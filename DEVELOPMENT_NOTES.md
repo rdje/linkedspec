@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (RUST-PARITY.8.3 — non-REP emitter lane split):
+  Treat non-repetition generated source as a sequence of separate mechanisms, not one patch. The first code read
+  found that `CompiledRule` carries regex/action/blind dispatch tables and `parse_mode`, but not enough parsed
+  rule-mode metadata for generated source to distinguish OR-bcode from AND-bcode robustly. The correct sequence is
+  now `.8.3.1` mode/family metadata plus generated family-plan emission, `.8.3.2` direct default/OR acode
+  execution, `.8.3.3` direct AND acode execution, `.8.3.4` direct AND/OR bcode execution, and `.8.3.5` matrix
+  closeout. No Rust source changed in the split.
+
 - 2026-07-04 (RUST-PARITY.8.2 — Rust generated-source scaffold):
   The first Rust source-emitter slice deliberately emits a small generated module that delegates through the
   existing interpreter. `emit_rust_source(&CompiledSpec)` serializes the compiled structural contract into a Rust
@@ -64,7 +72,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   parser-state/capture/input/mark readers, declaration helpers, and compatibility aliases stay explicit function,
   statement, or lifecycle surfaces unless a future task defines type-correct receiver semantics and lands
   Perl/Rust/tests/docs/KM together. No `SPEC-FORMAT-TERSE` leaf is currently pending; PNT returns to
-  `RUST-PARITY.8.3` unless a new terse leaf is split.
+  `RUST-PARITY.8.3.1` unless a new terse leaf is split.
 
 - 2026-07-04 (SPEC-FORMAT-TERSE.7.3 — array numeric reducer receiver methods):
   Array/list receivers now have terminal numeric reducer methods: `sum`, `avg`, `median`, `range`, `min`, and

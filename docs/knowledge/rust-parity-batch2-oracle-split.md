@@ -39,8 +39,10 @@ RTL/plugin/legacy safety smokes and left the richer mismatches as explicit
 follow-up blockers. `RUST-PARITY.7.4` finalized the manifest-backed regression
 guard. `RUST-PARITY.8.1` then split the broad code-generation emitter lane, and
 `RUST-PARITY.8.2` landed the minimal generated-source scaffold plus compile/run
-harness. The current frontier is `RUST-PARITY.8.3`: non-repetition
-handler-family emission.
+harness. `RUST-PARITY.8.3` then split non-repetition handler-family emission
+into narrower generated-source children. The current frontier is
+`RUST-PARITY.8.3.1`: rule-mode/family metadata plus generated non-REP
+family-plan emission.
 
 The later lanes are:
 
@@ -60,4 +62,5 @@ The later lanes are:
 - `.7.4`: done — regression guard and oracle corpus finalization.
 - `.8.1`: done — code-generation emitter lane split/inventory.
 - `.8.2`: done — minimal generated Rust-source scaffold plus compile/run harness.
-- `.8.3`: current frontier — non-repetition handler-family emission.
+- `.8.3`: split/active — non-repetition handler-family emission is decomposed into narrower children.
+- `.8.3.1`: current frontier — rule-mode/family metadata plus generated non-REP family-plan emission.

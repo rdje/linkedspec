@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — RUST-PARITY.8.3 — split non-repetition emitter lane
+
+**Scope:** Task-tree ownership, roadmap/frontier tracker, live recovery docs, and Knowledge Map. No Rust source
+behavior changed.
+
+**What changed:** The non-repetition generated Rust-source leaf is now split before implementation. The split
+records that `.8.3` still bundled separate mechanisms: carrying enough rule-mode/family metadata through
+`CompiledRule`, emitting an explicit generated family plan, direct default/OR acode execution, direct AND acode
+execution, direct AND/OR bcode execution, and the final non-REP matrix closeout.
+
+**Evidence:** Read the active task/KM/code context and verified the split with doctrine/memory/KM gates. The next
+executable frontier is `RUST-PARITY.8.3.1`: rule-mode/family metadata plus generated non-REP family-plan emission.
+
 ## 2026-07-04 — RUST-PARITY.8.2 — add Rust source emitter scaffold
 
 **Scope:** Rust runtime crate API, generated-source compile/run proof, Rust README, mdBook backend handoff, task
