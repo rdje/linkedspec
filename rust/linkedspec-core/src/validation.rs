@@ -25,12 +25,28 @@
 
 use crate::ast::{BodyElementKind, SpecFile};
 use crate::error::{LinkedSpecError, Result};
+use crate::trace::{TraceConfig, TraceEmitter};
 use rgx_core::Regex;
 use std::collections::HashSet;
 
 /// Run all (non-strict) validation passes on a parsed spec.
 pub fn validate(spec: &SpecFile) -> Result<()> {
     validate_with_options(spec, false)
+}
+
+/// Run validation with explicit trace configuration.
+///
+/// `TRACE-OBSERVABILITY.4.2` wires the control/sink layer. Validation events
+/// are added by `.4.3`, so this entrypoint currently preserves `validate`
+/// behavior while validating trace setup for later event wiring.
+pub fn validate_with_trace(spec: &SpecFile, trace_config: TraceConfig) -> Result<()> {
+    let mut trace = TraceEmitter::new(trace_config)?;
+    validate_with_trace_emitter(spec, &mut trace)
+}
+
+/// Run validation with a caller-owned trace emitter.
+pub fn validate_with_trace_emitter(spec: &SpecFile, _trace: &mut TraceEmitter) -> Result<()> {
+    validate(spec)
 }
 
 /// Run validation passes, optionally in strict mode.

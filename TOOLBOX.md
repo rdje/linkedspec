@@ -214,12 +214,13 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **Compile/ActionIR coverage boundary:** the planned Perl reference compile/ActionIR owner namespaces are covered
   through MethodLowering. The remaining trace work is cross-variant parity: Rust and future variants must expose
   the same documented controls, levels, event classes, and sink behavior before claiming trace parity.
-- **Rust parity design inventory:** `TRACE-OBSERVABILITY.4.1` maps Rust trace work before code. Shared trace
-  levels/config/sinks/events must be visible from `linkedspec-core` for parser/validation/compiler owners, then
-  reused by `linkedspec-runtime` for `parse_spec_with_user_functions`, staged parser dispatch, `Engine::execute`,
-  generated-plan execution, generated parser modules, rule dispatch, lifecycle blocks, statement control flow,
-  repetition/AND/OR choices, and mark/capture helper events. Rust does not claim trace parity until `.4.2-.4.5`
-  implement and prove that contract.
+- **Rust trace controls:** `TRACE-OBSERVABILITY.4.2` adds the Rust shared control layer:
+  `linkedspec_core::trace::{TraceConfig, TraceLevel, TraceSinkMode, TraceEmitter}` plus the `DUMP_*` constants,
+  environment-derived config, stdout/route/mirror sinks, routed-file reset, and event primitives. Runtime re-exports
+  it as `linkedspec_runtime::trace`; opt-in traced entrypoints now exist beside core parse/validate/compile,
+  full-spec user-function parsing, staged parse jobs, `Engine::execute`, generated-plan execution, generated parser
+  execution, and emitted generated module `parse_with_trace(...)`. Rust still does not claim trace parity until
+  `.4.3` compile/spec-parser events, `.4.4` runtime branch events, and `.4.5` parity proof land.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.

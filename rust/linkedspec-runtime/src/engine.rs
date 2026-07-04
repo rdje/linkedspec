@@ -37,6 +37,7 @@ use crate::runtime::RuntimeContext;
 use crate::source_emitter::{GeneratedRuleFamily, GeneratedRuleSpec};
 use linkedspec_core::ast::RuleMode;
 use linkedspec_core::expr::{AccessSegment, Arg, CodeBlock, Expr};
+use linkedspec_core::trace::{TraceConfig, TraceEmitter};
 use linkedspec_core::types::{
     BcodeEntry, CompiledSpec, CompiledUserFunction, ParseMode, RuntimeValue,
 };
@@ -1010,6 +1011,30 @@ impl Engine {
         Ok(RuntimeValue::Array(ctx.accumulator.clone()).to_json())
     }
 
+    /// Execute the top rule with explicit trace configuration.
+    ///
+    /// `TRACE-OBSERVABILITY.4.2` wires the Rust trace controls and sinks. Runtime
+    /// branch events are added by `.4.4`, so this entrypoint currently preserves
+    /// `execute` output while validating trace setup for later event wiring.
+    pub fn execute_with_trace(
+        &self,
+        input: &str,
+        trace_config: TraceConfig,
+    ) -> Result<Value, String> {
+        let mut trace =
+            TraceEmitter::new(trace_config).map_err(|err| format!("trace setup failed: {err}"))?;
+        self.execute_with_trace_emitter(input, &mut trace)
+    }
+
+    /// Execute the top rule with a caller-owned trace emitter.
+    pub fn execute_with_trace_emitter(
+        &self,
+        input: &str,
+        _trace: &mut TraceEmitter,
+    ) -> Result<Value, String> {
+        self.execute(input)
+    }
+
     /// Execute generated source through a validated rule-family plan.
     ///
     /// This path is separate from [`execute`](Self::execute): generated modules
@@ -1031,6 +1056,29 @@ impl Engine {
         };
         generated.execute_rule(&label, 0, &mut ctx)?;
         Ok(RuntimeValue::Array(ctx.accumulator.clone()).to_json())
+    }
+
+    /// Execute generated source through a validated rule-family plan with
+    /// explicit trace configuration.
+    pub fn execute_generated_with_plan_with_trace(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        trace_config: TraceConfig,
+    ) -> Result<Value, String> {
+        let mut trace =
+            TraceEmitter::new(trace_config).map_err(|err| format!("trace setup failed: {err}"))?;
+        self.execute_generated_with_plan_with_trace_emitter(generated_rules, input, &mut trace)
+    }
+
+    /// Execute generated source with a caller-owned trace emitter.
+    pub fn execute_generated_with_plan_with_trace_emitter(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        _trace: &mut TraceEmitter,
+    ) -> Result<Value, String> {
+        self.execute_generated_with_plan(generated_rules, input)
     }
 
     /// Execute a specific rule by label, entering at the given regex index

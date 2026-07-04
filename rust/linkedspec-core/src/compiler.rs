@@ -30,6 +30,7 @@
 use crate::ast::{BodyElementKind, Rule, SpecFile};
 use crate::error::{LinkedSpecError, Result};
 use crate::expr::CodeBlock;
+use crate::trace::{TraceConfig, TraceEmitter};
 use crate::types::{
     AcodeEntry, BcodeEntry, CompiledRule, CompiledSpec, CompiledUserFunction, ParseMode,
 };
@@ -48,6 +49,24 @@ pub fn compile(spec: &SpecFile) -> Result<CompiledSpec> {
     let mut compiled = CompiledSpec { functions, rules };
     build_dependency_regex_map(&mut compiled)?;
     Ok(compiled)
+}
+
+/// Compile a parsed `SpecFile` with explicit trace configuration.
+///
+/// `TRACE-OBSERVABILITY.4.2` wires the control/sink layer. Compile-side events
+/// are added by `.4.3`, so this entrypoint currently preserves `compile`
+/// output while validating trace setup for later event wiring.
+pub fn compile_with_trace(spec: &SpecFile, trace_config: TraceConfig) -> Result<CompiledSpec> {
+    let mut trace = TraceEmitter::new(trace_config)?;
+    compile_with_trace_emitter(spec, &mut trace)
+}
+
+/// Compile with a caller-owned trace emitter.
+pub fn compile_with_trace_emitter(
+    spec: &SpecFile,
+    _trace: &mut TraceEmitter,
+) -> Result<CompiledSpec> {
+    compile(spec)
 }
 
 fn compile_function(function: &crate::ast::FunctionDefinition) -> Result<CompiledUserFunction> {

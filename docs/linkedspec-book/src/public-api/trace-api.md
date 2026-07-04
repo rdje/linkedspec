@@ -28,15 +28,17 @@ behavior.
 
 ## Rust variant trace status
 
-As of `TRACE-OBSERVABILITY.4.1`, the Rust variant has a trace design inventory but does **not** yet claim trace
-parity. Rust's current public library APIs still run quietly by default and do not expose trace controls, levels,
-sinks, or structured trace events.
+As of `TRACE-OBSERVABILITY.4.2`, the Rust variant exposes the shared trace control layer but does **not** yet claim
+trace parity. Rust now has ordered trace levels, configuration, stdout/route/mirror sinks, reset/truncate behavior,
+event primitives, and opt-in traced entrypoints beside the existing quiet entrypoints. Rust does not yet emit the
+compile/spec-parser or runtime branch event coverage required for trace parity; those are owned by
+`TRACE-OBSERVABILITY.4.3` and `.4.4`.
 
 The required Rust mapping is:
 
-- shared trace levels, configuration, sink routing, and event primitives must be reachable from `linkedspec-core`,
+- shared trace levels, configuration, sink routing, and event primitives are reachable from `linkedspec-core`,
   because Rust parser, validation, compiler, dependency-regex, and compiled-type owners live there;
-- `linkedspec-runtime` must reuse the same model for `parse_spec_with_user_functions`, staged parser dispatch,
+- `linkedspec-runtime` reuses the same model for `parse_spec_with_user_functions`, staged parser dispatch,
   `Engine::execute`, `Engine::execute_generated_with_plan`, `source_emitter::execute_generated_parser`, and
   generated parser modules;
 - compile-side trace events must cover `parse_spec`, `validate`, `compile`, dependency-regex resolution, full
@@ -44,12 +46,59 @@ The required Rust mapping is:
 - runtime trace events must cover rule entry/exit, recursion cutoffs, acode/bcode child dispatch, regex
   match/no-match choices, AND/OR and repetition control flow, lifecycle block execution, statement-form
   `if`/`switch` branch selection, mark/capture helper operations, and generated-rule family plan dispatch;
-- existing untraced APIs must remain default-quiet and output-compatible, with explicit traced entrypoints or
-  configuration plumbing added beside them.
+- existing untraced APIs remain default-quiet and output-compatible; explicit traced entrypoints now validate trace
+  setup and route sinks without changing parse results.
 
-`TRACE-OBSERVABILITY.4.2` owns Rust controls, levels, and sinks; `.4.3` owns Rust compile/spec-parser events;
-`.4.4` owns Rust runtime dispatch and branch events; `.4.5` owns cross-variant parity proof and the reusable
-future-variant checklist.
+The Rust control surface is:
+
+- `linkedspec_core::trace::{TraceConfig, TraceLevel, TraceSinkMode, TraceEmitter}` plus `DUMP_NONE`,
+  `DUMP_LOW`, `DUMP_MEDIUM`, `DUMP_HIGH`, `DUMP_FULL`, and `DUMP_DEBUG`;
+- `linkedspec_runtime::trace`, which re-exports the same core trace module for runtime users and generated modules;
+- `TraceConfig::from_env()`, using the same `LINKEDSPEC_TRACE_LEVEL`, `LINKEDSPEC_DUMP_VERBOSITY`,
+  `LINKEDSPEC_TRACE_FILE`, `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_RESET_FILE`, and
+  `LINKEDSPEC_TRACE_EMOJI` controls documented for the portable contract;
+- route/mirror/stdout behavior through `TraceSinkMode`, with `with_trace_file(...)` defaulting to routed-file output
+  and `with_reset_file(true)` truncating the file during trace setup;
+- structured primitives on `TraceEmitter`: `emit_event`, `enter_scope`, `exit_scope`, `trace_decision`,
+  `log_output`, and `log_dump`.
+
+The Rust opt-in traced entrypoints are:
+
+- `linkedspec_core::parser::parse_spec_with_trace(...)` and `parse_spec_with_trace_emitter(...)`;
+- `linkedspec_core::validation::validate_with_trace(...)` and `validate_with_trace_emitter(...)`;
+- `linkedspec_core::compiler::compile_with_trace(...)` and `compile_with_trace_emitter(...)`;
+- `linkedspec_runtime::spec_parser::parse_spec_with_user_functions_with_trace(...)` and
+  `parse_spec_with_user_functions_with_trace_emitter(...)`;
+- `linkedspec_runtime::spec_parser::parse_user_function_definition_asts_with_trace(...)` and
+  `parse_user_function_definition_asts_with_trace_emitter(...)`;
+- `linkedspec_runtime::staged_parser_registry::execute_parse_job_with_trace(...)`,
+  `execute_parse_job_with_trace_emitter(...)`, `execute_parse_jobs_with_trace(...)`, and
+  `execute_parse_jobs_with_trace_emitter(...)`;
+- `Engine::execute_with_trace(...)`, `Engine::execute_with_trace_emitter(...)`,
+  `Engine::execute_generated_with_plan_with_trace(...)`, and
+  `Engine::execute_generated_with_plan_with_trace_emitter(...)`;
+- `source_emitter::execute_generated_parser_with_trace(...)`; newly emitted Rust parser modules also expose
+  `parse_with_trace(input, trace_config)` beside the existing `parse(input)`.
+
+Example Rust usage:
+
+```rust
+use linkedspec_core::trace::{TraceConfig, TraceLevel};
+use linkedspec_runtime::engine::Engine;
+
+let trace = TraceConfig::enabled(TraceLevel::DEBUG)
+    .with_trace_file("linkedspec.trace.log")
+    .with_reset_file(true);
+
+let output = Engine::new(compiled).execute_with_trace(input, trace)?;
+```
+
+Until `.4.3` and `.4.4` land, the traced Rust entrypoints may create or reset the configured trace file without
+writing compile/runtime event lines. That is expected for `.4.2`: this slice lands controls, levels, sinks, and
+entrypoint plumbing only.
+
+`TRACE-OBSERVABILITY.4.3` owns Rust compile/spec-parser events; `.4.4` owns Rust runtime dispatch and branch events;
+`.4.5` owns cross-variant parity proof and the reusable future-variant checklist.
 
 ## Command-line trace control
 

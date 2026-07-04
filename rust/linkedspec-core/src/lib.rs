@@ -15,6 +15,7 @@ pub mod compiler;
 pub mod error;
 pub mod expr;
 pub mod parser;
+pub mod trace;
 pub mod types;
 pub mod validation;
 

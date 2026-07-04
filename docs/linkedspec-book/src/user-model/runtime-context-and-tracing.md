@@ -310,14 +310,15 @@ In the Perl reference backend, the planned compile/ActionIR owner coverage is cl
 remaining trace work is cross-variant parity: Rust and future variants must implement the same external trace
 capabilities before claiming trace parity.
 
-As of `TRACE-OBSERVABILITY.4.1`, the Rust variant has been mapped against that contract but has not implemented the
-trace surface yet. The Rust design inventory assigns shared trace levels/configuration/sink behavior to a
-core-visible Rust trace model because `linkedspec-core` owns `parse_spec`, `validate`, `compile`, dependency-regex
-resolution, and the compiled contract types. `linkedspec-runtime` must reuse that same model for
-`parse_spec_with_user_functions`, staged parse-job dispatch, `Engine::execute`, generated-plan execution,
-generated parser modules, lifecycle block execution, rule dispatch, repetition/AND/OR branch choices, and
-mark/capture helper operations. Existing Rust APIs remain default-quiet until `.4.2` adds explicit trace controls,
-`.4.3` adds compile/spec-parser events, `.4.4` adds runtime branch events, and `.4.5` proves cross-variant parity.
+As of `TRACE-OBSERVABILITY.4.2`, the Rust variant has the shared trace control surface but has not completed event
+coverage. `linkedspec-core::trace` owns `TraceLevel`, `TraceConfig`, `TraceSinkMode`, `TraceEmitter`, the
+`DUMP_*` constants, environment-derived configuration, stdout/routed-file/mirror sinks, routed-file reset, and
+structured event primitives. `linkedspec-runtime::trace` re-exports the same module, and Rust exposes opt-in traced
+entrypoints beside the existing quiet APIs for core parse/validate/compile, full-spec user-function parsing, staged
+parse jobs, interpreter execution, generated-plan execution, generated parser execution, and newly emitted generated
+parser modules (`parse_with_trace(...)` beside `parse(...)`). Existing Rust APIs remain default-quiet and
+output-compatible. Until `.4.3` and `.4.4` land, traced Rust entrypoints validate and route trace setup but may
+produce empty trace files because compile/runtime event emission is still pending; `.4.5` is the parity proof.
 
 Tracing is controlled separately from runtime context.
 

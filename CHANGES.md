@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.4.2 — add Rust trace controls
+
+**Scope:** Rust trace controls, levels, sinks, traced entrypoints, mdBook contract updates, toolbox, task-tree/
+frontier sync, live recovery docs, focused Rust tests, and Knowledge Map.
+
+**What changed:** Added `linkedspec-core::trace` as the shared Rust trace control surface: `TraceLevel`,
+`TraceConfig`, `TraceSinkMode`, `TraceEmitter`, `DUMP_*` constants, environment-derived configuration,
+stdout/routed-file/mirror sinks, routed-file reset, and structured event primitives. `linkedspec-runtime` re-exports
+the same module as `linkedspec_runtime::trace`.
+
+Explicit traced entrypoints now sit beside existing default-quiet APIs for core `parse_spec`, `validate`, and
+`compile`; runtime full-spec user-function parsing; staged parse jobs; `Engine::execute`; generated-plan execution;
+generated parser execution; and emitted generated modules through `parse_with_trace(...)`. Existing untraced APIs
+remain output-compatible. Compile/spec-parser event emission remains owned by `.4.3`; runtime branch emission
+remains owned by `.4.4`; parity proof remains owned by `.4.5`.
+
+**Evidence:** `cargo test -p linkedspec-core trace` passes the new level/config/sink primitive tests. `cargo test
+-p linkedspec-runtime --test trace_controls` passes traced-entrypoint equivalence, generated-source trace entrypoint
+surface checks, and routed-file setup coverage. `cargo test -p linkedspec-runtime --test source_emitter` passes
+generated crate compilation/execution with the new emitted `parse_with_trace(...)` surface. `cargo fmt`, mdBook,
+Knowledge Map, memory/doctrine, whitespace, and full local CI pass; local CI includes phase0 at 1021 green.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.4.1 — map Rust trace parity design
 
 **Scope:** Rust trace parity design inventory, mdBook contract status, toolbox, task-tree/frontier sync, live

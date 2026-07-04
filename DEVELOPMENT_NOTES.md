@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.4.2 — Rust trace controls):
+  Rust now has the shared trace control layer, but not trace event parity. Use `linkedspec_core::trace` for
+  `TraceLevel`, `TraceConfig`, `TraceSinkMode`, `TraceEmitter`, the `DUMP_*` constants, environment-derived config,
+  stdout/route/mirror sinks, file reset, and event primitives. Runtime users and generated modules should import
+  the same surface through `linkedspec_runtime::trace`.
+
+  Existing quiet entrypoints remain the compatibility default. New traced variants validate trace setup and sink
+  routing beside core parse/validate/compile, full-spec user-function parsing, staged parse jobs, `Engine::execute`,
+  generated-plan execution, generated parser execution, and emitted generated module `parse_with_trace(...)`.
+  Until `.4.3` and `.4.4` wire real events, routed trace files can be created/truncated but remain empty during
+  normal parse/compile/execute calls. Do not claim Rust trace parity until `.4.3` compile/spec-parser events,
+  `.4.4` runtime branch events, and `.4.5` parity proof are complete.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.4.1 — Rust trace parity design):
   The Rust trace surface must be designed from the mdBook external contract, not from Perl package names. Because
   `linkedspec-core` owns `parse_spec`, `validate`, `compile`, dependency-regex resolution, and the shared

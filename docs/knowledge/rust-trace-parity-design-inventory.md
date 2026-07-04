@@ -31,6 +31,7 @@ generated parser modules, runtime context/match/mark state, interpreter branch e
 execution, statement-form `if`/`switch`, acode/bcode child dispatch, repetition/AND/OR choices, and generated-rule
 family plan dispatch.
 
-The next leaves are implementation leaves: `.4.2` adds Rust controls, levels, and sinks while preserving default
-quiet behavior; `.4.3` adds compile/spec-parser/staged-dispatch trace events; `.4.4` adds runtime/generated-plan
-branch events; `.4.5` proves cross-variant trace parity and defines the reusable future-variant checklist.
+`.4.2` has since added Rust controls, levels, sinks, event primitives, and traced entrypoint plumbing while
+preserving default quiet behavior. The remaining leaves are `.4.3` compile/spec-parser/staged-dispatch trace
+events, `.4.4` runtime/generated-plan branch events, and `.4.5` cross-variant trace parity proof plus the reusable
+future-variant checklist.

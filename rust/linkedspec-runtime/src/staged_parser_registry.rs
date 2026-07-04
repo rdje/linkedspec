@@ -7,6 +7,7 @@
 //! records follow the language-neutral staged parsing contract.
 
 use linkedspec_core::expr::CodeBlock;
+use linkedspec_core::trace::{TraceConfig, TraceEmitter};
 use serde_json::{Map, Value, json};
 
 const ACTIONIR_BODY_SPEC_ID: &str = "actionir-body.spec";
@@ -73,6 +74,29 @@ pub fn execute_parse_job(job: &Value) -> Result<Value, String> {
         .ok_or_else(|| "staged parse dispatch produced no result".to_string())
 }
 
+/// Execute one staged parse job with explicit trace configuration.
+pub fn execute_parse_job_with_trace(
+    job: &Value,
+    trace_config: TraceConfig,
+) -> Result<Value, String> {
+    let mut trace =
+        TraceEmitter::new(trace_config).map_err(|err| format!("trace setup failed: {err}"))?;
+    execute_parse_job_with_trace_emitter(job, &mut trace)
+}
+
+/// Execute one staged parse job with a caller-owned trace emitter.
+pub fn execute_parse_job_with_trace_emitter(
+    job: &Value,
+    trace: &mut TraceEmitter,
+) -> Result<Value, String> {
+    let results = execute_parse_jobs_with_trace_emitter(std::slice::from_ref(job), trace)?;
+    results
+        .into_iter()
+        .next()
+        .and_then(|record| record.get("result").cloned())
+        .ok_or_else(|| "staged parse dispatch produced no result".to_string())
+}
+
 /// Execute parse jobs through the minimal deterministic registry queue.
 pub fn execute_parse_jobs(jobs: &[Value]) -> Result<Vec<Value>, String> {
     let mut queue = jobs
@@ -96,6 +120,24 @@ pub fn execute_parse_jobs(jobs: &[Value]) -> Result<Vec<Value>, String> {
         ));
     }
     Ok(results)
+}
+
+/// Execute parse jobs through the registry queue with explicit trace configuration.
+pub fn execute_parse_jobs_with_trace(
+    jobs: &[Value],
+    trace_config: TraceConfig,
+) -> Result<Vec<Value>, String> {
+    let mut trace =
+        TraceEmitter::new(trace_config).map_err(|err| format!("trace setup failed: {err}"))?;
+    execute_parse_jobs_with_trace_emitter(jobs, &mut trace)
+}
+
+/// Execute parse jobs through the registry queue with a caller-owned trace emitter.
+pub fn execute_parse_jobs_with_trace_emitter(
+    jobs: &[Value],
+    _trace: &mut TraceEmitter,
+) -> Result<Vec<Value>, String> {
+    execute_parse_jobs(jobs)
 }
 
 fn resolve(job: &StagedParseJob) -> Result<ResolvedParser, String> {

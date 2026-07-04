@@ -7,6 +7,7 @@
 
 use crate::engine::Engine;
 use linkedspec_core::ast::RuleMode;
+use linkedspec_core::trace::TraceConfig;
 use linkedspec_core::types::{CompiledRule, CompiledSpec};
 
 /// Version of the generated-source scaffold format.
@@ -68,8 +69,9 @@ pub fn emit_rust_source(compiled: &CompiledSpec) -> Result<String, String> {
     source.push_str("//! Generated LinkedSpec parser module.\n");
     source.push_str("//! Source format: linkedspec-runtime source_emitter v1.\n\n");
     source.push_str(
-        "use linkedspec_runtime::source_emitter::{execute_generated_parser, GeneratedRuleFamily, GeneratedRuleSpec};\n\n",
+        "use linkedspec_runtime::source_emitter::{execute_generated_parser, execute_generated_parser_with_trace, GeneratedRuleFamily, GeneratedRuleSpec};\n",
     );
+    source.push_str("use linkedspec_runtime::trace::TraceConfig;\n\n");
     source.push_str(&format!(
         "pub const LINKEDSPEC_GENERATED_SOURCE_FORMAT: u32 = {GENERATED_SOURCE_FORMAT};\n"
     ));
@@ -89,6 +91,10 @@ pub fn emit_rust_source(compiled: &CompiledSpec) -> Result<String, String> {
     source.push_str(
         r#"pub fn parse(input: &str) -> Result<serde_json::Value, String> {
     execute_generated_parser(COMPILED_SPEC_JSON, GENERATED_RULES, input)
+}
+
+pub fn parse_with_trace(input: &str, trace_config: TraceConfig) -> Result<serde_json::Value, String> {
+    execute_generated_parser_with_trace(COMPILED_SPEC_JSON, GENERATED_RULES, input, trace_config)
 }
 "#,
     );
@@ -111,6 +117,23 @@ pub fn execute_generated_parser(
         .map_err(|e| format!("generated CompiledSpec JSON is invalid: {e}"))?;
     validate_generated_rule_plan(&compiled, generated_rules)?;
     Engine::new(compiled).execute_generated_with_plan(generated_rules, input)
+}
+
+/// Execute a generated parser module with explicit trace configuration.
+pub fn execute_generated_parser_with_trace(
+    compiled_spec_json: &str,
+    generated_rules: &[GeneratedRuleSpec],
+    input: &str,
+    trace_config: TraceConfig,
+) -> Result<serde_json::Value, String> {
+    let compiled: CompiledSpec = serde_json::from_str(compiled_spec_json)
+        .map_err(|e| format!("generated CompiledSpec JSON is invalid: {e}"))?;
+    validate_generated_rule_plan(&compiled, generated_rules)?;
+    Engine::new(compiled).execute_generated_with_plan_with_trace(
+        generated_rules,
+        input,
+        trace_config,
+    )
 }
 
 /// Classify one compiled rule into the generated-source family plan.

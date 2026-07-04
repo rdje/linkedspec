@@ -8,9 +8,10 @@
 use crate::engine::Engine;
 use crate::staged_parser_registry;
 use linkedspec_core::ast::{FunctionDefinition, SourceSpan, SpecFile};
-use linkedspec_core::compiler::compile;
-use linkedspec_core::parser::parse_spec;
-use linkedspec_core::validation::validate;
+use linkedspec_core::compiler::{compile, compile_with_trace_emitter};
+use linkedspec_core::parser::{parse_spec, parse_spec_with_trace_emitter};
+use linkedspec_core::trace::{TraceConfig, TraceEmitter};
+use linkedspec_core::validation::{validate, validate_with_trace_emitter};
 use serde_json::{Map, Value};
 
 const USER_FUNCTION_DEFINITION_SPEC: &str =
@@ -28,6 +29,44 @@ struct AstSpan {
 /// definitions, without hand-parsing that DSL in Rust.
 pub fn parse_spec_with_user_functions(source: &str) -> Result<SpecFile, String> {
     let nodes = parse_user_function_definition_asts(source)?;
+    let (functions, spans) = function_definitions_from_nodes(&nodes, source)?;
+
+    let stripped = strip_function_definition_spans(source, &spans)?;
+    let mut spec = parse_spec(&stripped)
+        .map_err(|err| format!("rule parse after function extraction failed: {err}"))?;
+    spec.functions = functions;
+    Ok(spec)
+}
+
+/// Parse a full LinkedSpec source string with explicit trace configuration.
+pub fn parse_spec_with_user_functions_with_trace(
+    source: &str,
+    trace_config: TraceConfig,
+) -> Result<SpecFile, String> {
+    let mut trace =
+        TraceEmitter::new(trace_config).map_err(|err| format!("trace setup failed: {err}"))?;
+    parse_spec_with_user_functions_with_trace_emitter(source, &mut trace)
+}
+
+/// Parse a full LinkedSpec source string with a caller-owned trace emitter.
+pub fn parse_spec_with_user_functions_with_trace_emitter(
+    source: &str,
+    trace: &mut TraceEmitter,
+) -> Result<SpecFile, String> {
+    let nodes = parse_user_function_definition_asts_with_trace_emitter(source, trace)?;
+    let (functions, spans) = function_definitions_from_nodes(&nodes, source)?;
+
+    let stripped = strip_function_definition_spans(source, &spans)?;
+    let mut spec = parse_spec_with_trace_emitter(&stripped, trace)
+        .map_err(|err| format!("rule parse after function extraction failed: {err}"))?;
+    spec.functions = functions;
+    Ok(spec)
+}
+
+fn function_definitions_from_nodes(
+    nodes: &[Value],
+    source: &str,
+) -> Result<(Vec<FunctionDefinition>, Vec<AstSpan>), String> {
     let mut functions = Vec::new();
     let mut spans = Vec::new();
 
@@ -50,11 +89,7 @@ pub fn parse_spec_with_user_functions(source: &str) -> Result<SpecFile, String> 
         }
     }
 
-    let stripped = strip_function_definition_spans(source, &spans)?;
-    let mut spec = parse_spec(&stripped)
-        .map_err(|err| format!("rule parse after function extraction failed: {err}"))?;
-    spec.functions = functions;
-    Ok(spec)
+    Ok((functions, spans))
 }
 
 /// Return the raw AST nodes produced by `specs/user_function_definition.spec`.
@@ -69,6 +104,33 @@ pub fn parse_user_function_definition_asts(source: &str) -> Result<Vec<Value>, S
         .map_err(|err| format!("failed to compile user_function_definition.spec: {err}"))?;
     let output = Engine::new(compiled)
         .execute(source)
+        .map_err(|err| format!("user_function_definition.spec execution failed: {err}"))?;
+    definition_nodes_from_output(&output)
+}
+
+/// Return raw user-function AST nodes with explicit trace configuration.
+pub fn parse_user_function_definition_asts_with_trace(
+    source: &str,
+    trace_config: TraceConfig,
+) -> Result<Vec<Value>, String> {
+    let mut trace =
+        TraceEmitter::new(trace_config).map_err(|err| format!("trace setup failed: {err}"))?;
+    parse_user_function_definition_asts_with_trace_emitter(source, &mut trace)
+}
+
+/// Return raw user-function AST nodes with a caller-owned trace emitter.
+pub fn parse_user_function_definition_asts_with_trace_emitter(
+    source: &str,
+    trace: &mut TraceEmitter,
+) -> Result<Vec<Value>, String> {
+    let parser_spec = parse_spec_with_trace_emitter(USER_FUNCTION_DEFINITION_SPEC, trace)
+        .map_err(|err| format!("failed to parse user_function_definition.spec: {err}"))?;
+    validate_with_trace_emitter(&parser_spec, trace)
+        .map_err(|err| format!("failed to validate user_function_definition.spec: {err}"))?;
+    let compiled = compile_with_trace_emitter(&parser_spec, trace)
+        .map_err(|err| format!("failed to compile user_function_definition.spec: {err}"))?;
+    let output = Engine::new(compiled)
+        .execute_with_trace_emitter(source, trace)
         .map_err(|err| format!("user_function_definition.spec execution failed: {err}"))?;
     definition_nodes_from_output(&output)
 }

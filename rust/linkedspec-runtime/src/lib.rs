@@ -16,5 +16,7 @@ pub mod source_emitter;
 pub mod spec_parser;
 pub mod staged_parser_registry;
 
+pub use linkedspec_core::trace;
+
 /// Crate version, matching the workspace version.
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");

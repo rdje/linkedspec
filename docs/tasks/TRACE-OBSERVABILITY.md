@@ -99,7 +99,8 @@ Coverage plan:
    as a variant-neutral checklist rather than Perl mechanics.
 4. `.4`: required backend-parity lane — define and implement the Rust and future-variant equivalent trace model
    instead of pretending the current Perl-only trace surface already covers Rust. `.4.1` has now mapped the
-   neutral mdBook contract onto Rust owner boundaries; `.4.2` is the first Rust implementation leaf.
+   neutral mdBook contract onto Rust owner boundaries; `.4.2` has added Rust trace controls, levels, sinks, and
+   traced entrypoints; `.4.3` is the next implementation leaf for compile/spec-parser events.
 
 ## Non-Goals
 
@@ -311,23 +312,33 @@ Coverage plan:
     `CompiledSpec`/`CompiledRule` types; `linkedspec-runtime` owns `parse_spec_with_user_functions`, staged
     parser registry dispatch, `Engine::execute`, `Engine::execute_generated_with_plan`,
     `source_emitter::execute_generated_parser`, runtime context/match/mark state, interpreter branch execution,
-    and generated-rule family plan execution. Rust currently has no trace API/control implementation, so `.4.2`
-    must add shared Rust trace levels/config/sink routing first, `.4.3` must add parser/compiler/staged-dispatch
-    scope and decision events, `.4.4` must add interpreter/generated-plan runtime branch events, and `.4.5` must
-    prove cross-variant contract parity before Rust claims trace parity.
+    and generated-rule family plan execution. `.4.2` has since added the shared Rust trace controls, levels, sinks,
+    event primitives, and traced entrypoints; `.4.3` must add parser/compiler/staged-dispatch scope and decision
+    events, `.4.4` must add interpreter/generated-plan runtime branch events, and `.4.5` must prove
+    cross-variant contract parity before Rust claims trace parity.
   Verification: Rust source inventory; `cargo test` attempted and failed only in the existing
     `linkedspec-runtime` integration test target (157 passed, 9 failed) with no Rust source diff; accepted `.4.1`
     gates were `mdbook build docs/linkedspec-book`, `bash knowledge-map/scripts/check_knowledge_map.sh`,
     `bash scripts/check_memory_architecture.sh`, `bash scripts/check_doctrines.sh`, `git diff --check`, and
     `bash tools/run_ci_local.sh`.
-  Commit: `pending`
-- ID: `TRACE-OBSERVABILITY.4.2` · Status: `active`
+  Commit: `eb0b23a8` (`TRACE-OBSERVABILITY.4.1 - map Rust trace parity design`)
+- ID: `TRACE-OBSERVABILITY.4.2` · Status: `done` (closed 2026-07-04)
   Goal: Rust trace controls, levels, and sinks — implement the Rust-facing configuration model and output routing
     equivalent to the documented contract. Preserve default-quiet behavior for existing `parse_spec`, `compile`,
     `Engine::execute`, and generated parser entrypoints while adding explicit traced entrypoints/config plumbing.
-  Verification: `pending`
+  Acceptance: done — `linkedspec-core::trace` now owns the shared Rust trace control layer: `TraceLevel`,
+    `TraceConfig`, `TraceSinkMode`, `TraceEmitter`, `DUMP_*` constants, environment-derived configuration,
+    stdout/routed-file/mirror sinks, routed-file reset, and structured event primitives. `linkedspec-runtime`
+    re-exports that model and adds explicit traced entrypoints beside core parse/validate/compile, full-spec
+    user-function parsing, staged parse jobs, interpreter execution, generated-plan execution, generated parser
+    execution, and emitted generated module `parse_with_trace(...)`. Existing untraced APIs remain default-quiet
+    and output-compatible. Compile/runtime event emission remains explicitly deferred to `.4.3`/`.4.4`.
+  Verification: `cargo test -p linkedspec-core trace`; `cargo test -p linkedspec-runtime --test trace_controls`;
+    `cargo test -p linkedspec-runtime --test source_emitter`; `cargo fmt`; `mdbook build docs/linkedspec-book`;
+    `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`;
+    `bash scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh`.
   Commit: `pending`
-- ID: `TRACE-OBSERVABILITY.4.3` · Status: `pending`
+- ID: `TRACE-OBSERVABILITY.4.3` · Status: `active`
   Goal: Rust compile/spec-parser trace events — add structured compile-side scope and decision events equivalent
     to the Perl reference contract.
   Verification: `pending`
@@ -347,10 +358,9 @@ Coverage plan:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `.4.2` | `active` | Add Rust controls, levels, and sinks after the design inventory. |
-| 2 | `.4.3` | `pending` | Add Rust compile/spec-parser trace events. |
-| 3 | `.4.4` | `pending` | Add Rust runtime dispatch/branch trace events. |
-| 4 | `.4.5` | `pending` | Close cross-variant trace parity docs/gates. |
+| 1 | `.4.3` | `active` | Add Rust compile/spec-parser trace events after the controls/sinks layer. |
+| 2 | `.4.4` | `pending` | Add Rust runtime dispatch/branch trace events. |
+| 3 | `.4.5` | `pending` | Close cross-variant trace parity docs/gates. |
 
 ## Decisions
 
@@ -407,13 +417,15 @@ Coverage plan:
   validation, compiler, dependency-map, and compiled-type surfaces, shared Rust trace level/config/event primitives
   must be visible from `linkedspec-core` rather than living only in `linkedspec-runtime`. Runtime execution,
   generated-plan execution, staged parser dispatch, and generated-source parser entrypoints reuse that same model.
-  Existing quiet APIs stay the compatibility default; `.4.2` adds explicit traced configuration and sink routing
-  before `.4.3`/`.4.4` emit compile/runtime events.
+  Existing quiet APIs stay the compatibility default; `.4.2` has added explicit traced configuration and sink
+  routing before `.4.3`/`.4.4` emit compile/runtime events.
 
 ## Open Questions
 
-- Rust trace controls/levels/sinks: implement the shared Rust configuration and output routing model without
-  changing default quiet parse/compile/execute behavior.
+- Rust compile/spec-parser events: wire the `.4.2` emitter through parser, validation, compiler, full-spec
+  user-function parsing, and staged-dispatch owner decisions without changing parse/compile results.
+- Rust runtime branch events: wire the same emitter through interpreter/generated-plan branch decisions without
+  changing branch outcomes.
 - Required backend parity: Rust and future variants must implement equivalent trace capabilities before claiming trace
   parity; the current Perl-only surface is reference progress, not parity closeout.
 - Auto-instrumentation (`Devel::*`/aspect style) is not the preferred first path: generated template instrumentation
@@ -443,6 +455,7 @@ Coverage plan:
 | `2026-07-04` | `.3.4.6` | representative debug routed descriptor-compile probe across return/set/receiver/control paths; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — normal compile path emits `rule_ir`, `emit_context`, `actionir:scanner`, `actionir:rewrite_pipeline`, `actionir:control_flow`, and `actionir:method_lowering` decisions together; full local CI passed with phase0 1021 green |
 | `2026-07-04` | `.3.5` | `perl bin/linkedspec --help`; `rg -n 'LINKEDSPEC_TRACE|trace_level|trace_log|--trace|\bTrace\b|\btrace\b' rust --glob '!**/tests/corpus/**'`; `prove -v -Iperl t/trace_cli.t t/trace_generated_handler_branch.t t/trace_generated_nonrep_dispatch.t t/trace_generated_rep_dispatch.t t/trace_ruleir_planning.t t/trace_emit_context_bridge.t t/trace_actionir_pipeline.t t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t` | PASS — CLI contract remains discoverable, Perl reference trace suite passes, and Rust still has no trace API/control hits outside corpus fixtures; backend parity is split into `.4.*` before code |
 | `2026-07-04` | `.4.1` | Rust source inventory: `rust/README.md`; `linkedspec-core::{parser,validation,compiler,types}`; `linkedspec-runtime::{spec_parser,engine,runtime,source_emitter}`; public Rust test harnesses; `mdbook build docs/linkedspec-book`; Knowledge Map; memory/doctrine; `git diff --check`; `bash tools/run_ci_local.sh` | PASS — Rust trace parity has an owner map before code; shared trace primitives must be core-visible; runtime/generated/staged entrypoints must preserve default quiet behavior and route through explicit traced configuration in later leaves. Note: an over-broad `cargo test` attempt failed in existing `linkedspec-runtime` integration tests (157 passed, 9 failed) with no Rust source diff, so it is recorded but not used as this docs/design leaf's acceptance gate. |
+| `2026-07-04` | `.4.2` | `cargo test -p linkedspec-core trace`; `cargo test -p linkedspec-runtime --test trace_controls`; `cargo test -p linkedspec-runtime --test source_emitter`; `cargo fmt`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — Rust trace levels/config/sink primitives, traced entrypoints, and emitted generated parser modules pass focused coverage; full local CI passed with phase0 1021 green |
 
 ## Commit Log
 
@@ -463,7 +476,8 @@ Coverage plan:
 | `.3.4.5` | `cfe2d9d1` (`TRACE-OBSERVABILITY.3.4.5 - trace MethodLowering decisions`) | MethodLowering ActionIR trace call-site wiring. |
 | `.3.4.6` | `8fa7243a` (`TRACE-OBSERVABILITY.3.4.6 - close compile ActionIR trace coverage`) | Compile/ActionIR coverage closeout probe/docs. |
 | `.3.5` | `c623d6ec` (`TRACE-OBSERVABILITY.3.5 - close trace contract and split parity`) | Variant-neutral trace contract closeout and `.4.*` backend parity split. |
-| `.4.1` | `pending` (`TRACE-OBSERVABILITY.4.1 - map Rust trace parity design`) | Rust owner-boundary and entrypoint inventory before trace code. |
+| `.4.1` | `eb0b23a8` (`TRACE-OBSERVABILITY.4.1 - map Rust trace parity design`) | Rust owner-boundary and entrypoint inventory before trace code. |
+| `.4.2` | `pending` (`TRACE-OBSERVABILITY.4.2 - add Rust trace controls`) | Rust shared trace controls, levels, sinks, event primitives, and traced entrypoints. |
 
 ## Changelog
 
@@ -518,5 +532,9 @@ Coverage plan:
   has no API/control hits outside corpus fixtures, and `.4.1` is now the PNT frontier for Rust trace parity design.
 - `2026-07-04`: Closed `.4.1` Rust trace parity design inventory. The Rust trace contract now maps onto
   core-visible shared trace primitives, compile/spec-parser/staged-dispatch owner events, runtime/generated-plan
-  branch events, and default-quiet compatibility. `.4.2` is now the PNT frontier for Rust trace controls, levels,
-  and sinks.
+  branch events, and default-quiet compatibility. `.4.2` has since added Rust trace controls, levels, sinks, and
+  traced entrypoints; `.4.3` is now the PNT frontier for Rust compile/spec-parser trace events.
+- `2026-07-04`: Closed `.4.2` Rust trace controls, levels, and sinks. `linkedspec-core::trace` now exposes the
+  Rust control layer, `linkedspec-runtime::trace` re-exports it, and opt-in traced entrypoints exist beside core
+  parse/validate/compile, runtime/full-spec/staged execution, generated-plan execution, generated parser execution,
+  and emitted generated modules. `.4.3` is now the PNT frontier for compile/spec-parser/staged-dispatch events.

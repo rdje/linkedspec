@@ -25,6 +25,10 @@ pub enum LinkedSpecError {
     #[error("runtime error: {0}")]
     Runtime(String),
 
+    /// Trace configuration or sink error.
+    #[error("trace error: {0}")]
+    Trace(#[from] crate::trace::TraceError),
+
     /// JSON serialization error.
     #[error("JSON error: {0}")]
     Json(#[from] serde_json::Error),

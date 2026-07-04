@@ -11,6 +11,7 @@ use crate::ast::{
     BodyElement, BodyElementKind, EdgeTarget, FluentCall, Rule, RuleHeader, RuleMode, SpecFile,
 };
 use crate::error::{LinkedSpecError, Result};
+use crate::trace::{TraceConfig, TraceEmitter};
 use rgx_core::Regex;
 
 /// Parse a `.spec` source string into a `SpecFile` AST.
@@ -71,6 +72,21 @@ pub fn parse_spec(source: &str) -> Result<SpecFile> {
         functions: Vec::new(),
         rules,
     })
+}
+
+/// Parse a `.spec` source string with explicit trace configuration.
+///
+/// `TRACE-OBSERVABILITY.4.2` wires the control/sink layer. Compile-side events
+/// are added by `.4.3`, so this entrypoint currently preserves `parse_spec`
+/// output while validating trace setup for later event wiring.
+pub fn parse_spec_with_trace(source: &str, trace_config: TraceConfig) -> Result<SpecFile> {
+    let mut trace = TraceEmitter::new(trace_config)?;
+    parse_spec_with_trace_emitter(source, &mut trace)
+}
+
+/// Parse with a caller-owned trace emitter.
+pub fn parse_spec_with_trace_emitter(source: &str, _trace: &mut TraceEmitter) -> Result<SpecFile> {
+    parse_spec(source)
 }
 
 /// Skip blank lines and comment lines, return first non-skipped index.
