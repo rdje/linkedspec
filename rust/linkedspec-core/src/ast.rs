@@ -61,9 +61,10 @@ pub struct RuleHeader {
 }
 
 /// Rule mode suffix — determines repetition, ordering, and matching behavior.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
 pub enum RuleMode {
     /// No mode suffix — repeated choice (equivalent to `OR+`).
+    #[default]
     Default,
     /// `:AND` — ordered sequence.
     And,

@@ -268,6 +268,9 @@ pub struct CompiledRule {
     pub is_top: bool,
     /// Parse mode (seek or consume).
     pub parse_mode: ParseMode,
+    /// Original parsed rule mode, preserved for generated-source family planning.
+    #[serde(default)]
+    pub mode: crate::ast::RuleMode,
     /// Regex patterns for this rule (compiled from `/pattern/` body elements).
     pub regex_patterns: Vec<String>,
     /// Action edge dispatch: fires when the matching regex alternative matches.

@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (RUST-PARITY.8.3.1 — generated family-plan metadata):
+  The generated Rust-source path now has a durable rule-family plan before direct handler execution starts.
+  `CompiledRule` carries parsed `RuleMode`, and `source_emitter` classifies rules into `Default`, `OrAcode`,
+  `AndSingleAcode`, `AndAcodeSeq`, `AndBcode`, `OrBcode`, or `Repetition`. Generated modules embed that
+  `GENERATED_RULES` table beside `COMPILED_SPEC_JSON` and validate label/family agreement before running. Execution
+  still delegates through `Engine`; `.8.3.2` is the first direct-execution leaf and should use the emitted plan as the
+  dispatch contract for default/OR acode before broadening to AND acode and bcode.
+
 - 2026-07-04 (RUST-PARITY.8.3 — non-REP emitter lane split):
   Treat non-repetition generated source as a sequence of separate mechanisms, not one patch. The first code read
   found that `CompiledRule` carries regex/action/blind dispatch tables and `parse_mode`, but not enough parsed
@@ -72,7 +80,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   parser-state/capture/input/mark readers, declaration helpers, and compatibility aliases stay explicit function,
   statement, or lifecycle surfaces unless a future task defines type-correct receiver semantics and lands
   Perl/Rust/tests/docs/KM together. No `SPEC-FORMAT-TERSE` leaf is currently pending; PNT returns to
-  `RUST-PARITY.8.3.1` unless a new terse leaf is split.
+  `RUST-PARITY.8.3.2` unless a new terse leaf is split.
 
 - 2026-07-04 (SPEC-FORMAT-TERSE.7.3 — array numeric reducer receiver methods):
   Array/list receivers now have terminal numeric reducer methods: `sum`, `avg`, `median`, `range`, `min`, and

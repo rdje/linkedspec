@@ -207,13 +207,14 @@ writes an **emitter** that consumes HandlerIR nodes and produces runnable code i
 your language. The JSON diagnostic backend (`_emit_handler_json`) proves the pattern.
 
 The Rust backend currently executes an interpreted structural model
-(`CompiledSpec`/`CompiledRule`) rather than generated Rust source. Its
+(`CompiledSpec`/`CompiledRule`) rather than direct generated Rust handlers. Its
 generated-source path is tracked separately under `RUST-PARITY.8`: `.8.1`
-split the work, and `.8.2` added the minimal scaffold/compile-run proof. That
-scaffold emits a Rust module embedding a serialized `CompiledSpec` and delegates
-`parse(input)` through the existing runtime engine; direct emitted handler
-families remain the `.8.3`/`.8.4` work, followed by all-variant/oracle
-integration in `.8.5`.
+split the work, `.8.2` added the minimal scaffold/compile-run proof, and
+`.8.3.1` added a generated rule-family plan. The scaffold now emits a Rust
+module embedding a serialized `CompiledSpec`, a `GENERATED_RULES` table, and a
+`parse(input)` entry point that validates the plan before delegating through the
+existing runtime engine; direct emitted handler families remain the
+`.8.3.2`–`.8.4` work, followed by all-variant/oracle integration in `.8.5`.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against `tests/corpus/`. The corpus root has a `manifest.json`

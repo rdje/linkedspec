@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **RUST-PARITY.8.3.1 — emit generated family plan**
+  (GENERATED SOURCE NOW CARRIES VALIDATED RULE-FAMILY METADATA).
+
+  **Fix:** `CompiledRule` preserves parsed `RuleMode`, and generated Rust source now embeds a `GENERATED_RULES`
+  family plan. `source_emitter` classifies default, OR acode, AND single-acode, AND sequential-acode, AND bcode,
+  OR bcode, and repetition markers, then validates generated plan rows against the embedded compiled spec before
+  delegating through the existing `Engine`.
+
+  **Verification:** Focused Rust formatting, `types_test`, `source_emitter`, and clippy checks pass. The generated
+  source test builds one isolated temp crate containing generated modules for the non-REP family-plan matrix and
+  verifies each generated `parse(...)` path still matches interpreter output.
+
+  **Frontier:** `RUST-PARITY.8.3.2` — emit direct default/OR acode generated execution.
+
 - 2026-07-04: **RUST-PARITY.8.3 — split non-repetition emitter lane**
   (NON-REP GENERATED-SOURCE WORK IS NOW DECOMPOSED BEFORE CODE).
 
@@ -18,7 +32,8 @@ Current execution status for interruption-safe batch workflow recovery.
   `CompiledRule` shape does not carry enough parsed mode/family data for generated source to distinguish OR-bcode
   from AND-bcode robustly.
 
-  **Frontier:** `RUST-PARITY.8.3.1` — carry rule-mode/family metadata and emit the generated non-REP family plan.
+  **Frontier at completion:** `RUST-PARITY.8.3.1` carried rule-mode/family metadata and generated non-REP
+  family-plan emission; `.8.3.1` is now done and current frontier is `.8.3.2`.
 
 - 2026-07-04: **RUST-PARITY.8.2 — add Rust source emitter scaffold**
   (GENERATED RUST-SOURCE API AND ISOLATED COMPILE/RUN HARNESS ARE NOW IN PLACE).
@@ -31,7 +46,7 @@ Current execution status for interruption-safe batch workflow recovery.
   interpreter result, builds the emitted module in an isolated temporary crate with offline Cargo, and executes the
   generated parser on a simple non-recursive case.
 
-  **Frontier:** `RUST-PARITY.8.3.1` has since become current after `.8.3` split the non-repetition emitter lane.
+  **Frontier:** `RUST-PARITY.8.3.2` has since become current after `.8.3` split the non-repetition emitter lane.
 
 - 2026-07-04: **RUST-PARITY.8.1 — split Rust source emitter lane**
   (CODE-GENERATION EMITTER WORK IS OWNED BY CHILD LEAVES BEFORE IMPLEMENTATION).
@@ -46,7 +61,7 @@ Current execution status for interruption-safe batch workflow recovery.
   minimal emitter scaffold/compile-run harness, non-REP families, REP families, and all-variant/oracle
   integration.
 
-  **Frontier:** `RUST-PARITY.8.3.1` has since become current after `.8.2` landed the generated-source
+  **Frontier:** `RUST-PARITY.8.3.2` has since become current after `.8.2` landed the generated-source
   scaffold/compile-run harness and `.8.3` split the non-REP lane.
 
 - 2026-07-04: **RUST-PARITY.7.4 — finalize oracle corpus manifest guard**
@@ -61,7 +76,7 @@ Current execution status for interruption-safe batch workflow recovery.
   plus manifest**; `cargo fmt --manifest-path rust/Cargo.toml --all` passes; Rust `corpus_oracle` passes **3
   tests**, including missing/stale drift guards and all **88** manifest-listed fixtures. `.7` is closed.
 
-  **Frontier:** `RUST-PARITY.8.3.1` has since become the current implementation leaf after `.8.2` landed the
+  **Frontier:** `RUST-PARITY.8.3.2` has since become the current implementation leaf after `.8.2` landed the
   generated-source scaffold/compile-run harness and `.8.3` split the non-REP lane.
 
 - 2026-07-04: **RUST-PARITY.7.3.6 — land legacy shipped-spec safety smokes**
@@ -80,7 +95,7 @@ Current execution status for interruption-safe batch workflow recovery.
   phase0 **1021** tests.
 
   **Frontier:** `RUST-PARITY.7.4` has since completed, `.8.1` split the code-generation lane, and `.8.2` landed
-  the generated-source scaffold and `.8.3` split the non-REP lane; current frontier is `RUST-PARITY.8.3.1`.
+  the generated-source scaffold and `.8.3` split the non-REP lane; current frontier is `RUST-PARITY.8.3.2`.
 
 - 2026-07-04: **RUST-PARITY.7.3.5 — close null-output and spec smoke triage**
   (`spec.spec` SMOKES ARE ORACLE-GREEN; DEBUG-ONLY NULL CANDIDATES NOT PROMOTED).
@@ -130,7 +145,7 @@ Current execution status for interruption-safe batch workflow recovery.
   summaries, numeric reducer statements, tests, corpus, mdBook, and Knowledge Map facts. `mdbook build
   docs/linkedspec-book`, Knowledge Map regeneration/check, memory/doctrine checks, and `git diff --check` pass.
 
-  **Frontier:** no `SPEC-FORMAT-TERSE` leaf is currently pending. PNT returns to `RUST-PARITY.8.3.1` unless a
+  **Frontier:** no `SPEC-FORMAT-TERSE` leaf is currently pending. PNT returns to `RUST-PARITY.8.3.2` unless a
   new terse leaf is split.
 
 - 2026-07-04: **SPEC-FORMAT-TERSE.7.3 — backfill array numeric reducer receiver methods**
@@ -499,7 +514,7 @@ Current execution status for interruption-safe batch workflow recovery.
   staged-registry, and spec-defined user-function tests PASS; direct Perl phase0 TAP run PASS with **1018**
   top-level tests; mdBook, Knowledge Map, memory, doctrine, whitespace, and full local CI gates PASS.
 
-  **Frontier:** staged prototype tree frontier is empty; PNT returns to `RUST-PARITY.8.3.1` unless a new staged linked
+  **Frontier:** staged prototype tree frontier is empty; PNT returns to `RUST-PARITY.8.3.2` unless a new staged linked
   parsing leaf is explicitly split.
 
 - 2026-07-03: **STAGED-LINKED-PARSING.5.5 — function-body parse jobs dispatched**

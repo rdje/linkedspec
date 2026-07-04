@@ -37,12 +37,12 @@ mixed hlink fixtures because they require a neutral scalar-ref/action-payload
 contract or a hlink spec migration. `RUST-PARITY.7.3.6` then added seven
 RTL/plugin/legacy safety smokes and left the richer mismatches as explicit
 follow-up blockers. `RUST-PARITY.7.4` finalized the manifest-backed regression
-guard. `RUST-PARITY.8.1` then split the broad code-generation emitter lane, and
+guard. `RUST-PARITY.8.1` then split the broad code-generation emitter lane,
 `RUST-PARITY.8.2` landed the minimal generated-source scaffold plus compile/run
-harness. `RUST-PARITY.8.3` then split non-repetition handler-family emission
-into narrower generated-source children. The current frontier is
-`RUST-PARITY.8.3.1`: rule-mode/family metadata plus generated non-REP
-family-plan emission.
+harness, `RUST-PARITY.8.3` split non-repetition handler-family emission into
+narrower generated-source children, and `RUST-PARITY.8.3.1` landed the
+generated rule-family plan. The current frontier is `RUST-PARITY.8.3.2`:
+direct default/OR acode generated execution.
 
 The later lanes are:
 
@@ -63,4 +63,5 @@ The later lanes are:
 - `.8.1`: done — code-generation emitter lane split/inventory.
 - `.8.2`: done — minimal generated Rust-source scaffold plus compile/run harness.
 - `.8.3`: split/active — non-repetition handler-family emission is decomposed into narrower children.
-- `.8.3.1`: current frontier — rule-mode/family metadata plus generated non-REP family-plan emission.
+- `.8.3.1`: done — rule-mode/family metadata plus generated non-REP family-plan validation.
+- `.8.3.2`: current frontier — direct default/OR acode generated execution.

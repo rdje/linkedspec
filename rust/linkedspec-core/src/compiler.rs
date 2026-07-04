@@ -250,6 +250,7 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
         label: rule.header.label.clone(),
         is_top: rule.header.is_top,
         parse_mode,
+        mode: rule.header.mode.clone(),
         regex_patterns,
         acode_dispatch,
         bcode_dispatch,

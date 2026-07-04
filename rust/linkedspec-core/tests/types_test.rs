@@ -1,5 +1,6 @@
 //! Tests for core type serialization/deserialization and RuntimeValue semantics.
 
+use linkedspec_core::ast::RuleMode;
 use linkedspec_core::types::{AcodeEntry, CompiledRule, CompiledSpec, ParseMode, RuntimeValue};
 
 #[test]
@@ -25,6 +26,7 @@ fn compiled_rule_json_roundtrip() {
         label: "TestRule".into(),
         is_top: true,
         parse_mode: ParseMode::Seek,
+        mode: RuleMode::Default,
         regex_patterns: vec!["hello".into(), "world".into()],
         acode_dispatch: vec![AcodeEntry {
             regex_idx: 0,
@@ -64,6 +66,7 @@ fn compiled_spec_json_roundtrip() {
                 label: "Top".into(),
                 is_top: true,
                 parse_mode: ParseMode::Seek,
+                mode: RuleMode::Default,
                 regex_patterns: vec!["/a/".into()],
                 acode_dispatch: vec![AcodeEntry {
                     regex_idx: 0,
@@ -88,6 +91,7 @@ fn compiled_spec_json_roundtrip() {
                 label: "Child".into(),
                 is_top: false,
                 parse_mode: ParseMode::Consume,
+                mode: RuleMode::And,
                 regex_patterns: vec!["/b/".into()],
                 acode_dispatch: vec![],
                 bcode_dispatch: Vec::new(),
@@ -158,7 +162,7 @@ fn runtime_value_as_bool() {
 #[test]
 fn runtime_value_as_number() {
     assert_eq!(RuntimeValue::Number(42.0).as_number(), Some(42.0));
-    assert_eq!(RuntimeValue::Scalar("3.14".into()).as_number(), Some(3.14));
+    assert_eq!(RuntimeValue::Scalar("2.5".into()).as_number(), Some(2.5));
     assert_eq!(RuntimeValue::Undef.as_number(), None);
     assert_eq!(
         RuntimeValue::Scalar("not a number".into()).as_number(),

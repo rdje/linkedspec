@@ -13,9 +13,9 @@ The `rust/` directory contains a Cargo workspace with two crates:
 
 The Rust variant primarily interprets its compiled structural contract at runtime: the engine walks compiled rule
 specifications and executes regex matching, child rule dispatch, and lifecycle code as direct Rust function calls.
-It also exposes a minimal generated-source scaffold (`linkedspec_runtime::source_emitter`) that emits a Rust
-module embedding a `CompiledSpec` and delegating execution to the same engine. Direct generated handler bodies are
-tracked in the follow-on `RUST-PARITY.8.3+` leaves.
+It also exposes a generated-source scaffold (`linkedspec_runtime::source_emitter`) that emits a Rust module embedding
+a `CompiledSpec`, a validated rule-family plan, and a `parse(input)` entry point that still delegates execution to
+the same engine. Direct generated handler bodies are tracked in the follow-on `RUST-PARITY.8.3.2+` leaves.
 
 ## Quick Start
 
@@ -88,8 +88,8 @@ The Perl reference implementation lives at `perl/LinkedSpec.pm`. The Rust varian
 - Uses the **same** regex dispatch semantics (seek/consume modes)
 - Uses the **same** rule modes (AND, OR, OR+, AND+, bounded, *, +, ?, &, |)
 - **Does not** generate Perl code or use `eval` — the default runtime path interprets `CompiledSpec` directly
-- Provides a minimal generated Rust-source scaffold that embeds `CompiledSpec` and delegates to the interpreter;
-  direct generated handler-family emission is still in progress
+- Provides a generated Rust-source scaffold that embeds `CompiledSpec` plus a validated family plan and delegates to
+  the interpreter; direct generated handler-family execution is still in progress
 - **Does not** implement the legacy plugin system (`.plg` files, `PPlugin`)
 
 ## Test Corpus

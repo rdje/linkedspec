@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — RUST-PARITY.8.3.1 — emit generated family plan
+
+**Scope:** Rust compiled-rule metadata, generated Rust-source emitter, generated-source compile/run tests, task-tree
+frontier docs, mdBook backend handoff, live recovery docs, and Knowledge Map.
+
+**What changed:** `CompiledRule` now preserves the parsed `RuleMode` so generated source can distinguish default,
+OR, AND, bcode, and repetition families. The source emitter now writes a `GENERATED_RULES` table with
+`GeneratedRuleFamily` rows, validates that generated plan against the embedded compiled spec, and still delegates
+execution through the existing `Engine` until the direct execution leaves.
+
+**Evidence:** The focused generated-source matrix builds generated modules for default, OR acode, AND single-acode,
+AND sequential-acode, AND bcode, and OR bcode cases in one isolated temp crate and verifies generated `parse(...)`
+output matches the interpreter. Focused Rust tests and clippy pass. The next executable frontier is
+`RUST-PARITY.8.3.2`: direct default/OR acode generated execution.
+
 ## 2026-07-04 — RUST-PARITY.8.3 — split non-repetition emitter lane
 
 **Scope:** Task-tree ownership, roadmap/frontier tracker, live recovery docs, and Knowledge Map. No Rust source
