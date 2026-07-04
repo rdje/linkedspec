@@ -5,13 +5,13 @@ answers:
   - "what is trace_generated_handler_branch"
   - "how should generated handler branch tracing be emitted"
   - "does the generated handler trace helper change branch behavior"
-  - "are generated handler templates instrumented yet"
+  - "what helper should generated handler templates use"
   - "what follows TRACE-OBSERVABILITY.3.1"
 date: 2026-07-04
 status: current
 tags: [trace, observability, generated-handlers, perl, task-tree, mdbook]
 evidence: "perl/LinkedSpec/Trace.pm trace_generated_handler_branch; t/trace_generated_handler_branch.t; docs/linkedspec-book/src/public-api/trace-api.md; docs/tasks/TRACE-OBSERVABILITY.md .3.1"
-reverify: "perl -c -Iperl perl/LinkedSpec/Trace.pm && perl -c -Iperl t/trace_generated_handler_branch.t && prove -v -Iperl t/trace_generated_handler_branch.t && prove -v -Iperl t/trace_generated_nonrep_dispatch.t && rg -n 'trace_generated_handler_branch|generated_handler_branch|TRACE-OBSERVABILITY\\.3\\.3' docs/tasks/TRACE-OBSERVABILITY.md docs/TASK_TREE.md MEMORY.md docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md"
+reverify: "perl -c -Iperl perl/LinkedSpec/Trace.pm && perl -c -Iperl t/trace_generated_handler_branch.t && prove -v -Iperl t/trace_generated_handler_branch.t && prove -v -Iperl t/trace_generated_nonrep_dispatch.t && prove -v -Iperl t/trace_generated_rep_dispatch.t && rg -n 'trace_generated_handler_branch|generated_handler_branch|TRACE-OBSERVABILITY\\.3\\.4' docs/tasks/TRACE-OBSERVABILITY.md docs/TASK_TREE.md MEMORY.md docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md"
 ---
 
 `LinkedSpec::Trace::trace_generated_handler_branch(%args)` is the Perl reference helper contract for generated
@@ -27,5 +27,6 @@ Contract:
 - evaluates `details => sub { ... }` only when tracing is enabled;
 - captures detail-builder errors in trace text instead of perturbing parser behavior.
 
-`TRACE-OBSERVABILITY.3.2` now wires non-repetition generated handler call sites through this helper.
-`TRACE-OBSERVABILITY.3.3` owns repetition/min/max/zero-progress paths.
+`TRACE-OBSERVABILITY.3.2` wires non-repetition generated handler call sites through this helper, and
+`TRACE-OBSERVABILITY.3.3` wires repetition/min/max/zero-progress paths through the same helper. Remaining coverage
+work starts at `TRACE-OBSERVABILITY.3.4` for compile/ActionIR owner scopes and branches.

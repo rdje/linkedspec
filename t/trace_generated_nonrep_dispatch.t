@@ -166,8 +166,8 @@ SPEC
  like($or_lines, qr/DECISION generated_handler_branch:or_acode:Top:acode_index_1 => TAKEN/, 'OR_ACODE traces selected acode choice branch');
 };
 
-subtest 'repetition handler bodies remain deferred to TRACE-OBSERVABILITY.3.3' => sub {
- plan tests => 5;
+subtest 'repetition handler bodies are instrumented by TRACE-OBSERVABILITY.3.3' => sub {
+ plan tests => 6;
 
  my $spec = <<'SPEC';
 Top::
@@ -192,7 +192,8 @@ SPEC
  like($source, qr/Top => sub \{.*trace_generated_handler_branch/s, 'non-repetition wrapper source is instrumented');
 
  my ($plus_body) = $source =~ /Plus => sub \{(.*?^\s+\},)/ms;
- unlike($plus_body // '', qr/trace_generated_handler_branch/, 'REP_ACODE rule body is not instrumented in .3.2');
+ like($plus_body // '', qr/trace_generated_handler_branch/, 'REP_ACODE rule body is instrumented in .3.3');
+ like($plus_body // '', qr/branch => 'max_continue'/, 'REP_ACODE rule body traces repetition max-bound decisions');
 };
 
 LinkedSpec::Trace::configure_trace(trace_level => 'none', trace_log_file => '', trace_log_mode => 'stdout');

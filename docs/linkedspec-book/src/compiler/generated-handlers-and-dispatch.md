@@ -119,7 +119,7 @@ The modernization goal is not to pretend generation does not exist. The goal is 
 
 ## HandlerVariantEmitter and HandlerIR
 
-The `HandlerVariantEmitter` module (`perl/LinkedSpec/HandlerVariantEmitter.pm`, ~1018 lines) is the handler code generator. It was extracted from `SpecEntry.pm` to keep variant construction and emission in one focused module. It operates in two phases: first, a variant builder produces a `HandlerIR` hashref AST describing the handler structure; second, a backend-specific emitter consumes the IR and produces the final output (Perl source, or JSON for diagnostics).
+The `HandlerVariantEmitter` module (`perl/LinkedSpec/HandlerVariantEmitter.pm`, about 1.6k lines) is the handler code generator. It was extracted from `SpecEntry.pm` to keep variant construction and emission in one focused module. It operates in two phases: first, a variant builder produces a `HandlerIR` hashref AST describing the handler structure; second, a backend-specific emitter consumes the IR and produces the final output (Perl source, or JSON for diagnostics).
 
 ### HandlerIR: the intermediate representation
 
@@ -165,6 +165,12 @@ Repetition bounds are resolved by `_resolve_rep_bounds`, which maps node types (
 - `_build_lmatch_extraction` — emits the common `$LMATCH`, `@LMATCH_LIST`, `%LMATCH_HASH`, `$LINDEX`, `$LSPOS` extraction block
 
 REP variants (rep_bcode, rep_and_bcode, rep_and_acode) compose inner handlers as anonymous coderefs (`$or_code`, `$and_code`) with progress-detection guards that check whether `pos($$STRING)` advanced between iterations.
+
+Generated Perl templates also route branch decisions through `LinkedSpec::Trace::trace_generated_handler_branch(...)`.
+At `debug` trace level, non-repetition templates report match/no-match, acode/bcode dispatch, AND sequence, `LX`,
+and child-result decisions. Repetition templates report loop entry, per-iteration success/failure, min-satisfied
+stops, max-bound continuation/cutoff, and the bcode REP zero-progress cutoff. These trace calls return the original
+branch boolean, so tracing should not change parser behavior.
 
 **JSON diagnostic backend** (`_emit_handler_json`). Uses `JSON::PP` (Perl core since 5.14) with canonical key ordering and pretty printing. It strips `undef` and empty values, producing a clean serialized HandlerIR document. The backend is selected by setting the `$BACKEND` package variable in `SpecEntry.pm` (line 19) to `'json'`, or by passing `backend => 'json'` to `_build_handler_variants`.
 

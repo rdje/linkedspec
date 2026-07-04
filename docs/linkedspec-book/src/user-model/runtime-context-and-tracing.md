@@ -290,11 +290,9 @@ The trace surface is useful for:
 - debugging mark/capture behavior
 
 Current coverage is useful but not exhaustive. LinkedSpec traces broad compiler/parser scopes, per-rule runtime
-handler wrappers, selected decisions, dumps, and mark/capture events. The Perl reference backend also has a
-generated-handler branch helper contract so emitted templates can record branch decisions without changing branch
-results. Generated handler internals such as match/no-match branches, acode/bcode dispatch branches, repetition
-min/max paths, and most ActionIR lowering branches are still planned coverage work until those templates and owners
-are wired to the helper.
+handler wrappers, selected decisions, dumps, and mark/capture events. The Perl reference backend also emits
+debug-level generated-handler branch decisions for non-repetition dispatch paths and repetition loop paths. Most
+ActionIR lowering branches are still planned coverage work until those owners are instrumented.
 
 Tracing is controlled separately from runtime context.
 
@@ -435,11 +433,12 @@ When generated handler templates use the branch helper, decision names follow th
 generated_handler_branch:<handler_kind>:<rule_label>:<branch>
 ```
 
-In the Perl reference backend, non-repetition generated handlers emit those decisions at `debug` level for regex
-match/miss, `LX` no-match paths, acode dispatch, AND sequence checks, bcode child-call dispatch, and bcode
-child-result checks. Typical branch names are `match`, `no_match_lx`, `acode_index_0`,
-`required_sequence_index`, `bcode_call_Child`, and `bcode_child_result`. Repetition min/max and zero-progress loop
-decisions remain a later coverage slice.
+In the Perl reference backend, generated handlers emit those decisions at `debug` level for regex match/miss, `LX`
+no-match paths, acode dispatch, AND sequence checks, bcode child-call dispatch, bcode child-result checks,
+repetition loop entry, min-satisfied stop decisions, per-iteration success/failure, max-bound continuation/cutoff,
+and bcode REP zero-progress cutoffs. Typical branch names are `match`, `no_match_lx`, `acode_index_0`,
+`required_sequence_index`, `bcode_call_Child`, `bcode_child_result`, `loop_enter`, `iteration_result`,
+`miss_min_satisfied`, `max_continue`, `zero_progress`, and `zero_progress_min_satisfied`.
 
 Those helper events return the normalized original branch boolean and evaluate lazy detail builders only when
 tracing is enabled, so branch tracing should not perturb parser behavior.

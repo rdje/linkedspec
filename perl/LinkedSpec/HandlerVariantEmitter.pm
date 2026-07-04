@@ -1034,11 +1034,98 @@ sub _emit_or_acode_handler {
 sub _emit_rep_bcode_handler {
     my ($ir) = @_;
     my $label  = $ir->{label};
+    my $handler_kind = $ir->{kind};
+    my $trace_enabled = _trace_branches_enabled($ir);
     my $min    = $ir->{rep_min};
     my $max    = $ir->{rep_max};
     my $excode = $ir->{excode} || 'return \@' . $label . '_collect';
     my $ecode  = $ir->{ecode}  || 'return \@' . $label . '_collect';
     my $itcode = $ir->{itcode} || 'push @' . $label . '_collect, $or_ret;';
+    my $loop_enter_trace = _trace_branch_statement(
+        enabled => $trace_enabled,
+        indent => '    ',
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'loop_enter',
+        taken_expr => '1',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "starting REP bcode iteration" }',
+    );
+    my $or_result_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'iteration_result',
+        taken_expr => '$or_ret',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "return_ref=" . (ref($or_ret) || "") }',
+    );
+    my $miss_min_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'miss_min_satisfied',
+        taken_expr => '$ccount >= $min',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "inner OR_BCODE result was false" }',
+    );
+    my $zero_progress_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'zero_progress',
+        taken_expr => '$loop_end_pos == $loop_start_pos',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => '$loop_end_pos' ],
+        ],
+        details_expr => 'sub { "loop_start_pos=$loop_start_pos loop_end_pos=$loop_end_pos" }',
+    );
+    my $zero_progress_min_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'zero_progress_min_satisfied',
+        taken_expr => '$ccount >= $min',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => '$loop_end_pos' ],
+        ],
+        details_expr => 'sub { "zero progress cutoff" }',
+    );
+    my $max_continue_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'max_continue',
+        taken_expr => '$ccount < $max',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "continue while loop_count < max" }',
+    );
 
     # Build inner OR_BCODE as a coderef
     my $or_body = _emit_or_bcode_handler({
@@ -1061,10 +1148,11 @@ sub _emit_rep_bcode_handler {
    };
 
    while(1) {
+' . $loop_enter_trace . '
     my $loop_start_pos = defined(pos $$STRING) ? pos $$STRING : -1;
     my $or_ret = $or_code->();
-    unless ($or_ret) {
-     if ($ccount >= $min) {
+    unless (' . $or_result_condition . ') {
+     if (' . $miss_min_condition . ') {
       ' . $excode . '
      } else {
       return undef
@@ -1072,8 +1160,8 @@ sub _emit_rep_bcode_handler {
     }
 
     my $loop_end_pos = defined(pos $$STRING) ? pos $$STRING : -1;
-    if ($loop_end_pos == $loop_start_pos) {
-     if ($ccount >= $min) {
+    if (' . $zero_progress_condition . ') {
+     if (' . $zero_progress_min_condition . ') {
       ' . $excode . '
      } else {
       return undef
@@ -1084,7 +1172,7 @@ sub _emit_rep_bcode_handler {
 
     ' . $itcode . '
 
-    last unless $ccount < $max
+    last unless ' . $max_continue_condition . '
    }
 
    ' . $ecode . '
@@ -1097,11 +1185,98 @@ sub _emit_rep_bcode_handler {
 sub _emit_rep_and_bcode_handler {
     my ($ir) = @_;
     my $label  = $ir->{label};
+    my $handler_kind = $ir->{kind};
+    my $trace_enabled = _trace_branches_enabled($ir);
     my $min    = $ir->{rep_min};
     my $max    = $ir->{rep_max};
     my $excode = $ir->{excode} || 'return \@' . $label . '_collect';
     my $ecode  = $ir->{ecode}  || 'return \@' . $label . '_collect';
     my $itcode = $ir->{itcode} || 'push @' . $label . '_collect, $and_ret;';
+    my $loop_enter_trace = _trace_branch_statement(
+        enabled => $trace_enabled,
+        indent => '    ',
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'loop_enter',
+        taken_expr => '1',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "starting REP AND_BCODE iteration" }',
+    );
+    my $and_result_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'iteration_result',
+        taken_expr => '$and_ret',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "return_ref=" . (ref($and_ret) || "") }',
+    );
+    my $miss_min_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'miss_min_satisfied',
+        taken_expr => '$ccount >= $min',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "inner AND_BCODE result was false" }',
+    );
+    my $zero_progress_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'zero_progress',
+        taken_expr => '$loop_end_pos == $loop_start_pos',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => '$loop_end_pos' ],
+        ],
+        details_expr => 'sub { "loop_start_pos=$loop_start_pos loop_end_pos=$loop_end_pos" }',
+    );
+    my $zero_progress_min_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'zero_progress_min_satisfied',
+        taken_expr => '$ccount >= $min',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => '$loop_end_pos' ],
+        ],
+        details_expr => 'sub { "zero progress cutoff" }',
+    );
+    my $max_continue_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'max_continue',
+        taken_expr => '$ccount < $max',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "continue while loop_count < max" }',
+    );
 
     # Build inner AND_BCODE as a coderef
     my $and_body = _emit_and_bcode_handler({
@@ -1123,10 +1298,11 @@ sub _emit_rep_and_bcode_handler {
    };
 
    while(1) {
+' . $loop_enter_trace . '
     my $loop_start_pos = defined(pos $$STRING) ? pos $$STRING : -1;
     my $and_ret = $and_code->();
-    unless ($and_ret) {
-     if ($ccount >= $min) {
+    unless (' . $and_result_condition . ') {
+     if (' . $miss_min_condition . ') {
       ' . $excode . '
      } else {
       return undef
@@ -1134,8 +1310,8 @@ sub _emit_rep_and_bcode_handler {
     }
 
     my $loop_end_pos = defined(pos $$STRING) ? pos $$STRING : -1;
-    if ($loop_end_pos == $loop_start_pos) {
-     if ($ccount >= $min) {
+    if (' . $zero_progress_condition . ') {
+     if (' . $zero_progress_min_condition . ') {
       ' . $excode . '
      } else {
       return undef
@@ -1146,7 +1322,7 @@ sub _emit_rep_and_bcode_handler {
 
     ' . $itcode . '
 
-    last unless $ccount < $max
+    last unless ' . $max_continue_condition . '
    }
 
    ' . $ecode . '
@@ -1159,11 +1335,70 @@ sub _emit_rep_and_bcode_handler {
 sub _emit_rep_and_acode_handler {
     my ($ir) = @_;
     my $label  = $ir->{label};
+    my $handler_kind = $ir->{kind};
+    my $trace_enabled = _trace_branches_enabled($ir);
     my $min    = $ir->{rep_min};
     my $max    = $ir->{rep_max};
     my $excode = $ir->{excode} || 'return \@' . $label . '_collect';
     my $ecode  = $ir->{ecode}  || 'return \@' . $label . '_collect';
     my $itcode = $ir->{itcode} || 'push @' . $label . '_collect, $and_ret;';
+    my $loop_enter_trace = _trace_branch_statement(
+        enabled => $trace_enabled,
+        indent => '    ',
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'loop_enter',
+        taken_expr => '1',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "starting REP AND_ACODE iteration" }',
+    );
+    my $and_result_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'iteration_result',
+        taken_expr => '$and_ret',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "return_ref=" . (ref($and_ret) || "") }',
+    );
+    my $miss_min_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'miss_min_satisfied',
+        taken_expr => '$ccount >= $min',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "inner AND_ACODE result was false" }',
+    );
+    my $max_continue_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'max_continue',
+        taken_expr => '$ccount < $max',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "continue while loop_count < max" }',
+    );
 
     # Build inner AND_ACODE as a coderef
     my $and_body = _emit_and_acode_seq_handler({
@@ -1185,9 +1420,10 @@ sub _emit_rep_and_acode_handler {
    };
 
    while(1) {
+' . $loop_enter_trace . '
     my $and_ret = $and_code->();
-    unless ($and_ret) {
-     if ($ccount >= $min) {
+    unless (' . $and_result_condition . ') {
+     if (' . $miss_min_condition . ') {
       ' . $excode . '
      } else {
       return undef
@@ -1198,7 +1434,7 @@ sub _emit_rep_and_acode_handler {
 
     ' . $itcode . '
 
-    last unless $ccount < $max
+    last unless ' . $max_continue_condition . '
    }
 
    ' . $ecode . '
@@ -1211,6 +1447,8 @@ sub _emit_rep_and_acode_handler {
 sub _emit_rep_acode_handler {
     my ($ir) = @_;
     my $label      = $ir->{label};
+    my $handler_kind = $ir->{kind};
+    my $trace_enabled = _trace_branches_enabled($ir);
     my $match_expr = _linkedre_or_expr(%$ir, label => $label);
     my $min        = $ir->{rep_min};
     my $max        = $ir->{rep_max};
@@ -1228,8 +1466,86 @@ sub _emit_rep_acode_handler {
         $transformed =~ s/\breturn\s+/"\$" . $label . " = "/eg;
         push @acodes_transformed, $transformed;
     }
-    my $acodes = _build_acodes_dispatch_block(\@acodes_transformed);
+    my $acodes = _build_acodes_dispatch_block(
+        \@acodes_transformed,
+        label => $label,
+        handler_kind => $handler_kind,
+        trace_enabled => $trace_enabled,
+    );
     my $lmatch = _build_lmatch_extraction();
+    my $loop_enter_trace = _trace_branch_statement(
+        enabled => $trace_enabled,
+        indent => '    ',
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'loop_enter',
+        taken_expr => '1',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "starting REP acode iteration" }',
+    );
+    my $match_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'match',
+        taken_expr => 'defined($minfo) ? 1 : 0',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { defined($minfo) ? "match_index=$$minfo{index}" : "no_match" }',
+    );
+    my $miss_min_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'miss_min_satisfied',
+        taken_expr => '$ccount >= $min',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "regex match was false" }',
+    );
+    my $iteration_success_trace = _trace_branch_statement(
+        enabled => $trace_enabled,
+        indent => '    ',
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'iteration_result',
+        taken_expr => '1',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ match_index => '$$minfo{index}' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "return_ref=" . (ref($' . $label . ') || "") }',
+    );
+    my $max_continue_condition = _trace_branch_condition(
+        enabled => $trace_enabled,
+        label => $label,
+        handler_kind => $handler_kind,
+        branch => 'max_continue',
+        taken_expr => '$ccount < $max',
+        meta => [
+            [ loop_count => '$ccount' ],
+            [ rep_min => '$min' ],
+            [ rep_max => '$max' ],
+            [ pos => 'pos($$STRING)' ],
+        ],
+        details_expr => 'sub { "continue while loop_count < max" }',
+    );
 
     return '
 
@@ -1239,9 +1555,10 @@ sub _emit_rep_acode_handler {
    my $ccount = 0;
 
    while(1) {
+' . $loop_enter_trace . '
     my $minfo = ' . $match_expr . ';
-    unless($minfo) {
-     if ($ccount >= $min) {
+    unless(' . $match_condition . ') {
+     if (' . $miss_min_condition . ') {
       ' . $excode . '
      } else {
       return undef
@@ -1254,12 +1571,13 @@ sub _emit_rep_acode_handler {
     ' . $acodes . '
 
     ' . $lecode . '
+' . $iteration_success_trace . '
 
     ++$ccount;
 
     ' . $itcode . '
 
-    last unless $ccount < $max
+    last unless ' . $max_continue_condition . '
    }
 
    ' . $ecode . '

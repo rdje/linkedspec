@@ -1,14 +1,22 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.3.3 — repetition generated path tracing):
+  Repetition Perl generated handler templates now emit debug-level REP branch decisions through
+  `trace_generated_handler_branch(...)`. Common REP branch names are `loop_enter`, `iteration_result`,
+  `miss_min_satisfied`, and `max_continue`; `REP_ACODE` also reports `match` and `acode_index_<n>`, while bcode
+  REP variants also report `zero_progress` and `zero_progress_min_satisfied`. Keep inner non-REP bcode helper
+  traces disabled inside REP coderefs unless a later leaf deliberately changes trace granularity; `.3.3` keeps the
+  REP loop as the ownership boundary for emitted decisions. Remaining "see everything" coverage is compile/ActionIR
+  owner scopes and branch decisions under `.3.4`, plus later Rust trace parity.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.3.2 — non-repetition generated dispatch tracing):
   Non-repetition Perl generated handler templates now emit branch decisions through
   `trace_generated_handler_branch(...)`. Keep new non-REP branches on that helper rather than hand-formatting trace
   strings. Current branch names include `match`, `no_match_lx`, `acode_index_<n>`, `required_index_0`,
   `required_sequence_index`, `bcode_call_<Rule>`, `bcode_child_result`, and `bcode_no_child_match`. These are
   debug-level events, so CLI/per-call probes that need generated-handler branches must use `--trace debug` or
-  `trace_level => 'debug'`. Repetition loops are intentionally still plain generated Perl here; `.3.3` owns min/max,
-  loop continuation, and zero-progress trace decisions.
+  `trace_level => 'debug'`. Repetition loops have since been instrumented under `.3.3`.
 
 - 2026-07-04 (TRACE-OBSERVABILITY.3.1 — generated-handler branch helper seam):
   `LinkedSpec::Trace::trace_generated_handler_branch(%args)` is the only helper contract generated Perl handler
@@ -37,9 +45,10 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - 2026-07-04 (TRACE-OBSERVABILITY.1 — coverage audit before trace work):
   The trace framework was not missing; coverage and discoverability are the gaps. Current Perl trace sees broad
   `Get`/parser invocation stages, per-rule runtime handler wrappers, selected decisions, dumps, and mark/capture
-  events. It does not yet see the actual generated handler branches (`while`, `foreach`, `if`/`elsif`, `unless`,
-  repetition min/max/zero-progress paths, acode index dispatch, bcode call dispatch), and most ActionIR owner
-  lowering branches have no enter/exit or decision trace. The first implementation path should be explicit,
+  events. At audit time it did not yet see the actual generated handler branches (`while`, `foreach`, `if`/`elsif`,
+  `unless`, repetition min/max/zero-progress paths, acode index dispatch, bcode call dispatch); `.3.2` and `.3.3`
+  have since wired the Perl reference templates. Most ActionIR owner lowering branches still have no enter/exit or
+  decision trace. The first implementation path should be explicit,
   reviewable instrumentation in the generated handler templates plus owner-level wrappers, not an aspect/`Devel::*`
   approach. Also keep the public controls honest: use env vars, per-call trace options, or `configure_trace(...)`.
   Assigning `$LinkedSpec::DUMP_VERBOSITY` before the lazy `LinkedSpec::Trace` load is not a reliable facade control;

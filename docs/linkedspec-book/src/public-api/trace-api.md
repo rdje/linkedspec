@@ -95,12 +95,14 @@ as `match_index`, `call`, `pos`, `loop_count`, `rep_min`, and `rep_max`, plus `r
 is a coderef, LinkedSpec evaluates it only when the configured trace level enables the event. A details coderef
 error is captured in trace text instead of changing the branch result. The default event level is `debug`.
 
-The Perl reference generated handlers now use this helper for non-repetition dispatch branches. At `debug` trace
-level, emitted handler bodies report regex match/miss decisions, `LX` no-match paths, acode index choices,
-AND sequence index checks, bcode child-call dispatch, and bcode child-result checks. Current branch names include
-`match`, `no_match_lx`, `acode_index_<n>`, `required_index_0`, `required_sequence_index`,
-`bcode_call_<Rule>`, `bcode_child_result`, and `bcode_no_child_match`. Repetition loop decisions such as min/max,
-loop continuation, and zero-progress cutoff remain a separate coverage slice.
+The Perl reference generated handlers now use this helper for both non-repetition dispatch branches and repetition
+loop branches. At `debug` trace level, emitted handler bodies report regex match/miss decisions, `LX` no-match
+paths, acode index choices, AND sequence index checks, bcode child-call dispatch, bcode child-result checks, REP
+loop entry, per-iteration success/failure, min-satisfied stop decisions, max-bound continuation/cutoff decisions,
+and the bcode REP zero-progress cutoff. Current branch names include `match`, `no_match_lx`, `acode_index_<n>`,
+`required_index_0`, `required_sequence_index`, `bcode_call_<Rule>`, `bcode_child_result`,
+`bcode_no_child_match`, `loop_enter`, `iteration_result`, `miss_min_satisfied`, `max_continue`, `zero_progress`,
+and `zero_progress_min_satisfied`.
 
 ### `log_output($level, $message, $context)`
 
@@ -174,7 +176,7 @@ Treat these variables as compatibility state, not the preferred control API. Use
 
 ## Typical usage
 
-The current trace implementation covers broad compile-pipeline stages, parser invocation, per-rule runtime handler wrappers, selected decisions, dumps, mark/capture events, and the reusable generated-handler branch helper contract. It is not yet an exhaustive branch tracer for every generated handler body or every ActionIR lowering branch.
+The current trace implementation covers broad compile-pipeline stages, parser invocation, per-rule runtime handler wrappers, selected decisions, dumps, mark/capture events, and generated-handler branch decisions for the Perl reference non-repetition and repetition templates. It is not yet an exhaustive branch tracer for every ActionIR lowering branch.
 
 The consistent scope naming makes it possible to follow a single parse through nested trace output:
 
@@ -188,6 +190,6 @@ LinkedSpec::parser_invoke:Top
 <- LinkedSpec::parser_invoke:Top (returned AST)
 ```
 
-Each `->` and `<-` pair corresponds to a `trace_enter`/`trace_exit` call. Decision events appear inline without indent changes. Generated runtime-handler branches such as match/no-match dispatch, `if`/`elsif`, repetition min/max paths, and bcode/acode dispatch now have a shared helper to call, but the templates are wired in later coverage leaves; they are not guaranteed current output yet.
+Each `->` and `<-` pair corresponds to a `trace_enter`/`trace_exit` call. Decision events appear inline without indent changes. Generated runtime-handler branches such as match/no-match dispatch, `if`/`elsif`, repetition min/max paths, and bcode/acode dispatch emit `generated_handler_branch:<handler_kind>:<rule_label>:<branch>` decisions at `debug` level in the Perl reference backend.
 
 The trace API is intentionally kept separate from the structured `last_error` diagnostics channel. Trace output is for developers and debugging; structured `last_error` payloads are for callers programmatically handling failures.

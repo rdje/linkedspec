@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — engine observability / developer experience`
 - Created: `2026-06-19`
-- Last updated: `2026-07-04` (`.3.2` non-repetition generated dispatch tracing done; `.3.3` next)
+- Last updated: `2026-07-04` (`.3.3` repetition generated handler tracing done)
 - Owner: repo-local workflow
 
 ## Goal (user directive, 2026-06-19)
@@ -39,10 +39,9 @@ per-call trace options, or `configure_trace`.)
 1. **Discoverability/CLI:** `TRACE-OBSERVABILITY.2` now closes the first discoverability gap with
    `bin/linkedspec`, a command-line compile/run runner that exposes `--trace LEVEL`, `--trace-file`,
    `--trace-mode`, `--trace-reset`, and `--trace-emoji`, and with mdBook/TOOLBOX documentation.
-2. **Coverage:** instrumentation is at *pipeline stages + key decisions*, NOT exhaustive. "See
-   everything" wants function enter/exit + every if/switch/case branch across the compile pipeline
-   AND the **generated runtime parser** (the emitted handler source in `SpecEntry`/`HandlerVariantEmitter`
-   — runtime branch tracing likely needs emitting trace calls into the generated handlers).
+2. **Coverage:** generated runtime parser branch tracing is now concrete for the Perl reference non-repetition
+   and repetition handler templates, but compile/ActionIR owner coverage is still not exhaustive. "See everything"
+   wants function enter/exit + every if/switch/case branch across the compile pipeline and generated runtime parser.
 
 ## Coverage Audit (`TRACE-OBSERVABILITY.1`, 2026-07-04)
 
@@ -69,14 +68,12 @@ The important gaps are now pinned:
   `--trace`/`--trace-file` CLI surface. `TRACE-OBSERVABILITY.2` has since closed that discoverability gap.
 - Most ActionIR/lowering owner functions have no ENTER/EXIT scopes and their `if`/`switch`/case decisions are not
   traced; the current pipeline trace sees stage boundaries and a few validation decisions, not every branch.
-- `perl/LinkedSpec/HandlerVariantEmitter.pm` emits untraced runtime branches (`while`, `foreach`, `if`/`elsif`,
-  `unless`, repetition min/max and zero-progress branches, acode index dispatch, bcode call dispatch, and
-  no-match/LX/EX paths). A 2026-07-04 `dump_parser_source` probe for a minimal parser showed emitted
-  `while (` and `unless(` branches but no emitted `trace_decision`/`trace_enter`/`trace_exit` in the handler body.
-  Runtime execution for that same parser exposed only wrapper-level `parser_invoke`, `rule_handler`, and
-  `rule_handler_eval` decisions.
-- Generated in-body trace is currently limited mainly to mark/capture events; ordinary match/dispatch/repetition
-  control flow is opaque unless the whole handler source is dumped and read manually.
+- At the time of the `.1` audit, `perl/LinkedSpec/HandlerVariantEmitter.pm` emitted untraced runtime branches
+  (`while`, `foreach`, `if`/`elsif`, `unless`, repetition min/max and zero-progress branches, acode index dispatch,
+  bcode call dispatch, and no-match/LX/EX paths). `.3.2` and `.3.3` have since wired the Perl reference
+  non-repetition and repetition generated templates through `trace_generated_handler_branch(...)`.
+- Generated in-body trace now covers match/dispatch/repetition control flow for the current Perl reference
+  templates; compile/ActionIR owner branches remain the next opaque coverage area.
 - Rust currently has no analogous trace API/sink surface in `rust/linkedspec-runtime`; `rg` finds no runtime trace
   implementation beyond ordinary test variables named `log`.
 
@@ -85,8 +82,8 @@ Coverage plan:
 1. `.2`: done — add a discoverable CLI/control surface and document the exact env/per-call/API controls. Correct
    docs say `configure_trace`, per-call options, env vars, and `bin/linkedspec` flags are the reliable controls;
    lazy facade package-variable mutation is compatibility state, not the preferred control path.
-2. `.3`: extend Perl reference coverage in small sub-leaves: helper seam and non-repetition generated handler
-   dispatch tracing are now in place; next instrument repetition decisions, then add missing compile/ActionIR
+2. `.3`: extend Perl reference coverage in small sub-leaves: helper seam, non-repetition generated handler
+   dispatch tracing, and repetition generated handler tracing are now in place; next add missing compile/ActionIR
    owner ENTER/EXIT and branch decisions.
 3. Future backend-parity leaf: after the Perl reference trace semantics are concrete, define/implement the Rust
    equivalent trace model instead of pretending the current Perl-only trace surface already covers Rust.
@@ -151,17 +148,26 @@ Coverage plan:
     templates route their non-repetition branch conditions through `trace_generated_handler_branch`; debug trace
     reports `match`, `no_match_lx`, `acode_index_<n>`, `required_index_0`, `required_sequence_index`,
     `bcode_call_<Rule>`, `bcode_child_result`, and `bcode_no_child_match` decisions. Repetition templates remain
-    deliberately uninstrumented for `.3.3`.
+    deliberately uninstrumented until `.3.3`, which has since closed.
   Verification: `perl -c -Iperl perl/LinkedSpec/HandlerVariantEmitter.pm`;
     `perl -c -Iperl t/trace_generated_nonrep_dispatch.t`;
     `prove -v -Iperl t/trace_generated_nonrep_dispatch.t`; mdBook; Knowledge Map; memory/doctrine; whitespace;
     `tools/run_ci_local.sh`.
-  Commit: `pending this commit`
-- ID: `TRACE-OBSERVABILITY.3.3` · Status: `pending`
+  Commit: `08e7a885` (`TRACE-OBSERVABILITY.3.2 - trace non-repetition generated dispatch`)
+- ID: `TRACE-OBSERVABILITY.3.3` · Status: `done` (closed 2026-07-04)
   Goal: Instrument repetition generated handler paths: min/max bounds, loop entry/exit, zero-progress cutoff, and
     per-iteration success/failure decisions.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance: done — `REP_BCODE`, `REP_AND_BCODE`, `REP_AND_ACODE`, and `REP_ACODE` templates route their REP
+    loop branch conditions through `trace_generated_handler_branch`; debug trace reports `loop_enter`,
+    `iteration_result`, `miss_min_satisfied`, `max_continue`, and, for bcode REP families, `zero_progress` and
+    `zero_progress_min_satisfied`. `REP_ACODE` also reports `match` and `acode_index_<n>`. Nested non-REP bcode
+    helper branch calls remain disabled inside REP coderefs so REP traces stay loop-owned.
+  Verification: `perl -c -Iperl perl/LinkedSpec/HandlerVariantEmitter.pm`;
+    `perl -c -Iperl t/trace_generated_rep_dispatch.t`;
+    `prove -v -Iperl t/trace_generated_rep_dispatch.t`;
+    `prove -v -Iperl t/trace_generated_nonrep_dispatch.t`; mdBook; Knowledge Map; memory/doctrine; whitespace;
+    `tools/run_ci_local.sh`.
+  Commit: `pending this commit`
 - ID: `TRACE-OBSERVABILITY.3.4` · Status: `pending`
   Goal: Add missing Perl compile/ActionIR owner ENTER/EXIT scopes and branch decisions for the lowering paths that
     select helper families, control-flow branches, and fallback/diagnostic outcomes.
@@ -177,10 +183,9 @@ Coverage plan:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `.3.3` | `pending` | Instrument repetition paths separately because min/max/zero-progress loops have distinct risks. |
-| 2 | `.3.4` | `pending` | Add compile/ActionIR owner scopes after runtime handler trace semantics are concrete. |
-| 3 | `.3.5` | `pending` | Close coverage docs/probes and decide the backend-parity split. |
-| 4 | future backend parity | `pending split` | Rust has no trace API yet; split after Perl reference trace semantics settle. |
+| 1 | `.3.4` | `pending` | Add compile/ActionIR owner scopes after runtime handler trace semantics are concrete. |
+| 2 | `.3.5` | `pending` | Close coverage docs/probes and decide the backend-parity split. |
+| 3 | future backend parity | `pending split` | Rust has no trace API yet; split after Perl reference trace semantics settle. |
 
 ## Decisions
 
@@ -197,18 +202,21 @@ Coverage plan:
   repetition templates; `.3.2` and `.3.3` own those emitted call-site changes.
 - `2026-07-04`: `.3.2` instruments only non-repetition generated handler dispatch. Repetition wrappers disable
   nested non-REP branch calls inside REP coderef bodies, and `REP_ACODE` source remains plain until `.3.3` owns the
-  min/max/zero-progress trace design.
+  min/max/zero-progress trace design. `.3.3` has since closed that design.
+- `2026-07-04`: `.3.3` instruments REP loop decisions at the REP template boundary. Nested non-REP bcode helper
+  branch calls remain disabled inside REP coderefs so traces report loop-level REP decisions instead of duplicating
+  inner dispatch details on every iteration.
 
 ## Open Questions
 
-- Runtime-parser branch tracing: emit explicit decision calls into generated handler source
-  (`HandlerVariantEmitter` templates via `SpecEntry` runtime helpers), gated by verbosity.
+- Compile/ActionIR branch tracing: add owner-level ENTER/EXIT scopes and decision calls through explicit helper
+  seams without perturbing lowering behavior.
 - Auto-instrumentation (`Devel::*`/aspect style) is not the preferred first path: generated template instrumentation
   and owner-level trace wrappers are more portable and reviewable.
 
 ## Blockers
 
-- None. Independent of the triage; `.2` (CLI) can land standalone.
+- None.
 
 ## Verification Log
 
@@ -219,7 +227,8 @@ Coverage plan:
 | `2026-07-04` | `.2` | `perl -c bin/linkedspec`; `perl -c -Iperl t/trace_cli.t`; `prove -v -Iperl t/trace_cli.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `tools/run_ci_local.sh` | PASS — CLI help exposes trace flags; routed trace file is non-empty; stdout remains canonical parser JSON; full local CI passes with phase0 1021 green |
 | `2026-07-04` | `.3` | task-tree split review; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `git diff --check` | PASS — coverage extension split before code |
 | `2026-07-04` | `.3.1` | `perl -c -Iperl perl/LinkedSpec/Trace.pm`; `perl -c -Iperl t/trace_generated_handler_branch.t`; `prove -v -Iperl t/trace_generated_handler_branch.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — helper contract added before generated template instrumentation; full local CI passed with phase0 1021 green |
-| `2026-07-04` | `.3.2` | `perl -c -Iperl perl/LinkedSpec/HandlerVariantEmitter.pm`; `perl -c -Iperl t/trace_generated_nonrep_dispatch.t`; `prove -v -Iperl t/trace_generated_nonrep_dispatch.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — non-repetition generated handler branch decisions traced; repetition source remains deferred to `.3.3` |
+| `2026-07-04` | `.3.2` | `perl -c -Iperl perl/LinkedSpec/HandlerVariantEmitter.pm`; `perl -c -Iperl t/trace_generated_nonrep_dispatch.t`; `prove -v -Iperl t/trace_generated_nonrep_dispatch.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — non-repetition generated handler branch decisions traced; repetition source was deferred until `.3.3` |
+| `2026-07-04` | `.3.3` | `perl -c -Iperl perl/LinkedSpec/HandlerVariantEmitter.pm`; `perl -c -Iperl t/trace_generated_rep_dispatch.t`; `prove -v -Iperl t/trace_generated_rep_dispatch.t`; `prove -v -Iperl t/trace_generated_nonrep_dispatch.t`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — repetition generated handler loop decisions traced; full local CI passed with phase0 1021 green |
 
 ## Commit Log
 
@@ -230,8 +239,8 @@ Coverage plan:
 | `.2` | `30981c44` (`TRACE-OBSERVABILITY.2 - add trace CLI control`) | CLI/docs control; no trace coverage expansion yet. |
 | `.3` | `8e371460` (`TRACE-OBSERVABILITY.3 - split trace coverage extension`) | Split Perl reference coverage extension into executable child leaves; no runtime/code behavior change. |
 | `.3.1` | `95b84fab` (`TRACE-OBSERVABILITY.3.1 - add generated-handler trace helper seam`) | Helper contract for emitted generated handler branch decisions; no template call-site wiring yet. |
-| `.3.2` | `pending this commit` (`TRACE-OBSERVABILITY.3.2 - trace non-repetition generated dispatch`) | Non-repetition generated handler template call-site wiring; REP remains next. |
-| `.3.1` | `pending this commit` | Generated-handler branch trace helper contract; templates not yet instrumented. |
+| `.3.2` | `08e7a885` (`TRACE-OBSERVABILITY.3.2 - trace non-repetition generated dispatch`) | Non-repetition generated handler template call-site wiring. |
+| `.3.3` | `pending this commit` (`TRACE-OBSERVABILITY.3.3 - trace repetition generated paths`) | Repetition generated handler template loop/min/max/zero-progress branch call-site wiring. |
 
 ## Changelog
 
@@ -249,3 +258,10 @@ Coverage plan:
 - `2026-07-04`: Closed `.3.1` helper seam. `LinkedSpec::Trace::trace_generated_handler_branch(%args)` is the
   owner-level contract for emitted branch decisions; `.3.2` is now the PNT frontier for non-repetition template
   call sites.
+- `2026-07-04`: Closed `.3.2` non-repetition generated dispatch. Debug trace now reports non-REP generated
+  match/miss, acode index, AND sequence, bcode call/result, and `LX` no-match decisions; `.3.3` is now the PNT
+  frontier for repetition templates.
+- `2026-07-04`: Closed `.3.3` repetition generated paths. Debug trace now reports REP loop entry,
+  per-iteration success/failure, min-satisfied stop decisions, max-bound continuation/cutoff, `REP_ACODE`
+  match/acode-index dispatch, and bcode REP zero-progress cutoffs. `.3.4` is now the PNT frontier for
+  compile/ActionIR owner scopes and branch decisions.

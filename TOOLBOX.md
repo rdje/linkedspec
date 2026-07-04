@@ -184,10 +184,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **HOW (per-call):** `LinkedSpec::Get(\$s, trace_level => 'debug', trace_log_mode => 'stdout')`, or
   `LinkedSpec::configure_trace(...)`. Programmatic API: `trace_enter/trace_exit/trace_decision`,
   `log_output`, `log_dump`, `should_dump`.
-- **Generated handler branches:** non-repetition Perl generated handlers now emit debug-level
-  `DECISION generated_handler_branch:<handler_kind>:<rule>:<branch>` lines for match/miss, acode index dispatch,
-  AND sequence checks, bcode child-call dispatch, and child-result checks. Repetition loop min/max and
-  zero-progress branches are still a separate trace-coverage leaf.
+- **Generated handler branches:** Perl generated handlers now emit debug-level
+  `DECISION generated_handler_branch:<handler_kind>:<rule>:<branch>` lines for non-repetition match/miss, acode
+  index dispatch, AND sequence checks, bcode child-call dispatch, child-result checks, and REP loop decisions.
+  REP branch names include `loop_enter`, `iteration_result`, `miss_min_satisfied`, `max_continue`,
+  `zero_progress`, and `zero_progress_min_satisfied` where the generated template has that branch.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.

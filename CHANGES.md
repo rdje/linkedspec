@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.3.3 — trace repetition generated paths
+
+**Scope:** Perl REP generated handler templates, focused runtime/source trace regressions, mdBook trace docs,
+toolbox, task-tree/frontier sync, live recovery docs, and Knowledge Map.
+
+**What changed:** Repetition generated handlers now wrap their loop branch conditions with
+`LinkedSpec::Trace::trace_generated_handler_branch(...)`. The Perl reference trace can now show REP loop entry,
+per-iteration success/failure, min-satisfied stop decisions, max-bound continuation/cutoff decisions, `REP_ACODE`
+match and acode-index dispatch, and bcode REP zero-progress cutoffs. Nested non-REP bcode helper calls inside REP
+coderefs stay quiet so each REP iteration reports the owned loop decision rather than duplicating inner helper
+dispatch details.
+
+**Evidence:** Focused coverage in `t/trace_generated_rep_dispatch.t` proves runtime debug trace output for
+`REP_ACODE` plus/optional/below-min paths and `REP_AND_ACODE` ordered iteration, and source-locks `REP_BCODE`,
+`REP_AND_BCODE`, `REP_AND_ACODE`, and `REP_ACODE` templates for their branch names. The previous non-REP trace
+test now asserts REP bodies are instrumented. Full local CI passes, including phase0 at 1021 green.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.3.2 — trace non-repetition generated dispatch
 
 **Scope:** Perl generated handler templates, focused runtime trace regression, mdBook trace docs, toolbox,
@@ -10,13 +27,13 @@ task-tree/frontier sync, live recovery docs, and Knowledge Map.
 `LinkedSpec::Trace::trace_generated_handler_branch(...)`. The Perl reference trace can now show runtime regex
 match/miss decisions, `LX` no-match paths, acode index choices, AND sequence index checks, bcode child-call
 dispatch, and bcode child-result checks in generated handler bodies. Repetition handlers are deliberately left
-untraced in this slice and remain owned by `TRACE-OBSERVABILITY.3.3`.
+untraced in this slice and remain owned by `TRACE-OBSERVABILITY.3.3`, which has since closed.
 
 **Evidence:** Focused coverage in `t/trace_generated_nonrep_dispatch.t` builds parsers with trace disabled, resets
 debug routed trace before runtime invocation, and proves `_default`, `AND_BCODE`, `OR_BCODE`, `AND_ACODE`, and
-`OR_ACODE` branch decisions appear without changing parser results. The same test inspects generated source to
-prove `REP_ACODE` bodies remain uninstrumented for the next leaf. Full local CI passes, including phase0 at 1021
-green.
+`OR_ACODE` branch decisions appear without changing parser results. At `.3.2` close, the same test inspected
+generated source to prove `REP_ACODE` bodies remained uninstrumented for the next leaf; `.3.3` has since updated
+that assertion to expect REP instrumentation. Full local CI passes, including phase0 at 1021 green.
 
 ## 2026-07-04 — TRACE-OBSERVABILITY.3.1 — add generated-handler trace helper seam
 
