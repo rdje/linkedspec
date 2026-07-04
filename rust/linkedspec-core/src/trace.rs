@@ -643,6 +643,25 @@ mod tests {
     }
 
     #[test]
+    fn log_output_and_log_dump_emit_structured_events() {
+        let stdout = SharedBuffer::default();
+        let stdout_reader = stdout.clone();
+        let config = TraceConfig::enabled(TraceLevel::DEBUG);
+        let mut emitter = TraceEmitter::with_stdout(config, Box::new(stdout)).unwrap();
+
+        emitter
+            .log_output(TraceLevel::LOW, "runtime message", "ctx=runtime")
+            .unwrap();
+        emitter
+            .log_dump(TraceLevel::FULL, "compiled descriptor dump")
+            .unwrap();
+
+        let output = stdout_reader.to_string();
+        assert!(output.contains("[LOW][log] log_output runtime message context=ctx=runtime"));
+        assert!(output.contains("[FULL][dump] log_dump compiled descriptor dump"));
+    }
+
+    #[test]
     fn scope_and_decision_primitives_preserve_branch_values() {
         let stdout = SharedBuffer::default();
         let stdout_reader = stdout.clone();

@@ -7,7 +7,7 @@ answers:
   - "why must Rust trace primitives be core-visible"
   - "which Rust entrypoints need trace parity"
   - "what Rust trace work comes after TRACE-OBSERVABILITY.4.1"
-  - "can Rust claim trace parity now"
+  - "could Rust claim trace parity after TRACE-OBSERVABILITY.4.1"
 date: 2026-07-04
 status: current
 tags: [trace, observability, rust, parity, task-tree, mdbook]
@@ -32,6 +32,6 @@ execution, statement-form `if`/`switch`, acode/bcode child dispatch, repetition/
 family plan dispatch.
 
 `.4.2` has since added Rust controls, levels, sinks, event primitives, and traced entrypoint plumbing while
-preserving default quiet behavior. `.4.3` has since added compile/spec-parser/staged-dispatch trace events, and
-`.4.4` has since added runtime/generated-plan branch, lifecycle, and mark/capture events. The remaining leaf is
-`.4.5` cross-variant trace parity proof plus the reusable future-variant checklist.
+preserving default quiet behavior. `.4.3` has since added compile/spec-parser/staged-dispatch trace events, `.4.4`
+has since added runtime/generated-plan branch, lifecycle, and mark/capture events, and `.4.5` has since closed
+cross-variant trace parity proof plus the reusable future-variant checklist.

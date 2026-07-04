@@ -212,8 +212,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   selection, AST-vs-string fallback/bypass choices, unsupported helper exits, receiver-chain transitions,
   assignment/mutation operator routing, mutation-slot values, and return-payload fallback choices.
 - **Compile/ActionIR coverage boundary:** the planned Perl reference compile/ActionIR owner namespaces are covered
-  through MethodLowering. The remaining trace work is cross-variant parity: Rust and future variants must expose
-  the same documented controls, levels, event classes, and sink behavior before claiming trace parity.
+  through MethodLowering. Rust also satisfies the mdBook-documented external trace capability contract as of
+  `TRACE-OBSERVABILITY.4.5`. Future variants must expose the same documented controls, levels, event classes,
+  sink behavior, and default-quiet behavior before claiming trace parity.
 - **Rust trace controls/events:** `TRACE-OBSERVABILITY.4.2` added the Rust shared control layer:
   `linkedspec_core::trace::{TraceConfig, TraceLevel, TraceSinkMode, TraceEmitter}` plus the `DUMP_*` constants,
   environment-derived config, stdout/route/mirror sinks, routed-file reset, and event primitives. Runtime re-exports
@@ -225,7 +226,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `rust_runtime:engine:*` for interpreted rule entry/exit, recursion cutoffs, regex match/no-match, acode/bcode
   dispatch, lifecycle blocks, statement controls, helper `call(child)`, and mark/capture helper operations, plus
   `rust_runtime:generated_plan:*` for generated family-plan dispatch and generated direct acode/bcode execution.
-  Rust still does not claim trace parity until `.4.5` parity proof lands.
+  `TRACE-OBSERVABILITY.4.5` closes the parity proof: Rust can claim parity for the documented external capability
+  contract, while future variants must pass the mdBook checklist before making the same claim.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.

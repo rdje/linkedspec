@@ -27,5 +27,5 @@ The sequence is:
 
 Rust trace parity is split into `.4.*`. `.4.1` mapped the neutral mdBook trace contract onto Rust entrypoints and
 owner boundaries before code; `.4.2` through `.4.4` have since added Rust controls, compile/spec-parser/
-staged-dispatch events, and runtime branch/mark/capture events. The active frontier is `TRACE-OBSERVABILITY.4.5`
-for cross-variant trace parity proof and the future-variant checklist.
+staged-dispatch events, and runtime branch/mark/capture events. `.4.5` has since closed cross-variant trace parity
+proof and the future-variant checklist, so `TRACE-OBSERVABILITY` is now closed.

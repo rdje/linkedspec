@@ -29,5 +29,6 @@ match/no-match, acode/bcode dispatch, and AND-sequence slots. Lifecycle and mark
 the shared `rust_runtime:engine:*` namespaces because generated-plan execution reuses the same runtime block/helper
 owners.
 
-Rust still does not claim trace parity after `.4.4`. `TRACE-OBSERVABILITY.4.5` remains the cross-variant parity
-proof and reusable future-variant checklist.
+At `.4.4` closeout Rust still did not claim trace parity. `TRACE-OBSERVABILITY.4.5` has since closed the
+cross-variant parity proof and reusable future-variant checklist, so Rust can now claim parity for the documented
+external capability contract.

@@ -24,5 +24,5 @@ user-function-definition parser execution, function projection, stripped-rule pa
 sort, resolve, load, compile, and execute decisions for each job.
 
 This did not complete Rust trace parity by itself. `.4.4` has since added runtime interpreter/generated-plan branch
-events, rule entry/exit, and mark/capture operations. `.4.5` remains the cross-variant parity proof before Rust can
-claim trace parity.
+events, rule entry/exit, and mark/capture operations, and `.4.5` has since closed the cross-variant parity proof.
+Rust can now claim parity for the documented external capability contract.

@@ -306,12 +306,13 @@ debug-level `ActionIR::MethodLowering` helper-family/assignment/mutation/receive
 Perl reference backend also emits debug-level generated-handler branch decisions for non-repetition dispatch paths
 and repetition loop paths.
 
-In the Perl reference backend, the planned compile/ActionIR owner coverage is closed through MethodLowering. The
-remaining trace work is cross-variant parity: Rust and future variants must implement the same external trace
-capabilities before claiming trace parity.
+In the Perl reference backend, the planned compile/ActionIR owner coverage is closed through MethodLowering. Rust
+also satisfies the mdBook-documented external trace capability contract as of `TRACE-OBSERVABILITY.4.5`; future
+variants must implement the same external capabilities before claiming trace parity.
 
-As of `TRACE-OBSERVABILITY.4.4`, the Rust variant has the shared trace control surface and emits compile-side,
-full-spec parser, staged parse-job dispatcher, interpreted runtime, and generated-plan runtime events.
+As of `TRACE-OBSERVABILITY.4.5`, the Rust variant has the shared trace control surface, emits compile-side,
+full-spec parser, staged parse-job dispatcher, interpreted runtime, and generated-plan runtime events, and claims
+trace parity for the documented external contract.
 `linkedspec-core::trace` owns `TraceLevel`, `TraceConfig`,
 `TraceSinkMode`, `TraceEmitter`, the `DUMP_*` constants, environment-derived configuration, stdout/routed-file/
 mirror sinks, routed-file reset, and structured event primitives. `linkedspec-runtime::trace` re-exports the same
@@ -322,7 +323,8 @@ Rust APIs remain default-quiet and output-compatible. Rust traced compile/spec-p
 validation-pass, compile-rule, dependency-regex, user-function-definition parser, and staged-dispatch normalize/
 resolve/load/compile/execute events. Rust traced runtime paths now report rule entry/exit, recursion cutoffs,
 regex match/no-match decisions, acode/bcode child dispatch, lifecycle block execution, statement-form branch
-decisions, mark/capture helper operations, and generated-rule family-plan dispatch. `.4.5` is the parity proof.
+decisions, mark/capture helper operations, and generated-rule family-plan dispatch. The parity claim remains tied
+to the documented behavior, not to Perl-specific package names or internal event vocabulary.
 
 Tracing is controlled separately from runtime context.
 

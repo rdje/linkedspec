@@ -11,8 +11,8 @@ answers:
 date: 2026-07-04
 status: current
 tags: [trace, parity, variants, mdbook, external-contract, rust, perl]
-evidence: "User directive 2026-07-04; docs/linkedspec-book/src/public-api/trace-api.md; docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md; docs/tasks/TRACE-OBSERVABILITY.md"
-reverify: "rg -n 'variant-neutral trace contract|trace parity|variant-agnostic|claim trace parity|external contract|backend-specific internals|Perl reference vocabulary|TRACE-OBSERVABILITY\\.4\\.5|rust_runtime:engine|rust_runtime:generated_plan' docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md docs/tasks/TRACE-OBSERVABILITY.md TOOLBOX.md docs/knowledge/trace-cross-variant-capability-contract.md rust/linkedspec-runtime/src"
+evidence: "User directive 2026-07-04; docs/linkedspec-book/src/public-api/trace-api.md; docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md; docs/tasks/TRACE-OBSERVABILITY.md .4.5"
+reverify: "rg -n 'variant-neutral trace contract|Future variant trace parity checklist|trace parity|variant-agnostic|claim trace parity|external contract|backend-specific internals|Perl reference vocabulary|TRACE-OBSERVABILITY\\.4\\.5|rust_runtime:engine|rust_runtime:generated_plan' docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md docs/tasks/TRACE-OBSERVABILITY.md TOOLBOX.md docs/knowledge/trace-cross-variant-capability-contract.md rust/linkedspec-runtime/src"
 ---
 
 The documented trace capabilities are an external contract for every LinkedSpec variant.
@@ -36,7 +36,7 @@ The Perl backend is the reference implementation currently covered under `TRACE-
 event names such as `rule_ir:...`, `emit_context:...`, `actionir:...`, and `generated_handler_branch:...` are
 reference vocabulary, not mandatory package names for every backend.
 
-Rust now has the `.4.2` trace control/sink surface, `.4.3` compile/spec-parser/staged-dispatch events, and `.4.4`
-interpreted/generated-plan runtime branch/mark/capture events. Rust still cannot claim trace parity until
-`TRACE-OBSERVABILITY.4.5` proves this external contract across variants and records the reusable future-variant
-checklist.
+Rust now has the `.4.2` trace control/sink surface, `.4.3` compile/spec-parser/staged-dispatch events, `.4.4`
+interpreted/generated-plan runtime branch/mark/capture events, and `.4.5` parity proof. Rust can claim trace parity
+for the documented external contract. Future variants must pass the mdBook checklist and record proof before making
+the same claim.

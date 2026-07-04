@@ -10,7 +10,7 @@ answers:
 date: 2026-07-04
 status: current
 tags: [trace, cli, observability, mdbook, task-tree]
-evidence: "bin/linkedspec; t/trace_cli.t; docs/linkedspec-book/src/public-api/trace-api.md; docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md; TOOLBOX.md; docs/tasks/TRACE-OBSERVABILITY.md; TRACE-OBSERVABILITY.3 split; TRACE-OBSERVABILITY.3.5 closeout; TRACE-OBSERVABILITY.4.2-.4.4 Rust trace work"
+evidence: "bin/linkedspec; t/trace_cli.t; docs/linkedspec-book/src/public-api/trace-api.md; docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md; TOOLBOX.md; docs/tasks/TRACE-OBSERVABILITY.md; TRACE-OBSERVABILITY.3 split; TRACE-OBSERVABILITY.3.5 closeout; TRACE-OBSERVABILITY.4.2-.4.5 Rust trace work"
 reverify: "perl -c bin/linkedspec && perl -c -Iperl t/trace_cli.t && prove -v -Iperl t/trace_cli.t && rg -n 'bin/linkedspec|--trace|TRACE-OBSERVABILITY.4.5|trace_generated_handler_branch|rust_runtime:engine' docs/tasks/TRACE-OBSERVABILITY.md docs/TASK_TREE.md docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md TOOLBOX.md perl/LinkedSpec/Trace.pm rust/linkedspec-runtime/src"
 ---
 
@@ -32,5 +32,5 @@ The CLI maps flags directly onto existing trace options: `--trace` to `trace_lev
 `TRACE-OBSERVABILITY.3` has since split and closed the Perl reference trace coverage/no-drift sequence through
 `.3.5`. The CLI remains the Perl reference discoverability surface. Rust and future-variant trace parity is owned by
 `TRACE-OBSERVABILITY.4.*`; `.4.2` through `.4.4` have added Rust controls, compile/spec-parser/staged-dispatch
-events, and runtime branch/mark/capture events. `.4.5` remains the cross-variant parity proof before Rust can claim
-trace parity.
+events, and runtime branch/mark/capture events. `.4.5` has since closed cross-variant parity proof, so Rust can
+claim parity for the documented external trace capability contract.

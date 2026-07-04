@@ -28,9 +28,10 @@ behavior.
 
 ## Rust variant trace status
 
-As of `TRACE-OBSERVABILITY.4.4`, the Rust variant exposes the shared trace control layer and emits compile,
-validation, full-spec parser, staged parse-job dispatcher, interpreted runtime, and generated-plan runtime events,
-but it does **not** yet claim trace parity.
+As of `TRACE-OBSERVABILITY.4.5`, the Rust variant claims trace parity for the mdBook-documented external capability
+contract. This claim is behavioral: Rust does not reuse Perl package names or every Perl-internal event namespace,
+but it exposes equivalent documented levels, controls, sinks, event classes, default-quiet behavior, and regression
+proof.
 Rust now has ordered trace levels, configuration, stdout/route/mirror sinks, reset/truncate behavior, event
 primitives, opt-in traced entrypoints beside the existing quiet entrypoints, and routed debug events for
 `parse_spec`, validation passes, `compile`, dependency-regex mapping, user-function definition parsing, full-spec
@@ -99,8 +100,24 @@ let output = Engine::new(compiled).execute_with_trace(input, trace)?;
 ```
 
 Rust compile/spec-parser/staged-dispatch trace events are present as of `.4.3`; Rust interpreted and generated-plan
-runtime branch/mark/capture events are present as of `.4.4`. `TRACE-OBSERVABILITY.4.5` owns cross-variant parity
-proof and the reusable future-variant checklist.
+runtime branch/mark/capture events are present as of `.4.4`; `.4.5` closes the cross-variant parity proof and
+records the reusable future-variant checklist.
+
+## Future variant trace parity checklist
+
+Any future LinkedSpec variant must satisfy this checklist before it claims trace parity:
+
+- implement ordered trace levels equivalent to `none`, `low`, `medium`, `high`, `full`, and `debug`;
+- expose trace controls from the variant's normal parse/compile/runtime entrypoints without changing results;
+- support stdout, routed-file, and mirrored sink behavior, including reset/truncate for routed trace files;
+- keep the default untraced mode quiet and output-compatible;
+- emit structured enter/exit scope events for meaningful compile, parser, and runtime-handler boundaries;
+- emit decision or branch events for control-flow choices, including runtime dispatch branches;
+- emit mark/capture/source-position events wherever the variant implements those source-boundary features;
+- provide dump/log primitives for higher-verbosity diagnostic payloads;
+- prove routed trace output with focused tests for controls, sinks, scopes, decisions, dump/log events, and
+  default-quiet behavior;
+- update the task tree, Knowledge Map, and mdBook with the proof before the variant parity claim is durable.
 
 ## Command-line trace control
 
@@ -275,8 +292,8 @@ Treat these variables as compatibility state, not the preferred control API. Use
 The current Perl reference trace implementation covers broad compile-pipeline stages, parser invocation, per-rule runtime handler wrappers, selected decisions, dumps, mark/capture events, RuleIR planning decisions, EmitContext owner-bridge/rewrite-orchestration decisions, ActionIR scanner/canonical/diagnostic/rewrite-pipeline decisions, compact ActionIR lowerer decisions, `ActionIR::MethodLowering` helper-family/assignment/mutation/receiver-chain/fallback decisions, and generated-handler branch decisions for the Perl reference non-repetition and repetition templates.
 
 In the Perl reference backend, the planned compile/ActionIR owner coverage is closed through MethodLowering. The
-remaining trace work is cross-variant parity: Rust and future variants must implement the same external trace
-capabilities before claiming trace parity.
+cross-variant trace parity proof is closed for Rust as of `TRACE-OBSERVABILITY.4.5`; future variants must satisfy
+the checklist above before claiming parity.
 
 The consistent scope naming makes it possible to follow a single parse through nested trace output:
 

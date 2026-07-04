@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.4.5 — close trace parity proof
+
+**Scope:** Cross-variant trace parity proof, future-variant checklist, Rust dump/log primitive coverage, mdBook/
+TOOLBOX/live docs, task-tree closeout, and Knowledge Map.
+
+**What changed:** Closed the trace parity proof for the mdBook-documented external capability contract. Perl remains
+the reference vocabulary, while Rust now has equivalent documented ordered levels, normal-entrypoint controls,
+stdout/routed-file/mirror sinks, routed-file reset, default-quiet behavior, compile/spec-parser/runtime scope and
+branch events, mark/capture/source-boundary events where implemented, and dump/log diagnostics. The common book now
+records the checklist future variants must satisfy before claiming parity.
+
+**Tests:** Added Rust unit coverage proving `TraceEmitter::log_output(...)` and `log_dump(...)` emit structured
+events, and reran the Rust core trace and runtime trace-control suites plus the Perl trace suite.
+
+**Status:** `TRACE-OBSERVABILITY` is closed. Rust can claim trace parity for the documented external behavioral
+contract; future variants must pass the mdBook checklist before making the same claim.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.4.4 — add Rust runtime trace events
 
 **Scope:** Rust interpreted runtime and generated-plan trace event emission, focused trace tests, mdBook/toolbox
@@ -18,8 +35,8 @@ result contract as untraced generated execution.
 runtime branch/lifecycle/mark-capture events and generated-plan branch events while preserving traced/untraced output
 equality.
 
-**Status:** Rust still does not claim trace parity. `.4.5` remains the cross-variant parity proof and reusable
-future-variant checklist.
+**Status:** At `.4.4` closeout Rust still did not claim trace parity. `.4.5` has since closed the cross-variant
+parity proof and reusable future-variant checklist.
 
 ## 2026-07-04 — TRACE-OBSERVABILITY.4.3 — add Rust compile/spec-parser trace events
 
@@ -38,8 +55,8 @@ report normalize, stable queue sort, resolve, load, compile, and execute decisio
 full-spec user-function/staged-dispatch events, and direct staged queue phase events while preserving untraced output
 equality.
 
-**Status:** Rust still does not claim trace parity. Runtime interpreter/generated-plan branch events and mark/capture
-events have since landed in `.4.4`; parity proof remains owned by `.4.5`.
+**Status:** At `.4.3` closeout Rust still did not claim trace parity. Runtime interpreter/generated-plan branch
+events and mark/capture events have since landed in `.4.4`; `.4.5` has since closed the parity proof.
 
 ## 2026-07-04 — TRACE-OBSERVABILITY.4.2 — add Rust trace controls
 

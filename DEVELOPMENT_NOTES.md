@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.4.5 — trace parity proof):
+  Rust may now claim trace parity for the mdBook-documented external capability contract. The claim is behavioral:
+  ordered levels, normal-entrypoint controls, stdout/routed-file/mirror sinks, routed-file reset, default-quiet
+  behavior, structured compile/spec-parser/runtime scopes, decision/branch events, mark/capture/source-boundary
+  events where implemented, and dump/log diagnostics. It does not require Rust to reuse Perl package names or every
+  Perl-internal event namespace. Future variants must satisfy the mdBook checklist and commit task-tree/Knowledge
+  Map proof before claiming parity.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.4.4 — Rust runtime trace events):
   Rust runtime trace events are now emitted through the same shared `linkedspec-core::trace` sink as `.4.2`/`.4.3`.
   The runtime context records structured execution events only when a traced entrypoint enables recording, then
@@ -43,9 +51,10 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   output-compatible; add explicit traced configuration/plumbing beside them. Runtime instrumentation then belongs
   in `linkedspec-runtime` around `parse_spec_with_user_functions`, staged parser dispatch, interpreter rule
   execution, generated-plan execution, lifecycle block execution, statement-form `if`/`switch`, acode/bcode child
-  dispatch, repetition/AND/OR branch choices, and mark/capture helper operations. Rust cannot claim trace parity
+  dispatch, repetition/AND/OR branch choices, and mark/capture helper operations. Rust could not claim trace parity
   until `.4.2` controls/sinks, `.4.3` compile/spec-parser events, `.4.4` runtime branch events, and `.4.5` parity
-  proof are complete; `.4.2` through `.4.4` have since landed, leaving `.4.5` as the active proof leaf.
+  proof were complete; `.4.2` through `.4.5` have since landed, and Rust can now claim parity for the documented
+  external capability contract.
 
 - 2026-07-04 (TRACE-OBSERVABILITY.3.5 — trace contract/parity split):
   The external trace contract is the mdBook-documented behavior, not Perl package names. A variant claiming trace

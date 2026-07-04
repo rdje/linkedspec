@@ -30,4 +30,5 @@ The same probe preserved ActionIR readiness (`ready=1 raw=0 unresolved=0`), so t
 Perl fallback or unresolved-helper drift.
 
 `TRACE-OBSERVABILITY.3.5` has since closed overall trace no-drift and split the Rust/future-variant trace parity
-lane. The active follow-up is `TRACE-OBSERVABILITY.4.1`, not another known opaque compile/ActionIR owner.
+lane. `.4.1` through `.4.5` have since closed, including Rust parity proof for the documented external trace
+capability contract. No additional opaque compile/ActionIR trace owner is currently known from this closeout.
