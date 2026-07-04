@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — TRACE-OBSERVABILITY.1 — audit trace coverage gaps
+
+**Scope:** Trace call-site audit, task-tree coverage plan, mdBook trace API/runtime-context corrections, live
+recovery docs, and Knowledge Map.
+
+**What changed:** Completed the read-only trace coverage audit. The existing Perl reference trace framework is
+usable through env vars, per-call options, and `configure_trace(...)`, and it records broad compile pipeline
+scopes, parser invocation, per-rule handler wrappers, selected decisions, dumps, and mark/capture events. The audit
+pins the remaining gaps: no discoverable CLI flag/entrypoint, generated handler branch/control-flow decisions are
+not emitted, most ActionIR owner branches lack trace coverage, and the Rust runtime has no equivalent trace API.
+
+**Evidence:** `rg` call-site inventory, `dump_parser_source` on a minimal parser, routed debug trace probe to
+`/tmp/linkedspec_trace_audit.log`, direct facade/owner trace-state probes, Rust trace search, mdBook build, and
+the memory/doctrine gates. The next frontier is `TRACE-OBSERVABILITY.2` for CLI/docs control.
+
 ## 2026-07-04 — TOP-RULE-AS-NORMAL.3.2 — lock Rust recursive top-rule values
 
 **Scope:** Rust runtime declaration semantics, recursive top-rule/body value parity locks, oracle corpus fixtures,

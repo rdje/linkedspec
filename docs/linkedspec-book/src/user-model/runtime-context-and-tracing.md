@@ -289,6 +289,11 @@ The trace surface is useful for:
 - inspecting decision points
 - debugging mark/capture behavior
 
+Current coverage is useful but not exhaustive. LinkedSpec traces broad compiler/parser scopes, per-rule runtime
+handler wrappers, selected decisions, dumps, and mark/capture events. Generated handler internals such as
+match/no-match branches, acode/bcode dispatch branches, repetition min/max paths, and most ActionIR lowering
+branches are still planned coverage work.
+
 Tracing is controlled separately from runtime context.
 
 You can configure tracing directly:
@@ -382,6 +387,10 @@ Supported trace environment variables include:
 - `LINKEDSPEC_TRACE_RESET_FILE`
 
 Environment configuration is useful when you cannot easily change the caller code.
+
+Prefer environment variables, per-call trace options, or `configure_trace(...)` for control. Direct package-variable
+mutation is compatibility state; assigning `$LinkedSpec::DUMP_VERBOSITY` before the lazy trace owner is loaded is
+not a reliable substitute for configuring trace.
 
 ## Trace scopes and decisions
 

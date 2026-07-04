@@ -6,11 +6,12 @@ answers:
   - "what are the verbosity levels"
   - "how do I configure trace output"
   - "where does log_output go"
+  - "can I set DUMP_VERBOSITY directly"
 date: 2026-06-12
 status: current
 tags: [trace, diagnostics, verbosity, formatting]
-evidence: "perl/LinkedSpec/Trace.pm; LinkedSpec.pm re-exports trace globals via typeglob aliasing; verbosity constants DUMP_NONE through DUMP_DEBUG defined in LinkedSpec.pm"
-reverify: "grep -n 'DUMP_NONE\|DUMP_DEBUG\|configure_trace' perl/LinkedSpec.pm"
+evidence: "perl/LinkedSpec/Trace.pm; LinkedSpec.pm facade wrappers; TRACE-OBSERVABILITY.1 measured that facade-level $LinkedSpec::DUMP_VERBOSITY assignment before lazy Trace load does not enable log_output, while configure_trace/env/per-call options do"
+reverify: "rg -n 'DUMP_NONE|DUMP_DEBUG|configure_trace|trace_log_file|trace_reset_log' perl/LinkedSpec.pm perl/LinkedSpec/Trace.pm docs/tasks/TRACE-OBSERVABILITY.md"
 ---
 
 `LinkedSpec::Trace` is the sole owner of trace state, formatting, indentation, verbosity,
@@ -31,6 +32,10 @@ and output routing. It is reached through `LinkedSpec::OwnerDispatch` by all con
 **Key entrypoints**: `configure_trace`, `trace_enter`/`trace_exit` (scoped), `trace_decision`
 (branch logging), `log_output` (verbosity-gated), `log_dump` (preformatted payloads),
 `should_dump` (verbosity threshold check).
+
+Use `configure_trace(...)`, per-call trace options, or `LINKEDSPEC_TRACE_*` environment variables to control trace.
+The facade's package-variable aliases are compatibility state, not the reliable configuration path before the lazy
+`LinkedSpec::Trace` owner has loaded.
 
 The module lazily loads `Data::Dumper` only when needed for structured dumps, keeping the
 common no-dump path fast.

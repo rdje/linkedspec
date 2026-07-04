@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (TRACE-OBSERVABILITY.1 — coverage audit before trace work):
+  The trace framework was not missing; coverage and discoverability are the gaps. Current Perl trace sees broad
+  `Get`/parser invocation stages, per-rule runtime handler wrappers, selected decisions, dumps, and mark/capture
+  events. It does not yet see the actual generated handler branches (`while`, `foreach`, `if`/`elsif`, `unless`,
+  repetition min/max/zero-progress paths, acode index dispatch, bcode call dispatch), and most ActionIR owner
+  lowering branches have no enter/exit or decision trace. The first implementation path should be explicit,
+  reviewable instrumentation in the generated handler templates plus owner-level wrappers, not an aspect/`Devel::*`
+  approach. Also keep the public controls honest: use env vars, per-call trace options, or `configure_trace(...)`.
+  Assigning `$LinkedSpec::DUMP_VERBOSITY` before the lazy `LinkedSpec::Trace` load is not a reliable facade control;
+  `trace_mark_event` is an owner-level `LinkedSpec::Trace` function, not a `LinkedSpec` facade method.
+
 - 2026-07-04 (TOP-RULE-AS-NORMAL.3.2 — Rust recursive top-rule values):
   The recursive value leak was not caused by child dispatch needing full variable-store isolation. The real Rust
   bug was narrower: `declare(array, items)` is parsed with raw first arg `Variable("array")`, and the runtime had

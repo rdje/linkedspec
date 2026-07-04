@@ -7,8 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **TRACE-OBSERVABILITY.1 — audit trace coverage gaps**
+  (READ-ONLY AUDIT CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.2).
+
+  **Audit:** The Perl reference trace framework exists and works through env vars, per-call options, and
+  `configure_trace(...)`, but coverage is not exhaustive. Current trace spans broad `Get`/parser invocation
+  scopes, per-rule handler wrappers, selected compiler/resolver/validation decisions, dumps, and mark/capture
+  events. Generated handler bodies still contain untraced `while`/`foreach`/`if`/`unless` dispatch and repetition
+  branches, most ActionIR owner branches lack enter/exit or decision trace, there is no discoverable CLI flag, and
+  the Rust runtime has no equivalent trace API yet.
+
+  **Verification:** `rg` call-site inventory, `dump_parser_source` probe, routed debug trace probe to
+  `/tmp/linkedspec_trace_audit.log`, direct facade/owner trace-state probes, Rust trace search, mdBook build, and
+  doctrine/memory gates.
+
+  **Frontier:** `TRACE-OBSERVABILITY.2` — add a discoverable CLI/docs control for the existing trace API.
+
 - 2026-07-04: **TOP-RULE-AS-NORMAL.3.2 — lock Rust recursive top-rule values**
-  (TOP-RULE-AS-NORMAL TREE CLOSED; NEXT FRONTIER TRACE-OBSERVABILITY.1).
+  (TOP-RULE-AS-NORMAL TREE CLOSED; FRONTIER AT COMPLETION TRACE-OBSERVABILITY.1, NOW CLOSED).
 
   **Fix:** Rust `declare(...)` now resolves a raw first bare argument as the declaration type token, so
   `declare(array, items)` actually declares an array instead of evaluating `array` as an undefined variable.
@@ -21,7 +37,8 @@ Current execution status for interruption-safe batch workflow recovery.
   `tools/gen_oracle_corpus.pl` syntax-checks. The three new corpus fixtures cover body recursion, nested top-rule
   `LX` recursion, and top-rule sequence recursion.
 
-  **Frontier:** `TRACE-OBSERVABILITY.1` — coverage audit before CLI/docs/coverage implementation.
+  **Frontier at completion:** `TRACE-OBSERVABILITY.1` — coverage audit before CLI/docs/coverage implementation;
+  `.1` has since closed and the current frontier is `TRACE-OBSERVABILITY.2`.
 
 - 2026-07-04: **RUST-PARITY.9 — finalize Rust parity documentation**
   (RUST-PARITY TREE CLOSED; TOP-RULE-AS-NORMAL.3.2 UNBLOCKED).

@@ -71,12 +71,19 @@ if (LinkedSpec::should_dump(300)) {
 }
 ```
 
-### `trace_mark_event($mark_name, $position, $level)`
+### `LinkedSpec::Trace::trace_mark_event(%args)`
 
-Emits a trace event for parser boundary marks. `$mark_name` is the mark identifier, `$position` is the input cursor position where the mark was placed. Used by runtime handlers to trace capture/mark boundaries during parsing.
+Emits a trace event for parser boundary marks. This is an owner-level function on `LinkedSpec::Trace`, not a `LinkedSpec` facade wrapper. Generated/runtime internals normally reach it through the runtime mark bridge; most callers configure tracing rather than calling this directly.
 
 ```perl
-LinkedSpec::trace_mark_event('segment_start', pos($$input_ref), 300);
+LinkedSpec::Trace::trace_mark_event(
+  operation => 'mark_here',
+  rule_label => 'Segment',
+  mark_name => 'segment_start',
+  string_ref => \$input,
+  mark_pos => pos($input),
+  level => 300,
+);
 ```
 
 ## Verbosity levels
@@ -110,11 +117,13 @@ Additional trace state variables are exported from LinkedSpec.pm via typeglob al
 - `$TRACE_TOPIC_SPACING` — vertical spacing between trace topics
 - `$TRACE_INITIALIZED` — flag set after first `configure_trace` call
 
-These variables provide direct read/write access to trace state without calling `configure_trace`. Setting `$DUMP_VERBOSITY` to `300` has the same effect as `configure_trace(verbosity => 300)`.
+Treat these variables as compatibility state, not the preferred control API. Use `configure_trace(...)`, per-call trace options, or the `LINKEDSPEC_TRACE_*` environment variables to configure tracing reliably. Assigning `$LinkedSpec::DUMP_VERBOSITY` before the lazy `LinkedSpec::Trace` owner has been loaded is not equivalent to `configure_trace(...)`, because the owner initializes its own state on first use.
 
 ## Typical usage
 
-The trace API is used throughout the compile pipeline, runtime handler execution, and parser invocation. The consistent scope naming makes it possible to follow a single parse through nested trace output:
+The current trace implementation covers broad compile-pipeline stages, parser invocation, per-rule runtime handler wrappers, selected decisions, dumps, and mark/capture events. It is not yet an exhaustive branch tracer for every generated handler body or every ActionIR lowering branch.
+
+The consistent scope naming makes it possible to follow a single parse through nested trace output:
 
 ```text
 LinkedSpec::parser_invoke:Top
@@ -126,6 +135,6 @@ LinkedSpec::parser_invoke:Top
 <- LinkedSpec::parser_invoke:Top (returned AST)
 ```
 
-Each `->` and `<-` pair corresponds to a `trace_enter`/`trace_exit` call. Decision events appear inline without indent changes.
+Each `->` and `<-` pair corresponds to a `trace_enter`/`trace_exit` call. Decision events appear inline without indent changes. Generated runtime-handler branches such as match/no-match dispatch, `if`/`elsif`, repetition min/max paths, and bcode/acode dispatch are still a planned coverage extension rather than guaranteed current output.
 
 The trace API is intentionally kept separate from the structured `last_error` diagnostics channel. Trace output is for developers and debugging; structured `last_error` payloads are for callers programmatically handling failures.
