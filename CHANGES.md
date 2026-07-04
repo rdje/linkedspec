@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — RUST-PARITY.8.3.3 — emit direct AND acode execution
+
+**Scope:** Rust generated-source execution path, shared Rust AND acode sequence semantics,
+source-emitter compile/run matrix, task-tree frontier docs, mdBook backend handoff, live recovery docs, and
+Knowledge Map.
+
+**What changed:** The generated-plan executor now treats `AndSingleAcode` and `AndAcodeSeq` as direct acode
+families instead of fallback families. Non-repetition AND regex/acode rules now consume regex slots in ordered
+index sequence before they can complete; an out-of-order or incomplete sequence returns `undef` before the rule
+exit block. This shared runtime behavior keeps generated execution aligned with the interpreted Rust path while
+matching the Perl HandlerIR `and_acode_seq` contract for ordered consume cases.
+
+**Evidence:** The focused generated-source matrix now proves an AND single-acode action return and an AND
+sequential-acode case that only returns from the second ordered slot (`a b` → `and-seq`), which would fail if the
+executor stopped after the first regex. Focused formatting, source-emitter, runtime-lib, and clippy checks pass.
+The next executable frontier is `RUST-PARITY.8.3.4`: direct AND/OR bcode generated execution.
+
 ## 2026-07-04 — RUST-PARITY.8.3.2 — emit direct default-or acode execution
 
 **Scope:** Rust generated-source execution path, source-emitter compile/run matrix, task-tree frontier docs,

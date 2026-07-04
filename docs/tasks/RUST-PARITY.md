@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Phase 9 — Rust variant (parity follow-on)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-04` (`.8.3.2` done — direct default/OR acode
-  generated execution landed; frontier is `.8.3.3`)
+- Last updated: `2026-07-04` (`.8.3.3` done — direct AND acode
+  generated execution landed; frontier is `.8.3.4`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -549,10 +549,10 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - ID: `RUST-PARITY.8.3`
   Status: `done/split`
   Goal: Emit non-repetition handler families
-  Children: `.8.3.1` (done), `.8.3.2` (done), `.8.3.3` (pending), `.8.3.4` (pending), `.8.3.5` (pending)
+  Children: `.8.3.1` (done), `.8.3.2` (done), `.8.3.3` (done), `.8.3.4` (pending), `.8.3.5` (pending)
   Acceptance: Generated Rust covers default, OR, AND single/sequential acode, AND bcode, and OR bcode structural families with representative compile/run tests and parity against the interpreter/oracle for focused fixtures
   Note: Split 2026-07-04 (PNT rule 5). A source audit for the first implementation pass found `.8.3` still bundles multiple independently-reviewable mechanisms: Rust `CompiledRule` lacks enough rule-mode metadata to distinguish OR-bcode from AND-bcode robustly; generated source needs an explicit family plan before per-family runtime execution can be proven; acode, bcode, and final matrix coverage have separate risks and test shapes. No Rust code changed in this split.
-  Verification: Split — `.8.3.1` and `.8.3.2` are now done; current executable frontier is `.8.3.3`.
+  Verification: Split — `.8.3.1`, `.8.3.2`, and `.8.3.3` are now done; current executable frontier is `.8.3.4`.
   Commit: `RUST-PARITY.8.3 - split non-repetition emitter lane` (see Commit Log)
 
 - ID: `RUST-PARITY.8.3.1`
@@ -570,11 +570,11 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Commit: `RUST-PARITY.8.3.2 - emit direct default-or acode execution` (see Commit Log)
 
 - ID: `RUST-PARITY.8.3.3`
-  Status: `pending`
+  Status: `done`
   Goal: Emit direct AND acode execution
   Acceptance: Generated-source execution covers AND single-acode and AND sequential-acode structural families, including ordered consume behavior, with focused compile/run tests matching interpreter and Perl-oracle expectations for representative fixtures
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-04. The generated-plan executor now treats `AndSingleAcode` and `AndAcodeSeq` as direct acode families instead of falling back. The shared Rust regex/acode loop now enforces non-repetition AND ordered sequence by requiring regex slot 0, then slot 1, and so on; an out-of-order or incomplete sequence returns `undef` before the rule exit block. The focused source-emitter matrix proves direct AND single-acode and a two-slot AND sequential-acode case whose second edge returns `and-seq`, which would fail if execution stopped after the first regex. Verification passed: `cargo fmt --manifest-path rust/Cargo.toml --all`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib`; `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter`.
+  Commit: `RUST-PARITY.8.3.3 - emit direct AND acode execution` (see Commit Log)
 
 - ID: `RUST-PARITY.8.3.4`
   Status: `pending`
@@ -621,7 +621,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | — | `RUST-PARITY.8.3` | `done/split` | non-repetition generated-family lane split into metadata/plan, acode, bcode, and matrix children |
 | — | `RUST-PARITY.8.3.1` | `done` | generated rule-mode/family metadata and family-plan validation landed; generated source still delegated through the interpreter |
 | — | `RUST-PARITY.8.3.2` | `done` | generated-plan executor now directly handles default and OR acode families before falling back for later-family lanes |
-| 1 | `RUST-PARITY.8.3.3` | `pending` | next direct-execution child replaces fallback for AND single-acode and AND sequential-acode generated families |
+| — | `RUST-PARITY.8.3.3` | `done` | generated-plan executor now directly handles AND single-acode and AND sequential-acode, including ordered consume semantics |
+| 1 | `RUST-PARITY.8.3.4` | `pending` | next direct-execution child replaces fallback for AND bcode sequential dispatch and OR bcode first-match dispatch |
 | — | `RUST-PARITY.5.2` | `done` | match_*/entry_* split landed (2026-06-16); entry = dispatcher's match, local = own match, per-handler lexical save/restore |
 | — | `RUST-PARITY.5.3` | `done` | char-based indexing + cursor line/col landed (2026-06-16); byte-internal, char-exposed; entry/match spans stored |
 | — | `RUST-PARITY.5.4` | `done` | dedupe match arms + REP zero-progress guard landed (2026-06-16); better hash/hash_copy/print arms live, REP breaks on no cursor progress |
@@ -700,6 +701,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 - `2026-07-04` (`.8.3` split): non-repetition handler emission is split again before implementation. The first code read found that Rust `CompiledRule` preserves regex/action/blind dispatch tables and parse mode, but not enough parsed rule-mode metadata to robustly distinguish OR-bcode from AND-bcode in a generated-source-only pass. The remaining `.8.3` scope also spans separate acode, bcode, and matrix-closeout risks. Per PNT rule 5, `.8.3.1` now owns rule-mode/family metadata plus generated non-REP family-plan emission; `.8.3.2` owns direct default/OR acode execution; `.8.3.3` owns direct AND acode execution; `.8.3.4` owns direct AND/OR bcode execution; `.8.3.5` owns the non-REP matrix closeout. No Rust source changed in the split.
 - `2026-07-04` (`.8.3.1` implementation): generated family-plan metadata landed before direct execution. `CompiledRule` now carries parsed `RuleMode` so source generation does not infer OR/AND family shape from dispatch tables alone. The runtime source emitter now classifies each rule into a `GeneratedRuleFamily`, emits `GENERATED_RULES` beside `COMPILED_SPEC_JSON`, and validates generated labels/families before delegating through `Engine`. The test matrix deliberately proves plan emission/validation for default, OR acode, AND single-acode, AND sequential-acode, AND bcode, and OR bcode generated modules while leaving direct execution to `.8.3.2`+. Frontier → `.8.3.2`.
 - `2026-07-04` (`.8.3.2` implementation): direct generated execution started for the default and OR acode families. Generated modules still embed `CompiledSpec` plus `GENERATED_RULES`, but `execute_generated_parser` now calls the plan-aware executor instead of `Engine::execute`. The generated executor directly runs default/OR acode rules with the interpreter's lifecycle semantics: recursion guard, entry/local match lexicals, I/LS/LE/IT/LX/EX/E blocks, action-edge child-return scoping, default-mode repetition, and zero-progress termination. Unsupported AND/bcode/REP families still fall back inside the executor until `.8.3.3`–`.8.4`. Frontier → `.8.3.3`.
+- `2026-07-04` (`.8.3.3` implementation): direct generated execution now covers AND acode families. `GeneratedPlanExecutor` treats `AndSingleAcode` and `AndAcodeSeq` as direct acode families, and the Rust regex/acode loop now enforces ordered non-repetition AND sequence before completion: regex slot 0, then slot 1, etc. An out-of-order or incomplete sequence fires `LX` when present and returns `undef` before `E`, matching the Perl HandlerIR `and_acode_seq` ordered-index contract for focused cases while keeping generated and interpreted Rust execution aligned. The source-emitter matrix now proves an AND single-acode return and a two-slot AND sequential-acode case whose payload is produced only by the second ordered edge. Frontier → `.8.3.4`.
 - `2026-07-02` (`.7.5.3` reconciliation): `.7.5.3` is closed without new runtime code in this slice because the
   implementation landed later under owned `SPEC-FORMAT-TERSE` leaves. `SPEC-FORMAT-TERSE.2.3.3.1` added the
   parser/compiler/runtime metadata path for action-edge fluent chains and no-arg `.push` / `.return(expr)` /
@@ -831,6 +833,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `2026-07-04` | `RUST-PARITY.8.3` | Task/KM/code read; `git diff --check`; Knowledge Map/memory/doctrine gates | PASS/SPLIT — `.8.3` was split before code because non-REP emission still bundles metadata/family-plan, acode, bcode, and matrix-closeout mechanisms; Rust `CompiledRule` needs explicit mode/family metadata before generated source can robustly distinguish OR-bcode from AND-bcode. No Rust source changed. Frontier → `.8.3.1` |
 | `2026-07-04` | `RUST-PARITY.8.3.1` | focused fmt/tests/clippy; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — `CompiledRule` now preserves parsed `RuleMode`, generated Rust source embeds and validates `GENERATED_RULES`, and the focused generated-source matrix compiles/runs default, OR acode, AND single-acode, AND sequential-acode, AND bcode, and OR bcode generated modules through the existing interpreter delegation. `tools/run_ci_local.sh` passed with 1021 phase0 regression tests. Frontier → `.8.3.2` |
 | `2026-07-04` | `RUST-PARITY.8.3.2` | focused Rust fmt/source-emitter/clippy; runtime lib tests; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — generated source now enters the plan-aware executor; default and OR acode rules run directly with interpreter-equivalent lifecycle/action-edge semantics, while later families keep their fallback path. `tools/run_ci_local.sh` passed with 1021 phase0 regression tests. Frontier → `.8.3.3` |
+| `2026-07-04` | `RUST-PARITY.8.3.3` | focused Rust fmt/source-emitter/runtime-lib/clippy; mdBook build; Knowledge Map/memory/doctrine/whitespace gates; full local CI | PASS — generated source now directly handles AND single-acode and AND sequential-acode families. The Rust regex/acode loop enforces ordered non-repetition AND sequence, and the generated-source matrix proves a second-slot return payload that would fail if execution stopped after the first regex. `tools/run_ci_local.sh` passed with 1021 phase0 regression tests. Frontier → `.8.3.4` |
 
 ### RUST-PARITY.1 Inventory — 2026-06-16
 
@@ -909,6 +912,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
 | `RUST-PARITY.8.3` | `RUST-PARITY.8.3 - split non-repetition emitter lane` | no source behavior change; splits non-repetition generated-family emission into `.8.3.1` family metadata/plan, `.8.3.2` default/OR acode, `.8.3.3` AND acode, `.8.3.4` AND/OR bcode, and `.8.3.5` matrix closeout |
 | `RUST-PARITY.8.3.1` | `RUST-PARITY.8.3.1 - emit generated family plan` | preserves parsed `RuleMode` in `CompiledRule`; generated Rust source now embeds and validates a non-REP family plan across default/OR/AND acode-bcode cases while still delegating execution through `Engine` |
 | `RUST-PARITY.8.3.2` | `RUST-PARITY.8.3.2 - emit direct default-or acode execution` | generated source now enters a plan-aware executor; default and OR acode families run directly while AND/bcode/REP families remain fallback-owned by later leaves |
+| `RUST-PARITY.8.3.3` | `RUST-PARITY.8.3.3 - emit direct AND acode execution` | generated source now directly handles AND single-acode and AND sequential-acode; shared Rust loop enforces ordered AND regex/acode sequence before completion |
 
 ## Changelog
 
@@ -1013,3 +1017,7 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   instead of `Engine::execute(...)`; that executor runs default/OR acode rules directly and preserves the
   interpreter's lifecycle, action-edge child-return, default repetition, and zero-progress semantics. AND acode is
   next. Frontier → `.8.3.3`.
+- `2026-07-04`: `.8.3.3` done — direct generated execution now covers AND single-acode and AND sequential-acode
+  families. The Rust regex/acode loop now requires non-repetition AND regex slots to match in ordered index
+  sequence before completion; incomplete or out-of-order sequences return `undef` before `E`. The focused
+  generated-source matrix proves the second ordered edge can return `and-seq`. Frontier → `.8.3.4`.

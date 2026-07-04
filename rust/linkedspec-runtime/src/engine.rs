@@ -385,7 +385,7 @@ impl GeneratedPlanExecutor<'_> {
         if !Self::is_direct_acode_family(family) {
             return self.engine.execute_rule(label, entry_regex_idx, ctx);
         }
-        self.execute_direct_acode_rule(label, entry_regex_idx, ctx)
+        self.execute_direct_acode_rule(label, entry_regex_idx, family, ctx)
     }
 
     fn generated_rule_family(&self, label: &str) -> Result<GeneratedRuleFamily, String> {
@@ -399,7 +399,10 @@ impl GeneratedPlanExecutor<'_> {
     fn is_direct_acode_family(family: GeneratedRuleFamily) -> bool {
         matches!(
             family,
-            GeneratedRuleFamily::Default | GeneratedRuleFamily::OrAcode
+            GeneratedRuleFamily::Default
+                | GeneratedRuleFamily::OrAcode
+                | GeneratedRuleFamily::AndSingleAcode
+                | GeneratedRuleFamily::AndAcodeSeq
         )
     }
 
@@ -431,6 +434,7 @@ impl GeneratedPlanExecutor<'_> {
         &self,
         label: &str,
         entry_regex_idx: usize,
+        family: GeneratedRuleFamily,
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
         let entry_pos = ctx.pos;
@@ -438,7 +442,7 @@ impl GeneratedPlanExecutor<'_> {
             return Ok(RuntimeValue::Undef);
         }
 
-        let result = self.execute_direct_acode_rule_inner(label, entry_regex_idx, ctx);
+        let result = self.execute_direct_acode_rule_inner(label, entry_regex_idx, family, ctx);
         ctx.exit_recursion(label, entry_pos);
         result
     }
@@ -447,6 +451,7 @@ impl GeneratedPlanExecutor<'_> {
         &self,
         label: &str,
         entry_regex_idx: usize,
+        family: GeneratedRuleFamily,
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
         let rule = self.engine.spec.find(label).ok_or_else(|| {
@@ -508,12 +513,19 @@ impl GeneratedPlanExecutor<'_> {
         let is_rep = rule.rep_min.is_some();
         let rep_min = rule.rep_min.unwrap_or(0);
         let rep_max = rule.rep_max;
+        let is_and_acode_seq = !is_rep
+            && matches!(family, GeneratedRuleFamily::AndAcodeSeq)
+            && rule.regex_patterns.len() > 1;
+        let and_acode_seq_len = rule.regex_patterns.len();
         let mut matches: usize = 0;
         let max_iter = 10_000;
         let has_entry_idx = entry_regex_idx > 0 && entry_regex_idx < rule.regex_patterns.len();
 
         for _iter in 0..max_iter {
-            if !is_rep && matches > 0 {
+            if !is_rep && !is_and_acode_seq && matches > 0 {
+                break;
+            }
+            if is_and_acode_seq && matches >= and_acode_seq_len {
                 break;
             }
 
@@ -543,6 +555,14 @@ impl GeneratedPlanExecutor<'_> {
             };
 
             if let Some(m) = match_result {
+                if is_and_acode_seq && m.index != matches {
+                    if let Some(ref lxcode) = rule.lxcode {
+                        self.engine.execute_block(lxcode, ctx, label)?;
+                        return_if_rule_returned!();
+                    }
+                    break;
+                }
+
                 let entry_was_empty = ctx.entry_groups.is_empty()
                     && ctx.entry_named.is_empty()
                     && ctx.entry_start_byte == ctx.entry_end_byte;
@@ -652,6 +672,12 @@ impl GeneratedPlanExecutor<'_> {
                 "rule '{}': expected at least {} matches, got {}",
                 label, rep_min, matches
             ));
+        }
+
+        if is_and_acode_seq && matches < and_acode_seq_len {
+            ctx.restore_return_value(caller_return);
+            saved_match.restore(ctx);
+            return Ok(RuntimeValue::Undef);
         }
 
         if let Some(ref excode) = rule.excode {
@@ -905,6 +931,8 @@ impl Engine {
         let is_rep = rule.rep_min.is_some();
         let rep_min = rule.rep_min.unwrap_or(0);
         let rep_max = rule.rep_max;
+        let is_and_acode_seq = !is_rep && rule.mode.is_and() && rule.regex_patterns.len() > 1;
+        let and_acode_seq_len = rule.regex_patterns.len();
         let mut matches: usize = 0;
         let max_iter = 10_000;
 
@@ -914,7 +942,10 @@ impl Engine {
 
         for _iter in 0..max_iter {
             // Non-REP rules execute once
-            if !is_rep && matches > 0 {
+            if !is_rep && !is_and_acode_seq && matches > 0 {
+                break;
+            }
+            if is_and_acode_seq && matches >= and_acode_seq_len {
                 break;
             }
 
@@ -934,7 +965,7 @@ impl Engine {
                 // Self-recursive entry: only try the specified regex slot.
                 // Build a single-pattern alternation for this slot.
                 let entry_pat = &rule.regex_patterns[entry_regex_idx];
-                let entry_alt = CompiledAlternation::compile(&[entry_pat.clone()])?;
+                let entry_alt = CompiledAlternation::compile(std::slice::from_ref(entry_pat))?;
                 match rule.parse_mode {
                     ParseMode::Consume => entry_alt.consume_match(&ctx.input, ctx.pos),
                     ParseMode::Seek => entry_alt.seek_match(&ctx.input, ctx.pos),
@@ -952,6 +983,14 @@ impl Engine {
             };
 
             if let Some(m) = match_result {
+                if is_and_acode_seq && m.index != matches {
+                    if let Some(ref lxcode) = rule.lxcode {
+                        self.execute_block(lxcode, ctx, label)?;
+                        return_if_rule_returned!();
+                    }
+                    break;
+                }
+
                 let entry_was_empty = ctx.entry_groups.is_empty()
                     && ctx.entry_named.is_empty()
                     && ctx.entry_start_byte == ctx.entry_end_byte;
@@ -1077,10 +1116,10 @@ impl Engine {
             }
 
             // Check max bound (REP rules)
-            if let Some(max) = rep_max {
-                if matches >= max {
-                    break;
-                }
+            if let Some(max) = rep_max
+                && matches >= max
+            {
+                break;
             }
 
             // Zero-progress guard: a REP iteration that left the cursor
@@ -1099,6 +1138,12 @@ impl Engine {
                 "rule '{}': expected at least {} matches, got {}",
                 label, rep_min, matches
             ));
+        }
+
+        if is_and_acode_seq && matches < and_acode_seq_len {
+            ctx.restore_return_value(caller_return);
+            saved_match.restore(ctx);
+            return Ok(RuntimeValue::Undef);
         }
 
         // ── EX-block (REP exhaustion, fires after loop completes normally) ──

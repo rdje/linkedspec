@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **RUST-PARITY.8.3.3 — emit direct AND acode execution**
+  (GENERATED SOURCE NOW DIRECTLY RUNS AND ACODE FAMILIES).
+
+  **Fix:** `GeneratedPlanExecutor` now treats `AndSingleAcode` and `AndAcodeSeq` as direct acode families. The
+  shared Rust regex/acode loop now enforces ordered non-repetition AND sequence: slot 0, then slot 1, and so on;
+  out-of-order or incomplete sequence returns `undef` before the rule exit block. This keeps generated execution,
+  interpreted Rust execution, and the Perl HandlerIR ordered-consume contract aligned for the covered cases.
+
+  **Verification:** Focused Rust formatting, generated-source matrix, runtime library tests, and focused clippy
+  pass. The matrix includes an AND sequential-acode case that only returns from the second ordered slot
+  (`a b` -> `and-seq`), proving the direct path does not stop after the first regex.
+
+  **Frontier:** `RUST-PARITY.8.3.4` — emit direct AND/OR bcode generated execution.
+
 - 2026-07-04: **RUST-PARITY.8.3.2 — emit direct default-or acode execution**
   (GENERATED SOURCE NOW DIRECTLY RUNS THE FIRST ACODE FAMILIES).
 
@@ -35,7 +49,7 @@ Current execution status for interruption-safe batch workflow recovery.
   verifies each generated `parse(...)` path still matches interpreter output.
 
   **Frontier at completion:** `RUST-PARITY.8.3.2` emitted direct default/OR acode generated execution; `.8.3.2`
-  is now done and current frontier is `.8.3.3`.
+  completed with the frontier advanced to `.8.3.3`; `.8.3.3` is now done and the current frontier is `.8.3.4`.
 
 - 2026-07-04: **RUST-PARITY.8.3 — split non-repetition emitter lane**
   (NON-REP GENERATED-SOURCE WORK IS NOW DECOMPOSED BEFORE CODE).

@@ -1,4 +1,4 @@
-//! RUST-PARITY.8.2/.8.3.1/.8.3.2 — generated Rust-source compile/run proof.
+//! RUST-PARITY.8.2/.8.3.1/.8.3.2/.8.3.3 — generated Rust-source compile/run proof.
 
 use linkedspec_core::ast::RuleMode;
 use linkedspec_core::compiler::compile;
@@ -35,9 +35,14 @@ Done:
 "#;
 
 const AND_ACODE_SEQ_SOURCE_EMITTER_SPEC: &str = r#"Top::AND
+ /a/ -> First
+ /[ \t]+b/ -> Second { return("and-seq") }
+
+First:
  /a/
- /b/
- LE { return(match_text()) }
+
+Second:
+ /[ \t]+b/
 "#;
 
 const AND_BCODE_SOURCE_EMITTER_SPEC: &str = r#"Top::AND
@@ -132,8 +137,8 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         Case {
             module: "and_acode_seq_case",
             spec: AND_ACODE_SEQ_SOURCE_EMITTER_SPEC,
-            input: "a",
-            expected: json!(["a"]),
+            input: "a b",
+            expected: json!(["and-seq"]),
             expected_family: "GeneratedRuleFamily::AndAcodeSeq",
             expected_mode: RuleMode::And,
         },

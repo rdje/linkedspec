@@ -45,4 +45,4 @@ helper family (`score.abs().ceil().add(2)`, `score.min(3)`, etc.). Hash receiver
 inventory did not need additional backfill in this slice; mutating or ambiguous helpers stay explicit.
 
 The follow-up `SPEC-FORMAT-TERSE.7.4` no-drift sweep is now done. No `SPEC-FORMAT-TERSE` leaf is currently
-pending, and PNT returns to `RUST-PARITY.8.3.3` unless a new terse leaf is split.
+pending, and PNT returns to `RUST-PARITY.8.3.4` unless a new terse leaf is split.

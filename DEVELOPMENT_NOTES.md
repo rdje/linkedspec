@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (RUST-PARITY.8.3.3 — direct AND acode generated execution):
+  `GeneratedPlanExecutor` now handles `AndSingleAcode` and `AndAcodeSeq` directly. The important semantic detail is
+  ordered AND acode sequence: a non-repetition AND regex/acode rule with multiple regex slots must consume slot 0,
+  then slot 1, and so on; matching a later slot early or failing before the sequence is complete returns `undef`
+  before the rule exit block. The shared Rust interpreter loop now enforces that same ordered-index contract, so the
+  generated path does not become a divergent semantics. The source-emitter matrix locks this with a two-slot AND
+  acode case whose second edge returns `and-seq`; stopping after the first regex would return `[]`, not the expected
+  payload. `.8.3.4` remains the bcode direct-execution leaf.
+
 - 2026-07-04 (RUST-PARITY.8.3.2 — direct default/OR acode generated execution):
   Generated Rust modules no longer use whole-parser `Engine::execute` for the first direct family slice. After
   `source_emitter` validates `GENERATED_RULES`, it calls `Engine::execute_generated_with_plan(...)`. That path uses
