@@ -28,6 +28,7 @@ changed* lives in git (layer D), not here.
 | [0015](0015-staged-parser-registry-dispatch-contract.md) | Staged parser dispatch uses a deterministic registry and queue: resolve/load/compile/execute, stable job ordering, cache fingerprints, capability boundaries, and cycle diagnostics | 2026-07-02 | accepted | architecture, staged-parsing, parser-registry, dispatch, caching, language-neutral |
 | [0016](0016-staged-parsing-language-neutrality.md) | Every staged parsing artifact remains implementation-language neutral: syntax, AST metadata, dispatch, diagnostics, fixtures, and docs are contracts, backend mechanics are adapters | 2026-07-02 | accepted | architecture, staged-parsing, portability, language-neutral, backends |
 | [0017](0017-function-definition-staged-ast-contract.md) | Function-definition staged AST shape is predicted before implementation: wrapper-top small-spec tests, named captures for optional fields, exact body provenance, parse-job field, and direct body_ast assertions | 2026-07-02 | accepted | architecture, staged-parsing, user-functions, ast, source-provenance, language-neutral |
+| [0018](0018-declaration-helper-legacy-compatibility-policy.md) | Declaration helpers remain accepted legacy compatibility after the terse migration; new authoring uses auto-existing variables and terse assignment/mutation forms | 2026-07-04 | accepted | dsl, compatibility, spec-format-terse, declaration, migration |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

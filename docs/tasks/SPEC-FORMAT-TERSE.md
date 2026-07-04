@@ -6,7 +6,12 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-04` (**`.6.3` DONE; public docs and checked-in corpus/example sweep closed. Current-facing
+- Last updated: `2026-07-04` (**`.6.4` DONE; declaration-helper post-migration compatibility policy decided.
+  `declare(...)` and declaration aliases remain accepted legacy compatibility for existing specs, but new shipped
+  specs, public examples, and current corpus examples must use terse auto-existing variables and assignment/
+  mutation forms. ADR `0018`, mdBook policy notes, and KM coverage added; Perl/Rust compatibility evidence stays
+  locked by existing declare/no-declare oracle fixtures. Declaration retirement `.6` is closed; frontier moves to
+  `.7.1` for the supported-type method audit. Prior **`.6.3` DONE; public docs and checked-in corpus/example sweep closed. Current-facing
   mdBook examples and root corpus specs no longer teach `declare(...)` or old helper spellings; generated Rust
   oracle fixtures use canonical terse helpers where old names were incidental, while residual old spellings are
   isolated to compatibility/reference fixtures or legacy-reference pages. Added KM coverage for the
@@ -2664,7 +2669,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `pending`
 
 - ID: `SPEC-FORMAT-TERSE.6`
-  Status: `active`
+  Status: `done` (2026-07-04)
   Goal: Finish the terse-format declaration migration by removing `declare(...)` from live `.spec` files.
   Children: `.6.1`, `.6.2`, `.6.3`, `.6.4`
 
@@ -2839,16 +2844,22 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.6.3 - sweep docs and corpus declare examples`
 
 - ID: `SPEC-FORMAT-TERSE.6.4`
-  Status: `pending`
+  Status: `done` (2026-07-04)
   Goal: Decide and implement the post-migration compatibility-support policy for declaration helpers.
   Acceptance: After `.6.2`/`.6.3` leave no live spec-file dependency, either keep implementation support explicitly
     documented as legacy compatibility or remove/diagnose it under a focused implementation leaf; Perl and Rust
     agree on the selected policy; final no-drift scans and local gates pass.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **DONE 2026-07-04.** ADR `0018` records the selected policy: keep `declare(...)` and declaration
+    aliases as accepted legacy compatibility for existing specs, do not use them in new shipped specs/current
+    examples/root corpus examples, do not expand declaration support with new features, and require a future
+    focused leaf for any removal or diagnostic hardening. The mdBook declaration reference and helper catalog now
+    state that policy, `docs/knowledge/terse-declaration-helper-compatibility-policy.md` records the retrieval
+    fact, and the Rust oracle corpus keeps declare/no-declare convergence fixtures as compatibility locks. No
+    Perl/Rust implementation change is needed for this policy slice.
+  Commit: `SPEC-FORMAT-TERSE.6.4 - lock declare compatibility policy`
 
 - ID: `SPEC-FORMAT-TERSE.7`
-  Status: `pending` (backlog; after `.6` unless the user explicitly reprioritizes it)
+  Status: `active` (frontier after declaration-retirement `.6` closure)
   Goal: Audit and backfill the type method surface so useful helper functions are also available as receiver
     methods on the supported value types when that is readable and type-correct.
   Children: `.7.1`, `.7.2`, `.7.3`, `.7.4`
@@ -2901,8 +2912,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.6.2.3.2` | `done` | authored specs/corpora use `:name`, `LHS = RHS`, direct shapes, and remembered bare kinds; phase0 1020 |
 | — | `SPEC-FORMAT-TERSE.6.2.4` | `done` | shipped specs compile and scan clean; phase0 1020; oracle 73 fixtures; broader docs/corpus sweep owned by `.6.3` |
 | — | `SPEC-FORMAT-TERSE.6.3` | `done` | public docs, checked-in corpus/test specs, and current-facing examples use terse replacements; legacy spellings are compatibility/reference-only |
-| 1 | `SPEC-FORMAT-TERSE.6.4` | `pending` | decide post-migration compatibility support only after live spec-file use is gone |
-| 3 | `SPEC-FORMAT-TERSE.7.1` | `pending` | backlog from user directive: audit supported types and helper families before adding/backfilling methods such as string `substr()` |
+| — | `SPEC-FORMAT-TERSE.6.4` | `done` | declaration helpers remain accepted legacy compatibility; new authoring uses terse replacements; declaration-retirement lane closed |
+| 1 | `SPEC-FORMAT-TERSE.7.1` | `pending` | backlog from user directive: audit supported types and helper families before adding/backfilling methods such as string `substr()` |
 | — | `SPEC-FORMAT-TERSE.0` | `done` | Ratified 2026-06-18 — ADR `0007` (direction Rounds 1–3 + gradual-alias migration + lockstep variants + reference-touching exception + regression gate). |
 | — | ~~EXECUTION DECISION PENDING~~ | `resolved` 2026-06-22 | The "usable phase0" gate is **cleared** — `t/phase0_regression.t` 960/960 green + `tools/run_ci_local.sh` EXIT 0 (via `PHASE0-BACKHALF-TRIAGE`). Migration policy already resolved (gradual-alias, ADR `0007`). `.1.x`+ are now PNT-eligible. |
 | — | `SPEC-FORMAT-TERSE.1.1.1` | `done` 2026-06-24 | Round 1 — auto-existing working variables (**Perl reference**): the engine now auto-supplies the per-invocation `my` lexical for wrapper-referenced vars; `declare(...)` is now optional. Collector in `RuleIR::EmitContext::_collect_auto_working_var_decls`, injection in `SpecEntry::compile_spec_entry`. 19/20 shipped specs byte-identical (only `tkgui` gains one legit `my`, behavior-preserved); +3 phase0 locks → 968 green; gate EXIT 0; book taught (declare optional). |
@@ -3847,6 +3858,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-04` | `SPEC-FORMAT-TERSE.6.4` | KM retrieval for declare retirement; implementation/doc inventory for declaration helper support; ADR `0018`; mdBook declaration/helper policy updates; Knowledge Map fact card/regeneration/check; declaration-support scans; Rust corpus oracle; mdBook build; memory/doctrine/diff gates; full local CI | Post-migration policy is compatibility retention. `declare(...)` and declaration aliases remain accepted legacy compatibility for existing specs, but new authoring/current examples use terse replacements. No implementation removal is done in this slice. Future removal/diagnostics require a new focused leaf. Declaration-retirement `.6` closes and frontier becomes `.7.1`. |
 | `2026-07-04` | `SPEC-FORMAT-TERSE.6.3` | Current-facing mdBook `declare(...)` / old-helper scans excluding explicit legacy/reference pages; root `tests/corpus` scans; root corpus probes for `simple_grammar`, `tablegrep`, and `lispish`; `perl -Iperl tools/gen_oracle_corpus.pl`; generated-corpus expected-output diff check; Rust corpus oracle (`cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture`); `mdbook build docs/linkedspec-book`; `prove -q -Iperl t/phase0_regression.t`; Knowledge Map regeneration/check; full local CI (`bash tools/run_ci_local.sh`) | Public docs and corpus examples now teach terse replacements instead of active `declare(...)` or old helper spellings. Root corpus specs scan clean and probes keep existing outputs. Generated oracle inputs use canonical helpers where old spellings were incidental; expected JSON remains unchanged, and residual old spellings are compatibility/reference-only. Added KM coverage for the bare `merge_hash(base, overlay)` boundary. Phase0 passes with **1020** tests, Rust `corpus_oracle` passes all **73 fixtures**, and full local CI passes. Frontier becomes `.6.4`. |
 | `2026-07-04` | `SPEC-FORMAT-TERSE.6.2.4` | Shipped-spec scans for `scalar(...)` / `assign(...)`, `declare(...)`, and old helper spellings; checked-in corpus and mdBook inventory scans; `perl -Iperl -MLinkedSpec` descriptor compile for all 21 shipped specs; `prove -q -Iperl t/phase0_regression.t`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle (`cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture`); `mdbook build docs/linkedspec-book`; generated-corpus diff check; full local CI (`bash tools/run_ci_local.sh`) | Shipped specs compile and scan clean for the retired/currently-forbidden surfaces. Phase0 passes with **1020** tests. Oracle regeneration remains stable at **73 fixtures** with no tracked corpus diff, and Rust `corpus_oracle` passes all fixtures. The public book has no `scalar(...)` / `assign(...)` hits and builds. Broader checked-in corpus/book `declare(...)` and older helper references are not shipped-spec blockers and are now the explicit `.6.3` sweep input. Full local CI passes. Frontier becomes `.6.3`. |
 | `2026-07-04` | `SPEC-FORMAT-TERSE.6.2.3.2` | Active authored spec/corpus scan for `scalar(` / `assign(`; mdBook scan; Perl syntax checks for edited ActionIR modules; `prove -q -Iperl t/actionir_ast_parser.t`; `prove -q -Iperl t/phase0_regression.t`; `cargo fmt --manifest-path rust/Cargo.toml --all --check`; focused Rust core/runtime tests for scalar-slot shorthand and remembered bare kind | Authored/current `.spec` no longer supports or uses `scalar(...)` scalar-slot reads or `assign(...)` assignment aliases. `:name` is the scalar-slot spelling; `LHS = RHS` / `set(...)` are assignment forms; initialized bare identifiers remember scalar/array/hash kind. Phase0 passes with **1020** tests. Frontier becomes `.6.2.4`. |
@@ -3957,6 +3969,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.6.4` | `SPEC-FORMAT-TERSE.6.4 - lock declare compatibility policy` | ADR `0018` keeps declaration helpers as accepted legacy compatibility, excludes them from new authoring, and requires a future focused leaf for any removal/diagnostics; declaration-retirement `.6` closes and frontier becomes `.7.1`. |
 | `SPEC-FORMAT-TERSE.6.3` | `SPEC-FORMAT-TERSE.6.3 - sweep docs and corpus declare examples` | Current-facing mdBook and checked-in corpus examples now use terse initialization/mutation and canonical helper spellings; root corpus scans/probes pass; generated oracle expected outputs are unchanged; residual old spellings are compatibility/reference-only; frontier becomes `.6.4`. |
 | `SPEC-FORMAT-TERSE.6.2.4` | `SPEC-FORMAT-TERSE.6.2.4 - verify shipped-spec terse surface` | Final shipped-spec no-drift verification passes: all 21 shipped specs compile, retired-surface/old-helper shipped scans are clean, phase0 1020 and Rust oracle 73 fixtures pass, mdBook builds, and broader docs/corpus legacy references are owned by `.6.3`. |
 | `SPEC-FORMAT-TERSE.6.2.3.2` | `SPEC-FORMAT-TERSE.6.2.3.2 - retire scalar and assign spec helpers` | Authored/current specs moved to `:name`, `LHS = RHS` / `set(...)`, direct shapes, and remembered bare kind; raw authored `scalar(...)` and `assign(...)` are retired from the DSL surface; phase0 1020 and focused Rust checks pass. |
@@ -4064,6 +4077,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.4.2` | `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls` | Perl inline value-control lowering landed for `if`/`switch` in supported value positions; corpus 46 passes and frontier becomes `.2.3.5`. |
 
 ## Changelog
+
+- `2026-07-04`: **`.6.4` DONE — declaration-helper compatibility policy locked.**
+  `declare(...)` and declaration aliases remain accepted legacy compatibility for existing specs after the terse
+  migration, but they are excluded from new shipped specs, current-facing examples, and root corpus examples.
+  Future removal or diagnostic hardening requires a separate focused leaf. ADR `0018`, mdBook policy notes, and
+  a Knowledge Map fact card record the decision. Declaration-retirement `.6` is closed; frontier moves to `.7.1`.
 
 - `2026-07-04`: **`.6.3` DONE — public docs and corpus examples swept to the terse surface.**
   Current-facing mdBook examples and root corpus specs now use auto-existing variables, assignments, direct

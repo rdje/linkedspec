@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **SPEC-FORMAT-TERSE.6.4 — lock declare compatibility policy**
+  (DECLARATION RETIREMENT CLOSED; LEGACY COMPATIBILITY POLICY RECORDED).
+  Declaration helpers remain accepted compatibility syntax for existing specs, but they are no longer current
+  authoring syntax.
+
+  **Fix:** ADR `0018`, the mdBook declaration reference, helper catalog, project status page, Knowledge Map, task
+  tree, and roadmap now state the same policy: new shipped specs, public examples, and current corpus examples use
+  auto-existing variables plus terse assignment/mutation forms, while future declaration removal or diagnostics
+  require a separate focused leaf.
+
+  **Verification:** shipped-spec declaration scans remain clean; current-facing doc scans classify residual hits as
+  legacy/reference/status material; mdBook builds; Knowledge Map regenerates/checks; memory/doctrine/diff gates
+  pass; Rust `corpus_oracle` passes all **73** fixtures; phase0 remains **1020** green; and full local CI passes.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.7.1` — audit supported types and helper families before adding/backfilling
+  methods such as string `substr()`.
+
 - 2026-07-04: **SPEC-FORMAT-TERSE.6.3 — sweep docs and corpus declare examples**
   (PUBLIC DOCS/CORPUS TERSE-SURFACE SWEEP; COMPATIBILITY HOLDOUTS CLASSIFIED).
   Current-facing mdBook examples and root checked-in corpus specs now teach terse working-variable

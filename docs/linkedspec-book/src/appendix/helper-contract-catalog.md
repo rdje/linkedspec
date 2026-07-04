@@ -117,6 +117,8 @@ dispatch rule.
 > with no `declare(...)` is a fresh per-invocation slot scoped to the rule — **not** a value
 > carried across parses or recursive re-entries. `declare(...)` is retained as a legacy explicit form;
 > new specs should use direct assignment initializers such as `name = value`, `items = []`, and `meta = {}`.
+> Post-migration support is compatibility-only: existing specs may keep declaration helpers, but new examples
+> and language work should not depend on them.
 > The DSL literals
 > `undef`/`true`/`false` and the engine's own handler locals are never treated as working-variable
 > names (so `array(undef)` builds an array holding the `undef` literal, not a variable `undef`).
@@ -1308,6 +1310,9 @@ their contracts. New `.spec` authoring should prefer the terse names.
 
 ### Compatibility Aliases (Retired)
 The following are retired and must not be used in new `.spec` authoring. Backends may implement them for compatibility with legacy specs but should treat them as deprecated:
+
+Declaration helpers (`declare(...)` plus declaration aliases) follow the same compatibility policy: accepted for
+legacy specs, not for new authoring. See [Declaration Helper Reference](../dsl/declaration-helper-reference.md#post-migration-support-policy).
 
 | Retired | Use Instead |
 |---|---|

@@ -2,10 +2,11 @@
 
 This chapter records the legacy declaration helper family and the terse-format replacement policy.
 
-> **Current policy.** New `.spec` files should not use `declare(...)`. Working variables auto-exist through the
-> terse format, and kind is inferred from wrappers, helper argument positions, assignment targets, and direct RHS
-> shape values. Use `name = value`, `items = []`, `meta = { ... }`, `items += value`, `meta[key] = value`,
-> `set(...)`, and existing terse read positions instead.
+> **Current policy.** New `.spec` files should not use `declare(...)`. The declaration helper family remains
+> accepted only as legacy compatibility for existing specs. Working variables auto-exist through the terse format,
+> and kind is inferred from wrappers, helper argument positions, assignment targets, and direct RHS shape values.
+> Use `name = value`, `items = []`, `meta = { ... }`, `items += value`, `meta[key] = value`, `set(...)`, and
+> existing terse read positions instead.
 
 Read [Action Model and Helper Surface](action-model-and-helper-surface.md) first if the helper-DSL direction is still new. Read [Value, Container, and Flow Helper Reference](value-container-flow-helper-reference.md) after this chapter when you want the value expressions that can feed assignments, direct initializers, and legacy declaration initializers.
 
@@ -118,6 +119,14 @@ The kind comes from the **position**: the target of `set(...)` and `name = value
 Where a name is wrapped, the wrapper still decides its kind. Where a name is bare in a type-implying position, that
 position decides it. Direct RHS shape assignment infers the target kind for array/hash assignment; explicit
 `:name` keeps array/hash payloads in a scalar.
+
+## Post-migration support policy
+
+`declare(...)` and the declaration aliases remain accepted compatibility syntax for existing specs. They are not
+removed by the terse migration, because removing them would be a compatibility break and would discard useful
+declare/no-declare convergence fixtures. They are also not expanded with new declaration features: new language
+work should use the terse surface. Any future removal or diagnostic hardening must be owned by a separate focused
+task-tree leaf and update Perl, Rust, oracle fixtures, this book, and the Knowledge Map together.
 
 > **Reserved names.** `undef`, `true`, and `false` are literals, so `array(undef)` constructs an array holding the `undef` literal — it does **not** create a variable named `undef`. The engine's own handler locals are likewise never treated as working variables.
 

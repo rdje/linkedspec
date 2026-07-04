@@ -1,14 +1,21 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (SPEC-FORMAT-TERSE.6.4 — declaration helpers are legacy compatibility):
+  Keep the post-migration boundary strict. `declare(...)` and declaration aliases stay accepted for existing specs,
+  but they are not current authoring syntax and should not appear in new shipped specs, public examples, or current
+  corpus examples. Do not add new declaration features. Do not remove or hard-diagnose declaration helpers without a
+  new focused leaf that updates Perl, Rust, oracle fixtures, mdBook, and Knowledge Map together. The
+  `autoexist_*_declare` oracle fixtures remain useful compatibility locks for declare/no-declare convergence.
+
 - 2026-07-04 (SPEC-FORMAT-TERSE.6.3 — docs/corpus terse-surface sweep):
   Keep the `.6.3` boundary explicit. Current-facing mdBook examples and root corpus specs should show terse
   working-variable forms first: `name = value`, `items = []`, direct shape literals, `items += value`,
   `meta[key] = value`, `push(...)`, `copy(...)`, and `cat(...)`. The remaining old spellings are not drift when
   they live in named compatibility locks or legacy/reference pages. In the generated Rust oracle corpus, preserve
   `autoexist_*_declare`, `autoexist_array_bare_arg`, `terse_1_2_3_2_array_copy_bare_read`,
-  `terse_1_2_3_2_hash_copy_bare_read`, and the hash receiver-method fixture until `.6.4` decides compatibility
-  support. Also preserve the `merge_hash` lesson: today `merge_hash(base, overlay)` is not equivalent to
+  `terse_1_2_3_2_hash_copy_bare_read`, and the hash receiver-method fixture as deliberate compatibility locks
+  after `.6.4`. Also preserve the `merge_hash` lesson: today `merge_hash(base, overlay)` is not equivalent to
   `merge_hash(copy(hash(base)), overlay)`, so examples that intend an overlay merge must keep an explicit
   hash-valued first argument.
 

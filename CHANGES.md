@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — SPEC-FORMAT-TERSE.6.4 — lock declare compatibility policy
+
+**Scope:** Declaration-helper compatibility policy, ADR, mdBook reference/status pages, Knowledge Map, task-tree
+status, roadmap tracker, and live continuity docs. No parser, runtime, or shipped `.spec` implementation changed.
+
+**What changed:** ADR `0018` records the post-migration policy: `declare(...)` and declaration aliases remain
+accepted legacy compatibility for existing specs, but they are excluded from new shipped specs, public examples,
+and current corpus examples. Future removal or diagnostic hardening must be owned by a separate focused
+task-tree leaf that updates Perl, Rust, oracle fixtures, mdBook, and Knowledge Map together. The mdBook
+declaration reference, helper catalog, and project status now state that boundary.
+
+**Evidence:** Shipped-spec declaration scans remain clean. Current-facing docs scans classify residual
+`declare(...)` hits as legacy/reference/status material. mdBook builds, Knowledge Map regenerates/checks, memory
+architecture and doctrine gates pass, Rust `corpus_oracle` passes all **73** fixtures, phase0 remains **1020**
+green, and full local CI passes.
+
 ## 2026-07-04 — SPEC-FORMAT-TERSE.6.3 — sweep docs and corpus declare examples
 
 **Scope:** Public mdBook examples/reference pages, root checked-in corpus, generated Rust oracle corpus,
