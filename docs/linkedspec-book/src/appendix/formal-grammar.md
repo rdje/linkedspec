@@ -648,6 +648,8 @@ add(a, b), sub(a, b), mul(a, b)          — aliases for num_add/num_sub/num_mul
 div(a, b), mod(a, b), clamp(x, lo, hi)   — aliases for num_div/num_mod/num_clamp
 min(...), max(...), sum(arr)             — aliases for num_min/num_max/num_sum
 avg(arr), median(arr), range(arr)        — aliases for num_avg/num_median/num_range
+arr.sum(), arr.avg(), arr.median()       — terminal array receiver reducer methods
+arr.range(), arr.min(), arr.max()        — terminal array receiver reducer methods
 +(a, b), -(a, b), *(a, b)                — aliases for num_add/num_sub/num_mul
 /(a, b), %(a, b)                         — aliases for num_div/num_mod
 eq(a, b), ne(a, b), gt(a, b)             — aliases for num_eq/num_ne/num_gt

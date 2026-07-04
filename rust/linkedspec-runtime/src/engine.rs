@@ -1772,6 +1772,12 @@ impl Engine {
                 | "is_empty"
                 | "is_nonempty"
                 | "join_values"
+                | "sum"
+                | "avg"
+                | "median"
+                | "range"
+                | "min"
+                | "max"
         )
     }
 
@@ -1934,6 +1940,12 @@ impl Engine {
     ) -> Result<RuntimeValue, String> {
         use linkedspec_core::expr::{Arg, Expr};
 
+        #[derive(Clone, Copy, Eq, PartialEq)]
+        enum ReceiverFamily {
+            Array,
+            Terminal,
+        }
+
         let mut current = match receiver {
             Expr::Variable { name } => RuntimeValue::Array(ctx.array_copy(name)),
             Expr::Call { name, args } if name == "array" && args.len() == 1 => match &args[0] {
@@ -1944,8 +1956,12 @@ impl Engine {
             },
             _ => self.eval_expr(receiver, ctx, rule_label)?,
         };
+        let mut family = ReceiverFamily::Array;
 
-        for call in calls {
+        for (index, call) in calls.iter().enumerate() {
+            if family == ReceiverFamily::Terminal {
+                return Ok(RuntimeValue::Undef);
+            }
             if Self::is_statement_only_array_end_mutation_method(&call.method)
                 || !Self::is_array_receiver_value_chain_method(&call.method)
             {
@@ -1977,6 +1993,18 @@ impl Engine {
 
             current =
                 self.call_helper_with_args(&call.method, &raw_args, &evaluated, ctx, rule_label)?;
+            family = match call.method.as_str() {
+                "array_copy" | "copy" | "sorted" | "reversed" | "take" | "take_last"
+                | "drop_front" | "drop_back" | "slice" | "concat_arrays" | "split_each"
+                | "trim_each" | "filter_nonempty" | "lowercase_each" | "uppercase_each"
+                | "uniq" | "filter_match" => ReceiverFamily::Array,
+                _ => {
+                    if index + 1 != calls.len() {
+                        return Ok(RuntimeValue::Undef);
+                    }
+                    ReceiverFamily::Terminal
+                }
+            };
         }
 
         Ok(current)
@@ -2078,6 +2106,11 @@ impl Engine {
                         | "drop_front" | "drop_back" | "slice" | "concat_arrays" | "split_each"
                         | "trim_each" | "filter_nonempty" | "lowercase_each" | "uppercase_each"
                         | "uniq" | "filter_match" => ReceiverFamily::Array,
+                        "sum" | "avg" | "median" | "range" | "min" | "max"
+                            if index + 1 != calls.len() =>
+                        {
+                            return Ok(RuntimeValue::Undef);
+                        }
                         _ => ReceiverFamily::Terminal,
                     };
                 }
@@ -2177,6 +2210,11 @@ impl Engine {
                         | "drop_front" | "drop_back" | "slice" | "concat_arrays" | "split_each"
                         | "trim_each" | "filter_nonempty" | "lowercase_each" | "uppercase_each"
                         | "uniq" | "filter_match" => ReceiverFamily::Array,
+                        "sum" | "avg" | "median" | "range" | "min" | "max"
+                            if index + 1 != calls.len() =>
+                        {
+                            return Ok(RuntimeValue::Undef);
+                        }
                         _ => ReceiverFamily::Terminal,
                     };
                 }
@@ -3900,10 +3938,17 @@ impl Engine {
                     .unwrap_or(0.0),
             )),
             "num_min" => {
-                let min = args
-                    .iter()
-                    .filter_map(|a| a.as_number())
-                    .fold(f64::INFINITY, |a, b| a.min(b));
+                let values: Vec<f64> = if args.len() == 1 {
+                    match self.array_consuming_arg(raw_args, args, 0, ctx) {
+                        RuntimeValue::Array(items) => {
+                            items.iter().filter_map(|item| item.as_number()).collect()
+                        }
+                        value => value.as_number().into_iter().collect(),
+                    }
+                } else {
+                    args.iter().filter_map(|a| a.as_number()).collect()
+                };
+                let min = values.iter().copied().fold(f64::INFINITY, |a, b| a.min(b));
                 if min.is_finite() {
                     Ok(RuntimeValue::Number(min))
                 } else {
@@ -3911,9 +3956,19 @@ impl Engine {
                 }
             }
             "num_max" => {
-                let max = args
+                let values: Vec<f64> = if args.len() == 1 {
+                    match self.array_consuming_arg(raw_args, args, 0, ctx) {
+                        RuntimeValue::Array(items) => {
+                            items.iter().filter_map(|item| item.as_number()).collect()
+                        }
+                        value => value.as_number().into_iter().collect(),
+                    }
+                } else {
+                    args.iter().filter_map(|a| a.as_number()).collect()
+                };
+                let max = values
                     .iter()
-                    .filter_map(|a| a.as_number())
+                    .copied()
                     .fold(f64::NEG_INFINITY, |a, b| a.max(b));
                 if max.is_finite() {
                     Ok(RuntimeValue::Number(max))

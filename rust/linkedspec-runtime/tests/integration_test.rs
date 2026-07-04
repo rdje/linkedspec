@@ -2885,6 +2885,28 @@ fn terse_2_3_5_4_number_terminal_methods_end_chains() {
     );
 }
 
+// ── SPEC-FORMAT-TERSE.7.3 — array numeric reducer receiver methods:
+
+#[test]
+fn terse_7_3_array_numeric_reducer_receiver_methods_run() {
+    let grammar = "Top::\n /x/ -> Done { scores += 1; scores += 5; scores += 3; scores += 5; return(array(scores.sum(), scores.avg(), scores.median(), scores.range(), scores.min(), scores.max(), scores.sorted().take(3).avg(), scores.uniq().sum(), num_min(array(scores)), num_max(array(scores)), min(scores), max(scores))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[14, 3.5, 4, 4, 1, 5, 3, 9, 1, 5, 1, 5]]),
+        "array receiver numeric reducers terminate array chains and match the array-form helper aliases"
+    );
+}
+
+#[test]
+fn terse_7_3_array_numeric_reducer_receiver_methods_end_chains() {
+    let grammar = "Top::\n /x/ -> Done { scores += 1; scores += 2; return(array(scores.sum().drop_front(1), scores.min().sorted())) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[null, null]]),
+        "array receiver numeric reducer terminals cannot continue into later receiver-dot methods"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.3.2.1 — numeric word aliases:
 
 #[test]

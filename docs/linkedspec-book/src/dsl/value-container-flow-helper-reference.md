@@ -664,9 +664,13 @@ bucket = %(count(array(parts)), 3);
 bounded_count = num_clamp(count(array(parts)), 1, 5);
 score_total = num_sum(array(scores));
 score_total = sum(array(scores));
+score_total = scores.sum();
 score_average = num_avg(array(scores));
+score_average = scores.avg();
 score_median = num_median(array(scores));
 score_range = num_range(array(scores));
+score_floor = scores.min();
+score_ceiling = scores.max();
 next_depth = depth.add(1);
 weighted_count = count(array(parts)).add(2, :offset).mul(3);
 score_bucket = score.abs().ceil().clamp(0, 10);
@@ -678,15 +682,17 @@ the corresponding `num_*` helper, so `score.abs().ceil().add(2)` maps to
 `num_add(num_ceil(num_abs(:score)), 2)`, and `3.5.floor().add(1)` maps to
 `num_add(num_floor(3.5), 1)`. Number-returning links (`abs`, `floor`, `ceil`, `round`, `add`, `sub`, `mul`,
 `div`, `mod`, `min`, `max`, and `clamp`) can keep chaining through number helpers. Comparison links (`eq`,
-`ne`, `gt`, `ge`, `lt`, `le`) return booleans and end the chain. Array reducers such as `num_sum(array(...))`
-and `num_avg(array(...))` remain explicit array-consuming helpers; there is no implicit number receiver bridge
-from scalar values into array reducers. A number-yielding expression-valued block can be the receiver, for
-example `{ 3.5 }.floor().add(2)`.
+`ne`, `gt`, `ge`, `lt`, `le`) return booleans and end the chain. Array reducers are array-consuming: use
+function form such as `num_sum(array(scores))` / `sum(scores)` or terminal array receiver form such as
+`scores.sum()` / `scores.avg()`. They are not scalar number receiver links, and reducer terminals do not
+continue through later array receiver methods. A number-yielding expression-valued block can be the receiver,
+for example `{ 3.5 }.floor().add(2)`.
 
 Numeric helpers compose with array helpers:
 
 ```text
 top_score_average = num_avg(take(sorted(array(scores)), 3));
+top_score_average = scores.sorted().take(3).avg();
 score_floor = num_min(take(array(scores), 5));
 score_ceiling = num_max(concat_arrays(array(scores), array(extra_scores)));
 ```

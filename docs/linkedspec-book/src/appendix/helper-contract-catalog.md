@@ -551,11 +551,14 @@ dispatch rule.
   `drop_front`, `drop_back`, `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`,
   `lowercase_each`, `uppercase_each`, `uniq`, and `filter_match`.
 - **Allowed terminal links**: `count`, `first`, `last`, `contains`, `index_of`, `is_empty`, `is_nonempty`,
-  and `join_values`. Receiver-dot `items.join_values(delim)` keeps the helper's canonical delimiter-first
-  contract: it maps to `join_values(delim, items)`.
+  `join_values`, `sum`, `avg`, `median`, `range`, `min`, and `max`. Receiver-dot
+  `items.join_values(delim)` keeps the helper's canonical delimiter-first contract: it maps to
+  `join_values(delim, items)`. Receiver-dot numeric reducers such as `scores.sum()` and `scores.min()` are
+  array-consuming terminal links over the same numeric aggregate helper family.
 - **Boundary**: `split(value, delim)` belongs to the scalar/string receiver family because its receiver is the
-  string being split. Statement-only end mutations (`push_back`, `push_front`, `pop_back`, `pop_front`) remain
-  mutations, not value-chain links.
+  string being split. Numeric reducer terminals do not continue through later array methods; compose the helper
+  form explicitly when another numeric operation is needed. Statement-only end mutations (`push_back`,
+  `push_front`, `pop_back`, `pop_front`) remain mutations, not value-chain links.
 - **Block receivers**: An expression-valued block whose value is an array can be the receiver, for example
   `{ [3, 1, 2] }.sorted().join_values(",")`. A block-local `return(array_expr)` yields the receiver value and
   skips later block statements before the array chain runs.
@@ -777,7 +780,8 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 > — no regex — dispatching to a `value` rule that carries the regex and reads
 > `entry_group(N)`; output = the parser's one-element accumulator array). The array-form
 > reducers (`num_sum`, `num_avg`, `num_median`, `num_range`, and the array form of
-> `num_min`/`num_max`) take an explicit `array(...)` of numeric values — build it from
+> `num_min`/`num_max`) take an array of numeric values: use explicit `array(...)` in function form, or a
+> compatible array receiver such as `scores.sum()` / `scores.min()`. Build literal arrays from
 > capture groups (`array(entry_group(0), entry_group(1), …)`) or numeric literals. An
 > `undef` result (e.g. divide-by-zero) surfaces as a `null` element.
 

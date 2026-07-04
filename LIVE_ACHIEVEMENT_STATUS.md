@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-04: **SPEC-FORMAT-TERSE.7.3 — backfill array numeric reducer receiver methods**
+  (ARRAY/LIST NUMERIC REDUCERS ARE TERMINAL RECEIVER METHODS).
+  Array/list receivers now support `sum`, `avg`, `median`, `range`, `min`, and `max` as pure terminal methods.
+
+  **Fix:** Perl receiver chains lower those reducer methods through the existing aggregate helper family,
+  including array-returning links such as `scores.sorted().take(3).avg()` and pure internal array-pipeline links
+  such as `scores.uniq().sum()`. Invalid reducer continuations such as `scores.sum().drop_front(1)` return
+  `undef`/`null`. Rust mirrors the receiver surface, treats array terminal methods as chain-ending, and supports
+  documented single-array `num_min(array_expr)` / `num_max(array_expr)` and `min(array_expr)` / `max(array_expr)`.
+  Hash receiver methods from `.7.1` already covered the useful pure hash surface; mutating and ambiguous helpers
+  remain explicit statement/function forms.
+
+  **Verification:** Perl phase0 passes with **1021** tests; focused Rust `terse_7_3` tests pass; oracle
+  regeneration emits **74** fixtures and Rust `corpus_oracle` passes all 74; `mdbook build docs/linkedspec-book`
+  and `cargo fmt --manifest-path rust/Cargo.toml --all --check` pass.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.7.4` — final type-method no-drift sweep across codebase, mdBook, helper
+  catalog, examples, tests, and Knowledge Map.
+
 - 2026-07-04: **SPEC-FORMAT-TERSE.7.2 — verify string method surface**
   (STRING/SCALAR RECEIVER BACKFILL CLOSED; NO CODE CHANGE).
   `substr()` and the other useful pure string/scalar receiver methods are already implemented and documented on

@@ -6,13 +6,19 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-04` (**`.7.2` DONE; string/scalar method backfill closed with no implementation
+- Last updated: `2026-07-04` (**`.7.3` DONE; array/list numeric reducer receiver methods landed as terminal
+  Perl/Rust links. `sum`, `avg`, `median`, `range`, `min`, and `max` now work from array receivers, including after
+  array-returning links such as `sorted().take(...)` and Perl internal pure array-pipeline links such as `uniq()`.
+  Invalid reducer continuations return `undef`/`null`; hash and number mutation/ambiguous boundaries remain
+  explicit. Phase0 passes with **1021** tests, the Rust oracle corpus passes **74 fixtures**, mdBook examples and
+  helper catalog entries are in sync, and frontier moves to `.7.4` for the final type-method no-drift sweep.
+  Prior **`.7.2` DONE; string/scalar method backfill closed with no implementation
   change. Focused Perl probes confirm `"abcdef".substr(1, 3).uppercase()` and
   `uppercase(substr("abcdef", 1, 3))` both return `BCD` with `ready=1`, `fallback=0`, `raw=0`, and
   `unresolved=0`; focused Rust `terse_2_3_5_3` tests pass. mdBook already documents method/helper equivalence
   and the string receiver family (`trim`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix`, `rm_suffix`,
   `substr`, `concat`/`cat`, `coalesce_nonempty`, `split` bridge, and terminals), so no parser/runtime/book
-  behavior change is required. Frontier moves to `.7.3` for array/list, hash, and number receiver backfill audit.
+  behavior change is required. Frontier moved to `.7.3` for array/list, hash, and number receiver backfill audit.
   Prior **`.7.1` DONE; supported type-method surface inventory recorded before
   implementation. The existing receiver families are string/scalar, array/list, hash, and number; boolean/flow
   results are terminal today; expression-valued blocks and user-function returns dispatch by yielded runtime type
@@ -2961,13 +2967,23 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.7.2 - verify string method surface`
 
 - ID: `SPEC-FORMAT-TERSE.7.3`
-  Status: `pending`
+  Status: `done` (2026-07-04)
   Goal: Backfill useful array/list, hash, and number receiver methods from the `.7.1` inventory.
   Acceptance: Reasonable pure helper candidates are method-callable on matching receiver types, mutating or
     ambiguous helpers retain explicit statement/function forms unless the leaf defines safe receiver semantics, and
     Perl/Rust parity plus mdBook examples are locked.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-04.** Added terminal array/list receiver methods for numeric aggregate reducers:
+    `sum`, `avg`, `median`, `range`, `min`, and `max`. Perl receiver chains lower those methods through the
+    existing aggregate helper family, including array-returning links such as `sorted().take(...)` and pure
+    internal array-pipeline links such as `uniq()`. Invalid reducer continuations such as
+    `scores.sum().drop_front(1)` and `scores.min().sorted()` return `undef`/`null`. Rust accepts the same
+    receiver methods, tightens array receiver terminal continuation handling, and supports the documented
+    single-array `num_min(array_expr)` / `num_max(array_expr)` plus `min(array_expr)` / `max(array_expr)` forms.
+    Hash receiver methods from `.7.1` already cover the useful pure hash surface; mutating/ambiguous helpers remain
+    explicit statement/function forms. Locked by Perl phase0 (**1021 tests**), focused Rust `terse_7_3` integration
+    tests, regenerated oracle fixture `terse_7_3_array_numeric_reducer_receiver_methods` (corpus **74 fixtures**),
+    mdBook examples, and KM fact `terse-array-numeric-reducer-receiver-methods`.
+  Commit: `SPEC-FORMAT-TERSE.7.3 - backfill array numeric reducer receiver methods`
 
 - ID: `SPEC-FORMAT-TERSE.7.4`
   Status: `pending`
@@ -2992,7 +3008,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.6.4` | `done` | declaration helpers remain accepted legacy compatibility; new authoring uses terse replacements; declaration-retirement lane closed |
 | — | `SPEC-FORMAT-TERSE.7.1` | `done` | supported type-method inventory recorded; string `substr()` already exists as a receiver method; function/statement-only boundaries identified |
 | — | `SPEC-FORMAT-TERSE.7.2` | `done` | string/scalar receiver methods already cover the useful pure helper set; `substr()` method/helper equivalence verified on Perl/Rust; no code change |
-| 1 | `SPEC-FORMAT-TERSE.7.3` | `pending` | audit/backfill useful array/list, hash, and number receiver methods from `.7.1`, keeping mutation/ambiguous helpers explicit |
+| — | `SPEC-FORMAT-TERSE.7.3` | `done` | array/list numeric reducer receiver methods landed as terminal links; hash/number boundaries kept explicit; phase0 1021; oracle 74 fixtures |
+| 1 | `SPEC-FORMAT-TERSE.7.4` | `pending` | final type-method no-drift sweep across codebase, mdBook, examples, tests, and Knowledge Map |
 | — | `SPEC-FORMAT-TERSE.0` | `done` | Ratified 2026-06-18 — ADR `0007` (direction Rounds 1–3 + gradual-alias migration + lockstep variants + reference-touching exception + regression gate). |
 | — | ~~EXECUTION DECISION PENDING~~ | `resolved` 2026-06-22 | The "usable phase0" gate is **cleared** — `t/phase0_regression.t` 960/960 green + `tools/run_ci_local.sh` EXIT 0 (via `PHASE0-BACKHALF-TRIAGE`). Migration policy already resolved (gradual-alias, ADR `0007`). `.1.x`+ are now PNT-eligible. |
 | — | `SPEC-FORMAT-TERSE.1.1.1` | `done` 2026-06-24 | Round 1 — auto-existing working variables (**Perl reference**): the engine now auto-supplies the per-invocation `my` lexical for wrapper-referenced vars; `declare(...)` is now optional. Collector in `RuleIR::EmitContext::_collect_auto_working_var_decls`, injection in `SpecEntry::compile_spec_entry`. 19/20 shipped specs byte-identical (only `tkgui` gains one legit `my`, behavior-preserved); +3 phase0 locks → 968 green; gate EXIT 0; book taught (declare optional). |
@@ -3937,6 +3954,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-04` | `SPEC-FORMAT-TERSE.7.3` | KM retrieval for receiver-chain facts; Perl/Rust receiver classifier and reducer-target audit; Perl lowering/runtime/descriptor probes for `scores.sum()` and `scores.uniq().sum()`; `perl -c -Iperl perl/LinkedSpec/ActionIR/MethodLowering.pm`; `prove -q -Iperl t/phase0_regression.t`; focused Rust `terse_7_3` integration tests; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; `cargo fmt --manifest-path rust/Cargo.toml --all --check`; `mdbook build docs/linkedspec-book` | Array/list numeric reducers are now terminal receiver methods: `sum`, `avg`, `median`, `range`, `min`, and `max`. Perl composes them after array-returning links, including pure internal array-pipeline links such as `uniq()`, with zero fallback/raw/unresolved descriptor counts. Rust accepts the same receiver methods, treats array terminals as chain-ending, and supports documented single-array `num_min`/`num_max` helper forms. Hash receiver backfill required no new pure methods; mutation/ambiguous helpers remain explicit. Phase0 passes with **1021** tests; oracle corpus passes **74 fixtures**. Frontier becomes `.7.4`. |
 | `2026-07-04` | `SPEC-FORMAT-TERSE.7.2` | KM retrieval for string receiver chains; mdBook helper/reference audit; Perl runtime + descriptor probes for method/helper `substr()` equivalence and split bridge; focused Rust `terse_2_3_5_3` test filter | String/scalar method backfill is already satisfied by the current Perl/Rust surface. `substr()` is an accepted receiver method, helper-form and method-form `substr` both return `BCD` in the focused Perl probe, descriptor metadata stays language-agnostic-ready with zero fallback/raw/unresolved counts, and focused Rust tests pass. The useful pure string receiver set from `.7.1` is already implemented and documented; statement regex substitution remains an explicit mutation boundary. Frontier becomes `.7.3`. |
 | `2026-07-04` | `SPEC-FORMAT-TERSE.7.1` | KM retrieval for existing receiver-chain facts; Perl/Rust receiver classifier inventory; mdBook helper-catalog receiver-boundary update; Knowledge Map fact card/regeneration/check; focused classifier scans; Rust corpus oracle; mdBook build; memory/doctrine/diff gates; full local CI | Supported runtime receiver families are inventoried before implementation: string/scalar, array/list, hash, and number have existing receiver-method tables; booleans/flow results are terminal; expression-valued blocks and user-function returns dispatch by yielded runtime type. String `substr()` is already in the receiver family, so `.7.2` starts with verification/backfill evidence rather than an implementation assumption. Mutation, lifecycle/control, child-dispatch, parser-state reader, declaration, and compatibility surfaces remain function/statement/lifecycle-only unless a future leaf defines safe receiver semantics. Frontier becomes `.7.2`. |
 | `2026-07-04` | `SPEC-FORMAT-TERSE.6.4` | KM retrieval for declare retirement; implementation/doc inventory for declaration helper support; ADR `0018`; mdBook declaration/helper policy updates; Knowledge Map fact card/regeneration/check; declaration-support scans; Rust corpus oracle; mdBook build; memory/doctrine/diff gates; full local CI | Post-migration policy is compatibility retention. `declare(...)` and declaration aliases remain accepted legacy compatibility for existing specs, but new authoring/current examples use terse replacements. No implementation removal is done in this slice. Future removal/diagnostics require a new focused leaf. Declaration-retirement `.6` closes and frontier becomes `.7.1`. |

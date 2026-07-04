@@ -787,6 +787,21 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.7.3 — array numeric reducer receiver methods ──
+    #
+    # Numeric aggregate reducers are pure terminal methods on array receivers.
+    # The fixture also locks the documented single-array min/max helper forms
+    # that the receiver methods dispatch through.
+    {   case   => 'terse_7_3_array_numeric_reducer_receiver_methods',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { scores += 1; scores += 5; scores += 3; scores += 5; return(array(scores.sum(), scores.avg(), scores.median(), scores.range(), scores.min(), scores.max(), scores.sorted().take(3).avg(), scores.uniq().sum(), num_min(array(scores)), num_max(array(scores)), min(scores), max(scores))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.3.2.1 — numeric word aliases ──
     #
     # Function-form numeric word aliases map to the existing num_* family.

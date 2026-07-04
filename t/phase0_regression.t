@@ -46515,6 +46515,66 @@ subtest 'spec_format_terse_2_3_5_4_number_receiver_value_chains' => sub {
         'number receiver value-chain spec remains language-agnostic ActionIR ready');
 };
 
+subtest 'spec_format_terse_7_3_array_numeric_reducer_receiver_methods' => sub {
+    # SPEC-FORMAT-TERSE.7.3: numeric aggregate reducers are pure terminal
+    # methods on array receivers. Scalar number receiver min/max remain the
+    # first-argument numeric helper form owned by .2.3.5.4.
+    plan tests => 11;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    like($L->('return(scores.sum())'), qr/__ls_num_sum_total.*\@scores/s,
+        'array receiver sum lowers through the numeric aggregate reducer');
+    like($L->('return(scores.sorted().take(3).avg())'), qr/sort .*__ls_num_avg_source/s,
+        'array receiver avg can terminate after array-returning receiver helpers');
+    like($L->('return(scores.min())'), qr/__ls_num_min_value.*\@scores/s,
+        'array receiver min lowers through the array-form numeric minimum reducer');
+    is($L->('return(scores.sum().drop_front(1))'), 'return undef',
+        'array numeric reducer terminals cannot continue through later array methods');
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { scores += 1; scores += 5; scores += 3; scores += 5; return(array(scores.sum(), scores.avg(), scores.median(), scores.range(), scores.min(), scores.max(), scores.sorted().take(3).avg(), scores.uniq().sum())) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'array numeric reducer receiver spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '[14,3.5,4,4,1,5,3,9]',
+        'array numeric reducer receiver methods return aggregate numbers without mutating the source array');
+
+    my $terminal_spec = "Top::\n"
+                      . " /x/ -> Done { scores += 1; scores += 2; return(array(scores.sum().drop_front(1), scores.min().sorted())) }\n"
+                      . "\nDone::\n /[a-z]+/\n";
+    my $terminal_parser = eval { LinkedSpec::Get(\$terminal_spec) };
+    ok(ref($terminal_parser) eq 'CODE', 'array numeric reducer terminal-continuation spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($terminal_parser, 'xhello'), '[null,null]',
+        'array numeric reducer terminals followed by later calls return undef');
+
+    my $src = $gen->($spec);
+    unlike($src, qr/\.(?:sum|avg|median|range|min|max)\b/,
+        'generated source has no raw receiver-dot numeric reducer residue');
+
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'array numeric reducer receiver spec has no canonical fallback');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'array numeric reducer receiver spec remains language-agnostic ActionIR ready');
+};
+
 subtest 'spec_format_terse_2_3_5_5_block_valued_receiver_chains' => sub {
     # SPEC-FORMAT-TERSE.2.3.5.5: expression-valued blocks can be receivers
     # for the same compatible array/hash/string/number value-chain families.

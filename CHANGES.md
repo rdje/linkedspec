@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-04 — SPEC-FORMAT-TERSE.7.3 — backfill array numeric reducer receiver methods
+
+**Scope:** Perl ActionIR receiver lowering, Rust runtime receiver dispatch, Rust integration tests, oracle corpus,
+mdBook helper/reference pages, task-tree/live docs, and Knowledge Map.
+
+**What changed:** Added terminal array/list receiver methods for numeric aggregate reducers: `sum`, `avg`,
+`median`, `range`, `min`, and `max`. Perl lowers them through the existing aggregate helper family, including
+array-returning receiver links such as `sorted().take(...)` and pure internal array-pipeline links such as
+`uniq()`. Rust accepts the same receiver methods, treats array terminal methods as chain-ending, and now supports
+the documented single-array `num_min(array_expr)` / `num_max(array_expr)` plus `min(array_expr)` / `max(array_expr)`
+forms. Hash receiver methods from `.7.1` already cover the useful pure hash surface; mutating and ambiguous
+helpers remain explicit statement/function forms.
+
+**Evidence:** Perl phase0 passes with **1021** tests. Focused Rust `terse_7_3` tests pass. The oracle generator
+now emits **74** fixtures including `terse_7_3_array_numeric_reducer_receiver_methods`, and Rust `corpus_oracle`
+passes all 74. `mdbook build docs/linkedspec-book` and `cargo fmt --manifest-path rust/Cargo.toml --all --check`
+pass.
+
 ## 2026-07-04 — SPEC-FORMAT-TERSE.7.2 — verify string method surface
 
 **Scope:** String/scalar receiver-method verification, task-tree/live docs, roadmap, and Knowledge Map. No parser,

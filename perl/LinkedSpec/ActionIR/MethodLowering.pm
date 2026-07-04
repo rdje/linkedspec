@@ -838,6 +838,8 @@ sub _actionir_ast_known_value_call_method {
   array hash array_copy hash_copy copy flat flat_array flat_hash
   count first last drop_front take slice take_last drop_back concat_arrays split split_tagged_records
   sorted reversed contains index_of split_each trim_each filter_nonempty lowercase_each uppercase_each
+  __array_value_split_each __array_value_trim_each __array_value_filter_nonempty __array_value_lowercase_each
+  __array_value_uppercase_each __array_value_uniq __array_value_filter_match
   uniq filter_match count_keys sorted_keys sorted_values has_key merge_hash rename_key drop_keys pick_keys
   join_values
   input_slice input_text input_len input_end_pos input_end_line input_end_col
@@ -2019,8 +2021,32 @@ sub _lower_method_value_expr {
    return 'do { my $__ls_array_pipeline_source = '.$source_expr.'; if (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq \'ARRAY\') { my %__ls_array_pipeline_seen; [grep { my $__ls_array_pipeline_key = defined($_) ? "S$_" : "U"; !$__ls_array_pipeline_seen{$__ls_array_pipeline_key}++ } @{$__ls_array_pipeline_source}] } else { [] } }';
  }
 
-  return undef
- };
+ return undef
+};
+my $lower_internal_array_pipeline_target_expr = sub {
+ my ($target_expr) = @_;
+ return undef unless defined($target_expr) && $target_expr =~ /^\s*__array_value_/o;
+ my $pipeline_deps = ref($deps) eq 'HASH' ? { %$deps } : {};
+ delete $pipeline_deps->{__actionir_ast_value_lowering_compat_bridge};
+ return _lower_method_value_expr($target_expr, $pipeline_deps)
+};
+my $lower_numeric_array_reducer_source_expr = sub {
+ my ($method, $source_expr) = @_;
+ return undef unless defined($method) && defined($source_expr) && length($source_expr);
+ return 'do { my $__ls_num_sum_source = '.$source_expr.'; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq \'ARRAY\') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } }'
+  if $method eq 'num_sum';
+ return 'do { my $__ls_num_avg_source = '.$source_expr.'; if (defined($__ls_num_avg_source) && ref($__ls_num_avg_source) eq \'ARRAY\') { my $__ls_num_avg_total = 0; my $__ls_num_avg_count = 0; my $__ls_num_avg_ok = 1; for my $__ls_num_avg_term (@{$__ls_num_avg_source}) { if (!(defined($__ls_num_avg_term) && $__ls_num_avg_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_avg_ok = 0; last; } $__ls_num_avg_total += $__ls_num_avg_term; $__ls_num_avg_count++; } $__ls_num_avg_ok ? ($__ls_num_avg_count ? ($__ls_num_avg_total / $__ls_num_avg_count) : undef) : undef } else { undef } }'
+  if $method eq 'num_avg';
+ return 'do { my $__ls_num_median_source = '.$source_expr.'; if (defined($__ls_num_median_source) && ref($__ls_num_median_source) eq \'ARRAY\') { my @__ls_num_median_terms = @{$__ls_num_median_source}; my $__ls_num_median_ok = 1; for my $__ls_num_median_term (@__ls_num_median_terms) { if (!(defined($__ls_num_median_term) && $__ls_num_median_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_median_ok = 0; last; } } if ($__ls_num_median_ok && @__ls_num_median_terms) { @__ls_num_median_terms = sort { $a <=> $b } @__ls_num_median_terms; my $__ls_num_median_count = scalar(@__ls_num_median_terms); my $__ls_num_median_mid = int($__ls_num_median_count / 2); ($__ls_num_median_count % 2) ? $__ls_num_median_terms[$__ls_num_median_mid] : (($__ls_num_median_terms[$__ls_num_median_mid - 1] + $__ls_num_median_terms[$__ls_num_median_mid]) / 2) } else { undef } } else { undef } }'
+  if $method eq 'num_median';
+ return 'do { my $__ls_num_range_source = '.$source_expr.'; if (defined($__ls_num_range_source) && ref($__ls_num_range_source) eq \'ARRAY\') { my $__ls_num_range_min; my $__ls_num_range_max; my $__ls_num_range_seen = 0; my $__ls_num_range_ok = 1; for my $__ls_num_range_term (@{$__ls_num_range_source}) { if (!(defined($__ls_num_range_term) && $__ls_num_range_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_range_ok = 0; last; } if ($__ls_num_range_seen) { $__ls_num_range_min = $__ls_num_range_term if $__ls_num_range_term < $__ls_num_range_min; $__ls_num_range_max = $__ls_num_range_term if $__ls_num_range_term > $__ls_num_range_max; } else { $__ls_num_range_min = $__ls_num_range_term; $__ls_num_range_max = $__ls_num_range_term; $__ls_num_range_seen = 1; } } $__ls_num_range_ok ? ($__ls_num_range_seen ? ($__ls_num_range_max - $__ls_num_range_min) : undef) : undef } else { undef } }'
+  if $method eq 'num_range';
+ return 'do { my $__ls_num_min_source = '.$source_expr.'; if (defined($__ls_num_min_source) && ref($__ls_num_min_source) eq \'ARRAY\') { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@{$__ls_num_min_source}) { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef } else { undef } }'
+  if $method eq 'num_min';
+ return 'do { my $__ls_num_max_source = '.$source_expr.'; if (defined($__ls_num_max_source) && ref($__ls_num_max_source) eq \'ARRAY\') { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@{$__ls_num_max_source}) { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef } else { undef } }'
+  if $method eq 'num_max';
+ return undef
+};
  my $legacy_method_value_expr = sub {
   my ($source_expr) = @_;
   return undef unless defined $source_expr;
@@ -2921,8 +2947,28 @@ sub _lower_method_value_expr {
   return undef unless defined($method) && length($method);
 
   my @arg_exprs;
+  my @internal_array_pipeline_arg_exprs;
   foreach my $arg (@$args) {
    my $arg_expr = $lower_ast_scalar_assignment_value_node->($arg);
+   my $internal_array_pipeline_arg_expr;
+   if (!(defined($arg_expr) && length($arg_expr))
+       && ref($arg) eq 'HASH'
+       && ($arg->{kind} // '') eq 'call'
+       && defined($arg->{name})
+       && $arg->{name} =~ /^__array_value_/o) {
+    my @pipeline_args;
+    foreach my $pipeline_arg (@{$arg->{args} || []}) {
+     my $pipeline_arg_expr = $ast_expr_source_node->($pipeline_arg);
+     $pipeline_arg_expr = $pipeline_arg->{source}
+      if ref($pipeline_arg) eq 'HASH' && !(defined($pipeline_arg_expr) && length($pipeline_arg_expr));
+     return undef unless defined($pipeline_arg_expr) && length($pipeline_arg_expr);
+     push @pipeline_args, $pipeline_arg_expr;
+    }
+    $internal_array_pipeline_arg_expr = $lower_array_pipeline_value_expr->({
+     method => $arg->{name},
+     args => \@pipeline_args,
+    });
+   }
    if (!(defined($arg_expr) && length($arg_expr)) && $method eq 'array' && @$args != 1) {
     my $arg_kind = ref($arg) eq 'HASH' ? ($arg->{kind} // '') : '';
     $arg_expr = $lower_ast_value_node->($arg, { bare_scalar_read => 1 })
@@ -2938,6 +2984,15 @@ sub _lower_method_value_expr {
    $arg_expr = $arg->{source} unless defined($arg_expr) && length($arg_expr);
    return undef unless defined($arg_expr) && length($arg_expr);
    push @arg_exprs, $arg_expr;
+   push @internal_array_pipeline_arg_exprs, $internal_array_pipeline_arg_expr;
+  }
+
+  if (@arg_exprs == 1 && $method =~ /^(?:num_sum|num_avg|num_median|num_range|num_min|num_max)$/o) {
+   my $pipeline_target = $internal_array_pipeline_arg_exprs[0];
+   $pipeline_target = $lower_internal_array_pipeline_target_expr->($arg_exprs[0])
+    unless defined($pipeline_target) && length($pipeline_target);
+   my $pipeline_reducer = $lower_numeric_array_reducer_source_expr->($method, $pipeline_target);
+   return $pipeline_reducer if defined($pipeline_reducer) && length($pipeline_reducer);
   }
 
   return $legacy_method_value_expr->($method.'('.join(', ', @arg_exprs).')')
@@ -2998,6 +3053,10 @@ sub _lower_method_value_expr {
    if ($method eq 'join_values') {
     return undef unless @$arg_exprs == 1;
     return ['join_values('.$arg_exprs->[0].', '.$current_expr.')', 'terminal'];
+   }
+   if ($method =~ /^(?:sum|avg|median|range|min|max)$/o) {
+    return undef unless @$arg_exprs == 0;
+    return [$method.'('.$current_expr.')', 'terminal'];
    }
    if ($method =~ /^(?:split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o) {
     return ['__array_value_'.$method.'('.join(', ', ($current_expr, @$arg_exprs)).')', 'array'];
@@ -3147,11 +3206,14 @@ sub _lower_method_value_expr {
   if (_is_array_receiver_value_chain_method($first_method)) {
    return undef if defined($receiver_expr) && $receiver_expr =~ /^hash\s*\(/o;
    my $current_expr = $receiver_expr;
+   my $current_family = 'array';
    for (my $idx = 0; $idx < @$calls; ++$idx) {
+    return 'undef' if $current_family eq 'terminal';
     my $call = $calls->[$idx];
     my $applied = $append_array_chain_call->($current_expr, $call);
     return undef unless ref($applied) eq 'ARRAY';
-    $current_expr = $applied->[0];
+    ($current_expr, $current_family) = @$applied;
+    return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
    }
    return $lower_synthetic_chain_expr->($current_expr)
   }
@@ -3446,14 +3508,20 @@ if ($method_call && $method_call->{method} eq 'num_sum') {
 
  my $target_expr = $trim_action_ir_value->($num_sum_args->[0]);
  return undef unless defined($target_expr) && length($target_expr);
- return undef unless $looks_like_array_value_expr->($target_expr);
+ my $target_call = $parse_method_function_expr->($target_expr);
+ my $pipeline_target = $lower_array_pipeline_value_expr->($target_call);
+ $pipeline_target = $lower_internal_array_pipeline_target_expr->($target_expr)
+  unless defined($pipeline_target) && length($pipeline_target);
+ return undef unless $looks_like_array_value_expr->($target_expr)
+                  || (defined($pipeline_target) && length($pipeline_target));
 
  my $array_symbol = $extract_array_symbol_name->($target_expr);
  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
   return 'do { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@'.$array_symbol.') { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef }';
  }
 
- my $lowered_target = _lower_method_value_expr($target_expr, $deps);
+ my $lowered_target = $pipeline_target;
+ $lowered_target = _lower_method_value_expr($target_expr, $deps) unless defined($lowered_target) && length($lowered_target);
  $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
  return undef unless defined($lowered_target) && length($lowered_target);
 
@@ -3465,14 +3533,20 @@ if ($method_call && $method_call->{method} eq 'num_avg') {
 
  my $target_expr = $trim_action_ir_value->($num_avg_args->[0]);
  return undef unless defined($target_expr) && length($target_expr);
- return undef unless $looks_like_array_value_expr->($target_expr);
+ my $target_call = $parse_method_function_expr->($target_expr);
+ my $pipeline_target = $lower_array_pipeline_value_expr->($target_call);
+ $pipeline_target = $lower_internal_array_pipeline_target_expr->($target_expr)
+  unless defined($pipeline_target) && length($pipeline_target);
+ return undef unless $looks_like_array_value_expr->($target_expr)
+                  || (defined($pipeline_target) && length($pipeline_target));
 
  my $array_symbol = $extract_array_symbol_name->($target_expr);
  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
   return 'do { my $__ls_num_avg_total = 0; my $__ls_num_avg_count = 0; my $__ls_num_avg_ok = 1; for my $__ls_num_avg_term (@'.$array_symbol.') { if (!(defined($__ls_num_avg_term) && $__ls_num_avg_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_avg_ok = 0; last; } $__ls_num_avg_total += $__ls_num_avg_term; $__ls_num_avg_count++; } $__ls_num_avg_ok ? ($__ls_num_avg_count ? ($__ls_num_avg_total / $__ls_num_avg_count) : undef) : undef }';
  }
 
- my $lowered_target = _lower_method_value_expr($target_expr, $deps);
+ my $lowered_target = $pipeline_target;
+ $lowered_target = _lower_method_value_expr($target_expr, $deps) unless defined($lowered_target) && length($lowered_target);
  $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
  return undef unless defined($lowered_target) && length($lowered_target);
 
@@ -3490,7 +3564,11 @@ if ($method_call && $method_call->{method} eq 'num_median') {
   return 'do { my @__ls_num_median_terms = @'.$array_symbol.'; my $__ls_num_median_ok = 1; for my $__ls_num_median_term (@__ls_num_median_terms) { if (!(defined($__ls_num_median_term) && $__ls_num_median_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_median_ok = 0; last; } } if ($__ls_num_median_ok && @__ls_num_median_terms) { @__ls_num_median_terms = sort { $a <=> $b } @__ls_num_median_terms; my $__ls_num_median_count = scalar(@__ls_num_median_terms); my $__ls_num_median_mid = int($__ls_num_median_count / 2); ($__ls_num_median_count % 2) ? $__ls_num_median_terms[$__ls_num_median_mid] : (($__ls_num_median_terms[$__ls_num_median_mid - 1] + $__ls_num_median_terms[$__ls_num_median_mid]) / 2) } else { undef } }';
  }
 
- my $lowered_target = _lower_method_value_expr($target_expr, $deps);
+ my $target_call = $parse_method_function_expr->($target_expr);
+ my $lowered_target = $lower_array_pipeline_value_expr->($target_call);
+ $lowered_target = $lower_internal_array_pipeline_target_expr->($target_expr)
+  unless defined($lowered_target) && length($lowered_target);
+ $lowered_target = _lower_method_value_expr($target_expr, $deps) unless defined($lowered_target) && length($lowered_target);
  $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
  return undef unless defined($lowered_target) && length($lowered_target);
 
@@ -3508,7 +3586,11 @@ if ($method_call && $method_call->{method} eq 'num_range') {
   return 'do { my $__ls_num_range_min; my $__ls_num_range_max; my $__ls_num_range_seen = 0; my $__ls_num_range_ok = 1; for my $__ls_num_range_term (@'.$array_symbol.') { if (!(defined($__ls_num_range_term) && $__ls_num_range_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_range_ok = 0; last; } if ($__ls_num_range_seen) { $__ls_num_range_min = $__ls_num_range_term if $__ls_num_range_term < $__ls_num_range_min; $__ls_num_range_max = $__ls_num_range_term if $__ls_num_range_term > $__ls_num_range_max; } else { $__ls_num_range_min = $__ls_num_range_term; $__ls_num_range_max = $__ls_num_range_term; $__ls_num_range_seen = 1; } } $__ls_num_range_ok ? ($__ls_num_range_seen ? ($__ls_num_range_max - $__ls_num_range_min) : undef) : undef }';
  }
 
- my $lowered_target = _lower_method_value_expr($target_expr, $deps);
+ my $target_call = $parse_method_function_expr->($target_expr);
+ my $lowered_target = $lower_array_pipeline_value_expr->($target_call);
+ $lowered_target = $lower_internal_array_pipeline_target_expr->($target_expr)
+  unless defined($lowered_target) && length($lowered_target);
+ $lowered_target = _lower_method_value_expr($target_expr, $deps) unless defined($lowered_target) && length($lowered_target);
  $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
  return undef unless defined($lowered_target) && length($lowered_target);
 
@@ -3641,7 +3723,11 @@ if ($method_call && $method_call->{method} eq 'num_add') {
     return 'do { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@'.$array_symbol.') { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef }';
    }
 
-   my $lowered_target = _lower_method_value_expr($target_expr, $deps);
+   my $target_call = $parse_method_function_expr->($target_expr);
+   my $lowered_target = $lower_array_pipeline_value_expr->($target_call);
+   $lowered_target = $lower_internal_array_pipeline_target_expr->($target_expr)
+    unless defined($lowered_target) && length($lowered_target);
+   $lowered_target = _lower_method_value_expr($target_expr, $deps) unless defined($lowered_target) && length($lowered_target);
    $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
    return undef unless defined($lowered_target) && length($lowered_target);
 
@@ -3671,7 +3757,11 @@ if ($method_call && $method_call->{method} eq 'num_add') {
     return 'do { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@'.$array_symbol.') { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef }';
    }
 
-   my $lowered_target = _lower_method_value_expr($target_expr, $deps);
+   my $target_call = $parse_method_function_expr->($target_expr);
+   my $lowered_target = $lower_array_pipeline_value_expr->($target_call);
+   $lowered_target = $lower_internal_array_pipeline_target_expr->($target_expr)
+    unless defined($lowered_target) && length($lowered_target);
+   $lowered_target = _lower_method_value_expr($target_expr, $deps) unless defined($lowered_target) && length($lowered_target);
    $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
    return undef unless defined($lowered_target) && length($lowered_target);
 
@@ -4962,7 +5052,7 @@ sub _split_receiver_dot_method_expr {
 sub _is_array_receiver_value_chain_method {
  my ($method) = @_;
  return 0 unless defined $method;
- return $method =~ /^(?:array_copy|copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count|first|last|contains|index_of|is_empty|is_nonempty|join_values)$/o ? 1 : 0
+ return $method =~ /^(?:array_copy|copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count|first|last|contains|index_of|is_empty|is_nonempty|join_values|sum|avg|median|range|min|max)$/o ? 1 : 0
 }
 
 sub _hash_receiver_value_chain_return_family {
@@ -5070,19 +5160,33 @@ sub _normalize_array_receiver_value_chain_expr {
  return undef unless @calls;
 
  my $current_expr = $receiver_expr;
- foreach my $call (@calls) {
+ my $current_family = 'array';
+ for (my $idx = 0; $idx < @calls; ++$idx) {
+  return 'undef' if $current_family eq 'terminal';
+  my $call = $calls[$idx];
   my $method = $call->{method} // '';
   my @args = @{$call->{args} || []};
   if ($method eq 'join_values') {
    return undef unless @args == 1;
    $current_expr = 'join_values('.$args[0].', '.$current_expr.')';
+   $current_family = 'terminal';
+   next;
+  }
+  if ($method =~ /^(?:sum|avg|median|range|min|max)$/o) {
+   return undef unless @args == 0;
+   $current_expr = $method.'('.$current_expr.')';
+   $current_family = 'terminal';
    next;
   }
   if ($method =~ /^(?:split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o) {
    $current_expr = '__array_value_'.$method.'('.join(', ', ($current_expr, @args)).')';
+   $current_family = 'array';
    next;
   }
   $current_expr = $method.'('.join(', ', ($current_expr, @args)).')';
+  $current_family = ($method =~ /^(?:array_copy|copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays)$/o)
+   ? 'array'
+   : 'terminal';
  }
 
  return $current_expr;
@@ -5231,6 +5335,12 @@ sub _normalize_string_receiver_value_chain_expr {
     $current_family = 'terminal';
     next;
    }
+   if ($method =~ /^(?:sum|avg|median|range|min|max)$/o) {
+    return undef unless @args == 0;
+    $current_expr = $method.'('.$current_expr.')';
+    $current_family = 'terminal';
+    next;
+   }
    if ($method =~ /^(?:split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o) {
     $current_expr = '__array_value_'.$method.'('.join(', ', ($current_expr, @args)).')';
     $current_family = 'array';
@@ -5318,6 +5428,12 @@ sub _normalize_hash_receiver_value_chain_expr {
    if ($method eq 'join_values') {
     return undef unless @args == 1;
     $current_expr = 'join_values('.$args[0].', '.$current_expr.')';
+    $current_family = 'terminal';
+    next;
+   }
+   if ($method =~ /^(?:sum|avg|median|range|min|max)$/o) {
+    return undef unless @args == 0;
+    $current_expr = $method.'('.$current_expr.')';
     $current_family = 'terminal';
     next;
    }

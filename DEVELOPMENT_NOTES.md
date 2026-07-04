@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-04 (SPEC-FORMAT-TERSE.7.3 — array numeric reducer receiver methods):
+  Array/list receivers now have terminal numeric reducer methods: `sum`, `avg`, `median`, `range`, `min`, and
+  `max`. Keep these in the array receiver family, not the scalar number receiver family. `score.min(3)` remains
+  the scalar numeric comparison/min helper shape, while `scores.min()` is the array-form aggregate reducer.
+  Reducer terminals must stop array chains: invalid continuations such as `scores.sum().drop_front(1)` return
+  `undef`/`null`. On the Perl side, receiver-chain `uniq()` must stay on the pure internal array-pipeline path
+  (`__array_value_uniq`) when feeding reducers; public `uniq(array(...))` still has statement/list-context
+  behavior in older paths and is not the right lowering for pure receiver composition. Rust mirrors the receiver
+  surface and now handles single-array `num_min`/`num_max` helper forms. Phase0 is 1021 green and the oracle corpus
+  is 74 fixtures after this slice.
+
 - 2026-07-04 (SPEC-FORMAT-TERSE.7.2 — string/scalar receiver methods verified):
   The string/scalar method backfill leaf required no code. `substr()` is already a receiver method, and focused
   probes show `"abcdef".substr(1, 3).uppercase()` equals `uppercase(substr("abcdef", 1, 3))` (`BCD`) with
