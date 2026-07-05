@@ -14,7 +14,7 @@ answers:
 date: 2026-07-04
 status: current
 tags: [spec-format-terse, operators, assignment, expressions, comparisons, task-tree]
-evidence: "User clarification on 2026-07-01 accepted the uniform operator-call doctrine: comparison operators should be captured as ordinary call/method spellings such as gt(a,b), >=(a,b), ne(a,b), and !=(a,b). The same clarification states that assign(a,b) is replaced by a = b, that =(a,b) is equivalent to a = b, and that assignment is an expression with a value. SPEC-FORMAT-TERSE.3.2.3.4 landed comparison symbol calls on 2026-07-02. SPEC-FORMAT-TERSE.3.3 audited assignment before code and split implementation into .3.3.1 scalar expression values, .3.3.2 aggregate target-kind expression values, .3.3.3 append/hash-index mutation expression values, and .3.3.4 compatibility/docs/oracle closure. SPEC-FORMAT-TERSE.3.3.4 temporarily kept assign(...) as a legacy alias only; SPEC-FORMAT-TERSE.6.2.3.2 later retired authored spec-file assign(...). Current syntax is target = value, =(target,value), or set(target,value). See [[terse-assignment-expression-closure]] and [[terse-retired-scalar-assign-spec-surface]]."
+evidence: "User clarification on 2026-07-01 accepted the uniform operator-call doctrine: comparison operators should be captured as ordinary call/method spellings such as gt(a,b), >=(a,b), ne(a,b), and !=(a,b). The same clarification states that assign(a,b) is replaced by a = b, that =(a,b) is equivalent to a = b, and that assignment is an expression with a value. SPEC-FORMAT-TERSE.3.2.3.4 landed comparison symbol calls on 2026-07-02. SPEC-FORMAT-TERSE.3.3 audited assignment before code and split implementation into .3.3.1 scalar expression values, .3.3.2 aggregate/direct-shape expression values, .3.3.3 append/hash-index mutation expression values, and .3.3.4 compatibility/docs/oracle closure. SPEC-FORMAT-TERSE.11.2 and .11.3 later changed bare direct-shape storage from target-kind inference to duck-typed value binding while preserving assignment expression values. SPEC-FORMAT-TERSE.3.3.4 temporarily kept assign(...) as a legacy alias only; SPEC-FORMAT-TERSE.6.2.3.2 later retired authored spec-file assign(...). Current syntax is target = value, =(target,value), or set(target,value). See [[terse-assignment-expression-closure]], [[terse-duck-typed-assignment-perl-reference]], [[terse-rust-duck-typed-assignment-parity]], and [[terse-retired-scalar-assign-spec-surface]]."
 reverify: "rg -n \"SPEC-FORMAT-TERSE\\.3\\.3|SPEC-FORMAT-TERSE\\.3\\.3\\.1|=\\(target, value\\)|statement-only|expression-valued assignment\" docs/tasks/SPEC-FORMAT-TERSE.md docs/TASK_TREE.md docs/knowledge/terse-expression-valued-assignment-and-operator-calls.md docs/linkedspec-book/src/appendix/helper-contract-catalog.md"
 ---
 
@@ -28,7 +28,7 @@ The accepted terse contract is uniform:
 - `target = value` is the canonical assignment spelling.
 - `=(target, value)` is the operator-call equivalent of `target = value`.
 - `assign(target, value)` was legacy migration debt and is now retired from authored specs.
-- Assignment has a value: the value stored in the target after assignment and target-kind inference.
+- Assignment has a value: the typed value stored in the target after assignment.
 
 The `.3.3` audit split implementation so the scalar, aggregate, append/hash-index, and compatibility/documentation
 contracts could land separately. `SPEC-FORMAT-TERSE.3.3.1` landed the scalar subset:
@@ -39,12 +39,13 @@ contracts could land separately. `SPEC-FORMAT-TERSE.3.3.1` landed the scalar sub
   compatibility was retired from authored specs by `.6.2.3.2`.
 - Nested scalar assignment expressions and receiver chains on the assigned scalar value are supported.
 
-`SPEC-FORMAT-TERSE.3.3.2` then landed the aggregate direct-shape subset:
+`SPEC-FORMAT-TERSE.3.3.2` then landed the direct-shape subset, whose expression-valued result remains current even
+though `.11.2`/`.11.3` later replaced bare target-kind storage inference with duck-typed value binding:
 
-- `return(items = [value])` stores the array working variable and yields the assigned array value.
-- `return(=(meta, { key => value }))` stores the hash working variable and yields the assigned hash value.
+- `return(items = [value])` binds an array value and yields that stored array value.
+- `return(=(meta, { key => value }))` binds a hash value and yields that stored hash value.
 - Matching explicit `array(target)` and `hash(target)` assignment targets yield aggregate snapshots.
-- Explicit `scalar(target)` assignment targets still keep scalar-held shape payloads.
+- Explicit aggregate targets still use aggregate storage.
 
 `SPEC-FORMAT-TERSE.3.3.3` then landed the mutation subset:
 

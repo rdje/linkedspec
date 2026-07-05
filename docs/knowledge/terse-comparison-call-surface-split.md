@@ -55,7 +55,8 @@ behind an explicit string-comparison bridge:
 - `.3.2.3.4`: done; comparison symbol callees now map to numeric `num_*` aliases.
 - `.3.3`: done/split; expression-valued assignment and `=(target,value)` equivalence are now split before code.
 - `.3.3.1`: done; scalar assignment expression values and scalar `=(target,value)` equivalence now ship.
-- `.3.3.2`: done; aggregate assignment expression values after target-kind inference now ship.
+- `.3.3.2`: done; direct-shape assignment expression values now ship, with current storage behavior superseded by
+  the later `.11` duck-typed assignment facts.
 - `.3.3.3`: done; array append and hash-index mutation expression values now ship.
 - `.3.3.4`: current next task; legacy function spelling cleanup and full assignment-expression closure.
 

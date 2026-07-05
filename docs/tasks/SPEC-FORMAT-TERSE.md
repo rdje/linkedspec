@@ -6,13 +6,17 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-05` (**`.11.2` DONE; Perl reference duck-typed assignment landed. Bare Perl assignment
-  targets now bind typed RHS values through one scalar value slot (`name = []` -> `$name = []`,
-  `set(name, { key => value })` -> `$name = {$key => $value}`), expression-valued assignment returns the
-  scalar-held value, generated-source collection records `my $name` rather than `my @name` / `my %name` solely
-  from RHS shape, and scalar-bound `array(name)` / `hash(name)` views read guarded snapshots. Explicit
-  `array(...)` / `hash(...)` mutation targets still use aggregate storage. Frontier moves to `.11.3` for Rust
-  parity. Prior **`.11.1` DONE; duck-typed assignment work split after mandatory bootstrap,
+- Last updated: `2026-07-05` (**`.11.3` DONE; Rust duck-typed assignment parity landed. Rust now scalar-binds
+  evaluated RHS typed values for bare `name = value`, `set(name, value)`, and `=(name, value)`, including direct
+  array/hash RHS shapes; explicit `array(...)` / `hash(...)` mutation targets remain aggregate storage, and
+  scalar-held typed views/copy/receiver/helper reads use guarded snapshots. Oracle corpus is regenerated to **91**
+  fixtures. Frontier moves to `.11.4` for nested mixed value paths. Prior **`.11.2` DONE; Perl reference
+  duck-typed assignment landed. Bare Perl assignment targets now bind typed RHS values through one scalar value
+  slot (`name = []` -> `$name = []`, `set(name, { key => value })` -> `$name = {$key => $value}`),
+  expression-valued assignment returns the scalar-held value, generated-source collection records `my $name`
+  rather than `my @name` / `my %name` solely from RHS shape, and scalar-bound `array(name)` / `hash(name)` views
+  read guarded snapshots. Explicit `array(...)` / `hash(...)` mutation targets still use aggregate storage. Prior
+  **`.11.1` DONE; duck-typed assignment work split after mandatory bootstrap,
   mdBook/code/Knowledge Map inventory, and focused toolbox probes. Current Perl/Rust still implement direct
   RHS-shape target-kind inference (`x = []` -> array storage, `x = {}` -> hash storage), which conflicts with the
   `.11` duck-typed value-binding contract. The frontier is `.11.2` for the Perl reference change, followed by
@@ -3061,10 +3065,10 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `deferred`
 
 - ID: `SPEC-FORMAT-TERSE.11`
-  Status: `active` (split 2026-07-05; `.11.1` and `.11.2` done; frontier `.11.3`)
+  Status: `active` (split 2026-07-05; `.11.1` through `.11.3` done; frontier `.11.4`)
   Goal: Adopt duck-typed `.spec` variable assignment semantics so variables bind typed values at runtime instead of
     exposing Perl-style scalar/array/hash storage classes through assignment inference.
-  Children: `.11.1` (done), `.11.2` (done), `.11.3` (active), `.11.4` (pending), `.11.5` (pending).
+  Children: `.11.1` (done), `.11.2` (done), `.11.3` (done), `.11.4` (active), `.11.5` (pending).
   Acceptance: The spec, parser, Perl lowering, Rust runtime, generated oracle corpus, active tests, mdBook, and
     Knowledge Map agree that `name = value` binds `name` to the typed value produced by the RHS. Scalar, number,
     string, array, and hash values are all legal RHS values; `name = [...]` binds an array value, `name = {...}`
@@ -3135,17 +3139,33 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.11.2 - implement Perl duck-typed assignment binding`
 
 - ID: `SPEC-FORMAT-TERSE.11.3`
-  Status: `active`
+  Status: `done` (2026-07-05)
   Goal: Rust runtime parity for duck-typed assignment and bare variable value reads.
   Acceptance: Rust `Expr::AssignScalar` and `set`/`=` helper execution bind the evaluated `RuntimeValue` to the
     named variable without retagging bare targets from direct RHS shape. Later assignments may replace a scalar
     with an array/hash value and vice versa. Rust integration and oracle fixtures must replace the old
     `.1.2.3.5.4` target-kind inference expectations.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-05.** Rust `Engine` removed the direct RHS-shape target-retagging path for bare
+    assignment and helper assignment. `Expr::AssignScalar`, statement-form `name = value`, and helper-form
+    `set(name, value)` / `=(name, value)` now evaluate the RHS and store the resulting `RuntimeValue` in the
+    scalar value slot, so direct array/hash RHS values are scalar-held typed values. Explicit raw `array(name)` and
+    `hash(name)` targets still route to aggregate storage. Guarded scalar-held snapshots now feed
+    `array(name)`, `hash(name)`, `copy(...)`, aggregate-consuming helper slots, and array/hash receiver chains when
+    `bare_kind(name)` is scalar. The final oracle pass also closed the narrow Perl reference fallback where
+    scalar-held `copy(name)` and bare array receiver chains still preferred aggregate storage unless explicitly
+    wrapped; the Perl declaration collector also now records the scalar slot for remembered-scalar `copy(name)`
+    instead of reintroducing aggregate preamble declarations. Focused Rust locks cover scalar-held direct-shape
+    assignment, replacement across scalar/array/hash shapes, bare `set(...)` value binding, explicit aggregate
+    targets, scalar-slot shorthand readback, and the `.3.3.2`/`.3.3.4` assignment-expression cases. Perl
+    syntax/probe checks cover scalar-held copy/receiver readback and declaration collection.
+    `tools/gen_oracle_corpus.pl` regenerated the oracle corpus to **91** manifest-listed fixtures with
+    `.11.3` cases replacing the old `.1.2.3.5.4` expectations, and the Rust corpus oracle passes. Broad
+    `prove -q -Iperl t/phase0_regression.t` completes with the `.11` locks clean and one known unrelated failure:
+    `emit_context_lowers_split_tagged_records_helper` still reports `unresolved_helper_count == 1`.
+  Commit: `SPEC-FORMAT-TERSE.11.3 - implement Rust duck-typed assignment parity`
 
 - ID: `SPEC-FORMAT-TERSE.11.4`
-  Status: `pending`
+  Status: `active`
   Goal: Specify and implement nested mixed array/hash value-path reads and writes.
   Acceptance: Nested paths through duck-typed values support arbitrary hash-then-array, array-then-hash, and longer
     mixed read/write combinations in statement and expression-valued assignment contexts. Missing intermediate
@@ -3232,12 +3252,11 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SPEC-FORMAT-TERSE.11.3` | `active` | Rust parity follows the completed Perl reference assignment semantics change |
-| 2 | `SPEC-FORMAT-TERSE.11.4` | `pending` | nested mixed array/hash value paths need explicit semantics after top-level binding is corrected |
-| 3 | `SPEC-FORMAT-TERSE.11.5` | `pending` | docs/KM/corpus/mdBook closeout follows implementation |
-| 4 | `SPEC-FORMAT-TERSE.15` | `pending` | user directive removes colon-prefixed scalar variable references from the future duck-typed surface |
-| 5 | `SPEC-FORMAT-TERSE.8` | `pending` | user directive removes all remaining legacy compatibility helper support; in-flight helper-removal work must stay aligned with `.11` assignment semantics |
-| 6 | `SPEC-FORMAT-TERSE.9` | `pending` | user directive replaces Perlish hash-literal `=>` association with terse `:` association after helper-removal / assignment-semantics coordination lands |
+| 1 | `SPEC-FORMAT-TERSE.11.4` | `active` | nested mixed array/hash value paths need explicit semantics after top-level binding is corrected on Perl/Rust |
+| 2 | `SPEC-FORMAT-TERSE.11.5` | `pending` | docs/KM/corpus/mdBook closeout follows nested-path implementation |
+| 3 | `SPEC-FORMAT-TERSE.15` | `pending` | user directive removes colon-prefixed scalar variable references from the future duck-typed surface |
+| 4 | `SPEC-FORMAT-TERSE.8` | `pending` | user directive removes all remaining legacy compatibility helper support; in-flight helper-removal work must stay aligned with `.11` assignment semantics |
+| 5 | `SPEC-FORMAT-TERSE.9` | `pending` | user directive replaces Perlish hash-literal `=>` association with terse `:` association after helper-removal / assignment-semantics coordination lands |
 | — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.12` | `deferred` / `spec backlog` | track future hash-tree attached-block traversal; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.13` | `deferred` / `backlog` | track lower-priority array-tree traversal analog; not PNT-eligible until explicitly activated |
@@ -4201,6 +4220,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-05` | `SPEC-FORMAT-TERSE.11.3` | Perl syntax/probe checks for scalar-held `copy(...)`, receiver-chain readback, and declaration collection; focused Rust runtime tests for `terse_11_3`, `terse_6_2_3_1_scalar_slot_shorthand_runs`, `terse_3_3_2_aggregate_assignment_expressions_run`, and `terse_3_3_4_assignment_expression_closure_run`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; broad phase0 with one unrelated known failure | Rust duck-typed assignment parity landed and the oracle-exposed Perl scalar-held copy/receiver fallback gap was closed. Bare Rust assignment and `set`/`=` helper forms now bind evaluated scalar/array/hash `RuntimeValue`s through the scalar value slot, while explicit `array(...)` / `hash(...)` targets remain aggregate storage. Scalar-held typed views feed typed wrappers, `copy(...)`, aggregate-consuming helper slots, and receiver chains; Perl generated source keeps those scalar-held reads on scalar preambles. Oracle corpus regenerated to **91** fixtures with `.11.3` cases replacing the old `.1.2.3.5.4` target-kind expectations. Phase0's remaining failure is `emit_context_lowers_split_tagged_records_helper`, outside this leaf. Frontier becomes `.11.4`. |
 | `2026-07-04` | `SPEC-FORMAT-TERSE.7.4` | KM retrieval for type-method/receiver-chain facts; drift scans for stale `.7` frontier text, 73/74 fixture wording, receiver-family summaries, numeric reducer statements, tests, corpus, and Knowledge Map facts; mdBook build; memory/doctrine/KM/diff gates | No Perl/Rust behavior change needed. Current roadmap, task-tree index, mdBook helper/reference summaries, and Knowledge Map facts now agree that array numeric reducers are terminal array/list receiver methods, not scalar number receiver links; mutation/lifecycle/control/child-dispatch/parser-state/declaration/compatibility helpers remain explicit. `.7` is closed and the `SPEC-FORMAT-TERSE` frontier is empty. |
 | `2026-07-04` | `SPEC-FORMAT-TERSE.7.3` | KM retrieval for receiver-chain facts; Perl/Rust receiver classifier and reducer-target audit; Perl lowering/runtime/descriptor probes for `scores.sum()` and `scores.uniq().sum()`; `perl -c -Iperl perl/LinkedSpec/ActionIR/MethodLowering.pm`; `prove -q -Iperl t/phase0_regression.t`; focused Rust `terse_7_3` integration tests; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; `cargo fmt --manifest-path rust/Cargo.toml --all --check`; `mdbook build docs/linkedspec-book` | Array/list numeric reducers are now terminal receiver methods: `sum`, `avg`, `median`, `range`, `min`, and `max`. Perl composes them after array-returning links, including pure internal array-pipeline links such as `uniq()`, with zero fallback/raw/unresolved descriptor counts. Rust accepts the same receiver methods, treats array terminals as chain-ending, and supports documented single-array `num_min`/`num_max` helper forms. Hash receiver backfill required no new pure methods; mutation/ambiguous helpers remain explicit. Phase0 passes with **1021** tests; oracle corpus passes **74 fixtures**. Frontier becomes `.7.4`. |
 | `2026-07-04` | `SPEC-FORMAT-TERSE.7.2` | KM retrieval for string receiver chains; mdBook helper/reference audit; Perl runtime + descriptor probes for method/helper `substr()` equivalence and split bridge; focused Rust `terse_2_3_5_3` test filter | String/scalar method backfill is already satisfied by the current Perl/Rust surface. `substr()` is an accepted receiver method, helper-form and method-form `substr` both return `BCD` in the focused Perl probe, descriptor metadata stays language-agnostic-ready with zero fallback/raw/unresolved counts, and focused Rust tests pass. The useful pure string receiver set from `.7.1` is already implemented and documented; statement regex substitution remains an explicit mutation boundary. Frontier becomes `.7.3`. |
@@ -4316,6 +4336,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.11.3` | `SPEC-FORMAT-TERSE.11.3 - implement Rust duck-typed assignment parity` | Rust now scalar-binds bare assignment RHS values, including direct array/hash shapes, and keeps explicit `array(...)` / `hash(...)` targets as aggregate storage. Oracle corpus is 91 fixtures; frontier becomes `.11.4`. |
+| `SPEC-FORMAT-TERSE.11.2` | `SPEC-FORMAT-TERSE.11.2 - implement Perl duck-typed assignment binding` | Perl reference bare assignment now binds typed RHS values through scalar storage; explicit aggregate targets remain aggregate storage; frontier became `.11.3`. |
+| `SPEC-FORMAT-TERSE.11.1` | `SPEC-FORMAT-TERSE.11.1 - split duck-typed assignment work` | Split duck-typed assignment after bootstrap, code/book/KM inventory, and toolbox probes; frontier became `.11.2`. |
 | `SPEC-FORMAT-TERSE.7.4` | `SPEC-FORMAT-TERSE.7.4 - close type-method no-drift sweep` | Roadmap/task-tree/mdBook/KM receiver-family summaries are reconciled after `.7.3`; type-method lane closes with no Perl/Rust behavior change; no `SPEC-FORMAT-TERSE` leaf is currently pending. |
 | `SPEC-FORMAT-TERSE.7.3` | `SPEC-FORMAT-TERSE.7.3 - backfill array numeric reducer receiver methods` | Array/list numeric reducers `sum`, `avg`, `median`, `range`, `min`, and `max` are terminal receiver methods on Perl/Rust; invalid continuations return `undef`/`null`; phase0 1021 and oracle 74 fixtures pass. |
 | `SPEC-FORMAT-TERSE.7.2` | `SPEC-FORMAT-TERSE.7.2 - verify string method surface` | String/scalar receiver methods, including `substr()`, are already implemented and documented on Perl/Rust; focused probes/tests verify helper-method equivalence; no parser/runtime/book behavior change was needed, and frontier becomes `.7.3`. |
@@ -4428,6 +4451,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.4.2` | `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls` | Perl inline value-control lowering landed for `if`/`switch` in supported value positions; corpus 46 passes and frontier becomes `.2.3.5`. |
 
 ## Changelog
+
+- `2026-07-05`: **`.11.3` DONE — Rust duck-typed assignment parity landed.**
+  Rust now matches the Perl `.11.2` value-binding contract. Bare `name = value`, `set(name, value)`, and
+  `=(name, value)` bind scalar, array, or hash RHS values as the variable's current typed value; direct RHS shape
+  no longer retags bare targets into array/hash aggregate storage. Explicit `array(...)` / `hash(...)` targets
+  remain aggregate storage, and scalar-held typed snapshots feed `array(name)`, `hash(name)`, `copy(...)`,
+  aggregate-consuming helper slots, and compatible receiver chains. The same leaf closed the Perl reference
+  fallback order for scalar-held `copy(name)` and bare array receiver chains after the oracle exposed the mismatch.
+  Frontier moves to `.11.4`.
 
 - `2026-07-05`: **`.15` OWNED — remove colon scalar references from duck-typed surface.**
   User directive logs the removal of `:name` scalar variable references now that variables are duck-typed runtime

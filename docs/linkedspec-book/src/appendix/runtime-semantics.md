@@ -236,12 +236,12 @@ Use `:value` when the source should be visibly scalar without the long `:value` 
 Assignment also has a value form. `name = "ok"` and `=(name, "ok")` store the scalar and evaluate to the stored
 value, so they can appear inside `return(...)`, helper arguments, expression-valued blocks, user-function bodies,
 and compatible scalar receiver chains such as `=(raw, " text ").trim()`. Direct shape RHS assignments participate
-in the same value contract after target-kind inference: `items = [value]`, `set(items, [value])`, and
-`=(items, [value])` store `items` as an array and evaluate to the assigned array value; `meta = { key => value }`
-stores `meta` as a hash and evaluates to the assigned hash value. Explicit `:payload` and `:payload`
-targets keep scalar-held shape payloads. Mutation assignments also have expression values: `items += value` appends to the
-named array and evaluates to the updated array snapshot, while `meta[key] = value` updates the named hash and
-evaluates to the updated hash snapshot.
+in the same value contract as typed value binding: `items = [value]`, `set(items, [value])`, and
+`=(items, [value])` bind an array value to `items` and evaluate to that stored array value; `meta = { key => value }`
+binds a hash value and evaluates to that stored hash value. Explicit `set(array(items), ...)` and
+`set(hash(meta), ...)` targets remain aggregate-storage mutation forms. Mutation assignments also have expression
+values: `items += value` appends to the named array and evaluates to the updated array snapshot, while
+`meta[key] = value` updates the named hash and evaluates to the updated hash snapshot.
 
 Array end mutations are also statement-level operations on a named working array:
 `items.push_back(value)` appends, `items.push_front(value)` prepends, `items.pop_back()`

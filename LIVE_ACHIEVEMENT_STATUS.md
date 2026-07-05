@@ -7,6 +7,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-05: **SPEC-FORMAT-TERSE.11.3 — implement Rust duck-typed assignment parity**
+  (RUST PARITY DONE; NESTED VALUE-PATH FRONTIER ACTIVE).
+
+  **Fix:** Rust bare assignment now binds the evaluated typed RHS value instead of retagging direct array/hash RHS
+  shapes into aggregate storage. `name = [value]`, `set(name, [value])`, and `=(name, [value])` store scalar-held
+  array values and yield them in value positions; `set(array(items), [value])` and `set(hash(meta), {...})` remain
+  explicit aggregate mutations. Scalar-held `array(name)` / `hash(name)` reads, `copy(...)`, aggregate-consuming
+  helper slots, and receiver chains now use guarded snapshots. The oracle pass also closed the narrow Perl
+  reference fallback where scalar-held `copy(name)` and bare array receiver chains still preferred aggregate
+  storage unless explicitly wrapped, including the generated-source declaration collector.
+
+  **Verification:** Perl syntax/probe checks for scalar-held copy/receiver readback and declaration collection
+  passed. Focused Rust runtime tests for `.11.3`, scalar-slot shorthand, aggregate assignment values, and
+  assignment-expression closure passed. The oracle corpus was regenerated to 91 fixtures with `.11.3` cases; Rust
+  corpus oracle, mdBook build, Knowledge Map, memory, doctrine, and diff checks pass. Broad phase0 completed with
+  the `.11` locks clean and one known unrelated failure in `emit_context_lowers_split_tagged_records_helper`.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.11.4` is active for nested mixed array/hash value-path reads and writes.
+  `.11.5` remains behind it for final docs/KM/corpus closeout.
+
 - 2026-07-05: **SPEC-FORMAT-TERSE.11.2 — implement Perl duck-typed assignment binding**
   (PERL REFERENCE DONE; RUST PARITY FRONTIER ACTIVE).
 

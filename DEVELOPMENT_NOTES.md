@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-05 (SPEC-FORMAT-TERSE.11.3 — Rust duck-typed assignment parity):
+  Rust `Engine` now treats bare assignment as typed value binding. `Expr::AssignScalar`,
+  `execute_scalar_assignment_operator_statement`, and `set`/`=` helper execution evaluate the RHS and store the
+  resulting `RuntimeValue` in the scalar slot without direct RHS-shape retagging. Keep explicit aggregate mutation
+  boundaries deliberate: only raw `array(name)` / `hash(name)` targets should route to `RuntimeContext::set_array`
+  / `set_hash`; bare `set(name, [value])`, `name = [value]`, and `=(name, [value])` must remain scalar-held typed
+  values. Scalar-held `array(name)` / `hash(name)` views are guarded by `bare_kind(name) == Scalar`, so later
+  aggregate mutations such as `items += value` or `set(array(items), ...)` can retag the name back to aggregate
+  storage. Future nested-path work in `.11.4` must preserve that value-binding contract instead of reviving the
+  old `.1.2.3.5.4` target-kind inference branch. The oracle run also exposed and closed the matching Perl
+  reference readback gap: scalar-held `copy(name)` and bare array receiver chains must consult the remembered
+  scalar-held array/hash value before falling back to aggregate storage, and `RuleIR::EmitContext` must auto-declare
+  the scalar slot for remembered-scalar `copy(name)` rather than reviving `my @name` / `my %name`.
+
 - 2026-07-05 (SPEC-FORMAT-TERSE.11.2 — Perl duck-typed assignment):
   Perl bare assignment now binds typed RHS values through scalar storage. The key seams are
   `ActionIR::MethodLowering::_lower_value_binding_source_expr`, bare-target branches in assignment/set lowering,

@@ -60,6 +60,13 @@ declarations solely from RHS shape. Explicit `array(...)` / `hash(...)` mutation
 and scalar-bound `array(name)` / `hash(name)` views read guarded snapshots. Frontier advances to
 `SPEC-FORMAT-TERSE.11.3` for Rust parity.
 
+Index note 2026-07-05: `SPEC-FORMAT-TERSE.11.3` Rust duck-typed assignment parity is done. Bare Rust assignment
+and `set`/`=` helper forms now bind evaluated scalar/array/hash `RuntimeValue`s through the scalar value slot,
+while explicit `array(...)` / `hash(...)` targets remain aggregate storage. The same leaf closed the
+oracle-exposed Perl scalar-held `copy(name)` / bare array receiver fallback gap. The generated oracle corpus is 91
+fixtures with `.11.3` value-binding cases, and the Rust oracle passes. Frontier advances to
+`SPEC-FORMAT-TERSE.11.4` for nested mixed array/hash value paths.
+
 Index note 2026-07-05: `SPEC-FORMAT-TERSE.12` and `.13` are now tracked as deferred/backlog by explicit user
 directive. `.12` owns future hash-tree attached-block traversal; for that backlog item a hash-tree has a hash root,
 hash interior nodes, and scalar or array leaves. `.13` tracks the analogous lower-priority array-tree traversal

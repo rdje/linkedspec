@@ -4,9 +4,10 @@ This chapter records the legacy declaration helper family and the terse-format r
 
 > **Current policy.** New `.spec` files should not use `declare(...)`. The declaration helper family remains
 > accepted only as legacy compatibility for existing specs. Working variables auto-exist through the terse format,
-> and kind is inferred from wrappers, helper argument positions, assignment targets, and direct RHS shape values.
-> Use `name = value`, `items = []`, `meta = { ... }`, `items += value`, `meta[key] = value`, `set(...)`, and
-> existing terse read positions instead.
+> and kind is inferred from wrappers, helper argument positions, and explicit assignment/mutation targets.
+> Bare assignment binds the evaluated typed value, so `items = []` and `meta = { ... }` replace the variable with
+> array/hash values. Use explicit `set(array(items), ...)` or `set(hash(meta), ...)` when the target must be
+> aggregate working storage.
 
 Read [Action Model and Helper Surface](action-model-and-helper-surface.md) first if the helper-DSL direction is still new. Read [Value, Container, and Flow Helper Reference](value-container-flow-helper-reference.md) after this chapter when you want the value expressions that can feed assignments, direct initializers, and legacy declaration initializers.
 
@@ -106,19 +107,33 @@ meta[key] = value
 return(payload["children"][index]["name"])
 ```
 
-The kind comes from the **position**: the target of `set(...)` and `name = value` is a scalar for non-shape RHS values; the target of `push(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read positions: `copy(array(name))` reads the working array, `copy(hash(name))` reads the working hash, and `copy(name)` follows the current array-first rule. In supported scalar read slots, a bare name or scalar-slot shorthand reads the working scalar: `return(count)`, `return(:count)`, `set(out, count)`, `set(out, :count)`, `out = count`, `items += value`, `set_key(meta, key, value)`, `meta[key] = value`, and direct path atoms such as `payload["children"][index]`. Direct RHS shape assignment is the special case where the value's shape infers the target kind: `name = [value]` / `set(name, [value])` assigns an array working variable, and `name = { key => value }` / `set(name, { key => value })` assigns a hash working variable. The variable is the same fresh per-invocation working value described above. Direct nested access keeps quoted path segments as hash keys; numeric, helper, and non-reserved bare path segments are array indexes.
+The kind comes from the **position**: the target of `set(...)` and `name = value` binds the evaluated typed RHS
+value; the target of `push(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of
+`set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read
+positions: `copy(array(name))` reads the current array value or working array, `copy(hash(name))` reads the current
+hash value or working hash, and `copy(name)` follows the current aggregate/value read rule for the name. In
+supported scalar read slots, a bare name or scalar-slot shorthand reads the working scalar: `return(count)`,
+`return(:count)`, `set(out, count)`, `set(out, :count)`, `out = count`, `items += value`,
+`set_key(meta, key, value)`, `meta[key] = value`, and direct path atoms such as `payload["children"][index]`.
+Direct RHS shape assignment is not a declaration signal: `name = [value]` / `set(name, [value])` binds an array
+value to `name`, and `name = { key => value }` / `set(name, { key => value })` binds a hash value. Use explicit
+`set(array(name), ...)` or `set(hash(name), ...)` when the target must be aggregate working storage. Direct nested
+access keeps quoted path segments as hash keys; numeric, helper, and non-reserved bare path segments are array
+indexes.
 
 `declare(...)` is retirement-bound for spec files. Use terse replacements instead:
 
 - `declare(scalar, count=0)` -> `count = 0`;
-- `declare(array, items)` -> `items = []` when an explicit reset is needed, or just `items += value` on first use;
-- `declare(hash, meta)` -> `meta = {}` when an explicit reset is needed, or just `meta[key] = value` on first use;
-- `declare(array, items=[value])` -> `items = [value]`;
-- `declare(hash, meta={ key => value })` -> `meta = { key => value }`.
+- `declare(array, items)` -> `set(array(items), [])` when an explicit aggregate reset is needed, or just
+  `items += value` on first use;
+- `declare(hash, meta)` -> `set(hash(meta), {})` when an explicit aggregate reset is needed, or just
+  `meta[key] = value` on first use;
+- `declare(array, items=[value])` -> `set(array(items), [value])`;
+- `declare(hash, meta={ key => value })` -> `set(hash(meta), { key => value })`.
 
 Where a name is wrapped, the wrapper still decides its kind. Where a name is bare in a type-implying position, that
-position decides it. Direct RHS shape assignment infers the target kind for array/hash assignment; explicit
-`:name` keeps array/hash payloads in a scalar.
+position decides it. Bare assignment binds the RHS typed value; explicit `array(name)` / `hash(name)` targets keep
+array/hash aggregate storage.
 
 ## Post-migration support policy
 

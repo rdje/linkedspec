@@ -1,0 +1,18 @@
+[
+   "text",
+   [
+      "ok"
+   ],
+   {
+      "stage" : "ok"
+   },
+   "done",
+   [
+      "ok",
+      "tail"
+   ],
+   {
+      "extra" : "yes",
+      "stage" : "ok"
+   }
+]

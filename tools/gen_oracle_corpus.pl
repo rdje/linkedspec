@@ -323,26 +323,27 @@ Done::
 SPEC
     },
 
-    # ── SPEC-FORMAT-TERSE.1.2.3.5.4 — Rust RHS shape target-kind parity ──
+    # ── SPEC-FORMAT-TERSE.11.3 — Rust duck-typed assignment parity ──
     #
-    # These fixtures freeze the Perl `.1.2.3.5.2` target-kind inference
-    # contract: direct shape RHS values infer aggregate bare targets, while
-    # explicit scalar targets keep scalar-held shape payloads.
-    {   case   => 'terse_1_2_3_5_4_shape_rhs_infers_bare_targets',
+    # These fixtures freeze the current Perl `.11.2` / Rust `.11.3`
+    # duck-typed assignment contract: bare direct shape RHS values bind
+    # scalar-held typed values, while explicit array/hash targets keep
+    # aggregate-storage mutation semantics.
+    {   case   => 'terse_11_3_shape_assignment_value_binding',
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); items = [value]; items += "tail"; meta = { key => value }; meta["fixed"] = "yes"; return(array(copy(array(items)), copy(hash(meta)), :items, :meta)) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); items = [value]; meta = { key => value }; return(array(:items, array(items), copy(items), items.count(), items.first(), :meta, hash(meta), copy(meta), meta.count_keys(), meta.pick_keys(key).sorted_values().first())) }
 
 Done::
  /[a-z]+/
 SPEC
     },
-    {   case   => 'terse_1_2_3_5_4_shape_rhs_scalar_boundary',
+    {   case   => 'terse_11_3_assignment_replacement_and_explicit_targets',
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); set(items, [value]); meta = { key => value }; set(:payload, [value]); return(array(copy(array(items)), copy(hash(meta)), :payload, copy(array(payload)))) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); thing = "text"; first = thing; thing = [value]; second = array(thing); thing = { key => value }; third = hash(thing); thing = "done"; set(array(items_mut), [value]); items_mut += "tail"; set(hash(meta_mut), { key => value }); meta_mut["extra"] = "yes"; return(array(first, second, third, thing, array(items_mut), hash(meta_mut))) }
 
 Done::
  /[a-z]+/
@@ -899,10 +900,10 @@ SPEC
     },
     # ── SPEC-FORMAT-TERSE.3.3.2 — aggregate assignment expression values ──
     #
-    # Direct RHS shape assignment forms now store and yield the assigned
-    # aggregate value in value positions. This fixture covers bare infix
-    # assignment, set(...) compatibility, scalar-held shape payloads, and
-    # receiver chaining on the operator-call aggregate assignment value.
+    # Direct RHS shape assignment forms now store and yield scalar-held typed
+    # values in value positions for bare targets. This fixture covers bare
+    # infix assignment, set(...) compatibility, explicit scalar shape payloads,
+    # and receiver chaining on the operator-call assigned value.
     {   case   => 'terse_3_3_2_aggregate_assignment_expressions',
         input  => 'xhello',
         source => <<'SPEC',
@@ -939,7 +940,7 @@ SPEC
         source => <<'SPEC',
 fn keep(value) { return(fn_out = value) }
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(:name, "!")), other, set(third, keep("fn")), third, legacy = "compat", legacy, items = [value], copy(items), set(meta, { key => value }), copy(hash(meta)), items += "tail", copy(items), meta["extra"] = other, copy(hash(meta)), (items += "last").count(), (meta["last"] = value).count_keys())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(:name, "!")), other, set(third, keep("fn")), third, set(current, "surface"), current, items = [value], array(items), set(meta, { key => value }), hash(meta), set(array(items_mut), [value]), items_mut += "tail", copy(array(items_mut)), set(hash(meta_mut), { key => value }), meta_mut["extra"] = other, copy(hash(meta_mut)), (items_mut += "last").count(), (meta_mut["last"] = value).count_keys())) }
 
 Done::
  /[a-z]+/

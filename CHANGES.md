@@ -1,6 +1,31 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-05 — SPEC-FORMAT-TERSE.11.3 — implement Rust duck-typed assignment parity
+
+**Scope:** Rust runtime assignment semantics, the oracle-exposed Perl scalar-held copy/receiver read gap, focused
+integration locks, generated Perl/Rust oracle fixtures, mdBook alignment, and Knowledge Map facts for the current
+duck-typed assignment contract.
+
+**What changed:** Rust now matches the Perl `.11.2` reference: bare `name = value`, `set(name, value)`, and
+`=(name, value)` bind the evaluated `RuntimeValue` directly to the scalar value slot, including array and hash RHS
+values. The old direct RHS-shape retagging path was removed for bare targets, so `items = [value]` and
+`set(items, [value])` store scalar-held typed values while explicit `set(array(items), [value])` and
+`set(hash(meta), {...})` remain aggregate-storage mutations. Scalar-held `array(name)` / `hash(name)` views,
+`copy(...)`, aggregate-consuming helper arguments, and receiver chains now read guarded typed snapshots. The final
+oracle pass also closed the matching Perl reference gap where scalar-held `copy(items)` and bare array receiver
+chains still preferred aggregate storage unless explicitly wrapped, and the Perl declaration collector now records
+`my $name` rather than `my @name` / `my %name` for scalar-held `copy(name)` readback.
+
+**Tests:** Perl syntax checks and focused `LinkedSpec::Get` probe for scalar-held `copy(...)` / receiver-chain
+readback; focused Rust runtime tests for `terse_11_3`, `terse_6_2_3_1_scalar_slot_shorthand_runs`,
+`terse_3_3_2_aggregate_assignment_expressions_run`, and `terse_3_3_4_assignment_expression_closure_run`; oracle
+corpus regeneration; Rust corpus oracle; mdBook build; Knowledge Map, memory-architecture, doctrine, and diff
+checks. Broad `prove -q -Iperl t/phase0_regression.t` completed with the `.11` locks clean and one known unrelated
+failure: `emit_context_lowers_split_tagged_records_helper` still reports `unresolved_helper_count == 1`.
+
+**Status:** `.11.3` is complete for Rust parity; `.11.4` owns nested mixed value paths.
+
 ## 2026-07-05 — SPEC-FORMAT-TERSE.11.2 — implement Perl duck-typed assignment binding
 
 **Scope:** Perl reference assignment lowering, generated-source declaration collection, focused Perl locks, and

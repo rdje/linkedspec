@@ -71,10 +71,11 @@ meta = { "kind" => "token", "line" => entry_line() };
 Use assignment when you want to set or replace the target. Assignment remains valid as a statement, and assignment
 forms are also value expressions. `name = "ok"` and `=(name, "ok")` store the scalar and yield it. Direct shape
 assignments such as `items = [value]`, `set(items, [value])`, `=(items, [value])`, and
-`meta = { key => value }` store the inferred aggregate target and yield the assigned array or hash value. Mutation
-assignments also compose as values: `items += value` mutates the named array and yields the updated array snapshot,
-while `meta[key] = value` mutates the named hash and yields the updated hash snapshot. These forms compose in
-`return(...)`, helper arguments, expression-valued blocks, user functions, or compatible receiver chains.
+`meta = { key => value }` bind the array or hash as the current typed value of the bare target and yield that
+stored value. Mutation assignments also compose as values: `items += value` mutates the named array and yields the
+updated array snapshot, while `meta[key] = value` mutates the named hash and yields the updated hash snapshot.
+These forms compose in `return(...)`, helper arguments, expression-valued blocks, user functions, or compatible
+receiver chains.
 
 ## Pushing values
 
@@ -122,25 +123,33 @@ return({ field => value, "seen" => true, "parts" => [value, entry_text()] });
 
 That returns an object with a dynamic key from `field`, a fixed `"seen"` field, and a nested array.
 
-Direct shape literals also drive target-kind inference for bare assignment targets on the Perl reference and
-Rust backend:
+Direct shape literals are ordinary RHS values for bare assignment targets on the Perl reference and Rust backend:
 
 ```text
-items = [value, cat("a", "b")];     # initializes array working variable items
-meta = { field => value };          # initializes hash working variable meta
-set(items, []);                     # replaces array working variable items with an empty array
-set(meta, {});                      # replaces hash working variable meta with an empty hash
+items = [value, cat("a", "b")];     # binds an array value to items
+meta = { field => value };          # binds a hash value to meta
+set(items, []);                     # replaces items with an empty array value
+set(meta, {});                      # replaces meta with an empty hash value
 ```
 
-Use the scalar-slot shorthand when the intent is to store the whole array/hash payload in a scalar:
+Use an explicit aggregate target when the intent is aggregate working-variable storage:
+
+```text
+set(array(items), [value]);
+set(hash(meta), { field => value });
+```
+
+Use the scalar-slot shorthand when the source should visibly read or target the scalar slot. A scalar slot may hold
+an array or hash value:
 
 ```text
 set(:payload, [value]);
 return(:payload);
 ```
 
-This target-kind inference is intentionally tied to direct RHS shape literals. Use the `:name` shorthand when the
-goal is a scalar-held shape payload; use `array(name)` / `hash(name)` when the goal is an explicit aggregate target.
+`array(name)` and `hash(name)` are typed views/snapshots at use sites. When `name` currently holds an array or hash
+value through bare assignment, they read that value. When the name has been populated through explicit aggregate
+mutation such as `set(array(name), ...)` or `name += value`, they read the aggregate working storage.
 
 Expression-valued blocks are also value expressions. Use them when a value needs local setup before it is
 returned or assigned:

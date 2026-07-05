@@ -70,9 +70,9 @@ Detailed reference: [Value, Container, and Flow Helper Reference](value-containe
 
 Working variables auto-exist when they are first used through a typed position:
 
-- `name = value` — scalar assignment for non-shape values
-- `items = []` — array initialization through a direct shape
-- `meta = { "kind" => value }` — hash initialization through a direct shape
+- `name = value` — bind the typed RHS value to `name`
+- `items = []` — bind an array value to `items`
+- `meta = { "kind" => value }` — bind a hash value to `meta`
 - `items += value` or `push(array(items), value)` — append to an array
 - `meta[key] = value` — mutate a hash
 
@@ -83,8 +83,8 @@ Working variables auto-exist when they are first used through a typed position:
 
 Write values into declared variables or containers:
 
-- `set(target, value)` — write a value; `target = value` is the preferred operator form. Scalar and direct-shape aggregate assignments also yield the stored value in value positions.
-- `name = value` — terse assignment operator; scalar RHS values yield the stored scalar, and direct array/hash RHS shapes yield the assigned aggregate value after target-kind inference
+- `set(target, value)` — write a value; `target = value` is the preferred operator form. Bare assignments bind the evaluated typed value and yield it in value positions.
+- `name = value` — terse assignment operator; scalar, array, and hash RHS values all bind as the current typed value of `name`
 - `=(name, value)` — operator-call spelling for the same assignment value expression
 - `items += value` — terse array append operator; a bare RHS reads the scalar working variable `value`, while all-bare `push(A,B)` remains child-call syntax; in value positions it yields the updated array snapshot
 - `push(container, value)` — append to an array

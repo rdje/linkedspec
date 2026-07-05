@@ -2108,8 +2108,14 @@ sub _collect_auto_working_var_decls {
    $record->('@', $1);
   }
   while ($masked =~ /\bcopy\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
-   my $kind = _bare_symbol_kind($1);
-   $record->(defined($kind) && $kind eq 'hash' ? '%' : '@', $1);
+   my $name = $1;
+   my $kind = _bare_symbol_kind($name);
+   $record->(
+    defined($kind) && $kind eq 'scalar' ? '$'
+    : defined($kind) && $kind eq 'hash' ? '%'
+    : '@',
+    $name,
+   );
   }
   while ($masked =~ /\bhash_copy\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
    $record->('%', $1);

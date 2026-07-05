@@ -58,21 +58,20 @@ return({ key => value });       # {"kind": "token"}
 return({ "kind" => value });    # fixed "kind" field
 ```
 
-Direct shape literals also drive target-kind inference for bare assignment targets on the Perl reference and
-Rust backend:
+Direct shape literals are typed RHS values for bare assignment targets on the Perl reference and Rust backend:
 
 ```text
-items = [value, cat("a", "b")];      # @items = ($value, cat(...))
-meta = { key => value };             # %meta = ($key => $value)
-set(items, []);                      # @items = ()
-set(meta, {});                       # %meta = ()
-set(:payload, [value]);              # same scalar payload boundary, terser
+items = [value, cat("a", "b")];      # items holds an array value
+meta = { key => value };             # meta holds a hash value
+set(items, []);                      # items holds an empty array value
+set(meta, {});                       # meta holds an empty hash value
+set(array(items), []);               # explicit aggregate array reset
+set(hash(meta), {});                 # explicit aggregate hash reset
 ```
 
-The scalar-slot shorthand is the scalar payload boundary on both variants:
-`set(:payload, [value])` stores the whole array payload in scalar `payload`, while
-`array(payload)` remains a separate working array. In value positions, `:name` reads the scalar
-slot named `name`.
+The scalar-slot shorthand remains an explicit scalar read/target spelling in pre-`.15` examples:
+`set(:payload, [value])` stores the whole array payload in scalar `payload`. In value positions, `:name` reads the
+scalar slot named `name`.
 Direct-access brackets (`payload["items"][i]`), hash-index assignment brackets (`meta[key] = value`),
 control-flow/block braces, and all-bare child-call routing remain separate surfaces.
 
@@ -103,9 +102,9 @@ dispatch rule.
 > typed aggregate wrapper (`array(name)` / `hash(name)`) or the scalar-slot shorthand `:name`
 > auto-creates it as a per-invocation working variable of that kind, so `declare(...)` is not
 > required first. The wrapper is also optional in a **type-implying argument position**: the scalar
-> target of `set(name, …)` and the scalar assignment operator `name = value`
-> for non-shape RHS values; the array/hash target when a bare assignment receives a direct RHS
-> shape (`name = []`, `set(name, [value])`, `name = {}`, `set(name, { key => value })`);
+> target of `set(name, …)` and the assignment operator `name = value`, which bind scalar, array, or hash RHS
+> values as the variable's current typed value; explicit aggregate targets such as `set(array(name), ...)` and
+> `set(hash(name), ...)`;
 > the scalar source in `return(name)`, `set(out, name)`, and `out = name`;
 > the array target of `push(name, …)`, `push_nonempty(name, …)`, and the array append operator
 > `name += value`; and the hash target of
@@ -147,10 +146,10 @@ dispatch rule.
 
 ### `name = value` assignment operator
 - **Signature**: `name = value`
-- **Returns**: In statement position, the stored value is ignored. In value position, it yields the value stored in the target: a scalar for non-shape scalar assignment, an array for direct RHS array-shape assignment, or a hash for direct RHS hash-shape assignment.
-- **Behavior**: Sets the working variable `name` to `value`. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable.
-- **Edge cases**: `set(:name, [value])` stores the whole array payload in `$name`; `name = [value]` replaces `@name`; `name = { key => value }` replaces `%name`. A **bare** target auto-exists as a scalar for non-shape RHS values (`name = value` reads `$value` and assigns `$name`), but direct RHS shape literals infer aggregate kind: `name = [value]` assigns `@name`, and `name = { key => value }` assigns `%name`. In scalar assignment source slots, a bare source name or scalar-slot shorthand reads a scalar too: `out = value` and `out = :value` are equivalent.
-- **Terse spelling**: `name = value` is the preferred operator spelling, and `set(name, value)` remains the helper spelling. In value positions, scalar assignments store and yield the stored scalar, while direct RHS shape assignments store and yield the assigned array/hash value after target-kind inference. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
+- **Returns**: In statement position, the stored value is ignored. In value position, it yields the typed value stored in the target.
+- **Behavior**: Sets the working variable `name` to the evaluated RHS value. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable. Later assignments may replace a scalar with an array/hash value, or replace an array/hash value with a scalar.
+- **Edge cases**: `name = [value]`, `set(name, [value])`, and `=(name, [value])` bind an array value to `name`; `name = { key => value }` binds a hash value. Use `set(array(name), [value])` or `set(hash(name), { key => value })` for aggregate working storage. In scalar assignment source slots, a bare source name or scalar-slot shorthand reads a scalar too: `out = value` and `out = :value` are equivalent.
+- **Terse spelling**: `name = value` is the preferred operator spelling, and `set(name, value)` remains the helper spelling. In value positions, assignments store and yield the stored typed value. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ## 2. Scalar Helpers
 
@@ -1314,8 +1313,8 @@ unlike the Retired table below):
 
 | Canonical (terse) | Deprecated alias | Notes |
 |---|---|---|
-| `set(target, value)` | `target = value` | scalar / array / hash assignment. Scalar non-shape assignments and direct RHS shape assignments yield the stored value in value positions; a bare direct shape target infers array/hash kind. A bare `set(name, …)` target auto-exists like `assign`; a bare scalar source `set(out, name)` reads `name`. |
-| `name = value` / `=(name, value)` | `set(name, value)` / `name = value` | assignment expression/operator spelling. It stores the target and yields the stored scalar or direct-shape aggregate value in value positions. |
+| `set(target, value)` | `target = value` | typed value assignment. Bare assignments bind scalar, array, or hash RHS values and yield the stored value in value positions. Explicit `array(...)` / `hash(...)` targets keep aggregate storage. A bare scalar source `set(out, name)` reads `name`. |
+| `name = value` / `=(name, value)` | `set(name, value)` / `name = value` | assignment expression/operator spelling. It stores the target and yields the stored typed value in value positions. |
 | `items += value` | `push(items, value)` / `push_value(items, value)` | array append operator. A bare RHS reads a scalar working variable; all-bare `push(A,B)` remains child-call syntax; in value positions it yields the updated array snapshot. |
 | `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()` | `items += value` for back append only | array end-mutation methods; statement-level only. The receiver may be bare or `array(...)`; pop methods discard the removed value. |
 | `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator. Bare key/RHS identifiers read scalar working variables in mutation slots; in value positions it yields the updated hash snapshot. |
@@ -1329,9 +1328,9 @@ variables as array indexes.
 
 The helper aliases above lower identically within their supported statement/helper families. Assignment forms
 (`set(...)`, `name = value`, and `=(name, value)`) now compose as value expressions when the
-target is scalar or when a direct RHS shape literal infers an array/hash target. Mutation assignment operators also
-compose as value expressions: `items += value` yields the updated array snapshot and `meta[key] = value` yields the
-updated hash snapshot. Array end mutations remain statement-only.
+target receives a scalar, array, or hash RHS value. Mutation assignment operators also compose as value
+expressions: `items += value` yields the updated array snapshot and `meta[key] = value` yields the updated hash
+snapshot. Array end mutations remain statement-only.
 Value-producing helper aliases such as `cat(...)` and `copy(...)` compose in the value positions documented by
 their contracts. New `.spec` authoring should prefer the terse names.
 

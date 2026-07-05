@@ -3439,11 +3439,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
     label => 'fluent_chain',
     decision => 'ast_array_receiver_chain',
     taken => 1,
-    context => { first_method => $first_method, steps => scalar(@$calls) },
-   );
-   return undef if defined($receiver_expr) && $receiver_expr =~ /^hash\s*\(/o;
-   my $current_expr = $receiver_expr;
-   my $current_family = 'array';
+   context => { first_method => $first_method, steps => scalar(@$calls) },
+  );
+  return undef if defined($receiver_expr) && $receiver_expr =~ /^hash\s*\(/o;
+  my $current_expr = $receiver_expr;
+  $current_expr = 'array('.$current_expr.')'
+   if ($receiver->{kind} // '') eq 'variable'
+   && $current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+  my $current_family = 'array';
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     return 'undef' if $current_family eq 'terminal';
     my $call = $calls->[$idx];
@@ -4986,6 +4989,13 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   if (defined($remembered_kind) && $remembered_kind eq 'array') {
    my $array_symbol = $extract_array_symbol_name->($container_expr);
    return '[@'.$array_symbol.']' if defined($array_symbol) && length($array_symbol);
+  }
+  if (defined($remembered_kind) && $remembered_kind eq 'scalar'
+      && $container_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
+   my $name = $1;
+   return 'do { my $__ls_copy_value = $'.$name.'; '
+    .'(defined($__ls_copy_value) && ref($__ls_copy_value) eq \'ARRAY\') ? [@{$__ls_copy_value}] : '
+    .'(defined($__ls_copy_value) && ref($__ls_copy_value) eq \'HASH\') ? { %{$__ls_copy_value} } : [] }';
   }
   if ($container_expr =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o) {
    my $name = $1;

@@ -30,9 +30,9 @@ set(:payload, [value]);          # scalar payload boundary: $payload = [$value]
 return(array(:value, :payload));
 ```
 
-Bare direct-shape assignment keeps its aggregate inference rule. `set(payload, [value])`
-assigns the working array `payload`; `set(:payload, [value])` stores the whole array
-payload in scalar `payload`.
+Bare direct-shape assignment binds the shape as the variable's typed value. `set(payload, [value])`
+stores the whole array value in `payload`; `set(:payload, [value])` is the explicit scalar-slot spelling for the
+same payload boundary.
 
 Example:
 
@@ -153,7 +153,7 @@ An audit of all 20 shipped `.spec` files (88 total accumulator operations, June 
 
 These helpers are the entry point into local working state and structured values.
 
-> **Working variables auto-exist.** `:name`, `array(name)`, and `hash(name)` reference a per-rule working variable. `:name` reads scalar `name`; `array(items)` reads working array `items`; `hash(meta)` reads working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. You do **not** have to `declare(...)` a working variable first. The wrapper or type-implying position auto-creates a fresh per-invocation working value of that kind. A **bare** name works as the scalar target of `set(name, ...)` and `name = value` for non-shape RHS values; as an array/hash target when that bare assignment receives a direct RHS shape literal (`name = []` / `set(name, [value])` -> array, `name = {}` / `set(name, { key => value })` -> hash); the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push(name, ...)`, `push_nonempty(name, ...)`, and `name += expr`; the hash target of `set_key(name, key, value)` and `name[key] = value`; and the aggregate snapshot reads `copy(array(name))`, `copy(hash(name))`, and array-first `copy(name)`. Use `set(:name, [value])` when you intentionally want a scalar to hold an array or hash payload. `declare(...)` stays available only as legacy compatibility; new examples should use direct assignments and typed wrappers. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
+> **Working variables auto-exist.** `:name`, `array(name)`, and `hash(name)` reference a per-rule working variable. `:name` reads scalar `name`; `array(items)` reads the current array value or working array `items`; `hash(meta)` reads the current hash value or working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. You do **not** have to `declare(...)` a working variable first. The wrapper or type-implying position auto-creates a fresh per-invocation working value of that kind. A **bare** name works as the target of `set(name, ...)` and `name = value`, binding the evaluated typed RHS value whether it is scalar, array, or hash; the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push(name, ...)`, `push_nonempty(name, ...)`, and `name += expr`; the hash target of `set_key(name, key, value)` and `name[key] = value`; and aggregate snapshot reads such as `copy(array(name))`, `copy(hash(name))`, and `copy(name)`. Use explicit `set(array(name), ...)` / `set(hash(name), ...)` when you intentionally want aggregate working storage rather than replacing the bare variable's typed value. `declare(...)` stays available only as legacy compatibility; new examples should use direct assignments and typed wrappers. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
 
 > **Primitive literals are typed values.** Quoted strings (`"text"` or `'text'`), numbers
 > (`42`, `3.14`), `true`, `false`, and `undef` can be used anywhere an explicit value
@@ -181,12 +181,11 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 > literals stay typed, recognized helpers compose, direct access keeps its own bracket rules, and non-reserved
 > bare names read scalar working variables. A bare hash key is therefore dynamic (`{ key => value }` reads
 > `$key`), not a string literal; quote fixed field names (`{ "kind" => value }`). When a direct shape literal
-> is the RHS of a bare assignment target, it infers the aggregate target kind on both variants:
-> `items = [value]` / `set(items, [])` assign the array working variable, and
-> `meta = { key => value }` / `set(meta, {})` assign the hash working variable. Explicit scalar targets keep
-> scalar payload assignment: `set(:payload, [value])` assigns the whole array
-> payload to scalar `payload`. In value positions, those direct-shape assignments yield the assigned array/hash
-> value; the explicit scalar-target form yields the scalar-held payload.
+> is the RHS of a bare assignment target, the array or hash is stored as the variable's typed value on both
+> variants: `items = [value]` / `set(items, [])` bind array values, and
+> `meta = { key => value }` / `set(meta, {})` bind hash values. Explicit `array(...)` and `hash(...)` targets
+> remain aggregate-storage mutation forms. In value positions, direct-shape assignments yield the stored typed
+> value.
 
 > **Expression-valued blocks are receiver-capable value expressions.** A non-empty block without a top-level
 > `=>` can feed a compatible receiver-dot helper chain. The yielded value enters the normal helper family
@@ -226,7 +225,7 @@ Direct path atoms use the same scalar read rule when the atom is not a primitive
 > and a single unified `copy(container)` subsumes the former array-copy and hash-copy helpers
 > (it resolves array-vs-hash by the wrapped symbol kind, array first; a bare `copy(x)` resolves as an
 > array snapshot read). The assignment operator `name = value` is equivalent to `set(name, value)`; in value
-> positions it yields the stored scalar or direct-shape aggregate value. The
+> positions it yields the stored typed value. The
 > array append operator `items += expr` is equivalent to the explicit
 > append forms `push(items, expr)` / `push(array(items), expr)`; when the value is a working scalar,
 > `items += value` reads `$value`, and in value positions the expression yields the updated array snapshot.
@@ -238,11 +237,10 @@ Direct path atoms use the same scalar read rule when the atom is not a primitive
 > `[i]` are array indexes. Non-reserved bare path atoms such as `[i]` read scalar working variables as indexes.
 > Direct shape literals `[]` and `{ key => value }` are accepted as value expressions on the Perl reference and
 > Rust backend. Bare elements/keys/values inside the shape read scalar working variables, and fixed hash field
-> names should be quoted. Direct shape literals also infer the aggregate kind of a bare assignment target on
-> both variants: `items = [value]` initializes the array working variable, and
-> `meta = { key => value }` initializes the hash working variable; use `set(:payload, [value])` or
-> `set(:payload, [value])` for scalar-held shape payloads. In value positions, the direct-shape assignment yields the assigned array/hash
-> value.
+> names should be quoted. Direct shape literals bind as typed values for bare assignment targets on both variants:
+> `items = [value]` stores an array value, and `meta = { key => value }` stores a hash value. Use
+> `set(array(items), [value])` or `set(hash(meta), { key => value })` when the target must be aggregate working
+> storage. In value positions, the direct-shape assignment yields the stored array/hash value.
 > Current examples use only the terse spellings.
 > See the
 > [Helper Contract Catalog](../appendix/helper-contract-catalog.md#terse-helper-renames-canonical-going-forward).
@@ -324,8 +322,8 @@ These helpers mutate or dispatch rule state. The assignment forms also have the 
 
 | Helper | Effect | Use it when |
 | --- | --- | --- |
-| `name = expr` | replace a scalar slot | a named scalar should hold the expression result; equivalent to `set(name, expr)` for non-shape RHS values. |
-| `set(:name, expr)` | replace a scalar slot explicitly | a named scalar should hold the expression result, including direct shape payloads such as `[value]`. |
+| `name = expr` | replace the named typed value | a working variable should hold the expression result, whether scalar, array, or hash. |
+| `set(:name, expr)` | replace a scalar slot explicitly | a named scalar slot should visibly hold the expression result, including direct shape payloads such as `[value]`. |
 | `set(array(name), array_expr)` | replace an array slot | an array should become a new array value. |
 | `set(hash(name), hash_expr)` | replace a hash slot | a hash should become a new hash value. |
 | `items += expr` | append one value and yield the updated array snapshot when used as an expression | a named array should grow by one explicit value expression; equivalent to `push(items, expr)` / `push(array(items), expr)` for accepted RHS shapes. |

@@ -41,6 +41,6 @@ should use `str_*`; `eq`/`ne`/`gt`/`ge`/`lt`/`le` are numeric aliases.
 
 `SPEC-FORMAT-TERSE.3.2.3.4` later added comparison symbol aliases. `SPEC-FORMAT-TERSE.3.3` then split
 expression-valued assignment before code, `.3.3.1` landed scalar assignment expression values, `.3.3.2` landed
-aggregate assignment expression values after target-kind inference, `.3.3.3` landed array append/hash-index
-mutation expression values, and `.3.3.4` closed assignment-expression docs/compatibility. See
-[[terse-assignment-expression-closure]].
+direct-shape assignment expression values, `.3.3.3` landed array append/hash-index mutation expression values,
+and `.3.3.4` closed assignment-expression docs/compatibility. Later `.11` facts own the current duck-typed
+storage behavior. See [[terse-assignment-expression-closure]].

@@ -5,8 +5,8 @@
    "ok!",
    "fn",
    "fn",
-   "compat",
-   "compat",
+   "surface",
+   "surface",
    [
       "ok"
    ],
@@ -20,6 +20,9 @@
       "stage" : "ok"
    },
    [
+      "ok"
+   ],
+   [
       "ok",
       "tail"
    ],
@@ -27,6 +30,9 @@
       "ok",
       "tail"
    ],
+   {
+      "stage" : "ok"
+   },
    {
       "extra" : "ok!",
       "stage" : "ok"

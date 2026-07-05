@@ -33,7 +33,7 @@
 //! child rule to start with. The default (0) uses the first regex.
 
 use crate::helpers::regex_engine::CompiledAlternation;
-use crate::runtime::RuntimeContext;
+use crate::runtime::{RuntimeContext, RuntimeVarKind};
 use crate::source_emitter::{GeneratedRuleFamily, GeneratedRuleSpec};
 use linkedspec_core::ast::RuleMode;
 use linkedspec_core::expr::{AccessSegment, Arg, CodeBlock, Expr};
@@ -2711,9 +2711,6 @@ impl Engine {
             return Ok(false);
         };
         let evaluated = self.eval_expr(value, ctx, rule_label)?;
-        if self.assign_direct_shape_to_target(name, value, evaluated.clone(), ctx)? {
-            return Ok(true);
-        }
         ctx.set_scalar(name, evaluated);
         Ok(true)
     }
@@ -2967,61 +2964,6 @@ impl Engine {
         }
     }
 
-    fn direct_shape_literal_kind(expr: &linkedspec_core::expr::Expr) -> Option<ShapeLiteralKind> {
-        use linkedspec_core::expr::Expr;
-        match expr {
-            Expr::ArrayLiteral { .. } => Some(ShapeLiteralKind::Array),
-            Expr::HashLiteral { .. } => Some(ShapeLiteralKind::Hash),
-            _ => None,
-        }
-    }
-
-    fn assign_direct_shape_to_target(
-        &self,
-        target_name: &str,
-        value_expr: &linkedspec_core::expr::Expr,
-        value: RuntimeValue,
-        ctx: &mut RuntimeContext,
-    ) -> Result<bool, String> {
-        match (Self::direct_shape_literal_kind(value_expr), value) {
-            (Some(ShapeLiteralKind::Array), RuntimeValue::Array(values)) => {
-                ctx.set_array(target_name, values);
-                Ok(true)
-            }
-            (Some(ShapeLiteralKind::Hash), RuntimeValue::Hash(values)) => {
-                ctx.set_hash(target_name, values);
-                Ok(true)
-            }
-            (Some(_), other) => Err(format!(
-                "direct shape literal evaluated to unexpected value kind: {:?}",
-                other
-            )),
-            (None, _) => Ok(false),
-        }
-    }
-
-    fn direct_shape_assignment_target(
-        raw_target: &linkedspec_core::expr::Arg,
-        shape_kind: ShapeLiteralKind,
-    ) -> Option<String> {
-        use linkedspec_core::expr::{Arg, Expr};
-        match raw_target {
-            Arg::Positional(Expr::Variable { name }) => Some(name.clone()),
-            Arg::Positional(Expr::Call { name, args })
-                if matches!(
-                    (shape_kind, name.as_str()),
-                    (ShapeLiteralKind::Array, "array") | (ShapeLiteralKind::Hash, "hash")
-                ) && args.len() == 1 =>
-            {
-                match &args[0] {
-                    Arg::Positional(Expr::Variable { name }) => Some(name.clone()),
-                    _ => None,
-                }
-            }
-            _ => None,
-        }
-    }
-
     fn aggregate_wrapper_assignment_target(
         raw_target: &linkedspec_core::expr::Arg,
         value: &RuntimeValue,
@@ -3064,6 +3006,29 @@ impl Engine {
                 "aggregate assignment evaluated to unexpected value kind: {:?}",
                 other
             )),
+        }
+    }
+
+    fn scalar_held_array_snapshot(ctx: &RuntimeContext, name: &str) -> Option<Vec<RuntimeValue>> {
+        if !matches!(ctx.bare_kind(name), Some(RuntimeVarKind::Scalar)) {
+            return None;
+        }
+        match ctx.get_scalar(name) {
+            RuntimeValue::Array(values) => Some(values),
+            _ => None,
+        }
+    }
+
+    fn scalar_held_hash_snapshot(
+        ctx: &RuntimeContext,
+        name: &str,
+    ) -> Option<Vec<(String, RuntimeValue)>> {
+        if !matches!(ctx.bare_kind(name), Some(RuntimeVarKind::Scalar)) {
+            return None;
+        }
+        match ctx.get_scalar(name) {
+            RuntimeValue::Hash(values) => Some(values),
+            _ => None,
         }
     }
 
@@ -3112,11 +3077,6 @@ impl Engine {
             }
             Expr::AssignScalar { name, value } => {
                 let evaluated = self.eval_expr(value, ctx, rule_label)?;
-                if Self::direct_shape_literal_kind(value).is_some()
-                    && self.assign_direct_shape_to_target(name, value, evaluated.clone(), ctx)?
-                {
-                    return Ok(evaluated);
-                }
                 ctx.set_scalar(name, evaluated.clone());
                 Ok(evaluated)
             }
@@ -3516,10 +3476,14 @@ impl Engine {
         }
 
         let mut current = match receiver {
-            Expr::Variable { name } => RuntimeValue::Array(ctx.array_copy(name)),
+            Expr::Variable { name } => Self::scalar_held_array_snapshot(ctx, name)
+                .map(RuntimeValue::Array)
+                .unwrap_or_else(|| RuntimeValue::Array(ctx.array_copy(name))),
             Expr::Call { name, args } if name == "array" && args.len() == 1 => match &args[0] {
                 Arg::Positional(Expr::Variable { name }) => {
-                    RuntimeValue::Array(ctx.array_copy(name))
+                    Self::scalar_held_array_snapshot(ctx, name)
+                        .map(RuntimeValue::Array)
+                        .unwrap_or_else(|| RuntimeValue::Array(ctx.array_copy(name)))
                 }
                 _ => self.eval_expr(receiver, ctx, rule_label)?,
             },
@@ -3596,9 +3560,15 @@ impl Engine {
         }
 
         let mut current = match receiver {
-            Expr::Variable { name } => RuntimeValue::Hash(ctx.hash_copy(name)),
+            Expr::Variable { name } => Self::scalar_held_hash_snapshot(ctx, name)
+                .map(RuntimeValue::Hash)
+                .unwrap_or_else(|| RuntimeValue::Hash(ctx.hash_copy(name))),
             Expr::Call { name, args } if name == "hash" && args.len() == 1 => match &args[0] {
-                Arg::Positional(Expr::Variable { name }) => RuntimeValue::Hash(ctx.hash_copy(name)),
+                Arg::Positional(Expr::Variable { name }) => {
+                    Self::scalar_held_hash_snapshot(ctx, name)
+                        .map(RuntimeValue::Hash)
+                        .unwrap_or_else(|| RuntimeValue::Hash(ctx.hash_copy(name)))
+                }
                 _ => self.eval_expr(receiver, ctx, rule_label)?,
             },
             _ => self.eval_expr(receiver, ctx, rule_label)?,
@@ -4021,13 +3991,6 @@ impl Engine {
         match expr {
             Expr::AssignScalar { name, value } => {
                 let evaluated = self.eval_expr(value, ctx, rule_label)?;
-                if Self::direct_shape_literal_kind(value).is_some() {
-                    if self.assign_direct_shape_to_target(name, value, evaluated.clone(), ctx)? {
-                        return Ok(evaluated);
-                    }
-                    ctx.set_scalar(name, evaluated);
-                    return Ok(ctx.get_scalar(name));
-                }
                 ctx.set_scalar(name, evaluated.clone());
                 Ok(evaluated)
             }
@@ -4185,6 +4148,9 @@ impl Engine {
 
         let evaluated = args.get(index).cloned().unwrap_or(RuntimeValue::Undef);
         if let Some(Arg::Positional(Expr::Variable { name })) = raw_args.get(index) {
+            if let Some(values) = Self::scalar_held_hash_snapshot(ctx, name) {
+                return RuntimeValue::Hash(values);
+            }
             return RuntimeValue::Hash(ctx.hash_copy(name));
         }
 
@@ -4206,6 +4172,9 @@ impl Engine {
 
         let evaluated = args.get(index).cloned().unwrap_or(RuntimeValue::Undef);
         if let Some(Arg::Positional(Expr::Variable { name })) = raw_args.get(index) {
+            if let Some(values) = Self::scalar_held_array_snapshot(ctx, name) {
+                return RuntimeValue::Array(values);
+            }
             return RuntimeValue::Array(ctx.array_copy(name));
         }
 
@@ -4396,21 +4365,6 @@ impl Engine {
                             ctx,
                         );
                     }
-                    if let Some(kind) = Self::direct_shape_literal_kind(raw_args[1].value()) {
-                        if let Some(target) =
-                            Self::direct_shape_assignment_target(&raw_args[0], kind)
-                        {
-                            return Self::store_aggregate_assignment(
-                                &target,
-                                kind,
-                                args[1].clone(),
-                                ctx,
-                            );
-                        }
-                        let target = self.resolve_scalar_target(raw_args, &args[0]);
-                        ctx.set_scalar(&target, args[1].clone());
-                        return Ok(args[1].clone());
-                    }
                     let target = self.resolve_scalar_target(raw_args, &args[0]);
                     ctx.set_scalar(&target, args[1].clone());
                     return Ok(args[1].clone());
@@ -4426,6 +4380,9 @@ impl Engine {
                         linkedspec_core::expr::Expr::Variable { name: var_name },
                     ) = &raw_args[0]
                     {
+                        if let Some(values) = Self::scalar_held_array_snapshot(ctx, var_name) {
+                            return Ok(RuntimeValue::Array(values));
+                        }
                         return Ok(RuntimeValue::Array(ctx.get_array(var_name)));
                     }
                 }
@@ -4450,6 +4407,11 @@ impl Engine {
                         _ => {
                             let arr_name = self.resolve_array_target(raw_args, arg, true);
                             if !arr_name.is_empty() {
+                                if let Some(values) =
+                                    Self::scalar_held_array_snapshot(ctx, &arr_name)
+                                {
+                                    return Ok(RuntimeValue::Array(values));
+                                }
                                 Ok(RuntimeValue::Array(ctx.array_copy(&arr_name)))
                             } else {
                                 Ok(RuntimeValue::Array(Vec::new()))
@@ -4468,10 +4430,20 @@ impl Engine {
                         _ => {
                             let arr_name = self.resolve_array_target(raw_args, arg, true);
                             if !arr_name.is_empty() {
+                                if let Some(values) =
+                                    Self::scalar_held_array_snapshot(ctx, &arr_name)
+                                {
+                                    return Ok(RuntimeValue::Array(values));
+                                }
                                 Ok(RuntimeValue::Array(ctx.array_copy(&arr_name)))
                             } else {
                                 let hash_name = self.resolve_hash_target(raw_args, arg, true);
                                 if !hash_name.is_empty() {
+                                    if let Some(values) =
+                                        Self::scalar_held_hash_snapshot(ctx, &hash_name)
+                                    {
+                                        return Ok(RuntimeValue::Hash(values));
+                                    }
                                     Ok(RuntimeValue::Hash(ctx.hash_copy(&hash_name)))
                                 } else {
                                     Ok(RuntimeValue::Array(Vec::new()))
@@ -5769,6 +5741,9 @@ impl Engine {
                     )),
                 ) = (args.len() == 1 && raw_args.len() == 1, raw_args.first())
                 {
+                    if let Some(values) = Self::scalar_held_hash_snapshot(ctx, var_name) {
+                        return Ok(RuntimeValue::Hash(values));
+                    }
                     return Ok(RuntimeValue::Hash(ctx.get_hash(var_name)));
                 }
                 let mut entries = Vec::new();
@@ -5796,6 +5771,11 @@ impl Engine {
                         _ => {
                             let hash_name = self.resolve_hash_target(raw_args, arg, true);
                             if !hash_name.is_empty() {
+                                if let Some(values) =
+                                    Self::scalar_held_hash_snapshot(ctx, &hash_name)
+                                {
+                                    return Ok(RuntimeValue::Hash(values));
+                                }
                                 Ok(RuntimeValue::Hash(ctx.hash_copy(&hash_name)))
                             } else {
                                 Ok(RuntimeValue::Hash(Vec::new()))

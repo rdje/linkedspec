@@ -2055,47 +2055,47 @@ fn terse_1_2_3_5_3_shape_literals_work_in_mutation_rhs_slots() {
     );
 }
 
-// ── SPEC-FORMAT-TERSE.1.2.3.5.4 — Rust RHS shape target-kind inference:
-// direct shape literals on bare assignment targets initialize the aggregate
-// working variable, while explicit scalar targets keep scalar-held payloads.
+// ── SPEC-FORMAT-TERSE.11.3 — Rust duck-typed assignment parity:
+// direct shape literals on bare assignment targets bind scalar-held typed
+// values. Explicit array/hash targets still mutate aggregate storage.
 
 #[test]
-fn terse_1_2_3_5_4_shape_rhs_no_longer_uses_scalar_assignment_after_target_inference_leaf() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); name = [value]; return(array(:name, array_copy(array(name)))) }\n\nDone::\n /[a-z]+/\n";
+fn terse_11_3_shape_assignment_binds_scalar_held_array_values() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); name = [value]; return(array(:name, array(name), copy(name), name.count(), name.first())) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([[null, ["ok"]]]),
-        "after SPEC-FORMAT-TERSE.1.2.3.5.4, a direct shape RHS on a bare target initializes the aggregate slot"
+        serde_json::json!([[["ok"], ["ok"], ["ok"], 1, "ok"]]),
+        "direct shape RHS on a bare target stores and reads a scalar-held array value"
     );
 }
 
 #[test]
-fn terse_1_2_3_5_4_bare_shape_rhs_infers_array_and_hash_targets() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); items = [value]; items += \"tail\"; meta = { key => value }; meta[\"fixed\"] = \"yes\"; return(array(array_copy(array(items)), hash_copy(hash(meta)), :items, :meta)) }\n\nDone::\n /[a-z]+/\n";
+fn terse_11_3_assignment_can_replace_scalar_array_hash_values() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); thing = \"text\"; first = thing; thing = [value]; second = array(thing); thing = { key => value }; third = hash(thing); thing = \"done\"; return(array(first, second, third, thing)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([[["ok", "tail"], {"fixed": "yes", "stage": "ok"}, null, null]]),
-        "bare shape RHS initializes aggregate working variables, not scalar payloads"
+        serde_json::json!([["text", ["ok"], {"stage": "ok"}, "done"]]),
+        "later assignment can replace a scalar with array/hash values and then a scalar again"
     );
 }
 
 #[test]
-fn terse_1_2_3_5_4_set_shape_rhs_infers_bare_targets() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(items, [value]); meta = { key => value }; return(array(array_copy(array(items)), hash_copy(hash(meta)))) }\n\nDone::\n /[a-z]+/\n";
+fn terse_11_3_set_shape_rhs_binds_bare_targets_as_values() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(items, [value]); set(meta, { key => value }); return(array(array(items), hash(meta), :items, :meta)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([[["ok"], {"stage": "ok"}]]),
-        "set(...) and operator assignment use direct shape RHS to infer aggregate target kind for bare targets"
+        serde_json::json!([[["ok"], {"stage": "ok"}, ["ok"], {"stage": "ok"}]]),
+        "set(...) with a bare direct shape target stores scalar-held typed values"
     );
 }
 
 #[test]
-fn terse_1_2_3_5_4_explicit_typed_targets_and_scalar_boundary() {
+fn terse_11_3_explicit_typed_targets_remain_aggregate_storage() {
     let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(array(items), [value]); set(hash(meta), { key => value }); set(:payload, [value]); return(array(array_copy(array(items)), hash_copy(hash(meta)), :payload, array_copy(array(payload)))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([[["ok"], {"stage": "ok"}, ["ok"], []]]),
-        "explicit array/hash targets accept direct shapes, while :payload stores the shape payload in the scalar"
+        serde_json::json!([[["ok"], {"stage": "ok"}, ["ok"], ["ok"]]]),
+        "explicit array/hash targets use aggregate storage while scalar targets keep scalar-held payloads"
     );
 }
 
@@ -2104,7 +2104,7 @@ fn terse_6_2_3_1_scalar_slot_shorthand_runs() {
     let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(:payload, [value]); set(snapshot, :payload); return(array(:value, :payload, copy(array(payload)), :snapshot)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([["ok", ["ok"], [], ["ok"]]]),
+        serde_json::json!([["ok", ["ok"], ["ok"], ["ok"]]]),
         ":name reads scalar slots and set(:name, shape) keeps the shape payload in the scalar"
     );
 }
@@ -3236,7 +3236,7 @@ Done::
 fn terse_3_3_4_assignment_expression_closure_run() {
     let grammar = r#"fn keep(value) { return(fn_out = value) }
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(:name, "!")), other, set(third, keep("fn")), third, legacy = "compat", legacy, items = [value], array_copy(items), set(meta, { key => value }), hash_copy(meta), items += "tail", array_copy(items), meta["extra"] = other, hash_copy(meta), (items += "last").count(), (meta["last"] = value).count_keys())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(:name, "!")), other, set(third, keep("fn")), third, set(current, "surface"), current, items = [value], array(items), set(meta, { key => value }), hash(meta), set(array(items_mut), [value]), items_mut += "tail", copy(array(items_mut)), set(hash(meta_mut), { key => value }), meta_mut["extra"] = other, copy(hash(meta_mut)), (items_mut += "last").count(), (meta_mut["last"] = value).count_keys())) }
 
 Done::
  /[a-z]+/
@@ -3250,14 +3250,16 @@ Done::
             "ok!",
             "fn",
             "fn",
-            "compat",
-            "compat",
+            "surface",
+            "surface",
             ["ok"],
             ["ok"],
             {"stage": "ok"},
             {"stage": "ok"},
+            ["ok"],
             ["ok", "tail"],
             ["ok", "tail"],
+            {"stage": "ok"},
             {"extra": "ok!", "stage": "ok"},
             {"extra": "ok!", "stage": "ok"},
             3,

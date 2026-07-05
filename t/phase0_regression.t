@@ -47358,7 +47358,7 @@ subtest 'spec_format_terse_11_2_bare_identifier_value_binding_memory' => sub {
     # SPEC-FORMAT-TERSE.11.2: after bare assignment, a bare identifier is a
     # scalar-held typed value. Explicit array(...) / hash(...) views read that
     # value through guarded snapshots; direct RHS shape no longer remembers @/%.
-    plan tests => 12;
+    plan tests => 13;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
     my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
@@ -47386,13 +47386,13 @@ subtest 'spec_format_terse_11_2_bare_identifier_value_binding_memory' => sub {
         'non-shape initialization keeps later bare value reads scalar');
 
     my $spec = "Top::\n"
-             . " /x/ -> Done { value = \"ok\"; key = \"stage\"; items = [value]; meta = { key => value }; return(array(array(items), hash(meta), count(array(items)), count_keys(hash(meta)), first(array(items)), first(sorted_values(pick_keys(hash(meta), key))))) }\n"
+             . " /x/ -> Done { value = \"ok\"; key = \"stage\"; items = [value]; meta = { key => value }; return(array(:items, array(items), copy(items), items.count(), items.first(), :meta, hash(meta), copy(meta), meta.count_keys(), meta.pick_keys(key).sorted_values().first())) }\n"
              . "\nDone::\n /[a-z]+/\n";
     my $parser = eval { LinkedSpec::Get(\$spec) };
     ok(ref($parser) eq 'CODE', 'bare-identifier type-memory spec compiles')
         or diag(normalize_error($@));
-    is($run->($parser, 'xhello'), '[["ok"],{"stage":"ok"},1,1,"ok","ok"]',
-        'scalar-bound typed values read back through explicit array/hash views');
+    is($run->($parser, 'xhello'), '[["ok"],["ok"],["ok"],1,"ok",{"stage":"ok"},{"stage":"ok"},{"stage":"ok"},1,"ok"]',
+        'scalar-bound typed values read back through typed views, copy, and receiver chains');
 
     my $src = $gen->($spec);
     is((() = ($src =~ /my \$items\b/g)), 1,
@@ -47401,6 +47401,8 @@ subtest 'spec_format_terse_11_2_bare_identifier_value_binding_memory' => sub {
         'hash value binding auto-supplies one my $meta');
     is((() = ($src =~ /my \@items\b/g)), 0,
         'array value binding does not auto-supply my @items');
+    is((() = ($src =~ /my \@meta\b/g)), 0,
+        'hash value binding does not auto-supply my @meta');
     is((() = ($src =~ /my %meta\b/g)), 0,
         'hash value binding does not auto-supply my %meta');
     like($src, qr/\$items = \[\$value\].*\$meta = \{\$key => \$value\}.*ref\(\$__ls_array_value\) eq 'ARRAY'.*ref\(\$__ls_hash_value\) eq 'HASH'/s,
