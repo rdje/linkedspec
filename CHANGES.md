@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-05 — SPEC-FORMAT-TERSE.15.1 — split colon scalar-slot removal
+
+**Scope:** Audit and task-tree split for removing `:name` scalar-slot syntax from the future duck-typed surface.
+
+**What changed:** `SPEC-FORMAT-TERSE.15` is now split into signoff-sized leaves. The audit found current `:name`
+use across shipped specs, root corpus examples, generated Rust oracle fixtures, mdBook guidance, Knowledge Map
+facts, active Perl/Rust tests, `tools/gen_oracle_corpus.pl`, and both parser/runtime implementations. Hard removal
+is therefore not one safe slice. The frontier is `.15.2` for current authored spec/corpus/docs/KM migration to
+bare value reads before Perl and Rust parser/runtime retirement work.
+
+**Tests:** Audit scans and documentation gates only; no parser/runtime behavior changed.
+
+**Status:** `.15.1` is complete; `.15.2` is active.
+
 ## 2026-07-05 — SPEC-FORMAT-TERSE.11.5 — close duck-typed assignment alignment
 
 **Scope:** Roadmap/live-doc/Knowledge Map alignment for the completed duck-typed assignment lane.

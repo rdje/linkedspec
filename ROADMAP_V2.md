@@ -260,7 +260,9 @@ DSL helper surface consistency note:
   `:name` as the terse scalar-slot spelling, `.6.2.3.2` retired active authored-spec `scalar(...)` /
   `assign(...)` while adding remembered bare identifier kinds, `.6.2.4` verified shipped-spec no-drift, `.6.3`
   swept current-facing docs plus checked-in corpus examples, and `.6.4` kept declaration helpers as legacy
-  compatibility while excluding them from new authoring. The Rust oracle corpus is now 92 fixtures after
+  compatibility while excluding them from new authoring. `.15.1` has since split removal of `:name` scalar-slot
+  punctuation from the duck-typed surface; `.15.2` owns current spec/corpus/docs/KM migration to bare value reads
+  before Perl/Rust parser/runtime retirement. The Rust oracle corpus is now 92 fixtures after
   `SPEC-FORMAT-TERSE.11.4` added `terse_11_4_nested_mixed_value_path_assignment`, the Lispish fixture was
   re-enabled, migrated to direct access under `SCALAREF-RETIREMENT`, the first `RUST-PARITY.7.2` shipped-spec
   batch added two `hlink_substitution` raw-string cases, `RUST-PARITY.7.3.3.2` added the JSON-safe `{abc}` curly
@@ -293,7 +295,8 @@ DSL helper surface consistency note:
   Perl/Rust for `copy(NAME)` after the identifier's kind is known, with explicit aggregate receivers still available
   where needed. Scalar bare reads work on Perl/Rust for source slots (`return(NAME)`, `set(out, NAME)`, and
   `out = NAME`), mutation key/RHS slots (`items += VALUE`, `set_key(meta, KEY, VALUE)`, `meta[KEY] = VALUE`), direct
-  path atoms (`foo["a"][z]`), and explicit scalar-slot shorthand (`:name`). Direct shape-literal values such as
+  path atoms (`foo["a"][z]`), while explicit scalar-slot shorthand (`:name`) is superseded by the active `.15`
+  removal lane and should not be taught as future current syntax. Direct shape-literal values such as
   `[]`, `[value, true]`, and `{ key => value, "fixed" => [value] }` now work as value expressions on Perl and Rust,
   so bare shape keys/elements/values read scalar working variables and fixed hash field names must be quoted.
   Direct shape literals in assignment bind typed values instead of declaring aggregate storage: `items = [value]`

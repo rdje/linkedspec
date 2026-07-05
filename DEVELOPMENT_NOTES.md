@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-05 (SPEC-FORMAT-TERSE.15.1 — colon scalar-slot removal split):
+  Do not try to remove `:name` in one parser/runtime slice. The audit found it in current shipped/root specs,
+  generated oracle inputs, mdBook guidance, Knowledge Map facts, trace/phase0 tests, oracle generation sources,
+  Perl scalar-slot lowering/extraction, and Rust `Expr::ScalarSlot` parser/runtime support. Keep `.15.2` focused
+  on current-facing migration to bare value reads while compatibility still exists; only after that should `.15.3`
+  and `.15.4` retire Perl and Rust parser/runtime support. Hash-literal key positions are a separate grammar
+  boundary and must not be accidentally reinterpreted as value reads.
+
 - 2026-07-05 (SPEC-FORMAT-TERSE.11.5 — duck-typed assignment alignment):
   Treat `.1.2.3.5.2` / `.1.2.3.5.4` RHS target-kind inference as historical only. Current-facing docs, fact cards,
   tests, and roadmap text must say that direct RHS shapes bind typed values: `name = [value]` stores an array value

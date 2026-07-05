@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-05: **SPEC-FORMAT-TERSE.15.1 — split colon scalar-slot removal**
+  (AUDIT/SPLIT DONE; CURRENT-SURFACE MIGRATION FRONTIER ACTIVE).
+
+  **Fix:** Audited `:name` scalar-slot usage before implementation and split the removal lane. Current usage spans
+  shipped/root specs, root corpus examples, generated oracle fixtures, mdBook guidance, Knowledge Map facts,
+  trace/phase0 tests, oracle-generation sources, and Perl/Rust parser/runtime support, so hard removal is not one
+  safe slice.
+
+  **Verification:** Audit scans recorded in `docs/tasks/SPEC-FORMAT-TERSE.md`; Knowledge Map, memory, doctrine,
+  whitespace, and mdBook checks pass. No parser/runtime behavior changed.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.15.2` is active for migrating current specs/corpus/docs/KM away from `:name`
+  while compatibility remains. `.15.3` and `.15.4` own Perl and Rust retirement; `.15.5` owns final no-drift.
+
 - 2026-07-05: **SPEC-FORMAT-TERSE.11.5 — close duck-typed assignment alignment**
   (DUCK-TYPED ASSIGNMENT LANE CLOSED; COLON-SLOT REMOVAL FRONTIER NEXT).
 
