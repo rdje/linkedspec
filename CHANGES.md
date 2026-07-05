@@ -1,6 +1,42 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-05 — SPEC-FORMAT-TERSE.15.2.2 — Perl reference bare-read completion in value positions
+
+**Scope:** Make bare identifiers read the bound typed value in every value position `.15.2.1` enumerated, on the
+Perl reference engine, with `:name` still accepted (compat) during the transition. Reference-engine change,
+authorized/owned (ADR `0007` sanctioned reference-touching for the terse migration; ADR `0019` engine-first order).
+
+**Change 1 — `perl/LinkedSpec/ActionIR/FlowExpr.pm` (`_lower_flow_composite_expr`, `passthrough_no_call` site):**
+a lone bare identifier (`/\A[A-Za-z_][A-Za-z0-9_]*\z/`) that reaches passthrough — provably not `true`/`false`, not
+`:name`, not a primitive literal, not direct nested access, not a helper/method call — now lowers to `$name`
+(a variable read, `decision => 'bare_variable_read'`), mirroring the `:name` scalar_slot branch. Multi-token
+passthrough expressions stay verbatim. Because if/elseif/while + `num_*` + logical conditions all delegate to this
+function (via `ControlFlow::_lower_control_flow_value_expr`) and the switch selector funnels through it too, this
+ONE change closed all three enumerated gaps at once.
+
+**Change 2 — `perl/LinkedSpec/ActionIR/ControlFlow.pm` (`_lower_switch_case_value_expr`):** a bare word in
+switch-CASE-LABEL position stays a literal tag (a label/key position, analogous to the hash-literal-key exemption
+in ADR `0019`) — Change 1 would otherwise turn `case(foo)` into `eq $foo`. The literal-tag decision is now made on
+the source token (`/^\w+$/` and not `true`/`false`) rather than the pre-`.15.2.2` `$lowered eq $trimmed` probe that
+relied on the composite lowerer returning bare words verbatim. Net semantics: `switch(kind)` reads variable `kind`;
+`case(foo)` matches literal `"foo"`; use `case(:name)`/quoted for a non-literal case value.
+
+**Validation:**
+- Discriminating probes (`scratchpad/probe_15_2_1b.pl`): `switch(kind)`→`good`, `num_lt(n,5)`@n=10→`no`,
+  `if(c)`@c=0→`F` — all now equal their `:name` forms; `:name` forms still work.
+- Focused switch/case lowering via `call_spec_handler_subst`: selector `$__ls_switch_value = $kind`, case `eq "foo"`,
+  default branch intact — matches the phase0 regex lock (test 377/10).
+- FULL phase0 (`PERL5LIB= perl -Iperl t/phase0_regression.t`, 10-min timeout): reach `ok 1022` (plan `1..1022`),
+  **1021 pass**, only failure `not ok 796` (`emit_context_lowers_split_tagged_records_helper`, pre-existing
+  baseline). `comm` vs baseline `{796}` empty both ways — zero new failures, zero regressions.
+- `perl -c` clean on both changed modules.
+- ENV note: phase0 subprocess tests require `PERL5LIB=` cleared (stale `pgen/fx/perl` checkout otherwise poisons
+  the pplugin lazy-load subtests — unrelated to this change).
+
+**Frontier:** → `.15.2.3` (Rust parity). `:name` still compat; full removal is `.15.3`/`.15.4` after `.15.2.4`
+source migration.
+
 ## 2026-07-05 — SPEC-FORMAT-TERSE.15.2.1 — bare-vs-`:name` value-position inventory + engine seams (design only)
 
 **Scope:** Design/inventory leaf for engine-first `:name` removal. Enumerate every value position where a bare

@@ -7,8 +7,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-05: **SPEC-FORMAT-TERSE.15.2.2 — Perl reference bare-read completion in value positions**
+  (DONE; FRONTIER `.15.2.3` RUST PARITY ACTIVE).
+
+  **Change:** One guarded branch in `ActionIR::FlowExpr::_lower_flow_composite_expr` (bare identifier at the
+  `passthrough_no_call` site → `$name` variable read, mirroring the `:name` branch) closed all three enumerated
+  value-position gaps at once — if/elseif/while + `num_*` + logical conditions delegate to it and the switch
+  selector funnels through it. A second change in `ActionIR::ControlFlow::_lower_switch_case_value_expr` keeps a bare
+  switch CASE LABEL a literal tag (hash-key-analogous exemption, ADR `0019`): `switch(kind)` reads variable `kind`,
+  `case(foo)` matches literal `"foo"`. `:name` stays accepted (compat) during the transition.
+
+  **Verification:** Discriminating probes show `switch(kind)`→`good`, `num_lt(n,5)`@n=10→`no`, `if(c)`@c=0→`F`, all
+  == their `:name` forms. FULL phase0 (`PERL5LIB=` cleared, 10-min timeout): reach `ok 1022`, **1021 pass**, only
+  the pre-existing `not ok 796`; zero regressions (`comm` vs baseline `{796}` empty both ways). `perl -c` clean on
+  both changed modules. Memory/KM/doctrine gates pass.
+
+  **Env:** phase0 needs `PERL5LIB=` cleared (stale `pgen/fx/perl` poisons the pplugin subprocess subtests) and the
+  10-min foreground timeout (else it caps mid-run at exit 144/143 — always check the REACH first).
+
 - 2026-07-05: **SPEC-FORMAT-TERSE.15.2.1 — bare-vs-`:name` value-position inventory + engine seams**
-  (DESIGN/INVENTORY DONE; FRONTIER `.15.2.2` PERL BARE-READ COMPLETION ACTIVE).
+  (DESIGN/INVENTORY DONE; PERL `.15.2.2` NOW DONE).
 
   **Inventory (discriminating reference-engine probes):** bare identifiers are NOT read as the bound variable in
   exactly three value positions — `switch(...)` selector (`switch(:kind)`→`good` vs `switch(kind)`→`def`),

@@ -378,7 +378,16 @@ sub _lower_flow_composite_expr {
  }
 
  my $call = $parse_method_function_expr->($trimmed);
- return $finish->($trimmed, 'passthrough_no_call', { expr => $trimmed }) unless $call;
+ unless ($call) {
+  # SPEC-FORMAT-TERSE.15.2.2 — value-position-is-variable (ADR 0019): a bare identifier
+  # reaching this point is not `true`/`false`, not a `:name` scalar slot, not a primitive
+  # literal, not direct nested access, and not a helper/method call — so in a value or
+  # condition position it is a variable/parameter read, mirroring the `:name` branch above.
+  # Guarded to a lone identifier so multi-token passthrough expressions stay verbatim.
+  return $finish->('$'.$trimmed, 'bare_variable_read', { symbol => $trimmed })
+   if $trimmed =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  return $finish->($trimmed, 'passthrough_no_call', { expr => $trimmed });
+ }
 
  my $method = $call->{method} // '';
  my $args = $call->{args} || [];

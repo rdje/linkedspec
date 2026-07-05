@@ -1,6 +1,22 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-05 (SPEC-FORMAT-TERSE.15.2.2 — the fix was one branch, plus one compensating exemption):
+  The `.15.2.1` prediction held: because `ControlFlow::_lower_control_flow_value_expr` delegates to
+  `FlowExpr::_lower_flow_composite_expr`, and the switch selector funnels through the same function, a single guarded
+  branch at the `passthrough_no_call` site (bare identifier → `$name`) closed the switch/num/if gaps together. The
+  non-obvious part was the SIDE EFFECT: `ControlFlow::_lower_switch_case_value_expr` detected a literal case label by
+  checking `$lowered eq $trimmed` — i.e. it *relied on the composite lowerer returning bare words verbatim*. The
+  moment bare words became `$name`, `case(foo)` silently became `eq $foo`, breaking the switch/case regex lock
+  (phase0 test 377/10). Lesson: any consumer that used composite passthrough as a "is this a plain word" oracle is a
+  latent break site. The fix is the hash-key-analogous exemption from ADR `0019`: a case LABEL is a key/label
+  position, not a value-read position, so it stays a literal — decided on the source token directly, independent of
+  what the composite lowerer now returns. Two environmental gotchas cost real time and are now in MEMORY: (1) the
+  full phase0 needs `PERL5LIB=` cleared or the pplugin subprocess subtests fail against the stale `pgen/fx/perl`
+  checkout (a spurious `not ok 102` that looks like a regression but is not); (2) the suite takes long enough that a
+  background run or the default 2-min foreground timeout caps it mid-run (exit 144/143) — use the 10-min foreground
+  timeout and always check the REACH (`ok 1022`, plan `1..1022`) before trusting any count.
+
 - 2026-07-05 (SPEC-FORMAT-TERSE.15.2.1 — where bare reads fail, and the ONE seam that fixes most of it):
   The bare-vs-`:name` value-position gap is narrower and more localized than the `.15.2` re-scope note implied.
   Discriminating reference-engine probes (a bare-fallback must yield a *different* result than a real read, else the

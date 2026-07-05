@@ -11,6 +11,9 @@ answers:
   - "why is SPEC-FORMAT-TERSE.15 sequenced engine-first not source-first"
   - "how do you push a scalar value onto an array without :name"
   - "when is a bare identifier a variable read vs a rule reference"
+  - "does case(foo) read a variable or match a literal label"
+  - "how do bare reads work in switch if num conditions after SPEC-FORMAT-TERSE.15.2.2"
+  - "which seam makes a bare identifier a variable read in a condition on the Perl engine"
 date: 2026-07-05
 status: current
 tags: [spec-format-terse, colon-slot, bare-read, value-position, rule-reference, sequencing, perl, rust, SPEC-FORMAT-TERSE]
@@ -51,3 +54,28 @@ value-position reads honor the bound variable on Perl + Rust, `.15.2.4` migrates
 user directive that `:name` shall not be supported). See ADR `0019`, and
 [[terse-duck-typed-assignment-perl-reference]] for the assignment-binding side of the same
 surface.
+
+## Resolution — Perl reference (`.15.2.2`, 2026-07-05)
+
+The gap is CLOSED on the Perl reference engine (`:name` still accepted during the
+transition). ONE guarded branch does it, because the three positions share a lowering root:
+
+- `ActionIR::FlowExpr::_lower_flow_composite_expr` — a lone bare identifier
+  (`/\A[A-Za-z_][A-Za-z0-9_]*\z/`) reaching the `passthrough_no_call` site (provably not
+  `true`/`false`, not `:name`, not a primitive literal, not direct nested access, not a
+  helper/method call) now lowers to `$name` (a variable read), mirroring the `:name` branch.
+  if/elseif/while + `num_*` + logical conditions delegate here (via
+  `ControlFlow::_lower_control_flow_value_expr`) and the switch selector funnels through it,
+  so `switch(kind)`, `num_lt(n,5)`, `if(c)` all now read the bound variable.
+
+**Case labels stay literal (key-position exemption).** A bare word in switch-CASE-LABEL
+position is a literal tag, NOT a variable read — a label/key position, analogous to the
+hash-literal-key exemption in this ADR. `switch(kind)` reads variable `kind`, but
+`case(foo)` matches the literal `"foo"`; use `case(:name)` / a quoted value for a
+non-literal. Enforced in `ControlFlow::_lower_switch_case_value_expr` by deciding the
+literal-tag on the source token directly (before `.15.2.2` it relied on the composite
+lowerer returning bare words verbatim, which the new bare-read broke).
+
+Proof: discriminating probes (`switch(kind)`->`good`, `num_lt(n,5)`@n=10->`no`,
+`if(c)`@c=0->`F`, all == their `:name` forms) + full phase0 green (reach `ok 1022`, 1021
+pass, only the pre-existing `not ok 796`). Rust parity is `.15.2.3`.

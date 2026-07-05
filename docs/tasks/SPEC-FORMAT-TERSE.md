@@ -6,7 +6,17 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-05` (**`.15.2.1` DONE; bare-vs-`:name` value-position inventory + engine seams locked
+- Last updated: `2026-07-05` (**`.15.2.2` DONE; Perl reference bare-read completion. ONE change to
+  `ActionIR::FlowExpr::_lower_flow_composite_expr` (bare identifier at the `passthrough_no_call` site -> `$name`
+  variable read, mirroring the `:name` branch) closed all three enumerated value-position gaps at once, because
+  if/elseif/while + `num_*` + logical conditions delegate to it and the switch selector funnels through it too.
+  A second change to `ActionIR::ControlFlow::_lower_switch_case_value_expr` keeps a bare switch-CASE LABEL a literal
+  tag (hash-key-analogous exemption, ADR `0019`): `switch(kind)` reads variable `kind`, `case(foo)` matches literal
+  `"foo"`. Discriminating probes: `switch(kind)`->`good`, `num_lt(n,5)`@n=10->`no`, `if(c)`@c=0->`F`, all == their
+  `:name` forms (which still work; compat). FULL phase0 GREEN: reach `ok 1022`, 1021 pass, only pre-existing
+  `not ok 796`; zero regressions. `:name` removal now unblocked once Rust parity (`.15.2.3`) lands and sources
+  migrate (`.15.2.4`). ENV: run phase0 with `PERL5LIB=` cleared (stale `pgen/fx/perl` poisons subprocess tests).
+  Frontier -> `.15.2.3` (Rust parity). Prior **`.15.2.1` DONE; bare-vs-`:name` value-position inventory + engine seams locked
   before any engine code. Discriminating reference-engine probes confirm bare identifiers are NOT read as the
   bound variable in three value positions: the `switch(...)` selector, `num_*(...)` callee args, and
   `if(...)`/`while(...)`/logical conditions — `switch(:kind)`->`good` vs `switch(kind)`->`def`;
@@ -3297,7 +3307,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 - ID: `SPEC-FORMAT-TERSE.15`
   Status: `active` (split 2026-07-05 by `.15.1`; RE-SEQUENCED 2026-07-05 to engine-first after the bare-read-gap
-    finding; `.15.2.1` design/inventory done 2026-07-05; frontier `.15.2.2`)
+    finding; `.15.2.1` design + `.15.2.2` Perl bare-read done 2026-07-05; frontier `.15.2.3`)
   Goal: Make `:name` fully unsupported (user directive 2026-07-05: `:name` shall NOT be supported). The `.15.1`
     audit assumed a source-first migration would be output-preserving, but bare reads are NOT yet honored in every
     value position at `104088e5` (proven: `switch(:kind)`->`good` vs `switch(kind)`->`def`; plus rule-name
@@ -3350,8 +3360,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     rule references appear only in edge/dispatch positions (`-> Rule`, `call(Rule)`, `=> Rule`, and the all-bare
     child-call `push(RuleA, AccumB)` convention). Scalar push therefore uses `items += value` or
     `push(array(items), value)`, never a colon slot.
-  Children: `.15.2.1` (design/inventory, DONE 2026-07-05), `.15.2.2` (Perl engine impl, active),
-    `.15.2.3` (Rust parity), `.15.2.4` (source migration to bare, output-preserving).
+  Children: `.15.2.1` (design/inventory, DONE 2026-07-05), `.15.2.2` (Perl engine impl, DONE 2026-07-05),
+    `.15.2.3` (Rust parity, active), `.15.2.4` (source migration to bare, output-preserving).
   Acceptance: bare reads produce byte-identical reference output to today's `:name` in every value position on
     Perl and Rust and the value-position-vs-edge policy is documented; then all current shipped specs, root
     corpus, generated oracle sources, mdBook examples, and non-historical Knowledge Map facts use bare reads with
@@ -3415,14 +3425,36 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `pending`
 
 - ID: `SPEC-FORMAT-TERSE.15.2.2`
-  Status: `pending`
+  Status: `done` (2026-07-05)
   Goal: Perl reference — make bare identifiers read the bound typed value in every value position enumerated by
     `.15.2.1`, with rule references confined to edge/dispatch positions. `:name` keeps working (compat) during
     this transition.
   Acceptance: focused reference-engine probes show bare == `:name` output for every enumerated position; phase0
     stays green (1021 pass plus the one pre-existing unrelated `emit_context_lowers_split_tagged_records_helper`
     failure).
-  Verification: `pending`
+  Verification: **PASS 2026-07-05.** ONE central change closed all three enumerated gaps because if/elseif/while +
+    `num_*` + logical conditions all funnel through `ActionIR::FlowExpr::_lower_flow_composite_expr` (via
+    `ControlFlow::_lower_control_flow_value_expr`, which delegates), and the switch selector funnels through it too.
+    - CHANGE 1 (`perl/LinkedSpec/ActionIR/FlowExpr.pm`, the `passthrough_no_call` site): a lone bare identifier
+      (`/\A[A-Za-z_][A-Za-z0-9_]*\z/`) reaching passthrough — provably not `true`/`false`, not `:name`, not a
+      primitive literal, not direct nested access, not a helper/method call — now lowers to `$name` (a variable
+      read, `decision => 'bare_variable_read'`), mirroring the `:name` scalar_slot branch. Multi-token passthrough
+      stays verbatim.
+    - CHANGE 2 (`perl/LinkedSpec/ActionIR/ControlFlow.pm`, `_lower_switch_case_value_expr`): a bare word in
+      switch-CASE-LABEL position stays a literal tag (a label/key position, analogous to the hash-literal-key
+      exemption in ADR `0019`), because Change 1 would otherwise turn `case(foo)` into `eq $foo`. The literal-tag
+      decision is now made on the source token (`/^\w+$/` and not `true`/`false`) instead of the pre-`.15.2.2`
+      `$lowered eq $trimmed` probe that relied on composite passthrough. So `switch(kind)` reads variable `kind`
+      while `case(foo)` matches literal `"foo"`; `case(:name)`/quoted values stay non-literal.
+    Evidence (discriminating probes, `scratchpad/probe_15_2_1b.pl`): `switch(kind)`->`good`, `num_lt(n,5)`@n=10->`no`,
+    `if(c)`@c=0->`F` — all now equal to their `:name` forms; `:name` forms still work (compat). Focused switch/case
+    lowering via `call_spec_handler_subst`: selector `$__ls_switch_value = $kind`, case `eq "foo"`, default branch
+    intact — matches the phase0 regex lock. FULL phase0 (`PERL5LIB= perl -Iperl t/phase0_regression.t`): reach
+    `ok 1022` (true end, plan `1..1022`), **1021 pass**, only failure `not ok 796`
+    (`emit_context_lowers_split_tagged_records_helper`, the pre-existing baseline). `comm` vs baseline `{796}` =
+    empty both ways: zero new failures, zero regressions. `perl -c` clean on both changed modules. ENV: phase0
+    subprocess tests (e.g. 102 pplugin lazy-load) require `PERL5LIB=` cleared, else the stale
+    `pgen/fx/perl` checkout poisons them (unrelated to this change).
   Commit: `pending`
 
 - ID: `SPEC-FORMAT-TERSE.15.2.3`
@@ -3476,8 +3508,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `SPEC-FORMAT-TERSE.15.2.1` | `done` | design/inventory: value positions where bare != `:name` enumerated with discriminating evidence (switch/num_*/if); seams pinned (Perl `FlowExpr::_lower_flow_composite_expr:364` + `ControlFlow` selector; Rust `Expr::Variable` vs `ScalarSlot`); value-position-is-variable policy locked |
-| 2 | `SPEC-FORMAT-TERSE.15.2.2` | `active` | Perl engine: bare reads honored in all value positions (`:name` still compat) |
-| 3 | `SPEC-FORMAT-TERSE.15.2.3` | `pending` | Rust engine parity for bare reads in all value positions |
+| 2 | `SPEC-FORMAT-TERSE.15.2.2` | `done` | Perl engine: ONE FlowExpr change (bare→`$name` at passthrough) closed switch/num/if gaps; ControlFlow keeps case labels literal; full phase0 green 1021/1-baseline, `:name` still compat |
+| 3 | `SPEC-FORMAT-TERSE.15.2.3` | `active` | Rust engine parity for bare reads in all value positions |
 | 4 | `SPEC-FORMAT-TERSE.15.2.4` | `pending` | migrate current specs/corpus/oracle/mdBook/KM to bare (now output-preserving) |
 | 5 | `SPEC-FORMAT-TERSE.15.3` | `pending` | remove Perl `:name` parsing/lowering entirely (no compat) after sources are bare |
 | 6 | `SPEC-FORMAT-TERSE.15.4` | `pending` | remove Rust `:name` support entirely (no compat) |

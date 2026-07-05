@@ -124,7 +124,15 @@ sub _lower_switch_case_value_expr {
  my $lowered = $lower_flow_composite_expr->($trimmed);
  return undef unless defined($lowered) && length($lowered);
 
- if ($trimmed =~ /^\w+$/o && $lowered eq $trimmed) {
+ # SPEC-FORMAT-TERSE.15.2.2 — a bare word in switch-case LABEL position is a literal
+ # tag, not a variable read: it is a label/key position, analogous to the hash-literal
+ # key exemption in ADR 0019. `switch(kind)` reads the variable kind, but `case(foo)`
+ # matches the literal "foo"; use `case(:name)` (or a quoted/compound value) for a
+ # non-literal. `true`/`false` keep their boolean lowering. Before .15.2.2 this was
+ # detected by `$lowered eq $trimmed` (the composite lowerer returned bare words
+ # verbatim); now the composite lowerer reads a bare identifier as a variable, so the
+ # literal-tag decision is made here directly on the source token.
+ if ($trimmed =~ /^\w+$/o && $trimmed !~ /^(?:true|false)$/o) {
   return {mode => 'eq', expr => $normalize_method_tag_expr->($trimmed)}
  }
  return {mode => 'eq', expr => $lowered}
