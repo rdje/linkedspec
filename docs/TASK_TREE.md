@@ -99,6 +99,17 @@ Perl/Rust tests, oracle generation sources, and parser/runtime support, so hard 
 advances to `SPEC-FORMAT-TERSE.15.2` for current spec/corpus/docs/KM migration to bare value reads before Perl and
 Rust parser/runtime retirement.
 
+Index note 2026-07-05: `SPEC-FORMAT-TERSE.15.2` is RE-SCOPED engine-first and `.15` is re-sequenced. Executing the
+source-first `.15.2` migration proved it is NOT output-preserving at `104088e5`: bare identifiers are not read as
+the bound variable value in `switch(...)`, numeric callees, `if(...)` conditions, or all-bare `push(A,B)` second
+args, and collide with rule names in `spec.spec`/`ebnf.spec` (direct probe: `switch(:kind)`->`'good'` vs
+`switch(kind)`->`'def'`). Per the user directive that `:name` shall NOT be supported, `.15.2` now owns engine-first
+bare-read completion (`.15.2.1` design, `.15.2.2` Perl, `.15.2.3` Rust, `.15.2.4` source migration), then `.15.3`
+(Perl) and `.15.4` (Rust) remove `:name` entirely with no compat, then `.15.5` closes drift. A prior session's
+uncommitted intermingled `.15.2/.15.3/.15.4/.8/.9` work (phase0 RED) is preserved on branch
+`recovery/terse-15-uncommitted-20260705`; `main` is clean at `104088e5`. See ADR `0019` and KM card
+`terse-bare-read-value-position-gap`. Current frontier advances to `SPEC-FORMAT-TERSE.15.2.1`.
+
 Index note 2026-07-02: `SPEC-FORMAT-TERSE.3.3.4` is now done. Scalar, direct-shape aggregate, array append, hash-index mutation, operator-call, canonical `set(...)`, and legacy `assign(...)` assignment expressions are shipped on Perl/Rust; corpus is **62 fixtures**, phase0 is **1015 green**. The later `.6` shipped-spec terse migration lane reactivated concrete `SPEC-FORMAT-TERSE` frontier leaves.
 
 Index note 2026-07-04: `SPEC-FORMAT-TERSE.6.2.4` is now done. All 21 shipped `specs/*.spec` files compile from

@@ -1,6 +1,21 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-05 (SPEC-FORMAT-TERSE.15.2 — `:name` removal is ENGINE-FIRST, not source-first):
+  The `.15.1` audit assumed migrating `:name`→bare is a spelling swap. It is not. At `104088e5`, bare identifiers
+  are NOT read as the bound variable value in every value position `:name` serves — proven by the oracle
+  byte-identity gate and a direct reference-engine probe (`switch(:kind)`→`'good'` vs `switch(kind)`→`'def'`; same
+  for `num_lt`/`num_gt`, `if(...)` conditions, and the second arg of all-bare `push(A,B)`). In `spec.spec`/
+  `ebnf.spec`, a bare name colliding with a rule/token name (`started`, `top`, `rule`, `on`) resolves as a RULE
+  reference, not a variable read. `:name` was doing disambiguation work. So the order MUST be engine-first:
+  `.15.2.2`/`.15.2.3` make value-position bare reads honor the bound variable on Perl+Rust (policy: value position
+  = variable read; rule references only in edge/dispatch positions), `.15.2.4` migrates sources (now
+  output-preserving), then `.15.3`/`.15.4` remove `:name` entirely. Practical debugging aids for this lane: the
+  oracle regen (`tools/gen_oracle_corpus.pl`) is slow (~90 fixtures, build-per-fixture) and must run in the
+  BACKGROUND (foreground times out); a changed `expected.json` after a bare migration is the signal a slot is
+  load-bearing (bare≠colon). Recovery of the prior dirty tree lives on `recovery/terse-15-uncommitted-20260705`.
+  See ADR `0019` and KM card `terse-bare-read-value-position-gap`.
+
 - 2026-07-05 (SPEC-FORMAT-TERSE.15.1 — colon scalar-slot removal split):
   Do not try to remove `:name` in one parser/runtime slice. The audit found it in current shipped/root specs,
   generated oracle inputs, mdBook guidance, Knowledge Map facts, trace/phase0 tests, oracle generation sources,

@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-05: **SPEC-FORMAT-TERSE.15.2 re-scope — reorder .15 to engine-first (bare-read gap) + recovery**
+  (PLANNING/RECOVERY DONE; ENGINE-FIRST FRONTIER `.15.2.1` ACTIVE).
+
+  **Recovery:** A prior session left the working tree dirty with uncommitted, intermingled `.15.2/.15.3/.15.4/.8/.9`
+  work (152 files, phase0 RED). Preserved verbatim on branch `recovery/terse-15-uncommitted-20260705`
+  (`b1a2aefe`, reference-only); `main` reset clean to `104088e5`.
+
+  **Finding:** Source-first `.15.2` migration is NOT output-preserving at `104088e5` — bare identifiers are not
+  read as the bound variable in `switch(...)`, numeric callees, `if(...)` conditions, or all-bare `push(A,B)`
+  second args, and collide with rule names in `spec.spec`/`ebnf.spec` (`switch(:kind)`→`good` vs
+  `switch(kind)`→`def`). Per user directive (`:name` shall NOT be supported), `.15` re-sequenced engine-first:
+  `.15.2.1` design → `.15.2.2` Perl → `.15.2.3` Rust → `.15.2.4` migration → `.15.3`/`.15.4` remove → `.15.5`
+  closeout. ADR `0019`, KM `terse-bare-read-value-position-gap`.
+
+  **Verification:** Baseline phase0 = 1021 pass / 1 pre-existing unrelated fail (test 796). Memory/KM/doctrine
+  gates pass. No engine/source behavior changed.
+
 - 2026-07-05: **SPEC-FORMAT-TERSE.15.1 — split colon scalar-slot removal**
   (AUDIT/SPLIT DONE; CURRENT-SURFACE MIGRATION FRONTIER ACTIVE).
 

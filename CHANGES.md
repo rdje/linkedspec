@@ -1,6 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-05 — SPEC-FORMAT-TERSE.15.2 — reorder .15 to engine-first (bare-read gap) + recovery
+
+**Scope:** Recover a prior session's dirty working tree and re-sequence `:name` removal after proving the planned
+source-first migration is not output-preserving. Planning + recovery only; no engine/source behavior changed.
+
+**Recovery:** A prior session left the working tree dirty with uncommitted, intermingled `.15.2/.15.3/.15.4/.8/.9`
+work (152 files, phase0 RED). It is preserved verbatim on branch `recovery/terse-15-uncommitted-20260705` (commit
+`b1a2aefe`, reference-only — do not merge); `main` is reset clean to `104088e5`.
+
+**Finding:** Executing the source-first `.15.2` migration (apply `:name`→bare to `specs/*.spec` + oracle sources,
+regenerate the corpus, read the byte-identity gate) proved it is NOT output-preserving at `104088e5`. Bare
+identifiers are not read as the bound variable value in `switch(...)`, numeric callees (`num_lt`/`num_gt`),
+`if(...)` conditions, or the second arg of all-bare `push(A,B)`, and collide with rule names in
+`spec.spec`/`ebnf.spec`. Direct reference-engine probe: `switch(:kind)` → `'good'` vs `switch(kind)` → `'def'`.
+`:name` was disambiguating variable-read from rule-reference. Most shipped specs (`ds_vhistory`, `lib_reader`,
+`pplugin`, `simenv`, `tablegrep`, `tkgui`, `vhdl`) were output-preserving.
+
+**Decision (user directive: `:name` shall NOT be supported):** `.15` is re-sequenced ENGINE-FIRST. `.15.2` now
+owns `.15.2.1` design/inventory, `.15.2.2` Perl bare-read completion, `.15.2.3` Rust parity, `.15.2.4` source
+migration (output-preserving); then `.15.3`/`.15.4` remove `:name` entirely (no compat), `.15.5` closeout. Policy:
+in value positions a bare identifier is a variable read; rule references appear only in edge/dispatch positions
+(`-> Rule`, `call(Rule)`, `=> Rule`, all-bare `push(RuleA, AccumB)`); scalar push uses `items += value` or
+`push(array(items), value)`.
+
+**Artifacts:** ADR `0019`, KM card `terse-bare-read-value-position-gap`, task-tree `.15` re-sequence + `.15.2.*`
+child leaves, `KNOWLEDGE_MAP.md` regenerated (201 facts).
+
+**Verification:** Baseline phase0 = 1021 pass / 1 pre-existing unrelated fail (test 796
+`emit_context_lowers_split_tagged_records_helper`). Memory-architecture, Knowledge Map, and doctrine gates pass.
+No parser/runtime/source behavior changed.
+
 ## 2026-07-05 — SPEC-FORMAT-TERSE.15.1 — split colon scalar-slot removal
 
 **Scope:** Audit and task-tree split for removing `:name` scalar-slot syntax from the future duck-typed surface.

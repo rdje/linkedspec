@@ -1,0 +1,53 @@
+---
+id: terse-bare-read-value-position-gap
+title: "SPEC-FORMAT-TERSE.15.2 - bare identifiers are NOT read as variables in every value position at 104088e5; :name disambiguated variable-read from rule-reference, so :name removal is engine-first."
+answers:
+  - "does switch(name) read the scalar working variable like switch(:name)"
+  - "why does switch(kind) return default instead of the matched case"
+  - "does bare name work in num_lt num_gt if condition value positions"
+  - "why did migrating :name to bare break spec.spec and ebnf.spec output"
+  - "what does :name disambiguate in the terse spec surface"
+  - "is the :name to bare source migration output preserving at 104088e5"
+  - "why is SPEC-FORMAT-TERSE.15 sequenced engine-first not source-first"
+  - "how do you push a scalar value onto an array without :name"
+  - "when is a bare identifier a variable read vs a rule reference"
+date: 2026-07-05
+status: current
+tags: [spec-format-terse, colon-slot, bare-read, value-position, rule-reference, sequencing, perl, rust, SPEC-FORMAT-TERSE]
+evidence: "At commit 104088e5 (SPEC-FORMAT-TERSE.15.1) bare identifiers are NOT read as the bound variable value in several value positions where `:name` is: `switch(...)` selector, numeric callees `num_lt(...)`/`num_gt(...)`, `if(...)` conditions, and the second argument of the all-bare child-call `push(A, B)`. Direct reference-engine probe: for a rule body `{ set(kind, \"b\"); switch(:kind) { case(\"a\"){return(\"bad\")} case(\"b\"){return(\"good\")} default {return(\"def\")} } }`, `switch(:kind)` returns 'good' (reads scalar kind) but `switch(kind)` returns 'def' (bare 'kind' is not read as the variable). Additionally, in `spec.spec`/`ebnf.spec` a bare name that collides with a rule/token name (`started`, `top`, `rule`, `on`) resolves as a RULE reference, not a variable read, collapsing the parse (`spec_spec_minimal_rule` -> []). So `:name` was load-bearing: it disambiguated a variable read from a rule reference and forced a scalar read where bare-read support had not landed. The oracle byte-identity gate (tools/gen_oracle_corpus.pl -> expected.json) flags exactly these as changed output; most shipped specs (ds_vhistory, lib_reader, pplugin, simenv, tablegrep, tkgui, vhdl) were output-preserving. Because the user directed that :name shall NOT be supported, SPEC-FORMAT-TERSE.15 is re-sequenced engine-first: .15.2.2/.15.2.3 make bare identifiers in value positions read the bound variable on Perl+Rust (value-position-is-variable policy; rule references only in edge/dispatch positions `-> Rule`, `call(Rule)`, `=> Rule`, and all-bare `push(RuleA, AccumB)`), .15.2.4 migrates sources, then .15.3/.15.4 remove :name entirely. Scalar push without :name uses `items += value` or `push(array(items), value)`. See ADR 0019."
+reverify: "perl -Iperl -MLinkedSpec -e 'my $c = qq{Top::\\n /x/ -> Done { set(kind, \"b\"); switch(:kind) { case(\"a\") { return(\"bad\") } case(\"b\") { return(\"good\") } default { return(\"def\") } } }\\n\\nDone::\\n /[a-z]+/\\n}; my $b = $c; $b =~ s/switch\\(:kind\\)/switch(kind)/; for my $t ([colon=>$c],[bare=>$b]) { my $p = LinkedSpec::Get(\\$t->[1]); my $in=\"xhello\"; print $t->[0], \": \", ($p->(\\$in) // \"undef\"), \"\\n\"; }'"
+---
+
+# Bare-Read Value-Position Gap (why `:name` removal is engine-first)
+
+At `104088e5`, bare identifiers are **not** read as the bound variable value in every value
+position that `:name` serves. Proven directly against the reference engine:
+
+```text
+switch(:kind) -> 'good'   # reads scalar kind = "b", matches case("b")
+switch(kind)  -> 'def'    # bare 'kind' is NOT read as the variable -> default
+```
+
+The same gap appears in numeric callees (`num_lt(...)`, `num_gt(...)`), `if(...)`
+conditions, and the second argument of the all-bare child-call `push(A, B)`. Separately,
+in `spec.spec`/`ebnf.spec` a bare name that **collides with a rule/token name**
+(`started`, `top`, `rule`, `on`) resolves as a *rule reference*, not a variable read, so
+the parse collapses (`spec_spec_minimal_rule` -> `[]`).
+
+So `:name` was load-bearing — it disambiguated **variable read** from **rule reference**
+and forced a scalar read where bare support had not landed. A source-first `:name`->bare
+migration is therefore **not** output-preserving; the oracle byte-identity gate flags
+exactly the affected fixtures.
+
+**Policy (value-position-is-variable).** In a value-expression position a bare identifier
+is a variable/parameter read; rule references appear only in edge/dispatch positions
+(`-> Rule`, `call(Rule)`, `=> Rule`, and the all-bare `push(RuleA, AccumB)` convention).
+Scalar push therefore uses `items += value` or `push(array(items), value)`, never a colon
+slot.
+
+**Consequence.** `SPEC-FORMAT-TERSE.15` is engine-first: `.15.2.2`/`.15.2.3` make bare
+value-position reads honor the bound variable on Perl + Rust, `.15.2.4` migrates sources
+(now output-preserving), then `.15.3`/`.15.4` remove `:name` entirely (no compat, per the
+user directive that `:name` shall not be supported). See ADR `0019`, and
+[[terse-duck-typed-assignment-perl-reference]] for the assignment-binding side of the same
+surface.
