@@ -3127,13 +3127,29 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Verification: `deferred`
   Commit: `deferred`
 
+- ID: `SPEC-FORMAT-TERSE.15`
+  Status: `pending` (owned by user directive 2026-07-05)
+  Goal: Remove colon-prefixed scalar variable references from the future duck-typed `.spec` surface.
+  Acceptance: The duck-typed authoring surface uses bare names for variable and parameter reads in value-expression
+    positions. `value` reads the current runtime typed value bound to `value`; `:value` is removed from current
+    examples, mdBook guidance, generated oracle fixtures, active tests, and Knowledge Map current facts except
+    where historical records explicitly discuss the old scalar-slot syntax. Bare names in hash-literal key position
+    remain key tokens that stringify to hash keys, so the implementation must preserve a clear grammar/AST boundary
+    between value reads and hash key spelling. Explicit typed views/guards use `array(value)` and `hash(value)`,
+    not scalar-slot punctuation. Before implementation, the leaf must audit shipped specs, root corpus examples,
+    parser/lowering paths, Rust runtime behavior, diagnostics, mdBook, and Knowledge Map facts for `:name` scalar
+    references and split child work if the blast radius is larger than one safe slice.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `SPEC-FORMAT-TERSE.11` | `active` | user directive adopts duck-typed variable assignment as the active terse-format direction before further assignment-shape fixes |
-| 2 | `SPEC-FORMAT-TERSE.8` | `pending` | user directive removes all remaining legacy compatibility helper support; in-flight helper-removal work must stay aligned with `.11` assignment semantics |
-| 3 | `SPEC-FORMAT-TERSE.9` | `pending` | user directive replaces Perlish hash-literal `=>` association with terse `:` association after helper-removal / assignment-semantics coordination lands |
+| 2 | `SPEC-FORMAT-TERSE.15` | `pending` | user directive removes colon-prefixed scalar variable references from the future duck-typed surface |
+| 3 | `SPEC-FORMAT-TERSE.8` | `pending` | user directive removes all remaining legacy compatibility helper support; in-flight helper-removal work must stay aligned with `.11` assignment semantics |
+| 4 | `SPEC-FORMAT-TERSE.9` | `pending` | user directive replaces Perlish hash-literal `=>` association with terse `:` association after helper-removal / assignment-semantics coordination lands |
 | — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.12` | `deferred` / `spec backlog` | track future hash-tree attached-block traversal; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.13` | `deferred` / `backlog` | track lower-priority array-tree traversal analog; not PNT-eligible until explicitly activated |
@@ -4324,6 +4340,11 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.4.2` | `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls` | Perl inline value-control lowering landed for `if`/`switch` in supported value positions; corpus 46 passes and frontier becomes `.2.3.5`. |
 
 ## Changelog
+
+- `2026-07-05`: **`.15` OWNED — remove colon scalar references from duck-typed surface.**
+  User directive logs the removal of `:name` scalar variable references now that variables are duck-typed runtime
+  values. Future current-facing syntax reads variables/parameters as bare names in value positions, while bare
+  hash-literal keys remain stringified key tokens in key position.
 
 - `2026-07-05`: **`.14` DEFERRED/SPEC BACKLOG — trailing block arguments without closures.**
   User directive tracked the generalization from hash-tree attached blocks to a block-argument type accepted only as

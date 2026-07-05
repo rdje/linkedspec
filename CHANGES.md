@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-05 — SPEC-FORMAT-TERSE.15 — track colon scalar-reference removal
+
+**Scope:** Task-tree/index/live-doc tracking for removing scalar-slot punctuation from the future duck-typed
+surface.
+
+**What changed:** Added pending `SPEC-FORMAT-TERSE.15` to own removal of `:name` scalar variable references. The
+future duck-typed surface reads variables and parameters as bare names in value-expression positions. Bare names in
+hash-literal key position remain stringified keys, so `.15` must preserve a clear key-position vs value-position
+grammar/AST boundary when implemented.
+
+**Tests:** `git diff --check -- CHANGES.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md MEMORY.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md`.
+
+**Status:** `.15` is pending and owned; no parser/runtime behavior changed in this tracking slice.
+
 ## 2026-07-05 — SPEC-FORMAT-TERSE.14 — track trailing block arguments
 
 **Scope:** Task-tree/index/live-doc tracking for a future block-argument type on helper and receiver-method calls.

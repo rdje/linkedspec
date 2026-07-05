@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-05: **SPEC-FORMAT-TERSE.15 — track colon scalar-reference removal**
+  (TASK-TREE OWNERSHIP TRACKED; IMPLEMENTATION NOT ACTIVE).
+
+  **Fix:** Added pending ownership for removing `:name` scalar variable references from the future duck-typed
+  surface. Variables and parameters should be read as bare names in value positions, while bare names in
+  hash-literal key position remain stringified keys.
+
+  **Verification:** `git diff --check -- CHANGES.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md MEMORY.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md`.
+
+  **Frontier:** `.15` is owned and pending behind the active `.11` duck-typed semantics work. Implementation has
+  not started.
+
 - 2026-07-05: **SPEC-FORMAT-TERSE.14 — track trailing block arguments**
   (TASK-TREE BACKLOG TRACKED; IMPLEMENTATION NOT ACTIVE).
 

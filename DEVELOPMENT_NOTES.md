@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-05 (SPEC-FORMAT-TERSE.15 — colon scalar-reference removal):
+  Duck typing removes the reason for `:name` as scalar-slot syntax. The future current-facing surface should read
+  variables and parameters as bare names in value positions. Preserve the grammar distinction that bare names in
+  hash-literal key position are stringified keys, while bare names in value position are value reads. Typed
+  aggregate views should remain explicit (`array(value)`, `hash(value)`) rather than punctuation-driven.
+
 - 2026-07-05 (SPEC-FORMAT-TERSE.14 — trailing block arguments):
   Future attached-block generalization should be a block-argument type, not full closures. Keep the block final in
   the call signature and prefer `fn(args) { ... }` / grammar-safe zero-arg `fn { ... }` over inline
