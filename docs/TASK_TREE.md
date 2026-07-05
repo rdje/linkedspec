@@ -48,6 +48,12 @@ delimiter-explicit (`name = [...]`, `name = {...}`); delimiterless comma/pair RH
 future leaf specifies it. Nested references and assignments through mixed array/hash value trees are part of the
 `.11` contract and must not inherit Perl autovivification behavior accidentally.
 
+Index note 2026-07-05: `SPEC-FORMAT-TERSE.11.1` split/probe closure is done. The current source and toolbox probes
+show that Perl still lowers direct RHS shape assignments into `@name`/`%name` target-kind inference and Rust still
+has matching direct-shape assignment branches. Frontier advances to `SPEC-FORMAT-TERSE.11.2` for the Perl reference
+duck-typed value-binding implementation, with Rust parity, nested value paths, and docs/KM/corpus closeout split
+behind it.
+
 Index note 2026-07-05: `SPEC-FORMAT-TERSE.12` and `.13` are now tracked as deferred/backlog by explicit user
 directive. `.12` owns future hash-tree attached-block traversal; for that backlog item a hash-tree has a hash root,
 hash interior nodes, and scalar or array leaves. `.13` tracks the analogous lower-priority array-tree traversal

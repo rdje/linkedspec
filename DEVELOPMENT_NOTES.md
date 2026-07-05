@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-05 (SPEC-FORMAT-TERSE.11.1 — split/probe):
+  Current implementation still has two target-kind inference seams that conflict with duck-typed assignment:
+  Perl `MethodLowering`/`RuleIR::EmitContext` lower and declare bare direct-shape assignments as `@name` or
+  `%name`, and Rust `engine.rs` retags bare `AssignScalar` / `set` direct-shape RHS values through
+  `set_array`/`set_hash`. Keep `.11.2` focused on the Perl reference change first; do not stage unrelated
+  pre-existing `.8` helper-removal edits from the dirty worktree into the `.11.2` commit.
+
 - 2026-07-05 (SPEC-FORMAT-TERSE.15 — colon scalar-reference removal):
   Duck typing removes the reason for `:name` as scalar-slot syntax. The future current-facing surface should read
   variables and parameters as bare names in value positions. Preserve the grammar distinction that bare names in

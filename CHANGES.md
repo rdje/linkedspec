@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-05 — SPEC-FORMAT-TERSE.11.1 — split duck-typed assignment work
+
+**Scope:** Task-tree split, code/book inventory, and toolbox probe record for the active duck-typed assignment
+semantics lane.
+
+**What changed:** Split `SPEC-FORMAT-TERSE.11` into child leaves after reading the active code paths and mdBook
+drift. `.11.1` records the current ground truth: Perl still lowers direct RHS shape assignment into `@name` /
+`%name` target-kind inference and Rust still has matching direct-shape assignment branches. The frontier now moves
+to `.11.2` for the Perl reference value-binding implementation, followed by Rust parity, nested path semantics, and
+docs/KM/corpus closeout.
+
+**Tests:** `git diff --check -- CHANGES.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md MEMORY.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md`; `perl -Iperl -MLinkedSpec -e 'print $INC{"LinkedSpec.pm"},"\n"'`; focused `LinkedSpec::call_spec_handler_subst` probes for shape assignment lowering.
+
+**Status:** `.11.1` is complete; no parser/runtime/mdBook behavior changed in this split slice.
+
 ## 2026-07-05 — SPEC-FORMAT-TERSE.15 — track colon scalar-reference removal
 
 **Scope:** Task-tree/index/live-doc tracking for removing scalar-slot punctuation from the future duck-typed

@@ -6,13 +6,16 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-04` (**`.7.4` DONE; type-method no-drift sweep closed. Current roadmap, task-tree index,
+- Last updated: `2026-07-05` (**`.11.1` DONE; duck-typed assignment work split after mandatory bootstrap,
+  mdBook/code/Knowledge Map inventory, and focused toolbox probes. Current Perl/Rust still implement direct
+  RHS-shape target-kind inference (`x = []` -> array storage, `x = {}` -> hash storage), which conflicts with the
+  `.11` duck-typed value-binding contract. The frontier is `.11.2` for the Perl reference change, followed by
+  `.11.3` Rust parity, `.11.4` nested mixed paths, and `.11.5` docs/KM/corpus closeout. Prior **`.7.4` DONE; type-method no-drift sweep closed. Current roadmap, task-tree index,
   mdBook helper/reference summaries, and Knowledge Map facts now agree that string/scalar, array/list, hash, and
   number receiver families are the supported type-method surface; array numeric reducers are terminal array/list
   receiver methods, not scalar number receiver links; mutation/lifecycle/control/child-dispatch/parser-state/
   declaration/compatibility helpers remain explicit unless a future leaf defines type-correct receiver semantics.
-  No Perl/Rust behavior change was needed. The `.7` lane is closed, and no `SPEC-FORMAT-TERSE` leaf is currently
-  pending. PNT returns to `TOP-RULE-AS-NORMAL.3.2` unless a new terse leaf is split. Prior **`.7.3` DONE; array/list numeric reducer receiver methods landed as terminal
+  No Perl/Rust behavior change was needed. The `.7` lane is closed. Prior **`.7.3` DONE; array/list numeric reducer receiver methods landed as terminal
   Perl/Rust links. `sum`, `avg`, `median`, `range`, `min`, and `max` now work from array receivers, including after
   array-returning links such as `sorted().take(...)` and Perl internal pure array-pipeline links such as `uniq()`.
   Invalid reducer continuations return `undef`/`null`; hash and number mutation/ambiguous boundaries remain
@@ -3052,9 +3055,10 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `deferred`
 
 - ID: `SPEC-FORMAT-TERSE.11`
-  Status: `active` (owned by user directive 2026-07-05)
+  Status: `active` (split 2026-07-05; `.11.1` done; frontier `.11.2`)
   Goal: Adopt duck-typed `.spec` variable assignment semantics so variables bind typed values at runtime instead of
     exposing Perl-style scalar/array/hash storage classes through assignment inference.
+  Children: `.11.1` (done), `.11.2` (active), `.11.3` (pending), `.11.4` (pending), `.11.5` (pending).
   Acceptance: The spec, parser, Perl lowering, Rust runtime, generated oracle corpus, active tests, mdBook, and
     Knowledge Map agree that `name = value` binds `name` to the typed value produced by the RHS. Scalar, number,
     string, array, and hash values are all legal RHS values; `name = [...]` binds an array value, `name = {...}`
@@ -3075,6 +3079,68 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     Perl storage classes. Hash-literal syntax must coordinate with `.9`: examples use whichever key/value
     separator is current when the child implementation lands, and no `.11` code may reintroduce `{ key => value }`
     as a current surface after `.9`.
+  Verification: split by `.11.1`; implementation pending in child leaves.
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.11.1`
+  Status: `done` (2026-07-05)
+  Goal: Split duck-typed assignment implementation after full bootstrap/code/book inventory and toolbox probes.
+  Acceptance: Before code, identify the exact current drift from the `.11` contract, split the implementation into
+    signoff-sized children, and record the dirty-work boundary so later commits do not mix unrelated helper-removal
+    work with assignment semantics.
+  Verification: **PASS 2026-07-05.** Completed the mandatory bootstrap read (`README.md`,
+    `MEMORY_ARCHITECTURE.md`, `MEMORY.md`, `SESSION_BOOTSTRAP.md`, `COMMIT.md`, `TOOLBOX.md`, task tree,
+    relevant ADRs, and Knowledge Map facts), read the mdBook source set for assignment/container drift, inspected
+    the LinkedSpec facade/import tree plus the ActionIR/Rust seams for assignments and variable stores, and used
+    toolbox probes with `perl -Iperl` to confirm current behavior. Current Perl still lowers bare direct-shape
+    assignments as target-kind inference (`x = []` -> `@x = ()`, `set(x, {})` -> `%x = ()`) and the collector still
+    records matching `my @x` / `my %x` declarations. Rust still has direct-shape assignment branches that retag
+    bare targets into array/hash stores. The worktree also contains pre-existing `.8` helper-removal / `.15`
+    tracking edits, so implementation is split to keep staging and commit ownership precise. No parser/runtime/book
+    behavior changed in this leaf.
+  Commit: `SPEC-FORMAT-TERSE.11.1 - split duck-typed assignment work`
+
+- ID: `SPEC-FORMAT-TERSE.11.2`
+  Status: `active`
+  Goal: Perl reference — replace RHS-shape target-kind inference with duck-typed value binding for bare assignment
+    targets.
+  Acceptance: Perl lowering for `name = value`, `set(name, value)`, expression-valued `=(name, value)`, and the
+    corresponding generated-source declaration collector treats bare `name` as one runtime value binding. Direct
+    shape RHS values lower as values (`[]`/`{}` payloads held by the variable), not as `@name` / `%name` storage
+    assignment solely because of RHS shape. Explicit typed view/mutation surfaces must be handled deliberately and
+    documented in the child verification; no stale collector path may emit `my @name` or `my %name` solely from
+    `name = [...]` / `name = {...}`. Focused Perl source/runtime tests must replace the old
+    `shape_rhs_infers_bare_targets` locks.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.11.3`
+  Status: `pending`
+  Goal: Rust runtime parity for duck-typed assignment and bare variable value reads.
+  Acceptance: Rust `Expr::AssignScalar` and `set`/`=` helper execution bind the evaluated `RuntimeValue` to the
+    named variable without retagging bare targets from direct RHS shape. Later assignments may replace a scalar
+    with an array/hash value and vice versa. Rust integration and oracle fixtures must replace the old
+    `.1.2.3.5.4` target-kind inference expectations.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.11.4`
+  Status: `pending`
+  Goal: Specify and implement nested mixed array/hash value-path reads and writes.
+  Acceptance: Nested paths through duck-typed values support arbitrary hash-then-array, array-then-hash, and longer
+    mixed read/write combinations in statement and expression-valued assignment contexts. Missing intermediate
+    containers, wrong-shape transitions, array index extension, and hash key creation are specified in LinkedSpec
+    terms and covered on Perl/Rust without accidentally inheriting Perl autovivification semantics.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.11.5`
+  Status: `pending`
+  Goal: Close duck-typed assignment documentation, Knowledge Map, corpus/oracle, and mdBook alignment.
+  Acceptance: Active tests, generated oracle fixtures, mdBook chapters, helper catalog, live docs, and current
+    Knowledge Map facts describe assignment as typed value binding, not Perl storage-class inference. Historical
+    task/changelog references may remain historical; current-facing guidance must not teach direct RHS shape as
+    declaration or target-kind inference. Coordinate examples with `.9` if hash-literal colon syntax has landed.
   Verification: `pending`
   Commit: `pending`
 
@@ -3146,10 +3212,13 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SPEC-FORMAT-TERSE.11` | `active` | user directive adopts duck-typed variable assignment as the active terse-format direction before further assignment-shape fixes |
-| 2 | `SPEC-FORMAT-TERSE.15` | `pending` | user directive removes colon-prefixed scalar variable references from the future duck-typed surface |
-| 3 | `SPEC-FORMAT-TERSE.8` | `pending` | user directive removes all remaining legacy compatibility helper support; in-flight helper-removal work must stay aligned with `.11` assignment semantics |
-| 4 | `SPEC-FORMAT-TERSE.9` | `pending` | user directive replaces Perlish hash-literal `=>` association with terse `:` association after helper-removal / assignment-semantics coordination lands |
+| 1 | `SPEC-FORMAT-TERSE.11.2` | `active` | `.11.1` split/probe pass found the Perl RHS-shape target-kind inference paths; next owned slice replaces them with duck-typed value binding |
+| 2 | `SPEC-FORMAT-TERSE.11.3` | `pending` | Rust parity follows the Perl reference assignment semantics change |
+| 3 | `SPEC-FORMAT-TERSE.11.4` | `pending` | nested mixed array/hash value paths need explicit semantics after top-level binding is corrected |
+| 4 | `SPEC-FORMAT-TERSE.11.5` | `pending` | docs/KM/corpus/mdBook closeout follows implementation |
+| 5 | `SPEC-FORMAT-TERSE.15` | `pending` | user directive removes colon-prefixed scalar variable references from the future duck-typed surface |
+| 6 | `SPEC-FORMAT-TERSE.8` | `pending` | user directive removes all remaining legacy compatibility helper support; in-flight helper-removal work must stay aligned with `.11` assignment semantics |
+| 7 | `SPEC-FORMAT-TERSE.9` | `pending` | user directive replaces Perlish hash-literal `=>` association with terse `:` association after helper-removal / assignment-semantics coordination lands |
 | — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.12` | `deferred` / `spec backlog` | track future hash-tree attached-block traversal; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.13` | `deferred` / `backlog` | track lower-priority array-tree traversal analog; not PNT-eligible until explicitly activated |

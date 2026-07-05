@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-05: **SPEC-FORMAT-TERSE.11.1 — split duck-typed assignment work**
+  (TASK-TREE SPLIT/PROBE DONE; IMPLEMENTATION FRONTIER ADVANCED).
+
+  **Fix:** Split the active duck-typed assignment leaf into signoff-sized children after codebase, mdBook, Knowledge
+  Map, and toolbox inspection. Current ground truth is recorded: Perl still infers `@name`/`%name` from direct RHS
+  shape assignment, and Rust still has matching direct-shape assignment branches.
+
+  **Verification:** `git diff --check -- CHANGES.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md MEMORY.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md`; `perl -Iperl -MLinkedSpec` module-path check; focused `call_spec_handler_subst` probes.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.11.2` is active for the Perl reference duck-typed value-binding implementation.
+  Rust parity, nested mixed value paths, and docs/KM/corpus closeout are split behind it.
+
 - 2026-07-05: **SPEC-FORMAT-TERSE.15 — track colon scalar-reference removal**
   (TASK-TREE OWNERSHIP TRACKED; IMPLEMENTATION NOT ACTIVE).
 
