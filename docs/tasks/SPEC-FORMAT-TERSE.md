@@ -3006,10 +3006,81 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     corpus, and Knowledge Map facts. No source behavior change was needed.
   Commit: `SPEC-FORMAT-TERSE.7.4 - close type-method no-drift sweep`
 
+- ID: `SPEC-FORMAT-TERSE.8`
+  Status: `pending` (reactivated by user directive 2026-07-04)
+  Goal: Remove all legacy compatibility helper-function support so the accepted `.spec` authoring surface is the
+    terse surface only.
+  Acceptance: Perl and Rust reject or stop lowering legacy helper spellings that remained accepted only for
+    compatibility after `.6.4`, including declaration helpers (`declare(...)` and declaration aliases), old
+    assignment/copy/concat/append spellings (`assign(...)`, `array_copy(...)`, `hash_copy(...)`, `concat(...)`,
+    `push_value(...)` where a terse replacement exists), retired wrapper aliases (`s(...)`, `a(...)`, `h(...)`),
+    and any lingering `scalar(...)` scalar-slot compatibility path. Current shipped specs, root corpus examples,
+    generated oracle fixtures, mdBook examples, helper catalog, Knowledge Map facts, and roadmap/live docs must
+    describe and exercise only the terse forms: auto-existing variables, `:name`, `array(...)`, `hash(...)`,
+    direct shape literals, `set(...)`, assignment operators, `push(...)`/`items += value`, `cat(...)`, and
+    `copy(...)`. Historical changelog/task records may mention removed spellings only as past facts, not as
+    current supported behavior.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.9`
+  Status: `pending` (owned by user directive 2026-07-04)
+  Goal: Replace Perlish hash-literal association syntax with terse colon association syntax.
+  Acceptance: The current `.spec` hash literal syntax uses `{ key : value }` for key/value association in direct
+    hash shape literals and examples. The old `{ key => value }` spelling is removed from the accepted current
+    authoring surface, generated oracle fixtures, active tests, mdBook examples, and Knowledge Map current facts
+    except where historical task/changelog records explicitly discuss past syntax. Perl and Rust parse/evaluate
+    colon hash literals consistently, including nested shape literals, direct RHS target-kind inference
+    (`meta = { key : value }`), mutation RHS values (`meta[key] = { key : value }`), block-vs-hash precedence,
+    and expression-valued assignment forms. The book documents `:` as the hash-literal key/value separator and
+    no longer teaches `=>` as current `.spec` syntax.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.10`
+  Status: `deferred` / `potential` (tracked by user directive 2026-07-04; may be dropped)
+  Goal: Decide whether direct hash literals have any dynamic/computed key surface beyond the fixed-key syntax
+    accepted by the spec, and implement it only if the spec explicitly defines that surface first.
+  Acceptance: No parser/runtime implementation may broaden hash-literal key semantics by accident. Before any
+    code change, the leaf must either (a) be closed as `dropped` with the explicit decision that direct hash
+    literals accept only the fixed key forms defined by `.9`, or (b) be split into a specification-first
+    implementation plan that defines exact dynamic/computed-key syntax, bare-key stringification rules, quoted-key
+    behavior, expression-key delimiters if any, block-vs-hash precedence, nested literal behavior, Perl/Rust parity,
+    diagnostics for ambiguous key forms, mdBook examples, active tests, generated oracle fixtures, and Knowledge
+    Map updates. This leaf is not PNT-eligible while `.8` and `.9` are pending.
+  Verification: `deferred`
+  Commit: `deferred`
+
+- ID: `SPEC-FORMAT-TERSE.11`
+  Status: `active` (owned by user directive 2026-07-05)
+  Goal: Adopt duck-typed `.spec` variable assignment semantics so variables bind typed values at runtime instead of
+    exposing Perl-style scalar/array/hash storage classes through assignment inference.
+  Acceptance: The spec, parser, Perl lowering, Rust runtime, generated oracle corpus, active tests, mdBook, and
+    Knowledge Map agree that `name = value` binds `name` to the typed value produced by the RHS. Scalar, number,
+    string, array, and hash values are all legal RHS values; `name = [...]` binds an array value, `name = {...}`
+    binds a hash value, and later `name = ...` may rebind the same name to a different typed shape. Direct
+    `[...]` / `{...}` literals are value literals, not declarations or Perl-sigil target-kind inference triggers.
+    The `.11` MVP keeps aggregate RHS syntax explicit: `name = [a, b]` and `name = { k : v }` are accepted
+    value-literal assignments, while delimiterless aggregate sugar such as `name = a, b` or `name = k : v` is
+    out of scope unless a later task-tree leaf specifies its precedence, diagnostics, and parser recovery rules.
+    `array(name)` and `hash(name)` remain explicit typed reads/snapshots/guards at use sites, not declaration
+    mechanisms. The implementation must remove or rewrite current assignment tests and lowering paths that infer
+    `@name` / `%name` storage solely from RHS shape. Perl may keep private implementation details internally, but
+    no user-facing spec, diagnostic, mdBook example, or Knowledge Map fact may describe assignment in terms of
+    Perl storage classes. Hash-literal syntax must coordinate with `.9`: examples use whichever key/value
+    separator is current when the child implementation lands, and no `.11` code may reintroduce `{ key => value }`
+    as a current surface after `.9`.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
+| 1 | `SPEC-FORMAT-TERSE.11` | `active` | user directive adopts duck-typed variable assignment as the active terse-format direction before further assignment-shape fixes |
+| 2 | `SPEC-FORMAT-TERSE.8` | `pending` | user directive removes all remaining legacy compatibility helper support; in-flight helper-removal work must stay aligned with `.11` assignment semantics |
+| 3 | `SPEC-FORMAT-TERSE.9` | `pending` | user directive replaces Perlish hash-literal `=>` association with terse `:` association after helper-removal / assignment-semantics coordination lands |
+| — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.6.1` | `done` | User directive owned under the existing terse-format tree; shipped-spec inventory recorded before any `.spec` edit. |
 | — | `SPEC-FORMAT-TERSE.6.2.1` | `done` | shipped specs no longer use active `declare(...)` / `.declare(...)`; focused compile, phase0, and Rust corpus oracle pass |
 | — | `SPEC-FORMAT-TERSE.6.2.2` | `done` | shipped specs no longer use active old helper spellings; focused compile, phase0, and Rust corpus oracle pass |
@@ -3023,7 +3094,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.7.2` | `done` | string/scalar receiver methods already cover the useful pure helper set; `substr()` method/helper equivalence verified on Perl/Rust; no code change |
 | — | `SPEC-FORMAT-TERSE.7.3` | `done` | array/list numeric reducer receiver methods landed as terminal links; hash/number boundaries kept explicit; phase0 1021; oracle 74 fixtures |
 | — | `SPEC-FORMAT-TERSE.7.4` | `done` | final type-method no-drift sweep closed; current docs/KM/task-tree/roadmap agree on method families and explicit boundaries |
-| — | _none_ | `frontier empty` | no `SPEC-FORMAT-TERSE` leaf is currently pending; PNT returns to `TOP-RULE-AS-NORMAL.3.2` unless a new terse leaf is split |
+| — | _none_ | `superseded` | frontier reopened by `SPEC-FORMAT-TERSE.8` after the user's 2026-07-04 directive to remove legacy compatibility helpers |
 | — | `SPEC-FORMAT-TERSE.0` | `done` | Ratified 2026-06-18 — ADR `0007` (direction Rounds 1–3 + gradual-alias migration + lockstep variants + reference-touching exception + regression gate). |
 | — | ~~EXECUTION DECISION PENDING~~ | `resolved` 2026-06-22 | The "usable phase0" gate is **cleared** — `t/phase0_regression.t` 960/960 green + `tools/run_ci_local.sh` EXIT 0 (via `PHASE0-BACKHALF-TRIAGE`). Migration policy already resolved (gradual-alias, ADR `0007`). `.1.x`+ are now PNT-eligible. |
 | — | `SPEC-FORMAT-TERSE.1.1.1` | `done` 2026-06-24 | Round 1 — auto-existing working variables (**Perl reference**): the engine now auto-supplies the per-invocation `my` lexical for wrapper-referenced vars; `declare(...)` is now optional. Collector in `RuleIR::EmitContext::_collect_auto_working_var_decls`, injection in `SpecEntry::compile_spec_entry`. 19/20 shipped specs byte-identical (only `tkgui` gains one legit `my`, behavior-preserved); +3 phase0 locks → 968 green; gate EXIT 0; book taught (declare optional). |
@@ -4196,6 +4267,27 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.4.2` | `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls` | Perl inline value-control lowering landed for `if`/`switch` in supported value positions; corpus 46 passes and frontier becomes `.2.3.5`. |
 
 ## Changelog
+
+- `2026-07-05`: **`.11` ACTIVE — duck-typed assignment semantics.**
+  User directive adopts duck-typed variable binding as the active assignment direction: `name = value` binds a
+  typed value, including array/hash RHS values, without exposing Perl `$/@/%` storage classes as the spec model.
+  The leaf is now the active spec-first assignment-semantics owner and must coordinate with `.8` helper-removal
+  fallout and `.9` colon hash-literal syntax before implementation lands.
+
+- `2026-07-04`: **`.8` OWNED — legacy compatibility helper support removal.**
+  User directive supersedes the `.6.4` compatibility-retention policy for this unreleased project. The next slice
+  removes remaining compatibility-only helper spellings from Perl/Rust, tests/corpus, mdBook, Knowledge Map, and
+  roadmap/live docs so the terse surface is the only accepted current helper surface.
+
+- `2026-07-04`: **`.9` OWNED — colon hash-literal association syntax.**
+  User directive replaces Perlish `{ key => value }` hash-literal association with terse `{ key : value }` syntax.
+  The leaf is queued behind `.8` so compatibility-helper removal can land as its own committed slice before the
+  hash-literal parser/docs migration.
+
+- `2026-07-04`: **`.10` DEFERRED/POTENTIAL — dynamic/computed hash-literal keys.**
+  User directive tracked a possible future implementation for dynamic/computed hash-literal keys, but only if the
+  spec explicitly defines the syntax and semantics first. The leaf is intentionally discardable: it may be closed
+  as dropped if the accepted hash-literal surface stays fixed-key only after `.9`.
 
 - `2026-07-04`: **`.6.4` DONE — declaration-helper compatibility policy locked.**
   `declare(...)` and declaration aliases remain accepted legacy compatibility for existing specs after the terse

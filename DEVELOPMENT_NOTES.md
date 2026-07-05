@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-05 (SPEC-FORMAT-TERSE.11 — duck-typed assignment semantics):
+  The active assignment direction is now duck-typed value binding, not Perl storage-class inference. Treat
+  `name = value` as binding the variable to the RHS typed value at runtime: strings/numbers/scalars, arrays from
+  `[...]`, and hashes from `{...}`. Later assignments may change the value shape. `array(name)` and `hash(name)`
+  should be modeled as explicit typed reads/snapshots/guards, not declarations. The `.11` MVP deliberately keeps
+  aggregate RHS values delimiter-explicit; do not make `name = a, b` equivalent to `name = [a, b]` or `name = k : v`
+  equivalent to `name = { k : v }` without a later task-tree leaf that specifies precedence, diagnostics, and
+  recovery.
+
 - 2026-07-04 (TRACE-OBSERVABILITY.4.5 — trace parity proof):
   Rust may now claim trace parity for the mdBook-documented external capability contract. The claim is behavioral:
   ordered levels, normal-entrypoint controls, stdout/routed-file/mirror sinks, routed-file reset, default-quiet

@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-05 — SPEC-FORMAT-TERSE.11 — activate duck-typed assignment semantics
+
+**Scope:** Task-tree ownership, top-level task index, and resume pointer for the new duck-typed assignment
+semantics direction.
+
+**What changed:** Added active leaf `SPEC-FORMAT-TERSE.11` to own the decision that `.spec` assignment should bind
+runtime typed values instead of exposing Perl scalar/array/hash storage classes. The leaf specifies that
+`name = [...]` binds an array value and `name = {...}` binds a hash value, with later rebinds allowed to change
+shape. It also keeps delimiterless aggregate RHS sugar such as `name = a, b` and `name = k : v` out of the MVP
+unless a future leaf explicitly owns its precedence and diagnostics.
+
+**Tests:** `git diff --check -- docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md MEMORY.md`.
+
+**Status:** `.11` is the active spec-first assignment-semantics owner. The broader in-flight `.8` helper-removal
+work remains uncommitted and must align with `.11`; no runtime behavior changed in this tracking slice.
+
 ## 2026-07-04 — TRACE-OBSERVABILITY.4.5 — close trace parity proof
 
 **Scope:** Cross-variant trace parity proof, future-variant checklist, Rust dump/log primitive coverage, mdBook/

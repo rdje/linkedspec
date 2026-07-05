@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-05: **SPEC-FORMAT-TERSE.11 — activate duck-typed assignment semantics**
+  (TASK-TREE OWNERSHIP ACTIVE; IMPLEMENTATION PENDING).
+
+  **Fix:** Added active task-tree ownership for duck-typed `.spec` assignment semantics. The accepted direction is
+  that `name = value` binds a runtime typed value rather than exposing Perl `$/@/%` storage classes. Explicit
+  aggregate RHS forms `name = [...]` and `name = {...}` are the MVP; delimiterless aggregate RHS sugar remains out
+  of scope unless a later leaf owns it.
+
+  **Verification:** `git diff --check -- docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md MEMORY.md`.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.11` is active and spec-first. In-flight `SPEC-FORMAT-TERSE.8` helper-removal
+  work remains owned and must align with `.11`; `.9` colon hash-literal syntax follows; `.10` dynamic/computed
+  hash keys remains deferred/potential.
+
 - 2026-07-04: **TRACE-OBSERVABILITY.4.5 — close trace parity proof**
   (TRACE PARITY PROOF DONE; TRACE-OBSERVABILITY TREE CLOSED).
 
