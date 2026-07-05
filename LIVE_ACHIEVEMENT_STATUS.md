@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-05: **SPEC-FORMAT-TERSE.11 — track nested typed-value paths**
+  (TASK-TREE ACCEPTANCE REFINED; IMPLEMENTATION PENDING).
+
+  **Fix:** Expanded the active duck-typed assignment leaf to require deeply nested references and assignments
+  through mixed array/hash value trees in arbitrary combinations. The implementation must define intermediate
+  container behavior explicitly instead of inheriting Perl autovivification behavior by accident.
+
+  **Verification:** `git diff --check -- CHANGES.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md MEMORY.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md`.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.11` remains active.
+
 - 2026-07-05: **SPEC-FORMAT-TERSE.11 — activate duck-typed assignment semantics**
   (TASK-TREE OWNERSHIP ACTIVE; IMPLEMENTATION PENDING).
 

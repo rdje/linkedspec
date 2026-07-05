@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-05 — SPEC-FORMAT-TERSE.11 — track nested typed-value paths
+
+**Scope:** Task-tree/index/live-doc refinement for the active duck-typed assignment semantics leaf.
+
+**What changed:** Expanded `SPEC-FORMAT-TERSE.11` acceptance so deeply nested references and assignments through
+mixed array/hash value trees are explicitly required in arbitrary combinations. The task now requires the
+implementation to define and test intermediate-container behavior for nested writes instead of inheriting Perl
+autovivification behavior accidentally.
+
+**Tests:** `git diff --check -- CHANGES.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md MEMORY.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md`.
+
+**Status:** Implementation remains pending under the active `.11` leaf.
+
 ## 2026-07-05 — SPEC-FORMAT-TERSE.11 — activate duck-typed assignment semantics
 
 **Scope:** Task-tree ownership, top-level task index, and resume pointer for the new duck-typed assignment

@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-05 (SPEC-FORMAT-TERSE.11 — nested typed-value paths):
+  Duck-typed assignment must include nested reads and writes through mixed array/hash value trees in arbitrary
+  combinations. Do not let Perl autovivification semantics define the language accidentally; the implementation
+  needs explicit behavior and tests for missing intermediate containers, array/hash segment transitions, and both
+  statement-form and expression-valued nested assignment where assignment expressions are supported.
+
 - 2026-07-05 (SPEC-FORMAT-TERSE.11 — duck-typed assignment semantics):
   The active assignment direction is now duck-typed value binding, not Perl storage-class inference. Treat
   `name = value` as binding the variable to the RHS typed value at runtime: strings/numbers/scalars, arrays from

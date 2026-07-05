@@ -3063,6 +3063,11 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     The `.11` MVP keeps aggregate RHS syntax explicit: `name = [a, b]` and `name = { k : v }` are accepted
     value-literal assignments, while delimiterless aggregate sugar such as `name = a, b` or `name = k : v` is
     out of scope unless a later task-tree leaf specifies its precedence, diagnostics, and parser recovery rules.
+    Deeply nested references and assignments through array/hash value trees must be supported in arbitrary
+    combinations. Reads and writes such as hash-then-array, array-then-hash, and longer mixed paths are part of the
+    `.11` contract, including both statement-form assignment and expression-valued assignment where the language
+    already supports assignment expressions. The implementation must specify and test intermediate-container
+    behavior for nested writes instead of inheriting Perl autovivification semantics by accident.
     `array(name)` and `hash(name)` remain explicit typed reads/snapshots/guards at use sites, not declaration
     mechanisms. The implementation must remove or rewrite current assignment tests and lowering paths that infer
     `@name` / `%name` storage solely from RHS shape. Perl may keep private implementation details internally, but
@@ -4271,8 +4276,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 - `2026-07-05`: **`.11` ACTIVE — duck-typed assignment semantics.**
   User directive adopts duck-typed variable binding as the active assignment direction: `name = value` binds a
   typed value, including array/hash RHS values, without exposing Perl `$/@/%` storage classes as the spec model.
-  The leaf is now the active spec-first assignment-semantics owner and must coordinate with `.8` helper-removal
-  fallout and `.9` colon hash-literal syntax before implementation lands.
+  The leaf is now the active spec-first assignment-semantics owner, including nested mixed array/hash tree
+  references and assignments in arbitrary combinations, and must coordinate with `.8` helper-removal fallout and
+  `.9` colon hash-literal syntax before implementation lands.
 
 - `2026-07-04`: **`.8` OWNED — legacy compatibility helper support removal.**
   User directive supersedes the `.6.4` compatibility-retention policy for this unreleased project. The next slice

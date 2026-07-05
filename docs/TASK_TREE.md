@@ -45,7 +45,8 @@ Index note 2026-07-05: `SPEC-FORMAT-TERSE.11` is now active by explicit user dir
 assignment semantics: `name = value` binds runtime typed values, including array/hash RHS values, without exposing
 Perl scalar/array/hash storage classes as the `.spec` language model. The MVP keeps aggregate RHS values
 delimiter-explicit (`name = [...]`, `name = {...}`); delimiterless comma/pair RHS sugar is out of scope unless a
-future leaf specifies it.
+future leaf specifies it. Nested references and assignments through mixed array/hash value trees are part of the
+`.11` contract and must not inherit Perl autovivification behavior accidentally.
 
 Index note 2026-07-02: `SPEC-FORMAT-TERSE.3.3.4` is now done. Scalar, direct-shape aggregate, array append, hash-index mutation, operator-call, canonical `set(...)`, and legacy `assign(...)` assignment expressions are shipped on Perl/Rust; corpus is **62 fixtures**, phase0 is **1015 green**. The later `.6` shipped-spec terse migration lane reactivated concrete `SPEC-FORMAT-TERSE` frontier leaves.
 
