@@ -1,6 +1,27 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-05 (SPEC-FORMAT-TERSE.15.2.1 — where bare reads fail, and the ONE seam that fixes most of it):
+  The bare-vs-`:name` value-position gap is narrower and more localized than the `.15.2` re-scope note implied.
+  Discriminating reference-engine probes (a bare-fallback must yield a *different* result than a real read, else the
+  probe proves nothing — my first probe used `n=3`/`c=1` and falsely showed "no gap") confirm exactly three failing
+  value positions: the `switch(...)` selector, `num_*(...)` callee args, and `if(...)`/`while(...)`/logical
+  conditions. Plain `return(name)`, assignment RHS, and receiver positions ALREADY read bare — so the terse
+  read-side is mostly done; the gap is confined to condition/selector/logical-arg lowering. On Perl, that lowering
+  funnels through ONE function: `ActionIR::FlowExpr::_lower_flow_composite_expr`
+  (`perl/LinkedSpec/ActionIR/FlowExpr.pm:319`). It maps `:name`→`$name` at `:364` but has no bare-identifier arm,
+  so a bare atom falls through to a literal (a bareword → numeric 0 in `num_*`, or a truthy string in `if`). The
+  same function handles `num_*` args (helper names matched at `:374`, args recursed at `:422`), so closing the
+  `switch`/`num`/`if` gap is largely one guarded branch here (plus the switch selector path in
+  `ActionIR::ControlFlow._control_ast_value_source_expr:332`). The hard constraint for `.15.2.2`: the new
+  bare→scalar-read branch must NOT swallow helper-call names (still matched by the `:374` regex) and must respect
+  the value-position-is-variable policy — bare is a variable read ONLY in value positions; rule references live in
+  edge/dispatch positions, which is why the real shipped-spec risk is `spec.spec`/`ebnf.spec` rule-name collisions,
+  not the synthetic `switch(` fixtures (`switch(` appears in no shipped spec). On Rust the mirror is `Expr::Variable`
+  (bare, `rust/linkedspec-core/src/expr.rs:1350`) vs `Expr::ScalarSlot`→`ctx.get_scalar`
+  (`rust/linkedspec-runtime/src/engine.rs:3287`). This composes with `.11`: the *type* of a bare name is set at
+  assignment by the RHS shape; `.15` only settles that a bare *read* returns that bound typed value.
+
 - 2026-07-05 (SPEC-FORMAT-TERSE.15.2 — `:name` removal is ENGINE-FIRST, not source-first):
   The `.15.1` audit assumed migrating `:name`→bare is a spelling swap. It is not. At `104088e5`, bare identifiers
   are NOT read as the bound variable value in every value position `:name` serves — proven by the oracle

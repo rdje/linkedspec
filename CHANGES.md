@@ -1,6 +1,45 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-05 — SPEC-FORMAT-TERSE.15.2.1 — bare-vs-`:name` value-position inventory + engine seams (design only)
+
+**Scope:** Design/inventory leaf for engine-first `:name` removal. Enumerate every value position where a bare
+identifier is NOT read as the bound variable today (while `:name` is), pin the exact Perl+Rust seams `.15.2.2`/
+`.15.2.3` must change, and lock the value-position-is-variable policy. **No engine/source/mdBook behavior changed.**
+
+**Evidence (LinkedSpec's own `LinkedSpec::Get` probe, discriminating values so a bare-fallback differs from a real
+read):**
+- `switch(...)` selector — `{ set(kind,"b"); switch(:kind){...case("b"){"good"}default{"def"}} }`: `:kind`→`good`
+  (reads scalar), `kind`→`def` (bare NOT read).
+- `num_*(...)` callee args — `{ set(n,10); switch(num_lt(:n,5)){...} }`: `:n`→`no` (10<5 false), `n`→`yes`
+  (bare `n`→numeric 0, 0<5 true).
+- `if(...)`/`while(...)`/logical conditions — `{ set(c,0); if(:c){"T"}else{"F"} }`: `:c`→`F` (0 falsy), `c`→`T`
+  (bare truthy bareword).
+- Already-correct (no gap): plain `return(name)`, assignment RHS, receiver — `return(:v)`==`return(v)`==`V`.
+- Real shipped-spec hazard: rule-name collisions in `spec.spec`/`ebnf.spec` (a bare name matching a rule/token name
+  resolves as a rule reference; `spec_spec_minimal_rule`→`[]`) — authoritative evidence in ADR `0019`. `switch(`
+  appears in NO shipped spec, so the synthetic positions are fixtures; the collision class is the live risk.
+
+**Seams identified (not touched):**
+- Perl central: `ActionIR::FlowExpr::_lower_flow_composite_expr` (`perl/LinkedSpec/ActionIR/FlowExpr.pm:319`); the
+  `:name`→`$name` branch at `:364` has no bare counterpart. Covers if/elseif/while/logical + `num_*` args (num
+  names matched `:374`, args recursed `:422`).
+- Perl switch selector/case: `ActionIR::ControlFlow::_control_ast_value_source_expr`
+  (`perl/LinkedSpec/ActionIR/ControlFlow.pm:332`) + `_lower_switch_case_value_expr` (`:104`).
+- Rust: bare→`Expr::Variable` (`rust/linkedspec-core/src/expr.rs:1350`, selector test `:1788`); `:name`→
+  `Expr::ScalarSlot`→`ctx.get_scalar` (`rust/linkedspec-runtime/src/engine.rs:3287`).
+
+**Policy locked (ADR `0019`):** in a value-expression position a bare identifier is a variable/parameter read; rule
+references appear only in edge/dispatch positions (`-> Rule`, `call(Rule)`, `=> Rule`, all-bare
+`push(RuleA, AccumB)`); scalar push uses `items += value` / `push(array(items), value)`. Composes with the `.11`
+type-at-assignment duck-typed model (already captured under `.11`): a bare name's type is fixed by the RHS shape at
+assignment (scalar←string/number, array←`[...]`, hash←`{ key: value }`, code-block←`{ ... }`), and a bare read
+returns that bound runtime typed value.
+
+**Validation:** design/inventory only — no code path changed, so no phase0 delta (baseline stays 1021 pass / 1
+pre-existing unrelated fail, test 796). Probes: `scratchpad/probe_15_2_1.pl`, `probe_15_2_1b.pl`. Frontier →
+`.15.2.2` (Perl bare-read completion).
+
 ## 2026-07-05 — SPEC-FORMAT-TERSE.15.2 — reorder .15 to engine-first (bare-read gap) + recovery
 
 **Scope:** Recover a prior session's dirty working tree and re-sequence `:name` removal after proving the planned

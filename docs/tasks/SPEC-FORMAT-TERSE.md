@@ -6,7 +6,25 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-05` (**`.15.2` RE-SCOPED engine-first + recovery. A prior session's uncommitted,
+- Last updated: `2026-07-05` (**`.15.2.1` DONE; bare-vs-`:name` value-position inventory + engine seams locked
+  before any engine code. Discriminating reference-engine probes confirm bare identifiers are NOT read as the
+  bound variable in three value positions: the `switch(...)` selector, `num_*(...)` callee args, and
+  `if(...)`/`while(...)`/logical conditions — `switch(:kind)`->`good` vs `switch(kind)`->`def`;
+  `num_lt(:n,5)`@n=10->`no` vs `num_lt(n,5)`->`yes` (bare falls back to numeric 0); `if(:c)`@c=0->`F` vs
+  `if(c)`->`T` (bare is a truthy bareword). Plain value positions (`return(name)`, assignment RHS, receiver) already
+  read bare correctly. The load-bearing shipped-spec risk is rule-name collisions in `spec.spec`/`ebnf.spec`
+  (ADR `0019`; `switch(kind)` and bare names matching rule/token names resolve as rule references). Central Perl
+  seam: `ActionIR::FlowExpr::_lower_flow_composite_expr` (`perl/LinkedSpec/ActionIR/FlowExpr.pm:319`; the
+  `:name`->`$name` branch at `:364` has NO bare-identifier counterpart) shared by if/elseif/while/logical and
+  `num_*` args, plus the switch selector via `ActionIR::ControlFlow::_control_ast_value_source_expr`
+  (`perl/LinkedSpec/ActionIR/ControlFlow.pm:332`). Rust seams: bare parses to `Expr::Variable`
+  (`rust/linkedspec-core/src/expr.rs:1350`; selector test `:1788`), `:name` to `Expr::ScalarSlot` evaluated as
+  `ctx.get_scalar` (`rust/linkedspec-runtime/src/engine.rs:3287`). Policy locked (value-position-is-variable,
+  ADR `0019`): a bare identifier in a value-expression position is a variable/parameter read; rule references
+  appear only in edge/dispatch positions (`-> Rule`, `call(Rule)`, `=> Rule`, all-bare `push(RuleA, AccumB)`).
+  This composes with the `.11` type-at-assignment duck-typed model (already captured under `.11`): a bare read
+  returns the runtime typed value whose type was fixed by the RHS shape at assignment. No engine behavior changed.
+  Frontier -> `.15.2.2` (Perl bare-read completion). Prior **`.15.2` RE-SCOPED engine-first + recovery. A prior session's uncommitted,
   intermingled `.15.2/.15.3/.15.4/.8/.9` work (phase0 RED) is preserved on branch
   `recovery/terse-15-uncommitted-20260705`; `main` is clean at `104088e5`. Attempting the source-first `.15.2`
   migration proved it is NOT output-preserving: bare reads are not honored in every value position at `104088e5`
@@ -3279,7 +3297,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 - ID: `SPEC-FORMAT-TERSE.15`
   Status: `active` (split 2026-07-05 by `.15.1`; RE-SEQUENCED 2026-07-05 to engine-first after the bare-read-gap
-    finding; frontier `.15.2.1`)
+    finding; `.15.2.1` design/inventory done 2026-07-05; frontier `.15.2.2`)
   Goal: Make `:name` fully unsupported (user directive 2026-07-05: `:name` shall NOT be supported). The `.15.1`
     audit assumed a source-first migration would be output-preserving, but bare reads are NOT yet honored in every
     value position at `104088e5` (proven: `switch(:kind)`->`good` vs `switch(kind)`->`def`; plus rule-name
@@ -3332,8 +3350,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     rule references appear only in edge/dispatch positions (`-> Rule`, `call(Rule)`, `=> Rule`, and the all-bare
     child-call `push(RuleA, AccumB)` convention). Scalar push therefore uses `items += value` or
     `push(array(items), value)`, never a colon slot.
-  Children: `.15.2.1` (design/inventory, active), `.15.2.2` (Perl engine impl), `.15.2.3` (Rust parity),
-    `.15.2.4` (source migration to bare, output-preserving).
+  Children: `.15.2.1` (design/inventory, DONE 2026-07-05), `.15.2.2` (Perl engine impl, active),
+    `.15.2.3` (Rust parity), `.15.2.4` (source migration to bare, output-preserving).
   Acceptance: bare reads produce byte-identical reference output to today's `:name` in every value position on
     Perl and Rust and the value-position-vs-edge policy is documented; then all current shipped specs, root
     corpus, generated oracle sources, mdBook examples, and non-historical Knowledge Map facts use bare reads with
@@ -3342,7 +3360,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `pending`
 
 - ID: `SPEC-FORMAT-TERSE.15.2.1`
-  Status: `active`
+  Status: `done` (2026-07-05)
   Goal: Inventory every value position where a bare identifier is NOT read as the bound variable today while
     `:name` is (Perl + Rust), and lock the value-position-is-variable-read policy and the edge/child-call
     rule-reference boundary before any engine code.
@@ -3350,7 +3368,50 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     vs `switch(kind)`->`def`), the collision cases in `spec.spec`/`ebnf.spec`, the Perl lowering seams
     (`ActionIR::MethodLowering`/`ValueExpr`/`FlowExpr`/`ControlFlow`) and Rust parser/runtime seams that must
     change, and the documented policy. No engine behavior changes in this leaf.
-  Verification: `pending`
+  Verification: **PASS 2026-07-05.** Ground truth taken with LinkedSpec's own `LinkedSpec::Get` probe (per
+    `TOOLBOX.md`), using DISCRIMINATING values so a bare-fallback yields a different result than a real read.
+
+    FAILING VALUE POSITIONS (bare != `:name` today) — confirmed on the Perl reference engine:
+    1. `switch(...)` selector: `{ set(kind,"b"); switch(:kind){...case("b"){"good"}default{"def"}} }` ->
+       `:kind`=`good` (reads scalar), `kind`=`def` (bare NOT read).
+    2. `num_*(...)` callee args: `{ set(n,10); switch(num_lt(:n,5)){...} }` -> `:n`=`no` (10<5 false),
+       `n`=`yes` (bare `n` -> numeric 0, 0<5 true). Same class for `num_gt`/`num_le`/... and other numeric callees.
+    3. `if(...)`/`while(...)`/logical conditions: `{ set(c,0); if(:c){"T"}else{"F"} }` -> `:c`=`F` (0 falsy),
+       `c`=`T` (bare truthy bareword).
+    NON-FAILING (already read bare): plain `return(name)`, assignment RHS, and receiver positions return the bound
+    value with or without the colon (`return(:v)`==`return(v)`==`V`).
+    RULE-NAME COLLISIONS (load-bearing, shipped specs): in `spec.spec`/`ebnf.spec` a bare name that matches a
+    rule/token name (`started`, `top`, `rule`, `on`) resolves as a RULE REFERENCE, not a variable read, collapsing
+    the parse (`spec_spec_minimal_rule` -> `[]`) — authoritative real-spec evidence recorded in ADR `0019`. `switch(`
+    itself appears in NO shipped spec, so positions 1-3 are fixture/synthetic; the collision class is the real
+    migration hazard.
+
+    ENGINE SEAMS THAT MUST CHANGE (identified, not touched):
+    - Perl (central): `ActionIR::FlowExpr::_lower_flow_composite_expr` (`perl/LinkedSpec/ActionIR/FlowExpr.pm:319`)
+      — the shared condition/logical/value lowering. Its `:name` -> `$name` branch (`:364`,
+      `/^:([A-Za-z_]\w*)$/ -> '$'.$1`) has NO bare-identifier counterpart, so a bare atom falls through to a
+      literal. This one seam covers if/elseif/while conditions, `not/and/or` logical args, and `num_*` args (num
+      helper names are matched at `:374` and their args recursed through the same function at `:422`).
+    - Perl (switch selector + case values): `ActionIR::ControlFlow::_control_ast_value_source_expr`
+      (`perl/LinkedSpec/ActionIR/ControlFlow.pm:332`, also `:409` for while) and `_lower_switch_case_value_expr`
+      (`:104`).
+    - Rust (parity): bare identifier parses to `Expr::Variable` (`rust/linkedspec-core/src/expr.rs:1350`; the
+      `switch(kind)` selector test asserts `Expr::Variable{name:"kind"}` at `:1788`); `:name` parses to
+      `Expr::ScalarSlot` (`:1375`) and evaluates to `ctx.get_scalar(name)` at
+      `rust/linkedspec-runtime/src/engine.rs:3287`. `.15.2.3` must make `Expr::Variable` in condition/selector/
+      `num_*`-arg value positions read the bound scalar the same way (or prove it already does by probe).
+
+    POLICY LOCKED (value-position-is-variable, ADR `0019`): in a value-expression position a bare identifier is a
+    variable/parameter read; rule references appear only in edge/dispatch positions (`-> Rule`, `call(Rule)`,
+    `=> Rule`, and the all-bare child-call `push(RuleA, AccumB)`). Scalar push uses `items += value` or
+    `push(array(items), value)`, never a colon slot. This composes with the `.11` type-at-assignment duck-typed
+    model (already captured under `.11`, per the user's 2026-07-05 note): the *type* of a bare name is fixed at
+    assignment time by the RHS shape (scalar <- string/number, array <- `[...]`, hash <- `{ key: value }`,
+    code-block <- `{ ... }` with no top-level key), and a bare *read* returns that bound runtime typed value.
+
+    No engine/Perl/Rust/mdBook behavior changed in this leaf (design/inventory only). Probe scripts:
+    `scratchpad/probe_15_2_1.pl` and `probe_15_2_1b.pl` (discriminating); KM card
+    `terse-bare-read-value-position-gap` reverify reproduces position 1.
   Commit: `pending`
 
 - ID: `SPEC-FORMAT-TERSE.15.2.2`
@@ -3414,8 +3475,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SPEC-FORMAT-TERSE.15.2.1` | `active` | design/inventory: enumerate value positions where bare != `:name` today + lock the value-position-is-variable policy before engine code |
-| 2 | `SPEC-FORMAT-TERSE.15.2.2` | `pending` | Perl engine: bare reads honored in all value positions (`:name` still compat) |
+| 1 | `SPEC-FORMAT-TERSE.15.2.1` | `done` | design/inventory: value positions where bare != `:name` enumerated with discriminating evidence (switch/num_*/if); seams pinned (Perl `FlowExpr::_lower_flow_composite_expr:364` + `ControlFlow` selector; Rust `Expr::Variable` vs `ScalarSlot`); value-position-is-variable policy locked |
+| 2 | `SPEC-FORMAT-TERSE.15.2.2` | `active` | Perl engine: bare reads honored in all value positions (`:name` still compat) |
 | 3 | `SPEC-FORMAT-TERSE.15.2.3` | `pending` | Rust engine parity for bare reads in all value positions |
 | 4 | `SPEC-FORMAT-TERSE.15.2.4` | `pending` | migrate current specs/corpus/oracle/mdBook/KM to bare (now output-preserving) |
 | 5 | `SPEC-FORMAT-TERSE.15.3` | `pending` | remove Perl `:name` parsing/lowering entirely (no compat) after sources are bare |

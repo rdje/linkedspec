@@ -7,8 +7,27 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-05: **SPEC-FORMAT-TERSE.15.2.1 — bare-vs-`:name` value-position inventory + engine seams**
+  (DESIGN/INVENTORY DONE; FRONTIER `.15.2.2` PERL BARE-READ COMPLETION ACTIVE).
+
+  **Inventory (discriminating reference-engine probes):** bare identifiers are NOT read as the bound variable in
+  exactly three value positions — `switch(...)` selector (`switch(:kind)`→`good` vs `switch(kind)`→`def`),
+  `num_*(...)` callee args (`num_lt(:n,5)`@n=10→`no` vs bare→`yes`), and `if(...)`/`while(...)`/logical conditions
+  (`if(:c)`@c=0→`F` vs bare→`T`). Plain `return(name)`/assign-RHS/receiver already read bare. Real shipped-spec
+  hazard is rule-name collisions in `spec.spec`/`ebnf.spec` (ADR `0019`); `switch(` appears in no shipped spec.
+
+  **Seams pinned for `.15.2.2`/`.15.2.3`:** Perl `ActionIR::FlowExpr::_lower_flow_composite_expr`
+  (`perl/LinkedSpec/ActionIR/FlowExpr.pm:319`; `:name`→`$name` at `:364`, no bare arm) covers if/elseif/while/
+  logical + `num_*` args; switch selector via `ActionIR::ControlFlow._control_ast_value_source_expr:332`. Rust
+  `Expr::Variable` (`rust/linkedspec-core/src/expr.rs:1350`) vs `Expr::ScalarSlot`→`ctx.get_scalar`
+  (`rust/linkedspec-runtime/src/engine.rs:3287`). Policy locked (value-position-is-variable, ADR `0019`); composes
+  with the `.11` type-at-assignment duck-typed model.
+
+  **Verification:** design/inventory only — no code path changed; baseline phase0 stays 1021 pass / 1 pre-existing
+  unrelated fail (test 796). Memory/KM/doctrine gates pass. No engine/source/mdBook behavior changed.
+
 - 2026-07-05: **SPEC-FORMAT-TERSE.15.2 re-scope — reorder .15 to engine-first (bare-read gap) + recovery**
-  (PLANNING/RECOVERY DONE; ENGINE-FIRST FRONTIER `.15.2.1` ACTIVE).
+  (PLANNING/RECOVERY DONE; ENGINE-FIRST `.15.2.1` DESIGN NOW DONE).
 
   **Recovery:** A prior session left the working tree dirty with uncommitted, intermingled `.15.2/.15.3/.15.4/.8/.9`
   work (152 files, phase0 RED). Preserved verbatim on branch `recovery/terse-15-uncommitted-20260705`
