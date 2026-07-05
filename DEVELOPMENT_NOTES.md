@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-05 (SPEC-FORMAT-TERSE.14 — trailing block arguments):
+  Future attached-block generalization should be a block-argument type, not full closures. Keep the block final in
+  the call signature and prefer `fn(args) { ... }` / grammar-safe zero-arg `fn { ... }` over inline
+  `fn(args, { ... })` until the parser can distinguish code blocks from hash literals without guessing. A
+  block-taking helper or receiver method also needs an explicit invocation contract: how it calls the block, what
+  context values it passes, what the block returns, and what diagnostics are produced for missing/non-callable
+  block arguments. Do not make blocks assignable, returnable, or caller-state-capturing under this leaf.
+
 - 2026-07-05 (SPEC-FORMAT-TERSE.12/.13 — tree traversal backlog):
   Future hash-tree traversal should be specified as receiver methods with attached blocks over a value tree whose
   root and interior nodes are hashes and whose leaves are scalars or arrays. Before implementation, define method

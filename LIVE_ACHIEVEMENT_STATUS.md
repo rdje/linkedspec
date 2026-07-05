@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-05: **SPEC-FORMAT-TERSE.14 — track trailing block arguments**
+  (TASK-TREE BACKLOG TRACKED; IMPLEMENTATION NOT ACTIVE).
+
+  **Fix:** Added deferred ownership for a future block-argument type on helper and receiver-method calls. Blocks
+  are final arguments only, with preferred trailing syntax such as `fn(args) { ... }`; zero-arg `fn { ... }` is
+  grammar-gated, inline `fn(args, { ... })` is deferred or allowed only if unambiguous from hash literals, and
+  closures/assignable blocks/returnable blocks remain out of scope. The leaf also requires a defined callee-side
+  block invocation surface before code.
+
+  **Verification:** `git diff --check -- CHANGES.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md MEMORY.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md`.
+
+  **Frontier:** `.14` is not PNT-eligible unless explicitly reactivated. `SPEC-FORMAT-TERSE.11` remains active.
+
 - 2026-07-05: **SPEC-FORMAT-TERSE.12/.13 — track tree traversal backlog**
   (TASK-TREE BACKLOG TRACKED; IMPLEMENTATION NOT ACTIVE).
 

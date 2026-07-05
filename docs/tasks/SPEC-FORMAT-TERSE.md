@@ -3105,6 +3105,28 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Verification: `deferred`
   Commit: `deferred`
 
+- ID: `SPEC-FORMAT-TERSE.14`
+  Status: `deferred` / `spec backlog` (tracked by user directive 2026-07-05)
+  Goal: Specify code blocks as a trailing block-argument type for helper and receiver-method calls, without
+    introducing closures as assignable/returnable values.
+  Acceptance: No parser/runtime implementation is authorized by this backlog item. If activated later, a child
+    implementation plan must define a block-argument type that may be passed only as the final argument to helpers
+    or receiver methods. The preferred spelling is trailing-block syntax: `fn(args) { ... }` is equivalent to
+    passing the block as the final argument, `fn() { ... }` is accepted for zero explicit arguments, and
+    `fn { ... }` may be accepted for zero-argument block-taking calls if the grammar can distinguish it cleanly.
+    Inline `fn(args, { ... })` remains deferred or accepted only after the grammar proves it can distinguish code
+    blocks from hash literals without guessing. The leaf must specify block context/parameters, scoping, return
+    semantics, and an explicit invocation surface for helpers/methods that receive a block argument. That
+    invocation surface must define how the callee calls the block, how values such as `value`, `key`, `path`,
+    `index`, `depth`, or accumulator state are passed, what the block returns, how errors/non-local returns behave,
+    and diagnostics for calling a missing or non-callable block. The leaf must also specify diagnostics for
+    non-final block arguments, interaction with hash literal braces from `.9`, receiver chaining behavior,
+    Perl/Rust parity, mdBook examples, active tests, generated oracle fixtures, and Knowledge Map updates. Blocks
+    are not closures in this leaf: they are not assignable values, not returnable values, and do not imply captured
+    caller state unless a later task-tree leaf explicitly adopts closures.
+  Verification: `deferred`
+  Commit: `deferred`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -3115,6 +3137,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.12` | `deferred` / `spec backlog` | track future hash-tree attached-block traversal; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.13` | `deferred` / `backlog` | track lower-priority array-tree traversal analog; not PNT-eligible until explicitly activated |
+| — | `SPEC-FORMAT-TERSE.14` | `deferred` / `spec backlog` | track trailing block-argument type for helpers/methods without closures; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.6.1` | `done` | User directive owned under the existing terse-format tree; shipped-spec inventory recorded before any `.spec` edit. |
 | — | `SPEC-FORMAT-TERSE.6.2.1` | `done` | shipped specs no longer use active `declare(...)` / `.declare(...)`; focused compile, phase0, and Rust corpus oracle pass |
 | — | `SPEC-FORMAT-TERSE.6.2.2` | `done` | shipped specs no longer use active old helper spellings; focused compile, phase0, and Rust corpus oracle pass |
@@ -4301,6 +4324,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.4.2` | `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls` | Perl inline value-control lowering landed for `if`/`switch` in supported value positions; corpus 46 passes and frontier becomes `.2.3.5`. |
 
 ## Changelog
+
+- `2026-07-05`: **`.14` DEFERRED/SPEC BACKLOG — trailing block arguments without closures.**
+  User directive tracked the generalization from hash-tree attached blocks to a block-argument type accepted only as
+  the final argument to helpers and receiver methods. The preferred future spelling is trailing-block syntax such
+  as `fn(args) { ... }`, with zero-arg `fn { ... }` possible if grammar-safe. This leaf explicitly does not adopt
+  closures, assignable blocks, returnable blocks, or implicit caller-state capture.
 
 - `2026-07-05`: **`.12`/`.13` DEFERRED/BACKLOG — tree traversal attached-block ideas.**
   User directive tracked hash-tree traversal methods with attached code blocks as future spec work and clarified

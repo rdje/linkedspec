@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-05 — SPEC-FORMAT-TERSE.14 — track trailing block arguments
+
+**Scope:** Task-tree/index/live-doc tracking for a future block-argument type on helper and receiver-method calls.
+
+**What changed:** Added deferred `SPEC-FORMAT-TERSE.14` for trailing code-block arguments. The future surface is
+specified as a block-argument type, not closures: blocks may appear only as the final argument, preferred syntax is
+`fn(args) { ... }`, zero-arg `fn { ... }` remains grammar-gated, and inline `fn(args, { ... })` stays deferred or
+allowed only if it is unambiguous from hash literals. The leaf also requires an explicit callee-side invocation
+surface: how helpers/methods call the block, pass context, consume returns, and diagnose missing/non-callable
+blocks must be specified before code.
+
+**Tests:** `git diff --check -- CHANGES.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md MEMORY.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md`.
+
+**Status:** `.14` is deferred/spec backlog and not PNT-eligible unless explicitly activated.
+
 ## 2026-07-05 — SPEC-FORMAT-TERSE.12/.13 — track tree traversal backlog
 
 **Scope:** Task-tree/index/live-doc tracking for future attached-block tree traversal receiver methods.
