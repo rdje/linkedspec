@@ -191,22 +191,28 @@ dispatch rule.
 - **Edge cases**: Returns `undef` if the key does not exist or container is not array/hash.
 - **Example**: over `/(\w+),(\w+),(\w+)/`, `array(entry_group(0), entry_group(1), entry_group(2))[1]` on `a,b,c` → `["b"]`.
 
-### Direct nested access: `base["key"][index]`
+### Direct nested access and value-path assignment: `base["key"][index]`
 - **Signature**: `base[path_segment...]`, where `base` is a working scalar containing an array/hash payload.
-- **Returns**: scalar or undef
+- **Returns**: read form returns the selected value or `undef`; assignment form returns the updated root value on
+  success or `undef` on failure.
 - **Behavior**: Reads any-depth mixed hash/array paths directly from a structured payload. Quoted string
   segments such as `["children"]` or `['children']` are hash keys. Numeric segments and explicit helper/value
   expressions such as `[0]` or `[i]` are array indexes. A non-reserved bare path atom such as `[i]`
-  is also a scalar array-index read, equivalent to `[i]`.
-- **Edge cases**: Returns `undef` when a segment does not exist or the current value has the wrong container
-  kind. Primitive literals and engine locals such as `[true]` or `[CAPTURE]` are not claimed as scalar path
-  variables.
+  is also a scalar array-index read, equivalent to `[i]`. The same direct path may be used as an assignment
+  target, for example `payload["children"][0]["name"] = value`.
+- **Edge cases**: Reads return `undef` when a segment does not exist or the current value has the wrong container
+  kind. Writes do not autovivify intermediate containers: every intermediate hash key or array element must
+  already exist and have the required array/hash shape. The final segment may create or replace a hash key, replace
+  an existing array element, or append exactly at the current array length. Array gaps, missing intermediate keys,
+  and wrong intermediate shapes yield `undef` and leave the root unchanged. Primitive literals and engine locals
+  such as `[true]` or `[CAPTURE]` are not claimed as scalar path variables.
 - **Example**:
   ```text
   Top::
    /x/ -> Done {
      set(payload, hash("children", array(hash("name", "one"), hash("name", "two"))))
      set(i, 1)
+     payload["children"][i]["name"] = "updated"
      return(payload["children"][i]["name"])
    }
 
@@ -721,7 +727,12 @@ dispatch rule.
 - **Returns**: updated hash snapshot in value positions; side-effect-only behavior when used as a statement.
 - **Behavior**: Hash-index assignment. Mutates the named working hash `target` at the evaluated string key. Lowers and runs identically to `set_key(target, key_expr, value_expr)` for accepted key/value expressions, and evaluates to the updated hash snapshot when used as a value.
 - **Examples**: `meta["stage"] = "normalized"`, `meta[cat("source", "_kind")] = :kind`, `meta[field_name] = :field_value`, `meta[field_name] = field_value`.
-- **Edge cases**: The left side target is a bare hash target and auto-exists as a per-invocation working hash. Bare key/RHS identifiers read scalar working variables in this mutation slot. Receiver-dot `meta.set_key(key, value)` remains pure copy-valued composition; use `meta[key] = value` when you want mutation.
+- **Edge cases**: The left side target is a bare hash target and auto-exists as a per-invocation working hash
+  unless the name currently holds a scalar-bound array/hash value from bare assignment. In that scalar-held case,
+  a single-segment assignment mutates the held root: hash keys update/create hash entries, while numeric array
+  indexes replace or append at len. Bare key/RHS identifiers read scalar working variables in this mutation slot.
+  Receiver-dot `meta.set_key(key, value)` remains pure copy-valued composition; use `meta[key] = value` when you
+  want mutation.
 
 ### `rename_key(h, old, new)`
 - **Signature**: `rename_key(h: hash, old_key: string, new_key: string)`
@@ -1318,19 +1329,22 @@ unlike the Retired table below):
 | `items += value` | `push(items, value)` / `push_value(items, value)` | array append operator. A bare RHS reads a scalar working variable; all-bare `push(A,B)` remains child-call syntax; in value positions it yields the updated array snapshot. |
 | `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()` | `items += value` for back append only | array end-mutation methods; statement-level only. The receiver may be bare or `array(...)`; pop methods discard the removed value. |
 | `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator. Bare key/RHS identifiers read scalar working variables in mutation slots; in value positions it yields the updated hash snapshot. |
+| `payload["items"][0]["name"] = value` | direct nested access assignment | mutates a scalar-held array/hash value path. Intermediate containers must exist; final hash keys may be created; final array indexes may replace or append at len. |
 | `cat(args...)` | `concat(args...)` | string concatenation. |
 | `copy(container)` | `array_copy(arr)` / `hash_copy(h)` | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
 
 Direct nested access, for example `payload["children"][0]["name"]` or `payload["children"][i]["name"]`, is
 also part of the terse surface. It is not a helper rename; it is the replacement surface for the older nested
 path helper spelling. Quoted segments are hash keys, and bare path atoms such as `[i]` read scalar working
-variables as array indexes.
+variables as array indexes. As an lvalue, a direct nested path mutates an existing scalar-held array/hash value
+tree with the no-autovivification write rules described above.
 
 The helper aliases above lower identically within their supported statement/helper families. Assignment forms
 (`set(...)`, `name = value`, and `=(name, value)`) now compose as value expressions when the
 target receives a scalar, array, or hash RHS value. Mutation assignment operators also compose as value
 expressions: `items += value` yields the updated array snapshot and `meta[key] = value` yields the updated hash
-snapshot. Array end mutations remain statement-only.
+snapshot; nested value-path assignment yields the updated root value on success and `undef` on failed path checks.
+Array end mutations remain statement-only.
 Value-producing helper aliases such as `cat(...)` and `copy(...)` compose in the value positions documented by
 their contracts. New `.spec` authoring should prefer the terse names.
 

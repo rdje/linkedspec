@@ -628,7 +628,7 @@ sub _lower_ast_block_side_effect_statement {
  return undef unless ref($node) eq 'HASH';
 
  my $kind = $node->{kind} // '';
- foreach my $candidate_kind ('assign_scalar', 'assign_array_append', 'assign_hash_index') {
+ foreach my $candidate_kind ('assign_scalar', 'assign_array_append', 'assign_hash_index', 'assign_nested_access') {
   next unless $kind eq $candidate_kind;
   my $lowered = _lower_ast_assignment_operator_statement($node, $deps, $candidate_kind);
   return $lowered if defined($lowered) && length($lowered);
@@ -904,6 +904,132 @@ sub _actionir_ast_value_source_expr {
  return undef
 }
 
+sub _lower_ast_nested_access_assignment_value_node {
+ my ($node, $deps) = @_;
+ return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'assign_nested_access';
+
+ my $base = $node->{base};
+ return undef unless defined($base) && $base =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ my $segments = $node->{segments};
+ return undef unless ref($segments) eq 'ARRAY' && @$segments > 1;
+
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $lower_scalar_access_key_expr = $require_dep->('lower_scalar_access_key_expr');
+
+ my $value_source = _actionir_ast_value_source_expr($node->{value});
+ $value_source = $node->{value}{source}
+  if ref($node->{value}) eq 'HASH' && !(defined($value_source) && length($value_source));
+ return undef unless defined($value_source) && length($value_source);
+ my $value_lowered = _lower_mutation_slot_value_expr($value_source, $deps);
+ return undef unless defined($value_lowered) && length($value_lowered);
+
+ my @prefix;
+ my @compiled_segments;
+ for (my $idx = 0; $idx < @$segments; ++$idx) {
+  my $segment = $segments->[$idx];
+  return undef unless ref($segment) eq 'HASH';
+  if (($segment->{kind} // '') eq 'key') {
+   my $quote = '"';
+   $quote = $1 if defined($segment->{source}) && $segment->{source} =~ /\A\[\s*(['"])/s;
+   my $var = '$__ls_path_key_'.$idx;
+   push @prefix, 'my '.$var.' = '._actionir_ast_quote_string_source($segment->{value}, $quote).';';
+   push @compiled_segments, { kind => 'key', var => $var };
+   next;
+  }
+  return undef unless ($segment->{kind} // '') eq 'index';
+  my $index_source = _actionir_ast_value_source_expr($segment->{expr});
+  $index_source = $segment->{expr}{source}
+   if ref($segment->{expr}) eq 'HASH' && !(defined($index_source) && length($index_source));
+  return undef unless defined($index_source) && length($index_source);
+  my $index_lowered = $lower_scalar_access_key_expr->($index_source);
+  return undef unless defined($index_lowered) && length($index_lowered);
+  my $var = '$__ls_path_idx_'.$idx;
+  push @prefix, 'my '.$var.' = int(('.$index_lowered.') // 0);';
+  push @compiled_segments, { kind => 'index', var => $var };
+ }
+ push @prefix, 'my $__ls_path_value = '.$value_lowered.';';
+ push @prefix, 'my $__ls_path_cursor = $'.$base.';';
+ push @prefix, 'my $__ls_path_ok = (ref($__ls_path_cursor) eq "HASH" || ref($__ls_path_cursor) eq "ARRAY") ? 1 : 0;';
+
+ my @body = @prefix;
+ for (my $idx = 0; $idx < $#compiled_segments; ++$idx) {
+  my $segment = $compiled_segments[$idx];
+  my $var = $segment->{var};
+  if ($segment->{kind} eq 'key') {
+   push @body,
+    'if ($__ls_path_ok) { if (ref($__ls_path_cursor) eq "HASH" && exists $__ls_path_cursor->{'.$var.'}) { $__ls_path_cursor = $__ls_path_cursor->{'.$var.'}; } else { $__ls_path_ok = 0; } }';
+  } else {
+   push @body,
+    'if ($__ls_path_ok) { if (ref($__ls_path_cursor) eq "ARRAY" && '.$var.' >= 0 && '.$var.' < @{$__ls_path_cursor}) { $__ls_path_cursor = $__ls_path_cursor->['.$var.']; } else { $__ls_path_ok = 0; } }';
+  }
+ }
+
+ my $final = $compiled_segments[-1];
+ my $final_var = $final->{var};
+ if ($final->{kind} eq 'key') {
+  push @body,
+   'if ($__ls_path_ok) { if (ref($__ls_path_cursor) eq "HASH") { $__ls_path_cursor->{'.$final_var.'} = $__ls_path_value; } else { $__ls_path_ok = 0; } }';
+ } else {
+  push @body,
+   'if ($__ls_path_ok) { if (ref($__ls_path_cursor) eq "ARRAY" && '.$final_var.' >= 0 && '.$final_var.' <= @{$__ls_path_cursor}) { if ('.$final_var.' == @{$__ls_path_cursor}) { push @{$__ls_path_cursor}, $__ls_path_value; } else { splice @{$__ls_path_cursor}, '.$final_var.', 1, $__ls_path_value; } } else { $__ls_path_ok = 0; } }';
+ }
+ push @body, '$__ls_path_ok ? $'.$base.' : undef';
+ return 'do { '.join(' ', @body).' }'
+}
+
+sub _lower_ast_scalar_held_hash_index_assignment_value_node {
+ my ($node, $deps) = @_;
+ return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'assign_hash_index';
+ my $target = $node->{name};
+ return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+
+ my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
+  ? $deps->{bare_symbol_kind}
+  : sub { return undef };
+ return undef unless (($bare_symbol_kind->($target) // '') eq 'scalar');
+
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $lower_scalar_access_key_expr = $require_dep->('lower_scalar_access_key_expr');
+
+ my $key_source = _actionir_ast_value_source_expr($node->{key});
+ $key_source = $node->{key}{source}
+  if ref($node->{key}) eq 'HASH' && !(defined($key_source) && length($key_source));
+ my $value_source = _actionir_ast_value_source_expr($node->{value});
+ $value_source = $node->{value}{source}
+  if ref($node->{value}) eq 'HASH' && !(defined($value_source) && length($value_source));
+ return undef unless defined($key_source) && length($key_source);
+ return undef unless defined($value_source) && length($value_source);
+
+ my $key_lowered = $lower_scalar_access_key_expr->($key_source);
+ return undef unless defined($key_lowered) && length($key_lowered);
+ my $value_lowered = _lower_mutation_slot_value_expr($value_source, $deps);
+ return undef unless defined($value_lowered) && length($value_lowered);
+ my $can_index = (ref($node->{key}) eq 'HASH' && (($node->{key}{kind} // '') eq 'string')) ? 0 : 1;
+
+ return 'do { '
+      . 'my $__ls_path_key_0 = '.$key_lowered.'; '
+      . 'my $__ls_path_idx_0 = int(($__ls_path_key_0) // 0); '
+      . 'my $__ls_path_value = '.$value_lowered.'; '
+      . 'my $__ls_path_ok = 0; '
+      . 'if (ref($'.$target.') eq "HASH") { $'.$target.'->{$__ls_path_key_0} = $__ls_path_value; $__ls_path_ok = 1; } '
+      . 'elsif ('.$can_index.' && ref($'.$target.') eq "ARRAY" && $__ls_path_idx_0 >= 0 && $__ls_path_idx_0 <= @{$'.$target.'}) { '
+      . 'if ($__ls_path_idx_0 == @{$'.$target.'}) { push @{$'.$target.'}, $__ls_path_value; } else { splice @{$'.$target.'}, $__ls_path_idx_0, 1, $__ls_path_value; } '
+      . '$__ls_path_ok = 1; } '
+      . '$__ls_path_ok ? $'.$target.' : undef }'
+}
+
 sub _actionir_ast_unsupported_helper_expr {
  my ($method) = @_;
  return undef unless defined($method) && $method =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
@@ -1111,6 +1237,16 @@ sub _user_function_collect_local_decls_from_node {
  if ($kind eq 'assign_hash_index') {
   _user_function_record_local_decl($decls, $params, '%', $node->{name});
   _user_function_collect_local_decls_from_node($node->{key}, $decls, $params);
+  _user_function_collect_local_decls_from_node($node->{value}, $decls, $params);
+  return;
+ }
+
+ if ($kind eq 'assign_nested_access') {
+  _user_function_record_local_decl($decls, $params, '$', $node->{base});
+  foreach my $segment (@{$node->{segments} || []}) {
+   next unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'index';
+   _user_function_collect_local_decls_from_node($segment->{expr}, $decls, $params);
+  }
   _user_function_collect_local_decls_from_node($node->{value}, $decls, $params);
   return;
  }
@@ -1679,6 +1815,8 @@ sub _lower_ast_assignment_operator_statement {
   );
   my $target = $node->{name};
   return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  my $scalar_held = _lower_ast_scalar_held_hash_index_assignment_value_node($node, $deps);
+  return $scalar_held if defined($scalar_held) && length($scalar_held);
   my $key = $ast_value_source->($node->{key});
   my $value = $ast_value_source->($node->{value});
   return undef unless defined($key) && length($key);
@@ -1686,9 +1824,20 @@ sub _lower_ast_assignment_operator_statement {
   my $lower_scalar_access_key_expr = $require_dep->('lower_scalar_access_key_expr');
   my $key_lowered = $lower_scalar_access_key_expr->($key);
   return undef unless defined($key_lowered) && length($key_lowered);
-  my $value_lowered = _lower_mutation_slot_value_expr($value, $deps);
-  return undef unless defined($value_lowered) && length($value_lowered);
-  return '$'.$target.'{'.$key_lowered.'} = '.$value_lowered
+ my $value_lowered = _lower_mutation_slot_value_expr($value, $deps);
+ return undef unless defined($value_lowered) && length($value_lowered);
+ return '$'.$target.'{'.$key_lowered.'} = '.$value_lowered
+ }
+
+ if ($kind eq 'assign_nested_access') {
+  _trace_method_decision(
+   phase => 'lower_ast_assignment_operator_statement',
+   label => 'assignment',
+   decision => 'ast_nested_access_assignment',
+   taken => 1,
+   context => { target => $node->{base} },
+  );
+  return _lower_ast_nested_access_assignment_value_node($node, $deps)
  }
 
  return undef
@@ -2761,6 +2910,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
   if ($kind eq 'assign_hash_index') {
    my $target = $node->{name};
    return undef unless defined($target) && $target =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   my $scalar_held = _lower_ast_scalar_held_hash_index_assignment_value_node($node, $deps);
+   return $scalar_held if defined($scalar_held) && length($scalar_held);
    my $key_source = $ast_expr_source_node->($node->{key});
    $key_source = $node->{key}{source}
     if ref($node->{key}) eq 'HASH' && !(defined($key_source) && length($key_source));
@@ -2774,7 +2925,11 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return undef unless defined($key_lowered) && length($key_lowered);
    my $value_lowered = _lower_mutation_slot_value_expr($value_source, $deps);
    return undef unless defined($value_lowered) && length($value_lowered);
-   return 'do { $'.$target.'{'.$key_lowered.'} = '.$value_lowered.'; +{%'.$target.'} }'
+  return 'do { $'.$target.'{'.$key_lowered.'} = '.$value_lowered.'; +{%'.$target.'} }'
+  }
+
+  if ($kind eq 'assign_nested_access') {
+   return _lower_ast_nested_access_assignment_value_node($node, $deps)
   }
 
   if ($kind eq 'assign_scalar') {
@@ -3044,6 +3199,16 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return $node->{value} ? 'do { require JSON::PP; JSON::PP::true }' : 'do { require JSON::PP; JSON::PP::false }'
    if $kind eq 'boolean';
   if ($kind eq 'raw_perl') {
+   my $source = $node->{source};
+   if (defined($source) && $source =~ /^\((.*)\)$/s) {
+    my $inner = $trim_action_ir_value->($1);
+    if (defined($inner) && length($inner) && $inner ne $source) {
+     my $inner_node = _parse_method_value_ast_expr($inner, $deps);
+     my $inner_expr = $lower_ast_value_node->($inner_node, $opts)
+      if ref($inner_node) eq 'HASH';
+     return $inner_expr if defined($inner_expr) && length($inner_expr);
+    }
+   }
    my $scalar_slot_read = _lower_source_slot_bare_scalar_read_expr($node->{source}, $deps);
    return $scalar_slot_read if defined($scalar_slot_read) && length($scalar_slot_read);
    return undef;
@@ -3055,7 +3220,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return _lower_source_slot_bare_scalar_read_expr(':'.$node->{name}, $deps)
    if $kind eq 'scalar_slot' && defined($node->{name}) && length($node->{name});
   return $lower_ast_scalar_assignment_value_node->($node)
-   if $kind eq 'assign_scalar' || $kind eq 'assign_array_append' || $kind eq 'assign_hash_index';
+   if $kind eq 'assign_scalar' || $kind eq 'assign_array_append' || $kind eq 'assign_hash_index' || $kind eq 'assign_nested_access';
   return $lower_ast_direct_access_node->($node)
    if $kind eq 'indexed_var' || $kind eq 'nested_access';
   if ($kind eq 'array_literal') {
@@ -3183,6 +3348,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
     $arg_expr = $lower_ast_value_node->($arg, { bare_scalar_read => 1 })
      if $arg_kind eq 'variable'
      || $arg_kind eq 'assign_scalar'
+     || $arg_kind eq 'assign_array_append'
+     || $arg_kind eq 'assign_hash_index'
+     || $arg_kind eq 'assign_nested_access'
      || $arg_kind eq 'array_literal'
      || $arg_kind eq 'hash_literal'
      || $arg_kind eq 'block_value'
@@ -5082,7 +5250,12 @@ if ($method_call && $method_call->{method} eq 'index_of') {
    return '[@'.$array_symbol.']' if defined($array_symbol) && length($array_symbol) && $trimmed =~ $array_symbol_expr_re;
   }
   my @lowered = map {
-   my $lowered_arg = $lower_shape_member_expr->($_);
+   my $ast_arg = _parse_method_value_ast_expr($_, $deps);
+   my $lowered_arg = ref($ast_arg) eq 'HASH'
+    ? $lower_ast_value_node->($ast_arg, { bare_scalar_read => 1 })
+    : undef;
+   $lowered_arg = $lower_shape_member_expr->($_)
+    unless defined($lowered_arg) && length($lowered_arg);
    $lowered_arg = _lower_method_value_expr($_, $deps)
     unless defined($lowered_arg) && length($lowered_arg);
    defined($lowered_arg) && length($lowered_arg) ? $lowered_arg : $_;
@@ -6234,11 +6407,16 @@ sub _lower_hash_index_assignment_operator_statement {
   $deps,
   'assign_hash_index',
  );
+ $ast_lowered = _lower_ast_assignment_operator_statement(
+  _parse_method_value_ast_expr($trimmed, $deps),
+  $deps,
+  'assign_nested_access',
+ ) unless defined($ast_lowered) && length($ast_lowered);
  if (defined($ast_lowered) && length($ast_lowered)) {
   _trace_method_decision(
    phase => 'lower_hash_index_assignment_operator_statement',
    label => 'assignment',
-   decision => 'ast_hash_index_assignment',
+   decision => 'ast_hash_or_nested_access_assignment',
    taken => 1,
    context => {},
   );

@@ -729,6 +729,17 @@ sub _parse_assignment_expr {
     value => $value,
    )
   }
+  if (($left->{kind} // '') eq 'nested_access' && @{$left->{segments} || []} > 1) {
+   return _node(
+    'assign_nested_access',
+    $trimmed,
+    $start,
+    $end,
+    base => $left->{base},
+    segments => $left->{segments},
+    value => $value,
+   )
+  }
  }
 
  return undef

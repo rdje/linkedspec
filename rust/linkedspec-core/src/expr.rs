@@ -92,6 +92,13 @@ pub enum Expr {
         key: Box<Expr>,
         value: Box<Expr>,
     },
+    /// A nested value-path assignment operator: `payload["items"][0]["name"] = value`
+    #[serde(rename = "assign_nested_access")]
+    AssignNestedAccess {
+        base: String,
+        segments: Vec<AccessSegment>,
+        value: Box<Expr>,
+    },
     /// A variable reference: `results`, `retv`, `$name`
     #[serde(rename = "variable")]
     Variable { name: String },
@@ -187,6 +194,20 @@ impl std::fmt::Display for Expr {
             Expr::AssignScalar { name, value } => write!(f, "{name} = {value}"),
             Expr::AssignArrayAppend { name, value } => write!(f, "{name} += {value}"),
             Expr::AssignHashIndex { name, key, value } => write!(f, "{name}[{key}] = {value}"),
+            Expr::AssignNestedAccess {
+                base,
+                segments,
+                value,
+            } => {
+                write!(f, "{base}")?;
+                for segment in segments {
+                    match segment {
+                        AccessSegment::Key { value } => write!(f, "[\"{value}\"]")?,
+                        AccessSegment::Index { expr } => write!(f, "[{expr}]")?,
+                    }
+                }
+                write!(f, " = {value}")
+            }
             Expr::Variable { name } => write!(f, "{name}"),
             Expr::ScalarSlot { name } => write!(f, ":{name}"),
             Expr::IndexedVar { name, index } => write!(f, "{name}[{index}]"),
@@ -688,19 +709,11 @@ impl<'a> Parser<'a> {
             return Ok(None);
         }
 
-        self.advance(1);
-        self.skip_whitespace();
-        if self.pos >= self.src.len() {
+        let segments = self.parse_access_segments(&name)?;
+        if segments.is_empty() {
             self.pos = start;
             return Ok(None);
         }
-        let key = self.parse_expr()?;
-        self.skip_whitespace();
-        if self.peek() != Some(']') {
-            self.pos = start;
-            return Ok(None);
-        }
-        self.advance(1);
         self.skip_whitespace();
         if self.peek() != Some('=') {
             self.pos = start;
@@ -719,9 +732,20 @@ impl<'a> Parser<'a> {
             return Ok(None);
         }
         let value = self.parse_expr()?;
-        Ok(Some(Expr::AssignHashIndex {
-            name,
-            key: Box::new(key),
+        if segments.len() == 1 {
+            let key = match segments.into_iter().next().unwrap() {
+                AccessSegment::Key { value } => Expr::StringLiteral { value },
+                AccessSegment::Index { expr } => *expr,
+            };
+            return Ok(Some(Expr::AssignHashIndex {
+                name,
+                key: Box::new(key),
+                value: Box::new(value),
+            }));
+        }
+        Ok(Some(Expr::AssignNestedAccess {
+            base: name,
+            segments,
             value: Box::new(value),
         }))
     }

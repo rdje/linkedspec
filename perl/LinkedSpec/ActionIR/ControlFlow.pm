@@ -213,6 +213,17 @@ sub _control_ast_value_source_expr {
   }
   return $expr
  }
+ if ($kind eq 'assign_nested_access') {
+  my $target = _control_ast_value_source_expr({
+   kind => 'nested_access',
+   base => $node->{base},
+   segments => $node->{segments},
+  });
+  my $value = _control_ast_value_source_expr($node->{value});
+  return undef unless defined($target) && length($target);
+  return undef unless defined($value) && length($value);
+  return $target.' = '.$value
+ }
  if ($kind eq 'array_literal') {
   my @items;
   foreach my $item (@{$node->{items} || []}) {

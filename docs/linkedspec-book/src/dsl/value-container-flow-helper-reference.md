@@ -235,6 +235,10 @@ Direct path atoms use the same scalar read rule when the atom is not a primitive
 > Direct nested access `payload["children"][0]["name"]` is accepted for mixed path segments.
 > Quoted string segments are hash keys; numeric segments and helper/value expressions such as
 > `[i]` are array indexes. Non-reserved bare path atoms such as `[i]` read scalar working variables as indexes.
+> The same path can be an assignment target: `payload["children"][0]["name"] = value` mutates the
+> scalar-held array/hash value. Intermediate containers must already exist with the required shape; final hash
+> keys may be created; final array indexes may replace an element or append exactly at the current length.
+> Missing paths, wrong intermediate shapes, and array gaps yield `undef` and do not mutate the root.
 > Direct shape literals `[]` and `{ key => value }` are accepted as value expressions on the Perl reference and
 > Rust backend. Bare elements/keys/values inside the shape read scalar working variables, and fixed hash field
 > names should be quoted. Direct shape literals bind as typed values for bare assignment targets on both variants:
@@ -272,6 +276,15 @@ child_kind = retv["kind"];
 first_child_name = retv["children"][0]["name"];
 second_child_name = retv["children"][1]["name"];
 dynamic_child_name = retv["children"][child_index]["name"];
+```
+
+Example write:
+
+```text
+payload = { "children" => [{ "name" => "old" }] };
+payload["children"][0]["name"] = "new";
+payload["children"][1] = { "name" => "second" };
+return(payload);
 ```
 
 ## Constructors, snapshots, and flattening

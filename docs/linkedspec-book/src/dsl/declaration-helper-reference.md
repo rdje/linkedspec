@@ -103,8 +103,9 @@ items += value
 set_key(meta, key, value)
 meta[key] = value
 
-# direct-access path scalar reads — the bare path atom is a scalar array index
+# direct-access path scalar reads/writes — the bare path atom is a scalar array index
 return(payload["children"][index]["name"])
+payload["children"][index]["name"] = value
 ```
 
 The kind comes from the **position**: the target of `set(...)` and `name = value` binds the evaluated typed RHS
@@ -119,7 +120,8 @@ Direct RHS shape assignment is not a declaration signal: `name = [value]` / `set
 value to `name`, and `name = { key => value }` / `set(name, { key => value })` binds a hash value. Use explicit
 `set(array(name), ...)` or `set(hash(name), ...)` when the target must be aggregate working storage. Direct nested
 access keeps quoted path segments as hash keys; numeric, helper, and non-reserved bare path segments are array
-indexes.
+indexes. As an assignment target, a nested path mutates the scalar-held array/hash value only when intermediate
+containers already exist with the required shape.
 
 `declare(...)` is retirement-bound for spec files. Use terse replacements instead:
 

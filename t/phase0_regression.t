@@ -47210,6 +47210,74 @@ subtest 'spec_format_terse_3_3_4_assignment_expression_closure' => sub {
         'assignment expression closure spec remains language-agnostic ActionIR ready');
 };
 
+subtest 'spec_format_terse_11_4_nested_mixed_value_path_assignment' => sub {
+    # SPEC-FORMAT-TERSE.11.4: multi-segment direct-access lvalues mutate
+    # scalar-held array/hash value trees explicitly. Intermediate containers
+    # must already exist with the required shape; final hash keys may be
+    # created and final array indexes may replace an element or append at len.
+    plan tests => 13;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    like($L->('return(payload["items"][0]["name"] = value)'),
+        qr/return do \{ .*__ls_path_key_0.*__ls_path_idx_1.*__ls_path_key_2.*__ls_path_ok.*\?\s*\$payload\s*:\s*undef/s,
+        'nested assignment expression lowers to an explicit guarded value block');
+    my $stmt_lowered = LinkedSpec::RuleIR::EmitContext::_lower_hash_index_assignment_operator_statement('payload["items"][1] = value');
+    like($stmt_lowered, qr/__ls_path_idx_1.*push \@\{\$__ls_path_cursor\}.*\$__ls_path_ok \? \$payload : undef/s,
+        'nested statement assignment lowers through the guarded path helper');
+    unlike($stmt_lowered, qr/payload\["items"\]\[1\]\s*=/,
+        'nested statement lowering leaves no raw direct-access assignment residue');
+
+    my $stmt_spec = "Top::\n"
+                  . " /x/ -> Done { set(value, \"new\"); payload = { \"items\" => [{ \"name\" => \"old\" }] }; payload[\"items\"][0][\"name\"] = value; payload[\"items\"][1] = \"tail\"; missing_result = payload[\"missing\"][0] = \"bad\"; wrong_result = payload[\"items\"][0][0] = \"bad\"; return(array(payload, missing_result, wrong_result)) }\n"
+                  . "\nDone::\n /[a-z]+/\n";
+    my $stmt_parser = eval { LinkedSpec::Get(\$stmt_spec) };
+    ok(ref($stmt_parser) eq 'CODE', 'nested statement assignment spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($stmt_parser, 'xhello'), '[{"items":[{"name":"new"},"tail"]},null,null]',
+        'nested statement assignment mutates existing paths, appends at len, and returns undef for missing/wrong paths');
+
+    my $expr_spec = "Top::\n"
+                  . " /x/ -> Done { payload = { \"items\" => [{ \"name\" => \"old\" }] }; return(array((payload[\"items\"][0][\"name\"] = \"new\").count_keys(), payload[\"items\"][1] = \"tail\", payload, payload[\"items\"][3] = \"gap\", payload)) }\n"
+                  . "\nDone::\n /[a-z]+/\n";
+    my $expr_parser = eval { LinkedSpec::Get(\$expr_spec) };
+    ok(ref($expr_parser) eq 'CODE', 'nested assignment expression spec compiles to a parser')
+        or diag(normalize_error($@));
+    is($run->($expr_parser, 'xhello'),
+        '[1,{"items":[{"name":"new"},"tail"]},{"items":[{"name":"new"},"tail"]},null,{"items":[{"name":"new"},"tail"]}]',
+        'nested assignment expressions return the updated root on success and undef for out-of-range extension');
+
+    my $src = $gen->($stmt_spec);
+    like($src, qr/my \$payload;/,
+        'generated source declares the scalar-held payload');
+    like($src, qr/my \$value;/,
+        'generated source declares the scalar RHS');
+    unlike($src, qr/my \@payload;|my %payload;/,
+        'generated source does not infer aggregate storage declarations for nested scalar-held paths');
+    like($src, qr/__ls_path_ok.*__ls_path_cursor/s,
+        'generated source contains explicit guarded nested-path machinery');
+
+    my $d = LinkedSpec::Get(\$stmt_spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{unresolved_helper_count}, 0,
+        'nested value-path assignment spec has no unresolved-helper hits');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'nested value-path assignment spec remains language-agnostic ActionIR ready');
+};
+
 subtest 'spec_format_terse_2_3_5_6_typed_wrapper_quoted_name_boundaries' => sub {
     # SPEC-FORMAT-TERSE.2.3.5.6: single-argument aggregate typed wrappers read
     # working variables only from bare name tokens. Quoted strings remain literal

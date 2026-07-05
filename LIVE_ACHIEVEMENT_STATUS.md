@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-05: **SPEC-FORMAT-TERSE.11.4 — implement nested value-path assignment**
+  (NESTED VALUE-PATH DONE; DUCK-TYPED CLOSEOUT FRONTIER ACTIVE).
+
+  **Fix:** Perl and Rust now support nested direct-access assignment through scalar-held array/hash payloads, such
+  as `payload["items"][0]["name"] = value`. Writes use explicit path checks instead of Perl autovivification:
+  intermediates must exist and match shape; final hash keys may be created/replaced; final array indexes may
+  replace or append exactly at len; missing/wrong/gap paths return `undef`/`null` and leave the root unchanged.
+  Single-segment scalar-held array roots such as `payload[1] = value` now mutate the array value consistently.
+
+  **Verification:** Focused Perl syntax/probe checks pass for nested lowering, scalar-held array root mutation,
+  generated declarations, and descriptor readiness. Focused Rust `.11.4` tests pass. The oracle corpus was
+  regenerated to **92** fixtures with `terse_11_4_nested_mixed_value_path_assignment`, known `spec_spec_*`
+  generator drift restored, and the Rust corpus oracle passes.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.11.5` is active for final duck-typed assignment docs/KM/corpus/mdBook
+  closeout/alignment. `.15`, `.8`, and `.9` remain behind it.
+
 - 2026-07-05: **SPEC-FORMAT-TERSE.11.3 — implement Rust duck-typed assignment parity**
   (RUST PARITY DONE; NESTED VALUE-PATH FRONTIER ACTIVE).
 

@@ -45,6 +45,12 @@ use serde_json::Value;
 
 const LINKEDSPEC_WHILE_ITERATION_LIMIT: usize = 10_000;
 
+#[derive(Debug, Clone)]
+enum EvaluatedAccessSegment {
+    Key(String),
+    Index(usize),
+}
+
 /// The runtime engine executes CompiledRule nodes against input text.
 pub struct Engine {
     /// The compiled spec being executed (needed for child rule lookup).
@@ -2142,6 +2148,14 @@ impl Engine {
             Expr::AssignHashIndex { key, value, .. } => {
                 Self::expr_calls_rule(key, rule_label) || Self::expr_calls_rule(value, rule_label)
             }
+            Expr::AssignNestedAccess {
+                segments, value, ..
+            } => {
+                segments.iter().any(|segment| match segment {
+                    AccessSegment::Key { .. } => false,
+                    AccessSegment::Index { expr } => Self::expr_calls_rule(expr, rule_label),
+                }) || Self::expr_calls_rule(value, rule_label)
+            }
             Expr::IndexedVar { index, .. } => Self::expr_calls_rule(index, rule_label),
             Expr::NestedAccess { segments, .. } => segments.iter().any(|segment| match segment {
                 AccessSegment::Key { .. } => false,
@@ -2443,6 +2457,11 @@ impl Engine {
             if self.execute_hash_index_assignment_operator_statement(&stmt.expr, ctx, rule_label)? {
                 continue;
             }
+            if self
+                .execute_nested_access_assignment_operator_statement(&stmt.expr, ctx, rule_label)?
+            {
+                continue;
+            }
             if self.execute_set_key_statement(&stmt.expr, ctx, rule_label)? {
                 continue;
             }
@@ -2467,6 +2486,9 @@ impl Engine {
             return Ok(());
         }
         if self.execute_hash_index_assignment_operator_statement(expr, ctx, rule_label)? {
+            return Ok(());
+        }
+        if self.execute_nested_access_assignment_operator_statement(expr, ctx, rule_label)? {
             return Ok(());
         }
         if self.execute_set_key_statement(expr, ctx, rule_label)? {
@@ -2742,9 +2764,28 @@ impl Engine {
         let Expr::AssignHashIndex { name, key, value } = expr else {
             return Ok(false);
         };
-        let evaluated_key = self.eval_expr(key, ctx, rule_label)?.to_str();
-        let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
-        ctx.set_hash_entry(name, &evaluated_key, evaluated_value);
+        self.eval_hash_index_assignment_expression(name, key, value, ctx, rule_label)?;
+        Ok(true)
+    }
+
+    /// Execute the statement-level nested value-path assignment
+    /// `payload["items"][0]["name"] = value`.
+    fn execute_nested_access_assignment_operator_statement(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<bool, String> {
+        use linkedspec_core::expr::Expr;
+        let Expr::AssignNestedAccess {
+            base,
+            segments,
+            value,
+        } = expr
+        else {
+            return Ok(false);
+        };
+        self.eval_nested_access_assignment_expression(base, segments, value, ctx, rule_label)?;
         Ok(true)
     }
 
@@ -2768,10 +2809,160 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
+        if matches!(ctx.bare_kind(name), Some(RuntimeVarKind::Scalar)) {
+            let mut root = ctx.get_scalar(name);
+            match root {
+                RuntimeValue::Hash(ref mut entries) => {
+                    let evaluated_key = self.eval_expr(key, ctx, rule_label)?.to_str();
+                    let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
+                    if let Some((_, existing)) = entries
+                        .iter_mut()
+                        .find(|(candidate, _)| candidate == &evaluated_key)
+                    {
+                        *existing = evaluated_value;
+                    } else {
+                        entries.push((evaluated_key, evaluated_value));
+                    }
+                    ctx.set_scalar(name, root.clone());
+                    return Ok(root);
+                }
+                RuntimeValue::Array(ref mut items) => {
+                    if matches!(key, linkedspec_core::expr::Expr::StringLiteral { .. }) {
+                        return Ok(RuntimeValue::Undef);
+                    }
+                    let idx_val = self.eval_expr(key, ctx, rule_label)?;
+                    let idx_number = idx_val.as_number().unwrap_or(0.0);
+                    let idx = if idx_number.is_finite() && idx_number >= 0.0 {
+                        idx_number as usize
+                    } else {
+                        usize::MAX
+                    };
+                    let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
+                    if idx < items.len() {
+                        items[idx] = evaluated_value;
+                    } else if idx == items.len() {
+                        items.push(evaluated_value);
+                    } else {
+                        return Ok(RuntimeValue::Undef);
+                    }
+                    ctx.set_scalar(name, root.clone());
+                    return Ok(root);
+                }
+                _ => return Ok(RuntimeValue::Undef),
+            }
+        }
         let evaluated_key = self.eval_expr(key, ctx, rule_label)?.to_str();
         let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
         ctx.set_hash_entry(name, &evaluated_key, evaluated_value);
         Ok(RuntimeValue::Hash(ctx.get_hash(name)))
+    }
+
+    fn eval_nested_access_assignment_expression(
+        &self,
+        base: &str,
+        segments: &[AccessSegment],
+        value: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        let evaluated_segments = self.eval_access_segments(segments, ctx, rule_label)?;
+        let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
+        let original_kind = ctx.bare_kind(base);
+        let mut root = ctx.get_bare_value(base);
+        if !Self::assign_nested_runtime_value(&mut root, &evaluated_segments, evaluated_value) {
+            return Ok(RuntimeValue::Undef);
+        }
+
+        match (original_kind, &root) {
+            (Some(RuntimeVarKind::Array), RuntimeValue::Array(values)) => {
+                ctx.set_array(base, values.clone())
+            }
+            (Some(RuntimeVarKind::Hash), RuntimeValue::Hash(values)) => {
+                ctx.set_hash(base, values.clone())
+            }
+            _ => ctx.set_scalar(base, root.clone()),
+        }
+        Ok(root)
+    }
+
+    fn eval_access_segments(
+        &self,
+        segments: &[AccessSegment],
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<Vec<EvaluatedAccessSegment>, String> {
+        let mut evaluated = Vec::with_capacity(segments.len());
+        for segment in segments {
+            match segment {
+                AccessSegment::Key { value } => {
+                    evaluated.push(EvaluatedAccessSegment::Key(value.clone()));
+                }
+                AccessSegment::Index { expr } => {
+                    let idx_val = self.eval_expr(expr, ctx, rule_label)?;
+                    let idx_number = idx_val.as_number().unwrap_or(0.0);
+                    let idx = if idx_number.is_finite() && idx_number >= 0.0 {
+                        idx_number as usize
+                    } else {
+                        usize::MAX
+                    };
+                    evaluated.push(EvaluatedAccessSegment::Index(idx));
+                }
+            }
+        }
+        Ok(evaluated)
+    }
+
+    fn assign_nested_runtime_value(
+        current: &mut RuntimeValue,
+        segments: &[EvaluatedAccessSegment],
+        value: RuntimeValue,
+    ) -> bool {
+        let Some((segment, rest)) = segments.split_first() else {
+            return false;
+        };
+        if rest.is_empty() {
+            return match (current, segment) {
+                (RuntimeValue::Hash(entries), EvaluatedAccessSegment::Key(key)) => {
+                    if let Some((_, existing)) =
+                        entries.iter_mut().find(|(candidate, _)| candidate == key)
+                    {
+                        *existing = value;
+                    } else {
+                        entries.push((key.clone(), value));
+                    }
+                    true
+                }
+                (RuntimeValue::Array(items), EvaluatedAccessSegment::Index(idx)) => {
+                    if *idx < items.len() {
+                        items[*idx] = value;
+                        true
+                    } else if *idx == items.len() {
+                        items.push(value);
+                        true
+                    } else {
+                        false
+                    }
+                }
+                _ => false,
+            };
+        }
+
+        match (current, segment) {
+            (RuntimeValue::Hash(entries), EvaluatedAccessSegment::Key(key)) => {
+                let Some((_, child)) = entries.iter_mut().find(|(candidate, _)| candidate == key)
+                else {
+                    return false;
+                };
+                Self::assign_nested_runtime_value(child, rest, value)
+            }
+            (RuntimeValue::Array(items), EvaluatedAccessSegment::Index(idx)) => {
+                let Some(child) = items.get_mut(*idx) else {
+                    return false;
+                };
+                Self::assign_nested_runtime_value(child, rest, value)
+            }
+            _ => false,
+        }
     }
 
     /// Execute statement-level receiver-dot array end mutations.
@@ -3086,6 +3277,12 @@ impl Engine {
             Expr::AssignHashIndex { name, key, value } => {
                 self.eval_hash_index_assignment_expression(name, key, value, ctx, rule_label)
             }
+            Expr::AssignNestedAccess {
+                base,
+                segments,
+                value,
+            } => self
+                .eval_nested_access_assignment_expression(base, segments, value, ctx, rule_label),
             Expr::Variable { name } => Ok(ctx.get_bare_value(name)),
             Expr::ScalarSlot { name } => Ok(ctx.get_scalar(name)),
             Expr::IndexedVar { name, index } => {
@@ -4000,6 +4197,12 @@ impl Engine {
             Expr::AssignHashIndex { name, key, value } => {
                 self.eval_hash_index_assignment_expression(name, key, value, ctx, rule_label)
             }
+            Expr::AssignNestedAccess {
+                base,
+                segments,
+                value,
+            } => self
+                .eval_nested_access_assignment_expression(base, segments, value, ctx, rule_label),
             _ => self.eval_expr(expr, ctx, rule_label),
         }
     }

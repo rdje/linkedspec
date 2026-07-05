@@ -243,6 +243,12 @@ binds a hash value and evaluates to that stored hash value. Explicit `set(array(
 values: `items += value` appends to the named array and evaluates to the updated array snapshot, while
 `meta[key] = value` updates the named hash and evaluates to the updated hash snapshot.
 
+Nested value-path assignment mutates scalar-held array/hash payloads through direct access syntax:
+`payload["items"][0]["name"] = value`. Intermediate path containers must already exist and match the segment kind.
+The final segment may create or replace a hash key, replace an existing array element, or append exactly at the
+array length. Missing intermediates, wrong intermediate container kinds, and array gaps yield `undef` and leave the
+root unchanged. Successful expression-valued nested assignment yields the updated root value.
+
 Array end mutations are also statement-level operations on a named working array:
 `items.push_back(value)` appends, `items.push_front(value)` prepends, `items.pop_back()`
 removes the last element, and `items.pop_front()` removes the first element. The receiver

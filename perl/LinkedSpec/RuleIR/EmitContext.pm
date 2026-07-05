@@ -787,8 +787,18 @@ sub _collect_bare_identifier_type_memory {
    return;
   }
   if ($kind eq 'assign_hash_index') {
-   $record->($node->{name}, 'hash');
+   $record->($node->{name}, 'hash')
+    unless (($kind_by_name{$node->{name}} // '') eq 'scalar');
    $collect_ast_type_node->($node->{key});
+   $collect_ast_type_node->($node->{value});
+   return;
+  }
+  if ($kind eq 'assign_nested_access') {
+   $record->($node->{base}, 'scalar');
+   foreach my $segment (@{$node->{segments} || []}) {
+    next unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'index';
+    $collect_ast_type_node->($segment->{expr});
+   }
    $collect_ast_type_node->($node->{value});
    return;
   }
@@ -880,13 +890,17 @@ sub _collect_bare_identifier_type_memory {
    $collect_ast_type_node->($ast_node) if ref($ast_node) eq 'HASH';
 
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\+=\s*/s) {
-    $record->($1, 'array');
-    next;
-   }
-   if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\[/s) {
-    $record->($1, 'hash');
-    next;
-   }
+   $record->($1, 'array');
+   next;
+  }
+  if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\[/s) {
+   next if ref($ast_node) eq 'HASH' && ($ast_node->{kind} // '') eq 'assign_nested_access';
+   next if ref($ast_node) eq 'HASH'
+        && ($ast_node->{kind} // '') eq 'assign_hash_index'
+        && (($kind_by_name{$1} // '') eq 'scalar');
+   $record->($1, 'hash');
+   next;
+  }
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=|>)\s*(.+)$/s) {
     my ($name, $kind) = _bare_symbol_kind_from_target_expr($1, $2);
     $record->($name, $kind);
@@ -1982,8 +1996,19 @@ sub _collect_auto_working_var_decls {
   }
 
   if ($kind eq 'assign_hash_index') {
-   $record->('%', $node->{name});
+   my $remembered_kind = _bare_symbol_kind($node->{name});
+   $record->(($remembered_kind // '') eq 'scalar' ? '$' : '%', $node->{name});
    $collect_ast_node_refs->($node->{key}, 1);
+   $collect_ast_node_refs->($node->{value}, 1);
+   return;
+  }
+
+  if ($kind eq 'assign_nested_access') {
+   $record->('$', $node->{base});
+   foreach my $segment (@{$node->{segments} || []}) {
+    next unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'index';
+    $collect_ast_node_refs->($segment->{expr}, 1);
+   }
    $collect_ast_node_refs->($node->{value}, 1);
    return;
   }
@@ -2163,11 +2188,20 @@ sub _collect_auto_working_var_decls {
     next;
    }
    if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*\[/s) {
-    my $target_expr = $1;
-    my $lowered_hash_index = _lower_hash_index_assignment_operator_statement($trimmed);
-    if (defined($lowered_hash_index) && length($lowered_hash_index)) {
+   my $target_expr = $1;
+   my $lowered_hash_index = _lower_hash_index_assignment_operator_statement($trimmed);
+   if (defined($lowered_hash_index) && length($lowered_hash_index)) {
+    my $ast_node = $parse_ast_value_expr->($trimmed);
+    if (ref($ast_node) eq 'HASH' && ($ast_node->{kind} // '') eq 'assign_nested_access') {
+     $collect_ast_node_refs->($ast_node, 0);
+     next;
+    }
      my $parsed_hash_index = _parse_hash_index_assignment_operator_statement($trimmed);
-     $record->('%', $parsed_hash_index->{target} // $target_expr) if $parsed_hash_index;
+     if ($parsed_hash_index) {
+      my $target = $parsed_hash_index->{target} // $target_expr;
+      my $remembered_kind = _bare_symbol_kind($target);
+      $record->(($remembered_kind // '') eq 'scalar' ? '$' : '%', $target);
+     }
      if ($parsed_hash_index) {
       for my $slot (qw(key value)) {
        my $slot_expr = _trim_action_ir_value($parsed_hash_index->{$slot});

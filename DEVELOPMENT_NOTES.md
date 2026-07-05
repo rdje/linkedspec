@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-05 (SPEC-FORMAT-TERSE.11.4 — nested value-path assignment):
+  Nested direct-access lvalues now have explicit duck-typed value-tree semantics. Keep `assign_nested_access`
+  lowering/runtime code guarded: every intermediate segment must check both existence and container shape, final
+  hash segments may create/replace entries, final array segments may only replace an existing element or append at
+  exactly `len`, and failed path checks return `undef`/`RuntimeValue::Undef` without mutating the root. Do not use
+  Perl autovivification as language semantics. Single-segment `name[index] = value` must route through scalar-held
+  array/hash mutation when type memory/runtime `bare_kind(name)` says the name is scalar-bound; only then should it
+  fall back to named hash storage. Generated Perl should avoid private `->$idx =` assignment forms inside lowered
+  path helpers, because readiness diagnostics can mistake them for unresolved DSL lvalues; use guarded `splice`
+  for in-range array replacement.
+
 - 2026-07-05 (SPEC-FORMAT-TERSE.11.3 — Rust duck-typed assignment parity):
   Rust `Engine` now treats bare assignment as typed value binding. `Expr::AssignScalar`,
   `execute_scalar_assignment_operator_statement`, and `set`/`=` helper execution evaluate the RHS and store the

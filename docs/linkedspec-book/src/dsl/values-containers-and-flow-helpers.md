@@ -77,6 +77,20 @@ updated array snapshot, while `meta[key] = value` mutates the named hash and yie
 These forms compose in `return(...)`, helper arguments, expression-valued blocks, user functions, or compatible
 receiver chains.
 
+Nested value-path assignment uses the same direct bracket path on the left side:
+
+```text
+payload = { "items" => [{ "name" => "old" }] };
+payload["items"][0]["name"] = "new";
+payload["items"][1] = { "name" => "tail" };
+```
+
+Nested writes mutate the array/hash value currently held by the bare variable. Intermediate containers must
+already exist and have the required shape; LinkedSpec does not autovivify missing hashes or arrays. A final hash
+key may be created or replaced. A final array index may replace an existing element or append exactly at the
+current array length. An array gap, missing intermediate key, or wrong intermediate container leaves the root
+unchanged and yields `undef` in value positions.
+
 ## Pushing values
 
 Use `push(array(target), value)` when you want to append.

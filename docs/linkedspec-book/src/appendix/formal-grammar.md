@@ -497,6 +497,7 @@ direct_access : name direct_segment+
 direct_segment : '[' quoted_string ']'
                | '[' bare_identifier ']'
                | '[' explicit_index_expr ']'
+nested_assignment : direct_access '=' expr
 ```
 
 The base `name` is a working scalar that holds a structured array/hash payload.
@@ -506,6 +507,11 @@ array-index reads. Non-reserved bare path atoms such as `[i]` are also scalar
 array-index reads, equivalent to `[i]`. Primitive literals and engine
 locals are not claimed as bare path atoms.
 
+When `direct_access` is used as `nested_assignment`, the base value is mutated only if every intermediate
+container already exists and has the required shape. The final hash key may be created; the final array index may
+replace an existing element or append exactly at the current length. Missing intermediates, wrong shapes, and
+array gaps yield `undef` in value positions.
+
 Scalar-slot shorthand:
 
 ```text
@@ -514,16 +520,18 @@ set(:name, [value])            — assign the array payload to scalar slot name
 ```
 
 Use the shorthand when the value must visibly be a scalar slot but the full
-`:name` wrapper is too noisy. Bare direct-shape targets still infer
-aggregate kind: `set(name, [value])` assigns the working array `name`, while
-`set(:name, [value])` assigns the scalar `name`.
+`:name` wrapper is too noisy. Bare direct-shape assignment now binds the typed
+value to the bare variable: `set(name, [value])` stores an array value in
+`name`, while `set(:name, [value])` targets the explicit scalar slot spelling.
+Use `set(array(name), ...)` or `set(hash(name), ...)` only when aggregate
+working storage is intended.
 
 ### 7.1 Working-Variable Helpers
 ```
-name = value                — assign a scalar working variable
-items = []                  — initialize an array working variable
-meta = {}                   — initialize a hash working variable
-set(name, value)            — helper form of scalar assignment
+name = value                — bind a typed value to a working variable
+items = []                  — bind an array value to items
+meta = {}                   — bind a hash value to meta
+set(name, value)            — helper form of assignment
 return(name)                — read and return a scalar working variable
 :name                       — explicit scalar-slot read shorthand
 ```

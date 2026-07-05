@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-05 — SPEC-FORMAT-TERSE.11.4 — implement nested value-path assignment
+
+**Scope:** Perl/Rust nested direct-access assignment, focused phase0/Rust locks, generated oracle corpus, mdBook
+semantics, and Knowledge Map coverage for duck-typed value-path writes.
+
+**What changed:** Multi-segment lvalues such as `payload["items"][0]["name"] = value` now mutate scalar-held
+array/hash payload trees on Perl and Rust. The implementation checks every intermediate segment explicitly rather
+than relying on Perl autovivification: intermediate containers must already exist and have the required shape,
+final hash keys may be created or replaced, final array indexes may replace existing elements or append exactly at
+len, and missing/wrong/gap paths return `undef`/`null` without mutating the root. Expression-valued nested
+assignment returns the updated root on success. Single-segment `payload[1] = value` now also mutates a scalar-held
+array root consistently before falling back to named-hash storage when the bare name is not scalar-bound.
+
+**Tests:** Perl syntax checks for the touched ActionIR/EmitContext modules; focused `LinkedSpec::call_spec_handler_subst`
+and `LinkedSpec::Get` probes for nested statement/value assignment, scalar-held array roots, generated declarations,
+and descriptor readiness; focused Rust `terse_11_4` tests; oracle corpus regeneration; Rust corpus oracle over
+**92** fixtures. The generator's known `spec_spec_*` expected-output drift was restored to the existing AST
+expectations before the passing oracle run.
+
+**Status:** `.11.4` is complete; `.11.5` is active for final duck-typed assignment closeout alignment.
+
 ## 2026-07-05 — SPEC-FORMAT-TERSE.11.3 — implement Rust duck-typed assignment parity
 
 **Scope:** Rust runtime assignment semantics, the oracle-exposed Perl scalar-held copy/receiver read gap, focused

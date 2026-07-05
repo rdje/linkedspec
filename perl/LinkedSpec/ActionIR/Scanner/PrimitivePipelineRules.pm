@@ -383,13 +383,30 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
  my $trimmed = _trim_action_ir_value($statement);
  next unless defined($trimmed) && length($trimmed);
  my $parsed = _parse_hash_index_assignment_operator_statement($trimmed);
- next unless $parsed;
+ if ($parsed) {
+  push @events, {
+   raw => $trimmed,
+   args => {
+    target => $parsed->{target},
+    key    => $parsed->{key},
+    value  => $parsed->{value},
+   },
+  };
+  next;
+ }
+ my $node;
+ eval {
+  require LinkedSpec::ActionIR::AST;
+  $node = LinkedSpec::ActionIR::AST::parse_action_expr($trimmed, {});
+  1;
+ } or next;
+ next unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'assign_nested_access';
  push @events, {
   raw => $trimmed,
   args => {
-   target => $parsed->{target},
-   key    => $parsed->{key},
-   value  => $parsed->{value},
+   target => $node->{base},
+   path_segment_count => scalar(@{$node->{segments} || []}),
+   value => ref($node->{value}) eq 'HASH' ? ($node->{value}{source} // '') : '',
   },
  };
 }
