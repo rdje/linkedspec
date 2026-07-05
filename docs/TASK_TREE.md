@@ -54,6 +54,12 @@ has matching direct-shape assignment branches. Frontier advances to `SPEC-FORMAT
 duck-typed value-binding implementation, with Rust parity, nested value paths, and docs/KM/corpus closeout split
 behind it.
 
+Index note 2026-07-05: `SPEC-FORMAT-TERSE.11.2` Perl reference value binding is done. Bare Perl assignment targets
+now bind typed RHS values through `$name`; direct RHS shape no longer emits `@name`/`%name` or matching aggregate
+declarations solely from RHS shape. Explicit `array(...)` / `hash(...)` mutation targets remain aggregate storage,
+and scalar-bound `array(name)` / `hash(name)` views read guarded snapshots. Frontier advances to
+`SPEC-FORMAT-TERSE.11.3` for Rust parity.
+
 Index note 2026-07-05: `SPEC-FORMAT-TERSE.12` and `.13` are now tracked as deferred/backlog by explicit user
 directive. `.12` owns future hash-tree attached-block traversal; for that backlog item a hash-tree has a hash root,
 hash interior nodes, and scalar or array leaves. `.13` tracks the analogous lower-priority array-tree traversal

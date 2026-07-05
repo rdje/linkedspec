@@ -46056,11 +46056,11 @@ subtest 'spec_format_terse_1_2_3_5_1_shape_literal_value_expressions' => sub {
 
 };
 
-subtest 'spec_format_terse_1_2_3_5_2_rhs_shape_target_kind_inference' => sub {
-    # SPEC-FORMAT-TERSE.1.2.3.5.2: direct [] / {} RHS literals infer the
-    # aggregate working-variable kind for bare assignment targets. Explicit
-    # explicit scalar-slot targets remain scalar payload assignment boundaries.
-    plan tests => 32;
+subtest 'spec_format_terse_11_2_bare_shape_assignment_value_binding' => sub {
+    # SPEC-FORMAT-TERSE.11.2: direct [] / {} RHS literals are typed values for
+    # bare assignment targets. Explicit array(...) / hash(...) targets remain
+    # aggregate-storage mutation surfaces until the nested value-path work lands.
+    plan tests => 36;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
     my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
@@ -46077,62 +46077,62 @@ subtest 'spec_format_terse_1_2_3_5_2_rhs_shape_target_kind_inference' => sub {
         return $src;
     };
 
-    is($L->('name = []'), '@name = ()',
-        'empty array RHS infers a bare array assignment target');
-    is($L->('name = {}'), '%name = ()',
-        'empty hash RHS infers a bare hash assignment target');
-    is($L->('name = [value]'), '@name = ($value)',
-        'non-empty array RHS infers a bare array assignment target');
-    is($L->('name = { key => value }'), '%name = ($key => $value)',
-        'non-empty hash RHS infers a bare hash assignment target');
-    is($L->('set(name, [value])'), '@name = ($value)',
-        'set(name, shape) follows the same RHS target-kind inference');
-    is($L->('set(meta, { key => value })'), '%meta = ($key => $value)',
-        'set(meta, shape) follows the same RHS target-kind inference');
+    is($L->('name = []'), '$name = []',
+        'empty array RHS binds a scalar-held array value');
+    is($L->('name = {}'), '$name = {}',
+        'empty hash RHS binds a scalar-held hash value');
+    is($L->('name = [value]'), '$name = [$value]',
+        'non-empty array RHS binds a scalar-held array value');
+    is($L->('name = { key => value }'), '$name = {$key => $value}',
+        'non-empty hash RHS binds a scalar-held hash value');
+    is($L->('set(name, [value])'), '$name = [$value]',
+        'set(name, shape) follows scalar value-binding semantics');
+    is($L->('set(meta, { key => value })'), '$meta = {$key => $value}',
+        'set(meta, shape) follows scalar value-binding semantics');
     is($L->('set(:name, [value])'), '$name = [$value]',
-        'explicit scalar target keeps scalar payload assignment semantics');
+        'explicit scalar target remains a scalar payload assignment boundary');
     is($L->('name = value'), '$name = $value',
         'non-shape RHS assignment remains scalar assignment');
 
     my $array_spec = "Top::\n"
-                   . " /x/ -> Done { set(value,\"ok\"); items = [value]; items += \"tail\"; return(array_copy(items)) }\n"
+                   . " /x/ -> Done { set(value,\"ok\"); items = [value]; return(array(items)) }\n"
                    . "\nDone::\n /[a-z]+/\n";
     my $array_parser = eval { LinkedSpec::Get(\$array_spec) };
-    ok(ref($array_parser) eq 'CODE', 'array RHS-shape target inference spec compiles')
+    ok(ref($array_parser) eq 'CODE', 'array value-binding assignment spec compiles')
         or diag(normalize_error($@));
-    is($run->($array_parser, 'xhello'), '["ok","tail"]',
-        'array RHS-shape target inference runs through later array mutation');
+    is($run->($array_parser, 'xhello'), '["ok"]',
+        'array value-binding assignment reads back through array(name)');
     my $array_src = $gen->($array_spec);
-    is((() = ($array_src =~ /my \@items\b/g)), 1,
-        'array RHS-shape target auto-supplies one my @items');
-    is((() = ($array_src =~ /my \$items\b/g)), 0,
-        'array RHS-shape target does not auto-supply my $items');
+    is((() = ($array_src =~ /my \$items\b/g)), 1,
+        'array value-binding target auto-supplies one my $items');
+    is((() = ($array_src =~ /my \@items\b/g)), 0,
+        'array value-binding target does not auto-supply my @items');
     is((() = ($array_src =~ /my \$value\b/g)), 1,
-        'array RHS-shape member read auto-supplies one my $value');
-    like($array_src, qr/\@items = \(\$value\)/,
-        'generated source assigns the lowered array shape into @items');
-    like($array_src, qr/push \@items, "tail"/,
-        'generated source keeps subsequent array mutation on @items');
+        'array shape member read auto-supplies one my $value');
+    like($array_src, qr/\$items = \[\$value\]/,
+        'generated source assigns the lowered array shape into $items');
+    like($array_src, qr/ref\(\$__ls_array_value\) eq 'ARRAY'/,
+        'array(name) reads the scalar-held array value through a guard');
 
     my $hash_spec = "Top::\n"
-                  . " /x/ -> Done { set(key,\"stage\"); set(value,\"ok\"); meta = { key => value }; meta[\"fixed\"] = \"yes\"; return(hash_copy(meta)) }\n"
+                  . " /x/ -> Done { set(key,\"stage\"); set(value,\"ok\"); meta = { key => value }; return(hash(meta)) }\n"
                   . "\nDone::\n /[a-z]+/\n";
     my $hash_parser = eval { LinkedSpec::Get(\$hash_spec) };
-    ok(ref($hash_parser) eq 'CODE', 'hash RHS-shape target inference spec compiles')
+    ok(ref($hash_parser) eq 'CODE', 'hash value-binding assignment spec compiles')
         or diag(normalize_error($@));
-    is($run->($hash_parser, 'xhello'), '{"fixed":"yes","stage":"ok"}',
-        'hash RHS-shape target inference runs through later hash mutation');
+    is($run->($hash_parser, 'xhello'), '{"stage":"ok"}',
+        'hash value-binding assignment reads back through hash(meta)');
     my $hash_src = $gen->($hash_spec);
-    is((() = ($hash_src =~ /my \%meta\b/g)), 1,
-        'hash RHS-shape target auto-supplies one my %meta');
-    is((() = ($hash_src =~ /my \$meta\b/g)), 0,
-        'hash RHS-shape target does not auto-supply my $meta');
+    is((() = ($hash_src =~ /my \$meta\b/g)), 1,
+        'hash value-binding target auto-supplies one my $meta');
+    is((() = ($hash_src =~ /my \%meta\b/g)), 0,
+        'hash value-binding target does not auto-supply my %meta');
     is((() = ($hash_src =~ /my \$key\b/g)), 1,
-        'hash RHS-shape key read auto-supplies one my $key');
+        'hash shape key read auto-supplies one my $key');
     is((() = ($hash_src =~ /my \$value\b/g)), 1,
-        'hash RHS-shape value read auto-supplies one my $value');
-    like($hash_src, qr/\%meta = \(\$key => \$value\)/,
-        'generated source assigns the lowered hash shape into %meta');
+        'hash shape value read auto-supplies one my $value');
+    like($hash_src, qr/\$meta = \{\$key => \$value\}/,
+        'generated source assigns the lowered hash shape into $meta');
 
     my $explicit_scalar_spec = "Top::\n"
                              . " /x/ -> Done { set(value,\"ok\"); set(:name, [value]); return(:name) }\n"
@@ -46148,27 +46148,37 @@ subtest 'spec_format_terse_1_2_3_5_2_rhs_shape_target_kind_inference' => sub {
     is((() = ($explicit_scalar_src =~ /my \@name\b/g)), 0,
         'explicit scalar target does not auto-supply my @name');
 
-    my $declare_array_spec = "Top::\n"
-                           . " /x/ -> Done { set(value,\"ok\"); declare(array, items=[value, cat(\"a\",\"b\")]); return(array_copy(items)) }\n"
-                           . "\nDone::\n /[a-z]+/\n";
-    my $declare_array_parser = eval { LinkedSpec::Get(\$declare_array_spec) };
-    ok(ref($declare_array_parser) eq 'CODE', 'array declaration shape initializer spec compiles')
+    my $explicit_array_spec = "Top::\n"
+                            . " /x/ -> Done { set(value,\"ok\"); set(array(items), [value, cat(\"a\",\"b\")]); return(copy(array(items))) }\n"
+                            . "\nDone::\n /[a-z]+/\n";
+    my $explicit_array_parser = eval { LinkedSpec::Get(\$explicit_array_spec) };
+    ok(ref($explicit_array_parser) eq 'CODE', 'explicit array target shape initializer spec compiles')
         or diag(normalize_error($@));
-    is($run->($declare_array_parser, 'xhello'), '["ok","ab"]',
-        'array declaration shape initializer lowers members before runtime');
-    like($gen->($declare_array_spec), qr/my \@items = \(\$value, do \{/,
-        'array declaration shape initializer lowers a bare member to $value');
+    is($run->($explicit_array_parser, 'xhello'), '["ok","ab"]',
+        'explicit array target shape initializer lowers members before runtime');
+    my $explicit_array_src = $gen->($explicit_array_spec);
+    is((() = ($explicit_array_src =~ /my \@items\b/g)), 1,
+        'explicit array target auto-supplies one my @items');
+    is((() = ($explicit_array_src =~ /my \$items\b/g)), 0,
+        'explicit array target does not auto-supply my $items');
+    like($explicit_array_src, qr/\@items = \(\$value, do \{/,
+        'explicit array target stores the lowered shape into @items');
 
-    my $declare_hash_spec = "Top::\n"
-                          . " /x/ -> Done { set(key,\"stage\"); set(value,\"ok\"); declare(hash, meta={ key => value, \"fixed\" => [value] }); return(hash_copy(meta)) }\n"
-                          . "\nDone::\n /[a-z]+/\n";
-    my $declare_hash_parser = eval { LinkedSpec::Get(\$declare_hash_spec) };
-    ok(ref($declare_hash_parser) eq 'CODE', 'hash declaration shape initializer spec compiles')
+    my $explicit_hash_spec = "Top::\n"
+                           . " /x/ -> Done { set(key,\"stage\"); set(value,\"ok\"); set(hash(meta), { key => value, \"fixed\" => [value] }); return(copy(hash(meta))) }\n"
+                           . "\nDone::\n /[a-z]+/\n";
+    my $explicit_hash_parser = eval { LinkedSpec::Get(\$explicit_hash_spec) };
+    ok(ref($explicit_hash_parser) eq 'CODE', 'explicit hash target shape initializer spec compiles')
         or diag(normalize_error($@));
-    is($run->($declare_hash_parser, 'xhello'), '{"fixed":["ok"],"stage":"ok"}',
-        'hash declaration shape initializer lowers key/value members before runtime');
-    like($gen->($declare_hash_spec), qr/my \%meta = \(\$key => \$value, "fixed" => \[\$value\]\)/,
-        'hash declaration shape initializer lowers nested shape members');
+    is($run->($explicit_hash_parser, 'xhello'), '{"fixed":["ok"],"stage":"ok"}',
+        'explicit hash target shape initializer lowers key/value members before runtime');
+    my $explicit_hash_src = $gen->($explicit_hash_spec);
+    is((() = ($explicit_hash_src =~ /my \%meta\b/g)), 1,
+        'explicit hash target auto-supplies one my %meta');
+    is((() = ($explicit_hash_src =~ /my \$meta\b/g)), 0,
+        'explicit hash target does not auto-supply my $meta');
+    like($explicit_hash_src, qr/\%meta = \(\$key => \$value, "fixed" => \[\$value\]\)/,
+        'explicit hash target stores the lowered shape into %meta');
 };
 
 subtest 'spec_format_terse_1_6_array_end_mutation_methods' => sub {
@@ -46927,9 +46937,10 @@ subtest 'spec_format_terse_3_2_3_4_numeric_comparison_symbol_callees' => sub {
 };
 
 subtest 'spec_format_terse_3_3_1_scalar_assignment_expression_values' => sub {
-    # SPEC-FORMAT-TERSE.3.3.1: scalar assignment expressions store and return
-    # the assigned scalar value. Direct RHS shape inference, array append, and
-    # hash-index mutation value contracts remain later leaves.
+    # SPEC-FORMAT-TERSE.3.3.1 plus .11.2: scalar assignment expressions store
+    # and return the assigned value. Direct RHS shapes now bind scalar-held typed
+    # values for bare targets; array append and hash-index mutation value
+    # contracts remain separate leaves.
     plan tests => 12;
     require JSON::PP;
     require LinkedSpec::ActionIR::MethodExpr;
@@ -46957,9 +46968,9 @@ subtest 'spec_format_terse_3_3_1_scalar_assignment_expression_values' => sub {
     is($L->('return(set(out, name = "ok"))'),
         'return do { $out = do { $name = "ok"; $name }; $out }',
         'set compatibility spelling returns the stored scalar value');
-    like($L->('return(set(items, [value]))'),
-        qr/^return\s+(?!do \{ \$items =)/,
-        'direct shape RHS is not claimed by the scalar expression-value leaf');
+    is($L->('return(set(items, [value]))'),
+        'return do { $items = [$value]; $items }',
+        'direct shape RHS follows scalar-held value binding for bare targets');
     ok(LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr('=(target, value)'),
         'single-equals operator-call spelling parses');
 
@@ -46990,11 +47001,10 @@ subtest 'spec_format_terse_3_3_1_scalar_assignment_expression_values' => sub {
 };
 
 subtest 'spec_format_terse_3_3_2_aggregate_assignment_expression_values' => sub {
-    # SPEC-FORMAT-TERSE.3.3.2: direct RHS shape assignment expressions
-    # store array/hash working variables after target-kind inference and
-    # return the aggregate value stored. Explicit scalar targets keep the
-    # scalar-held shape payload boundary.
-    plan tests => 17;
+    # SPEC-FORMAT-TERSE.3.3.2 plus .11.2: direct RHS shape assignment expressions
+    # bind and return scalar-held typed values for bare targets. Explicit
+    # array(...) / hash(...) targets keep aggregate storage.
+    plan tests => 18;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
     my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
@@ -47012,17 +47022,17 @@ subtest 'spec_format_terse_3_3_2_aggregate_assignment_expression_values' => sub 
     };
 
     is($L->('return(items = [value])'),
-        'return do { @items = ($value); [@items] }',
-        'bare direct array RHS assignment returns the stored array value');
+        'return do { $items = [$value]; $items }',
+        'bare direct array RHS assignment returns the scalar-held array value');
     is($L->('return(set(items, [value]))'),
-        'return do { @items = ($value); [@items] }',
-        'set with bare direct array RHS returns the stored array value');
+        'return do { $items = [$value]; $items }',
+        'set with bare direct array RHS returns the scalar-held array value');
     is($L->('return(=(items, [value]))'),
-        'return do { @items = ($value); [@items] }',
-        'operator-call direct array RHS returns the stored array value');
+        'return do { $items = [$value]; $items }',
+        'operator-call direct array RHS returns the scalar-held array value');
     is($L->('return(set(meta, { key => value }))'),
-        'return do { %meta = ($key => $value); +{%meta} }',
-        'bare direct hash RHS assignment returns the stored hash value');
+        'return do { $meta = {$key => $value}; $meta }',
+        'bare direct hash RHS assignment returns the scalar-held hash value');
     is($L->('return(set(array(items), [value]))'),
         'return do { @items = ($value); [@items] }',
         'explicit array target returns the stored array value');
@@ -47034,7 +47044,7 @@ subtest 'spec_format_terse_3_3_2_aggregate_assignment_expression_values' => sub 
         'explicit scalar target returns the scalar-held shape payload');
 
     my $spec = "Top::\n"
-             . " /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(items = [value], array_copy(array(items)), set(meta, { key => value }), hash_copy(hash(meta)), set(:payload, [value]), payload, =(more, [value, \"x\"]).count())) }\n"
+             . " /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(items = [value], copy(array(items)), set(meta, { key => value }), copy(hash(meta)), set(:payload, [value]), payload, =(more, [value, \"x\"]).count())) }\n"
              . "\nDone::\n /[a-z]+/\n";
     my $parser = eval { LinkedSpec::Get(\$spec) };
     ok(ref($parser) eq 'CODE', 'aggregate assignment expression spec compiles to a parser')
@@ -47052,10 +47062,12 @@ subtest 'spec_format_terse_3_3_2_aggregate_assignment_expression_values' => sub 
         'direct shape assignment expression can be the value yielded by a block');
 
     my $src = $gen->($spec);
-    like($src, qr/my \@items;.*my %meta;.*my \@more;/s,
-        'generated source auto-declares aggregate assignment expression targets');
-    like($src, qr/\@items = \(\$value\).*%meta = \(\$key => \$value\).*__ls_count/s,
-        'generated source contains aggregate assignment values and receiver-chain lowering');
+    like($src, qr/my \$items;.*my \$meta;.*my \$more;/s,
+        'generated source auto-declares bare aggregate assignment expression targets as scalar value bindings');
+    unlike($src, qr/my \@items;|my %meta;|my \@more;/,
+        'generated source does not auto-declare aggregate storage for bare shape assignment expressions');
+    like($src, qr/\$items = \[\$value\].*\$meta = \{\$key => \$value\}.*__ls_count/s,
+        'generated source contains scalar-held typed values and receiver-chain lowering');
     unlike($src, qr/return\s+\[.*(?:assign|set)\s*\(|=\s*\(\s*items/s,
         'generated source has no raw aggregate assign helper or operator-call residue');
 
@@ -47150,8 +47162,9 @@ subtest 'spec_format_terse_3_3_3_mutation_assignment_expression_values' => sub {
 
 subtest 'spec_format_terse_3_3_4_assignment_expression_closure' => sub {
     # SPEC-FORMAT-TERSE.3.3.4: the parent assignment-expression contract is
-    # closed when scalar, direct-shape aggregate, append, hash-index, and legacy
-    # set(...) compatibility spellings compose in one portable program.
+    # closed when scalar value binding, direct-shape typed values, explicit
+    # aggregate mutation, hash-index mutation, and set(...) spellings compose in
+    # one portable program.
     plan tests => 8;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
@@ -47170,21 +47183,21 @@ subtest 'spec_format_terse_3_3_4_assignment_expression_closure' => sub {
 
     my $spec = "fn keep(value) { return(fn_out = value) }\n"
              . "Top::\n"
-             . " /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(name = value, name, =(other, cat(:name, \"!\")), other, set(third, keep(\"fn\")), third, set(legacy, \"compat\"), legacy, items = [value], array_copy(items), set(meta, { key => value }), hash_copy(meta), items += \"tail\", array_copy(items), meta[\"extra\"] = other, hash_copy(meta), (items += \"last\").count(), (meta[\"last\"] = value).count_keys())) }\n"
+             . " /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(name = value, name, =(other, cat(:name, \"!\")), other, set(third, keep(\"fn\")), third, set(current, \"surface\"), current, items = [value], array(items), set(meta, { key => value }), hash(meta), set(array(items_mut), [value]), items_mut += \"tail\", copy(array(items_mut)), set(hash(meta_mut), { key => value }), meta_mut[\"extra\"] = other, copy(hash(meta_mut)), (items_mut += \"last\").count(), (meta_mut[\"last\"] = value).count_keys())) }\n"
              . "\nDone::\n /[a-z]+/\n";
     my $parser = eval { LinkedSpec::Get(\$spec) };
     ok(ref($parser) eq 'CODE', 'assignment expression closure spec compiles to a parser')
         or diag(normalize_error($@));
     is($run->($parser, 'xhello'),
-        '["ok","ok","ok!","ok!","fn","fn","compat","compat",["ok"],["ok"],{"stage":"ok"},{"stage":"ok"},["ok","tail"],["ok","tail"],{"extra":"ok!","stage":"ok"},{"extra":"ok!","stage":"ok"},3,3]',
-        'scalar, aggregate, mutation, function-local, and legacy compatibility assignments compose');
+        '["ok","ok","ok!","ok!","fn","fn","surface","surface",["ok"],["ok"],{"stage":"ok"},{"stage":"ok"},["ok"],["ok","tail"],["ok","tail"],{"stage":"ok"},{"extra":"ok!","stage":"ok"},{"extra":"ok!","stage":"ok"},3,3]',
+        'scalar value binding, explicit aggregate mutation, and function-local assignments compose');
 
     my $src = $gen->($spec);
-    like($src, qr/\$name = \$value.*\$other = .*__ls_concat_parts.*\$third = .*__ls_user_fn_arg_0 = "fn".*\$legacy = "compat"/s,
-        'generated source contains scalar, operator-call, set, and legacy assign compatibility values');
-    like($src, qr/(?=.*\@items = \(\$value\))(?=.*push \@items, "tail")(?=.*%meta = \(\$key => \$value\))(?=.*\$meta\{"extra"\} = \$other)/s,
-        'generated source contains aggregate and mutation assignment values');
-    unlike($src, qr/\bassign\s*\(|=\s*\(\s*other\b|items\s*\+=|meta\["extra"\]\s*=/,
+    like($src, qr/\$name = \$value.*\$other = .*__ls_concat_parts.*\$third = .*__ls_user_fn_arg_0 = "fn".*\$current = "surface"/s,
+        'generated source contains scalar, operator-call, set, and current assignment values');
+    like($src, qr/(?=.*\$items = \[\$value\])(?=.*\$meta = \{\$key => \$value\})(?=.*\@items_mut = \(\$value\))(?=.*push \@items_mut, "tail")(?=.*%meta_mut = \(\$key => \$value\))(?=.*\$meta_mut\{"extra"\} = \$other)/s,
+        'generated source contains scalar-held typed values plus explicit aggregate mutation values');
+    unlike($src, qr/\bassign\s*\(|=\s*\(\s*other\b|items_mut\s*\+=|meta_mut\["extra"\]\s*=/,
         'generated source has no raw legacy/operator/mutation residue');
 
     my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -47316,7 +47329,7 @@ subtest 'spec_format_terse_6_2_3_1_scalar_slot_shorthand' => sub {
     my $parser = eval { LinkedSpec::Get(\$spec) };
     ok(ref($parser) eq 'CODE', 'scalar-slot shorthand spec compiles')
         or diag(normalize_error($@));
-    is($run->($parser, 'xhello'), '["ok",["ok"],[],["ok"]]',
+    is($run->($parser, 'xhello'), '["ok",["ok"],["ok"],["ok"]]',
         'scalar-slot shorthand reads and stores scalar-held direct-shape payloads');
 
     my $src = $gen->($spec);
@@ -47341,10 +47354,10 @@ subtest 'spec_format_terse_6_2_3_1_scalar_slot_shorthand' => sub {
         'scalar-slot shorthand spec remains language-agnostic ActionIR ready');
 };
 
-subtest 'spec_format_terse_6_2_3_2_bare_identifier_type_memory' => sub {
-    # SPEC-FORMAT-TERSE.6.2.3.2: after initialization, a bare identifier
-    # remembers the scalar/array/hash kind implied by its assignment target and
-    # RHS shape. Later bare reads reuse that known kind without wrapper syntax.
+subtest 'spec_format_terse_11_2_bare_identifier_value_binding_memory' => sub {
+    # SPEC-FORMAT-TERSE.11.2: after bare assignment, a bare identifier is a
+    # scalar-held typed value. Explicit array(...) / hash(...) views read that
+    # value through guarded snapshots; direct RHS shape no longer remembers @/%.
     plan tests => 12;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
@@ -47362,43 +47375,43 @@ subtest 'spec_format_terse_6_2_3_2_bare_identifier_type_memory' => sub {
         return $src;
     };
 
-    like($L->('items = [value]; return(copy(items))'),
-        qr/\@items = \(\$value\).*return \[\@items\]/s,
-        'array-shaped initialization makes later bare items read as the array');
-    like($L->('meta = { key => value }; return(copy(meta))'),
-        qr/%meta = \(\$key => \$value\).*return \{\%meta\}/s,
-        'hash-shaped initialization makes later bare meta read as the hash');
+    like($L->('items = [value]; return(items)'),
+        qr/\$items = \[\$value\].*return \$items/s,
+        'array-shaped initialization makes later bare items read the scalar-held array value');
+    like($L->('meta = { key => value }; return(meta)'),
+        qr/\$meta = \{\$key => \$value\}.*return \$meta/s,
+        'hash-shaped initialization makes later bare meta read the scalar-held hash value');
     is($L->('value = "ok"; return(value)'),
         '$value = "ok"; return $value',
         'non-shape initialization keeps later bare value reads scalar');
 
     my $spec = "Top::\n"
-             . " /x/ -> Done { value = \"ok\"; key = \"stage\"; items = [value]; meta = { key => value }; return(array(copy(items), copy(meta), items.count(), meta.count_keys(), items.first(), meta.pick_keys(key).sorted_values().first())) }\n"
+             . " /x/ -> Done { value = \"ok\"; key = \"stage\"; items = [value]; meta = { key => value }; return(array(array(items), hash(meta), count(array(items)), count_keys(hash(meta)), first(array(items)), first(sorted_values(pick_keys(hash(meta), key))))) }\n"
              . "\nDone::\n /[a-z]+/\n";
     my $parser = eval { LinkedSpec::Get(\$spec) };
     ok(ref($parser) eq 'CODE', 'bare-identifier type-memory spec compiles')
         or diag(normalize_error($@));
     is($run->($parser, 'xhello'), '[["ok"],{"stage":"ok"},1,1,"ok","ok"]',
-        'bare identifiers read back through the type remembered at initialization');
+        'scalar-bound typed values read back through explicit array/hash views');
 
     my $src = $gen->($spec);
-    is((() = ($src =~ /my \@items\b/g)), 1,
-        'array initialization auto-supplies one my @items');
-    is((() = ($src =~ /my %meta\b/g)), 1,
-        'hash initialization auto-supplies one my %meta');
-    is((() = ($src =~ /my \$items\b/g)), 0,
-        'array-initialized items is not also auto-supplied as scalar');
-    is((() = ($src =~ /my \$meta\b/g)), 0,
-        'hash-initialized meta is not also auto-supplied as scalar');
-    like($src, qr/\@items = \(\$value\).*%meta = \(\$key => \$value\).*scalar\(\@items\).*scalar\(keys %meta\)/s,
-        'generated source uses array/hash storage for later bare receiver/helper reads');
+    is((() = ($src =~ /my \$items\b/g)), 1,
+        'array value binding auto-supplies one my $items');
+    is((() = ($src =~ /my \$meta\b/g)), 1,
+        'hash value binding auto-supplies one my $meta');
+    is((() = ($src =~ /my \@items\b/g)), 0,
+        'array value binding does not auto-supply my @items');
+    is((() = ($src =~ /my %meta\b/g)), 0,
+        'hash value binding does not auto-supply my %meta');
+    like($src, qr/\$items = \[\$value\].*\$meta = \{\$key => \$value\}.*ref\(\$__ls_array_value\) eq 'ARRAY'.*ref\(\$__ls_hash_value\) eq 'HASH'/s,
+        'generated source uses scalar-held values plus guarded array/hash views');
 
     my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
     my $meta = $d->{spec}{Top}{meta}{action_rewriter};
     is($meta->{unresolved_helper_count}, 0,
-        'bare-identifier type-memory spec has no unresolved-helper hits');
+        'bare-identifier value-binding spec has no unresolved-helper hits');
     ok($meta->{language_agnostic_action_ir_ready},
-        'bare-identifier type-memory spec remains language-agnostic ActionIR ready');
+        'bare-identifier value-binding spec remains language-agnostic ActionIR ready');
 };
 
 subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {

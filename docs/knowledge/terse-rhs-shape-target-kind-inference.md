@@ -1,6 +1,6 @@
 ---
 id: terse-rhs-shape-target-kind-inference
-title: "SPEC-FORMAT-TERSE.1.2.3.5.2 - Perl direct RHS shape literals infer aggregate bare assignment targets."
+title: "SPEC-FORMAT-TERSE.1.2.3.5.2 - Historical Perl direct RHS shape target-kind inference."
 answers:
   - "does name = [value] infer an array working variable"
   - "does name = {} infer a hash working variable"
@@ -11,16 +11,19 @@ answers:
   - "where is Rust shape-literal value parity recorded"
   - "where is Rust RHS shape target-kind parity recorded"
   - "where are aggregate assignment expression values recorded"
-date: 2026-07-04
-status: confirmed
+date: 2026-07-05
+status: superseded
 tags: [dsl, literals, variables, type-inference, channel-2, rhs-shape, spec-format-terse, SPEC-FORMAT-TERSE, perl, actionir]
-evidence: "SPEC-FORMAT-TERSE.1.2.3.5.2 landed on 2026-06-29. Perl `ActionIR::MethodLowering::_infer_direct_shape_literal_kind` classifies only direct outer `[]` / `{}` RHS values and delegates acceptance to `_lower_method_value_expr`, so target inference follows the same shape grammar as `.1.2.3.5.1`. Bare assignment targets infer aggregate kind: `name = []` -> `@name = ()`, `name = [value]` -> `@name = ($value)`, `name = {}` -> `%name = ()`, `name = { key => value }` -> `%name = ($key => $value)`, and `set(name, [value])` -> `@name = ($value)`. Non-shape RHS assignment remains scalar (`name = value` -> `$name = $value`). Current explicit scalar targets use `:name` (`set(:name, [value])` -> `$name = [$value]`); at the original leaf this was `scalar(name)`, later retired from authored specs by `.6.2.3.2`. `_collect_auto_working_var_decls` records the target sigil from the RHS shape and no longer emits stale scalar declarations for aggregate shape assignments. SPEC-FORMAT-TERSE.1.2.3.5.3 later landed Rust shape-literal value parity, and SPEC-FORMAT-TERSE.1.2.3.5.4 landed Rust target-kind parity; see [[terse-rust-shape-literal-value-parity]] and [[terse-rust-rhs-shape-target-kind-parity]]. SPEC-FORMAT-TERSE.3.3.2 later made the same direct RHS shape assignments yield assigned aggregate values in expression positions; see [[terse-aggregate-assignment-expression-values]]."
-reverify: "perl -Iperl -MLinkedSpec -e 'for my $stmt (q{name = []}, q{name = {}}, q{name = [value]}, q{name = { key => value }}, q{set(name, [value])}, q{set(:name, [value])}, q{name = value}) { my $out = LinkedSpec::call_spec_handler_subst(\"Top\", $stmt); $out =~ s/\\n/\\\\n/g; print \"$stmt => $out\\n\" }' && prove -q -Iperl t/phase0_regression.t"
+evidence: "Historical fact: SPEC-FORMAT-TERSE.1.2.3.5.2 landed on 2026-06-29 and made Perl direct RHS shape literals infer aggregate bare assignment targets (`name = []` -> `@name = ()`, `name = { key => value }` -> `%name = (...)`). SPEC-FORMAT-TERSE.11.2 superseded this Perl reference behavior on 2026-07-05: bare assignment targets now bind scalar-held typed values (`name = []` -> `$name = []`, `set(name, [value])` -> `$name = [$value]`) and generated Perl records `my $name`, not `my @name` / `my %name` solely from RHS shape. See [[terse-duck-typed-assignment-perl-reference]]. Rust still retains the old direct-shape target-retagging behavior until SPEC-FORMAT-TERSE.11.3 lands; see [[terse-rust-rhs-shape-target-kind-parity]]."
+reverify: "perl -Iperl -MLinkedSpec -e 'for my $stmt (q{name = []}, q{name = { key => value }}, q{set(name, [value])}, q{return(set(items, [value]))}) { my $out = LinkedSpec::call_spec_handler_subst(\"Top\", $stmt); $out =~ s/\\n/\\\\n/g; print \"$stmt => $out\\n\" }'"
 ---
 
 # RHS Shape Target-Kind Inference
 
-Perl direct RHS shape literals now infer the aggregate kind of a bare assignment target:
+This card records the historical Perl behavior from `SPEC-FORMAT-TERSE.1.2.3.5.2`. It is superseded for the Perl
+reference by [[terse-duck-typed-assignment-perl-reference]].
+
+Perl direct RHS shape literals used to infer the aggregate kind of a bare assignment target:
 
 ```text
 items = [value]

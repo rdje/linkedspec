@@ -1,6 +1,6 @@
 ---
 id: terse-aggregate-assignment-expression-values
-title: "SPEC-FORMAT-TERSE.3.3.2 ships aggregate assignment expressions that store and yield assigned shapes."
+title: "SPEC-FORMAT-TERSE.3.3.2 historical aggregate assignment expression values."
 answers:
   - "does return(items = [value]) work now"
   - "does =(items, [value]) yield an array value"
@@ -9,16 +9,17 @@ answers:
   - "how do array(target) and hash(target) assignment expressions behave"
   - "does :payload keep direct shape assignment payloads scalar"
   - "what is next after SPEC-FORMAT-TERSE.3.3.2"
-date: 2026-07-04
-status: current
+date: 2026-07-05
+status: superseded-for-perl
 tags: [spec-format-terse, assignment, expressions, aggregate, target-kind-inference, rust-parity, oracle]
-evidence: "SPEC-FORMAT-TERSE.3.3.2 implementation in perl/LinkedSpec/ActionIR/MethodLowering.pm, perl/LinkedSpec/RuleIR/EmitContext.pm, rust/linkedspec-core/src/expr.rs, and rust/linkedspec-runtime/src/engine.rs; locks in t/actionir_ast_parser.t, t/phase0_regression.t spec_format_terse_3_3_2_aggregate_assignment_expression_values, rust/linkedspec-runtime/tests/integration_test.rs terse_3_3_2_aggregate_assignment_expressions_run, and rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions. SPEC-FORMAT-TERSE.3.3.4 later closed the parent docs/oracle compatibility contract; SPEC-FORMAT-TERSE.6.2.3.1 added `:name` scalar slots, and SPEC-FORMAT-TERSE.6.2.3.2 retired authored spec-file scalar(...)/assign(...)."
-reverify: "prove -q -Iperl t/actionir_ast_parser.t t/phase0_regression.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_3_3_2_aggregate_assignment_expressions_run && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle"
+evidence: "Historical cross-backend fact: SPEC-FORMAT-TERSE.3.3.2 made direct RHS shape assignments expression-valued and, at that time, used target-kind inference for bare aggregate targets on Perl and Rust. SPEC-FORMAT-TERSE.11.2 superseded the Perl side on 2026-07-05: Perl `return(items = [value])`, `return(set(items, [value]))`, and `return(=(items, [value]))` now yield the scalar-held array value through `$items`, not `@items`; explicit `array(items)` / `hash(meta)` targets remain aggregate storage. Rust parity is pending in SPEC-FORMAT-TERSE.11.3. See [[terse-duck-typed-assignment-perl-reference]] for current Perl behavior and [[terse-rust-rhs-shape-target-kind-parity]] for the old Rust parity point."
+reverify: "perl -Iperl -MLinkedSpec -e 'for my $stmt (q{return(items = [value])}, q{return(set(items, [value]))}, q{return(=(items, [value]))}, q{return(set(array(items), [value]))}) { my $out = LinkedSpec::call_spec_handler_subst(\"Top\", $stmt); $out =~ s/\\n/\\\\n/g; print \"$stmt => $out\\n\" }'"
 ---
 
 # Terse Aggregate Assignment Expression Values
 
-`SPEC-FORMAT-TERSE.3.3.2` makes direct RHS shape assignments value expressions on both Perl and Rust.
+`SPEC-FORMAT-TERSE.3.3.2` made direct RHS shape assignments value expressions on both Perl and Rust. The Perl
+target-kind inference part of that contract is superseded by [[terse-duck-typed-assignment-perl-reference]].
 
 - `items = [value]`, `set(items, [value])`, and `=(items, [value])` infer an array working variable for a bare
   target, store the assigned array, and yield the assigned array value.

@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-05 (SPEC-FORMAT-TERSE.11.2 — Perl duck-typed assignment):
+  Perl bare assignment now binds typed RHS values through scalar storage. The key seams are
+  `ActionIR::MethodLowering::_lower_value_binding_source_expr`, bare-target branches in assignment/set lowering,
+  expression-valued assignment lowering, and `RuleIR::EmitContext` type/declaration collection. Direct shape RHS no
+  longer decides `@name`/`%name`; explicit `array(...)`/`hash(...)` assignment targets still own aggregate mutation
+  storage. Scalar-bound `array(name)`/`hash(name)` views must bypass aggregate-storage fast paths and lower through
+  guarded `$name` snapshots. Rust still needs equivalent runtime value binding in `.11.3`; do not let Rust tests or
+  corpus expectations keep the old direct-shape retagging contract.
+
 - 2026-07-05 (SPEC-FORMAT-TERSE.11.1 — split/probe):
   Current implementation still has two target-kind inference seams that conflict with duck-typed assignment:
   Perl `MethodLowering`/`RuleIR::EmitContext` lower and declare bare direct-shape assignments as `@name` or

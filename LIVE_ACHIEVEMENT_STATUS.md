@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-05: **SPEC-FORMAT-TERSE.11.2 — implement Perl duck-typed assignment binding**
+  (PERL REFERENCE DONE; RUST PARITY FRONTIER ACTIVE).
+
+  **Fix:** Bare Perl assignment and `set` targets now bind typed RHS values through `$name`; direct shape RHS no
+  longer emits `@name`/`%name` or matching aggregate declarations solely from RHS shape. Explicit
+  `array(...)`/`hash(...)` targets remain aggregate mutation storage, and scalar-bound typed views read guarded
+  snapshots from `$name`.
+
+  **Verification:** Perl module/test syntax checks, `git diff --check` for touched Perl/test files, focused
+  lowering/generated-source/runtime probes, and assignment-expression closure probe passed. A broad
+  `prove -q -Iperl t/phase0_regression.t` run was interrupted after surfacing unrelated dirty-work failures and
+  stale assignment expectations updated in this slice.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.11.3` is active for Rust parity. Nested mixed value paths and docs/KM/corpus
+  closeout remain split behind `.11.3`.
+
 - 2026-07-05: **SPEC-FORMAT-TERSE.11.1 — split duck-typed assignment work**
   (TASK-TREE SPLIT/PROBE DONE; IMPLEMENTATION FRONTIER ADVANCED).
 

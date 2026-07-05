@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-05 — SPEC-FORMAT-TERSE.11.2 — implement Perl duck-typed assignment binding
+
+**Scope:** Perl reference assignment lowering, generated-source declaration collection, focused Perl locks, and
+Knowledge Map facts for duck-typed bare assignment values.
+
+**What changed:** Bare Perl assignment targets now bind the evaluated RHS through one scalar value slot. Direct
+shape RHS values lower as scalar-held typed values (`name = []` -> `$name = []`, `set(name, [value])` ->
+`$name = [$value]`, expression-valued `set`/`=` returns `$name`) instead of retagging the target as `@name` or
+`%name`. Explicit `array(...)` / `hash(...)` assignment targets still use aggregate storage, and scalar-bound
+`array(name)` / `hash(name)` views now read guarded snapshots from `$name`.
+
+**Tests:** `perl -c -Iperl perl/LinkedSpec/ActionIR/MethodLowering.pm`; `perl -c -Iperl perl/LinkedSpec/RuleIR/EmitContext.pm`; `perl -c -Iperl t/phase0_regression.t`; `git diff --check -- perl/LinkedSpec/ActionIR/MethodLowering.pm perl/LinkedSpec/RuleIR/EmitContext.pm t/phase0_regression.t`; focused `LinkedSpec::call_spec_handler_subst`, generated-source declaration, and runtime probes for `.11.2` assignment/readback/closure semantics. A clean detached-worktree `prove -q -Iperl t/phase0_regression.t` rerun completed with the `.11.2` assignment locks green and one helper-readiness failure outside this slice: `emit_context_lowers_split_tagged_records_helper` reports `unresolved_helper_count == 1` and therefore is not language-agnostic ready.
+
+**Status:** `.11.2` is complete for Perl; Rust parity moves to `.11.3`.
+
 ## 2026-07-05 — SPEC-FORMAT-TERSE.11.1 — split duck-typed assignment work
 
 **Scope:** Task-tree split, code/book inventory, and toolbox probe record for the active duck-typed assignment
