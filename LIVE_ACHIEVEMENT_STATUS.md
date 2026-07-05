@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-05: **SPEC-FORMAT-TERSE.12/.13 — track tree traversal backlog**
+  (TASK-TREE BACKLOG TRACKED; IMPLEMENTATION NOT ACTIVE).
+
+  **Fix:** Added deferred hash-tree traversal ownership and a lower-priority array-tree traversal backlog item.
+  Hash-tree traversal is defined for future spec work as a hash root with hash interior nodes and scalar or array
+  leaves, with attached-block traversal method names, callback context, traversal order, and return/mutation policy
+  still to be specified before code.
+
+  **Verification:** `git diff --check -- CHANGES.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md MEMORY.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md`.
+
+  **Frontier:** `.12` and `.13` are not PNT-eligible unless explicitly reactivated. `SPEC-FORMAT-TERSE.11`
+  remains the active spec-first assignment-semantics owner.
+
 - 2026-07-05: **SPEC-FORMAT-TERSE.11 — track nested typed-value paths**
   (TASK-TREE ACCEPTANCE REFINED; IMPLEMENTATION PENDING).
 

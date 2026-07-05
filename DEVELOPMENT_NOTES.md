@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-05 (SPEC-FORMAT-TERSE.12/.13 — tree traversal backlog):
+  Future hash-tree traversal should be specified as receiver methods with attached blocks over a value tree whose
+  root and interior nodes are hashes and whose leaves are scalars or arrays. Before implementation, define method
+  names, block attachment syntax, callback context (`value`, `key`, `path`, `depth`, accumulator if needed),
+  deterministic traversal order, array-leaf treatment, and pure-vs-mutating return policy. The analogous array-tree
+  traversal idea is tracked separately as lower-priority backlog and should not be inferred from the hash-tree
+  design without its own array-tree definition.
+
 - 2026-07-05 (SPEC-FORMAT-TERSE.11 — nested typed-value paths):
   Duck-typed assignment must include nested reads and writes through mixed array/hash value trees in arbitrary
   combinations. Do not let Perl autovivification semantics define the language accidentally; the implementation

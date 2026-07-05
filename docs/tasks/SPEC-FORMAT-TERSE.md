@@ -3078,6 +3078,33 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Verification: `pending`
   Commit: `pending`
 
+- ID: `SPEC-FORMAT-TERSE.12`
+  Status: `deferred` / `spec backlog` (tracked by user directive 2026-07-05)
+  Goal: Specify hash-tree traversal receiver methods with attached code blocks for operating on leaves.
+  Acceptance: The leaf owns a future hash-tree traversal surface, not implementation work yet. A hash-tree is
+    defined for this backlog item as a value tree with a hash at the root, hashes at interior nodes, and scalar or
+    array values at leaves. Before any parser/runtime code change, a child implementation plan must define the
+    accepted receiver method names (`walk_leaves`, `map_leaves`, `reduce_leaves`, or another chosen set), block
+    attachment syntax, callback/block context (`value`, `key`, `path`, `depth`, accumulator if any), deterministic
+    traversal order, array-leaf treatment, return/mutation policy, error handling for non-tree shapes, interaction
+    with duck-typed assignment and nested value paths from `.11`, Perl/Rust parity, mdBook examples, active tests,
+    generated oracle fixtures, and Knowledge Map updates. The surface must be described in LinkedSpec terms, not
+    by Ruby or Perl implementation mechanics.
+  Verification: `deferred`
+  Commit: `deferred`
+
+- ID: `SPEC-FORMAT-TERSE.13`
+  Status: `deferred` / `backlog` (tracked by user directive 2026-07-05)
+  Goal: Track analogous array-tree traversal receiver methods as a lower-priority future feature.
+  Acceptance: No implementation is authorized by this backlog item. If activated later, the leaf must first define
+    what qualifies as an array-tree, what values count as leaves, whether hash values are leaves or nested
+    traversal nodes, the attached-block method surface, path/index context, deterministic traversal order,
+    return/mutation policy, diagnostics, mdBook examples, tests, oracle fixtures, and Knowledge Map updates. This
+    item is intentionally lower priority than hash-tree traversal and is not PNT-eligible unless explicitly
+    reactivated.
+  Verification: `deferred`
+  Commit: `deferred`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -3086,6 +3113,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | 2 | `SPEC-FORMAT-TERSE.8` | `pending` | user directive removes all remaining legacy compatibility helper support; in-flight helper-removal work must stay aligned with `.11` assignment semantics |
 | 3 | `SPEC-FORMAT-TERSE.9` | `pending` | user directive replaces Perlish hash-literal `=>` association with terse `:` association after helper-removal / assignment-semantics coordination lands |
 | — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
+| — | `SPEC-FORMAT-TERSE.12` | `deferred` / `spec backlog` | track future hash-tree attached-block traversal; not PNT-eligible until explicitly activated |
+| — | `SPEC-FORMAT-TERSE.13` | `deferred` / `backlog` | track lower-priority array-tree traversal analog; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.6.1` | `done` | User directive owned under the existing terse-format tree; shipped-spec inventory recorded before any `.spec` edit. |
 | — | `SPEC-FORMAT-TERSE.6.2.1` | `done` | shipped specs no longer use active `declare(...)` / `.declare(...)`; focused compile, phase0, and Rust corpus oracle pass |
 | — | `SPEC-FORMAT-TERSE.6.2.2` | `done` | shipped specs no longer use active old helper spellings; focused compile, phase0, and Rust corpus oracle pass |
@@ -4272,6 +4301,11 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.4.2` | `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls` | Perl inline value-control lowering landed for `if`/`switch` in supported value positions; corpus 46 passes and frontier becomes `.2.3.5`. |
 
 ## Changelog
+
+- `2026-07-05`: **`.12`/`.13` DEFERRED/BACKLOG — tree traversal attached-block ideas.**
+  User directive tracked hash-tree traversal methods with attached code blocks as future spec work and clarified
+  that hash-tree leaves are scalar or array values. The analogous array-tree traversal idea is tracked as a
+  lower-priority backlog item. Neither leaf is implementation-active unless explicitly reactivated.
 
 - `2026-07-05`: **`.11` ACTIVE — duck-typed assignment semantics.**
   User directive adopts duck-typed variable binding as the active assignment direction: `name = value` binds a

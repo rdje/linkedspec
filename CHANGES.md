@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-05 — SPEC-FORMAT-TERSE.12/.13 — track tree traversal backlog
+
+**Scope:** Task-tree/index/live-doc tracking for future attached-block tree traversal receiver methods.
+
+**What changed:** Added deferred `SPEC-FORMAT-TERSE.12` for hash-tree traversal methods with attached code blocks
+and lower-priority backlog `SPEC-FORMAT-TERSE.13` for analogous array-tree traversal. The hash-tree backlog item
+defines the intended tree shape as a hash root, hash interior nodes, and scalar or array leaves. Both leaves require
+spec-first method names, block context, traversal order, return/mutation policy, diagnostics, mdBook examples,
+tests, oracle fixtures, and Knowledge Map updates before implementation.
+
+**Tests:** `git diff --check -- CHANGES.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md MEMORY.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md`.
+
+**Status:** `.12` and `.13` are deferred/backlog and not PNT-eligible unless explicitly activated.
+
 ## 2026-07-05 — SPEC-FORMAT-TERSE.11 — track nested typed-value paths
 
 **Scope:** Task-tree/index/live-doc refinement for the active duck-typed assignment semantics leaf.
