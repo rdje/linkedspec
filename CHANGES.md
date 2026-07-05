@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-05 — SPEC-FORMAT-TERSE.11.5 — close duck-typed assignment alignment
+
+**Scope:** Roadmap/live-doc/Knowledge Map alignment for the completed duck-typed assignment lane.
+
+**What changed:** Current-facing roadmap wording now describes direct RHS shape assignment as typed value binding,
+not declaration or storage-class inference. Historical target-kind inference remains documented only as superseded
+history. Knowledge Map fact cards that referenced the old inference as a dependency now point readers to the `.11`
+supersession, and the generated `KNOWLEDGE_MAP.md` was refreshed.
+
+**Tests:** Stale-wording scans across current-facing docs/facts, Knowledge Map regeneration/check, mdBook build,
+memory/doctrine checks, and whitespace diff check.
+
+**Status:** `.11.5` and the `.11` duck-typed assignment container are complete; the frontier moves to `.15`.
+
 ## 2026-07-05 — SPEC-FORMAT-TERSE.11.4 — implement nested value-path assignment
 
 **Scope:** Perl/Rust nested direct-access assignment, focused phase0/Rust locks, generated oracle corpus, mdBook

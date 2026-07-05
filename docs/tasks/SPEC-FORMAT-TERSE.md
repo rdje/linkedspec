@@ -6,7 +6,11 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-05` (**`.11.4` DONE; nested mixed value-path assignment landed. Perl and Rust now mutate
+- Last updated: `2026-07-05` (**`.11.5` DONE; duck-typed assignment alignment closed. Roadmap/live docs and
+  current Knowledge Map facts now describe direct RHS shapes as typed value binding, not declaration or
+  storage-class inference; historical target-kind inference cards are explicitly marked superseded. The Rust
+  oracle corpus remains **92** fixtures and mdBook assignment/container guidance already matches `.11`. Frontier
+  moves to `.15` for removing `:name` scalar-slot syntax from the future duck-typed surface. Prior **`.11.4` DONE; nested mixed value-path assignment landed. Perl and Rust now mutate
   scalar-held array/hash payload trees through direct lvalue paths such as `payload["items"][0]["name"] = value`
   in statement and expression-valued contexts. Intermediate containers must already exist with the required shape;
   final hash keys may be created; final array indexes may replace or append exactly at len; gaps/missing/wrong
@@ -3071,10 +3075,10 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `deferred`
 
 - ID: `SPEC-FORMAT-TERSE.11`
-  Status: `active` (split 2026-07-05; `.11.1` through `.11.4` done; frontier `.11.5`)
+  Status: `done` (2026-07-05; `.11.1` through `.11.5` done)
   Goal: Adopt duck-typed `.spec` variable assignment semantics so variables bind typed values at runtime instead of
     exposing Perl-style scalar/array/hash storage classes through assignment inference.
-  Children: `.11.1` (done), `.11.2` (done), `.11.3` (done), `.11.4` (done), `.11.5` (pending).
+  Children: `.11.1` (done), `.11.2` (done), `.11.3` (done), `.11.4` (done), `.11.5` (done).
   Acceptance: The spec, parser, Perl lowering, Rust runtime, generated oracle corpus, active tests, mdBook, and
     Knowledge Map agree that `name = value` binds `name` to the typed value produced by the RHS. Scalar, number,
     string, array, and hash values are all legal RHS values; `name = [...]` binds an array value, `name = {...}`
@@ -3095,8 +3099,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     Perl storage classes. Hash-literal syntax must coordinate with `.9`: examples use whichever key/value
     separator is current when the child implementation lands, and no `.11` code may reintroduce `{ key => value }`
     as a current surface after `.9`.
-  Verification: split by `.11.1`; implementation pending in child leaves.
-  Commit: `pending`
+  Verification: **DONE 2026-07-05.** `.11.1` split the work after bootstrap/probes; `.11.2` landed Perl
+    duck-typed value binding; `.11.3` landed Rust parity; `.11.4` landed nested mixed value-path assignment; and
+    `.11.5` closed current-facing docs, roadmap, mdBook/KM alignment, and corpus/oracle wording. Assignment is now
+    documented as typed value binding across active surfaces. Historical RHS target-kind inference remains only as
+    explicitly superseded history.
+  Commit: closed by child commits through `SPEC-FORMAT-TERSE.11.5 - close duck-typed assignment alignment`
 
 - ID: `SPEC-FORMAT-TERSE.11.1`
   Status: `done` (2026-07-05)
@@ -3195,14 +3203,21 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.11.4 - implement nested value-path assignment`
 
 - ID: `SPEC-FORMAT-TERSE.11.5`
-  Status: `active`
+  Status: `done` (2026-07-05)
   Goal: Close duck-typed assignment documentation, Knowledge Map, corpus/oracle, and mdBook alignment.
   Acceptance: Active tests, generated oracle fixtures, mdBook chapters, helper catalog, live docs, and current
     Knowledge Map facts describe assignment as typed value binding, not Perl storage-class inference. Historical
     task/changelog references may remain historical; current-facing guidance must not teach direct RHS shape as
     declaration or target-kind inference. Coordinate examples with `.9` if hash-literal colon syntax has landed.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-05.** Scanned current-facing roadmap, mdBook, live docs, and Knowledge Map facts for
+    stale RHS-shape target-kind inference language. `ROADMAP_V2.md` now says the old inference branch is historical
+    and superseded by `.11` duck-typed value binding, and the corpus count is **92** with
+    `terse_11_4_nested_mixed_value_path_assignment`. Fact cards that still referenced the old inference as a
+    dependency now point readers to the `.11` supersession, while the explicit historical inference cards remain
+    marked `superseded`. `KNOWLEDGE_MAP.md` was regenerated. The mdBook assignment/container sections already
+    describe typed binding, explicit aggregate targets, and nested no-autovivification writes, so no book behavior
+    change was needed in this closeout leaf.
+  Commit: `SPEC-FORMAT-TERSE.11.5 - close duck-typed assignment alignment`
 
 - ID: `SPEC-FORMAT-TERSE.12`
   Status: `deferred` / `spec backlog` (tracked by user directive 2026-07-05)
@@ -3272,10 +3287,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SPEC-FORMAT-TERSE.11.5` | `active` | final docs/KM/corpus/mdBook closeout follows nested-path implementation |
-| 2 | `SPEC-FORMAT-TERSE.15` | `pending` | user directive removes colon-prefixed scalar variable references from the future duck-typed surface |
-| 3 | `SPEC-FORMAT-TERSE.8` | `pending` | user directive removes all remaining legacy compatibility helper support; in-flight helper-removal work must stay aligned with `.11` assignment semantics |
-| 4 | `SPEC-FORMAT-TERSE.9` | `pending` | user directive replaces Perlish hash-literal `=>` association with terse `:` association after helper-removal / assignment-semantics coordination lands |
+| 1 | `SPEC-FORMAT-TERSE.15` | `pending` | user directive removes colon-prefixed scalar variable references from the future duck-typed surface |
+| 2 | `SPEC-FORMAT-TERSE.8` | `pending` | user directive removes all remaining legacy compatibility helper support; in-flight helper-removal work must stay aligned with `.11` assignment semantics |
+| 3 | `SPEC-FORMAT-TERSE.9` | `pending` | user directive replaces Perlish hash-literal `=>` association with terse `:` association after helper-removal / assignment-semantics coordination lands |
 | — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.12` | `deferred` / `spec backlog` | track future hash-tree attached-block traversal; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.13` | `deferred` / `backlog` | track lower-priority array-tree traversal analog; not PNT-eligible until explicitly activated |
@@ -4239,6 +4253,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-05` | `SPEC-FORMAT-TERSE.11.5` | Current-facing stale-wording scans across `ROADMAP_V2.md`, mdBook, live docs, `docs/knowledge/`, and `KNOWLEDGE_MAP.md`; targeted roadmap/fact-card edits; Knowledge Map regeneration/check; mdBook build; memory/doctrine/diff checks | Duck-typed assignment alignment is closed. Current roadmap and Knowledge Map retrieval now describe direct RHS shapes as typed value binding and keep target-kind inference only as explicitly superseded history. mdBook assignment/container guidance already matched `.11`; oracle corpus remains **92** fixtures. Frontier becomes `.15`. |
 | `2026-07-05` | `SPEC-FORMAT-TERSE.11.4` | Perl syntax checks for `ActionIR::MethodLowering`, `RuleIR::EmitContext`, `ActionIR::AST::Parser`, `ActionIR::ControlFlow`, and `Scanner::PrimitivePipelineRules`; focused `LinkedSpec::call_spec_handler_subst` / `LinkedSpec::Get` probes for nested statement/value assignment, scalar-held array root mutation, generated declarations, and descriptor readiness; focused Rust `terse_11_4` integration tests; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle over **92** manifest fixtures; mdBook/KM/doc checks; broad phase0 rerun | Nested mixed value-path assignment landed on Perl/Rust. Multi-segment direct-access lvalues mutate scalar-held array/hash value trees with explicit path guards, no intermediate autovivification, hash-key create/replace, array replace/append-at-len, and `undef`/`null` failure values for missing/wrong/gap paths. Single-segment scalar-held array/hash roots now mutate consistently before named-hash fallback. The oracle corpus includes `terse_11_4_nested_mixed_value_path_assignment`; known `spec_spec_*` generator drift was restored to the existing AST expectations before the passing oracle. Broad phase0 now has only the pre-existing unrelated `emit_context_lowers_split_tagged_records_helper` failure (`1/1022`). Frontier becomes `.11.5`. |
 | `2026-07-05` | `SPEC-FORMAT-TERSE.11.3` | Perl syntax/probe checks for scalar-held `copy(...)`, receiver-chain readback, and declaration collection; focused Rust runtime tests for `terse_11_3`, `terse_6_2_3_1_scalar_slot_shorthand_runs`, `terse_3_3_2_aggregate_assignment_expressions_run`, and `terse_3_3_4_assignment_expression_closure_run`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; mdBook build; Knowledge Map regenerate/check; memory/doctrine/diff checks; broad phase0 with one unrelated known failure | Rust duck-typed assignment parity landed and the oracle-exposed Perl scalar-held copy/receiver fallback gap was closed. Bare Rust assignment and `set`/`=` helper forms now bind evaluated scalar/array/hash `RuntimeValue`s through the scalar value slot, while explicit `array(...)` / `hash(...)` targets remain aggregate storage. Scalar-held typed views feed typed wrappers, `copy(...)`, aggregate-consuming helper slots, and receiver chains; Perl generated source keeps those scalar-held reads on scalar preambles. Oracle corpus regenerated to **91** fixtures with `.11.3` cases replacing the old `.1.2.3.5.4` target-kind expectations. Phase0's remaining failure is `emit_context_lowers_split_tagged_records_helper`, outside this leaf. Frontier becomes `.11.4`. |
 | `2026-07-04` | `SPEC-FORMAT-TERSE.7.4` | KM retrieval for type-method/receiver-chain facts; drift scans for stale `.7` frontier text, 73/74 fixture wording, receiver-family summaries, numeric reducer statements, tests, corpus, and Knowledge Map facts; mdBook build; memory/doctrine/KM/diff gates | No Perl/Rust behavior change needed. Current roadmap, task-tree index, mdBook helper/reference summaries, and Knowledge Map facts now agree that array numeric reducers are terminal array/list receiver methods, not scalar number receiver links; mutation/lifecycle/control/child-dispatch/parser-state/declaration/compatibility helpers remain explicit. `.7` is closed and the `SPEC-FORMAT-TERSE` frontier is empty. |
@@ -4356,6 +4371,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.11.5` | `SPEC-FORMAT-TERSE.11.5 - close duck-typed assignment alignment` | Roadmap/current docs and Knowledge Map retrieval now present typed value binding as current behavior and target-kind inference as superseded history; `.11` closes and frontier becomes `.15`. |
 | `SPEC-FORMAT-TERSE.11.4` | `SPEC-FORMAT-TERSE.11.4 - implement nested value-path assignment` | Nested mixed direct-access writes now mutate scalar-held array/hash value trees on Perl/Rust with explicit no-autovivification path guards; oracle corpus is 92 fixtures; frontier becomes `.11.5`. |
 | `SPEC-FORMAT-TERSE.11.3` | `SPEC-FORMAT-TERSE.11.3 - implement Rust duck-typed assignment parity` | Rust now scalar-binds bare assignment RHS values, including direct array/hash shapes, and keeps explicit `array(...)` / `hash(...)` targets as aggregate storage. Oracle corpus is 91 fixtures; frontier becomes `.11.4`. |
 | `SPEC-FORMAT-TERSE.11.2` | `SPEC-FORMAT-TERSE.11.2 - implement Perl duck-typed assignment binding` | Perl reference bare assignment now binds typed RHS values through scalar storage; explicit aggregate targets remain aggregate storage; frontier became `.11.3`. |
@@ -4472,6 +4488,11 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.4.2` | `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls` | Perl inline value-control lowering landed for `if`/`switch` in supported value positions; corpus 46 passes and frontier becomes `.2.3.5`. |
 
 ## Changelog
+
+- `2026-07-05`: **`.11.5` DONE — duck-typed assignment alignment closed.**
+  Current roadmap and Knowledge Map retrieval now describe direct RHS shapes as typed value binding. Historical
+  target-kind inference remains documented only as superseded history. The mdBook already matched `.11`; oracle
+  corpus remains **92** fixtures. Frontier moves to `.15`.
 
 - `2026-07-05`: **`.11.4` DONE — nested mixed value-path assignment landed.**
   Perl and Rust now support direct-access lvalues such as `payload["items"][0]["name"] = value` in statement and

@@ -251,9 +251,54 @@ DSL helper surface consistency note:
   ordinary comparison word calls to numeric aliases after `.3.2.3.2` shipped the explicit `str_*`
   string-comparison helpers, `.3.2.3.4` landed comparison symbol callees, `.3.3` split expression-valued
   assignment, `.3.3.1` landed scalar assignment expression values, `.3.3.2` landed aggregate assignment
-  expression values after target-kind inference, and `.3.3.3` landed array append and hash-index mutation
-  expression values as updated aggregate snapshots. `.3.3.4` then closed the parent assignment-expression docs/compatibility contract: public examples prefer `set(...)` and operator assignment, `assign(...)` remained a legacy alias at that time, and phase0 then stood at 1015 tests. The later `.6` terse migration lane is closed: `.6.2.1` removed shipped-spec `declare(...)`, `.6.2.2` migrated old helper spellings, `.6.2.3.1` added `:name` as the terse scalar-slot spelling, `.6.2.3.2` retired active authored-spec `scalar(...)` / `assign(...)` while adding remembered bare identifier kinds, `.6.2.4` verified shipped-spec no-drift, `.6.3` swept current-facing docs plus checked-in corpus examples, and `.6.4` kept declaration helpers as legacy compatibility while excluding them from new authoring. The Rust oracle corpus is now 91 fixtures after the Lispish fixture was re-enabled, migrated to direct access under `SCALAREF-RETIREMENT`, the first `RUST-PARITY.7.2` shipped-spec batch added two `hlink_substitution` raw-string cases, `RUST-PARITY.7.3.3.2` added the JSON-safe `{abc}` curly case, `RUST-PARITY.7.3.4.4` added the two `lib_reader` attribute cases, `RUST-PARITY.7.3.4.2` added the four scalar `portmap` cases, `SPEC-FORMAT-TERSE.6.2.3.1` added `terse_6_2_3_1_scalar_slot_shorthand`, `SPEC-FORMAT-TERSE.7.3` added `terse_7_3_array_numeric_reducer_receiver_methods`, `RUST-PARITY.7.3.4.3` added `portmap_concatenation`, `ebnf_expression_rules`, and `ebnf_logging_annotation`, `RUST-PARITY.7.3.5` added the four `spec_spec_*` smokes after null-output triage, `RUST-PARITY.7.3.6` added the seven RTL/plugin/legacy safety smokes, and `TOP-RULE-AS-NORMAL.3.2` added `top_rule_body_recursion_sexpr`, `top_rule_lx_recursion_nested`, and `top_rule_lx_recursion_sequence`; bracket/mixed hlink scalar-ref cases are deferred by `RUST-PARITY.7.3.3.3`.
-- **The `.1.5` literal/nested-access/call/semicolon surface is split; primitive literal parity, call-spacing locks, statement separators, and explicit direct nested access are landed (`SPEC-FORMAT-TERSE.1.5` / `.1.5.2` / `.1.5.3` / `.1.5.4` / `.1.5.5.1`, 2026-06-29); Channel 2 value-read semantics are now landed on both variants (`SPEC-FORMAT-TERSE.1.2.3.1` through `.1.2.3.4`, 2026-06-29), and shape-literal values plus RHS target-kind inference are landed on both variants through `.1.2.3.5.4`.** Primitive literals are typed value expressions on Perl and Rust: quoted strings stay strings, numbers stay numeric, `undef` becomes null, and `true`/`false` are JSON booleans rather than strings. Exact matching keeps `trueword`/`undefine` outside the literal path; in supported scalar read slots those identifiers are working-variable reads. `push(items,false)` is an explicit append while all-bare non-literal `push(A,B)` remains the child-call convention. Rust now gates statement-form `if(false); ... else(); ... endif()` blocks; the value-form lazy `if(cond,then,else)` helper is unchanged. Helper calls keep the `callee(args)` shape: optional whitespace before `(` is accepted at supported call sites, but no-parenthesis helpers remain out of scope. Statement separators are newline-or-semicolon: newlines separate top-level canonical DSL statements, multiple same-line statements require semicolons, and nested semicolons stay protected. Direct nested access now works for mixed path segments such as `foo["a"][9]["b"][z]`: quoted string segments are hash keys, numeric/helper segments are array indexes, and non-reserved bare path atoms are scalar array-index reads equivalent to `[:z]`. The legacy `scalaref(base,path)` compatibility form has been retired under `SCALAREF-RETIREMENT`: active shipped specs/docs migrated away from it in `.3`, and `.4` removed implementation support. Aggregate bare reads work on Perl/Rust for `copy(NAME)` after the identifier's kind is known, with explicit aggregate receivers still available where needed. Scalar bare reads work on Perl/Rust for source slots (`return(NAME)`, `set(out, NAME)`, and `out = NAME`), mutation key/RHS slots (`items += VALUE`, `set_key(meta, KEY, VALUE)`, `meta[KEY] = VALUE`), direct path atoms (`foo["a"][z]`), and explicit scalar-slot shorthand (`:name`). Direct shape-literal values such as `[]`, `[value, true]`, and `{ key => value, "fixed" => [value] }` now work as value expressions on Perl and Rust, so bare shape keys/elements/values read scalar working variables and fixed hash field names must be quoted. Direct shape literals also infer aggregate targets for bare assignment targets on Perl and Rust: `items = [value]` initializes the array working variable, `meta = { key => value }` initializes the hash working variable, and `set(:payload, [value])` stays the scalar-held payload boundary.
+  expression values under the then-current target-kind inference contract later superseded by duck-typed value
+  binding, and `.3.3.3` landed array append and hash-index mutation
+  expression values as updated aggregate snapshots. `.3.3.4` then closed the parent assignment-expression
+  docs/compatibility contract: public examples prefer `set(...)` and operator assignment, `assign(...)` remained
+  a legacy alias at that time, and phase0 then stood at 1015 tests. The later `.6` terse migration lane is closed:
+  `.6.2.1` removed shipped-spec `declare(...)`, `.6.2.2` migrated old helper spellings, `.6.2.3.1` added
+  `:name` as the terse scalar-slot spelling, `.6.2.3.2` retired active authored-spec `scalar(...)` /
+  `assign(...)` while adding remembered bare identifier kinds, `.6.2.4` verified shipped-spec no-drift, `.6.3`
+  swept current-facing docs plus checked-in corpus examples, and `.6.4` kept declaration helpers as legacy
+  compatibility while excluding them from new authoring. The Rust oracle corpus is now 92 fixtures after
+  `SPEC-FORMAT-TERSE.11.4` added `terse_11_4_nested_mixed_value_path_assignment`, the Lispish fixture was
+  re-enabled, migrated to direct access under `SCALAREF-RETIREMENT`, the first `RUST-PARITY.7.2` shipped-spec
+  batch added two `hlink_substitution` raw-string cases, `RUST-PARITY.7.3.3.2` added the JSON-safe `{abc}` curly
+  case, `RUST-PARITY.7.3.4.4` added the two `lib_reader` attribute cases, `RUST-PARITY.7.3.4.2` added the four
+  scalar `portmap` cases, `SPEC-FORMAT-TERSE.6.2.3.1` added `terse_6_2_3_1_scalar_slot_shorthand`,
+  `SPEC-FORMAT-TERSE.7.3` added `terse_7_3_array_numeric_reducer_receiver_methods`, `RUST-PARITY.7.3.4.3`
+  added `portmap_concatenation`, `ebnf_expression_rules`, and `ebnf_logging_annotation`, `RUST-PARITY.7.3.5`
+  added the four `spec_spec_*` smokes after null-output triage, `RUST-PARITY.7.3.6` added the seven
+  RTL/plugin/legacy safety smokes, and `TOP-RULE-AS-NORMAL.3.2` added `top_rule_body_recursion_sexpr`,
+  `top_rule_lx_recursion_nested`, and `top_rule_lx_recursion_sequence`; bracket/mixed hlink scalar-ref cases are
+  deferred by `RUST-PARITY.7.3.3.3`.
+- **The `.1.5` literal/nested-access/call/semicolon surface is split; primitive literal parity, call-spacing locks,
+  statement separators, and explicit direct nested access are landed (`SPEC-FORMAT-TERSE.1.5` / `.1.5.2` /
+  `.1.5.3` / `.1.5.4` / `.1.5.5.1`, 2026-06-29); Channel 2 value-read semantics are now landed on both variants
+  (`SPEC-FORMAT-TERSE.1.2.3.1` through `.1.2.3.4`, 2026-06-29), shape-literal values landed through
+  `.1.2.3.5.4`, and the historical RHS target-kind inference branch is superseded by duck-typed value binding in
+  `.11.2` through `.11.4`.** Primitive literals are typed value expressions on Perl and Rust: quoted strings stay
+  strings, numbers stay numeric, `undef` becomes null, and `true`/`false` are JSON booleans rather than strings.
+  Exact matching keeps `trueword`/`undefine` outside the literal path; in supported scalar read slots those
+  identifiers are working-variable reads. `push(items,false)` is an explicit append while all-bare non-literal
+  `push(A,B)` remains the child-call convention. Rust now gates statement-form `if(false); ... else(); ... endif()`
+  blocks; the value-form lazy `if(cond,then,else)` helper is unchanged. Helper calls keep the `callee(args)` shape:
+  optional whitespace before `(` is accepted at supported call sites, but no-parenthesis helpers remain out of
+  scope. Statement separators are newline-or-semicolon: newlines separate top-level canonical DSL statements,
+  multiple same-line statements require semicolons, and nested semicolons stay protected. Direct nested access now
+  works for mixed path segments such as `foo["a"][9]["b"][z]`: quoted string segments are hash keys, numeric/helper
+  segments are array indexes, and non-reserved bare path atoms are scalar array-index reads equivalent to `[:z]`.
+  The legacy `scalaref(base,path)` compatibility form has been retired under `SCALAREF-RETIREMENT`: active shipped
+  specs/docs migrated away from it in `.3`, and `.4` removed implementation support. Aggregate bare reads work on
+  Perl/Rust for `copy(NAME)` after the identifier's kind is known, with explicit aggregate receivers still available
+  where needed. Scalar bare reads work on Perl/Rust for source slots (`return(NAME)`, `set(out, NAME)`, and
+  `out = NAME`), mutation key/RHS slots (`items += VALUE`, `set_key(meta, KEY, VALUE)`, `meta[KEY] = VALUE`), direct
+  path atoms (`foo["a"][z]`), and explicit scalar-slot shorthand (`:name`). Direct shape-literal values such as
+  `[]`, `[value, true]`, and `{ key => value, "fixed" => [value] }` now work as value expressions on Perl and Rust,
+  so bare shape keys/elements/values read scalar working variables and fixed hash field names must be quoted.
+  Direct shape literals in assignment bind typed values instead of declaring aggregate storage: `items = [value]`
+  stores an array value in `items`, `meta = { key => value }` stores a hash value in `meta`, and explicit
+  `array(...)` / `hash(...)` targets remain the aggregate-storage mutation boundary.
 - Child-rule append authoring is now standardized on `push(...)`: `push(Rule)`, `push(Rule, index)`, `push(Rule, target)`, and `push(Rule, target, index)`. The duplicate public `push_call(...)` helper is retired, and raw Perl wrapper metadata now uses `push_child_call_*_builtin` contract IDs instead of names that look like public helper calls.
 - Fatal parser-flow authoring now uses explicit `exit_now(status)` when DSL code must stop immediately after a diagnostic; bare host `exit` remains compatibility syntax, while `exit_now(...)` contributes canonical `EXIT` metadata and keeps migrated specs out of the compatibility-surface bucket. `tablegrep::{grep,group}` now use this helper plus helper-form child captures and declarations, so `tablegrep` reports zero compatibility-surface rules.
 - Rule-flow skip authoring now uses explicit `next()` when an edge should consume or recognize input without appending a value; bare `next` remains compatibility syntax, while `next()` contributes canonical `NEXT` metadata. `tkgui::{sub_gui_list,curlyb}` now use this helper plus helper-form returns, so `tkgui` reports zero compatibility-surface rules.

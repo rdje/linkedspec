@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-05 (SPEC-FORMAT-TERSE.11.5 — duck-typed assignment alignment):
+  Treat `.1.2.3.5.2` / `.1.2.3.5.4` RHS target-kind inference as historical only. Current-facing docs, fact cards,
+  tests, and roadmap text must say that direct RHS shapes bind typed values: `name = [value]` stores an array value
+  in `name`, not `@name`, and `name = { key => value }` stores a hash value in `name`, not `%name`. Explicit
+  `array(name)` / `hash(name)` targets remain the aggregate-storage mutation boundary. When updating older
+  migration notes, preserve history only with an immediate supersession pointer to the `.11` duck-typed contract.
+
 - 2026-07-05 (SPEC-FORMAT-TERSE.11.4 — nested value-path assignment):
   Nested direct-access lvalues now have explicit duck-typed value-tree semantics. Keep `assign_nested_access`
   lowering/runtime code guarded: every intermediate segment must check both existence and container shape, final

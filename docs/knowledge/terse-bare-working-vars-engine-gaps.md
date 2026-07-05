@@ -87,7 +87,9 @@ deliberately not accepted because Channel 2 still owns bare value-position reads
 Perl and Rust by `.1.2.3.1` through `.1.2.3.4` (aggregate reads, scalar source slots, mutation key/RHS slots,
 and direct-access bare path atoms). The remaining RHS-shape/type-inference work was split before code:
 `.1.2.3.5.1` owns Perl shape-literal value expressions (`[]` / `{}` with expression-aware element/key/value
-lowering), `.1.2.3.5.2` owns Perl RHS target-kind inference, and `.1.2.3.5.3` / `.1.2.3.5.4` own Rust parity.
+lowering), `.1.2.3.5.2` owns the now-historical Perl RHS target-kind inference contract, and `.1.2.3.5.3` /
+`.1.2.3.5.4` own Rust value/parity history. `SPEC-FORMAT-TERSE.11.2` and `.11.3` later superseded the storage
+inference branch with duck-typed value binding.
 Ground truth for the split lives in [[terse-rhs-shape-type-inference-ground-truth]].
 
 ## The three behaviors (dump-don't-guess)

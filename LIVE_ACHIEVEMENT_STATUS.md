@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-05: **SPEC-FORMAT-TERSE.11.5 — close duck-typed assignment alignment**
+  (DUCK-TYPED ASSIGNMENT LANE CLOSED; COLON-SLOT REMOVAL FRONTIER NEXT).
+
+  **Fix:** Current roadmap and Knowledge Map retrieval now describe direct RHS shape assignment as typed value
+  binding. Target-kind inference remains documented only as superseded history. The mdBook assignment/container
+  guidance already matched `.11` semantics, including explicit aggregate targets and nested no-autovivification
+  value-path writes.
+
+  **Verification:** Current-facing stale-wording scans passed after targeted roadmap/fact-card edits.
+  `KNOWLEDGE_MAP.md` was regenerated over 199 facts / 1418 question keys; mdBook, Knowledge Map, memory,
+  doctrine, and whitespace checks pass.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.15` is next for removing `:name` scalar-slot syntax from the future
+  duck-typed surface. `.8` helper-removal work and `.9` colon hash-literal syntax remain behind it.
+
 - 2026-07-05: **SPEC-FORMAT-TERSE.11.4 — implement nested value-path assignment**
   (NESTED VALUE-PATH DONE; DUCK-TYPED CLOSEOUT FRONTIER ACTIVE).
 
@@ -21,8 +36,7 @@ Current execution status for interruption-safe batch workflow recovery.
   regenerated to **92** fixtures with `terse_11_4_nested_mixed_value_path_assignment`, known `spec_spec_*`
   generator drift restored, and the Rust corpus oracle passes.
 
-  **Frontier:** `SPEC-FORMAT-TERSE.11.5` is active for final duck-typed assignment docs/KM/corpus/mdBook
-  closeout/alignment. `.15`, `.8`, and `.9` remain behind it.
+  **Frontier:** This was closed by `SPEC-FORMAT-TERSE.11.5`; current frontier is `.15`, followed by `.8` and `.9`.
 
 - 2026-07-05: **SPEC-FORMAT-TERSE.11.3 — implement Rust duck-typed assignment parity**
   (RUST PARITY DONE; NESTED VALUE-PATH FRONTIER ACTIVE).
