@@ -7,8 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.2.4 — migrate later integration fixtures**
+  (DONE; FRONTIER `.8.2.2.2.5` RUST INTEGRATION-TEST RESIDUE CLASSIFICATION NEXT).
+
+  **Change:** Later current-feature Rust integration fixtures outside explicit compatibility blocks now use current
+  `push(...)`, `copy(...)`, and explicit aggregate-setter spellings where supported. The array append-operator
+  equivalence test now compares against current `push(...)`.
+
+  **Boundary:** No runtime behavior changed. Hash receiver chains intentionally keep documented `.hash_copy()`
+  receiver spelling today, and wrapper-alias `h(...)` fixture residue remains for `.8.2.2.2.5` classification.
+
+  **Verification:** Focused Rust filters for `terse_1_`, `terse_2_3`, `rust_parity_7_3_4`,
+  `rust_parity_7_5_2`, `terse_11_3`, and `terse_3_3` pass. Full Rust `integration_test` passes **172** tests,
+  and Rust formatting plus whitespace checks pass.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.2.3 — annotate legacy helper compatibility tests**
-  (DONE; FRONTIER `.8.2.2.2.4` LATER CURRENT-FEATURE RUST INTEGRATION FIXTURE CLEANUP NEXT).
+  (DONE; `.8.2.2.2.4` LATER CURRENT-FEATURE RUST INTEGRATION FIXTURE CLEANUP HAS SINCE CLOSED).
 
   **Change:** The early Rust integration compatibility block now uses current `push(...)`, `copy(...)`, and
   `hash(...)` spellings on current-side assertions. Retained old-helper sides are labelled as `.8.4` hard-retirement

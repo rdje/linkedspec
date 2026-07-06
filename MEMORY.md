@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.8.2.2.2.3` — explicit Rust legacy-helper compatibility/equivalence tests
-  now use current helper spellings on the current side and label retained old-helper sides as `.8.4` hard-retirement
-  locks.
-- prior_leaf: `SPEC-FORMAT-TERSE.8.2.2.2.2` (commit `2a018fc9`) — TOP-RULE-AS-NORMAL recursive Rust integration
-  fixtures use current append/snapshot spellings while retaining `declare(array, items)` as a scoped-declaration
-  compatibility lock.
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.8.2.2.2.4` — later current-feature Rust integration fixtures now use
+  current `push(...)`, `copy(...)`, and explicit aggregate-setter spellings where supported; hash receiver
+  `.hash_copy()` and wrapper-alias residue remain for `.8.2.2.2.5` classification.
+- prior_leaf: `SPEC-FORMAT-TERSE.8.2.2.2.3` (commit `52de58c9`) — explicit Rust legacy-helper
+  compatibility/equivalence tests use current helper spellings on the current side and label retained old-helper
+  sides as `.8.4` hard-retirement locks.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-FORMAT-TERSE.8.2.2.2.3 - annotate legacy helper tests`; parent before this slice was
-  `2a018fc9`. **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly
+  `SPEC-FORMAT-TERSE.8.2.2.2.4 - migrate later integration fixtures`; parent before this slice was
+  `52de58c9`. **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly
   instructed.**
-- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.8.2.2.2.4` (migrate later current-feature Rust integration
-  fixtures that still carry incidental old-helper spellings) and it may start only after this `.8.2.2.2.3` commit is
-  clean and `git status` is handoff-ready.
-- next_action: after this `.8.2.2.2.3` commit is clean, pick `SPEC-FORMAT-TERSE.8.2.2.2.4`; do not push unless
+- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.8.2.2.2.5` (Rust integration-test helper-string residue
+  classification) and it may start only after this `.8.2.2.2.4` commit is clean and `git status` is
+  handoff-ready.
+- next_action: after this `.8.2.2.2.4` commit is clean, pick `SPEC-FORMAT-TERSE.8.2.2.2.5`; do not push unless
   explicitly instructed.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
@@ -41,5 +41,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   worktree ignored by submodule policy. Deferred lanes behind `.8.2`: `.9` (hash `=>`→`:`),
   `.10`/`.12`/`.13`/`.14` backlog; `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`,
   `SPEC-LANG-REFERENCE`.
-- blockers: none for `.8.2.2.2.4` ownership. in_flight_uncommitted: none after the `.8.2.2.2.3` commit lands; do
+- blockers: none for `.8.2.2.2.5` ownership. in_flight_uncommitted: none after the `.8.2.2.2.4` commit lands; do
   not pivot unless the repo is handoff-ready.

@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.2.4 — migrate later integration fixtures
+
+**Scope:** Migrate later current-feature Rust integration fixture strings outside explicit compatibility blocks in
+`rust/linkedspec-runtime/tests/integration_test.rs`.
+
+**Change:** Later terse feature fixtures now use current helper spellings where the current surface supports them:
+`push(...)`/`+=` for appends, `copy(...)` for aggregate snapshots, and explicit aggregate setters for setup. The
+array append-operator equivalence test now compares against current `push(...)` rather than the legacy
+`push_value(...)` helper.
+
+**Boundary:** This slice does not change runtime behavior and does not hard-retire any helper. Hash receiver chains
+still use the documented `.hash_copy()` receiver method, and wrapper-alias `h(...)` fixture strings remain for the
+`.8.2.2.2.5` residue-classification leaf.
+
+**Validation:** Focused Rust filters passed for `terse_1_`, `terse_2_3`, `rust_parity_7_3_4`,
+`rust_parity_7_5_2`, `terse_11_3`, and `terse_3_3`. Full
+`cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test integration_test` passed all **172**
+tests. Rust formatting and whitespace checks pass.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.2.3 — annotate legacy helper compatibility tests
 
 **Scope:** Migrate or annotate explicit legacy-helper compatibility/equivalence tests in

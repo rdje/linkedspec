@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.2.4 — fixture cleanup must not conflate function helpers with receiver
+  methods): In Rust integration fixtures, migrate function-form setup/snapshot helpers to current spellings
+  (`push(...)`, `copy(...)`, explicit aggregate setters) where the current surface supports them. Do not rewrite
+  hash receiver chains to `.copy()` as part of this cleanup: the documented current hash receiver method is still
+  `.hash_copy()` today. A candidate `meta.copy()` change returned `Null` in
+  `terse_2_3_5_2_hash_receiver_value_chains_run`, while `meta.hash_copy()` preserved the expected values. Leave
+  hash receiver and wrapper-alias residue for the dedicated `.8.2.2.2.5` classification leaf.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.2.3 — compatibility tests need labelled old sides): In Rust integration
   tests, migrate the current side of helper-equivalence assertions to current spellings first, then leave the old
   side only when it is deliberately proving legacy compatibility for `.8.4`. `push_nonempty(...)` is kept as a
