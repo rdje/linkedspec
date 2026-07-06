@@ -1,6 +1,36 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.15.2.4 — migrate current sources to bare reads
+
+**Scope:** Complete the output-preserving source/corpus/docs migration away from `:name` scalar-slot reads now that
+Perl and Rust both honor the value-position-is-variable policy. Hard parser/runtime removal remains owned by
+`.15.3` and `.15.4`.
+
+**Source migration:** Shipped `specs/*.spec`, root corpus inputs, generated Rust oracle input fixtures, and current
+mdBook examples now use bare value reads. Expected Rust oracle JSON and the manifest stayed unchanged after
+regeneration over **93** fixtures.
+
+**Runtime/lowering fixes exposed by the migration:** parser-backed `set(...)` control-flow AST nodes are
+reconstructed as `set(...)` instead of unsupported `assign(...)`; `split_tagged_records(...)` keeps its first bare
+argument as the required source instead of optional scope; fluent `.return(array_copy/hash_copy/copy(...))` is a
+general payload return; Perl declaration/type-memory collection recognizes initialized `declare(...)` and
+single-bare `array(...)`/`hash(...)` wrappers; Rust action-edge `call(child)` publishes child `retv` only after the
+attached block completes, and descriptor scalar bare reads can coexist with same-name aggregate accumulators.
+
+**Validation:**
+- `env PERL5LIB= perl -Iperl t/phase0_regression.t` — PASS, reaches `1..1022`.
+- `env PERL5LIB= perl -Iperl tools/gen_oracle_corpus.pl` — regenerated **93** fixtures; no expected JSON/manifest
+  diff.
+- `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture` — PASS
+  over **93** fixtures.
+- `mdbook build docs/linkedspec-book`
+- `git diff --check`
+- Current-surface scalar-slot residue scan reports only expected rule-mode labels, regex syntax, and historical
+  literal strings; no live `:name` scalar-slot example remains in the migrated surfaces.
+
+**Frontier:** -> `.15.3` for Perl reference `:name` parser/lowering retirement.
+
 ## 2026-07-06 — REPO-HYGIENE.2 — ignore Claude project state and rgx local dirt
 
 **Scope:** User-authorized repository hygiene cleanup for paths that should not be controlled by the parent

@@ -17,16 +17,16 @@ LX {
 }
 LS {retv = undef}
 LE {
- if(not(:retv));
+ if(not(retv));
   return_undef();
  endif();
  
- if(and(and(:prev_node_type, matches(:prev_node_type, /_OP/o)), matches(retv["type"], /_OP/o)));
+ if(and(and(prev_node_type, matches(prev_node_type, /_OP/o)), matches(retv["type"], /_OP/o)));
   print("ERROR: Two operators w/o neither a RE_TERM nor a GROUP in between\n");
   exit_now(1);
  endif();
  
- push(internal, :retv);
+ push(array(internal), retv);
  prev_node_type = retv["type"]
 }
 #======== End Of grep ========
@@ -52,16 +52,16 @@ I {
 
 LS {retv = undef}
 LE {
- if(not(:retv));
+ if(not(retv));
   return_undef();
  endif();
  
- if(and(and(:prev_node_type, matches(:prev_node_type, /_OP/o)), matches(retv["type"], /_OP/o)));
+ if(and(and(prev_node_type, matches(prev_node_type, /_OP/o)), matches(retv["type"], /_OP/o)));
   print("\nERROR: Two operators w/o neither a RE_TERM nor a GROUP in between\n");
   exit_now(1);
  endif();
 
- push(internal, :retv);
+ push(array(internal), retv);
  prev_node_type = retv["type"]
 }
 #==========
@@ -72,12 +72,12 @@ I {
  field = entry_group(0);
  sens = entry_group(1);
  re = entry_group(2);
- if(matches(:field, /^\[\d+\]$/o));
-  subscript = :field;
-  substr(:subscript, /^\[(\d+)\]$/, "$1", o);
-  return(hash("type", "STERM", "field", :subscript, "sens", :sens, "re", :re));
+ if(matches(field, /^\[\d+\]$/o));
+  subscript = field;
+  substr(subscript, /^\[(\d+)\]$/, "$1", o);
+  return(hash("type", "STERM", "field", subscript, "sens", sens, "re", re));
  else();
-  return(hash("type", "TERM", "field", :field, "sens", :sens, "re", :re));
+  return(hash("type", "TERM", "field", field, "sens", sens, "re", re));
  endif()
 }
 

@@ -254,14 +254,17 @@ sub _control_ast_value_source_expr {
   return '{'.join(', ', @pairs).'}'
  }
  if ($kind eq 'call') {
-  return undef unless defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  my $method = $node->{name};
+  return undef unless defined($method) && $method =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  $method = 'set'
+   if $method eq 'assign' && (($node->{source} // '') !~ /^\s*assign\s*\(/o);
   my @args;
   foreach my $arg (@{$node->{args} || []}) {
    my $arg_expr = _control_ast_value_source_expr($arg);
    return undef unless defined($arg_expr) && length($arg_expr);
    push @args, $arg_expr;
   }
-  return $node->{name}.'('.join(', ', @args).')'
+  return $method.'('.join(', ', @args).')'
  }
  if ($kind eq 'fluent_chain') {
   my $receiver = _control_ast_value_source_expr($node->{receiver});

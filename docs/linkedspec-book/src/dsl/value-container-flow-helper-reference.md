@@ -13,7 +13,7 @@ Most value helpers return one expression. They become useful when they are place
 | Site | Shape | Use it when |
 | --- | --- | --- |
 | Working-variable initializer | `name = expr` / `items = []` / `meta = {}` | a working variable should start with one explicit scalar, array, or hash value. |
-| Assignment | `set(target, source)` / `target = source` | an existing scalar, array, or hash slot should be replaced. |
+| Assignment | `set(target, source)` / `target = source` | an existing working value should be replaced. |
 | Array append | `items += expr` / `push(target, expr)` / `push(array(target), expr)` | one explicit value expression should be appended without replacing the whole array. |
 | Hash field assignment | `meta[key_expr] = expr` / `set_key(name, key_expr, expr)` | one field of a named working hash should be updated in place. |
 | Return payload | `return(payload)` | the rule should return one structured value. |
@@ -21,18 +21,18 @@ Most value helpers return one expression. They become useful when they are place
 | Switch driver | `switch(value)` | one value should drive equality cases. |
 | Constructor payload | `array(...)` / `hash(...)` | nested values should become one array or hash payload. |
 
-Scalar working variables are read with `:name`. Use it when a payload should
-visibly come from the scalar slot named `name`:
+Scalar working variables are read with bare names such as `name`. Use that spelling when a payload should
+visibly come from the working variable named `name`:
 
 ```text
 set(value, "ok");
-set(:payload, [value]);          # scalar payload boundary: $payload = [$value]
-return(array(:value, :payload));
+set(payload, [value]);          # payload now holds the array value [value]
+return(array(value, payload));
 ```
 
 Bare direct-shape assignment binds the shape as the variable's typed value. `set(payload, [value])`
-stores the whole array value in `payload`; `set(:payload, [value])` is the explicit scalar-slot spelling for the
-same payload boundary.
+stores the whole array value in `payload`; use `set(array(payload), [value])` only when the target must be
+aggregate working-array storage instead.
 
 Example:
 
@@ -43,8 +43,8 @@ Token::AND
    text = lowercase(trim(entry_group(0)));
    return(hash(
      "kind", "token",
-     "text", :text,
-     "text_length", length(:text)
+     "text", text,
+     "text_length", length(text)
    ));
  }
 ```
@@ -153,7 +153,7 @@ An audit of all 20 shipped `.spec` files (88 total accumulator operations, June 
 
 These helpers are the entry point into local working state and structured values.
 
-> **Working variables auto-exist.** `:name`, `array(name)`, and `hash(name)` reference a per-rule working variable. `:name` reads scalar `name`; `array(items)` reads the current array value or working array `items`; `hash(meta)` reads the current hash value or working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. You do **not** have to `declare(...)` a working variable first. The wrapper or type-implying position auto-creates a fresh per-invocation working value of that kind. A **bare** name works as the target of `set(name, ...)` and `name = value`, binding the evaluated typed RHS value whether it is scalar, array, or hash; the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push(name, ...)`, `push_nonempty(name, ...)`, and `name += expr`; the hash target of `set_key(name, key, value)` and `name[key] = value`; and aggregate snapshot reads such as `copy(array(name))`, `copy(hash(name))`, and `copy(name)`. Use explicit `set(array(name), ...)` / `set(hash(name), ...)` when you intentionally want aggregate working storage rather than replacing the bare variable's typed value. `declare(...)` stays available only as legacy compatibility; new examples should use direct assignments and typed wrappers. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
+> **Working variables auto-exist.** `name`, `array(name)`, and `hash(name)` reference a per-rule working variable. `name` reads scalar `name`; `array(items)` reads the current array value or working array `items`; `hash(meta)` reads the current hash value or working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. You do **not** have to `declare(...)` a working variable first. The wrapper or type-implying position auto-creates a fresh per-invocation working value of that kind. A **bare** name works as the target of `set(name, ...)` and `name = value`, binding the evaluated typed RHS value whether it is scalar, array, or hash; the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push(name, ...)`, `push_nonempty(name, ...)`, and `name += expr`; the hash target of `set_key(name, key, value)` and `name[key] = value`; and aggregate snapshot reads such as `copy(array(name))`, `copy(hash(name))`, and `copy(name)`. Use explicit `set(array(name), ...)` / `set(hash(name), ...)` when you intentionally want aggregate working storage rather than replacing the bare variable's typed value. `declare(...)` stays available only as legacy compatibility; new examples should use direct assignments and typed wrappers. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
 
 > **Primitive literals are typed values.** Quoted strings (`"text"` or `'text'`), numbers
 > (`42`, `3.14`), `true`, `false`, and `undef` can be used anywhere an explicit value
@@ -196,7 +196,7 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 
 | Helper | Result | Use it when |
 | --- | --- | --- |
-| `:name` | scalar value | read the working scalar `name`. |
+| `name` | scalar value | read the working scalar `name`. |
 | `array(items).drop_front(index).first()` | scalar value or `undef` | read one zero-based element from an array value. |
 | `hash(meta).pick_keys(key).sorted_values().first()` | scalar value or `undef` | read one field from a hash value. |
 | `base["field"][0][i]` | scalar value or `undef` | read a nested hash/array path directly from a working scalar container; a bare path atom such as `[i]` reads scalar `i` as an array index. |
@@ -210,17 +210,17 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 | `copy(hash_expr)` / `copy(name)` | hash value | snapshot a hash value as one nested payload. A bare name reads the working hash of that name. |
 
 Retired short wrapper aliases `s(...)`, `a(...)`, and `h(...)` are not canonical wrapper
-spellings. Use `:name`, `array(...)`, and `hash(...)` so descriptors and backend
+spellings. Use `name`, `array(...)`, and `hash(...)` so descriptors and backend
 handoff metadata see the intended typed access directly.
 
-In scalar value positions, a bare scalar name is the same read as `:name` during the
-transition: `return(count)`, `set(out, count)`, `out = count`, `if(count, ...)`,
-`num_lt(count, 5)`, and `switch(kind, ...)` read the current scalar slot. Mutation slots use the
+In scalar value positions, a bare scalar name reads the working variable:
+`return(count)`, `set(out, count)`, `out = count`, `if(count, ...)`,
+`num_lt(count, 5)`, and `switch(kind, ...)` read the current working scalar. Mutation slots use the
 same scalar read for array append RHS and hash mutation key/RHS positions: `items += value`,
 `set_key(meta, key, value)`, and `meta[key] = value` read `$value` / `$key` where those slots are scalar-valued.
 Direct path atoms use the same scalar read rule when the atom is not a primitive literal or engine local. Switch
 case labels are the deliberate exception: `case(foo)` is a literal tag named `foo`; write a quoted tag for fixed
-labels and `case(:foo)` only when the case value must be read from the scalar slot during the transition.
+labels and a value expression such as `case(cat(foo, ""), body)` when the case value must be read dynamically.
 
 > **Terse spellings (canonical going forward).** The `.spec` format is migrating to terser helper
 > names: use `set(target, source)` or `target = source` for assignment, `cat(...)` for concatenation,
@@ -338,7 +338,7 @@ These helpers mutate or dispatch rule state. The assignment forms also have the 
 | Helper | Effect | Use it when |
 | --- | --- | --- |
 | `name = expr` | replace the named typed value | a working variable should hold the expression result, whether scalar, array, or hash. |
-| `set(:name, expr)` | replace a scalar slot explicitly | a named scalar slot should visibly hold the expression result, including direct shape payloads such as `[value]`. |
+| `set(name, expr)` | replace the named typed value | a working variable should visibly hold the expression result, including direct shape payloads such as `[value]`. |
 | `set(array(name), array_expr)` | replace an array slot | an array should become a new array value. |
 | `set(hash(name), hash_expr)` | replace a hash slot | a hash should become a new hash value. |
 | `items += expr` | append one value and yield the updated array snapshot when used as an expression | a named array should grow by one explicit value expression; equivalent to `push(items, expr)` / `push(array(items), expr)` for accepted RHS shapes. |
@@ -366,7 +366,7 @@ Parent::AND
  Child
  -> Parent[0] {
    retv = call(Child);
-   push(array(children), :retv);
+   push(array(children), retv);
    return(hash("kind", "parent", "children", copy(array(children))));
  }
 ```
@@ -421,7 +421,7 @@ The terse operator form is equivalent for explicit value expressions and bare sc
 ```text
 items += trim(match_text());
 children += hash("kind", "wrapped", "node", call(Node));
-items += :value;
+items += value;
 items += value;
 ```
 
@@ -432,8 +432,8 @@ Hash field assignment has the same statement shape for named hashes:
 
 ```text
 meta["kind"] = "token";
-meta[cat("source", "_kind")] = :kind;
-meta[field_name] = :field_value;
+meta[cat("source", "_kind")] = kind;
+meta[field_name] = field_value;
 meta[field_name] = field_value;
 ```
 
@@ -489,7 +489,7 @@ push_nonempty(array(tags), lowercase(trim(match_text())));
 Do not use it when an empty string is a meaningful token:
 
 ```text
-push(array(fields), :field_text);
+push(array(fields), field_text);
 ```
 
 That distinction is deliberate. `push(...)` says "append exactly what I computed." `push_nonempty(...)` says "append the computed value only if it survived the emptiness filter."
@@ -497,13 +497,13 @@ That distinction is deliberate. `push(...)` says "append exactly what I computed
 Append versus replace:
 
 ```text
-push(array(children), :retv);
+push(array(children), retv);
 ```
 
 That appends one value.
 
 ```text
-set(array(children), array(:retv));
+set(array(children), [retv]);
 ```
 
 That replaces the whole array with a one-item array. It is correct only when replacement is the intent.
@@ -528,18 +528,18 @@ Examples:
 
 ```text
 name = lowercase(trim(entry_group(0)));
-key = replace_substr(lowercase(trim(:name)), "-", "_");
-core = rm_prefix(:key, "node_");
-base = rm_suffix(:core, "_end");
-full_key = cat(:base, "::", :stage);
-name_len = length(:name);
+key = replace_substr(lowercase(trim(name)), "-", "_");
+core = rm_prefix(key, "node_");
+base = rm_suffix(core, "_end");
+full_key = cat(base, "::", stage);
+name_len = length(name);
 short_key = raw.trim().lowercase().replace_substr("-", "_").substr(0, 12);
 set(array(parts), raw.trim().split("-").trim_each().filter_nonempty());
 public = raw.trim().split("-").lowercase_each().join_values("_");
 ```
 
 String receiver-dot value chains are accepted for the pure scalar string helpers. The receiver is the first
-helper argument, so `raw.trim().lowercase()` maps to `lowercase(trim(:raw))`, and
+helper argument, so `raw.trim().lowercase()` maps to `lowercase(trim(raw))`, and
 `"abcdef".substr(1, 3).uppercase()` maps to `uppercase(substr("abcdef", 1, 3))`. String-returning links
 (`trim`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix`, `rm_suffix`, `substr`, `cat`/`concat`, and
 `coalesce_nonempty`) can keep chaining through string helpers. `split(delim)` is the explicit bridge from a
@@ -559,8 +559,8 @@ Rationale:
 Statement-style regex substitution is a separate mutation form used by some shipped specs:
 
 ```text
-substr(:value, "\"|\\s", "", go);
-regex_subst(:value, /^\[(\d+)\]$/, "$1", o);
+substr(value, "\"|\\s", "", go);
+regex_subst(value, /^\[(\d+)\]$/, "$1", o);
 ```
 
 Those forms mutate the named scalar target. `g` applies the replacement globally; `i`, `m`, `s`, and `x` are regex
@@ -570,10 +570,10 @@ flags; `o` is accepted as a compatibility no-op. Keep this form out of receiver-
 Example:
 
 ```text
-if(num_gt(coalesce(length(trim(:name)), 0), 3))
-  return(hash("kind", "long_name", "name", :name));
+if(num_gt(coalesce(length(trim(name)), 0), 3))
+  return(hash("kind", "long_name", "name", name));
 else()
-  return(hash("kind", "short_name", "name", :name));
+  return(hash("kind", "short_name", "name", name));
 endif()
 ```
 
@@ -597,14 +597,14 @@ These helpers usually appear in `if(...)`, `elseif(...)`, and `switch(...)` expr
 Examples:
 
 ```text
-if(str_eq(lowercase(trim(:kind)), "word"))
-  return(hash("kind", "word", "text", :text));
-elseif(starts_with(lowercase(trim(:kind)), "node_"))
-  return(hash("kind", "node", "text", :text));
-elseif(matches(:kind, /^[A-Z_]+$/))
-  return(hash("kind", "keyword", "text", :text));
+if(str_eq(lowercase(trim(kind)), "word"))
+  return(hash("kind", "word", "text", text));
+elseif(starts_with(lowercase(trim(kind)), "node_"))
+  return(hash("kind", "node", "text", text));
+elseif(matches(kind, /^[A-Z_]+$/))
+  return(hash("kind", "keyword", "text", text));
 else()
-  return(hash("kind", "unknown", "text", :text));
+  return(hash("kind", "unknown", "text", text));
 endif()
 ```
 
@@ -667,11 +667,11 @@ Examples:
 
 ```text
 part_count = count(array(parts));
-next_depth = num_add(:depth, 1);
-next_depth = add(:depth, 1);
-next_depth = +(:depth, 1);
-distance = num_abs(num_sub(:end_pos, :start_pos));
-distance = abs(sub(:end_pos, :start_pos));
+next_depth = num_add(depth, 1);
+next_depth = add(depth, 1);
+next_depth = +(depth, 1);
+distance = num_abs(num_sub(end_pos, start_pos));
+distance = abs(sub(end_pos, start_pos));
 bucket = num_mod(count(array(parts)), 3);
 bucket = %(count(array(parts)), 3);
 bounded_count = num_clamp(count(array(parts)), 1, 5);
@@ -685,14 +685,14 @@ score_range = num_range(array(scores));
 score_floor = scores.min();
 score_ceiling = scores.max();
 next_depth = depth.add(1);
-weighted_count = count(array(parts)).add(2, :offset).mul(3);
+weighted_count = count(array(parts)).add(2, offset).mul(3);
 score_bucket = score.abs().ceil().clamp(0, 10);
 has_parts = >(count(array(parts)), 0);
 ```
 
 Number receiver-dot value chains are accepted with terse method names. The receiver is the first argument to
 the corresponding `num_*` helper, so `score.abs().ceil().add(2)` maps to
-`num_add(num_ceil(num_abs(:score)), 2)`, and `3.5.floor().add(1)` maps to
+`num_add(num_ceil(num_abs(score)), 2)`, and `3.5.floor().add(1)` maps to
 `num_add(num_floor(3.5), 1)`. Number-returning links (`abs`, `floor`, `ceil`, `round`, `add`, `sub`, `mul`,
 `div`, `mod`, `min`, `max`, and `clamp`) can keep chaining through number helpers. Comparison links (`eq`,
 `ne`, `gt`, `ge`, `lt`, `le`) return booleans and end the chain. Array reducers are array-consuming: use
@@ -848,7 +848,7 @@ set(array(public_keys), sorted_keys(pick_keys(hash(meta), "kind", "source", "sta
 set(array(public_values), sorted_values(pick_keys(hash(meta), "kind", "source", "stage")));
 has_kind = has_key(hash(meta), "kind");
 set(hash(layered), merge_hash(hash(meta), hash("stage", "normalized")));
-set(hash(with_owner), set_key(hash(layered), "owner", :rule_name));
+set(hash(with_owner), set_key(hash(layered), "owner", rule_name));
 set(hash(renamed), rename_key(hash(with_owner), "old_stage", "stage"));
 set(hash(public_meta), drop_keys(hash(renamed), "debug", "span"));
 set(hash(summary_meta), pick_keys(hash(public_meta), "kind", "source", "stage"));
@@ -878,8 +878,8 @@ The terse hash-index operator is the statement form written with the key next to
 
 ```text
 meta["stage"] = "normalized";
-meta[cat("source", "_kind")] = :kind;
-meta[field_name] = :field_value;
+meta[cat("source", "_kind")] = kind;
+meta[field_name] = field_value;
 meta[field_name] = field_value;
 ```
 
@@ -903,9 +903,9 @@ Fallback helpers choose values. Presence helpers ask what shape or value is avai
 Examples:
 
 ```text
-name = coalesce(retv["name"], :IMATCH, "UNKNOWN");
-public_name = coalesce_nonempty(trim(:name), "anonymous");
-has_public_name = is_defined(:public_name);
+name = coalesce(retv["name"], IMATCH, "UNKNOWN");
+public_name = coalesce_nonempty(trim(name), "anonymous");
+has_public_name = is_defined(public_name);
 missing_kind = is_undefined(hash(meta).pick_keys("kind").sorted_values().first());
 has_items = is_nonempty(array(items));
 no_public_meta = is_empty(pick_keys(hash(meta), "kind", "source"));
@@ -937,7 +937,7 @@ Array-pipeline helpers are statements or composable array-valued transformations
 
 | Helper | Effect |
 | --- | --- |
-| `split(array(target), :source, delimiter?)` | replace `target` with the pieces from splitting `source`. |
+| `split(array(target), source, delimiter?)` | replace `target` with the pieces from splitting `source`. |
 | `split_each(array(target), delimiter)` | split every current array item and flatten the result back into `target`. |
 | `trim_each(array(target))` | trim every array item in place. |
 | `filter_nonempty(array(target))` | remove empty string items. |
@@ -945,7 +945,7 @@ Array-pipeline helpers are statements or composable array-valued transformations
 | `uppercase_each(array(target))` | uppercase every array item. |
 | `uniq(array(target))` | remove duplicates while preserving first-seen order. |
 | `filter_match(array(target), /regex/)` | keep only items that match the regex. |
-| `split_tagged_records(:source, delimiter, tag, field...)` | build one tagged array record for each split source item. |
+| `split_tagged_records(source, delimiter, tag, field...)` | build one tagged array record for each split source item. |
 
 Worked example:
 
@@ -955,7 +955,7 @@ FieldList::AND
  /([A-Za-z_, ]+)/
  -> FieldList[0] {
    raw = entry_group(0);
-   split(array(fields), :raw, /,/);
+   split(array(fields), raw, /,/);
    trim_each(array(fields));
    filter_nonempty(array(fields));
    lowercase_each(array(fields));
@@ -989,12 +989,12 @@ Use `split_tagged_records(...)` when a comma-separated identifier list should be
 
 ```text
 return(split_tagged_records(
-  :identifier_list,
+  identifier_list,
   /\s*,\s*/o,
   "?signal_declaration:",
-  :subtype_indication,
-  :signal_kind,
-  :expression
+  subtype_indication,
+  signal_kind,
+  expression
 ))
 ```
 
@@ -1021,9 +1021,9 @@ if(and(
 endif()
 
 if(or(
-  str_eq(:kind, "word"),
-  str_eq(:kind, "identifier"),
-  matches(:kind, /^name_/)
+  str_eq(kind, "word"),
+  str_eq(kind, "identifier"),
+  matches(kind, /^name_/)
 ))
   return(hash("kind", "named"));
 endif()
@@ -1094,10 +1094,10 @@ For attached blocks, `when(condition) { ... }` is a readable alias for the first
 `otherwise { ... }` is a readable alias for the fallback `else` branch:
 
 ```text
-when(matches(:kind, /^node_/)) {
-  return(hash("kind", "node", "text", :kind))
+when(matches(kind, /^node_/)) {
+  return(hash("kind", "node", "text", kind))
 } otherwise {
-  return(hash("kind", "other", "text", :kind))
+  return(hash("kind", "other", "text", kind))
 }
 ```
 
@@ -1112,7 +1112,7 @@ Use attached-block control flow when a branch needs substantial statement bodies
 | `if(cond, then_value, branches...)` | evaluate `cond`; return `then_value` when true, otherwise choose an `elseif(...)`, `else(...)`, or plain third fallback. |
 | `elseif(cond, value)` | additional inline `if` branch. |
 | `else(value)` | fallback inline `if` branch. |
-| `switch(value, branches...)` | evaluate `value` once and choose the first matching branch; a bare switch subject reads a scalar slot. |
+| `switch(value, branches...)` | evaluate `value` once and choose the first matching branch; a bare switch subject reads a working scalar. |
 | `case(value, body)` | one equality case; a bare case value such as `case(foo, body)` is the literal tag `foo`, not a scalar read. |
 | `default(body)` | fallback branch. |
 
@@ -1121,7 +1121,7 @@ Inline `if` example:
 ```text
 return(if(
   is_nonempty(flag),
-  cat("prefix-", :flag),
+  cat("prefix-", flag),
   else("missing")
 ))
 ```
@@ -1136,10 +1136,10 @@ Inline `switch` example:
 
 ```text
 return(switch(
-  lowercase(trim(:kind)),
-  case("word", hash("kind", "word", "text", :text)),
-  case("space", hash("kind", "space", "text", :text)),
-  default(hash("kind", "unknown", "text", :text))
+  lowercase(trim(kind)),
+  case("word", hash("kind", "word", "text", text)),
+  case("space", hash("kind", "space", "text", text)),
+  default(hash("kind", "unknown", "text", text))
 ))
 ```
 
@@ -1147,17 +1147,19 @@ Bare switch subjects and bare case labels intentionally mean different things:
 
 ```text
 set(kind, "word")
+set(other, "space")
 return(switch(
   kind,
   case(word, "literal tag matched"),
-  case(:other, "dynamic transition-only label"),
+  case(cat(other, ""), "dynamic expression matched"),
   default("unknown")
 ))
 ```
 
 Here `kind` reads the scalar working variable, while `case(word, ...)` matches the literal tag
-`"word"`. Prefer quoted strings such as `case("word", ...)` when teaching fixed labels; the bare-label form is
-kept for parity with attached `case(word) { ... }` labels.
+`"word"`. `case(cat(other, ""), ...)` evaluates `other` as a value expression. Prefer quoted strings such as
+`case("word", ...)` when teaching fixed labels; the bare-label form is kept for parity with attached
+`case(word) { ... }` labels.
 
 Expression-valued branch blocks are allowed in selected branches:
 
@@ -1172,15 +1174,15 @@ return(if(
 Use attached-block `switch` for portable branch logic:
 
 ```text
-switch(:kind) {
+switch(kind) {
   case("word") {
-    return(hash("kind", "word", "text", :text))
+    return(hash("kind", "word", "text", text))
   }
   case("space") {
-    return(hash("kind", "space", "text", :text))
+    return(hash("kind", "space", "text", text))
   }
   default {
-    return(hash("kind", "unknown", "text", :text))
+    return(hash("kind", "unknown", "text", text))
   }
 }
 ```
@@ -1197,8 +1199,8 @@ is evaluated before each iteration, and body statements can update the values us
 
 ```text
 set(count, 0);
-while(num_lt(:count, 3)) {
-  set(count, num_add(:count, 1));
+while(num_lt(count, 3)) {
+  set(count, num_add(count, 1));
 }
 return(count);
 ```
@@ -1220,8 +1222,8 @@ interpreter execution.
 Examples:
 
 ```text
-say("normalized kind: ", :kind);
-print("token=", :text, " kind=", :kind, "\n");
+say("normalized kind: ", kind);
+print("token=", text, " kind=", kind, "\n");
 print_each(array(matches), "match:<<", ">>\n");
 ```
 
@@ -1247,7 +1249,7 @@ Node::AND
    retv = call(Child);
    set(hash(meta), hash(
      "kind", coalesce_nonempty(trim(retv["kind"]), "node"),
-     "name", coalesce_nonempty(trim(retv["name"]), :IMATCH, "anonymous")
+     "name", coalesce_nonempty(trim(retv["name"]), IMATCH, "anonymous")
    ));
    set(hash(meta), set_key(hash(meta), "normalized_name", replace_substr(lowercase(trim(hash(meta).pick_keys("name").sorted_values().first())), " ", "_")));
    return(copy(hash(meta)));
@@ -1272,11 +1274,11 @@ Sequence::AND
  Item
  -> Sequence[0] {
    retv = call(Item);
-   items += :retv;
+   items += retv;
  }
  -> Sequence[1] {
    retv = call(Item);
-   items += :retv;
+   items += retv;
 
    if(num_gt(count(array(items)), 1))
      return(hash(
@@ -1291,7 +1293,7 @@ Sequence::AND
  }
 ```
 
-The important choice is the append operation: each child result is appended, here with `items += :retv`. The final `return(...)` uses pure array helpers to read or derive views from the accumulated array without mutating it.
+The important choice is the append operation: each child result is appended, here with `items += retv`. The final `return(...)` uses pure array helpers to read or derive views from the accumulated array without mutating it.
 
 ## Worked example: classify with switch
 
@@ -1303,13 +1305,13 @@ Kind::AND
  /[A-Za-z_]+/
  -> Kind[0] {
    raw = entry_text();
-   kind = replace_substr(lowercase(trim(:raw)), "-", "_");
+   kind = replace_substr(lowercase(trim(raw)), "-", "_");
 
-   switch(:kind) {
-     case("word") { return(hash("kind", "word", "raw", :raw)) }
-     case("space") { return(hash("kind", "space", "raw", :raw)) }
-     case("node") { return(hash("kind", "node", "raw", :raw)) }
-     default { return(hash("kind", "unknown", "raw", :raw)) }
+   switch(kind) {
+     case("word") { return(hash("kind", "word", "raw", raw)) }
+     case("space") { return(hash("kind", "space", "raw", raw)) }
+     case("node") { return(hash("kind", "node", "raw", raw)) }
+     default { return(hash("kind", "unknown", "raw", raw)) }
    }
  }
 ```

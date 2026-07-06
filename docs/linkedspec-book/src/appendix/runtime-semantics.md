@@ -208,30 +208,30 @@ surrounding rule return channel. This is separate from expression-valued blocks 
 
 ### 5.3 Explicit Accumulation
 
-`push(target, value)` targets a named accumulator explicitly. The terse
+`push(array(target), value)` targets a named accumulator explicitly. The terse
 spelling `push(target, value)` is equivalent when the value position is
 unambiguous:
 
 ```text
 Foo::
  I { results = [] }
- -> Bar {push(array(results), :retv)}
+ -> Bar {push(array(results), retv)}
 E {return(copy(array(results)))}
 ```
 
 ```text
 Foo::
- -> Bar {push(results, :retv)}
+ -> Bar {results += retv}
 E {return(copy(array(results)))}
 ```
 
 All-bare `push(A, B)` keeps the child-call meaning: `A` is a child rule and `B`
 is the target accumulator. To append a working-variable value, write
-`items += value`, `push(results, :value)`, or `push(results, :value)`.
+`items += value` or `push(array(results), value)`.
 Bare scalar reads are currently supported in return and assignment-like source slots such as
 `return(value)`, `set(out, value)`, and `out = value`, in mutation slots such as
 `items += value`, and in direct-access path atoms such as `payload["children"][index]`.
-Use `:value` when the source should be visibly scalar without the long `:value` wrapper.
+Use the bare name when the source should visibly read a working scalar.
 
 Assignment also has a value form. `name = "ok"` and `=(name, "ok")` store the scalar and evaluate to the stored
 value, so they can appear inside `return(...)`, helper arguments, expression-valued blocks, user-function bodies,

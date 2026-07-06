@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `REPO-HYGIENE.2` — `.claude/projects/` local agent state ignored; `rgx` remains a tracked
-  submodule/gitlink with `.gitmodules` `ignore = dirty` so local submodule worktree dirt does not dirty parent
-  status. `rgx/` is NOT gitignored and the gitlink remains tracked.
-- prior_feature_leaf: `SPEC-FORMAT-TERSE.15.2.3` (commit `8bd32e25`) — Rust bare-read parity + switch case-label
-  alignment; Rust oracle corpus PASS over **93** fixtures; full phase0 reaches `ok 1022` with **1021 pass** and only
-  known baseline `not ok 796`.
-- latest_commit: pending this hygiene slice commit (`REPO-HYGIENE.2 - ignore Claude project state and rgx local dirt`);
-  previous `8bd32e25` (`SPEC-FORMAT-TERSE.15.2.3`). **~309 commits ahead of origin — OVER the documented 300 push threshold
-  (LIVE_ACHIEVEMENT_STATUS); still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.15.2.4` (source/corpus/docs/KM migration from `:name` to bare,
-  now output-preserving). Do **not** start it until `REPO-HYGIENE.2` is committed and status is handoff-ready.
-- next_action: Complete `REPO-HYGIENE.2` commit workflow, clear `git_message_brief.txt`, verify `git status` is clean
-  except ignored local-only paths. Then PNT may pick `.15.2.4`.
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.15.2.4` — current shipped specs, root corpus inputs, generated Rust
+  oracle inputs, and mdBook examples now use bare value reads instead of `:name` scalar-slot reads; expected JSON
+  stayed unchanged across the regenerated **93** fixture oracle corpus.
+- prior_leaf: `REPO-HYGIENE.2` (commit `cf0df422`) — `.claude/projects/` local agent state ignored; `rgx` remains a
+  tracked submodule/gitlink with `.gitmodules` `ignore = dirty`.
+- latest_commit: this slice commit `SPEC-FORMAT-TERSE.15.2.4 - migrate current sources to bare reads`; parent
+  `cf0df422`. **Branch was 310 commits ahead of origin before this commit — over the documented 300 push threshold;
+  still do NOT push mid-PNT unless explicitly instructed.**
+- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.15.3` (Perl reference removal/hard-retirement of `:name`
+  scalar-slot parsing/lowering) and it must not start until the `.15.2.4` commit workflow is complete and status is
+  handoff-ready.
+- next_action: Finish `.15.2.4` commit workflow, clear `git_message_brief.txt`, and verify `git status` is clean.
+  Then PNT may pick `.15.3`.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.
@@ -39,4 +39,4 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   worktree ignored by submodule policy. Deferred lanes behind `.15`: `.8` (legacy-helper removal), `.9` (hash
   `=>`→`:`), `.10`/`.12`/`.13`/`.14` backlog; `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`,
   `SPEC-LANG-REFERENCE`.
-- blockers: none for ownership. in_flight_uncommitted: `REPO-HYGIENE.2` cleanup until committed; do not pivot.
+- blockers: none for ownership. in_flight_uncommitted: `.15.2.4` commit workflow until committed; do not pivot.

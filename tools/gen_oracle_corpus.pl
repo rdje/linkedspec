@@ -123,7 +123,7 @@ SPEC
     # ── SPEC-FORMAT-TERSE.1.1.2 — auto-existing working variables (cross-variant) ──
     #
     # The Perl reference (.1.1.1, ADR 0007) lets a working variable referenced
-    # through a typed wrapper -- :NAME/array(NAME) -- be used WITHOUT a
+    # through a typed wrapper -- NAME/array(NAME) -- be used WITHOUT a
     # prior declare(...). These cases prove the Rust backend reproduces that
     # behavior under the universal-contract obligation (ADR 0006): each grammar
     # uses a working variable with NO declare in the divergence-free edge-action
@@ -139,7 +139,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { v = "ok"; return(:v) }
+ /x/ -> Done { v = "ok"; return(v) }
 
 Done::
  /[a-z]+/
@@ -149,7 +149,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { declare(scalar, v); v = "ok"; return(:v) }
+ /x/ -> Done { declare(scalar, v); v = "ok"; return(v) }
 
 Done::
  /[a-z]+/
@@ -190,13 +190,13 @@ SPEC
     # kind -- the assignment target is a scalar, the push_value(...) target is an array.
     # Same divergence-free proof class as the wrapped autoexist_* cases above (the bare
     # target is the only difference), so the Rust backend must produce the identical
-    # reference value. The value is read back through a wrapper (:v/array(items)) --
+    # reference value. The value is read back through a wrapper (v/array(items)) --
     # bare value-position reads are Channel 2, not this leaf.
     {   case   => 'autoexist_scalar_bare_arg',
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { v = "ok"; return(:v) }
+ /x/ -> Done { v = "ok"; return(v) }
 
 Done::
  /[a-z]+/
@@ -280,7 +280,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(out, value); name = value; return(array(:out, :name)) }
+ /x/ -> Done { set(value, "ok"); set(out, value); name = value; return(array(out, name)) }
 
 Done::
  /[a-z]+/
@@ -333,7 +333,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); items = [value]; meta = { key => value }; return(array(:items, array(items), copy(items), items.count(), items.first(), :meta, hash(meta), copy(meta), meta.count_keys(), meta.pick_keys(key).sorted_values().first())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); items = [value]; meta = { key => value }; return(array(items, array(items), copy(items), items.count(), items.first(), meta, hash(meta), copy(meta), meta.count_keys(), meta.pick_keys(key).sorted_values().first())) }
 
 Done::
  /[a-z]+/
@@ -371,7 +371,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(:payload, [value]); set(snapshot, :payload); return(array(:value, :payload, copy(array(payload)), :snapshot)) }
+ /x/ -> Done { set(value, "ok"); set(payload, [value]); set(snapshot, payload); return(array(value, payload, copy(array(payload)), snapshot)) }
 
 Done::
  /[a-z]+/
@@ -388,7 +388,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { label = cat("a", "b"); push(array(items), :label); return(copy(array(items))) }
+ /x/ -> Done { label = cat("a", "b"); push(array(items), label); return(copy(array(items))) }
 
 Done::
  /[a-z]+/
@@ -407,14 +407,14 @@ SPEC
 
     # ── SPEC-FORMAT-TERSE.1.3.2 — explicit array append terse spelling ──
     #
-    # `push(target, value)` is the terse explicit-value append spelling when the
-    # value shape is unambiguous; all-bare child-call forms keep `push(Rule,target)`
-    # precedence on the Perl reference.
+    # `push(target, value)` remains available when the value shape is unambiguous.
+    # All-bare `push(Rule,target)` keeps child-call precedence, so appending a
+    # scalar read by bare name uses the `+=` operator spelling.
     {   case   => 'terse_1_3_2_push_alias_array',
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(label, "b"); push(items, "a"); push(items, :label); return(copy(array(items))) }
+ /x/ -> Done { set(label, "b"); push(items, "a"); items += label; return(copy(array(items))) }
 
 Done::
  /[a-z]+/
@@ -446,7 +446,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { name = cat("o", "k"); return(:name) }
+ /x/ -> Done { name = cat("o", "k"); return(name) }
 
 Done::
  /[a-z]+/
@@ -462,7 +462,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { label = "b"; items += "a"; items += :label; return(copy(array(items))) }
+ /x/ -> Done { label = "b"; items += "a"; items += label; return(copy(array(items))) }
 
 Done::
  /[a-z]+/
@@ -504,7 +504,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { flag = true; items += false; push(items, true); meta["enabled"] = true; if(false); return("bad"); else(); return(array(:flag, copy(array(items)), copy(hash(meta)))); endif() }
+ /x/ -> Done { flag = true; items += false; push(items, true); meta["enabled"] = true; if(false); return("bad"); else(); return(array(flag, copy(array(items)), copy(hash(meta)))); endif() }
 
 Done::
  /[a-z]+/
@@ -519,7 +519,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set (name, cat ("a", "b")); items += cat ("c", "d"); meta[cat ("s", "tage")] = :name; return (array(:name, copy (array (items)), copy (hash (meta)))) }
+ /x/ -> Done { set (name, cat ("a", "b")); items += cat ("c", "d"); meta[cat ("s", "tage")] = name; return (array(name, copy (array (items)), copy (hash (meta)))) }
 
 Done::
  /[a-z]+/
@@ -536,7 +536,7 @@ SPEC
         source => <<'SPEC',
 Top::
  /x/ -> Done { set(name,"a")
- return(:name) }
+ return(name) }
 
 Done::
  /[a-z]+/
@@ -546,7 +546,7 @@ SPEC
     #
     # Direct mixed hash/array access is canonical when every segment is explicit.
     # Bare path atoms such as `[z]` remain Channel 2 work; this fixture uses
-    # `:z` for the final index.
+    # `z` for the final index.
     {   case   => 'terse_1_5_5_1_direct_nested_access',
         input  => 'xhello',
         source => <<'SPEC',
@@ -647,7 +647,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(kind, "b"); switch(:kind) { case("a") { return("bad") } case("b") { return("later") } default { return("default") } } }
+ /x/ -> Done { set(kind, "b"); switch(kind) { case("a") { return("bad") } case("b") { return("later") } default { return("default") } } }
 
 Done::
  /[a-z]+/
@@ -664,7 +664,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(count, 0); while(num_lt(:count, 3)) { set(count, num_add(:count, 1)) }; return(count) }
+ /x/ -> Done { set(count, 0); while(num_lt(count, 3)) { set(count, num_add(count, 1)) }; return(count) }
 
 Done::
  /[a-z]+/
@@ -744,13 +744,13 @@ SPEC
     # ── SPEC-FORMAT-TERSE.15.2.3 — Rust parity for bare value reads ──
     #
     # Bare identifiers in value positions read bound values, while a bare
-    # switch-case label stays a literal tag. `case(:foo)` remains an evaluated
-    # scalar-slot expression until `:name` is retired by later .15 leaves.
+    # switch-case label stays a literal tag. Dynamic case labels must be written
+    # as value expressions rather than as bare labels.
     {   case   => 'terse_15_2_3_bare_value_reads_and_case_labels',
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(kind, "foo"); set(foo, "bar"); set(n, 10); set(c, 0); switch(kind) { case(foo) { attached = "literal" } case(:foo) { attached = "slot" } default { attached = "default" } }; return(array(attached, switch(kind, case(foo, "literal"), case(:foo, "slot"), default("default")), if(num_lt(n, 5), "yes", else("no")), if(c, "T", else("F")))) }
+ /x/ -> Done { set(kind, "foo"); set(foo, "bar"); set(n, 10); set(c, 0); switch(kind) { case(foo) { attached = "literal" } case(cat(foo, "")) { attached = "dynamic" } default { attached = "default" } }; return(array(attached, switch(kind, case(foo, "literal"), case(cat(foo, ""), "dynamic"), default("default")), if(num_lt(n, 5), "yes", else("no")), if(c, "T", else("F")))) }
 
 Done::
  /[a-z]+/
@@ -878,7 +878,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(out, ""); if(str_eq("node", "node")) { set(out, cat(:out, "E")) }; if(str_ne("node", "edge")) { set(out, cat(:out, "N")) }; if(str_gt("2", "10")) { set(out, cat(:out, "G")) }; if(str_ge("2", "2")) { set(out, cat(:out, "H")) }; if(str_lt("10", "2")) { set(out, cat(:out, "L")) }; if(str_le("10", "10")) { set(out, cat(:out, "M")) }; if(str_gt("10", "2")) { set(out, cat(:out, "X")) }; return(out) }
+ /x/ -> Done { set(out, ""); if(str_eq("node", "node")) { set(out, cat(out, "E")) }; if(str_ne("node", "edge")) { set(out, cat(out, "N")) }; if(str_gt("2", "10")) { set(out, cat(out, "G")) }; if(str_ge("2", "2")) { set(out, cat(out, "H")) }; if(str_lt("10", "2")) { set(out, cat(out, "L")) }; if(str_le("10", "10")) { set(out, cat(out, "M")) }; if(str_gt("10", "2")) { set(out, cat(out, "X")) }; return(out) }
 
 Done::
  /[a-z]+/
@@ -892,7 +892,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(out, ""); if(eq("2", "2")) { set(out, cat(:out, "E")) }; if(ne("2", "3")) { set(out, cat(:out, "N")) }; if(gt("10", "2")) { set(out, cat(:out, "G")) }; if(ge("2", "2")) { set(out, cat(:out, "H")) }; if(lt("2", "10")) { set(out, cat(:out, "L")) }; if(le("2", "2")) { set(out, cat(:out, "M")) }; if(gt("2", "10")) { set(out, cat(:out, "X")) }; if(str_gt("2", "10")) { set(out, cat(:out, "S")) }; return(out) }
+ /x/ -> Done { set(out, ""); if(eq("2", "2")) { set(out, cat(out, "E")) }; if(ne("2", "3")) { set(out, cat(out, "N")) }; if(gt("10", "2")) { set(out, cat(out, "G")) }; if(ge("2", "2")) { set(out, cat(out, "H")) }; if(lt("2", "10")) { set(out, cat(out, "L")) }; if(le("2", "2")) { set(out, cat(out, "M")) }; if(gt("2", "10")) { set(out, cat(out, "X")) }; if(str_gt("2", "10")) { set(out, cat(out, "S")) }; return(out) }
 
 Done::
  /[a-z]+/
@@ -906,7 +906,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(out, ""); if(==("2", "2")) { set(out, cat(:out, "E")) }; if(!=("2", "3")) { set(out, cat(:out, "N")) }; if(>("10", "2")) { set(out, cat(:out, "G")) }; if(>=("2", "2")) { set(out, cat(:out, "H")) }; if(<("2", "10")) { set(out, cat(:out, "L")) }; if(<=("2", "2")) { set(out, cat(:out, "M")) }; if(>("2", "10")) { set(out, cat(:out, "X")) }; if(str_gt("2", "10")) { set(out, cat(:out, "S")) }; return(out) }
+ /x/ -> Done { set(out, ""); if(==("2", "2")) { set(out, cat(out, "E")) }; if(!=("2", "3")) { set(out, cat(out, "N")) }; if(>("10", "2")) { set(out, cat(out, "G")) }; if(>=("2", "2")) { set(out, cat(out, "H")) }; if(<("2", "10")) { set(out, cat(out, "L")) }; if(<=("2", "2")) { set(out, cat(out, "M")) }; if(>("2", "10")) { set(out, cat(out, "X")) }; if(str_gt("2", "10")) { set(out, cat(out, "S")) }; return(out) }
 
 Done::
  /[a-z]+/
@@ -925,7 +925,7 @@ SPEC
         source => <<'SPEC',
 fn store(value) { return(local = value) }
 Top::
- /x/ -> Done { return(array(name = "ok", name, =(other, cat(:name, "!")), other, set(third, store("fn")), third, { block = cat(:third, "!"); block }, =(raw, " hi ").trim())) }
+ /x/ -> Done { return(array(name = "ok", name, =(other, cat(name, "!")), other, set(third, store("fn")), third, { block = cat(third, "!"); block }, =(raw, " hi ").trim())) }
 
 Done::
  /[a-z]+/
@@ -941,7 +941,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], copy(array(items)), set(meta, { key => value }), copy(hash(meta)), set(:payload, [value]), payload, =(more, [value, "x"]).count())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], copy(array(items)), set(meta, { key => value }), copy(hash(meta)), set(payload, [value]), payload, =(more, [value, "x"]).count())) }
 
 Done::
  /[a-z]+/
@@ -973,7 +973,7 @@ SPEC
         source => <<'SPEC',
 fn keep(value) { return(fn_out = value) }
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(:name, "!")), other, set(third, keep("fn")), third, set(current, "surface"), current, items = [value], array(items), set(meta, { key => value }), hash(meta), set(array(items_mut), [value]), items_mut += "tail", copy(array(items_mut)), set(hash(meta_mut), { key => value }), meta_mut["extra"] = other, copy(hash(meta_mut)), (items_mut += "last").count(), (meta_mut["last"] = value).count_keys())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(name, "!")), other, set(third, keep("fn")), third, set(current, "surface"), current, items = [value], array(items), set(meta, { key => value }), hash(meta), set(array(items_mut), [value]), items_mut += "tail", copy(array(items_mut)), set(hash(meta_mut), { key => value }), meta_mut["extra"] = other, copy(hash(meta_mut)), (items_mut += "last").count(), (meta_mut["last"] = value).count_keys())) }
 
 Done::
  /[a-z]+/
@@ -987,10 +987,10 @@ SPEC
     {   case   => 'terse_4_3_2_user_function_runtime',
         input  => 'xhello',
         source => <<'SPEC',
-fn normalize(value) { return(trim(:value)) }
-fn words(value) { set(scratch, trim(:value)); return([:scratch, uppercase(:scratch)]) }
+fn normalize(value) { return(trim(value)) }
+fn words(value) { set(scratch, trim(value)); return([scratch, uppercase(scratch)]) }
 Top::
- /x/ -> Done { normalize(" drop "); return(array(normalize(" x "), words(" go ").join_values("|"), words(" a ").count(), :scratch)) }
+ /x/ -> Done { normalize(" drop "); return(array(normalize(" x "), words(" go ").join_values("|"), words(" a ").count(), scratch)) }
 
 Done::
  /[a-z]+/

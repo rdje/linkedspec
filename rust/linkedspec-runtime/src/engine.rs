@@ -815,33 +815,27 @@ impl GeneratedPlanExecutor<'_> {
                                         entry.child_regex_idx,
                                         ctx,
                                     )?;
-                                    ctx.set_retv(child_retv.clone());
                                     ctx.push_action_edge_call_result(
                                         &entry.child_label,
-                                        child_retv,
+                                        child_retv.clone(),
                                     );
                                     let block_result = self.engine.execute_block(block, ctx, label);
                                     ctx.pop_action_edge_call_result();
                                     block_result?;
                                     return_if_rule_returned!();
+                                    ctx.set_retv(child_retv);
                                 } else if entry.child_label == label {
                                     self.engine.execute_block(block, ctx, label)?;
                                     return_if_rule_returned!();
                                 } else {
+                                    self.engine.execute_block(block, ctx, label)?;
+                                    return_if_rule_returned!();
                                     let child_retv = self.execute_action_edge_child_rule(
                                         &entry.child_label,
                                         entry.child_regex_idx,
                                         ctx,
                                     )?;
-                                    ctx.set_retv(child_retv.clone());
-                                    ctx.push_action_edge_call_result(
-                                        &entry.child_label,
-                                        child_retv,
-                                    );
-                                    let block_result = self.engine.execute_block(block, ctx, label);
-                                    ctx.pop_action_edge_call_result();
-                                    block_result?;
-                                    return_if_rule_returned!();
+                                    ctx.set_retv(child_retv);
                                 }
                             } else {
                                 let child_retv = self.execute_action_edge_child_rule(
@@ -1975,15 +1969,15 @@ impl Engine {
                                         entry.child_regex_idx,
                                         ctx,
                                     )?;
-                                    ctx.set_retv(child_retv.clone());
                                     ctx.push_action_edge_call_result(
                                         &entry.child_label,
-                                        child_retv,
+                                        child_retv.clone(),
                                     );
                                     let block_result = self.execute_block(block, ctx, label);
                                     ctx.pop_action_edge_call_result();
                                     block_result?;
                                     return_if_rule_returned!();
+                                    ctx.set_retv(child_retv);
                                 } else if entry.child_label == label {
                                     // A self-recursive code edge such as
                                     // `-> rule[1] { return(...) }` is usually a
@@ -1996,25 +1990,18 @@ impl Engine {
                                     self.execute_block(block, ctx, label)?;
                                     return_if_rule_returned!();
                                 } else {
-                                    // Use child_regex_idx for multi-entrypoint
-                                    // support. The child's return value becomes
-                                    // the parent's `retv` (Runtime Semantics
-                                    // §3.3 / §6.1), readable by the attached
-                                    // code below and the LE-block after the loop.
+                                    // Blocks that do not call the child run before
+                                    // the generated Perl handler dispatches that
+                                    // child. The child return then seeds `retv`
+                                    // for later edges / lifecycle blocks.
+                                    self.execute_block(block, ctx, label)?;
+                                    return_if_rule_returned!();
                                     let child_retv = self.execute_action_edge_child_rule(
                                         &entry.child_label,
                                         entry.child_regex_idx,
                                         ctx,
                                     )?;
-                                    ctx.set_retv(child_retv.clone());
-                                    ctx.push_action_edge_call_result(
-                                        &entry.child_label,
-                                        child_retv,
-                                    );
-                                    let block_result = self.execute_block(block, ctx, label);
-                                    ctx.pop_action_edge_call_result();
-                                    block_result?;
-                                    return_if_rule_returned!();
+                                    ctx.set_retv(child_retv);
                                 }
                             } else {
                                 let child_retv = self.execute_action_edge_child_rule(
@@ -3214,6 +3201,9 @@ impl Engine {
     }
 
     fn scalar_held_array_snapshot(ctx: &RuntimeContext, name: &str) -> Option<Vec<RuntimeValue>> {
+        if ctx.descriptor_scalar_bare_read(name) {
+            return None;
+        }
         if !matches!(ctx.bare_kind(name), Some(RuntimeVarKind::Scalar)) {
             return None;
         }
@@ -3227,6 +3217,9 @@ impl Engine {
         ctx: &RuntimeContext,
         name: &str,
     ) -> Option<Vec<(String, RuntimeValue)>> {
+        if ctx.descriptor_scalar_bare_read(name) {
+            return None;
+        }
         if !matches!(ctx.bare_kind(name), Some(RuntimeVarKind::Scalar)) {
             return None;
         }

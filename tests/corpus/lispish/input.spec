@@ -8,7 +8,7 @@ I {word = []; tail = []; retv = undef; head = undef; has_head = undef}
 
  -> parenthesis       {
    if(is_nonempty(array(word)));
-    if(is_empty(:has_head));
+    if(is_empty(has_head));
      head = join_values("", array(word));
      has_head = 1;
     else();
@@ -17,18 +17,18 @@ I {word = []; tail = []; retv = undef; head = undef; has_head = undef}
     word = [];
    endif();
    retv = call(parenthesis);
-   if(is_empty(:has_head));
-    head = :retv;
+   if(is_empty(has_head));
+    head = retv;
     has_head = 1;
    else();
-    push(tail, :retv);
+    push(array(tail), retv);
    endif()
 }
 
  -> spaces            {
    call(spaces);
    if(is_nonempty(array(word)));
-    if(is_empty(:has_head));
+    if(is_empty(has_head));
      head = join_values("", array(word));
      has_head = 1;
     else();
@@ -45,7 +45,7 @@ I {word = []; tail = []; retv = undef; head = undef; has_head = undef}
 
  -> parenthesis[1]    {
    if(is_nonempty(array(word)));
-    if(is_empty(:has_head));
+    if(is_empty(has_head));
      head = join_values("", array(word));
      has_head = 1;
     else();
@@ -53,11 +53,11 @@ I {word = []; tail = []; retv = undef; head = undef; has_head = undef}
     endif();
    endif();
 
-   if(:has_head);
+   if(has_head);
     if(is_nonempty(array(tail)));
-     return(array(:head, copy(tail)));
+     return(array(head, copy(tail)));
     else();
-     return(array(:head, undef));
+     return(array(head, undef));
     endif();
    else();
     return(array(undef));
@@ -76,7 +76,7 @@ curlyb: /(?<!\\)\{/ /(?<!\\)\}/ I {content = undef}
  -> squotes
  -> curlyb[1]                 {
  content = CAPTURE;
- return(hash("type", "CBRACE", "content", :content))
+ return(hash("type", "CBRACE", "content", content))
 }
 
 spaces: /\s+/               I.return(hash("type", "SPACE", "content", entry_text()))

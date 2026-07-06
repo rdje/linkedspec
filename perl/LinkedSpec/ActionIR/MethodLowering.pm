@@ -4743,8 +4743,8 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return 'do { my $__ls_split_value = '.$source_expr.'; my $__ls_split_delimiter = '.$delimiter_expr.'; (defined($__ls_split_value) && defined($__ls_split_delimiter)) ? [split /\Q$__ls_split_delimiter\E/, $__ls_split_value, -1] : [] }';
  }
  if ($method_call && $method_call->{method} eq 'split_tagged_records') {
-  my $record_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 3, undef);
-  return undef unless $record_args && @$record_args >= 3;
+  my $record_args = $method_call->{args} || [];
+  return undef unless ref($record_args) eq 'ARRAY' && @$record_args >= 3;
 
   my $source_expr = _lower_method_value_expr($record_args->[0], $deps);
   $source_expr = $trim_action_ir_value->($record_args->[0]) unless defined($source_expr) && length($source_expr);

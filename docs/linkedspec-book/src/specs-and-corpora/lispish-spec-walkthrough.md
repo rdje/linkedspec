@@ -223,11 +223,11 @@ The closing parenthesis edge finalizes the current form:
 ```text
 -> parenthesis[1] {
   ...
-  if(:has_head);
+  if(has_head);
    if(is_nonempty(array(tail)));
-    return(array(:head, copy(array(tail))));
+    return(array(head, copy(array(tail))));
    else();
-    return(array(:head, undef));
+    return(array(head, undef));
    endif();
   else();
    return(array(undef));
@@ -237,7 +237,7 @@ The closing parenthesis edge finalizes the current form:
 
 The canonical wrappers matter:
 
-- `:head` means scalar variable `head`.
+- `head` means scalar variable `head`.
 - `array(tail)` means array variable `tail`.
 - `copy(array(tail))` snapshots the tail elements into the returned array shape.
 - `return(array(...))` returns an array payload.

@@ -21,12 +21,12 @@ LX  {
   else();
    entry_tag = "?version_entry:";
   endif();
-  push(array(object_hier), array(:entry_tag, copy(array(capt))));
+  push(array(object_hier), array(entry_tag, copy(array(capt))));
  endif();
 
  if(is_nonempty(array(object_hier)));
   current_object_name = cur_object[1];
-  push(array(vhistory), array("?object:", :current_object_name, copy(array(object_hier))));
+  push(array(vhistory), array("?object:", current_object_name, copy(array(object_hier))));
  endif();
 
  return(array("?ds_vhistory:", copy(array(vhistory))))
@@ -40,14 +40,14 @@ LX  {
    else();
     entry_tag = "?version_entry:";
    endif();
-   push(array(object_hier), array(:entry_tag, copy(array(capt))));
+   push(array(object_hier), array(entry_tag, copy(array(capt))));
    set(array(capt), array());
 
   endif();
 
   if(is_nonempty(array(object_hier)));
    current_object_name = cur_object[1];
-   push(array(vhistory), array("?object:", :current_object_name, copy(array(object_hier))));
+   push(array(vhistory), array("?object:", current_object_name, copy(array(object_hier))));
    set(array(object_hier), array());
   endif();
 
@@ -64,7 +64,7 @@ LX  {
    else();
     entry_tag = "?version_entry:";
    endif();
-   push(array(object_hier), array(:entry_tag, copy(array(capt))));
+   push(array(object_hier), array(entry_tag, copy(array(capt))));
    set(array(capt), array());
   endif();
 }

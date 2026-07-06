@@ -71,7 +71,7 @@ spec_file::
   started = 0
  }
  -> rule_header {
-  if(:started) {
+  if(started) {
    push(array(paragraphs), copy(array(current)));
    set(array(current), array())
   }
@@ -91,7 +91,7 @@ spec_file::
  -> split_marker     { push(split_marker, current) }
  -> comment          { next() }
  LX {
-  if(:started) {
+  if(started) {
    push(array(paragraphs), copy(array(current)))
   }
   return(copy(array(paragraphs)))
@@ -102,7 +102,7 @@ rule_header: /(\w++)[ \t]*(::|:)[ \t]*((?:&|\||\+|\*|\?|OR\+|OR\{[^}]++\}|OR|AND
  I {
   top = 0;
   if(str_eq(entry_group(1), "::")) { top = 1 }
-  return(hash("type", "rule", "label", entry_group(0), "top", :top, "mode", entry_group(2)))
+  return(hash("type", "rule", "label", entry_group(0), "top", top, "mode", entry_group(2)))
  }
 
 # ---- regex literal: `/pattern/` (outer slashes stripped, inner pattern kept) --

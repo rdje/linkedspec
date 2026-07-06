@@ -39,7 +39,7 @@ Token::AND
  /[A-Za-z_]+/
  -> Token[0] {
    text = lowercase(trim(entry_text()));
-   set(hash(meta), set_key(hash(meta), "text", :text));
+   set(hash(meta), set_key(hash(meta), "text", text));
    return(copy(hash(meta)));
  }
 ```
@@ -75,11 +75,11 @@ List::AND
  Item
  -> List[0] {
    retv = call(Item);
-   push(array(items), :retv);
+   push(array(items), retv);
  }
  -> List[1] {
    retv = call(Item);
-   push(array(items), :retv);
+   push(array(items), retv);
    return(set_key(hash(meta), "items", copy(array(items))));
  }
 ```
@@ -115,8 +115,8 @@ Action bodies should use helper statements:
 
 ```text
 name = entry_text();
-push(array(items), :retv);
-return(hash("kind", "name", "value", :name));
+push(array(items), retv);
+return(hash("kind", "name", "value", name));
 ```
 
 Prefer those forms over raw Perl assignment, push, and return statements in new examples.
@@ -132,7 +132,7 @@ Example:
 ```text
 /[A-Za-z_]+/ -> Name[0]
   .set(text, lowercase(trim(entry_text())))
-  .return(hash("kind", "name", "text", :text));
+  .return(hash("kind", "name", "text", text));
 ```
 
 This lowers through the same helper surface as the block form:
@@ -141,7 +141,7 @@ This lowers through the same helper surface as the block form:
 /[A-Za-z_]+/
 -> Name[0] {
   text = lowercase(trim(entry_text()));
-  return(hash("kind", "name", "text", :text));
+  return(hash("kind", "name", "text", text));
 }
 ```
 
@@ -152,7 +152,7 @@ Action-edge continuations are also portable when they stay edge-scoped:
 ```text
 -> Item .push
 -> Item .push(items)
--> Item .if(:on).push(Item, items).else().return_undef().endif()
+-> Item .if(on).push(Item, items).else().return_undef().endif()
 -> Item[1] .return(array("?items:", copy(array(Item))))
 ```
 
@@ -166,8 +166,8 @@ Action edges can also use receiver-fluent attached `when/otherwise` blocks when 
 clearer than a full structured block:
 
 ```text
--> Item.when(is_defined(:retv)) {
-  return(:retv)
+-> Item.when(is_defined(retv)) {
+  return(retv)
 }.otherwise {
   return("missing")
 }
@@ -176,8 +176,8 @@ clearer than a full structured block:
 The no-dot fallback tail is equivalent:
 
 ```text
--> Item.when(is_defined(:retv)) {
-  return(:retv)
+-> Item.when(is_defined(retv)) {
+  return(retv)
 } otherwise {
   return("missing")
 }
@@ -189,7 +189,7 @@ They also accept compact receiver chains for short ordered lifecycle statement l
 ```text
 token : /[A-Za-z_]\w*/
  I.set(text, lowercase(entry_text()))
-  .return(hash("kind", "token", "text", :text))
+  .return(hash("kind", "token", "text", text))
 ```
 
 That form is equivalent to `I { text = lowercase(entry_text()); return(...) }`: each method in the
@@ -210,7 +210,7 @@ When the parent needs to inspect or reshape the child result, use the explicit h
 ```text
 -> Parent[0] {
   retv = call(Child);
-  return(hash("kind", "parent", "child", :retv));
+  return(hash("kind", "parent", "child", retv));
 }
 ```
 
@@ -235,9 +235,9 @@ semantic_annotation: /@(\w+)\s*:\s*/
 -> semantic_annotation | grammar_rule {
   BACKTRACK();
   c = capture_slice();
-  substr(:c, "\s*$", "", o);
-  substr(:c, "^\"|\"$", "", go);
-  return(array("semantic_annotation", array(entry_group(0), :c)));
+  substr(c, "\s*$", "", o);
+  substr(c, "^\"|\"$", "", go);
+  return(array("semantic_annotation", array(entry_group(0), c)));
 }
 ```
 
@@ -269,7 +269,7 @@ Wrapper::AND
  => Header
  => Body
  => Trailer
- LX { return(:retv); }
+ LX { return(retv); }
 ```
 
 Use this family when the rule needs a child-rule call as part of the body rather than one local regex-slot action.
@@ -280,7 +280,7 @@ In new public examples, prefer the more explicit child-result pattern unless the
 
 ```text
 retv = call(Child);
-push(array(children), :retv);
+push(array(children), retv);
 ```
 
 That pattern makes the dataflow visible.
@@ -338,7 +338,7 @@ Delimited::AND
  /\}/
  -> Delimited[2] {
    body = capture_from(body_start);
-   return(hash("kind", "delimited", "body", :body));
+   return(hash("kind", "delimited", "body", body));
  }
 ```
 
@@ -357,7 +357,7 @@ Top::
  }
  /x/
  E {
-   return(hash("out", :out, "ignored", :ignored));
+   return(hash("out", out, "ignored", ignored));
  }
 ```
 
@@ -414,7 +414,7 @@ Items:*
    item = entry_text();
  }
  IT {
-   push(array(items), :item);
+   push(array(items), item);
  }
  E {
    return(hash("kind", "items", "items", copy(array(items))));
@@ -468,7 +468,7 @@ Use this as the default decision guide:
 | Initialize metadata shared by return paths | `I { meta = { "kind" => "node" } }` |
 | Transform one matched token | `-> Rule[index] { ... }` |
 | Capture and reshape one child result | `retv = call(Child)` inside an action body |
-| Append repeated child results | `push(array(items), :retv)` inside action/iteration logic |
+| Append repeated child results | `push(array(items), retv)` inside action/iteration logic |
 | Mark a grammar boundary | `@mark(name)` or `@capture_slice` at the grammar slot |
 | Move a boundary from code | `mark_here(name)` or `start_capture_slice()` inside a block |
 | Return a shaped optional fallback | `LX { return(...) }`, used sparingly |
@@ -488,7 +488,7 @@ Block::AND
  /\}/
  -> Block[2] {
    body = capture_from(body_start);
-   set(hash(meta), set_key(hash(meta), "body", :body));
+   set(hash(meta), set_key(hash(meta), "body", body));
    set(hash(meta), set_key(hash(meta), "body_start_line", mark_line(body_start)));
    return(copy(hash(meta)));
  }
@@ -515,12 +515,12 @@ Pair::AND
  Value
  -> Pair[0] {
    retv = call(Name);
-   lhs = :retv;
+   lhs = retv;
  }
  -> Pair[2] {
    retv = call(Value);
-   rhs = :retv;
-   return(hash("kind", "pair", "lhs", :lhs, "rhs", :rhs));
+   rhs = retv;
+   return(hash("kind", "pair", "lhs", lhs, "rhs", rhs));
  }
 ```
 

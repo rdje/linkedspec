@@ -725,6 +725,7 @@ sub _bare_type_memory_reserved_name {
 sub _collect_bare_identifier_type_memory {
  my ($rule_ir) = @_;
  return {} unless ref($rule_ir) eq 'HASH';
+ my $label = defined($rule_ir->{label}) ? $rule_ir->{label} : '';
 
  my @raw_blocks;
  my $code_blocks = (ref($rule_ir->{code_blocks}) eq 'HASH') ? $rule_ir->{code_blocks} : {};
@@ -750,6 +751,19 @@ sub _collect_bare_identifier_type_memory {
   my $source = LinkedSpec::ActionIR::MethodLowering::_actionir_ast_value_source_expr($node);
   $source = $node->{source} if !(defined($source) && length($source)) && defined($node->{source});
   return $source
+ };
+ my $strip_decl_scope_arg = sub {
+  my ($args, $source_cb) = @_;
+  return [] unless ref($args) eq 'ARRAY';
+  my @effective = @$args;
+  return \@effective unless @effective >= 2;
+  my $first = $source_cb->($effective[0]);
+  my $second = $source_cb->($effective[1]);
+  if (defined($first) && defined($label) && $first eq $label
+      && defined(_bare_symbol_kind_from_decl_type($second))) {
+   shift @effective;
+  }
+  return \@effective;
  };
  my $record_ast_target = sub {
   my ($target_node, $value_node) = @_;
@@ -822,10 +836,54 @@ sub _collect_bare_identifier_type_memory {
   if ($kind eq 'call') {
    my $name = $node->{name} // '';
    my $args = $node->{args} || [];
+   if ($name eq 'declare' && ref($args) eq 'ARRAY' && @$args >= 1) {
+    my $effective_args = $strip_decl_scope_arg->($args, $node_source_expr);
+    my $type = $node_source_expr->($effective_args->[0]);
+    my $kind = _bare_symbol_kind_from_decl_type($type);
+    if (defined($kind)) {
+     for my $arg (@{$effective_args}[1 .. $#$effective_args]) {
+      my $entry = $node_source_expr->($arg);
+      my $binding = _parse_declare_binding_entry($entry);
+      my $decl_name = (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'assign_scalar')
+       ? $arg->{name}
+       : (ref($binding) eq 'HASH') ? $binding->{name} : _trim_action_ir_value($entry);
+      $record->($decl_name, $kind);
+      $collect_ast_type_node->($arg->{value})
+       if ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'assign_scalar';
+     }
+     return;
+    }
+   }
+   if ($name =~ /^declare_(?:s|scalar|a|array|h|hash)$/o && ref($args) eq 'ARRAY') {
+    my $decl_type = $name;
+    $decl_type =~ s/^declare_//o;
+    my $kind = _bare_symbol_kind_from_decl_type($decl_type);
+    if (defined($kind)) {
+     my $effective_args = $strip_decl_scope_arg->($args, $node_source_expr);
+     for my $arg (@$effective_args) {
+      my $entry = $node_source_expr->($arg);
+      my $binding = _parse_declare_binding_entry($entry);
+      my $decl_name = (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'assign_scalar')
+       ? $arg->{name}
+       : (ref($binding) eq 'HASH') ? $binding->{name} : _trim_action_ir_value($entry);
+      $record->($decl_name, $kind);
+      $collect_ast_type_node->($arg->{value})
+       if ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'assign_scalar';
+     }
+     return;
+    }
+   }
    if (($name eq '=' || $name eq 'set' || ($name eq 'assign' && (($node->{source} // '') !~ /^\s*assign\s*\(/o)))
        && ref($args) eq 'ARRAY' && @$args == 2) {
     $record_ast_target->($args->[0], $args->[1]);
     $collect_ast_type_node->($args->[1]);
+    return;
+   }
+   if (($name eq 'array' || $name eq 'hash' || $name eq 'scalar')
+       && ref($args) eq 'ARRAY'
+       && @$args == 1
+       && ref($args->[0]) eq 'HASH'
+       && ($args->[0]{kind} // '') eq 'variable') {
     return;
    }
    if (($name eq 'push' || $name eq 'push_value' || $name eq 'push_nonempty' || $name eq 'split') && ref($args) eq 'ARRAY' && @$args) {
@@ -851,7 +909,46 @@ sub _collect_bare_identifier_type_memory {
    $collect_ast_type_node->($node->{receiver});
    foreach my $call (@{$node->{calls} || []}) {
     next unless ref($call) eq 'HASH';
-    $collect_ast_type_node->($_) for @{$call->{args} || []};
+    my $method = $call->{method} // '';
+    my $args = $call->{args} || [];
+    if ($method eq 'declare' && ref($args) eq 'ARRAY' && @$args >= 1) {
+     my $effective_args = $strip_decl_scope_arg->($args, $node_source_expr);
+     my $type = $node_source_expr->($effective_args->[0]);
+     my $kind = _bare_symbol_kind_from_decl_type($type);
+     if (defined($kind)) {
+      for my $arg (@{$effective_args}[1 .. $#$effective_args]) {
+       my $entry = $node_source_expr->($arg);
+       my $binding = _parse_declare_binding_entry($entry);
+       my $name = (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'assign_scalar')
+        ? $arg->{name}
+        : (ref($binding) eq 'HASH') ? $binding->{name} : _trim_action_ir_value($entry);
+       $record->($name, $kind);
+       $collect_ast_type_node->($arg->{value})
+        if ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'assign_scalar';
+      }
+      next;
+     }
+    }
+    if ($method =~ /^declare_(?:s|scalar|a|array|h|hash)$/o && ref($args) eq 'ARRAY') {
+     my $decl_type = $method;
+     $decl_type =~ s/^declare_//o;
+     my $kind = _bare_symbol_kind_from_decl_type($decl_type);
+     if (defined($kind)) {
+      my $effective_args = $strip_decl_scope_arg->($args, $node_source_expr);
+      for my $arg (@$effective_args) {
+       my $entry = $node_source_expr->($arg);
+       my $binding = _parse_declare_binding_entry($entry);
+       my $name = (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'assign_scalar')
+        ? $arg->{name}
+        : (ref($binding) eq 'HASH') ? $binding->{name} : _trim_action_ir_value($entry);
+       $record->($name, $kind);
+       $collect_ast_type_node->($arg->{value})
+        if ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'assign_scalar';
+      }
+      next;
+     }
+    }
+    $collect_ast_type_node->($_) for @$args;
    }
    return;
   }
@@ -918,13 +1015,15 @@ sub _collect_bare_identifier_type_memory {
    next unless ref($args) eq 'ARRAY';
 
    if ($method eq 'declare') {
-    my $type = _trim_action_ir_value($args->[0]);
+    my $effective_args = $strip_decl_scope_arg->($args, sub { _trim_action_ir_value($_[0]) });
+    my $type = _trim_action_ir_value($effective_args->[0]);
     my $kind = _bare_symbol_kind_from_decl_type($type);
     next unless defined($kind);
-    for my $arg (@{$args}[1 .. $#$args]) {
-     my $name = _trim_action_ir_value($arg);
-     $record->($name, $kind);
-    }
+    for my $arg (@{$effective_args}[1 .. $#$effective_args]) {
+    my $binding = _parse_declare_binding_entry($arg);
+    my $name = (ref($binding) eq 'HASH') ? $binding->{name} : _trim_action_ir_value($arg);
+    $record->($name, $kind);
+   }
    next;
   }
   if ($method =~ /^declare_(?:s|scalar|a|array|h|hash)$/o) {
@@ -932,8 +1031,10 @@ sub _collect_bare_identifier_type_memory {
     $decl_type =~ s/^declare_//o;
     my $kind = _bare_symbol_kind_from_decl_type($decl_type);
     next unless defined($kind);
-    for my $arg (@$args) {
-     my $name = _trim_action_ir_value($arg);
+    my $effective_args = $strip_decl_scope_arg->($args, sub { _trim_action_ir_value($_[0]) });
+    for my $arg (@$effective_args) {
+     my $binding = _parse_declare_binding_entry($arg);
+     my $name = (ref($binding) eq 'HASH') ? $binding->{name} : _trim_action_ir_value($arg);
      $record->($name, $kind);
     }
     next;

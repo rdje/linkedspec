@@ -3,8 +3,8 @@ top::            I {blocks = []; retv = undef}
  -> comments
  -> begin_end_blocks          {
 	                       retv = call(begin_end_blocks);
-	                       if(:retv);
-	                         push(array(blocks), :retv);
+	                       if(retv);
+	                         push(array(blocks), retv);
 	                       endif()
 		              }
 
@@ -17,7 +17,7 @@ LX {
    }
 
 
-begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {block_namei = entry_text(); retv = undef; assigns = []; keyval_pairs = []; print("begin_end_blocks: BEGIN   (", entry_text(), "\n"); substr(:block_namei, /^.*\s+/, "", o)}
+begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {block_namei = entry_text(); retv = undef; assigns = []; keyval_pairs = []; print("begin_end_blocks: BEGIN   (", entry_text(), "\n"); substr(block_namei, /^.*\s+/, "", o)}
 
  -> comments
  -> anyvariable                       {
@@ -25,17 +25,17 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {block_namei = entry_text(); 
                                          push(array(assigns), copy(array(keyval_pairs)));
                                        endif();
 	                                       retv = call(anyvariable);
-                                       set(array(keyval_pairs), array(:retv))
+                                       set(array(keyval_pairs), [retv])
                                       }
 
  -> multiline_value                   {push(array(keyval_pairs), call(multiline_value))}
  -> singleline_value                  {push(array(keyval_pairs), call(singleline_value))}
  -> begin_end_blocks[1]               {
                                        block_namee = match_text();
-	                                       substr(:block_namee, /^.*\s+/, "", o);
+	                                       substr(block_namee, /^.*\s+/, "", o);
 
-                                       if(str_ne(:block_namee, :block_namei));
-                                         print("(simenv) -E- BEGIN Block Name '", :block_namei, "' and END Block name '", :block_namee, "' do not match.\n");
+                                       if(str_ne(block_namee, block_namei));
+                                         print("(simenv) -E- BEGIN Block Name '", block_namei, "' and END Block name '", block_namee, "' do not match.\n");
                                          print("             BEGIN statement is on line ", cursor_line(), " while END statement is on line ", match_line(), "\n");
 	                                         exit_now();
                                        endif();
@@ -45,7 +45,7 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {block_namei = entry_text(); 
                                        endif();
                                        print("begin_end_blocks: END    (", match_text(), "\n");
                                        if(is_nonempty(array(assigns)));
-	                                         return(hash("name", :block_namei, "content", copy(array(assigns))));
+	                                         return(hash("name", block_namei, "content", copy(array(assigns))));
                                        else();
                                          return_undef();
                                        endif()
@@ -57,9 +57,9 @@ begin_end_blocks: /\bBEGIN\s+\w+/ /\bEND\s+\w+/  I {block_namei = entry_text(); 
       
 anyvariable: /\S+\s*(?==)/ I {
 	                                       variable_name = entry_text();
-	                                       substr(:variable_name, /\s+$/, "", o);
-	                                       print("anyvariable: VARIABLE NAME (", :variable_name, ")\n");
-		                                       return(hash("type", "anyvariable", "content", :variable_name))
+	                                       substr(variable_name, /\s+$/, "", o);
+	                                       print("anyvariable: VARIABLE NAME (", variable_name, ")\n");
+		                                       return(hash("type", "anyvariable", "content", variable_name))
 			                      }
 
 multiline_value: /=\s*\{/    /\}/ I {print("multiline_value: START\n")}
@@ -93,7 +93,7 @@ singleline_value:    /=/ /(?<!\\)\n|\b(?=END\s+\w+)/ I {matches = []; last_pos =
 	 endif()
    }
 
- LS {shift = num_sub(match_start_pos(), :last_pos); if(num_gt(:shift, 0)); push(array(matches), hash("type", "verbatim", "content", input_slice(:last_pos, :shift))); endif()}
+ LS {shift = num_sub(match_start_pos(), last_pos); if(num_gt(shift, 0)); push(array(matches), hash("type", "verbatim", "content", input_slice(last_pos, shift))); endif()}
  LX {print("(simenv) -E- End of Line not found for *singleline_value* starting on line ", capture_slice_line(), "\n");
      exit_now()}
 
@@ -120,7 +120,7 @@ dquotes: /"/ /(?<!\\)"/                     I {print("dquotes: START\n"); matche
            return(hash("type", "dquotes", "content", undef));
          endif()}
 
- LS {shift = num_sub(match_start_pos(), :last_pos); if(num_gt(:shift, 0)); push(array(matches), input_slice(:last_pos, :shift)); endif()}
+ LS {shift = num_sub(match_start_pos(), last_pos); if(num_gt(shift, 0)); push(array(matches), input_slice(last_pos, shift)); endif()}
  LX {print("(simenv) -E- Closing parenthesis not found for *dquotes* starting on line ", capture_slice_line(), "\n");
      exit_now()}
 
@@ -148,7 +148,7 @@ perl_dquotes: /qq\(/  /\)/                  I {print("perl_dquotes: START\n"); m
            return(hash("type", "dquotes", "content", undef));
          endif()}
 
- LS {shift = num_sub(match_start_pos(), :last_pos); if(num_gt(:shift, 0)); push(array(matches), input_slice(:last_pos, :shift)); endif()}
+ LS {shift = num_sub(match_start_pos(), last_pos); if(num_gt(shift, 0)); push(array(matches), input_slice(last_pos, shift)); endif()}
  LX {print("(simenv) -E- Closing parenthesis not found for *perl_dquotes* starting on line ", capture_slice_line(), "\n");
      exit_now()}
 
@@ -166,7 +166,7 @@ command_substitution: /`/  /(?<!\\)`/       I {print("command_substitution: STAR
                                                endif()
 				              }
 
- LS {shift = num_sub(match_start_pos(), :last_pos); if(num_gt(:shift, 0)); push(array(matches), input_slice(:last_pos, :shift)); endif()}
+ LS {shift = num_sub(match_start_pos(), last_pos); if(num_gt(shift, 0)); push(array(matches), input_slice(last_pos, shift)); endif()}
  LX {print("(simenv) -E- Unmatched back-tick for *command_substitution* starting on line ", capture_slice_line(), "\n");
      exit_now()}
 
@@ -182,7 +182,7 @@ perl_command_substitution: /qx\(/  /\)/     I {print("perl_command_substitution:
 	   return(hash("type", "command_substitution", "content", undef));
 	 endif()}
 
- LS {shift = num_sub(match_start_pos(), :last_pos); if(num_gt(:shift, 0)); push(array(matches), input_slice(:last_pos, :shift)); endif()}
+ LS {shift = num_sub(match_start_pos(), last_pos); if(num_gt(shift, 0)); push(array(matches), input_slice(last_pos, shift)); endif()}
  LX {print("(simenv) -E- Closing parenthesis not found for *perl_command_substitution* starting on line ", capture_slice_line(), "\n");
      exit_now()}
  
@@ -201,9 +201,9 @@ bvariable_substitution: /(?<!\\)\$\{/ /\}/  I {print("bvariable_substitution: ST
 
 variable_substitution: /(?<!\\)\$\w+/       I {
 	                                       variable_name = entry_text();
-	                                       substr(:variable_name, /^\$/, "", o);
-	                                       print("variable_substitution: (", :variable_name, ")\n");
-					       return(hash("type", "variable_substitution", "content", :variable_name))
+	                                       substr(variable_name, /^\$/, "", o);
+	                                       print("variable_substitution: (", variable_name, ")\n");
+					       return(hash("type", "variable_substitution", "content", variable_name))
 				              }
 
 curlybrace: /\{/   /\}/                     I {print("curlybrace: OPENING Brace\n")}
@@ -222,4 +222,4 @@ parenthesis: /\(/   /\)/                    I {print("parenthesis: OPENING Paren
      exit_now()}
 
 
-comments: /#.*\n/                           I {comment_text = entry_text(); substr(:comment_text, /\n$/, "", o); print("comments: <", :comment_text, ">\n")}
+comments: /#.*\n/                           I {comment_text = entry_text(); substr(comment_text, /\n$/, "", o); print("comments: <", comment_text, ">\n")}

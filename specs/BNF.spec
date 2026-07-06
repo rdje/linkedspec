@@ -17,27 +17,27 @@ description::			I {print("HELLO\n")}
  
 construction_start:	/[a-zA-Z_]\w*\s*->/	I {
 	text = entry_text();
-	substr(:text, "\\s*->$", "", o);
-	print("(construction_start)         -I- seen(", :text, ")\n")
+	substr(text, "\\s*->$", "", o);
+	print("(construction_start)         -I- seen(", text, ")\n")
 }
 
 node: 			/[a-zA-Z_]\w*/		I {print("(node)         -I- <", entry_text(), ">\n")}
 dquote_str:		/"[^"]+"/		I {
 	text = entry_text();
-	substr(:text, "^(?:\")|(?:\")$", "", go);
-	print("(dquote_str)         -I- seen(", :text, ")\n")
+	substr(text, "^(?:\")|(?:\")$", "", go);
+	print("(dquote_str)         -I- seen(", text, ")\n")
 }
 
 squote_str:		/'[^']+?'/		I {
 	text = entry_text();
-	substr(:text, "^'|'$", "", go);
-	print("(squote_str)         -I- seen(", :text, ")\n")
+	substr(text, "^'|'$", "", go);
+	print("(squote_str)         -I- seen(", text, ")\n")
 }
 
 regex:			/\/.+\//		I {
 	text = entry_text();
-	substr(:text, "^/|/$", "", go);
-	print("(regex)         -I- seen#", :text, "#\n")
+	substr(text, "^/|/$", "", go);
+	print("(regex)         -I- seen#", text, "#\n")
 }
 
 group: 			/\(/ /\)/		I {print("(group)        -I-  ****************************************** Entering\n")}

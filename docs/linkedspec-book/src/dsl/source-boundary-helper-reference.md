@@ -223,7 +223,7 @@ Pair::AND
  -> Pair[4] {
    mark_match_start(close_start);
    return(hash(
-     "left", :left,
+     "left", left,
      "right", capture_between(right_start, close_start)
    ))
  }
@@ -247,8 +247,8 @@ Body::AND
  -> Body[4] { second = capture_take(); start_capture_slice_from(body_start) }
  -> Body[6] {
    return(hash(
-     "first", :first,
-     "second", :second,
+     "first", first,
+     "second", second,
      "whole_body", capture_slice()
    ))
  }

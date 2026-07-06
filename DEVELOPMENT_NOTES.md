@@ -1,6 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.15.2.4 — source migration stress-tested the bare-read seams):
+  The current `:name` to bare-read migration was output-preserving, but only after preserving several boundaries
+  that are easy to collapse accidentally. Parser-backed `set(...)` can surface as an internal `assign(...)` AST
+  call; when reconstructing control-flow value sources, normalize that internal name back to `set(...)` unless the
+  user source was explicitly `assign(...)`. Do not route `split_tagged_records(source, ...)` through optional-scope
+  normalization: its first bare argument is the data source, not a scope label. Fluent
+  `.return(array_copy(...))`, `.return(hash_copy(...))`, and `.return(copy(...))` are general payload returns and
+  must not get label-injected. On Rust action edges, `call(child)` may need the child return before an attached
+  block runs, but publishing `retv`/descriptor tags must wait until the block completes normally; otherwise EBNF
+  action blocks observe the current header as `retv` too early. Descriptor scalar bare reads may coexist with a
+  same-name aggregate accumulator: bare `rule` can read the descriptor scalar while `array(rule)` and
+  `flat_array(rule)` still consume aggregate storage. Finally, `array(retv)` is an aggregate wrapper/read; use
+  `[retv]` for a one-element scalar array.
+
 - 2026-07-06 (REPO-HYGIENE.2 — `.gitignore` cannot hide a tracked gitlink):
   `.claude/projects/` was straightforward untracked local agent state, but `rgx` was a tracked `160000` gitlink in
   the parent repo. A `.gitignore` entry does not apply to tracked paths and should not be used for real

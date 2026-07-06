@@ -314,7 +314,7 @@ Parent::AND
  }
  /child-anchor/ -> Parent[0] {
    retv = call(Child);
-   push(array(children), :retv);
+   push(array(children), retv);
    return(hash("kind", "parent", "children", copy(array(children))));
  }
 ```
@@ -370,13 +370,13 @@ Record::AND
  => Header
  => Body
  => Trailer
- LX { return(:retv); }
+ LX { return(retv); }
 ```
 
 Same-line packing is also supported:
 
 ```text
-Record::AND I { retv = undef; } => Header => Body => Trailer LX { return(:retv); }
+Record::AND I { retv = undef; } => Header => Body => Trailer LX { return(retv); }
 ```
 
 Prefer the multiline form in public documentation and new specs. It makes the parser-step order visible and leaves room to explain why each child rule exists.
@@ -399,7 +399,7 @@ Field::AND
  I { retv = undef; }
  /field\s+/ -> Field[0] {
    retv = call(Name);
-   return(hash("kind", "field", "name", :retv));
+   return(hash("kind", "field", "name", retv));
  }
 
 Name:

@@ -9,7 +9,7 @@ For the method-by-method public reference, read [Value, Container, and Flow Help
 The core container helpers are:
 
 ```text
-:name
+name
 array(items)
 hash(meta)
 ```
@@ -49,7 +49,7 @@ Use this convention when the rule name is the best name for the collection. If a
 
 ```text
 push(Child, children)
-push(array(children), :child)
+push(array(children), child)
 push_nonempty(array(children), trim(capture_slice()))
 ```
 
@@ -99,13 +99,13 @@ Example:
 
 ```text
 child = call(Child);
-push(array(items), :child);
+push(array(items), child);
 ```
 
 Do not use whole-array assignment when you mean append.
 
 ```text
-set(array(items), array(:child));
+set(array(items), array(child));
 ```
 
 That replaces the whole array. It does not append to it.
@@ -118,7 +118,7 @@ Examples:
 
 ```text
 return(hash("kind", "token", "text", entry_text()));
-return(array("?node:", :name, copy(array(children))));
+return(array("?node:", name, copy(array(children))));
 return({ "kind" => "token", "text" => entry_text(), "tags" => [tag, true] });
 ```
 
@@ -153,12 +153,12 @@ set(array(items), [value]);
 set(hash(meta), { field => value });
 ```
 
-Use the scalar-slot shorthand when the source should visibly read or target the scalar slot. A scalar slot may hold
-an array or hash value:
+Use a bare working variable when the source should visibly read the current value or when the target should bind the
+typed RHS value. A bare variable may hold an array or hash value:
 
 ```text
-set(:payload, [value]);
-return(:payload);
+set(payload, [value]);
+return(payload);
 ```
 
 `array(name)` and `hash(name)` are typed views/snapshots at use sites. When `name` currently holds an array or hash
@@ -198,7 +198,7 @@ raw.trim().split("-").trim_each().filter_nonempty()
 raw.trim().split("-").lowercase_each().join_values("_")
 score.abs().ceil().add(2).clamp(0, 10)
 count(array(parts)).gt(0)
-split_tagged_records(:identifier_list, /\s*,\s*/o, "?node:", :type_name)
+split_tagged_records(identifier_list, /\s*,\s*/o, "?node:", type_name)
 ```
 
 This keeps the action code declarative. A reader can tell whether you are copying, flattening, joining, or shaping repeated tagged rows without unpacking raw Perl syntax.
@@ -218,7 +218,7 @@ selected helper family consumes the yielded value.
 Hash helpers make metadata shaping explicit:
 
 ```text
-set(hash(meta), hash("kind", "rule", "name", :name));
+set(hash(meta), hash("kind", "rule", "name", name));
 set_key(meta, "line", entry_line());
 set(hash(meta), merge_hash(hash(meta), hash("source", "spec")));
 public_fields = meta.drop_keys("debug").sorted_keys().join_values(",");
@@ -233,8 +233,8 @@ LinkedSpec supports structured control-flow helpers so rules do not have to fall
 Typical shape:
 
 ```text
-if(is_nonempty(:name));
-  return(hash("kind", "named", "name", :name));
+if(is_nonempty(name));
+  return(hash("kind", "named", "name", name));
 else();
   return(hash("kind", "anonymous"));
 endif();
@@ -243,7 +243,7 @@ endif();
 Attached switch flow is useful when one value drives multiple cases:
 
 ```text
-switch(:kind) {
+switch(kind) {
   case("word") { return(hash("kind", "word", "text", entry_text())) }
   case("space") { return(hash("kind", "space", "text", entry_text())) }
   default { return(hash("kind", "other", "text", entry_text())) }
@@ -260,7 +260,7 @@ Token::
    text = entry_group(0);
    return(hash(
      "kind", "token",
-     "text", :text,
+     "text", text,
      "line", entry_line(),
      "col", entry_col()
    ));

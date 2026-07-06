@@ -500,11 +500,11 @@ direct_segment : '[' quoted_string ']'
 nested_assignment : direct_access '=' expr
 ```
 
-The base `name` is a working scalar that holds a structured array/hash payload.
+The base `name` is a working value that holds a structured array/hash payload.
 Quoted string segments (`["field"]` or `['field']`) are hash-key reads. Numeric
 segments and helper/value expressions (`[0]`, `[i]`, `[add(1, 2)]`) are
 array-index reads. Non-reserved bare path atoms such as `[i]` are also scalar
-array-index reads, equivalent to `[i]`. Primitive literals and engine
+array-index reads of working variable `i`. Primitive literals and engine
 locals are not claimed as bare path atoms.
 
 When `direct_access` is used as `nested_assignment`, the base value is mutated only if every intermediate
@@ -512,17 +512,16 @@ container already exists and has the required shape. The final hash key may be c
 replace an existing element or append exactly at the current length. Missing intermediates, wrong shapes, and
 array gaps yield `undef` in value positions.
 
-Scalar-slot shorthand:
+Bare scalar reads and typed assignment:
 
 ```text
-:name                         — read scalar slot name, equivalent to :name
-set(:name, [value])            — assign the array payload to scalar slot name
+name                         — read working variable name in scalar value positions
+set(name, [value])            — bind the array payload as the typed value of name
 ```
 
-Use the shorthand when the value must visibly be a scalar slot but the full
-`:name` wrapper is too noisy. Bare direct-shape assignment now binds the typed
-value to the bare variable: `set(name, [value])` stores an array value in
-`name`, while `set(:name, [value])` targets the explicit scalar slot spelling.
+Use the bare spelling when the value must visibly come from a working variable.
+Bare direct-shape assignment binds the typed value to the bare variable:
+`set(name, [value])` stores an array value in `name`.
 Use `set(array(name), ...)` or `set(hash(name), ...)` only when aggregate
 working storage is intended.
 
@@ -533,7 +532,6 @@ items = []                  — bind an array value to items
 meta = {}                   — bind a hash value to meta
 set(name, value)            — helper form of assignment
 return(name)                — read and return a scalar working variable
-:name                       — explicit scalar-slot read shorthand
 ```
 
 ### 7.2 Scalar Helpers
@@ -557,8 +555,8 @@ replace_substr(s, old, new)     — literal string replacement
 rm_prefix(s, prefix)            — remove prefix
 rm_suffix(s, suffix)            — remove suffix
 substr(s, start, len?)          — substring from zero-based start
-substr(:target, /re/, repl, flags)
-regex_subst(:target, /re/, repl, flags)
+substr(target, /re/, repl, flags)
+regex_subst(target, /re/, repl, flags)
                         — regex substitution mutating a scalar target
 string_expr.trim().lowercase()
                         — receiver-dot string value chain over compatible pure scalar helpers
@@ -605,7 +603,7 @@ is_empty(arr)           — true if array/hash is empty
 is_nonempty(arr)        — true if array/hash has elements
 join_values(delim, arr) — join array elements with delimiter
 split(s, delim)         — split string into array
-split(array(target), :source, delim)
+split(array(target), source, delim)
                         — replace target array with split source pieces
 split_each(arr, delim)  — split each element
 trim_each(arr)          — trim each element
@@ -785,9 +783,9 @@ composite expressions. Marker-style `if` is implemented on the Perl reference an
 
 ```
 I {
- if(matches(:value, /^yes$/));
+ if(matches(value, /^yes$/));
  result = "confirmed";
- elseif(matches(:value, /^no$/));
+ elseif(matches(value, /^no$/));
  result = "rejected";
  else();
  result = "unknown";
@@ -799,7 +797,7 @@ Inline-composite `if(...)` and `switch(...)` are portable value expressions in s
 
 ```
 E {
- return(if(is_nonempty(:type),
+ return(if(is_nonempty(type),
    "typed",
    else("missing")
  ))
@@ -808,7 +806,7 @@ E {
 
 ```
 E {
- return(switch(:type,
+ return(switch(type,
    case("regex", "regular expression"),
    case("edge", "edge"),
    default("other")
@@ -874,13 +872,13 @@ DemoParser::
  I  { results = [] }
  LS { retv = undef }
  /pattern1/ -> Child { retv = call(Child) }
- LE { if(is_defined(:retv)); push(array(results), :retv); endif() }
+ LE { if(is_defined(retv)); push(array(results), retv); endif() }
  E  { return(array("?result:", copy(array(results)))) }
 
 Child::
  /hello[ \t]+(\w+)/
  I { name = entry_group(0) }
- E { return(:name) }
+ E { return(name) }
 
 SecondChild:OR+
  /(?:\w+)/

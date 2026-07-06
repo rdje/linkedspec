@@ -37,15 +37,15 @@ positions. Avoid both raw declaration code and `declare(...)` in new examples.
 
 ## Declarations are optional: working variables auto-exist
 
-You do **not** have to `declare(...)` a working variable before using it. A variable referenced through a typed aggregate wrapper — `array(NAME)` / `hash(NAME)` — or through the scalar-slot shorthand `:NAME` **auto-exists**: the engine supplies its declaration automatically, taking the kind from the wrapper or shorthand (`:NAME` → scalar, `array` → array, `hash` → hash). Both of these behave the same:
+You do **not** have to `declare(...)` a working variable before using it. A variable referenced through a typed aggregate wrapper — `array(NAME)` / `hash(NAME)` — or through a bare scalar read/target position **auto-exists**: the engine supplies its declaration automatically, taking the kind from the wrapper or type-implying position (`NAME` in scalar positions → scalar, `array` → array, `hash` → hash). Both of these behave the same:
 
 ```text
 # explicit declaration (still fully supported)
 I { declare(scalar, count) }
--> Item[0] { count = num_add(coalesce(:count, 0), 1) }
+-> Item[0] { count = num_add(coalesce(count, 0), 1) }
 
 # auto-existing — no declare needed
--> Item[0] { count = num_add(coalesce(:count, 0), 1) }
+-> Item[0] { count = num_add(coalesce(count, 0), 1) }
 ```
 
 An auto-existing variable is a fresh **per-invocation** working value — one for each time the rule's handler runs — exactly like an explicit `declare(...)`. It is scoped to the rule and visible to every action edge and lifecycle block of that rule, and it does **not** carry state over from a previous parse or a previous recursive entry of the rule.
@@ -84,18 +84,17 @@ items += match_group(0)
 # hash target of set_key(...) and hash-index assignment — the bare name is a hash
 set_key(meta, "text", match_group(0))
 meta["text"] = match_group(0)
-meta[cat("source", "_kind")] = :kind
+meta[cat("source", "_kind")] = kind
 
 # aggregate snapshot reads — the bare name is the aggregate being copied
 return(copy(array(items)))
-return(copy(items))
 return(copy(hash(meta)))
 return(copy(items))
 
 # scalar source-slot reads — the bare name is a scalar value
-return(:count)
 return(count)
 set(out, count)
+out = count
 name = value
 
 # mutation key/RHS scalar reads — targets keep their array/hash kind
@@ -113,8 +112,8 @@ value; the target of `push(...)`, `push_nonempty(...)`, and `name += value` is a
 `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read
 positions: `copy(array(name))` reads the current array value or working array, `copy(hash(name))` reads the current
 hash value or working hash, and `copy(name)` follows the current aggregate/value read rule for the name. In
-supported scalar read slots, a bare name or scalar-slot shorthand reads the working scalar: `return(count)`,
-`return(:count)`, `set(out, count)`, `set(out, :count)`, `out = count`, `items += value`,
+supported scalar read slots, a bare name reads the working scalar: `return(count)`,
+`set(out, count)`, `out = count`, `items += value`,
 `set_key(meta, key, value)`, `meta[key] = value`, and direct path atoms such as `payload["children"][index]`.
 Direct RHS shape assignment is not a declaration signal: `name = [value]` / `set(name, [value])` binds an array
 value to `name`, and `name = { key => value }` / `set(name, { key => value })` binds a hash value. Use explicit
@@ -272,7 +271,7 @@ declare(scalar, kind="node");
 declare(scalar, active=1);
 declare(scalar, normalized=lowercase(trim(entry_text())));
 declare(array, items=array());
-declare(array, parts=array(:first, :second));
+declare(array, parts=array(first, second));
 declare(hash, meta=hash("kind", "node", "source", "Node"));
 ```
 
@@ -334,7 +333,7 @@ Example:
 ```text
 I {
   declare(scalar, raw=entry_text());
-  declare(scalar, normalized=lowercase(trim(:raw)));
+  declare(scalar, normalized=lowercase(trim(raw)));
 }
 ```
 
@@ -348,7 +347,7 @@ Examples:
 
 ```text
 declare(array, items=array());
-declare(array, pair=array(:lhs, :rhs));
+declare(array, pair=array(lhs, rhs));
 declare(array, groups=entry_groups());
 declare(array, keys=sorted_keys(hash(meta)));
 declare(array, public_keys=take(sorted_keys(pick_keys(hash(meta), "kind", "source")), 2));
@@ -430,7 +429,7 @@ Common initializer sources include:
 | Source | Examples |
 | --- | --- |
 | Literals | `"node"`, `1`, `0` |
-| Working values | `:name`, `array(items)`, `hash(meta)` |
+| Working values | `name`, `array(items)`, `hash(meta)` |
 | Source readers | `entry_text()`, `entry_group(0)`, `capture_slice()`, `cursor_pos()` |
 | Child payload access | `retv["content"]`, `retv["children"][0]["name"]` |
 | Constructors | `array(...)`, `hash(...)` |
@@ -451,7 +450,7 @@ I {
   filter_match(array(clean_parts), /^[a-z_]+$/);
   declare(hash, meta=hash(
     "kind", "field_list",
-    "name", :clean_name,
+    "name", clean_name,
     "part_count", count(array(clean_parts))
   ));
 }
@@ -476,8 +475,8 @@ They also work in method-chain style:
 /[A-Za-z_, ]+/ -> FieldList
   .declare(array, parts)
   .declare(scalar, raw)
-  .set(:raw, entry_text())
-  .split(array(parts), :raw, /,/)
+  .set(raw, entry_text())
+  .split(array(parts), raw, /,/)
   .trim_each(array(parts))
   .filter_nonempty(array(parts))
   .return(hash("kind", "field_list", "fields", array_copy(array(parts))));
@@ -512,11 +511,11 @@ List::AND
  Item
  -> List[0] {
    retv = call(Item);
-   push_value(array(items), :retv);
+   push_value(array(items), retv);
  }
  -> List[1] {
    retv = call(Item);
-   push_value(array(items), :retv);
+   push_value(array(items), retv);
    return(hash(
      "kind", "list",
      "items", array_copy(array(items)),
@@ -544,8 +543,8 @@ Token::AND
  /[A-Za-z_]+/
  -> Token[0] {
    text = lowercase(trim(entry_text()));
-   meta["text"] = :text;
-   meta["text_length"] = length(:text);
+   meta["text"] = text;
+   meta["text_length"] = length(text);
    return(hash_copy(hash(meta)));
  }
 ```
@@ -599,14 +598,14 @@ Do not use a scalar declaration for a value you later treat as an array:
 
 ```text
 declare(scalar, items);
-push_value(array(items), :retv);
+push_value(array(items), retv);
 ```
 
 Prefer:
 
 ```text
 declare(array, items);
-push_value(array(items), :retv);
+push_value(array(items), retv);
 ```
 
 Do not use legacy declaration syntax to reset:

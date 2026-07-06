@@ -36,7 +36,7 @@ A helper-oriented rule should make the intent visible:
 Top::
  /name=(\w+)/ -> Value {
    name = entry_group(0);
-   return(hash("kind", "assignment", "name", :name));
+   return(hash("kind", "assignment", "name", name));
  }
 ```
 
@@ -55,7 +55,7 @@ The current helper surface is broad, but it is easier to learn in families. Each
 
 Construct and transform values during parsing:
 
-- `:name` — read the named scalar slot
+- `name` — read the named scalar working variable
 - `array(name)` — read a named array value
 - `hash(name)` — read a named hash value
 - `flat_array(...)` — flatten arguments into an array

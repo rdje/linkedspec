@@ -32,7 +32,7 @@ Top::AND
  /BEGIN/
  /END/
  -> Top[0] { first = capture_slice(); }
- -> Top[1] { return(hash("body", :first)); }
+ -> Top[1] { return(hash("body", first)); }
 ```
 
 The important distinction:

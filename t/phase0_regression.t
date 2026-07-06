@@ -39075,13 +39075,13 @@ subtest 'emit_context_lowers_split_tagged_records_helper' => sub {
     plan tests => 7;
 
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(split_tagged_records(:identifier_list, /\s*,\s*/o, "?row:", :kind, :expr))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return(split_tagged_records(identifier_list, /\s*,\s*/o, "?row:", kind, expr))'),
         'return [map { ["?row:", $_, $kind, $expr] } split /\s*,\s*/o, $identifier_list]',
         'split_tagged_records helper lowers comma-list records into the legacy VHDL map/split shape'
     );
 
     my $spec_content = <<'SPEC';
-Top:: I.declare(scalar, identifier_list="A,B", kind="wire", expr="1").declare(array, rows=split_tagged_records(:identifier_list, /\s*,\s*/o, "?row:", :kind, :expr)).return(array_copy(array(rows)))
+Top:: I.declare(scalar, identifier_list="A,B", kind="wire", expr="1").declare(array, rows=split_tagged_records(identifier_list, /\s*,\s*/o, "?row:", kind, expr)).return(array_copy(array(rows)))
  /a/ -> Top { return_undef() }
 SPEC
 
@@ -39609,7 +39609,7 @@ subtest 'emit_context_lowers_attached_while_with_iteration_safety' => sub {
         'compact attached while skips the body when the initial condition is false',
     );
 
-    my $counting_while = 'set(count,0); while(num_lt(:count,3)) { set(count,num_add(:count,1)) }; return(count)';
+    my $counting_while = 'set(count,0); while(num_lt(count,3)) { set(count,num_add(count,1)) }; return(count)';
     my $counting_spec = qq{Top::\n /x/ -> Done { $counting_while }\n\nDone::\n /x/\n};
     my $counting_descr = LinkedSpec::Get(\$counting_spec, return_descriptor => 1);
     ok(defined($counting_descr) && ref($counting_descr) eq 'HASH', 'descriptor build succeeds for condition-mutating attached while form');
@@ -41611,10 +41611,10 @@ subtest 'ebnf_spec_prefers_canonical_container_wrappers_in_core_method_dsl_band'
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'ebnf source spec text is available for wrapper migration inspection');
-    like($source_content, qr/\.if\(:on\)/, 'ebnf core method-DSL band now prefers :on in fluent guard checks');
+    like($source_content, qr/\.if\(on\)/, 'ebnf core method-DSL band now prefers bare on in fluent guard checks');
     unlike($source_content, qr/\.if\(s\(on\)\)/, 'ebnf fluent guard checks no longer use retired s(on) aliases in the migrated band');
     like($source_content, qr/I\.return\(array\("rule", entry_group\(0\)\)\)/, 'ebnf grammar_rule token reader now uses the canonical array constructor');
-    like($source_content, qr/push\(array\(rules\), array\(:rule, flat_array\(rule\)\)\)/, 'ebnf grammar_file accumulation band now uses push(...) plus :rule and array(rule) wrappers');
+    like($source_content, qr/push\(array\(rules\), array\(rule, flat_array\(rule\)\)\)/, 'ebnf grammar_file accumulation band now uses push(...) plus bare rule and array(rule) wrappers');
 };
 subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 16;
@@ -41661,7 +41661,7 @@ subtest 'ds_vhistory_spec_prefers_canonical_container_wrappers_in_vhistory_band'
 
     ok(defined($source_content) && length($source_content), 'ds_vhistory source spec text is available for wrapper migration inspection');
     like($source_content, qr/first_capt = array\(capt\)\.first\(\);/, 'ds_vhistory vhistory band now uses direct assignment plus array(capt).first() in first captured-entry reads');
-    like($source_content, qr/push\(array\(object_hier\), array\(:entry_tag, copy\(array\(capt\)\)\)\)/, 'ds_vhistory vhistory band now uses push(...) plus :entry_tag and copy in object_hier pushes');
+    like($source_content, qr/push\(array\(object_hier\), array\(entry_tag, copy\(array\(capt\)\)\)\)/, 'ds_vhistory vhistory band now uses push(...) plus bare entry_tag and copy in object_hier pushes');
     like($source_content, qr/cur_object = call\(object\)/, 'ds_vhistory object edge now prefers direct call assignment instead of compatibility assignment');
     like($source_content, qr/push\(array\(capt\), call\(branch\)\)/, 'ds_vhistory child capture edges now prefer push(array(capt), call(...))');
     ok(index($source_content, 'return(array("?ds_vhistory:", copy(array(vhistory))))') >= 0, 'ds_vhistory vhistory band now uses the canonical array wrapper plus copy in top-level return construction');
@@ -41858,7 +41858,7 @@ subtest 'tablegrep_terminal_token_band_prefers_entry_group_reads' => sub {
 
     ok(defined($source_content) && length($source_content), 'tablegrep source spec text is available for terminal-token reader inspection');
     like($source_content, qr/field = entry_group\(0\);\s+sens = entry_group\(1\);\s+re = entry_group\(2\);/s, 'tablegrep re_term now prefers terse entry_group(0..2) assignments for immediate capture reads');
-    like($source_content, qr/return\(hash\("type", "STERM", "field", :subscript, "sens", :sens, "re", :re\)\)/, 'tablegrep subscript terminal return shape remains preserved after entry_group migration');
+    like($source_content, qr/return\(hash\("type", "STERM", "field", subscript, "sens", sens, "re", re\)\)/, 'tablegrep subscript terminal return shape remains preserved after entry_group migration');
     like($source_content, qr/or_op:\s*\/\\\|\\\|\//, 'tablegrep operator token rules remain present after terminal-token migration');
     unlike($source_content, qr/declare\(scalar,\s*field=scalar\(IMATCH_LIST,\s*0\),\s*sens=scalar\(IMATCH_LIST,\s*1\),\s*re=scalar\(IMATCH_LIST,\s*2\)\);/, 'tablegrep re_term no longer uses scalar(IMATCH_LIST, ...) in the migrated terminal-token band');
 };
@@ -42109,8 +42109,8 @@ subtest 'vhdl_top_token_readers_prefer_entry_text' => sub {
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for top token-reader helper inspection');
-    like($source_content, qr{comment:\s+/--\.\*/\s+I \{text = entry_text\(\); return\(:text\)\}}, 'vhdl comment token reader now prefers entry_text() through terse scalar assignment');
-    like($source_content, qr{space:\s+/\\s\+/\s+I \{text = entry_text\(\); return\(:text\)\}}, 'vhdl space token reader now prefers entry_text() through terse scalar assignment');
+    like($source_content, qr{comment:\s+/--\.\*/\s+I \{text = entry_text\(\); return\(text\)\}}, 'vhdl comment token reader now prefers entry_text() through terse scalar assignment');
+    like($source_content, qr{space:\s+/\\s\+/\s+I \{text = entry_text\(\); return\(text\)\}}, 'vhdl space token reader now prefers entry_text() through terse scalar assignment');
     unlike($source_content, qr{comment:\s+/--\.\*/\s+I\.return\(\$IMATCH\)}, 'vhdl comment token reader no longer uses raw $IMATCH');
     unlike($source_content, qr{space:\s+/\\s\+/\s+I\.return\(\$IMATCH\)}, 'vhdl space token reader no longer uses raw $IMATCH');
 };
@@ -42160,11 +42160,11 @@ subtest 'vhdl_declaration_readers_prefer_entry_group_locals' => sub {
     like($source_content, qr/file_declaration: .*?identifier_list = entry_group\(0\);\s+remainder_info = entry_group\(1\);/s, 'vhdl file_declaration now prefers terse entry_group(...) local assignments');
     like($source_content, qr/signal_declaration: .*?identifier_list = entry_group\(0\);\s+subtype_indication = entry_group\(1\);\s+signal_kind = entry_group\(2\);\s+expression = entry_group\(3\);/s, 'vhdl signal_declaration now prefers terse entry_group(...) local assignments');
     like($source_content, qr/configuration_specification: .*?instantiation_list = entry_group\(0\);\s+component_name = entry_group\(1\);\s+binding_indication = entry_group\(2\);/s, 'vhdl configuration_specification now prefers terse entry_group(...) local assignments');
-    like($source_content, qr/constant_declaration: .*?return\(split_tagged_records\(:identifier_list, \/\\s\*,\\s\*\/o, "\?constant_declaration:", :subtype_indication, :expression\)\)/s, 'vhdl constant_declaration now prefers split_tagged_records for identifier-list returns');
-    like($source_content, qr/variable_declaration: .*?return\(split_tagged_records\(:identifier_list, \/\\s\*,\\s\*\/o, "\?variable_declaration:", :subtype_indication, :expression\)\)/s, 'vhdl variable_declaration now prefers split_tagged_records for identifier-list returns');
-    like($source_content, qr/file_declaration: .*?return\(split_tagged_records\(:identifier_list, \/\\s\*,\\s\*\/o, "\?file_declaration:", :remainder_info\)\)/s, 'vhdl file_declaration now prefers split_tagged_records for identifier-list returns');
-    like($source_content, qr/signal_declaration: .*?return\(split_tagged_records\(:identifier_list, \/\\s\*,\\s\*\/o, "\?signal_declaration:", :subtype_indication, :signal_kind, :expression\)\)/s, 'vhdl signal_declaration now prefers split_tagged_records for identifier-list returns');
-    like($source_content, qr/configuration_specification: .*?return\(split_tagged_records\(:instantiation_list, \/\\s\*,\\s\*\/o, "\?configuration_specification:", :component_name, :binding_indication\)\)/s, 'vhdl configuration_specification now prefers split_tagged_records for instantiation-list returns');
+    like($source_content, qr/constant_declaration: .*?return\(split_tagged_records\(identifier_list, \/\\s\*,\\s\*\/o, "\?constant_declaration:", subtype_indication, expression\)\)/s, 'vhdl constant_declaration now prefers split_tagged_records for identifier-list returns');
+    like($source_content, qr/variable_declaration: .*?return\(split_tagged_records\(identifier_list, \/\\s\*,\\s\*\/o, "\?variable_declaration:", subtype_indication, expression\)\)/s, 'vhdl variable_declaration now prefers split_tagged_records for identifier-list returns');
+    like($source_content, qr/file_declaration: .*?return\(split_tagged_records\(identifier_list, \/\\s\*,\\s\*\/o, "\?file_declaration:", remainder_info\)\)/s, 'vhdl file_declaration now prefers split_tagged_records for identifier-list returns');
+    like($source_content, qr/signal_declaration: .*?return\(split_tagged_records\(identifier_list, \/\\s\*,\\s\*\/o, "\?signal_declaration:", subtype_indication, signal_kind, expression\)\)/s, 'vhdl signal_declaration now prefers split_tagged_records for identifier-list returns');
+    like($source_content, qr/configuration_specification: .*?return\(split_tagged_records\(instantiation_list, \/\\s\*,\\s\*\/o, "\?configuration_specification:", component_name, binding_indication\)\)/s, 'vhdl configuration_specification now prefers split_tagged_records for instantiation-list returns');
     unlike($source_content, qr/constant_declaration: .*?my \(\$identifier_list, \$subtype_indication, \$expression\) = \@IMATCH_LIST;/s, 'vhdl constant_declaration no longer destructures raw @IMATCH_LIST');
     unlike($source_content, qr/variable_declaration: .*?my \(\$identifier_list, \$subtype_indication, \$expression\) = \@IMATCH_LIST;/s, 'vhdl variable_declaration no longer destructures raw @IMATCH_LIST');
     unlike($source_content, qr/file_declaration: .*?my \(\$identifier_list, \$remainder_info\) = \@IMATCH_LIST;/s, 'vhdl file_declaration no longer destructures raw @IMATCH_LIST');
@@ -42185,8 +42185,8 @@ subtest 'vhdl_helper_returns_prefer_entry_groups' => sub {
     ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for helper-return entry_groups migration inspection');
     like($source_content, qr/subprogram_declaration: .*?I\.return\(array\("\?subprogram_declaration:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl subprogram_declaration now prefers entry_groups() in its helper return');
     like($source_content, qr/return\(array\("\?subprogram_body:", flat_array\(entry_groups\(\)\), copy\(array\(subprogram_statement_tokens\)\)\)\)/, 'vhdl subprogram_body now prefers entry_groups() and copy in its helper return');
-    like($source_content, qr/return\(array\("\?type_declaration:", flat_array\(entry_groups\(\)\), :type_definition\)\)/, 'vhdl type_declaration now prefers entry_groups() in its helper return');
-    like($source_content, qr/return\(array\("\?process_statement:", flat_array\(entry_groups\(\)\), copy\(array\(process_statement\)\), :process_statement_part\)\)/, 'vhdl process_statement now prefers entry_groups() and copy in its helper return');
+    like($source_content, qr/return\(array\("\?type_declaration:", flat_array\(entry_groups\(\)\), type_definition\)\)/, 'vhdl type_declaration now prefers entry_groups() in its helper return');
+    like($source_content, qr/return\(array\("\?process_statement:", flat_array\(entry_groups\(\)\), copy\(array\(process_statement\)\), process_statement_part\)\)/, 'vhdl process_statement now prefers entry_groups() and copy in its helper return');
     unlike($source_content, qr/subprogram_declaration: .*?flat_array\(IMATCH_LIST\)/, 'vhdl subprogram_declaration no longer uses flat_array(IMATCH_LIST)');
     unlike($source_content, qr/return\(array\("\?subprogram_body:", flat_array\(IMATCH_LIST\), array_(?:values|copy)\(array\(subprogram_statement_tokens\)\)\)\)/, 'vhdl subprogram_body no longer uses flat_array(IMATCH_LIST)');
     unlike($source_content, qr/return\(array\("\?type_declaration:", flat_array\(IMATCH_LIST\), scalar\(type_definition\)\)\)/, 'vhdl type_declaration no longer uses flat_array(IMATCH_LIST)');
@@ -42363,7 +42363,7 @@ subtest 'bnf_token_readers_prefer_entry_text' => sub {
     ok(defined($source_content) && length($source_content), 'BNF source spec text is available for token-reader helper inspection');
     ok(index($source_content, 'text = entry_text();') >= 0, 'BNF migrated token readers now prefer terse assignment from entry_text()');
     like($source_content, qr/node:\s+.*?entry_text\(\)/s, 'BNF node now prefers entry_text() for the immediate token read');
-    ok(index($source_content, 'substr(:text, "^/|/$", "", go);') >= 0, 'BNF regex now prefers helperized string-pattern cleanup after entry_text()');
+    ok(index($source_content, 'substr(text, "^/|/$", "", go);') >= 0, 'BNF regex now prefers helperized string-pattern cleanup after entry_text()');
     like($source_content, qr/group\[1\].*?return\(1\);/s, 'BNF group completion now prefers helper-form numeric return');
     unlike($source_content, qr/declare\(scalar,\s*text=entry_text\(\)\)/, 'BNF token readers no longer use declare(...) for entry_text() locals');
     unlike($source_content, qr/scalar\(IMATCH\)/, 'BNF migrated token readers no longer rely on :IMATCH');
@@ -42552,8 +42552,8 @@ subtest 'hlink_substitution_spec_prefers_canonical_container_wrappers_in_top_ban
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'hlink_substitution source spec text is available for wrapper migration inspection');
-    like($source_content, qr/retv = call\(substitute_statement2\)/, 'hlink_substitution top band now uses direct :retv-compatible call assignment');
-    like($source_content, qr/push\(array\(word_items\), :retv\)/, 'hlink_substitution top band now uses push(...) plus array(word_items) and :retv in accumulator pushes');
+    like($source_content, qr/retv = call\(substitute_statement2\)/, 'hlink_substitution top band now uses direct bare retv-compatible call assignment');
+    like($source_content, qr/push\(array\(word_items\), retv\)/, 'hlink_substitution top band now uses push(...) plus array(word_items) and bare retv in accumulator pushes');
     ok(index($source_content, 'return(copy(array(word_items)));') >= 0, 'hlink_substitution top band now uses array(word_items) plus copy in aggregate return flow');
     like($source_content, qr/-> substitute_statement2\[1\] \{print\("\(HLinkSubst\) -E- Dangling closing bracket\\n"\); exit_now\(1\)\}/, 'hlink_substitution top dangling-bracket path now uses exit_now(1)');
     unlike($source_content, qr/push_value\(a\(word_items\), s\(retv\)\)/, 'hlink_substitution migrated band no longer uses retired a()/s() aliases in accumulator pushes');
@@ -42649,12 +42649,12 @@ subtest 'lib_reader_spec_prefers_canonical_container_wrappers_in_reader_band' =>
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'lib_reader source spec text is available for wrapper migration inspection');
-    ok(index($source_content, 'substr(:groupname, "\"", "", go)') >= 0, 'lib_reader group reader now uses :groupname in regex-subst cleanup');
+    ok(index($source_content, 'substr(groupname, "\"", "", go)') >= 0, 'lib_reader group reader now uses bare groupname in regex-subst cleanup');
     ok(index($source_content, 'LX          {return(copy(array(lib_file)))}') >= 0, 'lib_reader top lifecycle return now uses helper-form array snapshot return');
-    like($source_content, qr/\.return\(array\("GROUP", :grouptype, :groupname, copy\(array\(group\)\)\)\)/, 'lib_reader group return now uses scalar-slot shorthand plus copy');
-    like($source_content, qr/LX \{say\("GROUP <", :grouptype, ">\(", :groupname, "\) Has a syntax error\."\); exit_now\(1\)\}/, 'lib_reader group syntax-error path keeps the structured diagnostic and exit_now helper');
+    like($source_content, qr/\.return\(array\("GROUP", grouptype, groupname, copy\(array\(group\)\)\)\)/, 'lib_reader group return now uses bare reads plus copy');
+    like($source_content, qr/LX \{say\("GROUP <", grouptype, ">\(", groupname, "\) Has a syntax error\."\); exit_now\(1\)\}/, 'lib_reader group syntax-error path keeps the structured diagnostic and exit_now helper');
     like($source_content, qr/exit_now\(1\)/, 'lib_reader group syntax-error path now uses exit_now(1)');
-    like($source_content, qr/split\(array\(value_items\), :value, \/,\//, 'lib_reader cattribute splitter now uses canonical array wrapper and scalar-slot shorthand');
+    like($source_content, qr/split\(array\(value_items\), value, \/,\//, 'lib_reader cattribute splitter now uses canonical array wrapper and a bare value read');
     unlike($source_content, qr/\.return\(a\("GROUP", s\(grouptype\), s\(groupname\), array_(?:values|copy)\(a\(group\)\)\)\)/, 'lib_reader group return no longer uses retired s()/a() aliases in the migrated band');
     unlike($source_content, qr/return\s+\\\@lib_file|\bexit\s+1\b/, 'lib_reader migrated lifecycle paths no longer use compatibility return-ref or bare exit syntax');
 };
@@ -42715,18 +42715,18 @@ subtest 'sdce_spec_prefers_canonical_container_wrappers_in_split_band' => sub {
     ok(defined($source_content) && length($source_content), 'sdce source spec text is available for wrapper migration inspection');
     like($source_content, qr/sdc_esplit:: I \{pieces = \[\]; retv = undef; start_capture_slice\(\)\}/, 'sdce top band now prefers terse initialization plus start_capture_slice() for explicit anonymous capture-boundary initialization');
     unlike($source_content, qr/assign\(scalar\(IPOS\), 0\)/, 'sdce top band no longer uses direct IPOS initialization');
-    like($source_content, qr/LS\s+\{retv = capture_slice\(\); push\(array\(pieces\), :retv\)\}/, 'sdce top split band now prefers capture_slice() plus terse assignment/push for anonymous capture-boundary reads');
+    like($source_content, qr/LS\s+\{retv = capture_slice\(\); push\(array\(pieces\), retv\)\}/, 'sdce top split band now prefers capture_slice() plus terse assignment/push for anonymous capture-boundary reads');
     unlike($source_content, qr/LS\s+\{assign\(scalar\(retv\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\); push_value\(array\(pieces\), scalar\(retv\)\)\}/, 'sdce top split band no longer uses raw rule-entry substr capture');
     like($source_content, qr/LE\s+\{start_capture_slice\(\)\}/, 'sdce split bands now prefer start_capture_slice() for direct anonymous capture-boundary movement');
     unlike($source_content, qr/assign\(scalar\(IPOS\), cursor_pos\(\)\)/, 'sdce split bands no longer use explicit IPOS assignment plus cursor_pos() in the migrated anonymous-boundary writes');
-    like($source_content, qr/LX\s+\{retv = capture_rest\(\); push\(array\(pieces\), :retv\); return\(copy\(array\(pieces\)\)\)\}/, 'sdce trailing split band now prefers capture_rest() plus terse assignment/push/copy for anonymous capture-boundary tail reads');
+    like($source_content, qr/LX\s+\{retv = capture_rest\(\); push\(array\(pieces\), retv\); return\(copy\(array\(pieces\)\)\)\}/, 'sdce trailing split band now prefers capture_rest() plus terse assignment/push/copy for anonymous capture-boundary tail reads');
     unlike($source_content, qr/LX\s+\{assign\(scalar\(retv\), substr\(\$\$STRING, \$IPOS, length\(\$\$STRING\) - \$IPOS\)\); push_value\(array\(pieces\), scalar\(retv\)\); return\(array_(?:values|copy)\(array\(pieces\)\)\)\}/, 'sdce trailing split band no longer uses raw rule-entry tail substr capture');
-    like($source_content, qr/push\(array\(pieces\), :retv\)/, 'sdce top band now uses push(...) plus array(pieces) and :retv in accumulator pushes');
+    like($source_content, qr/push\(array\(pieces\), retv\)/, 'sdce top band now uses push(...) plus array(pieces) and bare retv in accumulator pushes');
     like($source_content, qr/segment = input_slice\(match_end_pos\(\), call\(oc_brace\)\)/, 'sdce get_pinport brace segment read now prefers direct assignment plus input_slice() with an explicit match-end start');
     unlike($source_content, qr/substr\(\$\$STRING, \$LSPOS, call\(oc_brace\)\)/, 'sdce get_pinport brace segment read no longer uses raw whole-input substr with LSPOS');
     like($source_content, qr/segment = capture_slice\(\)/, 'sdce nested split band now prefers direct assignment plus capture_slice() for anonymous capture-boundary reads');
     unlike($source_content, qr/assign\(scalar\(segment\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\)/, 'sdce nested split band no longer uses raw rule-entry substr capture');
-    ok(index($source_content, 'split(array(segment_parts), :segment, /\s+/)') >= 0, 'sdce get_pinport now uses canonical wrappers in split source and target positions');
+    ok(index($source_content, 'split(array(segment_parts), segment, /\s+/)') >= 0, 'sdce get_pinport now uses canonical wrappers in split source and target positions');
     like($source_content, qr/-> get_pinport\[1\]\s+\{return\(array\(flat_array\(entry_groups\(\)\), copy\(array\(pieces\)\)\)\)\}/, 'sdce get_pinport now prefers entry_groups() plus copy in its helper return');
     unlike($source_content, qr/-> get_pinport\[1\]\s+\{return\(array\(flat_array\(IMATCH_LIST\), array_(?:values|copy)\(array\(pieces\)\)\)\)\}/, 'sdce get_pinport no longer uses flat_array(IMATCH_LIST) in its helper return');
     like($source_content, qr/oc_brace: .*?\{return\(capture_slice_len\(\)\)\}/, 'sdce oc_brace now prefers capture_slice_len() for brace-body width reads');
@@ -42746,7 +42746,7 @@ subtest 'ebnf_logging_annotation_prefers_explicit_capture_slice_flow' => sub {
     like($source_content, qr/push\(quoted_string, 1\);\s+start_capture_slice\(\)/, 'ebnf logging_annotation advances the capture boundary after indexed quoted-string child results');
     unlike($source_content, qr/push \@logging_annotation, call\(quoted_string\)->\[1\]/, 'ebnf logging_annotation no longer uses the raw indexed push-call wrapper');
     like($source_content, qr/-> comma \{\s+push_nonempty\(array\(logging_annotation\), trim\(capture_slice\(\)\)\);\s+start_capture_slice\(\)\s+\}/, 'ebnf logging_annotation advances the capture boundary after comma spans');
-    like($source_content, qr/return\(array\("logging_annotation", array\(:logging_name, copy\(array\(logging_annotation\)\)\)\)\)/, 'ebnf logging_annotation now returns helper-form payload with a snapshot array');
+    like($source_content, qr/return\(array\("logging_annotation", array\(logging_name, copy\(array\(logging_annotation\)\)\)\)\)/, 'ebnf logging_annotation now returns helper-form payload with a snapshot array');
     unlike($source_content, qr/\$IMATCH =~ s\/\@\|\\s\*\\\(\//, 'ebnf logging_annotation no longer mutates $IMATCH with raw regex substitution');
     unlike($source_content, qr/return \['logging_annotation', \[\$IMATCH, \[\@logging_annotation\]\]\]/, 'ebnf logging_annotation no longer uses bare arrayref return syntax');
     unlike($source_content, qr/(?:CAPTURE_IF\s*\(|\.capture_if\b)/, 'ebnf logging_annotation no longer uses the legacy capture-if helper surface');
@@ -42933,7 +42933,7 @@ subtest 'pplugin_spec_prefers_canonical_container_wrappers_in_top_aggregation_ba
     like($source_content, qr/I \{defs = \[\]; retv = undef\}/, 'pplugin top setup now initializes working state through terse assignments');
     like($source_content, qr/-> comment\s+\{next\(\)\}/, 'pplugin comment edge now uses helper-form next()');
     like($source_content, qr/-> subdef\s+\{retv = call\(subdef\)\}/, 'pplugin subdef edge now uses direct call assignment');
-    like($source_content, qr/if\(is_defined\(:retv\)\);/, 'pplugin top aggregation guard now uses helper-form definedness flow');
+    like($source_content, qr/if\(is_defined\(retv\)\);/, 'pplugin top aggregation guard now uses helper-form definedness flow');
     like($source_content, qr/set\(array\(defs\), array\(flat_array\(defs\), retv\[0\], retv\[1\]\)\)/, 'pplugin top aggregation now uses canonical array wrappers and direct access in set and constructor positions');
     like($source_content, qr/return_undef\(\);/, 'pplugin top aggregation fallback now uses helper-form return_undef()');
     like($source_content, qr/^LX \{return\(hash\(flat_array\(array\(defs\)\)\)\)\}/m, 'pplugin top LX now builds the returned definition hash through helper-form hash construction');
@@ -43188,9 +43188,9 @@ subtest 'simenv_remaining_compatibility_source_prefers_helpers' => sub {
     like($source_content, qr/push\(array\(keyval_pairs\), call\(multiline_value\)\)/, 'simenv begin_end_blocks now appends multiline values through push');
     like($source_content, qr/last_pos = capture_slice_pos\(\); shift = undef/, 'simenv substitution readers initialize position tracking with terse capture_slice_pos() assignment');
     like($source_content, qr/last_pos = cursor_pos\(\)/, 'simenv substitution readers advance position tracking with cursor_pos()');
-    like($source_content, qr/input_slice\(:last_pos, :shift\)/, 'simenv verbatim slices now use input_slice()');
+    like($source_content, qr/input_slice\(last_pos, shift\)/, 'simenv verbatim slices now use input_slice()');
     like($source_content, qr/print_each\(array\(matches\), "perl_command_substitution:<<", ">>\\n"\)/, 'simenv debug match loops now use print_each()');
-    like($source_content, qr/substr\(:block_namei, \/\^\.\*\\s\+\/, "", o\)/, 'simenv BEGIN block-name cleanup uses a regex literal for whitespace stripping');
+    like($source_content, qr/substr\(block_namei, \/\^\.\*\\s\+\/, "", o\)/, 'simenv BEGIN block-name cleanup uses a regex literal for whitespace stripping');
     unlike($source_content, qr/my \$last_pos=\$IPOS|my \@matches|pos\(\$\$STRING\)|push \@matches|print ".*?" foreach \(\@matches\)|\bexit\b|return \{type=>|return \{name=>/s, 'simenv source no longer uses the old compatibility position/loop/return/exit forms');
     like($source_content, qr/return_undef\(\)/, 'simenv void completion paths now use return_undef()');
     like($source_content, qr/exit_now\(\)/, 'simenv fatal error paths now use exit_now()');
@@ -43294,7 +43294,7 @@ subtest 'lispish_spec_prefers_canonical_container_wrappers_in_parenthesis_and_re
     ok(defined($source_content) && length($source_content), 'Lispish source spec text is available for wrapper migration inspection');
     like($source_content, qr/if\(is_nonempty\(array\(word\)\)\);/, 'Lispish parenthesis band now uses array(word) in aggregate flow guards');
     like($source_content, qr/head = join_values\("", array\(word\)\);/, 'Lispish parenthesis band now uses direct assignment plus array(word) in head assignment');
-    like($source_content, qr/return\(array\(:head, copy\(array\(tail\)\)\)\);/, 'Lispish parenthesis return path now uses scalar-slot shorthand plus copy');
+    like($source_content, qr/return\(array\(head, copy\(array\(tail\)\)\)\);/, 'Lispish parenthesis return path now uses bare reads plus copy');
     like($source_content, qr/I\.return\(hash\("type", "DQUOTES", "content", entry_group\(0\)\)\)/, 'Lispish token readers now use the canonical hash constructor');
     like($source_content, qr/-> parenthesis\s+\{return\(call\(parenthesis\)\)\}/, 'Lispish top child-return edge now uses helper-form return(call(...))');
     like($source_content, qr/-> parenthesis\[1\]\s+\{say\("\(Lispish\) -E- Syntax Error"\); exit_now\(1\)\}/, 'Lispish top syntax-error edge now uses exit_now(1)');

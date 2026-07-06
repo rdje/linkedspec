@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.15.2.4 — migrate current sources to bare reads**
+  (DONE; FRONTIER `.15.3` PERL `:name` REMOVAL NEXT, NOT STARTED).
+
+  **Change:** Current shipped specs, root corpus examples, generated Rust oracle inputs, and mdBook examples now use
+  bare value reads instead of `:name` scalar-slot reads. The migration preserved the **93** fixture oracle expected
+  JSON and manifest.
+
+  **Engine boundaries locked:** Perl lowering now keeps parser-backed `set(...)` reconstruction, variadic
+  `split_tagged_records(...)` source arguments, copy-return payloads, and declaration/type-memory tracking aligned
+  with the migrated source surface. Rust action-edge `call(child)` blocks publish child `retv` after the block
+  completes, and descriptor scalar bare reads can coexist with same-name aggregate accumulators.
+
+  **Verification:** Full phase0 passes (`1..1022`); oracle regeneration preserves expected JSON; Rust
+  `corpus_oracle` passes over **93** fixtures; mdBook build, whitespace diff check, and scalar-slot residue scan
+  pass with only rule-mode/regex/historical-string exclusions.
+
 - 2026-07-06: **REPO-HYGIENE.2 — ignore Claude project state and rgx local dirt**
   (DONE; REPO HANDOFF CLEANUP).
 

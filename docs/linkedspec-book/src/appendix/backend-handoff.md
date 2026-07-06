@@ -251,7 +251,7 @@ smokes for minimal rules, action edges, user-function definitions, and comments;
 RTL/plugin/legacy safety smokes covering `regdef`, `tablegrep`, `simenv`, `vhdl`,
 `ds_vhistory`, empty `pplugin`, and empty `tkgui`; terse receiver-chain fixtures for
 arrays, hashes, strings, numbers, aggregate wrapper quoting, and block-valued receivers;
-numeric word aliases; arithmetic/comparison symbol callees; the terse scalar-slot `:name`
+numeric word aliases; arithmetic/comparison symbol callees; the terse bare-read `name`
 fixture for scalar reads, scalar mutation targets, and scalar-held shape payloads;
 explicit string comparisons; assignment-expression fixtures; and the shared Perl/Rust
 user-function runtime fixture; plus recursive top-rule/body value fixtures for wrapper-body

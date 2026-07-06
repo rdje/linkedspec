@@ -13,7 +13,7 @@ LX { return(hash("?results:", copy(array(results)))) }
 Child:
  /pattern1[ \t]+hello[ \t]+(\w+)/
  I { name = entry_group(0) }
- E { return(:name) }
+ E { return(name) }
 ```
 
 ## input.txt

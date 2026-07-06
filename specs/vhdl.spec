@@ -12,8 +12,8 @@ vhdl_file::
 LX {return(copy(array(vhdl_file)))}
 
 
-comment:        /--.*/                         I {text = entry_text(); return(:text)}
-space:          /\s+/                          I {text = entry_text(); return(:text)}
+comment:        /--.*/                         I {text = entry_text(); return(text)}
+space:          /\s+/                          I {text = entry_text(); return(text)}
 dquote_string:  /"(.+?)(?<!")"/                I.return(array("?dquote_string:", flat_array(entry_groups())))
 library_clause: /(?is)\blibrary\s+(.+?)\s*;/   I.return(array("?library_clause:", flat_array(entry_groups())))
 use_clause:     /(?is)\buse\s+(.+?)\s*;/       I.return(array("?use_clause:", flat_array(entry_groups())))
@@ -152,7 +152,7 @@ process_statement: /(?i)(?:(\w+)\s*:\s*)?\bprocess\b/  /(?i)\bbegin\b/ /(?is)\be
 
 -> process_statement[2]                 {
    process_statement_part = substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH);
-   return(array("?process_statement:", flat_array(entry_groups()), copy(array(process_statement)), :process_statement_part))
+   return(array("?process_statement:", flat_array(entry_groups()), copy(array(process_statement)), process_statement_part))
 }
 
 
@@ -254,7 +254,7 @@ I {pos_begin = undef; subprogram_statement_part = undef; subprogram_statement_to
 
 -> subprogram_body[2] {
    subprogram_statement_part = substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH);
-   split(array(subprogram_statement_tokens), :subprogram_statement_part, /((?:\s*--.*\s*)+|\s*;\s*)/);
+   split(array(subprogram_statement_tokens), subprogram_statement_part, /((?:\s*--.*\s*)+|\s*;\s*)/);
    split_each(array(subprogram_statement_tokens), /^(\s+)/);
    filter_nonempty(array(subprogram_statement_tokens));
    return(array("?subprogram_body:", flat_array(entry_groups()), copy(array(subprogram_statement_tokens))))
@@ -312,17 +312,17 @@ LE {start_capture_slice()}
 -> downto_or_to           {
    msi_lsi = undef;
    msi_lsi = join_values("", array(capt));
-   substr(:msi_lsi, /^\s+|\n\s*|\s+$/, //, goi);
-   push(array(msi_lsi), :msi_lsi);
+   substr(msi_lsi, /^\s+|\n\s*|\s+$/, //, goi);
+   push(array(msi_lsi), msi_lsi);
    set(array(capt), array())
 } 
 -> signal_decl_range[1]   {
    if(not(is_empty(array(capt))));
     msi_lsi = undef;
     msi_lsi = join_values("", array(capt));
-    if(:msi_lsi);
-     substr(:msi_lsi, /^\s+|\n\s*|\s+$/, //, goi);
-     push(array(msi_lsi), :msi_lsi);
+    if(msi_lsi);
+     substr(msi_lsi, /^\s+|\n\s*|\s+$/, //, goi);
+     push(array(msi_lsi), msi_lsi);
     endif();
    endif();
 
@@ -336,7 +336,7 @@ type_declaration:     /(?is)\btype\s+(\w+)\s+is\s+/ /\s*;/
 -> type_declaration[1]      {
 	type_definition = undef;
 	type_definition = CAPTURE;
-	return(array("?type_declaration:", flat_array(entry_groups()), :type_definition))}
+	return(array("?type_declaration:", flat_array(entry_groups()), type_definition))}
 record_endrecord:   /(?is)\brecord\s.+?\bend\s+record\s+/
 
 
@@ -346,7 +346,7 @@ constant_declaration: /(?is)\bconstant\s+(.+?)\s*:\s*(.+?)(?:\s*:=\s*(.+?))?\s*;
   subtype_indication = entry_group(1);
   expression = entry_group(2);
 
-  return(split_tagged_records(:identifier_list, /\s*,\s*/o, "?constant_declaration:", :subtype_indication, :expression))
+  return(split_tagged_records(identifier_list, /\s*,\s*/o, "?constant_declaration:", subtype_indication, expression))
 }
 
 variable_declaration: /(?is)\b(?:shared\s+)?variable\s+(.+?)\s*:\s*(.+?)(?:\s*:=\s*(.+?))?\s*;/ I {
@@ -354,14 +354,14 @@ variable_declaration: /(?is)\b(?:shared\s+)?variable\s+(.+?)\s*:\s*(.+?)(?:\s*:=
   subtype_indication = entry_group(1);
   expression = entry_group(2);
 
-  return(split_tagged_records(:identifier_list, /\s*,\s*/o, "?variable_declaration:", :subtype_indication, :expression))
+  return(split_tagged_records(identifier_list, /\s*,\s*/o, "?variable_declaration:", subtype_indication, expression))
 }
 
 file_declaration: /(?is)\bfile\s+(.+?)\s*:\s*(.+?)\s*;/ I {
   identifier_list = entry_group(0);
   remainder_info = entry_group(1);
 
-  return(split_tagged_records(:identifier_list, /\s*,\s*/o, "?file_declaration:", :remainder_info))
+  return(split_tagged_records(identifier_list, /\s*,\s*/o, "?file_declaration:", remainder_info))
 }
 
 alias_declaration:          /(?is)\balias\s+(\S+)\s+(.+?)?\bis\s+(\w+)(?:.*?)\s*;/    I.return(array("?alias_declaration:", flat_array(entry_groups())))
@@ -376,7 +376,7 @@ signal_declaration: /(?is)\bsignal\s+(.+?)\s*:\s*(.+?)(?:\s+(register|bus))?(?:\
   signal_kind = entry_group(2);
   expression = entry_group(3);
 
-  return(split_tagged_records(:identifier_list, /\s*,\s*/o, "?signal_declaration:", :subtype_indication, :signal_kind, :expression))
+  return(split_tagged_records(identifier_list, /\s*,\s*/o, "?signal_declaration:", subtype_indication, signal_kind, expression))
 }
 
 configuration_specification: /(?is)\bfor\s+(.+?)\s*:\s*(\w+)\s+(.+?)\s*;/ I {
@@ -384,7 +384,7 @@ configuration_specification: /(?is)\bfor\s+(.+?)\s*:\s*(\w+)\s+(.+?)\s*;/ I {
   component_name = entry_group(1);
   binding_indication = entry_group(2);
 
-  return(split_tagged_records(:instantiation_list, /\s*,\s*/o, "?configuration_specification:", :component_name, :binding_indication))
+  return(split_tagged_records(instantiation_list, /\s*,\s*/o, "?configuration_specification:", component_name, binding_indication))
 }
 
 downto_or_to: /(?i)\b(?:downto|to)\b/

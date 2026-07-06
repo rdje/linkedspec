@@ -2352,6 +2352,27 @@ fn terse_15_2_3_bare_switch_case_labels_are_literal_tags() {
     );
 }
 
+#[test]
+fn terse_15_2_4_descriptor_scalar_bare_read_survives_same_name_array_accumulator() {
+    let grammar = r#"Top::
+I { rule = undef }
+-> Header {
+  if(rule);
+  set(array(rule), array());
+  push(array(rule), array("word", "Term"));
+  return(array(rule, flat_array(rule)))
+  endif()
+}
+
+Header: /\w+/ I.return(array("rule", entry_text()))
+"#;
+    assert_eq!(
+        build_and_run(grammar, "Expr Term"),
+        serde_json::json!([[["rule", "Expr"], ["word", "Term"]]]),
+        "descriptor-tag scalar reads stay distinct from same-name aggregate wrapper reads"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.2.2.6.2 — Rust attached-block while parity:
 
 #[test]

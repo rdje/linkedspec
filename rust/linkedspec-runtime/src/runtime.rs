@@ -28,6 +28,9 @@ pub struct RuntimeContext {
     hashes: std::collections::HashMap<String, Vec<(String, RuntimeValue)>>,
     /// Remembered bare identifier kind after declaration or assignment.
     bare_kinds: std::collections::HashMap<String, RuntimeVarKind>,
+    /// Descriptor-tag scalars that must stay bare-readable even when a same-name
+    /// aggregate accumulator is mutated through `array(name)` / `hash(name)`.
+    descriptor_scalar_bare_reads: std::collections::HashSet<String>,
     /// The rule's main accumulator (return value).
     pub accumulator: Vec<RuntimeValue>,
     /// Entry capture groups (group 0 = first participating capture).
@@ -101,6 +104,7 @@ struct RuntimeVariableSnapshot {
     array: Option<Vec<RuntimeValue>>,
     hash: Option<Vec<(String, RuntimeValue)>>,
     bare_kind: Option<RuntimeVarKind>,
+    descriptor_scalar_bare_read: bool,
 }
 
 #[derive(Debug, Clone)]
@@ -123,6 +127,7 @@ pub(crate) struct RuntimeVariableStores {
     arrays: std::collections::HashMap<String, Vec<RuntimeValue>>,
     hashes: std::collections::HashMap<String, Vec<(String, RuntimeValue)>>,
     bare_kinds: std::collections::HashMap<String, RuntimeVarKind>,
+    descriptor_scalar_bare_reads: std::collections::HashSet<String>,
 }
 
 impl RuntimeContext {
@@ -135,6 +140,7 @@ impl RuntimeContext {
             arrays: std::collections::HashMap::new(),
             hashes: std::collections::HashMap::new(),
             bare_kinds: std::collections::HashMap::new(),
+            descriptor_scalar_bare_reads: std::collections::HashSet::new(),
             accumulator: Vec::new(),
             entry_groups: Vec::new(),
             entry_named: std::collections::HashMap::new(),
@@ -307,6 +313,9 @@ impl RuntimeContext {
     }
 
     pub fn get_bare_value(&self, name: &str) -> RuntimeValue {
+        if self.descriptor_scalar_bare_reads.contains(name) {
+            return self.get_scalar(name);
+        }
         match self.bare_kinds.get(name).copied() {
             Some(RuntimeVarKind::Array) => RuntimeValue::Array(self.get_array(name)),
             Some(RuntimeVarKind::Hash) => RuntimeValue::Hash(self.get_hash(name)),
@@ -316,6 +325,10 @@ impl RuntimeContext {
 
     pub fn bare_kind(&self, name: &str) -> Option<RuntimeVarKind> {
         self.bare_kinds.get(name).copied()
+    }
+
+    pub(crate) fn descriptor_scalar_bare_read(&self, name: &str) -> bool {
+        self.descriptor_scalar_bare_reads.contains(name)
     }
 
     // ── Arrays ──
@@ -422,6 +435,7 @@ impl RuntimeContext {
             arrays: std::mem::take(&mut self.arrays),
             hashes: std::mem::take(&mut self.hashes),
             bare_kinds: std::mem::take(&mut self.bare_kinds),
+            descriptor_scalar_bare_reads: std::mem::take(&mut self.descriptor_scalar_bare_reads),
         }
     }
 
@@ -430,6 +444,7 @@ impl RuntimeContext {
         self.arrays = stores.arrays;
         self.hashes = stores.hashes;
         self.bare_kinds = stores.bare_kinds;
+        self.descriptor_scalar_bare_reads = stores.descriptor_scalar_bare_reads;
     }
 
     pub(crate) fn enter_rule_variable_scope(&mut self) {
@@ -468,11 +483,16 @@ impl RuntimeContext {
             }
             match snapshot.bare_kind {
                 Some(value) => {
-                    self.bare_kinds.insert(name, value);
+                    self.bare_kinds.insert(name.clone(), value);
                 }
                 None => {
                     self.bare_kinds.remove(&name);
                 }
+            }
+            if snapshot.descriptor_scalar_bare_read {
+                self.descriptor_scalar_bare_reads.insert(name);
+            } else {
+                self.descriptor_scalar_bare_reads.remove(&name);
             }
         }
     }
@@ -500,6 +520,7 @@ impl RuntimeContext {
                 array: self.arrays.get(name).cloned(),
                 hash: self.hashes.get(name).cloned(),
                 bare_kind: self.bare_kinds.get(name).copied(),
+                descriptor_scalar_bare_read: self.descriptor_scalar_bare_reads.contains(name),
             });
     }
 
@@ -535,9 +556,41 @@ impl RuntimeContext {
     /// the scalar-slot shorthand (Runtime Semantics §3.3 / §6.1). Before this was wired
     /// in, `retv` resolved to undef for virtually every grammar.
     pub fn set_retv(&mut self, value: RuntimeValue) {
+        self.bind_descriptor_scalar_bare_read(&value);
         self.bare_kinds
             .insert("retv".to_string(), RuntimeVarKind::Scalar);
         self.scalars.insert("retv".to_string(), value);
+    }
+
+    fn bind_descriptor_scalar_bare_read(&mut self, value: &RuntimeValue) {
+        let Some(name) = Self::descriptor_scalar_name(value) else {
+            return;
+        };
+        self.scalars.insert(name.to_string(), value.clone());
+        self.descriptor_scalar_bare_reads.insert(name.to_string());
+    }
+
+    fn descriptor_scalar_name(value: &RuntimeValue) -> Option<&str> {
+        let RuntimeValue::Array(values) = value else {
+            return None;
+        };
+        let Some(RuntimeValue::Scalar(name)) = values.first() else {
+            return None;
+        };
+        if Self::is_identifier(name) {
+            Some(name)
+        } else {
+            None
+        }
+    }
+
+    fn is_identifier(name: &str) -> bool {
+        let mut chars = name.chars();
+        let Some(first) = chars.next() else {
+            return false;
+        };
+        (first == '_' || first.is_ascii_alphabetic())
+            && chars.all(|ch| ch == '_' || ch.is_ascii_alphanumeric())
     }
 
     pub fn push_action_edge_call_result(&mut self, label: &str, value: RuntimeValue) {

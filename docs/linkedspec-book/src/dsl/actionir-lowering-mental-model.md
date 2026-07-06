@@ -25,7 +25,7 @@ Instead of asking readers to understand a substring expression, a mutable array 
 
 ```text
 name = entry_group(0);
-push(array(items), :name);
+push(array(items), name);
 return(hash("kind", "names", "items", copy(array(items))));
 ```
 
@@ -37,7 +37,7 @@ Source-level helper DSL:
 
 ```text
 name = entry_group(0);
-return(hash("kind", "token", "name", :name));
+return(hash("kind", "token", "name", name));
 ```
 
 Semantic reading:
@@ -55,7 +55,7 @@ However, new public examples should prefer canonical helper forms:
 
 ```text
 retv = call(Child);
-push(array(items), :retv);
+push(array(items), retv);
 ```
 
 over raw or compatibility-heavy shapes such as direct Perl assignment and manual array mutation.
