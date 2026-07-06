@@ -41614,7 +41614,7 @@ subtest 'ebnf_spec_prefers_canonical_container_wrappers_in_core_method_dsl_band'
     like($source_content, qr/\.if\(on\)/, 'ebnf core method-DSL band now prefers bare on in fluent guard checks');
     unlike($source_content, qr/\.if\(s\(on\)\)/, 'ebnf fluent guard checks no longer use retired s(on) aliases in the migrated band');
     like($source_content, qr/I\.return\(array\("rule", entry_group\(0\)\)\)/, 'ebnf grammar_rule token reader now uses the canonical array constructor');
-    like($source_content, qr/push\(array\(rules\), array\(rule, flat_array\(rule\)\)\)/, 'ebnf grammar_file accumulation band now uses push(...) plus bare rule and array(rule) wrappers');
+    like($source_content, qr/push\(array\(rules\), array\(rule_header, flat_array\(rule\)\)\)/, 'ebnf grammar_file accumulation band now uses push(...) plus bare rule_header and array(rule) wrappers');
 };
 subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
     plan tests => 16;

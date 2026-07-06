@@ -55,7 +55,7 @@ slot.
 
 **Consequence.** `SPEC-FORMAT-TERSE.15` is engine-first: `.15.2.2`/`.15.2.3` make bare
 value-position reads honor the bound variable on Perl + Rust, `.15.2.4` migrates sources
-(now output-preserving), `.15.3` removes Perl `:name` support, and `.15.4` removes Rust
+(now output-preserving), `.15.3` removed Perl `:name` support, and `.15.4` removed Rust
 `Expr::ScalarSlot` support. See ADR `0019`, and
 [[terse-duck-typed-assignment-perl-reference]] for the assignment-binding side of the same
 surface.

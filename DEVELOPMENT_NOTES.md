@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.15.4 — Rust colon-slot removal needs action-edge `retv` awareness):
+  Rust no longer has an `Expr::ScalarSlot` compatibility branch. `:name` fails in the core parser with the same
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read` sentinel family used by Perl, and all
+  runtime/source-emitter fixtures use bare value reads. The subtle Rust-only boundary is action-edge execution:
+  after removing `:retv` fixtures, blocks that read bare `retv` still need the matched edge child's scoped return
+  available before block evaluation. Treat `block_reads_retv(...)` like an explicit `call(child)` for
+  pre-dispatch/scoped-result purposes. The EBNF oracle is a good regression target here: the shipped spec must use
+  a distinct scalar header (`rule_header`) plus aggregate body array (`rule`) so bare reads do not rely on the old
+  same-name scalar/array collision. The generated corpus case now named `terse_15_4_bare_scalar_payload_readback`
+  is the current bare-read lock for the former scalar-slot payload example. Phase0 also has a source lock for this
+  EBNF seam; keep it keyed to `rule_header`, not the old same-name `rule` scalar.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.15.3 — removing `:name` also tests the bare-read grammar boundaries):
   Perl `:name` is now hard-retired, not compat-retained: parsing/lowering emits
   `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read`, and `scalar_slot_fallback` is gone.

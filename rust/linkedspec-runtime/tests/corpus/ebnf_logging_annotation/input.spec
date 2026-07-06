@@ -6,13 +6,13 @@ grammar_file:: I {
   rule = [];
   includes = [];
   semantic_annotations = [];
-  rule = undef;
+  rule_header = undef;
   on = undef
 }
 
 LX {
-  if(rule);
-    push(array(rules), array(rule, flat_array(rule)));
+  if(rule_header);
+    push(array(rules), array(rule_header, flat_array(rule)));
   endif();
 
   return(array(flat_array(includes), flat_array(rules)))
@@ -22,14 +22,14 @@ LX {
 -> include_file.push(includes)
 
 -> grammar_rule   {
-  if(rule);
-    push(array(rules), array(rule, flat_array(rule)));
+  if(rule_header);
+    push(array(rules), array(rule_header, flat_array(rule)));
   endif();
 
   set(array(rule), array(flat_array(semantic_annotations)));
   set(array(semantic_annotations), array());
 
-  rule = call(grammar_rule);
+  rule_header = call(grammar_rule);
   on = 1
 }
 

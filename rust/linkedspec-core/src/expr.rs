@@ -1,5 +1,5 @@
 //! Expression AST for lifecycle code — parsed from code strings like
-//! `push(array(results), :retv)` and interpreted at runtime.
+//! `push(array(results), retv)` and interpreted at runtime.
 //!
 //! This is the Rust-native replacement for Perl's eval-based code generation.
 //! Lifecycle code is parsed into expression trees once at compile time,
@@ -76,7 +76,7 @@ pub struct HashLiteralEntry {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "kind")]
 pub enum Expr {
-    /// A helper function call: `push(array(results), :retv)`
+    /// A helper function call: `push(array(results), retv)`
     #[serde(rename = "call")]
     Call { name: String, args: Vec<Arg> },
     /// A scalar assignment operator: `name = value`
@@ -102,9 +102,6 @@ pub enum Expr {
     /// A variable reference: `results`, `retv`, `$name`
     #[serde(rename = "variable")]
     Variable { name: String },
-    /// An explicit scalar-slot reference: `:name`
-    #[serde(rename = "scalar_slot")]
-    ScalarSlot { name: String },
     /// An indexed variable access: `results[0]`, `$hash{"key"}`
     #[serde(rename = "indexed_var")]
     IndexedVar { name: String, index: Box<Expr> },
@@ -209,7 +206,6 @@ impl std::fmt::Display for Expr {
                 write!(f, " = {value}")
             }
             Expr::Variable { name } => write!(f, "{name}"),
-            Expr::ScalarSlot { name } => write!(f, ":{name}"),
             Expr::IndexedVar { name, index } => write!(f, "{name}[{index}]"),
             Expr::NestedAccess { base, segments } => {
                 write!(f, "{base}")?;
@@ -870,7 +866,7 @@ impl<'a> Parser<'a> {
                 let expr = self.parse_array_literal()?;
                 self.parse_fluent_chain(expr)
             }
-            ':' => self.parse_scalar_slot(),
+            ':' => self.parse_retired_colon_scalar_slot(),
             '{' => {
                 let expr = self.parse_brace_expr()?;
                 self.parse_fluent_chain(expr)
@@ -1352,27 +1348,28 @@ impl<'a> Parser<'a> {
         }
     }
 
-    fn parse_scalar_slot(&mut self) -> Result<Expr, String> {
+    fn parse_retired_colon_scalar_slot(&mut self) -> Result<Expr, String> {
+        let colon_pos = self.pos;
         self.advance(1);
         let start = self.pos;
-        let Some(first) = self.peek() else {
-            return Err("expected scalar slot name after ':'".into());
-        };
-        if !(first.is_ascii_alphabetic() || first == '_') {
+        if let Some(first) = self.peek()
+            && (first.is_ascii_alphabetic() || first == '_')
+        {
+            while let Some(ch) = self.peek() {
+                if ch.is_ascii_alphanumeric() || ch == '_' {
+                    self.advance(ch.len_utf8());
+                } else {
+                    break;
+                }
+            }
+            let name = &self.src[start..self.pos];
             return Err(format!(
-                "expected scalar slot name after ':' at position {}",
-                self.pos
+                "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read: retired ':{name}' scalar-slot syntax at position {colon_pos}; use bare '{name}'"
             ));
         }
-        while let Some(ch) = self.peek() {
-            if ch.is_ascii_alphanumeric() || ch == '_' {
-                self.advance(ch.len_utf8());
-            } else {
-                break;
-            }
-        }
-        let name = self.src[start..self.pos].to_string();
-        self.parse_fluent_chain(Expr::ScalarSlot { name })
+        Err(format!(
+            "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read: retired colon-prefixed scalar-slot syntax at position {colon_pos}; use bare variable reads"
+        ))
     }
 
     fn parse_access_segments(&mut self, name: &str) -> Result<Vec<AccessSegment>, String> {
@@ -1632,7 +1629,7 @@ mod tests {
 
     #[test]
     fn parse_nested_calls() {
-        let code = r#"push(array(results), :retv)"#;
+        let code = r#"push(array(results), retv)"#;
         let block = CodeBlock::parse(code).unwrap();
         match &block.statements[0].expr {
             Expr::Call { name, args } => {
@@ -1645,7 +1642,7 @@ mod tests {
 
     #[test]
     fn parse_call_with_whitespace_before_parentheses() {
-        let code = r#"set (name, cat ("a", "b")); return (:name)"#;
+        let code = r#"set (name, cat ("a", "b")); return (name)"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 2);
         match &block.statements[0].expr {
@@ -1666,8 +1663,8 @@ mod tests {
             Expr::Call { name, args } => {
                 assert_eq!(name, "return");
                 match args[0].value() {
-                    Expr::ScalarSlot { name } => assert_eq!(name, "name"),
-                    _ => panic!("expected scalar slot"),
+                    Expr::Variable { name } => assert_eq!(name, "name"),
+                    _ => panic!("expected bare variable read"),
                 }
             }
             _ => panic!("expected return call"),
@@ -1877,7 +1874,7 @@ mod tests {
 
     #[test]
     fn parse_attached_while_block_as_lazy_statement_loop() {
-        let code = r#"set(count, 0); while(num_lt(:count, 3)) { set(count, num_add(:count, 1)) }; return(count)"#;
+        let code = r#"set(count, 0); while(num_lt(count, 3)) { set(count, num_add(count, 1)) }; return(count)"#;
         let block = CodeBlock::parse(code).unwrap();
 
         assert_eq!(statement_call_names(&block), vec!["set", "while", "return"]);
@@ -1946,7 +1943,7 @@ mod tests {
 
     #[test]
     fn parse_scalar_assignment_statement() {
-        let code = r#"name = cat("o", "k"); return(:name)"#;
+        let code = r#"name = cat("o", "k"); return(name)"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 2);
         match &block.statements[0].expr {
@@ -1986,7 +1983,7 @@ mod tests {
 
     #[test]
     fn parse_hash_index_assignment_statement() {
-        let code = r#"meta[cat("s", "tage")] = :value; return(hash_copy(hash(meta)))"#;
+        let code = r#"meta[cat("s", "tage")] = value; return(hash_copy(hash(meta)))"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 2);
         match &block.statements[0].expr {
@@ -2000,8 +1997,8 @@ mod tests {
                     _ => panic!("expected call key"),
                 }
                 match value.as_ref() {
-                    Expr::ScalarSlot { name } => assert_eq!(name, "value"),
-                    _ => panic!("expected scalar-slot RHS"),
+                    Expr::Variable { name } => assert_eq!(name, "value"),
+                    _ => panic!("expected bare variable RHS"),
                 }
             }
             _ => panic!("expected hash-index assignment"),
@@ -2080,32 +2077,12 @@ mod tests {
     }
 
     #[test]
-    fn parse_scalar_slot_shorthand_expr() {
-        let code = r#"set(:payload, [value]); return([:value, :payload])"#;
-        let block = CodeBlock::parse(code).unwrap();
-        match &block.statements[0].expr {
-            Expr::Call { name, args } => {
-                assert_eq!(name, "set");
-                assert!(matches!(args[0].value(), Expr::ScalarSlot { name } if name == "payload"));
-            }
-            other => panic!("expected set call, got {:?}", other),
-        }
-        match &block.statements[1].expr {
-            Expr::Call { name, args } => {
-                assert_eq!(name, "return");
-                match args[0].value() {
-                    Expr::ArrayLiteral { items } => {
-                        assert_eq!(items.len(), 2);
-                        assert!(matches!(&items[0], Expr::ScalarSlot { name } if name == "value"));
-                        assert!(
-                            matches!(&items[1], Expr::ScalarSlot { name } if name == "payload")
-                        );
-                    }
-                    other => panic!("expected ArrayLiteral, got {:?}", other),
-                }
-            }
-            other => panic!("expected return call, got {:?}", other),
-        }
+    fn parse_retired_colon_scalar_slot_reports_bare_read_migration() {
+        let err = CodeBlock::parse(r#"set(:payload, [value]); return(:payload)"#)
+            .expect_err("retired colon scalar slot must not parse");
+        assert!(err.contains("colon_scalar_slot_use_bare_read"));
+        assert!(err.contains("retired ':payload' scalar-slot syntax"));
+        assert!(err.contains("use bare 'payload'"));
     }
 
     #[test]
@@ -2283,7 +2260,7 @@ mod tests {
 
     #[test]
     fn parse_multiple_statements() {
-        let code = r#"declare(array, results); push(array(results), :retv); return(array_copy(array(results)))"#;
+        let code = r#"declare(array, results); push(array(results), retv); return(array_copy(array(results)))"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 3);
     }
@@ -2555,7 +2532,7 @@ mod tests {
 
     #[test]
     fn parse_fluent_chain_single_dot() {
-        let code = r#"set(name, entry_text()).return(:name)"#;
+        let code = r#"set(name, entry_text()).return(name)"#;
         let block = CodeBlock::parse(code).unwrap();
         // First statement should be: set(...).return(...)
         let first = &block.statements[0].expr;
@@ -2576,7 +2553,7 @@ mod tests {
 
     #[test]
     fn parse_fluent_chain_multiple_dots() {
-        let code = "push(array(items), :retv).return(array_copy(array(items))).endif()";
+        let code = "push(array(items), retv).return(array_copy(array(items))).endif()";
         let block = CodeBlock::parse(code).unwrap();
         let first = &block.statements[0].expr;
         match first {
@@ -2597,7 +2574,7 @@ mod tests {
     #[test]
     fn parse_fluent_chain_on_variable() {
         // Variable with fluent chain (used for I.declare(...) style)
-        let code = "results.push(:new)";
+        let code = "results.push(new)";
         let block = CodeBlock::parse(code).unwrap();
         match &block.statements[0].expr {
             Expr::FluentChain { receiver, calls } => {
@@ -2830,7 +2807,7 @@ mod tests {
 
     #[test]
     fn roundtrip_nested_calls() {
-        assert_roundtrip("push(array(results), :retv)");
+        assert_roundtrip("push(array(results), retv)");
     }
 
     #[test]
@@ -2924,7 +2901,7 @@ mod tests {
 
     #[test]
     fn roundtrip_fluent_chain() {
-        let code = "set(name, entry_text()).return(:name)";
+        let code = "set(name, entry_text()).return(name)";
         let block1 = CodeBlock::parse(code).unwrap();
         let displayed = block1.statements[0].expr.to_string();
         let block2 = CodeBlock::parse(&displayed).unwrap();
@@ -2945,7 +2922,7 @@ mod tests {
 
     #[test]
     fn roundtrip_fluent_chain_multi() {
-        let code = "push(array(items), :retv).return(array_copy(array(items))).endif()";
+        let code = "push(array(items), retv).return(array_copy(array(items))).endif()";
         let block1 = CodeBlock::parse(code).unwrap();
         let displayed = block1.statements[0].expr.to_string();
         let block2 = CodeBlock::parse(&displayed).unwrap();
@@ -3006,7 +2983,7 @@ mod tests {
     fn parse_newline_separated_statements_without_semicolons() {
         // Newlines are the implicit separator for method-only statements.
         let code = r#"declare(array, results)
-push(array(results), :retv)
+push(array(results), retv)
 return(array_copy(array(results)))"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 3);
@@ -3015,7 +2992,7 @@ return(array_copy(array(results)))"#;
     #[test]
     fn parse_statements_with_semicolons() {
         let code = r#"declare(array, results);
-push(array(results), :retv);
+push(array(results), retv);
 return(array_copy(array(results)));"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 3);
@@ -3023,7 +3000,7 @@ return(array_copy(array(results)));"#;
 
     #[test]
     fn parse_same_line_statements_require_semicolons() {
-        let result = CodeBlock::parse("declare(array, results) push(array(results), :retv)");
+        let result = CodeBlock::parse("declare(array, results) push(array(results), retv)");
         assert!(result.is_err());
         assert!(result.unwrap_err().contains("expected ';' or newline"));
     }
@@ -3252,7 +3229,7 @@ return(array_copy(array(results)));"#;
 
     #[test]
     fn serde_roundtrip_codeblock() {
-        let code = r#"push(array(results), :retv)"#;
+        let code = r#"push(array(results), retv)"#;
         let block = CodeBlock::parse(code).unwrap();
         let json = serde_json::to_string(&block).unwrap();
         let _back: CodeBlock = serde_json::from_str(&json).unwrap();
@@ -3260,7 +3237,7 @@ return(array_copy(array(results)));"#;
 
     #[test]
     fn serde_roundtrip_fluent_chain() {
-        let code = "set(name, entry_text()).return(:name)";
+        let code = "set(name, entry_text()).return(name)";
         let block = CodeBlock::parse(code).unwrap();
         let json = serde_json::to_string(&block).unwrap();
         let back: CodeBlock = serde_json::from_str(&json).unwrap();

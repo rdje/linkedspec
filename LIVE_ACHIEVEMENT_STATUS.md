@@ -7,8 +7,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.15.4 — retire Rust colon scalar slots**
+  (DONE; FRONTIER `.15.5` FINAL NO-DRIFT CLOSEOUT NEXT).
+
+  **Change:** Rust `Expr::ScalarSlot` was removed from the core AST and runtime/source-emitter paths. A retired
+  `:name` value primary now emits
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read` with bare-read migration guidance.
+
+  **Semantics preserved:** Runtime fixtures use bare reads. Action-edge blocks that call a child or read bare
+  `retv` pre-dispatch the matched edge child and expose the scoped child return to the attached block. `specs/ebnf.spec`
+  now uses `rule_header` for the scalar rule header and `rule` for the aggregate body, avoiding the old same-name
+  scalar/array collision under bare reads. The generated corpus case formerly named
+  `terse_6_2_3_1_scalar_slot_shorthand` is now `terse_15_4_bare_scalar_payload_readback`.
+
+  **Verification:** Focused Rust core/runtime/source-emitter/trace suites pass; `perl -Iperl
+  tools/gen_oracle_corpus.pl` regenerates **93** fixtures; Rust `corpus_oracle` passes over all **93** fixtures;
+  full Phase0 with `PERL5LIB=` cleared passes (`env PERL5LIB= perl -Iperl t/phase0_regression.t`, plan `1..1022`)
+  after refreshing the EBNF source-lock assertion to `rule_header`.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.15.3 — retire Perl colon scalar slots**
-  (DONE; FRONTIER `.15.4` RUST `Expr::ScalarSlot` REMOVAL NEXT, NOT STARTED).
+  (DONE; `.15.4` RUST `Expr::ScalarSlot` REMOVAL HAS SINCE CLOSED).
 
   **Change:** Perl reference `:name` scalar-slot syntax no longer parses/lowers as a successful read or target.
   Retired colon scalar slots now emit

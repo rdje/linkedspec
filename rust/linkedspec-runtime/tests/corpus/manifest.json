@@ -22,7 +22,7 @@
       "terse_11_3_shape_assignment_value_binding",
       "terse_11_3_assignment_replacement_and_explicit_targets",
       "terse_11_4_nested_mixed_value_path_assignment",
-      "terse_6_2_3_1_scalar_slot_shorthand",
+      "terse_15_4_bare_scalar_payload_readback",
       "terse_1_4_2_set_cat_copy_array",
       "terse_1_4_2_copy_hash_symbol_empty",
       "terse_1_3_2_push_alias_array",

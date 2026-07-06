@@ -367,7 +367,7 @@ Done::
  /[a-z]+/
 SPEC
     },
-    {   case   => 'terse_6_2_3_1_scalar_slot_shorthand',
+    {   case   => 'terse_15_4_bare_scalar_payload_readback',
         input  => 'xhello',
         source => <<'SPEC',
 Top::

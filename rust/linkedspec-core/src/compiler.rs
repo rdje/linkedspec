@@ -584,7 +584,7 @@ mod tests {
 
     #[test]
     fn compile_lifecycle_blocks() {
-        let src = "Top::\n /x/ I { declare(array, results) } LE { push_value(array(results), :retv) } E { return(array_copy(array(results))) }";
+        let src = "Top::\n /x/ I { declare(array, results) } LE { push_value(array(results), retv) } E { return(array_copy(array(results))) }";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         assert!(compiled.rules[0].preamble.is_some()); // I-block
@@ -639,7 +639,7 @@ mod tests {
 
     #[test]
     fn compile_serialize_deserialize() {
-        let src = "Top::\n /x/ I { declare(array, r) } LE { push_value(array(r), :retv) } E { return(array_copy(array(r))) }";
+        let src = "Top::\n /x/ I { declare(array, r) } LE { push_value(array(r), retv) } E { return(array_copy(array(r))) }";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         let json = serde_json::to_string(&compiled).unwrap();
@@ -796,7 +796,7 @@ mod tests {
     fn compile_multiline_action_edge_fluent_flow_chain() {
         let src = r#"Wrapper::
  -> child
-  .if(:on)
+  .if(on)
     .push(child, out)
   .else()
     .return_undef()
@@ -811,7 +811,7 @@ child: /x/
         assert_eq!(
             rule.acode_dispatch[0].fluent_chain,
             vec![
-                ("if".to_string(), ":on".to_string()),
+                ("if".to_string(), "on".to_string()),
                 ("push".to_string(), "child, out".to_string()),
                 ("else".to_string(), "".to_string()),
                 ("return_undef".to_string(), "".to_string()),
@@ -825,7 +825,7 @@ child: /x/
     #[test]
     fn build_dependency_regex_map_resolves_edge_only_entries() {
         // grep::-style: all entries are edge-only, each gets a unique alternation position
-        let src = "grep::\n -> re_term { set(:retv, call(re_term)) }\n -> or_op { set(:retv, call(or_op)) }\n\nre_term:\n /re_term_pattern/\nor_op:\n /or_op_pattern/\n";
+        let src = "grep::\n -> re_term { set(retv, call(re_term)) }\n -> or_op { set(retv, call(or_op)) }\n\nre_term:\n /re_term_pattern/\nor_op:\n /or_op_pattern/\n";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         let grep = compiled.find("grep").unwrap();

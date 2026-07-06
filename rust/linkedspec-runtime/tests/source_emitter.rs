@@ -53,8 +53,8 @@ Second:
 
 const AND_BCODE_SOURCE_EMITTER_SPEC: &str = r#"Top::AND
  I { declare(array, log) }
- => ChildA { push_value(array(log), :retv) }
- => ChildB { push_value(array(log), :retv) }
+ => ChildA { push_value(array(log), retv) }
+ => ChildB { push_value(array(log), retv) }
  E { return(array_copy(array(log))) }
 
 ChildA:
@@ -69,7 +69,7 @@ ChildB:
 const OR_BCODE_SOURCE_EMITTER_SPEC: &str = r#"Top::OR
  => ChildA
  => ChildB
- E { return(concat("or-bcode:", :retv)) }
+ E { return(concat("or-bcode:", retv)) }
 
 ChildA:
  /a/
@@ -110,7 +110,7 @@ const REP_BCODE_SOURCE_EMITTER_SPEC: &str = r#"Top::OR{2,3}
  I { declare(array, out) }
  => A
  => B
- LE { push_value(array(out), :retv) }
+ LE { push_value(array(out), retv) }
  E { return(array_copy(array(out))) }
 
 A:&
@@ -126,7 +126,7 @@ const REP_AND_ACODE_SOURCE_EMITTER_SPEC: &str = r#"Top::AND{2}
  I { declare(array, pairs); declare(array, pair) }
  /a/ -> A { push_value(array(pair), match_text()) }
  /b/ -> B { push_value(array(pair), match_text()) }
- IT { push_value(array(pairs), array_copy(array(pair))); set(pair, []) }
+ IT { push_value(array(pairs), array_copy(array(pair))); set(array(pair), []) }
  E { return(array_copy(array(pairs))) }
 
 A:
@@ -138,9 +138,9 @@ B:
 
 const REP_AND_BCODE_SOURCE_EMITTER_SPEC: &str = r#"Top::AND{2}
  I { declare(array, groups); declare(array, group) }
- => A { push_value(array(group), :retv) }
- => B { push_value(array(group), :retv) }
- IT { push_value(array(groups), array_copy(array(group))); set(group, []) }
+ => A { push_value(array(group), retv) }
+ => B { push_value(array(group), retv) }
+ IT { push_value(array(groups), array_copy(array(group))); set(array(group), []) }
  E { return(array_copy(array(groups))) }
 
 A:&

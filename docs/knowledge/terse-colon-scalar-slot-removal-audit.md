@@ -13,7 +13,7 @@ answers:
 date: 2026-07-06
 status: confirmed
 tags: [spec-format-terse, scalar-slot, variables, task-tree, audit, rust, perl, docs, corpus]
-evidence: "SPEC-FORMAT-TERSE.15.1 audited `:name` scalar-slot usage before implementation. The scan found current usage across shipped specs/root corpora, generated Rust oracle fixtures, mdBook current guidance, Knowledge Map facts, `tools/gen_oracle_corpus.pl`, active Perl trace/phase0 tests, Rust parser/runtime/source-emitter tests, and parser/runtime code including Rust `Expr::ScalarSlot` plus Perl scalar-slot extraction/lowering. The lane is split: `.15.2` migrated current authored specs, corpus fixtures, mdBook guidance, and current Knowledge Map facts to bare-name value reads; `.15.3` hard-retired Perl reference `:name` parsing/lowering; `.15.4` removes or hard-retires Rust `Expr::ScalarSlot` parsing/runtime support; `.15.5` performs the final no-drift closeout. Hash-literal key positions remain a separate grammar boundary and must not be reinterpreted as value reads."
+evidence: "SPEC-FORMAT-TERSE.15.1 audited `:name` scalar-slot usage before implementation. The scan found current usage across shipped specs/root corpora, generated Rust oracle fixtures, mdBook current guidance, Knowledge Map facts, `tools/gen_oracle_corpus.pl`, active Perl trace/phase0 tests, Rust parser/runtime/source-emitter tests, and parser/runtime code including Rust `Expr::ScalarSlot` plus Perl scalar-slot extraction/lowering. The lane is split: `.15.2` migrated current authored specs, corpus fixtures, mdBook guidance, and current Knowledge Map facts to bare-name value reads; `.15.3` hard-retired Perl reference `:name` parsing/lowering; `.15.4` hard-retired Rust `Expr::ScalarSlot` parsing/runtime support; `.15.5` performs the final no-drift closeout. Hash-literal key positions remain a separate grammar boundary and must not be reinterpreted as value reads."
 reverify: "rg -n ':[A-Za-z_][A-Za-z0-9_]*|ScalarSlot|scalar-slot|scalar slot' specs tests t tools perl rust docs/linkedspec-book/src docs/knowledge --glob '*.spec' --glob '*.md' --glob '*.t' --glob '*.pl' --glob '*.pm' --glob '*.rs'"
 ---
 
@@ -28,7 +28,7 @@ The safe order is:
 1. `SPEC-FORMAT-TERSE.15.2`: migrate current specs, corpus fixtures, mdBook guidance, and current Knowledge Map
    facts to bare-name value reads while compatibility still exists.
 2. `SPEC-FORMAT-TERSE.15.3`: retire Perl reference scalar-slot parsing/lowering. DONE 2026-07-06.
-3. `SPEC-FORMAT-TERSE.15.4`: retire Rust `Expr::ScalarSlot` parser/runtime support.
+3. `SPEC-FORMAT-TERSE.15.4`: retire Rust `Expr::ScalarSlot` parser/runtime support. DONE 2026-07-06.
 4. `SPEC-FORMAT-TERSE.15.5`: perform the final no-drift scan and closeout.
 
 The migration must preserve the grammar boundary between bare names in value positions, which read variables, and

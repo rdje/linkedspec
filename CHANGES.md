@@ -1,6 +1,37 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.15.4 — retire Rust colon scalar slots
+
+**Scope:** Hard-retire Rust `Expr::ScalarSlot` after `.15.2.4` migrated current sources to bare reads and `.15.3`
+retired the Perl reference backend. No compatibility retention.
+
+**Change:** `Expr::ScalarSlot` is removed from the Rust core AST. A leading `:name` value primary now fails at parse
+time with `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read` and explicit bare-read migration
+guidance. Runtime evaluation, mutation-target resolution, child-call scans, and source-emitter fixtures no longer
+carry a scalar-slot branch.
+
+**Runtime parity preserved:** Action-edge blocks that call a child or read bare `retv` pre-dispatch the matched
+edge child and expose its scoped return to `call(child)` / `retv` during the attached block. The EBNF shipped spec
+now uses `rule_header` to avoid the old same-name scalar/array `rule` collision under bare reads, and regenerated
+EBNF oracle input fixtures match the shipped spec. The stale generated oracle case
+`terse_6_2_3_1_scalar_slot_shorthand` was renamed to `terse_15_4_bare_scalar_payload_readback`.
+
+**Validation:**
+- `cargo test --manifest-path rust/Cargo.toml -p linkedspec-core expr::tests` — PASS.
+- `cargo test --manifest-path rust/Cargo.toml -p linkedspec-core compiler::tests` — PASS.
+- `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib` — PASS.
+- `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test integration_test` — PASS.
+- `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter` — PASS.
+- `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test trace_controls` — PASS.
+- `perl -c -Iperl tools/gen_oracle_corpus.pl` and `perl -Iperl tools/gen_oracle_corpus.pl` — PASS, **93** fixtures.
+- `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture` — PASS over
+  **93** fixtures.
+- `env PERL5LIB= perl -Iperl t/phase0_regression.t` — PASS, plan `1..1022`; Phase0's stale EBNF source lock was
+  updated from `rule` to `rule_header` to match the `.15.4` collision fix.
+
+**Frontier:** -> `.15.5` for final colon scalar-slot no-drift closeout.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.15.3 — retire Perl colon scalar slots
 
 **Scope:** Hard-retire Perl reference `:name` scalar-slot parsing/lowering after `.15.2.4` migrated current

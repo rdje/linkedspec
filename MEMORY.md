@@ -18,19 +18,18 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.15.3` — Perl reference `:name` scalar-slot parsing/lowering is
-  hard-retired; retired colon slots emit
-  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read` instead of a successful read/target, and
-  active Perl tests/fixtures use bare reads.
-- prior_leaf: `REPO-HYGIENE.2` (commit `cf0df422`) — `.claude/projects/` local agent state ignored; `rgx` remains a
-  tracked submodule/gitlink with `.gitmodules` `ignore = dirty`.
-- latest_commit: `95c22ec9` — `SPEC-FORMAT-TERSE.15.3 - retire Perl colon scalar slots`; parent
-  `8f4354f6`. **Branch is 312 commits ahead of origin — over the documented 300 push threshold;
-  still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.15.4` (Rust `Expr::ScalarSlot` parser/runtime removal) and it
-  may start only after confirming `git status` is handoff-ready.
-- next_action: Pick and own `SPEC-FORMAT-TERSE.15.4` (Rust `Expr::ScalarSlot` retirement) under the task tree; do
-  not push unless explicitly instructed.
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.15.4` — Rust `Expr::ScalarSlot` is hard-retired; `:name` now emits
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read`, Rust fixtures/corpus use bare reads, and
+  the EBNF oracle inputs use `rule_header` to avoid same-name scalar/array collision.
+- prior_leaf: `SPEC-FORMAT-TERSE.15.3` (commit `95c22ec9`) — Perl reference `:name` scalar-slot parsing/lowering is
+  hard-retired; active Perl tests/fixtures use bare reads.
+- latest_commit: HEAD containing this pointer should be `SPEC-FORMAT-TERSE.15.4 - retire Rust colon scalar slots`;
+  parent before this slice was `95c22ec9`. **Branch is over the documented 300 push threshold; still do NOT push
+  mid-PNT unless explicitly instructed.**
+- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.15.5` (final colon scalar-slot no-drift closeout) and it may
+  start only after confirming `git status` is handoff-ready.
+- next_action: after this `.15.4` commit is clean, pick and own `SPEC-FORMAT-TERSE.15.5`; do not push unless
+  explicitly instructed.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.
@@ -39,4 +38,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   worktree ignored by submodule policy. Deferred lanes behind `.15`: `.8` (legacy-helper removal), `.9` (hash
   `=>`→`:`), `.10`/`.12`/`.13`/`.14` backlog; `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`,
   `SPEC-LANG-REFERENCE`.
-- blockers: none for ownership. in_flight_uncommitted: none; do not pivot unless the repo is handoff-ready.
+- blockers: none for `.15.5` ownership. in_flight_uncommitted: none after the `.15.4` commit lands; do not pivot
+  unless the repo is handoff-ready.

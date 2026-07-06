@@ -230,7 +230,6 @@ fn regex_literal_arg(args: &[Arg], index: usize) -> Option<&str> {
 
 fn scalar_mutation_target_arg(arg: &Arg) -> Option<String> {
     match arg.value() {
-        Expr::ScalarSlot { name } => Some(name.clone()),
         Expr::Variable { name } => Some(name.clone()),
         _ => None,
     }
@@ -809,7 +808,9 @@ impl GeneratedPlanExecutor<'_> {
                         );
                         if entry.fluent_chain.is_empty() {
                             if let Some(ref block) = entry.code {
-                                if Engine::block_calls_rule(block, &entry.child_label) {
+                                if Engine::block_calls_rule(block, &entry.child_label)
+                                    || Engine::block_reads_retv(block)
+                                {
                                     let child_retv = self.execute_action_edge_child_rule(
                                         &entry.child_label,
                                         entry.child_regex_idx,
@@ -819,6 +820,7 @@ impl GeneratedPlanExecutor<'_> {
                                         &entry.child_label,
                                         child_retv.clone(),
                                     );
+                                    ctx.set_retv(child_retv.clone());
                                     let block_result = self.engine.execute_block(block, ctx, label);
                                     ctx.pop_action_edge_call_result();
                                     block_result?;
@@ -1959,11 +1961,14 @@ impl Engine {
                         );
                         if entry.fluent_chain.is_empty() {
                             if let Some(ref block) = entry.code {
-                                if Self::block_calls_rule(block, &entry.child_label) {
+                                if Self::block_calls_rule(block, &entry.child_label)
+                                    || Self::block_reads_retv(block)
+                                {
                                     // Perl lowers `call(child)` inside the edge
                                     // block to the already matched edge child.
-                                    // Pre-dispatch once, then let helper
-                                    // evaluation read that scoped result.
+                                    // A bare `retv` read has the same dependency:
+                                    // pre-dispatch once, then let helper
+                                    // evaluation read the scoped child result.
                                     let child_retv = self.execute_action_edge_child_rule(
                                         &entry.child_label,
                                         entry.child_regex_idx,
@@ -1973,6 +1978,7 @@ impl Engine {
                                         &entry.child_label,
                                         child_retv.clone(),
                                     );
+                                    ctx.set_retv(child_retv.clone());
                                     let block_result = self.execute_block(block, ctx, label);
                                     ctx.pop_action_edge_call_result();
                                     block_result?;
@@ -2165,8 +2171,62 @@ impl Engine {
                     })
             }
             Expr::Variable { .. }
-            | Expr::ScalarSlot { .. }
             | Expr::StringLiteral { .. }
+            | Expr::NumberLiteral { .. }
+            | Expr::BooleanLiteral { .. }
+            | Expr::RegexLiteral { .. }
+            | Expr::Undef => false,
+        }
+    }
+
+    fn block_reads_retv(block: &CodeBlock) -> bool {
+        block
+            .statements
+            .iter()
+            .any(|stmt| Self::expr_reads_retv(&stmt.expr))
+    }
+
+    fn expr_reads_retv(expr: &Expr) -> bool {
+        match expr {
+            Expr::Call { args, .. } => args.iter().any(Self::arg_reads_retv),
+            Expr::AssignScalar { value, .. } => Self::expr_reads_retv(value),
+            Expr::AssignArrayAppend { value, .. } => Self::expr_reads_retv(value),
+            Expr::AssignHashIndex { key, value, .. } => {
+                Self::expr_reads_retv(key) || Self::expr_reads_retv(value)
+            }
+            Expr::AssignNestedAccess {
+                base,
+                segments,
+                value,
+            } => {
+                base == "retv"
+                    || segments.iter().any(|segment| match segment {
+                        AccessSegment::Key { .. } => false,
+                        AccessSegment::Index { expr } => Self::expr_reads_retv(expr),
+                    })
+                    || Self::expr_reads_retv(value)
+            }
+            Expr::Variable { name } => name == "retv",
+            Expr::IndexedVar { name, index } => name == "retv" || Self::expr_reads_retv(index),
+            Expr::NestedAccess { base, segments } => {
+                base == "retv"
+                    || segments.iter().any(|segment| match segment {
+                        AccessSegment::Key { .. } => false,
+                        AccessSegment::Index { expr } => Self::expr_reads_retv(expr),
+                    })
+            }
+            Expr::ArrayLiteral { items } => items.iter().any(Self::expr_reads_retv),
+            Expr::HashLiteral { entries } => entries.iter().any(|entry| {
+                Self::expr_reads_retv(&entry.key) || Self::expr_reads_retv(&entry.value)
+            }),
+            Expr::BlockValue { block } => Self::block_reads_retv(block),
+            Expr::FluentChain { receiver, calls } => {
+                Self::expr_reads_retv(receiver)
+                    || calls
+                        .iter()
+                        .any(|call| call.args.iter().any(Self::arg_reads_retv))
+            }
+            Expr::StringLiteral { .. }
             | Expr::NumberLiteral { .. }
             | Expr::BooleanLiteral { .. }
             | Expr::RegexLiteral { .. }
@@ -2176,6 +2236,10 @@ impl Engine {
 
     fn arg_calls_rule(arg: &Arg, rule_label: &str) -> bool {
         Self::expr_calls_rule(arg.value(), rule_label)
+    }
+
+    fn arg_reads_retv(arg: &Arg) -> bool {
+        Self::expr_reads_retv(arg.value())
     }
 
     fn call_names_rule(args: &[Arg], rule_label: &str) -> bool {
@@ -3014,10 +3078,12 @@ impl Engine {
         use linkedspec_core::expr::{Arg, Expr};
         match receiver {
             Expr::Variable { name } => Some(name.clone()),
-            Expr::Call { name, args } if name == "array" && args.len() == 1 => match &args[0] {
-                Arg::Positional(Expr::Variable { name }) => Some(name.clone()),
-                _ => None,
-            },
+            Expr::Call { name, args } if (name == "array" || name == "a") && args.len() == 1 => {
+                match &args[0] {
+                    Arg::Positional(Expr::Variable { name }) => Some(name.clone()),
+                    _ => None,
+                }
+            }
             _ => None,
         }
     }
@@ -3170,8 +3236,10 @@ impl Engine {
             return None;
         };
         match (name.as_str(), value) {
-            ("array", RuntimeValue::Array(_)) => Some((ShapeLiteralKind::Array, target.clone())),
-            ("hash", RuntimeValue::Hash(_)) => Some((ShapeLiteralKind::Hash, target.clone())),
+            ("array" | "a", RuntimeValue::Array(_)) => {
+                Some((ShapeLiteralKind::Array, target.clone()))
+            }
+            ("hash" | "h", RuntimeValue::Hash(_)) => Some((ShapeLiteralKind::Hash, target.clone())),
             _ => None,
         }
     }
@@ -3290,7 +3358,6 @@ impl Engine {
             } => self
                 .eval_nested_access_assignment_expression(base, segments, value, ctx, rule_label),
             Expr::Variable { name } => Ok(ctx.get_bare_value(name)),
-            Expr::ScalarSlot { name } => Ok(ctx.get_scalar(name)),
             Expr::IndexedVar { name, index } => {
                 let idx_val = self.eval_expr(index, ctx, rule_label)?;
                 let idx: usize = idx_val.as_number().unwrap_or(0.0) as usize;
@@ -3682,14 +3749,16 @@ impl Engine {
             Expr::Variable { name } => Self::scalar_held_array_snapshot(ctx, name)
                 .map(RuntimeValue::Array)
                 .unwrap_or_else(|| RuntimeValue::Array(ctx.array_copy(name))),
-            Expr::Call { name, args } if name == "array" && args.len() == 1 => match &args[0] {
-                Arg::Positional(Expr::Variable { name }) => {
-                    Self::scalar_held_array_snapshot(ctx, name)
-                        .map(RuntimeValue::Array)
-                        .unwrap_or_else(|| RuntimeValue::Array(ctx.array_copy(name)))
+            Expr::Call { name, args } if (name == "array" || name == "a") && args.len() == 1 => {
+                match &args[0] {
+                    Arg::Positional(Expr::Variable { name }) => {
+                        Self::scalar_held_array_snapshot(ctx, name)
+                            .map(RuntimeValue::Array)
+                            .unwrap_or_else(|| RuntimeValue::Array(ctx.array_copy(name)))
+                    }
+                    _ => self.eval_expr(receiver, ctx, rule_label)?,
                 }
-                _ => self.eval_expr(receiver, ctx, rule_label)?,
-            },
+            }
             _ => self.eval_expr(receiver, ctx, rule_label)?,
         };
         let mut family = ReceiverFamily::Array;
@@ -3766,14 +3835,16 @@ impl Engine {
             Expr::Variable { name } => Self::scalar_held_hash_snapshot(ctx, name)
                 .map(RuntimeValue::Hash)
                 .unwrap_or_else(|| RuntimeValue::Hash(ctx.hash_copy(name))),
-            Expr::Call { name, args } if name == "hash" && args.len() == 1 => match &args[0] {
-                Arg::Positional(Expr::Variable { name }) => {
-                    Self::scalar_held_hash_snapshot(ctx, name)
-                        .map(RuntimeValue::Hash)
-                        .unwrap_or_else(|| RuntimeValue::Hash(ctx.hash_copy(name)))
+            Expr::Call { name, args } if (name == "hash" || name == "h") && args.len() == 1 => {
+                match &args[0] {
+                    Arg::Positional(Expr::Variable { name }) => {
+                        Self::scalar_held_hash_snapshot(ctx, name)
+                            .map(RuntimeValue::Hash)
+                            .unwrap_or_else(|| RuntimeValue::Hash(ctx.hash_copy(name)))
+                    }
+                    _ => self.eval_expr(receiver, ctx, rule_label)?,
                 }
-                _ => self.eval_expr(receiver, ctx, rule_label)?,
-            },
+            }
             _ => self.eval_expr(receiver, ctx, rule_label)?,
         };
         let mut family = ReceiverFamily::Hash;
@@ -4254,17 +4325,14 @@ impl Engine {
 
     /// Resolve a scalar target name from an evaluated value.
     ///
-    /// `:varname` explicitly names the scalar slot. A bare target name in
-    /// scalar-target position names the working variable itself.
+    /// A bare target name in scalar-target position names the working variable
+    /// itself.
     fn resolve_scalar_target(
         &self,
         raw_args: &[linkedspec_core::expr::Arg],
         val: &RuntimeValue,
     ) -> String {
         use linkedspec_core::expr::{Arg, Expr};
-        if let Some(Arg::Positional(Expr::ScalarSlot { name: var_name })) = raw_args.first() {
-            return var_name.clone();
-        }
         // SPEC-FORMAT-TERSE.1.2.1 Channel 1 (Rust parity, .1.2.2): a BARE
         // (un-wrapped) name in the scalar-target position (e.g. v = ...) IS
         // the working variable itself — mirrors the Perl reference's `^(\w+)$`
@@ -4292,7 +4360,7 @@ impl Engine {
         use linkedspec_core::expr::{Arg, Expr};
         // Check if the raw arg is `array(variable)`.
         if let Some(Arg::Positional(Expr::Call { name, args })) = raw_args.first() {
-            if name == "array" && args.len() == 1 {
+            if (name == "array" || name == "a") && args.len() == 1 {
                 if let Arg::Positional(Expr::Variable { name: var_name }) = &args[0] {
                     return var_name.clone();
                 }
@@ -4328,7 +4396,9 @@ impl Engine {
     ) -> String {
         use linkedspec_core::expr::{Arg, Expr};
         if let Some(var_name) = raw_args.first().and_then(|arg| match arg {
-            Arg::Positional(Expr::Call { name, args }) if name == "hash" && args.len() == 1 => {
+            Arg::Positional(Expr::Call { name, args })
+                if (name == "hash" || name == "h") && args.len() == 1 =>
+            {
                 match &args[0] {
                     Arg::Positional(Expr::Variable { name }) => Some(name),
                     _ => None,
@@ -4581,7 +4651,7 @@ impl Engine {
                 Ok(RuntimeValue::Undef)
             }
             // ── Array constructors ──
-            "array" => {
+            "array" | "a" => {
                 // Container reference: `array(varname)` with single bare variable
                 // returns the named array, not a constructed array.
                 if args.len() == 1 && raw_args.len() == 1 {
@@ -5942,7 +6012,7 @@ impl Engine {
                     .collect(),
             )),
             // ── Hash helpers ──
-            "hash" => {
+            "hash" | "h" => {
                 if let (
                     true,
                     Some(linkedspec_core::expr::Arg::Positional(
@@ -6317,16 +6387,15 @@ mod tests {
     use linkedspec_core::validation::validate;
 
     const SIMPLE_GRAMMAR: &str = r#"DemoParser::
- /pattern1/ -> Child {
-  I { declare(array, results) }
-  LE { push_value(array(results), :retv) }
-  E { return(array("?results:", array_copy(array(results)))) }
- }
+ /pattern1/ -> Child
+ I { declare(array, results) }
+ LE { push_value(array(results), retv) }
+ E { return(array("?results:", array_copy(array(results)))) }
 
 Child::
  /hello[ \t]+(\w+)/
  I { declare(scalar, name=entry_group(0)) }
- E { return(:name) }
+ E { return(name) }
 "#;
 
     #[test]
@@ -6565,18 +6634,18 @@ ChildB:
  /pattern1/ -> ChildA
  /pattern2/ -> ChildB
  I { declare(array, results) }
- LE { push_value(array(results), :retv) }
+ LE { push_value(array(results), retv) }
  E { return(array("?results:", array_copy(array(results)))) }
 
 ChildA:
  /hello/
  I { declare(scalar, retv=entry_text()) }
- E { return(:retv) }
+ E { return(retv) }
 
 ChildB:
  /world/
  I { declare(scalar, retv=entry_text()) }
- E { return(:retv) }
+ E { return(retv) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6595,7 +6664,7 @@ ChildB:
         let grammar = r#"Top::
  /hello/
  I { declare(scalar, name) }
- E { name = entry_text(); return(:name) }
+ E { name = entry_text(); return(name) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6613,7 +6682,7 @@ ChildB:
         let grammar = r#"Top::
  /hello/
  I { declare(scalar, name) }
- E { return(:name) }
+ E { return(name) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6632,7 +6701,7 @@ ChildB:
  /(\w+)/
  I { declare(scalar, word) }
  LE { word = entry_group(0) }
- E { return(:word) }
+ E { return(word) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6648,7 +6717,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, word) }
- E { word = entry_group(0); return(:word) }
+ E { word = entry_group(0); return(word) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6683,7 +6752,7 @@ ChildB:
  /(\w+)/
  I { declare(array, items); declare(scalar, item_count) }
  LE { push_value(array(items), entry_group(0)) }
- E { item_count = count(array(items)); return(:item_count) }
+ E { item_count = count(array(items)); return(item_count) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6770,12 +6839,12 @@ ChildB:
 
     #[test]
     fn helpers_5_2_scalar_accessor() {
-        // :varname returns the declared variable's value
+        // varname returns the declared variable's value
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, word) }
  LE { word = entry_group(0) }
- E { return(:word) }
+ E { return(word) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6791,7 +6860,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, first); declare(scalar, second) }
- E { return(coalesce(:first, :second, "default")) }
+ E { return(coalesce(first, second, "default")) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6809,7 +6878,7 @@ ChildB:
  /(\w+)/
  I { declare(scalar, val) }
  LE { val = entry_group(0) }
- E { return(coalesce(:val, "fallback")) }
+ E { return(coalesce(val, "fallback")) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6952,7 +7021,7 @@ ChildB:
         let grammar = r#"Top::
  /(\w+)/
  I { declare(scalar, retv=next()) }
- E { return(:retv) }
+ E { return(retv) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6975,7 +7044,7 @@ ChildB:
  /(\d+)/
  I { declare(scalar, val) }
  LE { val = entry_group(0) }
- E { return(coalesce_nonempty("", :val, "final")) }
+ E { return(coalesce_nonempty("", val, "final")) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -7090,7 +7159,7 @@ ChildB:
  /(\w+)/
  I { declare(scalar, val) }
  LE { val = entry_group(0) }
- E { return(switch(:val,
+ E { return(switch(val,
                case("hello", "greeting"),
                case("world", "planet"),
                default("unknown"))) }
@@ -7110,7 +7179,7 @@ ChildB:
  /(\w+)/
  I { declare(scalar, val) }
  LE { val = entry_group(0) }
- E { return(switch(:val,
+ E { return(switch(val,
                case("red", "color"),
                default("not_a_color"))) }
 "#;
@@ -7129,7 +7198,7 @@ ChildB:
  /(\d+)/
  I { declare(scalar, val) }
  LE { val = entry_group(0) }
- E { return(switch(:val,
+ E { return(switch(val,
                case("1", "one"),
                case("2", "two"),
                case("3", "three"),

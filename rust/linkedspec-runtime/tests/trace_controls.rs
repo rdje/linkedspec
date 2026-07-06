@@ -33,7 +33,7 @@ Top::
  I { mark_input_start("input") }
  LS { start_capture_slice() }
  /x/ -> Child
- LE { push_value(array(results), :retv) }
+ LE { push_value(array(results), retv) }
  E { return(array(capture_rest_from("input"), array_copy(array(results)))) }
 
 Child::
