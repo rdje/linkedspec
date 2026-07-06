@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.4 — migrate Perl phase0 helper strings**
+  (DONE; FRONTIER `.8.2.2.5` ACTIVE-TEST/CORPUS RESIDUE SCANS NEXT).
+
+  **Change:** Perl phase0 embedded specs now use current `cat(...)`, `push(...)`, and `copy(...)` spellings where
+  the fixture is not an explicit legacy compatibility lock. TOP-RULE recursion append/snapshot paths,
+  user-function helpers, auto-existence append proofs, current-feature snapshot returns, array method fixtures, and
+  mutation-expression snapshots were migrated.
+
+  **Boundary:** No runtime behavior changed. Remaining old-helper strings are classified under declaration scope,
+  `push_nonempty(...)` semantic filtering, aggregate-copy compatibility, helper-renaming equivalence, canonical
+  old-side equivalence, or current `.hash_copy()` receiver-method surface. The all-bare
+  `push(words, label)` candidate failed as expected because that spelling remains child-call-shaped; the accepted
+  current form is `push(array(words), label)` where the RHS is a bare scalar read.
+
+  **Verification:** `perl -c -Iperl t/phase0_regression.t` passes. Full phase0 with `PERL5LIB=` cleared passes
+  **1022** tests. Focused phase0 residue scan shows every retained old-helper spelling under an explicit owner.
+  Rust formatting, whitespace, memory architecture, and doctrine checks pass.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.3 — migrate generated corpus helper fixtures**
   (DONE; FRONTIER `.8.2.2.4` PERL PHASE0 OLD-HELPER STRING MIGRATION NEXT).
 

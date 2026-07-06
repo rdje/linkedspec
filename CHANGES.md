@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.4 — migrate Perl phase0 helper strings
+
+**Scope:** Perl phase0 embedded `.spec` strings in `t/phase0_regression.t`.
+
+**Change:** Current-surface phase0 fixtures now use `cat(...)`, `push(...)`, and `copy(...)` where they are not
+explicitly testing legacy compatibility. TOP-RULE recursion append/snapshot strings, user-function fixtures,
+auto-existence append proofs, set-key/append/hash-index snapshots, primitive/call-spacing locks, array
+end-mutation fixtures, and mutation-expression snapshots were migrated to current helper spellings.
+
+**Boundary:** No runtime behavior or user-facing syntax changed. Retained old-helper hits are classified as
+scoped-declaration compatibility, `push_nonempty(...)` semantic-filter compatibility, aggregate-copy compatibility,
+explicit helper-renaming equivalence, canonical old-side equivalence, or current `.hash_copy()` receiver-method
+surface. A failed candidate confirmed that all-bare `push(words, label)` still routes as child-call-shaped syntax,
+so current append fixtures that need a bare RHS use `push(array(words), label)`.
+
+**Validation:** `perl -c -Iperl t/phase0_regression.t` passes. Full phase0 with `PERL5LIB=` cleared passes
+**1022** tests. The focused phase0 residue scan shows every remaining old-helper spelling under an explicit owner.
+Rust formatting, whitespace, memory architecture, and doctrine checks pass.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.3 — migrate generated corpus helper fixtures
 
 **Scope:** Generated oracle corpus fixture inputs and `tools/gen_oracle_corpus.pl`.

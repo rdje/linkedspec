@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.4 — phase0 cleanup must preserve all-bare `push(...)` routing):
+  In Perl phase0 fixture strings, do not replace `push_value(name, value)` with all-bare `push(name, value)` when
+  both arguments are bare identifiers. That spelling keeps the child-call convention. Use `push(array(name), value)`
+  or `name += value` for current append semantics when the RHS is a bare scalar read. The `.8.2.2.4` migration kept
+  retained helper hits only when they are explicit compatibility/equivalence locks (`declare(...)`,
+  `push_nonempty(...)`, aggregate-copy helpers, helper-renaming old sides, or current `.hash_copy()` receiver
+  methods).
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.3 — generated corpus cleanup starts at the generator):
   Do not hand-edit generated oracle corpus fixtures as the source of truth. Migrate helper spellings in
   `tools/gen_oracle_corpus.pl`, regenerate, and expect `expected.json`/`manifest.json` to stay stable for

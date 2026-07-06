@@ -278,7 +278,9 @@ DSL helper surface consistency note:
   Rust legacy-helper compatibility/equivalence tests; `.8.2.2.2.4` has migrated later current-feature Rust
   integration fixture setup/snapshot strings to current helper spellings where supported; `.8.2.2.2.5` has closed
   final Rust integration-test residue classification; `.8.2.2.3` has migrated/classified generated oracle corpus
-  fixture inputs with no expected-output drift; and `.8.2.2.4` now owns Perl phase0 helper-string cleanup.
+  fixture inputs with no expected-output drift; `.8.2.2.4` has migrated/classified Perl phase0 helper strings with
+  phase0 1022 PASS; and `.8.2.2.5` now owns the closeout active-test/corpus residue scans before current-facing
+  docs/KM cleanup.
   `.9` remains pending behind `.8` for hash-literal `:` association syntax. The Rust oracle
   corpus is now 93 fixtures
   after `.15.2.3` added `terse_15_2_3_bare_value_reads_and_case_labels`; it had reached 92 fixtures after

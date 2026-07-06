@@ -44310,9 +44310,9 @@ subtest 'function_body_staged_prototype_end_to_end' => sub {
 
     my $spec = <<'SPEC';
 fn normalize(value) { return(trim(value)) }
-fn join_pair(left, right) { return(concat(left, right)) }
-fn mk_items(first, second) { items += first; items += second; return(array_copy(items)) }
-fn mk_meta(key, value) { meta[key] = value; return(hash_copy(meta)) }
+fn join_pair(left, right) { return(cat(left, right)) }
+fn mk_items(first, second) { items += first; items += second; return(copy(array(items))) }
+fn mk_meta(key, value) { meta[key] = value; return(copy(hash(meta))) }
 
 Top::
  /x/ -> Done { set(stage_meta, mk_meta("k","v")); return([normalize(" x "), join_pair("a","b"), count(mk_items("a","b")), stage_meta["k"]]) }
@@ -44429,7 +44429,7 @@ fn normalize(value) {
 }
 
 fn join_pair(left, right) {
- return(concat(left, right))
+ return(cat(left, right))
 }
 
 Top::
@@ -44551,14 +44551,14 @@ subtest 'user_function_value_call_execution' => sub {
 
     my $spec = <<'SPEC';
 fn normalize(value) { return(trim(value)) }
-fn join_pair(left, right) { return(concat(left, right)) }
+fn join_pair(left, right) { return(cat(left, right)) }
 fn final_expr(value) { trim(value) }
 fn choose(value) { return(value); "bad" }
-fn mk_items(first, second) { items += first; items += second; return(array_copy(items)) }
-fn mk_meta(key, value) { meta[key] = value; return(hash_copy(meta)) }
+fn mk_items(first, second) { items += first; items += second; return(copy(array(items))) }
+fn mk_meta(key, value) { meta[key] = value; return(copy(hash(meta))) }
 fn local_shadow(value) { temp = value; return(temp) }
 Top::
- /x/ -> Done { set(out, normalize(" x ")); items += join_pair("a","b"); meta["k"] = normalize(" v " ); set(stage_meta, mk_meta("stage","ok")); set(stage_count, count_keys(stage_meta)); return([out, final_expr(" y "), join_pair("a","b"), count(mk_items("a","b")), stage_meta["stage"], normalize(" Z " ).lowercase(), choose("first"), count(array_copy(items)), meta.pick_keys("k").sorted_values().first(), local_shadow("inner"), temp]) }
+ /x/ -> Done { set(out, normalize(" x ")); items += join_pair("a","b"); meta["k"] = normalize(" v " ); set(stage_meta, mk_meta("stage","ok")); set(stage_count, count_keys(stage_meta)); return([out, final_expr(" y "), join_pair("a","b"), count(mk_items("a","b")), stage_meta["stage"], normalize(" Z " ).lowercase(), choose("first"), count(copy(array(items))), meta.pick_keys("k").sorted_values().first(), local_shadow("inner"), temp]) }
 Done::
  /x/
 SPEC
@@ -44788,11 +44788,14 @@ subtest 'consume_before_recurse_body_recursion_parses_and_terminates' => sub {
     # re-entry). Lock a recursive S-expression body grammar: it parses a nested input
     # to the expected AST and terminates under the hard bound.
     plan tests => 3;
+    # SPEC-FORMAT-TERSE.8.2.2.4: retain `declare(array, items)` here as
+    # scoped-declaration compatibility, while ordinary append/snapshot behavior
+    # uses current `push(...)` / `copy(...)` spellings.
     my $spec = "top::\n -> sexpr { return(call(sexpr)) }\n\n"
              . "sexpr: /\\(/ /\\)/  I { declare(array, items) }\n"
-             . " -> sexpr     { push_value(array(items), call(sexpr)) }\n"
-             . " -> atom      { push_value(array(items), call(atom)) }\n"
-             . " -> sexpr[1]  { return(array_copy(array(items))) }\n\n"
+             . " -> sexpr     { push(array(items), call(sexpr)) }\n"
+             . " -> atom      { push(array(items), call(atom)) }\n"
+             . " -> sexpr[1]  { return(copy(array(items))) }\n\n"
              . "atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
     my $parser = eval { LinkedSpec::Get(\$spec, top_rule => 'top') };
     ok(ref($parser) eq 'CODE', 'recursive S-expression grammar builds a parser')
@@ -44808,10 +44811,12 @@ subtest 'top_rule_as_normal_top_recursion_terminates' => sub {
     # of top re-entry recursion (it currently diverges from the equivalent body form)
     # is the gap owned by TOP-RULE-AS-NORMAL.2.2 and is intentionally NOT asserted here.
     plan tests => 2;
+    # SPEC-FORMAT-TERSE.8.2.2.4: retain only the scoped-declaration
+    # compatibility marker; append/snapshot helpers are current surface.
     my $spec = "sexpr:: /\\(/ /\\)/  I { declare(array, items) }\n"
-             . " -> sexpr     { push_value(array(items), call(sexpr)) }\n"
-             . " -> atom      { push_value(array(items), call(atom)) }\n"
-             . " -> sexpr[1]  { return(array_copy(array(items))) }\n\n"
+             . " -> sexpr     { push(array(items), call(sexpr)) }\n"
+             . " -> atom      { push(array(items), call(atom)) }\n"
+             . " -> sexpr[1]  { return(copy(array(items))) }\n\n"
              . "atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
     my $parser = eval { LinkedSpec::Get(\$spec, top_rule => 'sexpr') };
     ok(ref($parser) eq 'CODE', 'top-recursive grammar builds a parser')
@@ -44834,10 +44839,10 @@ subtest 'top_rule_as_normal_recursion_with_lx_parses_sequence' => sub {
     # the two are intentionally different grammars (different arity), not an engine bug.
     plan tests => 3;
     my $spec = "sexpr:: /\\(/ /\\)/  I { declare(array, items) }\n"
-             . " -> sexpr     { push_value(array(items), call(sexpr)) }\n"
-             . " -> atom      { push_value(array(items), call(atom)) }\n"
-             . " -> sexpr[1]  { return(array_copy(array(items))) }\n"
-             . "LX { return(array_copy(array(items))) }\n\n"
+             . " -> sexpr     { push(array(items), call(sexpr)) }\n"
+             . " -> atom      { push(array(items), call(atom)) }\n"
+             . " -> sexpr[1]  { return(copy(array(items))) }\n"
+             . "LX { return(copy(array(items))) }\n\n"
              . "atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
     my $parser = eval { LinkedSpec::Get(\$spec, top_rule => 'sexpr') };
     ok(ref($parser) eq 'CODE', 'top-recursive grammar with LX builds a parser')
@@ -44861,7 +44866,7 @@ subtest 'top_rule_as_normal_regex_on_top_reads_own_match_with_match_family' => s
     # the book now warns against returns nulls. (A bare edge-less AND slot is a positional
     # anchor that is not separately captured, so the separator is folded into the name slot.)
     plan tests => 3;
-    my $ok_spec = "Pair::AND\n I { declare(hash, pair) }\n"
+    my $ok_spec = "Pair::AND\n I { set(hash(pair), {}) }\n"
                 . " /([A-Za-z_]\\w*)\\s*=\\s*/ -> Pair[0] {\n"
                 . "   set(hash(pair), set_key(hash(pair), \"name\", match_group(0)));\n }\n"
                 . " /([^,\\n]+)/ -> Pair[1] {\n"
@@ -44874,7 +44879,7 @@ subtest 'top_rule_as_normal_regex_on_top_reads_own_match_with_match_family' => s
         'top rule reading its OWN match with match_group(0) returns populated values');
 
     # the footgun the book now documents: entry_* on a top rule is empty (nothing entered it)
-    my $foot_spec = "Pair::AND\n I { declare(hash, pair) }\n"
+    my $foot_spec = "Pair::AND\n I { set(hash(pair), {}) }\n"
                   . " /([A-Za-z_]\\w*)\\s*=\\s*/ -> Pair[0] {\n"
                   . "   set(hash(pair), set_key(hash(pair), \"name\", entry_text()));\n }\n"
                   . " /([^,\\n]+)/ -> Pair[1] {\n"
@@ -44913,8 +44918,8 @@ subtest 'spec_format_terse_1_1_1_auto_existing_variables_work_without_declare' =
     is($run->($sp, 'a b c'), '3', 're-running the SAME parser still returns 3 (per-invocation my, not a leaky global)');
 
     # (b) array working variable used WITHOUT declare: a per-match accumulator.
-    my $array_spec = "top:: /(\\w+)\\s*/ -> top[0] { push_value(array(items), match_group(0)) }\n"
-                   . "LX {return(array_copy(array(items)))}\n";
+    my $array_spec = "top:: /(\\w+)\\s*/ -> top[0] { push(array(items), match_group(0)) }\n"
+                   . "LX {return(copy(array(items)))}\n";
     my $ap = eval { LinkedSpec::Get(\$array_spec) };
     ok(ref($ap) eq 'CODE', 'no-declare array working var: spec compiles to a parser')
         or diag(normalize_error($@));
@@ -44963,8 +44968,10 @@ subtest 'spec_format_terse_1_1_1_reserved_literals_are_not_auto_declared' => sub
 subtest 'spec_format_terse_1_2_1_bare_arg_position_auto_exists' => sub {
     # SPEC-FORMAT-TERSE.1.2.1 (ADR 0007), Channel 1: a BARE (un-wrapped) working variable
     # used in a type-implying helper arg position auto-exists with the POSITION-implied sigil
-    # -- the scalar target of set(NAME, ...) and the array target of push_value(NAME, ...)
-    # / push_nonempty(NAME, ...). Before this leaf such a bare var lowered to the right
+    # -- the scalar target of set(NAME, ...) and the array target of push(NAME, ...)
+    # / push_nonempty(NAME, ...). `push_nonempty(...)` remains here as an
+    # explicit SPEC-FORMAT-TERSE.8.2.2.4 compatibility/semantic-filter lock;
+    # current append proofs use `push(...)`. Before this leaf such a bare var lowered to the right
     # sigil'd variable but got NO `my`, leaving a leaky package global (non-strict handlers
     # -- KM card terse-bare-working-vars-engine-gaps). The DECISIVE, isolating proof is
     # source-level: with no wrapper or declare anywhere, the engine now emits exactly one
@@ -44994,10 +45001,10 @@ subtest 'spec_format_terse_1_2_1_bare_arg_position_auto_exists' => sub {
     unlike($scalar_src, qr/my [\$\@\%]match_group\b/,
         'only the bare TARGET is auto-declared -- the value helper match_group(...) is not');
 
-    # (b) bare push_value target -> array.
-    my $array_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push_value(items, match_group(0)) }\n");
+    # (b) bare push target -> array.
+    my $array_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push(items, match_group(0)) }\n");
     my $n_array = () = ($array_src =~ /my \@items\b/g);
-    is($n_array, 1, 'bare push_value(items, ...) auto-supplies exactly one `my @items`');
+    is($n_array, 1, 'bare push(items, ...) auto-supplies exactly one `my @items`');
 
     # (c) bare push_nonempty target -> array.
     my $nonempty_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push_nonempty(items, match_group(0)) }\n");
@@ -45041,10 +45048,10 @@ subtest 'spec_format_terse_1_2_1_dedup_with_wrapped_and_declare_single_my' => su
     my $n3 = () = ($declared =~ /my \$count\b/g);
     is($n3, 1, 'declare(scalar,count) + bare set(count,...) dedup to exactly one `my $count`');
 
-    my $mix_array = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push_value(items, match_group(0)) }\n"
-                         . "LX {return(array_copy(array(items)))}\n");
+    my $mix_array = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push(items, match_group(0)) }\n"
+                         . "LX {return(copy(array(items)))}\n");
     my $n4 = () = ($mix_array =~ /my \@items\b/g);
-    is($n4, 1, 'bare push_value(items,...) + wrapped array(items) dedup to exactly one `my @items`');
+    is($n4, 1, 'bare push(items,...) + wrapped array(items) dedup to exactly one `my @items`');
 };
 
 subtest 'spec_format_terse_1_2_1_bare_mutation_per_invocation_no_leak' => sub {
@@ -45070,18 +45077,21 @@ subtest 'spec_format_terse_1_2_1_bare_mutation_per_invocation_no_leak' => sub {
     is($run->($sp, 'a b c'), '3', 'bare set(count,...) counter returns 3 for 3 words');
     is($run->($sp, 'a b c'), '3', 're-running the SAME parser still returns 3 (per-invocation my, not a leaky global)');
 
-    my $array_spec = "top:: /(\\w+)\\s*/ -> top[0] { push_value(items, match_group(0)) }\n"
-                   . "LX {return(array_copy(array(items)))}\n";
+    my $array_spec = "top:: /(\\w+)\\s*/ -> top[0] { push(items, match_group(0)) }\n"
+                   . "LX {return(copy(array(items)))}\n";
     my $ap = eval { LinkedSpec::Get(\$array_spec) };
-    ok(ref($ap) eq 'CODE', 'bare-push_value accumulator compiles to a parser')
+    ok(ref($ap) eq 'CODE', 'bare-push accumulator compiles to a parser')
         or diag(normalize_error($@));
-    is($run->($ap, 'a b c'), '["a","b","c"]', 'bare push_value(items,...) accumulator collects all 3 words');
+    is($run->($ap, 'a b c'), '["a","b","c"]', 'bare push(items,...) accumulator collects all 3 words');
     is($run->($ap, 'a b c'), '["a","b","c"]', 're-running the SAME parser still returns 3 items (per-invocation my, not a leaky global)');
 };
 
 subtest 'spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist' => sub {
     # SPEC-FORMAT-TERSE.1.2.3.1 (Channel 2 aggregate subset): aggregate bare value
     # reads already lower to sigiled variables on the Perl reference
+    # SPEC-FORMAT-TERSE.8.2.2.4 keeps `array_copy(...)` / `hash_copy(...)`
+    # spellings in this subtest as explicit aggregate bare-read compatibility
+    # locks until .8.4 hard retirement. Incidental setup uses current helpers.
     # (`array_copy(items)` -> `[@items]`, `hash_copy(meta)` -> `{%meta}`,
     # `copy(items)` -> `[@items]`) but previously got no preamble `my`, leaving a
     # non-strict package-global hazard. This leaf supplies the per-invocation lexical
@@ -45124,9 +45134,9 @@ subtest 'spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist' => sub
     my $reserved_src = $gen->("top:: -> w { return(array_copy(undef)) }\n\nw : /x/\n");
     unlike($reserved_src, qr/my \@undef\b/, 'aggregate bare-read collector still skips reserved DSL literal undef');
 
-    my $dedup_target_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push_value(items, match_group(0)); return(array_copy(items)) }\n");
+    my $dedup_target_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push(items, match_group(0)); return(array_copy(items)) }\n");
     my $n_dedup_target = () = ($dedup_target_src =~ /my \@items\b/g);
-    is($n_dedup_target, 1, 'bare push_value target plus bare array_copy read dedup to one `my @items`');
+    is($n_dedup_target, 1, 'bare push target plus bare array_copy read dedup to one `my @items`');
 
     my $wrapped_src = $gen->("top:: -> w { return(array_copy(array(items))) }\n\nw : /x/\n");
     my $n_wrapped = () = ($wrapped_src =~ /my \@items\b/g);
@@ -45138,7 +45148,7 @@ subtest 'spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist' => sub
 
     is($run->($array_spec, 'x'), '[]', 'bare array_copy(items) runtime smoke returns an empty array snapshot');
 
-    my $array_accum_spec = "top:: /(\\w+)\\s*/ -> top[0] { push_value(items, match_group(0)) }\n"
+    my $array_accum_spec = "top:: /(\\w+)\\s*/ -> top[0] { push(items, match_group(0)) }\n"
                          . "LX {return(array_copy(items))}\n";
     my $ap = eval { LinkedSpec::Get(\$array_accum_spec, top_rule => 'top', parse_mode => 'seek') };
     ok(ref($ap) eq 'CODE', 'bare array_copy(items) accumulator compiles to a parser')
@@ -45290,14 +45300,14 @@ subtest 'spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist' => sub
     like($L->('push(items,value)'), qr/^push \@value, &\{\$\$descr\{spec\}\{items\}\{handler\}\}/,
         'all-bare push(items,value) keeps child-call precedence');
 
-    my $d = LinkedSpec::Get(\("top:: /x/ -> top[0] { items += value; set_key(meta,key,value); meta[key] = value; return(hash_copy(meta)) }\n"), return_descriptor => 1);
+    my $d = LinkedSpec::Get(\("top:: /x/ -> top[0] { items += value; set_key(meta,key,value); meta[key] = value; return(copy(hash(meta))) }\n"), return_descriptor => 1);
     my $meta = $d->{spec}{top}{meta}{action_rewriter};
     is(join(',', sort @{$meta->{canonical_action_ir_nodes} || []}), 'ASSIGN,PUSH,RETURN',
         'mutation-slot bare reads report canonical PUSH/ASSIGN/RETURN nodes');
     is($meta->{canonical_action_ir_fallback_count}, 0,
         'mutation-slot bare reads have no canonical fallback');
 
-    my $src = $gen->("top:: -> w { items += value; set_key(meta, key, value); meta[key2] = value2; return(array(array_copy(items), hash_copy(meta))) }\n\nw : /x/\n");
+    my $src = $gen->("top:: -> w { items += value; set_key(meta, key, value); meta[key2] = value2; return(array(copy(array(items)), copy(hash(meta)))) }\n\nw : /x/\n");
     for my $pair (['@', 'items'], ['%', 'meta'], ['$', 'value'], ['$', 'key'], ['$', 'key2'], ['$', 'value2']) {
         my ($sigil, $name) = @$pair;
         my $q = quotemeta($sigil.$name);
@@ -45309,11 +45319,11 @@ subtest 'spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist' => sub
     ok(index($src, 'my %meta;') >= 0 && index($src, 'my %meta;') < index($src, 'while (1)'),
         'the auto `my %meta` sits in the preamble before while(1)');
 
-    my $literal_src = $gen->("top:: -> w { items += true; set_key(meta, false, undef); meta[true] = false; return(hash_copy(meta)) }\n\nw : /x/\n");
+    my $literal_src = $gen->("top:: -> w { items += true; set_key(meta, false, undef); meta[true] = false; return(copy(hash(meta))) }\n\nw : /x/\n");
     unlike($literal_src, qr/my \$(?:true|false|undef)\b/,
         'reserved primitive literals are not auto-declared as scalar reads in mutation slots');
 
-    my $dedup_src = $gen->("top:: -> w { declare(scalar, value, key); declare(array, items); declare(hash, meta); items += value; set_key(meta, key, value); meta[key] = value; return(array_copy(items)) }\n\nw : /x/\n");
+    my $dedup_src = $gen->("top:: -> w { declare(scalar, value, key); declare(array, items); declare(hash, meta); items += value; set_key(meta, key, value); meta[key] = value; return(copy(array(items))) }\n\nw : /x/\n");
     for my $pair (['$', 'value'], ['$', 'key'], ['@', 'items'], ['%', 'meta']) {
         my ($sigil, $name) = @$pair;
         my $q = quotemeta($sigil.$name);
@@ -45322,7 +45332,7 @@ subtest 'spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist' => sub
     }
 
     my $runtime_spec = "top:: /(\\w+)=(\\w+)\\s*/ -> top[0] { set(key, match_group(0)); set(value, match_group(1)); items += value; set_key(meta, key, value); meta[\"last\"] = value }\n"
-                     . "LX { return(hash(\"items\", array_copy(items), \"meta\", hash_copy(meta))) }\n";
+                     . "LX { return(hash(\"items\", copy(array(items)), \"meta\", copy(hash(meta)))) }\n";
     my $p = eval { LinkedSpec::Get(\$runtime_spec, top_rule => 'top', parse_mode => 'seek') };
     ok(ref($p) eq 'CODE', 'mutation-slot bare-read runtime spec compiles to a parser')
         or diag(normalize_error($@));
@@ -45499,7 +45509,7 @@ subtest 'spec_format_terse_1_4_1_terse_spec_runs_identically_to_canonical' => su
         my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
         return defined($out) ? $out : ('ERR:' . ($@ // 'undef'));
     };
-    my $terse = "top:: /(\\w+)\\s*/ -> top[0] { set(label, cat(match_group(0), \"!\")); push_value(words, label) }\n"
+    my $terse = "top:: /(\\w+)\\s*/ -> top[0] { set(label, cat(match_group(0), \"!\")); push(array(words), label) }\n"
               . "LX { return(copy(array(words))) }\n";
     my $canon = "top:: /(\\w+)\\s*/ -> top[0] { set(label, concat(match_group(0), \"!\")); push_value(words, label) }\n"
               . "LX { return(array_copy(array(words))) }\n";
@@ -45538,7 +45548,7 @@ subtest 'spec_format_terse_1_3_3_set_key_statement_mutates_hash' => sub {
     like($L->('return(set_key(hash(meta), "stage", "v"))'), qr/^return do \{ my \$__ls_set_key_source = \\%meta;/,
         'nested set_key(hash(meta),...) remains the pure hash-copy value helper');
 
-    my $d = LinkedSpec::Get(\("top:: /(\\w+)\\s*/ -> top[0] { set_key(meta, \"stage\", cat(\"a\", \"b\")); return(hash_copy(hash(meta))) }\n"), return_descriptor => 1);
+    my $d = LinkedSpec::Get(\("top:: /(\\w+)\\s*/ -> top[0] { set_key(meta, \"stage\", cat(\"a\", \"b\")); return(copy(hash(meta))) }\n"), return_descriptor => 1);
     my $meta = $d->{spec}{top}{meta}{action_rewriter};
     is(join(',', sort @{$meta->{canonical_action_ir_nodes} || []}), 'ASSIGN,RETURN',
         'set_key statement reports as ASSIGN plus RETURN in canonical ActionIR');
@@ -45554,13 +45564,13 @@ subtest 'spec_format_terse_1_3_3_set_key_statement_mutates_hash' => sub {
         'bare set_key target is a HASH -- no scalar or array declaration for meta');
 
     my $spec = "top:: /(\\w+)\\s*/ -> top[0] { set_key(meta, match_group(0), cat(match_group(0), \"!\")) }\n"
-             . "LX { return(hash_copy(hash(meta))) }\n";
+             . "LX { return(copy(hash(meta))) }\n";
     my $p = eval { LinkedSpec::Get(\$spec) };
     is($run->($p, 'a b'), '{"a":"a!","b":"b!"}', 'set_key(meta,...) mutates a no-declare hash target');
     is($run->($p, 'a b'), '{"a":"a!","b":"b!"}', 're-running the same parser is stable (per-invocation hash lexical)');
 
     my $pure = "top:: /(\\w+)\\s*/ -> top[0] { set_key(meta, \"existing\", \"old\"); set(hash(copy), set_key(hash(meta), \"stage\", \"v\")) }\n"
-             . "LX { return(array(hash_copy(hash(meta)), hash_copy(hash(copy)))) }\n";
+             . "LX { return(array(copy(hash(meta)), copy(hash(copy)))) }\n";
     my $pp = eval { LinkedSpec::Get(\$pure) };
     is($run->($pp, 'x'), '[{"existing":"old"},{"existing":"old","stage":"v"}]',
         'nested pure set_key(hash(meta),...) returns a copy without mutating meta');
@@ -45661,14 +45671,14 @@ subtest 'spec_format_terse_1_3_4_2_array_append_operator_matches_push' => sub {
     is($L->('name["k"] = "v"'), '$name{"k"} = "v"',
         'hash-index assignment is handled by its own operator contract');
 
-    my $d = LinkedSpec::Get(\("top:: /(\\w+)\\s*/ -> top[0] { items += cat(\"a\", \"b\"); return(array_copy(array(items))) }\n"), return_descriptor => 1);
+    my $d = LinkedSpec::Get(\("top:: /(\\w+)\\s*/ -> top[0] { items += cat(\"a\", \"b\"); return(copy(array(items))) }\n"), return_descriptor => 1);
     my $meta = $d->{spec}{top}{meta}{action_rewriter};
     is(join(',', sort @{$meta->{canonical_action_ir_nodes} || []}), 'PUSH,RETURN',
         'array append operator reports as PUSH plus RETURN in canonical ActionIR');
     is($meta->{canonical_action_ir_fallback_count}, 0,
         'array append operator has no canonical fallback');
 
-    my $src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { items += \"a\"; return(array_copy(array(items))) }\n");
+    my $src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { items += \"a\"; return(copy(array(items))) }\n");
     my $array_my = () = ($src =~ /my \@items\b/g);
     is($array_my, 1, 'bare array append target auto-supplies exactly one `my @items`');
     ok(index($src, 'my @items;') >= 0 && index($src, 'my @items;') < index($src, 'while (1)'),
@@ -45677,7 +45687,7 @@ subtest 'spec_format_terse_1_3_4_2_array_append_operator_matches_push' => sub {
         'bare array append target is an ARRAY -- no scalar or hash declaration for items');
 
     my $spec = "top:: /(\\w+)\\s*/ -> top[0] { set(label, cat(match_group(0), \"!\")); items += label }\n"
-             . "LX { return(array_copy(array(items))) }\n";
+             . "LX { return(copy(array(items))) }\n";
     my $p = eval { LinkedSpec::Get(\$spec) };
     is($run->($p, 'a b'), '["a!","b!"]',
         'array append operator mutates a no-declare array target at runtime');
@@ -45721,14 +45731,14 @@ subtest 'spec_format_terse_1_3_4_3_hash_index_assignment_operator_matches_set_ke
     is($L->('items += "a"'), 'push @items, "a"',
         'array append operator remains separate');
 
-    my $d = LinkedSpec::Get(\("top:: /(\\w+)\\s*/ -> top[0] { meta[cat(\"s\", \"tage\")] = cat(\"a\", \"b\"); return(hash_copy(hash(meta))) }\n"), return_descriptor => 1);
+    my $d = LinkedSpec::Get(\("top:: /(\\w+)\\s*/ -> top[0] { meta[cat(\"s\", \"tage\")] = cat(\"a\", \"b\"); return(copy(hash(meta))) }\n"), return_descriptor => 1);
     my $meta = $d->{spec}{top}{meta}{action_rewriter};
     is(join(',', sort @{$meta->{canonical_action_ir_nodes} || []}), 'ASSIGN,RETURN',
         'hash-index assignment operator reports as ASSIGN plus RETURN in canonical ActionIR');
     is($meta->{canonical_action_ir_fallback_count}, 0,
         'hash-index assignment operator has no canonical fallback');
 
-    my $src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { meta[\"stage\"] = \"v\"; return(hash_copy(hash(meta))) }\n");
+    my $src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { meta[\"stage\"] = \"v\"; return(copy(hash(meta))) }\n");
     my $hash_my = () = ($src =~ /my \%meta\b/g);
     is($hash_my, 1, 'bare hash-index target auto-supplies exactly one `my %meta`');
     ok(index($src, 'my %meta;') >= 0 && index($src, 'my %meta;') < index($src, 'while (1)'),
@@ -45737,7 +45747,7 @@ subtest 'spec_format_terse_1_3_4_3_hash_index_assignment_operator_matches_set_ke
         'bare hash-index target is a HASH -- no scalar or array declaration for meta');
 
     my $spec = "top:: /(\\w+)\\s*/ -> top[0] { set(label, cat(match_group(0), \"!\")); meta[match_group(0)] = label }\n"
-             . "LX { return(hash_copy(hash(meta))) }\n";
+             . "LX { return(copy(hash(meta))) }\n";
     my $p = eval { LinkedSpec::Get(\$spec) };
     is($run->($p, 'a b'), '{"a":"a!","b":"b!"}',
         'hash-index assignment operator mutates a no-declare hash target at runtime');
@@ -45790,7 +45800,7 @@ subtest 'spec_format_terse_1_5_2_primitive_literal_parity' => sub {
         'return payload preserves typed booleans, strings, numbers, and undef/null');
 
     my $mutation_spec = "Top::\n"
-                      . " /x/ -> Done { flag = true; items += false; push(items, true); meta[\"enabled\"] = true; return(array(flag, array_copy(array(items)), hash_copy(hash(meta)))) }\n"
+                      . " /x/ -> Done { flag = true; items += false; push(items, true); meta[\"enabled\"] = true; return(array(flag, copy(array(items)), copy(hash(meta)))) }\n"
                       . "\nDone::\n /[a-z]+/\n";
     my $mp = eval { LinkedSpec::Get(\$mutation_spec) };
     ok(ref($mp) eq 'CODE', 'primitive-literal mutation spec compiles to a parser')
@@ -45846,7 +45856,7 @@ subtest 'spec_format_terse_1_5_3_call_spacing_and_parentheses_locks' => sub {
         'no-paren scalar read spelling is not claimed as a helper call');
 
     my $spacing_spec = "Top::\n"
-                     . " /x/ -> Done { set (name, cat (\"a\", \"b\")); items += cat (\"c\", \"d\"); meta[cat (\"s\", \"tage\")] = name; return (array(name, array_copy (array (items)), hash_copy (hash (meta)))) }\n"
+                     . " /x/ -> Done { set (name, cat (\"a\", \"b\")); items += cat (\"c\", \"d\"); meta[cat (\"s\", \"tage\")] = name; return (array(name, copy (array (items)), copy (hash (meta)))) }\n"
                      . "\nDone::\n /[a-z]+/\n";
     my $sp = eval { LinkedSpec::Get(\$spacing_spec) };
     ok(ref($sp) eq 'CODE', 'call-spacing spec compiles to a parser')
@@ -46217,7 +46227,7 @@ subtest 'spec_format_terse_1_6_array_end_mutation_methods' => sub {
         'push_front accepts an explicit array(...) receiver');
 
     my $spec = "Top::\n"
-             . " /x/ -> Done { set(value,\"b\"); items.push_back(\"a\"); items.push_back(value); items.push_front(\"z\"); items.pop_back(); items.pop_front(); return(array_copy(items)) }\n"
+             . " /x/ -> Done { set(value,\"b\"); items.push_back(\"a\"); items.push_back(value); items.push_front(\"z\"); items.pop_back(); items.pop_front(); return(copy(array(items))) }\n"
              . "\nDone::\n /[a-z]+/\n";
     my $parser = eval { LinkedSpec::Get(\$spec) };
     ok(ref($parser) eq 'CODE', 'array end-mutation spec compiles to a parser')
@@ -46251,7 +46261,7 @@ subtest 'spec_format_terse_1_6_array_end_mutation_methods' => sub {
         'array end-mutation spec remains language-agnostic ActionIR ready');
 
     my $alias_spec = "Top::\n"
-                   . " /x/ -> Done { array(items).push_back(\"b\"); array(items).push_front(\"a\"); return(array_copy(items)) }\n"
+                   . " /x/ -> Done { array(items).push_back(\"b\"); array(items).push_front(\"a\"); return(copy(array(items))) }\n"
                    . "\nDone::\n /[a-z]+/\n";
     my $alias_parser = eval { LinkedSpec::Get(\$alias_spec) };
     ok(ref($alias_parser) eq 'CODE', 'explicit receiver spec compiles to a parser')
@@ -47117,7 +47127,7 @@ subtest 'spec_format_terse_3_3_3_mutation_assignment_expression_values' => sub {
         'hash-index assignment expression can feed a hash receiver chain');
 
     my $spec = "Top::\n"
-             . " /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(items += value, array_copy(items), meta[key] = value, hash_copy(meta), (items += \"x\").count(), (meta[\"last\"] = value).count_keys())) }\n"
+             . " /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(items += value, copy(array(items)), meta[key] = value, copy(hash(meta)), (items += \"x\").count(), (meta[\"last\"] = value).count_keys())) }\n"
              . "\nDone::\n /[a-z]+/\n";
     my $parser = eval { LinkedSpec::Get(\$spec) };
     ok(ref($parser) eq 'CODE', 'mutation assignment expression spec compiles to a parser')
