@@ -12,13 +12,13 @@ use serde_json::Value;
 
 const SIMPLE_GRAMMAR: &str = r#"DemoParser::
  /pattern1/ -> Child
- I { declare(array, results) }
- LE { push_value(array(results), retv) }
- E { return(array("?results:", array_copy(array(results)))) }
+ I { set(array(results), []) }
+ LE { push(array(results), retv) }
+ E { return(array("?results:", copy(array(results)))) }
 
 Child::
  /hello[ \t]+(\w+)/
- I { declare(scalar, name=entry_group(0)) }
+ I { name = entry_group(0) }
  E { return(name) }
 "#;
 
@@ -469,9 +469,9 @@ Done:
 #[test]
 fn function_body_staged_prototype_end_to_end_shape_and_runtime() {
     let grammar = r#"fn normalize(value) { return(trim(value)) }
-fn join_pair(left, right) { return(concat(left, right)) }
-fn mk_items(first, second) { items += first; items += second; return(array_copy(items)) }
-fn mk_meta(key, value) { meta[key] = value; return(hash_copy(meta)) }
+fn join_pair(left, right) { return(cat(left, right)) }
+fn mk_items(first, second) { items += first; items += second; return(copy(array(items))) }
+fn mk_meta(key, value) { meta[key] = value; return(copy(hash(meta))) }
 
 Top::
  /x/ -> Done { stage_meta = mk_meta("k","v"); return([normalize(" x "), join_pair("a","b"), count(mk_items("a","b")), stage_meta["k"]]) }
@@ -661,12 +661,12 @@ fn corpus_recursive_grammar() {
  /\d+/
  /\(/
  /\)/
- I { declare(array, results) }
- LE { push_value(array(results), entry_text()) }
+ I { set(array(results), []) }
+ LE { push(array(results), entry_text()) }
  -> Expr
  -> Expr[1]
  -> Expr[2]
- E { return(array_copy(array(results))) }
+ E { return(copy(array(results))) }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -680,10 +680,10 @@ fn corpus_recursive_grammar() {
 fn corpus_lifecycle_ordered_output() {
     let grammar = r#"OrderedParser::OR{1,1}
  /(\w+)/
- I { declare(array, log); push_value(array(log), "I") }
- LS { push_value(array(log), "LS") }
- LE { push_value(array(log), entry_group(0)) }
- E { push_value(array(log), "E"); return(array_copy(array(log))) }
+ I { set(array(log), []); push(array(log), "I") }
+ LS { push(array(log), "LS") }
+ LE { push(array(log), entry_group(0)) }
+ E { push(array(log), "E"); return(copy(array(log))) }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -702,18 +702,18 @@ fn corpus_lifecycle_ordered_output() {
 #[test]
 fn corpus_blind_call_and_rule() {
     let grammar = r#"Top::AND
- I { declare(array, log) }
+ I { set(array(log), []) }
  => ChildA
  => ChildB
- E { return(array_copy(array(log))) }
+ E { return(copy(array(log))) }
 
 ChildA:
  /a/
- I { push_value(array(log), "A") }
+ I { push(array(log), "A") }
 
 ChildB:
  /b/
- I { push_value(array(log), "B") }
+ I { push(array(log), "B") }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -731,9 +731,9 @@ ChildB:
 fn corpus_rep_with_bounds() {
     let grammar = r#"Repeater::OR{1,3}
  /(\w+)/
- I { declare(array, words) }
- LE { push_value(array(words), entry_group(0)) }
- E { return(array_copy(array(words))) }
+ I { set(array(words), []) }
+ LE { push(array(words), entry_group(0)) }
+ E { return(copy(array(words))) }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -996,15 +996,15 @@ Child:
 #[test]
 fn regression_edge_only_with_lifecycle_blocks() {
     let grammar = r#"LifecycleParser::OR{1,1}
- I { declare(array, log); push_value(array(log), "I") }
- LS { push_value(array(log), "LS") }
- LE { push_value(array(log), "LE") }
+ I { set(array(log), []); push(array(log), "I") }
+ LS { push(array(log), "LS") }
+ LE { push(array(log), "LE") }
  -> Child
- E { push_value(array(log), "E"); return(array_copy(array(log))) }
+ E { push(array(log), "E"); return(copy(array(log))) }
 
 Child:
  /hello/
- I { declare(scalar, retv=entry_text()) }
+ I { retv = entry_text() }
  E { return(retv) }
 "#;
     let spec = parse_spec(grammar).unwrap();
@@ -1064,9 +1064,9 @@ fn regression_self_recursive_edge_only_compiler_output() {
 fn retv_5_1_action_edge_propagates_child_return_into_le() {
     let grammar = r#"Parent::
  /open/ -> Child
- I { declare(array, results) }
- LE { push_value(array(results), retv) }
- E { return(array_copy(array(results))) }
+ I { set(array(results), []) }
+ LE { push(array(results), retv) }
+ E { return(copy(array(results))) }
 
 Child:
  /close/
@@ -1091,9 +1091,9 @@ Child:
 #[test]
 fn retv_5_1_blind_call_edge_propagates_child_return() {
     let grammar = r#"Top::AND
- I { declare(array, collected) }
+ I { set(array(collected), []) }
  => Child
- E { push_value(array(collected), retv); return(array_copy(array(collected))) }
+ E { push(array(collected), retv); return(copy(array(collected))) }
 
 Child:
  /go/
@@ -1119,9 +1119,9 @@ Child:
 fn retv_5_1_rep_dispatch_collects_each_child_return_via_retv() {
     let grammar = r#"List::OR+
  /(\w+)/ -> Item
- I { declare(array, out) }
- LE { push_value(array(out), retv) }
- E { return(array_copy(array(out))) }
+ I { set(array(out), []) }
+ LE { push(array(out), retv) }
+ E { return(copy(array(out))) }
 
 Item:
  /unused/
@@ -1151,7 +1151,7 @@ Item:
 fn retv_5_1_call_helper_returns_child_return_value() {
     let grammar = r#"Driver::
  /seed/
- I { declare(scalar, captured) }
+ I { captured = undef }
  E { captured = call(Sub); return(captured) }
 
 Sub:
@@ -1190,13 +1190,13 @@ Sub:
 fn match_5_2_child_entry_is_dispatcher_match_local_is_own() {
     let grammar = r#"Parent::
  /(open)/ -> Child
- I { declare(array, results) }
- LE { push_value(array(results), retv) }
- E { return(array_copy(array(results))) }
+ I { set(array(results), []) }
+ LE { push(array(results), retv) }
+ E { return(copy(array(results))) }
 
 Child:
  /(close)/
- E { return(concat(entry_text(), "|", match_text())) }
+ E { return(cat(entry_text(), "|", match_text())) }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();
@@ -1220,9 +1220,9 @@ Child:
 fn match_5_2_parent_local_match_survives_child_dispatch() {
     let grammar = r#"Parent::
  /(open)/ -> Child
- I { declare(array, results) }
- LE { push_value(array(results), match_text()) }
- E { return(array_copy(array(results))) }
+ I { set(array(results), []) }
+ LE { push(array(results), match_text()) }
+ E { return(copy(array(results))) }
 
 Child:
  /(close)/
@@ -1249,7 +1249,7 @@ Child:
 fn match_5_2_top_rule_entry_equals_local_match() {
     let grammar = r#"Top::
  /(\w+)/
- E { return(concat(entry_text(), "|", match_text())) }
+ E { return(cat(entry_text(), "|", match_text())) }
 "#;
     let spec = parse_spec(grammar).unwrap();
     validate(&spec).unwrap();

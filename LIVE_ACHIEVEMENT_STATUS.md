@@ -7,8 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.2.1 — migrate integration smoke helper fixtures**
+  (DONE; FRONTIER `.8.2.2.2.2` TOP-RULE-AS-NORMAL RECURSIVE HELPER-STRING MIGRATION NEXT).
+
+  **Change:** Non-compatibility Rust integration smoke fixtures before the recursive and explicit compatibility
+  blocks now use current helper spellings: explicit aggregate setters, `push(...)`, `copy(...)`, `cat(...)`, and
+  direct scalar assignment.
+
+  **Boundary:** TOP-RULE-AS-NORMAL recursive fixtures and explicit legacy-helper equivalence blocks remain
+  untouched and owned by later `.8.2.2.2` children.
+
+  **Verification:** Scoped old-helper scan now starts at the TOP-RULE-AS-NORMAL block, outside this child. Focused
+  `full_pipeline` and staged user-function filters pass. Full Rust `integration_test` passes **172** tests.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.1 — migrate source-emitter helper fixtures**
-  (DONE; FRONTIER `.8.2.2.2` RUST INTEGRATION-TEST HELPER-STRING MIGRATION NEXT).
+  (DONE; `.8.2.2.2.1` INTEGRATION SMOKE HELPER-FIXTURE MIGRATION HAS SINCE CLOSED).
 
   **Change:** Rust source-emitter smoke specs no longer use incidental `declare(...)`, `push_value(...)`,
   `array_copy(...)`, or `concat(...)` helper spellings. They now use explicit aggregate setters,

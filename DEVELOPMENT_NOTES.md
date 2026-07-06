@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.2.1 — integration-test helper cleanup needs category boundaries): Do not
+  bulk-replace every old helper spelling in `integration_test.rs`. Ordinary smoke fixtures can move directly to
+  current spellings, but recursive TOP-RULE-AS-NORMAL fixtures and explicit legacy-helper equivalence blocks carry
+  separate semantic/compatibility ownership. Keep those categories split so a cleanup slice does not accidentally
+  erase a compatibility lock or a scoped recursion fact.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.1 — migrate helper spellings without changing aggregate storage): When
   replacing old declaration/helper spellings in active fixtures, preserve storage intent, not just output shape.
   `name = []` binds a scalar-held array value under the current duck-typed assignment contract; it is not the same

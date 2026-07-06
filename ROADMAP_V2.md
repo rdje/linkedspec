@@ -270,9 +270,10 @@ DSL helper surface consistency note:
   helper-removal before behavior changes: successful remaining compatibility paths are classified. `.8.2.1` has
   migrated live EBNF `push_nonempty(...)` use to explicit `is_nonempty(...)`-guarded `push(...)` with no oracle
   expected-output drift. `.8.2.2.1` has migrated the Rust source-emitter smoke specs away from incidental legacy
-  helper spellings while preserving named-aggregate storage through explicit `set(array(...), [])`; `.8.2.2.2`
-  now owns Rust integration-test helper-string migration/classification before hard retirement. `.9` remains
-  pending behind `.8` for hash-literal `:` association syntax. The Rust oracle
+  helper spellings while preserving named-aggregate storage through explicit `set(array(...), [])`; `.8.2.2.2.1`
+  has migrated the non-compatibility Rust integration smoke fixtures with full `integration_test` passing, and
+  `.8.2.2.2.2` now owns recursive TOP-RULE-AS-NORMAL helper-string migration/classification before hard retirement.
+  `.9` remains pending behind `.8` for hash-literal `:` association syntax. The Rust oracle
   corpus is now 93 fixtures
   after `.15.2.3` added `terse_15_2_3_bare_value_reads_and_case_labels`; it had reached 92 fixtures after
   `SPEC-FORMAT-TERSE.11.4` added `terse_11_4_nested_mixed_value_path_assignment`, the Lispish fixture was

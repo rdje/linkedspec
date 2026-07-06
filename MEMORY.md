@@ -18,18 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.8.2.2.1` — Rust source-emitter smoke specs now use current helper
-  spellings (`set(array(...), [])`, `push(...)`, `copy(...)`, `cat(...)`) instead of incidental legacy helper names,
-  and the generated-source compile/run suite preserves all asserted payloads.
-- prior_leaf: `SPEC-FORMAT-TERSE.8.2.1` (commit `c6db145a`) — live EBNF `push_nonempty(...)` was migrated to
-  explicit `is_nonempty(...)`-guarded `push(...)` with no EBNF oracle expected-output drift.
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.8.2.2.2.1` — non-compatibility Rust integration smoke fixtures before
+  the recursive/compatibility blocks now use current helper spellings, and full Rust `integration_test` passes
+  **172** tests.
+- prior_leaf: `SPEC-FORMAT-TERSE.8.2.2.1` (commit `c51fe7c3`) — Rust source-emitter smoke specs were migrated to
+  current helper spellings with explicit aggregate resets.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-FORMAT-TERSE.8.2.2.1 - migrate source-emitter helper fixtures`; parent before this slice was `c6db145a`.
-  **Branch is over the documented 300 push threshold; still do NOT push
-  mid-PNT unless explicitly instructed.**
-- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.8.2.2.2` (migrate/classify Rust integration-test old-helper
-  strings) and it may start only after the `.8.2.2.1` commit is clean and `git status` is handoff-ready.
-- next_action: after this `.8.2.2.1` commit is clean, pick `SPEC-FORMAT-TERSE.8.2.2.2`; do not push unless
+  `SPEC-FORMAT-TERSE.8.2.2.2.1 - migrate integration smoke helper fixtures`; parent before this slice was
+  `c51fe7c3`. **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly
+  instructed.**
+- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.8.2.2.2.2` (migrate/classify TOP-RULE-AS-NORMAL recursive
+  integration-test helper strings) and it may start only after the `.8.2.2.2.1` commit is clean and `git status` is
+  handoff-ready.
+- next_action: after this `.8.2.2.2.1` commit is clean, pick `SPEC-FORMAT-TERSE.8.2.2.2.2`; do not push unless
   explicitly instructed.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
@@ -39,5 +40,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   worktree ignored by submodule policy. Deferred lanes behind `.8.2`: `.9` (hash `=>`→`:`),
   `.10`/`.12`/`.13`/`.14` backlog; `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`,
   `SPEC-LANG-REFERENCE`.
-- blockers: none for `.8.2.2.2` ownership. in_flight_uncommitted: none after the `.8.2.2.1` commit lands; do not
-  pivot unless the repo is handoff-ready.
+- blockers: none for `.8.2.2.2.2` ownership. in_flight_uncommitted: none after the `.8.2.2.2.1` commit lands; do
+  not pivot unless the repo is handoff-ready.

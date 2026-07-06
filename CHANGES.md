@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.2.1 — migrate integration smoke helper fixtures
+
+**Scope:** Migrate non-compatibility Rust integration-test smoke fixtures before touching recursive edge cases or
+explicit legacy-helper compatibility blocks.
+
+**Change:** `SIMPLE_GRAMMAR`, staged user-function helpers, corpus/lifecycle/edge smoke grammars, `retv_5_1`
+fixtures, and `match_5_2` fixtures now use current helper spellings: explicit aggregate setters, `push(...)`,
+`copy(...)`, `cat(...)`, and direct scalar assignment.
+
+**Boundary:** Recursive TOP-RULE-AS-NORMAL fixtures and explicit legacy-helper equivalence tests remain unchanged
+for later `.8.2.2.2` children.
+
+**Validation:** The scoped helper-hit scan now starts at the later TOP-RULE-AS-NORMAL recursive block. Focused
+`full_pipeline` and staged user-function filters passed, and full `cargo test --manifest-path rust/Cargo.toml -p
+linkedspec-runtime --test integration_test` passed all **172** tests.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.1 — migrate source-emitter helper fixtures
 
 **Scope:** Remove incidental legacy helper spellings from the Rust source-emitter smoke specs before hard-retiring
