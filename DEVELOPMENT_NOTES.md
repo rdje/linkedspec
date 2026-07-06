@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.2.5 — residue scans need ownership categories, not only string counts):
+  For Rust integration-test helper cleanup, a raw `rg` hit is not automatically incidental debt. Classify by owner:
+  recursive declaration scope (`.8.2.2.2.2`), explicit legacy-helper compatibility (`.8.2.2.2.3` / `.8.4`),
+  current documented receiver-method surface (`meta.hash_copy()`), or legacy wrapper-alias boundary (`h(...)`).
+  Only unowned fixture strings should be migrated in the scan leaf.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.2.4 — fixture cleanup must not conflate function helpers with receiver
   methods): In Rust integration fixtures, migrate function-form setup/snapshot helpers to current spellings
   (`push(...)`, `copy(...)`, explicit aggregate setters) where the current surface supports them. Do not rewrite

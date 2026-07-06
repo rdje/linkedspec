@@ -3127,6 +3127,11 @@ fn terse_2_3_5_1_array_end_mutations_remain_statement_only_in_value_slots() {
 
 #[test]
 fn terse_2_3_5_2_hash_receiver_value_chains_run() {
+    // SPEC-FORMAT-TERSE.8.2.2.2.5 classifies the `.hash_copy()`
+    // occurrences below as intentional receiver-method surface, not incidental
+    // function-form helper residue. The documented hash receiver family still
+    // includes `hash_copy`; a candidate `.copy()` receiver replacement returned
+    // `Null` and would need separate receiver-method ownership before removal.
     let grammar = r#"Top::
  /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); set(hash(layered), merge_hash(hash(meta), hash(extra))); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), hash(layered).pick_keys("a").sorted_values().first(), hash(meta).rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("a", "missing").has_key("a"), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }
 
@@ -3511,6 +3516,10 @@ fn terse_2_3_5_5_block_valued_receiver_chains_run() {
 
 #[test]
 fn terse_2_3_5_6_typed_wrapper_quoted_boundaries_run() {
+    // SPEC-FORMAT-TERSE.8.2.2.2.5 classifies `h(...)` below as an
+    // intentional legacy wrapper-alias boundary lock. Current authored examples
+    // use `hash(...)`; this fixture keeps only the alias side needed to prove
+    // quoted-name and bare-working-hash behavior until .8.4 hard retirement.
     let grammar = "Top::\n /x/ -> Done { items += \"a\"; items += \"b\"; set_key(meta, \"a\", 1); set_key(meta, \"b\", 2); return(array(count(array(items)), count(array(\"items\")), count(array('items')), count(a(items)), count(a(\"items\")), count([\"items\"]), count(array(\"literal\", \"value\")), count_keys(hash(meta)), count_keys(hash(\"meta\", 1)), count_keys(hash('meta', 1)), count_keys({ \"meta\" => 1 }), count_keys(h(meta)), count_keys(h(\"meta\", 1)))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),

@@ -7,8 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.2.5 — classify integration helper residue**
+  (DONE; FRONTIER `.8.2.2.3` GENERATED ORACLE CORPUS HELPER-FIXTURE MIGRATION NEXT).
+
+  **Change:** The remaining Rust integration-test helper-string residue is classified in place. Recursive
+  `declare(...)` usage remains owned by `.8.2.2.2.2`; explicit helper compatibility strings remain owned by
+  `.8.2.2.2.3`/`.8.4`; receiver-dot `.hash_copy()` is documented current hash receiver surface; and `h(...)` in
+  the quoted wrapper-boundary test is a legacy wrapper-alias retirement lock.
+
+  **Boundary:** No runtime behavior or user-facing syntax changed. The Rust integration-test helper cleanup lane is
+  closed, so the next active cleanup surface is generated oracle corpus fixture inputs.
+
+  **Verification:** Focused residue scan over `integration_test.rs` shows every remaining old-helper spelling under
+  an explicit `.8.2.2.2.2`, `.8.2.2.2.3`, or `.8.2.2.2.5` classification. Rust formatting passes.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.2.4 — migrate later integration fixtures**
-  (DONE; FRONTIER `.8.2.2.2.5` RUST INTEGRATION-TEST RESIDUE CLASSIFICATION NEXT).
+  (DONE; `.8.2.2.2.5` RUST INTEGRATION-TEST RESIDUE CLASSIFICATION HAS SINCE CLOSED).
 
   **Change:** Later current-feature Rust integration fixtures outside explicit compatibility blocks now use current
   `push(...)`, `copy(...)`, and explicit aggregate-setter spellings where supported. The array append-operator

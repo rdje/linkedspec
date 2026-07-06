@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.2.5 — classify integration helper residue
+
+**Scope:** Close the old-helper residue scan for `rust/linkedspec-runtime/tests/integration_test.rs` before moving
+to generated oracle corpus fixtures.
+
+**Change:** The last unclassified later-fixture hits are now labelled in place: hash receiver `.hash_copy()` calls
+are documented as intentional receiver-method surface, and `h(...)` calls in the quoted wrapper-boundary test are
+documented as a legacy wrapper-alias retirement lock. Earlier `declare(...)`, `push_nonempty(...)`,
+`array_copy(...)`, `hash_copy(...)`, `concat(...)`, and `push_value(...)` hits were already owned by the recursive
+or compatibility children.
+
+**Boundary:** No runtime behavior or user-facing syntax changed. The Rust integration-test cleanup lane is closed;
+generated oracle corpus fixture migration is next.
+
+**Validation:** The focused residue scan shows every remaining helper spelling in `integration_test.rs` under an
+explicit `.8.2.2.2.2`, `.8.2.2.2.3`, or `.8.2.2.2.5` classification comment. Rust formatting passes.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.2.4 — migrate later integration fixtures
 
 **Scope:** Migrate later current-feature Rust integration fixture strings outside explicit compatibility blocks in
