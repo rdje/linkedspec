@@ -14,8 +14,8 @@ answers:
 date: 2026-06-17
 status: confirmed
 tags: [spec-language, structure, top-rule, authoring, bootstrap, SPEC-LANG-REFERENCE]
-evidence: "Authoring doctrine (user-established + the whole shipped corpus): a .spec top (::) rule is the _INITIAL entry/dispatch loop and carries NO regex of its own; the regex(es) live on the normal (:) rules it dispatches to. All 20 shipped specs/*.spec are written this way (every top rule has no regex). A well-formed .spec therefore has >=2 rules: the :: entry rule + >=1 normal : rule. Basis: BootstrapSpec/Core.pm:417 (:: -> target _INITIAL), RuleIR.pm:193-195 (_INITIAL -> top_rule). Verified 2-rule worked-example idiom via LinkedSpec::Get: `demo::  -> value  .push` / `LX { return(array_copy(a(demo))) }` + `value : /(\\w+) (\\w+)/  I.return(concat(entry_group(0),\"-\",entry_group(1)))` on `hello world` => [\"hello-world\"] (output = top rule's one-element accumulator snapshot; the dispatched child reads entry_group(N), not match_group(N)). RETRACTION (2026-06-17): an earlier version of this card claimed a regex-on-top / single-rule spec 'silently returns []'. That mechanism claim was inaccurate and is withdrawn; the genuinely broken shape to avoid in examples is the explicit ::AND ... -> Rule[N] { return(...) } form (AND mode + slot index), which drops its edge return -> [] (the .10.1 AND_SINGLE_ACODE finding in HandlerVariantEmitter.pm). The doctrine stands on its own: write 2-rule, no regex on top -- do not reason about what a malformed regex-on-top spec returns."
-reverify: "perl -Iperl -MLinkedSpec -MJSON::PP -e 'my $s=\"demo_top::  -> word_pair  .push\\nLX {return(array_copy(a(demo_top)))}\\n\\nword_pair : /(\\\\w+) (\\\\w+)/  I.return(concat(entry_group(0), \\\"-\\\", entry_group(1)))\\n\"; my $p=LinkedSpec::Get(\\$s); print JSON::PP->new->canonical(1)->allow_nonref(1)->encode($p->(\\\"hello world\\\")),\"\\n\"'  # => [\"hello-world\"]"
+evidence: "Authoring doctrine (user-established + the whole shipped corpus): a .spec top (::) rule is the _INITIAL entry/dispatch loop and carries NO regex of its own; the regex(es) live on the normal (:) rules it dispatches to. All 20 shipped specs/*.spec are written this way (every top rule has no regex). A well-formed .spec therefore has >=2 rules: the :: entry rule + >=1 normal : rule. Basis: BootstrapSpec/Core.pm:417 (:: -> target _INITIAL), RuleIR.pm:193-195 (_INITIAL -> top_rule). Verified 2-rule worked-example idiom via LinkedSpec::Get: `demo::  -> value  .push` / `LX { return(copy(array(demo))) }` + `value : /(\\w+) (\\w+)/  I.return(cat(entry_group(0),\"-\",entry_group(1)))` on `hello world` => [\"hello-world\"] (output = top rule's one-element accumulator snapshot; the dispatched child reads entry_group(N), not match_group(N)). RETRACTION (2026-06-17): an earlier version of this card claimed a regex-on-top / single-rule spec 'silently returns []'. That mechanism claim was inaccurate and is withdrawn; the genuinely broken shape to avoid in examples is the explicit ::AND ... -> Rule[N] { return(...) } form (AND mode + slot index), which drops its edge return -> [] (the .10.1 AND_SINGLE_ACODE finding in HandlerVariantEmitter.pm). The doctrine stands on its own: write 2-rule, no regex on top -- do not reason about what a malformed regex-on-top spec returns."
+reverify: "perl -Iperl -MLinkedSpec -MJSON::PP -e 'my $s=\"demo_top::  -> word_pair  .push\\nLX {return(copy(array(demo_top)))}\\n\\nword_pair : /(\\\\w+) (\\\\w+)/  I.return(cat(entry_group(0), \\\"-\\\", entry_group(1)))\\n\"; my $p=LinkedSpec::Get(\\$s); print JSON::PP->new->canonical(1)->allow_nonref(1)->encode($p->(\\\"hello world\\\")),\"\\n\"'  # => [\"hello-world\"]"
 ---
 
 # Authoring a `.spec`: top entry rule (no regex) + normal rule(s)
@@ -37,9 +37,9 @@ reverify: "perl -Iperl -MLinkedSpec -MJSON::PP -e 'my $s=\"demo_top::  -> word_p
 
 ```text
 demo::  -> value  .push
-LX { return(array_copy(a(demo))) }
+LX { return(copy(array(demo))) }
 
-value : /(\w+) (\w+)/  I.return(concat(entry_group(0), "-", entry_group(1)))
+value : /(\w+) (\w+)/  I.return(cat(entry_group(0), "-", entry_group(1)))
 ```
 Input `hello world` → output `["hello-world"]` (verified via `LinkedSpec::Get`). Notes:
 

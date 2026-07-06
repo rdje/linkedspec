@@ -108,7 +108,8 @@ Other modern helpers do not silently guess the current rule accumulator. They ca
 
 ```text
 push(array(Parent), capture_slice());
-push_nonempty(array(Parent), trim(capture_slice()));
+parent_part = trim(capture_slice());
+if(is_nonempty(parent_part)) { push(array(Parent), parent_part); }
 set(array(Parent), array());
 return(hash("children", copy(array(Parent))));
 ```
@@ -118,8 +119,8 @@ Older capture and return helpers also use this convention:
 | Helper | Current-rule accumulator behavior | Modern direction |
 | --- | --- | --- |
 | `capture(label)` | appends the anonymous capture slice into `@CurrentRule`; the label argument is compatibility syntax | prefer `push(array(CurrentRule), capture_slice())` or an explicit domain array |
-| `capture_if(label)` | trims and conditionally appends the anonymous capture slice into `@CurrentRule`; the label argument is compatibility syntax | prefer `push_nonempty(array(CurrentRule), trim(capture_slice()))` or an explicit domain array |
-| `CAPTURE_IF()` | trims and conditionally appends the anonymous capture slice into `@CurrentRule` | prefer `push_nonempty(array(CurrentRule), trim(capture_slice()))` |
+| `capture_if(label)` | trims and conditionally appends the anonymous capture slice into `@CurrentRule`; the label argument is compatibility syntax | prefer `part = trim(capture_slice()); if(is_nonempty(part)) { push(array(CurrentRule), part) }` or an explicit domain array |
+| `CAPTURE_IF()` | trims and conditionally appends the anonymous capture slice into `@CurrentRule` | prefer `part = trim(capture_slice()); if(is_nonempty(part)) { push(array(CurrentRule), part) }` |
 | *(removed 2026-06-14)* | `return_a`, `return_m`, `return_ma` were legacy tagged return shortcuts | Retired. Use `return(array(...))` with `copy(array(CurrentRule))` and/or `flat_array(entry_groups())` so payload shape is visible. |
 
 Historically, a VHDL-style rule might have used the now-removed `return_ma(generate_statement)` shorthand. The modern spelling makes each part explicit:
@@ -142,7 +143,7 @@ An audit of all 20 shipped `.spec` files (88 total accumulator operations, June 
 | --- | --- | --- |
 | `push(array(…), …)` | 63 | 71.6% |
 | Fluent `.push(…)` with explicit target | 19 | 21.6% |
-| `push_nonempty(array(…), …)` | 2 | 2.3% |
+| explicit `is_nonempty(...)` guard + `push(array(…), …)` | 2 | 2.3% |
 | Convention-based `push(Child)` | 4 | 4.5% |
 
 **95.5% of accumulator operations already use explicit targets.** The four remaining convention-based uses (across `regdef`, `tkgui`, and `ebnf`) are idiomatic — the rule name is the clearest name for the collection.
@@ -153,7 +154,7 @@ An audit of all 20 shipped `.spec` files (88 total accumulator operations, June 
 
 These helpers are the entry point into local working state and structured values.
 
-> **Working variables auto-exist.** `name`, `array(name)`, and `hash(name)` reference a per-rule working variable. `name` reads scalar `name`; `array(items)` reads the current array value or working array `items`; `hash(meta)` reads the current hash value or working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. You do **not** have to `declare(...)` a working variable first. The wrapper or type-implying position auto-creates a fresh per-invocation working value of that kind. A **bare** name works as the target of `set(name, ...)` and `name = value`, binding the evaluated typed RHS value whether it is scalar, array, or hash; the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push(name, ...)`, `push_nonempty(name, ...)`, and `name += expr`; the hash target of `set_key(name, key, value)` and `name[key] = value`; and aggregate snapshot reads such as `copy(array(name))`, `copy(hash(name))`, and `copy(name)`. Use explicit `set(array(name), ...)` / `set(hash(name), ...)` when you intentionally want aggregate working storage rather than replacing the bare variable's typed value. `declare(...)` stays available only as legacy compatibility; new examples should use direct assignments and typed wrappers. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
+> **Working variables auto-exist.** `name`, `array(name)`, and `hash(name)` reference a per-rule working variable. `name` reads scalar `name`; `array(items)` reads the current array value or working array `items`; `hash(meta)` reads the current hash value or working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. You do **not** have to `declare(...)` a working variable first. The wrapper or type-implying position auto-creates a fresh per-invocation working value of that kind. A **bare** name works as the target of `set(name, ...)` and `name = value`, binding the evaluated typed RHS value whether it is scalar, array, or hash; the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push(name, ...)` and `name += expr`; the hash target of `set_key(name, key, value)` and `name[key] = value`; and aggregate snapshot reads such as `copy(array(name))`, `copy(hash(name))`, and `copy(name)`. Use explicit `set(array(name), ...)` / `set(hash(name), ...)` when you intentionally want aggregate working storage rather than replacing the bare variable's typed value. `declare(...)` stays available only as legacy compatibility; new examples should use direct assignments and typed wrappers. See the [Declaration Helper Reference](declaration-helper-reference.md#declarations-are-optional-working-variables-auto-exist).
 
 > **Primitive literals are typed values.** Quoted strings (`"text"` or `'text'`), numbers
 > (`42`, `3.14`), `true`, `false`, and `undef` can be used anywhere an explicit value
@@ -350,7 +351,7 @@ These helpers mutate or dispatch rule state. The assignment forms also have the 
 | `push(rule, target)` | call one rule and append into a named array | a child rule result should go straight into an explicit array accumulator. |
 | `push(rule, target, index)` | call one rule and append one indexed result into a named array | one element from a shaped child return should go straight into an explicit array accumulator. |
 | `push(array(name), expr)` | append one value | an array should grow by one item. |
-| `push_nonempty(array(name), expr)` | append one meaningful value | empty captures or optional child results should be ignored instead of becoming payload items. |
+| `part = expr; if(is_nonempty(part)) { push(array(name), part) }` | append one meaningful value | empty captures or optional child results should be ignored instead of becoming payload items. |
 | `set_key(name, key, value)` | set one hash field | a named working hash should be updated in place. |
 | `return(payload)` | return one value | the rule should emit a structured result. |
 | `return_undef()` | return `undef` | an optional rule branch has no value. |
@@ -464,10 +465,12 @@ I { logging_annotation = []; }
   push(quoted_string, 1)
 }
 -> comma {
-  push_nonempty(array(logging_annotation), trim(capture_slice()))
+  logging_annotation_part = trim(capture_slice())
+  if(is_nonempty(logging_annotation_part)) { push(array(logging_annotation), logging_annotation_part) }
 }
 -> logging_annotation[1] {
-  push_nonempty(array(logging_annotation), trim(capture_slice()));
+  logging_annotation_part = trim(capture_slice());
+  if(is_nonempty(logging_annotation_part)) { push(array(logging_annotation), logging_annotation_part); }
   return(hash(
     "kind", "logging_annotation",
     "name", match_group(0),
@@ -476,14 +479,19 @@ I { logging_annotation = []; }
 }
 ```
 
-`push_nonempty(array(target), value)` is for accumulator rules where an optional parse span may be empty after normalization. It evaluates the value once, skips `undef`, skips the empty string, skips empty array references, and skips empty hash references. It still preserves the string `"0"` because `"0"` is data, not absence. Other reference values count as present values and are appended.
+Use an explicit non-empty guard for accumulator rules where an optional parse span may be empty after normalization. Evaluate the value once, check `is_nonempty(...)`, and then append through `push(...)`. This skips `undef`, the empty string, empty arrays, and empty hashes while preserving the string `"0"` because `"0"` is data, not absence. Other reference values count as present values and are appended.
 
-Use `push_nonempty(...)` when the empty value is parser noise:
+Use the explicit filter when the empty value is parser noise:
 
 ```text
-push_nonempty(array(parts), trim(capture_slice()));
-push_nonempty(array(children), call(OptionalChild));
-push_nonempty(array(tags), lowercase(trim(match_text())));
+part = trim(capture_slice());
+if(is_nonempty(part)) { push(array(parts), part); }
+
+child = call(OptionalChild);
+if(is_nonempty(child)) { push(array(children), child); }
+
+tag = lowercase(trim(match_text()));
+if(is_nonempty(tag)) { push(array(tags), tag); }
 ```
 
 Do not use it when an empty string is a meaningful token:
@@ -492,7 +500,7 @@ Do not use it when an empty string is a meaningful token:
 push(array(fields), field_text);
 ```
 
-That distinction is deliberate. `push(...)` says "append exactly what I computed." `push_nonempty(...)` says "append the computed value only if it survived the emptiness filter."
+That distinction is deliberate. `push(...)` says "append exactly what I computed." The explicit guard says "append the computed value only if it survived the emptiness filter." The older `push_nonempty(...)` helper remains a legacy compatibility spelling while hard retirement is staged.
 
 Append versus replace:
 

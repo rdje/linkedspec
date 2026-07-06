@@ -89,7 +89,7 @@ Write values into declared variables or containers:
 - `items += value` — terse array append operator; a bare RHS reads the scalar working variable `value`, while all-bare `push(A,B)` remains child-call syntax; in value positions it yields the updated array snapshot
 - `push(container, value)` — append to an array
 - `push(array(name), value)` — named-array push
-- `push_nonempty(array(name), value)` — push only if value is defined and non-empty
+- `if(is_nonempty(value)) { push(array(name), value) }` — named-array push with an explicit non-empty filter
 - `set_key(name, key, value)` — set one key in a named working hash
 - `name[key] = value` — terse hash-index assignment operator, equivalent to `set_key(name, key, value)` when the key and value are explicit expressions; in value positions it yields the updated hash snapshot
 - `payload["items"][0]["name"] = value` — nested value-path assignment into a scalar-held array/hash payload; intermediate containers must already exist, final hash keys may be created, and final array indexes may replace or append at len

@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.3 — migrate book and knowledge helper references
+
+**Scope:** Current-facing mdBook helper guidance, Knowledge fact-card `reverify` commands, and the derived
+Knowledge Map.
+
+**Change:** Book examples now teach current helper spellings first: `cat(...)`, `copy(...)`, assignment/operator
+forms, `push(...)`, and explicit `is_nonempty(...)` guards before `push(...)`. Old helper names remain in
+compatibility/catalog, retired-diagnostic, or historical contexts instead of being presented as current authoring.
+Knowledge fact-card `reverify` commands were updated away from legacy helper spellings unless the card explicitly
+proves retirement/compatibility, and `KNOWLEDGE_MAP.md` was regenerated.
+
+**Boundary:** No parser/runtime behavior changed. This closes the current-facing docs/KM cleanup before `.8.2.4`
+runs the final migration scans/gates.
+
+**Validation:** `mdbook build docs/linkedspec-book`, `bash knowledge-map/scripts/check_knowledge_map.sh`,
+`git diff --check`, `bash scripts/check_memory_architecture.sh`, and `bash scripts/check_doctrines.sh` pass.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.5 — close active test/corpus helper residue
 
 **Scope:** Active Rust/Perl test fixtures, generated oracle inputs, generator source, shipped specs, and checked-in

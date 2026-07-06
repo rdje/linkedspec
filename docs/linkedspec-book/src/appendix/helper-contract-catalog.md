@@ -106,7 +106,7 @@ dispatch rule.
 > values as the variable's current typed value; explicit aggregate targets such as `set(array(name), ...)` and
 > `set(hash(name), ...)`;
 > the scalar source in `return(name)`, `set(out, name)`, and `out = name`;
-> the array target of `push(name, …)`, `push_nonempty(name, …)`, and the array append operator
+> the array target of `push(name, …)` and the array append operator
 > `name += value`; and the hash target of
 > `set_key(name, key, value)` and hash-index assignment `name[key] = value`
 > auto-exist from a **bare** name too, with the kind fixed by that position. Aggregate snapshot reads
@@ -432,9 +432,9 @@ dispatch rule.
 ### `push(arr, value)`
 - **Signature**: `push(target: array, value: expr)`
 - **Returns**: void
-- **Behavior**: Terse explicit-value append. Lowers identically to `push_value(target, value)` for unambiguous value expressions.
+- **Behavior**: Terse explicit-value append. Lowers identically to the legacy explicit-value append helper for unambiguous value expressions.
 - **Examples**: `push(items, "a")`, `push(array(items), value)`, `push(array(items), cat("a", "b"))`, and `push(items, call(Child))`.
-- **Disambiguation**: `push(A, B)` where both arguments are bare identifiers remains a child-call form (`A` is the child rule, `B` is the target accumulator). To append a working variable by bare name, use the operator form `items += value`; `push_value(items, value)` remains explicit and unambiguous.
+- **Disambiguation**: `push(A, B)` where both arguments are bare identifiers remains a child-call form (`A` is the child rule, `B` is the target accumulator). To append a working variable by bare name, use the operator form `items += value` or wrap the target as `push(array(items), value)`.
 
 ### `items += value`
 - **Signature**: `target += value: expr`
@@ -471,13 +471,16 @@ dispatch rule.
 ### `push_value(arr, value)`
 - **Signature**: `push_value(target: array, value: expr)`
 - **Returns**: void
-- **Behavior**: Appends a value to the named accumulator. `push(target, value)` is the terse spelling for unambiguous value expressions; `push_value` stays accepted and is still the clearest form when both arguments are bare identifiers.
-- **Edge cases**: Value can be any expression type. Undef values are appended as-is (use `push_nonempty` to skip). The target may be wrapped (`array(items)`) or a **bare** name (`items`); a bare target auto-exists as an array.
+- **Compatibility status**: Legacy compatibility spelling. Current authoring uses `push(array(target), value)`, `target += value`, or an explicit typed target when both arguments are bare identifiers and child-call ambiguity must be avoided.
+- **Behavior**: Appends a value to the named accumulator. `push(target, value)` is the terse spelling for unambiguous value expressions.
+- **Edge cases**: Value can be any expression type. Undef values are appended as-is; use an explicit `is_nonempty(...)` guard before `push(...)` when empty values should be skipped. The target may be wrapped (`array(items)`) or a **bare** name (`items`); a bare target auto-exists as an array.
 
 ### `push_nonempty(arr, value)`
 - **Signature**: `push_nonempty(target: array, value: expr)`
 - **Returns**: void
-- **Behavior**: Appends the value only if it is defined and non-empty. Skips undef and empty strings.
+- **Compatibility status**: Legacy compatibility spelling. Current authoring spells the filter explicitly:
+  `value = expr; if(is_nonempty(value)) { push(array(target), value) }`.
+- **Behavior**: Appends the value only if it is defined and non-empty. Skips undef, empty strings, empty arrays, and empty hashes while preserving `"0"`.
 - **Edge cases**: Like `push_value`, the target may be wrapped (`array(items)`) or a **bare** name (`items`) that auto-exists as an array.
 
 ### `count(arr)`

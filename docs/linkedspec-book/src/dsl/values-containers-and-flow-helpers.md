@@ -50,7 +50,8 @@ Use this convention when the rule name is the best name for the collection. If a
 ```text
 push(Child, children)
 push(array(children), child)
-push_nonempty(array(children), trim(capture_slice()))
+child_text = trim(capture_slice())
+if(is_nonempty(child_text)) { push(array(children), child_text) }
 ```
 
 Most helpers do not guess the current rule array. They can still read or mutate it when you name it explicitly, for example `array(Parent)`, `push(array(Parent), value)`, or `return(hash("children", copy(array(Parent))))`.

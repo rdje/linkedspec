@@ -383,8 +383,8 @@ The following older helpers remain useful when reading or migrating legacy specs
 | --- | --- |
 | `$CAPTURE` | `capture_slice()` or `name = capture_slice()` |
 | `capture(label)` | `push(array(target), capture_slice())` when the target is explicit |
-| `capture_if(label)` | `push_nonempty(array(target), trim(capture_slice()))` for the common trimmed-and-nonempty append case; explicit `if(...)` around `capture_slice()` when custom filtering is needed |
-| `CAPTURE_IF()` | `push_nonempty(array(current_rule), trim(capture_slice()))` when replacing the legacy current-rule append shape |
+| `capture_if(label)` | `part = trim(capture_slice()); if(is_nonempty(part)) { push(array(target), part) }` for the common trimmed-and-nonempty append case; explicit `if(...)` around `capture_slice()` when custom filtering is needed |
+| `CAPTURE_IF()` | `part = trim(capture_slice()); if(is_nonempty(part)) { push(array(current_rule), part) }` when replacing the legacy current-rule append shape |
 | `ibacktrack(label)` / `IBACKTRACK()` | keep as compatibility unless a clearer parser structure removes the need to backtrack |
 | `backtrack(label)` / `BACKTRACK()` | keep as compatibility unless a clearer parser structure removes the need to backtrack |
 

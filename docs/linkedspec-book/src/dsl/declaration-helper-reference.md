@@ -76,7 +76,7 @@ A working variable also auto-exists when it appears **bare** in a helper positio
 set(count, match_group(0))
 count = match_group(0)
 
-# array target of push(...) / push_nonempty(...) — the bare name is an array
+# array target of push(...) and += — the bare name is an array
 push(array(items), match_group(0))
 push(items, match_group(0))
 items += match_group(0)
@@ -108,7 +108,7 @@ payload["children"][index]["name"] = value
 ```
 
 The kind comes from the **position**: the target of `set(...)` and `name = value` binds the evaluated typed RHS
-value; the target of `push(...)`, `push_nonempty(...)`, and `name += value` is an array; the target of
+value; the target of `push(...)` and `name += value` is an array; the target of
 `set_key(name, key, value)` and `name[key] = value` is a hash. Aggregate snapshot helpers are type-implying read
 positions: `copy(array(name))` reads the current array value or working array, `copy(hash(name))` reads the current
 hash value or working hash, and `copy(name)` follows the current aggregate/value read rule for the name. In
@@ -352,7 +352,7 @@ declare(array, groups=entry_groups());
 declare(array, keys=sorted_keys(hash(meta)));
 declare(array, public_keys=take(sorted_keys(pick_keys(hash(meta), "kind", "source")), 2));
 declare(array, merged=concat_arrays(array(items), array(extra_items), ["tail"]));
-declare(array, snapshot=array_copy(array(items)));
+declare(array, snapshot=copy(array(items)));
 ```
 
 Use an array initializer when the rule should start with a known list.
@@ -363,10 +363,10 @@ Use `array()` for an explicit empty list:
 declare(array, items=array());
 ```
 
-Use `array_copy(...)` when the initializer should snapshot an existing array-valued expression:
+Use `copy(...)` when the initializer should snapshot an existing array-valued expression:
 
 ```text
-declare(array, saved_items=array_copy(array(items)));
+declare(array, saved_items=copy(array(items)));
 ```
 
 Use `set(array(name), array())` to clear or reset a live array later. Do not redeclare a variable just to clear it.
@@ -388,7 +388,7 @@ declare(hash, public_meta=pick_keys(hash(meta), "kind", "source"));
 declare(hash, cleaned_meta=drop_keys(hash(meta), "debug", "span"));
 declare(hash, normalized_meta=set_key(hash(meta), "stage", "normalized"));
 declare(hash, merged_meta=merge_hash(hash(meta), hash("stage", "normalized")));
-declare(hash, snapshot=hash_copy(hash(meta)));
+declare(hash, snapshot=copy(hash(meta)));
 ```
 
 Use a hash initializer when the rule's metadata shape is known at entry:
@@ -415,13 +415,13 @@ Do not redeclare to reset. Redeclaration is a lifetime decision, not a mutation 
 
 ## Initializer expression surface
 
-Declaration initializers reuse the same expression language as `set(...)`, `push_value(...)`, `return(...)`, and flow helpers.
+Declaration initializers reuse the same expression language as `set(...)`, `push(...)`, `return(...)`, and flow helpers.
 
 > **Terse spellings.** The same terse helper names apply here: `set(...)`,
-> scalar `name = value` and `=(name, value)` for scalar assignment, array append `items += expr` for explicit append values, hash-index assignment `meta["key"] = expr` for `set_key(meta, "key", expr)`, `cat(...)` for `concat(...)`, and a unified `copy(...)` for `array_copy(...)` / `hash_copy(...)`
+> scalar `name = value` and `=(name, value)` for scalar assignment, array append `items += expr` for explicit append values, hash-index assignment `meta["key"] = expr` for `set_key(meta, "key", expr)`, `cat(...)` for the legacy string-concat helper, and unified `copy(...)` for legacy aggregate-copy helpers
 > (it resolves array-vs-hash by the wrapped symbol kind). They lower identically to the original
 > names in initializer and assignment sources, so `declare(array, saved=copy(array(items)))` is
-> equivalent to `declare(array, saved=array_copy(array(items)))`. See the
+> equivalent to the legacy aggregate-copy spelling. See the
 > [Helper Contract Catalog](../appendix/helper-contract-catalog.md#terse-helper-renames-canonical-going-forward).
 
 Common initializer sources include:
@@ -433,8 +433,8 @@ Common initializer sources include:
 | Source readers | `entry_text()`, `entry_group(0)`, `capture_slice()`, `cursor_pos()` |
 | Child payload access | `retv["content"]`, `retv["children"][0]["name"]` |
 | Constructors | `array(...)`, `hash(...)` |
-| Aggregate helpers | `array_copy(...)`, `hash_copy(...)`, `sorted_keys(...)`, `pick_keys(...)`, `split_tagged_records(...)` |
-| String helpers | `trim(...)`, `lowercase(...)`, `replace_substr(...)`, `concat(...)` |
+| Aggregate helpers | `copy(...)`, `sorted_keys(...)`, `pick_keys(...)`, `split_tagged_records(...)` |
+| String helpers | `trim(...)`, `lowercase(...)`, `replace_substr(...)`, `cat(...)` |
 | Numeric helpers | `count(...)`, `length(...)`, `num_add(...)`, `num_clamp(...)` |
 | Predicate helpers | `is_nonempty(...)`, `has_key(...)`, `matches(...)` |
 | Fallback helpers | `coalesce(...)`, `coalesce_nonempty(...)` |
@@ -479,7 +479,7 @@ They also work in method-chain style:
   .split(array(parts), raw, /,/)
   .trim_each(array(parts))
   .filter_nonempty(array(parts))
-  .return(hash("kind", "field_list", "fields", array_copy(array(parts))));
+  .return(hash("kind", "field_list", "fields", copy(array(parts))));
 ```
 
 Structured blocks are usually better for substantial logic. Fluent chains are useful for compact helper-only sequences that stay readable.
@@ -511,14 +511,14 @@ List::AND
  Item
  -> List[0] {
    retv = call(Item);
-   push_value(array(items), retv);
+   push(array(items), retv);
  }
  -> List[1] {
    retv = call(Item);
-   push_value(array(items), retv);
+   push(array(items), retv);
    return(hash(
      "kind", "list",
-     "items", array_copy(array(items)),
+     "items", copy(array(items)),
      "item_count", count(array(items))
    ));
  }
@@ -545,7 +545,7 @@ Token::AND
    text = lowercase(trim(entry_text()));
    meta["text"] = text;
    meta["text_length"] = length(text);
-   return(hash_copy(hash(meta)));
+   return(copy(hash(meta)));
  }
 ```
 
@@ -598,14 +598,14 @@ Do not use a scalar declaration for a value you later treat as an array:
 
 ```text
 declare(scalar, items);
-push_value(array(items), retv);
+push(array(items), retv);
 ```
 
 Prefer:
 
 ```text
 declare(array, items);
-push_value(array(items), retv);
+push(array(items), retv);
 ```
 
 Do not use legacy declaration syntax to reset:

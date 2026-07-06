@@ -575,7 +575,7 @@ concat_arrays(a1, a2)  — concatenate arrays
 push(arr, child)        — append child to accumulator
 push(arr, child, index) — append child at index
 push(arr, value)  — append value to accumulator
-push_nonempty(arr, val) — append if non-empty
+push_nonempty(arr, val) — legacy compatibility; prefer val = expr; if(is_nonempty(val)) { push(arr, val) }
 target.push_back(value) — append value to named working array (statement)
 target.push_front(value) — prepend value to named working array (statement)
 target.pop_back()       — remove last item from named working array (statement)

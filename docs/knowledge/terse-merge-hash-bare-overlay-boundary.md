@@ -10,8 +10,8 @@ answers:
 date: 2026-07-04
 status: confirmed
 tags: [dsl, hash, helper, spec-format-terse, oracle, mdbook]
-evidence: "During SPEC-FORMAT-TERSE.6.3, regenerating the oracle corpus after changing `merge_hash(hash_copy(base), overlay)` to `merge_hash(base, overlay)` changed the Perl reference expected value for `terse_2_3_4_1_bare_hash_helper_arg_composition` from `2` to `0`. Direct probes showed `merge_hash(hash_copy(base), overlay)`, `merge_hash(copy(hash(base)), overlay)`, and `merge_hash(hash(base), overlay)` return `2`, while `merge_hash(base, overlay)` returns `0`."
-reverify: "perl -Iperl -MJSON::PP -MLinkedSpec -e 'for my $expr (q{merge_hash(hash_copy(base), overlay)}, q{merge_hash(base, overlay)}, q{merge_hash(copy(hash(base)), overlay)}, q{merge_hash(hash(base), overlay)}) { my $spec = qq{Top::\\n /x/ -> Done { set_key(base, \"b\", 2); set_key(base, \"a\", 1); set_key(overlay, \"c\", 3); return(count(drop_front(sorted_keys($expr)))) }\\n\\nDone::\\n /[a-z]+/\\n}; my $p = LinkedSpec::Get(\\$spec); my $in = q{xhello}; my $r = $p->(\\$in); print \"$expr => \", JSON::PP->new->canonical->encode($r), \"\\n\"; }'"
+evidence: "During SPEC-FORMAT-TERSE.6.3, regenerating the oracle corpus after changing the old-helper form `merge_hash(hash_copy(base), overlay)` to `merge_hash(base, overlay)` changed the Perl reference expected value for `terse_2_3_4_1_bare_hash_helper_arg_composition` from `2` to `0`. Current direct probes show `merge_hash(copy(hash(base)), overlay)` and `merge_hash(hash(base), overlay)` return `2`, while `merge_hash(base, overlay)` returns `0`."
+reverify: "perl -Iperl -MJSON::PP -MLinkedSpec -e 'for my $expr (q{merge_hash(base, overlay)}, q{merge_hash(copy(hash(base)), overlay)}, q{merge_hash(hash(base), overlay)}) { my $spec = qq{Top::\\n /x/ -> Done { set_key(base, \"b\", 2); set_key(base, \"a\", 1); set_key(overlay, \"c\", 3); return(count(drop_front(sorted_keys($expr)))) }\\n\\nDone::\\n /[a-z]+/\\n}; my $p = LinkedSpec::Get(\\$spec); my $in = q{xhello}; my $r = $p->(\\$in); print \"$expr => \", JSON::PP->new->canonical->encode($r), \"\\n\"; }'"
 ---
 
 # `merge_hash` bare overlay boundary

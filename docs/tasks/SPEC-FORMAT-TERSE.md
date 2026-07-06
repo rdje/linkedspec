@@ -6,7 +6,11 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-06` (**`.8.2.2.5` DONE; `.8.2.2` DONE; `.8.2` remains active with frontier `.8.2.3`. Active-test/corpus helper residue scans are clean or classified. Legacy helper-removal inventory is complete and `.8` is now
+- Last updated: `2026-07-06` (**`.8.2.3` DONE; `.8.2` remains active with frontier `.8.2.4`. Current-facing
+  mdBook and Knowledge Map helper references now teach current terse spellings first: `cat(...)`, `copy(...)`,
+  assignment/operators, `push(...)`, and explicit `is_nonempty(...)` guards before `push(...)`; legacy helper names
+  remain only in compatibility, retired-diagnostic, or historical contexts. `.8.2.2.5` previously closed
+  active-test/corpus helper residue scans and `.8.2.2` is done. Legacy helper-removal inventory is complete and `.8` is now
   split before behavior changes. Perl probes show `assign(...)` is already raw/unlowered, while `scalar(...)` and
   `s(...)`/`a(...)`/`h(...)` already emit unsupported-helper diagnostics; still-successful Perl compatibility
   paths include `declare(...)`/`declare_s`/`declare_a`/`declare_h`, `concat(...)`, `array_copy(...)`,
@@ -16,7 +20,8 @@
   with `is_nonempty(...)`-guarded `push(...)` before hard retirement; generated EBNF oracle inputs and the EBNF
   walkthrough match the shipped spec with no expected-output drift. `.8.2.2.3` migrated generated oracle corpus
   fixture inputs with no expected-output drift; `.8.2.2.4` migrated/classified Perl phase0 helper strings; `.8.2.2.5`
-  closed active-test/corpus residue scans and labelled Rust wrapper-alias residue. Frontier -> `.8.2.3`. Prior **`.15.5` DONE; colon scalar-slot removal closeout complete. Stale current-surface
+  closed active-test/corpus residue scans and labelled Rust wrapper-alias residue. `.8.2.3` migrated current-facing
+  mdBook/KM helper references and regenerated `KNOWLEDGE_MAP.md`. Frontier -> `.8.2.4`. Prior **`.15.5` DONE; colon scalar-slot removal closeout complete. Stale current-surface
   `:name` scans across shipped specs, generated corpus inputs, mdBook, tests, code, and Knowledge Map facts found
   no live authored `:name` support outside intentional retired-diagnostic tests/code and historical records. Two
   stale Knowledge fact-card references were corrected: the duck-typed assignment reverify command now uses bare
@@ -3167,8 +3172,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     into a separately owned replacement before removal. Historical tests/docs may keep old spellings only when they
     assert retired diagnostics or document past behavior. Oracle generation and mdBook build stay in sync.
   Children: `.8.2.1` (done — live EBNF `push_nonempty(...)` migration and generated EBNF oracle refresh),
-    `.8.2.2` (active — incidental active test/corpus old-helper migration; leave only explicit legacy/diagnostic
-    locks), `.8.2.3` (pending — current-facing mdBook/KM helper-reference cleanup), `.8.2.4` (pending — no-drift
+    `.8.2.2` (done — incidental active test/corpus old-helper migration; leave only explicit legacy/diagnostic
+    locks), `.8.2.3` (done — current-facing mdBook/KM helper-reference cleanup), `.8.2.4` (active — no-drift
     closeout before hard retirement).
   Verification: `pending`
   Commit: `pending`
@@ -3359,18 +3364,25 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.8.2.2.5 - close active test corpus helper residue`
 
 - ID: `SPEC-FORMAT-TERSE.8.2.3`
-  Status: `active`
+  Status: `done`
   Goal: Migrate current-facing mdBook and Knowledge Map helper references away from the old helper spellings before
     implementation removal.
   Acceptance: Current-facing docs teach `cat(...)`, `copy(...)`, assignments, `push(...)`, and explicit
     `if(is_nonempty(value)) { push(...) }` filtering first. Legacy names appear only in historical compatibility or
     retired-diagnostic sections, and Knowledge fact-card `reverify` commands avoid removed spellings unless they
     explicitly prove retirement.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-06.** Current-facing mdBook helper examples and compatibility tables now use or
+    recommend current spellings: `cat(...)`, `copy(...)`, assignments, `push(...)`, and explicit
+    `if(is_nonempty(value)) { push(...) }` filters. The declaration helper reference, value/container flow guide,
+    source-boundary migration table, helper catalog, and formal grammar appendix no longer present old helper calls
+    as current authoring examples. Knowledge fact-card `reverify` commands were migrated away from legacy helper
+    spellings unless the card explicitly proves retirement or compatibility, and `KNOWLEDGE_MAP.md` was regenerated.
+    `mdbook build docs/linkedspec-book`, Knowledge Map check, whitespace check, memory-architecture check, and
+    doctrine check passed.
+  Commit: `SPEC-FORMAT-TERSE.8.2.3 - migrate book and knowledge helper references`
 
 - ID: `SPEC-FORMAT-TERSE.8.2.4`
-  Status: `pending`
+  Status: `active`
   Goal: Close the migration parent with focused scans and regenerated artifacts before hard retirement.
   Acceptance: Current-source/test/corpus/doc/KM scans are clean or each residual old-helper spelling is tied to a
     pending hard-retirement diagnostic. Oracle generation, corpus oracle, mdBook, doctrine checks, and focused
@@ -3964,8 +3976,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | 16 | `SPEC-FORMAT-TERSE.8.2.2.3` | `done` | generated oracle corpus helper fixture inputs migrated/classified with no expected-output drift |
 | 17 | `SPEC-FORMAT-TERSE.8.2.2.4` | `done` | Perl phase0 helper strings migrated/classified; full phase0 passes 1022 |
 | 18 | `SPEC-FORMAT-TERSE.8.2.2.5` | `done` | active-test/corpus residue scans closed; Rust wrapper-alias residue labelled |
-| 19 | `SPEC-FORMAT-TERSE.8.2.3` | `active` | migrate current-facing mdBook/KM helper references before engine retirement |
-| 20 | `SPEC-FORMAT-TERSE.8.2.4` | `pending` | close `.8.2` migration scans/gates before hard retirement |
+| 19 | `SPEC-FORMAT-TERSE.8.2.3` | `done` | current-facing mdBook/KM helper references migrated; Knowledge Map regenerated |
+| 20 | `SPEC-FORMAT-TERSE.8.2.4` | `active` | close `.8.2` migration scans/gates before hard retirement |
 | 21 | `SPEC-FORMAT-TERSE.9` | `pending` | user directive replaces Perlish hash-literal `=>` association with terse `:` association after helper-removal / assignment-semantics coordination lands |
 | — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.12` | `deferred` / `spec backlog` | track future hash-tree attached-block traversal; not PNT-eligible until explicitly activated |

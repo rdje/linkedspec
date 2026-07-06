@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.3 — migrate book and knowledge helper references**
+  (DONE; FRONTIER `.8.2.4` NO-DRIFT SCAN/GATE CLOSEOUT NEXT).
+
+  **Change:** Current-facing mdBook helper examples now teach current terse spellings first: `cat(...)`,
+  `copy(...)`, assignment/operator forms, `push(...)`, and explicit `is_nonempty(...)` guards before `push(...)`.
+  Knowledge fact-card `reverify` commands were migrated away from legacy helper spellings unless they explicitly
+  prove retirement/compatibility, and `KNOWLEDGE_MAP.md` was regenerated.
+
+  **Boundary:** No parser/runtime behavior changed. Legacy helper names remain only in compatibility/catalog,
+  retired-diagnostic, or historical contexts.
+
+  **Verification:** mdBook build, Knowledge Map check, whitespace check, memory architecture check, and doctrine
+  check pass.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.5 — close active test/corpus helper residue**
   (DONE; FRONTIER `.8.2.3` MDBOOK/KM HELPER-REFERENCE MIGRATION NEXT).
 

@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.8.2.3 — docs/KM cleanup must distinguish current guidance from compatibility
+  cataloging): Current-facing examples should not mention legacy helper spellings as the recommended route. Keep old
+  helper names only where the section is explicitly compatibility, retired-diagnostic, or historical. For
+  `push_nonempty(...)` migrations, write the value to a temporary once, guard with `is_nonempty(...)`, then append
+  with `push(array(target), value)` so filter semantics stay visible and no one invents a replacement helper.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.5 — closeout scans need separate alias and false-positive buckets):
   Do not treat single-letter wrapper-alias scans as the same thing as primary helper scans. `a(...)` / `h(...)`
   must be classified where they are real fixture strings, while regex/input text such as `(a(b)c)` is only a false

@@ -40,9 +40,9 @@ Nested semicolons inside expression payloads remain part of that payload. For ex
 Fluent attached-control syntax can still use conventional branch tails such as:
 
 ```text
--> Top.if(scalar(on)) {
+-> Top.if(on) {
   return_undef()
-} elseif(scalar(alt_on)) {
+} elseif(alt_on) {
   say("alt")
 } else {
   return_undef()

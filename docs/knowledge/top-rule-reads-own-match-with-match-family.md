@@ -14,7 +14,7 @@ date: 2026-06-23
 status: confirmed
 tags: [spec-language, authoring, top-rule, regex, entry-vs-match, AND-mode, TOP-RULE-AS-NORMAL, ADR-0010]
 evidence: "LinkedSpec::Get probes 2026-06-23 (TOP-RULE-AS-NORMAL.4, dump-don't-transcribe; scratchpad verify4b/4c/4d). (1) `Pair::AND` (top rule) with `/(name)\\s*=\\s*/ -> Pair[0] {set name=match_group(0)}` + `/(value)/ -> Pair[1] {return value=match_group(0)}` on `name = value` (consume) => {\"name\":\"name\",\"value\":\"value\"}. (2) The SAME shape with entry_text() instead of match_group(0) => {\"name\":null,\"value\":null} -- a top rule has no entering match. (3) A single-slot top rule with an I-block reading match_group/entry_group => {\"name\":null,\"value\":null} because I runs BEFORE the own-slot match (use a post-match edge or E/EX). (4) A bare edge-less middle slot `/\\s*=\\s*/` between two captured slots is NOT consumed: the value slot's match_text came back as ` = value` (the cursor had not advanced past `name`), so the separator must be folded into a slot that owns an edge (verified clean: name slot `/(name)\\s*=\\s*/`, value slot `/(value)/`). A dispatched body rule is the inverse: the worked-spec `Pair:` matcher reads entry_group(N) because the parent `Top:: -> Pair` dispatch is the entering match. Locked by phase0 `top_rule_as_normal_regex_on_top_reads_own_match_with_match_family`."
-reverify: "perl -Iperl -MLinkedSpec -MJSON::PP -e 'my $J=JSON::PP->new->canonical(1)->allow_nonref(1); my $s=\"Pair::AND\\n I { declare(hash, pair) }\\n /([A-Za-z_]\\\\w*)\\\\s*=\\\\s*/ -> Pair[0] { assign(hash(pair), set_key(hash(pair), \\\"name\\\", match_group(0))); }\\n /([^,\\\\n]+)/ -> Pair[1] { return(set_key(hash(pair), \\\"value\\\", match_group(0))); }\\n\"; my $p=LinkedSpec::Get(\\$s, top_rule=>\"Pair\", parse_mode=>\"consume\"); print $J->encode($p->(\\\"name = value\\\")),\"\\n\";'  # => {\"name\":\"name\",\"value\":\"value\"}  (swap match_group(0)->entry_text() to see the null footgun)"
+reverify: "perl -Iperl -MLinkedSpec -MJSON::PP -e 'my $J=JSON::PP->new->canonical(1)->allow_nonref(1); my $s=\"Pair::AND\\n I { set(hash(pair), {}) }\\n /([A-Za-z_]\\\\w*)\\\\s*=\\\\s*/ -> Pair[0] { set(hash(pair), set_key(hash(pair), \\\"name\\\", match_group(0))); }\\n /([^,\\\\n]+)/ -> Pair[1] { return(set_key(hash(pair), \\\"value\\\", match_group(0))); }\\n\"; my $p=LinkedSpec::Get(\\$s, top_rule=>\"Pair\", parse_mode=>\"consume\"); print $J->encode($p->(\\\"name = value\\\")),\"\\n\";'  # => {\"name\":\"name\",\"value\":\"value\"}  (swap match_group(0)->entry_text() to see the null footgun)"
 ---
 
 # A top rule reads its OWN regex match with `match_*`, not `entry_*`
@@ -38,9 +38,9 @@ reverify: "perl -Iperl -MLinkedSpec -MJSON::PP -e 'my $J=JSON::PP->new->canonica
 
 ```text
 Pair::AND
- I { declare(hash, pair) }
+ I { set(hash(pair), {}) }
  /([A-Za-z_]\w*)\s*=\s*/ -> Pair[0] {
-   assign(hash(pair), set_key(hash(pair), "name", match_group(0)));
+   set(hash(pair), set_key(hash(pair), "name", match_group(0)));
  }
  /([^,\n]+)/ -> Pair[1] {
    return(set_key(hash(pair), "value", match_group(0)));
