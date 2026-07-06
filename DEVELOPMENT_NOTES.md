@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.8.2.4 — closeout scans need stable buckets before hard retirement):
+  Before removing a legacy helper implementation, first prove current authored specs/corpus/docs are clean and
+  classify every remaining generated/test hit by owner. For this lane, root `specs/` and `tests/corpus/` are clean;
+  generated corpus/test residues are declaration compatibility, aggregate-copy compatibility, current
+  `.hash_copy()` receiver-method surface, or pending `.8.3`/`.8.4` retirement locks. Full phase0, corpus oracle,
+  oracle regeneration, mdBook, and doctrine gates are the handoff proof.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.8.2.3 — docs/KM cleanup must distinguish current guidance from compatibility
   cataloging): Current-facing examples should not mention legacy helper spellings as the recommended route. Keep old
   helper names only where the section is explicitly compatibility, retired-diagnostic, or historical. For

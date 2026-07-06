@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.8.2.3` — current-facing mdBook/KM helper-reference cleanup is complete:
-  book examples now teach `cat(...)`, `copy(...)`, assignments/operators, `push(...)`, and explicit
-  `is_nonempty(...)` guards before `push(...)`; old helper names remain compatibility/retired-diagnostic/historical;
-  Knowledge fact-card `reverify` commands were migrated where appropriate and `KNOWLEDGE_MAP.md` regenerated.
-- prior_leaf: `SPEC-FORMAT-TERSE.8.2.2.5` (commit `e81e9cfa`) — active-test/corpus helper residue scans were
-  closed and Rust wrapper-alias residue was labelled.
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.8.2.4` — `.8.2` migration closeout is complete: root specs/corpus scan
+  clean, generated/test residues are classified for `.8.3`/`.8.4` hard retirement, oracle regeneration is stable
+  over 93 fixtures, Rust `corpus_oracle` passes, mdBook builds, and full phase0 passes 1022 tests.
+- prior_leaf: `SPEC-FORMAT-TERSE.8.2.3` (commit `4a5b3430`) — current-facing mdBook/KM helper references were
+  migrated and `KNOWLEDGE_MAP.md` regenerated.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-FORMAT-TERSE.8.2.3 - migrate book and knowledge helper references`; parent before this slice was
-  `e81e9cfa`. **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly
+  `SPEC-FORMAT-TERSE.8.2.4 - close helper migration no-drift gates`; parent before this slice was
+  `4a5b3430`. **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly
   instructed.**
-- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.8.2.4` (final `.8.2` no-drift scans/gates before hard
-  retirement) and it may start only after this `.8.2.3` commit is clean and `git status` is handoff-ready.
-- next_action: after this `.8.2.3` commit is clean, pick `SPEC-FORMAT-TERSE.8.2.4`; do not push unless explicitly
+- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.8.3` (Perl reference hard retirement for still-successful
+  legacy helper spellings) and it may start only after this `.8.2.4` commit is clean and `git status` is
+  handoff-ready.
+- next_action: after this `.8.2.4` commit is clean, pick `SPEC-FORMAT-TERSE.8.3`; do not push unless explicitly
   instructed.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
@@ -40,5 +40,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   worktree ignored by submodule policy. Deferred lanes behind `.8.2`: `.9` (hash `=>`→`:`),
   `.10`/`.12`/`.13`/`.14` backlog; `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`,
   `SPEC-LANG-REFERENCE`.
-- blockers: none for `.8.2.4` ownership. in_flight_uncommitted: none after the `.8.2.3` commit lands; do
+- blockers: none for `.8.3` ownership. in_flight_uncommitted: none after the `.8.2.4` commit lands; do
   not pivot unless the repo is handoff-ready.

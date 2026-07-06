@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.4 — close helper migration no-drift gates**
+  (DONE; FRONTIER `.8.3` PERL REFERENCE HARD RETIREMENT NEXT).
+
+  **Change:** `.8.2` migration closeout is complete. Root authored specs and checked-in corpus specs are clean for
+  retired helper spellings; generated corpus/test residues are classified as compatibility/retirement locks; and
+  the active frontier advances to Perl hard retirement.
+
+  **Boundary:** No parser/runtime behavior changed. This slice only proved no drift after the source/test/corpus/book
+  and Knowledge Map migrations.
+
+  **Verification:** Oracle generator syntax and regeneration pass with **93** fixtures and no git drift; Rust
+  `corpus_oracle` passes **3** tests; full phase0 passes **1022** tests with `PERL5LIB=` cleared; mdBook,
+  whitespace, and doctrine checks pass.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.8.2.3 — migrate book and knowledge helper references**
   (DONE; FRONTIER `.8.2.4` NO-DRIFT SCAN/GATE CLOSEOUT NEXT).
 

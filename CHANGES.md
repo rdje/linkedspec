@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.4 — close helper migration no-drift gates
+
+**Scope:** Final `.8.2` migration closeout scans and gates before hard-retiring legacy helper implementations.
+
+**Change:** The `.8.2` migration parent is closed. Root `specs/` and `tests/corpus/` scan clean for the primary
+retired helper spellings and wrapper aliases. Generated corpus and active-test residues are classified as
+declaration compatibility, aggregate-copy compatibility, current `.hash_copy()` receiver-method surface, or pending
+`.8.3`/`.8.4` hard-retirement locks.
+
+**Boundary:** No parser/runtime behavior changed. This is a scan/gate closeout and frontier advance to `.8.3` for
+Perl reference hard retirement.
+
+**Validation:** `perl -c -Iperl tools/gen_oracle_corpus.pl`, `perl -Iperl tools/gen_oracle_corpus.pl` (93 fixtures,
+no git drift), Rust `corpus_oracle` (3 tests), full phase0 with `PERL5LIB=` cleared (1022 tests), mdBook build,
+whitespace check, and doctrine check pass.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.3 — migrate book and knowledge helper references
 
 **Scope:** Current-facing mdBook helper guidance, Knowledge fact-card `reverify` commands, and the derived
