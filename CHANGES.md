@@ -1,6 +1,40 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.15.2.3 — Rust bare-read parity and switch case-label alignment
+
+**Scope:** Complete Rust parity for the `.15.2.2` value-position-is-variable policy while preserving the
+case-label literal exemption. Keep `:name` accepted during the transition; source migration and hard removal remain
+owned by later `.15` leaves.
+
+**Rust runtime:** `rust/linkedspec-runtime/src/engine.rs` now routes statement/attached switch cases and inline
+lazy `switch(...)` cases through one case-value helper. Bare case labels stringify to their literal tag name
+(`case(foo)` matches `"foo"`), while quoted values and scalar-slot expressions still evaluate normally
+(`case(:foo)` reads slot `foo`). Bare switch subjects and ordinary value positions continue to read variables, so
+`switch(kind)`, `num_lt(n,5)`, and `if(c,...)` match the Perl reference.
+
+**Perl reference alignment:** The new oracle exposed that inline value `switch(..., case(foo, ...))` still read
+`$foo`, while statement/attached `case(foo)` was already literal. `MethodLowering` now has a dedicated inline
+switch case-value lowering path so inline and attached case labels agree.
+
+**Self-hosted spec source correction:** Regenerating the oracle exposed stale `spec_spec_*` expectations after the
+`.11` duck-typed assignment model. `specs/spec.spec` now initializes `paragraphs` and `current` with explicit
+aggregate targets (`set(array(...), array())`) so later `push(rule_header, current)` mutations operate on the
+working arrays instead of scalar-held arrayrefs.
+
+**Validation:**
+- `perl -c -Iperl perl/LinkedSpec/ActionIR/MethodLowering.pm`
+- `perl -c -Iperl tools/gen_oracle_corpus.pl`
+- `env PERL5LIB= perl -Iperl tools/gen_oracle_corpus.pl`
+- `cargo fmt --manifest-path rust/Cargo.toml --all --check`
+- Focused Rust `.15.2.3` integration tests
+- `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture` — PASS
+  over **93** fixtures
+- `env PERL5LIB= perl -Iperl t/phase0_regression.t` — reaches `ok 1022` / plan `1..1022`, **1021 pass**, only
+  known baseline `not ok 796` (`emit_context_lowers_split_tagged_records_helper`)
+
+**Frontier:** → `.15.2.4` for the output-preserving current source/docs/KM migration from `:name` to bare reads.
+
 ## 2026-07-05 — SPEC-FORMAT-TERSE.15.2.2 — Perl reference bare-read completion in value positions
 
 **Scope:** Make bare identifiers read the bound typed value in every value position `.15.2.1` enumerated, on the

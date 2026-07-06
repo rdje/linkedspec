@@ -741,6 +741,21 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.15.2.3 — Rust parity for bare value reads ──
+    #
+    # Bare identifiers in value positions read bound values, while a bare
+    # switch-case label stays a literal tag. `case(:foo)` remains an evaluated
+    # scalar-slot expression until `:name` is retired by later .15 leaves.
+    {   case   => 'terse_15_2_3_bare_value_reads_and_case_labels',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(kind, "foo"); set(foo, "bar"); set(n, 10); set(c, 0); switch(kind) { case(foo) { attached = "literal" } case(:foo) { attached = "slot" } default { attached = "default" } }; return(array(attached, switch(kind, case(foo, "literal"), case(:foo, "slot"), default("default")), if(num_lt(n, 5), "yes", else("no")), if(c, "T", else("F")))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.2.3.5.1 — array receiver-dot value chains ──
     #
     # Receiver-dot array value methods are pure helper composition: each call

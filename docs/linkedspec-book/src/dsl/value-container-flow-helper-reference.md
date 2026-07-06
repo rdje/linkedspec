@@ -213,12 +213,14 @@ Retired short wrapper aliases `s(...)`, `a(...)`, and `h(...)` are not canonical
 spellings. Use `:name`, `array(...)`, and `hash(...)` so descriptors and backend
 handoff metadata see the intended typed access directly.
 
-In return and assignment-like scalar source slots, a bare scalar name is the same read as
-`:name`: `return(count)`, `set(out, count)`, and `out = count` read `$count`. This
-source-slot shorthand is intentionally narrower than every value expression. Mutation slots now support the
+In scalar value positions, a bare scalar name is the same read as `:name` during the
+transition: `return(count)`, `set(out, count)`, `out = count`, `if(count, ...)`,
+`num_lt(count, 5)`, and `switch(kind, ...)` read the current scalar slot. Mutation slots use the
 same scalar read for array append RHS and hash mutation key/RHS positions: `items += value`,
 `set_key(meta, key, value)`, and `meta[key] = value` read `$value` / `$key` where those slots are scalar-valued.
-Direct path atoms use the same scalar read rule when the atom is not a primitive literal or engine local.
+Direct path atoms use the same scalar read rule when the atom is not a primitive literal or engine local. Switch
+case labels are the deliberate exception: `case(foo)` is a literal tag named `foo`; write a quoted tag for fixed
+labels and `case(:foo)` only when the case value must be read from the scalar slot during the transition.
 
 > **Terse spellings (canonical going forward).** The `.spec` format is migrating to terser helper
 > names: use `set(target, source)` or `target = source` for assignment, `cat(...)` for concatenation,
@@ -1110,8 +1112,8 @@ Use attached-block control flow when a branch needs substantial statement bodies
 | `if(cond, then_value, branches...)` | evaluate `cond`; return `then_value` when true, otherwise choose an `elseif(...)`, `else(...)`, or plain third fallback. |
 | `elseif(cond, value)` | additional inline `if` branch. |
 | `else(value)` | fallback inline `if` branch. |
-| `switch(value, branches...)` | evaluate `value` once and choose the first matching branch. |
-| `case(value, body)` | one equality case. |
+| `switch(value, branches...)` | evaluate `value` once and choose the first matching branch; a bare switch subject reads a scalar slot. |
+| `case(value, body)` | one equality case; a bare case value such as `case(foo, body)` is the literal tag `foo`, not a scalar read. |
 | `default(body)` | fallback branch. |
 
 Inline `if` example:
@@ -1140,6 +1142,22 @@ return(switch(
   default(hash("kind", "unknown", "text", :text))
 ))
 ```
+
+Bare switch subjects and bare case labels intentionally mean different things:
+
+```text
+set(kind, "word")
+return(switch(
+  kind,
+  case(word, "literal tag matched"),
+  case(:other, "dynamic transition-only label"),
+  default("unknown")
+))
+```
+
+Here `kind` reads the scalar working variable, while `case(word, ...)` matches the literal tag
+`"word"`. Prefer quoted strings such as `case("word", ...)` when teaching fixed labels; the bare-label form is
+kept for parity with attached `case(word) { ... }` labels.
 
 Expression-valued branch blocks are allowed in selected branches:
 

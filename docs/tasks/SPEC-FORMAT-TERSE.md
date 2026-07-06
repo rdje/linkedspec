@@ -6,7 +6,17 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-05` (**`.15.2.2` DONE; Perl reference bare-read completion. ONE change to
+- Last updated: `2026-07-06` (**`.15.2.3` DONE; Rust parity and oracle alignment. Rust now treats bare
+  switch subjects, numeric/comparison helper args, and `if(...)` conditions as value-position variable reads while
+  keeping bare switch case labels literal tags (`switch(kind)` reads scalar `kind`; `case(foo)` matches `"foo"`,
+  and `case(:foo)` still evaluates the scalar slot during the transition). Perl inline value `switch(...)` case
+  labels were corrected to share the already-documented statement-switch literal-label rule. A regenerated
+  93-fixture oracle also exposed stale self-hosted `specs/spec.spec` aggregate initialization after `.11`
+  duck-typed assignment; `paragraphs` / `current` now initialize explicit aggregate targets so
+  `push(rule_header, current)` mutates the intended working arrays. Focused Rust `.15.2.3` tests pass; Rust
+  `corpus_oracle` passes over **93** fixtures; `perl -c` / `cargo fmt --check` pass; full phase0 reaches
+  `ok 1022` with **1021 pass** and only the known baseline `not ok 796`. Frontier -> `.15.2.4` (source migration to bare,
+  now output-preserving). Prior **`.15.2.2` DONE; Perl reference bare-read completion. ONE change to
   `ActionIR::FlowExpr::_lower_flow_composite_expr` (bare identifier at the `passthrough_no_call` site -> `$name`
   variable read, mirroring the `:name` branch) closed all three enumerated value-position gaps at once, because
   if/elseif/while + `num_*` + logical conditions delegate to it and the switch selector funnels through it too.
@@ -16,7 +26,7 @@
   `:name` forms (which still work; compat). FULL phase0 GREEN: reach `ok 1022`, 1021 pass, only pre-existing
   `not ok 796`; zero regressions. `:name` removal now unblocked once Rust parity (`.15.2.3`) lands and sources
   migrate (`.15.2.4`). ENV: run phase0 with `PERL5LIB=` cleared (stale `pgen/fx/perl` poisons subprocess tests).
-  Frontier -> `.15.2.3` (Rust parity). Prior **`.15.2.1` DONE; bare-vs-`:name` value-position inventory + engine seams locked
+  Prior **`.15.2.1` DONE; bare-vs-`:name` value-position inventory + engine seams locked
   before any engine code. Discriminating reference-engine probes confirm bare identifiers are NOT read as the
   bound variable in three value positions: the `switch(...)` selector, `num_*(...)` callee args, and
   `if(...)`/`while(...)`/logical conditions — `switch(:kind)`->`good` vs `switch(kind)`->`def`;
@@ -3307,7 +3317,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 - ID: `SPEC-FORMAT-TERSE.15`
   Status: `active` (split 2026-07-05 by `.15.1`; RE-SEQUENCED 2026-07-05 to engine-first after the bare-read-gap
-    finding; `.15.2.1` design + `.15.2.2` Perl bare-read done 2026-07-05; frontier `.15.2.3`)
+    finding; `.15.2.1` design + `.15.2.2` Perl bare-read done 2026-07-05; `.15.2.3` Rust parity done
+    2026-07-06; frontier `.15.2.4`)
   Goal: Make `:name` fully unsupported (user directive 2026-07-05: `:name` shall NOT be supported). The `.15.1`
     audit assumed a source-first migration would be output-preserving, but bare reads are NOT yet honored in every
     value position at `104088e5` (proven: `switch(:kind)`->`good` vs `switch(kind)`->`def`; plus rule-name
@@ -3315,7 +3326,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     reads everywhere (Perl+Rust) and migrates sources, then `.15.3`/`.15.4` remove `:name` entirely, then `.15.5`
     closes drift.
   Children: `.15.1` (done), `.15.2` (active; split into `.15.2.1` design / `.15.2.2` Perl engine /
-    `.15.2.3` Rust engine / `.15.2.4` source migration), `.15.3` (pending — Perl `:name` removal),
+    `.15.2.3` Rust engine done / `.15.2.4` source migration pending), `.15.3` (pending — Perl `:name` removal),
     `.15.4` (pending — Rust `:name` removal), `.15.5` (pending — closeout).
   Acceptance: The duck-typed authoring surface uses bare names for variable and parameter reads in value-expression
     positions. `value` reads the current runtime typed value bound to `value`; `:value` is removed from current
@@ -3361,7 +3372,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     child-call `push(RuleA, AccumB)` convention). Scalar push therefore uses `items += value` or
     `push(array(items), value)`, never a colon slot.
   Children: `.15.2.1` (design/inventory, DONE 2026-07-05), `.15.2.2` (Perl engine impl, DONE 2026-07-05),
-    `.15.2.3` (Rust parity, active), `.15.2.4` (source migration to bare, output-preserving).
+    `.15.2.3` (Rust parity, DONE 2026-07-06), `.15.2.4` (source migration to bare, output-preserving).
   Acceptance: bare reads produce byte-identical reference output to today's `:name` in every value position on
     Perl and Rust and the value-position-vs-edge policy is documented; then all current shipped specs, root
     corpus, generated oracle sources, mdBook examples, and non-historical Knowledge Map facts use bare reads with
@@ -3458,11 +3469,42 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `pending`
 
 - ID: `SPEC-FORMAT-TERSE.15.2.3`
-  Status: `pending`
+  Status: `done` (2026-07-06)
   Goal: Rust parity for `.15.2.2` — bare reads in all value positions, same value-position-is-variable policy,
     `:name` still parses during the transition.
   Acceptance: Rust oracle fixtures for the enumerated positions pass with bare reads; `cargo` corpus oracle green.
-  Verification: `pending`
+    If the regenerated corpus exposes pre-existing source drift that blocks the oracle from testing Rust parity,
+    the same leaf owns the minimal source correction plus a durable finding, because `.15.2.3` cannot close with
+    a red oracle.
+  Surfaced findings:
+    - `2026-07-06`: The new `.15.2.3` oracle fixture first exposed that Perl statement/attached
+      `case(foo)` was literal while inline value `switch(..., case(foo, ...))` still read variable `$foo`.
+      Root cause: `MethodLowering::_lower_inline_switch_value_expr` used normal branch-payload lowering for
+      the case match argument instead of the statement-switch case-label lowering. This leaf owns making inline
+      switch case labels literal too, matching the already-documented `.15.2.2` policy.
+    - `2026-07-06`: Regenerating the full oracle corpus exposed stale `spec_spec_*` expected files. TOOLBOX
+      `dump_parser_source` + routed trace showed `spec_file` still matched `rule_header` and `regex_anchor`, but
+      `specs/spec.spec` initialized `paragraphs = []` / `current = []` as scalar-held arrayrefs after the `.11`
+      duck-typed assignment model while `push(rule_header, current)` mutates aggregate `@current`. The leaf owns
+      changing those initializations to explicit aggregate `array(...)` targets so the self-hosted spec parser
+      and Rust oracle remain aligned.
+  Verification: Rust parity landed for the `.15.2.2` value-position-is-variable contract. The runtime now evaluates
+    switch case values through a dedicated case-label path: bare `Expr::Variable` labels stringify to the literal
+    label name, while quoted values and `:name`/other expressions still evaluate normally. Inline lazy
+    `switch(...)` uses the same helper, and statement/attached `switch` shares it too. Focused Rust integration
+    tests PASS for `switch(kind)` / `num_lt(n,5)` / `if(c)` bare reads and for bare-vs-`:foo` case-label
+    discrimination. `tools/gen_oracle_corpus.pl` adds
+    `terse_15_2_3_bare_value_reads_and_case_labels`; regenerated Rust corpus manifest is **93** fixtures and
+    `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture` PASS.
+    Perl inline value `switch(...)` case-label lowering was corrected after the new oracle exposed a reference-side
+    divergence; `perl -c -Iperl perl/LinkedSpec/ActionIR/MethodLowering.pm` PASS. `specs/spec.spec` aggregate
+    initialization now uses explicit `array(...)` targets after TOOLBOX/source probes showed the prior
+    `paragraphs = []` / `current = []` scalar-held arrays were incompatible with aggregate `push(...)` mutation
+    under the `.11` duck-typed model. Direct `LinkedSpec::Get` probe for `Top:: /x/` through `specs/spec.spec`
+    returns the expected minimal-rule AST. mdBook switch/case and bare-read guidance, KM fact card, and live docs
+    are updated. Full phase0 (`env PERL5LIB= perl -Iperl t/phase0_regression.t`) reaches `ok 1022` / plan
+    `1..1022`, with **1021 pass** and only the known baseline `not ok 796`
+    (`emit_context_lowers_split_tagged_records_helper`).
   Commit: `pending`
 
 - ID: `SPEC-FORMAT-TERSE.15.2.4`
@@ -3509,7 +3551,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | --- | --- | --- | --- |
 | 1 | `SPEC-FORMAT-TERSE.15.2.1` | `done` | design/inventory: value positions where bare != `:name` enumerated with discriminating evidence (switch/num_*/if); seams pinned (Perl `FlowExpr::_lower_flow_composite_expr:364` + `ControlFlow` selector; Rust `Expr::Variable` vs `ScalarSlot`); value-position-is-variable policy locked |
 | 2 | `SPEC-FORMAT-TERSE.15.2.2` | `done` | Perl engine: ONE FlowExpr change (bare→`$name` at passthrough) closed switch/num/if gaps; ControlFlow keeps case labels literal; full phase0 green 1021/1-baseline, `:name` still compat |
-| 3 | `SPEC-FORMAT-TERSE.15.2.3` | `active` | Rust engine parity for bare reads in all value positions |
+| 3 | `SPEC-FORMAT-TERSE.15.2.3` | `done` | Rust engine parity for bare reads in all value positions; Rust corpus oracle now 93 fixtures |
 | 4 | `SPEC-FORMAT-TERSE.15.2.4` | `pending` | migrate current specs/corpus/oracle/mdBook/KM to bare (now output-preserving) |
 | 5 | `SPEC-FORMAT-TERSE.15.3` | `pending` | remove Perl `:name` parsing/lowering entirely (no compat) after sources are bare |
 | 6 | `SPEC-FORMAT-TERSE.15.4` | `pending` | remove Rust `:name` support entirely (no compat) |
@@ -4479,6 +4521,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-06` | `SPEC-FORMAT-TERSE.15.2.3` | Focused Rust `.15.2.3` integration tests; `perl -c -Iperl perl/LinkedSpec/ActionIR/MethodLowering.pm`; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `env PERL5LIB= perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle over **93** fixtures; `cargo fmt --manifest-path rust/Cargo.toml --all --check`; full phase0 with `PERL5LIB=` cleared; mdBook/KM/live-doc updates | Rust parity for bare reads in switch subjects, numeric/comparison args, and `if(...)` conditions landed while preserving literal bare switch case labels. Inline Perl switch case labels were aligned to the same rule. Regenerated oracle corpus includes `terse_15_2_3_bare_value_reads_and_case_labels`; `specs/spec.spec` aggregate initialization now uses explicit `array(...)` targets after `.11` duck-typed assignment. Rust corpus oracle passes **93** fixtures. Phase0 reaches `ok 1022` with **1021 pass** and only baseline `not ok 796`. Frontier becomes `.15.2.4`. |
 | `2026-07-05` | `SPEC-FORMAT-TERSE.15.2 re-scope` | Recovered a prior session's uncommitted intermingled `.15.2/.15.3/.15.4/.8/.9` work onto branch `recovery/terse-15-uncommitted-20260705` and reset `main` to clean `104088e5`; applied the `:name`->bare converter to `specs/*.spec` + `tools/gen_oracle_corpus.pl`, regenerated the oracle corpus, and read the byte-identity gate; direct reference-engine probe (`LinkedSpec::Get`) on `switch(:kind)` vs `switch(kind)`; reverted all source edits back to clean `104088e5`; task-tree engine-first re-sequence | **Source-first migration is NOT output-preserving at `104088e5`.** Bare identifiers are not read as bound variable values in `switch(...)`, numeric callees, `if(...)` conditions, or the second arg of all-bare `push(A,B)`; direct probe: `switch(:kind)`->`'good'` but `switch(kind)`->`'def'`. The byte-identity gate flagged `spec_spec_*`/`ebnf_*` (variable/rule-name collisions) plus the all-bare `push`/`switch`/`while` inline fixtures as load-bearing (bare != `:name`), while most shipped specs (`ds_vhistory`, `lib_reader`, `pplugin`, `simenv`, `tablegrep`, `tkgui`, `vhdl`) were output-preserving. `:name` only worked as variable-vs-rule disambiguation. `.15.2` re-scoped ENGINE-FIRST (`.15.2.1` design, `.15.2.2` Perl, `.15.2.3` Rust, `.15.2.4` migration); `.15.3`/`.15.4` then remove `:name` entirely with no compat (user directive: `:name` shall not be supported). Frontier becomes `.15.2.1`. Baseline phase0 = 1021 pass / 1 pre-existing unrelated fail (test 796 `emit_context_lowers_split_tagged_records_helper`). No committed engine/source behavior changed. See ADR `0019`, KM card `terse-bare-read-value-position-gap`. |
 | `2026-07-05` | `SPEC-FORMAT-TERSE.15.1` | Audit scans for `:name`/scalar-slot forms across shipped specs, root corpora, Rust oracle fixtures, mdBook/current guidance, Knowledge Map facts, active Perl/Rust tests, oracle generation sources, and parser/runtime support; task-tree split; live-doc/KM updates; Knowledge Map regeneration/check; memory/doctrine/diff checks | Colon scalar-slot removal is split before implementation. Current `:name` usage is broad enough that hard retirement is unsafe as one slice, so `.15.2` owns current spec/corpus/docs/KM migration to bare reads, `.15.3` owns Perl retirement, `.15.4` owns Rust retirement, and `.15.5` owns final no-drift closeout. No parser/runtime behavior changed. |
 | `2026-07-05` | `SPEC-FORMAT-TERSE.11.5` | Current-facing stale-wording scans across `ROADMAP_V2.md`, mdBook, live docs, `docs/knowledge/`, and `KNOWLEDGE_MAP.md`; targeted roadmap/fact-card edits; Knowledge Map regeneration/check; mdBook build; memory/doctrine/diff checks | Duck-typed assignment alignment is closed. Current roadmap and Knowledge Map retrieval now describe direct RHS shapes as typed value binding and keep target-kind inference only as explicitly superseded history. mdBook assignment/container guidance already matched `.11`; oracle corpus remains **92** fixtures. Frontier becomes `.15`. |
@@ -4599,6 +4642,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.15.2.3` | `SPEC-FORMAT-TERSE.15.2.3 - align Rust bare-read switch parity` | Rust bare value reads now match Perl in switch/num/if positions while bare case labels remain literal; inline Perl switch case labels were aligned; `specs/spec.spec` aggregate initialization corrected; corpus oracle is 93 fixtures; frontier becomes `.15.2.4`. |
 | `SPEC-FORMAT-TERSE.15.2 re-scope` | `SPEC-FORMAT-TERSE.15.2 - reorder .15 to engine-first (bare-read gap)` | Recovery + finding: prior uncommitted mess preserved on `recovery/terse-15-uncommitted-20260705`; proved bare reads are not honored in all value positions at `104088e5`, so `.15.2` is re-sequenced engine-first (`.15.2.1`-`.15.2.4`) and `.15.3`/`.15.4` remove `:name` with no compat. No engine/source behavior changed. Frontier becomes `.15.2.1`. |
 | `SPEC-FORMAT-TERSE.15.1` | `SPEC-FORMAT-TERSE.15.1 - split colon scalar-slot removal` | Audit/split only: `:name` removal spans specs, corpus, oracle fixtures, mdBook, Knowledge Map facts, tests, generator sources, and Perl/Rust parser/runtime support. Frontier becomes `.15.2` for current-facing migration. |
 | `SPEC-FORMAT-TERSE.11.5` | `SPEC-FORMAT-TERSE.11.5 - close duck-typed assignment alignment` | Roadmap/current docs and Knowledge Map retrieval now present typed value binding as current behavior and target-kind inference as superseded history; `.11` closes and frontier becomes `.15`. |
@@ -4606,7 +4650,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.11.3` | `SPEC-FORMAT-TERSE.11.3 - implement Rust duck-typed assignment parity` | Rust now scalar-binds bare assignment RHS values, including direct array/hash shapes, and keeps explicit `array(...)` / `hash(...)` targets as aggregate storage. Oracle corpus is 91 fixtures; frontier becomes `.11.4`. |
 | `SPEC-FORMAT-TERSE.11.2` | `SPEC-FORMAT-TERSE.11.2 - implement Perl duck-typed assignment binding` | Perl reference bare assignment now binds typed RHS values through scalar storage; explicit aggregate targets remain aggregate storage; frontier became `.11.3`. |
 | `SPEC-FORMAT-TERSE.11.1` | `SPEC-FORMAT-TERSE.11.1 - split duck-typed assignment work` | Split duck-typed assignment after bootstrap, code/book/KM inventory, and toolbox probes; frontier became `.11.2`. |
-| `SPEC-FORMAT-TERSE.7.4` | `SPEC-FORMAT-TERSE.7.4 - close type-method no-drift sweep` | Roadmap/task-tree/mdBook/KM receiver-family summaries are reconciled after `.7.3`; type-method lane closes with no Perl/Rust behavior change; no `SPEC-FORMAT-TERSE` leaf is currently pending. |
+| `SPEC-FORMAT-TERSE.7.4` | `SPEC-FORMAT-TERSE.7.4 - close type-method no-drift sweep` | Roadmap/task-tree/mdBook/KM receiver-family summaries are reconciled after `.7.3`; type-method lane closes with no Perl/Rust behavior change; at that time no concrete `SPEC-FORMAT-TERSE` leaf was pending. |
 | `SPEC-FORMAT-TERSE.7.3` | `SPEC-FORMAT-TERSE.7.3 - backfill array numeric reducer receiver methods` | Array/list numeric reducers `sum`, `avg`, `median`, `range`, `min`, and `max` are terminal receiver methods on Perl/Rust; invalid continuations return `undef`/`null`; phase0 1021 and oracle 74 fixtures pass. |
 | `SPEC-FORMAT-TERSE.7.2` | `SPEC-FORMAT-TERSE.7.2 - verify string method surface` | String/scalar receiver methods, including `substr()`, are already implemented and documented on Perl/Rust; focused probes/tests verify helper-method equivalence; no parser/runtime/book behavior change was needed, and frontier becomes `.7.3`. |
 | `SPEC-FORMAT-TERSE.7.1` | `SPEC-FORMAT-TERSE.7.1 - inventory type method surface` | Receiver/value families, existing method tables, function/statement-only boundaries, and backend/test/doc impact are recorded before code; string `substr()` is already a receiver method, and frontier becomes `.7.2` verification/backfill. |

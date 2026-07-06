@@ -360,6 +360,11 @@ LX {
 }
 ```
 
+In a `switch`, a bare subject name is a scalar read, but a bare case label is a literal tag. For example,
+`switch(kind, case(token, "found"), default("unknown"))` reads scalar `kind` and matches the literal label
+`"token"`. Use quoted labels in new examples when that is clearer; use `case(:name, body)` only when the case
+label itself must be read from a scalar slot during the transition.
+
 ### Switch family: attached block (outer block body)
 
 Use attached-block `switch` when each branch has statement bodies, side effects, or early `return(...)`
@@ -381,6 +386,9 @@ LX {
   }
 }
 ```
+
+The same case-label rule applies to attached blocks: `switch(kind)` reads scalar `kind`, while `case(token)`
+matches the literal tag `"token"`.
 
 The outer block form requires branch bodies on each `case(...)` or `default` branch:
 

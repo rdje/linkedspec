@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.15.2.3 — parity work can expose reference-side drift too):
+  Rust already read bare `Expr::Variable` values in ordinary value positions, but switch case labels needed a
+  deliberate exception to match the Perl reference: `switch(kind)` is a variable read; `case(foo)` is a literal
+  tag. The robust shape is a small case-value helper shared by attached/statement switch and inline lazy
+  `switch(...)`, rather than relying on general expression evaluation at each case site. The `.15.2.3` oracle also
+  found the mirrored Perl bug: inline `case(foo, body)` still used branch-payload lowering and read `$foo`, unlike
+  attached `case(foo)`. Case labels are label/key positions, so both engines now treat bare case labels literally
+  and reserve evaluated labels for quoted/helper/scalar-slot expressions. A separate oracle surprise came from
+  `specs/spec.spec`: after duck-typed assignment, `paragraphs = []` creates a scalar-held arrayref, but the grammar
+  mutates aggregate `@paragraphs` / `@current` through `push(...)`. When a shipped spec intentionally uses
+  aggregate mutation later, initialize it with explicit `array(...)` targets; do not let direct-shape assignment
+  silently stand in for aggregate storage.
+
 - 2026-07-05 (SPEC-FORMAT-TERSE.15.2.2 — the fix was one branch, plus one compensating exemption):
   The `.15.2.1` prediction held: because `ControlFlow::_lower_control_flow_value_expr` delegates to
   `FlowExpr::_lower_flow_composite_expr`, and the switch selector funnels through the same function, a single guarded

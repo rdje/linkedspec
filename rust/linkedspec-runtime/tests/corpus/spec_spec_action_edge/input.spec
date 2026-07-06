@@ -66,8 +66,8 @@
 
 spec_file::
  I {
-  paragraphs = [];
-  current = [];
+  set(array(paragraphs), array());
+  set(array(current), array());
   started = 0
  }
  -> rule_header {

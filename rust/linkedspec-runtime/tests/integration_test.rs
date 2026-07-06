@@ -2323,6 +2323,35 @@ fn terse_2_2_5_2_attached_switch_preserves_inline_value_form() {
     );
 }
 
+// ── SPEC-FORMAT-TERSE.15.2.3 — Rust parity for bare value reads:
+
+#[test]
+fn terse_15_2_3_bare_reads_in_switch_num_and_if_value_positions() {
+    let grammar = "Top::\n /x/ -> Done { set(kind, \"b\"); set(n, 10); set(c, 0); set(switch_out, switch(kind, case(\"a\", \"bad\"), case(\"b\", \"good\"), default(\"def\"))); set(num_out, if(num_lt(n, 5), \"yes\", else(\"no\"))); set(if_out, if(c, \"T\", else(\"F\"))); return(array(switch_out, num_out, if_out)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["good", "no", "F"]]),
+        "bare names in switch selectors, numeric helper args, and if conditions read bound values"
+    );
+}
+
+#[test]
+fn terse_15_2_3_bare_switch_case_labels_are_literal_tags() {
+    let attached = "Top::\n /x/ -> Done { set(kind, \"foo\"); set(foo, \"bar\"); switch(kind) { case(foo) { attached = \"literal\" } case(:foo) { attached = \"slot\" } default { attached = \"default\" } }; set(inline, switch(kind, case(foo, \"literal\"), case(:foo, \"slot\"), default(\"default\"))); return(array(attached, inline)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(attached, "xhello"),
+        serde_json::json!([["literal", "literal"]]),
+        "bare case labels are literal tags for both attached and inline switch"
+    );
+
+    let scalar_slot = "Top::\n /x/ -> Done { set(kind, \"bar\"); set(foo, \"bar\"); switch(kind) { case(foo) { attached = \"literal\" } case(:foo) { attached = \"slot\" } default { attached = \"default\" } }; set(inline, switch(kind, case(foo, \"literal\"), case(:foo, \"slot\"), default(\"default\"))); return(array(attached, inline)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(scalar_slot, "xhello"),
+        serde_json::json!([["slot", "slot"]]),
+        "scalar-slot case labels still evaluate through the normal expression path during the transition"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.2.2.6.2 — Rust attached-block while parity:
 
 #[test]

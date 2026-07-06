@@ -414,6 +414,31 @@ sub _lower_inline_value_branch_payload_expr {
  return $payload_expr
 }
 
+sub _lower_inline_switch_case_value_expr {
+ my ($expr, $deps) = @_;
+ my $require_dep = sub {
+  my ($name) = @_;
+  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
+  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
+   unless ref($cb) eq 'CODE';
+  return $cb;
+ };
+ my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
+
+ return undef unless defined $expr;
+ my $trimmed = $trim_action_ir_value->($expr);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ # SPEC-FORMAT-TERSE.15.2.3 — inline value switch shares the statement-switch
+ # case-label rule: a bare label is a literal tag, not a variable read. Branch
+ # payloads still use normal value-position lowering.
+ if ($trimmed =~ /^\w+$/o && $trimmed !~ /^(?:true|false)$/o) {
+  return _normalize_method_tag_expr($trimmed, $deps);
+ }
+
+ return _lower_inline_value_branch_payload_expr($trimmed, $deps)
+}
+
 sub _lower_inline_if_value_expr {
  my ($method_call, $deps) = @_;
  my $require_dep = sub {
@@ -510,7 +535,7 @@ sub _lower_inline_switch_value_expr {
    return undef if $default_seen;
    my $branch_args = $normalize_method_args_with_optional_scope->($branch_call->{args} || [], 2, 2);
    return undef unless $branch_args;
-   my $case_expr = _lower_inline_value_branch_payload_expr($branch_args->[0], $deps);
+   my $case_expr = _lower_inline_switch_case_value_expr($branch_args->[0], $deps);
    return undef unless defined($case_expr) && length($case_expr);
    my $branch_value = _lower_inline_value_branch_payload_expr($branch_args->[1], $deps);
    return undef unless defined($branch_value) && length($branch_value);

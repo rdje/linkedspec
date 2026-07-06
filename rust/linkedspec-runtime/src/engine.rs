@@ -2672,7 +2672,8 @@ impl Engine {
                     return Ok(true);
                 };
                 if frame.parent_active && !frame.branch_taken {
-                    let case_value = self.eval_expr(args[0].value(), ctx, rule_label)?.to_str();
+                    let case_value =
+                        self.eval_switch_case_value(args[0].value(), ctx, rule_label)?;
                     let matches = case_value == frame.switch_value;
                     frame.current_active = matches;
                     frame.branch_taken = matches;
@@ -2718,6 +2719,18 @@ impl Engine {
                 Ok(true)
             }
             _ => Ok(false),
+        }
+    }
+
+    fn eval_switch_case_value(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<String, String> {
+        match expr {
+            linkedspec_core::expr::Expr::Variable { name } => Ok(name.clone()),
+            other => Ok(self.eval_expr(other, ctx, rule_label)?.to_str()),
         }
     }
 
@@ -6232,9 +6245,12 @@ impl Engine {
                     ) = &raw_args[i]
                     {
                         if branch_name == "case" && !branch_args.is_empty() {
-                            let case_val =
-                                self.eval_expr(branch_args[0].value(), ctx, rule_label)?;
-                            if case_val.to_str() == switch_str {
+                            let case_val = self.eval_switch_case_value(
+                                branch_args[0].value(),
+                                ctx,
+                                rule_label,
+                            )?;
+                            if case_val == switch_str {
                                 if branch_args.len() >= 2 {
                                     return self.eval_expr(branch_args[1].value(), ctx, rule_label);
                                 }

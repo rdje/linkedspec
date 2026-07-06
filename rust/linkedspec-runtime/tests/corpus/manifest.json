@@ -1,5 +1,5 @@
 {
-   "case_count" : 92,
+   "case_count" : 93,
    "cases" : [
       "proof_edge_array_literal",
       "proof_edge_scalar_literal",
@@ -47,6 +47,7 @@
       "terse_2_3_4_1_bare_array_helper_arg_composition",
       "terse_2_3_4_2_inline_if_value_control",
       "terse_2_3_4_2_inline_switch_value_control",
+      "terse_15_2_3_bare_value_reads_and_case_labels",
       "terse_2_3_5_1_array_receiver_value_chains",
       "terse_2_3_5_2_hash_receiver_value_chains",
       "terse_2_3_5_3_string_receiver_value_chains",

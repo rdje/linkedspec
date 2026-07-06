@@ -7,8 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.15.2.3 — Rust bare-read parity and switch case-label alignment**
+  (DONE; FRONTIER `.15.2.4` SOURCE MIGRATION NEXT, NOT STARTED).
+
+  **Change:** Rust statement/attached switch and inline lazy `switch(...)` now share one case-value path: bare case
+  labels are literal tags (`case(foo)` matches `"foo"`), while `case(:foo)` and quoted/helper expressions still
+  evaluate normally during the transition. Bare switch subjects, numeric/comparison helper args, and `if(...)`
+  conditions read bound scalar values. The Perl inline switch lowering was aligned after the new oracle exposed
+  that inline `case(foo, body)` still read `$foo` while attached `case(foo)` was already literal.
+
+  **Source alignment:** `specs/spec.spec` now initializes `paragraphs` and `current` with explicit aggregate
+  `array(...)` targets. Under `.11` duck-typed assignment, `paragraphs = []` / `current = []` create scalar-held
+  array values, which do not feed later aggregate `push(rule_header, current)` mutations.
+
+  **Verification:** Focused Rust `.15.2.3` tests pass; regenerated Rust oracle corpus passes over **93** fixtures;
+  `perl -c` and `cargo fmt --check` pass; full phase0 reaches `ok 1022` / plan `1..1022` with **1021 pass** and
+  only known baseline `not ok 796`. mdBook/KM/live docs updated.
+
 - 2026-07-05: **SPEC-FORMAT-TERSE.15.2.2 — Perl reference bare-read completion in value positions**
-  (DONE; FRONTIER `.15.2.3` RUST PARITY ACTIVE).
+  (DONE; `.15.2.3` RUST PARITY HAS SINCE CLOSED; FRONTIER `.15.2.4` NEXT).
 
   **Change:** One guarded branch in `ActionIR::FlowExpr::_lower_flow_composite_expr` (bare identifier at the
   `passthrough_no_call` site → `$name` variable read, mirroring the `:name` branch) closed all three enumerated
@@ -807,8 +824,8 @@ Current execution status for interruption-safe batch workflow recovery.
   summaries, numeric reducer statements, tests, corpus, mdBook, and Knowledge Map facts. `mdbook build
   docs/linkedspec-book`, Knowledge Map regeneration/check, memory/doctrine checks, and `git diff --check` pass.
 
-  **Frontier:** no `SPEC-FORMAT-TERSE` leaf is currently pending. PNT returns to `TOP-RULE-AS-NORMAL.3.2` unless a
-  new terse leaf is split.
+  **Frontier at that time:** no `SPEC-FORMAT-TERSE` leaf was pending. Later `.15` colon scalar-slot retirement
+  reactivated the terse frontier.
 
 - 2026-07-04: **SPEC-FORMAT-TERSE.7.3 — backfill array numeric reducer receiver methods**
   (ARRAY/LIST NUMERIC REDUCERS ARE TERMINAL RECEIVER METHODS).

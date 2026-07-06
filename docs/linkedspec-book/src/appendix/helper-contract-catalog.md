@@ -941,7 +941,8 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Signature**: Inline composite form.
 - **Returns**: value of the first matching `case` body, or the `default` body when no case matches.
 - **Behavior**: Evaluates `expr` once, compares it to each `case(val)` in order, and evaluates only the
-  selected branch payload.
+  selected branch payload. A bare switch subject such as `switch(kind, ...)` reads scalar `kind`; a bare case
+  value such as `case(foo, body)` is a literal tag named `foo`, matching attached-switch case labels.
 - **Portability status**: Portable on Perl and Rust in `return(...)`, assignment RHS, and fluent
   `.return(...)` value positions.
 
@@ -949,7 +950,8 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Signature**: Attached-block statement form.
 - **Returns**: no value of its own; branch statements provide side effects or `return(...)` values.
 - **Behavior**: Evaluates `expr` once. `case(...)` branches are tested in order, only the first matching branch
-  executes, and `default` executes only when no case matched.
+  executes, and `default` executes only when no case matched. A bare switch subject reads the scalar slot; a
+  bare case label is a literal tag, so `switch(kind) { case(foo) { ... } }` compares scalar `kind` to `"foo"`.
 - **Sugar**: `default() { ... }` is equivalent to `default { ... }`. A following same-line statement still
   needs the normal semicolon separator after the final `}`.
 
@@ -965,7 +967,9 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 ### `case(val, body)`
 - **Signature**: Inline switch branch.
 - **Returns**: branch body value.
-- **Behavior**: Embedded in inline-composite `switch(expr, case(...), ...)`.
+- **Behavior**: Embedded in inline-composite `switch(expr, case(...), ...)`. A bare first argument is a literal
+  tag; during the scalar-slot transition, `case(:foo, body)` reads the scalar slot `foo` for a dynamic case
+  value.
 
 ### `default(body)`
 - **Signature**: Default switch branch.

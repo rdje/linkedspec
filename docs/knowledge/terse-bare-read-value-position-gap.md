@@ -12,12 +12,17 @@ answers:
   - "how do you push a scalar value onto an array without :name"
   - "when is a bare identifier a variable read vs a rule reference"
   - "does case(foo) read a variable or match a literal label"
+  - "does inline switch case(foo, body) read a variable or match a literal label"
+  - "why did inline switch case labels differ from attached switch case labels"
+  - "why did spec_spec oracle fixtures regenerate to empty after duck typed assignment"
+  - "why must specs/spec.spec initialize paragraphs and current with array targets"
   - "how do bare reads work in switch if num conditions after SPEC-FORMAT-TERSE.15.2.2"
+  - "how do bare reads work in switch if num conditions after SPEC-FORMAT-TERSE.15.2.3"
   - "which seam makes a bare identifier a variable read in a condition on the Perl engine"
-date: 2026-07-05
+date: 2026-07-06
 status: current
 tags: [spec-format-terse, colon-slot, bare-read, value-position, rule-reference, sequencing, perl, rust, SPEC-FORMAT-TERSE]
-evidence: "At commit 104088e5 (SPEC-FORMAT-TERSE.15.1) bare identifiers are NOT read as the bound variable value in several value positions where `:name` is: `switch(...)` selector, numeric callees `num_lt(...)`/`num_gt(...)`, `if(...)` conditions, and the second argument of the all-bare child-call `push(A, B)`. Direct reference-engine probe: for a rule body `{ set(kind, \"b\"); switch(:kind) { case(\"a\"){return(\"bad\")} case(\"b\"){return(\"good\")} default {return(\"def\")} } }`, `switch(:kind)` returns 'good' (reads scalar kind) but `switch(kind)` returns 'def' (bare 'kind' is not read as the variable). Additionally, in `spec.spec`/`ebnf.spec` a bare name that collides with a rule/token name (`started`, `top`, `rule`, `on`) resolves as a RULE reference, not a variable read, collapsing the parse (`spec_spec_minimal_rule` -> []). So `:name` was load-bearing: it disambiguated a variable read from a rule reference and forced a scalar read where bare-read support had not landed. The oracle byte-identity gate (tools/gen_oracle_corpus.pl -> expected.json) flags exactly these as changed output; most shipped specs (ds_vhistory, lib_reader, pplugin, simenv, tablegrep, tkgui, vhdl) were output-preserving. Because the user directed that :name shall NOT be supported, SPEC-FORMAT-TERSE.15 is re-sequenced engine-first: .15.2.2/.15.2.3 make bare identifiers in value positions read the bound variable on Perl+Rust (value-position-is-variable policy; rule references only in edge/dispatch positions `-> Rule`, `call(Rule)`, `=> Rule`, and all-bare `push(RuleA, AccumB)`), .15.2.4 migrates sources, then .15.3/.15.4 remove :name entirely. Scalar push without :name uses `items += value` or `push(array(items), value)`. See ADR 0019."
+evidence: "At commit 104088e5 (SPEC-FORMAT-TERSE.15.1) bare identifiers are NOT read as the bound variable value in several value positions where `:name` is: `switch(...)` selector, numeric callees `num_lt(...)`/`num_gt(...)`, `if(...)` conditions, and the second argument of the all-bare child-call `push(A, B)`. Direct reference-engine probe: for a rule body `{ set(kind, \"b\"); switch(:kind) { case(\"a\"){return(\"bad\")} case(\"b\"){return(\"good\")} default {return(\"def\")} } }`, `switch(:kind)` returns 'good' (reads scalar kind) but `switch(kind)` returns 'def' (bare 'kind' is not read as the variable). Additionally, in `spec.spec`/`ebnf.spec` a bare name that collides with a rule/token name (`started`, `top`, `rule`, `on`) resolves as a RULE reference, not a variable read, collapsing the parse (`spec_spec_minimal_rule` -> []). So `:name` was load-bearing: it disambiguated a variable read from a rule reference and forced a scalar read where bare-read support had not landed. The oracle byte-identity gate (tools/gen_oracle_corpus.pl -> expected.json) flags exactly these as changed output; most shipped specs (ds_vhistory, lib_reader, pplugin, simenv, tablegrep, tkgui, vhdl) were output-preserving. Because the user directed that :name shall NOT be supported, SPEC-FORMAT-TERSE.15 is re-sequenced engine-first: .15.2.2/.15.2.3 make bare identifiers in value positions read the bound variable on Perl+Rust (value-position-is-variable policy; rule references only in edge/dispatch positions `-> Rule`, `call(Rule)`, `=> Rule`, and all-bare `push(RuleA, AccumB)`), .15.2.4 migrates sources, then .15.3/.15.4 remove :name entirely. Case labels are a deliberate key-position exception: `case(foo)` and inline `case(foo, body)` match literal tag `foo`, while `case(:foo)` reads a scalar slot during the transition. The .15.2.3 oracle exposed two additional durable facts: inline Perl switch case labels needed a dedicated case-value lowering path to match attached switch labels, and `specs/spec.spec` must initialize `paragraphs`/`current` with explicit `array(...)` targets after duck-typed assignment because scalar-held arrayrefs do not feed aggregate `push(rule_header, current)`. Scalar push without :name uses `items += value` or `push(array(items), value)`. See ADR 0019."
 reverify: "perl -Iperl -MLinkedSpec -e 'my $c = qq{Top::\\n /x/ -> Done { set(kind, \"b\"); switch(:kind) { case(\"a\") { return(\"bad\") } case(\"b\") { return(\"good\") } default { return(\"def\") } } }\\n\\nDone::\\n /[a-z]+/\\n}; my $b = $c; $b =~ s/switch\\(:kind\\)/switch(kind)/; for my $t ([colon=>$c],[bare=>$b]) { my $p = LinkedSpec::Get(\\$t->[1]); my $in=\"xhello\"; print $t->[0], \": \", ($p->(\\$in) // \"undef\"), \"\\n\"; }'"
 ---
 
@@ -79,3 +84,31 @@ lowerer returning bare words verbatim, which the new bare-read broke).
 Proof: discriminating probes (`switch(kind)`->`good`, `num_lt(n,5)`@n=10->`no`,
 `if(c)`@c=0->`F`, all == their `:name` forms) + full phase0 green (reach `ok 1022`, 1021
 pass, only the pre-existing `not ok 796`). Rust parity is `.15.2.3`.
+
+## Resolution — Rust parity and oracle surfacing (`.15.2.3`, 2026-07-06)
+
+The same value-position-is-variable policy is now implemented on the Rust backend for the
+enumerated positions. Rust `switch(kind)` reads the scalar variable `kind`, while
+`case(foo)` remains a literal label. Numeric/comparison helper args and `if(...)`
+conditions also read bare scalar variables, so the discriminating fixture returns:
+
+```text
+["literal","literal","no","F"]
+```
+
+The `.15.2.3` oracle fixture also exposed and closed a Perl-side parity hole in inline
+`switch(...)`: attached/statement `case(foo)` was already literal, but inline
+`case(foo, body)` still went through normal branch-payload lowering and read `$foo`.
+Inline switch now uses a dedicated case-value lowering path, so both forms treat bare
+case labels as literal tags.
+
+Regenerating the oracle also exposed stale self-hosted parser expectations for
+`specs/spec.spec`. After `.11` duck-typed assignment, `paragraphs = []` and
+`current = []` initialize scalar-held arrayrefs, but the self-hosted parser later mutates
+aggregate working arrays with `push(rule_header, current)`. The portable form is now
+explicit: `set(array(paragraphs), array())` and `set(array(current), array())`.
+
+Proof: focused Rust integration tests for the `.15.2.3` switch/num/if cases, Rust
+`corpus_oracle` over 93 fixtures, direct `specs/spec.spec` probe returning the expected
+minimal-rule AST, and Perl phase0 preserving the existing 1021-pass / one-baseline-failure
+shape.
