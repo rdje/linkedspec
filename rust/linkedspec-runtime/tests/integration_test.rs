@@ -2043,6 +2043,9 @@ fn terse_1_6_array_end_mutation_methods_run_in_order() {
 
 #[test]
 fn terse_1_6_explicit_array_receiver_aliases_run() {
+    // SPEC-FORMAT-TERSE.8.2.2.5 keeps `a(...)` here as an intentional
+    // legacy wrapper-alias compatibility lock for array receiver mutations.
+    // Current authored examples use `array(...)`; `.8.4` owns hard retirement.
     let grammar = "Top::\n /x/ -> Done { array(items).push_back(\"b\"); a(items).push_front(\"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
@@ -3516,10 +3519,11 @@ fn terse_2_3_5_5_block_valued_receiver_chains_run() {
 
 #[test]
 fn terse_2_3_5_6_typed_wrapper_quoted_boundaries_run() {
-    // SPEC-FORMAT-TERSE.8.2.2.2.5 classifies `h(...)` below as an
-    // intentional legacy wrapper-alias boundary lock. Current authored examples
-    // use `hash(...)`; this fixture keeps only the alias side needed to prove
-    // quoted-name and bare-working-hash behavior until .8.4 hard retirement.
+    // SPEC-FORMAT-TERSE.8.2.2.5 classifies `a(...)` / `h(...)` below as
+    // intentional legacy wrapper-alias boundary locks. Current authored examples
+    // use `array(...)` / `hash(...)`; this fixture keeps only the alias sides
+    // needed to prove quoted-name and bare-working-aggregate behavior until .8.4
+    // hard retirement.
     let grammar = "Top::\n /x/ -> Done { items += \"a\"; items += \"b\"; set_key(meta, \"a\", 1); set_key(meta, \"b\", 2); return(array(count(array(items)), count(array(\"items\")), count(array('items')), count(a(items)), count(a(\"items\")), count([\"items\"]), count(array(\"literal\", \"value\")), count_keys(hash(meta)), count_keys(hash(\"meta\", 1)), count_keys(hash('meta', 1)), count_keys({ \"meta\" => 1 }), count_keys(h(meta)), count_keys(h(\"meta\", 1)))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),

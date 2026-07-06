@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.5 — close active test/corpus helper residue
+
+**Scope:** Active Rust/Perl test fixtures, generated oracle inputs, generator source, shipped specs, and checked-in
+corpus specs.
+
+**Change:** Closeout scans now show the `.8.2.2` active-test/corpus lane is clean or explicitly classified. Rust
+integration wrapper-alias residue now labels `a(...)` / `h(...)` as intentional `.8.4` retirement locks; root
+`specs/` and `tests/corpus/` scan clean for the retired helper spellings; generated oracle inputs retain only the
+known declaration, aggregate-copy, and current hash receiver-method cases; and the Perl phase0 terse block retains
+only the categories classified by `.8.2.2.4`.
+
+**Boundary:** No parser/runtime behavior changed. This is a scan/classification closeout before `.8.2.3` migrates
+current-facing mdBook and Knowledge Map references.
+
+**Validation:** Focused old-helper residue scans over Rust active tests, generated corpus inputs, generator source,
+root corpus/specs, and the Perl phase0 terse block passed with only owned residual categories. Rust formatting,
+whitespace, memory architecture, and doctrine checks pass.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.4 — migrate Perl phase0 helper strings
 
 **Scope:** Perl phase0 embedded `.spec` strings in `t/phase0_regression.t`.

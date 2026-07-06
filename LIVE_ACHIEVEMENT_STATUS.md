@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.5 — close active test/corpus helper residue**
+  (DONE; FRONTIER `.8.2.3` MDBOOK/KM HELPER-REFERENCE MIGRATION NEXT).
+
+  **Change:** Active-test/corpus closeout scans classify or clear the remaining helper residue before current-facing
+  docs/KM cleanup. Rust integration comments now explicitly classify the remaining `a(...)` / `h(...)`
+  wrapper-alias fixture strings as `.8.4` retirement locks.
+
+  **Boundary:** No parser/runtime behavior changed. Root `specs/` and `tests/corpus/` scan clean for retired helper
+  spellings; generated oracle inputs retain only declaration, aggregate-copy, and current hash receiver-method
+  cases; phase0 retains only the `.8.2.2.4` compatibility/equivalence categories.
+
+  **Verification:** Focused residue scans over Rust active tests, generated corpus inputs, generator source, root
+  corpus/specs, and the Perl phase0 terse block passed with only owned residual categories. Rust formatting,
+  whitespace, memory architecture, and doctrine checks pass.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.4 — migrate Perl phase0 helper strings**
   (DONE; FRONTIER `.8.2.2.5` ACTIVE-TEST/CORPUS RESIDUE SCANS NEXT).
 

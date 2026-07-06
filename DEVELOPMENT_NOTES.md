@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.5 — closeout scans need separate alias and false-positive buckets):
+  Do not treat single-letter wrapper-alias scans as the same thing as primary helper scans. `a(...)` / `h(...)`
+  must be classified where they are real fixture strings, while regex/input text such as `(a(b)c)` is only a false
+  positive. The active-test/corpus closeout keeps root `specs/` and `tests/corpus/` clean, generated oracle inputs
+  limited to declaration/aggregate-copy/hash-receiver compatibility categories, and phase0 residue scoped to the
+  `.8.2.2.4` terse block classifications.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.4 — phase0 cleanup must preserve all-bare `push(...)` routing):
   In Perl phase0 fixture strings, do not replace `push_value(name, value)` with all-bare `push(name, value)` when
   both arguments are bare identifiers. That spelling keeps the child-call convention. Use `push(array(name), value)`
