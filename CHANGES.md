@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.3 — migrate generated corpus helper fixtures
+
+**Scope:** Generated oracle corpus fixture inputs and `tools/gen_oracle_corpus.pl`.
+
+**Change:** The `autoexist_array_bare_arg` and TOP-RULE recursion generated inputs now use current
+`push(...)`/`copy(...)` spellings for append and snapshot behavior. Incidental setup inside the aggregate-copy
+compatibility fixture now uses `push(...)`, while the asserted `array_copy(...)` helper remains intentionally
+retained as a generated-corpus compatibility lock.
+
+**Boundary:** No runtime behavior or user-facing syntax changed. Generated oracle expected JSON and manifest output
+did not drift. Remaining generated-corpus helper residue is classified as declaration compatibility,
+aggregate-copy compatibility, or current hash receiver-method surface.
+
+**Validation:** Generator syntax check passes; regeneration emits **93** fixtures with only expected
+`input.spec` changes; Rust `corpus_oracle` passes **3** tests including the full Perl reference comparison.
+Residue scans, Rust formatting, whitespace, memory architecture, and doctrine checks pass.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.2.5 — classify integration helper residue
 
 **Scope:** Close the old-helper residue scan for `rust/linkedspec-runtime/tests/integration_test.rs` before moving

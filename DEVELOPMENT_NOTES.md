@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.3 — generated corpus cleanup starts at the generator):
+  Do not hand-edit generated oracle corpus fixtures as the source of truth. Migrate helper spellings in
+  `tools/gen_oracle_corpus.pl`, regenerate, and expect `expected.json`/`manifest.json` to stay stable for
+  output-preserving fixture-string cleanup. A compatibility fixture can still migrate incidental setup helpers
+  (`push_value(...)` -> `push(...)`) while retaining the specific legacy helper under test (`array_copy(...)` or
+  `hash_copy(...)`) as an explicit compatibility lock.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.2.5 — residue scans need ownership categories, not only string counts):
   For Rust integration-test helper cleanup, a raw `rg` hit is not automatically incidental debt. Classify by owner:
   recursive declaration scope (`.8.2.2.2.2`), explicit legacy-helper compatibility (`.8.2.2.2.3` / `.8.4`),

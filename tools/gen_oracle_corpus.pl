@@ -187,7 +187,7 @@ SPEC
     },
     # SPEC-FORMAT-TERSE.1.2.1 Channel 1 (Rust parity = .1.2.2): a BARE (un-wrapped)
     # working var in a type-implying arg position auto-exists with the position-implied
-    # kind -- the assignment target is a scalar, the push_value(...) target is an array.
+    # kind -- the assignment target is a scalar, the push(...) target is an array.
     # Same divergence-free proof class as the wrapped autoexist_* cases above (the bare
     # target is the only difference), so the Rust backend must produce the identical
     # reference value. The value is read back through a wrapper (v/array(items)) --
@@ -206,7 +206,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { push_value(items, "a"); push_value(items, "b"); return(array_copy(array(items))) }
+ /x/ -> Done { push(items, "a"); push(items, "b"); return(copy(array(items))) }
 
 Done::
  /[a-z]+/
@@ -219,11 +219,14 @@ SPEC
     # bare value reads safe on the reference backend. Rust must resolve these bare
     # snapshot forms to the same named aggregate variables without broadening scalar
     # bare value reads or bare direct-access path atoms.
+    #
+    # SPEC-FORMAT-TERSE.8.2.2.3 keeps the two legacy aggregate-copy spellings below
+    # as explicit generated-corpus compatibility locks until .8.4 hard retirement.
     {   case   => 'terse_1_2_3_2_array_copy_bare_read',
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { push_value(items, "a"); push_value(items, "b"); return(array_copy(items)) }
+ /x/ -> Done { push(items, "a"); push(items, "b"); return(array_copy(items)) }
 
 Done::
  /[a-z]+/
@@ -780,7 +783,9 @@ SPEC
     # sorted key/value terminals can continue through the already-landed array
     # receiver helper family. Boolean terminals are covered by focused backend
     # tests; this oracle fixture keeps scalar/number/string values for direct
-    # Perl/Rust JSON parity.
+    # Perl/Rust JSON parity. The `.hash_copy()` receiver links below are current
+    # documented hash receiver-method surface, not incidental function-form helper
+    # residue.
     {   case   => 'terse_2_3_5_2_hash_receiver_value_chains',
         input  => 'xhello',
         source => <<'SPEC',
@@ -1033,6 +1038,10 @@ SPEC
     # ── SCALAREF-RETIREMENT.3 — shipped Lispish direct-access migration ──
     { case => 'lispish_x_y', spec => 'Lispish', input => '(x y)' },
     # ── TOP-RULE-AS-NORMAL.3.2 — recursive top-rule value parity ──
+    #
+    # SPEC-FORMAT-TERSE.8.2.2.3 keeps `declare(array, items)` here as the same
+    # Rust recursive scoped-declaration compatibility boundary classified in the
+    # integration tests; append/snapshot helpers use current `push`/`copy`.
     {
         case   => 'top_rule_body_recursion_sexpr',
         input  => '(a(b)c)',
@@ -1041,9 +1050,9 @@ top::
  -> sexpr { return(call(sexpr)) }
 
 sexpr: /\(/ /\)/  I { declare(array, items) }
- -> sexpr     { push_value(array(items), call(sexpr)) }
- -> atom      { push_value(array(items), call(atom)) }
- -> sexpr[1]  { return(array_copy(array(items))) }
+ -> sexpr     { push(array(items), call(sexpr)) }
+ -> atom      { push(array(items), call(atom)) }
+ -> sexpr[1]  { return(copy(array(items))) }
 
 atom: /[A-Za-z0-9]+/   I.return(entry_text())
 SPEC
@@ -1053,10 +1062,10 @@ SPEC
         input  => '(a(b)c)',
         source => <<'SPEC',
 sexpr:: /\(/ /\)/  I { declare(array, items) }
- -> sexpr     { push_value(array(items), call(sexpr)) }
- -> atom      { push_value(array(items), call(atom)) }
- -> sexpr[1]  { return(array_copy(array(items))) }
-LX { return(array_copy(array(items))) }
+ -> sexpr     { push(array(items), call(sexpr)) }
+ -> atom      { push(array(items), call(atom)) }
+ -> sexpr[1]  { return(copy(array(items))) }
+LX { return(copy(array(items))) }
 
 atom: /[A-Za-z0-9]+/   I.return(entry_text())
 SPEC
@@ -1066,10 +1075,10 @@ SPEC
         input  => '(a) (b)',
         source => <<'SPEC',
 sexpr:: /\(/ /\)/  I { declare(array, items) }
- -> sexpr     { push_value(array(items), call(sexpr)) }
- -> atom      { push_value(array(items), call(atom)) }
- -> sexpr[1]  { return(array_copy(array(items))) }
-LX { return(array_copy(array(items))) }
+ -> sexpr     { push(array(items), call(sexpr)) }
+ -> atom      { push(array(items), call(atom)) }
+ -> sexpr[1]  { return(copy(array(items))) }
+LX { return(copy(array(items))) }
 
 atom: /[A-Za-z0-9]+/   I.return(entry_text())
 SPEC

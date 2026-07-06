@@ -7,8 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.3 — migrate generated corpus helper fixtures**
+  (DONE; FRONTIER `.8.2.2.4` PERL PHASE0 OLD-HELPER STRING MIGRATION NEXT).
+
+  **Change:** Generated oracle corpus sources now use current `push(...)` and `copy(...)` spellings where the
+  fixture behavior is current-surface. `autoexist_array_bare_arg` and TOP-RULE recursion fixture inputs were
+  migrated, and incidental setup in the aggregate-copy compatibility fixture now uses `push(...)`.
+
+  **Boundary:** No runtime behavior changed and no oracle expected-output or manifest drift occurred. Remaining
+  generated-corpus helper residue is intentionally classified as declaration compatibility, aggregate-copy
+  compatibility, or current hash receiver-method surface.
+
+  **Verification:** `perl -c -Iperl tools/gen_oracle_corpus.pl`, `perl -Iperl tools/gen_oracle_corpus.pl`, and Rust
+  `corpus_oracle` pass over **93** generated fixtures. Focused residue scans, formatting, whitespace, memory
+  architecture, and doctrine checks pass.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.2.5 — classify integration helper residue**
-  (DONE; FRONTIER `.8.2.2.3` GENERATED ORACLE CORPUS HELPER-FIXTURE MIGRATION NEXT).
+  (DONE; `.8.2.2.3` GENERATED ORACLE CORPUS HELPER-FIXTURE MIGRATION HAS SINCE CLOSED).
 
   **Change:** The remaining Rust integration-test helper-string residue is classified in place. Recursive
   `declare(...)` usage remains owned by `.8.2.2.2.2`; explicit helper compatibility strings remain owned by
