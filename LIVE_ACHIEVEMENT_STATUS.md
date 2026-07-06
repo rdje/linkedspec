@@ -7,8 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.15.3 — retire Perl colon scalar slots**
+  (DONE; FRONTIER `.15.4` RUST `Expr::ScalarSlot` REMOVAL NEXT, NOT STARTED).
+
+  **Change:** Perl reference `:name` scalar-slot syntax no longer parses/lowers as a successful read or target.
+  Retired colon scalar slots now emit
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read`, and the former
+  `scalar_slot_fallback` trace/declaration path is gone.
+
+  **Semantics preserved:** Active Perl fixtures now use bare value reads. The retirement also locks bare-read
+  boundaries for inline `if`/`elseif`/`switch` conditions, logical `or(...)` / `and(...)`, ordinary
+  `entry_text()` / `match_text()` value helpers, assignment-source passthrough, flow RHS values, and scalar-held
+  hash `count_keys(...)`.
+
+  **Verification:** Focused ActionIR/trace tests pass; full phase0 passes with `PERL5LIB=` cleared and reaches
+  `1..1022`. mdBook/KM/live docs updated.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.15.2.4 — migrate current sources to bare reads**
-  (DONE; FRONTIER `.15.3` PERL `:name` REMOVAL NEXT, NOT STARTED).
+  (DONE; `.15.3` PERL `:name` REMOVAL HAS SINCE CLOSED).
 
   **Change:** Current shipped specs, root corpus examples, generated Rust oracle inputs, and mdBook examples now use
   bare value reads instead of `:name` scalar-slot reads. The migration preserved the **93** fixture oracle expected

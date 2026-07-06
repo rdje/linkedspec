@@ -31,7 +31,7 @@ emit_context:<phase>:<label>:<decision>
 ```
 
 The current coverage is the bridge/orchestration layer: ActionIR owner package and callback resolution, default
-dependency bundle selection, function-registry and bare-symbol-kind injection, compatibility scalar-slot and
+dependency bundle selection, function-registry and bare-symbol-kind injection, retired colon-slot diagnostics,
 aggregate-wrapper fallbacks, canonical rewrite-pipeline use, canonical raw-Perl fallback status, and
 `build_rule_ir_emit_context(...)` boundaries.
 

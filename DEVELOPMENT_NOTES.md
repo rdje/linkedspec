@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.15.3 — removing `:name` also tests the bare-read grammar boundaries):
+  Perl `:name` is now hard-retired, not compat-retained: parsing/lowering emits
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read`, and `scalar_slot_fallback` is gone.
+  The removal exposed places where the old colon spelling had hidden real bare-read ownership boundaries. Inline
+  `if(on, action...)` / `elseif(mid, action...)` and `switch(name, case(...), default(...))` must classify the
+  following argument before treating a leading bare word as optional scope. Logical `or(...)` / `and(...)` operands
+  are value conditions, not optional-scope payloads, so keep every operand. `entry_text()` / `match_text()` can lower
+  directly in ordinary value positions, but user-function bodies must continue to leave parser-state helpers
+  unresolved until staged body parsing owns that environment. For assignments, an unchanged `_lower_method_value_expr`
+  result is not proof that a source token is already handled; delegate unchanged/reserved tokens to the assignment
+  source lowerer. Finally, scalar-held container values must stay visible to receiver/helper fast paths:
+  `count_keys(snapshot)` should count a scalar-held hashref before falling back to named hash storage.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.15.2.4 — source migration stress-tested the bare-read seams):
   The current `:name` to bare-read migration was output-preserving, but only after preserving several boundaries
   that are easy to collapse accidentally. Parser-backed `set(...)` can surface as an internal `assign(...)` AST

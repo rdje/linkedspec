@@ -245,7 +245,7 @@ sub _lower_value_binding_source_expr {
  return $bare_scalar_read if defined($bare_scalar_read) && length($bare_scalar_read);
 
  my $value_expr = _lower_method_value_expr($trimmed, $deps);
- if (defined($value_expr) && length($value_expr)) {
+ if (defined($value_expr) && length($value_expr) && $value_expr ne $trimmed) {
   my $container_kind = _infer_assignment_source_container_kind($trimmed, $deps);
   return '['.$value_expr.']'
    if defined($container_kind) && $container_kind eq 'array' && $value_expr =~ /^\s*\@/s;
@@ -570,10 +570,11 @@ sub _lower_block_value_component_expr {
   my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
   die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
    unless ref($cb) eq 'CODE';
-  return $cb;
+ return $cb;
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $lower_primitive_literal_expr = $require_dep->('lower_primitive_literal_expr');
+ my $lower_flow_composite_expr = $require_dep->('lower_flow_composite_expr');
  my $lower_direct_nested_access_value_expr = $require_dep->('lower_direct_nested_access_value_expr');
 
  return undef unless defined $expr;
@@ -851,7 +852,9 @@ sub _actionir_ast_value_source_expr {
  return $node->{name}
   if $kind eq 'variable' && defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
  return ':'.$node->{name}
-  if $kind eq 'scalar_slot' && defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  if $kind eq 'colon_scalar_slot_removed'
+  && defined($node->{name})
+  && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
  if ($kind eq 'indexed_var') {
   return undef unless defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   my $index = _actionir_ast_value_source_expr($node->{index});
@@ -1068,6 +1071,19 @@ sub _actionir_ast_unsupported_helper_expr {
  return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:'.$method.'"; undef }'
 }
 
+sub _actionir_ast_retired_colon_scalar_slot_expr {
+ my ($name) = @_;
+ $name = '<unknown>' unless defined($name) && length($name);
+ _trace_method_decision(
+  phase => 'retired_colon_scalar_slot_expr',
+  label => 'expr',
+  decision => 'colon_scalar_slot_use_bare_read',
+  taken => 1,
+  context => { symbol => $name },
+ );
+ return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read"; undef }'
+}
+
 sub _actionir_ast_retired_wrapper_alias_method {
  my ($method) = @_;
  return undef unless defined($method) && length($method);
@@ -1227,8 +1243,7 @@ sub _user_function_collect_local_decls_from_node {
   _user_function_record_local_decl($decls, $params, '$', $node->{name});
   return;
  }
- if ($kind eq 'scalar_slot') {
-  _user_function_record_local_decl($decls, $params, '$', $node->{name});
+ if ($kind eq 'colon_scalar_slot_removed') {
   return;
  }
 
@@ -1876,7 +1891,7 @@ sub _is_reserved_actionir_value_symbol {
 
 #------------------------------------------------------------------------------
 # Function: _lower_method_value_expr
-# Purpose : Lower method DSL value expressions (`call(...)`, `:name`,
+# Purpose : Lower method DSL value expressions (`call(...)`, bare scalar reads,
 #           `array(...)`, `input_slice(...)`, `hash_copy(...)`, `merge_hash(...)`, `set_key(...)`,
 #           `rename_key(...)`, `drop_keys(...)`, `pick_keys(...)`, `sorted(...)`, `reversed(...)`, `sorted_keys(...)`, `sorted_values(...)`,
 #           `length(...)`, `substr(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `split(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_range(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `is_empty(...)`, `is_nonempty(...)`, `first(...)`, `last(...)`, `drop_front(...)`, `take(...)`, `slice(...)`, `take_last(...)`, `drop_back(...)`, `concat_arrays(...)`, `sorted(...)`, `reversed(...)`, `contains(...)`, `index_of(...)`,
@@ -2802,7 +2817,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return $node->{name}
   }
   return ':'.$node->{name}
-   if $kind eq 'scalar_slot' && defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+   if $kind eq 'colon_scalar_slot_removed'
+   && defined($node->{name})
+   && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   if ($kind eq 'assign_scalar') {
    return undef unless defined($node->{name}) && $node->{name} =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    my $value_expr = $ast_expr_source_node->($node->{value});
@@ -2976,9 +2993,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
 	  if (ref($target_node) eq 'HASH' && ($target_node->{kind} // '') eq 'variable') {
 	   $target_name = $target_node->{name};
 	   $target_sigil = '$';
-		  } elsif (ref($target_node) eq 'HASH' && ($target_node->{kind} // '') eq 'scalar_slot') {
-		   $target_name = $target_node->{name};
-		   $target_sigil = '$';
+		  } elsif (ref($target_node) eq 'HASH'
+		       && ($target_node->{kind} // '') eq 'colon_scalar_slot_removed') {
+			   return _actionir_ast_retired_colon_scalar_slot_expr($target_node->{name});
 		  } elsif (ref($target_node) eq 'HASH'
        && ($target_node->{kind} // '') eq 'call'
        && (($target_node->{name} // '') eq 'array' || ($target_node->{name} // '') eq 'hash')) {
@@ -3234,16 +3251,17 @@ my $lower_numeric_array_reducer_source_expr = sub {
      return $inner_expr if defined($inner_expr) && length($inner_expr);
     }
    }
-   my $scalar_slot_read = _lower_source_slot_bare_scalar_read_expr($node->{source}, $deps);
-   return $scalar_slot_read if defined($scalar_slot_read) && length($scalar_slot_read);
+   my $bare_scalar_read = _lower_source_slot_bare_scalar_read_expr($node->{source}, $deps);
+   return $bare_scalar_read if defined($bare_scalar_read) && length($bare_scalar_read);
    return undef;
   }
   return $node->{source}
    if $kind eq 'variable' && $opts->{variable_source};
   return $opts->{bare_scalar_read} ? _lower_source_slot_bare_scalar_read_expr($node->{name}, $deps) : undef
    if $kind eq 'variable';
-  return _lower_source_slot_bare_scalar_read_expr(':'.$node->{name}, $deps)
-   if $kind eq 'scalar_slot' && defined($node->{name}) && length($node->{name});
+	  return _actionir_ast_retired_colon_scalar_slot_expr($node->{name})
+	   if $kind eq 'colon_scalar_slot_removed'
+	   && defined($node->{name}) && length($node->{name});
   return $lower_ast_scalar_assignment_value_node->($node)
    if $kind eq 'assign_scalar' || $kind eq 'assign_array_append' || $kind eq 'assign_hash_index' || $kind eq 'assign_nested_access';
   return $lower_ast_direct_access_node->($node)
@@ -3376,7 +3394,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
      || $arg_kind eq 'assign_array_append'
      || $arg_kind eq 'assign_hash_index'
      || $arg_kind eq 'assign_nested_access'
-     || $arg_kind eq 'array_literal'
+	     || $arg_kind eq 'colon_scalar_slot_removed'
+	     || $arg_kind eq 'array_literal'
      || $arg_kind eq 'hash_literal'
      || $arg_kind eq 'block_value'
      || $arg_kind eq 'fluent_chain';
@@ -3535,10 +3554,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     taken => 1,
     context => { first_method => $first_method, steps => scalar(@$calls) },
    );
-   my $current_expr = $receiver_expr;
-   $current_expr = ':'.$current_expr
-    if ($receiver->{kind} // '') eq 'variable'
-    && $current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+	  my $current_expr = $receiver_expr;
    my $current_family = 'string';
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
@@ -3587,10 +3603,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     taken => 1,
     context => { first_method => $first_method, steps => scalar(@$calls) },
    );
-   my $current_expr = $receiver_expr;
-   $current_expr = ':'.$current_expr
-    if ($receiver->{kind} // '') eq 'variable'
-    && $current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+	  my $current_expr = $receiver_expr;
    my $current_family = 'number';
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
@@ -3901,6 +3914,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
 
   return 'do { my $__ls_input_slice_start = '.$start_expr.'; my $__ls_input_slice_width = '.$width_expr.'; (defined($__ls_input_slice_start) && defined($__ls_input_slice_width)) ? substr($$STRING, $__ls_input_slice_start, $__ls_input_slice_width) : undef }';
  }
+ if ($method_call && $method_call->{method} eq 'entry_text') {
+  my $entry_text_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 0, 0);
+  return undef unless $entry_text_args;
+  return $trimmed
+   if ref($deps->{__user_function_call_stack}) eq 'ARRAY'
+   && @{$deps->{__user_function_call_stack}};
+  return 'do { $IMATCH }';
+ }
  if ($method_call && $method_call->{method} eq 'entry_group') {
   my $entry_group_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
   return undef unless $entry_group_args;
@@ -3917,6 +3938,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $entry_map_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 0, 0);
   return undef unless $entry_map_args;
   return 'do { +{%IMATCH_HASH} }';
+ }
+ if ($method_call && $method_call->{method} eq 'match_text') {
+  my $match_text_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 0, 0);
+  return undef unless $match_text_args;
+  return $trimmed
+   if ref($deps->{__user_function_call_stack}) eq 'ARRAY'
+   && @{$deps->{__user_function_call_stack}};
+  return 'do { $LMATCH }';
  }
  if ($method_call && $method_call->{method} eq 'match_group') {
   my $match_group_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
@@ -4858,7 +4887,13 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   return undef unless defined($target_expr) && length($target_expr);
 
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
-  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
+  my $target_kind = $remembered_bare_symbol_kind->($target_expr);
+  if (
+   defined($hash_symbol) &&
+   length($hash_symbol) &&
+   $target_expr =~ $hash_symbol_expr_re &&
+   (($target_kind // '') ne 'scalar')
+  ) {
    return 'scalar(keys %'.$hash_symbol.')';
   }
 
@@ -5294,8 +5329,8 @@ if ($method_call && $method_call->{method} eq 'index_of') {
 #------------------------------------------------------------------------------
 # Function: _lower_source_slot_bare_scalar_read_expr
 # Purpose : Lower one accepted source-slot identifier using initialized bare-name
-#           type memory. `:NAME` always reads the scalar slot; bare `NAME` reads
-#           the remembered array/hash/scalar kind, defaulting to scalar.
+#           type memory. Bare `NAME` reads the remembered array/hash/scalar kind,
+#           defaulting to scalar; retired `:NAME` emits the migration diagnostic.
 # Args    : ($expr, $deps)
 # Returns : Perl value expression, or undef for non-source-slot bare reads
 #------------------------------------------------------------------------------
@@ -5318,9 +5353,7 @@ sub _lower_source_slot_bare_scalar_read_expr {
  return undef unless defined($trimmed) && length($trimmed);
  my $name;
  if ($trimmed =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o) {
-  $name = $1;
-  return undef if $name =~ /^(?:undef|true|false|IMATCH_LIST|IMATCH_HASH|LMATCH_LIST|LMATCH_HASH)$/o;
-  return '$'.$name;
+  return _actionir_ast_retired_colon_scalar_slot_expr($1);
  } elsif ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
   $name = $1;
  } else {
@@ -5358,6 +5391,17 @@ sub _lower_mutation_slot_value_expr {
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
 
+ if ($trimmed =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o) {
+  _trace_method_decision(
+   phase => 'lower_mutation_slot_value_expr',
+   label => 'value',
+   decision => 'retired_colon_scalar_slot',
+   taken => 1,
+   context => { symbol => $1 },
+  );
+  return _actionir_ast_retired_colon_scalar_slot_expr($1);
+ }
+
  my $bare_scalar_read = _lower_source_slot_bare_scalar_read_expr($trimmed, $deps);
  if (defined($bare_scalar_read) && length($bare_scalar_read)) {
   _trace_method_decision(
@@ -5382,6 +5426,20 @@ sub _lower_mutation_slot_value_expr {
   return $literal;
  }
  return undef if $trimmed =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+
+ if (ref($lower_flow_composite_expr) eq 'CODE') {
+  my $flow_expr = $lower_flow_composite_expr->($trimmed);
+  if (defined($flow_expr) && length($flow_expr) && $flow_expr ne $trimmed) {
+   _trace_method_decision(
+    phase => 'lower_mutation_slot_value_expr',
+    label => 'value',
+    decision => 'flow_value_source',
+    taken => 1,
+    context => {},
+   );
+   return $flow_expr;
+  }
+ }
 
  my $lowered = _lower_method_value_expr($trimmed, $deps);
  $lowered = $trimmed unless defined($lowered) && length($lowered);
@@ -5556,6 +5614,10 @@ sub _lower_assign_statement {
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
 
  my $target_trimmed = $trim_action_ir_value->($target);
+ if (defined($target_trimmed) && $target_trimmed =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o) {
+  my $diagnostic = _actionir_ast_retired_colon_scalar_slot_expr($1);
+  return $finish->($diagnostic, 'retired_colon_scalar_slot_target', { target => $1 });
+ }
  if (defined($target_trimmed) && $target_trimmed =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
   my $source_expr = _lower_value_binding_source_expr($source, $deps);
   return $finish->(undef, 'bare_value_target_failed', { target => $target_trimmed }) unless defined($source_expr) && length($source_expr);
@@ -5938,9 +6000,6 @@ sub _normalize_number_receiver_value_chain_expr {
  );
 
  my $current_expr = $receiver_expr;
- if ($current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
-  $current_expr = ':'.$current_expr;
- }
  my $current_family = 'number';
  for (my $idx = 0; $idx < @calls; ++$idx) {
   my $call = $calls[$idx];
@@ -6024,9 +6083,6 @@ sub _normalize_string_receiver_value_chain_expr {
  );
 
  my $current_expr = $receiver_expr;
- if ($current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
-  $current_expr = ':'.$current_expr;
- }
  my $current_family = 'string';
  for (my $idx = 0; $idx < @calls; ++$idx) {
   my $call = $calls[$idx];
@@ -6581,7 +6637,7 @@ sub _lower_push_value_statement {
   # SPEC-FORMAT-TERSE.1.3.2 — preserve child-call precedence. `push(Child, target)`
   # and `push(Child, index)` are both all-bare-token forms and continue through the
   # child-call contracts. Explicit value append uses `push(target, "literal")`,
-  # `push(target, :value)`, `push(array(target), value)`, or the old
+  # `push(array(target), value)`, `target += value`, or the old
   # unambiguous `push_value(target, value)`.
   return undef unless @$raw_args == 2;
   my $first_expr = $trim_action_ir_value->($raw_args->[0]);

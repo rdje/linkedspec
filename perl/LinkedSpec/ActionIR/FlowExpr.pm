@@ -293,7 +293,10 @@ sub _lower_defined_target_expr {
  return undef unless defined $arg_expr;
  my $trimmed = $trim_action_ir_value->($arg_expr);
  return undef unless defined($trimmed) && length($trimmed);
- return '$'.$1 if $trimmed =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o;
+ if ($trimmed =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o) {
+  return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read"; undef }';
+ }
+ return '$'.$trimmed if $trimmed =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
 
  my $direct_access = $lower_direct_nested_access_value_expr->($trimmed);
  return $direct_access if defined($direct_access) && length($direct_access);
@@ -361,7 +364,13 @@ sub _lower_flow_composite_expr {
  return $finish->(undef, 'empty_expr', {}) unless defined($trimmed) && length($trimmed);
  return $finish->('1', 'boolean_true', { expr => $trimmed }) if $trimmed eq 'true';
  return $finish->('0', 'boolean_false', { expr => $trimmed }) if $trimmed eq 'false';
- return $finish->('$'.$1, 'scalar_slot', { symbol => $1 }) if $trimmed =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o;
+ if ($trimmed =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o) {
+  return $finish->(
+   'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read"; undef }',
+   'retired_colon_scalar_slot',
+   { symbol => $1 },
+  );
+ }
  my $literal = $lower_primitive_literal_expr->($trimmed);
  return $finish->($literal, 'primitive_literal', { expr => $trimmed }) if defined($literal);
 
@@ -380,9 +389,9 @@ sub _lower_flow_composite_expr {
  my $call = $parse_method_function_expr->($trimmed);
  unless ($call) {
   # SPEC-FORMAT-TERSE.15.2.2 — value-position-is-variable (ADR 0019): a bare identifier
-  # reaching this point is not `true`/`false`, not a `:name` scalar slot, not a primitive
-  # literal, not direct nested access, and not a helper/method call — so in a value or
-  # condition position it is a variable/parameter read, mirroring the `:name` branch above.
+  # reaching this point is not `true`/`false`, not retired colon scalar-slot syntax, not a
+  # primitive literal, not direct nested access, and not a helper/method call — so in a value
+  # or condition position it is a variable/parameter read.
   # Guarded to a lone identifier so multi-token passthrough expressions stay verbatim.
   return $finish->('$'.$trimmed, 'bare_variable_read', { symbol => $trimmed })
    if $trimmed =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
@@ -426,7 +435,7 @@ sub _lower_flow_composite_expr {
  );
 
  if ($method eq 'or' || $method eq 'and') {
-  my $effective_args = $normalize_method_args_with_optional_scope->($args, 1, undef);
+  my $effective_args = $args;
   return $finish->(undef, 'logical_missing_args', { method => $method }) unless $effective_args && @$effective_args;
   my @parts = map { _lower_flow_composite_expr($_, $deps) } @$effective_args;
   return $finish->(undef, 'logical_arg_lowering_failed', { method => $method }) if grep { !defined($_) || !length($_) } @parts;

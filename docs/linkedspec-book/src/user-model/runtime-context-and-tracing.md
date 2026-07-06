@@ -479,7 +479,7 @@ emit_context:<phase>:<label>:<decision>
 
 Current EmitContext phases include `owner_package`, `owner_callback`, `owner_deps`, `rewrite_compat`,
 `rewrite_diagnostics`, and `build`. Typical decisions include `package_resolved`, `callback_resolved`,
-`default_bundle`, `inject_function_registry`, `inject_bare_symbol_kind`, `scalar_slot_fallback`,
+`default_bundle`, `inject_function_registry`, `inject_bare_symbol_kind`, `retired_colon_scalar_slot`,
 `aggregate_wrapper_fallback`, `canonical_rewrite_pipeline`, `canonical_raw_perl_fallback`,
 `function_registry_available`, `bare_type_memory_collected`, and `rewrite_rules_built`.
 

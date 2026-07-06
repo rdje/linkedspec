@@ -73,7 +73,7 @@ sub default_deps_for_package {
 
 #------------------------------------------------------------------------------
 # Function: _lower_control_flow_value_expr
-# Purpose : Lower control-flow method argument values (`:name`, helpers, etc.) into
+# Purpose : Lower control-flow method argument values (bare reads, helpers, etc.) into
 #           Perl expression form while allowing raw expressions.
 # Args    : ($expr, $deps)
 # Returns : Perl expression string or undef
@@ -127,8 +127,8 @@ sub _lower_switch_case_value_expr {
  # SPEC-FORMAT-TERSE.15.2.2 — a bare word in switch-case LABEL position is a literal
  # tag, not a variable read: it is a label/key position, analogous to the hash-literal
  # key exemption in ADR 0019. `switch(kind)` reads the variable kind, but `case(foo)`
- # matches the literal "foo"; use `case(:name)` (or a quoted/compound value) for a
- # non-literal. `true`/`false` keep their boolean lowering. Before .15.2.2 this was
+ # matches the literal "foo"; use a quoted/compound expression for a non-literal case
+ # value. `true`/`false` keep their boolean lowering. Before .15.2.2 this was
  # detected by `$lowered eq $trimmed` (the composite lowerer returned bare words
  # verbatim); now the composite lowerer reads a bare identifier as a variable, so the
  # literal-tag decision is made here directly on the source token.
@@ -443,6 +443,13 @@ sub _control_ast_flow_source_expr {
 # Args    : ($expr, $ctx, $deps)
 # Returns : Perl statement string or undef
 #------------------------------------------------------------------------------
+sub _if_arg_starts_inline_action_or_branch {
+ my ($expr) = @_;
+ return 0 unless defined $expr;
+ return 1 if $expr =~ /^\s*\{/s;
+ return $expr =~ /^\s*(?:elif|elseif|else|if|i|when|while|switch|case|default|endcase|endswitch|return|return_undef|declare(?:_\w+)?|set|push|push_value|push_nonempty|say|print|print_each|exit_now|next)\s*(?:\(|\{|\z)/o ? 1 : 0
+}
+
 sub _lower_if_flow_statement {
  my ($expr, $ctx, $deps) = @_;
  my $scope = _trace_control_enter(
@@ -479,7 +486,14 @@ sub _lower_if_flow_statement {
  return $finish->(undef, 'wrong_method', { method => $call ? ($call->{method} // '') : '<undef>' })
   unless $call && ($call->{method} eq 'if' || $call->{method} eq 'i' || $call->{method} eq 'when');
 
- my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, undef);
+ my $raw_args = $call->{args} || [];
+ my $effective_args = (
+  ref($raw_args) eq 'ARRAY' &&
+  @$raw_args > 1 &&
+  _if_arg_starts_inline_action_or_branch($raw_args->[1])
+ )
+  ? [@$raw_args]
+  : $normalize_method_args_with_optional_scope->($raw_args, 1, undef);
  return $finish->(undef, 'bad_arity', { method => $call->{method} }) unless $effective_args;
  my $cond_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
  return $finish->(undef, 'condition_lowering_failed', { method => $call->{method} }) unless defined($cond_expr) && length($cond_expr);
@@ -1005,7 +1019,14 @@ sub _lower_inline_if_branch_expr {
  my $method = $branch_call->{method} // '';
 
  if ($method eq 'elseif' || $method eq 'elif') {
-  my $effective_args = $normalize_method_args_with_optional_scope->($branch_call->{args} || [], 1, undef);
+  my $raw_args = $branch_call->{args} || [];
+  my $effective_args = (
+   ref($raw_args) eq 'ARRAY' &&
+   @$raw_args > 1 &&
+   _if_arg_starts_inline_action_or_branch($raw_args->[1])
+  )
+   ? [@$raw_args]
+   : $normalize_method_args_with_optional_scope->($raw_args, 1, undef);
   return undef unless $effective_args && @$effective_args >= 1;
 
   my $cond_expr = _lower_control_flow_value_expr($effective_args->[0], $deps);
@@ -1199,6 +1220,12 @@ sub _lower_while_flow_statement {
 # Args    : ($expr, $ctx, $deps)
 # Returns : Perl statement string or undef
 #------------------------------------------------------------------------------
+sub _switch_arg_starts_inline_branch {
+ my ($expr) = @_;
+ return 0 unless defined $expr;
+ return $expr =~ /^\s*(?:case|default)\s*(?:\(|\{|\z)/o ? 1 : 0
+}
+
 sub _lower_switch_flow_statement {
  my ($expr, $ctx, $deps) = @_;
  my $scope = _trace_control_enter(
@@ -1233,7 +1260,14 @@ sub _lower_switch_flow_statement {
  my $attached_block = $parsed_expr->{attached_block};
  return $finish->(undef, 'wrong_method', { method => $call ? ($call->{method} // '') : '<undef>' })
   unless $call && $call->{method} eq 'switch';
- my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, undef);
+ my $raw_args = $call->{args} || [];
+ my $effective_args = (
+  ref($raw_args) eq 'ARRAY' &&
+  @$raw_args > 1 &&
+  _switch_arg_starts_inline_branch($raw_args->[1])
+ )
+  ? [@$raw_args]
+  : $normalize_method_args_with_optional_scope->($raw_args, 1, undef);
  return $finish->(undef, 'bad_arity', { arg_count => ref($effective_args) eq 'ARRAY' ? scalar(@$effective_args) : 0 })
   unless $effective_args && @$effective_args >= 1;
  return $finish->(undef, 'attached_block_with_inline_args', { arg_count => scalar(@$effective_args) })

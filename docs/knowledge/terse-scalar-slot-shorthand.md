@@ -1,6 +1,6 @@
 ---
 id: terse-scalar-slot-shorthand
-title: "SPEC-FORMAT-TERSE.6.2.3.1 - :name is the terse scalar-slot shorthand; SPEC-FORMAT-TERSE.6.2.3.2 later retired authored spec-file scalar(name), and set(:name, shape) preserves the scalar payload boundary."
+title: "SPEC-FORMAT-TERSE.6.2.3.1 historical note - :name was the scalar-slot shorthand, but SPEC-FORMAT-TERSE.15.3 hard-retired Perl support; current authoring uses bare reads."
 answers:
   - "what is :name in LinkedSpec"
   - "how do I write scalar(name) tersely"
@@ -8,35 +8,25 @@ answers:
   - "is scalar(name) retired or still accepted"
   - "where did SPEC-FORMAT-TERSE.6.2.3.1 land"
   - "how do Perl and Rust parse :name scalar slot shorthand"
-date: 2026-07-03
-status: confirmed
+date: 2026-07-06
+status: superseded
 tags: [dsl, scalar, shorthand, spec-format-terse, SPEC-FORMAT-TERSE, actionir, rust, parity, mdbook]
-evidence: "SPEC-FORMAT-TERSE.6.2.3.1 landed `:name` on 2026-07-03. Perl recognizes the spelling in `ActionIR::ValueExpr::_extract_scalar_symbol_name`, `ActionIR::MethodLowering::_lower_source_slot_bare_scalar_read_expr`, direct-shape/constructor value lowering, and `RuleIR::EmitContext::_collect_auto_working_var_decls`. Rust adds `Expr::ScalarSlot { name }` in `linkedspec-core/src/expr.rs`, parses leading `:name` as a value primary, evaluates it with `RuntimeContext::get_scalar`, and treats it as a scalar assignment/mutation target in `linkedspec-runtime/src/engine.rs`. At `.6.2.3.1`, `:name` was introduced as the replacement for one-argument `scalar(name)` and `set(:payload, [value])` stores the whole array payload in scalar `payload`, while bare `set(payload, [value])` still infers an array assignment. SPEC-FORMAT-TERSE.6.2.3.2 later hard-retired authored spec-file `scalar(name)` and `assign(...)`; use `:name` plus `LHS = RHS`/`set(...)` on the current surface."
-reverify: "perl -Iperl -MLinkedSpec -e 'for my $stmt (q{return(:name)}, q{set(:payload, [value]); return(:payload)}, q{return([:value, :other])}, q{return(array(:value, :other))}) { print LinkedSpec::call_spec_handler_subst(\"Top\", $stmt), \"\\n\" }' && cargo test --manifest-path rust/Cargo.toml -p linkedspec-core parse_scalar_slot_shorthand_expr && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_6_2_3_1_scalar_slot_shorthand_runs -- --nocapture"
+evidence: "Historical fact: SPEC-FORMAT-TERSE.6.2.3.1 introduced `:name` on 2026-07-03 as the terse scalar-slot spelling, and SPEC-FORMAT-TERSE.6.2.3.2 later retired authored `scalar(name)` / `assign(...)`. The current surface supersedes that: SPEC-FORMAT-TERSE.15.2.4 migrated current specs/corpus/docs/KM to bare reads, and SPEC-FORMAT-TERSE.15.3 hard-retired Perl `:name` parsing/lowering by emitting `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read` instead of a successful scalar read/target. Current authoring uses bare value reads and explicit `array(...)` / `hash(...)` targets for aggregate storage boundaries. Rust `Expr::ScalarSlot` remains the next retirement target under SPEC-FORMAT-TERSE.15.4."
+reverify: "prove -q -Iperl t/actionir_ast_parser.t t/trace_emit_context_bridge.t t/trace_actionir_pipeline.t t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t"
 ---
 
-# Scalar-slot shorthand
+# Historical Scalar-Slot Shorthand
 
-`SPEC-FORMAT-TERSE.6.2.3.1` adds `:name` as the terse scalar-slot spelling.
-It is a scalar read in value positions:
+`SPEC-FORMAT-TERSE.6.2.3.1` added `:name` as a temporary terse scalar-slot spelling. That contract is now
+superseded on the Perl reference backend by `SPEC-FORMAT-TERSE.15.3`.
 
-```text
-return(:name)                  # reads scalar working variable name
-return([:value, :other])       # both items read scalar working variables
-```
-
-It is also an explicit scalar target in assignment-like target positions:
+Current authored specs should use bare value reads:
 
 ```text
-set(:payload, [value])        # scalar payload boundary: $payload = [$value]
+return(name)
+return([value, other])
+set(payload, [value])
 ```
 
-This does not change direct-shape target inference for bare targets:
-
-```text
-set(payload, [value])         # assigns array working variable payload
-set(:payload, [value])        # assigns scalar working variable payload
-```
-
-`SPEC-FORMAT-TERSE.6.2.3.2` later retired authored spec-file `scalar(name)`.
-Current specs use `:name` for scalar slots.
+On Perl, a remaining `:name` form is a migration error/diagnostic sentinel, not a working scalar-slot read.
+Rust `Expr::ScalarSlot` is still tracked separately for removal under `SPEC-FORMAT-TERSE.15.4`.

@@ -17,6 +17,20 @@ BEGIN {
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::ActionIR::Trace ();
 
+sub _retired_colon_scalar_slot_diagnostic_expr {
+ return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read"; undef }'
+}
+
+sub _rewrite_exact_retired_colon_scalar_slot {
+ my ($code) = @_;
+ return undef unless defined $code;
+ my $trimmed = $code;
+ $trimmed =~ s/^\s+//;
+ $trimmed =~ s/\s+\z//;
+ return undef unless $trimmed =~ /^:[A-Za-z_][A-Za-z0-9_]*$/o;
+ return _retired_colon_scalar_slot_diagnostic_expr()
+}
+
 sub _event_continues_implicit_if_flow {
  my ($event) = @_;
  my $contract_id = $event->{contract_id} // '';
@@ -431,7 +445,7 @@ sub _lower_action_code_from_canonical_ir {
   );
   $rewritten .= ' '.$implicit_closures;
  }
- if (@{$lower_ctx->{if_stack}} || @{$lower_ctx->{switch_stack}}) {
+	 if (@{$lower_ctx->{if_stack}} || @{$lower_ctx->{switch_stack}}) {
   LinkedSpec::ActionIR::Trace::decision(
    owner => 'rewrite_pipeline',
    phase => 'lower_action_code_from_canonical_ir',
@@ -451,10 +465,23 @@ sub _lower_action_code_from_canonical_ir {
     rewritten_len => defined($code) ? length($code) : 0,
    },
   );
-  return $code;
- }
+	  return $code;
+	 }
 
- LinkedSpec::ActionIR::Trace::exit_scope(
+	 my $retired_colon_scalar_slot = _rewrite_exact_retired_colon_scalar_slot($rewritten);
+	 if (defined($retired_colon_scalar_slot) && length($retired_colon_scalar_slot)) {
+	  LinkedSpec::ActionIR::Trace::decision(
+	   owner => 'rewrite_pipeline',
+	   phase => 'lower_action_code_from_canonical_ir',
+	   label => $label,
+	   decision => 'retired_colon_scalar_slot',
+	   taken => 1,
+	   context => {},
+	  );
+	  $rewritten = $retired_colon_scalar_slot;
+	 }
+
+	 LinkedSpec::ActionIR::Trace::exit_scope(
   $scope,
   {
    status => 'ok',

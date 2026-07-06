@@ -63,21 +63,19 @@ sub _empty_rule_ir {
  };
 }
 
-subtest 'compat rewrite traces owner bridge and scalar fallback decisions' => sub {
- plan tests => 8;
+subtest 'compat rewrite traces retired colon scalar-slot diagnostic' => sub {
+ plan tests => 6;
 
  my $trace_path = _debug_trace_path();
  my $rewritten = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat('Top', ':name');
 
- is($rewritten, '$name', 'scalar slot compatibility fallback still lowers to a scalar read');
+ like($rewritten, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read/, 'retired colon scalar slot emits the migration diagnostic');
  my $trace = _slurp($trace_path);
  like($trace, qr/ENTER LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat:Top/, 'trace enters the compat rewrite boundary');
  like($trace, qr/EXIT LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat:Top/, 'trace exits the compat rewrite boundary');
  like($trace, qr/DECISION emit_context:rewrite_action_code_for_compat:Top:compat_bare_type_memory => TAKEN/, 'trace reports compat bare-type memory collection');
- like($trace, qr/DECISION emit_context:owner_package:method_lowering:resolve => TAKEN/, 'trace reports ActionIR owner package resolution');
- like($trace, qr/DECISION emit_context:owner_callback:method_lowering:_lower_method_value_expr => TAKEN/, 'trace reports ActionIR owner callback resolution');
- like($trace, qr/DECISION emit_context:owner_deps:method_lowering:inject_bare_symbol_kind => TAKEN/, 'trace reports bare-kind dependency injection');
- like($trace, qr/DECISION emit_context:rewrite_action_code_for_compat:Top:scalar_slot_fallback => TAKEN/, 'trace reports the scalar fallback path');
+ like($trace, qr/DECISION emit_context:rewrite_action_code_for_compat:Top:retired_colon_scalar_slot => TAKEN/, 'trace reports the retired colon diagnostic path');
+ unlike($trace, qr/scalar_slot_fallback/, 'trace no longer reports the removed scalar-slot fallback path');
 };
 
 subtest 'compat rewrite traces aggregate fallback and canonical pipeline paths' => sub {
@@ -87,12 +85,12 @@ subtest 'compat rewrite traces aggregate fallback and canonical pipeline paths' 
  my $aggregate = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat('Top', 'array(items)');
  is($aggregate, '[@items]', 'aggregate compatibility fallback still lowers to an array copy');
  my $aggregate_trace = _slurp($aggregate_trace_path);
- like($aggregate_trace, qr/DECISION emit_context:rewrite_action_code_for_compat:Top:scalar_slot_fallback => SKIPPED/, 'trace reports skipped scalar fallback for aggregate wrapper');
+ like($aggregate_trace, qr/DECISION emit_context:rewrite_action_code_for_compat:Top:retired_colon_scalar_slot => SKIPPED/, 'trace reports skipped retired-colon path for aggregate wrapper');
  like($aggregate_trace, qr/DECISION emit_context:rewrite_action_code_for_compat:Top:aggregate_wrapper_fallback => TAKEN/, 'trace reports aggregate wrapper fallback');
 
  my $pipeline_trace_path = _debug_trace_path();
- my $pipeline = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat('Top', 'return(:name)');
- is($pipeline, 'return $name', 'canonical rewrite pipeline still lowers return(:name)');
+ my $pipeline = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat('Top', 'return(name)');
+ is($pipeline, 'return $name', 'canonical rewrite pipeline still lowers bare return(name)');
  my $pipeline_trace = _slurp($pipeline_trace_path);
  like($pipeline_trace, qr/DECISION emit_context:rewrite_action_code_for_compat:Top:aggregate_wrapper_fallback => SKIPPED/, 'trace reports skipped aggregate fallback before pipeline use');
  like($pipeline_trace, qr/ENTER LinkedSpec::RuleIR::EmitContext::rewrite_action_code_with_diagnostics:Top/, 'trace enters the diagnostic rewrite boundary');
@@ -104,7 +102,7 @@ subtest 'rule emit context traces rewrite orchestration and dependency injection
 
  my $trace_path = _debug_trace_path();
  my $rule_ir = _empty_rule_ir(
-  acode_entries => [{ code => 'return(:name)', relabel => 'Top', reidx => 0 }],
+  acode_entries => [{ code => 'return(name)', relabel => 'Top', reidx => 0 }],
   function_registry => { helper_x => { params => [], body => 'return("x")' } },
  );
  my $emit_ctx = LinkedSpec::RuleIR::EmitContext::build_rule_ir_emit_context($rule_ir);
@@ -130,7 +128,7 @@ subtest 'EmitContext remains Trace-lazy until trace is explicitly loaded' => sub
 require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_EAGER__\n" : "__TRACE_STILL_LAZY__\n";
 my $rewritten = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat("Top", ":name");
-print $rewritten eq '$name' ? "__REWRITE_OK__\n" : "__REWRITE_BAD__$rewritten\n";
+print $rewritten =~ /colon_scalar_slot_use_bare_read/ ? "__REWRITE_OK__\n" : "__REWRITE_BAD__$rewritten\n";
 print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_AFTER_REWRITE__\n" : "__TRACE_STILL_UNLOADED_AFTER_REWRITE__\n";
 PERL
 

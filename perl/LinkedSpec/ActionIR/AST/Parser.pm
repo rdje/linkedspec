@@ -240,7 +240,7 @@ sub _parse_expr_without_chain {
  return $shape if $shape;
 
  if ($trimmed =~ /\A:([A-Za-z_][A-Za-z0-9_]*)\z/o) {
-  return _node('scalar_slot', $trimmed, $start, $end, name => $1)
+  return _node('colon_scalar_slot_removed', $trimmed, $start, $end, name => $1)
  }
 
  my $control = _parse_control_flow_expr($trimmed, $start, $end);

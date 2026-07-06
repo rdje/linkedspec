@@ -287,19 +287,19 @@ subtest 'if-family control lowering consumes AST nodes' => sub {
             'Top',
             q{if(poison_if) { poison_then() } elseif(poison_alt) { poison_alt_body() } else { poison_else_body() }},
         );
-        like($attached, qr/if \(safe_if_flag\) \{ return \$safe_then \} elsif \(safe_alt_flag\) \{ return \$safe_alt \} else \{ return \$safe_else \}/, 'attached if/elseif/else lowers from AST condition and body fields');
+        like($attached, qr/if \(\$safe_if_flag\) \{ return \$safe_then \} elsif \(\$safe_alt_flag\) \{ return \$safe_alt \} else \{ return \$safe_else \}/, 'attached if/elseif/else lowers from AST condition and body fields');
 
         my $aliases = LinkedSpec::call_spec_handler_subst(
             'Top',
             q{when(poison_when) { poison_when_body() } otherwise { poison_otherwise_body() }},
         );
-        like($aliases, qr/if \(safe_when_flag\) \{ return \$safe_when \} else \{ return \$safe_otherwise \}/, 'when/otherwise aliases lower from AST condition and body fields');
+        like($aliases, qr/if \(\$safe_when_flag\) \{ return \$safe_when \} else \{ return \$safe_otherwise \}/, 'when/otherwise aliases lower from AST condition and body fields');
 
         my $markers = LinkedSpec::call_spec_handler_subst(
             'Top',
             q{if(poison_marker); return(poison_marker_then); elseif(poison_marker_alt); return(poison_marker_alt); else(); return(poison_marker_else); endif()},
         );
-        like($markers, qr/if \(safe_marker_flag\) \{; return \$safe_marker_then; \} elsif \(safe_marker_alt_flag\) \{; return \$safe_marker_alt; \} else \{; return \$safe_marker_else; \}/, 'marker if/elseif/else/endif lowers from AST condition fields');
+        like($markers, qr/if \(\$safe_marker_flag\) \{; return \$safe_marker_then; \} elsif \(\$safe_marker_alt_flag\) \{; return \$safe_marker_alt; \} else \{; return \$safe_marker_else; \}/, 'marker if/elseif/else/endif lowers from AST condition fields');
 
         my $all = join("\n", $attached, $aliases, $markers);
         unlike($all, qr/poison|__bad_/, 'if-family control lowering does not reuse original text or AST source fields');
@@ -408,7 +408,7 @@ subtest 'switch control lowering consumes AST nodes' => sub {
             'Top',
             q{switch(poison_kind) { case(poison_a) { poison_hit() } default { poison_miss() } }},
         );
-        like($attached, qr/my \$__ls_switch_value_\d+ = safe_kind/, 'attached switch source lowers from AST source_expr');
+        like($attached, qr/my \$__ls_switch_value_\d+ = \$safe_kind/, 'attached switch source lowers from AST source_expr');
         like($attached, qr/\$__ls_switch_value_\d+ eq "a".*return \$safe_hit/s, 'attached case lowers from AST match and body fields');
         like($attached, qr/if \(!\$__ls_switch_hit_\d+\).*return \$safe_miss/s, 'attached default lowers from AST default body');
 
@@ -416,7 +416,7 @@ subtest 'switch control lowering consumes AST nodes' => sub {
             'Top',
             q{switch(poison_marker_kind); case(poison_marker_a); return(poison_marker_hit); endcase(); default(); return(poison_marker_miss); endswitch()},
         );
-        like($markers, qr/my \$__ls_switch_value_\d+ = safe_marker_kind/, 'marker switch source lowers from AST source_expr');
+        like($markers, qr/my \$__ls_switch_value_\d+ = \$safe_marker_kind/, 'marker switch source lowers from AST source_expr');
         like($markers, qr/\$__ls_switch_value_\d+ eq "marker-a".*return \$safe_marker_hit/s, 'marker case lowers from AST match field while preserving switch stack');
         like($markers, qr/if \(!\$__ls_switch_hit_\d+\).*return \$safe_marker_miss/s, 'marker default and endswitch lower from AST markers');
 
@@ -472,7 +472,7 @@ subtest 'while control lowering consumes AST nodes' => sub {
             'Top',
             q{while(poison_condition) { poison_body() }},
         );
-        like($loop, qr/do \{ my \$__ls_while_guard_\d+ = 0; for \(; safe_condition; \)/, 'attached while condition lowers from AST condition field');
+        like($loop, qr/do \{ my \$__ls_while_guard_\d+ = 0; for \(; \$safe_condition; \)/, 'attached while condition lowers from AST condition field');
         like($loop, qr/LinkedSpec while iteration safety limit exceeded after 10000 iterations/, 'attached while keeps the existing iteration-safety guard');
         like($loop, qr/return \$safe_loop_value/, 'attached while body lowers from AST body statements');
         unlike($loop, qr/poison|__bad_/, 'while control lowering does not reuse original text or AST source fields');
@@ -531,7 +531,7 @@ subtest 'assignment and mutation statement lowering consumes AST nodes' => sub {
         };
 
         my $scalar = LinkedSpec::call_spec_handler_subst('Top', q{name = [poison]});
-        is($scalar, '@name = ($value)', 'scalar assignment operator lowers RHS from AST fields');
+        is($scalar, '$name = [$value]', 'scalar assignment operator lowers RHS from AST fields');
 
         my $append = LinkedSpec::call_spec_handler_subst('Top', q{items += poison});
         is($append, 'push @items, $value', 'array append operator lowers RHS from AST fields');
@@ -564,18 +564,18 @@ subtest 'assignment expression lowering consumes AST nodes' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(set(items, [value]))}),
-        q{return do { @items = ($value); [@items] }},
-        'direct array shape RHS assignment returns the stored array value'
+        q{return do { $items = [$value]; $items }},
+        'direct array shape RHS assignment returns the stored scalar-held array value'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(=(meta, { key => value }))}),
-        q{return do { %meta = ($key => $value); +{%meta} }},
-        'single-equals operator call returns the stored hash value'
+        q{return do { $meta = {$key => $value}; $meta }},
+        'single-equals operator call returns the stored scalar-held hash value'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(set(:payload, [value]))}),
-        q{return do { $payload = [$value]; $payload }},
-        'explicit scalar target keeps a scalar-held direct shape payload'
+        q{return do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read"; undef }},
+        'retired colon scalar target reports the bare-read migration diagnostic'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(items += value)}),
@@ -651,7 +651,7 @@ subtest 'statement helper-call lowering consumes AST call nodes' => sub {
         };
 
         my $assign = LinkedSpec::call_spec_handler_subst('Top', q{set(name, [poison])});
-        is($assign, '@name = ($value)', 'set statement lowers from AST call args');
+        is($assign, '$name = [$value]', 'set statement lowers from AST call args');
 
         my $set_key = LinkedSpec::call_spec_handler_subst('Top', q{set_key(hash(meta), poison_key, poison_value)});
         is($set_key, '$meta{$key} = $value', 'set_key statement lowers target/key/value from AST call args');
@@ -713,7 +713,7 @@ subtest 'non-call value lowering consumes AST nodes' => sub {
 
         my $shape = LinkedSpec::call_spec_handler_subst(
             'Top',
-            q{return([value, true, foo["a"][:i], { key => value }])},
+            q{return([value, true, foo["a"][i], { key => value }])},
         );
         is(
             $shape,
@@ -757,13 +757,13 @@ subtest 'value-only helper-call lowering consumes AST call nodes' => sub {
                     ],
                 };
             }
-            if ($expr eq 'num_add(:n,num_mul(2,3))') {
+            if ($expr eq 'num_add(n,num_mul(2,3))') {
                 return {
                     kind => 'call',
                     name => 'num_add',
                     source => '__bad_num_outer_host_call__()',
                     args => [
-                        { kind => 'scalar_slot', name => 'n', source => ':n' },
+                        { kind => 'variable', name => 'n', source => 'n' },
                         {
                             kind => 'call',
                             name => 'num_mul',
@@ -784,7 +784,7 @@ subtest 'value-only helper-call lowering consumes AST call nodes' => sub {
         like($string_call, qr/\$__ls_lower/, 'AST helper-call lowering recursively lowers nested value-only calls');
         unlike($string_call, qr/__bad_(?:outer|inner)_host_call__/, 'AST helper-call lowering does not reuse fake source text for supported calls');
 
-        my $numeric_call = LinkedSpec::call_spec_handler_subst('Top', q{return(num_add(:n,num_mul(2,3)))});
+        my $numeric_call = LinkedSpec::call_spec_handler_subst('Top', q{return(num_add(n,num_mul(2,3)))});
         like($numeric_call, qr/\$__ls_num_add_sum/, 'AST helper-call lowering preserves the outer numeric helper output');
         like($numeric_call, qr/\$__ls_num_mul_product/, 'AST helper-call lowering recursively lowers nested numeric helper calls');
         unlike($numeric_call, qr/__bad_num_(?:outer|inner)_host_call__/, 'AST helper-call lowering preserves compatibility only for unsupported argument calls');

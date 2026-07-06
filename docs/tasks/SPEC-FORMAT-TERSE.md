@@ -6,7 +6,16 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-06` (**`.15.2.4` DONE; current source/corpus/docs migration to bare value reads.
+- Last updated: `2026-07-06` (**`.15.3` DONE; Perl reference `:name` hard-retired. Perl ActionIR parsing/lowering,
+  rewrite diagnostics, and EmitContext compatibility no longer accept colon scalar slots as successful reads or
+  targets; a retired `:name` form now produces the unsupported helper sentinel
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read`. The remaining current Perl fixture
+  surface was migrated to bare reads, `scalar_slot_fallback` trace/declaration behavior is gone, and focused
+  ActionIR/trace tests plus full phase0 (`env PERL5LIB= perl -Iperl t/phase0_regression.t`, `1..1022`) PASS.
+  Follow-on fixes preserved current bare-read semantics for optional-scope `if`/`switch` forms, logical `or`/`and`
+  conditions, `entry_text()` / `match_text()` direct value lowering outside user-function bodies, assignment-source
+  passthrough, flow RHS lowering, and scalar-held hash `count_keys(...)`. Frontier -> `.15.4` (Rust
+  `Expr::ScalarSlot` removal). Prior **`.15.2.4` DONE; current source/corpus/docs migration to bare value reads.
   Shipped specs, root corpus inputs, generated Rust oracle inputs, and mdBook examples now avoid live `:name`
   scalar-slot reads; regenerated 93-fixture oracle expected JSON and manifest are unchanged. Full phase0 PASS
   (`1..1022`), Rust corpus oracle PASS, mdBook PASS, diff check PASS, and the current-surface scalar-slot residue
@@ -14,8 +23,7 @@
   fixed signoff boundaries: parser-backed `set(...)` AST reconstruction, `split_tagged_records(...)` source-arg
   preservation, copy-return payload classification, initialized declare/type-memory tracking, Rust action-edge
   child-return publication order, descriptor scalar bare reads coexisting with same-name aggregate accumulators,
-  and `array(retv)` vs `[retv]` constructor semantics. Frontier -> `.15.3` (Perl `:name` removal). Prior
-  **`.15.2.3` DONE; Rust parity and oracle alignment. Rust now treats bare
+  and `array(retv)` vs `[retv]` constructor semantics. Prior **`.15.2.3` DONE; Rust parity and oracle alignment. Rust now treats bare
   switch subjects, numeric/comparison helper args, and `if(...)` conditions as value-position variable reads while
   keeping bare switch case labels literal tags (`switch(kind)` reads scalar `kind`; `case(foo)` matches `"foo"`,
   and `case(:foo)` still evaluates the scalar slot during the transition). Perl inline value `switch(...)` case
@@ -3550,14 +3558,33 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.15.2.4 - migrate current sources to bare reads`
 
 - ID: `SPEC-FORMAT-TERSE.15.3`
-  Status: `pending` (runs AFTER `.15.2.4` source migration so no current source uses `:name`)
+  Status: `done` (2026-07-06)
   Goal: Remove Perl reference `:name` scalar-slot parsing/lowering ENTIRELY (user directive 2026-07-05: `:name`
     shall NOT be supported). No compatibility retention.
   Acceptance: `:name` in a value position becomes a parse/lowering error carrying a bare-read migration
     diagnostic; no current test depends on `:name`; bare names remain valid value reads in all value positions
     (guaranteed by `.15.2.2`), and hash-literal key token behavior is unchanged.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-06.** Perl ActionIR AST parsing now classifies `:name` as retired
+    `colon_scalar_slot_removed` instead of `scalar_slot`, and all Perl lowering paths emit the unsupported helper
+    sentinel `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read` instead of a successful
+    scalar read/target. `RuleIR::EmitContext` no longer auto-declares colon scalar slots or traces
+    `scalar_slot_fallback`; exact retired forms are diagnosed by the rewrite pipeline. Active Perl tests and phase0
+    fixtures were migrated to bare reads. Focused tests PASS:
+    `prove -q -Iperl t/actionir_ast_parser.t t/trace_emit_context_bridge.t t/trace_actionir_pipeline.t
+    t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t`.
+    Full phase0 PASS with the required clean environment:
+    `env PERL5LIB= perl -Iperl t/phase0_regression.t` reaches plan `1..1022`.
+
+    Hard-retirement exposed and fixed several bare-read seams that `:name` compatibility had hidden:
+    - optional-scope stripping no longer eats real bare conditions in `if(on, ...)`, `elseif(mid, ...)`, or
+      `switch(name, case(...), default(...))`;
+    - logical `or(...)` / `and(...)` preserve all bare operands as flow values;
+    - `entry_text()` / `match_text()` lower directly in ordinary value positions but remain unresolved inside
+      user-function bodies until staged function-body parsing owns them;
+    - unchanged/reserved assignment-source tokens delegate to the assignment-source lowerer instead of short-circuiting;
+    - flow RHS lowering can be used for flow-valued mutation sources when available; and
+    - `count_keys(snapshot)` counts scalar-held hashrefs instead of forcing named-hash storage.
+  Commit: `SPEC-FORMAT-TERSE.15.3 - retire Perl colon scalar slots`
 
 - ID: `SPEC-FORMAT-TERSE.15.4`
   Status: `pending` (runs AFTER `.15.3`)
@@ -3585,8 +3612,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | 2 | `SPEC-FORMAT-TERSE.15.2.2` | `done` | Perl engine: ONE FlowExpr change (bare→`$name` at passthrough) closed switch/num/if gaps; ControlFlow keeps case labels literal; full phase0 green 1021/1-baseline, `:name` still compat |
 | 3 | `SPEC-FORMAT-TERSE.15.2.3` | `done` | Rust engine parity for bare reads in all value positions; Rust corpus oracle now 93 fixtures |
 | 4 | `SPEC-FORMAT-TERSE.15.2.4` | `done` | current specs/corpus/oracle/mdBook/KM migrated to bare reads with no oracle expected-output drift |
-| 5 | `SPEC-FORMAT-TERSE.15.3` | `pending` | remove Perl `:name` parsing/lowering entirely (no compat) after sources are bare |
-| 6 | `SPEC-FORMAT-TERSE.15.4` | `pending` | remove Rust `:name` support entirely (no compat) |
+| 5 | `SPEC-FORMAT-TERSE.15.3` | `done` | Perl `:name` parsing/lowering is hard-retired; current Perl fixtures use bare reads and retired colon slots emit a migration diagnostic sentinel |
+| 6 | `SPEC-FORMAT-TERSE.15.4` | `pending` | next: remove Rust `:name` / `Expr::ScalarSlot` support entirely (no compat) |
 | 7 | `SPEC-FORMAT-TERSE.15.5` | `pending` | final no-drift closeout for colon scalar-slot removal |
 | 8 | `SPEC-FORMAT-TERSE.8` | `pending` | user directive removes all remaining legacy compatibility helper support; in-flight helper-removal work must stay aligned with `.11`/`.15` semantics |
 | 9 | `SPEC-FORMAT-TERSE.9` | `pending` | user directive replaces Perlish hash-literal `=>` association with terse `:` association after helper-removal / assignment-semantics coordination lands |
@@ -4553,6 +4580,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-06` | `SPEC-FORMAT-TERSE.15.3` | Perl ActionIR AST/lowering/rewrite/EmitContext retirement of colon scalar slots; active fixture migration to bare reads; focused ActionIR/trace tests; `perl -c -Iperl` syntax checks on touched Perl/test modules; full phase0 with `PERL5LIB=` cleared; mdBook/KM/live-doc updates; memory/doctrine/diff checks | Perl `:name` no longer parses or lowers as a successful scalar slot. Retired colon scalar slots produce `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read`; `scalar_slot_fallback` trace/declaration behavior is gone. Bare value reads remain valid across the Perl reference, including inline `if`/`elseif`/`switch` conditions, logical `or`/`and` operands, ordinary `entry_text()` / `match_text()` value helpers, assignment RHS passthrough, flow RHS values, and scalar-held hash `count_keys(...)`. Focused tests pass and full phase0 reaches plan `1..1022`. Frontier becomes `.15.4` for Rust `Expr::ScalarSlot` removal. |
 | `2026-07-06` | `SPEC-FORMAT-TERSE.15.2.4` | Current shipped-spec/root-corpus/generated-oracle/mdBook migration; `env PERL5LIB= perl -Iperl tools/gen_oracle_corpus.pl`; no Rust oracle `expected.json`/`manifest.json` diff; Rust corpus oracle over **93** fixtures; full phase0 with `PERL5LIB=` cleared; `mdbook build docs/linkedspec-book`; `git diff --check`; current-surface scalar-slot residue scan; KM/live-doc updates | Current sources now use bare value reads instead of live `:name` scalar-slot reads, with rule-mode labels, regex syntax, and historical literal strings treated as scan exclusions. The migration preserved oracle expected JSON, and fixed the load-bearing seams exposed by source migration: control-flow `set(...)` reconstruction, `split_tagged_records(...)` source-arg preservation, copy-return payload classification, declaration/type-memory tracking, Rust action-edge child-return publication order, descriptor scalar bare reads with same-name aggregate accumulators, and `array(retv)` versus `[retv]` constructor semantics. Frontier becomes `.15.3`. |
 | `2026-07-06` | `SPEC-FORMAT-TERSE.15.2.3` | Focused Rust `.15.2.3` integration tests; `perl -c -Iperl perl/LinkedSpec/ActionIR/MethodLowering.pm`; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `env PERL5LIB= perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle over **93** fixtures; `cargo fmt --manifest-path rust/Cargo.toml --all --check`; full phase0 with `PERL5LIB=` cleared; mdBook/KM/live-doc updates | Rust parity for bare reads in switch subjects, numeric/comparison args, and `if(...)` conditions landed while preserving literal bare switch case labels. Inline Perl switch case labels were aligned to the same rule. Regenerated oracle corpus includes `terse_15_2_3_bare_value_reads_and_case_labels`; `specs/spec.spec` aggregate initialization now uses explicit `array(...)` targets after `.11` duck-typed assignment. Rust corpus oracle passes **93** fixtures. Phase0 reaches `ok 1022` with **1021 pass** and only baseline `not ok 796`. Frontier becomes `.15.2.4`. |
 | `2026-07-05` | `SPEC-FORMAT-TERSE.15.2 re-scope` | Recovered a prior session's uncommitted intermingled `.15.2/.15.3/.15.4/.8/.9` work onto branch `recovery/terse-15-uncommitted-20260705` and reset `main` to clean `104088e5`; applied the `:name`->bare converter to `specs/*.spec` + `tools/gen_oracle_corpus.pl`, regenerated the oracle corpus, and read the byte-identity gate; direct reference-engine probe (`LinkedSpec::Get`) on `switch(:kind)` vs `switch(kind)`; reverted all source edits back to clean `104088e5`; task-tree engine-first re-sequence | **Source-first migration is NOT output-preserving at `104088e5`.** Bare identifiers are not read as bound variable values in `switch(...)`, numeric callees, `if(...)` conditions, or the second arg of all-bare `push(A,B)`; direct probe: `switch(:kind)`->`'good'` but `switch(kind)`->`'def'`. The byte-identity gate flagged `spec_spec_*`/`ebnf_*` (variable/rule-name collisions) plus the all-bare `push`/`switch`/`while` inline fixtures as load-bearing (bare != `:name`), while most shipped specs (`ds_vhistory`, `lib_reader`, `pplugin`, `simenv`, `tablegrep`, `tkgui`, `vhdl`) were output-preserving. `:name` only worked as variable-vs-rule disambiguation. `.15.2` re-scoped ENGINE-FIRST (`.15.2.1` design, `.15.2.2` Perl, `.15.2.3` Rust, `.15.2.4` migration); `.15.3`/`.15.4` then remove `:name` entirely with no compat (user directive: `:name` shall not be supported). Frontier becomes `.15.2.1`. Baseline phase0 = 1021 pass / 1 pre-existing unrelated fail (test 796 `emit_context_lowers_split_tagged_records_helper`). No committed engine/source behavior changed. See ADR `0019`, KM card `terse-bare-read-value-position-gap`. |
@@ -4675,6 +4703,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.15.3` | `SPEC-FORMAT-TERSE.15.3 - retire Perl colon scalar slots` | Perl `:name` now emits a retired colon-slot diagnostic sentinel instead of a successful scalar read/target; `scalar_slot_fallback` is gone; active Perl tests/fixtures use bare reads; full phase0 passes; frontier becomes `.15.4`. |
+| `SPEC-FORMAT-TERSE.15.2.4` | `SPEC-FORMAT-TERSE.15.2.4 - migrate current sources to bare reads` | Current specs/corpus/oracle/mdBook/KM surfaces use bare reads instead of live `:name`; oracle expected JSON stayed unchanged over 93 fixtures; frontier becomes `.15.3`. |
 | `SPEC-FORMAT-TERSE.15.2.3` | `SPEC-FORMAT-TERSE.15.2.3 - align Rust bare-read switch parity` | Rust bare value reads now match Perl in switch/num/if positions while bare case labels remain literal; inline Perl switch case labels were aligned; `specs/spec.spec` aggregate initialization corrected; corpus oracle is 93 fixtures; frontier becomes `.15.2.4`. |
 | `SPEC-FORMAT-TERSE.15.2 re-scope` | `SPEC-FORMAT-TERSE.15.2 - reorder .15 to engine-first (bare-read gap)` | Recovery + finding: prior uncommitted mess preserved on `recovery/terse-15-uncommitted-20260705`; proved bare reads are not honored in all value positions at `104088e5`, so `.15.2` is re-sequenced engine-first (`.15.2.1`-`.15.2.4`) and `.15.3`/`.15.4` remove `:name` with no compat. No engine/source behavior changed. Frontier becomes `.15.2.1`. |
 | `SPEC-FORMAT-TERSE.15.1` | `SPEC-FORMAT-TERSE.15.1 - split colon scalar-slot removal` | Audit/split only: `:name` removal spans specs, corpus, oracle fixtures, mdBook, Knowledge Map facts, tests, generator sources, and Perl/Rust parser/runtime support. Frontier becomes `.15.2` for current-facing migration. |

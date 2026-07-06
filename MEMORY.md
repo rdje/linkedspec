@@ -18,25 +18,26 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.15.2.4` — current shipped specs, root corpus inputs, generated Rust
-  oracle inputs, and mdBook examples now use bare value reads instead of `:name` scalar-slot reads; expected JSON
-  stayed unchanged across the regenerated **93** fixture oracle corpus.
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.15.3` — Perl reference `:name` scalar-slot parsing/lowering is
+  hard-retired; retired colon slots emit
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read` instead of a successful read/target, and
+  active Perl tests/fixtures use bare reads.
 - prior_leaf: `REPO-HYGIENE.2` (commit `cf0df422`) — `.claude/projects/` local agent state ignored; `rgx` remains a
   tracked submodule/gitlink with `.gitmodules` `ignore = dirty`.
-- latest_commit: this slice commit `SPEC-FORMAT-TERSE.15.2.4 - migrate current sources to bare reads`; parent
-  `cf0df422`. **Branch was 310 commits ahead of origin before this commit — over the documented 300 push threshold;
+- latest_commit: this slice commit `SPEC-FORMAT-TERSE.15.3 - retire Perl colon scalar slots`; parent
+  `8f4354f6`. **Branch was 311 commits ahead of origin before this commit — over the documented 300 push threshold;
   still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.15.3` (Perl reference removal/hard-retirement of `:name`
-  scalar-slot parsing/lowering) and it must not start until the `.15.2.4` commit workflow is complete and status is
+- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.15.4` (Rust `Expr::ScalarSlot` parser/runtime removal) and it
+  must not start until the `.15.3` commit workflow is complete and status is
   handoff-ready.
-- next_action: Finish `.15.2.4` commit workflow, clear `git_message_brief.txt`, and verify `git status` is clean.
-  Then PNT may pick `.15.3`.
+- next_action: Finish `.15.3` commit workflow, clear `git_message_brief.txt`, and verify `git status` is clean.
+  Then PNT may pick `.15.4`.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.
-- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests (e.g. 102 pplugin lazy-load) fail on the stale checkout. Full phase0 needs the **10-min timeout** (`timeout:600000`), else it caps mid-run (exit 144/143). **Generated Perl handlers are NON-strict.** **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`). Baseline phase0 = **1021 pass / 1 pre-existing unrelated fail** (test 796 `emit_context_lowers_split_tagged_records_helper`). oracle = `tools/gen_oracle_corpus.pl` (per-case fork/SIGKILL; ~90 fixtures → **run in background**; `manifest.json` + drift guards). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`. Rust numbered capture helpers are captures-only (`0`=first capture); whole match = `entry_text()`/`match_text()`.
+- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests (e.g. 102 pplugin lazy-load) fail on the stale checkout. Full phase0 needs the **10-min timeout** (`timeout:600000`), else it caps mid-run (exit 144/143). **Generated Perl handlers are NON-strict.** **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`). Current phase0 reaches **PASS `1..1022`**. oracle = `tools/gen_oracle_corpus.pl` (per-case fork/SIGKILL; **93** fixtures → **run in background**; `manifest.json` + drift guards). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`. Rust numbered capture helpers are captures-only (`0`=first capture); whole match = `entry_text()`/`match_text()`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Deferred lanes behind `.15`: `.8` (legacy-helper removal), `.9` (hash
   `=>`→`:`), `.10`/`.12`/`.13`/`.14` backlog; `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`,
   `SPEC-LANG-REFERENCE`.
-- blockers: none for ownership. in_flight_uncommitted: `.15.2.4` commit workflow until committed; do not pivot.
+- blockers: none for ownership. in_flight_uncommitted: `.15.3` commit workflow until committed; do not pivot.

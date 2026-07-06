@@ -29,7 +29,7 @@ and root corpus examples should use:
 - `items = []` or `items += value`;
 - `meta = { ... }` or `meta[key] = value`;
 - `set(...)`;
-- typed wrappers and `:name` where an explicit read boundary is needed.
+- bare value reads, with `array(...)` / `hash(...)` wrappers where an explicit aggregate-storage boundary is needed.
 
 Future removal or diagnostics must be owned by a new focused leaf because it would be a
 compatibility break across Perl, Rust, fixtures, and the book.

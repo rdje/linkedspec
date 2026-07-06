@@ -1344,35 +1344,33 @@ sub rewrite_action_code_for_compat {
      : 0,
    },
   );
-  local $__ls_current_bare_type_memory = $compat_bare_type_memory;
-  my $trimmed = _trim_action_ir_value($code);
-  if (defined($trimmed) && $trimmed =~ /^:[A-Za-z_][A-Za-z0-9_]*$/o) {
-   my $lowered = _lower_method_value_expr($trimmed);
-   if (defined($lowered) && length($lowered)) {
-    _trace_emit_context_decision(
-     phase => 'rewrite_action_code_for_compat',
-     label => $label,
-     decision => 'scalar_slot_fallback',
-     taken => 1,
-     context => {
-      raw => $trimmed,
-      lowered => $lowered,
-     },
-    );
-    _trace_emit_context_exit(
-     $scope,
-     { status => 'ok', label => $label, path => 'scalar_slot_fallback', rewritten_len => length($lowered) },
-    );
-    return $lowered
-   }
-  }
-  _trace_emit_context_decision(
-   phase => 'rewrite_action_code_for_compat',
-   label => $label,
-   decision => 'scalar_slot_fallback',
-   taken => 0,
-   context => {
-    raw => defined($trimmed) ? $trimmed : '<undef>',
+	  local $__ls_current_bare_type_memory = $compat_bare_type_memory;
+	  my $trimmed = _trim_action_ir_value($code);
+	  if (defined($trimmed) && $trimmed =~ /^:[A-Za-z_][A-Za-z0-9_]*$/o) {
+	   my $diagnostic = 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read"; undef }';
+	   _trace_emit_context_decision(
+	    phase => 'rewrite_action_code_for_compat',
+	    label => $label,
+	    decision => 'retired_colon_scalar_slot',
+	    taken => 1,
+	    context => {
+	     raw => $trimmed,
+	     lowered => $diagnostic,
+	    },
+	   );
+	   _trace_emit_context_exit(
+	    $scope,
+	    { status => 'ok', label => $label, path => 'retired_colon_scalar_slot', rewritten_len => length($diagnostic) },
+	   );
+	   return $diagnostic
+	  }
+	  _trace_emit_context_decision(
+	   phase => 'rewrite_action_code_for_compat',
+	   label => $label,
+	   decision => 'retired_colon_scalar_slot',
+	   taken => 0,
+	   context => {
+	    raw => defined($trimmed) ? $trimmed : '<undef>',
    },
   );
   if (
@@ -1785,13 +1783,6 @@ sub _collect_auto_working_var_decls {
   return if $seen{$dedup_key}++;
   push @collected, { sigil => $sigil, name => $name };
  };
- my $record_scalar_slot_read = sub {
-  my ($expr) = @_;
-  my $value = _trim_action_ir_value($expr);
-  return 0 unless defined($value) && $value =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o;
-  $record->('$', $1);
-  return 1;
- };
  my $record_direct_access_bare_path_atoms = sub {
   my ($expr) = @_;
   my $trimmed = _trim_action_ir_value($expr);
@@ -1859,7 +1850,6 @@ sub _collect_auto_working_var_decls {
   my ($member_expr) = @_;
   my $member = _trim_action_ir_value($member_expr);
   return unless defined($member) && length($member);
-  return if $record_scalar_slot_read->($member);
   $record->('$', $member) if $member =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   $record_direct_access_bare_path_atoms->($member);
   $collect_shape_literal_scalar_reads->($member);
@@ -1916,7 +1906,6 @@ sub _collect_auto_working_var_decls {
    return unless defined($last) && length($last);
   }
 
-  return if $record_scalar_slot_read->($last);
   $record->('$', $last) if $last =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   $record_direct_access_bare_path_atoms->($last);
   $collect_shape_literal_scalar_reads->($last);
@@ -1928,7 +1917,6 @@ sub _collect_auto_working_var_decls {
   my $value = _trim_action_ir_value($value_expr);
   return unless defined($value) && length($value);
   $collect_ast_value_refs->($value) if ref($collect_ast_value_refs) eq 'CODE';
-  return if $record_scalar_slot_read->($value);
   $record->('$', $value) if $value =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   $record_direct_access_bare_path_atoms->($value);
   $collect_shape_literal_scalar_reads->($value);
@@ -2028,10 +2016,7 @@ sub _collect_auto_working_var_decls {
   my ($target_expr, $source_expr) = @_;
   my $target = _trim_action_ir_value($target_expr);
   return unless defined($target) && length($target);
-  if ($target =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o) {
-   $record->('$', $1);
-   return;
-  }
+  return if $target =~ /^:[A-Za-z_][A-Za-z0-9_]*$/o;
   return unless $target =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
   $record->('$', $target);
  };
@@ -2079,10 +2064,12 @@ sub _collect_auto_working_var_decls {
   return unless ref($node) eq 'HASH';
   my $kind = $node->{kind} // '';
 
-  if ($kind eq 'variable') {
-   $record->('$', $node->{name}) if $bare_scalar_ok;
-   return;
-  }
+	  if ($kind eq 'variable') {
+	   $record->('$', $node->{name}) if $bare_scalar_ok;
+	   return;
+	  }
+
+	  return if $kind eq 'colon_scalar_slot_removed';
 
  if ($kind eq 'assign_scalar') {
    $record->('$', $node->{name});

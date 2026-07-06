@@ -34,10 +34,11 @@ set(meta, { key => value })
 set(hash(meta), { key => value })
 ```
 
-The scalar-slot shorthand was the scalar payload boundary:
+Current Rust duck-typed assignment stores a whole shape payload through a bare target:
 
 ```text
-set(:payload, [value])
+payload = [value]
+set(payload, [value])
 ```
 
 Current Rust behavior no longer retags bare targets from RHS shape. Bare `items = [value]`, `set(items, [value])`,

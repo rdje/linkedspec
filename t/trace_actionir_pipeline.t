@@ -51,9 +51,9 @@ sub _rewrite_with_trace {
 subtest 'canonical return traces scanner, canonical queue, and rewrite decisions' => sub {
  plan tests => 9;
 
- my ($rewritten, $diag, $trace) = _rewrite_with_trace('return(:name)');
+ my ($rewritten, $diag, $trace) = _rewrite_with_trace('return(name)');
 
- is($rewritten, 'return $name', 'return(:name) still lowers through the canonical pipeline');
+ is($rewritten, 'return $name', 'return(name) lowers through the canonical pipeline');
  is($diag->{helper_action_ir_count}, 1, 'helper event count is unchanged');
  is($diag->{canonical_action_ir_fallback_count}, 0, 'canonical return has no raw fallback');
  like($trace, qr/ENTER LinkedSpec::ActionIR::RewritePipeline::rewrite_action_code_with_diagnostics:Top/, 'trace enters the ActionIR rewrite-pipeline owner boundary');
@@ -79,7 +79,7 @@ subtest 'raw Perl fallback traces canonical and rewrite fallback decisions' => s
 subtest 'unsupported helper diagnostics trace unresolved-helper handoff' => sub {
  plan tests => 5;
 
- my ($rewritten, $diag, $trace) = _rewrite_with_trace('return(mystery(:name))');
+ my ($rewritten, $diag, $trace) = _rewrite_with_trace('return(mystery(name))');
 
  like($rewritten, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:mystery/, 'unsupported helper sentinel is still emitted');
  is($diag->{unresolved_helper_count}, 1, 'unresolved helper count is unchanged');
@@ -112,7 +112,7 @@ require LinkedSpec::ActionIR::Diagnostics;
 require LinkedSpec::ActionIR::RewritePipeline;
 print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_EAGER__\n" : "__TRACE_STILL_LAZY__\n";
 require LinkedSpec::RuleIR::EmitContext;
-my $rewritten = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat("Top", "return(:name)");
+my $rewritten = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat("Top", "return(name)");
 print $rewritten eq 'return $name' ? "__REWRITE_OK__\n" : "__REWRITE_BAD__$rewritten\n";
 print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_AFTER_REWRITE__\n" : "__TRACE_STILL_UNLOADED_AFTER_REWRITE__\n";
 PERL

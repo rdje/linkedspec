@@ -46,10 +46,12 @@ Non-shape RHS values remain scalar assignment:
 name = value     # $name = $value
 ```
 
-Use an explicit scalar target to store a whole shape payload in a scalar:
+Under the current duck-typed assignment contract, a bare target stores a whole shape payload as a scalar-held typed
+value:
 
 ```text
-set(:payload, [value])          # $payload = [$value]
+payload = [value]               # $payload = [$value]
+set(payload, [value])           # $payload = [$value]
 ```
 
 Historical declaration initializers used the same member-lowering path, but authored specs now prefer direct

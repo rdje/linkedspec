@@ -158,7 +158,6 @@ sub _extract_scalar_symbol_name {
  return undef unless defined $token;
  $token = $trim_action_ir_value->($token);
  return undef unless defined($token) && length($token);
- return $1 if $token =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o;
  return $1 if $token =~ /^(\w+)$/o;
  return undef
 }
@@ -528,7 +527,7 @@ sub _infer_scalar_container_kind {
 
 #------------------------------------------------------------------------------
 # Function: _lower_source_slot_bare_scalar_read_expr
-# Purpose : Lower one accepted scalar source-slot identifier to `$NAME`.
+# Purpose : Lower one accepted bare scalar source-slot identifier to `$NAME`.
 # Args    : ($expr, $deps)
 # Returns : Perl scalar read expression, or undef for non-source-slot bare reads
 #------------------------------------------------------------------------------
@@ -546,10 +545,9 @@ sub _lower_source_slot_bare_scalar_read_expr {
  return undef unless defined $expr;
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
+ return undef if $trimmed =~ /^:[A-Za-z_][A-Za-z0-9_]*$/o;
  my $name;
- if ($trimmed =~ /^:([A-Za-z_][A-Za-z0-9_]*)$/o) {
-  $name = $1;
- } elsif ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
+ if ($trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
   $name = $1;
  } else {
   return undef;

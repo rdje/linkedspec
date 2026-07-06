@@ -51,14 +51,14 @@ subtest 'MethodLowering traces value helper family and unsupported helper decisi
  plan tests => 6;
 
  my ($trim, $trim_trace) = _owner_call_with_trace(
-  'method_lowering',
-  '_lower_method_value_expr',
-  q{trim(:name)},
+	  'method_lowering',
+	  '_lower_method_value_expr',
+	  q{trim(name)},
  );
  my ($unsupported, $unsupported_trace) = _owner_call_with_trace(
-  'method_lowering',
-  '_lower_method_value_expr',
-  q{unknown_helper(:name)},
+	  'method_lowering',
+	  '_lower_method_value_expr',
+	  q{unknown_helper(name)},
  );
 
  is(
@@ -106,10 +106,10 @@ subtest 'MethodLowering traces receiver-chain family transitions' => sub {
   q{name.trim().split(",").count()},
  );
 
- is($string_chain, q{count(split(trim(:name), ","))}, 'string receiver chain normalization is unchanged');
+ is($string_chain, q{count(split(trim(name), ","))}, 'string receiver chain normalization uses bare reads');
  like($string_trace, qr/DECISION actionir:method_lowering:normalize_string_receiver_value_chain_expr:receiver_chain:string_receiver_chain => TAKEN/, 'trace reports string receiver chain');
  like($string_trace, qr/DECISION actionir:method_lowering:normalize_string_receiver_value_chain_expr:receiver_chain:string_chain_step => TAKEN/, 'trace reports string chain step');
- is($number_chain, q{num_gt(num_add(:count, 1), 5)}, 'number receiver chain normalization is unchanged');
+ is($number_chain, q{num_gt(num_add(count, 1), 5)}, 'number receiver chain normalization uses bare reads');
  like($number_trace, qr/DECISION actionir:method_lowering:normalize_number_receiver_value_chain_expr:receiver_chain:number_receiver_chain => TAKEN/, 'trace reports number receiver chain');
  like($number_trace, qr/DECISION actionir:method_lowering:normalize_number_receiver_value_chain_expr:receiver_chain:number_chain_step => TAKEN/, 'trace reports number chain step');
  is($hash_chain, q{join_values(",", sorted_keys(hash(meta)))}, 'hash receiver chain normalization is unchanged');
@@ -127,10 +127,10 @@ subtest 'MethodLowering traces assignment and mutation decisions' => sub {
  plan tests => 14;
 
  my ($assign, $assign_trace) = _owner_call_with_trace(
-  'method_lowering',
-  '_lower_assign_statement',
-  'items',
-  q{["a", :name]},
+	  'method_lowering',
+	  '_lower_assign_statement',
+	  'items',
+	  q{["a", name]},
  );
  my ($scalar, $scalar_trace) = _owner_call_with_trace(
   'method_lowering',
@@ -138,24 +138,24 @@ subtest 'MethodLowering traces assignment and mutation decisions' => sub {
   q{name = "x"},
  );
  my ($append, $append_trace) = _owner_call_with_trace(
-  'method_lowering',
-  '_lower_array_append_operator_statement',
-  q{items += :name},
+	  'method_lowering',
+	  '_lower_array_append_operator_statement',
+	  q{items += name},
  );
  my ($hash_assign, $hash_assign_trace) = _owner_call_with_trace(
-  'method_lowering',
-  '_lower_hash_index_assignment_operator_statement',
-  q{meta["k"] = :name},
+	  'method_lowering',
+	  '_lower_hash_index_assignment_operator_statement',
+	  q{meta["k"] = name},
  );
  my ($array_end, $array_end_trace) = _owner_call_with_trace(
-  'method_lowering',
-  '_lower_array_end_mutation_method_statement',
-  q{items.push_back(:name)},
+	  'method_lowering',
+	  '_lower_array_end_mutation_method_statement',
+	  q{items.push_back(name)},
  );
 
- is($assign, q{@items = ("a", $name)}, 'bare array-shape assignment lowering is unchanged');
+ is($assign, q{$items = ["a", $name]}, 'bare direct-shape assignment stores the scalar-held value');
  like($assign_trace, qr/ENTER LinkedSpec::ActionIR::MethodLowering::lower_assign_statement:assignment/, 'trace reports lower_assign_statement enter scope');
- like($assign_trace, qr/DECISION actionir:method_lowering:lower_assign_statement:assignment:bare_target_array_shape => TAKEN/, 'trace reports bare target array-shape assignment decision');
+ like($assign_trace, qr/DECISION actionir:method_lowering:lower_assign_statement:assignment:bare_value_target => TAKEN/, 'trace reports bare value-target assignment decision');
  like($assign_trace, qr/EXIT LinkedSpec::ActionIR::MethodLowering::lower_assign_statement:assignment/, 'trace reports lower_assign_statement exit scope');
  is($scalar, q{$name = "x"}, 'scalar assignment operator lowering is unchanged');
  like($scalar_trace, qr/DECISION actionir:method_lowering:lower_scalar_assignment_operator_statement:assignment:ast_scalar_assignment_operator => TAKEN/, 'trace reports AST scalar assignment operator');
@@ -163,7 +163,7 @@ subtest 'MethodLowering traces assignment and mutation decisions' => sub {
  like($append_trace, qr/DECISION actionir:method_lowering:lower_array_append_operator_statement:assignment:ast_array_append_operator => TAKEN/, 'trace reports AST array append operator');
  like($append_trace, qr/DECISION actionir:method_lowering:lower_mutation_slot_value_expr:value:bare_scalar_read => TAKEN/, 'trace reports mutation slot scalar read');
  is($hash_assign, q{$meta{"k"} = $name}, 'hash-index assignment operator lowering is unchanged');
- like($hash_assign_trace, qr/DECISION actionir:method_lowering:lower_hash_index_assignment_operator_statement:assignment:ast_hash_index_assignment => TAKEN/, 'trace reports AST hash-index assignment');
+ like($hash_assign_trace, qr/DECISION actionir:method_lowering:lower_hash_index_assignment_operator_statement:assignment:ast_hash_or_nested_access_assignment => TAKEN/, 'trace reports AST hash-index assignment');
  is($array_end, q{push @items, $name}, 'array end-mutation method lowering is unchanged');
  like($array_end_trace, qr/DECISION actionir:method_lowering:lower_ast_array_end_mutation_method_statement:fluent_chain:ast_array_end_push_back => TAKEN/, 'trace reports AST array end-mutation method');
  like($array_end_trace, qr/DECISION actionir:method_lowering:lower_array_end_mutation_method_statement:fluent_chain:ast_array_end_mutation => TAKEN/, 'trace reports lowered array end-mutation wrapper');
@@ -176,7 +176,7 @@ subtest 'MethodLowering trace hooks keep LinkedSpec::Trace lazy until explicitly
 require LinkedSpec::ActionIR::MethodLowering;
 print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_EAGER__\n" : "__TRACE_STILL_LAZY__\n";
 require LinkedSpec::RuleIR::EmitContext;
-my $lowered = LinkedSpec::RuleIR::EmitContext::_call_actionir_owner_with_deps("method_lowering", "_lower_method_value_expr", "trim(:name)");
+my $lowered = LinkedSpec::RuleIR::EmitContext::_call_actionir_owner_with_deps("method_lowering", "_lower_method_value_expr", "trim(name)");
 print $lowered =~ /__ls_trim/ ? "__METHOD_OK__\n" : "__METHOD_BAD__$lowered\n";
 print exists($INC{"LinkedSpec/Trace.pm"}) ? "__TRACE_AFTER_LOWER__\n" : "__TRACE_STILL_UNLOADED_AFTER_LOWER__\n";
 PERL

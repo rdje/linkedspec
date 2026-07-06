@@ -7,7 +7,7 @@ answers:
   - "does set(meta, { key => value }) yield a hash value"
   - "do bare aggregate assignment targets infer array or hash kind in value positions"
   - "how do array(target) and hash(target) assignment expressions behave"
-  - "does :payload keep direct shape assignment payloads scalar"
+  - "how do direct shape assignments keep payloads scalar now"
   - "what is next after SPEC-FORMAT-TERSE.3.3.2"
 date: 2026-07-05
 status: superseded
@@ -27,8 +27,9 @@ target-kind inference part of that contract is superseded by [[terse-duck-typed-
 - Current `meta = { key => value }`, `set(meta, { key => value })`, and `=(meta, { key => value })` bind a hash
   typed value for a bare target and yield that stored value.
 - Explicit `array(items)` and `hash(meta)` targets match the direct RHS shape and yield aggregate snapshots.
-- Explicit `:payload` targets keep the scalar-slot spelling, so `set(:payload, [value])` stores and yields a
-  scalar-held array value.
+- Bare `payload = [value]` / `set(payload, [value])` now store and yield a scalar-held array value under the
+  current duck-typed assignment contract; the historical `:payload` spelling is superseded on Perl by
+  `SPEC-FORMAT-TERSE.15.3`.
 
 This leaf originally extended the then-current target-kind inference contract from statement assignments into value
 positions. The expression-valued assignment result remains current, while the storage-class inference is historical.

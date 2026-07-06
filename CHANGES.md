@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.15.3 — retire Perl colon scalar slots
+
+**Scope:** Hard-retire Perl reference `:name` scalar-slot parsing/lowering after `.15.2.4` migrated current
+sources to bare value reads. No compatibility retention.
+
+**Change:** `:name` now parses as a retired colon-scalar node and lowers to the unsupported helper sentinel
+`LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read` instead of a successful scalar read or
+assignment target. `RuleIR::EmitContext` no longer auto-declares colon scalar slots or emits
+`scalar_slot_fallback`; the rewrite pipeline handles exact retired forms through the same diagnostic sentinel.
+
+**Bare-read seams kept intact:** Active tests and fixtures moved to bare reads. The removal also locked several
+edge cases that `:name` compatibility had masked: bare inline `if`/`elseif`/`switch` conditions survive optional
+scope parsing, `or(...)`/`and(...)` keep all operands, ordinary `entry_text()` / `match_text()` value helpers lower
+directly while user-function bodies keep parser-state helpers unresolved, assignment-source passthrough delegates to
+the value lowerer, flow RHS values can use flow lowering, and `count_keys(snapshot)` counts scalar-held hashrefs.
+
+**Validation:**
+- `prove -q -Iperl t/actionir_ast_parser.t t/trace_emit_context_bridge.t t/trace_actionir_pipeline.t t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t` — PASS.
+- `env PERL5LIB= perl -Iperl t/phase0_regression.t` — PASS, reaches `1..1022`.
+
+**Frontier:** -> `.15.4` for Rust `Expr::ScalarSlot` parser/runtime retirement.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.15.2.4 — migrate current sources to bare reads
 
 **Scope:** Complete the output-preserving source/corpus/docs migration away from `:name` scalar-slot reads now that

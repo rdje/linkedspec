@@ -51,9 +51,9 @@ subtest 'FlowExpr and ValueExpr trace compact expression decisions' => sub {
  plan tests => 9;
 
  my ($flow, $flow_trace) = _owner_call_with_trace(
-  'flow_expr',
-  '_lower_flow_composite_expr',
-  q{and(is_defined(:name), str_eq(:name, "x"))},
+	  'flow_expr',
+	  '_lower_flow_composite_expr',
+	  q{and(is_defined(name), str_eq(name, "x"))},
  );
  my ($direct, $direct_trace) = _owner_call_with_trace(
   'value_expr',
@@ -61,9 +61,9 @@ subtest 'FlowExpr and ValueExpr trace compact expression decisions' => sub {
   q{items[0][idx]["name"]},
  );
  my ($source, $source_trace) = _owner_call_with_trace(
-  'value_expr',
-  '_lower_assignment_source_expr',
-  q{:name},
+	  'value_expr',
+	  '_lower_assignment_source_expr',
+	  q{name},
  );
 
  like($flow, qr/\A\(\(defined\(\$name\)\) && /, 'flow composite still lowers logical defined/string comparison expression');
@@ -73,7 +73,7 @@ subtest 'FlowExpr and ValueExpr trace compact expression decisions' => sub {
  like($direct_trace, qr/DECISION actionir:value_expr:lower_direct_nested_access_value_expr:expr:bare_index_segment => TAKEN/, 'trace reports bare index segment');
  like($direct_trace, qr/DECISION actionir:value_expr:lower_direct_nested_access_value_expr:expr:literal_key_segment => TAKEN/, 'trace reports literal key segment');
  like($direct_trace, qr/DECISION actionir:value_expr:lower_direct_nested_access_value_expr:expr:direct_access_lowered => TAKEN/, 'trace reports direct-access success');
- is($source, '$name', 'assignment source scalar-slot shorthand still lowers to scalar read');
+ is($source, '$name', 'assignment source bare read still lowers to scalar read');
  like($source_trace, qr/DECISION actionir:value_expr:lower_assignment_source_expr:source:bare_scalar_read => TAKEN/, 'trace reports assignment-source scalar read');
 };
 
@@ -86,14 +86,14 @@ subtest 'ArrayPipeline and DeclareMethod trace plan and declaration decisions' =
   q{filter_match(trim_each(items), /^a/)},
  );
  my ($decl, $decl_trace) = _owner_call_with_trace(
-  'declare_method',
-  '_lower_declare_method_statement',
-  q{declare(array, items = ["a", :name])},
+	  'declare_method',
+	  '_lower_declare_method_statement',
+	  q{declare(array, items = ["a", name])},
  );
  my ($set, $set_trace) = _owner_call_with_trace(
-  'declare_method',
-  '_lower_assign_method_statement',
-  q{set(:name, "x")},
+	  'declare_method',
+	  '_lower_assign_method_statement',
+	  q{set(name, "x")},
  );
 
  is($array, '@items = grep { $_ =~ /^a/ } map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } @items', 'array pipeline lowering is unchanged');
@@ -120,9 +120,9 @@ subtest 'ControlFlow traces attached if and inline switch decisions' => sub {
  );
  my %switch_ctx = (if_stack => [], switch_stack => [], switch_counter => 0, while_counter => 0, rewrite_rules => []);
  my ($switch_stmt, $switch_trace) = _owner_call_with_trace(
-  'control_flow',
-  '_lower_switch_flow_statement',
-  q{switch(:name, case("x", return("x")), default(return("d")))},
+	  'control_flow',
+	  '_lower_switch_flow_statement',
+	  q{switch(Top, name, case("x", return("x")), default(return("d")))},
   \%switch_ctx,
  );
 
