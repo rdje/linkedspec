@@ -19,14 +19,14 @@ use std::process::Command;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 const SIMPLE_SOURCE_EMITTER_SPEC: &str = r#"Top::
- I { declare(array, words) }
+ I { set(array(words), []) }
  /hello[ \t]+(\w+)/
- LE { push_value(array(words), match_group(0)) }
- E { return(array_copy(array(words))) }
+ LE { push(array(words), match_group(0)) }
+ E { return(copy(array(words))) }
 "#;
 
 const OR_ACODE_SOURCE_EMITTER_SPEC: &str = r#"Top::OR
- /go/ -> Done { return(concat("or-acode:", call(Done))) }
+ /go/ -> Done { return(cat("or-acode:", call(Done))) }
 
 Done:
  /go/
@@ -52,10 +52,10 @@ Second:
 "#;
 
 const AND_BCODE_SOURCE_EMITTER_SPEC: &str = r#"Top::AND
- I { declare(array, log) }
- => ChildA { push_value(array(log), retv) }
- => ChildB { push_value(array(log), retv) }
- E { return(array_copy(array(log))) }
+ I { set(array(log), []) }
+ => ChildA { push(array(log), retv) }
+ => ChildB { push(array(log), retv) }
+ E { return(copy(array(log))) }
 
 ChildA:
  /a/
@@ -69,7 +69,7 @@ ChildB:
 const OR_BCODE_SOURCE_EMITTER_SPEC: &str = r#"Top::OR
  => ChildA
  => ChildB
- E { return(concat("or-bcode:", retv)) }
+ E { return(cat("or-bcode:", retv)) }
 
 ChildA:
  /a/
@@ -94,10 +94,10 @@ ChildB::
 "#;
 
 const REP_ACODE_SOURCE_EMITTER_SPEC: &str = r#"Top::OR{2,3}
- I { declare(array, out) }
- /a/ -> A { push_value(array(out), match_text()) }
- /b/ -> B { push_value(array(out), match_text()) }
- E { return(array_copy(array(out))) }
+ I { set(array(out), []) }
+ /a/ -> A { push(array(out), match_text()) }
+ /b/ -> B { push(array(out), match_text()) }
+ E { return(copy(array(out))) }
 
 A:
  /a/
@@ -107,11 +107,11 @@ B:
 "#;
 
 const REP_BCODE_SOURCE_EMITTER_SPEC: &str = r#"Top::OR{2,3}
- I { declare(array, out) }
+ I { set(array(out), []) }
  => A
  => B
- LE { push_value(array(out), retv) }
- E { return(array_copy(array(out))) }
+ LE { push(array(out), retv) }
+ E { return(copy(array(out))) }
 
 A:&
  /a/
@@ -123,11 +123,11 @@ B:&
 "#;
 
 const REP_AND_ACODE_SOURCE_EMITTER_SPEC: &str = r#"Top::AND{2}
- I { declare(array, pairs); declare(array, pair) }
- /a/ -> A { push_value(array(pair), match_text()) }
- /b/ -> B { push_value(array(pair), match_text()) }
- IT { push_value(array(pairs), array_copy(array(pair))); set(array(pair), []) }
- E { return(array_copy(array(pairs))) }
+ I { set(array(pairs), []); set(array(pair), []) }
+ /a/ -> A { push(array(pair), match_text()) }
+ /b/ -> B { push(array(pair), match_text()) }
+ IT { push(array(pairs), copy(array(pair))); set(array(pair), []) }
+ E { return(copy(array(pairs))) }
 
 A:
  /a/
@@ -137,11 +137,11 @@ B:
 "#;
 
 const REP_AND_BCODE_SOURCE_EMITTER_SPEC: &str = r#"Top::AND{2}
- I { declare(array, groups); declare(array, group) }
- => A { push_value(array(group), retv) }
- => B { push_value(array(group), retv) }
- IT { push_value(array(groups), array_copy(array(group))); set(array(group), []) }
- E { return(array_copy(array(groups))) }
+ I { set(array(groups), []); set(array(group), []) }
+ => A { push(array(group), retv) }
+ => B { push(array(group), retv) }
+ IT { push(array(groups), copy(array(group))); set(array(group), []) }
+ E { return(copy(array(groups))) }
 
 A:&
  /a/
@@ -153,14 +153,14 @@ B:&
 "#;
 
 const REP_ZERO_PROGRESS_SOURCE_EMITTER_SPEC: &str = r#"Top::OR+
- I { declare(array, iters) }
+ I { set(array(iters), []) }
  /x*/
- LE { push_value(array(iters), "i") }
- E { return(array_copy(array(iters))) }
+ LE { push(array(iters), "i") }
+ E { return(copy(array(iters))) }
 "#;
 
 const REP_RECURSION_GUARD_SOURCE_EMITTER_SPEC: &str = r#"Top::OR+
- /x*/ -> Top { return(concat("guard:", call(Top))) }
+ /x*/ -> Top { return(cat("guard:", call(Top))) }
 "#;
 
 const GENERATED_SOURCE_CORPUS_SUBSET: &[&str] = &[

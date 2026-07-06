@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.1 — migrate helper spellings without changing aggregate storage): When
+  replacing old declaration/helper spellings in active fixtures, preserve storage intent, not just output shape.
+  `name = []` binds a scalar-held array value under the current duck-typed assignment contract; it is not the same
+  as clearing the named aggregate read or mutated by `array(name)` / `push(array(name), ...)`. For fixtures that
+  previously used `declare(array, name)` to prepare aggregate storage, use `set(array(name), [])`. The
+  source-emitter repetition snapshots caught this immediately: `pair = []` / `group = []` let the next iteration
+  append onto the old named array, while `set(array(pair), [])` and `set(array(group), [])` preserved the original
+  per-iteration snapshots.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.8.2.1 — `push_nonempty(...)` can be removed from live EBNF without inventing a
   replacement helper): For scalar capture-slice cleanup, the behavior-preserving expansion is simple and explicit:
   assign `trim(capture_slice())` once to a scalar temporary, gate on `is_nonempty(temp)`, then `push(...)` the

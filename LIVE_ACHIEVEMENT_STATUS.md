@@ -7,8 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.1 — migrate source-emitter helper fixtures**
+  (DONE; FRONTIER `.8.2.2.2` RUST INTEGRATION-TEST HELPER-STRING MIGRATION NEXT).
+
+  **Change:** Rust source-emitter smoke specs no longer use incidental `declare(...)`, `push_value(...)`,
+  `array_copy(...)`, or `concat(...)` helper spellings. They now use explicit aggregate setters,
+  `push(...)`, `copy(...)`, and `cat(...)`.
+
+  **Guard:** Repetition snapshot fixtures need `set(array(name), [])` when resetting named aggregate storage.
+  Direct `name = []` binds a scalar-held array value and does not clear the aggregate later targeted by
+  `push(array(name), ...)`.
+
+  **Verification:** Source-emitter old-helper residue scan is clean. `cargo test --manifest-path rust/Cargo.toml
+  -p linkedspec-runtime --test source_emitter` passes all **3** tests, including generated Rust parser compile/run
+  proofs.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.8.2.1 — migrate EBNF nonempty append flow**
-  (DONE; FRONTIER `.8.2.2` ACTIVE TEST/CORPUS LEGACY-HELPER MIGRATION NEXT).
+  (DONE; `.8.2.2.1` SOURCE-EMITTER HELPER-FIXTURE MIGRATION HAS SINCE CLOSED).
 
   **Change:** `specs/ebnf.spec::logging_annotation` no longer uses `push_nonempty(...)`. The optional capture span
   is now trimmed once into `logging_annotation_part`, checked with `is_nonempty(...)`, and appended with

@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.1 — migrate source-emitter helper fixtures
+
+**Scope:** Remove incidental legacy helper spellings from the Rust source-emitter smoke specs before hard-retiring
+the old helper names.
+
+**Change:** `rust/linkedspec-runtime/tests/source_emitter.rs` now uses current helper spellings in the embedded
+`.spec` fixtures: explicit aggregate initialization through `set(array(...), [])`, `push(...)` appends,
+`copy(...)` aggregate snapshots, and `cat(...)` string concatenation.
+
+**Semantic guard:** Direct `name = []` is not a replacement for resetting the named aggregate later targeted by
+`push(array(name), ...)`; the migrated fixtures use `set(array(name), [])` where the old `declare(array, name)`
+was meant to clear aggregate storage.
+
+**Validation:** A focused residue scan finds no `declare(...)`, `push_value(...)`, `array_copy(...)`,
+`hash_copy(...)`, `concat(...)`, or `push_nonempty(...)` calls in `source_emitter.rs`. `cargo test
+--manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter` passes all **3** tests, including the
+generated Rust compile/run smoke suite.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.1 — migrate EBNF nonempty append flow
 
 **Scope:** Remove the current live EBNF dependency on `push_nonempty(...)` before hard-retiring legacy helpers.
