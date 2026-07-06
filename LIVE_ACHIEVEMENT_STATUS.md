@@ -7,8 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.1 — split legacy helper retirement**
+  (DONE; FRONTIER `.8.2` CURRENT-SURFACE MIGRATION NEXT).
+
+  **Inventory:** Perl already leaves `assign(...)` raw/unlowered and emits unsupported-helper diagnostics for
+  `scalar(...)` plus `s(...)`/`a(...)`/`h(...)`. Perl still lowers declaration helpers, `concat(...)`,
+  `array_copy(...)`, `hash_copy(...)`, `push_value(...)`, and `push_nonempty(...)`. Rust still executes
+  `declare`, `array_copy`, `hash_copy`, `concat`, `push_value`, `push_nonempty`, and `array|a` / `hash|h`.
+
+  **Next:** `.8.2` owns current-source/test/corpus/doc migration before engine retirement, including a
+  behavior-preserving `push_nonempty(...)` replacement decision.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.15.5 — close colon scalar-slot drift**
-  (DONE; FRONTIER `.8` LEGACY HELPER REMOVAL NEXT).
+  (DONE; `.8.1` HAS SINCE SPLIT LEGACY HELPER REMOVAL).
 
   **Closeout:** Current shipped specs, generated corpus inputs, mdBook guidance, active tests, and non-historical
   Knowledge Map facts no longer depend on successful `:name` scalar-slot syntax. Remaining colon hits are retired

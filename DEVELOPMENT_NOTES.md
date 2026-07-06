@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.8.1 — legacy helper retirement needs a migration slice before engine removal):
+  Do not remove legacy helper arms directly. The current successful surface is uneven: Perl already treats
+  `assign(...)`, `scalar(...)`, and `s(...)`/`a(...)`/`h(...)` as raw/diagnostic, but still lowers declaration
+  helpers, `concat(...)`, `array_copy(...)`, `hash_copy(...)`, `push_value(...)`, and `push_nonempty(...)`. Rust
+  still executes `declare`, `array_copy`, `hash_copy`, `concat`, `push_value`, `push_nonempty`, and `array|a` /
+  `hash|h`. `push_nonempty(...)` is not a plain alias: it skips undef, empty strings, empty arrays, and empty
+  hashes while preserving `"0"`. Migrate or split that semantic replacement before hard-retiring helper support.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.15.5 — no-drift closeout must scan retrieval facts too):
   Closing a syntax-removal lane is not just a code/spec scan. The final `:name` sweep found no current shipped-spec,
   generated-corpus, or mdBook live examples, but it did find stale Knowledge fact-card text: a duck-typed

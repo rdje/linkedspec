@@ -266,8 +266,10 @@ DSL helper surface consistency note:
   migrated current specs/corpus/docs/KM to bare value reads with no expected-output drift, `.15.3` has
   hard-retired Perl parser/lowering support for `:name`, `.15.4` has hard-retired Rust `Expr::ScalarSlot`, and
   `.15.5` has closed the final no-drift sweep by correcting stale Knowledge fact-card examples and reconfirming
-  current specs/corpus/mdBook/tests/KM do not depend on successful `:name`. The next active terse frontier is `.8`
-  for legacy helper-removal, with `.9` pending behind it for hash-literal `:` association syntax. The Rust oracle
+  current specs/corpus/mdBook/tests/KM do not depend on successful `:name`. `.8.1` has now split legacy
+  helper-removal before behavior changes: successful remaining compatibility paths are classified, and `.8.2`
+  owns current-source/test/corpus/doc migration plus the `push_nonempty(...)` replacement decision before hard
+  retirement. `.9` remains pending behind `.8` for hash-literal `:` association syntax. The Rust oracle
   corpus is now 93 fixtures
   after `.15.2.3` added `terse_15_2_3_bare_value_reads_and_case_labels`; it had reached 92 fixtures after
   `SPEC-FORMAT-TERSE.11.4` added `terse_11_4_nested_mixed_value_path_assignment`, the Lispish fixture was

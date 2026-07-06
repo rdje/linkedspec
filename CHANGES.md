@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.8.1 — split legacy helper retirement
+
+**Scope:** Inventory and split the legacy helper-removal lane before parser/runtime behavior changes.
+
+**Result:** `.8` now has child leaves for current-source migration, Perl hard retirement, Rust hard retirement,
+docs/KM cleanup, and final no-drift closeout. The next active frontier is `.8.2`.
+
+**Ground truth:** Perl already leaves `assign(...)` raw/unlowered and emits unsupported-helper diagnostics for
+`scalar(...)` plus `s(...)`/`a(...)`/`h(...)`. Perl still successfully lowers declaration helpers,
+`concat(...)`, `array_copy(...)`, `hash_copy(...)`, `push_value(...)`, and `push_nonempty(...)`. Rust still has
+successful runtime arms for `declare`, `array_copy`, `hash_copy`, `concat`, `push_value`, `push_nonempty`, and
+`array|a` / `hash|h` wrapper aliases.
+
+**Risk owned:** `push_nonempty(...)` filters undef/empty values and has no plain `push(...)` equivalent. `.8.2`
+must either migrate current uses with identical behavior through existing terse constructs or split/define a
+replacement before support is removed.
+
+**Validation:** `LinkedSpec::call_spec_handler_subst` probe over legacy helper spellings; Rust `engine.rs` /
+`expr.rs` code reads; broad current-surface scans over specs/corpus/docs/tests/KM.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.15.5 — close colon scalar-slot drift
 
 **Scope:** Final no-drift closeout after `.15.2.4` migrated current sources to bare reads, `.15.3` retired Perl

@@ -6,7 +6,15 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-06` (**`.15.5` DONE; colon scalar-slot removal closeout complete. Stale current-surface
+- Last updated: `2026-07-06` (**`.8.1` DONE/SPLIT; legacy helper-removal inventory is complete and `.8` is now
+  split before behavior changes. Perl probes show `assign(...)` is already raw/unlowered, while `scalar(...)` and
+  `s(...)`/`a(...)`/`h(...)` already emit unsupported-helper diagnostics; still-successful Perl compatibility
+  paths include `declare(...)`/`declare_s`/`declare_a`/`declare_h`, `concat(...)`, `array_copy(...)`,
+  `hash_copy(...)`, `push_value(...)`, and `push_nonempty(...)`. Rust still has successful runtime arms for
+  `declare`, `array_copy`, `hash_copy`, `concat`, `push_value`, `push_nonempty`, plus `array|a` and `hash|h`
+  wrapper aliases. `push_nonempty(...)` has semantics not covered by plain `push(...)`, so `.8.2` must either
+  migrate it to an existing terse expression without behavior drift or split/define a replacement before removing
+  support. Frontier -> `.8.2`. Prior **`.15.5` DONE; colon scalar-slot removal closeout complete. Stale current-surface
   `:name` scans across shipped specs, generated corpus inputs, mdBook, tests, code, and Knowledge Map facts found
   no live authored `:name` support outside intentional retired-diagnostic tests/code and historical records. Two
   stale Knowledge fact-card references were corrected: the duck-typed assignment reverify command now uses bare
@@ -3110,7 +3118,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.7.4 - close type-method no-drift sweep`
 
 - ID: `SPEC-FORMAT-TERSE.8`
-  Status: `pending` (reactivated by user directive 2026-07-04)
+  Status: `active` (reactivated by user directive 2026-07-04; split by `.8.1` on 2026-07-06)
   Goal: Remove all legacy compatibility helper-function support so the accepted `.spec` authoring surface is the
     terse surface only.
   Acceptance: Perl and Rust reject or stop lowering legacy helper spellings that remained accepted only for
@@ -3119,10 +3127,77 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     `push_value(...)` where a terse replacement exists), retired wrapper aliases (`s(...)`, `a(...)`, `h(...)`),
     and any lingering `scalar(...)` scalar-slot compatibility path. Current shipped specs, root corpus examples,
     generated oracle fixtures, mdBook examples, helper catalog, Knowledge Map facts, and roadmap/live docs must
-    describe and exercise only the terse forms: auto-existing variables, `:name`, `array(...)`, `hash(...)`,
+    describe and exercise only the terse forms: auto-existing variables, bare value reads, `array(...)`, `hash(...)`,
     direct shape literals, `set(...)`, assignment operators, `push(...)`/`items += value`, `cat(...)`, and
     `copy(...)`. Historical changelog/task records may mention removed spellings only as past facts, not as
     current supported behavior.
+  Children: `.8.1` (done — inventory/split), `.8.2` (active — current-source/test/corpus/doc migration and
+    `push_nonempty(...)` replacement decision), `.8.3` (pending — Perl hard retirement), `.8.4` (pending — Rust
+    hard retirement), `.8.5` (pending — public docs/KM/reference cleanup), `.8.6` (pending — no-drift closeout).
+  Verification: split by `.8.1`; implementation pending in child leaves.
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.8.1`
+  Status: `done` (2026-07-06)
+  Goal: Inventory and split legacy helper-removal before any behavior change.
+  Acceptance: LinkedSpec-tool probes and code reads classify which legacy helper spellings still succeed on Perl
+    and Rust, which are already retired/diagnostic, which examples/docs/corpus surfaces still exercise them, and
+    which child leaf owns each removal/migration boundary.
+  Verification: **PASS 2026-07-06.** `LinkedSpec::call_spec_handler_subst` shows Perl currently leaves
+    `assign(x, 1)` raw/unlowered, emits unsupported-helper diagnostics for `scalar(...)` and `s(...)`/`a(...)`/
+    `h(...)`, and still successfully lowers `declare(...)`/`declare_s`/`declare_a`/`declare_h`, `concat(...)`,
+    `array_copy(...)`, `hash_copy(...)`, `push_value(...)`, and `push_nonempty(...)`. Rust code reads show
+    successful runtime arms for `declare`, `array_copy`, `hash_copy`, `concat`, `push_value`, `push_nonempty`, and
+    wrapper aliases `array|a` and `hash|h`. Broad scans identify current shipped/corpus/doc/test hits, including
+    `specs/ebnf.spec` and oracle fixtures still using `push_nonempty(...)`; because `push_nonempty(...)` filters
+    undef/empty values and has no plain `push(...)` equivalent, `.8.2` owns either a behavior-preserving migration
+    to existing terse expressions or a replacement split before hard retirement. Knowledge fact card
+    `legacy-helper-retirement-split-inventory` records the reusable inventory.
+  Commit: `SPEC-FORMAT-TERSE.8.1 - split legacy helper retirement`
+
+- ID: `SPEC-FORMAT-TERSE.8.2`
+  Status: `active`
+  Goal: Migrate current authored sources, checked-in corpus/oracle examples, active tests, mdBook examples, and
+    current Knowledge facts away from still-successful legacy helper spellings before engine removal.
+  Acceptance: Current `.spec`/corpus/book examples use `set(...)`, assignment operators, `push(...)`/`+=`,
+    `cat(...)`, `copy(...)`, direct shapes, bare reads, and `array(...)`/`hash(...)` wrappers. Any
+    `push_nonempty(...)` use is either rewritten with identical behavior using existing terse constructs or split
+    into a separately owned replacement before removal. Historical tests/docs may keep old spellings only when they
+    assert retired diagnostics or document past behavior. Oracle generation and mdBook build stay in sync.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.8.3`
+  Status: `pending`
+  Goal: Hard-retire Perl reference support for still-successful legacy helper spellings after `.8.2` migration.
+  Acceptance: Perl lowering no longer successfully recognizes `declare(...)`/declaration aliases, `concat(...)`,
+    `array_copy(...)`, `hash_copy(...)`, or `push_value(...)` as current helper spellings; retired uses produce
+    explicit diagnostics or remain raw only in negative tests. Current terse replacements keep behavior.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.8.4`
+  Status: `pending`
+  Goal: Hard-retire Rust parser/runtime support for legacy helper spellings after `.8.2` migration.
+  Acceptance: Rust no longer executes `declare`, `array_copy`, `hash_copy`, `concat`, `push_value`, or wrapper
+    aliases `a(...)`/`h(...)` as successful current helper spellings; current terse replacements keep corpus parity.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.8.5`
+  Status: `pending`
+  Goal: Reconcile user-facing docs, helper catalog, Knowledge facts, roadmap/live docs, and diagnostics after Perl
+    and Rust legacy helper retirement.
+  Acceptance: Current-facing docs and fact-card `reverify` commands describe only supported terse helper spellings;
+    legacy names appear only in historical records or retired-diagnostic guidance.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.8.6`
+  Status: `pending`
+  Goal: Final no-drift closeout for legacy helper retirement.
+  Acceptance: Stale legacy-helper scans across current specs/corpora/docs/tests/KM/code pass, oracle corpus and
+    mdBook stay in sync, and the next frontier advances to `.9`.
   Verification: `pending`
   Commit: `pending`
 
@@ -3662,8 +3737,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | 5 | `SPEC-FORMAT-TERSE.15.3` | `done` | Perl `:name` parsing/lowering is hard-retired; current Perl fixtures use bare reads and retired colon slots emit a migration diagnostic sentinel |
 | 6 | `SPEC-FORMAT-TERSE.15.4` | `done` | Rust `:name` / `Expr::ScalarSlot` support is hard-retired; current Rust tests and oracle fixtures use bare reads |
 | 7 | `SPEC-FORMAT-TERSE.15.5` | `done` | final no-drift closeout for colon scalar-slot removal |
-| 8 | `SPEC-FORMAT-TERSE.8` | `active` | user directive removes all remaining legacy compatibility helper support; in-flight helper-removal work must stay aligned with `.11`/`.15` semantics |
-| 9 | `SPEC-FORMAT-TERSE.9` | `pending` | user directive replaces Perlish hash-literal `=>` association with terse `:` association after helper-removal / assignment-semantics coordination lands |
+| 8 | `SPEC-FORMAT-TERSE.8.1` | `done` | legacy helper-removal inventory/split completed; remaining successful Perl/Rust compatibility paths and `push_nonempty(...)` replacement risk are classified |
+| 9 | `SPEC-FORMAT-TERSE.8.2` | `active` | migrate current sources/tests/corpus/docs/KM away from still-successful legacy helper spellings before engine retirement |
+| 10 | `SPEC-FORMAT-TERSE.9` | `pending` | user directive replaces Perlish hash-literal `=>` association with terse `:` association after helper-removal / assignment-semantics coordination lands |
 | — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.12` | `deferred` / `spec backlog` | track future hash-tree attached-block traversal; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.13` | `deferred` / `backlog` | track lower-priority array-tree traversal analog; not PNT-eligible until explicitly activated |
@@ -4627,6 +4703,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-06` | `SPEC-FORMAT-TERSE.8.1` | KM retrieval for helper-renaming/retirement facts; `.8` task-node read; `LinkedSpec::call_spec_handler_subst` probe over `assign`, `concat`, `array_copy`, `hash_copy`, `push_value`, `push_nonempty`, `declare`, `scalar`, `s`/`a`/`h`, and declaration aliases; Rust `engine.rs` / `expr.rs` code reads; broad scans over current specs/corpus/docs/tests | `.8` is split before behavior change. Perl already leaves `assign(...)` raw and emits unsupported-helper diagnostics for `scalar(...)` and `s(...)`/`a(...)`/`h(...)`; Perl still lowers declaration helpers, `concat`, aggregate-copy helpers, `push_value`, and `push_nonempty`. Rust still executes `declare`, `array_copy`, `hash_copy`, `concat`, `push_value`, `push_nonempty`, and `array|a` / `hash|h` wrapper aliases. `push_nonempty(...)` has non-trivial empty-filter semantics and no plain `push(...)` equivalent, so `.8.2` owns the current-source migration and replacement decision before hard retirement. |
 | `2026-07-06` | `SPEC-FORMAT-TERSE.15.5` | Final colon scalar-slot residue scans across current specs/corpora/mdBook/tests/KM/code; live probes for corrected bare duck-typed assignment and `substr(target, ...)` mutation examples; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle over **93** fixtures; `mdbook build docs/linkedspec-book`; Knowledge Map regeneration/check; memory/doctrine/diff checks; full phase0 (`env PERL5LIB= perl -Iperl t/phase0_regression.t`, plan `1..1022`) | No current shipped-spec, generated corpus, or mdBook live surface depends on successful `:name` scalar slots. Remaining hits are retired-diagnostic code/tests, rule-mode/regex/public-API colon syntax, or explicitly historical facts. Two stale Knowledge fact-card references were corrected to the post-retirement surface: duck-typed assignment reverifies with bare `items` / `meta`, and regex substitution uses `substr(target, ...)` rather than retired `substr(:target, ...)`. Oracle corpus and mdBook stay in sync. `.15` closes and frontier advances to `.8`; `.9` remains pending behind `.8`. |
 | `2026-07-06` | `SPEC-FORMAT-TERSE.15.4` | Rust `Expr::ScalarSlot` AST/runtime/source-emitter retirement; stale Rust fixture migration to bare reads; EBNF `rule_header` source/corpus refresh; generated corpus case rename to `terse_15_4_bare_scalar_payload_readback`; focused core/runtime/source-emitter/trace tests; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle over **93** fixtures; full phase0 (`env PERL5LIB= perl -Iperl t/phase0_regression.t`, plan `1..1022`) | Rust no longer parses/evaluates `:name` as `Expr::ScalarSlot`; retired colon scalar slots emit `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read` with a bare-read migration diagnostic. Runtime and generated-source paths use bare reads, action-edge blocks that read `retv` get the scoped child return, EBNF avoids the same-name scalar/array `rule` collision through `rule_header`, generated EBNF oracle inputs are refreshed, the stale scalar-slot corpus fixture name is replaced with the `.15.4` bare-read case name, and Phase0's source lock now expects `rule_header`. Frontier becomes `.15.5`. |
 | `2026-07-06` | `SPEC-FORMAT-TERSE.15.3` | Perl ActionIR AST/lowering/rewrite/EmitContext retirement of colon scalar slots; active fixture migration to bare reads; focused ActionIR/trace tests; `perl -c -Iperl` syntax checks on touched Perl/test modules; full phase0 with `PERL5LIB=` cleared; mdBook/KM/live-doc updates; memory/doctrine/diff checks | Perl `:name` no longer parses or lowers as a successful scalar slot. Retired colon scalar slots produce `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read`; `scalar_slot_fallback` trace/declaration behavior is gone. Bare value reads remain valid across the Perl reference, including inline `if`/`elseif`/`switch` conditions, logical `or`/`and` operands, ordinary `entry_text()` / `match_text()` value helpers, assignment RHS passthrough, flow RHS values, and scalar-held hash `count_keys(...)`. Focused tests pass and full phase0 reaches plan `1..1022`. Frontier becomes `.15.4` for Rust `Expr::ScalarSlot` removal. |
@@ -4752,6 +4829,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.8.1` | `SPEC-FORMAT-TERSE.8.1 - split legacy helper retirement` | Legacy helper-removal inventory/split: current successful compatibility paths and `push_nonempty(...)` replacement risk are classified; `.8.2` becomes the active migration owner before Perl/Rust hard retirement. |
 | `SPEC-FORMAT-TERSE.15.5` | `SPEC-FORMAT-TERSE.15.5 - close colon scalar-slot drift` | Final no-drift closeout: stale current-surface scans pass; two stale Knowledge fact-card colon examples corrected; oracle corpus, mdBook, Knowledge Map, memory/doctrine checks, and phase0 pass; `.15` closes and frontier becomes `.8`. |
 | `SPEC-FORMAT-TERSE.15.4` | `SPEC-FORMAT-TERSE.15.4 - retire Rust colon scalar slots` | Rust `Expr::ScalarSlot` parser/runtime/source-emitter support is gone; retired colon scalar slots emit the bare-read migration diagnostic; active Rust fixtures and oracle corpus use bare reads; frontier becomes `.15.5`. |
 | `SPEC-FORMAT-TERSE.15.3` | `SPEC-FORMAT-TERSE.15.3 - retire Perl colon scalar slots` | Perl `:name` now emits a retired colon-slot diagnostic sentinel instead of a successful scalar read/target; `scalar_slot_fallback` is gone; active Perl tests/fixtures use bare reads; full phase0 passes; frontier becomes `.15.4`. |
@@ -4876,6 +4954,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.2.3.4.2` | `SPEC-FORMAT-TERSE.2.3.4.2 - implement Perl inline value controls` | Perl inline value-control lowering landed for `if`/`switch` in supported value positions; corpus 46 passes and frontier becomes `.2.3.5`. |
 
 ## Changelog
+
+- `2026-07-06`: **`.8.1` DONE/SPLIT - legacy helper retirement inventory.**
+  `.8` is now split before behavior changes. Current probes/code reads show which compatibility helper spellings
+  still succeed on Perl/Rust and which are already retired/diagnostic. The active implementation frontier is
+  `.8.2`, which owns current-source/test/corpus/doc migration and the `push_nonempty(...)` replacement decision
+  before hard-retiring Perl and Rust helper support.
 
 - `2026-07-06`: **`.15.5` DONE - colon scalar-slot no-drift closeout.**
   Current shipped specs, generated corpus inputs, mdBook guidance, active tests, and non-historical Knowledge Map

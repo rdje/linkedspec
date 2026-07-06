@@ -18,26 +18,26 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.15.5` — final colon scalar-slot no-drift closeout is complete; current
-  specs/corpus/mdBook/tests/KM do not depend on successful `:name`, and stale KM fact-card examples now use bare
-  `items` / `meta` plus `substr(target, ...)`.
-- prior_leaf: `SPEC-FORMAT-TERSE.15.4` (commit `5943653a`) — Rust `Expr::ScalarSlot` is hard-retired; `:name` now
-  emits `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read`, Rust fixtures/corpus use bare
-  reads, and the EBNF oracle inputs use `rule_header` to avoid same-name scalar/array collision.
-- latest_commit: HEAD containing this pointer should be `SPEC-FORMAT-TERSE.15.5 - close colon scalar-slot drift`;
-  parent before this slice was `5943653a`. **Branch is over the documented 300 push threshold; still do NOT push
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.8.1` — legacy helper retirement is split before behavior changes.
+  Remaining successful compatibility paths are classified; `.8.2` owns source/test/corpus/doc migration and the
+  `push_nonempty(...)` replacement decision before hard retirement.
+- prior_leaf: `SPEC-FORMAT-TERSE.15.5` (commit `918807ce`) — final colon scalar-slot no-drift closeout is complete;
+  current specs/corpus/mdBook/tests/KM do not depend on successful `:name`, and stale KM fact-card examples now use
+  bare `items` / `meta` plus `substr(target, ...)`.
+- latest_commit: HEAD containing this pointer should be `SPEC-FORMAT-TERSE.8.1 - split legacy helper retirement`;
+  parent before this slice was `918807ce`. **Branch is over the documented 300 push threshold; still do NOT push
   mid-PNT unless explicitly instructed.**
-- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.8` (legacy helper-removal) and it may start only after the
-  `.15.5` commit is clean and `git status` is handoff-ready.
-- next_action: after this `.15.5` commit is clean, pick and own `SPEC-FORMAT-TERSE.8`; do not push unless
+- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.8.2` (current-source/test/corpus/doc migration before
+  engine retirement) and it may start only after the `.8.1` commit is clean and `git status` is handoff-ready.
+- next_action: after this `.8.1` commit is clean, pick and own `SPEC-FORMAT-TERSE.8.2`; do not push unless
   explicitly instructed.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests (e.g. 102 pplugin lazy-load) fail on the stale checkout. Full phase0 needs the **10-min timeout** (`timeout:600000`), else it caps mid-run (exit 144/143). **Generated Perl handlers are NON-strict.** **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`). Current phase0 reaches **PASS `1..1022`**. oracle = `tools/gen_oracle_corpus.pl` (per-case fork/SIGKILL; **93** fixtures → **run in background**; `manifest.json` + drift guards). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`. Rust numbered capture helpers are captures-only (`0`=first capture); whole match = `entry_text()`/`match_text()`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
-  worktree ignored by submodule policy. Deferred lanes behind `.15`: `.8` (legacy-helper removal), `.9` (hash
-  `=>`→`:`), `.10`/`.12`/`.13`/`.14` backlog; `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`,
+  worktree ignored by submodule policy. Deferred lanes behind `.8.2`: `.9` (hash `=>`→`:`),
+  `.10`/`.12`/`.13`/`.14` backlog; `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`,
   `SPEC-LANG-REFERENCE`.
-- blockers: none for `.8` ownership. in_flight_uncommitted: none after the `.15.5` commit lands; do not pivot
+- blockers: none for `.8.2` ownership. in_flight_uncommitted: none after the `.8.1` commit lands; do not pivot
   unless the repo is handoff-ready.
