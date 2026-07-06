@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.2.2 — classify recursive helper fixtures
+
+**Scope:** Migrate or classify the legacy helper spellings in the TOP-RULE-AS-NORMAL recursive Rust integration
+tests before touching explicit compatibility/equivalence blocks.
+
+**Change:** Recursive `sexpr` fixtures now use current append/snapshot helper spellings (`push(...)`,
+`copy(...)`, and `array(...)`) instead of `push_value(...)`, `array_copy(...)`, and `a(...)`.
+
+**Boundary:** `declare(array, items)` remains intentionally in these recursive fixtures. A candidate
+`set(array(items), [])` replacement preserves the matching Perl probe but fails Rust recursive value parity by
+leaking/overwriting recursive frame state. The mdBook helper catalog and Knowledge Map now record that Rust
+`declare(...)` hard retirement must first provide equivalent rule-invocation scoping or a diagnostic path.
+
+**Validation:** Focused TOP-RULE filter and full Rust integration test pass after classification:
+`cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test integration_test top_rule_as_normal -- --nocapture`
+and `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test integration_test` (**172** tests).
+`mdbook build docs/linkedspec-book`, Knowledge Map, memory architecture, doctrine, and whitespace checks pass.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.2.1 — migrate integration smoke helper fixtures
 
 **Scope:** Migrate non-compatibility Rust integration-test smoke fixtures before touching recursive edge cases or

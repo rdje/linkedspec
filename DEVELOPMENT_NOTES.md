@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.2.2 — recursive Rust declaration scope is not an aggregate reset): In
+  recursive Rust rules, `declare(array, items)` is not replaceable by `set(array(items), [])` today. The latter
+  resets aggregate storage but does not create the rule-invocation snapshot/restore boundary that Rust declaration
+  tracking provides. The focused TOP-RULE-AS-NORMAL candidate failed the two recursive value-parity tests by losing
+  the outer `"a"` and duplicating nested payloads, while the Perl reference returned the same value for both forms.
+  Migrate surrounding helpers (`push_value` -> `push`, `array_copy` -> `copy`, `a` -> `array`), but leave
+  `declare(...)` as an intentional compatibility lock until the Rust hard-retirement leaf supplies equivalent
+  current-surface scoping or a diagnostic.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.2.1 — integration-test helper cleanup needs category boundaries): Do not
   bulk-replace every old helper spelling in `integration_test.rs`. Ordinary smoke fixtures can move directly to
   current spellings, but recursive TOP-RULE-AS-NORMAL fixtures and explicit legacy-helper equivalence blocks carry

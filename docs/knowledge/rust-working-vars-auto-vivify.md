@@ -12,6 +12,7 @@ answers:
   - "why does the Perl auto-existing-variable codegen fix not apply to Rust"
   - "how is cross-variant auto-existence parity proven (oracle fixtures autoexist_*)"
   - "why do the recursive Perl .1.1.1 auto-exist lock specs fail on Rust"
+  - "does Rust auto-vivify isolate undeclared recursive accumulators"
 date: 2026-06-24
 status: confirmed
 tags: [rust, runtime, variables, declare, spec-format-terse, SPEC-FORMAT-TERSE, RUST-PARITY, cross-variant-parity]
@@ -73,7 +74,7 @@ Locked by **5 oracle fixtures** `autoexist_{scalar,array}_{no_declare,declare}` 
 Rust == Perl reference) and **4 integration tests** `terse_1_1_2_*` (value anchors,
 declare/no-declare convergence, per-parse no-leak via same-engine re-run).
 
-## What is NOT covered (separate gap)
+## What is NOT covered (recursive accumulator isolation)
 
 The recursive/REP auto-exist idiom the **Perl** `.1.1.1` phase0 locks use
 (`top:: /(\w+)\s*/ -> top[0] { ... }` and `Top::*` REP) does **not** reproduce on Rust —
@@ -81,6 +82,14 @@ those exact specs return `[null]` / `[[]]`. That is the **separately-owned `RUST
 recursive-grammar / REP-lifecycle gap** (the same general value-parity gap as
 `TOP-RULE-AS-NORMAL.3.2`), **not** an auto-existence problem: the non-recursive
 equivalents are at full parity.
+
+`TOP-RULE-AS-NORMAL.3.2` later fixed recursive value parity for declared working
+variables, but not for undeclared recursive accumulator isolation. As of
+2026-07-06, replacing `declare(array, items)` with `set(array(items), [])` in the
+Rust recursive `sexpr` tests still leaks/overwrites recursive frame state. The
+durable rule is: Rust working variables auto-vivify and are fresh per parse; an
+explicit `declare(...)` is still the compatibility mechanism that creates
+rule-invocation snapshot/restore for recursive accumulators.
 
 ## Links
 

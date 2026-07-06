@@ -113,9 +113,12 @@ dispatch rule.
 > `copy(array(name))`, `copy(hash(name))`, and array-first `copy(name)` are also type-implying read
 > positions. A backend MUST supply
 > the same auto-existence: a wrapper- or position-referenced variable
-> with no `declare(...)` is a fresh per-invocation slot scoped to the rule — **not** a value
-> carried across parses or recursive re-entries. `declare(...)` is retained as a legacy explicit form;
-> new specs should use direct assignment initializers such as `name = value`, `items = []`, and `meta = {}`.
+> with no `declare(...)` is a fresh working slot for the parse, not a value carried across parses.
+> Recursive re-entry is the current compatibility boundary on Rust: explicit `declare(...)` still provides
+> rule-invocation snapshot/restore for recursive accumulators, and `set(array(name), [])` is not a drop-in
+> replacement there. `declare(...)` is retained as a legacy explicit form;
+> new non-recursive specs should use direct assignment initializers such as `name = value`, `items = []`, and
+> `meta = {}`.
 > Post-migration support is compatibility-only: existing specs may keep declaration helpers, but new examples
 > and language work should not depend on them.
 > The DSL literals

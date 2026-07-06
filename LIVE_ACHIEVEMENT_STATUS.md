@@ -7,8 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.2.2 — classify recursive helper fixtures**
+  (DONE; FRONTIER `.8.2.2.2.3` EXPLICIT LEGACY-HELPER COMPATIBILITY/EQUIVALENCE TESTS NEXT).
+
+  **Change:** TOP-RULE-AS-NORMAL recursive Rust integration fixtures now use current `push(...)`, `copy(...)`,
+  and `array(...)` spellings for append/snapshot behavior.
+
+  **Boundary:** `declare(array, items)` remains intentionally retained as a Rust scoped-declaration compatibility
+  lock. The current-surface `set(array(items), [])` candidate preserves the matching Perl probe but fails Rust
+  recursive value parity, so `.8.4` must resolve that before declaration-helper removal.
+
+  **Verification:** Focused TOP-RULE Rust integration filter passes, full Rust `integration_test` passes **172**
+  tests, and mdBook/Knowledge Map/memory/doctrine/whitespace checks pass.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.2.1 — migrate integration smoke helper fixtures**
-  (DONE; FRONTIER `.8.2.2.2.2` TOP-RULE-AS-NORMAL RECURSIVE HELPER-STRING MIGRATION NEXT).
+  (DONE; `.8.2.2.2.2` TOP-RULE-AS-NORMAL RECURSIVE HELPER CLASSIFICATION HAS SINCE CLOSED).
 
   **Change:** Non-compatibility Rust integration smoke fixtures before the recursive and explicit compatibility
   blocks now use current helper spellings: explicit aggregate setters, `push(...)`, `copy(...)`, `cat(...)`, and

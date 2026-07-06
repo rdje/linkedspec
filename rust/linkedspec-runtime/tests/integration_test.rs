@@ -1308,11 +1308,14 @@ fn top_rule_as_normal_3_1_no_consume_recursion_terminates() {
 // test remains the narrow termination/shape guard from .3.1.
 #[test]
 fn top_rule_as_normal_3_1_consume_before_recurse_is_not_cut() {
+    // `declare(array, items)` is retained intentionally for recursive
+    // per-invocation accumulator scope; the helper spelling migration below
+    // keeps only current append/snapshot helpers.
     let grammar = "top::\n -> sexpr { return(call(sexpr)) }\n\n\
                    sexpr: /\\(/ /\\)/  I { declare(array, items) }\n\
-                    -> sexpr     { push_value(a(items), call(sexpr)) }\n\
-                    -> atom      { push_value(a(items), call(atom)) }\n\
-                    -> sexpr[1]  { return(array_copy(a(items))) }\n\n\
+                    -> sexpr     { push(array(items), call(sexpr)) }\n\
+                    -> atom      { push(array(items), call(atom)) }\n\
+                    -> sexpr[1]  { return(copy(array(items))) }\n\n\
                    atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
     let spec = parse_spec(grammar).expect("parse");
     validate(&spec).expect("validate");
@@ -1337,13 +1340,17 @@ fn top_rule_as_normal_3_1_consume_before_recurse_is_not_cut() {
 // `sexpr` frame could leak its local `items` array into its parent. The runtime
 // now scopes declared working variables per rule invocation while preserving
 // the existing shared-state behavior for undeclared mutations.
+//
+// SPEC-FORMAT-TERSE.8.2.2.2.2 intentionally keeps `declare(array, items)` here:
+// replacing it with `set(array(items), [])` is not equivalent on Rust recursive
+// re-entry. The action helpers around it use the current `push`/`copy` spellings.
 #[test]
 fn top_rule_as_normal_3_2_body_recursion_value_parity() {
     let grammar = "top::\n -> sexpr { return(call(sexpr)) }\n\n\
                    sexpr: /\\(/ /\\)/  I { declare(array, items) }\n\
-                    -> sexpr     { push_value(array(items), call(sexpr)) }\n\
-                    -> atom      { push_value(array(items), call(atom)) }\n\
-                    -> sexpr[1]  { return(array_copy(array(items))) }\n\n\
+                    -> sexpr     { push(array(items), call(sexpr)) }\n\
+                    -> atom      { push(array(items), call(atom)) }\n\
+                    -> sexpr[1]  { return(copy(array(items))) }\n\n\
                    atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
     assert_eq!(
         build_and_run(grammar, "(a(b)c)"),
@@ -1355,10 +1362,10 @@ fn top_rule_as_normal_3_2_body_recursion_value_parity() {
 #[test]
 fn top_rule_as_normal_3_2_top_lx_recursion_value_parity() {
     let grammar = "sexpr:: /\\(/ /\\)/  I { declare(array, items) }\n\
-                    -> sexpr     { push_value(array(items), call(sexpr)) }\n\
-                    -> atom      { push_value(array(items), call(atom)) }\n\
-                    -> sexpr[1]  { return(array_copy(array(items))) }\n\
-                    LX { return(array_copy(array(items))) }\n\n\
+                    -> sexpr     { push(array(items), call(sexpr)) }\n\
+                    -> atom      { push(array(items), call(atom)) }\n\
+                    -> sexpr[1]  { return(copy(array(items))) }\n\
+                    LX { return(copy(array(items))) }\n\n\
                    atom: /[A-Za-z0-9]+/   I.return(entry_text())\n";
     assert_eq!(
         build_and_run(grammar, "(a(b)c)"),
