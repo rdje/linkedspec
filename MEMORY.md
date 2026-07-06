@@ -24,14 +24,13 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   active Perl tests/fixtures use bare reads.
 - prior_leaf: `REPO-HYGIENE.2` (commit `cf0df422`) — `.claude/projects/` local agent state ignored; `rgx` remains a
   tracked submodule/gitlink with `.gitmodules` `ignore = dirty`.
-- latest_commit: this slice commit `SPEC-FORMAT-TERSE.15.3 - retire Perl colon scalar slots`; parent
-  `8f4354f6`. **Branch was 311 commits ahead of origin before this commit — over the documented 300 push threshold;
+- latest_commit: `95c22ec9` — `SPEC-FORMAT-TERSE.15.3 - retire Perl colon scalar slots`; parent
+  `8f4354f6`. **Branch is 312 commits ahead of origin — over the documented 300 push threshold;
   still do NOT push mid-PNT unless explicitly instructed.**
 - active_work_unit: next frontier is `SPEC-FORMAT-TERSE.15.4` (Rust `Expr::ScalarSlot` parser/runtime removal) and it
-  must not start until the `.15.3` commit workflow is complete and status is
-  handoff-ready.
-- next_action: Finish `.15.3` commit workflow, clear `git_message_brief.txt`, and verify `git status` is clean.
-  Then PNT may pick `.15.4`.
+  may start only after confirming `git status` is handoff-ready.
+- next_action: Pick and own `SPEC-FORMAT-TERSE.15.4` (Rust `Expr::ScalarSlot` retirement) under the task tree; do
+  not push unless explicitly instructed.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.
@@ -40,4 +39,4 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   worktree ignored by submodule policy. Deferred lanes behind `.15`: `.8` (legacy-helper removal), `.9` (hash
   `=>`→`:`), `.10`/`.12`/`.13`/`.14` backlog; `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`,
   `SPEC-LANG-REFERENCE`.
-- blockers: none for ownership. in_flight_uncommitted: `.15.3` commit workflow until committed; do not pivot.
+- blockers: none for ownership. in_flight_uncommitted: none; do not pivot unless the repo is handoff-ready.
