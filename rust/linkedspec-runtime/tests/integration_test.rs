@@ -1440,7 +1440,7 @@ fn terse_1_1_2_auto_existing_scalar_var_works_without_declare() {
 fn terse_1_1_2_auto_existing_array_var_works_without_declare() {
     // array(items) is pushed to and copied with NO declare(array, items) -- it
     // auto-exists. Perl returns ["a","b"]; Rust wraps one level.
-    let grammar = "Top::\n /x/ -> Done { push_value(array(items), \"a\"); push_value(array(items), \"b\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { push(array(items), \"a\"); push(array(items), \"b\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["a", "b"]]),
@@ -1453,6 +1453,9 @@ fn terse_1_1_2_declare_form_unchanged_vs_no_declare() {
     // The declare(...) form and the no-declare form lower to identical output --
     // the Rust analogue of the Perl "declare path stays single `my`, no double"
     // lock: adding/removing the declare must not change behavior.
+    // SPEC-FORMAT-TERSE.8.2.2.2.3 keeps the declare(...) side as an
+    // explicit Rust compatibility lock for .8.4; append/snapshot helpers use
+    // the current surface so the assertion isolates declaration semantics.
     let scalar_no = "Top::\n /x/ -> Done { v = \"ok\"; return(v) }\n\nDone::\n /[a-z]+/\n";
     let scalar_decl =
         "Top::\n /x/ -> Done { declare(scalar, v); v = \"ok\"; return(v) }\n\nDone::\n /[a-z]+/\n";
@@ -1462,8 +1465,8 @@ fn terse_1_1_2_declare_form_unchanged_vs_no_declare() {
         "scalar: declare-form and no-declare-form produce identical output"
     );
 
-    let array_no = "Top::\n /x/ -> Done { push_value(array(items), \"a\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
-    let array_decl = "Top::\n /x/ -> Done { declare(array, items); push_value(array(items), \"a\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let array_no = "Top::\n /x/ -> Done { push(array(items), \"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let array_decl = "Top::\n /x/ -> Done { declare(array, items); push(array(items), \"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(array_no, "xhello"),
         build_and_run(array_decl, "xhello"),
@@ -1490,7 +1493,7 @@ fn terse_1_1_2_auto_existing_vars_are_per_parse_not_leaky() {
         "scalar var is per-parse, not leaked across executes"
     );
 
-    let array = "Top::\n /x/ -> Done { push_value(array(items), \"a\"); push_value(array(items), \"b\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let array = "Top::\n /x/ -> Done { push(array(items), \"a\"); push(array(items), \"b\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(array).expect("parse");
     validate(&spec).expect("validate");
     let engine = Engine::new(compile(&spec).expect("compile"));
@@ -1505,7 +1508,7 @@ fn terse_1_1_2_auto_existing_vars_are_per_parse_not_leaky() {
 
 // ── SPEC-FORMAT-TERSE.1.2.2 — Rust lockstep parity for .1.2.1 (Channel 1):
 // a BARE working var in a type-implying position auto-exists with
-// the position-implied kind (operator assignment target -> scalar, push_value/push_nonempty
+// the position-implied kind (operator assignment target -> scalar, push/push_nonempty
 // target -> array). On the Perl reference (.1.2.1) the engine auto-supplies the
 // per-invocation `my`; on Rust resolve_scalar_target/resolve_array_target now map
 // the bare name to the working variable and the per-parse RuntimeContext HashMap
@@ -1525,16 +1528,16 @@ fn terse_1_2_2_bare_scalar_arg_auto_exists() {
 
 #[test]
 fn terse_1_2_2_bare_array_arg_auto_exists() {
-    // push_value(items, ...) with a BARE target.
-    let grammar = "Top::\n /x/ -> Done { push_value(items, \"a\"); push_value(items, \"b\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    // push(items, ...) with a BARE target.
+    let grammar = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["a", "b"]]),
-        "bare push_value target auto-exists as an array (= Perl [\"a\",\"b\"] wrapped one level)"
+        "bare push target auto-exists as an array (= Perl [\"a\",\"b\"] wrapped one level)"
     );
-    // push_nonempty(items, ...) with a BARE target -- same array auto-existence,
-    // and the empty value is still skipped.
-    let ne = "Top::\n /x/ -> Done { push_nonempty(items, \"a\"); push_nonempty(items, \"\"); push_nonempty(items, \"b\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    // push_nonempty(items, ...) has non-trivial filtering semantics and is
+    // retained here as an explicit .8.4 legacy-helper retirement lock.
+    let ne = "Top::\n /x/ -> Done { push_nonempty(items, \"a\"); push_nonempty(items, \"\"); push_nonempty(items, \"b\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(ne, "xhello"),
         serde_json::json!([["a", "b"]]),
@@ -1547,6 +1550,8 @@ fn terse_1_2_2_bare_matches_wrapped_and_declare() {
     // The bare assignment form produces the same value as the explicit scalar-slot form and the
     // declare form (the Rust analogue of the Perl "byte-identical / single `my`"
     // locks): the explicit slot marker/declare are optional in these positions.
+    // SPEC-FORMAT-TERSE.8.2.2.2.3 keeps the declare(...) side as an
+    // explicit Rust compatibility lock for .8.4.
     let bare = "Top::\n /x/ -> Done { v = \"ok\"; return(v) }\n\nDone::\n /[a-z]+/\n";
     let explicit_slot = "Top::\n /x/ -> Done { set(v, \"ok\"); return(v) }\n\nDone::\n /[a-z]+/\n";
     let declared =
@@ -1563,12 +1568,12 @@ fn terse_1_2_2_bare_matches_wrapped_and_declare() {
         "scalar: bare arg == declare"
     );
 
-    let bare_a = "Top::\n /x/ -> Done { push_value(items, \"a\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
-    let wrapped_a = "Top::\n /x/ -> Done { push_value(array(items), \"a\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let bare_a = "Top::\n /x/ -> Done { push(items, \"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let wrapped_a = "Top::\n /x/ -> Done { push(array(items), \"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(bare_a, "xhello"),
         build_and_run(wrapped_a, "xhello"),
-        "array: bare push_value target == wrapped"
+        "array: bare push target == wrapped"
     );
 }
 
@@ -1588,7 +1593,7 @@ fn terse_1_2_2_bare_arg_vars_are_per_parse_not_leaky() {
         "bare scalar arg var is per-parse, not leaked across executes"
     );
 
-    let array = "Top::\n /x/ -> Done { push_value(items, \"a\"); push_value(items, \"b\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let array = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(array).expect("parse");
     validate(&spec).expect("validate");
     let engine = Engine::new(compile(&spec).expect("compile"));
@@ -1602,15 +1607,18 @@ fn terse_1_2_2_bare_arg_vars_are_per_parse_not_leaky() {
 }
 
 // ── SPEC-FORMAT-TERSE.1.2.3.2 — Rust lockstep parity for .1.2.3.1:
-// aggregate bare value reads are type-implying snapshot positions. `array_copy(NAME)`
-// and array-first `copy(NAME)` read array `NAME`; `hash_copy(NAME)` reads hash `NAME`.
+// aggregate bare value reads are type-implying snapshot positions. Legacy
+// `array_copy(NAME)`/`hash_copy(NAME)` compatibility locks below are explicitly
+// retained for .8.4; current-surface assertions use `copy(...)`.
 // Scalar-like bare value reads and bare direct-access path atoms landed later
 // under SPEC-FORMAT-TERSE.1.2.3.4.
 
 #[test]
 fn terse_1_2_3_2_bare_array_copy_read_matches_wrapped() {
-    let bare = "Top::\n /x/ -> Done { push_value(items, \"a\"); push_value(items, \"b\"); return(array_copy(items)) }\n\nDone::\n /[a-z]+/\n";
-    let wrapped = "Top::\n /x/ -> Done { push_value(items, \"a\"); push_value(items, \"b\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    // SPEC-FORMAT-TERSE.8.2.2.2.3: array_copy(...) is retained only as an
+    // explicit Rust legacy-helper compatibility lock for .8.4.
+    let bare = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(array_copy(items)) }\n\nDone::\n /[a-z]+/\n";
+    let wrapped = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(bare, "xhello");
     assert_eq!(
         actual,
@@ -1626,6 +1634,8 @@ fn terse_1_2_3_2_bare_array_copy_read_matches_wrapped() {
 
 #[test]
 fn terse_1_2_3_2_bare_hash_copy_read_matches_wrapped() {
+    // SPEC-FORMAT-TERSE.8.2.2.2.3: hash_copy(...) is retained only as an
+    // explicit Rust legacy-helper compatibility lock for .8.4.
     let bare = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(hash_copy(meta)) }\n\nDone::\n /[a-z]+/\n";
     let wrapped = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(hash_copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(bare, "xhello");
@@ -1643,8 +1653,9 @@ fn terse_1_2_3_2_bare_hash_copy_read_matches_wrapped() {
 
 #[test]
 fn terse_1_2_3_2_copy_bare_array_first_and_wrapped_hash() {
-    let bare_array = "Top::\n /x/ -> Done { push_value(items, \"a\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
-    let wrapped_array = "Top::\n /x/ -> Done { push_value(items, \"a\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let bare_array =
+        "Top::\n /x/ -> Done { push(items, \"a\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
+    let wrapped_array = "Top::\n /x/ -> Done { push(items, \"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     let actual_array = build_and_run(bare_array, "xhello");
     assert_eq!(
         actual_array,
@@ -1654,11 +1665,11 @@ fn terse_1_2_3_2_copy_bare_array_first_and_wrapped_hash() {
     assert_eq!(
         actual_array,
         build_and_run(wrapped_array, "xhello"),
-        "copy(items) == array_copy(array(items)) on Rust"
+        "copy(items) == copy(array(items)) on Rust"
     );
 
     let wrapped_hash = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
-    let canonical_hash = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(hash_copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let current_hash = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
     let actual_hash = build_and_run(wrapped_hash, "xhello");
     assert_eq!(
         actual_hash,
@@ -1667,14 +1678,14 @@ fn terse_1_2_3_2_copy_bare_array_first_and_wrapped_hash() {
     );
     assert_eq!(
         actual_hash,
-        build_and_run(canonical_hash, "xhello"),
-        "copy(hash(meta)) == hash_copy(hash(meta)) on Rust"
+        build_and_run(current_hash, "xhello"),
+        "copy(hash(meta)) is stable on Rust"
     );
 }
 
 #[test]
 fn terse_1_2_3_2_bare_aggregate_reads_are_per_parse() {
-    let array = "Top::\n /([ab])/ -> Done { push_value(items, match_group(0)); return(array_copy(items)) }\n\nDone::\n /[a-z]+/\n";
+    let array = "Top::\n /([ab])/ -> Done { push(items, match_group(0)); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(array).expect("parse array");
     validate(&spec).expect("validate array");
     let engine = Engine::new(compile(&spec).expect("compile array"));
@@ -1689,7 +1700,7 @@ fn terse_1_2_3_2_bare_aggregate_reads_are_per_parse() {
         "bare array read is isolated to the fresh RuntimeContext per execute"
     );
 
-    let hash = "Top::\n /([ab])/ -> Done { set_key(meta, match_group(0), \"seen\"); return(hash_copy(meta)) }\n\nDone::\n /[a-z]+/\n";
+    let hash = "Top::\n /([ab])/ -> Done { set_key(meta, match_group(0), \"seen\"); return(copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
     let spec = parse_spec(hash).expect("parse hash");
     validate(&spec).expect("validate hash");
     let engine = Engine::new(compile(&spec).expect("compile hash"));
@@ -1712,8 +1723,10 @@ fn terse_1_2_3_2_bare_aggregate_reads_are_per_parse() {
 
 #[test]
 fn terse_1_4_2_set_cat_copy_array_match_canonical_helpers() {
-    let terse = "Top::\n /x/ -> Done { set(label, cat(\"a\", \"b\")); push_value(array(items), label); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
-    let canonical = "Top::\n /x/ -> Done { label = concat(\"a\", \"b\"); push_value(array(items), label); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let terse = "Top::\n /x/ -> Done { set(label, cat(\"a\", \"b\")); push(array(items), label); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    // Legacy side intentionally retained until SPEC-FORMAT-TERSE.8.4 hard
+    // retires Rust execution of concat(...), push_value(...), and array_copy(...).
+    let legacy = "Top::\n /x/ -> Done { label = concat(\"a\", \"b\"); push_value(array(items), label); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(terse, "xhello");
     assert_eq!(
         actual,
@@ -1722,29 +1735,31 @@ fn terse_1_4_2_set_cat_copy_array_match_canonical_helpers() {
     );
     assert_eq!(
         actual,
-        build_and_run(canonical, "xhello"),
-        "set/cat/copy(array) == operator/concat/array_copy on Rust"
+        build_and_run(legacy, "xhello"),
+        "set/cat/push/copy(array) == legacy concat/push_value/array_copy on Rust"
     );
 }
 
 #[test]
 fn terse_1_4_2_copy_hash_matches_hash_copy() {
-    let terse = "Top::\n /x/ -> Done { return(copy(h(m))) }\n\nDone::\n /[a-z]+/\n";
-    let canonical = "Top::\n /x/ -> Done { return(hash_copy(h(m))) }\n\nDone::\n /[a-z]+/\n";
+    let terse = "Top::\n /x/ -> Done { return(copy(hash(m))) }\n\nDone::\n /[a-z]+/\n";
+    // Legacy side intentionally retained until SPEC-FORMAT-TERSE.8.4 hard
+    // retires Rust execution of hash_copy(...) and the h(...) wrapper alias.
+    let legacy = "Top::\n /x/ -> Done { return(hash_copy(h(m))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(terse, "xhello"),
         serde_json::json!([{}]),
-        "copy(h(m)) produces the Perl empty-hash reference value wrapped one level"
+        "copy(hash(m)) produces the Perl empty-hash reference value wrapped one level"
     );
     assert_eq!(
         build_and_run(terse, "xhello"),
-        build_and_run(canonical, "xhello"),
+        build_and_run(legacy, "xhello"),
         "copy(hash target) == hash_copy(hash target) on Rust"
     );
 
     let value_terse =
         "Top::\n /x/ -> Done { return(copy(hash(\"k\", \"v\"))) }\n\nDone::\n /[a-z]+/\n";
-    let value_canonical =
+    let value_legacy =
         "Top::\n /x/ -> Done { return(hash_copy(hash(\"k\", \"v\"))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(value_terse, "xhello"),
@@ -1753,15 +1768,17 @@ fn terse_1_4_2_copy_hash_matches_hash_copy() {
     );
     assert_eq!(
         build_and_run(value_terse, "xhello"),
-        build_and_run(value_canonical, "xhello"),
+        build_and_run(value_legacy, "xhello"),
         "copy(hash value) == hash_copy(hash value) on Rust"
     );
 }
 
 #[test]
 fn terse_1_3_2_push_alias_matches_push_value() {
-    let terse = "Top::\n /x/ -> Done { set(label, \"b\"); push(items, \"a\"); push(items, label); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
-    let canonical = "Top::\n /x/ -> Done { set(label, \"b\"); push_value(items, \"a\"); push_value(items, label); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let terse = "Top::\n /x/ -> Done { set(label, \"b\"); push(items, \"a\"); push(items, label); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    // Legacy side intentionally retained until SPEC-FORMAT-TERSE.8.4 hard
+    // retires Rust execution of push_value(...) and array_copy(...).
+    let legacy = "Top::\n /x/ -> Done { set(label, \"b\"); push_value(items, \"a\"); push_value(items, label); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(terse, "xhello");
     assert_eq!(
         actual,
@@ -1770,7 +1787,7 @@ fn terse_1_3_2_push_alias_matches_push_value() {
     );
     assert_eq!(
         actual,
-        build_and_run(canonical, "xhello"),
+        build_and_run(legacy, "xhello"),
         "push(target, value) == push_value(target, value) on Rust for explicit-value append"
     );
 }

@@ -7,8 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.2.3 — annotate legacy helper compatibility tests**
+  (DONE; FRONTIER `.8.2.2.2.4` LATER CURRENT-FEATURE RUST INTEGRATION FIXTURE CLEANUP NEXT).
+
+  **Change:** The early Rust integration compatibility block now uses current `push(...)`, `copy(...)`, and
+  `hash(...)` spellings on current-side assertions. Retained old-helper sides are labelled as `.8.4` hard-retirement
+  locks.
+
+  **Boundary:** Rust still executes the legacy helpers for compatibility. This slice only classifies explicit
+  compatibility/equivalence tests; later incidental Rust integration fixture strings remain owned by `.8.2.2.2.4`.
+
+  **Verification:** Focused Rust filters for `terse_1_1_2`, `terse_1_2`, `terse_1_4_2`, and `terse_1_3_2` pass.
+  Full Rust `integration_test` passes **172** tests, and Rust formatting, memory/doctrine, and whitespace checks
+  pass.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.2.2 — classify recursive helper fixtures**
-  (DONE; FRONTIER `.8.2.2.2.3` EXPLICIT LEGACY-HELPER COMPATIBILITY/EQUIVALENCE TESTS NEXT).
+  (DONE; `.8.2.2.2.3` EXPLICIT LEGACY-HELPER COMPATIBILITY/EQUIVALENCE TESTS HAVE SINCE CLOSED).
 
   **Change:** TOP-RULE-AS-NORMAL recursive Rust integration fixtures now use current `push(...)`, `copy(...)`,
   and `array(...)` spellings for append/snapshot behavior.

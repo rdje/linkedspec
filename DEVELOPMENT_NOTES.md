@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.2.3 — compatibility tests need labelled old sides): In Rust integration
+  tests, migrate the current side of helper-equivalence assertions to current spellings first, then leave the old
+  side only when it is deliberately proving legacy compatibility for `.8.4`. `push_nonempty(...)` is kept as a
+  labelled compatibility lock because it has filtering semantics, not because it is a plain `push(...)` alias.
+  Later current-feature fixtures still carrying incidental old helper spellings are separate cleanup work owned by
+  `.8.2.2.2.4`.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.8.2.2.2.2 — recursive Rust declaration scope is not an aggregate reset): In
   recursive Rust rules, `declare(array, items)` is not replaceable by `set(array(items), [])` today. The latter
   resets aggregate storage but does not create the rule-invocation snapshot/restore boundary that Rust declaration

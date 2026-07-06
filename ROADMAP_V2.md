@@ -274,7 +274,9 @@ DSL helper surface consistency note:
   has migrated the non-compatibility Rust integration smoke fixtures with full `integration_test` passing;
   `.8.2.2.2.2` has migrated TOP-RULE-AS-NORMAL recursive append/snapshot helper spellings while retaining
   `declare(...)` as a Rust scoped-declaration compatibility lock that `.8.4` must resolve before hard retirement;
-  and `.8.2.2.2.3` now owns explicit legacy-helper compatibility/equivalence test migration/annotation.
+  `.8.2.2.2.3` has migrated current-side helper spellings and labelled retained old-helper sides in explicit
+  Rust legacy-helper compatibility/equivalence tests; and `.8.2.2.2.4` now owns later current-feature Rust
+  integration fixture cleanup.
   `.9` remains pending behind `.8` for hash-literal `:` association syntax. The Rust oracle
   corpus is now 93 fixtures
   after `.15.2.3` added `terse_15_2_3_bare_value_reads_and_case_labels`; it had reached 92 fixtures after

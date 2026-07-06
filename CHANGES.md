@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.2.3 — annotate legacy helper compatibility tests
+
+**Scope:** Migrate or annotate explicit legacy-helper compatibility/equivalence tests in
+`rust/linkedspec-runtime/tests/integration_test.rs`.
+
+**Change:** Incidental setup and current-side assertions in the early Rust integration compatibility block now use
+current `push(...)`, `copy(...)`, and `hash(...)` spellings. The retained old-helper side of equivalence tests is
+now explicitly labelled as a Rust `.8.4` hard-retirement lock for `declare(...)`, `push_nonempty(...)`,
+`array_copy(...)`, `hash_copy(...)`, `concat(...)`, `push_value(...)`, and the `h(...)` wrapper alias.
+
+**Boundary:** This slice does not remove Rust legacy-helper execution. It makes the remaining old spellings in the
+explicit compatibility block intentional and leaves later current-feature fixture cleanup to `.8.2.2.2.4`.
+
+**Validation:** Focused Rust filters passed for `terse_1_1_2`, `terse_1_2`, `terse_1_4_2`, and
+`terse_1_3_2`. Full `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test integration_test`
+passed all **172** tests. Rust formatting, memory architecture, doctrine, and whitespace checks pass.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.2.2.2 — classify recursive helper fixtures
 
 **Scope:** Migrate or classify the legacy helper spellings in the TOP-RULE-AS-NORMAL recursive Rust integration

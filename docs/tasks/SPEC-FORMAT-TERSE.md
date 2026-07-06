@@ -6,7 +6,7 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-06` (**`.8.2.2.2.2` DONE; `.8.2.2.2` remains active with frontier `.8.2.2.2.3`. Legacy helper-removal inventory is complete and `.8` is now
+- Last updated: `2026-07-06` (**`.8.2.2.2.3` DONE; `.8.2.2.2` remains active with frontier `.8.2.2.2.4`. Legacy helper-removal inventory is complete and `.8` is now
   split before behavior changes. Perl probes show `assign(...)` is already raw/unlowered, while `scalar(...)` and
   `s(...)`/`a(...)`/`h(...)` already emit unsupported-helper diagnostics; still-successful Perl compatibility
   paths include `declare(...)`/`declare_s`/`declare_a`/`declare_h`, `concat(...)`, `array_copy(...)`,
@@ -3258,15 +3258,22 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.8.2.2.2.2 - classify recursive helper fixtures`
 
 - ID: `SPEC-FORMAT-TERSE.8.2.2.2.3`
-  Status: `active`
+  Status: `done`
   Goal: Migrate or annotate explicit legacy-helper compatibility/equivalence tests in Rust integration tests.
   Acceptance: Tests that prove old spellings equal current spellings are either converted to current-surface tests
     with equivalent coverage or annotated as intentional compatibility locks for `.8.3`/`.8.4` retirement.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-06.** The early Rust integration compatibility/equivalence block now uses current
+    `push(...)`, `copy(...)`, and `hash(...)` spellings on current-side assertions. Retained old helper spellings in
+    that block are annotated as explicit Rust `.8.4` hard-retirement locks: declaration helper sides, semantic
+    `push_nonempty(...)`, aggregate-copy helper compatibility assertions, string concat helper compatibility,
+    `push_value(...)`, and the legacy `h(...)` wrapper side. Later current-feature fixture strings remain owned by
+    `.8.2.2.2.4`. Focused filters for `terse_1_1_2`, `terse_1_2`, `terse_1_4_2`, and `terse_1_3_2` passed; full
+    `integration_test` passed **172** tests; Rust formatting, memory architecture, doctrine, and whitespace checks
+    passed.
+  Commit: `SPEC-FORMAT-TERSE.8.2.2.2.3 - annotate legacy helper tests`
 
 - ID: `SPEC-FORMAT-TERSE.8.2.2.2.4`
-  Status: `pending`
+  Status: `active`
   Goal: Migrate later current-feature Rust integration fixtures that still carry incidental old-helper spellings.
   Acceptance: Current terse feature tests outside explicit compatibility blocks use `push(...)`/`+=`, `copy(...)`,
     `cat(...)`, and explicit aggregate setters where needed, with focused Rust test filters passing.
@@ -3905,8 +3912,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | 10 | `SPEC-FORMAT-TERSE.8.2.2.1` | `done` | source-emitter smoke specs now use current helper spellings with explicit aggregate resets; generated-source suite passes |
 | 11 | `SPEC-FORMAT-TERSE.8.2.2.2.1` | `done` | non-compat Rust integration smoke fixtures now use current helper spellings; full integration test passes |
 | 12 | `SPEC-FORMAT-TERSE.8.2.2.2.2` | `done` | recursive TOP-RULE-AS-NORMAL strings now use current append/snapshot helpers; `declare(...)` retained as Rust scoped-declaration compatibility lock |
-| 13 | `SPEC-FORMAT-TERSE.8.2.2.2.3` | `active` | migrate/annotate explicit legacy-helper compatibility tests |
-| 14 | `SPEC-FORMAT-TERSE.8.2.2.2.4` | `pending` | migrate later current-feature Rust integration fixture strings |
+| 13 | `SPEC-FORMAT-TERSE.8.2.2.2.3` | `done` | explicit legacy-helper compatibility/equivalence tests now use current-side spellings and label retained old sides as `.8.4` locks |
+| 14 | `SPEC-FORMAT-TERSE.8.2.2.2.4` | `active` | migrate later current-feature Rust integration fixture strings |
 | 15 | `SPEC-FORMAT-TERSE.8.2.2.2.5` | `pending` | close Rust integration-test residue classification |
 | 16 | `SPEC-FORMAT-TERSE.8.2.2.3` | `pending` | migrate/classify generated oracle corpus old-helper fixture inputs |
 | 17 | `SPEC-FORMAT-TERSE.8.2.2.4` | `pending` | migrate/classify Perl phase0 old-helper strings |
@@ -4882,6 +4889,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-07-06` | `SPEC-FORMAT-TERSE.8.2.2.1` | `.8.2.2` split; source-emitter embedded `.spec` fixture migration; focused old-helper residue scan over `rust/linkedspec-runtime/tests/source_emitter.rs`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter` | Rust source-emitter smoke specs now use current helper spellings for aggregate initialization/reset, append, copy, and concatenation. Direct `name = []` was rejected as a migration for named aggregate reset after it failed repeated pair/group snapshot expectations; explicit `set(array(name), [])` preserves the old aggregate-storage semantics. The focused residue scan is clean, and the source-emitter suite passes all **3** tests, including generated Rust parser compile/run proofs. |
 | `2026-07-06` | `SPEC-FORMAT-TERSE.8.2.2.2.1` | `.8.2.2.2` split; migrated non-compatibility smoke strings in `rust/linkedspec-runtime/tests/integration_test.rs`; scoped helper-hit scan; focused `full_pipeline` and user-function filters; full Rust integration test | Top-level smoke, user-function, corpus/lifecycle/edge, `retv_5_1`, and `match_5_2` fixtures now use current helper spellings while explicit compatibility and recursive edge-case blocks remain untouched for later children. The scoped old-helper scan's first hit moved to TOP-RULE-AS-NORMAL, outside this child. Full `integration_test` PASS: **172** tests. |
 | `2026-07-06` | `SPEC-FORMAT-TERSE.8.2.2.2.2` | TOP-RULE-AS-NORMAL recursive helper-string migration/classification; failed Rust candidate replacing `declare(array, items)` with `set(array(items), [])`; matching Perl probe for both forms; focused Rust TOP-RULE filter; full Rust integration test; mdBook/KM updates | Recursive `sexpr` integration fixtures now use current `push(...)`, `copy(...)`, and `array(...)` append/snapshot spellings. `declare(array, items)` is intentionally retained as a Rust scoped-declaration compatibility lock: the candidate aggregate-reset replacement failed the two Rust recursive value-parity tests while Perl stayed output-equivalent. Full `integration_test` PASS: **172** tests. The Rust hard-retirement task `.8.4` now owns resolving this boundary before `declare(...)` removal. |
+| `2026-07-06` | `SPEC-FORMAT-TERSE.8.2.2.2.3` | Migrated/annotated explicit legacy-helper compatibility/equivalence strings in `rust/linkedspec-runtime/tests/integration_test.rs`; focused Rust filters for `terse_1_1_2`, `terse_1_2`, `terse_1_4_2`, and `terse_1_3_2`; full Rust integration test; Rust formatting, memory, doctrine, and whitespace checks | Current-side assertions now use current helper spellings, while retained old helper sides are explicitly labelled as `.8.4` compatibility locks. Later current-feature fixture old spellings remain owned by `.8.2.2.2.4`. Focused filters PASS and full `integration_test` PASS: **172** tests. |
 | `2026-07-06` | `SPEC-FORMAT-TERSE.15.5` | Final colon scalar-slot residue scans across current specs/corpora/mdBook/tests/KM/code; live probes for corrected bare duck-typed assignment and `substr(target, ...)` mutation examples; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle over **93** fixtures; `mdbook build docs/linkedspec-book`; Knowledge Map regeneration/check; memory/doctrine/diff checks; full phase0 (`env PERL5LIB= perl -Iperl t/phase0_regression.t`, plan `1..1022`) | No current shipped-spec, generated corpus, or mdBook live surface depends on successful `:name` scalar slots. Remaining hits are retired-diagnostic code/tests, rule-mode/regex/public-API colon syntax, or explicitly historical facts. Two stale Knowledge fact-card references were corrected to the post-retirement surface: duck-typed assignment reverifies with bare `items` / `meta`, and regex substitution uses `substr(target, ...)` rather than retired `substr(:target, ...)`. Oracle corpus and mdBook stay in sync. `.15` closes and frontier advances to `.8`; `.9` remains pending behind `.8`. |
 | `2026-07-06` | `SPEC-FORMAT-TERSE.15.4` | Rust `Expr::ScalarSlot` AST/runtime/source-emitter retirement; stale Rust fixture migration to bare reads; EBNF `rule_header` source/corpus refresh; generated corpus case rename to `terse_15_4_bare_scalar_payload_readback`; focused core/runtime/source-emitter/trace tests; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle over **93** fixtures; full phase0 (`env PERL5LIB= perl -Iperl t/phase0_regression.t`, plan `1..1022`) | Rust no longer parses/evaluates `:name` as `Expr::ScalarSlot`; retired colon scalar slots emit `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read` with a bare-read migration diagnostic. Runtime and generated-source paths use bare reads, action-edge blocks that read `retv` get the scoped child return, EBNF avoids the same-name scalar/array `rule` collision through `rule_header`, generated EBNF oracle inputs are refreshed, the stale scalar-slot corpus fixture name is replaced with the `.15.4` bare-read case name, and Phase0's source lock now expects `rule_header`. Frontier becomes `.15.5`. |
 | `2026-07-06` | `SPEC-FORMAT-TERSE.15.3` | Perl ActionIR AST/lowering/rewrite/EmitContext retirement of colon scalar slots; active fixture migration to bare reads; focused ActionIR/trace tests; `perl -c -Iperl` syntax checks on touched Perl/test modules; full phase0 with `PERL5LIB=` cleared; mdBook/KM/live-doc updates; memory/doctrine/diff checks | Perl `:name` no longer parses or lowers as a successful scalar slot. Retired colon scalar slots produce `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read`; `scalar_slot_fallback` trace/declaration behavior is gone. Bare value reads remain valid across the Perl reference, including inline `if`/`elseif`/`switch` conditions, logical `or`/`and` operands, ordinary `entry_text()` / `match_text()` value helpers, assignment RHS passthrough, flow RHS values, and scalar-held hash `count_keys(...)`. Focused tests pass and full phase0 reaches plan `1..1022`. Frontier becomes `.15.4` for Rust `Expr::ScalarSlot` removal. |
@@ -5007,6 +5015,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.8.2.2.2.3` | `SPEC-FORMAT-TERSE.8.2.2.2.3 - annotate legacy helper tests` | Explicit Rust legacy-helper compatibility/equivalence tests now use current-side helper spellings and label retained old-helper sides as `.8.4` hard-retirement locks. |
 | `SPEC-FORMAT-TERSE.8.2.2.2.2` | `SPEC-FORMAT-TERSE.8.2.2.2.2 - classify recursive helper fixtures` | TOP-RULE-AS-NORMAL recursive fixtures use current append/snapshot helpers; `declare(...)` remains an intentional Rust scoped-declaration compatibility lock for `.8.4` to resolve before hard retirement. |
 | `SPEC-FORMAT-TERSE.8.1` | `SPEC-FORMAT-TERSE.8.1 - split legacy helper retirement` | Legacy helper-removal inventory/split: current successful compatibility paths and `push_nonempty(...)` replacement risk are classified; `.8.2` becomes the active migration owner before Perl/Rust hard retirement. |
 | `SPEC-FORMAT-TERSE.8.2.1` | `SPEC-FORMAT-TERSE.8.2.1 - migrate EBNF nonempty append flow` | Live EBNF `push_nonempty(...)` use migrated to explicit assignment + `is_nonempty(...)` + `push(...)`; generated EBNF oracle inputs and mdBook walkthrough now match the shipped spec, with oracle expected output unchanged. |
