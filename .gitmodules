@@ -1,3 +1,4 @@
 [submodule "rgx"]
 	path = rgx
 	url = https://github.com/rdje/rgx.git
+	ignore = dirty

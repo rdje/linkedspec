@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — REPO-HYGIENE.2 — ignore Claude project state and rgx local dirt
+
+**Scope:** User-authorized repository hygiene cleanup for paths that should not be controlled by the parent
+LinkedSpec repository.
+
+**Change:** `.gitignore` now ignores `.claude/projects/`. `rgx` remains tracked as a submodule/gitlink, and
+`.gitmodules` now records `ignore = dirty` for that submodule so local worktree dirt inside `rgx/` does not dirty
+the parent repo status.
+
+**Finding:** `rgx` was tracked as a `160000` gitlink/submodule, so `.gitignore` alone could not suppress its dirty
+parent status and should not be used to hide it. The correct parent-repo cleanup is to keep `rgx` in `.gitmodules`
+and set the submodule ignore policy for local dirt.
+
+**Validation:** `git status --ignored` shows `.claude/projects/` ignored while `rgx` remains tracked as a `160000`
+gitlink; memory/doctrine/diff checks pass.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.15.2.3 — Rust bare-read parity and switch case-label alignment
 
 **Scope:** Complete Rust parity for the `.15.2.2` value-position-is-variable policy while preserving the

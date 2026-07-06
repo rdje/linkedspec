@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (REPO-HYGIENE.2 — `.gitignore` cannot hide a tracked gitlink):
+  `.claude/projects/` was straightforward untracked local agent state, but `rgx` was a tracked `160000` gitlink in
+  the parent repo. A `.gitignore` entry does not apply to tracked paths and should not be used for real
+  submodules. Keep the submodule declared in `.gitmodules`; when parent status should ignore local worktree dirt
+  inside the submodule, use the submodule ignore policy (`ignore = dirty`) instead.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.15.2.3 — parity work can expose reference-side drift too):
   Rust already read bare `Expr::Variable` values in ordinary value positions, but switch case labels needed a
   deliberate exception to match the Perl reference: `switch(kind)` is a variable read; `case(foo)` is a literal

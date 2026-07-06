@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **REPO-HYGIENE.2 — ignore Claude project state and rgx local dirt**
+  (DONE; REPO HANDOFF CLEANUP).
+
+  **Change:** `.claude/projects/` is ignored local agent state. `rgx` remains a tracked gitlink/submodule, and
+  `.gitmodules` now records `ignore = dirty` so local dirt inside `rgx/` does not dirty the parent repo status.
+
+  **Finding:** `rgx` was a tracked gitlink, so `.gitignore` alone could not suppress its dirty parent status.
+  Keeping the submodule and setting its submodule ignore policy is the correct cleanup.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.15.2.3 — Rust bare-read parity and switch case-label alignment**
   (DONE; FRONTIER `.15.2.4` SOURCE MIGRATION NEXT, NOT STARTED).
 
