@@ -7,8 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.15.5 — close colon scalar-slot drift**
+  (DONE; FRONTIER `.8` LEGACY HELPER REMOVAL NEXT).
+
+  **Closeout:** Current shipped specs, generated corpus inputs, mdBook guidance, active tests, and non-historical
+  Knowledge Map facts no longer depend on successful `:name` scalar-slot syntax. Remaining colon hits are retired
+  diagnostic code/tests, rule-mode/regex/public-API colon syntax, or explicitly historical records.
+
+  **Drift fixed:** Two stale current Knowledge fact-card examples were corrected: duck-typed assignment now
+  reverifies with bare `items` / `meta`, and statement regex substitution is documented as `substr(target, ...)`
+  instead of retired `substr(:target, ...)`.
+
+  **Verification:** Live probes for the corrected examples pass; oracle generation keeps **93** fixtures; Rust
+  `corpus_oracle` passes over all **93** fixtures; mdBook builds; Knowledge Map, memory/doctrine, diff, and full
+  phase0 checks pass (`env PERL5LIB= perl -Iperl t/phase0_regression.t`, plan `1..1022`).
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.15.4 — retire Rust colon scalar slots**
-  (DONE; FRONTIER `.15.5` FINAL NO-DRIFT CLOSEOUT NEXT).
+  (DONE; `.15.5` FINAL NO-DRIFT CLOSEOUT HAS SINCE CLOSED).
 
   **Change:** Rust `Expr::ScalarSlot` was removed from the core AST and runtime/source-emitter paths. A retired
   `:name` value primary now emits

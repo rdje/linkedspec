@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.15.5 — no-drift closeout must scan retrieval facts too):
+  Closing a syntax-removal lane is not just a code/spec scan. The final `:name` sweep found no current shipped-spec,
+  generated-corpus, or mdBook live examples, but it did find stale Knowledge fact-card text: a duck-typed
+  assignment reverify command still used `:items` / `:meta`, and the string-method note still described
+  `substr(:target, ...)` as the mutation form. After `.15.3`/`.15.4`, both must use the current bare surface
+  (`items`, `meta`, `substr(target, ...)`). Treat Knowledge cards as executable retrieval surface: historical cards
+  may mention retired syntax, but `status: current` cards and their `reverify` commands must use syntax that still
+  works unless the fact is explicitly about a retired diagnostic.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.15.4 — Rust colon-slot removal needs action-edge `retv` awareness):
   Rust no longer has an `Expr::ScalarSlot` compatibility branch. `:name` fails in the core parser with the same
   `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read` sentinel family used by Perl, and all

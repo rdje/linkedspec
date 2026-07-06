@@ -1,6 +1,33 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.15.5 — close colon scalar-slot drift
+
+**Scope:** Final no-drift closeout after `.15.2.4` migrated current sources to bare reads, `.15.3` retired Perl
+colon scalar slots, and `.15.4` retired Rust `Expr::ScalarSlot`.
+
+**Result:** Current shipped specs, generated corpus inputs, mdBook guidance, active tests, and non-historical
+Knowledge Map facts no longer depend on successful `:name` scalar-slot syntax. Remaining colon hits are rule-mode
+labels, regex syntax, public API wording, retired-diagnostic code/tests, or explicitly historical fact records.
+
+**Drift fixed:** Two stale Knowledge fact-card examples were corrected to the current surface:
+`terse-duck-typed-assignment-perl-reference` now reverifies with bare `items` / `meta`, and
+`terse-string-method-surface-verified` now documents statement regex substitution as `substr(target, ...)` rather
+than retired `substr(:target, ...)`.
+
+**Validation:**
+- Narrow current-surface `:name`/`Expr::ScalarSlot`/`scalar_slot_fallback` scans — PASS after classifying only
+  retired-diagnostic and historical hits.
+- Live probes for bare duck-typed assignment readback and `substr(target, ...)` mutation — PASS.
+- `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl` — PASS, **93** fixtures.
+- `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture` — PASS
+  over **93** fixtures.
+- `mdbook build docs/linkedspec-book` — PASS.
+- `env PERL5LIB= perl -Iperl t/phase0_regression.t` — PASS, plan `1..1022`.
+
+**Frontier:** `.15` is closed. Next active terse frontier is `.8` for legacy helper-removal; `.9` remains pending
+behind `.8`.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.15.4 — retire Rust colon scalar slots
 
 **Scope:** Hard-retire Rust `Expr::ScalarSlot` after `.15.2.4` migrated current sources to bare reads and `.15.3`
