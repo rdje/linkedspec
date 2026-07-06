@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.1 — migrate EBNF nonempty append flow
+
+**Scope:** Remove the current live EBNF dependency on `push_nonempty(...)` before hard-retiring legacy helpers.
+
+**Change:** `specs/ebnf.spec::logging_annotation` now evaluates `trim(capture_slice())` once into
+`logging_annotation_part`, gates the append with `is_nonempty(logging_annotation_part)`, and uses
+`push(array(logging_annotation), logging_annotation_part)` in both the comma and closing-edge branches.
+
+**Docs/corpus:** The EBNF mdBook walkthrough now shows the explicit filter flow. Regenerated EBNF oracle
+`input.spec` copies match the shipped spec; `expected.json` stayed unchanged.
+
+**Validation:** `perl -Iperl tools/gen_oracle_corpus.pl` regenerated **93** fixtures; `LinkedSpec::get_parser("ebnf")`
+preserves the `@log_rule("expr", "term")` payload; scoped `push_nonempty(...)` scan is clean for EBNF source/book
+and generated EBNF inputs; Rust `corpus_oracle` passed **93** fixtures; `mdbook build docs/linkedspec-book` passed;
+full phase0 passed **1022** tests after refreshing the stale source-inspection lock.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.8.1 — split legacy helper retirement
 
 **Scope:** Inventory and split the legacy helper-removal lane before parser/runtime behavior changes.

@@ -7,8 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.1 — migrate EBNF nonempty append flow**
+  (DONE; FRONTIER `.8.2.2` ACTIVE TEST/CORPUS LEGACY-HELPER MIGRATION NEXT).
+
+  **Change:** `specs/ebnf.spec::logging_annotation` no longer uses `push_nonempty(...)`. The optional capture span
+  is now trimmed once into `logging_annotation_part`, checked with `is_nonempty(...)`, and appended with
+  `push(array(logging_annotation), logging_annotation_part)`.
+
+  **Sync:** Generated EBNF oracle `input.spec` copies and the EBNF mdBook walkthrough match the shipped spec. The
+  oracle `expected.json` files did not drift.
+
+  **Verification:** `perl -Iperl tools/gen_oracle_corpus.pl` regenerated **93** fixtures; `LinkedSpec::get_parser("ebnf")`
+  preserves the `@log_rule("expr", "term")` payload; Rust `corpus_oracle` passes **93** fixtures; `mdbook build`
+  passes; full phase0 passes **1022** tests after refreshing the stale source-inspection lock.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.8.1 — split legacy helper retirement**
-  (DONE; FRONTIER `.8.2` CURRENT-SURFACE MIGRATION NEXT).
+  (DONE; `.8.2.1` EBNF NONEMPTY APPEND MIGRATION HAS SINCE CLOSED).
 
   **Inventory:** Perl already leaves `assign(...)` raw/unlowered and emits unsupported-helper diagnostics for
   `scalar(...)` plus `s(...)`/`a(...)`/`h(...)`. Perl still lowers declaration helpers, `concat(...)`,

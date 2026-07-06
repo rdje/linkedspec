@@ -267,8 +267,9 @@ DSL helper surface consistency note:
   hard-retired Perl parser/lowering support for `:name`, `.15.4` has hard-retired Rust `Expr::ScalarSlot`, and
   `.15.5` has closed the final no-drift sweep by correcting stale Knowledge fact-card examples and reconfirming
   current specs/corpus/mdBook/tests/KM do not depend on successful `:name`. `.8.1` has now split legacy
-  helper-removal before behavior changes: successful remaining compatibility paths are classified, and `.8.2`
-  owns current-source/test/corpus/doc migration plus the `push_nonempty(...)` replacement decision before hard
+  helper-removal before behavior changes: successful remaining compatibility paths are classified. `.8.2.1` has
+  migrated live EBNF `push_nonempty(...)` use to explicit `is_nonempty(...)`-guarded `push(...)` with no oracle
+  expected-output drift, and `.8.2.2` now owns incidental active test/corpus old-helper cleanup before hard
   retirement. `.9` remains pending behind `.8` for hash-literal `:` association syntax. The Rust oracle
   corpus is now 93 fixtures
   after `.15.2.3` added `terse_15_2_3_bare_value_reads_and_case_labels`; it had reached 92 fixtures after

@@ -42734,7 +42734,7 @@ subtest 'sdce_spec_prefers_canonical_container_wrappers_in_split_band' => sub {
     unlike($source_content, qr/assign\(a\(pieces\), a\(flat_array\(pieces\), flat_array\(segment_parts\)\)\)/, 'sdce migrated band no longer uses retired a() aliases in segment accumulation');
 };
 subtest 'ebnf_logging_annotation_prefers_explicit_capture_slice_flow' => sub {
-    plan tests => 11;
+    plan tests => 12;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'ebnf.spec');
     my $source_content = slurp($source_spec);
@@ -42745,13 +42745,14 @@ subtest 'ebnf_logging_annotation_prefers_explicit_capture_slice_flow' => sub {
     unlike($source_content, qr/logging_annotation: .*?\@capture_from_here/, 'ebnf logging_annotation no longer prefers @capture_from_here in the live source');
     like($source_content, qr/push\(quoted_string, 1\);\s+start_capture_slice\(\)/, 'ebnf logging_annotation advances the capture boundary after indexed quoted-string child results');
     unlike($source_content, qr/push \@logging_annotation, call\(quoted_string\)->\[1\]/, 'ebnf logging_annotation no longer uses the raw indexed push-call wrapper');
-    like($source_content, qr/-> comma \{\s+push_nonempty\(array\(logging_annotation\), trim\(capture_slice\(\)\)\);\s+start_capture_slice\(\)\s+\}/, 'ebnf logging_annotation advances the capture boundary after comma spans');
+    like($source_content, qr/-> comma \{\s+logging_annotation_part = trim\(capture_slice\(\)\);\s+if\(is_nonempty\(logging_annotation_part\)\);\s+push\(array\(logging_annotation\), logging_annotation_part\);\s+endif\(\);\s+start_capture_slice\(\)\s+\}/, 'ebnf logging_annotation appends nonempty comma spans through explicit filter flow');
+    like($source_content, qr/-> logging_annotation\[1\] \{\s+logging_annotation_part = trim\(capture_slice\(\)\);\s+if\(is_nonempty\(logging_annotation_part\)\);\s+push\(array\(logging_annotation\), logging_annotation_part\);\s+endif\(\);\s+return\(array\("logging_annotation", array\(logging_name, copy\(array\(logging_annotation\)\)\)\)\)\s+\}/, 'ebnf logging_annotation appends the closing span through explicit filter flow before returning');
     like($source_content, qr/return\(array\("logging_annotation", array\(logging_name, copy\(array\(logging_annotation\)\)\)\)\)/, 'ebnf logging_annotation now returns helper-form payload with a snapshot array');
     unlike($source_content, qr/\$IMATCH =~ s\/\@\|\\s\*\\\(\//, 'ebnf logging_annotation no longer mutates $IMATCH with raw regex substitution');
     unlike($source_content, qr/return \['logging_annotation', \[\$IMATCH, \[\@logging_annotation\]\]\]/, 'ebnf logging_annotation no longer uses bare arrayref return syntax');
     unlike($source_content, qr/(?:CAPTURE_IF\s*\(|\.capture_if\b)/, 'ebnf logging_annotation no longer uses the legacy capture-if helper surface');
 };
-subtest 'ebnf_logging_annotation_runtime_parses_after_push_nonempty_migration' => sub {
+subtest 'ebnf_logging_annotation_runtime_parses_after_explicit_nonempty_migration' => sub {
     plan tests => 6;
 
     my $parser = LinkedSpec::get_parser('ebnf');

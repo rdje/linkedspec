@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.8.1` — legacy helper retirement is split before behavior changes.
-  Remaining successful compatibility paths are classified; `.8.2` owns source/test/corpus/doc migration and the
-  `push_nonempty(...)` replacement decision before hard retirement.
-- prior_leaf: `SPEC-FORMAT-TERSE.15.5` (commit `918807ce`) — final colon scalar-slot no-drift closeout is complete;
-  current specs/corpus/mdBook/tests/KM do not depend on successful `:name`, and stale KM fact-card examples now use
-  bare `items` / `meta` plus `substr(target, ...)`.
-- latest_commit: HEAD containing this pointer should be `SPEC-FORMAT-TERSE.8.1 - split legacy helper retirement`;
-  parent before this slice was `918807ce`. **Branch is over the documented 300 push threshold; still do NOT push
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.8.2.1` — live EBNF `push_nonempty(...)` use is migrated to explicit
+  `logging_annotation_part = trim(capture_slice())`, `if(is_nonempty(...))`, and `push(...)`; generated EBNF oracle
+  inputs and the EBNF book walkthrough match with no expected-output drift.
+- prior_leaf: `SPEC-FORMAT-TERSE.8.1` (commit `6459dc4a`) — legacy helper retirement was split before behavior
+  changes; remaining successful compatibility paths were classified and `.8.2` became the migration owner.
+- latest_commit: HEAD containing this pointer should be `SPEC-FORMAT-TERSE.8.2.1 - migrate EBNF nonempty append flow`;
+  parent before this slice was `6459dc4a`. **Branch is over the documented 300 push threshold; still do NOT push
   mid-PNT unless explicitly instructed.**
-- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.8.2` (current-source/test/corpus/doc migration before
-  engine retirement) and it may start only after the `.8.1` commit is clean and `git status` is handoff-ready.
-- next_action: after this `.8.1` commit is clean, pick and own `SPEC-FORMAT-TERSE.8.2`; do not push unless
-  explicitly instructed.
+- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.8.2.2` (migrate incidental active test/corpus old-helper
+  strings while preserving explicit legacy/diagnostic locks) and it may start only after the `.8.2.1` commit is
+  clean and `git status` is handoff-ready.
+- next_action: after this `.8.2.1` commit is clean, pick `SPEC-FORMAT-TERSE.8.2.2`; do not push unless explicitly
+  instructed.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.
@@ -39,5 +39,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   worktree ignored by submodule policy. Deferred lanes behind `.8.2`: `.9` (hash `=>`→`:`),
   `.10`/`.12`/`.13`/`.14` backlog; `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`,
   `SPEC-LANG-REFERENCE`.
-- blockers: none for `.8.2` ownership. in_flight_uncommitted: none after the `.8.1` commit lands; do not pivot
+- blockers: none for `.8.2.2` ownership. in_flight_uncommitted: none after the `.8.2.1` commit lands; do not pivot
   unless the repo is handoff-ready.

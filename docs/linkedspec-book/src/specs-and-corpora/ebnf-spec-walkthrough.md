@@ -629,11 +629,17 @@ and then:
   start_capture_slice()
 }
 -> comma {
-  push_nonempty(array(logging_annotation), trim(capture_slice()));
+  logging_annotation_part = trim(capture_slice());
+  if(is_nonempty(logging_annotation_part));
+    push(array(logging_annotation), logging_annotation_part);
+  endif();
   start_capture_slice()
 }
 -> logging_annotation[1] {
-  push_nonempty(array(logging_annotation), trim(capture_slice()));
+  logging_annotation_part = trim(capture_slice());
+  if(is_nonempty(logging_annotation_part));
+    push(array(logging_annotation), logging_annotation_part);
+  endif();
   return(array("logging_annotation", array(logging_name, copy(array(logging_annotation)))))
 }
 ```
@@ -645,16 +651,19 @@ This is a useful advanced example because it combines:
 - a child call into `quoted_string`,
 - `push(...)` for the indexed quoted-string child result,
 - comma handling,
-- `push_nonempty(...)` for trimmed optional capture appends,
+- `is_nonempty(...)`-guarded `push(...)` for trimmed optional capture appends,
 - a normalized typed return payload.
 
-The current regression suite locks this runtime behavior because the optional comma and closing-edge spans are real parser data only after trimming. `push_nonempty(array(logging_annotation), trim(capture_slice()))` makes that intention explicit: read the current anonymous capture slice, trim it, and append it only when the result is not empty. This replaces the old `capture_if(...)` / `CAPTURE_IF()` surface in the live `ebnf.spec` rule while keeping the same runtime shape for nonempty argument fragments.
+The current regression suite locks this runtime behavior because the optional comma and closing-edge spans are real parser data only after trimming. The rule reads the current anonymous capture slice once, trims it into `logging_annotation_part`, and appends it only when `is_nonempty(logging_annotation_part)` is true. This replaces the old `capture_if(...)` / `CAPTURE_IF()` surface in the live `ebnf.spec` rule while keeping the same runtime shape for nonempty argument fragments.
 
 ```text
-push_nonempty(array(logging_annotation), trim(capture_slice()));
+logging_annotation_part = trim(capture_slice());
+if(is_nonempty(logging_annotation_part));
+  push(array(logging_annotation), logging_annotation_part);
+endif();
 ```
 
-That is not incidental. The helper is short enough to use in a spec, but explicit enough to expose all three concepts the parser author cares about: the capture boundary, the normalization step, and the accumulator append rule. The regression exists so logging annotations remain a real parser feature, not just descriptor metadata.
+That is not incidental. The explicit block exposes all three concepts the parser author cares about: the capture boundary, the normalization step, and the accumulator append rule. The regression exists so logging annotations remain a real parser feature, not just descriptor metadata.
 
 ## Corpus relationship
 
@@ -748,7 +757,7 @@ This is why `ebnf.spec` is useful in the book. It shows a shipped parser that st
 - terminal token readers such as `grammar_rule`, `rule_name`, `quoted_string`, `quantifier`, `probability`, and `regex` are ActionIR-ready,
 - the source spec uses canonical wrappers such as `...` and `array(...)` in the core method-DSL band,
 - `logging_annotation` uses explicit `start_capture_slice()` boundary movement,
-- `logging_annotation` uses `push_nonempty(...)` instead of the older `capture_if(...)` / `CAPTURE_IF()` helper surface,
+- `logging_annotation` uses `is_nonempty(...)`-guarded `push(...)` instead of the older `capture_if(...)` / `CAPTURE_IF()` helper surface,
 - the full `ebnf` descriptor reports zero compatibility-surface rules,
 - `@log_rule("expr", "term")` parses at runtime into a normalized `logging_annotation` payload,
 - `ebnf/*.ebnf` corpus files parse through `ebnf.spec` and return array ASTs,

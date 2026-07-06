@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.8.2.1 — `push_nonempty(...)` can be removed from live EBNF without inventing a
+  replacement helper): For scalar capture-slice cleanup, the behavior-preserving expansion is simple and explicit:
+  assign `trim(capture_slice())` once to a scalar temporary, gate on `is_nonempty(temp)`, then `push(...)` the
+  temporary. This preserves the old helper's empty-string filtering for the EBNF logging-annotation path and keeps
+  `"0"` meaningful because `is_nonempty(...)` already has the same truth boundary. The first full phase0 rerun
+  caught a stale source-inspection lock that still expected `push_nonempty(...)`; update source locks when live
+  examples migrate, not only runtime expectations. Generated EBNF corpus inputs changed with the shipped spec, but
+  `expected.json` did not drift.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.8.1 — legacy helper retirement needs a migration slice before engine removal):
   Do not remove legacy helper arms directly. The current successful surface is uneven: Perl already treats
   `assign(...)`, `scalar(...)`, and `s(...)`/`a(...)`/`h(...)` as raw/diagnostic, but still lowers declaration
