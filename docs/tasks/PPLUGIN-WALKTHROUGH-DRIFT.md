@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PPLUGIN-WALKTHROUGH-DRIFT`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Overall roadmap - documentation and book sync`
 - Created: `2026-07-07`
 - Last updated: `2026-07-07`
@@ -43,7 +43,7 @@ target specs, including `pplugin`, at `language_agnostic_ready_ratio = 1.0000`,
 ## Task Tree
 
 - ID: `PPLUGIN-WALKTHROUGH-DRIFT`
-  Status: `active`
+  Status: `done`
   Goal: Align the pplugin mdBook walkthrough with current descriptor status and legacy-runtime boundaries.
   Children: `.0`, `.1`
 
@@ -58,20 +58,23 @@ target specs, including `pplugin`, at `language_agnostic_ready_ratio = 1.0000`,
   Commit: `PPLUGIN-WALKTHROUGH-DRIFT.0 - create pplugin walkthrough drift tree`
 
 - ID: `PPLUGIN-WALKTHROUGH-DRIFT.1`
-  Status: `pending`
+  Status: `done`
   Goal: Update the pplugin walkthrough, Knowledge Map fact, and live docs to the current descriptor status.
   Acceptance: The walkthrough describes `pplugin.spec` as a current descriptor-ready shipped spec while still
     identifying `.plg` execution as legacy Perl runtime behavior; stale below-1.0000 and compatibility-surface
     wording is gone; Knowledge Map and live docs are updated; focused descriptor/stale-wording checks, mdBook,
     memory, Knowledge Map, doctrine, and diff checks pass.
-  Verification: pending.
-  Commit: pending.
+  Verification: `perl -Iperl -MLinkedSpec -e '...'` descriptor probe; focused stale-wording scan;
+    `mdbook build docs/linkedspec-book`; `bash knowledge-map/scripts/gen_knowledge_map.sh`;
+    `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`;
+    `bash scripts/check_doctrines.sh`; `git diff --check`
+  Commit: `PPLUGIN-WALKTHROUGH-DRIFT.1 - align pplugin walkthrough status`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `PPLUGIN-WALKTHROUGH-DRIFT.1` | `pending` | Tracking owner is in place; next slice can update the pplugin walkthrough and durable fact. |
+| — | — | — | Complete; return to `docs/TASK_TREE.md` for the next PNT-eligible frontier after commit. |
 
 ## Decisions
 
@@ -96,13 +99,17 @@ target specs, including `pplugin`, at `language_agnostic_ready_ratio = 1.0000`,
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-07-07` | `PPLUGIN-WALKTHROUGH-DRIFT.0` | `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `git diff --check` | PASS — tracking-only tree registered, live docs updated, no pplugin book content or parser/runtime code changed |
+| `2026-07-07` | `PPLUGIN-WALKTHROUGH-DRIFT.1` | descriptor probe for `ratio=1.0000 blocked=0 compat=0`; focused stale-wording scan; `mdbook build docs/linkedspec-book`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `git diff --check` | PASS — walkthrough now distinguishes descriptor-ready `pplugin.spec` parsing from legacy Perl `.plg` coderef execution |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `PPLUGIN-WALKTHROUGH-DRIFT.0` | `PPLUGIN-WALKTHROUGH-DRIFT.0 - create pplugin walkthrough drift tree` | Tracking-only; no pplugin book content or parser/runtime changes. |
+| `PPLUGIN-WALKTHROUGH-DRIFT.1` | `PPLUGIN-WALKTHROUGH-DRIFT.1 - align pplugin walkthrough status` | Walkthrough/Knowledge/live-doc correction. |
 
 ## Changelog
 
 - `2026-07-07`: Created tree to own pplugin walkthrough drift before making any book edits.
+- `2026-07-07`: Updated the pplugin walkthrough and added a Knowledge fact to record the descriptor-ready
+  parser versus legacy Perl `.plg` runtime boundary.

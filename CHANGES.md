@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — PPLUGIN-WALKTHROUGH-DRIFT.1 — align pplugin walkthrough status
+
+**Scope:** Narrow mdBook and Knowledge Map drift for the shipped `pplugin.spec` walkthrough.
+
+**Change:** Updated `specs-and-corpora/pplugin-spec-walkthrough.md` so it reports the current `pplugin` descriptor
+status (`language_agnostic_ready_ratio = 1.0000`, zero blocked rules, zero compatibility-surface rules) and
+separates that parser readiness from legacy Perl `.plg` runtime behavior. Added
+`docs/knowledge/pplugin-descriptor-ready-legacy-runtime-boundary.md` and regenerated `KNOWLEDGE_MAP.md`.
+
+**Boundary:** No parser/runtime code, shipped spec source, `.plg` plugin execution behavior, or Rust oracle corpus
+changed.
+
+**Validation:** Descriptor probe reports `ratio=1.0000 blocked=0 compat=0`; focused stale-wording scan passes;
+`mdbook build docs/linkedspec-book`, `bash scripts/check_memory_architecture.sh`,
+`bash knowledge-map/scripts/check_knowledge_map.sh`, `bash scripts/check_doctrines.sh`, and `git diff --check`
+pass.
+
 ## 2026-07-07 — PPLUGIN-WALKTHROUGH-DRIFT.0 — create pplugin walkthrough drift tree
 
 **Scope:** Tracking-only ownership for pplugin mdBook drift found during the bootstrap/book/code alignment pass.

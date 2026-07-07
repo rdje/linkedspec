@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (PPLUGIN-WALKTHROUGH-DRIFT.1 — descriptor readiness is not .plg runtime portability):
+  `LinkedSpec::get_parser("pplugin", return_descriptor => 1)` currently reports
+  `language_agnostic_ready_ratio = 1.0000`, `language_agnostic_blocked_rule_count = 0`, and
+  `compatibility_surface_rule_count = 0`. That only describes the `.spec` parser's ActionIR migration status.
+  The parser can still return Perl coderefs for `.plg` bodies because `perl/PPlugin.pm` is a legacy Perl runtime
+  adapter and `specs/pplugin.spec` returns a `sub { eval substr(...) }` callback for plugin execution. Do not use
+  descriptor readiness to claim that `.plg` execution is backend-neutral.
+
 - 2026-07-07 (PPLUGIN-WALKTHROUGH-DRIFT.0 — pplugin walkthrough drift needs a narrow owner):
   The pplugin walkthrough has to distinguish two facts that are easy to conflate: `pplugin.spec` is a current
   shipped `.spec` parser whose descriptor reports `language_agnostic_ready_ratio = 1.0000`,
