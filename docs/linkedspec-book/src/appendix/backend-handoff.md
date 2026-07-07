@@ -223,25 +223,27 @@ zero-progress termination, and same-position recursive-call guard coverage.
 `.8.5` integrated the generated-source proof with the oracle corpus: the
 source-emitter test still compiles and runs an all-family generated matrix, and
 it now also compiles/runs a curated subset selected from the checked-in
-`tests/corpus/manifest.json`. That generated-source corpus subset includes
+`rust/linkedspec-runtime/tests/corpus/manifest.json`. That generated-source corpus subset includes
 authored proof fixtures, terse helper/control/user-function fixtures, and
 shipped `tclite`/`portmap` smokes. This is deliberately a subset proof; the
-full 91-fixture corpus remains the Rust interpreter oracle gate unless a later
+full 93-fixture corpus remains the Rust interpreter oracle gate unless a later
 leaf explicitly broadens generated-source corpus coverage.
 `RUST-PARITY.9` closed the Rust follow-on documentation state around that
-boundary: interpreter parity is the 91-fixture corpus contract, while generated
+boundary: interpreter parity is the 93-fixture corpus contract, while generated
 source currently proves direct structural-family execution plus the curated
 manifest subset.
 
 ### Step 6: Validate Against the Test Corpus
-Run your backend against `tests/corpus/`. The corpus root has a `manifest.json`
+Run your backend against the manifest-backed corpus under
+`rust/linkedspec-runtime/tests/corpus/`. The corpus root has a `manifest.json`
 with `case_count` and the ordered `cases` list; every manifest entry has an
-`input.spec`, `input.txt`, and `expected.json`. Your backend is compliant when
-it produces structurally equivalent output for every manifest entry, and its
-runner rejects missing fixture directories or stale extra fixture directories.
+`input.spec`, `input.txt`, and `expected.json`. Your backend is compliant with
+the current corpus gate when it produces structurally equivalent output for
+every manifest entry, and its runner rejects missing fixture directories or
+stale extra fixture directories.
 
 The checked-in Rust corpus is kept green while parity work lands incrementally. It now has
-91 fixtures, including the two minimal shipped `tclite.spec` cases restored by the
+93 fixtures, including the two minimal shipped `tclite.spec` cases restored by the
 default-mode repetition parity work; the shipped `Lispish.spec` `lispish_x_y` case now
 migrated to direct nested access; the first `hlink_substitution` raw-string cases plus the
 JSON-safe `{abc}` curly-brace delimiter case; `lib_reader.spec` scalar-attribute and
@@ -417,7 +419,7 @@ All operations must be deterministic. Specifically:
 | HandlerIR Spec | `docs/knowledge/handler-ir-design.md` | HandlerIR node structure and emitter contract |
 | Helper Contract Catalog | `docs/linkedspec-book/src/appendix/helper-contract-catalog.md` | Every helper's behavioral contract |
 | Runtime Semantics | `docs/linkedspec-book/src/appendix/runtime-semantics.md` | Parse modes, lifecycles, dispatch |
-| Test Corpus | `tests/corpus/` | Language-neutral compliance tests |
+| Test Corpus | `rust/linkedspec-runtime/tests/corpus/` | Manifest-backed language-neutral compliance tests |
 
 ## Handoff Checklist
 

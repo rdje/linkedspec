@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **PUBLIC-STATUS-DRIFT-SYNC.1 — sync public Rust status docs**
+  (DONE; tree CLOSED).
+
+  **Change:** Updated the mdBook public project status and backend handoff pages to the current Rust state:
+  interpreter parity is the manifest-backed 93-fixture oracle gate, and generated Rust source remains a
+  direct structural-family proof plus curated corpus subset. The related Rust oracle/generated-source Knowledge
+  cards and derived `KNOWLEDGE_MAP.md` were refreshed.
+
+  **Boundary:** Documentation/status only. No parser/runtime behavior changed. Long-form `ROADMAP.md` and
+  `ARCHITECTURE_STATE.md` drift remain owned by `ROADMAP-DRIFT-RECONCILE`.
+
+  **Verification:** mdBook build, focused stale-status scan, memory architecture, Knowledge Map, doctrine driver,
+  and whitespace diff checks pass.
+
 - 2026-07-07: **PUBLIC-STATUS-DRIFT-SYNC.0 — create public status drift tree**
   (DONE tracking-only; frontier `.1` public mdBook status/handoff sync next).
 

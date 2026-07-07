@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (PUBLIC-STATUS-DRIFT-SYNC.1 — public status uses the Rust manifest, not stale parity wording):
+  The current Rust interpreter oracle count comes from
+  `rust/linkedspec-runtime/tests/corpus/manifest.json` (`case_count` 93). Public docs should describe interpreter
+  parity as the current manifest-backed gate and generated Rust source as a structural-family plus curated-subset
+  proof. Do not revive the older "Rust backend parity is ongoing" wording unless a new task defines a concrete
+  parity gap; if broadening generated-source validation to every manifest case becomes desirable, split a new
+  generated-source corpus-expansion leaf rather than folding it into status docs.
+
 - 2026-07-07 (PUBLIC-STATUS-DRIFT-SYNC.0 — task-own public status/book drift before edits):
   Treat `ROADMAP_V2.md`, `MEMORY.md`, the active task-tree ledger, and
   `rust/linkedspec-runtime/tests/corpus/manifest.json` as the current status sources for public status sync. The

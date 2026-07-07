@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — PUBLIC-STATUS-DRIFT-SYNC.1 — sync public Rust status docs
+
+**Scope:** Public mdBook status/handoff drift and the matching Knowledge Map oracle facts.
+
+**Change:** Updated `overview/project-status.md` so Phase 9 no longer calls Rust parity an ongoing follow-on, and
+so the ongoing Rust item describes generated-source breadth rather than interpreter parity. Updated
+`appendix/backend-handoff.md` to point at `rust/linkedspec-runtime/tests/corpus/manifest.json`, the current
+93-fixture Rust interpreter oracle, and the generated-source curated-subset boundary. Refreshed the related Rust
+oracle/generated-source Knowledge cards and regenerated `KNOWLEDGE_MAP.md`.
+
+**Boundary:** No parser/runtime/code behavior changed. Long-form `ROADMAP.md` and `ARCHITECTURE_STATE.md` drift
+remain owned by `ROADMAP-DRIFT-RECONCILE`.
+
+**Validation:** `mdbook build docs/linkedspec-book` passes. Focused stale-status scan over the touched book pages
+is clean. `bash scripts/check_memory_architecture.sh`, `bash knowledge-map/scripts/check_knowledge_map.sh`,
+`bash scripts/check_doctrines.sh`, and `git diff --check` pass.
+
 ## 2026-07-07 — PUBLIC-STATUS-DRIFT-SYNC.0 — create public status drift tree
 
 **Scope:** Tracking-only ownership for public status/mdBook drift discovered during the bootstrap/context pass.
