@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — TASK-TREE-METADATA-HYGIENE.0 — own task-tree metadata audit
+
+**Scope:** Tracking-only ownership for the user-requested audit of non-closed task trees and stale per-file task
+metadata.
+
+**Change:** Added `docs/tasks/TASK-TREE-METADATA-HYGIENE.md` and registered it in `docs/TASK_TREE.md`. The tree
+records the authoritative live non-closed task-tree inventory and owns follow-up cleanup for stale top-level
+metadata and stale frontier/verification rows in older task files.
+
+**Boundary:** No parser/runtime/source behavior, public mdBook content, or old task-file cleanup changed in this
+slice.
+
+**Validation:** `bash scripts/check_memory_architecture.sh`, `bash scripts/check_doctrines.sh`, and
+`git diff --check` pass.
+
 ## 2026-07-07 — PPLUGIN-WALKTHROUGH-DRIFT.1 — align pplugin walkthrough status
 
 **Scope:** Narrow mdBook and Knowledge Map drift for the shipped `pplugin.spec` walkthrough.

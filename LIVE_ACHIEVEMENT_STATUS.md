@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **TASK-TREE-METADATA-HYGIENE.0 — own task-tree metadata audit**
+  (DONE tracking-only; frontier `.1` top-level metadata reconciliation next).
+
+  **Change:** Added `TASK-TREE-METADATA-HYGIENE` to own the user-requested audit of non-closed task trees and stale
+  per-file task metadata. The authoritative live non-closed trees are recorded; stale old task-file metadata is now
+  split into cleanup leaves before any edits.
+
+  **Boundary:** Documentation/tracking only. No parser/runtime behavior changed, no public mdBook behavior changed,
+  and no old task files were cleaned up in this slice.
+
+  **Verification:** Memory architecture, doctrine driver, and whitespace diff checks pass.
+
 - 2026-07-07: **PUBLIC-STATUS-DRIFT-SYNC.2 — fix residual shipped corpus count drift**
   (DONE; tree CLOSED).
 

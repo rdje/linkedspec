@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (TASK-TREE-METADATA-HYGIENE.0 — central index is authoritative for live task state):
+  When auditing open task trees, use `docs/TASK_TREE.md` plus `MEMORY.md` as the live-state authority before trusting
+  stale rows inside old task files. The 2026-07-07 audit found live central rows for `SPEC-FORMAT-TERSE`,
+  `STAGED-LINKED-PARSING`, `DOCTRINE-ENFORCEMENT-ADOPT`, `SPEC-LANG-REFERENCE`, and
+  `ROADMAP-DRIFT-RECONCILE`; their frontiers are empty, deferred, or paused. Older per-file metadata drift is now
+  owned by `TASK-TREE-METADATA-HYGIENE.1`/`.2` instead of being edited during bootstrap.
+
 - 2026-07-07 (PPLUGIN-WALKTHROUGH-DRIFT.1 — descriptor readiness is not .plg runtime portability):
   `LinkedSpec::get_parser("pplugin", return_descriptor => 1)` currently reports
   `language_agnostic_ready_ratio = 1.0000`, `language_agnostic_blocked_rule_count = 0`, and

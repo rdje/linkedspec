@@ -18,22 +18,23 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `PPLUGIN-WALKTHROUGH-DRIFT.1` — pplugin walkthrough now matches the current descriptor
-  status (`ratio=1.0000`, `blocked=0`, `compat=0`) while keeping `.plg` execution scoped to the legacy Perl
-  runtime; Knowledge fact added.
-- prior_leaf: `PPLUGIN-WALKTHROUGH-DRIFT.0` — tracking-only owner created before the book edit.
+- latest_completed_leaf: `TASK-TREE-METADATA-HYGIENE.0` — tracking-only owner for the user-requested audit of
+  non-closed task trees and stale per-file task metadata. No old task files were cleaned up in this slice.
+- prior_leaf: `PPLUGIN-WALKTHROUGH-DRIFT.1` — pplugin walkthrough now matches current descriptor status while
+  `.plg` execution remains scoped to the legacy Perl runtime.
 - latest_commit: HEAD containing this pointer should be
-  `PPLUGIN-WALKTHROUGH-DRIFT.1 - align pplugin walkthrough status`; parent before this slice is
-  `PPLUGIN-WALKTHROUGH-DRIFT.0 - create pplugin walkthrough drift tree` (`e18be6e1`).
+  `TASK-TREE-METADATA-HYGIENE.0 - own task-tree metadata audit`; parent before this slice is
+  `PPLUGIN-WALKTHROUGH-DRIFT.1 - align pplugin walkthrough status` (`47997395`).
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: none in-flight after `PPLUGIN-WALKTHROUGH-DRIFT.1`; repo should be handoff-ready after commit
+- active_work_unit: none in-flight after `TASK-TREE-METADATA-HYGIENE.0`; repo should be handoff-ready after commit
   and `git_message_brief.txt` cleanup.
-- next_action: resume from `docs/TASK_TREE.md`. Current active trees have empty/deferred/paused frontiers; do not
-  edit a deferred leaf unless the user explicitly activates it or a new task-tree owner is created while clean.
+- next_action: `TASK-TREE-METADATA-HYGIENE.1` if continuing hygiene work: reconcile top-level metadata in
+  `FLUENT-BLOCK-EQUIVALENCE`, `MEDIUM-IMPACT`, and `PHASE0-BACKHALF-TRIAGE`. Other active rows remain
+  empty/deferred/paused unless explicitly activated.
 - latest_bootstrap_read: 2026-07-07 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, mdBook source, core Perl/Rust implementation, shipped specs, tooling, and focused
-  test harness inventory. The full book/code alignment pass found pplugin walkthrough drift; it is now corrected
-  and closed by `PPLUGIN-WALKTHROUGH-DRIFT.1`.
+  test harness inventory. The task-tree audit found stale per-file metadata; it is now owned by
+  `TASK-TREE-METADATA-HYGIENE`.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.
