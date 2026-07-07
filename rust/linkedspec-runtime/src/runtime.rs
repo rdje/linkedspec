@@ -115,6 +115,12 @@ struct RuntimeTraceEvent {
     level: TraceLevel,
 }
 
+#[derive(Debug, Clone)]
+pub(crate) struct RuntimeScopedVariableBinding {
+    name: String,
+    snapshot: RuntimeVariableSnapshot,
+}
+
 /// Saved scalar/array/hash variable stores.
 ///
 /// User-defined functions run with fresh local stores, then the caller's stores
@@ -310,6 +316,28 @@ impl RuntimeContext {
         self.bare_kinds
             .insert(name.to_string(), RuntimeVarKind::Scalar);
         self.scalars.insert(name.to_string(), value);
+    }
+
+    pub(crate) fn enter_scoped_scalar_binding(
+        &mut self,
+        name: &str,
+        value: RuntimeValue,
+    ) -> RuntimeScopedVariableBinding {
+        let snapshot = self.snapshot_variable(name);
+        self.bare_kinds
+            .insert(name.to_string(), RuntimeVarKind::Scalar);
+        self.scalars.insert(name.to_string(), value);
+        self.arrays.remove(name);
+        self.hashes.remove(name);
+        self.descriptor_scalar_bare_reads.remove(name);
+        RuntimeScopedVariableBinding {
+            name: name.to_string(),
+            snapshot,
+        }
+    }
+
+    pub(crate) fn exit_scoped_variable_binding(&mut self, binding: RuntimeScopedVariableBinding) {
+        self.restore_variable_snapshot(&binding.name, binding.snapshot);
     }
 
     pub fn get_bare_value(&self, name: &str) -> RuntimeValue {
@@ -508,6 +536,56 @@ impl RuntimeContext {
 
     pub(crate) fn record_rule_local_binding(&mut self, name: &str) {
         self.record_declaration(name);
+    }
+
+    fn snapshot_variable(&self, name: &str) -> RuntimeVariableSnapshot {
+        RuntimeVariableSnapshot {
+            scalar: self.scalars.get(name).cloned(),
+            array: self.arrays.get(name).cloned(),
+            hash: self.hashes.get(name).cloned(),
+            bare_kind: self.bare_kinds.get(name).copied(),
+            descriptor_scalar_bare_read: self.descriptor_scalar_bare_reads.contains(name),
+        }
+    }
+
+    fn restore_variable_snapshot(&mut self, name: &str, snapshot: RuntimeVariableSnapshot) {
+        match snapshot.scalar {
+            Some(value) => {
+                self.scalars.insert(name.to_string(), value);
+            }
+            None => {
+                self.scalars.remove(name);
+            }
+        }
+        match snapshot.array {
+            Some(value) => {
+                self.arrays.insert(name.to_string(), value);
+            }
+            None => {
+                self.arrays.remove(name);
+            }
+        }
+        match snapshot.hash {
+            Some(value) => {
+                self.hashes.insert(name.to_string(), value);
+            }
+            None => {
+                self.hashes.remove(name);
+            }
+        }
+        match snapshot.bare_kind {
+            Some(value) => {
+                self.bare_kinds.insert(name.to_string(), value);
+            }
+            None => {
+                self.bare_kinds.remove(name);
+            }
+        }
+        if snapshot.descriptor_scalar_bare_read {
+            self.descriptor_scalar_bare_reads.insert(name.to_string());
+        } else {
+            self.descriptor_scalar_bare_reads.remove(name);
+        }
     }
 
     fn record_declaration(&mut self, name: &str) {

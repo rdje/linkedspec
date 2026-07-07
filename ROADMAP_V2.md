@@ -289,10 +289,12 @@ DSL helper surface consistency note:
   colon-migration diagnostics, and `.9.6` closed final no-drift scans across current specs/corpora/docs/tests/KM
   and implementation support sites. The user explicitly reactivated `SPEC-FORMAT-TERSE.14` on 2026-07-07; `.14.1`
   split trailing block arguments before code, selected `with(value) { ... }` as the first helper-form MVP, and
-  `.14.2` landed Perl reference parsing/lowering/runtime support for `with(value) { ... }` / `with() { ... }`.
-  The active frontier is `.14.3` for Rust helper-form parity. `SPEC-FORMAT-TERSE.10`, `.12`, and `.13` remain
-  deferred unless explicitly activated. The Rust oracle corpus is now 93 fixtures
-  after `.15.2.3` added `terse_15_2_3_bare_value_reads_and_case_labels`; it had reached 92 fixtures after
+  `.14.2` landed Perl reference parsing/lowering/runtime support for `with(value) { ... }` / `with() { ... }`;
+  `.14.3` landed Rust helper-form parity and added the `terse_14_3_with_helper_trailing_block` oracle fixture.
+  The active frontier is `.14.4` for receiver `.with() { ... }`. `SPEC-FORMAT-TERSE.10`, `.12`, and `.13` remain
+  deferred unless explicitly activated. The Rust oracle corpus is now 94 fixtures
+  after `.14.3`; it had reached 93 fixtures after `.15.2.3` added
+  `terse_15_2_3_bare_value_reads_and_case_labels`, and 92 fixtures after
   `SPEC-FORMAT-TERSE.11.4` added `terse_11_4_nested_mixed_value_path_assignment`, the Lispish fixture was
   re-enabled, migrated to direct access under `SCALAREF-RETIREMENT`, the first `RUST-PARITY.7.2` shipped-spec
   batch added two `hlink_substitution` raw-string cases, `RUST-PARITY.7.3.3.2` added the JSON-safe `{abc}` curly

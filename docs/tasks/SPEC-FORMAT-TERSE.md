@@ -6,11 +6,11 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-07` (**`.14.2` DONE; Perl helper-form trailing block arguments landed**).
+- Last updated: `2026-07-07` (**`.14.3` DONE; Rust helper-form trailing block parity landed**).
   User directive 2026-07-07 reactivated the deferred `.14` trailing block-argument backlog item. `.14.1` defined
-  the MVP contract before code, and `.14.2` shipped the Perl reference helper-form surface
-  `with(value) { ... }` / `with() { ... }` as an immediate, non-closure trailing block argument. Receiver
-  `.with() { ... }` and Rust parity remain split behind it. Prior
+  the MVP contract before code, `.14.2` shipped the Perl reference helper-form surface, and `.14.3` shipped Rust
+  parser/runtime parity for `with(value) { ... }` / `with() { ... }` as immediate, non-closure trailing block
+  arguments. Receiver `.with() { ... }` remains split behind it. Prior
   **`.9.6` DONE; hash-literal colon association `.9` is closed**.
   Final no-drift scans across current specs, corpus sources, generated oracle inputs, tests, docs, mdBook, current
   Knowledge facts, and implementation support sites found no unclassified current hash-literal `=>` surface.
@@ -3890,13 +3890,26 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.14.2 - add Perl helper trailing blocks`
 
 - ID: `SPEC-FORMAT-TERSE.14.3`
-  Status: `pending`
+  Status: `done` (completed 2026-07-07)
   Goal: Implement Rust helper-form parity for `with(value) { ... }`.
   Acceptance: Rust parser/runtime recognizes the same helper-form trailing block syntax and semantics as the Perl
     reference, including scoped `value` binding/restoration, block-local return behavior, zero-arg `with()`, and
     hash-literal boundary preservation. Add a generated oracle fixture and focused Rust parser/runtime tests.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-07. Rust `expr` parser now appends a trailing `BlockValue` argument only for
+    helper-form `with(...) { ... }`; validation recognizes `with`; runtime dispatch treats `with` as lazy, evaluates
+    the optional value argument before block execution, binds scoped `value`, restores the prior same-name scalar,
+    array, hash, bare-kind, and descriptor-read state afterward, and reuses expression-valued block return
+    semantics. Focused parser tests lock accepted `with`, hash-literal payloads, and non-`with` rejection. Focused
+    runtime tests lock `with("x") { return(cat(value, "!")) }`, `with() { return(is_undefined(value)) }`,
+    restoration of an outer `value`, and hash literal payloads. The generated oracle fixture
+    `terse_14_3_with_helper_trailing_block` raises the Rust corpus to **94** fixtures and locks the canonical value
+    `["inner!","outer","undef",{"stage":"ok"}]`.
+    Checks: `cargo fmt --check`, `cargo test -p linkedspec-core trailing_block`,
+    `cargo test -p linkedspec-runtime terse_14_3`, `perl tools/gen_oracle_corpus.pl`,
+    `cargo test -p linkedspec-runtime oracle_corpus_matches_perl_reference`, `mdbook build docs/linkedspec-book`,
+    `bash scripts/check_memory_architecture.sh`, `bash knowledge-map/scripts/check_knowledge_map.sh`,
+    `bash scripts/check_doctrines.sh`, and `git diff --check` pass.
+  Commit: `SPEC-FORMAT-TERSE.14.3 - add Rust helper trailing blocks`
 
 - ID: `SPEC-FORMAT-TERSE.14.4`
   Status: `pending`
@@ -4257,13 +4270,13 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | 31 | `SPEC-FORMAT-TERSE.9.6` | `done` | final hash-literal colon no-drift closeout |
 | 32 | `SPEC-FORMAT-TERSE.14.1` | `done` | user reactivated trailing block arguments; MVP `with(value) { ... }` contract and implementation split are locked before code |
 | 33 | `SPEC-FORMAT-TERSE.14.2` | `done` | Perl reference helper-form trailing block arguments for `with(value) { ... }` landed with scoped `value`, zero-arg `with()`, and unsupported-callee diagnostics |
-| 34 | `SPEC-FORMAT-TERSE.14.3` | `pending` | Rust helper-form parity after Perl reference semantics land |
+| 34 | `SPEC-FORMAT-TERSE.14.3` | `done` | Rust helper-form parity landed with scoped `value`, zero-arg `with()`, hash payloads, and a 94th oracle fixture |
 | 35 | `SPEC-FORMAT-TERSE.14.4` | `pending` | receiver `.with() { ... }` trailing block arguments |
 | 36 | `SPEC-FORMAT-TERSE.14.5` | `pending` | mdBook/KM/oracle/no-drift closeout for shipped `.14` surface |
 | — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.12` | `deferred` / `spec backlog` | track future hash-tree attached-block traversal; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.13` | `deferred` / `backlog` | track lower-priority array-tree traversal analog; not PNT-eligible until explicitly activated |
-| — | `SPEC-FORMAT-TERSE.14` | `active` / `split` | trailing block-argument type for helpers/methods without closures; `.14.3` is the Rust parity frontier after Perl `.14.2` landed |
+| — | `SPEC-FORMAT-TERSE.14` | `active` / `split` | trailing block-argument type for helpers/methods without closures; `.14.4` is the receiver `.with() { ... }` frontier after helper-form parity landed |
 | — | `SPEC-FORMAT-TERSE.6.1` | `done` | User directive owned under the existing terse-format tree; shipped-spec inventory recorded before any `.spec` edit. |
 | — | `SPEC-FORMAT-TERSE.6.2.1` | `done` | shipped specs no longer use active `declare(...)` / `.declare(...)`; focused compile, phase0, and Rust corpus oracle pass |
 | — | `SPEC-FORMAT-TERSE.6.2.2` | `done` | shipped specs no longer use active old helper spellings; focused compile, phase0, and Rust corpus oracle pass |
@@ -5579,6 +5592,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   scoped lexical `value` during immediate block execution, preserves block-local `return(expr)`, keeps `{ key :
   value }` as a hash literal, and reports unsupported trailing-block callees with the standard unsupported-helper
   sentinel. mdBook documents the Perl reference surface without claiming Rust parity. Frontier moves to `.14.3`.
+- `2026-07-07`: **`.14.3` DONE — Rust helper-form trailing block parity.**
+  Rust now parses and executes helper-form `with(value) { ... }` / `with() { ... }` with the same immediate
+  non-closure semantics as the Perl reference: scoped `value`, block-local `return(expr)`, outer binding
+  restoration, zero-arg `undef`, and hash-literal boundary preservation. The generated oracle corpus now has
+  **94** fixtures after adding `terse_14_3_with_helper_trailing_block`; focused parser/runtime tests and the full
+  corpus oracle pass. Frontier moves to `.14.4`.
 
 - `2026-07-05`: **`.12`/`.13` DEFERRED/BACKLOG — tree traversal attached-block ideas.**
   User directive tracked hash-tree traversal methods with attached code blocks as future spec work and clarified

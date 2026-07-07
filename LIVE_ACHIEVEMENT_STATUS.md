@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **SPEC-FORMAT-TERSE.14.3 — add Rust helper trailing blocks**
+  (DONE implementation; frontier `.14.4` receiver `.with() { ... }` next).
+
+  **Change:** Rust parser/runtime parity now supports helper-form `with(value) { ... }` / `with() { ... }` as an
+  immediate trailing block argument. The block runs in the caller's current action/runtime context; only scalar
+  `value` is the portable scoped block parameter. Runtime restores the prior `value` binding after the block, and
+  block-local `return(expr)` yields the `with` result.
+
+  **Boundary:** Receiver `.with() { ... }`, bare `with { ... }`, closures, assignable/returnable blocks, delayed
+  callbacks, and non-`with` helper trailing blocks remain unshipped.
+
+  **Verification:** Focused Rust parser/runtime checks pass; oracle generation emits **94** fixtures; Rust
+  `oracle_corpus_matches_perl_reference` passes over the full manifest-backed corpus.
+
 - 2026-07-07: **SPEC-FORMAT-TERSE.14.2 — add Perl helper trailing blocks**
   (DONE implementation; frontier `.14.3` Rust helper-form parity next).
 
@@ -47,7 +61,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - 2026-07-07: **PUBLIC-STATUS-DRIFT-SYNC.2 — fix residual shipped corpus count drift**
   (DONE; tree CLOSED).
 
-  **Change:** Updated the shipped-specs/corpora mdBook page to use the current manifest-backed 93-fixture Rust
+  **Change:** Updated the shipped-specs/corpora mdBook page to use the then-current manifest-backed 93-fixture Rust
   oracle and to point at `rust/linkedspec-runtime/tests/corpus/manifest.json` for the exact case list.
 
   **Boundary:** Documentation/status only. No parser/runtime behavior changed. Long-form roadmap and architecture
@@ -70,8 +84,8 @@ Current execution status for interruption-safe batch workflow recovery.
 - 2026-07-07: **PUBLIC-STATUS-DRIFT-SYNC.1 — sync public Rust status docs**
   (DONE; tree CLOSED).
 
-  **Change:** Updated the mdBook public project status and backend handoff pages to the current Rust state:
-  interpreter parity is the manifest-backed 93-fixture oracle gate, and generated Rust source remains a
+  **Change:** Updated the mdBook public project status and backend handoff pages to the then-current Rust state:
+  interpreter parity was the then-current manifest-backed 93-fixture oracle gate, and generated Rust source remains a
   direct structural-family proof plus curated corpus subset. The related Rust oracle/generated-source Knowledge
   cards and derived `KNOWLEDGE_MAP.md` were refreshed.
 

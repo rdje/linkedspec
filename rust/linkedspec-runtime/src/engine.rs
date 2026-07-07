@@ -3304,12 +3304,12 @@ impl Engine {
         use linkedspec_core::expr::Expr;
         match expr {
             Expr::Call { name, args } => {
-                // Lazy-evaluation calls: if/switch/while/elseif/else/case/default
+                // Lazy-evaluation calls: if/switch/while/with/elseif/else/case/default
                 // Branch bodies must NOT be evaluated eagerly — they are
                 // evaluated only when their condition matches.
                 let is_lazy = matches!(
                     name.as_str(),
-                    "if" | "switch" | "while" | "elseif" | "else" | "case" | "default"
+                    "if" | "switch" | "while" | "with" | "elseif" | "else" | "case" | "default"
                 );
                 if is_lazy {
                     return self.call_helper_lazy(name, args, ctx, rule_label);
@@ -4336,6 +4336,40 @@ impl Engine {
             return None;
         };
         Some((args[0].value(), block))
+    }
+
+    fn eval_with_trailing_block(
+        &self,
+        raw_args: &[linkedspec_core::expr::Arg],
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        use linkedspec_core::expr::Expr;
+
+        if raw_args.is_empty() || raw_args.len() > 2 {
+            return Err(format!(
+                "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: helper `with(...) {{ ... }}` expects zero or one value argument plus a trailing block in rule '{rule_label}'"
+            ));
+        }
+
+        let Some(block_arg) = raw_args.last() else {
+            unreachable!("raw_args.is_empty() was checked above");
+        };
+        let Expr::BlockValue { block } = block_arg.value() else {
+            return Err(format!(
+                "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: helper `with(...)` requires a trailing block argument in rule '{rule_label}'"
+            ));
+        };
+
+        let scoped_value = if raw_args.len() == 2 {
+            self.eval_expr(raw_args[0].value(), ctx, rule_label)?
+        } else {
+            RuntimeValue::Undef
+        };
+        let binding = ctx.enter_scoped_scalar_binding("value", scoped_value);
+        let result = self.eval_block_value(block, ctx, rule_label);
+        ctx.exit_scoped_variable_binding(binding);
+        result
     }
 
     fn while_iteration_limit_message() -> String {
@@ -6292,6 +6326,7 @@ impl Engine {
                 }
                 Ok(RuntimeValue::Undef)
             }
+            "with" => self.eval_with_trailing_block(raw_args, ctx, rule_label),
             "case" => {
                 if raw_args.len() >= 2 {
                     let _ = self.eval_expr(raw_args[0].value(), ctx, rule_label)?;

@@ -483,6 +483,7 @@ fn is_known_actionir_call_name(name: &str) -> bool {
                 | "uppercase"
                 | "uppercase_each"
                 | "when"
+                | "with"
                 | "while"
         )
 }

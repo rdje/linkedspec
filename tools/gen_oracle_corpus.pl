@@ -1018,6 +1018,22 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.14.3 — Rust helper-form trailing block parity ──
+    #
+    # The Perl reference is the oracle for immediate, non-closure helper-form
+    # trailing block arguments. Rust must parse `with(value) { ... }` and
+    # `with() { ... }`, bind/restore the scoped `value`, and preserve hash
+    # literal payloads inside the block.
+    {   case   => 'terse_14_3_with_helper_trailing_block',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(value, "outer"); return(array(with("inner") { return(cat(value, "!")) }, value, with() { return(if(is_undefined(value), "undef", else("bad"))) }, with("ok") { return({ "stage" : value }) })) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.2.3.5.6 — typed wrapper quoted-name boundaries ──
     #
     # Single-argument aggregate wrappers name a working variable only when the

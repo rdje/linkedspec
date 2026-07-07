@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — SPEC-FORMAT-TERSE.14.3 — add Rust helper trailing blocks
+
+**Scope:** Rust helper-form parity for `with(value) { ... }` / `with() { ... }` trailing block arguments.
+
+**Change:** Rust now parses helper-form `with(...) { ... }` by appending a final `BlockValue` argument only for the
+owned `with` helper form. Runtime dispatch treats `with` as lazy, evaluates the optional value argument, binds
+scoped scalar `value` for immediate block execution, restores the previous same-name runtime state afterward, and
+reuses expression-valued block semantics for block-local `return(expr)`. Public docs now state the lexical
+execution context: the block runs in the caller's current action/runtime context, while only scalar `value` is the
+portable scoped block parameter.
+
+**Boundary:** Receiver `.with() { ... }`, bare `with { ... }`, closures, assignable/returnable blocks, delayed
+callbacks, and non-`with` helper trailing blocks remain out of scope.
+
+**Validation:** `cargo fmt --check`, `cargo test -p linkedspec-core trailing_block`,
+`cargo test -p linkedspec-runtime terse_14_3`, `perl tools/gen_oracle_corpus.pl` (94 fixtures),
+`cargo test -p linkedspec-runtime oracle_corpus_matches_perl_reference`, `mdbook build docs/linkedspec-book`,
+`bash scripts/check_memory_architecture.sh`, `bash knowledge-map/scripts/check_knowledge_map.sh`,
+`bash scripts/check_doctrines.sh`, and `git diff --check` pass.
+
 ## 2026-07-07 — SPEC-FORMAT-TERSE.14.2 — add Perl helper trailing blocks
 
 **Scope:** Perl reference support for helper-form trailing block arguments under `SPEC-FORMAT-TERSE.14`.
@@ -86,7 +106,7 @@ in this slice.
 **Scope:** Residual public mdBook count drift found during the full book read.
 
 **Change:** Updated `specs-and-corpora/shipped-specs-and-corpora.md` from the older 91-fixture Rust oracle wording
-to the current manifest-backed 93-fixture corpus, and pointed readers at
+to the then-current manifest-backed 93-fixture corpus, and pointed readers at
 `rust/linkedspec-runtime/tests/corpus/manifest.json` as the exact case-list source.
 
 **Boundary:** No parser/runtime/code behavior changed. Long-form `ROADMAP.md`, `ROADMAP_V2.md`, and
@@ -118,8 +138,8 @@ already-completed closeout.
 
 **Change:** Updated `overview/project-status.md` so Phase 9 no longer calls Rust parity an ongoing follow-on, and
 so the ongoing Rust item describes generated-source breadth rather than interpreter parity. Updated
-`appendix/backend-handoff.md` to point at `rust/linkedspec-runtime/tests/corpus/manifest.json`, the current
-93-fixture Rust interpreter oracle, and the generated-source curated-subset boundary. Refreshed the related Rust
+`appendix/backend-handoff.md` to point at `rust/linkedspec-runtime/tests/corpus/manifest.json`, the
+then-current 93-fixture Rust interpreter oracle, and the generated-source curated-subset boundary. Refreshed the related Rust
 oracle/generated-source Knowledge cards and regenerated `KNOWLEDGE_MAP.md`.
 
 **Boundary:** No parser/runtime/code behavior changed. Long-form `ROADMAP.md` and `ARCHITECTURE_STATE.md` drift

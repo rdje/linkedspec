@@ -226,10 +226,10 @@ it now also compiles/runs a curated subset selected from the checked-in
 `rust/linkedspec-runtime/tests/corpus/manifest.json`. That generated-source corpus subset includes
 authored proof fixtures, terse helper/control/user-function fixtures, and
 shipped `tclite`/`portmap` smokes. This is deliberately a subset proof; the
-full 93-fixture corpus remains the Rust interpreter oracle gate unless a later
+full 94-fixture corpus remains the Rust interpreter oracle gate unless a later
 leaf explicitly broadens generated-source corpus coverage.
 `RUST-PARITY.9` closed the Rust follow-on documentation state around that
-boundary: interpreter parity is the 93-fixture corpus contract, while generated
+boundary: interpreter parity is the 94-fixture corpus contract, while generated
 source currently proves direct structural-family execution plus the curated
 manifest subset.
 
@@ -243,7 +243,7 @@ every manifest entry, and its runner rejects missing fixture directories or
 stale extra fixture directories.
 
 The checked-in Rust corpus is kept green while parity work lands incrementally. It now has
-93 fixtures, including the two minimal shipped `tclite.spec` cases restored by the
+94 fixtures, including the `with(...) { ... }` trailing block helper case, the two minimal shipped `tclite.spec` cases restored by the
 default-mode repetition parity work; the shipped `Lispish.spec` `lispish_x_y` case now
 migrated to direct nested access; the first `hlink_substitution` raw-string cases plus the
 JSON-safe `{abc}` curly-brace delimiter case; `lib_reader.spec` scalar-attribute and

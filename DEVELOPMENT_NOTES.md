@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (SPEC-FORMAT-TERSE.14.3 — Rust `with(value) { ... }` helper-form parity):
+  Rust now mirrors the Perl helper-form trailing block surface. The expression parser appends a final `BlockValue`
+  only for `with(...) { ... }`, validation recognizes `with`, and runtime dispatch is lazy so the block is not
+  evaluated before the scoped `value` binding exists. The lexical model is call-site execution, not a closure or
+  function frame: captures, `retv`, cursor state, helper/function visibility, and ordinary working-variable side
+  effects are shared with the surrounding action/runtime context. Only scalar `value` is the portable scoped block
+  parameter in this MVP; mutations to other variable names persist. The Rust oracle corpus is now 94 fixtures after
+  `terse_14_3_with_helper_trailing_block`.
+
 - 2026-07-07 (SPEC-FORMAT-TERSE.14.2 — Perl `with(value) { ... }` is a flagged trailing block call):
   The ActionIR AST parser now represents helper-form trailing blocks as normal `call` nodes with
   `trailing_block_arg => 1` and a final `block_value` argument. MethodLowering must treat that flag as a dispatch
@@ -8,7 +17,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<callee>` instead of becoming ordinary helper arguments. The accepted
   lowering evaluates the optional value argument before introducing `my $value`, then executes the existing
   expression-valued block lowerer inside the scoped lexical binding. This preserves outer `value` bindings and
-  keeps `return(expr)` block-local. Rust parity is `.14.3`; receiver `.with() { ... }` is `.14.4`.
+  keeps `return(expr)` block-local. Rust parity landed under `.14.3`; receiver `.with() { ... }` is `.14.4`.
 
 - 2026-07-07 (SPEC-FORMAT-TERSE.14.1 — trailing block args are immediate non-closure callbacks):
   `SPEC-FORMAT-TERSE.14` is the owner for trailing code blocks used as helper/receiver arguments. The first MVP is
@@ -46,8 +55,9 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   Public Rust oracle count drift can survive outside the main status/handoff pages. When reconciling corpus counts,
   scan the whole public book surface that mentions fixture counts, not only `overview/project-status.md` and
   `appendix/backend-handoff.md`. The exact Rust interpreter oracle count comes from
-  `rust/linkedspec-runtime/tests/corpus/manifest.json` (`case_count` 93 today); book prose should point to that
-  manifest for the complete case list instead of hand-maintaining a long exact enumeration. Stale roadmap and
+  `rust/linkedspec-runtime/tests/corpus/manifest.json` (then-current `case_count` 93 at that slice; use the
+  manifest for today's count); book prose should point to that manifest for the complete case list instead of
+  hand-maintaining a long exact enumeration. Stale roadmap and
   architecture-state count references remain owned by deferred `ROADMAP-DRIFT-RECONCILE` leaves.
 
 - 2026-07-07 (BOOTSTRAP-RESUME-SYNC.1 — stale layer-A state must be task-owned before correction):
@@ -58,7 +68,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 - 2026-07-07 (PUBLIC-STATUS-DRIFT-SYNC.1 — public status uses the Rust manifest, not stale parity wording):
   The current Rust interpreter oracle count comes from
-  `rust/linkedspec-runtime/tests/corpus/manifest.json` (`case_count` 93). Public docs should describe interpreter
+  `rust/linkedspec-runtime/tests/corpus/manifest.json` (then-current `case_count` 93 at that slice). Public docs should describe interpreter
   parity as the current manifest-backed gate and generated Rust source as a structural-family plus curated-subset
   proof. Do not revive the older "Rust backend parity is ongoing" wording unless a new task defines a concrete
   parity gap; if broadening generated-source validation to every manifest case becomes desirable, split a new
@@ -67,8 +77,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - 2026-07-07 (PUBLIC-STATUS-DRIFT-SYNC.0 — task-own public status/book drift before edits):
   Treat `ROADMAP_V2.md`, `MEMORY.md`, the active task-tree ledger, and
   `rust/linkedspec-runtime/tests/corpus/manifest.json` as the current status sources for public status sync. The
-  Rust oracle manifest is under `rust/linkedspec-runtime/tests/corpus/manifest.json` and currently records 93
-  cases; the root `tests/corpus/` directory is the older three-case public corpus and is not the Rust parity count.
+  Rust oracle manifest is under `rust/linkedspec-runtime/tests/corpus/manifest.json` and recorded 93 cases at that
+  slice; the root `tests/corpus/` directory is the older three-case public corpus and is not the Rust parity count.
   Any mdBook status edit must be task-owned first by `PUBLIC-STATUS-DRIFT-SYNC.1`, and the older
   `ROADMAP-DRIFT-RECONCILE` leaves still own the long-form roadmap and architecture-state refresh separately.
 

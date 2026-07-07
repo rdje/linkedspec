@@ -18,7 +18,8 @@
 //! hash_index_assignment → name '[' expr ']' '=' expr  (hash mutation expression; statement-compatible)
 //! expr        → primary ('.' method_call)*
 //! primary     → call | nested_access | indexed_var | literal | block | grouped | variable
-//! call        → name '(' args? ')' | symbol '(' args? ')'
+//! call        → name '(' args? ')' trailing_block? | symbol '(' args? ')'
+//! trailing_block → '{' stmts '}'          (currently helper-form `with(...)` only)
 //! method_call → name '(' args? ')'
 //! args        → arg (',' arg)*
 //! arg         → expr | name '=' expr       (keyword argument only for keyword-aware callees)
@@ -1342,7 +1343,7 @@ impl<'a> Parser<'a> {
             }
             self.advance(1); // consume ')'
 
-            let expr = Expr::Call { name, args };
+            let expr = self.parse_optional_trailing_block_arg(name, args)?;
             // Parse any fluent chain continuations: .method(args)
             self.parse_fluent_chain(expr)
         } else if self.peek() == Some('[') {
@@ -1391,6 +1392,27 @@ impl<'a> Parser<'a> {
         Err(format!(
             "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read: retired colon-prefixed scalar-slot syntax at position {colon_pos}; use bare variable reads"
         ))
+    }
+
+    fn parse_optional_trailing_block_arg(
+        &mut self,
+        name: String,
+        mut args: Vec<Arg>,
+    ) -> Result<Expr, String> {
+        if name != "with" {
+            return Ok(Expr::Call { name, args });
+        }
+
+        let before_whitespace = self.pos;
+        self.skip_whitespace();
+        if self.peek() != Some('{') {
+            self.pos = before_whitespace;
+            return Ok(Expr::Call { name, args });
+        }
+
+        let block = self.parse_attached_branch_block("with")?;
+        args.push(Arg::Positional(Expr::BlockValue { block }));
+        Ok(Expr::Call { name, args })
     }
 
     fn parse_access_segments(&mut self, name: &str) -> Result<Vec<AccessSegment>, String> {
@@ -1932,6 +1954,70 @@ mod tests {
         assert!(
             err.contains("expected ';' or newline"),
             "attached while followed by a same-line statement must still need a separator: {err}"
+        );
+    }
+
+    #[test]
+    fn parse_with_helper_trailing_block_as_final_block_argument() {
+        let block = CodeBlock::parse(r#"return(with("x") { return(cat(value, "!")) })"#).unwrap();
+
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                assert_eq!(args.len(), 1);
+                match args[0].value() {
+                    Expr::Call { name, args } => {
+                        assert_eq!(name, "with");
+                        assert_eq!(args.len(), 2);
+                        assert!(
+                            matches!(args[0].value(), Expr::StringLiteral { value } if value == "x")
+                        );
+                        match args[1].value() {
+                            Expr::BlockValue { block } => {
+                                assert_eq!(statement_call_names(block), vec!["return"]);
+                            }
+                            other => panic!("expected trailing with block, got {other:?}"),
+                        }
+                    }
+                    other => panic!("expected with call payload, got {other:?}"),
+                }
+            }
+            other => panic!("expected return call, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn parse_with_helper_trailing_block_preserves_hash_literal_boundary() {
+        let block =
+            CodeBlock::parse(r#"return(with("ok") { return({ "stage" : value }) })"#).unwrap();
+
+        let Expr::Call { args, .. } = &block.statements[0].expr else {
+            panic!("expected return call");
+        };
+        let Expr::Call {
+            name: with_name,
+            args: with_args,
+        } = args[0].value()
+        else {
+            panic!("expected with call");
+        };
+        assert_eq!(with_name, "with");
+        let Expr::BlockValue { block } = with_args[1].value() else {
+            panic!("expected trailing block argument");
+        };
+        let Expr::Call { name, args } = &block.statements[0].expr else {
+            panic!("expected return call inside with block");
+        };
+        assert_eq!(name, "return");
+        assert!(matches!(args[0].value(), Expr::HashLiteral { entries } if entries.len() == 1));
+    }
+
+    #[test]
+    fn parse_non_with_helper_does_not_accept_trailing_block_argument() {
+        let err = CodeBlock::parse(r#"return(cat("x") { return("bad") })"#).unwrap_err();
+        assert!(
+            err.contains("expected ')' after args in call to 'return'"),
+            "only the owned helper-form with(...) trailing block should parse in .14.3: {err}"
         );
     }
 

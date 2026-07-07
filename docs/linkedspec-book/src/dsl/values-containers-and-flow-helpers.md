@@ -181,7 +181,7 @@ When a block is used as a receiver, its yielded value enters the same compatible
 `{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")`, and `{ 3.5 }.floor().add(2)` use the existing
 array, string, hash, and number contracts.
 
-The Perl reference also accepts helper-form trailing block arguments for `with(value) { ... }`:
+Perl and Rust also accept helper-form trailing block arguments for `with(value) { ... }`:
 
 ```text
 return(with(entry_group(0)) { return(cat(value, "!")) });
@@ -191,8 +191,11 @@ return(with() { return(is_undefined(value)) });
 `with(value) { ... }` evaluates the value, binds a scoped scalar `value` for immediate block execution, and returns
 the block result. `with() { ... }` binds that scoped `value` to `undef`. The binding is local to the block, so an
 outer working variable named `value` is visible again after the `with` expression finishes. The block is not a
-closure, assignable value, returnable value, or delayed callback. Bare `with { ... }`, receiver `.with() { ... }`,
-and Rust parity are not current portable surfaces yet.
+closure, assignable value, returnable value, or delayed callback. It runs in the caller's current action/runtime
+context: captures, `retv`, cursor state, helper/function visibility, and ordinary working-variable side effects are
+the same as the call site. Only the scalar binding `value` is portable as the scoped block parameter in this MVP;
+mutations to other variable names persist after `with` returns. Bare `with { ... }`, receiver `.with() { ... }`,
+and delayed callback semantics are not current portable surfaces.
 
 ## Reading and copying collections
 

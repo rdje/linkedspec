@@ -2436,6 +2436,48 @@ fn terse_2_2_6_2_attached_while_has_iteration_safety_limit() {
     );
 }
 
+// ── SPEC-FORMAT-TERSE.14.3 — Rust helper-form trailing block parity:
+
+#[test]
+fn terse_14_3_with_trailing_block_binds_value_and_returns_block_result() {
+    let grammar = "Top::\n /x/ -> Done { return(with(\"x\") { return(cat(value, \"!\")) }) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["x!"]),
+        "with(value) trailing blocks bind scoped value and return the block payload"
+    );
+}
+
+#[test]
+fn terse_14_3_with_zero_arg_binds_value_to_undef() {
+    let grammar = "Top::\n /x/ -> Done { return(with() { return(is_undefined(value)) }) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([true]),
+        "with() trailing blocks bind value to undef"
+    );
+}
+
+#[test]
+fn terse_14_3_with_trailing_block_restores_outer_value_binding() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"outer\"); return(array(with(\"inner\") { value = cat(value, \"!\"); return(value) }, value)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["inner!", "outer"]]),
+        "with(...) restores the outer value binding after immediate block execution"
+    );
+}
+
+#[test]
+fn terse_14_3_with_trailing_block_preserves_hash_literal_payloads() {
+    let grammar = "Top::\n /x/ -> Done { return(with(\"ok\") { return({ \"stage\" : value }) }) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([{"stage": "ok"}]),
+        "hash literals inside with trailing blocks keep hash-literal semantics"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.2.3.2 — lifecycle block value/drop channel:
 // lifecycle blocks execute statements and discard statement values. A top-level
 // lifecycle return(expr) records a surrounding rule return event, while
