@@ -1548,9 +1548,8 @@ impl Engine {
             } else {
                 vec![RuntimeValue::Scalar(args_str.clone())]
             };
-            let empty_kw = std::collections::HashMap::new();
             let empty_raw: &[linkedspec_core::expr::Arg] = &[];
-            self.call_helper(method, empty_raw, &args_val, &empty_kw, ctx, label)?;
+            self.call_helper(method, empty_raw, &args_val, ctx, label)?;
         }
 
         Ok(())
@@ -3078,12 +3077,10 @@ impl Engine {
         use linkedspec_core::expr::{Arg, Expr};
         match receiver {
             Expr::Variable { name } => Some(name.clone()),
-            Expr::Call { name, args } if (name == "array" || name == "a") && args.len() == 1 => {
-                match &args[0] {
-                    Arg::Positional(Expr::Variable { name }) => Some(name.clone()),
-                    _ => None,
-                }
-            }
+            Expr::Call { name, args } if name == "array" && args.len() == 1 => match &args[0] {
+                Arg::Positional(Expr::Variable { name }) => Some(name.clone()),
+                _ => None,
+            },
             _ => None,
         }
     }
@@ -3236,10 +3233,8 @@ impl Engine {
             return None;
         };
         match (name.as_str(), value) {
-            ("array" | "a", RuntimeValue::Array(_)) => {
-                Some((ShapeLiteralKind::Array, target.clone()))
-            }
-            ("hash" | "h", RuntimeValue::Hash(_)) => Some((ShapeLiteralKind::Hash, target.clone())),
+            ("array", RuntimeValue::Array(_)) => Some((ShapeLiteralKind::Array, target.clone())),
+            ("hash", RuntimeValue::Hash(_)) => Some((ShapeLiteralKind::Hash, target.clone())),
             _ => None,
         }
     }
@@ -3253,11 +3248,13 @@ impl Engine {
         match (kind, value) {
             (ShapeLiteralKind::Array, RuntimeValue::Array(values)) => {
                 let stored = RuntimeValue::Array(values.clone());
+                ctx.record_rule_local_binding(target);
                 ctx.set_array(target, values);
                 Ok(stored)
             }
             (ShapeLiteralKind::Hash, RuntimeValue::Hash(values)) => {
                 let stored = RuntimeValue::Hash(values.clone());
+                ctx.record_rule_local_binding(target);
                 ctx.set_hash(target, values);
                 Ok(stored)
             }
@@ -3413,17 +3410,18 @@ impl Engine {
             Expr::RegexLiteral { pattern } => Ok(RuntimeValue::Scalar(pattern.clone())),
             Expr::Undef => Ok(RuntimeValue::Undef),
             Expr::FluentChain { receiver, calls } => {
+                if calls.first().is_some_and(|call| {
+                    Self::is_hash_receiver_value_chain_method(&call.method)
+                        && (call.method != "copy"
+                            || Self::copy_receiver_starts_hash_chain(receiver, calls, ctx))
+                }) {
+                    return self.eval_hash_receiver_value_chain(receiver, calls, ctx, rule_label);
+                }
                 if calls
                     .first()
                     .is_some_and(|call| Self::is_array_receiver_value_chain_method(&call.method))
                 {
                     return self.eval_array_receiver_value_chain(receiver, calls, ctx, rule_label);
-                }
-                if calls
-                    .first()
-                    .is_some_and(|call| Self::is_hash_receiver_value_chain_method(&call.method))
-                {
-                    return self.eval_hash_receiver_value_chain(receiver, calls, ctx, rule_label);
                 }
                 if calls
                     .first()
@@ -3506,8 +3504,7 @@ impl Engine {
     fn is_array_receiver_value_chain_method(method: &str) -> bool {
         matches!(
             method,
-            "array_copy"
-                | "copy"
+            "copy"
                 | "sorted"
                 | "reversed"
                 | "take"
@@ -3549,7 +3546,7 @@ impl Engine {
     fn is_hash_receiver_hash_returning_method(method: &str) -> bool {
         matches!(
             method,
-            "hash_copy"
+            "copy"
                 | "merge_hash"
                 | "set_key"
                 | "rename_key"
@@ -3565,6 +3562,36 @@ impl Engine {
 
     fn is_hash_receiver_terminal_method(method: &str) -> bool {
         matches!(method, "count_keys" | "has_key")
+    }
+
+    fn copy_receiver_starts_hash_chain(
+        receiver: &linkedspec_core::expr::Expr,
+        calls: &[linkedspec_core::expr::FluentCall],
+        ctx: &RuntimeContext,
+    ) -> bool {
+        use linkedspec_core::expr::Expr;
+
+        match receiver {
+            Expr::Call { name, args } if name == "hash" && args.len() == 1 => return true,
+            Expr::Call { name, args } if name == "array" && args.len() == 1 => return false,
+            Expr::Variable { name } => match ctx.bare_kind(name) {
+                Some(RuntimeVarKind::Hash) => return true,
+                Some(RuntimeVarKind::Array) => return false,
+                _ => {}
+            },
+            _ => {}
+        }
+
+        if let Some(next) = calls.get(1) {
+            if Self::is_hash_receiver_value_chain_method(&next.method) {
+                return true;
+            }
+            if Self::is_array_receiver_value_chain_method(&next.method) {
+                return false;
+            }
+        }
+
+        false
     }
 
     fn is_string_receiver_value_chain_method(method: &str) -> bool {
@@ -3583,7 +3610,6 @@ impl Engine {
                 | "rm_prefix"
                 | "rm_suffix"
                 | "substr"
-                | "concat"
                 | "cat"
                 | "coalesce_nonempty"
         )
@@ -3749,16 +3775,14 @@ impl Engine {
             Expr::Variable { name } => Self::scalar_held_array_snapshot(ctx, name)
                 .map(RuntimeValue::Array)
                 .unwrap_or_else(|| RuntimeValue::Array(ctx.array_copy(name))),
-            Expr::Call { name, args } if (name == "array" || name == "a") && args.len() == 1 => {
-                match &args[0] {
-                    Arg::Positional(Expr::Variable { name }) => {
-                        Self::scalar_held_array_snapshot(ctx, name)
-                            .map(RuntimeValue::Array)
-                            .unwrap_or_else(|| RuntimeValue::Array(ctx.array_copy(name)))
-                    }
-                    _ => self.eval_expr(receiver, ctx, rule_label)?,
+            Expr::Call { name, args } if name == "array" && args.len() == 1 => match &args[0] {
+                Arg::Positional(Expr::Variable { name }) => {
+                    Self::scalar_held_array_snapshot(ctx, name)
+                        .map(RuntimeValue::Array)
+                        .unwrap_or_else(|| RuntimeValue::Array(ctx.array_copy(name)))
                 }
-            }
+                _ => self.eval_expr(receiver, ctx, rule_label)?,
+            },
             _ => self.eval_expr(receiver, ctx, rule_label)?,
         };
         let mut family = ReceiverFamily::Array;
@@ -3799,10 +3823,10 @@ impl Engine {
             current =
                 self.call_helper_with_args(&call.method, &raw_args, &evaluated, ctx, rule_label)?;
             family = match call.method.as_str() {
-                "array_copy" | "copy" | "sorted" | "reversed" | "take" | "take_last"
-                | "drop_front" | "drop_back" | "slice" | "concat_arrays" | "split_each"
-                | "trim_each" | "filter_nonempty" | "lowercase_each" | "uppercase_each"
-                | "uniq" | "filter_match" => ReceiverFamily::Array,
+                "copy" | "sorted" | "reversed" | "take" | "take_last" | "drop_front"
+                | "drop_back" | "slice" | "concat_arrays" | "split_each" | "trim_each"
+                | "filter_nonempty" | "lowercase_each" | "uppercase_each" | "uniq"
+                | "filter_match" => ReceiverFamily::Array,
                 _ => {
                     if index + 1 != calls.len() {
                         return Ok(RuntimeValue::Undef);
@@ -3835,16 +3859,14 @@ impl Engine {
             Expr::Variable { name } => Self::scalar_held_hash_snapshot(ctx, name)
                 .map(RuntimeValue::Hash)
                 .unwrap_or_else(|| RuntimeValue::Hash(ctx.hash_copy(name))),
-            Expr::Call { name, args } if (name == "hash" || name == "h") && args.len() == 1 => {
-                match &args[0] {
-                    Arg::Positional(Expr::Variable { name }) => {
-                        Self::scalar_held_hash_snapshot(ctx, name)
-                            .map(RuntimeValue::Hash)
-                            .unwrap_or_else(|| RuntimeValue::Hash(ctx.hash_copy(name)))
-                    }
-                    _ => self.eval_expr(receiver, ctx, rule_label)?,
+            Expr::Call { name, args } if name == "hash" && args.len() == 1 => match &args[0] {
+                Arg::Positional(Expr::Variable { name }) => {
+                    Self::scalar_held_hash_snapshot(ctx, name)
+                        .map(RuntimeValue::Hash)
+                        .unwrap_or_else(|| RuntimeValue::Hash(ctx.hash_copy(name)))
                 }
-            }
+                _ => self.eval_expr(receiver, ctx, rule_label)?,
+            },
             _ => self.eval_expr(receiver, ctx, rule_label)?,
         };
         let mut family = ReceiverFamily::Hash;
@@ -3915,10 +3937,10 @@ impl Engine {
                         rule_label,
                     )?;
                     family = match call.method.as_str() {
-                        "array_copy" | "copy" | "sorted" | "reversed" | "take" | "take_last"
-                        | "drop_front" | "drop_back" | "slice" | "concat_arrays" | "split_each"
-                        | "trim_each" | "filter_nonempty" | "lowercase_each" | "uppercase_each"
-                        | "uniq" | "filter_match" => ReceiverFamily::Array,
+                        "copy" | "sorted" | "reversed" | "take" | "take_last" | "drop_front"
+                        | "drop_back" | "slice" | "concat_arrays" | "split_each" | "trim_each"
+                        | "filter_nonempty" | "lowercase_each" | "uppercase_each" | "uniq"
+                        | "filter_match" => ReceiverFamily::Array,
                         "sum" | "avg" | "median" | "range" | "min" | "max"
                             if index + 1 != calls.len() =>
                         {
@@ -4019,10 +4041,10 @@ impl Engine {
                         rule_label,
                     )?;
                     family = match call.method.as_str() {
-                        "array_copy" | "copy" | "sorted" | "reversed" | "take" | "take_last"
-                        | "drop_front" | "drop_back" | "slice" | "concat_arrays" | "split_each"
-                        | "trim_each" | "filter_nonempty" | "lowercase_each" | "uppercase_each"
-                        | "uniq" | "filter_match" => ReceiverFamily::Array,
+                        "copy" | "sorted" | "reversed" | "take" | "take_last" | "drop_front"
+                        | "drop_back" | "slice" | "concat_arrays" | "split_each" | "trim_each"
+                        | "filter_nonempty" | "lowercase_each" | "uppercase_each" | "uniq"
+                        | "filter_match" => ReceiverFamily::Array,
                         "sum" | "avg" | "median" | "range" | "min" | "max"
                             if index + 1 != calls.len() =>
                         {
@@ -4360,19 +4382,19 @@ impl Engine {
         use linkedspec_core::expr::{Arg, Expr};
         // Check if the raw arg is `array(variable)`.
         if let Some(Arg::Positional(Expr::Call { name, args })) = raw_args.first() {
-            if (name == "array" || name == "a") && args.len() == 1 {
+            if name == "array" && args.len() == 1 {
                 if let Arg::Positional(Expr::Variable { name: var_name }) = &args[0] {
                     return var_name.clone();
                 }
             }
         }
         // SPEC-FORMAT-TERSE.1.2.1 Channel 1 (Rust parity, .1.2.2): in a type-implying
-        // array-TARGET position (push_value/push_nonempty), a BARE (un-wrapped) name
+        // array-TARGET position (`push`), a BARE (un-wrapped) name
         // IS the working array — mirrors the Perl reference's `^(\w+)$` fallback in
         // ValueExpr::_extract_array_symbol_name. SPEC-FORMAT-TERSE.1.2.3.2 extends
         // the same narrow aggregate-target interpretation to array snapshot reads
-        // (`array_copy(NAME)` and array-first `copy(NAME)`). Scalar-like bare reads
-        // and bare direct-access path atoms remain owned by later Channel 2 leaves.
+        // (array-first `copy(NAME)`). Scalar-like bare reads and bare direct-access
+        // path atoms remain owned by later Channel 2 leaves.
         if let (true, Some(Arg::Positional(Expr::Variable { name: var_name }))) =
             (allow_bare, raw_args.first())
         {
@@ -4386,7 +4408,7 @@ impl Engine {
     /// Mirrors `resolve_array_target` for hash-valued helpers: `hash(name)`
     /// names the runtime hash `name`, while constructor forms such as
     /// `hash("key", value)` stay value expressions handled by the `hash` helper.
-    /// When `allow_bare` is true, `hash_copy(NAME)` may also name the hash directly;
+    /// When `allow_bare` is true, `copy(hash(NAME))` may name the hash directly;
     /// scalar-like bare value reads stay outside this resolver.
     fn resolve_hash_target(
         &self,
@@ -4396,9 +4418,7 @@ impl Engine {
     ) -> String {
         use linkedspec_core::expr::{Arg, Expr};
         if let Some(var_name) = raw_args.first().and_then(|arg| match arg {
-            Arg::Positional(Expr::Call { name, args })
-                if (name == "hash" || name == "h") && args.len() == 1 =>
-            {
+            Arg::Positional(Expr::Call { name, args }) if name == "hash" && args.len() == 1 => {
                 match &args[0] {
                     Arg::Positional(Expr::Variable { name }) => Some(name),
                     _ => None,
@@ -4533,9 +4553,8 @@ impl Engine {
             format!("rule={rule_label} helper={name} arity={}", args.len()),
             TraceLevel::FULL,
         );
-        let empty_kw = std::collections::HashMap::new();
         let empty_vals: Vec<RuntimeValue> = Vec::new();
-        self.call_helper(name, args, &empty_vals, &empty_kw, ctx, rule_label)
+        self.call_helper(name, args, &empty_vals, ctx, rule_label)
     }
 
     /// Dispatch a helper call with keyword argument awareness.
@@ -4550,29 +4569,43 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
-        use linkedspec_core::expr::Arg;
-        // Build a map from keyword name → evaluated value
-        let mut kw: std::collections::HashMap<String, RuntimeValue> =
-            std::collections::HashMap::new();
-        for (arg, val) in raw_args.iter().zip(evaluated.iter()) {
-            if let Arg::Keyword { name, .. } = arg {
-                kw.insert(name.clone(), val.clone());
-            }
-        }
-        self.call_helper(name, raw_args, evaluated, &kw, ctx, rule_label)
+        self.call_helper(name, raw_args, evaluated, ctx, rule_label)
     }
 
-    /// Dispatch a helper call by name with original args, evaluated args, and keyword map.
+    fn retired_helper_error(name: &str) -> Option<String> {
+        let replacement = match name {
+            "declare" => {
+                "use auto-existing working variables; use assignment for scalars, set(array(name), []) for a rule-local array reset, or set(hash(name), {}) for a rule-local hash reset"
+            }
+            "array_copy" => "use copy(array(name)) or copy(name) for an array-first bare read",
+            "hash_copy" => "use copy(hash(name)) for a hash working variable",
+            "concat" => "use cat(...)",
+            "push_value" => "use push(...)",
+            "push_nonempty" => {
+                "use if(is_nonempty(value), push(array(name), value)) or an equivalent explicit guard"
+            }
+            "a" => "use array(...)",
+            "h" => "use hash(...)",
+            _ => return None,
+        };
+        Some(format!(
+            "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:{name}: retired helper `{name}(...)` is not supported by the Rust backend; {replacement}"
+        ))
+    }
+
+    /// Dispatch a helper call by name with original args and evaluated args.
     fn call_helper(
         &self,
         name: &str,
         raw_args: &[linkedspec_core::expr::Arg],
         args: &[RuntimeValue],
-        kw: &std::collections::HashMap<String, RuntimeValue>,
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
         let name = Self::numeric_word_helper_name(name).unwrap_or(name);
+        if let Some(message) = Self::retired_helper_error(name) {
+            return Err(message);
+        }
         if Self::is_mark_capture_helper(name) {
             ctx.trace_mark(
                 "rust_runtime:engine:mark_capture",
@@ -4588,50 +4621,6 @@ impl Engine {
             );
         }
         match name {
-            // ── Declarations ──
-            "declare" => {
-                if args.len() >= 2 {
-                    let type_name = if let Some(linkedspec_core::expr::Arg::Positional(
-                        linkedspec_core::expr::Expr::Variable { name },
-                    )) = raw_args.first()
-                    {
-                        name.clone()
-                    } else {
-                        args[0].to_str()
-                    };
-                    // Variable name: positional arg[1] or keyword "name".
-                    // Bare variable references like `declare(scalar, name)` should
-                    // use the variable NAME, not its runtime value.
-                    let var_name = if kw.contains_key("name") {
-                        "name".to_string()
-                    } else if let Some(linkedspec_core::expr::Arg::Positional(
-                        linkedspec_core::expr::Expr::Variable { name },
-                    )) = raw_args.get(1)
-                    {
-                        name.clone()
-                    } else {
-                        args[1].to_str()
-                    };
-                    match type_name.as_str() {
-                        "scalar" => {
-                            if kw.contains_key("name") {
-                                // declare(scalar, name=<value>):
-                                //   keyword value IS the initializer
-                                let init = kw.get("name").unwrap();
-                                ctx.declare_scalar_with(&var_name, init.clone());
-                            } else if args.len() >= 3 {
-                                ctx.declare_scalar_with(&var_name, args[2].clone());
-                            } else {
-                                ctx.declare_scalar(&var_name);
-                            }
-                        }
-                        "array" => ctx.declare_array(&var_name),
-                        "hash" => ctx.declare_hash(&var_name),
-                        _ => {}
-                    }
-                }
-                Ok(RuntimeValue::Undef)
-            }
             "set" | "=" => {
                 if args.len() >= 2 {
                     if let Some((kind, target)) =
@@ -4651,7 +4640,7 @@ impl Engine {
                 Ok(RuntimeValue::Undef)
             }
             // ── Array constructors ──
-            "array" | "a" => {
+            "array" => {
                 // Container reference: `array(varname)` with single bare variable
                 // returns the named array, not a constructed array.
                 if args.len() == 1 && raw_args.len() == 1 {
@@ -4668,7 +4657,7 @@ impl Engine {
                 // General constructor: `array(val1, val2, ...)`. Explicit
                 // flattening helpers are list-context splices in the Perl
                 // lowering, so `array(flat_array(items))` opens `items` into
-                // this constructor while `array(array_copy(items))` stays nested.
+                // this constructor while `array(copy(items))` stays nested.
                 let mut values = Vec::new();
                 for (raw_arg, value) in raw_args.iter().zip(args.iter()) {
                     if Self::is_list_context_splice_arg(raw_arg) {
@@ -4678,28 +4667,6 @@ impl Engine {
                     }
                 }
                 Ok(RuntimeValue::Array(values))
-            }
-            "array_copy" => {
-                if let Some(arg) = args.first() {
-                    match arg {
-                        RuntimeValue::Array(a) => Ok(RuntimeValue::Array(a.clone())),
-                        _ => {
-                            let arr_name = self.resolve_array_target(raw_args, arg, true);
-                            if !arr_name.is_empty() {
-                                if let Some(values) =
-                                    Self::scalar_held_array_snapshot(ctx, &arr_name)
-                                {
-                                    return Ok(RuntimeValue::Array(values));
-                                }
-                                Ok(RuntimeValue::Array(ctx.array_copy(&arr_name)))
-                            } else {
-                                Ok(RuntimeValue::Array(Vec::new()))
-                            }
-                        }
-                    }
-                } else {
-                    Ok(RuntimeValue::Array(Vec::new()))
-                }
             }
             "copy" => {
                 if let Some(arg) = args.first() {
@@ -4735,15 +4702,8 @@ impl Engine {
                 }
             }
             // ── Accumulator ──
-            "push_value" | "push" => {
+            "push" => {
                 if args.len() >= 2 {
-                    let arr_name = self.resolve_array_target(raw_args, &args[0], true);
-                    ctx.push_value(&arr_name, args[1].clone());
-                }
-                Ok(RuntimeValue::Undef)
-            }
-            "push_nonempty" => {
-                if args.len() >= 2 && args[1].is_nonempty() {
                     let arr_name = self.resolve_array_target(raw_args, &args[0], true);
                     ctx.push_value(&arr_name, args[1].clone());
                 }
@@ -4785,7 +4745,7 @@ impl Engine {
                 Ok(RuntimeValue::Undef)
             }
             // ── Scalar/string ──
-            "concat" | "cat" => {
+            "cat" => {
                 let result: String = args.iter().map(|a| a.to_str()).collect();
                 Ok(RuntimeValue::Scalar(result))
             }
@@ -6012,7 +5972,7 @@ impl Engine {
                     .collect(),
             )),
             // ── Hash helpers ──
-            "hash" | "h" => {
+            "hash" => {
                 if let (
                     true,
                     Some(linkedspec_core::expr::Arg::Positional(
@@ -6042,28 +6002,6 @@ impl Engine {
                     }
                 }
                 Ok(RuntimeValue::Hash(entries))
-            }
-            "hash_copy" => {
-                if let Some(arg) = args.first() {
-                    match arg {
-                        RuntimeValue::Hash(h) => Ok(RuntimeValue::Hash(h.clone())),
-                        _ => {
-                            let hash_name = self.resolve_hash_target(raw_args, arg, true);
-                            if !hash_name.is_empty() {
-                                if let Some(values) =
-                                    Self::scalar_held_hash_snapshot(ctx, &hash_name)
-                                {
-                                    return Ok(RuntimeValue::Hash(values));
-                                }
-                                Ok(RuntimeValue::Hash(ctx.hash_copy(&hash_name)))
-                            } else {
-                                Ok(RuntimeValue::Hash(Vec::new()))
-                            }
-                        }
-                    }
-                } else {
-                    Ok(RuntimeValue::Hash(Vec::new()))
-                }
             }
             "merge_hash" => {
                 let mut merged = Vec::new();
@@ -6388,13 +6326,13 @@ mod tests {
 
     const SIMPLE_GRAMMAR: &str = r#"DemoParser::
  /pattern1/ -> Child
- I { declare(array, results) }
- LE { push_value(array(results), retv) }
- E { return(array("?results:", array_copy(array(results)))) }
+ I { set(array(results), []) }
+ LE { push(array(results), retv) }
+ E { return(array("?results:", copy(array(results)))) }
 
 Child::
  /hello[ \t]+(\w+)/
- I { declare(scalar, name=entry_group(0)) }
+ I { name = entry_group(0) }
  E { return(name) }
 "#;
 
@@ -6434,13 +6372,13 @@ Child::
         // Grammar that exercises all 7 lifecycle markers with REP (* mode).
         let grammar = r#"Top::*
  /hello/
- I { declare(array, log); push_value(array(log), "I") }
- LS { push_value(array(log), "LS") }
- LE { push_value(array(log), "LE") }
- IT { push_value(array(log), "IT") }
- LX { push_value(array(log), "LX") }
- EX { push_value(array(log), "EX") }
- E { push_value(array(log), "E"); return(array_copy(array(log))) }
+ I { set(array(log), []); push(array(log), "I") }
+ LS { push(array(log), "LS") }
+ LE { push(array(log), "LE") }
+ IT { push(array(log), "IT") }
+ LX { push(array(log), "LX") }
+ EX { push(array(log), "EX") }
+ E { push(array(log), "E"); return(copy(array(log))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6467,10 +6405,10 @@ Child::
         // Use * (0 or more) so that zero matches is valid; LX fires on first no-match.
         let grammar = r#"Top::*
  /hello/
- I { declare(array, log); push_value(array(log), "I") }
- LS { push_value(array(log), "LS") }
- LX { push_value(array(log), "LX") }
- E { push_value(array(log), "E"); return(array_copy(array(log))) }
+ I { set(array(log), []); push(array(log), "I") }
+ LS { push(array(log), "LS") }
+ LX { push(array(log), "LX") }
+ E { push(array(log), "E"); return(copy(array(log))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6490,7 +6428,7 @@ Child::
     fn default_mode_repeats_action_edge_choices_and_allows_zero_matches() {
         let grammar = r#"Top::
  -> Item .push
- LX.return(array("top", array_copy(array(Top))))
+ LX.return(array("top", copy(array(Top))))
 
 Item: /x/ I.return("x")
 "#;
@@ -6530,9 +6468,9 @@ Item: /x/ I.return("x")
         // OR{,1} — at most 1 match
         let grammar = r#"Top::OR{,1}
  /hello/
- I { declare(array, log) }
- LE { push_value(array(log), "match") }
- E { return(array_copy(array(log))) }
+ I { set(array(log), []) }
+ LE { push(array(log), "match") }
+ E { return(copy(array(log))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6571,18 +6509,18 @@ Item: /x/ I.return("x")
         // variables when the child does not declare a local variable with the
         // same name.
         let grammar = r#"Top::AND
- I { declare(array, log) }
+ I { set(array(log), []) }
  => ChildA
  => ChildB
- E { return(array_copy(array(log))) }
+ E { return(copy(array(log))) }
 
 ChildA:
  /a/
- I { push_value(array(log), "A") }
+ I { push(array(log), "A") }
 
 ChildB:
  /b/
- I { push_value(array(log), "B") }
+ I { push(array(log), "B") }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6611,11 +6549,11 @@ ChildB:
  /[A-Za-z_]\w*/
  /"(?:[^"\\]|\\.)*"/
  /\d+/
- I { declare(array, results) }
+ I { set(array(results), []) }
  -> A
  -> A[1]
  -> A[2]
- E { return(array_copy(array(results))) }
+ E { return(copy(array(results))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6633,18 +6571,18 @@ ChildB:
         let grammar = r#"DemoParser::
  /pattern1/ -> ChildA
  /pattern2/ -> ChildB
- I { declare(array, results) }
- LE { push_value(array(results), retv) }
- E { return(array("?results:", array_copy(array(results)))) }
+ I { set(array(results), []) }
+ LE { push(array(results), retv) }
+ E { return(array("?results:", copy(array(results)))) }
 
 ChildA:
  /hello/
- I { declare(scalar, retv=entry_text()) }
+ I { retv = entry_text() }
  E { return(retv) }
 
 ChildB:
  /world/
- I { declare(scalar, retv=entry_text()) }
+ I { retv = entry_text() }
  E { return(retv) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -6663,7 +6601,7 @@ ChildB:
         // Declare in I, populate in E (entry_text() is valid AFTER match)
         let grammar = r#"Top::
  /hello/
- I { declare(scalar, name) }
+ I { name = undef }
  E { name = entry_text(); return(name) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -6681,7 +6619,7 @@ ChildB:
     fn helpers_5_1_declare_scalar_with_default() {
         let grammar = r#"Top::
  /hello/
- I { declare(scalar, name) }
+ I { name = undef }
  E { return(name) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -6699,7 +6637,7 @@ ChildB:
         // entry_group is only available AFTER match, so use LE to assign
         let grammar = r#"Top::
  /(\w+)/
- I { declare(scalar, word) }
+ I { word = undef }
  LE { word = entry_group(0) }
  E { return(word) }
 "#;
@@ -6716,7 +6654,7 @@ ChildB:
     fn helpers_5_1_assign_scalar() {
         let grammar = r#"Top::
  /(\w+)/
- I { declare(scalar, word) }
+ I { word = undef }
  E { word = entry_group(0); return(word) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -6729,12 +6667,12 @@ ChildB:
     }
 
     #[test]
-    fn helpers_5_1_declare_array_push_value_array_copy() {
+    fn helpers_5_1_declare_array_push_value_copy() {
         let grammar = r#"Top::
  /(\w+)/
- I { declare(array, results) }
- LE { push_value(array(results), entry_group(0)) }
- E { return(array_copy(array(results))) }
+ I { set(array(results), []) }
+ LE { push(array(results), entry_group(0)) }
+ E { return(copy(array(results))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6750,8 +6688,8 @@ ChildB:
     fn helpers_5_1_return_value_and_count() {
         let grammar = r#"Top::
  /(\w+)/
- I { declare(array, items); declare(scalar, item_count) }
- LE { push_value(array(items), entry_group(0)) }
+ I { set(array(items), []); item_count = undef }
+ LE { push(array(items), entry_group(0)) }
  E { item_count = count(array(items)); return(item_count) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -6765,12 +6703,12 @@ ChildB:
     }
 
     #[test]
-    fn helpers_5_1_push_nonempty() {
+    fn helpers_5_1_explicit_nonempty_guarded_push() {
         let grammar = r#"Top::
  /(\w+)/
- I { declare(array, items) }
- LE { push_nonempty(array(items), entry_group(0)) }
- E { return(array_copy(array(items))) }
+ I { set(array(items), []) }
+ LE { if(is_nonempty(entry_group(0)), push(array(items), entry_group(0))) }
+ E { return(copy(array(items))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6784,10 +6722,10 @@ ChildB:
 
     #[test]
     fn helpers_5_1_hash_roundtrip() {
-        // Use hash() constructor and hash_copy() for roundtrip
+        // Use hash() constructor and copy() for roundtrip
         let grammar = r#"Top::
  /(\w+)=(\d+)/
- I { declare(hash, config) }
+ I { set(hash(config), hash()) }
  LE { set_key(hash(config), entry_group(0), entry_group(1)) }
  E { return(entry_group(0)) }
 "#;
@@ -6801,13 +6739,48 @@ ChildB:
         assert_eq!(arr[0].as_str().unwrap(), "key");
     }
 
+    #[test]
+    fn helpers_5_1_retired_terse_8_4_spellings_diagnose() {
+        fn execute_snippet(snippet: &str) -> Result<Value, String> {
+            let grammar = format!("Top::\n /x/\n E {{ {snippet} }}\n");
+            let spec = parse_spec(&grammar).expect("parse retired-helper fixture");
+            validate(&spec).expect("validate retired-helper fixture");
+            let compiled = compile(&spec).expect("compile retired-helper fixture");
+            Engine::new(compiled).execute("x")
+        }
+
+        let cases = [
+            ("declare", "declare(scalar, v)"),
+            ("array_copy", "return(array_copy(array(items)))"),
+            ("hash_copy", "return(hash_copy(hash(meta)))"),
+            ("concat", "return(concat(\"a\", \"b\"))"),
+            ("push_value", "push_value(array(items), \"a\")"),
+            ("push_nonempty", "push_nonempty(array(items), \"a\")"),
+            ("a", "return(a(items))"),
+            ("h", "return(h(meta))"),
+        ];
+
+        for (helper, snippet) in cases {
+            let err = match execute_snippet(snippet) {
+                Ok(value) => {
+                    panic!("retired helper {helper} must fail instead of executing: {value:?}")
+                }
+                Err(err) => err,
+            };
+            assert!(
+                err.contains(&format!("LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:{helper}")),
+                "expected retired-helper diagnostic for {helper}, got {err}"
+            );
+        }
+    }
+
     // ── .5.2 Scalar and capture helper tests ──
 
     #[test]
     fn helpers_5_2_entry_text_and_entry_group() {
         let grammar = r#"Top::
  /hello[ \t]+(\w+)/
- E { return(concat(entry_text(), " ", entry_group(0))) }
+ E { return(cat(entry_text(), " ", entry_group(0))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6842,7 +6815,7 @@ ChildB:
         // varname returns the declared variable's value
         let grammar = r#"Top::
  /(\w+)/
- I { declare(scalar, word) }
+ I { word = undef }
  LE { word = entry_group(0) }
  E { return(word) }
 "#;
@@ -6859,7 +6832,7 @@ ChildB:
     fn helpers_5_2_coalesce_first_defined() {
         let grammar = r#"Top::
  /(\w+)/
- I { declare(scalar, first); declare(scalar, second) }
+ I { first = undef; second = undef }
  E { return(coalesce(first, second, "default")) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -6876,7 +6849,7 @@ ChildB:
     fn helpers_5_2_coalesce_short_circuits() {
         let grammar = r#"Top::
  /(\w+)/
- I { declare(scalar, val) }
+ I { val = undef }
  LE { val = entry_group(0) }
  E { return(coalesce(val, "fallback")) }
 "#;
@@ -6893,7 +6866,7 @@ ChildB:
     fn helpers_5_2_concat_strings() {
         let grammar = r#"Top::
  /(\w+) (\w+)/
- E { return(concat(entry_group(0), "+", entry_group(1))) }
+ E { return(cat(entry_group(0), "+", entry_group(1))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -6985,9 +6958,9 @@ ChildB:
     fn helpers_5_3_return_undef_skips_accumulator() {
         let grammar = r#"Top::
  /(\w+)/
- I { declare(array, items) }
- LE { push_value(array(items), entry_group(0)) }
- E { return(array_copy(array(items))); return_undef() }
+ I { set(array(items), []) }
+ LE { push(array(items), entry_group(0)) }
+ E { return(copy(array(items))); return_undef() }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -7020,7 +6993,7 @@ ChildB:
         // next() returns undef — used as control flow skip in loops
         let grammar = r#"Top::
  /(\w+)/
- I { declare(scalar, retv=next()) }
+ I { retv = next() }
  E { return(retv) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -7042,7 +7015,7 @@ ChildB:
         // coalesce_nonempty skips undef and "" but keeps "0" and other defined values
         let grammar = r#"Top::
  /(\d+)/
- I { declare(scalar, val) }
+ I { val = undef }
  LE { val = entry_group(0) }
  E { return(coalesce_nonempty("", val, "final")) }
 "#;
@@ -7065,7 +7038,7 @@ ChildB:
     fn cond_if_basic_then_branch() {
         let grammar = r#"Top::
  /(\w+)/
- I { declare(scalar, val) }
+ I { val = undef }
  LE { val = entry_group(0) }
  E { return(if(is_nonempty(val), "found", "empty")) }
 "#;
@@ -7083,7 +7056,7 @@ ChildB:
         // Undef variable → condition falsy → else branch
         let grammar = r#"Top::
  /(\w+)/
- I { declare(scalar, val) }
+ I { val = undef }
  E { return(if(is_defined(val), "defined", "undefined")) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -7101,7 +7074,7 @@ ChildB:
         // if(cond, then, else) — 3 positional args
         let grammar = r#"Top::
  /(\w+)/
- I { declare(scalar, val) }
+ I { val = undef }
  LE { val = entry_group(0) }
  E { return(if(is_defined(val), entry_text(), "fallback")) }
 "#;
@@ -7138,7 +7111,7 @@ ChildB:
     fn cond_if_all_falsy_falls_to_else() {
         let grammar = r#"Top::
  /(\w+)/
- I { declare(scalar, a); declare(scalar, b); declare(scalar, c) }
+ I { a = undef; b = undef; c = undef }
  E { return(if(is_nonempty(a), "a",
                elseif(is_nonempty(b), "b"),
                else("none"))) }
@@ -7157,7 +7130,7 @@ ChildB:
     fn cond_switch_basic_case_match() {
         let grammar = r#"Top::
  /(\w+)/
- I { declare(scalar, val) }
+ I { val = undef }
  LE { val = entry_group(0) }
  E { return(switch(val,
                case("hello", "greeting"),
@@ -7177,7 +7150,7 @@ ChildB:
     fn cond_switch_no_match_falls_to_default() {
         let grammar = r#"Top::
  /(\w+)/
- I { declare(scalar, val) }
+ I { val = undef }
  LE { val = entry_group(0) }
  E { return(switch(val,
                case("red", "color"),
@@ -7196,7 +7169,7 @@ ChildB:
     fn cond_switch_multiple_cases() {
         let grammar = r#"Top::
  /(\d+)/
- I { declare(scalar, val) }
+ I { val = undef }
  LE { val = entry_group(0) }
  E { return(switch(val,
                case("1", "one"),
@@ -7234,7 +7207,7 @@ ChildB:
         // it should NOT be called when condition is truthy.
         let grammar = r#"Top::
  /(\w+)/
- I { declare(scalar, val) }
+ I { val = undef }
  LE { val = entry_group(0) }
  E { return(if(is_defined(val), entry_text(), exit_now(1))) }
 "#;
@@ -7254,7 +7227,7 @@ ChildB:
         // it should NOT be called when the if-condition is truthy.
         let grammar = r#"Top::
  /(\w+)/
- I { declare(scalar, val) }
+ I { val = undef }
  LE { val = entry_group(0) }
  E { return(if(is_defined(val), "ok",
                elseif(is_empty(val), exit_now(1)),
@@ -7335,11 +7308,11 @@ ChildB:
         // BACKTRACK saves position; IBACKTRACK restores it
         let grammar = r#"Top::
  /(hello) (world)/
- I { declare(array, log); BACKTRACK() }
- LE { push_value(array(log), cursor_pos()) }
- E { push_value(array(log), cursor_pos());
-      IBACKTRACK(); push_value(array(log), cursor_pos());
-      return(array_copy(array(log))) }
+ I { set(array(log), []); BACKTRACK() }
+ LE { push(array(log), cursor_pos()) }
+ E { push(array(log), cursor_pos());
+      IBACKTRACK(); push(array(log), cursor_pos());
+      return(copy(array(log))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -7482,9 +7455,9 @@ ChildB:
         // broke after 100 iterations, so it would have collected 100+ entries.
         let grammar = r#"Top::OR+
  /x*/
- I { declare(array, iters) }
- LE { push_value(array(iters), "i") }
- E { return(array_copy(array(iters))) }
+ I { set(array(iters), []) }
+ LE { push(array(iters), "i") }
+ E { return(copy(array(iters))) }
 "#;
         let acc = run_5_3(grammar, "abc");
         let iters = acc.last().unwrap().as_array().unwrap();

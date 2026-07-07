@@ -1308,11 +1308,11 @@ fn top_rule_as_normal_3_1_no_consume_recursion_terminates() {
 // test remains the narrow termination/shape guard from .3.1.
 #[test]
 fn top_rule_as_normal_3_1_consume_before_recurse_is_not_cut() {
-    // `declare(array, items)` is retained intentionally for recursive
+    // `set(array(items), [])` is retained intentionally for recursive
     // per-invocation accumulator scope; the helper spelling migration below
     // keeps only current append/snapshot helpers.
     let grammar = "top::\n -> sexpr { return(call(sexpr)) }\n\n\
-                   sexpr: /\\(/ /\\)/  I { declare(array, items) }\n\
+                   sexpr: /\\(/ /\\)/  I { set(array(items), []) }\n\
                     -> sexpr     { push(array(items), call(sexpr)) }\n\
                     -> atom      { push(array(items), call(atom)) }\n\
                     -> sexpr[1]  { return(copy(array(items))) }\n\n\
@@ -1335,19 +1335,14 @@ fn top_rule_as_normal_3_1_consume_before_recurse_is_not_cut() {
 // Perl proved in TOP-RULE-AS-NORMAL.2.2 that a recursive top rule is an
 // ordinary recursive rule when authored with the standard LX accumulator-return
 // idiom. The remaining Rust gap was value shape: recursive child invocations
-// shared the same working-variable stores, and `declare(array, items)` did not
-// resolve the first bare argument as a declaration type token, so a nested
-// `sexpr` frame could leak its local `items` array into its parent. The runtime
-// now scopes declared working variables per rule invocation while preserving
-// the existing shared-state behavior for undeclared mutations.
-//
-// SPEC-FORMAT-TERSE.8.2.2.2.2 intentionally keeps `declare(array, items)` here:
-// replacing it with `set(array(items), [])` is not equivalent on Rust recursive
-// re-entry. The action helpers around it use the current `push`/`copy` spellings.
+// shared the same working-variable stores. SPEC-FORMAT-TERSE.8.4 makes the
+// current aggregate reset form `set(array(items), [])` rule-local, so a nested
+// `sexpr` frame no longer leaks its local `items` array into its parent while
+// ordinary undeclared mutations keep their existing shared behavior.
 #[test]
 fn top_rule_as_normal_3_2_body_recursion_value_parity() {
     let grammar = "top::\n -> sexpr { return(call(sexpr)) }\n\n\
-                   sexpr: /\\(/ /\\)/  I { declare(array, items) }\n\
+                   sexpr: /\\(/ /\\)/  I { set(array(items), []) }\n\
                     -> sexpr     { push(array(items), call(sexpr)) }\n\
                     -> atom      { push(array(items), call(atom)) }\n\
                     -> sexpr[1]  { return(copy(array(items))) }\n\n\
@@ -1361,7 +1356,7 @@ fn top_rule_as_normal_3_2_body_recursion_value_parity() {
 
 #[test]
 fn top_rule_as_normal_3_2_top_lx_recursion_value_parity() {
-    let grammar = "sexpr:: /\\(/ /\\)/  I { declare(array, items) }\n\
+    let grammar = "sexpr:: /\\(/ /\\)/  I { set(array(items), []) }\n\
                     -> sexpr     { push(array(items), call(sexpr)) }\n\
                     -> atom      { push(array(items), call(atom)) }\n\
                     -> sexpr[1]  { return(copy(array(items))) }\n\
@@ -1384,7 +1379,7 @@ fn top_rule_as_normal_3_2_top_lx_recursion_value_parity() {
 //
 // The Perl reference now lets a working variable referenced through the current
 // typed spelling -- `NAME` for scalar slots and `array(NAME)` for arrays -- be
-// used WITHOUT a prior declare(...). In Perl that needed an engine change: generated
+// used without a declaration helper. In Perl that needed an engine change: generated
 // handlers run non-strict, so an undeclared bare var would silently become a
 // leaky package global (KM working-vars-no-strict-need-my-lexical), and the fix
 // auto-injects a per-invocation `my` in the handler preamble.
@@ -1392,11 +1387,11 @@ fn top_rule_as_normal_3_2_top_lx_recursion_value_parity() {
 // The Rust runtime needs NO such change: it is an interpreter, not a codegen+eval
 // backend. Working variables live in HashMaps on `RuntimeContext` that auto-vivify
 // on write (`set_scalar`/`push_value`) and read as Undef/empty when absent
-// (`get_scalar`/`get_array`) -- so they already "auto-exist" with no declare. And
+// (`get_scalar`/`get_array`) -- so they already "auto-exist" with no declaration. And
 // `Engine::execute` builds a FRESH `RuntimeContext` per call, so a value can never
 // leak across parses (the Rust analogue of Perl's per-invocation `my` lexical).
-// declare(...) still seeds an initializer (`declare(scalar, x=expr)`), so it stays
-// meaningful and unchanged.
+// Current authored sources use direct assignment for scalars and explicit
+// aggregate resets for rule-local arrays/hashes.
 //
 // These locks use the divergence-free edge-action form (the corpus_oracle.rs
 // proof class: non-recursive `Parent:: /re/ -> Child { ... }`, value set by the
@@ -1426,7 +1421,7 @@ fn build_and_run_result(grammar: &str, input: &str) -> Result<Value, String> {
 
 #[test]
 fn terse_1_1_2_auto_existing_scalar_var_works_without_declare() {
-    // v is assigned and read back with NO declare(scalar, v) -- it
+    // v is assigned and read back with NO v = undef -- it
     // auto-exists. Perl returns "ok"; Rust wraps the accumulator one level.
     let grammar = "Top::\n /x/ -> Done { v = \"ok\"; return(v) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
@@ -1438,7 +1433,7 @@ fn terse_1_1_2_auto_existing_scalar_var_works_without_declare() {
 
 #[test]
 fn terse_1_1_2_auto_existing_array_var_works_without_declare() {
-    // array(items) is pushed to and copied with NO declare(array, items) -- it
+    // array(items) is pushed to and copied with NO set(array(items), []) -- it
     // auto-exists. Perl returns ["a","b"]; Rust wraps one level.
     let grammar = "Top::\n /x/ -> Done { push(array(items), \"a\"); push(array(items), \"b\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
@@ -1449,28 +1444,25 @@ fn terse_1_1_2_auto_existing_array_var_works_without_declare() {
 }
 
 #[test]
-fn terse_1_1_2_declare_form_unchanged_vs_no_declare() {
-    // The declare(...) form and the no-declare form lower to identical output --
-    // the Rust analogue of the Perl "declare path stays single `my`, no double"
-    // lock: adding/removing the declare must not change behavior.
-    // SPEC-FORMAT-TERSE.8.2.2.2.3 keeps the declare(...) side as an
-    // explicit Rust compatibility lock for .8.4; append/snapshot helpers use
-    // the current surface so the assertion isolates declaration semantics.
+fn terse_1_1_2_current_initializer_form_matches_no_declare() {
+    // Direct scalar initialization and explicit aggregate reset are the current
+    // forms that replace the retired declaration helper while preserving the
+    // auto-existing working-variable behavior.
     let scalar_no = "Top::\n /x/ -> Done { v = \"ok\"; return(v) }\n\nDone::\n /[a-z]+/\n";
-    let scalar_decl =
-        "Top::\n /x/ -> Done { declare(scalar, v); v = \"ok\"; return(v) }\n\nDone::\n /[a-z]+/\n";
+    let scalar_initialized =
+        "Top::\n /x/ -> Done { v = undef; v = \"ok\"; return(v) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(scalar_no, "xhello"),
-        build_and_run(scalar_decl, "xhello"),
-        "scalar: declare-form and no-declare-form produce identical output"
+        build_and_run(scalar_initialized, "xhello"),
+        "scalar: explicit initialization and no-initializer forms produce identical output"
     );
 
     let array_no = "Top::\n /x/ -> Done { push(array(items), \"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
-    let array_decl = "Top::\n /x/ -> Done { declare(array, items); push(array(items), \"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let array_reset = "Top::\n /x/ -> Done { set(array(items), []); push(array(items), \"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(array_no, "xhello"),
-        build_and_run(array_decl, "xhello"),
-        "array: declare-form and no-declare-form produce identical output"
+        build_and_run(array_reset, "xhello"),
+        "array: explicit reset and no-reset forms produce identical output for this non-recursive fixture"
     );
 }
 
@@ -1535,27 +1527,25 @@ fn terse_1_2_2_bare_array_arg_auto_exists() {
         serde_json::json!([["a", "b"]]),
         "bare push target auto-exists as an array (= Perl [\"a\",\"b\"] wrapped one level)"
     );
-    // push_nonempty(items, ...) has non-trivial filtering semantics and is
-    // retained here as an explicit .8.4 legacy-helper retirement lock.
-    let ne = "Top::\n /x/ -> Done { push_nonempty(items, \"a\"); push_nonempty(items, \"\"); push_nonempty(items, \"b\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    // The retired push_nonempty helper is modeled with an explicit current
+    // nonempty guard around push.
+    let ne = "Top::\n /x/ -> Done { if(is_nonempty(\"a\"), push(items, \"a\")); if(is_nonempty(\"\"), push(items, \"\")); if(is_nonempty(\"b\"), push(items, \"b\")); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(ne, "xhello"),
         serde_json::json!([["a", "b"]]),
-        "bare push_nonempty target auto-exists as an array and skips the empty value"
+        "explicit nonempty guard keeps the old filtered-append behavior"
     );
 }
 
 #[test]
-fn terse_1_2_2_bare_matches_wrapped_and_declare() {
+fn terse_1_2_2_bare_matches_wrapped_and_current_initializer() {
     // The bare assignment form produces the same value as the explicit scalar-slot form and the
-    // declare form (the Rust analogue of the Perl "byte-identical / single `my`"
-    // locks): the explicit slot marker/declare are optional in these positions.
-    // SPEC-FORMAT-TERSE.8.2.2.2.3 keeps the declare(...) side as an
-    // explicit Rust compatibility lock for .8.4.
+    // direct-initializer form: the explicit slot marker or initializer is
+    // optional in these positions.
     let bare = "Top::\n /x/ -> Done { v = \"ok\"; return(v) }\n\nDone::\n /[a-z]+/\n";
     let explicit_slot = "Top::\n /x/ -> Done { set(v, \"ok\"); return(v) }\n\nDone::\n /[a-z]+/\n";
-    let declared =
-        "Top::\n /x/ -> Done { declare(scalar, v); v = \"ok\"; return(v) }\n\nDone::\n /[a-z]+/\n";
+    let initialized =
+        "Top::\n /x/ -> Done { v = undef; v = \"ok\"; return(v) }\n\nDone::\n /[a-z]+/\n";
     let b = build_and_run(bare, "xhello");
     assert_eq!(
         b,
@@ -1564,8 +1554,8 @@ fn terse_1_2_2_bare_matches_wrapped_and_declare() {
     );
     assert_eq!(
         b,
-        build_and_run(declared, "xhello"),
-        "scalar: bare arg == declare"
+        build_and_run(initialized, "xhello"),
+        "scalar: bare arg == current initializer form"
     );
 
     let bare_a = "Top::\n /x/ -> Done { push(items, \"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
@@ -1607,47 +1597,34 @@ fn terse_1_2_2_bare_arg_vars_are_per_parse_not_leaky() {
 }
 
 // ── SPEC-FORMAT-TERSE.1.2.3.2 — Rust lockstep parity for .1.2.3.1:
-// aggregate bare value reads are type-implying snapshot positions. Legacy
-// `array_copy(NAME)`/`hash_copy(NAME)` compatibility locks below are explicitly
-// retained for .8.4; current-surface assertions use `copy(...)`.
-// Scalar-like bare value reads and bare direct-access path atoms landed later
-// under SPEC-FORMAT-TERSE.1.2.3.4.
+// aggregate bare value reads are type-implying snapshot positions for arrays.
+// Hash snapshots use the explicit current `copy(hash(NAME))` spelling.
 
 #[test]
 fn terse_1_2_3_2_bare_array_copy_read_matches_wrapped() {
-    // SPEC-FORMAT-TERSE.8.2.2.2.3: array_copy(...) is retained only as an
-    // explicit Rust legacy-helper compatibility lock for .8.4.
-    let bare = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(array_copy(items)) }\n\nDone::\n /[a-z]+/\n";
-    let wrapped = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+    let bare = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(copy(items)) }\n\nDone::\n /[a-z]+/\n";
+    let wrapped = "Top::\n /x/ -> Done { push(items, \"a\"); push(items, \"b\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(bare, "xhello");
     assert_eq!(
         actual,
         serde_json::json!([["a", "b"]]),
-        "array_copy(items) reads the array working variable under the Perl output shape"
+        "copy(items) reads the array working variable under the Perl output shape"
     );
     assert_eq!(
         actual,
         build_and_run(wrapped, "xhello"),
-        "array_copy(items) == array_copy(array(items)) on Rust"
+        "copy(items) == copy(array(items)) on Rust"
     );
 }
 
 #[test]
-fn terse_1_2_3_2_bare_hash_copy_read_matches_wrapped() {
-    // SPEC-FORMAT-TERSE.8.2.2.2.3: hash_copy(...) is retained only as an
-    // explicit Rust legacy-helper compatibility lock for .8.4.
-    let bare = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(hash_copy(meta)) }\n\nDone::\n /[a-z]+/\n";
-    let wrapped = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(hash_copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
-    let actual = build_and_run(bare, "xhello");
+fn terse_1_2_3_2_hash_copy_read_uses_explicit_hash_wrapper() {
+    let wrapped = "Top::\n /x/ -> Done { set_key(meta, \"stage\", \"v\"); return(copy(hash(meta))) }\n\nDone::\n /[a-z]+/\n";
+    let actual = build_and_run(wrapped, "xhello");
     assert_eq!(
         actual,
         serde_json::json!([{"stage": "v"}]),
-        "hash_copy(meta) reads the hash working variable under the Perl output shape"
-    );
-    assert_eq!(
-        actual,
-        build_and_run(wrapped, "xhello"),
-        "hash_copy(meta) == hash_copy(hash(meta)) on Rust"
+        "copy(hash(meta)) reads the hash working variable under the Perl output shape"
     );
 }
 
@@ -1724,71 +1701,40 @@ fn terse_1_2_3_2_bare_aggregate_reads_are_per_parse() {
 #[test]
 fn terse_1_4_2_set_cat_copy_array_match_canonical_helpers() {
     let terse = "Top::\n /x/ -> Done { set(label, cat(\"a\", \"b\")); push(array(items), label); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
-    // Legacy side intentionally retained until SPEC-FORMAT-TERSE.8.4 hard
-    // retires Rust execution of concat(...), push_value(...), and array_copy(...).
-    let legacy = "Top::\n /x/ -> Done { label = concat(\"a\", \"b\"); push_value(array(items), label); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(terse, "xhello");
     assert_eq!(
         actual,
         serde_json::json!([["ab"]]),
         "terse set+cat+copy(array) returns the same value shape as the Perl oracle"
     );
-    assert_eq!(
-        actual,
-        build_and_run(legacy, "xhello"),
-        "set/cat/push/copy(array) == legacy concat/push_value/array_copy on Rust"
-    );
 }
 
 #[test]
-fn terse_1_4_2_copy_hash_matches_hash_copy() {
+fn terse_1_4_2_copy_hash_matches_copy() {
     let terse = "Top::\n /x/ -> Done { return(copy(hash(m))) }\n\nDone::\n /[a-z]+/\n";
-    // Legacy side intentionally retained until SPEC-FORMAT-TERSE.8.4 hard
-    // retires Rust execution of hash_copy(...) and the h(...) wrapper alias.
-    let legacy = "Top::\n /x/ -> Done { return(hash_copy(h(m))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(terse, "xhello"),
         serde_json::json!([{}]),
         "copy(hash(m)) produces the Perl empty-hash reference value wrapped one level"
     );
-    assert_eq!(
-        build_and_run(terse, "xhello"),
-        build_and_run(legacy, "xhello"),
-        "copy(hash target) == hash_copy(hash target) on Rust"
-    );
 
     let value_terse =
         "Top::\n /x/ -> Done { return(copy(hash(\"k\", \"v\"))) }\n\nDone::\n /[a-z]+/\n";
-    let value_legacy =
-        "Top::\n /x/ -> Done { return(hash_copy(hash(\"k\", \"v\"))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(value_terse, "xhello"),
         serde_json::json!([{"k": "v"}]),
         "copy clones an already-materialized hash value"
     );
-    assert_eq!(
-        build_and_run(value_terse, "xhello"),
-        build_and_run(value_legacy, "xhello"),
-        "copy(hash value) == hash_copy(hash value) on Rust"
-    );
 }
 
 #[test]
-fn terse_1_3_2_push_alias_matches_push_value() {
+fn terse_1_3_2_push_alias_matches_push() {
     let terse = "Top::\n /x/ -> Done { set(label, \"b\"); push(items, \"a\"); push(items, label); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
-    // Legacy side intentionally retained until SPEC-FORMAT-TERSE.8.4 hard
-    // retires Rust execution of push_value(...) and array_copy(...).
-    let legacy = "Top::\n /x/ -> Done { set(label, \"b\"); push_value(items, \"a\"); push_value(items, label); return(array_copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     let actual = build_and_run(terse, "xhello");
     assert_eq!(
         actual,
         serde_json::json!([["a", "b"]]),
         "terse push(target, value) appends explicit values with the Perl oracle output shape"
-    );
-    assert_eq!(
-        actual,
-        build_and_run(legacy, "xhello"),
-        "push(target, value) == push_value(target, value) on Rust for explicit-value append"
     );
 }
 
@@ -2042,15 +1988,12 @@ fn terse_1_6_array_end_mutation_methods_run_in_order() {
 }
 
 #[test]
-fn terse_1_6_explicit_array_receiver_aliases_run() {
-    // SPEC-FORMAT-TERSE.8.2.2.5 keeps `a(...)` here as an intentional
-    // legacy wrapper-alias compatibility lock for array receiver mutations.
-    // Current authored examples use `array(...)`; `.8.4` owns hard retirement.
-    let grammar = "Top::\n /x/ -> Done { array(items).push_back(\"b\"); a(items).push_front(\"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
+fn terse_1_6_explicit_array_receiver_runs() {
+    let grammar = "Top::\n /x/ -> Done { array(items).push_back(\"b\"); array(items).push_front(\"a\"); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["a", "b"]]),
-        "array(...) and a(...) receivers name the working array for end mutations"
+        "array(...) receivers name the working array for end mutations"
     );
 }
 
@@ -3130,13 +3073,9 @@ fn terse_2_3_5_1_array_end_mutations_remain_statement_only_in_value_slots() {
 
 #[test]
 fn terse_2_3_5_2_hash_receiver_value_chains_run() {
-    // SPEC-FORMAT-TERSE.8.2.2.2.5 classifies the `.hash_copy()`
-    // occurrences below as intentional receiver-method surface, not incidental
-    // function-form helper residue. The documented hash receiver family still
-    // includes `hash_copy`; a candidate `.copy()` receiver replacement returned
-    // `Null` and would need separate receiver-method ownership before removal.
+    // Hash receiver chains use `.copy()` as the current hash snapshot method.
     let grammar = r#"Top::
- /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); set(hash(layered), merge_hash(hash(meta), hash(extra))); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), hash(layered).pick_keys("a").sorted_values().first(), hash(meta).rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("a", "missing").has_key("a"), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }
+ /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); set(hash(layered), merge_hash(hash(meta), hash(extra))); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), hash(layered).pick_keys("a").sorted_values().first(), hash(meta).rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("a", "missing").has_key("a"), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.copy().flat_hash().count_keys(), missing.copy().count_keys())) }
 
 Done::
  /[a-z]+/
@@ -3519,16 +3458,11 @@ fn terse_2_3_5_5_block_valued_receiver_chains_run() {
 
 #[test]
 fn terse_2_3_5_6_typed_wrapper_quoted_boundaries_run() {
-    // SPEC-FORMAT-TERSE.8.2.2.5 classifies `a(...)` / `h(...)` below as
-    // intentional legacy wrapper-alias boundary locks. Current authored examples
-    // use `array(...)` / `hash(...)`; this fixture keeps only the alias sides
-    // needed to prove quoted-name and bare-working-aggregate behavior until .8.4
-    // hard retirement.
-    let grammar = "Top::\n /x/ -> Done { items += \"a\"; items += \"b\"; set_key(meta, \"a\", 1); set_key(meta, \"b\", 2); return(array(count(array(items)), count(array(\"items\")), count(array('items')), count(a(items)), count(a(\"items\")), count([\"items\"]), count(array(\"literal\", \"value\")), count_keys(hash(meta)), count_keys(hash(\"meta\", 1)), count_keys(hash('meta', 1)), count_keys({ \"meta\" => 1 }), count_keys(h(meta)), count_keys(h(\"meta\", 1)))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { items += \"a\"; items += \"b\"; set_key(meta, \"a\", 1); set_key(meta, \"b\", 2); return(array(count(array(items)), count(array(\"items\")), count(array('items')), count([\"items\"]), count(array(\"literal\", \"value\")), count_keys(hash(meta)), count_keys(hash(\"meta\", 1)), count_keys(hash('meta', 1)), count_keys({ \"meta\" => 1 }))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([[2, 1, 1, 2, 1, 1, 2, 2, 1, 1, 1, 2, 1]]),
-        "bare wrappers read working variables while quoted wrappers and direct shapes construct literal payloads"
+        serde_json::json!([[2, 1, 1, 1, 2, 2, 1, 1, 1]]),
+        "bare canonical wrappers read working variables while quoted wrappers and direct shapes construct literal payloads"
     );
 }
 

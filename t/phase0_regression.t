@@ -45408,7 +45408,7 @@ subtest 'spec_format_terse_1_4_1_current_spellings_lower_and_old_spellings_retir
     # SPEC-FORMAT-TERSE.8.3 hard-retires the old Perl helper spellings that were
     # deprecated by .1.4.1. Keep positive coverage on the current spellings and
     # pin old function-form helpers to explicit diagnostics.
-    plan tests => 14;
+    plan tests => 16;
     my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
     my @current = (
         ['set(x, 1)', '$x = 1', 'set lowers scalar assignment'],
@@ -45420,6 +45420,8 @@ subtest 'spec_format_terse_1_4_1_current_spellings_lower_and_old_spellings_retir
         ['set(array(a2), copy(array(y)))', '@a2 = (@y)', 'copy(array) lowers array assignment source'],
         ['set(hash(h2), copy(hash(m)))', '%h2 = (%m)', 'copy(hash) lowers hash assignment source'],
         ['push(array(items), cat(a,b))', undef, 'cat lowers explicit push value source'],
+        ['if(true) { set(out, cat(out,"E")) }', undef, 'cat source spelling survives attached if-block reconstruction'],
+        ['if(true) { set(out, name.cat("!")) }', undef, 'fluent cat source spelling survives attached if-block reconstruction'],
         ['return(num_sum(copy(array(x))))', undef, 'copy(array) remains array-like in numeric reducers'],
     );
     for my $case (@current) {
@@ -46349,11 +46351,11 @@ subtest 'spec_format_terse_2_3_5_2_hash_receiver_value_chains' => sub {
         'retired receiver-dot scalaref is no longer lowered as a supported hash method');
     like($L->('return(hash(meta).rename_key("a","aa").drop_keys("b").set_key("z",4).count_keys())'), qr/__ls_rename_key.*__ls_drop.*__ls_count_keys/s,
         'explicit hash receiver chains hash-returning helpers into count_keys');
-    like($L->('return(meta.hash_copy().flat_hash().count_keys())'), qr/__ls_flat_hash.*__ls_count_keys/s,
-        'hash_copy/flat_hash receiver chain lowers as a hash-valued snapshot');
+    like($L->('return(meta.copy().flat_hash().count_keys())'), qr/__ls_flat_hash.*__ls_count_keys/s,
+        'copy/flat_hash receiver chain lowers as a hash-valued snapshot');
 
     my $spec = "Top::\n"
-             . " /x/ -> Done { set_key(meta,\"b\",2); set_key(meta,\"a\",1); set_key(extra,\"a\",9); set_key(extra,\"c\",3); set_key(layered,\"a\",extra.pick_keys(\"a\").sorted_values().first()); return(array(meta.set_key(\"c\",3).sorted_keys().join_values(\",\"), layered.pick_keys(\"a\").sorted_values().first(), hash(meta).rename_key(\"a\",\"aa\").drop_keys(\"b\").set_key(\"z\",4).count_keys(), meta.pick_keys(\"a\",\"missing\").has_key(\"a\"), meta.pick_keys(\"missing\").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }\n"
+             . " /x/ -> Done { set_key(meta,\"b\",2); set_key(meta,\"a\",1); set_key(extra,\"a\",9); set_key(extra,\"c\",3); set_key(layered,\"a\",extra.pick_keys(\"a\").sorted_values().first()); return(array(meta.set_key(\"c\",3).sorted_keys().join_values(\",\"), layered.pick_keys(\"a\").sorted_values().first(), hash(meta).rename_key(\"a\",\"aa\").drop_keys(\"b\").set_key(\"z\",4).count_keys(), meta.pick_keys(\"a\",\"missing\").has_key(\"a\"), meta.pick_keys(\"missing\").count_keys(), meta.sorted_values().drop_front(1).first(), meta.copy().flat_hash().count_keys(), missing.copy().count_keys())) }\n"
              . "\nDone::\n /[a-z]+/\n";
     my $parser = eval { LinkedSpec::Get(\$spec) };
     ok(ref($parser) eq 'CODE', 'hash receiver value-chain spec compiles to a parser')
@@ -46375,7 +46377,7 @@ subtest 'spec_format_terse_2_3_5_2_hash_receiver_value_chains' => sub {
         'hash receiver chains auto-supply one my %meta');
     is((() = ($src =~ /my \$meta\b/g)), 0,
         'hash receiver chains do not auto-supply my $meta');
-    unlike($src, qr/\.(?:set_key|merge_hash|hash_copy|flat_hash)\b/,
+    unlike($src, qr/\.(?:set_key|merge_hash|hash_copy|copy|flat_hash)\b/,
         'generated source has no raw receiver-dot hash helper residue');
 
     my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);

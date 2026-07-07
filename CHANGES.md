@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — SPEC-FORMAT-TERSE.8.4 — hard-retire Rust legacy helpers
+
+**Scope:** Rust parser/runtime retirement for old helper spellings, with Perl oracle fixes needed to keep current
+spellings stable under generated corpus regeneration.
+
+**Change:** Rust now diagnoses retired helper spellings instead of executing them successfully: `declare`,
+`array_copy`, `hash_copy`, `concat`, `push_value`, `push_nonempty`, and wrapper aliases `a(...)` / `h(...)`.
+Current replacements keep parity: `set(array(...), [])` / `set(hash(...), hash())`, direct shapes, `push(...)`,
+`copy(...)`, `cat(...)`, `array(...)`, `hash(...)`, and hash receiver `.copy()`.
+
+**Boundary:** Recursive TOP-RULE aggregate reset now records a rule-local binding before mutation, so
+`set(array(items), [])` replaces the old Rust scoped `declare(array, items)` behavior. Oracle regeneration also fixed
+Perl attached-control source reconstruction so source-spelled `cat(...)` is not rebuilt as retired `concat(...)`.
+
+**Validation:** Perl syntax checks for touched modules, oracle regeneration with `ORACLE_TIMEOUT=45` over **93**
+fixtures, focused Rust retirement/TOP-RULE/hash-receiver/corpus tests, full `linkedspec-core`, full
+`linkedspec-runtime`, and full phase0 **1022** pass. mdBook/Knowledge Map/doctrine gates are run in the commit
+closeout.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.8.3 — hard-retire Perl legacy helpers
 
 **Scope:** Perl reference ActionIR parser/lowering behavior for the remaining successful legacy helper spellings.

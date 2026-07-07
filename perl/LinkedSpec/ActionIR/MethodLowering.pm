@@ -3514,9 +3514,26 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return $lowered if defined($lowered) && length($lowered);
    return $legacy_method_value_expr->($current_expr)
   };
+  my $copy_starts_hash_receiver_chain = sub {
+   my ($candidate_receiver, $candidate_calls) = @_;
+   my $receiver_trimmed = $trim_action_ir_value->($candidate_receiver);
+   return 0 unless defined($receiver_trimmed) && length($receiver_trimmed);
+   return 1 if $receiver_trimmed =~ /^hash\s*\(/o;
+   return 0 if $receiver_trimmed =~ /^array\s*\(/o;
+   my $remembered_kind = $remembered_bare_symbol_kind->($receiver_trimmed);
+   return 1 if defined($remembered_kind) && $remembered_kind eq 'hash';
+   return 0 if defined($remembered_kind) && $remembered_kind eq 'array';
+   if (ref($candidate_calls) eq 'ARRAY' && @$candidate_calls > 1) {
+    my $next_method = $candidate_calls->[1]{method} // '';
+    return 1 if defined(_hash_receiver_value_chain_return_family($next_method));
+    return 0 if _is_array_receiver_value_chain_method($next_method);
+   }
+   return 0
+  };
 
   my $first_method = $calls->[0]{method} // '';
-  if (_is_hash_receiver_value_chain_method($first_method)) {
+  if (_is_hash_receiver_value_chain_method($first_method)
+   && ($first_method ne 'copy' || $copy_starts_hash_receiver_chain->($receiver_expr, $calls))) {
    _trace_method_decision(
     phase => 'lower_ast_fluent_chain_node',
     label => 'fluent_chain',
@@ -3540,7 +3557,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
      my $return_family = _hash_receiver_value_chain_return_family($method);
      return undef unless defined($return_family);
 
-     if ($method eq 'hash_copy') {
+     if ($method eq 'hash_copy' || $method eq 'copy') {
       return undef unless @$arg_exprs == 0;
       $current_expr = 'copy('.$current_expr.')';
      } elsif ($method eq 'flat_hash') {
@@ -5813,7 +5830,7 @@ sub _is_array_receiver_value_chain_method {
 sub _hash_receiver_value_chain_return_family {
  my ($method) = @_;
  return undef unless defined $method;
- return 'hash' if $method =~ /^(?:hash_copy|merge_hash|set_key|rename_key|drop_keys|pick_keys|flat_hash)$/o;
+ return 'hash' if $method =~ /^(?:hash_copy|copy|merge_hash|set_key|rename_key|drop_keys|pick_keys|flat_hash)$/o;
  return 'array' if $method =~ /^(?:sorted_keys|sorted_values)$/o;
  return 'terminal' if $method =~ /^(?:count_keys|has_key)$/o;
  return undef
@@ -5890,6 +5907,9 @@ sub _normalize_array_receiver_value_chain_expr {
  };
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+ my $bare_symbol_kind = (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE')
+  ? $deps->{bare_symbol_kind}
+  : sub { return undef };
 
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
@@ -6185,6 +6205,24 @@ sub _normalize_hash_receiver_value_chain_expr {
  }
  return undef unless @calls;
  return undef unless _is_hash_receiver_value_chain_method($calls[0]->{method} // '');
+ if (($calls[0]->{method} // '') eq 'copy') {
+  my $receiver_trimmed = $trim_action_ir_value->($receiver_expr);
+  return undef unless defined($receiver_trimmed) && length($receiver_trimmed);
+  my $copy_is_hash = 0;
+  $copy_is_hash = 1 if $receiver_trimmed =~ /^hash\s*\(/o;
+  $copy_is_hash = 0 if $receiver_trimmed =~ /^array\s*\(/o;
+  if (!$copy_is_hash && $receiver_trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o) {
+   my $remembered_kind = $bare_symbol_kind->($1);
+   $copy_is_hash = 1 if defined($remembered_kind) && $remembered_kind eq 'hash';
+   return undef if defined($remembered_kind) && $remembered_kind eq 'array';
+  }
+  if (!$copy_is_hash && @calls > 1) {
+   my $next_method = $calls[1]{method} // '';
+   $copy_is_hash = 1 if defined(_hash_receiver_value_chain_return_family($next_method));
+   return undef if !$copy_is_hash && _is_array_receiver_value_chain_method($next_method);
+  }
+  return undef unless $copy_is_hash;
+ }
  _trace_method_decision(
   phase => 'normalize_hash_receiver_value_chain_expr',
   label => 'receiver_chain',
@@ -6215,7 +6253,7 @@ sub _normalize_hash_receiver_value_chain_expr {
    my $return_family = _hash_receiver_value_chain_return_family($method);
    return undef unless defined($return_family);
 
-   if ($method eq 'hash_copy') {
+   if ($method eq 'hash_copy' || $method eq 'copy') {
     return undef unless @args == 0;
     $current_expr = 'copy('.$current_expr.')';
    } elsif ($method eq 'flat_hash') {

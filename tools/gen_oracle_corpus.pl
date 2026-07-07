@@ -123,14 +123,15 @@ SPEC
     # ── SPEC-FORMAT-TERSE.1.1.2 — auto-existing working variables (cross-variant) ──
     #
     # The Perl reference (.1.1.1, ADR 0007) lets a working variable referenced
-    # through a typed wrapper -- NAME/array(NAME) -- be used WITHOUT a
-    # prior declare(...). These cases prove the Rust backend reproduces that
+    # through a typed wrapper -- NAME/array(NAME) -- be used without a
+    # declaration helper. These cases prove the Rust backend reproduces that
     # behavior under the universal-contract obligation (ADR 0006): each grammar
-    # uses a working variable with NO declare in the divergence-free edge-action
+    # uses a working variable with no declaration helper in the divergence-free edge-action
     # form (the .7.1 proof class -- non-recursive `Parent:: /re/ -> Child { ... }`,
     # value set by the edge's own `return(...)`, action-less child), so Perl and
-    # Rust agree exactly (modulo the one-level accumulator wrap). The `*_declare`
-    # twins show declare-form output is unchanged; `undef_literal` guards that the
+    # Rust agree exactly (modulo the one-level accumulator wrap). The historical
+    # `*_declare` case names now carry the current initializer/reset forms for
+    # continuity; `undef_literal` guards that the
     # `undef` LITERAL inside array(undef) is not mistaken for a variable.
     # The recursive/REP auto-exist idiom the Perl phase0 locks use does NOT yet
     # reproduce on Rust -- that is the separately-owned RUST-PARITY recursive-grammar
@@ -149,7 +150,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { declare(scalar, v); v = "ok"; return(v) }
+ /x/ -> Done { v = undef; v = "ok"; return(v) }
 
 Done::
  /[a-z]+/
@@ -169,7 +170,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { declare(array, items); push(array(items), "a"); push(array(items), "b"); return(copy(array(items))) }
+ /x/ -> Done { set(array(items), []); push(array(items), "a"); push(array(items), "b"); return(copy(array(items))) }
 
 Done::
  /[a-z]+/
@@ -220,13 +221,13 @@ SPEC
     # snapshot forms to the same named aggregate variables without broadening scalar
     # bare value reads or bare direct-access path atoms.
     #
-    # SPEC-FORMAT-TERSE.8.2.2.3 keeps the two legacy aggregate-copy spellings below
-    # as explicit generated-corpus compatibility locks until .8.4 hard retirement.
+    # The historical `*_array_copy_*` / `*_hash_copy_*` case names now carry the
+    # current `copy(...)` forms for continuity after .8.4 hard retirement.
     {   case   => 'terse_1_2_3_2_array_copy_bare_read',
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { push(items, "a"); push(items, "b"); return(array_copy(items)) }
+ /x/ -> Done { push(items, "a"); push(items, "b"); return(copy(items)) }
 
 Done::
  /[a-z]+/
@@ -236,7 +237,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set_key(meta, "stage", "v"); return(hash_copy(meta)) }
+ /x/ -> Done { set_key(meta, "stage", "v"); return(copy(hash(meta))) }
 
 Done::
  /[a-z]+/
@@ -783,14 +784,14 @@ SPEC
     # sorted key/value terminals can continue through the already-landed array
     # receiver helper family. Boolean terminals are covered by focused backend
     # tests; this oracle fixture keeps scalar/number/string values for direct
-    # Perl/Rust JSON parity. The `.hash_copy()` receiver links below are current
+    # Perl/Rust JSON parity. The `.copy()` receiver links below are current
     # documented hash receiver-method surface, not incidental function-form helper
     # residue.
     {   case   => 'terse_2_3_5_2_hash_receiver_value_chains',
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); set(hash(layered), merge_hash(hash(meta), hash(extra))); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), hash(layered).pick_keys("a").sorted_values().first(), hash(meta).rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.hash_copy().flat_hash().count_keys(), missing.hash_copy().count_keys())) }
+ /x/ -> Done { set_key(meta, "b", 2); set_key(meta, "a", 1); set_key(extra, "a", 9); set_key(extra, "c", 3); set(hash(layered), merge_hash(hash(meta), hash(extra))); return(array(meta.set_key("c", 3).sorted_keys().join_values(","), hash(layered).pick_keys("a").sorted_values().first(), hash(meta).rename_key("a", "aa").drop_keys("b").set_key("z", 4).count_keys(), meta.pick_keys("missing").count_keys(), meta.sorted_values().drop_front(1).first(), meta.copy().flat_hash().count_keys(), missing.copy().count_keys())) }
 
 Done::
  /[a-z]+/
@@ -1039,9 +1040,8 @@ SPEC
     { case => 'lispish_x_y', spec => 'Lispish', input => '(x y)' },
     # ── TOP-RULE-AS-NORMAL.3.2 — recursive top-rule value parity ──
     #
-    # SPEC-FORMAT-TERSE.8.2.2.3 keeps `declare(array, items)` here as the same
-    # Rust recursive scoped-declaration compatibility boundary classified in the
-    # integration tests; append/snapshot helpers use current `push`/`copy`.
+    # SPEC-FORMAT-TERSE.8.4 makes `set(array(items), [])` the current rule-local
+    # recursive accumulator reset classified in the integration tests.
     {
         case   => 'top_rule_body_recursion_sexpr',
         input  => '(a(b)c)',
@@ -1049,7 +1049,7 @@ SPEC
 top::
  -> sexpr { return(call(sexpr)) }
 
-sexpr: /\(/ /\)/  I { declare(array, items) }
+sexpr: /\(/ /\)/  I { set(array(items), []) }
  -> sexpr     { push(array(items), call(sexpr)) }
  -> atom      { push(array(items), call(atom)) }
  -> sexpr[1]  { return(copy(array(items))) }
@@ -1061,7 +1061,7 @@ SPEC
         case   => 'top_rule_lx_recursion_nested',
         input  => '(a(b)c)',
         source => <<'SPEC',
-sexpr:: /\(/ /\)/  I { declare(array, items) }
+sexpr:: /\(/ /\)/  I { set(array(items), []) }
  -> sexpr     { push(array(items), call(sexpr)) }
  -> atom      { push(array(items), call(atom)) }
  -> sexpr[1]  { return(copy(array(items))) }
@@ -1074,7 +1074,7 @@ SPEC
         case   => 'top_rule_lx_recursion_sequence',
         input  => '(a) (b)',
         source => <<'SPEC',
-sexpr:: /\(/ /\)/  I { declare(array, items) }
+sexpr:: /\(/ /\)/  I { set(array(items), []) }
  -> sexpr     { push(array(items), call(sexpr)) }
  -> atom      { push(array(items), call(atom)) }
  -> sexpr[1]  { return(copy(array(items))) }

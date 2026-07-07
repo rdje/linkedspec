@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **SPEC-FORMAT-TERSE.8.4 — hard-retire Rust legacy helpers**
+  (DONE; FRONTIER `.8.5`/`.8.6` HELPER-RETIREMENT CLEANUP NEXT).
+
+  **Change:** Rust no longer executes retired helper spellings successfully. `declare`, `array_copy`, `hash_copy`,
+  `concat`, `push_value`, `push_nonempty`, and wrapper aliases `a(...)` / `h(...)` now return explicit
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` diagnostics; current `set(...)`/assignment, `push(...)`,
+  `copy(...)`, `cat(...)`, `array(...)`, `hash(...)`, and receiver `.copy()` spellings keep corpus parity.
+
+  **Boundary:** Recursive aggregate reset now uses current syntax: `set(array(items), [])` records a rule-local
+  binding before mutation, replacing the old Rust `declare(array, items)` scoped boundary. Perl oracle source
+  reconstruction now preserves `source_method` so current `cat(...)` inside attached control flow is not rebuilt as
+  retired `concat(...)`.
+
+  **Verification:** Oracle regeneration over **93** fixtures, focused Rust retirement/TOP-RULE/hash-receiver/corpus
+  tests, full `linkedspec-core`, full `linkedspec-runtime`, and full phase0 **1022** pass.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.8.3 — hard-retire Perl legacy helpers**
   (DONE; FRONTIER `.8.4` RUST HARD RETIREMENT NEXT).
 

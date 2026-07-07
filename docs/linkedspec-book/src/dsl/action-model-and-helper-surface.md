@@ -76,8 +76,7 @@ Working variables auto-exist when they are first used through a typed position:
 - `items += value` or `push(array(items), value)` — append to an array
 - `meta[key] = value` — mutate a hash
 
-`declare(...)` is a retired legacy helper on the Perl reference and remains a Rust compatibility boundary until
-the Rust hard-retirement leaf lands. The replacement policy is documented in
+`declare(...)` is a retired legacy helper on current runtimes. The replacement policy is documented in
 [Declaration Helper Reference](declaration-helper-reference.md). New examples should use the terse forms above.
 
 ### Assignment and mutation helpers

@@ -81,10 +81,10 @@ pub struct RuntimeContext {
     /// `call(child)` inside `-> child { ... }` to the already-dispatched edge
     /// match; this stack lets Rust expose that same value without re-searching.
     action_edge_call_results: Vec<(String, RuntimeValue)>,
-    /// Rule-local declaration frames. A `declare(...)` shadows any existing
-    /// binding for the duration of the current rule invocation, while ordinary
-    /// assignment/mutation without `declare(...)` keeps the existing shared
-    /// Rust working-variable behavior.
+    /// Rule-local variable frames. Explicit local initializers shadow any
+    /// existing binding for the duration of the current rule invocation, while
+    /// ordinary assignment/mutation keeps the existing shared Rust working-variable
+    /// behavior.
     declaration_scopes: Vec<RuntimeDeclarationScope>,
     /// User functions already replace the whole variable store with their own
     /// local store, so their declarations must not be recorded in an enclosing
@@ -504,6 +504,10 @@ impl RuntimeContext {
     pub(crate) fn resume_rule_declaration_tracking(&mut self) {
         self.declaration_scope_suppression_depth =
             self.declaration_scope_suppression_depth.saturating_sub(1);
+    }
+
+    pub(crate) fn record_rule_local_binding(&mut self, name: &str) {
+        self.record_declaration(name);
     }
 
     fn record_declaration(&mut self, name: &str) {

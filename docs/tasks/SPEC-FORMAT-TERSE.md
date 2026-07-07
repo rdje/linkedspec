@@ -6,11 +6,12 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-06` (**`.8.3` DONE; `.8` remains active with frontier `.8.4`. Perl legacy helper support
-  is hard-retired: declaration helpers/aliases, function-form `concat(...)`, `array_copy(...)`, `hash_copy(...)`,
-  `push_value(...)`, and `push_nonempty(...)` now emit unsupported-helper diagnostics while current `cat(...)`,
-  `copy(...)`, `push(...)`, assignments, typed wrappers, and receiver methods keep behavior. Source-method
-  preservation keeps current `cat(...)` distinct from retired `concat(...)` after parser normalization. Full phase0
+- Last updated: `2026-07-07` (**`.8.4` DONE; `.8` remains active with frontier `.8.5`/`.8.6` cleanup). Perl and
+  Rust legacy helper support is hard-retired for declaration helpers/aliases, function-form `concat(...)`,
+  `array_copy(...)`, `hash_copy(...)`, `push_value(...)`, `push_nonempty(...)`, and Rust wrapper aliases `a(...)` /
+  `h(...)`; current `cat(...)`, `copy(...)`, `push(...)`, assignments, typed wrappers, `array(...)`, `hash(...)`,
+  and receiver `.copy()` behavior keep parity. Source-method preservation keeps current `cat(...)` distinct from
+  retired `concat(...)` after parser normalization, including attached control-flow reconstruction. Full phase0
   passes 1022 tests. Prior `.8.2.4` closed the migration scans/gates before hard retirement: root authored
   specs/corpus are clean, generated corpus/test residues are tied to `.8.4` compatibility/retirement locks, oracle
   generation is stable over 93 fixtures, Rust `corpus_oracle` passes, and mdBook builds.
@@ -18,18 +19,20 @@
   spellings (`cat(...)`, `copy(...)`, assignment/operators, `push(...)`, and explicit `is_nonempty(...)` guards
   before `push(...)`). `.8.2.2.5` previously closed
   active-test/corpus helper residue scans and `.8.2.2` is done. Legacy helper-removal inventory is complete and `.8` is now
-  split before behavior changes. Perl probes show `assign(...)` is already raw/unlowered, while `scalar(...)` and
-  `s(...)`/`a(...)`/`h(...)` already emit unsupported-helper diagnostics; still-successful Perl compatibility
-  paths include `declare(...)`/`declare_s`/`declare_a`/`declare_h`, `concat(...)`, `array_copy(...)`,
-  `hash_copy(...)`, `push_value(...)`, and `push_nonempty(...)`. Rust still has successful runtime arms for
-  `declare`, `array_copy`, `hash_copy`, `concat`, `push_value`, `push_nonempty`, plus `array|a` and `hash|h`
-  wrapper aliases. `.8.2.1` migrated the current live EBNF `push_nonempty(...)` use by spelling the empty filter
+  split before behavior changes. Initial Perl probes showed `assign(...)` raw/unlowered, `scalar(...)` and
+  `s(...)`/`a(...)`/`h(...)` unsupported, and still-successful Perl compatibility paths for
+  `declare(...)`/`declare_s`/`declare_a`/`declare_h`, `concat(...)`, `array_copy(...)`, `hash_copy(...)`,
+  `push_value(...)`, and `push_nonempty(...)`; `.8.3` retired those Perl paths. Initial Rust reads showed successful
+  runtime arms for `declare`, `array_copy`, `hash_copy`, `concat`, `push_value`, `push_nonempty`, plus `array|a` and
+  `hash|h` wrapper aliases; `.8.4` retired those Rust paths. `.8.2.1` migrated the current live EBNF
+  `push_nonempty(...)` use by spelling the empty filter
   with `is_nonempty(...)`-guarded `push(...)` before hard retirement; generated EBNF oracle inputs and the EBNF
   walkthrough match the shipped spec with no expected-output drift. `.8.2.2.3` migrated generated oracle corpus
   fixture inputs with no expected-output drift; `.8.2.2.4` migrated/classified Perl phase0 helper strings; `.8.2.2.5`
   closed active-test/corpus residue scans and labelled Rust wrapper-alias residue. `.8.2.3` migrated current-facing
   mdBook/KM helper references and regenerated `KNOWLEDGE_MAP.md`; `.8.2.4` closed final `.8.2` no-drift scans and
-  gates. `.8.3` hard-retired the Perl helper paths. Frontier -> `.8.4`. Prior **`.15.5` DONE; colon scalar-slot removal closeout complete. Stale current-surface
+  gates. `.8.3` hard-retired the Perl helper paths and `.8.4` hard-retired the Rust helper paths. Frontier ->
+  `.8.5`/`.8.6` cleanup. Prior **`.15.5` DONE; colon scalar-slot removal closeout complete. Stale current-surface
   `:name` scans across shipped specs, generated corpus inputs, mdBook, tests, code, and Knowledge Map facts found
   no live authored `:name` support outside intentional retired-diagnostic tests/code and historical records. Two
   stale Knowledge fact-card references were corrected: the duck-typed assignment reverify command now uses bare
@@ -3147,7 +3150,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     `copy(...)`. Historical changelog/task records may mention removed spellings only as past facts, not as
     current supported behavior.
   Children: `.8.1` (done — inventory/split), `.8.2` (done — current-source/test/corpus/doc migration and
-    `push_nonempty(...)` replacement decision), `.8.3` (done — Perl hard retirement), `.8.4` (active — Rust
+    `push_nonempty(...)` replacement decision), `.8.3` (done — Perl hard retirement), `.8.4` (done — Rust
     hard retirement), `.8.5` (pending — public docs/KM/reference cleanup), `.8.6` (pending — no-drift closeout).
   Verification: split by `.8.1`; implementation pending in child leaves.
   Commit: `pending`
@@ -3182,7 +3185,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Children: `.8.2.1` (done — live EBNF `push_nonempty(...)` migration and generated EBNF oracle refresh),
     `.8.2.2` (done — incidental active test/corpus old-helper migration; leave only explicit legacy/diagnostic
     locks), `.8.2.3` (done — current-facing mdBook/KM helper-reference cleanup), `.8.2.4` (done — no-drift
-    closeout before hard retirement), `.8.3` (done — Perl hard retirement), `.8.4` (active — Rust hard
+    closeout before hard retirement), `.8.3` (done — Perl hard retirement), `.8.4` (done — Rust hard
     retirement).
   Verification: **PASS 2026-07-06.** Child leaves `.8.2.1` through `.8.2.4` migrated the live EBNF
     `push_nonempty(...)` flow, active tests/corpus fixtures, generated oracle inputs, current-facing mdBook/KM
@@ -3430,7 +3433,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.8.3 - hard-retire Perl legacy helpers`
 
 - ID: `SPEC-FORMAT-TERSE.8.4`
-  Status: `active`
+  Status: `done` (2026-07-07)
   Goal: Hard-retire Rust parser/runtime support for legacy helper spellings after `.8.2` migration.
   Acceptance: Rust no longer executes `declare`, `array_copy`, `hash_copy`, `concat`, `push_value`,
     `push_nonempty`, or wrapper aliases `a(...)`/`h(...)` as successful current helper spellings; current terse
@@ -3438,8 +3441,22 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     `.8.2.2.2.2` must be resolved here before `declare(...)` removal: either Rust gains current-surface
     rule-invocation scoping for undeclared recursive accumulators or retired declaration use produces an explicit
     diagnostic with replacement guidance.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-07.** Rust runtime now routes retired helper spellings to explicit
+    `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` diagnostics instead of successful execution. Removed successful
+    helper dispatch for `declare`, `array_copy`, `hash_copy`, `concat`, `push_value`, `push_nonempty`, and wrapper
+    aliases `a(...)` / `h(...)`; Rust validation keeps those names known only so diagnostics reach runtime. Current
+    fixture/corpus sources use `set(array(...), [])`, `set(hash(...), hash())` / direct shapes, `push(...)`,
+    `copy(...)`, `cat(...)`, `array(...)`, `hash(...)`, and hash receiver `.copy()`. Recursive TOP-RULE-AS-NORMAL
+    replacement now works because explicit aggregate resets record rule-local bindings before mutation, giving
+    `set(array(items), [])` the scoped snapshot/restore behavior that old `declare(array, items)` supplied in Rust.
+    Perl oracle regeneration also exposed a source-reconstruction bug: attached control-flow lowering must preserve
+    AST `source_method` so current `cat(...)` inside blocks is not reconstructed as retired `concat(...)`; this is
+    fixed and locked in phase0. Verification run: `perl -c -Iperl` on touched Perl modules, `perl -c -Iperl
+    tools/gen_oracle_corpus.pl`, `ORACLE_TIMEOUT=45 perl -Iperl tools/gen_oracle_corpus.pl` (93 fixtures), focused
+    Rust retirement/TOP-RULE/hash-receiver/corpus tests, full `cargo test --quiet --manifest-path rust/Cargo.toml -p
+    linkedspec-core`, full `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime`, and full
+    `prove -q -Iperl t/phase0_regression.t` **1022** pass.
+  Commit: `SPEC-FORMAT-TERSE.8.4 - hard-retire Rust legacy helpers`
 
 - ID: `SPEC-FORMAT-TERSE.8.5`
   Status: `pending`
@@ -4008,7 +4025,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | 19 | `SPEC-FORMAT-TERSE.8.2.3` | `done` | current-facing mdBook/KM helper references migrated; Knowledge Map regenerated |
 | 20 | `SPEC-FORMAT-TERSE.8.2.4` | `done` | `.8.2` no-drift scans/gates closed before hard retirement |
 | 21 | `SPEC-FORMAT-TERSE.8.3` | `done` | Perl reference legacy helper spellings now diagnose instead of lowering successfully |
-| 22 | `SPEC-FORMAT-TERSE.8.4` | `active` | hard-retire Rust parser/runtime support for legacy helper spellings and wrapper aliases |
+| 22 | `SPEC-FORMAT-TERSE.8.4` | `done` | Rust parser/runtime legacy helper spellings and wrapper aliases now diagnose instead of executing successfully |
 | 23 | `SPEC-FORMAT-TERSE.8.5` | `pending` | public docs/KM/reference cleanup after Perl/Rust hard retirement |
 | 24 | `SPEC-FORMAT-TERSE.8.6` | `pending` | final helper-retirement no-drift closeout |
 | 25 | `SPEC-FORMAT-TERSE.9` | `pending` | user directive replaces Perlish hash-literal `=>` association with terse `:` association after helper-removal / assignment-semantics coordination lands |
@@ -4977,6 +4994,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | --- | --- | --- | --- |
 | `2026-07-06` | `SPEC-FORMAT-TERSE.8.1` | KM retrieval for helper-renaming/retirement facts; `.8` task-node read; `LinkedSpec::call_spec_handler_subst` probe over `assign`, `concat`, `array_copy`, `hash_copy`, `push_value`, `push_nonempty`, `declare`, `scalar`, `s`/`a`/`h`, and declaration aliases; Rust `engine.rs` / `expr.rs` code reads; broad scans over current specs/corpus/docs/tests | `.8` is split before behavior change. Perl already leaves `assign(...)` raw and emits unsupported-helper diagnostics for `scalar(...)` and `s(...)`/`a(...)`/`h(...)`; Perl still lowers declaration helpers, `concat`, aggregate-copy helpers, `push_value`, and `push_nonempty`. Rust still executes `declare`, `array_copy`, `hash_copy`, `concat`, `push_value`, `push_nonempty`, and `array|a` / `hash|h` wrapper aliases. `push_nonempty(...)` has non-trivial empty-filter semantics and no plain `push(...)` equivalent, so `.8.2` owns the current-source migration and replacement decision before hard retirement. |
 | `2026-07-06` | `SPEC-FORMAT-TERSE.8.3` | Perl ActionIR parser/lowering retirement of declaration helpers, function-form `concat`, aggregate-copy helpers, `push_value`, and `push_nonempty`; active Perl test fixture migration; focused direct retirement/current-helper probe; `perl -c -Iperl` syntax checks for touched Perl/test files; focused `t/actionir_ast_parser.t`, `t/trace_actionir_compact_lowerers.t`, and `t/phase0_validation_fuzz.t`; full phase0; mdBook/KM/live-doc updates; memory/doctrine/diff checks | Perl old helper spellings now emit `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` diagnostics instead of successful lowering. Current `cat(...)`, `copy(...)`, `push(...)`, assignments, typed wrappers, and current receiver methods still lower. Source-method preservation keeps current `cat(...)` distinct from retired `concat(...)` even after parser normalization. Full phase0 PASS: **1022** tests. Frontier becomes `.8.4` for Rust hard retirement. |
+| `2026-07-07` | `SPEC-FORMAT-TERSE.8.4` | Rust runtime helper retirement; recursive aggregate reset scoping; current hash receiver `.copy()` parity; Perl ControlFlow source-method preservation for attached blocks; oracle regeneration; focused Rust retirement/TOP-RULE/hash-receiver/corpus tests; full Rust core/runtime package tests; full phase0; mdBook/KM/live-doc updates | Rust old helper spellings now emit `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` diagnostics instead of successful execution for `declare`, `array_copy`, `hash_copy`, `concat`, `push_value`, `push_nonempty`, and wrapper aliases `a(...)` / `h(...)`. Current `set(array(...), [])`, `push(...)`, `copy(...)`, `cat(...)`, `array(...)`, `hash(...)`, and receiver `.copy()` spellings preserve corpus parity. Recursive aggregate resets now record rule-local bindings before mutation. Oracle generation remains at **93** fixtures; full Rust core/runtime and phase0 **1022** pass. |
 | `2026-07-06` | `SPEC-FORMAT-TERSE.8.2.1` | Task split under `.8.2`; live EBNF source edit; EBNF mdBook walkthrough edit; `perl -c -Iperl tools/gen_oracle_corpus.pl`; `perl -Iperl tools/gen_oracle_corpus.pl`; `LinkedSpec::get_parser("ebnf")` runtime probe; scoped `push_nonempty(...)` scans; Rust `corpus_oracle`; `mdbook build docs/linkedspec-book`; `perl -c -Iperl t/phase0_regression.t`; full `prove -q -Iperl t/phase0_regression.t` after updating the stale source lock | Current live EBNF no longer uses `push_nonempty(...)`. Both optional-capture append branches now evaluate `trim(capture_slice())` once into `logging_annotation_part`, gate with `is_nonempty(...)`, and append through `push(array(logging_annotation), logging_annotation_part)`. Generated EBNF oracle `input.spec` copies changed; `expected.json` did not. `ebnf` still parses `@log_rule("expr", "term")` to the same `logging_annotation` payload. Rust corpus oracle PASS over **93** fixtures; mdBook PASS; phase0 PASS **1022**. |
 | `2026-07-06` | `SPEC-FORMAT-TERSE.8.2.2.1` | `.8.2.2` split; source-emitter embedded `.spec` fixture migration; focused old-helper residue scan over `rust/linkedspec-runtime/tests/source_emitter.rs`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter` | Rust source-emitter smoke specs now use current helper spellings for aggregate initialization/reset, append, copy, and concatenation. Direct `name = []` was rejected as a migration for named aggregate reset after it failed repeated pair/group snapshot expectations; explicit `set(array(name), [])` preserves the old aggregate-storage semantics. The focused residue scan is clean, and the source-emitter suite passes all **3** tests, including generated Rust parser compile/run proofs. |
 | `2026-07-06` | `SPEC-FORMAT-TERSE.8.2.2.2.1` | `.8.2.2.2` split; migrated non-compatibility smoke strings in `rust/linkedspec-runtime/tests/integration_test.rs`; scoped helper-hit scan; focused `full_pipeline` and user-function filters; full Rust integration test | Top-level smoke, user-function, corpus/lifecycle/edge, `retv_5_1`, and `match_5_2` fixtures now use current helper spellings while explicit compatibility and recursive edge-case blocks remain untouched for later children. The scoped old-helper scan's first hit moved to TOP-RULE-AS-NORMAL, outside this child. Full `integration_test` PASS: **172** tests. |

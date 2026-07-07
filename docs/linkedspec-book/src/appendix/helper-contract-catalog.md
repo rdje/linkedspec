@@ -100,8 +100,8 @@ dispatch rule.
 
 > **Declaration is optional — working variables auto-exist.** Referencing a variable through a
 > typed aggregate wrapper (`array(name)` / `hash(name)`) or a bare scalar read/target position
-> auto-creates it as a per-invocation working variable of that kind, so `declare(...)` is not
-> required first. The wrapper is also optional in a **type-implying argument position**: the scalar
+> auto-creates it as a per-invocation working variable of that kind, so `declare(...)` is retired
+> and not required first. The wrapper is also optional in a **type-implying argument position**: the scalar
 > target of `set(name, …)` and the assignment operator `name = value`, which bind scalar, array, or hash RHS
 > values as the variable's current typed value; explicit aggregate targets such as `set(array(name), ...)` and
 > `set(hash(name), ...)`;
@@ -114,13 +114,11 @@ dispatch rule.
 > positions. A backend MUST supply
 > the same auto-existence: a wrapper- or position-referenced variable
 > with no `declare(...)` is a fresh working slot for the parse, not a value carried across parses.
-> Recursive re-entry is the current compatibility boundary on Rust: explicit `declare(...)` still provides
-> rule-invocation snapshot/restore for recursive accumulators, and `set(array(name), [])` is not a drop-in
-> replacement there. On the Perl reference, `declare(...)` now emits a retired-helper diagnostic;
-> new non-recursive specs should use direct assignment initializers such as `name = value`, `items = []`, and
-> `meta = {}`.
-> Post-migration support is compatibility-only on Rust until `SPEC-FORMAT-TERSE.8.4`; new examples
-> and language work must not depend on declaration helpers.
+> Recursive re-entry uses the current aggregate reset form as the declaration replacement:
+> `set(array(name), [])` and `set(hash(name), {})` establish rule-local aggregate bindings before mutation.
+> `declare(...)` and declaration aliases now emit retired-helper diagnostics on both current variants.
+> New specs should use direct assignment initializers such as `name = value` or explicit aggregate resets
+> such as `set(array(items), [])` and `set(hash(meta), {})`.
 > The DSL literals
 > `undef`/`true`/`false` and the engine's own handler locals are never treated as working-variable
 > names (so `array(undef)` builds an array holding the `undef` literal, not a variable `undef`).
@@ -128,24 +126,30 @@ dispatch rule.
 ### `declare(scalar, name)`
 - **Signature**: `declare("scalar", name: string)`
 - **Returns**: void
-- **Behavior**: Declares a new scalar working variable named `name` in the current rule scope. Uninitialized (`undef`).
-- **Errors**: Redeclaring an existing variable in the same scope.
+- **Compatibility status**: Retired. Current runtimes diagnose this helper with
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare`.
+- **Use instead**: `name = undef` when an explicit initializer is useful, or first scalar assignment/use.
 
 ### `declare(scalar, name = value)`
 - **Signature**: `declare("scalar", name: string, initializer: expr)`
 - **Returns**: void
-- **Behavior**: Declares a scalar with an initial value.
-- **Edge cases**: The initializer expression is evaluated at declaration time.
+- **Compatibility status**: Retired. Current runtimes diagnose this helper with
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare`.
+- **Use instead**: `name = value`.
 
 ### `declare(array, name)`
 - **Signature**: `declare("array", name: string)`
 - **Returns**: void
-- **Behavior**: Declares an empty array working variable.
+- **Compatibility status**: Retired. Current runtimes diagnose this helper with
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare`.
+- **Use instead**: `set(array(name), [])` for an explicit aggregate reset, or `name += value` on first append.
 
 ### `declare(hash, name)`
 - **Signature**: `declare("hash", name: string)`
 - **Returns**: void
-- **Behavior**: Declares an empty hash/object working variable.
+- **Compatibility status**: Retired. Current runtimes diagnose this helper with
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare`.
+- **Use instead**: `set(hash(name), {})` for an explicit aggregate reset, or `name[key] = value` on first mutation.
 
 ### `name = value` assignment operator
 - **Signature**: `name = value`
@@ -229,7 +233,7 @@ dispatch rule.
 - **Returns**: scalar
 - **Behavior**: Concatenates all arguments as strings. Undef arguments are treated as empty strings.
 - **Edge cases**: Non-scalar arguments (arrays, hashes) return `undef` for the whole expression.
-- **Terse spelling**: `cat(args...)` is the canonical spelling. `concat(...)` is retired on the Perl reference and remains Rust compatibility only until `SPEC-FORMAT-TERSE.8.4`. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
+- **Terse spelling**: `cat(args...)` is the canonical spelling. `concat(...)` is retired and now diagnoses on current runtimes. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 - **Example**:
   ```text
   demo::  -> value  .push
@@ -403,7 +407,7 @@ dispatch rule.
 - **Signature**: `array_copy(arr: array)`
 - **Returns**: array
 - **Behavior**: Returns a shallow copy of the array. The new array contains the same elements but is a distinct container.
-- **Compatibility**: `array_values(...)` and `array_copy(...)` are retired on the Perl reference — use `copy(...)`.
+- **Compatibility**: `array_values(...)` and `array_copy(...)` are retired on current runtimes — use `copy(...)`.
 - **Terse spelling**: `copy(arr)` is the canonical spelling — one unified `copy(...)` subsumes both legacy array and hash copy forms, resolving array-vs-hash by the wrapped symbol kind (array first). See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ### `flat_array(arr)`
@@ -471,17 +475,17 @@ dispatch rule.
 ### `push_value(arr, value)`
 - **Signature**: `push_value(target: array, value: expr)`
 - **Returns**: void
-- **Compatibility status**: Retired on the Perl reference. Current authoring uses `push(array(target), value)`, `target += value`, or an explicit typed target when both arguments are bare identifiers and child-call ambiguity must be avoided.
+- **Compatibility status**: Retired on current runtimes. Current authoring uses `push(array(target), value)`, `target += value`, or an explicit typed target when both arguments are bare identifiers and child-call ambiguity must be avoided.
 - **Behavior**: Appends a value to the named accumulator. `push(target, value)` is the terse spelling for unambiguous value expressions.
 - **Edge cases**: Value can be any expression type. Undef values are appended as-is; use an explicit `is_nonempty(...)` guard before `push(...)` when empty values should be skipped. The target may be wrapped (`array(items)`) or a **bare** name (`items`); a bare target auto-exists as an array.
 
 ### `push_nonempty(arr, value)`
 - **Signature**: `push_nonempty(target: array, value: expr)`
 - **Returns**: void
-- **Compatibility status**: Retired on the Perl reference. Current authoring spells the filter explicitly:
+- **Compatibility status**: Retired on current runtimes. Current authoring spells the filter explicitly:
   `value = expr; if(is_nonempty(value)) { push(array(target), value) }`.
 - **Behavior**: Appends the value only if it is defined and non-empty. Skips undef, empty strings, empty arrays, and empty hashes while preserving `"0"`.
-- **Edge cases**: Like `push_value`, the target may be wrapped (`array(items)`) or a **bare** name (`items`) that auto-exists as an array.
+- **Edge cases**: The current replacement `push(...)` accepts a wrapped target (`array(items)`) or a **bare** name (`items`) that auto-exists as an array.
 
 ### `count(arr)`
 - **Signature**: `count(arr: array)`
@@ -558,7 +562,7 @@ dispatch rule.
   value feeds the next helper. For example, `items.sorted().drop_front(2).first()` is equivalent to
   `first(drop_front(sorted(items), 2))`, and `items.uniq().join_values(",")` is equivalent to
   `join_values(",", uniq(items))`.
-- **Allowed array-returning links**: `array_copy`, `copy`, `sorted`, `reversed`, `take`, `take_last`,
+- **Allowed array-returning links**: `copy`, `sorted`, `reversed`, `take`, `take_last`,
   `drop_front`, `drop_back`, `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`,
   `lowercase_each`, `uppercase_each`, `uniq`, and `filter_match`.
 - **Allowed terminal links**: `count`, `first`, `last`, `contains`, `index_of`, `is_empty`, `is_nonempty`,
@@ -592,7 +596,7 @@ dispatch rule.
   `meta.set_key("stage", "normalized").count_keys()` is equivalent to
   `count_keys(set_key(hash(meta), "stage", "normalized"))`. `meta.sorted_keys().join_values(",")` first
   derives the sorted key array, then continues through the array receiver-chain family.
-- **Allowed hash-returning links**: `hash_copy`, `merge_hash`, `set_key`, `rename_key`, `drop_keys`,
+- **Allowed hash-returning links**: `copy`, `merge_hash`, `set_key`, `rename_key`, `drop_keys`,
   `pick_keys`, and `flat_hash`. `merge_hash` preserves the canonical helper contract: later arguments
   override earlier keys.
 - **Allowed terminal/bridge links**: `sorted_keys` and `sorted_values` return arrays and may continue through
@@ -714,7 +718,8 @@ dispatch rule.
 - **Signature**: `hash_copy(h: hash)`
 - **Returns**: hash
 - **Behavior**: Shallow copy. The new hash has the same keys and values but is a distinct container.
-- **Terse spelling**: `copy(h)` is the unified canonical spelling (the same `copy(...)` that subsumes legacy array/hash copy helpers). See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
+- **Compatibility status**: Retired on current runtimes.
+- **Terse spelling**: `copy(h)` / receiver `.copy()` is the unified canonical spelling (the same `copy(...)` that subsumes legacy array/hash copy helpers). See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ### `merge_hash(h1, h2)`
 - **Signature**: `merge_hash(base: hash, overlay: hash)`
@@ -1294,13 +1299,13 @@ specific compatibility tag string.
 Receiver-dot methods are available for the value families that have a typed receiver table:
 
 - **String/scalar** receivers support pure string links such as `trim`, `lowercase`, `uppercase`,
-  `replace_substr`, `rm_prefix`, `rm_suffix`, `substr`, `concat`/`cat`, and `coalesce_nonempty`; `split(delim)`
+  `replace_substr`, `rm_prefix`, `rm_suffix`, `substr`, `cat`, and `coalesce_nonempty`; `split(delim)`
   bridges to array chains; `length`, `starts_with`, `ends_with`, `contains_substr`, and `matches` are terminal.
 - **Array/list** receivers support pure array links such as `copy`, `sorted`, `reversed`, `take`, `drop_front`,
   `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`, `uniq`, and `filter_match`. Terminal
   links include `count`, `first`, `last`, `contains`, `index_of`, `is_empty`, `is_nonempty`, `join_values`,
   `sum`, `avg`, `median`, `range`, `min`, and `max`.
-- **Hash** receivers support pure hash links such as `hash_copy`, `merge_hash`, `set_key`, `rename_key`,
+- **Hash** receivers support pure hash links such as `copy`, `merge_hash`, `set_key`, `rename_key`,
   `drop_keys`, `pick_keys`, and `flat_hash`; `sorted_keys` and `sorted_values` bridge to array chains; `count_keys`
   and `has_key` are terminal.
 - **Number** receivers support terse numeric links such as `abs`, `floor`, `ceil`, `round`, `add`, `sub`, `mul`,
@@ -1324,13 +1329,11 @@ that subset remain a separately locked surface.
 Most helpers propagate `undef` from their inputs to their outputs. Explicit `coalesce(...)` is the canonical way to provide a default. No helper silently converts `undef` to `0` or `""` unless documented otherwise.
 
 ### No Mutation Guarantee
-Helpers that return arrays or hashes (`array_copy`, `hash_copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. Statement forms such as `name = value`, `items += value`, `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, `items.pop_front()`, `set_key(name, key, value)`, and `name[key] = value` are the explicit mutation forms.
+Helpers that return arrays or hashes (`copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. Statement forms such as `name = value`, `items += value`, `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, `items.pop_front()`, `set_key(name, key, value)`, and `name[key] = value` are the explicit mutation forms.
 
 ### Terse Helper Renames (canonical going forward)
-The `.spec` format is migrating to terser helper names (terse-format direction). For these three
-helpers the **terse spelling is now canonical**; the original name is a **deprecated alias that
-lowers identically and still works** — it is *not* retired (retirement is a later, explicit step,
-unlike the Retired table below):
+The `.spec` format has migrated these helper families to terser spellings. The **terse spelling is canonical**;
+old copy/concat/append helper names are retired diagnostics on current runtimes:
 
 | Canonical (terse) | Deprecated alias | Notes |
 |---|---|---|
@@ -1340,8 +1343,8 @@ unlike the Retired table below):
 | `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()` | `items += value` for back append only | array end-mutation methods; statement-level only. The receiver may be bare or `array(...)`; pop methods discard the removed value. |
 | `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator. Bare key/RHS identifiers read scalar working variables in mutation slots; in value positions it yields the updated hash snapshot. |
 | `payload["items"][0]["name"] = value` | direct nested access assignment | mutates a scalar-held array/hash value path. Intermediate containers must exist; final hash keys may be created; final array indexes may replace or append at len. |
-| `cat(args...)` | `concat(args...)` retired on Perl | string concatenation. |
-| `copy(container)` | `array_copy(arr)` / `hash_copy(h)` retired on Perl | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
+| `cat(args...)` | `concat(args...)` retired | string concatenation. |
+| `copy(container)` | `array_copy(arr)` / `hash_copy(h)` retired | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
 
 Direct nested access, for example `payload["children"][0]["name"]` or `payload["children"][i]["name"]`, is
 also part of the terse surface. It is not a helper rename; it is the replacement surface for the older nested
@@ -1359,17 +1362,16 @@ Value-producing helper aliases such as `cat(...)` and `copy(...)` compose in the
 their contracts. New `.spec` authoring should prefer the terse names.
 
 ### Compatibility Aliases (Retired)
-The following are retired and must not be used in new `.spec` authoring. Backends may implement them for compatibility with legacy specs but should treat them as deprecated:
+The following are retired and must not be used in new `.spec` authoring. Current runtimes diagnose retired helper calls instead of executing them successfully:
 
-Declaration helpers (`declare(...)` plus declaration aliases) are retired on the Perl reference and remain Rust
-compatibility only until `SPEC-FORMAT-TERSE.8.4`. See [Declaration Helper Reference](../dsl/declaration-helper-reference.md#post-migration-support-policy).
+Declaration helpers (`declare(...)` plus declaration aliases) are retired. See [Declaration Helper Reference](../dsl/declaration-helper-reference.md).
 
 | Retired | Use Instead |
 |---|---|
 | `s(...)` | `...` |
 | `a(...)` | `array(...)` |
 | `h(...)` | `hash(...)` |
-| `array_values(...)` | `array_copy(...)` |
+| `array_values(...)` | `copy(...)` |
 | `flatten(...)` | `flat(...)` |
 | `tail(...)` | `drop_front(...)` |
 | `drop_last(...)` | `drop_back(...)` |

@@ -255,9 +255,11 @@ sub _control_ast_value_source_expr {
  }
  if ($kind eq 'call') {
   my $method = $node->{name};
-  return undef unless defined($method) && $method =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   $method = 'set'
    if $method eq 'assign' && (($node->{source} // '') !~ /^\s*assign\s*\(/o);
+  $method = $node->{source_method}
+   if defined($node->{source_method}) && $node->{source_method} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  return undef unless defined($method) && $method =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   my @args;
   foreach my $arg (@{$node->{args} || []}) {
    my $arg_expr = _control_ast_value_source_expr($arg);
@@ -273,6 +275,8 @@ sub _control_ast_value_source_expr {
   foreach my $call (@{$node->{calls} || []}) {
    return undef unless ref($call) eq 'HASH';
    my $method = $call->{method};
+   $method = $call->{source_method}
+    if defined($call->{source_method}) && $call->{source_method} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
    return undef unless defined($method) && $method =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
    my @args;
    foreach my $arg (@{$call->{args} || []}) {

@@ -584,7 +584,7 @@ mod tests {
 
     #[test]
     fn compile_lifecycle_blocks() {
-        let src = "Top::\n /x/ I { declare(array, results) } LE { push_value(array(results), retv) } E { return(array_copy(array(results))) }";
+        let src = "Top::\n /x/ I { set(array(results), []) } LE { push(array(results), retv) } E { return(copy(array(results))) }";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         assert!(compiled.rules[0].preamble.is_some()); // I-block
@@ -595,7 +595,7 @@ mod tests {
     #[test]
     fn compile_lifecycle_compact_fluent_chains() {
         let src = r#"Top::
- I.declare(scalar, out).set(out, "ok")
+ I.set(out, undef).set(out, "ok")
  /x/
  E.return(out)
 "#;
@@ -639,7 +639,7 @@ mod tests {
 
     #[test]
     fn compile_serialize_deserialize() {
-        let src = "Top::\n /x/ I { declare(array, r) } LE { push_value(array(r), retv) } E { return(array_copy(array(r))) }";
+        let src = "Top::\n /x/ I { set(array(r), []) } LE { push(array(r), retv) } E { return(copy(array(r))) }";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         let json = serde_json::to_string(&compiled).unwrap();
@@ -742,7 +742,7 @@ mod tests {
     #[test]
     fn compile_spec_with_fluent_chain_blind_edge() {
         // Blind edge with fluent chain should preserve both as structured data
-        let src = "Wrapper::AND\n => child .declare(scalar, name)";
+        let src = "Wrapper::AND\n => child .set(name, undef)";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         let rule = &compiled.rules[0];
@@ -750,8 +750,8 @@ mod tests {
         assert_eq!(rule.bcode_dispatch[0].child_label, "child");
         // Fluent chain stored as structured (method, args) pairs
         assert_eq!(rule.bcode_dispatch[0].fluent_chain.len(), 1);
-        assert_eq!(rule.bcode_dispatch[0].fluent_chain[0].0, "declare");
-        assert_eq!(rule.bcode_dispatch[0].fluent_chain[0].1, "scalar, name");
+        assert_eq!(rule.bcode_dispatch[0].fluent_chain[0].0, "set");
+        assert_eq!(rule.bcode_dispatch[0].fluent_chain[0].1, "name, undef");
     }
 
     #[test]
@@ -774,7 +774,7 @@ mod tests {
 
     #[test]
     fn compile_header_rest_action_edge_with_fluent_chain() {
-        let src = "Wrapper::->child.push\nLX { return(array_copy(array(Wrapper))) }\n\nchild: /x/";
+        let src = "Wrapper::->child.push\nLX { return(copy(array(Wrapper))) }\n\nchild: /x/";
         let spec = parse_spec(src).unwrap();
         let compiled = compile(&spec).unwrap();
         let rule = compiled.find("Wrapper").unwrap();

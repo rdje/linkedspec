@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (SPEC-FORMAT-TERSE.8.4 — retired helper diagnostics must stay explicit on Rust):
+  Rust validation may still recognize retired helper names only to let the runtime return
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>`; it must not dispatch them successfully. Current aggregate reset
+  forms such as `set(array(items), [])` must record a rule-local binding before mutation so recursive rule re-entry
+  gets the same snapshot/restore boundary old `declare(array, items)` provided. On the Perl oracle side, any source
+  reconstruction from ActionIR AST must preserve `source_method`; normalized implementation names such as `concat`
+  are not enough once old source spellings are retired.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.8.3 — retiring old helpers needs source spelling, not normalized names):
   The Perl AST/parser path normalizes `cat(...)` to the historical lowering helper `concat`, so hard retirement
   cannot key only on the normalized method name. Carry the original source spelling through call/fluent nodes and
