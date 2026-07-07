@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — PPLUGIN-WALKTHROUGH-DRIFT.0 — create pplugin walkthrough drift tree
+
+**Scope:** Tracking-only ownership for pplugin mdBook drift found during the bootstrap/book/code alignment pass.
+
+**Change:** Added `docs/tasks/PPLUGIN-WALKTHROUGH-DRIFT.md` and registered it in `docs/TASK_TREE.md` as the active
+owner for the pplugin walkthrough correction. Updated live recovery docs so the next action is
+`PPLUGIN-WALKTHROUGH-DRIFT.1`.
+
+**Boundary:** No pplugin walkthrough content, parser/runtime code, shipped specs, or `.plg` runtime behavior changed
+in this slice.
+
+**Validation:** `bash scripts/check_memory_architecture.sh`, `bash knowledge-map/scripts/check_knowledge_map.sh`,
+`bash scripts/check_doctrines.sh`, and `git diff --check` pass.
+
 ## 2026-07-07 — PUBLIC-STATUS-DRIFT-SYNC.2 — fix residual shipped corpus count drift
 
 **Scope:** Residual public mdBook count drift found during the full book read.

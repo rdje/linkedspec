@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (PPLUGIN-WALKTHROUGH-DRIFT.0 — pplugin walkthrough drift needs a narrow owner):
+  The pplugin walkthrough has to distinguish two facts that are easy to conflate: `pplugin.spec` is a current
+  shipped `.spec` parser whose descriptor reports `language_agnostic_ready_ratio = 1.0000`,
+  `language_agnostic_blocked_rule_count = 0`, and `compatibility_surface_rule_count = 0`, while `.plg` plugin
+  execution remains legacy Perl runtime behavior that returns coderefs and is not a backend-neutral runtime target.
+  Keep the actual book wording for `PPLUGIN-WALKTHROUGH-DRIFT.1`; this tracking-only slice only creates the owner.
+
 - 2026-07-07 (PUBLIC-STATUS-DRIFT-SYNC.2 — public count fixes need whole-book scans):
   Public Rust oracle count drift can survive outside the main status/handoff pages. When reconciling corpus counts,
   scan the whole public book surface that mentions fixture counts, not only `overview/project-status.md` and

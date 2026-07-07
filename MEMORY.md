@@ -18,21 +18,23 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `PUBLIC-STATUS-DRIFT-SYNC.2` — residual public mdBook count drift fixed: the
-  shipped-specs/corpora page now uses the current manifest-backed 93-fixture Rust oracle and points at
-  `rust/linkedspec-runtime/tests/corpus/manifest.json` for the exact case list.
-- prior_leaf: `BOOTSTRAP-RESUME-SYNC.1` — continuity-only correction of stale layer-A resume state.
+- latest_completed_leaf: `PPLUGIN-WALKTHROUGH-DRIFT.0` — tracking-only owner created for pplugin walkthrough
+  mdBook drift; no pplugin book content or parser/runtime behavior changed in this slice.
+- prior_leaf: `PUBLIC-STATUS-DRIFT-SYNC.2` — residual public mdBook count drift fixed to the current 93-fixture
+  Rust oracle.
 - latest_commit: HEAD containing this pointer should be
-  `PUBLIC-STATUS-DRIFT-SYNC.2 - fix residual shipped corpus count drift`; parent before this slice is
-  `BOOTSTRAP-RESUME-SYNC.1 - correct stale resume pointer`.
+  `PPLUGIN-WALKTHROUGH-DRIFT.0 - create pplugin walkthrough drift tree`; parent before this slice is
+  `PUBLIC-STATUS-DRIFT-SYNC.2 - fix residual shipped corpus count drift`.
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: none in-flight after `PUBLIC-STATUS-DRIFT-SYNC.2`; repo should be handoff-ready after commit and
-  `git_message_brief.txt` cleanup.
-- next_action: resume from `docs/TASK_TREE.md`. Current active trees have empty/deferred/paused frontiers; do not
-  edit a deferred leaf unless the user explicitly activates it or a new task-tree owner is created while clean.
+- active_work_unit: none in-flight after `PPLUGIN-WALKTHROUGH-DRIFT.0`; repo should be handoff-ready after commit
+  and `git_message_brief.txt` cleanup.
+- next_action: complete `PPLUGIN-WALKTHROUGH-DRIFT.1`: update the pplugin mdBook walkthrough and durable fact so
+  it reflects the current descriptor status (`ratio=1.0000`, `blocked=0`, `compat=0`) while keeping `.plg`
+  execution scoped to the legacy Perl runtime.
 - latest_bootstrap_read: 2026-07-07 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, mdBook source, core Perl/Rust implementation, shipped specs, tooling, and focused
-  test harness inventory. The full book read found one residual public 91-fixture count; `.2` corrected it.
+  test harness inventory. The full book/code alignment pass found pplugin walkthrough drift now owned by
+  `PPLUGIN-WALKTHROUGH-DRIFT.1`.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.
