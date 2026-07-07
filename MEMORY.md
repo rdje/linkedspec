@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `TASK-TREE-METADATA-HYGIENE.0` — tracking-only owner for the user-requested audit of
-  non-closed task trees and stale per-file task metadata. No old task files were cleaned up in this slice.
-- prior_leaf: `PPLUGIN-WALKTHROUGH-DRIFT.1` — pplugin walkthrough now matches current descriptor status while
-  `.plg` execution remains scoped to the legacy Perl runtime.
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.14.1` — user reactivated the non-closed trailing code-block owner;
+  `.14` is split before code with `with(value) { ... }` / `with() { ... }` as the first helper-form MVP.
+- prior_leaf: `TASK-TREE-METADATA-HYGIENE.0` — tracking-only owner for the user-requested audit of non-closed task
+  trees and stale per-file task metadata.
 - latest_commit: HEAD containing this pointer should be
-  `TASK-TREE-METADATA-HYGIENE.0 - own task-tree metadata audit`; parent before this slice is
-  `PPLUGIN-WALKTHROUGH-DRIFT.1 - align pplugin walkthrough status` (`47997395`).
+  `SPEC-FORMAT-TERSE.14.1 - activate trailing block-argument plan`; parent before this slice is
+  `TASK-TREE-METADATA-HYGIENE.0 - own task-tree metadata audit` (`070cc84a`).
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: none in-flight after `TASK-TREE-METADATA-HYGIENE.0`; repo should be handoff-ready after commit
-  and `git_message_brief.txt` cleanup.
-- next_action: `TASK-TREE-METADATA-HYGIENE.1` if continuing hygiene work: reconcile top-level metadata in
-  `FLUENT-BLOCK-EQUIVALENCE`, `MEDIUM-IMPACT`, and `PHASE0-BACKHALF-TRIAGE`. Other active rows remain
-  empty/deferred/paused unless explicitly activated.
+- active_work_unit: none in-flight after `SPEC-FORMAT-TERSE.14.1`; repo should be handoff-ready after commit and
+  `git_message_brief.txt` cleanup.
+- next_action: continue the user-selected `SPEC-FORMAT-TERSE.14` lane with `.14.2`: implement Perl reference
+  helper-form trailing block arguments for `with(value) { ... }`, preserving scoped `value`, block-local return,
+  and hash-literal boundaries. Do not pivot to `TASK-TREE-METADATA-HYGIENE.1` until this lane is clean or paused.
 - latest_bootstrap_read: 2026-07-07 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, mdBook source, core Perl/Rust implementation, shipped specs, tooling, and focused
   test harness inventory. The task-tree audit found stale per-file metadata; it is now owned by
@@ -40,6 +40,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   tracking update may be opened only after this repo is clean.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests (e.g. 102 pplugin lazy-load) fail on the stale checkout. Full phase0 needs the **10-min timeout** (`timeout:600000`), else it caps mid-run (exit 144/143). **Generated Perl handlers are NON-strict.** **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`). Current phase0 reaches **PASS `1..1024`**. oracle = `tools/gen_oracle_corpus.pl` (per-case fork/SIGKILL; **93** fixtures → **run in background**; `manifest.json` + drift guards). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`. Rust numbered capture helpers are captures-only (`0`=first capture); whole match = `entry_text()`/`match_text()`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
-  worktree ignored by submodule policy. Deferred lanes: `SPEC-FORMAT-TERSE` `.10`/`.12`/`.13`/`.14` backlog;
-  `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`, `SPEC-LANG-REFERENCE`.
+  worktree ignored by submodule policy. Deferred lanes: `SPEC-FORMAT-TERSE` `.10`/`.12`/`.13`; hygiene cleanup
+  waits behind the user-reactivated `.14` lane. `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`, and
+  `SPEC-LANG-REFERENCE` remain deferred/paused.
 - blockers: none. in_flight_uncommitted: none after this commit; do not pivot unless the repo is handoff-ready.

@@ -6,7 +6,11 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-07` (**`.9.6` DONE; hash-literal colon association `.9` is closed**).
+- Last updated: `2026-07-07` (**`.14.1` DONE; trailing block-argument surface activated and split**).
+  User directive 2026-07-07 reactivated the deferred `.14` trailing block-argument backlog item. `.14.1` defines
+  the MVP contract before code: trailing blocks are final-only, immediately invoked block arguments, not closures;
+  the first callable surface is `with(value) { ... }`, with receiver `.with() { ... }` split behind it. Prior
+  **`.9.6` DONE; hash-literal colon association `.9` is closed**.
   Final no-drift scans across current specs, corpus sources, generated oracle inputs, tests, docs, mdBook, current
   Knowledge facts, and implementation support sites found no unclassified current hash-literal `=>` surface.
   Current specs, generated oracle inputs, active tests, mdBook examples, root docs, and current Knowledge facts now
@@ -3817,26 +3821,83 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `deferred`
 
 - ID: `SPEC-FORMAT-TERSE.14`
-  Status: `deferred` / `spec backlog` (tracked by user directive 2026-07-05)
-  Goal: Specify code blocks as a trailing block-argument type for helper and receiver-method calls, without
-    introducing closures as assignable/returnable values.
-  Acceptance: No parser/runtime implementation is authorized by this backlog item. If activated later, a child
-    implementation plan must define a block-argument type that may be passed only as the final argument to helpers
-    or receiver methods. The preferred spelling is trailing-block syntax: `fn(args) { ... }` is equivalent to
-    passing the block as the final argument, `fn() { ... }` is accepted for zero explicit arguments, and
-    `fn { ... }` may be accepted for zero-argument block-taking calls if the grammar can distinguish it cleanly.
-    Inline `fn(args, { ... })` remains deferred or accepted only after the grammar proves it can distinguish code
-    blocks from hash literals without guessing. The leaf must specify block context/parameters, scoping, return
-    semantics, and an explicit invocation surface for helpers/methods that receive a block argument. That
-    invocation surface must define how the callee calls the block, how values such as `value`, `key`, `path`,
-    `index`, `depth`, or accumulator state are passed, what the block returns, how errors/non-local returns behave,
-    and diagnostics for calling a missing or non-callable block. The leaf must also specify diagnostics for
-    non-final block arguments, interaction with hash literal braces from `.9`, receiver chaining behavior,
-    Perl/Rust parity, mdBook examples, active tests, generated oracle fixtures, and Knowledge Map updates. Blocks
-    are not closures in this leaf: they are not assignable values, not returnable values, and do not imply captured
-    caller state unless a later task-tree leaf explicitly adopts closures.
-  Verification: `deferred`
-  Commit: `deferred`
+  Status: `active` (reactivated by user directive 2026-07-07; split by `.14.1`)
+  Goal: Specify and implement code blocks as a trailing block-argument type for helper and receiver-method calls,
+    without introducing closures as assignable/returnable values.
+  Children: `.14.1`, `.14.2`, `.14.3`, `.14.4`, `.14.5`
+  Acceptance: The accepted surface treats a trailing block as a final-only argument to an explicitly block-taking
+    helper or receiver method. Blocks are immediate callbacks, not closures: they are not assignable values, not
+    returnable values, and not callable later. Inline `fn(args, { ... })`, non-final block arguments, assignable
+    block values, returning block values, closures, lambdas, and implicit captured caller-state callbacks remain
+    out of scope. The implementation must preserve hash-literal `{ key : value }` parsing from `.9`, keep
+    `fn { ... }` deferred unless a later leaf proves it grammar-safe, document the shipped user-facing surface in
+    the mdBook, and keep Perl/Rust parity plus oracle coverage.
+  Verification: `active`
+  Commit: `active`
+
+- ID: `SPEC-FORMAT-TERSE.14.1`
+  Status: `done` (2026-07-07)
+  Goal: Activate and split the trailing block-argument backlog item before implementation.
+  Acceptance: The task tree defines the MVP block-argument contract, first callable surface, sequencing, diagnostics,
+    and verification expectations before parser/runtime code changes.
+  Verification: **PASS 2026-07-07.** Repo was clean before pivoting. Read-only scans identified
+    `SPEC-FORMAT-TERSE.14` as the non-closed trailing block/code-block owner. Existing Perl/Rust expression parsers
+    already have expression-valued `block_value` / `CodeBlock` concepts, and Rust already models attached
+    `while(cond) { ... }` as a call whose final arg is a `BlockValue`; however, general helper/receiver trailing
+    block-argument syntax and an explicit non-control invocation surface are not yet shipped. `.14.1` defines the
+    MVP as follows:
+    `with(value) { ... }` is the first helper-form block-taking surface; it evaluates `value`, binds the scoped
+    scalar context variable `value` for the immediate block execution, restores any prior `value` binding after the
+    block, and returns the block result. `return(expr)` inside the block is block-local and returns from the block,
+    not from the surrounding rule. `with() { ... }` binds `value` to `undef`. Bare `with { ... }` remains deferred
+    because word-plus-brace can be a rule-body lifecycle/code-block form today. Receiver `.with() { ... }` is split
+    after helper-form parity; it binds receiver value as `value` and must preserve receiver-chain behavior. Block
+    args must be final-only; inline `{ ... }` as an ordinary parenthesized argument remains the pre-existing
+    expression-valued block form and is not the new trailing syntax. Diagnostics must reject non-final trailing
+    block use, unknown block-taking callees, and attempts to treat block args as assignable/returnable closure
+    values. mdBook documentation is required once behavior ships. Closeout checks pass:
+    `bash scripts/check_memory_architecture.sh`, `bash knowledge-map/scripts/check_knowledge_map.sh`,
+    `bash scripts/check_doctrines.sh`, and `git diff --check`.
+  Commit: `SPEC-FORMAT-TERSE.14.1 - activate trailing block-argument plan`
+
+- ID: `SPEC-FORMAT-TERSE.14.2`
+  Status: `pending`
+  Goal: Implement Perl reference helper-form trailing block arguments for `with(value) { ... }`.
+  Acceptance: Perl ActionIR parsing/lowering recognizes `with(value) { ... }` and `with() { ... }` as a helper call
+    with a final block argument, lowers it without raw fallback, binds/restores the scoped `value` context variable,
+    keeps block-local return semantics, and preserves hash-literal parsing. Focused parser/lowering/runtime tests
+    prove `with("x") { return(cat(value, "!")) }` returns `"x!"`, `with() { return(is_undefined(value)) }` returns
+    true, and `{ key : value }` remains a hash literal.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.14.3`
+  Status: `pending`
+  Goal: Implement Rust helper-form parity for `with(value) { ... }`.
+  Acceptance: Rust parser/runtime recognizes the same helper-form trailing block syntax and semantics as the Perl
+    reference, including scoped `value` binding/restoration, block-local return behavior, zero-arg `with()`, and
+    hash-literal boundary preservation. Add a generated oracle fixture and focused Rust parser/runtime tests.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.14.4`
+  Status: `pending`
+  Goal: Implement receiver-form trailing block arguments for `.with() { ... }` on compatible value receivers.
+  Acceptance: Perl and Rust receiver chains accept a terminal or continuing `.with() { ... }` segment where the
+    receiver value is exposed as scoped `value` inside the block. The returned block value feeds later compatible
+    receiver-family links or acts as the terminal expression result. Non-final block arguments inside an ordinary
+    argument list remain rejected/deferred.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-FORMAT-TERSE.14.5`
+  Status: `pending`
+  Goal: Close trailing block-argument docs, mdBook, Knowledge Map, oracle, and no-drift alignment.
+  Acceptance: mdBook documents the shipped helper/receiver `with` block-argument surface with worked examples,
+    explicitly states what remains deferred, active tests and generated oracle fixtures are current, Knowledge Map
+    retrieval records the durable syntax/semantics fact, and roadmap/task-tree/live docs agree on `.14` status.
+  Verification: `pending`
+  Commit: `pending`
 
 - ID: `SPEC-FORMAT-TERSE.15`
   Status: `done` (split 2026-07-05 by `.15.1`; RE-SEQUENCED 2026-07-05 to engine-first after the bare-read-gap
@@ -4176,10 +4237,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | 29 | `SPEC-FORMAT-TERSE.9.4` | `done` | migrated current specs/corpus/docs/KM/tests to colon hash-literal syntax |
 | 30 | `SPEC-FORMAT-TERSE.9.5` | `done` | hard-retired old hash-literal `=>` association while preserving blind-call edge `=>` |
 | 31 | `SPEC-FORMAT-TERSE.9.6` | `done` | final hash-literal colon no-drift closeout |
+| 32 | `SPEC-FORMAT-TERSE.14.1` | `done` | user reactivated trailing block arguments; MVP `with(value) { ... }` contract and implementation split are locked before code |
+| 33 | `SPEC-FORMAT-TERSE.14.2` | `pending` | Perl reference helper-form trailing block arguments for `with(value) { ... }` |
+| 34 | `SPEC-FORMAT-TERSE.14.3` | `pending` | Rust helper-form parity after Perl reference semantics land |
+| 35 | `SPEC-FORMAT-TERSE.14.4` | `pending` | receiver `.with() { ... }` trailing block arguments |
+| 36 | `SPEC-FORMAT-TERSE.14.5` | `pending` | mdBook/KM/oracle/no-drift closeout for shipped `.14` surface |
 | — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.12` | `deferred` / `spec backlog` | track future hash-tree attached-block traversal; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.13` | `deferred` / `backlog` | track lower-priority array-tree traversal analog; not PNT-eligible until explicitly activated |
-| — | `SPEC-FORMAT-TERSE.14` | `deferred` / `spec backlog` | track trailing block-argument type for helpers/methods without closures; not PNT-eligible until explicitly activated |
+| — | `SPEC-FORMAT-TERSE.14` | `active` / `split` | trailing block-argument type for helpers/methods without closures; `.14.2` is the first implementation leaf |
 | — | `SPEC-FORMAT-TERSE.6.1` | `done` | User directive owned under the existing terse-format tree; shipped-spec inventory recorded before any `.spec` edit. |
 | — | `SPEC-FORMAT-TERSE.6.2.1` | `done` | shipped specs no longer use active `declare(...)` / `.declare(...)`; focused compile, phase0, and Rust corpus oracle pass |
 | — | `SPEC-FORMAT-TERSE.6.2.2` | `done` | shipped specs no longer use active old helper spellings; focused compile, phase0, and Rust corpus oracle pass |
@@ -5482,6 +5548,13 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   the final argument to helpers and receiver methods. The preferred future spelling is trailing-block syntax such
   as `fn(args) { ... }`, with zero-arg `fn { ... }` possible if grammar-safe. This leaf explicitly does not adopt
   closures, assignable blocks, returnable blocks, or implicit caller-state capture.
+- `2026-07-07`: **`.14.1` DONE — trailing block arguments reactivated and split before code.**
+  User directive picked the non-closed task tree that talks about trailing code blocks, confirming
+  `SPEC-FORMAT-TERSE.14` as the owner. The MVP surface is now `with(value) { ... }` / `with() { ... }` first:
+  the helper evaluates the value, binds scoped scalar `value` for immediate block execution, restores any prior
+  `value` afterward, and returns the block result. Bare `with { ... }` remains deferred because word-plus-brace is
+  already a rule-body lifecycle/code-block shape. Receiver `.with() { ... }`, Rust parity, and mdBook/KM/oracle
+  closeout are separate leaves. Frontier moves to `.14.2`.
 
 - `2026-07-05`: **`.12`/`.13` DEFERRED/BACKLOG — tree traversal attached-block ideas.**
   User directive tracked hash-tree traversal methods with attached code blocks as future spec work and clarified

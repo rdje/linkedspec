@@ -1,12 +1,22 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (SPEC-FORMAT-TERSE.14.1 — trailing block args are immediate non-closure callbacks):
+  `SPEC-FORMAT-TERSE.14` is the owner for trailing code blocks used as helper/receiver arguments. The first MVP is
+  helper-form `with(value) { ... }` / `with() { ... }`: evaluate the explicit value or `undef`, bind scoped scalar
+  `value` during immediate block execution, restore the previous binding afterward, and return the block result.
+  This does not introduce closures, assignable block values, returnable block values, or delayed invocation. Bare
+  `with { ... }` stays deferred because word-plus-brace overlaps existing lifecycle/code-block body syntax.
+  Implementation starts at `.14.2` on the Perl reference helper-form path; Rust parity and receiver
+  `.with() { ... }` are separate leaves.
+
 - 2026-07-07 (TASK-TREE-METADATA-HYGIENE.0 — central index is authoritative for live task state):
   When auditing open task trees, use `docs/TASK_TREE.md` plus `MEMORY.md` as the live-state authority before trusting
   stale rows inside old task files. The 2026-07-07 audit found live central rows for `SPEC-FORMAT-TERSE`,
   `STAGED-LINKED-PARSING`, `DOCTRINE-ENFORCEMENT-ADOPT`, `SPEC-LANG-REFERENCE`, and
-  `ROADMAP-DRIFT-RECONCILE`; their frontiers are empty, deferred, or paused. Older per-file metadata drift is now
-  owned by `TASK-TREE-METADATA-HYGIENE.1`/`.2` instead of being edited during bootstrap.
+  `ROADMAP-DRIFT-RECONCILE`; at that moment their frontiers were empty, deferred, or paused. The user then
+  reactivated `SPEC-FORMAT-TERSE.14`, so hygiene cleanup waits behind the `.14` lane. Older per-file metadata drift
+  remains owned by `TASK-TREE-METADATA-HYGIENE.1`/`.2` instead of being edited during bootstrap.
 
 - 2026-07-07 (PPLUGIN-WALKTHROUGH-DRIFT.1 — descriptor readiness is not .plg runtime portability):
   `LinkedSpec::get_parser("pplugin", return_descriptor => 1)` currently reports

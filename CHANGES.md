@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — SPEC-FORMAT-TERSE.14.1 — activate trailing block-argument plan
+
+**Scope:** Task-tree and roadmap ownership for the user-reactivated trailing code-block / trailing block-argument
+surface under `SPEC-FORMAT-TERSE.14`.
+
+**Change:** Reactivated `.14`, split it into implementation children, selected `with(value) { ... }` /
+`with() { ... }` as the first helper-form MVP, and recorded the no-closure semantics before any parser/runtime code
+changes. Added a Knowledge fact so future sessions can find the owner, accepted contract, and next leaf without
+redoing the scan.
+
+**Boundary:** Tracking/specification only. No parser/runtime/source behavior changed and no public mdBook behavior
+page changed, because the syntax is not shipped yet.
+
+**Validation:** `bash scripts/check_memory_architecture.sh`, `bash knowledge-map/scripts/check_knowledge_map.sh`,
+`bash scripts/check_doctrines.sh`, and `git diff --check` pass.
+
 ## 2026-07-07 — TASK-TREE-METADATA-HYGIENE.0 — own task-tree metadata audit
 
 **Scope:** Tracking-only ownership for the user-requested audit of non-closed task trees and stale per-file task

@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **SPEC-FORMAT-TERSE.14.1 — activate trailing block-argument plan**
+  (DONE tracking/specification; frontier `.14.2` Perl helper-form implementation next).
+
+  **Change:** Reactivated the non-closed `SPEC-FORMAT-TERSE.14` trailing code-block owner and split it before code.
+  The first MVP is `with(value) { ... }` / `with() { ... }` as an immediate, final-only block argument with scoped
+  `value` binding and no closure/assignable/returnable block semantics.
+
+  **Boundary:** Documentation/tracking only. No parser/runtime behavior changed and the public mdBook remains
+  unchanged until the user-facing syntax ships.
+
+  **Verification:** Memory architecture, Knowledge Map, doctrine driver, and whitespace diff checks pass.
+
 - 2026-07-07: **TASK-TREE-METADATA-HYGIENE.0 — own task-tree metadata audit**
   (DONE tracking-only; frontier `.1` top-level metadata reconciliation next).
 
