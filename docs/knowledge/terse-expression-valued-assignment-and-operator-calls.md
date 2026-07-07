@@ -43,7 +43,7 @@ contracts could land separately. `SPEC-FORMAT-TERSE.3.3.1` landed the scalar sub
 though `.11.2`/`.11.3` later replaced bare target-kind storage inference with duck-typed value binding:
 
 - `return(items = [value])` binds an array value and yields that stored array value.
-- `return(=(meta, { key => value }))` binds a hash value and yields that stored hash value.
+- `return(=(meta, { key : value }))` binds a hash value and yields that stored hash value.
 - Matching explicit `array(target)` and `hash(target)` assignment targets yield aggregate snapshots.
 - Explicit aggregate targets still use aggregate storage.
 

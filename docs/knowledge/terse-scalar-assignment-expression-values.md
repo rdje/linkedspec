@@ -29,7 +29,7 @@ reverify: "prove -q -Iperl t/actionir_ast_parser.t t/phase0_regression.t && carg
   compatible receiver chains such as `=(raw, " hi ").trim()`.
 
 `SPEC-FORMAT-TERSE.3.3.2` later implemented direct RHS shape assignment values. `.11.2` and `.11.3` changed the
-current storage model so `return(items = [value])` and `return(meta = { key => value })` bind and yield
+current storage model so `return(items = [value])` and `return(meta = { key : value })` bind and yield
 scalar-held typed array/hash values for bare targets, while explicit `array(...)` / `hash(...)` targets remain
 aggregate storage. `SPEC-FORMAT-TERSE.3.3.3` then implemented mutation assignment values:
 `return(items += value)` yields the updated array snapshot and `return(meta[key] = value)` yields the updated hash

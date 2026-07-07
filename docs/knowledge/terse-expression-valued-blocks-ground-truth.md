@@ -11,8 +11,8 @@ answers:
 date: 2026-06-29
 status: confirmed
 tags: [dsl, blocks, expressions, actionir, rust, spec-format-terse, SPEC-FORMAT-TERSE]
-evidence: "SPEC-FORMAT-TERSE.2.1.1 ground truth on 2026-06-29 used KM retrieval, TOOLBOX call_spec_handler_subst probes, LinkedSpec::Get runtime/source dumps, and Perl/Rust code-read. Current Perl lowers return({}) to return {}, and return({ key => value }) to return {$key => $value}, preserving hash shape literals. But return({ set(x,\"a\"); x }) lowers to invalid generated Perl shaped like return { $x = \"a\"; x }, and set(out, { set(x,\"a\"); return(x) }) follows hash target inference and emits malformed %out assignment. Rust has statement CodeBlock parsing and Expr::ArrayLiteral / Expr::HashLiteral, but no block-expression Expr variant or runtime evaluator. Therefore .2.1 split into .2.1.2 Perl-reference core block values, .2.1.3 Rust parity, and .2.1.4 block-local explicit-return follow-through if needed."
-reverify: "perl -Iperl -MLinkedSpec -e 'for my $stmt (q{return({})}, q{return({ key => value })}, q{return({ set(x,\"a\"); x })}, q{set(out, { set(x,\"a\"); return(x) })}) { my $out=LinkedSpec::call_spec_handler_subst(\"Top\",$stmt); $out =~ s/\\n/\\\\n/g; print \"$stmt => $out\\n\" }' && rg -n 'Block|HashLiteral|ArrayLiteral|parse_hash_literal|execute_block|eval_expr' rust/linkedspec-core/src/expr.rs rust/linkedspec-runtime/src/engine.rs"
+evidence: "SPEC-FORMAT-TERSE.2.1.1 ground truth on 2026-06-29 used KM retrieval, TOOLBOX call_spec_handler_subst probes, LinkedSpec::Get runtime/source dumps, and Perl/Rust code-read. Current Perl lowers return({}) to return {}, and return({ key : value }) to return {$key => $value}, preserving hash shape literals. But return({ set(x,\"a\"); x }) lowers to invalid generated Perl shaped like return { $x = \"a\"; x }, and set(out, { set(x,\"a\"); return(x) }) follows hash target inference and emits malformed %out assignment. Rust has statement CodeBlock parsing and Expr::ArrayLiteral / Expr::HashLiteral, but no block-expression Expr variant or runtime evaluator. Therefore .2.1 split into .2.1.2 Perl-reference core block values, .2.1.3 Rust parity, and .2.1.4 block-local explicit-return follow-through if needed."
+reverify: "perl -Iperl -MLinkedSpec -e 'for my $stmt (q{return({})}, q{return({ key : value })}, q{return({ set(x,\"a\"); x })}, q{set(out, { set(x,\"a\"); return(x) })}) { my $out=LinkedSpec::call_spec_handler_subst(\"Top\",$stmt); $out =~ s/\\n/\\\\n/g; print \"$stmt => $out\\n\" }' && rg -n 'Block|HashLiteral|ArrayLiteral|parse_hash_literal|execute_block|eval_expr' rust/linkedspec-core/src/expr.rs rust/linkedspec-runtime/src/engine.rs"
 ---
 
 # Expression-Valued Blocks Ground Truth
@@ -28,7 +28,7 @@ Hash shape literals already own brace value syntax:
 
 ```text
 return({})                 -> return {}
-return({ key => value })   -> return {$key => $value}
+return({ key : value })   -> return {$key => $value}
 ```
 
 Block-shaped values are not accepted as block expressions today:
@@ -53,7 +53,7 @@ Rust has:
 
 ## Split
 
-- `.2.1.2`: Perl reference core block values. Preserve `{}` and `{ key => value }` as hash literals, and treat
-  non-empty brace payloads without a top-level `=>` as block values in value-consuming slots.
+- `.2.1.2`: Perl reference core block values. Preserve `{}` and `{ key : value }` as hash literals, and treat
+  non-empty brace payloads without a top-level hash-pair delimiter as block values in value-consuming slots.
 - `.2.1.3`: Rust parity for the accepted Perl reference core.
 - `.2.1.4`: true block-local explicit-return semantics if final-only `return(expr)` is insufficient.

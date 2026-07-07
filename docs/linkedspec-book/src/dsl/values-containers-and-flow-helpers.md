@@ -22,7 +22,7 @@ For aggregate wrappers, a single **bare** name token names a working variable: `
 array/list working variable `items`, and `hash(meta)` reads the hash/associative-array working variable
 `meta`. Quoted strings are literal values, not variable-name aliases: `array("items")` constructs an array
 payload containing the string `"items"`, and `hash("key", value)` constructs a key/value hash. Prefer direct
-shape literals (`["literal"]`, `{ "key" => value }`, `[]`, `{}`) as the terse constructor spellings in new
+shape literals (`["literal"]`, `{ "key" : value }`, `[]`, `{}`) as the terse constructor spellings in new
 examples.
 
 ## Per-rule default accumulator
@@ -66,13 +66,13 @@ Examples:
 ```text
 name = entry_group(0);
 items = [];
-meta = { "kind" => "token", "line" => entry_line() };
+meta = { "kind" : "token", "line" : entry_line() };
 ```
 
 Use assignment when you want to set or replace the target. Assignment remains valid as a statement, and assignment
 forms are also value expressions. `name = "ok"` and `=(name, "ok")` store the scalar and yield it. Direct shape
 assignments such as `items = [value]`, `set(items, [value])`, `=(items, [value])`, and
-`meta = { key => value }` bind the array or hash as the current typed value of the bare target and yield that
+`meta = { key : value }` bind the array or hash as the current typed value of the bare target and yield that
 stored value. Mutation assignments also compose as values: `items += value` mutates the named array and yields the
 updated array snapshot, while `meta[key] = value` mutates the named hash and yields the updated hash snapshot.
 These forms compose in `return(...)`, helper arguments, expression-valued blocks, user functions, or compatible
@@ -81,9 +81,9 @@ receiver chains.
 Nested value-path assignment uses the same direct bracket path on the left side:
 
 ```text
-payload = { "items" => [{ "name" => "old" }] };
+payload = { "items" : [{ "name" : "old" }] };
 payload["items"][0]["name"] = "new";
-payload["items"][1] = { "name" => "tail" };
+payload["items"][1] = { "name" : "tail" };
 ```
 
 Nested writes mutate the array/hash value currently held by the bare variable. Intermediate containers must
@@ -120,20 +120,20 @@ Examples:
 ```text
 return(hash("kind", "token", "text", entry_text()));
 return(array("?node:", name, copy(array(children))));
-return({ "kind" => "token", "text" => entry_text(), "tags" => [tag, true] });
+return({ "kind" : "token", "text" : entry_text(), "tags" : [tag, true] });
 ```
 
 Older return helpers still exist and are useful when reading legacy specs, but new public examples should prefer the generalized `return(...)` form when it expresses the intent clearly.
 
-Direct shape literals (`[]` and `{ key => value }`) are value expressions on the Perl reference and Rust backend. Use
+Direct shape literals (`[]` and `{ key : value }`) are value expressions on the Perl reference and Rust backend. Use
 them when the literal shape is clearer than the helper form. Shape members still follow DSL value-expression
 rules: a bare element such as `tag` reads scalar working variable `tag`, and a bare hash key such as
-`{ field => value }` reads scalar `field` as the runtime key. Quote fixed object field names:
+`{ field : value }` reads scalar `field` as the runtime key. Quote fixed object field names:
 
 ```text
 set(field, "kind");
 set(value, "token");
-return({ field => value, "seen" => true, "parts" => [value, entry_text()] });
+return({ field : value, "seen" : true, "parts" : [value, entry_text()] });
 ```
 
 That returns an object with a dynamic key from `field`, a fixed `"seen"` field, and a nested array.
@@ -142,7 +142,7 @@ Direct shape literals are ordinary RHS values for bare assignment targets on the
 
 ```text
 items = [value, cat("a", "b")];     # binds an array value to items
-meta = { field => value };          # binds a hash value to meta
+meta = { field : value };          # binds a hash value to meta
 set(items, []);                     # replaces items with an empty array value
 set(meta, {});                      # replaces meta with an empty hash value
 ```
@@ -151,7 +151,7 @@ Use an explicit aggregate target when the intent is aggregate working-variable s
 
 ```text
 set(array(items), [value]);
-set(hash(meta), { field => value });
+set(hash(meta), { field : value });
 ```
 
 Use a bare working variable when the source should visibly read the current value or when the target should bind the
@@ -170,7 +170,7 @@ Expression-valued blocks are also value expressions. Use them when a value needs
 returned or assigned:
 
 ```text
-set(payload, { set(kind, "token"); return({ "kind" => kind }); "unused" });
+set(payload, { set(kind, "token"); return({ "kind" : kind }); "unused" });
 return(payload);
 ```
 
@@ -178,7 +178,7 @@ The `return(expr)` inside the block is block-local: it yields the block value an
 that block. The surrounding rule still returns only because the outer action later calls `return(payload)`.
 When a block is used as a receiver, its yielded value enters the same compatible receiver-dot helper family:
 `{ [3, 1, 2] }.sorted().join_values(",")`, `{ " a-b " }.trim().split("-").count()`,
-`{ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(",")`, and `{ 3.5 }.floor().add(2)` use the existing
+`{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")`, and `{ 3.5 }.floor().add(2)` use the existing
 array, string, hash, and number contracts.
 
 ## Reading and copying collections

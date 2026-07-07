@@ -25,7 +25,7 @@ Locked examples:
 { [3, 1, 2] }.sorted().join_values(",")              # "1,2,3"
 { return(["x", "y"]); ["bad"] }.join_values("|")     # "x|y"
 { set(raw, " a-b "); raw }.trim().split("-").count() # 2
-{ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(",") # "a,b"
+{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",") # "a,b"
 { 3.5 }.floor().add(2)                               # 5
 ```
 

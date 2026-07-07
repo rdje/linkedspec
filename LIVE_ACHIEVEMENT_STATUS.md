@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **SPEC-FORMAT-TERSE.9.4 — migrate hash literals to colon**
+  (DONE; FRONTIER `.9.5` HARD-RETIRE OLD HASH-LITERAL `=>` NEXT).
+
+  **Change:** Current-facing specs, checked-in corpus specs, generated Rust oracle inputs, active Perl/Rust tests,
+  mdBook examples, root docs, and Knowledge facts now prefer `{ key : value }` for direct hash-literal
+  association. `tkgui.spec` now returns a named hash accumulator directly instead of reconstructing one through
+  flat-array pairs.
+
+  **Boundary:** Blind-call edge `=>`, VHDL/source-language associations, generated Perl host hashrefs, Perl
+  metadata hashes, historical records, and explicit migration-window compatibility locks remain intentionally
+  classified. Old hash-literal `=>` is still accepted until `.9.5`.
+
+  **Verification:** Oracle generation over **93** fixtures, focused Perl/Rust checks, full phase0 `1..1023`,
+  Rust oracle corpus, mdBook, Knowledge Map, memory, whitespace, doctrine gates, and `tools/run_ci_local.sh` pass.
+
 - 2026-07-07: **SPEC-FORMAT-TERSE.9.3 — add Rust colon hash literals**
   (DONE; FRONTIER `.9.4` CURRENT-SOURCE/DOCS/CORPUS COLON MIGRATION NEXT).
 

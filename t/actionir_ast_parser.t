@@ -65,7 +65,7 @@ subtest 'shape literals and expression-valued blocks' => sub {
     is($array->{kind}, 'array_literal', 'array shape literal parses');
     is_deeply([map { $_->{kind} } @{$array->{items}}], ['variable', 'boolean', 'array_literal'], 'array literal items are typed expressions');
 
-    my $hash = parse_expr('{ key => value, "fixed" => [value] }');
+    my $hash = parse_expr('{ key : value, "fixed" : [value] }');
     is($hash->{kind}, 'hash_literal', 'hash shape literal parses');
     is(scalar(@{$hash->{entries}}), 2, 'hash literal entries are captured');
     is($hash->{entries}[0]{key}{kind}, 'variable', 'bare hash key is an expression');
@@ -86,7 +86,7 @@ subtest 'shape literals and expression-valued blocks' => sub {
     is($double_colon_block->{kind}, 'block_value', 'double-colon payload does not trigger colon hash parsing');
 
     my $block = parse_expr('{ set(x,"a"); x }');
-    is($block->{kind}, 'block_value', 'non-empty non-fat-arrow braces parse as a block value');
+    is($block->{kind}, 'block_value', 'non-empty non-hash-pair braces parse as a block value');
     is(scalar(@{$block->{block}{statements}}), 2, 'block value owns nested statements');
     is($block->{block}{statements}[0]{expr}{name}, 'assign', 'block statement calls use the same method parser seam');
     is($block->{block}{statements}[1]{expr}{kind}, 'variable', 'block final expression parses as a variable');
@@ -102,7 +102,7 @@ subtest 'assignment and mutation statement nodes' => sub {
     is($append->{name}, 'items', 'array append target name is captured');
     is($append->{value}{kind}, 'variable', 'array append RHS is parsed');
 
-    my $hash = parse_expr('meta[key] = { key => value }');
+    my $hash = parse_expr('meta[key] = { key : value }');
     is($hash->{kind}, 'assign_hash_index', 'hash-index assignment parses as assign_hash_index');
     is($hash->{key}{kind}, 'variable', 'hash assignment key is parsed as expression');
     is($hash->{value}{kind}, 'hash_literal', 'hash assignment RHS is parsed as hash literal');
@@ -535,7 +535,7 @@ subtest 'assignment and mutation statement lowering consumes AST nodes' => sub {
                     value => $var->('value'),
                 };
             }
-            if ($expr eq 'meta[poison_key] = { poison_key => poison_value }') {
+            if ($expr eq 'meta[poison_key] = { poison_key : poison_value }') {
                 return {
                     kind => 'assign_hash_index',
                     source => '__bad_assign_hash__()',
@@ -553,7 +553,7 @@ subtest 'assignment and mutation statement lowering consumes AST nodes' => sub {
         my $append = LinkedSpec::call_spec_handler_subst('Top', q{items += poison});
         is($append, 'push @items, $value', 'array append operator lowers RHS from AST fields');
 
-        my $hash_assign = LinkedSpec::call_spec_handler_subst('Top', q{meta[poison_key] = { poison_key => poison_value }});
+        my $hash_assign = LinkedSpec::call_spec_handler_subst('Top', q{meta[poison_key] = { poison_key : poison_value }});
         is($hash_assign, '$meta{$key} = {$key => $value}', 'hash-index assignment lowers key/RHS from AST fields');
 
         my $all = join("\n", $scalar, $append, $hash_assign);
@@ -585,7 +585,7 @@ subtest 'assignment expression lowering consumes AST nodes' => sub {
         'direct array shape RHS assignment returns the stored scalar-held array value'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(=(meta, { key => value }))}),
+        LinkedSpec::call_spec_handler_subst('Top', q{return(=(meta, { key : value }))}),
         q{return do { $meta = {$key => $value}; $meta }},
         'single-equals operator call returns the stored scalar-held hash value'
     );
@@ -729,7 +729,7 @@ subtest 'non-call value lowering consumes AST nodes' => sub {
 
         my $shape = LinkedSpec::call_spec_handler_subst(
             'Top',
-            q{return([value, true, foo["a"][i], { key => value }])},
+            q{return([value, true, foo["a"][i], { key : value }])},
         );
         is(
             $shape,
@@ -1172,7 +1172,7 @@ subtest 'return-payload lowering consumes AST nodes before raw fallback' => sub 
         local *LinkedSpec::ActionIR::AST::parse_action_expr = sub {
             my ($expr, @rest) = @_;
             ++$parse_calls;
-            if ($expr eq '[value, true, cat("a","b"), foo["a"][i], { key => value }]') {
+            if ($expr eq '[value, true, cat("a","b"), foo["a"][i], { key : value }]') {
                 return {
                     kind => 'array_literal',
                     source => '__bad_return_payload_array__()',
@@ -1217,7 +1217,7 @@ subtest 'return-payload lowering consumes AST nodes before raw fallback' => sub 
 
         my $payload = LinkedSpec::call_spec_handler_subst(
             'Top',
-            q{return([value, true, cat("a","b"), foo["a"][i], { key => value }])},
+            q{return([value, true, cat("a","b"), foo["a"][i], { key : value }])},
         );
         like($payload, qr/\$value/, 'AST return payload lowers bare scalar reads from typed nodes');
         like($payload, qr/JSON::PP::true/, 'AST return payload lowers booleans from typed nodes');

@@ -42,7 +42,7 @@ group:	/\(/ /\)/
    print("\\nERROR: ** Empty **  GROUP\\n");
    exit_now(2);
   endif();
-  return({type=>'GROUP', group=>array(internal)})
+  return({ "type" : "GROUP", "group" : array(internal) })
  }
 
 I {

@@ -23,7 +23,7 @@ landed in `SPEC-FORMAT-TERSE`:
 
 - scalar initialization: `name = value`;
 - array initialization/reset: `items = []` or `items = [value]` binds an array value to `items`;
-- hash initialization/reset: `meta = {}` or `meta = { key => value }` binds a hash value to `meta`;
+- hash initialization/reset: `meta = {}` or `meta = { key : value }` binds a hash value to `meta`;
 - array append on first use: `items += value`;
 - hash mutation on first use: `meta[key] = value`;
 - type-implying reads through accepted helper positions and direct path atoms.

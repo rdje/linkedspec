@@ -4,7 +4,7 @@ title: "SPEC-FORMAT-TERSE.3.3.2 historical aggregate assignment expression value
 answers:
   - "does return(items = [value]) work now"
   - "does =(items, [value]) yield an array value"
-  - "does set(meta, { key => value }) yield a hash value"
+  - "does set(meta, { key : value }) yield a hash value"
   - "do bare aggregate assignment targets infer array or hash kind in value positions"
   - "how do array(target) and hash(target) assignment expressions behave"
   - "how do direct shape assignments keep payloads scalar now"
@@ -24,7 +24,7 @@ target-kind inference part of that contract is superseded by [[terse-duck-typed-
 
 - Current `items = [value]`, `set(items, [value])`, and `=(items, [value])` bind an array typed value for a bare
   target and yield that stored value.
-- Current `meta = { key => value }`, `set(meta, { key => value })`, and `=(meta, { key => value })` bind a hash
+- Current `meta = { key : value }`, `set(meta, { key : value })`, and `=(meta, { key : value })` bind a hash
   typed value for a bare target and yield that stored value.
 - Explicit `array(items)` and `hash(meta)` targets match the direct RHS shape and yield aggregate snapshots.
 - Bare `payload = [value]` / `set(payload, [value])` now store and yield a scalar-held array value under the

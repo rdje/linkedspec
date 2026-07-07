@@ -306,7 +306,7 @@ sub _has_top_level_fat_arrow {
  my $in_double_quote = 0;
  my $escape_next = 0;
  my $len = length($text);
- for (my $idx = 0; $idx < $len - 1; ++$idx) {
+ for (my $idx = 0; $idx < $len; ++$idx) {
   my $char = substr($text, $idx, 1);
   if ($in_single_quote) {
    if ($escape_next) { $escape_next = 0; }
@@ -328,8 +328,13 @@ sub _has_top_level_fat_arrow {
   if ($char eq '}') { --$brace_depth if $brace_depth > 0; next; }
   if ($char eq '[') { ++$bracket_depth; next; }
   if ($char eq ']') { --$bracket_depth if $bracket_depth > 0; next; }
-  next unless $char eq '=' && substr($text, $idx + 1, 1) eq '>';
-  return 1 if $paren_depth == 0 && $brace_depth == 0 && $bracket_depth == 0;
+  next unless $paren_depth == 0 && $brace_depth == 0 && $bracket_depth == 0;
+  return 1 if $char eq '=' && $idx + 1 < $len && substr($text, $idx + 1, 1) eq '>';
+  if ($char eq ':') {
+   my $prev = $idx > 0 ? substr($text, $idx - 1, 1) : '';
+   my $next = $idx + 1 < $len ? substr($text, $idx + 1, 1) : '';
+   return 1 unless $prev eq ':' || $next eq ':';
+  }
  }
  return 0
 }
@@ -1982,7 +1987,7 @@ sub _lower_method_value_expr {
   my $in_double_quote = 0;
   my $escape_next = 0;
   my $len = length($text);
-  for (my $idx = 0; $idx < $len - 1; ++$idx) {
+  for (my $idx = 0; $idx < $len; ++$idx) {
    my $char = substr($text, $idx, 1);
    if ($in_single_quote) {
     if ($escape_next) { $escape_next = 0; }
@@ -2004,10 +2009,20 @@ sub _lower_method_value_expr {
    if ($char eq '}') { --$brace_depth if $brace_depth > 0; next; }
    if ($char eq '[') { ++$bracket_depth; next; }
    if ($char eq ']') { --$bracket_depth if $bracket_depth > 0; next; }
-   next unless $char eq '=' && substr($text, $idx + 1, 1) eq '>';
    next unless $paren_depth == 0 && $brace_depth == 0 && $bracket_depth == 0;
+   my $separator_len;
+   if ($char eq '=' && $idx + 1 < $len && substr($text, $idx + 1, 1) eq '>') {
+    $separator_len = 2;
+   } elsif ($char eq ':') {
+    my $prev = $idx > 0 ? substr($text, $idx - 1, 1) : '';
+    my $next = $idx + 1 < $len ? substr($text, $idx + 1, 1) : '';
+    next if $prev eq ':' || $next eq ':';
+    $separator_len = 1;
+   } else {
+    next;
+   }
    my $lhs = $trim_action_ir_value->(substr($text, 0, $idx));
-   my $rhs = $trim_action_ir_value->(substr($text, $idx + 2));
+   my $rhs = $trim_action_ir_value->(substr($text, $idx + $separator_len));
    return undef unless defined($lhs) && length($lhs);
    return undef unless defined($rhs) && length($rhs);
    return [$lhs, $rhs];

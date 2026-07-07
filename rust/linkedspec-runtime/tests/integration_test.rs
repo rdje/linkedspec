@@ -407,7 +407,7 @@ Done:
         ),
         (
             "shape literal body",
-            r#"fn meta() { return({ "b" => 2, "a" => [1, 2] }) }
+            r#"fn meta() { return({ "b" : 2, "a" : [1, 2] }) }
 Top::
  /x/ -> Done { return(meta().keys().sort()) }
 Done:
@@ -415,7 +415,7 @@ Done:
 "#,
             "meta",
             serde_json::json!([]),
-            r#"return({ "b" => 2, "a" => [1, 2] })"#,
+            r#"return({ "b" : 2, "a" : [1, 2] })"#,
         ),
     ];
 
@@ -1998,7 +1998,7 @@ fn terse_1_6_explicit_array_receiver_runs() {
 }
 
 // ── SPEC-FORMAT-TERSE.1.2.3.5.3 — Rust shape-literal value parity:
-// direct `[]` and `{ key => value }` forms are value expressions. Their members
+// direct `[]` and `{ key : value }` forms are value expressions. Their members
 // use the same expression semantics as the Perl `.1.2.3.5.1` contract: bare
 // names read scalar working variables, helper calls compose, primitive literals
 // stay typed, and nested shapes recurse. RHS target-kind inference landed later
@@ -2006,7 +2006,7 @@ fn terse_1_6_explicit_array_receiver_runs() {
 
 #[test]
 fn terse_1_2_3_5_3_shape_literal_values_return_typed_nested_payload() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array([value, cat(\"a\", \"b\"), true, []], { key => value, \"fixed\" => [value] })) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array([value, cat(\"a\", \"b\"), true, []], { key : value, \"fixed\" : [value] })) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[["ok", "ab", true, []], {"fixed": ["ok"], "stage": "ok"}]]),
@@ -2016,7 +2016,7 @@ fn terse_1_2_3_5_3_shape_literal_values_return_typed_nested_payload() {
 
 #[test]
 fn terse_1_2_3_5_3_shape_literals_work_in_mutation_rhs_slots() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"payload\"); set(key, \"stage\"); items += [value]; meta[key] = { key => value }; return(array(copy(array(items)), copy(hash(meta)))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"payload\"); set(key, \"stage\"); items += [value]; meta[key] = { key : value }; return(array(copy(array(items)), copy(hash(meta)))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[[["payload"]], {"stage": {"stage": "payload"}}]]),
@@ -2064,7 +2064,7 @@ fn terse_11_3_shape_assignment_binds_scalar_held_array_values() {
 
 #[test]
 fn terse_11_3_assignment_can_replace_scalar_array_hash_values() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); thing = \"text\"; first = thing; thing = [value]; second = array(thing); thing = { key => value }; third = hash(thing); thing = \"done\"; return(array(first, second, third, thing)) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); thing = \"text\"; first = thing; thing = [value]; second = array(thing); thing = { key : value }; third = hash(thing); thing = \"done\"; return(array(first, second, third, thing)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["text", ["ok"], {"stage": "ok"}, "done"]]),
@@ -2074,7 +2074,7 @@ fn terse_11_3_assignment_can_replace_scalar_array_hash_values() {
 
 #[test]
 fn terse_11_3_set_shape_rhs_binds_bare_targets_as_values() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(items, [value]); set(meta, { key => value }); return(array(array(items), hash(meta), items, meta)) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(items, [value]); set(meta, { key : value }); return(array(array(items), hash(meta), items, meta)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[["ok"], {"stage": "ok"}, ["ok"], {"stage": "ok"}]]),
@@ -2084,7 +2084,7 @@ fn terse_11_3_set_shape_rhs_binds_bare_targets_as_values() {
 
 #[test]
 fn terse_11_3_explicit_typed_targets_remain_aggregate_storage() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(array(items), [value]); set(hash(meta), { key => value }); set(payload, [value]); return(array(copy(array(items)), copy(hash(meta)), payload, copy(array(payload)))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); set(array(items), [value]); set(hash(meta), { key : value }); set(payload, [value]); return(array(copy(array(items)), copy(hash(meta)), payload, copy(array(payload)))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[["ok"], {"stage": "ok"}, ["ok"], ["ok"]]]),
@@ -2098,7 +2098,7 @@ fn terse_11_3_explicit_typed_targets_remain_aggregate_storage() {
 
 #[test]
 fn terse_11_4_nested_hash_array_hash_value_path_writes_run() {
-    let grammar = "Top::\n /x/ -> Done { set(value, \"new\"); payload = { \"items\" => [{ \"name\" => \"old\" }] }; payload[\"items\"][0][\"name\"] = value; payload[\"items\"][1] = { \"name\" => \"tail\" }; return(array(payload[\"items\"][0][\"name\"], payload[\"items\"][1][\"name\"], payload)) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { set(value, \"new\"); payload = { \"items\" : [{ \"name\" : \"old\" }] }; payload[\"items\"][0][\"name\"] = value; payload[\"items\"][1] = { \"name\" : \"tail\" }; return(array(payload[\"items\"][0][\"name\"], payload[\"items\"][1][\"name\"], payload)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["new", "tail", {"items": [{"name": "new"}, {"name": "tail"}]}]]),
@@ -2108,7 +2108,7 @@ fn terse_11_4_nested_hash_array_hash_value_path_writes_run() {
 
 #[test]
 fn terse_11_4_nested_array_hash_value_path_writes_run() {
-    let grammar = "Top::\n /x/ -> Done { payload = [{ \"name\" => \"old\" }]; payload[0][\"name\"] = \"new\"; payload[1] = { \"name\" => \"tail\" }; return(payload) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { payload = [{ \"name\" : \"old\" }]; payload[0][\"name\"] = \"new\"; payload[1] = { \"name\" : \"tail\" }; return(payload) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[{"name": "new"}, {"name": "tail"}]]),
@@ -2118,7 +2118,7 @@ fn terse_11_4_nested_array_hash_value_path_writes_run() {
 
 #[test]
 fn terse_11_4_nested_assignment_expression_returns_root_or_undef() {
-    let grammar = "Top::\n /x/ -> Done { payload = { \"items\" => [{ \"name\" => \"old\" }] }; return(array((payload[\"items\"][0][\"name\"] = \"new\").count_keys(), payload[\"items\"][1] = \"tail\", payload, payload[\"items\"][3] = \"gap\", payload, payload[\"missing\"][0] = \"bad\", payload, payload[\"items\"][0][0] = \"bad\", payload)) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { payload = { \"items\" : [{ \"name\" : \"old\" }] }; return(array((payload[\"items\"][0][\"name\"] = \"new\").count_keys(), payload[\"items\"][1] = \"tail\", payload, payload[\"items\"][3] = \"gap\", payload, payload[\"missing\"][0] = \"bad\", payload, payload[\"items\"][0][0] = \"bad\", payload)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[1, {"items": [{"name": "new"}, "tail"]}, {"items": [{"name": "new"}, "tail"]}, null, {"items": [{"name": "new"}, "tail"]}, null, {"items": [{"name": "new"}, "tail"]}, null, {"items": [{"name": "new"}, "tail"]}]]),
@@ -2138,7 +2138,7 @@ fn terse_15_4_bare_reads_replace_scalar_slot_shorthand() {
 
 #[test]
 fn terse_6_2_3_2_bare_identifier_remembers_type_after_initialization() {
-    let grammar = "Top::\n /x/ -> Done { value = \"ok\"; key = \"stage\"; items = [value]; meta = { key => value }; return(array(copy(items), copy(meta), items.count(), meta.count_keys(), items.first(), meta.pick_keys(key).sorted_values().first())) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { value = \"ok\"; key = \"stage\"; items = [value]; meta = { key : value }; return(array(copy(items), copy(meta), items.count(), meta.count_keys(), items.first(), meta.pick_keys(key).sorted_values().first())) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[["ok"], {"stage": "ok"}, 1, 1, "ok", "ok"]]),
@@ -2184,7 +2184,7 @@ fn terse_2_1_3_expression_valued_block_assignment_source_is_scalar() {
 
 #[test]
 fn terse_2_1_3_expression_valued_blocks_compose_with_hash_literals() {
-    let grammar = "Top::\n /x/ -> Done { return(array({ set(x, \"a\"); x }, { set(key, \"stage\"); set(value, \"ok\"); { key => value } }, {}, { key => value })) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { return(array({ set(x, \"a\"); x }, { set(key, \"stage\"); set(value, \"ok\"); { key : value } }, {}, { key : value })) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["a", {"stage": "ok"}, {}, {"stage": "ok"}]]),
@@ -2218,7 +2218,7 @@ fn terse_2_1_4_expression_valued_block_assignment_source_stops_after_return() {
 
 #[test]
 fn terse_2_1_4_expression_valued_blocks_compose_with_early_return_hash() {
-    let grammar = "Top::\n /x/ -> Done { return(array({ return(\"a\"); \"b\" }, { set(x, \"c\"); return({ \"k\" => x }); \"bad\" })) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { return(array({ return(\"a\"); \"b\" }, { set(x, \"c\"); return({ \"k\" : x }); \"bad\" })) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["a", {"k": "c"}]]),
@@ -3281,7 +3281,7 @@ Done::
 #[test]
 fn terse_3_3_2_aggregate_assignment_expressions_run() {
     let grammar = r#"Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], copy(array(items)), set(meta, { key => value }), copy(hash(meta)), set(payload, [value]), payload, =(more, [value, "x"]).count())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], copy(array(items)), set(meta, { key : value }), copy(hash(meta)), set(payload, [value]), payload, =(more, [value, "x"]).count())) }
 
 Done::
  /[a-z]+/
@@ -3316,7 +3316,7 @@ Done::
 fn terse_3_3_4_assignment_expression_closure_run() {
     let grammar = r#"fn keep(value) { return(fn_out = value) }
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(name, "!")), other, set(third, keep("fn")), third, set(current, "surface"), current, items = [value], array(items), set(meta, { key => value }), hash(meta), set(array(items_mut), [value]), items_mut += "tail", copy(array(items_mut)), set(hash(meta_mut), { key => value }), meta_mut["extra"] = other, copy(hash(meta_mut)), (items_mut += "last").count(), (meta_mut["last"] = value).count_keys())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(name, "!")), other, set(third, keep("fn")), third, set(current, "surface"), current, items = [value], array(items), set(meta, { key : value }), hash(meta), set(array(items_mut), [value]), items_mut += "tail", copy(array(items_mut)), set(hash(meta_mut), { key : value }), meta_mut["extra"] = other, copy(hash(meta_mut)), (items_mut += "last").count(), (meta_mut["last"] = value).count_keys())) }
 
 Done::
  /[a-z]+/
@@ -3387,7 +3387,7 @@ Done::
 #[test]
 fn terse_4_3_2_user_function_receiver_chains_continue_by_returned_type() {
     let grammar = r#"fn words(value) { return([trim(value), uppercase(trim(value))]) }
-fn meta() { return({ "b" => 2, "a" => 1 }) }
+fn meta() { return({ "b" : 2, "a" : 1 }) }
 Top::
  /x/ -> Done { return(array(words(" go ").join_values("|"), words(" a ").count(), meta().sorted_keys().join_values(","))) }
 
@@ -3470,7 +3470,7 @@ Done::
 
 #[test]
 fn terse_2_3_5_5_block_valued_receiver_chains_run() {
-    let grammar = "Top::\n /x/ -> Done { return(array({ [3, 1, 2] }.sorted().join_values(\",\"), { return([\"x\", \"y\"]); [\"bad\"] }.join_values(\"|\"), { set(raw, \" a-b \"); raw }.trim().split(\"-\").count(), { { \"b\" => 2, \"a\" => 1 } }.sorted_keys().join_values(\",\"), { 3.5 }.floor().add(2))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { return(array({ [3, 1, 2] }.sorted().join_values(\",\"), { return([\"x\", \"y\"]); [\"bad\"] }.join_values(\"|\"), { set(raw, \" a-b \"); raw }.trim().split(\"-\").count(), { { \"b\" : 2, \"a\" : 1 } }.sorted_keys().join_values(\",\"), { 3.5 }.floor().add(2))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([["1,2,3", "x|y", 2, "a,b", 5]]),
@@ -3482,7 +3482,7 @@ fn terse_2_3_5_5_block_valued_receiver_chains_run() {
 
 #[test]
 fn terse_2_3_5_6_typed_wrapper_quoted_boundaries_run() {
-    let grammar = "Top::\n /x/ -> Done { items += \"a\"; items += \"b\"; set_key(meta, \"a\", 1); set_key(meta, \"b\", 2); return(array(count(array(items)), count(array(\"items\")), count(array('items')), count([\"items\"]), count(array(\"literal\", \"value\")), count_keys(hash(meta)), count_keys(hash(\"meta\", 1)), count_keys(hash('meta', 1)), count_keys({ \"meta\" => 1 }))) }\n\nDone::\n /[a-z]+/\n";
+    let grammar = "Top::\n /x/ -> Done { items += \"a\"; items += \"b\"; set_key(meta, \"a\", 1); set_key(meta, \"b\", 2); return(array(count(array(items)), count(array(\"items\")), count(array('items')), count([\"items\"]), count(array(\"literal\", \"value\")), count_keys(hash(meta)), count_keys(hash(\"meta\", 1)), count_keys(hash('meta', 1)), count_keys({ \"meta\" : 1 }))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([[2, 1, 1, 1, 2, 2, 1, 1, 1]]),

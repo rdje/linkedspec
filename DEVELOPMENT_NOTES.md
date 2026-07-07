@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (SPEC-FORMAT-TERSE.9.4 — current source now prefers colon hash pairs):
+  Current `.spec` authoring examples, generated oracle inputs, tests, mdBook examples, and current Knowledge facts
+  should use `{ key : value }` for direct hash-literal association. Do not globally replace `=>`: blind-call edges,
+  VHDL/source-language associations, generated Perl host hashrefs, Perl metadata hashes, historical records, and
+  explicit old/new migration-window tests remain valid owners. The `.9.4` migration also exposed a Perl
+  `MethodLowering.pm` source fallback that still detected only `=>` inside expression-valued block receiver chains;
+  keep that scanner aligned with the ActionIR AST parser by accepting top-level `:` and old `=>` while skipping
+  `::`. Hard retirement of source-spelled hash-literal `=>` is still `.9.5`, not part of the migration sweep.
+
 - 2026-07-07 (SPEC-FORMAT-TERSE.9.3 — Rust colon hash literals reuse the same brace-classification boundary):
   Rust `linkedspec-core/src/expr.rs` now mirrors the Perl `.9.2` migration window: direct hash literals accept
   top-level `:` and old `=>` pair separators, while the scanner skips `::`, nested braces, brackets, parentheses,

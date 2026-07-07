@@ -16514,12 +16514,12 @@ subtest 'emit_context_lowers_array_snapshot_and_array_assign_method_contracts' =
         'return(payload) lowers copy(array(...)) to the same snapshot array payload'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return({name=>block_namei, content=>copy(array(assigns))})'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return({ name : block_namei, content : copy(array(assigns)) })'),
         'return {$name => $block_namei, $content => [@assigns]}',
         'return(payload) lowers copy(array(...)) inside structured hash payloads'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return({name=>block_namei, content=>copy(array(assigns))})'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return({ name : block_namei, content : copy(array(assigns)) })'),
         'return {$name => $block_namei, $content => [@assigns]}',
         'return(payload) lowers copy(array(...)) inside structured hash payloads'
     );
@@ -16546,12 +16546,12 @@ subtest 'emit_context_lowers_general_return_payloads_with_nested_structures' => 
     plan tests => 12;
 
     like(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(["semantic", { key => name }, [123, array(foo_arr).drop_front(idx).first()]])'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return(["semantic", { key : name }, [123, array(foo_arr).drop_front(idx).first()]])'),
         qr/^return \["semantic", \{\$key => \$name\}, \[123, do \{ my \$__ls_first = do \{ my \$__ls_tail_skip = \$idx;.*\@foo_arr.*\$__ls_first->\[0\]/s,
         'general return(payload) lowers nested array/hash payload with scalar helpers'
     );
     like(
-        LinkedSpec::call_spec_handler_subst('Top', 'return({ item => hash(foo_hash).pick_keys(key).sorted_values().first(), list => [name, 123] })'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return({ item : hash(foo_hash).pick_keys(key).sorted_values().first(), list : [name, 123] })'),
         qr/^return \{\$item => do \{ my \$__ls_first = do \{ my \$__ls_sorted_values = do \{ my \$__ls_pick_source = \\%foo_hash;.*foreach my \$__ls_pick_key \(\$key\).*\$__ls_first->\[0\].*\$list => \[\$name, 123\]\}/s,
         'general return(payload) lowers projected field/index reads inside nested hash/list payload'
     );
@@ -16561,7 +16561,7 @@ subtest 'emit_context_lowers_general_return_payloads_with_nested_structures' => 
         'general return(payload) lowers base[...]["..."] with mixed index/key path segments'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return({ item => myref["A"][B]["C"][D] })'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return({ item : myref["A"][B]["C"][D] })'),
         'return {$item => $myref->{"A"}->[$B]->{"C"}->[$D]}',
         'general return(payload) lowers base["..."][...] with hash-first path segments'
     );
@@ -16588,7 +16588,7 @@ subtest 'emit_context_lowers_general_return_payloads_with_nested_structures' => 
 
     my $spec_content = <<'SPEC';
 Top::&
- /a/ -> Top .return(["semantic", { key => name }, [array(foo_arr).drop_front(idx).first()]])
+ /a/ -> Top .return(["semantic", { key : name }, [array(foo_arr).drop_front(idx).first()]])
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -42966,9 +42966,10 @@ subtest 'tkgui_helper_flow_eliminates_raw_fallback' => sub {
     my $top_meta = $descr->{spec}{sub_gui_list}{meta}{action_rewriter};
     ok(
         scalar(grep { $_ eq 'NEXT' } @{$top_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'PUSH' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$top_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CALL' } @{$top_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$top_meta->{canonical_action_ir_nodes}}),
-        'tkgui sub_gui_list canonical action-IR nodes include NEXT/PUSH/RETURN after helper migration'
+        'tkgui sub_gui_list canonical action-IR nodes include NEXT/ASSIGN/CALL/RETURN after helper migration'
     );
 
     my $meta = $descr->{spec}{sub_gui}{meta}{action_rewriter};
@@ -43008,21 +43009,22 @@ subtest 'tkgui_parser_smoke' => sub {
     is($inner_eval_err, '', 'tkgui parser execution leaves no inner eval error');
     is($stdout, "Found a SUB GUI entry point <start>\n", 'tkgui parser preserves the sub_gui entry-point debug print');
     is($stderr, '', 'tkgui parser emits no stderr for the smoke input');
-    is_deeply($ast, {'((frame foo))' => undef}, 'tkgui parser preserves the current one-entry hash shape');
+    is_deeply($ast, {start => '((frame foo))'}, 'tkgui parser returns the current entry-name to captured-body hash shape');
 };
 subtest 'tkgui_sub_gui_prefers_capture_slice' => sub {
-    plan tests => 14;
+    plan tests => 15;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'tkgui.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'tkgui source spec text is available for delimiter-helper inspection');
-    like($source_content, qr/-> sub_gui\s+\{push\(sub_gui\)\}/, 'tkgui top aggregation now prefers push(sub_gui)');
-    like($source_content, qr/LX \{return\(hash\(flat_array\(array\(sub_gui_list\)\)\)\)\}/, 'tkgui top lifecycle now returns the accumulated pair list through helper-form hash construction');
+    like($source_content, qr/-> sub_gui\s+\{set\(hash\(sub_gui_list\),\s*merge_hash\(hash\(sub_gui_list\),\s*call\(sub_gui\)\)\)\}/, 'tkgui top aggregation now merges child hash fragments through helper-form assignment');
+    like($source_content, qr/I \{set\(hash\(sub_gui_list\),\s*\{\}\)\}/, 'tkgui top lifecycle initializes explicit hash accumulator storage');
+    like($source_content, qr/LX \{return\(copy\(hash\(sub_gui_list\)\)\)\}/, 'tkgui top lifecycle now returns the accumulated hash through helper-form copy construction');
     like($source_content, qr/-> comment\s+\{next\(\)\}/, 'tkgui comment skips now use the helper-form next statement');
     unlike($source_content, qr/push \@sub_guis, call\(/, 'tkgui top aggregation no longer uses a raw push-call wrapper');
     like($source_content, qr/subgui_name = entry_group\(0\);/, 'tkgui sub_gui now prefers direct assignment plus entry_group(0) for the entry-point name read');
-    like($source_content, qr/sub_gui\[1\]\s+\{return \(\$subgui_name => '\('\.capture_slice\(\)\.'\)'\)\}/, 'tkgui sub_gui now prefers capture_slice() for the inner parenthesized body read');
+    like($source_content, qr/sub_gui\[1\]\s+\{return\(\{\s*subgui_name\s*:\s*cat\("\(",\s*capture_slice\(\),\s*"\)"\)\s*\}\)\}/, 'tkgui sub_gui now returns a current-DSL hash fragment using capture_slice() for the inner parenthesized body read');
     like($source_content, qr/-> curlyb\[1\]\s+\{return_undef\(\)\}/, 'tkgui curlyb terminal edge now uses helper-form undef return');
     unlike($source_content, qr/my \(\$subgui_name\) = \@IMATCH_LIST;/, 'tkgui sub_gui no longer destructures raw @IMATCH_LIST for the entry-point name read');
     unlike($source_content, qr/sub_gui\[1\]\s+\{return \(\$subgui_name => '\('\.substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - 1\)\.'\)'\)\}/, 'tkgui sub_gui no longer uses the raw anonymous-boundary substr read');
@@ -44147,10 +44149,10 @@ fn pair(left, right) { return(cat(left, right)) }
 fn multiline(value) {
  value.trim().lowercase()
 }
-fn nested(value) { if(value) { return({ "kind" => value }) } else { return([]) } }
+fn nested(value) { if(value) { return({ "kind" : value }) } else { return([]) } }
 fn string_braces(value) { return("{not block}") }
 fn regex_body(value) { return(matches(value, /}/)) }
-fn direct_shapes(value) { return([value, { "kind" => value }]) }
+fn direct_shapes(value) { return([value, { "kind" : value }]) }
 fn assign_value(value) { return(out = value) }
 fn hash_set(key, value) { meta[key] = value; return(meta[key]) }
 fn adjacent_braces() { {}{} }
@@ -44213,7 +44215,7 @@ SPEC
     ok($multiline->{body_span}{line_end} > $multiline->{body_span}{line_start},
         'multiline function body span records multiple lines');
 
-    like($ast->[6]{body_source}, qr/return\(\{ "kind" => value \}\)/,
+    like($ast->[6]{body_source}, qr/return\(\{ "kind" : value \}\)/,
         'nested brace body is captured as body text');
     like($ast->[7]{body_source}, qr/\{not block\}/,
         'braces inside strings do not terminate the function body');
@@ -46084,13 +46086,13 @@ subtest 'spec_format_terse_1_2_3_5_1_shape_literal_value_expressions' => sub {
 
     is($L->('return([value])'), 'return [$value]',
         'array shape literal lowers a bare element as a scalar read');
-    is($L->('return({ key => value })'), 'return {$key => $value}',
+    is($L->('return({ key : value })'), 'return {$key => $value}',
         'hash shape literal lowers bare key and value slots as scalar reads');
     is($L->('set(out, [value, cat("a","b")])'), $L->('set(out, array(value, cat("a","b")))'),
         'explicit scalar assignment source shape literals compose with helper value expressions');
     is($L->('items += [value]'), 'push @items, [$value]',
         'array append RHS accepts a shape literal value expression');
-    is($L->('meta[key] = { key => value }'), '$meta{$key} = {$key => $value}',
+    is($L->('meta[key] = { key : value }'), '$meta{$key} = {$key => $value}',
         'hash-index assignment RHS accepts a hash shape literal');
     is($L->('push(items, [value])'), 'push @items, [$value]',
         'push(target, shape) is explicit append, not all-bare child-call routing');
@@ -46100,7 +46102,7 @@ subtest 'spec_format_terse_1_2_3_5_1_shape_literal_value_expressions' => sub {
         'hash-index assignment brackets stay statement syntax while RHS brackets are a value literal');
 
     my $shape_spec = "Top::\n"
-                   . " /x/ -> Done { set(value,\"ok\"); set(key,\"stage\"); return(array([value, cat(\"a\",\"b\"), true, []], { key => value, \"fixed\" => [value] })) }\n"
+                   . " /x/ -> Done { set(value,\"ok\"); set(key,\"stage\"); return(array([value, cat(\"a\",\"b\"), true, []], { key : value, \"fixed\" : [value] })) }\n"
                    . "\nDone::\n /[a-z]+/\n";
     my $shape_parser = eval { LinkedSpec::Get(\$shape_spec) };
     ok(ref($shape_parser) eq 'CODE', 'shape-literal return spec compiles to a parser')
@@ -46152,11 +46154,11 @@ subtest 'spec_format_terse_11_2_bare_shape_assignment_value_binding' => sub {
         'empty hash RHS binds a scalar-held hash value');
     is($L->('name = [value]'), '$name = [$value]',
         'non-empty array RHS binds a scalar-held array value');
-    is($L->('name = { key => value }'), '$name = {$key => $value}',
+    is($L->('name = { key : value }'), '$name = {$key => $value}',
         'non-empty hash RHS binds a scalar-held hash value');
     is($L->('set(name, [value])'), '$name = [$value]',
         'set(name, shape) follows scalar value-binding semantics');
-    is($L->('set(meta, { key => value })'), '$meta = {$key => $value}',
+    is($L->('set(meta, { key : value })'), '$meta = {$key => $value}',
         'set(meta, shape) follows scalar value-binding semantics');
     is($L->('set(name, [value])'), '$name = [$value]',
         'explicit scalar target remains a scalar payload assignment boundary');
@@ -46184,7 +46186,7 @@ subtest 'spec_format_terse_11_2_bare_shape_assignment_value_binding' => sub {
         'array(name) reads the scalar-held array value through a guard');
 
     my $hash_spec = "Top::\n"
-                  . " /x/ -> Done { set(key,\"stage\"); set(value,\"ok\"); meta = { key => value }; return(hash(meta)) }\n"
+                  . " /x/ -> Done { set(key,\"stage\"); set(value,\"ok\"); meta = { key : value }; return(hash(meta)) }\n"
                   . "\nDone::\n /[a-z]+/\n";
     my $hash_parser = eval { LinkedSpec::Get(\$hash_spec) };
     ok(ref($hash_parser) eq 'CODE', 'hash value-binding assignment spec compiles')
@@ -46234,7 +46236,7 @@ subtest 'spec_format_terse_11_2_bare_shape_assignment_value_binding' => sub {
         'explicit array target stores the lowered shape into @items');
 
     my $explicit_hash_spec = "Top::\n"
-                           . " /x/ -> Done { set(key,\"stage\"); set(value,\"ok\"); set(hash(meta), { key => value, \"fixed\" => [value] }); return(copy(hash(meta))) }\n"
+                           . " /x/ -> Done { set(key,\"stage\"); set(value,\"ok\"); set(hash(meta), { key : value, \"fixed\" : [value] }); return(copy(hash(meta))) }\n"
                            . "\nDone::\n /[a-z]+/\n";
     my $explicit_hash_parser = eval { LinkedSpec::Get(\$explicit_hash_spec) };
     ok(ref($explicit_hash_parser) eq 'CODE', 'explicit hash target shape initializer spec compiles')
@@ -46685,7 +46687,7 @@ subtest 'spec_format_terse_2_3_5_5_block_valued_receiver_chains' => sub {
     like($L->('return({ set(raw, " a-b "); raw }.trim().split("-").count())'),
         qr/__ls_trim.*__ls_split_value.*__ls_count/s,
         'string-yielding block receivers continue through split into array helper chains');
-    like($L->('return({ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(","))'),
+    like($L->('return({ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(","))'),
         qr/__ls_sorted_keys.*__ls_join_values/s,
         'hash-yielding block receivers continue through sorted_keys into array helper chains');
     like($L->('return({ 3.5 }.floor().add(2))'),
@@ -46693,7 +46695,7 @@ subtest 'spec_format_terse_2_3_5_5_block_valued_receiver_chains' => sub {
         'number-yielding block receivers continue through numeric helper chains');
 
     my $spec = "Top::\n"
-             . " /x/ -> Done { return(array({ [3, 1, 2] }.sorted().join_values(\",\"), { return([\"x\", \"y\"]); [\"bad\"] }.join_values(\"|\"), { set(raw, \" a-b \"); raw }.trim().split(\"-\").count(), { { \"b\" => 2, \"a\" => 1 } }.sorted_keys().join_values(\",\"), { 3.5 }.floor().add(2))) }\n"
+             . " /x/ -> Done { return(array({ [3, 1, 2] }.sorted().join_values(\",\"), { return([\"x\", \"y\"]); [\"bad\"] }.join_values(\"|\"), { set(raw, \" a-b \"); raw }.trim().split(\"-\").count(), { { \"b\" : 2, \"a\" : 1 } }.sorted_keys().join_values(\",\"), { 3.5 }.floor().add(2))) }\n"
              . "\nDone::\n /[a-z]+/\n";
     my $parser = eval { LinkedSpec::Get(\$spec) };
     ok(ref($parser) eq 'CODE', 'block-valued receiver-chain spec compiles to a parser')
@@ -47099,13 +47101,13 @@ subtest 'spec_format_terse_3_3_2_aggregate_assignment_expression_values' => sub 
     is($L->('return(=(items, [value]))'),
         'return do { $items = [$value]; $items }',
         'operator-call direct array RHS returns the scalar-held array value');
-    is($L->('return(set(meta, { key => value }))'),
+    is($L->('return(set(meta, { key : value }))'),
         'return do { $meta = {$key => $value}; $meta }',
         'bare direct hash RHS assignment returns the scalar-held hash value');
     is($L->('return(set(array(items), [value]))'),
         'return do { @items = ($value); [@items] }',
         'explicit array target returns the stored array value');
-    is($L->('return(set(hash(meta), { key => value }))'),
+    is($L->('return(set(hash(meta), { key : value }))'),
         'return do { %meta = ($key => $value); +{%meta} }',
         'explicit hash target returns the stored hash value');
     is($L->('return(set(payload, [value]))'),
@@ -47113,7 +47115,7 @@ subtest 'spec_format_terse_3_3_2_aggregate_assignment_expression_values' => sub 
         'explicit scalar target returns the scalar-held shape payload');
 
     my $spec = "Top::\n"
-             . " /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(items = [value], copy(array(items)), set(meta, { key => value }), copy(hash(meta)), set(payload, [value]), payload, =(more, [value, \"x\"]).count())) }\n"
+             . " /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(items = [value], copy(array(items)), set(meta, { key : value }), copy(hash(meta)), set(payload, [value]), payload, =(more, [value, \"x\"]).count())) }\n"
              . "\nDone::\n /[a-z]+/\n";
     my $parser = eval { LinkedSpec::Get(\$spec) };
     ok(ref($parser) eq 'CODE', 'aggregate assignment expression spec compiles to a parser')
@@ -47252,7 +47254,7 @@ subtest 'spec_format_terse_3_3_4_assignment_expression_closure' => sub {
 
     my $spec = "fn keep(value) { return(fn_out = value) }\n"
              . "Top::\n"
-             . " /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(name = value, name, =(other, cat(name, \"!\")), other, set(third, keep(\"fn\")), third, set(current, \"surface\"), current, items = [value], array(items), set(meta, { key => value }), hash(meta), set(array(items_mut), [value]), items_mut += \"tail\", copy(array(items_mut)), set(hash(meta_mut), { key => value }), meta_mut[\"extra\"] = other, copy(hash(meta_mut)), (items_mut += \"last\").count(), (meta_mut[\"last\"] = value).count_keys())) }\n"
+             . " /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(name = value, name, =(other, cat(name, \"!\")), other, set(third, keep(\"fn\")), third, set(current, \"surface\"), current, items = [value], array(items), set(meta, { key : value }), hash(meta), set(array(items_mut), [value]), items_mut += \"tail\", copy(array(items_mut)), set(hash(meta_mut), { key : value }), meta_mut[\"extra\"] = other, copy(hash(meta_mut)), (items_mut += \"last\").count(), (meta_mut[\"last\"] = value).count_keys())) }\n"
              . "\nDone::\n /[a-z]+/\n";
     my $parser = eval { LinkedSpec::Get(\$spec) };
     ok(ref($parser) eq 'CODE', 'assignment expression closure spec compiles to a parser')
@@ -47311,7 +47313,7 @@ subtest 'spec_format_terse_11_4_nested_mixed_value_path_assignment' => sub {
         'nested statement lowering leaves no raw direct-access assignment residue');
 
     my $stmt_spec = "Top::\n"
-                  . " /x/ -> Done { set(value, \"new\"); payload = { \"items\" => [{ \"name\" => \"old\" }] }; payload[\"items\"][0][\"name\"] = value; payload[\"items\"][1] = \"tail\"; missing_result = payload[\"missing\"][0] = \"bad\"; wrong_result = payload[\"items\"][0][0] = \"bad\"; return(array(payload, missing_result, wrong_result)) }\n"
+                  . " /x/ -> Done { set(value, \"new\"); payload = { \"items\" : [{ \"name\" : \"old\" }] }; payload[\"items\"][0][\"name\"] = value; payload[\"items\"][1] = \"tail\"; missing_result = payload[\"missing\"][0] = \"bad\"; wrong_result = payload[\"items\"][0][0] = \"bad\"; return(array(payload, missing_result, wrong_result)) }\n"
                   . "\nDone::\n /[a-z]+/\n";
     my $stmt_parser = eval { LinkedSpec::Get(\$stmt_spec) };
     ok(ref($stmt_parser) eq 'CODE', 'nested statement assignment spec compiles to a parser')
@@ -47320,7 +47322,7 @@ subtest 'spec_format_terse_11_4_nested_mixed_value_path_assignment' => sub {
         'nested statement assignment mutates existing paths, appends at len, and returns undef for missing/wrong paths');
 
     my $expr_spec = "Top::\n"
-                  . " /x/ -> Done { payload = { \"items\" => [{ \"name\" => \"old\" }] }; return(array((payload[\"items\"][0][\"name\"] = \"new\").count_keys(), payload[\"items\"][1] = \"tail\", payload, payload[\"items\"][3] = \"gap\", payload)) }\n"
+                  . " /x/ -> Done { payload = { \"items\" : [{ \"name\" : \"old\" }] }; return(array((payload[\"items\"][0][\"name\"] = \"new\").count_keys(), payload[\"items\"][1] = \"tail\", payload, payload[\"items\"][3] = \"gap\", payload)) }\n"
                   . "\nDone::\n /[a-z]+/\n";
     my $expr_parser = eval { LinkedSpec::Get(\$expr_spec) };
     ok(ref($expr_parser) eq 'CODE', 'nested assignment expression spec compiles to a parser')
@@ -47394,7 +47396,7 @@ subtest 'spec_format_terse_2_3_5_6_typed_wrapper_quoted_name_boundaries' => sub 
         'multi-argument hash(...) remains a hash constructor');
 
     my $spec = "Top::\n"
-             . " /x/ -> Done { items += \"a\"; items += \"b\"; set_key(meta,\"a\",1); set_key(meta,\"b\",2); return(array(count(array(items)), count(array(\"items\")), count(array('items')), count(array(items)), count(array(\"items\")), count([\"items\"]), count(array(\"literal\", \"value\")), count_keys(hash(meta)), count_keys(hash(\"meta\", 1)), count_keys(hash('meta', 1)), count_keys({ \"meta\" => 1 }), count_keys(hash(meta)), count_keys(hash(\"meta\", 1)))) }\n"
+             . " /x/ -> Done { items += \"a\"; items += \"b\"; set_key(meta,\"a\",1); set_key(meta,\"b\",2); return(array(count(array(items)), count(array(\"items\")), count(array('items')), count(array(items)), count(array(\"items\")), count([\"items\"]), count(array(\"literal\", \"value\")), count_keys(hash(meta)), count_keys(hash(\"meta\", 1)), count_keys(hash('meta', 1)), count_keys({ \"meta\" : 1 }), count_keys(hash(meta)), count_keys(hash(\"meta\", 1)))) }\n"
              . "\nDone::\n /[a-z]+/\n";
     my $parser = eval { LinkedSpec::Get(\$spec) };
     ok(ref($parser) eq 'CODE', 'typed-wrapper quoted-name boundary spec compiles to a parser')
@@ -47456,7 +47458,7 @@ subtest 'spec_format_terse_15_3_bare_identifier_scalar_value_reads' => sub {
         'legacy array(...) constructor lowers scalar-slot members');
     is($L->('return([value, value])'), 'return [$value, $value]',
         'direct array shape lowers scalar-slot members');
-    is($L->('return({ key => value })'), 'return {$key => $value}',
+    is($L->('return({ key : value })'), 'return {$key => $value}',
         'direct hash shape lowers scalar-slot keys and values');
 
     my $spec = "Top::\n"
@@ -47514,7 +47516,7 @@ subtest 'spec_format_terse_11_2_bare_identifier_value_binding_memory' => sub {
     like($L->('items = [value]; return(items)'),
         qr/\$items = \[\$value\].*return \$items/s,
         'array-shaped initialization makes later bare items read the scalar-held array value');
-    like($L->('meta = { key => value }; return(meta)'),
+    like($L->('meta = { key : value }; return(meta)'),
         qr/\$meta = \{\$key => \$value\}.*return \$meta/s,
         'hash-shaped initialization makes later bare meta read the scalar-held hash value');
     is($L->('value = "ok"; return(value)'),
@@ -47522,7 +47524,7 @@ subtest 'spec_format_terse_11_2_bare_identifier_value_binding_memory' => sub {
         'non-shape initialization keeps later bare value reads scalar');
 
     my $spec = "Top::\n"
-             . " /x/ -> Done { value = \"ok\"; key = \"stage\"; items = [value]; meta = { key => value }; return(array(items, array(items), copy(items), items.count(), items.first(), meta, hash(meta), copy(meta), meta.count_keys(), meta.pick_keys(key).sorted_values().first())) }\n"
+             . " /x/ -> Done { value = \"ok\"; key = \"stage\"; items = [value]; meta = { key : value }; return(array(items, array(items), copy(items), items.count(), items.first(), meta, hash(meta), copy(meta), meta.count_keys(), meta.pick_keys(key).sorted_values().first())) }\n"
              . "\nDone::\n /[a-z]+/\n";
     my $parser = eval { LinkedSpec::Get(\$spec) };
     ok(ref($parser) eq 'CODE', 'bare-identifier type-memory spec compiles')
@@ -47589,8 +47591,8 @@ subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {
         'assignment-source block with early return still lowers as a scalar block value');
     is($L->('return({})'), 'return {}',
         'empty braces remain a hash shape literal');
-    is($L->('return({ key => value })'), 'return {$key => $value}',
-        'top-level fat-arrow braces remain hash shape literals');
+    is($L->('return({ key : value })'), 'return {$key => $value}',
+        'top-level hash-pair braces remain hash shape literals');
 
     my $last_expr_spec = "Top::\n"
                        . " /x/ -> Done { return({ set(x,\"a\"); x }) }\n"
@@ -47638,7 +47640,7 @@ subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {
         'assignment-source early return stores the payload and skips later block statements');
 
     my $nested_spec = "Top::\n"
-                    . " /x/ -> Done { return(array({ set(x,\"a\"); x }, { set(key,\"stage\"); set(value,\"ok\"); { key => value } })) }\n"
+                    . " /x/ -> Done { return(array({ set(x,\"a\"); x }, { set(key,\"stage\"); set(value,\"ok\"); { key : value } })) }\n"
                     . "\nDone::\n /[a-z]+/\n";
     my $nested_parser = eval { LinkedSpec::Get(\$nested_spec) };
     ok(ref($nested_parser) eq 'CODE', 'nested block-value spec compiles')
@@ -47647,7 +47649,7 @@ subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {
         'block values compose inside array payloads and can return hash literals');
 
     my $early_nested_spec = "Top::\n"
-                          . " /x/ -> Done { return(array({ return(\"a\"); \"b\" }, { set(x,\"c\"); return({ \"k\" => x }); \"bad\" })) }\n"
+                          . " /x/ -> Done { return(array({ return(\"a\"); \"b\" }, { set(x,\"c\"); return({ \"k\" : x }); \"bad\" })) }\n"
                           . "\nDone::\n /[a-z]+/\n";
     my $early_nested_parser = eval { LinkedSpec::Get(\$early_nested_spec) };
     ok(ref($early_nested_parser) eq 'CODE', 'nested early-return block-value spec compiles')

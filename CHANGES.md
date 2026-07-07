@@ -1,6 +1,32 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — SPEC-FORMAT-TERSE.9.4 — migrate hash literals to colon
+
+**Scope:** Current source, generated oracle inputs, active tests, mdBook examples, root docs, and Knowledge facts
+for the hash-literal `{ key : value }` migration.
+
+**Change:** Current-facing `.spec` examples and oracle inputs now use `:` for direct hash-literal key/value
+association. `specs/user_function_definition.spec`, `specs/tablegrep.spec`, `specs/tkgui.spec`, checked-in
+corpus specs, generated Rust oracle inputs, phase0 strings, Rust integration strings, mdBook DSL/helper/runtime
+chapters, root guide examples, and current Knowledge fact cards were migrated. `tkgui.spec` now returns a
+direct hash accumulator keyed by sub-GUI name, avoiding the old flat-array hash reconstruction.
+
+**Boundary:** Blind-call edge `=>`, VHDL/source-language associations, generated Perl host-output `=>`,
+Perl metadata hashes, historical/changelog examples, and the explicit mixed old/new compatibility parser lock
+remain intentionally classified. Hard retirement of old hash-literal `=>` remains `.9.5`.
+
+**Fix exposed by migration:** A colon hash literal inside an expression-valued block receiver chain exposed a
+Perl `MethodLowering.pm` source fallback that still scanned only for `=>`. The fallback now recognizes top-level
+`:` as a hash-pair separator while skipping `::`, so
+`{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")` lowers/runs as `"a,b"`.
+
+**Validation:** `tools/gen_oracle_corpus.pl` regenerates **93** fixtures. Focused Perl syntax checks, focused
+toolbox probes, `prove -q -Iperl t/actionir_ast_parser.t`, full
+`prove -q -Iperl t/phase0_regression.t` with plan `1..1023`, focused Rust parser/runtime filters, Rust
+`oracle_corpus_matches_perl_reference`, mdBook, Knowledge Map, memory, whitespace, doctrine gates, and
+`bash tools/run_ci_local.sh` pass. Frontier becomes `.9.5` for hard retirement of old hash-literal `=>`.
+
 ## 2026-07-07 — SPEC-FORMAT-TERSE.9.3 — add Rust colon hash literals
 
 **Scope:** Rust parser/runtime parity for the hash-literal `{ key : value }` migration window.

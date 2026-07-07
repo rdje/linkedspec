@@ -838,7 +838,7 @@ lowering evidence for the retired declaration family.
 Typical patterns:
 - `set(array(items), [])`
 - `count = 0`
-- `set(hash(by_name), { "kind" => kind })`
+- `set(hash(by_name), { "kind" : kind })`
 
 ### I need value constructors, nested return payloads, or `call(...)` as a value source
 Start with [`USER_GUIDE_ActionIR_MethodLowering.md`](USER_GUIDE_ActionIR_MethodLowering.md).
@@ -921,7 +921,7 @@ Typical patterns:
 - `name = capture_slice()`
 - `retv = call(Leaf)`
 - `set(array(items), [retv])`
-- `set(hash(by_name), { "k" => v })`
+- `set(hash(by_name), { "k" : v })`
 
 ### I need boolean/comparison expressions
 Start with [`USER_GUIDE_ActionIR_FlowExpr.md`](USER_GUIDE_ActionIR_FlowExpr.md).

@@ -337,7 +337,7 @@ In value positions, a non-empty `{ ... }` payload without a top-level hash pair 
 expression-valued block on the Perl reference and Rust backend. It returns the final
 expression unless a `return(expr)` statement is reached earlier; that `return(expr)`
 exits only the expression-valued block, skips later statements in that block, and
-yields `expr` as the block value. Empty `{}` and top-level hash-pair forms such as `{ key => value }`
+yields `expr` as the block value. Empty `{}` and top-level hash-pair forms such as `{ key : value }`
 remain hash literals; during the `SPEC-FORMAT-TERSE.9` migration, Perl and Rust also treat
 top-level-colon `{ key : value }` as a hash literal. Because the block is a value expression, it may also be the
 receiver of a compatible receiver-dot chain, such as `{ [3, 1, 2] }.sorted().join_values(",")`

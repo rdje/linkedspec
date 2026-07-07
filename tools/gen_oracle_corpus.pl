@@ -310,7 +310,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array([value, cat("a", "b"), true, []], { key => value, "fixed" => [value] })) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array([value, cat("a", "b"), true, []], { key : value, "fixed" : [value] })) }
 
 Done::
  /[a-z]+/
@@ -320,7 +320,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "payload"); set(key, "stage"); items += [value]; meta[key] = { key => value }; return(array(copy(array(items)), copy(hash(meta)))) }
+ /x/ -> Done { set(value, "payload"); set(key, "stage"); items += [value]; meta[key] = { key : value }; return(array(copy(array(items)), copy(hash(meta)))) }
 
 Done::
  /[a-z]+/
@@ -337,7 +337,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); items = [value]; meta = { key => value }; return(array(items, array(items), copy(items), items.count(), items.first(), meta, hash(meta), copy(meta), meta.count_keys(), meta.pick_keys(key).sorted_values().first())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); items = [value]; meta = { key : value }; return(array(items, array(items), copy(items), items.count(), items.first(), meta, hash(meta), copy(meta), meta.count_keys(), meta.pick_keys(key).sorted_values().first())) }
 
 Done::
  /[a-z]+/
@@ -347,7 +347,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); thing = "text"; first = thing; thing = [value]; second = array(thing); thing = { key => value }; third = hash(thing); thing = "done"; set(array(items_mut), [value]); items_mut += "tail"; set(hash(meta_mut), { key => value }); meta_mut["extra"] = "yes"; return(array(first, second, third, thing, array(items_mut), hash(meta_mut))) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); thing = "text"; first = thing; thing = [value]; second = array(thing); thing = { key : value }; third = hash(thing); thing = "done"; set(array(items_mut), [value]); items_mut += "tail"; set(hash(meta_mut), { key : value }); meta_mut["extra"] = "yes"; return(array(first, second, third, thing, array(items_mut), hash(meta_mut))) }
 
 Done::
  /[a-z]+/
@@ -365,7 +365,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "new"); payload = { "items" => [{ "name" => "old" }] }; payload["items"][0]["name"] = value; payload["items"][1] = { "name" => "tail" }; missing_result = payload["missing"][0] = "bad"; wrong_result = payload["items"][0][0] = "bad"; root_array = [{ "name" => "old" }]; root_array[0]["name"] = value; root_array[1] = { "name" => "tail" }; return(array(payload, missing_result, wrong_result, root_array, (payload["items"][3] = "gap"))) }
+ /x/ -> Done { set(value, "new"); payload = { "items" : [{ "name" : "old" }] }; payload["items"][0]["name"] = value; payload["items"][1] = { "name" : "tail" }; missing_result = payload["missing"][0] = "bad"; wrong_result = payload["items"][0][0] = "bad"; root_array = [{ "name" : "old" }]; root_array[0]["name"] = value; root_array[1] = { "name" : "tail" }; return(array(payload, missing_result, wrong_result, root_array, (payload["items"][3] = "gap"))) }
 
 Done::
  /[a-z]+/
@@ -588,7 +588,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { return(array({ set(x, "a"); x }, { set(y, "b"); return(y) }, { set(key, "stage"); set(value, "ok"); { key => value } })) }
+ /x/ -> Done { return(array({ set(x, "a"); x }, { set(y, "b"); return(y) }, { set(key, "stage"); set(value, "ok"); { key : value } })) }
 
 Done::
  /[a-z]+/
@@ -603,7 +603,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { return(array({ return("a"); "b" }, { set(x, "c"); return({ "k" => x }); "bad" })) }
+ /x/ -> Done { return(array({ return("a"); "b" }, { set(x, "c"); return({ "k" : x }); "bad" })) }
 
 Done::
  /[a-z]+/
@@ -947,7 +947,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], copy(array(items)), set(meta, { key => value }), copy(hash(meta)), set(payload, [value]), payload, =(more, [value, "x"]).count())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items = [value], copy(array(items)), set(meta, { key : value }), copy(hash(meta)), set(payload, [value]), payload, =(more, [value, "x"]).count())) }
 
 Done::
  /[a-z]+/
@@ -979,7 +979,7 @@ SPEC
         source => <<'SPEC',
 fn keep(value) { return(fn_out = value) }
 Top::
- /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(name, "!")), other, set(third, keep("fn")), third, set(current, "surface"), current, items = [value], array(items), set(meta, { key => value }), hash(meta), set(array(items_mut), [value]), items_mut += "tail", copy(array(items_mut)), set(hash(meta_mut), { key => value }), meta_mut["extra"] = other, copy(hash(meta_mut)), (items_mut += "last").count(), (meta_mut["last"] = value).count_keys())) }
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(name = value, name, =(other, cat(name, "!")), other, set(third, keep("fn")), third, set(current, "surface"), current, items = [value], array(items), set(meta, { key : value }), hash(meta), set(array(items_mut), [value]), items_mut += "tail", copy(array(items_mut)), set(hash(meta_mut), { key : value }), meta_mut["extra"] = other, copy(hash(meta_mut)), (items_mut += "last").count(), (meta_mut["last"] = value).count_keys())) }
 
 Done::
  /[a-z]+/
@@ -1012,7 +1012,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { return(array({ [3, 1, 2] }.sorted().join_values(","), { return(["x", "y"]); ["bad"] }.join_values("|"), { set(raw, " a-b "); raw }.trim().split("-").count(), { { "b" => 2, "a" => 1 } }.sorted_keys().join_values(","), { 3.5 }.floor().add(2))) }
+ /x/ -> Done { return(array({ [3, 1, 2] }.sorted().join_values(","), { return(["x", "y"]); ["bad"] }.join_values("|"), { set(raw, " a-b "); raw }.trim().split("-").count(), { { "b" : 2, "a" : 1 } }.sorted_keys().join_values(","), { 3.5 }.floor().add(2))) }
 
 Done::
  /[a-z]+/
@@ -1027,7 +1027,7 @@ SPEC
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { items += "a"; items += "b"; set_key(meta, "a", 1); set_key(meta, "b", 2); return(array(count(array(items)), count(array("items")), count(array('items')), count(array(items)), count(array("items")), count(["items"]), count(array("literal", "value")), count_keys(hash(meta)), count_keys(hash("meta", 1)), count_keys(hash('meta', 1)), count_keys({ "meta" => 1 }), count_keys(hash(meta)), count_keys(hash("meta", 1)))) }
+ /x/ -> Done { items += "a"; items += "b"; set_key(meta, "a", 1); set_key(meta, "b", 2); return(array(count(array(items)), count(array("items")), count(array('items')), count(array(items)), count(array("items")), count(["items"]), count(array("literal", "value")), count_keys(hash(meta)), count_keys(hash("meta", 1)), count_keys(hash('meta', 1)), count_keys({ "meta" : 1 }), count_keys(hash(meta)), count_keys(hash("meta", 1)))) }
 
 Done::
  /[a-z]+/

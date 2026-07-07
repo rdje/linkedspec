@@ -40,7 +40,7 @@ The Perl reference and Rust backend accept direct array and hash shape literals 
 ```text
 []
 [value, cat("a", "b"), true, []]
-{ key => value, "fixed" => [value] }
+{ key : value, "fixed" : [value] }
 { key : value, "fixed" : [value] }   # migration-window spelling on Perl and Rust
 ```
 
@@ -58,17 +58,15 @@ A bare hash-literal key is a dynamic scalar key, not a fixed string field name:
 ```text
 set(key, "kind");
 set(value, "token");
-return({ key => value });       # {"kind": "token"}
-return({ key : value });        # same on Perl and Rust during migration
-return({ "kind" => value });    # fixed "kind" field
+return({ key : value });       # {"kind": "token"}
+return({ "kind" : value });    # fixed "kind" field
 ```
 
 Direct shape literals are typed RHS values for bare assignment targets on the Perl reference and Rust backend:
 
 ```text
 items = [value, cat("a", "b")];      # items holds an array value
-meta = { key => value };             # meta holds a hash value
-meta = { key : value };              # migration-window spelling on Perl and Rust
+meta = { key : value };             # meta holds a hash value
 set(items, []);                      # items holds an empty array value
 set(meta, {});                       # meta holds an empty hash value
 set(array(items), []);               # explicit aggregate array reset
@@ -82,18 +80,17 @@ Direct-access brackets (`payload["items"][i]`), hash-index assignment brackets (
 control-flow/block braces, and all-bare child-call routing remain separate surfaces.
 
 The Perl reference and Rust backend accept expression-valued blocks in value-consuming sites. A non-empty
-brace payload with no top-level hash pair separator (`=>`, and `:` during the migration)
-evaluates its statements and yields the final expression. A
+brace payload with no top-level hash-pair delimiter evaluates its statements and yields the final expression. A
 `return(expr)` anywhere in the block exits only that expression-valued block, skips later block statements,
-and yields `expr` as the block value. Hash literals keep precedence: `{}`, `{ key => value }`, and the
-migration spelling `{ key : value }` remain hash shapes.
+and yields `expr` as the block value. Hash literals keep precedence: `{}` and `{ key : value }`
+remain hash shapes; old `{ key => value }` remains a migration-window compatibility spelling until `.9.5`.
 
 ```text
 return({ set(x, "a"); x });                    # "a"
 set(out, { set(x, "a"); return(x) });          # $out = "a"
 return({ return("a"); "b" });                  # "a"
 set(out, { set(x, "a"); return(x); set(x, "b"); x });  # $out = "a"
-return(array({ set(x, "a"); x }, { "k" => x }));
+return(array({ set(x, "a"); x }, { "k" : x }));
 return({ [3, 1, 2] }.sorted().join_values(","));        # "1,2,3"
 return({ " a-b " }.trim().split("-").count());          # 2
 ```
@@ -162,7 +159,7 @@ dispatch rule.
 - **Signature**: `name = value`
 - **Returns**: In statement position, the stored value is ignored. In value position, it yields the typed value stored in the target.
 - **Behavior**: Sets the working variable `name` to the evaluated RHS value. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable. Later assignments may replace a scalar with an array/hash value, or replace an array/hash value with a scalar.
-- **Edge cases**: `name = [value]`, `set(name, [value])`, and `=(name, [value])` bind an array value to `name`; `name = { key => value }` binds a hash value. Use `set(array(name), [value])` or `set(hash(name), { key => value })` for aggregate working storage. In scalar assignment source slots, a bare source name reads the working scalar: `out = value`.
+- **Edge cases**: `name = [value]`, `set(name, [value])`, and `=(name, [value])` bind an array value to `name`; `name = { key : value }` binds a hash value. Use `set(array(name), [value])` or `set(hash(name), { key : value })` for aggregate working storage. In scalar assignment source slots, a bare source name reads the working scalar: `out = value`.
 - **Terse spelling**: `name = value` is the preferred operator spelling, and `set(name, value)` remains the helper spelling. In value positions, assignments store and yield the stored typed value. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ## 2. Scalar Helpers
@@ -615,7 +612,7 @@ dispatch rule.
   assignment also yields the updated hash snapshot in value positions. Receiver-dot `meta.set_key(key, value)` is
   pure value composition; it mutates nothing unless its result is explicitly assigned back.
 - **Block receivers**: An expression-valued block whose value is a hash can be the receiver, for example
-  `{ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(",")`.
+  `{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")`.
 
 ### `contains(arr, needle)`
 - **Signature**: `contains(arr: array, needle: scalar)`
@@ -711,7 +708,7 @@ dispatch rule.
 - **Retired short alias**: `h(...)`; use `hash(...)`.
 - **Boundary**: The bare one-argument name form is a direct working-variable name, not an indirect scalar
   lookup. `hash(alias)` reads the working hash named `alias`; it does not read scalar `alias` and then use
-  that scalar as another variable name. Prefer direct shape literals such as `{ "alias" => value }` as the
+  that scalar as another variable name. Prefer direct shape literals such as `{ "alias" : value }` as the
   terse constructor spelling in new examples.
 - **Edge cases**: Duplicate keys: last value wins. In multi-argument constructor use, an odd final key gets
   `undef` value.

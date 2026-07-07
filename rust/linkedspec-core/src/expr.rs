@@ -2107,7 +2107,7 @@ mod tests {
 
     #[test]
     fn parse_hash_shape_literal_value_expr() {
-        let code = r#"return({ key => value, "fixed" => [value] })"#;
+        let code = r#"return({ key : value, "fixed" : [value] })"#;
         let block = CodeBlock::parse(code).unwrap();
         match &block.statements[0].expr {
             Expr::Call { name, args } => {
@@ -2201,7 +2201,7 @@ mod tests {
 
     #[test]
     fn parse_shape_literals_in_mutation_slots() {
-        let code = r#"items += [value]; meta[key] = { key => value }"#;
+        let code = r#"items += [value]; meta[key] = { key : value }"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 2);
         match &block.statements[0].expr {
@@ -2269,7 +2269,7 @@ mod tests {
 
     #[test]
     fn parse_shape_literal_rhs_keeps_scalar_assignment_ast_until_target_inference_leaf() {
-        let code = r#"name = [value]; set(out, { key => value })"#;
+        let code = r#"name = [value]; set(out, { key : value })"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 2);
         match &block.statements[0].expr {
@@ -2334,7 +2334,7 @@ mod tests {
 
     #[test]
     fn parse_expression_valued_block_preserves_nested_final_hash_literal() {
-        let code = r#"return(array({ set(key, "stage"); set(value, "ok"); { key => value } }))"#;
+        let code = r#"return(array({ set(key, "stage"); set(value, "ok"); { key : value } }))"#;
         let block = CodeBlock::parse(code).unwrap();
         match &block.statements[0].expr {
             Expr::Call { name, args } => {
@@ -3035,13 +3035,13 @@ mod tests {
     #[test]
     fn roundtrip_shape_literals() {
         assert_roundtrip(r#"return([value, cat("a", "b"), true, []])"#);
-        assert_roundtrip(r#"return({ key => value, "fixed" => [value] })"#);
+        assert_roundtrip(r#"return({ key : value, "fixed" : [value] })"#);
     }
 
     #[test]
     fn roundtrip_expression_valued_block() {
         assert_roundtrip(r#"return({set(x, "a"); x})"#);
-        assert_roundtrip(r#"return(array({set(key, "stage"); set(value, "ok"); {key => value}}))"#);
+        assert_roundtrip(r#"return(array({set(key, "stage"); set(value, "ok"); {key : value}}))"#);
     }
 
     #[test]

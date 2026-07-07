@@ -1,8 +1,9 @@
-sub_gui_list:: 
- -> sub_gui	{push(sub_gui)}
+sub_gui_list::
+ -> sub_gui	{set(hash(sub_gui_list), merge_hash(hash(sub_gui_list), call(sub_gui)))}
  -> comment	{next()}
 
- LX {return(hash(flat_array(array(sub_gui_list))))}
+ I {set(hash(sub_gui_list), {})}
+ LX {return(copy(hash(sub_gui_list)))}
 
 sub_gui: /(\S+)\s+\{/   /\}/ 	
 I {
@@ -11,7 +12,7 @@ I {
 }
 
  -> curlyb
- -> sub_gui[1]	  {return ($subgui_name => '('.capture_slice().')')}
+ -> sub_gui[1]	  {return({ subgui_name : cat("(", capture_slice(), ")") })}
 
 curlyb: /\{/ /\}/
  -> curlyb

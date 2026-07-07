@@ -177,22 +177,22 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 ```
 
 > **Shape literals are value expressions on the Perl reference and Rust backend.** Direct array and hash literals are
-> accepted in value positions: `[]`, `[value, cat("a", "b")]`, `{ key => value }`, and nested combinations.
+> accepted in value positions: `[]`, `[value, cat("a", "b")]`, `{ key : value }`, and nested combinations.
 > Shape members lower through the same scoped DSL value-expression rules as the surrounding site: primitive
 > literals stay typed, recognized helpers compose, direct access keeps its own bracket rules, and non-reserved
-> bare names read scalar working variables. A bare hash key is therefore dynamic (`{ key => value }` reads
-> `$key`), not a string literal; quote fixed field names (`{ "kind" => value }`). When a direct shape literal
+> bare names read scalar working variables. A bare hash key is therefore dynamic (`{ key : value }` reads
+> `$key`), not a string literal; quote fixed field names (`{ "kind" : value }`). When a direct shape literal
 > is the RHS of a bare assignment target, the array or hash is stored as the variable's typed value on both
 > variants: `items = [value]` / `set(items, [])` bind array values, and
-> `meta = { key => value }` / `set(meta, {})` bind hash values. Explicit `array(...)` and `hash(...)` targets
+> `meta = { key : value }` / `set(meta, {})` bind hash values. Explicit `array(...)` and `hash(...)` targets
 > remain aggregate-storage mutation forms. In value positions, direct-shape assignments yield the stored typed
 > value.
 
 > **Expression-valued blocks are receiver-capable value expressions.** A non-empty block without a top-level
-> `=>` can feed a compatible receiver-dot helper chain. The yielded value enters the normal helper family
+> hash-pair delimiter can feed a compatible receiver-dot helper chain. The yielded value enters the normal helper family
 > selected by the method being called: `{ [3, 1, 2] }.sorted().join_values(",")` uses the array family,
 > `{ " a-b " }.trim().split("-").count()` uses string helpers and the explicit `split` array bridge,
-> `{ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(",")` uses hash then array helpers, and
+> `{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")` uses hash then array helpers, and
 > `{ 3.5 }.floor().add(2)` uses the number family. `return(expr)` inside the block is still block-local.
 
 | Helper | Result | Use it when |
@@ -204,9 +204,9 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 | `array(name)` | array value | read the working array `name`; the name token is bare. |
 | `hash(name)` | hash value | read the working hash `name`; the name token is bare. |
 | `array(...)` | array value | construct an empty or argument-list array payload; prefer `[...]` as the terse constructor spelling in new examples. |
-| `hash(...)` | hash value | construct an empty or multi-argument hash/object payload from key/value pairs or flattened hashes; use `{ "key" => undef }` for a one-field literal hash with no value. |
+| `hash(...)` | hash value | construct an empty or multi-argument hash/object payload from key/value pairs or flattened hashes; use `{ "key" : undef }` for a one-field literal hash with no value. |
 | `[]` / `[expr, ...]` | array value | construct one new array payload with direct literal syntax. |
-| `{ key_expr => value_expr, ... }` | hash value | construct one new hash/object payload with direct literal syntax; bare keys are scalar reads, so quote fixed field names. |
+| `{ key_expr : value_expr, ... }` | hash value | construct one new hash/object payload with direct literal syntax; bare keys are scalar reads, so quote fixed field names. |
 | `copy(array_expr)` / `copy(name)` | array value | snapshot an array value as one nested payload. A bare name reads the working array of that name. |
 | `copy(hash_expr)` / `copy(name)` | hash value | snapshot a hash value as one nested payload. A bare name reads the working hash of that name. |
 
@@ -242,11 +242,11 @@ labels and a value expression such as `case(cat(foo, ""), body)` when the case v
 > scalar-held array/hash value. Intermediate containers must already exist with the required shape; final hash
 > keys may be created; final array indexes may replace an element or append exactly at the current length.
 > Missing paths, wrong intermediate shapes, and array gaps yield `undef` and do not mutate the root.
-> Direct shape literals `[]` and `{ key => value }` are accepted as value expressions on the Perl reference and
+> Direct shape literals `[]` and `{ key : value }` are accepted as value expressions on the Perl reference and
 > Rust backend. Bare elements/keys/values inside the shape read scalar working variables, and fixed hash field
 > names should be quoted. Direct shape literals bind as typed values for bare assignment targets on both variants:
-> `items = [value]` stores an array value, and `meta = { key => value }` stores a hash value. Use
-> `set(array(items), [value])` or `set(hash(meta), { key => value })` when the target must be aggregate working
+> `items = [value]` stores an array value, and `meta = { key : value }` stores a hash value. Use
+> `set(array(items), [value])` or `set(hash(meta), { key : value })` when the target must be aggregate working
 > storage. In value positions, the direct-shape assignment yields the stored array/hash value.
 > Current examples use only the terse spellings.
 > See the
@@ -264,7 +264,7 @@ set(array(snapshot), copy(array(items)));
 set(hash(meta_snapshot), copy(hash(meta)));
 set(field, "kind");
 set(value, "token");
-return({ field => value, "seen" => true, "parts" => [value, entry_text()] });
+return({ field : value, "seen" : true, "parts" : [value, entry_text()] });
 ```
 
 Use `array_expr[index]` when the container is already known and the access path is one level deep.
@@ -284,9 +284,9 @@ dynamic_child_name = retv["children"][child_index]["name"];
 Example write:
 
 ```text
-payload = { "children" => [{ "name" => "old" }] };
+payload = { "children" : [{ "name" : "old" }] };
 payload["children"][0]["name"] = "new";
-payload["children"][1] = { "name" => "second" };
+payload["children"][1] = { "name" : "second" };
 return(payload);
 ```
 
@@ -881,7 +881,7 @@ are for scalar hashref payloads, not named working-hash value reads. Named mutat
 `set_key(meta, key, value)` and `meta[key] = value` mutate the named working hash, and the hash-index assignment
 form yields the updated hash snapshot in value positions. Receiver-dot `meta.set_key(key, value)` is a pure
 derived value unless assigned back. A hash-yielding expression-valued block can enter the same family, for example
-`{ { "b" => 2, "a" => 1 } }.sorted_keys().join_values(",")`.
+`{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")`.
 
 The terse hash-index operator is the statement form written with the key next to the target:
 

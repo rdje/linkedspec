@@ -6,9 +6,10 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-07` (**`.9.3` DONE; `.9.4` is active for current-source colon hash-literal migration).
-  Perl and Rust now accept `{ key : value }` hash-literal association during the migration window while preserving
-  old `{ key => value }` until hard retirement and leaving blind-call edge `=>` syntax intact. Prior `.9.1` split
+- Last updated: `2026-07-07` (**`.9.4` DONE; `.9.5` is active for old hash-literal `=>` hard retirement).
+  Current specs, generated oracle inputs, active tests, mdBook examples, root docs, and current Knowledge facts now
+  use `{ key : value }` for direct hash-literal association. Perl and Rust still accept old `{ key => value }`
+  only for the migration window until `.9.5`; blind-call edge `=>` syntax remains separate. Prior `.9.1` split
   the hash-literal `=>` migration surface before implementation: direct
   hash-literal associations are separate from blind-call edge `=>`, VHDL/source-language association syntax,
   historical docs/KM material, active tests/oracle fixtures, and parser/runtime support sites. Prior **`.8.6`
@@ -3564,17 +3565,29 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.9.3 - add Rust colon hash literals`
 
 - ID: `SPEC-FORMAT-TERSE.9.4`
-  Status: `active`
+  Status: `done` (2026-07-07)
   Goal: Migrate current specs, generated oracle fixtures, active tests, mdBook examples, root docs, and current
     Knowledge facts from hash-literal `=>` to `:`.
   Acceptance: Current-facing `.spec` authoring examples and generated oracle inputs use `{ key : value }` where
     they mean direct hash-literal association. Remaining `=>` occurrences are blind-call edge syntax, non-ActionIR
     grammar payloads, or explicitly historical/retirement material.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-07.** Current source/docs/corpus/KM examples now prefer colon hash-literal
+    association: `specs/user_function_definition.spec`, `specs/tablegrep.spec`, `specs/tkgui.spec`, root corpus
+    copies, generated Rust oracle inputs, Rust integration tests, Perl phase0 strings, mdBook helper/runtime/formal
+    grammar pages, root `USER_GUIDE.md`, and current Knowledge facts were migrated. Remaining `=>` occurrences are
+    classified as blind-call edge syntax, VHDL/source-language associations, generated Perl host-output hashrefs,
+    Perl metadata hashes, historical/changelog material, or the explicit mixed old/new migration-window parser lock.
+    Migration exposed and fixed a Perl `MethodLowering.pm` source fallback that still detected only `=>` in
+    expression-valued block receiver chains; it now recognizes top-level `:` while skipping `::`.
+    `tools/gen_oracle_corpus.pl` regenerates **93** fixtures. `perl -Iperl -c tools/gen_oracle_corpus.pl`,
+    `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`, `prove -q -Iperl t/actionir_ast_parser.t`, full
+    `prove -q -Iperl t/phase0_regression.t` (`1..1023`), focused Rust parser/runtime filters, Rust corpus oracle,
+    mdBook, Knowledge Map, memory, whitespace, doctrine gates, and `bash tools/run_ci_local.sh` pass. Frontier
+    advances to `.9.5`.
+  Commit: `SPEC-FORMAT-TERSE.9.4 - migrate hash literals to colon`
 
 - ID: `SPEC-FORMAT-TERSE.9.5`
-  Status: `pending`
+  Status: `active`
   Goal: Hard-retire old hash-literal `=>` association from current Perl/Rust ActionIR value syntax.
   Acceptance: `{ key => value }` no longer parses/evaluates as a current hash-literal association in Perl or Rust
     ActionIR value positions; diagnostics point to `{ key : value }`. Blind-call `=> Rule` edge syntax and
@@ -4134,8 +4147,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | 26 | `SPEC-FORMAT-TERSE.9.1` | `done` | audit/split hash-literal colon association surface before implementation |
 | 27 | `SPEC-FORMAT-TERSE.9.2` | `done` | Perl reference colon hash-literal support during migration window |
 | 28 | `SPEC-FORMAT-TERSE.9.3` | `done` | Rust parser/runtime colon hash-literal parity |
-| 29 | `SPEC-FORMAT-TERSE.9.4` | `active` | migrate current specs/corpus/docs/KM/tests to colon hash-literal syntax |
-| 30 | `SPEC-FORMAT-TERSE.9.5` | `pending` | hard-retire old hash-literal `=>` association while preserving blind-call edge `=>` |
+| 29 | `SPEC-FORMAT-TERSE.9.4` | `done` | migrated current specs/corpus/docs/KM/tests to colon hash-literal syntax |
+| 30 | `SPEC-FORMAT-TERSE.9.5` | `active` | hard-retire old hash-literal `=>` association while preserving blind-call edge `=>` |
 | 31 | `SPEC-FORMAT-TERSE.9.6` | `pending` | final hash-literal colon no-drift closeout |
 | — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.12` | `deferred` / `spec backlog` | track future hash-tree attached-block traversal; not PNT-eligible until explicitly activated |
@@ -5100,6 +5113,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-07` | `SPEC-FORMAT-TERSE.9.4` | Current-source/docs/corpus/KM migration scans; `tools/gen_oracle_corpus.pl` regeneration over **93** fixtures; Perl syntax checks for `tools/gen_oracle_corpus.pl` and `MethodLowering.pm`; focused tkgui descriptor/runtime probes; `prove -q -Iperl t/actionir_ast_parser.t`; full `prove -q -Iperl t/phase0_regression.t`; focused Rust parser/runtime filters for hash literals, `.9.3`, and block-valued receiver chains; Rust corpus oracle; mdBook/KM/live-doc updates; memory/doctrine/diff checks; full local CI | Current-facing direct hash-literal examples now use `{ key : value }`; remaining `=>` is classified as blind-call edge syntax, source-language association, generated Perl host output, Perl metadata, historical material, or explicit migration-window compatibility. The migration exposed and fixed a Perl `MethodLowering.pm` source fallback for colon hash literals inside expression-valued block receiver chains. Phase0 PASS: `1..1023`; `tools/run_ci_local.sh` PASS. Frontier becomes `.9.5` for old hash-literal `=>` hard retirement. |
 | `2026-07-07` | `SPEC-FORMAT-TERSE.9.3` | Rust `expr.rs` hash-pair parser/scanner implementation; focused parser unit tests for colon/mixed hash literals, assignment/mutation/expression-valued slots, and `::`/nested separator exclusion; runtime integration test `terse_9_3_colon_hash_literals_parse_and_run`; mdBook/KM/live-doc updates; memory/doctrine/diff checks | Rust now accepts `{ key : value }` hash literals during the migration window while still accepting old `{ key => value }` until hard retirement. Colon hash literals compose in return, direct assignment, mutation RHS, expression-valued assignment, array, receiver-chain, and nested shape contexts; non-pair braces remain expression-valued blocks. Frontier becomes `.9.4` for current-source/docs/corpus migration. |
 | `2026-07-07` | `SPEC-FORMAT-TERSE.9.2` | Perl ActionIR AST parser colon-pair implementation; focused parser tests for colon/mixed hash literals and `::` block preservation; phase0 subtest `spec_format_terse_9_2_perl_colon_hash_literal_support`; direct lowering/runtime/generated-source probes; full phase0 with `PERL5LIB=` cleared; mdBook/KM/live-doc updates; memory/doctrine/diff checks | Perl reference now accepts `{ key : value }` hash literals during the migration window while still accepting old `{ key => value }` until hard retirement. Colon hash literals compose in return, assignment, mutation RHS, expression-valued assignment, array, and nested shape contexts; generated Perl host source still emits Perl `=>`; non-pair braces remain block values. Full phase0 PASS: `1..1023`. Frontier becomes `.9.3` for Rust parser/runtime parity. |
 | `2026-07-07` | `SPEC-FORMAT-TERSE.9.1` | Hash-literal `=>` classification scans across specs, root corpus, generated Rust oracle corpus, docs/mdBook, tests, Knowledge facts, and parser/runtime support sites; task-tree split; Knowledge fact creation; Knowledge Map regeneration/check; mdBook build; memory/doctrine/diff checks | `.9` is split before implementation. Direct hash-literal `=>` migration candidates are separated from blind-call edge syntax, VHDL/source-language associations, historical material, active fixture strings, and parser/runtime implementation seams. The next active frontier is `.9.2` for Perl reference `{ key : value }` support during the migration window. No parser/runtime behavior changed. |
@@ -5255,6 +5269,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.8.2.1` | `SPEC-FORMAT-TERSE.8.2.1 - migrate EBNF nonempty append flow` | Live EBNF `push_nonempty(...)` use migrated to explicit assignment + `is_nonempty(...)` + `push(...)`; generated EBNF oracle inputs and mdBook walkthrough now match the shipped spec, with oracle expected output unchanged. |
 | `SPEC-FORMAT-TERSE.9.2` | `SPEC-FORMAT-TERSE.9.2 - add Perl colon hash literals` | Perl reference accepts `{ key : value }` hash-literal association during the migration window, preserves old `=>` until hard retirement, keeps generated Perl host fat arrows internal, and advances the frontier to `.9.3` Rust parity. |
 | `SPEC-FORMAT-TERSE.9.3` | `SPEC-FORMAT-TERSE.9.3 - add Rust colon hash literals` | Rust parser/runtime accepts `{ key : value }` hash-literal association during the migration window, preserves old `=>` until hard retirement, keeps blind-call edge `=>` separate, and advances the frontier to `.9.4` current-source/docs/corpus migration. |
+| `SPEC-FORMAT-TERSE.9.4` | `SPEC-FORMAT-TERSE.9.4 - migrate hash literals to colon` | Current specs/corpus/docs/KM/tests now prefer `{ key : value }`; classified `=>` owners remain for blind-call edges, source-language associations, generated Perl host output, metadata, history, and explicit compatibility locks; frontier advances to `.9.5` hard retirement. |
 | `SPEC-FORMAT-TERSE.8.2.2.1` | `SPEC-FORMAT-TERSE.8.2.2.1 - migrate source-emitter helper fixtures` | Rust source-emitter smoke specs use current helper spellings and explicit aggregate resets; focused residue scan is clean and generated-source compile/run tests pass. |
 | `SPEC-FORMAT-TERSE.8.2.2.2.1` | `SPEC-FORMAT-TERSE.8.2.2.2.1 - migrate integration smoke helper fixtures` | Rust integration smoke fixtures before the recursive/compatibility blocks use current helper spellings; full integration test passes **172** tests. |
 | `SPEC-FORMAT-TERSE.15.5` | `SPEC-FORMAT-TERSE.15.5 - close colon scalar-slot drift` | Final no-drift closeout: stale current-surface scans pass; two stale Knowledge fact-card colon examples corrected; oracle corpus, mdBook, Knowledge Map, memory/doctrine checks, and phase0 pass; `.15` closes and frontier becomes `.8`. |
@@ -5476,6 +5491,14 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   `{ key => value }` remains available only during the migration window. Nested shapes, direct assignment RHS,
   hash-index mutation RHS, expression-valued assignment forms, direct hash receiver chains, mixed old/new
   separators, and block-vs-hash precedence are locked by focused parser/runtime tests. Frontier moves to `.9.4`.
+
+- `2026-07-07`: **`.9.4` DONE — current source/docs/corpus/KM migrated to colon hash-literal syntax.**
+  Current-facing `.spec` sources, generated oracle inputs, active tests, mdBook examples, root docs, and current
+  Knowledge facts now use `{ key : value }` for direct hash-literal association. Remaining `=>` occurrences are
+  classified as blind-call edge syntax, VHDL/source-language associations, generated Perl host-output hashrefs,
+  Perl metadata hashes, historical/changelog material, or explicit mixed old/new compatibility coverage. The
+  migration exposed and fixed a Perl `MethodLowering.pm` source fallback for colon hash literals inside
+  expression-valued block receiver chains. Frontier moves to `.9.5`.
 
 - `2026-07-04`: **`.10` DEFERRED/POTENTIAL — dynamic/computed hash-literal keys.**
   User directive tracked a possible future implementation for dynamic/computed hash-literal keys, but only if the

@@ -10,7 +10,7 @@ answers:
 date: 2026-07-01
 status: current
 tags: [actionir, ast, perl-reference, method-lowering, statements]
-evidence: "PERL-ACTIONIR-AST-MIGRATION.4.1 changed MethodLowering so assign_scalar, assign_array_append, and assign_hash_index AST nodes lower from typed target/key/value fields before the legacy statement-regex paths. Focused t/actionir_ast_parser.t coverage poisons original statement identifiers and AST source fields and proves name = [poison], items += poison, and meta[poison_key] = { poison_key => poison_value } lower from AST fields while preserving existing assignment/mutation semantics."
+evidence: "PERL-ACTIONIR-AST-MIGRATION.4.1 changed MethodLowering so assign_scalar, assign_array_append, and assign_hash_index AST nodes lower from typed target/key/value fields before the legacy statement-regex paths. Focused t/actionir_ast_parser.t coverage poisons original statement identifiers and AST source fields and proves name = [poison], items += poison, and meta[poison_key] = { poison_key : poison_value } lower from AST fields while preserving existing assignment/mutation semantics."
 reverify: "prove -Iperl t/actionir_ast_parser.t && prove -q -Iperl t/phase0_regression.t"
 ---
 

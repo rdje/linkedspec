@@ -72,7 +72,7 @@ Working variables auto-exist when they are first used through a typed position:
 
 - `name = value` — bind the typed RHS value to `name`
 - `items = []` — bind an array value to `items`
-- `meta = { "kind" => value }` — bind a hash value to `meta`
+- `meta = { "kind" : value }` — bind a hash value to `meta`
 - `items += value` or `push(array(items), value)` — append to an array
 - `meta[key] = value` — mutate a hash
 

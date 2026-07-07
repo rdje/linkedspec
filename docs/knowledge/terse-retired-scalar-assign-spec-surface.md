@@ -9,7 +9,7 @@ answers:
   - "why can generated Perl still contain scalar(@...) after scalar(...) retirement"
   - "how does LinkedSpec remember whether a bare identifier is scalar array or hash"
   - "after items = [value] what does return(items) read"
-  - "after meta = { key => value } what does copy(meta) read"
+  - "after meta = { key : value } what does copy(meta) read"
   - "what is the current spec-file scalar read spelling"
 date: 2026-07-06
 status: confirmed
@@ -25,11 +25,11 @@ The current authored `.spec` surface no longer treats `scalar(...)` as the scala
 
 - scalar read in value positions: `name`
 - assignment statement/expression: `name = value` or `set(name, value)`
-- aggregate initialization: `items = [value]`, `meta = { key => value }`
+- aggregate initialization: `items = [value]`, `meta = { key : value }`
 - explicit aggregate-storage mutation boundary: `array(items)` / `hash(meta)`
 
 After initialization, a bare identifier carries its known kind. `items = [value]` makes later `items` and
-`copy(items)` array-valued; `meta = { key => value }` makes later `meta` and `copy(meta)` hash-valued; ordinary
+`copy(items)` array-valued; `meta = { key : value }` makes later `meta` and `copy(meta)` hash-valued; ordinary
 non-shape assignment keeps scalar kind.
 
 The boundary is the DSL surface. Generated backend Perl may still contain Perl built-ins such as `scalar(@items)`;

@@ -33,7 +33,7 @@ Example:
 ```text
 Token::AND
  I {
-   meta = { "kind" => "token" };
+   meta = { "kind" : "token" };
    text = undef;
  }
  /[A-Za-z_]+/
@@ -69,7 +69,7 @@ List::AND
  I {
    items = [];
    retv = undef;
-   meta = { "kind" => "list" };
+   meta = { "kind" : "list" };
  }
  Item
  Item
@@ -375,7 +375,7 @@ Example:
 
 ```text
 MaybeName::OR
- I { meta = { "kind" => "maybe_name" }; }
+ I { meta = { "kind" : "maybe_name" }; }
  LX {
    return(hash("kind", "missing_name"));
  }
@@ -465,7 +465,7 @@ Use this as the default decision guide:
 | Goal | Prefer |
 | --- | --- |
 | Initialize state shared by the rule | `I { items = []; retv = undef }` |
-| Initialize metadata shared by return paths | `I { meta = { "kind" => "node" } }` |
+| Initialize metadata shared by return paths | `I { meta = { "kind" : "node" } }` |
 | Transform one matched token | `-> Rule[index] { ... }` |
 | Capture and reshape one child result | `retv = call(Child)` inside an action body |
 | Append repeated child results | `push(array(items), retv)` inside action/iteration logic |
@@ -479,7 +479,7 @@ Use this as the default decision guide:
 ```text
 Block::AND
  I {
-   meta = { "kind" => "block" };
+   meta = { "kind" : "block" };
    body = undef;
  }
  /\{/

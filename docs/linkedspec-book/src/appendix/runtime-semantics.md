@@ -237,7 +237,7 @@ Assignment also has a value form. `name = "ok"` and `=(name, "ok")` store the sc
 value, so they can appear inside `return(...)`, helper arguments, expression-valued blocks, user-function bodies,
 and compatible scalar receiver chains such as `=(raw, " text ").trim()`. Direct shape RHS assignments participate
 in the same value contract as typed value binding: `items = [value]`, `set(items, [value])`, and
-`=(items, [value])` bind an array value to `items` and evaluate to that stored array value; `meta = { key => value }`
+`=(items, [value])` bind an array value to `items` and evaluate to that stored array value; `meta = { key : value }`
 binds a hash value and evaluates to that stored hash value. Explicit `set(array(items), ...)` and
 `set(hash(meta), ...)` targets remain aggregate-storage mutation forms. Mutation assignments also have expression
 values: `items += value` appends to the named array and evaluates to the updated array snapshot, while
@@ -258,12 +258,12 @@ scalar working variable (`$value` on the Perl reference). The pop methods discar
 removed value; value-returning forms such as `return(items.pop_back())` are not part of
 this statement-level contract.
 
-A non-empty brace payload without a top-level `=>` can also be used as a value
+A non-empty brace payload without a top-level hash-pair delimiter can also be used as a value
 block in value-consuming sites. The block runs its statements and yields the final
 expression unless a `return(expr)` statement is reached earlier. That `return(expr)`
 exits only the expression-valued block, skips later statements in that block, and
 yields `expr` as the block value; it does not set the surrounding rule's return
-channel. Empty `{}` and top-level-fat-arrow `{ key => value }` forms remain hash
+channel. Empty `{}` and top-level hash-pair `{ key : value }` forms remain hash
 shape literals on both the Perl reference and Rust backend.
 
 ```text

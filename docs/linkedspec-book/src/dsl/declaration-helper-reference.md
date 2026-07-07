@@ -20,13 +20,13 @@ Use the current surface directly:
 | `declare(array, items)` | `set(array(items), [])` when the rule must reset named aggregate storage, or `items += value` on first append. |
 | `declare(array, items=array(value))` | `set(array(items), [value])` |
 | `declare(hash, meta)` | `set(hash(meta), {})` when the rule must reset named aggregate storage, or `meta[key] = value` on first mutation. |
-| `declare(hash, meta=hash("kind", "node"))` | `set(hash(meta), { "kind" => "node" })` |
+| `declare(hash, meta=hash("kind", "node"))` | `set(hash(meta), { "kind" : "node" })` |
 
 Bare assignment binds the evaluated typed value:
 
 ```text
 items = [value];              # scalar working value `items` now holds an array payload
-meta = { "kind" => kind };    # scalar working value `meta` now holds a hash payload
+meta = { "kind" : kind };    # scalar working value `meta` now holds a hash payload
 ```
 
 Use explicit aggregate targets when later helpers should read or mutate named aggregate storage:
@@ -143,7 +143,7 @@ The state choices are explicit:
 ```text
 Token::AND
  I {
-   set(hash(meta), { "kind" => "token", "source" => "Token" });
+   set(hash(meta), { "kind" : "token", "source" : "Token" });
    text = undef;
  }
  /[A-Za-z_]+/

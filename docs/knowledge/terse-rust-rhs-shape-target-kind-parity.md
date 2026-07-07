@@ -29,9 +29,9 @@ set(array(items), [value])
 Direct hash RHS shapes used to assign hash working variables:
 
 ```text
-meta = { key => value }
-set(meta, { key => value })
-set(hash(meta), { key => value })
+meta = { key : value }
+set(meta, { key : value })
+set(hash(meta), { key : value })
 ```
 
 Current Rust duck-typed assignment stores a whole shape payload through a bare target:

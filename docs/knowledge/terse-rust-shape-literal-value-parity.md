@@ -4,7 +4,7 @@ title: "SPEC-FORMAT-TERSE.1.2.3.5.3 - Rust direct shape literals are value expre
 answers:
   - "does Rust parse [] and {} shape literal value expressions"
   - "does Rust [value] read scalar value inside a shape literal"
-  - "does Rust { key => value } read scalar key and value"
+  - "does Rust { key : value } read scalar key and value"
   - "where is current Rust duck typed assignment behavior recorded"
   - "what remains after SPEC-FORMAT-TERSE.1.2.3.5.3"
 date: 2026-06-29
@@ -21,7 +21,7 @@ Rust now accepts direct shape literals as value expressions:
 ```text
 []
 [value, cat("a", "b"), true, []]
-{ key => value, "fixed" => [value] }
+{ key : value, "fixed" : [value] }
 ```
 
 The member semantics match the accepted Perl value contract from
