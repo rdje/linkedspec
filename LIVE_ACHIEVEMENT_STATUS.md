@@ -7,8 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **SPEC-FORMAT-TERSE.9.6 — close hash literal colon drift**
+  (DONE; `.9` CLOSED; no concrete `SPEC-FORMAT-TERSE` PNT-eligible leaf remains unless a deferred leaf is
+  explicitly activated).
+
+  **Change:** Final no-drift closeout for the `{ key : value }` hash-literal migration. No parser/runtime
+  behavior changed; the closeout records that current specs, corpus inputs, generated oracle inputs, active tests,
+  docs/mdBook, current Knowledge facts, and implementation support sites are aligned on colon hash-literal
+  association.
+
+  **Boundary:** Remaining `=>` owners are blind-call edge syntax, VHDL/source-language associations, generated
+  Perl host output, Perl metadata/test data, backend value-rendering examples, explicit retired-syntax
+  diagnostics/tests, or historical records. They are not current direct hash-literal source syntax.
+
+  **Verification:** Current `.spec` source scans are clean for direct hash-literal `=>`; mdBook documents `:` as
+  current and old `{ key => value }` only as retired. Oracle generation remains **93** fixtures, focused Perl and
+  Rust `.9` checks pass, Rust `corpus_oracle` passes, and full phase0 passes `1..1024`.
+
 - 2026-07-07: **SPEC-FORMAT-TERSE.9.5 — retire hash literal fat arrows**
-  (DONE; FRONTIER `.9.6` FINAL HASH-LITERAL COLON NO-DRIFT CLOSEOUT NEXT).
+  (DONE; superseded by `.9.6` final no-drift closeout).
 
   **Change:** Old `{ key => value }` no longer succeeds as current ActionIR hash-literal syntax. Perl routes
   retired direct hash-literal fat arrows to `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon`, valid
@@ -24,7 +41,7 @@ Current execution status for interruption-safe batch workflow recovery.
   `1..1024`, mdBook, Knowledge Map, memory, doctrine, Rust format, diff, and local CI gates pass.
 
 - 2026-07-07: **SPEC-FORMAT-TERSE.9.4 — migrate hash literals to colon**
-  (DONE; superseded by `.9.5` hard retirement; current frontier `.9.6`).
+  (DONE; superseded by `.9.5` hard retirement and `.9.6` no-drift closeout).
 
   **Change:** Current-facing specs, checked-in corpus specs, generated Rust oracle inputs, active Perl/Rust tests,
   mdBook examples, root docs, and Knowledge facts now prefer `{ key : value }` for direct hash-literal

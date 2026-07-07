@@ -283,10 +283,12 @@ DSL helper surface consistency note:
   classification for Rust integration tests; `.8.2.3` has migrated current-facing mdBook/KM helper references
   to current terse spellings; and `.8.2.4` has closed the final `.8.2` no-drift scan/gate closeout before hard
   retirement. `.8.3` now owns Perl reference hard retirement of still-successful legacy helper spellings.
-  `.9` is now active for hash-literal `:` association syntax: `.9.1` split the migration, `.9.2` added Perl
+  `.9` is closed for hash-literal `:` association syntax: `.9.1` split the migration, `.9.2` added Perl
   reference colon support during the migration window, `.9.3` added Rust parser/runtime parity, `.9.4`
-  migrated current source/docs/KM/corpus to colon syntax, and `.9.5` hard-retired old hash-literal `=>` with
-  colon-migration diagnostics. `.9.6` owns final no-drift closeout. The Rust oracle
+  migrated current source/docs/KM/corpus to colon syntax, `.9.5` hard-retired old hash-literal `=>` with
+  colon-migration diagnostics, and `.9.6` closed final no-drift scans across current specs/corpora/docs/tests/KM
+  and implementation support sites. No concrete `SPEC-FORMAT-TERSE` PNT-eligible leaf remains after `.9` unless a
+  deferred/potential leaf is explicitly activated. The Rust oracle
   corpus is now 93 fixtures
   after `.15.2.3` added `terse_15_2_3_bare_value_reads_and_case_labels`; it had reached 92 fixtures after
   `SPEC-FORMAT-TERSE.11.4` added `terse_11_4_nested_mixed_value_path_assignment`, the Lispish fixture was

@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — SPEC-FORMAT-TERSE.9.6 — close hash literal colon drift
+
+**Scope:** Final no-drift closeout for the direct hash-literal `{ key : value }` migration and old
+`{ key => value }` retirement.
+
+**Change:** No parser/runtime behavior changed. The closeout records that current specs, corpus inputs, generated
+oracle inputs, active tests, docs/mdBook, current Knowledge facts, and implementation support sites are aligned on
+`:` for direct hash-literal association.
+
+**Boundary:** Remaining `=>` owners are classified as blind-call edge syntax, VHDL/source-language associations,
+generated Perl host output, Perl metadata/test data, backend value-rendering examples, explicit retired-syntax
+diagnostics/tests, or historical records. They are not current direct hash-literal source syntax.
+
+**Validation:** Current `.spec` source scans are clean for direct hash-literal `=>`; mdBook proof scans show `:`
+documented as current and old `{ key => value }` only as retired. `perl -Iperl tools/gen_oracle_corpus.pl`
+regenerates **93** fixtures, `prove -q -Iperl t/actionir_ast_parser.t` passes, focused Rust core/runtime `.9`
+filters pass, Rust `corpus_oracle` passes over the manifest-backed **93** fixtures, and full
+`prove -q -Iperl t/phase0_regression.t` passes with plan `1..1024`. `.9` is closed with no PNT-eligible child
+remaining.
+
 ## 2026-07-07 — SPEC-FORMAT-TERSE.9.5 — retire hash literal fat arrows
 
 **Scope:** Perl and Rust hard retirement of old ActionIR hash-literal `{ key => value }` syntax.

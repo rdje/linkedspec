@@ -18,20 +18,21 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.9.5` — old `{ key => value }` is retired as current ActionIR
-  hash-literal syntax on Perl/Rust; diagnostics point to `{ key : value }`, and the Rust compiler now treats
-  retired ActionIR parse diagnostics as fatal instead of accepting `code: None`.
-- prior_leaf: `SPEC-FORMAT-TERSE.9.4` — current specs, corpus inputs, generated oracle inputs, active tests,
-  mdBook examples, root docs, and current Knowledge facts now prefer `{ key : value }` for direct hash-literal
-  association. Remaining `=>` owners are classified, not migrated accidentally.
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.9.6` — final hash-literal colon no-drift closeout is done.
+  Current specs/corpora/generated oracle inputs/tests/docs/mdBook/current Knowledge facts are aligned on
+  `{ key : value }`; remaining `=>` owners are classified as blind-call edges, VHDL/source-language associations,
+  generated Perl host output, metadata/test data, value-rendering examples, retired diagnostics/tests, or history.
+- prior_leaf: `SPEC-FORMAT-TERSE.9.5` — old `{ key => value }` is retired as current ActionIR hash-literal syntax
+  on Perl/Rust; diagnostics point to `{ key : value }`, and the Rust compiler treats retired ActionIR parse
+  diagnostics as fatal instead of accepting `code: None`.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-FORMAT-TERSE.9.5 - retire hash literal fat arrows`; parent before this slice is
-  `SPEC-FORMAT-TERSE.9.4 - migrate hash literals to colon`.
+  `SPEC-FORMAT-TERSE.9.6 - close hash literal colon drift`; parent before this slice is
+  `SPEC-FORMAT-TERSE.9.5 - retire hash literal fat arrows`.
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: after this `.9.5` commit is clean and `git status` is handoff-ready, the next frontier is
-  `SPEC-FORMAT-TERSE.9.6` final hash-literal colon no-drift closeout.
-- next_action: finish `.9.5` commit workflow, clear `git_message_brief.txt`, verify clean status, then implement
-  `SPEC-FORMAT-TERSE.9.6` if continuing PNT; do not push unless explicitly instructed.
+- active_work_unit: close out and commit `SPEC-FORMAT-TERSE.9.6`; `.9` then has no PNT-eligible child remaining.
+  Deferred/potential leaves `.10`/`.12`/`.13`/`.14` are not eligible unless explicitly activated.
+- next_action: run closeout gates, commit `.9.6`, clear `git_message_brief.txt`, verify clean status. Do not push
+  unless explicitly instructed.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.
@@ -39,5 +40,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Deferred lanes behind `.9`: `.10`/`.12`/`.13`/`.14` backlog;
   `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`, `SPEC-LANG-REFERENCE`.
-- blockers: none for `.9.5` ownership. in_flight_uncommitted: none after the `.9.5` commit lands; do
+- blockers: none for `.9.6` ownership. in_flight_uncommitted: live-doc/task-tree closeout edits until commit; do
   not pivot unless the repo is handoff-ready.

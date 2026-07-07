@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (SPEC-FORMAT-TERSE.9.6 — final colon hash-literal scans classify by owner):
+  Do not treat every `=>` hit as current `.spec` hash-literal syntax. After `.9.6`, current authored `.spec`
+  inputs are clean for direct `{ key => value }` hash literals; the current source form is `{ key : value }`, and
+  mdBook documents old `{ key => value }` only as retired. Remaining `=>` owners are blind-call edge grammar,
+  VHDL/source-language association syntax, generated Perl host hashrefs, Perl metadata/test data hashes, backend
+  value-rendering examples, explicit retired-syntax diagnostics/tests, and historical records. Re-run owner-bucket
+  scans before changing any of those surfaces; a global `=>` replacement would be wrong.
+
 - 2026-07-07 (SPEC-FORMAT-TERSE.9.5 — retired hash-literal `=>` must be fatal, not fallback):
   Source-spelled ActionIR hash literals now use `:` only. A top-level `=>` inside a direct hash literal must route
   to `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon`; it must not rebuild a current hash literal,
