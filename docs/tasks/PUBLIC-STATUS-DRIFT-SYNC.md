@@ -17,6 +17,8 @@ The authoritative current state is `ROADMAP_V2.md`, the active task-tree ledger,
 public drift is in the mdBook status surface: `overview/project-status.md` still describes Rust
 cross-variant parity as an ongoing follow-on, and `appendix/backend-handoff.md` still names an older
 Rust oracle corpus count in its explanatory handoff text.
+A follow-up full mdBook read found one residual public count drift in
+`specs-and-corpora/shipped-specs-and-corpora.md`; `.2` owns that correction before any book edit.
 
 ## Non-Goals
 
@@ -34,6 +36,8 @@ Rust oracle corpus count in its explanatory handoff text.
   subset boundary.
 - `docs/linkedspec-book/src/appendix/backend-handoff.md` uses the current 93-fixture Rust corpus count
   where it describes the interpreter oracle gate.
+- `docs/linkedspec-book/src/specs-and-corpora/shipped-specs-and-corpora.md` uses the current
+  manifest-backed 93-fixture Rust corpus count instead of the older 91-fixture wording.
 - Focused no-drift scans over the touched status pages pass.
 - `mdbook build docs/linkedspec-book` passes when the book is changed.
 - `scripts/check_memory_architecture.sh`, `knowledge-map/scripts/check_knowledge_map.sh`, and
@@ -45,7 +49,7 @@ Rust oracle corpus count in its explanatory handoff text.
 - ID: `PUBLIC-STATUS-DRIFT-SYNC`
   Status: `done`
   Goal: Reconcile public status docs with the current codebase/task-tree state.
-  Children: `.0`, `.1`
+  Children: `.0`, `.1`, `.2`
 
 - ID: `PUBLIC-STATUS-DRIFT-SYNC.0`
   Status: `done`
@@ -68,6 +72,19 @@ Rust oracle corpus count in its explanatory handoff text.
     `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `git diff --check`
   Commit: `PUBLIC-STATUS-DRIFT-SYNC.1 - sync public Rust status docs`
 
+- ID: `PUBLIC-STATUS-DRIFT-SYNC.2`
+  Status: `done`
+  Goal: Correct the residual shipped-specs book page Rust oracle count after the full mdBook read.
+  Acceptance: `specs-and-corpora/shipped-specs-and-corpora.md` no longer names the older 91-fixture
+    Rust oracle corpus and instead matches the current 93-fixture manifest-backed interpreter oracle;
+    long-form roadmap and architecture-state count drift remain deferred to `ROADMAP-DRIFT-RECONCILE`;
+    focused scans, mdBook, memory, Knowledge Map, doctrine, and diff checks pass.
+  Verification: `mdbook build docs/linkedspec-book`; focused stale-count scan over public status/handoff/
+    shipped-specs pages; `bash scripts/check_memory_architecture.sh`;
+    `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`;
+    `git diff --check`
+  Commit: `PUBLIC-STATUS-DRIFT-SYNC.2 - fix residual shipped corpus count drift`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -81,6 +98,10 @@ Rust oracle corpus count in its explanatory handoff text.
   open follow-on described by the mdBook project status page. The long-form roadmap drift remains owned
   elsewhere; this tree owns the narrower public status/book surface so it can be fixed without broadening
   `ROADMAP-DRIFT-RECONCILE`.
+- `2026-07-07`: During the full mdBook read-through, the shipped-specs/corpora page still named the
+  older 91-fixture Rust oracle corpus even though the manifest, project status page, and backend handoff
+  page are now at 93 fixtures. Treat that as residual public-status drift under `.2`; do not broaden this
+  leaf into the already deferred `ROADMAP-DRIFT-RECONCILE.1`/`.2` roadmap and architecture refresh.
 
 ## Open Questions
 
@@ -96,6 +117,7 @@ Rust oracle corpus count in its explanatory handoff text.
 | --- | --- | --- | --- |
 | `2026-07-07` | `PUBLIC-STATUS-DRIFT-SYNC.0` | `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `git diff --check` | PASS — tracking-only tree registered, live docs updated, no code/book content changed |
 | `2026-07-07` | `PUBLIC-STATUS-DRIFT-SYNC.1` | `mdbook build docs/linkedspec-book`; focused stale-status scan over the touched book pages; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `git diff --check` | PASS — book status/handoff pages and Knowledge facts updated to the 93-fixture interpreter oracle and generated-source subset boundary |
+| `2026-07-07` | `PUBLIC-STATUS-DRIFT-SYNC.2` | `mdbook build docs/linkedspec-book`; focused stale-count scan over public status/handoff/shipped-specs pages; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `git diff --check` | PASS — shipped-specs book page now points at the manifest-backed 93-fixture Rust oracle and stale 91/88 public-page hits are gone |
 
 ## Commit Log
 
@@ -103,9 +125,12 @@ Rust oracle corpus count in its explanatory handoff text.
 | --- | --- | --- |
 | `PUBLIC-STATUS-DRIFT-SYNC.0` | `PUBLIC-STATUS-DRIFT-SYNC.0 - create public status drift tree` | Tracking-only; no code/book content changes. |
 | `PUBLIC-STATUS-DRIFT-SYNC.1` | `PUBLIC-STATUS-DRIFT-SYNC.1 - sync public Rust status docs` | Public mdBook status/handoff wording and Knowledge cards refreshed. |
+| `PUBLIC-STATUS-DRIFT-SYNC.2` | `PUBLIC-STATUS-DRIFT-SYNC.2 - fix residual shipped corpus count drift` | Residual shipped-specs book page count corrected. |
 
 ## Changelog
 
 - `2026-07-07`: Created tree to own public status/mdBook drift before making any book edits.
 - `2026-07-07`: Completed `.1`; public status/handoff pages now use the current Rust interpreter oracle count,
   generated-source subset boundary, and manifest path.
+- `2026-07-07`: Completed `.2`; the shipped-specs/corpora book page now names the manifest-backed 93-fixture
+  Rust oracle and points readers at the manifest for the exact case list.

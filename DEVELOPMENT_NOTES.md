@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (PUBLIC-STATUS-DRIFT-SYNC.2 — public count fixes need whole-book scans):
+  Public Rust oracle count drift can survive outside the main status/handoff pages. When reconciling corpus counts,
+  scan the whole public book surface that mentions fixture counts, not only `overview/project-status.md` and
+  `appendix/backend-handoff.md`. The exact Rust interpreter oracle count comes from
+  `rust/linkedspec-runtime/tests/corpus/manifest.json` (`case_count` 93 today); book prose should point to that
+  manifest for the complete case list instead of hand-maintaining a long exact enumeration. Stale roadmap and
+  architecture-state count references remain owned by deferred `ROADMAP-DRIFT-RECONCILE` leaves.
+
 - 2026-07-07 (BOOTSTRAP-RESUME-SYNC.1 — stale layer-A state must be task-owned before correction):
   If `MEMORY.md` names an already-committed leaf as in-flight while `git status --short` is clean, treat that as a
   continuity defect and open a narrow task-tree owner before editing the pointer. The correct source of truth is

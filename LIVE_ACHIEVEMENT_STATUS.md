@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **PUBLIC-STATUS-DRIFT-SYNC.2 — fix residual shipped corpus count drift**
+  (DONE; tree CLOSED).
+
+  **Change:** Updated the shipped-specs/corpora mdBook page to use the current manifest-backed 93-fixture Rust
+  oracle and to point at `rust/linkedspec-runtime/tests/corpus/manifest.json` for the exact case list.
+
+  **Boundary:** Documentation/status only. No parser/runtime behavior changed. Long-form roadmap and architecture
+  count drift remain owned by deferred `ROADMAP-DRIFT-RECONCILE` leaves.
+
+  **Verification:** mdBook build, focused stale-count scan, memory architecture, Knowledge Map, doctrine driver,
+  and whitespace diff checks pass.
+
 - 2026-07-07: **BOOTSTRAP-RESUME-SYNC.1 — correct stale resume pointer**
   (DONE; continuity-only tree CLOSED).
 

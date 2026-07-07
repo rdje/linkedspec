@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — PUBLIC-STATUS-DRIFT-SYNC.2 — fix residual shipped corpus count drift
+
+**Scope:** Residual public mdBook count drift found during the full book read.
+
+**Change:** Updated `specs-and-corpora/shipped-specs-and-corpora.md` from the older 91-fixture Rust oracle wording
+to the current manifest-backed 93-fixture corpus, and pointed readers at
+`rust/linkedspec-runtime/tests/corpus/manifest.json` as the exact case-list source.
+
+**Boundary:** No parser/runtime/code behavior changed. Long-form `ROADMAP.md`, `ROADMAP_V2.md`, and
+`ARCHITECTURE_STATE.md` count/status drift remain outside this leaf unless the deferred
+`ROADMAP-DRIFT-RECONCILE` leaves are activated.
+
+**Validation:** `mdbook build docs/linkedspec-book` passes. Focused stale-count scan over the public
+status/handoff/shipped-specs pages has no 91/88 hits. `bash scripts/check_memory_architecture.sh`,
+`bash knowledge-map/scripts/check_knowledge_map.sh`, `bash scripts/check_doctrines.sh`, and `git diff --check`
+pass.
+
 ## 2026-07-07 — BOOTSTRAP-RESUME-SYNC.1 — correct stale resume pointer
 
 **Scope:** Continuity docs and task-tree state after the user-directed bootstrap pass.

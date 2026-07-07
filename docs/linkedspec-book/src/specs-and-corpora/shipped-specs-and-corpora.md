@@ -81,10 +81,13 @@ The important point is that these files collectively exercise the system:
 - runtime parser invocation,
 - real nested return payloads.
 
-The 91-fixture Rust oracle corpus tracks this maturity incrementally. It now includes
-`lib_reader_sattribute` and `lib_reader_cattribute`; `portmap_bare`, `portmap_bit`,
-`portmap_slice`, `portmap_constant`, and `portmap_concatenation`; `ebnf_expression_rules`
-and `ebnf_logging_annotation`; and four `spec.spec` smokes:
+The manifest-backed 93-fixture Rust oracle corpus tracks this maturity incrementally.
+Its exact case list lives in `rust/linkedspec-runtime/tests/corpus/manifest.json`.
+Representative cases include `lib_reader_sattribute` and `lib_reader_cattribute`;
+`portmap_bare`, `portmap_bit`, `portmap_slice`, `portmap_constant`, and
+`portmap_concatenation`; `ebnf_expression_rules` and `ebnf_logging_annotation`;
+terse-language fixtures such as `terse_11_4_nested_mixed_value_path_assignment` and
+`terse_15_2_3_bare_value_reads_and_case_labels`; and four `spec.spec` smokes:
 `spec_spec_minimal_rule`, `spec_spec_action_edge`, `spec_spec_user_function_definition`,
 and `spec_spec_comment_skip`; plus the narrow legacy safety smokes
 `regdef_nested_register_fields`, `tablegrep_simple_term`, `simenv_multiline_value`,
