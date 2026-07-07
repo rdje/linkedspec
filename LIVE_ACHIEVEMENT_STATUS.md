@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **PUBLIC-STATUS-DRIFT-SYNC.0 — create public status drift tree**
+  (DONE tracking-only; frontier `.1` public mdBook status/handoff sync next).
+
+  **Change:** Added an active task tree to own the public status drift found during the bootstrap/context pass before
+  any book edits. The concrete drift is narrow: `overview/project-status.md` still presents Rust parity as ongoing,
+  and `appendix/backend-handoff.md` still carries an older Rust oracle corpus count.
+
+  **Boundary:** No code, runtime behavior, roadmap content, or mdBook content changed. `ROADMAP-DRIFT-RECONCILE`
+  continues to own long-form `ROADMAP.md` and `ARCHITECTURE_STATE.md` drift.
+
+  **Verification:** Memory architecture, Knowledge Map, doctrine driver, and whitespace diff checks pass.
+
 - 2026-07-07: **SPEC-FORMAT-TERSE.9.6 — close hash literal colon drift**
   (DONE; `.9` CLOSED; no concrete `SPEC-FORMAT-TERSE` PNT-eligible leaf remains unless a deferred leaf is
   explicitly activated).

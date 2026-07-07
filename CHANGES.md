@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — PUBLIC-STATUS-DRIFT-SYNC.0 — create public status drift tree
+
+**Scope:** Tracking-only ownership for public status/mdBook drift discovered during the bootstrap/context pass.
+
+**Change:** Added `docs/tasks/PUBLIC-STATUS-DRIFT-SYNC.md` and registered it in the active task-tree index. The
+tree owns the narrow public status surface where `overview/project-status.md` still describes Rust parity as an
+ongoing follow-on and `appendix/backend-handoff.md` still names an older Rust oracle corpus count.
+
+**Boundary:** No code, runtime behavior, roadmap content, or book content changed in this slice. The long-form
+`ROADMAP.md` and `ARCHITECTURE_STATE.md` drift remains owned by `ROADMAP-DRIFT-RECONCILE`; this tree only owns the
+public mdBook status/handoff drift found now.
+
+**Validation:** `bash scripts/check_memory_architecture.sh`, `bash knowledge-map/scripts/check_knowledge_map.sh`,
+`bash scripts/check_doctrines.sh`, and `git diff --check` pass.
+
 ## 2026-07-07 — SPEC-FORMAT-TERSE.9.6 — close hash literal colon drift
 
 **Scope:** Final no-drift closeout for the direct hash-literal `{ key : value }` migration and old

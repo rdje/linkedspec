@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (PUBLIC-STATUS-DRIFT-SYNC.0 — task-own public status/book drift before edits):
+  Treat `ROADMAP_V2.md`, `MEMORY.md`, the active task-tree ledger, and
+  `rust/linkedspec-runtime/tests/corpus/manifest.json` as the current status sources for public status sync. The
+  Rust oracle manifest is under `rust/linkedspec-runtime/tests/corpus/manifest.json` and currently records 93
+  cases; the root `tests/corpus/` directory is the older three-case public corpus and is not the Rust parity count.
+  Any mdBook status edit must be task-owned first by `PUBLIC-STATUS-DRIFT-SYNC.1`, and the older
+  `ROADMAP-DRIFT-RECONCILE` leaves still own the long-form roadmap and architecture-state refresh separately.
+
 - 2026-07-07 (SPEC-FORMAT-TERSE.9.6 — final colon hash-literal scans classify by owner):
   Do not treat every `=>` hit as current `.spec` hash-literal syntax. After `.9.6`, current authored `.spec`
   inputs are clean for direct `{ key => value }` hash literals; the current source form is `{ key : value }`, and

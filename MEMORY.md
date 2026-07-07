@@ -18,27 +18,27 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.9.6` — final hash-literal colon no-drift closeout is done.
-  Current specs/corpora/generated oracle inputs/tests/docs/mdBook/current Knowledge facts are aligned on
-  `{ key : value }`; remaining `=>` owners are classified as blind-call edges, VHDL/source-language associations,
-  generated Perl host output, metadata/test data, value-rendering examples, retired diagnostics/tests, or history.
-- prior_leaf: `SPEC-FORMAT-TERSE.9.5` — old `{ key => value }` is retired as current ActionIR hash-literal syntax
-  on Perl/Rust; diagnostics point to `{ key : value }`, and the Rust compiler treats retired ActionIR parse
-  diagnostics as fatal instead of accepting `code: None`.
+- latest_completed_leaf: `PUBLIC-STATUS-DRIFT-SYNC.0` — tracking-only public status/mdBook drift tree is created.
+  It owns the discovered public status drift before edits: `overview/project-status.md` still presents Rust parity
+  as ongoing, and `appendix/backend-handoff.md` still carries an older Rust oracle corpus count.
+- prior_leaf: `SPEC-FORMAT-TERSE.9.6` — final hash-literal colon no-drift closeout is done; `.9` is closed and no
+  concrete `SPEC-FORMAT-TERSE` PNT-eligible leaf remains unless a deferred/potential leaf is explicitly activated.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-FORMAT-TERSE.9.6 - close hash literal colon drift`; parent before this slice is
-  `SPEC-FORMAT-TERSE.9.5 - retire hash literal fat arrows`.
+  `PUBLIC-STATUS-DRIFT-SYNC.0 - create public status drift tree`; parent before this slice is
+  `SPEC-FORMAT-TERSE.9.6 - close hash literal colon drift`.
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: close out and commit `SPEC-FORMAT-TERSE.9.6`; `.9` then has no PNT-eligible child remaining.
-  Deferred/potential leaves `.10`/`.12`/`.13`/`.14` are not eligible unless explicitly activated.
-- next_action: run closeout gates, commit `.9.6`, clear `git_message_brief.txt`, verify clean status. Do not push
-  unless explicitly instructed.
+- active_work_unit: `PUBLIC-STATUS-DRIFT-SYNC.1` is the next leaf. Update only the discovered mdBook status/handoff
+  drift against `ROADMAP_V2.md`, `MEMORY.md`, and `rust/linkedspec-runtime/tests/corpus/manifest.json` (93
+  fixtures).
+- next_action: run tracking-slice closeout gates, commit `.0`, clear `git_message_brief.txt`, verify clean status,
+  then implement `.1`. Do not pivot to `ROADMAP-DRIFT-RECONCILE` while dirty; long-form `ROADMAP.md` and
+  `ARCHITECTURE_STATE.md` remain separately owned. Do not push unless explicitly instructed.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests (e.g. 102 pplugin lazy-load) fail on the stale checkout. Full phase0 needs the **10-min timeout** (`timeout:600000`), else it caps mid-run (exit 144/143). **Generated Perl handlers are NON-strict.** **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`). Current phase0 reaches **PASS `1..1024`**. oracle = `tools/gen_oracle_corpus.pl` (per-case fork/SIGKILL; **93** fixtures → **run in background**; `manifest.json` + drift guards). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`. Rust numbered capture helpers are captures-only (`0`=first capture); whole match = `entry_text()`/`match_text()`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
-  worktree ignored by submodule policy. Deferred lanes behind `.9`: `.10`/`.12`/`.13`/`.14` backlog;
+  worktree ignored by submodule policy. Deferred lanes: `SPEC-FORMAT-TERSE` `.10`/`.12`/`.13`/`.14` backlog;
   `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`, `SPEC-LANG-REFERENCE`.
-- blockers: none for `.9.6` ownership. in_flight_uncommitted: live-doc/task-tree closeout edits until commit; do
+- blockers: none for `.0` ownership. in_flight_uncommitted: tracking-only task-tree/live-doc edits until commit; do
   not pivot unless the repo is handoff-ready.
