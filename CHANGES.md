@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — SPEC-FORMAT-TERSE.9.1 — split hash literal colon migration
+
+**Scope:** Task-tree, Knowledge Map, and live-doc split/inventory for replacing direct hash-literal association
+`{ key => value }` with `{ key : value }`.
+
+**Change:** `.9` is now split into Perl support, Rust parity, source/docs/KM/corpus migration, hard-retirement, and
+final no-drift leaves. The inventory classifies direct hash-literal `=>` candidates separately from blind-call edge
+syntax, VHDL/source-language associations, historical notes, fixture strings, and parser/runtime support sites.
+
+**Boundary:** No parser/runtime behavior changed. Blind-call `=> Rule` remains valid syntax; VHDL associations are
+not part of the ActionIR hash-literal migration.
+
+**Validation:** Knowledge Map regenerated and checked; mdBook builds; whitespace, memory, and doctrine gates pass
+in commit closeout. Frontier becomes `.9.2` for Perl reference `{ key : value }` support.
+
 ## 2026-07-07 — SPEC-FORMAT-TERSE.8.6 — close helper retirement no-drift
 
 **Scope:** Final helper-retirement drift scan across executable specs/corpora, public docs, tests/code, Knowledge

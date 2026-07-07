@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (SPEC-FORMAT-TERSE.9.1 — `=>` migration must preserve non-hash owners):
+  The hash-literal colon migration is not a global `=>` replacement. Treat direct hash-literal association
+  candidates separately from blind-call edge syntax (`=> Rule`), VHDL/source-language associations, historical
+  evidence, and tests that intentionally mention old syntax. Parser implementation seams are Perl
+  `ActionIR/AST/Parser.pm` (`_parse_hash_literal_expr`, `_find_top_level_fat_arrow`) and Rust
+  `linkedspec-core/src/expr.rs::parse_hash_literal` plus runtime `Expr::HashLiteral` evaluation. The source DSL
+  moves to `{ key : value }`, but generated Perl host code may still legitimately use Perl's own `=>` operator.
+
 - 2026-07-07 (SPEC-FORMAT-TERSE.8.6 — no-drift scans must classify by executable surface):
   For helper-retirement closeout, treat current specs/corpora differently from docs/tests/code. Executable current
   specs and oracle inputs should be clean for retired helper calls; false positives such as regex colons,

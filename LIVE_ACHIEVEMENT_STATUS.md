@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **SPEC-FORMAT-TERSE.9.1 — split hash literal colon migration**
+  (DONE; FRONTIER `.9.2` PERL REFERENCE COLON HASH-LITERAL SUPPORT NEXT).
+
+  **Change:** `.9` is split before implementation. Direct hash-literal `=>` migration candidates are classified
+  apart from blind-call edge syntax, VHDL/source-language associations, historical material, active fixture strings,
+  and parser/runtime support sites. A Knowledge fact records the split so future sessions can start from the owner
+  buckets instead of redoing the scan.
+
+  **Boundary:** No parser/runtime behavior changed. Blind-call `=> Rule` remains valid, and source-language
+  association syntax such as VHDL `=>` is outside the ActionIR hash-literal migration.
+
+  **Verification:** Knowledge Map regenerated and checked; mdBook builds; memory, whitespace, and doctrine gates
+  pass in commit closeout.
+
 - 2026-07-07: **SPEC-FORMAT-TERSE.8.6 — close helper retirement no-drift**
   (DONE; FRONTIER `.9` HASH-LITERAL COLON ASSOCIATION NEXT AFTER CLEAN COMMIT).
 
