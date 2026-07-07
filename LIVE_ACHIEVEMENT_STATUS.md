@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **BOOTSTRAP-RESUME-SYNC.1 — correct stale resume pointer**
+  (DONE; continuity-only tree CLOSED).
+
+  **Change:** Added and completed a narrow task tree for the bootstrap finding that `MEMORY.md` still treated
+  `PUBLIC-STATUS-DRIFT-SYNC.1` as in-flight after commit `e1101e1a` was already present and `git status --short`
+  was clean. `MEMORY.md` now records the clean handoff state and the absence of an in-flight work unit.
+
+  **Boundary:** No parser/runtime behavior changed, and no public mdBook content changed.
+
+  **Verification:** Memory architecture, doctrine driver, and whitespace diff checks pass.
+
 - 2026-07-07: **PUBLIC-STATUS-DRIFT-SYNC.1 — sync public Rust status docs**
   (DONE; tree CLOSED).
 

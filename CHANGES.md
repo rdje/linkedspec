@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — BOOTSTRAP-RESUME-SYNC.1 — correct stale resume pointer
+
+**Scope:** Continuity docs and task-tree state after the user-directed bootstrap pass.
+
+**Change:** Added and completed `BOOTSTRAP-RESUME-SYNC` to own a stale layer-A resume-pointer finding before
+editing continuity docs. `MEMORY.md` now reflects that `PUBLIC-STATUS-DRIFT-SYNC.1` was already committed at
+`e1101e1a` and the repo was clean; live docs now point future sessions at the task-tree index instead of an
+already-completed closeout.
+
+**Boundary:** No parser/runtime/source behavior changed, and no public mdBook content changed.
+
+**Validation:** `bash scripts/check_memory_architecture.sh`, `bash scripts/check_doctrines.sh`, and
+`git diff --check` pass.
+
 ## 2026-07-07 — PUBLIC-STATUS-DRIFT-SYNC.1 — sync public Rust status docs
 
 **Scope:** Public mdBook status/handoff drift and the matching Knowledge Map oracle facts.

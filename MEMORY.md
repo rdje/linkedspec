@@ -18,19 +18,21 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `PUBLIC-STATUS-DRIFT-SYNC.1` — public Rust status docs are synchronized and the tree is
-  closed. mdBook project status/backend handoff now use the current 93-fixture Rust interpreter oracle, the
-  generated-source curated-subset boundary, and the real manifest path; related Knowledge cards are refreshed.
-- prior_leaf: `PUBLIC-STATUS-DRIFT-SYNC.0` — tracking-only public status/mdBook drift tree was created before
-  book edits.
+- latest_completed_leaf: `BOOTSTRAP-RESUME-SYNC.1` — continuity-only correction: bootstrap found stale
+  `MEMORY.md` wording that still treated `PUBLIC-STATUS-DRIFT-SYNC.1` as in-flight even though commit `e1101e1a`
+  existed and `git status --short` was clean. The task tree and live docs now record the clean handoff state.
+- prior_leaf: `PUBLIC-STATUS-DRIFT-SYNC.1` — public Rust status docs are synchronized and the tree is closed.
 - latest_commit: HEAD containing this pointer should be
-  `PUBLIC-STATUS-DRIFT-SYNC.1 - sync public Rust status docs`; parent before this slice is
-  `PUBLIC-STATUS-DRIFT-SYNC.0 - create public status drift tree`.
+  `BOOTSTRAP-RESUME-SYNC.1 - correct stale resume pointer`; parent before this slice is
+  `PUBLIC-STATUS-DRIFT-SYNC.1 - sync public Rust status docs`.
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: close out and commit `PUBLIC-STATUS-DRIFT-SYNC.1`, then verify clean status. After that, resume
-  PNT from `docs/TASK_TREE.md`; do not pivot while dirty.
-- next_action: run final closeout gates, commit `.1`, clear `git_message_brief.txt`, verify clean status. Do not
-  push unless explicitly instructed.
+- active_work_unit: none in-flight after `BOOTSTRAP-RESUME-SYNC.1`; repo should be handoff-ready after commit and
+  `git_message_brief.txt` cleanup.
+- next_action: resume from `docs/TASK_TREE.md`. Current active trees have empty/deferred/paused frontiers; do not
+  edit a deferred leaf unless the user explicitly activates it or a new task-tree owner is created while clean.
+- latest_bootstrap_read: 2026-07-07 read README, memory architecture, session bootstrap, task-tree index/active
+  trees, relevant ADR/KM facts, mdBook source, core Perl/Rust implementation, shipped specs, tooling, and focused
+  test harness inventory. No parser/runtime/book behavior changed in this continuity slice.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.
@@ -38,5 +40,4 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Deferred lanes: `SPEC-FORMAT-TERSE` `.10`/`.12`/`.13`/`.14` backlog;
   `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`, `SPEC-LANG-REFERENCE`.
-- blockers: none for `.1` ownership. in_flight_uncommitted: mdBook/KM/live-doc closeout edits until commit; do
-  not pivot unless the repo is handoff-ready.
+- blockers: none. in_flight_uncommitted: none after this commit; do not pivot unless the repo is handoff-ready.

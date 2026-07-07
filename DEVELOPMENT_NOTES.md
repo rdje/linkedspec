@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (BOOTSTRAP-RESUME-SYNC.1 — stale layer-A state must be task-owned before correction):
+  If `MEMORY.md` names an already-committed leaf as in-flight while `git status --short` is clean, treat that as a
+  continuity defect and open a narrow task-tree owner before editing the pointer. The correct source of truth is
+  the combination of `git log -1 --oneline`, `git status --short`, the owning task tree, and `docs/TASK_TREE.md`;
+  do not pivot to an unrelated tree while the resume pointer is known stale.
+
 - 2026-07-07 (PUBLIC-STATUS-DRIFT-SYNC.1 — public status uses the Rust manifest, not stale parity wording):
   The current Rust interpreter oracle count comes from
   `rust/linkedspec-runtime/tests/corpus/manifest.json` (`case_count` 93). Public docs should describe interpreter
