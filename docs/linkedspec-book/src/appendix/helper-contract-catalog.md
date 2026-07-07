@@ -41,7 +41,6 @@ The Perl reference and Rust backend accept direct array and hash shape literals 
 []
 [value, cat("a", "b"), true, []]
 { key : value, "fixed" : [value] }
-{ key : value, "fixed" : [value] }   # migration-window spelling on Perl and Rust
 ```
 
 Shape literals are accepted in value-consuming sites such as `return(payload)`, scalar assignment sources,
@@ -49,9 +48,9 @@ array append RHS values, hash-index assignment RHS values, `push(target, value)`
 payloads. Array elements, hash keys, and hash values lower through the scoped DSL value-expression rules:
 primitive literals stay typed, recognized helper calls compose, direct nested access keeps its own bracket
 semantics, nested shape literals recurse, and non-reserved bare names are scalar working-variable reads.
-During the `SPEC-FORMAT-TERSE.9` migration, Perl and Rust both accept `:` as the hash-literal key/value separator.
-The broad source/docs/corpus migration is tracked separately, so `=>` may still appear in historical examples and
-cross-backend material until those leaves close.
+Perl and Rust both use `:` as the direct hash-literal key/value separator. Old `{ key => value }` ActionIR
+value syntax is retired and reports `hash_literal_use_colon`; `=>` remains valid only for other owned surfaces
+such as blind-call edges, source-language payloads, generated Perl host hashrefs, and historical records.
 
 A bare hash-literal key is a dynamic scalar key, not a fixed string field name:
 
@@ -83,7 +82,7 @@ The Perl reference and Rust backend accept expression-valued blocks in value-con
 brace payload with no top-level hash-pair delimiter evaluates its statements and yields the final expression. A
 `return(expr)` anywhere in the block exits only that expression-valued block, skips later block statements,
 and yields `expr` as the block value. Hash literals keep precedence: `{}` and `{ key : value }`
-remain hash shapes; old `{ key => value }` remains a migration-window compatibility spelling until `.9.5`.
+remain hash shapes; old `{ key => value }` is retired and is not a block fallback.
 
 ```text
 return({ set(x, "a"); x });                    # "a"

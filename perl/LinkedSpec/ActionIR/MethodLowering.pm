@@ -860,6 +860,8 @@ sub _actionir_ast_value_source_expr {
   if $kind eq 'colon_scalar_slot_removed'
   && defined($node->{name})
   && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ return _actionir_ast_retired_hash_literal_fat_arrow_expr()
+  if $kind eq 'hash_literal_fat_arrow_removed';
  if ($kind eq 'indexed_var') {
   return undef unless defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   my $index = _actionir_ast_value_source_expr($node->{index});
@@ -901,7 +903,7 @@ sub _actionir_ast_value_source_expr {
    my $value_expr = _actionir_ast_value_source_expr($entry->{value});
    return undef unless defined($key_expr) && length($key_expr);
    return undef unless defined($value_expr) && length($value_expr);
-   push @pairs, $key_expr.' => '.$value_expr;
+   push @pairs, $key_expr.' : '.$value_expr;
   }
   return '{'.join(', ', @pairs).'}'
  }
@@ -1118,6 +1120,17 @@ sub _actionir_ast_retired_colon_scalar_slot_expr {
  return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read"; undef }'
 }
 
+sub _actionir_ast_retired_hash_literal_fat_arrow_expr {
+ _trace_method_decision(
+  phase => 'retired_hash_literal_fat_arrow_expr',
+  label => 'expr',
+  decision => 'hash_literal_use_colon',
+  taken => 1,
+  context => {},
+ );
+ return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon"; undef }'
+}
+
 sub _actionir_ast_retired_wrapper_alias_method {
  my ($method) = @_;
  return undef unless defined($method) && length($method);
@@ -1278,6 +1291,9 @@ sub _user_function_collect_local_decls_from_node {
   return;
  }
  if ($kind eq 'colon_scalar_slot_removed') {
+  return;
+ }
+ if ($kind eq 'hash_literal_fat_arrow_removed') {
   return;
  }
 
@@ -2012,7 +2028,7 @@ sub _lower_method_value_expr {
    next unless $paren_depth == 0 && $brace_depth == 0 && $bracket_depth == 0;
    my $separator_len;
    if ($char eq '=' && $idx + 1 < $len && substr($text, $idx + 1, 1) eq '>') {
-    $separator_len = 2;
+    return { retired_hash_literal_fat_arrow => 1 };
    } elsif ($char eq ':') {
     my $prev = $idx > 0 ? substr($text, $idx - 1, 1) : '';
     my $next = $idx + 1 < $len ? substr($text, $idx + 1, 1) : '';
@@ -2090,7 +2106,9 @@ sub _lower_method_value_expr {
   my @lowered_pairs;
   foreach my $entry (@$entries) {
    my $pair = $split_top_level_fat_arrow->($entry);
-   return undef unless $pair;
+   return _actionir_ast_retired_hash_literal_fat_arrow_expr()
+    if ref($pair) eq 'HASH' && $pair->{retired_hash_literal_fat_arrow};
+   return undef unless ref($pair) eq 'ARRAY';
    my $key_expr = $lower_shape_member_expr->($pair->[0]);
    my $value_expr = $lower_shape_member_expr->($pair->[1]);
    return undef unless defined($key_expr) && length($key_expr);
@@ -2842,6 +2860,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    if $kind eq 'colon_scalar_slot_removed'
    && defined($node->{name})
    && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  return _actionir_ast_retired_hash_literal_fat_arrow_expr()
+   if $kind eq 'hash_literal_fat_arrow_removed';
   if ($kind eq 'assign_scalar') {
    return undef unless defined($node->{name}) && $node->{name} =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    my $value_expr = $ast_expr_source_node->($node->{value});
@@ -2899,7 +2919,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     my $value_expr = $ast_expr_source_node->($entry->{value});
     return undef unless defined($key_expr) && length($key_expr);
     return undef unless defined($value_expr) && length($value_expr);
-    push @pairs, $key_expr.' => '.$value_expr;
+    push @pairs, $key_expr.' : '.$value_expr;
    }
    return '{'.join(', ', @pairs).'}';
   }
@@ -3291,6 +3311,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
 	  return _actionir_ast_retired_colon_scalar_slot_expr($node->{name})
 	   if $kind eq 'colon_scalar_slot_removed'
 	   && defined($node->{name}) && length($node->{name});
+  return _actionir_ast_retired_hash_literal_fat_arrow_expr()
+   if $kind eq 'hash_literal_fat_arrow_removed';
   return $lower_ast_scalar_assignment_value_node->($node)
    if $kind eq 'assign_scalar' || $kind eq 'assign_array_append' || $kind eq 'assign_hash_index' || $kind eq 'assign_nested_access';
   return $lower_ast_direct_access_node->($node)
@@ -3423,18 +3445,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
     });
    }
    if (!(defined($arg_expr) && length($arg_expr)) && $method eq 'array' && @$args != 1) {
-    my $arg_kind = ref($arg) eq 'HASH' ? ($arg->{kind} // '') : '';
     $arg_expr = $lower_ast_value_node->($arg, { bare_scalar_read => 1 })
-     if $arg_kind eq 'variable'
-     || $arg_kind eq 'assign_scalar'
-     || $arg_kind eq 'assign_array_append'
-     || $arg_kind eq 'assign_hash_index'
-     || $arg_kind eq 'assign_nested_access'
-	     || $arg_kind eq 'colon_scalar_slot_removed'
-	     || $arg_kind eq 'array_literal'
-     || $arg_kind eq 'hash_literal'
-     || $arg_kind eq 'block_value'
-     || $arg_kind eq 'fluent_chain';
+     if ref($arg) eq 'HASH';
    }
    $arg_expr = $ast_expr_source_node->($arg)
     unless defined($arg_expr) && length($arg_expr);
@@ -3451,6 +3463,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $pipeline_reducer = $lower_numeric_array_reducer_source_expr->($method, $pipeline_target);
    return $pipeline_reducer if defined($pipeline_reducer) && length($pipeline_reducer);
   }
+
+  return '['.join(', ', @arg_exprs).']'
+   if $method eq 'array' && @arg_exprs != 1;
 
   return $legacy_method_value_expr->($method.'('.join(', ', @arg_exprs).')')
  };

@@ -2024,10 +2024,10 @@ fn terse_1_2_3_5_3_shape_literals_work_in_mutation_rhs_slots() {
     );
 }
 
-// ── SPEC-FORMAT-TERSE.9.3 — Rust colon hash-literal parity:
-// During the migration window, Rust accepts `{ key : value }` anywhere the old
-// direct `{ key => value }` shape literal was accepted. Blind-call `=>` remains
-// edge syntax and old hash-pair `=>` support is retired separately in `.9.5`.
+// ── SPEC-FORMAT-TERSE.9.3/.9.5 — Rust colon hash-literal parity and retirement:
+// Rust accepts `{ key : value }` anywhere direct hash shape literals are value
+// expressions. Blind-call `=>` remains edge syntax; old hash-pair `=>` source is
+// hard-retired by `.9.5` and must diagnose instead of building a parser.
 
 #[test]
 fn terse_9_3_colon_hash_literals_parse_and_run() {
@@ -2045,6 +2045,24 @@ fn terse_9_3_colon_hash_literals_parse_and_run() {
             "a"
         ]]),
         "colon hash literals compose in Rust value, assignment, mutation, receiver-chain, and block contexts"
+    );
+}
+
+#[test]
+fn terse_9_5_hash_literal_fat_arrow_is_retired() {
+    let grammar = "Top::\n /x/ -> Done { set(old, \"stage\"); set(value, \"ok\"); return({ old => value }) }\n\nDone::\n /[a-z]+/\n";
+    let spec = parse_spec_with_user_functions(grammar).expect("parse");
+    validate(&spec).expect("validate");
+    let err = compile(&spec)
+        .expect_err("old hash-literal fat arrow must fail during ActionIR compile")
+        .to_string();
+    assert!(
+        err.contains("LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon"),
+        "expected colon-migration diagnostic, got: {err}"
+    );
+    assert!(
+        err.contains("retired '=>' hash-literal separator"),
+        "expected retired fat-arrow diagnostic, got: {err}"
     );
 }
 

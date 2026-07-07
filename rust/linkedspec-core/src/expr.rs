@@ -25,7 +25,7 @@
 //! literal     → string | number | boolean | regex | undef | array | hash
 //! grouped     → '(' expr ')'
 //! array       → '[' (expr (',' expr)*)? ']'
-//! hash        → '{' (expr ('=>' | ':') expr (',' expr ('=>' | ':') expr)*)? '}'
+//! hash        → '{' (expr ':' expr (',' expr ':' expr)*)? '}'
 //! block       → '{' stmt+ '}'              (non-empty, no top-level hash-pair separator)
 //! string      → '"' [^"]* '"' | "'" [^']* "'"
 //! number      → -?\d+(\.\d+)?
@@ -1120,9 +1120,15 @@ impl<'a> Parser<'a> {
 
             let key = self.parse_expr()?;
             self.skip_whitespace();
+            if self.remaining().starts_with("=>") {
+                return Err(format!(
+                    "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon: retired '=>' hash-literal separator at position {}; use ':' as in '{{ key : value }}'",
+                    self.pos
+                ));
+            }
             let Some(separator_len) = Self::hash_pair_separator_at(self.remaining()) else {
                 return Err(format!(
-                    "expected '=>' or ':' in hash literal at position {}",
+                    "expected ':' in hash literal at position {}",
                     self.pos
                 ));
             };
@@ -1225,9 +1231,6 @@ impl<'a> Parser<'a> {
     }
 
     fn hash_pair_separator_at(src: &str) -> Option<usize> {
-        if src.starts_with("=>") {
-            return Some(2);
-        }
         if src.starts_with(':') && !src.starts_with("::") {
             return Some(1);
         }
@@ -2181,22 +2184,12 @@ mod tests {
     }
 
     #[test]
-    fn parse_mixed_hash_pair_separators_during_migration_window() {
+    fn parse_retired_hash_literal_fat_arrow_reports_colon_migration() {
         let code = r#"return({ old => value, current : value })"#;
-        let block = CodeBlock::parse(code).unwrap();
-        match &block.statements[0].expr {
-            Expr::Call { args, .. } => match args[0].value() {
-                Expr::HashLiteral { entries } => {
-                    assert_eq!(entries.len(), 2);
-                    assert!(matches!(&entries[0].key, Expr::Variable { name } if name == "old"));
-                    assert!(
-                        matches!(&entries[1].key, Expr::Variable { name } if name == "current")
-                    );
-                }
-                other => panic!("expected HashLiteral, got {:?}", other),
-            },
-            other => panic!("expected return call, got {:?}", other),
-        }
+        let err = CodeBlock::parse(code).expect_err("old hash-literal fat arrow must not parse");
+        assert!(err.contains("LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon"));
+        assert!(err.contains("retired '=>' hash-literal separator"));
+        assert!(err.contains("use ':'"));
     }
 
     #[test]

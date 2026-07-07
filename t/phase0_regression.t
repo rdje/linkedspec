@@ -46001,10 +46001,10 @@ subtest 'spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments' => su
 };
 
 subtest 'spec_format_terse_9_2_perl_colon_hash_literal_support' => sub {
-    # SPEC-FORMAT-TERSE.9.2: Perl accepts the future `{ key : value }`
-    # hash-literal association syntax during the migration window while the old
-    # `{ key => value }` spelling still works until hard retirement.
-    plan tests => 15;
+    # SPEC-FORMAT-TERSE.9.2: Perl accepts the current `{ key : value }`
+    # hash-literal association syntax. Old `{ key => value }` hard retirement
+    # is locked separately by SPEC-FORMAT-TERSE.9.5 below.
+    plan tests => 14;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
     my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
@@ -46026,8 +46026,6 @@ subtest 'spec_format_terse_9_2_perl_colon_hash_literal_support' => sub {
     is($L->('return({ "fixed" : [value], key : { "nested" : value } })'),
         'return {"fixed" => [$value], $key => {"nested" => $value}}',
         'colon hash literal lowers quoted keys and nested shape values');
-    is($L->('return({ old => value, key : value })'), 'return {$old => $value, $key => $value}',
-        'migration-window parser accepts old and colon hash pair separators together');
     is($L->('name = { key : value }'), '$name = {$key => $value}',
         'direct assignment RHS accepts colon hash literals');
     is($L->('meta[key] = { "inner" : value }'), '$meta{$key} = {"inner" => $value}',
@@ -46061,6 +46059,45 @@ subtest 'spec_format_terse_9_2_perl_colon_hash_literal_support' => sub {
         'colon hash-literal spec has no unresolved-helper hits');
     ok($meta->{language_agnostic_action_ir_ready},
         'colon hash-literal spec remains language-agnostic ActionIR ready on the Perl reference');
+};
+
+subtest 'spec_format_terse_9_5_perl_hash_literal_fat_arrow_retired' => sub {
+    # SPEC-FORMAT-TERSE.9.5: old `{ key => value }` hash-literal source is no
+    # longer a compatibility path. It must diagnose, not lower as host Perl.
+    plan tests => 11;
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+
+    my $old = $L->('return({ old => value })');
+    like($old, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon/,
+        'old hash-literal fat arrow emits the colon-association diagnostic');
+    unlike($old, qr/\$old => \$value/,
+        'old hash-literal fat arrow does not lower as a Perl hash pair');
+
+    my $mixed = $L->('return({ old => value, key : value })');
+    like($mixed, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon/,
+        'mixed old/new hash literal is rejected instead of partly accepted');
+    unlike($mixed, qr/\$old => \$value/,
+        'mixed old/new hash literal has no old-pair fallback');
+
+    is($L->('return({ key : value })'), 'return {$key => $value}',
+        'current colon hash literals still lower');
+    is($L->('return({ set(x,"a"); x })'), 'return do { $x = "a"; $x }',
+        'non-pair braces still parse as expression-valued blocks');
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { set(old,\"stage\"); set(value,\"ok\"); return({ old => value }) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    ok(ref($d) eq 'HASH', 'descriptor still builds with the retired hash-literal diagnostic');
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{raw_perl_dependency_count}, 0,
+        'retired hash-literal diagnostic is not raw Perl fallback');
+    is($meta->{unresolved_helper_count}, 1,
+        'retired hash-literal diagnostic is reported as unresolved');
+    is_deeply($meta->{unresolved_helpers}, ['hash_literal_use_colon'],
+        'retired hash-literal diagnostic names the colon migration');
+    ok(!$meta->{language_agnostic_action_ir_ready},
+        'retired hash-literal diagnostic blocks ActionIR readiness');
 };
 
 subtest 'spec_format_terse_1_2_3_5_1_shape_literal_value_expressions' => sub {

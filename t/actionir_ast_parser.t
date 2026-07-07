@@ -78,9 +78,9 @@ subtest 'shape literals and expression-valued blocks' => sub {
     is($colon_hash->{entries}[1]{value}{kind}, 'array_literal', 'colon hash value can be a nested array shape literal');
     is($colon_hash->{entries}[2]{value}{kind}, 'hash_literal', 'colon hash value can be a nested hash shape literal');
 
-    my $mixed_hash = parse_expr('{ old => value, current : value }');
-    is($mixed_hash->{kind}, 'hash_literal', 'migration-window hash literal accepts old and colon pair separators');
-    is_deeply([map { $_->{key}{name} } @{$mixed_hash->{entries}}], ['old', 'current'], 'mixed hash literal preserves pair order');
+    my $retired_hash = parse_expr('{ old => value, current : value }');
+    is($retired_hash->{kind}, 'hash_literal_fat_arrow_removed', 'old hash-literal fat-arrow separator is retired');
+    is($retired_hash->{reason}, 'hash_literal_use_colon', 'retired hash-literal diagnostic points to colon association');
 
     my $double_colon_block = parse_expr('{ JSON::PP }');
     is($double_colon_block->{kind}, 'block_value', 'double-colon payload does not trigger colon hash parsing');
@@ -593,6 +593,17 @@ subtest 'assignment expression lowering consumes AST nodes' => sub {
         LinkedSpec::call_spec_handler_subst('Top', q{return(set(:payload, [value]))}),
         q{return do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read"; undef }},
         'retired colon scalar target reports the bare-read migration diagnostic'
+    );
+    my $retired_hash_literal = LinkedSpec::call_spec_handler_subst('Top', q{return({ old => value })});
+    like(
+        $retired_hash_literal,
+        qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon/,
+        'old hash-literal fat arrow reports the colon-association diagnostic'
+    );
+    unlike(
+        $retired_hash_literal,
+        qr/\$old => \$value/,
+        'old hash-literal fat arrow does not lower as a Perl hash pair'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(items += value)}),

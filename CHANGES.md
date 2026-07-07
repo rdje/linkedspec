@@ -1,6 +1,32 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — SPEC-FORMAT-TERSE.9.5 — retire hash literal fat arrows
+
+**Scope:** Perl and Rust hard retirement of old ActionIR hash-literal `{ key => value }` syntax.
+
+**Change:** Direct ActionIR hash literals now use `{ key : value }` only. Perl marks top-level `=>` hash-literal
+payloads as retired and lowers them to `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon` instead of
+building a current `hash_literal` AST or falling through to raw/source fallback. Rust rejects `=>` in direct
+hash-literal parsing with the same colon-migration diagnostic, and the Rust compiler now makes unsupported
+ActionIR-helper parse diagnostics fatal so retired action code cannot be silently compiled as `code: None`.
+
+**Boundary:** Blind-call edge `=> Rule` remains valid rule-body syntax. VHDL/source-language associations,
+generated Perl host hashrefs, Perl metadata hashes, and historical records remain separate owners; this slice only
+retires source-spelled ActionIR hash-literal association.
+
+**Fix exposed by hard retirement:** Multi-argument AST `array(...)` lowering was re-feeding already-lowered Perl
+host hashrefs like `{$key => $value}` through the source-level helper parser. Once old source `=>` became fatal,
+that second parse misdiagnosed valid colon hash-literal arguments. The AST aggregate-call path now emits
+multi-argument array constructors directly from already-lowered arguments and lowers call arguments such as
+`hash(meta)` before direct emission.
+
+**Validation:** Focused Perl syntax and AST tests pass, direct Perl lowering probes show retired `=>` diagnostics
+with valid colon hash literals still lowering, focused Rust parser/compiler/runtime filters pass for both colon
+success and retired fat-arrow rejection, and full `prove -q -Iperl t/phase0_regression.t` passes with plan
+`1..1024`. mdBook, Knowledge Map, memory/doctrine checks, diff check, Rust formatting, and
+`bash tools/run_ci_local.sh` pass. Frontier becomes `.9.6` for final no-drift scans.
+
 ## 2026-07-07 — SPEC-FORMAT-TERSE.9.4 — migrate hash literals to colon
 
 **Scope:** Current source, generated oracle inputs, active tests, mdBook examples, root docs, and Knowledge facts

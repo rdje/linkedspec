@@ -7,8 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **SPEC-FORMAT-TERSE.9.5 — retire hash literal fat arrows**
+  (DONE; FRONTIER `.9.6` FINAL HASH-LITERAL COLON NO-DRIFT CLOSEOUT NEXT).
+
+  **Change:** Old `{ key => value }` no longer succeeds as current ActionIR hash-literal syntax. Perl routes
+  retired direct hash-literal fat arrows to `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon`, valid
+  colon hash literals still lower, and Rust rejects the retired form during ActionIR parsing/compilation instead
+  of accepting a rule with dropped action code. Perl multi-argument `array(...)` AST lowering now emits the
+  already-lowered constructor directly, so generated Perl host hashrefs are not reparsed as retired source fat
+  arrows.
+
+  **Boundary:** Blind-call edge `=> Rule` remains valid. Generated Perl host hashrefs, Perl metadata hashes,
+  VHDL/source-language associations, and historical notes remain separate `=>` owners.
+
+  **Verification:** Focused Perl AST/lowering checks, focused Rust parser/compiler/runtime checks, full phase0
+  `1..1024`, mdBook, Knowledge Map, memory, doctrine, Rust format, diff, and local CI gates pass.
+
 - 2026-07-07: **SPEC-FORMAT-TERSE.9.4 — migrate hash literals to colon**
-  (DONE; FRONTIER `.9.5` HARD-RETIRE OLD HASH-LITERAL `=>` NEXT).
+  (DONE; superseded by `.9.5` hard retirement; current frontier `.9.6`).
 
   **Change:** Current-facing specs, checked-in corpus specs, generated Rust oracle inputs, active Perl/Rust tests,
   mdBook examples, root docs, and Knowledge facts now prefer `{ key : value }` for direct hash-literal
@@ -16,8 +32,8 @@ Current execution status for interruption-safe batch workflow recovery.
   flat-array pairs.
 
   **Boundary:** Blind-call edge `=>`, VHDL/source-language associations, generated Perl host hashrefs, Perl
-  metadata hashes, historical records, and explicit migration-window compatibility locks remain intentionally
-  classified. Old hash-literal `=>` is still accepted until `.9.5`.
+  metadata hashes, historical records, and explicit migration-window compatibility locks remained intentionally
+  classified at this leaf. Old hash-literal `=>` acceptance was removed by `.9.5`.
 
   **Verification:** Oracle generation over **93** fixtures, focused Perl/Rust checks, full phase0 `1..1023`,
   Rust oracle corpus, mdBook, Knowledge Map, memory, whitespace, doctrine gates, and `tools/run_ci_local.sh` pass.
@@ -30,9 +46,9 @@ Current execution status for interruption-safe batch workflow recovery.
   shapes, direct assignment RHS values, hash-index mutation RHS values, expression-valued `set(...)` / `=(...)`,
   array composition, direct hash receiver chains, and block-vs-hash precedence.
 
-  **Boundary:** Old hash-literal `{ key => value }` remains accepted only until `.9.5`; blind-call edge `=> Rule`
-  remains separate rule-body syntax. Existing specs/corpus/docs are not broadly migrated in this slice; `.9.4`
-  owns that source-facing sweep.
+  **Boundary:** At this migration-window leaf, old hash-literal `{ key => value }` remained accepted only until
+  `.9.5`; blind-call edge `=> Rule` remained separate rule-body syntax. `.9.5` has since retired the old
+  hash-literal spelling.
 
   **Verification:** Rust formatting passes; focused Rust parser and runtime integration tests pass. Knowledge Map,
   mdBook, memory, whitespace, and doctrine gates pass in commit closeout.
@@ -43,7 +59,8 @@ Current execution status for interruption-safe batch workflow recovery.
   **Change:** The Perl reference ActionIR AST parser now accepts `{ key : value }` as hash-literal association
   syntax during the migration window. Colon pairs work for bare and quoted keys, nested array/hash shapes, direct
   assignment RHS values, hash-index mutation RHS values, expression-valued `set(...)` / `=(...)`, and array shape
-  composition. The old `{ key => value }` spelling remains accepted only until the hard-retirement leaf.
+  composition. The old `{ key => value }` spelling remained accepted only until the hard-retirement leaf, which is
+  now done.
 
   **Boundary:** Blind-call edge `=> Rule` syntax is untouched. Generated Perl host code still legitimately emits
   Perl fat arrows inside hashrefs, and double-colon payloads such as `{ JSON::PP }` still parse as block values

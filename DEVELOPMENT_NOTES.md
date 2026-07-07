@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (SPEC-FORMAT-TERSE.9.5 — retired hash-literal `=>` must be fatal, not fallback):
+  Source-spelled ActionIR hash literals now use `:` only. A top-level `=>` inside a direct hash literal must route
+  to `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon`; it must not rebuild a current hash literal,
+  become an expression-valued block, or compile away as an empty action. Perl AST/source reconstruction should
+  serialize current hash literals with `:`; generated Perl host hashrefs may still use Perl `=>` after lowering.
+  Rust scanners may still detect top-level `=>` only to classify the retired syntax and emit the diagnostic; the
+  compiler must treat unsupported-ActionIR-helper parser diagnostics as fatal so rejected action code cannot fall
+  through to `code: None`. Blind-call `=> Rule` remains rule-body syntax, not ActionIR hash-literal syntax.
+  Do not feed already-lowered Perl host snippets back through the source parser: multi-argument AST `array(...)`
+  constructors must emit `[...]` directly from lowered args, because a valid lowered hashref like
+  `{$key => $value}` contains Perl host `=>` even though the source DSL form was `{ key : value }`.
+
 - 2026-07-07 (SPEC-FORMAT-TERSE.9.4 — current source now prefers colon hash pairs):
   Current `.spec` authoring examples, generated oracle inputs, tests, mdBook examples, and current Knowledge facts
   should use `{ key : value }` for direct hash-literal association. Do not globally replace `=>`: blind-call edges,

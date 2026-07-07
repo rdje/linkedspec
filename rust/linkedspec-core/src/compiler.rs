@@ -245,6 +245,27 @@ fn compile_function(function: &crate::ast::FunctionDefinition) -> Result<Compile
     })
 }
 
+fn parse_rule_code_block(
+    rule_label: &str,
+    code_kind: &str,
+    code: &str,
+) -> Result<Option<CodeBlock>> {
+    match CodeBlock::parse(code) {
+        Ok(block) => Ok(Some(block)),
+        Err(err) if is_unsupported_actionir_helper_error(&err) => Err(LinkedSpecError::Compile(
+            format!("rule '{rule_label}': failed to parse {code_kind} code: {err}"),
+        )),
+        Err(err) => {
+            eprintln!("warning: rule '{rule_label}': failed to parse {code_kind} code: {err}");
+            Ok(None)
+        }
+    }
+}
+
+fn is_unsupported_actionir_helper_error(error: &str) -> bool {
+    error.contains("LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:")
+}
+
 fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
     let mut regex_patterns: Vec<String> = Vec::new();
     let mut acode_dispatch: Vec<AcodeEntry> = Vec::new();
@@ -287,18 +308,11 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                     0 // placeholder; post-processing fixes edge-only entries
                 };
 
-                let parsed_code = code.as_ref().and_then(|c| {
-                    CodeBlock::parse(c)
-                        .map_err(|e| {
-                            // Log the parse failure but don't crash — the
-                            // validation layer should catch these earlier.
-                            eprintln!(
-                                "warning: rule '{}': failed to parse action code: {e}",
-                                rule.header.label
-                            );
-                        })
-                        .ok()
-                });
+                let parsed_code = code
+                    .as_deref()
+                    .map(|c| parse_rule_code_block(&rule.header.label, "action", c))
+                    .transpose()?
+                    .flatten();
                 let fluent: Vec<(String, String)> = fluent_chain
                     .iter()
                     .map(|fc| (fc.method.clone(), fc.args.clone()))
@@ -325,16 +339,11 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                 fluent_chain,
             } => {
                 last_regex_line = None;
-                let parsed_code = code.as_ref().and_then(|c| {
-                    CodeBlock::parse(c)
-                        .map_err(|e| {
-                            eprintln!(
-                                "warning: rule '{}': failed to parse blind-call code: {e}",
-                                rule.header.label
-                            );
-                        })
-                        .ok()
-                });
+                let parsed_code = code
+                    .as_deref()
+                    .map(|c| parse_rule_code_block(&rule.header.label, "blind-call", c))
+                    .transpose()?
+                    .flatten();
 
                 // Preserve fluent chain as structured data (method_name, args_string).
                 let fluent: Vec<(String, String)> = fluent_chain
@@ -351,14 +360,11 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
 
             BodyElementKind::CodeBlock { lifecycle, code } => {
                 last_regex_line = None;
-                let parsed = CodeBlock::parse(code)
-                    .map_err(|e| {
-                        eprintln!(
-                            "warning: rule '{}': failed to parse {} -block code: {e}",
-                            rule.header.label, lifecycle
-                        );
-                    })
-                    .ok();
+                let parsed = parse_rule_code_block(
+                    &rule.header.label,
+                    &format!("{lifecycle} -block"),
+                    code,
+                )?;
                 if let Some(block) = parsed {
                     match lifecycle.as_str() {
                         "I" => preamble = Some(block),
@@ -678,6 +684,16 @@ mod tests {
         );
         let err = compile(&spec).unwrap_err().to_string();
         assert!(err.contains("function 'bad': failed to parse body code"));
+    }
+
+    #[test]
+    fn compile_action_edge_retired_hash_literal_fat_arrow_is_compile_error() {
+        let src = "Top::\n /x/ -> Done { return({ old => value }) }\n\nDone:\n /done/\n";
+        let spec = parse_spec(src).unwrap();
+        let err = compile(&spec).unwrap_err().to_string();
+        assert!(err.contains("rule 'Top': failed to parse action code"));
+        assert!(err.contains("LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon"));
+        assert!(err.contains("use ':' as in '{ key : value }'"));
     }
 
     // ── Action edge → regex association tests ──

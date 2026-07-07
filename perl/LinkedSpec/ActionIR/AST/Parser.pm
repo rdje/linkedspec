@@ -591,6 +591,19 @@ sub _parse_hash_literal_expr {
    unless ref($separator) eq 'HASH';
   my $separator_idx = $separator->{idx};
   my $separator_len = $separator->{length};
+  if (($separator->{token} // '') eq '=>') {
+   my $separator_start = $start + 1 + $entry_offset + $separator_idx;
+   return _node(
+    'hash_literal_fat_arrow_removed',
+    $trimmed,
+    $start,
+    $end,
+    reason => 'hash_literal_use_colon',
+    separator => '=>',
+    replacement_separator => ':',
+    separator_source_span => _span($separator_start, $separator_start + $separator_len),
+   )
+  }
   my $key_text = substr($entry, 0, $separator_idx);
   my $value_text = substr($entry, $separator_idx + $separator_len);
   my ($key_trimmed, $key_start) = _trim_with_offsets($key_text, $start + 1 + $entry_offset);
