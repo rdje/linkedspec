@@ -242,6 +242,12 @@ replaces the old scoped `declare(array, items)` boundary. Oracle regeneration al
 reconstruction to preserve `source_method` for current helper spellings. Full Rust core/runtime package tests and
 full phase0 **1022** pass. Active frontier is now `.8.5` / `.8.6` cleanup.
 
+Index note 2026-07-07: `SPEC-FORMAT-TERSE.8.5` reconciled current-facing docs, root guide framing, Rust README,
+Knowledge facts, and live task records after Perl/Rust helper hard retirement. Current guidance teaches
+auto-existing variables, assignments, `set(...)`, `push(...)`, `copy(...)`, `cat(...)`, `array(...)`, `hash(...)`,
+and bare scalar reads; old helper names are retained only as historical or retired-diagnostic material. Knowledge
+Map and mdBook checks pass. Active frontier is now `.8.6` final helper-retirement no-drift closeout before `.9`.
+
 Index note 2026-07-02: `SPEC-FORMAT-TERSE.3.3.4` is now done. Scalar, direct-shape aggregate, array append, hash-index mutation, operator-call, canonical `set(...)`, and legacy `assign(...)` assignment expressions are shipped on Perl/Rust; corpus is **62 fixtures**, phase0 is **1015 green**. The later `.6` shipped-spec terse migration lane reactivated concrete `SPEC-FORMAT-TERSE` frontier leaves.
 
 Index note 2026-07-04: `SPEC-FORMAT-TERSE.6.2.4` is now done. All 21 shipped `specs/*.spec` files compile from
@@ -258,11 +264,11 @@ incidental; residual old spellings are compatibility/reference-only. Root corpus
 remains **73 fixtures** with no expected-output drift, Rust `corpus_oracle` passes, and mdBook builds. Frontier
 advances to `.6.4` for the post-migration compatibility-support policy.
 
-Index note 2026-07-04: `SPEC-FORMAT-TERSE.6.4` is now done. Declaration helpers remain accepted legacy
-compatibility for existing specs, but new shipped specs, public examples, and current corpus examples use terse
-auto-existing variables and assignment/mutation forms. ADR `0018`, mdBook policy notes, and Knowledge Map coverage
-record the decision; future removal or diagnostics require a separate focused leaf. Declaration-retirement `.6`
-is closed. Frontier advances to `.7.1` for the supported-type method audit.
+Index note 2026-07-04: `SPEC-FORMAT-TERSE.6.4` is now done. At this historical leaf, declaration helpers were kept as
+legacy compatibility for existing specs while new shipped specs, public examples, and current corpus examples used
+terse auto-existing variables and assignment/mutation forms. `SPEC-FORMAT-TERSE.8` later superseded this retention
+policy and hard-retired the helpers. Declaration-retirement `.6` is closed. Frontier advances to `.7.1` for the
+supported-type method audit.
 
 Index note 2026-07-04: `SPEC-FORMAT-TERSE.7.1` is now done. The supported receiver/value families are
 inventoried before code: string/scalar, array/list, hash, and number have existing receiver method tables;

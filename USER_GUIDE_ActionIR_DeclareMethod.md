@@ -1,6 +1,12 @@
 # USER GUIDE - ActionIR `DeclareMethod.pm`
 This guide covers the declaration surface lowered by `perl/LinkedSpec/ActionIR/DeclareMethod.pm`.
 
+Post-`SPEC-FORMAT-TERSE.8.3` / `.8.4` status:
+- this file is historical lowering archaeology for the retired declaration helper family,
+- `declare(...)`, `declare_a(...)`, `declare_s(...)`, `declare_h(...)`, and the long declaration aliases now diagnose on current Perl/Rust authoring paths,
+- new `.spec` files use auto-existing working variables plus explicit initializers such as `name = undef`, `set(array(items), [])`, and `set(hash(by_name), {})`,
+- old examples below remain useful only for understanding past migrations and emitted-code history.
+
 The declaration surface is where you define working state inside action/lifecycle code without dropping back to raw Perl declarations.
 For exact DSL-to-Perl examples for every declaration form and alias discussed here, read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) alongside this guide.
 
@@ -19,7 +25,7 @@ my $retv;
 my %by_name;
 ```
 
-with canonical helper forms:
+with the historical declaration helper forms:
 
 ```text
 declare(array, items)
@@ -27,7 +33,7 @@ declare(scalar, retv)
 declare(hash, by_name)
 ```
 
-That seems small, but it matters because `declare(...)` becomes a typed ActionIR node instead of an opaque raw statement.
+That used to matter because `declare(...)` became a typed ActionIR node instead of an opaque raw statement. Current terse authoring keeps the typed boundary through auto-existing variables and explicit assignment/reset forms instead.
 
 ## Canonical syntax
 ### Typed declaration form

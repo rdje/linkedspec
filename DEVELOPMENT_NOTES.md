@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (SPEC-FORMAT-TERSE.8.5 — post-retirement docs must not teach old spellings):
+  After `.8.3`/`.8.4`, root guides and Knowledge cards may keep old helper names only as historical lowering
+  evidence or retired-diagnostic guidance. Current-facing examples should use auto-existing variables, bare scalar
+  reads, direct assignment/mutation, `set(...)`, `push(...)`, `copy(...)`, `cat(...)`, `array(...)`, and `hash(...)`.
+  When an older policy record such as `.6.4` remains in a task/history file, explicitly mark it as superseded by
+  `.8` hard retirement so it is not mistaken for live compatibility.
+
 - 2026-07-07 (SPEC-FORMAT-TERSE.8.4 — retired helper diagnostics must stay explicit on Rust):
   Rust validation may still recognize retired helper names only to let the runtime return
   `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>`; it must not dispatch them successfully. Current aggregate reset

@@ -1,6 +1,11 @@
 # USER GUIDE - ActionIR `ControlFlow.pm`
 This guide covers the statement-level control-flow lowering implemented by `perl/LinkedSpec/ActionIR/ControlFlow.pm`.
 
+Post-`SPEC-FORMAT-TERSE.8.3` / `.8.4` status:
+- control-flow syntax remains current, but this root guide still contains older helper spellings inside branch bodies,
+- read `assign(...)`, `array_copy(...)`, `hash_copy(...)`, `push_value(...)`, `push_nonempty(...)`, `concat(...)`, scalar-slot wrappers, and short wrapper aliases here as historical unless a section explicitly marks current guidance,
+- current branch-body examples use `target = value`, `set(...)`, `push(...)`, `copy(...)`, `cat(...)`, aggregate wrappers, and bare scalar reads.
+
 Read this when you want canonical `if/else` flow, switch/case branching, and helper-based output statements inside those branches.
 For exact DSL-to-Perl examples for every control-flow marker and emitted branch shape discussed here, also read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md).
 
@@ -129,8 +134,8 @@ endif()
 
 ```text
 if(is_nonempty(array(word)))
-  push_value(array(tail), join_values("", array(word)));
-  assign(array(word), array());
+  push(array(tail), join_values("", array(word)));
+  set(array(word), []);
 endif()
 ```
 

@@ -17,6 +17,7 @@ date: 2026-06-24
 status: confirmed
 tags: [rust, runtime, variables, declare, spec-format-terse, SPEC-FORMAT-TERSE, RUST-PARITY, cross-variant-parity]
 evidence: "SPEC-FORMAT-TERSE.1.1.2 (2026-06-24). rust/linkedspec-runtime/src/runtime.rs: RuntimeContext holds scalars/arrays/hashes HashMaps; set_scalar = scalars.insert (unconditional), push_value = arrays.entry().or_default().push, set_hash_entry = hashes.entry().or_default; get_scalar/get_array/get_hash return Undef/empty when absent; declare_scalar/declare_array/declare_hash just pre-seed an entry (declare_scalar_with seeds an =init value). rust/linkedspec-runtime/src/engine.rs Engine::execute = `let mut ctx = RuntimeContext::new(input)` per call (fresh store per parse). Throwaway Rust + `perl -Iperl` LinkedSpec::Get probes on the same divergence-free edge-action grammars: scalar no-declare Perl \"ok\"/Rust [\"ok\"]; array no-declare Perl [\"a\",\"b\"]/Rust [[\"a\",\"b\"]]; declare twins identical; array(undef) Perl [null]/Rust [[null]] (Rust = Perl reference wrapped one level, the .7.1 output-shape rule). Locked: 5 oracle fixtures autoexist_* (tools/gen_oracle_corpus.pl) + 4 terse_1_1_2_* integration tests. cargo 244->248 green; 7/7 oracle fixtures PASS; clippy zero-new; phase0 968 green (Perl untouched). The recursive/REP auto-exist idiom the Perl phase0 locks use (top:: ... -> top[0]; Top::*) returns [null]/[[]] on Rust = the separately-owned RUST-PARITY recursive-grammar/REP-lifecycle gap, NOT auto-existence."
+evidence_update_2026_07_07: "SPEC-FORMAT-TERSE.8.4 retired Rust `declare(...)` successful execution after explicit aggregate reset targets such as `set(array(items), [])` gained the recursive rule-local binding behavior needed to replace scoped declarations. `declare(...)` now emits `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare`; the auto-vivify/fresh-per-parse facts remain current."
 reverify: "cd rust && cargo test --manifest-path Cargo.toml --test corpus_oracle -- --nocapture 2>&1 | grep autoexist; grep -n 'fn set_scalar\\|fn get_scalar\\|fn push_value\\|or_default' linkedspec-runtime/src/runtime.rs; grep -n 'RuntimeContext::new' linkedspec-runtime/src/engine.rs"
 ---
 
@@ -42,10 +43,9 @@ live in three `HashMap`s on `RuntimeContext` (`rust/linkedspec-runtime/src/runti
   `hashes.entry(name).or_default()`.
 - **reads are total** — `get_scalar`/`get_array`/`get_hash` return `Undef`/empty when the
   name is absent (no error).
-- **`declare(...)` just pre-seeds an entry** (`declare_scalar`/`declare_array`/
+- **Historically, `declare(...)` pre-seeded an entry** (`declare_scalar`/`declare_array`/
   `declare_hash`); `declare(scalar, x=expr)` seeds an initializer via
-  `declare_scalar_with`. So `declare` stays meaningful only for its `=init` form;
-  omitting it is identical for plain use.
+  `declare_scalar_with`. Current Rust no longer executes source-spelled `declare(...)`; it diagnoses it as retired.
 
 So a `.spec` working variable referenced via `scalar(NAME)`/`array(NAME)`/`hash(NAME)`
 **already auto-exists** with no `declare`. And `Engine::execute` builds a **fresh
@@ -84,12 +84,9 @@ recursive-grammar / REP-lifecycle gap** (the same general value-parity gap as
 equivalents are at full parity.
 
 `TOP-RULE-AS-NORMAL.3.2` later fixed recursive value parity for declared working
-variables, but not for undeclared recursive accumulator isolation. As of
-2026-07-06, replacing `declare(array, items)` with `set(array(items), [])` in the
-Rust recursive `sexpr` tests still leaks/overwrites recursive frame state. The
-durable rule is: Rust working variables auto-vivify and are fresh per parse; an
-explicit `declare(...)` is still the compatibility mechanism that creates
-rule-invocation snapshot/restore for recursive accumulators.
+variables. `SPEC-FORMAT-TERSE.8.4` then closed the replacement gap: `set(array(items), [])`
+now records the same rule-local aggregate binding before mutation, so current Rust no
+longer needs `declare(...)` as the recursive accumulator isolation mechanism.
 
 ## Links
 

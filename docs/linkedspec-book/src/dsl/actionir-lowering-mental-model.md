@@ -87,7 +87,7 @@ Start with the core families:
 
 - `set(...)` for writing values
 - `return(...)` for returning payloads
-- `...`, `array(...)`, `hash(...)` for value construction
+- bare scalar reads plus `array(...)` / `hash(...)` for value construction
 - `entry_*` and `match_*` readers for match data
 - `capture_*` and `mark_*` helpers for parser boundary work
 - `if(...)` and `switch` helpers for structured control flow
@@ -146,7 +146,7 @@ trace work is cross-variant parity rather than another known opaque ActionIR own
 Each contract family has a dedicated lowering owner:
 
 - `FlowExpr` — flow-expression helpers (method chains, fluent continuations)
-- `ValueExpr` — value construction (`...`, `array(...)`, `hash(...)`)
+- `ValueExpr` — value construction (bare scalar reads, `array(...)`, `hash(...)`)
 - `ControlFlow` — structured control flow (`if/elseif/else/endif`, `switch/case/default/endswitch`)
 - `MethodLowering` — method-like helper lowering to Perl code
 - `DeclareMethod` — legacy declaration helpers (`declare(...)`, `declare_s(...)`, `declare_a(...)`, `declare_h(...)`)

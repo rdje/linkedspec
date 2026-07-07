@@ -13,8 +13,9 @@ answers:
 date: 2026-07-01
 status: current
 tags: [spec-format-terse, wrappers, variables, array, hash, mdbook, rust-parity]
-evidence: "SPEC-FORMAT-TERSE.2.3.5.6 locks the corrected aggregate typed-wrapper boundary on the Perl reference and Rust runtime. `array(foo)` and `hash(bar)` are explicit typed working-variable reads when the argument is a bare name token. Quoted strings are not aliases for those reads and are not scalar-indirect lookup: `array(\"foo\")` is a literal array payload, while hash constructors use quoted keys in key/value forms such as `hash(\"foo\", value)`. The user-facing terse constructor forms are direct shape literals (`[value]`, `{ \"key\" => value }`, `[]`, `{}`). Short aliases `a(...)` / `h(...)` remain legacy compatibility only and are not current authored examples."
-reverify: "perl -Iperl -MLinkedSpec -e 'for my $expr (q{return(count(array(foo)))}, q{return(count(array(\"foo\")))}, q{return(count(array('\\''foo'\\'')))}, q{return(count_keys(hash(bar)))}, q{return(count_keys(hash(\"bar\", 1)))}, q{return(count_keys(hash('\\''bar'\\'', 1)))}, q{return(count([\"foo\"]))}, q{return(count_keys({ \"bar\" => 1 }))}) { print \"$expr => \", LinkedSpec::call_spec_handler_subst(\"Top\", $expr), \"\\n\" }' && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml terse_2_3_5_6 --quiet"
+evidence: "SPEC-FORMAT-TERSE.2.3.5.6 locks the corrected aggregate typed-wrapper boundary on the Perl reference and Rust runtime. `array(foo)` and `hash(bar)` are explicit typed working-variable reads when the argument is a bare name token. Quoted strings are not aliases for those reads and are not scalar-indirect lookup: `array(\"foo\")` is a literal array payload, while hash constructors use quoted keys in key/value forms such as `hash(\"foo\", value)`. The user-facing terse constructor forms are direct shape literals (`[value]`, `{ \"key\" => value }`, `[]`, `{}`)."
+evidence_update_2026_07_07: "SPEC-FORMAT-TERSE.8.4 retired Rust successful execution of short wrapper aliases `a(...)` / `h(...)`; Perl already diagnosed short wrapper aliases. Current authored examples use `array(...)`, `hash(...)`, direct shape literals, and bare scalar reads."
+reverify: "perl -Iperl -MLinkedSpec -e 'for my $expr (q{return(count(array(foo)))}, q{return(count(array(\"foo\")))}, q{return(count(array('\\''foo'\\'')))}, q{return(count_keys(hash(bar)))}, q{return(count_keys(hash(\"bar\", 1)))}, q{return(count_keys(hash('\\''bar'\\'', 1)))}, q{return(count([\"foo\"]))}, q{return(count_keys({ \"bar\" => 1 }))}) { print \"$expr => \", LinkedSpec::call_spec_handler_subst(\"Top\", $expr), \"\\n\" }' && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_3_5_6 --quiet && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime helpers_5_1_retired_terse_8_4_spellings_diagnose --quiet"
 ---
 
 # Typed Wrapper Quoted-Name Boundaries
@@ -52,6 +53,9 @@ The preferred terse constructor surface is direct shape syntax:
 []
 {}
 ```
+
+Short aliases `a(...)` and `h(...)` are retired diagnostics on current runtimes, not compatibility spellings for
+new or maintained specs.
 
 ## Links
 

@@ -108,9 +108,9 @@ The same ActionIR boundary is where the Perl reference is moving from source-tex
 rewrites to typed helper/action AST consumption. `LinkedSpec::ActionIR::AST` is the
 parser seam. `MethodLowering::_lower_method_value_expr(...)` now consumes that seam for
 non-call value nodes, value-only helper-call composition, and aggregate/helper families
-with slot-sensitive policy. Canonical wrappers `...`,
-`array(...)`, and `hash(...)` now enter through AST `call` nodes together with
-`copy`/`array_copy`/`hash_copy`, collection helpers, numeric reducers over aggregate
+with slot-sensitive policy. Bare scalar reads plus canonical aggregate wrappers
+`array(...)` and `hash(...)` now enter through AST nodes together with
+current `copy(...)`, collection helpers, numeric reducers over aggregate
 operands, and hash helpers; their AST bridge preserves aggregate symbol slots and quoted
 wrapper literal payloads before reusing the Perl helper catalog. Unsupported covered
 helper forms now report unresolved-helper metadata instead of leaking as generated

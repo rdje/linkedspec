@@ -2,6 +2,11 @@
 This guide covers the helper-contract and compatibility surfaces cataloged by `perl/LinkedSpec/ActionIR/Contracts.pm`.
 For exact DSL-to-Perl examples for every compatibility helper, wrapper, capture/backtrack form, and classified pass-through idiom, also read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md).
 
+Post-`SPEC-FORMAT-TERSE.8.3` / `.8.4` status:
+- this guide is a compatibility/contract catalog, so it intentionally names retired helpers,
+- new `.spec` authoring should use current spellings from the mdBook and root `USER_GUIDE.md`,
+- retired helpers named here are historical or diagnostic context, not recommendations for new examples.
+
 This is where many legacy helpers and compatibility-preserving wrappers are normalized into canonical lowering behavior.
 
 ## Why this guide matters
@@ -10,7 +15,7 @@ Not every user-facing construct looks like a modern method DSL call. LinkedSpec 
 - they are part of the migration path,
 - you will encounter them while reading older rules.
 
-For new backend-neutral authoring, many of these are still valid, but some are better treated as compatibility forms rather than defaults.
+After helper hard-retirement, `declare(...)`, `assign(...)`, `array_copy(...)`, `hash_copy(...)`, source-spelled `concat(...)`, `push_value(...)`, `push_nonempty(...)`, and short wrapper aliases are retired from current authoring.
 
 ## Canonical container wrappers
 The core container/value wrappers are:
@@ -23,8 +28,8 @@ These are LinkedSpec DSL spellings. They do not introduce Perl-style sigil synta
 Examples:
 
 ```text
-assign(scalar(name), entry_text())
-assign(array(parts), array("A", "B"))
+name = entry_text()
+set(array(parts), ["A", "B"])
 return(hash("kind", entry_named(kind), "count", count(array(parts))))
 ```
 
@@ -49,11 +54,11 @@ my $retv = call(child)
 push @items, call(child)
 ```
 
-These forms are recognized for compatibility. However, in new helper-centric code, prefer:
+These forms are recognized for compatibility. However, in current helper-centric code, prefer:
 
 ```text
-assign(scalar(retv), call(child))
-push_value(array(items), scalar(retv))
+retv = call(child)
+push(array(items), retv)
 ```
 
 ## `push(rule)` and push variants
@@ -82,7 +87,7 @@ push(Top, child, items)
 This is mainly useful as an emitted/internal compatibility shape for method-chain lowering.
 
 ## Return helper family
-`return(payload)` is the canonical return surface for new DSL authoring. It makes the returned value explicit and lets nested value helpers lower normally inside that payload: `array(...)`, `hash(...)`, `array_copy(...)`, `flat_array(...)`, `entry_group(...)`, `entry_groups()`, `match_group(...)`, and the scalar/container helper family all stay visible to the reader.
+`return(payload)` is the canonical return surface for new DSL authoring. It makes the returned value explicit and lets nested value helpers lower normally inside that payload: `array(...)`, `hash(...)`, `copy(...)`, `flat_array(...)`, `entry_group(...)`, `entry_groups()`, `match_group(...)`, aggregate wrappers, and bare scalar reads all stay visible to the reader.
 
 The older tagged return helpers below remain recognized because historical specs use them, but they should be read as compatibility shortcuts rather than the spelling to teach in new code. Their most important hidden convention is that the label also implies the rule-local accumulator array of the same name.
 
@@ -93,7 +98,7 @@ Preferred replacement shapes:
 return_a(Top)
 
 # Modern:
-return(array("?Top:", array_copy(array(Top))))
+return(array("?Top:", copy(array(Top))))
 
 # Historical:
 return_m(Top)
@@ -105,13 +110,13 @@ return(array("?Top:", flat_array(entry_groups())))
 return_ma(Top)
 
 # Modern:
-return(array("?Top:", flat_array(entry_groups()), array_copy(array(Top))))
+return(array("?Top:", flat_array(entry_groups()), copy(array(Top))))
 
 # Historical:
 return_im(group_open)
 
 # Modern:
-return(array("group_open", scalar(IMATCH)))
+return(array("group_open", IMATCH))
 ```
 
 ### `return_a(label[, arg])`
@@ -127,8 +132,8 @@ return_a(Top, scalar(name))
 Prefer an explicit payload when writing new code:
 
 ```text
-return(array("?Top:", array_copy(array(Top))))
-return(array("?Top:", scalar(name), array_copy(array(Top))))
+return(array("?Top:", copy(array(Top))))
+return(array("?Top:", name, copy(array(Top))))
 ```
 
 ### `return_m(label)`

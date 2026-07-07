@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **SPEC-FORMAT-TERSE.8.5 — reconcile helper retirement docs**
+  (DONE; FRONTIER `.8.6` FINAL HELPER-RETIREMENT NO-DRIFT CLOSEOUT NEXT).
+
+  **Change:** Current-facing docs, root guides, Rust README, and Knowledge cards now agree on the post-retirement
+  helper surface: auto-existing variables, direct assignment/mutation, `set(...)`, `push(...)`, `copy(...)`,
+  `cat(...)`, `array(...)`, `hash(...)`, and bare scalar reads. Old helper names are kept only as historical
+  lowering evidence or retired-diagnostic guidance.
+
+  **Boundary:** No parser/runtime behavior changed. Historical `.6.4` compatibility policy records remain as dated
+  history, but visible summaries now say `.8` superseded that policy with hard retirement.
+
+  **Verification:** Knowledge Map regenerated and checked; mdBook builds; `git diff --check` passes. Commit closeout
+  runs memory/doctrine gates.
+
 - 2026-07-07: **SPEC-FORMAT-TERSE.8.4 — hard-retire Rust legacy helpers**
   (DONE; FRONTIER `.8.5`/`.8.6` HELPER-RETIREMENT CLEANUP NEXT).
 
@@ -1172,13 +1186,13 @@ Current execution status for interruption-safe batch workflow recovery.
 
 - 2026-07-04: **SPEC-FORMAT-TERSE.6.4 — lock declare compatibility policy**
   (DECLARATION RETIREMENT CLOSED; LEGACY COMPATIBILITY POLICY RECORDED).
-  Declaration helpers remain accepted compatibility syntax for existing specs, but they are no longer current
-  authoring syntax.
+  At this historical leaf, declaration helpers were kept as compatibility syntax for existing specs, but they were
+  no longer current authoring syntax. `SPEC-FORMAT-TERSE.8` later superseded that retention policy and hard-retired
+  the helpers.
 
   **Fix:** ADR `0018`, the mdBook declaration reference, helper catalog, project status page, Knowledge Map, task
-  tree, and roadmap now state the same policy: new shipped specs, public examples, and current corpus examples use
-  auto-existing variables plus terse assignment/mutation forms, while future declaration removal or diagnostics
-  require a separate focused leaf.
+  tree, and roadmap stated the same policy for that slice: new shipped specs, public examples, and current corpus
+  examples used auto-existing variables plus terse assignment/mutation forms.
 
   **Verification:** shipped-spec declaration scans remain clean; current-facing doc scans classify residual hits as
   legacy/reference/status material; mdBook builds; Knowledge Map regenerates/checks; memory/doctrine/diff gates

@@ -1,6 +1,12 @@
 # USER GUIDE - ActionIR `ValueExpr.pm`
 This guide covers the assignment/value-expression behavior handled by `perl/LinkedSpec/ActionIR/ValueExpr.pm`.
 
+Post-`SPEC-FORMAT-TERSE.8.3` / `.8.4` status:
+- this file preserves historical assignment-helper evidence,
+- `assign(...)` and scalar-slot wrapper examples such as `scalar(name)` should not be copied into new `.spec` examples as the preferred style,
+- current authoring uses `name = value`, `set(target, value)`, `set(array(name), [])`, `set(hash(name), {})`, aggregate wrappers for aggregate receivers, and bare scalar reads in value positions,
+- retained old spellings in this guide are migration/reference material unless a section explicitly says it is current.
+
 If `MethodLowering.pm` gives you the building blocks, `ValueExpr.pm` explains how those building blocks are consumed by assignments and related value-based helper statements.
 For exact DSL-to-Perl examples for every assignment shape, source form, and substitution helper discussed here, also read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md).
 
@@ -18,8 +24,8 @@ Documentation note:
 
 For a cross-cutting tutorial that focuses specifically on string/integer/float scalars plus array/hash composition with many worked `.spec` examples, also read [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR_ScalarAggregateMethods.md).
 
-## `assign(target, source)`
-This is the canonical assignment helper.
+## Historical `assign(target, source)`
+This was the canonical assignment helper before current terse assignment forms became the preferred user-facing surface.
 
 ### Scalar target
 

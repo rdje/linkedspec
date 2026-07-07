@@ -34,7 +34,7 @@ Retired helpers such as `return_array(...)` / `return_a(...)` and non-DSL host-s
 compatibility shapes remain fenced too.
 
 The all-bare `push(A,B)` form remains the existing child-call aggregation convention, not scalar append. Use
-`items += value`, an unambiguous literal/value `push(...)`, or `push_value(...)` for append intent.
+`items += value` or an unambiguous literal/value `push(...)` for append intent; `push_value(...)` is retired.
 
 Unknown call names are different. The AST parser already represents `user_fn("x")` as a `call` node and
 `user_fn("x").trim()` as a `fluent_chain` with a `call` receiver. After

@@ -1,6 +1,11 @@
 # USER GUIDE - ActionIR `FlowExpr.pm`
 This guide covers the expression-lowering surface implemented by `perl/LinkedSpec/ActionIR/FlowExpr.pm`.
 
+Post-`SPEC-FORMAT-TERSE.15.4` status:
+- scalar-slot examples using `:name` are historical,
+- current Rust and Perl authoring use bare scalar reads such as `name`, `flag`, and `IMATCH` in value/condition slots,
+- old `:name` references below are migration context unless a section explicitly says it is discussing retired diagnostics.
+
 This is the guide to read when you need conditions, boolean composition, comparisons, definedness checks, emptiness checks, and expression nesting.
 For exact DSL-to-Perl examples for every boolean/comparison helper discussed here, also read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md).
 For a cross-cutting tutorial that focuses specifically on string/integer/float scalars plus array/hash composition with many worked `.spec` examples, also read [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR_ScalarAggregateMethods.md).
@@ -31,7 +36,7 @@ if ($flag && $name ne "")
 with explicit DSL expressions such as:
 
 ```text
-if(and(:flag, is_nonempty(:name)))
+if(and(flag, is_nonempty(name)))
 ```
 
 That is easier to analyze, easier to lower, and easier to port.
@@ -40,8 +45,8 @@ That is easier to analyze, easier to lower, and easier to port.
 ### `or(...)`
 
 ```text
-or(:on, :off)
-or(eq(:kind, "A"), eq(:kind, "B"))
+or(on, off)
+or(eq(kind, "A"), eq(kind, "B"))
 ```
 
 Use it when any one of the conditions should pass.
@@ -49,9 +54,9 @@ Use it when any one of the conditions should pass.
 ### `and(...)`
 
 ```text
-and(:enabled, is_nonempty(:name))
-and(not(is_empty(array(items))), matches(:token, /^[A-Z_]+$/))
-and(contains_substr(lowercase(trim(:name)), "node"), ends_with(lowercase(trim(:name)), "_end"))
+and(enabled, is_nonempty(name))
+and(not(is_empty(array(items))), matches(token, /^[A-Z_]+$/))
+and(contains_substr(lowercase(trim(name)), "node"), ends_with(lowercase(trim(name)), "_end"))
 ```
 
 Use it when all conditions must pass.
@@ -59,8 +64,8 @@ Use it when all conditions must pass.
 ### `not(...)`
 
 ```text
-not(is_empty(:name))
-not(eq(:kind, "ignore"))
+not(is_empty(name))
+not(eq(kind, "ignore"))
 ```
 
 Use it to invert one condition.
@@ -72,9 +77,9 @@ Use this when the rule needs to distinguish "missing/undefined" from "defined bu
 Examples:
 
 ```text
-is_defined(:name)
+is_defined(name)
 is_defined(retv["content"])
-is_defined(coalesce(retv["type"], :IMATCH))
+is_defined(coalesce(retv["type"], IMATCH))
 ```
 
 Typical meanings:
@@ -99,7 +104,7 @@ Examples:
 
 ```text
 is_undefined(retv["type"])
-is_undefined(coalesce(retv["content"], :IMATCH))
+is_undefined(coalesce(retv["content"], IMATCH))
 ```
 
 Use it when the rule should take a missing-value branch only if no defined value is available yet.
@@ -111,7 +116,7 @@ Use it for scalars, arrays, hashes/objects, or composed aggregate expressions.
 Examples:
 
 ```text
-is_empty(:name)
+is_empty(name)
 is_empty(array(items))
 is_empty(join_values("", array(word)))
 is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))
@@ -126,8 +131,8 @@ Typical meanings:
 - and only the remaining non-aggregate fallback expressions use plain truthiness.
 
 This is intentionally different from `is_defined(...)`:
-- `is_empty(:name)` treats both `undef` and `""` as empty,
-- `is_defined(:name)` treats `""` as already present,
+- `is_empty(name)` treats both `undef` and `""` as empty,
+- `is_defined(name)` treats `""` as already present,
 - and `is_empty(pick_keys(hash(meta), "kind"))` can still be true even though that projected hash ref is defined.
 
 This same helper family now also has value-layer support, so the identical `is_empty(...)` spelling can be used in assignment values and `return(payload)`, not only directly in `if(...)` / `elseif(...)` / `switch(...)` conditions.

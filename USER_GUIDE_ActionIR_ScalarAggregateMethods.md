@@ -1,6 +1,11 @@
 # USER GUIDE - Scalar and Aggregate Method Composition
 This guide is the long-form cookbook for working with scalar values and aggregate values in LinkedSpec `.spec` files.
 
+Post-`SPEC-FORMAT-TERSE.8.3` / `.8.4` status:
+- this root cookbook predates helper hard-retirement and is retained as migration/reference material,
+- current examples should prefer `copy(...)`, `cat(...)`, `push(...)`, `set(...)`, direct assignment, aggregate wrappers, and bare scalar reads,
+- old `declare(...)`, `assign(...)`, `array_copy(...)`, `hash_copy(...)`, source-spelled `concat(...)`, `push_value(...)`, `push_nonempty(...)`, scalar-slot wrapper, and short wrapper examples below are historical unless explicitly marked current.
+
 Read this guide when you want one place that teaches:
 - string, integer, and float-like scalar handling,
 - arrays and hashes,
@@ -27,14 +32,14 @@ Small examples:
 ```text
 join_values("", array(word))
 retv["content"]
-array_copy(array(items))
+copy(array(items))
 hash("type", retv["type"], "content", retv["content"])
 ```
 
 Larger examples:
 
 ```text
-assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))
+set(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))
 ```
 
 ```text
@@ -42,14 +47,14 @@ return(hash(
   "kind", "NODE",
   "head", scalar(items, 0),
   "content", retv["content"],
-  "parts", array_copy(array(parts))
+  "parts", copy(array(parts))
 ))
 ```
 
 ```text
 return(array(
-  hash("name", join_values("", array(word)), "tags", array_copy(array(tags))),
-  hash("meta", hash("depth", scalar(depth), "confidence", scalar(confidence)))
+  hash("name", join_values("", array(word)), "tags", copy(array(tags))),
+  hash("meta", hash("depth", depth, "confidence", confidence))
 ))
 ```
 
@@ -76,10 +81,10 @@ String-like scalar work is the most common value flow in `.spec` files.
 ### Direct scalar reads
 
 ```text
-scalar(name)
-scalar(IMATCH)
-scalar(LMATCH)
-scalar(IMATCH_LIST, 0)
+name
+IMATCH
+LMATCH
+IMATCH_LIST[0]
 ```
 
 Typical uses:
@@ -91,15 +96,15 @@ Typical uses:
 Examples:
 
 ```text
-declare(scalar, token=scalar(IMATCH))
-assign(scalar(opening), scalar(IMATCH_LIST, 0))
-return(hash("type", "TOKEN", "content", scalar(token)))
+token = IMATCH
+opening = IMATCH_LIST[0]
+return(hash("type", "TOKEN", "content", token))
 ```
 
 ### Captured substring as a scalar
 
 ```text
-assign(scalar(content), CAPTURE)
+content = CAPTURE
 ```
 
 This is the canonical helper way to keep a captured substring without dropping back to raw Perl substring code.
@@ -108,9 +113,8 @@ Example:
 
 ```text
 -> block[1] {
-  declare(scalar, content)
-  assign(scalar(content), CAPTURE)
-  return(hash("type", "BLOCK", "content", scalar(content)))
+  content = CAPTURE
+  return(hash("type", "BLOCK", "content", content))
 }
 ```
 

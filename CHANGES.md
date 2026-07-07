@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — SPEC-FORMAT-TERSE.8.5 — reconcile helper retirement docs
+
+**Scope:** User-facing docs, root reference guides, Rust README, Knowledge facts, and task/live docs after Perl and
+Rust legacy helper hard retirement.
+
+**Change:** Current-facing guidance now consistently teaches auto-existing variables, direct assignment/mutation,
+`set(...)`, `push(...)`, `copy(...)`, `cat(...)`, `array(...)`, `hash(...)`, and bare scalar reads. Retired helper
+spellings (`declare(...)`, declaration aliases, `assign(...)`, scalar-slot wrappers, `array_copy(...)`,
+`hash_copy(...)`, source-spelled `concat(...)`, `push_value(...)`, `push_nonempty(...)`, and short wrapper aliases)
+are now framed as historical or retired-diagnostic material instead of current authoring. The Rust README now states
+the 93-fixture oracle and the retired-helper diagnostic boundary.
+
+**Boundary:** This is a documentation/Knowledge synchronization slice only. No parser/runtime behavior changed.
+Historical logs keep dated `.6.4` compatibility policy evidence, but visible summaries now state that `.8` superseded
+that policy with hard retirement.
+
+**Validation:** `knowledge-map/scripts/gen_knowledge_map.sh`, `knowledge-map/scripts/check_knowledge_map.sh`,
+`mdbook build docs/linkedspec-book`, and `git diff --check` pass. Broader memory/doctrine gates run in commit
+closeout.
+
 ## 2026-07-07 — SPEC-FORMAT-TERSE.8.4 — hard-retire Rust legacy helpers
 
 **Scope:** Rust parser/runtime retirement for old helper spellings, with Perl oracle fixes needed to keep current

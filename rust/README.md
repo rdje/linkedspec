@@ -17,7 +17,7 @@ It also exposes a generated-source path (`linkedspec_runtime::source_emitter`) t
 `CompiledSpec`, a validated rule-family plan, and a `parse(input)` entry point. Generated parsers now route through a
 plan-aware executor: default, OR acode, AND acode, AND bcode, OR bcode, REP acode, REP bcode, REP-AND acode, and
 REP-AND bcode families run directly. The generated-source test harness validates every supported structural family
-and a manifest-backed corpus subset; the full 88-fixture corpus remains the interpreter oracle gate.
+and a manifest-backed corpus subset; the full 93-fixture corpus remains the interpreter oracle gate.
 
 ## Quick Start
 
@@ -66,15 +66,16 @@ On no-match: `I → LS → no match → LX → E`
 
 The engine implements 80+ helpers covering:
 
-- **Declarations**: `declare`, `assign`
-- **Arrays**: `array`, `array_copy`, `push_value`, `push_nonempty`, `count`
-- **Scalars**: `scalar`, `coalesce`, `coalesce_nonempty`, `concat`
+- **Working variables and assignment**: auto-existing scalar/array/hash variables, `name = value`, `set(target, value)`, `set(array(name), [])`, `set(hash(name), {})`
+- **Retired diagnostics**: `declare`, declaration aliases, `array_copy`, `hash_copy`, source-spelled `concat`, `push_value`, `push_nonempty`, and short wrapper aliases `a(...)` / `h(...)`
+- **Arrays**: `array`, `copy`, `push`, explicit `is_nonempty(...)` guard plus `push(...)`, `count`
+- **Scalars**: bare scalar reads, `coalesce`, `coalesce_nonempty`, `cat`
 - **Capture**: `entry_text`, `entry_group`, `entry_groups`, `entry_len`
 - **Match**: `match_text`, `match_group`, `match_groups`, `match_len`
 - **Control flow**: `return`, `return_undef`, `exit_now`, `next`
 - **Strings**: `trim`, `lowercase`, `uppercase`, `length`, `substr`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`, `filter_nonempty`, `filter_match`, `uniq`, `sorted`, `reversed`, `take`, `take_last`, `drop_front`, `drop_back`, `slice`, `contains`, `index_of`, `is_empty`, `is_nonempty`, `is_defined`, `is_undefined`, `join_values`, `flat_array`, `concat_arrays`
 - **String matching**: `starts_with`, `ends_with`, `contains_substr`, `matches`, `replace_substr`, `rm_prefix`, `rm_suffix`
-- **Hashes**: `hash`, `hash_copy`, `merge_hash`, `set_key`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `count_keys`, `has_key`, `flat_hash`; direct nested access reads fields from scalar-held hash/array payloads
+- **Hashes**: `hash`, `copy`, `merge_hash`, `set_key`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `count_keys`, `has_key`, `flat_hash`; direct nested access reads fields from scalar-held hash/array payloads
 - **Arithmetic**: `num_add`, `num_sub`, `num_mul`, `num_div`, `num_mod`, `num_abs`, `num_floor`, `num_ceil`, `num_round`, `num_min`, `num_max`, `num_clamp`, `num_sum`, `num_avg`, `num_median`, `num_range`
 - **Cursor/position**: `cursor_pos`, `cursor_line`, `cursor_col`, `cursor_rest`, `cursor_rest_len`, `input_text`, `input_len`, `input_slice`
 - **Marks/capture**: `start_capture_slice`, `capture_slice`, `capture_slice_len`, `capture_slice_line`, `capture_slice_pos`, `mark_here`, `mark_pos`, `mark_exists`, `capture_from`

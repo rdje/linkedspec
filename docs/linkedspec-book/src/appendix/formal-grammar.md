@@ -575,7 +575,7 @@ concat_arrays(a1, a2)  — concatenate arrays
 push(arr, child)        — append child to accumulator
 push(arr, child, index) — append child at index
 push(arr, value)  — append value to accumulator
-push_nonempty(arr, val) — retired on the Perl reference; prefer val = expr; if(is_nonempty(val)) { push(arr, val) }
+push_nonempty(arr, val) — retired on current Perl/Rust runtimes; prefer val = expr; if(is_nonempty(val)) { push(arr, val) }
 target.push_back(value) — append value to named working array (statement)
 target.push_front(value) — prepend value to named working array (statement)
 target.pop_back()       — remove last item from named working array (statement)
@@ -851,7 +851,13 @@ tracking but not recommended for new `.spec` authoring:
 
 - Raw Perl expressions and ad hoc operators outside the documented helper/operator slots
 - `return_a`, `return_m`, `return_ma`, `return_imatch`/`return_im` (retired)
-- `s(...)`, `a(...)`, `h(...)` — use `...`, `array(...)`, `hash(...)`
+- `declare(...)` and declaration aliases — use auto-existing variables, assignment, and typed aggregate resets
+- `assign(...)` — use `target = value` or `set(target, value)`
+- `array_copy(...)`, `hash_copy(...)` — use `copy(...)`
+- `concat(...)` — use `cat(...)`
+- `push_value(...)` — use `push(...)`
+- `push_nonempty(...)` — use an explicit `is_nonempty(...)` guard plus `push(...)`
+- `s(...)`, `a(...)`, `h(...)` — use bare scalar reads, `array(...)`, `hash(...)`
 - `array_values(...)` — use `copy(...)`
 - `flatten(...)` — use `flat(...)`
 - `tail(...)` — use `drop_front(...)`

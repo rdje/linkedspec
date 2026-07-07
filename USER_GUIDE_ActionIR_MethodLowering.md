@@ -1,6 +1,12 @@
 # USER GUIDE - ActionIR `MethodLowering.pm`
 This guide covers the value-construction and general method lowering handled by `perl/LinkedSpec/ActionIR/MethodLowering.pm`.
 
+Post-`SPEC-FORMAT-TERSE.8.3` / `.8.4` status:
+- this file mixes current helper descriptions with historical lowering evidence,
+- retired spellings such as `array_copy(...)`, `hash_copy(...)`, source-spelled `concat(...)`, `push_value(...)`, `push_nonempty(...)`, and short wrapper aliases are not current authoring forms,
+- current examples should use `copy(...)`, `cat(...)`, `push(...)`, explicit `if(is_nonempty(...))` guards, `array(...)`, `hash(...)`, and bare scalar reads where the mdBook shows them,
+- old helper names below remain only as compatibility/migration context unless a section explicitly marks a current spelling.
+
 This module is where many of the most important backend-neutral building blocks live.
 For exact DSL-to-Perl examples for every constructor, selector, flattening helper, return helper, and compatibility surface mentioned here, also read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md).
 
@@ -23,7 +29,7 @@ In practical terms, this is the guide you want when you need to understand:
 - `replace_substr(...)`
 - `rm_prefix(...)`
 - `rm_suffix(...)`
-- `concat(...)`
+- `cat(...)` (`concat(...)` is retired when source-spelled)
 - `num_abs(...)`
 - `num_floor(...)`
 - `num_ceil(...)`
@@ -64,20 +70,20 @@ In practical terms, this is the guide you want when you need to understand:
 - `sorted_values(...)`
 - `has_key(...)`
 - `merge_hash(...)`
-- `hash_copy(...)`
+- `copy(hash(...))`
 - `set_key(...)`
 - `rename_key(...)`
 - `drop_keys(...)`
 - `pick_keys(...)`
 - `coalesce_nonempty(...)`
 - `coalesce(...)`
-- `array_copy(...)`
+- `copy(array(...))`
 - `array_values(...)` as a compatibility alias
 - `flat(...)`, `flat_array(...)`, `flat_hash(...)` with compatibility alias `flatten(...)`
 - `join_values(...)`
 - `call(rule)` as a value source
 - generalized `return(payload)` payload lowering
-- `push_value(...)` value lowering
+- `push(...)` value lowering
 
 ## `split_tagged_records(...)`
 Use `split_tagged_records(scalar(source), delimiter, tag, field...)` when a scalar list should return repeated tagged array records.
@@ -96,8 +102,8 @@ return(split_tagged_records(
 
 This lowers to `return [map { [tag, item, field...] } split ...]`, but the source rule stays in helper form and remains visible to descriptor metadata.
 
-## `scalar(...)`
-`scalar(...)` is the most frequently used value helper.
+## Historical scalar-slot wrapper examples
+The examples in this section show old scalar-wrapper lowering. Current user-facing examples prefer bare scalar reads in value slots.
 
 ### Form 1: plain scalar variable access
 

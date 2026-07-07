@@ -209,8 +209,8 @@ direct indexed/nested access, shape literals, and block values lower from AST no
 Value-only helper-call composition now also consumes AST `call` nodes recursively before
 reusing the existing Perl helper catalog, covering scalar normalization, string
 predicate/composition, coalesce/concat, and scalar-argument numeric helpers. Aggregate
-helper-call families now consume AST `call` nodes too: canonical wrappers
-(`...`/`array(...)`/`hash(...)`), `copy`/`array_copy`/`hash_copy`, collection
+helper-call families now consume AST `call` nodes too: bare scalar reads, canonical aggregate wrappers
+(`array(...)`/`hash(...)`), current `copy(...)`, collection
 helpers, numeric reducers over aggregate operands, and hash helpers rebuild their helper
 surface from typed AST fields while preserving symbol slots and quoted-wrapper literal
 boundaries before reusing the existing Perl helper catalog. Unsupported covered helper

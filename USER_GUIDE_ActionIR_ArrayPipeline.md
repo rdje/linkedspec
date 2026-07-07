@@ -1,6 +1,11 @@
 # USER GUIDE - ActionIR `ArrayPipeline.pm`
 This guide covers the composable array/string pipeline helpers lowered by `perl/LinkedSpec/ActionIR/ArrayPipeline.pm`.
 
+Post-`SPEC-FORMAT-TERSE.8.3` / `.8.4` status:
+- pipeline helper names remain current, but many examples in this root guide predate scalar-slot retirement,
+- read `:name`, `assign(...)`, `declare(...)`, `array_copy(...)`, and short wrapper examples here as historical migration evidence,
+- current authoring uses bare scalar reads such as `text`, `set(array(parts), [])` for aggregate resets, and `copy(array(parts))` for snapshots.
+
 This is the guide to read when you want to tokenize, normalize, filter, or deduplicate array content without falling back to raw Perl `split`, `map`, or `grep` chains.
 For exact DSL-to-Perl examples for every pipeline helper and its preferred/raw counterpart, also read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md).
 
@@ -31,8 +36,8 @@ Use `split(...)` to populate an array from a scalar source string.
 Examples:
 
 ```text
-split(array(parts), :text, /\s*,\s*/)
-split(array(tokens), :subprogram_statement_part, /((?:\s*--.*\s*)+|\s*;\s*)/)
+split(array(parts), text, /\s*,\s*/)
+split(array(tokens), subprogram_statement_part, /((?:\s*--.*\s*)+|\s*;\s*)/)
 ```
 
 If you omit the delimiter, the default is a comma-ish splitter.
@@ -78,7 +83,7 @@ filter_nonempty(array(parts))
 Common companion pattern:
 
 ```text
-split(array(parts), :text, /,/);
+split(array(parts), text, /,/);
 trim_each(array(parts));
 filter_nonempty(array(parts))
 ```
@@ -132,11 +137,11 @@ Example:
 
 ```text
 return(split_tagged_records(
-  :identifier_list,
+  identifier_list,
   /\s*,\s*/o,
   "?constant_declaration:",
-  :subtype_indication,
-  :expression
+  subtype_indication,
+  expression
 ))
 ```
 

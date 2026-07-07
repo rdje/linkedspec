@@ -1,6 +1,6 @@
 ---
 id: terse-helper-rename-lowering-sites
-title: "SPEC-FORMAT-TERSE.1.4 ground truth — where the helper-rename targets assign/concat/array_copy/hash_copy are recognized + lowered (Perl reference AND Rust), the alias seam, and the three distinct shapes the terse renames set/cat/copy take. cat=pure rename via _normalize_method_name (MethodExpr.pm:19-26); set=STATEMENT-level (Contracts.pm:1749/1753 \\bassign\\s*\\( + DeclareMethod + MethodLowering._lower_assign_statement) — NOT reached by _normalize_method_name; copy=NOT a pure rename, it unifies array_copy/hash_copy and needs a dedicated dispatch resolving array-then-hash symbol kind. Rust: all four canonical helpers live in one Engine::call_helper() match (engine.rs assign@711, array_copy@735, concat@820, hash_copy@1833; aliases=pipe arms) — copy needs its own value-type-dispatch arm because a literal cannot repeat across the array_copy and hash_copy arms."
+title: "SPEC-FORMAT-TERSE.1.4 ground truth — set/cat/copy recognition sites and the historical assign/concat/array_copy/hash_copy alias seam; SPEC-FORMAT-TERSE.8 later retired the old spellings."
 answers:
   - "where does assign / concat / array_copy / hash_copy lower in the perl engine"
   - "where are the four helper-rename targets recognized in the Rust engine"
@@ -16,7 +16,8 @@ date: 2026-07-04
 status: confirmed
 tags: [engine, dsl, helpers, aliases, rename, actionir, spec-format-terse, SPEC-FORMAT-TERSE, MethodLowering, rust, parity]
 evidence: "TOOLBOX `call_spec_handler_subst` probes 2026-06-24 (`perl -Iperl -MLinkedSpec`, dump-don't-guess; `perl -Iperl` confirmed `perl/LinkedSpec.pm` loads over the stale `PERL5LIB` — TOOLBOX §6.5). BEFORE (the historical gap): `assign(scalar(x),1)`→`$x = 1` but `set(scalar(x),1)`→`set(scalar(x), 1)` (passthrough); `concat(\"a\",\"b\")`→`do { my @__ls_concat_parts = (\"a\", \"b\"); ... join('', @__ls_concat_parts) : undef }` but `cat(\"a\",\"b\")`→`cat(\"a\",\"b\")` (passthrough); `array_copy(a(items))`→`[@items]` but `copy(a(items))`→`copy([items])` (partial — inner `a(items)` lowers but `copy` is unknown); `hash_copy(h(m))`→`{%m}` but `copy(h(m))`→`copy(h(m))` (passthrough). Perl recognition+lowering sites at that leaf: assign was STATEMENT-level (`ActionIR/Contracts.pm` + DeclareMethod + MethodLowering); concat was value-expr; array_copy/hash_copy had separate sigil lowerers. .1.4.1 landed Perl recognition at every canonical-name site; .1.4.2 landed Rust parity. SPEC-FORMAT-TERSE.6.2.3.2 later retired authored spec-file assign(...) and scalar(...) wrapper spelling; current reverify checks the surviving terse names `set`, `cat`, and remembered-kind `copy`."
-reverify: "perl -Iperl -MLinkedSpec -e 'for my $stmt (q{set(x, 1)},q{return(cat(\"a\",\"b\"))},q{items = [\"a\"]; return(copy(items))},q{meta = { key => \"v\" }; return(copy(meta))}) { my $out=LinkedSpec::call_spec_handler_subst(\"Top\",$stmt); $out =~ s/\\n/\\\\n/g; print \"$stmt => $out\\n\" }' && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml terse_1_4_2 && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml --test corpus_oracle"
+evidence_update_2026_07_07: "SPEC-FORMAT-TERSE.8.3/.8.4 superseded the alias-retention conclusion: current runtimes diagnose old source spellings `assign(...)`, source-spelled `concat(...)`, `array_copy(...)`, `hash_copy(...)`, `push_value(...)`, `push_nonempty(...)`, and short wrapper aliases instead of executing them successfully. `set`, `cat`, `copy`, `push`, assignment, and aggregate wrappers are the current spellings."
+reverify: "perl -Iperl -MLinkedSpec -e 'for my $stmt (q{set(x, 1)},q{return(cat(\"a\",\"b\"))},q{items = [\"a\"]; return(copy(items))},q{meta = { key => \"v\" }; return(copy(meta))}) { my $out=LinkedSpec::call_spec_handler_subst(\"Top\",$stmt); $out =~ s/\\n/\\\\n/g; print \"$stmt => $out\\n\" }' && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_1_4_2 --quiet && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime helpers_5_1_retired_terse_8_4_spellings_diagnose --quiet"
 ---
 
 # `.1.4` ground truth: where the helper renames land, on both variants
@@ -26,8 +27,9 @@ ground-truth pass; direction ratified in ADR [0007](../decisions/0007-spec-forma
 This is the engine grounding for the terse-format leaf "helper renames `assign`→`set`, `concat`→`cat`,
 `array_copy`/`hash_copy`→`copy`", and the reason that leaf was split by variant (Perl-first `.1.4.1` +
 Rust parity `.1.4.2`). Direction per ADR 0007: the **new terse names become canonical**, the **old names
-stayed deprecated aliases that lower identically** at that point. `SPEC-FORMAT-TERSE.6.2.3.2` later retired
-authored spec-file `assign(...)` and the current surface uses `set(...)`, `cat(...)`, and `copy(...)`.
+stayed deprecated aliases that lower identically** at that point. `SPEC-FORMAT-TERSE.8.3` / `.8.4` later retired
+those old successful helper spellings, so the current surface uses `set(...)`, `cat(...)`, `copy(...)`, `push(...)`,
+assignments, aggregate wrappers, and bare scalar reads.
 
 ## Status — `.1.4` CLOSED on both variants (2026-06-29)
 
@@ -37,7 +39,7 @@ Both halves are now **done**. `.1.4.1` landed the Perl reference: `set`/`cat`/`c
 byte-identical proof; +4 phase0 locks → 975 green; full gate EXIT 0). `.1.4.2` landed Rust
 `Engine::call_helper()` parity: `set` and `cat` are pipe-arm aliases, and `copy` is a unified array/hash
 value-copy arm locked by Perl-oracle fixtures and integration tests. The site map below is the implementation
-ground truth (now extended to recognize the aliases at each site).
+ground truth for why the current spellings exist; the old source spellings are now retired diagnostics.
 
 ### The original gap (pre-`.1.4.1`, for the record)
 
@@ -90,10 +92,11 @@ Before the leaf, all three terse spellings passed through unrecognized — `set(
 
 ## Rust parity (`.1.4.2`) sites — LANDED 2026-06-29
 
-All four canonical helpers live in **one** `Engine::call_helper()` match in
+Historically, all four canonical helpers lived in **one** `Engine::call_helper()` match in
 `rust/linkedspec-runtime/src/engine.rs` (`assign`@711, `array_copy`@735, `concat`@820, `hash_copy`@1833;
 there is NO helper recognition in the parser/compiler crates). Aliases are **inline pipe-separated match
-arms** (`"array" | "a"`, `"scalar" | "s"`, `"push_value" | "push"`). `.1.4.2` landed:
+arms** in that historical implementation. `.8.4` later changed the old names and short wrapper aliases into
+explicit retired-helper diagnostics. `.1.4.2` landed:
 
 - `set`: pipe onto the assign arm — `"assign" | "set" => { … }`.
 - `cat`: pipe onto the concat arm — `"concat" | "cat" => { … }`.

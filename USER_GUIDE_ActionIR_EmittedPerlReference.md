@@ -1,8 +1,8 @@
 # USER GUIDE - ActionIR Emitted Perl Reference
 This is the exhaustive companion to the module-oriented ActionIR guides.
-Its job is simple: list every currently supported lowering helper or recognized compatibility construct and show the emitted Perl shape.
+Its job is simple: preserve the emitted-Perl lowering history for helper and compatibility constructs and show representative Perl shapes.
 
-Use this file when you want to review the real lowering contract rather than just the higher-level explanations.
+Use this file when you want to review historical lowering mechanics rather than just the higher-level explanations.
 
 Scope note:
 - “exhaustive” here means exhaustive over the recognized helper/lowering surfaces and compatibility constructs,
@@ -10,9 +10,10 @@ Scope note:
 - Unlimited nested method composition in arguments is a supported capability; this file uses representative emitted examples rather than trying to enumerate every combination.
 
 ## How to read this file
-- Preferred canonical helper forms are the best choice for new backend-neutral `.spec` authoring.
-- Compatibility helpers are still supported and important because existing specs use them.
+- Preferred canonical helper forms in this file may be historical; the mdBook and root `USER_GUIDE.md` are the current authoring surface.
+- Compatibility helpers were important because existing specs used them; several are now retired and diagnose explicitly.
 - Classified pass-through idioms are preserved verbatim, but they still register canonical ActionIR nodes and therefore do not count as `RAW_PERL` fallback.
+- Retired examples such as `declare(...)`, `assign(...)`, `array_copy(...)`, `hash_copy(...)`, `concat(...)`, `push_value(...)`, `push_nonempty(...)`, scalar-slot wrappers, and short wrapper aliases are retained here as lowering archaeology, not current recommendations.
 
 Many helpers accept an optional leading scope token in chained forms.
 Examples:
@@ -20,8 +21,8 @@ Examples:
 - `declare_a(Top, items)` lowers the same way as `declare_a(items)`.
 - `push_value(Top, array(items), scalar(retv))` lowers the same way as `push_value(array(items), scalar(retv))`.
 
-## Preferred canonical helper surface
-### Declarations (`DeclareMethod.pm`)
+## Historical helper surface
+### Retired declarations (`DeclareMethod.pm`)
 - `declare(array, items, captures)` -> `my @items; my @captures`
 - `declare(scalar, flag)` -> `my $flag`
 - `declare(hash, by_name)` -> `my %by_name`

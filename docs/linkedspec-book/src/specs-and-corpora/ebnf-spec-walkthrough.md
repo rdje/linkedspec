@@ -755,7 +755,7 @@ This is why `ebnf.spec` is useful in the book. It shows a shipped parser that st
 - descriptor build succeeds through `LinkedSpec::get_parser('ebnf', return_descriptor => 1)`,
 - `grammar_file` no longer reports raw-Perl fallback dependency,
 - terminal token readers such as `grammar_rule`, `rule_name`, `quoted_string`, `quantifier`, `probability`, and `regex` are ActionIR-ready,
-- the source spec uses canonical wrappers such as `...` and `array(...)` in the core method-DSL band,
+- the source spec uses bare scalar reads plus canonical wrappers such as `array(...)` in the core method-DSL band,
 - `logging_annotation` uses explicit `start_capture_slice()` boundary movement,
 - `logging_annotation` uses `is_nonempty(...)`-guarded `push(...)` instead of the older `capture_if(...)` / `CAPTURE_IF()` helper surface,
 - the full `ebnf` descriptor reports zero compatibility-surface rules,

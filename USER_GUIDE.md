@@ -25,6 +25,19 @@ The project direction is now explicit:
 
 That matters because the long-term goal is not “Perl, but cleaner.” It is a backend-neutral `.spec` language that can be implemented by LinkedSpec backends in Rust and other languages too.
 
+## Current Terse Authoring Surface
+After `SPEC-FORMAT-TERSE.8.3` / `.8.4`, current authoring uses auto-existing working variables,
+direct assignment/mutation, `set(...)`, `push(...)`, `cat(...)`, `copy(...)`, `array(...)`, and `hash(...)`.
+The older helper spellings `declare(...)`, declaration aliases, `assign(...)`, `scalar(...)` as a scalar-slot wrapper,
+`array_copy(...)`, `hash_copy(...)`, `concat(...)`, `push_value(...)`, `push_nonempty(...)`, and short wrapper aliases
+`s(...)` / `a(...)` / `h(...)` are retired from current `.spec` authoring. The Perl reference and Rust backend now
+diagnose the remaining retired helper calls instead of executing them successfully.
+
+The LinkedSpec Book under `docs/linkedspec-book/src/` is the current user-facing surface for new examples. The
+repo-root `USER_GUIDE_ActionIR_*.md` files are still useful implementation and migration references, but many of
+their detailed emitted-Perl examples were written before the terse hard-retirement pass. Read old helper spellings
+there as historical lowering evidence unless a section explicitly says it is current post-`.8` authoring guidance.
+
 ## Why this guide is split
 The lowering surface is now large enough that a single giant guide becomes hard to navigate. This top-level guide is the map; the detailed lowering references live in focused module-oriented guides.
 
@@ -40,7 +53,7 @@ Detailed lowering references:
 - [`USER_GUIDE_RuleModesAndSplit.md`](USER_GUIDE_RuleModesAndSplit.md)
 
 Read this file first, then jump into the specific module guide that matches the lowering family you are using.
-For exhaustive review of the current lowering contract, including emitted Perl for every supported helper and compatibility construct, read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) alongside the module guides.
+For historical emitted-Perl lowering evidence, read [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md) alongside the module guides. For current authoring examples, prefer the LinkedSpec Book chapters under `docs/linkedspec-book/src/dsl/` and `docs/linkedspec-book/src/appendix/helper-contract-catalog.md`.
 
 **The LinkedSpec Book** (`docs/linkedspec-book/src/index.md`) is the public-facing entry point for new users. It covers the mental model, DSL families, compiler pipeline, public API, and architecture at a higher level than these module-oriented guides. If you are new to LinkedSpec, start with the book. Then come back to this guide and the detailed ActionIR references for deeper implementation detail.
 
@@ -78,11 +91,11 @@ Example:
 Top::
  /a/ -> Next {
 label:
- return(array("?Top:", array_copy(array(Top))))
+ return(array("?Top:", copy(array(Top))))
  }
 
 Next::
- /b/ { return(array("?Next:", array_copy(array(Next)))) }
+ /b/ { return(array("?Next:", copy(array(Next)))) }
 ```
 
 Here `label:` is block content inside `Top`, not the start of a new `label` rule paragraph.
@@ -146,9 +159,9 @@ pair:&
  /[A-Za-z_]\w*/
  /\s*=\s*/
  /[^,\n]+/
- I {declare(scalar, retv)}
+ I {retv = undef}
  -> child_rule
- LX {return(scalar(retv))}
+ LX {return(retv)}
 ```
 
 This is the common style:
@@ -162,11 +175,11 @@ This is the common style:
 
 ```text
 pair:&
- I {declare(scalar, retv)}
+ I {retv = undef}
  /[A-Za-z_]\w*/
  -> child_rule
  /\s*=\s*/
- LX {return(scalar(retv))}
+ LX {return(retv)}
  /[^,\n]+/
 ```
 
@@ -180,13 +193,13 @@ That is not the style most people should prefer for readability, but it illustra
 Because the rule body is paragraph-based rather than line-based, the same rule can also be written on one physical line:
 
 ```text
-pair:& /[A-Za-z_]\w*/ /\s*=\s*/ /[^,\n]+/ I {declare(scalar, retv)} -> child_rule LX {return(scalar(retv))}
+pair:& /[A-Za-z_]\w*/ /\s*=\s*/ /[^,\n]+/ I {retv = undef} -> child_rule LX {return(retv)}
 ```
 
 The same thing is true for blind-call rules:
 
 ```text
-wrapper::AND I {declare(scalar, retv)} => header => body => trailer LX {return(scalar(retv))}
+wrapper::AND I {retv = undef} => header => body => trailer LX {return(retv)}
 ```
 
 That is usually less readable than the multiline form, so it should not be the default house style. But it is still real supported syntax:
@@ -216,9 +229,9 @@ That is a large part of why LinkedSpec specs are easy to parse structurally even
 When you write helper-style action code such as:
 
 ```text
-I {declare(array, items); declare(scalar, retv)}
--> child {assign(scalar(retv), call(child)); push_value(array(items), scalar(retv))}
--> child[1] {return(array("?Top:", array_copy(array(items))))}
+I {set(array(items), []); retv = undef}
+-> child {retv = call(child); push(array(items), retv)}
+-> child[1] {return(array("?Top:", copy(array(items))))}
 ```
 
 LinkedSpec does **not** treat that as opaque text. Instead it tries to:
@@ -233,12 +246,12 @@ Think about authoring styles in three tiers, but read tiers 2 and 3 as migration
 
 1. **Canonical helper-only lowering**
    - Best choice.
-   - Uses helper forms like `declare(...)`, `assign(...)`, `return(payload)`, `if(...)`, `push_value(...)`, `print_each(...)`, `array(...)`, `hash(...)`, `array_copy(...)`, `hash_copy(...)`, `concat_arrays(...)`, `sorted(...)`, `join_values(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `concat(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_range(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `index_of(...)`, `set_key(...)`, `rename_key(...)`, and so on.
+   - Uses helper/operator forms like `name = value`, `set(...)`, `return(payload)`, `if(...)`, `push(...)`, `items += value`, `meta[key] = value`, `print_each(...)`, `array(...)`, `hash(...)`, `copy(...)`, `cat(...)`, `concat_arrays(...)`, `sorted(...)`, `join_values(...)`, `replace_substr(...)`, `rm_prefix(...)`, `rm_suffix(...)`, `num_abs(...)`, `num_floor(...)`, `num_ceil(...)`, `num_round(...)`, `num_sum(...)`, `num_avg(...)`, `num_median(...)`, `num_range(...)`, `num_add(...)`, `num_sub(...)`, `num_mul(...)`, `num_div(...)`, `num_mod(...)`, `num_clamp(...)`, `num_min(...)`, `num_max(...)`, `starts_with(...)`, `ends_with(...)`, `contains_substr(...)`, `matches(...)`, `coalesce_nonempty(...)`, `index_of(...)`, `set_key(...)`, `rename_key(...)`, and so on.
    - This is the preferred style for backend-neutral `.spec` authoring.
 
 2. **Helper shells with raw host expressions inside arguments**
    - Transitional only.
-   - Example: `assign(scalar(pos_begin), pos $$STRING)` or `assign(scalar(part), substr($$STRING, ...))`.
+   - Example: `pos_begin = cursor_pos()` is current helper form; old examples such as `assign(scalar(pos_begin), pos $$STRING)` are historical migration evidence.
    - The outer statement is canonical, but the inner expression is still host-language flavored.
    - Use only when no dedicated helper exists yet, and treat it as migration debt to remove rather than a desirable steady-state pattern.
 
@@ -417,16 +430,16 @@ An explicit side-by-side equivalence example can help:
 
 ```text
 A::
- /a/ -> A   { return(array("?A:", array_copy(array(A)))) }
- /b/ -> A[1] { return(array("?A:", array_copy(array(A)))) }
+ /a/ -> A   { return(array("?A:", copy(array(A)))) }
+ /b/ -> A[1] { return(array("?A:", copy(array(A)))) }
 ```
 
 and:
 
 ```text
 A::
- /a/ -> A[0] { return(array("?A:", array_copy(array(A)))) }
- /b/ -> A[1] { return(array("?A:", array_copy(array(A)))) }
+ /a/ -> A[0] { return(array("?A:", copy(array(A)))) }
+ /b/ -> A[1] { return(array("?A:", copy(array(A)))) }
 ```
 
 mean the same thing for the recursive first slot:
@@ -444,29 +457,29 @@ Lowered constructs are not limited to one place.
 ### 1. Action blocks on edges
 
 ```text
--> child { assign(scalar(retv), call(child)); push_value(array(items), scalar(retv)) }
+-> child { retv = call(child); push(array(items), retv) }
 ```
 
 ### 2. Chained action edges
 
 ```text
--> child .declare(scalar, name).assign(scalar(name), CAPTURE).return(node, array(scalar(name)))
+-> child .return(hash("kind", "child", "text", entry_text()))
 ```
 
 ### 3. Lifecycle blocks
 
 ```text
-I  {declare(array, items); declare(scalar, flag)}
+I  { set(array(items), []); flag = undef }
 LS {print("loop start\n")}
-LE {assign(scalar(flag), IMATCH)}
-LX {return(array_copy(array(items)))}
+LE { flag = IMATCH }
+LX { return(copy(array(items))) }
 ```
 
 ### 4. Chained lifecycle forms
 
 ```text
-I.declare(array, items).declare(scalar, flag)
-LX.if(is_nonempty(array(items))).return(array_copy(array(items))).else().return_undef().endif()
+I.set(array(items), []).set(flag, undef)
+LX.if(is_nonempty(array(items))).return(copy(array(items))).else().return_undef().endif()
 ```
 
 ### Fluent chains and `{...}` blocks are meant to be equivalent
@@ -518,9 +531,9 @@ This first lock is intentionally scoped. It does not yet claim that every nested
 
 One more supported slice is now locked too: nested array-pipeline composition inside `return(array(...))` lowers cleanly, and the fluent versus structured method surfaces now agree on the migration metadata for that return-payload shape as well.
 
-Collection-valued nested array-pipeline composition is now locked on a broader supported surface too: `declare(array, ...)`, `assign(array(...), ...)`, and nested hash/array payload values all accept the same helper-only pipeline composition, and the fluent versus structured lifecycle forms agree on that metadata as well.
+Collection-valued nested array-pipeline composition is now locked on a broader supported surface too: `set(array(...), ...)`, `name = [...]`, and nested hash/array payload values all accept the same helper-only pipeline composition, and the fluent versus structured lifecycle forms agree on that metadata as well.
 
-That supported collection-valued surface now extends to broader hash/object-oriented shapes too: `declare(hash, ...)`, `assign(hash(...), ...)`, `push_value(array(...), hash(...))`, and `return(..., hash(...))` all accept the same nested helper-only collection composition, and the fluent versus structured lifecycle forms agree on that metadata there as well.
+That supported collection-valued surface now extends to broader hash/object-oriented shapes too: `set(hash(...), ...)`, `name = { ... }`, `push(array(...), hash(...))`, and `return(..., hash(...))` all accept the same nested helper-only collection composition, and the fluent versus structured lifecycle forms agree on that metadata there as well.
 
 That supported collection-hash shape is now locked on action-edge surfaces too: fluent `-> rule .m1(...).m2(...)` and structured `-> rule { m1(...); m2(...); }` forms now agree on compiled action output and migration metadata for that supported chain.
 
@@ -528,9 +541,9 @@ Supported branch-local control-flow slices are now locked too: fluent and struct
 
 That supported branch-local control-flow equivalence is now locked on lifecycle surfaces too, not just action edges: chained forms like `LX.if(...).m(...).endif()` and structured lifecycle blocks like `LX { if(...); m(...); endif() }` now agree on lowering and migration metadata for the supported payload shapes.
 
-Supported multi-step method sequences inside action-edge control-flow bodies are locked too, not just single payload-return branches: fluent and structured forms now agree on compiled output and migration metadata when branch bodies contain supported helper sequences such as `declare(...)`, `push_value(...)`, `say(...)`, and `return_*` combinations.
+Supported multi-step method sequences inside action-edge control-flow bodies are locked too, not just single payload-return branches: fluent and structured forms now agree on compiled output and migration metadata when branch bodies contain supported helper sequences such as `set(...)`, `push(...)`, `say(...)`, and `return_*` combinations.
 
-That same supported multi-step branch-local equivalence is now locked on lifecycle surfaces too: `LX.if(...).declare(...).push_value(...).return_*...endif()` and the structured `LX { if(...); declare(...); push_value(...); return_*... endif() }` form, as well as the parallel `switch/case` forms, now agree on lowered lifecycle output and migration metadata for those supported helper sequences.
+That same supported multi-step branch-local equivalence is now locked on lifecycle surfaces too: `LX.if(...).set(...).push(...).return_*...endif()` and the structured `LX { if(...); set(...); push(...); return_*... endif() }` form, as well as the parallel `switch/case` forms, now agree on lowered lifecycle output and migration metadata for those supported helper sequences.
 
 Inline composite `switch(..., case(...), default(...))` forms are now locked on both action-edge and lifecycle surfaces too: fluent and structured authoring agree not only for marker-style `case()/default()/endswitch()` flow, but also for supported inline `case(...)` and `default(...)` action sequences inside the `switch(...)` argument list itself.
 
@@ -618,27 +631,27 @@ That same deeper nested inline-switch coverage now exists inside composite `if(.
 
 The `if(...)` family now has the matching structured attached-block form too. Inside an action-edge `{ ... }` block or any lifecycle block (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`), you can write `if(cond) { ... } elseif(cond2) { ... } else() { ... }` and get the same canonical lowering and migration metadata as the already-supported inline composite `if(cond, ..., elseif(...), else(...))` surfaces. That same attached-block composite surface is now also available as the final call on fluent action-edge and lifecycle chains. Treat it as a supported final-call fluent control-flow surface, not as permission for unconstrained marker-style flow outside structured contexts.
 
-List-context insertion helpers are locked too: fluent and structured authoring now agree on supported `flat_array(...)` and `flat_hash(...)` payload forms on both action-edge and lifecycle surfaces, so flat-list insertion stays part of the same method-like DSL equivalence contract rather than a one-off lowering quirk. The supported source side now also includes composed aggregate helpers such as `sorted_keys(...)`, `sorted_values(...)`, `pick_keys(...)`, and `hash_copy(...)`, not only one named working array or hash.
+List-context insertion helpers are locked too: fluent and structured authoring now agree on supported `flat_array(...)` and `flat_hash(...)` payload forms on both action-edge and lifecycle surfaces, so flat-list insertion stays part of the same method-like DSL equivalence contract rather than a one-off lowering quirk. The supported source side now also includes composed aggregate helpers such as `sorted_keys(...)`, `sorted_values(...)`, `pick_keys(...)`, and `copy(hash(...))`, not only one named working array or hash.
 
 That same supported flat-list equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on `flat_array(...)` and `flat_hash(...)` return payloads on both action-edge and lifecycle surfaces.
 
-Snapshot payload helpers are locked too: fluent and structured authoring now agree on supported `array_copy(...)` payload forms on both action-edge and lifecycle surfaces, so snapshot-array payload construction stays inside the same method-like DSL equivalence contract.
+Snapshot payload helpers are locked too: fluent and structured authoring now agree on supported `copy(array(...))` payload forms on both action-edge and lifecycle surfaces, so snapshot-array payload construction stays inside the same method-like DSL equivalence contract.
 
-That same supported snapshot-helper equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on `array_copy(...)` return payloads on both action-edge and lifecycle surfaces.
+That same supported snapshot-helper equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on `copy(array(...))` return payloads on both action-edge and lifecycle surfaces.
 
 String-join payload helpers are locked too: fluent and structured authoring now agree on supported `join_values(delimiter, array_expr)` payload forms on both action-edge and lifecycle surfaces, so joined-string payload construction stays inside the same method-like DSL equivalence contract rather than acting like a one-off scalar shortcut.
 
 That same supported `join_values(...)` equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on joined-string return payloads on both action-edge and lifecycle surfaces. The supported source side is broader than one named array variable: projected arrays like `sorted_keys(...)`, `sorted_values(...)`, and array-valued fallback chains can now reduce straight into one scalar string as well.
 
-Canonical `call(rule)` value capture is locked too: fluent and structured authoring now agree on supported `assign(scalar(retv), call(rule))` helper forms on both action-edge and lifecycle surfaces, so child-result capture stays inside the same backend-neutral method-like DSL equivalence contract rather than depending on raw assignment wrappers.
+Canonical `call(rule)` value capture is locked too: fluent and structured authoring now agree on supported `retv = call(rule)` / `set(retv, call(rule))` forms on both action-edge and lifecycle surfaces, so child-result capture stays inside the same backend-neutral method-like DSL equivalence contract rather than depending on raw assignment wrappers.
 
-That same supported call-value equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on canonical `assign(scalar(retv), call(rule))` capture chains on both action-edge and lifecycle surfaces.
+That same supported call-value equivalence is now locked inside control-flow branch bodies too: fluent and structured `if(...)` / `elseif(...)` and `switch(...)` / `case(...)` forms agree on canonical `retv = call(rule)` capture chains on both action-edge and lifecycle surfaces.
 
-Nested accessor payloads are locked too: fluent and structured authoring now agree on supported direct nested access plus indexed/keyed `scalar(...)` payload reads on both action-edge and lifecycle surfaces, so path-following value composition stays inside the same backend-neutral method-like DSL equivalence contract.
+Nested accessor payloads are locked too: fluent and structured authoring now agree on supported direct nested access plus bare scalar payload reads on both action-edge and lifecycle surfaces, so path-following value composition stays inside the same backend-neutral method-like DSL equivalence contract.
 
-Array-normalization pipelines are locked too: fluent and structured authoring now agree on representative `split(...) -> split_each(...) -> trim_each(...) -> filter_nonempty(...) -> return(array_copy(...))` flows on both action-edge and lifecycle surfaces, so multi-stage token cleanup stays inside the same backend-neutral method-like DSL equivalence contract instead of feeling like a one-off migration detail from the VHDL corpus.
+Array-normalization pipelines are locked too: fluent and structured authoring now agree on representative `split(...) -> split_each(...) -> trim_each(...) -> filter_nonempty(...) -> return(copy(...))` flows on both action-edge and lifecycle surfaces, so multi-stage token cleanup stays inside the same backend-neutral method-like DSL equivalence contract instead of feeling like a one-off migration detail from the VHDL corpus.
 
-Case-normalization and filter pipelines are locked too: fluent and structured authoring now agree on representative `assign(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)) -> lowercase_each(array(parts)) -> return(array_copy(array(parts)))` flows on both action-edge and lifecycle surfaces, so uppercase/uniq/filter/lowercase cleanup is also part of the explicit backend-neutral method-like DSL contract rather than only low-level array-pipeline lowering machinery.
+Case-normalization and filter pipelines are locked too: fluent and structured authoring now agree on representative `set(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)) -> lowercase_each(array(parts)) -> return(copy(array(parts)))` flows on both action-edge and lifecycle surfaces, so uppercase/uniq/filter/lowercase cleanup is also part of the explicit backend-neutral method-like DSL contract rather than only low-level array-pipeline lowering machinery.
 
 Defaulting/coalescing value helpers are now part of that explicit contract too: fluent and structured authoring now agree on representative `coalesce(...)` fallback chains across assignment sources, return payloads, and comparison inputs on both action-edge and lifecycle surfaces, so parser-oriented “first defined value wins” logic no longer needs to hide inside ad hoc raw fallback expressions.
 
@@ -660,7 +673,7 @@ Hash/object key-presence checks are part of that contract too: `has_key(...)` no
 
 Hash/object layering is part of that contract too: `merge_hash(...)` now lets `.spec` rules build one canonical merged object from working hashes, constructor hashes, and hash-valued fallback expressions on both action-edge and lifecycle surfaces, so parser-owned metadata normalization can stay inside the same functional, parser-oriented expression layer instead of leaking into ad hoc host-language object merging.
 
-Hash/object snapshotting is part of that contract too: `hash_copy(...)` now lets `.spec` rules keep one stable nested object snapshot from a working hash or composed hash-valued expression on both action-edge and lifecycle surfaces, so nested payload construction and later helper composition can stay inside the same functional, parser-oriented expression layer instead of dropping into ad hoc host-language `{%hash}` copies.
+Hash/object snapshotting is part of that contract too: `copy(hash(...))` now lets `.spec` rules keep one stable nested object snapshot from a working hash or composed hash-valued expression on both action-edge and lifecycle surfaces, so nested payload construction and later helper composition can stay inside the same functional, parser-oriented expression layer instead of dropping into ad hoc host-language `{%hash}` copies.
 
 Hash/object single-field update is part of that contract too: `set_key(...)` now lets `.spec` rules set one canonical field on working hashes and hash-valued expressions on both action-edge and lifecycle surfaces, so small object-shape adjustments can stay inside the same functional, parser-oriented expression layer instead of forcing a one-key merge wrapper or dropping into ad hoc host-language field assignment.
 
@@ -787,29 +800,29 @@ A lot of lowering examples refer to a small set of parser runtime values.
 Examples:
 
 ```text
-assign(scalar(name), scalar(IMATCH))
-assign(scalar(line_now), cursor_line())
-assign(scalar(token), entry_text())
-assign(scalar(entry_line_num), entry_line())
-assign(array(parts), entry_groups())
-assign(scalar(kind), entry_named(kind))
-assign(scalar(entry_width), entry_len())
-assign(scalar(match_line_num), match_line())
-assign(scalar(content), CAPTURE)
-return(array("?node:", scalar(IMATCH_LIST, 0), scalar(IMATCH_LIST, 1)))
-assign(scalar(pos_begin), pos $$STRING)
+name = IMATCH
+line_now = cursor_line()
+token = entry_text()
+entry_line_num = entry_line()
+set(array(parts), entry_groups())
+kind = entry_named(kind)
+entry_width = entry_len()
+match_line_num = match_line()
+content = CAPTURE
+return(array("?node:", IMATCH_LIST[0], IMATCH_LIST[1]))
+pos_begin = cursor_pos()
 ```
 
-The canonical container wrappers are:
-- `scalar(...)`
+The canonical current value forms are:
+- bare scalar reads such as `name`
 - `array(...)`
 - `hash(...)`
 
-These are LinkedSpec DSL forms, not Perl sigils. Older short wrapper aliases `s(...)`, `a(...)`, and `h(...)` are retired; write the canonical forms in new and migrated specs.
+These are LinkedSpec DSL forms, not Perl sigils. Older scalar-slot wrappers and short wrapper aliases `s(...)`, `a(...)`, and `h(...)` are retired; write bare scalar reads plus canonical aggregate wrappers in new and migrated specs.
 
 ```text
-assign(scalar(name), entry_text())
-assign(array(parts), entry_groups())
+name = entry_text()
+set(array(parts), entry_groups())
 return(hash("kind", entry_named(kind), "parts", array("A", "B")))
 ```
 
@@ -817,12 +830,15 @@ return(hash("kind", entry_named(kind), "parts", array("A", "B")))
 If you are trying to do one of these jobs, read the matching guide first.
 
 ### I need declarations or initialized working state
-Start with [`USER_GUIDE_ActionIR_DeclareMethod.md`](USER_GUIDE_ActionIR_DeclareMethod.md).
+Start with the current book chapter
+[`docs/linkedspec-book/src/dsl/declaration-helper-reference.md`](docs/linkedspec-book/src/dsl/declaration-helper-reference.md).
+Use [`USER_GUIDE_ActionIR_DeclareMethod.md`](USER_GUIDE_ActionIR_DeclareMethod.md) only when you need historical
+lowering evidence for the retired declaration family.
 
 Typical patterns:
-- `declare(array, items)`
-- `declare(scalar, flag=or(scalar(on), scalar(off)))`
-- `declare(hash, by_name=hash("kind", scalar(kind)))`
+- `set(array(items), [])`
+- `count = 0`
+- `set(hash(by_name), { "kind" => kind })`
 
 ### I need value constructors, nested return payloads, or `call(...)` as a value source
 Start with [`USER_GUIDE_ActionIR_MethodLowering.md`](USER_GUIDE_ActionIR_MethodLowering.md).
@@ -831,15 +847,15 @@ Typical patterns:
 - `array(...)`
 - `hash(...)`
 - direct nested access
-- `scalar(sorted_keys(...), 0)`
-- `scalar(merge_hash(...), "kind")`
-- `scalar(set_key(...), "stage")`
-- `scalar(rename_key(...), "stage")`
+- `sorted_keys(...).first()`
+- `merge_hash(...).pick_keys("kind").sorted_values().first()`
+- `set_key(...).pick_keys("stage").sorted_values().first()`
+- `rename_key(...).pick_keys("stage").sorted_values().first()`
 - `length(...)`
 - `replace_substr(...)`
 - `rm_prefix(...)`
 - `rm_suffix(...)`
-- `concat(...)`
+- `cat(...)`
 - `starts_with(...)`
 - `ends_with(...)`
 - `contains_substr(...)`
@@ -858,18 +874,18 @@ Typical patterns:
 - `drop_back(...)`
 - `drop_back(..., n)`
 - `concat_arrays(...)`
-- `array_copy(...)`
-- `hash_copy(...)`
+- `copy(array(...))`
+- `copy(hash(...))`
 - `flat_array(...)`
-- `assign(scalar(retv), call(rule))`
+- `retv = call(rule)`
 - `return(array(...))`
 
 ### I need a long scalar/array/hash composition cookbook with many examples
 Start with [`USER_GUIDE_ActionIR_ScalarAggregateMethods.md`](USER_GUIDE_ActionIR_ScalarAggregateMethods.md).
 
 Typical patterns:
-- string scalars from `scalar(...)`, `CAPTURE`, `concat(...)`, and `join_values(...)`
-- one-step reads from composed aggregates via `scalar(sorted_keys(...), 0)` and `scalar(merge_hash(...), "kind")`
+- string scalars from bare reads, source helpers, `cat(...)`, and `join_values(...)`
+- one-step reads from composed aggregates via receiver chains and direct nested access
 - single-field object updates via `set_key(hash_expr, key_expr, value_expr)`
 - single-field object renames via `rename_key(hash_expr, old_key_expr, new_key_expr)`
 - nonempty scalar fallback chains via `coalesce_nonempty(value1, value2, ..., valueN)`
@@ -881,31 +897,31 @@ Typical patterns:
 - scalar emptiness flags from `is_empty(value_expr)` and `is_nonempty(value_expr)` inside both assignments and `return(payload)`
 - boundary scalars from `first(array_expr)` and `last(array_expr)`
 - first-match scalar indices from `index_of(array_expr, needle_expr)` over direct and composed array-valued expressions
-- prefix arrays from `take(array_expr)` and counted prefix arrays from `take(array_expr, scalar(take_count))`
-- middle-window arrays from `slice(array_expr, scalar(slice_start))` and bounded middle-window arrays from `slice(array_expr, scalar(slice_start), scalar(slice_count))`
-- suffix arrays from `take_last(array_expr)` and counted suffix arrays from `take_last(array_expr, scalar(take_last_count))`
-- front-drop arrays from `drop_front(array_expr)` and counted front-drop arrays from `drop_front(array_expr, scalar(skip_count))`
-- back-drop arrays from `drop_back(array_expr)` and counted back-drop arrays from `drop_back(array_expr, scalar(drop_count))`
+- prefix arrays from `take(array_expr)` and counted prefix arrays from `take(array_expr, take_count)`
+- middle-window arrays from `slice(array_expr, slice_start)` and bounded middle-window arrays from `slice(array_expr, slice_start, slice_count)`
+- suffix arrays from `take_last(array_expr)` and counted suffix arrays from `take_last(array_expr, take_last_count)`
+- front-drop arrays from `drop_front(array_expr)` and counted front-drop arrays from `drop_front(array_expr, skip_count)`
+- back-drop arrays from `drop_back(array_expr)` and counted back-drop arrays from `drop_back(array_expr, drop_count)`
 - pure array layering via `concat_arrays(array_expr, array_expr, ...)`
 - deterministic array sorting via `sorted(array_expr)` over direct or composed array-valued expressions
 - pure array order inversion via `reversed(array_expr)` over direct or composed array-valued expressions
-- integer/float-like scalars carried through `declare(...)`, `assign(...)`, and `num_*` comparisons
-- array constructors and snapshots via `array(...)` and `array_copy(...)`
-- hash/object constructors and snapshots via `hash(...)` and `hash_copy(...)`
+- integer/float-like scalars carried through assignments and `num_*` comparisons
+- array constructors and snapshots via `[...]`, `array(...)`, and `copy(array(...))`
+- hash/object constructors and snapshots via `{ ... }`, `hash(...)`, and `copy(hash(...))`
 - stable hash/object summaries via `sorted_keys(...)` and `sorted_values(...)`
 - array membership flags via `contains(array_expr, value_expr)`
 - aggregate-shape emptiness checks via `is_empty(sorted_values(...))` and `is_nonempty(pick_keys(...))`
-- nested reads via `scalar(array(...), idx)` and direct nested access
-- deep Lisp-style composition inside `declare(...)`, `assign(...)`, `return(...)`, `if(...)`, and `switch(...)`
+- nested reads via receiver chains/direct access
+- deep Lisp-style composition inside assignments, `return(...)`, `if(...)`, and `switch(...)`
 
 ### I need assignment semantics or special assignment sources
 Start with [`USER_GUIDE_ActionIR_ValueExpr.md`](USER_GUIDE_ActionIR_ValueExpr.md).
 
 Typical patterns:
-- `assign(scalar(name), CAPTURE)`
-- `assign(scalar(retv), call(Leaf))`
-- `assign(array(items), array(scalar(retv)))`
-- `assign(hash(by_name), hash("k", scalar(v)))`
+- `name = capture_slice()`
+- `retv = call(Leaf)`
+- `set(array(items), [retv])`
+- `set(hash(by_name), { "k" => v })`
 
 ### I need boolean/comparison expressions
 Start with [`USER_GUIDE_ActionIR_FlowExpr.md`](USER_GUIDE_ActionIR_FlowExpr.md).
@@ -939,7 +955,7 @@ Typical patterns:
 - `lowercase_each(...)`, `uppercase_each(...)`
 - `uniq(...)`
 - `filter_match(...)`
-- `split_tagged_records(scalar(list), delimiter, tag, extra...)`
+- `split_tagged_records(list, delimiter, tag, extra...)`
 
 ### I need legacy helper wrappers or capture/backtrack helpers
 Start with [`USER_GUIDE_ActionIR_Contracts.md`](USER_GUIDE_ActionIR_Contracts.md).
@@ -956,24 +972,24 @@ Important boundary:
 - They are not a full parser-engine backtracking facility.
 - LinkedSpec currently assumes a mostly forward-moving rule/runtime model, so well-written `.spec` files should rely on explicit rule structure and only use local backtrack helpers where needed.
 
-### I need the exact emitted Perl for every currently supported construct
+### I need historical emitted Perl for lowering/migration archaeology
 Start with [`USER_GUIDE_ActionIR_EmittedPerlReference.md`](USER_GUIDE_ActionIR_EmittedPerlReference.md).
 
-This is the exhaustive review document. It covers:
-- preferred canonical helper forms,
+This is the historical emitted-Perl review document. It covers:
+- pre-retirement lowering forms that may now be historical,
 - older compatibility helpers such as `capture_if` and raw call wrappers (legacy return wrappers `return_a`, `return_m`, `return_ma`, `return_imatch`, `return_array` were removed 2026-06-14; use the canonical `return(expr)` form),
 - classified pass-through idioms that are preserved verbatim but still count as canonical ActionIR rather than `RAW_PERL` fallback.
 
-## Most Common Canonical Patterns
+## Most Common Current Patterns
 These are the patterns you will use over and over again.
 
-### Pattern 1: declare state, call a child, keep the result
+### Pattern 1: initialize state, call a child, keep the result
 
 ```text
-I {declare(array, items); declare(scalar, retv)}
+I {set(array(items), []); retv = undef}
 -> child {
-  assign(scalar(retv), call(child));
-  push_value(array(items), scalar(retv))
+  retv = call(child);
+  push(array(items), retv)
 }
 ```
 
@@ -982,10 +998,10 @@ Use this when you need the child result more than once, or when you need to bran
 ### Pattern 2: assign a captured substring and return a structured node
 
 ```text
-I {declare(scalar, content)}
+I {content = undef}
 -> block[1] {
-  assign(scalar(content), CAPTURE);
-  return(hash("type", "BLOCK", "content", scalar(content)))
+  content = capture_slice();
+  return(hash("type", "BLOCK", "content", content))
 }
 ```
 
@@ -994,13 +1010,13 @@ Use this when you are closing a delimited construct and want a canonical object/
 ### Pattern 3: accumulate tokens, then snapshot them in a return payload
 
 ```text
-I {declare(array, parts)}
--> piece {push_value(array(parts), scalar(IMATCH))}
--> Top[1] {return(array("?Top:", array_copy(array(parts))))}
+I {set(array(parts), [])}
+-> piece {push(array(parts), match_text())}
+-> Top[1] {return(array("?Top:", copy(array(parts))))}
 ```
 
-Prefer `array_copy(array(parts))` when you want a **snapshot array payload**.
-(The older `array_values(...)` spelling was retired — use `array_copy(...)` instead.)
+Prefer `copy(array(parts))` when you want a **snapshot array payload**.
+The older `array_values(...)` and `array_copy(...)` spellings are retired.
 
 ### Pattern 4: flatten an existing array into a constructor
 
@@ -1011,7 +1027,7 @@ return(array("?node:", flat_array(IMATCH_LIST)))
 Use `flat_array(...)` when you want **list-context insertion**, not an array snapshot. That now works both for one named working array and for composed array-valued helper expressions such as `sorted_keys(...)`.
 
 That distinction is important:
-- `array_copy(array(items))` means “make an array payload from the current array contents.”
+- `copy(array(items))` means “make an array payload from the current array contents.”
 - `flat_array(items)` means “splice the array elements into the surrounding constructor.”
 - `flat_array(sorted_keys(hash(meta)))` means “compute a stable key-list array first, then splice those items into the surrounding constructor.”
 
@@ -1019,39 +1035,40 @@ That distinction is important:
 This is the shape now used in `Lispish::parenthesis`:
 
 ```text
-I {declare(array, word, tail); declare(scalar, retv, head, has_head)}
+I {set(array(word), []); set(array(tail), []); retv = undef; head = undef; has_head = undef}
 
 -> parenthesis {
   if(is_nonempty(array(word)))
-    if(is_empty(scalar(has_head)))
-      assign(scalar(head), join_values("", array(word)))
-      assign(scalar(has_head), 1)
+    if(is_empty(has_head))
+      head = join_values("", array(word))
+      has_head = 1
     else
-      push_value(array(tail), join_values("", array(word)))
+      push(array(tail), join_values("", array(word)))
     endif
-    assign(array(word), array())
+    set(array(word), [])
   endif
 
-  assign(scalar(retv), call(parenthesis))
-  if(is_empty(scalar(has_head)))
-    assign(scalar(head), scalar(retv))
-    assign(scalar(has_head), 1)
+  retv = call(parenthesis)
+  if(is_empty(has_head))
+    head = retv
+    has_head = 1
   else
-    push_value(array(tail), scalar(retv))
+    push(array(tail), retv)
   endif
 }
 ```
 
-The important idea is not just recursion; it is the **canonical replacement** of older raw wrappers like `$retv = call(parenthesis)` with `assign(scalar(retv), call(parenthesis))`.
+The important idea is not just recursion; it is the current terse replacement of older raw wrappers like
+`$retv = call(parenthesis)` with `retv = call(parenthesis)`, plus explicit aggregate reset/append forms.
 
 ## How To Inspect Lowering
 ### Snippet inspection utility
 Use `tools/inspect_spec_codegen.pl` when you want to see the generated Perl and canonical action-IR for a specific snippet.
 
 Examples:
-- `perl tools/inspect_spec_codegen.pl --label Top --snippet 'I.declare(array, items).declare(scalar, retv)'`
-- `perl tools/inspect_spec_codegen.pl --label Top --snippet 'assign(scalar(retv), call(Leaf))'`
-- `perl tools/inspect_spec_codegen.pl --label Top --snippet 'if(is_nonempty(array(items))); return(array_copy(array(items))); else(); return_undef(); endif()'`
+- `perl tools/inspect_spec_codegen.pl --label Top --snippet 'I.set(array(items), []).set(retv, undef)'`
+- `perl tools/inspect_spec_codegen.pl --label Top --snippet 'retv = call(Leaf)'`
+- `perl tools/inspect_spec_codegen.pl --label Top --snippet 'if(is_nonempty(array(items))); return(copy(array(items))); else(); return_undef(); endif()'`
 
 The tool is especially useful when you are deciding between two equivalent-looking helper forms and want to confirm which one actually lowers canonically.
 
@@ -1510,13 +1527,13 @@ all emit a short input excerpt plus a caret on the next line under the stored po
 ## Strong Recommendations for New Specs
 If backend neutrality matters, these are the defaults you should follow.
 
-1. Prefer `declare(...)` over raw `my` declarations.
-2. Prefer `assign(...)` over raw assignment wrappers.
-3. Prefer `assign(scalar(retv), call(rule))` over `$retv = call(rule)`.
-4. Prefer `push_value(array(target), value)` over raw `push @target, ...` when you already have a value expression.
-5. Prefer `return(payload)` with `array(...)`, `hash(...)`, `array_copy(...)`, `hash_copy(...)`, `flat_*` helpers, `split_tagged_records(...)`, and direct source readers such as `capture_slice_len()` over ad hoc Perl data literals when possible.
+1. Prefer auto-existing working variables with `name = value`, `set(...)`, `set(array(name), [])`, and `set(hash(name), {})` over raw `my` declarations.
+2. Prefer `target = value` or `set(target, value)` over raw assignment wrappers.
+3. Prefer `retv = call(rule)` over `$retv = call(rule)`.
+4. Prefer `push(array(target), value)` or `target += value` over raw `push @target, ...` when you already have a value expression.
+5. Prefer `return(payload)` with `array(...)`, `hash(...)`, `copy(...)`, `flat_*` helpers, `split_tagged_records(...)`, and direct source readers such as `capture_slice_len()` over ad hoc Perl data literals when possible.
 6. Prefer helper control-flow markers (`if`, `elseif`, `else`, `endif`, `switch`, `case`, `default`) over raw Perl branch scaffolding when possible.
-7. Prefer `array_copy(array(name))` for snapshot array payloads, prefer `hash_copy(hash(name))` for snapshot object payloads, and use `flat_array(...)` / `flat_hash(...)` for list-context insertion over either direct working aggregates or composed aggregate helper expressions.
+7. Prefer `copy(array(name))` for snapshot array payloads, prefer `copy(hash(name))` for snapshot object payloads, and use `flat_array(...)` / `flat_hash(...)` for list-context insertion over either direct working aggregates or composed aggregate helper expressions.
 8. Use snippet inspection and `return_descriptor` metadata to verify that the rule stays language-agnostic-action-IR ready.
 
 ## Known Caveats and Nuances

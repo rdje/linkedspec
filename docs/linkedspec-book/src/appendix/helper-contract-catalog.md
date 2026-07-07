@@ -1368,7 +1368,7 @@ Declaration helpers (`declare(...)` plus declaration aliases) are retired. See [
 
 | Retired | Use Instead |
 |---|---|
-| `s(...)` | `...` |
+| `s(...)` | bare scalar reads |
 | `a(...)` | `array(...)` |
 | `h(...)` | `hash(...)` |
 | `array_values(...)` | `copy(...)` |
