@@ -92,6 +92,26 @@ subtest 'shape literals and expression-valued blocks' => sub {
     is($block->{block}{statements}[1]{expr}{kind}, 'variable', 'block final expression parses as a variable');
 };
 
+subtest 'trailing block call arguments' => sub {
+    my $with = parse_expr('with("x") { return(cat(value,"!")) }');
+    is($with->{kind}, 'call', 'with(...) trailing block parses as a call');
+    is($with->{name}, 'with', 'trailing block call keeps the source callee');
+    ok($with->{trailing_block_arg}, 'trailing block call is explicitly flagged');
+    is(scalar(@{$with->{args}}), 2, 'explicit value plus trailing block become two call arguments');
+    is($with->{args}[0]{kind}, 'string', 'explicit with value parses as the first argument');
+    is($with->{args}[1]{kind}, 'block_value', 'trailing body parses as the final block_value argument');
+    is($with->{args}[1]{source}, '{ return(cat(value,"!")) }', 'block argument preserves its brace source');
+    is($with->{args}[1]{block}{statements}[0]{expr}{name}, 'return', 'block argument owns parsed block statements');
+
+    my $zero = parse_expr('with() { return(is_undefined(value)) }');
+    ok($zero->{trailing_block_arg}, 'zero-argument with() trailing block is flagged');
+    is(scalar(@{$zero->{args}}), 1, 'zero-argument with() carries only the final block argument');
+    is($zero->{args}[0]{kind}, 'block_value', 'zero-argument with() block is the final argument');
+
+    my $unknown = parse_expr('unknown("x") { return(value) }');
+    ok($unknown->{trailing_block_arg}, 'unknown trailing-block callees still parse for lowering diagnostics');
+};
+
 subtest 'assignment and mutation statement nodes' => sub {
     my $scalar = parse_expr('name = [value]');
     is($scalar->{kind}, 'assign_scalar', 'bare assignment parses as assign_scalar');

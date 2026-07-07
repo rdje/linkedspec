@@ -288,8 +288,9 @@ DSL helper surface consistency note:
   migrated current source/docs/KM/corpus to colon syntax, `.9.5` hard-retired old hash-literal `=>` with
   colon-migration diagnostics, and `.9.6` closed final no-drift scans across current specs/corpora/docs/tests/KM
   and implementation support sites. The user explicitly reactivated `SPEC-FORMAT-TERSE.14` on 2026-07-07; `.14.1`
-  split trailing block arguments before code, selected `with(value) { ... }` as the first helper-form MVP, and made
-  `.14.2` the active Perl reference implementation frontier. `SPEC-FORMAT-TERSE.10`, `.12`, and `.13` remain
+  split trailing block arguments before code, selected `with(value) { ... }` as the first helper-form MVP, and
+  `.14.2` landed Perl reference parsing/lowering/runtime support for `with(value) { ... }` / `with() { ... }`.
+  The active frontier is `.14.3` for Rust helper-form parity. `SPEC-FORMAT-TERSE.10`, `.12`, and `.13` remain
   deferred unless explicitly activated. The Rust oracle corpus is now 93 fixtures
   after `.15.2.3` added `terse_15_2_3_bare_value_reads_and_case_labels`; it had reached 92 fixtures after
   `SPEC-FORMAT-TERSE.11.4` added `terse_11_4_nested_mixed_value_path_assignment`, the Lispish fixture was

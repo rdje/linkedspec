@@ -6,10 +6,11 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-07` (**`.14.1` DONE; trailing block-argument surface activated and split**).
-  User directive 2026-07-07 reactivated the deferred `.14` trailing block-argument backlog item. `.14.1` defines
-  the MVP contract before code: trailing blocks are final-only, immediately invoked block arguments, not closures;
-  the first callable surface is `with(value) { ... }`, with receiver `.with() { ... }` split behind it. Prior
+- Last updated: `2026-07-07` (**`.14.2` DONE; Perl helper-form trailing block arguments landed**).
+  User directive 2026-07-07 reactivated the deferred `.14` trailing block-argument backlog item. `.14.1` defined
+  the MVP contract before code, and `.14.2` shipped the Perl reference helper-form surface
+  `with(value) { ... }` / `with() { ... }` as an immediate, non-closure trailing block argument. Receiver
+  `.with() { ... }` and Rust parity remain split behind it. Prior
   **`.9.6` DONE; hash-literal colon association `.9` is closed**.
   Final no-drift scans across current specs, corpus sources, generated oracle inputs, tests, docs, mdBook, current
   Knowledge facts, and implementation support sites found no unclassified current hash-literal `=>` surface.
@@ -3861,15 +3862,32 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.14.1 - activate trailing block-argument plan`
 
 - ID: `SPEC-FORMAT-TERSE.14.2`
-  Status: `pending`
+  Status: `done` (2026-07-07)
   Goal: Implement Perl reference helper-form trailing block arguments for `with(value) { ... }`.
   Acceptance: Perl ActionIR parsing/lowering recognizes `with(value) { ... }` and `with() { ... }` as a helper call
     with a final block argument, lowers it without raw fallback, binds/restores the scoped `value` context variable,
     keeps block-local return semantics, and preserves hash-literal parsing. Focused parser/lowering/runtime tests
     prove `with("x") { return(cat(value, "!")) }` returns `"x!"`, `with() { return(is_undefined(value)) }` returns
     true, and `{ key : value }` remains a hash literal.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-07.** `perl/LinkedSpec/ActionIR/AST/Parser.pm` now parses a top-level trailing
+    brace after a `callee(...)` head as a flagged final `block_value` argument (`trailing_block_arg`), while attached
+    control-flow parsing still owns `if`/`when`/`switch`/`while`. `perl/LinkedSpec/ActionIR/MethodLowering.pm`
+    accepts that flagged trailing block only for helper-form `with`; it evaluates the optional value arg through the
+    existing value lowerer, binds a lexical scoped `value` inside an immediate `do { ... }`, reuses the existing
+    expression-valued block lowerer for block-local `return(expr)`, and emits the normal unsupported-helper sentinel
+    for unknown trailing-block callees. `with() { ... }` binds `value` to `undef`. The slice also added narrow AST
+    value lowering for `is_defined(...)` / `is_undefined(...)` so the zero-arg `with()` proof lowers without raw
+    fallback. Public mdBook text now documents this as current Perl reference behavior while marking Rust parity,
+    bare `with { ... }`, and receiver `.with() { ... }` as follow-ons. Focused probes show
+    `return(with("x") { return(cat(value,"!")) })` lowers to a scoped `do` block, `return(with() { return(is_undefined(value)) })`
+    lowers through `undef` binding plus `(!defined($value))`, `return({ key : value })` still lowers as a hash
+    literal, and `return(unknown("x") { return(value) })` emits
+    `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:unknown`. Checks pass: `perl -c -Iperl` on the touched Perl modules and
+    focused tests, `prove -q -Iperl t/actionir_ast_parser.t`, and full `PERL5LIB= prove -q -Iperl
+    t/phase0_regression.t` with plan `1..1025`. Closeout checks pass: `mdbook build docs/linkedspec-book`,
+    `bash scripts/check_memory_architecture.sh`, `bash knowledge-map/scripts/check_knowledge_map.sh`,
+    `bash scripts/check_doctrines.sh`, and `git diff --check`.
+  Commit: `SPEC-FORMAT-TERSE.14.2 - add Perl helper trailing blocks`
 
 - ID: `SPEC-FORMAT-TERSE.14.3`
   Status: `pending`
@@ -4238,14 +4256,14 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | 30 | `SPEC-FORMAT-TERSE.9.5` | `done` | hard-retired old hash-literal `=>` association while preserving blind-call edge `=>` |
 | 31 | `SPEC-FORMAT-TERSE.9.6` | `done` | final hash-literal colon no-drift closeout |
 | 32 | `SPEC-FORMAT-TERSE.14.1` | `done` | user reactivated trailing block arguments; MVP `with(value) { ... }` contract and implementation split are locked before code |
-| 33 | `SPEC-FORMAT-TERSE.14.2` | `pending` | Perl reference helper-form trailing block arguments for `with(value) { ... }` |
+| 33 | `SPEC-FORMAT-TERSE.14.2` | `done` | Perl reference helper-form trailing block arguments for `with(value) { ... }` landed with scoped `value`, zero-arg `with()`, and unsupported-callee diagnostics |
 | 34 | `SPEC-FORMAT-TERSE.14.3` | `pending` | Rust helper-form parity after Perl reference semantics land |
 | 35 | `SPEC-FORMAT-TERSE.14.4` | `pending` | receiver `.with() { ... }` trailing block arguments |
 | 36 | `SPEC-FORMAT-TERSE.14.5` | `pending` | mdBook/KM/oracle/no-drift closeout for shipped `.14` surface |
 | — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.12` | `deferred` / `spec backlog` | track future hash-tree attached-block traversal; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.13` | `deferred` / `backlog` | track lower-priority array-tree traversal analog; not PNT-eligible until explicitly activated |
-| — | `SPEC-FORMAT-TERSE.14` | `active` / `split` | trailing block-argument type for helpers/methods without closures; `.14.2` is the first implementation leaf |
+| — | `SPEC-FORMAT-TERSE.14` | `active` / `split` | trailing block-argument type for helpers/methods without closures; `.14.3` is the Rust parity frontier after Perl `.14.2` landed |
 | — | `SPEC-FORMAT-TERSE.6.1` | `done` | User directive owned under the existing terse-format tree; shipped-spec inventory recorded before any `.spec` edit. |
 | — | `SPEC-FORMAT-TERSE.6.2.1` | `done` | shipped specs no longer use active `declare(...)` / `.declare(...)`; focused compile, phase0, and Rust corpus oracle pass |
 | — | `SPEC-FORMAT-TERSE.6.2.2` | `done` | shipped specs no longer use active old helper spellings; focused compile, phase0, and Rust corpus oracle pass |
@@ -5555,6 +5573,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   `value` afterward, and returns the block result. Bare `with { ... }` remains deferred because word-plus-brace is
   already a rule-body lifecycle/code-block shape. Receiver `.with() { ... }`, Rust parity, and mdBook/KM/oracle
   closeout are separate leaves. Frontier moves to `.14.2`.
+- `2026-07-07`: **`.14.2` DONE — Perl helper-form trailing block arguments.**
+  The Perl ActionIR AST parser now turns `with(value) { ... }` and `with() { ... }` into a helper call with a
+  flagged final `block_value` argument. MethodLowering accepts the flagged trailing block only for `with`, binds a
+  scoped lexical `value` during immediate block execution, preserves block-local `return(expr)`, keeps `{ key :
+  value }` as a hash literal, and reports unsupported trailing-block callees with the standard unsupported-helper
+  sentinel. mdBook documents the Perl reference surface without claiming Rust parity. Frontier moves to `.14.3`.
 
 - `2026-07-05`: **`.12`/`.13` DEFERRED/BACKLOG — tree traversal attached-block ideas.**
   User directive tracked hash-tree traversal methods with attached code blocks as future spec work and clarified

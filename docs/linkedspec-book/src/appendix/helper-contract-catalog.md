@@ -99,6 +99,23 @@ evaluates first, including any block-local `return(expr)`, and the yielded value
 compatible receiver family selected by the first method. Blocks do not create a separate block-only receiver
 dispatch rule.
 
+### Perl reference trailing block helper: `with(value) { ... }`
+
+- **Signature**: `with(value?: expr) { block }`
+- **Returns**: the immediate block result.
+- **Backend status**: Perl reference support is current. Rust parity, receiver `.with() { ... }`, and bare
+  `with { ... }` are not current portable surfaces yet.
+- **Behavior**: Evaluates the optional value argument, binds scoped scalar `value` while the trailing block
+  executes, restores any surrounding `value` binding afterward, and yields the block result. `with() { ... }`
+  binds `value` to `undef`.
+- **Return semantics**: `return(expr)` inside the trailing block is block-local, exactly like expression-valued
+  blocks: it yields `expr` from the block and skips later block statements; it does not return from the surrounding
+  rule/action.
+- **Examples**:
+  - `return(with("x") { return(cat(value, "!")) })` yields `"x!"`.
+  - `return(with() { return(is_undefined(value)) })` yields `1` on the Perl reference.
+  - `set(value, "outer"); return(array(with("inner") { return(value) }, value))` yields `["inner", "outer"]`.
+
 ## 1. Declaration Helpers
 
 > **Declaration is optional — working variables auto-exist.** Referencing a variable through a
@@ -189,10 +206,10 @@ dispatch rule.
 > carries `/<regex>/`, its `I.return(<expr>)` computes the result, and `<output>` is the
 > parser's array. Predicate helper results in these examples surface in the reference
 > boolean shape (`1` for true, `0` for false); primitive literal `true`/`false` values
-> are typed JSON booleans. An undefined result surfaces as a `null` element. The value-returning predicates (`matches`,
-> `starts_with`, `ends_with`, `contains_substr`) may be returned directly; the
-> definedness predicates (`is_defined`, `is_undefined`) are **condition-only** — use them
-> inside an `if (...)` test in an `I { ... }` block (shown below), not inside `return(...)`.
+> are typed JSON booleans. An undefined result surfaces as a `null` element. The value-returning predicates
+> (`matches`, `starts_with`, `ends_with`, `contains_substr`) may be returned directly. The definedness predicates
+> (`is_defined`, `is_undefined`) are portable in `if (...)` conditions; the Perl reference also lowers them in
+> ActionIR AST value contexts such as `with() { return(is_undefined(value)) }` while Rust parity catches up.
 
 ### `container[key]`
 - **Signature**: `container: array|hash[key: int|string]`

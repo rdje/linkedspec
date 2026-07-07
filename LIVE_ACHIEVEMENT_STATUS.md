@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **SPEC-FORMAT-TERSE.14.2 — add Perl helper trailing blocks**
+  (DONE implementation; frontier `.14.3` Rust helper-form parity next).
+
+  **Change:** The Perl reference now parses and lowers `with(value) { ... }` / `with() { ... }` as immediate
+  trailing block arguments. The block gets scoped lexical `value`, block-local `return(expr)` behavior, hash-literal
+  separation, and unsupported-helper diagnostics for unknown trailing-block callees.
+
+  **Boundary:** Rust parity, receiver `.with() { ... }`, bare `with { ... }`, closures, assignable/returnable block
+  values, and delayed callbacks remain unshipped.
+
+  **Verification:** Focused parser/lowering probes pass; `t/actionir_ast_parser.t` passes; full phase0 passes
+  1025 tests; mdBook, memory, Knowledge Map, doctrine, and whitespace checks pass.
+
 - 2026-07-07: **SPEC-FORMAT-TERSE.14.1 — activate trailing block-argument plan**
   (DONE tracking/specification; frontier `.14.2` Perl helper-form implementation next).
 

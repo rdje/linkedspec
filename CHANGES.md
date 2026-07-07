@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — SPEC-FORMAT-TERSE.14.2 — add Perl helper trailing blocks
+
+**Scope:** Perl reference support for helper-form trailing block arguments under `SPEC-FORMAT-TERSE.14`.
+
+**Change:** `with(value) { ... }` and `with() { ... }` now parse as helper calls with flagged final `block_value`
+arguments. MethodLowering accepts the trailing block only for `with`, binds scoped lexical `value` during immediate
+block execution, reuses expression-valued block lowering for block-local `return(expr)`, and emits the standard
+unsupported-helper sentinel for unknown trailing-block callees. The mdBook and Knowledge fact now describe the
+Perl-reference surface while leaving Rust parity and receiver `.with() { ... }` as follow-on leaves.
+
+**Boundary:** Rust parity, receiver `.with() { ... }`, bare `with { ... }`, closures, assignable blocks, returnable
+blocks, and delayed callbacks remain out of scope.
+
+**Validation:** `perl -c -Iperl` on touched Perl modules/tests, `prove -q -Iperl t/actionir_ast_parser.t`,
+`PERL5LIB= prove -q -Iperl t/phase0_regression.t` (1025 tests), `mdbook build docs/linkedspec-book`,
+`bash scripts/check_memory_architecture.sh`, `bash knowledge-map/scripts/check_knowledge_map.sh`,
+`bash scripts/check_doctrines.sh`, and `git diff --check` pass.
+
 ## 2026-07-07 — SPEC-FORMAT-TERSE.14.1 — activate trailing block-argument plan
 
 **Scope:** Task-tree and roadmap ownership for the user-reactivated trailing code-block / trailing block-argument

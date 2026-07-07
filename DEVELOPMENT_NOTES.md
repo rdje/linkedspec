@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (SPEC-FORMAT-TERSE.14.2 — Perl `with(value) { ... }` is a flagged trailing block call):
+  The ActionIR AST parser now represents helper-form trailing blocks as normal `call` nodes with
+  `trailing_block_arg => 1` and a final `block_value` argument. MethodLowering must treat that flag as a dispatch
+  boundary: only `with` is accepted in this leaf; other trailing-block callees intentionally return
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<callee>` instead of becoming ordinary helper arguments. The accepted
+  lowering evaluates the optional value argument before introducing `my $value`, then executes the existing
+  expression-valued block lowerer inside the scoped lexical binding. This preserves outer `value` bindings and
+  keeps `return(expr)` block-local. Rust parity is `.14.3`; receiver `.with() { ... }` is `.14.4`.
+
 - 2026-07-07 (SPEC-FORMAT-TERSE.14.1 — trailing block args are immediate non-closure callbacks):
   `SPEC-FORMAT-TERSE.14` is the owner for trailing code blocks used as helper/receiver arguments. The first MVP is
   helper-form `with(value) { ... }` / `with() { ... }`: evaluate the explicit value or `undef`, bind scoped scalar

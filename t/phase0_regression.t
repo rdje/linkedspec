@@ -47703,6 +47703,88 @@ subtest 'spec_format_terse_2_1_2_perl_expression_valued_blocks' => sub {
         'assignment-source block does not infer hash assignment');
 };
 
+subtest 'spec_format_terse_14_2_perl_helper_trailing_block_arguments' => sub {
+    # SPEC-FORMAT-TERSE.14.2: Perl reference helper-form trailing block
+    # arguments. `with(value) { ... }` is an immediate, final-only block
+    # argument, not a closure or assignable block value.
+    plan tests => 18;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    my $lowered = $L->('return(with("x") { return(cat(value,"!")) })');
+    like($lowered, qr/^return do \{ my \$__ls_with_value = "x"; my \$value = \$__ls_with_value; do \{/,
+        'with(value) trailing block lowers through a scoped immediate do-block');
+    like($lowered, qr/\@__ls_concat_parts = \(\$value, "!"\)/,
+        'with block body sees the scoped value variable');
+    unlike($lowered, qr/return with\b/,
+        'with(value) trailing block no longer falls back to raw trailing-block syntax');
+
+    my $zero_lowered = $L->('return(with() { return(is_undefined(value)) })');
+    like($zero_lowered, qr/my \$__ls_with_value = undef; my \$value = \$__ls_with_value;/,
+        'with() binds value to undef for the immediate block');
+    like($zero_lowered, qr/\(!defined\(\$value\)\)/,
+        'is_undefined(value) lowers inside the with block');
+    is($L->('return({ key : value })'), 'return {$key => $value}',
+        'hash-literal braces remain separate from trailing block arguments');
+    like($L->('return(unknown("x") { return(value) })'), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:unknown/,
+        'unknown trailing-block callees emit an unsupported-helper diagnostic');
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { return(with(\"x\") { return(cat(value,\"!\")) }) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'with(value) trailing-block spec compiles')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '"x!"',
+        'with(value) trailing block returns the block result');
+
+    my $zero_spec = "Top::\n"
+                  . " /x/ -> Done { return(with() { return(is_undefined(value)) }) }\n"
+                  . "\nDone::\n /[a-z]+/\n";
+    my $zero_parser = eval { LinkedSpec::Get(\$zero_spec) };
+    ok(ref($zero_parser) eq 'CODE', 'with() trailing-block spec compiles')
+        or diag(normalize_error($@));
+    is($run->($zero_parser, 'xhello'), '1',
+        'with() trailing block observes undef value');
+
+    my $scope_spec = "Top::\n"
+                   . " /x/ -> Done { set(value,\"outer\"); return(array(with(\"inner\") { return(value) }, value)) }\n"
+                   . "\nDone::\n /[a-z]+/\n";
+    my $scope_parser = eval { LinkedSpec::Get(\$scope_spec) };
+    ok(ref($scope_parser) eq 'CODE', 'with(value) scoped-binding spec compiles')
+        or diag(normalize_error($@));
+    is($run->($scope_parser, 'xhello'), '["inner","outer"]',
+        'with(value) restores the surrounding value binding after block execution');
+
+    my $src = $gen->($spec);
+    like($src, qr/my \$__ls_with_value = "x"; my \$value = \$__ls_with_value;/,
+        'generated source contains the scoped with binding');
+    unlike($src, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/,
+        'generated source has no unsupported-helper sentinel for accepted with');
+
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'with(value) trailing-block spec has no canonical fallback');
+    is($meta->{unresolved_helper_count}, 0,
+        'with(value) trailing-block spec has no unresolved helper');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'with(value) trailing-block spec remains ActionIR ready on the Perl reference');
+};
+
 subtest 'spec_format_terse_2_3_4_2_perl_inline_value_control_lowering' => sub {
     # SPEC-FORMAT-TERSE.2.3.4.2: inline-composite if/switch are value expressions
     # on the Perl reference too. The statement-marker and attached-block control

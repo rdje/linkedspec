@@ -2525,6 +2525,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
   matches          => [2, 2],
   coalesce         => [2, undef],
   coalesce_nonempty => [2, undef],
+  is_defined       => [1, 1],
+  is_undefined     => [1, 1],
   num_abs          => [1, 1],
   num_floor        => [1, 1],
   num_ceil         => [1, 1],
@@ -2647,6 +2649,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
  my $lower_ast_fluent_chain_node;
  my $lower_ast_scalar_assignment_value_node;
  my $lower_ast_user_function_call_node;
+ my $lower_ast_with_trailing_block_call_node;
  my $ast_expr_source_node;
  my $lower_ast_supported_call_source_node;
  my $lower_user_function_node_source_expr = sub {
@@ -2929,6 +2932,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return undef;
   }
   if ($kind eq 'call') {
+   return $node->{source}
+    if $node->{trailing_block_arg}
+    && defined($node->{source})
+    && length($node->{source});
    if (($node->{name} // '') eq '=') {
     my @args;
     foreach my $arg (@{$node->{args} || []}) {
@@ -3273,6 +3280,39 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return undef unless @lowered;
   return 'do { '.join(' ', @lowered).' }'
  };
+ $lower_ast_with_trailing_block_call_node = sub {
+  my ($node) = @_;
+  return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
+  return undef unless $node->{trailing_block_arg};
+  my $name = $node->{name} // '';
+  return _actionir_ast_unsupported_helper_expr($name)
+   unless $name eq 'with';
+
+  my $args = $node->{args} || [];
+  return _actionir_ast_unsupported_helper_expr('with')
+   unless ref($args) eq 'ARRAY' && (@$args == 1 || @$args == 2);
+
+  my $block_node = $args->[-1];
+  return _actionir_ast_unsupported_helper_expr('with')
+   unless ref($block_node) eq 'HASH' && ($block_node->{kind} // '') eq 'block_value';
+
+  my $value_expr = 'undef';
+  if (@$args == 2) {
+   $value_expr = $lower_ast_value_node->($args->[0], { bare_scalar_read => 1 });
+   $value_expr = $legacy_method_value_expr->($args->[0]{source})
+    unless defined($value_expr) && length($value_expr);
+   $value_expr = $args->[0]{source}
+    if !(defined($value_expr) && length($value_expr)) && defined($args->[0]{source});
+   return _actionir_ast_unsupported_helper_expr('with')
+    unless defined($value_expr) && length($value_expr);
+   $value_expr = '+'.$value_expr if $value_expr =~ /^\s*\{/s;
+  }
+
+  my $block_expr = $lower_ast_block_value_node->($block_node);
+  return _actionir_ast_unsupported_helper_expr('with')
+   unless defined($block_expr) && length($block_expr);
+  return 'do { my $__ls_with_value = '.$value_expr.'; my $value = $__ls_with_value; '.$block_expr.' }'
+ };
  $lower_ast_value_node = sub {
   my ($node, $opts) = @_;
   $opts = {} unless ref($opts) eq 'HASH';
@@ -3348,6 +3388,11 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return $lower_ast_fluent_chain_node->($node)
    if $kind eq 'fluent_chain';
   if ($kind eq 'call') {
+   if ($node->{trailing_block_arg}) {
+    my $with_call = $lower_ast_with_trailing_block_call_node->($node);
+    return $with_call if defined($with_call) && length($with_call);
+    return _actionir_ast_unsupported_helper_expr($node->{name});
+   }
    my $scalar_assignment = $lower_ast_scalar_assignment_value_node->($node);
    return $scalar_assignment if defined($scalar_assignment) && length($scalar_assignment);
    my $user_function_call = $lower_ast_user_function_call_node->($node);
@@ -3408,6 +3453,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
 
   my $source_method = _actionir_source_spelled_method_name($method, $node->{source});
+  return 'defined('.$lowered_args[0].')'
+   if $method eq 'is_defined';
+  return '(!defined('.$lowered_args[0].'))'
+   if $method eq 'is_undefined';
   return $legacy_method_value_expr->($source_method.'('.join(', ', @lowered_args).')')
  };
  $lower_ast_aggregate_call_node = sub {

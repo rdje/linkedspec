@@ -291,6 +291,9 @@ sub _unescape_string_payload {
 
 sub _parse_call_expr {
  my ($trimmed, $start, $end) = @_;
+ my $trailing_block_call = _parse_trailing_block_call_expr($trimmed, $start, $end);
+ return $trailing_block_call if $trailing_block_call;
+
  my $call = _parse_method_function_expr($trimmed);
  return undef unless ref($call) eq 'HASH' && defined($call->{method});
  my $open_idx = index($trimmed, '(');
@@ -304,6 +307,41 @@ sub _parse_call_expr {
   name => $call->{method},
   source_method => $call->{source_method},
   args => \@args,
+ )
+}
+
+sub _parse_trailing_block_call_expr {
+ my ($trimmed, $start, $end) = @_;
+ my $attached = _split_attached_block_expr($trimmed);
+ return undef unless ref($attached) eq 'HASH';
+
+ my ($head_trimmed, $head_start) = _trim_with_offsets($attached->{head}, $start);
+ return undef unless length($head_trimmed);
+
+ my $call = _parse_method_function_expr($head_trimmed);
+ return undef unless ref($call) eq 'HASH' && defined($call->{method});
+
+ my $open_idx = index($head_trimmed, '(');
+ return undef if $open_idx < 0;
+ my $payload = substr($head_trimmed, $open_idx + 1, length($head_trimmed) - $open_idx - 2);
+ my @args = _parse_arg_exprs($payload, $head_start + $open_idx + 1);
+
+ my $block_start = $start + $attached->{open_idx};
+ my $block_end = $start + $attached->{close_idx} + 1;
+ my $block_source = substr($trimmed, $attached->{open_idx}, $attached->{close_idx} - $attached->{open_idx} + 1);
+ my $block = parse_action_block($attached->{body});
+ push @args, _node('block_value', $block_source, $block_start, $block_end, block => $block);
+
+ return _node(
+  'call',
+  $trimmed,
+  $start,
+  $end,
+  name => $call->{method},
+  source_method => $call->{source_method},
+  args => \@args,
+  trailing_block_arg => 1,
+  trailing_block_source_span => _span($block_start, $block_end),
  )
 }
 
