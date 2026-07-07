@@ -1034,6 +1034,21 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.14.4 — receiver-form trailing block parity ──
+    #
+    # Receiver `.with() { ... }` binds the receiver value as scoped `value`.
+    # The block result is either the terminal expression result or feeds later
+    # compatible receiver-family links.
+    {   case   => 'terse_14_4_receiver_with_trailing_block',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { set(value, "outer"); return(array("inner".with() { return(cat(value, "!")) }, value, " x ".with() { return(cat(value, "!")) }.trim(), " a-b ".trim().with() { return(value.split("-")) }.count(), "ok".with() { return({ "stage" : value }) }.count_keys())) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.2.3.5.6 — typed wrapper quoted-name boundaries ──
     #
     # Single-argument aggregate wrappers name a working variable only when the

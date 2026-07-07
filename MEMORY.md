@@ -18,21 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `REPO-HYGIENE.3` — urgent generated-artifact cleanup removed ignored/untracked
-  `rust/target` (5.2G) and `docs/linkedspec-book/book` (7.0M). `rgx/` `.log`/`.bin` hits were preserved as
-  submodule corpus/stimulus artifacts, not safe parent-repo cleanup targets.
-- prior_leaf: `SPEC-FORMAT-TERSE.14.3` — Rust helper-form trailing block parity landed with `with(value) { ... }`
-  / `with() { ... }`, scoped scalar `value`, block-local return, zero-arg `undef`, hash payload preservation, and
-  a 94th oracle fixture.
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.14.4` — receiver `.with() { ... }` trailing block arguments landed on
+  Perl/Rust. The receiver value is scoped as `value`, block-local return yields the `.with` result, that result can
+  feed later compatible receiver-family links, and explicit receiver `.with(value) { ... }` remains rejected/deferred.
+- prior_leaf: `REPO-HYGIENE.3` — urgent generated-artifact cleanup removed ignored/untracked `rust/target` (5.2G)
+  and `docs/linkedspec-book/book` (7.0M); Rust tests rebuilt `rust/target` during `.14.4` verification.
 - latest_commit: HEAD containing this pointer should be
-  `REPO-HYGIENE.3 - remove generated artifacts`; parent before this slice is
-  `SPEC-FORMAT-TERSE.14.3 - add Rust helper trailing blocks` (`e214748c`).
+  `SPEC-FORMAT-TERSE.14.4 - add receiver trailing blocks`; parent before this slice includes
+  `REPO-HYGIENE.3 - remove generated artifacts`.
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: none in-flight after `REPO-HYGIENE.3`; repo should be handoff-ready after commit and
-  `git_message_brief.txt` cleanup. Rust tests will rebuild `rust/target` on next run.
-- next_action: return to the user-selected `SPEC-FORMAT-TERSE.14` lane with `.14.4`: receiver-form trailing block
-  arguments for `.with() { ... }` on compatible value receivers. Do not pivot to `TASK-TREE-METADATA-HYGIENE.1`
-  until this lane is clean or paused.
+- active_work_unit: none in-flight after `.14.4`; repo should be handoff-ready after commit and
+  `git_message_brief.txt` cleanup.
+- next_action: continue the user-selected `SPEC-FORMAT-TERSE.14` lane with `.14.5`: final mdBook/KM/oracle/no-drift
+  closeout for the shipped helper and receiver trailing block surface. Do not pivot to
+  `TASK-TREE-METADATA-HYGIENE.1` until this lane is clean or paused.
 - latest_bootstrap_read: 2026-07-07 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, mdBook source, core Perl/Rust implementation, shipped specs, tooling, and focused
   test harness inventory. The task-tree audit found stale per-file metadata; it is now owned by
@@ -40,7 +39,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.
-- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests (e.g. 102 pplugin lazy-load) fail on the stale checkout. Full phase0 needs the **10-min timeout** (`timeout:600000`), else it caps mid-run (exit 144/143). **Generated Perl handlers are NON-strict.** **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`). Current phase0 reaches **PASS `1..1025`**. oracle = `tools/gen_oracle_corpus.pl` (per-case fork/SIGKILL; **94** fixtures → **run in background**; `manifest.json` + drift guards). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`. Rust numbered capture helpers are captures-only (`0`=first capture); whole match = `entry_text()`/`match_text()`.
+- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests (e.g. 102 pplugin lazy-load) fail on the stale checkout. Full phase0 needs the **10-min timeout** (`timeout:600000`), else it caps mid-run (exit 144/143). **Generated Perl handlers are NON-strict.** **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`). Current phase0 reaches **PASS `1..1026`**. oracle = `tools/gen_oracle_corpus.pl` (per-case fork/SIGKILL; **95** fixtures → **run in background**; `manifest.json` + drift guards). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`. Rust numbered capture helpers are captures-only (`0`=first capture); whole match = `entry_text()`/`match_text()`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Deferred lanes: `SPEC-FORMAT-TERSE` `.10`/`.12`/`.13`;
   `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`, and `SPEC-LANG-REFERENCE` remain deferred/paused.

@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (SPEC-FORMAT-TERSE.14.4 — receiver `.with() { ... }` normalizes through the `with` block model):
+  Receiver-form trailing blocks are not a separate closure mechanism. Perl normalizes `receiver.with() { ... }`
+  into the same scoped `with(receiver) { ... }` execution shape before continuing the compatible receiver chain,
+  while Rust detects chains containing receiver `with` and dispatches later links by the block result's runtime
+  family. The receiver form takes no parenthesized value arguments; `.with(value) { ... }` is intentionally rejected
+  so the receiver remains the sole block input. The Rust oracle corpus is now 95 fixtures after
+  `terse_14_4_receiver_with_trailing_block`.
+  Side finding from fixture design: `has_key(...)` is an unrelated Perl/Rust output-shape edge. Perl currently
+  lowers it to numeric `1`/`0`, while Rust returns `RuntimeValue::Bool`; do not use `has_key` as incidental proof in
+  focused oracle fixtures unless that parity edge is being worked explicitly.
+
 - 2026-07-07 (REPO-HYGIENE.3 — generated artifact cleanup boundary):
   Safe disk-space cleanup in the parent checkout is limited to ignored/untracked generated outputs unless a later
   task proves a broader boundary. This slice removed `rust/target` (5.2G) and `docs/linkedspec-book/book` (7.0M).

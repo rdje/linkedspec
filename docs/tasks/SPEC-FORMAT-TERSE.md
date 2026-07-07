@@ -6,11 +6,14 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-07` (**`.14.3` DONE; Rust helper-form trailing block parity landed**).
+- Last updated: `2026-07-07` (**`.14.4` DONE; receiver-form `.with() { ... }` trailing blocks landed**).
   User directive 2026-07-07 reactivated the deferred `.14` trailing block-argument backlog item. `.14.1` defined
   the MVP contract before code, `.14.2` shipped the Perl reference helper-form surface, and `.14.3` shipped Rust
   parser/runtime parity for `with(value) { ... }` / `with() { ... }` as immediate, non-closure trailing block
-  arguments. Receiver `.with() { ... }` remains split behind it. Prior
+  arguments. `.14.4` shipped receiver-form `.with() { ... }` on Perl and Rust: the receiver value is exposed as
+  scoped `value`, the immediate block result can be terminal or feed later compatible receiver-family links, and
+  explicit receiver `.with(value) { ... }` remains deferred/rejected. `.14.5` owns the final no-drift closeout for
+  the trailing block-argument lane. Prior
   **`.9.6` DONE; hash-literal colon association `.9` is closed**.
   Final no-drift scans across current specs, corpus sources, generated oracle inputs, tests, docs, mdBook, current
   Knowledge facts, and implementation support sites found no unclassified current hash-literal `=>` surface.
@@ -3912,14 +3915,42 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.14.3 - add Rust helper trailing blocks`
 
 - ID: `SPEC-FORMAT-TERSE.14.4`
-  Status: `pending`
+  Status: `done` (completed 2026-07-07)
   Goal: Implement receiver-form trailing block arguments for `.with() { ... }` on compatible value receivers.
   Acceptance: Perl and Rust receiver chains accept a terminal or continuing `.with() { ... }` segment where the
     receiver value is exposed as scoped `value` inside the block. The returned block value feeds later compatible
     receiver-family links or acts as the terminal expression result. Non-final block arguments inside an ordinary
     argument list remain rejected/deferred.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-07. Perl `ActionIR::AST::Parser` now parses receiver `.with() { ... }` as a fluent
+    segment with a flagged final `block_value` argument and receiver-trailing-block metadata. Perl
+    `ActionIR::MethodLowering` normalizes that receiver segment to the already-shipped helper-form `with(receiver)
+    { ... }` semantics, preserving scoped lexical `value`, block-local `return(expr)`, outer `value` restoration,
+    and continuing receiver chains over the block result. Explicit receiver `.with(value) { ... }` emits the
+    standard unsupported-helper sentinel and remains outside the shipped surface. Rust `expr` parsing accepts only
+    zero-argument receiver `.with() { ... }`, renders it without putting the block inside the parentheses, and
+    rejects explicit receiver args. Rust runtime dispatch detects chains containing receiver `with`, evaluates the
+    receiver left-to-right, binds scoped `value`, restores the previous binding, then routes later links through the
+    compatible string/array/hash/number receiver families. Focused tests lock terminal receiver blocks, string and
+    array continuations, mid-chain receiver blocks, outer binding restoration, unsupported explicit receiver args,
+    and no raw/unresolved Perl metadata. The generated oracle fixture
+    `terse_14_4_receiver_with_trailing_block` raises the Rust corpus to **95** fixtures and locks
+    `["inner!","outer","x !",2,1]`. Side finding recorded during fixture design: using `has_key(...)` as the
+    final hash proof exposed an unrelated output-shape mismatch (`perl/LinkedSpec/ActionIR/MethodLowering.pm`
+    lowers `has_key` to numeric `1`/`0`, while `rust/linkedspec-runtime/src/engine.rs` returns
+    `RuntimeValue::Bool`). The `.14.4` fixture uses `count_keys()` instead so this receiver-block slice stays
+    focused; the finding is durable here and in `DEVELOPMENT_NOTES.md` for later prioritization.
+    Checks: `perl -c -Iperl perl/LinkedSpec/ActionIR/AST/Parser.pm`,
+    `perl -c -Iperl perl/LinkedSpec/ActionIR/MethodLowering.pm`,
+    `prove -q -Iperl t/actionir_ast_parser.t`, full
+    `PERL5LIB= prove -q -Iperl t/phase0_regression.t` with plan `1..1026`,
+    `cargo fmt --manifest-path rust/Cargo.toml --all`,
+    `cargo test --manifest-path rust/Cargo.toml -p linkedspec-core trailing_block -- --nocapture`,
+    `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_14_4 -- --nocapture`,
+    `perl -c -Iperl tools/gen_oracle_corpus.pl`, `perl tools/gen_oracle_corpus.pl`, and
+    `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime
+    oracle_corpus_matches_perl_reference` pass. Public mdBook, live docs, and Knowledge facts were updated in the
+    same slice for no drift; `.14.5` remains the final closeout/sweep leaf.
+  Commit: `SPEC-FORMAT-TERSE.14.4 - add receiver trailing blocks`
 
 - ID: `SPEC-FORMAT-TERSE.14.5`
   Status: `pending`
@@ -4271,12 +4302,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | 32 | `SPEC-FORMAT-TERSE.14.1` | `done` | user reactivated trailing block arguments; MVP `with(value) { ... }` contract and implementation split are locked before code |
 | 33 | `SPEC-FORMAT-TERSE.14.2` | `done` | Perl reference helper-form trailing block arguments for `with(value) { ... }` landed with scoped `value`, zero-arg `with()`, and unsupported-callee diagnostics |
 | 34 | `SPEC-FORMAT-TERSE.14.3` | `done` | Rust helper-form parity landed with scoped `value`, zero-arg `with()`, hash payloads, and a 94th oracle fixture |
-| 35 | `SPEC-FORMAT-TERSE.14.4` | `pending` | receiver `.with() { ... }` trailing block arguments |
+| 35 | `SPEC-FORMAT-TERSE.14.4` | `done` | receiver `.with() { ... }` trailing block arguments landed with a 95th oracle fixture |
 | 36 | `SPEC-FORMAT-TERSE.14.5` | `pending` | mdBook/KM/oracle/no-drift closeout for shipped `.14` surface |
 | — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.12` | `deferred` / `spec backlog` | track future hash-tree attached-block traversal; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.13` | `deferred` / `backlog` | track lower-priority array-tree traversal analog; not PNT-eligible until explicitly activated |
-| — | `SPEC-FORMAT-TERSE.14` | `active` / `split` | trailing block-argument type for helpers/methods without closures; `.14.4` is the receiver `.with() { ... }` frontier after helper-form parity landed |
+| — | `SPEC-FORMAT-TERSE.14` | `active` / `split` | trailing block-argument type for helpers/methods without closures; `.14.5` is the final no-drift closeout frontier after helper and receiver forms landed |
 | — | `SPEC-FORMAT-TERSE.6.1` | `done` | User directive owned under the existing terse-format tree; shipped-spec inventory recorded before any `.spec` edit. |
 | — | `SPEC-FORMAT-TERSE.6.2.1` | `done` | shipped specs no longer use active `declare(...)` / `.declare(...)`; focused compile, phase0, and Rust corpus oracle pass |
 | — | `SPEC-FORMAT-TERSE.6.2.2` | `done` | shipped specs no longer use active old helper spellings; focused compile, phase0, and Rust corpus oracle pass |
@@ -5598,6 +5629,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   restoration, zero-arg `undef`, and hash-literal boundary preservation. The generated oracle corpus now has
   **94** fixtures after adding `terse_14_3_with_helper_trailing_block`; focused parser/runtime tests and the full
   corpus oracle pass. Frontier moves to `.14.4`.
+- `2026-07-07`: **`.14.4` DONE — receiver-form trailing block arguments.**
+  Perl and Rust now accept receiver `.with() { ... }` as an immediate trailing block argument. The receiver value is
+  scoped as `value`, the block result can be terminal or can continue into compatible receiver-family links, and
+  explicit receiver `.with(value) { ... }` remains rejected/deferred. The generated oracle corpus now has **95**
+  fixtures after adding `terse_14_4_receiver_with_trailing_block`; full phase0 passes 1026 tests and the Rust
+  corpus oracle passes. Frontier moves to `.14.5`.
 
 - `2026-07-05`: **`.12`/`.13` DEFERRED/BACKLOG — tree traversal attached-block ideas.**
   User directive tracked hash-tree traversal methods with attached code blocks as future spec work and clarified

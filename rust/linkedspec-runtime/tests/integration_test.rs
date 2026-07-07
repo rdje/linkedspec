@@ -2478,6 +2478,48 @@ fn terse_14_3_with_trailing_block_preserves_hash_literal_payloads() {
     );
 }
 
+// ── SPEC-FORMAT-TERSE.14.4 — receiver-form trailing block parity:
+
+#[test]
+fn terse_14_4_receiver_with_trailing_block_binds_receiver_value() {
+    let grammar = "Top::\n /x/ -> Done { return(\"x\".with() { return(cat(value, \"!\")) }) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["x!"]),
+        "receiver .with() binds the receiver value as scoped value"
+    );
+}
+
+#[test]
+fn terse_14_4_receiver_with_trailing_block_feeds_string_continuation() {
+    let grammar = "Top::\n /x/ -> Done { return(\" x \".with() { return(cat(value, \"!\")) }.trim()) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!(["x !"]),
+        "receiver .with() block result feeds later string-family links"
+    );
+}
+
+#[test]
+fn terse_14_4_receiver_with_trailing_block_feeds_array_continuation() {
+    let grammar = "Top::\n /x/ -> Done { return(\" a-b \".trim().with() { return(value.split(\"-\")) }.count()) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([2]),
+        "receiver .with() block result feeds later compatible array-family links"
+    );
+}
+
+#[test]
+fn terse_14_4_receiver_with_trailing_block_restores_outer_value_binding() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"outer\"); return(array(\"inner\".with() { value = cat(value, \"!\"); return(value) }, value)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([["inner!", "outer"]]),
+        "receiver .with() restores the outer value binding after block execution"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.2.3.2 — lifecycle block value/drop channel:
 // lifecycle blocks execute statements and discard statement values. A top-level
 // lifecycle return(expr) records a surrounding rule return event, while

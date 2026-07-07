@@ -108,6 +108,13 @@ subtest 'trailing block call arguments' => sub {
     is(scalar(@{$zero->{args}}), 1, 'zero-argument with() carries only the final block argument');
     is($zero->{args}[0]{kind}, 'block_value', 'zero-argument with() block is the final argument');
 
+    my $receiver = parse_expr('"x".with() { return(cat(value,"!")) }.trim()');
+    is($receiver->{kind}, 'fluent_chain', 'receiver .with() trailing block parses as a fluent chain');
+    is_deeply([map { $_->{method} } @{$receiver->{calls}}], ['with', 'trim'], 'receiver .with() preserves later fluent calls');
+    ok($receiver->{calls}[0]{receiver_trailing_block_arg}, 'receiver .with() segment is explicitly flagged');
+    is(scalar(@{$receiver->{calls}[0]{args}}), 1, 'receiver .with() carries only the trailing block argument');
+    is($receiver->{calls}[0]{args}[0]{kind}, 'block_value', 'receiver .with() block is the final argument');
+
     my $unknown = parse_expr('unknown("x") { return(value) }');
     ok($unknown->{trailing_block_arg}, 'unknown trailing-block callees still parse for lowering diagnostics');
 };

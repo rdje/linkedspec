@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — SPEC-FORMAT-TERSE.14.4 — add receiver trailing blocks
+
+**Scope:** Receiver-form trailing block arguments for `.with() { ... }` on Perl and Rust.
+
+**Change:** Receiver chains now accept `.with() { ... }` as an immediate block-taking segment. The receiver value is
+bound as scoped `value`, the block result can be the terminal expression value or feed later compatible
+receiver-family links, and the surrounding `value` binding is restored afterward. The Rust oracle corpus now has
+95 fixtures after adding `terse_14_4_receiver_with_trailing_block`.
+
+**Boundary:** Explicit receiver `.with(value) { ... }`, bare `with { ... }`, closures, assignable/returnable
+blocks, delayed callbacks, and arbitrary non-`with` receiver trailing blocks remain unshipped.
+
+**Validation:** Focused Perl parser/lowering/runtime locks, full phase0 (1026 tests), focused Rust parser/runtime
+tests, oracle generation, and the 95-fixture Rust oracle pass. Public mdBook, task-tree, live docs, and Knowledge
+facts are updated to the shipped receiver surface.
+
 ## 2026-07-07 — REPO-HYGIENE.3 — remove generated artifacts
 
 **Scope:** User-requested generated-artifact cleanup for disk-space recovery.

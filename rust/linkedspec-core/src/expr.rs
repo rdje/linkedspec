@@ -19,8 +19,8 @@
 //! expr        → primary ('.' method_call)*
 //! primary     → call | nested_access | indexed_var | literal | block | grouped | variable
 //! call        → name '(' args? ')' trailing_block? | symbol '(' args? ')'
-//! trailing_block → '{' stmts '}'          (currently helper-form `with(...)` only)
-//! method_call → name '(' args? ')'
+//! trailing_block → '{' stmts '}'          (helper-form `with(...)` and receiver `.with()`)
+//! method_call → name '(' args? ')' trailing_block?
 //! args        → arg (',' arg)*
 //! arg         → expr | name '=' expr       (keyword argument only for keyword-aware callees)
 //! literal     → string | number | boolean | regex | undef | array | hash
@@ -256,6 +256,25 @@ impl std::fmt::Display for Expr {
             Expr::FluentChain { receiver, calls } => {
                 write!(f, "{receiver}")?;
                 for call in calls {
+                    if call.method == "with"
+                        && matches!(
+                            call.args.last(),
+                            Some(Arg::Positional(Expr::BlockValue { .. }))
+                        )
+                    {
+                        write!(f, ".{}(", call.method)?;
+                        for (i, arg) in call.args[..call.args.len() - 1].iter().enumerate() {
+                            if i > 0 {
+                                write!(f, ", ")?;
+                            }
+                            match arg {
+                                Arg::Positional(e) => write!(f, "{e}")?,
+                                Arg::Keyword { name, value } => write!(f, "{name}={value}")?,
+                            }
+                        }
+                        write!(f, ") {}", call.args.last().unwrap().value())?;
+                        continue;
+                    }
                     write!(f, ".{}(", call.method)?;
                     for (i, arg) in call.args.iter().enumerate() {
                         if i > 0 {
@@ -1468,6 +1487,7 @@ impl<'a> Parser<'a> {
                 ));
             }
             self.advance(1); // consume ')'
+            let args = self.parse_optional_fluent_trailing_block_arg(&method, args)?;
             calls.push(FluentCall { method, args });
             self.skip_inline_whitespace();
         }
@@ -1475,6 +1495,33 @@ impl<'a> Parser<'a> {
             receiver: Box::new(receiver),
             calls,
         })
+    }
+
+    fn parse_optional_fluent_trailing_block_arg(
+        &mut self,
+        method: &str,
+        mut args: Vec<Arg>,
+    ) -> Result<Vec<Arg>, String> {
+        if method != "with" {
+            return Ok(args);
+        }
+
+        let before_whitespace = self.pos;
+        self.skip_whitespace();
+        if self.peek() != Some('{') {
+            self.pos = before_whitespace;
+            return Ok(args);
+        }
+        if !args.is_empty() {
+            return Err(format!(
+                "receiver .with() trailing block expects no parenthesized arguments at position {}",
+                before_whitespace
+            ));
+        }
+
+        let block = self.parse_attached_branch_block("with")?;
+        args.push(Arg::Positional(Expr::BlockValue { block }));
+        Ok(args)
     }
 
     fn callee_allows_keyword_args(callee: &str) -> bool {
@@ -2010,6 +2057,36 @@ mod tests {
         };
         assert_eq!(name, "return");
         assert!(matches!(args[0].value(), Expr::HashLiteral { entries } if entries.len() == 1));
+    }
+
+    #[test]
+    fn parse_receiver_with_trailing_block_as_fluent_call() {
+        let block =
+            CodeBlock::parse(r#"return("x".with() { return(cat(value, "!")) }.trim())"#).unwrap();
+
+        let Expr::Call { name, args } = &block.statements[0].expr else {
+            panic!("expected return call");
+        };
+        assert_eq!(name, "return");
+        let Expr::FluentChain { receiver, calls } = args[0].value() else {
+            panic!("expected receiver with fluent chain");
+        };
+        assert!(matches!(receiver.as_ref(), Expr::StringLiteral { value } if value == "x"));
+        assert_eq!(calls.len(), 2);
+        assert_eq!(calls[0].method, "with");
+        assert_eq!(calls[0].args.len(), 1);
+        assert!(matches!(calls[0].args[0].value(), Expr::BlockValue { .. }));
+        assert_eq!(calls[1].method, "trim");
+        assert!(calls[1].args.is_empty());
+    }
+
+    #[test]
+    fn parse_receiver_with_trailing_block_rejects_explicit_value_arg() {
+        let err = CodeBlock::parse(r#"return("x".with("bad") { return(value) })"#).unwrap_err();
+        assert!(
+            err.contains("receiver .with() trailing block expects no parenthesized arguments"),
+            "receiver .with(value) must stay outside the .14.4 surface: {err}"
+        );
     }
 
     #[test]

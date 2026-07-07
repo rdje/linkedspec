@@ -3430,6 +3430,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $lowered_arg;
    if (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'call') {
     $lowered_arg = $lower_ast_scalar_assignment_value_node->($arg);
+    $lowered_arg = $lower_ast_value_node->($arg, { bare_scalar_read => 1 })
+     if !(defined($lowered_arg) && length($lowered_arg)) && $arg->{trailing_block_arg};
     $lowered_arg = $lower_ast_value_only_call_node->($arg, $opts)
      unless defined($lowered_arg) && length($lowered_arg);
     $lowered_arg = $ast_expr_source_node->($arg)
@@ -3525,11 +3527,11 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $calls = $node->{calls} || [];
   return undef unless ref($receiver) eq 'HASH' && ref($calls) eq 'ARRAY' && @$calls;
 
-  my $unknown = _actionir_ast_first_unknown_value_call_name($node, $deps);
-  my $unknown_expr = _actionir_ast_unsupported_helper_expr($unknown);
-  return $unknown_expr if defined($unknown_expr) && length($unknown_expr);
-
-  my $receiver_expr = $ast_expr_source_node->($receiver);
+  my $receiver_expr;
+  $receiver_expr = $lower_ast_value_node->($receiver, { bare_scalar_read => 1 })
+   if ($receiver->{kind} // '') eq 'call' && $receiver->{trailing_block_arg};
+  $receiver_expr = $ast_expr_source_node->($receiver)
+   unless defined($receiver_expr) && length($receiver_expr);
   $receiver_expr = $receiver->{source} unless defined($receiver_expr) && length($receiver_expr);
   return undef unless defined($receiver_expr) && length($receiver_expr);
   if (($receiver->{kind} // '') eq 'raw_perl' && $receiver_expr =~ /^\((.*)\)$/s) {
@@ -3538,6 +3540,53 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $inner_expr = $lower_ast_value_node->($inner_node, { bare_scalar_read => 1 })
     if ref($inner_node) eq 'HASH';
    $receiver_expr = $inner_expr if defined($inner_expr) && length($inner_expr);
+  }
+
+  if (grep { ref($_) eq 'HASH' && $_->{receiver_trailing_block_arg} } @$calls) {
+   _trace_method_decision(
+    phase => 'lower_ast_fluent_chain_node',
+    label => 'fluent_chain',
+    decision => 'ast_receiver_with_trailing_block_chain',
+    taken => 1,
+    context => { steps => scalar(@$calls) },
+   );
+
+   my $synthetic_expr = $receiver_expr;
+   foreach my $call (@$calls) {
+    return undef unless ref($call) eq 'HASH';
+    my $method = $call->{method} // '';
+    if ($call->{receiver_trailing_block_arg}) {
+     return _actionir_ast_unsupported_helper_expr($method)
+      unless $method eq 'with';
+     my $args = $call->{args} || [];
+     return _actionir_ast_unsupported_helper_expr('with')
+      unless ref($args) eq 'ARRAY' && @$args == 1;
+     my $block_node = $args->[0];
+     return _actionir_ast_unsupported_helper_expr('with')
+      unless ref($block_node) eq 'HASH' && ($block_node->{kind} // '') eq 'block_value';
+     my $block_source = $block_node->{source};
+     return _actionir_ast_unsupported_helper_expr('with')
+      unless defined($block_source) && length($block_source);
+     $synthetic_expr = 'with('.$synthetic_expr.') '.$block_source;
+     next;
+    }
+    my $source = $call->{source};
+    return undef unless defined($source) && length($source);
+    $synthetic_expr .= '.'.$source;
+   }
+
+   my $lowered = _lower_method_value_expr($synthetic_expr, $deps);
+   return $lowered if defined($lowered) && length($lowered);
+   return $legacy_method_value_expr->($synthetic_expr)
+  }
+
+  my $receiver_is_with_trailing_block = (($receiver->{kind} // '') eq 'call'
+   && ($receiver->{name} // '') eq 'with'
+   && $receiver->{trailing_block_arg}) ? 1 : 0;
+  unless ($receiver_is_with_trailing_block) {
+   my $unknown = _actionir_ast_first_unknown_value_call_name($node, $deps);
+   my $unknown_expr = _actionir_ast_unsupported_helper_expr($unknown);
+   return $unknown_expr if defined($unknown_expr) && length($unknown_expr);
   }
 
   my $chain_arg_exprs = sub {

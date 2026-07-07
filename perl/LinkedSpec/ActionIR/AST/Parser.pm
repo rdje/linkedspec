@@ -814,19 +814,14 @@ sub _parse_fluent_chain_expr {
  my @calls;
  for (my $idx = 1; $idx < @$segments; ++$idx) {
   my $seg = $segments->[$idx];
-  my $call = _parse_method_function_expr($seg->{text});
+  my $call = _parse_fluent_call_segment(
+   $seg->{text},
+   $start + $seg->{start},
+   $start + $seg->{end},
+  );
   return _raw_node($trimmed, $start, $end, 'invalid_fluent_chain')
-   unless ref($call) eq 'HASH' && defined($call->{method});
-  my $open_idx = index($seg->{text}, '(');
-  my $payload = substr($seg->{text}, $open_idx + 1, length($seg->{text}) - $open_idx - 2);
-  my @args = _parse_arg_exprs($payload, $start + $seg->{start} + $open_idx + 1);
-  push @calls, {
-   method => $call->{method},
-   source_method => $call->{source_method},
-   args => \@args,
-   source => $seg->{text},
-   source_span => _span($start + $seg->{start}, $start + $seg->{end}),
-  };
+   unless ref($call) eq 'HASH';
+  push @calls, $call;
  }
 
  return _node(
@@ -837,6 +832,57 @@ sub _parse_fluent_chain_expr {
   receiver => $receiver,
   calls => \@calls,
  )
+}
+
+sub _parse_fluent_call_segment {
+ my ($text, $start, $end) = @_;
+ return undef unless defined($text) && length($text);
+
+ my $call = _parse_method_function_expr($text);
+ if (ref($call) eq 'HASH' && defined($call->{method})) {
+  my $open_idx = index($text, '(');
+  return undef if $open_idx < 0;
+  my $payload = substr($text, $open_idx + 1, length($text) - $open_idx - 2);
+  my @args = _parse_arg_exprs($payload, $start + $open_idx + 1);
+  return {
+   method => $call->{method},
+   source_method => $call->{source_method},
+   args => \@args,
+   source => $text,
+   source_span => _span($start, $end),
+  }
+ }
+
+ my $attached = _split_attached_block_expr($text);
+ return undef unless ref($attached) eq 'HASH';
+
+ my ($head_trimmed, $head_start) = _trim_with_offsets($attached->{head}, $start);
+ return undef unless length($head_trimmed);
+ $call = _parse_method_function_expr($head_trimmed);
+ return undef unless ref($call) eq 'HASH' && defined($call->{method});
+ return undef unless ($call->{method} // '') eq 'with';
+
+ my $open_idx = index($head_trimmed, '(');
+ return undef if $open_idx < 0;
+ my $payload = substr($head_trimmed, $open_idx + 1, length($head_trimmed) - $open_idx - 2);
+ my @args = _parse_arg_exprs($payload, $head_start + $open_idx + 1);
+
+ my $block_start = $start + $attached->{open_idx};
+ my $block_end = $start + $attached->{close_idx} + 1;
+ my $block_source = substr($text, $attached->{open_idx}, $attached->{close_idx} - $attached->{open_idx} + 1);
+ my $block = parse_action_block($attached->{body});
+ push @args, _node('block_value', $block_source, $block_start, $block_end, block => $block);
+
+ return {
+  method => $call->{method},
+  source_method => $call->{source_method},
+  args => \@args,
+  source => $text,
+  source_span => _span($start, $end),
+  trailing_block_arg => 1,
+  receiver_trailing_block_arg => 1,
+  trailing_block_source_span => _span($block_start, $block_end),
+ }
 }
 
 sub _split_top_level_fluent_segments {

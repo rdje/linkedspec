@@ -47785,6 +47785,95 @@ subtest 'spec_format_terse_14_2_perl_helper_trailing_block_arguments' => sub {
         'with(value) trailing-block spec remains ActionIR ready on the Perl reference');
 };
 
+subtest 'spec_format_terse_14_4_perl_receiver_trailing_block_arguments' => sub {
+    # SPEC-FORMAT-TERSE.14.4: receiver `.with() { ... }` binds the
+    # receiver value as scoped `value`, then feeds the block result into
+    # any later compatible receiver-family links.
+    plan tests => 18;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    my $terminal_lowered = $L->('return("x".with() { return(cat(value,"!")) })');
+    like($terminal_lowered, qr/my \$__ls_with_value = "x"; my \$value = \$__ls_with_value;/,
+        'receiver .with() lowers by binding the receiver value');
+    unlike($terminal_lowered, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/,
+        'terminal receiver .with() lowering has no unsupported-helper sentinel');
+
+    my $continuing_lowered = $L->('return(" x ".with() { return(cat(value,"!")) }.trim())');
+    like($continuing_lowered, qr/my \$__ls_trim = do \{ my \$__ls_with_value = " x ";/,
+        'continuing receiver .with() feeds the block result into the next string method');
+    unlike($continuing_lowered, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/,
+        'continuing receiver .with() lowering has no unsupported-helper sentinel');
+
+    my $mid_lowered = $L->('return(" x ".trim().with() { return(cat(value,"!")) }.uppercase())');
+    like($mid_lowered, qr/my \$__ls_upper = do \{ my \$__ls_with_value = do \{ my \$__ls_trim = " x ";/,
+        'mid-chain receiver .with() consumes the previous receiver result');
+    unlike($mid_lowered, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/,
+        'mid-chain receiver .with() lowering has no unsupported-helper sentinel');
+
+    like($L->('return("x".with("bad") { return(value) })'), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with/,
+        'receiver .with(value) remains outside the .14.4 surface');
+
+    my $terminal_spec = "Top::\n"
+                      . " /x/ -> Done { return(\"x\".with() { return(cat(value,\"!\")) }) }\n"
+                      . "\nDone::\n /[a-z]+/\n";
+    my $terminal_parser = eval { LinkedSpec::Get(\$terminal_spec) };
+    ok(ref($terminal_parser) eq 'CODE', 'terminal receiver .with() spec compiles')
+        or diag(normalize_error($@));
+    is($run->($terminal_parser, 'xhello'), '"x!"',
+        'terminal receiver .with() returns the block result');
+
+    my $continuing_spec = "Top::\n"
+                        . " /x/ -> Done { return(\" x \".with() { return(cat(value,\"!\")) }.trim()) }\n"
+                        . "\nDone::\n /[a-z]+/\n";
+    my $continuing_parser = eval { LinkedSpec::Get(\$continuing_spec) };
+    ok(ref($continuing_parser) eq 'CODE', 'continuing receiver .with() spec compiles')
+        or diag(normalize_error($@));
+    is($run->($continuing_parser, 'xhello'), '"x !"',
+        'continuing receiver .with() feeds later string methods');
+
+    my $array_bridge_spec = "Top::\n"
+                          . " /x/ -> Done { return(\" a-b \".trim().with() { return(value.split(\"-\")) }.count()) }\n"
+                          . "\nDone::\n /[a-z]+/\n";
+    my $array_bridge_parser = eval { LinkedSpec::Get(\$array_bridge_spec) };
+    ok(ref($array_bridge_parser) eq 'CODE', 'receiver .with() array-result continuation spec compiles')
+        or diag(normalize_error($@));
+    is($run->($array_bridge_parser, 'xhello'), '2',
+        'receiver .with() block result can feed later array-family methods');
+
+    my $scope_spec = "Top::\n"
+                   . " /x/ -> Done { set(value,\"outer\"); return(array(\"inner\".with() { value = cat(value,\"!\"); return(value) }, value)) }\n"
+                   . "\nDone::\n /[a-z]+/\n";
+    my $scope_parser = eval { LinkedSpec::Get(\$scope_spec) };
+    ok(ref($scope_parser) eq 'CODE', 'receiver .with() scoped-binding spec compiles')
+        or diag(normalize_error($@));
+    is($run->($scope_parser, 'xhello'), '["inner!","outer"]',
+        'receiver .with() restores the surrounding value binding after block execution');
+
+    my $src = $gen->($continuing_spec);
+    my $d = LinkedSpec::Get(\$continuing_spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'receiver .with() spec has no canonical fallback');
+    is($meta->{unresolved_helper_count}, 0,
+        'receiver .with() spec has no unresolved helper');
+    ok($meta->{language_agnostic_action_ir_ready} && $src !~ /LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/,
+        'receiver .with() spec remains ActionIR ready without unsupported sentinels');
+};
+
 subtest 'spec_format_terse_2_3_4_2_perl_inline_value_control_lowering' => sub {
     # SPEC-FORMAT-TERSE.2.3.4.2: inline-composite if/switch are value expressions
     # on the Perl reference too. The statement-marker and attached-block control

@@ -3410,6 +3410,10 @@ impl Engine {
             Expr::RegexLiteral { pattern } => Ok(RuntimeValue::Scalar(pattern.clone())),
             Expr::Undef => Ok(RuntimeValue::Undef),
             Expr::FluentChain { receiver, calls } => {
+                if calls.iter().any(Self::is_receiver_with_trailing_block_call) {
+                    return self
+                        .eval_receiver_with_trailing_block_chain(receiver, calls, ctx, rule_label);
+                }
                 if calls.first().is_some_and(|call| {
                     Self::is_hash_receiver_value_chain_method(&call.method)
                         && (call.method != "copy"
@@ -3534,6 +3538,28 @@ impl Engine {
                 | "range"
                 | "min"
                 | "max"
+        )
+    }
+
+    fn is_array_receiver_array_returning_method(method: &str) -> bool {
+        matches!(
+            method,
+            "copy"
+                | "sorted"
+                | "reversed"
+                | "take"
+                | "take_last"
+                | "drop_front"
+                | "drop_back"
+                | "slice"
+                | "concat_arrays"
+                | "split_each"
+                | "trim_each"
+                | "filter_nonempty"
+                | "lowercase_each"
+                | "uppercase_each"
+                | "uniq"
+                | "filter_match"
         )
     }
 
@@ -3754,6 +3780,264 @@ impl Engine {
 
     fn is_number_receiver_terminal_method(method: &str) -> bool {
         matches!(method, "eq" | "ne" | "gt" | "ge" | "lt" | "le")
+    }
+
+    fn is_receiver_with_trailing_block_call(call: &linkedspec_core::expr::FluentCall) -> bool {
+        use linkedspec_core::expr::{Arg, Expr};
+
+        call.method == "with"
+            && matches!(
+                call.args.last(),
+                Some(Arg::Positional(Expr::BlockValue { .. }))
+            )
+    }
+
+    fn eval_receiver_with_trailing_block_chain(
+        &self,
+        receiver: &linkedspec_core::expr::Expr,
+        calls: &[linkedspec_core::expr::FluentCall],
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        let mut current = self.eval_expr(receiver, ctx, rule_label)?;
+
+        for (index, call) in calls.iter().enumerate() {
+            if Self::is_receiver_with_trailing_block_call(call) {
+                current =
+                    self.eval_receiver_with_trailing_block_call(current, call, ctx, rule_label)?;
+                continue;
+            }
+
+            let next_call = calls.get(index + 1);
+            current = self.eval_receiver_dynamic_value_chain_call(
+                current,
+                call,
+                next_call,
+                index + 1 == calls.len(),
+                ctx,
+                rule_label,
+            )?;
+        }
+
+        Ok(current)
+    }
+
+    fn eval_receiver_with_trailing_block_call(
+        &self,
+        current: RuntimeValue,
+        call: &linkedspec_core::expr::FluentCall,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        use linkedspec_core::expr::Expr;
+
+        if call.args.len() != 1 {
+            return Err(format!(
+                "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: receiver `.with() {{ ... }}` expects no parenthesized arguments in rule '{rule_label}'"
+            ));
+        }
+        let Expr::BlockValue { block } = call.args[0].value() else {
+            return Err(format!(
+                "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: receiver `.with()` requires a trailing block argument in rule '{rule_label}'"
+            ));
+        };
+
+        let binding = ctx.enter_scoped_scalar_binding("value", current);
+        let result = self.eval_block_value(block, ctx, rule_label);
+        ctx.exit_scoped_variable_binding(binding);
+        result
+    }
+
+    fn eval_receiver_dynamic_value_chain_call(
+        &self,
+        current: RuntimeValue,
+        call: &linkedspec_core::expr::FluentCall,
+        next_call: Option<&linkedspec_core::expr::FluentCall>,
+        is_last: bool,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        let method = call.method.as_str();
+
+        if method == "copy" {
+            if matches!(current, RuntimeValue::Hash(_))
+                || next_call
+                    .is_some_and(|next| Self::is_hash_receiver_value_chain_method(&next.method))
+            {
+                return self.eval_hash_receiver_dynamic_value_call(
+                    current, call, is_last, ctx, rule_label,
+                );
+            }
+            return self
+                .eval_array_receiver_dynamic_value_call(current, call, is_last, ctx, rule_label);
+        }
+
+        if Self::is_hash_receiver_value_chain_method(method) {
+            return self
+                .eval_hash_receiver_dynamic_value_call(current, call, is_last, ctx, rule_label);
+        }
+        if Self::is_array_receiver_value_chain_method(method)
+            && (!matches!(method, "min" | "max") || matches!(current, RuntimeValue::Array(_)))
+        {
+            return self
+                .eval_array_receiver_dynamic_value_call(current, call, is_last, ctx, rule_label);
+        }
+        if Self::is_string_receiver_value_chain_method(method) {
+            return self
+                .eval_string_receiver_dynamic_value_call(current, call, is_last, ctx, rule_label);
+        }
+        if Self::is_number_receiver_value_chain_method(method) {
+            return self
+                .eval_number_receiver_dynamic_value_call(current, call, is_last, ctx, rule_label);
+        }
+
+        Ok(RuntimeValue::Undef)
+    }
+
+    fn receiver_call_args(
+        &self,
+        current: RuntimeValue,
+        call: &linkedspec_core::expr::FluentCall,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<(Vec<linkedspec_core::expr::Arg>, Vec<RuntimeValue>), String> {
+        use linkedspec_core::expr::{Arg, Expr};
+
+        let evaluated_call_args: Vec<RuntimeValue> = call
+            .args
+            .iter()
+            .map(|arg| self.eval_expr(arg.value(), ctx, rule_label))
+            .collect::<Result<Vec<_>, _>>()?;
+
+        let receiver_arg = Arg::Positional(Expr::Undef);
+        if call.method == "join_values" {
+            let mut raw = call.args.clone();
+            raw.push(receiver_arg);
+            let mut vals = evaluated_call_args;
+            vals.push(current);
+            return Ok((raw, vals));
+        }
+
+        let mut raw = Vec::with_capacity(call.args.len() + 1);
+        raw.push(receiver_arg);
+        raw.extend(call.args.clone());
+        let mut vals = Vec::with_capacity(evaluated_call_args.len() + 1);
+        vals.push(current);
+        vals.extend(evaluated_call_args);
+        Ok((raw, vals))
+    }
+
+    fn eval_array_receiver_dynamic_value_call(
+        &self,
+        current: RuntimeValue,
+        call: &linkedspec_core::expr::FluentCall,
+        is_last: bool,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        if Self::is_statement_only_array_end_mutation_method(&call.method)
+            || !Self::is_array_receiver_value_chain_method(&call.method)
+        {
+            return Ok(RuntimeValue::Undef);
+        }
+
+        let (raw_args, evaluated) = self.receiver_call_args(current, call, ctx, rule_label)?;
+        let next =
+            self.call_helper_with_args(&call.method, &raw_args, &evaluated, ctx, rule_label)?;
+        if !Self::is_array_receiver_array_returning_method(&call.method) && !is_last {
+            return Ok(RuntimeValue::Undef);
+        }
+        Ok(next)
+    }
+
+    fn eval_hash_receiver_dynamic_value_call(
+        &self,
+        current: RuntimeValue,
+        call: &linkedspec_core::expr::FluentCall,
+        is_last: bool,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        if !Self::is_hash_receiver_value_chain_method(&call.method) {
+            return Ok(RuntimeValue::Undef);
+        }
+
+        let (raw_args, evaluated) = self.receiver_call_args(current, call, ctx, rule_label)?;
+        let next =
+            self.call_helper_with_args(&call.method, &raw_args, &evaluated, ctx, rule_label)?;
+        if Self::is_hash_receiver_terminal_method(&call.method) && !is_last {
+            return Ok(RuntimeValue::Undef);
+        }
+        Ok(next)
+    }
+
+    fn eval_string_receiver_dynamic_value_call(
+        &self,
+        current: RuntimeValue,
+        call: &linkedspec_core::expr::FluentCall,
+        is_last: bool,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        if !Self::is_string_receiver_value_chain_method(&call.method) {
+            return Ok(RuntimeValue::Undef);
+        }
+
+        let (raw_args, evaluated) = self.receiver_call_args(current, call, ctx, rule_label)?;
+        let next =
+            self.call_helper_with_args(&call.method, &raw_args, &evaluated, ctx, rule_label)?;
+        if Self::is_string_receiver_terminal_method(&call.method) && !is_last {
+            return Ok(RuntimeValue::Undef);
+        }
+        Ok(next)
+    }
+
+    fn eval_number_receiver_dynamic_value_call(
+        &self,
+        current: RuntimeValue,
+        call: &linkedspec_core::expr::FluentCall,
+        is_last: bool,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        use linkedspec_core::expr::{Arg, Expr};
+
+        if !Self::is_number_receiver_value_chain_method(&call.method) {
+            return Ok(RuntimeValue::Undef);
+        }
+        let valid_arity = match call.method.as_str() {
+            "abs" | "floor" | "ceil" | "round" => call.args.is_empty(),
+            "sub" | "div" | "mod" | "eq" | "ne" | "gt" | "ge" | "lt" | "le" => call.args.len() == 1,
+            "clamp" => call.args.len() == 2,
+            "add" | "mul" | "min" | "max" => !call.args.is_empty(),
+            _ => false,
+        };
+        if !valid_arity {
+            return Ok(RuntimeValue::Undef);
+        }
+
+        let Some(helper_name) = Self::number_receiver_helper_name(&call.method) else {
+            return Ok(RuntimeValue::Undef);
+        };
+        let evaluated_call_args: Vec<RuntimeValue> = call
+            .args
+            .iter()
+            .map(|arg| self.eval_expr(arg.value(), ctx, rule_label))
+            .collect::<Result<Vec<_>, _>>()?;
+
+        let mut raw_args = Vec::with_capacity(call.args.len() + 1);
+        raw_args.push(Arg::Positional(Expr::Undef));
+        raw_args.extend(call.args.clone());
+        let mut evaluated = Vec::with_capacity(evaluated_call_args.len() + 1);
+        evaluated.push(current);
+        evaluated.extend(evaluated_call_args);
+
+        let next =
+            self.call_helper_with_args(helper_name, &raw_args, &evaluated, ctx, rule_label)?;
+        if Self::is_number_receiver_terminal_method(&call.method) && !is_last {
+            return Ok(RuntimeValue::Undef);
+        }
+        Ok(next)
     }
 
     fn eval_array_receiver_value_chain(

@@ -99,15 +99,17 @@ evaluates first, including any block-local `return(expr)`, and the yielded value
 compatible receiver family selected by the first method. Blocks do not create a separate block-only receiver
 dispatch rule.
 
-### Trailing block helper: `with(value) { ... }`
+### Trailing block helper: `with(value) { ... }` / `.with() { ... }`
 
-- **Signature**: `with(value?: expr) { block }`
+- **Signature**: `with(value?: expr) { block }`; receiver form `receiver.with() { block }`
 - **Returns**: the immediate block result.
-- **Backend status**: Perl reference and Rust interpreter support are current. Receiver `.with() { ... }` and bare
-  `with { ... }` are not current portable surfaces yet.
-- **Behavior**: Evaluates the optional value argument, binds scoped scalar `value` while the trailing block
-  executes, restores any surrounding `value` binding afterward, and yields the block result. `with() { ... }`
-  binds `value` to `undef`.
+- **Backend status**: Perl reference and Rust interpreter support are current for helper form and receiver form.
+  Bare `with { ... }` and explicit receiver `.with(value) { ... }` are not current portable surfaces yet.
+- **Behavior**: Helper form evaluates the optional value argument, binds scoped scalar `value` while the trailing
+  block executes, restores any surrounding `value` binding afterward, and yields the block result. `with() { ... }`
+  binds `value` to `undef`. Receiver form evaluates the receiver first, binds that receiver value as scoped
+  `value`, and yields the block result as the terminal value or as the input to later compatible receiver-family
+  links.
 - **Execution context**: The block runs immediately in the caller's current action/runtime context. Captures,
   `retv`, cursor state, helper/function visibility, and ordinary working-variable side effects are shared with the
   call site. Only the scalar binding `value` is portable as the scoped block parameter in this MVP; mutations to
@@ -118,6 +120,8 @@ dispatch rule.
 - **Examples**:
   - `return(with("x") { return(cat(value, "!")) })` yields `"x!"`.
   - `return(with() { return(is_undefined(value)) })` yields true.
+  - `return(" x ".with() { return(cat(value, "!")) }.trim())` yields `"x !"`.
+  - `return(" a-b ".trim().with() { return(value.split("-")) }.count())` yields `2`.
   - `set(value, "outer"); return(array(with("inner") { return(value) }, value))` yields `["inner", "outer"]`.
 
 ## 1. Declaration Helpers

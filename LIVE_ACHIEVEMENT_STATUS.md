@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **SPEC-FORMAT-TERSE.14.4 — add receiver trailing blocks**
+  (DONE implementation; frontier `.14.5` final trailing block no-drift closeout next).
+
+  **Change:** Perl and Rust now support receiver `.with() { ... }` as an immediate trailing block argument. The
+  receiver value is scoped as `value`, block-local `return(expr)` yields the `.with` result, and that result can be
+  terminal or feed later compatible receiver-family links.
+
+  **Boundary:** Explicit receiver `.with(value) { ... }`, bare `with { ... }`, closures, assignable/returnable
+  blocks, delayed callbacks, and arbitrary non-`with` receiver trailing blocks remain unshipped.
+
+  **Verification:** Focused Perl and Rust parser/runtime checks pass; full phase0 passes 1026 tests; oracle
+  generation emits **95** fixtures; Rust `oracle_corpus_matches_perl_reference` passes over the full
+  manifest-backed corpus.
+
 - 2026-07-07: **REPO-HYGIENE.3 — remove generated artifacts**
   (DONE urgent cleanup; return to `SPEC-FORMAT-TERSE.14.4` next).
 
@@ -21,7 +35,7 @@ Current execution status for interruption-safe batch workflow recovery.
   boundaries.
 
 - 2026-07-07: **SPEC-FORMAT-TERSE.14.3 — add Rust helper trailing blocks**
-  (DONE implementation; frontier `.14.4` receiver `.with() { ... }` next).
+  (DONE implementation; next at that time was `.14.4` receiver `.with() { ... }`).
 
   **Change:** Rust parser/runtime parity now supports helper-form `with(value) { ... }` / `with() { ... }` as an
   immediate trailing block argument. The block runs in the caller's current action/runtime context; only scalar

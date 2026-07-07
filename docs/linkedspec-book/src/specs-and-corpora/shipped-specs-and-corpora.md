@@ -81,7 +81,7 @@ The important point is that these files collectively exercise the system:
 - runtime parser invocation,
 - real nested return payloads.
 
-The manifest-backed 94-fixture Rust oracle corpus tracks this maturity incrementally.
+The manifest-backed 95-fixture Rust oracle corpus tracks this maturity incrementally.
 Its exact case list lives in `rust/linkedspec-runtime/tests/corpus/manifest.json`.
 Representative cases include `lib_reader_sattribute` and `lib_reader_cattribute`;
 `portmap_bare`, `portmap_bit`, `portmap_slice`, `portmap_constant`, and
