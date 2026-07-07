@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — REPO-HYGIENE.3 — remove generated artifacts
+
+**Scope:** User-requested generated-artifact cleanup for disk-space recovery.
+
+**Change:** Removed ignored, untracked, rebuildable generated outputs: `rust/target` (5.2G before deletion) and
+`docs/linkedspec-book/book` (7.0M before deletion).
+
+**Boundary:** No source, fixtures, checked-in docs, or submodule corpus content was deleted. `.log` and `.bin` hits
+under `rgx/` were preserved because they live in submodule stimulus/fixture/issue-artifact trees and are not 100%
+safe parent-repo cleanup targets.
+
+**Validation:** Ignored/tracked checks confirm the deleted directories were ignored and untracked. Post-clean scans
+show no remaining safe `.log`, `.bin`, `.tmp`, `.bak`, `.DS_Store`, or `.swp` artifacts in the main checkout
+outside `.git`, ignored target trees, and `rgx`. `bash scripts/check_memory_architecture.sh`,
+`bash knowledge-map/scripts/check_knowledge_map.sh`, `bash scripts/check_doctrines.sh`, and `git diff --check`
+pass. Cargo/mdBook were intentionally not run for this cleanup slice because they would recreate the removed
+generated artifacts.
+
 ## 2026-07-07 — SPEC-FORMAT-TERSE.14.3 — add Rust helper trailing blocks
 
 **Scope:** Rust helper-form parity for `with(value) { ... }` / `with() { ... }` trailing block arguments.

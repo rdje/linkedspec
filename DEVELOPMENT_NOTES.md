@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (REPO-HYGIENE.3 — generated artifact cleanup boundary):
+  Safe disk-space cleanup in the parent checkout is limited to ignored/untracked generated outputs unless a later
+  task proves a broader boundary. This slice removed `rust/target` (5.2G) and `docs/linkedspec-book/book` (7.0M).
+  Do not delete `.log` or `.bin` hits under `rgx/` from the parent repo cleanup path: they are inside a tracked
+  submodule's stimulus, fixture, or issue-artifact corpus and are not 100% safe to remove here. Any future `rgx`
+  artifact pruning needs its own submodule-owned task and status check.
+
 - 2026-07-07 (SPEC-FORMAT-TERSE.14.3 — Rust `with(value) { ... }` helper-form parity):
   Rust now mirrors the Perl helper-form trailing block surface. The expression parser appends a final `BlockValue`
   only for `with(...) { ... }`, validation recognizes `with`, and runtime dispatch is lazy so the block is not

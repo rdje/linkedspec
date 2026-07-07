@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **REPO-HYGIENE.3 — remove generated artifacts**
+  (DONE urgent cleanup; return to `SPEC-FORMAT-TERSE.14.4` next).
+
+  **Change:** Removed ignored/untracked generated outputs `rust/target` (5.2G) and `docs/linkedspec-book/book`
+  (7.0M). This reclaims the large Rust build output and mdBook HTML output; both are rebuildable.
+
+  **Boundary:** No source, fixtures, checked-in docs, or submodule corpus content was deleted. `.log` and `.bin`
+  hits under `rgx/` were preserved as submodule stimulus/fixture/issue artifacts.
+
+  **Verification:** Ignored/tracked checks passed before deletion; post-clean checks confirm both generated
+  directories are removed and no safe log/bin/temp artifacts remain in the main checkout outside ignored/submodule
+  boundaries.
+
 - 2026-07-07: **SPEC-FORMAT-TERSE.14.3 — add Rust helper trailing blocks**
   (DONE implementation; frontier `.14.4` receiver `.with() { ... }` next).
 
