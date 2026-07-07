@@ -116,11 +116,11 @@ dispatch rule.
 > with no `declare(...)` is a fresh working slot for the parse, not a value carried across parses.
 > Recursive re-entry is the current compatibility boundary on Rust: explicit `declare(...)` still provides
 > rule-invocation snapshot/restore for recursive accumulators, and `set(array(name), [])` is not a drop-in
-> replacement there. `declare(...)` is retained as a legacy explicit form;
+> replacement there. On the Perl reference, `declare(...)` now emits a retired-helper diagnostic;
 > new non-recursive specs should use direct assignment initializers such as `name = value`, `items = []`, and
 > `meta = {}`.
-> Post-migration support is compatibility-only: existing specs may keep declaration helpers, but new examples
-> and language work should not depend on them.
+> Post-migration support is compatibility-only on Rust until `SPEC-FORMAT-TERSE.8.4`; new examples
+> and language work must not depend on declaration helpers.
 > The DSL literals
 > `undef`/`true`/`false` and the engine's own handler locals are never treated as working-variable
 > names (so `array(undef)` builds an array holding the `undef` literal, not a variable `undef`).
@@ -229,7 +229,7 @@ dispatch rule.
 - **Returns**: scalar
 - **Behavior**: Concatenates all arguments as strings. Undef arguments are treated as empty strings.
 - **Edge cases**: Non-scalar arguments (arrays, hashes) return `undef` for the whole expression.
-- **Terse spelling**: `cat(args...)` is the canonical terse rename of `concat`; both spellings lower identically (`concat` is a deprecated alias). See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
+- **Terse spelling**: `cat(args...)` is the canonical spelling. `concat(...)` is retired on the Perl reference and remains Rust compatibility only until `SPEC-FORMAT-TERSE.8.4`. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 - **Example**:
   ```text
   demo::  -> value  .push
@@ -403,8 +403,8 @@ dispatch rule.
 - **Signature**: `array_copy(arr: array)`
 - **Returns**: array
 - **Behavior**: Returns a shallow copy of the array. The new array contains the same elements but is a distinct container.
-- **Compatibility**: `array_values(...)` is a retired alias — use `array_copy`.
-- **Terse spelling**: `copy(arr)` is the canonical terse rename — one unified `copy(...)` subsumes both `array_copy` and `hash_copy`, resolving array-vs-hash by the wrapped symbol kind (array first). `copy(array(x))` lowers identically to `array_copy(array(x))`. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
+- **Compatibility**: `array_values(...)` and `array_copy(...)` are retired on the Perl reference — use `copy(...)`.
+- **Terse spelling**: `copy(arr)` is the canonical spelling — one unified `copy(...)` subsumes both legacy array and hash copy forms, resolving array-vs-hash by the wrapped symbol kind (array first). See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ### `flat_array(arr)`
 - **Signature**: `flat_array(arr: array)`
@@ -471,14 +471,14 @@ dispatch rule.
 ### `push_value(arr, value)`
 - **Signature**: `push_value(target: array, value: expr)`
 - **Returns**: void
-- **Compatibility status**: Legacy compatibility spelling. Current authoring uses `push(array(target), value)`, `target += value`, or an explicit typed target when both arguments are bare identifiers and child-call ambiguity must be avoided.
+- **Compatibility status**: Retired on the Perl reference. Current authoring uses `push(array(target), value)`, `target += value`, or an explicit typed target when both arguments are bare identifiers and child-call ambiguity must be avoided.
 - **Behavior**: Appends a value to the named accumulator. `push(target, value)` is the terse spelling for unambiguous value expressions.
 - **Edge cases**: Value can be any expression type. Undef values are appended as-is; use an explicit `is_nonempty(...)` guard before `push(...)` when empty values should be skipped. The target may be wrapped (`array(items)`) or a **bare** name (`items`); a bare target auto-exists as an array.
 
 ### `push_nonempty(arr, value)`
 - **Signature**: `push_nonempty(target: array, value: expr)`
 - **Returns**: void
-- **Compatibility status**: Legacy compatibility spelling. Current authoring spells the filter explicitly:
+- **Compatibility status**: Retired on the Perl reference. Current authoring spells the filter explicitly:
   `value = expr; if(is_nonempty(value)) { push(array(target), value) }`.
 - **Behavior**: Appends the value only if it is defined and non-empty. Skips undef, empty strings, empty arrays, and empty hashes while preserving `"0"`.
 - **Edge cases**: Like `push_value`, the target may be wrapped (`array(items)`) or a **bare** name (`items`) that auto-exists as an array.
@@ -714,7 +714,7 @@ dispatch rule.
 - **Signature**: `hash_copy(h: hash)`
 - **Returns**: hash
 - **Behavior**: Shallow copy. The new hash has the same keys and values but is a distinct container.
-- **Terse spelling**: `copy(h)` is the unified canonical terse rename (the same `copy(...)` that subsumes `array_copy`); `copy(hash(x))` lowers identically to `hash_copy(hash(x))`. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
+- **Terse spelling**: `copy(h)` is the unified canonical spelling (the same `copy(...)` that subsumes legacy array/hash copy helpers). See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
 
 ### `merge_hash(h1, h2)`
 - **Signature**: `merge_hash(base: hash, overlay: hash)`
@@ -1336,12 +1336,12 @@ unlike the Retired table below):
 |---|---|---|
 | `set(target, value)` | `target = value` | typed value assignment. Bare assignments bind scalar, array, or hash RHS values and yield the stored value in value positions. Explicit `array(...)` / `hash(...)` targets keep aggregate storage. A bare scalar source `set(out, name)` reads `name`. |
 | `name = value` / `=(name, value)` | `set(name, value)` / `name = value` | assignment expression/operator spelling. It stores the target and yields the stored typed value in value positions. |
-| `items += value` | `push(array(items), value)` / `push_value(items, value)` | array append operator. A bare RHS reads a scalar working variable; all-bare `push(A,B)` remains child-call syntax; in value positions it yields the updated array snapshot. |
+| `items += value` | `push(array(items), value)` | array append operator. A bare RHS reads a scalar working variable; all-bare `push(A,B)` remains child-call syntax; in value positions it yields the updated array snapshot. |
 | `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()` | `items += value` for back append only | array end-mutation methods; statement-level only. The receiver may be bare or `array(...)`; pop methods discard the removed value. |
 | `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator. Bare key/RHS identifiers read scalar working variables in mutation slots; in value positions it yields the updated hash snapshot. |
 | `payload["items"][0]["name"] = value` | direct nested access assignment | mutates a scalar-held array/hash value path. Intermediate containers must exist; final hash keys may be created; final array indexes may replace or append at len. |
-| `cat(args...)` | `concat(args...)` | string concatenation. |
-| `copy(container)` | `array_copy(arr)` / `hash_copy(h)` | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
+| `cat(args...)` | `concat(args...)` retired on Perl | string concatenation. |
+| `copy(container)` | `array_copy(arr)` / `hash_copy(h)` retired on Perl | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
 
 Direct nested access, for example `payload["children"][0]["name"]` or `payload["children"][i]["name"]`, is
 also part of the terse surface. It is not a helper rename; it is the replacement surface for the older nested
@@ -1349,7 +1349,7 @@ path helper spelling. Quoted segments are hash keys, and bare path atoms such as
 variables as array indexes. As an lvalue, a direct nested path mutates an existing scalar-held array/hash value
 tree with the no-autovivification write rules described above.
 
-The helper aliases above lower identically within their supported statement/helper families. Assignment forms
+The current helper aliases above lower within their supported statement/helper families. Assignment forms
 (`set(...)`, `name = value`, and `=(name, value)`) now compose as value expressions when the
 target receives a scalar, array, or hash RHS value. Mutation assignment operators also compose as value
 expressions: `items += value` yields the updated array snapshot and `meta[key] = value` yields the updated hash
@@ -1361,8 +1361,8 @@ their contracts. New `.spec` authoring should prefer the terse names.
 ### Compatibility Aliases (Retired)
 The following are retired and must not be used in new `.spec` authoring. Backends may implement them for compatibility with legacy specs but should treat them as deprecated:
 
-Declaration helpers (`declare(...)` plus declaration aliases) follow the same compatibility policy: accepted for
-legacy specs, not for new authoring. See [Declaration Helper Reference](../dsl/declaration-helper-reference.md#post-migration-support-policy).
+Declaration helpers (`declare(...)` plus declaration aliases) are retired on the Perl reference and remain Rust
+compatibility only until `SPEC-FORMAT-TERSE.8.4`. See [Declaration Helper Reference](../dsl/declaration-helper-reference.md#post-migration-support-policy).
 
 | Retired | Use Instead |
 |---|---|

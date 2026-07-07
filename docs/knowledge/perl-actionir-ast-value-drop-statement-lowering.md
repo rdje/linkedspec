@@ -10,7 +10,7 @@ answers:
 date: 2026-07-01
 status: current
 tags: [actionir, ast, perl-reference, method-lowering, value-drop]
-evidence: "PERL-ACTIONIR-AST-MIGRATION.5.2 added the value_drop_statement contract, scanner event, canonical VALUE_DROP mapping, and focused t/actionir_ast_parser.t coverage. Supported standalone value statements such as trim(\" x \"), concat(\"a\",\"b\"), and \" x \".trim() lower through MethodLowering AST value traversal and then discard the value; malformed covered helpers report unresolved-helper metadata. SPEC-FORMAT-TERSE.4.2.3 adds a registry-aware canonical event path so registered standalone user-function calls/chains also lower as VALUE_DROP; unregistered standalone user-function-shaped calls/chains remain raw compatibility debt."
+evidence: "PERL-ACTIONIR-AST-MIGRATION.5.2 added the value_drop_statement contract, scanner event, canonical VALUE_DROP mapping, and focused t/actionir_ast_parser.t coverage. Supported standalone value statements such as trim(\" x \"), cat(\"a\",\"b\"), and \" x \".trim() lower through MethodLowering AST value traversal and then discard the value; malformed covered helpers report unresolved-helper metadata. SPEC-FORMAT-TERSE.8.3 retired old standalone concat(...) on Perl, so it now reports a retired-helper diagnostic instead of being a supported value drop. SPEC-FORMAT-TERSE.4.2.3 adds a registry-aware canonical event path so registered standalone user-function calls/chains also lower as VALUE_DROP; unregistered standalone user-function-shaped calls/chains remain raw compatibility debt."
 reverify: "prove -Iperl t/actionir_ast_parser.t && prove -q -Iperl t/phase0_regression.t"
 ---
 

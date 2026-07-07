@@ -18,27 +18,28 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.8.2.4` — `.8.2` migration closeout is complete: root specs/corpus scan
-  clean, generated/test residues are classified for `.8.3`/`.8.4` hard retirement, oracle regeneration is stable
-  over 93 fixtures, Rust `corpus_oracle` passes, mdBook builds, and full phase0 passes 1022 tests.
-- prior_leaf: `SPEC-FORMAT-TERSE.8.2.3` (commit `4a5b3430`) — current-facing mdBook/KM helper references were
-  migrated and `KNOWLEDGE_MAP.md` regenerated.
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.8.3` — Perl hard retirement is complete: declaration helpers/aliases,
+  function-form `concat(...)`, `array_copy(...)`, `hash_copy(...)`, `push_value(...)`, and `push_nonempty(...)` now
+  emit unsupported-helper diagnostics, while current `cat(...)`, `copy(...)`, `push(...)`, assignments, typed
+  wrappers, and receiver methods keep behavior. Full phase0 passes 1022 tests.
+- prior_leaf: `SPEC-FORMAT-TERSE.8.2.4` (commit `6f244ce3`) — `.8.2` migration closeout proved current
+  specs/corpus/docs/KM clean or classified before hard retirement.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-FORMAT-TERSE.8.2.4 - close helper migration no-drift gates`; parent before this slice was
-  `4a5b3430`. **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly
+  `SPEC-FORMAT-TERSE.8.3 - hard-retire Perl legacy helpers`; parent before this slice was
+  `6f244ce3`. **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly
   instructed.**
-- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.8.3` (Perl reference hard retirement for still-successful
-  legacy helper spellings) and it may start only after this `.8.2.4` commit is clean and `git status` is
+- active_work_unit: next frontier is `SPEC-FORMAT-TERSE.8.4` (Rust parser/runtime hard retirement for legacy helper
+  spellings and wrapper aliases) and it may start only after this `.8.3` commit is clean and `git status` is
   handoff-ready.
-- next_action: after this `.8.2.4` commit is clean, pick `SPEC-FORMAT-TERSE.8.3`; do not push unless explicitly
+- next_action: after this `.8.3` commit is clean, pick `SPEC-FORMAT-TERSE.8.4`; do not push unless explicitly
   instructed.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests (e.g. 102 pplugin lazy-load) fail on the stale checkout. Full phase0 needs the **10-min timeout** (`timeout:600000`), else it caps mid-run (exit 144/143). **Generated Perl handlers are NON-strict.** **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`). Current phase0 reaches **PASS `1..1022`**. oracle = `tools/gen_oracle_corpus.pl` (per-case fork/SIGKILL; **93** fixtures → **run in background**; `manifest.json` + drift guards). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`. Rust numbered capture helpers are captures-only (`0`=first capture); whole match = `entry_text()`/`match_text()`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
-  worktree ignored by submodule policy. Deferred lanes behind `.8.2`: `.9` (hash `=>`→`:`),
+  worktree ignored by submodule policy. Deferred lanes behind `.8.4` / `.8` closeout: `.9` (hash `=>`→`:`),
   `.10`/`.12`/`.13`/`.14` backlog; `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`,
   `SPEC-LANG-REFERENCE`.
-- blockers: none for `.8.3` ownership. in_flight_uncommitted: none after the `.8.2.4` commit lands; do
+- blockers: none for `.8.4` ownership. in_flight_uncommitted: none after the `.8.3` commit lands; do
   not pivot unless the repo is handoff-ready.

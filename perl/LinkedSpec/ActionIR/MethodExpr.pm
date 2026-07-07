@@ -236,13 +236,16 @@ sub _parse_method_function_expr {
  my $trimmed = _trim_method_expr_value($expr);
  return undef unless defined($trimmed) && length($trimmed);
  return undef unless $trimmed =~ /^(?<method>\w+|==|!=|>=|<=|=|[+\-*\/%<>])\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))$/o;
- my $method = _normalize_method_name($+{method});
+ my $source_method = $+{method};
+ my $method = _normalize_method_name($source_method);
 
  my $payload = $+{PAREN};
  $payload =~ s/^\(|\)$//go;
  return {
-  method => $method,
-  args   => _split_top_level_csv($payload),
+  method        => $method,
+  source_method => $source_method,
+  source        => $trimmed,
+  args          => _split_top_level_csv($payload),
  }
 }
 

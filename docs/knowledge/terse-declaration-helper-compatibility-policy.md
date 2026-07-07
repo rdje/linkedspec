@@ -1,26 +1,26 @@
 ---
 id: terse-declaration-helper-compatibility-policy
-title: "declare(...) remains accepted legacy compatibility after SPEC-FORMAT-TERSE.6; new authoring uses terse auto-existing variables and assignment/mutation forms"
+title: "declare(...) is retired on the Perl reference after SPEC-FORMAT-TERSE.8.3; Rust compatibility remains pending; new authoring uses terse auto-existing variables and assignment/mutation forms"
 answers:
   - "does declare remain supported"
   - "should declare be removed after the terse migration"
   - "what is the post-migration declare compatibility policy"
   - "is declare legacy compatibility"
   - "where are declaration helpers allowed"
-date: 2026-07-04
-status: confirmed
+date: 2026-07-06
+status: current
 tags: [spec-format-terse, declare, compatibility, dsl, decision]
-evidence: "ADR 0018 and SPEC-FORMAT-TERSE.6.4 decide that `declare(...)` and declaration aliases remain accepted legacy compatibility syntax after live shipped specs, public examples, and root corpus examples moved to terse replacements. The policy keeps Perl/Rust compatibility support and the declare/no-declare oracle fixtures (`autoexist_scalar_declare`, `autoexist_array_declare`) while forbidding new shipped specs/current examples from depending on declaration helpers."
+evidence: "ADR 0018 and SPEC-FORMAT-TERSE.6.4 originally kept `declare(...)` and declaration aliases as accepted legacy compatibility after live shipped specs, public examples, and root corpus examples moved to terse replacements. SPEC-FORMAT-TERSE.8 supersedes that retention policy for this unreleased project. SPEC-FORMAT-TERSE.8.3 now makes Perl `declare(...)`, `declare_s(...)`, `declare_a(...)`, `declare_h(...)`, `declare_scalar(...)`, `declare_array(...)`, and `declare_hash(...)` emit retired-helper diagnostics. Rust still retains declaration compatibility until `SPEC-FORMAT-TERSE.8.4` resolves the recursive accumulator scoping boundary."
 reverify: "rg -n 'declare\\(|\\.declare\\(' specs || true; rg -n 'declare\\(|\\.declare\\(' docs/linkedspec-book/src --glob '*.md' --glob '!**/declaration-helper-reference.md' --glob '!**/helper-contract-catalog.md'; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture"
 ---
 
 # Terse Declaration Helper Compatibility Policy
 
-The post-migration policy is compatibility retention, not immediate removal.
+The post-migration policy changed in `SPEC-FORMAT-TERSE.8`: compatibility retention is being removed.
 
-`declare(...)` and declaration aliases stay accepted for existing specs so older source
-can still compile and so the declare/no-declare convergence fixtures keep proving that
-auto-existing variables match the older explicit form.
+On the Perl reference, `declare(...)` and declaration aliases now emit
+`LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` diagnostics. Rust still accepts them
+until `SPEC-FORMAT-TERSE.8.4` resolves or diagnoses the recursive accumulator boundary.
 
 They are not the current authoring surface. New shipped specs, current-facing examples,
 and root corpus examples should use:
@@ -31,5 +31,4 @@ and root corpus examples should use:
 - `set(...)`;
 - bare value reads, with `array(...)` / `hash(...)` wrappers where an explicit aggregate-storage boundary is needed.
 
-Future removal or diagnostics must be owned by a new focused leaf because it would be a
-compatibility break across Perl, Rust, fixtures, and the book.
+The remaining compatibility work is Rust-side hard retirement plus final book/KM cleanup.

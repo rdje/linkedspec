@@ -392,7 +392,7 @@ subtest 'validate_dsl_syntax' => sub {
     push @cases, [\$deep_nest, 1, 'spec with 30-level nested lifecycle blocks'];
 
     # --- Edge: valid paragraph member ordering ---
-    my $paragraph = "Top::\n /a/ -> Child\nI { declare(scalar, x=1) }\nLS { }\nLE { }\nE { return(1) }\nChild:\n /b/\n";
+    my $paragraph = "Top::\n /a/ -> Child\nI { x = 1 }\nLS { }\nLE { }\nE { return(1) }\nChild:\n /b/\n";
     push @cases, [\$paragraph, 1, 'spec with various paragraph members'];
 
     plan tests => scalar(@cases);

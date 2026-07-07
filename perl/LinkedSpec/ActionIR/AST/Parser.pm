@@ -302,6 +302,7 @@ sub _parse_call_expr {
   $start,
   $end,
   name => $call->{method},
+  source_method => $call->{source_method},
   args => \@args,
  )
 }
@@ -768,6 +769,7 @@ sub _parse_fluent_chain_expr {
   my @args = _parse_arg_exprs($payload, $start + $seg->{start} + $open_idx + 1);
   push @calls, {
    method => $call->{method},
+   source_method => $call->{source_method},
    args => \@args,
    source => $seg->{text},
    source_span => _span($start + $seg->{start}, $start + $seg->{end}),

@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.3 — hard-retire Perl legacy helpers**
+  (DONE; FRONTIER `.8.4` RUST HARD RETIREMENT NEXT).
+
+  **Change:** Perl reference lowering now treats the remaining old helper spellings as retired. Declaration helpers
+  and aliases, function-form `concat(...)`, `array_copy(...)`, `hash_copy(...)`, `push_value(...)`, and
+  `push_nonempty(...)` emit explicit unsupported-helper diagnostics instead of successful lowering. Current
+  `cat(...)`, `copy(...)`, `push(...)`, assignments, typed wrappers, and receiver methods still lower.
+
+  **Boundary:** Rust compatibility remains for the next owned leaf, `.8.4`; explicit diagnostic/compatibility test
+  fixtures stay in place to lock the retirement boundary.
+
+  **Verification:** Focused Perl helper probe, syntax checks for touched Perl/test modules, focused
+  `t/actionir_ast_parser.t`, `t/trace_actionir_compact_lowerers.t`, and `t/phase0_validation_fuzz.t`, full phase0
+  with `PERL5LIB=` cleared (**1022** tests), mdBook, Knowledge Map, memory, whitespace, and doctrine gates pass.
+
 - 2026-07-06: **SPEC-FORMAT-TERSE.8.2.4 — close helper migration no-drift gates**
   (DONE; FRONTIER `.8.3` PERL REFERENCE HARD RETIREMENT NEXT).
 

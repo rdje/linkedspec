@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-06 — SPEC-FORMAT-TERSE.8.3 — hard-retire Perl legacy helpers
+
+**Scope:** Perl reference ActionIR parser/lowering behavior for the remaining successful legacy helper spellings.
+
+**Change:** Perl now diagnoses declaration helpers and aliases, function-form `concat(...)`, `array_copy(...)`,
+`hash_copy(...)`, `push_value(...)`, and `push_nonempty(...)` with
+`LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` instead of lowering them successfully. Current terse spellings keep
+working: `cat(...)`, `copy(...)`, `push(...)`, assignments, typed aggregate wrappers, and current receiver methods.
+The AST path now preserves source method spelling so current `cat(...)` is not mistaken for retired
+parser-normalized `concat(...)`.
+
+**Boundary:** Rust compatibility arms remain pending under `SPEC-FORMAT-TERSE.8.4`; explicit old-helper diagnostic
+tests remain as retirement locks.
+
+**Validation:** Focused direct Perl helper probe, syntax checks for touched Perl/test modules, focused
+`t/actionir_ast_parser.t`, `t/trace_actionir_compact_lowerers.t`, and `t/phase0_validation_fuzz.t`, full phase0
+with `PERL5LIB=` cleared (1022 tests), mdBook build, Knowledge Map regeneration/check, whitespace, memory, and
+doctrine gates pass.
+
 ## 2026-07-06 — SPEC-FORMAT-TERSE.8.2.4 — close helper migration no-drift gates
 
 **Scope:** Final `.8.2` migration closeout scans and gates before hard-retiring legacy helper implementations.

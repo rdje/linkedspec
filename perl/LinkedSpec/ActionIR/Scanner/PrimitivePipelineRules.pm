@@ -100,17 +100,24 @@ while ($code =~ /\b(?<expr>(?:push_value|push)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"
  next unless $call && ($call->{method} eq 'push_value' || $call->{method} eq 'push');
  my $raw_args = $call->{args} || [];
  my $effective_args;
- if ($call->{method} eq 'push_value') {
-  $effective_args = _normalize_method_args_with_optional_scope($raw_args, 2, 2);
- } else {
-  next unless @$raw_args == 2;
-  my $first_expr = _trim_action_ir_value($raw_args->[0]);
-  my $second_expr = _trim_action_ir_value($raw_args->[1]);
-  next if defined($first_expr) && defined($second_expr)
-       && $first_expr =~ /^\w+$/o && $second_expr =~ /^\w+$/o
-       && !_is_primitive_literal_token($second_expr);
-  $effective_args = $raw_args;
- }
+	 if ($call->{method} eq 'push_value') {
+	  $effective_args = _normalize_method_args_with_optional_scope($raw_args, 2, 2);
+	 } else {
+	  if (@$raw_args == 2) {
+	   $effective_args = $raw_args;
+	  } elsif (@$raw_args == 3) {
+	   my $scoped_target_expr = _trim_action_ir_value($raw_args->[1]);
+	   next unless defined($scoped_target_expr) && $scoped_target_expr =~ /^array\s*\(\s*\w+\s*\)$/o;
+	   $effective_args = [ $raw_args->[1], $raw_args->[2] ];
+	  } else {
+	   next;
+	  }
+	  my $first_expr = _trim_action_ir_value($effective_args->[0]);
+	  my $second_expr = _trim_action_ir_value($effective_args->[1]);
+	  next if defined($first_expr) && defined($second_expr)
+	       && $first_expr =~ /^\w+$/o && $second_expr =~ /^\w+$/o
+	       && !_is_primitive_literal_token($second_expr);
+	 }
  next unless $effective_args;
  my $target_expr = _trim_action_ir_value($effective_args->[0]);
  my $value_expr = _trim_action_ir_value($effective_args->[1]);

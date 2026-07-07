@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-06 (SPEC-FORMAT-TERSE.8.3 — retiring old helpers needs source spelling, not normalized names):
+  The Perl AST/parser path normalizes `cat(...)` to the historical lowering helper `concat`, so hard retirement
+  cannot key only on the normalized method name. Carry the original source spelling through call/fluent nodes and
+  synthesized receiver expressions, then retire only source-spelled legacy function forms (`concat(...)`,
+  `array_copy(...)`, `hash_copy(...)`, `push_value(...)`, `push_nonempty(...)`, declaration helpers/aliases).
+  Current `cat(...)`, `copy(...)`, `push(...)`, typed wrappers, assignments, and current receiver methods should
+  remain the success path while old spellings produce explicit unsupported-helper diagnostics.
+
 - 2026-07-06 (SPEC-FORMAT-TERSE.8.2.4 — closeout scans need stable buckets before hard retirement):
   Before removing a legacy helper implementation, first prove current authored specs/corpus/docs are clean and
   classify every remaining generated/test hit by owner. For this lane, root `specs/` and `tests/corpus/` are clean;

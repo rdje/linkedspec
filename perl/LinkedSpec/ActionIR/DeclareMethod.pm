@@ -41,6 +41,12 @@ sub _trace_declare_exit {
  return LinkedSpec::ActionIR::Trace::exit_scope($scope, $details);
 }
 
+sub _retired_declare_helper_diagnostic_expr {
+ my ($method) = @_;
+ return undef unless defined($method) && $method =~ /\Adeclare(?:_(?:a|array|s|scalar|h|hash))?\z/o;
+ return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:'.$method.'"; undef }'
+}
+
 #------------------------------------------------------------------------------
 	# Package : LinkedSpec::ActionIR::DeclareMethod
 	# Purpose : ActionIR owner for declare/set helper parsing and lowering plus
@@ -340,14 +346,12 @@ sub _lower_declare_method_statement {
    unless ref($cb) eq 'CODE';
   return $cb;
  };
- my $lower_typed_declare_statement = $require_dep->('lower_typed_declare_statement');
- my $decl = _extract_declare_statement_from_method_expr($expr, $deps);
- return $finish->(undef, 'no_declaration', {}) unless $decl;
- return $finish->(
-  $lower_typed_declare_statement->($decl->{declaration_type}, $decl->{entries}),
-  'typed_declare_lowered',
-  { type => $decl->{declaration_type}, entry_count => scalar(@{$decl->{entries} || []}) },
- )
+ my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
+ my $call = $parse_method_function_expr->($expr);
+ if ($call && defined(my $diagnostic = _retired_declare_helper_diagnostic_expr($call->{method}))) {
+  return $finish->($diagnostic, 'retired_declare_helper', { method => $call->{method} });
+ }
+ return $finish->(undef, 'no_declaration', {})
 }
 
 sub _lower_assign_method_statement {

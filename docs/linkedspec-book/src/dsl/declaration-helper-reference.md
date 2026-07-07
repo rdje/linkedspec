@@ -2,8 +2,9 @@
 
 This chapter records the legacy declaration helper family and the terse-format replacement policy.
 
-> **Current policy.** New `.spec` files should not use `declare(...)`. The declaration helper family remains
-> accepted only as legacy compatibility for existing specs. Working variables auto-exist through the terse format,
+> **Current policy.** New `.spec` files should not use `declare(...)`. The Perl reference now emits an explicit
+> retired-helper diagnostic for `declare(...)` and declaration aliases; Rust compatibility remains owned by
+> `SPEC-FORMAT-TERSE.8.4`. Working variables auto-exist through the terse format,
 > and kind is inferred from wrappers, helper argument positions, and explicit assignment/mutation targets.
 > Bare assignment binds the evaluated typed value, so `items = []` and `meta = { ... }` replace the variable with
 > array/hash values. Use explicit `set(array(items), ...)` or `set(hash(meta), ...)` when the target must be
@@ -40,7 +41,7 @@ positions. Avoid both raw declaration code and `declare(...)` in new examples.
 You do **not** have to `declare(...)` a working variable before using it. A variable referenced through a typed aggregate wrapper — `array(NAME)` / `hash(NAME)` — or through a bare scalar read/target position **auto-exists**: the engine supplies its declaration automatically, taking the kind from the wrapper or type-implying position (`NAME` in scalar positions → scalar, `array` → array, `hash` → hash). Both of these behave the same:
 
 ```text
-# explicit declaration (still fully supported)
+# legacy declaration form (retired on the Perl reference)
 I { declare(scalar, count) }
 -> Item[0] { count = num_add(coalesce(count, 0), 1) }
 
@@ -48,7 +49,7 @@ I { declare(scalar, count) }
 -> Item[0] { count = num_add(coalesce(count, 0), 1) }
 ```
 
-An auto-existing variable is a fresh **per-invocation** working value — one for each time the rule's handler runs — exactly like an explicit `declare(...)`. It is scoped to the rule and visible to every action edge and lifecycle block of that rule, and it does **not** carry state over from a previous parse or a previous recursive entry of the rule.
+An auto-existing variable is a fresh **per-invocation** working value — one for each time the rule's handler runs — matching the scoped behavior that explicit declarations historically provided. It is scoped to the rule and visible to every action edge and lifecycle block of that rule, and it does **not** carry state over from a previous parse or a previous recursive entry of the rule.
 
 For aggregate wrappers, the single argument is a working-variable name token only when it is **bare**:
 
@@ -138,11 +139,11 @@ array/hash aggregate storage.
 
 ## Post-migration support policy
 
-`declare(...)` and the declaration aliases remain accepted compatibility syntax for existing specs. They are not
-removed by the terse migration, because removing them would be a compatibility break and would discard useful
-declare/no-declare convergence fixtures. They are also not expanded with new declaration features: new language
-work should use the terse surface. Any future removal or diagnostic hardening must be owned by a separate focused
-task-tree leaf and update Perl, Rust, oracle fixtures, this book, and the Knowledge Map together.
+`declare(...)` and the declaration aliases are no longer successful Perl reference helpers: they produce
+`LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` diagnostics. Rust still has declaration compatibility for existing
+fixtures until `SPEC-FORMAT-TERSE.8.4` resolves the recursive accumulator boundary and retires or diagnoses the
+Rust side. They are also not expanded with new declaration features: new language work should use the terse
+surface.
 
 > **Reserved names.** `undef`, `true`, and `false` are literals, so `array(undef)` constructs an array holding the `undef` literal — it does **not** create a variable named `undef`. The engine's own handler locals are likewise never treated as working variables.
 

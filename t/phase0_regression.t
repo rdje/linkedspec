@@ -1552,7 +1552,7 @@ subtest 'actionir_declare_method_helpers_keep_inline_callback_validation' => sub
     my $declare_method_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'DeclareMethod.pm'));
     ok(defined($declare_method_pm) && length($declare_method_pm), 'DeclareMethod.pm source is available for source-shape inspection');
     unlike($declare_method_pm, qr/sub _require_dep\b/, 'DeclareMethod.pm no longer carries a separate local dependency-validator wrapper');
-    like($declare_method_pm, qr/sub _parse_declare_binding_entry\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\).*sub _lower_declare_value_expr\b.*my \$require_dep = sub \{.*\$lower_flow_composite_expr = \$require_dep->\('lower_flow_composite_expr'\).*sub _lower_declare_initializer_expr\b.*my \$require_dep = sub \{.*\$parse_method_function_expr = \$require_dep->\('parse_method_function_expr'\).*sub _extract_declare_statement_from_method_expr\b.*my \$require_dep = sub \{.*\$declare_alias_to_type = \$require_dep->\('declare_alias_to_type'\).*sub _lower_declare_method_statement\b.*my \$require_dep = sub \{.*\$lower_typed_declare_statement = \$require_dep->\('lower_typed_declare_statement'\).*sub _lower_assign_method_statement\b.*my \$require_dep = sub \{.*\$lower_assign_statement = \$require_dep->\('lower_assign_statement'\)/s, 'DeclareMethod.pm now keeps callback validation inline inside its declare/assign lowering seams');
+    like($declare_method_pm, qr/sub _parse_declare_binding_entry\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\).*sub _lower_declare_value_expr\b.*my \$require_dep = sub \{.*\$lower_flow_composite_expr = \$require_dep->\('lower_flow_composite_expr'\).*sub _lower_declare_initializer_expr\b.*my \$require_dep = sub \{.*\$parse_method_function_expr = \$require_dep->\('parse_method_function_expr'\).*sub _extract_declare_statement_from_method_expr\b.*my \$require_dep = sub \{.*\$declare_alias_to_type = \$require_dep->\('declare_alias_to_type'\).*sub _lower_declare_method_statement\b.*my \$require_dep = sub \{.*\$parse_method_function_expr = \$require_dep->\('parse_method_function_expr'\).*sub _lower_assign_method_statement\b.*my \$require_dep = sub \{.*\$lower_assign_statement = \$require_dep->\('lower_assign_statement'\)/s, 'DeclareMethod.pm now keeps callback validation inline inside its retired-declare/assign lowering seams');
 };
 subtest 'actionir_value_expr_helpers_keep_inline_callback_validation' => sub {
     plan tests => 3;
@@ -5388,7 +5388,7 @@ subtest 'action_rule_paragraph_members_can_be_interleaved_after_rule_label' => s
     my $conventional_spec = <<'SPEC';
 Top::
  /a/ -> Leaf { return(1) }
- I { declare(scalar, retv) }
+ I { set(retv, undef) }
  LX { return(retv) }
 
 Leaf:
@@ -5400,7 +5400,7 @@ Top::
  LX { return(retv) }
  -> Leaf { return(1) }
  /a/
- I { declare(scalar, retv) }
+ I { set(retv, undef) }
 
 Leaf:
  /b/ -> Leaf { return(1) }
@@ -5456,7 +5456,7 @@ subtest 'blind_call_rule_paragraph_members_can_be_interleaved_after_rule_label' 
 
     my $conventional_spec = <<'SPEC';
 Top::AND
- I { declare(scalar, retv) }
+ I { set(retv, undef) }
  => First
  => Second
  LX { return(retv) }
@@ -5472,7 +5472,7 @@ SPEC
 Top::AND
  LX { return(retv) }
  => First
- I { declare(scalar, retv) }
+ I { set(retv, undef) }
  => Second
 
 First:
@@ -5529,7 +5529,7 @@ subtest 'same_line_action_rule_paragraph_members_match_multiline_form' => sub {
     my $multiline_spec = <<'SPEC';
 Top::
  /a/ -> Leaf { return(1) }
- I { declare(scalar, retv) }
+ I { set(retv, undef) }
  LX { return(retv) }
 
 Leaf:
@@ -5537,7 +5537,7 @@ Leaf:
 SPEC
 
     my $same_line_spec = <<'SPEC';
-Top:: /a/ -> Leaf { return(1) } I { declare(scalar, retv) } LX { return(retv) }
+Top:: /a/ -> Leaf { return(1) } I { set(retv, undef) } LX { return(retv) }
 
 Leaf: /b/ -> Leaf { return(1) }
 SPEC
@@ -5589,7 +5589,7 @@ subtest 'same_line_blind_call_rule_paragraph_members_match_multiline_form' => su
 
     my $multiline_spec = <<'SPEC';
 Top::AND
- I { declare(scalar, retv) }
+ I { set(retv, undef) }
  => First
  => Second
  LX { return(retv) }
@@ -5602,7 +5602,7 @@ Second:
 SPEC
 
     my $same_line_spec = <<'SPEC';
-Top::AND I { declare(scalar, retv) } => First => Second LX { return(retv) }
+Top::AND I { set(retv, undef) } => First => Second LX { return(retv) }
 
 First: /a/ -> First { return(1) }
 Second: /b/ -> Second { return(1) }
@@ -5816,7 +5816,7 @@ subtest 'validation_accepts_multiline_fluent_control_and_body_continuations' => 
 my $spec_content = <<'SPEC';
 Top::&
  /a/ -> Top.if(on) {
-  declare(array, events)
+  set(array(events), array())
   return_undef()
  } elseif(alt_on)
   say("alt")
@@ -5902,10 +5902,10 @@ subtest 'validation_accepts_same_line_rule_paragraph_forms' => sub {
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 my $spec_content = <<'SPEC';
-Top:: /a/ -> Leaf { return(1) } I { declare(scalar, retv) } LX { return(retv) }
+Top:: /a/ -> Leaf { return(1) } I { set(retv, undef) } LX { return(retv) }
 Leaf: /b/ -> Leaf { return(1) }
 
-Wrapper:AND I { declare(scalar, retv) } => First => Second LX { return(retv) }
+Wrapper:AND I { set(retv, undef) } => First => Second LX { return(retv) }
 First: /x/ -> First { return(1) }
 Second: /y/ -> Second { return(1) }
 SPEC
@@ -6707,7 +6707,7 @@ subtest 'validation_accepts_full_method_empty_blind_code_block_patterns' => sub 
 my $spec_content = <<'SPEC';
 Top::
  => Helper.if(on).push(items).return_undef().endif {
-  declare(scalar, retv)
+  set(retv, undef)
   return(retv)
  }
 
@@ -6729,7 +6729,7 @@ subtest 'validation_accepts_lifecycle_fluent_chain_with_attached_flow' => sub {
 my $spec_content = <<'SPEC';
 Top::
  /a/ I.if(on) {
-  declare(scalar, retv)
+  set(retv, undef)
  }.elseif(alt) {
   say("alt")
   return_undef()
@@ -6894,7 +6894,7 @@ subtest 'validation_accepts_all_lifecycle_markers_with_fluent_chains' => sub {
 my $spec_content = <<'SPEC';
 Top::
  /a/ __MARKER__.if(on) {
-  declare(scalar, retv)
+  set(retv, undef)
   return(retv)
  }
 
@@ -12429,7 +12429,7 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
         );
         $rewritten{push} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
-            'push_value(array(items), retv)',
+            'push(array(items), retv)',
         );
         $rewritten{regex} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
@@ -12461,7 +12461,7 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
         );
         $rewritten{return_general} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
-            'return(array_copy(array(items)))',
+            'return(copy(array(items)))',
         );
         $rewritten{pipeline_match} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
@@ -12474,7 +12474,11 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
     ok($ok_run, 'EmitContext lowering succeeds without the removed LinkedSpec lowering facade helpers')
         or diag(normalize_error($err));
     unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'EmitContext lowering does not call the trapped removed LinkedSpec facade helpers');
-    is($rewritten{declare}, 'my $flag = (($on) || ($off))', 'declare alias lowering stays inside EmitContext-owned lowering path');
+    is(
+        $rewritten{declare},
+        'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare_s"; undef }',
+        'retired declare alias stays inside EmitContext-owned diagnostic lowering path'
+    );
     is($rewritten{assign}, '$flag = (($on) || ($off))', 'assign lowering stays inside EmitContext-owned lowering path');
     is($rewritten{push}, 'push @items, $retv', 'push_value lowering stays inside EmitContext-owned lowering path');
     is($rewritten{regex}, '$c =~ s{^"|"$}{}go', 'regex substitution lowering stays inside EmitContext-owned lowering path');
@@ -12651,6 +12655,7 @@ subtest 'emit_context_avoids_deps_declare_method_dep_builder' => sub {
     plan tests => 6;
 
     my ($ok_run, $err, $declare_stmt, $assign_stmt) = (0, '', undef, undef);
+    my $declare_diag = 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare"; undef }';
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::action_rewriter_declare_method_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_DECLARE_METHOD_DEPS__\n" };
@@ -12663,8 +12668,8 @@ subtest 'emit_context_avoids_deps_declare_method_dep_builder' => sub {
     ok($ok_run, 'EmitContext declare-method lowering succeeds without the removed Deps declare-method dep builder')
         or diag(normalize_error($err));
     unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_DECLARE_METHOD_DEPS__/, 'EmitContext does not call the trapped Deps declare-method dep builder');
-    ok(defined($declare_stmt), 'EmitContext still returns lowered declare output through the DeclareMethod-owned default deps');
-    is($declare_stmt, 'my @items', 'EmitContext preserves declare-method lowering output after moving default deps into DeclareMethod');
+    ok(defined($declare_stmt), 'EmitContext still returns retired-declare diagnostics through the DeclareMethod-owned default deps');
+    is($declare_stmt, $declare_diag, 'EmitContext preserves retired declare-method diagnostics after moving default deps into DeclareMethod');
     ok(defined($assign_stmt), 'EmitContext still returns lowered assign output through the DeclareMethod-owned default deps');
     is($assign_stmt, '$retv = $foo', 'EmitContext preserves assign-method lowering output after moving default deps into DeclareMethod');
 };
@@ -12687,7 +12692,7 @@ subtest 'emit_context_avoids_deps_action_contract_dep_builder' => sub {
     unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_CONTRACT_DEPS__/, 'EmitContext does not call the trapped Deps action-contract dep builder');
     ok(ref($contracts) eq 'ARRAY' && @{$contracts} > 0, 'EmitContext still returns lowering contracts through the Contracts-owned default deps');
     ok($declare_contract && ref($declare_contract->{lower}) eq 'CODE', 'EmitContext still exposes the declare_typed lowering contract through the Contracts owner');
-    is($declare_output, 'my @items', 'EmitContext preserves declare_typed contract lowering after moving default deps into Contracts');
+    is($declare_output, 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare"; undef }', 'EmitContext preserves declare_typed retired diagnostics after moving default deps into Contracts');
 };
 subtest 'emit_context_avoids_deps_value_expr_dep_builder' => sub {
     plan tests => 6;
@@ -12937,7 +12942,7 @@ my ($declare_contract) = grep { $_->{id} eq "declare_typed" } @{$contracts || []
 my $declare_output = $declare_contract ? $declare_contract->{lower}->("declare(array, items)") : undef;
 print ref($contracts) eq "ARRAY" ? "__CONTRACTS_ARRAY__\n" : "__CONTRACTS_OTHER__\n";
 print exists($INC{"LinkedSpec/ActionIR/Contracts.pm"}) ? "__CONTRACTS_AFTER_HELPER__\n" : "__CONTRACTS_STILL_UNLOADED__\n";
-if (defined($declare_output) && $declare_output eq "my \@items") {
+if (defined($declare_output) && $declare_output eq q{do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare"; undef }}) {
     print "__CONTRACTS_PAYLOAD_OK__\n";
 } else {
     print "__CONTRACTS_PAYLOAD_BAD__\n";
@@ -12948,7 +12953,7 @@ PERL
     like($out, qr/__CONTRACTS_STILL_LAZY__/, 'require EmitContext keeps Contracts unloaded');
     like($out, qr/__CONTRACTS_ARRAY__/, 'contract helper still returns a contract array after lazy Contracts loading');
     like($out, qr/__CONTRACTS_AFTER_HELPER__/, 'contract helper lazy-loads Contracts on demand');
-    like($out, qr/__CONTRACTS_PAYLOAD_OK__/, 'contract helper preserves declare_typed lowering output after lazy Contracts loading');
+    like($out, qr/__CONTRACTS_PAYLOAD_OK__/, 'contract helper preserves declare_typed retired diagnostics after lazy Contracts loading');
     is($err, '', 'EmitContext require/contracts subprocess does not emit stderr');
 };
 subtest 'emit_context_require_avoids_rewrite_pipeline_load_until_rewrite_helper' => sub {
@@ -13115,7 +13120,7 @@ my $assign_stmt = LinkedSpec::RuleIR::EmitContext::_lower_assign_method_statemen
 print defined($declare_stmt) && defined($assign_stmt) ? "__DECLARE_METHOD_RESULT_OK__\n" : "__DECLARE_METHOD_RESULT_BAD__\n";
 print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/DeclareMethod.pm"}) ? "__DECLARE_METHOD_AFTER_HELPER__\n" : "__DECLARE_METHOD_STILL_UNLOADED__\n";
-if (defined($declare_stmt) && $declare_stmt eq "my \@items" && defined($assign_stmt) && $assign_stmt eq "\$retv = \$foo") {
+if (defined($declare_stmt) && $declare_stmt eq q{do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare"; undef }} && defined($assign_stmt) && $assign_stmt eq "\$retv = \$foo") {
     print "__DECLARE_METHOD_PAYLOAD_OK__\n";
 } else {
     print "__DECLARE_METHOD_PAYLOAD_BAD__\n";
@@ -13127,7 +13132,7 @@ PERL
     like($out, qr/__DECLARE_METHOD_RESULT_OK__/, 'declare-method helpers still return lowered output after lazy DeclareMethod loading');
     like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'declare-method helpers lazy-load EmitContext on demand');
     like($out, qr/__DECLARE_METHOD_AFTER_HELPER__/, 'declare-method helpers lazy-load DeclareMethod on demand through EmitContext');
-    like($out, qr/__DECLARE_METHOD_PAYLOAD_OK__/, 'declare-method helpers preserve declare and assign-method lowering after lazy DeclareMethod loading');
+    like($out, qr/__DECLARE_METHOD_PAYLOAD_OK__/, 'declare-method helpers preserve retired declare diagnostics and assign-method lowering after lazy DeclareMethod loading');
     is($err, '', 'EmitContext require/declare-method subprocess does not emit stderr');
 };
 subtest 'emit_context_dep_builders_avoid_method_expr_prefetch' => sub {
@@ -13148,7 +13153,7 @@ subtest 'emit_context_dep_builders_avoid_method_expr_prefetch' => sub {
 
     ok($ok, 'declare/scanner dep-builder paths no longer prefetch MethodExpr through EmitContext') or diag($err);
     is($err, '', 'removed EmitContext MethodExpr prefetch seam is not touched');
-    is($declare_stmt, 'my @items', 'declare-method lowering still succeeds after owner-side MethodExpr dep loading');
+    is($declare_stmt, 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare"; undef }', 'declare-method lowering emits retired diagnostics after owner-side MethodExpr dep loading');
     is(ref($events), 'ARRAY', 'scanner lowering path still returns an event array after owner-side MethodExpr dep loading');
     is(scalar(@{$events || []}), 1, 'scanner lowering path still finds one set-value event');
     is_deeply($events->[0], {
@@ -13740,7 +13745,7 @@ subtest 'named_mark_capture_from_reads_rule_local_checkpoint' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage) }
+ I { set(stage, undef) }
  /foo\(/
  @mark(body_start)
  /\w+/
@@ -13770,7 +13775,7 @@ subtest 'named_mark_capture_len_from_reads_current_edge_span_length' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage) }
+ I { set(stage, undef) }
  /foo\(/
  @mark(body_start)
  /\w+/
@@ -13797,7 +13802,7 @@ subtest 'named_mark_scope_is_rule_local_and_not_visible_to_child_rules' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage) }
+ I { set(stage, undef) }
  /foo\(/
  @mark(body_start)
  /\w+/
@@ -13826,7 +13831,7 @@ subtest 'absolute_input_boundary_mark_writers_seed_named_checkpoints' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, input_start_seen, input_end_seen) }
+ I { set(input_start_seen, undef); set(input_end_seen, undef) }
  /foo\(/
  @mark(body_start)
  /bar\)/
@@ -13859,7 +13864,7 @@ Top::AND
  -> Top[0] { return(call(Child)) }
 
 Child::AND
- I { declare(scalar, seen_text, seen_len) }
+ I { set(seen_text, undef); set(seen_len, undef) }
  /bar/
  /\)/
  -> Child[0] { set(seen_text, input_text()); set(seen_len, input_len()) }
@@ -13891,7 +13896,7 @@ Top::AND
  -> Top[0] { return(call(Child)) }
 
 Child::AND
- I { declare(scalar, whole_end_pos, whole_end_line, whole_end_col) }
+ I { set(whole_end_pos, undef); set(whole_end_line, undef); set(whole_end_col, undef) }
  /bar/
  /\n\)/
  -> Child[0] { set(whole_end_pos, input_end_pos()); set(whole_end_line, input_end_line()); set(whole_end_col, input_end_col()) }
@@ -13920,7 +13925,7 @@ subtest 'anonymous_capture_take_advances_capture_boundary_like_split_cursor' => 
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, first, second) }
+ I { set(stage, undef); set(first, undef); set(second, undef) }
  /foo\(/
  /alpha/
  /,\s*(?=beta)/
@@ -13958,7 +13963,7 @@ subtest 'anonymous_capture_take_len_advances_capture_boundary_like_split_cursor'
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, first_width, second_width) }
+ I { set(stage, undef); set(first_width, undef); set(second_width, undef) }
  /foo\(/
  /alpha/
  /,\s*(?=beta)/
@@ -13996,7 +14001,7 @@ subtest 'named_mark_capture_take_advances_named_checkpoint_like_split_cursor' =>
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, first, second) }
+ I { set(stage, undef); set(first, undef); set(second, undef) }
  /foo\(/
  @mark(body_start)
  /alpha/
@@ -14035,7 +14040,7 @@ subtest 'named_mark_capture_take_len_advances_named_checkpoint_like_split_cursor
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, first_width, second_width) }
+ I { set(stage, undef); set(first_width, undef); set(second_width, undef) }
  /foo\(/
  @mark(body_start)
  /alpha/
@@ -14074,7 +14079,7 @@ subtest 'anonymous_and_named_capture_boundaries_can_bridge_explicitly' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, first, second) }
+ I { set(stage, undef); set(first, undef); set(second, undef) }
  /foo\(/
  /alpha/
  /,\s*(?=beta)/
@@ -14115,7 +14120,7 @@ subtest 'named_mark_capture_rest_helpers_read_tail_through_end_of_input' => sub 
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage) }
+ I { set(stage, undef) }
  /\(/
  @mark(body_start)
  /\w+/
@@ -14149,7 +14154,7 @@ subtest 'named_mark_capture_take_rest_helper_reads_tail_and_advances_mark_to_end
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, first_tail, after_first_tail) }
+ I { set(first_tail, undef); set(after_first_tail, undef) }
  /\(/
  -> Top[0] { mark_here(body_start) }
  /\w+/
@@ -14180,7 +14185,7 @@ subtest 'named_mark_capture_take_rest_len_helper_reads_tail_width_and_advances_m
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, first_tail_width, after_first_tail) }
+ I { set(first_tail_width, undef); set(after_first_tail, undef) }
  /\(/
  -> Top[0] { mark_here(body_start) }
  /\w+/
@@ -14241,7 +14246,7 @@ subtest 'anonymous_capture_take_until_cursor_helper_reads_and_advances_through_c
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, first, after_first_start) }
+ I { set(first, undef); set(after_first_start, undef) }
  /\(/
  -> Top[0] { start_capture_slice() }
  /\w+/
@@ -14272,7 +14277,7 @@ subtest 'anonymous_capture_take_until_cursor_len_helper_reads_width_and_advances
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, first_width, after_first_start) }
+ I { set(first_width, undef); set(after_first_start, undef) }
  /\(/
  -> Top[0] { start_capture_slice() }
  /\w+/
@@ -14334,7 +14339,7 @@ subtest 'named_mark_capture_take_until_cursor_helper_reads_and_advances_through_
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, first, after_first_start) }
+ I { set(first, undef); set(after_first_start, undef) }
  /\(/
  @mark(body_start)
  /\w+/
@@ -14366,7 +14371,7 @@ subtest 'named_mark_capture_take_until_cursor_len_helper_reads_width_and_advance
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, first_width, after_first_start) }
+ I { set(first_width, undef); set(after_first_start, undef) }
  /\(/
  @mark(body_start)
  /\w+/
@@ -14398,7 +14403,7 @@ subtest 'named_mark_capture_between_reads_span_between_two_rule_local_checkpoint
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, first_segment) }
+ I { set(stage, undef); set(first_segment, undef) }
  /foo\(/
  @mark(body_start)
  /alpha/
@@ -14433,7 +14438,7 @@ subtest 'named_mark_capture_len_between_reads_two_mark_span_length' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, first_segment) }
+ I { set(stage, undef); set(first_segment, undef) }
  /foo\(/
  @mark(body_start)
  /alpha/
@@ -14468,7 +14473,7 @@ subtest 'named_mark_mark_copy_advances_or_clears_explicit_boundary' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, first_len) }
+ I { set(stage, undef); set(first_len, undef) }
  /foo/
  @mark(body_start)
  /alpha/
@@ -14501,7 +14506,7 @@ subtest 'named_mark_capture_take_between_reads_and_advances_explicit_start_mark'
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, first_segment) }
+ I { set(stage, undef); set(first_segment, undef) }
  /foo/
  @mark(body_start)
  /alpha/
@@ -14534,7 +14539,7 @@ subtest 'named_mark_capture_take_between_len_reads_and_advances_explicit_start_m
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, first_width) }
+ I { set(stage, undef); set(first_width, undef) }
  /foo/
  @mark(body_start)
  /alpha/
@@ -14567,7 +14572,7 @@ subtest 'capture_slice_helpers_read_current_capture_boundary_span_without_named_
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, first_span, first_len) }
+ I { set(first_span, undef); set(first_len, undef) }
  /\(/
  /\w+/
  /\)/
@@ -14599,7 +14604,7 @@ subtest 'capture_rest_helpers_read_current_capture_boundary_tail_without_named_m
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, tail_before_close, tail_width) }
+ I { set(tail_before_close, undef); set(tail_width, undef) }
  /\(/
  -> Top[0] { start_capture_slice() }
  /\w+/
@@ -14632,7 +14637,7 @@ subtest 'capture_take_rest_helpers_read_tail_and_advance_anonymous_boundary_to_e
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, first_tail, after_first_tail) }
+ I { set(first_tail, undef); set(after_first_tail, undef) }
  /\(/
  -> Top[0] { start_capture_slice() }
  /\w+/
@@ -14663,7 +14668,7 @@ subtest 'capture_take_rest_len_helpers_read_tail_width_and_advance_anonymous_bou
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, first_tail_width, after_first_tail) }
+ I { set(first_tail_width, undef); set(after_first_tail, undef) }
  /\(/
  -> Top[0] { start_capture_slice() }
  /\w+/
@@ -14694,7 +14699,7 @@ subtest 'named_mark_mark_pos_reads_rule_local_checkpoint_position' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, begin_pos, end_pos) }
+ I { set(stage, undef); set(begin_pos, undef); set(end_pos, undef) }
  /foo\(/
  @mark(body_start)
  /\w+/
@@ -14725,7 +14730,7 @@ subtest 'named_mark_mark_line_reads_rule_local_checkpoint_line' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, begin_line, end_line) }
+ I { set(stage, undef); set(begin_line, undef); set(end_line, undef) }
  /foo\n/
  @mark(body_start)
  /bar\n/
@@ -14756,7 +14761,7 @@ subtest 'named_mark_mark_col_reads_rule_local_checkpoint_column' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, begin_col, end_col) }
+ I { set(stage, undef); set(begin_col, undef); set(end_col, undef) }
 /foo /
  @mark(body_start)
 /bar /
@@ -14787,7 +14792,7 @@ subtest 'cursor_pos_reads_current_parser_position_without_named_mark' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, first_pos, second_pos, third_pos) }
+ I { set(first_pos, undef); set(second_pos, undef); set(third_pos, undef) }
  /foo\(/
  /\w+/
  /\)/
@@ -14817,7 +14822,7 @@ subtest 'cursor_line_reads_live_current_parser_line_without_named_mark' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, first_line, second_line, third_line) }
+ I { set(first_line, undef); set(second_line, undef); set(third_line, undef) }
  /foo\n/
  /bar\n/
  /baz/
@@ -14847,7 +14852,7 @@ subtest 'cursor_col_reads_live_current_parser_column_without_named_mark' => sub 
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, first_col, second_col, third_col) }
+ I { set(first_col, undef); set(second_col, undef); set(third_col, undef) }
  /foo\(/
  /\w+/
  /\)/
@@ -14877,7 +14882,7 @@ subtest 'cursor_rest_helpers_read_live_current_parser_tail_without_named_mark' =
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, after_open_tail, after_body_tail) }
+ I { set(after_open_tail, undef); set(after_body_tail, undef) }
  /foo\(/
  /\w+/
  /\)/
@@ -14994,7 +14999,7 @@ subtest 'current_match_position_helpers_read_local_match_boundaries' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, body_start_pos, body_end_pos) }
+ I { set(stage, undef); set(body_start_pos, undef); set(body_end_pos, undef) }
  /foo\(/
  /\w+/
  /\)/
@@ -15025,7 +15030,7 @@ subtest 'current_match_text_helper_reads_local_match_content' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, body_token) }
+ I { set(stage, undef); set(body_token, undef) }
  /foo\(/
  /\w+/
  /\)/
@@ -15055,7 +15060,7 @@ subtest 'current_match_length_helper_reads_local_match_width' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, body_width) }
+ I { set(stage, undef); set(body_width, undef) }
  /foo\(/
  /\w+/
  /\)/
@@ -15085,12 +15090,12 @@ subtest 'entry_text_helper_reads_rule_entry_match_content' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage) }
+ I { set(stage, undef) }
  /foo\(/
  -> Top[0] { set(stage, "open"); return(call(Child)) }
 
 Child::AND
- I { declare(scalar, entry_token, body_token) }
+ I { set(entry_token, undef); set(body_token, undef) }
  /\w+/
  /\)/
  -> Child[0] { set(entry_token, entry_text()); set(body_token, match_text()) }
@@ -15125,7 +15130,7 @@ Top::AND
  -> Top[0] { return(call(Child)) }
 
 Child::AND
- I { declare(scalar, entry_col_num, body_col_num) }
+ I { set(entry_col_num, undef); set(body_col_num, undef) }
  /\w+/
  /\)/
  -> Child[0] { set(entry_col_num, entry_col()); set(body_col_num, match_col()) }
@@ -15158,7 +15163,7 @@ Top::AND
  -> Top[0] { return(call(Child)) }
 
 Child::AND
- I { declare(scalar, entry_group_0, body_group_0, body_group_1) }
+ I { set(entry_group_0, undef); set(body_group_0, undef); set(body_group_1, undef) }
  /(\w)(\w+)/
  /(\))/
  -> Child[0] { set(entry_group_0, entry_group(0)); set(body_group_0, match_group(0)); set(body_group_1, match_group(1)) }
@@ -15191,11 +15196,11 @@ Top::AND
  -> Top[0] { return(call(Child)) }
 
 Child::AND
- I { declare(array, entry_groups_seen, body_groups_seen) }
+ I { set(array(entry_groups_seen), array()); set(array(body_groups_seen), array()) }
  /(\w)(\w+)/
  /(\))/
  -> Child[0] { set(array(entry_groups_seen), entry_groups()); set(array(body_groups_seen), match_groups()) }
- -> Child[1] { return(array("?Child:", array_copy(array(entry_groups_seen)), array_copy(array(body_groups_seen)), match_groups())) }
+ -> Child[1] { return(array("?Child:", copy(array(entry_groups_seen)), copy(array(body_groups_seen)), match_groups())) }
 SPEC
 
     my %runtime_ctx;
@@ -15224,7 +15229,7 @@ Top::AND
  -> Top[0] { return(call(Child)) }
 
 Child::AND
- I { declare(scalar, entry_prefix, body_first, body_rest) }
+ I { set(entry_prefix, undef); set(body_first, undef); set(body_rest, undef) }
  /(?<first>\w)(?<rest>\w+)/
  /(?<close>\))/
  -> Child[0] { set(entry_prefix, entry_named(prefix)); set(body_first, match_named(first)); set(body_rest, match_named(rest)) }
@@ -15257,7 +15262,7 @@ Top::AND
  -> Top[0] { return(call(Child)) }
 
 Child::AND
- I { declare(scalar, entry_has_prefix, entry_has_missing, body_has_first, body_has_close) }
+ I { set(entry_has_prefix, undef); set(entry_has_missing, undef); set(body_has_first, undef); set(body_has_close, undef) }
  /(?<first>\w)(?<rest>\w+)/
  /(?<close>\))/
  -> Child[0] { set(entry_has_prefix, entry_has(prefix)); set(entry_has_missing, entry_has(missing_name)); set(body_has_first, match_has(first)); set(body_has_close, match_has(close)) }
@@ -15290,7 +15295,7 @@ Top::AND
  -> Top[0] { return(call(Child)) }
 
 Child::AND
- I { declare(hash, entry_named_seen, body_named_seen) }
+ I { set(hash(entry_named_seen), hash()); set(hash(body_named_seen), hash()) }
  /(?<first>\w)(?<rest>\w+)/
  -> Child[0] { set(hash(entry_named_seen), entry_map()); set(hash(body_named_seen), match_map()) }
  /(?<close>\))/
@@ -15319,7 +15324,7 @@ subtest 'canonical_container_wrappers_behave_across_supported_positions' => sub 
 
     my $spec_content = <<'SPEC';
 Top::
- I { declare(array, parts); declare(hash, meta); declare(scalar, name) }
+ I { set(array(parts), array()); set(hash(meta), hash()); set(name, undef) }
  /(\w+)/
  -> Top[0] {
      set(array(parts), array("A", "B"));
@@ -15388,12 +15393,12 @@ subtest 'entry_length_helper_reads_rule_entry_match_width' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage) }
+ I { set(stage, undef) }
  /foo\(/
  -> Top[0] { set(stage, "open"); return(call(Child)) }
 
 Child::AND
- I { declare(scalar, entry_len_value, body_len_value) }
+ I { set(entry_len_value, undef); set(body_len_value, undef) }
  /\w+/
  /\)/
  -> Child[0] { set(entry_len_value, entry_len()); set(body_len_value, length(match_text())) }
@@ -15422,12 +15427,12 @@ subtest 'entry_position_helpers_read_rule_entry_match_boundaries' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage) }
+ I { set(stage, undef) }
  /foo\(/
  -> Top[0] { set(stage, "open"); return(call(Child)) }
 
 Child::AND
- I { declare(scalar, entry_start, entry_end, body_start, body_end) }
+ I { set(entry_start, undef); set(entry_end, undef); set(body_start, undef); set(body_end, undef) }
  /\w+/
  /\)/
  -> Child[0] { set(entry_start, entry_start_pos()); set(entry_end, entry_end_pos()); set(body_start, match_start_pos()); set(body_end, match_end_pos()) }
@@ -15461,7 +15466,7 @@ Top::AND
  -> Top[0] { return(call(Child)) }
 
 Child::AND
- I { declare(scalar, entry_end_line_seen, body_end_line_seen) }
+ I { set(entry_end_line_seen, undef); set(body_end_line_seen, undef) }
  /\w+\n/
  /\w+/
  -> Child[0] { set(entry_end_line_seen, entry_end_line()); set(body_end_line_seen, match_end_line()) }
@@ -15494,7 +15499,7 @@ Top::AND
  -> Top[0] { return(call(Child)) }
 
 Child::AND
- I { declare(scalar, entry_end_col_seen, body_end_col_seen) }
+ I { set(entry_end_col_seen, undef); set(body_end_col_seen, undef) }
  /\w+/
  /\)/
  -> Child[0] { set(entry_end_col_seen, entry_end_col()); set(body_end_col_seen, match_end_col()) }
@@ -15527,7 +15532,7 @@ Top::AND
  -> Top[0] { return(call(Child)) }
 
 Child::AND
- I { declare(scalar, entry_start_line_seen, body_start_line_seen, entry_line_seen, body_line_seen) }
+ I { set(entry_start_line_seen, undef); set(body_start_line_seen, undef); set(entry_line_seen, undef); set(body_line_seen, undef) }
  /\w+\n/
  /\w+/
  -> Child[0] { set(entry_start_line_seen, entry_start_line()); set(body_start_line_seen, match_start_line()); set(entry_line_seen, entry_line()); set(body_line_seen, match_line()) }
@@ -15568,7 +15573,7 @@ Top::AND
  -> Top[0] { return(call(Child)) }
 
 Child::AND
- I { declare(scalar, entry_start_col_seen, body_start_col_seen, entry_col_seen, body_col_seen) }
+ I { set(entry_start_col_seen, undef); set(body_start_col_seen, undef); set(entry_col_seen, undef); set(body_col_seen, undef) }
  /\w+/
  /\)/
  -> Child[0] { set(entry_start_col_seen, entry_start_col()); set(body_start_col_seen, match_start_col()); set(entry_col_seen, entry_col()); set(body_col_seen, match_col()) }
@@ -15630,7 +15635,7 @@ subtest 'named_mark_mark_match_start_records_left_edge_of_current_match' => sub 
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage) }
+ I { set(stage, undef) }
  /foo\(/
  @mark(body_start)
  /\w+/
@@ -15665,7 +15670,7 @@ Top::AND
  -> Top[0] { return(call(Child)) }
 
 Child::AND
- I { declare(scalar, entry_start_seen, entry_end_seen, body_end_seen) }
+ I { set(entry_start_seen, undef); set(entry_end_seen, undef); set(body_end_seen, undef) }
  /bar/
  /\)/
  -> Child[0] { mark_entry_start(entry_start); mark_entry_end(entry_end); mark_match_end(body_end); set(entry_start_seen, mark_pos(entry_start)); set(entry_end_seen, mark_pos(entry_end)); set(body_end_seen, mark_pos(body_end)) }
@@ -15699,7 +15704,7 @@ subtest 'named_mark_mark_here_updates_named_checkpoint_without_reading' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, first) }
+ I { set(stage, undef); set(first, undef) }
  /foo\(/
  @mark(body_start)
  /alpha/
@@ -15734,7 +15739,7 @@ subtest 'named_mark_clear_mark_removes_rule_local_checkpoint_explicitly' => sub 
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, first) }
+ I { set(stage, undef); set(first, undef) }
  /foo\(/
  @mark(body_start)
  /alpha/
@@ -15769,7 +15774,7 @@ subtest 'named_mark_mark_exists_reports_rule_local_checkpoint_presence' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, stage, before_clear) }
+ I { set(stage, undef); set(before_clear, undef) }
  /foo\(/
  @mark(body_start)
  /alpha/
@@ -15804,7 +15809,7 @@ subtest 'named_mark_mark_exists_is_supported_inside_flow_conditions' => sub {
 
     my $spec_content = <<'SPEC';
 Top::AND
- I { declare(scalar, seen) }
+ I { set(seen, undef) }
  /foo\(/
  @mark(body_start)
  /alpha/
@@ -15830,55 +15835,59 @@ SPEC
     );
     ok(!defined($runtime_ctx{last_error}), 'mark_exists(name) flow-branch parse leaves runtime_ctx last_error clear on success');
 };
-subtest 'emit_context_lowers_typed_declare_methods_and_aliases' => sub {
+subtest 'emit_context_retires_typed_declare_methods_and_aliases' => sub {
     plan tests => 13;
 
+    my $diag = sub {
+        my ($name) = @_;
+        return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:'.$name.'"; undef }';
+    };
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'declare(array, items, captures); declare(scalar, flag); declare(hash, by_name)'),
-        'my @items; my @captures; my $flag; my %by_name',
-        'typed declare(type, ...) lowering emits canonical Perl declarations'
+        LinkedSpec::call_spec_handler_subst('Top', 'declare(array, items, captures)'),
+        $diag->('declare'),
+        'typed declare(type, ...) is retired with an explicit diagnostic'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'declare_a(Top, items, captures); declare_s(Top, flag); declare_h(Top, by_name)'),
-        'my @items; my @captures; my $flag; my %by_name',
-        'declare_* aliases lower to same declaration semantics'
+        LinkedSpec::call_spec_handler_subst('Top', 'declare_a(Top, items, captures)'),
+        $diag->('declare_a'),
+        'declare_a alias is retired with an explicit diagnostic'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'declare_array(Top, items); declare_scalar(Top, flag); declare_hash(Top, by_name)'),
-        'my @items; my $flag; my %by_name',
-        'long declare_* aliases lower to same declaration semantics'
+        LinkedSpec::call_spec_handler_subst('Top', 'declare_s(Top, flag)'),
+        $diag->('declare_s'),
+        'declare_s alias is retired with an explicit diagnostic'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'declare(scalar, flag=or(on, off), token=myref["kind"])'),
-        'my $flag = (($on) || ($off)); my $token = $myref->{"kind"}',
-        'declare(scalar, name=expr, ...) supports flow/value expression initializers'
+        LinkedSpec::call_spec_handler_subst('Top', 'declare_h(Top, by_name)'),
+        $diag->('declare_h'),
+        'declare_h alias is retired with an explicit diagnostic'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'declare_array(Top, parts=array(a, b))'),
-        'my @parts = ($a, $b)',
-        'declare_array alias supports array(...) initializer lowering'
+        $diag->('declare_array'),
+        'declare_array alias is retired with an explicit diagnostic'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'declare_hash(Top, by_name=hash("k1", v1, "k2", v2))'),
-        'my %by_name = ("k1" => $v1, "k2" => $v2)',
-        'declare_hash alias supports hash(...) initializer lowering'
+        $diag->('declare_hash'),
+        'declare_hash alias is retired with an explicit diagnostic'
     );
 
     my $spec_content = <<'SPEC';
-Top:: I.declare(array, items, captures=array(seed)).declare(scalar, flag=or(on, off)).declare(hash, by_name=hash("k", v))
+Top:: I.set(array(items), array()).set(array(captures), array(seed)).set(flag, or(on, off)).set(hash(by_name), hash("k", v))
  /a/ -> Top { return(1) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for non-action chained declare methods');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for current non-action setup methods');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
-    is($meta->{canonical_action_ir_fallback_count}, 0, 'chained declare methods avoid RAW_PERL fallback');
-    is($meta->{raw_perl_dependency_count}, 0, 'chained declare methods avoid raw-Perl dependency');
-    is($meta->{unresolved_helper_count}, 0, 'chained declare methods avoid unresolved-helper hits');
-    ok(grep { $_ eq 'DECLARE' } @{$meta->{helper_action_ir_nodes}}, 'helper action-IR nodes include DECLARE for declare methods');
-    ok(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include DECLARE for declare methods');
-    ok($meta->{language_agnostic_action_ir_ready}, 'chained declare method rule remains language-agnostic action-IR ready');
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'current setup methods avoid RAW_PERL fallback');
+    is($meta->{raw_perl_dependency_count}, 0, 'current setup methods avoid raw-Perl dependency');
+    is($meta->{unresolved_helper_count}, 0, 'current setup methods avoid unresolved-helper hits');
+    ok(grep { $_ eq 'ASSIGN' } @{$meta->{helper_action_ir_nodes}}, 'helper action-IR nodes include ASSIGN for current setup methods');
+    ok(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include ASSIGN for current setup methods');
+    ok($meta->{language_agnostic_action_ir_ready}, 'current setup method rule remains language-agnostic action-IR ready');
 };
 subtest 'emit_context_lowers_method_contracts_for_capture_and_structured_return_values' => sub {
     plan tests => 79;
@@ -16285,17 +16294,17 @@ subtest 'emit_context_lowers_push_value_method_contract' => sub {
     plan tests => 19;
 
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'push_value(array(items), retv)'),
+        LinkedSpec::call_spec_handler_subst('Top', 'push(array(items), retv)'),
         'push @items, $retv',
-        'push_value(array(target), value) lowers to canonical Perl push statement'
+        'push(array(target), value) lowers to canonical Perl push statement'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'push_value(items, array(tag, name))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'push(array(items), array(tag, name))'),
         'push @items, [$tag, $name]',
         'push_value accepts bare target symbol and lowers nested array(...) value expression'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'push_value(Top, array(items), retv)'),
+        LinkedSpec::call_spec_handler_subst('Top', 'push(array(items), retv)'),
         'push @items, $retv',
         'push_value optional scope argument is ignored during lowering'
     );
@@ -16321,7 +16330,7 @@ subtest 'emit_context_lowers_push_value_method_contract' => sub {
     );
 
     my $spec_content = <<'SPEC';
-Top:: I.declare(array, items).declare(scalar, retv).set(retv, CAPTURE).push_value(array(items), retv)
+Top:: I.set(array(items), array()).set(retv, undef).set(retv, CAPTURE).push(array(items), retv)
  /a/ -> Top { return(1) }
 SPEC
 
@@ -16336,7 +16345,7 @@ SPEC
 
 my $push_alias_spec = <<'SPEC';
 Top::
- /x/ -> Done { set(label, "b"); push(items, "a"); push(array(items), label); return(array_copy(array(items))) }
+ /x/ -> Done { set(label, "b"); push(items, "a"); push(array(items), label); return(copy(array(items))) }
 
 Done:
  /[a-z]+/
@@ -16401,7 +16410,7 @@ subtest 'emit_context_lowers_push_child_call_contracts' => sub {
     );
 
     my $spec_content = <<'SPEC';
-Top:: /a/ -> Top { push(Leaf); return(array(array_copy(array(Top)))) }
+Top:: /a/ -> Top { push(Leaf); return(array(copy(array(Top)))) }
 Leaf:
  /a/ -> Leaf { return(array("leaf", match_text())) }
 SPEC
@@ -16420,7 +16429,7 @@ SPEC
     is_deeply($event->{args}, { target => 'Top', source => 'Leaf', target_mode => 'implicit_current_label' }, 'push(Rule) canonical event records the implicit destination array and source rule');
 
     my $indexed_spec_content = <<'SPEC';
-Top:: /a/ -> Top { push(Leaf, 1); return(array(array_copy(array(Top)))) }
+Top:: /a/ -> Top { push(Leaf, 1); return(array(copy(array(Top)))) }
 Leaf:
  /a/ -> Leaf { return(array("leaf", match_text())) }
 SPEC
@@ -16434,48 +16443,42 @@ SPEC
     my $input = 'aa';
     is_deeply($parser->(\$input), [[['leaf', 'a']]], 'push(Rule) appends the whole child result as one element in the current rule array at runtime');
 };
-subtest 'emit_context_lowers_push_nonempty_method_contract' => sub {
-    plan tests => 13;
+subtest 'emit_context_retires_push_nonempty_method_contract' => sub {
+    plan tests => 12;
 
-    my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(array(items), trim(capture_slice()))');
-    like($rewrite, qr/\bpush \@items, \$__ls_push_nonempty if \$__ls_push_nonempty_ok\b/, 'push_nonempty(array(target), value) lowers to a guarded push statement');
-    like($rewrite, qr/\$__ls_push_nonempty ne ''/, 'push_nonempty scalar guard treats empty string as empty');
-    like($rewrite, qr/ref\(\$__ls_push_nonempty\) eq 'ARRAY'/, 'push_nonempty array guard checks arrayref cardinality');
-    like($rewrite, qr/ref\(\$__ls_push_nonempty\) eq 'HASH'/, 'push_nonempty hash guard checks hashref cardinality');
-
-    my @items;
-    my $empty_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(array(items), "")');
-    my $zero_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(array(items), "0")');
-    my $empty_array_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(array(items), array())');
-    my $nonempty_array_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(array(items), ["item"])');
-    my $empty_hash_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(array(items), hash())');
-    my $nonempty_hash_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'push_nonempty(array(items), hash("key", "value"))');
-    my $ok_eval = eval "$empty_rewrite; $zero_rewrite; $empty_array_rewrite; $nonempty_array_rewrite; $empty_hash_rewrite; $nonempty_hash_rewrite; 1";
-    ok($ok_eval, 'push_nonempty generated statements eval cleanly for empty and nonempty scalar/array/hash values') or diag(normalize_error($@));
-    is_deeply(\@items, ['0', ['item'], {key => 'value'}], 'push_nonempty skips empty string/array/hash values while preserving meaningful scalar/array/hash payloads');
+    my $diag = 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:push_nonempty"; undef }';
+    for my $expr (
+        'push_nonempty(array(items), trim(capture_slice()))',
+        'push_nonempty(array(items), "")',
+        'push_nonempty(array(items), "0")',
+        'push_nonempty(array(items), array())',
+        'push_nonempty(array(items), ["item"])',
+        'push_nonempty(array(items), hash())',
+        'push_nonempty(array(items), hash("key", "value"))',
+    ) {
+        is(LinkedSpec::call_spec_handler_subst('Top', $expr), $diag, "$expr is retired with an explicit diagnostic");
+    }
 
     my $spec_content = <<'SPEC';
-Top::AND I.declare(array, items)
+Top::AND I.set(array(items), array())
  /a/
  /,/
  /b/
- -> Top[1] { push_nonempty(array(items), trim(capture_slice())) }
- -> Top[2] { return(array(array_copy(array(items)))) }
+ -> Top[1] { if(is_nonempty(trim(capture_slice()))); push(array(items), trim(capture_slice())); endif() }
+ -> Top[2] { return(array(copy(array(items)))) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for push_nonempty method contract');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for explicit is_nonempty/push replacement');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
-    is($meta->{canonical_action_ir_fallback_count}, 0, 'push_nonempty method contract avoids RAW_PERL fallback');
-    is($meta->{unresolved_helper_count}, 0, 'push_nonempty method contract avoids unresolved-helper hits');
-    ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PUSH for push_nonempty contract');
-    ok(!@{$meta->{compatibility_surface_contract_ids}}, 'push_nonempty is a modern helper, not compatibility-surface syntax');
-    ok($meta->{language_agnostic_action_ir_ready}, 'push_nonempty method contract remains language-agnostic action-IR ready');
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'explicit is_nonempty/push replacement avoids RAW_PERL fallback');
+    is($meta->{unresolved_helper_count}, 0, 'explicit is_nonempty/push replacement avoids unresolved-helper hits');
+    ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PUSH for the replacement contract');
 
     my $parser = LinkedSpec::Get(\$spec_content);
     my $input = 'a,b';
-    is_deeply($parser->(\$input), [['a']], 'push_nonempty appends the trimmed capture slice at runtime');
+    is_deeply($parser->(\$input), [['a']], 'explicit is_nonempty guard plus push appends the trimmed capture slice at runtime');
 };
 subtest 'emit_context_lowers_array_snapshot_and_array_assign_method_contracts' => sub {
     plan tests => 13;
@@ -16491,38 +16494,38 @@ subtest 'emit_context_lowers_array_snapshot_and_array_assign_method_contracts' =
         'set(array(target), array()) lowers to empty array assignment'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'push_value(array(assigns), array_copy(array(keyval_pairs)))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'push(array(assigns), copy(array(keyval_pairs)))'),
         'push @assigns, [@keyval_pairs]',
-        'push_value accepts array_copy(array(...)) snapshot payloads'
+        'push_value accepts copy(array(...)) snapshot payloads'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'push_value(array(assigns), array_copy(array(keyval_pairs)))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'push(array(assigns), copy(array(keyval_pairs)))'),
         'push @assigns, [@keyval_pairs]',
-        'push_value accepts array_copy(array(...)) snapshot payloads as the clearer alias'
+        'push_value accepts copy(array(...)) snapshot payloads as the clearer alias'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(array_copy(array(items)))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return(copy(array(items)))'),
         'return [@items]',
-        'return(payload) lowers array_copy(array(...)) to a snapshot array payload'
+        'return(payload) lowers copy(array(...)) to a snapshot array payload'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(array_copy(array(items)))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return(copy(array(items)))'),
         'return [@items]',
-        'return(payload) lowers array_copy(array(...)) to the same snapshot array payload'
+        'return(payload) lowers copy(array(...)) to the same snapshot array payload'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return({name=>block_namei, content=>array_copy(array(assigns))})'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return({name=>block_namei, content=>copy(array(assigns))})'),
         'return {$name => $block_namei, $content => [@assigns]}',
-        'return(payload) lowers array_copy(array(...)) inside structured hash payloads'
+        'return(payload) lowers copy(array(...)) inside structured hash payloads'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return({name=>block_namei, content=>array_copy(array(assigns))})'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return({name=>block_namei, content=>copy(array(assigns))})'),
         'return {$name => $block_namei, $content => [@assigns]}',
-        'return(payload) lowers array_copy(array(...)) inside structured hash payloads'
+        'return(payload) lowers copy(array(...)) inside structured hash payloads'
     );
 
     my $spec_content = <<'SPEC';
-Top:: I.declare(array, items).declare(scalar, retv).set(array(items), array(retv)).return(array_copy(array(items)))
+Top:: I.set(array(items), array()).set(retv, undef).set(array(items), array(retv)).return(copy(array(items)))
  /a/ -> Top { return(1) }
 SPEC
 
@@ -16533,10 +16536,9 @@ SPEC
     is($meta->{canonical_action_ir_fallback_count}, 0, 'array snapshot/assign method contracts avoid RAW_PERL fallback');
     is($meta->{unresolved_helper_count}, 0, 'array snapshot/assign method contracts avoid unresolved-helper hits');
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
-        'canonical action-IR nodes include DECLARE/ASSIGN/RETURN for array snapshot/assign contracts'
+        'canonical action-IR nodes include ASSIGN/RETURN for array snapshot/assign contracts'
     );
     ok($meta->{language_agnostic_action_ir_ready}, 'array snapshot alias/assign method contracts remain language-agnostic action-IR ready');
 };
@@ -16632,9 +16634,9 @@ subtest 'method_like_collection_value_pipeline_forms_lower_equivalently' => sub 
     plan tests => 12;
 
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'declare(array, items=filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))'),
-        'my @items = @IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }',
-        'declare(array, name=pipeline(...)) lowers nested array-pipeline initializer'
+        LinkedSpec::call_spec_handler_subst('Top', 'set(array(items), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))'),
+        '@items = @IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }',
+        'set(array(name), pipeline(...)) lowers nested array-pipeline initializer'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'set(array(parts), filter_match(uniq(uppercase_each(array(items))), /^B/))'),
@@ -16654,13 +16656,13 @@ subtest 'method_like_collection_value_pipeline_forms_lower_equivalently' => sub 
 
     my $fluent_spec = <<'SPEC';
 Top::&
-I.declare(array, items=filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)).set(array(parts), filter_match(uniq(uppercase_each(array(items))), /^B/))
+I.set(array(items), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)).set(array(parts), filter_match(uniq(uppercase_each(array(items))), /^B/))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-I { declare(array, items=filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)); set(array(parts), filter_match(uniq(uppercase_each(array(items))), /^B/)) }
+I { set(array(items), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)); set(array(parts), filter_match(uniq(uppercase_each(array(items))), /^B/)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -16684,9 +16686,9 @@ subtest 'method_like_collection_hash_pipeline_forms_lower_equivalently' => sub {
     plan tests => 14;
 
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'declare(hash, by_name=hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))))'),
-        'my %by_name = ("A" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }])',
-        'declare(hash, name=hash(... array(pipeline(...)))) lowers nested collection-valued hash initializer'
+        LinkedSpec::call_spec_handler_subst('Top', 'set(hash(by_name), hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))))'),
+        '%by_name = ("A" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }])',
+        'set(hash(name), hash(... array(pipeline(...)))) lowers nested collection-valued hash initializer'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'set(hash(by_name), hash("A", array(filter_match(uniq(uppercase_each(array(items))), /^B/))))'),
@@ -16694,7 +16696,7 @@ subtest 'method_like_collection_hash_pipeline_forms_lower_equivalently' => sub {
         'set(hash(...), hash(... array(pipeline(...)))) lowers nested collection-valued hash source'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'push(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))))'),
         'push @events, {"items" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }]}',
         'push_value accepts hash payloads with nested collection-valued array-pipeline composition'
     );
@@ -16706,13 +16708,13 @@ subtest 'method_like_collection_hash_pipeline_forms_lower_equivalently' => sub {
 
     my $fluent_spec = <<'SPEC';
 Top::&
-I.declare(hash, by_name=hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/))))
+I.set(hash(by_name), hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).set(array(events), array()).push(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/))))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-I { declare(hash, by_name=hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))) }
+I { set(hash(by_name), hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); set(array(events), array()); push(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -16739,12 +16741,12 @@ subtest 'method_like_collection_hash_action_forms_lower_equivalently' => sub {
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, by_name=hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^C/)))))
+ /a/ -> Top .set(hash(by_name), hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).set(array(events), array()).push(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^C/)))))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, by_name=hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^C/))))) }
+ /a/ -> Top { set(hash(by_name), hash("A", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); set(array(events), array()); push(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^B/)))); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^C/))))) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -16941,12 +16943,12 @@ subtest 'method_like_fluent_and_structured_action_if_elseif_multi_step_blocks_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .if(on).declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))).elseif(alt_on).say("alt").return_undef().else().return_undef().endif()
+ /a/ -> Top .if(on).set(array(events), array()).push(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))).elseif(alt_on).say("alt").return_undef().else().return_undef().endif()
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { if(on); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))); elseif(alt_on); say("alt"); return_undef(); else(); return_undef(); endif() }
+ /a/ -> Top { if(on); set(array(events), array()); push(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))); elseif(alt_on); say("alt"); return_undef(); else(); return_undef(); endif() }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -16971,7 +16973,7 @@ SPEC
         'fluent and structured action-edge if/elseif multi-step branch forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$fluent_meta->{canonical_action_ir_nodes}}),
         'action-edge if/elseif multi-step fluent form preserves helper nodes across branch-local method sequences'
@@ -16982,12 +16984,12 @@ subtest 'method_like_fluent_and_structured_action_switch_case_multi_step_blocks_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .switch(kind).case("A").declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))).default().say("miss").return_undef().endswitch()
+ /a/ -> Top .switch(kind).case("A").set(array(events), array()).push(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))).default().say("miss").return_undef().endswitch()
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { switch(kind); case("A"); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))); default(); say("miss"); return_undef(); endswitch() }
+ /a/ -> Top { switch(kind); case("A"); set(array(events), array()); push(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))); default(); say("miss"); return_undef(); endswitch() }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -17012,7 +17014,7 @@ SPEC
         'fluent and structured action-edge switch/case multi-step branch forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$fluent_meta->{canonical_action_ir_nodes}}),
         'action-edge switch/case multi-step fluent form preserves helper nodes across branch-local method sequences'
@@ -17023,13 +17025,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_multi_step_blocks
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.if(on).declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))).elseif(alt_on).say("alt").return_undef().else().return_undef().endif()
+LX.if(on).set(array(events), array()).push(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))).elseif(alt_on).say("alt").return_undef().else().return_undef().endif()
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { if(on); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))); elseif(alt_on); say("alt"); return_undef(); else(); return_undef(); endif() }
+LX { if(on); set(array(events), array()); push(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))); elseif(alt_on); say("alt"); return_undef(); else(); return_undef(); endif() }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -17055,7 +17057,7 @@ SPEC
         'fluent and structured lifecycle if/elseif multi-step branch forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$fluent_meta->{canonical_action_ir_nodes}}),
         'lifecycle if/elseif multi-step fluent form preserves helper nodes across branch-local method sequences'
@@ -17066,13 +17068,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_switch_case_multi_step_bloc
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.switch(kind).case("A").declare(array, events).push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))).default().say("miss").return_undef().endswitch()
+LX.switch(kind).case("A").set(array(events), array()).push(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))).return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))).default().say("miss").return_undef().endswitch()
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { switch(kind); case("A"); declare(array, events); push_value(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))); default(); say("miss"); return_undef(); endswitch() }
+LX { switch(kind); case("A"); set(array(events), array()); push(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))); return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(events))), /^B/))))); default(); say("miss"); return_undef(); endswitch() }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -17098,7 +17100,7 @@ SPEC
         'fluent and structured lifecycle switch/case multi-step branch forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$fluent_meta->{canonical_action_ir_nodes}}),
         'lifecycle switch/case multi-step fluent form preserves helper nodes across branch-local method sequences'
@@ -17109,12 +17111,12 @@ subtest 'method_like_fluent_and_structured_action_inline_composite_switch_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .switch(op, case("|", declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef()))
+ /a/ -> Top .switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef()))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { switch(op, case("|", declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
+ /a/ -> Top { switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -17140,7 +17142,7 @@ SPEC
     );
     ok(
         scalar(grep { $_ eq 'SWITCH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$fluent_meta->{canonical_action_ir_nodes}}),
@@ -17152,13 +17154,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_inline_composite_switch_low
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.switch(op, case("|", declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef()))
+LX.switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef()))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { switch(op, case("|", declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
+LX { switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -17185,7 +17187,7 @@ SPEC
     );
     ok(
         scalar(grep { $_ eq 'SWITCH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$fluent_meta->{canonical_action_ir_nodes}}),
@@ -17197,7 +17199,7 @@ subtest 'method_like_action_inline_composite_switch_branch_blocks_lower_equivale
 
     my $list_spec = <<'SPEC';
 Top::&
- /a/ -> Top { switch(op, case("|", declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
+ /a/ -> Top { switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
 SPEC
 
     my $block_spec = <<'SPEC';
@@ -17206,8 +17208,8 @@ Top::&
   switch(
     op,
     case("|", {
-      declare(array, events)
-      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      set(array(events), array())
+      push(array(events), hash("items", array(IMATCH_LIST)))
       return_array(semantic_annotation, hash("items", array(events)))
     }),
     default({
@@ -17241,7 +17243,7 @@ SPEC
     );
     ok(
         scalar(grep { $_ eq 'SWITCH' } @{$block_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$block_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$block_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$block_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$block_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$block_meta->{canonical_action_ir_nodes}}),
@@ -17253,7 +17255,7 @@ subtest 'method_like_lifecycle_inline_composite_switch_branch_blocks_lower_equiv
 
     my $list_spec = <<'SPEC';
 Top::&
-LX { switch(op, case("|", declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
+LX { switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -17263,8 +17265,8 @@ LX {
   switch(
     op,
     case("|", {
-      declare(array, events)
-      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      set(array(events), array())
+      push(array(events), hash("items", array(IMATCH_LIST)))
       return_array(semantic_annotation, hash("items", array(events)))
     }),
     default({
@@ -17299,7 +17301,7 @@ SPEC
     );
     ok(
         scalar(grep { $_ eq 'SWITCH' } @{$block_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$block_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$block_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$block_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$block_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$block_meta->{canonical_action_ir_nodes}}),
@@ -17315,8 +17317,8 @@ Top::&
   switch(
     op,
     case("|", {
-      declare(array, events)
-      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      set(array(events), array())
+      push(array(events), hash("items", array(IMATCH_LIST)))
       return(array("semantic_annotation", hash("items", array(events))))
     }),
     default({
@@ -17333,8 +17335,8 @@ Top::&
   switch(
     op,
     case("|") {
-      declare(array, events)
-      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      set(array(events), array())
+      push(array(events), hash("items", array(IMATCH_LIST)))
       return(array("semantic_annotation", hash("items", array(events))))
     },
     default {
@@ -17365,7 +17367,7 @@ SPEC
         $attached_meta->{canonical_action_ir_hits},
         {
             CASE    => 1,
-            DECLARE => 1,
+            ASSIGN  => 1,
             DEFAULT => 1,
             PUSH    => 1,
             RETURN  => 2,
@@ -17380,7 +17382,7 @@ SPEC
     );
     ok(
         scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$attached_meta->{canonical_action_ir_nodes}}),
@@ -17396,8 +17398,8 @@ LX {
   switch(
     op,
     case("|", {
-      declare(array, events)
-      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      set(array(events), array())
+      push(array(events), hash("items", array(IMATCH_LIST)))
       return(array("semantic_annotation", hash("items", array(events))))
     }),
     default({
@@ -17415,8 +17417,8 @@ LX {
   switch(
     op,
     case("|") {
-      declare(array, events)
-      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      set(array(events), array())
+      push(array(events), hash("items", array(IMATCH_LIST)))
       return(array("semantic_annotation", hash("items", array(events))))
     },
     default {
@@ -17448,7 +17450,7 @@ SPEC
         $attached_meta->{canonical_action_ir_hits},
         {
             CASE    => 1,
-            DECLARE => 1,
+            ASSIGN  => 1,
             DEFAULT => 1,
             PUSH    => 1,
             RETURN  => 3,
@@ -17463,7 +17465,7 @@ SPEC
     );
     ok(
         scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$attached_meta->{canonical_action_ir_nodes}}),
@@ -17475,15 +17477,15 @@ subtest 'method_like_action_inline_composite_if_lower_equivalently' => sub {
 
     my $inline_spec = <<'SPEC';
 Top::&
- /a/ -> Top { if(on, declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return(array("semantic_annotation", hash("items", array(events)))), elseif(alt_on, say("alt"), return_undef()), else(return_undef())) }
+ /a/ -> Top { if(on, set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return(array("semantic_annotation", hash("items", array(events)))), elseif(alt_on, say("alt"), return_undef()), else(return_undef())) }
 SPEC
 
     my $marker_spec = <<'SPEC';
 Top::&
  /a/ -> Top {
   if(on)
-  declare(array, events)
-  push_value(array(events), hash("items", array(IMATCH_LIST)))
+  set(array(events), array())
+  push(array(events), hash("items", array(IMATCH_LIST)))
   return(array("semantic_annotation", hash("items", array(events))))
   elseif(alt_on)
   say("alt")
@@ -17521,7 +17523,7 @@ SPEC
         scalar(grep { $_ eq 'IF' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELIF' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$inline_meta->{canonical_action_ir_nodes}}),
         'action-edge inline composite if form preserves IF/ELIF/ELSE plus helper nodes across inline branch action lists'
@@ -17532,7 +17534,7 @@ subtest 'method_like_lifecycle_inline_composite_if_lower_equivalently' => sub {
 
     my $inline_spec = <<'SPEC';
 Top::&
-LX { if(on, declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return(array("semantic_annotation", hash("items", array(events)))), elseif(alt_on, say("alt"), return_undef()), else(return_undef())) }
+LX { if(on, set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return(array("semantic_annotation", hash("items", array(events)))), elseif(alt_on, say("alt"), return_undef()), else(return_undef())) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -17540,8 +17542,8 @@ SPEC
 Top::&
 LX {
   if(on)
-  declare(array, events)
-  push_value(array(events), hash("items", array(IMATCH_LIST)))
+  set(array(events), array())
+  push(array(events), hash("items", array(IMATCH_LIST)))
   return(array("semantic_annotation", hash("items", array(events))))
   elseif(alt_on)
   say("alt")
@@ -17580,7 +17582,7 @@ SPEC
         scalar(grep { $_ eq 'IF' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELIF' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$inline_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$inline_meta->{canonical_action_ir_nodes}}),
         'lifecycle inline composite if form preserves IF/ELIF/ELSE plus helper nodes across inline branch action lists'
@@ -17591,7 +17593,7 @@ subtest 'method_like_action_inline_composite_if_branch_blocks_lower_equivalently
 
     my $list_spec = <<'SPEC';
 Top::&
- /a/ -> Top { if(on, declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events))), elseif(alt_on, say("alt"), return_undef()), else(return_undef())) }
+ /a/ -> Top { if(on, set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events))), elseif(alt_on, say("alt"), return_undef()), else(return_undef())) }
 SPEC
 
     my $block_spec = <<'SPEC';
@@ -17600,8 +17602,8 @@ Top::&
   if(
     on,
     {
-      declare(array, events)
-      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      set(array(events), array())
+      push(array(events), hash("items", array(IMATCH_LIST)))
       return_array(semantic_annotation, hash("items", array(events)))
     },
     elseif(alt_on, {
@@ -17640,7 +17642,7 @@ SPEC
         scalar(grep { $_ eq 'IF' } @{$block_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELIF' } @{$block_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$block_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$block_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$block_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$block_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$block_meta->{canonical_action_ir_nodes}}),
         'action-edge inline composite if branch-block form preserves IF/ELIF/ELSE plus helper nodes across semicolonless structured branch bodies'
@@ -17651,7 +17653,7 @@ subtest 'method_like_lifecycle_inline_composite_if_branch_blocks_lower_equivalen
 
     my $list_spec = <<'SPEC';
 Top::&
-LX { if(on, declare(array, events), push_value(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events))), elseif(alt_on, say("alt"), return_undef()), else(return_undef())) }
+LX { if(on, set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events))), elseif(alt_on, say("alt"), return_undef()), else(return_undef())) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -17661,8 +17663,8 @@ LX {
   if(
     on,
     {
-      declare(array, events)
-      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      set(array(events), array())
+      push(array(events), hash("items", array(IMATCH_LIST)))
       return_array(semantic_annotation, hash("items", array(events)))
     },
     elseif(alt_on, {
@@ -17702,7 +17704,7 @@ SPEC
         scalar(grep { $_ eq 'IF' } @{$block_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELIF' } @{$block_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$block_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$block_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$block_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$block_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$block_meta->{canonical_action_ir_nodes}}),
         'lifecycle inline composite if branch-block form preserves IF/ELIF/ELSE plus helper nodes across semicolonless structured branch bodies'
@@ -17717,8 +17719,8 @@ Top::&
   if(
     on,
     {
-      declare(array, events)
-      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      set(array(events), array())
+      push(array(events), hash("items", array(IMATCH_LIST)))
       return_array(semantic_annotation, hash("items", array(events)))
     },
     elseif(alt_on, {
@@ -17736,8 +17738,8 @@ SPEC
 Top::&
  /a/ -> Top {
   if(on) {
-    declare(array, events)
-    push_value(array(events), hash("items", array(IMATCH_LIST)))
+    set(array(events), array())
+    push(array(events), hash("items", array(IMATCH_LIST)))
     return_array(semantic_annotation, hash("items", array(events)))
   }
   elseif(alt_on) {
@@ -17775,7 +17777,7 @@ SPEC
         scalar(grep { $_ eq 'IF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELIF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$attached_meta->{canonical_action_ir_nodes}}),
         'action-edge attached-block composite if form preserves IF/ELIF/ELSE plus helper nodes across attached branch bodies'
@@ -17790,8 +17792,8 @@ LX {
   if(
     on,
     {
-      declare(array, events)
-      push_value(array(events), hash("items", array(IMATCH_LIST)))
+      set(array(events), array())
+      push(array(events), hash("items", array(IMATCH_LIST)))
       return_array(semantic_annotation, hash("items", array(events)))
     },
     elseif(alt_on, {
@@ -17810,8 +17812,8 @@ SPEC
 Top::&
 LX {
   if(on) {
-    declare(array, events)
-    push_value(array(events), hash("items", array(IMATCH_LIST)))
+    set(array(events), array())
+    push(array(events), hash("items", array(IMATCH_LIST)))
     return_array(semantic_annotation, hash("items", array(events)))
   }
   elseif(alt_on) {
@@ -17850,7 +17852,7 @@ SPEC
         scalar(grep { $_ eq 'IF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELIF' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'PUSH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$attached_meta->{canonical_action_ir_nodes}}),
         'lifecycle attached-block composite if form preserves IF/ELIF/ELSE plus helper nodes across attached branch bodies'
@@ -17876,13 +17878,13 @@ subtest 'method_like_remaining_lifecycle_inline_composite_if_lower_equivalently'
 
             my $fluent_spec = <<"SPEC";
 Top::&
-$tag.if(on, declare(array, events), return_undef(), elseif(alt_on, say("alt"), return_undef()), else(return_undef()))
+$tag.if(on, set(array(events), array()), return_undef(), elseif(alt_on, say("alt"), return_undef()), else(return_undef()))
  /a/ -> Top { return(1) }
 SPEC
 
             my $block_spec = <<"SPEC";
 Top::&
-$tag { if(on, declare(array, events), return_undef(), elseif(alt_on, say("alt"), return_undef()), else(return_undef())) }
+$tag { if(on, set(array(events), array()), return_undef(), elseif(alt_on, say("alt"), return_undef()), else(return_undef())) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -17937,7 +17939,7 @@ $tag {
   if(
     on,
     {
-      declare(array, events)
+      set(array(events), array())
       return_undef()
     },
     elseif(alt_on, {
@@ -17956,7 +17958,7 @@ SPEC
 Top::&
 $tag {
   if(on) {
-    declare(array, events)
+    set(array(events), array())
     return_undef()
   }
   elseif(alt_on) {
@@ -18004,7 +18006,7 @@ subtest 'method_like_fluent_action_attached_block_composite_if_lower_equivalentl
 Top::&
  /a/ -> Top {
   if(on) {
-    declare(array, events)
+    set(array(events), array())
     return_undef()
   }
   elseif(alt_on) {
@@ -18020,7 +18022,7 @@ SPEC
     my $fluent_spec = <<'SPEC';
 Top::&
  /a/ -> Top.if(on) {
-  declare(array, events)
+  set(array(events), array())
   return_undef()
  } elseif(alt_on) {
   say("alt")
@@ -18075,7 +18077,7 @@ subtest 'method_like_full_lifecycle_fluent_attached_block_composite_if_lower_equ
 Top::&
 $tag {
   if(on) {
-    declare(array, events)
+    set(array(events), array())
     return_undef()
   }
   elseif(alt_on) {
@@ -18092,7 +18094,7 @@ SPEC
             my $fluent_spec = <<"SPEC";
 Top::&
 $tag.if(on) {
-  declare(array, events)
+  set(array(events), array())
   return_undef()
  } elseif(alt_on) {
   say("alt")
@@ -18137,7 +18139,7 @@ subtest 'method_like_action_mixed_branch_carrier_composite_if_lower_equivalently
 Top::&
  /a/ -> Top {
   if(on) {
-    declare(array, events)
+    set(array(events), array())
     return_undef()
   }
   elseif(alt_on)
@@ -18152,7 +18154,7 @@ SPEC
     my $fluent_spec = <<'SPEC';
 Top::&
  /a/ -> Top.if(on) {
-  declare(array, events)
+  set(array(events), array())
   return_undef()
  } elseif(alt_on)
   say("alt")
@@ -18207,7 +18209,7 @@ subtest 'method_like_full_lifecycle_mixed_branch_carrier_composite_if_lower_equi
 Top::&
 $tag {
   if(on) {
-    declare(array, events)
+    set(array(events), array())
     return_undef()
   }
   elseif(alt_on)
@@ -18223,7 +18225,7 @@ SPEC
             my $fluent_spec = <<"SPEC";
 Top::&
 $tag.if(on) {
-  declare(array, events)
+  set(array(events), array())
   return_undef()
  } elseif(alt_on)
   say("alt")
@@ -20049,13 +20051,13 @@ subtest 'method_like_remaining_lifecycle_inline_composite_switch_lower_equivalen
 
             my $fluent_spec = <<"SPEC";
 Top::&
-$tag.switch(op, case("|", declare(array, events), return_array(semantic_annotation, hash("items", array(events)))), default(return_undef()))
+$tag.switch(op, case("|", set(array(events), array()), return_array(semantic_annotation, hash("items", array(events)))), default(return_undef()))
  /a/ -> Top { return(1) }
 SPEC
 
             my $block_spec = <<"SPEC";
 Top::&
-$tag { switch(op, case("|", declare(array, events), return_array(semantic_annotation, hash("items", array(events)))), default(return_undef())) }
+$tag { switch(op, case("|", set(array(events), array()), return_array(semantic_annotation, hash("items", array(events)))), default(return_undef())) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -20105,7 +20107,7 @@ subtest 'method_like_remaining_lifecycle_inline_composite_if_branch_blocks_lower
 
             my $list_spec = <<"SPEC";
 Top::&
-$tag { if(on, declare(array, events), return_undef(), elseif(alt_on, say("alt"), return_undef()), else(return_undef())) }
+$tag { if(on, set(array(events), array()), return_undef(), elseif(alt_on, say("alt"), return_undef()), else(return_undef())) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -20115,7 +20117,7 @@ $tag {
   if(
     on,
     {
-      declare(array, events)
+      set(array(events), array())
       return_undef()
     },
     elseif(alt_on, {
@@ -20177,7 +20179,7 @@ subtest 'method_like_remaining_lifecycle_inline_composite_switch_branch_blocks_l
 
             my $list_spec = <<"SPEC";
 Top::&
-$tag { switch(op, case("|", declare(array, events), return_array(semantic_annotation, hash("items", array(events)))), default(return_undef())) }
+$tag { switch(op, case("|", set(array(events), array()), return_array(semantic_annotation, hash("items", array(events)))), default(return_undef())) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -20187,7 +20189,7 @@ $tag {
   switch(
     op,
     case("|", {
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     }),
     default({
@@ -20249,7 +20251,7 @@ $tag {
   switch(
     op,
     case("|", {
-      declare(array, events)
+      set(array(events), array())
       return(array("semantic_annotation", hash("items", array(events))))
     }),
     default({
@@ -20266,7 +20268,7 @@ $tag {
   switch(
     op,
     case("|") {
-      declare(array, events)
+      set(array(events), array())
       return(array("semantic_annotation", hash("items", array(events))))
     },
     default() {
@@ -20293,7 +20295,7 @@ SPEC
                 $attached_meta->{canonical_action_ir_hits},
                 {
                     CASE    => 1,
-                    DECLARE => 1,
+                    ASSIGN  => 1,
                     DEFAULT => 1,
                     RETURN  => 3,
                     SWITCH  => 1,
@@ -21045,12 +21047,12 @@ subtest 'method_like_fluent_and_structured_action_flat_list_helpers_lower_equiva
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "source", "rule")).return(hash(flat_hash(hash_copy(pick_keys(hash(meta), "kind", "source"))), "stage", "normalized")).return(array("keys", flat_array(sorted_keys(hash_copy(hash(meta)))), "tail"))
+ /a/ -> Top .set(hash(meta), hash("kind", "NODE", "source", "rule")).return(hash(flat_hash(pick_keys(hash(meta), "kind", "source")), "stage", "normalized")).return(array("keys", flat_array(sorted_keys(hash(meta))), "tail"))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule")); return(hash(flat_hash(hash_copy(pick_keys(hash(meta), "kind", "source"))), "stage", "normalized")); return(array("keys", flat_array(sorted_keys(hash_copy(hash(meta)))), "tail")) }
+ /a/ -> Top { set(hash(meta), hash("kind", "NODE", "source", "rule")); return(hash(flat_hash(pick_keys(hash(meta), "kind", "source")), "stage", "normalized")); return(array("keys", flat_array(sorted_keys(hash(meta))), "tail")) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -21075,9 +21077,9 @@ SPEC
         'fluent and structured action-edge flat-list helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge flat-list helper fluent form preserves DECLARE/RETURN coverage while keeping composed list-context insertion helper lowering'
+        'action-edge flat-list helper fluent form preserves ASSIGN/RETURN coverage while keeping composed list-context insertion helper lowering'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_flat_list_helpers_lower_equivalently' => sub {
@@ -21085,13 +21087,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_flat_list_helpers_lower_equ
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "source", "rule")).return(hash(flat_hash(hash_copy(pick_keys(hash(meta), "kind", "source"))), "stage", "normalized")).return(array("keys", flat_array(sorted_keys(hash_copy(hash(meta)))), "tail"))
+LX.set(hash(meta), hash("kind", "NODE", "source", "rule")).return(hash(flat_hash(pick_keys(hash(meta), "kind", "source")), "stage", "normalized")).return(array("keys", flat_array(sorted_keys(hash(meta))), "tail"))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "source", "rule")); return(hash(flat_hash(hash_copy(pick_keys(hash(meta), "kind", "source"))), "stage", "normalized")); return(array("keys", flat_array(sorted_keys(hash_copy(hash(meta)))), "tail")) }
+LX { set(hash(meta), hash("kind", "NODE", "source", "rule")); return(hash(flat_hash(pick_keys(hash(meta), "kind", "source")), "stage", "normalized")); return(array("keys", flat_array(sorted_keys(hash(meta))), "tail")) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -21117,9 +21119,9 @@ SPEC
         'fluent and structured lifecycle flat-list helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle flat-list helper fluent form preserves DECLARE/RETURN coverage while keeping composed list-context insertion helper lowering'
+        'lifecycle flat-list helper fluent form preserves ASSIGN/RETURN coverage while keeping composed list-context insertion helper lowering'
     );
 };
 subtest 'method_like_fluent_and_structured_action_array_snapshot_helpers_lower_equivalently' => sub {
@@ -21127,12 +21129,12 @@ subtest 'method_like_fluent_and_structured_action_array_snapshot_helpers_lower_e
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .return(array_copy(array(items))).return(hash("content", array_copy(array(assigns))))
+ /a/ -> Top .return(copy(array(items))).return(hash("content", copy(array(assigns))))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { return(array_copy(array(items))); return(hash("content", array_copy(array(assigns)))) }
+ /a/ -> Top { return(copy(array(items))); return(hash("content", copy(array(assigns)))) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -21166,13 +21168,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_array_snapshot_helpers_lowe
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.return(array_copy(array(items))).return(hash("content", array_copy(array(assigns))))
+LX.return(copy(array(items))).return(hash("content", copy(array(assigns))))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { return(array_copy(array(items))); return(hash("content", array_copy(array(assigns)))) }
+LX { return(copy(array(items))); return(hash("content", copy(array(assigns)))) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -21207,12 +21209,12 @@ subtest 'method_like_fluent_and_structured_action_if_elseif_array_snapshot_branc
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .if(on).return(array_copy(array(items))).elseif(alt_on).return(hash("content", array_copy(array(assigns)))).else().return_undef().endif()
+ /a/ -> Top .if(on).return(copy(array(items))).elseif(alt_on).return(hash("content", copy(array(assigns)))).else().return_undef().endif()
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { if(on); return(array_copy(array(items))); elseif(alt_on); return(hash("content", array_copy(array(assigns)))); else(); return_undef(); endif() }
+ /a/ -> Top { if(on); return(copy(array(items))); elseif(alt_on); return(hash("content", copy(array(assigns)))); else(); return_undef(); endif() }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -21248,12 +21250,12 @@ subtest 'method_like_fluent_and_structured_action_switch_case_array_snapshot_bra
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .switch(kind).case("A").return(array_copy(array(items))).default().return(hash("content", array_copy(array(assigns)))).endswitch()
+ /a/ -> Top .switch(kind).case("A").return(copy(array(items))).default().return(hash("content", copy(array(assigns)))).endswitch()
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { switch(kind); case("A"); return(array_copy(array(items))); default(); return(hash("content", array_copy(array(assigns)))); endswitch() }
+ /a/ -> Top { switch(kind); case("A"); return(copy(array(items))); default(); return(hash("content", copy(array(assigns)))); endswitch() }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -21290,15 +21292,15 @@ subtest 'method_like_structured_action_control_flow_blocks_accept_optional_semic
 
     my $if_fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .if(on).return(array_copy(array(items))).elseif(alt_on).return(hash("content", array_copy(array(assigns)))).else().return_undef().endif()
+ /a/ -> Top .if(on).return(copy(array(items))).elseif(alt_on).return(hash("content", copy(array(assigns)))).else().return_undef().endif()
 SPEC
 
     my $if_block_spec = <<'SPEC';
 Top::&
  /a/ -> Top { if(on)
- return(array_copy(array(items)))
+ return(copy(array(items)))
  elseif(alt_on)
- return(hash("content", array_copy(array(assigns))))
+ return(hash("content", copy(array(assigns))))
  else()
  return_undef()
  endif() }
@@ -21306,16 +21308,16 @@ SPEC
 
     my $switch_fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .switch(kind).case("A").return(array_copy(array(items))).default().return(hash("content", array_copy(array(assigns)))).endswitch()
+ /a/ -> Top .switch(kind).case("A").return(copy(array(items))).default().return(hash("content", copy(array(assigns)))).endswitch()
 SPEC
 
     my $switch_block_spec = <<'SPEC';
 Top::&
  /a/ -> Top { switch(kind)
  case("A")
- return(array_copy(array(items)))
+ return(copy(array(items)))
  default()
- return(hash("content", array_copy(array(assigns))))
+ return(hash("content", copy(array(assigns))))
  endswitch() }
 SPEC
 
@@ -21348,15 +21350,15 @@ subtest 'method_like_structured_action_control_flow_blocks_accept_bare_zero_arg_
 
     my $if_fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .if(on).return(array_copy(array(items))).elseif(alt_on).return(hash("content", array_copy(array(assigns)))).else().return_undef().endif()
+ /a/ -> Top .if(on).return(copy(array(items))).elseif(alt_on).return(hash("content", copy(array(assigns)))).else().return_undef().endif()
 SPEC
 
     my $if_block_spec = <<'SPEC';
 Top::&
  /a/ -> Top { if(on)
- return(array_copy(array(items)))
+ return(copy(array(items)))
  elseif(alt_on)
- return(hash("content", array_copy(array(assigns))))
+ return(hash("content", copy(array(assigns))))
  else
  return_undef()
  endif }
@@ -21364,17 +21366,17 @@ SPEC
 
     my $switch_fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .switch(kind).case("A").return(array_copy(array(items))).default().return(hash("content", array_copy(array(assigns)))).endswitch()
+ /a/ -> Top .switch(kind).case("A").return(copy(array(items))).default().return(hash("content", copy(array(assigns)))).endswitch()
 SPEC
 
     my $switch_block_spec = <<'SPEC';
 Top::&
  /a/ -> Top { switch(kind)
  case("A")
- return(array_copy(array(items)))
+ return(copy(array(items)))
  endcase
  default
- return(hash("content", array_copy(array(assigns))))
+ return(hash("content", copy(array(assigns))))
  endcase
  endswitch }
 SPEC
@@ -21408,22 +21410,22 @@ subtest 'method_like_fluent_action_control_flow_chains_accept_bare_zero_arg_mark
 
     my $if_explicit_spec = <<'SPEC';
 Top::&
- /a/ -> Top .if(on).return(array_copy(array(items))).elseif(alt_on).return(hash("content", array_copy(array(assigns)))).else().return_undef().endif()
+ /a/ -> Top .if(on).return(copy(array(items))).elseif(alt_on).return(hash("content", copy(array(assigns)))).else().return_undef().endif()
 SPEC
 
     my $if_bare_spec = <<'SPEC';
 Top::&
- /a/ -> Top .if(on).return(array_copy(array(items))).elseif(alt_on).return(hash("content", array_copy(array(assigns)))).else.return_undef().endif
+ /a/ -> Top .if(on).return(copy(array(items))).elseif(alt_on).return(hash("content", copy(array(assigns)))).else.return_undef().endif
 SPEC
 
     my $switch_explicit_spec = <<'SPEC';
 Top::&
- /a/ -> Top .switch(kind).case("A").return(array_copy(array(items))).endcase().default().return(hash("content", array_copy(array(assigns)))).endcase().endswitch()
+ /a/ -> Top .switch(kind).case("A").return(copy(array(items))).endcase().default().return(hash("content", copy(array(assigns)))).endcase().endswitch()
 SPEC
 
     my $switch_bare_spec = <<'SPEC';
 Top::&
- /a/ -> Top .switch(kind).case("A").return(array_copy(array(items))).endcase.default.return(hash("content", array_copy(array(assigns)))).endcase.endswitch
+ /a/ -> Top .switch(kind).case("A").return(copy(array(items))).endcase.default.return(hash("content", copy(array(assigns)))).endcase.endswitch
 SPEC
 
     my $if_explicit_descr = LinkedSpec::Get(\$if_explicit_spec, return_descriptor => 1);
@@ -21455,16 +21457,16 @@ subtest 'method_like_structured_lifecycle_control_flow_blocks_accept_optional_se
 
     my $if_fluent_spec = <<'SPEC';
 Top::&
-LX.if(on).return(array_copy(array(items))).elseif(alt_on).return(hash("content", array_copy(array(assigns)))).else().return_undef().endif()
+LX.if(on).return(copy(array(items))).elseif(alt_on).return(hash("content", copy(array(assigns)))).else().return_undef().endif()
  /a/ -> Top { return(1) }
 SPEC
 
     my $if_block_spec = <<'SPEC';
 Top::&
 LX { if(on)
- return(array_copy(array(items)))
+ return(copy(array(items)))
  elseif(alt_on)
- return(hash("content", array_copy(array(assigns))))
+ return(hash("content", copy(array(assigns))))
  else()
  return_undef()
  endif() }
@@ -21473,7 +21475,7 @@ SPEC
 
     my $switch_fluent_spec = <<'SPEC';
 Top::&
-LX.switch(kind).case("A").return(array_copy(array(items))).default().return(hash("content", array_copy(array(assigns)))).endswitch()
+LX.switch(kind).case("A").return(copy(array(items))).default().return(hash("content", copy(array(assigns)))).endswitch()
  /a/ -> Top { return(1) }
 SPEC
 
@@ -21481,9 +21483,9 @@ SPEC
 Top::&
 LX { switch(kind)
  case("A")
- return(array_copy(array(items)))
+ return(copy(array(items)))
  default()
- return(hash("content", array_copy(array(assigns))))
+ return(hash("content", copy(array(assigns))))
  endswitch() }
  /a/ -> Top { return(1) }
 SPEC
@@ -21846,7 +21848,7 @@ Top::&
  /a/ -> Top {
   switch(op)
   case("|")
-  declare(array, events)
+  set(array(events), array())
   return(array("semantic_annotation", hash("items", array(events))))
   default()
   say("miss")
@@ -21860,7 +21862,7 @@ Top::&
  /a/ -> Top {
   switch(op)
   case("|") {
-    declare(array, events)
+    set(array(events), array())
     return(array("semantic_annotation", hash("items", array(events))))
   }
   default() {
@@ -21896,7 +21898,7 @@ SPEC
         scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$attached_meta->{canonical_action_ir_nodes}}),
         'action-edge marker-style switch attached-branch-block sugar preserves switch plus helper nodes across semicolonless structured branch bodies'
@@ -21926,7 +21928,7 @@ Top::&
 $tag {
   switch(op)
   case("|")
-  declare(array, events)
+  set(array(events), array())
   return(array("semantic_annotation", hash("items", array(events))))
   default()
   return_undef()
@@ -21940,7 +21942,7 @@ Top::&
 $tag {
   switch(op)
   case("|") {
-    declare(array, events)
+    set(array(events), array())
     return(array("semantic_annotation", hash("items", array(events))))
   }
   default {
@@ -21987,7 +21989,7 @@ Top::&
   switch(
     op,
     case("|") {
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     },
     default {
@@ -22003,7 +22005,7 @@ Top::&
  /a/ -> Top {
   switch(op) {
     case("|") {
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     }
     default {
@@ -22039,7 +22041,7 @@ SPEC
         scalar(grep { $_ eq 'SWITCH' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CASE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'DEFAULT' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$attached_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$attached_meta->{canonical_action_ir_nodes}}),
         'action-edge attached-block outer switch form preserves SWITCH/CASE/DEFAULT plus helper nodes'
@@ -22070,7 +22072,7 @@ $tag {
   switch(
     op,
     case("|") {
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     },
     default {
@@ -22086,7 +22088,7 @@ Top::&
 $tag {
   switch(op) {
     case("|") {
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     }
     default {
@@ -22132,7 +22134,7 @@ Top::&
  /a/ -> Top {
   switch(op) {
     case("|") {
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     }
     default {
@@ -22148,7 +22150,7 @@ Top::&
  /a/ -> Top {
   switch(op) {
     case("|")
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     default
       say("miss")
@@ -22182,7 +22184,7 @@ SPEC
         scalar(grep { $_ eq 'SWITCH' } @{$plain_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CASE' } @{$plain_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'DEFAULT' } @{$plain_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$plain_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$plain_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$plain_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$plain_meta->{canonical_action_ir_nodes}}),
         'action-edge attached-block outer switch plain marker branches preserve SWITCH/CASE/DEFAULT plus helper nodes'
@@ -22212,7 +22214,7 @@ Top::&
 $tag {
   switch(op) {
     case("|") {
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     }
     default {
@@ -22228,7 +22230,7 @@ Top::&
 $tag {
   switch(op) {
     case("|")
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     default
       return_undef()
@@ -22272,7 +22274,7 @@ Top::&
  /a/ -> Top {
   switch(op) {
     case("|")
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     default
       say("miss")
@@ -22285,7 +22287,7 @@ SPEC
 Top::&
  /a/ -> Top.switch(op) {
   case("|")
-    declare(array, events)
+    set(array(events), array())
     return_array(semantic_annotation, hash("items", array(events)))
   default
     say("miss")
@@ -22339,7 +22341,7 @@ Top::&
 $tag {
   switch(op) {
     case("|")
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     default
       return_undef()
@@ -22352,7 +22354,7 @@ SPEC
 Top::&
 $tag.switch(op) {
   case("|")
-    declare(array, events)
+    set(array(events), array())
     return_array(semantic_annotation, hash("items", array(events)))
   default
     return_undef()
@@ -22395,7 +22397,7 @@ Top::&
  /a/ -> Top {
   switch(op) {
     case("|") {
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     }
     case("&") {
@@ -22414,7 +22416,7 @@ Top::&
  /a/ -> Top {
   switch(op) {
     case("|") {
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     }
     case("&")
@@ -22452,7 +22454,7 @@ SPEC
         scalar(grep { $_ eq 'SWITCH' } @{$mixed_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CASE' } @{$mixed_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'DEFAULT' } @{$mixed_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'DECLARE' } @{$mixed_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$mixed_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$mixed_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SAY' } @{$mixed_meta->{canonical_action_ir_nodes}}),
         'action-edge attached-block outer switch mixed branch carriers preserve SWITCH/CASE/DEFAULT plus helper nodes'
@@ -22482,7 +22484,7 @@ Top::&
 $tag {
   switch(op) {
     case("|") {
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     }
     case("&") {
@@ -22501,7 +22503,7 @@ Top::&
 $tag {
   switch(op) {
     case("|") {
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     }
     case("&")
@@ -22549,7 +22551,7 @@ Top::&
  /a/ -> Top {
   switch(op) {
     case("|") {
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     }
     case("&")
@@ -22566,7 +22568,7 @@ SPEC
 Top::&
  /a/ -> Top.switch(op) {
   case("|") {
-    declare(array, events)
+    set(array(events), array())
     return_array(semantic_annotation, hash("items", array(events)))
   }
   case("&")
@@ -22629,7 +22631,7 @@ Top::&
 $tag {
   switch(op) {
     case("|") {
-      declare(array, events)
+      set(array(events), array())
       return_array(semantic_annotation, hash("items", array(events)))
     }
     case("&")
@@ -22646,7 +22648,7 @@ SPEC
 Top::&
 $tag.switch(op) {
   case("|") {
-    declare(array, events)
+    set(array(events), array())
     return_array(semantic_annotation, hash("items", array(events)))
   }
   case("&")
@@ -33028,13 +33030,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_array_snapshot_br
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.if(on).return(array_copy(array(items))).elseif(alt_on).return(hash("content", array_copy(array(assigns)))).else().return_undef().endif()
+LX.if(on).return(copy(array(items))).elseif(alt_on).return(hash("content", copy(array(assigns)))).else().return_undef().endif()
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { if(on); return(array_copy(array(items))); elseif(alt_on); return(hash("content", array_copy(array(assigns)))); else(); return_undef(); endif() }
+LX { if(on); return(copy(array(items))); elseif(alt_on); return(hash("content", copy(array(assigns)))); else(); return_undef(); endif() }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -33071,13 +33073,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_switch_case_array_snapshot_
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.switch(kind).case("A").return(array_copy(array(items))).default().return(hash("content", array_copy(array(assigns)))).endswitch()
+LX.switch(kind).case("A").return(copy(array(items))).default().return(hash("content", copy(array(assigns)))).endswitch()
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { switch(kind); case("A"); return(array_copy(array(items))); default(); return(hash("content", array_copy(array(assigns)))); endswitch() }
+LX { switch(kind); case("A"); return(copy(array(items))); default(); return(hash("content", copy(array(assigns)))); endswitch() }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -33195,12 +33197,12 @@ subtest 'method_like_fluent_and_structured_action_join_values_projected_array_he
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")).declare(scalar, joined_keys).set(joined_keys, join_values(", ", sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))).return(join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source", "stage"))))
+ /a/ -> Top .set(hash(meta), hash("kind", "NODE", "source", "rule", "stage", "normalized")).set(joined_keys, undef).set(joined_keys, join_values(", ", sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))).return(join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source", "stage"))))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")); declare(scalar, joined_keys); set(joined_keys, join_values(", ", sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))); return(join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))) }
+ /a/ -> Top { set(hash(meta), hash("kind", "NODE", "source", "rule", "stage", "normalized")); set(joined_keys, undef); set(joined_keys, join_values(", ", sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))); return(join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -33225,10 +33227,10 @@ SPEC
         'fluent and structured action-edge projected-array join_values helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge projected-array join_values fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge projected-array join_values fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_join_values_projected_array_helpers_lower_equivalently' => sub {
@@ -33236,13 +33238,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_join_values_projected_array
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")).declare(scalar, joined_keys).set(joined_keys, join_values(", ", sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))).return(join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source", "stage"))))
+LX.set(hash(meta), hash("kind", "NODE", "source", "rule", "stage", "normalized")).set(joined_keys, undef).set(joined_keys, join_values(", ", sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))).return(join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source", "stage"))))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")); declare(scalar, joined_keys); set(joined_keys, join_values(", ", sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))); return(join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))) }
+LX { set(hash(meta), hash("kind", "NODE", "source", "rule", "stage", "normalized")); set(joined_keys, undef); set(joined_keys, join_values(", ", sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))); return(join_values(" | ", sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -33268,10 +33270,10 @@ SPEC
         'fluent and structured lifecycle projected-array join_values helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle projected-array join_values fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle projected-array join_values fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_first_last_value_helpers_lower_equivalently' => sub {
@@ -33279,12 +33281,12 @@ subtest 'method_like_fluent_and_structured_action_first_last_value_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")).declare(scalar, first_key).declare(scalar, last_value).set(first_key, first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))).set(last_value, last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))).return(hash("first_key", first_key, "last_value", last_value))
+ /a/ -> Top .set(hash(meta), hash("kind", "NODE", "source", "rule", "stage", "normalized")).set(first_key, undef).set(last_value, undef).set(first_key, first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))).set(last_value, last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))).return(hash("first_key", first_key, "last_value", last_value))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")); declare(scalar, first_key); declare(scalar, last_value); set(first_key, first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))); set(last_value, last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))); return(hash("first_key", first_key, "last_value", last_value)) }
+ /a/ -> Top { set(hash(meta), hash("kind", "NODE", "source", "rule", "stage", "normalized")); set(first_key, undef); set(last_value, undef); set(first_key, first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))); set(last_value, last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))); return(hash("first_key", first_key, "last_value", last_value)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -33309,10 +33311,10 @@ SPEC
         'fluent and structured action-edge first/last helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge first/last fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge first/last fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_first_last_value_helpers_lower_equivalently' => sub {
@@ -33320,13 +33322,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_first_last_value_helpers_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")).declare(scalar, first_key).declare(scalar, last_value).set(first_key, first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))).set(last_value, last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))).return(hash("first_key", first_key, "last_value", last_value))
+LX.set(hash(meta), hash("kind", "NODE", "source", "rule", "stage", "normalized")).set(first_key, undef).set(last_value, undef).set(first_key, first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))).set(last_value, last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))).return(hash("first_key", first_key, "last_value", last_value))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "source", "rule", "stage", "normalized")); declare(scalar, first_key); declare(scalar, last_value); set(first_key, first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))); set(last_value, last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))); return(hash("first_key", first_key, "last_value", last_value)) }
+LX { set(hash(meta), hash("kind", "NODE", "source", "rule", "stage", "normalized")); set(first_key, undef); set(last_value, undef); set(first_key, first(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")))); set(last_value, last(sorted_values(pick_keys(hash(meta), "kind", "source", "stage")))); return(hash("first_key", first_key, "last_value", last_value)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -33352,10 +33354,10 @@ SPEC
         'fluent and structured lifecycle first/last helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle first/last fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle first/last fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_length_value_helpers_lower_equivalently' => sub {
@@ -33363,12 +33365,12 @@ subtest 'method_like_fluent_and_structured_action_length_value_helpers_lower_equ
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, clean_name).declare(scalar, clean_length).set(clean_name, trim(coalesce(retv["content"], entry_text(), " UNKNOWN "))).set(clean_length, length(clean_name)).return(hash("clean_name", clean_name, "clean_length", clean_length, "raw_length", length(entry_text())))
+ /a/ -> Top .set(clean_name, undef).set(clean_length, undef).set(clean_name, trim(coalesce(retv["content"], entry_text(), " UNKNOWN "))).set(clean_length, length(clean_name)).return(hash("clean_name", clean_name, "clean_length", clean_length, "raw_length", length(entry_text())))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, clean_name); declare(scalar, clean_length); set(clean_name, trim(coalesce(retv["content"], entry_text(), " UNKNOWN "))); set(clean_length, length(clean_name)); return(hash("clean_name", clean_name, "clean_length", clean_length, "raw_length", length(entry_text()))) }
+ /a/ -> Top { set(clean_name, undef); set(clean_length, undef); set(clean_name, trim(coalesce(retv["content"], entry_text(), " UNKNOWN "))); set(clean_length, length(clean_name)); return(hash("clean_name", clean_name, "clean_length", clean_length, "raw_length", length(entry_text()))) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -33393,10 +33395,10 @@ SPEC
         'fluent and structured action-edge length helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge length fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge length fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_length_value_helpers_lower_equivalently' => sub {
@@ -33404,13 +33406,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_length_value_helpers_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, clean_name).declare(scalar, clean_length).set(clean_name, trim(coalesce(retv["content"], entry_text(), " UNKNOWN "))).set(clean_length, length(clean_name)).return(hash("clean_name", clean_name, "clean_length", clean_length, "raw_length", length(entry_text())))
+LX.set(clean_name, undef).set(clean_length, undef).set(clean_name, trim(coalesce(retv["content"], entry_text(), " UNKNOWN "))).set(clean_length, length(clean_name)).return(hash("clean_name", clean_name, "clean_length", clean_length, "raw_length", length(entry_text())))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, clean_name); declare(scalar, clean_length); set(clean_name, trim(coalesce(retv["content"], entry_text(), " UNKNOWN "))); set(clean_length, length(clean_name)); return(hash("clean_name", clean_name, "clean_length", clean_length, "raw_length", length(entry_text()))) }
+LX { set(clean_name, undef); set(clean_length, undef); set(clean_name, trim(coalesce(retv["content"], entry_text(), " UNKNOWN "))); set(clean_length, length(clean_name)); return(hash("clean_name", clean_name, "clean_length", clean_length, "raw_length", length(entry_text()))) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -33436,10 +33438,10 @@ SPEC
         'fluent and structured lifecycle length helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle length fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle length fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_composed_scalar_container_reads_lower_equivalently' => sub {
@@ -33447,12 +33449,12 @@ subtest 'method_like_fluent_and_structured_action_composed_scalar_container_read
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, first_key).declare(scalar, chosen_kind).set(first_key, sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")).first()).set(chosen_kind, merge_hash(hash(meta), hash("kind", "NODE")).pick_keys("kind").sorted_values().first()).return(hash("first_key", first_key, "chosen_kind", chosen_kind))
+ /a/ -> Top .set(first_key, undef).set(chosen_kind, undef).set(first_key, sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")).first()).set(chosen_kind, merge_hash(hash(meta), hash("kind", "NODE")).pick_keys("kind").sorted_values().first()).return(hash("first_key", first_key, "chosen_kind", chosen_kind))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, first_key); declare(scalar, chosen_kind); set(first_key, sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")).first()); set(chosen_kind, merge_hash(hash(meta), hash("kind", "NODE")).pick_keys("kind").sorted_values().first()); return(hash("first_key", first_key, "chosen_kind", chosen_kind)) }
+ /a/ -> Top { set(first_key, undef); set(chosen_kind, undef); set(first_key, sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")).first()); set(chosen_kind, merge_hash(hash(meta), hash("kind", "NODE")).pick_keys("kind").sorted_values().first()); return(hash("first_key", first_key, "chosen_kind", chosen_kind)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -33477,10 +33479,10 @@ SPEC
         'fluent and structured action-edge composed scalar container-read forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge composed scalar container-read fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge composed scalar container-read fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_composed_scalar_container_reads_lower_equivalently' => sub {
@@ -33488,13 +33490,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_composed_scalar_container_r
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, first_key).declare(scalar, chosen_kind).set(first_key, sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")).first()).set(chosen_kind, merge_hash(hash(meta), hash("kind", "NODE")).pick_keys("kind").sorted_values().first()).return(hash("first_key", first_key, "chosen_kind", chosen_kind))
+LX.set(first_key, undef).set(chosen_kind, undef).set(first_key, sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")).first()).set(chosen_kind, merge_hash(hash(meta), hash("kind", "NODE")).pick_keys("kind").sorted_values().first()).return(hash("first_key", first_key, "chosen_kind", chosen_kind))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, first_key); declare(scalar, chosen_kind); set(first_key, sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")).first()); set(chosen_kind, merge_hash(hash(meta), hash("kind", "NODE")).pick_keys("kind").sorted_values().first()); return(hash("first_key", first_key, "chosen_kind", chosen_kind)) }
+LX { set(first_key, undef); set(chosen_kind, undef); set(first_key, sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")).first()); set(chosen_kind, merge_hash(hash(meta), hash("kind", "NODE")).pick_keys("kind").sorted_values().first()); return(hash("first_key", first_key, "chosen_kind", chosen_kind)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -33520,10 +33522,10 @@ SPEC
         'fluent and structured lifecycle composed scalar container-read forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle composed scalar container-read fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle composed scalar container-read fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_drop_front_array_helpers_lower_equivalently' => sub {
@@ -33531,12 +33533,12 @@ subtest 'method_like_fluent_and_structured_action_drop_front_array_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, rest_keys).declare(scalar, skip_count=2, rest_count).set(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), skip_count)).set(rest_count, count(array(rest_keys))).return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", rest_count))
+ /a/ -> Top .set(array(rest_keys), array()).set(skip_count, 2).set(rest_count, undef).set(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), skip_count)).set(rest_count, count(array(rest_keys))).return(hash("rest_keys", copy(array(rest_keys)), "rest_count", rest_count))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, rest_keys); declare(scalar, skip_count=2, rest_count); set(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), skip_count)); set(rest_count, count(array(rest_keys))); return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", rest_count)) }
+ /a/ -> Top { set(array(rest_keys), array()); set(skip_count, 2); set(rest_count, undef); set(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), skip_count)); set(rest_count, count(array(rest_keys))); return(hash("rest_keys", copy(array(rest_keys)), "rest_count", rest_count)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -33561,10 +33563,10 @@ SPEC
         'fluent and structured action-edge drop_front helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge drop_front fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge drop_front fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_drop_front_array_helpers_lower_equivalently' => sub {
@@ -33572,13 +33574,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_drop_front_array_helpers_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, rest_keys).declare(scalar, skip_count=2, rest_count).set(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), skip_count)).set(rest_count, count(array(rest_keys))).return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", rest_count))
+LX.set(array(rest_keys), array()).set(skip_count, 2).set(rest_count, undef).set(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), skip_count)).set(rest_count, count(array(rest_keys))).return(hash("rest_keys", copy(array(rest_keys)), "rest_count", rest_count))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, rest_keys); declare(scalar, skip_count=2, rest_count); set(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), skip_count)); set(rest_count, count(array(rest_keys))); return(hash("rest_keys", array_copy(array(rest_keys)), "rest_count", rest_count)) }
+LX { set(array(rest_keys), array()); set(skip_count, 2); set(rest_count, undef); set(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), skip_count)); set(rest_count, count(array(rest_keys))); return(hash("rest_keys", copy(array(rest_keys)), "rest_count", rest_count)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -33604,10 +33606,10 @@ SPEC
         'fluent and structured lifecycle drop_front helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle drop_front fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle drop_front fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_take_array_helpers_lower_equivalently' => sub {
@@ -33615,12 +33617,12 @@ subtest 'method_like_fluent_and_structured_action_take_array_helpers_lower_equiv
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, first_keys).declare(scalar, take_count=2, first_count).set(array(first_keys), take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), take_count)).set(first_count, count(array(first_keys))).return(hash("first_keys", array_copy(array(first_keys)), "first_count", first_count))
+ /a/ -> Top .set(array(first_keys), array()).set(take_count, 2).set(first_count, undef).set(array(first_keys), take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), take_count)).set(first_count, count(array(first_keys))).return(hash("first_keys", copy(array(first_keys)), "first_count", first_count))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, first_keys); declare(scalar, take_count=2, first_count); set(array(first_keys), take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), take_count)); set(first_count, count(array(first_keys))); return(hash("first_keys", array_copy(array(first_keys)), "first_count", first_count)) }
+ /a/ -> Top { set(array(first_keys), array()); set(take_count, 2); set(first_count, undef); set(array(first_keys), take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), take_count)); set(first_count, count(array(first_keys))); return(hash("first_keys", copy(array(first_keys)), "first_count", first_count)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -33645,10 +33647,10 @@ SPEC
         'fluent and structured action-edge take helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge take fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge take fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_take_array_helpers_lower_equivalently' => sub {
@@ -33656,13 +33658,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_take_array_helpers_lower_eq
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, first_keys).declare(scalar, take_count=2, first_count).set(array(first_keys), take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), take_count)).set(first_count, count(array(first_keys))).return(hash("first_keys", array_copy(array(first_keys)), "first_count", first_count))
+LX.set(array(first_keys), array()).set(take_count, 2).set(first_count, undef).set(array(first_keys), take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), take_count)).set(first_count, count(array(first_keys))).return(hash("first_keys", copy(array(first_keys)), "first_count", first_count))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, first_keys); declare(scalar, take_count=2, first_count); set(array(first_keys), take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), take_count)); set(first_count, count(array(first_keys))); return(hash("first_keys", array_copy(array(first_keys)), "first_count", first_count)) }
+LX { set(array(first_keys), array()); set(take_count, 2); set(first_count, undef); set(array(first_keys), take(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), take_count)); set(first_count, count(array(first_keys))); return(hash("first_keys", copy(array(first_keys)), "first_count", first_count)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -33688,10 +33690,10 @@ SPEC
         'fluent and structured lifecycle take helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle take fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle take fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_slice_array_helpers_lower_equivalently' => sub {
@@ -33699,12 +33701,12 @@ subtest 'method_like_fluent_and_structured_action_slice_array_helpers_lower_equi
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, middle_keys).declare(scalar, slice_start=1, slice_count=2, middle_count, first_middle).set(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), slice_start, slice_count)).set(middle_count, count(array(middle_keys))).set(first_middle, array(middle_keys).first()).return(hash("middle_keys", array_copy(array(middle_keys)), "middle_count", middle_count, "first_middle", first_middle))
+ /a/ -> Top .set(array(middle_keys), array()).set(slice_start, 1).set(slice_count, 2).set(middle_count, undef).set(first_middle, undef).set(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), slice_start, slice_count)).set(middle_count, count(array(middle_keys))).set(first_middle, array(middle_keys).first()).return(hash("middle_keys", copy(array(middle_keys)), "middle_count", middle_count, "first_middle", first_middle))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, middle_keys); declare(scalar, slice_start=1, slice_count=2, middle_count, first_middle); set(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), slice_start, slice_count)); set(middle_count, count(array(middle_keys))); set(first_middle, array(middle_keys).first()); return(hash("middle_keys", array_copy(array(middle_keys)), "middle_count", middle_count, "first_middle", first_middle)) }
+ /a/ -> Top { set(array(middle_keys), array()); set(slice_start, 1); set(slice_count, 2); set(middle_count, undef); set(first_middle, undef); set(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), slice_start, slice_count)); set(middle_count, count(array(middle_keys))); set(first_middle, array(middle_keys).first()); return(hash("middle_keys", copy(array(middle_keys)), "middle_count", middle_count, "first_middle", first_middle)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -33729,10 +33731,10 @@ SPEC
         'fluent and structured action-edge slice helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge slice fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge slice fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_slice_array_helpers_lower_equivalently' => sub {
@@ -33740,13 +33742,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_slice_array_helpers_lower_e
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, middle_keys).declare(scalar, slice_start=1, slice_count=2, middle_count, first_middle).set(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), slice_start, slice_count)).set(middle_count, count(array(middle_keys))).set(first_middle, array(middle_keys).first()).return(hash("middle_keys", array_copy(array(middle_keys)), "middle_count", middle_count, "first_middle", first_middle))
+LX.set(array(middle_keys), array()).set(slice_start, 1).set(slice_count, 2).set(middle_count, undef).set(first_middle, undef).set(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), slice_start, slice_count)).set(middle_count, count(array(middle_keys))).set(first_middle, array(middle_keys).first()).return(hash("middle_keys", copy(array(middle_keys)), "middle_count", middle_count, "first_middle", first_middle))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, middle_keys); declare(scalar, slice_start=1, slice_count=2, middle_count, first_middle); set(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), slice_start, slice_count)); set(middle_count, count(array(middle_keys))); set(first_middle, array(middle_keys).first()); return(hash("middle_keys", array_copy(array(middle_keys)), "middle_count", middle_count, "first_middle", first_middle)) }
+LX { set(array(middle_keys), array()); set(slice_start, 1); set(slice_count, 2); set(middle_count, undef); set(first_middle, undef); set(array(middle_keys), slice(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), slice_start, slice_count)); set(middle_count, count(array(middle_keys))); set(first_middle, array(middle_keys).first()); return(hash("middle_keys", copy(array(middle_keys)), "middle_count", middle_count, "first_middle", first_middle)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -33772,10 +33774,10 @@ SPEC
         'fluent and structured lifecycle slice helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle slice fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle slice fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_take_last_array_helpers_lower_equivalently' => sub {
@@ -33783,12 +33785,12 @@ subtest 'method_like_fluent_and_structured_action_take_last_array_helpers_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, last_keys).declare(scalar, take_last_count=2, last_count).set(array(last_keys), take_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), take_last_count)).set(last_count, count(array(last_keys))).return(hash("last_keys", array_copy(array(last_keys)), "last_count", last_count))
+ /a/ -> Top .set(array(last_keys), array()).set(take_last_count, 2).set(last_count, undef).set(array(last_keys), take_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), take_last_count)).set(last_count, count(array(last_keys))).return(hash("last_keys", copy(array(last_keys)), "last_count", last_count))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, last_keys); declare(scalar, take_last_count=2, last_count); set(array(last_keys), take_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), take_last_count)); set(last_count, count(array(last_keys))); return(hash("last_keys", array_copy(array(last_keys)), "last_count", last_count)) }
+ /a/ -> Top { set(array(last_keys), array()); set(take_last_count, 2); set(last_count, undef); set(array(last_keys), take_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), take_last_count)); set(last_count, count(array(last_keys))); return(hash("last_keys", copy(array(last_keys)), "last_count", last_count)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -33813,10 +33815,10 @@ SPEC
         'fluent and structured action-edge take_last helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge take_last fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge take_last fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_take_last_array_helpers_lower_equivalently' => sub {
@@ -33824,13 +33826,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_take_last_array_helpers_low
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, last_keys).declare(scalar, take_last_count=2, last_count).set(array(last_keys), take_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), take_last_count)).set(last_count, count(array(last_keys))).return(hash("last_keys", array_copy(array(last_keys)), "last_count", last_count))
+LX.set(array(last_keys), array()).set(take_last_count, 2).set(last_count, undef).set(array(last_keys), take_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), take_last_count)).set(last_count, count(array(last_keys))).return(hash("last_keys", copy(array(last_keys)), "last_count", last_count))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, last_keys); declare(scalar, take_last_count=2, last_count); set(array(last_keys), take_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), take_last_count)); set(last_count, count(array(last_keys))); return(hash("last_keys", array_copy(array(last_keys)), "last_count", last_count)) }
+LX { set(array(last_keys), array()); set(take_last_count, 2); set(last_count, undef); set(array(last_keys), take_last(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), take_last_count)); set(last_count, count(array(last_keys))); return(hash("last_keys", copy(array(last_keys)), "last_count", last_count)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -33856,10 +33858,10 @@ SPEC
         'fluent and structured lifecycle take_last helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle take_last fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle take_last fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_scalar_boundary_helpers_lower_equivalently' => sub {
@@ -33867,12 +33869,12 @@ subtest 'method_like_fluent_and_structured_action_scalar_boundary_helpers_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, raw_name=" PrefixSuffix ", has_prefix, has_suffix).set(has_prefix, starts_with(lowercase(trim(raw_name)), "prefix")).set(has_suffix, ends_with(lowercase(trim(raw_name)), "suffix")).return(hash("has_prefix", has_prefix, "has_suffix", has_suffix))
+ /a/ -> Top .set(raw_name, " PrefixSuffix ").set(has_prefix, undef).set(has_suffix, undef).set(has_prefix, starts_with(lowercase(trim(raw_name)), "prefix")).set(has_suffix, ends_with(lowercase(trim(raw_name)), "suffix")).return(hash("has_prefix", has_prefix, "has_suffix", has_suffix))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, raw_name=" PrefixSuffix ", has_prefix, has_suffix); set(has_prefix, starts_with(lowercase(trim(raw_name)), "prefix")); set(has_suffix, ends_with(lowercase(trim(raw_name)), "suffix")); return(hash("has_prefix", has_prefix, "has_suffix", has_suffix)) }
+ /a/ -> Top { set(raw_name, " PrefixSuffix "); set(has_prefix, undef); set(has_suffix, undef); set(has_prefix, starts_with(lowercase(trim(raw_name)), "prefix")); set(has_suffix, ends_with(lowercase(trim(raw_name)), "suffix")); return(hash("has_prefix", has_prefix, "has_suffix", has_suffix)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -33897,10 +33899,10 @@ SPEC
         'fluent and structured action-edge scalar boundary helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge scalar boundary helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge scalar boundary helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_scalar_boundary_helpers_lower_equivalently' => sub {
@@ -33908,13 +33910,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_boundary_helpers_low
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, raw_name=" PrefixSuffix ", has_prefix, has_suffix).set(has_prefix, starts_with(lowercase(trim(raw_name)), "prefix")).set(has_suffix, ends_with(lowercase(trim(raw_name)), "suffix")).return(hash("has_prefix", has_prefix, "has_suffix", has_suffix))
+LX.set(raw_name, " PrefixSuffix ").set(has_prefix, undef).set(has_suffix, undef).set(has_prefix, starts_with(lowercase(trim(raw_name)), "prefix")).set(has_suffix, ends_with(lowercase(trim(raw_name)), "suffix")).return(hash("has_prefix", has_prefix, "has_suffix", has_suffix))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, raw_name=" PrefixSuffix ", has_prefix, has_suffix); set(has_prefix, starts_with(lowercase(trim(raw_name)), "prefix")); set(has_suffix, ends_with(lowercase(trim(raw_name)), "suffix")); return(hash("has_prefix", has_prefix, "has_suffix", has_suffix)) }
+LX { set(raw_name, " PrefixSuffix "); set(has_prefix, undef); set(has_suffix, undef); set(has_prefix, starts_with(lowercase(trim(raw_name)), "prefix")); set(has_suffix, ends_with(lowercase(trim(raw_name)), "suffix")); return(hash("has_prefix", has_prefix, "has_suffix", has_suffix)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -33940,10 +33942,10 @@ SPEC
         'fluent and structured lifecycle scalar boundary helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle scalar boundary helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle scalar boundary helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_scalar_contains_substr_helpers_lower_equivalently' => sub {
@@ -33951,12 +33953,12 @@ subtest 'method_like_fluent_and_structured_action_scalar_contains_substr_helpers
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, raw_name=" PrefixSuffix ", kind=" node_token ", has_fix, has_node).set(has_fix, contains_substr(lowercase(trim(raw_name)), "fix")).set(has_node, contains_substr(uppercase(trim(coalesce(kind, entry_text()))), "NODE")).return(hash("has_fix", has_fix, "has_node", has_node))
+ /a/ -> Top .set(raw_name, " PrefixSuffix ").set(kind, " node_token ").set(has_fix, undef).set(has_node, undef).set(has_fix, contains_substr(lowercase(trim(raw_name)), "fix")).set(has_node, contains_substr(uppercase(trim(coalesce(kind, entry_text()))), "NODE")).return(hash("has_fix", has_fix, "has_node", has_node))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, raw_name=" PrefixSuffix ", kind=" node_token ", has_fix, has_node); set(has_fix, contains_substr(lowercase(trim(raw_name)), "fix")); set(has_node, contains_substr(uppercase(trim(coalesce(kind, entry_text()))), "NODE")); return(hash("has_fix", has_fix, "has_node", has_node)) }
+ /a/ -> Top { set(raw_name, " PrefixSuffix "); set(kind, " node_token "); set(has_fix, undef); set(has_node, undef); set(has_fix, contains_substr(lowercase(trim(raw_name)), "fix")); set(has_node, contains_substr(uppercase(trim(coalesce(kind, entry_text()))), "NODE")); return(hash("has_fix", has_fix, "has_node", has_node)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -33981,10 +33983,10 @@ SPEC
         'fluent and structured action-edge scalar contains_substr helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge scalar contains_substr helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge scalar contains_substr helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_scalar_contains_substr_helpers_lower_equivalently' => sub {
@@ -33992,13 +33994,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_contains_substr_help
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, raw_name=" PrefixSuffix ", kind=" node_token ", has_fix, has_node).set(has_fix, contains_substr(lowercase(trim(raw_name)), "fix")).set(has_node, contains_substr(uppercase(trim(coalesce(kind, entry_text()))), "NODE")).return(hash("has_fix", has_fix, "has_node", has_node))
+LX.set(raw_name, " PrefixSuffix ").set(kind, " node_token ").set(has_fix, undef).set(has_node, undef).set(has_fix, contains_substr(lowercase(trim(raw_name)), "fix")).set(has_node, contains_substr(uppercase(trim(coalesce(kind, entry_text()))), "NODE")).return(hash("has_fix", has_fix, "has_node", has_node))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, raw_name=" PrefixSuffix ", kind=" node_token ", has_fix, has_node); set(has_fix, contains_substr(lowercase(trim(raw_name)), "fix")); set(has_node, contains_substr(uppercase(trim(coalesce(kind, entry_text()))), "NODE")); return(hash("has_fix", has_fix, "has_node", has_node)) }
+LX { set(raw_name, " PrefixSuffix "); set(kind, " node_token "); set(has_fix, undef); set(has_node, undef); set(has_fix, contains_substr(lowercase(trim(raw_name)), "fix")); set(has_node, contains_substr(uppercase(trim(coalesce(kind, entry_text()))), "NODE")); return(hash("has_fix", has_fix, "has_node", has_node)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -34024,10 +34026,10 @@ SPEC
         'fluent and structured lifecycle scalar contains_substr helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle scalar contains_substr helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle scalar contains_substr helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_scalar_replace_substr_helpers_lower_equivalently' => sub {
@@ -34035,12 +34037,12 @@ subtest 'method_like_fluent_and_structured_action_scalar_replace_substr_helpers_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, raw_name=" Node-Item ", kind=" node type ", normalized).set(normalized, replace_substr(lowercase(trim(coalesce(raw_name, entry_text()))), "-", "_")).if(str_eq(replace_substr(lowercase(trim(kind)), " ", "_"), "node_type")).return(hash("normalized", normalized, "normalized_kind", replace_substr(lowercase(trim(kind)), " ", "_"))).else.return(hash("normalized", normalized, "normalized_kind", "other")).endif
+ /a/ -> Top .set(raw_name, " Node-Item ").set(kind, " node type ").set(normalized, undef).set(normalized, replace_substr(lowercase(trim(coalesce(raw_name, entry_text()))), "-", "_")).if(str_eq(replace_substr(lowercase(trim(kind)), " ", "_"), "node_type")).return(hash("normalized", normalized, "normalized_kind", replace_substr(lowercase(trim(kind)), " ", "_"))).else.return(hash("normalized", normalized, "normalized_kind", "other")).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, raw_name=" Node-Item ", kind=" node type ", normalized); set(normalized, replace_substr(lowercase(trim(coalesce(raw_name, entry_text()))), "-", "_")); if(str_eq(replace_substr(lowercase(trim(kind)), " ", "_"), "node_type")); return(hash("normalized", normalized, "normalized_kind", replace_substr(lowercase(trim(kind)), " ", "_"))); else; return(hash("normalized", normalized, "normalized_kind", "other")); endif }
+ /a/ -> Top { set(raw_name, " Node-Item "); set(kind, " node type "); set(normalized, undef); set(normalized, replace_substr(lowercase(trim(coalesce(raw_name, entry_text()))), "-", "_")); if(str_eq(replace_substr(lowercase(trim(kind)), " ", "_"), "node_type")); return(hash("normalized", normalized, "normalized_kind", replace_substr(lowercase(trim(kind)), " ", "_"))); else; return(hash("normalized", normalized, "normalized_kind", "other")); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -34065,12 +34067,12 @@ SPEC
         'fluent and structured action-edge scalar replace_substr helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge scalar replace_substr helper fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'action-edge scalar replace_substr helper fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_scalar_replace_substr_helpers_lower_equivalently' => sub {
@@ -34078,13 +34080,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_replace_substr_helpe
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, raw_name=" Node-Item ", kind=" node type ", normalized).set(normalized, replace_substr(lowercase(trim(coalesce(raw_name, entry_text()))), "-", "_")).if(str_eq(replace_substr(lowercase(trim(kind)), " ", "_"), "node_type")).return(hash("normalized", normalized, "normalized_kind", replace_substr(lowercase(trim(kind)), " ", "_"))).else.return(hash("normalized", normalized, "normalized_kind", "other")).endif
+LX.set(raw_name, " Node-Item ").set(kind, " node type ").set(normalized, undef).set(normalized, replace_substr(lowercase(trim(coalesce(raw_name, entry_text()))), "-", "_")).if(str_eq(replace_substr(lowercase(trim(kind)), " ", "_"), "node_type")).return(hash("normalized", normalized, "normalized_kind", replace_substr(lowercase(trim(kind)), " ", "_"))).else.return(hash("normalized", normalized, "normalized_kind", "other")).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, raw_name=" Node-Item ", kind=" node type ", normalized); set(normalized, replace_substr(lowercase(trim(coalesce(raw_name, entry_text()))), "-", "_")); if(str_eq(replace_substr(lowercase(trim(kind)), " ", "_"), "node_type")); return(hash("normalized", normalized, "normalized_kind", replace_substr(lowercase(trim(kind)), " ", "_"))); else; return(hash("normalized", normalized, "normalized_kind", "other")); endif }
+LX { set(raw_name, " Node-Item "); set(kind, " node type "); set(normalized, undef); set(normalized, replace_substr(lowercase(trim(coalesce(raw_name, entry_text()))), "-", "_")); if(str_eq(replace_substr(lowercase(trim(kind)), " ", "_"), "node_type")); return(hash("normalized", normalized, "normalized_kind", replace_substr(lowercase(trim(kind)), " ", "_"))); else; return(hash("normalized", normalized, "normalized_kind", "other")); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -34110,12 +34112,12 @@ SPEC
         'fluent and structured lifecycle scalar replace_substr helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle scalar replace_substr helper fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'lifecycle scalar replace_substr helper fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_scalar_boundary_transform_helpers_lower_equivalently' => sub {
@@ -34123,12 +34125,12 @@ subtest 'method_like_fluent_and_structured_action_scalar_boundary_transform_help
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, raw_name=" Node Item End ", prefix_trimmed, suffix_trimmed).set(prefix_trimmed, rm_prefix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "node_")).set(suffix_trimmed, rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end")).return(hash("prefix_trimmed", prefix_trimmed, "suffix_trimmed", suffix_trimmed))
+ /a/ -> Top .set(raw_name, " Node Item End ").set(prefix_trimmed, undef).set(suffix_trimmed, undef).set(prefix_trimmed, rm_prefix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "node_")).set(suffix_trimmed, rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end")).return(hash("prefix_trimmed", prefix_trimmed, "suffix_trimmed", suffix_trimmed))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, raw_name=" Node Item End ", prefix_trimmed, suffix_trimmed); set(prefix_trimmed, rm_prefix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "node_")); set(suffix_trimmed, rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end")); return(hash("prefix_trimmed", prefix_trimmed, "suffix_trimmed", suffix_trimmed)) }
+ /a/ -> Top { set(raw_name, " Node Item End "); set(prefix_trimmed, undef); set(suffix_trimmed, undef); set(prefix_trimmed, rm_prefix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "node_")); set(suffix_trimmed, rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end")); return(hash("prefix_trimmed", prefix_trimmed, "suffix_trimmed", suffix_trimmed)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -34153,10 +34155,10 @@ SPEC
         'fluent and structured action-edge scalar boundary-transform helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge scalar boundary-transform helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge scalar boundary-transform helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_scalar_boundary_transform_helpers_lower_equivalently' => sub {
@@ -34164,13 +34166,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_boundary_transform_h
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, raw_name=" Node Item End ", prefix_trimmed, suffix_trimmed).set(prefix_trimmed, rm_prefix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "node_")).set(suffix_trimmed, rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end")).return(hash("prefix_trimmed", prefix_trimmed, "suffix_trimmed", suffix_trimmed))
+LX.set(raw_name, " Node Item End ").set(prefix_trimmed, undef).set(suffix_trimmed, undef).set(prefix_trimmed, rm_prefix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "node_")).set(suffix_trimmed, rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end")).return(hash("prefix_trimmed", prefix_trimmed, "suffix_trimmed", suffix_trimmed))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, raw_name=" Node Item End ", prefix_trimmed, suffix_trimmed); set(prefix_trimmed, rm_prefix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "node_")); set(suffix_trimmed, rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end")); return(hash("prefix_trimmed", prefix_trimmed, "suffix_trimmed", suffix_trimmed)) }
+LX { set(raw_name, " Node Item End "); set(prefix_trimmed, undef); set(suffix_trimmed, undef); set(prefix_trimmed, rm_prefix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "node_")); set(suffix_trimmed, rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end")); return(hash("prefix_trimmed", prefix_trimmed, "suffix_trimmed", suffix_trimmed)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -34196,10 +34198,10 @@ SPEC
         'fluent and structured lifecycle scalar boundary-transform helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle scalar boundary-transform helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle scalar boundary-transform helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_scalar_concat_helpers_lower_equivalently' => sub {
@@ -34207,12 +34209,12 @@ subtest 'method_like_fluent_and_structured_action_scalar_concat_helpers_lower_eq
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, first_name="  Node ", last_name=" Item ", stage="init", full_name).set(full_name, concat(lowercase(trim(first_name)), "_", replace_substr(lowercase(trim(last_name)), " ", "_"))).return(hash("full_name", full_name, "stage_key", concat(full_name, "::", stage)))
+ /a/ -> Top .set(first_name, "  Node ").set(last_name, " Item ").set(stage, "init").set(full_name, undef).set(full_name, cat(lowercase(trim(first_name)), "_", replace_substr(lowercase(trim(last_name)), " ", "_"))).return(hash("full_name", full_name, "stage_key", cat(full_name, "::", stage)))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, first_name="  Node ", last_name=" Item ", stage="init", full_name); set(full_name, concat(lowercase(trim(first_name)), "_", replace_substr(lowercase(trim(last_name)), " ", "_"))); return(hash("full_name", full_name, "stage_key", concat(full_name, "::", stage))) }
+ /a/ -> Top { set(first_name, "  Node "); set(last_name, " Item "); set(stage, "init"); set(full_name, undef); set(full_name, cat(lowercase(trim(first_name)), "_", replace_substr(lowercase(trim(last_name)), " ", "_"))); return(hash("full_name", full_name, "stage_key", cat(full_name, "::", stage))) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -34237,10 +34239,10 @@ SPEC
         'fluent and structured action-edge scalar concat helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge scalar concat helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge scalar concat helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_scalar_concat_helpers_lower_equivalently' => sub {
@@ -34248,13 +34250,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_concat_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, first_name="  Node ", last_name=" Item ", stage="init", full_name).set(full_name, concat(lowercase(trim(first_name)), "_", replace_substr(lowercase(trim(last_name)), " ", "_"))).return(hash("full_name", full_name, "stage_key", concat(full_name, "::", stage)))
+LX.set(first_name, "  Node ").set(last_name, " Item ").set(stage, "init").set(full_name, undef).set(full_name, cat(lowercase(trim(first_name)), "_", replace_substr(lowercase(trim(last_name)), " ", "_"))).return(hash("full_name", full_name, "stage_key", cat(full_name, "::", stage)))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, first_name="  Node ", last_name=" Item ", stage="init", full_name); set(full_name, concat(lowercase(trim(first_name)), "_", replace_substr(lowercase(trim(last_name)), " ", "_"))); return(hash("full_name", full_name, "stage_key", concat(full_name, "::", stage))) }
+LX { set(first_name, "  Node "); set(last_name, " Item "); set(stage, "init"); set(full_name, undef); set(full_name, cat(lowercase(trim(first_name)), "_", replace_substr(lowercase(trim(last_name)), " ", "_"))); return(hash("full_name", full_name, "stage_key", cat(full_name, "::", stage))) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -34280,10 +34282,10 @@ SPEC
         'fluent and structured lifecycle scalar concat helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle scalar concat helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle scalar concat helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_scalar_regex_helpers_lower_equivalently' => sub {
@@ -34291,12 +34293,12 @@ subtest 'method_like_fluent_and_structured_action_scalar_regex_helpers_lower_equ
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, raw_name=" PrefixSuffix ", is_prefixed, is_alpha).set(is_prefixed, matches(lowercase(trim(raw_name)), /^prefix/)).set(is_alpha, matches(uppercase(trim(raw_name)), /^[A-Z]+$/)).return(hash("is_prefixed", is_prefixed, "is_alpha", is_alpha))
+ /a/ -> Top .set(raw_name, " PrefixSuffix ").set(is_prefixed, undef).set(is_alpha, undef).set(is_prefixed, matches(lowercase(trim(raw_name)), /^prefix/)).set(is_alpha, matches(uppercase(trim(raw_name)), /^[A-Z]+$/)).return(hash("is_prefixed", is_prefixed, "is_alpha", is_alpha))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, raw_name=" PrefixSuffix ", is_prefixed, is_alpha); set(is_prefixed, matches(lowercase(trim(raw_name)), /^prefix/)); set(is_alpha, matches(uppercase(trim(raw_name)), /^[A-Z]+$/)); return(hash("is_prefixed", is_prefixed, "is_alpha", is_alpha)) }
+ /a/ -> Top { set(raw_name, " PrefixSuffix "); set(is_prefixed, undef); set(is_alpha, undef); set(is_prefixed, matches(lowercase(trim(raw_name)), /^prefix/)); set(is_alpha, matches(uppercase(trim(raw_name)), /^[A-Z]+$/)); return(hash("is_prefixed", is_prefixed, "is_alpha", is_alpha)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -34321,10 +34323,10 @@ SPEC
         'fluent and structured action-edge scalar regex helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge scalar regex helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge scalar regex helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_scalar_regex_helpers_lower_equivalently' => sub {
@@ -34332,13 +34334,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_regex_helpers_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, raw_name=" PrefixSuffix ", is_prefixed, is_alpha).set(is_prefixed, matches(lowercase(trim(raw_name)), /^prefix/)).set(is_alpha, matches(uppercase(trim(raw_name)), /^[A-Z]+$/)).return(hash("is_prefixed", is_prefixed, "is_alpha", is_alpha))
+LX.set(raw_name, " PrefixSuffix ").set(is_prefixed, undef).set(is_alpha, undef).set(is_prefixed, matches(lowercase(trim(raw_name)), /^prefix/)).set(is_alpha, matches(uppercase(trim(raw_name)), /^[A-Z]+$/)).return(hash("is_prefixed", is_prefixed, "is_alpha", is_alpha))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, raw_name=" PrefixSuffix ", is_prefixed, is_alpha); set(is_prefixed, matches(lowercase(trim(raw_name)), /^prefix/)); set(is_alpha, matches(uppercase(trim(raw_name)), /^[A-Z]+$/)); return(hash("is_prefixed", is_prefixed, "is_alpha", is_alpha)) }
+LX { set(raw_name, " PrefixSuffix "); set(is_prefixed, undef); set(is_alpha, undef); set(is_prefixed, matches(lowercase(trim(raw_name)), /^prefix/)); set(is_alpha, matches(uppercase(trim(raw_name)), /^[A-Z]+$/)); return(hash("is_prefixed", is_prefixed, "is_alpha", is_alpha)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -34364,10 +34366,10 @@ SPEC
         'fluent and structured lifecycle scalar regex helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle scalar regex helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle scalar regex helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_numeric_arithmetic_helpers_lower_equivalently' => sub {
@@ -34375,12 +34377,12 @@ subtest 'method_like_fluent_and_structured_action_numeric_arithmetic_helpers_low
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, parts=array("A", "B", "C")).declare(scalar, depth=1.25, offset=0.75, next_depth, remaining).set(next_depth, num_add(depth, 1, offset)).set(remaining, num_sub(num_add(count(array(parts)), offset), 1)).return(hash("next_depth", next_depth, "remaining", remaining))
+ /a/ -> Top .set(array(parts), array("A", "B", "C")).set(depth, 1.25).set(offset, 0.75).set(next_depth, undef).set(remaining, undef).set(next_depth, num_add(depth, 1, offset)).set(remaining, num_sub(num_add(count(array(parts)), offset), 1)).return(hash("next_depth", next_depth, "remaining", remaining))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, parts=array("A", "B", "C")); declare(scalar, depth=1.25, offset=0.75, next_depth, remaining); set(next_depth, num_add(depth, 1, offset)); set(remaining, num_sub(num_add(count(array(parts)), offset), 1)); return(hash("next_depth", next_depth, "remaining", remaining)) }
+ /a/ -> Top { set(array(parts), array("A", "B", "C")); set(depth, 1.25); set(offset, 0.75); set(next_depth, undef); set(remaining, undef); set(next_depth, num_add(depth, 1, offset)); set(remaining, num_sub(num_add(count(array(parts)), offset), 1)); return(hash("next_depth", next_depth, "remaining", remaining)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -34405,10 +34407,10 @@ SPEC
         'fluent and structured action-edge numeric arithmetic helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge numeric arithmetic helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge numeric arithmetic helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_numeric_arithmetic_helpers_lower_equivalently' => sub {
@@ -34416,13 +34418,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_numeric_arithmetic_helpers_
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, parts=array("A", "B", "C")).declare(scalar, depth=1.25, offset=0.75, next_depth, remaining).set(next_depth, num_add(depth, 1, offset)).set(remaining, num_sub(num_add(count(array(parts)), offset), 1)).return(hash("next_depth", next_depth, "remaining", remaining))
+LX.set(array(parts), array("A", "B", "C")).set(depth, 1.25).set(offset, 0.75).set(next_depth, undef).set(remaining, undef).set(next_depth, num_add(depth, 1, offset)).set(remaining, num_sub(num_add(count(array(parts)), offset), 1)).return(hash("next_depth", next_depth, "remaining", remaining))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, parts=array("A", "B", "C")); declare(scalar, depth=1.25, offset=0.75, next_depth, remaining); set(next_depth, num_add(depth, 1, offset)); set(remaining, num_sub(num_add(count(array(parts)), offset), 1)); return(hash("next_depth", next_depth, "remaining", remaining)) }
+LX { set(array(parts), array("A", "B", "C")); set(depth, 1.25); set(offset, 0.75); set(next_depth, undef); set(remaining, undef); set(next_depth, num_add(depth, 1, offset)); set(remaining, num_sub(num_add(count(array(parts)), offset), 1)); return(hash("next_depth", next_depth, "remaining", remaining)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -34448,10 +34450,10 @@ SPEC
         'fluent and structured lifecycle numeric arithmetic helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle numeric arithmetic helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle numeric arithmetic helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_numeric_product_division_helpers_lower_equivalently' => sub {
@@ -34459,12 +34461,12 @@ subtest 'method_like_fluent_and_structured_action_numeric_product_division_helpe
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, parts=array("A", "B", "C", "D")).declare(scalar, factor=1.5, divisor=2, scaled_count, average_count).set(scaled_count, num_mul(count(array(parts)), factor)).set(average_count, num_div(num_mul(count(array(parts)), factor), divisor)).return(hash("scaled_count", scaled_count, "average_count", average_count))
+ /a/ -> Top .set(array(parts), array("A", "B", "C", "D")).set(factor, 1.5).set(divisor, 2).set(scaled_count, undef).set(average_count, undef).set(scaled_count, num_mul(count(array(parts)), factor)).set(average_count, num_div(num_mul(count(array(parts)), factor), divisor)).return(hash("scaled_count", scaled_count, "average_count", average_count))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, factor=1.5, divisor=2, scaled_count, average_count); set(scaled_count, num_mul(count(array(parts)), factor)); set(average_count, num_div(num_mul(count(array(parts)), factor), divisor)); return(hash("scaled_count", scaled_count, "average_count", average_count)) }
+ /a/ -> Top { set(array(parts), array("A", "B", "C", "D")); set(factor, 1.5); set(divisor, 2); set(scaled_count, undef); set(average_count, undef); set(scaled_count, num_mul(count(array(parts)), factor)); set(average_count, num_div(num_mul(count(array(parts)), factor), divisor)); return(hash("scaled_count", scaled_count, "average_count", average_count)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -34489,10 +34491,10 @@ SPEC
         'fluent and structured action-edge numeric product/division helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge numeric product/division helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge numeric product/division helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_numeric_product_division_helpers_lower_equivalently' => sub {
@@ -34500,13 +34502,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_numeric_product_division_he
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, parts=array("A", "B", "C", "D")).declare(scalar, factor=1.5, divisor=2, scaled_count, average_count).set(scaled_count, num_mul(count(array(parts)), factor)).set(average_count, num_div(num_mul(count(array(parts)), factor), divisor)).return(hash("scaled_count", scaled_count, "average_count", average_count))
+LX.set(array(parts), array("A", "B", "C", "D")).set(factor, 1.5).set(divisor, 2).set(scaled_count, undef).set(average_count, undef).set(scaled_count, num_mul(count(array(parts)), factor)).set(average_count, num_div(num_mul(count(array(parts)), factor), divisor)).return(hash("scaled_count", scaled_count, "average_count", average_count))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, factor=1.5, divisor=2, scaled_count, average_count); set(scaled_count, num_mul(count(array(parts)), factor)); set(average_count, num_div(num_mul(count(array(parts)), factor), divisor)); return(hash("scaled_count", scaled_count, "average_count", average_count)) }
+LX { set(array(parts), array("A", "B", "C", "D")); set(factor, 1.5); set(divisor, 2); set(scaled_count, undef); set(average_count, undef); set(scaled_count, num_mul(count(array(parts)), factor)); set(average_count, num_div(num_mul(count(array(parts)), factor), divisor)); return(hash("scaled_count", scaled_count, "average_count", average_count)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -34532,10 +34534,10 @@ SPEC
         'fluent and structured lifecycle numeric product/division helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle numeric product/division helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle numeric product/division helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_numeric_min_max_helpers_lower_equivalently' => sub {
@@ -34543,12 +34545,12 @@ subtest 'method_like_fluent_and_structured_action_numeric_min_max_helpers_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, parts=array("A", "B", "C", "D")).declare(scalar, offset=1, lower_limit=3, upper_limit=6, floor_value, ceiling_value).set(floor_value, num_min(num_add(count(array(parts)), offset), lower_limit, 10)).set(ceiling_value, num_max(num_add(count(array(parts)), offset), 2, upper_limit)).return(hash("floor_value", floor_value, "ceiling_value", ceiling_value))
+ /a/ -> Top .set(array(parts), array("A", "B", "C", "D")).set(offset, 1).set(lower_limit, 3).set(upper_limit, 6).set(floor_value, undef).set(ceiling_value, undef).set(floor_value, num_min(num_add(count(array(parts)), offset), lower_limit, 10)).set(ceiling_value, num_max(num_add(count(array(parts)), offset), 2, upper_limit)).return(hash("floor_value", floor_value, "ceiling_value", ceiling_value))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, offset=1, lower_limit=3, upper_limit=6, floor_value, ceiling_value); set(floor_value, num_min(num_add(count(array(parts)), offset), lower_limit, 10)); set(ceiling_value, num_max(num_add(count(array(parts)), offset), 2, upper_limit)); return(hash("floor_value", floor_value, "ceiling_value", ceiling_value)) }
+ /a/ -> Top { set(array(parts), array("A", "B", "C", "D")); set(offset, 1); set(lower_limit, 3); set(upper_limit, 6); set(floor_value, undef); set(ceiling_value, undef); set(floor_value, num_min(num_add(count(array(parts)), offset), lower_limit, 10)); set(ceiling_value, num_max(num_add(count(array(parts)), offset), 2, upper_limit)); return(hash("floor_value", floor_value, "ceiling_value", ceiling_value)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -34573,10 +34575,10 @@ SPEC
         'fluent and structured action-edge numeric min/max helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge numeric min/max helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge numeric min/max helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_numeric_min_max_helpers_lower_equivalently' => sub {
@@ -34584,13 +34586,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_numeric_min_max_helpers_low
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, parts=array("A", "B", "C", "D")).declare(scalar, offset=1, lower_limit=3, upper_limit=6, floor_value, ceiling_value).set(floor_value, num_min(num_add(count(array(parts)), offset), lower_limit, 10)).set(ceiling_value, num_max(num_add(count(array(parts)), offset), 2, upper_limit)).return(hash("floor_value", floor_value, "ceiling_value", ceiling_value))
+LX.set(array(parts), array("A", "B", "C", "D")).set(offset, 1).set(lower_limit, 3).set(upper_limit, 6).set(floor_value, undef).set(ceiling_value, undef).set(floor_value, num_min(num_add(count(array(parts)), offset), lower_limit, 10)).set(ceiling_value, num_max(num_add(count(array(parts)), offset), 2, upper_limit)).return(hash("floor_value", floor_value, "ceiling_value", ceiling_value))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, offset=1, lower_limit=3, upper_limit=6, floor_value, ceiling_value); set(floor_value, num_min(num_add(count(array(parts)), offset), lower_limit, 10)); set(ceiling_value, num_max(num_add(count(array(parts)), offset), 2, upper_limit)); return(hash("floor_value", floor_value, "ceiling_value", ceiling_value)) }
+LX { set(array(parts), array("A", "B", "C", "D")); set(offset, 1); set(lower_limit, 3); set(upper_limit, 6); set(floor_value, undef); set(ceiling_value, undef); set(floor_value, num_min(num_add(count(array(parts)), offset), lower_limit, 10)); set(ceiling_value, num_max(num_add(count(array(parts)), offset), 2, upper_limit)); return(hash("floor_value", floor_value, "ceiling_value", ceiling_value)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -34616,10 +34618,10 @@ SPEC
         'fluent and structured lifecycle numeric min/max helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle numeric min/max helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle numeric min/max helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_numeric_mod_helper_lower_equivalently' => sub {
@@ -34627,12 +34629,12 @@ subtest 'method_like_fluent_and_structured_action_numeric_mod_helper_lower_equiv
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, parts=array("A", "B", "C", "D", "E")).declare(scalar, offset=1, divisor=3, bucket, wrapped).set(bucket, num_mod(num_add(count(array(parts)), offset), divisor)).set(wrapped, num_mod(num_add(bucket, 5), 4)).return(hash("bucket", bucket, "wrapped", wrapped))
+ /a/ -> Top .set(array(parts), array("A", "B", "C", "D", "E")).set(offset, 1).set(divisor, 3).set(bucket, undef).set(wrapped, undef).set(bucket, num_mod(num_add(count(array(parts)), offset), divisor)).set(wrapped, num_mod(num_add(bucket, 5), 4)).return(hash("bucket", bucket, "wrapped", wrapped))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, parts=array("A", "B", "C", "D", "E")); declare(scalar, offset=1, divisor=3, bucket, wrapped); set(bucket, num_mod(num_add(count(array(parts)), offset), divisor)); set(wrapped, num_mod(num_add(bucket, 5), 4)); return(hash("bucket", bucket, "wrapped", wrapped)) }
+ /a/ -> Top { set(array(parts), array("A", "B", "C", "D", "E")); set(offset, 1); set(divisor, 3); set(bucket, undef); set(wrapped, undef); set(bucket, num_mod(num_add(count(array(parts)), offset), divisor)); set(wrapped, num_mod(num_add(bucket, 5), 4)); return(hash("bucket", bucket, "wrapped", wrapped)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -34657,10 +34659,10 @@ SPEC
         'fluent and structured action-edge numeric modulo helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge numeric modulo helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge numeric modulo helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_numeric_mod_helper_lower_equivalently' => sub {
@@ -34668,13 +34670,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_numeric_mod_helper_lower_eq
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, parts=array("A", "B", "C", "D", "E")).declare(scalar, offset=1, divisor=3, bucket, wrapped).set(bucket, num_mod(num_add(count(array(parts)), offset), divisor)).set(wrapped, num_mod(num_add(bucket, 5), 4)).return(hash("bucket", bucket, "wrapped", wrapped))
+LX.set(array(parts), array("A", "B", "C", "D", "E")).set(offset, 1).set(divisor, 3).set(bucket, undef).set(wrapped, undef).set(bucket, num_mod(num_add(count(array(parts)), offset), divisor)).set(wrapped, num_mod(num_add(bucket, 5), 4)).return(hash("bucket", bucket, "wrapped", wrapped))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, parts=array("A", "B", "C", "D", "E")); declare(scalar, offset=1, divisor=3, bucket, wrapped); set(bucket, num_mod(num_add(count(array(parts)), offset), divisor)); set(wrapped, num_mod(num_add(bucket, 5), 4)); return(hash("bucket", bucket, "wrapped", wrapped)) }
+LX { set(array(parts), array("A", "B", "C", "D", "E")); set(offset, 1); set(divisor, 3); set(bucket, undef); set(wrapped, undef); set(bucket, num_mod(num_add(count(array(parts)), offset), divisor)); set(wrapped, num_mod(num_add(bucket, 5), 4)); return(hash("bucket", bucket, "wrapped", wrapped)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -34700,10 +34702,10 @@ SPEC
         'fluent and structured lifecycle numeric modulo helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle numeric modulo helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle numeric modulo helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_numeric_clamp_helper_lower_equivalently' => sub {
@@ -34711,12 +34713,12 @@ subtest 'method_like_fluent_and_structured_action_numeric_clamp_helper_lower_equ
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, parts=array("A", "B", "C", "D")).declare(scalar, offset=2, lower_limit=3, upper_limit=5, bounded, delta).set(bounded, num_clamp(num_add(count(array(parts)), offset), lower_limit, upper_limit)).set(delta, num_clamp(num_sub(offset, 5), -4, 0)).return(hash("bounded", bounded, "delta", delta))
+ /a/ -> Top .set(array(parts), array("A", "B", "C", "D")).set(offset, 2).set(lower_limit, 3).set(upper_limit, 5).set(bounded, undef).set(delta, undef).set(bounded, num_clamp(num_add(count(array(parts)), offset), lower_limit, upper_limit)).set(delta, num_clamp(num_sub(offset, 5), -4, 0)).return(hash("bounded", bounded, "delta", delta))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, offset=2, lower_limit=3, upper_limit=5, bounded, delta); set(bounded, num_clamp(num_add(count(array(parts)), offset), lower_limit, upper_limit)); set(delta, num_clamp(num_sub(offset, 5), -4, 0)); return(hash("bounded", bounded, "delta", delta)) }
+ /a/ -> Top { set(array(parts), array("A", "B", "C", "D")); set(offset, 2); set(lower_limit, 3); set(upper_limit, 5); set(bounded, undef); set(delta, undef); set(bounded, num_clamp(num_add(count(array(parts)), offset), lower_limit, upper_limit)); set(delta, num_clamp(num_sub(offset, 5), -4, 0)); return(hash("bounded", bounded, "delta", delta)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -34741,10 +34743,10 @@ SPEC
         'fluent and structured action-edge numeric clamp helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge numeric clamp helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge numeric clamp helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_numeric_clamp_helper_lower_equivalently' => sub {
@@ -34752,13 +34754,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_numeric_clamp_helper_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, parts=array("A", "B", "C", "D")).declare(scalar, offset=2, lower_limit=3, upper_limit=5, bounded, delta).set(bounded, num_clamp(num_add(count(array(parts)), offset), lower_limit, upper_limit)).set(delta, num_clamp(num_sub(offset, 5), -4, 0)).return(hash("bounded", bounded, "delta", delta))
+LX.set(array(parts), array("A", "B", "C", "D")).set(offset, 2).set(lower_limit, 3).set(upper_limit, 5).set(bounded, undef).set(delta, undef).set(bounded, num_clamp(num_add(count(array(parts)), offset), lower_limit, upper_limit)).set(delta, num_clamp(num_sub(offset, 5), -4, 0)).return(hash("bounded", bounded, "delta", delta))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, offset=2, lower_limit=3, upper_limit=5, bounded, delta); set(bounded, num_clamp(num_add(count(array(parts)), offset), lower_limit, upper_limit)); set(delta, num_clamp(num_sub(offset, 5), -4, 0)); return(hash("bounded", bounded, "delta", delta)) }
+LX { set(array(parts), array("A", "B", "C", "D")); set(offset, 2); set(lower_limit, 3); set(upper_limit, 5); set(bounded, undef); set(delta, undef); set(bounded, num_clamp(num_add(count(array(parts)), offset), lower_limit, upper_limit)); set(delta, num_clamp(num_sub(offset, 5), -4, 0)); return(hash("bounded", bounded, "delta", delta)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -34784,10 +34786,10 @@ SPEC
         'fluent and structured lifecycle numeric clamp helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle numeric clamp helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle numeric clamp helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_drop_back_array_helpers_lower_equivalently' => sub {
@@ -34795,12 +34797,12 @@ subtest 'method_like_fluent_and_structured_action_drop_back_array_helpers_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, leading_keys).declare(scalar, drop_count=1, kept_count).set(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), drop_count)).set(kept_count, count(array(leading_keys))).return(hash("leading_keys", array_copy(array(leading_keys)), "kept_count", kept_count))
+ /a/ -> Top .set(array(leading_keys), array()).set(drop_count, 1).set(kept_count, undef).set(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), drop_count)).set(kept_count, count(array(leading_keys))).return(hash("leading_keys", copy(array(leading_keys)), "kept_count", kept_count))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, leading_keys); declare(scalar, drop_count=1, kept_count); set(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), drop_count)); set(kept_count, count(array(leading_keys))); return(hash("leading_keys", array_copy(array(leading_keys)), "kept_count", kept_count)) }
+ /a/ -> Top { set(array(leading_keys), array()); set(drop_count, 1); set(kept_count, undef); set(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), drop_count)); set(kept_count, count(array(leading_keys))); return(hash("leading_keys", copy(array(leading_keys)), "kept_count", kept_count)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -34825,10 +34827,10 @@ SPEC
         'fluent and structured action-edge drop_back helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge drop_back fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge drop_back fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_drop_back_array_helpers_lower_equivalently' => sub {
@@ -34836,13 +34838,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_drop_back_array_helpers_low
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, leading_keys).declare(scalar, drop_count=1, kept_count).set(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), drop_count)).set(kept_count, count(array(leading_keys))).return(hash("leading_keys", array_copy(array(leading_keys)), "kept_count", kept_count))
+LX.set(array(leading_keys), array()).set(drop_count, 1).set(kept_count, undef).set(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), drop_count)).set(kept_count, count(array(leading_keys))).return(hash("leading_keys", copy(array(leading_keys)), "kept_count", kept_count))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, leading_keys); declare(scalar, drop_count=1, kept_count); set(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), drop_count)); set(kept_count, count(array(leading_keys))); return(hash("leading_keys", array_copy(array(leading_keys)), "kept_count", kept_count)) }
+LX { set(array(leading_keys), array()); set(drop_count, 1); set(kept_count, undef); set(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), drop_count)); set(kept_count, count(array(leading_keys))); return(hash("leading_keys", copy(array(leading_keys)), "kept_count", kept_count)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -34868,10 +34870,10 @@ SPEC
         'fluent and structured lifecycle drop_back helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle drop_back fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle drop_back fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_drop_alias_array_helpers_lower_equivalently' => sub {
@@ -34879,12 +34881,12 @@ subtest 'method_like_fluent_and_structured_action_drop_alias_array_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, rest_keys).declare(array, leading_keys).declare(scalar, skip_count=2, drop_count=1, kept_count).set(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), skip_count)).set(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), drop_count)).set(kept_count, count(array(leading_keys))).return(hash("rest_keys", array_copy(array(rest_keys)), "leading_keys", array_copy(array(leading_keys)), "kept_count", kept_count))
+ /a/ -> Top .set(array(rest_keys), array()).set(array(leading_keys), array()).set(skip_count, 2).set(drop_count, 1).set(kept_count, undef).set(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), skip_count)).set(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), drop_count)).set(kept_count, count(array(leading_keys))).return(hash("rest_keys", copy(array(rest_keys)), "leading_keys", copy(array(leading_keys)), "kept_count", kept_count))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, rest_keys); declare(array, leading_keys); declare(scalar, skip_count=2, drop_count=1, kept_count); set(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), skip_count)); set(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), drop_count)); set(kept_count, count(array(leading_keys))); return(hash("rest_keys", array_copy(array(rest_keys)), "leading_keys", array_copy(array(leading_keys)), "kept_count", kept_count)) }
+ /a/ -> Top { set(array(rest_keys), array()); set(array(leading_keys), array()); set(skip_count, 2); set(drop_count, 1); set(kept_count, undef); set(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), skip_count)); set(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), drop_count)); set(kept_count, count(array(leading_keys))); return(hash("rest_keys", copy(array(rest_keys)), "leading_keys", copy(array(leading_keys)), "kept_count", kept_count)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -34909,10 +34911,10 @@ SPEC
         'fluent and structured action-edge drop alias helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge drop alias fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge drop alias fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_drop_alias_array_helpers_lower_equivalently' => sub {
@@ -34920,13 +34922,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_drop_alias_array_helpers_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, rest_keys).declare(array, leading_keys).declare(scalar, skip_count=2, drop_count=1, kept_count).set(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), skip_count)).set(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), drop_count)).set(kept_count, count(array(leading_keys))).return(hash("rest_keys", array_copy(array(rest_keys)), "leading_keys", array_copy(array(leading_keys)), "kept_count", kept_count))
+LX.set(array(rest_keys), array()).set(array(leading_keys), array()).set(skip_count, 2).set(drop_count, 1).set(kept_count, undef).set(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), skip_count)).set(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), drop_count)).set(kept_count, count(array(leading_keys))).return(hash("rest_keys", copy(array(rest_keys)), "leading_keys", copy(array(leading_keys)), "kept_count", kept_count))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, rest_keys); declare(array, leading_keys); declare(scalar, skip_count=2, drop_count=1, kept_count); set(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), skip_count)); set(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), drop_count)); set(kept_count, count(array(leading_keys))); return(hash("rest_keys", array_copy(array(rest_keys)), "leading_keys", array_copy(array(leading_keys)), "kept_count", kept_count)) }
+LX { set(array(rest_keys), array()); set(array(leading_keys), array()); set(skip_count, 2); set(drop_count, 1); set(kept_count, undef); set(array(rest_keys), drop_front(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), skip_count)); set(array(leading_keys), drop_back(sorted_keys(pick_keys(hash(meta), "kind", "source", "stage")), drop_count)); set(kept_count, count(array(leading_keys))); return(hash("rest_keys", copy(array(rest_keys)), "leading_keys", copy(array(leading_keys)), "kept_count", kept_count)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -34952,10 +34954,10 @@ SPEC
         'fluent and structured lifecycle drop alias helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle drop alias fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle drop alias fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_if_elseif_join_values_branches_lower_equivalently' => sub {
@@ -35303,14 +35305,14 @@ subtest 'method_like_fluent_and_structured_action_call_value_helpers_lower_equiv
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, retv).set(retv, call(Leaf)).return(hash("item", retv))
+ /a/ -> Top .set(retv, undef).set(retv, call(Leaf)).return(hash("item", retv))
 Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, retv); set(retv, call(Leaf)); return(hash("item", retv)) }
+ /a/ -> Top { set(retv, undef); set(retv, call(Leaf)); return(hash("item", retv)) }
 Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
@@ -35337,11 +35339,11 @@ SPEC
         'fluent and structured action-edge call-value helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CALL' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge call-value fluent form preserves DECLARE/ASSIGN/CALL/RETURN coverage across canonical call capture'
+        'action-edge call-value fluent form preserves ASSIGN/CALL/RETURN coverage across canonical call capture'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_call_value_helpers_lower_equivalently' => sub {
@@ -35349,7 +35351,7 @@ subtest 'method_like_fluent_and_structured_lifecycle_call_value_helpers_lower_eq
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, retv).set(retv, call(Leaf)).return(hash("item", retv))
+LX.set(retv, undef).set(retv, call(Leaf)).return(hash("item", retv))
  /a/ -> Top { return(1) }
 Leaf::&
  /a/ -> Leaf { return("x") }
@@ -35357,7 +35359,7 @@ SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, retv); set(retv, call(Leaf)); return(hash("item", retv)) }
+LX { set(retv, undef); set(retv, call(Leaf)); return(hash("item", retv)) }
  /a/ -> Top { return(1) }
 Leaf::&
  /a/ -> Leaf { return("x") }
@@ -35385,11 +35387,11 @@ SPEC
         'fluent and structured lifecycle call-value helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CALL' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle call-value fluent form preserves DECLARE/ASSIGN/CALL/RETURN coverage across canonical call capture'
+        'lifecycle call-value fluent form preserves ASSIGN/CALL/RETURN coverage across canonical call capture'
     );
 };
 subtest 'method_like_fluent_and_structured_action_if_elseif_call_value_branches_lower_equivalently' => sub {
@@ -35397,14 +35399,14 @@ subtest 'method_like_fluent_and_structured_action_if_elseif_call_value_branches_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, retv).if(on).set(retv, call(Leaf)).return(hash("item", retv)).elseif(alt_on).set(retv, call(Leaf)).return(array("alt", retv)).else().return_undef().endif()
+ /a/ -> Top .set(retv, undef).if(on).set(retv, call(Leaf)).return(hash("item", retv)).elseif(alt_on).set(retv, call(Leaf)).return(array("alt", retv)).else().return_undef().endif()
 Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, retv); if(on); set(retv, call(Leaf)); return(hash("item", retv)); elseif(alt_on); set(retv, call(Leaf)); return(array("alt", retv)); else(); return_undef(); endif() }
+ /a/ -> Top { set(retv, undef); if(on); set(retv, call(Leaf)); return(hash("item", retv)); elseif(alt_on); set(retv, call(Leaf)); return(array("alt", retv)); else(); return_undef(); endif() }
 Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
@@ -35431,13 +35433,13 @@ SPEC
         'fluent and structured action-edge if/elseif call-value branch forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CALL' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELIF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge if/elseif fluent form preserves control-flow plus DECLARE/ASSIGN/CALL/RETURN coverage for call-value branches'
+        'action-edge if/elseif fluent form preserves control-flow plus ASSIGN/CALL/RETURN coverage for call-value branches'
     );
 };
 subtest 'method_like_fluent_and_structured_action_switch_case_call_value_branches_lower_equivalently' => sub {
@@ -35445,14 +35447,14 @@ subtest 'method_like_fluent_and_structured_action_switch_case_call_value_branche
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, retv).switch(kind).case("A").set(retv, call(Leaf)).return(hash("item", retv)).default().set(retv, call(Leaf)).return(array("alt", retv)).endswitch()
+ /a/ -> Top .set(retv, undef).switch(kind).case("A").set(retv, call(Leaf)).return(hash("item", retv)).default().set(retv, call(Leaf)).return(array("alt", retv)).endswitch()
 Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, retv); switch(kind); case("A"); set(retv, call(Leaf)); return(hash("item", retv)); default(); set(retv, call(Leaf)); return(array("alt", retv)); endswitch() }
+ /a/ -> Top { set(retv, undef); switch(kind); case("A"); set(retv, call(Leaf)); return(hash("item", retv)); default(); set(retv, call(Leaf)); return(array("alt", retv)); endswitch() }
 Leaf::&
  /a/ -> Leaf { return("x") }
 SPEC
@@ -35479,14 +35481,14 @@ SPEC
         'fluent and structured action-edge switch/case call-value branch forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CALL' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SWITCH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CASE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'DEFAULT' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge switch/case fluent form preserves control-flow plus DECLARE/ASSIGN/CALL/RETURN coverage for call-value branches'
+        'action-edge switch/case fluent form preserves control-flow plus ASSIGN/CALL/RETURN coverage for call-value branches'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_call_value_branches_lower_equivalently' => sub {
@@ -35494,7 +35496,7 @@ subtest 'method_like_fluent_and_structured_lifecycle_if_elseif_call_value_branch
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, retv).if(on).set(retv, call(Leaf)).return(hash("item", retv)).elseif(alt_on).set(retv, call(Leaf)).return(array("alt", retv)).else().return_undef().endif()
+LX.set(retv, undef).if(on).set(retv, call(Leaf)).return(hash("item", retv)).elseif(alt_on).set(retv, call(Leaf)).return(array("alt", retv)).else().return_undef().endif()
  /a/ -> Top { return(1) }
 Leaf::&
  /a/ -> Leaf { return("x") }
@@ -35502,7 +35504,7 @@ SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, retv); if(on); set(retv, call(Leaf)); return(hash("item", retv)); elseif(alt_on); set(retv, call(Leaf)); return(array("alt", retv)); else(); return_undef(); endif() }
+LX { set(retv, undef); if(on); set(retv, call(Leaf)); return(hash("item", retv)); elseif(alt_on); set(retv, call(Leaf)); return(array("alt", retv)); else(); return_undef(); endif() }
  /a/ -> Top { return(1) }
 Leaf::&
  /a/ -> Leaf { return("x") }
@@ -35530,13 +35532,13 @@ SPEC
         'fluent and structured lifecycle if/elseif call-value branch forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CALL' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELIF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle if/elseif fluent form preserves control-flow plus DECLARE/ASSIGN/CALL/RETURN coverage for call-value branches'
+        'lifecycle if/elseif fluent form preserves control-flow plus ASSIGN/CALL/RETURN coverage for call-value branches'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_switch_case_call_value_branches_lower_equivalently' => sub {
@@ -35544,7 +35546,7 @@ subtest 'method_like_fluent_and_structured_lifecycle_switch_case_call_value_bran
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, retv).switch(kind).case("A").set(retv, call(Leaf)).return(hash("item", retv)).default().set(retv, call(Leaf)).return(array("alt", retv)).endswitch()
+LX.set(retv, undef).switch(kind).case("A").set(retv, call(Leaf)).return(hash("item", retv)).default().set(retv, call(Leaf)).return(array("alt", retv)).endswitch()
  /a/ -> Top { return(1) }
 Leaf::&
  /a/ -> Leaf { return("x") }
@@ -35552,7 +35554,7 @@ SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, retv); switch(kind); case("A"); set(retv, call(Leaf)); return(hash("item", retv)); default(); set(retv, call(Leaf)); return(array("alt", retv)); endswitch() }
+LX { set(retv, undef); switch(kind); case("A"); set(retv, call(Leaf)); return(hash("item", retv)); default(); set(retv, call(Leaf)); return(array("alt", retv)); endswitch() }
  /a/ -> Top { return(1) }
 Leaf::&
  /a/ -> Leaf { return("x") }
@@ -35580,14 +35582,14 @@ SPEC
         'fluent and structured lifecycle switch/case call-value branch forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CALL' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SWITCH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CASE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'DEFAULT' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle switch/case fluent form preserves control-flow plus DECLARE/ASSIGN/CALL/RETURN coverage for call-value branches'
+        'lifecycle switch/case fluent form preserves control-flow plus ASSIGN/CALL/RETURN coverage for call-value branches'
     );
 };
 subtest 'method_like_fluent_and_structured_action_nested_accessor_payloads_lower_equivalently' => sub {
@@ -35595,12 +35597,12 @@ subtest 'method_like_fluent_and_structured_action_nested_accessor_payloads_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, content).set(content, retv["content"]).return(hash("content", content, "head", array(items).first())).return(array(tree[0]["kind"], hash(by_name).pick_keys(key).sorted_values().first()))
+ /a/ -> Top .set(content, undef).set(content, retv["content"]).return(hash("content", content, "head", array(items).first())).return(array(tree[0]["kind"], hash(by_name).pick_keys(key).sorted_values().first()))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, content); set(content, retv["content"]); return(hash("content", content, "head", array(items).first())); return(array(tree[0]["kind"], hash(by_name).pick_keys(key).sorted_values().first())) }
+ /a/ -> Top { set(content, undef); set(content, retv["content"]); return(hash("content", content, "head", array(items).first())); return(array(tree[0]["kind"], hash(by_name).pick_keys(key).sorted_values().first())) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35625,10 +35627,10 @@ SPEC
         'fluent and structured action-edge nested accessor payload forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge nested accessor fluent form preserves DECLARE/ASSIGN/RETURN coverage across direct and indexed scalar payload reads'
+        'action-edge nested accessor fluent form preserves ASSIGN/RETURN coverage across direct and indexed scalar payload reads'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_nested_accessor_payloads_lower_equivalently' => sub {
@@ -35636,13 +35638,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_nested_accessor_payloads_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, content).set(content, retv["content"]).return(hash("content", content, "head", array(items).first())).return(array(tree[0]["kind"], hash(by_name).pick_keys(key).sorted_values().first()))
+LX.set(content, undef).set(content, retv["content"]).return(hash("content", content, "head", array(items).first())).return(array(tree[0]["kind"], hash(by_name).pick_keys(key).sorted_values().first()))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, content); set(content, retv["content"]); return(hash("content", content, "head", array(items).first())); return(array(tree[0]["kind"], hash(by_name).pick_keys(key).sorted_values().first())) }
+LX { set(content, undef); set(content, retv["content"]); return(hash("content", content, "head", array(items).first())); return(array(tree[0]["kind"], hash(by_name).pick_keys(key).sorted_values().first())) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -35668,10 +35670,10 @@ SPEC
         'fluent and structured lifecycle nested accessor payload forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle nested accessor fluent form preserves DECLARE/ASSIGN/RETURN coverage across direct and indexed scalar payload reads'
+        'lifecycle nested accessor fluent form preserves ASSIGN/RETURN coverage across direct and indexed scalar payload reads'
     );
 };
 subtest 'method_like_fluent_and_structured_action_array_normalization_pipelines_lower_equivalently' => sub {
@@ -35679,12 +35681,12 @@ subtest 'method_like_fluent_and_structured_action_array_normalization_pipelines_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, parts).declare(scalar, args).set(args, "left:1, right:2").split(array(parts), args, /,\s*/).split_each(array(parts), /:/).trim_each(array(parts)).filter_nonempty(array(parts)).return(array_copy(array(parts)))
+ /a/ -> Top .set(array(parts), array()).set(args, undef).set(args, "left:1, right:2").split(array(parts), args, /,\s*/).split_each(array(parts), /:/).trim_each(array(parts)).filter_nonempty(array(parts)).return(copy(array(parts)))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, parts); declare(scalar, args); set(args, "left:1, right:2"); split(array(parts), args, /,\s*/); split_each(array(parts), /:/); trim_each(array(parts)); filter_nonempty(array(parts)); return(array_copy(array(parts))) }
+ /a/ -> Top { set(array(parts), array()); set(args, undef); set(args, "left:1, right:2"); split(array(parts), args, /,\s*/); split_each(array(parts), /:/); trim_each(array(parts)); filter_nonempty(array(parts)); return(copy(array(parts))) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35709,14 +35711,14 @@ SPEC
         'fluent and structured action-edge array-normalization pipeline forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SPLIT' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SPLIT_EACH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'TRIM_EACH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'FILTER_NONEMPTY' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge array-normalization fluent form preserves DECLARE/ASSIGN/SPLIT/SPLIT_EACH/TRIM_EACH/FILTER_NONEMPTY/RETURN coverage'
+        'action-edge array-normalization fluent form preserves ASSIGN/SPLIT/SPLIT_EACH/TRIM_EACH/FILTER_NONEMPTY/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_array_normalization_pipelines_lower_equivalently' => sub {
@@ -35724,13 +35726,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_array_normalization_pipelin
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, parts).declare(scalar, args).set(args, "left:1, right:2").split(array(parts), args, /,\s*/).split_each(array(parts), /:/).trim_each(array(parts)).filter_nonempty(array(parts)).return(array_copy(array(parts)))
+LX.set(array(parts), array()).set(args, undef).set(args, "left:1, right:2").split(array(parts), args, /,\s*/).split_each(array(parts), /:/).trim_each(array(parts)).filter_nonempty(array(parts)).return(copy(array(parts)))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, parts); declare(scalar, args); set(args, "left:1, right:2"); split(array(parts), args, /,\s*/); split_each(array(parts), /:/); trim_each(array(parts)); filter_nonempty(array(parts)); return(array_copy(array(parts))) }
+LX { set(array(parts), array()); set(args, undef); set(args, "left:1, right:2"); split(array(parts), args, /,\s*/); split_each(array(parts), /:/); trim_each(array(parts)); filter_nonempty(array(parts)); return(copy(array(parts))) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -35756,14 +35758,14 @@ SPEC
         'fluent and structured lifecycle array-normalization pipeline forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SPLIT' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'SPLIT_EACH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'TRIM_EACH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'FILTER_NONEMPTY' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle array-normalization fluent form preserves DECLARE/ASSIGN/SPLIT/SPLIT_EACH/TRIM_EACH/FILTER_NONEMPTY/RETURN coverage'
+        'lifecycle array-normalization fluent form preserves ASSIGN/SPLIT/SPLIT_EACH/TRIM_EACH/FILTER_NONEMPTY/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_case_normalization_filter_pipelines_lower_equivalently' => sub {
@@ -35771,12 +35773,12 @@ subtest 'method_like_fluent_and_structured_action_case_normalization_filter_pipe
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, parts).set(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)).lowercase_each(array(parts)).return(array_copy(array(parts)))
+ /a/ -> Top .set(array(parts), array()).set(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)).lowercase_each(array(parts)).return(copy(array(parts)))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, parts); set(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)); lowercase_each(array(parts)); return(array_copy(array(parts))) }
+ /a/ -> Top { set(array(parts), array()); set(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)); lowercase_each(array(parts)); return(copy(array(parts))) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35801,14 +35803,14 @@ SPEC
         'fluent and structured action-edge case-normalization/filter pipeline forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'MAP_UPPERCASE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'UNIQ' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'FILTER_MATCH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'MAP_LOWERCASE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge case-normalization/filter fluent form preserves DECLARE/ASSIGN/MAP_UPPERCASE/UNIQ/FILTER_MATCH/MAP_LOWERCASE/RETURN coverage'
+        'action-edge case-normalization/filter fluent form preserves ASSIGN/MAP_UPPERCASE/UNIQ/FILTER_MATCH/MAP_LOWERCASE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_case_normalization_filter_pipelines_lower_equivalently' => sub {
@@ -35816,13 +35818,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_case_normalization_filter_p
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, parts).set(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)).lowercase_each(array(parts)).return(array_copy(array(parts)))
+LX.set(array(parts), array()).set(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)).lowercase_each(array(parts)).return(copy(array(parts)))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, parts); set(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)); lowercase_each(array(parts)); return(array_copy(array(parts))) }
+LX { set(array(parts), array()); set(array(parts), filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)); lowercase_each(array(parts)); return(copy(array(parts))) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -35848,14 +35850,14 @@ SPEC
         'fluent and structured lifecycle case-normalization/filter pipeline forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'MAP_UPPERCASE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'UNIQ' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'FILTER_MATCH' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'MAP_LOWERCASE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle case-normalization/filter fluent form preserves DECLARE/ASSIGN/MAP_UPPERCASE/UNIQ/FILTER_MATCH/MAP_LOWERCASE/RETURN coverage'
+        'lifecycle case-normalization/filter fluent form preserves ASSIGN/MAP_UPPERCASE/UNIQ/FILTER_MATCH/MAP_LOWERCASE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_coalesce_value_helpers' => sub {
@@ -35896,12 +35898,12 @@ subtest 'method_like_fluent_and_structured_action_coalesce_value_helpers_lower_e
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, chosen).set(chosen, coalesce(retv["content"], entry_text(), "UNKNOWN")).if(str_eq(coalesce(retv["type"], "WORD"), "WORD")).return(hash("chosen", chosen, "parts", coalesce(retv["parts"], ["empty"]))).else.return(hash("chosen", chosen, "parts", ["fallback"])).endif
+ /a/ -> Top .set(chosen, undef).set(chosen, coalesce(retv["content"], entry_text(), "UNKNOWN")).if(str_eq(coalesce(retv["type"], "WORD"), "WORD")).return(hash("chosen", chosen, "parts", coalesce(retv["parts"], ["empty"]))).else.return(hash("chosen", chosen, "parts", ["fallback"])).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, chosen); set(chosen, coalesce(retv["content"], entry_text(), "UNKNOWN")); if(str_eq(coalesce(retv["type"], "WORD"), "WORD")); return(hash("chosen", chosen, "parts", coalesce(retv["parts"], ["empty"]))); else; return(hash("chosen", chosen, "parts", ["fallback"])); endif }
+ /a/ -> Top { set(chosen, undef); set(chosen, coalesce(retv["content"], entry_text(), "UNKNOWN")); if(str_eq(coalesce(retv["type"], "WORD"), "WORD")); return(hash("chosen", chosen, "parts", coalesce(retv["parts"], ["empty"]))); else; return(hash("chosen", chosen, "parts", ["fallback"])); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35926,12 +35928,12 @@ SPEC
         'fluent and structured action-edge coalesce helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge coalesce fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage across value fallback usage'
+        'action-edge coalesce fluent form preserves ASSIGN/IF/ELSE/RETURN coverage across value fallback usage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_coalesce_nonempty_value_helpers_lower_equivalently' => sub {
@@ -35939,12 +35941,12 @@ subtest 'method_like_fluent_and_structured_action_coalesce_nonempty_value_helper
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, kind="WORD", chosen).set(chosen, coalesce_nonempty(trim(retv["content"]), trim(entry_text()), "UNKNOWN")).if(str_eq(coalesce_nonempty(trim(retv["type"]), kind, "WORD"), "WORD")).return(hash("chosen", chosen, "kind", coalesce_nonempty(trim(retv["type"]), kind, "WORD"))).else.return(hash("chosen", chosen, "kind", "OTHER")).endif
+ /a/ -> Top .set(kind, "WORD").set(chosen, undef).set(chosen, coalesce_nonempty(trim(retv["content"]), trim(entry_text()), "UNKNOWN")).if(str_eq(coalesce_nonempty(trim(retv["type"]), kind, "WORD"), "WORD")).return(hash("chosen", chosen, "kind", coalesce_nonempty(trim(retv["type"]), kind, "WORD"))).else.return(hash("chosen", chosen, "kind", "OTHER")).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, kind="WORD", chosen); set(chosen, coalesce_nonempty(trim(retv["content"]), trim(entry_text()), "UNKNOWN")); if(str_eq(coalesce_nonempty(trim(retv["type"]), kind, "WORD"), "WORD")); return(hash("chosen", chosen, "kind", coalesce_nonempty(trim(retv["type"]), kind, "WORD"))); else; return(hash("chosen", chosen, "kind", "OTHER")); endif }
+ /a/ -> Top { set(kind, "WORD"); set(chosen, undef); set(chosen, coalesce_nonempty(trim(retv["content"]), trim(entry_text()), "UNKNOWN")); if(str_eq(coalesce_nonempty(trim(retv["type"]), kind, "WORD"), "WORD")); return(hash("chosen", chosen, "kind", coalesce_nonempty(trim(retv["type"]), kind, "WORD"))); else; return(hash("chosen", chosen, "kind", "OTHER")); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -35969,12 +35971,12 @@ SPEC
         'fluent and structured action-edge coalesce_nonempty helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge coalesce_nonempty fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage across scalar fallback usage'
+        'action-edge coalesce_nonempty fluent form preserves ASSIGN/IF/ELSE/RETURN coverage across scalar fallback usage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_coalesce_value_helpers_lower_equivalently' => sub {
@@ -35982,13 +35984,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_coalesce_value_helpers_lowe
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, chosen).set(chosen, coalesce(retv["content"], entry_text(), "UNKNOWN")).if(str_eq(coalesce(retv["type"], "WORD"), "WORD")).return(hash("chosen", chosen, "parts", coalesce(retv["parts"], ["empty"]))).else.return(hash("chosen", chosen, "parts", ["fallback"])).endif
+LX.set(chosen, undef).set(chosen, coalesce(retv["content"], entry_text(), "UNKNOWN")).if(str_eq(coalesce(retv["type"], "WORD"), "WORD")).return(hash("chosen", chosen, "parts", coalesce(retv["parts"], ["empty"]))).else.return(hash("chosen", chosen, "parts", ["fallback"])).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, chosen); set(chosen, coalesce(retv["content"], entry_text(), "UNKNOWN")); if(str_eq(coalesce(retv["type"], "WORD"), "WORD")); return(hash("chosen", chosen, "parts", coalesce(retv["parts"], ["empty"]))); else; return(hash("chosen", chosen, "parts", ["fallback"])); endif }
+LX { set(chosen, undef); set(chosen, coalesce(retv["content"], entry_text(), "UNKNOWN")); if(str_eq(coalesce(retv["type"], "WORD"), "WORD")); return(hash("chosen", chosen, "parts", coalesce(retv["parts"], ["empty"]))); else; return(hash("chosen", chosen, "parts", ["fallback"])); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -36014,12 +36016,12 @@ SPEC
         'fluent and structured lifecycle coalesce helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle coalesce fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage across value fallback usage'
+        'lifecycle coalesce fluent form preserves ASSIGN/IF/ELSE/RETURN coverage across value fallback usage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_coalesce_nonempty_value_helpers_lower_equivalently' => sub {
@@ -36027,13 +36029,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_coalesce_nonempty_value_hel
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, kind="WORD", chosen).set(chosen, coalesce_nonempty(trim(retv["content"]), trim(entry_text()), "UNKNOWN")).if(str_eq(coalesce_nonempty(trim(retv["type"]), kind, "WORD"), "WORD")).return(hash("chosen", chosen, "kind", coalesce_nonempty(trim(retv["type"]), kind, "WORD"))).else.return(hash("chosen", chosen, "kind", "OTHER")).endif
+LX.set(kind, "WORD").set(chosen, undef).set(chosen, coalesce_nonempty(trim(retv["content"]), trim(entry_text()), "UNKNOWN")).if(str_eq(coalesce_nonempty(trim(retv["type"]), kind, "WORD"), "WORD")).return(hash("chosen", chosen, "kind", coalesce_nonempty(trim(retv["type"]), kind, "WORD"))).else.return(hash("chosen", chosen, "kind", "OTHER")).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, kind="WORD", chosen); set(chosen, coalesce_nonempty(trim(retv["content"]), trim(entry_text()), "UNKNOWN")); if(str_eq(coalesce_nonempty(trim(retv["type"]), kind, "WORD"), "WORD")); return(hash("chosen", chosen, "kind", coalesce_nonempty(trim(retv["type"]), kind, "WORD"))); else; return(hash("chosen", chosen, "kind", "OTHER")); endif }
+LX { set(kind, "WORD"); set(chosen, undef); set(chosen, coalesce_nonempty(trim(retv["content"]), trim(entry_text()), "UNKNOWN")); if(str_eq(coalesce_nonempty(trim(retv["type"]), kind, "WORD"), "WORD")); return(hash("chosen", chosen, "kind", coalesce_nonempty(trim(retv["type"]), kind, "WORD"))); else; return(hash("chosen", chosen, "kind", "OTHER")); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -36059,12 +36061,12 @@ SPEC
         'fluent and structured lifecycle coalesce_nonempty helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle coalesce_nonempty fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage across scalar fallback usage'
+        'lifecycle coalesce_nonempty fluent form preserves ASSIGN/IF/ELSE/RETURN coverage across scalar fallback usage'
     );
 };
 subtest 'emit_context_lowers_definedness_flow_helpers' => sub {
@@ -36106,12 +36108,12 @@ subtest 'method_like_fluent_and_structured_action_definedness_flow_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, chosen).if(is_defined(retv["content"])).set(chosen, retv["content"]).elseif(is_undefined(retv["type"])).set(chosen, "MISSING_TYPE").else.set(chosen, coalesce(retv["type"], "UNKNOWN")).endif.return(hash("chosen", chosen))
+ /a/ -> Top .set(chosen, undef).if(is_defined(retv["content"])).set(chosen, retv["content"]).elseif(is_undefined(retv["type"])).set(chosen, "MISSING_TYPE").else.set(chosen, coalesce(retv["type"], "UNKNOWN")).endif.return(hash("chosen", chosen))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, chosen); if(is_defined(retv["content"])); set(chosen, retv["content"]); elseif(is_undefined(retv["type"])); set(chosen, "MISSING_TYPE"); else; set(chosen, coalesce(retv["type"], "UNKNOWN")); endif; return(hash("chosen", chosen)) }
+ /a/ -> Top { set(chosen, undef); if(is_defined(retv["content"])); set(chosen, retv["content"]); elseif(is_undefined(retv["type"])); set(chosen, "MISSING_TYPE"); else; set(chosen, coalesce(retv["type"], "UNKNOWN")); endif; return(hash("chosen", chosen)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36136,13 +36138,13 @@ SPEC
         'fluent and structured action-edge definedness-helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELIF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge definedness fluent form preserves DECLARE/IF/ELIF/ELSE/ASSIGN/RETURN coverage'
+        'action-edge definedness fluent form preserves ASSIGN/IF/ELIF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_definedness_flow_helpers_lower_equivalently' => sub {
@@ -36150,13 +36152,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_definedness_flow_helpers_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, chosen).if(is_defined(retv["content"])).set(chosen, retv["content"]).elseif(is_undefined(retv["type"])).set(chosen, "MISSING_TYPE").else.set(chosen, coalesce(retv["type"], "UNKNOWN")).endif.return(hash("chosen", chosen))
+LX.set(chosen, undef).if(is_defined(retv["content"])).set(chosen, retv["content"]).elseif(is_undefined(retv["type"])).set(chosen, "MISSING_TYPE").else.set(chosen, coalesce(retv["type"], "UNKNOWN")).endif.return(hash("chosen", chosen))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, chosen); if(is_defined(retv["content"])); set(chosen, retv["content"]); elseif(is_undefined(retv["type"])); set(chosen, "MISSING_TYPE"); else; set(chosen, coalesce(retv["type"], "UNKNOWN")); endif; return(hash("chosen", chosen)) }
+LX { set(chosen, undef); if(is_defined(retv["content"])); set(chosen, retv["content"]); elseif(is_undefined(retv["type"])); set(chosen, "MISSING_TYPE"); else; set(chosen, coalesce(retv["type"], "UNKNOWN")); endif; return(hash("chosen", chosen)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -36182,13 +36184,13 @@ SPEC
         'fluent and structured lifecycle definedness-helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELIF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle definedness fluent form preserves DECLARE/IF/ELIF/ELSE/ASSIGN/RETURN coverage'
+        'lifecycle definedness fluent form preserves ASSIGN/IF/ELIF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_aggregate_expression_emptiness_flow_helpers' => sub {
@@ -36235,12 +36237,12 @@ subtest 'method_like_fluent_and_structured_action_aggregate_emptiness_flow_helpe
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)).if(and(is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source"))), is_empty(drop_keys(hash(meta), "kind", "source", "debug")))).return(hash("state", "projected", "values", sorted_values(pick_keys(hash(meta), "kind", "source")))).else.return(hash("state", "other")).endif
+ /a/ -> Top .set(hash(meta), hash("kind", "NODE", "source", "rule", "debug", 1)).if(and(is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source"))), is_empty(drop_keys(hash(meta), "kind", "source", "debug")))).return(hash("state", "projected", "values", sorted_values(pick_keys(hash(meta), "kind", "source")))).else.return(hash("state", "other")).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)); if(and(is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source"))), is_empty(drop_keys(hash(meta), "kind", "source", "debug")))); return(hash("state", "projected", "values", sorted_values(pick_keys(hash(meta), "kind", "source")))); else; return(hash("state", "other")); endif }
+ /a/ -> Top { set(hash(meta), hash("kind", "NODE", "source", "rule", "debug", 1)); if(and(is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source"))), is_empty(drop_keys(hash(meta), "kind", "source", "debug")))); return(hash("state", "projected", "values", sorted_values(pick_keys(hash(meta), "kind", "source")))); else; return(hash("state", "other")); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36265,11 +36267,11 @@ SPEC
         'fluent and structured action-edge aggregate-emptiness helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge aggregate-emptiness fluent form preserves DECLARE/IF/ELSE/RETURN coverage'
+        'action-edge aggregate-emptiness fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_aggregate_emptiness_flow_helpers_lower_equivalently' => sub {
@@ -36277,13 +36279,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_aggregate_emptiness_flow_he
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)).if(and(is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source"))), is_empty(drop_keys(hash(meta), "kind", "source", "debug")))).return(hash("state", "projected", "values", sorted_values(pick_keys(hash(meta), "kind", "source")))).else.return(hash("state", "other")).endif
+LX.set(hash(meta), hash("kind", "NODE", "source", "rule", "debug", 1)).if(and(is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source"))), is_empty(drop_keys(hash(meta), "kind", "source", "debug")))).return(hash("state", "projected", "values", sorted_values(pick_keys(hash(meta), "kind", "source")))).else.return(hash("state", "other")).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)); if(and(is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source"))), is_empty(drop_keys(hash(meta), "kind", "source", "debug")))); return(hash("state", "projected", "values", sorted_values(pick_keys(hash(meta), "kind", "source")))); else; return(hash("state", "other")); endif }
+LX { set(hash(meta), hash("kind", "NODE", "source", "rule", "debug", 1)); if(and(is_nonempty(sorted_values(pick_keys(hash(meta), "kind", "source"))), is_empty(drop_keys(hash(meta), "kind", "source", "debug")))); return(hash("state", "projected", "values", sorted_values(pick_keys(hash(meta), "kind", "source")))); else; return(hash("state", "other")); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -36309,11 +36311,11 @@ SPEC
         'fluent and structured lifecycle aggregate-emptiness helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle aggregate-emptiness fluent form preserves DECLARE/IF/ELSE/RETURN coverage'
+        'lifecycle aggregate-emptiness fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_scalar_normalization_value_helpers' => sub {
@@ -36340,12 +36342,12 @@ subtest 'method_like_fluent_and_structured_action_scalar_normalization_helpers_l
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, chosen).set(chosen, lowercase(trim(coalesce(retv["content"], entry_text(), " UNKNOWN ")))).if(str_eq(uppercase(trim(coalesce(retv["type"], "word"))), "WORD")).return(hash("chosen", chosen, "type", uppercase(trim(coalesce(retv["type"], "word"))))).else.return(hash("chosen", chosen, "type", "OTHER")).endif
+ /a/ -> Top .set(chosen, undef).set(chosen, lowercase(trim(coalesce(retv["content"], entry_text(), " UNKNOWN ")))).if(str_eq(uppercase(trim(coalesce(retv["type"], "word"))), "WORD")).return(hash("chosen", chosen, "type", uppercase(trim(coalesce(retv["type"], "word"))))).else.return(hash("chosen", chosen, "type", "OTHER")).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, chosen); set(chosen, lowercase(trim(coalesce(retv["content"], entry_text(), " UNKNOWN ")))); if(str_eq(uppercase(trim(coalesce(retv["type"], "word"))), "WORD")); return(hash("chosen", chosen, "type", uppercase(trim(coalesce(retv["type"], "word"))))); else; return(hash("chosen", chosen, "type", "OTHER")); endif }
+ /a/ -> Top { set(chosen, undef); set(chosen, lowercase(trim(coalesce(retv["content"], entry_text(), " UNKNOWN ")))); if(str_eq(uppercase(trim(coalesce(retv["type"], "word"))), "WORD")); return(hash("chosen", chosen, "type", uppercase(trim(coalesce(retv["type"], "word"))))); else; return(hash("chosen", chosen, "type", "OTHER")); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36370,12 +36372,12 @@ SPEC
         'fluent and structured action-edge scalar-normalization helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge scalar-normalization fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'action-edge scalar-normalization fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_scalar_normalization_helpers_lower_equivalently' => sub {
@@ -36383,13 +36385,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_scalar_normalization_helper
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, chosen).set(chosen, lowercase(trim(coalesce(retv["content"], entry_text(), " UNKNOWN ")))).if(str_eq(uppercase(trim(coalesce(retv["type"], "word"))), "WORD")).return(hash("chosen", chosen, "type", uppercase(trim(coalesce(retv["type"], "word"))))).else.return(hash("chosen", chosen, "type", "OTHER")).endif
+LX.set(chosen, undef).set(chosen, lowercase(trim(coalesce(retv["content"], entry_text(), " UNKNOWN ")))).if(str_eq(uppercase(trim(coalesce(retv["type"], "word"))), "WORD")).return(hash("chosen", chosen, "type", uppercase(trim(coalesce(retv["type"], "word"))))).else.return(hash("chosen", chosen, "type", "OTHER")).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, chosen); set(chosen, lowercase(trim(coalesce(retv["content"], entry_text(), " UNKNOWN ")))); if(str_eq(uppercase(trim(coalesce(retv["type"], "word"))), "WORD")); return(hash("chosen", chosen, "type", uppercase(trim(coalesce(retv["type"], "word"))))); else; return(hash("chosen", chosen, "type", "OTHER")); endif }
+LX { set(chosen, undef); set(chosen, lowercase(trim(coalesce(retv["content"], entry_text(), " UNKNOWN ")))); if(str_eq(uppercase(trim(coalesce(retv["type"], "word"))), "WORD")); return(hash("chosen", chosen, "type", uppercase(trim(coalesce(retv["type"], "word"))))); else; return(hash("chosen", chosen, "type", "OTHER")); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -36415,12 +36417,12 @@ SPEC
         'fluent and structured lifecycle scalar-normalization helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle scalar-normalization fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'lifecycle scalar-normalization fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_count_value_helpers' => sub {
@@ -36452,12 +36454,12 @@ subtest 'method_like_fluent_and_structured_action_count_value_helpers_lower_equi
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, part_count).set(part_count, count(coalesce(retv["parts"], ["empty"]))).if(num_gt(count(array(parts)), 0)).return(hash("part_count", part_count, "seen", count(array(parts)))).else.return(hash("part_count", part_count, "seen", 0)).endif
+ /a/ -> Top .set(part_count, undef).set(part_count, count(coalesce(retv["parts"], ["empty"]))).if(num_gt(count(array(parts)), 0)).return(hash("part_count", part_count, "seen", count(array(parts)))).else.return(hash("part_count", part_count, "seen", 0)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, part_count); set(part_count, count(coalesce(retv["parts"], ["empty"]))); if(num_gt(count(array(parts)), 0)); return(hash("part_count", part_count, "seen", count(array(parts)))); else; return(hash("part_count", part_count, "seen", 0)); endif }
+ /a/ -> Top { set(part_count, undef); set(part_count, count(coalesce(retv["parts"], ["empty"]))); if(num_gt(count(array(parts)), 0)); return(hash("part_count", part_count, "seen", count(array(parts)))); else; return(hash("part_count", part_count, "seen", 0)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36482,12 +36484,12 @@ SPEC
         'fluent and structured action-edge count helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge count fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'action-edge count fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_count_value_helpers_lower_equivalently' => sub {
@@ -36495,13 +36497,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_count_value_helpers_lower_e
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, part_count).set(part_count, count(coalesce(retv["parts"], ["empty"]))).if(num_gt(count(array(parts)), 0)).return(hash("part_count", part_count, "seen", count(array(parts)))).else.return(hash("part_count", part_count, "seen", 0)).endif
+LX.set(part_count, undef).set(part_count, count(coalesce(retv["parts"], ["empty"]))).if(num_gt(count(array(parts)), 0)).return(hash("part_count", part_count, "seen", count(array(parts)))).else.return(hash("part_count", part_count, "seen", 0)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, part_count); set(part_count, count(coalesce(retv["parts"], ["empty"]))); if(num_gt(count(array(parts)), 0)); return(hash("part_count", part_count, "seen", count(array(parts)))); else; return(hash("part_count", part_count, "seen", 0)); endif }
+LX { set(part_count, undef); set(part_count, count(coalesce(retv["parts"], ["empty"]))); if(num_gt(count(array(parts)), 0)); return(hash("part_count", part_count, "seen", count(array(parts)))); else; return(hash("part_count", part_count, "seen", 0)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -36527,12 +36529,12 @@ SPEC
         'fluent and structured lifecycle count helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle count fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'lifecycle count fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_contains_value_helpers' => sub {
@@ -36669,24 +36671,24 @@ subtest 'emit_context_lowers_concat_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('concat(lowercase(trim(raw_name)), "_", stage)'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('cat(lowercase(trim(raw_name)), "_", stage)'),
         q{do { my @__ls_concat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_concat_ok = 1; for my $__ls_concat_part (@__ls_concat_parts) { if (!defined($__ls_concat_part) || ref($__ls_concat_part)) { $__ls_concat_ok = 0; last; } } $__ls_concat_ok ? join('', @__ls_concat_parts) : undef }},
-        'concat(...) lowers normalized scalar fragments into one guarded pure scalar expression'
+        'cat(...) lowers normalized scalar fragments into one guarded pure scalar expression'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('concat(coalesce_nonempty(trim(retv["type"]), entry_text(), "word"), "::", uppercase(trim(kind)))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('cat(coalesce_nonempty(trim(retv["type"]), entry_text(), "word"), "::", uppercase(trim(kind)))'),
         q{do { my @__ls_concat_parts = (do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{"type"}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = do { $IMATCH }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "word" } }, "::", do { my $__ls_upper = do { my $__ls_trim = $kind; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_upper) ? uc($__ls_upper) : $__ls_upper }); my $__ls_concat_ok = 1; for my $__ls_concat_part (@__ls_concat_parts) { if (!defined($__ls_concat_part) || ref($__ls_concat_part)) { $__ls_concat_ok = 0; last; } } $__ls_concat_ok ? join('', @__ls_concat_parts) : undef }},
-        'concat(...) lowers composed fallback and normalization fragments into one guarded scalar value'
+        'cat(...) lowers composed fallback and normalization fragments into one guarded scalar value'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(concat(lowercase(trim(raw_name)), "_", stage), "node_init")'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(cat(lowercase(trim(raw_name)), "_", stage), "node_init")'),
         q{do { my $__ls_str_cmp_lhs = do { my @__ls_concat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_concat_ok = 1; for my $__ls_concat_part (@__ls_concat_parts) { if (!defined($__ls_concat_part) || ref($__ls_concat_part)) { $__ls_concat_ok = 0; last; } } $__ls_concat_ok ? join('', @__ls_concat_parts) : undef }; my $__ls_str_cmp_rhs = "node_init"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
-        'concat(...) composes inside flow comparisons over normalized scalar expressions'
+        'cat(...) composes inside flow comparisons over normalized scalar expressions'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("full_name", concat(lowercase(trim(raw_name)), "_", stage)))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash("full_name", cat(lowercase(trim(raw_name)), "_", stage)))'),
         q{return {"full_name" => do { my @__ls_concat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_concat_ok = 1; for my $__ls_concat_part (@__ls_concat_parts) { if (!defined($__ls_concat_part) || ref($__ls_concat_part)) { $__ls_concat_ok = 0; last; } } $__ls_concat_ok ? join('', @__ls_concat_parts) : undef }}},
-        'concat(...) lowers inside general return payloads'
+        'cat(...) lowers inside general return payloads'
     );
 };
 subtest 'emit_context_lowers_value_layer_emptiness_helpers' => sub {
@@ -36718,12 +36720,12 @@ subtest 'method_like_fluent_and_structured_action_contains_value_helpers_lower_e
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "debug", 1), "kind", "source"))).declare(scalar, has_kind).set(has_kind, contains(array(projected_keys), "kind")).if(and(has_kind, contains(sorted_values(hash("kind", "NODE", "source", "rule")), "NODE"))).return(hash("has_kind", has_kind, "keys", array_copy(array(projected_keys)))).else.return(hash("has_kind", has_kind, "keys", array())).endif
+ /a/ -> Top .set(array(projected_keys), sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "debug", 1), "kind", "source"))).set(has_kind, undef).set(has_kind, contains(array(projected_keys), "kind")).if(and(has_kind, contains(sorted_values(hash("kind", "NODE", "source", "rule")), "NODE"))).return(hash("has_kind", has_kind, "keys", copy(array(projected_keys)))).else.return(hash("has_kind", has_kind, "keys", array())).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "debug", 1), "kind", "source"))); declare(scalar, has_kind); set(has_kind, contains(array(projected_keys), "kind")); if(and(has_kind, contains(sorted_values(hash("kind", "NODE", "source", "rule")), "NODE"))); return(hash("has_kind", has_kind, "keys", array_copy(array(projected_keys)))); else; return(hash("has_kind", has_kind, "keys", array())); endif }
+ /a/ -> Top { set(array(projected_keys), sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "debug", 1), "kind", "source"))); set(has_kind, undef); set(has_kind, contains(array(projected_keys), "kind")); if(and(has_kind, contains(sorted_values(hash("kind", "NODE", "source", "rule")), "NODE"))); return(hash("has_kind", has_kind, "keys", copy(array(projected_keys)))); else; return(hash("has_kind", has_kind, "keys", array())); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36748,12 +36750,12 @@ SPEC
         'fluent and structured action-edge contains helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge contains fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'action-edge contains fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_contains_value_helpers_lower_equivalently' => sub {
@@ -36761,13 +36763,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_contains_value_helpers_lowe
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "debug", 1), "kind", "source"))).declare(scalar, has_kind).set(has_kind, contains(array(projected_keys), "kind")).if(and(has_kind, contains(sorted_values(hash("kind", "NODE", "source", "rule")), "NODE"))).return(hash("has_kind", has_kind, "keys", array_copy(array(projected_keys)))).else.return(hash("has_kind", has_kind, "keys", array())).endif
+LX.set(array(projected_keys), sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "debug", 1), "kind", "source"))).set(has_kind, undef).set(has_kind, contains(array(projected_keys), "kind")).if(and(has_kind, contains(sorted_values(hash("kind", "NODE", "source", "rule")), "NODE"))).return(hash("has_kind", has_kind, "keys", copy(array(projected_keys)))).else.return(hash("has_kind", has_kind, "keys", array())).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "debug", 1), "kind", "source"))); declare(scalar, has_kind); set(has_kind, contains(array(projected_keys), "kind")); if(and(has_kind, contains(sorted_values(hash("kind", "NODE", "source", "rule")), "NODE"))); return(hash("has_kind", has_kind, "keys", array_copy(array(projected_keys)))); else; return(hash("has_kind", has_kind, "keys", array())); endif }
+LX { set(array(projected_keys), sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "debug", 1), "kind", "source"))); set(has_kind, undef); set(has_kind, contains(array(projected_keys), "kind")); if(and(has_kind, contains(sorted_values(hash("kind", "NODE", "source", "rule")), "NODE"))); return(hash("has_kind", has_kind, "keys", copy(array(projected_keys)))); else; return(hash("has_kind", has_kind, "keys", array())); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -36793,12 +36795,12 @@ SPEC
         'fluent and structured lifecycle contains helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle contains fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'lifecycle contains fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_index_of_value_helpers' => sub {
@@ -36830,12 +36832,12 @@ subtest 'method_like_fluent_and_structured_action_index_of_value_helpers_lower_e
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "stage", "normalized"), "kind", "source", "stage"))).declare(scalar, kind_index).set(kind_index, index_of(array(projected_keys), "kind")).if(is_defined(kind_index)).return(index_of(array(projected_keys), "kind")).else.return(index_of(sorted_values(hash("kind", "NODE", "source", "rule", "stage", "normalized")), "missing")).endif
+ /a/ -> Top .set(array(projected_keys), sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "stage", "normalized"), "kind", "source", "stage"))).set(kind_index, undef).set(kind_index, index_of(array(projected_keys), "kind")).if(is_defined(kind_index)).return(index_of(array(projected_keys), "kind")).else.return(index_of(sorted_values(hash("kind", "NODE", "source", "rule", "stage", "normalized")), "missing")).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "stage", "normalized"), "kind", "source", "stage"))); declare(scalar, kind_index); set(kind_index, index_of(array(projected_keys), "kind")); if(is_defined(kind_index)); return(index_of(array(projected_keys), "kind")); else; return(index_of(sorted_values(hash("kind", "NODE", "source", "rule", "stage", "normalized")), "missing")); endif }
+ /a/ -> Top { set(array(projected_keys), sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "stage", "normalized"), "kind", "source", "stage"))); set(kind_index, undef); set(kind_index, index_of(array(projected_keys), "kind")); if(is_defined(kind_index)); return(index_of(array(projected_keys), "kind")); else; return(index_of(sorted_values(hash("kind", "NODE", "source", "rule", "stage", "normalized")), "missing")); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36860,12 +36862,12 @@ SPEC
         'fluent and structured action-edge index_of helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge index_of fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'action-edge index_of fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_index_of_value_helpers_lower_equivalently' => sub {
@@ -36873,13 +36875,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_index_of_value_helpers_lowe
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "stage", "normalized"), "kind", "source", "stage"))).declare(scalar, kind_index).set(kind_index, index_of(array(projected_keys), "kind")).if(is_defined(kind_index)).return(index_of(array(projected_keys), "kind")).else.return(index_of(sorted_values(hash("kind", "NODE", "source", "rule", "stage", "normalized")), "missing")).endif
+LX.set(array(projected_keys), sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "stage", "normalized"), "kind", "source", "stage"))).set(kind_index, undef).set(kind_index, index_of(array(projected_keys), "kind")).if(is_defined(kind_index)).return(index_of(array(projected_keys), "kind")).else.return(index_of(sorted_values(hash("kind", "NODE", "source", "rule", "stage", "normalized")), "missing")).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, projected_keys=sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "stage", "normalized"), "kind", "source", "stage"))); declare(scalar, kind_index); set(kind_index, index_of(array(projected_keys), "kind")); if(is_defined(kind_index)); return(index_of(array(projected_keys), "kind")); else; return(index_of(sorted_values(hash("kind", "NODE", "source", "rule", "stage", "normalized")), "missing")); endif }
+LX { set(array(projected_keys), sorted_keys(pick_keys(hash("kind", "NODE", "source", "rule", "stage", "normalized"), "kind", "source", "stage"))); set(kind_index, undef); set(kind_index, index_of(array(projected_keys), "kind")); if(is_defined(kind_index)); return(index_of(array(projected_keys), "kind")); else; return(index_of(sorted_values(hash("kind", "NODE", "source", "rule", "stage", "normalized")), "missing")); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -36905,12 +36907,12 @@ SPEC
         'fluent and structured lifecycle index_of helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle index_of fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'lifecycle index_of fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_count_keys_value_helpers' => sub {
@@ -36942,12 +36944,12 @@ subtest 'method_like_fluent_and_structured_action_count_keys_value_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(scalar, meta_key_count).set(meta_key_count, count_keys(coalesce(retv["meta"], hash("kind", "fallback")))).if(num_gt(count_keys(hash(meta)), 1)).return(hash("meta_key_count", meta_key_count, "seen", count_keys(hash(meta)))).else.return(hash("meta_key_count", meta_key_count, "seen", 0)).endif
+ /a/ -> Top .set(meta_key_count, undef).set(meta_key_count, count_keys(coalesce(retv["meta"], hash("kind", "fallback")))).if(num_gt(count_keys(hash(meta)), 1)).return(hash("meta_key_count", meta_key_count, "seen", count_keys(hash(meta)))).else.return(hash("meta_key_count", meta_key_count, "seen", 0)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(scalar, meta_key_count); set(meta_key_count, count_keys(coalesce(retv["meta"], hash("kind", "fallback")))); if(num_gt(count_keys(hash(meta)), 1)); return(hash("meta_key_count", meta_key_count, "seen", count_keys(hash(meta)))); else; return(hash("meta_key_count", meta_key_count, "seen", 0)); endif }
+ /a/ -> Top { set(meta_key_count, undef); set(meta_key_count, count_keys(coalesce(retv["meta"], hash("kind", "fallback")))); if(num_gt(count_keys(hash(meta)), 1)); return(hash("meta_key_count", meta_key_count, "seen", count_keys(hash(meta)))); else; return(hash("meta_key_count", meta_key_count, "seen", 0)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -36972,12 +36974,12 @@ SPEC
         'fluent and structured action-edge count_keys helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge count_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'action-edge count_keys fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_count_keys_value_helpers_lower_equivalently' => sub {
@@ -36985,13 +36987,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_count_keys_value_helpers_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, meta_key_count).set(meta_key_count, count_keys(coalesce(retv["meta"], hash("kind", "fallback")))).if(num_gt(count_keys(hash(meta)), 1)).return(hash("meta_key_count", meta_key_count, "seen", count_keys(hash(meta)))).else.return(hash("meta_key_count", meta_key_count, "seen", 0)).endif
+LX.set(meta_key_count, undef).set(meta_key_count, count_keys(coalesce(retv["meta"], hash("kind", "fallback")))).if(num_gt(count_keys(hash(meta)), 1)).return(hash("meta_key_count", meta_key_count, "seen", count_keys(hash(meta)))).else.return(hash("meta_key_count", meta_key_count, "seen", 0)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, meta_key_count); set(meta_key_count, count_keys(coalesce(retv["meta"], hash("kind", "fallback")))); if(num_gt(count_keys(hash(meta)), 1)); return(hash("meta_key_count", meta_key_count, "seen", count_keys(hash(meta)))); else; return(hash("meta_key_count", meta_key_count, "seen", 0)); endif }
+LX { set(meta_key_count, undef); set(meta_key_count, count_keys(coalesce(retv["meta"], hash("kind", "fallback")))); if(num_gt(count_keys(hash(meta)), 1)); return(hash("meta_key_count", meta_key_count, "seen", count_keys(hash(meta)))); else; return(hash("meta_key_count", meta_key_count, "seen", 0)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37017,12 +37019,12 @@ SPEC
         'fluent and structured lifecycle count_keys helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle count_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'lifecycle count_keys fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_has_key_value_helpers' => sub {
@@ -37054,12 +37056,12 @@ subtest 'method_like_fluent_and_structured_action_has_key_value_helpers_lower_eq
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "existing", "source", "rule")).declare(scalar, has_kind).set(has_kind, has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")).if(has_key(hash(meta), "kind")).return(hash("has_kind", has_kind, "meta_key_count", count_keys(hash(meta)))).else.return(hash("has_kind", has_kind, "meta_key_count", 0)).endif
+ /a/ -> Top .set(hash(meta), hash("kind", "existing", "source", "rule")).set(has_kind, undef).set(has_kind, has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")).if(has_key(hash(meta), "kind")).return(hash("has_kind", has_kind, "meta_key_count", count_keys(hash(meta)))).else.return(hash("has_kind", has_kind, "meta_key_count", 0)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "existing", "source", "rule")); declare(scalar, has_kind); set(has_kind, has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")); if(has_key(hash(meta), "kind")); return(hash("has_kind", has_kind, "meta_key_count", count_keys(hash(meta)))); else; return(hash("has_kind", has_kind, "meta_key_count", 0)); endif }
+ /a/ -> Top { set(hash(meta), hash("kind", "existing", "source", "rule")); set(has_kind, undef); set(has_kind, has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")); if(has_key(hash(meta), "kind")); return(hash("has_kind", has_kind, "meta_key_count", count_keys(hash(meta)))); else; return(hash("has_kind", has_kind, "meta_key_count", 0)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37084,12 +37086,12 @@ SPEC
         'fluent and structured action-edge has_key helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge has_key fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'action-edge has_key fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_has_key_value_helpers_lower_equivalently' => sub {
@@ -37097,13 +37099,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_has_key_value_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "existing", "source", "rule")).declare(scalar, has_kind).set(has_kind, has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")).if(has_key(hash(meta), "kind")).return(hash("has_kind", has_kind, "meta_key_count", count_keys(hash(meta)))).else.return(hash("has_kind", has_kind, "meta_key_count", 0)).endif
+LX.set(hash(meta), hash("kind", "existing", "source", "rule")).set(has_kind, undef).set(has_kind, has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")).if(has_key(hash(meta), "kind")).return(hash("has_kind", has_kind, "meta_key_count", count_keys(hash(meta)))).else.return(hash("has_kind", has_kind, "meta_key_count", 0)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "existing", "source", "rule")); declare(scalar, has_kind); set(has_kind, has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")); if(has_key(hash(meta), "kind")); return(hash("has_kind", has_kind, "meta_key_count", count_keys(hash(meta)))); else; return(hash("has_kind", has_kind, "meta_key_count", 0)); endif }
+LX { set(hash(meta), hash("kind", "existing", "source", "rule")); set(has_kind, undef); set(has_kind, has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")); if(has_key(hash(meta), "kind")); return(hash("has_kind", has_kind, "meta_key_count", count_keys(hash(meta)))); else; return(hash("has_kind", has_kind, "meta_key_count", 0)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37129,12 +37131,12 @@ SPEC
         'fluent and structured lifecycle has_key helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle has_key fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'lifecycle has_key fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_merge_hash_value_helpers' => sub {
@@ -37166,12 +37168,12 @@ subtest 'method_like_fluent_and_structured_action_merge_hash_value_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta_base=hash("kind", "existing", "source", "rule")).declare(hash, merged_meta).declare(scalar, has_kind).set(hash(merged_meta), merge_hash(hash(meta_base), coalesce(retv["meta"], hash("kind", "fallback")), hash("stage", "normalized"))).set(has_kind, has_key(hash(merged_meta), "kind")).if(has_kind).return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))).else.return(hash("missing_kind", 1)).endif
+ /a/ -> Top .set(hash(meta_base), hash("kind", "existing", "source", "rule")).set(hash(merged_meta), hash()).set(has_kind, undef).set(hash(merged_meta), merge_hash(hash(meta_base), coalesce(retv["meta"], hash("kind", "fallback")), hash("stage", "normalized"))).set(has_kind, has_key(hash(merged_meta), "kind")).if(has_kind).return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))).else.return(hash("missing_kind", 1)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta_base=hash("kind", "existing", "source", "rule")); declare(hash, merged_meta); declare(scalar, has_kind); set(hash(merged_meta), merge_hash(hash(meta_base), coalesce(retv["meta"], hash("kind", "fallback")), hash("stage", "normalized"))); set(has_kind, has_key(hash(merged_meta), "kind")); if(has_kind); return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))); else; return(hash("missing_kind", 1)); endif }
+ /a/ -> Top { set(hash(meta_base), hash("kind", "existing", "source", "rule")); set(hash(merged_meta), hash()); set(has_kind, undef); set(hash(merged_meta), merge_hash(hash(meta_base), coalesce(retv["meta"], hash("kind", "fallback")), hash("stage", "normalized"))); set(has_kind, has_key(hash(merged_meta), "kind")); if(has_kind); return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))); else; return(hash("missing_kind", 1)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37196,12 +37198,12 @@ SPEC
         'fluent and structured action-edge merge_hash helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge merge_hash fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'action-edge merge_hash fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_merge_hash_value_helpers_lower_equivalently' => sub {
@@ -37209,13 +37211,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_merge_hash_value_helpers_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta_base=hash("kind", "existing", "source", "rule")).declare(hash, merged_meta).declare(scalar, has_kind).set(hash(merged_meta), merge_hash(hash(meta_base), coalesce(retv["meta"], hash("kind", "fallback")), hash("stage", "normalized"))).set(has_kind, has_key(hash(merged_meta), "kind")).if(has_kind).return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))).else.return(hash("missing_kind", 1)).endif
+LX.set(hash(meta_base), hash("kind", "existing", "source", "rule")).set(hash(merged_meta), hash()).set(has_kind, undef).set(hash(merged_meta), merge_hash(hash(meta_base), coalesce(retv["meta"], hash("kind", "fallback")), hash("stage", "normalized"))).set(has_kind, has_key(hash(merged_meta), "kind")).if(has_kind).return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))).else.return(hash("missing_kind", 1)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta_base=hash("kind", "existing", "source", "rule")); declare(hash, merged_meta); declare(scalar, has_kind); set(hash(merged_meta), merge_hash(hash(meta_base), coalesce(retv["meta"], hash("kind", "fallback")), hash("stage", "normalized"))); set(has_kind, has_key(hash(merged_meta), "kind")); if(has_kind); return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))); else; return(hash("missing_kind", 1)); endif }
+LX { set(hash(meta_base), hash("kind", "existing", "source", "rule")); set(hash(merged_meta), hash()); set(has_kind, undef); set(hash(merged_meta), merge_hash(hash(meta_base), coalesce(retv["meta"], hash("kind", "fallback")), hash("stage", "normalized"))); set(has_kind, has_key(hash(merged_meta), "kind")); if(has_kind); return(merge_hash(hash(merged_meta), hash("meta_key_count", count_keys(hash(merged_meta))))); else; return(hash("missing_kind", 1)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37241,36 +37243,36 @@ SPEC
         'fluent and structured lifecycle merge_hash helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle merge_hash fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'lifecycle merge_hash fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_hash_copy_value_helpers' => sub {
     plan tests => 4;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('hash_copy(hash(meta))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('copy(hash(meta))'),
         '{%meta}',
-        'hash_copy(...) lowers working hashes into a pure snapshot hashref expression'
+        'copy(...) lowers working hashes into a pure snapshot hashref expression'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_nonempty(hash_copy(hash(meta)))'),
+        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_nonempty(copy(hash(meta)))'),
         '(!(do { my $__ls_empty_hash = {%meta}; (!defined($__ls_empty_hash) || !scalar(keys %{$__ls_empty_hash})) }))',
-        'hash_copy(...) composes inside aggregate emptiness flow checks as a hash-valued expression'
+        'copy(...) composes inside aggregate emptiness flow checks as a hash-valued expression'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash_copy(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source", "stage")))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return(copy(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source", "stage")))'),
         'return do { my $__ls_hash_copy = do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (defined($__ls_hash_copy) && ref($__ls_hash_copy) eq \'HASH\') ? { %{$__ls_hash_copy} } : {} }',
-        'hash_copy(...) lowers inside general return payloads'
+        'copy(...) lowers inside general return payloads'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'set(hash(meta_out), hash_copy(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source", "stage")))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'set(hash(meta_out), copy(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source", "stage")))'),
         '%meta_out = (do { my $__ls_hash_init = do { my $__ls_hash_copy = do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (defined($__ls_hash_copy) && ref($__ls_hash_copy) eq \'HASH\') ? { %{$__ls_hash_copy} } : {} }; defined($__ls_hash_init) ? %{$__ls_hash_init} : () })',
-        'hash_copy(...) lowers inside hash assignment sources'
+        'copy(...) lowers inside hash assignment sources'
     );
 };
 subtest 'method_like_fluent_and_structured_action_hash_copy_value_helpers_lower_equivalently' => sub {
@@ -37278,12 +37280,12 @@ subtest 'method_like_fluent_and_structured_action_hash_copy_value_helpers_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied).declare(scalar, kind_seen).set(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).set(kind_seen, hash_copy(hash(copied)).pick_keys("kind").sorted_values().first()).if(is_nonempty(hash_copy(hash(copied)))).return(hash("kind_seen", kind_seen, "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))).else.return(hash("missing_kind", 1)).endif
+ /a/ -> Top .set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule")).set(hash(copied), hash()).set(kind_seen, undef).set(hash(copied), copy(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).set(kind_seen, copy(hash(copied)).pick_keys("kind").sorted_values().first()).if(is_nonempty(copy(hash(copied)))).return(hash("kind_seen", kind_seen, "meta", copy(hash(copied)), "meta_key_count", count_keys(copy(hash(copied))))).else.return(hash("missing_kind", 1)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied); declare(scalar, kind_seen); set(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); set(kind_seen, hash_copy(hash(copied)).pick_keys("kind").sorted_values().first()); if(is_nonempty(hash_copy(hash(copied)))); return(hash("kind_seen", kind_seen, "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))); else; return(hash("missing_kind", 1)); endif }
+ /a/ -> Top { set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule")); set(hash(copied), hash()); set(kind_seen, undef); set(hash(copied), copy(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); set(kind_seen, copy(hash(copied)).pick_keys("kind").sorted_values().first()); if(is_nonempty(copy(hash(copied)))); return(hash("kind_seen", kind_seen, "meta", copy(hash(copied)), "meta_key_count", count_keys(copy(hash(copied))))); else; return(hash("missing_kind", 1)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37308,12 +37310,12 @@ SPEC
         'fluent and structured action-edge hash_copy helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge hash_copy fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'action-edge hash_copy fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_hash_copy_value_helpers_lower_equivalently' => sub {
@@ -37321,13 +37323,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_hash_copy_value_helpers_low
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied).declare(scalar, kind_seen).set(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).set(kind_seen, hash_copy(hash(copied)).pick_keys("kind").sorted_values().first()).if(is_nonempty(hash_copy(hash(copied)))).return(hash("kind_seen", kind_seen, "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))).else.return(hash("missing_kind", 1)).endif
+LX.set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule")).set(hash(copied), hash()).set(kind_seen, undef).set(hash(copied), copy(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).set(kind_seen, copy(hash(copied)).pick_keys("kind").sorted_values().first()).if(is_nonempty(copy(hash(copied)))).return(hash("kind_seen", kind_seen, "meta", copy(hash(copied)), "meta_key_count", count_keys(copy(hash(copied))))).else.return(hash("missing_kind", 1)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule"), copied); declare(scalar, kind_seen); set(hash(copied), hash_copy(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); set(kind_seen, hash_copy(hash(copied)).pick_keys("kind").sorted_values().first()); if(is_nonempty(hash_copy(hash(copied)))); return(hash("kind_seen", kind_seen, "meta", hash_copy(hash(copied)), "meta_key_count", count_keys(hash_copy(hash(copied))))); else; return(hash("missing_kind", 1)); endif }
+LX { set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule")); set(hash(copied), hash()); set(kind_seen, undef); set(hash(copied), copy(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); set(kind_seen, copy(hash(copied)).pick_keys("kind").sorted_values().first()); if(is_nonempty(copy(hash(copied)))); return(hash("kind_seen", kind_seen, "meta", copy(hash(copied)), "meta_key_count", count_keys(copy(hash(copied))))); else; return(hash("missing_kind", 1)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37353,12 +37355,12 @@ SPEC
         'fluent and structured lifecycle hash_copy helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle hash_copy fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'lifecycle hash_copy fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_set_key_value_helpers' => sub {
@@ -37390,12 +37392,12 @@ subtest 'method_like_fluent_and_structured_action_set_key_value_helpers_lower_eq
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "source", "rule"), normalized).declare(scalar, has_stage, chosen_stage).set(hash(normalized), set_key(merge_hash(hash(meta), coalesce(retv["meta"], hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(entry_text(), "normalized"))))).set(has_stage, has_key(hash(normalized), "stage")).set(chosen_stage, normalized["stage"]).if(has_stage).return(hash("stage", chosen_stage, "meta_key_count", count_keys(hash(normalized)))).else.return(hash("missing_stage", 1)).endif
+ /a/ -> Top .set(hash(meta), hash("kind", "NODE", "source", "rule")).set(hash(normalized), hash()).set(has_stage, undef).set(chosen_stage, undef).set(hash(normalized), set_key(merge_hash(hash(meta), coalesce(retv["meta"], hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(entry_text(), "normalized"))))).set(has_stage, has_key(hash(normalized), "stage")).set(chosen_stage, normalized["stage"]).if(has_stage).return(hash("stage", chosen_stage, "meta_key_count", count_keys(hash(normalized)))).else.return(hash("missing_stage", 1)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule"), normalized); declare(scalar, has_stage, chosen_stage); set(hash(normalized), set_key(merge_hash(hash(meta), coalesce(retv["meta"], hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(entry_text(), "normalized"))))); set(has_stage, has_key(hash(normalized), "stage")); set(chosen_stage, normalized["stage"]); if(has_stage); return(hash("stage", chosen_stage, "meta_key_count", count_keys(hash(normalized)))); else; return(hash("missing_stage", 1)); endif }
+ /a/ -> Top { set(hash(meta), hash("kind", "NODE", "source", "rule")); set(hash(normalized), hash()); set(has_stage, undef); set(chosen_stage, undef); set(hash(normalized), set_key(merge_hash(hash(meta), coalesce(retv["meta"], hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(entry_text(), "normalized"))))); set(has_stage, has_key(hash(normalized), "stage")); set(chosen_stage, normalized["stage"]); if(has_stage); return(hash("stage", chosen_stage, "meta_key_count", count_keys(hash(normalized)))); else; return(hash("missing_stage", 1)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37420,12 +37422,12 @@ SPEC
         'fluent and structured action-edge set_key helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge set_key fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'action-edge set_key fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_set_key_value_helpers_lower_equivalently' => sub {
@@ -37433,13 +37435,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_set_key_value_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "source", "rule"), normalized).declare(scalar, has_stage, chosen_stage).set(hash(normalized), set_key(merge_hash(hash(meta), coalesce(retv["meta"], hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(entry_text(), "normalized"))))).set(has_stage, has_key(hash(normalized), "stage")).set(chosen_stage, normalized["stage"]).if(has_stage).return(hash("stage", chosen_stage, "meta_key_count", count_keys(hash(normalized)))).else.return(hash("missing_stage", 1)).endif
+LX.set(hash(meta), hash("kind", "NODE", "source", "rule")).set(hash(normalized), hash()).set(has_stage, undef).set(chosen_stage, undef).set(hash(normalized), set_key(merge_hash(hash(meta), coalesce(retv["meta"], hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(entry_text(), "normalized"))))).set(has_stage, has_key(hash(normalized), "stage")).set(chosen_stage, normalized["stage"]).if(has_stage).return(hash("stage", chosen_stage, "meta_key_count", count_keys(hash(normalized)))).else.return(hash("missing_stage", 1)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "source", "rule"), normalized); declare(scalar, has_stage, chosen_stage); set(hash(normalized), set_key(merge_hash(hash(meta), coalesce(retv["meta"], hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(entry_text(), "normalized"))))); set(has_stage, has_key(hash(normalized), "stage")); set(chosen_stage, normalized["stage"]); if(has_stage); return(hash("stage", chosen_stage, "meta_key_count", count_keys(hash(normalized)))); else; return(hash("missing_stage", 1)); endif }
+LX { set(hash(meta), hash("kind", "NODE", "source", "rule")); set(hash(normalized), hash()); set(has_stage, undef); set(chosen_stage, undef); set(hash(normalized), set_key(merge_hash(hash(meta), coalesce(retv["meta"], hash("owner", "fallback"))), "stage", uppercase(trim(coalesce(entry_text(), "normalized"))))); set(has_stage, has_key(hash(normalized), "stage")); set(chosen_stage, normalized["stage"]); if(has_stage); return(hash("stage", chosen_stage, "meta_key_count", count_keys(hash(normalized)))); else; return(hash("missing_stage", 1)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37465,12 +37467,12 @@ SPEC
         'fluent and structured lifecycle set_key helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle set_key fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'lifecycle set_key fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_rename_key_value_helpers' => sub {
@@ -37502,12 +37504,12 @@ subtest 'method_like_fluent_and_structured_action_rename_key_value_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "old_stage", "draft", "source", "rule"), normalized).declare(scalar, has_stage, chosen_stage).set(hash(normalized), rename_key(set_key(hash(meta), "owner", rule_name), "old_stage", "stage")).set(has_stage, has_key(hash(normalized), "stage")).set(chosen_stage, normalized["stage"]).if(has_stage).return(hash("stage", chosen_stage, "meta_key_count", count_keys(hash(normalized)))).else.return(hash("missing_stage", 1)).endif
+ /a/ -> Top .set(hash(meta), hash("kind", "NODE", "old_stage", "draft", "source", "rule")).set(hash(normalized), hash()).set(has_stage, undef).set(chosen_stage, undef).set(hash(normalized), rename_key(set_key(hash(meta), "owner", rule_name), "old_stage", "stage")).set(has_stage, has_key(hash(normalized), "stage")).set(chosen_stage, normalized["stage"]).if(has_stage).return(hash("stage", chosen_stage, "meta_key_count", count_keys(hash(normalized)))).else.return(hash("missing_stage", 1)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "old_stage", "draft", "source", "rule"), normalized); declare(scalar, has_stage, chosen_stage); set(hash(normalized), rename_key(set_key(hash(meta), "owner", rule_name), "old_stage", "stage")); set(has_stage, has_key(hash(normalized), "stage")); set(chosen_stage, normalized["stage"]); if(has_stage); return(hash("stage", chosen_stage, "meta_key_count", count_keys(hash(normalized)))); else; return(hash("missing_stage", 1)); endif }
+ /a/ -> Top { set(hash(meta), hash("kind", "NODE", "old_stage", "draft", "source", "rule")); set(hash(normalized), hash()); set(has_stage, undef); set(chosen_stage, undef); set(hash(normalized), rename_key(set_key(hash(meta), "owner", rule_name), "old_stage", "stage")); set(has_stage, has_key(hash(normalized), "stage")); set(chosen_stage, normalized["stage"]); if(has_stage); return(hash("stage", chosen_stage, "meta_key_count", count_keys(hash(normalized)))); else; return(hash("missing_stage", 1)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37532,12 +37534,12 @@ SPEC
         'fluent and structured action-edge rename_key helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge rename_key fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'action-edge rename_key fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_rename_key_value_helpers_lower_equivalently' => sub {
@@ -37545,13 +37547,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_rename_key_value_helpers_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "old_stage", "draft", "source", "rule"), normalized).declare(scalar, has_stage, chosen_stage).set(hash(normalized), rename_key(set_key(hash(meta), "owner", rule_name), "old_stage", "stage")).set(has_stage, has_key(hash(normalized), "stage")).set(chosen_stage, normalized["stage"]).if(has_stage).return(hash("stage", chosen_stage, "meta_key_count", count_keys(hash(normalized)))).else.return(hash("missing_stage", 1)).endif
+LX.set(hash(meta), hash("kind", "NODE", "old_stage", "draft", "source", "rule")).set(hash(normalized), hash()).set(has_stage, undef).set(chosen_stage, undef).set(hash(normalized), rename_key(set_key(hash(meta), "owner", rule_name), "old_stage", "stage")).set(has_stage, has_key(hash(normalized), "stage")).set(chosen_stage, normalized["stage"]).if(has_stage).return(hash("stage", chosen_stage, "meta_key_count", count_keys(hash(normalized)))).else.return(hash("missing_stage", 1)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "old_stage", "draft", "source", "rule"), normalized); declare(scalar, has_stage, chosen_stage); set(hash(normalized), rename_key(set_key(hash(meta), "owner", rule_name), "old_stage", "stage")); set(has_stage, has_key(hash(normalized), "stage")); set(chosen_stage, normalized["stage"]); if(has_stage); return(hash("stage", chosen_stage, "meta_key_count", count_keys(hash(normalized)))); else; return(hash("missing_stage", 1)); endif }
+LX { set(hash(meta), hash("kind", "NODE", "old_stage", "draft", "source", "rule")); set(hash(normalized), hash()); set(has_stage, undef); set(chosen_stage, undef); set(hash(normalized), rename_key(set_key(hash(meta), "owner", rule_name), "old_stage", "stage")); set(has_stage, has_key(hash(normalized), "stage")); set(chosen_stage, normalized["stage"]); if(has_stage); return(hash("stage", chosen_stage, "meta_key_count", count_keys(hash(normalized)))); else; return(hash("missing_stage", 1)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37577,12 +37579,12 @@ SPEC
         'fluent and structured lifecycle rename_key helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle rename_key fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'lifecycle rename_key fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_drop_keys_value_helpers' => sub {
@@ -37614,12 +37616,12 @@ subtest 'method_like_fluent_and_structured_action_drop_keys_value_helpers_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")).declare(hash, cleaned).declare(scalar, has_kind).set(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "debug")).set(has_kind, has_key(hash(cleaned), "kind")).if(has_kind).return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))).else.return(hash("missing_kind", 1)).endif
+ /a/ -> Top .set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule")).set(hash(cleaned), hash()).set(has_kind, undef).set(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "debug")).set(has_kind, has_key(hash(cleaned), "kind")).if(has_kind).return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))).else.return(hash("missing_kind", 1)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")); declare(hash, cleaned); declare(scalar, has_kind); set(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "debug")); set(has_kind, has_key(hash(cleaned), "kind")); if(has_kind); return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))); else; return(hash("missing_kind", 1)); endif }
+ /a/ -> Top { set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule")); set(hash(cleaned), hash()); set(has_kind, undef); set(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "debug")); set(has_kind, has_key(hash(cleaned), "kind")); if(has_kind); return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))); else; return(hash("missing_kind", 1)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37644,12 +37646,12 @@ SPEC
         'fluent and structured action-edge drop_keys helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge drop_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'action-edge drop_keys fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_drop_keys_value_helpers_lower_equivalently' => sub {
@@ -37657,13 +37659,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_drop_keys_value_helpers_low
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")).declare(hash, cleaned).declare(scalar, has_kind).set(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "debug")).set(has_kind, has_key(hash(cleaned), "kind")).if(has_kind).return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))).else.return(hash("missing_kind", 1)).endif
+LX.set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule")).set(hash(cleaned), hash()).set(has_kind, undef).set(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "debug")).set(has_kind, has_key(hash(cleaned), "kind")).if(has_kind).return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))).else.return(hash("missing_kind", 1)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule")); declare(hash, cleaned); declare(scalar, has_kind); set(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "debug")); set(has_kind, has_key(hash(cleaned), "kind")); if(has_kind); return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))); else; return(hash("missing_kind", 1)); endif }
+LX { set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule")); set(hash(cleaned), hash()); set(has_kind, undef); set(hash(cleaned), drop_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "debug")); set(has_kind, has_key(hash(cleaned), "kind")); if(has_kind); return(merge_hash(hash(cleaned), hash("meta_key_count", count_keys(hash(cleaned))))); else; return(hash("missing_kind", 1)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37689,12 +37691,12 @@ SPEC
         'fluent and structured lifecycle drop_keys helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle drop_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'lifecycle drop_keys fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_pick_keys_value_helpers' => sub {
@@ -37726,12 +37728,12 @@ subtest 'method_like_fluent_and_structured_action_pick_keys_value_helpers_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(hash, projected).declare(scalar, has_kind).set(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage")).set(has_kind, has_key(hash(projected), "kind")).if(has_kind).return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))).else.return(hash("missing_kind", 1)).endif
+ /a/ -> Top .set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).set(hash(projected), hash()).set(has_kind, undef).set(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage")).set(has_kind, has_key(hash(projected), "kind")).if(has_kind).return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))).else.return(hash("missing_kind", 1)).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(hash, projected); declare(scalar, has_kind); set(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage")); set(has_kind, has_key(hash(projected), "kind")); if(has_kind); return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))); else; return(hash("missing_kind", 1)); endif }
+ /a/ -> Top { set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); set(hash(projected), hash()); set(has_kind, undef); set(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage")); set(has_kind, has_key(hash(projected), "kind")); if(has_kind); return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))); else; return(hash("missing_kind", 1)); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37756,12 +37758,12 @@ SPEC
         'fluent and structured action-edge pick_keys helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge pick_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'action-edge pick_keys fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_pick_keys_value_helpers_lower_equivalently' => sub {
@@ -37769,13 +37771,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_pick_keys_value_helpers_low
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(hash, projected).declare(scalar, has_kind).set(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage")).set(has_kind, has_key(hash(projected), "kind")).if(has_kind).return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))).else.return(hash("missing_kind", 1)).endif
+LX.set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).set(hash(projected), hash()).set(has_kind, undef).set(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage")).set(has_kind, has_key(hash(projected), "kind")).if(has_kind).return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))).else.return(hash("missing_kind", 1)).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(hash, projected); declare(scalar, has_kind); set(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage")); set(has_kind, has_key(hash(projected), "kind")); if(has_kind); return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))); else; return(hash("missing_kind", 1)); endif }
+LX { set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); set(hash(projected), hash()); set(has_kind, undef); set(hash(projected), pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage")); set(has_kind, has_key(hash(projected), "kind")); if(has_kind); return(merge_hash(hash(projected), hash("meta_key_count", count_keys(hash(projected))))); else; return(hash("missing_kind", 1)); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37801,12 +37803,12 @@ SPEC
         'fluent and structured lifecycle pick_keys helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle pick_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'lifecycle pick_keys fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_sorted_keys_value_helpers' => sub {
@@ -37838,12 +37840,12 @@ subtest 'method_like_fluent_and_structured_action_sorted_keys_value_helpers_lowe
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(array, projected_keys).declare(scalar, key_count).set(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).set(key_count, count(array(projected_keys))).if(num_gt(key_count, 0)).return(hash("key_count", key_count, "keys", array_copy(array(projected_keys)))).else.return(hash("key_count", 0, "keys", array())).endif
+ /a/ -> Top .set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).set(array(projected_keys), array()).set(key_count, undef).set(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).set(key_count, count(array(projected_keys))).if(num_gt(key_count, 0)).return(hash("key_count", key_count, "keys", copy(array(projected_keys)))).else.return(hash("key_count", 0, "keys", array())).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_keys); declare(scalar, key_count); set(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); set(key_count, count(array(projected_keys))); if(num_gt(key_count, 0)); return(hash("key_count", key_count, "keys", array_copy(array(projected_keys)))); else; return(hash("key_count", 0, "keys", array())); endif }
+ /a/ -> Top { set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); set(array(projected_keys), array()); set(key_count, undef); set(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); set(key_count, count(array(projected_keys))); if(num_gt(key_count, 0)); return(hash("key_count", key_count, "keys", copy(array(projected_keys)))); else; return(hash("key_count", 0, "keys", array())); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37868,12 +37870,12 @@ SPEC
         'fluent and structured action-edge sorted_keys helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge sorted_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'action-edge sorted_keys fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_sorted_keys_value_helpers_lower_equivalently' => sub {
@@ -37881,13 +37883,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_sorted_keys_value_helpers_l
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(array, projected_keys).declare(scalar, key_count).set(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).set(key_count, count(array(projected_keys))).if(num_gt(key_count, 0)).return(hash("key_count", key_count, "keys", array_copy(array(projected_keys)))).else.return(hash("key_count", 0, "keys", array())).endif
+LX.set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).set(array(projected_keys), array()).set(key_count, undef).set(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).set(key_count, count(array(projected_keys))).if(num_gt(key_count, 0)).return(hash("key_count", key_count, "keys", copy(array(projected_keys)))).else.return(hash("key_count", 0, "keys", array())).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_keys); declare(scalar, key_count); set(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); set(key_count, count(array(projected_keys))); if(num_gt(key_count, 0)); return(hash("key_count", key_count, "keys", array_copy(array(projected_keys)))); else; return(hash("key_count", 0, "keys", array())); endif }
+LX { set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); set(array(projected_keys), array()); set(key_count, undef); set(array(projected_keys), sorted_keys(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); set(key_count, count(array(projected_keys))); if(num_gt(key_count, 0)); return(hash("key_count", key_count, "keys", copy(array(projected_keys)))); else; return(hash("key_count", 0, "keys", array())); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -37913,12 +37915,12 @@ SPEC
         'fluent and structured lifecycle sorted_keys helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle sorted_keys fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'lifecycle sorted_keys fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_sorted_values_value_helpers' => sub {
@@ -37950,12 +37952,12 @@ subtest 'method_like_fluent_and_structured_action_sorted_values_value_helpers_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(array, projected_values).declare(scalar, value_count).set(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).set(value_count, count(array(projected_values))).if(num_gt(value_count, 0)).return(hash("value_count", value_count, "values", array_copy(array(projected_values)))).else.return(hash("value_count", 0, "values", array())).endif
+ /a/ -> Top .set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).set(array(projected_values), array()).set(value_count, undef).set(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).set(value_count, count(array(projected_values))).if(num_gt(value_count, 0)).return(hash("value_count", value_count, "values", copy(array(projected_values)))).else.return(hash("value_count", 0, "values", array())).endif
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_values); declare(scalar, value_count); set(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); set(value_count, count(array(projected_values))); if(num_gt(value_count, 0)); return(hash("value_count", value_count, "values", array_copy(array(projected_values)))); else; return(hash("value_count", 0, "values", array())); endif }
+ /a/ -> Top { set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); set(array(projected_values), array()); set(value_count, undef); set(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); set(value_count, count(array(projected_values))); if(num_gt(value_count, 0)); return(hash("value_count", value_count, "values", copy(array(projected_values)))); else; return(hash("value_count", 0, "values", array())); endif }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -37980,12 +37982,12 @@ SPEC
         'fluent and structured action-edge sorted_values helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge sorted_values fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'action-edge sorted_values fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_sorted_values_value_helpers_lower_equivalently' => sub {
@@ -37993,13 +37995,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_sorted_values_value_helpers
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).declare(array, projected_values).declare(scalar, value_count).set(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).set(value_count, count(array(projected_values))).if(num_gt(value_count, 0)).return(hash("value_count", value_count, "values", array_copy(array(projected_values)))).else.return(hash("value_count", 0, "values", array())).endif
+LX.set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")).set(array(projected_values), array()).set(value_count, undef).set(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))).set(value_count, count(array(projected_values))).if(num_gt(value_count, 0)).return(hash("value_count", value_count, "values", copy(array(projected_values)))).else.return(hash("value_count", 0, "values", array())).endif
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(hash, meta=hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); declare(array, projected_values); declare(scalar, value_count); set(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); set(value_count, count(array(projected_values))); if(num_gt(value_count, 0)); return(hash("value_count", value_count, "values", array_copy(array(projected_values)))); else; return(hash("value_count", 0, "values", array())); endif }
+LX { set(hash(meta), hash("kind", "NODE", "debug", 1, "source", "rule", "noise", "x")); set(array(projected_values), array()); set(value_count, undef); set(array(projected_values), sorted_values(pick_keys(merge_hash(hash(meta), coalesce(retv["meta"], hash("stage", "normalized"))), "kind", "source", "stage"))); set(value_count, count(array(projected_values))); if(num_gt(value_count, 0)); return(hash("value_count", value_count, "values", copy(array(projected_values)))); else; return(hash("value_count", 0, "values", array())); endif }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -38025,12 +38027,12 @@ SPEC
         'fluent and structured lifecycle sorted_values helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle sorted_values fluent form preserves DECLARE/ASSIGN/IF/ELSE/RETURN coverage'
+        'lifecycle sorted_values fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_concat_arrays_value_helpers' => sub {
@@ -38052,9 +38054,9 @@ subtest 'emit_context_lowers_concat_arrays_value_helpers' => sub {
         'concat_arrays(...) lowers inside general return payloads'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'declare(array, combined=concat_arrays(array(parts), sorted_keys(hash(meta)), ["tail"]))'),
-        q{my @combined = (@parts, do { my $__ls_concat_arrays = [sort keys %meta]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["tail"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () })},
-        'declare(array, name=concat_arrays(...)) lowers into list-context array initialization'
+        LinkedSpec::call_spec_handler_subst('Top', 'set(array(combined), concat_arrays(array(parts), sorted_keys(hash(meta)), ["tail"]))'),
+        q{@combined = (@parts, do { my $__ls_concat_arrays = [sort keys %meta]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = ["tail"]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () })},
+        'set(array(name), concat_arrays(...)) lowers into list-context array initialization'
     );
 };
 subtest 'method_like_fluent_and_structured_action_concat_arrays_value_helpers_lower_equivalently' => sub {
@@ -38062,12 +38064,12 @@ subtest 'method_like_fluent_and_structured_action_concat_arrays_value_helpers_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, parts=array("left", "right"), combined=concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["tail"])).declare(scalar, combined_count, first_item).set(combined_count, count(array(combined))).set(first_item, array(combined).first()).return(hash("combined", array_copy(array(combined)), "combined_count", combined_count, "first_item", first_item))
+ /a/ -> Top .set(array(parts), array("left", "right")).set(array(combined), concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["tail"])).set(combined_count, undef).set(first_item, undef).set(combined_count, count(array(combined))).set(first_item, array(combined).first()).return(hash("combined", copy(array(combined)), "combined_count", combined_count, "first_item", first_item))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, parts=array("left", "right"), combined=concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["tail"])); declare(scalar, combined_count, first_item); set(combined_count, count(array(combined))); set(first_item, array(combined).first()); return(hash("combined", array_copy(array(combined)), "combined_count", combined_count, "first_item", first_item)) }
+ /a/ -> Top { set(array(parts), array("left", "right")); set(array(combined), concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["tail"])); set(combined_count, undef); set(first_item, undef); set(combined_count, count(array(combined))); set(first_item, array(combined).first()); return(hash("combined", copy(array(combined)), "combined_count", combined_count, "first_item", first_item)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -38092,10 +38094,10 @@ SPEC
         'fluent and structured action-edge concat_arrays helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge concat_arrays fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge concat_arrays fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_concat_arrays_value_helpers_lower_equivalently' => sub {
@@ -38103,13 +38105,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_concat_arrays_value_helpers
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, parts=array("left", "right"), combined=concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["tail"])).declare(scalar, combined_count, first_item).set(combined_count, count(array(combined))).set(first_item, array(combined).first()).return(hash("combined", array_copy(array(combined)), "combined_count", combined_count, "first_item", first_item))
+LX.set(array(parts), array("left", "right")).set(array(combined), concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["tail"])).set(combined_count, undef).set(first_item, undef).set(combined_count, count(array(combined))).set(first_item, array(combined).first()).return(hash("combined", copy(array(combined)), "combined_count", combined_count, "first_item", first_item))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, parts=array("left", "right"), combined=concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["tail"])); declare(scalar, combined_count, first_item); set(combined_count, count(array(combined))); set(first_item, array(combined).first()); return(hash("combined", array_copy(array(combined)), "combined_count", combined_count, "first_item", first_item)) }
+LX { set(array(parts), array("left", "right")); set(array(combined), concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["tail"])); set(combined_count, undef); set(first_item, undef); set(combined_count, count(array(combined))); set(first_item, array(combined).first()); return(hash("combined", copy(array(combined)), "combined_count", combined_count, "first_item", first_item)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -38135,10 +38137,10 @@ SPEC
         'fluent and structured lifecycle concat_arrays helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle concat_arrays fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle concat_arrays fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_sorted_array_value_helpers' => sub {
@@ -38170,12 +38172,12 @@ subtest 'method_like_fluent_and_structured_action_sorted_array_value_helpers_low
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, parts=array("beta", "alpha", "gamma"), ordered).declare(scalar, first_item, ordered_count, joined).set(array(ordered), sorted(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["delta"]))).set(first_item, array(ordered).first()).set(ordered_count, count(array(ordered))).set(joined, join_values("|", array(ordered))).return(hash("ordered", array_copy(array(ordered)), "first_item", first_item, "ordered_count", ordered_count, "joined", joined))
+ /a/ -> Top .set(array(parts), array("beta", "alpha", "gamma")).set(array(ordered), array()).set(first_item, undef).set(ordered_count, undef).set(joined, undef).set(array(ordered), sorted(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["delta"]))).set(first_item, array(ordered).first()).set(ordered_count, count(array(ordered))).set(joined, join_values("|", array(ordered))).return(hash("ordered", copy(array(ordered)), "first_item", first_item, "ordered_count", ordered_count, "joined", joined))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, parts=array("beta", "alpha", "gamma"), ordered); declare(scalar, first_item, ordered_count, joined); set(array(ordered), sorted(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["delta"]))); set(first_item, array(ordered).first()); set(ordered_count, count(array(ordered))); set(joined, join_values("|", array(ordered))); return(hash("ordered", array_copy(array(ordered)), "first_item", first_item, "ordered_count", ordered_count, "joined", joined)) }
+ /a/ -> Top { set(array(parts), array("beta", "alpha", "gamma")); set(array(ordered), array()); set(first_item, undef); set(ordered_count, undef); set(joined, undef); set(array(ordered), sorted(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["delta"]))); set(first_item, array(ordered).first()); set(ordered_count, count(array(ordered))); set(joined, join_values("|", array(ordered))); return(hash("ordered", copy(array(ordered)), "first_item", first_item, "ordered_count", ordered_count, "joined", joined)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -38200,10 +38202,10 @@ SPEC
         'fluent and structured action-edge sorted array helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge sorted array fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge sorted array fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_sorted_array_value_helpers_lower_equivalently' => sub {
@@ -38211,13 +38213,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_sorted_array_value_helpers_
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, parts=array("beta", "alpha", "gamma"), ordered).declare(scalar, first_item, ordered_count, joined).set(array(ordered), sorted(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["delta"]))).set(first_item, array(ordered).first()).set(ordered_count, count(array(ordered))).set(joined, join_values("|", array(ordered))).return(hash("ordered", array_copy(array(ordered)), "first_item", first_item, "ordered_count", ordered_count, "joined", joined))
+LX.set(array(parts), array("beta", "alpha", "gamma")).set(array(ordered), array()).set(first_item, undef).set(ordered_count, undef).set(joined, undef).set(array(ordered), sorted(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["delta"]))).set(first_item, array(ordered).first()).set(ordered_count, count(array(ordered))).set(joined, join_values("|", array(ordered))).return(hash("ordered", copy(array(ordered)), "first_item", first_item, "ordered_count", ordered_count, "joined", joined))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, parts=array("beta", "alpha", "gamma"), ordered); declare(scalar, first_item, ordered_count, joined); set(array(ordered), sorted(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["delta"]))); set(first_item, array(ordered).first()); set(ordered_count, count(array(ordered))); set(joined, join_values("|", array(ordered))); return(hash("ordered", array_copy(array(ordered)), "first_item", first_item, "ordered_count", ordered_count, "joined", joined)) }
+LX { set(array(parts), array("beta", "alpha", "gamma")); set(array(ordered), array()); set(first_item, undef); set(ordered_count, undef); set(joined, undef); set(array(ordered), sorted(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["delta"]))); set(first_item, array(ordered).first()); set(ordered_count, count(array(ordered))); set(joined, join_values("|", array(ordered))); return(hash("ordered", copy(array(ordered)), "first_item", first_item, "ordered_count", ordered_count, "joined", joined)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -38243,10 +38245,10 @@ SPEC
         'fluent and structured lifecycle sorted array helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle sorted array fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle sorted array fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_reversed_array_value_helpers' => sub {
@@ -38278,12 +38280,12 @@ subtest 'method_like_fluent_and_structured_action_reversed_array_value_helpers_l
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, parts=array("alpha", "beta", "gamma"), reversed_parts).declare(scalar, first_item, reversed_count, joined).set(array(reversed_parts), reversed(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["tail"]))).set(first_item, array(reversed_parts).first()).set(reversed_count, count(array(reversed_parts))).set(joined, join_values("|", array(reversed_parts))).return(hash("reversed_parts", array_copy(array(reversed_parts)), "first_item", first_item, "reversed_count", reversed_count, "joined", joined))
+ /a/ -> Top .set(array(parts), array("alpha", "beta", "gamma")).set(array(reversed_parts), array()).set(first_item, undef).set(reversed_count, undef).set(joined, undef).set(array(reversed_parts), reversed(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["tail"]))).set(first_item, array(reversed_parts).first()).set(reversed_count, count(array(reversed_parts))).set(joined, join_values("|", array(reversed_parts))).return(hash("reversed_parts", copy(array(reversed_parts)), "first_item", first_item, "reversed_count", reversed_count, "joined", joined))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, parts=array("alpha", "beta", "gamma"), reversed_parts); declare(scalar, first_item, reversed_count, joined); set(array(reversed_parts), reversed(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["tail"]))); set(first_item, array(reversed_parts).first()); set(reversed_count, count(array(reversed_parts))); set(joined, join_values("|", array(reversed_parts))); return(hash("reversed_parts", array_copy(array(reversed_parts)), "first_item", first_item, "reversed_count", reversed_count, "joined", joined)) }
+ /a/ -> Top { set(array(parts), array("alpha", "beta", "gamma")); set(array(reversed_parts), array()); set(first_item, undef); set(reversed_count, undef); set(joined, undef); set(array(reversed_parts), reversed(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["tail"]))); set(first_item, array(reversed_parts).first()); set(reversed_count, count(array(reversed_parts))); set(joined, join_values("|", array(reversed_parts))); return(hash("reversed_parts", copy(array(reversed_parts)), "first_item", first_item, "reversed_count", reversed_count, "joined", joined)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -38308,10 +38310,10 @@ SPEC
         'fluent and structured action-edge reversed array helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge reversed array fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge reversed array fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_reversed_array_value_helpers_lower_equivalently' => sub {
@@ -38319,13 +38321,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_reversed_array_value_helper
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, parts=array("alpha", "beta", "gamma"), reversed_parts).declare(scalar, first_item, reversed_count, joined).set(array(reversed_parts), reversed(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["tail"]))).set(first_item, array(reversed_parts).first()).set(reversed_count, count(array(reversed_parts))).set(joined, join_values("|", array(reversed_parts))).return(hash("reversed_parts", array_copy(array(reversed_parts)), "first_item", first_item, "reversed_count", reversed_count, "joined", joined))
+LX.set(array(parts), array("alpha", "beta", "gamma")).set(array(reversed_parts), array()).set(first_item, undef).set(reversed_count, undef).set(joined, undef).set(array(reversed_parts), reversed(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["tail"]))).set(first_item, array(reversed_parts).first()).set(reversed_count, count(array(reversed_parts))).set(joined, join_values("|", array(reversed_parts))).return(hash("reversed_parts", copy(array(reversed_parts)), "first_item", first_item, "reversed_count", reversed_count, "joined", joined))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, parts=array("alpha", "beta", "gamma"), reversed_parts); declare(scalar, first_item, reversed_count, joined); set(array(reversed_parts), reversed(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["tail"]))); set(first_item, array(reversed_parts).first()); set(reversed_count, count(array(reversed_parts))); set(joined, join_values("|", array(reversed_parts))); return(hash("reversed_parts", array_copy(array(reversed_parts)), "first_item", first_item, "reversed_count", reversed_count, "joined", joined)) }
+LX { set(array(parts), array("alpha", "beta", "gamma")); set(array(reversed_parts), array()); set(first_item, undef); set(reversed_count, undef); set(joined, undef); set(array(reversed_parts), reversed(concat_arrays(array(parts), take(sorted_keys(hash("kind", "NODE", "source", "rule", "stage", "top")), 2), ["tail"]))); set(first_item, array(reversed_parts).first()); set(reversed_count, count(array(reversed_parts))); set(joined, join_values("|", array(reversed_parts))); return(hash("reversed_parts", copy(array(reversed_parts)), "first_item", first_item, "reversed_count", reversed_count, "joined", joined)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -38351,10 +38353,10 @@ SPEC
         'fluent and structured lifecycle reversed array helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle reversed array fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle reversed array fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_num_sum_value_helpers' => sub {
@@ -38386,12 +38388,12 @@ subtest 'method_like_fluent_and_structured_action_num_sum_value_helpers_lower_eq
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, scores=array(1, 2.5, 3), extras=array(4, 5)).declare(scalar, total, bounded_total).set(total, num_sum(take(concat_arrays(array(scores), array(extras)), 4))).set(bounded_total, num_clamp(total, 0, 20)).return(hash("total", total, "bounded_total", bounded_total))
+ /a/ -> Top .set(array(scores), array(1, 2.5, 3)).set(array(extras), array(4, 5)).set(total, undef).set(bounded_total, undef).set(total, num_sum(take(concat_arrays(array(scores), array(extras)), 4))).set(bounded_total, num_clamp(total, 0, 20)).return(hash("total", total, "bounded_total", bounded_total))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, scores=array(1, 2.5, 3), extras=array(4, 5)); declare(scalar, total, bounded_total); set(total, num_sum(take(concat_arrays(array(scores), array(extras)), 4))); set(bounded_total, num_clamp(total, 0, 20)); return(hash("total", total, "bounded_total", bounded_total)) }
+ /a/ -> Top { set(array(scores), array(1, 2.5, 3)); set(array(extras), array(4, 5)); set(total, undef); set(bounded_total, undef); set(total, num_sum(take(concat_arrays(array(scores), array(extras)), 4))); set(bounded_total, num_clamp(total, 0, 20)); return(hash("total", total, "bounded_total", bounded_total)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -38416,10 +38418,10 @@ SPEC
         'fluent and structured action-edge num_sum helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge num_sum fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge num_sum fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_num_sum_value_helpers_lower_equivalently' => sub {
@@ -38427,13 +38429,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_num_sum_value_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, scores=array(1, 2.5, 3), extras=array(4, 5)).declare(scalar, total, bounded_total).set(total, num_sum(take(concat_arrays(array(scores), array(extras)), 4))).set(bounded_total, num_clamp(total, 0, 20)).return(hash("total", total, "bounded_total", bounded_total))
+LX.set(array(scores), array(1, 2.5, 3)).set(array(extras), array(4, 5)).set(total, undef).set(bounded_total, undef).set(total, num_sum(take(concat_arrays(array(scores), array(extras)), 4))).set(bounded_total, num_clamp(total, 0, 20)).return(hash("total", total, "bounded_total", bounded_total))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, scores=array(1, 2.5, 3), extras=array(4, 5)); declare(scalar, total, bounded_total); set(total, num_sum(take(concat_arrays(array(scores), array(extras)), 4))); set(bounded_total, num_clamp(total, 0, 20)); return(hash("total", total, "bounded_total", bounded_total)) }
+LX { set(array(scores), array(1, 2.5, 3)); set(array(extras), array(4, 5)); set(total, undef); set(bounded_total, undef); set(total, num_sum(take(concat_arrays(array(scores), array(extras)), 4))); set(bounded_total, num_clamp(total, 0, 20)); return(hash("total", total, "bounded_total", bounded_total)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -38459,10 +38461,10 @@ SPEC
         'fluent and structured lifecycle num_sum helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle num_sum fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle num_sum fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_num_avg_value_helpers' => sub {
@@ -38494,12 +38496,12 @@ subtest 'method_like_fluent_and_structured_action_num_avg_value_helpers_lower_eq
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, scores=array(2, 4, 6), extras=array(8, 10)).declare(scalar, avg, rounded_avg).set(avg, num_avg(take(concat_arrays(array(scores), array(extras)), 4))).set(rounded_avg, num_round(avg)).return(hash("avg", avg, "rounded_avg", rounded_avg))
+ /a/ -> Top .set(array(scores), array(2, 4, 6)).set(array(extras), array(8, 10)).set(avg, undef).set(rounded_avg, undef).set(avg, num_avg(take(concat_arrays(array(scores), array(extras)), 4))).set(rounded_avg, num_round(avg)).return(hash("avg", avg, "rounded_avg", rounded_avg))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, scores=array(2, 4, 6), extras=array(8, 10)); declare(scalar, avg, rounded_avg); set(avg, num_avg(take(concat_arrays(array(scores), array(extras)), 4))); set(rounded_avg, num_round(avg)); return(hash("avg", avg, "rounded_avg", rounded_avg)) }
+ /a/ -> Top { set(array(scores), array(2, 4, 6)); set(array(extras), array(8, 10)); set(avg, undef); set(rounded_avg, undef); set(avg, num_avg(take(concat_arrays(array(scores), array(extras)), 4))); set(rounded_avg, num_round(avg)); return(hash("avg", avg, "rounded_avg", rounded_avg)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -38524,10 +38526,10 @@ SPEC
         'fluent and structured action-edge num_avg helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge num_avg fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge num_avg fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_num_avg_value_helpers_lower_equivalently' => sub {
@@ -38535,13 +38537,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_num_avg_value_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, scores=array(2, 4, 6), extras=array(8, 10)).declare(scalar, avg, rounded_avg).set(avg, num_avg(take(concat_arrays(array(scores), array(extras)), 4))).set(rounded_avg, num_round(avg)).return(hash("avg", avg, "rounded_avg", rounded_avg))
+LX.set(array(scores), array(2, 4, 6)).set(array(extras), array(8, 10)).set(avg, undef).set(rounded_avg, undef).set(avg, num_avg(take(concat_arrays(array(scores), array(extras)), 4))).set(rounded_avg, num_round(avg)).return(hash("avg", avg, "rounded_avg", rounded_avg))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, scores=array(2, 4, 6), extras=array(8, 10)); declare(scalar, avg, rounded_avg); set(avg, num_avg(take(concat_arrays(array(scores), array(extras)), 4))); set(rounded_avg, num_round(avg)); return(hash("avg", avg, "rounded_avg", rounded_avg)) }
+LX { set(array(scores), array(2, 4, 6)); set(array(extras), array(8, 10)); set(avg, undef); set(rounded_avg, undef); set(avg, num_avg(take(concat_arrays(array(scores), array(extras)), 4))); set(rounded_avg, num_round(avg)); return(hash("avg", avg, "rounded_avg", rounded_avg)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -38567,10 +38569,10 @@ SPEC
         'fluent and structured lifecycle num_avg helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle num_avg fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle num_avg fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_num_median_value_helpers' => sub {
@@ -38602,12 +38604,12 @@ subtest 'method_like_fluent_and_structured_action_num_median_value_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, scores=array(2, 4, 6), extras=array(8, 10)).declare(scalar, median, rounded_median).set(median, num_median(take(concat_arrays(array(scores), array(extras)), 4))).set(rounded_median, num_round(median)).return(hash("median", median, "rounded_median", rounded_median))
+ /a/ -> Top .set(array(scores), array(2, 4, 6)).set(array(extras), array(8, 10)).set(median, undef).set(rounded_median, undef).set(median, num_median(take(concat_arrays(array(scores), array(extras)), 4))).set(rounded_median, num_round(median)).return(hash("median", median, "rounded_median", rounded_median))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, scores=array(2, 4, 6), extras=array(8, 10)); declare(scalar, median, rounded_median); set(median, num_median(take(concat_arrays(array(scores), array(extras)), 4))); set(rounded_median, num_round(median)); return(hash("median", median, "rounded_median", rounded_median)) }
+ /a/ -> Top { set(array(scores), array(2, 4, 6)); set(array(extras), array(8, 10)); set(median, undef); set(rounded_median, undef); set(median, num_median(take(concat_arrays(array(scores), array(extras)), 4))); set(rounded_median, num_round(median)); return(hash("median", median, "rounded_median", rounded_median)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -38632,10 +38634,10 @@ SPEC
         'fluent and structured action-edge num_median helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge num_median fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge num_median fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_num_median_value_helpers_lower_equivalently' => sub {
@@ -38643,13 +38645,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_num_median_value_helpers_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, scores=array(2, 4, 6), extras=array(8, 10)).declare(scalar, median, rounded_median).set(median, num_median(take(concat_arrays(array(scores), array(extras)), 4))).set(rounded_median, num_round(median)).return(hash("median", median, "rounded_median", rounded_median))
+LX.set(array(scores), array(2, 4, 6)).set(array(extras), array(8, 10)).set(median, undef).set(rounded_median, undef).set(median, num_median(take(concat_arrays(array(scores), array(extras)), 4))).set(rounded_median, num_round(median)).return(hash("median", median, "rounded_median", rounded_median))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, scores=array(2, 4, 6), extras=array(8, 10)); declare(scalar, median, rounded_median); set(median, num_median(take(concat_arrays(array(scores), array(extras)), 4))); set(rounded_median, num_round(median)); return(hash("median", median, "rounded_median", rounded_median)) }
+LX { set(array(scores), array(2, 4, 6)); set(array(extras), array(8, 10)); set(median, undef); set(rounded_median, undef); set(median, num_median(take(concat_arrays(array(scores), array(extras)), 4))); set(rounded_median, num_round(median)); return(hash("median", median, "rounded_median", rounded_median)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -38675,10 +38677,10 @@ SPEC
         'fluent and structured lifecycle num_median helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle num_median fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle num_median fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_num_range_value_helpers' => sub {
@@ -38710,12 +38712,12 @@ subtest 'method_like_fluent_and_structured_action_num_range_value_helpers_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, scores=array(9, 2, 6), extras=array(4, 10)).declare(scalar, span).set(span, num_range(take(concat_arrays(array(scores), array(extras)), 4))).return(hash("span", span))
+ /a/ -> Top .set(array(scores), array(9, 2, 6)).set(array(extras), array(4, 10)).set(span, undef).set(span, num_range(take(concat_arrays(array(scores), array(extras)), 4))).return(hash("span", span))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, scores=array(9, 2, 6), extras=array(4, 10)); declare(scalar, span); set(span, num_range(take(concat_arrays(array(scores), array(extras)), 4))); return(hash("span", span)) }
+ /a/ -> Top { set(array(scores), array(9, 2, 6)); set(array(extras), array(4, 10)); set(span, undef); set(span, num_range(take(concat_arrays(array(scores), array(extras)), 4))); return(hash("span", span)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -38740,10 +38742,10 @@ SPEC
         'fluent and structured action-edge num_range helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge num_range fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge num_range fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_num_range_value_helpers_lower_equivalently' => sub {
@@ -38751,13 +38753,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_num_range_value_helpers_low
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, scores=array(9, 2, 6), extras=array(4, 10)).declare(scalar, span).set(span, num_range(take(concat_arrays(array(scores), array(extras)), 4))).return(hash("span", span))
+LX.set(array(scores), array(9, 2, 6)).set(array(extras), array(4, 10)).set(span, undef).set(span, num_range(take(concat_arrays(array(scores), array(extras)), 4))).return(hash("span", span))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, scores=array(9, 2, 6), extras=array(4, 10)); declare(scalar, span); set(span, num_range(take(concat_arrays(array(scores), array(extras)), 4))); return(hash("span", span)) }
+LX { set(array(scores), array(9, 2, 6)); set(array(extras), array(4, 10)); set(span, undef); set(span, num_range(take(concat_arrays(array(scores), array(extras)), 4))); return(hash("span", span)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -38783,10 +38785,10 @@ SPEC
         'fluent and structured lifecycle num_range helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle num_range fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle num_range fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_num_minmax_array_reducer_helpers' => sub {
@@ -38828,12 +38830,12 @@ subtest 'method_like_fluent_and_structured_action_num_minmax_array_reducer_helpe
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, scores=array(9, 2, 6), extras=array(4, 10)).declare(scalar, lowest, highest).set(lowest, num_min(take(concat_arrays(array(scores), array(extras)), 4))).set(highest, num_max(take(concat_arrays(array(scores), array(extras)), 4))).return(hash("lowest", lowest, "highest", highest))
+ /a/ -> Top .set(array(scores), array(9, 2, 6)).set(array(extras), array(4, 10)).set(lowest, undef).set(highest, undef).set(lowest, num_min(take(concat_arrays(array(scores), array(extras)), 4))).set(highest, num_max(take(concat_arrays(array(scores), array(extras)), 4))).return(hash("lowest", lowest, "highest", highest))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, scores=array(9, 2, 6), extras=array(4, 10)); declare(scalar, lowest, highest); set(lowest, num_min(take(concat_arrays(array(scores), array(extras)), 4))); set(highest, num_max(take(concat_arrays(array(scores), array(extras)), 4))); return(hash("lowest", lowest, "highest", highest)) }
+ /a/ -> Top { set(array(scores), array(9, 2, 6)); set(array(extras), array(4, 10)); set(lowest, undef); set(highest, undef); set(lowest, num_min(take(concat_arrays(array(scores), array(extras)), 4))); set(highest, num_max(take(concat_arrays(array(scores), array(extras)), 4))); return(hash("lowest", lowest, "highest", highest)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -38858,10 +38860,10 @@ SPEC
         'fluent and structured action-edge unary-array num_min/max helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge unary-array num_min/max fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge unary-array num_min/max fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_num_minmax_array_reducer_helpers_lower_equivalently' => sub {
@@ -38869,13 +38871,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_num_minmax_array_reducer_he
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, scores=array(9, 2, 6), extras=array(4, 10)).declare(scalar, lowest, highest).set(lowest, num_min(take(concat_arrays(array(scores), array(extras)), 4))).set(highest, num_max(take(concat_arrays(array(scores), array(extras)), 4))).return(hash("lowest", lowest, "highest", highest))
+LX.set(array(scores), array(9, 2, 6)).set(array(extras), array(4, 10)).set(lowest, undef).set(highest, undef).set(lowest, num_min(take(concat_arrays(array(scores), array(extras)), 4))).set(highest, num_max(take(concat_arrays(array(scores), array(extras)), 4))).return(hash("lowest", lowest, "highest", highest))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, scores=array(9, 2, 6), extras=array(4, 10)); declare(scalar, lowest, highest); set(lowest, num_min(take(concat_arrays(array(scores), array(extras)), 4))); set(highest, num_max(take(concat_arrays(array(scores), array(extras)), 4))); return(hash("lowest", lowest, "highest", highest)) }
+LX { set(array(scores), array(9, 2, 6)); set(array(extras), array(4, 10)); set(lowest, undef); set(highest, undef); set(lowest, num_min(take(concat_arrays(array(scores), array(extras)), 4))); set(highest, num_max(take(concat_arrays(array(scores), array(extras)), 4))); return(hash("lowest", lowest, "highest", highest)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -38901,10 +38903,10 @@ SPEC
         'fluent and structured lifecycle unary-array num_min/max helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle unary-array num_min/max fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle unary-array num_min/max fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_flat_list_value_helpers' => sub {
@@ -38951,7 +38953,7 @@ subtest 'emit_context_lowers_flat_list_value_helpers' => sub {
         'flat_array(...) flattens match_groups() inside general return payloads instead of leaving a runtime helper call'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat_hash(hash_copy(hash(meta))), "kind", "node"))'),
+        LinkedSpec::call_spec_handler_subst('Top', 'return(hash(flat_hash(copy(hash(meta))), "kind", "node"))'),
         'return {do { my $__ls_flat_hash = {%meta}; (defined($__ls_flat_hash) && ref($__ls_flat_hash) eq \'HASH\') ? %{$__ls_flat_hash} : () }, "kind" => "node"}',
         'flat_hash(...) now flattens composed hash-valued helper expressions into surrounding hash constructors'
     );
@@ -39005,7 +39007,7 @@ subtest 'emit_context_lowers_composable_array_string_method_contracts' => sub {
     );
 
     my $spec_content = <<'SPEC';
-Top:: I.declare(array, parts).declare(scalar, args).set(args, CAPTURE).split(array(parts), args, /\s*,\s*/).trim_each(array(parts)).filter_nonempty(array(parts))
+Top:: I.set(array(parts), array()).set(args, undef).set(args, CAPTURE).split(array(parts), args, /\s*,\s*/).trim_each(array(parts)).filter_nonempty(array(parts))
  /a/ -> Top { return(1) }
 SPEC
 
@@ -39055,7 +39057,7 @@ subtest 'emit_context_lowers_additional_composable_array_string_routines' => sub
     );
 
     my $spec_content = <<'SPEC';
-Top:: I.declare(array, parts).lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)
+Top:: I.set(array(parts), array()).lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)
  /a/ -> Top { return(1) }
 SPEC
 
@@ -39081,7 +39083,7 @@ subtest 'emit_context_lowers_split_tagged_records_helper' => sub {
     );
 
     my $spec_content = <<'SPEC';
-Top:: I.declare(scalar, identifier_list="A,B", kind="wire", expr="1").declare(array, rows=split_tagged_records(identifier_list, /\s*,\s*/o, "?row:", kind, expr)).return(array_copy(array(rows)))
+Top:: I.set(identifier_list, "A,B").set(kind, "wire").set(expr, "1").set(array(rows), split_tagged_records(identifier_list, /\s*,\s*/o, "?row:", kind, expr)).return(copy(array(rows)))
  /a/ -> Top { return_undef() }
 SPEC
 
@@ -39093,9 +39095,9 @@ SPEC
     is($meta->{unresolved_helper_count}, 0, 'split_tagged_records flow avoids unresolved-helper hits');
     is($meta->{compatibility_surface_count}, 0, 'split_tagged_records flow avoids compatibility-surface events');
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}),
-        'split_tagged_records flow contributes DECLARE/RETURN action-IR coverage'
+        'split_tagged_records flow contributes ASSIGN/RETURN action-IR coverage'
     );
     ok($meta->{language_agnostic_action_ir_ready}, 'split_tagged_records flow remains language-agnostic action-IR ready');
 };
@@ -39824,7 +39826,7 @@ subtest 'method_like_structured_lx_blocks_accept_optional_semicolons' => sub {
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(scalar, retv).set(retv, call(Leaf)).return(hash("item", retv))
+LX.set(retv, undef).set(retv, call(Leaf)).return(hash("item", retv))
  /a/ -> Top { return(1) }
 Leaf::&
  /a/ -> Leaf { return("x") }
@@ -39832,7 +39834,7 @@ SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(scalar, retv)
+LX { set(retv, undef)
  set(retv, call(Leaf))
  return(hash("item", retv)) }
  /a/ -> Top { return(1) }
@@ -39870,8 +39872,7 @@ subtest 'method_like_structured_remaining_lifecycle_blocks_accept_optional_semic
     plan tests => scalar(@cases);
 
     my $expected_hits = {
-        ASSIGN   => 1,
-        DECLARE  => 1,
+        ASSIGN   => 2,
         RETURN   => 2,
     };
 
@@ -39883,13 +39884,13 @@ subtest 'method_like_structured_remaining_lifecycle_blocks_accept_optional_semic
 
             my $fluent_spec = <<"SPEC";
 Top::&
-$tag.declare(scalar, retv).set(retv, CAPTURE).return(hash("item", retv))
+$tag.set(retv, undef).set(retv, CAPTURE).return(hash("item", retv))
  /a/ -> Top { return(1) }
 SPEC
 
             my $block_spec = <<"SPEC";
 Top::&
-$tag { declare(scalar, retv)
+$tag { set(retv, undef)
  set(retv, CAPTURE)
  return(hash("item", retv)) }
  /a/ -> Top { return(1) }
@@ -39907,8 +39908,8 @@ SPEC
             is($block_meta->{canonical_action_ir_fallback_count}, 0, "semicolonless structured $tag lifecycle helper block avoids RAW_PERL fallback");
             is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, "semicolonless structured $tag lifecycle helper block preserves canonical action-IR node coverage from the fluent baseline");
             is_deeply($fluent_meta->{canonical_action_ir_hits}, $block_meta->{canonical_action_ir_hits}, "semicolonless structured $tag lifecycle helper block preserves canonical action-IR hit counts from the fluent baseline");
-            is_deeply($fluent_meta->{canonical_action_ir_hits}, $expected_hits, "fluent $tag lifecycle helper chain exposes the expected DECLARE/ASSIGN/RETURN helper mix");
-            is_deeply($block_meta->{canonical_action_ir_hits}, $expected_hits, "semicolonless structured $tag lifecycle helper block exposes the expected DECLARE/ASSIGN/RETURN helper mix");
+            is_deeply($fluent_meta->{canonical_action_ir_hits}, $expected_hits, "fluent $tag lifecycle helper chain exposes the expected ASSIGN/RETURN helper mix");
+            is_deeply($block_meta->{canonical_action_ir_hits}, $expected_hits, "semicolonless structured $tag lifecycle helper block exposes the expected ASSIGN/RETURN helper mix");
             ok(
                 $block_meta->{unresolved_helper_count} == 0 &&
                 $block_meta->{language_agnostic_action_ir_ready},
@@ -41209,7 +41210,7 @@ subtest 'emit_context_lowers_print_each_helper_without_compatibility_surface' =>
     plan tests => 8;
 
     my $spec_content = <<'SPEC';
-Top::& I {declare(array, matches=array("x", "y"))}
+Top::& I {set(array(matches), array("x", "y"))}
  /a/ -> Top { print_each(array(matches), "item<<", ">>\n") }
 SPEC
 
@@ -43487,7 +43488,7 @@ subtest 'trace_output_shows_mark_helper_positions_with_input_pointer_excerpt' =>
 
     my $spec = <<'SPEC';
 Top::AND
- I { declare(scalar, first) }
+ I { set(first, undef) }
  /foo\(/
  -> Top[0] { mark_here(body_start) }
  /\w+/
@@ -43567,12 +43568,12 @@ subtest 'method_like_fluent_and_structured_action_numeric_abs_helper_lower_equiv
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, parts=array("A", "B", "C")).declare(scalar, offset=1, limit=6, distance).set(distance, num_abs(num_sub(num_add(count(array(parts)), offset), limit))).return(hash("distance", distance))
+ /a/ -> Top .set(array(parts), array("A", "B", "C")).set(offset, 1).set(limit, 6).set(distance, undef).set(distance, num_abs(num_sub(num_add(count(array(parts)), offset), limit))).return(hash("distance", distance))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, parts=array("A", "B", "C")); declare(scalar, offset=1, limit=6, distance); set(distance, num_abs(num_sub(num_add(count(array(parts)), offset), limit))); return(hash("distance", distance)) }
+ /a/ -> Top { set(array(parts), array("A", "B", "C")); set(offset, 1); set(limit, 6); set(distance, undef); set(distance, num_abs(num_sub(num_add(count(array(parts)), offset), limit))); return(hash("distance", distance)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -43597,10 +43598,10 @@ SPEC
         'fluent and structured action-edge numeric abs helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge numeric abs helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge numeric abs helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 
@@ -43609,13 +43610,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_numeric_abs_helper_lower_eq
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, parts=array("A", "B", "C")).declare(scalar, offset=1, limit=6, distance).set(distance, num_abs(num_sub(num_add(count(array(parts)), offset), limit))).return(hash("distance", distance))
+LX.set(array(parts), array("A", "B", "C")).set(offset, 1).set(limit, 6).set(distance, undef).set(distance, num_abs(num_sub(num_add(count(array(parts)), offset), limit))).return(hash("distance", distance))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, parts=array("A", "B", "C")); declare(scalar, offset=1, limit=6, distance); set(distance, num_abs(num_sub(num_add(count(array(parts)), offset), limit))); return(hash("distance", distance)) }
+LX { set(array(parts), array("A", "B", "C")); set(offset, 1); set(limit, 6); set(distance, undef); set(distance, num_abs(num_sub(num_add(count(array(parts)), offset), limit))); return(hash("distance", distance)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -43641,10 +43642,10 @@ SPEC
         'fluent and structured lifecycle numeric abs helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle numeric abs helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle numeric abs helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 
@@ -43653,12 +43654,12 @@ subtest 'method_like_fluent_and_structured_action_numeric_rounding_helpers_lower
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(array, parts=array("A", "B", "C", "D")).declare(scalar, raw_name="  score  ", raw_score=3.75, offset=0.5, factor=1.5, floored, ceiled, rounded).set(floored, num_floor(num_sub(raw_score, offset))).set(ceiled, num_ceil(num_div(num_mul(count(array(parts)), factor), 2))).set(rounded, num_round(num_add(coalesce(length(trim(raw_name)), 0), offset))).return(hash("floored", floored, "ceiled", ceiled, "rounded", rounded))
+ /a/ -> Top .set(array(parts), array("A", "B", "C", "D")).set(raw_name, "  score  ").set(raw_score, 3.75).set(offset, 0.5).set(factor, 1.5).set(floored, undef).set(ceiled, undef).set(rounded, undef).set(floored, num_floor(num_sub(raw_score, offset))).set(ceiled, num_ceil(num_div(num_mul(count(array(parts)), factor), 2))).set(rounded, num_round(num_add(coalesce(length(trim(raw_name)), 0), offset))).return(hash("floored", floored, "ceiled", ceiled, "rounded", rounded))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, raw_name="  score  ", raw_score=3.75, offset=0.5, factor=1.5, floored, ceiled, rounded); set(floored, num_floor(num_sub(raw_score, offset))); set(ceiled, num_ceil(num_div(num_mul(count(array(parts)), factor), 2))); set(rounded, num_round(num_add(coalesce(length(trim(raw_name)), 0), offset))); return(hash("floored", floored, "ceiled", ceiled, "rounded", rounded)) }
+ /a/ -> Top { set(array(parts), array("A", "B", "C", "D")); set(raw_name, "  score  "); set(raw_score, 3.75); set(offset, 0.5); set(factor, 1.5); set(floored, undef); set(ceiled, undef); set(rounded, undef); set(floored, num_floor(num_sub(raw_score, offset))); set(ceiled, num_ceil(num_div(num_mul(count(array(parts)), factor), 2))); set(rounded, num_round(num_add(coalesce(length(trim(raw_name)), 0), offset))); return(hash("floored", floored, "ceiled", ceiled, "rounded", rounded)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -43683,10 +43684,10 @@ SPEC
         'fluent and structured action-edge numeric rounding helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge numeric rounding helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action-edge numeric rounding helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 
@@ -43695,13 +43696,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_numeric_rounding_helpers_lo
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.declare(array, parts=array("A", "B", "C", "D")).declare(scalar, raw_name="  score  ", raw_score=3.75, offset=0.5, factor=1.5, floored, ceiled, rounded).set(floored, num_floor(num_sub(raw_score, offset))).set(ceiled, num_ceil(num_div(num_mul(count(array(parts)), factor), 2))).set(rounded, num_round(num_add(coalesce(length(trim(raw_name)), 0), offset))).return(hash("floored", floored, "ceiled", ceiled, "rounded", rounded))
+LX.set(array(parts), array("A", "B", "C", "D")).set(raw_name, "  score  ").set(raw_score, 3.75).set(offset, 0.5).set(factor, 1.5).set(floored, undef).set(ceiled, undef).set(rounded, undef).set(floored, num_floor(num_sub(raw_score, offset))).set(ceiled, num_ceil(num_div(num_mul(count(array(parts)), factor), 2))).set(rounded, num_round(num_add(coalesce(length(trim(raw_name)), 0), offset))).return(hash("floored", floored, "ceiled", ceiled, "rounded", rounded))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { declare(array, parts=array("A", "B", "C", "D")); declare(scalar, raw_name="  score  ", raw_score=3.75, offset=0.5, factor=1.5, floored, ceiled, rounded); set(floored, num_floor(num_sub(raw_score, offset))); set(ceiled, num_ceil(num_div(num_mul(count(array(parts)), factor), 2))); set(rounded, num_round(num_add(coalesce(length(trim(raw_name)), 0), offset))); return(hash("floored", floored, "ceiled", ceiled, "rounded", rounded)) }
+LX { set(array(parts), array("A", "B", "C", "D")); set(raw_name, "  score  "); set(raw_score, 3.75); set(offset, 0.5); set(factor, 1.5); set(floored, undef); set(ceiled, undef); set(rounded, undef); set(floored, num_floor(num_sub(raw_score, offset))); set(ceiled, num_ceil(num_div(num_mul(count(array(parts)), factor), 2))); set(rounded, num_round(num_add(coalesce(length(trim(raw_name)), 0), offset))); return(hash("floored", floored, "ceiled", ceiled, "rounded", rounded)) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -43727,10 +43728,10 @@ SPEC
         'fluent and structured lifecycle numeric rounding helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle numeric rounding helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'lifecycle numeric rounding helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_action_value_emptiness_helpers_lower_equivalently' => sub {
@@ -43738,12 +43739,12 @@ subtest 'method_like_fluent_and_structured_action_value_emptiness_helpers_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)).declare(scalar, values_empty, meta_nonempty).set(values_empty, is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))).set(meta_nonempty, is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))).return(hash("values_empty", values_empty, "meta_nonempty", meta_nonempty, "snapshot_empty", is_empty(drop_keys(hash(meta), "kind", "source", "debug"))))
+ /a/ -> Top .set(hash(meta), hash("kind", "NODE", "source", "rule", "debug", 1)).set(values_empty, undef).set(meta_nonempty, undef).set(values_empty, is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))).set(meta_nonempty, is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))).return(hash("values_empty", values_empty, "meta_nonempty", meta_nonempty, "snapshot_empty", is_empty(drop_keys(hash(meta), "kind", "source", "debug"))))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)); declare(scalar, values_empty, meta_nonempty); set(values_empty, is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))); set(meta_nonempty, is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))); return(hash("values_empty", values_empty, "meta_nonempty", meta_nonempty, "snapshot_empty", is_empty(drop_keys(hash(meta), "kind", "source", "debug")))) }
+ /a/ -> Top { set(hash(meta), hash("kind", "NODE", "source", "rule", "debug", 1)); set(values_empty, undef); set(meta_nonempty, undef); set(values_empty, is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))); set(meta_nonempty, is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))); return(hash("values_empty", values_empty, "meta_nonempty", meta_nonempty, "snapshot_empty", is_empty(drop_keys(hash(meta), "kind", "source", "debug")))) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -43768,10 +43769,10 @@ SPEC
         'fluent and structured action value-emptiness helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action value-emptiness helper fluent form preserves DECLARE/ASSIGN/RETURN coverage'
+        'action value-emptiness helper fluent form preserves ASSIGN/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_value_emptiness_helpers_lower_equivalently' => sub {
@@ -43780,13 +43781,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_value_emptiness_helpers_low
     my $fluent_spec = <<'SPEC';
 Top::&
  /a/ -> Top
-LX.declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)).declare(scalar, values_empty, meta_nonempty).set(values_empty, is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))).set(meta_nonempty, is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))).return(hash("values_empty", values_empty, "meta_nonempty", meta_nonempty))
+LX.set(hash(meta), hash("kind", "NODE", "source", "rule", "debug", 1)).set(values_empty, undef).set(meta_nonempty, undef).set(values_empty, is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))).set(meta_nonempty, is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))).return(hash("values_empty", values_empty, "meta_nonempty", meta_nonempty))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
  /a/ -> Top
-LX { declare(hash, meta=hash("kind", "NODE", "source", "rule", "debug", 1)); declare(scalar, values_empty, meta_nonempty); set(values_empty, is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))); set(meta_nonempty, is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))); return(hash("values_empty", values_empty, "meta_nonempty", meta_nonempty)) }
+LX { set(hash(meta), hash("kind", "NODE", "source", "rule", "debug", 1)); set(values_empty, undef); set(meta_nonempty, undef); set(values_empty, is_empty(sorted_values(pick_keys(hash(meta), "kind", "source")))); set(meta_nonempty, is_nonempty(pick_keys(drop_keys(hash(meta), "debug"), "kind", "source"))); return(hash("values_empty", values_empty, "meta_nonempty", meta_nonempty)) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -43809,15 +43810,15 @@ SPEC
         'fluent and structured lifecycle value-emptiness helper forms remain language-agnostic action-IR ready'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle value-emptiness helper fluent form preserves DECLARE/ASSIGN coverage'
+        'lifecycle value-emptiness helper fluent form preserves ASSIGN coverage'
     );
     ok(
-        scalar(grep { $_ eq 'DECLARE' } @{$block_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'ASSIGN' } @{$block_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$block_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$block_meta->{canonical_action_ir_nodes}}),
-        'structured lifecycle value-emptiness helper form preserves DECLARE/ASSIGN/RETURN coverage'
+        'structured lifecycle value-emptiness helper form preserves ASSIGN/RETURN coverage'
     );
 };
 
@@ -44788,11 +44789,11 @@ subtest 'consume_before_recurse_body_recursion_parses_and_terminates' => sub {
     # re-entry). Lock a recursive S-expression body grammar: it parses a nested input
     # to the expected AST and terminates under the hard bound.
     plan tests => 3;
-    # SPEC-FORMAT-TERSE.8.2.2.4: retain `declare(array, items)` here as
+    # SPEC-FORMAT-TERSE.8.2.2.4: retain `set(array(items), array())` here as
     # scoped-declaration compatibility, while ordinary append/snapshot behavior
     # uses current `push(...)` / `copy(...)` spellings.
     my $spec = "top::\n -> sexpr { return(call(sexpr)) }\n\n"
-             . "sexpr: /\\(/ /\\)/  I { declare(array, items) }\n"
+             . "sexpr: /\\(/ /\\)/  I { set(array(items), array()) }\n"
              . " -> sexpr     { push(array(items), call(sexpr)) }\n"
              . " -> atom      { push(array(items), call(atom)) }\n"
              . " -> sexpr[1]  { return(copy(array(items))) }\n\n"
@@ -44813,7 +44814,7 @@ subtest 'top_rule_as_normal_top_recursion_terminates' => sub {
     plan tests => 2;
     # SPEC-FORMAT-TERSE.8.2.2.4: retain only the scoped-declaration
     # compatibility marker; append/snapshot helpers are current surface.
-    my $spec = "sexpr:: /\\(/ /\\)/  I { declare(array, items) }\n"
+    my $spec = "sexpr:: /\\(/ /\\)/  I { set(array(items), array()) }\n"
              . " -> sexpr     { push(array(items), call(sexpr)) }\n"
              . " -> atom      { push(array(items), call(atom)) }\n"
              . " -> sexpr[1]  { return(copy(array(items))) }\n\n"
@@ -44838,7 +44839,7 @@ subtest 'top_rule_as_normal_recursion_with_lx_parses_sequence' => sub {
     # `top:: -> sexpr {return(call(sexpr))}` wrapper form (which returns a single form) --
     # the two are intentionally different grammars (different arity), not an engine bug.
     plan tests => 3;
-    my $spec = "sexpr:: /\\(/ /\\)/  I { declare(array, items) }\n"
+    my $spec = "sexpr:: /\\(/ /\\)/  I { set(array(items), array()) }\n"
              . " -> sexpr     { push(array(items), call(sexpr)) }\n"
              . " -> atom      { push(array(items), call(atom)) }\n"
              . " -> sexpr[1]  { return(copy(array(items))) }\n"
@@ -44941,7 +44942,7 @@ subtest 'spec_format_terse_1_1_1_declare_path_stays_single_my_no_double' => sub 
         return $src;
     };
     my $declared = "top:: /(\\w+)\\s*/ -> top[0] { set(count, num_add(coalesce(count, 0), 1)) }\n"
-                 . "I.declare(scalar, count)\n"
+                 . "I.set(count, undef)\n"
                  . "LX {return(count)}\n";
     (my $no_declare = $declared) =~ s/^I\.declare\(scalar, count\)\n//m;
     my $declared_src = $gen->($declared);
@@ -44968,10 +44969,8 @@ subtest 'spec_format_terse_1_1_1_reserved_literals_are_not_auto_declared' => sub
 subtest 'spec_format_terse_1_2_1_bare_arg_position_auto_exists' => sub {
     # SPEC-FORMAT-TERSE.1.2.1 (ADR 0007), Channel 1: a BARE (un-wrapped) working variable
     # used in a type-implying helper arg position auto-exists with the POSITION-implied sigil
-    # -- the scalar target of set(NAME, ...) and the array target of push(NAME, ...)
-    # / push_nonempty(NAME, ...). `push_nonempty(...)` remains here as an
-    # explicit SPEC-FORMAT-TERSE.8.2.2.4 compatibility/semantic-filter lock;
-    # current append proofs use `push(...)`. Before this leaf such a bare var lowered to the right
+    # -- the scalar target of set(NAME, ...) and the array target of push(NAME, ...).
+    # Before this leaf such a bare var lowered to the right
     # sigil'd variable but got NO `my`, leaving a leaky package global (non-strict handlers
     # -- KM card terse-bare-working-vars-engine-gaps). The DECISIVE, isolating proof is
     # source-level: with no wrapper or declare anywhere, the engine now emits exactly one
@@ -44979,7 +44978,7 @@ subtest 'spec_format_terse_1_2_1_bare_arg_position_auto_exists' => sub {
     # (Reading a purely-bare var back through the DSL needs a wrapper, which would itself
     # trigger the .1.1.1 wrapped path -- so isolation is proven at the generated-source level;
     # the run-twice no-leak BEHAVIOR is locked separately below.)
-    plan tests => 7;
+    plan tests => 6;
     my $gen = sub {
         my ($spec) = @_;
         my $src = '';
@@ -45006,11 +45005,7 @@ subtest 'spec_format_terse_1_2_1_bare_arg_position_auto_exists' => sub {
     my $n_array = () = ($array_src =~ /my \@items\b/g);
     is($n_array, 1, 'bare push(items, ...) auto-supplies exactly one `my @items`');
 
-    # (c) bare push_nonempty target -> array.
-    my $nonempty_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push_nonempty(items, match_group(0)) }\n");
-    like($nonempty_src, qr/my \@items\b/, 'bare push_nonempty(items, ...) auto-supplies `my @items`');
-
-    # (d) deferral boundary: the child-append fluent .push(target) (whose paired `push(Rule, ...)`
+    # (c) deferral boundary: the child-append fluent .push(target) (whose paired `push(Rule, ...)`
     #     has a RULE name as first arg -- ambiguous) is NOT collected by Channel 1.
     my $fluent_src = $gen->("top:: -> w.push(items)\n LX { return(count) }\n\nw : /(\\w+)/  I.return(match_group(0))\n");
     unlike($fluent_src, qr/my \@items\b/,
@@ -45043,10 +45038,10 @@ subtest 'spec_format_terse_1_2_1_dedup_with_wrapped_and_declare_single_my' => su
     is($n2, 1, 'set(count,...) wrapped target emits exactly one `my $count` (bare-arg pattern does not double-match a wrapped target)');
 
     my $declared = $gen->("top:: /(\\w+)\\s*/ -> top[0] { set(count, match_group(0)) }\n"
-                        . "I.declare(scalar, count)\n"
+                        . "I.set(count, undef)\n"
                         . "LX {return(count)}\n");
     my $n3 = () = ($declared =~ /my \$count\b/g);
-    is($n3, 1, 'declare(scalar,count) + bare set(count,...) dedup to exactly one `my $count`');
+    is($n3, 1, 'set(count, undef) + bare set(count,...) dedup to exactly one `my $count`');
 
     my $mix_array = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push(items, match_group(0)) }\n"
                          . "LX {return(copy(array(items)))}\n");
@@ -45089,11 +45084,11 @@ subtest 'spec_format_terse_1_2_1_bare_mutation_per_invocation_no_leak' => sub {
 subtest 'spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist' => sub {
     # SPEC-FORMAT-TERSE.1.2.3.1 (Channel 2 aggregate subset): aggregate bare value
     # reads already lower to sigiled variables on the Perl reference
-    # SPEC-FORMAT-TERSE.8.2.2.4 keeps `array_copy(...)` / `hash_copy(...)`
-    # spellings in this subtest as explicit aggregate bare-read compatibility
-    # locks until .8.4 hard retirement. Incidental setup uses current helpers.
-    # (`array_copy(items)` -> `[@items]`, `hash_copy(meta)` -> `{%meta}`,
-    # `copy(items)` -> `[@items]`) but previously got no preamble `my`, leaving a
+    # SPEC-FORMAT-TERSE.8.3 keeps the current `copy(...)` spelling here as
+    # aggregate bare-read coverage. Incidental setup uses current helpers.
+    # (`copy(items)` and ambiguous bare `copy(meta)` resolve array-first;
+    # hash-typed uses still use `copy(hash(meta))` or an established hash target)
+    # but previously got no preamble `my`, leaving a
     # non-strict package-global hazard. This leaf supplies the per-invocation lexical
     # without changing wrapped/declared forms or scalar bare reads.
     plan tests => 17;
@@ -45114,60 +45109,60 @@ subtest 'spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist' => sub
         return defined($out) ? $out : ('ERR:' . normalize_error($@));
     };
 
-    my $array_spec = "top:: -> w { return(array_copy(items)) }\n\nw : /x/\n";
+    my $array_spec = "top:: -> w { return(copy(items)) }\n\nw : /x/\n";
     my $array_src = $gen->($array_spec);
     my $n_array = () = ($array_src =~ /my \@items\b/g);
-    is($n_array, 1, 'bare array_copy(items) auto-supplies exactly one `my @items`');
-    like($array_src, qr/return \[\@items\]/, 'bare array_copy(items) still lowers to the existing array-copy expression');
-    unlike($array_src, qr/my \%items\b/, 'bare array_copy(items) does not infer a hash declaration');
+    is($n_array, 1, 'bare copy(items) auto-supplies exactly one `my @items`');
+    like($array_src, qr/return \[\@items\]/, 'bare copy(items) still lowers to the existing array-copy expression');
+    unlike($array_src, qr/my \%items\b/, 'bare copy(items) does not infer a hash declaration');
 
-    my $hash_spec = "top:: -> w { return(hash_copy(meta)) }\n\nw : /x/\n";
+    my $hash_spec = "top:: -> w { return(copy(meta)) }\n\nw : /x/\n";
     my $hash_src = $gen->($hash_spec);
-    my $n_hash = () = ($hash_src =~ /my \%meta\b/g);
-    is($n_hash, 1, 'bare hash_copy(meta) auto-supplies exactly one `my %meta`');
-    like($hash_src, qr/return \{\%meta\}/, 'bare hash_copy(meta) still lowers to the existing hash-copy expression');
+    my $n_hash = () = ($hash_src =~ /my \@meta\b/g);
+    is($n_hash, 1, 'bare copy(meta) follows array-first copy and auto-supplies exactly one `my @meta`');
+    like($hash_src, qr/return \[\@meta\]/, 'ambiguous bare copy(meta) lowers to the array-first copy expression');
 
     my $copy_src = $gen->("top:: -> w { return(copy(items)) }\n\nw : /x/\n");
     my $n_copy = () = ($copy_src =~ /my \@items\b/g);
     is($n_copy, 1, 'bare copy(items) follows the existing array-first copy rule and auto-supplies `my @items`');
 
-    my $reserved_src = $gen->("top:: -> w { return(array_copy(undef)) }\n\nw : /x/\n");
+    my $reserved_src = $gen->("top:: -> w { return(copy(undef)) }\n\nw : /x/\n");
     unlike($reserved_src, qr/my \@undef\b/, 'aggregate bare-read collector still skips reserved DSL literal undef');
 
-    my $dedup_target_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push(items, match_group(0)); return(array_copy(items)) }\n");
+    my $dedup_target_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push(items, match_group(0)); return(copy(items)) }\n");
     my $n_dedup_target = () = ($dedup_target_src =~ /my \@items\b/g);
     is($n_dedup_target, 1, 'bare push target plus bare array_copy read dedup to one `my @items`');
 
-    my $wrapped_src = $gen->("top:: -> w { return(array_copy(array(items))) }\n\nw : /x/\n");
+    my $wrapped_src = $gen->("top:: -> w { return(copy(array(items))) }\n\nw : /x/\n");
     my $n_wrapped = () = ($wrapped_src =~ /my \@items\b/g);
-    is($n_wrapped, 1, 'wrapped array_copy(array(items)) remains on the wrapped path with one `my @items`');
+    is($n_wrapped, 1, 'wrapped copy(array(items)) remains on the wrapped path with one `my @items`');
 
-    my $hash_dedup_src = $gen->("top:: -> w { set_key(meta, \"kind\", \"x\"); return(hash_copy(meta)) }\n\nw : /x/\n");
+    my $hash_dedup_src = $gen->("top:: -> w { set_key(meta, \"kind\", \"x\"); return(copy(meta)) }\n\nw : /x/\n");
     my $n_hash_dedup = () = ($hash_dedup_src =~ /my \%meta\b/g);
     is($n_hash_dedup, 1, 'bare set_key target plus bare hash_copy read dedup to one `my %meta`');
 
-    is($run->($array_spec, 'x'), '[]', 'bare array_copy(items) runtime smoke returns an empty array snapshot');
+    is($run->($array_spec, 'x'), '[]', 'bare copy(items) runtime smoke returns an empty array snapshot');
 
     my $array_accum_spec = "top:: /(\\w+)\\s*/ -> top[0] { push(items, match_group(0)) }\n"
-                         . "LX {return(array_copy(items))}\n";
+                         . "LX {return(copy(items))}\n";
     my $ap = eval { LinkedSpec::Get(\$array_accum_spec, top_rule => 'top', parse_mode => 'seek') };
-    ok(ref($ap) eq 'CODE', 'bare array_copy(items) accumulator compiles to a parser')
+    ok(ref($ap) eq 'CODE', 'bare copy(items) accumulator compiles to a parser')
         or diag(normalize_error($@));
     my $input_array_first = 'a b';
     my $array_first = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $ap->(\$input_array_first); alarm(0); $J->encode($r) };
-    is(defined($array_first) ? $array_first : ('ERR:' . normalize_error($@)), '["a","b"]', 'bare array_copy(items) returns the current parse array snapshot');
+    is(defined($array_first) ? $array_first : ('ERR:' . normalize_error($@)), '["a","b"]', 'bare copy(items) returns the current parse array snapshot');
     my $input_array_rerun = 'c';
     my $array_rerun = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $ap->(\$input_array_rerun); alarm(0); $J->encode($r) };
     is(defined($array_rerun) ? $array_rerun : ('ERR:' . normalize_error($@)), '["c"]', 're-running the SAME parser resets the auto-declared bare array read target');
 
     my $hash_accum_spec = "top:: /(\\w+)\\s*/ -> top[0] { set_key(meta, match_group(0), true) }\n"
-                         . "LX {return(hash_copy(meta))}\n";
+                         . "LX {return(copy(meta))}\n";
     my $hp = eval { LinkedSpec::Get(\$hash_accum_spec, top_rule => 'top', parse_mode => 'seek') };
-    ok(ref($hp) eq 'CODE', 'bare hash_copy(meta) mutation/read spec compiles to a parser')
+    ok(ref($hp) eq 'CODE', 'bare copy(meta) mutation/read spec compiles to a parser')
         or diag(normalize_error($@));
     my $input_hash_first = 'a';
     my $hash_first = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $hp->(\$input_hash_first); alarm(0); $J->encode($r) };
-    is(defined($hash_first) ? $hash_first : ('ERR:' . normalize_error($@)), '{"a":true}', 'bare hash_copy(meta) returns the current parse hash snapshot');
+    is(defined($hash_first) ? $hash_first : ('ERR:' . normalize_error($@)), '{"a":true}', 'bare copy(meta) returns the current parse hash snapshot');
     my $input_hash_second = 'b';
     my $hash_second = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $hp->(\$input_hash_second); alarm(0); $J->encode($r) };
     is(defined($hash_second) ? $hash_second : ('ERR:' . normalize_error($@)), '{"b":true}', 're-running the SAME parser resets the auto-declared bare hash read target');
@@ -45239,7 +45234,7 @@ subtest 'spec_format_terse_1_2_3_3_1_scalar_source_slot_bare_reads_auto_exist' =
         'reserved primitive literals are not auto-declared as scalar reads');
 
     my $dedup_src = $gen->("top:: -> w { set(out, count); return(count) }\n"
-                         . "I.declare(scalar, count)\n\nw : /x/\n");
+                         . "I.set(count, undef)\n\nw : /x/\n");
     my $dedup_count = () = ($dedup_src =~ /my \$count\b/g);
     is($dedup_count, 1, 'bare source read + wrapped/declared count dedup to one `my $count`');
 
@@ -45323,7 +45318,7 @@ subtest 'spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist' => sub
     unlike($literal_src, qr/my \$(?:true|false|undef)\b/,
         'reserved primitive literals are not auto-declared as scalar reads in mutation slots');
 
-    my $dedup_src = $gen->("top:: -> w { declare(scalar, value, key); declare(array, items); declare(hash, meta); items += value; set_key(meta, key, value); meta[key] = value; return(copy(array(items))) }\n\nw : /x/\n");
+    my $dedup_src = $gen->("top:: -> w { set(value, undef); set(key, undef); set(array(items), array()); set(hash(meta), hash()); items += value; set_key(meta, key, value); meta[key] = value; return(copy(array(items))) }\n\nw : /x/\n");
     for my $pair (['$', 'value'], ['$', 'key'], ['@', 'items'], ['%', 'meta']) {
         my ($sigil, $name) = @$pair;
         my $q = quotemeta($sigil.$name);
@@ -45393,7 +45388,7 @@ subtest 'spec_format_terse_1_2_3_3_3_direct_access_bare_path_atoms_auto_exist' =
     unlike($src, qr/my \$(?:true|CAPTURE)\b/,
         'reserved direct-access atoms are not auto-declared');
 
-    my $dedup_src = $gen->("top:: -> w { declare(scalar, z); return(foo[\"a\"][z]) }\n\nw : /x/\n");
+    my $dedup_src = $gen->("top:: -> w { set(z, undef); return(foo[\"a\"][z]) }\n\nw : /x/\n");
     my $dedup_z = () = ($dedup_src =~ /my \$z\b/g);
     is($dedup_z, 1, 'direct-access bare path atom dedups declared z to one `my $z`');
 
@@ -45409,36 +45404,37 @@ subtest 'spec_format_terse_1_2_3_3_3_direct_access_bare_path_atoms_auto_exist' =
         're-running the SAME parser remains stable with direct-access scalar index reads');
 };
 
-subtest 'spec_format_terse_1_4_1_new_spellings_lower_identically_to_canonical' => sub {
-    # SPEC-FORMAT-TERSE.1.4.1 (ADR 0007): the terse helper renames become canonical, the old
-    # names stay deprecated aliases that lower identically -- assign<->set, concat<->cat,
-    # array_copy/hash_copy<->copy. The decisive proof is byte-equal lowering through the
-    # EmitContext compatibility rewriter (call_spec_handler_subst), in isolation AND in the
-    # composed positions (assignment source, push value, return payload, numeric reducer).
-    # The old-name lowerings are also pinned to their concrete shape so this leaf cannot
-    # silently change them (the all-20-spec byte-identical proof lives in the task tree).
+subtest 'spec_format_terse_1_4_1_current_spellings_lower_and_old_spellings_retire' => sub {
+    # SPEC-FORMAT-TERSE.8.3 hard-retires the old Perl helper spellings that were
+    # deprecated by .1.4.1. Keep positive coverage on the current spellings and
+    # pin old function-form helpers to explicit diagnostics.
     plan tests => 14;
     my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
-    my @pairs = (
-        ['set(x, 1)',                    'set(x, 1)',                    'set == set(scalar statement)'],
-        ['return(cat("a","b"))',                 'return(concat("a","b"))',                 'cat == concat (return payload)'],
-        ['return(copy(array(items)))',               'return(array_copy(array(items)))',            'copy(array) == array_copy'],
-        ['return(copy(hash(m)))',                   'return(hash_copy(hash(m)))',                 'copy(hash) == hash_copy'],
-        ['set(x, cat(a,b))',             'set(x, concat(a,b))',          'set+cat == assign+concat (scalar source)'],
-        ['set(x, copy(array(y)))',        'set(x, array_copy(array(y)))',     'copy as scalar assignment source == array_copy'],
-        ['set(array(a2), copy(array(y)))',        'set(array(a2), array_copy(array(y)))',     'copy as array assignment source == array_copy'],
-        ['set(hash(h2), copy(hash(m)))',         'set(hash(h2), hash_copy(hash(m)))',       'copy as hash assignment source == hash_copy'],
-        ['push_value(array(items), cat(a,b))',   'push_value(array(items), concat(a,b))',   'cat as a push value == concat'],
-        ['return(num_sum(copy(array(x))))',          'return(num_sum(array_copy(array(x))))',       'copy as a numeric-reducer arg == array_copy'],
+    my @current = (
+        ['set(x, 1)', '$x = 1', 'set lowers scalar assignment'],
+        ['return(cat("a","b"))', undef, 'cat lowers return payload through concat implementation'],
+        ['return(copy(array(items)))', 'return [@items]', 'copy(array) lowers array snapshot return payload'],
+        ['return(copy(hash(m)))', 'return {%m}', 'copy(hash) lowers hash snapshot return payload'],
+        ['set(x, cat(a,b))', undef, 'cat lowers scalar assignment source'],
+        ['set(x, copy(array(y)))', '$x = [@y]', 'copy(array) lowers scalar assignment source'],
+        ['set(array(a2), copy(array(y)))', '@a2 = (@y)', 'copy(array) lowers array assignment source'],
+        ['set(hash(h2), copy(hash(m)))', '%h2 = (%m)', 'copy(hash) lowers hash assignment source'],
+        ['push(array(items), cat(a,b))', undef, 'cat lowers explicit push value source'],
+        ['return(num_sum(copy(array(x))))', undef, 'copy(array) remains array-like in numeric reducers'],
     );
-    for my $p (@pairs) {
-        is($L->($p->[0]), $L->($p->[1]), $p->[2]);
+    for my $case (@current) {
+        my ($expr, $expected, $label) = @$case;
+        my $lowered = $L->($expr);
+        if (defined($expected)) {
+            is($lowered, $expected, $label);
+        } else {
+            unlike($lowered, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/, $label);
+        }
     }
-    # Old-name (deprecated alias) lowerings stay byte-unchanged.
-    is($L->('set(x, 1)'), '$x = 1', 'old name set(x,1) still lowers to `$x = 1`');
-    is($L->('return(array_copy(array(items)))'), 'return [@items]', 'old name array_copy still lowers to `[@items]`');
-    is($L->('return(hash_copy(hash(m)))'), 'return {%m}', 'old name hash_copy still lowers to `{%m}`');
-    like($L->('return(cat("a","b"))'), qr/\@__ls_concat_parts/, 'cat is routed through the concat do-block lowering');
+    is($L->('return(concat("a","b"))'), 'return do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:concat"; undef }', 'old concat(...) is retired');
+    is($L->('return(array_copy(array(items)))'), 'return do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:array_copy"; undef }', 'old array_copy(...) is retired');
+    is($L->('return(hash_copy(hash(m)))'), 'return do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_copy"; undef }', 'old hash_copy(...) is retired');
+    is($L->('push_value(array(items), cat(a,b))'), 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:push_value"; undef }', 'old push_value(...) is retired');
 };
 
 subtest 'spec_format_terse_1_4_1_set_is_full_assign_alias' => sub {
@@ -45477,30 +45473,27 @@ subtest 'spec_format_terse_1_4_1_set_is_full_assign_alias' => sub {
 };
 
 subtest 'spec_format_terse_1_4_1_copy_resolves_array_then_hash' => sub {
-    # The unified terse `copy(X)` subsumes array_copy + hash_copy: it resolves the wrapped
-    # symbol kind at lowering time (array first, then hash), so it lowers identically to the
-    # specific old helper in every position -- value expr, assignment/declare source, and the
-    # array-vs-hash type-inference used by reducers/coalesce.
+    # The unified terse `copy(X)` resolves the wrapped symbol kind at lowering time
+    # (array first, then hash), including assignment sources and type-inference sites.
     plan tests => 7;
     my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
     is($L->('return(copy(array(x)))'), 'return [@x]', 'copy of a wrapped array symbol -> [@x]');
     is($L->('return(copy(hash(m)))'), 'return {%m}', 'copy of a wrapped hash symbol -> {%m}');
-    is($L->('return(copy(items))'), $L->('return(array_copy(items))'),
-        'bare copy(items) resolves array-first (== array_copy)');
-    is($L->('set(array(a2), copy(array(y)))'), $L->('set(array(a2), array_copy(array(y)))'),
-        'copy as an array assignment source == array_copy (list init)');
-    is($L->('set(hash(h2), copy(hash(m)))'), $L->('set(hash(h2), hash_copy(hash(m)))'),
-        'copy as a hash assignment source == hash_copy (list init)');
-    is($L->('return(num_sum(copy(array(x))))'), $L->('return(num_sum(array_copy(array(x))))'),
-        'copy stays array-like in numeric-reducer type inference (== array_copy)');
-    is($L->('return(coalesce(copy(hash(m)), hash(n)))'), $L->('return(coalesce(hash_copy(hash(m)), hash(n)))'),
-        'copy stays hash-like in coalesce type inference (== hash_copy)');
+    is($L->('return(copy(items))'), 'return [@items]',
+        'bare copy(items) resolves array-first');
+    is($L->('set(array(a2), copy(array(y)))'), '@a2 = (@y)',
+        'copy lowers as an array assignment source');
+    is($L->('set(hash(h2), copy(hash(m)))'), '%h2 = (%m)',
+        'copy lowers as a hash assignment source');
+    like($L->('return(num_sum(copy(array(x))))'), qr/\$__ls_num_sum_source = \[\@x\]/,
+        'copy stays array-like in numeric-reducer type inference');
+    like($L->('return(coalesce(copy(hash(m)), hash(n)))'), qr/\$__ls_coalesce = \{%m\}/,
+        'copy stays hash-like in coalesce type inference');
 };
 
 subtest 'spec_format_terse_1_4_1_terse_spec_runs_identically_to_canonical' => sub {
-    # End-to-end: a real .spec written with the terse renames (set + cat + copy) compiles and
-    # produces byte-identical output to its canonical-named twin (assign + concat + array_copy),
-    # and re-running the same parser is stable (per-invocation lexicals, no leak).
+    # End-to-end: a real .spec written with current set + cat + copy compiles,
+    # produces stable output, and matches an equivalent current-spelling twin.
     plan tests => 5;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
@@ -45511,8 +45504,8 @@ subtest 'spec_format_terse_1_4_1_terse_spec_runs_identically_to_canonical' => su
     };
     my $terse = "top:: /(\\w+)\\s*/ -> top[0] { set(label, cat(match_group(0), \"!\")); push(array(words), label) }\n"
               . "LX { return(copy(array(words))) }\n";
-    my $canon = "top:: /(\\w+)\\s*/ -> top[0] { set(label, concat(match_group(0), \"!\")); push_value(words, label) }\n"
-              . "LX { return(array_copy(array(words))) }\n";
+    my $canon = "top:: /(\\w+)\\s*/ -> top[0] { set(label, cat(match_group(0), \"!\")); push(array(words), label) }\n"
+              . "LX { return(copy(array(words))) }\n";
     my $tp = eval { LinkedSpec::Get(\$terse) };
     my $cp = eval { LinkedSpec::Get(\$canon) };
     ok(ref($tp) eq 'CODE', 'terse set/cat/copy spec compiles to a parser') or diag(normalize_error($@));
@@ -45631,7 +45624,7 @@ subtest 'spec_format_terse_1_3_4_1_scalar_assignment_operator_matches_set' => su
     is($run->($p, 'a b'), '"b!"',
         're-running the same parser is stable (per-invocation scalar lexical)');
 
-    my $kw_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { declare(scalar, name=entry_group(1)); return(name) }\n");
+    my $kw_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { set(name, entry_group(1)); return(name) }\n");
     like($kw_src, qr/my \$name\b/,
         'keyword argument name=entry_group(1) inside declare(...) remains a helper argument, not a top-level operator statement');
 };

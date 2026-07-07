@@ -1718,16 +1718,21 @@ sub _mask_action_code_literals {
 #             (b) SPEC-FORMAT-TERSE.1.2.1 / .11.2, Channel 1 — BARE (un-wrapped)
 #                 names in type-implying helper arg positions: set(NAME, VALUE) and
 #                 NAME = VALUE bind the scalar value slot regardless of RHS shape,
-#                 while statement-level set_key(NAME, KEY, VALUE), push_value(NAME, ...),
-#                 push(NAME, nonbare-value), and push_nonempty(NAME, ...) keep their
-#                 explicit hash/array mutation targets. Such a bare name already LOWERS
-#                 to the matching variable but otherwise gets no `my` (leaky global).
+#                 while statement-level set_key(NAME, KEY, VALUE) and
+#                 push(NAME, nonbare-value) keep their explicit hash/array mutation
+#                 targets. Retired push_value(NAME, ...) / push_nonempty(NAME, ...)
+#                 spelling is still recognized here only to keep legacy diagnostic
+#                 fixtures from introducing unrelated package globals. Such a bare
+#                 name already LOWERS to the matching variable in current accepted
+#                 shapes but otherwise gets no `my` (leaky global).
 #                 The child-append push(Rule[, target]) / fluent .push(target) target
 #                 (all-bare child-call shape) and bare hash value-position reads
 #                 are deliberately NOT collected here.
 #             (c) SPEC-FORMAT-TERSE.1.2.3.1, Channel 2 aggregate subset — BARE
-#                 aggregate value reads that already lower to a sigiled aggregate:
-#                 array_copy(NAME) / copy(NAME) -> @NAME and hash_copy(NAME) -> %NAME.
+#                 aggregate value reads that lower to a sigiled aggregate:
+#                 current copy(NAME) -> remembered kind / @NAME fallback; retired
+#                 array_copy(NAME) / hash_copy(NAME) are kept only for legacy
+#                 diagnostic fixture stability.
 #             (d) SPEC-FORMAT-TERSE.1.2.3.3.1, Channel 2 scalar source-slot subset —
 #                 BARE scalar reads in return/assignment-like source slots:
 #                 return(NAME), set(out, NAME), and `out = NAME` -> $NAME.
@@ -1750,8 +1755,8 @@ sub _mask_action_code_literals {
 #                 same scalar-read, shape-literal, direct-access, and block-value discovery.
 #           Deduped against (1) the per-rule accumulator @<label> and (2) any name
 #           already declared with the same sigil in the LOWERED handler code
-#           (declare(...) or raw `my`), so a spec that already declares/wraps its
-#           working vars emits byte-identical generated source (no double `my`).
+#           (historical declare(...) or raw `my`), so older declaration fixtures
+#           do not produce a second `my` while they are being diagnosed.
 # Args    : ($rule_ir, $lowered_text)  # $lowered_text = concatenated lowered code
 # Returns : arrayref of "my <sigil><name>;" declaration strings (possibly empty)
 #------------------------------------------------------------------------------
@@ -2201,7 +2206,8 @@ sub _collect_auto_working_var_decls {
   # (b) SPEC-FORMAT-TERSE.1.2.1, Channel 1 — BARE working var in a type-implying helper
   #     arg position. The bare name already lowers to the correctly-sigil'd variable
   #     (set -> $NAME;
-  #     push_value/push/push_nonempty -> @NAME) but otherwise gets no preamble `my`. The
+  #     push -> @NAME) but otherwise gets no preamble `my`. Retired
+  #     push_value/push_nonempty are matched below only for diagnostic fixture stability. The
 	  #     `\s*,` after the name means a WRAPPED target (array(x), whose name is
   #     followed by `(`) is not matched here — it stays on path (a); both dedup to one `my`.
   # A bare `set(NAME, ...)` target follows the same scalar value-binding rule as operator
@@ -2214,9 +2220,9 @@ sub _collect_auto_working_var_decls {
    $record->('@', $1);   # push_value / push_nonempty target lowers to an array
   }
   # (c) SPEC-FORMAT-TERSE.1.2.3.1 / .6.2.3.2, Channel 2 aggregate subset — BARE
-  #     aggregate value reads. `array_copy(NAME)` is explicit array storage, while
-  #     terse `copy(NAME)` follows remembered bare-name kind before the legacy
-  #     untyped array fallback.
+  #     aggregate value reads. Current `copy(NAME)` follows remembered bare-name
+  #     kind before the legacy untyped array fallback. Retired array_copy/hash_copy
+  #     forms are still collected only for diagnostic fixture stability.
   while ($masked =~ /\barray_copy\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
    $record->('@', $1);
   }
@@ -2460,7 +2466,8 @@ sub build_rule_ir_emit_context {
  # SPEC-FORMAT-TERSE.1.1.1 — auto-existing working variables. Collect typed-wrapper
  # references across the rule's RAW blocks and emit one preamble `my` per working
  # variable that is not already declared (deduped against the LOWERED handler code so
- # specs that use declare(...) stay byte-identical). See _collect_auto_working_var_decls.
+ # older declare/raw-my fixtures do not produce a second declaration). See
+ # _collect_auto_working_var_decls.
  my $lowered_text = join("\n",
   grep { defined && length }
   (
