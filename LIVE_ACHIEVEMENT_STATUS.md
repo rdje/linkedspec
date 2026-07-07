@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **SPEC-FORMAT-TERSE.8.6 — close helper retirement no-drift**
+  (DONE; FRONTIER `.9` HASH-LITERAL COLON ASSOCIATION NEXT AFTER CLEAN COMMIT).
+
+  **Change:** Final helper-retirement scans classify current specs/corpora as clean for retired helper calls, keep
+  remaining old names in diagnostics/regression/historical/reference buckets only, and correct the root guide so
+  current scalar assembly is `cat(...)`; source-spelled `concat(...)` is retired. A Knowledge fact card records the
+  no-drift audit result.
+
+  **Boundary:** No parser/runtime behavior changed. This is a closeout/documentation/Knowledge slice after Perl and
+  Rust hard retirement.
+
+  **Verification:** Oracle generation is byte-identical over **93** fixtures; Rust `corpus_oracle` passes **3**
+  tests. mdBook, Knowledge Map, memory, whitespace, and doctrine gates pass in commit closeout.
+
 - 2026-07-07: **SPEC-FORMAT-TERSE.8.5 — reconcile helper retirement docs**
   (DONE; FRONTIER `.8.6` FINAL HELPER-RETIREMENT NO-DRIFT CLOSEOUT NEXT).
 

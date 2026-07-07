@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — SPEC-FORMAT-TERSE.8.6 — close helper retirement no-drift
+
+**Scope:** Final helper-retirement drift scan across executable specs/corpora, public docs, tests/code, Knowledge
+Map facts, and generated oracle fixtures after Perl/Rust hard retirement.
+
+**Change:** The current authoring surface stays aligned on auto-existing variables, assignment/mutation,
+`set(...)`, `push(...)`, `copy(...)`, `cat(...)`, `array(...)`, `hash(...)`, and bare scalar reads. A stale root
+guide sentence that still presented `concat(...)` as current syntax now teaches `cat(...)` and identifies
+source-spelled `concat(...)` as retired. A Knowledge fact card records the scan buckets so future sessions do not
+redo the same no-drift audit.
+
+**Boundary:** No parser/runtime behavior changed. Remaining old helper names are diagnostics, regression locks,
+historical notes, Knowledge facts, or explicit retired-helper reference material; executable current specs/corpora
+do not use them as accepted syntax.
+
+**Validation:** Retired-helper scans over `specs/`, root corpus, and Rust oracle corpus classify cleanly; oracle
+corpus regeneration is byte-identical over **93** fixtures; Rust `corpus_oracle` passes **3** tests. mdBook,
+Knowledge Map, whitespace, memory, and doctrine gates pass in commit closeout.
+
 ## 2026-07-07 — SPEC-FORMAT-TERSE.8.5 — reconcile helper retirement docs
 
 **Scope:** User-facing docs, root reference guides, Rust README, Knowledge facts, and task/live docs after Perl and

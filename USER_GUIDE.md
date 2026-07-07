@@ -661,7 +661,7 @@ Definedness flow helpers are part of that same contract too: `is_defined(...)` a
 
 Scalar normalization helpers are part of that explicit contract too: `trim(...)`, `lowercase(...)`, and `uppercase(...)` now compose canonically across assignment sources, return payloads, and comparison inputs on both action-edge and lifecycle surfaces, so ordinary text cleanup can stay inside the backend-neutral value-expression layer instead of leaking into ad hoc raw string handling.
 
-Pure scalar assembly is part of that same contract too: `concat(...)` now lets `.spec` rules build canonical string values from normalized scalar fragments across assignment sources, direct `return(payload)` expressions, and comparison inputs on both action-edge and lifecycle surfaces, so string construction no longer needs temporary array staging or ad hoc host-language interpolation.
+Pure scalar assembly is part of that same contract too: `cat(...)` lets `.spec` rules build canonical string values from normalized scalar fragments across assignment sources, direct `return(payload)` expressions, and comparison inputs on both action-edge and lifecycle surfaces, so string construction no longer needs temporary array staging or ad hoc host-language interpolation. The older source-spelled `concat(...)` form is retired and current runtimes diagnose it.
 
 Scalar boundary transforms are part of that same contract too: `rm_prefix(...)` and `rm_suffix(...)` now let `.spec` rules strip one literal leading or trailing marker from normalized scalar values across assignments, direct `return(payload)` expressions, and comparison inputs, so common name-cleanup work can stay inside pure value expressions instead of leaking into ad hoc raw string code.
 

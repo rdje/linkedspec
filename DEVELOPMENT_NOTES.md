@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (SPEC-FORMAT-TERSE.8.6 — no-drift scans must classify by executable surface):
+  For helper-retirement closeout, treat current specs/corpora differently from docs/tests/code. Executable current
+  specs and oracle inputs should be clean for retired helper calls; false positives such as regex colons,
+  `JSON::PP`, comments, strings, and literal input text are not helper syntax. In code/tests/docs, old names may
+  remain only as unsupported-helper diagnostics, regression locks, historical evidence, or explicitly retired
+  reference material. If a current-facing guide says an old helper such as `concat(...)` is live syntax, fix it
+  immediately to the current spelling (`cat(...)`) and record the audit conclusion in a Knowledge fact.
+
 - 2026-07-07 (SPEC-FORMAT-TERSE.8.5 — post-retirement docs must not teach old spellings):
   After `.8.3`/`.8.4`, root guides and Knowledge cards may keep old helper names only as historical lowering
   evidence or retired-diagnostic guidance. Current-facing examples should use auto-existing variables, bare scalar

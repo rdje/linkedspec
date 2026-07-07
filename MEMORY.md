@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.8.5` — current-facing docs/KM/reference cleanup after helper hard
-  retirement is complete: root guides, mdBook, Rust README, and Knowledge facts teach `set(...)`, assignments,
-  `push(...)`, `copy(...)`, `cat(...)`, `array(...)`, `hash(...)`, and bare scalar reads; old helper names are
-  historical or retired-diagnostic only.
-- prior_leaf: `SPEC-FORMAT-TERSE.8.4` — Rust hard retirement completed explicit diagnostics for `declare`,
-  `array_copy`, `hash_copy`, `concat`, `push_value`, `push_nonempty`, and wrapper aliases `a(...)` / `h(...)`.
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.8.6` — final helper-retirement no-drift closeout is complete:
+  executable specs/corpora are clean for retired helper calls, docs/tests/code/KM occurrences are classified as
+  diagnostics, regression locks, history, or retired-reference material, oracle regeneration is byte-identical over
+  **93** fixtures, and Rust `corpus_oracle` passes **3** tests.
+- prior_leaf: `SPEC-FORMAT-TERSE.8.5` — current-facing docs/KM/reference cleanup after helper hard retirement
+  reconciled root guides, mdBook, Rust README, and Knowledge facts to current helper spellings.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-FORMAT-TERSE.8.5 - reconcile helper retirement docs`; parent before this slice is the `.8.4` commit.
+  `SPEC-FORMAT-TERSE.8.6 - close helper retirement no-drift`; parent before this slice is the `.8.5` commit.
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: after this `.8.5` commit is clean and `git status` is handoff-ready, the next frontier is
-  `SPEC-FORMAT-TERSE.8.6` final helper-retirement no-drift closeout before `.9`.
-- next_action: finish `.8.5` commit workflow, clear `git_message_brief.txt`, verify clean status, then pick
-  `SPEC-FORMAT-TERSE.8.6` if continuing PNT; do not push unless explicitly instructed.
+- active_work_unit: after this `.8.6` commit is clean and `git status` is handoff-ready, the next frontier is
+  `SPEC-FORMAT-TERSE.9` hash-literal colon association syntax.
+- next_action: finish `.8.6` commit workflow, clear `git_message_brief.txt`, verify clean status, then pick
+  `SPEC-FORMAT-TERSE.9` if continuing PNT; do not push unless explicitly instructed.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.
@@ -39,5 +39,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   worktree ignored by submodule policy. Deferred lanes behind `.8` closeout: `.9` (hash `=>`→`:`),
   `.10`/`.12`/`.13`/`.14` backlog; `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`,
   `SPEC-LANG-REFERENCE`.
-- blockers: none for `.8.5` ownership. in_flight_uncommitted: none after the `.8.5` commit lands; do
+- blockers: none for `.8.6` ownership. in_flight_uncommitted: none after the `.8.6` commit lands; do
   not pivot unless the repo is handoff-ready.

@@ -3470,12 +3470,24 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.8.5 - reconcile helper retirement docs`
 
 - ID: `SPEC-FORMAT-TERSE.8.6`
-  Status: `pending`
+  Status: `done`
   Goal: Final no-drift closeout for legacy helper retirement.
   Acceptance: Stale legacy-helper scans across current specs/corpora/docs/tests/KM/code pass, oracle corpus and
     mdBook stay in sync, and the next frontier advances to `.9`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-07.** Current executable specs/corpora scan clean for retired helper calls:
+    no `declare(...)`, `assign(...)`, `array_copy(...)`, `hash_copy(...)`, `concat(...)`, `push_value(...)`,
+    `push_nonempty(...)`, or scalar-slot `scalar(...)` calls remain in `specs/`, root corpus specs, or Rust oracle
+    corpus specs. Short-wrapper alias scans only hit literal input text `(a(b)c)` in recursion fixtures, not helper
+    calls. Colon-prefixed scalar-slot scans only hit comments, Perl namespace examples, regex syntax, and string
+    literals. Code/test/doc/KM residue is classified as unsupported-helper diagnostics, retirement regression
+    locks, historical/migration notes, Knowledge facts, or explicit retired-helper reference text. Root
+    `USER_GUIDE.md` had one stale current-facing `concat(...)` paragraph; it now teaches `cat(...)` and states
+    source-spelled `concat(...)` is retired. Added Knowledge fact
+    `terse-helper-retirement-no-drift-closeout`. `perl -c -Iperl tools/gen_oracle_corpus.pl` passes; `perl -Iperl
+    tools/gen_oracle_corpus.pl` regenerates **93** fixtures with no corpus drift; Rust `corpus_oracle` passes **3**
+    tests. mdBook/Knowledge Map/memory/doctrine gates pass in commit closeout. Frontier advances to `.9` after this
+    clean commit.
+  Commit: `SPEC-FORMAT-TERSE.8.6 - close helper retirement no-drift`
 
 - ID: `SPEC-FORMAT-TERSE.9`
   Status: `pending` (owned by user directive 2026-07-04)
@@ -4029,7 +4041,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | 21 | `SPEC-FORMAT-TERSE.8.3` | `done` | Perl reference legacy helper spellings now diagnose instead of lowering successfully |
 | 22 | `SPEC-FORMAT-TERSE.8.4` | `done` | Rust parser/runtime legacy helper spellings and wrapper aliases now diagnose instead of executing successfully |
 | 23 | `SPEC-FORMAT-TERSE.8.5` | `done` | public docs/KM/reference cleanup after Perl/Rust hard retirement |
-| 24 | `SPEC-FORMAT-TERSE.8.6` | `pending` | final helper-retirement no-drift closeout |
+| 24 | `SPEC-FORMAT-TERSE.8.6` | `done` | final helper-retirement no-drift closeout |
 | 25 | `SPEC-FORMAT-TERSE.9` | `pending` | user directive replaces Perlish hash-literal `=>` association with terse `:` association after helper-removal / assignment-semantics coordination lands |
 | — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.12` | `deferred` / `spec backlog` | track future hash-tree attached-block traversal; not PNT-eligible until explicitly activated |
