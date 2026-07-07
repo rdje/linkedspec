@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (SPEC-FORMAT-TERSE.9.3 — Rust colon hash literals reuse the same brace-classification boundary):
+  Rust `linkedspec-core/src/expr.rs` now mirrors the Perl `.9.2` migration window: direct hash literals accept
+  top-level `:` and old `=>` pair separators, while the scanner skips `::`, nested braces, brackets, parentheses,
+  strings, and regex literals. Keep this in the ActionIR expression parser only. Blind-call edge `=> Rule` remains
+  rule-body syntax, source-language associations such as VHDL remain out of scope, and broad current-source/corpus
+  migration belongs to `.9.4`. Runtime `Expr::HashLiteral` evaluation was already separator-agnostic once the AST
+  exists, so the behavior change is parser plus focused Rust locks, not a runtime data-model rewrite.
+
 - 2026-07-07 (SPEC-FORMAT-TERSE.9.2 — Perl colon hash literals share the pair scanner with old `=>`):
   During the hash-literal migration window, the Perl ActionIR AST parser accepts both top-level `:` and `=>` as
   hash-literal pair separators. Keep this scoped to direct hash literals: skip `::` while scanning so block values

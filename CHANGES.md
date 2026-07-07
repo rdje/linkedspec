@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — SPEC-FORMAT-TERSE.9.3 — add Rust colon hash literals
+
+**Scope:** Rust parser/runtime parity for the hash-literal `{ key : value }` migration window.
+
+**Change:** The Rust ActionIR expression parser now treats top-level `:` as a direct hash-literal pair separator
+alongside old `=>`, while explicitly excluding `::` and nested/string/regex separators from brace classification.
+Colon hash literals parse in return payloads, direct assignment RHS values, hash-index mutation RHS values,
+expression-valued `set(...)` / `=(...)`, array composition, direct hash receiver chains, and nested hash shapes.
+
+**Boundary:** Old `{ key => value }` remains accepted only for the migration window until `.9.5`. Blind-call edge
+`=> Rule` syntax is unchanged and remains owned by the rule-body parser, not the ActionIR hash-literal parser.
+Current-source/corpus/doc migration to prefer `:` is deliberately left to `.9.4`.
+
+**Validation:** Rust formatting passes. Focused parser tests and the broader
+`cargo test --manifest-path rust/Cargo.toml -p linkedspec-core expr::tests::` suite pass for colon-only hashes,
+mixed `=>`/`:` migration hashes, assignment/mutation/expression-valued slots, and scanner exclusion of
+`::`/nested separators. The runtime integration test `terse_9_3_colon_hash_literals_parse_and_run` passes. mdBook,
+Knowledge Map, memory, doctrine, and diff-whitespace gates pass. Frontier becomes `.9.4` for current-source/docs/corpus
+migration.
+
 ## 2026-07-07 — SPEC-FORMAT-TERSE.9.2 — add Perl colon hash literals
 
 **Scope:** Perl reference ActionIR AST parsing/lowering for the hash-literal `{ key : value }` migration window.

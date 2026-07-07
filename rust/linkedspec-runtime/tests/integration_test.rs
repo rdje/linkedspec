@@ -2024,6 +2024,30 @@ fn terse_1_2_3_5_3_shape_literals_work_in_mutation_rhs_slots() {
     );
 }
 
+// ── SPEC-FORMAT-TERSE.9.3 — Rust colon hash-literal parity:
+// During the migration window, Rust accepts `{ key : value }` anywhere the old
+// direct `{ key => value }` shape literal was accepted. Blind-call `=>` remains
+// edge syntax and old hash-pair `=>` support is retired separately in `.9.5`.
+
+#[test]
+fn terse_9_3_colon_hash_literals_parse_and_run() {
+    let grammar = "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); direct = { key : value, \"fixed\" : [value], \"outer\" : { \"nested\" : value } }; meta[key] = { key : value }; set(assigned, { key : value }); set(expr_set, set(tmp, { key : value })); set(expr_op, =(tmp2, { key : value })); return(array(direct, copy(hash(meta)), assigned, expr_set, expr_op, [value, { key : value }], { key : value }.count_keys(), { set(x, \"a\"); x })) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[
+            {"fixed": ["ok"], "outer": {"nested": "ok"}, "stage": "ok"},
+            {"stage": {"stage": "ok"}},
+            {"stage": "ok"},
+            {"stage": "ok"},
+            {"stage": "ok"},
+            ["ok", {"stage": "ok"}],
+            1,
+            "a"
+        ]]),
+        "colon hash literals compose in Rust value, assignment, mutation, receiver-chain, and block contexts"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.11.3 — Rust duck-typed assignment parity:
 // direct shape literals on bare assignment targets bind scalar-held typed
 // values. Explicit array/hash targets still mutate aggregate storage.

@@ -25,8 +25,8 @@
 //! literal     → string | number | boolean | regex | undef | array | hash
 //! grouped     → '(' expr ')'
 //! array       → '[' (expr (',' expr)*)? ']'
-//! hash        → '{' (expr '=>' expr (',' expr '=>' expr)*)? '}'
-//! block       → '{' stmt+ '}'              (non-empty, no top-level '=>')
+//! hash        → '{' (expr ('=>' | ':') expr (',' expr ('=>' | ':') expr)*)? '}'
+//! block       → '{' stmt+ '}'              (non-empty, no top-level hash-pair separator)
 //! string      → '"' [^"]* '"' | "'" [^']* "'"
 //! number      → -?\d+(\.\d+)?
 //! boolean     → 'true' | 'false'
@@ -114,7 +114,7 @@ pub enum Expr {
     /// A direct array shape literal: `[]`, `[value, true]`
     #[serde(rename = "array_literal")]
     ArrayLiteral { items: Vec<Expr> },
-    /// A direct hash shape literal: `{ key => value }`
+    /// A direct hash shape literal: `{ key : value }`
     #[serde(rename = "hash_literal")]
     HashLiteral { entries: Vec<HashLiteralEntry> },
     /// A value-returning block expression: `{ set(x, "a"); x }`
@@ -1120,17 +1120,17 @@ impl<'a> Parser<'a> {
 
             let key = self.parse_expr()?;
             self.skip_whitespace();
-            if !self.remaining().starts_with("=>") {
+            let Some(separator_len) = Self::hash_pair_separator_at(self.remaining()) else {
                 return Err(format!(
-                    "expected '=>' in hash literal at position {}",
+                    "expected '=>' or ':' in hash literal at position {}",
                     self.pos
                 ));
-            }
-            self.advance(2);
+            };
+            self.advance(separator_len);
             self.skip_whitespace();
             if self.pos >= self.src.len() || self.peek() == Some('}') {
                 return Err(format!(
-                    "expected value after '=>' in hash literal at position {}",
+                    "expected value after hash pair separator in hash literal at position {}",
                     self.pos
                 ));
             }
@@ -1163,7 +1163,7 @@ impl<'a> Parser<'a> {
         let (payload_start, payload_end, after_close) = self.scan_brace_payload_bounds()?;
         let payload = &self.src[payload_start..payload_end];
 
-        if payload.trim().is_empty() || Self::has_top_level_fat_arrow(payload) {
+        if payload.trim().is_empty() || Self::has_top_level_hash_pair_separator(payload) {
             self.pos = start;
             return self.parse_hash_literal();
         }
@@ -1224,7 +1224,17 @@ impl<'a> Parser<'a> {
         ))
     }
 
-    fn has_top_level_fat_arrow(src: &str) -> bool {
+    fn hash_pair_separator_at(src: &str) -> Option<usize> {
+        if src.starts_with("=>") {
+            return Some(2);
+        }
+        if src.starts_with(':') && !src.starts_with("::") {
+            return Some(1);
+        }
+        None
+    }
+
+    fn has_top_level_hash_pair_separator(src: &str) -> bool {
         let bytes = src.as_bytes();
         let mut pos = 0usize;
         let mut paren_depth = 0usize;
@@ -1253,6 +1263,14 @@ impl<'a> Parser<'a> {
                 b'}' => brace_depth = brace_depth.saturating_sub(1),
                 b'=' if pos + 1 < bytes.len()
                     && bytes[pos + 1] == b'>'
+                    && paren_depth == 0
+                    && bracket_depth == 0
+                    && brace_depth == 0 =>
+                {
+                    return true;
+                }
+                b':' if !(pos + 1 < bytes.len() && bytes[pos + 1] == b':')
+                    && !(pos > 0 && bytes[pos - 1] == b':')
                     && paren_depth == 0
                     && bracket_depth == 0
                     && brace_depth == 0 =>
@@ -2118,6 +2136,70 @@ mod tests {
     }
 
     #[test]
+    fn parse_colon_hash_shape_literal_value_expr() {
+        let code = r#"return({ key : value, "fixed" : [value], "outer" : { "nested" : value } })"#;
+        let block = CodeBlock::parse(code).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                match args[0].value() {
+                    Expr::HashLiteral { entries } => {
+                        assert_eq!(entries.len(), 3);
+                        assert!(
+                            matches!(&entries[0].key, Expr::Variable { name } if name == "key")
+                        );
+                        assert!(
+                            matches!(&entries[0].value, Expr::Variable { name } if name == "value")
+                        );
+                        assert!(
+                            matches!(&entries[1].key, Expr::StringLiteral { value } if value == "fixed")
+                        );
+                        assert!(
+                            matches!(&entries[1].value, Expr::ArrayLiteral { items } if items.len() == 1)
+                        );
+                        assert!(
+                            matches!(&entries[2].key, Expr::StringLiteral { value } if value == "outer")
+                        );
+                        match &entries[2].value {
+                            Expr::HashLiteral { entries } => {
+                                assert_eq!(entries.len(), 1);
+                                assert!(
+                                    matches!(&entries[0].key, Expr::StringLiteral { value } if value == "nested")
+                                );
+                                assert!(
+                                    matches!(&entries[0].value, Expr::Variable { name } if name == "value")
+                                );
+                            }
+                            other => panic!("expected nested HashLiteral, got {:?}", other),
+                        }
+                    }
+                    other => panic!("expected HashLiteral, got {:?}", other),
+                }
+            }
+            _ => panic!("expected return call"),
+        }
+    }
+
+    #[test]
+    fn parse_mixed_hash_pair_separators_during_migration_window() {
+        let code = r#"return({ old => value, current : value })"#;
+        let block = CodeBlock::parse(code).unwrap();
+        match &block.statements[0].expr {
+            Expr::Call { args, .. } => match args[0].value() {
+                Expr::HashLiteral { entries } => {
+                    assert_eq!(entries.len(), 2);
+                    assert!(matches!(&entries[0].key, Expr::Variable { name } if name == "old"));
+                    assert!(
+                        matches!(&entries[1].key, Expr::Variable { name } if name == "current")
+                    );
+                }
+                other => panic!("expected HashLiteral, got {:?}", other),
+            },
+            other => panic!("expected return call, got {:?}", other),
+        }
+    }
+
+    #[test]
     fn parse_shape_literals_in_mutation_slots() {
         let code = r#"items += [value]; meta[key] = { key => value }"#;
         let block = CodeBlock::parse(code).unwrap();
@@ -2138,6 +2220,50 @@ mod tests {
                 );
             }
             other => panic!("expected hash-index assignment, got {:?}", other),
+        }
+    }
+
+    #[test]
+    fn parse_colon_shape_literals_in_assignment_and_mutation_slots() {
+        let code = r#"name = { key : value }; meta[key] = { "inner" : value }; set(out, { key : value }); return(=(other, { key : value }))"#;
+        let block = CodeBlock::parse(code).unwrap();
+        assert_eq!(block.statements.len(), 4);
+        match &block.statements[0].expr {
+            Expr::AssignScalar { name, value } => {
+                assert_eq!(name, "name");
+                assert!(
+                    matches!(value.as_ref(), Expr::HashLiteral { entries } if entries.len() == 1)
+                );
+            }
+            other => panic!("expected scalar assignment, got {:?}", other),
+        }
+        match &block.statements[1].expr {
+            Expr::AssignHashIndex { name, key, value } => {
+                assert_eq!(name, "meta");
+                assert!(matches!(key.as_ref(), Expr::Variable { name } if name == "key"));
+                assert!(
+                    matches!(value.as_ref(), Expr::HashLiteral { entries } if entries.len() == 1)
+                );
+            }
+            other => panic!("expected hash-index assignment, got {:?}", other),
+        }
+        match &block.statements[2].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "set");
+                assert!(
+                    matches!(args[1].value(), Expr::HashLiteral { entries } if entries.len() == 1)
+                );
+            }
+            other => panic!("expected set call, got {:?}", other),
+        }
+        match &block.statements[3].expr {
+            Expr::Call { name, args } => {
+                assert_eq!(name, "return");
+                assert!(
+                    matches!(args[0].value(), Expr::Call { name, args } if name == "=" && matches!(args[1].value(), Expr::HashLiteral { entries } if entries.len() == 1))
+                );
+            }
+            other => panic!("expected return call, got {:?}", other),
         }
     }
 
@@ -2164,6 +2290,22 @@ mod tests {
             }
             other => panic!("expected set call, got {:?}", other),
         }
+    }
+
+    #[test]
+    fn top_level_hash_pair_separator_scanner_skips_nested_and_namespace_colons() {
+        assert!(Parser::has_top_level_hash_pair_separator("key : value"));
+        assert!(Parser::has_top_level_hash_pair_separator("old => value"));
+        assert!(!Parser::has_top_level_hash_pair_separator("JSON::PP"));
+        assert!(!Parser::has_top_level_hash_pair_separator(
+            r#""literal:colon""#
+        ));
+        assert!(!Parser::has_top_level_hash_pair_separator(
+            "call(key : value)"
+        ));
+        assert!(!Parser::has_top_level_hash_pair_separator(
+            r#"{ "nested" : value }"#
+        ));
     }
 
     #[test]

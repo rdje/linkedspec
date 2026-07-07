@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **SPEC-FORMAT-TERSE.9.3 — add Rust colon hash literals**
+  (DONE; FRONTIER `.9.4` CURRENT-SOURCE/DOCS/CORPUS COLON MIGRATION NEXT).
+
+  **Change:** The Rust ActionIR expression parser now accepts `{ key : value }` direct hash-literal association
+  during the migration window, matching the Perl `.9.2` reference behavior. Colon pairs compose in nested hash
+  shapes, direct assignment RHS values, hash-index mutation RHS values, expression-valued `set(...)` / `=(...)`,
+  array composition, direct hash receiver chains, and block-vs-hash precedence.
+
+  **Boundary:** Old hash-literal `{ key => value }` remains accepted only until `.9.5`; blind-call edge `=> Rule`
+  remains separate rule-body syntax. Existing specs/corpus/docs are not broadly migrated in this slice; `.9.4`
+  owns that source-facing sweep.
+
+  **Verification:** Rust formatting passes; focused Rust parser and runtime integration tests pass. Knowledge Map,
+  mdBook, memory, whitespace, and doctrine gates pass in commit closeout.
+
 - 2026-07-07: **SPEC-FORMAT-TERSE.9.2 — add Perl colon hash literals**
   (DONE; FRONTIER `.9.3` RUST COLON HASH-LITERAL PARITY NEXT).
 
