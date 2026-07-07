@@ -72,6 +72,19 @@ subtest 'shape literals and expression-valued blocks' => sub {
     is($hash->{entries}[1]{key}{kind}, 'string', 'quoted hash key is a string expression');
     is($hash->{entries}[1]{value}{kind}, 'array_literal', 'hash value can be a nested shape literal');
 
+    my $colon_hash = parse_expr('{ key : value, "fixed" : [value], outer : { "nested" : value } }');
+    is($colon_hash->{kind}, 'hash_literal', 'colon hash shape literal parses');
+    is(scalar(@{$colon_hash->{entries}}), 3, 'colon hash literal entries are captured');
+    is($colon_hash->{entries}[1]{value}{kind}, 'array_literal', 'colon hash value can be a nested array shape literal');
+    is($colon_hash->{entries}[2]{value}{kind}, 'hash_literal', 'colon hash value can be a nested hash shape literal');
+
+    my $mixed_hash = parse_expr('{ old => value, current : value }');
+    is($mixed_hash->{kind}, 'hash_literal', 'migration-window hash literal accepts old and colon pair separators');
+    is_deeply([map { $_->{key}{name} } @{$mixed_hash->{entries}}], ['old', 'current'], 'mixed hash literal preserves pair order');
+
+    my $double_colon_block = parse_expr('{ JSON::PP }');
+    is($double_colon_block->{kind}, 'block_value', 'double-colon payload does not trigger colon hash parsing');
+
     my $block = parse_expr('{ set(x,"a"); x }');
     is($block->{kind}, 'block_value', 'non-empty non-fat-arrow braces parse as a block value');
     is(scalar(@{$block->{block}{statements}}), 2, 'block value owns nested statements');
@@ -93,6 +106,10 @@ subtest 'assignment and mutation statement nodes' => sub {
     is($hash->{kind}, 'assign_hash_index', 'hash-index assignment parses as assign_hash_index');
     is($hash->{key}{kind}, 'variable', 'hash assignment key is parsed as expression');
     is($hash->{value}{kind}, 'hash_literal', 'hash assignment RHS is parsed as hash literal');
+
+    my $colon_hash = parse_expr('meta[key] = { key : value }');
+    is($colon_hash->{kind}, 'assign_hash_index', 'colon hash-index assignment parses as assign_hash_index');
+    is($colon_hash->{value}{kind}, 'hash_literal', 'colon hash assignment RHS is parsed as hash literal');
 
     my $operator_call = parse_expr('=(target, value)');
     is($operator_call->{kind}, 'call', 'single-equals operator spelling parses as a call');

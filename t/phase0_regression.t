@@ -45998,6 +45998,69 @@ subtest 'spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments' => su
         'direct nested access runs through mixed hash and array segments');
 };
 
+subtest 'spec_format_terse_9_2_perl_colon_hash_literal_support' => sub {
+    # SPEC-FORMAT-TERSE.9.2: Perl accepts the future `{ key : value }`
+    # hash-literal association syntax during the migration window while the old
+    # `{ key => value }` spelling still works until hard retirement.
+    plan tests => 15;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    is($L->('return({ key : value })'), 'return {$key => $value}',
+        'colon hash literal lowers bare key/value through scalar reads');
+    is($L->('return({ "fixed" : [value], key : { "nested" : value } })'),
+        'return {"fixed" => [$value], $key => {"nested" => $value}}',
+        'colon hash literal lowers quoted keys and nested shape values');
+    is($L->('return({ old => value, key : value })'), 'return {$old => $value, $key => $value}',
+        'migration-window parser accepts old and colon hash pair separators together');
+    is($L->('name = { key : value }'), '$name = {$key => $value}',
+        'direct assignment RHS accepts colon hash literals');
+    is($L->('meta[key] = { "inner" : value }'), '$meta{$key} = {"inner" => $value}',
+        'hash-index mutation RHS accepts colon hash literals');
+    is($L->('return(set(meta, { key : value }))'), 'return do { $meta = {$key => $value}; $meta }',
+        'expression-valued set accepts colon hash literals');
+    is($L->('return(=(meta, { key : value }))'), 'return do { $meta = {$key => $value}; $meta }',
+        'single-equals value call accepts colon hash literals');
+    is($L->('return([value, { key : value }])'), 'return [$value, {$key => $value}]',
+        'colon hash literals compose inside array shape values');
+    is($L->('return({ set(x,"a"); x })'), 'return do { $x = "a"; $x }',
+        'non-pair braces still parse as expression-valued blocks');
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { set(key,\"stage\"); set(value,\"ok\"); meta = { key : value }; return(array({ key : value }, { \"fixed\" : [value], key : { \"nested\" : value } }, hash(meta))) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'colon hash-literal spec compiles')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '[{"stage":"ok"},{"fixed":["ok"],"stage":{"nested":"ok"}},{"stage":"ok"}]',
+        'colon hash literals run with scalar key/value reads and nested shapes');
+
+    my $src = $gen->($spec);
+    like($src, qr/\$meta = \{\$key => \$value\}/,
+        'generated Perl host code still uses Perl fat-arrow syntax internally');
+    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'colon hash-literal spec has no canonical fallback');
+    is($meta->{unresolved_helper_count}, 0,
+        'colon hash-literal spec has no unresolved-helper hits');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'colon hash-literal spec remains language-agnostic ActionIR ready on the Perl reference');
+};
+
 subtest 'spec_format_terse_1_2_3_5_1_shape_literal_value_expressions' => sub {
     # SPEC-FORMAT-TERSE.1.2.3.5.1: [] / {} are DSL value literals, not
     # raw-Perl passthrough. Direct shape members lower through the accepted

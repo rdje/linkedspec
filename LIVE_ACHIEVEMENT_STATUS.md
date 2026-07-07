@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **SPEC-FORMAT-TERSE.9.2 — add Perl colon hash literals**
+  (DONE; FRONTIER `.9.3` RUST COLON HASH-LITERAL PARITY NEXT).
+
+  **Change:** The Perl reference ActionIR AST parser now accepts `{ key : value }` as hash-literal association
+  syntax during the migration window. Colon pairs work for bare and quoted keys, nested array/hash shapes, direct
+  assignment RHS values, hash-index mutation RHS values, expression-valued `set(...)` / `=(...)`, and array shape
+  composition. The old `{ key => value }` spelling remains accepted only until the hard-retirement leaf.
+
+  **Boundary:** Blind-call edge `=> Rule` syntax is untouched. Generated Perl host code still legitimately emits
+  Perl fat arrows inside hashrefs, and double-colon payloads such as `{ JSON::PP }` still parse as block values
+  instead of hash literals.
+
+  **Verification:** Focused AST tests pass; full phase0 passes with `PERL5LIB=` cleared and plan `1..1023`.
+  Knowledge Map, mdBook, memory, whitespace, and doctrine gates pass in commit closeout.
+
 - 2026-07-07: **SPEC-FORMAT-TERSE.9.1 — split hash literal colon migration**
   (DONE; FRONTIER `.9.2` PERL REFERENCE COLON HASH-LITERAL SUPPORT NEXT).
 

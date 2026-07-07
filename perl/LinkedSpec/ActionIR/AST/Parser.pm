@@ -571,7 +571,7 @@ sub _parse_brace_expr {
  my ($trimmed, $start, $end) = @_;
  return undef unless _outer_delimiter_is_balanced($trimmed, '{', '}');
  my $payload = substr($trimmed, 1, length($trimmed) - 2);
- if (_fallback_trim($payload) eq '' || _has_top_level_fat_arrow($payload)) {
+ if (_fallback_trim($payload) eq '' || _has_top_level_hash_pair_separator($payload)) {
   return _parse_hash_literal_expr($trimmed, $payload, $start, $end);
  }
  my $block = parse_action_block($payload);
@@ -586,13 +586,15 @@ sub _parse_hash_literal_expr {
  foreach my $entry (@$parts) {
   my $entry_offset = _find_piece_offset($payload, $entry, $cursor);
   $entry_offset = $cursor unless defined $entry_offset;
-  my $arrow_idx = _find_top_level_fat_arrow($entry);
+  my $separator = _find_top_level_hash_pair_separator($entry);
   return _raw_node($trimmed, $start, $end, 'invalid_hash_literal')
-   unless defined $arrow_idx;
-  my $key_text = substr($entry, 0, $arrow_idx);
-  my $value_text = substr($entry, $arrow_idx + 2);
+   unless ref($separator) eq 'HASH';
+  my $separator_idx = $separator->{idx};
+  my $separator_len = $separator->{length};
+  my $key_text = substr($entry, 0, $separator_idx);
+  my $value_text = substr($entry, $separator_idx + $separator_len);
   my ($key_trimmed, $key_start) = _trim_with_offsets($key_text, $start + 1 + $entry_offset);
-  my ($value_trimmed, $value_start) = _trim_with_offsets($value_text, $start + 1 + $entry_offset + $arrow_idx + 2);
+  my ($value_trimmed, $value_start) = _trim_with_offsets($value_text, $start + 1 + $entry_offset + $separator_idx + $separator_len);
   push @entries, {
    key => parse_action_expr($key_trimmed, { base_start => $key_start }),
    value => parse_action_expr($value_trimmed, { base_start => $value_start }),
@@ -879,6 +881,35 @@ sub _find_matching_delim {
 sub _has_top_level_fat_arrow {
  my ($text) = @_;
  return defined(_find_top_level_fat_arrow($text)) ? 1 : 0
+}
+
+sub _has_top_level_hash_pair_separator {
+ my ($text) = @_;
+ return defined(_find_top_level_hash_pair_separator($text)) ? 1 : 0
+}
+
+sub _find_top_level_hash_pair_separator {
+ my ($text) = @_;
+ return undef unless defined $text;
+ my $state = _new_scan_state();
+ my $len = length($text);
+ for (my $idx = 0; $idx < $len; ++$idx) {
+  my $ch = substr($text, $idx, 1);
+  if (_consume_scan_char($state, $text, $idx, $ch)) {
+   next;
+  }
+  next unless _scan_is_top_level($state);
+  if ($ch eq '=' && $idx + 1 < $len && substr($text, $idx, 2) eq '=>') {
+   return { idx => $idx, length => 2, token => '=>' };
+  }
+  if ($ch eq ':') {
+   my $prev = $idx > 0 ? substr($text, $idx - 1, 1) : '';
+   my $next = $idx + 1 < $len ? substr($text, $idx + 1, 1) : '';
+   next if $prev eq ':' || $next eq ':';
+   return { idx => $idx, length => 1, token => ':' };
+  }
+ }
+ return undef
 }
 
 sub _find_top_level_fat_arrow {

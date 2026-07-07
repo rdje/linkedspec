@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — SPEC-FORMAT-TERSE.9.2 — add Perl colon hash literals
+
+**Scope:** Perl reference ActionIR AST parsing/lowering for the hash-literal `{ key : value }` migration window.
+
+**Change:** The Perl parser now treats top-level `:` as a hash-literal pair separator alongside the old `=>`
+separator. Colon hash literals compose in return payloads, scalar assignment RHS values, hash-index mutation RHS
+values, expression-valued `set(...)` / `=(...)`, array shape values, and nested array/hash shapes. Bare key/value
+slots still lower as scoped scalar reads; quoted keys remain fixed fields.
+
+**Boundary:** Old `{ key => value }` remains accepted only for the migration window until `.9.5`. The scanner skips
+double-colon tokens so non-pair brace values such as `{ JSON::PP }` remain expression-valued blocks. Generated Perl
+host code still uses Perl fat arrows inside emitted hashrefs; this is not source `.spec` syntax.
+
+**Validation:** `perl -c -Iperl` syntax checks pass for the touched parser/tests, focused
+`t/actionir_ast_parser.t` passes, direct toolbox probes match the expected lowering/runtime behavior, and full
+`env PERL5LIB= perl -Iperl t/phase0_regression.t` passes with plan `1..1023`. Frontier becomes `.9.3` for Rust
+parser/runtime parity.
+
 ## 2026-07-07 — SPEC-FORMAT-TERSE.9.1 — split hash literal colon migration
 
 **Scope:** Task-tree, Knowledge Map, and live-doc split/inventory for replacing direct hash-literal association

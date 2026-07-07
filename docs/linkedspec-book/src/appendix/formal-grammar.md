@@ -333,12 +333,13 @@ semicolons inside nested expressions or literal payloads remain protected.
 Lifecycle blocks are not expression-valued blocks: ordinary final statement values are
 discarded, and only an explicit top-level `return(expr)` writes the rule return channel.
 
-In value positions, a non-empty `{ ... }` payload without a top-level `=>` is an
+In value positions, a non-empty `{ ... }` payload without a top-level hash pair separator is an
 expression-valued block on the Perl reference and Rust backend. It returns the final
 expression unless a `return(expr)` statement is reached earlier; that `return(expr)`
 exits only the expression-valued block, skips later statements in that block, and
 yields `expr` as the block value. Empty `{}` and top-level-fat-arrow `{ key => value }`
-forms remain hash literals. Because the block is a value expression, it may also be the
+forms remain hash literals; during the `SPEC-FORMAT-TERSE.9` migration, the Perl
+reference also treats top-level-colon `{ key : value }` as a hash literal. Because the block is a value expression, it may also be the
 receiver of a compatible receiver-dot chain, such as `{ [3, 1, 2] }.sorted().join_values(",")`
 or `{ " a-b " }.trim().split("-").count()`.
 

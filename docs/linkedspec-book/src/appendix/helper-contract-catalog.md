@@ -41,6 +41,7 @@ The Perl reference and Rust backend accept direct array and hash shape literals 
 []
 [value, cat("a", "b"), true, []]
 { key => value, "fixed" => [value] }
+{ key : value, "fixed" : [value] }   # Perl reference migration-window spelling
 ```
 
 Shape literals are accepted in value-consuming sites such as `return(payload)`, scalar assignment sources,
@@ -48,6 +49,9 @@ array append RHS values, hash-index assignment RHS values, `push(target, value)`
 payloads. Array elements, hash keys, and hash values lower through the scoped DSL value-expression rules:
 primitive literals stay typed, recognized helper calls compose, direct nested access keeps its own bracket
 semantics, nested shape literals recurse, and non-reserved bare names are scalar working-variable reads.
+During the `SPEC-FORMAT-TERSE.9` migration, the Perl reference also accepts `:` as the hash-literal key/value
+separator. Rust parity and the broad source/docs/corpus migration are tracked separately, so `=>` may still appear
+in historical examples and cross-backend material until those leaves close.
 
 A bare hash-literal key is a dynamic scalar key, not a fixed string field name:
 
@@ -55,6 +59,7 @@ A bare hash-literal key is a dynamic scalar key, not a fixed string field name:
 set(key, "kind");
 set(value, "token");
 return({ key => value });       # {"kind": "token"}
+return({ key : value });        # same on the Perl reference during migration
 return({ "kind" => value });    # fixed "kind" field
 ```
 
@@ -63,6 +68,7 @@ Direct shape literals are typed RHS values for bare assignment targets on the Pe
 ```text
 items = [value, cat("a", "b")];      # items holds an array value
 meta = { key => value };             # meta holds a hash value
+meta = { key : value };              # Perl reference migration-window spelling
 set(items, []);                      # items holds an empty array value
 set(meta, {});                       # meta holds an empty hash value
 set(array(items), []);               # explicit aggregate array reset
@@ -76,10 +82,11 @@ Direct-access brackets (`payload["items"][i]`), hash-index assignment brackets (
 control-flow/block braces, and all-bare child-call routing remain separate surfaces.
 
 The Perl reference and Rust backend accept expression-valued blocks in value-consuming sites. A non-empty
-brace payload with no top-level `=>` evaluates its statements and yields the final expression. A
+brace payload with no top-level hash pair separator (`=>`, and `:` on the Perl reference during the migration)
+evaluates its statements and yields the final expression. A
 `return(expr)` anywhere in the block exits only that expression-valued block, skips later block statements,
-and yields `expr` as the block value. Hash literals keep precedence: `{}` and `{ key => value }` remain hash
-shapes.
+and yields `expr` as the block value. Hash literals keep precedence: `{}`, `{ key => value }`, and the
+Perl-reference migration spelling `{ key : value }` remain hash shapes.
 
 ```text
 return({ set(x, "a"); x });                    # "a"

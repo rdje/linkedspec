@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (SPEC-FORMAT-TERSE.9.2 — Perl colon hash literals share the pair scanner with old `=>`):
+  During the hash-literal migration window, the Perl ActionIR AST parser accepts both top-level `:` and `=>` as
+  hash-literal pair separators. Keep this scoped to direct hash literals: skip `::` while scanning so block values
+  containing package-like names do not become hashes, and remember that generated Perl hashrefs still use Perl
+  `=>` internally. Do not migrate blind-call edge `=> Rule` syntax or VHDL/source-language associations under this
+  leaf. Rust parity is still `.9.3`; broad source/docs/KM/corpus migration is `.9.4`.
+
 - 2026-07-07 (SPEC-FORMAT-TERSE.9.1 — `=>` migration must preserve non-hash owners):
   The hash-literal colon migration is not a global `=>` replacement. Treat direct hash-literal association
   candidates separately from blind-call edge syntax (`=> Rule`), VHDL/source-language associations, historical
