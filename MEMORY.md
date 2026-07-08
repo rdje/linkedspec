@@ -18,16 +18,15 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DOCTRINE-ENFORCEMENT-ADOPT.3.3` — task-acceptance docs/KM/no-drift closeout; tree
-  closed.
-- prior_leaf: `DOCTRINE-ENFORCEMENT-ADOPT.3.2` — `TASK-ACCEPTANCE` staged evidence-shape gate implemented and
-  registered.
+- latest_completed_leaf: `RUST-STATUS-DRIFT-SYNC.1` — current-facing Rust status counts synced to 97 fixtures, 21
+  shipped specs, and phase0 `1..1028`; tree closed.
+- prior_leaf: `DOCTRINE-ENFORCEMENT-ADOPT.3.3` — task-acceptance docs/KM/no-drift closeout; tree closed.
 - latest_commit: HEAD containing this pointer should be
-  `DOCTRINE-ENFORCEMENT-ADOPT.3.3 - close task acceptance no-drift`; parent before this slice is
-  `135f7bbb DOCTRINE-ENFORCEMENT-ADOPT.3.2 - implement task acceptance evidence gate`.
+  `RUST-STATUS-DRIFT-SYNC.1 - sync Rust status counts`; parent before this slice is
+  `DOCTRINE-ENFORCEMENT-ADOPT.3.3 - close task acceptance no-drift`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: no non-paused active frontier after `DOCTRINE-ENFORCEMENT-ADOPT` closes; `SPEC-LANG-REFERENCE`
+- active_work_unit: no non-paused active frontier after `RUST-STATUS-DRIFT-SYNC` closes; `SPEC-LANG-REFERENCE`
   remains paused in the index.
 - next_action: from a clean repo, pick or split the next roadmap-owned PNT leaf before edits; only resume the paused
   `SPEC-LANG-REFERENCE` scorch if directed or folded into a new roadmap/book-sweep owner.

@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — RUST-STATUS-DRIFT-SYNC.1 — sync Rust status counts
+
+**Scope:** Documentation-only synchronization for current-facing Rust variant status counts.
+
+**Change:** Added a narrow task-tree owner for startup-discovered drift, then updated `ROADMAP.md`,
+`rust/README.md`, and the mdBook shipped-corpora page so current status matches the checked-in manifest:
+97 Rust oracle fixtures, 21 shipped `.spec` files, and phase0 `1..1028`. Historical task/log entries that were
+accurate for earlier slices remain unchanged.
+
+**Validation:** Focused stale-count scans over current-facing docs pass; the manifest records `case_count` 97 and
+the `terse_13_3_array_tree_traversal_receiver_blocks` fixture; `specs/` contains 21 shipped `.spec` files.
+`mdbook build docs/linkedspec-book`, memory architecture, Knowledge Map, doctrine driver, task-tree metadata, and
+whitespace checks pass.
+
 ## 2026-07-08 — DOCTRINE-ENFORCEMENT-ADOPT.3.3 — close task-acceptance no-drift
 
 **Scope:** Documentation, Knowledge Map, task-tree, and live-resume closeout for the shipped

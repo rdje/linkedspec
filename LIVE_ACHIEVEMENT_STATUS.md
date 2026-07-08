@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **RUST-STATUS-DRIFT-SYNC.1 — sync Rust status counts**
+  (DONE docs-only drift correction; tree CLOSED).
+
+  **Change:** Registered a narrow owner for startup-discovered Rust status drift, then synchronized current-facing
+  `ROADMAP.md`, `rust/README.md`, and mdBook shipped-corpora wording to the current 97-fixture Rust oracle, 21
+  shipped specs, and phase0 `1..1028`.
+
+  **Boundary:** No parser/runtime behavior or corpus data changed. Historical earlier-count task/log entries remain
+  unchanged when they describe the baseline at the time of their slice.
+
+  **Verification:** Focused current-facing stale-count scans, manifest `case_count` check, shipped-spec count check,
+  mdBook build, memory architecture, Knowledge Map, doctrine, task-tree metadata, and whitespace gates pass.
+
 - 2026-07-08: **DOCTRINE-ENFORCEMENT-ADOPT.3.3 — close task-acceptance no-drift**
   (DONE docs/KM/no-drift closeout; `DOCTRINE-ENFORCEMENT-ADOPT` CLOSED).
 

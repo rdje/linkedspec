@@ -17,7 +17,7 @@ It also exposes a generated-source path (`linkedspec_runtime::source_emitter`) t
 `CompiledSpec`, a validated rule-family plan, and a `parse(input)` entry point. Generated parsers now route through a
 plan-aware executor: default, OR acode, AND acode, AND bcode, OR bcode, REP acode, REP bcode, REP-AND acode, and
 REP-AND bcode families run directly. The generated-source test harness validates every supported structural family
-and a manifest-backed corpus subset; the full 96-fixture corpus remains the interpreter oracle gate.
+and a manifest-backed corpus subset; the full 97-fixture corpus remains the interpreter oracle gate.
 
 ## Quick Start
 
@@ -86,7 +86,7 @@ The engine implements 80+ helpers covering:
 
 The Perl reference implementation lives at `perl/LinkedSpec.pm`. The Rust variant:
 
-- Uses the **same** `.spec` file format (parses all 20 shipped specs)
+- Uses the **same** `.spec` file format (parses all 21 shipped specs)
 - Uses the **same** lifecycle model (I/LS/LE/E/EX/IT/LX blocks)
 - Uses the **same** regex dispatch semantics (seek/consume modes)
 - Uses the **same** rule modes (AND, OR, OR+, AND+, bounded, *, +, ?, &, |)
@@ -98,7 +98,7 @@ The Perl reference implementation lives at `perl/LinkedSpec.pm`. The Rust varian
 
 ## Test Corpus
 
-All 20 shipped `.spec` files from the parent `specs/` directory are parsed, validated, and compiled as part of the test suite. The integration test covers:
+All 21 shipped `.spec` files from the parent `specs/` directory are parsed, validated, and compiled as part of the test suite. The integration test covers:
 
 - Full pipeline: parse → validate → compile → execute
 - Recursive grammars (self-referencing rules with multi-entrypoint dispatch)

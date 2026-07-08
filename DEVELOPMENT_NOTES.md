@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (RUST-STATUS-DRIFT-SYNC.1 — Rust status count drift):
+  Startup review after `SPEC-FORMAT-TERSE.13.5` found current-facing status drift outside the already-correct
+  main status pages: `ROADMAP.md` still advertised the Phase 9 oracle as 96 fixtures, `rust/README.md` still said
+  the full corpus was 96 fixtures and the Rust parser covered 20 shipped specs, and the mdBook shipped-corpora
+  page still named the core phase0 gate as `1..1027`. The Knowledge Map fact card and checked-in manifest agree on
+  the current state: `case_count` 97, including `terse_13_3_array_tree_traversal_receiver_blocks`, and `specs/`
+  contains 21 shipped `.spec` files. This slice corrected only current-facing status text; older log/task entries
+  that describe earlier 20-spec, 96-fixture, or `1..1027` baselines remain historical records.
+
 - 2026-07-08 (DOCTRINE-ENFORCEMENT-ADOPT.3.3 — task-acceptance no-drift closeout):
   The doctrine-enforcement adoption tree is closed. The shipped `TASK-ACCEPTANCE` boundary is now consistent
   across `DOCTRINE_ENFORCEMENT.md`, `TOOLBOX.md`, the mdBook local-CI chapter, ADR `0009`, the Knowledge fact card,
