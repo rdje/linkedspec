@@ -6,15 +6,11 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-06-18` (`.10.5.4` done; user activated `SPEC-FORMAT-TERSE` — whole-book scorch
-  PAUSED after `.10.5.4`, pivot to the terse-format tree. Earlier **MAJOR CORRECTION** — user established that a `.spec` top (`::`)
-  rule has NO regex; a valid spec needs ≥2 rules (top entry + ≥1 normal `:` rule carrying the
-  regex). This means `.5.2`'s 35 examples + catalog preamble AND `.9`'s §5.5 example are
-  **structurally invalid** (regex on the top rule), and `.10.1`'s "engine bug" verdict was **WRONG**
-  — the `[]` was just invalid structure, NOT an `AND_SINGLE_ACODE` regression. NO engine change; Perl
-  reference untouched. Replaced the bad KM card with `spec-top-rule-no-regex-two-rule-minimum.md`
-  (proven 2-rule idiom). Remediation owned by `.10.3`/`.10.4`/`.10.5`. **FRESH SESSION recommended**
-  to execute the remediation; repo handoff-ready.)
+- Last updated: `2026-07-08` (`.10.5.4.1` done: user reactivated the whole-book scorch after the
+  2026-06-18 pause for `SPEC-FORMAT-TERSE`; frontier resumes at `.10.5.5`. Earlier **MAJOR
+  CORRECTION** — user established that a `.spec` top (`::`) rule has NO regex; a valid spec needs >=2
+  rules (top entry + >=1 normal `:` rule carrying the regex). Remediation remains documentation-only
+  and owned by `.10.3`/`.10.5`; Perl reference untouched.)
 - Owner: repo-local workflow
 
 ## Goal
@@ -69,7 +65,8 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Children: `.1`–`.4` (done), `.5` (active: `.5.1`–`.5.2` done, `.5.3`–`.5.5` pending), `.6`, `.7`,
   `.8`, `.9` (done — §5.5 drift fix, but used INVALID structure — superseded by `.10.4`), `.10`
   (**CORRECTED**: remediate structurally-invalid examples in `.5.2`/`.9`; NO engine bug; `.10.1`
-  verdict superseded, `.10.2` superseded; remediation `.10.3`/`.10.4`/`.10.5`)
+  verdict superseded, `.10.2` superseded; remediation `.10.3`/`.10.5`; `.10.5.4.1` reactivated the
+  paused scorch and `.10.5.5` is the next book-fix leaf)
 
 - ID: `SPEC-LANG-REFERENCE.1`
   Status: `done`
@@ -330,7 +327,8 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Children: `.10.1` (done — investigation; its verdict is now **superseded** — see note), `.10.2`
   (**superseded** — the engine-fix-vs-doc fork is moot), `.10.3` (done — redid `.5.2` examples + both
   preambles with the verified 2-rule idiom), `.10.6` (done — retracted the inaccurate `[]` premise;
-  rationale = the 2-rule authoring doctrine), `.10.4`/`.10.5` (remediation pending)
+  rationale = the 2-rule authoring doctrine), `.10.5.4.1` (done — reactivated the paused scorch),
+  `.10.5` (remediation active; `.10.5.5` next)
 
 - ID: `SPEC-LANG-REFERENCE.10.1`
   Status: `done`
@@ -406,7 +404,8 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   **SCOPE DECISION (user, 2026-06-17): FULL BOOK-WIDE SCORCH** — rewrite *every* worked example
   (including the isolated DSL helper-illustration fragments) to the verified 2-rule idiom, and correct
   all wrong outputs. See the scope Decision below.
-  Children: `.10.5.1` (done — audit + decomposition), `.10.5.2`–`.10.5.19` (per-file fixes + finalize)
+  Children: `.10.5.1` (done — audit + decomposition), `.10.5.2`–`.10.5.4` (done per-file fixes),
+  `.10.5.4.1` (done — reactivation metadata), `.10.5.5`–`.10.5.19` (per-file fixes + finalize)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.1`
   Status: `done`
@@ -494,6 +493,18 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   reference engine and elsewhere in the book until `SPEC-FORMAT-TERSE` lands the terse forms.
   `mdbook build` exit 0; `scripts/check_memory_architecture.sh` exit 0. No Perl change.
   Commit: `SPEC-LANG-REFERENCE.10.5.4` (see Commit Log)
+
+- ID: `SPEC-LANG-REFERENCE.10.5.4.1`
+  Status: `done`
+  Goal: Reactivate the paused whole-book scorch at the user's 2026-07-08 directive, without bundling
+  the next book-content fix.
+  Acceptance: central task-tree index, this task file, memory pointer, live status, changelog, and
+  development notes all agree that the scorch is active again and `.10.5.5` is the next resumable leaf;
+  no mdBook content or parser/runtime behavior changes in this metadata-only slice.
+  Verification: Done — 2026-07-08. Updated durable coordination records to resolve the 2026-06-18
+  pause and point the active frontier at `.10.5.5` (`user-model/spec-files-and-rule-paragraphs.md`).
+  No book source, parser/runtime code, corpus, or Knowledge Map fact changed.
+  Commit: `SPEC-LANG-REFERENCE.10.5.4.1` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.5`
   Status: `pending`
@@ -779,8 +790,8 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.5.2` | `done` | `overview/what-is-linkedspec.md` minimal kv example → verified 2-rule idiom (2026-06-17); extracted-from-book run → `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; `mdbook build` exit 0 |
 | — | `SPEC-LANG-REFERENCE.10.5.3` | `done` | `public-api/get-and-get-parser.md` minimal `Get` example → verified 2-rule idiom (2026-06-17); book-extracted run → `[{"kind":"top","text":"foo"}]`; caught `match_text()`→`entry_text()` (else `null`); `mdbook build` exit 0 |
 | — | `SPEC-LANG-REFERENCE.10.5.4` | `done` | `worked-spec-walkthrough.md` rewritten to the verified 2-rule idiom (2026-06-18); every claimed output re-derived through `LinkedSpec::Get` (`answer = 42` → `[{"kind":"pair",…}]`; output corrected single-hash → one-element list; `ctx{top_rule}` `Pair`→`Top`); `match_group`→`entry_group`; declare/assign dropped per user pivot; `mdbook build` exit 0 |
-| ⏸ | **SCORCH PAUSED (2026-06-18)** | `paused` | **User activated `SPEC-FORMAT-TERSE` (terse `.spec` format) — see that tree.** The remaining scorch leaves `.10.5.5`–`.10.5.19` are paused: the terse migration will re-sweep every book example in lockstep with the engine, so finishing the 2-rule scorch first would duplicate work. Resume the scorch only if directed, or fold the remaining files into the terse book-sweep. |
-| 4 | `SPEC-LANG-REFERENCE.10.5.5` | `pending` (paused) | fix `user-model/spec-files-and-rule-paragraphs.md` malformed label-in-block + `Top::AND` sketches |
+| — | `SPEC-LANG-REFERENCE.10.5.4.1` | `done` | reactivated by user directive (2026-07-08); the 2026-06-18 `SPEC-FORMAT-TERSE` pause is resolved; no book content changed |
+| 4 | `SPEC-LANG-REFERENCE.10.5.5` | `pending` | next: fix `user-model/spec-files-and-rule-paragraphs.md` malformed label-in-block + `Top::AND` sketches |
 | 5 | `SPEC-LANG-REFERENCE.10.5.6` | `pending` | fix `user-model/rule-modes-and-parse-modes.md` ~20 mode fragments + reframe "both valid shapes" |
 | 6 | `SPEC-LANG-REFERENCE.10.5.7` | `pending` | fix `user-model/regex-in-spec.md` `::`-with-regex fragments (keep capture teaching) |
 | 7 | `SPEC-LANG-REFERENCE.10.5.8` | `pending` | audit+fix `user-model/blind-calls-and-parser-orchestration.md` (mostly clean — blind-call `::` carry no regex) |
@@ -804,6 +815,12 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | 24 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
 
 ## Decisions
+
+- **`2026-07-08` — SCORCH REACTIVATED (user directive, `.10.5.4.1`).** The 2026-06-18 pause caused
+  by activating `SPEC-FORMAT-TERSE` is resolved. The whole-book language-reference scorch resumes at
+  `.10.5.5`; this activation slice changes durable coordination state only and does not edit book
+  content. The next implementation leaf remains the per-file fix for
+  `user-model/spec-files-and-rule-paragraphs.md`.
 
 - **`2026-06-17` — SCOPE: FULL BOOK-WIDE SCORCH (user decision, `.10.5.1`).** Faced with the audit
   finding that the `Rule::AND /regex/ -> Rule[N] {return}` idiom is **pervasive** (~105 `::`-mode rule
@@ -891,8 +908,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 ## Blockers
 
 - None. (`.10.2`'s "blocked-on-decision" is gone — superseded; the decision was withdrawn after the
-  user's structural correction. The remediation leaves `.10.3`/`.10.4`/`.10.5` are pending and
-  unblocked; a FRESH SESSION is recommended to execute them with the corrected model.)
+  user's structural correction. The scorch is active again as of 2026-07-08; resume at `.10.5.5`.)
 
 ## Verification Log
 
@@ -913,6 +929,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.5.2` | extracted the new block **from the book file** and ran it through `LinkedSpec::Get` (`foo=bar baz=qux`→`[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; `answer=42`→`[{"key":"answer","val":"42"}]`); compared idiom forms (`I {return}` works, bare `{return}`→`[0,0]`); `mdbook build` | `mdbook build` exit 0; single-rule `Top::AND+ /…/ -> Top[0]` (regex-on-top → `null`) replaced with the verified 2-rule idiom + accurate prose/output + cross-links |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.5.3` | extracted the new `Get` heredoc spec **from the book file** + ran `LinkedSpec::Get` (`foo`→`[{"kind":"top","text":"foo"}]`); compared `match_text()`(→`null`) vs `entry_text()`(→`"foo"`); confirmed only one inline `.spec` heredoc on the page; `mdbook build` | `mdbook build` exit 0; `Top::AND /foo/ -> Top[0]` (→ `[]`) replaced with the verified 2-rule idiom using `entry_text()` + an output comment + a structure-teaching sentence |
 | `2026-06-18` | `SPEC-LANG-REFERENCE.10.5.4` | rewrote the whole chapter to the 2-rule idiom (`Top::` entry + `Pair:` matcher); mode-aware `LinkedSpec::Get` driver re-derived every claimed I/O (default/consume `answer = 42`→`[{"kind":"pair","name":"answer","value":"42"}]`; consume `junk answer = 42`→`[]`; seek→the pair; multi `a = 1, b = 2`→2-element list); descriptor/ctx probe (`ref HASH`✓, `meta.parse_mode consume`✓, `spec{Pair}`✓, **`ctx{top_rule}` Pair→Top**); isolated the `:AND`+separated-`I`→`[0]` and OR-`I`-block→`[null]` traps; `mdbook build`; `scripts/check_memory_architecture.sh` | `mdbook build` exit 0; self-check exit 0. Single-rule `Pair::AND -> Pair[0]` (→`[]`, claimed a hash) replaced; output reframed single-hash→one-element list; `match_group`→`entry_group` (+ trap doc); **declare()/assign() removed** from the advanced sketch per user pivot (call(...) teaching kept). Surfaced the terse-format pivot → user activated `SPEC-FORMAT-TERSE`; scorch paused after this leaf. No Perl change |
+| `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.4.1` | durable coordination update only: task tree, central index, memory pointer, live status, changelog, and development notes | scorch reactivated by user directive; next active leaf is `.10.5.5`; no parser/runtime/source/book behavior changed |
 
 ## Commit Log
 
@@ -933,6 +950,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.5.2` | `SPEC-LANG-REFERENCE.10.5.2 — book: fix what-is-linkedspec.md minimal kv example → verified 2-rule idiom` | Replaced the single-rule `Top::AND+ /…/ -> Top[0]` (regex-on-top → compile-fail/`null`) with `top:: -> pair .push` / `LX{return(array_copy(a(top)))}` + `pair: /(\w+)=(\w+)/ I{return(hash(…entry_group(0/1)…))}`; book-extracted run → `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; `mdbook build` exit 0 |
 | `SPEC-LANG-REFERENCE.10.5.3` | `SPEC-LANG-REFERENCE.10.5.3 — book: fix get-and-get-parser.md minimal Get example → verified 2-rule idiom` | Replaced inline `Top::AND /foo/ -> Top[0] {…match_text()…}` (→ `[]`) with `top:: -> word .push` / `LX{return(array_copy(a(top)))}` + `word: /foo/ I{return(hash("kind","top","text",entry_text()))}`; book-extracted run → `[{"kind":"top","text":"foo"}]`; `match_text()`→`null` trap caught; `mdbook build` exit 0 |
 | `SPEC-LANG-REFERENCE.10.5.4` | `SPEC-LANG-REFERENCE.10.5.4 — book: fix worked-spec-walkthrough.md → verified 2-rule idiom; re-derive whole-chapter outputs; drop declare/assign` | Central single-rule `Pair::AND -> Pair[0]` (→`[]`, claimed `{kind:pair,…}`) → `Top::` entry + `Pair:` matcher; every claimed I/O re-derived via `LinkedSpec::Get`; output corrected single-hash→one-element list; `match_group`→`entry_group`; `ctx{top_rule}` Pair→Top; declare()/assign() removed from the advanced sketch per the user terse-format pivot. `mdbook build` exit 0. **Whole-book scorch PAUSED here — user activated `SPEC-FORMAT-TERSE`.** |
+| `SPEC-LANG-REFERENCE.10.5.4.1` | `SPEC-LANG-REFERENCE.10.5.4.1 — reactivate book scorch` | User reactivated `SPEC-LANG-REFERENCE`; durable coordination records now point to `.10.5.5` as the next book-content leaf. Metadata-only; no mdBook source or parser/runtime behavior changed |
 
 ## Changelog
 
@@ -1156,3 +1174,8 @@ wrapped only where a complete worked example is intended) during the per-file fi
   `SPEC-FORMAT-TERSE` now**, so the whole-book scorch is **PAUSED after this leaf** (the terse migration
   will re-sweep every book example in lockstep with the engine). `mdbook build` exit 0; self-check exit
   0. No Perl change. Frontier → SCORCH PAUSED; pivot to `SPEC-FORMAT-TERSE.0` (ratify + ADR).
+- `2026-07-08`: `.10.5.4.1` done — user reactivated `SPEC-LANG-REFERENCE`. Durable coordination
+  records now resolve the 2026-06-18 pause and set `.10.5.5` as the next active scorch leaf. Metadata
+  only; no mdBook source, parser/runtime code, corpus, or Knowledge Map facts changed. Frontier →
+  `.10.5.5` (`user-model/spec-files-and-rule-paragraphs.md` malformed label-in-block + `Top::AND`
+  sketches).

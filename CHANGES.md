@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.4.1 — reactivate book scorch
+
+**Scope:** Metadata-only activation of the paused language-reference book scorch.
+
+**Change:** Resolved the 2026-06-18 `SPEC-LANG-REFERENCE` pause by user directive and set
+`.10.5.5` as the next active frontier. Updated the task tree, central task-tree index, memory pointer, live status,
+and development notes.
+
+**Validation:** No parser/runtime/source/book behavior changed; this slice only changes durable coordination
+records. Focused checks cover memory architecture, task-tree metadata, doctrine registry, and whitespace.
+
 ## 2026-07-08 — TASK-TREE-METADATA-HYGIENE.4 — reconcile closeout commit metadata
 
 **Scope:** Metadata-only task-tree hygiene after startup review.

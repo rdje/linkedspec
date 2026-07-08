@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.4.1 — reactivate book scorch**
+  (DONE metadata-only activation; frontier `.10.5.5` next).
+
+  **Change:** Resolved the old `SPEC-LANG-REFERENCE` scorch pause by user directive and pointed the durable
+  frontier at `.10.5.5`.
+
+  **Boundary:** No parser/runtime/source/book behavior changed. The next book-content work is still pending:
+  `user-model/spec-files-and-rule-paragraphs.md` malformed label-in-block plus `Top::AND` sketches.
+
+  **Verification:** Memory architecture, task-tree metadata, doctrine registry, and whitespace gates cover this
+  coordination-only slice.
+
 - 2026-07-08: **TASK-TREE-METADATA-HYGIENE.4 — reconcile closeout commit metadata**
   (DONE metadata-only task-tree handoff cleanup; tree CLOSED).
 

@@ -18,19 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `TASK-TREE-METADATA-HYGIENE.4` — post-startup metadata cleanup recorded the landed
+- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.4.1` — user reactivated the whole-book language-reference
+  scorch; metadata-only coordination now points the active frontier at `.10.5.5`.
+- prior_leaf: `TASK-TREE-METADATA-HYGIENE.4` — post-startup metadata cleanup recorded the landed
   `SPEC-SOURCE-TERSE-CLOSEOUT.1` commit in its task file; no parser/runtime/source/book behavior changed.
-- prior_leaf: `SPEC-SOURCE-TERSE-CLOSEOUT.1` — root `specs/*.spec` source-format closeout completed:
-  retired-helper/host-residue scans clean, all 21 descriptors `1.0000 0 0`, Rust oracle 99 fixtures.
 - latest_commit: HEAD containing this pointer should be
-  `TASK-TREE-METADATA-HYGIENE.4 - reconcile closeout commit metadata`; parent before this slice is
-  `SPEC-SOURCE-TERSE-CLOSEOUT.1 - close root spec terse source`.
+  `SPEC-LANG-REFERENCE.10.5.4.1 - reactivate book scorch`; parent before this slice is
+  `TASK-TREE-METADATA-HYGIENE.4 - reconcile closeout commit metadata`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: no non-paused active frontier after the closeout metadata sync; `SPEC-LANG-REFERENCE` remains
-  paused in the index.
-- next_action: from a clean repo, pick or split the next roadmap-owned PNT leaf before edits. The all-root-spec
-  terse-source closeout and its task-file commit metadata are no longer blocking other activities.
+- active_work_unit: `SPEC-LANG-REFERENCE.10.5.5` is the next active leaf after the user reactivated the
+  language-reference scorch.
+- next_action: from a clean repo, execute `.10.5.5`: fix
+  `docs/linkedspec-book/src/user-model/spec-files-and-rule-paragraphs.md` malformed label-in-block example plus
+  `Top::AND` regex-on-top sketches, re-verify examples, then run the warranted book/docs gates.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
   enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.
@@ -38,7 +39,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1028`**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
-  worktree ignored by submodule policy. `SPEC-LANG-REFERENCE` remains paused. Richer pplugin runtime parity remains
-  a Rust follow-up, but `pplugin.spec` source format is closed.
+  worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
+  source format is closed.
 - blockers: none. in_flight_uncommitted: none once this pointer commit lands; do not pivot unless the repo is
   handoff-ready.

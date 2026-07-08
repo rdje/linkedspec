@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.4.1 — reactivate language-reference scorch):
+  The user explicitly reactivated `SPEC-LANG-REFERENCE` after the 2026-06-18 pause for
+  `SPEC-FORMAT-TERSE`. This slice is metadata-only: it resolves the pause in the task tree and central index,
+  updates live docs, and makes `.10.5.5` the next active leaf. The next actual book-content work remains
+  `user-model/spec-files-and-rule-paragraphs.md`: fix the malformed label-in-block example and the `Top::AND`
+  regex-on-top sketches, then re-verify and build the book.
+
 - 2026-07-08 (TASK-TREE-METADATA-HYGIENE.4 — closeout commit metadata):
   Startup review after `SPEC-SOURCE-TERSE-CLOSEOUT.1` confirmed HEAD was already
   `SPEC-SOURCE-TERSE-CLOSEOUT.1 - close root spec terse source`, but the closeout task file still said commit
