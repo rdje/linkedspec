@@ -8,8 +8,9 @@ This document is the current high-level technical reading of the project shape. 
 - `2026-07-08` refresh: `ROADMAP-DRIFT-RECONCILE.2` refreshed the dated status/count layer after
   the terse-format and Rust-oracle follow-ons; `SPEC-FORMAT-TERSE.12.2` later raised the phase0 lock count with
   the Perl hash-tree traversal regression, `.12.3` raised the Rust oracle with hash-tree traversal parity, `.12.4`
-  closed docs/KM/live no-drift alignment for that hash-tree traversal lane, and `SPEC-FORMAT-TERSE.13.3` added
-  Rust/oracle parity for array-tree traversal receiver blocks. The Rust variant now has a green 97-fixture
+  closed docs/KM/live no-drift alignment for that hash-tree traversal lane, `SPEC-FORMAT-TERSE.13.3` added
+  Rust/oracle parity for array-tree traversal receiver blocks, and `.13.4` closed the array-tree docs/KM/live
+  no-drift alignment. The Rust variant now has a green 97-fixture
   manifest-backed interpreter oracle with missing/stale fixture drift guards. The generated Rust-source path
   emits a module with embedded `CompiledSpec`, validated generated-family plan, and `parse(input)` entry point;
   it directly executes every currently supported structural family (`Default`, OR/AND acode, AND/OR bcode, and

@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-FORMAT-TERSE.13.4 — close array-tree traversal drift
+
+**Scope:** Documentation, Knowledge Map, oracle-count, task-tree, and live-doc closeout for shipped array-tree
+traversal receiver blocks.
+
+**Change:** Marked `SPEC-FORMAT-TERSE.13` exhausted after Perl reference support, Rust parser/runtime parity, and
+the 97th generated oracle fixture landed. Current docs now describe array-tree traversal as a shipped Perl/Rust
+surface using `walk_leaves() { ... }`, `map_leaves() { ... }`, and `reduce_leaves(initial) { ... }` on array-valued
+receivers.
+
+**Validation:** Drift scans covered stale `.13.4` frontier wording, pending Rust parity text, callback-binding
+terms, `undef` vs JSON-null wording, and the 97-fixture corpus count. mdBook, Knowledge Map, memory architecture,
+doctrine, task-tree metadata, and whitespace gates pass.
+
 ## 2026-07-08 — SPEC-FORMAT-TERSE.13.3 — implement Rust array-tree traversal
 
 **Scope:** Rust parser/runtime parity plus a generated Perl-backed oracle fixture for array-tree traversal receiver
@@ -9,7 +23,7 @@ blocks.
 **Change:** Generalized Rust receiver trailing-block traversal from hash-only to hash-or-array runtime dispatch.
 Hash receivers keep the shipped `.12` sorted-key behavior. Array receivers traverse nested arrays depth-first by
 zero-based index, treat hash values as leaves, bind scoped `value`, `index`, `path`, `depth`, and reduce-only
-`acc`, return `null` without callbacks for scalar receivers, and allow `walk_leaves` / `map_leaves` to feed
+`acc`, return `undef` without callbacks for scalar receivers, and allow `walk_leaves` / `map_leaves` to feed
 array-family continuations such as `.count()`.
 
 **Validation:** Focused Rust parser tests for tree traversal receiver blocks pass; focused Rust `.13.3` runtime

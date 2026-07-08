@@ -7,14 +7,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-FORMAT-TERSE.13.4 — close array-tree traversal drift**
+  (DONE docs/KM/oracle/no-drift closeout; `.13` CLOSED/exhausted).
+
+  **Change:** Closed the array-tree traversal activity after `.13.2` Perl reference support and `.13.3` Rust/oracle
+  parity. Live docs, task-tree rows, roadmap state, mdBook status/helper/formal/backend pages, Knowledge Map facts,
+  and the generated oracle manifest now agree on the shipped 97-fixture array-tree traversal surface.
+
+  **Boundary:** No parser/runtime or corpus semantics changed in this closeout slice.
+
+  **Verification:** Stale frontier/pending-parity scans, mdBook build, Knowledge Map regeneration/check, memory
+  architecture, doctrine, task-tree metadata, and whitespace gates pass.
+
 - 2026-07-08: **SPEC-FORMAT-TERSE.13.3 — implement Rust array-tree traversal**
-  (DONE Rust parser/runtime parity plus generated oracle fixture; frontier `.13.4` docs/KM/no-drift closeout).
+  (DONE Rust parser/runtime parity plus generated oracle fixture; `.13.4` closeout is now complete above).
 
   **Change:** Rust now accepts and executes array-valued receiver `walk_leaves`, `map_leaves`, and
   `reduce_leaves(initial)` attached-block traversal through the same receiver trailing-block chain used for
   hash-tree traversal. Hash receivers keep `.12` sorted-key traversal; array receivers recurse through nested
   arrays by index, treat hashes as leaves, bind scoped `value`, `index`, `path`, `depth`, and reduce-only `acc`,
-  and return `null` without callbacks for scalar receivers.
+  and return `undef` without callbacks for scalar receivers.
 
   **Oracle:** `tools/gen_oracle_corpus.pl` regenerated the corpus to **97** fixtures, adding
   `terse_13_3_array_tree_traversal_receiver_blocks`; Rust `oracle_corpus_matches_perl_reference` passes.
@@ -30,8 +42,8 @@ Current execution status for interruption-safe batch workflow recovery.
   arrays depth-first by zero-based index, treat hashes as leaves, bind scoped `value`, `index`, `path`, `depth`,
   and reduce-only `acc`, and return `undef` without callbacks for scalar receivers.
 
-  **Boundary:** Rust runtime parity and the generated oracle fixture were split to `.13.3`, which is now complete.
-  Final docs/KM/no-drift closeout remains `.13.4`.
+  **Boundary:** Rust runtime parity and the generated oracle fixture were split to `.13.3`, and final
+  docs/KM/no-drift closeout was split to `.13.4`; both are now complete.
 
   **Verification:** `MethodLowering.pm` syntax check, focused lowering/runtime/source-residue probes, parser AST
   test, and full Perl phase0 pass (`Files=1, Tests=1028`, `Result: PASS`), plus Knowledge/live-doc sync.
@@ -44,8 +56,8 @@ Current execution status for interruption-safe batch workflow recovery.
   with nested arrays as interior nodes, scalar/hash leaves, index-order traversal, and scoped callback bindings
   `value`, `index`, `path`, `depth`, and reduce-only `acc`.
 
-  **Boundary:** No parser/runtime behavior changed. Perl implementation is `.13.2`; Rust/oracle parity is `.13.3`;
-  docs/KM/no-drift closeout is `.13.4`.
+  **Boundary:** No parser/runtime behavior changed. Perl implementation was `.13.2`; Rust/oracle parity was
+  `.13.3`; docs/KM/no-drift closeout was `.13.4`. All are now complete.
 
   **Verification:** Knowledge Map retrieval, task-tree split review, Knowledge fact creation/regeneration,
   memory architecture, doctrine, task-tree metadata, and whitespace checks pass.

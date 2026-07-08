@@ -6,11 +6,11 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-08` (**`.13.3` DONE; Rust/oracle array-tree traversal parity landed; frontier `.13.4`**).
-  User directive 2026-07-08 activated the remaining `SPEC-FORMAT-TERSE` parked work after `.12` closed. `.13.3`
-  lands Rust parser/runtime parity and the generated 97th oracle fixture for array-tree `walk_leaves`,
-  `map_leaves`, and `reduce_leaves(initial)` receiver blocks while preserving hash-tree behavior; `.13.4` now owns
-  final docs/KM/no-drift closeout. Prior `.13.2` landed the Perl reference implementation. Prior `.13.1`
+- Last updated: `2026-07-08` (**`.13.4` DONE; array-tree traversal closeout finished; `.13` exhausted**).
+  User directive 2026-07-08 activated the remaining `SPEC-FORMAT-TERSE` parked work after `.12` closed. `.13.4`
+  closes docs/KM/oracle/live-doc/task-tree drift after `.13.3` landed Rust parser/runtime parity and the generated
+  97th oracle fixture for array-tree `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver blocks
+  while preserving hash-tree behavior. Prior `.13.2` landed the Perl reference implementation. Prior `.13.1`
   accepted array-tree receiver block traversal into the active roadmap and split it before implementation. Prior `.10.1`
   records the current direct hash-literal key contract: `{ key_expr : value_expr }` evaluates the key expression;
   bare keys are scalar reads, quoted keys are fixed fields, computed helper expressions may supply keys, and no
@@ -3946,9 +3946,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.12.4 - close hash-tree traversal drift`
 
 - ID: `SPEC-FORMAT-TERSE.13`
-  Status: `active` (split by `.13.1` on 2026-07-08; frontier `.13.4`)
+  Status: `done` / `closed` (reactivated by user directive 2026-07-08; exhausted by `.13.4`)
   Goal: Track analogous array-tree traversal receiver methods as a lower-priority future feature.
-  Children: `.13.1` (done), `.13.2` (done), `.13.3` (done), `.13.4` (pending)
+  Children: `.13.1` (done), `.13.2` (done), `.13.3` (done), `.13.4` (done)
   Acceptance: Array-tree traversal is receiver-only in this lane and uses the same immediate attached-block method
     names as hash-tree traversal, but on array-valued receivers: `array_value.walk_leaves() { ... }`,
     `array_value.map_leaves() { ... }`, and `array_value.reduce_leaves(initial) { ... }`. An array-tree is a
@@ -3965,8 +3965,11 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     links such as `.count()`, while `reduce_leaves(...)` is terminal. The implementation must preserve caller-state
     side effects except for scoped restoration of `value`, `index`, `path`, `depth`, and `acc`; must land on Perl
     and Rust with active tests, generated oracle fixtures, mdBook examples, and Knowledge Map facts.
-  Verification: `pending` (parent closes after `.13.4`)
-  Commit: `pending`
+  Verification: **PASS 2026-07-08.** `.13.1` split the contract before code, `.13.2` landed the Perl reference,
+    `.13.3` landed Rust parser/runtime parity plus the 97th oracle fixture, and `.13.4` closed mdBook, Knowledge
+    Map, live-doc, task-tree, roadmap, and oracle-count drift. Array-tree traversal is now a shipped Perl/Rust
+    receiver-block surface with no remaining `.13` leaf.
+  Commit: `SPEC-FORMAT-TERSE.13.4 - close array-tree traversal drift`
 
 - ID: `SPEC-FORMAT-TERSE.13.1`
   Status: `done` (2026-07-08)
@@ -4012,7 +4015,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     `reduce_leaves(initial)` receiver trailing blocks as tree traversal fluent calls. Runtime execution now
     dispatches receiver traversal over hash or array values: hash receivers keep the `.12` sorted-key behavior,
     while array receivers recurse through nested arrays by zero-based index, treat hashes as leaves, bind scoped
-    `value`/`index`/`path`/`depth` plus reduce-only `acc`, return `null` without callbacks for scalar receivers,
+    `value`/`index`/`path`/`depth` plus reduce-only `acc`, return `undef` without callbacks for scalar receivers,
     and allow `walk_leaves` / `map_leaves` results to feed array-family continuations. Focused checks pass:
     `cargo test --manifest-path rust/linkedspec-core/Cargo.toml tree_traversal_receiver`,
     `cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml terse_13_3`,
@@ -4024,14 +4027,21 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.13.3 - implement Rust array-tree traversal`
 
 - ID: `SPEC-FORMAT-TERSE.13.4`
-  Status: `pending`
+  Status: `done` (2026-07-08)
   Goal: Close array-tree traversal docs, Knowledge Map, oracle, and no-drift alignment.
   Acceptance: mdBook helper/reference/formal/backend-handoff pages document the shipped `.13` surface with
     examples; generated oracle corpus count and Knowledge Map facts are current; live docs and task-tree frontier
     mark `.13` exhausted; final scans find no current-facing drift in method names, callback bindings, traversal
     semantics, or corpus counts.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-08.** Final no-drift scans found no current-facing Rust-pending array-tree wording
+    after `.13.3`, no stale 96-fixture current corpus count, and no callback-binding drift. The only current
+    wording cleanup was to keep the DSL-facing scalar-receiver result as `undef` while JSON output may encode it
+    as null. mdBook helper/reference/formal/backend-handoff/status pages already document the shipped Perl/Rust
+    array-tree traversal surface. Knowledge Map facts point at the `.13.2` Perl implementation, `.13.3` Rust
+    implementation, and 97-fixture oracle evidence. Final gates pass: `mdbook build docs/linkedspec-book`;
+    `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`;
+    `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `git diff --check`.
+  Commit: `SPEC-FORMAT-TERSE.13.4 - close array-tree traversal drift`
 
 - ID: `SPEC-FORMAT-TERSE.14`
   Status: `done` (closed by `.14.5` on 2026-07-07)
@@ -4535,7 +4545,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.12` | `done` / `closed` | hash-tree attached-block traversal closed through `.12.4`; no current leaf remains |
 | 41 | `SPEC-FORMAT-TERSE.13.1` | `done` | user directive reactivated remaining terse-format work; array-tree traversal split before parser/runtime implementation |
 | 42 | `SPEC-FORMAT-TERSE.13.2` | `done` | Perl reference implementation for array-tree receiver block traversal landed; phase0 `1..1028` |
-| 43 | `SPEC-FORMAT-TERSE.13.3` | `done` | Rust parser/runtime parity plus the 97th generated oracle fixture for array-tree traversal landed; frontier `.13.4` |
+| 43 | `SPEC-FORMAT-TERSE.13.3` | `done` | Rust parser/runtime parity plus the 97th generated oracle fixture for array-tree traversal landed |
+| 44 | `SPEC-FORMAT-TERSE.13.4` | `done` | mdBook, Knowledge Map, live-doc, task-tree, and no-drift closeout completed; `.13` exhausted |
+| — | `SPEC-FORMAT-TERSE.13` | `done` / `closed` | array-tree traversal closed through `.13.4`; no current leaf remains |
 | — | `SPEC-FORMAT-TERSE.14` | `done` / `closed` | trailing block-argument type closed for helper-function and receiver-method `with` forms without closures; future expansions need new owned leaves |
 | — | `SPEC-FORMAT-TERSE.6.1` | `done` | User directive owned under the existing terse-format tree; shipped-spec inventory recorded before any `.spec` edit. |
 | — | `SPEC-FORMAT-TERSE.6.2.1` | `done` | shipped specs no longer use active `declare(...)` / `.declare(...)`; focused compile, phase0, and Rust corpus oracle pass |
@@ -5511,8 +5523,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| `2026-07-08` | `SPEC-FORMAT-TERSE.13.3` | Focused Rust parser tree traversal tests; focused Rust `.13.3` runtime tests; focused `.12.3` hash-tree runtime regression tests; Perl oracle corpus regeneration; Rust 97-fixture corpus oracle | Rust array-tree traversal receiver blocks landed with parser/runtime parity. Array receivers recurse through nested arrays by zero-based index, treat hashes as leaves, bind scoped `value`/`index`/`path`/`depth` plus reduce-only `acc`, preserve `.12` hash-tree behavior, diagnose malformed calls, and feed array continuations after `walk_leaves` / `map_leaves`. Oracle corpus regenerated to **97** fixtures with `terse_13_3_array_tree_traversal_receiver_blocks`; Rust oracle PASS. Frontier becomes `.13.4` for docs/KM/no-drift closeout. |
-| `2026-07-08` | `SPEC-FORMAT-TERSE.13.2` | Knowledge Map retrieval for hash-tree and array-tree traversal contracts; Perl syntax check for `MethodLowering.pm`; focused lowering/runtime/source-residue probes; `prove -q -Iperl t/actionir_ast_parser.t`; full `PERL5LIB= prove -q -Iperl t/phase0_regression.t`; mdBook status sync; Knowledge fact creation/regeneration; memory/doctrine/diff checks | Perl reference array-tree traversal landed. The same receiver methods now dispatch over hash or array receiver values: hashes keep `.12` sorted-key semantics, arrays traverse nested arrays depth-first by zero-based index with hashes as leaves. Array callbacks bind scoped `value`/`index`/`path`/`depth` plus reduce-only `acc`; empty arrays run no callbacks; scalar receivers return `undef`; `walk_leaves` / `map_leaves` can feed array-family continuations such as `.count()`. Phase0 passes `Files=1, Tests=1028`. Frontier becomes `.13.3` for Rust/oracle parity. |
+| `2026-07-08` | `SPEC-FORMAT-TERSE.13.4` | Final array-tree traversal no-drift scans; mdBook build; Knowledge Map regeneration/check; memory architecture, doctrine, task-tree metadata, and whitespace gates | `.13` is closed/exhausted. mdBook helper/reference/formal/backend-handoff/status pages, Knowledge Map facts, live docs, roadmap state, task-tree rows, and the generated 97-fixture oracle manifest agree that array-tree traversal receiver blocks are shipped on Perl/Rust. No parser/runtime or corpus semantics changed in this closeout leaf. |
+| `2026-07-08` | `SPEC-FORMAT-TERSE.13.3` | Focused Rust parser tree traversal tests; focused Rust `.13.3` runtime tests; focused `.12.3` hash-tree runtime regression tests; Perl oracle corpus regeneration; Rust 97-fixture corpus oracle | Rust array-tree traversal receiver blocks landed with parser/runtime parity. Array receivers recurse through nested arrays by zero-based index, treat hashes as leaves, bind scoped `value`/`index`/`path`/`depth` plus reduce-only `acc`, preserve `.12` hash-tree behavior, diagnose malformed calls, and feed array continuations after `walk_leaves` / `map_leaves`. Oracle corpus regenerated to **97** fixtures with `terse_13_3_array_tree_traversal_receiver_blocks`; Rust oracle PASS. The then-frontier moved to `.13.4` for docs/KM/no-drift closeout. |
+| `2026-07-08` | `SPEC-FORMAT-TERSE.13.2` | Knowledge Map retrieval for hash-tree and array-tree traversal contracts; Perl syntax check for `MethodLowering.pm`; focused lowering/runtime/source-residue probes; `prove -q -Iperl t/actionir_ast_parser.t`; full `PERL5LIB= prove -q -Iperl t/phase0_regression.t`; mdBook status sync; Knowledge fact creation/regeneration; memory/doctrine/diff checks | Perl reference array-tree traversal landed. The same receiver methods now dispatch over hash or array receiver values: hashes keep `.12` sorted-key semantics, arrays traverse nested arrays depth-first by zero-based index with hashes as leaves. Array callbacks bind scoped `value`/`index`/`path`/`depth` plus reduce-only `acc`; empty arrays run no callbacks; scalar receivers return `undef`; `walk_leaves` / `map_leaves` can feed array-family continuations such as `.count()`. Phase0 passes `Files=1, Tests=1028`. The then-frontier moved to `.13.3` for Rust/oracle parity. |
 | `2026-07-08` | `SPEC-FORMAT-TERSE.13.1` | Knowledge Map retrieval for hash-tree traversal contract; task-tree split; Knowledge fact creation; Knowledge Map regeneration/check; memory/doctrine/diff checks | `.13` is split before implementation. The accepted MVP is receiver-only `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` on array-valued receivers with immediate attached blocks, index-order traversal, scoped `value`/`index`/`path`/`depth` bindings plus `acc` for reduction, hash leaves, non-array `undef`, and no parser/runtime behavior change. Frontier becomes `.13.2` for the Perl reference implementation. |
 | `2026-07-08` | `SPEC-FORMAT-TERSE.10.1` | Knowledge Map retrieval for hash-literal colon facts; `LinkedSpec::call_spec_handler_subst` probes for bare, computed, and quoted hash-literal keys; direct `LinkedSpec::Get` runtime probe; Rust `expr.rs::parse_hash_literal` and `engine.rs` hash-literal evaluation read; mdBook/KM/live-doc updates; memory/doctrine/diff checks | `.10` is closed as a spec-ratification/no-engine-change leaf. Direct hash literals are expression-keyed (`{ key_expr : value_expr }`): bare keys are scalar reads, quoted keys are fixed strings, computed helper expressions can be keys, old `=>` remains retired, and block-vs-hash precedence is unchanged. Frontier moves to the remaining `SPEC-FORMAT-TERSE.13` backlog item under the user's exhaustion directive. |
 | `2026-07-07` | `SPEC-FORMAT-TERSE.14.5` | Final trailing block no-drift scans and wording cleanup; mdBook build; Knowledge Map regeneration/check; oracle generator syntax/regeneration; Rust `oracle_corpus_matches_perl_reference` over **95** fixtures; memory/doctrine/diff gates | Roadmap, mdBook status, Knowledge Map retrieval, live docs, task-tree state, and oracle corpus now agree that trailing block arguments are shipped for helper-function `with(value) { ... }` / `with() { ... }` and receiver-method `.with() { ... }` only. Deferred surfaces remain explicitly unshipped, no parser/runtime behavior changed, and `.14` closes. |
@@ -5662,8 +5675,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `SPEC-FORMAT-TERSE.13.3` | `SPEC-FORMAT-TERSE.13.3 - implement Rust array-tree traversal` | Rust parser/runtime parity landed for array-valued `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver blocks while preserving hash-tree behavior; generated oracle corpus is 97 fixtures and frontier becomes `.13.4`. |
-| `SPEC-FORMAT-TERSE.13.2` | `SPEC-FORMAT-TERSE.13.2 - implement Perl array-tree traversal` | Perl reference lowering/runtime support landed for array-valued `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver blocks while preserving hash-tree traversal behavior; frontier becomes `.13.3`. |
+| `SPEC-FORMAT-TERSE.13.4` | `SPEC-FORMAT-TERSE.13.4 - close array-tree traversal drift` | Final no-drift closeout verified mdBook, Knowledge Map, live docs, task-tree rows, roadmap state, and the 97-fixture oracle manifest; `.13` is exhausted. |
+| `SPEC-FORMAT-TERSE.13.3` | `SPEC-FORMAT-TERSE.13.3 - implement Rust array-tree traversal` | Rust parser/runtime parity landed for array-valued `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver blocks while preserving hash-tree behavior; generated oracle corpus is 97 fixtures and the then-frontier moved to `.13.4` closeout. |
+| `SPEC-FORMAT-TERSE.13.2` | `SPEC-FORMAT-TERSE.13.2 - implement Perl array-tree traversal` | Perl reference lowering/runtime support landed for array-valued `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver blocks while preserving hash-tree traversal behavior; the then-frontier moved to `.13.3`. |
 | `SPEC-FORMAT-TERSE.13.1` | `SPEC-FORMAT-TERSE.13.1 - split array-tree traversal` | Reactivated `.13` and split array-tree receiver block traversal into Perl, Rust/oracle, and docs/KM/no-drift leaves before parser/runtime code. |
 | `SPEC-FORMAT-TERSE.10.1` | `SPEC-FORMAT-TERSE.10.1 - ratify dynamic hash-literal keys` | Direct hash literals are explicitly expression-keyed: bare keys are scalar reads, quoted keys are fixed strings, and computed helper expressions may supply keys. No parser/runtime behavior changed; `.10` is closed. |
 | `SPEC-FORMAT-TERSE.12.4` | `SPEC-FORMAT-TERSE.12.4 - close hash-tree traversal drift` | Final no-drift closeout verified mdBook, Knowledge Map, live docs, task-tree rows, roadmap/architecture state, and the 96-fixture oracle manifest; `.12` is exhausted. `.10` was later closed by `.10.1`; `.13` remains the next parked item under the exhaustion directive. |
@@ -5924,7 +5938,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   parser/runtime changes: direct hash literals are expression-keyed (`{ key_expr : value_expr }`), bare keys are
   scalar reads, quoted keys are fixed fields, computed helper expressions can supply keys, old `=>` remains
   retired, and block-vs-hash precedence is unchanged. mdBook and Knowledge Map now state the contract explicitly.
-  Frontier moves to `.13` for the remaining array-tree traversal backlog item.
+  The then-frontier moved to `.13` for the remaining array-tree traversal backlog item.
 
 - `2026-07-08`: **`.13.1` DONE — array-tree traversal split before implementation.**
   The accepted MVP uses the same immediate receiver block method names as hash-tree traversal:
@@ -5948,10 +5962,16 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Rust now parses and executes array-valued `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver
   trailing blocks through shared tree traversal dispatch. Hash receivers preserve `.12` sorted-key traversal;
   array receivers recurse through nested arrays by zero-based index, treat hashes as leaves, bind scoped
-  `value`/`index`/`path`/`depth` plus reduce-only `acc`, and return `null` without callbacks for scalar receivers.
+  `value`/`index`/`path`/`depth` plus reduce-only `acc`, and return `undef` without callbacks for scalar receivers.
   Focused Rust parser/runtime and hash-tree regression tests pass. The generated oracle corpus now has **97**
-  fixtures after `terse_13_3_array_tree_traversal_receiver_blocks`, and the Rust corpus oracle passes. Frontier
-  moves to `.13.4` for docs/KM/no-drift closeout.
+  fixtures after `terse_13_3_array_tree_traversal_receiver_blocks`, and the Rust corpus oracle passes. The
+  then-frontier moved to `.13.4` for docs/KM/no-drift closeout.
+
+- `2026-07-08`: **`.13.4` DONE — array-tree traversal docs/KM/no-drift closeout.**
+  mdBook helper/reference/formal/backend-handoff/status pages, Knowledge Map facts, live docs, roadmap state,
+  task-tree rows, and the generated 97-fixture oracle manifest now agree that array-tree traversal receiver blocks
+  are shipped on Perl/Rust. Final drift scans found no current-facing Rust-pending wording, callback-binding drift,
+  or stale current corpus count. No parser/runtime or corpus semantics changed. `.13` is closed/exhausted.
 
 - `2026-07-05`: **`.12`/`.13` DEFERRED/BACKLOG — tree traversal attached-block ideas.**
   User directive tracked hash-tree traversal methods with attached code blocks as future spec work and clarified
