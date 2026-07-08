@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.20 — lifecycle drift policy):
+  The lifecycle final-value/direct-`E` drift from `.10.5.9` is now explicitly a documented
+  current Perl-reference caveat, not a hidden authorization to change the engine. Focused probes
+  still show the direct default-rule `I`+regex+`E` shape returning `"not_a_return"` and generated
+  source omitting the `E` hash-return path; a dispatched child with no explicit return surfaces
+  `["not_a_return"]`. ADR `0020` owns the policy boundary. Public examples and
+  `appendix/runtime-semantics.md` now teach explicit `return(...)` as the portable action/lifecycle
+  return channel. The `.10.5` scorch is complete; the next language-reference leaf is `.5.3`
+  for Array helper worked examples.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.19 — whole-book scorch closeout):
   The final mdBook re-grep found three residual regex-on-`::` examples after the per-file leaves:
   `spec-files-and-rule-paragraphs.md`'s recursive `sexpr::` example, two helper-catalog terse examples

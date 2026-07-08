@@ -30,6 +30,7 @@ changed* lives in git (layer D), not here.
 | [0017](0017-function-definition-staged-ast-contract.md) | Function-definition staged AST shape is predicted before implementation: wrapper-top small-spec tests, named captures for optional fields, exact body provenance, parse-job field, and direct body_ast assertions | 2026-07-02 | accepted | architecture, staged-parsing, user-functions, ast, source-provenance, language-neutral |
 | [0018](0018-declaration-helper-legacy-compatibility-policy.md) | Declaration helpers remain accepted legacy compatibility after the terse migration; new authoring uses auto-existing variables and terse assignment/mutation forms | 2026-07-04 | accepted | dsl, compatibility, spec-format-terse, declaration, migration |
 | [0019](0019-terse-colon-slot-removal-engine-first.md) | `:name` removal is engine-first: bare reads are incomplete at the audit commit (`switch(kind)` etc. + rule-name collisions), so complete bare-name value reads on Perl+Rust first, then remove `:name` entirely (no compat) | 2026-07-05 | accepted | dsl, spec-format-terse, colon-slot, sequencing, engine, cross-variant-parity |
+| [0020](0020-lifecycle-handler-drift-documentation-policy.md) | Lifecycle handler-shape drift remains a documented Perl-reference caveat until a separately-owned implementation/parity task authorizes engine changes | 2026-07-08 | accepted | lifecycle, perl-reference, generated-handlers, documentation, parity |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.20 — document lifecycle drift policy
+
+**Scope:** lifecycle return-channel documentation and durable policy record.
+
+**Change:** Added ADR `0020` to record the lifecycle final-value/direct-`E` Perl
+handler-shape drift as a documented current-reference caveat until a separately-owned
+implementation/parity leaf authorizes engine changes. Tightened `runtime-semantics.md`
+so portable rule values come from explicit `return(...)`, not lifecycle final-statement
+leakage, and updated the lifecycle KM fact card to point at the ADR.
+
+**Validation:** Focused Perl probes reproduce the caveat: the direct default-rule
+`I`+regex+`E` shape returns `"not_a_return"` and generated source omits the `E`
+hash-return path; a dispatched child without explicit `return(...)` returns
+`["not_a_return"]`. `mdbook build docs/linkedspec-book` and the memory, task-tree,
+doctrine, whitespace, and Knowledge Map checks pass.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.19 — finalize book scorch
 
 **Scope:** mdBook whole-book scorch closeout.

@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.20 — document lifecycle drift policy**
+  (DONE policy/documentation closeout; frontier `.5.3` next).
+
+  **Change:** Recorded ADR `0020`, updated `appendix/runtime-semantics.md`, and refreshed the
+  lifecycle drift KM fact so lifecycle final-value/direct-`E` handler-shape drift is a documented
+  current Perl-reference caveat until a separately-owned implementation/parity leaf authorizes
+  behavior changes.
+
+  **Boundary:** No parser/runtime/source behavior changed. This closes the `.10.5` whole-book
+  scorch follow-up and returns the language-reference frontier to helper-catalog Array examples.
+
+  **Verification:** Focused Perl probes reproduce the direct default-rule `I`+regex+`E` drift,
+  dispatched child no-return drift, and generated-source omission; mdBook, doctrine, task-tree,
+  memory, Knowledge Map, and whitespace checks pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.19 — finalize book scorch**
   (DONE mdBook closeout; frontier `.10.5.20` next).
 

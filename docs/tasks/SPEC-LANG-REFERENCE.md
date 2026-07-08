@@ -6,9 +6,10 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-07-08` (`.10.5.9` done: `dsl/action-and-lifecycle-placement.md`
-  now uses normal `:` regex-bearing examples, separates entry-match `I`/`entry_*` from local-slot
-  action `match_*`, and frontier advances to `.10.5.10`. Earlier **MAJOR
+- Last updated: `2026-07-08` (`.10.5.20` done: ADR `0020` records lifecycle handler-shape
+  drift as a documented current Perl-reference caveat until a separately-owned implementation/parity
+  leaf authorizes behavior changes; `.10.5` whole-book scorch is complete and frontier returns to
+  `.5.3` Array helper worked examples. Earlier **MAJOR
   CORRECTION** — user established that a `.spec` top (`::`) rule has NO regex; a valid spec needs >=2
   rules (top entry + >=1 normal `:` rule carrying the regex). Remediation remains documentation-only
   and owned by `.10.3`/`.10.5`; Perl reference untouched.)
@@ -67,7 +68,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   `.8`, `.9` (done — §5.5 drift fix, but used INVALID structure — superseded by `.10.4`), `.10`
   (**CORRECTED**: remediate structurally-invalid examples in `.5.2`/`.9`; NO engine bug; `.10.1`
   verdict superseded, `.10.2` superseded; remediation `.10.3`/`.10.5`; `.10.5.4.1` reactivated the
-  paused scorch and `.10.5.9` is done; `.10.5.10` is the next book-fix leaf)
+  paused scorch and `.10.5.20` is done; `.5.3` is the next helper-example leaf)
 
 - ID: `SPEC-LANG-REFERENCE.1`
   Status: `done`
@@ -773,7 +774,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.5.19` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.20`
-  Status: `pending`
+  Status: `done`
   Goal: Resolve the lifecycle handler-shape drift found during `.10.5.9`: current Perl generated handlers
   can expose an `I` block's final host statement value when explicit `return(...)` is omitted, and a direct
   default-rule `I` + regex + `E` shape can omit the regex/E path in generated source, while existing Rust
@@ -781,8 +782,17 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Acceptance: decide whether this remains a documented Perl-reference caveat or becomes a backend/runtime
   fix task; update mdBook/KM/tests/task-tree records accordingly; keep the Perl reference untouched unless
   a separately-owned implementation leaf explicitly authorizes code changes.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. Focused Perl probes reverified the caveat: the direct
+  `Top:: I { set(out,...); set(ignored,"not_a_return") } /x/ E { return(hash(...)) }`
+  shape returns `"not_a_return"`, a dispatched child without explicit `return(...)` returns
+  `["not_a_return"]`, and `dump_parser_source` for the direct shape contains the `I` block's
+  `not_a_return` statement while omitting the `hash("out",...)` `E` path. ADR `0020` records
+  the policy: document this as a current Perl-reference caveat for language-reference closeout;
+  any behavior normalization needs a separately-owned implementation/parity leaf. `runtime-semantics.md`
+  now teaches explicit `return(...)` as the portable return channel, and KM fact
+  `perl-lifecycle-final-value-e-drift` points to ADR `0020`. `mdbook build`, memory/task/doctrine,
+  whitespace, and Knowledge Map checks pass.
+  Commit: `SPEC-LANG-REFERENCE.10.5.20` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.6`
   Status: `done`
@@ -961,16 +971,24 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.5.17` | `done` | `tablegrep-spec-walkthrough.md` output drift fixed 2026-07-08; parser outputs and descriptor metadata reverified |
 | — | `SPEC-LANG-REFERENCE.10.5.18` | `done` | `portmap-spec-walkthrough.md` output-shape examples reverified 2026-07-08; current page already matches live nested JSON |
 | — | `SPEC-LANG-REFERENCE.10.5.19` | `done` | planned page scorch finalized 2026-07-08; residual regex-on-`::` examples fixed; whole-book re-grep clean |
-| 9 | `SPEC-LANG-REFERENCE.10.5.20` | `pending` | resolve lifecycle final-value / direct-`E` Perl handler drift found during `.10.5.9` |
+| — | `SPEC-LANG-REFERENCE.10.5.20` | `done` | lifecycle final-value / direct-`E` Perl handler drift resolved 2026-07-08 as a documented current Perl-reference caveat under ADR `0020` |
 | — | `SPEC-LANG-REFERENCE.10.4` | `superseded` | folded into `.10.5.16` |
-| 18 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the scorch |
-| 19 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
-| 20 | `SPEC-LANG-REFERENCE.5.5` | `pending` | worked examples: Declaration, Capture/Mark, Entry/Match, Input, Call families (closes `.5`) |
-| 21 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
-| 22 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
-| 23 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
+| 9 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the scorch |
+| 10 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
+| 11 | `SPEC-LANG-REFERENCE.5.5` | `pending` | worked examples: Declaration, Capture/Mark, Entry/Match, Input, Call families (closes `.5`) |
+| 12 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
+| 13 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
+| 14 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
 
 ## Decisions
+
+- **`2026-07-08` — LIFECYCLE DRIFT DECISION (`.10.5.20`, ADR `0020`).**
+  The lifecycle final-value/direct-`E` drift found during `.10.5.9` remains a documented current
+  Perl-reference caveat for the language-reference closeout, not an implicit Perl engine-change
+  authorization. Public and portable examples use explicit `return(...)`; the runtime semantics appendix
+  now states that final statements in lifecycle blocks are not a portable implicit return channel. Any
+  behavior normalization must be owned by a separate implementation/parity leaf with focused Perl locks,
+  cross-variant review, and docs/KM updates.
 
 - **`2026-07-08` — ACTION/LIFECYCLE PAGE FIX (`.10.5.9`) + DRIFT FOLLOW-UP.**
   The action/lifecycle placement chapter now treats regex-bearing snippets as normal `:` rule fragments,
@@ -1072,9 +1090,10 @@ wrapped only where a complete worked example is intended) during the per-file fi
 - (audit) Granularity of the gap-filling leaves — decided when `.1` completes (likely grouped
   by construct family: file/paragraph model, rule modes, parse modes, edges, lifecycle markers,
   capture/mark, helper families, control flow, runtime semantics, + a KM-cards leaf + finalize).
-- (`.10.5.20`, NON-BLOCKING FOLLOW-UP) Decide whether the Perl lifecycle final-value/direct-`E`
-  handler-shape drift remains a documented reference caveat or becomes an implementation/parity task.
-  This does not block the page scorch because `.10.5.9` now avoids relying on the drift-prone forms.
+- ~~(`.10.5.20`, NON-BLOCKING FOLLOW-UP) Decide whether the Perl lifecycle final-value/direct-`E`
+  handler-shape drift remains a documented reference caveat or becomes an implementation/parity task.~~
+  **RESOLVED 2026-07-08 in ADR `0020` / `.10.5.20`:** documented caveat now; implementation/parity
+  behavior changes require a separate owning leaf.
 - ~~(`.10`, DECISION NEEDED — engine-fix vs doc-rewrite for the single-slot AND output drift)~~
   **RESOLVED / WITHDRAWN 2026-06-17.** The premise (an `AND_SINGLE_ACODE` engine bug) was wrong: the
   affected examples are **structurally invalid** (regex on the top rule / single-rule). There is no
@@ -1085,7 +1104,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 ## Blockers
 
 - None. (`.10.2`'s "blocked-on-decision" is gone — superseded; the decision was withdrawn after the
-  user's structural correction. The scorch is active again as of 2026-07-08; resume at `.10.5.10`.)
+  user's structural correction. The scorch is closed as of `.10.5.20`; resume at `.5.3`.)
 
 ## Verification Log
 
@@ -1112,6 +1131,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.7` | representative runtime probes through `LinkedSpec::Get` (keyword wrapper; numbered groups; named groups; numbered-compaction and named-compaction cases); source-page scan for remaining `::` labels; `mdbook build docs/linkedspec-book` | outputs match documented payloads: `["foo"]`, `[{"key":"foo","val":"bar"}]`, `[{"name":"alpha"}]`, numbered compaction `abc`→`[{"amount":"abc","name":null}]`, `12abc`→`[{"amount":"12","name":"abc"}]`, named groups stable; remaining `::` labels are no-regex wrappers; mdBook build exit 0 |
 | `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.8` | source-page scan for `::` headers followed by regex slots; wrapped mixed-edge negative probe through `LinkedSpec::Get`; `mdbook build docs/linkedspec-book` | scan reports no regex slot under a `::` header; mixed-edge probe logs `Cannot mix ACTION (->) and BLIND CALL (=>) code blocks`; mdBook build exit 0 |
 | `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.9` | focused `LinkedSpec::Get` probes for entry-match `I`, later-slot actions, explicit lifecycle return, and Pair slot flow; source-page scan for `::` headers followed by regex slots; `mdbook build docs/linkedspec-book`; Knowledge Map check | probes return documented payloads (`Name`, `Token`, lifecycle hash, Pair hash); scan reports no regex slot under a `::` header; mdBook build and Knowledge Map check exit 0; Perl lifecycle drift fact recorded |
+| `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.20` | focused Perl probes for direct default-rule `I`+regex+`E`, dispatched child lifecycle without explicit return, and `dump_parser_source`; ADR/KM/runtime-semantics updates; `mdbook build docs/linkedspec-book`; memory, task-tree, doctrine, whitespace, and Knowledge Map checks | direct shape returns `"not_a_return"`; dispatched child without explicit return returns `["not_a_return"]`; generated direct handler source includes the `I` final statement and omits the `E` hash-return path. ADR `0020` keeps this as a documented caveat until a separate implementation/parity leaf owns behavior normalization; gates pass |
 
 ## Commit Log
 
@@ -1148,6 +1168,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.5.17` | `SPEC-LANG-REFERENCE.10.5.17 — fix tablegrep walkthrough outputs` | `tablegrep-spec-walkthrough.md` now shows verified JSON outputs for the simple term and grouped expression (`sens` is `=`), and its descriptor helper list matches the live spec. Parser probes, descriptor metadata probe, and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.18` | `SPEC-LANG-REFERENCE.10.5.18 — verify portmap walkthrough outputs` | `portmap-spec-walkthrough.md`'s five output-shape examples were rechecked against `LinkedSpec::get_parser('portmap')`; the current page already matches the live nested JSON for bare, bit, slice, constant, and concatenation cases. Parser probes and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.19` | `SPEC-LANG-REFERENCE.10.5.19 — finalize book scorch` | Whole-book closeout scans found and fixed the remaining regex-on-`::` mdBook examples in `spec-files-and-rule-paragraphs.md`, `helper-contract-catalog.md`, and `compiler/pipeline-overview.md`. Follow-up scans return no matches; focused parser probes and mdBook build pass |
+| `SPEC-LANG-REFERENCE.10.5.20` | `SPEC-LANG-REFERENCE.10.5.20 — document lifecycle drift policy` | Lifecycle final-value/direct-`E` drift resolved as a documented current Perl-reference caveat under ADR `0020`; `runtime-semantics.md` teaches explicit `return(...)` as the portable return channel; KM fact updated; focused probes and gates pass |
 
 ## Changelog
 
@@ -1430,3 +1451,10 @@ wrapped only where a complete worked example is intended) during the per-file fi
   direct value-path, array end-mutation, and function-registry outputs. Whole-book regex-on-`::`
   re-greps are clean and `mdbook build` exits 0. Frontier → `.10.5.20`
   (lifecycle handler-shape drift follow-up).
+- `2026-07-08`: `.10.5.20` done — resolved the lifecycle handler-shape drift follow-up as a
+  documented current Perl-reference caveat under ADR `0020`, not as an implicit backend change.
+  Reverified that the direct default-rule `I`+regex+`E` shape returns `"not_a_return"` and its
+  generated source omits the `E` hash-return path, while a dispatched child without explicit return
+  returns `["not_a_return"]`. `runtime-semantics.md` now says portable lifecycle/action values come
+  from explicit `return(...)`; KM fact `perl-lifecycle-final-value-e-drift` points to ADR `0020`.
+  Frontier → `.5.3` (Array helper worked examples).

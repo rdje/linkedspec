@@ -285,9 +285,11 @@ expression, it yields the updated hash snapshot after the field write.
 
 ### 5.4 Return Value
 
-The rule's return value is whatever the **E-block** returns (or the last lifecycle
-block to execute). A rule must return a value identifiable by the parent. The
-canonical form is `return(copy(array(accumulator)))`.
+The rule's portable return value is whatever an explicit `return(...)` in an action or
+lifecycle block yields. Lifecycle blocks are statement blocks: a final `set(...)`,
+helper call, or value expression is not a portable implicit return. A rule that should
+surface an accumulator should say so directly, for example
+`return(copy(array(accumulator)))`.
 
 ### 5.5 What a Parser Returns (Top-Level Output)
 
@@ -434,7 +436,7 @@ An action edge `-> Child` with a code block executes the code block after the
 child matches. The action code:
 - Receives the child's match info.
 - Can declare variables, read captures.
-- Can return a value via lifecycle blocks (`LE`, `E`).
+- Can return a value via explicit `return(...)` in the action or lifecycle path.
 
 The action edge **selector index** determines which regex slot of the target
 rule is matched: `-> rule` means index `[0]`. `-> rule[N]` selects slot `N`.
