@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (DOCTRINE-ENFORCEMENT-ADOPT.3.2 — task-acceptance evidence gate):
+  `scripts/check_diagnosis_evidence.sh` is now the `TASK-ACCEPTANCE` doctrine. It uses `git diff --cached` and
+  governs staged `.github/workflows/`, `.githooks/`, `bin/`, `perl/`, `rust/`, `specs/`, `t/`, `tools/`, and
+  `scripts/` paths. When it fires, it requires a staged `docs/tasks/*.md` file with the six `TOOLBOX.md`
+  checklist labels checked and with conservative tool, WHY/WHERE, and verification signatures. This is a
+  shape/presence gate; it intentionally does not run arbitrary commands copied into task Markdown. The driver
+  meta-check now makes the script executable/tracked presence part of doctrine enforcement, and
+  `tools/run_ci_local.sh` also audits the script as a tracked file.
+
 - 2026-07-08 (DOCTRINE-ENFORCEMENT-ADOPT.3.1 — evidence gate split before code):
   The deferred evidence/task-acceptance doctrine is now split before implementation. The key design boundary is
   false-positive control: the first checker should inspect the staged set, govern only code/spec/test/tooling-style

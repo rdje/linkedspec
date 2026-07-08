@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **DOCTRINE-ENFORCEMENT-ADOPT.3.2 — implement task-acceptance evidence gate**
+  (DONE `TASK-ACCEPTANCE` staged evidence-shape gate; frontier `.3.3` closeout next).
+
+  **Change:** Added executable `scripts/check_diagnosis_evidence.sh`, registered it in
+  `scripts/check_doctrines.sh`, and synced the doctrine standard, `TOOLBOX.md`, local gate audit, mdBook local-CI
+  chapter, ADR `0009`, Knowledge Map source facts, task tree, and live docs.
+
+  **Boundary:** The check is staged-set scoped. It governs code/spec/test/tooling paths and checks for a completed
+  task-file acceptance checklist with LinkedSpec-tool signatures; it does not execute arbitrary Markdown commands.
+
+  **Verification:** Direct script check, staged self-check, doctrine driver, memory architecture, task-tree
+  metadata, mdBook build, and whitespace checks pass.
+
 - 2026-07-08: **DOCTRINE-ENFORCEMENT-ADOPT.3.1 — split evidence gate before code**
   (DONE scope/signature design split; frontier `.3.2` implementation next).
 

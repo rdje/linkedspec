@@ -53,6 +53,17 @@ regexes need careful project-specific design to avoid false-positives.
 - This is additive: the existing memory-architecture + Knowledge Map enforcement is unchanged in
   substance, only re-routed through the one registry.
 
+## Status Update — 2026-07-08
+
+`DOCTRINE-ENFORCEMENT-ADOPT.3.2` adds the deferred evidence-archetype gate as
+`TASK-ACCEPTANCE`: `scripts/check_diagnosis_evidence.sh`.
+
+The check is intentionally staged-set and evidence-shape scoped. It fires only for staged
+code/spec/test/tooling-style paths, requires a staged owning `docs/tasks/*.md` file, and checks for the
+`TOOLBOX.md` acceptance checklist with LinkedSpec-tool evidence signatures. It does not re-run arbitrary
+commands cited in Markdown from a hook; the reproducibility oracle remains focused validation and the broader
+local CI gate.
+
 ## Links
 
 - Tree: [`DOCTRINE-ENFORCEMENT-ADOPT`](../tasks/DOCTRINE-ENFORCEMENT-ADOPT.md)

@@ -119,9 +119,10 @@ for "which doctrines are enforced by what"; this file's §10 mirrors it.
 - **Adding a doctrine** = write a `check_*.sh` obeying §4 + add one registry line. Nothing else.
 
 LinkedSpec ships the reference driver at [`scripts/check_doctrines.sh`](scripts/check_doctrines.sh).
-The reference EVIDENCE-archetype check (a task-acceptance gate keyed off `TOOLBOX.md`) is a planned
-follow-on (`DOCTRINE-ENFORCEMENT-ADOPT.3`); until it lands, the registry enforces the structural
-doctrines and the phase0 oracle is the re-run leg.
+The reference EVIDENCE-archetype check is
+[`scripts/check_diagnosis_evidence.sh`](scripts/check_diagnosis_evidence.sh): a staged
+task-acceptance gate keyed off `TOOLBOX.md`. It checks checklist presence and evidence signatures for
+governed staged changes; the phase0/local-CI oracle remains the re-run leg.
 
 ---
 
@@ -186,7 +187,7 @@ To land non-compliant work, an author would have to defeat all four.
 | `.githooks/commit-msg` | E3: require a work-unit id in the subject (LinkedSpec scheme — see `COMMIT.md`) |
 | `DOCTRINE_ENFORCEMENT.md` | this standard |
 | `TOOLBOX.md` | the debug-toolbox catalog + the **acceptance-checklist template** a code change should satisfy |
-| _(planned)_ `scripts/check_diagnosis_evidence.sh` | reference EVIDENCE check (the task-acceptance gate) — `DOCTRINE-ENFORCEMENT-ADOPT.3` |
+| `scripts/check_diagnosis_evidence.sh` | reference EVIDENCE check (the task-acceptance gate) |
 
 ### B — ADAPT (the only project-specific knobs)
 - `scripts/check_doctrines.sh`: the `DOCTRINES=(…)` array (your doctrine ids → your check scripts).
@@ -235,12 +236,13 @@ Enforced by [`scripts/check_doctrines.sh`](scripts/check_doctrines.sh) via
 | `MEMORY-ARCH` | structural | `scripts/check_memory_architecture.sh` | the durable 4-layer memory architecture invariants (`MEMORY_ARCHITECTURE.md` §9) |
 | `KNOWLEDGE-MAP` | structural | `knowledge-map/scripts/check_knowledge_map.sh` | the derived Knowledge Map is in sync with its fact sources |
 | `TASK-TREE-METADATA` | structural | `scripts/check_task_tree_metadata.sh` | completed task trees do not advertise live `Current Frontier` rows |
+| `TASK-ACCEPTANCE` | evidence | `scripts/check_diagnosis_evidence.sh` | staged governed code/spec/test/tooling changes carry a task-tree acceptance checklist with LinkedSpec-tool evidence signatures |
 
 Deterministic-oracle doctrine run via the broader gate (`tools/run_ci_local.sh`): the phase0
 regression suite `t/phase0_regression.t` (the cross-variant baseline + the all-spec ActionIR-ready
 invariant, `docs/decisions/0002`) re-executes the real engine, so cited results are independently
-re-verified. Planned: `TASK-ACCEPTANCE` (evidence) via `scripts/check_diagnosis_evidence.sh`
-(`DOCTRINE-ENFORCEMENT-ADOPT.3`).
+re-verified. `TASK-ACCEPTANCE` is intentionally a staged evidence-shape check, not a hook-time
+executor for arbitrary Markdown commands.
 
 To add a doctrine here: write `scripts/check_<id>.sh` (§4 contract), add one line to the driver's
 `DOCTRINES` array, and add a row above. The driver's meta-check fails if the script is missing.

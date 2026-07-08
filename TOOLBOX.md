@@ -23,11 +23,15 @@ supporting techniques** that complement them. (Always run with `perl -Iperl …`
   don't transcribe it** from a triage note.
 - Doctrine compliance runs via [`scripts/check_doctrines.sh`](scripts/check_doctrines.sh) (the registry
   driver), invoked by [`.githooks/pre-commit`](.githooks/pre-commit) (E3) + `tools/run_ci_local.sh` (E4).
+  For staged code/spec/test/tooling changes, `TASK-ACCEPTANCE`
+  ([`scripts/check_diagnosis_evidence.sh`](scripts/check_diagnosis_evidence.sh)) requires the owning
+  task file to carry the checklist below with LinkedSpec-tool evidence signatures.
 
 ### The task-acceptance checklist (recommended for any code-change leaf)
 
 Copy into the owning `docs/tasks/<TREE>.md` leaf; each box backed by the cited LinkedSpec-tool output.
-(The mechanical hard-gate is `DOCTRINE-ENFORCEMENT-ADOPT.3`, deferred; until then it is the discipline.)
+The mechanical hard-gate checks staged checklist presence and evidence signatures; the cited commands remain
+the reproducibility oracle run through focused validation and `tools/run_ci_local.sh`.
 
 ```markdown
 ## Acceptance Checklist
@@ -278,7 +282,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 
 ### 5.3 Doctrine / memory gates
 - `bash scripts/check_doctrines.sh` (driver — runs every registered check) ·
-  `bash scripts/check_memory_architecture.sh` · `bash knowledge-map/scripts/check_knowledge_map.sh`.
+  `bash scripts/check_memory_architecture.sh` · `bash knowledge-map/scripts/check_knowledge_map.sh` ·
+  `bash scripts/check_diagnosis_evidence.sh` (staged task-acceptance evidence gate).
 
 ---
 

@@ -18,17 +18,17 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DOCTRINE-ENFORCEMENT-ADOPT.3.1` — evidence/task-acceptance hard-gate split/design
-  completed before implementation.
-- prior_leaf: `SPEC-FORMAT-TERSE.13.5` — parent `SPEC-FORMAT-TERSE` task-tree status reconciled closed.
+- latest_completed_leaf: `DOCTRINE-ENFORCEMENT-ADOPT.3.2` — `TASK-ACCEPTANCE` staged evidence-shape gate
+  implemented and registered.
+- prior_leaf: `DOCTRINE-ENFORCEMENT-ADOPT.3.1` — evidence/task-acceptance hard-gate split/design completed.
 - latest_commit: HEAD containing this pointer should be
-  `DOCTRINE-ENFORCEMENT-ADOPT.3.1 - split evidence gate before code`; parent before this slice is
-  `fe740dbf SPEC-FORMAT-TERSE.13.5 - close parent terse task tree`.
+  `DOCTRINE-ENFORCEMENT-ADOPT.3.2 - implement task acceptance evidence gate`; parent before this slice is
+  `6c1d6258 DOCTRINE-ENFORCEMENT-ADOPT.3.1 - split evidence gate before code`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DOCTRINE-ENFORCEMENT-ADOPT` → frontier leaf `DOCTRINE-ENFORCEMENT-ADOPT.3.2` (`pending`).
-- next_action: implement/register `scripts/check_diagnosis_evidence.sh` as the scope-aware staged
-  `TASK-ACCEPTANCE` doctrine, keeping `DOCTRINE_ENFORCEMENT.md` §10, `TOOLBOX.md`, and the driver in lockstep.
+- active_work_unit: `DOCTRINE-ENFORCEMENT-ADOPT` → frontier leaf `DOCTRINE-ENFORCEMENT-ADOPT.3.3` (`pending`).
+- next_action: close docs/KM/no-drift for the shipped `TASK-ACCEPTANCE` gate, then reconcile `.3`/parent status
+  if no further evidence-gate leaves remain.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
   enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.

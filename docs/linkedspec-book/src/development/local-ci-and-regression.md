@@ -50,6 +50,9 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
 - runs the main phase0 regression suite,
 - runs `scripts/check_memory_architecture.sh` to verify memory architecture invariants (layer integrity, pointer freshness, bounded-layer consistency),
 - runs `knowledge-map/scripts/check_knowledge_map.sh` to verify Knowledge Map integrity (derived map matches source cards, no stale entries),
+- runs `scripts/check_diagnosis_evidence.sh` through the doctrine driver; in a pre-commit context this requires
+  staged code/spec/test/tooling changes to carry a task-tree acceptance checklist with LinkedSpec-tool evidence
+  signatures,
 - enforces a RAM usage guard that refuses to run the test suite when system memory utilization exceeds 88%, preventing resource-exhaustion failures from masking real test results.
 
 The command sequence includes:
@@ -113,6 +116,10 @@ This is not a guideline. It is a hard, non-negotiable requirement:
 - A leaf must exist in the active task tree before implementation begins.
 - Commit messages must carry the leaf identifier for traceability.
 - If a change does not fit an existing leaf, split the leaf or create a new one before writing code.
+
+For staged code/spec/test/tooling changes, the doctrine gate also requires the owning task file to carry the
+task-acceptance checklist from `TOOLBOX.md`. The checklist records the reproduction/issue, root cause, fix,
+verification, no-regression evidence, and lockstep documentation state.
 
 The task-tree workflow (`docs/TASK_TREE.md`) and per-phase tree files (`docs/tasks/<TREE>.md`) are the authoritative record of what leaf owns what work.
 

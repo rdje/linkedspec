@@ -79,6 +79,7 @@ require_tracked_file perl/LinkedSpec.pm
 require_tracked_file t/phase0_regression.t
 require_tracked_file scripts/check_memory_architecture.sh
 require_tracked_file scripts/check_doctrines.sh
+require_tracked_file scripts/check_diagnosis_evidence.sh
 require_tracked_file DOCTRINE_ENFORCEMENT.md
 require_tracked_file TOOLBOX.md
 require_tracked_file MEMORY_ARCHITECTURE.md

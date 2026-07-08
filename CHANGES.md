@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — DOCTRINE-ENFORCEMENT-ADOPT.3.2 — implement task-acceptance evidence gate
+
+**Scope:** Doctrine tooling, local gate registration, and documentation sync for staged task-acceptance evidence.
+
+**Change:** Added executable `scripts/check_diagnosis_evidence.sh` and registered it as `TASK-ACCEPTANCE` in
+`scripts/check_doctrines.sh`. The check inspects the staged set, passes when no governed code/spec/test/tooling
+paths are staged, and otherwise requires a staged `docs/tasks/*.md` file with the `TOOLBOX.md` acceptance
+checklist completed using LinkedSpec-tool, WHY/WHERE, and verification signatures. Synced the doctrine standard,
+toolbox, local gate tracked-file audit, mdBook local-CI chapter, ADR `0009`, and Knowledge Map source facts.
+
+**Validation:** `bash scripts/check_diagnosis_evidence.sh`, staged self-check, `bash scripts/check_doctrines.sh`,
+`bash scripts/check_memory_architecture.sh`, `bash scripts/check_task_tree_metadata.sh`,
+`mdbook build docs/linkedspec-book`, and `git diff --check` pass.
+
 ## 2026-07-08 — DOCTRINE-ENFORCEMENT-ADOPT.3.1 — split evidence gate before code
 
 **Scope:** Task-tree and continuity split/design for the pending evidence/task-acceptance doctrine.
