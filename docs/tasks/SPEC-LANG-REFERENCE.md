@@ -6,10 +6,10 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-07-08` (`.5.3` done: Array helper worked examples added to
-  `helper-contract-catalog.md` with focused `LinkedSpec::Get` verification; split / array-pipeline
-  return-shape caveats recorded in KM fact `array-helper-return-shape-caveats`; frontier advances to
-  `.5.4` Hash + Control Flow helper examples. Earlier **MAJOR
+- Last updated: `2026-07-08` (`.5.4` done: Hash + Control Flow helper worked examples added
+  to `helper-contract-catalog.md` with focused `LinkedSpec::Get` verification; direct odd-arity
+  `hash(...)` caveat recorded in KM fact `hash-helper-odd-arity-current-behavior`; optional behavior
+  normalization deferred to `.5.4.1`; frontier advances to `.5.5` remaining helper families. Earlier **MAJOR
   CORRECTION** — user established that a `.spec` top (`::`) rule has NO regex; a valid spec needs >=2
   rules (top entry + >=1 normal `:` rule carrying the regex). Remediation remains documentation-only
   and owned by `.10.3`/`.10.5`; Perl reference untouched.)
@@ -277,12 +277,32 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `deferred`
 
 - ID: `SPEC-LANG-REFERENCE.5.4`
-  Status: `pending`
+  Status: `done`
   Goal: Worked examples — Hash + Control Flow helper families
   Acceptance: ≥1 compile-verified example per family (Hash + Control Flow), built through
   `LinkedSpec::Get`. `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: DONE 2026-07-08. Focused `LinkedSpec::Get` oracle probes verified Hash constructor,
+  explicit `undef`, `flat_hash`, copy snapshot, merge, pure and mutating `set_key`, hash-index
+  assignment, rename/drop/pick, membership/count, sorted views, receiver chains, block receivers,
+  hash-tree map/walk/reduce, inline/marker/attached branch forms, switch forms, `while`, `next`,
+  `return`, and `return_undef`. Descriptor probe verified `exit_now(2)` as canonical `EXIT` metadata
+  without running the terminating path. `call_spec_handler_subst` root-caused direct odd-arity
+  `hash("a", 1, "missing")` as unsupported-helper output (`[null]` through the demo wrapper), so
+  the book now documents explicit `undef` / list-splice forms and KM fact
+  `hash-helper-odd-arity-current-behavior` records the caveat.
+  Commit: `SPEC-LANG-REFERENCE.5.4` (see Commit Log)
+
+- ID: `SPEC-LANG-REFERENCE.5.4.1`
+  Status: `deferred`
+  Goal: Optional implementation/parity follow-up for direct odd-arity Hash helper constructor behavior found
+  during `.5.4`: decide whether `hash("a", 1, "missing")` should remain a documented unsupported current
+  shape or normalize to the same trailing-`undef` behavior as explicit `hash("a", 1, "missing", undef)` /
+  list-context `hash(flat_array(...))`.
+  Acceptance: if activated, make the policy explicit, add focused Perl/Rust regression locks, update the mdBook
+  and Knowledge Map, and ensure direct constructor, list-splice, and hash-literal examples are aligned.
+  Verification: Deferred — `.5.4` documents the current stable forms and records the caveat in KM; no engine
+  behavior change is authorized in this documentation leaf.
+  Commit: `deferred`
 
 - ID: `SPEC-LANG-REFERENCE.5.5`
   Status: `pending`
@@ -1000,13 +1020,24 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.4` | `superseded` | folded into `.10.5.16` |
 | — | `SPEC-LANG-REFERENCE.5.3` | `done` | Array helper worked examples added 2026-07-08; split/pipeline return-shape caveats documented and tracked |
 | — | `SPEC-LANG-REFERENCE.5.3.1` | `deferred` | optional implementation/parity follow-up for split/pipeline return-shape caveats; not PNT-active unless explicitly activated |
-| 9 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
+| — | `SPEC-LANG-REFERENCE.5.4` | `done` | Hash + Control Flow helper worked examples added 2026-07-08; direct odd-arity hash constructor caveat documented and tracked |
+| — | `SPEC-LANG-REFERENCE.5.4.1` | `deferred` | optional implementation/parity follow-up for direct odd-arity `hash(...)`; not PNT-active unless explicitly activated |
 | 10 | `SPEC-LANG-REFERENCE.5.5` | `pending` | worked examples: Declaration, Capture/Mark, Entry/Match, Input, Call families (closes `.5`) |
 | 11 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
 | 12 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
 | 13 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
 
 ## Decisions
+
+- **`2026-07-08` — HASH + CONTROL FLOW EXAMPLES + HASH CONSTRUCTOR CAVEAT (`.5.4`).**
+  The Hash and Control Flow helper catalog now documents verified current forms: hash constructor/copy/splice,
+  pure and mutating hash updates, sorted views, receiver chains, hash-tree traversal, inline/marker/attached
+  branches, `switch`, `while`, `next`, `return`, and `return_undef`. `exit_now(2)` is documented from descriptor
+  metadata rather than run, because running it intentionally exits the parser process. During verification,
+  TOOLBOX probes found direct odd-arity `hash("a", 1, "missing")` lowers to an unsupported-helper sentinel and
+  returns `undef` on the current Perl reference; explicit `undef` and list-splice forms are the documented
+  current forms. KM fact `hash-helper-odd-arity-current-behavior` records the caveat, and optional behavior
+  normalization is deferred to `.5.4.1`.
 
 - **`2026-07-08` — ARRAY HELPER EXAMPLES + SHAPE-SENSITIVE RETURN CAVEATS (`.5.3`).**
   The Array helper catalog now documents verified current forms: pure array values, receiver chains,
@@ -1139,7 +1170,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 ## Blockers
 
 - None. (`.10.2`'s "blocked-on-decision" is gone — superseded; the decision was withdrawn after the
-  user's structural correction. The scorch is closed as of `.10.5.20`; `.5.3` is done; resume at `.5.4`.)
+  user's structural correction. The scorch is closed as of `.10.5.20`; `.5.4` is done; resume at `.5.5`.)
 
 ## Verification Log
 
@@ -1152,6 +1183,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `2026-06-17` | `SPEC-LANG-REFERENCE.5.1` | delegated read-only catalog audit (`Contracts.pm` id set vs catalog); self-verified the 2 flagged sigil leaks at `helper-contract-catalog.md:13,159` + whole-catalog re-sweep for `$`/`@`/`%` sigils and `lowers to`/`do {`/`Data::Dumper`/`JSON::PP`/`//gcp`; `mdbook build` | `mdbook build` exit 0; **0 public-API completeness gaps** (158 ids = ~130 public + 17 internal IR variants + ~11 deprecated `compatibility_surface`); **2 sigil leaks fixed**, no others; example-density gap (0/~140) decomposed into `.5.2`–`.5.5` |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.5.2` | scratch oracle-style driver (`LinkedSpec::Get` → run parser on input → `JSON::PP->canonical` encode) over all 35 Scalar+Numeric examples; sanity-checked vs frozen fixtures `proof_edge_{scalar,array}_literal` (reproduced exactly); probed the value-vs-condition lowering split in `ActionIR/FlowExpr.pm`; `mdbook build` | `mdbook build` exit 0; 35/35 examples produce the documented outputs; `is_defined`/`is_undefined` documented condition-only (die as values); `split→num_sum` non-composition avoided (array-form reducers use explicit `array(...)`); **discovered** §5.5 Pair example outputs `[]` not the tagged array → owned by new leaf `.9` (not bundled) |
 | `2026-07-08` | `SPEC-LANG-REFERENCE.5.3` | focused `LinkedSpec::Get` oracle driver for Array value examples, statement/mutation pipeline examples, split return-shape variants, receiver-chain variants, and array-tree traversal; `call_spec_handler_subst` probes for split/pipeline lowering; mdBook/KM/live-doc updates; `mdbook build docs/linkedspec-book`; memory, task-tree, doctrine, whitespace, and Knowledge Map checks | documented Array examples return the recorded outputs; caveats confirmed: compact `I.return(split(...))` tags as `"?value:"`, block/receiver split returns plain arrays, direct `return(split_each(array(items), ...))` returns count-shaped output, and documented receiver chains stick to verified continuations. Gates pass |
+| `2026-07-08` | `SPEC-LANG-REFERENCE.5.4` | focused `LinkedSpec::Get` oracle driver for Hash examples, hash-tree traversal examples, Control Flow branch/loop/return examples, and `next()` repetition control; `call_spec_handler_subst` probes for direct odd-arity `hash(...)`; descriptor probe for `exit_now(2)` canonical metadata; mdBook/KM/live-doc updates; `mdbook build docs/linkedspec-book`; memory, task-tree, doctrine, whitespace, and Knowledge Map checks | documented Hash and Control Flow examples return the recorded outputs; direct `hash("a", 1, "missing")` is documented as a current unsupported-helper caveat with explicit `undef` / list-splice stable forms; `exit_now(2)` descriptor reports ready `EXIT` metadata without running the terminating path. Gates pass |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.9` | scratch oracle driver: reconfirmed `Pair::AND … -> Pair[0]` → `[]` under default/`consume`/`seek`; confirmed corrected OR self-ref `-> Pair` → `["?pair:","key","val"]`; §5.5/§5.6 sweep; whole-book `grep -E '-> \w+\[0\]'` + `::AND` cross-scan; checked `worked-spec-walkthrough.md` claimed output + ground-truthed self-edge idiom vs shipped specs (`portmap`/`hlink_substitution`/`DT`); `mdbook build` | `mdbook build` exit 0; §5.5 Pair example fixed (+ §5.7 cross-ref note); §5.6 left untouched (different construct). **Found SYSTEMIC variant** — single-slot `::AND -> Rule[0] { return }` output drift in several chapters (notably `worked-spec-walkthrough.md` claims `{kind=>"pair",…}`, actually `[]`) → new leaf `.10`, **blocked on a user decision** (engine-bug vs doc-rewrite) |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.1` | delegated read-only codegen investigation (general-purpose agent, 42 tool-uses) + **self-verified the 3 load-bearing claims against source**: read `HandlerVariantEmitter.pm:564-630` (confirmed the missing `push` at 575-582), `git log -- HandlerVariantEmitter.pm` (confirmed MEDIUM-IMPACT.3.4.x provenance: `148c746`/`7fec186`), and `specentry-perl-coupling-inventory.md:234` (confirmed the pre-documented "lack E-block support" gap); behavioral matrix via `LinkedSpec::Get` (single-slot AND `LX`/`E`/edge `return` all → `[]`; OR self-ref + multi-slot-closing-slot + REP all surface values) | ~~VERDICT: accidental regression~~ — **SUPERSEDED** (see next row). The verdict was wrong because the premise was wrong (the examples are structurally invalid). |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10` (correction) | user established the `.spec` structural invariant (top `::` rule has no regex; valid spec ≥2 rules); verified vs `BootstrapSpec/Core.pm:414,417` (`::`→`_INITIAL`, label line anchored — no regex) + `RuleIR.pm:193-195` (`_INITIAL`→`top_rule`) + audit of all 20 `specs/*.spec` (every top rule `regex_on_top=no`); **proven the correct 2-rule worked-example idiom** via `LinkedSpec::Get` (`demo_top:: -> word_pair .push; LX{return(array_copy(a(demo_top)))}` + `word_pair : /(\w+) (\w+)/ I.return(concat(entry_group(0),"-",entry_group(1)))` → `["hello-world"]`; the child reads `entry_group` not `match_group`) | **NO engine bug** — the `[]` was invalid spec structure (regex on top rule / single-rule). Perl reference untouched. Deleted the bad KM card; wrote `spec-top-rule-no-regex-two-rule-minimum.md`. `.10.1` verdict + `.10.2` fork superseded; remediation `.10.3`/`.10.4`/`.10.5`. FRESH SESSION recommended |
@@ -1180,6 +1212,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.5.1` | `SPEC-LANG-REFERENCE.5.1 — helper-catalog audit: 0 completeness gaps, fix 2 variant-neutrality sigil leaks, decompose example work into .5.2-.5.5` | Confirmed 0 public-API gaps; fixed `$name`/`$rule_label` sigil leaks in `helper-contract-catalog.md`; split `.5` into per-family example sub-leaves. mdbook build exit 0 |
 | `SPEC-LANG-REFERENCE.5.2` | `SPEC-LANG-REFERENCE.5.2 — book: compile-verified worked examples for all Scalar + Numeric helpers (helper-contract-catalog §2/§5)` | 35 helpers, each run-verified through `LinkedSpec::Get` against the oracle; shared runnable-spec preamble; condition-only note for `is_defined`/`is_undefined`; array-form reducers via explicit `array(...)`. Found §5.5 drift → new leaf `.9`. mdbook build exit 0 |
 | `SPEC-LANG-REFERENCE.5.3` | `SPEC-LANG-REFERENCE.5.3 — add Array helper worked examples` | `helper-contract-catalog.md` now has verified Array examples for constructor/copy/splice, selectors, edge slices, ordering, membership, split, pipelines, mutations, receiver chains, and array-tree traversal. KM fact `array-helper-return-shape-caveats` records split/pipeline shape-sensitive caveats; optional normalization deferred to `.5.3.1` |
+| `SPEC-LANG-REFERENCE.5.4` | `SPEC-LANG-REFERENCE.5.4 — add Hash and Control Flow worked examples` | `helper-contract-catalog.md` now has verified Hash examples for constructor/copy/splice, pure/mutating updates, sorted views, receiver chains, and hash-tree traversal, plus Control Flow examples for branch forms, `switch`, `while`, `next`, `return`, `return_undef`, and descriptor-verified `exit_now`. KM fact `hash-helper-odd-arity-current-behavior` records the direct odd-arity `hash(...)` caveat; optional normalization deferred to `.5.4.1` |
 | `SPEC-LANG-REFERENCE.9` | `SPEC-LANG-REFERENCE.9 — book: fix drifted §5.5 Pair example output (AND-[0] self-edge returns [] not the tagged array)` | Corrected the §5.5 Pair example to the verified OR self-ref `-> Pair` form (+ §5.7 cross-ref). Surfaced a SYSTEMIC variant across chapters → new leaf `.10` (blocked on a user decision). mdbook build exit 0 |
 | `SPEC-LANG-REFERENCE.10.1` | `SPEC-LANG-REFERENCE.10.1 — investigation: single-slot AND drops its edge return ([]) is a Perl-reference regression, not intended (KM card + verdict)` | Read-only root-cause investigation; VERDICT = accidental regression in `AND_SINGLE_ACODE` emitter (missing `push`); triple-verified vs source/git/card; KM card `and-single-acode-edge-return-dropped.md`. `.10.2` fix blocked on a user direction decision. No code/book change. **(Verdict later SUPERSEDED — see `.10` correction commit.)** |
 | `SPEC-LANG-REFERENCE.10` (correction) | `SPEC-LANG-REFERENCE.10 — correction: top rule has no regex; .5.2/.9 examples are structurally invalid (not an engine bug); retract .10.1, plan remediation (.10.3-.5)` | User-established structural invariant (top `::` rule no regex; valid spec ≥2 rules), verified vs Core.pm/RuleIR.pm + 20-spec audit. Deleted the wrong KM card, added `spec-top-rule-no-regex-two-rule-minimum.md` with the proven 2-rule idiom. Superseded `.10.1` verdict + `.10.2`; added remediation leaves. NO Perl change. Repo handoff-ready; fresh session recommended |
@@ -1503,3 +1536,12 @@ wrapped only where a complete worked example is intended) during the per-file fi
   pipeline-to-pure receiver continuations; the book documents stable forms and KM fact
   `array-helper-return-shape-caveats` records the caveat. Optional behavior normalization is deferred
   to `.5.3.1`; frontier → `.5.4` (Hash + Control Flow helper worked examples).
+- `2026-07-08`: `.5.4` done — added verified Hash and Control Flow helper worked examples to
+  `appendix/helper-contract-catalog.md`. Hash examples now cover constructor/copy/splice, pure and
+  mutating hash updates, sorted views, receiver chains, block receivers, and hash-tree traversal.
+  Control Flow examples now cover inline/marker/attached branch forms, `switch`, `while`, `next`,
+  `return`, and `return_undef`; `exit_now(2)` is descriptor-verified without running the terminating
+  path. Probes found direct odd-arity `hash("a", 1, "missing")` returns `undef` via an unsupported-helper
+  sentinel on current Perl, so the book documents explicit `undef` / list-splice stable forms and KM fact
+  `hash-helper-odd-arity-current-behavior` records the caveat. Optional normalization is deferred to
+  `.5.4.1`; frontier → `.5.5` (Declaration, Capture/Mark, Entry/Match, Input, Call examples).

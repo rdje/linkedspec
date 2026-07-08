@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.5.4 — add Hash and Control Flow worked examples**
+  (DONE mdBook helper catalog examples; frontier `.5.5` next).
+
+  **Change:** Added verified Hash examples to `helper-contract-catalog.md`, covering
+  constructor/copy/splice forms, pure and mutating hash updates, sorted views, receiver chains,
+  block receivers, and hash-tree traversal. Added verified Control Flow examples for
+  inline/marker/attached branches, `switch`, `while`, `next`, `return`, and `return_undef`;
+  `exit_now(2)` is descriptor-verified without running the terminating path. Added KM fact
+  `hash-helper-odd-arity-current-behavior`.
+
+  **Boundary:** No parser/runtime/source behavior changed. Direct odd-arity `hash(...)`
+  behavior normalization is deferred to `.5.4.1` and is not PNT-active unless explicitly
+  activated.
+
+  **Verification:** Focused `LinkedSpec::Get` probes generated the documented outputs,
+  `call_spec_handler_subst` root-caused the direct odd-arity constructor caveat, and the
+  descriptor probe verified `exit_now(2)` metadata; mdBook, doctrine, task-tree, memory,
+  Knowledge Map, and whitespace checks pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.5.3 — add Array helper worked examples**
   (DONE mdBook helper catalog examples; frontier `.5.4` next).
 

@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.5.4 — add Hash and Control Flow worked examples
+
+**Scope:** mdBook helper catalog Hash and Control Flow examples.
+
+**Change:** Added verified Hash helper examples to `helper-contract-catalog.md`,
+covering constructor/copy/splice forms, pure and mutating hash updates, sorted views,
+receiver chains, block receivers, and hash-tree traversal. Added verified Control Flow
+examples for inline/marker/attached branches, `switch`, `while`, `next`, `return`, and
+`return_undef`; `exit_now(2)` is documented from descriptor metadata rather than run.
+Added KM fact `hash-helper-odd-arity-current-behavior` for the direct odd-arity
+`hash(...)` current-Perl caveat and deferred optional normalization to `.5.4.1`.
+
+**Validation:** Focused `LinkedSpec::Get` probes generated every documented runtime output,
+`call_spec_handler_subst` root-caused `hash("a", 1, "missing")` to an unsupported-helper
+sentinel returning `undef`, and a descriptor probe verified `exit_now(2)` reports canonical
+`EXIT` metadata. `mdbook build docs/linkedspec-book` and the memory, task-tree, doctrine,
+whitespace, and Knowledge Map checks pass.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.5.3 — add Array helper worked examples
 
 **Scope:** mdBook helper catalog Array-family examples.

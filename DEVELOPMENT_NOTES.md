@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.5.4 — Hash and Control Flow helper worked examples):
+  `helper-contract-catalog.md` now has verified Hash examples for constructor/copy/splice forms,
+  pure and mutating update forms, sorted views, receiver chains, block receivers, and hash-tree
+  traversal, plus Control Flow examples for inline/marker/attached branch forms, `switch`, `while`,
+  `next`, `return`, and `return_undef`. `exit_now(2)` is documented through descriptor metadata
+  (`EXIT`, no raw/fallback/unresolved) because running it deliberately terminates the parser process.
+  The verification pass caught a stale Hash edge-case claim: direct `hash("a", 1, "missing")` does
+  not fill the trailing key with `undef` on current Perl; it lowers to an unsupported-helper sentinel
+  and returns `undef`. The stable spellings are explicit `hash("a", 1, "missing", undef)` or a
+  deliberate list-context splice. KM fact `hash-helper-odd-arity-current-behavior` records the
+  reverify command; optional behavior normalization is deferred to `.5.4.1`.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.5.3 — Array helper worked examples):
   `helper-contract-catalog.md` now has verified Array-family examples for pure value helpers,
   statement/mutation pipelines, receiver chains, and array-tree traversal. The verification pass found

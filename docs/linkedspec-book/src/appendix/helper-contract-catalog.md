@@ -669,74 +669,6 @@ dispatch rule.
   `{ [3, 1, 2] }.sorted().join_values(",")`. A block-local `return(array_expr)` yields the receiver value and
   skips later block statements before the array chain runs.
 
-### `sorted_keys(hash)`
-- **Signature**: `sorted_keys(h: hash)`
-- **Returns**: array
-- **Behavior**: Returns the hash's keys as an array, sorted alphabetically. Deterministic — does not depend on host-language hash iteration order.
-
-### `sorted_values(hash)`
-- **Signature**: `sorted_values(h: hash)`
-- **Returns**: array
-- **Behavior**: Returns the hash's values as an array, sorted by their corresponding keys alphabetically. Deterministic.
-
-### Hash receiver-dot value chains
-- **Signature**: `hash_expr.method(args...).next(args...)`
-- **Returns**: the documented return value of the final helper in the chain.
-- **Behavior**: A compatible hash receiver feeds into the first pure hash helper, and each helper's return
-  value feeds the next compatible helper. For example,
-  `meta.set_key("stage", "normalized").count_keys()` is equivalent to
-  `count_keys(set_key(hash(meta), "stage", "normalized"))`. `meta.sorted_keys().join_values(",")` first
-  derives the sorted key array, then continues through the array receiver-chain family.
-- **Allowed hash-returning links**: `copy`, `merge_hash`, `set_key`, `rename_key`, `drop_keys`,
-  `pick_keys`, and `flat_hash`. `merge_hash` preserves the canonical helper contract: later arguments
-  override earlier keys.
-- **Allowed terminal/bridge links**: `sorted_keys` and `sorted_values` return arrays and may continue through
-  compatible array receiver helpers. `count_keys` and `has_key` return number and boolean terminal values.
-  Field reads from a named working hash use `hash(name).pick_keys(key).sorted_values().first()` after storing expression receivers in a
-  named hash. Direct bracket reads such as `retv["key"]` are for scalar hashref payloads, not working-hash
-  value reads.
-- **Boundary**: `set_key(name, key, value)` and `name[key] = value` mutate the named working hash; hash-index
-  assignment also yields the updated hash snapshot in value positions. Receiver-dot `meta.set_key(key, value)` is
-  pure value composition; it mutates nothing unless its result is explicitly assigned back.
-- **Block receivers**: An expression-valued block whose value is a hash can be the receiver, for example
-  `{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")`.
-
-### Hash-tree receiver block traversal: `walk_leaves`, `map_leaves`, `reduce_leaves`
-- **Signatures**:
-  - `hash_expr.walk_leaves() { block }`
-  - `hash_expr.map_leaves() { block }`
-  - `hash_expr.reduce_leaves(initial_acc: expr) { block }`
-- **Returns**:
-  - `walk_leaves` returns the original hash tree after running callbacks.
-  - `map_leaves` returns a new hash tree with each leaf replaced by the callback result.
-  - `reduce_leaves` returns the final accumulator.
-- **Backend status**: Perl reference and Rust interpreter support are current.
-- **Tree shape**: The receiver must be a hash. Nested hashes are interior nodes. Every non-hash value is a leaf,
-  including arrays.
-- **Traversal order**: Sorted-key depth-first traversal. For `{ "a" : "A", "arr" : ["u", "v"], "b" : { "y" : "B" } }`,
-  callbacks run for paths `a`, `arr`, then `b/y`.
-- **Callback bindings**: Each callback runs immediately in the caller's current action/runtime context with scoped
-  scalar bindings:
-  - `value`: current leaf value.
-  - `key`: current leaf key.
-  - `path`: array value containing root-to-leaf path segments.
-  - `depth`: zero-based leaf depth.
-  - `acc`: current accumulator for `reduce_leaves` only.
-- **Binding restoration**: The traversal restores those scoped names after each callback and after traversal
-  completes. Mutations to other working variables are ordinary side effects and persist.
-- **Return semantics**: `return(expr)` inside the callback is block-local and supplies that callback's result. In
-  `map_leaves`, the result replaces the current leaf. In `reduce_leaves`, the result becomes the next accumulator.
-  In `walk_leaves`, the result is ignored.
-- **Edge cases**: A non-hash receiver yields `undef` and does not execute the callback. `walk_leaves()` and
-  `map_leaves()` take no parenthesized arguments. `reduce_leaves(initial)` requires exactly one parenthesized
-  initial accumulator expression. `walk_leaves()` and `map_leaves()` return hash values and can feed later hash
-  receiver links such as `.count_keys()`. `reduce_leaves(...)` is terminal. These are immediate receiver block
-  methods, not closures or delayed callbacks.
-- **Examples**:
-  - `return(tree.map_leaves() { return(cat(join_values("/", array(path)), "=", value)) })`
-  - `tree.walk_leaves() { paths += join_values("/", array(path)) }`
-  - `return(tree.reduce_leaves(0) { return(acc.add(1)) })`
-
 ### Array-tree receiver block traversal: `walk_leaves`, `map_leaves`, `reduce_leaves`
 - **Signatures**:
   - `array_expr.walk_leaves() { block }`
@@ -881,6 +813,47 @@ dispatch rule.
 
 ## 4. Hash Helpers
 
+> **Worked examples** use the same runnable two-rule scaffold as the Array section:
+>
+> ```text
+> demo::
+>  -> value .push
+>  LX { return(copy(array(demo))) }
+>
+> value : /<regex>/
+>  I { <statements>; return(<hash-or-derived-value>) }
+> ```
+>
+> Outputs are the parser's accumulator array after `demo` pushes each `value` result.
+
+**Verified value, mutation, and receiver examples:**
+
+| Surface | Body inside `value`'s `I { ... }` block | Input | Output |
+| --- | --- | --- | --- |
+| Construct | `return(hash("b", 2, "a", 1))` | `x` | `[{"a":1,"b":2}]` |
+| Explicit null value | `return(hash("a", 1, "missing", undef))` | `x` | `[{"a":1,"missing":null}]` |
+| Splice count | `return(count(array(flat_hash(hash("a", 1, "b", 2)))))` | `x` | `[4]` |
+| Copy snapshot | `set(hash(meta), { "a" : 1 }); set(hash(saved), copy(hash(meta))); meta["b"] = 2; return(array(count_keys(hash(meta)), count_keys(hash(saved))))` | `x` | `[[2,1]]` |
+| Merge override | `return(merge_hash(hash("a", 1, "b", 2), hash("b", 9, "c", 3)))` | `x` | `[{"a":1,"b":9,"c":3}]` |
+| Pure `set_key` | `set(hash(meta), { "a" : 1 }); return(array(meta.set_key("b", 2).count_keys(), count_keys(hash(meta))))` | `x` | `[[2,1]]` |
+| Statement `set_key` | `set_key(meta, "a", 1); set_key(meta, "b", 2); return(copy(hash(meta)))` | `x` | `[{"a":1,"b":2}]` |
+| Hash-index assignment | `key = "stage"; value = "ok"; meta[key] = value; return(copy(hash(meta)))` | `x` | `[{"stage":"ok"}]` |
+| Rename/drop/pick | `return(rename_key(hash("old", 1, "keep", 2), "old", "new"))` / `return(drop_keys(hash("a", 1, "b", 2, "c", 3), "b", "c"))` / `return(pick_keys(hash("a", 1, "b", 2, "c", 3), "b", "missing"))` | `x` | `[{"keep":2,"new":1}]` / `[{"a":1}]` / `[{"b":2}]` |
+| Membership/count | `return(array(has_key(hash("a", 1), "a"), has_key(hash("a", 1), "missing")))` / `return(count_keys(hash("a", 1, "b", 2)))` | `x` | `[[1,0]]` / `[2]` |
+| Sorted views | `return(sorted_keys(hash("b", 2, "a", 1)))` / `return(sorted_values(hash("b", 2, "a", 1)))` | `x` | `[["a","b"]]` / `[[1,2]]` |
+| Receiver chain | `set_key(meta, "b", 2); set_key(meta, "a", 1); return(meta.set_key("c", 3).sorted_keys().join_values(","))` | `x` | `["a,b,c"]` |
+| Block receiver | `return({ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(","))` | `x` | `["a,b"]` |
+| Hash-tree map | `set(hash(meta), { "b" : { "y" : "B" }, "a" : "A" }); return(meta.map_leaves() { return(cat(join_values("/", array(path)), "=", value)) })` | `x` | `[{"a":"a=A","b":{"y":"b/y=B"}}]` |
+| Hash-tree walk | `set(hash(meta), { "b" : { "y" : "B" }, "a" : "A" }); return(array(meta.walk_leaves() { paths += join_values("/", array(path)); return(value) }.count_keys(), array(paths)))` | `x` | `[[2,["a","b/y"]]]` |
+| Hash-tree reduce | `set(hash(meta), { "b" : { "y" : "B" }, "a" : "A" }); return(meta.reduce_leaves("") { return(cat(acc, key)) })` | `x` | `["ay"]` |
+
+> **Current Perl caveat.** Direct odd-arity constructor calls such as
+> `hash("a", 1, "missing")` are not the portable "trailing undef" spelling on the
+> current Perl reference; they lower to an unsupported-helper sentinel and return
+> `undef` (`[null]` through this scaffold). Spell the missing value explicitly
+> as `hash("a", 1, "missing", undef)`, or pass a list-valued splice such as
+> `hash(flat_array(array("a", 1, "missing")))` when that list context is intended.
+
 ### `hash(k1, v1, k2, v2, ...)`
 - **Signature**: `hash(keys_and_values: scalar...)`
 - **Returns**: hash
@@ -894,8 +867,8 @@ dispatch rule.
   lookup. `hash(alias)` reads the working hash named `alias`; it does not read scalar `alias` and then use
   that scalar as another variable name. Prefer direct shape literals such as `{ "alias" : value }` as the
   terse constructor spelling in new examples.
-- **Edge cases**: Duplicate keys: last value wins. In multi-argument constructor use, an odd final key gets
-  `undef` value.
+- **Edge cases**: Duplicate keys: last value wins. Direct multi-argument constructor calls should pass paired
+  key/value arguments; use an explicit `undef` value for a null-valued trailing key.
 
 ### `flat_hash(h)`
 - **Signature**: `flat_hash(h: hash)`
@@ -957,6 +930,79 @@ dispatch rule.
 - **Signature**: `count_keys(h: hash)`
 - **Returns**: int
 - **Behavior**: Returns the number of keys in the hash. Returns undef for non-hash input.
+
+### `sorted_keys(hash)`
+- **Signature**: `sorted_keys(h: hash)`
+- **Returns**: array
+- **Behavior**: Returns the hash's keys as an array, sorted alphabetically. Deterministic — does not depend on host-language hash iteration order.
+
+### `sorted_values(hash)`
+- **Signature**: `sorted_values(h: hash)`
+- **Returns**: array
+- **Behavior**: Returns the hash's values as an array, sorted by their corresponding keys alphabetically. Deterministic.
+
+### Hash receiver-dot value chains
+- **Signature**: `hash_expr.method(args...).next(args...)`
+- **Returns**: the documented return value of the final helper in the chain.
+- **Behavior**: A compatible hash receiver feeds into the first pure hash helper, and each helper's return
+  value feeds the next compatible helper. For example,
+  `meta.set_key("stage", "normalized").count_keys()` is equivalent to
+  `count_keys(set_key(hash(meta), "stage", "normalized"))`. `meta.sorted_keys().join_values(",")` first
+  derives the sorted key array, then continues through the array receiver-chain family.
+- **Allowed hash-returning links**: `copy`, `merge_hash`, `set_key`, `rename_key`, `drop_keys`,
+  `pick_keys`, and `flat_hash`. `merge_hash` preserves the canonical helper contract: later arguments
+  override earlier keys.
+- **Allowed terminal/bridge links**: `sorted_keys` and `sorted_values` return arrays and may continue through
+  compatible array receiver helpers. `count_keys` and `has_key` return number and boolean terminal values.
+  Field reads from a named working hash use `hash(name).pick_keys(key).sorted_values().first()` after storing
+  expression receivers in a named hash. Direct bracket reads such as `retv["key"]` are for scalar hashref
+  payloads, not working-hash value reads.
+- **Boundary**: `set_key(name, key, value)` and `name[key] = value` mutate the named working hash; hash-index
+  assignment also yields the updated hash snapshot in value positions. Receiver-dot `meta.set_key(key, value)` is
+  pure value composition; it mutates nothing unless its result is explicitly assigned back.
+- **Block receivers**: An expression-valued block whose value is a hash can be the receiver, for example
+  `{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")`.
+
+### Hash-tree receiver block traversal: `walk_leaves`, `map_leaves`, `reduce_leaves`
+- **Signatures**:
+  - `hash_expr.walk_leaves() { block }`
+  - `hash_expr.map_leaves() { block }`
+  - `hash_expr.reduce_leaves(initial_acc: expr) { block }`
+- **Returns**:
+  - `walk_leaves` returns the original hash tree after running callbacks.
+  - `map_leaves` returns a new hash tree with each leaf replaced by the callback result.
+  - `reduce_leaves` returns the final accumulator.
+- **Backend status**: Perl reference and Rust interpreter support are current.
+- **Tree shape**: The receiver must be a hash. Nested hashes are interior nodes. Every non-hash value is a leaf,
+  including arrays.
+- **Traversal order**: Sorted-key depth-first traversal. For `{ "a" : "A", "arr" : ["u", "v"], "b" : { "y" : "B" } }`,
+  callbacks run for paths `a`, `arr`, then `b/y`.
+- **Callback bindings**: Each callback runs immediately in the caller's current action/runtime context with scoped
+  scalar bindings:
+  - `value`: current leaf value.
+  - `key`: current leaf key.
+  - `path`: array value containing root-to-leaf path segments.
+  - `depth`: zero-based leaf depth.
+  - `acc`: current accumulator for `reduce_leaves` only.
+- **Binding restoration**: The traversal restores those scoped names after each callback and after traversal
+  completes. Mutations to other working variables are ordinary side effects and persist.
+- **Return semantics**: `return(expr)` inside the callback is block-local and supplies that callback's result. In
+  `map_leaves`, the result replaces the current leaf. In `reduce_leaves`, the result becomes the next accumulator.
+  In `walk_leaves`, the result is ignored.
+- **Edge cases**: A non-hash receiver yields `undef` and does not execute the callback. `walk_leaves()` and
+  `map_leaves()` take no parenthesized arguments. `reduce_leaves(initial)` requires exactly one parenthesized
+  initial accumulator expression. `walk_leaves()` and `map_leaves()` return hash values and can feed later hash
+  receiver links such as `.count_keys()`. `reduce_leaves(...)` is terminal. These are immediate receiver block
+  methods, not closures or delayed callbacks.
+- **Examples**:
+  - After `set(hash(meta), { "b" : { "y" : "B" }, "a" : "A" })`,
+    `return(meta.map_leaves() { return(cat(join_values("/", array(path)), "=", value)) })`
+    yields `[{"a":"a=A","b":{"y":"b/y=B"}}]` through the standard `demo::` wrapper.
+  - After `set(hash(meta), { "b" : { "y" : "B" }, "a" : "A" })`,
+    `return(array(meta.walk_leaves() { paths += join_values("/", array(path)); return(value) }.count_keys(), array(paths)))`
+    yields `[[2,["a","b/y"]]]`.
+  - After `set(hash(meta), { "b" : { "y" : "B" }, "a" : "A" })`,
+    `return(meta.reduce_leaves("") { return(cat(acc, key)) })` yields `["ay"]`.
 
 ## 5. Numeric Helpers
 
@@ -1105,6 +1151,41 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Example**: over `/(\d+),(\d+),(\d+),(\d+)/`, `num_range(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `3,9,1,7` → `[8]` (`9 - 1`).
 
 ## 6. Control Flow Helpers
+
+> **Worked examples** use the standard `demo:: -> value .push` scaffold unless stated otherwise.
+> Examples that read `entry_group(0)` use a regex with an explicit capture group.
+
+**Verified branch, loop, and return examples:**
+
+| Surface | Body inside `value`'s `I { ... }` block | Input | Output |
+| --- | --- | --- | --- |
+| Inline `if(...)` value | `return(if(str_eq(entry_group(0), "hot"), "H", else("C")))` over `/([A-Za-z]+)/` | `hot` | `["H"]` |
+| Marker `if`/`elseif`/`else` | `kind = entry_group(0); if(str_eq(kind, "a")); return("A"); elseif(str_eq(kind, "b")); return("B"); else(); return("Z"); endif()` over `/([A-Za-z]+)/` | `b` | `["B"]` |
+| Attached `if` blocks | `kind = entry_group(0); if(str_eq(kind, "a")) { return("A") } elseif(str_eq(kind, "b")) { return("B") } else { return("Z") }` over `/([A-Za-z]+)/` | `b` | `["B"]` |
+| `when` / `otherwise` | `kind = entry_group(0); when(str_eq(kind, "yes")) { return("Y") } otherwise { return("N") }` over `/([A-Za-z]+)/` | `yes` | `["Y"]` |
+| Inline `switch(...)` value | `kind = entry_group(0); return(switch(kind, case("a", "A"), case("b", "B"), default("Z")))` over `/([A-Za-z]+)/` | `b` | `["B"]` |
+| Attached `switch` blocks | `kind = entry_group(0); switch(kind) { case("a") { return("A") } case("b") { return("B") } default { return("Z") } }` over `/([A-Za-z]+)/` | `b` | `["B"]` |
+| `while` loop | `count = 0; while(num_lt(count, 3)) { count = num_add(count, 1) }; return(count)` | `x` | `[3]` |
+| `return(value)` | `return(entry_group(0))` over `/([A-Za-z]+)/` | `ok` | `["ok"]` |
+| `return_undef()` | `if(str_eq(entry_group(0), "skip")) { return_undef() } else { return(entry_group(0)) }` over `/([A-Za-z]+)/` | `skip` | `[null]` |
+
+**Verified repetition-control example:**
+
+```text
+demo::
+ -> value .push
+ LX { return(copy(array(demo))) }
+
+value : /(keep|skip|take)\s*/
+ I { if(str_eq(entry_group(0), "skip")) { next() } else { return(entry_group(0)) } }
+```
+
+Input `keep skip take ` yields `["keep","take"]`: `next()` consumes the `skip` repetition without appending a
+value to `demo`'s accumulator.
+
+**Compile-only fatal-exit example:** `exit_now(2)` is descriptor-verified as language-agnostic control metadata
+(`ready=1`, `raw=0`, `fallback=0`, `unresolved=0`, canonical nodes `["EXIT"]`). It is not run in the example
+table because its runtime behavior is to terminate the parser process.
 
 ### `if(cond, then, elseif(cond2, then2), else(default))`
 - **Signature**: Inline composite value form.
