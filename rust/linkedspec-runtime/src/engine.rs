@@ -3797,13 +3797,13 @@ impl Engine {
             )
     }
 
-    fn is_hash_tree_receiver_method(method: &str) -> bool {
+    fn is_tree_traversal_receiver_method(method: &str) -> bool {
         matches!(method, "walk_leaves" | "map_leaves" | "reduce_leaves")
     }
 
     fn is_receiver_trailing_block_surface_call(call: &linkedspec_core::expr::FluentCall) -> bool {
         Self::is_receiver_with_trailing_block_call(call)
-            || Self::is_hash_tree_receiver_method(&call.method)
+            || Self::is_tree_traversal_receiver_method(&call.method)
     }
 
     fn eval_receiver_with_trailing_block_chain(
@@ -3817,7 +3817,7 @@ impl Engine {
 
         for (index, call) in calls.iter().enumerate() {
             if Self::is_receiver_with_trailing_block_call(call)
-                || Self::is_hash_tree_receiver_method(&call.method)
+                || Self::is_tree_traversal_receiver_method(&call.method)
             {
                 current =
                     self.eval_receiver_with_trailing_block_call(current, call, ctx, rule_label)?;
@@ -3850,9 +3850,8 @@ impl Engine {
     ) -> Result<RuntimeValue, String> {
         use linkedspec_core::expr::Expr;
 
-        if Self::is_hash_tree_receiver_method(&call.method) {
-            return self
-                .eval_hash_tree_receiver_trailing_block_call(current, call, ctx, rule_label);
+        if Self::is_tree_traversal_receiver_method(&call.method) {
+            return self.eval_tree_receiver_trailing_block_call(current, call, ctx, rule_label);
         }
 
         if call.args.len() != 1 {
@@ -3872,7 +3871,7 @@ impl Engine {
         result
     }
 
-    fn eval_hash_tree_receiver_trailing_block_call(
+    fn eval_tree_receiver_trailing_block_call(
         &self,
         current: RuntimeValue,
         call: &linkedspec_core::expr::FluentCall,
@@ -3883,68 +3882,81 @@ impl Engine {
 
         let method = call.method.as_str();
         let Some(block_arg) = call.args.last() else {
-            return Err(Self::hash_tree_receiver_malformed_message(
-                method, rule_label,
-            ));
+            return Err(Self::tree_receiver_malformed_message(method, rule_label));
         };
         let Expr::BlockValue { block } = block_arg.value() else {
-            return Err(Self::hash_tree_receiver_malformed_message(
-                method, rule_label,
-            ));
+            return Err(Self::tree_receiver_malformed_message(method, rule_label));
         };
 
         match method {
             "walk_leaves" | "map_leaves" if call.args.len() != 1 => {
-                return Err(Self::hash_tree_receiver_malformed_message(
-                    method, rule_label,
-                ));
+                return Err(Self::tree_receiver_malformed_message(method, rule_label));
             }
             "reduce_leaves" if call.args.len() != 2 => {
-                return Err(Self::hash_tree_receiver_malformed_message(
-                    method, rule_label,
-                ));
+                return Err(Self::tree_receiver_malformed_message(method, rule_label));
             }
             "walk_leaves" | "map_leaves" | "reduce_leaves" => {}
             _ => return Ok(RuntimeValue::Undef),
         }
 
-        let RuntimeValue::Hash(entries) = current else {
-            return Ok(RuntimeValue::Undef);
-        };
-
-        match method {
-            "walk_leaves" => {
-                let mut path = Vec::new();
-                self.walk_hash_tree_entries(&entries, &mut path, block, ctx, rule_label)?;
-                Ok(RuntimeValue::Hash(entries))
-            }
-            "map_leaves" => {
-                let mut path = Vec::new();
-                let mapped =
-                    self.map_hash_tree_entries(&entries, &mut path, block, ctx, rule_label)?;
-                Ok(RuntimeValue::Hash(mapped))
-            }
-            "reduce_leaves" => {
-                let mut acc = self.eval_expr(call.args[0].value(), ctx, rule_label)?;
-                let mut path = Vec::new();
-                self.reduce_hash_tree_entries(
-                    &entries, &mut path, block, &mut acc, ctx, rule_label,
-                )?;
-                Ok(acc)
-            }
+        match current {
+            RuntimeValue::Hash(entries) => match method {
+                "walk_leaves" => {
+                    let mut path = Vec::new();
+                    self.walk_hash_tree_entries(&entries, &mut path, block, ctx, rule_label)?;
+                    Ok(RuntimeValue::Hash(entries))
+                }
+                "map_leaves" => {
+                    let mut path = Vec::new();
+                    let mapped =
+                        self.map_hash_tree_entries(&entries, &mut path, block, ctx, rule_label)?;
+                    Ok(RuntimeValue::Hash(mapped))
+                }
+                "reduce_leaves" => {
+                    let mut acc = self.eval_expr(call.args[0].value(), ctx, rule_label)?;
+                    let mut path = Vec::new();
+                    self.reduce_hash_tree_entries(
+                        &entries, &mut path, block, &mut acc, ctx, rule_label,
+                    )?;
+                    Ok(acc)
+                }
+                _ => Ok(RuntimeValue::Undef),
+            },
+            RuntimeValue::Array(items) => match method {
+                "walk_leaves" => {
+                    let mut path = Vec::new();
+                    self.walk_array_tree_items(&items, &mut path, block, ctx, rule_label)?;
+                    Ok(RuntimeValue::Array(items))
+                }
+                "map_leaves" => {
+                    let mut path = Vec::new();
+                    let mapped =
+                        self.map_array_tree_items(&items, &mut path, block, ctx, rule_label)?;
+                    Ok(RuntimeValue::Array(mapped))
+                }
+                "reduce_leaves" => {
+                    let mut acc = self.eval_expr(call.args[0].value(), ctx, rule_label)?;
+                    let mut path = Vec::new();
+                    self.reduce_array_tree_items(
+                        &items, &mut path, block, &mut acc, ctx, rule_label,
+                    )?;
+                    Ok(acc)
+                }
+                _ => Ok(RuntimeValue::Undef),
+            },
             _ => Ok(RuntimeValue::Undef),
         }
     }
 
-    fn hash_tree_receiver_malformed_message(method: &str, rule_label: &str) -> String {
+    fn tree_receiver_malformed_message(method: &str, rule_label: &str) -> String {
         let signature = match method {
             "reduce_leaves" => ".reduce_leaves(initial) { ... }",
             "walk_leaves" => ".walk_leaves() { ... }",
             "map_leaves" => ".map_leaves() { ... }",
-            _ => ".<hash-tree-method>() { ... }",
+            _ => ".<tree-traversal-method>() { ... }",
         };
         format!(
-            "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:{method}: receiver `{signature}` requires the accepted hash-tree trailing-block arity in rule '{rule_label}'"
+            "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:{method}: receiver `{signature}` requires the accepted tree traversal trailing-block arity in rule '{rule_label}'"
         )
     }
 
@@ -4060,6 +4072,140 @@ impl Engine {
                 RuntimeValue::Array(
                     path.iter()
                         .map(|part| RuntimeValue::Scalar(part.clone()))
+                        .collect(),
+                ),
+            ),
+        );
+        bindings.push(
+            ctx.enter_scoped_scalar_binding("depth", RuntimeValue::Number(path.len() as f64)),
+        );
+
+        let result = self.eval_block_value(block, ctx, rule_label);
+        while let Some(binding) = bindings.pop() {
+            ctx.exit_scoped_variable_binding(binding);
+        }
+        result
+    }
+
+    fn walk_array_tree_items(
+        &self,
+        items: &[RuntimeValue],
+        path: &mut Vec<usize>,
+        block: &CodeBlock,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<(), String> {
+        for (index, value) in items.iter().enumerate() {
+            path.push(index);
+            let result = match value {
+                RuntimeValue::Array(child_items) => {
+                    self.walk_array_tree_items(child_items, path, block, ctx, rule_label)
+                }
+                leaf => self
+                    .eval_array_tree_leaf_block(
+                        block,
+                        leaf.clone(),
+                        index,
+                        path,
+                        None,
+                        ctx,
+                        rule_label,
+                    )
+                    .map(|_| ()),
+            };
+            path.pop();
+            result?;
+        }
+        Ok(())
+    }
+
+    fn map_array_tree_items(
+        &self,
+        items: &[RuntimeValue],
+        path: &mut Vec<usize>,
+        block: &CodeBlock,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<Vec<RuntimeValue>, String> {
+        let mut mapped = Vec::new();
+        for (index, value) in items.iter().enumerate() {
+            path.push(index);
+            let next_value = match value {
+                RuntimeValue::Array(child_items) => self
+                    .map_array_tree_items(child_items, path, block, ctx, rule_label)
+                    .map(RuntimeValue::Array),
+                leaf => self.eval_array_tree_leaf_block(
+                    block,
+                    leaf.clone(),
+                    index,
+                    path,
+                    None,
+                    ctx,
+                    rule_label,
+                ),
+            };
+            path.pop();
+            mapped.push(next_value?);
+        }
+        Ok(mapped)
+    }
+
+    fn reduce_array_tree_items(
+        &self,
+        items: &[RuntimeValue],
+        path: &mut Vec<usize>,
+        block: &CodeBlock,
+        acc: &mut RuntimeValue,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<(), String> {
+        for (index, value) in items.iter().enumerate() {
+            path.push(index);
+            let result = match value {
+                RuntimeValue::Array(child_items) => {
+                    self.reduce_array_tree_items(child_items, path, block, acc, ctx, rule_label)
+                }
+                leaf => {
+                    *acc = self.eval_array_tree_leaf_block(
+                        block,
+                        leaf.clone(),
+                        index,
+                        path,
+                        Some(acc.clone()),
+                        ctx,
+                        rule_label,
+                    )?;
+                    Ok(())
+                }
+            };
+            path.pop();
+            result?;
+        }
+        Ok(())
+    }
+
+    fn eval_array_tree_leaf_block(
+        &self,
+        block: &CodeBlock,
+        value: RuntimeValue,
+        index: usize,
+        path: &[usize],
+        acc: Option<RuntimeValue>,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        let mut bindings = Vec::new();
+        if let Some(acc_value) = acc {
+            bindings.push(ctx.enter_scoped_scalar_binding("acc", acc_value));
+        }
+        bindings.push(ctx.enter_scoped_scalar_binding("value", value));
+        bindings.push(ctx.enter_scoped_scalar_binding("index", RuntimeValue::Number(index as f64)));
+        bindings.push(
+            ctx.enter_scoped_scalar_binding(
+                "path",
+                RuntimeValue::Array(
+                    path.iter()
+                        .map(|part| RuntimeValue::Number(*part as f64))
                         .collect(),
                 ),
             ),

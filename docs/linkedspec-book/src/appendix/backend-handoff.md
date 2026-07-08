@@ -226,10 +226,10 @@ it now also compiles/runs a curated subset selected from the checked-in
 `rust/linkedspec-runtime/tests/corpus/manifest.json`. That generated-source corpus subset includes
 authored proof fixtures, terse helper/control/user-function fixtures, and
 shipped `tclite`/`portmap` smokes. This is deliberately a subset proof; the
-full 96-fixture corpus remains the Rust interpreter oracle gate unless a later
+full 97-fixture corpus remains the Rust interpreter oracle gate unless a later
 leaf explicitly broadens generated-source corpus coverage.
 `RUST-PARITY.9` closed the Rust follow-on documentation state around that
-boundary: interpreter parity is the 96-fixture corpus contract, while generated
+boundary: interpreter parity is the 97-fixture corpus contract, while generated
 source currently proves direct structural-family execution plus the curated
 manifest subset.
 
@@ -243,7 +243,7 @@ every manifest entry, and its runner rejects missing fixture directories or
 stale extra fixture directories.
 
 The checked-in Rust corpus is kept green while parity work lands incrementally. It now has
-96 fixtures, including the `with(...) { ... }` helper, `.with() { ... }` receiver trailing block case, and hash-tree traversal receiver block case; the two minimal shipped `tclite.spec` cases restored by the
+97 fixtures, including the `with(...) { ... }` helper, `.with() { ... }` receiver trailing block case, hash-tree traversal receiver block case, and array-tree traversal receiver block case; the two minimal shipped `tclite.spec` cases restored by the
 default-mode repetition parity work; the shipped `Lispish.spec` `lispish_x_y` case now
 migrated to direct nested access; the first `hlink_substitution` raw-string cases plus the
 JSON-safe `{abc}` curly-brace delimiter case; `lib_reader.spec` scalar-attribute and
@@ -252,9 +252,7 @@ cases; `ebnf.spec` expression-rule and logging-annotation payload cases; four `s
 smokes for minimal rules, action edges, user-function definitions, and comments; seven
 RTL/plugin/legacy safety smokes covering `regdef`, `tablegrep`, `simenv`, `vhdl`,
 `ds_vhistory`, empty `pplugin`, and empty `tkgui`; terse receiver-chain fixtures for
-arrays, hashes, strings, numbers, aggregate wrapper quoting, and block-valued receivers;
-array-tree traversal receiver blocks are implemented on the Perl reference and remain pending for the Rust
-interpreter/oracle until `SPEC-FORMAT-TERSE.13.3`;
+arrays, hashes, strings, numbers, aggregate wrapper quoting, block-valued receivers, and array-tree traversal;
 numeric word aliases; arithmetic/comparison symbol callees; the terse bare-read `name`
 fixture for scalar reads, scalar mutation targets, and scalar-held shape payloads;
 explicit string comparisons; assignment-expression fixtures; and the shared Perl/Rust

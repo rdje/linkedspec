@@ -7,17 +7,31 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-FORMAT-TERSE.13.3 — implement Rust array-tree traversal**
+  (DONE Rust parser/runtime parity plus generated oracle fixture; frontier `.13.4` docs/KM/no-drift closeout).
+
+  **Change:** Rust now accepts and executes array-valued receiver `walk_leaves`, `map_leaves`, and
+  `reduce_leaves(initial)` attached-block traversal through the same receiver trailing-block chain used for
+  hash-tree traversal. Hash receivers keep `.12` sorted-key traversal; array receivers recurse through nested
+  arrays by index, treat hashes as leaves, bind scoped `value`, `index`, `path`, `depth`, and reduce-only `acc`,
+  and return `null` without callbacks for scalar receivers.
+
+  **Oracle:** `tools/gen_oracle_corpus.pl` regenerated the corpus to **97** fixtures, adding
+  `terse_13_3_array_tree_traversal_receiver_blocks`; Rust `oracle_corpus_matches_perl_reference` passes.
+
+  **Verification:** Focused Rust parser tree traversal tests, focused `.13.3` runtime tests, focused `.12.3`
+  hash-tree runtime regressions, oracle regeneration, and the 97-fixture Rust corpus oracle all pass.
+
 - 2026-07-08: **SPEC-FORMAT-TERSE.13.2 — implement Perl array-tree traversal**
-  (DONE Perl reference implementation; frontier `.13.3` Rust/oracle parity).
+  (DONE Perl reference implementation; `.13.3` Rust/oracle parity is now complete above).
 
   **Change:** Perl now lowers receiver `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` through shared
   tree traversal dispatch. Hash receivers keep the `.12` sorted-key semantics; array receivers traverse nested
   arrays depth-first by zero-based index, treat hashes as leaves, bind scoped `value`, `index`, `path`, `depth`,
   and reduce-only `acc`, and return `undef` without callbacks for scalar receivers.
 
-  **Boundary:** Rust runtime parity and the generated oracle fixture are not landed yet; `.13.3` owns that work.
-  The mdBook status note labels array-tree traversal as Perl-reference current / Rust pending until `.13.3` and
-  `.13.4` close.
+  **Boundary:** Rust runtime parity and the generated oracle fixture were split to `.13.3`, which is now complete.
+  Final docs/KM/no-drift closeout remains `.13.4`.
 
   **Verification:** `MethodLowering.pm` syntax check, focused lowering/runtime/source-residue probes, parser AST
   test, and full Perl phase0 pass (`Files=1, Tests=1028`, `Result: PASS`), plus Knowledge/live-doc sync.

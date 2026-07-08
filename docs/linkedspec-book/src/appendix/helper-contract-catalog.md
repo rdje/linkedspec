@@ -684,8 +684,8 @@ dispatch rule.
   - `map_leaves` returns a new array tree with the same nested-array structure and each leaf replaced by the
     callback result.
   - `reduce_leaves` returns the final accumulator.
-- **Backend status**: Perl reference support is current as of `SPEC-FORMAT-TERSE.13.2`; Rust interpreter and
-  generated-oracle parity are pending under `SPEC-FORMAT-TERSE.13.3`.
+- **Backend status**: Perl reference support landed under `SPEC-FORMAT-TERSE.13.2`; Rust interpreter and
+  generated-oracle parity landed under `SPEC-FORMAT-TERSE.13.3`.
 - **Tree shape**: The receiver must be an array. Nested arrays are interior nodes. Scalar values and hash values
   are leaves; hash values are not traversed recursively by this surface.
 - **Traversal order**: Depth-first by zero-based array index. For `["a", ["b", "c"], { "h" : "H" }]`, callbacks
@@ -1408,8 +1408,8 @@ Receiver-dot methods are available for the value families that have a typed rece
   `drop_keys`, `pick_keys`, and `flat_hash`; `sorted_keys` and `sorted_values` bridge to array chains; `count_keys`
   and `has_key` are terminal. Hash-tree traversal receiver methods `walk_leaves`, `map_leaves`, and
   `reduce_leaves` are immediate block-bearing links with their own scoped callback bindings.
-- **Array-tree traversal** uses the same block-bearing receiver method names on array-valued receivers in the Perl
-  reference; Rust parity is pending under `SPEC-FORMAT-TERSE.13.3`.
+- **Array-tree traversal** uses the same block-bearing receiver method names on array-valued receivers, with
+  Perl reference support from `SPEC-FORMAT-TERSE.13.2` and Rust/oracle parity from `SPEC-FORMAT-TERSE.13.3`.
 - **Number** receivers support terse numeric links such as `abs`, `floor`, `ceil`, `round`, `add`, `sub`, `mul`,
   `div`, `mod`, `clamp`, `min`, and `max`; `eq`, `ne`, `gt`, `ge`, `lt`, and `le` are terminal numeric
   comparisons.

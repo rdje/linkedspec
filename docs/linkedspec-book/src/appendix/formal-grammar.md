@@ -601,8 +601,7 @@ hash_expr.set_key(k, v).sorted_keys().join_values(delim)
 hash_expr.map_leaves() { return(value) }
                         — hash-tree receiver block traversal over non-hash leaves
 array_expr.map_leaves() { return(value) }
-                        — array-tree receiver block traversal over scalar/hash leaves; Perl reference current,
-                          Rust parity pending under SPEC-FORMAT-TERSE.13.3
+                        — array-tree receiver block traversal over scalar/hash leaves; Perl/Rust current
 contains(arr, needle)   — array membership test
 index_of(arr, needle)   — first index of needle
 is_empty(arr)           — true if array/hash is empty
@@ -641,11 +640,11 @@ hash_expr.map_leaves() { block }
 hash_expr.reduce_leaves(initial) { block }
                         — fold every non-hash leaf into acc, returns final accumulator
 array_expr.walk_leaves() { block }
-                        — visit every scalar/hash leaf for side effects, returns original array tree; Perl reference current
+                        — visit every scalar/hash leaf for side effects, returns original array tree
 array_expr.map_leaves() { block }
-                        — replace every scalar/hash leaf with block result, returns new array tree; Perl reference current
+                        — replace every scalar/hash leaf with block result, returns new array tree
 array_expr.reduce_leaves(initial) { block }
-                        — fold every scalar/hash leaf into acc, returns final accumulator; Perl reference current
+                        — fold every scalar/hash leaf into acc, returns final accumulator
 ```
 
 ### 7.5 Numeric Helpers

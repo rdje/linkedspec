@@ -2577,6 +2577,68 @@ fn terse_12_3_hash_tree_receiver_blocks_reject_malformed_calls() {
     );
 }
 
+// ── SPEC-FORMAT-TERSE.13.3 — array-tree receiver traversal parity:
+
+#[test]
+fn terse_13_3_array_tree_receiver_blocks_map_reduce_walk() {
+    let grammar = "Top::\n /x/ -> Done { items = [\"a\", [\"b\", \"c\"], { \"h\" : \"H\" }]; return(array(items.map_leaves() { return(cat(join_values(\"/\", array(path)), \"=\", if(count(hash(value).sorted_keys()), cat(\"{\", hash(value).sorted_keys().join_values(\",\"), \"}\"), else(value)))) }, items.reduce_leaves(\"\") { return(cat(acc, join_values(\"/\", array(path)), \":\", if(count(hash(value).sorted_keys()), cat(\"{\", hash(value).sorted_keys().join_values(\",\"), \"}\"), else(value)), \";\")) }, items.walk_leaves() { seen += join_values(\"/\", array(path)); return(value) }.count(), array(seen))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[
+            ["0=a", ["1/0=b", "1/1=c"], "2={h}"],
+            "0:a;1/0:b;1/1:c;2:{h};",
+            3,
+            ["0", "1/0", "1/1", "2"]
+        ]]),
+        "array-tree receiver blocks traverse nested arrays by index, treat hashes as leaves, and keep array continuations"
+    );
+}
+
+#[test]
+fn terse_13_3_array_tree_receiver_blocks_empty_tree_and_non_array() {
+    let grammar = "Top::\n /x/ -> Done { items = []; scalar = \"x\"; return(array(items.map_leaves() { touched += \"bad\" }.count(), items.reduce_leaves(\"seed\") { return(\"bad\") }, items.walk_leaves() { touched += \"bad\" }.count(), array(touched), is_undefined(scalar.map_leaves() { touched += \"bad\" }), is_undefined(scalar.reduce_leaves(\"seed\") { touched += \"bad\" }), is_undefined(scalar.walk_leaves() { touched += \"bad\" }), array(touched))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[0, "seed", 0, [], true, true, true, []]]),
+        "empty array trees run no callbacks, and scalar receivers return undef without callbacks"
+    );
+}
+
+#[test]
+fn terse_13_3_array_tree_receiver_blocks_restore_callback_bindings() {
+    let grammar = "Top::\n /x/ -> Done { value = \"outer_value\"; index = \"outer_index\"; path = \"outer_path\"; depth = \"outer_depth\"; acc = \"outer_acc\"; items = [\"A\"]; mapped = items.map_leaves() { value = cat(value, \"!\"); index = 9; path = [\"inner_path\"]; depth = 99; return(cat(value, index)) }; reduced = items.reduce_leaves(\"seed\") { acc = cat(acc, index); return(acc) }; return(array(mapped.first(), reduced, value, index, path, depth, acc)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[
+            "A!9",
+            "seed0",
+            "outer_value",
+            "outer_index",
+            "outer_path",
+            "outer_depth",
+            "outer_acc"
+        ]]),
+        "array callback scoped variables restore any outer bindings after map/reduce blocks"
+    );
+}
+
+#[test]
+fn terse_13_3_array_tree_receiver_blocks_reject_malformed_calls() {
+    let missing_block = "Top::\n /x/ -> Done { items = [\"a\"]; return(items.map_leaves()) }\n\nDone::\n /[a-z]+/\n";
+    let err = build_and_run_result(missing_block, "xhello").unwrap_err();
+    assert!(
+        err.contains("LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:map_leaves"),
+        "array map_leaves without a trailing block must produce an explicit diagnostic: {err}"
+    );
+
+    let missing_reduce_block = "Top::\n /x/ -> Done { items = [\"a\"]; return(items.reduce_leaves(\"seed\")) }\n\nDone::\n /[a-z]+/\n";
+    let err = build_and_run_result(missing_reduce_block, "xhello").unwrap_err();
+    assert!(
+        err.contains("LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:reduce_leaves"),
+        "array reduce_leaves without a trailing block must produce an explicit diagnostic: {err}"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.2.3.2 — lifecycle block value/drop channel:
 // lifecycle blocks execute statements and discard statement values. A top-level
 // lifecycle return(expr) records a surrounding rule return event, while

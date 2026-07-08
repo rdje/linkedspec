@@ -19,7 +19,7 @@
 //! expr        → primary ('.' method_call)*
 //! primary     → call | nested_access | indexed_var | literal | block | grouped | variable
 //! call        → name '(' args? ')' trailing_block? | symbol '(' args? ')'
-//! trailing_block → '{' stmts '}'          (helper-form `with(...)`, receiver `.with()`, and hash-tree receiver methods)
+//! trailing_block → '{' stmts '}'          (helper-form `with(...)`, receiver `.with()`, and tree traversal receiver methods)
 //! method_call → name '(' args? ')' trailing_block?
 //! args        → arg (',' arg)*
 //! arg         → expr | name '=' expr       (keyword argument only for keyword-aware callees)
@@ -2117,7 +2117,7 @@ mod tests {
     }
 
     #[test]
-    fn parse_hash_tree_receiver_trailing_blocks_as_fluent_calls() {
+    fn parse_tree_traversal_receiver_trailing_blocks_as_fluent_calls() {
         let block = CodeBlock::parse(
             r#"return(meta.map_leaves() { return(cat(key, "=", value)) }.count_keys())"#,
         )
@@ -2135,6 +2135,23 @@ mod tests {
         assert_eq!(calls[0].args.len(), 1);
         assert!(matches!(calls[0].args[0].value(), Expr::BlockValue { .. }));
         assert_eq!(calls[1].method, "count_keys");
+
+        let array_block = CodeBlock::parse(
+            r#"return(items.map_leaves() { return(cat(index, "=", value)) }.count())"#,
+        )
+        .unwrap();
+        let Expr::Call { args, .. } = &array_block.statements[0].expr else {
+            panic!("expected return call");
+        };
+        let Expr::FluentChain { receiver, calls } = args[0].value() else {
+            panic!("expected array-tree fluent chain");
+        };
+        assert!(matches!(receiver.as_ref(), Expr::Variable { name } if name == "items"));
+        assert_eq!(calls.len(), 2);
+        assert_eq!(calls[0].method, "map_leaves");
+        assert_eq!(calls[0].args.len(), 1);
+        assert!(matches!(calls[0].args[0].value(), Expr::BlockValue { .. }));
+        assert_eq!(calls[1].method, "count");
 
         let reducer =
             CodeBlock::parse(r#"return(meta.reduce_leaves("") { return(cat(acc, key)) })"#)
@@ -2155,7 +2172,7 @@ mod tests {
     }
 
     #[test]
-    fn parse_hash_tree_receiver_trailing_blocks_reject_wrong_arity() {
+    fn parse_tree_traversal_receiver_trailing_blocks_reject_wrong_arity() {
         let err =
             CodeBlock::parse(r#"return(meta.map_leaves("bad") { return(value) })"#).unwrap_err();
         assert!(

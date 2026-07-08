@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-FORMAT-TERSE.13.3 — Rust array-tree traversal):
+  Rust now uses one receiver trailing-block traversal dispatch for hash and array values. The hash path preserves
+  the `.12` sorted-key traversal contract; the new array path recurses only through nested arrays, treats hashes as
+  leaves, and scopes callback variables as scalar `RuntimeValue`s (`value`, `index`, `path`, `depth`, and
+  reduce-only `acc`). Because Rust scalar-held arrays feed existing array receiver/helper paths, callback examples
+  should use receiver links such as `mapped.first()` or `array(path)` rather than assuming aggregate-array storage
+  for duck-typed assignment results. The Perl-backed oracle corpus now has 97 fixtures after
+  `terse_13_3_array_tree_traversal_receiver_blocks`.
+
 - 2026-07-08 (SPEC-FORMAT-TERSE.13.2 — Perl array-tree traversal):
   `MethodLowering.pm` now uses one tree-traversal receiver path for `walk_leaves`, `map_leaves`, and
   `reduce_leaves(initial)`, with runtime dispatch for hash vs array receiver values. Hash receivers preserve the

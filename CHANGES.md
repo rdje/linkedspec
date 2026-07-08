@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-FORMAT-TERSE.13.3 — implement Rust array-tree traversal
+
+**Scope:** Rust parser/runtime parity plus a generated Perl-backed oracle fixture for array-tree traversal receiver
+blocks.
+
+**Change:** Generalized Rust receiver trailing-block traversal from hash-only to hash-or-array runtime dispatch.
+Hash receivers keep the shipped `.12` sorted-key behavior. Array receivers traverse nested arrays depth-first by
+zero-based index, treat hash values as leaves, bind scoped `value`, `index`, `path`, `depth`, and reduce-only
+`acc`, return `null` without callbacks for scalar receivers, and allow `walk_leaves` / `map_leaves` to feed
+array-family continuations such as `.count()`.
+
+**Validation:** Focused Rust parser tests for tree traversal receiver blocks pass; focused Rust `.13.3` runtime
+tests pass; focused `.12.3` hash-tree runtime tests still pass; `perl -Iperl tools/gen_oracle_corpus.pl`
+regenerated **97** fixtures including `terse_13_3_array_tree_traversal_receiver_blocks`; Rust
+`oracle_corpus_matches_perl_reference` passes over the 97-fixture manifest.
+
 ## 2026-07-08 — SPEC-FORMAT-TERSE.13.2 — implement Perl array-tree traversal
 
 **Scope:** Perl reference implementation for array-valued receiver block traversal methods.

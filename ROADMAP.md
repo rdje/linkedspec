@@ -27,7 +27,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Specs baseline:
   - All 21 shipped files in `specs/*.spec` compile in the phase0 baseline.
   - Current phase0 reaches `PASS 1..1028` when run with `PERL5LIB=` cleared.
-  - The Rust interpreter oracle is manifest-backed at 96 fixtures.
+  - The Rust interpreter oracle is manifest-backed at 97 fixtures.
   - The former `specs/tclite.spec` literal `[` regex blocker is fixed.
 
 ## Strategic Principles
@@ -512,7 +512,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Exit criteria:
   - a Cargo workspace at `rust/` (`linkedspec-core` + `linkedspec-runtime`) parses, validates, compiles, and interprets `.spec` files (v0.1, interpreted mode).
   - the variant is exercised by the Rust test suite and the manifest-backed Perl-reference output oracle.
-- Current status: the Rust interpreter oracle is green over 96 fixtures. Generated Rust source emission remains a
+- Current status: the Rust interpreter oracle is green over 97 fixtures. Generated Rust source emission remains a
   structural/curated-subset proof, not the primary interpreter parity gate.
 - Variant model: `.spec` is the universal contract, Perl is the reference backend, Rust is the implemented
   lockstep variant, and Julia/Dart are accepted future lockstep variants; Lua requires an explicit ADR before it

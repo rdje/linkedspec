@@ -45,6 +45,7 @@ answers:
   - "does child return leak into the parent accumulator in Rust"
   - "does a regex on a rule header line register in the Rust parser"
   - "when did hash tree traversal enter the Rust oracle corpus"
+  - "when did array tree traversal enter the Rust oracle corpus"
 date: 2026-07-08
 status: confirmed
 tags: [rust, oracle, corpus, parity, RUST-PARITY, testing]
@@ -60,13 +61,14 @@ evidence_update_2026_07_07_public_status: "The checked-in manifest `rust/linkeds
 evidence_update_2026_07_07_14_3: "SPEC-FORMAT-TERSE.14.3 added `terse_14_3_with_helper_trailing_block` after Rust parser/runtime support for helper-form `with(value) { ... }` / `with() { ... }` landed. `perl tools/gen_oracle_corpus.pl` now emits 94 fixtures, and `cargo test -p linkedspec-runtime oracle_corpus_matches_perl_reference` passes over all 94 fixtures."
 evidence_update_2026_07_07_14_4: "SPEC-FORMAT-TERSE.14.4 added `terse_14_4_receiver_with_trailing_block` after Perl/Rust support for receiver-form `.with() { ... }` landed. `perl tools/gen_oracle_corpus.pl` now emits 95 fixtures, and `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference` passes over all 95 fixtures."
 evidence_update_2026_07_08_12_3: "SPEC-FORMAT-TERSE.12.3 added `terse_12_3_hash_tree_traversal_receiver_blocks` after Rust parser/runtime support for hash-tree receiver blocks `walk_leaves`, `map_leaves`, and `reduce_leaves` landed. `perl -Iperl tools/gen_oracle_corpus.pl` now emits 96 fixtures, and `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference -- --nocapture` passes over all 96 fixtures."
-reverify: "perl -c -Iperl tools/gen_oracle_corpus.pl; ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl 2>&1 | grep 'hard kill during parser build/parse'; perl -Iperl tools/gen_oracle_corpus.pl; rg -n '\"case_count\" : 96|terse_12_3_hash_tree_traversal_receiver_blocks' rust/linkedspec-runtime/tests/corpus/manifest.json; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference"
+evidence_update_2026_07_08_13_3: "SPEC-FORMAT-TERSE.13.3 added `terse_13_3_array_tree_traversal_receiver_blocks` after Rust parser/runtime support for array-tree receiver blocks `walk_leaves`, `map_leaves`, and `reduce_leaves` landed. `perl -Iperl tools/gen_oracle_corpus.pl` now emits 97 fixtures, and `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference` passes over all 97 fixtures."
+reverify: "perl -c -Iperl tools/gen_oracle_corpus.pl; ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl 2>&1 | grep 'hard kill during parser build/parse'; perl -Iperl tools/gen_oracle_corpus.pl; rg -n '\"case_count\" : 97|terse_13_3_array_tree_traversal_receiver_blocks' rust/linkedspec-runtime/tests/corpus/manifest.json; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference"
 ---
 
 # Perl↔Rust Output Oracle (RUST-PARITY.7)
 
 **Confirmed 2026-06-17 (RUST-PARITY.7.1); updated 2026-07-08
-(SPEC-FORMAT-TERSE.12.3).** A language-neutral cross-variant parity gate
+(SPEC-FORMAT-TERSE.13.3).** A language-neutral cross-variant parity gate
 (ADR 0006 §Phase 8.6). The Perl reference is the behavioral oracle; the corpus is its
 frozen output; `cargo test` validates the Rust backend against it with no Perl in the loop.
 
@@ -105,7 +107,7 @@ that: the Rust engine initially did **not** reproduce the shipped recursive spec
 shipped `tclite` and `Lispish` fixtures are now active; `.7.2` and `.7.3` expanded the
 green corpus to 88 fixtures, `.7.4` finalized the manifest-backed drift guard, and
 `TOP-RULE-AS-NORMAL.3.2` raised the corpus to 91 fixtures with recursive top-rule value
-cases, and later terse-language leaves raised the checked-in manifest to 96 fixtures.
+cases, and later terse-language leaves raised the checked-in manifest to 97 fixtures.
 
 - **Header-line-regex → 0-regex parser bug (`.7.5.1`, FIXED 2026-06-17; necessary, NOT
   sufficient for tclite).** `rust/linkedspec-core/src/parser.rs:86` — the rule-header regex
