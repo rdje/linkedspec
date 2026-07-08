@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.5 — fix spec file paragraph examples**
+  (DONE mdBook + Knowledge fact; frontier `.10.5.6` next).
+
+  **Change:** Rewrote `user-model/spec-files-and-rule-paragraphs.md` examples to the verified 2-rule
+  idiom and replaced the malformed bare `label:` block with valid quoted `"label:"` helper content plus
+  the exact validation-error note.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a documentation correction plus the
+  narrow Knowledge fact `rule-starts-open-block-validation`.
+
+  **Verification:** Four replacement snippets compile/run through `LinkedSpec::Get`; the bad bare-label
+  probe reports `Rule definition not allowed inside open block`; mdBook, memory, Knowledge, doctrine,
+  task-tree, and whitespace gates cover the final committed slice.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.4.1 — reactivate book scorch**
   (DONE metadata-only activation; frontier `.10.5.5` next).
 

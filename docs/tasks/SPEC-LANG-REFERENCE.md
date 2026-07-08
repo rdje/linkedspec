@@ -6,8 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-07-08` (`.10.5.4.1` done: user reactivated the whole-book scorch after the
-  2026-06-18 pause for `SPEC-FORMAT-TERSE`; frontier resumes at `.10.5.5`. Earlier **MAJOR
+- Last updated: `2026-07-08` (`.10.5.5` done: `user-model/spec-files-and-rule-paragraphs.md`
+  now uses verified 2-rule examples and documents the bare `label:` open-block validation error;
+  frontier advances to `.10.5.6`. Earlier **MAJOR
   CORRECTION** — user established that a `.spec` top (`::`) rule has NO regex; a valid spec needs >=2
   rules (top entry + >=1 normal `:` rule carrying the regex). Remediation remains documentation-only
   and owned by `.10.3`/`.10.5`; Perl reference untouched.)
@@ -507,12 +508,18 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.5.4.1` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.5`
-  Status: `pending`
+  Status: `done`
   Goal: Fix `user-model/spec-files-and-rule-paragraphs.md` — the malformed label-in-block example
   (`Top::AND … label:` → DSL compile error) + the `Top::AND` regex-on-top sketches
   Acceptance: valid forms, re-verified; `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. Replaced the page's runnable `Top::AND` minimal, label-in-block,
+  same-line, and multiline examples with the verified 2-rule idiom (`Top:: -> Word .push` /
+  `LX { return(copy(array(Top))) }` plus normal `Word:`/`Item:` matcher rules). Replaced the malformed
+  bare `label:` block with a valid quoted `"label:"` helper value, and documented that a bare label-like
+  line inside an open `{ ... }` block fails validation with `Rule definition not allowed inside open
+  block`. The four replacement snippets were compile/run-verified through `LinkedSpec::Get`; the
+  mdBook build exits 0 (`mdbook build docs/linkedspec-book`).
+  Commit: `SPEC-LANG-REFERENCE.10.5.5` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.6`
   Status: `pending`
@@ -743,7 +750,7 @@ target) · CLEAN.
 | `overview/what-is-linkedspec.md` | §"minimal kv parser" `Top::AND+ /…/ -> Top[0]` (single rule) | A+C+D | "returns a hash per match" → **compile error → `null`** | `.10.5.2` |
 | `public-api/get-and-get-parser.md` | "minimal example" `Top::AND /foo/ -> Top[0]` | A+B+C | "runnable parser" → **`[]`** | `.10.5.3` |
 | `user-model/worked-spec-walkthrough.md` | central `Pair::AND /…/ -> Pair[0]` (single rule, whole chapter) | A+B+C | `{kind:pair,name:answer,value:42}` → **`[]`** | `.10.5.4` |
-| `user-model/spec-files-and-rule-paragraphs.md` | label-in-block `Top::AND … label:`; `Top::AND` sketches | A+D | "label belongs to the block" → **DSL compile error** (agent, re-verify at fix) | `.10.5.5` |
+| `user-model/spec-files-and-rule-paragraphs.md` | label-in-block `Top::AND … label:`; `Top::AND` sketches | A+D | "label belongs to the block" → **DSL compile error** (`Rule definition not allowed inside open block`, reverified 2026-07-08); fixed in `.10.5.5` | `.10.5.5` |
 | `user-model/rule-modes-and-parse-modes.md` | ~20 mode fragments `Pair::&`/`::AND`/`::OR`/`Top:: /foo/`…; line 24 "both valid shapes" framing | A | regex on `::` throughout; `Top:: /foo/ -> Top` → **`null`** | `.10.5.6` |
 | `user-model/regex-in-spec.md` | `Top::` (l.38), `Pair::AND` (l.101), `Subdef::AND`, `Unit::AND` fragments | A | regex on `::` (capture-indexing teaching is correct) | `.10.5.7` |
 | `user-model/blind-calls-and-parser-orchestration.md` | `Document::AND`/`Atom::|`… (blind-call, no regex); `BadRule::` negative | mostly CLEAN | blind-call `::` rules carry no regex — audit + fix any stray regex-on-`::` | `.10.5.8` |
@@ -791,30 +798,39 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.5.3` | `done` | `public-api/get-and-get-parser.md` minimal `Get` example → verified 2-rule idiom (2026-06-17); book-extracted run → `[{"kind":"top","text":"foo"}]`; caught `match_text()`→`entry_text()` (else `null`); `mdbook build` exit 0 |
 | — | `SPEC-LANG-REFERENCE.10.5.4` | `done` | `worked-spec-walkthrough.md` rewritten to the verified 2-rule idiom (2026-06-18); every claimed output re-derived through `LinkedSpec::Get` (`answer = 42` → `[{"kind":"pair",…}]`; output corrected single-hash → one-element list; `ctx{top_rule}` `Pair`→`Top`); `match_group`→`entry_group`; declare/assign dropped per user pivot; `mdbook build` exit 0 |
 | — | `SPEC-LANG-REFERENCE.10.5.4.1` | `done` | reactivated by user directive (2026-07-08); the 2026-06-18 `SPEC-FORMAT-TERSE` pause is resolved; no book content changed |
-| 4 | `SPEC-LANG-REFERENCE.10.5.5` | `pending` | next: fix `user-model/spec-files-and-rule-paragraphs.md` malformed label-in-block + `Top::AND` sketches |
-| 5 | `SPEC-LANG-REFERENCE.10.5.6` | `pending` | fix `user-model/rule-modes-and-parse-modes.md` ~20 mode fragments + reframe "both valid shapes" |
-| 6 | `SPEC-LANG-REFERENCE.10.5.7` | `pending` | fix `user-model/regex-in-spec.md` `::`-with-regex fragments (keep capture teaching) |
-| 7 | `SPEC-LANG-REFERENCE.10.5.8` | `pending` | audit+fix `user-model/blind-calls-and-parser-orchestration.md` (mostly clean — blind-call `::` carry no regex) |
-| 8 | `SPEC-LANG-REFERENCE.10.5.9` | `pending` | fix `dsl/action-and-lifecycle-placement.md` worked examples → 2-rule idiom |
-| 9 | `SPEC-LANG-REFERENCE.10.5.10` | `pending` | fix `dsl/capture-marks-and-source-locations.md` (`Top::AND`, `Call::AND`/`Inner::AND`) |
-| 10 | `SPEC-LANG-REFERENCE.10.5.11` | `pending` | fix `dsl/declaration-helper-reference.md` (`Token::AND`, `List::AND`) |
-| 11 | `SPEC-LANG-REFERENCE.10.5.12` | `pending` | fix `dsl/source-boundary-helper-reference.md` (`Tuple::AND`/`Block::AND`/…) |
-| 12 | `SPEC-LANG-REFERENCE.10.5.13` | `pending` | fix `dsl/value-container-flow-helper-reference.md` (`Token::AND`/`Node::AND`/…) |
-| 13 | `SPEC-LANG-REFERENCE.10.5.14` | `pending` | fix remaining DSL pages (`values-containers` `Token::`, `action-model` `Top::`, `fluent-and-block-forms`, `actionir-lowering`) |
-| 14 | `SPEC-LANG-REFERENCE.10.5.15` | `pending` | fix `appendix/formal-grammar.md` §1 + §12 examples |
-| 15 | `SPEC-LANG-REFERENCE.10.5.16` | `pending` | fix `appendix/runtime-semantics.md` §5.5/§5.6 (folds `.10.4`) |
-| 16 | `SPEC-LANG-REFERENCE.10.5.17` | `pending` | fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts (`sens`/GROUP) |
-| 17 | `SPEC-LANG-REFERENCE.10.5.18` | `pending` | fix `specs-and-corpora/portmap-spec-walkthrough.md` 5 output-shape examples |
-| 18 | `SPEC-LANG-REFERENCE.10.5.19` | `pending` | finalize scorch — whole-book re-grep + `mdbook build`; close `.10.5`/`.10` |
+| — | `SPEC-LANG-REFERENCE.10.5.5` | `done` | `user-model/spec-files-and-rule-paragraphs.md` examples now use verified 2-rule forms; bare `label:` open-block validation error documented |
+| 4 | `SPEC-LANG-REFERENCE.10.5.6` | `pending` | next: fix `user-model/rule-modes-and-parse-modes.md` ~20 mode fragments + reframe "both valid shapes" |
+| 5 | `SPEC-LANG-REFERENCE.10.5.7` | `pending` | fix `user-model/regex-in-spec.md` `::`-with-regex fragments (keep capture teaching) |
+| 6 | `SPEC-LANG-REFERENCE.10.5.8` | `pending` | audit+fix `user-model/blind-calls-and-parser-orchestration.md` (mostly clean — blind-call `::` carry no regex) |
+| 7 | `SPEC-LANG-REFERENCE.10.5.9` | `pending` | fix `dsl/action-and-lifecycle-placement.md` worked examples → 2-rule idiom |
+| 8 | `SPEC-LANG-REFERENCE.10.5.10` | `pending` | fix `dsl/capture-marks-and-source-locations.md` (`Top::AND`, `Call::AND`/`Inner::AND`) |
+| 9 | `SPEC-LANG-REFERENCE.10.5.11` | `pending` | fix `dsl/declaration-helper-reference.md` (`Token::AND`, `List::AND`) |
+| 10 | `SPEC-LANG-REFERENCE.10.5.12` | `pending` | fix `dsl/source-boundary-helper-reference.md` (`Tuple::AND`/`Block::AND`/…) |
+| 11 | `SPEC-LANG-REFERENCE.10.5.13` | `pending` | fix `dsl/value-container-flow-helper-reference.md` (`Token::AND`/`Node::AND`/…) |
+| 12 | `SPEC-LANG-REFERENCE.10.5.14` | `pending` | fix remaining DSL pages (`values-containers` `Token::`, `action-model` `Top::`, `fluent-and-block-forms`, `actionir-lowering`) |
+| 13 | `SPEC-LANG-REFERENCE.10.5.15` | `pending` | fix `appendix/formal-grammar.md` §1 + §12 examples |
+| 14 | `SPEC-LANG-REFERENCE.10.5.16` | `pending` | fix `appendix/runtime-semantics.md` §5.5/§5.6 (folds `.10.4`) |
+| 15 | `SPEC-LANG-REFERENCE.10.5.17` | `pending` | fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts (`sens`/GROUP) |
+| 16 | `SPEC-LANG-REFERENCE.10.5.18` | `pending` | fix `specs-and-corpora/portmap-spec-walkthrough.md` 5 output-shape examples |
+| 17 | `SPEC-LANG-REFERENCE.10.5.19` | `pending` | finalize scorch — whole-book re-grep + `mdbook build`; close `.10.5`/`.10` |
 | — | `SPEC-LANG-REFERENCE.10.4` | `superseded` | folded into `.10.5.16` |
-| 19 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the scorch |
-| 20 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
-| 21 | `SPEC-LANG-REFERENCE.5.5` | `pending` | worked examples: Declaration, Capture/Mark, Entry/Match, Input, Call families (closes `.5`) |
-| 22 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
-| 23 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
-| 24 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
+| 18 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the scorch |
+| 19 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
+| 20 | `SPEC-LANG-REFERENCE.5.5` | `pending` | worked examples: Declaration, Capture/Mark, Entry/Match, Input, Call families (closes `.5`) |
+| 21 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
+| 22 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
+| 23 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
 
 ## Decisions
+
+- **`2026-07-08` — SPEC FILE PARAGRAPH PAGE FIX (`.10.5.5`).** The
+  `user-model/spec-files-and-rule-paragraphs.md` page now follows the scorch doctrine for runnable
+  stream examples: `Top::` is a no-regex entry rule that dispatches and returns its accumulator, and
+  normal `:` matcher rules carry regexes and read the entering match with `entry_text()`. The old bare
+  `label:` example is not valid block DSL; it is a validation error (`Rule definition not allowed
+  inside open block`). The page now uses a valid quoted `"label:"` helper value to teach the
+  block-boundary distinction, and the exact validation behavior is durable in Knowledge Map fact
+  `rule-starts-open-block-validation`.
 
 - **`2026-07-08` — SCORCH REACTIVATED (user directive, `.10.5.4.1`).** The 2026-06-18 pause caused
   by activating `SPEC-FORMAT-TERSE` is resolved. The whole-book language-reference scorch resumes at
@@ -908,7 +924,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 ## Blockers
 
 - None. (`.10.2`'s "blocked-on-decision" is gone — superseded; the decision was withdrawn after the
-  user's structural correction. The scorch is active again as of 2026-07-08; resume at `.10.5.5`.)
+  user's structural correction. The scorch is active again as of 2026-07-08; resume at `.10.5.6`.)
 
 ## Verification Log
 
@@ -930,6 +946,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.5.3` | extracted the new `Get` heredoc spec **from the book file** + ran `LinkedSpec::Get` (`foo`→`[{"kind":"top","text":"foo"}]`); compared `match_text()`(→`null`) vs `entry_text()`(→`"foo"`); confirmed only one inline `.spec` heredoc on the page; `mdbook build` | `mdbook build` exit 0; `Top::AND /foo/ -> Top[0]` (→ `[]`) replaced with the verified 2-rule idiom using `entry_text()` + an output comment + a structure-teaching sentence |
 | `2026-06-18` | `SPEC-LANG-REFERENCE.10.5.4` | rewrote the whole chapter to the 2-rule idiom (`Top::` entry + `Pair:` matcher); mode-aware `LinkedSpec::Get` driver re-derived every claimed I/O (default/consume `answer = 42`→`[{"kind":"pair","name":"answer","value":"42"}]`; consume `junk answer = 42`→`[]`; seek→the pair; multi `a = 1, b = 2`→2-element list); descriptor/ctx probe (`ref HASH`✓, `meta.parse_mode consume`✓, `spec{Pair}`✓, **`ctx{top_rule}` Pair→Top**); isolated the `:AND`+separated-`I`→`[0]` and OR-`I`-block→`[null]` traps; `mdbook build`; `scripts/check_memory_architecture.sh` | `mdbook build` exit 0; self-check exit 0. Single-rule `Pair::AND -> Pair[0]` (→`[]`, claimed a hash) replaced; output reframed single-hash→one-element list; `match_group`→`entry_group` (+ trap doc); **declare()/assign() removed** from the advanced sketch per user pivot (call(...) teaching kept). Surfaced the terse-format pivot → user activated `SPEC-FORMAT-TERSE`; scorch paused after this leaf. No Perl change |
 | `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.4.1` | durable coordination update only: task tree, central index, memory pointer, live status, changelog, and development notes | scorch reactivated by user directive; next active leaf is `.10.5.5`; no parser/runtime/source/book behavior changed |
+| `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.5` | four replacement snippets run through `LinkedSpec::Get` (minimal, label-in-block, compact same-line, multiline); explicit bad bare-`label:` probe; `mdbook build docs/linkedspec-book`; Knowledge Map fact card + regeneration | replacement snippets compile/run and return documented payloads; bare `label:` inside an open block reports `Rule definition not allowed inside open block`; mdBook build exit 0; new fact `rule-starts-open-block-validation` indexed |
 
 ## Commit Log
 
@@ -951,6 +968,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.5.3` | `SPEC-LANG-REFERENCE.10.5.3 — book: fix get-and-get-parser.md minimal Get example → verified 2-rule idiom` | Replaced inline `Top::AND /foo/ -> Top[0] {…match_text()…}` (→ `[]`) with `top:: -> word .push` / `LX{return(array_copy(a(top)))}` + `word: /foo/ I{return(hash("kind","top","text",entry_text()))}`; book-extracted run → `[{"kind":"top","text":"foo"}]`; `match_text()`→`null` trap caught; `mdbook build` exit 0 |
 | `SPEC-LANG-REFERENCE.10.5.4` | `SPEC-LANG-REFERENCE.10.5.4 — book: fix worked-spec-walkthrough.md → verified 2-rule idiom; re-derive whole-chapter outputs; drop declare/assign` | Central single-rule `Pair::AND -> Pair[0]` (→`[]`, claimed `{kind:pair,…}`) → `Top::` entry + `Pair:` matcher; every claimed I/O re-derived via `LinkedSpec::Get`; output corrected single-hash→one-element list; `match_group`→`entry_group`; `ctx{top_rule}` Pair→Top; declare()/assign() removed from the advanced sketch per the user terse-format pivot. `mdbook build` exit 0. **Whole-book scorch PAUSED here — user activated `SPEC-FORMAT-TERSE`.** |
 | `SPEC-LANG-REFERENCE.10.5.4.1` | `SPEC-LANG-REFERENCE.10.5.4.1 — reactivate book scorch` | User reactivated `SPEC-LANG-REFERENCE`; durable coordination records now point to `.10.5.5` as the next book-content leaf. Metadata-only; no mdBook source or parser/runtime behavior changed |
+| `SPEC-LANG-REFERENCE.10.5.5` | `SPEC-LANG-REFERENCE.10.5.5 — fix spec file paragraph examples` | `spec-files-and-rule-paragraphs.md` runnable examples now use the verified 2-rule idiom; the malformed bare `label:` block is replaced with valid quoted `"label:"` helper content plus the exact validation-error note. Four snippets verified through `LinkedSpec::Get`; mdBook build exit 0; Knowledge fact card added |
 
 ## Changelog
 
@@ -1179,3 +1197,10 @@ wrapped only where a complete worked example is intended) during the per-file fi
   only; no mdBook source, parser/runtime code, corpus, or Knowledge Map facts changed. Frontier →
   `.10.5.5` (`user-model/spec-files-and-rule-paragraphs.md` malformed label-in-block + `Top::AND`
   sketches).
+- `2026-07-08`: `.10.5.5` done — fixed
+  `docs/linkedspec-book/src/user-model/spec-files-and-rule-paragraphs.md`. The minimal, block-boundary,
+  same-line, and multiline examples now use the verified 2-rule idiom (`Top::` dispatch/accumulator +
+  normal matcher rules with regexes and `entry_text()`). The malformed bare `label:` block example is
+  replaced with a valid quoted `"label:"` helper value and an explicit validation-error note. Added
+  Knowledge fact `rule-starts-open-block-validation`. Frontier → `.10.5.6`
+  (`user-model/rule-modes-and-parse-modes.md` mode fragments + "both valid shapes" framing).

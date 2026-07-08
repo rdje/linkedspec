@@ -20,9 +20,9 @@ This is a better mental model than thinking of `.spec` files as rigid line-by-li
 The double colon is an **entry marker**, not a special construct. `top_rule::` says
 "this is the rule a backend enters first." In every other respect a top rule is an
 **ordinary rule**: it can carry a regex, take any rule mode, dispatch with `->`/`=>`
-edges, and be recursive — exactly like a single-colon rule. The minimal example below
-even writes its top rule as `Top::AND` (a mode on a top rule), and other chapters show
-`Top::AND /a/ -> Top[0]` (a regex on a top rule); both are legal.
+edges, and be recursive — exactly like a single-colon rule. The runnable stream examples
+in this book still use the clearer two-rule shape: a no-regex entry rule that dispatches
+to normal matcher rules.
 
 Two long-standing recommendations are therefore **idiom, not engine law**:
 
@@ -30,7 +30,7 @@ Two long-standing recommendations are therefore **idiom, not engine law**:
   two-rule shape (a `::` dispatch loop that `.push`es and an `LX` that returns the
   accumulator). It is the clean shape for a **stream of records**, and most chapters use
   it, but it is a style choice, not a requirement.
-- *"Rule modes are body-rule-only"* — a top rule may carry a mode (`Top::AND`,
+- *"Rule modes are body-rule-only"* — a top rule may carry a mode (`Document::AND`,
   `Stream::OR+`, …) just like a body rule.
 
 A **single recursive document** can be expressed with a recursive top rule directly,
@@ -92,30 +92,35 @@ at end of input); the `null` is the missing-`LX` authoring case, not an engine f
 ## Minimal example
 
 ```text
-Top::AND
- => Word
+Top::
+ -> Word .push
 
-Word:AND
- /foo/ -> Word[0] {
-   return(hash("kind", "word", "text", match_text()));
+LX { return(copy(array(Top))) }
+
+Word:
+ /foo/ I {
+   return(hash("kind", "word", "text", entry_text()))
  }
 ```
 
 This file contains two rule paragraphs:
 
-- `Top::AND`
-- `Word:AND`
+- `Top::`
+- `Word:`
 
-`Top` is written with the double-colon form because it is intended as an entry-style rule in this example. `Word` is written with the single-colon form because it is a normal child rule.
+`Top` is written with the double-colon form because it is the entry rule in this
+example. `Word` is written with the single-colon form because it is a normal matcher
+rule.
 
 The body of `Top` contains:
 
-- one blind-call edge: `=> Word`
+- one dispatch edge: `-> Word .push`
+- one `LX` lifecycle block that returns the entry rule accumulator
 
 The body of `Word` contains:
 
 - one regex anchor: `/foo/`
-- one action edge: `-> Word[0] { ... }`
+- one `I { ... }` lifecycle block that reads the entering match with `entry_text()`
 
 The action returns a structured helper-built payload rather than depending on the older compact `return_a(...)` helper style.
 
@@ -132,26 +137,42 @@ It also explains why top-level validation matters so much: the parser has to kno
 
 ## Top-level rule starts versus block content
 
-Rule starts are top-level constructs. A label-like line inside an open block is not a new rule.
+Rule starts are top-level constructs. Inside an open block, colon-bearing text must still
+be valid helper DSL; it is not parsed as a new top-level rule.
 
 ```text
-Top::AND
- /a/ -> Top[0] {
-label:
- return(hash("kind", "top"));
+Top::
+ -> Item .push
+ -> Next .push
+
+LX { return(copy(array(Top))) }
+
+Item:
+ /a/ I {
+   return(hash(
+     "kind", "top",
+     "label:", "inside block"
+   ))
  }
 
-Next:AND
- /b/ -> Next[0] {
-   return(hash("kind", "next", "text", match_text()));
+Next:
+ /b/ I {
+   return(hash("kind", "next", "text", entry_text()))
  }
 ```
 
-Here `label:` belongs to the action block attached to `Top`. It does not start a new `label` rule because the parser is still inside the `{ ... }` block.
+Here `"label:"` is a quoted helper value inside the `Item` lifecycle block. It is not
+a rule start because rule starts are only recognized at paragraph top level.
 
-The `label:` line is here only to show the block-boundary rule-start distinction: a label-like line inside an open `{ ... }` block is block content, not a new top-level rule. Both rules use the same helper-DSL payload form (`return(hash(...))`), so nothing in this example is backend-specific.
+A bare `label:` line inside the same open `{ ... }` block would not become a rule, but
+it also would not be valid helper DSL. The compiler rejects that form with a "Rule
+definition not allowed inside open block" validation error and asks you to close the
+preceding block before starting the next rule. Both rules above use the same helper-DSL
+payload form (`return(hash(...))`), so nothing in this example is backend-specific.
 
-This matters because LinkedSpec allows rule bodies to carry real action and lifecycle blocks. If the frontend treated every `word:` token as a rule start, it would misread valid block content.
+This matters because LinkedSpec allows rule bodies to carry real action and lifecycle
+blocks. If the frontend treated every colon-bearing helper value as a rule start, it
+would misread valid block content.
 
 ## What can appear inside a rule paragraph
 
@@ -172,20 +193,23 @@ The exact set of supported forms is intentionally validated. Stray top-level tex
 LinkedSpec supports compact same-line authoring:
 
 ```text
-Top::AND => Word
-Word:AND /foo/ -> Word[0] { return(hash("kind", "word", "text", match_text())); }
+Top:: -> Word .push
+LX { return(copy(array(Top))) }
+Word: /foo/ I { return(hash("kind", "word", "text", entry_text())) }
 ```
 
 It also supports the clearer multiline style:
 
 ```text
-Top::AND
- => Word
+Top::
+ -> Word .push
 
-Word:AND
+LX { return(copy(array(Top))) }
+
+Word:
  /foo/
- -> Word[0] {
-   return(hash("kind", "word", "text", match_text()));
+ I {
+   return(hash("kind", "word", "text", entry_text()))
  }
 ```
 

@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.5 — spec file paragraph examples):
+  `user-model/spec-files-and-rule-paragraphs.md` is now back on the verified 2-rule authoring idiom.
+  The page no longer teaches runnable `Top::AND` stream examples or uses `match_text()` in dispatched
+  matcher rules. The minimal, block-boundary, compact, and multiline examples all use `Top::` as a
+  no-regex dispatcher/accumulator and normal matcher rules with regexes plus `entry_text()`. The old
+  bare `label:` example was not a valid helper block; the compiler reports `Rule definition not
+  allowed inside open block`. The page now uses a valid quoted `"label:"` helper value and the exact
+  failure mode is durable in Knowledge fact `rule-starts-open-block-validation`. The next scorch leaf
+  is `.10.5.6` for `user-model/rule-modes-and-parse-modes.md`.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.4.1 — reactivate language-reference scorch):
   The user explicitly reactivated `SPEC-LANG-REFERENCE` after the 2026-06-18 pause for
   `SPEC-FORMAT-TERSE`. This slice is metadata-only: it resolves the pause in the task tree and central index,

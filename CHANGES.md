@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.5 — fix spec file paragraph examples
+
+**Scope:** mdBook language-reference correction plus a narrow Knowledge Map fact.
+
+**Change:** Reworked `user-model/spec-files-and-rule-paragraphs.md` so its minimal, block-boundary,
+same-line, and multiline examples use the verified 2-rule idiom: `Top::` dispatches/returns its
+accumulator, while normal matcher rules carry regexes and read `entry_text()`. Replaced the malformed
+bare `label:` block example with valid quoted `"label:"` helper content and documented the actual
+validation error. Added Knowledge fact `rule-starts-open-block-validation`.
+
+**Validation:** Four replacement snippets compile/run through `LinkedSpec::Get`; the bad bare-`label:`
+probe reports `Rule definition not allowed inside open block`; `mdbook build docs/linkedspec-book` and
+the memory/Knowledge/doctrine/task-tree/whitespace gates pass.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.4.1 — reactivate book scorch
 
 **Scope:** Metadata-only activation of the paused language-reference book scorch.
