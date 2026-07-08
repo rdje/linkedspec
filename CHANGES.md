@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.14 — fix remaining DSL examples
+
+**Scope:** mdBook DSL chapter scorch closeout for the remaining DSL pages.
+
+**Change:** Reworked the Token practical pattern, the helper-surface Value example, and
+the fluent/block Items worked example so regex-bearing work lives on normal matcher rules
+instead of `::` / `::AND+` headers. Reduced the `Toplevel:AND+` structured-style sketch
+to the lifecycle block fragment it was demonstrating. Audited `actionir-lowering-mental-model.md`
+and left it unchanged because the in-scope blocks are helper-statement or lowering-pipeline fragments.
+
+**Validation:** Focused `LinkedSpec::Get` probes verify Token, Value, and Items outputs
+for singleton/pair/list cases. The four-page scan finds no regex slot under a `::` header;
+`mdbook build docs/linkedspec-book` passes.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.13 — fix value-container flow examples
 
 **Scope:** mdBook value/container/flow helper reference correction.

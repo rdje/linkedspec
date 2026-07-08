@@ -663,14 +663,27 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.5.13` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.14`
-  Status: `pending`
+  Status: `done`
   Goal: Fix the remaining DSL pages — `dsl/values-containers-and-flow-helpers.md` (`Token::`),
   `dsl/action-model-and-helper-surface.md` (`Top::`), `dsl/fluent-and-block-forms.md` (`Items::AND+`,
   `Toplevel:AND+`), and audit `dsl/actionir-lowering-mental-model.md` (helper-statement fragments)
   Acceptance: no regex on `::`; complete worked examples re-verified; isolated helper-statement
   fragments confirmed valid or wrapped; `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. Replaced the `Token::` practical pattern in
+  `dsl/values-containers-and-flow-helpers.md` and the `Top:: /name=.../` tiny example in
+  `dsl/action-model-and-helper-surface.md` with no-regex `Top::` wrappers plus normal
+  regex-owning `Token:` / `Value:` rules. In `dsl/fluent-and-block-forms.md`, reduced the
+  `Toplevel:AND+` lifecycle sketch to the lifecycle block fragment it was demonstrating, and
+  rewrote the `Items::AND+` all-forms example as a no-regex `Items::` entry rule plus normal
+  `Item:` matcher. Audited `dsl/actionir-lowering-mental-model.md`: the in-scope blocks are
+  helper-statement or lowering-pipeline fragments, not runnable regex-owning spec examples, so
+  no content change was needed. Focused probes: Token → `[{"col":1,"kind":"token","line":1,"text":"Alpha"}]`;
+  Value → `[{"kind":"assignment","name":"alpha"}]`;
+  Items `alpha` → `{"item":{"text":"alpha"},"kind":"singleton"}`;
+  Items `alpha beta` → `{"first":{"text":"alpha"},"kind":"pair","second":{"text":"beta"}}`;
+  Items `alpha beta gamma` → `{"count":3,"items":[{"text":"alpha"},{"text":"beta"},{"text":"gamma"}],"kind":"list"}`.
+  The four-page scan reports no `::` header followed by a regex slot; `mdbook build docs/linkedspec-book` exits 0.
+  Commit: `SPEC-LANG-REFERENCE.10.5.14` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.15`
   Status: `pending`
@@ -894,7 +907,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.5.11` | `done` | `dsl/declaration-helper-reference.md` fixed 2026-07-08; List/Token examples reverified |
 | — | `SPEC-LANG-REFERENCE.10.5.12` | `done` | `dsl/source-boundary-helper-reference.md` fixed 2026-07-08; seven examples reverified |
 | — | `SPEC-LANG-REFERENCE.10.5.13` | `done` | `dsl/value-container-flow-helper-reference.md` fixed 2026-07-08; Token/FieldList/Node/Sequence/Kind examples reverified |
-| 5 | `SPEC-LANG-REFERENCE.10.5.14` | `pending` | fix remaining DSL pages (`values-containers` `Token::`, `action-model` `Top::`, `fluent-and-block-forms`, `actionir-lowering`) |
+| — | `SPEC-LANG-REFERENCE.10.5.14` | `done` | remaining DSL pages fixed/audited 2026-07-08; Token/Value/Items examples reverified |
 | 6 | `SPEC-LANG-REFERENCE.10.5.15` | `pending` | fix `appendix/formal-grammar.md` §1 + §12 examples |
 | 7 | `SPEC-LANG-REFERENCE.10.5.16` | `pending` | fix `appendix/runtime-semantics.md` §5.5/§5.6 (folds `.10.4`) |
 | 8 | `SPEC-LANG-REFERENCE.10.5.17` | `pending` | fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts (`sens`/GROUP) |
@@ -1081,6 +1094,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.5.11` | `SPEC-LANG-REFERENCE.10.5.11 — fix declaration helper examples` | `declaration-helper-reference.md` now uses no-regex wrappers for accumulator and metadata examples: `List::` owns aggregate state while `Item:` owns the matcher, and `Top::` dispatches to regex-owning `Token:`. Runtime probes return the documented two-item list and token metadata outputs; page scan and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.12` | `SPEC-LANG-REFERENCE.10.5.12 — fix source-boundary examples` | `source-boundary-helper-reference.md` now uses no-regex `Top::AND` blind-call wrappers plus normal regex-owning rules for Tuple, Block, Paren, Pair, Body, AtEnd, and entry-vs-match examples. Seven focused probes return the documented source-boundary outputs; page scan and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.13` | `SPEC-LANG-REFERENCE.10.5.13 — fix value-container flow examples` | `value-container-flow-helper-reference.md` now uses no-regex wrappers or entry rules for Token, FieldList, Node, Sequence, and Kind examples, with regex slots moved to normal matcher rules. Five focused probes return the documented token, field-list, node-normalization, sequence head/tail, and switch-classification outputs; page scan and mdBook build pass |
+| `SPEC-LANG-REFERENCE.10.5.14` | `SPEC-LANG-REFERENCE.10.5.14 — fix remaining DSL examples` | `values-containers-and-flow-helpers.md`, `action-model-and-helper-surface.md`, and `fluent-and-block-forms.md` now avoid regex-bearing `::` examples for Token, Value, and Items. `actionir-lowering-mental-model.md` audited clean as helper/pipeline fragments only. Focused Token, Value, and Items probes pass; four-page scan and mdBook build pass |
 
 ## Changelog
 

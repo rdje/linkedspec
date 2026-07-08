@@ -29,11 +29,10 @@ they execute as the same ordered lifecycle statements as the equivalent `{ ... }
 **Structured style** places calls inside a lifecycle block:
 
 ```text
-Toplevel:AND+
- I {
-   items = [];
-   retv = undef;
- }
+I {
+  items = [];
+  retv = undef;
+}
 ```
 
 For ordinary helper statements, both styles lower to the same action model. The choice between them is
@@ -472,15 +471,18 @@ This rule accumulates child results, chooses a return shape based on count, and 
 multiple forms in combination:
 
 ```text
-Items::AND+
+Items::
  I {
    acc = [];
    kind = "list";
+   retv = undef;
  }
- E {
-   push(array(acc), call(Item));
+ -> Item {
+   retv = call(Item);
+   push(array(acc), retv);
+   next();
  }
-LX {
+ LX {
    if(is_empty(array(acc)));
    return(hash("kind", kind, "items", array()));
    else();
@@ -491,8 +493,8 @@ LX {
      case(2) {
        return(hash(
          "kind", "pair",
-         "first", array(acc).first(),
-         "second", array(acc).drop_front(1).first()
+         "first", first(array(acc)),
+         "second", first(drop_front(array(acc)))
        ))
      }
      default {
@@ -505,10 +507,14 @@ LX {
    }
    endif();
  }
+
+Item: /\s*[A-Za-z_]+/
+ I { return(hash("text", trim(entry_text()))) }
 ```
 
 This rule uses:
-- Structured lifecycle blocks (`I { }`, `E { }`, `LX { }`)
+- Structured lifecycle blocks (`I { }`, `LX { }`)
+- An action edge that calls `Item`, records its payload, and continues scanning
 - Statement-marker `if` inside `LX`
 - Inline-composite `switch` inside the `else` branch
 

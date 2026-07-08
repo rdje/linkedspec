@@ -34,7 +34,11 @@ A helper-oriented rule should make the intent visible:
 
 ```text
 Top::
- /name=(\w+)/ -> Value {
+ -> Value .push
+ LX { return(copy(array(Top))) }
+
+Value: /name=(\w+)/
+ I {
    name = entry_group(0);
    return(hash("kind", "assignment", "name", name));
  }

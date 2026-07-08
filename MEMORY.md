@@ -18,23 +18,22 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.13` — fixed
-  `dsl/value-container-flow-helper-reference.md`: Token/FieldList/Node/Sequence/Kind worked examples
-  now use no-regex wrappers or entry rules plus explicit normal matcher rules, with five
-  `LinkedSpec::Get` outputs reverified.
-- prior_leaf: `SPEC-LANG-REFERENCE.10.5.12` — fixed `dsl/source-boundary-helper-reference.md`
-  Tuple/Block/Paren/Pair/Body/AtEnd/entry-vs-match examples.
+- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.14` — fixed/audited the remaining DSL pages:
+  `values-containers-and-flow-helpers.md` Token pattern, `action-model-and-helper-surface.md` Value
+  example, `fluent-and-block-forms.md` Toplevel/Items examples, and `actionir-lowering-mental-model.md`
+  helper/pipeline fragments, with Token/Value/Items `LinkedSpec::Get` outputs reverified.
+- prior_leaf: `SPEC-LANG-REFERENCE.10.5.13` — fixed `dsl/value-container-flow-helper-reference.md`
+  Token/FieldList/Node/Sequence/Kind examples.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-LANG-REFERENCE.10.5.13 - fix value-container flow examples`; parent before this slice is
-  `SPEC-LANG-REFERENCE.10.5.12 - fix source-boundary examples`.
+  `SPEC-LANG-REFERENCE.10.5.14 - fix remaining DSL examples`; parent before this slice is
+  `SPEC-LANG-REFERENCE.10.5.13 - fix value-container flow examples`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `SPEC-LANG-REFERENCE.10.5.14` is the next active leaf in the reactivated
+- active_work_unit: `SPEC-LANG-REFERENCE.10.5.15` is the next active leaf in the reactivated
   language-reference scorch.
-- next_action: from a clean repo, execute `.10.5.14`: fix the remaining DSL pages
-  (`dsl/values-containers-and-flow-helpers.md` `Token::`, `dsl/action-model-and-helper-surface.md`
-  `Top::`, `dsl/fluent-and-block-forms.md` `Items::AND+`/`Toplevel:AND+`) and audit
-  `dsl/actionir-lowering-mental-model.md` helper-statement fragments.
+- next_action: from a clean repo, execute `.10.5.15`: fix `docs/linkedspec-book/src/appendix/formal-grammar.md`
+  §1 paragraph-model examples and §12 complete example into doctrine-valid, compile/run-verified
+  forms or clearly marked grammar meta-notation.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
   enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.

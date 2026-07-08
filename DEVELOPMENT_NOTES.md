@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.14 — remaining DSL examples):
+  `dsl/values-containers-and-flow-helpers.md` and `dsl/action-model-and-helper-surface.md` now use
+  no-regex `Top::` wrappers plus normal regex-owning `Token:` / `Value:` rules for their compact
+  examples. `dsl/fluent-and-block-forms.md` now treats the introductory structured-style example as
+  a lifecycle-block fragment instead of a standalone `Toplevel:AND+` rule, and its all-forms worked
+  example is a verified `Items::` entry rule that dispatches to `Item:` and returns singleton/pair/list
+  shapes from `LX`. `dsl/actionir-lowering-mental-model.md` was audited and left unchanged because its
+  relevant code fences are helper-statement or lowering-pipeline fragments, not runnable regex-owning
+  spec examples. The next scorch leaf is `.10.5.15` for `appendix/formal-grammar.md`.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.13 — value-container flow examples):
   `dsl/value-container-flow-helper-reference.md` no longer uses regex-bearing `Token::AND`,
   `FieldList::AND`, `Node::AND`, `Sequence::AND`, or `Kind::AND` worked examples. Token,

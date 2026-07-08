@@ -333,8 +333,12 @@ switch(kind) {
 Here is a compact token-node pattern:
 
 ```text
-Token::
- /(\w+)/ {
+Top::
+ -> Token .push
+ LX { return(copy(array(Top))) }
+
+Token: /(\w+)/
+ I {
    text = entry_group(0);
    return(hash(
      "kind", "token",

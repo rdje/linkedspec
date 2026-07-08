@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.14 — fix remaining DSL examples**
+  (DONE mdBook correction/audit; frontier `.10.5.15` next).
+
+  **Change:** Reworked the remaining DSL-page examples so Token, Value, and Items use
+  no-regex entry/wrapper rules plus normal regex-owning matcher rules. Reduced the
+  `Toplevel:AND+` structured-style sketch to the lifecycle block fragment it demonstrates.
+
+  **Boundary:** No parser/runtime/source behavior changed. `actionir-lowering-mental-model.md`
+  was audited and left unchanged because the relevant blocks are helper/pipeline fragments.
+
+  **Verification:** Focused `LinkedSpec::Get` probes cover Token, Value, and Items singleton/pair/list
+  outputs; the four-page scan finds no regex under `::`; mdBook, doctrine, task-tree, memory,
+  Knowledge Map, and whitespace checks pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.13 — fix value-container flow examples**
   (DONE mdBook correction; frontier `.10.5.14` next).
 
