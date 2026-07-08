@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (TASK-TREE-METADATA-HYGIENE.4 — closeout commit metadata):
+  Startup review after `SPEC-SOURCE-TERSE-CLOSEOUT.1` confirmed HEAD was already
+  `SPEC-SOURCE-TERSE-CLOSEOUT.1 - close root spec terse source`, but the closeout task file still said commit
+  execution was pending. This is not broad historical backfill; it is a newly-created handoff contradiction in the
+  just-closed task. The fix records the landed commit in `docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md` and updates the
+  hygiene ledger/live docs so future sessions do not waste time re-deriving whether the closeout was committed.
+
 - 2026-07-08 (SPEC-SOURCE-TERSE-CLOSEOUT.1 — root spec terse source closeout):
   The root shipped specs are now source-format closed against the current accepted terse surface, not merely
   descriptor-clean. Strict scans across `specs/*.spec` found no retired helper spellings or raw host-action

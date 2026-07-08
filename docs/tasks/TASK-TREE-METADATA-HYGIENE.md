@@ -6,7 +6,7 @@
 - Status: `done`
 - Roadmap lane: `Overall roadmap - durable architecture / task-tree hygiene`
 - Created: `2026-07-07`
-- Last updated: `2026-07-08` (`.3` done; tree complete)
+- Last updated: `2026-07-08` (`.4` done; tree complete)
 - Owner: repo-local workflow
 
 ## Goal
@@ -36,7 +36,7 @@ agents can determine the true open/closed task state without re-auditing old tas
 - ID: `TASK-TREE-METADATA-HYGIENE`
   Status: `done`
   Goal: Reconcile stale task-tree metadata found during the 2026-07-07 bootstrap/open-tree audit.
-  Children: `.0`, `.1`, `.2`, `.3`
+  Children: `.0`, `.1`, `.2`, `.3`, `.4`
 
 - ID: `TASK-TREE-METADATA-HYGIENE.0`
   Status: `done`
@@ -89,6 +89,17 @@ agents can determine the true open/closed task state without re-auditing old tas
     fields remain manual cleanup territory.
   Commit: `TASK-TREE-METADATA-HYGIENE.3 - gate completed-tree frontiers`
 
+- ID: `TASK-TREE-METADATA-HYGIENE.4`
+  Status: `done`
+  Goal: Reconcile the just-closed `SPEC-SOURCE-TERSE-CLOSEOUT` task-file commit metadata after startup review
+    confirmed the commit landed.
+  Acceptance: `docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md` no longer says its completed `.1` commit is pending;
+    live continuity docs identify this metadata-only slice and the clean next action.
+  Verification: Done - 2026-07-08. Focused scans confirmed the stale commit-pending wording was isolated to
+    `docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md`; this leaf updates that task file plus the required live docs. No
+    parser/runtime/source/book behavior changed.
+  Commit: `TASK-TREE-METADATA-HYGIENE.4 - reconcile closeout commit metadata`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -96,6 +107,7 @@ agents can determine the true open/closed task state without re-auditing old tas
 | 1 | `TASK-TREE-METADATA-HYGIENE.1` | `done` | Top-level metadata contradictions are reconciled so completed trees no longer look live. |
 | 2 | `TASK-TREE-METADATA-HYGIENE.2` | `done` | Stale frontier/verification/commit rows are reconciled or explicitly classified. |
 | 3 | `TASK-TREE-METADATA-HYGIENE.3` | `done` | Low-noise completed-tree Current Frontier gate added to the doctrine registry. |
+| 4 | `TASK-TREE-METADATA-HYGIENE.4` | `done` | The just-closed root-spec closeout task now records its landed commit instead of pending handoff text. |
 
 ## Decisions
 
@@ -127,6 +139,10 @@ agents can determine the true open/closed task state without re-auditing old tas
   `pending`, `active`, `in_progress`, or `blocked` status cells in their `Current Frontier` table. Exploratory
   scans showed broad per-leaf `Commit: pending` backfill enforcement would create legacy false positives, so that
   remains manual cleanup unless a future task narrows it further.
+- `2026-07-08`: `.4` is a narrow follow-up for a newly-created, non-historical false positive: the
+  `SPEC-SOURCE-TERSE-CLOSEOUT` task file still said `.1` commit execution was pending even though HEAD is
+  `SPEC-SOURCE-TERSE-CLOSEOUT.1 - close root spec terse source` and the central index/memory already treat the
+  tree as closed.
 
 ## Open Questions
 
@@ -140,6 +156,7 @@ agents can determine the true open/closed task state without re-auditing old tas
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-08` | `TASK-TREE-METADATA-HYGIENE.4` | Focused stale commit-pending scans over `SPEC-SOURCE-TERSE-CLOSEOUT`; memory/doctrine/task-tree/diff gates | PASS — closeout task metadata now records the landed commit and clean handoff state. |
 | `2026-07-08` | `TASK-TREE-METADATA-HYGIENE.3` | `bash scripts/check_task_tree_metadata.sh`; `bash scripts/check_doctrines.sh`; memory/KM/diff gates | PASS — completed-tree Current Frontier invariant is now mechanically gated. |
 | `2026-07-08` | `TASK-TREE-METADATA-HYGIENE.2` | Focused stale-marker scans over the named completed/completed-like task files; post-commit hook inspection; memory/doctrine/diff gates | PASS — stale frontier/verification/commit rows reconciled or explicitly classified without parser/runtime/public-book behavior change. |
 | `2026-07-07` | `TASK-TREE-METADATA-HYGIENE.1` | Focused metadata/status scans over the three named task files; memory/doctrine/diff gates | PASS — stale active top metadata reconciled without parser/runtime/public-book behavior change. |
@@ -149,6 +166,7 @@ agents can determine the true open/closed task state without re-auditing old tas
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `TASK-TREE-METADATA-HYGIENE.4` | `TASK-TREE-METADATA-HYGIENE.4 - reconcile closeout commit metadata` | Reconciles the landed `SPEC-SOURCE-TERSE-CLOSEOUT.1` commit metadata after startup review. |
 | `TASK-TREE-METADATA-HYGIENE.3` | `TASK-TREE-METADATA-HYGIENE.3 - gate completed-tree frontiers` | Adds the narrow `TASK-TREE-METADATA` doctrine gate and closes the hygiene tree. |
 | `TASK-TREE-METADATA-HYGIENE.2` | `TASK-TREE-METADATA-HYGIENE.2 - reconcile stale frontier rows` | Reconciles stale current-frontier, verification, and commit rows in completed/completed-like task files; `.3` gate decision is next. |
 | `TASK-TREE-METADATA-HYGIENE.1` | `TASK-TREE-METADATA-HYGIENE.1 - reconcile top task metadata` | Reconciles stale active top metadata in the three named completed/exhausted task files; frontier becomes `.2`. |
@@ -166,3 +184,5 @@ agents can determine the true open/closed task state without re-auditing old tas
   moves to `.3` for the doctrine/check decision.
 - `2026-07-08`: Completed `.3` by adding and registering the low-noise `TASK-TREE-METADATA` doctrine check for
   completed-tree Current Frontier rows. Tree complete.
+- `2026-07-08`: Added `.4` to reconcile the just-closed `SPEC-SOURCE-TERSE-CLOSEOUT.1` commit metadata after
+  startup review found the task file still described the landed closeout commit as pending.

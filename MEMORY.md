@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-SOURCE-TERSE-CLOSEOUT.1` — root `specs/*.spec` source-format closeout completed:
+- latest_completed_leaf: `TASK-TREE-METADATA-HYGIENE.4` — post-startup metadata cleanup recorded the landed
+  `SPEC-SOURCE-TERSE-CLOSEOUT.1` commit in its task file; no parser/runtime/source/book behavior changed.
+- prior_leaf: `SPEC-SOURCE-TERSE-CLOSEOUT.1` — root `specs/*.spec` source-format closeout completed:
   retired-helper/host-residue scans clean, all 21 descriptors `1.0000 0 0`, Rust oracle 99 fixtures.
-- prior_leaf: `RUST-STATUS-DRIFT-SYNC.1` — current-facing Rust status counts synced to 97 fixtures, 21
-  shipped specs, and phase0 `1..1028`; tree closed.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-SOURCE-TERSE-CLOSEOUT.1 - close root spec terse source`; parent before this slice is
-  `RUST-STATUS-DRIFT-SYNC.1 - sync Rust status counts`.
+  `TASK-TREE-METADATA-HYGIENE.4 - reconcile closeout commit metadata`; parent before this slice is
+  `SPEC-SOURCE-TERSE-CLOSEOUT.1 - close root spec terse source`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: no non-paused active frontier after `SPEC-SOURCE-TERSE-CLOSEOUT` closes; `SPEC-LANG-REFERENCE`
-  remains paused in the index.
+- active_work_unit: no non-paused active frontier after the closeout metadata sync; `SPEC-LANG-REFERENCE` remains
+  paused in the index.
 - next_action: from a clean repo, pick or split the next roadmap-owned PNT leaf before edits. The all-root-spec
-  terse-source closeout is no longer blocking other activities.
+  terse-source closeout and its task-file commit metadata are no longer blocking other activities.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
   enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.

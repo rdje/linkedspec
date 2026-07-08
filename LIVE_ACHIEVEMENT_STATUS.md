@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **TASK-TREE-METADATA-HYGIENE.4 — reconcile closeout commit metadata**
+  (DONE metadata-only task-tree handoff cleanup; tree CLOSED).
+
+  **Change:** Reconciled `docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md` so the completed `.1` leaf records its landed
+  commit instead of saying commit execution is pending.
+
+  **Boundary:** No parser/runtime/source/book behavior changed. This is a continuity cleanup for the just-closed
+  root-spec closeout, not a broad historical task-file backfill.
+
+  **Verification:** Focused stale pending-commit scan found the contradiction in the closeout task file; memory,
+  task-tree, doctrine, and whitespace gates cover the final committed slice.
+
 - 2026-07-08: **SPEC-SOURCE-TERSE-CLOSEOUT.1 — close root spec terse source**
   (DONE source-format closeout; tree CLOSED).
 

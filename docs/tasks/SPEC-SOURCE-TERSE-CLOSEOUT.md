@@ -59,13 +59,13 @@ source-format doubt.
     `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`;
     `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `git diff --check`;
     `bash tools/run_ci_local.sh`.
-  Commit: `pending`
+  Commit: `SPEC-SOURCE-TERSE-CLOSEOUT.1 - close root spec terse source`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SPEC-SOURCE-TERSE-CLOSEOUT.1` | `done` | Root `specs/*.spec` source-format closeout completed; final docs/gates/commit are the only remaining handoff steps. |
+| 1 | `SPEC-SOURCE-TERSE-CLOSEOUT.1` | `done` | Root `specs/*.spec` source-format closeout completed and committed; tree is closed. |
 
 ## Decisions
 
@@ -114,7 +114,7 @@ source-format doubt.
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `SPEC-SOURCE-TERSE-CLOSEOUT.1` | `SPEC-SOURCE-TERSE-CLOSEOUT.1 - close root spec terse source` | Pending commit execution. |
+| `SPEC-SOURCE-TERSE-CLOSEOUT.1` | `SPEC-SOURCE-TERSE-CLOSEOUT.1 - close root spec terse source` | Landed as `caa864a0`; post-commit metadata reconciled by `TASK-TREE-METADATA-HYGIENE.4`. |
 
 ## Changelog
 

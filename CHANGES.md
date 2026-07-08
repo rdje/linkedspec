@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — TASK-TREE-METADATA-HYGIENE.4 — reconcile closeout commit metadata
+
+**Scope:** Metadata-only task-tree hygiene after startup review.
+
+**Change:** Reconciled `docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md` so the completed `.1` leaf records its landed
+commit instead of saying commit execution is pending. Updated the hygiene task tree, central index, memory pointer,
+and live status notes for this metadata-only slice.
+
+**Validation:** Focused scans showed the stale pending-commit wording was isolated to the just-closed closeout task
+file. No parser/runtime/source/book behavior changed.
+
 ## 2026-07-08 — SPEC-SOURCE-TERSE-CLOSEOUT.1 — close root spec terse source
 
 **Scope:** Exhaustive root `specs/*.spec` source-format closeout plus generated oracle/doc synchronization.
