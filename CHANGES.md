@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — DOCTRINE-ENFORCEMENT-ADOPT.3.1 — split evidence gate before code
+
+**Scope:** Task-tree and continuity split/design for the pending evidence/task-acceptance doctrine.
+
+**Change:** Reactivated `DOCTRINE-ENFORCEMENT-ADOPT.3` by splitting it before code. The next executable leaf is
+`.3.2`, which will implement/register a scope-aware staged `TASK-ACCEPTANCE` checker. The follow-up `.3.3` will
+close docs, Knowledge Map, and no-drift state after the checker exists. The design keeps the checker narrow:
+govern staged code/spec/test/tooling changes, require a staged owning task-file checklist with LinkedSpec-tool
+evidence signatures, and leave arbitrary command re-execution to the local CI gate rather than the hook.
+
+**Validation:** Bootstrap/read review, Knowledge Map search for existing evidence-gate facts, task-tree split
+review, relevant enforcement owner paths read, memory architecture, doctrine, task-tree metadata, and whitespace
+checks.
+
 ## 2026-07-08 — SPEC-FORMAT-TERSE.13.5 — close parent terse task tree
 
 **Scope:** Metadata-only task-tree closeout for the parent terse-format tree.

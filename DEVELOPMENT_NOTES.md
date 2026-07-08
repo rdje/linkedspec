@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (DOCTRINE-ENFORCEMENT-ADOPT.3.1 — evidence gate split before code):
+  The deferred evidence/task-acceptance doctrine is now split before implementation. The key design boundary is
+  false-positive control: the first checker should inspect the staged set, govern only code/spec/test/tooling-style
+  changes, require a staged owning task-file checklist, and look for conservative LinkedSpec-tool/output
+  signatures from `TOOLBOX.md`. It should not become a broad historical task-tree audit, and it should not execute
+  arbitrary commands pasted into Markdown from a pre-commit hook. Re-execution remains the role of the broader
+  local CI gate and focused validation commands recorded in the task leaf.
+
 - 2026-07-08 (SPEC-FORMAT-TERSE.13.5 — parent tree status closeout):
   `SPEC-FORMAT-TERSE` is now a closed parent task-tree, not an active tree with an empty frontier. The correction
   is metadata-only: central index, task-file top metadata, current-frontier rows, live docs, roadmap state, and

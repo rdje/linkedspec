@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **DOCTRINE-ENFORCEMENT-ADOPT.3.1 — split evidence gate before code**
+  (DONE scope/signature design split; frontier `.3.2` implementation next).
+
+  **Change:** Reactivated the deferred evidence/task-acceptance doctrine by splitting `.3` into a narrow staged
+  implementation sequence. `.3.2` now owns `scripts/check_diagnosis_evidence.sh` plus `TASK-ACCEPTANCE`
+  registration; `.3.3` owns docs/KM/no-drift closeout after the checker exists.
+
+  **Boundary:** No parser/runtime, corpus, mdBook behavior, or gate behavior changed in this slice. The planned
+  checker is intentionally staged-set/checklist-shape scoped to avoid broad historical false positives.
+
+  **Verification:** Bootstrap/read review, Knowledge Map search for existing evidence-gate facts, relevant
+  enforcement owner paths read, task-tree split review, memory architecture, doctrine, task-tree metadata, and
+  whitespace checks pass.
+
 - 2026-07-08: **SPEC-FORMAT-TERSE.13.5 — close parent terse task tree**
   (DONE metadata-only parent task-tree status reconciliation; `SPEC-FORMAT-TERSE` CLOSED).
 

@@ -18,28 +18,24 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.13.5` — parent `SPEC-FORMAT-TERSE` task-tree status reconciled
-  closed after `.13.4` left no current PNT-eligible leaf.
-- prior_leaf: `SPEC-FORMAT-TERSE.13.4` — array-tree traversal docs, Knowledge Map, oracle, task-tree, and
-  live-doc closeout finished; `.13` is exhausted.
+- latest_completed_leaf: `DOCTRINE-ENFORCEMENT-ADOPT.3.1` — evidence/task-acceptance hard-gate split/design
+  completed before implementation.
+- prior_leaf: `SPEC-FORMAT-TERSE.13.5` — parent `SPEC-FORMAT-TERSE` task-tree status reconciled closed.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-FORMAT-TERSE.13.5 - close parent terse task tree`; parent before this slice is
-  `b5ce7f0c SPEC-FORMAT-TERSE.13.4 - close array-tree traversal drift`.
+  `DOCTRINE-ENFORCEMENT-ADOPT.3.1 - split evidence gate before code`; parent before this slice is
+  `fe740dbf SPEC-FORMAT-TERSE.13.5 - close parent terse task tree`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: none under `SPEC-FORMAT-TERSE`; the parent terse-format task tree is closed after `.13.5`.
-- next_action: continue PNT from `docs/TASK_TREE.md`; remaining non-closed task-tree entries are
-  `DOCTRINE-ENFORCEMENT-ADOPT.3` (deferred) and `SPEC-LANG-REFERENCE` (paused) unless the director activates a
-  new task-tree leaf.
+- active_work_unit: `DOCTRINE-ENFORCEMENT-ADOPT` → frontier leaf `DOCTRINE-ENFORCEMENT-ADOPT.3.2` (`pending`).
+- next_action: implement/register `scripts/check_diagnosis_evidence.sh` as the scope-aware staged
+  `TASK-ACCEPTANCE` doctrine, keeping `DOCTRINE_ENFORCEMENT.md` §10, `TOOLBOX.md`, and the driver in lockstep.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
-  trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/helper/backend/dev chapters, core Perl/Rust
-  implementation, shipped specs, tooling, and focused test harness inventory.
+  trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
+  enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
-  or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
-  tracking update may be opened only after this repo is clean.
-- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests (e.g. 102 pplugin lazy-load) fail on the stale checkout. Full phase0 needs the **10-min timeout** (`timeout:600000`), else it caps mid-run (exit 144/143). **Generated Perl handlers are NON-strict.** **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`). Current phase0 reaches **PASS `1..1028`**. oracle = `tools/gen_oracle_corpus.pl` (per-case fork/SIGKILL; **97** fixtures → **run in background**; `manifest.json` + drift guards). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`. Rust numbered capture helpers are captures-only (`0`=first capture); whole match = `entry_text()`/`match_text()`.
+  or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
+- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1028`**. Rust oracle = **97** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
-  worktree ignored by submodule policy. Remaining open deferred/paused lanes outside the current
-  `SPEC-FORMAT-TERSE.13` parity pass: `DOCTRINE-ENFORCEMENT-ADOPT.3` and `SPEC-LANG-REFERENCE`.
+  worktree ignored by submodule policy. `SPEC-LANG-REFERENCE` remains paused.
 - blockers: none. in_flight_uncommitted: none once this pointer commit lands; do not pivot unless the repo is
   handoff-ready.
