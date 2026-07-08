@@ -34,6 +34,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"; cd "$ROOT"
 DOCTRINES=(
   "MEMORY-ARCH|durable 4-layer memory architecture invariants (MEMORY_ARCHITECTURE.md §9)|scripts/check_memory_architecture.sh"
   "KNOWLEDGE-MAP|the derived Knowledge Map is in sync with its fact sources|knowledge-map/scripts/check_knowledge_map.sh"
+  "TASK-TREE-METADATA|completed task trees do not advertise live Current Frontier rows|scripts/check_task_tree_metadata.sh"
 )
 
 fail=0

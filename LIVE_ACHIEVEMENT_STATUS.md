@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **TASK-TREE-METADATA-HYGIENE.3 — gate completed-tree frontiers**
+  (DONE doctrine gate; tree CLOSED).
+
+  **Change:** Added `scripts/check_task_tree_metadata.sh` and registered `TASK-TREE-METADATA` in the doctrine
+  driver. Completed task files are now gated against live `Current Frontier` status cells while historical prose
+  and old commit-backfill fields stay outside the check.
+
+  **Boundary:** No parser/runtime behavior changed and no public mdBook behavior changed.
+
+  **Verification:** New task-tree metadata check, doctrine driver, Knowledge Map regeneration/check, memory
+  architecture, and diff checks pass.
+
 - 2026-07-08: **TASK-TREE-METADATA-HYGIENE.2 — reconcile stale frontier rows**
   (DONE metadata-only cleanup; frontier `.3` doctrine/check decision next).
 

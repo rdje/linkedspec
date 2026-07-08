@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — TASK-TREE-METADATA-HYGIENE.3 — gate completed-tree frontiers
+
+**Scope:** Low-noise doctrine enforcement for task-tree metadata hygiene.
+
+**Change:** Added `scripts/check_task_tree_metadata.sh` and registered it as `TASK-TREE-METADATA` in
+`scripts/check_doctrines.sh`. The gate checks only task files whose top metadata says `done`, `completed`, or
+`exhausted`, and only the status cell in their `Current Frontier` tables. It fails if a completed tree advertises a
+live frontier status (`pending`, `active`, `in_progress`, or `blocked`). Documented the new doctrine in
+`DOCTRINE_ENFORCEMENT.md`, added a Knowledge fact for the gate boundary, and closed `TASK-TREE-METADATA-HYGIENE`.
+
+**Boundary:** No parser/runtime behavior changed and no public mdBook behavior changed. Historical prose and old
+per-leaf commit backfill fields remain outside this gate to avoid legacy false positives.
+
+**Validation:** New task-tree metadata check, full doctrine driver, Knowledge Map regeneration/check,
+memory-architecture check, and diff checks pass.
+
 ## 2026-07-08 — TASK-TREE-METADATA-HYGIENE.2 — reconcile stale frontier rows
 
 **Scope:** Metadata-only reconciliation for completed/completed-like task trees that still carried stale

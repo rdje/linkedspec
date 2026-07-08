@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `TASK-TREE-METADATA-HYGIENE`
-- Status: `active` (created 2026-07-07 from the user-requested open-task-tree audit)
+- Status: `done`
 - Roadmap lane: `Overall roadmap - durable architecture / task-tree hygiene`
 - Created: `2026-07-07`
-- Last updated: `2026-07-08` (`.2` done; frontier `.3`)
+- Last updated: `2026-07-08` (`.3` done; tree complete)
 - Owner: repo-local workflow
 
 ## Goal
@@ -34,7 +34,7 @@ agents can determine the true open/closed task state without re-auditing old tas
 ## Task Tree
 
 - ID: `TASK-TREE-METADATA-HYGIENE`
-  Status: `active`
+  Status: `done`
   Goal: Reconcile stale task-tree metadata found during the 2026-07-07 bootstrap/open-tree audit.
   Children: `.0`, `.1`, `.2`, `.3`
 
@@ -78,12 +78,16 @@ agents can determine the true open/closed task state without re-auditing old tas
   Commit: `TASK-TREE-METADATA-HYGIENE.2 - reconcile stale frontier rows`
 
 - ID: `TASK-TREE-METADATA-HYGIENE.3`
-  Status: `pending`
+  Status: `done`
   Goal: Decide whether to add a lightweight doctrine/check for stale task-tree metadata.
   Acceptance: Either a focused check is added to the doctrine registry with low false-positive risk, or the tree
     records why a manual audit is the safer policy for now.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done - 2026-07-08. Added `scripts/check_task_tree_metadata.sh`, registered it as
+    `TASK-TREE-METADATA` in `scripts/check_doctrines.sh`, documented it in `DOCTRINE_ENFORCEMENT.md`, and added a
+    Knowledge fact for the check boundary. The check is intentionally narrow: completed/exhausted/done task files
+    must not have live status cells in `Current Frontier`, while historical prose and old per-leaf commit backfill
+    fields remain manual cleanup territory.
+  Commit: `TASK-TREE-METADATA-HYGIENE.3 - gate completed-tree frontiers`
 
 ## Current Frontier
 
@@ -91,7 +95,7 @@ agents can determine the true open/closed task state without re-auditing old tas
 | --- | --- | --- | --- |
 | 1 | `TASK-TREE-METADATA-HYGIENE.1` | `done` | Top-level metadata contradictions are reconciled so completed trees no longer look live. |
 | 2 | `TASK-TREE-METADATA-HYGIENE.2` | `done` | Stale frontier/verification/commit rows are reconciled or explicitly classified. |
-| 3 | `TASK-TREE-METADATA-HYGIENE.3` | `pending` | Decide whether the observed invariant is safe enough for an automated doctrine check. |
+| 3 | `TASK-TREE-METADATA-HYGIENE.3` | `done` | Low-noise completed-tree Current Frontier gate added to the doctrine registry. |
 
 ## Decisions
 
@@ -118,11 +122,15 @@ agents can determine the true open/closed task state without re-auditing old tas
   an explicit deferred non-goal; those deferred rows are not stale live frontiers. `.2` also corrected stale
   `LINKEDSPEC-LOW-EFFORT.2` wording after verifying `.githooks/post-commit` is verification-only: it warns when
   `MEMORY.md` lacks a parseable `latest_commit` hash or drifts from HEAD, but it does not rewrite `MEMORY.md`.
+- `2026-07-08`: `.3` chose a narrow structural gate rather than a broad historical metadata gate. The enforced
+  invariant is: task files whose top metadata says `done`, `completed`, or `exhausted` must not advertise
+  `pending`, `active`, `in_progress`, or `blocked` status cells in their `Current Frontier` table. Exploratory
+  scans showed broad per-leaf `Commit: pending` backfill enforcement would create legacy false positives, so that
+  remains manual cleanup unless a future task narrows it further.
 
 ## Open Questions
 
-- None blocking `.3`. The next leaf decides whether the now-observed cleanup pattern can become a low-noise
-  doctrine check.
+- None.
 
 ## Blockers
 
@@ -132,6 +140,7 @@ agents can determine the true open/closed task state without re-auditing old tas
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-08` | `TASK-TREE-METADATA-HYGIENE.3` | `bash scripts/check_task_tree_metadata.sh`; `bash scripts/check_doctrines.sh`; memory/KM/diff gates | PASS — completed-tree Current Frontier invariant is now mechanically gated. |
 | `2026-07-08` | `TASK-TREE-METADATA-HYGIENE.2` | Focused stale-marker scans over the named completed/completed-like task files; post-commit hook inspection; memory/doctrine/diff gates | PASS — stale frontier/verification/commit rows reconciled or explicitly classified without parser/runtime/public-book behavior change. |
 | `2026-07-07` | `TASK-TREE-METADATA-HYGIENE.1` | Focused metadata/status scans over the three named task files; memory/doctrine/diff gates | PASS — stale active top metadata reconciled without parser/runtime/public-book behavior change. |
 | `2026-07-07` | `TASK-TREE-METADATA-HYGIENE.0` | Read-only audit of central index, active task files, and stale metadata candidates; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `git diff --check` | PASS |
@@ -140,6 +149,7 @@ agents can determine the true open/closed task state without re-auditing old tas
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `TASK-TREE-METADATA-HYGIENE.3` | `TASK-TREE-METADATA-HYGIENE.3 - gate completed-tree frontiers` | Adds the narrow `TASK-TREE-METADATA` doctrine gate and closes the hygiene tree. |
 | `TASK-TREE-METADATA-HYGIENE.2` | `TASK-TREE-METADATA-HYGIENE.2 - reconcile stale frontier rows` | Reconciles stale current-frontier, verification, and commit rows in completed/completed-like task files; `.3` gate decision is next. |
 | `TASK-TREE-METADATA-HYGIENE.1` | `TASK-TREE-METADATA-HYGIENE.1 - reconcile top task metadata` | Reconciles stale active top metadata in the three named completed/exhausted task files; frontier becomes `.2`. |
 | `TASK-TREE-METADATA-HYGIENE.0` | `TASK-TREE-METADATA-HYGIENE.0 - own task-tree metadata audit` | Tracking-only owner for the user-requested open-task-tree audit finding. |
@@ -154,3 +164,5 @@ agents can determine the true open/closed task state without re-auditing old tas
 - `2026-07-08`: Completed `.2` by reconciling stale current-frontier/verification/commit metadata in
   completed/completed-like task files and by explicitly classifying the surviving deferred/non-goal rows. Frontier
   moves to `.3` for the doctrine/check decision.
+- `2026-07-08`: Completed `.3` by adding and registering the low-noise `TASK-TREE-METADATA` doctrine check for
+  completed-tree Current Frontier rows. Tree complete.

@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (TASK-TREE-METADATA-HYGIENE.3 — completed-tree frontier gate):
+  Added `scripts/check_task_tree_metadata.sh` as the `TASK-TREE-METADATA` doctrine. The check is intentionally
+  narrow: for task files whose top metadata status is `done`, `completed`, or `exhausted`, it parses only the
+  `Current Frontier` table status cell and fails on live statuses (`pending`, `active`, `in_progress`, `blocked`).
+  It does not scan changelog prose or force old per-leaf `Commit: pending` fields to be backfilled. Exploratory
+  scans showed that broad leaf-level commit/verification enforcement would trip substantial legacy metadata debt
+  unrelated to the current frontier invariant, so future broadening needs its own cleanup owner.
+
 - 2026-07-08 (TASK-TREE-METADATA-HYGIENE.2 — stale frontier rows and hook behavior):
   Reconciled stale current-frontier, verification, and commit rows in completed/completed-like task trees. The
   stable rule observed so far: completed task files should not retain `pending` frontier/verification/commit rows,

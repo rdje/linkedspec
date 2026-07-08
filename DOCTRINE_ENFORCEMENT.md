@@ -234,6 +234,7 @@ Enforced by [`scripts/check_doctrines.sh`](scripts/check_doctrines.sh) via
 |---|---|---|---|
 | `MEMORY-ARCH` | structural | `scripts/check_memory_architecture.sh` | the durable 4-layer memory architecture invariants (`MEMORY_ARCHITECTURE.md` §9) |
 | `KNOWLEDGE-MAP` | structural | `knowledge-map/scripts/check_knowledge_map.sh` | the derived Knowledge Map is in sync with its fact sources |
+| `TASK-TREE-METADATA` | structural | `scripts/check_task_tree_metadata.sh` | completed task trees do not advertise live `Current Frontier` rows |
 
 Deterministic-oracle doctrine run via the broader gate (`tools/run_ci_local.sh`): the phase0
 regression suite `t/phase0_regression.t` (the cross-variant baseline + the all-spec ActionIR-ready

@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `TASK-TREE-METADATA-HYGIENE.2` — metadata-only reconciliation of stale
-  current-frontier, verification, and commit rows in completed/completed-like task files. Intentional deferred rows
-  remain visible for `COMPAT-ALIAS-RETIREMENT` medium-term aliases and `NONCORE-QUARANTINE.N`.
-- prior_leaf: `TASK-TREE-METADATA-HYGIENE.1` — stale active top metadata reconciled in
-  `FLUENT-BLOCK-EQUIVALENCE`, `MEDIUM-IMPACT`, and `PHASE0-BACKHALF-TRIAGE`.
+- latest_completed_leaf: `TASK-TREE-METADATA-HYGIENE.3` — added the narrow `TASK-TREE-METADATA` doctrine gate:
+  completed/done/exhausted task files must not advertise live `Current Frontier` status cells. The hygiene tree is
+  complete and moved to Completed in `docs/TASK_TREE.md`.
+- prior_leaf: `TASK-TREE-METADATA-HYGIENE.2` — metadata-only reconciliation of stale current-frontier,
+  verification, and commit rows in completed/completed-like task files, with intentional deferred rows preserved.
 - latest_commit: HEAD containing this pointer should be
-  `TASK-TREE-METADATA-HYGIENE.2 - reconcile stale frontier rows`; parent before this slice includes
-  `TASK-TREE-METADATA-HYGIENE.1 - reconcile top task metadata`.
+  `TASK-TREE-METADATA-HYGIENE.3 - gate completed-tree frontiers`; parent before this slice includes
+  `TASK-TREE-METADATA-HYGIENE.2 - reconcile stale frontier rows`.
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: none in-flight after `.2`; repo should be handoff-ready after commit and
+- active_work_unit: none in-flight after `.3`; repo should be handoff-ready after commit and
   `git_message_brief.txt` cleanup.
-- next_action: continue `TASK-TREE-METADATA-HYGIENE.3` after this `.2` commit is clean; decide whether the observed
-  metadata invariant is safe enough for a low-noise doctrine/check. Do not pivot while the repo is dirty.
+- next_action: after the `.3` commit is clean, return to `docs/TASK_TREE.md`; current active rows are empty,
+  paused, or explicitly deferred, so no PNT-eligible leaf is available unless a deferred lane is reactivated.
 - latest_bootstrap_read: 2026-07-07/08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, mdBook source, core Perl/Rust implementation, shipped specs, tooling, and focused
   test harness inventory. The task-tree audit found stale per-file metadata; it is owned by
