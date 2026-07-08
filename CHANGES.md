@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — STAGED-LINKED-PARSING.6 — close staged linked parsing tree
+
+**Scope:** Task-tree metadata closeout for the completed staged linked parsing prototype.
+
+**Change:** Marked `STAGED-LINKED-PARSING` done, moved it from Active to Completed in the central task-tree index,
+and replaced the stale PNT pointer to already-closed `TOP-RULE-AS-NORMAL.3.2` with a return to the active
+task-tree index.
+
+**Boundary:** No parser/runtime behavior changed and no public mdBook content changed.
+
+**Validation:** Memory architecture, doctrine, task-tree metadata, and diff checks pass.
+
 ## 2026-07-08 — ROADMAP-DRIFT-RECONCILE.2 — refresh architecture status counts
 
 **Scope:** Architecture-state and public-book status/count documentation sync.

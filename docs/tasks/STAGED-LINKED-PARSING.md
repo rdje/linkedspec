@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `STAGED-LINKED-PARSING`
-- Status: `active`
+- Status: `done` (closed 2026-07-08)
 - Roadmap lane: `Overall roadmap — .spec language model / parser composition`
 - Created: `2026-07-02`
-- Last updated: `2026-07-03`
+- Last updated: `2026-07-08`
 - Owner: repo-local workflow
 
 ## Goal
@@ -39,10 +39,10 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 ## Task Tree
 
 - ID: `STAGED-LINKED-PARSING`
-  Status: `active`
+  Status: `done` (closed 2026-07-08)
   Goal: Adopt and then implement staged linked parsing as a first-class
     LinkedSpec architecture.
-  Children: `.1`, `.2`, `.3`, `.4`, `.5`
+  Children: `.1`, `.2`, `.3`, `.4`, `.5`, `.6`
 
 - ID: `STAGED-LINKED-PARSING.1`
   Status: `done`
@@ -383,11 +383,23 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
     shipped.
   Commit: `STAGED-LINKED-PARSING.5.6 - prove function-body staged prototype`
 
+- ID: `STAGED-LINKED-PARSING.6`
+  Status: `done`
+  Goal: Close the staged linked parsing tree after the prototype frontier was exhausted.
+  Acceptance: Mark the tree done, move it from Active to Completed in the central
+    index, replace stale PNT routing to already-closed `TOP-RULE-AS-NORMAL.3.2`,
+    and update live continuity docs without changing parser/runtime behavior.
+  Verification: **DONE 2026-07-08.** The tree is closed in this file and
+    `docs/TASK_TREE.md`; the prior stale PNT pointer now routes to the active
+    task-tree index. Verification passed: memory/doctrine/task-tree metadata
+    checks and diff checks.
+  Commit: `STAGED-LINKED-PARSING.6 - close staged linked parsing tree`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| - | _none_ | - | The first function-body staged prototype is complete. PNT returns to `TOP-RULE-AS-NORMAL.3.2` unless a new staged linked parsing leaf is explicitly split. |
+| — | `STAGED-LINKED-PARSING.6` | `done` | The first function-body staged prototype is complete, no staged frontier remains, and the stale `TOP-RULE-AS-NORMAL.3.2` pointer is removed. Tree closed; PNT returns to the active task-tree index. |
 
 ## Decisions
 
@@ -534,4 +546,5 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
 - `2026-07-02`: `.5.3.2` done — Rust consumes the same spec-returned user-function definition AST contract and no longer owns a raw definition parser bridge; frontier moves to `.5.4`.
 - `2026-07-03`: `.5.4` done — function-body payloads now carry neutral `body_parse_job` sidecars with deterministic ids, parser identity, top rule, result/failure policies, exact text, and source spans; frontier moves to `.5.5`.
 - `2026-07-03`: `.5.5` done — minimal staged registry dispatch now executes function-body parse jobs through `actionir-body.spec` / `action_block`, records neutral cache/phase metadata in tests, stitches `body_ast`, and moves the frontier to `.5.6`.
-- `2026-07-03`: `.5.6` done — function-body staged prototype proved end to end on Perl and Rust with descriptor/parsed/compiled AST-shape assertions, runtime stability checks, source-provenance diagnostics, mdBook sync, and phase0 1018 green; no staged frontier remains, so PNT returns to `TOP-RULE-AS-NORMAL.3.2`.
+- `2026-07-03`: `.5.6` done — function-body staged prototype proved end to end on Perl and Rust with descriptor/parsed/compiled AST-shape assertions, runtime stability checks, source-provenance diagnostics, mdBook sync, and phase0 1018 green; no staged frontier remains.
+- `2026-07-08`: `.6` done — closed the exhausted staged linked parsing tree and removed the stale PNT pointer to the already-closed `TOP-RULE-AS-NORMAL.3.2`; PNT returns to the active task-tree index.

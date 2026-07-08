@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **STAGED-LINKED-PARSING.6 — close staged linked parsing tree**
+  (DONE metadata closeout; tree CLOSED).
+
+  **Change:** `STAGED-LINKED-PARSING` is now marked done and moved from Active to Completed in the central
+  task-tree index. Its stale PNT pointer to already-closed `TOP-RULE-AS-NORMAL.3.2` now routes back to the active
+  task-tree index.
+
+  **Boundary:** No parser/runtime behavior changed and no public mdBook content changed.
+
+  **Verification:** Memory architecture, doctrine, task-tree metadata, and diff checks pass.
+
 - 2026-07-08: **RUST-README-DRIFT-SYNC.1 — sync Rust README oracle count**
   (DONE docs-only correction; tree CLOSED).
 

@@ -1,6 +1,11 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (STAGED-LINKED-PARSING.6 — close exhausted staged tree):
+  `STAGED-LINKED-PARSING` is now closed rather than left active with an empty frontier. The earlier
+  function-body staged prototype remains the implemented proof point; this slice only reconciles the task tree and
+  index, and removes the stale PNT pointer to `TOP-RULE-AS-NORMAL.3.2`, which is already closed.
+
 - 2026-07-08 (ROADMAP-DRIFT-RECONCILE.2 — architecture/book status-count refresh):
   `ARCHITECTURE_STATE.md` now names the current status snapshot: 21 shipped specs, phase0 `PASS 1..1026`, a
   95-fixture Rust interpreter oracle, generated Rust-source proof over current structural families plus a curated
