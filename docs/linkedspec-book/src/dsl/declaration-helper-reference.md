@@ -110,50 +110,54 @@ authoring surface.
 Current form:
 
 ```text
-List::AND
+List::
  I {
    set(array(items), []);
    retv = undef;
  }
- Item
- Item
- -> List[0] {
+ -> Item {
    retv = call(Item);
    push(array(items), retv);
  }
- -> List[1] {
-   retv = call(Item);
-   push(array(items), retv);
+ LX {
    return(hash(
      "kind", "list",
      "items", copy(array(items)),
      "item_count", count(array(items))
    ));
  }
+
+Item: /\s*[A-Za-z_]+/
+ I { return(hash("text", trim(entry_text()))) }
 ```
+
+On input `alpha beta`, this returns `{"kind":"list","items":[{"text":"alpha"},{"text":"beta"}],"item_count":2}`.
 
 The state choices are explicit:
 
 - `set(array(items), [])` resets the named array accumulator for this rule invocation.
 - `retv = undef` makes the scratch scalar visible before action edges use it.
 - `push(array(items), retv)` appends one computed child result.
+- `Item:` owns the regex and returns one item record; `List::` owns the accumulator.
 
 ## Worked Example: Metadata Baseline
 
 ```text
-Token::AND
+Top::
+ -> Token .push
+ LX { return(copy(array(Top))) }
+
+Token: /[A-Za-z_]+/
  I {
    set(hash(meta), { "kind" : "token", "source" : "Token" });
-   text = undef;
- }
- /[A-Za-z_]+/
- -> Token[0] {
    text = lowercase(trim(entry_text()));
    meta["text"] = text;
    meta["text_length"] = length(text);
    return(copy(hash(meta)));
  }
 ```
+
+On input `Alpha`, this returns `[{"kind":"token","source":"Token","text":"alpha","text_length":5}]`.
 
 The hash reset states the always-present metadata. Later hash-index assignments state the branch-local updates and are
 equivalent to `set_key(meta, key, value)` for explicit key/value expressions.

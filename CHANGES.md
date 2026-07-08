@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.11 — fix declaration helper examples
+
+**Scope:** mdBook declaration-helper chapter correction.
+
+**Change:** Reworked `dsl/declaration-helper-reference.md` so the accumulator and metadata
+worked examples use no-regex `::` wrappers and regex-owning normal matcher rules. `List::`
+now owns the array accumulator and calls `Item:`, while the token metadata example uses
+`Top::` as the wrapper and `Token:` as the matcher.
+
+**Validation:** Focused `LinkedSpec::Get` probes verify `alpha beta` returns
+`{"kind":"list","items":[{"text":"alpha"},{"text":"beta"}],"item_count":2}` and `Alpha`
+returns `[{"kind":"token","source":"Token","text":"alpha","text_length":5}]`. The page
+scan finds no regex slot under a `::` header; `mdbook build docs/linkedspec-book` passes.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.10 — fix capture and entry-match examples
 
 **Scope:** mdBook capture/source-location chapter correction plus a narrow Knowledge Map fact.

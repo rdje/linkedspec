@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.11 — fix declaration helper examples**
+  (DONE mdBook correction; frontier `.10.5.12` next).
+
+  **Change:** Reworked `dsl/declaration-helper-reference.md` so the accumulator and metadata
+  examples use no-regex `::` wrappers with regex-owning normal rules. `List::` owns state and
+  calls `Item:`, while `Top::` dispatches to `Token:` for the metadata example.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a documentation correction for
+  the active whole-book scorch.
+
+  **Verification:** Focused `LinkedSpec::Get` probes cover the documented list and token outputs;
+  page scan finds no regex under `::`; mdBook, doctrine, task-tree, memory, and whitespace checks pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.10 — fix capture and entry-match examples**
   (DONE mdBook + Knowledge fact correction; frontier `.10.5.11` next).
 

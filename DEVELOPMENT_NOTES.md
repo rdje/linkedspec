@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.11 — declaration helper examples):
+  `dsl/declaration-helper-reference.md` now keeps declaration-helper replacement examples on the
+  standard no-regex wrapper shape. The accumulator example uses `List::` only for state ownership
+  (`set(array(items), [])`, scratch `retv`, final `LX` return) and puts matching in `Item:`;
+  `Item: /\s*[A-Za-z_]+/` trims `entry_text()` so consume-mode streams can cross whitespace.
+  The metadata example uses `Top::` as the wrapper and `Token:` as the regex owner. The next scorch
+  leaf is `.10.5.12` for `dsl/source-boundary-helper-reference.md`.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.10 — capture/source-location examples):
   `dsl/capture-marks-and-source-locations.md` no longer teaches `Top::AND` / `Call::AND` regex-bearing
   examples. The `capture_slice()` example is now a no-regex `Top::` wrapper dispatching to a normal

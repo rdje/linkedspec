@@ -18,23 +18,23 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.10` — fixed
-  `dsl/capture-marks-and-source-locations.md`: `capture_slice()` now uses a no-regex `Top::` wrapper plus
-  normal `Body:` delimiter rule, and entry-vs-match divergence now uses a no-regex blind-call wrapper plus
-  normal `Call:`/`Inner:` rules. Knowledge fact `perl-capture-slice-delimiter-seek-boundary` records the
-  seek-vs-consume capture caveat.
-- prior_leaf: `SPEC-LANG-REFERENCE.10.5.9` — fixed `dsl/action-and-lifecycle-placement.md` and recorded
-  `perl-lifecycle-final-value-e-drift`.
+- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.11` — fixed
+  `dsl/declaration-helper-reference.md`: accumulator and metadata examples now use no-regex `::` wrappers
+  with regex-owning normal rules (`Item:` / `Token:`), and the documented `alpha beta` + `Alpha` outputs
+  were reverified through `LinkedSpec::Get`.
+- prior_leaf: `SPEC-LANG-REFERENCE.10.5.10` — fixed `dsl/capture-marks-and-source-locations.md` and
+  recorded `perl-capture-slice-delimiter-seek-boundary`.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-LANG-REFERENCE.10.5.10 - fix capture and entry-match examples`; parent before this slice is
-  `SPEC-LANG-REFERENCE.10.5.9 - fix action and lifecycle placement examples`.
+  `SPEC-LANG-REFERENCE.10.5.11 - fix declaration helper examples`; parent before this slice is
+  `SPEC-LANG-REFERENCE.10.5.10 - fix capture and entry-match examples`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `SPEC-LANG-REFERENCE.10.5.11` is the next active leaf in the reactivated
+- active_work_unit: `SPEC-LANG-REFERENCE.10.5.12` is the next active leaf in the reactivated
   language-reference scorch.
-- next_action: from a clean repo, execute `.10.5.11`: fix
-  `docs/linkedspec-book/src/dsl/declaration-helper-reference.md` worked examples (`Token::AND`, `List::AND`)
-  to doctrine-valid no-regex `::` wrappers / regex-owning normal rules.
+- next_action: from a clean repo, execute `.10.5.12`: fix
+  `docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md` worked examples
+  (`Tuple::AND`, `Block::AND`, `Paren::AND`, `Pair::AND`, `Body::AND`, `AtEnd::AND`,
+  `Top::AND`/`Child::AND`) to doctrine-valid wrappers / normal matcher rules.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
   enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.
