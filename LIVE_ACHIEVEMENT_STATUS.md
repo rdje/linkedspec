@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-FORMAT-TERSE.12.1 — activate hash-tree traversal split**
+  (DONE tracking/spec split; frontier `.12.2` Perl reference implementation next).
+
+  **Change:** Reactivated `SPEC-FORMAT-TERSE.12` and split the hash-tree attached-block traversal lane before code.
+  The MVP is receiver-only `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` with immediate attached
+  blocks, sorted depth-first hash traversal, scoped callback bindings, array leaves, and explicit Perl/Rust/docs
+  child leaves.
+
+  **Boundary:** No parser/runtime behavior changed and no public mdBook content changed.
+
+  **Verification:** Memory architecture, doctrine, task-tree metadata, and diff checks pass.
+
 - 2026-07-08: **STAGED-LINKED-PARSING.6 — close staged linked parsing tree**
   (DONE metadata closeout; tree CLOSED).
 
@@ -725,8 +737,8 @@ Current execution status for interruption-safe batch workflow recovery.
   `KNOWLEDGE_MAP.md` was regenerated over 199 facts / 1418 question keys; mdBook, Knowledge Map, memory,
   doctrine, and whitespace checks pass.
 
-  **Frontier:** `SPEC-FORMAT-TERSE.15` is next for removing `:name` scalar-slot syntax from the future
-  duck-typed surface. `.8` helper-removal work and `.9` colon hash-literal syntax remain behind it.
+  **Historical frontier:** At this slice, `SPEC-FORMAT-TERSE.15` was next for removing `:name` scalar-slot syntax.
+  That lane, `.8`, `.9`, and `.14` have since closed; the current active terse frontier is `.12.2`.
 
 - 2026-07-05: **SPEC-FORMAT-TERSE.11.4 — implement nested value-path assignment**
   (NESTED VALUE-PATH DONE; DUCK-TYPED CLOSEOUT FRONTIER ACTIVE).

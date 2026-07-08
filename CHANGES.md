@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-FORMAT-TERSE.12.1 — activate hash-tree traversal split
+
+**Scope:** Task-tree and live-doc activation for hash-tree traversal receiver methods.
+
+**Change:** Reactivated deferred `SPEC-FORMAT-TERSE.12` by explicit user directive and split it before code. The
+accepted MVP is receiver-only `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` with immediate attached
+blocks, sorted depth-first hash traversal, scoped `value`/`key`/`path`/`depth` bindings plus `acc` for reduction,
+array leaves, no delayed closures, and explicit Perl/Rust/docs/KM/oracle children.
+
+**Boundary:** No parser/runtime behavior changed and no public mdBook content changed in this split slice.
+
+**Validation:** Memory architecture, doctrine, task-tree metadata, and diff checks pass.
+
 ## 2026-07-08 — STAGED-LINKED-PARSING.6 — close staged linked parsing tree
 
 **Scope:** Task-tree metadata closeout for the completed staged linked parsing prototype.

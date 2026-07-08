@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-FORMAT-TERSE.12.1 — hash-tree traversal split before code):
+  `SPEC-FORMAT-TERSE.12` is now active by explicit user directive. The accepted MVP is deliberately receiver-only
+  and immediate: `hash_value.walk_leaves() { ... }`, `hash_value.map_leaves() { ... }`, and
+  `hash_value.reduce_leaves(initial) { ... }`. Traversal is sorted depth-first over hash keys; arrays are leaves,
+  not nested traversal nodes; callbacks get scoped `value`, `key`, `path`, and `depth`, with `acc` only for
+  reduction. The implementation starts with Perl reference `.12.2`, then Rust/oracle parity `.12.3`, then
+  docs/KM/no-drift `.12.4`.
+
 - 2026-07-08 (STAGED-LINKED-PARSING.6 — close exhausted staged tree):
   `STAGED-LINKED-PARSING` is now closed rather than left active with an empty frontier. The earlier
   function-body staged prototype remains the implemented proof point; this slice only reconciles the task tree and

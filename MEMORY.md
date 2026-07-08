@@ -18,18 +18,18 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `STAGED-LINKED-PARSING.6` — metadata closeout: the exhausted staged linked parsing tree is
-  now `done`, moved from Active to Completed, and no longer points PNT at already-closed `TOP-RULE-AS-NORMAL.3.2`.
-- prior_leaf: `ROADMAP-DRIFT-RECONCILE.2` — docs/book reconciliation: `ARCHITECTURE_STATE.md` and narrow mdBook
-  status lines now reflect current 21-spec phase0 `1..1026`, 95-fixture Rust oracle, and noncore/plugin state.
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.12.1` — reactivated and split hash-tree attached-block traversal before
+  implementation; the accepted MVP surface is receiver-only `walk_leaves`, `map_leaves`, and `reduce_leaves`.
+- prior_leaf: `STAGED-LINKED-PARSING.6` — metadata closeout: the exhausted staged linked parsing tree is now
+  `done`, moved from Active to Completed, and no longer points PNT at already-closed `TOP-RULE-AS-NORMAL.3.2`.
 - latest_commit: HEAD containing this pointer should be
-  `STAGED-LINKED-PARSING.6 - close staged linked parsing tree`; parent before this slice is
-  `b8ee539c ROADMAP-DRIFT-RECONCILE.2 - refresh architecture status counts`.
+  `SPEC-FORMAT-TERSE.12.1 - activate hash-tree traversal split`; parent before this slice is
+  `961cc086 STAGED-LINKED-PARSING.6 - close staged linked parsing tree`.
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: none in-flight after `STAGED-LINKED-PARSING.6`; repo should be handoff-ready after commit and
-  `git_message_brief.txt` cleanup.
-- next_action: per user directive 2026-07-08, inventory where remaining open task trees are deferred or paused,
-  then stop for discussion before activating another deferred/paused lane.
+- active_work_unit: `SPEC-FORMAT-TERSE.12` hash-tree traversal lane reactivated by user directive 2026-07-08;
+  `.12.1` owns the committed split/spec contract before code.
+- next_action: implement `SPEC-FORMAT-TERSE.12.2` Perl reference receiver attached-block traversal
+  (`walk_leaves`, `map_leaves`, `reduce_leaves`) using the existing immediate trailing-block model.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, mdBook source, core Perl/Rust implementation, shipped specs, tooling, and focused
   test harness inventory. Startup found isolated Rust README drift now owned by `RUST-README-DRIFT-SYNC`.
@@ -38,6 +38,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   tracking update may be opened only after this repo is clean.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests (e.g. 102 pplugin lazy-load) fail on the stale checkout. Full phase0 needs the **10-min timeout** (`timeout:600000`), else it caps mid-run (exit 144/143). **Generated Perl handlers are NON-strict.** **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`). Current phase0 reaches **PASS `1..1026`**. oracle = `tools/gen_oracle_corpus.pl` (per-case fork/SIGKILL; **95** fixtures → **run in background**; `manifest.json` + drift guards). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`. Rust numbered capture helpers are captures-only (`0`=first capture); whole match = `entry_text()`/`match_text()`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
-  worktree ignored by submodule policy. Remaining open deferred/paused lanes to inventory/discuss:
-  `SPEC-FORMAT-TERSE` `.10`/`.12`/`.13`, `DOCTRINE-ENFORCEMENT-ADOPT.3`, and `SPEC-LANG-REFERENCE`.
-- blockers: none. in_flight_uncommitted: none after this commit; do not pivot unless the repo is handoff-ready.
+  worktree ignored by submodule policy. Remaining open deferred/paused lanes outside current `.12`: `SPEC-FORMAT-TERSE`
+  `.10`/`.13`, `DOCTRINE-ENFORCEMENT-ADOPT.3`, and `SPEC-LANG-REFERENCE`.
+- blockers: none. in_flight_uncommitted: `.12.1` tracking/docs until committed; do not pivot unless the repo is
+  handoff-ready.
