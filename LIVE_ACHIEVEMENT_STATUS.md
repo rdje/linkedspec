@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.6 — fix rule mode and parse mode examples**
+  (DONE mdBook correction; frontier `.10.5.7` next).
+
+  **Change:** Reworked `user-model/rule-modes-and-parse-modes.md` so regex-owning mode examples use
+  single-colon labels, `::` examples are no-regex entry/dispatcher shapes, and the parse-mode
+  `Top:: /foo/` snippets are now a verified `Top::` + `Word:` wrapper.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a documentation correction for the
+  active whole-book scorch.
+
+  **Verification:** `LinkedSpec::Get` probes confirm the documented token-stream and `seek`/`consume`
+  outputs; remaining `::` labels on the page are no-regex entry/dispatcher examples; mdBook build passes.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.5 — fix spec file paragraph examples**
   (DONE mdBook + Knowledge fact; frontier `.10.5.6` next).
 

@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-07-08` (`.10.5.5` done: `user-model/spec-files-and-rule-paragraphs.md`
-  now uses verified 2-rule examples and documents the bare `label:` open-block validation error;
-  frontier advances to `.10.5.6`. Earlier **MAJOR
+- Last updated: `2026-07-08` (`.10.5.6` done: `user-model/rule-modes-and-parse-modes.md`
+  now keeps regexes on single-colon rules, preserves no-regex `::` entry/dispatcher examples, and
+  frontier advances to `.10.5.7`. Earlier **MAJOR
   CORRECTION** — user established that a `.spec` top (`::`) rule has NO regex; a valid spec needs >=2
   rules (top entry + >=1 normal `:` rule carrying the regex). Remediation remains documentation-only
   and owned by `.10.3`/`.10.5`; Perl reference untouched.)
@@ -67,7 +67,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   `.8`, `.9` (done — §5.5 drift fix, but used INVALID structure — superseded by `.10.4`), `.10`
   (**CORRECTED**: remediate structurally-invalid examples in `.5.2`/`.9`; NO engine bug; `.10.1`
   verdict superseded, `.10.2` superseded; remediation `.10.3`/`.10.5`; `.10.5.4.1` reactivated the
-  paused scorch and `.10.5.5` is the next book-fix leaf)
+  paused scorch and `.10.5.6` is done; `.10.5.7` is the next book-fix leaf)
 
 - ID: `SPEC-LANG-REFERENCE.1`
   Status: `done`
@@ -522,7 +522,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.5.5` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.6`
-  Status: `pending`
+  Status: `done`
   Goal: Fix `user-model/rule-modes-and-parse-modes.md` — convert all ~20 mode fragments off
   regex-on-`::` (use single-colon `:` normal rules for regex-carrying rules), reframe the "the same
   mode suffixes can appear after either colon form / both valid shapes" teaching to the doctrine
@@ -530,8 +530,15 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   consume examples
   Acceptance: no example puts a regex on a `::` rule; framing corrected; representative examples
   re-verified; `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. Reframed the rule-label surface so runnable examples use
+  no-regex `Top::` entry/dispatcher rules and single-colon regex-carrying rules. Converted the
+  regex-owning mode fragments (`Pair:&`, `Pair:AND`, `NameRun:+`, `TokenStream:OR`, bounded
+  `OR{...}` and `AND{...}` families, and the mixed-edge `BadRule:` negative example) off `::`.
+  Replaced the `Top:: /foo/` seek/consume snippets with the verified 2-rule wrapper (`Top:: -> Word
+  .push` / `LX { return(copy(array(Top))) }` + `Word: /foo/ I.return(entry_text())`). Runtime probes:
+  token stream `foo "bar"` → `["foo","bar"]`; `seek` over `junk foo` → `["foo"]`; `consume` over
+  `junk foo` → `[]`; `consume` over `foo` → `["foo"]`. `mdbook build docs/linkedspec-book` exits 0.
+  Commit: `SPEC-LANG-REFERENCE.10.5.6` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.7`
   Status: `pending`
@@ -751,7 +758,7 @@ target) · CLEAN.
 | `public-api/get-and-get-parser.md` | "minimal example" `Top::AND /foo/ -> Top[0]` | A+B+C | "runnable parser" → **`[]`** | `.10.5.3` |
 | `user-model/worked-spec-walkthrough.md` | central `Pair::AND /…/ -> Pair[0]` (single rule, whole chapter) | A+B+C | `{kind:pair,name:answer,value:42}` → **`[]`** | `.10.5.4` |
 | `user-model/spec-files-and-rule-paragraphs.md` | label-in-block `Top::AND … label:`; `Top::AND` sketches | A+D | "label belongs to the block" → **DSL compile error** (`Rule definition not allowed inside open block`, reverified 2026-07-08); fixed in `.10.5.5` | `.10.5.5` |
-| `user-model/rule-modes-and-parse-modes.md` | ~20 mode fragments `Pair::&`/`::AND`/`::OR`/`Top:: /foo/`…; line 24 "both valid shapes" framing | A | regex on `::` throughout; `Top:: /foo/ -> Top` → **`null`** | `.10.5.6` |
+| `user-model/rule-modes-and-parse-modes.md` | ~20 mode fragments `Pair::&`/`::AND`/`::OR`/`Top:: /foo/`…; line 24 "both valid shapes" framing | A | regex on `::` throughout; `Top:: /foo/ -> Top` → **`null`**; fixed in `.10.5.6` | `.10.5.6` |
 | `user-model/regex-in-spec.md` | `Top::` (l.38), `Pair::AND` (l.101), `Subdef::AND`, `Unit::AND` fragments | A | regex on `::` (capture-indexing teaching is correct) | `.10.5.7` |
 | `user-model/blind-calls-and-parser-orchestration.md` | `Document::AND`/`Atom::|`… (blind-call, no regex); `BadRule::` negative | mostly CLEAN | blind-call `::` rules carry no regex — audit + fix any stray regex-on-`::` | `.10.5.8` |
 | `dsl/action-and-lifecycle-placement.md` | `Token::AND`,`List::AND`,`Name::AND`,`Delimited::AND`,`Block::AND`,`Tuple::AND`,`Pair::AND`,`MaybeName::OR`,`Items:*` | A | regex on `::` (helper-illustration); `ebnf.spec` quote at l.184 is CLEAN | `.10.5.9` |
@@ -799,20 +806,20 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.5.4` | `done` | `worked-spec-walkthrough.md` rewritten to the verified 2-rule idiom (2026-06-18); every claimed output re-derived through `LinkedSpec::Get` (`answer = 42` → `[{"kind":"pair",…}]`; output corrected single-hash → one-element list; `ctx{top_rule}` `Pair`→`Top`); `match_group`→`entry_group`; declare/assign dropped per user pivot; `mdbook build` exit 0 |
 | — | `SPEC-LANG-REFERENCE.10.5.4.1` | `done` | reactivated by user directive (2026-07-08); the 2026-06-18 `SPEC-FORMAT-TERSE` pause is resolved; no book content changed |
 | — | `SPEC-LANG-REFERENCE.10.5.5` | `done` | `user-model/spec-files-and-rule-paragraphs.md` examples now use verified 2-rule forms; bare `label:` open-block validation error documented |
-| 4 | `SPEC-LANG-REFERENCE.10.5.6` | `pending` | next: fix `user-model/rule-modes-and-parse-modes.md` ~20 mode fragments + reframe "both valid shapes" |
-| 5 | `SPEC-LANG-REFERENCE.10.5.7` | `pending` | fix `user-model/regex-in-spec.md` `::`-with-regex fragments (keep capture teaching) |
-| 6 | `SPEC-LANG-REFERENCE.10.5.8` | `pending` | audit+fix `user-model/blind-calls-and-parser-orchestration.md` (mostly clean — blind-call `::` carry no regex) |
-| 7 | `SPEC-LANG-REFERENCE.10.5.9` | `pending` | fix `dsl/action-and-lifecycle-placement.md` worked examples → 2-rule idiom |
-| 8 | `SPEC-LANG-REFERENCE.10.5.10` | `pending` | fix `dsl/capture-marks-and-source-locations.md` (`Top::AND`, `Call::AND`/`Inner::AND`) |
-| 9 | `SPEC-LANG-REFERENCE.10.5.11` | `pending` | fix `dsl/declaration-helper-reference.md` (`Token::AND`, `List::AND`) |
-| 10 | `SPEC-LANG-REFERENCE.10.5.12` | `pending` | fix `dsl/source-boundary-helper-reference.md` (`Tuple::AND`/`Block::AND`/…) |
-| 11 | `SPEC-LANG-REFERENCE.10.5.13` | `pending` | fix `dsl/value-container-flow-helper-reference.md` (`Token::AND`/`Node::AND`/…) |
-| 12 | `SPEC-LANG-REFERENCE.10.5.14` | `pending` | fix remaining DSL pages (`values-containers` `Token::`, `action-model` `Top::`, `fluent-and-block-forms`, `actionir-lowering`) |
-| 13 | `SPEC-LANG-REFERENCE.10.5.15` | `pending` | fix `appendix/formal-grammar.md` §1 + §12 examples |
-| 14 | `SPEC-LANG-REFERENCE.10.5.16` | `pending` | fix `appendix/runtime-semantics.md` §5.5/§5.6 (folds `.10.4`) |
-| 15 | `SPEC-LANG-REFERENCE.10.5.17` | `pending` | fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts (`sens`/GROUP) |
-| 16 | `SPEC-LANG-REFERENCE.10.5.18` | `pending` | fix `specs-and-corpora/portmap-spec-walkthrough.md` 5 output-shape examples |
-| 17 | `SPEC-LANG-REFERENCE.10.5.19` | `pending` | finalize scorch — whole-book re-grep + `mdbook build`; close `.10.5`/`.10` |
+| — | `SPEC-LANG-REFERENCE.10.5.6` | `done` | `user-model/rule-modes-and-parse-modes.md` regex-owning mode examples now use single-colon labels; `Top:: /foo/` parse-mode snippets replaced with verified 2-rule wrapper |
+| 4 | `SPEC-LANG-REFERENCE.10.5.7` | `pending` | next: fix `user-model/regex-in-spec.md` `::`-with-regex fragments (keep capture teaching) |
+| 5 | `SPEC-LANG-REFERENCE.10.5.8` | `pending` | audit+fix `user-model/blind-calls-and-parser-orchestration.md` (mostly clean — blind-call `::` carry no regex) |
+| 6 | `SPEC-LANG-REFERENCE.10.5.9` | `pending` | fix `dsl/action-and-lifecycle-placement.md` worked examples → 2-rule idiom |
+| 7 | `SPEC-LANG-REFERENCE.10.5.10` | `pending` | fix `dsl/capture-marks-and-source-locations.md` (`Top::AND`, `Call::AND`/`Inner::AND`) |
+| 8 | `SPEC-LANG-REFERENCE.10.5.11` | `pending` | fix `dsl/declaration-helper-reference.md` (`Token::AND`, `List::AND`) |
+| 9 | `SPEC-LANG-REFERENCE.10.5.12` | `pending` | fix `dsl/source-boundary-helper-reference.md` (`Tuple::AND`/`Block::AND`/…) |
+| 10 | `SPEC-LANG-REFERENCE.10.5.13` | `pending` | fix `dsl/value-container-flow-helper-reference.md` (`Token::AND`/`Node::AND`/…) |
+| 11 | `SPEC-LANG-REFERENCE.10.5.14` | `pending` | fix remaining DSL pages (`values-containers` `Token::`, `action-model` `Top::`, `fluent-and-block-forms`, `actionir-lowering`) |
+| 12 | `SPEC-LANG-REFERENCE.10.5.15` | `pending` | fix `appendix/formal-grammar.md` §1 + §12 examples |
+| 13 | `SPEC-LANG-REFERENCE.10.5.16` | `pending` | fix `appendix/runtime-semantics.md` §5.5/§5.6 (folds `.10.4`) |
+| 14 | `SPEC-LANG-REFERENCE.10.5.17` | `pending` | fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts (`sens`/GROUP) |
+| 15 | `SPEC-LANG-REFERENCE.10.5.18` | `pending` | fix `specs-and-corpora/portmap-spec-walkthrough.md` 5 output-shape examples |
+| 16 | `SPEC-LANG-REFERENCE.10.5.19` | `pending` | finalize scorch — whole-book re-grep + `mdbook build`; close `.10.5`/`.10` |
 | — | `SPEC-LANG-REFERENCE.10.4` | `superseded` | folded into `.10.5.16` |
 | 18 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the scorch |
 | 19 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
@@ -924,7 +931,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 ## Blockers
 
 - None. (`.10.2`'s "blocked-on-decision" is gone — superseded; the decision was withdrawn after the
-  user's structural correction. The scorch is active again as of 2026-07-08; resume at `.10.5.6`.)
+  user's structural correction. The scorch is active again as of 2026-07-08; resume at `.10.5.7`.)
 
 ## Verification Log
 
@@ -947,6 +954,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `2026-06-18` | `SPEC-LANG-REFERENCE.10.5.4` | rewrote the whole chapter to the 2-rule idiom (`Top::` entry + `Pair:` matcher); mode-aware `LinkedSpec::Get` driver re-derived every claimed I/O (default/consume `answer = 42`→`[{"kind":"pair","name":"answer","value":"42"}]`; consume `junk answer = 42`→`[]`; seek→the pair; multi `a = 1, b = 2`→2-element list); descriptor/ctx probe (`ref HASH`✓, `meta.parse_mode consume`✓, `spec{Pair}`✓, **`ctx{top_rule}` Pair→Top**); isolated the `:AND`+separated-`I`→`[0]` and OR-`I`-block→`[null]` traps; `mdbook build`; `scripts/check_memory_architecture.sh` | `mdbook build` exit 0; self-check exit 0. Single-rule `Pair::AND -> Pair[0]` (→`[]`, claimed a hash) replaced; output reframed single-hash→one-element list; `match_group`→`entry_group` (+ trap doc); **declare()/assign() removed** from the advanced sketch per user pivot (call(...) teaching kept). Surfaced the terse-format pivot → user activated `SPEC-FORMAT-TERSE`; scorch paused after this leaf. No Perl change |
 | `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.4.1` | durable coordination update only: task tree, central index, memory pointer, live status, changelog, and development notes | scorch reactivated by user directive; next active leaf is `.10.5.5`; no parser/runtime/source/book behavior changed |
 | `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.5` | four replacement snippets run through `LinkedSpec::Get` (minimal, label-in-block, compact same-line, multiline); explicit bad bare-`label:` probe; `mdbook build docs/linkedspec-book`; Knowledge Map fact card + regeneration | replacement snippets compile/run and return documented payloads; bare `label:` inside an open block reports `Rule definition not allowed inside open block`; mdBook build exit 0; new fact `rule-starts-open-block-validation` indexed |
+| `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.6` | representative runtime probes through `LinkedSpec::Get` (token-stream wrapper; `seek`/`consume` word wrapper); source-page scan for remaining `::` labels; `mdbook build docs/linkedspec-book` | token stream `foo "bar"` → `["foo","bar"]`; `seek` `junk foo` → `["foo"]`; `consume` `junk foo` → `[]`; `consume` `foo` → `["foo"]`; remaining `::` labels are no-regex entry/dispatcher examples; mdBook build exit 0 |
 
 ## Commit Log
 
@@ -969,6 +977,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.5.4` | `SPEC-LANG-REFERENCE.10.5.4 — book: fix worked-spec-walkthrough.md → verified 2-rule idiom; re-derive whole-chapter outputs; drop declare/assign` | Central single-rule `Pair::AND -> Pair[0]` (→`[]`, claimed `{kind:pair,…}`) → `Top::` entry + `Pair:` matcher; every claimed I/O re-derived via `LinkedSpec::Get`; output corrected single-hash→one-element list; `match_group`→`entry_group`; `ctx{top_rule}` Pair→Top; declare()/assign() removed from the advanced sketch per the user terse-format pivot. `mdbook build` exit 0. **Whole-book scorch PAUSED here — user activated `SPEC-FORMAT-TERSE`.** |
 | `SPEC-LANG-REFERENCE.10.5.4.1` | `SPEC-LANG-REFERENCE.10.5.4.1 — reactivate book scorch` | User reactivated `SPEC-LANG-REFERENCE`; durable coordination records now point to `.10.5.5` as the next book-content leaf. Metadata-only; no mdBook source or parser/runtime behavior changed |
 | `SPEC-LANG-REFERENCE.10.5.5` | `SPEC-LANG-REFERENCE.10.5.5 — fix spec file paragraph examples` | `spec-files-and-rule-paragraphs.md` runnable examples now use the verified 2-rule idiom; the malformed bare `label:` block is replaced with valid quoted `"label:"` helper content plus the exact validation-error note. Four snippets verified through `LinkedSpec::Get`; mdBook build exit 0; Knowledge fact card added |
+| `SPEC-LANG-REFERENCE.10.5.6` | `SPEC-LANG-REFERENCE.10.5.6 — fix rule mode and parse mode examples` | `rule-modes-and-parse-modes.md` regex-owning mode examples now use single-colon labels, the `::` framing teaches no-regex entry/dispatcher usage, and `Top:: /foo/` parse-mode snippets are replaced with the verified 2-rule wrapper. Runtime probes and mdBook build pass |
 
 ## Changelog
 
@@ -1204,3 +1213,12 @@ wrapped only where a complete worked example is intended) during the per-file fi
   replaced with a valid quoted `"label:"` helper value and an explicit validation-error note. Added
   Knowledge fact `rule-starts-open-block-validation`. Frontier → `.10.5.6`
   (`user-model/rule-modes-and-parse-modes.md` mode fragments + "both valid shapes" framing).
+- `2026-07-08`: `.10.5.6` done — fixed
+  `docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md`. Regex-owning rule-mode examples
+  now use single-colon labels (`Pair:AND`, `TokenStream:OR`, bounded `AND{...}`/`OR{...}`, etc.);
+  `::` examples are no-regex entry/dispatcher or blind-call compositions. The old "both valid shapes"
+  framing now teaches the two-rule documentation idiom while preserving the engine nuance that the top
+  rule is ordinary at runtime. The `Top:: /foo/` seek/consume snippets are replaced with a verified
+  `Top::` + `Word:` wrapper: seek `junk foo` returns `["foo"]`, consume `junk foo` returns `[]`, and
+  consume `foo` returns `["foo"]`. `mdbook build` exit 0. Frontier → `.10.5.7`
+  (`user-model/regex-in-spec.md` regex-on-`::` fragments).

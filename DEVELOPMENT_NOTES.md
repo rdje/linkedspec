@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.6 — rule modes and parse modes):
+  `user-model/rule-modes-and-parse-modes.md` now follows the book scorch doctrine without erasing the
+  top-rule runtime nuance: runnable regex-owning mode examples use normal `:` labels, while `::` remains
+  a no-regex entry/dispatcher spelling. The page no longer teaches "both valid shapes" as a runnable
+  regex-on-`::` pattern, and the parse-mode examples use a verified `Top::` + `Word:` wrapper. Runtime
+  probes confirmed token-stream output plus `seek`/`consume` behavior. The next scorch leaf is `.10.5.7`
+  for `user-model/regex-in-spec.md`.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.5 — spec file paragraph examples):
   `user-model/spec-files-and-rule-paragraphs.md` is now back on the verified 2-rule authoring idiom.
   The page no longer teaches runnable `Top::AND` stream examples or uses `match_text()` in dispatched

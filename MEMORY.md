@@ -18,22 +18,23 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.5` — fixed
-  `user-model/spec-files-and-rule-paragraphs.md`: runnable examples now use verified 2-rule forms, and
-  bare `label:` inside an open block is documented as the `Rule definition not allowed inside open block`
-  validation error. Added KM fact `rule-starts-open-block-validation`.
-- prior_leaf: `SPEC-LANG-REFERENCE.10.5.4.1` — user reactivated the whole-book language-reference
-  scorch; metadata-only coordination pointed the active frontier at `.10.5.5`.
+- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.6` — fixed
+  `user-model/rule-modes-and-parse-modes.md`: regex-owning mode examples now use single-colon labels,
+  `::` is framed as no-regex entry/dispatcher usage, and seek/consume examples use a verified
+  `Top::` + `Word:` wrapper.
+- prior_leaf: `SPEC-LANG-REFERENCE.10.5.5` — fixed `user-model/spec-files-and-rule-paragraphs.md`
+  examples and documented the bare `label:` open-block validation error; added KM fact
+  `rule-starts-open-block-validation`.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-LANG-REFERENCE.10.5.5 - fix spec file paragraph examples`; parent before this slice is
-  `SPEC-LANG-REFERENCE.10.5.4.1 - reactivate book scorch`.
+  `SPEC-LANG-REFERENCE.10.5.6 - fix rule mode and parse mode examples`; parent before this slice is
+  `SPEC-LANG-REFERENCE.10.5.5 - fix spec file paragraph examples`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `SPEC-LANG-REFERENCE.10.5.6` is the next active leaf in the reactivated
+- active_work_unit: `SPEC-LANG-REFERENCE.10.5.7` is the next active leaf in the reactivated
   language-reference scorch.
-- next_action: from a clean repo, execute `.10.5.6`: fix
-  `docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md` mode fragments and "both valid
-  shapes" framing, re-verify representative examples, then run the warranted book/docs gates.
+- next_action: from a clean repo, execute `.10.5.7`: fix
+  `docs/linkedspec-book/src/user-model/regex-in-spec.md` regex-on-`::` fragments while preserving
+  capture-indexing teaching, re-verify representative examples, then run the warranted book/docs gates.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
   enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.

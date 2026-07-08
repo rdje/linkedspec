@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.6 — fix rule mode and parse mode examples
+
+**Scope:** mdBook language-reference correction for rule-mode and parse-mode examples.
+
+**Change:** Reworked `user-model/rule-modes-and-parse-modes.md` so regex-owning mode examples use
+single-colon labels, `::` examples are framed as no-regex entry/dispatcher rules, and the old
+`Top:: /foo/` seek/consume snippets use a verified `Top::` + `Word:` wrapper.
+
+**Validation:** Representative `LinkedSpec::Get` probes match the documented outputs (`["foo","bar"]`,
+`["foo"]`, `[]`, `["foo"]`); remaining `::` labels are no-regex entry/dispatcher examples; `mdbook build
+docs/linkedspec-book` passes.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.5 — fix spec file paragraph examples
 
 **Scope:** mdBook language-reference correction plus a narrow Knowledge Map fact.

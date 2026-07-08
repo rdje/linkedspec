@@ -5,7 +5,7 @@ LinkedSpec rule execution has two independent axes:
 - the rule mode, which is written on the rule label and controls how that rule composes its body,
 - the parse mode, which is passed to parser construction and controls cursor discipline while the parser runs.
 
-Keep those two ideas separate. A rule label such as `Top::AND` says "compose this rule body as an ordered sequence." A parser option such as `parse_mode => 'consume'` says "do not skip forward before matching the next anchor." They answer different questions.
+Keep those two ideas separate. A rule label such as `Item:AND` says "compose this rule body as an ordered sequence." A parser option such as `parse_mode => 'consume'` says "do not skip forward before matching the next anchor." They answer different questions.
 
 ## Current rule-label surface
 
@@ -21,26 +21,21 @@ The entry-style form commonly used for top-level examples uses two colons:
 Top::
 ```
 
-The same mode suffixes can appear after either colon form. For example, these are both valid shapes:
+For runnable examples in this book, keep `::` as a no-regex entry or dispatcher rule and put regex-carrying rules behind it with the ordinary single-colon form:
 
 ```text
-Top::AND
+Top::
 Item:AND
 ```
 
-This is because `::` is only an **entry marker** — it designates the rule entered first.
-A top rule is otherwise an ordinary rule: it can carry any mode, carry a regex, and
-recurse, exactly like a body rule (see
-[.spec Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#the-top--rule-is-an-ordinary-rule-entered-first)).
-The common "no mode and no regex on the top rule" two-rule shape is recommended idiom for
-stream-of-records parsing, not a restriction. Recursion through any rule — including the
-top rule — must consume input before it recurses; a non-progressing (no-consume) cycle is
-cut so the parser terminates (see the [formal grammar §5.4](../appendix/formal-grammar.md)).
+Here `Top::` is the no-regex entry rule, and `Item:AND` is the regex-carrying ordered sequence. A no-regex entry or dispatcher can still carry a mode suffix when it composes child parser calls, as shown later in this chapter.
+
+Mechanically, `::` is an **entry marker**: it designates the rule entered first. The Perl reference engine treats that rule as an ordinary rule at runtime (see [.spec Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#the-top--rule-is-an-ordinary-rule-entered-first)), but new teaching examples use the clearer two-rule shape: no regex on `Top::`; regex slots on ordinary `:` rules. Recursion through any rule — including the top rule — must consume input before it recurses; a non-progressing (no-consume) cycle is cut so the parser terminates (see the [formal grammar §5.4](../appendix/formal-grammar.md)).
 
 The current public suffix surface is intentionally small and exact:
 
 - `Rule:` is the historical baseline repeated-alternative rule shape.
-- `Rule::` is the same entry-style spelling commonly used for top-level rules.
+- `Rule::` is the entry-style spelling commonly used for no-regex top-level dispatcher rules.
 - `Rule:&` is ordered sequence.
 - `Rule:AND` is the worded ordered-sequence spelling.
 - `Rule:AND+` is open-ended repeated ordered sequence with an implicit lower bound of one.
@@ -94,11 +89,17 @@ Rule:OR{1,}
 
 That is a conceptual authoring model, not a promise that every low-level emitted handler path is textually identical. The important practical point is that bare `Rule:` is not a single-choice wrapper and is not an implicit ordered sequence. If you want those meanings, say them explicitly.
 
-The entry-style top-level form can use the same baseline model:
+For a top-level stream parser, wrap a regex-bearing baseline matcher with a no-regex entry rule:
 
 ```text
 Top::
- /[A-Za-z_]\w*/ -> Top
+ -> Token .push
+LX { return(copy(array(Top))) }
+
+Token:
+ /[A-Za-z_]\w*/ I.return(entry_text())
+ /"[^"]*"/ I.return(entry_text())
+ /'[^']*'/ I.return(entry_text())
 ```
 
 Use bare labels when reading older specs or when the historical repeated-choice style is already clear in local context. Prefer explicit `OR`, `OR+`, or `OR{...}` when teaching, documenting, or writing a new spec whose repetition intent should be obvious from the label.
@@ -108,7 +109,7 @@ Use bare labels when reading older specs or when the historical repeated-choice 
 `:&` means ordered sequence:
 
 ```text
-Pair::&
+Pair:&
  /[A-Za-z_]\w*/ -> Pair[0]
  /\s*=\s*/
  /[^,\n]+/ -> Pair[2]
@@ -119,7 +120,7 @@ The rule succeeds when the parts fit in order. In this sketch the name must appe
 `:AND` is the worded spelling for the same ordered-sequence contract:
 
 ```text
-Pair::AND
+Pair:AND
  /[A-Za-z_]\w*/ -> Pair[0]
  /\s*=\s*/
  /[^,\n]+/ -> Pair[2]
@@ -127,14 +128,12 @@ Pair::AND
 
 Use `:AND` when readability matters more than compactness. It is especially useful in public examples, wrapper rules, and specs where a reader should not have to remember that `&` means ordered sequence.
 
-A helper-style action can still shape the final result in the usual way. Note that this
-`Pair` is a top (`::`) rule matching its **own** regex slots, so nothing *entered* it:
-read each slot's match with the `match_*` family from a **post-match edge action**, not
-the `entry_*` family (which is for a match that entered a dispatched rule, and is empty
-here):
+A helper-style action can still shape the final result in the usual way. Because this
+single-colon `Pair:AND` rule owns its regex slots, post-match edge actions read each
+slot's match with the `match_*` family:
 
 ```text
-Pair::AND
+Pair:AND
  I { pair = {} }
  /([A-Za-z_]\w*)\s*=\s*/ -> Pair[0] {
    set(hash(pair), set_key(hash(pair), "name", match_group(0)));
@@ -144,11 +143,11 @@ Pair::AND
  }
 ```
 
-On input `name = value` (parse mode `consume`) this returns
-`{ "name": "name", "value": "value" }`. The rule mode controls the ordered matching; the
-action code controls what value the rule returns. (The `\s*=\s*` separator is folded into
-the name slot: a bare edge-less regex slot in an `AND` rule is a positional anchor that is
-not separately captured, so attach the separator to a slot that owns an edge.)
+Embed this matcher behind a no-regex `Top::` wrapper when it is part of a stream parser.
+The rule mode controls the ordered matching; the action code controls what value the rule
+returns. (The `\s*=\s*` separator is folded into the name slot: a bare edge-less regex slot
+in an `AND` rule is a positional anchor that is not separately captured, so attach the
+separator to a slot that owns an edge.)
 
 ## Single choice: `:|`
 
@@ -179,7 +178,7 @@ Use `:|` when exactly one alternative should provide the rule's result. Do not u
 `:+` is compact one-or-more repeated choice:
 
 ```text
-NameRun::+
+NameRun:+
  /[A-Za-z_]\w*/ -> NameRun
 ```
 
@@ -211,7 +210,7 @@ These sigils are concise and useful in established specs. For new explanatory ma
 `:OR` is explicit open-ended repeated choice with an implicit lower bound of one:
 
 ```text
-TokenStream::OR
+TokenStream:OR
  /[A-Za-z_]\w*/ -> TokenStream
  /"(?:[^"\\]|\\.)*"/ -> TokenStream
  /'(?:[^'\\]|\\.)*'/ -> TokenStream
@@ -222,7 +221,7 @@ On each iteration, the rule tries the alternatives and collects one successful h
 `:OR+` is the shorthand spelling for the same open-ended repeated-choice family:
 
 ```text
-TokenStream::OR+
+TokenStream:OR+
  /[A-Za-z_]\w*/ -> TokenStream
  /"(?:[^"\\]|\\.)*"/ -> TokenStream
  /'(?:[^'\\]|\\.)*'/ -> TokenStream
@@ -233,14 +232,14 @@ Use `:OR+` when you want the plus sign visible in the label. Use `:OR` when the 
 `OR{N}` requires exactly `N` successful choice iterations:
 
 ```text
-HexByte::OR{2}
+HexByte:OR{2}
  /[0-9A-Fa-f]/ -> HexByte
 ```
 
 `OR{N,M}` requires at least `N` and at most `M` successful choice iterations:
 
 ```text
-FlagRun::OR{1,3}
+FlagRun:OR{1,3}
  /--debug/ -> FlagRun
  /--trace/ -> FlagRun
  /--strict/ -> FlagRun
@@ -249,14 +248,14 @@ FlagRun::OR{1,3}
 `OR{N,}` requires at least `N` successful choice iterations and then remains open-ended:
 
 ```text
-TwoOrMoreNames::OR{2,}
+TwoOrMoreNames:OR{2,}
  /[A-Za-z_]\w*/ -> TwoOrMoreNames
 ```
 
 `OR{,M}` allows zero through `M` successful choice iterations:
 
 ```text
-OptionalPrefixes::OR{,2}
+OptionalPrefixes:OR{,2}
  /\+/ -> OptionalPrefixes
  /-/ -> OptionalPrefixes
 ```
@@ -275,7 +274,7 @@ Invalid bounds such as `OR{,}` or descending ranges such as `OR{3,2}` should be 
 `:AND+` is open-ended repeated ordered sequence with an implicit lower bound of one:
 
 ```text
-AssignmentStream::AND+
+AssignmentStream:AND+
  /[A-Za-z_]\w*/ -> AssignmentStream[0]
  /\s*=\s*/
  /[^,\n]+/ -> AssignmentStream[2]
@@ -286,7 +285,7 @@ The whole ordered sequence repeats. In this example, one iteration is `name`, th
 `AND{N}` requires exactly `N` complete sequence iterations:
 
 ```text
-TwoPairs::AND{2}
+TwoPairs:AND{2}
  /[A-Za-z_]\w*/ -> TwoPairs[0]
  /\s*=\s*/
  /[^,\n]+/ -> TwoPairs[2]
@@ -295,7 +294,7 @@ TwoPairs::AND{2}
 `AND{N,M}` requires at least `N` and at most `M` complete sequence iterations:
 
 ```text
-TwoToFourPairs::AND{2,4}
+TwoToFourPairs:AND{2,4}
  /[A-Za-z_]\w*/ -> TwoToFourPairs[0]
  /\s*=\s*/
  /[^,\n]+/ -> TwoToFourPairs[2]
@@ -304,7 +303,7 @@ TwoToFourPairs::AND{2,4}
 `AND{N,}` requires at least `N` complete sequence iterations and then remains open-ended:
 
 ```text
-TwoOrMorePairs::AND{2,}
+TwoOrMorePairs:AND{2,}
  /[A-Za-z_]\w*/ -> TwoOrMorePairs[0]
  /\s*=\s*/
  /[^,\n]+/ -> TwoOrMorePairs[2]
@@ -313,7 +312,7 @@ TwoOrMorePairs::AND{2,}
 `AND{,M}` allows zero through `M` complete sequence iterations:
 
 ```text
-UpToTwoPairs::AND{,2}
+UpToTwoPairs:AND{,2}
  /[A-Za-z_]\w*/ -> UpToTwoPairs[0]
  /\s*=\s*/
  /[^,\n]+/ -> UpToTwoPairs[2]
@@ -400,7 +399,7 @@ For a deeper walkthrough of `=>`, post-call processing, edge-family selection, a
 Do not mix action edges and blind calls in the same rule body:
 
 ```text
-BadRule::
+BadRule:
  /.../ -> ChildA
  => ChildB
 ```
@@ -443,7 +442,11 @@ Example:
 
 ```text
 Top::
- /foo/ -> Top { return(entry_text()) }
+ -> Word .push
+LX { return(copy(array(Top))) }
+
+Word:
+ /foo/ I.return(entry_text())
 ```
 
 With `seek`, this input can still match:
@@ -452,7 +455,7 @@ With `seek`, this input can still match:
 junk foo
 ```
 
-The parser is allowed to move forward until it finds `foo`.
+The parser is allowed to move forward until it finds `foo`; this wrapper returns `["foo"]`.
 
 ### `consume`
 
@@ -462,7 +465,11 @@ The same spec:
 
 ```text
 Top::
- /foo/ -> Top { return(entry_text()) }
+ -> Word .push
+LX { return(copy(array(Top))) }
+
+Word:
+ /foo/ I.return(entry_text())
 ```
 
 rejects this input under `consume`:
@@ -471,13 +478,15 @@ rejects this input under `consume`:
 junk foo
 ```
 
-because the current cursor is at `j`, not at `f`.
+because the current cursor is at `j`, not at `f`; this wrapper returns no matches (`[]`).
 
 This input is acceptable under both modes:
 
 ```text
 foo
 ```
+
+For that input, the wrapper returns `["foo"]` under either mode.
 
 Use `consume` when the spec should behave more like a conventional parser step and reject leading junk before the next anchor. Use `seek` when the spec should act more like an extraction grammar over a larger body of text.
 
