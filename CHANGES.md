@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — DOCTRINE-ENFORCEMENT-ADOPT.3.3 — close task-acceptance no-drift
+
+**Scope:** Documentation, Knowledge Map, task-tree, and live-resume closeout for the shipped
+`TASK-ACCEPTANCE` evidence gate.
+
+**Change:** Closed `DOCTRINE-ENFORCEMENT-ADOPT` after reconciling the doctrine standard, `TOOLBOX.md`, mdBook
+local-CI/task-tree ownership wording, ADR `0009`, the Knowledge fact card, central task-tree index, and live docs.
+The false-positive escape path is now explicit: inspect `git diff --cached --name-only`, unstage unrelated governed
+files, stage/update the owning task checklist, or split the work. The known limit is also explicit: the gate proves
+staged evidence shape and ownership, not truthfulness or historical completeness.
+
+**Validation:** No executable behavior changed. No-drift scans, Knowledge Map regeneration, doctrine driver,
+memory architecture, task-tree metadata, mdBook build, and whitespace checks pass.
+
 ## 2026-07-08 — DOCTRINE-ENFORCEMENT-ADOPT.3.2 — implement task-acceptance evidence gate
 
 **Scope:** Doctrine tooling, local gate registration, and documentation sync for staged task-acceptance evidence.

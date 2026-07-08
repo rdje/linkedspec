@@ -244,6 +244,12 @@ invariant, `docs/decisions/0002`) re-executes the real engine, so cited results 
 re-verified. `TASK-ACCEPTANCE` is intentionally a staged evidence-shape check, not a hook-time
 executor for arbitrary Markdown commands.
 
+If `TASK-ACCEPTANCE` fires unexpectedly, inspect the exact staged set with
+`git diff --cached --name-only`. The valid exits are to unstage unrelated governed files,
+stage/update the owning task-tree checklist, or split the work into a leaf that can carry honest
+evidence. Do not satisfy the gate with a dummy checklist: the script can only prove the staged
+evidence shape, while focused validation and `tools/run_ci_local.sh` remain the truth test.
+
 To add a doctrine here: write `scripts/check_<id>.sh` (§4 contract), add one line to the driver's
 `DOCTRINES` array, and add a row above. The driver's meta-check fails if the script is missing.
 

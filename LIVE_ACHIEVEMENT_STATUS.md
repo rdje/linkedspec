@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **DOCTRINE-ENFORCEMENT-ADOPT.3.3 — close task-acceptance no-drift**
+  (DONE docs/KM/no-drift closeout; `DOCTRINE-ENFORCEMENT-ADOPT` CLOSED).
+
+  **Change:** Reconciled the shipped `TASK-ACCEPTANCE` boundary across `DOCTRINE_ENFORCEMENT.md`, `TOOLBOX.md`,
+  mdBook local-CI/task-tree ownership wording, ADR `0009`, Knowledge Map source facts, task-tree index, and live
+  docs.
+
+  **Boundary:** No executable behavior changed. The gate remains a staged evidence-shape check. The docs now spell
+  out the false-positive path (`git diff --cached --name-only`, then unstage, update the real owning task leaf, or
+  split the work) and the known limit (ownership/evidence shape, not truthfulness or historical completeness).
+
+  **Verification:** No-drift scans, Knowledge Map regeneration, doctrine driver, memory architecture, task-tree
+  metadata, mdBook build, and whitespace checks pass.
+
 - 2026-07-08: **DOCTRINE-ENFORCEMENT-ADOPT.3.2 — implement task-acceptance evidence gate**
   (DONE `TASK-ACCEPTANCE` staged evidence-shape gate; frontier `.3.3` closeout next).
 

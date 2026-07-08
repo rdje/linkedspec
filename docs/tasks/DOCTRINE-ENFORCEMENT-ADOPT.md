@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `DOCTRINE-ENFORCEMENT-ADOPT`
-- Status: `active` (created 2026-06-22)
+- Status: `done` (created 2026-06-22; closed 2026-07-08)
 - Roadmap lane: `Overall roadmap — durable architecture / doctrine enforcement (cross-project standard)`
 - Created: `2026-06-22`
-- Last updated: `2026-07-08` (`.3.2` **DONE** — `TASK-ACCEPTANCE` staged evidence gate implemented; frontier → `.3.3`)
+- Last updated: `2026-07-08` (`.3.3` **DONE** — docs/KM/no-drift closeout complete; tree closed)
 - Owner: repo-local workflow
 
 ## Goal
@@ -43,7 +43,7 @@ itself is `pgen/DOCTRINE_ENFORCEMENT.md` (the authoritative source we replay her
 
 ## Task Tree
 
-- ID: `DOCTRINE-ENFORCEMENT-ADOPT` · Status: `active` · Children: `.1`, `.2`, `.3`
+- ID: `DOCTRINE-ENFORCEMENT-ADOPT` · Status: `done` (closed 2026-07-08) · Children: `.1`, `.2`, `.3`
 - ID: `DOCTRINE-ENFORCEMENT-ADOPT.1` · Status: `done` (2026-06-22)
   Goal: Write `TOOLBOX.md` — LinkedSpec's **own** diagnostic/debug toolbox catalog + the task-acceptance
     checklist template + symptom→tool chooser + diagnosis protocols.
@@ -70,12 +70,12 @@ itself is `pgen/DOCTRINE_ENFORCEMENT.md` (the authoritative source we replay her
   Verification: `bash scripts/check_doctrines.sh` exit 0 (2/2 PASS); `bash -n` clean on pre-commit +
     run_ci_local; KM in sync; the commit itself exercised the rewired pre-commit hook (driver) green.
     Commit: (this commit, with `.1`)
-- ID: `DOCTRINE-ENFORCEMENT-ADOPT.3` · Status: `active` (split 2026-07-08; `.3.1` + `.3.2` done)
+- ID: `DOCTRINE-ENFORCEMENT-ADOPT.3` · Status: `done` (split and closed 2026-07-08)
   Goal: Add a LinkedSpec EVIDENCE/TASK-ACCEPTANCE doctrine — adapt `check_diagnosis_evidence.sh`
     (define LinkedSpec's "what counts as a code change" globs + the tool-output signature regexes from
     `TOOLBOX.md`) and register it so a code change's task leaf must carry a tool-backed WHY+WHERE +
     measured verification.
-  Acceptance: `pending`  ·  Verification: split into `.3.1`-`.3.3`  ·  Commit: `pending`
+  Acceptance: met  ·  Verification: `.3.1`-`.3.3` complete  ·  Commit: `.3.1`-`.3.3`
 - ID: `DOCTRINE-ENFORCEMENT-ADOPT.3.1` · Status: `done` (2026-07-08)
   Goal: Split/design the evidence gate before implementation so the hard-gate avoids false positives.
   Result: `.3` is split into a narrow staged sequence:
@@ -88,7 +88,7 @@ itself is `pgen/DOCTRINE_ENFORCEMENT.md` (the authoritative source we replay her
   Verification: task-tree split review; Knowledge Map search found no existing evidence-gate fact beyond ADR
     `0009` / this task; relevant enforcement owner paths read (`scripts/check_doctrines.sh`,
     `scripts/check_task_tree_metadata.sh`, `.githooks/pre-commit`, `tools/run_ci_local.sh`, `TOOLBOX.md`).
-  Commit: pending this slice.
+  Commit: `6c1d6258 DOCTRINE-ENFORCEMENT-ADOPT.3.1 - split evidence gate before code`.
 - ID: `DOCTRINE-ENFORCEMENT-ADOPT.3.2` · Status: `done` (2026-07-08)
   Goal: Implement and register `scripts/check_diagnosis_evidence.sh` as the `TASK-ACCEPTANCE` doctrine.
   Result: Added executable `scripts/check_diagnosis_evidence.sh`, registered `TASK-ACCEPTANCE` in
@@ -101,7 +101,7 @@ itself is `pgen/DOCTRINE_ENFORCEMENT.md` (the authoritative source we replay her
   Verification: `bash scripts/check_diagnosis_evidence.sh` (no staged governed changes); staged self-check with
     this `.3.2` commit content; `bash scripts/check_doctrines.sh`; `bash scripts/check_memory_architecture.sh`;
     `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book`; `git diff --check`.
-  Commit: pending this slice.
+  Commit: `135f7bbb DOCTRINE-ENFORCEMENT-ADOPT.3.2 - implement task acceptance evidence gate`.
 
 ### Acceptance Checklist — DOCTRINE-ENFORCEMENT-ADOPT.3.2
 - [x] **REPRODUCE / ISSUE** — `rg -n "TASK-ACCEPTANCE|check_diagnosis_evidence|Acceptance Checklist" scripts DOCTRINE_ENFORCEMENT.md TOOLBOX.md docs/tasks` showed the evidence gate was still planned/deferred or absent before this slice.
@@ -110,13 +110,20 @@ itself is `pgen/DOCTRINE_ENFORCEMENT.md` (the authoritative source we replay her
 - [x] **ADDRESSED (verified)** — `bash scripts/check_diagnosis_evidence.sh` passes for no staged governed paths and passes with this staged `.3.2` task checklist while `scripts/check_doctrines.sh` reports all registered doctrines PASS.
 - [x] **NO REGRESSION** — `bash scripts/check_doctrines.sh`, `bash scripts/check_memory_architecture.sh`, `bash scripts/check_task_tree_metadata.sh`, `mdbook build docs/linkedspec-book`, and `git diff --check` pass.
 - [x] **LOCKSTEP** — `DOCTRINE_ENFORCEMENT.md`, `TOOLBOX.md`, `docs/linkedspec-book/src/development/local-ci-and-regression.md`, ADR `0009`, `docs/knowledge/task-acceptance-evidence-gate-boundary.md`, this task tree, and live docs are updated together.
-- ID: `DOCTRINE-ENFORCEMENT-ADOPT.3.3` · Status: `pending`
+- ID: `DOCTRINE-ENFORCEMENT-ADOPT.3.3` · Status: `done` (2026-07-08)
   Goal: Close evidence-gate docs/no-drift after `.3.2`.
-  Acceptance: mdBook development workflow/local-CI wording, root live docs, task-tree index, Knowledge Map, and
-    any new fact card agree on the shipped `TASK-ACCEPTANCE` boundary; false-positive escape hatches and known
-    limits are explicit.
-  Verification: pending.
-  Commit: pending.
+  Result: Closed the evidence-gate no-drift pass. `DOCTRINE_ENFORCEMENT.md`, `TOOLBOX.md`, the mdBook local-CI
+    chapter, ADR `0009`, the Knowledge fact card, the task-tree index, and live resume docs now agree that
+    `TASK-ACCEPTANCE` is a staged evidence-shape gate. The false-positive path is explicit: inspect
+    `git diff --cached --name-only`, then unstage unrelated governed files, stage/update the owning task leaf, or
+    split the work. The known limit is also explicit: the check proves staged evidence shape/ownership, not
+    truthfulness or historical completeness.
+  Acceptance: met.
+  Verification: `rg -n "TASK-ACCEPTANCE|check_diagnosis_evidence|false-positive|git diff --cached --name-only"`
+    across root docs, mdBook, ADR, Knowledge, and this task tree; `knowledge-map/scripts/gen_knowledge_map.sh`;
+    `bash scripts/check_doctrines.sh`; `bash scripts/check_memory_architecture.sh`;
+    `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book`; `git diff --check`.
+  Commit: pending this slice.
 
 ## Current Frontier
 
@@ -126,7 +133,7 @@ itself is `pgen/DOCTRINE_ENFORCEMENT.md` (the authoritative source we replay her
 | — | `.2` | `done` 2026-06-22 | Enforcement kit landed: `DOCTRINE_ENFORCEMENT.md` + driver (`scripts/check_doctrines.sh`, 2/2 PASS) + pre-commit→driver + run_ci_local→driver + discovery + ADR `0009`. |
 | — | `.3.1` | `done` 2026-07-08 | Split/design completed; `.3` is now implementation/closeout children. |
 | — | `.3.2` | `done` 2026-07-08 | Implemented/registered the scope-aware staged `TASK-ACCEPTANCE` evidence checker. |
-| 1 | `.3.3` | `pending` | Close docs/KM/no-drift after the checker lands. |
+| — | `.3.3` | `done` 2026-07-08 | Closed docs/KM/no-drift after the checker landed; no current frontier remains. |
 
 ## Decisions
 
@@ -141,6 +148,9 @@ itself is `pgen/DOCTRINE_ENFORCEMENT.md` (the authoritative source we replay her
 - `2026-07-08`: Ship `.3.2` as a staged evidence-shape check. It governs `.github/workflows/`, `.githooks/`,
   `bin/`, `perl/`, `rust/`, `specs/`, `t/`, `tools/`, and `scripts/` paths, requires a staged task checklist,
   and deliberately leaves arbitrary command re-execution to focused validation and the local CI gate.
+- `2026-07-08`: Close `.3.3` by aligning root docs, mdBook, ADR, Knowledge, task-tree index, and live docs on
+  the shipped `TASK-ACCEPTANCE` boundary, including the false-positive escape path and known limits. No executable
+  behavior changed.
 
 ## Open Questions
 
@@ -160,14 +170,16 @@ itself is `pgen/DOCTRINE_ENFORCEMENT.md` (the authoritative source we replay her
 | `2026-06-22` | `.2` | `bash scripts/check_doctrines.sh` (exit 0, 2/2 PASS); `bash -n` on pre-commit + run_ci_local; `check_knowledge_map.sh` in sync; the commit's own pre-commit run (driver) | `done` — kit live; driver green; hooks valid |
 | `2026-07-08` | `.3.1` | Bootstrap/read review; Knowledge Map search for existing evidence-gate facts; task-tree split/design review; relevant enforcement owner paths read | `done` — `.3` split into `.3.2` implementation and `.3.3` closeout |
 | `2026-07-08` | `.3.2` | `bash scripts/check_diagnosis_evidence.sh`; staged self-check; `bash scripts/check_doctrines.sh`; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book`; `git diff --check` | `done` — `TASK-ACCEPTANCE` gate implemented and registered |
+| `2026-07-08` | `.3.3` | no-drift `rg` scans for `TASK-ACCEPTANCE`, `check_diagnosis_evidence`, false-positive/known-limit wording, and `git diff --cached --name-only`; Knowledge Map regeneration; doctrine, memory-architecture, task-tree metadata, mdBook, whitespace gates | `done` — docs/KM/no-drift closeout complete |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `.1`+`.2` | `DOCTRINE-ENFORCEMENT-ADOPT.1+.2 — adopt Doctrine-Enforcement architecture (driver+registry+gates) + LinkedSpec TOOLBOX.md` | this commit (landed atomically — mutual references) |
-| `.3.1` | `pending` | split/design slice |
-| `.3.2` | `pending` | implementation slice |
+| `.3.1` | `6c1d6258 DOCTRINE-ENFORCEMENT-ADOPT.3.1 - split evidence gate before code` | split/design slice |
+| `.3.2` | `135f7bbb DOCTRINE-ENFORCEMENT-ADOPT.3.2 - implement task acceptance evidence gate` | implementation slice |
+| `.3.3` | `pending` | docs/KM/no-drift closeout slice |
 
 ## Changelog
 
@@ -190,3 +202,5 @@ itself is `pgen/DOCTRINE_ENFORCEMENT.md` (the authoritative source we replay her
 - `2026-07-08`: `.3.2` **DONE**. Added and registered `scripts/check_diagnosis_evidence.sh` as the
   `TASK-ACCEPTANCE` doctrine. Synced the standard/toolbox/local gate/mdBook/ADR/KM/task/live docs with the
   shipped staged evidence-shape boundary. Frontier → `.3.3`.
+- `2026-07-08`: `.3.3` **DONE**. Closed docs/KM/no-drift for the shipped `TASK-ACCEPTANCE` gate and closed
+  `DOCTRINE-ENFORCEMENT-ADOPT`; no frontier remains in this tree.

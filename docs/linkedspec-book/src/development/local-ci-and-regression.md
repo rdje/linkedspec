@@ -121,6 +121,12 @@ For staged code/spec/test/tooling changes, the doctrine gate also requires the o
 task-acceptance checklist from `TOOLBOX.md`. The checklist records the reproduction/issue, root cause, fix,
 verification, no-regression evidence, and lockstep documentation state.
 
+If that check fires unexpectedly, inspect the staged set with `git diff --cached --name-only`. The intended
+fix is to unstage unrelated governed files, stage/update the owning task-tree checklist, or split the work into
+a smaller leaf. The check is intentionally narrow: it does not audit historical task files and does not re-run
+commands copied into Markdown. The actual proof remains the focused validation recorded in the task leaf plus
+the local CI gate.
+
 The task-tree workflow (`docs/TASK_TREE.md`) and per-phase tree files (`docs/tasks/<TREE>.md`) are the authoritative record of what leaf owns what work.
 
 Task-tree ownership improves code quality by ensuring every change traces back to a documented intent with acceptance criteria. It enables interruption-safe recovery from task-tree state, prevents orphan changes that drift from the roadmap, and gives `git log --grep` on leaf IDs a complete ordered history of every leaf.

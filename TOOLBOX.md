@@ -33,6 +33,11 @@ Copy into the owning `docs/tasks/<TREE>.md` leaf; each box backed by the cited L
 The mechanical hard-gate checks staged checklist presence and evidence signatures; the cited commands remain
 the reproducibility oracle run through focused validation and `tools/run_ci_local.sh`.
 
+If the gate fires on an unexpected commit, first run `git diff --cached --name-only`. Either unstage the
+unrelated governed files, stage/update the real owning task leaf, or split the work so one leaf owns one
+evidence trail. A placeholder checklist is not acceptable; the gate is deliberately a staged evidence-shape
+check, not proof that the cited commands were run.
+
 ```markdown
 ## Acceptance Checklist
 - [ ] **REPRODUCE / ISSUE** — <LinkedSpec tool command + symptom (test FAIL line / got-vs-expected / hang)>

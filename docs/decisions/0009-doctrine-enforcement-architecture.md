@@ -64,6 +64,11 @@ code/spec/test/tooling-style paths, requires a staged owning `docs/tasks/*.md` f
 commands cited in Markdown from a hook; the reproducibility oracle remains focused validation and the broader
 local CI gate.
 
+The closeout docs also record the false-positive escape path: inspect `git diff --cached --name-only`,
+then unstage unrelated governed files, stage/update the real owning task checklist, or split the slice.
+The known limit is explicit: the gate proves staged evidence shape and ownership, not truthfulness or
+historical completeness.
+
 ## Links
 
 - Tree: [`DOCTRINE-ENFORCEMENT-ADOPT`](../tasks/DOCTRINE-ENFORCEMENT-ADOPT.md)

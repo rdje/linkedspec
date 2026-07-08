@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (DOCTRINE-ENFORCEMENT-ADOPT.3.3 — task-acceptance no-drift closeout):
+  The doctrine-enforcement adoption tree is closed. The shipped `TASK-ACCEPTANCE` boundary is now consistent
+  across `DOCTRINE_ENFORCEMENT.md`, `TOOLBOX.md`, the mdBook local-CI chapter, ADR `0009`, the Knowledge fact card,
+  task-tree index, and live docs. The gate's operational escape path is deliberately mundane: inspect
+  `git diff --cached --name-only`, then unstage unrelated governed files, stage/update the real owning task
+  checklist, or split the work. Its known limit is explicit: it proves staged evidence shape and ownership only;
+  focused validation and `tools/run_ci_local.sh` remain the truth test.
+
 - 2026-07-08 (DOCTRINE-ENFORCEMENT-ADOPT.3.2 — task-acceptance evidence gate):
   `scripts/check_diagnosis_evidence.sh` is now the `TASK-ACCEPTANCE` doctrine. It uses `git diff --cached` and
   governs staged `.github/workflows/`, `.githooks/`, `bin/`, `perl/`, `rust/`, `specs/`, `t/`, `tools/`, and

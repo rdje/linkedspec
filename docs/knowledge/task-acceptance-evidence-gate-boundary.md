@@ -7,6 +7,8 @@ answers:
   - "which staged paths trigger the task acceptance evidence gate"
   - "why is the task acceptance evidence gate narrow"
   - "where is the diagnosis evidence checklist enforced"
+  - "what should I do if TASK-ACCEPTANCE fires unexpectedly"
+  - "what are the known limits of the task acceptance evidence gate"
 date: 2026-07-08
 status: current
 tags: [doctrine-enforcement, task-trees, evidence, tooling]
@@ -30,3 +32,10 @@ The check deliberately does not re-run arbitrary commands pasted into Markdown.
 That avoids false positives and hook-time command-execution risk. The actual
 reproducibility oracle remains the focused validation commands recorded in the
 task leaf plus the broader local gate (`tools/run_ci_local.sh`).
+
+If the gate fires unexpectedly, inspect `git diff --cached --name-only`. Resolve
+the mismatch by unstaging unrelated governed files, staging/updating the real
+owning task-tree checklist, or splitting the work into a smaller leaf with its
+own evidence trail. The known limit is deliberate: the check proves staged
+evidence shape and ownership, not truthfulness, historical completeness, or that
+the cited commands have been re-run.

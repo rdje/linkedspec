@@ -18,17 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DOCTRINE-ENFORCEMENT-ADOPT.3.2` — `TASK-ACCEPTANCE` staged evidence-shape gate
-  implemented and registered.
-- prior_leaf: `DOCTRINE-ENFORCEMENT-ADOPT.3.1` — evidence/task-acceptance hard-gate split/design completed.
+- latest_completed_leaf: `DOCTRINE-ENFORCEMENT-ADOPT.3.3` — task-acceptance docs/KM/no-drift closeout; tree
+  closed.
+- prior_leaf: `DOCTRINE-ENFORCEMENT-ADOPT.3.2` — `TASK-ACCEPTANCE` staged evidence-shape gate implemented and
+  registered.
 - latest_commit: HEAD containing this pointer should be
-  `DOCTRINE-ENFORCEMENT-ADOPT.3.2 - implement task acceptance evidence gate`; parent before this slice is
-  `6c1d6258 DOCTRINE-ENFORCEMENT-ADOPT.3.1 - split evidence gate before code`.
+  `DOCTRINE-ENFORCEMENT-ADOPT.3.3 - close task acceptance no-drift`; parent before this slice is
+  `135f7bbb DOCTRINE-ENFORCEMENT-ADOPT.3.2 - implement task acceptance evidence gate`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DOCTRINE-ENFORCEMENT-ADOPT` → frontier leaf `DOCTRINE-ENFORCEMENT-ADOPT.3.3` (`pending`).
-- next_action: close docs/KM/no-drift for the shipped `TASK-ACCEPTANCE` gate, then reconcile `.3`/parent status
-  if no further evidence-gate leaves remain.
+- active_work_unit: no non-paused active frontier after `DOCTRINE-ENFORCEMENT-ADOPT` closes; `SPEC-LANG-REFERENCE`
+  remains paused in the index.
+- next_action: from a clean repo, pick or split the next roadmap-owned PNT leaf before edits; only resume the paused
+  `SPEC-LANG-REFERENCE` scorch if directed or folded into a new roadmap/book-sweep owner.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
   enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.
