@@ -53,7 +53,7 @@ Resolves and dispatches an autoloaded plugin name. Used by the plugin autoloader
 
 Perl `AUTOLOAD` handler that catches unresolved method calls on `LinkedSpec` and attempts to route them through registered plugins. This is legacy compatibility behavior.
 
-**Status note:** All seven legacy transition-surface methods (`run_plugin`, `get_plugin`, `dispatch_plugin_autoload_name`, `AUTOLOAD`, `register_plugin`, `register_plugins`, `clear_registered_plugins`) are **DEPRECATED** as of the PLUGIN-MODERNIZATION tree (completed 2026-05-17). They remain on the public facade while the remaining `.plg` files (down from ~36 to 19 after modernization) still use the plugin infrastructure, but new code must use canonical package owners directly. The retirement path is documented in PLUGIN-MODERNIZATION.5: migrate `.plg` actions to package owners, retire `PPlugin`, reduce/delete `PluginBridge`, remove deprecated facade methods, then migrate `FSMGen::AUTOLOAD`.
+**Status note:** All seven legacy transition-surface methods (`run_plugin`, `get_plugin`, `dispatch_plugin_autoload_name`, `AUTOLOAD`, `register_plugin`, `register_plugins`, `clear_registered_plugins`) are **DEPRECATED** as of the PLUGIN-MODERNIZATION tree (completed 2026-05-17). The root `plugin/` corpus is gone, and the 13 surviving legacy `.plg` files now live under `noncore/plugin/`; they are parked outside the active backend-neutral product tree. These facade methods remain only as Perl-reference compatibility shims, and new code must use canonical package owners directly. The retirement path is to migrate or delete the remaining noncore `.plg` actions, retire `PPlugin`, reduce/delete `PluginBridge`, and remove the deprecated facade methods.
 
 ## Relationship to the compile/runtime surface
 

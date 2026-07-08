@@ -4,14 +4,19 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-04`
-- `2026-07-04` refresh: RUST-PARITY follow-on closed. The Rust variant now has a green 88-fixture
+- Last refreshed: `2026-07-08`
+- `2026-07-08` refresh: `ROADMAP-DRIFT-RECONCILE.2` refreshed the dated status/count layer after
+  the terse-format and Rust-oracle follow-ons. The Rust variant now has a green 95-fixture
+  manifest-backed interpreter oracle with missing/stale fixture drift guards. The generated Rust-source path
+  emits a module with embedded `CompiledSpec`, validated generated-family plan, and `parse(input)` entry point;
+  it directly executes every currently supported structural family (`Default`, OR/AND acode, AND/OR bcode, and
+  the four explicit REP subfamilies) and is proven by an all-family compile/run matrix plus a curated
+  manifest-backed corpus subset. The full 95-fixture corpus remains the interpreter oracle gate;
+  generated-source corpus coverage is intentionally a subset until a future leaf broadens it. Current phase0 is
+  `PASS 1..1026` over 21 shipped `.spec` files with `PERL5LIB=` cleared.
+- `2026-07-04` refresh: RUST-PARITY follow-on closed. The Rust variant then had a green 88-fixture
   manifest-backed interpreter oracle with missing/stale fixture drift guards, and the generated Rust-source path
-  emits a module with embedded `CompiledSpec`, validated generated-family plan, and `parse(input)` entry point.
-  Generated source directly executes every currently supported structural family (`Default`, OR/AND acode,
-  AND/OR bcode, and the four explicit REP subfamilies) and is proven by an all-family compile/run matrix plus a
-  curated 8-case manifest-backed corpus subset. The full 88-fixture corpus remains the interpreter oracle gate;
-  generated-source corpus coverage is intentionally a subset until a future leaf broadens it.
+  emitted the first validated generated-family module/corpus proof.
 - `2026-06-14` refresh: COMPAT-ALIAS-RETIREMENT-V2.2 removed 5 legacy return helpers (return_a, return_m, return_ma, return_imatch, return_im) from all 7 implementation files. LIFECYCLE-FAMILY-AUDIT tree completed — all 7 lifecycle markers verified. ROADMAP-V2-TRACKER-SYNC tree completed — trackers synchronized. DOC-BOOK-SYNC tree active for documentation/book sync.
 - `2026-06-13` refresh: MEDIUM-IMPACT task tree substantially advanced. HandlerVariantEmitter now has structured HandlerIR (10 variant builders → IR hashrefs → dispatched emitter templates), a backend dispatch table (`%BACKEND_EMITTERS` with `perl` default), and a JSON/AST diagnostic backend (`_emit_handler_json` via `JSON::PP`). Validation.pm fuzzing harness (`t/phase0_validation_fuzz.t`) covers 5 surfaces with 168+ combinatorial cases across rule labels, edge scanning, and DSL syntax. BootstrapSpec.pm now has dual-path parse: `_build_spec_spec_parser()` lazily builds spec.spec parser via bootstrap seed and caches it; `run_bootstrap_parse()` runs spec.spec alongside bootstrap as a diagnostic side channel (bootstrap always primary; recursion guard active). Cross-check at 2/20 exact match (tablegrep, verilog); remaining 18 specs tracked in .3.4 parity gap. AND handler MIXED_ACTIONS conflict resolved (.3.4.4): RuleIR routes AND I-blocks to `and_icode_entries`, EmitContext processes them, HandlerVariantEmitter prepends assignment for result capture. Comment/blank-line skip in Runtime.pm wrapper. RuntimeContext reusable via populated scalar-slot contract.
 - `2026-06-04` refresh: removed two stale references that still presented the deleted `perl/LinkedSpec/ActionRewriter.pm` module as a live owner-dispatch participant. That module was deleted in Phase 1 (`PHASE1-PARSER-CORE-ISOLATION.2`, commit `4f8e0b6`); the focused helper-rewrite compatibility entrypoint now lives solely in `LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(...)`, reachable through the façade helper `LinkedSpec::call_spec_handler_subst(...)`.
@@ -161,7 +166,7 @@ This document is the current high-level technical reading of the project shape. 
 - Thin wrapper callback lookup now routes through that seam for `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, `ActionIR::Scanner`, and `RuleIR::EmitContext`'s ActionIR owner dispatch; direct callback probing is reserved for `OwnerDispatch` itself.
 - `LinkedSpec::OwnerDispatch` now also owns shared dependency-map assembly for active ActionIR owners and a mixed callback/value bundle builder for the parser-factory path, so owner-side dependency wiring is centralizing instead of drifting back into local registries.
 - `LinkedSpec::PluginBridge` now also spends that same owner-dispatch seam for its default compatibility plumbing: lazy `PPlugin` loading, registered-plugin lookup through `PluginRegistry`, successful `$@` preservation, and default callback-map assembly no longer require bridge-local eval/restore branches or a hand-built dependency hash.
-- The former Perl-only legacy domain-utility owners and the `.plg` plugin corpus are no longer part of the active `perl/` tree; two retirement passes resolved them, and `t/phase0_regression.t` is green (960/960) without any of them.
+- The former Perl-only legacy domain-utility owners and the `.plg` plugin corpus are no longer part of the active `perl/` tree; two retirement passes resolved them, and `t/phase0_regression.t` is green (`PASS 1..1026`) without any of them.
   - **Deleted** (`LEGACY-VHDL-RETIRE`, the Perl-only non-portable VHDL/RTL/FSM-generation subsystem with no Rust/Julia/Dart counterpart): `RTLUtils`, `FSMGen`, `VHDL::ConstantEval`, and the six `.plg` files that depended exclusively on them (`fsmgen`/`lte_digital_rf`/`mbist`/`msword`/`regtest`/`rtl`). The stale `generic_fake_memory_module.plg` / `wrapgen.plg` / `get_log2`->`ceil_log2` prose carried here described files already deleted earlier; it is gone with the subsystem.
   - **Relocated to `noncore/`** (`NONCORE-QUARANTINE`, proven unreachable from the `LinkedSpec.pm` union shipped-`specs/*.spec` closure): the remaining non-core domain owners — `HTTP::FileAccess`, `HTML::PathLinks`, `InteractivePrompt`, `Text::VariableSubstitution`, `MSOffice::Excel`, `QC::Flow`, `QC::Summary`, `QC::TclInterconn`, `Table::GenericFilter`, `Timing::SetupHold`, `Timing::StanBackend`, `Timing::StanOmap2430cBackend` (plus the flat domain `.pm`) — and the 13 surviving `.plg`, all `git mv`'d into `noncore/` with layout preserved (`noncore/README.md` is the parked-fate ledger). The root `plugin/` directory no longer exists; `perl/` is now core-only.
 - A fresh 2026-04-11 bootstrap pass confirmed that the recent compiler naming cleanup is now on the active facade/compiler path: `LinkedSpec.pm` exposes `build_compiled_rule_table(...)`, `Compiler.pm` / `CompilerState.pm` speak in terms of compiled-spec / compiled dependency-regex / compiled-descriptor state, and the former bootstrap-local `spec_descr` / `gdata` vocabulary has now been renamed to rule-descriptor / dispatch-state terminology.
@@ -181,7 +186,7 @@ This document is the current high-level technical reading of the project shape. 
 - `Compiler.pm` now also has one explicit internal compiled-spec state model, so descriptor assembly no longer treats loose parallel compiled-rule-table / `build_dependency_regex_map` hashes as its own source of truth.
 - Dynamic plugin loading is still present in the public facade, but current project direction treats it as legacy-removal territory rather than a feature family to preserve.
 - The Rust variant's production path is still an interpreter over `CompiledSpec`/`CompiledRule`, but it is now
-  parity-tested through a checked-in 88-fixture oracle corpus generated from the Perl reference and guarded against
+  parity-tested through a checked-in 95-fixture oracle corpus generated from the Perl reference and guarded against
   manifest drift.
 - The Rust generated-source path is no longer just a scaffold: `linkedspec_runtime::source_emitter` emits
   compilable Rust modules with a generated family plan, and the plan-aware executor directly handles every current

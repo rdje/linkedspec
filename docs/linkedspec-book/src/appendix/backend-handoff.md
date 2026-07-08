@@ -333,7 +333,7 @@ It provides:
   brace-less forms, statementful/caller-mutating functions, recursion support,
   closures/lambdas/currying, and namespaces remain deferred.
 - `t/phase0_regression.t` — comprehensive regression tests.
-- Phase 0 baseline showing all 20 shipped specs compile at `language_agnostic_ready_ratio == 1.0000`.
+- Phase 0 baseline showing all 21 shipped specs compile at `language_agnostic_ready_ratio == 1.0000`.
 
 ## What You Must Build
 

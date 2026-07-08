@@ -67,7 +67,6 @@ The local gate treats these as CI inputs:
 - `.github/workflows`
 - `tools`
 - `specs`
-- `plugin`
 - `conf`
 - `tablescript`
 - `ebnf`
@@ -75,6 +74,9 @@ The local gate treats these as CI inputs:
 - `t`
 
 Untracked files in those areas fail the gate.
+
+The former root `plugin/` corpus is intentionally not a CI input area. Its surviving `.plg` files were relocated to
+`noncore/plugin/`, outside the core local gate.
 
 That rule is deliberate. A local untracked file in `specs/`, `perl/`, or a corpus directory can make tests pass locally while CI fails or, worse, can hide a missing fixture. The gate forces those inputs to be tracked and reviewable.
 
@@ -136,7 +138,8 @@ The test file includes several kinds of checks:
 - descriptor introspection checks for metadata and migration summaries,
 - source-level checks that shipped specs use preferred helper DSL forms,
 - smoke checks for selected shipped parsers,
-- corpus regression checks over `plugin/`, `conf/`, `tablescript/`, and `ebnf/`,
+- corpus regression checks over `conf/`, `tablescript/`, and `ebnf/`; the former root `plugin/` corpus was relocated
+  to `noncore/` and no longer participates in the core gate,
 - trace and runtime-context checks.
 
 ### Validation fuzzing harness

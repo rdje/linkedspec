@@ -868,7 +868,7 @@ tracking but not recommended for new `.spec` authoring:
 - `capture_slice_length()` — use `capture_slice_len()`
 - Bare `return`, bare `next`, bare `exit` — use `return_undef()`, `next()`, `exit_now(1)`
 
-All 20 shipped `.spec` files compile with zero compatibility-surface rules.
+All 21 shipped `.spec` files compile with zero compatibility-surface rules.
 New `.spec` files must maintain this invariant.
 
 ## 12. Complete Example

@@ -186,7 +186,7 @@ For the detailed rule-by-rule explanation of the shipped grammar-file parser, re
 
 ## `noncore/plugin/` (relocated legacy `.plg` corpus)
 
-The repository used to ship a top-level `plugin/` directory of legacy `.plg` files. As of the `NONCORE-QUARANTINE` and `LEGACY-VHDL-RETIRE` work it is **no longer part of the active product tree**: the root `plugin/` directory is gone, and `t/phase0_regression.t` is green (960/960) without it.
+The repository used to ship a top-level `plugin/` directory of legacy `.plg` files. As of the `NONCORE-QUARANTINE` and `LEGACY-VHDL-RETIRE` work it is **no longer part of the active product tree**: the root `plugin/` directory is gone, the 13 surviving `.plg` files live under `noncore/plugin/`, and the current core `t/phase0_regression.t` gate is green (`1..1026`) without the root plugin corpus.
 
 > **Perl reference implementation.** The `.plg` plugin system, the `PPlugin` runtime,
 > and the package-owner migration it once drove are part of the **Perl reference

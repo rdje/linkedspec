@@ -3,8 +3,7 @@
 ## Metadata
 
 - Tree ID: `ROADMAP-DRIFT-RECONCILE`
-- Status: `active` (`.1` done 2026-07-08 after user `PNT` reactivated the previously deferred
-  lane; `.2` is the current frontier)
+- Status: `done` (completed 2026-07-08)
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-23`
 - Last updated: `2026-07-08`
@@ -29,7 +28,8 @@ the stale long-form companion.
 ## Acceptance Criteria
 
 - `ROADMAP.md` no longer contradicts `ROADMAP_V2.md` / the task-tree on the items in `.1` below.
-- `ARCHITECTURE_STATE.md` dated header + status counts are refreshed to current (`.2`).
+- `ARCHITECTURE_STATE.md` dated header + status counts are refreshed to current (`.2`), with narrow
+  mdBook status lines kept in sync when the refresh exposes public-book drift.
 - `scripts/check_memory_architecture.sh` + the KM gate pass; `bash tools/run_ci_local.sh` EXIT 0
   (these are doc-only changes — phase0 unaffected, but the gate must stay green).
 - Each completed leaf is committed through `COMMIT.md` with the leaf id in the subject.
@@ -37,7 +37,7 @@ the stale long-form companion.
 ## Task Tree
 
 - ID: `ROADMAP-DRIFT-RECONCILE`
-  Status: `active`
+  Status: `done`
   Goal: Reconcile `ROADMAP.md` / `ARCHITECTURE_STATE.md` drift with the current state
   Children: `.0`, `.1`, `.2`
 
@@ -77,22 +77,28 @@ the stale long-form companion.
   Commit: `ROADMAP-DRIFT-RECONCILE.1 - reconcile long-form roadmap drift`
 
 - ID: `ROADMAP-DRIFT-RECONCILE.2`
-  Status: `pending`
+  Status: `done`
   Goal: Refresh `ARCHITECTURE_STATE.md` dated header + status counts to current
   Acceptance: `ARCHITECTURE_STATE.md` "Last refreshed" header + Status block reflect work since
     `2026-06-14` (the `LEGACY-VHDL-RETIRE` / `NONCORE-QUARANTINE` retirements, `TOP-RULE-AS-NORMAL`,
     `SPEC-FORMAT-TERSE` progress) and the current phase0 count (`PASS 1..1026`). The architectural
     *model* in the body is re-read and corrected only where a new deep reading changed the best
-    model (much of it is still accurate). Gate EXIT 0.
-  Verification: `pending`
-  Commit: `pending`
+    model (much of it is still accurate). Public mdBook status lines for shipped-spec count,
+    plugin/noncore boundary, and local-CI corpus lists are synchronized. Gate EXIT 0.
+  Verification: Done — 2026-07-08. `ARCHITECTURE_STATE.md` now has `Last refreshed: 2026-07-08`,
+    current 95-fixture Rust oracle status, current phase0 `PASS 1..1026`, and 21 shipped specs.
+    The mdBook status, architecture, local-CI, plugin-registry, shipped-corpora, backend handoff,
+    formal-grammar, and convention-audit pages no longer advertise current-state claims with 20
+    shipped specs, 19 remaining root `.plg`, or root `plugin/` corpus participation. Historical
+    June 2026 audit counts are explicitly labeled as historical. No parser/runtime behavior changed.
+  Commit: `ROADMAP-DRIFT-RECONCILE.2 - refresh architecture status counts`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `ROADMAP-DRIFT-RECONCILE.1` | `done` | Closed 2026-07-08 after user `PNT` reactivated the previously deferred lane. |
-| 2 | `ROADMAP-DRIFT-RECONCILE.2` | `pending` | Next PNT slice: refresh `ARCHITECTURE_STATE.md` header/status counts to current. |
+| 2 | `ROADMAP-DRIFT-RECONCILE.2` | `done` | Closed 2026-07-08; tree complete. |
 
 ## Decisions
 
@@ -109,11 +115,13 @@ the stale long-form companion.
 - `2026-07-08`: User `PNT` reactivated the previously deferred lane now that `SPEC-FORMAT-TERSE.14`
   is closed and no terse leaf is PNT-eligible. `.1` was selected first because the long-form roadmap
   had the broadest stale public-status surface; `.2` remains the next architecture-state refresh.
+- `2026-07-08`: `.2` also synchronized narrow mdBook status/count lines found during the architecture
+  refresh, because the book is a live public view and must not retain stale 20-spec/plugin-corpus
+  wording after the architecture status changes.
 
 ## Open Questions
 
-- None blocking. (Whether `ARCHITECTURE_STATE.md` also warrants a deeper body re-model is decided
-  inside `.2` when it is picked up.)
+- None.
 
 ## Blockers
 
@@ -125,6 +133,7 @@ the stale long-form companion.
 | --- | --- | --- | --- |
 | `2026-06-23` | `ROADMAP-DRIFT-RECONCILE.0` | Tree authored from `docs/tasks/TEMPLATE.md`; drift findings transcribed from the 2026-06-23 bootstrap audit; index row registered; doctrine driver (2/2) + KM gate green via pre-commit hook | Tracking-only — no code/book/roadmap content changed in this slice; phase0 965 unaffected |
 | `2026-07-08` | `ROADMAP-DRIFT-RECONCILE.1` | Filesystem/status checks for shipped specs, `noncore/plugin`, root `plugin/`, Perl core modules, Rust corpus manifest; focused stale-wording scans; `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash tools/run_ci_local.sh` | PASS — local CI includes phase0 `1..1026`; no parser/runtime/mdBook behavior changed |
+| `2026-07-08` | `ROADMAP-DRIFT-RECONCILE.2` | Focused architecture/book stale-count scans; mdBook build; `git diff --check`; memory/KM/doctrine checks; local CI gate before commit | PASS — mdBook builds and local CI includes phase0 `1..1026`; no parser/runtime behavior changed |
 
 ## Commit Log
 
@@ -132,6 +141,7 @@ the stale long-form companion.
 | --- | --- | --- |
 | `ROADMAP-DRIFT-RECONCILE.0` | `ROADMAP-DRIFT-RECONCILE.0 — create tree to own deferred ROADMAP.md/ARCHITECTURE_STATE.md drift (tracking-only)` | Tracking-only; leaves `.1`/`.2` deferred behind `SPEC-FORMAT-TERSE` per user 2026-06-23. |
 | `ROADMAP-DRIFT-RECONCILE.1` | `ROADMAP-DRIFT-RECONCILE.1 - reconcile long-form roadmap drift` | Long-form `ROADMAP.md` reconciliation; `.2` remains next. |
+| `ROADMAP-DRIFT-RECONCILE.2` | `ROADMAP-DRIFT-RECONCILE.2 - refresh architecture status counts` | Architecture/status-count and narrow mdBook sync; tree complete. |
 
 ## Changelog
 
@@ -140,3 +150,5 @@ the stale long-form companion.
   behind the active `SPEC-FORMAT-TERSE` track (user decision: "Defer — track as a new leaf").
 - `2026-07-08`: User `PNT` reactivated the lane; `.1` reconciled `ROADMAP.md` with current terse
   format, phase0, Rust oracle, noncore/plugin, and variant-model state. Frontier advances to `.2`.
+- `2026-07-08`: `.2` refreshed `ARCHITECTURE_STATE.md` status counts and synchronized narrow mdBook
+  status drift; `ROADMAP-DRIFT-RECONCILE` is complete.

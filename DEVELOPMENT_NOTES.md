@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (ROADMAP-DRIFT-RECONCILE.2 — architecture/book status-count refresh):
+  `ARCHITECTURE_STATE.md` now names the current status snapshot: 21 shipped specs, phase0 `PASS 1..1026`, a
+  95-fixture Rust interpreter oracle, generated Rust-source proof over current structural families plus a curated
+  subset, and root `plugin/` removed with 13 surviving `.plg` files parked under `noncore/plugin/`. The public
+  book's current-state status/count lines were swept at the same time; historical June 2026 audit counts stay in
+  place only where they are explicitly framed as historical. `ROADMAP-DRIFT-RECONCILE` is complete.
+
 - 2026-07-08 (ROADMAP-DRIFT-RECONCILE.1 — long-form roadmap drift):
   `ROADMAP.md` now reflects the current core status instead of the June drift snapshot: `SPEC-FORMAT-TERSE` /
   ADR `0007` is the current `.spec` evolution track, `declare(...)` is historical/retired authoring rather than

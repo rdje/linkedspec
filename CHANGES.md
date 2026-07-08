@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — ROADMAP-DRIFT-RECONCILE.2 — refresh architecture status counts
+
+**Scope:** Architecture-state and public-book status/count documentation sync.
+
+**Change:** Refreshed `ARCHITECTURE_STATE.md` to `2026-07-08` and aligned its status block with the current
+21-spec phase0 baseline (`1..1026`), 95-fixture Rust interpreter oracle, generated Rust-source subset boundary,
+and noncore/plugin state. Synchronized the narrow mdBook pages that still carried stale current-state counts or
+plugin-corpus wording, including project status, owner tree, local CI, plugin registry, shipped corpora, backend
+handoff, formal grammar, and one convention-audit note. Closed `ROADMAP-DRIFT-RECONCILE` in the task-tree index.
+
+**Boundary:** No parser/runtime behavior changed. Historical June 2026 audit counts remain historical where they
+are explicitly labeled that way.
+
+**Validation:** Focused stale-wording scans, mdBook build, `git diff --check`, memory/KM/doctrine checks, and
+`bash tools/run_ci_local.sh` pass (including phase0 `1..1026`).
+
 ## 2026-07-08 — ROADMAP-DRIFT-RECONCILE.1 — reconcile long-form roadmap drift
 
 **Scope:** Documentation-only long-form roadmap reconciliation.

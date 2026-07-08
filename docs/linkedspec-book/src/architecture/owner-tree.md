@@ -464,7 +464,7 @@ The public facade still exposes plugin-related entrypoints, all **DEPRECATED** a
 - `dispatch_plugin_autoload_name(...)` — DEPRECATED,
 - `AUTOLOAD` — DEPRECATED.
 
-Architecturally, this branch should be read as transition machinery. These methods remain on the facade while the remaining `.plg` files (down from ~36 to 19 after modernization) still use the plugin infrastructure. The retirement path: migrate `.plg` actions to package owners, retire `PPlugin`, reduce/delete `PluginBridge`, then remove these deprecated facade methods.
+Architecturally, this branch should be read as transition machinery. The root `plugin/` directory is gone: the Perl-only VHDL/RTL/FSM-generation `.plg` subset was deleted, and the 13 surviving legacy `.plg` files were relocated to `noncore/plugin/`. The retirement path is now to keep the facade stubs only as compatibility shims, retire `PPlugin`, reduce/delete `PluginBridge`, then remove these deprecated facade methods.
 
 `LinkedSpec::PluginRegistry` owns explicit in-memory plugin registration.
 

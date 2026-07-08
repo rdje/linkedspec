@@ -18,18 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `ROADMAP-DRIFT-RECONCILE.1` — docs-only reconciliation: long-form `ROADMAP.md` now reflects
-  current terse-format, phase0, Rust oracle, noncore/plugin, and variant-model state; frontier advances to `.2`.
-- prior_leaf: `RUST-README-DRIFT-SYNC.1` — docs-only correction: `rust/README.md` now names the current full Rust
-  interpreter oracle as 95 fixtures.
+- latest_completed_leaf: `ROADMAP-DRIFT-RECONCILE.2` — docs/book reconciliation: `ARCHITECTURE_STATE.md` and narrow
+  mdBook status lines now reflect current 21-spec phase0 `1..1026`, 95-fixture Rust oracle, and noncore/plugin
+  state; `ROADMAP-DRIFT-RECONCILE` is complete.
+- prior_leaf: `ROADMAP-DRIFT-RECONCILE.1` — docs-only reconciliation: long-form `ROADMAP.md` now reflects current
+  terse-format, phase0, Rust oracle, noncore/plugin, and variant-model state.
 - latest_commit: HEAD containing this pointer should be
-  `ROADMAP-DRIFT-RECONCILE.1 - reconcile long-form roadmap drift`; parent before this slice is
-  `a430c962 RUST-README-DRIFT-SYNC.1 - sync Rust README oracle count`.
+  `ROADMAP-DRIFT-RECONCILE.2 - refresh architecture status counts`; parent before this slice is
+  `70cb257a ROADMAP-DRIFT-RECONCILE.1 - reconcile long-form roadmap drift`.
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: none in-flight after `ROADMAP-DRIFT-RECONCILE.1`; repo should be handoff-ready after commit and
+- active_work_unit: none in-flight after `ROADMAP-DRIFT-RECONCILE.2`; repo should be handoff-ready after commit and
   `git_message_brief.txt` cleanup.
-- next_action: continue PNT with `ROADMAP-DRIFT-RECONCILE.2` — refresh `ARCHITECTURE_STATE.md` header/status counts
-  to current, then commit before considering any other lane.
+- next_action: review `docs/TASK_TREE.md` after commit. No current PNT-eligible leaf remains unless a deferred or
+  paused lane is explicitly reactivated (`SPEC-FORMAT-TERSE.10/.12/.13`, `DOCTRINE-ENFORCEMENT-ADOPT.3`, or
+  `SPEC-LANG-REFERENCE`).
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, mdBook source, core Perl/Rust implementation, shipped specs, tooling, and focused
   test harness inventory. Startup found isolated Rust README drift now owned by `RUST-README-DRIFT-SYNC`.
