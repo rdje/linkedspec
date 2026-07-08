@@ -3542,7 +3542,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    $receiver_expr = $inner_expr if defined($inner_expr) && length($inner_expr);
   }
 
-  if (grep { ref($_) eq 'HASH' && $_->{receiver_trailing_block_arg} } @$calls) {
+  if (grep { ref($_) eq 'HASH' && $_->{receiver_trailing_block_arg} && !_is_hash_tree_receiver_method($_->{method} // '') } @$calls) {
    _trace_method_decision(
     phase => 'lower_ast_fluent_chain_node',
     label => 'fluent_chain',
@@ -3658,6 +3658,51 @@ my $lower_numeric_array_reducer_source_expr = sub {
    }
    return 0
   };
+  my $lower_hash_tree_receiver_block_call = sub {
+   my ($method, $target_expr, $call) = @_;
+   return undef unless _is_hash_tree_receiver_method($method);
+   my $unsupported = sub {
+    return [_actionir_ast_unsupported_helper_expr($method), 'terminal']
+   };
+   return $unsupported->() unless ref($call) eq 'HASH' && $call->{receiver_trailing_block_arg};
+   my $args = $call->{args} || [];
+   return $unsupported->() unless ref($args) eq 'ARRAY';
+   my $expected_argc = $method eq 'reduce_leaves' ? 2 : 1;
+   return $unsupported->() unless @$args == $expected_argc;
+   my $block_node = $args->[-1];
+   return $unsupported->()
+    unless ref($block_node) eq 'HASH' && ($block_node->{kind} // '') eq 'block_value';
+   my $block_expr = $lower_ast_block_value_node->($block_node);
+   return $unsupported->() unless defined($block_expr) && length($block_expr);
+
+   my $lowered_target = _lower_method_value_expr($target_expr, $deps);
+   $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
+   return undef unless defined($lowered_target) && length($lowered_target);
+
+   my $leaf_bindings = 'my $value = $__ls_hash_tree_leaf_value; my @value = (defined($value) && ref($value) eq \'ARRAY\') ? @{$value} : (); my %value = (defined($value) && ref($value) eq \'HASH\') ? %{$value} : (); my $key = $__ls_hash_tree_leaf_key; my $path = [@{$__ls_hash_tree_leaf_path}]; my @path = @{$path}; my $depth = scalar(@{$__ls_hash_tree_leaf_path}); ';
+   my $leaf_block = 'do { '.$leaf_bindings.$block_expr.' }';
+   if ($method eq 'walk_leaves') {
+    my $expr = 'do { my $__ls_hash_tree_source = '.$lowered_target.'; if (!(defined($__ls_hash_tree_source) && ref($__ls_hash_tree_source) eq \'HASH\')) { undef } else { my $__ls_hash_tree_walk; $__ls_hash_tree_walk = sub { my ($__ls_hash_tree_node, $__ls_hash_tree_path) = @_; foreach my $__ls_hash_tree_leaf_key (sort keys %{$__ls_hash_tree_node}) { my $__ls_hash_tree_leaf_value = $__ls_hash_tree_node->{$__ls_hash_tree_leaf_key}; my @__ls_hash_tree_next_path = (@{$__ls_hash_tree_path}, $__ls_hash_tree_leaf_key); if (defined($__ls_hash_tree_leaf_value) && ref($__ls_hash_tree_leaf_value) eq \'HASH\') { $__ls_hash_tree_walk->($__ls_hash_tree_leaf_value, \@__ls_hash_tree_next_path); } else { my $__ls_hash_tree_leaf_path = \@__ls_hash_tree_next_path; my $__ls_hash_tree_ignored = '.$leaf_block.'; } } return undef }; $__ls_hash_tree_walk->($__ls_hash_tree_source, []); $__ls_hash_tree_source } }';
+    return [$expr, 'hash'];
+   }
+   if ($method eq 'map_leaves') {
+    my $expr = 'do { my $__ls_hash_tree_source = '.$lowered_target.'; if (!(defined($__ls_hash_tree_source) && ref($__ls_hash_tree_source) eq \'HASH\')) { undef } else { my $__ls_hash_tree_map; $__ls_hash_tree_map = sub { my ($__ls_hash_tree_node, $__ls_hash_tree_path) = @_; my %__ls_hash_tree_out; foreach my $__ls_hash_tree_leaf_key (sort keys %{$__ls_hash_tree_node}) { my $__ls_hash_tree_leaf_value = $__ls_hash_tree_node->{$__ls_hash_tree_leaf_key}; my @__ls_hash_tree_next_path = (@{$__ls_hash_tree_path}, $__ls_hash_tree_leaf_key); if (defined($__ls_hash_tree_leaf_value) && ref($__ls_hash_tree_leaf_value) eq \'HASH\') { $__ls_hash_tree_out{$__ls_hash_tree_leaf_key} = $__ls_hash_tree_map->($__ls_hash_tree_leaf_value, \@__ls_hash_tree_next_path); } else { my $__ls_hash_tree_leaf_path = \@__ls_hash_tree_next_path; $__ls_hash_tree_out{$__ls_hash_tree_leaf_key} = '.$leaf_block.'; } } return \%__ls_hash_tree_out }; $__ls_hash_tree_map->($__ls_hash_tree_source, []) } }';
+    return [$expr, 'hash'];
+   }
+   if ($method eq 'reduce_leaves') {
+    my $initial_expr = $lower_ast_value_node->($args->[0], { bare_scalar_read => 1 });
+    $initial_expr = $legacy_method_value_expr->($args->[0]{source})
+     unless defined($initial_expr) && length($initial_expr);
+    $initial_expr = $args->[0]{source}
+     if !(defined($initial_expr) && length($initial_expr)) && defined($args->[0]{source});
+    return $unsupported->() unless defined($initial_expr) && length($initial_expr);
+    $initial_expr = '+'.$initial_expr if $initial_expr =~ /^\s*\{/s;
+    my $reduce_block = 'do { my $acc = $__ls_hash_tree_acc; my @acc = (defined($acc) && ref($acc) eq \'ARRAY\') ? @{$acc} : (); my %acc = (defined($acc) && ref($acc) eq \'HASH\') ? %{$acc} : (); '.$leaf_bindings.$block_expr.' }';
+    my $expr = 'do { my $__ls_hash_tree_source = '.$lowered_target.'; if (!(defined($__ls_hash_tree_source) && ref($__ls_hash_tree_source) eq \'HASH\')) { undef } else { my $__ls_hash_tree_acc = '.$initial_expr.'; my $__ls_hash_tree_reduce; $__ls_hash_tree_reduce = sub { my ($__ls_hash_tree_node, $__ls_hash_tree_path) = @_; foreach my $__ls_hash_tree_leaf_key (sort keys %{$__ls_hash_tree_node}) { my $__ls_hash_tree_leaf_value = $__ls_hash_tree_node->{$__ls_hash_tree_leaf_key}; my @__ls_hash_tree_next_path = (@{$__ls_hash_tree_path}, $__ls_hash_tree_leaf_key); if (defined($__ls_hash_tree_leaf_value) && ref($__ls_hash_tree_leaf_value) eq \'HASH\') { $__ls_hash_tree_reduce->($__ls_hash_tree_leaf_value, \@__ls_hash_tree_next_path); } else { my $__ls_hash_tree_leaf_path = \@__ls_hash_tree_next_path; $__ls_hash_tree_acc = '.$reduce_block.'; } } return undef }; $__ls_hash_tree_reduce->($__ls_hash_tree_source, []); $__ls_hash_tree_acc } }';
+    return [$expr, 'terminal'];
+   }
+   return undef
+  };
 
   my $first_method = $calls->[0]{method} // '';
   if (_is_hash_receiver_value_chain_method($first_method)
@@ -3670,9 +3715,12 @@ my $lower_numeric_array_reducer_source_expr = sub {
     context => { first_method => $first_method, steps => scalar(@$calls) },
    );
    my $current_expr = $receiver_expr;
-   $current_expr = 'hash('.$current_expr.')'
-    if ($receiver->{kind} // '') eq 'variable'
-    && $current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
+   if (($receiver->{kind} // '') eq 'variable'
+    && $current_expr =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
+    my $receiver_kind = $remembered_bare_symbol_kind->($current_expr);
+    $current_expr = 'hash('.$current_expr.')'
+     unless _is_hash_tree_receiver_method($first_method) && (($receiver_kind // '') eq 'scalar');
+   }
    my $current_family = 'hash';
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
@@ -3685,7 +3733,11 @@ my $lower_numeric_array_reducer_source_expr = sub {
      my $return_family = _hash_receiver_value_chain_return_family($method);
      return undef unless defined($return_family);
 
-     if ($method eq 'hash_copy' || $method eq 'copy') {
+     if (_is_hash_tree_receiver_method($method)) {
+      my $applied = $lower_hash_tree_receiver_block_call->($method, $current_expr, $call);
+      return undef unless ref($applied) eq 'ARRAY';
+      ($current_expr, $current_family) = @$applied;
+     } elsif ($method eq 'hash_copy' || $method eq 'copy') {
       return undef unless @$arg_exprs == 0;
       $current_expr = 'copy('.$current_expr.')';
      } elsif ($method eq 'flat_hash') {
@@ -3695,8 +3747,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
       $current_expr = $method.'('.join(', ', ($current_expr, @$arg_exprs)).')';
      }
 
-     return undef if $return_family eq 'terminal' && !$is_last;
-     $current_family = $return_family;
+     return undef if $current_family eq 'terminal' && !$is_last;
+     $current_family = $return_family unless _is_hash_tree_receiver_method($method);
      next;
     }
 
@@ -5958,15 +6010,21 @@ sub _is_array_receiver_value_chain_method {
 sub _hash_receiver_value_chain_return_family {
  my ($method) = @_;
  return undef unless defined $method;
- return 'hash' if $method =~ /^(?:hash_copy|copy|merge_hash|set_key|rename_key|drop_keys|pick_keys|flat_hash)$/o;
+ return 'hash' if $method =~ /^(?:hash_copy|copy|merge_hash|set_key|rename_key|drop_keys|pick_keys|flat_hash|walk_leaves|map_leaves)$/o;
  return 'array' if $method =~ /^(?:sorted_keys|sorted_values)$/o;
- return 'terminal' if $method =~ /^(?:count_keys|has_key)$/o;
+ return 'terminal' if $method =~ /^(?:count_keys|has_key|reduce_leaves)$/o;
  return undef
 }
 
 sub _is_hash_receiver_value_chain_method {
  my ($method) = @_;
  return defined(_hash_receiver_value_chain_return_family($method)) ? 1 : 0
+}
+
+sub _is_hash_tree_receiver_method {
+ my ($method) = @_;
+ return 0 unless defined $method;
+ return $method =~ /^(?:walk_leaves|map_leaves|reduce_leaves)$/o ? 1 : 0
 }
 
 sub _string_receiver_value_chain_return_family {

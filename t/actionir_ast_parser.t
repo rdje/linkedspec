@@ -115,6 +115,24 @@ subtest 'trailing block call arguments' => sub {
     is(scalar(@{$receiver->{calls}[0]{args}}), 1, 'receiver .with() carries only the trailing block argument');
     is($receiver->{calls}[0]{args}[0]{kind}, 'block_value', 'receiver .with() block is the final argument');
 
+    my $hash_tree = parse_expr('meta.map_leaves() { return(cat(path.join_values("."), "=", value)) }.count_keys()');
+    is($hash_tree->{kind}, 'fluent_chain', 'hash-tree receiver trailing block parses as a fluent chain');
+    is_deeply([map { $_->{method} } @{$hash_tree->{calls}}], ['map_leaves', 'count_keys'],
+        'hash-tree receiver trailing block preserves later fluent calls');
+    ok($hash_tree->{calls}[0]{receiver_trailing_block_arg},
+        'hash-tree receiver trailing block segment is explicitly flagged');
+    is(scalar(@{$hash_tree->{calls}[0]{args}}), 1,
+        'map_leaves() carries only the trailing block argument');
+    is($hash_tree->{calls}[0]{args}[0]{kind}, 'block_value',
+        'map_leaves() block is the final argument');
+
+    my $reducer = parse_expr('meta.reduce_leaves("") { return(cat(acc,value)) }');
+    ok($reducer->{calls}[0]{receiver_trailing_block_arg}, 'reduce_leaves(...) trailing block is flagged');
+    is(scalar(@{$reducer->{calls}[0]{args}}), 2,
+        'reduce_leaves(initial) carries initial value plus block argument');
+    is($reducer->{calls}[0]{args}[1]{kind}, 'block_value',
+        'reduce_leaves block is the final argument');
+
     my $unknown = parse_expr('unknown("x") { return(value) }');
     ok($unknown->{trailing_block_arg}, 'unknown trailing-block callees still parse for lowering diagnostics');
 };

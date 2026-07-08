@@ -6,14 +6,15 @@ This document is the current high-level technical reading of the project shape. 
 ## Status
 - Last refreshed: `2026-07-08`
 - `2026-07-08` refresh: `ROADMAP-DRIFT-RECONCILE.2` refreshed the dated status/count layer after
-  the terse-format and Rust-oracle follow-ons. The Rust variant now has a green 95-fixture
+  the terse-format and Rust-oracle follow-ons; `SPEC-FORMAT-TERSE.12.2` later raised the phase0 lock count with
+  the Perl hash-tree traversal regression. The Rust variant now has a green 95-fixture
   manifest-backed interpreter oracle with missing/stale fixture drift guards. The generated Rust-source path
   emits a module with embedded `CompiledSpec`, validated generated-family plan, and `parse(input)` entry point;
   it directly executes every currently supported structural family (`Default`, OR/AND acode, AND/OR bcode, and
   the four explicit REP subfamilies) and is proven by an all-family compile/run matrix plus a curated
   manifest-backed corpus subset. The full 95-fixture corpus remains the interpreter oracle gate;
   generated-source corpus coverage is intentionally a subset until a future leaf broadens it. Current phase0 is
-  `PASS 1..1026` over 21 shipped `.spec` files with `PERL5LIB=` cleared.
+  `PASS 1..1027` over 21 shipped `.spec` files with `PERL5LIB=` cleared after the Perl hash-tree traversal lock.
 - `2026-07-04` refresh: RUST-PARITY follow-on closed. The Rust variant then had a green 88-fixture
   manifest-backed interpreter oracle with missing/stale fixture drift guards, and the generated Rust-source path
   emitted the first validated generated-family module/corpus proof.
@@ -166,7 +167,7 @@ This document is the current high-level technical reading of the project shape. 
 - Thin wrapper callback lookup now routes through that seam for `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, `ActionIR::Scanner`, and `RuleIR::EmitContext`'s ActionIR owner dispatch; direct callback probing is reserved for `OwnerDispatch` itself.
 - `LinkedSpec::OwnerDispatch` now also owns shared dependency-map assembly for active ActionIR owners and a mixed callback/value bundle builder for the parser-factory path, so owner-side dependency wiring is centralizing instead of drifting back into local registries.
 - `LinkedSpec::PluginBridge` now also spends that same owner-dispatch seam for its default compatibility plumbing: lazy `PPlugin` loading, registered-plugin lookup through `PluginRegistry`, successful `$@` preservation, and default callback-map assembly no longer require bridge-local eval/restore branches or a hand-built dependency hash.
-- The former Perl-only legacy domain-utility owners and the `.plg` plugin corpus are no longer part of the active `perl/` tree; two retirement passes resolved them, and `t/phase0_regression.t` is green (`PASS 1..1026`) without any of them.
+- The former Perl-only legacy domain-utility owners and the `.plg` plugin corpus are no longer part of the active `perl/` tree; two retirement passes resolved them, and `t/phase0_regression.t` is green (`PASS 1..1027`) without any of them.
   - **Deleted** (`LEGACY-VHDL-RETIRE`, the Perl-only non-portable VHDL/RTL/FSM-generation subsystem with no Rust/Julia/Dart counterpart): `RTLUtils`, `FSMGen`, `VHDL::ConstantEval`, and the six `.plg` files that depended exclusively on them (`fsmgen`/`lte_digital_rf`/`mbist`/`msword`/`regtest`/`rtl`). The stale `generic_fake_memory_module.plg` / `wrapgen.plg` / `get_log2`->`ceil_log2` prose carried here described files already deleted earlier; it is gone with the subsystem.
   - **Relocated to `noncore/`** (`NONCORE-QUARANTINE`, proven unreachable from the `LinkedSpec.pm` union shipped-`specs/*.spec` closure): the remaining non-core domain owners — `HTTP::FileAccess`, `HTML::PathLinks`, `InteractivePrompt`, `Text::VariableSubstitution`, `MSOffice::Excel`, `QC::Flow`, `QC::Summary`, `QC::TclInterconn`, `Table::GenericFilter`, `Timing::SetupHold`, `Timing::StanBackend`, `Timing::StanOmap2430cBackend` (plus the flat domain `.pm`) — and the 13 surviving `.plg`, all `git mv`'d into `noncore/` with layout preserved (`noncore/README.md` is the parked-fate ledger). The root `plugin/` directory no longer exists; `perl/` is now core-only.
 - A fresh 2026-04-11 bootstrap pass confirmed that the recent compiler naming cleanup is now on the active facade/compiler path: `LinkedSpec.pm` exposes `build_compiled_rule_table(...)`, `Compiler.pm` / `CompilerState.pm` speak in terms of compiled-spec / compiled dependency-regex / compiled-descriptor state, and the former bootstrap-local `spec_descr` / `gdata` vocabulary has now been renamed to rule-descriptor / dispatch-state terminology.

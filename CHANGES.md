@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-FORMAT-TERSE.12.2 — implement Perl hash-tree traversal
+
+**Scope:** Perl reference parser/lowering support for hash-tree attached-block receiver traversal.
+
+**Change:** The Perl ActionIR AST parser now accepts receiver trailing blocks on
+`walk_leaves`, `map_leaves`, and `reduce_leaves(initial)`. Method lowering implements sorted
+depth-first traversal over hash-root/hash-interior value trees, treats arrays as leaves, binds scoped
+`value`, `key`, `path`, and `depth` callback variables plus `acc` for reductions, restores the outer
+callback-name bindings after each immediate block, and rejects malformed arity or missing blocks with explicit
+unsupported-helper diagnostics. `walk_leaves` returns the original tree after side-effect callbacks,
+`map_leaves` returns a newly mapped tree, and `reduce_leaves(initial)` returns the final accumulator.
+
+**Boundary:** This is the Perl reference slice only. Rust parser/runtime parity, generated oracle fixtures,
+Knowledge Map facts, and full public helper documentation remain owned by `.12.3` and `.12.4`.
+The mdBook current-status count was refreshed from phase0 `1..1026` to `1..1027`, but detailed hash-tree helper
+examples wait for cross-backend parity.
+
+**Validation:** `perl -Iperl -c perl/LinkedSpec/ActionIR/AST/Parser.pm`;
+`perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`; `prove -q -Iperl t/actionir_ast_parser.t`;
+`PERL5LIB= prove -q -Iperl t/phase0_regression.t` (PASS, 1027 tests); `git diff --check`.
+
 ## 2026-07-08 — SPEC-FORMAT-TERSE.12.1 — activate hash-tree traversal split
 
 **Scope:** Task-tree and live-doc activation for hash-tree traversal receiver methods.

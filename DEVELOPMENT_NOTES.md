@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-FORMAT-TERSE.12.2 — Perl hash-tree traversal receiver blocks):
+  The Perl reference now lowers `hash_value.walk_leaves() { ... }`,
+  `hash_value.map_leaves() { ... }`, and `hash_value.reduce_leaves(initial) { ... }` as immediate receiver
+  trailing-block calls. The traversal helpers walk hash-root/hash-interior value trees in sorted depth-first key
+  order, treat arrays as leaves, return `undef` without callbacks for non-hash receivers, and preserve the `.12`
+  callback contract with scoped `value`, `key`, `path`, `depth`, and reduction-only `acc`. Because Perl's existing
+  block lowering can resolve `array(value)` / `hash(value)` through aggregate lexicals, the generated callback
+  frame mirrors array/hash views for `value` and `acc` while keeping the portable contract scalar-valued. Rust
+  parity and generated oracle fixtures remain `.12.3`; full mdBook helper examples remain `.12.4`.
+
 - 2026-07-08 (SPEC-FORMAT-TERSE.12.1 — hash-tree traversal split before code):
   `SPEC-FORMAT-TERSE.12` is now active by explicit user directive. The accepted MVP is deliberately receiver-only
   and immediate: `hash_value.walk_leaves() { ... }`, `hash_value.map_leaves() { ... }`, and

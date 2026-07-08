@@ -6,11 +6,12 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-08` (**`.12.1` DONE; hash-tree traversal receiver methods reactivated and split; frontier `.12.2`**).
+- Last updated: `2026-07-08` (**`.12.2` DONE; Perl hash-tree traversal receiver blocks landed; frontier `.12.3`**).
   User directive 2026-07-08 reactivated the deferred `.12` hash-tree traversal backlog item. `.12.1` owns the
-  spec-first split before any parser/runtime code: accepted receiver methods, attached-block syntax, callback
-  bindings, deterministic order, array-leaf/error semantics, Perl/Rust parity, mdBook examples, active tests,
-  generated oracle fixtures, and Knowledge Map updates. Prior user directive 2026-07-07 reactivated the deferred
+  spec-first split before any parser/runtime code, and `.12.2` landed the Perl reference implementation for
+  `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver attached blocks. `.12.3` now owns Rust
+  parser/runtime parity and generated oracle fixtures; `.12.4` owns mdBook/Knowledge Map/no-drift closeout. Prior
+  user directive 2026-07-07 reactivated the deferred
   `.14` trailing block-argument backlog item. `.14.1` defined
   the MVP contract before code, `.14.2` shipped the Perl reference helper-function form surface, and `.14.3` shipped Rust
   parser/runtime parity for `with(value) { ... }` / `with() { ... }` as immediate, non-closure trailing block
@@ -3803,9 +3804,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.11.5 - close duck-typed assignment alignment`
 
 - ID: `SPEC-FORMAT-TERSE.12`
-  Status: `active` / `split` (reactivated by user directive 2026-07-08; split by `.12.1` before code)
+  Status: `active` / `split` (reactivated by user directive 2026-07-08; Perl reference landed in `.12.2`)
   Goal: Specify hash-tree traversal receiver methods with attached code blocks for operating on leaves.
-  Children: `.12.1` (done), `.12.2` (active), `.12.3` (pending), `.12.4` (pending).
+  Children: `.12.1` (done), `.12.2` (done), `.12.3` (active), `.12.4` (pending).
   Acceptance: Hash-tree traversal is receiver-only in this lane and uses immediate attached blocks, not delayed
     closures. A hash-tree is a value tree with a hash at the root, hashes at interior nodes, and scalar or array
     values at leaves. The accepted MVP methods are:
@@ -3841,18 +3842,30 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.12.1 - activate hash-tree traversal split`
 
 - ID: `SPEC-FORMAT-TERSE.12.2`
-  Status: `active`
+  Status: `done` (2026-07-08)
   Goal: Perl reference implementation for hash-tree attached-block receiver methods.
   Acceptance: Perl ActionIR AST/lowering accepts receiver-form `.walk_leaves() { ... }`, `.map_leaves() { ... }`,
     and `.reduce_leaves(initial) { ... }` on hash-valued receivers; rejects malformed arity or missing blocks with
     explicit unsupported-helper diagnostics; binds/restores scoped `value`, `key`, `path`, `depth`, and `acc`
     according to the `.12` contract; uses sorted depth-first traversal; covers valid, empty, array-leaf,
     non-hash/wrong-shape, continuation, and side-effect cases in focused Perl tests.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-08.** Perl AST parsing now accepts receiver trailing-block segments for
+    `walk_leaves`, `map_leaves`, and `reduce_leaves`. `ActionIR::MethodLowering` lowers them through immediate
+    sorted depth-first traversal closures over hash-root/hash-interior value trees, treats arrays as leaves,
+    returns `undef` without callbacks for non-hash receivers, and binds scoped `value`, `key`, `path`, `depth`,
+    plus reduction-only `acc` for callback execution. Malformed missing-block or wrong-arity calls emit explicit
+    `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<method>` diagnostics. Focused tests cover AST parsing, lowering,
+    valid/empty/non-hash runtime behavior, array leaves, side effects, continuation through `count_keys`, scoped
+    callback restoration, descriptor readiness, and generated-source residue checks. Verification commands:
+    `perl -Iperl -c perl/LinkedSpec/ActionIR/AST/Parser.pm`;
+    `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`;
+    `prove -q -Iperl t/actionir_ast_parser.t`;
+    `PERL5LIB= prove -q -Iperl t/phase0_regression.t` (PASS, 1027 tests);
+    `git diff --check`.
+  Commit: `SPEC-FORMAT-TERSE.12.2 - implement Perl hash-tree traversal`
 
 - ID: `SPEC-FORMAT-TERSE.12.3`
-  Status: `pending`
+  Status: `active`
   Goal: Rust parser/runtime parity and generated oracle fixture for hash-tree traversal methods.
   Acceptance: Rust parses and executes the same receiver attached-block method surface as Perl; runtime results
     match Perl over generated oracle fixtures; focused Rust integration tests cover traversal order, scoped
@@ -4377,9 +4390,10 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | 35 | `SPEC-FORMAT-TERSE.14.4` | `done` | receiver `.with() { ... }` trailing block arguments landed with a 95th oracle fixture |
 | 36 | `SPEC-FORMAT-TERSE.14.5` | `done` | mdBook/KM/oracle/no-drift closeout for shipped helper-function and receiver-method `.14` surface |
 | 37 | `SPEC-FORMAT-TERSE.12.1` | `done` | user reactivated hash-tree traversal; split/spec contract landed before parser/runtime code |
-| 38 | `SPEC-FORMAT-TERSE.12.2` | `active` | Perl reference implementation for receiver attached-block traversal is next |
+| 38 | `SPEC-FORMAT-TERSE.12.2` | `done` | Perl reference implementation for receiver attached-block traversal landed; phase0 `1..1027` |
+| 39 | `SPEC-FORMAT-TERSE.12.3` | `active` | Rust parser/runtime parity and generated oracle fixtures are next |
 | — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
-| — | `SPEC-FORMAT-TERSE.12` | `active` / `split` | hash-tree attached-block traversal is reactivated; frontier is `.12.2` |
+| — | `SPEC-FORMAT-TERSE.12` | `active` / `split` | hash-tree attached-block traversal is reactivated; frontier is `.12.3` |
 | — | `SPEC-FORMAT-TERSE.13` | `deferred` / `backlog` | track lower-priority array-tree traversal analog; not PNT-eligible until explicitly activated |
 | — | `SPEC-FORMAT-TERSE.14` | `done` / `closed` | trailing block-argument type closed for helper-function and receiver-method `with` forms without closures; future expansions need new owned leaves |
 | — | `SPEC-FORMAT-TERSE.6.1` | `done` | User directive owned under the existing terse-format tree; shipped-spec inventory recorded before any `.spec` edit. |
@@ -5488,6 +5502,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.12.2` | `SPEC-FORMAT-TERSE.12.2 - implement Perl hash-tree traversal` | Perl reference receiver attached-block traversal landed for `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` with sorted hash-tree leaf traversal, scoped callback bindings, malformed-call diagnostics, and phase0 `1..1027`; frontier becomes `.12.3` Rust parity. |
+| `SPEC-FORMAT-TERSE.12.1` | `SPEC-FORMAT-TERSE.12.1 - activate hash-tree traversal split` | Reactivated `.12` by user directive and split hash-tree attached-block traversal into Perl, Rust/oracle, and docs/KM/no-drift leaves before parser/runtime code. |
 | `SPEC-FORMAT-TERSE.14.5` | `SPEC-FORMAT-TERSE.14.5 - close trailing block drift` | Final no-drift closeout for helper-function and receiver-method `with` trailing blocks; roadmap/mdBook/KM/live docs/task-tree/oracle agree and `.14` closes. |
 | `SPEC-FORMAT-TERSE.8.3` | `SPEC-FORMAT-TERSE.8.3 - hard-retire Perl legacy helpers` | Perl legacy helper spellings now diagnose instead of lowering successfully; current terse replacements keep behavior; frontier becomes `.8.4`. |
 | `SPEC-FORMAT-TERSE.8.2.2.5` | `SPEC-FORMAT-TERSE.8.2.2.5 - close active test corpus helper residue` | Active-test/corpus helper residue scans are clean or classified; Rust integration wrapper-alias residue is labelled and `.8.2.2` closes. |
@@ -5718,6 +5734,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   behavior changed; bare `with { ... }`, explicit receiver `.with(value) { ... }`, closures, delayed callbacks,
   assignable/returnable blocks, and arbitrary non-`with` trailing blocks remain deferred behind future owned leaves.
   `SPEC-FORMAT-TERSE.14` is closed.
+
+- `2026-07-08`: **`.12.2` LANDED — Perl hash-tree traversal receiver blocks.**
+  Perl now accepts `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver attached-block calls and
+  lowers them to immediate sorted depth-first traversal over hash-root/hash-interior value trees. Arrays are leaf
+  values, non-hash receivers return `undef` without callbacks, malformed calls diagnose with
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<method>`, and callbacks get scoped `value`, `key`, `path`, `depth`,
+  plus reduction-only `acc`. Focused AST and phase0 locks cover parsing, lowering, valid/empty/non-hash runtime
+  behavior, side effects, continuation through `count_keys`, scoped binding restoration, descriptor readiness, and
+  generated-source residue. Phase0 now passes `1..1027`; frontier moves to `.12.3` for Rust parity and oracle.
 
 - `2026-07-05`: **`.12`/`.13` DEFERRED/BACKLOG — tree traversal attached-block ideas.**
   User directive tracked hash-tree traversal methods with attached code blocks as future spec work and clarified

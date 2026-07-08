@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-FORMAT-TERSE.12.2 — implement Perl hash-tree traversal**
+  (DONE Perl reference implementation; frontier `.12.3` Rust parity and oracle next).
+
+  **Change:** Perl now accepts and lowers receiver attached-block hash-tree traversal methods:
+  `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)`. Traversal is sorted depth-first over hash keys,
+  arrays are leaves, callbacks get scoped `value`/`key`/`path`/`depth` plus reduction `acc`, non-hash receivers
+  return `undef` without callbacks, and malformed calls produce explicit unsupported-helper diagnostics.
+
+  **Boundary:** Rust parser/runtime parity and generated oracle fixtures remain next in `.12.3`. Full public
+  helper examples and Knowledge Map closeout remain `.12.4`; current mdBook status counts only were refreshed to
+  phase0 `1..1027`.
+
+  **Verification:** Perl syntax checks pass; `t/actionir_ast_parser.t` passes; full phase0 passes 1027 tests.
+
 - 2026-07-08: **SPEC-FORMAT-TERSE.12.1 — activate hash-tree traversal split**
   (DONE tracking/spec split; frontier `.12.2` Perl reference implementation next).
 
