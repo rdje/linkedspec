@@ -106,7 +106,7 @@ squotes: /'/ /(?<!\\)'/                     I {print("squotes: START\n")}
 					       return(hash("type", "squotes", "content", capture_slice()))
 				              }
 
- LX {print("(simenv) -E- Closing tick not found for *$squotes* starting on line ", capture_slice_line(), "\n");
+ LX {print("(simenv) -E- Closing tick not found for *squotes* starting on line ", capture_slice_line(), "\n");
      exit_now()}
 
 dquotes: /"/ /(?<!\\)"/                     I {print("dquotes: START\n"); matches = []; last_pos = capture_slice_pos(); shift = undef}
@@ -133,7 +133,7 @@ perl_squotes: /q\(/  /\)/                   I {print("perl_squotes: START\n")}
 					       return(hash("type", "squotes", "content", capture_slice()))
 				              }
 
- LX {print("(simenv) -E- Closing Parenthesis not found for *$perl_squotes* starting on line ", capture_slice_line(), "\n");
+ LX {print("(simenv) -E- Closing Parenthesis not found for *perl_squotes* starting on line ", capture_slice_line(), "\n");
      exit_now()}
 
 perl_dquotes: /qq\(/  /\)/                  I {print("perl_dquotes: START\n"); matches = []; last_pos = capture_slice_pos(); shift = undef}

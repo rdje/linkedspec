@@ -151,7 +151,7 @@ process_statement: /(?i)(?:(\w+)\s*:\s*)?\bprocess\b/  /(?i)\bbegin\b/ /(?is)\be
 -> process_statement[1]                 {pos_begin = cursor_pos()}
 
 -> process_statement[2]                 {
-   process_statement_part = substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH);
+   process_statement_part = input_slice(pos_begin, -(match_start_pos(), pos_begin));
    return(array("?process_statement:", flat_array(entry_groups()), copy(array(process_statement)), process_statement_part))
 }
 
@@ -253,7 +253,7 @@ I {pos_begin = undef; subprogram_statement_part = undef; subprogram_statement_to
 -> subprogram_body[1] {pos_begin = cursor_pos()}
 
 -> subprogram_body[2] {
-   subprogram_statement_part = substr($$STRING, $pos_begin, $LSPOS - $pos_begin - length $LMATCH);
+   subprogram_statement_part = input_slice(pos_begin, -(match_start_pos(), pos_begin));
    split(array(subprogram_statement_tokens), subprogram_statement_part, /((?:\s*--.*\s*)+|\s*;\s*)/);
    split_each(array(subprogram_statement_tokens), /^(\s+)/);
    filter_nonempty(array(subprogram_statement_tokens));
@@ -268,19 +268,12 @@ loop_endloop: /(?i)\bloop\b/ /(?is)\bend\s+loop\b.*?;/             -> comment  -
 opar_cpar:    /\(/            /\)/                                 -> comment  -> dquote_string -> opar_cpar                                                      -> opar_cpar[1]    .return([])
 
 
-# interface_declaration:  I {my @idecl}
-# -> interface_constant_declaration        {return call(interface_constant_declaration)}     
-# -> interface_signal_declaration          {return call(interface_signal_declaration)}
-# -> interface_variable_declaration        {return call(interface_variable_declaration)}
-# -> interface_file_declaration            {return call(interface_file_declaration)}
-
-
 generic_clause:   /(?i)\bgeneric\s*\(/ /\)\s*;/
 -? push
 -> comment                      .push
 -> dquote_string                .push
 -> interface_signal_declaration .push
--> generic_clause[1]            .return (@generic_clause ? \@generic_clause : undef)
+-> generic_clause[1]            .return(if(is_nonempty(array(generic_clause)), copy(array(generic_clause)), else(undef)))
 
 
 port_clause:   /(?i)\bport\s*\(/ /\)\s*;/
@@ -288,7 +281,7 @@ port_clause:   /(?i)\bport\s*\(/ /\)\s*;/
 -> comment                      .push
 -> dquote_string                .push
 -> interface_signal_declaration .push
--> port_clause[1]               .return (@port_clause ? \@port_clause : undef)
+-> port_clause[1]               .return(if(is_nonempty(array(port_clause)), copy(array(port_clause)), else(undef)))
 
 
 interface_signal_declaration: /(\w+)\s*:\s*(\w+)\s+(\w+)/ /\s*;|\s*(?=\)\s*;)/
@@ -304,10 +297,10 @@ LE {start_capture_slice()}
 -> opar_cpar              {
    pos1 = undef;
    pos2 = undef;
-   pos1 = pos($$STRING)-1;
+   pos1 = match_start_pos();
    call(opar_cpar);
    pos2 = cursor_pos();
-   push(array(capt), substr($$STRING, $pos1, $pos2-$pos1))
+   push(array(capt), input_slice(pos1, -(pos2, pos1)))
 }
 -> downto_or_to           {
    msi_lsi = undef;
@@ -335,7 +328,7 @@ type_declaration:     /(?is)\btype\s+(\w+)\s+is\s+/ /\s*;/
 -> record_endrecord
 -> type_declaration[1]      {
 	type_definition = undef;
-	type_definition = CAPTURE;
+	type_definition = capture_slice();
 	return(array("?type_declaration:", flat_array(entry_groups()), type_definition))}
 record_endrecord:   /(?is)\brecord\s.+?\bend\s+record\s+/
 

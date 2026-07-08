@@ -69,6 +69,12 @@ corpus then had 63 fixtures.
 curly-brace delimiter fixture (`hlink_curly_brace`, input `{abc}`). The corpus
 then had 66 fixtures.
 
+`SPEC-SOURCE-TERSE-CLOSEOUT.1` later migrated the shipped `hlink_substitution`
+bracket payload away from the historical Perl scalar-reference shape to a neutral
+`capture_slice()` string. The corpus now includes `hlink_bracket_body` (`[abc]`)
+and `hlink_mixed_bracket_brace` (`foo[bar]{baz}`), both represented directly in
+JSON and green against the Rust backend.
+
 `RUST-PARITY.7.3.4.4` added `lib_reader_sattribute` and `lib_reader_cattribute`.
 `RUST-PARITY.7.3.4.2` then added `portmap_bare`, `portmap_bit`,
 `portmap_slice`, and `portmap_constant`, proving the shipped `portmap.spec`
@@ -97,4 +103,9 @@ fixtures after the broader recursive-grammar blocker closed:
 `top_rule_body_recursion_sexpr`, `top_rule_lx_recursion_nested`, and
 `top_rule_lx_recursion_sequence`. These lock the Perl reference values for the
 wrapper-body recursive `sexpr` idiom, a recursive top rule with `LX`, and a
-top-rule `LX` sequence parse. The corpus now has 91 fixtures.
+top-rule `LX` sequence parse.
+
+Later terse-language leaves added helper/receiver trailing-block, hash-tree traversal,
+array-tree traversal, and typed-wrapper quoted-name fixtures. The checked-in corpus
+now has 99 fixtures after `SPEC-SOURCE-TERSE-CLOSEOUT.1` added the two neutral hlink
+bracket/mixed delimiter cases.

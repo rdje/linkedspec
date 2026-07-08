@@ -2,7 +2,7 @@
 
 `specs/pplugin.spec` parses LinkedSpec plugin files (`.plg`). Plugin files define Perl subroutines in a lightweight DSL that the legacy `PPlugin` runtime loads and executes. This spec is the parser that `PPlugin` itself uses to read plugin source files.
 
-> **Perl reference implementation.** `.plg` files and the `PPlugin` runtime belong to the **Perl reference backend's** legacy plugin system, not to the portable runtime contract. This walkthrough is included because `pplugin.spec` is a real shipped parser example for a host-language format. Its current descriptor status is ready (`language_agnostic_ready_ratio = 1.0000`, zero blocked rules, zero compatibility-surface rules), while `.plg` execution still returns Perl coderefs in the reference runtime.
+> **Perl reference implementation.** `.plg` files and the `PPlugin` runtime belong to the **Perl reference backend's** legacy plugin system, not to the portable runtime contract. This walkthrough is included because `pplugin.spec` is a real shipped parser example for a host-language format. Its current descriptor status is ready (`language_agnostic_ready_ratio = 1.0000`, zero blocked rules, zero compatibility-surface rules). The spec returns plugin body text; the Perl `PPlugin` adapter wraps that text into executable coderefs for legacy `.plg` callers.
 
 It demonstrates:
 
@@ -11,7 +11,7 @@ It demonstrates:
 - string-literal skipping (`dquotes`, `squotes`, `curlyb`),
 - the `next()` control-flow helper for skipping ignored matches,
 - `entry_named(...)` for accessing named regex capture groups,
-- host-language plugin-body coderef construction in the Perl reference runtime.
+- host-language plugin-body execution kept outside the `.spec` parser, in the Perl reference runtime adapter.
 
 Read this after the [`Lispish.spec` Walkthrough](lispish-spec-walkthrough.md).
 
@@ -32,23 +32,24 @@ PLUGIN
 my $ast = $parser->(\$plugin_source);
 ```
 
-The returned payload is useful to the Perl reference runtime because it contains coderefs. A future backend may
-use this file as a parser/corpus target, but compiling `.plg` bodies into executable Perl callbacks is not a
-cross-backend runtime requirement.
+The returned payload is useful to the Perl reference runtime because it preserves each subroutine body as source
+text. A future backend may use this file as a parser/corpus target, but compiling `.plg` bodies into executable
+Perl callbacks is not a cross-backend runtime requirement.
 
 ## Output shape
 
-On the Perl reference backend, a plugin with two subroutines returns:
+On the Perl reference backend, the parser returns a hash from subroutine name to captured body text:
 
 ```perl
 {
-  do_thing  => sub { ... },  # compiled coderef
-  do_other  => sub { ... },
+  do_thing  => ' ... body text ... ',
+  do_other  => ' ... body text ... ',
 }
 ```
 
-The parser returns a flat hash (name => coderef pairs) where each value is a Perl callback for the plugin body.
-The hash is built by the `LX` block's `return(hash(flat_array(array(defs))))` call.
+The parser returns a flat hash where each value is the captured plugin body. The hash is built by the `LX` block's
+`return(hash(flat_array(array(defs))))` call. `perl/PPlugin.pm` then normalizes that parsed payload into the
+legacy name-to-coderef registry consumed by older plugin callers.
 
 ## Rule inventory
 
@@ -69,12 +70,13 @@ The hash is built by the `LX` block's `return(hash(flat_array(array(defs))))` ca
 
 **`next()` for comments.** The `pplugin_top` rule lists `-> comment { next() }` as its first alternative. `next()` is the LinkedSpec equivalent of Perl's `next` statement — it skips the current match and tries the next one. This means comments are silently consumed without affecting the accumulated `defs` array.
 
-**`LX` accumulator pattern.** The `pplugin_top` rule accumulates `[name, coderef]` pairs in `I { defs = [] }`. Each `LE` hook pushes `[subname, coderef]` via `flat_array`. On exit (`LX`), the accumulated pairs are converted to a flat hash. This is the same accumulator pattern used by `tablegrep.spec`.
+**`LX` accumulator pattern.** The `pplugin_top` rule accumulates `[name, body_text]` pairs in `I { defs = [] }`. Each `LE` hook pushes `[subname, body_text]` via `flat_array`. On exit (`LX`), the accumulated pairs are converted to a flat hash. This is the same accumulator pattern used by `tablegrep.spec`.
 
-**Legacy `eval` inside the returned coderef.** The `subdef[1]` action edge returns
-`sub {eval substr($$STRING, $IPOS, $LSPOS - $IPOS - 1)}` as the plugin-body callback. That callback is Perl
-reference-runtime behavior: plugin subroutine bodies are Perl code, not LinkedSpec DSL. This host-language
-payload is separate from the descriptor's compatibility-surface summary for the `.spec` parser rules.
+**Legacy `eval` stays in `PPlugin.pm`.** The `subdef[1]` action edge returns
+`array(entry_named(subname), capture_slice())`, so `pplugin.spec` remains parser-data oriented. The Perl
+reference runtime later wraps that body text in a callback that evaluates the body for legacy `.plg` execution.
+That evaluation step is Perl reference-runtime behavior: plugin subroutine bodies are Perl code, not LinkedSpec
+DSL. It is separate from the descriptor's compatibility-surface summary for the `.spec` parser rules.
 
 ## Descriptor readiness
 

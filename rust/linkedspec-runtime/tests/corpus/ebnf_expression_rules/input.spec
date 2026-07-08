@@ -37,7 +37,7 @@ LX {
   .if(on)
     .push(rule_name, rule)
   .else()
-    .say("Error: Rule name '$LMATCH' reference with no container rule context")
+    .say("Error: Rule name '", entry_text(), "' reference with no container rule context")
     .return_undef()
   .endif()
 
@@ -45,7 +45,7 @@ LX {
   .if(on)
     .push(quoted_string, rule)
   .else()
-    .say("Error: Quoted string <$LMATCH> occurrence with no container rule context")
+    .say("Error: Quoted string <", entry_text(), "> occurrence with no container rule context")
     .return_undef()
   .endif()
 
@@ -53,7 +53,7 @@ LX {
   .if(on)
     .push(number, rule)
   .else()
-    .say("Error: Number '$LMATCH' occurrence with no container rule context")
+    .say("Error: Number '", entry_text(), "' occurrence with no container rule context")
     .return_undef()
   .endif()
 

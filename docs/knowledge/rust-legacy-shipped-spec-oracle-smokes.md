@@ -11,7 +11,7 @@ answers:
 date: 2026-07-04
 status: confirmed
 tags: [rust, oracle, corpus, parity, shipped-specs, legacy, plugin, RUST-PARITY]
-evidence: "RUST-PARITY.7.3.6 probed RTL/plugin/legacy candidates through the Perl reference and a temporary Rust parity probe before fixture promotion. Seven JSON-safe Rust-green smokes were added to tools/gen_oracle_corpus.pl and checked into rust/linkedspec-runtime/tests/corpus/: regdef_nested_register_fields, tablegrep_simple_term, simenv_multiline_value, vhdl_library_use, ds_vhistory_version_entry, pplugin_empty, and tkgui_empty. `perl -c -Iperl tools/gen_oracle_corpus.pl`, `perl -Iperl tools/gen_oracle_corpus.pl`, Rust `corpus_oracle`, and Rust `parse_all_shipped_specs` passed; corpus size is 88 fixtures. Richer candidates were kept out: pplugin real subdefs return coderefs that JSON cannot encode, tkgui body returns still hit raw Perl pair-return action parsing, sdce slice/capture segmentation diverges, recursive tablegrep groups over-report child terms in Rust, simenv single-line values lose verbatim payload, VHDL entity port clauses collapse to null, ds_vhistory branch entries classify as version entries, and verilog returns Perl 0 versus Rust empty accumulator."
+evidence: "RUST-PARITY.7.3.6 probed RTL/plugin/legacy candidates through the Perl reference and a temporary Rust parity probe before fixture promotion. Seven JSON-safe Rust-green smokes were added to tools/gen_oracle_corpus.pl and checked into rust/linkedspec-runtime/tests/corpus/: regdef_nested_register_fields, tablegrep_simple_term, simenv_multiline_value, vhdl_library_use, ds_vhistory_version_entry, pplugin_empty, and tkgui_empty. `perl -c -Iperl tools/gen_oracle_corpus.pl`, `perl -Iperl tools/gen_oracle_corpus.pl`, Rust `corpus_oracle`, and Rust `parse_all_shipped_specs` passed; corpus size was 88 fixtures. Richer candidates were kept out at that time: pplugin real subdefs returned coderefs that JSON could not encode, tkgui body returns still hit raw Perl pair-return action parsing, sdce slice/capture segmentation diverged, recursive tablegrep groups over-reported child terms in Rust, simenv single-line values lost verbatim payload, VHDL entity port clauses collapsed to null, ds_vhistory branch entries classified as version entries, and verilog returned Perl 0 versus Rust empty accumulator. SPEC-SOURCE-TERSE-CLOSEOUT.1 later changed pplugin.spec to return body text instead of coderefs; richer pplugin Rust parity remains separate from this historical smoke leaf."
 reverify: "perl -c -Iperl tools/gen_oracle_corpus.pl && perl -Iperl tools/gen_oracle_corpus.pl && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime parse_all_shipped_specs -- --nocapture"
 ---
 
@@ -32,9 +32,10 @@ Green fixtures now active in the Rust oracle corpus:
 
 The corpus has **88 fixtures** after this slice.
 
-Non-promoted blockers remain explicit follow-up evidence:
+Non-promoted blockers remain explicit follow-up evidence. The pplugin reason changed after
+`SPEC-SOURCE-TERSE-CLOSEOUT.1`: the spec now returns body text instead of coderefs, but a richer
+Rust oracle case still needs separate parser/runtime parity ownership.
 
-- real `pplugin` subdefinitions return Perl coderefs, which the canonical JSON oracle cannot encode.
 - `tkgui` body returns still depend on a raw Perl pair-return action that Rust does not parse today.
 - `sdce` brace/slice capture segmentation diverges.
 - recursive `tablegrep` groups over-report child terms in Rust.

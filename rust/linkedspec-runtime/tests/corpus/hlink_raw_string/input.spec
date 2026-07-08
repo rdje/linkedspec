@@ -16,7 +16,7 @@ substitute_top::   I        {retv = undef; word_items = []}
 substitute_statement2: /(?<!\\)\[/ /(?<!\\)\]/ 
  -> substitute_statement2 
  -> curlyb
- -> substitute_statement2[1] {return(\(my $capt = capture_slice()))}
+ -> substitute_statement2[1] {return(capture_slice())}
 
  LX {print("(HLinkSubst) -E- Unmatched closing bracket\n"); exit_now(2)}
 

@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-SOURCE-TERSE-CLOSEOUT.1 — root spec terse source closeout):
+  The root shipped specs are now source-format closed against the current accepted terse surface, not merely
+  descriptor-clean. Strict scans across `specs/*.spec` found no retired helper spellings or raw host-action
+  residues after migrating the remaining spots in `hlink_substitution`, `pplugin`, `Lispish`, `ebnf`, `simenv`,
+  and `vhdl`. The important behavior changes are deliberate: `hlink_substitution` bracket payloads now return
+  neutral strings, which promotes `hlink_bracket_body` and `hlink_mixed_bracket_brace` into the Rust oracle; and
+  `pplugin.spec` now returns plugin body text, with legacy coderef execution preserved by `perl/PPlugin.pm`.
+  The checked-in Rust oracle is now 99 fixtures. Some valid current spellings remain non-maximal by style, but
+  they are not compatibility debt.
+
 - 2026-07-08 (RUST-STATUS-DRIFT-SYNC.1 — Rust status count drift):
   Startup review after `SPEC-FORMAT-TERSE.13.5` found current-facing status drift outside the already-correct
   main status pages: `ROADMAP.md` still advertised the Phase 9 oracle as 96 fixtures, `rust/README.md` still said

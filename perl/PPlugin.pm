@@ -94,6 +94,43 @@ sub _read_plugin_file {
 }
 
 #------------------------------------------------------------------------------
+# Function: _plugin_body_to_coderef
+# Purpose : Convert a parsed `.plg` body payload into the legacy executable
+#           callback shape. Parser output is source text; older injected tests may
+#           still provide coderefs directly.
+# Args    : ($body)
+# Returns : plugin coderef | undef
+#------------------------------------------------------------------------------
+sub _plugin_body_to_coderef {
+ my ($body) = @_;
+ return $body if ref($body) eq 'CODE';
+ return undef if ref($body);
+
+ my $source = defined($body) ? $body : '';
+ return sub { eval $source }
+}
+
+#------------------------------------------------------------------------------
+# Function: _normalize_plugin_registry_payload
+# Purpose : Keep `pplugin.spec` as a parser-data producer while preserving the
+#           legacy PPlugin name-to-coderef registry consumed by callers.
+# Args    : ($parsed_payload)
+# Returns : normalized hashref | undef
+#------------------------------------------------------------------------------
+sub _normalize_plugin_registry_payload {
+ my ($parsed_payload) = @_;
+ return undef unless ref($parsed_payload) eq 'HASH';
+
+ my %registry;
+ foreach my $name (keys %$parsed_payload) {
+  my $coderef = _plugin_body_to_coderef($parsed_payload->{$name});
+  next unless ref($coderef) eq 'CODE';
+  $registry{$name} = $coderef;
+ }
+ return \%registry
+}
+
+#------------------------------------------------------------------------------
 # Function: _build_plugin_registry
 # Purpose : Parse discovered `.plg` files and build the legacy name-to-coderef
 #           registry consumed by compatibility callers.
@@ -127,7 +164,13 @@ sub _build_plugin_registry {
    next
   }
 
-  push @plugins, %$rt;
+  my $normalized = _normalize_plugin_registry_payload($rt);
+  unless ($normalized) {
+   print "(PPlugin) -W- Issue normalizing plugin file '$cplugin'\n";
+   next
+  }
+
+  push @plugins, %$normalized;
  }
 
  my %plugins = @plugins;

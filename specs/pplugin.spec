@@ -17,7 +17,7 @@ subdef: /(?<subname>\w\S*)\s*(?<!\\)\{/ /(?<!\\)\}/
  -> curlyb
  -> dquotes
  -> squotes
- -> subdef[1]	{return(array(entry_named(subname), sub {eval substr($$STRING, $IPOS, $LSPOS - $IPOS -1)}))}
+ -> subdef[1]	{return(array(entry_named(subname), capture_slice()))}
 
 
 curlyb: /(?<!\\)\{/ /(?<!\\)\}/

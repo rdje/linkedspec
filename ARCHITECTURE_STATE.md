@@ -10,13 +10,14 @@ This document is the current high-level technical reading of the project shape. 
   the Perl hash-tree traversal regression, `.12.3` raised the Rust oracle with hash-tree traversal parity, `.12.4`
   closed docs/KM/live no-drift alignment for that hash-tree traversal lane, `SPEC-FORMAT-TERSE.13.3` added
   Rust/oracle parity for array-tree traversal receiver blocks, `.13.4` closed the array-tree docs/KM/live
-  no-drift alignment, and `.13.5` reconciled the parent terse-format task tree closed. The Rust variant now has a
-  green 97-fixture
+  no-drift alignment, `.13.5` reconciled the parent terse-format task tree closed, and
+  `SPEC-SOURCE-TERSE-CLOSEOUT.1` completed the root-spec source-format closeout. The Rust variant now has a
+  green 99-fixture
   manifest-backed interpreter oracle with missing/stale fixture drift guards. The generated Rust-source path
   emits a module with embedded `CompiledSpec`, validated generated-family plan, and `parse(input)` entry point;
   it directly executes every currently supported structural family (`Default`, OR/AND acode, AND/OR bcode, and
   the four explicit REP subfamilies) and is proven by an all-family compile/run matrix plus a curated
-  manifest-backed corpus subset. The full 97-fixture corpus remains the interpreter oracle gate;
+  manifest-backed corpus subset. The full 99-fixture corpus remains the interpreter oracle gate;
   generated-source corpus coverage is intentionally a subset until a future leaf broadens it. Current phase0 is
   `PASS 1..1028` over 21 shipped `.spec` files with `PERL5LIB=` cleared after the Perl array-tree traversal lock.
 - `2026-07-04` refresh: RUST-PARITY follow-on closed. The Rust variant then had a green 88-fixture
@@ -191,7 +192,7 @@ This document is the current high-level technical reading of the project shape. 
 - `Compiler.pm` now also has one explicit internal compiled-spec state model, so descriptor assembly no longer treats loose parallel compiled-rule-table / `build_dependency_regex_map` hashes as its own source of truth.
 - Dynamic plugin loading is still present in the public facade, but current project direction treats it as legacy-removal territory rather than a feature family to preserve.
 - The Rust variant's production path is still an interpreter over `CompiledSpec`/`CompiledRule`, but it is now
-  parity-tested through a checked-in 97-fixture oracle corpus generated from the Perl reference and guarded against
+  parity-tested through a checked-in 99-fixture oracle corpus generated from the Perl reference and guarded against
   manifest drift.
 - The Rust generated-source path is no longer just a scaffold: `linkedspec_runtime::source_emitter` emits
   compilable Rust modules with a generated family plan, and the plan-aware executor directly handles every current

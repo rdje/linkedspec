@@ -27,7 +27,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Specs baseline:
   - All 21 shipped files in `specs/*.spec` compile in the phase0 baseline.
   - Current phase0 reaches `PASS 1..1028` when run with `PERL5LIB=` cleared.
-  - The Rust interpreter oracle is manifest-backed at 97 fixtures.
+  - The Rust interpreter oracle is manifest-backed at 99 fixtures.
   - The former `specs/tclite.spec` literal `[` regex blocker is fixed.
 
 ## Strategic Principles
@@ -512,7 +512,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Exit criteria:
   - a Cargo workspace at `rust/` (`linkedspec-core` + `linkedspec-runtime`) parses, validates, compiles, and interprets `.spec` files (v0.1, interpreted mode).
   - the variant is exercised by the Rust test suite and the manifest-backed Perl-reference output oracle.
-- Current status: the Rust interpreter oracle is green over 97 fixtures. Generated Rust source emission remains a
+- Current status: the Rust interpreter oracle is green over 99 fixtures. Generated Rust source emission remains a
   structural/curated-subset proof, not the primary interpreter parity gate.
 - Variant model: `.spec` is the universal contract, Perl is the reference backend, Rust is the implemented
   lockstep variant, and Julia/Dart are accepted future lockstep variants; Lua requires an explicit ADR before it
@@ -861,7 +861,7 @@ This is a saved future-enhancement note, not an active implementation item.
 | Phase 6 | `done` | User/developer documentation, architecture rationale, and live project-state upkeep. | Task tree `docs/tasks/PHASE6-DOCUMENTATION.md` completed 2026-05-17 (8 leaves). Book, USER_GUIDE, and architecture docs are maintained live; repo-root-relative doc paths are policy and regression-locked. Ongoing upkeep continues under the no-drift doctrine. |
 | Phase 7 | `done` | Self-hosted `spec.spec` grammar and `.spec` evolution through the DSL itself. | Task tree `docs/tasks/PHASE7-SELF-HOSTED-SPEC.md` completed 2026-05-17 (5 leaves). `spec.spec` captures the supported `.spec` envelope at `language_agnostic_ready_ratio == 1.0000` with regression coverage, and is the required change surface for `.spec` evolution. |
 | Phase 8 | `done` | Multi-backend specification and handoff surface. | Task tree `docs/tasks/PHASE8-MULTI-BACKEND-HANDOFF.md` completed 2026-06-14 (8 leaves: ADR, grammar, HandlerIR, helpers, semantics, corpus, handoff, finalization). Specification-only — zero code changes. |
-| Phase 9 | `done` | Rust variant implementation — LinkedSpec runtime in Rust. | Task tree `docs/tasks/PHASE9-RUST-VARIANT.md` completed 2026-06-14 (17 leaves). Cargo workspace at `rust/`: `linkedspec-core` + `linkedspec-runtime`. Interpreted mode. v0.1 operational. The manifest-backed Rust interpreter oracle is green over 97 Perl-reference fixtures; generated source remains structural/curated-subset proof. |
+| Phase 9 | `done` | Rust variant implementation — LinkedSpec runtime in Rust. | Task tree `docs/tasks/PHASE9-RUST-VARIANT.md` completed 2026-06-14 (17 leaves). Cargo workspace at `rust/`: `linkedspec-core` + `linkedspec-runtime`. Interpreted mode. v0.1 operational. The manifest-backed Rust interpreter oracle is green over 99 Perl-reference fixtures; generated source remains structural/curated-subset proof. |
 | Backbone refactor track | `done` | Cross-cutting structural cleanup needed to make LinkedSpec robust, modular, and extensible. | All items complete (Items 1, 2, 3). |
 | Backbone Item 1 | `done` | Declarative bootstrap grammar registry replacing positional bootstrap coupling. | Declarative bootstrap registry landed. |
 | Backbone Item 2 | `done` | Staged `spec_entry()` compiler pipeline around RuleIR and explicit planning/validation phases. | Staged `spec_entry()` RuleIR pipeline landed. |
@@ -1270,7 +1270,7 @@ These are tracked implementation concerns, not immediate blockers.
     - Landed follow-up: `portmap::{portmap,concatenation}` now use helper-form structured aggregate return flow and concat payload construction instead of bare Perl return statements, so the full `portmap` descriptor migration summary now reports zero compatibility-surface rules.
     - Landed follow-up: canonical `next()` now covers rule-flow skips without entering the compatibility-surface bucket, and `tkgui::{sub_gui_list,curlyb}` now use `next()`, `return_undef()`, and helper-form accumulator hash construction, so the full `tkgui` descriptor migration summary now reports zero compatibility-surface rules.
     - Landed follow-up: `hlink_substitution::{substitute_top,substitute_statement2,curlyb}` now use `exit_now(...)`, helper-form `return(...)`, and `concat(...)` instead of bare compatibility exits and returns, so the full `hlink_substitution` descriptor migration summary now reports zero compatibility-surface rules.
-    - Landed follow-up: `pplugin::{pplugin_top,subdef,curlyb}` now use helper-form declaration, flow, assignment, hash-return, array-return, and undef-return spelling instead of bare compatibility statements, so the full `pplugin` descriptor migration summary now reports zero compatibility-surface rules while preserving plugin coderef behavior.
+    - Landed follow-up: `pplugin::{pplugin_top,subdef,curlyb}` now use helper-form declaration, flow, assignment, hash-return, array-return, and undef-return spelling instead of bare compatibility statements, so the full `pplugin` descriptor migration summary now reports zero compatibility-surface rules; `SPEC-SOURCE-TERSE-CLOSEOUT.1` later moved plugin-body coderef wrapping out of the spec and into the Perl `PPlugin` runtime adapter.
     - Landed follow-up: `regdef::{regdef_top,reg_def,reg_fld,ob_cb}` now use helper-form array payload returns, accumulator snapshots, and `return(1)` instead of bare compatibility returns, so the full `regdef` descriptor migration summary now reports zero compatibility-surface rules while preserving the nested register/field AST shape.
     - Landed follow-up: `ebnf::{grammar_file,include_dir,include_file,semantic_annotation,logging_annotation}` now use helper-form child-call assignment, include argument cleanup pipelines, capture cleanup, explicit rolling `start_capture_slice()` movement, and helper-form returns instead of bare compatibility statements, so the full `ebnf` descriptor migration summary now reports zero compatibility-surface rules while preserving include and annotation AST behavior.
     - Landed follow-up: `ifelse::{if,then,elsif,else,while,while_then}` now use canonical `return_undef()` for flow-stop edges instead of bare compatibility `return`, so the full `ifelse` descriptor migration summary now reports zero compatibility-surface rules while preserving the debug parser trace behavior.

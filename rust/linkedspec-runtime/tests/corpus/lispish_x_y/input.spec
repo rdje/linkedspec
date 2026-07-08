@@ -75,7 +75,7 @@ curlyb: /(?<!\\)\{/ /(?<!\\)\}/ I {content = undef}
  -> dquotes
  -> squotes
  -> curlyb[1]                 {
- content = CAPTURE;
+ content = capture_slice();
  return(hash("type", "CBRACE", "content", content))
 }
 

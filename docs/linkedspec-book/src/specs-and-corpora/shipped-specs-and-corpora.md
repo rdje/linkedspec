@@ -81,11 +81,13 @@ The important point is that these files collectively exercise the system:
 - runtime parser invocation,
 - real nested return payloads.
 
-The manifest-backed 97-fixture Rust oracle corpus tracks this maturity incrementally.
+The manifest-backed 99-fixture Rust oracle corpus tracks this maturity incrementally.
 Its exact case list lives in `rust/linkedspec-runtime/tests/corpus/manifest.json`.
 Representative cases include `lib_reader_sattribute` and `lib_reader_cattribute`;
 `portmap_bare`, `portmap_bit`, `portmap_slice`, `portmap_constant`, and
 `portmap_concatenation`; `ebnf_expression_rules` and `ebnf_logging_annotation`;
+`hlink_raw_string`, `hlink_raw_escaped_brackets`, `hlink_curly_brace`,
+`hlink_bracket_body`, and `hlink_mixed_bracket_brace`;
 terse-language fixtures such as `terse_11_4_nested_mixed_value_path_assignment` and
 `terse_15_2_3_bare_value_reads_and_case_labels`, plus
 `terse_12_3_hash_tree_traversal_receiver_blocks` and
@@ -98,7 +100,7 @@ plus the recursive top-rule/body value fixtures `top_rule_body_recursion_sexpr`,
 `top_rule_lx_recursion_nested`, and `top_rule_lx_recursion_sequence`.
 Those fixtures verify grouped attributes, port-map scalar classification and
 concatenation, EBNF payload extraction, self-hosted `.spec` grammar AST shape, and
-minimal RTL/plugin/legacy parser reachability, and recursive top-rule value parity
+minimal RTL/plugin/legacy parser reachability, hlink delimiter/link payload parity, and recursive top-rule value parity
 against the Perl reference output. `BNF.spec`,
 `DT.spec`, `ifelse.spec`, and `operators_try.spec` remain useful diagnostic/debug-print
 examples, but their probed inputs currently return Perl `null`, so they are not promoted

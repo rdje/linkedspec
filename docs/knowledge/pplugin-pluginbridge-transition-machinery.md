@@ -34,8 +34,10 @@ lowering, diagnostics. Dynamic plugin loading was historically useful but is not
 architectural center anymore.
 
 `RUST-PARITY.7.3.6` only added the empty `pplugin_empty` syntax smoke to the Rust oracle
-corpus. Richer `pplugin` subdefinitions still return Perl coderefs and are not
-JSON-representable in the current oracle, so that fixture is not evidence that the
-legacy plugin runtime is a backend-neutral target.
+corpus. `SPEC-SOURCE-TERSE-CLOSEOUT.1` later moved plugin-body coderef wrapping out of
+`specs/pplugin.spec`: the parser now returns body text and the Perl `PPlugin` adapter
+wraps it for legacy callers. Richer `pplugin` subdefinitions still are not evidence that
+the legacy plugin runtime is a backend-neutral target; promoting them to the Rust oracle
+requires a separate Rust parser/runtime parity owner.
 
 Related: [[ownerdispatch-shared-seam]].

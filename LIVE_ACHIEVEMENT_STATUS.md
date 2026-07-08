@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-SOURCE-TERSE-CLOSEOUT.1 — close root spec terse source**
+  (DONE source-format closeout; tree CLOSED).
+
+  **Change:** Completed the all-root `specs/*.spec` terse source closeout. Remaining root-spec host-action residues
+  were migrated in `hlink_substitution`, `pplugin`, `Lispish`, `ebnf`, `simenv`, and `vhdl`. Hlink bracket payloads
+  are now neutral strings, and `pplugin.spec` now returns plugin body text while `perl/PPlugin.pm` preserves legacy
+  coderef execution for `.plg` callers.
+
+  **Boundary:** This closes source-format doubt for shipped specs. It does not make dynamic `.plg` execution a
+  backend-neutral target, and it does not churn valid current syntax merely to use every newer terse feature.
+
+  **Verification:** Retired-helper/host-residue scans are clean; all 21 shipped descriptors report `1.0000 0 0`;
+  focused hlink/pplugin probes pass; oracle generation emits 99 fixtures; Rust
+  `oracle_corpus_matches_perl_reference` passes over the 99-fixture manifest.
+
 - 2026-07-08: **RUST-STATUS-DRIFT-SYNC.1 — sync Rust status counts**
   (DONE docs-only drift correction; tree CLOSED).
 

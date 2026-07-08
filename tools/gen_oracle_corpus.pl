@@ -1149,6 +1149,9 @@ SPEC
     { case => 'hlink_raw_escaped_brackets',    spec => 'hlink_substitution', input => 'plain \[text\]' },
     # ── RUST-PARITY.7.3.3.2 — JSON-safe hlink_substitution curly delimiter ──
     { case => 'hlink_curly_brace',             spec => 'hlink_substitution', input => '{abc}' },
+    # ── SPEC-SOURCE-TERSE-CLOSEOUT.1 — hlink bracket outputs are now neutral strings ──
+    { case => 'hlink_bracket_body',            spec => 'hlink_substitution', input => '[abc]' },
+    { case => 'hlink_mixed_bracket_brace',     spec => 'hlink_substitution', input => 'foo[bar]{baz}' },
 
     # ── RUST-PARITY.7.3.4.2 — shipped portmap scalar classification parity ──
     { case => 'portmap_bare',     spec => 'portmap', input => 'foo' },

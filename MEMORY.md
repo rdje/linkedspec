@@ -18,25 +18,27 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `RUST-STATUS-DRIFT-SYNC.1` — current-facing Rust status counts synced to 97 fixtures, 21
+- latest_completed_leaf: `SPEC-SOURCE-TERSE-CLOSEOUT.1` — root `specs/*.spec` source-format closeout completed:
+  retired-helper/host-residue scans clean, all 21 descriptors `1.0000 0 0`, Rust oracle 99 fixtures.
+- prior_leaf: `RUST-STATUS-DRIFT-SYNC.1` — current-facing Rust status counts synced to 97 fixtures, 21
   shipped specs, and phase0 `1..1028`; tree closed.
-- prior_leaf: `DOCTRINE-ENFORCEMENT-ADOPT.3.3` — task-acceptance docs/KM/no-drift closeout; tree closed.
 - latest_commit: HEAD containing this pointer should be
-  `RUST-STATUS-DRIFT-SYNC.1 - sync Rust status counts`; parent before this slice is
-  `DOCTRINE-ENFORCEMENT-ADOPT.3.3 - close task acceptance no-drift`.
+  `SPEC-SOURCE-TERSE-CLOSEOUT.1 - close root spec terse source`; parent before this slice is
+  `RUST-STATUS-DRIFT-SYNC.1 - sync Rust status counts`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: no non-paused active frontier after `RUST-STATUS-DRIFT-SYNC` closes; `SPEC-LANG-REFERENCE`
+- active_work_unit: no non-paused active frontier after `SPEC-SOURCE-TERSE-CLOSEOUT` closes; `SPEC-LANG-REFERENCE`
   remains paused in the index.
-- next_action: from a clean repo, pick or split the next roadmap-owned PNT leaf before edits; only resume the paused
-  `SPEC-LANG-REFERENCE` scorch if directed or folded into a new roadmap/book-sweep owner.
+- next_action: from a clean repo, pick or split the next roadmap-owned PNT leaf before edits. The all-root-spec
+  terse-source closeout is no longer blocking other activities.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
   enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
-- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1028`**. Rust oracle = **97** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
+- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1028`**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
-  worktree ignored by submodule policy. `SPEC-LANG-REFERENCE` remains paused.
+  worktree ignored by submodule policy. `SPEC-LANG-REFERENCE` remains paused. Richer pplugin runtime parity remains
+  a Rust follow-up, but `pplugin.spec` source format is closed.
 - blockers: none. in_flight_uncommitted: none once this pointer commit lands; do not pivot unless the repo is
   handoff-ready.

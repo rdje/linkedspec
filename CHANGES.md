@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-SOURCE-TERSE-CLOSEOUT.1 — close root spec terse source
+
+**Scope:** Exhaustive root `specs/*.spec` source-format closeout plus generated oracle/doc synchronization.
+
+**Change:** Migrated remaining root-spec host-action residues in `hlink_substitution`, `pplugin`, `Lispish`,
+`ebnf`, `simenv`, and `vhdl` to current helper/value forms. `hlink_substitution` bracket payloads now return
+neutral strings, so `[abc]` and `foo[bar]{baz}` are active Rust oracle fixtures. `pplugin.spec` now returns
+plugin body text; `perl/PPlugin.pm` wraps that text into legacy coderefs for `.plg` runtime callers.
+
+**Validation:** Retired-helper and host-residue scans over root specs are clean; all 21 shipped descriptors report
+`1.0000 0 0`; focused hlink and pplugin probes pass; oracle generation emits 99 fixtures; Rust
+`oracle_corpus_matches_perl_reference` passes over the 99-fixture manifest.
+
 ## 2026-07-08 — RUST-STATUS-DRIFT-SYNC.1 — sync Rust status counts
 
 **Scope:** Documentation-only synchronization for current-facing Rust variant status counts.

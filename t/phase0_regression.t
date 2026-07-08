@@ -42516,9 +42516,9 @@ subtest 'hlink_substitution_parser_smoke' => sub {
     ok(defined($parser) && ref($parser) eq 'CODE', 'hlink_substitution parser created');
 
     my @cases = (
-        ['[abc]', [\'abc']],
+        ['[abc]', ['abc']],
         ['{abc}', ['{abc}']],
-        ['foo[bar]{baz}', ['foo', \'bar', '{baz}']],
+        ['foo[bar]{baz}', ['foo', 'bar', '{baz}']],
     );
 
     for my $case (@cases) {
@@ -42530,13 +42530,14 @@ subtest 'hlink_substitution_parser_smoke' => sub {
     }
 };
 subtest 'hlink_substitution_delimiter_rules_prefer_capture_slice' => sub {
-    plan tests => 10;
+    plan tests => 11;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'hlink_substitution.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'hlink_substitution source spec text is available for delimiter-helper inspection');
-    like($source_content, qr/substitute_statement2\[1\] \{return\(\\\(my \$capt = capture_slice\(\)\)\)\}/, 'hlink_substitution substitute_statement2 now prefers helper-form return plus capture_slice() for the bracket body read');
+    like($source_content, qr/substitute_statement2\[1\] \{return\(capture_slice\(\)\)\}/, 'hlink_substitution substitute_statement2 now returns the bracket body through the neutral capture_slice() helper');
+    unlike($source_content, qr/return\(\\\(my \$capt = capture_slice\(\)\)\)/, 'hlink_substitution bracket body no longer returns a Perl scalar reference payload');
     unlike($source_content, qr/substitute_statement2\[1\] \{return \\\(my \$capt = substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - 1\)\)\}/, 'hlink_substitution substitute_statement2 no longer uses the raw anonymous-boundary substr read');
     unlike($source_content, qr/substitute_statement2\[1\] \{return \\\(my \$capt = capture_slice\(\)\)\}/, 'hlink_substitution substitute_statement2 no longer uses bare return compatibility syntax');
     like($source_content, qr/curlyb\[1\]\s+\{return\(cat\("\{", capture_slice\(\), "\}"\)\)\}/, 'hlink_substitution curlyb now rebuilds the wrapped brace body through helper-form cat plus capture_slice()');
@@ -42905,7 +42906,7 @@ subtest 'pplugin_helper_flow_eliminates_raw_fallback' => sub {
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'pplugin exposes no top blocked rule after helper migration');
 };
 subtest 'pplugin_parser_smoke' => sub {
-    plan tests => 8;
+    plan tests => 10;
 
     my $parser = LinkedSpec::get_parser('pplugin');
     ok(defined($parser) && ref($parser) eq 'CODE', 'pplugin parser created');
@@ -42920,10 +42921,15 @@ PPLUGIN
     ok(!$@, 'pplugin parser executed without die') or diag(normalize_error($@));
     ok(defined($ast) && ref($ast) eq 'HASH', 'pplugin parser returned a hash AST');
     is_deeply([sort keys %$ast], [qw(bar foo)], 'pplugin AST preserves expected subdef names');
-    is(ref($ast->{foo}), 'CODE', 'pplugin foo entry is a coderef');
-    is(ref($ast->{bar}), 'CODE', 'pplugin bar entry is a coderef');
-    is($ast->{foo}->(), 3, 'pplugin foo coderef preserves evaluated body behavior');
-   is($ast->{bar}->(), 'ok', 'pplugin bar coderef preserves evaluated body behavior');
+    is($ast->{foo}, ' 1 + 2 ', 'pplugin foo entry is parsed plugin body text');
+    is($ast->{bar}, ' qq(ok) ', 'pplugin bar entry is parsed plugin body text');
+
+    require PPlugin;
+    my $registry = PPlugin::_normalize_plugin_registry_payload($ast);
+    ok(defined($registry) && ref($registry) eq 'HASH', 'PPlugin normalizes parsed plugin body text into a registry');
+    is(ref($registry->{foo}), 'CODE', 'PPlugin wraps foo body text as a coderef');
+    is($registry->{foo}->(), 3, 'PPlugin foo coderef preserves evaluated body behavior');
+    is($registry->{bar}->(), 'ok', 'PPlugin bar coderef preserves evaluated body behavior');
 };
 subtest 'pplugin_spec_prefers_canonical_container_wrappers_in_top_aggregation_band' => sub {
     plan tests => 14;
@@ -42939,7 +42945,7 @@ subtest 'pplugin_spec_prefers_canonical_container_wrappers_in_top_aggregation_ba
     like($source_content, qr/set\(array\(defs\), array\(flat_array\(defs\), retv\[0\], retv\[1\]\)\)/, 'pplugin top aggregation now uses canonical array wrappers and direct access in set and constructor positions');
     like($source_content, qr/return_undef\(\);/, 'pplugin top aggregation fallback now uses helper-form return_undef()');
     like($source_content, qr/^LX \{return\(hash\(flat_array\(array\(defs\)\)\)\)\}/m, 'pplugin top LX now builds the returned definition hash through helper-form hash construction');
-    like($source_content, qr/subdef\[1\]\s+\{return\(array\(entry_named\(subname\), sub \{eval substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS -1\)\}\)\)\}/, 'pplugin subdef body now uses helper-form array return around the preserved plugin-body coderef');
+    like($source_content, qr/subdef\[1\]\s+\{return\(array\(entry_named\(subname\), capture_slice\(\)\)\)\}/, 'pplugin subdef body now returns parsed plugin body text through capture_slice()');
     like($source_content, qr/curlyb\[1\]\s+\{return_undef\(\)\}/, 'pplugin curlyb completion now uses helper-form return_undef()');
     unlike($source_content, qr/assign\(a\(defs\), a\(flat_array\(defs\), retv\[0\], retv\[1\]\)\)\)/, 'pplugin top aggregation no longer uses retired a() aliases in the migrated band');
     unlike($source_content, qr/return undef unless defined \$retv/, 'pplugin top aggregation no longer uses bare return-unless compatibility syntax');

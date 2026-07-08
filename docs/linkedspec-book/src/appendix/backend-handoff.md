@@ -226,10 +226,10 @@ it now also compiles/runs a curated subset selected from the checked-in
 `rust/linkedspec-runtime/tests/corpus/manifest.json`. That generated-source corpus subset includes
 authored proof fixtures, terse helper/control/user-function fixtures, and
 shipped `tclite`/`portmap` smokes. This is deliberately a subset proof; the
-full 97-fixture corpus remains the Rust interpreter oracle gate unless a later
+full 99-fixture corpus remains the Rust interpreter oracle gate unless a later
 leaf explicitly broadens generated-source corpus coverage.
 `RUST-PARITY.9` closed the Rust follow-on documentation state around that
-boundary: interpreter parity is the 97-fixture corpus contract, while generated
+boundary: interpreter parity is the 99-fixture corpus contract, while generated
 source currently proves direct structural-family execution plus the curated
 manifest subset.
 
@@ -243,10 +243,11 @@ every manifest entry, and its runner rejects missing fixture directories or
 stale extra fixture directories.
 
 The checked-in Rust corpus is kept green while parity work lands incrementally. It now has
-97 fixtures, including the `with(...) { ... }` helper, `.with() { ... }` receiver trailing block case, hash-tree traversal receiver block case, and array-tree traversal receiver block case; the two minimal shipped `tclite.spec` cases restored by the
+99 fixtures, including the `with(...) { ... }` helper, `.with() { ... }` receiver trailing block case, hash-tree traversal receiver block case, and array-tree traversal receiver block case; the two minimal shipped `tclite.spec` cases restored by the
 default-mode repetition parity work; the shipped `Lispish.spec` `lispish_x_y` case now
 migrated to direct nested access; the first `hlink_substitution` raw-string cases plus the
-JSON-safe `{abc}` curly-brace delimiter case; `lib_reader.spec` scalar-attribute and
+JSON-safe `{abc}` curly-brace delimiter case and the neutral bracket/mixed delimiter cases;
+`lib_reader.spec` scalar-attribute and
 comma-list attribute cases; `portmap.spec` bare, bit, slice, constant, and concatenation
 cases; `ebnf.spec` expression-rule and logging-annotation payload cases; four `spec.spec`
 smokes for minimal rules, action edges, user-function definitions, and comments; seven

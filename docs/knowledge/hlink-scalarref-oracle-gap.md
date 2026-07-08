@@ -1,6 +1,6 @@
 ---
 id: hlink-scalarref-oracle-gap
-title: hlink_substitution bracket/mixed fixtures are deferred because Perl emits scalar refs that JSON cannot encode and Rust cannot yet execute the scalar-ref action branch
+title: hlink_substitution bracket/mixed scalar-ref oracle gap is resolved; bracket payloads now return neutral strings and the Rust corpus includes hlink_bracket_body plus hlink_mixed_bracket_brace
 answers:
   - "why can't hlink_substitution bracket fixtures be added directly to the JSON oracle"
   - "why are hlink bracket fixtures deferred"
@@ -11,37 +11,39 @@ answers:
   - "which leaf owns deferred hlink scalar-ref fixture support"
   - "what happens when Rust executes hlink [abc]"
   - "when did hlink_curly_brace enter the Rust oracle corpus"
+  - "when did hlink_bracket_body enter the Rust oracle corpus"
+  - "when did hlink_mixed_bracket_brace enter the Rust oracle corpus"
+  - "is the hlink scalar-ref oracle gap resolved"
 date: 2026-07-03
-status: confirmed
+status: superseded
 tags: [rust, oracle, corpus, hlink-substitution, RUST-PARITY]
-evidence: "RUST-PARITY.7.3.3.1 read specs/hlink_substitution.spec, existing hlink corpus fixtures, and phase0 hlink_substitution_parser_smoke. Perl returns [\\'abc'] for [abc] and a mixed array containing a scalar ref for foo[bar]{baz}; JSON::PP refuses scalar refs with 'cannot encode reference to scalar'. The {abc} case returns a plain string payload ['{abc}'] and is JSON-safe. RUST-PARITY.7.3.3.2 added hlink_curly_brace for {abc}; the generator now produces 66 fixtures and Rust corpus_oracle passes. RUST-PARITY.7.3.3.3 then probed Rust and found the bracket path is not only a JSON-representation gap: Rust has no scalar-ref RuntimeValue, and the shipped action payload return(\\(my $capt = capture_slice())) is rejected by the Rust action parser before [abc] falls through to unmatched-closing-bracket exit_now(2). Bracket/mixed fixtures are deferred to RUST-PARITY.7.3.3.4 until a neutral scalar-ref contract or hlink spec migration exists."
-reverify: "perl -Iperl -MData::Dumper -MJSON::PP -MLinkedSpec -e 'my $p=LinkedSpec::get_parser(\"hlink_substitution\"); for my $input (\"[abc]\",\"foo[bar]{baz}\") { my $copy=$input; my $v=$p->(\\$copy); print \"INPUT=$input\\n\"; print Dumper($v); eval { print JSON::PP->new->canonical(1)->encode($v),\"\\n\" }; print \"JSON_ERR=$@\" if $@ }'; rg -n 'hlink_curly_brace|return\\(\\\\\\(my \\$capt = capture_slice\\(\\)\\)\\)|enum RuntimeValue|fn to_json|RUST-PARITY\\.7\\.3\\.3\\.4' tools/gen_oracle_corpus.pl specs/hlink_substitution.spec rust/linkedspec-core/src/types.rs docs/tasks/RUST-PARITY.md"
+evidence: "RUST-PARITY.7.3.3.1 read specs/hlink_substitution.spec, existing hlink corpus fixtures, and phase0 hlink_substitution_parser_smoke. Perl then returned [\\'abc'] for [abc] and a mixed array containing a scalar ref for foo[bar]{baz}; JSON::PP refused scalar refs with 'cannot encode reference to scalar'. The {abc} case returned a plain string payload ['{abc}'] and RUST-PARITY.7.3.3.2 added hlink_curly_brace. RUST-PARITY.7.3.3.3 then proved Rust also lacked the scalar-ref action branch, so bracket/mixed fixtures were deferred. SPEC-SOURCE-TERSE-CLOSEOUT.1 superseded that blocker by migrating specs/hlink_substitution.spec::substitute_statement2[1] to return(capture_slice()). Perl now returns ['abc'] for [abc] and ['foo','bar','{baz}'] for foo[bar]{baz}; tools/gen_oracle_corpus.pl includes hlink_bracket_body and hlink_mixed_bracket_brace; the manifest case_count is 99; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference passes over all 99 fixtures."
+reverify: "perl -Iperl -MJSON::PP -MLinkedSpec -e 'my $p=LinkedSpec::get_parser(\"hlink_substitution\"); for my $input (\"[abc]\",\"foo[bar]{baz}\") { my $copy=$input; my $v=$p->(\\$copy); print JSON::PP->new->canonical(1)->encode($v),\"\\n\" }'; rg -n 'return\\(capture_slice\\(\\)\\)|hlink_bracket_body|hlink_mixed_bracket_brace|\"case_count\" : 99' specs/hlink_substitution.spec tools/gen_oracle_corpus.pl rust/linkedspec-runtime/tests/corpus/manifest.json; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference"
 ---
 
 # hlink_substitution Scalar-Reference Oracle Gap
 
-**Confirmed 2026-07-03 (`RUST-PARITY.7.3.3.1`); updated by
-`RUST-PARITY.7.3.3.2` and `.7.3.3.3`.** The remaining
-`hlink_substitution` delimiter candidates do not all have the same oracle shape or Rust support.
+**Confirmed 2026-07-03 (`RUST-PARITY.7.3.3.1`); superseded 2026-07-08 by
+`SPEC-SOURCE-TERSE-CLOSEOUT.1`.** The original scalar-reference oracle gap is closed.
 
-- `{abc}` returns a plain string payload and can be represented directly in
-  `expected.json`; this is now checked in as `hlink_curly_brace`.
-- `[abc]` returns a Perl scalar reference (`[\'abc']`) in the reference AST.
-- `foo[bar]{baz}` returns a mixed array containing that scalar-reference bracket
-  payload.
+Historical state:
 
-`JSON::PP` refuses to encode scalar references, so bracket and mixed
-`hlink_substitution` fixtures need an explicit cross-variant representation
-decision before they enter the language-neutral JSON corpus. `.7.3.3.3` also showed
-that current Rust cannot simply produce an equivalent bracket AST: the scalar-ref action
-payload in `substitute_statement2` is rejected by the Rust action parser, and `[abc]`
-then falls through to the shipped unmatched-closing-bracket `exit_now(2)` path.
+- `{abc}` returned a plain string payload and entered the corpus as `hlink_curly_brace`.
+- `[abc]` returned a Perl scalar reference (`[\'abc']`).
+- `foo[bar]{baz}` returned a mixed array containing that scalar-reference bracket payload.
+
+Current state:
+
+- `substitute_statement2[1]` returns `capture_slice()` directly.
+- `[abc]` returns `["abc"]`.
+- `foo[bar]{baz}` returns `["foo","bar","{baz}"]`.
+- `hlink_bracket_body` and `hlink_mixed_bracket_brace` are checked-in oracle fixtures in
+  the 99-fixture Rust corpus.
 
 The owned leaves are:
 
 - `RUST-PARITY.7.3.3.2`: done — added the JSON-safe curly-brace fixture.
 - `RUST-PARITY.7.3.3.3`: done — deferred bracket/mixed fixtures with Perl JSON
   failure and Rust action-branch evidence.
-- `RUST-PARITY.7.3.3.4`: deferred — reopen only to define a neutral tagged
-  scalar-ref JSON contract plus Rust support, or to migrate the hlink spec away
-  from Perl scalar-ref AST values.
+- `RUST-PARITY.7.3.3.4`: superseded — no neutral scalar-ref contract is needed for
+  this hlink path because the shipped spec now emits neutral string payloads.
