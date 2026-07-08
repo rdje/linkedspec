@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (MEMORY-PUSH-POINTER-SYNC.1 — push threshold state is live, not durable):
+  `MEMORY.md` should not fossilize a branch ahead-count as if it were a durable fact. A final clean-status check
+  showed `git status -sb` at ahead 27 while the resume pointer still said the branch was over the documented
+  300-commit push threshold. The durable guidance now says to check `git status -sb` for the live ahead count and
+  not push mid-PNT unless explicitly instructed or deliberately invoking the threshold policy. The post-commit
+  `latest_commit` hash warning remains the known soft hook boundary; this slice did not rework that mechanism.
+
 - 2026-07-08 (ROADMAP-POST-12-DRIFT-SYNC.1 — long roadmap count drift):
   Startup review after `SPEC-FORMAT-TERSE.12.4` found only the long-form `ROADMAP.md` still carrying the previous
   current-state counts (`1..1026` and 95 Rust oracle fixtures). The mdBook status/helper/backend chapters already

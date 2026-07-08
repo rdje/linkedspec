@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **MEMORY-PUSH-POINTER-SYNC.1 — remove stale push threshold claim**
+  (DONE continuity-only correction; tree CLOSED).
+
+  **Change:** Replaced the stale `MEMORY.md` claim that the branch was over the 300-commit push threshold with
+  policy-oriented guidance to check `git status -sb` for the live ahead count and avoid pushing mid-PNT unless
+  explicitly instructed or deliberately invoking the threshold policy.
+
+  **Boundary:** No parser/runtime behavior, corpus data, roadmap status, or mdBook source changed. The known
+  post-commit `latest_commit` hash warning remains soft and unchanged.
+
+  **Verification:** Focused stale-threshold scan, live branch-status check, memory architecture, doctrine,
+  task-tree metadata, and whitespace checks pass.
+
 - 2026-07-08: **ROADMAP-POST-12-DRIFT-SYNC.1 — sync long roadmap baseline**
   (DONE docs-only drift correction; tree CLOSED).
 

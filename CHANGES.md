@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — MEMORY-PUSH-POINTER-SYNC.1 — remove stale push threshold claim
+
+**Scope:** Continuity-only correction for the layer-A resume pointer.
+
+**Change:** Replaced the stale `MEMORY.md` statement that the branch was over the 300-commit push threshold with
+policy-oriented guidance to check `git status -sb` for the live ahead count and avoid pushing mid-PNT unless
+explicitly instructed or the threshold policy is deliberately invoked. Added and closed a narrow task-tree owner for
+the correction.
+
+**Validation:** Focused stale-threshold scan; `git status -sb`; `bash scripts/check_memory_architecture.sh`;
+`bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `git diff --check`.
+
 ## 2026-07-08 — ROADMAP-POST-12-DRIFT-SYNC.1 — sync long roadmap baseline
 
 **Scope:** Documentation-only correction for startup-discovered current-state drift in the long-form roadmap.
