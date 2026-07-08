@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.19 — finalize book scorch
+
+**Scope:** mdBook whole-book scorch closeout.
+
+**Change:** Ran the final regex-on-`::` sweep and fixed the remaining mdBook examples
+that still violated the scorch doctrine: the recursive `sexpr` example in
+`spec-files-and-rule-paragraphs.md`, two terse helper examples in `helper-contract-catalog.md`,
+and the function-registry proof snippet in `compiler/pipeline-overview.md`. Corrected the
+direct value-path output to the verified `"updated"` result.
+
+**Validation:** Whole-book `rg` scans for same-line and next-line regex slots under `::`
+headers return no matches. Focused `LinkedSpec::Get` probes verify the corrected `sexpr`,
+direct value-path, array mutation, and function-registry outputs. `mdbook build
+docs/linkedspec-book` passes.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.18 — verify portmap walkthrough outputs
 
 **Scope:** mdBook portmap walkthrough output verification.

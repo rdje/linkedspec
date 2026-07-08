@@ -756,14 +756,21 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.5.18` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.19`
-  Status: `pending`
+  Status: `done`
   Goal: Finalize the scorch — whole-book re-grep confirming **zero** regex-on-`::` example rules
   remain, every claimed I/O re-verified, `mdbook build` exit 0; close the planned `.10.5.2`–`.10.5.18`
   book-page sweep
   Acceptance: clean whole-book sweep; planned page-fix children `done`/`superseded`; any follow-up drift
   leaf remains separately tracked if it is not part of the page-scorch closeout.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. Whole-book `rg` scans for same-line and immediately-following-line
+  regex slots under `::` rule headers now return no matches across `docs/linkedspec-book/src`. The closeout
+  sweep found and fixed three residual mdBook examples: the recursive `sexpr` example in
+  `spec-files-and-rule-paragraphs.md`, the direct value-path and array-end-mutation examples in
+  `helper-contract-catalog.md`, and the function-registry proof snippet in `compiler/pipeline-overview.md`.
+  Focused `LinkedSpec::Get` probes verify the corrected outputs: `(a(b)c)` -> `[["a",["b"],"c"]]`,
+  `(a) (b)` -> `[["a"],["b"]]`, direct value-path assignment -> `"updated"`, array end mutations ->
+  `["a"]`, and the function proof -> `["x","ab",2,"v"]`. `mdbook build docs/linkedspec-book` exits 0.
+  Commit: `SPEC-LANG-REFERENCE.10.5.19` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.20`
   Status: `pending`
@@ -898,8 +905,16 @@ target) · CLEAN.
 | `specs-and-corpora/tablegrep-spec-walkthrough.md` | `field1 =~ /foo/` `sens`; GROUP example | B | `sens '=~'` → **`'='`**; group → **`{"group":["internal"]}`** | `.10.5.17` |
 | `specs-and-corpora/portmap-spec-walkthrough.md` | 5 output-shape examples | B | flat `['?bare:','clk',undef,…]` → **nested `["?bare:",["clk"]]` / `["?slice:",["addr","7","0"]]`** | `.10.5.18` |
 
-**Confirmed CLEAN (no fix needed):** all `compiler/*`, `architecture/owner-tree.md`, `development/*`
-(zero `.spec` grammar blocks — Perl/JSON/bash only); `public-api/{trace-api,plugin-registry,descriptor-introspection}.md`;
+**Closeout residuals (`.10.5.19`, fixed):**
+
+| File | Block(s) | Class | Drift fixed | Fix leaf |
+| --- | --- | --- | --- | --- |
+| `user-model/spec-files-and-rule-paragraphs.md` | recursive `sexpr:: /\(/ /\)/` example | A | regex on `::` in the recursion example; rewritten as no-regex `top::` wrapper plus normal recursive `sexpr:` rule | `.10.5.19` |
+| `appendix/helper-contract-catalog.md` | direct value-path and array-end-mutation worked examples | A+B | `Top:: /x/` / `Done:: /[a-z]+/` examples rewritten to no-regex `Top:: -> Done`; direct value-path output corrected to `"updated"` and semicolon-separated terse statements restored | `.10.5.19` |
+| `compiler/pipeline-overview.md` | function-registry runtime proof snippet | A | `Top:: /x/` / `Done:: /x/` proof rewritten to no-regex `Top:: -> Done`; function bodies use the verified `copy(array(...))` / `copy(hash(...))` forms | `.10.5.19` |
+
+**Confirmed CLEAN (no fix needed after `.10.5.19`):** remaining `compiler/*`, `architecture/owner-tree.md`,
+`development/*`; `public-api/{trace-api,plugin-registry,descriptor-introspection}.md`;
 `appendix/helper-contract-catalog.md` §2/§5 worked examples (the `.10.3` 2-rule idiom, re-spot-checked);
 `appendix/backend-handoff.md`; `specs-and-corpora/shipped-specs-and-corpora.md`;
 `specs-and-corpora/lispish-spec-walkthrough.md` (faithful shipped-spec quotes + verified outputs);
@@ -945,8 +960,8 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.5.16` | `done` | `appendix/runtime-semantics.md` §5.5/§5.6 fixed 2026-07-08; `.10.4` folded; five outputs reverified |
 | — | `SPEC-LANG-REFERENCE.10.5.17` | `done` | `tablegrep-spec-walkthrough.md` output drift fixed 2026-07-08; parser outputs and descriptor metadata reverified |
 | — | `SPEC-LANG-REFERENCE.10.5.18` | `done` | `portmap-spec-walkthrough.md` output-shape examples reverified 2026-07-08; current page already matches live nested JSON |
-| 9 | `SPEC-LANG-REFERENCE.10.5.19` | `pending` | finalize planned page scorch — whole-book re-grep + `mdbook build` |
-| 10 | `SPEC-LANG-REFERENCE.10.5.20` | `pending` | resolve lifecycle final-value / direct-`E` Perl handler drift found during `.10.5.9` |
+| — | `SPEC-LANG-REFERENCE.10.5.19` | `done` | planned page scorch finalized 2026-07-08; residual regex-on-`::` examples fixed; whole-book re-grep clean |
+| 9 | `SPEC-LANG-REFERENCE.10.5.20` | `pending` | resolve lifecycle final-value / direct-`E` Perl handler drift found during `.10.5.9` |
 | — | `SPEC-LANG-REFERENCE.10.4` | `superseded` | folded into `.10.5.16` |
 | 18 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the scorch |
 | 19 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
@@ -1132,6 +1147,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.5.16` | `SPEC-LANG-REFERENCE.10.5.16 — fix runtime semantics examples` | `runtime-semantics.md` §5.5/§5.6 now uses no-regex `Top::` wrappers plus normal regex-owning `Done:`, `Pair:`, `object:`, and `manifest:` rules. The folded `.10.4` Pair target now returns the verified `entry_group` tagged array through `Top`; five focused outputs, page scan, and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.17` | `SPEC-LANG-REFERENCE.10.5.17 — fix tablegrep walkthrough outputs` | `tablegrep-spec-walkthrough.md` now shows verified JSON outputs for the simple term and grouped expression (`sens` is `=`), and its descriptor helper list matches the live spec. Parser probes, descriptor metadata probe, and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.18` | `SPEC-LANG-REFERENCE.10.5.18 — verify portmap walkthrough outputs` | `portmap-spec-walkthrough.md`'s five output-shape examples were rechecked against `LinkedSpec::get_parser('portmap')`; the current page already matches the live nested JSON for bare, bit, slice, constant, and concatenation cases. Parser probes and mdBook build pass |
+| `SPEC-LANG-REFERENCE.10.5.19` | `SPEC-LANG-REFERENCE.10.5.19 — finalize book scorch` | Whole-book closeout scans found and fixed the remaining regex-on-`::` mdBook examples in `spec-files-and-rule-paragraphs.md`, `helper-contract-catalog.md`, and `compiler/pipeline-overview.md`. Follow-up scans return no matches; focused parser probes and mdBook build pass |
 
 ## Changelog
 
@@ -1407,3 +1423,10 @@ wrapped only where a complete worked example is intended) during the per-file fi
   backend output: bare, bit, slice, constant, and concatenation cases are nested tagged arrays rather
   than flat `undef`-padded records. `mdbook build` exit 0. Frontier → `.10.5.19`
   (planned whole-book closeout sweep).
+- `2026-07-08`: `.10.5.19` done — finalized the planned whole-book scorch. Closeout scans found
+  three residual regex-on-`::` examples and fixed them in
+  `user-model/spec-files-and-rule-paragraphs.md`, `appendix/helper-contract-catalog.md`, and
+  `compiler/pipeline-overview.md`. Focused `LinkedSpec::Get` probes verify the corrected `sexpr`,
+  direct value-path, array end-mutation, and function-registry outputs. Whole-book regex-on-`::`
+  re-greps are clean and `mdbook build` exits 0. Frontier → `.10.5.20`
+  (lifecycle handler-shape drift follow-up).

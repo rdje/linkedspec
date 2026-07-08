@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.19 — finalize book scorch**
+  (DONE mdBook closeout; frontier `.10.5.20` next).
+
+  **Change:** Fixed the final residual regex-on-`::` mdBook examples in
+  `spec-files-and-rule-paragraphs.md`, `helper-contract-catalog.md`, and
+  `compiler/pipeline-overview.md`, and corrected the helper-catalog direct value-path output.
+
+  **Boundary:** No parser/runtime/source behavior changed. This closes the planned page-scorch
+  sweep and leaves the previously tracked lifecycle handler-shape drift as `.10.5.20`.
+
+  **Verification:** Whole-book regex-on-`::` scans return no matches; focused `LinkedSpec::Get`
+  probes cover the corrected recursion, direct value-path, array mutation, and function-registry
+  examples; mdBook, doctrine, task-tree, memory, Knowledge Map, and whitespace checks pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.18 — verify portmap walkthrough outputs**
   (DONE mdBook verification; frontier `.10.5.19` next).
 

@@ -62,32 +62,35 @@ adjacent slot that owns an edge, as the name slot does here.)
 
 ### Recursion and termination (consume before you recurse)
 
-Recursion is just an edge or a `call(...)` that re-enters a rule — including the top
-rule. The one requirement is **forward progress**: every recursive cycle must consume
-input before it recurses. A rule that re-enters itself at the **same input position**
+Recursion is just an edge or a `call(...)` that re-enters a rule. The one requirement is
+**forward progress**: every recursive cycle must consume input before it recurses. A rule
+that re-enters itself at the **same input position**
 without consuming anything is a non-progressing cycle; the engine **cuts** such a
 re-entry (it yields `undef`) so the parser terminates instead of hanging. Idiomatic
 recursion consumes first — for example a parenthesis rule matches `(`, recurses, then
 matches `)` — and is never affected by the cut.
 
-A recursive rule used **as the top rule** is still an ordinary accumulating rule, so —
-like any accumulating top rule — it needs an `LX` block to surface its accumulator when
-the input is exhausted:
+When a recursive rule is dispatched from the top entry rule, the top rule still needs
+an `LX` block to surface its accumulator when the input is exhausted:
 
 ```text
-sexpr:: /\(/ /\)/  I { items = [] }
+top::
+ -> sexpr .push
+LX { return(copy(array(top))) }
+
+sexpr: /\(/ /\)/  I { items = [] }
  -> sexpr     { push(array(items), call(sexpr)) }
  -> atom      { push(array(items), call(atom)) }
  -> sexpr[1]  { return(copy(array(items))) }
-LX { return(copy(array(items))) }
 
 atom: /[A-Za-z0-9]+/   I.return(entry_text())
 ```
 
-With the `LX`, input `(a(b)c)` returns `[["a",["b"],"c"]]` and `(a) (b)` returns
+With the top-rule `LX`, input `(a(b)c)` returns `[["a",["b"],"c"]]` and `(a) (b)` returns
 `[["a"],["b"]]` — the top rule accumulates the **sequence** of top-level forms. Without
-the `LX`, the same top rule returns `null` (a bare accumulating top rule returns `undef`
-at end of input); the `null` is the missing-`LX` authoring case, not an engine fault.
+the `LX`, the same top wrapper returns `null` (a bare accumulating top rule returns
+`undef` at end of input); the `null` is the missing-`LX` authoring case, not an engine
+fault.
 
 ## Minimal example
 

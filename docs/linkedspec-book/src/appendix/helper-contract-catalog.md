@@ -244,17 +244,17 @@ dispatch rule.
 - **Example**:
   ```text
   Top::
-   /x/ -> Done {
-     set(payload, hash("children", array(hash("name", "one"), hash("name", "two"))))
-     set(i, 1)
-     payload["children"][i]["name"] = "updated"
+   -> Done {
+     set(payload, hash("children", array(hash("name", "one"), hash("name", "two"))));
+     set(i, 1);
+     payload["children"][i]["name"] = "updated";
      return(payload["children"][i]["name"])
    }
 
-  Done::
+  Done:
    /[a-z]+/
   ```
-  Input `xhello` -> `["two"]`.
+  Input `xhello` -> `"updated"`.
 
 ### `concat(args...)`
 - **Signature**: `concat(a: scalar, b: scalar, ...)`
@@ -484,14 +484,14 @@ dispatch rule.
 - **Worked example**:
   ```text
   Top::
-   /x/ -> Done {
-    set(value, "b")
-    items.push_back("a")
-    items.push_back(value)
-    items.push_front("z")
-    items.pop_back()
-    items.pop_front()
-    return(copy(items))
+   -> Done {
+    set(value, "b");
+    items.push_back("a");
+    items.push_back(value);
+    items.push_front("z");
+    items.pop_back();
+    items.pop_front();
+    return(copy(array(items)))
    }
 
   Done:

@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.19 — whole-book scorch closeout):
+  The final mdBook re-grep found three residual regex-on-`::` examples after the per-file leaves:
+  `spec-files-and-rule-paragraphs.md`'s recursive `sexpr::` example, two helper-catalog terse examples
+  (`Top:: /x/` plus `Done:: /[a-z]+/`), and `compiler/pipeline-overview.md`'s function-registry proof
+  snippet. They now use no-regex `Top::` wrappers with normal regex-owning rules. The helper examples
+  also restore semicolon-separated terse statements per the existing `terse-statement-separator-contract`
+  Knowledge card; the direct value-path example's verified result is `"updated"`, not `["two"]`.
+  Whole-book regex-on-`::` scans now return no matches. The next scorch leaf is `.10.5.20` for the
+  lifecycle handler-shape drift already recorded during `.10.5.9`.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.18 — portmap walkthrough outputs):
   `specs-and-corpora/portmap-spec-walkthrough.md` already matched the live Perl reference output
   when this leaf was executed. `LinkedSpec::get_parser('portmap')` returns nested tagged arrays for

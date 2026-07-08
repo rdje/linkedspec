@@ -18,20 +18,21 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.18` — reverified
-  `portmap-spec-walkthrough.md` output-shape examples against the Perl reference; the current page
-  already matches the live nested JSON for bare, bit, slice, constant, and concatenation cases.
-- prior_leaf: `SPEC-LANG-REFERENCE.10.5.17` — fixed `tablegrep-spec-walkthrough.md`
-  output drift and descriptor helper metadata.
+- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.19` — finalized the planned whole-book scorch;
+  residual regex-on-`::` mdBook examples in spec-file recursion, helper-catalog terse examples, and
+  the compiler function-registry proof snippet are fixed, and whole-book re-greps are clean.
+- prior_leaf: `SPEC-LANG-REFERENCE.10.5.18` — reverified `portmap-spec-walkthrough.md`
+  output-shape examples against the Perl reference.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-LANG-REFERENCE.10.5.18 - verify portmap walkthrough outputs`; parent before this slice is
-  `SPEC-LANG-REFERENCE.10.5.17 - fix tablegrep walkthrough outputs`.
+  `SPEC-LANG-REFERENCE.10.5.19 - finalize book scorch`; parent before this slice is
+  `SPEC-LANG-REFERENCE.10.5.18 - verify portmap walkthrough outputs`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `SPEC-LANG-REFERENCE.10.5.19` is the next active leaf in the reactivated
+- active_work_unit: `SPEC-LANG-REFERENCE.10.5.20` is the next active leaf in the reactivated
   language-reference scorch.
-- next_action: from a clean repo, execute `.10.5.19`: run the planned whole-book scorch closeout
-  re-greps, reverify any remaining claimed I/O that the sweep surfaces, and run `mdbook build`.
+- next_action: from a clean repo, execute `.10.5.20`: decide and resolve the lifecycle final-value /
+  direct-`E` Perl handler-shape drift recorded during `.10.5.9`, keeping Perl untouched unless a
+  separately-owned implementation leaf explicitly authorizes code changes.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
   enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.

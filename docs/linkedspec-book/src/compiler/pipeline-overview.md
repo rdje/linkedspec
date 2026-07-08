@@ -175,15 +175,15 @@ with several function bodies such as:
 ```text
 fn normalize(value) { return(trim(value)) }
 fn join_pair(left, right) { return(cat(left, right)) }
-fn mk_items(first, second) { items += first; items += second; return(copy(items)) }
-fn mk_meta(key, value) { meta[key] = value; return(copy(meta)) }
+fn mk_items(first, second) { items += first; items += second; return(copy(array(items))) }
+fn mk_meta(key, value) { meta[key] = value; return(copy(hash(meta))) }
 
 Top::
- /x/ -> Done {
-  stage_meta = mk_meta("k", "v")
+ -> Done {
+  set(stage_meta, mk_meta("k", "v"));
   return([normalize(" x "), join_pair("a", "b"), count(mk_items("a", "b")), stage_meta["k"]])
  }
-Done::
+Done:
  /x/
 ```
 
