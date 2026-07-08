@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.12 — fix source-boundary examples
+
+**Scope:** mdBook source-boundary helper reference correction.
+
+**Change:** Reworked `dsl/source-boundary-helper-reference.md` so the Tuple, Block, Paren,
+Pair, Body, AtEnd, and entry-vs-match examples use no-regex `Top::AND` blind-call wrappers
+plus regex-owning normal rules. Added a seek-mode note for delimiter-body examples and
+reduced the Tuple/Body capture sequences to verified two-segment forms that still demonstrate
+`capture_take()`, `capture_slice()`, and the anonymous/named boundary bridge.
+
+**Validation:** Seven focused `LinkedSpec::Get` probes verify the replacement snippets:
+Tuple, Block, Paren, Pair, Body, AtEnd, and entry-vs-match. The page scan finds no regex
+slot under a `::` header; `mdbook build docs/linkedspec-book` passes.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.11 — fix declaration helper examples
 
 **Scope:** mdBook declaration-helper chapter correction.

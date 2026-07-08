@@ -18,23 +18,23 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.11` — fixed
-  `dsl/declaration-helper-reference.md`: accumulator and metadata examples now use no-regex `::` wrappers
-  with regex-owning normal rules (`Item:` / `Token:`), and the documented `alpha beta` + `Alpha` outputs
-  were reverified through `LinkedSpec::Get`.
-- prior_leaf: `SPEC-LANG-REFERENCE.10.5.10` — fixed `dsl/capture-marks-and-source-locations.md` and
-  recorded `perl-capture-slice-delimiter-seek-boundary`.
+- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.12` — fixed
+  `dsl/source-boundary-helper-reference.md`: Tuple/Block/Paren/Pair/Body/AtEnd/entry-vs-match examples
+  now use no-regex `Top::AND` blind-call wrappers plus regex-owning normal rules, with seven
+  `LinkedSpec::Get` outputs reverified.
+- prior_leaf: `SPEC-LANG-REFERENCE.10.5.11` — fixed `dsl/declaration-helper-reference.md`
+  List/Token examples.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-LANG-REFERENCE.10.5.11 - fix declaration helper examples`; parent before this slice is
-  `SPEC-LANG-REFERENCE.10.5.10 - fix capture and entry-match examples`.
+  `SPEC-LANG-REFERENCE.10.5.12 - fix source-boundary examples`; parent before this slice is
+  `SPEC-LANG-REFERENCE.10.5.11 - fix declaration helper examples`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `SPEC-LANG-REFERENCE.10.5.12` is the next active leaf in the reactivated
+- active_work_unit: `SPEC-LANG-REFERENCE.10.5.13` is the next active leaf in the reactivated
   language-reference scorch.
-- next_action: from a clean repo, execute `.10.5.12`: fix
-  `docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md` worked examples
-  (`Tuple::AND`, `Block::AND`, `Paren::AND`, `Pair::AND`, `Body::AND`, `AtEnd::AND`,
-  `Top::AND`/`Child::AND`) to doctrine-valid wrappers / normal matcher rules.
+- next_action: from a clean repo, execute `.10.5.13`: fix
+  `docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md` worked examples
+  (`Token::AND`, `Node::AND`, `Sequence::AND`, `Kind::AND`, `FieldList::AND`; `logging_annotation:`
+  already normal) to doctrine-valid wrappers / normal matcher rules.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
   enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.

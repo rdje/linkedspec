@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.12 — fix source-boundary examples**
+  (DONE mdBook correction; frontier `.10.5.13` next).
+
+  **Change:** Reworked `dsl/source-boundary-helper-reference.md` so the source-boundary examples use
+  no-regex `Top::AND` blind-call wrappers plus normal regex-owning rules for Tuple, Block, Paren,
+  Pair, Body, AtEnd, and entry-vs-match examples.
+
+  **Boundary:** No parser/runtime/source behavior changed. Delimiter-body examples are now explicitly
+  seek-shaped, matching the previously recorded capture-slice caveat.
+
+  **Verification:** Seven focused `LinkedSpec::Get` probes cover the replacement snippets; page scan
+  finds no regex under `::`; mdBook, doctrine, task-tree, memory, Knowledge Map, and whitespace checks pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.11 — fix declaration helper examples**
   (DONE mdBook correction; frontier `.10.5.12` next).
 

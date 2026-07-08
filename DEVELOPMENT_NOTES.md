@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.12 — source-boundary examples):
+  `dsl/source-boundary-helper-reference.md` no longer uses regex-bearing `Tuple::AND`, `Block::AND`,
+  `Paren::AND`, `Pair::AND`, `Body::AND`, `AtEnd::AND`, or `Top::AND`/`Child::AND` examples. The page
+  now wraps each example with a no-regex `Top::AND => Rule` blind-call wrapper and puts regex slots on
+  normal `Rule:AND` / `Call:` / `Child:` rules. Delimiter-body examples are explicitly seek-shaped.
+  The old three-segment Tuple/Body sketches were reduced to verified two-segment forms; the same helper
+  mechanics remain covered without relying on unverified `null`-shaped output. The next scorch leaf is
+  `.10.5.13` for `dsl/value-container-flow-helper-reference.md`.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.11 — declaration helper examples):
   `dsl/declaration-helper-reference.md` now keeps declaration-helper replacement examples on the
   standard no-regex wrapper shape. The accumulator example uses `List::` only for state ownership

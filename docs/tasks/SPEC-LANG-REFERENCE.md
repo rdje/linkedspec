@@ -626,12 +626,23 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.5.11` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.12`
-  Status: `pending`
+  Status: `done`
   Goal: Fix `dsl/source-boundary-helper-reference.md` worked examples (`Tuple::AND`, `Block::AND`,
   `Paren::AND`, `Pair::AND`, `Body::AND`, `AtEnd::AND`, `Top::AND`/`Child::AND`) → 2-rule idiom
   Acceptance: doctrine-valid + re-verified; `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. Replaced every regex-owning `::AND` example with a no-regex
+  `Top::AND => <Rule>` blind-call wrapper and a normal regex-owning `<Rule>:AND` (or `Call:`/`Child:`)
+  rule. Added a short seek-mode note for delimiter-body examples, matching the caveat recorded in
+  `perl-capture-slice-delimiter-seek-boundary`. Reduced the old three-segment Tuple/Body sketches to
+  verified two-segment forms that still exercise `capture_take()`, `capture_slice()`,
+  `mark_capture_slice(...)`, and `start_capture_slice_from(...)`. Focused probes:
+  Tuple → `[["?Tuple:",["alpha","beta"]]]`; Block → `[{"body":"abc","body_start_col":2,"body_start_line":1}]`;
+  Paren → `[{"body":"abc","col":2,"line":1}]`; Pair → `[{"left":"left","right":"right"}]`;
+  Body bridge → `[{"first":"alpha","second":"beta","whole_body":"alpha,beta"}]`;
+  AtEnd → `[{"cursor_pos":7,"prefix":"abc END","remaining":"","source_end_col":8,"source_end_line":1,"source_len":7}]`;
+  entry-vs-match → `[{"entry_group_count":1,"entry_prefix":"foo","entry_text":"foo","local_group_count":1,"local_name":"bar","local_text":"bar"}]`.
+  The page scan reports no `::` header followed by a regex slot; `mdbook build docs/linkedspec-book` exits 0.
+  Commit: `SPEC-LANG-REFERENCE.10.5.12` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.13`
   Status: `pending`
@@ -871,15 +882,15 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.5.9` | `done` | `dsl/action-and-lifecycle-placement.md` fixed 2026-07-08; lifecycle drift caveat tracked |
 | — | `SPEC-LANG-REFERENCE.10.5.10` | `done` | `dsl/capture-marks-and-source-locations.md` fixed 2026-07-08; capture seek caveat tracked |
 | — | `SPEC-LANG-REFERENCE.10.5.11` | `done` | `dsl/declaration-helper-reference.md` fixed 2026-07-08; List/Token examples reverified |
-| 4 | `SPEC-LANG-REFERENCE.10.5.12` | `pending` | fix `dsl/source-boundary-helper-reference.md` (`Tuple::AND`/`Block::AND`/…) |
-| 5 | `SPEC-LANG-REFERENCE.10.5.13` | `pending` | fix `dsl/value-container-flow-helper-reference.md` (`Token::AND`/`Node::AND`/…) |
-| 6 | `SPEC-LANG-REFERENCE.10.5.14` | `pending` | fix remaining DSL pages (`values-containers` `Token::`, `action-model` `Top::`, `fluent-and-block-forms`, `actionir-lowering`) |
-| 7 | `SPEC-LANG-REFERENCE.10.5.15` | `pending` | fix `appendix/formal-grammar.md` §1 + §12 examples |
-| 8 | `SPEC-LANG-REFERENCE.10.5.16` | `pending` | fix `appendix/runtime-semantics.md` §5.5/§5.6 (folds `.10.4`) |
-| 9 | `SPEC-LANG-REFERENCE.10.5.17` | `pending` | fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts (`sens`/GROUP) |
-| 10 | `SPEC-LANG-REFERENCE.10.5.18` | `pending` | fix `specs-and-corpora/portmap-spec-walkthrough.md` 5 output-shape examples |
-| 11 | `SPEC-LANG-REFERENCE.10.5.19` | `pending` | finalize planned page scorch — whole-book re-grep + `mdbook build` |
-| 12 | `SPEC-LANG-REFERENCE.10.5.20` | `pending` | resolve lifecycle final-value / direct-`E` Perl handler drift found during `.10.5.9` |
+| — | `SPEC-LANG-REFERENCE.10.5.12` | `done` | `dsl/source-boundary-helper-reference.md` fixed 2026-07-08; seven examples reverified |
+| 4 | `SPEC-LANG-REFERENCE.10.5.13` | `pending` | fix `dsl/value-container-flow-helper-reference.md` (`Token::AND`/`Node::AND`/…) |
+| 5 | `SPEC-LANG-REFERENCE.10.5.14` | `pending` | fix remaining DSL pages (`values-containers` `Token::`, `action-model` `Top::`, `fluent-and-block-forms`, `actionir-lowering`) |
+| 6 | `SPEC-LANG-REFERENCE.10.5.15` | `pending` | fix `appendix/formal-grammar.md` §1 + §12 examples |
+| 7 | `SPEC-LANG-REFERENCE.10.5.16` | `pending` | fix `appendix/runtime-semantics.md` §5.5/§5.6 (folds `.10.4`) |
+| 8 | `SPEC-LANG-REFERENCE.10.5.17` | `pending` | fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts (`sens`/GROUP) |
+| 9 | `SPEC-LANG-REFERENCE.10.5.18` | `pending` | fix `specs-and-corpora/portmap-spec-walkthrough.md` 5 output-shape examples |
+| 10 | `SPEC-LANG-REFERENCE.10.5.19` | `pending` | finalize planned page scorch — whole-book re-grep + `mdbook build` |
+| 11 | `SPEC-LANG-REFERENCE.10.5.20` | `pending` | resolve lifecycle final-value / direct-`E` Perl handler drift found during `.10.5.9` |
 | — | `SPEC-LANG-REFERENCE.10.4` | `superseded` | folded into `.10.5.16` |
 | 18 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the scorch |
 | 19 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
@@ -1058,6 +1069,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.5.9` | `SPEC-LANG-REFERENCE.10.5.9 — fix action and lifecycle placement examples` | `action-and-lifecycle-placement.md` now separates entry-match `I`/`entry_*` from local-slot action `match_*`, removes regex-on-`::` examples, corrects hash initialization, and records the Perl lifecycle handler drift caveat |
 | `SPEC-LANG-REFERENCE.10.5.10` | `SPEC-LANG-REFERENCE.10.5.10 — fix capture and entry-match examples` | `capture-marks-and-source-locations.md` now uses a no-regex `Top::` wrapper plus normal `Body:` delimiter rule for the `capture_slice()` example, and a blind-call `Top::AND => Call` wrapper plus normal `Call:`/`Inner:` rules for entry-vs-match divergence. Seek-mode capture probe returns `[{"body":"body"}]`; blind-call probe returns `greet` vs `world`; Knowledge fact `perl-capture-slice-delimiter-seek-boundary` records the consume-mode caveat |
 | `SPEC-LANG-REFERENCE.10.5.11` | `SPEC-LANG-REFERENCE.10.5.11 — fix declaration helper examples` | `declaration-helper-reference.md` now uses no-regex wrappers for accumulator and metadata examples: `List::` owns aggregate state while `Item:` owns the matcher, and `Top::` dispatches to regex-owning `Token:`. Runtime probes return the documented two-item list and token metadata outputs; page scan and mdBook build pass |
+| `SPEC-LANG-REFERENCE.10.5.12` | `SPEC-LANG-REFERENCE.10.5.12 — fix source-boundary examples` | `source-boundary-helper-reference.md` now uses no-regex `Top::AND` blind-call wrappers plus normal regex-owning rules for Tuple, Block, Paren, Pair, Body, AtEnd, and entry-vs-match examples. Seven focused probes return the documented source-boundary outputs; page scan and mdBook build pass |
 
 ## Changelog
 

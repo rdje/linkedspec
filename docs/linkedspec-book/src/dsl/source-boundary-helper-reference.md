@@ -100,29 +100,31 @@ Compatibility aliases:
 
 Prefer the explicit names in new public examples.
 
+The delimiter-body examples below use seek-mode matching. In consume mode, model the
+intervening body tokens explicitly so the closer is reached contiguously.
+
 ### Example: split a comma-separated body
 
 ```text
-Tuple::AND
- I { parts = []; }
+Top::AND
+ => Tuple
+
+Tuple:AND
+ I { set(array(parts), []); }
  /\(/
- /[^,]*/
+ /[^,]+/
  /,/
- /[^,]*/
- /,/
- /[^)]*/
+ /[^)]+/
  /\)/
  -> Tuple[0] { start_capture_slice() }
  -> Tuple[2] { push(array(parts), capture_take()) }
- -> Tuple[4] { push(array(parts), capture_take()) }
- -> Tuple[6] { push(array(parts), capture_slice()); return(array("?Tuple:", copy(array(parts)))) }
+ -> Tuple[4] { push(array(parts), capture_slice()); return(array("?Tuple:", copy(array(parts)))) }
 ```
 
 Reading this example:
 
 - `start_capture_slice()` begins the anonymous slice after the opening `(`.
 - The first `capture_take()` returns the text before the first comma and advances the slice boundary past that comma.
-- The second `capture_take()` returns the text before the second comma and advances again.
 - The final `capture_slice()` reads the last segment before the closing `)`.
 
 Use this pattern when one rolling boundary is enough. If multiple independent boundaries must survive at the same time, use named marks instead.
@@ -130,7 +132,10 @@ Use this pattern when one rolling boundary is enough. If multiple independent bo
 ### Example: report where a slice started
 
 ```text
-Block::AND
+Top::AND
+ => Block
+
+Block:AND
  /\{/
  /[^}]*/
  /\}/
@@ -193,7 +198,10 @@ Named mark span readers return `undef` when their needed mark is absent or when 
 ### Example: capture between a named opener and the closing match
 
 ```text
-Paren::AND
+Top::AND
+ => Paren
+
+Paren:AND
  /\(/
  /[^)]*/
  /\)/
@@ -212,7 +220,10 @@ Paren::AND
 ### Example: two explicit marks
 
 ```text
-Pair::AND
+Top::AND
+ => Pair
+
+Pair:AND
  /\[/
  /\w+/
  /:/
@@ -234,18 +245,20 @@ If a rule needs an exact right edge, store it explicitly with `mark_match_start(
 ### Example: bridge anonymous and named boundaries
 
 ```text
-Body::AND
+Top::AND
+ => Body
+
+Body:AND
  /\(/
- /[^,]*/
+ /[^,]+/
  /,/
- /[^,]*/
- /,/
- /[^)]*/
+ /[^)]+/
  /\)/
  -> Body[0] { start_capture_slice(); mark_capture_slice(body_start) }
  -> Body[2] { first = capture_take() }
- -> Body[4] { second = capture_take(); start_capture_slice_from(body_start) }
- -> Body[6] {
+ -> Body[4] {
+   second = capture_slice();
+   start_capture_slice_from(body_start);
    return(hash(
      "first", first,
      "second", second,
@@ -279,7 +292,10 @@ Cursor helpers read the live parser cursor. Whole-input helpers ignore the curso
 Example:
 
 ```text
-AtEnd::AND
+Top::AND
+ => AtEnd
+
+AtEnd:AND
  /END/
  -> AtEnd[0] {
    return(hash(
@@ -349,16 +365,18 @@ Prefer the explicit `match_start_*` names when the surrounding code also talks a
 
 ```text
 Top::AND
- /(?<prefix>foo)\(/
- -> Top[0] { return(call(Child)) }
+ => Call
 
-Child::AND
- /(?<name>\w+)/
+Call: /(?<prefix>foo)\(/ -> Child {
+  return(call(Child));
+}
+
+Child: /(?<name>\w+)/
  /\)/
  -> Child[0] {
    return(hash(
      "entry_text", entry_text(),
-     "entry_prefix", entry_named(prefix),
+     "entry_prefix", entry_group(0),
      "local_text", match_text(),
      "local_name", match_named(name),
      "entry_group_count", count(entry_groups()),
@@ -369,7 +387,7 @@ Child::AND
 
 Read it this way:
 
-- `entry_*` sees the `foo(` match that brought `Child` into the current context.
+- `entry_*` sees the captured outer name `foo` from the match that brought `Child` into the current context.
 - `match_*` sees the current local `Child` match, here the word inside the parentheses.
 - If this inline example is built directly, select `top_rule => Top` so the public entrypoint is explicit.
 
