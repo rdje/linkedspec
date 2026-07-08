@@ -18,20 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.13.4` — array-tree traversal docs, Knowledge Map, oracle, task-tree,
-  and live-doc closeout finished; `.13` is exhausted.
-- prior_leaf: `SPEC-FORMAT-TERSE.13.3` — Rust parser/runtime parity and the Perl-backed 97th oracle fixture landed
-  for array-tree receiver block traversal.
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.13.5` — parent `SPEC-FORMAT-TERSE` task-tree status reconciled
+  closed after `.13.4` left no current PNT-eligible leaf.
+- prior_leaf: `SPEC-FORMAT-TERSE.13.4` — array-tree traversal docs, Knowledge Map, oracle, task-tree, and
+  live-doc closeout finished; `.13` is exhausted.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-FORMAT-TERSE.13.4 - close array-tree traversal drift`; parent before this slice is
-  `40ff8dc6 SPEC-FORMAT-TERSE.13.3 - implement Rust array-tree traversal`.
+  `SPEC-FORMAT-TERSE.13.5 - close parent terse task tree`; parent before this slice is
+  `b5ce7f0c SPEC-FORMAT-TERSE.13.4 - close array-tree traversal drift`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: none under `SPEC-FORMAT-TERSE`; the `.13` array-tree traversal activity is exhausted after
-  `.13.4`.
+- active_work_unit: none under `SPEC-FORMAT-TERSE`; the parent terse-format task tree is closed after `.13.5`.
 - next_action: continue PNT from `docs/TASK_TREE.md`; remaining non-closed task-tree entries are
   `DOCTRINE-ENFORCEMENT-ADOPT.3` (deferred) and `SPEC-LANG-REFERENCE` (paused) unless the director activates a
-  new `SPEC-FORMAT-TERSE` leaf.
+  new task-tree leaf.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/helper/backend/dev chapters, core Perl/Rust
   implementation, shipped specs, tooling, and focused test harness inventory.

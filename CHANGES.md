@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-FORMAT-TERSE.13.5 — close parent terse task tree
+
+**Scope:** Metadata-only task-tree closeout for the parent terse-format tree.
+
+**Change:** Reconciled `SPEC-FORMAT-TERSE` from `active` with an empty frontier to `done` / `closed` in the
+central task-tree index and task-file metadata. Stale split-container rows inside the task file now use
+historical done/closed wording, while deferred future-backend decisions remain non-current roadmap decisions.
+
+**Validation:** Parent-status scans, mdBook build, Knowledge Map regeneration/check, memory architecture,
+doctrine, task-tree metadata, and whitespace gates pass. No parser/runtime, corpus, or behavioral mdBook
+semantics changed.
+
 ## 2026-07-08 — SPEC-FORMAT-TERSE.13.4 — close array-tree traversal drift
 
 **Scope:** Documentation, Knowledge Map, oracle-count, task-tree, and live-doc closeout for shipped array-tree

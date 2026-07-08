@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-FORMAT-TERSE.13.5 — parent tree status closeout):
+  `SPEC-FORMAT-TERSE` is now a closed parent task-tree, not an active tree with an empty frontier. The correction
+  is metadata-only: central index, task-file top metadata, current-frontier rows, live docs, roadmap state, and
+  Knowledge Map facts now agree there is no current PNT-eligible terse-format leaf. No parser/runtime, corpus, or
+  behavioral mdBook semantics changed.
+
 - 2026-07-08 (SPEC-FORMAT-TERSE.13.4 — array-tree traversal closeout):
   `.13` is closed/exhausted after `.13.2` landed the Perl reference implementation and `.13.3` landed Rust
   parser/runtime parity plus the 97th oracle fixture. The shipped surface is receiver-only and immediate:

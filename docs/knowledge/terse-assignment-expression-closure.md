@@ -39,5 +39,6 @@ The documentation policy after closure is:
 - At `.3.3.4`, `assign(...)` remained supported for compatibility and was documented as a legacy alias.
 - After `.6.2.3.2`, current authored specs use `target = value` or `set(target, value)` instead.
 
-The active `SPEC-FORMAT-TERSE` roadmap has no concrete PNT-eligible leaf after `.3.3.4`. Future backend leaves
-`.5.1` and `.5.2` are deferred to roadmap selection, and `.5.3` is blocked on a Lua backend decision.
+At `.3.3.4`, the active `SPEC-FORMAT-TERSE` roadmap had no concrete PNT-eligible leaf until later user
+reactivations. `SPEC-FORMAT-TERSE.13.5` later closed the parent terse-format task tree; future terse-format work
+requires a newly activated/split leaf.

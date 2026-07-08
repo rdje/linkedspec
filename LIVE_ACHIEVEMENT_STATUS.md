@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-FORMAT-TERSE.13.5 — close parent terse task tree**
+  (DONE metadata-only parent task-tree status reconciliation; `SPEC-FORMAT-TERSE` CLOSED).
+
+  **Change:** Reconciled the parent `SPEC-FORMAT-TERSE` task tree from `active` with an empty frontier to
+  `done` / `closed`. Stale internal split-container rows that still looked active now read as historical
+  done/closed rows.
+
+  **Boundary:** No parser/runtime, corpus, or behavioral mdBook semantics changed.
+
+  **Verification:** Parent-status scans, mdBook build, Knowledge Map regeneration/check, memory architecture,
+  doctrine, task-tree metadata, and whitespace gates pass.
+
 - 2026-07-08: **SPEC-FORMAT-TERSE.13.4 — close array-tree traversal drift**
   (DONE docs/KM/oracle/no-drift closeout; `.13` CLOSED/exhausted).
 

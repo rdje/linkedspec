@@ -3,14 +3,15 @@
 ## Metadata
 
 - Tree ID: `SPEC-FORMAT-TERSE`
-- Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
+- Status: `done` / `closed` (activated 2026-06-18 by user; ratified in ADR `0007`; closed by `.13.5`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-08` (**`.13.4` DONE; array-tree traversal closeout finished; `.13` exhausted**).
-  User directive 2026-07-08 activated the remaining `SPEC-FORMAT-TERSE` parked work after `.12` closed. `.13.4`
-  closes docs/KM/oracle/live-doc/task-tree drift after `.13.3` landed Rust parser/runtime parity and the generated
-  97th oracle fixture for array-tree `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver blocks
-  while preserving hash-tree behavior. Prior `.13.2` landed the Perl reference implementation. Prior `.13.1`
+- Last updated: `2026-07-08` (**`.13.5` DONE; parent task-tree status reconciled closed**).
+  User directive 2026-07-08 activated the remaining `SPEC-FORMAT-TERSE` parked work after `.12` closed. `.13.5`
+  closes the parent tree metadata after `.13.4` finished docs/KM/oracle/live-doc/task-tree drift alignment and
+  left no current PNT-eligible `SPEC-FORMAT-TERSE` leaf. Prior `.13.3` landed Rust parser/runtime parity and the
+  generated 97th oracle fixture for array-tree `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver
+  blocks while preserving hash-tree behavior. Prior `.13.2` landed the Perl reference implementation. Prior `.13.1`
   accepted array-tree receiver block traversal into the active roadmap and split it before implementation. Prior `.10.1`
   records the current direct hash-literal key contract: `{ key_expr : value_expr }` evaluates the key expression;
   bare keys are scalar reads, quoted keys are fixed fields, computed helper expressions may supply keys, and no
@@ -610,9 +611,10 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 ## Task Tree
 
 - ID: `SPEC-FORMAT-TERSE`
-  Status: `active`
+  Status: `done` / `closed` (closed 2026-07-08 by `.13.5`)
   Goal: Evolve the `.spec` DSL toward a terser, fully-composable format (brainstorm Rounds 1–3 + resume 4+)
-  Children: `.0` (done), `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
+  Children: `.0` through `.15` completed, deferred, or explicitly blocked as recorded below; `.13.5` closes the
+    parent metadata status after the final active implementation/docs lane was exhausted.
 
 - ID: `SPEC-FORMAT-TERSE.0`
   Status: `done`
@@ -1413,7 +1415,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.4.2` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.1.5`
-  Status: `active` (2026-06-29 — split by literal/call/separator/access surface)
+  Status: `done` / `closed` (2026-06-29 — split by literal/call/separator/access surface; children complete)
   Goal: Literals, nested access, call + semicolon rules
   Children: `.1.5.1`, `.1.5.2`, `.1.5.3`, `.1.5.4`, `.1.5.5`
 
@@ -1591,7 +1593,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.1.6 — implement array end-mutation methods` (see Commit Log)
 
 - ID: `SPEC-FORMAT-TERSE.2`
-  Status: `active` (Round 2 expression-valued block leaf `.2.1` done; frontier `.2.2`)
+  Status: `done` / `closed` (Round 2 expression-valued block, control-flow, and composability leaves complete)
   Goal: Round 2 — control flow (everything is an expression)
   Children: `.2.1`, `.2.2`, `.2.3`
 
@@ -1653,7 +1655,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.1.4 — implement block-local return`
 
 - ID: `SPEC-FORMAT-TERSE.2.2`
-  Status: `active` (split 2026-06-30 by `.2.2.1`; `.2.2.6.2` done, frontier `.2.3`)
+  Status: `done` / `closed` (split 2026-06-30 by `.2.2.1`; children complete)
   Goal: Control-flow keywords — `if/elseif/else`, `when`, `otherwise`, `default`, `while`, `switch`
   Acceptance: `if (cond) { ... } elseif (cond) { ... } else { ... }` — parens for conditions, blocks
     for bodies, blocks NEVER inside parens; `when (cond) { ... }` inline conditional; `otherwise { ... }`
@@ -1835,7 +1837,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.2.6.2 - implement Rust attached while safety`
 
 - ID: `SPEC-FORMAT-TERSE.2.3`
-  Status: `active` (2026-06-30 — SPLIT/OWNED before code; container)
+  Status: `done` / `closed` (2026-06-30 split container; children complete)
   Goal: Fluent control-flow, lifecycle blocks, and full composability
   Children: `.2.3.1`, `.2.3.2`, `.2.3.3` (container), `.2.3.4` (container), `.2.3.5`
   Acceptance: Fluent chains `.when (cond) { ... }.otherwise { ... }` (parens for condition, block after);
@@ -1894,7 +1896,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.3.2 - lock lifecycle value drop return channel`
 
 - ID: `SPEC-FORMAT-TERSE.2.3.3`
-  Status: `active` (2026-06-30 — SPLIT/OWNED before code; container)
+  Status: `done` / `closed` (2026-06-30 split container; children complete)
   Goal: Rust fluent block-chain and action-edge parity split/implementation
   Children: `.2.3.3.1`, `.2.3.3.2`, `.2.3.3.3`
   Acceptance: Rust supports the accepted fluent control-flow block-chain contract, including attached block
@@ -2292,7 +2294,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.2.3.5.6 - lock aggregate wrapper quoting boundaries`
 
 - ID: `SPEC-FORMAT-TERSE.3`
-  Status: `active`
+  Status: `done` / `closed`
   Goal: Round 3 — edge syntax plus uniform operator/function expression syntax
   Children: `.3.1`, `.3.2`, `.3.3`
 
@@ -2315,7 +2317,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.3.1 - lock edge syntax contract`
 
 - ID: `SPEC-FORMAT-TERSE.3.2`
-  Status: `active` (SPLIT 2026-07-01)
+  Status: `done` / `closed` (split 2026-07-01; children complete)
   Goal: Arithmetic + comparisons as composable functions (word + symbol spellings, no precedence)
   Children: `.3.2.1`, `.3.2.2`, `.3.2.3`
   Acceptance: Split before code because the requested surface crosses three separate mechanisms. Function-form
@@ -2378,7 +2380,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.3.2.2 - implement arithmetic symbol callees`
 
 - ID: `SPEC-FORMAT-TERSE.3.2.3`
-  Status: `active` (SPLIT/OWNED 2026-07-02)
+  Status: `done` / `closed` (split 2026-07-02; children complete)
   Goal: Comparison spelling contract and implementation split before code
   Children: `.3.2.3.1`, `.3.2.3.2`, `.3.2.3.3`, `.3.2.3.4`
   Acceptance: Record and split the accepted comparison operator-call surface before code. The canonical future
@@ -2797,7 +2799,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.4.4 - finalize function surface ledger`
 
 - ID: `SPEC-FORMAT-TERSE.5`
-  Status: `active` (SPLIT 2026-07-01)
+  Status: `done` / `closed` (split 2026-07-01; implementation leaves deferred/blocked pending future roadmap decisions)
   Goal: Future backend variant parity ownership before any non-Rust variant code
   Children: `.5.0` (done), `.5.1` (deferred), `.5.2` (deferred), `.5.3` (blocked)
   Acceptance: The implemented-variant inventory is explicit, the accepted future backend targets are tied
@@ -3169,7 +3171,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.7.4 - close type-method no-drift sweep`
 
 - ID: `SPEC-FORMAT-TERSE.8`
-  Status: `active` (reactivated by user directive 2026-07-04; split by `.8.1` on 2026-07-06)
+  Status: `done` / `closed` (reactivated by user directive 2026-07-04; closed by `.8.6` on 2026-07-07)
   Goal: Remove all legacy compatibility helper-function support so the accepted `.spec` authoring surface is the
     terse surface only.
   Acceptance: Perl and Rust reject or stop lowering legacy helper spellings that remained accepted only for
@@ -3184,9 +3186,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     current supported behavior.
   Children: `.8.1` (done — inventory/split), `.8.2` (done — current-source/test/corpus/doc migration and
     `push_nonempty(...)` replacement decision), `.8.3` (done — Perl hard retirement), `.8.4` (done — Rust
-    hard retirement), `.8.5` (pending — public docs/KM/reference cleanup), `.8.6` (pending — no-drift closeout).
-  Verification: split by `.8.1`; implementation pending in child leaves.
-  Commit: `pending`
+    hard retirement), `.8.5` (done — public docs/KM/reference cleanup), `.8.6` (done — no-drift closeout).
+  Verification: **PASS 2026-07-07.** Children `.8.1` through `.8.6` closed the legacy-helper-retirement lane.
+  Commit: `SPEC-FORMAT-TERSE.8.6 - close helper retirement drift`
 
 - ID: `SPEC-FORMAT-TERSE.8.1`
   Status: `done` (2026-07-06)
@@ -3946,9 +3948,11 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.12.4 - close hash-tree traversal drift`
 
 - ID: `SPEC-FORMAT-TERSE.13`
-  Status: `done` / `closed` (reactivated by user directive 2026-07-08; exhausted by `.13.4`)
+  Status: `done` / `closed` (reactivated by user directive 2026-07-08; exhausted by `.13.4`; parent metadata
+    reconciled by `.13.5`)
   Goal: Track analogous array-tree traversal receiver methods as a lower-priority future feature.
-  Children: `.13.1` (done), `.13.2` (done), `.13.3` (done), `.13.4` (done)
+  Children: `.13.1` (done), `.13.2` (done), `.13.3` (done), `.13.4` (done), `.13.5` (done; metadata-only
+    parent tree status reconciliation)
   Acceptance: Array-tree traversal is receiver-only in this lane and uses the same immediate attached-block method
     names as hash-tree traversal, but on array-valued receivers: `array_value.walk_leaves() { ... }`,
     `array_value.map_leaves() { ... }`, and `array_value.reduce_leaves(initial) { ... }`. An array-tree is a
@@ -3966,9 +3970,10 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     side effects except for scoped restoration of `value`, `index`, `path`, `depth`, and `acc`; must land on Perl
     and Rust with active tests, generated oracle fixtures, mdBook examples, and Knowledge Map facts.
   Verification: **PASS 2026-07-08.** `.13.1` split the contract before code, `.13.2` landed the Perl reference,
-    `.13.3` landed Rust parser/runtime parity plus the 97th oracle fixture, and `.13.4` closed mdBook, Knowledge
-    Map, live-doc, task-tree, roadmap, and oracle-count drift. Array-tree traversal is now a shipped Perl/Rust
-    receiver-block surface with no remaining `.13` leaf.
+    `.13.3` landed Rust parser/runtime parity plus the 97th oracle fixture, `.13.4` closed mdBook, Knowledge
+    Map, live-doc, task-tree, roadmap, and oracle-count drift, and `.13.5` reconciled the parent task-tree status.
+    Array-tree traversal is now a shipped Perl/Rust receiver-block surface with no remaining behavioral `.13`
+    leaf.
   Commit: `SPEC-FORMAT-TERSE.13.4 - close array-tree traversal drift`
 
 - ID: `SPEC-FORMAT-TERSE.13.1`
@@ -4042,6 +4047,21 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`;
     `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `git diff --check`.
   Commit: `SPEC-FORMAT-TERSE.13.4 - close array-tree traversal drift`
+
+- ID: `SPEC-FORMAT-TERSE.13.5`
+  Status: `done` (2026-07-08)
+  Goal: Reconcile the parent `SPEC-FORMAT-TERSE` task-tree status to closed after `.13.4` left no current
+    PNT-eligible leaf.
+  Acceptance: The central task-tree index, this task file's top metadata, current-frontier table, live docs,
+    roadmap state, and Knowledge Map facts agree that `SPEC-FORMAT-TERSE` is closed; stale split-container
+    `active` rows inside this task file are converted to historical closed/done wording; no parser/runtime,
+    corpus, or mdBook behavioral semantics change.
+  Verification: **PASS 2026-07-08.** Metadata-only closeout reconciled the parent `SPEC-FORMAT-TERSE` status and
+    stale internal split-container rows to closed/done while preserving future backend deferrals as non-current
+    roadmap decisions. Gates pass: `mdbook build docs/linkedspec-book`;
+    `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`;
+    `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `git diff --check`.
+  Commit: `SPEC-FORMAT-TERSE.13.5 - close parent terse task tree`
 
 - ID: `SPEC-FORMAT-TERSE.14`
   Status: `done` (closed by `.14.5` on 2026-07-07)
@@ -4240,7 +4260,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.15.1 - split colon scalar-slot removal`
 
 - ID: `SPEC-FORMAT-TERSE.15.2`
-  Status: `active` / `split` (RE-SCOPED 2026-07-05 after the bare-read-gap finding; see Verification Log
+  Status: `done` / `closed` (RE-SCOPED 2026-07-05 after the bare-read-gap finding; see Verification Log
     `2026-07-05 SPEC-FORMAT-TERSE.15.2 re-scope`)
   Goal: Complete bare-name value reads across ALL value positions on Perl + Rust so that `:name` becomes fully
     redundant, THEN migrate current authored sources to bare. This is the prerequisite the `.15.1` audit missed.
@@ -4547,7 +4567,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | 42 | `SPEC-FORMAT-TERSE.13.2` | `done` | Perl reference implementation for array-tree receiver block traversal landed; phase0 `1..1028` |
 | 43 | `SPEC-FORMAT-TERSE.13.3` | `done` | Rust parser/runtime parity plus the 97th generated oracle fixture for array-tree traversal landed |
 | 44 | `SPEC-FORMAT-TERSE.13.4` | `done` | mdBook, Knowledge Map, live-doc, task-tree, and no-drift closeout completed; `.13` exhausted |
+| 45 | `SPEC-FORMAT-TERSE.13.5` | `done` | parent `SPEC-FORMAT-TERSE` task-tree status reconciled closed; stale split-container active rows converted to historical closed/done wording |
 | — | `SPEC-FORMAT-TERSE.13` | `done` / `closed` | array-tree traversal closed through `.13.4`; no current leaf remains |
+| — | `SPEC-FORMAT-TERSE` | `done` / `closed` | parent tree closed by `.13.5`; no current PNT-eligible leaf remains |
 | — | `SPEC-FORMAT-TERSE.14` | `done` / `closed` | trailing block-argument type closed for helper-function and receiver-method `with` forms without closures; future expansions need new owned leaves |
 | — | `SPEC-FORMAT-TERSE.6.1` | `done` | User directive owned under the existing terse-format tree; shipped-spec inventory recorded before any `.spec` edit. |
 | — | `SPEC-FORMAT-TERSE.6.2.1` | `done` | shipped specs no longer use active `declare(...)` / `.declare(...)`; focused compile, phase0, and Rust corpus oracle pass |
@@ -4567,7 +4589,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | ~~EXECUTION DECISION PENDING~~ | `resolved` 2026-06-22 | The "usable phase0" gate is **cleared** — `t/phase0_regression.t` 960/960 green + `tools/run_ci_local.sh` EXIT 0 (via `PHASE0-BACKHALF-TRIAGE`). Migration policy already resolved (gradual-alias, ADR `0007`). `.1.x`+ are now PNT-eligible. |
 | — | `SPEC-FORMAT-TERSE.1.1.1` | `done` 2026-06-24 | Round 1 — auto-existing working variables (**Perl reference**): the engine now auto-supplies the per-invocation `my` lexical for wrapper-referenced vars; `declare(...)` is now optional. Collector in `RuleIR::EmitContext::_collect_auto_working_var_decls`, injection in `SpecEntry::compile_spec_entry`. 19/20 shipped specs byte-identical (only `tkgui` gains one legit `my`, behavior-preserved); +3 phase0 locks → 968 green; gate EXIT 0; book taught (declare optional). |
 | — | `SPEC-FORMAT-TERSE.1.1.2` | `done` 2026-06-24 | Rust lockstep parity for auto-existing variables — assessed **DOABLE, no engine change**: the Rust interpreter's per-parse `RuntimeContext` HashMaps already auto-vivify working vars (no `declare` needed) and are fresh per `execute` (no leak), so auto-existence is inherent (no Perl-style leaky-global hazard to fix). Locked with 5 oracle fixtures (`autoexist_*`, Rust==Perl reference) + 4 integration tests (value anchors, declare/no-declare convergence, per-parse no-leak); cargo 244→248 green; phase0 968 green (Perl untouched). Recursive/REP idiom deferred to `RUST-PARITY` (separate gap, not auto-existence). `.1.1` container now done; `.1.1.1` change is now landed against the universal contract. |
-| — | `SPEC-FORMAT-TERSE.1.2` | `active` (SPLIT 2026-06-24) | Too broad for one slice → split by inference channel (Perl-first + Rust parity) after a `dump_parser_source` ground-truth pass. KM [[terse-bare-working-vars-engine-gaps]]. |
+| — | `SPEC-FORMAT-TERSE.1.2` | `done` | Split by inference channel (Perl-first + Rust parity) after a `dump_parser_source` ground-truth pass; Channel 1 and Channel 2 children are complete. KM [[terse-bare-working-vars-engine-gaps]]. |
 | — | `SPEC-FORMAT-TERSE.1.2.1` | `done` 2026-06-24 | Channel 1 (Perl) — arg-position bare working-var auto-existence LANDED. Extended `_collect_auto_working_var_decls` (bare `assign`→`$`, `push_value`/`push_nonempty`→`@`; `\s*,` guard keeps wrapped targets on the wrapped path; same dedup) → all 20 specs **byte-identical**; +3 phase0 subtests (17 assertions) → **971 green**; gate EXIT 0; ratio 1.0000; book taught (3 pages). Child-append `push(Rule[,target])`/`.push` target + bare hash (value-position) deferred to Channel 2. |
 | — | `SPEC-FORMAT-TERSE.1.2.2` | `done` 2026-06-24 | Rust lockstep parity for `.1.2.1` — LANDED. Unlike `.1.1.2` it REQUIRED a Rust engine change: `resolve_scalar_target`/`resolve_array_target` now map a bare `Expr::Variable` target to the working var (mirroring Perl's `^\w+$` fallback), scoped to the Channel-1 positions via `allow_bare` (push_value/push_nonempty true; array_copy/hash_copy false). Probe: bare `[null]`/`[[]]` → `["ok"]`/`[["a","b"]]` (= wrapped = Perl reference). 2 oracle fixtures + 4 integration tests; cargo 248→252 green; clippy zero-new; phase0 971 (Perl untouched); gate EXIT 0. **Channel 1 complete on both variants.** |
 | — | `SPEC-FORMAT-TERSE.1.4` | `done` 2026-06-29 | Helper renames closed on both variants. Split by variant after a TOOLBOX-first `call_spec_handler_subst` ground-truth pass; `.1.4.1` landed the Perl reference + book, and `.1.4.2` landed Rust `Engine::call_helper()` parity with oracle + integration locks. KM [[terse-helper-rename-lowering-sites]]. |
@@ -4615,7 +4637,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.2.6` | `done` 2026-06-30 | `while(cond) { ... }` split/owned before code, then closed by Perl reference loop/safety and Rust parity. |
 | — | `SPEC-FORMAT-TERSE.2.2.6.1` | `done` 2026-06-30 | Perl reference attached `while(cond) { ... }` with deterministic iteration safety landed. |
 | — | `SPEC-FORMAT-TERSE.2.2.6.2` | `done` 2026-06-30 | Rust attached-while parser/runtime parity landed with deterministic iteration safety and 39 oracle fixtures. |
-| — | `SPEC-FORMAT-TERSE.2.3` | `active` 2026-06-30 | Split/owned before code: fluent block chains, lifecycle value/drop semantics, Rust parity, full composability, and return-type method chaining are separate leaves. |
+| — | `SPEC-FORMAT-TERSE.2.3` | `done` | Split/owned before code: fluent block chains, lifecycle value/drop semantics, Rust parity, full composability, and return-type method chaining were separate leaves; all children are complete. |
 | — | `SPEC-FORMAT-TERSE.2.3.1` | `done` 2026-06-30 | Perl reference fluent block-chain contract landed for exact `.when(cond) { ... }.otherwise { ... }` action/lifecycle forms, including the no-dot `otherwise` continuation. |
 | — | `SPEC-FORMAT-TERSE.2.3.2` | `done` 2026-06-30 | Lifecycle blocks locked as statement blocks: final ordinary statement values are discarded, top-level `return(expr)` writes the surrounding channel, and expression-valued block-local return stays separate. |
 | — | `SPEC-FORMAT-TERSE.2.3.3.1` | `done` 2026-06-30 | Rust action-edge fluent no-arg `.push` / `.return(expr)` parity landed; tclite oracle remains deferred behind separate compact lifecycle/body fluent and default-mode repetition gaps. |
@@ -4637,7 +4659,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.3.5.5` | `done` 2026-07-01 | Block-valued receiver-dot chaining landed by yielded runtime type; expression-valued blocks feed the existing compatible array/string/hash/number receiver families. |
 | — | `SPEC-FORMAT-TERSE.5.0` | `done` 2026-07-01 | Future backend parity ownership is explicit before any non-Rust variant code: Perl reference and Rust are implemented; Julia/Dart are accepted future targets; Lua needs an ADR before inclusion. |
 | — | `SPEC-FORMAT-TERSE.3.1` | `done` 2026-07-01 | Edge syntax contract confirmed and locked with existing regression coverage: `->` action edges and `=>` blind-call edges stay as-is; grouped action targets require a shared block; block-less grouping stays invalid. |
-| — | `SPEC-FORMAT-TERSE.3.2` | `active` (split 2026-07-01) | Arithmetic/comparison call surface split before code: word aliases, symbol callees, and comparison-name policy are separate mechanisms. |
+| — | `SPEC-FORMAT-TERSE.3.2` | `done` | Arithmetic/comparison call surface split before code: word aliases, symbol callees, and comparison-name policy are separate mechanisms; all children are complete. |
 | — | `SPEC-FORMAT-TERSE.3.2.1` | `done` 2026-07-01 | Non-conflicting numeric word aliases map to `num_*` on Perl/Rust; comparison words stayed string helpers until `.3.2.3.3` later flipped them. |
 | — | `SPEC-FORMAT-TERSE.4.1` | `done` 2026-07-01 | User-defined function MVP contract/inventory locked before code; implementation split into `.4.2.1`–`.4.2.3` and `.4.3.1`–`.4.3.2`. |
 | — | `SPEC-FORMAT-TERSE.4.2.1` | `done` 2026-07-01 | Perl reference function-definition grammar/registry descriptor seam landed; registered calls were intentionally unresolved until `.4.2.2`. |
@@ -4647,7 +4669,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.4.3.2` | `done` 2026-07-02 | Rust registered user-function calls now execute as values, feed compatible receiver chains, discard standalone results, and pass the Perl/Rust oracle fixture; corpus 54 fixtures. |
 | — | `SPEC-FORMAT-TERSE.4.4` | `done` 2026-07-02 | Function MVP surface finalized in the book/KM/task tree; alternate spellings, optional zero-arg parentheses, brace-less bodies, side-effect/caller-mutating functions, recursion, closures/lambdas/currying, and namespaces are explicitly deferred. |
 | — | `SPEC-FORMAT-TERSE.3.2.2` | `done` 2026-07-02 | Arithmetic symbol callees `+(...)`, `-(...)`, `*(...)`, `/(...)`, and `%(...)` now map to `num_add`/`num_sub`/`num_mul`/`num_div`/`num_mod` on Perl/Rust while slash regex literals remain regexes. |
-| — | `SPEC-FORMAT-TERSE.3.2.3` | `active` (split 2026-07-02) | Comparison call surface split before implementation: explicit string bridge first, numeric comparison word aliases next, symbol callees after that. |
+| — | `SPEC-FORMAT-TERSE.3.2.3` | `done` | Comparison call surface split before implementation: explicit string bridge first, numeric comparison word aliases next, symbol callees after that; all children are complete. |
 | — | `SPEC-FORMAT-TERSE.3.2.3.1` | `done` 2026-07-02 | Explicit `str_eq`/`str_ne`/`str_gt`/`str_ge`/`str_lt`/`str_le` compatibility bridge contract locked before changing bare comparison words; no runtime behavior changed. |
 | — | `SPEC-FORMAT-TERSE.3.2.3.2` | `done` 2026-07-02 | Explicit `str_*` string-comparison helpers landed on Perl/Rust; bare comparison words remained string-compatibility aliases until `.3.2.3.3`. |
 | — | `SPEC-FORMAT-TERSE.3.2.3.3` | `done` 2026-07-02 | Ordinary comparison word calls now map to numeric `num_*` aliases on Perl/Rust; lexical strings use explicit `str_*`. |
@@ -5523,6 +5545,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-08` | `SPEC-FORMAT-TERSE.13.5` | Parent-status reconciliation scans; mdBook build; Knowledge Map regeneration/check; memory architecture, doctrine, task-tree metadata, and whitespace gates | `SPEC-FORMAT-TERSE` top metadata and central index now mark the tree done/closed instead of active-with-empty-frontier. Stale internal split-container `active` rows are historical done/closed rows. No parser/runtime, corpus, or behavioral mdBook semantics changed. |
 | `2026-07-08` | `SPEC-FORMAT-TERSE.13.4` | Final array-tree traversal no-drift scans; mdBook build; Knowledge Map regeneration/check; memory architecture, doctrine, task-tree metadata, and whitespace gates | `.13` is closed/exhausted. mdBook helper/reference/formal/backend-handoff/status pages, Knowledge Map facts, live docs, roadmap state, task-tree rows, and the generated 97-fixture oracle manifest agree that array-tree traversal receiver blocks are shipped on Perl/Rust. No parser/runtime or corpus semantics changed in this closeout leaf. |
 | `2026-07-08` | `SPEC-FORMAT-TERSE.13.3` | Focused Rust parser tree traversal tests; focused Rust `.13.3` runtime tests; focused `.12.3` hash-tree runtime regression tests; Perl oracle corpus regeneration; Rust 97-fixture corpus oracle | Rust array-tree traversal receiver blocks landed with parser/runtime parity. Array receivers recurse through nested arrays by zero-based index, treat hashes as leaves, bind scoped `value`/`index`/`path`/`depth` plus reduce-only `acc`, preserve `.12` hash-tree behavior, diagnose malformed calls, and feed array continuations after `walk_leaves` / `map_leaves`. Oracle corpus regenerated to **97** fixtures with `terse_13_3_array_tree_traversal_receiver_blocks`; Rust oracle PASS. The then-frontier moved to `.13.4` for docs/KM/no-drift closeout. |
 | `2026-07-08` | `SPEC-FORMAT-TERSE.13.2` | Knowledge Map retrieval for hash-tree and array-tree traversal contracts; Perl syntax check for `MethodLowering.pm`; focused lowering/runtime/source-residue probes; `prove -q -Iperl t/actionir_ast_parser.t`; full `PERL5LIB= prove -q -Iperl t/phase0_regression.t`; mdBook status sync; Knowledge fact creation/regeneration; memory/doctrine/diff checks | Perl reference array-tree traversal landed. The same receiver methods now dispatch over hash or array receiver values: hashes keep `.12` sorted-key semantics, arrays traverse nested arrays depth-first by zero-based index with hashes as leaves. Array callbacks bind scoped `value`/`index`/`path`/`depth` plus reduce-only `acc`; empty arrays run no callbacks; scalar receivers return `undef`; `walk_leaves` / `map_leaves` can feed array-family continuations such as `.count()`. Phase0 passes `Files=1, Tests=1028`. The then-frontier moved to `.13.3` for Rust/oracle parity. |
@@ -5675,6 +5698,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `SPEC-FORMAT-TERSE.13.5` | `SPEC-FORMAT-TERSE.13.5 - close parent terse task tree` | Metadata-only closeout reconciled the parent task tree and central index from active-with-empty-frontier to done/closed; no behavior changed. |
 | `SPEC-FORMAT-TERSE.13.4` | `SPEC-FORMAT-TERSE.13.4 - close array-tree traversal drift` | Final no-drift closeout verified mdBook, Knowledge Map, live docs, task-tree rows, roadmap state, and the 97-fixture oracle manifest; `.13` is exhausted. |
 | `SPEC-FORMAT-TERSE.13.3` | `SPEC-FORMAT-TERSE.13.3 - implement Rust array-tree traversal` | Rust parser/runtime parity landed for array-valued `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver blocks while preserving hash-tree behavior; generated oracle corpus is 97 fixtures and the then-frontier moved to `.13.4` closeout. |
 | `SPEC-FORMAT-TERSE.13.2` | `SPEC-FORMAT-TERSE.13.2 - implement Perl array-tree traversal` | Perl reference lowering/runtime support landed for array-valued `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver blocks while preserving hash-tree traversal behavior; the then-frontier moved to `.13.3`. |
@@ -5972,6 +5996,11 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   task-tree rows, and the generated 97-fixture oracle manifest now agree that array-tree traversal receiver blocks
   are shipped on Perl/Rust. Final drift scans found no current-facing Rust-pending wording, callback-binding drift,
   or stale current corpus count. No parser/runtime or corpus semantics changed. `.13` is closed/exhausted.
+
+- `2026-07-08`: **`.13.5` DONE — parent terse task-tree status closeout.**
+  The parent `SPEC-FORMAT-TERSE` task-tree and central index now mark the tree `done` / `closed` instead of
+  `active` with an empty frontier. Stale internal split-container rows that still looked live are now historical
+  done/closed rows. No parser/runtime, corpus, or behavioral mdBook semantics changed.
 
 - `2026-07-05`: **`.12`/`.13` DEFERRED/BACKLOG — tree traversal attached-block ideas.**
   User directive tracked hash-tree traversal methods with attached code blocks as future spec work and clarified
