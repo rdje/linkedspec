@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.13 — fix value-container flow examples
+
+**Scope:** mdBook value/container/flow helper reference correction.
+
+**Change:** Reworked `dsl/value-container-flow-helper-reference.md` so Token, FieldList,
+Node, Sequence, and Kind worked examples no longer put regex slots under `::` / `::AND`
+headers. Regex ownership now lives on normal `Token:`, `FieldList:`, `Child:`, `Item:`,
+and `Kind:` matcher rules, while no-regex wrappers or entry rules keep the examples
+focused on helper behavior.
+
+**Validation:** Five focused `LinkedSpec::Get` probes verify the replacement snippets:
+Token, FieldList, Kind, Node normalization, and Sequence head/tail. The page scan finds
+no regex slot under a `::` header; `mdbook build docs/linkedspec-book` passes.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.12 — fix source-boundary examples
 
 **Scope:** mdBook source-boundary helper reference correction.

@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.13 — value-container flow examples):
+  `dsl/value-container-flow-helper-reference.md` no longer uses regex-bearing `Token::AND`,
+  `FieldList::AND`, `Node::AND`, `Sequence::AND`, or `Kind::AND` worked examples. Token,
+  FieldList, and Kind now use a no-regex `Top::` wrapper plus normal regex-owning matcher rules.
+  Node and Sequence remain entry-rule examples, but dispatch to explicit `Child:` / `Item:`
+  matchers for the regex-bearing work. The Sequence example keeps the multiline control-flow
+  form that the ActionIR parser accepts; compacting the `if`/`return` shape into a single line
+  produced a Perl syntax error during probing. The next scorch leaf is `.10.5.14` for the
+  remaining DSL pages.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.12 — source-boundary examples):
   `dsl/source-boundary-helper-reference.md` no longer uses regex-bearing `Tuple::AND`, `Block::AND`,
   `Paren::AND`, `Pair::AND`, `Body::AND`, `AtEnd::AND`, or `Top::AND`/`Child::AND` examples. The page

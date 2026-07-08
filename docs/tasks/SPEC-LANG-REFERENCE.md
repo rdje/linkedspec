@@ -645,12 +645,22 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.5.12` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.13`
-  Status: `pending`
+  Status: `done`
   Goal: Fix `dsl/value-container-flow-helper-reference.md` worked examples (`Token::AND`, `Node::AND`,
   `Sequence::AND`, `Kind::AND`, `FieldList::AND`, `logging_annotation:` already `:`) → 2-rule idiom
   Acceptance: doctrine-valid + re-verified; `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. Replaced regex-owning `Token::AND`, `FieldList::AND`, and
+  `Kind::AND` examples with no-regex `Top::` wrappers plus normal regex-owning `Token:`,
+  `FieldList:`, and `Kind:` rules. Reworked the `Node::AND` and `Sequence::AND` examples as
+  no-regex entry rules that dispatch to explicit `Child:` / `Item:` matchers, preserving the hash
+  normalization and head/tail array teaching without relying on regex slots under `::` headers.
+  Focused probes: Token → `[{"kind":"token","text":"alpha","text_length":5}]`;
+  FieldList → `[{"field_count":2,"fields":["name","kind"],"first_field":"name","kind":"field_list"}]`;
+  Kind → `[{"kind":"node","raw":"node"}]`;
+  Node → `{"kind":"word","name":"Alpha","normalized_name":"alpha"}`;
+  Sequence → `{"head":{"text":"alpha"},"item_count":2,"kind":"sequence","rest":[{"text":"beta"}]}`.
+  The page scan reports no `::` header followed by a regex slot; `mdbook build docs/linkedspec-book` exits 0.
+  Commit: `SPEC-LANG-REFERENCE.10.5.13` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.14`
   Status: `pending`
@@ -883,7 +893,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.5.10` | `done` | `dsl/capture-marks-and-source-locations.md` fixed 2026-07-08; capture seek caveat tracked |
 | — | `SPEC-LANG-REFERENCE.10.5.11` | `done` | `dsl/declaration-helper-reference.md` fixed 2026-07-08; List/Token examples reverified |
 | — | `SPEC-LANG-REFERENCE.10.5.12` | `done` | `dsl/source-boundary-helper-reference.md` fixed 2026-07-08; seven examples reverified |
-| 4 | `SPEC-LANG-REFERENCE.10.5.13` | `pending` | fix `dsl/value-container-flow-helper-reference.md` (`Token::AND`/`Node::AND`/…) |
+| — | `SPEC-LANG-REFERENCE.10.5.13` | `done` | `dsl/value-container-flow-helper-reference.md` fixed 2026-07-08; Token/FieldList/Node/Sequence/Kind examples reverified |
 | 5 | `SPEC-LANG-REFERENCE.10.5.14` | `pending` | fix remaining DSL pages (`values-containers` `Token::`, `action-model` `Top::`, `fluent-and-block-forms`, `actionir-lowering`) |
 | 6 | `SPEC-LANG-REFERENCE.10.5.15` | `pending` | fix `appendix/formal-grammar.md` §1 + §12 examples |
 | 7 | `SPEC-LANG-REFERENCE.10.5.16` | `pending` | fix `appendix/runtime-semantics.md` §5.5/§5.6 (folds `.10.4`) |
@@ -1070,6 +1080,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.5.10` | `SPEC-LANG-REFERENCE.10.5.10 — fix capture and entry-match examples` | `capture-marks-and-source-locations.md` now uses a no-regex `Top::` wrapper plus normal `Body:` delimiter rule for the `capture_slice()` example, and a blind-call `Top::AND => Call` wrapper plus normal `Call:`/`Inner:` rules for entry-vs-match divergence. Seek-mode capture probe returns `[{"body":"body"}]`; blind-call probe returns `greet` vs `world`; Knowledge fact `perl-capture-slice-delimiter-seek-boundary` records the consume-mode caveat |
 | `SPEC-LANG-REFERENCE.10.5.11` | `SPEC-LANG-REFERENCE.10.5.11 — fix declaration helper examples` | `declaration-helper-reference.md` now uses no-regex wrappers for accumulator and metadata examples: `List::` owns aggregate state while `Item:` owns the matcher, and `Top::` dispatches to regex-owning `Token:`. Runtime probes return the documented two-item list and token metadata outputs; page scan and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.12` | `SPEC-LANG-REFERENCE.10.5.12 — fix source-boundary examples` | `source-boundary-helper-reference.md` now uses no-regex `Top::AND` blind-call wrappers plus normal regex-owning rules for Tuple, Block, Paren, Pair, Body, AtEnd, and entry-vs-match examples. Seven focused probes return the documented source-boundary outputs; page scan and mdBook build pass |
+| `SPEC-LANG-REFERENCE.10.5.13` | `SPEC-LANG-REFERENCE.10.5.13 — fix value-container flow examples` | `value-container-flow-helper-reference.md` now uses no-regex wrappers or entry rules for Token, FieldList, Node, Sequence, and Kind examples, with regex slots moved to normal matcher rules. Five focused probes return the documented token, field-list, node-normalization, sequence head/tail, and switch-classification outputs; page scan and mdBook build pass |
 
 ## Changelog
 

@@ -37,9 +37,12 @@ aggregate working-array storage instead.
 Example:
 
 ```text
-Token::AND
- /(\w+)/
- -> Token[0] {
+Top::
+ -> Token .push
+ LX { return(copy(array(Top))) }
+
+Token: /(\w+)/
+ I {
    text = lowercase(trim(entry_group(0)));
    return(hash(
      "kind", "token",
@@ -1024,10 +1027,13 @@ Array-pipeline helpers are statements or composable array-valued transformations
 Worked example:
 
 ```text
-FieldList::AND
- I { fields = []; raw = undef; }
- /([A-Za-z_, ]+)/
- -> FieldList[0] {
+Top::
+ -> FieldList .push
+ LX { return(copy(array(Top))) }
+
+FieldList: /([A-Za-z_, ]+)/
+ I {
+   set(array(fields), []);
    raw = entry_group(0);
    split(array(fields), raw, /,/);
    trim_each(array(fields));
@@ -1316,18 +1322,20 @@ Keep public examples focused on structured return values. Use debug output helpe
 This example shows child capture, fallback, normalization, hash shaping, and a structured return.
 
 ```text
-Node::AND
- I { retv = undef; meta = {}; }
- Child
- -> Node[0] {
+Node::
+ I { retv = undef; set(hash(meta), {}); }
+ -> Child {
    retv = call(Child);
    set(hash(meta), hash(
      "kind", coalesce_nonempty(trim(retv["kind"]), "node"),
-     "name", coalesce_nonempty(trim(retv["name"]), IMATCH, "anonymous")
+     "name", coalesce_nonempty(trim(retv["name"]), "anonymous")
    ));
    set(hash(meta), set_key(hash(meta), "normalized_name", replace_substr(lowercase(trim(hash(meta).pick_keys("name").sorted_values().first())), " ", "_")));
    return(copy(hash(meta)));
  }
+
+Child: /[A-Za-z_]+/
+ I { return(hash("kind", "word", "name", entry_text())) }
 ```
 
 Why this reads well:
@@ -1342,15 +1350,9 @@ Why this reads well:
 This example shows array appends, boundary reads, array helpers, and branch predicates.
 
 ```text
-Sequence::AND
- I { items = []; retv = undef; }
- Item
- Item
- -> Sequence[0] {
-   retv = call(Item);
-   items += retv;
- }
- -> Sequence[1] {
+Sequence::
+ I { set(array(items), []); retv = undef; }
+ -> Item {
    retv = call(Item);
    items += retv;
 
@@ -1362,9 +1364,13 @@ Sequence::AND
        "item_count", count(array(items))
      ));
    else()
-     return(hash("kind", "single", "item", first(array(items))));
+     next();
    endif()
  }
+ LX { return(hash("kind", "single", "item", first(array(items)))) }
+
+Item: /\s*[A-Za-z_]+/
+ I { return(hash("text", trim(entry_text()))) }
 ```
 
 The important choice is the append operation: each child result is appended, here with `items += retv`. The final `return(...)` uses pure array helpers to read or derive views from the accumulated array without mutating it.
@@ -1374,10 +1380,12 @@ The important choice is the append operation: each child result is appended, her
 This example shows value normalization and switch classification.
 
 ```text
-Kind::AND
- I { raw = undef; kind = undef; }
- /[A-Za-z_]+/
- -> Kind[0] {
+Top::
+ -> Kind .push
+ LX { return(copy(array(Top))) }
+
+Kind: /[A-Za-z_]+/
+ I {
    raw = entry_text();
    kind = replace_substr(lowercase(trim(raw)), "-", "_");
 

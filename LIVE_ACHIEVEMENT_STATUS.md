@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.13 — fix value-container flow examples**
+  (DONE mdBook correction; frontier `.10.5.14` next).
+
+  **Change:** Reworked `dsl/value-container-flow-helper-reference.md` so Token, FieldList,
+  Node, Sequence, and Kind examples use no-regex wrappers or entry rules with explicit normal
+  matcher rules for regex-bearing work.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a documentation correction
+  for the active whole-book scorch.
+
+  **Verification:** Five focused `LinkedSpec::Get` probes cover the replacement snippets; page
+  scan finds no regex under `::`; mdBook, doctrine, task-tree, memory, Knowledge Map, and
+  whitespace checks pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.12 — fix source-boundary examples**
   (DONE mdBook correction; frontier `.10.5.13` next).
 
