@@ -24,15 +24,14 @@ Function definitions are also recognized only at top level.
 
 ```text
 Top::
- /a/ -> Next {
- return(array("?Top:", copy(array(Top))))
- }
+ -> Next .push
+ LX { return(array("?Top:", copy(array(Top)))) }
 
-Next::
- /b/ { return(array("?Next:", copy(array(Next)))) }
+Next: /a/
+ I { return(array("?Next:", entry_text())) }
 ```
 
-Here `return(...)` is block content inside `Top`, and `Next::` starts a new paragraph.
+Here `return(...)` is block content inside `Top`, and `Next:` starts a new paragraph.
 
 ### 1.1 Leading Whitespace, Comments, and Blank Lines
 
@@ -894,26 +893,34 @@ New `.spec` files must maintain this invariant.
 DemoParser::
  I  { results = [] }
  LS { retv = undef }
- /pattern1/ -> Child { retv = call(Child) }
- LE { if(is_defined(retv)); push(array(results), retv); endif() }
- E  { return(array("?result:", copy(array(results)))) }
+ -> Child {
+   retv = call(Child);
+   push(array(results), retv);
+   next();
+ }
+ LE { retv = undef }
+ LX { return(array("?result:", copy(array(results)))) }
 
-Child::
- /hello[ \t]+(\w+)/
- I { name = entry_group(0) }
- E { return(name) }
+Child: /\s*hello[ \t]+(\w+)/
+ I { name = entry_group(0); return(name) }
 
 SecondChild:OR+
- /(?:\w+)/
- E { return(array("?words:", copy(array(SecondChild)))) }
+ /\s*(\w+)/ -> SecondChild[0] { return(match_group(0)) }
 
 ThirdChild:AND
- /first/ -> A
- /second/ -> B
+ -> First .push
+ -> Second .push
+ LX { return(array("?third:", copy(array(ThirdChild)))) }
+
+First: /first/
+ I { return(entry_text()) }
+
+Second: /\s*second/
+ I { return(trim(entry_text())) }
 ```
 
 This grammar:
-- `DemoParser::` is a top rule with one action edge to `Child` plus lifecycle blocks.
-- `Child:` is a body rule with a single regex + lifecycle blocks.
-- `SecondChild:OR+` is a repeated-choice rule.
-- `ThirdChild:AND` is an ordered-sequence rule with two edges.
+- `DemoParser::` is a no-regex top rule with one action edge to `Child` plus lifecycle blocks.
+- `Child:` is a body rule with a single regex and an explicit return.
+- `SecondChild:OR+` is a repeated-choice rule that returns each matched word.
+- `ThirdChild:AND` is an ordered-sequence rule with two defined child edges.

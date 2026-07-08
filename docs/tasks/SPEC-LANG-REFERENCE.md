@@ -686,13 +686,22 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.5.14` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.15`
-  Status: `pending`
+  Status: `done`
   Goal: Fix `appendix/formal-grammar.md` — §1 paragraph-model example (`Top:: /a/ -> Next` + `Next:: /b/`)
   and §12 "complete example" (`DemoParser:: … /pattern1/ …` + undefined targets `A`/`B`) → valid forms
   Acceptance: doctrine-valid + compile/run-verified (or clearly-marked grammar meta-notation);
   `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. Replaced the §1 paragraph-model example with a no-regex
+  `Top::` entry rule that dispatches to normal regex-owning `Next:` and returns the paragraph
+  result from `LX`. Reworked the §12 complete example so `DemoParser::` is a no-regex top rule,
+  `Child:` owns the `hello` regex, `SecondChild:OR+` owns its repeated word regex/action, and
+  `ThirdChild:AND` dispatches to defined `First:` and `Second:` matcher rules instead of
+  undefined `A`/`B` targets. Focused probes: paragraph example `a` →
+  `["?Top:",[["?Next:","a"]]]`; `DemoParser` on `hello Alice hello Bob` →
+  `["?result:",["Alice","Bob"]]`; `SecondChild` on `one two` → `["one","two"]`;
+  `ThirdChild` on `first second` → `["?third:",["first","second"]]`. The appendix scan reports
+  no `::` header followed by a regex slot; `mdbook build docs/linkedspec-book` exits 0.
+  Commit: `SPEC-LANG-REFERENCE.10.5.15` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.16`
   Status: `pending`
@@ -908,7 +917,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.5.12` | `done` | `dsl/source-boundary-helper-reference.md` fixed 2026-07-08; seven examples reverified |
 | — | `SPEC-LANG-REFERENCE.10.5.13` | `done` | `dsl/value-container-flow-helper-reference.md` fixed 2026-07-08; Token/FieldList/Node/Sequence/Kind examples reverified |
 | — | `SPEC-LANG-REFERENCE.10.5.14` | `done` | remaining DSL pages fixed/audited 2026-07-08; Token/Value/Items examples reverified |
-| 6 | `SPEC-LANG-REFERENCE.10.5.15` | `pending` | fix `appendix/formal-grammar.md` §1 + §12 examples |
+| — | `SPEC-LANG-REFERENCE.10.5.15` | `done` | `appendix/formal-grammar.md` §1 + §12 examples fixed 2026-07-08; four probes reverified |
 | 7 | `SPEC-LANG-REFERENCE.10.5.16` | `pending` | fix `appendix/runtime-semantics.md` §5.5/§5.6 (folds `.10.4`) |
 | 8 | `SPEC-LANG-REFERENCE.10.5.17` | `pending` | fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts (`sens`/GROUP) |
 | 9 | `SPEC-LANG-REFERENCE.10.5.18` | `pending` | fix `specs-and-corpora/portmap-spec-walkthrough.md` 5 output-shape examples |
@@ -1095,6 +1104,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.5.12` | `SPEC-LANG-REFERENCE.10.5.12 — fix source-boundary examples` | `source-boundary-helper-reference.md` now uses no-regex `Top::AND` blind-call wrappers plus normal regex-owning rules for Tuple, Block, Paren, Pair, Body, AtEnd, and entry-vs-match examples. Seven focused probes return the documented source-boundary outputs; page scan and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.13` | `SPEC-LANG-REFERENCE.10.5.13 — fix value-container flow examples` | `value-container-flow-helper-reference.md` now uses no-regex wrappers or entry rules for Token, FieldList, Node, Sequence, and Kind examples, with regex slots moved to normal matcher rules. Five focused probes return the documented token, field-list, node-normalization, sequence head/tail, and switch-classification outputs; page scan and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.14` | `SPEC-LANG-REFERENCE.10.5.14 — fix remaining DSL examples` | `values-containers-and-flow-helpers.md`, `action-model-and-helper-surface.md`, and `fluent-and-block-forms.md` now avoid regex-bearing `::` examples for Token, Value, and Items. `actionir-lowering-mental-model.md` audited clean as helper/pipeline fragments only. Focused Token, Value, and Items probes pass; four-page scan and mdBook build pass |
+| `SPEC-LANG-REFERENCE.10.5.15` | `SPEC-LANG-REFERENCE.10.5.15 — fix formal grammar examples` | `formal-grammar.md` §1 and §12 now use no-regex top rules plus normal regex-owning matcher rules. The complete example defines every dispatch target and verifies DemoParser, SecondChild, and ThirdChild outputs; appendix scan and mdBook build pass |
 
 ## Changelog
 

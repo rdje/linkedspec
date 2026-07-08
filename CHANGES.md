@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.15 — fix formal grammar examples
+
+**Scope:** mdBook formal grammar appendix correction.
+
+**Change:** Reworked `appendix/formal-grammar.md` so the paragraph-model example and
+the complete example use no-regex top rules with normal regex-owning matcher rules.
+The complete example now defines the ordered-sequence dispatch targets (`First:` and
+`Second:`) instead of referencing undefined `A`/`B` rules.
+
+**Validation:** Focused `LinkedSpec::Get` probes verify the paragraph example plus
+`DemoParser`, `SecondChild`, and `ThirdChild` top-rule outputs. The appendix scan finds
+no regex slot under a `::` header; `mdbook build docs/linkedspec-book` passes.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.14 — fix remaining DSL examples
 
 **Scope:** mdBook DSL chapter scorch closeout for the remaining DSL pages.

@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.15 — formal grammar examples):
+  `appendix/formal-grammar.md` now keeps the formal examples aligned with the book's current
+  authoring doctrine. The §1 paragraph-model example uses a no-regex `Top::` entry rule with
+  `LX` return and a normal `Next:` matcher. The §12 complete example uses `DemoParser::` as the
+  only top entry, moves `Child` to a normal matcher rule, gives `SecondChild:OR+` a verified local
+  regex/action shape, and defines `First:` / `Second:` for the `ThirdChild:AND` dispatch edges.
+  The next scorch leaf is `.10.5.16` for `appendix/runtime-semantics.md`.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.14 — remaining DSL examples):
   `dsl/values-containers-and-flow-helpers.md` and `dsl/action-model-and-helper-surface.md` now use
   no-regex `Top::` wrappers plus normal regex-owning `Token:` / `Value:` rules for their compact

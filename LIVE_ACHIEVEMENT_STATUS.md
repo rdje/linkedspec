@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.15 — fix formal grammar examples**
+  (DONE mdBook correction; frontier `.10.5.16` next).
+
+  **Change:** Reworked `appendix/formal-grammar.md` §1 and §12 examples so no top `::`
+  rule owns regex slots, and the complete example defines all ordered-sequence child targets.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a formal grammar appendix
+  documentation correction for the whole-book scorch.
+
+  **Verification:** Focused `LinkedSpec::Get` probes cover the paragraph example plus
+  `DemoParser`, `SecondChild`, and `ThirdChild`; appendix scan finds no regex under `::`;
+  mdBook, doctrine, task-tree, memory, Knowledge Map, and whitespace checks pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.14 — fix remaining DSL examples**
   (DONE mdBook correction/audit; frontier `.10.5.15` next).
 
