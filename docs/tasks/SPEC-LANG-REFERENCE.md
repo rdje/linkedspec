@@ -704,14 +704,23 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.5.15` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.16`
-  Status: `pending`
+  Status: `done`
   Goal: Fix `appendix/runtime-semantics.md` §5.5/§5.6 examples (the three `Top::`/`Pair::` regex-on-top
   forms incl. the **`.10.4` §5.5 Pair target**, and the §5.6 single `object:`/`manifest:` fragments)
   → 2-rule idiom; re-derive outputs. **Closes/subsumes `.10.4`.**
   Acceptance: doctrine-valid + re-verified outputs; `.10.4` marked superseded-by-`.10.5.16`;
   `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. Rewrote all §5.5 parser-output examples to no-regex
+  `Top::` wrappers dispatching to normal regex-owning `Done:` / `Pair:` rules, preserving the
+  documented scalar, array, and tagged-pair output shapes. Replaced the §5.6 `object:` and
+  `manifest:` single-rule fragments with complete no-regex `Top::` wrappers plus normal
+  regex-owning body rules. The `.10.4` Pair target is closed here: the Pair example now reads
+  `entry_group(0/1)` in the dispatched `Pair:` rule and returns that value through `Top`.
+  Focused probes: scalar → `"scalar-ok"`; proof array → `["?proof:","ok"]`;
+  pair → `["?pair:","key","val"]`; object → `["?object:","foo"]`;
+  manifest → `["?manifest:"]`. The page scan reports no `::` header followed by a regex slot;
+  `mdbook build docs/linkedspec-book` exits 0.
+  Commit: `SPEC-LANG-REFERENCE.10.5.16` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.17`
   Status: `pending`
@@ -918,7 +927,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.5.13` | `done` | `dsl/value-container-flow-helper-reference.md` fixed 2026-07-08; Token/FieldList/Node/Sequence/Kind examples reverified |
 | — | `SPEC-LANG-REFERENCE.10.5.14` | `done` | remaining DSL pages fixed/audited 2026-07-08; Token/Value/Items examples reverified |
 | — | `SPEC-LANG-REFERENCE.10.5.15` | `done` | `appendix/formal-grammar.md` §1 + §12 examples fixed 2026-07-08; four probes reverified |
-| 7 | `SPEC-LANG-REFERENCE.10.5.16` | `pending` | fix `appendix/runtime-semantics.md` §5.5/§5.6 (folds `.10.4`) |
+| — | `SPEC-LANG-REFERENCE.10.5.16` | `done` | `appendix/runtime-semantics.md` §5.5/§5.6 fixed 2026-07-08; `.10.4` folded; five outputs reverified |
 | 8 | `SPEC-LANG-REFERENCE.10.5.17` | `pending` | fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts (`sens`/GROUP) |
 | 9 | `SPEC-LANG-REFERENCE.10.5.18` | `pending` | fix `specs-and-corpora/portmap-spec-walkthrough.md` 5 output-shape examples |
 | 10 | `SPEC-LANG-REFERENCE.10.5.19` | `pending` | finalize planned page scorch — whole-book re-grep + `mdbook build` |
@@ -1105,6 +1114,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.5.13` | `SPEC-LANG-REFERENCE.10.5.13 — fix value-container flow examples` | `value-container-flow-helper-reference.md` now uses no-regex wrappers or entry rules for Token, FieldList, Node, Sequence, and Kind examples, with regex slots moved to normal matcher rules. Five focused probes return the documented token, field-list, node-normalization, sequence head/tail, and switch-classification outputs; page scan and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.14` | `SPEC-LANG-REFERENCE.10.5.14 — fix remaining DSL examples` | `values-containers-and-flow-helpers.md`, `action-model-and-helper-surface.md`, and `fluent-and-block-forms.md` now avoid regex-bearing `::` examples for Token, Value, and Items. `actionir-lowering-mental-model.md` audited clean as helper/pipeline fragments only. Focused Token, Value, and Items probes pass; four-page scan and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.15` | `SPEC-LANG-REFERENCE.10.5.15 — fix formal grammar examples` | `formal-grammar.md` §1 and §12 now use no-regex top rules plus normal regex-owning matcher rules. The complete example defines every dispatch target and verifies DemoParser, SecondChild, and ThirdChild outputs; appendix scan and mdBook build pass |
+| `SPEC-LANG-REFERENCE.10.5.16` | `SPEC-LANG-REFERENCE.10.5.16 — fix runtime semantics examples` | `runtime-semantics.md` §5.5/§5.6 now uses no-regex `Top::` wrappers plus normal regex-owning `Done:`, `Pair:`, `object:`, and `manifest:` rules. The folded `.10.4` Pair target now returns the verified `entry_group` tagged array through `Top`; five focused outputs, page scan, and mdBook build pass |
 
 ## Changelog
 

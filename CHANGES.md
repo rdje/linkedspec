@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.16 — fix runtime semantics examples
+
+**Scope:** mdBook runtime semantics appendix correction.
+
+**Change:** Reworked `appendix/runtime-semantics.md` §5.5/§5.6 examples so the
+top-level output examples and tagged-shape snippets use no-regex `Top::` wrappers
+with normal regex-owning matcher rules. This folds the old `.10.4` Pair target:
+the Pair example now reads captures with `entry_group(...)` inside the dispatched
+`Pair:` rule and returns that value through `Top`.
+
+**Validation:** Five focused `LinkedSpec::Get` probes verify scalar, proof-array,
+pair, object, and manifest outputs. The page scan finds no regex slot under a `::`
+header; `mdbook build docs/linkedspec-book` passes.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.15 — fix formal grammar examples
 
 **Scope:** mdBook formal grammar appendix correction.

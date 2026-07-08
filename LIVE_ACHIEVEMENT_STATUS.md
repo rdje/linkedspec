@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.16 — fix runtime semantics examples**
+  (DONE mdBook correction; frontier `.10.5.17` next).
+
+  **Change:** Reworked `appendix/runtime-semantics.md` §5.5/§5.6 examples to use
+  no-regex `Top::` wrappers plus normal regex-owning body rules, folding the `.10.4`
+  Pair target into this leaf.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a runtime semantics
+  documentation correction for the whole-book scorch.
+
+  **Verification:** Focused `LinkedSpec::Get` probes cover scalar, proof-array, Pair,
+  object, and manifest outputs; page scan finds no regex under `::`; mdBook, doctrine,
+  task-tree, memory, Knowledge Map, and whitespace checks pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.15 — fix formal grammar examples**
   (DONE mdBook correction; frontier `.10.5.16` next).
 

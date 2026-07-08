@@ -298,36 +298,49 @@ the rule returns (a scalar, an array, or a hash), structurally unchanged. A back
 implements this contract must hand back that same value.
 
 The following are **verified** input→output pairs (the Perl reference is the behavioral
-oracle; the first two are frozen oracle-corpus fixtures, the third was produced by
-running the reference parser):
+oracle):
 
 ```text
 Top::
- /x/ -> Done { return("scalar-ok") }
-Done::
- /[a-z]+/
+ -> Done {
+   retv = call(Done);
+   return("scalar-ok");
+ }
+
+Done: /x[a-z]+/
+ I { return(entry_text()) }
 ```
 Input `xhello` → output `"scalar-ok"` — a bare scalar.
 
 ```text
 Top::
- /x/ -> Done { return(array("?proof:", "ok")) }
-Done::
- /[a-z]+/
+ -> Done {
+   retv = call(Done);
+   return(array("?proof:", "ok"));
+ }
+
+Done: /x[a-z]+/
+ I { return(entry_text()) }
 ```
 Input `xhello` → output `["?proof:", "ok"]` — an array.
 
 ```text
-Pair::
- /(\w+)=(\w+)/ -> Pair {
-   return(array("?pair:", match_group(0), match_group(1)));
+Top::
+ -> Pair {
+   retv = call(Pair);
+   return(retv);
+ }
+
+Pair: /(\w+)=(\w+)/
+ I {
+   return(array("?pair:", entry_group(0), entry_group(1)));
  }
 ```
 Input `key=val` → output `["?pair:", "key", "val"]` — here the author chose an array
-holding an (optional, §5.6) leading tag plus the two captures (`match_group(0)` is the
-first capture group; see [Regex in `.spec`](../user-model/regex-in-spec.md#capture-groups)).
-The rule returns the value through a self-referencing action edge (`-> Pair`), which is
-what surfaces the `return(...)` value as the top-level output (§5.7).
+holding an (optional, §5.6) leading tag plus the two captures (`entry_group(0)` is the
+first capture group when `Pair` is entered; see [Regex in `.spec`](../user-model/regex-in-spec.md#capture-groups)).
+The top rule returns the dispatched `Pair` result directly, so that value becomes the
+parser's top-level output (§5.7).
 
 ### 5.6 The Output Shape Is the Author's Choice
 
@@ -341,15 +354,29 @@ the first element is a string tag of the form `"?<rule>:"` naming the producing 
 the payload after it.
 
 ```text
-object: /(?i)\nobject:\s+(\S+)/  I.return(array("?object:", flat_array(entry_groups())))
+Top::
+ -> object {
+   retv = call(object);
+   return(retv);
+ }
+
+object: /(?i)object:\s+(\S+)/
+ I { return(array("?object:", flat_array(entry_groups()))) }
 ```
-A match of `object: foo` produces `["?object:", "foo"]`; a tag-only form is used when a
+Input `object: foo` produces `["?object:", "foo"]`; a tag-only form is used when a
 node carries no payload:
 
 ```text
-manifest: /(?is)\nmanifest:\s+.+?\n\n/  I.return(array("?manifest:"))
+Top::
+ -> manifest {
+   retv = call(manifest);
+   return(retv);
+ }
+
+manifest: /(?is)manifest:\s+.+?\n\n/
+ I { return(array("?manifest:")) }
 ```
-→ `["?manifest:"]`.
+Input `manifest: body\n\n` → `["?manifest:"]`.
 
 This convention is **purely optional** — an older self-describing-AST style some specs
 adopt so a consumer can identify each node by its leading tag. **Nothing in the engine

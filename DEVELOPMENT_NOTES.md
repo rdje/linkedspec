@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.16 — runtime semantics examples):
+  `appendix/runtime-semantics.md` §5.5 now teaches top-level output through no-regex `Top::`
+  wrappers that explicitly call regex-owning body rules. The scalar/proof examples use `Done:`;
+  the folded `.10.4` Pair example uses `Pair:` with `entry_group(0/1)` and returns that value
+  through `Top`. §5.6 wraps the `object:` and `manifest:` tagged-array examples with complete
+  `Top::` dispatchers so the documented outputs are parser outputs, not isolated fragments.
+  The next scorch leaf is `.10.5.17` for `tablegrep-spec-walkthrough.md`.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.15 — formal grammar examples):
   `appendix/formal-grammar.md` now keeps the formal examples aligned with the book's current
   authoring doctrine. The §1 paragraph-model example uses a no-regex `Top::` entry rule with
