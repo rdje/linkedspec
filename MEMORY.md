@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-LANG-REFERENCE.5.5` — added verified Declaration, Capture/Mark,
-  Entry/Match, Input, and Call helper worked examples; corrected stale entry-vs-match examples to the
-  verified ordered-child shape; KM fact `entry-match-divergence-verified-shape` records the pattern.
-- prior_leaf: `SPEC-LANG-REFERENCE.5.4` — added verified Hash + Control Flow helper examples and
-  tracked the direct odd-arity `hash(...)` current-Perl caveat in KM fact
-  `hash-helper-odd-arity-current-behavior`.
+- latest_completed_leaf: `SPEC-LANG-REFERENCE.6` — added a verified marker-form capture/mark cross-example,
+  corrected placement-sensitive named-mark examples to helper-call timing, and recorded KM fact
+  `split-boundary-marker-action-timing`.
+- prior_leaf: `SPEC-LANG-REFERENCE.5.5` — added verified Declaration, Capture/Mark, Entry/Match, Input,
+  and Call helper worked examples; corrected stale entry-vs-match examples to the verified ordered-child shape.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-LANG-REFERENCE.5.5 - add remaining helper-family worked examples`; parent before this slice is
-  `SPEC-LANG-REFERENCE.5.4 - add Hash and Control Flow worked examples`.
+  `SPEC-LANG-REFERENCE.6 - add capture/mark marker cross-example`; parent before this slice is
+  `SPEC-LANG-REFERENCE.5.5 - add remaining helper-family worked examples`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `SPEC-LANG-REFERENCE.6` is the next active language-reference leaf.
-- next_action: from a clean repo, execute `.6`: add the capture/mark cross-example and any remaining
-  thin-spot fixes called out by the task tree, keeping examples verified through `LinkedSpec::Get`.
+- active_work_unit: `SPEC-LANG-REFERENCE.7` is the next active language-reference leaf.
+- next_action: from a clean repo, execute `.7`: ensure KM fact cards cover the durable `.spec`-language
+  subjects named by the audit (output/return shape, regex feature set, rule modes, lifecycle, edges, and
+  capture/mark taxonomy), regenerating and checking `KNOWLEDGE_MAP.md`.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
   enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.

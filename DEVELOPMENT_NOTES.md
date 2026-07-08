@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.6 — capture/mark marker cross-example):
+  `source-boundary-helper-reference.md` and `action-and-lifecycle-placement.md` now share a verified
+  marker-form example that exercises `@capture_slice`, `@mark(body_start)`, `mark_match_start(close_start)`,
+  `capture_slice()`, `capture_from(...)`, and `capture_between(...)` in one rule. The verification pass
+  found the useful authoring rule: marker effects are visible from a later action, while same-block precision
+  belongs to helper calls such as `start_capture_slice()` and `mark_here(...)`. The action-placement page now
+  uses `mark_here(...)` for opener actions that need exact block-local timing. KM fact
+  `split-boundary-marker-action-timing` records the generated-source/root-cause evidence.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.5.5 — remaining helper-family worked examples):
   `helper-contract-catalog.md` now has verified examples for Declaration, Capture/Mark, Entry/Match,
   Input, and Call helper families, closing the `.5` helper-catalog sweep. The verification pass caught

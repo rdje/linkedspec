@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.6 — add capture/mark marker cross-example
+
+**Scope:** mdBook source-boundary and action/lifecycle placement examples.
+
+**Change:** Added a verified marker-form capture/mark cross-example using `@capture_slice`,
+`@mark(body_start)`, `mark_match_start(close_start)`, `capture_slice()`, `capture_from(...)`,
+and `capture_between(...)`. Corrected placement-sensitive named-mark examples to use
+`mark_here(...)` inside opener actions when exact action-local timing is needed. Added KM fact
+`split-boundary-marker-action-timing`.
+
+**Validation:** Focused `LinkedSpec::Get` probes verify the marker example output and the corrected
+consume-mode named-mark examples. `mdbook build docs/linkedspec-book` and the memory, task-tree,
+doctrine, whitespace, and Knowledge Map checks pass.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.5.5 — add remaining helper-family worked examples
 
 **Scope:** mdBook helper catalog Declaration, Capture/Mark, Entry/Match, Input, and Call examples.

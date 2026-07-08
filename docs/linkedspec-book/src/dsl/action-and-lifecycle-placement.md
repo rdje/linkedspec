@@ -318,18 +318,30 @@ Example:
 
 ```text
 Delimited:AND
- I { body = undef; }
+ I {
+   body = undef;
+   body_text = undef;
+ }
  /\{/
- @mark(body_start)
- /[^}]*/
+ /[^}]+/
  /\}/
+ -> Delimited[0] {
+   mark_here(body_start);
+ }
+ -> Delimited[1] {
+   body_text = match_text();
+ }
  -> Delimited[2] {
    body = capture_from(body_start);
    return(hash("kind", "delimited", "body", body));
  }
 ```
 
-The `@mark(body_start)` marker is implemented as a later local-end placement update. That means an action on the same slot should not expect the newly written mark yet. Read it from a later slot.
+The opener action records the boundary after `{`, and the closing action reads
+from that saved boundary to the current local-match edge. The middle action keeps
+the body slot explicit in this consume-mode pattern. If you use the marker form
+`@mark(body_start)`, read it from a later slot; an action on the same slot should
+not expect the newly written mark yet.
 
 ## Lifecycle blocks are statement blocks
 
@@ -418,27 +430,43 @@ Marker forms such as:
 
 are not ordinary return-value helpers. They are placement-sensitive rule members.
 
-`@capture_slice` moves the anonymous capture boundary at that rule slot. `@mark(name)` stores a named checkpoint for later same-rule reads.
+`@capture_slice` moves the anonymous capture boundary after the matched grammar
+slot. `@mark(name)` stores a named checkpoint for later same-rule reads. In
+action-bearing examples, make the boundary slot explicit and read the marker
+effects from a later action.
 
 Example:
 
 ```text
-Tuple:AND
- I { parts = []; }
- /\(/
+Top::AND
+ => MarkerBody
+
+MarkerBody:AND
+ /foo\(/
  @capture_slice
- /[^,]*/
- /,/
- /[^)]*/
+ @mark(body_start)
+ /[A-Za-z]+/
  /\)/
- -> Tuple[2] {
-   push(array(parts), capture_take());
+ -> MarkerBody[0] {
+   opened = 1;
  }
- -> Tuple[4] {
-   push(array(parts), capture_slice());
-   return(hash("kind", "tuple", "parts", copy(array(parts))));
+ -> MarkerBody[2] {
+   mark_match_start(close_start);
+   return(hash(
+     "anonymous", capture_slice(),
+     "named", capture_from(body_start),
+     "between", capture_between(body_start, close_start),
+     "body_start", mark_pos(body_start),
+     "close_start", mark_pos(close_start)
+   ))
  }
 ```
+
+With `parse_mode => "seek"`, input `foo(alpha)` returns
+`[{"anonymous":"alpha","between":"alpha","body_start":4,"close_start":9,"named":"alpha"}]`.
+The opener slot establishes both the anonymous boundary and the named mark after
+its action runs; the closing slot can then read the same span through
+`capture_slice()`, `capture_from(...)`, and `capture_between(...)`.
 
 Use the helper-call form such as `start_capture_slice()` when the boundary move belongs inside an action or lifecycle block. Use the marker form when the grammar slot itself is the boundary.
 
@@ -465,11 +493,17 @@ Block:AND
  I {
    set(hash(meta), { "kind" : "block" });
    body = undef;
+   body_text = undef;
  }
  /\{/
- @mark(body_start)
- /[^}]*/
+ /[^}]+/
  /\}/
+ -> Block[0] {
+   mark_here(body_start);
+ }
+ -> Block[1] {
+   body_text = match_text();
+ }
  -> Block[2] {
    body = capture_from(body_start);
    set(hash(meta), set_key(hash(meta), "body", body));
@@ -482,6 +516,8 @@ The placement logic is:
 
 - `I { ... }` creates state for this rule invocation.
 - The opening brace slot establishes the named mark for later use.
+- The body slot is explicit, so consume-mode matching advances through it before
+  the closing delimiter action.
 - The closing brace action reads from the earlier mark to the current local-match edge.
 - The returned payload is shaped with value and source-location helpers.
 

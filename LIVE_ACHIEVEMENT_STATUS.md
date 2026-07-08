@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.6 — add capture/mark marker cross-example**
+  (DONE mdBook capture/mark cross-example + thin-spot fixes; frontier `.7` next).
+
+  **Change:** Added a verified marker-form example to `source-boundary-helper-reference.md`
+  and `action-and-lifecycle-placement.md`, exercising `@capture_slice`, `@mark(body_start)`,
+  `mark_match_start(close_start)`, `capture_slice()`, `capture_from(...)`, and
+  `capture_between(...)` together. Corrected placement-sensitive named-mark examples to use
+  `mark_here(...)` where exact action-local timing is needed. Added KM fact
+  `split-boundary-marker-action-timing`.
+
+  **Boundary:** No parser/runtime/source behavior changed. The slice documents the current
+  marker visibility rule and fixes stale documentation examples only.
+
+  **Verification:** Focused `LinkedSpec::Get` probes verify the marker example and corrected
+  consume-mode helper-call examples; mdBook, doctrine, task-tree, memory, Knowledge Map, and
+  whitespace checks pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.5.5 — add remaining helper-family worked examples**
   (DONE mdBook helper catalog examples; helper-catalog sweep `.5` closed; frontier `.6` next).
 

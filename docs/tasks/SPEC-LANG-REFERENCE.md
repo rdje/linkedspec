@@ -6,11 +6,10 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-07-08` (`.5.5` done: Declaration, Capture/Mark, Entry/Match, Input, and
-  Call helper worked examples added to `helper-contract-catalog.md` with focused `LinkedSpec::Get`
-  verification; stale entry-vs-match book examples corrected to the verified ordered-child shape;
-  KM fact `entry-match-divergence-verified-shape` added; helper-catalog sweep `.5` closes and
-  frontier advances to `.6` capture/mark cross-example. Earlier **MAJOR
+- Last updated: `2026-07-08` (`.6` done: added a verified marker-form capture/mark cross-example,
+  corrected placement-sensitive named-mark examples to use block-local helper calls where exact action
+  timing is needed, added KM fact `split-boundary-marker-action-timing`, and advanced the frontier to
+  `.7` KM fact-card coverage. Earlier **MAJOR
   CORRECTION** — user established that a `.spec` top (`::`) rule has NO regex; a valid spec needs >=2
   rules (top entry + >=1 normal `:` rule carrying the regex). Remediation remains documentation-only
   and owned by `.10.3`/`.10.5`; Perl reference untouched.)
@@ -65,11 +64,11 @@ The surface to cover (authoritative sources in parentheses) includes at least:
 - ID: `SPEC-LANG-REFERENCE`
   Status: `active`
   Goal: Complete + variant-agnostic + example-rich book coverage of the whole `.spec` language
-  Children: `.1`–`.5` (done, including `.5.1`–`.5.5`; `.5.3.1`/`.5.4.1` deferred), `.6`, `.7`,
+  Children: `.1`–`.6` (done, including `.5.1`–`.5.5`; `.5.3.1`/`.5.4.1` deferred), `.7`,
   `.8`, `.9` (done — §5.5 drift fix, but used INVALID structure — superseded by `.10.4`), `.10`
   (**CORRECTED**: remediate structurally-invalid examples in `.5.2`/`.9`; NO engine bug; `.10.1`
   verdict superseded, `.10.2` superseded; remediation `.10.3`/`.10.5`; `.10.5.4.1` reactivated the
-  paused scorch and `.10.5.20` is done; `.6` is the next language-reference leaf)
+  paused scorch and `.10.5.20` is done; `.7` is the next language-reference leaf)
 
 - ID: `SPEC-LANG-REFERENCE.1`
   Status: `done`
@@ -327,13 +326,23 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.5.5` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.6`
-  Status: `pending`
+  Status: `done`
   Goal: Capture/mark cross-example + any remaining thin spots
   Acceptance: one worked rule exercising the anonymous + named capture/mark families together
   (`@capture_slice`, `@mark(name)`, `capture_*_from`/`_between`, `mark_*`), plus any
   small thin-spot fixes the audit flagged; `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. Added a verified marker-form cross-example to
+  `dsl/source-boundary-helper-reference.md` and `dsl/action-and-lifecycle-placement.md` using
+  `@capture_slice`, `@mark(body_start)`, `mark_match_start(close_start)`, `capture_slice()`,
+  `capture_from(body_start)`, and `capture_between(body_start, close_start)`. Focused
+  `LinkedSpec::Get` probes verify `foo(alpha)` under seek mode returns
+  `[{"anonymous":"alpha","between":"alpha","body_start":4,"close_start":9,"named":"alpha"}]`.
+  The same slice corrected placement-sensitive named-mark examples in
+  `action-and-lifecycle-placement.md` to use `mark_here(...)` inside the opener action when exact
+  action-block timing is needed; consume-mode probes verify `Delimited` and `Block` examples return
+  `{"body":"body"}`-shaped payloads. KM fact `split-boundary-marker-action-timing` records the
+  durable marker timing caveat. `mdbook build` and KM/memory/doctrine gates pass.
+  Commit: `SPEC-LANG-REFERENCE.6` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.7`
   Status: `pending`
@@ -1037,11 +1046,20 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.5.4` | `done` | Hash + Control Flow helper worked examples added 2026-07-08; direct odd-arity hash constructor caveat documented and tracked |
 | — | `SPEC-LANG-REFERENCE.5.4.1` | `deferred` | optional implementation/parity follow-up for direct odd-arity `hash(...)`; not PNT-active unless explicitly activated |
 | — | `SPEC-LANG-REFERENCE.5.5` | `done` | worked examples added for Declaration, Capture/Mark, Entry/Match, Input, and Call families; helper-catalog sweep `.5` closes (2026-07-08) |
-| 11 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
+| 11 | `SPEC-LANG-REFERENCE.6` | `done` | capture/mark cross-example + marker-placement thin spots fixed 2026-07-08 |
 | 12 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
 | 13 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
 
 ## Decisions
+
+- **`2026-07-08` — MARKER-FORM CAPTURE/MARK TIMING (`.6`).**
+  The public capture/mark cross-example uses a verified seek-mode delimiter shape: an opener action
+  is followed by `@capture_slice` and `@mark(body_start)`, and a later closing-delimiter action reads
+  the same body span through `capture_slice()`, `capture_from(body_start)`, and
+  `capture_between(body_start, close_start)` after calling `mark_match_start(close_start)`. For exact
+  timing inside an action or lifecycle block, public examples now prefer helper-call forms such as
+  `start_capture_slice()` and `mark_here(...)`. KM fact `split-boundary-marker-action-timing` records
+  the generated-source/root-cause evidence so future sessions do not re-derive marker visibility.
 
 - **`2026-07-08` — HASH + CONTROL FLOW EXAMPLES + HASH CONSTRUCTOR CAVEAT (`.5.4`).**
   The Hash and Control Flow helper catalog now documents verified current forms: hash constructor/copy/splice,
@@ -1570,3 +1588,11 @@ wrapped only where a complete worked example is intended) during the per-file fi
   `Name:AND` later-slot action). KM fact `entry-match-divergence-verified-shape` records the durable
   pattern. Helper-catalog sweep `.5` closes; frontier → `.6` (capture/mark cross-example + remaining
   thin spots).
+- `2026-07-08`: `.6` done — added the capture/mark cross-example to
+  `source-boundary-helper-reference.md` and `action-and-lifecycle-placement.md`, exercising
+  `@capture_slice`, `@mark(body_start)`, `mark_match_start(close_start)`, `capture_slice()`,
+  `capture_from(body_start)`, and `capture_between(body_start, close_start)` in one verified rule.
+  Corrected marker-placement thin spots in `action-and-lifecycle-placement.md` by using
+  `mark_here(...)` inside opener actions when exact block-local timing is required. KM fact
+  `split-boundary-marker-action-timing` records the durable visibility rule. Frontier → `.7`
+  (durable `.spec`-language KM fact-card coverage).

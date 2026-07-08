@@ -269,6 +269,49 @@ Body:AND
 
 `mark_capture_slice(body_start)` promotes the anonymous boundary to a durable mark. `start_capture_slice_from(body_start)` restores it later. This is useful when the rule wants both incremental segments and the whole body.
 
+### Example: marker syntax plus named helpers
+
+Marker members are useful when a grammar slot itself is the boundary. The example
+below sets both the anonymous capture boundary and a named mark after the opener
+slot, then reads both boundaries from the closing-delimiter action.
+
+```text
+Top::AND
+ => MarkerBody
+
+MarkerBody:AND
+ /foo\(/
+ @capture_slice
+ @mark(body_start)
+ /[A-Za-z]+/
+ /\)/
+ -> MarkerBody[0] {
+   opened = 1;
+ }
+ -> MarkerBody[2] {
+   mark_match_start(close_start);
+   return(hash(
+     "anonymous", capture_slice(),
+     "named", capture_from(body_start),
+     "between", capture_between(body_start, close_start),
+     "body_start", mark_pos(body_start),
+     "close_start", mark_pos(close_start)
+   ))
+ }
+```
+
+With `parse_mode => "seek"`, input `foo(alpha)` returns
+`[{"anonymous":"alpha","between":"alpha","body_start":4,"close_start":9,"named":"alpha"}]`.
+The three text readers all see the same body span:
+
+- `capture_slice()` reads from the anonymous boundary set by `@capture_slice`.
+- `capture_from(body_start)` reads from the named mark set by `@mark(body_start)`.
+- `capture_between(body_start, close_start)` reads between the marker-written
+  start mark and the explicit `mark_match_start(close_start)` endpoint.
+
+If the boundary belongs inside action code rather than at a grammar slot, prefer
+`start_capture_slice()` and `mark_here(...)`; their timing is local to the block.
+
 ## Cursor and whole-input helpers
 
 Cursor helpers read the live parser cursor. Whole-input helpers ignore the cursor and read from the entire current input.
