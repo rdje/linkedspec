@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.10 — fix capture and entry-match examples**
+  (DONE mdBook + Knowledge fact correction; frontier `.10.5.11` next).
+
+  **Change:** Reworked `dsl/capture-marks-and-source-locations.md` so the capture example uses a
+  no-regex `Top::` wrapper plus normal `Body:` delimiter rule, and the entry-vs-match example uses
+  a no-regex blind-call wrapper plus normal `Call:`/`Inner:` matcher rules.
+
+  **Boundary:** No parser/runtime/source behavior changed. The slice records the Perl seek-vs-consume
+  delimiter-capture authoring boundary in Knowledge fact `perl-capture-slice-delimiter-seek-boundary`.
+
+  **Verification:** Focused `LinkedSpec::Get` probes cover the seek-mode capture output and the
+  `greet`/`world` entry-vs-match split; page scan finds no regex under `::`; mdBook, Knowledge Map,
+  doctrine, task-tree, memory, and whitespace checks pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.9 — fix action and lifecycle placement examples**
   (DONE mdBook + Knowledge fact correction; frontier `.10.5.10` next).
 

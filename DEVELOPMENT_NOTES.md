@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.10 — capture/source-location examples):
+  `dsl/capture-marks-and-source-locations.md` no longer teaches `Top::AND` / `Call::AND` regex-bearing
+  examples. The `capture_slice()` example is now a no-regex `Top::` wrapper dispatching to a normal
+  `Body:` delimiter rule and is verified in seek mode (`BEGIN body END` -> `[{"body":"body"}]`).
+  Consume mode returns `[null]` for the same minimal opener/body/closer shape because the child close
+  regex is checked at the cursor after the opener and cannot skip body text; Knowledge fact
+  `perl-capture-slice-delimiter-seek-boundary` records that authoring boundary. The entry-vs-match
+  example now uses a no-regex blind-call wrapper with normal `Call:`/`Inner:` rules and verifies
+  `entry_*` reading `greet` while `match_*` reads `world`. The next scorch leaf is `.10.5.11` for
+  `dsl/declaration-helper-reference.md`.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.9 — action/lifecycle placement examples):
   `dsl/action-and-lifecycle-placement.md` now separates entry-match handling from later local-slot actions.
   A dispatched normal rule reads the match that caused entry with `entry_text()` / `entry_group(...)` in

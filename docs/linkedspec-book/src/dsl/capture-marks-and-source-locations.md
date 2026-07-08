@@ -27,13 +27,15 @@ Use it when one rolling boundary is enough.
 Example:
 
 ```text
-Top::AND
- I { start_capture_slice(); first = undef; }
- /BEGIN/
- /END/
- -> Top[0] { first = capture_slice(); }
- -> Top[1] { return(hash("body", first)); }
+Top::
+ -> Body .push
+ LX { return(copy(array(Top))) }
+
+Body: /BEGIN/ /END/
+ -> Body[1] { return(hash("body", trim(capture_slice()))) }
 ```
+
+With seek-mode matching, input `BEGIN body END` returns `[{"body":"body"}]`.
 
 The important distinction:
 
@@ -138,21 +140,31 @@ For a simple single-regex rule, the match that *entered* the rule and the rule's
 They **diverge** when a rule's action runs against a local match that is not the match that dispatched into it — the classic case is a **dispatched child**. Consider a parent that recognizes a `name(` opener and dispatches into a child that reads the word inside:
 
 ```text
-Call::AND
- /(\w+)\(/ -> Inner
+Top::AND
+ => Call
 
-Inner::AND
- /(\w+)/ -> Inner[0] {
-   return(hash("outer", entry_text(), "inner", match_text()));
+Call: /(\w+)\(/ -> Inner {
+  return(call(Inner));
+}
+
+Inner: /(\w+)/
+ /\)/
+ -> Inner[0] {
+   return(hash(
+     "outer", entry_text(),
+     "outer_name", entry_group(0),
+     "inner", match_text(),
+     "inner_name", match_group(0)
+   ));
  }
 ```
 
-Over the input `greet(world)`, the two families read **different** spans:
+Over the input `greet(world)`, this returns `[{"outer":"greet","outer_name":"greet","inner":"world","inner_name":"world"}]`. The two families read **different** spans:
 
-- `entry_text()` reads the match that **entered** `Inner` — the parent's `greet(` opener.
+- `entry_text()` and `entry_group(0)` read the match that **entered** `Inner` — the outer name `greet` from `Call`.
 - `match_text()` reads `Inner`'s **own** local match — the inner word `world`.
 
-The split applies to every reader in both families: `entry_group(0)` / `entry_named(...)` read the entering match's captures (here `greet`), while `match_group(0)` / `match_named(...)` read the local match's captures (here `world`). The same example in reference form, reading captures by index and by name, is in [Source Boundary Helper Reference](source-boundary-helper-reference.md#entry-versus-match-example).
+The split applies to every reader in both families: `entry_group(0)` reads the entering match's capture (here `greet`), while `match_group(0)` reads the local match's capture (here `world`).
 
 Choose by what you need: `entry_*` for the context that brought the action here, `match_*` for the token the action is processing right now.
 

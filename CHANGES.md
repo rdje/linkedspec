@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.10 — fix capture and entry-match examples
+
+**Scope:** mdBook capture/source-location chapter correction plus a narrow Knowledge Map fact.
+
+**Change:** Reworked `dsl/capture-marks-and-source-locations.md` so the `capture_slice()`
+worked example uses a no-regex `Top::` wrapper plus normal `Body:` delimiter rule. Replaced
+the `Call::AND`/`Inner::AND` divergence sketch with a no-regex blind-call wrapper and normal
+regex-owning `Call:`/`Inner:` rules. Added Knowledge fact `perl-capture-slice-delimiter-seek-boundary`
+for the seek-vs-consume delimiter-capture caveat found during verification.
+
+**Validation:** Focused `LinkedSpec::Get` probes verify `BEGIN body END` -> `[{"body":"body"}]`
+under seek mode and `greet(world)` -> `[{"outer":"greet","outer_name":"greet","inner":"world","inner_name":"world"}]`.
+The page scan finds no regex slot under a `::` header; `mdbook build docs/linkedspec-book` passes.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.9 — fix action and lifecycle placement examples
 
 **Scope:** mdBook action/lifecycle placement chapter correction plus a Knowledge Map caveat.
