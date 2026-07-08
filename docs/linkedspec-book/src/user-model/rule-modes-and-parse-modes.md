@@ -21,21 +21,21 @@ The entry-style form commonly used for top-level examples uses two colons:
 Top::
 ```
 
-For runnable examples in this book, keep `::` as a no-regex entry or dispatcher rule and put regex-carrying rules behind it with the ordinary single-colon form:
+For stream-of-records examples, this book often uses `::` as a no-regex entry or dispatcher wrapper and puts regex-carrying rules behind it with the ordinary single-colon form:
 
 ```text
 Top::
 Item:AND
 ```
 
-Here `Top::` is the no-regex entry rule, and `Item:AND` is the regex-carrying ordered sequence. A no-regex entry or dispatcher can still carry a mode suffix when it composes child parser calls, as shown later in this chapter.
+Here `Top::` is the no-regex entry wrapper, and `Item:AND` is the regex-carrying ordered sequence. A no-regex entry or dispatcher can still carry a mode suffix when it composes child parser calls, as shown later in this chapter.
 
-Mechanically, `::` is an **entry marker**: it designates the rule entered first. The Perl reference engine treats that rule as an ordinary rule at runtime (see [.spec Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#the-top--rule-is-an-ordinary-rule-entered-first)), but new teaching examples use the clearer two-rule shape: no regex on `Top::`; regex slots on ordinary `:` rules. Recursion through any rule — including the top rule — must consume input before it recurses; a non-progressing (no-consume) cycle is cut so the parser terminates (see the [formal grammar §5.4](../appendix/formal-grammar.md)).
+Mechanically, `::` is an **entry marker**: it designates the rule entered first. The Perl reference engine treats that rule as an ordinary rule at runtime (see [.spec Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#the-top--rule-is-an-ordinary-rule-entered-first)). After entry selection, `::` and `:` have the same rule feature surface: either form can carry regex slots, rule modes, action or blind-call edges, lifecycle blocks, and recursion. Recursion through any rule — including the top rule — must consume input before it recurses; a non-progressing (no-consume) cycle is cut so the parser terminates (see the [formal grammar §5.4](../appendix/formal-grammar.md)).
 
 The current public suffix surface is intentionally small and exact:
 
 - `Rule:` is the historical baseline repeated-alternative rule shape.
-- `Rule::` is the entry-style spelling commonly used for no-regex top-level dispatcher rules.
+- `Rule::` is the entry marker for the rule entered first; its body supports the same modes and regex slots as `Rule:`.
 - `Rule:&` is ordered sequence.
 - `Rule:AND` is the worded ordered-sequence spelling.
 - `Rule:AND+` is open-ended repeated ordered sequence with an implicit lower bound of one.

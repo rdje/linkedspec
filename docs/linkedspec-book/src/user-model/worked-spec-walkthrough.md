@@ -115,13 +115,13 @@ matcher — so `match_group(0)` here would be empty. See
 [Capture, Marks, and Source Locations](../dsl/capture-marks-and-source-locations.md) for when
 `entry_*` and `match_*` diverge.
 
-## Why two rules
+## Why this example uses two rules
 
 The top `::` entry rule and the normal `:` matcher rule play different roles:
 
-- The **entry rule** (`Top::`) names the whole parser and owns the result. It carries no regex —
-  it loops, dispatches to matchers, collects their payloads, and returns the collection. There is
-  exactly one entry rule per spec.
+- The **entry rule** (`Top::`) names the whole parser and owns the result. In this example it carries
+  no regex: it loops, dispatches to matchers, collects their payloads, and returns the collection.
+  There is exactly one default entry marker per spec.
 - The **matcher rule** (`Pair:`) carries the regex and turns one match into one payload.
 
 In this idiom the regex lives on the normal `:` matcher rule and the `::` entry rule
@@ -337,7 +337,7 @@ The important habit is to change the rule label when the composition model chang
 
 This small example demonstrates the default authoring loop:
 
-- Write a top `::` entry rule (no regex) plus one or more normal `:` matcher rules that carry the regex.
+- For stream-style parsers, a top `::` entry wrapper with no regex plus one or more normal `:` matcher rules is often the clearest shape.
 - Use a rule label that names the composition model.
 - Use regex capture groups when the payload is already local to one match.
 - Use `entry_group(...)` to read the capture groups of the match that entered a dispatched rule.

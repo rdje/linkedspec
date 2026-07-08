@@ -10,7 +10,7 @@ answers:
 date: 2026-07-08
 status: confirmed
 tags: [spec-language, rule-modes, parse-modes, sequence, choice, repetition, SPEC-LANG-REFERENCE]
-evidence: "SPEC-LANG-REFERENCE.7 promotes the durable rule-mode retrieval point from mdBook rule-modes-and-parse-modes.md and runtime-semantics.md. Earlier SPEC-LANG-REFERENCE.10.5.6 corrected runnable examples to use no-regex top wrappers and normal regex-owning matcher rules."
+evidence: "SPEC-LANG-REFERENCE.7 promotes the durable rule-mode retrieval point from mdBook rule-modes-and-parse-modes.md and runtime-semantics.md. SPEC-LANG-REFERENCE.8 corrected stale no-regex-top wording after ADR 0010: `::` is the entry marker, and once selected it has the same rule-mode/regex/action feature surface as `:`. Runnable stream examples may still use no-regex top wrappers as an idiom."
 ---
 
 # Spec Rule-Mode Semantics Map
@@ -25,7 +25,7 @@ Current public rule-label semantics:
 | Surface | Meaning |
 | --- | --- |
 | `Rule:` | historical repeated-choice baseline |
-| `Rule::` | entry-style spelling, commonly used as a no-regex top dispatcher |
+| `Rule::` | entry marker for the rule entered first; same body feature surface as `Rule:` |
 | `Rule:&`, `Rule:AND` | ordered sequence |
 | `Rule:|` | single successful choice |
 | `Rule:+` | one-or-more repeated choice |
@@ -42,10 +42,11 @@ Bounds count complete iterations:
 - `{,M}` means zero through `M`;
 - invalid or descending bounds should fail validation.
 
-For book examples, keep `::` as a no-regex entry or dispatcher rule and put
-regex slots on ordinary `:` rules. Mechanically, the top rule is still an
-ordinary rule entered first; the no-regex wrapper style is the current teaching
-idiom.
+For stream-of-records examples, the book often uses a no-regex `::` entry wrapper
+that dispatches to regex-owning matcher rules and returns an accumulator. That is
+an idiom, not a validity rule. Mechanically, `::` marks the rule entered first;
+after entry selection, `::` and `:` rules support the same regex slots, modes,
+edges, lifecycle blocks, and recursion model.
 
 ## Links
 

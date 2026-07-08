@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.8 — top-rule doctrine drift correction):
+  The current doctrine is the June 23 ADR `0010` model, not the older June 17 no-regex correction.
+  `::` marks the rule entered first; once selected, a `::` rule has the same regex slots, rule modes,
+  action/blind-call edges, lifecycle blocks, and recursion model as a `:` rule. A `.spec` still needs
+  an entry marker for the default start rule, but regex-bearing `::` bodies are valid. The no-regex
+  top wrapper remains a good stream-of-records teaching idiom, not a validity minimum. Focused
+  `LinkedSpec::Get` probes compared `Entry::` and selected `Body:` forms in default and `AND` modes
+  and got matching outputs; the stale no-regex card is now a superseded redirect.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.7 — spec-language Knowledge Map cards):
   The audit-required durable `.spec` language subjects now have canonical Knowledge Map retrieval cards:
   `spec-output-return-shape-contract`, `spec-regex-feature-contract`, `spec-rule-mode-semantics-map`,

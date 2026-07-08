@@ -3,16 +3,14 @@
 ## Metadata
 
 - Tree ID: `SPEC-LANG-REFERENCE`
-- Status: `active`
+- Status: `done` / `closed`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-07-08` (`.7` done: KM fact-card coverage now routes the durable `.spec`
-  language subjects named by the audit — output/return shape, regex feature set, rule modes,
-  lifecycle/`retv`, action-vs-blind dispatch, and capture/mark taxonomy — and the frontier advances
-  to `.8` final consistency/closeout. Earlier **MAJOR
-  CORRECTION** — user established that a `.spec` top (`::`) rule has NO regex; a valid spec needs >=2
-  rules (top entry + >=1 normal `:` rule carrying the regex). Remediation remains documentation-only
-  and owned by `.10.3`/`.10.5`; Perl reference untouched.)
+- Last updated: `2026-07-08` (`.8` done: final consistency/closeout corrected stale top-rule doctrine
+  drift and closed the tree. The June 17 no-regex/two-rule-minimum correction is historical and was superseded by ADR
+  `0010` on 2026-06-23: `::` marks the rule entered first; after entry selection, `::` and `:` share
+  the same regex/mode/action feature surface. The no-regex top wrapper remains a stream-parser idiom,
+  not a validity rule.)
 - Owner: repo-local workflow
 
 ## Goal
@@ -62,13 +60,12 @@ The surface to cover (authoritative sources in parentheses) includes at least:
 ## Task Tree
 
 - ID: `SPEC-LANG-REFERENCE`
-  Status: `active`
+  Status: `done` / `closed`
   Goal: Complete + variant-agnostic + example-rich book coverage of the whole `.spec` language
   Children: `.1`–`.7` (done, including `.5.1`–`.5.5`; `.5.3.1`/`.5.4.1` deferred),
-  `.8`, `.9` (done — §5.5 drift fix, but used INVALID structure — superseded by `.10.4`), `.10`
-  (**CORRECTED**: remediate structurally-invalid examples in `.5.2`/`.9`; NO engine bug; `.10.1`
-  verdict superseded, `.10.2` superseded; remediation `.10.3`/`.10.5`; `.10.5.4.1` reactivated the
-  paused scorch and `.10.5.20` is done; `.8` is the next language-reference leaf)
+  `.8` (done/closed), `.9` (done — §5.5 drift fix, later superseded by `.10.4`/`.10.5.16), `.10`
+  (historical remediation done; its no-regex validity premise was later superseded by ADR `0010`;
+  `.10.1` verdict superseded, `.10.2` superseded, `.10.3`/`.10.5`/`.10.6` done).
 
 - ID: `SPEC-LANG-REFERENCE.1`
   Status: `done`
@@ -393,13 +390,13 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.9` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10`
-  Status: `active`
-  Goal: **CORRECTED (2026-06-17, user)** — Remediate the structurally-INVALID `.spec` examples
-  (regex on the top rule / single-rule grammars) introduced in `.5.2`/`.9`, and retract the
-  mis-diagnosed `.10.1` "engine bug" record. **There is NO engine bug.** The `[]` outputs were the
-  result of invalid spec structure, not an `AND_SINGLE_ACODE` regression. See "CORRECTION" in
-  Decisions below. The Perl reference is authoritative and is NOT to be touched
-  ([[feedback_do-not-fix-reference-engine]]).
+  Status: `done`
+  Goal: **HISTORICAL CORRECTION (2026-06-17, superseded in doctrine by ADR `0010`)** — Remediate
+  the examples that were then classified as structurally invalid and retract the mis-diagnosed
+  `.10.1` "engine bug" record. **Current doctrine note (2026-07-08):** ADR `0010` later superseded
+  the no-regex/two-rule-minimum validity premise. `::` marks the rule entered first; after entry
+  selection, `::` and `:` have the same feature surface. The `.10.x` book rewrites remain acceptable
+  as stream-parser teaching examples, not as proof that regex-bearing `::` rules are invalid.
   Children: `.10.1` (done — investigation; its verdict is now **superseded** — see note), `.10.2`
   (**superseded** — the engine-fix-vs-doc fork is moot), `.10.3` (done — redid `.5.2` examples + both
   preambles with the verified 2-rule idiom), `.10.6` (done — retracted the inaccurate `[]` premise;
@@ -470,13 +467,13 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: n/a
 
 - ID: `SPEC-LANG-REFERENCE.10.5`
-  Status: `active`
+  Status: `done`
   Goal: **SCORCH THE WHOLE BOOK** (user directive 2026-06-17 — "the book shall not mislead; only
   truthful, valid code snippets") — exhaustively audit **EVERY** `.spec` code snippet across all of
-  `docs/linkedspec-book/src/**` for (i) doctrine-validity (NO regex on a top `::` rule; ≥2 rules)
-  and (ii) output-correctness (any claimed input→output matches a `LinkedSpec::Get` run), then
-  remediate every misleading/invalid snippet. Audit-as-decomposition: the read-only hunt (`.10.5.1`)
-  produced per-file fix sub-leaves `.10.5.2…` and **subsumes** the `.10.4` §5.5 Pair fix.
+  `docs/linkedspec-book/src/**` for the then-active no-regex top doctrine and output-correctness
+  (any claimed input→output matches a `LinkedSpec::Get` run), then remediate every misleading/invalid
+  snippet. **Current doctrine note (2026-07-08):** the no-regex-top validity premise is superseded by
+  ADR `0010`; the resulting two-rule examples remain valid stream-parser idioms.
   **SCOPE DECISION (user, 2026-06-17): FULL BOOK-WIDE SCORCH** — rewrite *every* worked example
   (including the isolated DSL helper-illustration fragments) to the verified 2-rule idiom, and correct
   all wrong outputs. See the scope Decision below.
@@ -891,14 +888,24 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.6` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.8`
-  Status: `pending`
-  Goal: Finalize — whole-book consistency + close
+  Status: `done`
+  Goal: Finalize — whole-book consistency + close, including the current top-rule doctrine
+  correction after stale no-regex wording resurfaced.
   Acceptance: full `mdbook build` exit 0; a cross-chapter consistency pass confirming every
   `.spec` construct from the `.1` inventory is documented with at least one example and no
-  variant leakage; every example verified valid against the grammar; tree closed when all
-  children are `done`/`deferred`.
-  Verification: `pending`
-  Commit: `pending`
+  variant leakage; every example verified valid against the grammar; durable doctrine records
+  agree that ADR `0010` supersedes the old no-regex/two-rule-minimum validity doctrine; tree
+  closed when all children are `done`/`deferred`.
+  Verification: Done — 2026-07-08. Focused `LinkedSpec::Get` probes confirmed current ADR `0010`
+  doctrine: regex-bearing `Entry::` and selected regex-bearing `Body:` with equivalent default-rule
+  bodies both return `"foo"`, and equivalent `Entry::AND` / selected `Body:AND` bodies both return
+  `{"name":"name","value":"value"}`. Corrected current-facing task-tree, ADR, Knowledge Map, mdBook,
+  and toolbox wording so no-regex top wrappers are stream-parser idiom, not validity law. Rewrote
+  `spec-top-rule-no-regex-two-rule-minimum` as a superseded redirect and regenerated `KNOWLEDGE_MAP.md`.
+  `mdbook build docs/linkedspec-book`, `knowledge-map/scripts/check_knowledge_map.sh`,
+  `scripts/check_memory_architecture.sh`, `scripts/check_task_tree_metadata.sh`,
+  `scripts/check_doctrines.sh`, and `git diff --check` all pass.
+  Commit: `SPEC-LANG-REFERENCE.8 - correct top-rule doctrine drift and close language reference`
 
 ## Audit Findings (`.1`, 2026-06-17)
 
@@ -1054,9 +1061,19 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.5.5` | `done` | worked examples added for Declaration, Capture/Mark, Entry/Match, Input, and Call families; helper-catalog sweep `.5` closes (2026-07-08) |
 | 11 | `SPEC-LANG-REFERENCE.6` | `done` | capture/mark cross-example + marker-placement thin spots fixed 2026-07-08 |
 | 12 | `SPEC-LANG-REFERENCE.7` | `done` | durable `.spec`-language KM fact cards completed 2026-07-08 |
-| 13 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
+| — | `SPEC-LANG-REFERENCE.8` | `done` | final consistency/closeout completed 2026-07-08; stale top-rule doctrine drift corrected to ADR `0010`, gates pass, tree closed |
 
 ## Decisions
+
+- **`2026-07-08` — TOP-RULE DOCTRINE DRIFT CORRECTION (`.8`).**
+  User reminder during closeout re-established the current doctrine chronology: the June 17
+  "top `::` rule has no regex / valid spec needs at least two rules" correction was superseded by
+  ADR `0010` on 2026-06-23. Current doctrine: `::` is the entry marker for the rule entered first;
+  after entry selection, `::` and `:` rules have the same regex, mode, edge, lifecycle, and recursion
+  feature surface. A complete `.spec` still needs a `::` entry marker so there is a default start rule,
+  but a regex-bearing `::` rule is valid. The no-regex top wrapper remains a useful stream-of-records
+  idiom, not a validity minimum. `.8` owns correcting current-facing task/KM/book/toolbox wording and
+  preserving the old card as a superseded historical redirect.
 
 - **`2026-07-08` — DURABLE SPEC-LANGUAGE KM RETRIEVAL (`.7`).**
   The `.spec` language reference now has canonical Knowledge Map cards for the audit-required
@@ -1143,26 +1160,29 @@ wrapped only where a complete worked example is intended) during the per-file fi
 - **`2026-06-17` — ENGINE FACTS for the scorch (`.10.5.1`, verified via `LinkedSpec::Get`).** (1) `::`
   and `:` are interchangeable on a **non-first** rule (`child::AND /re/` ≡ `child:AND /re/`); only the
   **first** rule is the top/`_INITIAL` entry; multiple `::` rules do not collide. So a regex on a `::`
-  rule is a **doctrine** problem, not an engine error (the engine is permissive — matches `.10.6`).
+  rule was recorded here as a **doctrine** problem, not an engine error (historical note: ADR `0010`
+  later superseded that doctrine and made `::`/`:` feature parity current).
   (2) The `Rule::AND /regex/ -> Rule[N] { return(...) }` shape (AND mode + slot self-edge) drops its
   edge return → `[]` (the `.10.1` `_emit_and_single_acode_handler` finding) — so the book's pervasive
   worked-example idiom both violates the doctrine **and** fails to surface its `return` value. The fix
   idiom is the verified `demo:: -> child .push` / `LX{return(array_copy(a(demo)))}` + `child : /re/
   I.return(<expr reading entry_group(N)>)` form.
 
-- **`2026-06-17` — CORRECTION (user-established `.spec` structural invariant; supersedes the `.10.1`
-  engine-bug verdict).** A `.spec` **top-level rule** (written with `::`) is the **entry point**:
-  it is entered at startup and runs a `while(1)` loop that matches the regexes of the **non-top
-  (`:`) rules** and dispatches to them. **The top rule has NO regex of its own.** Therefore a valid
-  `.spec` has **at least two rules**: the `::` entry rule **plus** ≥1 normal `:` rule that carries
-  the regex(es). Authoritative basis: `BootstrapSpec/Core.pm:414` (label line is anchored
+- **`2026-06-17` — HISTORICAL CORRECTION (superseded by ADR `0010` as validity doctrine; still
+  supersedes the `.10.1` engine-bug verdict).** This entry records the old correction for provenance.
+  Current doctrine is the June 23 ADR `0010` model: `::` marks the rule entered first, and after entry
+  selection `::` and `:` share the same feature surface. The historical June 17 correction said that
+  the top `::` rule should be a no-regex entry/dispatch loop, so a valid spec needed a top wrapper plus
+  at least one normal matcher rule. That validity claim is no longer current. Its original cited basis
+  was `BootstrapSpec/Core.pm:414` (label line is anchored
   `\A LABEL (::|:) MODE \z` — no regex on the label) + `:417` (`::`→`_INITIAL`), `RuleIR.pm:193-195`
   (`_INITIAL`→`top_rule`), and an audit of all 20 `specs/*.spec` (every top rule `regex_on_top=no`).
-  A regex-on-top-rule or single-rule spec is **malformed**; the engine is permissive and returns the
-  empty top accumulator `[]` (NOT a bug). The Perl reference is authoritative and **must not be
-  touched** ([[feedback_do-not-fix-reference-engine]]). Consequence: `.5.2` (35 examples + the
-  catalog preamble) and `.9` (§5.5) used the invalid `Demo:: /regex/ -> Demo {…}` form and must be
-  redone (`.10.3`/`.10.4`); other chapters audited in `.10.5`. KM card:
+  The historical conclusion was that regex-on-top or single-rule specs were malformed and should be
+  rewritten to the two-rule idiom. That conclusion is superseded as a validity claim, but the
+  remediation still produced valid stream-parser examples. The Perl reference remained untouched
+  ([[feedback_do-not-fix-reference-engine]]). Consequence then: `.5.2` (35 examples + the catalog
+  preamble) and `.9` (§5.5) were redone in `.10.3`/`.10.4`; other chapters were audited in `.10.5`.
+  KM card:
   `spec-top-rule-no-regex-two-rule-minimum.md`.
   **Proven minimal worked-example idiom** (verified via `LinkedSpec::Get`, modeled on
   `specs/lib_reader.spec` / `specs/tclite.spec`):
@@ -1177,18 +1197,18 @@ wrapped only where a complete worked example is intended) during the per-file fi
   an earlier `[null]`). The output is the top rule's accumulator snapshot (so one match → a
   one-element array); the per-match helper value here is `"hello-world"`.
 
-- **`2026-06-17` — `.10.6` retraction (an engine-reality sub-claim of the CORRECTION above was
-  inaccurate; the authoring doctrine stands).** Ground-truthing the CORRECTION's premise via
+- **`2026-06-17` — `.10.6` retraction (historical; later superseded further by ADR `0010`).**
+  This retracted the false "`regex-on-top -> []`" mechanism but still kept the then-active no-regex
+  authoring doctrine. ADR `0010` later superseded that doctrine too. Ground-truthing the CORRECTION's
+  premise via
   `LinkedSpec::Get` showed that a regex on a `::` rule with an OR self-ref / cross-rule **action edge
   does run and return its value** — the old `.5.2`/`.9` examples returned the documented values, and
   the §5.5 frozen oracle fixtures (`Top:: /x/ -> Done {…}`) work. So the sub-claim "a regex-on-top /
   single-rule spec silently returns `[]`" was **wrong** and is retracted; the only shape returning
-  `[]` is the explicit `::AND … -> Rule[N] { return(...) }` form (the `.10.1` finding). **This does
-  NOT change the doctrine or `.10.3`:** a `.spec` is written as a top `::` entry rule (no regex) + ≥1
-  normal `:` rule (per [[feedback_spec-structure-top-plus-normal]] and all 20 shipped specs), and
-  `.10.4`/`.10.5` still reshape regex-on-top book examples to that form — but the **rationale is the
-  authoring doctrine, not an `[]` bug**. There is no rationale for ever putting a regex on a top
-  rule. KM card `spec-top-rule-no-regex-two-rule-minimum.md` rewritten doctrine-first.
+  `[]` is the explicit `::AND … -> Rule[N] { return(...) }` form (the `.10.1` finding). At that time
+  this did not change the no-regex authoring doctrine; as of ADR `0010` and `.8`, that doctrine is
+  historical and the two-rule wrapper is only a stream-parser idiom. KM card
+  `spec-top-rule-no-regex-two-rule-minimum.md` is now a superseded redirect.
 
 - `2026-06-17`: Created tree to own the user request (comprehensive variant-agnostic `.spec`
   documentation + KM cards). Per the splitting discipline, the first leaf is an audit that
@@ -1214,13 +1234,13 @@ wrapped only where a complete worked example is intended) during the per-file fi
 
 ## Blockers
 
-- None. (`.10.2`'s "blocked-on-decision" is gone — superseded; the decision was withdrawn after the
-  user's structural correction. The scorch is closed as of `.10.5.20`; `.5` is done; resume at `.6`.)
+- None. `.8` closeout is active; no user decision is currently blocking it.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-08` | `SPEC-LANG-REFERENCE.8` | focused `LinkedSpec::Get` parity probes (`Entry::` vs selected `Body:` default + `AND` bodies); current-facing stale-doctrine scan; Knowledge Map regeneration/check; `mdbook build docs/linkedspec-book`; memory, task-tree metadata, doctrine, and whitespace checks | ADR `0010` reaffirmed as current doctrine: `::` marks the rule entered first and shares the `:` feature surface after entry selection. Old no-regex/two-rule-minimum card is now a superseded redirect; mdBook/toolbox/task/live docs aligned; tree closed |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.1` | two read-only audits (surface inventory ∥ book coverage map) synthesized; cross-checked the "E/IT deprecated" claim vs `LIFECYCLE-FAMILY-AUDIT`; `scripts/check_memory_architecture.sh` | self-check exit 0; 8/10 surface areas WELL-COVERED; binding gaps = regex-first-class (`.2`) + output-shape (`.3`); minor gaps `.4`–`.6`; KM cards `.7`; finalize `.8`. Rejected the unverified E/IT-deprecated claim. No book change (audit only) |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.2` | engine facts verified read-only against `perl/LinkedRE.pm`, `perl/LinkedSpec/ActionIR/Contracts.pm` (`entry_group`/`match_group`/`entry_named` lowering), `perl/LinkedSpec/BootstrapSpec/Core.pm` (`/pattern/` recognizer), `rust/linkedspec-runtime/src/helpers.rs` (rgx `CompiledAlternation`), and cross-checked vs shipped specs (`lib_reader`/`tablegrep`/`spec.spec`); `mdbook build` (pre + post); whole-book grep for capture-indexing drift | `mdbook build` exit 0 both times; new `regex-in-spec.md` chapter + `formal-grammar.md §3.1` expansion; **3 drift sites corrected** (wrong "index 0 = full match" claim + two examples using the 1-based convention); convention verified 0-based/captures-only/compacted |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.3` | output shapes verified vs frozen oracle-corpus fixtures (`rust/linkedspec-runtime/tests/corpus/proof_edge_{scalar,array}_literal`), a **live Perl-reference run** (`LinkedSpec::Get` on a `/(\w+)=(\w+)/` spec → `["?pair:","key","val"]`), and shipped-spec grep for the tagged convention; grounded the wrap + return-vs-accumulator in `docs/knowledge/rust-perl-output-oracle.md`; `mdbook build` | `mdbook build` exit 0; `runtime-semantics.md §5` expanded (§5.5–§5.8). A hand-built accumulator example (`[undef,undef,undef]`) was discarded — only verified material documented. Tagged shape reframed as OPTIONAL per user feedback (engine imposes no output schema) |
@@ -1262,6 +1282,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.5.5` | `SPEC-LANG-REFERENCE.5.5 — add remaining helper-family worked examples` | `helper-contract-catalog.md` now has verified Declaration, Capture/Mark, Entry/Match, Input, and Call examples. Corrected stale entry-vs-match examples in the source-boundary chapters to the verified ordered-child shape and added KM fact `entry-match-divergence-verified-shape`. This closes the helper-catalog sweep `.5`; frontier advances to `.6` |
 | `SPEC-LANG-REFERENCE.6` | `SPEC-LANG-REFERENCE.6 — add capture/mark marker cross-example` | `source-boundary-helper-reference.md` and `action-and-lifecycle-placement.md` now include a verified marker-form cross-example for `@capture_slice`, `@mark(body_start)`, `mark_match_start(close_start)`, `capture_slice()`, `capture_from(...)`, and `capture_between(...)`. KM fact `split-boundary-marker-action-timing` records marker visibility timing; frontier advances to `.7` |
 | `SPEC-LANG-REFERENCE.7` | `SPEC-LANG-REFERENCE.7 — add spec-language Knowledge Map cards` | Added canonical KM fact cards for output/return shape, regex backend feature contract, rule-mode semantics, lifecycle/`retv` order, and capture/mark taxonomy; extended `spec-edge-syntax-contract` for action-vs-blind dispatch retrieval. KM gate passes; frontier advances to `.8` |
+| `SPEC-LANG-REFERENCE.8` | `SPEC-LANG-REFERENCE.8 — correct top-rule doctrine drift and close language reference` | Reaffirmed ADR `0010` as current doctrine (`::` marks the entered-first rule; `::`/`:` share the feature surface after entry selection), converted the old no-regex/two-rule-minimum card into a superseded redirect, aligned mdBook/toolbox/task/live docs, and closed the language-reference tree. Focused parity probes, mdBook, KM, memory, task-tree metadata, doctrine, and whitespace gates pass |
 | `SPEC-LANG-REFERENCE.9` | `SPEC-LANG-REFERENCE.9 — book: fix drifted §5.5 Pair example output (AND-[0] self-edge returns [] not the tagged array)` | Corrected the §5.5 Pair example to the verified OR self-ref `-> Pair` form (+ §5.7 cross-ref). Surfaced a SYSTEMIC variant across chapters → new leaf `.10` (blocked on a user decision). mdbook build exit 0 |
 | `SPEC-LANG-REFERENCE.10.1` | `SPEC-LANG-REFERENCE.10.1 — investigation: single-slot AND drops its edge return ([]) is a Perl-reference regression, not intended (KM card + verdict)` | Read-only root-cause investigation; VERDICT = accidental regression in `AND_SINGLE_ACODE` emitter (missing `push`); triple-verified vs source/git/card; KM card `and-single-acode-edge-return-dropped.md`. `.10.2` fix blocked on a user direction decision. No code/book change. **(Verdict later SUPERSEDED — see `.10` correction commit.)** |
 | `SPEC-LANG-REFERENCE.10` (correction) | `SPEC-LANG-REFERENCE.10 — correction: top rule has no regex; .5.2/.9 examples are structurally invalid (not an engine bug); retract .10.1, plan remediation (.10.3-.5)` | User-established structural invariant (top `::` rule no regex; valid spec ≥2 rules), verified vs Core.pm/RuleIR.pm + 20-spec audit. Deleted the wrong KM card, added `spec-top-rule-no-regex-two-rule-minimum.md` with the proven 2-rule idiom. Superseded `.10.1` verdict + `.10.2`; added remediation leaves. NO Perl change. Repo handoff-ready; fresh session recommended |
@@ -1616,3 +1637,10 @@ wrapped only where a complete worked example is intended) during the per-file fi
   taxonomy; extended the existing edge syntax card with action-vs-blind dispatch retrieval keys.
   Regenerated `KNOWLEDGE_MAP.md`; required question spot-checks route to the expected facts and
   the KM gate passes. Frontier → `.8` (final whole-book consistency + close).
+- `2026-07-08`: `.8` done — corrected stale top-rule doctrine drift and closed
+  `SPEC-LANG-REFERENCE`. User reminder re-established the chronology: the June 17 no-regex/two-rule
+  correction is historical and ADR `0010` (2026-06-23) is current doctrine. Focused probes confirmed
+  equivalent regex-bearing `Entry::` and selected `Body:` default/`AND` bodies return matching outputs.
+  The old no-regex card is now a superseded redirect; current-facing mdBook/toolbox/task/live docs
+  say `::` marks the rule entered first and otherwise shares the `:` feature surface. mdBook, KM,
+  memory, task-tree metadata, doctrine, and whitespace gates pass. Tree closed.

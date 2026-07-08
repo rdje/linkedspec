@@ -18,20 +18,23 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-LANG-REFERENCE.7` — added canonical KM cards for output/return shape,
-  regex backend features, rule modes, lifecycle/`retv`, and capture/mark taxonomy; extended the edge card
-  for action-vs-blind dispatch retrieval.
-- prior_leaf: `SPEC-LANG-REFERENCE.6` — added a verified marker-form capture/mark cross-example,
-  corrected placement-sensitive named-mark examples to helper-call timing, and recorded KM fact
-  `split-boundary-marker-action-timing`.
+- latest_completed_leaf: `SPEC-LANG-REFERENCE.8` — corrected stale top-rule doctrine drift and closed
+  the language-reference tree. Current doctrine is ADR `0010` (2026-06-23): `::` marks the rule entered
+  first; after entry selection, `::` and `:` share the same regex/mode/action feature surface. The older
+  no-regex/two-rule-minimum correction is historical, and the no-regex wrapper remains a stream-parser
+  idiom only.
+- prior_leaf: `SPEC-LANG-REFERENCE.7` — added canonical KM cards for output/return shape, regex backend
+  features, rule modes, lifecycle/`retv`, and capture/mark taxonomy; extended the edge card for
+  action-vs-blind dispatch retrieval.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-LANG-REFERENCE.7 - add spec-language Knowledge Map cards`; parent before this slice is
-  `SPEC-LANG-REFERENCE.6 - add capture/mark marker cross-example`.
+  `SPEC-LANG-REFERENCE.8 - correct top-rule doctrine drift and close language reference`; parent before
+  this slice is `SPEC-LANG-REFERENCE.7 - add spec-language Knowledge Map cards`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `SPEC-LANG-REFERENCE.8` is the next active language-reference leaf.
-- next_action: from a clean repo, execute `.8`: final whole-book consistency and closeout for
-  `SPEC-LANG-REFERENCE`, including mdBook/KM/live-doc/task-tree no-drift checks.
+- active_work_unit: none known after `SPEC-LANG-REFERENCE` closeout; `docs/TASK_TREE.md` has no
+  active/pending PNT-eligible row at this pointer.
+- next_action: from a clean repo, confirm `docs/TASK_TREE.md` / roadmap for any newly activated work;
+  otherwise await a new user-directed task.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
   enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.
@@ -41,5 +44,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none once this pointer commit lands; do not pivot unless the repo is
+- blockers: none. in_flight_uncommitted: none once the `.8` pointer commit lands; do not pivot unless the repo is
   handoff-ready.

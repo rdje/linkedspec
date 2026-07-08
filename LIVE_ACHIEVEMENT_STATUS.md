@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.8 — correct top-rule doctrine drift and close language reference**
+  (DONE final consistency/closeout; `SPEC-LANG-REFERENCE` closed).
+
+  **Change:** ADR `0010` is the current doctrine: `::` marks the rule entered first, and after entry
+  selection `::` and `:` share the same regex/mode/action feature surface. The old no-regex/two-rule
+  minimum card is now a superseded historical redirect; mdBook/toolbox/task-tree wording is being
+  aligned so the no-regex wrapper reads as a stream-parser idiom only. The language-reference tree is
+  closed.
+
+  **Boundary:** Documentation, Knowledge Map, and coordination-state correction only; no parser/runtime
+  behavior change.
+
+  **Verification:** Focused Perl probes confirm regex-bearing `Entry::` and selected regex-bearing
+  `Body:` forms produce matching default-mode and `AND`-mode outputs. mdBook, Knowledge Map, memory,
+  task-tree metadata, doctrine, and whitespace gates pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.7 — add spec-language Knowledge Map cards**
   (DONE KM fact-card coverage; frontier `.8` next).
 

@@ -6,12 +6,12 @@
 
 ## Context
 
-The mdBook teaches, in several places, that a `::` top rule **cannot carry a regex** and that
+Before this decision, the mdBook taught in several places that a `::` top rule **cannot carry a regex** and that
 the `:AND`/`:OR`/… rule modes are **"Body rule only"** (`appendix/formal-grammar.md` mode table;
 `overview/what-is-linkedspec.md:45`; `worked-spec-walkthrough.md:119-124`). The recorded authoring
 doctrine ([[spec-top-rule-no-regex-two-rule-minimum]] / [[feedback_spec-structure-top-plus-normal]])
-says the same: a valid `.spec` is a top `::` dispatch rule with **no** regex plus ≥1 normal `:` rule
-that carries the regex.
+said the same: a valid `.spec` is a top `::` dispatch rule with **no** regex plus ≥1 normal `:` rule
+that carries the regex. This June 17 no-regex doctrine is superseded by this decision.
 
 That is contradicted by the engine. A read-only investigation (2026-06-23, TOOLBOX probes —
 `LinkedSpec::Get`, `generate_only` + `dump_parser_source`, plus a grep of the codegen path)
@@ -40,6 +40,9 @@ The user reframed the design accordingly: **the top rule should be treated as an
 only difference being that it is the one entered first — which is exactly why it is marked `::`.**
 The no-regex dispatch loop is an idiom; recursion through/into the top rule should be allowed, with
 the standard termination requirement that every recursive cycle consume input.
+
+Restated narrowly: `::` is the entry marker. After entry selection, `::` and `:` rules have the same
+regex, mode, edge, lifecycle, and recursion feature surface.
 
 ## Decision
 
@@ -70,9 +73,10 @@ the standard termination requirement that every recursive cycle consume input.
 
 ## Consequences
 
-- The book's "Body rule only" / "no regex on top" statements become **idiom guidance**, reframed (not
-  deleted) so they no longer read as engine constraints; the consume-before-recurse termination rule is
-  documented. The recommended 2-rule idiom is preserved as *style*.
+- The book's "Body rule only" / "no regex on top" statements become **historical drift or idiom
+  guidance**, reframed (not deleted where the example style remains useful) so they no longer read as
+  engine constraints or validity doctrine. The consume-before-recurse termination rule is documented.
+  The 2-rule no-regex top wrapper is preserved only as a stream-parser style.
 - `t/phase0_regression.t` must stay **960/960 green**; every newly-confirmed or newly-enabled behavior
   (regex-on-top across modes, top re-entry recursion, termination) gets an explicit regression lock.
 - The reference engine is otherwise still frozen; this ADR is the named exception for this specific

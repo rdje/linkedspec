@@ -1,11 +1,16 @@
 ---
 id: top-rule-is-ordinary-rule-entered-first
-title: "Engine mechanics: the top (::) rule is an ordinary rule that is merely ENTERED FIRST, not a special construct. The entry point is just `&{$descr->{spec}{$top_rule}}(...)`; the while(1) streaming loop is MODE-driven (default/OR/REP), not top-driven; a regex on the top rule already compiles as a normal rule (e.g. Pair::AND -> a standard AND handler). 'No regex on top' is the recommended IDIOM, not an engine law (ADR 0010)."
+title: "Current doctrine (adopted 2026-06-23): `::` marks the rule entered first; after entry selection, `::` and `:` have the same regex/mode/action feature surface."
 answers:
   - "is the top (::) rule special-cased in the engine vs a normal (:) rule"
   - "what does :: actually do mechanically (entry marker vs dispatch loop)"
   - "where does the while(1) streaming loop come from (top rule or rule mode)"
   - "can a top rule carry a regex and does it work"
+  - "can a :: rule carry a regex"
+  - "do :: and : have the same rule features"
+  - "what does the :: vs : colon mean for a rule"
+  - "how is the top-level rule handled in the engine"
+  - "should the top-level rule carry a regex"
   - "does regex on the top rule compile differently from a body rule"
   - "is 'no regex on the top rule' an engine law or an idiom"
   - "how does recursion into / re-entry of the top rule behave"
@@ -15,13 +20,15 @@ date: 2026-06-23
 status: confirmed
 tags: [engine, parser, top-rule, codegen, recursion, language-model, TOP-RULE-AS-NORMAL, ADR-0010]
 evidence: "Read-only TOOLBOX investigation 2026-06-23 (TOP-RULE-AS-NORMAL.1). (1) Entry point is just `sub Get { &{$descr->{spec}{$top_rule}}($descr,$_[0]) }` (Compiler.pm:1006) -- the top rule is NOT specially wrapped; it is invoked like any handler. (2) The while(1) loops live in HandlerVariantEmitter.pm and are MODE-driven (default/repeated-choice/REP repeat; :AND is a single ordered pass) -- the 'top = while(1) dispatch loop' behavior is an emergent idiom (default-mode top + dispatch edges + LX accumulator), not a property of `::`. (3) Regex on a top rule already compiles as a normal rule: `generate_only`+`dump_parser_source` on `Pair::AND` + regex slots emits a standard AND handler (`while ($idx < 2) { LinkedRE::or(...) ... }`) -- identical to a body rule; the earlier breakage was the AND-codegen defect already fixed under ADR 0008 / PHASE0-BACKHALF-TRIAGE.3. (4) Idiomatic recursion is body-rule + consume-before-recurse (specs/Lispish.spec: `parenthesis: /\\(/ ... -> parenthesis ... /\\)/`, green). Naive grammars recursing BACK INTO the top rule, or using zero-progress blind-call dispatch, HANG -- the genuinely open dimension (same family as the PHASE0-BACKHALF-TRIAGE.5.2 never-undef/while(1) non-termination). Design decision + engine-touch authorization recorded in ADR 0010."
+evidence_update_2026_07_08: "SPEC-LANG-REFERENCE.8 reverified the current doctrine after a stale June 17 no-regex correction resurfaced. In a single spec defining both `Entry:: /foo/ -> Entry { return(match_text()) }` and `Body: /foo/ -> Body { return(match_text()) }`, selecting `top_rule=>Entry` and `top_rule=>Body` both returns `\"foo\"`; similarly, `Entry::AND` and selected `Body:AND` with equivalent regex slots both return `{name:\"name\",value:\"value\"}`. The remaining structural requirement is an entry marker in the spec so there is a default start rule; it is not a ban on regex-bearing `::` rule bodies."
 reverify: "perl -Iperl -e 'use LinkedSpec; my %c; my $s=\"Pair::AND\\n /a/\\n /b/\\n\"; LinkedSpec::Get(\\$s, generate_only=>1, dump_parser_source=>1, runtime_ctx_ref=>\\%c); print ${$c{parser_source_chunks_ref}};'  # emits a standard `Pair => sub { ... while ($idx < 2) { LinkedRE::or(...) } ... }` AND handler -- a top rule compiled exactly like a body rule"
 ---
 
 # Engine mechanics: the top (`::`) rule is an ordinary rule entered first
 
-**Confirmed 2026-06-23** (read-only investigation `TOP-RULE-AS-NORMAL.1`; design decision ADR
-[0010](../decisions/0010-top-rule-is-ordinary-rule-entered-first.md)).
+**Current doctrine adopted 2026-06-23** (read-only investigation `TOP-RULE-AS-NORMAL.1`;
+design decision ADR [0010](../decisions/0010-top-rule-is-ordinary-rule-entered-first.md)).
+This supersedes the earlier June 17 "no regex on top / two-rule minimum" validity doctrine.
 
 ## What the engine actually does
 
@@ -33,17 +40,22 @@ reverify: "perl -Iperl -e 'use LinkedSpec; my %c; my $s=\"Pair::AND\\n /a/\\n /b
   emits a single ordered pass. The familiar "top rule is a `while(1)` dispatch loop" is an **emergent
   idiom** — a default-mode top rule with dispatch edges + an `LX` accumulator — **not** a property of
   `::`.
-- **A regex on the top rule already compiles as a normal rule.** `Pair::AND` with regex slots emits a
-  standard AND handler (`while ($idx < 2) { LinkedRE::or(...) … }`), identical to a body rule. The old
+- **A regex on the top rule compiles as a normal rule.** `Pair::AND` with regex slots emits a
+  standard AND handler (`while ($idx < 2) { LinkedRE::or(...) ... }`), identical to a body rule. The old
   breakage was the AND-codegen defect, **fixed** under ADR `0008` / `PHASE0-BACKHALF-TRIAGE.3`.
+- **The feature surface is shared.** After a rule is selected as the parser entry point, a `::` rule
+  can use the same regex slots, rule modes, action/blind-call edges, lifecycle blocks, and recursion
+  model as a `:` rule. The only semantic distinction is entry selection: `::` marks the rule entered
+  first by default.
 
 ## The idiom vs the law (ADR 0010)
 
-"No regex on the top rule" and "`:AND`/`:OR`/… are Body-rule-only" are the recommended **idiom/style**
-([[spec-top-rule-no-regex-two-rule-minimum]]) — **not** engine laws. The user reframed (ADR `0010`):
-the top rule is an ordinary rule merely **entered first**. The dispatch-loop-no-regex shape is the
-clean choice for a **stream of records**; a **single recursive document** can be expressed with a
-recursive top rule directly.
+"No regex on the top rule" and "`:AND`/`:OR`/... are Body-rule-only" are **not** current doctrine.
+The old no-regex card is now a superseded historical redirect
+([[spec-top-rule-no-regex-two-rule-minimum]]). The current doctrine is simpler: the top rule is an
+ordinary rule merely **entered first**. A no-regex dispatch-loop wrapper remains a clean idiom for a
+**stream of records**; a **single recursive document** can be expressed with a recursive top rule
+directly.
 
 ## The open dimension: recursion into the top rule + termination
 
@@ -60,5 +72,5 @@ ADR `0010` as a scoped exception to the engine-frozen doctrine, with cross-varia
 - Decision: [0010](../decisions/0010-top-rule-is-ordinary-rule-entered-first.md); precedent [0008](../decisions/0008-authorize-reference-engine-defect-fixes.md)
 - Tree: [[TOP-RULE-AS-NORMAL]] (`.1` investigation done; `.2` engine impl; `.3` parity; `.4` book)
 - Files: `perl/LinkedSpec/Compiler.pm:1006`, `perl/LinkedSpec/HandlerVariantEmitter.pm`, `specs/Lispish.spec`
-- Related: [[spec-top-rule-no-regex-two-rule-minimum]], [[feedback_spec-structure-top-plus-normal]],
-  [[lispish-corpus-catastrophic-backtracking]], [[spec-contract-is-unique]], [[cross-variant-output-parity]]
+- Related: [[spec-top-rule-no-regex-two-rule-minimum]], [[lispish-corpus-catastrophic-backtracking]],
+  [[spec-contract-is-unique]], [[cross-variant-output-parity]]

@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.8 — correct top-rule doctrine drift and close language reference
+
+**Scope:** current-facing top-rule doctrine records, mdBook wording, Knowledge Map facts, and
+language-reference closeout coordination.
+
+**Change:** Reaffirmed ADR `0010` as current doctrine: `::` marks the rule entered first, and after
+entry selection `::` and `:` rules share the same regex/mode/action feature surface. Rewrote the old
+`spec-top-rule-no-regex-two-rule-minimum` card as a superseded historical redirect, tightened the
+canonical top-rule and rule-mode cards, and corrected stale no-regex-as-law wording in the mdBook,
+`TOOLBOX.md`, ADR `0010`, and task-tree records.
+
+**Validation:** Focused `LinkedSpec::Get` probes compare regex-bearing `Entry::` and selected
+regex-bearing `Body:` rules in default and `AND` modes; both pairs return the same outputs.
+`mdbook build docs/linkedspec-book`, the Knowledge Map gate, memory check, task-tree metadata
+check, doctrine driver, and `git diff --check` pass.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.7 — add spec-language Knowledge Map cards
 
 **Scope:** Knowledge Map fact cards for durable `.spec` language reference subjects.
