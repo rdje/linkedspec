@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — RUST-README-DRIFT-SYNC.0 — own Rust README count drift
+
+**Scope:** Tracking-only owner for one startup-discovered documentation drift.
+
+**Change:** Added `docs/tasks/RUST-README-DRIFT-SYNC.md` and registered it in the active task-tree index. The
+finding: `rust/README.md` still names the full Rust interpreter oracle as 93 fixtures, while the checked-in
+manifest, mdBook status/handoff/corpora pages, live docs, and Knowledge Map point at 95 fixtures after
+`terse_14_4_receiver_with_trailing_block`.
+
+**Boundary:** No parser/runtime behavior changed and `rust/README.md` is not edited in this tracking slice.
+
+**Validation:** Memory-architecture check, doctrine driver, and diff checks pass.
+
 ## 2026-07-08 — TASK-TREE-METADATA-HYGIENE.3 — gate completed-tree frontiers
 
 **Scope:** Low-noise doctrine enforcement for task-tree metadata hygiene.

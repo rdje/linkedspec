@@ -18,23 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `TASK-TREE-METADATA-HYGIENE.3` — added the narrow `TASK-TREE-METADATA` doctrine gate:
-  completed/done/exhausted task files must not advertise live `Current Frontier` status cells. The hygiene tree is
-  complete and moved to Completed in `docs/TASK_TREE.md`.
-- prior_leaf: `TASK-TREE-METADATA-HYGIENE.2` — metadata-only reconciliation of stale current-frontier,
-  verification, and commit rows in completed/completed-like task files, with intentional deferred rows preserved.
+- latest_completed_leaf: `RUST-README-DRIFT-SYNC.0` — tracking-only owner for startup-discovered drift:
+  `rust/README.md` still says the full Rust interpreter oracle has 93 fixtures while manifest/book/live/KM state is
+  at 95. README content is intentionally untouched until `.1`.
+- prior_leaf: `TASK-TREE-METADATA-HYGIENE.3` — added the narrow completed-tree `Current Frontier` doctrine gate.
 - latest_commit: HEAD containing this pointer should be
-  `TASK-TREE-METADATA-HYGIENE.3 - gate completed-tree frontiers`; parent before this slice includes
-  `TASK-TREE-METADATA-HYGIENE.2 - reconcile stale frontier rows`.
+  `RUST-README-DRIFT-SYNC.0 - own Rust README count drift`; parent before this slice is
+  `TASK-TREE-METADATA-HYGIENE.3 - gate completed-tree frontiers`.
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: none in-flight after `.3`; repo should be handoff-ready after commit and
-  `git_message_brief.txt` cleanup.
-- next_action: after the `.3` commit is clean, return to `docs/TASK_TREE.md`; current active rows are empty,
-  paused, or explicitly deferred, so no PNT-eligible leaf is available unless a deferred lane is reactivated.
-- latest_bootstrap_read: 2026-07-07/08 read README, memory architecture, session bootstrap, task-tree index/active
+- active_work_unit: `RUST-README-DRIFT-SYNC.1` pending after `.0`; repo should be clean between slices.
+- next_action: update `rust/README.md` from stale 93-fixture wording to current 95-fixture oracle boundary, run
+  focused scans/checks, update live docs/task tree, and commit `.1`.
+- latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, mdBook source, core Perl/Rust implementation, shipped specs, tooling, and focused
-  test harness inventory. The task-tree audit found stale per-file metadata; it is owned by
-  `TASK-TREE-METADATA-HYGIENE`.
+  test harness inventory. Startup found isolated Rust README drift now owned by `RUST-README-DRIFT-SYNC`.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.
@@ -42,4 +39,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Deferred lanes: `SPEC-FORMAT-TERSE` `.10`/`.12`/`.13`;
   `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`, and `SPEC-LANG-REFERENCE` remain deferred/paused.
-- blockers: none. in_flight_uncommitted: none after this commit; do not pivot unless the repo is handoff-ready.
+- blockers: none. in_flight_uncommitted: `.0` tracking docs until commit; do not pivot unless the repo is
+  handoff-ready.

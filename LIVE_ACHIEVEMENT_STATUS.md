@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **RUST-README-DRIFT-SYNC.0 — own Rust README count drift**
+  (DONE tracking-only owner; frontier `.1` README correction next).
+
+  **Change:** Registered a narrow task tree for the startup-discovered drift where `rust/README.md` still says the
+  full Rust interpreter oracle has 93 fixtures while the manifest, mdBook, live docs, and Knowledge Map are at
+  **95** fixtures.
+
+  **Boundary:** No parser/runtime behavior changed and the README itself is intentionally untouched in this owner
+  slice.
+
+  **Verification:** Memory-architecture check, doctrine driver, and diff checks pass.
+
 - 2026-07-08: **TASK-TREE-METADATA-HYGIENE.3 — gate completed-tree frontiers**
   (DONE doctrine gate; tree CLOSED).
 

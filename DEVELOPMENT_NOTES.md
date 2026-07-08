@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (RUST-README-DRIFT-SYNC.0 — Rust README count drift owner):
+  Startup review found a narrow docs drift outside the mdBook: `rust/README.md` still says the full interpreter
+  oracle is 93 fixtures, but the manifest and current public book/live/KM state are at 95 fixtures. The new
+  `RUST-README-DRIFT-SYNC` tree owns that isolated correction so the README edit is not made opportunistically
+  during bootstrap. No parser/runtime behavior changes in `.0`; `.1` is the README update.
+
 - 2026-07-08 (TASK-TREE-METADATA-HYGIENE.3 — completed-tree frontier gate):
   Added `scripts/check_task_tree_metadata.sh` as the `TASK-TREE-METADATA` doctrine. The check is intentionally
   narrow: for task files whose top metadata status is `done`, `completed`, or `exhausted`, it parses only the
