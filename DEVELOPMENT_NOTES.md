@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (ROADMAP-POST-12-DRIFT-SYNC.1 — long roadmap count drift):
+  Startup review after `SPEC-FORMAT-TERSE.12.4` found only the long-form `ROADMAP.md` still carrying the previous
+  current-state counts (`1..1026` and 95 Rust oracle fixtures). The mdBook status/helper/backend chapters already
+  reflected `1..1027`, 96 fixtures, and the hash-tree traversal receiver-block surface, so this slice corrected the
+  long roadmap and recorded a narrow completed owner instead of reopening the broader `ROADMAP-DRIFT-RECONCILE`
+  tree. Treat this as count/status sync only; no parser/runtime, corpus, or book behavior changed.
+
 - 2026-07-08 (SPEC-FORMAT-TERSE.12.4 — hash-tree traversal no-drift closeout):
   The `.12` hash-tree traversal lane is closed after `.12.1` split the contract, `.12.2` landed the Perl
   reference, `.12.3` landed Rust/oracle parity, and `.12.4` verified docs/KM/live-doc/oracle/task-tree alignment.

@@ -26,8 +26,8 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   is core-only apart from the legacy compatibility adapter `PPlugin.pm`.
 - Specs baseline:
   - All 21 shipped files in `specs/*.spec` compile in the phase0 baseline.
-  - Current phase0 reaches `PASS 1..1026` when run with `PERL5LIB=` cleared.
-  - The Rust interpreter oracle is manifest-backed at 95 fixtures.
+  - Current phase0 reaches `PASS 1..1027` when run with `PERL5LIB=` cleared.
+  - The Rust interpreter oracle is manifest-backed at 96 fixtures.
   - The former `specs/tclite.spec` literal `[` regex blocker is fixed.
 
 ## Strategic Principles
@@ -70,7 +70,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   reintroduced under a new owner.
 - Freeze baseline AST shapes for representative inputs.
 - Exit criteria:
-  - Green baseline suite (`PERL5LIB= prove -Iperl t/phase0_regression.t`, currently `PASS 1..1026`).
+  - Green baseline suite (`PERL5LIB= prove -Iperl t/phase0_regression.t`, currently `PASS 1..1027`).
   - Known failures documented; no shipped-spec compile blocker is currently deferred.
 
 ## Phase 1: Parser-Core Isolation
@@ -512,7 +512,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Exit criteria:
   - a Cargo workspace at `rust/` (`linkedspec-core` + `linkedspec-runtime`) parses, validates, compiles, and interprets `.spec` files (v0.1, interpreted mode).
   - the variant is exercised by the Rust test suite and the manifest-backed Perl-reference output oracle.
-- Current status: the Rust interpreter oracle is green over 95 fixtures. Generated Rust source emission remains a
+- Current status: the Rust interpreter oracle is green over 96 fixtures. Generated Rust source emission remains a
   structural/curated-subset proof, not the primary interpreter parity gate.
 - Variant model: `.spec` is the universal contract, Perl is the reference backend, Rust is the implemented
   lockstep variant, and Julia/Dart are accepted future lockstep variants; Lua requires an explicit ADR before it
@@ -851,7 +851,7 @@ This is a saved future-enhancement note, not an active implementation item.
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |
 | Overall roadmap | `done` | Whole-project delivery across parser core, semantics, runtime, docs, self-hosting, multi-backend handoff, and the Rust variant. | All numbered phases (0-9) done. All Backbone items done. Plugin modernization done. Method-like DSL migration done. Phase 7 self-hosting complete. Phase 8 multi-backend handoff surface specified; Phase 9 Rust variant operational (Cargo workspace at `rust/`, interpreted mode, v0.1). mdBook reframed variant-agnostic (`.spec` = universal contract; Perl = reference backend; Rust = implemented lockstep variant; Julia/Dart = accepted future variants). Remaining: ongoing documentation/book sync and explicitly owned deferred feature lanes. |
-| Phase 0 | `done` | Regression safety net, baseline compilation coverage, and corpus-level guardrails. | Keep the regression baseline green; all 21 shipped `specs/*.spec` files now participate in the baseline compile pass, and the current gate reaches `PASS 1..1026` with `PERL5LIB=` cleared. |
+| Phase 0 | `done` | Regression safety net, baseline compilation coverage, and corpus-level guardrails. | Keep the regression baseline green; all 21 shipped `specs/*.spec` files now participate in the baseline compile pass, and the current gate reaches `PASS 1..1027` with `PERL5LIB=` cleared. |
 | Phase 1 | `done` | Parser-core isolation and dependency-surface reduction for the active compile/runtime path. | Task tree `docs/tasks/PHASE1-PARSER-CORE-ISOLATION.md` completed 2026-05-18 (3 leaves: inventory, ActionRewriter.pm removal, rewrite_action_code_for_compat evaluation). ActionRewriter.pm deleted (118 lines, 59 forwarders). |
 | Phase 1A | `done` | Thin-façade modularization of `LinkedSpec.pm` into focused owner modules with stable public APIs. | Task tree `docs/tasks/PHASE1A-CLOSE-OUT.md` completed 2026-05-16. `LinkedSpec.pm` is a thin façade; the lazy owner-dispatch / callback-value lookup / `$@` preservation plumbing is centralized in `LinkedSpec::OwnerDispatch` and shared across the owner modules. The then-present thin shim `ActionRewriter.pm` was later deleted in Phase 1; the focused helper-rewrite entrypoint now lives in `LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(...)`. |
 | Phase 2 | `done` | DSL frontend hardening, stricter validation, and clearer token/error handling. | Task tree `docs/tasks/PHASE2-DSL-FRONTEND.md` completed 2026-05-16 (6 leaves). Syntax-aware validation hardened across rule-paragraph, token, and error surfaces; further hardening is incidental follow-up. |
@@ -861,7 +861,7 @@ This is a saved future-enhancement note, not an active implementation item.
 | Phase 6 | `done` | User/developer documentation, architecture rationale, and live project-state upkeep. | Task tree `docs/tasks/PHASE6-DOCUMENTATION.md` completed 2026-05-17 (8 leaves). Book, USER_GUIDE, and architecture docs are maintained live; repo-root-relative doc paths are policy and regression-locked. Ongoing upkeep continues under the no-drift doctrine. |
 | Phase 7 | `done` | Self-hosted `spec.spec` grammar and `.spec` evolution through the DSL itself. | Task tree `docs/tasks/PHASE7-SELF-HOSTED-SPEC.md` completed 2026-05-17 (5 leaves). `spec.spec` captures the supported `.spec` envelope at `language_agnostic_ready_ratio == 1.0000` with regression coverage, and is the required change surface for `.spec` evolution. |
 | Phase 8 | `done` | Multi-backend specification and handoff surface. | Task tree `docs/tasks/PHASE8-MULTI-BACKEND-HANDOFF.md` completed 2026-06-14 (8 leaves: ADR, grammar, HandlerIR, helpers, semantics, corpus, handoff, finalization). Specification-only — zero code changes. |
-| Phase 9 | `done` | Rust variant implementation — LinkedSpec runtime in Rust. | Task tree `docs/tasks/PHASE9-RUST-VARIANT.md` completed 2026-06-14 (17 leaves). Cargo workspace at `rust/`: `linkedspec-core` + `linkedspec-runtime`. Interpreted mode. v0.1 operational. The manifest-backed Rust interpreter oracle is green over 95 Perl-reference fixtures; generated source remains structural/curated-subset proof. |
+| Phase 9 | `done` | Rust variant implementation — LinkedSpec runtime in Rust. | Task tree `docs/tasks/PHASE9-RUST-VARIANT.md` completed 2026-06-14 (17 leaves). Cargo workspace at `rust/`: `linkedspec-core` + `linkedspec-runtime`. Interpreted mode. v0.1 operational. The manifest-backed Rust interpreter oracle is green over 96 Perl-reference fixtures; generated source remains structural/curated-subset proof. |
 | Backbone refactor track | `done` | Cross-cutting structural cleanup needed to make LinkedSpec robust, modular, and extensible. | All items complete (Items 1, 2, 3). |
 | Backbone Item 1 | `done` | Declarative bootstrap grammar registry replacing positional bootstrap coupling. | Declarative bootstrap registry landed. |
 | Backbone Item 2 | `done` | Staged `spec_entry()` compiler pipeline around RuleIR and explicit planning/validation phases. | Staged `spec_entry()` RuleIR pipeline landed. |
@@ -899,7 +899,7 @@ These are tracked implementation concerns, not immediate blockers.
   - but continue prioritizing missing user-facing DSL features first unless one of these seams becomes a concrete bug or blocks a planned feature.
 
 ### Detailed Status Notes
-- Phase 0: `done` (Test::More baseline under `t/phase0_regression.t` for all 21 shipped specs; current gate `PASS 1..1026` with `PERL5LIB=` cleared).
+- Phase 0: `done` (Test::More baseline under `t/phase0_regression.t` for all 21 shipped specs; current gate `PASS 1..1027` with `PERL5LIB=` cleared).
 - Phase 0 enhancement: corpus-level regression includes active core project directories such as `conf/`, `tablescript/`, and `ebnf/`; the former root `plugin/` corpus is retired from the core gate after `NONCORE-QUARANTINE`.
 - Phase 1: `mostly done`.
 - Phase 1A (LinkedSpec.pm modularization): `mostly done`.

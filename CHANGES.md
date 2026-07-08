@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — ROADMAP-POST-12-DRIFT-SYNC.1 — sync long roadmap baseline
+
+**Scope:** Documentation-only correction for startup-discovered current-state drift in the long-form roadmap.
+
+**Change:** Added a narrow task-tree owner and refreshed `ROADMAP.md` current-state baseline references from
+phase0 `1..1026` / 95 Rust oracle fixtures to phase0 `1..1027` / 96 fixtures after the `SPEC-FORMAT-TERSE.12.4`
+hash-tree traversal closeout. The reviewed mdBook already carried the current status, helper contract, formal
+grammar, backend handoff, and development workflow wording, so no book source edit was needed.
+
+**Validation:** Focused stale-count scans over `ROADMAP.md`; `mdbook build docs/linkedspec-book`;
+`bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`;
+`bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `git diff --check`.
+
 ## 2026-07-08 — SPEC-FORMAT-TERSE.12.4 — close hash-tree traversal drift
 
 **Scope:** Final no-drift closeout for the shipped `.12` hash-tree traversal receiver surface.

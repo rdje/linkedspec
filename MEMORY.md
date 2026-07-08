@@ -18,21 +18,21 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.12.4` — final hash-tree traversal mdBook/Knowledge Map/live-doc
-  no-drift closeout completed; `.12` is exhausted.
-- prior_leaf: `SPEC-FORMAT-TERSE.12.3` — Rust parser/runtime parity and the Perl-backed 96th oracle fixture landed
-  for hash-tree receiver traversal blocks.
+- latest_completed_leaf: `ROADMAP-POST-12-DRIFT-SYNC.1` — docs-only long-roadmap count drift correction completed;
+  `ROADMAP.md` now matches phase0 `1..1027` and the 96-fixture Rust interpreter oracle baseline.
+- prior_leaf: `SPEC-FORMAT-TERSE.12.4` — final hash-tree traversal mdBook/Knowledge Map/live-doc no-drift closeout
+  completed; `.12` is exhausted.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-FORMAT-TERSE.12.4 - close hash-tree traversal drift`; parent before this slice is
-  `58ac3895 SPEC-FORMAT-TERSE.12.3 - implement Rust hash-tree traversal`.
+  `ROADMAP-POST-12-DRIFT-SYNC.1 - sync long roadmap baseline`; parent before this slice is
+  `1d6783bb SPEC-FORMAT-TERSE.12.4 - close hash-tree traversal drift`.
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: `SPEC-FORMAT-TERSE.12` hash-tree traversal lane is closed/exhausted after `.12.1` split,
-  `.12.2` Perl reference, `.12.3` Rust/oracle parity, and `.12.4` no-drift closeout.
-- next_action: no current PNT-eligible `SPEC-FORMAT-TERSE.12` leaf remains. `SPEC-FORMAT-TERSE.10` and `.13`
-  stay deferred/backlog unless explicitly activated by the director.
+- active_work_unit: none after `ROADMAP-POST-12-DRIFT-SYNC` closes; `SPEC-FORMAT-TERSE.12` is closed/exhausted.
+- next_action: no current PNT-eligible leaf remains in the active frontier. `SPEC-FORMAT-TERSE.10` and `.13` stay
+  deferred/backlog, `DOCTRINE-ENFORCEMENT-ADOPT.3` stays deferred, and `SPEC-LANG-REFERENCE` stays paused unless
+  explicitly activated by the director.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
-  trees, relevant ADR/KM facts, mdBook source, core Perl/Rust implementation, shipped specs, tooling, and focused
-  test harness inventory. Startup found isolated Rust README drift now owned by `RUST-README-DRIFT-SYNC`.
+  trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/helper/backend/dev chapters, core Perl/Rust
+  implementation, shipped specs, tooling, and focused test harness inventory.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.

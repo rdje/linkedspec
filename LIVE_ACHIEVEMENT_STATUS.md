@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **ROADMAP-POST-12-DRIFT-SYNC.1 — sync long roadmap baseline**
+  (DONE docs-only drift correction; tree CLOSED).
+
+  **Change:** Registered a narrow owner for startup-discovered `ROADMAP.md` drift, then synchronized current-state
+  roadmap references to the post-`SPEC-FORMAT-TERSE.12.4` baseline: phase0 `PASS 1..1027` and the 96-fixture Rust
+  interpreter oracle.
+
+  **Boundary:** No parser/runtime behavior, corpus data, or mdBook source changed. The mdBook was reviewed and was
+  already current for the `1..1027` / 96-fixture hash-tree traversal state.
+
+  **Verification:** Focused stale-count scans, mdBook build, memory architecture, Knowledge Map, doctrine,
+  task-tree metadata, and whitespace checks pass.
+
 - 2026-07-08: **SPEC-FORMAT-TERSE.12.4 — close hash-tree traversal drift**
   (DONE final no-drift closeout; `SPEC-FORMAT-TERSE.12` exhausted).
 
