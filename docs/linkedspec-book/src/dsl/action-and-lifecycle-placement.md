@@ -14,6 +14,8 @@ The short version:
 
 Use the simple forms first. Reach for the advanced lifecycle hooks only when the rule really needs placement-specific behavior.
 
+Unless an example includes a `Top::` wrapper, treat it as a rule-paragraph fragment. Complete public examples should use the two-rule shape: a no-regex `::` entry rule dispatches to one or more normal `:` rules that own the regexes. In a dispatched normal rule, `I { ... }` sees the entry match, while `-> Rule[index] { ... }` actions run for later local slots in that rule.
+
 ## Rule paragraph members
 
 A rule paragraph can contain several kinds of members:
@@ -22,7 +24,7 @@ A rule paragraph can contain several kinds of members:
 | --- | --- | --- |
 | Regex slot | `/[A-Za-z_]+/` | match one local token or anchor. |
 | Action edge | `-> Token[0] { ... }` | run action code for a matched local slot. |
-| Helper chain action edge | `-> Token[0] .return(hash(...))` | compact method-chain form of an action edge. |
+| Helper chain action edge | `-> Token[0] .return(hash(...))` | compact method-chain form of a local-slot action edge. |
 | Empty action edge | `-> Token` | dispatch to the target rule with default call behavior. |
 | Blind-call edge | `=> Child` / `=> Child { ... }` | call another rule as part of the rule body without tying the body to one regex slot action. |
 | Lifecycle block | `I { ... }` | run placement-specific setup or hook code. |
@@ -31,25 +33,21 @@ A rule paragraph can contain several kinds of members:
 Example:
 
 ```text
-Token::AND
- I {
-   meta = { "kind" : "token" };
-   text = undef;
+Name:AND /name/ /\s*=/ /[A-Za-z_]+/
+ -> Name[1] {
+   eq = match_text();
  }
- /[A-Za-z_]+/
- -> Token[0] {
-   text = lowercase(trim(entry_text()));
-   set(hash(meta), set_key(hash(meta), "text", text));
-   return(copy(hash(meta)));
+ -> Name[2] {
+   return(hash("kind", "name", "entry", entry_text(), "value", match_text()));
  }
 ```
 
 The structure is:
 
-- the rule starts at `Token::AND`
-- `I { ... }` initializes rule-owned working state
-- `/[A-Za-z_]+/` is local regex slot `0`
-- `-> Token[0] { ... }` runs when slot `0` is the current local match
+- the rule starts at `Name:AND`
+- `/name/` is the entry regex when a parent dispatches to `Name`
+- `/\s*=/` and `/[A-Za-z_]+/` are later local slots
+- `-> Name[1] { ... }` and `-> Name[2] { ... }` run when those local slots are the current match
 
 ## `I { ... }`: rule-entry setup
 
@@ -65,26 +63,15 @@ Typical uses:
 Example:
 
 ```text
-List::AND
+Token: /[A-Za-z_]+/
  I {
-   items = [];
-   retv = undef;
-   meta = { "kind" : "list" };
- }
- Item
- Item
- -> List[0] {
-   retv = call(Item);
-   push(array(items), retv);
- }
- -> List[1] {
-   retv = call(Item);
-   push(array(items), retv);
-   return(set_key(hash(meta), "items", copy(array(items))));
+   set(hash(meta), { "kind" : "token" });
+   text = lowercase(trim(entry_text()));
+   return(set_key(hash(meta), "text", text));
  }
 ```
 
-`I { ... }` is usually the right place for initialization because it runs before later action-edge logic needs those variables.
+`I { ... }` is usually the right place for initialization because it runs before later action-edge logic needs those variables. It is also the right place to transform the entry match of a dispatched child rule, because `entry_text()` and `entry_group(...)` are available there.
 
 ## Action edges: `-> Rule[index] { ... }`
 
@@ -93,28 +80,28 @@ Action edges attach code to one local match slot.
 Example:
 
 ```text
-Name::AND
- /name/
- /\s*=/
- /[A-Za-z_]+/
+Name:AND /name/ /\s*=/ /[A-Za-z_]+/
+ -> Name[1] {
+   eq = match_text();
+ }
  -> Name[2] {
-   return(hash("kind", "name", "value", entry_text()));
+   return(hash("kind", "name", "separator", eq, "value", match_text()));
  }
 ```
 
-Here `Name[2]` refers to the third local regex slot in the rule. Slot numbering is zero-based.
+Here `Name[2]` refers to the third regex slot in the rule. Slot numbering is zero-based, and `match_text()` reads the current local slot. When the rule is reached through a parent `-> Name` dispatch, the first regex (`/name/`) is the entry match and is available through `entry_text()`.
 
 Use an action edge when:
 
 - the rule should transform the current match into a value
-- the action needs `entry_text()`, `entry_group(...)`, `match_text()`, or source-location helpers
+- the action needs `match_text()`, `match_group(...)`, or source-location helpers for the current local slot
 - the action should call another rule and store the returned value
 - the action should return the final payload for the rule
 
 Action bodies should use helper statements:
 
 ```text
-name = entry_text();
+name = match_text();
 push(array(items), retv);
 return(hash("kind", "name", "value", name));
 ```
@@ -131,7 +118,7 @@ Example:
 
 ```text
 /[A-Za-z_]+/ -> Name[0]
-  .set(text, lowercase(trim(entry_text())))
+  .set(text, lowercase(trim(match_text())))
   .return(hash("kind", "name", "text", text));
 ```
 
@@ -140,7 +127,7 @@ This lowers through the same helper surface as the block form:
 ```text
 /[A-Za-z_]+/
 -> Name[0] {
-  text = lowercase(trim(entry_text()));
+  text = lowercase(trim(match_text()));
   return(hash("kind", "name", "text", text));
 }
 ```
@@ -305,7 +292,7 @@ match_col()
 
 over raw variables such as `LMATCH`, `IMATCH`, or manual capture-list indexing in new public examples.
 
-Use `entry_*` helpers when the action wants the immediate match that led into the action or rule. Use `match_*` helpers when the action is explicitly about the current local match being processed. The [Source Boundary Helper Reference](source-boundary-helper-reference.md) documents the exact `entry_*` and `match_*` families.
+Use `entry_*` helpers when code wants the match that entered the current rule, typically from `I { ... }` in a dispatched child. Use `match_*` helpers when an action is about the current local slot being processed. The [Source Boundary Helper Reference](source-boundary-helper-reference.md) documents the exact `entry_*` and `match_*` families.
 
 ## `LS { ... }` and `LE { ... }`: local-slot hooks
 
@@ -330,7 +317,7 @@ Important caveat: if an action body returns from the rule, later hook code in th
 Example:
 
 ```text
-Delimited::AND
+Delimited:AND
  I { body = undef; }
  /\{/
  @mark(body_start)
@@ -346,26 +333,23 @@ The `@mark(body_start)` marker is implemented as a later local-end placement upd
 
 ## Lifecycle blocks are statement blocks
 
-Lifecycle blocks execute statements for their side effects and return-channel writes. They do
-not yield the value of their final statement as an implicit block result.
+Lifecycle blocks should be written as statement blocks: use assignments and helper calls for side effects, and use `return(...)` when the rule or action should produce a value. Do not rely on the ordinary value of the final statement in a lifecycle block.
 
 ```text
-Top::
+Example: /x/
  I {
    set(out, "from_i");
    set(ignored, "not_a_return");
- }
- /x/
- E {
    return(hash("out", out, "ignored", ignored));
  }
 ```
 
-The final `set(ignored, ...)` statement mutates `ignored`, but the rule returns only because the
-later `E { return(...) }` block writes the return channel. A top-level lifecycle `return(expr)` is
-different from `return(expr)` inside an expression-valued block: the lifecycle form writes the
-surrounding rule/action return channel, while the expression-valued block form yields only that
-local block's value.
+The final `set(ignored, ...)` statement mutates `ignored`; the result is produced by the explicit
+`return(...)`. A top-level lifecycle `return(expr)` is different from `return(expr)` inside an
+expression-valued block: the lifecycle form writes the surrounding rule/action return channel,
+while the expression-valued block form yields only that local block's value.
+
+Portability note: current Perl reference handler shapes can expose a host-language final statement value when a lifecycle block omits an explicit return, and direct `E { ... }` finalization is handler-shape sensitive. Public examples should make lifecycle returns explicit and should not depend on final-statement leakage.
 
 ## `LX { ... }`: local no-match/failure path
 
@@ -374,14 +358,14 @@ local block's value.
 Example:
 
 ```text
-MaybeName::OR
- I { meta = { "kind" : "maybe_name" }; }
+MaybeName:OR
+ I { set(hash(meta), { "kind" : "maybe_name" }); }
  LX {
    return(hash("kind", "missing_name"));
  }
  /[A-Za-z_]+/
  -> MaybeName[0] {
-   return(set_key(hash(meta), "name", entry_text()));
+   return(set_key(hash(meta), "name", match_text()));
  }
 ```
 
@@ -411,7 +395,7 @@ Items:*
  }
  /[A-Za-z_]+/
  -> Items[0] {
-   item = entry_text();
+   item = match_text();
  }
  IT {
    push(array(items), item);
@@ -439,7 +423,7 @@ are not ordinary return-value helpers. They are placement-sensitive rule members
 Example:
 
 ```text
-Tuple::AND
+Tuple:AND
  I { parts = []; }
  /\(/
  @capture_slice
@@ -465,7 +449,7 @@ Use this as the default decision guide:
 | Goal | Prefer |
 | --- | --- |
 | Initialize state shared by the rule | `I { items = []; retv = undef }` |
-| Initialize metadata shared by return paths | `I { meta = { "kind" : "node" } }` |
+| Initialize metadata shared by return paths | `I { set(hash(meta), { "kind" : "node" }) }` |
 | Transform one matched token | `-> Rule[index] { ... }` |
 | Capture and reshape one child result | `retv = call(Child)` inside an action body |
 | Append repeated child results | `push(array(items), retv)` inside action/iteration logic |
@@ -477,9 +461,9 @@ Use this as the default decision guide:
 ## Worked example: source span with a named mark
 
 ```text
-Block::AND
+Block:AND
  I {
-   meta = { "kind" : "block" };
+   set(hash(meta), { "kind" : "block" });
    body = undef;
  }
  /\{/
@@ -504,32 +488,25 @@ The placement logic is:
 ## Worked example: explicit child-result dataflow
 
 ```text
-Pair::AND
- I {
-   lhs = undef;
-   rhs = undef;
-   retv = undef;
- }
- Name
- /\s*=\s*/
- Value
+Pair:AND /[A-Za-z_]+/ /\s*=\s*/ /\d+/
  -> Pair[0] {
-   retv = call(Name);
-   lhs = retv;
+   lhs = match_text();
+ }
+ -> Pair[1] {
+   sep = match_text();
  }
  -> Pair[2] {
-   retv = call(Value);
-   rhs = retv;
+   rhs = match_text();
    return(hash("kind", "pair", "lhs", lhs, "rhs", rhs));
  }
 ```
 
-The explicit `retv` assignments make the child-result flow visible. That is usually better than hiding the same logic behind empty edges when the parent rule needs to reshape the result.
+The explicit assignments make the value flow visible. That is usually better than hiding the same logic behind empty edges when the rule needs to reshape the result.
 
 ## Practical guidance
 
 - Put shared state in `I { ... }`.
-- Put token-specific transformation in `-> Rule[index] { ... }`.
+- Put entry-match transformation in `I { ... }`; put later local-slot transformation in `-> Rule[index] { ... }`.
 - Prefer helper statements inside action bodies; avoid raw Perl in new examples.
 - Use method chains only when the action stays compact and readable.
 - Treat `LS`, `LE`, `LX`, `IT`, `EX`, and `E` as advanced placement hooks, not as the normal way to write every rule.

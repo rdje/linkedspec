@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.9 — action/lifecycle placement examples):
+  `dsl/action-and-lifecycle-placement.md` now separates entry-match handling from later local-slot actions.
+  A dispatched normal rule reads the match that caused entry with `entry_text()` / `entry_group(...)` in
+  `I { ... }`; indexed action edges such as `-> Name[2]` operate on local slots and should read
+  `match_text()` / `match_group(...)`. The leaf also corrected examples that mixed scalar shape assignment
+  (`meta = { ... }`) with aggregate hash reads (`hash(meta)`): examples that mutate `hash(meta)` now seed it
+  with `set(hash(meta), { ... })`.
+  While verifying the lifecycle section, TOOLBOX probes showed current Perl generated handlers can leak a
+  lifecycle block's final host statement value when no explicit `return(...)` is present, and a direct
+  `Top:: I ... /x/ E { ... }` shape can omit the regex/E path in generated source. The page now warns authors
+  to use explicit lifecycle `return(...)`; Knowledge fact `perl-lifecycle-final-value-e-drift` records the drift.
+  The next scorch leaf is `.10.5.10` for `dsl/capture-marks-and-source-locations.md`.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.8 — blind-call orchestration examples):
   `user-model/blind-calls-and-parser-orchestration.md` was mostly clean because its `::` blind-call
   wrappers carry no regex slots. The remaining regex-on-`::` drift was in action-edge examples:

@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.9 — fix action and lifecycle placement examples
+
+**Scope:** mdBook action/lifecycle placement chapter correction plus a Knowledge Map caveat.
+
+**Change:** Reworked `dsl/action-and-lifecycle-placement.md` so regex-bearing examples use normal
+single-colon rules, entry-match transforms are taught through `I { ... }` + `entry_*`, and local-slot
+action edges use `match_*`. Removed invalid bare child-rule lines from the Pair sketch, corrected
+hash-storage initialization, and replaced the misleading direct `E { ... }` lifecycle example with
+an explicit lifecycle `return(...)` warning.
+
+**Validation:** Focused `LinkedSpec::Get` probes verify the corrected entry-match, later-slot action,
+explicit lifecycle return, and Pair slot-flow examples. A page scan finds no regex slot under a `::`
+header; `mdbook build docs/linkedspec-book`, `git diff --check`, and the Knowledge Map check pass.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.8 — fix blind-call orchestration examples
 
 **Scope:** mdBook blind-call chapter correction for the active whole-book scorch.

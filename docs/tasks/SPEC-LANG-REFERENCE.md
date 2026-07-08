@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-07-08` (`.10.5.8` done: `user-model/blind-calls-and-parser-orchestration.md`
-  now keeps blind-call `::` wrappers no-regex and action-edge regex examples single-colon, and
-  frontier advances to `.10.5.9`. Earlier **MAJOR
+- Last updated: `2026-07-08` (`.10.5.9` done: `dsl/action-and-lifecycle-placement.md`
+  now uses normal `:` regex-bearing examples, separates entry-match `I`/`entry_*` from local-slot
+  action `match_*`, and frontier advances to `.10.5.10`. Earlier **MAJOR
   CORRECTION** — user established that a `.spec` top (`::`) rule has NO regex; a valid spec needs >=2
   rules (top entry + >=1 normal `:` rule carrying the regex). Remediation remains documentation-only
   and owned by `.10.3`/`.10.5`; Perl reference untouched.)
@@ -67,7 +67,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   `.8`, `.9` (done — §5.5 drift fix, but used INVALID structure — superseded by `.10.4`), `.10`
   (**CORRECTED**: remediate structurally-invalid examples in `.5.2`/`.9`; NO engine bug; `.10.1`
   verdict superseded, `.10.2` superseded; remediation `.10.3`/`.10.5`; `.10.5.4.1` reactivated the
-  paused scorch and `.10.5.8` is done; `.10.5.9` is the next book-fix leaf)
+  paused scorch and `.10.5.9` is done; `.10.5.10` is the next book-fix leaf)
 
 - ID: `SPEC-LANG-REFERENCE.1`
   Status: `done`
@@ -574,13 +574,24 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.5.8` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.9`
-  Status: `pending`
+  Status: `done`
   Goal: Fix `dsl/action-and-lifecycle-placement.md` worked examples (`Token::AND`, `List::AND`,
   `Name::AND`, `Delimited::AND`, `Block::AND`, `Tuple::AND`, `Pair::AND`, `MaybeName::OR`, `Items:*`,
   …) → 2-rule idiom (regex on `:` rules), preserving the grouped-target + lifecycle-placement teaching
   Acceptance: no regex on `::`; representative examples re-verified; `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. Converted regex-owning examples to normal `:` labels and tightened
+  the chapter's entry-vs-local-slot model: dispatched entry-match transforms use `I { ... }` with
+  `entry_text()` / `entry_group(...)`, while indexed local-slot actions use `match_text()` /
+  `match_group(...)`. Replaced invalid bare child-rule lines in the Pair sketch with verified local-slot
+  regex/action flow, corrected aggregate hash initialization (`set(hash(meta), { ... })` where examples later
+  read `hash(meta)`), and changed the lifecycle statement-block example to explicit `return(...)`. Focused
+  probes: `Name` later slots → `[{"entry":"name","kind":"name","separator":"=","value":"Alpha"}]`;
+  `Token` entry `I` → `[{"kind":"token","text":"alpha"}]`; explicit lifecycle return →
+  `[{"ignored":"not_a_return","out":"from_i"}]`; Pair slot flow → `{"kind":"pair","lhs":"answer","rhs":"42"}`.
+  The page scan reports no `::` header followed by a regex slot; `mdbook build docs/linkedspec-book` and
+  Knowledge Map check pass. A Perl handler-shape drift found during verification is tracked in Knowledge fact
+  `perl-lifecycle-final-value-e-drift` and follow-up leaf `.10.5.20`.
+  Commit: `SPEC-LANG-REFERENCE.10.5.9` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.10`
   Status: `pending`
@@ -663,8 +674,22 @@ The surface to cover (authoritative sources in parentheses) includes at least:
 - ID: `SPEC-LANG-REFERENCE.10.5.19`
   Status: `pending`
   Goal: Finalize the scorch — whole-book re-grep confirming **zero** regex-on-`::` example rules
-  remain, every claimed I/O re-verified, `mdbook build` exit 0; close `.10.5` and the `.10` container
-  Acceptance: clean whole-book sweep; `.10.5` + `.10` closed when all children `done`/`superseded`.
+  remain, every claimed I/O re-verified, `mdbook build` exit 0; close the planned `.10.5.2`–`.10.5.18`
+  book-page sweep
+  Acceptance: clean whole-book sweep; planned page-fix children `done`/`superseded`; any follow-up drift
+  leaf remains separately tracked if it is not part of the page-scorch closeout.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SPEC-LANG-REFERENCE.10.5.20`
+  Status: `pending`
+  Goal: Resolve the lifecycle handler-shape drift found during `.10.5.9`: current Perl generated handlers
+  can expose an `I` block's final host statement value when explicit `return(...)` is omitted, and a direct
+  default-rule `I` + regex + `E` shape can omit the regex/E path in generated source, while existing Rust
+  tests model the intended statement-block contract.
+  Acceptance: decide whether this remains a documented Perl-reference caveat or becomes a backend/runtime
+  fix task; update mdBook/KM/tests/task-tree records accordingly; keep the Perl reference untouched unless
+  a separately-owned implementation leaf explicitly authorizes code changes.
   Verification: `pending`
   Commit: `pending`
 
@@ -778,7 +803,7 @@ target) · CLEAN.
 | `user-model/rule-modes-and-parse-modes.md` | ~20 mode fragments `Pair::&`/`::AND`/`::OR`/`Top:: /foo/`…; line 24 "both valid shapes" framing | A | regex on `::` throughout; `Top:: /foo/ -> Top` → **`null`**; fixed in `.10.5.6` | `.10.5.6` |
 | `user-model/regex-in-spec.md` | `Top::` (l.38), `Pair::AND` (l.101), `Subdef::AND`, `Unit::AND` fragments | A | regex on `::` (capture-indexing teaching is correct); fixed in `.10.5.7` | `.10.5.7` |
 | `user-model/blind-calls-and-parser-orchestration.md` | `Document::AND`/`Atom::|`… (blind-call, no regex); `BadRule::` negative | mostly CLEAN | blind-call `::` rules carry no regex; fixed stray action-edge regex-on-`::` examples in `.10.5.8` | `.10.5.8` |
-| `dsl/action-and-lifecycle-placement.md` | `Token::AND`,`List::AND`,`Name::AND`,`Delimited::AND`,`Block::AND`,`Tuple::AND`,`Pair::AND`,`MaybeName::OR`,`Items:*` | A | regex on `::` (helper-illustration); `ebnf.spec` quote at l.184 is CLEAN | `.10.5.9` |
+| `dsl/action-and-lifecycle-placement.md` | `Token::AND`,`List::AND`,`Name::AND`,`Delimited::AND`,`Block::AND`,`Tuple::AND`,`Pair::AND`,`MaybeName::OR`,`Items:*` | A + drift caveat | regex on `::` fixed in `.10.5.9`; entry-vs-local-slot examples tightened; lifecycle final-value / direct-`E` Perl caveat recorded in KM | `.10.5.9` |
 | `dsl/capture-marks-and-source-locations.md` | `Top::AND`; `Call::AND`/`Inner::AND` divergence | A | regex on `::` (entry-vs-match teaching correct) | `.10.5.10` |
 | `dsl/declaration-helper-reference.md` | `Token::AND`,`List::AND` worked examples | A | regex on `::` | `.10.5.11` |
 | `dsl/source-boundary-helper-reference.md` | `Tuple::AND`,`Block::AND`,`Paren::AND`,`Pair::AND`,`Body::AND`,`AtEnd::AND`,`Top::AND`/`Child::AND` | A | regex on `::` | `.10.5.12` |
@@ -826,17 +851,18 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.5.6` | `done` | `user-model/rule-modes-and-parse-modes.md` regex-owning mode examples now use single-colon labels; `Top:: /foo/` parse-mode snippets replaced with verified 2-rule wrapper |
 | — | `SPEC-LANG-REFERENCE.10.5.7` | `done` | `user-model/regex-in-spec.md` examples now use no-regex `Top::` wrappers plus single-colon regex-bearing rules; capture compaction examples reverified |
 | — | `SPEC-LANG-REFERENCE.10.5.8` | `done` | `user-model/blind-calls-and-parser-orchestration.md` blind-call `::` wrappers stayed no-regex; stray regex-owning action-edge examples now use single-colon labels |
-| 4 | `SPEC-LANG-REFERENCE.10.5.9` | `pending` | next: fix `dsl/action-and-lifecycle-placement.md` worked examples → 2-rule idiom |
-| 5 | `SPEC-LANG-REFERENCE.10.5.10` | `pending` | fix `dsl/capture-marks-and-source-locations.md` (`Top::AND`, `Call::AND`/`Inner::AND`) |
-| 6 | `SPEC-LANG-REFERENCE.10.5.11` | `pending` | fix `dsl/declaration-helper-reference.md` (`Token::AND`, `List::AND`) |
-| 7 | `SPEC-LANG-REFERENCE.10.5.12` | `pending` | fix `dsl/source-boundary-helper-reference.md` (`Tuple::AND`/`Block::AND`/…) |
-| 8 | `SPEC-LANG-REFERENCE.10.5.13` | `pending` | fix `dsl/value-container-flow-helper-reference.md` (`Token::AND`/`Node::AND`/…) |
-| 9 | `SPEC-LANG-REFERENCE.10.5.14` | `pending` | fix remaining DSL pages (`values-containers` `Token::`, `action-model` `Top::`, `fluent-and-block-forms`, `actionir-lowering`) |
-| 10 | `SPEC-LANG-REFERENCE.10.5.15` | `pending` | fix `appendix/formal-grammar.md` §1 + §12 examples |
-| 11 | `SPEC-LANG-REFERENCE.10.5.16` | `pending` | fix `appendix/runtime-semantics.md` §5.5/§5.6 (folds `.10.4`) |
-| 12 | `SPEC-LANG-REFERENCE.10.5.17` | `pending` | fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts (`sens`/GROUP) |
-| 13 | `SPEC-LANG-REFERENCE.10.5.18` | `pending` | fix `specs-and-corpora/portmap-spec-walkthrough.md` 5 output-shape examples |
-| 14 | `SPEC-LANG-REFERENCE.10.5.19` | `pending` | finalize scorch — whole-book re-grep + `mdbook build`; close `.10.5`/`.10` |
+| — | `SPEC-LANG-REFERENCE.10.5.9` | `done` | `dsl/action-and-lifecycle-placement.md` fixed 2026-07-08; lifecycle drift caveat tracked |
+| 4 | `SPEC-LANG-REFERENCE.10.5.10` | `pending` | fix `dsl/capture-marks-and-source-locations.md` (`Top::AND`, `Call::AND`/`Inner::AND`) |
+| 5 | `SPEC-LANG-REFERENCE.10.5.11` | `pending` | fix `dsl/declaration-helper-reference.md` (`Token::AND`, `List::AND`) |
+| 6 | `SPEC-LANG-REFERENCE.10.5.12` | `pending` | fix `dsl/source-boundary-helper-reference.md` (`Tuple::AND`/`Block::AND`/…) |
+| 7 | `SPEC-LANG-REFERENCE.10.5.13` | `pending` | fix `dsl/value-container-flow-helper-reference.md` (`Token::AND`/`Node::AND`/…) |
+| 8 | `SPEC-LANG-REFERENCE.10.5.14` | `pending` | fix remaining DSL pages (`values-containers` `Token::`, `action-model` `Top::`, `fluent-and-block-forms`, `actionir-lowering`) |
+| 9 | `SPEC-LANG-REFERENCE.10.5.15` | `pending` | fix `appendix/formal-grammar.md` §1 + §12 examples |
+| 10 | `SPEC-LANG-REFERENCE.10.5.16` | `pending` | fix `appendix/runtime-semantics.md` §5.5/§5.6 (folds `.10.4`) |
+| 11 | `SPEC-LANG-REFERENCE.10.5.17` | `pending` | fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts (`sens`/GROUP) |
+| 12 | `SPEC-LANG-REFERENCE.10.5.18` | `pending` | fix `specs-and-corpora/portmap-spec-walkthrough.md` 5 output-shape examples |
+| 13 | `SPEC-LANG-REFERENCE.10.5.19` | `pending` | finalize planned page scorch — whole-book re-grep + `mdbook build` |
+| 14 | `SPEC-LANG-REFERENCE.10.5.20` | `pending` | resolve lifecycle final-value / direct-`E` Perl handler drift found during `.10.5.9` |
 | — | `SPEC-LANG-REFERENCE.10.4` | `superseded` | folded into `.10.5.16` |
 | 18 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the scorch |
 | 19 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
@@ -846,6 +872,15 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | 23 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
 
 ## Decisions
+
+- **`2026-07-08` — ACTION/LIFECYCLE PAGE FIX (`.10.5.9`) + DRIFT FOLLOW-UP.**
+  The action/lifecycle placement chapter now treats regex-bearing snippets as normal `:` rule fragments,
+  not top `::` rules. The page also distinguishes entry-match lifecycle code (`I { ... }` + `entry_*`)
+  from later local-slot action edges (`-> Rule[index] { ... }` + `match_*`). During verification, TOOLBOX
+  probes found a current Perl generated-handler caveat: omitted lifecycle `return(...)` can leak a final
+  host statement value in some shapes, and direct default-rule `E { ... }` finalization can be omitted from
+  generated source. The page documents explicit lifecycle `return(...)` as the safe public example style;
+  Knowledge fact `perl-lifecycle-final-value-e-drift` and follow-up leaf `.10.5.20` own the broader drift.
 
 - **`2026-07-08` — SPEC FILE PARAGRAPH PAGE FIX (`.10.5.5`).** The
   `user-model/spec-files-and-rule-paragraphs.md` page now follows the scorch doctrine for runnable
@@ -938,6 +973,9 @@ wrapped only where a complete worked example is intended) during the per-file fi
 - (audit) Granularity of the gap-filling leaves — decided when `.1` completes (likely grouped
   by construct family: file/paragraph model, rule modes, parse modes, edges, lifecycle markers,
   capture/mark, helper families, control flow, runtime semantics, + a KM-cards leaf + finalize).
+- (`.10.5.20`, NON-BLOCKING FOLLOW-UP) Decide whether the Perl lifecycle final-value/direct-`E`
+  handler-shape drift remains a documented reference caveat or becomes an implementation/parity task.
+  This does not block the page scorch because `.10.5.9` now avoids relying on the drift-prone forms.
 - ~~(`.10`, DECISION NEEDED — engine-fix vs doc-rewrite for the single-slot AND output drift)~~
   **RESOLVED / WITHDRAWN 2026-06-17.** The premise (an `AND_SINGLE_ACODE` engine bug) was wrong: the
   affected examples are **structurally invalid** (regex on the top rule / single-rule). There is no
@@ -948,7 +986,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 ## Blockers
 
 - None. (`.10.2`'s "blocked-on-decision" is gone — superseded; the decision was withdrawn after the
-  user's structural correction. The scorch is active again as of 2026-07-08; resume at `.10.5.9`.)
+  user's structural correction. The scorch is active again as of 2026-07-08; resume at `.10.5.10`.)
 
 ## Verification Log
 
@@ -974,6 +1012,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.6` | representative runtime probes through `LinkedSpec::Get` (token-stream wrapper; `seek`/`consume` word wrapper); source-page scan for remaining `::` labels; `mdbook build docs/linkedspec-book` | token stream `foo "bar"` → `["foo","bar"]`; `seek` `junk foo` → `["foo"]`; `consume` `junk foo` → `[]`; `consume` `foo` → `["foo"]`; remaining `::` labels are no-regex entry/dispatcher examples; mdBook build exit 0 |
 | `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.7` | representative runtime probes through `LinkedSpec::Get` (keyword wrapper; numbered groups; named groups; numbered-compaction and named-compaction cases); source-page scan for remaining `::` labels; `mdbook build docs/linkedspec-book` | outputs match documented payloads: `["foo"]`, `[{"key":"foo","val":"bar"}]`, `[{"name":"alpha"}]`, numbered compaction `abc`→`[{"amount":"abc","name":null}]`, `12abc`→`[{"amount":"12","name":"abc"}]`, named groups stable; remaining `::` labels are no-regex wrappers; mdBook build exit 0 |
 | `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.8` | source-page scan for `::` headers followed by regex slots; wrapped mixed-edge negative probe through `LinkedSpec::Get`; `mdbook build docs/linkedspec-book` | scan reports no regex slot under a `::` header; mixed-edge probe logs `Cannot mix ACTION (->) and BLIND CALL (=>) code blocks`; mdBook build exit 0 |
+| `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.9` | focused `LinkedSpec::Get` probes for entry-match `I`, later-slot actions, explicit lifecycle return, and Pair slot flow; source-page scan for `::` headers followed by regex slots; `mdbook build docs/linkedspec-book`; Knowledge Map check | probes return documented payloads (`Name`, `Token`, lifecycle hash, Pair hash); scan reports no regex slot under a `::` header; mdBook build and Knowledge Map check exit 0; Perl lifecycle drift fact recorded |
 
 ## Commit Log
 
@@ -999,6 +1038,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.5.6` | `SPEC-LANG-REFERENCE.10.5.6 — fix rule mode and parse mode examples` | `rule-modes-and-parse-modes.md` regex-owning mode examples now use single-colon labels, the `::` framing teaches no-regex entry/dispatcher usage, and `Top:: /foo/` parse-mode snippets are replaced with the verified 2-rule wrapper. Runtime probes and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.7` | `SPEC-LANG-REFERENCE.10.5.7 — fix regex chapter examples` | `regex-in-spec.md` examples now use no-regex `Top::` wrappers plus single-colon regex-bearing rules. Numbered/named capture and compaction teaching is preserved with `entry_group` / `entry_named`; runtime probes and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.8` | `SPEC-LANG-REFERENCE.10.5.8 — fix blind-call orchestration examples` | `blind-calls-and-parser-orchestration.md` keeps no-regex blind-call `::` wrappers, converts regex-owning action-edge examples to single-colon labels, and clarifies the mixed-edge negative example. Scan/probe and mdBook build pass |
+| `SPEC-LANG-REFERENCE.10.5.9` | `SPEC-LANG-REFERENCE.10.5.9 — fix action and lifecycle placement examples` | `action-and-lifecycle-placement.md` now separates entry-match `I`/`entry_*` from local-slot action `match_*`, removes regex-on-`::` examples, corrects hash initialization, and records the Perl lifecycle handler drift caveat |
 
 ## Changelog
 
@@ -1259,3 +1299,12 @@ wrapped only where a complete worked example is intended) during the per-file fi
   `->` with `=>`. A focused scan reports no `::` header followed by a regex slot; the wrapped negative
   probe logs the expected mixed-edge validation error. `mdbook build` exit 0. Frontier → `.10.5.9`
   (`dsl/action-and-lifecycle-placement.md` worked examples).
+- `2026-07-08`: `.10.5.9` done — fixed
+  `docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md`. Regex-bearing examples now use
+  normal `:` rule labels, entry-match transforms are taught with `I { ... }` plus `entry_*`, and local-slot
+  action edges use `match_*`. Corrected stale examples that used bare child-rule lines, scalar shape
+  assignment before `hash(meta)` reads, and direct lifecycle `E` finalization as if it were universally
+  stable. Focused probes verified the corrected `Name`, `Token`, lifecycle, and Pair examples; page scan
+  reports no `::` header followed by a regex slot; `mdbook build` exit 0. Found and tracked a current Perl
+  lifecycle handler-shape caveat in Knowledge fact `perl-lifecycle-final-value-e-drift` and follow-up leaf
+  `.10.5.20`. Frontier → `.10.5.10` (`dsl/capture-marks-and-source-locations.md` worked examples).

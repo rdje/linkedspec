@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.9 — fix action and lifecycle placement examples**
+  (DONE mdBook + Knowledge fact correction; frontier `.10.5.10` next).
+
+  **Change:** Reworked `dsl/action-and-lifecycle-placement.md` so regex-bearing examples use normal
+  `:` rules, entry-match transforms use `I { ... }` plus `entry_*`, local-slot action edges use `match_*`,
+  and lifecycle examples use explicit `return(...)` instead of implying direct `E` finalization.
+
+  **Boundary:** No parser/runtime/source behavior changed. The slice documents an observed current Perl
+  lifecycle handler-shape caveat in Knowledge fact `perl-lifecycle-final-value-e-drift`.
+
+  **Verification:** Focused `LinkedSpec::Get` probes cover entry-match, later-slot action, explicit lifecycle
+  return, and Pair slot-flow examples; page scan finds no regex under `::`; mdBook, Knowledge Map, and whitespace
+  checks pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.8 — fix blind-call orchestration examples**
   (DONE mdBook correction; frontier `.10.5.9` next).
 

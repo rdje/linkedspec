@@ -18,21 +18,22 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.8` — fixed
-  `user-model/blind-calls-and-parser-orchestration.md`: no-regex blind-call `::` wrappers stay, regex-owning
-  action-edge examples use `:` labels, and the mixed-edge negative example is clarified.
-- prior_leaf: `SPEC-LANG-REFERENCE.10.5.7` — fixed `user-model/regex-in-spec.md` examples with
-  no-regex `Top::` wrappers plus single-colon regex-bearing rules.
+- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.9` — fixed
+  `dsl/action-and-lifecycle-placement.md`: regex-bearing examples use normal `:` rules, entry-match examples
+  use `I` + `entry_*`, local-slot action examples use `match_*`, lifecycle examples use explicit
+  `return(...)`, and Knowledge fact `perl-lifecycle-final-value-e-drift` records the Perl handler-shape caveat.
+- prior_leaf: `SPEC-LANG-REFERENCE.10.5.8` — fixed `user-model/blind-calls-and-parser-orchestration.md`
+  while keeping no-regex blind-call `::` wrappers intact.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-LANG-REFERENCE.10.5.8 - fix blind-call orchestration examples`; parent before this slice is
-  `SPEC-LANG-REFERENCE.10.5.7 - fix regex chapter examples`.
+  `SPEC-LANG-REFERENCE.10.5.9 - fix action and lifecycle placement examples`; parent before this slice is
+  `SPEC-LANG-REFERENCE.10.5.8 - fix blind-call orchestration examples`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `SPEC-LANG-REFERENCE.10.5.9` is the next active leaf in the reactivated
+- active_work_unit: `SPEC-LANG-REFERENCE.10.5.10` is the next active leaf in the reactivated
   language-reference scorch.
-- next_action: from a clean repo, execute `.10.5.9`: fix
-  `docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md` worked examples to the 2-rule/no-regex
-  `Top::` idiom where complete snippets own regex slots.
+- next_action: from a clean repo, execute `.10.5.10`: fix
+  `docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md` worked examples to the 2-rule/no-regex
+  `Top::` idiom while preserving entry-vs-match source-boundary teaching.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
   enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.
