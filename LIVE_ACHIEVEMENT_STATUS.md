@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **TASK-TREE-METADATA-HYGIENE.1 — reconcile top task metadata**
+  (DONE metadata-only cleanup; frontier `.2` stale frontier/verification rows next).
+
+  **Change:** Completed/exhausted task trees no longer advertise stale top-level `active` metadata in
+  `FLUENT-BLOCK-EQUIVALENCE.md`, `MEDIUM-IMPACT.md`, or `PHASE0-BACKHALF-TRIAGE.md`. The owning hygiene tree and
+  central index now point to `.2`.
+
+  **Boundary:** No parser/runtime behavior changed and no public mdBook behavior changed.
+
+  **Verification:** Focused stale-active scans, memory/doctrine checks, and diff checks pass.
+
 - 2026-07-07: **SPEC-FORMAT-TERSE.14.5 — close trailing block drift**
   (DONE no-drift closeout; `SPEC-FORMAT-TERSE.14` closed).
 

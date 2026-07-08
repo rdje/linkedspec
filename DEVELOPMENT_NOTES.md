@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (TASK-TREE-METADATA-HYGIENE.1 — top metadata reconciliation):
+  Reconciled stale active top metadata in `docs/tasks/FLUENT-BLOCK-EQUIVALENCE.md`,
+  `docs/tasks/MEDIUM-IMPACT.md`, and `docs/tasks/PHASE0-BACKHALF-TRIAGE.md`. This was metadata-only: no
+  parser/runtime or public-book behavior changed. The key rule applied here is that a task file whose own body says
+  the tree is done/exhausted must not keep advertising `Status: active` unless it also names a live frontier or an
+  explicit deferral. The hygiene frontier moves to `.2` for noisier stale frontier/verification rows.
+
 - 2026-07-07 (SPEC-FORMAT-TERSE.14.5 — trailing block no-drift closeout boundary):
   The shipped trailing block-argument surface is closed for `.14`: helper-function form `with(value) { ... }` / `with() { ... }`
   and receiver-method form `.with() { ... }` are documented as immediate non-closure callbacks on Perl/Rust, with a

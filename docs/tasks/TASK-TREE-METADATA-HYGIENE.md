@@ -6,7 +6,7 @@
 - Status: `active` (created 2026-07-07 from the user-requested open-task-tree audit)
 - Roadmap lane: `Overall roadmap - durable architecture / task-tree hygiene`
 - Created: `2026-07-07`
-- Last updated: `2026-07-07` (`.0` done; frontier `.1`)
+- Last updated: `2026-07-07` (`.1` done; frontier `.2`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -50,13 +50,17 @@ agents can determine the true open/closed task state without re-auditing old tas
   Commit: `TASK-TREE-METADATA-HYGIENE.0 - own task-tree metadata audit` (see Commit Log)
 
 - ID: `TASK-TREE-METADATA-HYGIENE.1`
-  Status: `pending`
+  Status: `done`
   Goal: Reconcile top-level task metadata that still says active while the body says done or exhausted.
   Acceptance: `docs/tasks/FLUENT-BLOCK-EQUIVALENCE.md`, `docs/tasks/MEDIUM-IMPACT.md`, and
     `docs/tasks/PHASE0-BACKHALF-TRIAGE.md` no longer contradict their own internal status/body text. Any surviving
     `active` wording is justified by an explicit live frontier or an explicit deferral.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done - 2026-07-07. Reconciled stale top metadata in all three named task files:
+    `FLUENT-BLOCK-EQUIVALENCE` now reports tree exhausted/done, `MEDIUM-IMPACT` now reports done with empty
+    frontier and stale `.3.4` active status closed, and `PHASE0-BACKHALF-TRIAGE` now reports done with stale
+    active current-frontier rows for `.2.2`, `.2.2.2`, `.5.3`, and `.5.3.2` closed. No parser/runtime/public-book
+    behavior changed.
+  Commit: `TASK-TREE-METADATA-HYGIENE.1 - reconcile top task metadata`
 
 - ID: `TASK-TREE-METADATA-HYGIENE.2`
   Status: `pending`
@@ -81,7 +85,7 @@ agents can determine the true open/closed task state without re-auditing old tas
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TASK-TREE-METADATA-HYGIENE.1` | `pending` | Top-level metadata contradictions are the highest-risk drift because they can make a completed tree look live. |
+| 1 | `TASK-TREE-METADATA-HYGIENE.1` | `done` | Top-level metadata contradictions are reconciled so completed trees no longer look live. |
 | 2 | `TASK-TREE-METADATA-HYGIENE.2` | `pending` | Stale frontier rows are next; they are noisier but mostly within already completed task files. |
 | - | `TASK-TREE-METADATA-HYGIENE.3` | `pending` (deferred) | Gate design should wait until `.1`/`.2` show the real invariant and false-positive risk. |
 
@@ -89,7 +93,7 @@ agents can determine the true open/closed task state without re-auditing old tas
 
 - `2026-07-07`: The authoritative live non-closed inventory comes from `docs/TASK_TREE.md` plus `MEMORY.md`, not
   isolated stale rows inside old task files. Current live non-closed rows are:
-  `SPEC-FORMAT-TERSE` (active but no PNT-eligible leaf; deferred `.10`, `.12`, `.13`, `.14`),
+  `SPEC-FORMAT-TERSE` (active but no PNT-eligible leaf; deferred `.10`, `.12`, `.13`; `.14` closed),
   `STAGED-LINKED-PARSING` (active metadata; prototype complete; frontier empty),
   `DOCTRINE-ENFORCEMENT-ADOPT` (`.3` pending deferred),
   `SPEC-LANG-REFERENCE` (paused scorch leaves `.10.5.5` through `.10.5.19`), and
@@ -97,6 +101,9 @@ agents can determine the true open/closed task state without re-auditing old tas
 - `2026-07-07`: The audit found stale per-file metadata that should be reconciled under this tree, not edited
   opportunistically during bootstrap. Three files have top metadata that still says active while internal text says
   done/exhausted: `FLUENT-BLOCK-EQUIVALENCE.md`, `MEDIUM-IMPACT.md`, and `PHASE0-BACKHALF-TRIAGE.md`.
+- `2026-07-07`: `.1` reconciled those three top-metadata contradictions. `FLUENT-BLOCK-EQUIVALENCE` and
+  `MEDIUM-IMPACT` now report done/exhausted at the top level, and `PHASE0-BACKHALF-TRIAGE` no longer has stale
+  active current-frontier rows inside a tree whose body says it is complete.
 - `2026-07-07`: Several completed or completed-like trees have stale frontier/verification/commit rows that can
   mislead automated or human readers: `COMPAT-ALIAS-TEST-CLEANUP.md`, `LIFECYCLE-FAMILY-AUDIT.md`,
   `LINKEDSPEC-LOW-EFFORT.md`, `RGX-BRANCH-TRACKING.md`, `PHASE8-MULTI-BACKEND-HANDOFF.md`, and
@@ -116,12 +123,14 @@ agents can determine the true open/closed task state without re-auditing old tas
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-07` | `TASK-TREE-METADATA-HYGIENE.1` | Focused metadata/status scans over the three named task files; memory/doctrine/diff gates | PASS — stale active top metadata reconciled without parser/runtime/public-book behavior change. |
 | `2026-07-07` | `TASK-TREE-METADATA-HYGIENE.0` | Read-only audit of central index, active task files, and stale metadata candidates; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `git diff --check` | PASS |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `TASK-TREE-METADATA-HYGIENE.1` | `TASK-TREE-METADATA-HYGIENE.1 - reconcile top task metadata` | Reconciles stale active top metadata in the three named completed/exhausted task files; frontier becomes `.2`. |
 | `TASK-TREE-METADATA-HYGIENE.0` | `TASK-TREE-METADATA-HYGIENE.0 - own task-tree metadata audit` | Tracking-only owner for the user-requested open-task-tree audit finding. |
 
 ## Changelog
@@ -129,3 +138,5 @@ agents can determine the true open/closed task state without re-auditing old tas
 - `2026-07-07`: Created task tree to own stale task-tree metadata found during the user-requested audit of
   non-closed task trees. `.0` records the finding only; `.1` and `.2` own cleanup leaves; `.3` owns the future
   gate decision.
+- `2026-07-07`: Completed `.1` by reconciling stale top metadata in `FLUENT-BLOCK-EQUIVALENCE.md`,
+  `MEDIUM-IMPACT.md`, and `PHASE0-BACKHALF-TRIAGE.md`. Frontier moves to `.2`.

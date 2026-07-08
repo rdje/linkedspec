@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `FLUENT-BLOCK-EQUIVALENCE`
-- Status: `active`
+- Status: `done` (reconciled 2026-07-07 by `TASK-TREE-METADATA-HYGIENE.1`; tree exhausted)
 - Roadmap lane: `Overall roadmap — method-like DSL migration track (near-term priority 2)`
 - Created: `2026-06-14`
-- Last updated: `2026-06-14`
+- Last updated: `2026-07-07` (`TASK-TREE-METADATA-HYGIENE.1` reconciled stale top metadata; both leaves are done and the tree is exhausted)
 - Owner: repo-local workflow
 
 ## Goal

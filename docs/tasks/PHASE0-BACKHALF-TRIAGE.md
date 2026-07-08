@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `PHASE0-BACKHALF-TRIAGE`
-- Status: `active` (created 2026-06-19)
+- Status: `done` (created 2026-06-19; reconciled 2026-07-07 by `TASK-TREE-METADATA-HYGIENE.1`)
 - Roadmap lane: `Overall roadmap — regression-gate health (back-half core failures)`
 - Created: `2026-06-19`
 - Last updated: `2026-06-23` (**TREE COMPLETE** — `.6` `superseded` by `TOP-RULE-AS-NORMAL`: the user escalated
@@ -123,7 +123,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
   Verification: full phase0 TAP run + 5 direct reproductions (cluster D bisection, capture/mark lowering,
     entry_and child-rule `[]`, return(1) AST shape) + 2 parallel read-only deep-dives (B; C+F+G).
   Commit: (this commit)
-- ID: `PHASE0-BACKHALF-TRIAGE.2` · Status: `active` · Children: `.2.1`–`.2.4`
+- ID: `PHASE0-BACKHALF-TRIAGE.2` · Status: `done` · Children: `.2.1`–`.2.4`
   Goal: Re-bless / retire the 108 STALE subtests against the current documented engine behavior.
   - ID: `.2.1` · Status: `done` (2026-06-21) — Cluster A: re-blessed parser-collection-shape to the
     current `[1,1]`-style child-return output (dropped the retired auto-tag `['?Rule:',[]]` expectation).
@@ -134,7 +134,7 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
     `return_a` helper failure, so it re-buckets to cluster B (`.2.2`), not the auto-tag family.
     TEST-ONLY (13 `is_deeply` expecteds in `t/phase0_regression.t`; engine untouched). Got-values
     captured empirically (`Choice::OR+`/`::AND`/`::|`/`AND+`/`AND{N,M}` repros) before re-blessing.
-  - ID: `.2.2` · Status: `active` · Children: `.2.2.1`, `.2.2.2` — Cluster B (76): re-bless the
+  - ID: `.2.2` · Status: `done` · Children: `.2.2.1`, `.2.2.2` — Cluster B (76): re-bless the
     `method_like` family + the re-bucketed `blind_call_fluent_post_call_chain_matches_block_form`.
     **Split 2026-06-21** after read-only recon + empirical probing (too broad + partly judgment-heavy for
     one signoff slice). Recon classified the 76: **B1 = 18** (retired helper in the spec body),
@@ -521,9 +521,9 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | — | `.3` | `done` 2026-06-21 | AND-codegen fix landed — 62 phase0 failures cleared, zero regressions. |
 | — | `.4` | `done` 2026-06-21 | input-boundary guard landed — 2 cleared, zero regressions. Both engine defects now fixed. |
 | — | `.2.1` | `done` 2026-06-21 | Cluster A re-bless (7, not 8) — 109 → 102 failing, `comm` set-diff = exactly the 7, zero regressions. TEST-ONLY. |
-| — | `.2.2` | `active` (split 2026-06-21) | Cluster B (76) decomposed → `.2.2.1` (done) + `.2.2.2` (split). |
+| — | `.2.2` | `done` 2026-06-21 | Cluster B (76) decomposed → `.2.2.1` (done) + `.2.2.2` (split). |
 | — | `.2.2.1` | `done` 2026-06-21 | Cluster B2 re-bless — 55 pure-B2 `method_like*` cleared (102 → 47 failing), `comm` set-diff = exactly 55, zero real regressions (lone `parser_invalid_input` flake disproven by a clean re-run). TEST-ONLY. |
-| — | `.2.2.2` | `active` (split 2026-06-21) | Cluster B1 (21) decomposed → `.2.2.2.1` (17 `return_array`) + `.2.2.2.2` (4 `return_a`/`return_m` incl. 3 BOTH), after recon + verified helper-mapping archaeology (KM [[retired-return-helpers-canonical-rewrite]]). |
+| — | `.2.2.2` | `done` 2026-06-21 | Cluster B1 (21) decomposed → `.2.2.2.1` (17 `return_array`) + `.2.2.2.2` (4 `return_a`/`return_m` incl. 3 BOTH), after recon + verified helper-mapping archaeology (KM [[retired-return-helpers-canonical-rewrite]]). |
 | — | `.2.2.2.1` | `done` 2026-06-21 | Cluster B1-array re-bless — 33 `return_array`→`return(array("semantic_annotation",…))` rewrites + 2 BOTH literal hit-hash re-blesses (`RETURN_A`→`RETURN`), TEST-ONLY; phase0 47→30, `comm` set-diff = exactly the 17 cleared, 0 regressions. |
 | — | `.2.2.2.2` | `done` 2026-06-21 | Cluster B1-accumulator re-bless — 4 `return_a`/`return_m` subtests rewritten to canonical `.return(1).return(array("?Top:", entry_groups()))` + subtest-1 `RETURN_A`/`RETURN_M`→`RETURN` node re-bless, TEST-ONLY; phase0 30→26, `comm` set-diff = exactly the 4 cleared, 0 regressions. |
 | — | `.2.3` | `done` 2026-06-22 | Cluster C `emit_context` ×20 re-blessed/rewritten (return(1)→`return 1` resolved, RETURN_A→RETURN, retired-helper passthrough, removed `_lower_return_array_statement`, 2 plan off-by-ones, restored expr-bearing return specs), TEST-ONLY; phase0 26→6, exactly the 20 cleared, 0 regressions. |
@@ -531,9 +531,9 @@ fix time.) See [[runtime-input-boundary-validation-regression]].
 | — | `.5.1` | `done` 2026-06-22 | Resolved the stale `corpus_regression` plugin dataset (subtest-941 "No tests run"/exit-255 = a `NONCORE-QUARANTINE` leftover, NOT a natural stop). Removed the non-core `.plg` dataset (TEST-ONLY); exposed `.5.2`. |
 | — | `.5.2` | `done` 2026-06-22 | Lispish `corpus_regression` hang FIXED (root cause corrected: **not a regex** — the parser never returns `undef`, so the `while(1)` multi-parse loop spins; added a forward-progress guard, TEST-ONLY). 76/76 corpus files ok; `ok 941 - corpus_regression`; suite now reaches subtest 960. [[lispish-corpus-catastrophic-backtracking]] |
 | — | `.5.4` | `done` 2026-06-22 | Re-blessed the **3 dark-tail failures** (TEST-ONLY): 952/953 `parse_mode` `qr/\?Top:/`→`qr/\$VAR1 = 1;/` (`return(1)`→scalar `1`, dumped via `LinkedSpec::Get`); 960 dropped the `noncore/`-moved `.plg`-corpus inspection, kept the core `PluginBridge.pm` check (plan 5→1). **phase0 fully GREEN 960/960**; `comm` = exactly the 3 cleared, 0 new. |
-| — | `.5.3` | `active` (split 2026-06-22) | Downstream gate-flips, decomposed → `.5.3.1` (done: full local gate green) + `.5.3.2` (status/doc/KM reconciliation). |
+| — | `.5.3` | `done` 2026-06-22 | Downstream gate-flips, decomposed → `.5.3.1` (done: full local gate green) + `.5.3.2` (status/doc/KM reconciliation). |
 | — | `.5.3.1` | `done` 2026-06-22 | Cleared the stale `plugin/` reference in `tools/run_ci_local.sh` (NONCORE-QUARANTINE leftover, same class as `.5.1`/`.5.4`); **`bash tools/run_ci_local.sh` now EXIT 0 green end-to-end** (doctrine 2/2 + audits + `perl -c` + phase0 960/960). Advances `NONCORE-QUARANTINE.V`. |
-| — | `.5.3.2` | `active` (split 2026-06-22) | Decomposed → `.5.3.2.1` (status & continuity reconciliation) + `.5.3.2.2` (narrative-doc + book drift). |
+| — | `.5.3.2` | `done` 2026-06-22 | Decomposed → `.5.3.2.1` (status & continuity reconciliation) + `.5.3.2.2` (narrative-doc + book drift). |
 | — | `.5.3.2.1` | `done` 2026-06-22 | **Status & continuity reconciliation** (DOC-ONLY): flipped `NONCORE-QUARANTINE.V` (blocker cleared→`pending`), `LEGACY-VHDL-RETIRE.4`→`done` + `.5` (cleared→`pending`), `SPEC-FORMAT-TERSE` impl-gate→cleared (`.1.x` PNT-eligible); synced `docs/TASK_TREE.md` index + the `rtlutils-regex-hang` KM card + live docs; no "blocked by phase0" text remains in the ledgers. |
 | — | `.5.3.2.2` | `done` 2026-06-22 | **Narrative-doc + book drift sync** (deferred `LEGACY-VHDL-RETIRE.5` body, DOC-ONLY): `ROADMAP_V2.md` + `ARCHITECTURE_STATE.md` owner-tree/legacy-branch + 2 mdBook files synced to the deleted (RTLUtils/FSMGen/VHDL::ConstantEval) vs relocated-to-`noncore/` reality; `generic_fake_memory_module.plg`/`wrapgen.plg`/`ceil_log2` drift gone; `mdbook build` EXIT 0. Flipped `LEGACY-VHDL-RETIRE.5` → done + `NONCORE-QUARANTINE.V` → done. |
 | — | `.6` | `superseded` 2026-06-23 | Escalated by the user from book-only into an **engine change** + authorization (ADR `0010`): treat the top rule as an ordinary rule (entered first) w.r.t. regex + recursion. Investigation + decision landed in `TOP-RULE-AS-NORMAL.1`; the book reconciliation is owned by `TOP-RULE-AS-NORMAL.4`. **PHASE0-BACKHALF-TRIAGE is COMPLETE** (`.1`–`.5` done, `.6` superseded); frontier empty — see the `TOP-RULE-AS-NORMAL` tree. |

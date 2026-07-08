@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `MEDIUM-IMPACT`
-- Status: `active`
+- Status: `done` (reconciled 2026-07-07 by `TASK-TREE-METADATA-HYGIENE.1`; frontier empty)
 - Roadmap lane: `Overall roadmap — medium-impact follow-on`
 - Created: `2026-06-12`
-- Last updated: `2026-06-12` (.3.4 investigation complete: two compounding issues identified, approach (1) chosen, .3.4.1 done, .3.4.2 ready for clean implementation)
+- Last updated: `2026-07-07` (`TASK-TREE-METADATA-HYGIENE.1` reconciled stale top metadata; `.1`, `.2`, and `.3` are done and the frontier is empty)
 - Owner: repo-local workflow
 
 ## Goal
@@ -47,7 +47,7 @@ skipping gap and wiring spec.spec as the primary parse path.
 ## Task Tree
 
 - ID: `MEDIUM-IMPACT`
-  Status: `active`
+  Status: `done`
   Goal: `SpecEntry backend decoupling, Validation.pm fuzzing, BootstrapSpec→spec.spec handoff`
   Children: `MEDIUM-IMPACT.1`, `MEDIUM-IMPACT.2`, `MEDIUM-IMPACT.3`
 
@@ -151,7 +151,7 @@ skipping gap and wiring spec.spec as the primary parse path.
   Commit: `e2ea174` (substantive); hash-fix chain `5725f87` `316262f`
 
 - ID: `MEDIUM-IMPACT.3.4`
-  Status: `active`
+  Status: `done`
   Goal: `Fix gaps discovered in .3.3 cross-check. Update spec.spec grammar to close any coverage gaps vs BootstrapSpec::Core. Fix infrastructure issue: AND_SINGLE_ACODE routes I-block to preamble where return() exits before edges run.`
   Children: `MEDIUM-IMPACT.3.4.1`, `MEDIUM-IMPACT.3.4.2`, `MEDIUM-IMPACT.3.4.3`, `MEDIUM-IMPACT.3.4.4`
   Decision: `2026-06-12: Approach (1) works for the I-block issue (confirmed via emitter test) but cannot succeed in isolation — body_element:* REP over-consumption means coordinated spec.spec grammar change also required. See investigation notes. Recommended path: split .3.4 into two parallel workstreams — (A) infrastructure: apply approach (1) to AND_SINGLE_ACODE emitter (IAMTCH bridge + return→assignment + push_label), (B) grammar: restructure rule_paragraph and body_element in spec.spec to avoid REP edge over-consumption (e.g., split body_element into single-match + collection rule, or change rule_paragraph to REP mode).`

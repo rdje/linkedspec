@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — TASK-TREE-METADATA-HYGIENE.1 — reconcile top task metadata
+
+**Scope:** Metadata-only reconciliation for completed/exhausted task trees that still advertised `active` at the
+top level.
+
+**Change:** `FLUENT-BLOCK-EQUIVALENCE.md`, `MEDIUM-IMPACT.md`, and `PHASE0-BACKHALF-TRIAGE.md` now align their
+top metadata with their own bodies. `MEDIUM-IMPACT` also closes the stale `.3.4` active status, and
+`PHASE0-BACKHALF-TRIAGE` closes stale active current-frontier rows for completed child slices. The owning hygiene
+tree and central task-tree index now advance the frontier to `.2`.
+
+**Boundary:** No parser/runtime behavior changed and no public mdBook behavior changed.
+
+**Validation:** Focused stale-active scans, memory/doctrine checks, and diff checks pass.
+
 ## 2026-07-07 — SPEC-FORMAT-TERSE.14.5 — close trailing block drift
 
 **Scope:** Final no-drift closeout for the shipped trailing block-argument surface.
