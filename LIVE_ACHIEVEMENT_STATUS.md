@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.7 — fix regex chapter examples**
+  (DONE mdBook correction; frontier `.10.5.8` next).
+
+  **Change:** Reworked `user-model/regex-in-spec.md` so keyword, numbered-capture, named-capture, and
+  compaction examples use no-regex `Top::` wrappers plus single-colon regex-bearing rules.
+
+  **Boundary:** No parser/runtime/source behavior changed. Capture-indexing facts remain the same:
+  numbered groups are 0-based, captures-only, and compacted; named groups remain stable.
+
+  **Verification:** `LinkedSpec::Get` probes confirm keyword, pair, named capture, numbered-compaction,
+  and named-compaction outputs; remaining `::` labels on the page are no-regex wrappers; mdBook build passes.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.6 — fix rule mode and parse mode examples**
   (DONE mdBook correction; frontier `.10.5.7` next).
 

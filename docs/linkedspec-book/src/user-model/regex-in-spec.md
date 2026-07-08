@@ -32,12 +32,18 @@ A regex literal is written between forward slashes:
   opens a rule with `/(?m)^\s*([[:alpha:]_]\w*)\s*:{,2}=/` and `Lispish.spec` uses
   `(?s:.*?)`. The `.spec` layer adds no flag system of its own on top of the pattern.
 
-A minimal rule that anchors on a keyword:
+A minimal no-regex entry rule that dispatches to a keyword matcher:
 
 ```text
 Top::
- /foo/ -> Top { return(entry_text()) }
+ -> Keyword .push
+LX { return(copy(array(Top))) }
+
+Keyword:
+ /foo/ I.return(entry_text())
 ```
+
+On input `foo`, this returns `["foo"]`.
 
 ## Regex slots: more than one pattern per rule
 
@@ -92,23 +98,27 @@ read it carefully.
 
 ### Numbered groups
 
-A `(...)` group in the pattern is a **numbered capture**. Read it with `match_group(N)`
-for the current local match, or `entry_group(N)` for the match that entered the rule —
-the [entry-versus-match](#entry-versus-match) distinction is below; for a single-regex
-rule they coincide:
+A `(...)` group in the pattern is a **numbered capture**. In the common two-rule shape,
+a no-regex `Top::` wrapper dispatches into a regex-bearing child rule, and the child reads
+the entering captures with `entry_group(N)`. A post-match action attached directly to a
+rule's own regex slot reads the local slot with `match_group(N)`. The
+[entry-versus-match](#entry-versus-match) distinction is below.
 
 ```text
-Pair::AND
- /(\w+)=(\w+)/ -> Pair[0] {
-   return(hash("key", match_group(0), "val", match_group(1)));
- }
+Top::
+ -> Pair .push
+LX { return(copy(array(Top))) }
+
+Pair:
+ /(\w+)=(\w+)/ I.return(hash("key", entry_group(0), "val", entry_group(1)))
 ```
 
 The numbering follows three rules:
 
-1. **Zero-based.** `match_group(0)` is the **first** capture group, `match_group(1)` the
-   second, and so on. In the example, `match_group(0)` is the `(\w+)` before `=` and
-   `match_group(1)` is the `(\w+)` after it.
+1. **Zero-based.** `entry_group(0)` is the **first** capture group, `entry_group(1)` the
+   second, and so on. In the example, `entry_group(0)` is the `(\w+)` before `=` and
+   `entry_group(1)` is the `(\w+)` after it. The same numbering applies to `match_group(N)`
+   when you are reading a local post-match slot.
 2. **Captures only — group `0` is *not* the whole match.** Unlike many regex libraries
    where group `0` means "the entire match", in `.spec` the group list holds *only* the
    parenthesised captures. To read the whole matched text, use `entry_text()` /
@@ -125,10 +135,8 @@ A `(?<name>...)` group is a **named capture**. Read it by name (the name is a ba
 not a quoted string):
 
 ```text
-Subdef::AND
- /(?<subname>\w\S*)/ -> Subdef[0] {
-   return(hash("name", match_named(subname)));
- }
+Subdef:
+ /(?<subname>\w\S*)/ I.return(hash("name", entry_named(subname)))
 ```
 
 - `entry_named(name)` / `match_named(name)` return the captured value, or `undef` if that
@@ -147,30 +155,26 @@ Because non-participating numbered groups are dropped, indices are **positional 
 result, not in the pattern**:
 
 ```text
-Unit::AND
- /(\d+)?([a-z]+)/ -> Unit[0] {
-   return(hash("amount", match_group(0), "name", match_group(1)));
- }
+Unit:
+ /(\d+)?([a-z]+)/ I.return(hash("amount", entry_group(0), "name", entry_group(1)))
 ```
 
 Match this against `abc`:
 
 - `(\d+)?` matched nothing (no leading digits), so it is dropped.
 - `([a-z]+)` matched `abc`.
-- The compacted list is therefore `["abc"]`: `match_group(0)` is `"abc"`, and
-  `match_group(1)` is `undef`.
+- The compacted list is therefore `["abc"]`: `entry_group(0)` is `"abc"`, and
+  `entry_group(1)` is `undef`.
 
 So `"amount"` becomes `"abc"` and `"name"` becomes `undef` — almost certainly not
 intended. Against `12abc`, both groups participate and the mapping is the expected
-`match_group(0) == "12"`, `match_group(1) == "abc"`.
+`entry_group(0) == "12"`, `entry_group(1) == "abc"`.
 
 The fix is to name the groups so absence does not shift anything:
 
 ```text
-Unit::AND
- /(?<amount>\d+)?(?<name>[a-z]+)/ -> Unit[0] {
-   return(hash("amount", match_named(amount), "name", match_named(name)));
- }
+Unit:
+ /(?<amount>\d+)?(?<name>[a-z]+)/ I.return(hash("amount", entry_named(amount), "name", entry_named(name)))
 ```
 
 Now `abc` yields `amount => undef`, `name => "abc"`, and `12abc` yields `amount => "12"`,
@@ -181,12 +185,14 @@ Now `abc` yields `amount => undef`, `name => "abc"`, and `12abc` yields `amount 
 There are two numbered/named capture families because there are two matches in play:
 
 - **`entry_*`** reads the match that **entered** the current context — the regex match
-  that dispatched into this rule/action.
-- **`match_*`** reads the **current local** match being processed inside the rule.
+  that dispatched into this rule/action. This is what the regex-bearing child rules above
+  use when entered by a no-regex `Top::` wrapper.
+- **`match_*`** reads the **current local** match being processed inside the rule, typically
+  from a post-match edge action attached to that rule's own regex slot.
 
-For a simple single-regex rule they coincide, so either family works. They diverge in
-nested or dispatched rules, where the action runs against a local match different from the
-one that brought it in. The full mental model and a side-by-side example live in
+In simple one-slot flows they may point at the same text, but they are different channels.
+They diverge in nested or dispatched rules, where the action runs against a local match
+different from the one that brought it in. The full mental model and a side-by-side example live in
 [Capture, Marks, and Source Locations](../dsl/capture-marks-and-source-locations.md).
 
 ## What a backend's regex engine must support

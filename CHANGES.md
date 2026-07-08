@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.7 — fix regex chapter examples
+
+**Scope:** mdBook regex chapter correction for the active whole-book scorch.
+
+**Change:** Reworked `user-model/regex-in-spec.md` so the keyword, numbered-capture, named-capture,
+and compaction examples use no-regex `Top::` wrappers plus single-colon regex-bearing rules. The
+capture-indexing contract stays intact: groups are 0-based, captures-only, compacted when
+non-participating, and named captures remain stable.
+
+**Validation:** Representative `LinkedSpec::Get` probes confirm the documented keyword, pair, named
+capture, numbered-compaction, and named-compaction outputs; the page scan finds no regex slot under a
+`::` header; `mdbook build docs/linkedspec-book` passes.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.6 — fix rule mode and parse mode examples
 
 **Scope:** mdBook language-reference correction for rule-mode and parse-mode examples.

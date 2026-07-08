@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.7 — regex chapter examples):
+  `user-model/regex-in-spec.md` no longer uses regex-on-`::` examples. Complete snippets use a
+  no-regex `Top::` wrapper, and regex-bearing examples are normal `:` child rules. The capture
+  teaching now uses `entry_group` / `entry_named` for the dispatched-child shape while preserving the
+  zero-based, captures-only, compacted numbered-group contract and the named-group stability guidance.
+  The next scorch leaf is `.10.5.8` for `user-model/blind-calls-and-parser-orchestration.md`.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.6 — rule modes and parse modes):
   `user-model/rule-modes-and-parse-modes.md` now follows the book scorch doctrine without erasing the
   top-rule runtime nuance: runnable regex-owning mode examples use normal `:` labels, while `::` remains
