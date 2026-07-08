@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.5.5 — add remaining helper-family worked examples
+
+**Scope:** mdBook helper catalog Declaration, Capture/Mark, Entry/Match, Input, and Call examples.
+
+**Change:** Added verified examples for declaration replacements, anonymous and named capture/mark
+helpers, entry-vs-local-match helpers, whole-input readers, and `call(child)`. Corrected stale
+entry-vs-match examples in the source-boundary chapters to the verified ordered-child shape and
+added KM fact `entry-match-divergence-verified-shape`. This closes helper-catalog sweep `.5`.
+
+**Validation:** Focused `LinkedSpec::Get` probes generated every documented runtime output,
+including the corrected entry-vs-local-match shape. `mdbook build docs/linkedspec-book` and the
+memory, task-tree, doctrine, whitespace, and Knowledge Map checks pass.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.5.4 — add Hash and Control Flow worked examples
 
 **Scope:** mdBook helper catalog Hash and Control Flow examples.

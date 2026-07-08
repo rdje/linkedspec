@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.5.5 — add remaining helper-family worked examples**
+  (DONE mdBook helper catalog examples; helper-catalog sweep `.5` closed; frontier `.6` next).
+
+  **Change:** Added verified Declaration, Capture/Mark, Entry/Match, Input, and Call examples to
+  `helper-contract-catalog.md`. Corrected stale entry-vs-match examples in
+  `capture-marks-and-source-locations.md` and `source-boundary-helper-reference.md` to the verified
+  ordered-child shape, and added KM fact `entry-match-divergence-verified-shape`.
+
+  **Boundary:** No parser/runtime/source behavior changed. The stale example correction is a documentation
+  alignment fix discovered while verifying `.5.5`.
+
+  **Verification:** Focused `LinkedSpec::Get` probes generated the documented outputs for the five
+  remaining helper families and the corrected entry-vs-match shape; mdBook, doctrine, task-tree, memory,
+  Knowledge Map, and whitespace checks pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.5.4 — add Hash and Control Flow worked examples**
   (DONE mdBook helper catalog examples; frontier `.5.5` next).
 

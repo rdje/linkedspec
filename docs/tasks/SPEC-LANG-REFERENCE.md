@@ -6,10 +6,11 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-07-08` (`.5.4` done: Hash + Control Flow helper worked examples added
-  to `helper-contract-catalog.md` with focused `LinkedSpec::Get` verification; direct odd-arity
-  `hash(...)` caveat recorded in KM fact `hash-helper-odd-arity-current-behavior`; optional behavior
-  normalization deferred to `.5.4.1`; frontier advances to `.5.5` remaining helper families. Earlier **MAJOR
+- Last updated: `2026-07-08` (`.5.5` done: Declaration, Capture/Mark, Entry/Match, Input, and
+  Call helper worked examples added to `helper-contract-catalog.md` with focused `LinkedSpec::Get`
+  verification; stale entry-vs-match book examples corrected to the verified ordered-child shape;
+  KM fact `entry-match-divergence-verified-shape` added; helper-catalog sweep `.5` closes and
+  frontier advances to `.6` capture/mark cross-example. Earlier **MAJOR
   CORRECTION** — user established that a `.spec` top (`::`) rule has NO regex; a valid spec needs >=2
   rules (top entry + >=1 normal `:` rule carrying the regex). Remediation remains documentation-only
   and owned by `.10.3`/`.10.5`; Perl reference untouched.)
@@ -64,11 +65,11 @@ The surface to cover (authoritative sources in parentheses) includes at least:
 - ID: `SPEC-LANG-REFERENCE`
   Status: `active`
   Goal: Complete + variant-agnostic + example-rich book coverage of the whole `.spec` language
-  Children: `.1`–`.4` (done), `.5` (active: `.5.1`–`.5.3` done, `.5.4`–`.5.5` pending), `.6`, `.7`,
+  Children: `.1`–`.5` (done, including `.5.1`–`.5.5`; `.5.3.1`/`.5.4.1` deferred), `.6`, `.7`,
   `.8`, `.9` (done — §5.5 drift fix, but used INVALID structure — superseded by `.10.4`), `.10`
   (**CORRECTED**: remediate structurally-invalid examples in `.5.2`/`.9`; NO engine bug; `.10.1`
   verdict superseded, `.10.2` superseded; remediation `.10.3`/`.10.5`; `.10.5.4.1` reactivated the
-  paused scorch and `.10.5.20` is done; `.5.3` is the next helper-example leaf)
+  paused scorch and `.10.5.20` is done; `.6` is the next language-reference leaf)
 
 - ID: `SPEC-LANG-REFERENCE.1`
   Status: `done`
@@ -181,7 +182,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.4` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.5`
-  Status: `active`
+  Status: `done`
   Goal: Helper-contract catalog **completeness + variant-neutrality + examples** sweep
   Acceptance: confirm every helper family in `perl/LinkedSpec/ActionIR/Contracts.pm` is
   represented in `appendix/helper-contract-catalog.md` with a backend-neutral behavioral
@@ -189,6 +190,11 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Perl-implementation note from the contract; add examples where the catalog is example-poor.
   **Split during implementation (the surface is large)** — see Audit Findings (`.5`) below.
   Children: `.5.1` (done), `.5.2` (done), `.5.3`, `.5.4`, `.5.5`
+  Verification: Done — 2026-07-08. `.5.1` confirmed zero public helper-catalog completeness gaps
+  and decomposed the example-density work; `.5.2` added Scalar/Numeric examples; `.5.3` added Array
+  examples; `.5.4` added Hash + Control Flow examples; `.5.5` added Declaration, Capture/Mark,
+  Entry/Match, Input, and Call examples. All documented example outputs were generated through
+  focused `LinkedSpec::Get` probes, with caveats recorded in KM where durable.
 
 - ID: `SPEC-LANG-REFERENCE.5.1`
   Status: `done`
@@ -305,12 +311,20 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `deferred`
 
 - ID: `SPEC-LANG-REFERENCE.5.5`
-  Status: `pending`
+  Status: `done`
   Goal: Worked examples — Declaration, Capture/Mark, Entry/Match, Input, Call families
   Acceptance: ≥1 compile-verified example per remaining family, built through `LinkedSpec::Get`;
   closes `.5`. `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. Added focused worked examples to
+  `appendix/helper-contract-catalog.md` for declaration replacements (`name = value` plus explicit
+  aggregate resets), anonymous capture cursor reads, named marks with `capture_between(...)`,
+  entry-vs-local-match readers, whole-input readers, and `call(child)`. Focused `LinkedSpec::Get`
+  probes verified every documented output. During verification, stale entry-vs-match examples in
+  `capture-marks-and-source-locations.md` and `source-boundary-helper-reference.md` were corrected
+  from an unverified `return(call(Inner/Child))` shape to the verified ordered-child shape
+  (`Top:: -> Name .push` + `Name:AND` later-slot action). KM fact
+  `entry-match-divergence-verified-shape` records the durable pattern. This closes `.5`.
+  Commit: `SPEC-LANG-REFERENCE.5.5` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.6`
   Status: `pending`
@@ -1022,7 +1036,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.5.3.1` | `deferred` | optional implementation/parity follow-up for split/pipeline return-shape caveats; not PNT-active unless explicitly activated |
 | — | `SPEC-LANG-REFERENCE.5.4` | `done` | Hash + Control Flow helper worked examples added 2026-07-08; direct odd-arity hash constructor caveat documented and tracked |
 | — | `SPEC-LANG-REFERENCE.5.4.1` | `deferred` | optional implementation/parity follow-up for direct odd-arity `hash(...)`; not PNT-active unless explicitly activated |
-| 10 | `SPEC-LANG-REFERENCE.5.5` | `pending` | worked examples: Declaration, Capture/Mark, Entry/Match, Input, Call families (closes `.5`) |
+| — | `SPEC-LANG-REFERENCE.5.5` | `done` | worked examples added for Declaration, Capture/Mark, Entry/Match, Input, and Call families; helper-catalog sweep `.5` closes (2026-07-08) |
 | 11 | `SPEC-LANG-REFERENCE.6` | `pending` | capture/mark cross-example + remaining thin spots |
 | 12 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
 | 13 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
@@ -1170,7 +1184,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 ## Blockers
 
 - None. (`.10.2`'s "blocked-on-decision" is gone — superseded; the decision was withdrawn after the
-  user's structural correction. The scorch is closed as of `.10.5.20`; `.5.4` is done; resume at `.5.5`.)
+  user's structural correction. The scorch is closed as of `.10.5.20`; `.5` is done; resume at `.6`.)
 
 ## Verification Log
 
@@ -1184,6 +1198,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `2026-06-17` | `SPEC-LANG-REFERENCE.5.2` | scratch oracle-style driver (`LinkedSpec::Get` → run parser on input → `JSON::PP->canonical` encode) over all 35 Scalar+Numeric examples; sanity-checked vs frozen fixtures `proof_edge_{scalar,array}_literal` (reproduced exactly); probed the value-vs-condition lowering split in `ActionIR/FlowExpr.pm`; `mdbook build` | `mdbook build` exit 0; 35/35 examples produce the documented outputs; `is_defined`/`is_undefined` documented condition-only (die as values); `split→num_sum` non-composition avoided (array-form reducers use explicit `array(...)`); **discovered** §5.5 Pair example outputs `[]` not the tagged array → owned by new leaf `.9` (not bundled) |
 | `2026-07-08` | `SPEC-LANG-REFERENCE.5.3` | focused `LinkedSpec::Get` oracle driver for Array value examples, statement/mutation pipeline examples, split return-shape variants, receiver-chain variants, and array-tree traversal; `call_spec_handler_subst` probes for split/pipeline lowering; mdBook/KM/live-doc updates; `mdbook build docs/linkedspec-book`; memory, task-tree, doctrine, whitespace, and Knowledge Map checks | documented Array examples return the recorded outputs; caveats confirmed: compact `I.return(split(...))` tags as `"?value:"`, block/receiver split returns plain arrays, direct `return(split_each(array(items), ...))` returns count-shaped output, and documented receiver chains stick to verified continuations. Gates pass |
 | `2026-07-08` | `SPEC-LANG-REFERENCE.5.4` | focused `LinkedSpec::Get` oracle driver for Hash examples, hash-tree traversal examples, Control Flow branch/loop/return examples, and `next()` repetition control; `call_spec_handler_subst` probes for direct odd-arity `hash(...)`; descriptor probe for `exit_now(2)` canonical metadata; mdBook/KM/live-doc updates; `mdbook build docs/linkedspec-book`; memory, task-tree, doctrine, whitespace, and Knowledge Map checks | documented Hash and Control Flow examples return the recorded outputs; direct `hash("a", 1, "missing")` is documented as a current unsupported-helper caveat with explicit `undef` / list-splice stable forms; `exit_now(2)` descriptor reports ready `EXIT` metadata without running the terminating path. Gates pass |
+| `2026-07-08` | `SPEC-LANG-REFERENCE.5.5` | focused `LinkedSpec::Get` oracle driver for Declaration, Capture/Mark, Entry/Match, Input, and Call examples; stale entry-vs-match page examples re-probed and corrected to a verified ordered-child shape; KM fact card + regeneration; mdBook/live-doc updates; `mdbook build docs/linkedspec-book`; memory, task-tree, doctrine, whitespace, and Knowledge Map checks | documented remaining helper-family examples return the recorded outputs; helper-catalog sweep `.5` closes. `capture-marks-and-source-locations.md` and `source-boundary-helper-reference.md` now use the verified `Top:: -> Name .push` + `Name:AND` entry/local-match divergence shape, and KM fact `entry-match-divergence-verified-shape` records the pattern. Gates pass |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.9` | scratch oracle driver: reconfirmed `Pair::AND … -> Pair[0]` → `[]` under default/`consume`/`seek`; confirmed corrected OR self-ref `-> Pair` → `["?pair:","key","val"]`; §5.5/§5.6 sweep; whole-book `grep -E '-> \w+\[0\]'` + `::AND` cross-scan; checked `worked-spec-walkthrough.md` claimed output + ground-truthed self-edge idiom vs shipped specs (`portmap`/`hlink_substitution`/`DT`); `mdbook build` | `mdbook build` exit 0; §5.5 Pair example fixed (+ §5.7 cross-ref note); §5.6 left untouched (different construct). **Found SYSTEMIC variant** — single-slot `::AND -> Rule[0] { return }` output drift in several chapters (notably `worked-spec-walkthrough.md` claims `{kind=>"pair",…}`, actually `[]`) → new leaf `.10`, **blocked on a user decision** (engine-bug vs doc-rewrite) |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10.1` | delegated read-only codegen investigation (general-purpose agent, 42 tool-uses) + **self-verified the 3 load-bearing claims against source**: read `HandlerVariantEmitter.pm:564-630` (confirmed the missing `push` at 575-582), `git log -- HandlerVariantEmitter.pm` (confirmed MEDIUM-IMPACT.3.4.x provenance: `148c746`/`7fec186`), and `specentry-perl-coupling-inventory.md:234` (confirmed the pre-documented "lack E-block support" gap); behavioral matrix via `LinkedSpec::Get` (single-slot AND `LX`/`E`/edge `return` all → `[]`; OR self-ref + multi-slot-closing-slot + REP all surface values) | ~~VERDICT: accidental regression~~ — **SUPERSEDED** (see next row). The verdict was wrong because the premise was wrong (the examples are structurally invalid). |
 | `2026-06-17` | `SPEC-LANG-REFERENCE.10` (correction) | user established the `.spec` structural invariant (top `::` rule has no regex; valid spec ≥2 rules); verified vs `BootstrapSpec/Core.pm:414,417` (`::`→`_INITIAL`, label line anchored — no regex) + `RuleIR.pm:193-195` (`_INITIAL`→`top_rule`) + audit of all 20 `specs/*.spec` (every top rule `regex_on_top=no`); **proven the correct 2-rule worked-example idiom** via `LinkedSpec::Get` (`demo_top:: -> word_pair .push; LX{return(array_copy(a(demo_top)))}` + `word_pair : /(\w+) (\w+)/ I.return(concat(entry_group(0),"-",entry_group(1)))` → `["hello-world"]`; the child reads `entry_group` not `match_group`) | **NO engine bug** — the `[]` was invalid spec structure (regex on top rule / single-rule). Perl reference untouched. Deleted the bad KM card; wrote `spec-top-rule-no-regex-two-rule-minimum.md`. `.10.1` verdict + `.10.2` fork superseded; remediation `.10.3`/`.10.4`/`.10.5`. FRESH SESSION recommended |
@@ -1213,6 +1228,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.5.2` | `SPEC-LANG-REFERENCE.5.2 — book: compile-verified worked examples for all Scalar + Numeric helpers (helper-contract-catalog §2/§5)` | 35 helpers, each run-verified through `LinkedSpec::Get` against the oracle; shared runnable-spec preamble; condition-only note for `is_defined`/`is_undefined`; array-form reducers via explicit `array(...)`. Found §5.5 drift → new leaf `.9`. mdbook build exit 0 |
 | `SPEC-LANG-REFERENCE.5.3` | `SPEC-LANG-REFERENCE.5.3 — add Array helper worked examples` | `helper-contract-catalog.md` now has verified Array examples for constructor/copy/splice, selectors, edge slices, ordering, membership, split, pipelines, mutations, receiver chains, and array-tree traversal. KM fact `array-helper-return-shape-caveats` records split/pipeline shape-sensitive caveats; optional normalization deferred to `.5.3.1` |
 | `SPEC-LANG-REFERENCE.5.4` | `SPEC-LANG-REFERENCE.5.4 — add Hash and Control Flow worked examples` | `helper-contract-catalog.md` now has verified Hash examples for constructor/copy/splice, pure/mutating updates, sorted views, receiver chains, and hash-tree traversal, plus Control Flow examples for branch forms, `switch`, `while`, `next`, `return`, `return_undef`, and descriptor-verified `exit_now`. KM fact `hash-helper-odd-arity-current-behavior` records the direct odd-arity `hash(...)` caveat; optional normalization deferred to `.5.4.1` |
+| `SPEC-LANG-REFERENCE.5.5` | `SPEC-LANG-REFERENCE.5.5 — add remaining helper-family worked examples` | `helper-contract-catalog.md` now has verified Declaration, Capture/Mark, Entry/Match, Input, and Call examples. Corrected stale entry-vs-match examples in the source-boundary chapters to the verified ordered-child shape and added KM fact `entry-match-divergence-verified-shape`. This closes the helper-catalog sweep `.5`; frontier advances to `.6` |
 | `SPEC-LANG-REFERENCE.9` | `SPEC-LANG-REFERENCE.9 — book: fix drifted §5.5 Pair example output (AND-[0] self-edge returns [] not the tagged array)` | Corrected the §5.5 Pair example to the verified OR self-ref `-> Pair` form (+ §5.7 cross-ref). Surfaced a SYSTEMIC variant across chapters → new leaf `.10` (blocked on a user decision). mdbook build exit 0 |
 | `SPEC-LANG-REFERENCE.10.1` | `SPEC-LANG-REFERENCE.10.1 — investigation: single-slot AND drops its edge return ([]) is a Perl-reference regression, not intended (KM card + verdict)` | Read-only root-cause investigation; VERDICT = accidental regression in `AND_SINGLE_ACODE` emitter (missing `push`); triple-verified vs source/git/card; KM card `and-single-acode-edge-return-dropped.md`. `.10.2` fix blocked on a user direction decision. No code/book change. **(Verdict later SUPERSEDED — see `.10` correction commit.)** |
 | `SPEC-LANG-REFERENCE.10` (correction) | `SPEC-LANG-REFERENCE.10 — correction: top rule has no regex; .5.2/.9 examples are structurally invalid (not an engine bug); retract .10.1, plan remediation (.10.3-.5)` | User-established structural invariant (top `::` rule no regex; valid spec ≥2 rules), verified vs Core.pm/RuleIR.pm + 20-spec audit. Deleted the wrong KM card, added `spec-top-rule-no-regex-two-rule-minimum.md` with the proven 2-rule idiom. Superseded `.10.1` verdict + `.10.2`; added remediation leaves. NO Perl change. Repo handoff-ready; fresh session recommended |
@@ -1545,3 +1561,12 @@ wrapped only where a complete worked example is intended) during the per-file fi
   sentinel on current Perl, so the book documents explicit `undef` / list-splice stable forms and KM fact
   `hash-helper-odd-arity-current-behavior` records the caveat. Optional normalization is deferred to
   `.5.4.1`; frontier → `.5.5` (Declaration, Capture/Mark, Entry/Match, Input, Call examples).
+- `2026-07-08`: `.5.5` done — added verified worked examples for the remaining helper families:
+  declaration replacements (`name = value` plus explicit aggregate resets), anonymous capture cursor
+  reads, named marks with `capture_between(...)`, entry-vs-local-match readers, whole-input readers,
+  and `call(child)`. Focused `LinkedSpec::Get` probes verified every documented output. While probing,
+  corrected stale entry-vs-match snippets in `capture-marks-and-source-locations.md` and
+  `source-boundary-helper-reference.md` to the verified ordered-child shape (`Top:: -> Name .push` +
+  `Name:AND` later-slot action). KM fact `entry-match-divergence-verified-shape` records the durable
+  pattern. Helper-catalog sweep `.5` closes; frontier → `.6` (capture/mark cross-example + remaining
+  thin spots).

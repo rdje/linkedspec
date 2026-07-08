@@ -364,32 +364,38 @@ Prefer the explicit `match_start_*` names when the surrounding code also talks a
 ## Entry versus match example
 
 ```text
-Top::AND
- => Call
+Top::
+ -> Name .push
+ LX { return(copy(array(Top))) }
 
-Call: /(?<prefix>foo)\(/ -> Child {
-  return(call(Child));
-}
-
-Child: /(?<name>\w+)/
- /\)/
- -> Child[0] {
+Name:AND
+ /(?<head>name)/
+ /\s*=\s*/
+ /(?<value>[A-Za-z_]+)/
+ -> Name[1] {
+   eq = match_text();
+ }
+ -> Name[2] {
    return(hash(
      "entry_text", entry_text(),
-     "entry_prefix", entry_group(0),
+     "entry_name", entry_named(head),
      "local_text", match_text(),
-     "local_name", match_named(name),
+     "local_name", match_named(value),
      "entry_group_count", count(entry_groups()),
-     "local_group_count", count(match_groups())
+     "local_group_count", count(match_groups()),
+     "separator", trim(eq)
    ))
  }
 ```
 
 Read it this way:
 
-- `entry_*` sees the captured outer name `foo` from the match that brought `Child` into the current context.
-- `match_*` sees the current local `Child` match, here the word inside the parentheses.
+- `entry_*` sees the captured first slot `name` from the match that brought `Name` into the current context.
+- `match_*` sees the current local `Name` match, here the final slot `Alpha` when the input is `name=Alpha`.
 - If this inline example is built directly, select `top_rule => Top` so the public entrypoint is explicit.
+
+On input `name=Alpha`, the top accumulator returns
+`[{"entry_group_count":1,"entry_name":"name","entry_text":"name","local_group_count":1,"local_name":"Alpha","local_text":"Alpha","separator":"="}]`.
 
 This split is the main reason both helper families exist.
 

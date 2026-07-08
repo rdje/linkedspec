@@ -137,34 +137,37 @@ Use `match_*` when the action wants the local match currently being processed, n
 
 For a simple single-regex rule, the match that *entered* the rule and the rule's *local* match are the same span, so `entry_*` and `match_*` agree — use whichever reads best.
 
-They **diverge** when a rule's action runs against a local match that is not the match that dispatched into it — the classic case is a **dispatched child**. Consider a parent that recognizes a `name(` opener and dispatches into a child that reads the word inside:
+They **diverge** when a rule's action runs against a local match that is not the match that dispatched into it. Consider a top dispatcher that enters an ordered child through the first slot (`name`) and returns from a later local slot (`Alpha`):
 
 ```text
-Top::AND
- => Call
+Top::
+ -> Name .push
+ LX { return(copy(array(Top))) }
 
-Call: /(\w+)\(/ -> Inner {
-  return(call(Inner));
-}
-
-Inner: /(\w+)/
- /\)/
- -> Inner[0] {
+Name:AND
+ /(?<head>name)/
+ /\s*=\s*/
+ /(?<value>[A-Za-z_]+)/
+ -> Name[1] {
+   eq = match_text();
+ }
+ -> Name[2] {
    return(hash(
-     "outer", entry_text(),
-     "outer_name", entry_group(0),
-     "inner", match_text(),
-     "inner_name", match_group(0)
-   ));
+     "entry_text", entry_text(),
+     "entry_name", entry_named(head),
+     "local_text", match_text(),
+     "local_name", match_named(value),
+     "separator", trim(eq)
+   ))
  }
 ```
 
-Over the input `greet(world)`, this returns `[{"outer":"greet","outer_name":"greet","inner":"world","inner_name":"world"}]`. The two families read **different** spans:
+Over the input `name=Alpha`, this returns `[{"entry_name":"name","entry_text":"name","local_name":"Alpha","local_text":"Alpha","separator":"="}]`. The two families read **different** spans:
 
-- `entry_text()` and `entry_group(0)` read the match that **entered** `Inner` — the outer name `greet` from `Call`.
-- `match_text()` reads `Inner`'s **own** local match — the inner word `world`.
+- `entry_text()` and `entry_named(head)` read the match that **entered** `Name` — the first slot, `name`.
+- `match_text()` and `match_named(value)` read `Name`'s **current local match** — the final slot, `Alpha`.
 
-The split applies to every reader in both families: `entry_group(0)` reads the entering match's capture (here `greet`), while `match_group(0)` reads the local match's capture (here `world`).
+The split applies to every reader in both families: `entry_group(0)` reads the entering match's capture (here `name`), while `match_group(0)` reads the local match's capture (here `Alpha`).
 
 Choose by what you need: `entry_*` for the context that brought the action here, `match_*` for the token the action is processing right now.
 

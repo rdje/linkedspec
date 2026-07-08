@@ -185,6 +185,23 @@ dispatch rule.
 - **Behavior**: Sets the working variable `name` to the evaluated RHS value. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable. Later assignments may replace a scalar with an array/hash value, or replace an array/hash value with a scalar.
 - **Edge cases**: `name = [value]`, `set(name, [value])`, and `=(name, [value])` bind an array value to `name`; `name = { key : value }` binds a hash value. Use `set(array(name), [value])` or `set(hash(name), { key : value })` for aggregate working storage. In scalar assignment source slots, a bare source name reads the working scalar: `out = value`.
 - **Terse spelling**: `name = value` is the preferred operator spelling, and `set(name, value)` remains the helper spelling. In value positions, assignments store and yield the stored typed value. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
+- **Worked example**:
+  ```text
+  demo::
+   -> value .push
+   LX { return(copy(array(demo))) }
+
+  value : /(\w+)/
+   I {
+     value = entry_group(0);
+     set(array(items), [value, cat(value, "!")]);
+     set(hash(meta), { "value" : value });
+     return(array(value, array(items), hash(meta), name = value, name))
+   }
+  ```
+  Input `ok` returns `[["ok",["ok","ok!"],{"value":"ok"},"ok","ok"]]`.
+  The scalar assignment `name = value` stores and yields `"ok"` in value position; the explicit
+  aggregate resets establish `items` and `meta` without using retired `declare(...)`.
 
 ## 2. Scalar Helpers
 
@@ -1301,6 +1318,61 @@ the `_rest` readers), so the next capture continues from there. Note that the
 match-start readers (`capture_take`, `capture_take_len`, `capture_take_len_from`)
 read up to the match start but still advance the origin to the scan position.
 
+> **Worked examples.** Boundary-oriented capture examples are often naturally
+> `seek`-mode snippets: an opener match records a boundary, the parser seeks to a
+> later delimiter match, and the capture helper reads the text between them.
+
+Anonymous capture cursor:
+
+```text
+demo::
+ -> body .push
+ LX { return(copy(array(demo))) }
+
+body: /BEGIN/ /END/
+ -> body[1] {
+   return(hash("body", trim(capture_slice()), "width", capture_slice_len()))
+ }
+```
+
+With `parse_mode => "seek"`, input `BEGIN alpha END` returns
+`[{"body":"alpha","width":7}]`: `capture_slice()` spans the text between the
+`BEGIN` match and the later `END` match, while `trim(...)` removes the surrounding
+spaces for the displayed body.
+
+Named marks and explicit span endpoints:
+
+```text
+demo::AND
+ => pair
+
+pair:AND
+ /\[/
+ /\w+/
+ /:/
+ /\w+/
+ /\]/
+ -> pair[0] { mark_here(body_start) }
+ -> pair[2] {
+   mark_match_start(colon_start);
+   left = capture_between(body_start, colon_start);
+   mark_here(right_start)
+ }
+ -> pair[4] {
+   mark_match_start(close_start);
+   return(hash(
+     "left", left,
+     "left_len", capture_len_between(body_start, colon_start),
+     "right", capture_between(right_start, close_start)
+   ))
+ }
+```
+
+With `parse_mode => "seek"`, input `[left:right]` returns
+`[{"left":"left","left_len":4,"right":"right"}]`. The first action records the
+left boundary, the colon action records an exact right boundary for `left` and a
+new start for `right`, and the closing-bracket action records the final right edge.
+
 ### `start_capture_slice()`
 - **Signature**: `start_capture_slice()`
 - **Returns**: void
@@ -1454,6 +1526,46 @@ read up to the match start but still advance the origin to the scan position.
 
 These helpers read from the **current match** — the regex capture that triggered the current code block.
 
+> **Worked example: entry versus local match.** A no-regex top dispatcher enters an
+> ordered child rule through the first slot (`name`) and the child returns from a
+> later local slot (`Alpha`):
+>
+> ```text
+> demo::
+>  -> value .push
+>  LX { return(copy(array(demo))) }
+>
+> value:AND
+>  /(?<head>name)/
+>  /\s*=\s*/
+>  /(?<value>[A-Za-z_]+)/
+>  -> value[1] {
+>    eq = match_text();
+>  }
+>  -> value[2] {
+>    return(hash(
+>      "entry_text", entry_text(),
+>      "entry_named", entry_named(head),
+>      "entry_groups", entry_groups(),
+>      "entry_map", entry_map(),
+>      "entry_start", entry_start_pos(),
+>      "entry_end", entry_end_pos(),
+>      "local_text", match_text(),
+>      "local_named", match_named(value),
+>      "local_groups", match_groups(),
+>      "local_map", match_map(),
+>      "local_start", match_start_pos(),
+>      "local_end", match_end_pos(),
+>      "separator", trim(eq)
+>    ))
+>  }
+> ```
+>
+> Input `name=Alpha` returns
+> `[{"entry_end":4,"entry_groups":["name"],"entry_map":{"head":"name"},"entry_named":"name","entry_start":0,"entry_text":"name","local_end":10,"local_groups":["Alpha"],"local_map":{"value":"Alpha"},"local_named":"Alpha","local_start":5,"local_text":"Alpha","separator":"="}]`.
+> The `entry_*` helpers read the match that entered `value` (the first slot, `name`);
+> the `match_*` helpers in the final action read the current local slot (`Alpha`).
+
 ### `entry_text()`
 - **Signature**: `entry_text()`
 - **Returns**: scalar
@@ -1508,6 +1620,28 @@ These helpers read from the **current match** — the regex capture that trigger
 
 ## 9. Input Helpers
 
+> **Worked example.** Input helpers read the whole input, not the current cursor,
+> entry match, or local match:
+>
+> ```text
+> demo::
+>  -> value .push
+>  LX { return(copy(array(demo))) }
+>
+> value : /.+/
+>  I {
+>    return(hash(
+>      "text", input_text(),
+>      "len", input_len(),
+>      "slice", input_slice(1, 2),
+>      "line", input_end_line(),
+>      "col", input_end_col()
+>    ))
+>  }
+> ```
+>
+> Input `abcd` returns `[{"col":5,"len":4,"line":1,"slice":"bc","text":"abcd"}]`.
+
 ### `input_text()`
 - **Signature**: `input_text()`
 - **Returns**: scalar
@@ -1531,10 +1665,25 @@ These helpers read from the **current match** — the regex capture that trigger
 ## 10. Call Expression
 
 ### `call(child_rule)`
-- **Signature**: `call(rule_name: string)`
+- **Signature**: `call(rule_name: bare rule-label token)`
 - **Returns**: the child rule's return value
 - **Behavior**: Invokes a child rule directly from action code and returns its result. Used for nested parsing delegation.
-- **Edge cases**: The child rule must exist and be a valid body rule in the same `.spec` file.
+- **Edge cases**: The child rule must exist and be a valid body rule in the same `.spec` file. Use the bare
+  rule label (`call(child)`), not a quoted string: current runtimes resolve the target from the raw action
+  argument token.
+- **Worked example**:
+  ```text
+  demo::
+   -> child {
+     retv = call(child);
+     return(hash("child", retv, "len", length(retv)))
+   }
+
+  child: /(\w+)/
+   I { return(uppercase(entry_text())) }
+  ```
+  Input `abc` returns `{"child":"ABC","len":3}`. The top action calls `child`, stores the child return in
+  `retv`, and returns a hash directly; this example does not use the top accumulator wrapper.
 
 ## Cross-Cutting Contracts
 

@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.5.5 — remaining helper-family worked examples):
+  `helper-contract-catalog.md` now has verified examples for Declaration, Capture/Mark, Entry/Match,
+  Input, and Call helper families, closing the `.5` helper-catalog sweep. The verification pass caught
+  stale entry-vs-match snippets that used a parent action with `return(call(Inner/Child))` while claiming
+  a child local-match output. The stable teaching shape is a no-regex top dispatcher (`Top:: -> Name .push`)
+  into an ordered child (`Name:AND`): the first slot is the entry match (`entry_*` reads `name`), and a later
+  slot action is the local match (`match_*` reads `Alpha`). The helper catalog and source-boundary chapters
+  now use that shape; KM fact `entry-match-divergence-verified-shape` records the reverify command.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.5.4 — Hash and Control Flow helper worked examples):
   `helper-contract-catalog.md` now has verified Hash examples for constructor/copy/splice forms,
   pure and mutating update forms, sorted views, receiver chains, block receivers, and hash-tree
