@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-FORMAT-TERSE.13.1 — array-tree traversal split):
+  `.13` is active and split before parser/runtime code. The accepted MVP reuses the `.12` immediate receiver
+  block method names on array-valued receivers: `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)`.
+  Array roots and nested arrays are traversal nodes; scalar and hash values are leaves, so hashes are not
+  recursively traversed inside array trees. Traversal order is depth-first by zero-based array index. Callback
+  blocks get scoped `value`, `index`, `path`, `depth`, and reduce-only `acc`. The next implementation slice is
+  `.13.2` for the Perl reference; Rust/oracle parity and docs/KM/no-drift are split behind it.
+
 - 2026-07-08 (SPEC-FORMAT-TERSE.10.1 — dynamic hash-literal keys ratified):
   `.10` is closed without parser/runtime changes. The existing direct hash-literal contract is expression-keyed:
   `{ key_expr : value_expr }` evaluates the key expression and stringifies it for the runtime hash key. Bare keys

@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-FORMAT-TERSE.13.1 — split array-tree traversal
+
+**Scope:** Spec-first task split for the remaining `SPEC-FORMAT-TERSE` array-tree traversal backlog item.
+
+**Change:** Accepted array-tree traversal into the active terse-format roadmap and split it before parser/runtime
+code. The planned surface reuses receiver block methods on array-valued receivers:
+`walk_leaves() { ... }`, `map_leaves() { ... }`, and `reduce_leaves(initial) { ... }`. Array roots and nested
+arrays are traversal nodes; scalar and hash values are leaves; traversal is depth-first in zero-based index order;
+callbacks bind scoped `value`, `index`, `path`, `depth`, and reduce-only `acc`.
+
+**Validation:** Knowledge Map retrieval for the `.12` hash-tree contract; task-tree split review; Knowledge fact
+creation and map regeneration; memory, doctrine, task-tree metadata, and whitespace checks. No parser/runtime
+behavior changed.
+
 ## 2026-07-08 — SPEC-FORMAT-TERSE.10.1 — ratify dynamic hash-literal keys
 
 **Scope:** Spec-ratification/no-engine-change closeout for direct hash-literal key semantics.

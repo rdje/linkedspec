@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-FORMAT-TERSE.13.1 — split array-tree traversal**
+  (DONE spec-first split; frontier `.13.2` Perl reference implementation).
+
+  **Change:** Reactivated and split the array-tree traversal backlog item before parser/runtime code. The accepted
+  surface is receiver-only `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` on array-valued receivers,
+  with nested arrays as interior nodes, scalar/hash leaves, index-order traversal, and scoped callback bindings
+  `value`, `index`, `path`, `depth`, and reduce-only `acc`.
+
+  **Boundary:** No parser/runtime behavior changed. Perl implementation is `.13.2`; Rust/oracle parity is `.13.3`;
+  docs/KM/no-drift closeout is `.13.4`.
+
+  **Verification:** Knowledge Map retrieval, task-tree split review, Knowledge fact creation/regeneration,
+  memory architecture, doctrine, task-tree metadata, and whitespace checks pass.
+
 - 2026-07-08: **SPEC-FORMAT-TERSE.10.1 — ratify dynamic hash-literal keys**
   (DONE spec-ratification/no-engine-change closeout; `.10` CLOSED).
 

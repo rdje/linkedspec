@@ -18,21 +18,21 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.10.1` — dynamic/computed direct hash-literal keys ratified as the
-  current `{ key_expr : value_expr }` contract; no parser/runtime behavior changed and `.10` is closed.
-- prior_leaf: `MEMORY-PUSH-POINTER-SYNC.1` — stale branch-threshold wording removed from the resume pointer; push
-  guidance now points at policy instead of a fossilized ahead-count claim.
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.13.1` — array-tree traversal accepted and split before parser/runtime
+  code; frontier moves to `.13.2` for the Perl reference implementation.
+- prior_leaf: `SPEC-FORMAT-TERSE.10.1` — dynamic/computed direct hash-literal keys ratified as the current
+  `{ key_expr : value_expr }` contract; no parser/runtime behavior changed and `.10` is closed.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-FORMAT-TERSE.10.1 - ratify dynamic hash-literal keys`; parent before this slice is
-  `614b391d MEMORY-PUSH-POINTER-SYNC.1 - remove stale push threshold claim`.
+  `SPEC-FORMAT-TERSE.13.1 - split array-tree traversal`; parent before this slice is
+  `a10b8c40 SPEC-FORMAT-TERSE.10.1 - ratify dynamic hash-literal keys`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `SPEC-FORMAT-TERSE.13` next under the 2026-07-08 user directive to exhaust remaining
-  `SPEC-FORMAT-TERSE` work after `.10.1` closed `.10`.
-- next_action: start `SPEC-FORMAT-TERSE.13` with a spec-first split/decision for array-tree traversal. Do not
-  change parser/runtime behavior before the task tree defines the accepted surface, or closes the idea as dropped.
-  `DOCTRINE-ENFORCEMENT-ADOPT.3` stays deferred, and `SPEC-LANG-REFERENCE` stays paused unless explicitly
-  activated by the director.
+- active_work_unit: `SPEC-FORMAT-TERSE.13.2` — Perl reference implementation for array-tree traversal receiver
+  blocks.
+- next_action: implement Perl `array_value.walk_leaves() { ... }`, `.map_leaves() { ... }`, and
+  `.reduce_leaves(initial) { ... }` on array-valued receivers per `.13.1`, while preserving existing `.12`
+  hash-tree behavior. `DOCTRINE-ENFORCEMENT-ADOPT.3` stays deferred, and `SPEC-LANG-REFERENCE` stays paused unless
+  explicitly activated by the director.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/helper/backend/dev chapters, core Perl/Rust
   implementation, shipped specs, tooling, and focused test harness inventory.
@@ -42,6 +42,6 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests (e.g. 102 pplugin lazy-load) fail on the stale checkout. Full phase0 needs the **10-min timeout** (`timeout:600000`), else it caps mid-run (exit 144/143). **Generated Perl handlers are NON-strict.** **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`). Current phase0 reaches **PASS `1..1027`**. oracle = `tools/gen_oracle_corpus.pl` (per-case fork/SIGKILL; **96** fixtures → **run in background**; `manifest.json` + drift guards). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`. Rust numbered capture helpers are captures-only (`0`=first capture); whole match = `entry_text()`/`match_text()`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Remaining open deferred/paused lanes outside the current
-  `SPEC-FORMAT-TERSE.13` exhaustion pass: `DOCTRINE-ENFORCEMENT-ADOPT.3` and `SPEC-LANG-REFERENCE`.
+  `SPEC-FORMAT-TERSE.13` implementation pass: `DOCTRINE-ENFORCEMENT-ADOPT.3` and `SPEC-LANG-REFERENCE`.
 - blockers: none. in_flight_uncommitted: none once this pointer commit lands; do not pivot unless the repo is
   handoff-ready.
