@@ -426,6 +426,65 @@ dispatch rule.
 
 ## 3. Array Helpers
 
+> **Worked examples.** Array examples use the same complete two-rule scaffold as the
+> Scalar/Numeric examples:
+>
+> ```text
+> demo::
+>  -> value .push
+>  LX { return(copy(array(demo))) }
+>
+> value : /<regex>/
+>  I { return(<array-expression>) }
+> ```
+>
+> The top `demo::` rule has no regex; it dispatches to the regex-owning `value:` rule,
+> pushes the child value, and returns the accumulator snapshot. Outputs below are therefore
+> one-element arrays holding the helper result. Multi-statement examples use the same
+> scaffold but put the shown statements inside the `I { ... }` block.
+
+**Verified value examples:**
+
+| Surface | Example | Input | Output |
+| --- | --- | --- | --- |
+| Construct | `array(entry_group(0), entry_group(1), entry_group(2))` over `/(\w+),(\w+),(\w+)/` | `a,b,c` | `[["a","b","c"]]` |
+| Copy | `copy(array(entry_group(0), entry_group(1), entry_group(2)))` over `/(\w+),(\w+),(\w+)/` | `a,b,c` | `[["a","b","c"]]` |
+| Splice | `array("tag", flat_array(array(entry_group(0), entry_group(1))))` over `/(\w+),(\w+)/` | `a,b` | `[["tag","a","b"]]` |
+| Concatenate | `concat_arrays(array(entry_group(0), entry_group(1)), array(entry_group(2)))` over `/(\w+),(\w+),(\w+)/` | `a,b,c` | `[["a","b","c"]]` |
+| Count/select | `count(array(entry_group(0), entry_group(1), entry_group(2)))` / `first(...)` / `last(...)` | `a,b,c` | `[3]` / `["a"]` / `["c"]` |
+| Edge slices | `take(..., 2)` / `take_last(..., 2)` / `drop_front(..., 1)` / `drop_back(..., 1)` / `slice(..., 1, 2)` | `a,b,c` | `[["a","b"]]` / `[["b","c"]]` / `[["b","c"]]` / `[["a","b"]]` / `[["b","c"]]` |
+| Order | `sorted(array("b", "a", "c"))` / `reversed(array("a", "b", "c"))` | `x` | `[["a","b","c"]]` / `[["c","b","a"]]` |
+| Membership | `contains(array("a", "b", "c"), "b")` / `index_of(array("a", "b", "c"), "b")` / missing `index_of(..., "z")` | `x` | `[1]` / `[1]` / `[null]` |
+| Emptiness | `is_empty([])` / `is_nonempty(["a"])` | `x` | `[1]` / `[1]` |
+| Join | `join_values(",", array("a", "b", "c"))` | `x` | `["a,b,c"]` |
+| Split bridge | `entry_group(0).split(",")` over `/(.+)/` | `a,b,c` | `[["a","b","c"]]` |
+| Receiver chain | `items.sorted().drop_front(1).first()` after `set(array(items), ["b", "a", "b", "c"])` | `x` | `["b"]` |
+| Pipeline receiver | `items.trim_each().filter_nonempty().join_values("|")` after `set(array(items), [" a ", "", " b "])` | `x` | `["a|b"]` |
+
+**Verified mutation/pipeline examples:**
+
+| Body inside `value`'s `I { ... }` block | Input | Output |
+| --- | --- | --- |
+| `set(source, entry_group(0)); split(array(items), source, /,/); return(copy(array(items)))` over `/(.+)/` | `a,b,c` | `[["a","b","c"]]` |
+| `set(array(items), ["a:b", "c:d"]); split_each(array(items), ":"); return(copy(array(items)))` | `x` | `[["a","b","c","d"]]` |
+| `set(array(items), [" a ", " b"]); trim_each(array(items)); return(copy(array(items)))` | `x` | `[["a","b"]]` |
+| `set(array(items), ["a", "", undef, "0", "b"]); filter_nonempty(array(items)); return(copy(array(items)))` | `x` | `[["a","0","b"]]` |
+| `set(array(items), ["alpha", "beta", "atom"]); filter_match(array(items), /^a/); return(copy(array(items)))` | `x` | `[["alpha","atom"]]` |
+| `set(array(items), ["a", "b", "a", "c", "b"]); uniq(array(items)); return(copy(array(items)))` | `x` | `[["a","b","c"]]` |
+| `set(array(items), ["A", "bC"]); lowercase_each(array(items)); return(copy(array(items)))` | `x` | `[["a","bc"]]` |
+| `set(array(items), ["a", "bC"]); uppercase_each(array(items)); return(copy(array(items)))` | `x` | `[["A","BC"]]` |
+| `set(value, entry_group(0)); push(array(items), value); items += "tail"; return(copy(array(items)))` over `/(\w+)/` | `head` | `[["head","tail"]]` |
+| `set(value, entry_group(0)); if(is_nonempty(value)) { push(array(items), value) }; set(value, ""); if(is_nonempty(value)) { push(array(items), value) }; return(copy(array(items)))` over `/(\w+)/` | `keep` | `[["keep"]]` |
+
+> **Current Perl caveats.** For `split(value, delim)`, prefer receiver form
+> `value.split(delim)` or block form `I { return(split(value, delim)) }`. Compact
+> lifecycle shorthand `I.return(split(...))` currently routes through an older tagged
+> shorthand shape on the Perl reference. For array pipeline helpers (`split_each`,
+> `trim_each`, `filter_nonempty`, `lowercase_each`, `uppercase_each`, `uniq`, and
+> `filter_match`), return a receiver chain (`items.trim_each()`) or assign/copy the
+> named target as shown above; a direct `return(split_each(array(items), ":"))` is
+> shape-sensitive on current Perl and does not document the portable array value.
+
 ### `array(e1, e2, ...)`
 - **Signature**: `array(elements: expr...)`
 - **Returns**: array
@@ -586,10 +645,11 @@ dispatch rule.
 ### Array receiver-dot value chains
 - **Signature**: `array_expr.method(args...).next(args...)`
 - **Returns**: the documented return value of the final helper in the chain.
-- **Behavior**: A compatible array receiver feeds into the first pure array helper, and each helper's return
-  value feeds the next helper. For example, `items.sorted().drop_front(2).first()` is equivalent to
-  `first(drop_front(sorted(items), 2))`, and `items.uniq().join_values(",")` is equivalent to
-  `join_values(",", uniq(items))`.
+- **Behavior**: A compatible array receiver feeds into verified array helper chains. Pure array links compose
+  through later pure links and terminals, for example `items.sorted().drop_front(2).first()` is equivalent to
+  `first(drop_front(sorted(items), 2))`. Pipeline links compose through pipeline/terminal continuations that are
+  locked by the runtime, for example `items.uniq().join_values(",")` and
+  `phrases.split_each("-").filter_match(/^aa$/).count()`.
 - **Allowed array-returning links**: `copy`, `sorted`, `reversed`, `take`, `take_last`,
   `drop_front`, `drop_back`, `slice`, `concat_arrays`, `split_each`, `trim_each`, `filter_nonempty`,
   `lowercase_each`, `uppercase_each`, `uniq`, and `filter_match`.
@@ -601,7 +661,10 @@ dispatch rule.
 - **Boundary**: `split(value, delim)` belongs to the scalar/string receiver family because its receiver is the
   string being split. Numeric reducer terminals do not continue through later array methods; compose the helper
   form explicitly when another numeric operation is needed. Statement-only end mutations (`push_back`,
-  `push_front`, `pop_back`, `pop_front`) remain mutations, not value-chain links.
+  `push_front`, `pop_back`, `pop_front`) remain mutations, not value-chain links. The portable contract does not
+  promise every possible pipeline-to-pure continuation; use verified chains such as
+  `items.uniq().join_values(",")`, `items.filter_match(/^a/).count()`, or pure chains such as
+  `items.sorted().drop_front(1).first()`.
 - **Block receivers**: An expression-valued block whose value is an array can be the receiver, for example
   `{ [3, 1, 2] }.sorted().join_values(",")`. A block-local `return(array_expr)` yields the receiver value and
   skips later block statements before the array chain runs.
@@ -705,9 +768,16 @@ dispatch rule.
   initial accumulator expression. `walk_leaves()` and `map_leaves()` can feed later compatible array receiver links
   such as `.count()`. `reduce_leaves(...)` is terminal.
 - **Examples**:
-  - `return(items.map_leaves() { return(cat(join_values("/", array(path)), "=", value)) })`
-  - `items.walk_leaves() { paths += join_values("/", array(path)) }`
-  - `return(items.reduce_leaves(0) { return(acc.add(1)) })`
+  - After `set(array(items), ["a", ["b", "c"]])`,
+    `return(items.map_leaves() { return(cat(join_values("/", array(path)), "=", value)) })`
+    yields `[["0=a",["1/0=b","1/1=c"]]]` through the standard `demo::` wrapper.
+  - After `set(array(items), ["a", ["b", "c"]])`,
+    `set(out, items.walk_leaves() { paths += join_values("/", array(path)); return(value) }); return(copy(array(paths)))`
+    yields `[["0","1/0","1/1"]]`.
+  - After `set(array(items), ["a", ["b", "c"]])`,
+    `return(items.reduce_leaves(0) { return(acc.add(1)) })` yields `[3]`.
+  - `return(items.map_leaves() { return(value) }.count())` yields `[2]`: the top-level mapped array has two
+    elements, even though traversal visited three leaves.
 
 ### `contains(arr, needle)`
 - **Signature**: `contains(arr: array, needle: scalar)`
@@ -741,6 +811,11 @@ dispatch rule.
 - **Signature**: `split(value: scalar, delim: scalar)`
 - **Returns**: array
 - **Behavior**: Splits a string on the delimiter, returning an array of substrings.
+- **Examples**: over `/(.+)/`, `entry_group(0).split(",")` on `a,b,c` → `[["a","b","c"]]`.
+  `count(entry_group(0).split(","))` on the same input → `[3]`.
+- **Current Perl caveat**: use receiver form (`value.split(delim)`) or block form
+  `I { return(split(value, delim)) }` in runnable examples. Compact `I.return(split(...))`
+  currently surfaces an older tagged shorthand shape in the Perl reference.
 
 ### `split(array(target), source, delimiter)`
 - **Signature**: `split(array(target), source, delimiter: regex-or-scalar)`
@@ -754,36 +829,50 @@ dispatch rule.
 - **Signature**: `split_each(arr: array, delim: scalar)`
 - **Returns**: array
 - **Behavior**: Splits each element of the array on the delimiter. Results are concatenated into a single flat array.
+- **Example**: after `set(array(items), ["a:b", "c:d"])`, `return(items.split_each(":"))`
+  yields `[["a","b","c","d"]]`.
 
 ### `trim_each(arr)`
 - **Signature**: `trim_each(arr: array)`
 - **Returns**: array
 - **Behavior**: Trims whitespace from each element of the array.
+- **Example**: after `set(array(items), [" a ", " b"])`, `return(items.trim_each())`
+  yields `[["a","b"]]`.
 
 ### `filter_nonempty(arr)`
 - **Signature**: `filter_nonempty(arr: array)`
 - **Returns**: array
 - **Behavior**: Returns a new array with empty/undef elements removed.
+- **Example**: after `set(array(items), ["a", "", undef, "0", "b"])`,
+  `return(items.filter_nonempty())` yields `[["a","0","b"]]`.
 
 ### `filter_match(arr, /pattern/)`
 - **Signature**: `filter_match(arr: array, pattern: regex)`
 - **Returns**: array
 - **Behavior**: Returns elements matching the regex pattern.
+- **Example**: after `set(array(items), ["alpha", "beta", "atom"])`,
+  `return(items.filter_match(/^a/))` yields `[["alpha","atom"]]`.
 
 ### `uniq(arr)`
 - **Signature**: `uniq(arr: array)`
 - **Returns**: array
 - **Behavior**: Returns a new array with duplicates removed. Order of first occurrence is preserved.
+- **Example**: after `set(array(items), ["a", "b", "a", "c", "b"])`,
+  `return(items.uniq())` yields `[["a","b","c"]]`.
 
 ### `lowercase_each(arr)`
 - **Signature**: `lowercase_each(arr: array)`
 - **Returns**: array
 - **Behavior**: Lowercases each element.
+- **Example**: after `set(array(items), ["A", "bC"])`, `return(items.lowercase_each())`
+  yields `[["a","bc"]]`.
 
 ### `uppercase_each(arr)`
 - **Signature**: `uppercase_each(arr: array)`
 - **Returns**: array
 - **Behavior**: Uppercases each element.
+- **Example**: after `set(array(items), ["a", "bC"])`, `return(items.uppercase_each())`
+  yields `[["A","BC"]]`.
 
 ### `print_each(arr)`
 - **Signature**: `print_each(arr: array)`

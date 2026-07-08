@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.5.3 — add Array helper worked examples**
+  (DONE mdBook helper catalog examples; frontier `.5.4` next).
+
+  **Change:** Added verified Array helper examples to `helper-contract-catalog.md`, covering
+  constructor/copy/splice, count/selectors, edge slices, ordering, membership, split, pipelines,
+  mutations, receiver chains, and array-tree traversal. Added KM fact
+  `array-helper-return-shape-caveats` for shape-sensitive current Perl forms.
+
+  **Boundary:** No parser/runtime/source behavior changed. Optional behavior normalization for compact
+  split/pipeline return caveats is deferred to `.5.3.1` and is not PNT-active unless explicitly
+  activated.
+
+  **Verification:** Focused `LinkedSpec::Get` probes generated the documented outputs and confirmed
+  the caveats; mdBook, doctrine, task-tree, memory, Knowledge Map, and whitespace checks pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.20 — document lifecycle drift policy**
   (DONE policy/documentation closeout; frontier `.5.3` next).
 

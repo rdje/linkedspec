@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.5.3 — add Array helper worked examples
+
+**Scope:** mdBook helper catalog Array-family examples.
+
+**Change:** Added verified Array helper examples to `helper-contract-catalog.md`,
+covering constructor/copy/splice helpers, count/selectors, edge slices, ordering,
+membership, join/split, mutation and pipeline helpers, receiver chains, and array-tree
+traversal. Added KM fact `array-helper-return-shape-caveats` for current Perl caveats
+around compact `I.return(split(...))`, direct returns of array pipeline helpers, and
+over-broad pipeline-to-pure receiver continuations.
+
+**Validation:** Focused `LinkedSpec::Get` probes generated every documented output, plus
+negative/caveat probes for compact split and direct pipeline returns. `mdbook build
+docs/linkedspec-book` and the memory, task-tree, doctrine, whitespace, and Knowledge Map
+checks pass.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.20 — document lifecycle drift policy
 
 **Scope:** lifecycle return-channel documentation and durable policy record.

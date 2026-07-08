@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.5.3 — Array helper worked examples):
+  `helper-contract-catalog.md` now has verified Array-family examples for pure value helpers,
+  statement/mutation pipelines, receiver chains, and array-tree traversal. The verification pass found
+  three caveats worth preserving: compact `I.return(split(...))` takes an old tagged shorthand path,
+  while `I { return(split(...)) }` and receiver `.split(...)` return the plain array; direct
+  `return(split_each(array(items), ...))` returns a count-shaped value in the standard demo wrapper,
+  while receiver/assignment/mutation-plus-copy forms return arrays; and current Perl receiver chains
+  support verified pure chains and pipeline-to-terminal chains, not every pipeline-to-pure combination
+  (`items.uniq().sorted()` is not documented as portable). KM fact
+  `array-helper-return-shape-caveats` records the reverify command.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.20 — lifecycle drift policy):
   The lifecycle final-value/direct-`E` drift from `.10.5.9` is now explicitly a documented
   current Perl-reference caveat, not a hidden authorization to change the engine. Focused probes
