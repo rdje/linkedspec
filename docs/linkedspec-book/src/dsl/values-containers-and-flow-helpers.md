@@ -203,6 +203,39 @@ scoped block parameter in this MVP; mutations to other variable names persist af
 `with { ... }`, explicit receiver `.with(value) { ... }`, and delayed callback semantics are not current portable
 surfaces.
 
+Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
+values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each
+leaf for side effects and returns the original hash tree. `map_leaves() { ... }` returns a new hash tree with each
+leaf replaced by the block result. `reduce_leaves(initial) { ... }` folds leaves into an accumulator and returns the
+final accumulator. Traversal is stable sorted-key depth-first order. The block gets scoped scalar bindings:
+`value` for the current leaf, `key` for the current key, `path` for an array of path segments from the root, `depth`
+for the zero-based leaf depth, and `acc` for `reduce_leaves` only. Those scoped bindings are restored after each
+callback.
+
+```text
+tree = { "a" : "A", "b" : { "y" : "B" }, "arr" : ["u", "v"] };
+
+return(tree.map_leaves() {
+  leaf_text = if(count(array(value)), join_values("", array(value)), else(value));
+  return(cat(join_values("/", array(path)), "=", leaf_text))
+});
+
+set(array(paths), []);
+tree.walk_leaves() {
+  paths += join_values("/", array(path))
+};
+return(copy(array(paths)));  # ["a", "arr", "b/y"]
+
+return(tree.reduce_leaves(0) {
+  return(acc.add(1))
+});
+```
+
+Calling one of these traversal methods on a non-hash receiver yields `undef` and does not execute the callback.
+`walk_leaves()` and `map_leaves()` take no parenthesized arguments; `reduce_leaves(initial)` requires exactly one
+initial accumulator argument. `walk_leaves()` and `map_leaves()` return hash values and can continue into later
+hash receiver methods such as `.count_keys()`. `reduce_leaves(...)` returns the accumulator as a terminal value.
+
 ## Reading and copying collections
 
 Use explicit helpers when you need a snapshot or derived collection:

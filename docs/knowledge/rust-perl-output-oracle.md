@@ -44,7 +44,8 @@ answers:
   - "did Rust temporarily support scalaref(retv, {content}) before retirement"
   - "does child return leak into the parent accumulator in Rust"
   - "does a regex on a rule header line register in the Rust parser"
-date: 2026-07-07
+  - "when did hash tree traversal enter the Rust oracle corpus"
+date: 2026-07-08
 status: confirmed
 tags: [rust, oracle, corpus, parity, RUST-PARITY, testing]
 evidence: "RUST-PARITY.7.1 (2026-06-17): tools/gen_oracle_corpus.pl (Perl, JSON::PP->canonical(1)) emits rust/linkedspec-runtime/tests/corpus/<case>/{input.spec,input.txt,expected.json}; rust/linkedspec-runtime/tests/corpus_oracle.rs enumerates them and asserts engine.execute(input) == json!([expected]). Proven green on 2 authored grammars (scalar + nested-array). RUST-PARITY.7.5.1 (2026-06-17): fixed the header-line-regex bug (parser.rs:86 (\\S*)->([^\\s/]*)) so header-line regexes register and bracket pairs resolve open[0]/close[1] (4 unit tests; cargo test 242 passed). SPEC-FORMAT-TERSE.2.3.3.1 (2026-06-30): Rust parser/compiler/runtime now carry action-edge fluent_chain and execute no-arg .push, .return(expr), and .return_undef; focused core fluent_chain and runtime terse_2_3_3_1 tests pass. SPEC-FORMAT-TERSE.2.3.3.3.1 (2026-06-30): Rust compact lifecycle chains such as I.return(...) and I.declare(...).return(...) now normalize to lifecycle CodeBlock statements and execute. SPEC-FORMAT-TERSE.2.3.3.3.2 (2026-06-30): Rust action-edge explicit/flow chains now execute .push(target), .push(child,target), .if/.else/.endif gating, helper calls, and return continuations. SPEC-FORMAT-TERSE.2.3.3.3.3.1 (2026-06-30): Rust default mode is now zero-min repeated choice, I-block return exits child dispatch before local re-match, and tclite_command_subst/tclite_double_quote are active. RUST-PARITY.7.5.2 (2026-07-02) temporarily restored legacy Lispish scalaref parity; SCALAREF-RETIREMENT.3 migrated Lispish to direct access, and SCALAREF-RETIREMENT.4 removed scalaref implementation support. RUST-PARITY.7.2 fixed Rust captures-only numbered helper indexing and added two hlink_substitution raw-string fixtures. RUST-PARITY.7.3.2 (2026-07-03): verified the historic RTLUtils timeout is retired from the current core tree, changed gen_oracle_corpus run_oracle from alarm() to per-case fork+SIGKILL process timeout, regenerated 65 fixtures byte-identically, and proved ORACLE_TIMEOUT=0 hard-kills the first parse. RUST-PARITY.7.3.3.2 added hlink_curly_brace for {abc}; corpus_oracle passes over 66 fixtures."
@@ -58,13 +59,14 @@ evidence_update_2026_07_04_top_rule_32: "TOP-RULE-AS-NORMAL.3.2 added `top_rule_
 evidence_update_2026_07_07_public_status: "The checked-in manifest `rust/linkedspec-runtime/tests/corpus/manifest.json` records `case_count` 93. PUBLIC-STATUS-DRIFT-SYNC.1 refreshed the mdBook public status and backend handoff pages to use the then-current 93-fixture interpreter oracle boundary while keeping generated-source corpus validation described as the curated subset."
 evidence_update_2026_07_07_14_3: "SPEC-FORMAT-TERSE.14.3 added `terse_14_3_with_helper_trailing_block` after Rust parser/runtime support for helper-form `with(value) { ... }` / `with() { ... }` landed. `perl tools/gen_oracle_corpus.pl` now emits 94 fixtures, and `cargo test -p linkedspec-runtime oracle_corpus_matches_perl_reference` passes over all 94 fixtures."
 evidence_update_2026_07_07_14_4: "SPEC-FORMAT-TERSE.14.4 added `terse_14_4_receiver_with_trailing_block` after Perl/Rust support for receiver-form `.with() { ... }` landed. `perl tools/gen_oracle_corpus.pl` now emits 95 fixtures, and `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference` passes over all 95 fixtures."
-reverify: "perl -c -Iperl tools/gen_oracle_corpus.pl; ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl 2>&1 | grep 'hard kill during parser build/parse'; perl -Iperl tools/gen_oracle_corpus.pl; rg -n '\"case_count\" : 95' rust/linkedspec-runtime/tests/corpus/manifest.json; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference"
+evidence_update_2026_07_08_12_3: "SPEC-FORMAT-TERSE.12.3 added `terse_12_3_hash_tree_traversal_receiver_blocks` after Rust parser/runtime support for hash-tree receiver blocks `walk_leaves`, `map_leaves`, and `reduce_leaves` landed. `perl -Iperl tools/gen_oracle_corpus.pl` now emits 96 fixtures, and `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference -- --nocapture` passes over all 96 fixtures."
+reverify: "perl -c -Iperl tools/gen_oracle_corpus.pl; ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl 2>&1 | grep 'hard kill during parser build/parse'; perl -Iperl tools/gen_oracle_corpus.pl; rg -n '\"case_count\" : 96|terse_12_3_hash_tree_traversal_receiver_blocks' rust/linkedspec-runtime/tests/corpus/manifest.json; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference"
 ---
 
 # Perl↔Rust Output Oracle (RUST-PARITY.7)
 
-**Confirmed 2026-06-17 (RUST-PARITY.7.1); updated 2026-07-07
-(PUBLIC-STATUS-DRIFT-SYNC.1).** A language-neutral cross-variant parity gate
+**Confirmed 2026-06-17 (RUST-PARITY.7.1); updated 2026-07-08
+(SPEC-FORMAT-TERSE.12.3).** A language-neutral cross-variant parity gate
 (ADR 0006 §Phase 8.6). The Perl reference is the behavioral oracle; the corpus is its
 frozen output; `cargo test` validates the Rust backend against it with no Perl in the loop.
 
@@ -103,7 +105,7 @@ that: the Rust engine initially did **not** reproduce the shipped recursive spec
 shipped `tclite` and `Lispish` fixtures are now active; `.7.2` and `.7.3` expanded the
 green corpus to 88 fixtures, `.7.4` finalized the manifest-backed drift guard, and
 `TOP-RULE-AS-NORMAL.3.2` raised the corpus to 91 fixtures with recursive top-rule value
-cases, and later terse-language leaves raised the checked-in manifest to 95 fixtures.
+cases, and later terse-language leaves raised the checked-in manifest to 96 fixtures.
 
 - **Header-line-regex → 0-regex parser bug (`.7.5.1`, FIXED 2026-06-17; necessary, NOT
   sufficient for tclite).** `rust/linkedspec-core/src/parser.rs:86` — the rule-header regex

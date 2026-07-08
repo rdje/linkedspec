@@ -19,7 +19,7 @@
 //! expr        → primary ('.' method_call)*
 //! primary     → call | nested_access | indexed_var | literal | block | grouped | variable
 //! call        → name '(' args? ')' trailing_block? | symbol '(' args? ')'
-//! trailing_block → '{' stmts '}'          (helper-form `with(...)` and receiver `.with()`)
+//! trailing_block → '{' stmts '}'          (helper-form `with(...)`, receiver `.with()`, and hash-tree receiver methods)
 //! method_call → name '(' args? ')' trailing_block?
 //! args        → arg (',' arg)*
 //! arg         → expr | name '=' expr       (keyword argument only for keyword-aware callees)
@@ -173,6 +173,13 @@ impl Arg {
 
 // ── Display for debugging ──
 
+fn fluent_call_prints_trailing_block(call: &FluentCall) -> bool {
+    matches!(
+        call.method.as_str(),
+        "with" | "walk_leaves" | "map_leaves" | "reduce_leaves"
+    )
+}
+
 impl std::fmt::Display for Expr {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
@@ -256,7 +263,7 @@ impl std::fmt::Display for Expr {
             Expr::FluentChain { receiver, calls } => {
                 write!(f, "{receiver}")?;
                 for call in calls {
-                    if call.method == "with"
+                    if fluent_call_prints_trailing_block(call)
                         && matches!(
                             call.args.last(),
                             Some(Arg::Positional(Expr::BlockValue { .. }))
@@ -1502,7 +1509,7 @@ impl<'a> Parser<'a> {
         method: &str,
         mut args: Vec<Arg>,
     ) -> Result<Vec<Arg>, String> {
-        if method != "with" {
+        if !Self::method_allows_fluent_trailing_block(method) {
             return Ok(args);
         }
 
@@ -1512,16 +1519,36 @@ impl<'a> Parser<'a> {
             self.pos = before_whitespace;
             return Ok(args);
         }
-        if !args.is_empty() {
-            return Err(format!(
-                "receiver .with() trailing block expects no parenthesized arguments at position {}",
-                before_whitespace
-            ));
+        match method {
+            "with" | "walk_leaves" | "map_leaves" => {
+                if !args.is_empty() {
+                    return Err(format!(
+                        "receiver .{method}() trailing block expects no parenthesized arguments at position {}",
+                        before_whitespace
+                    ));
+                }
+            }
+            "reduce_leaves" => {
+                if args.len() != 1 {
+                    return Err(format!(
+                        "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:reduce_leaves: receiver .reduce_leaves(initial) trailing block expects exactly one parenthesized accumulator argument at position {}",
+                        before_whitespace
+                    ));
+                }
+            }
+            _ => unreachable!("method_allows_fluent_trailing_block checked"),
         }
 
-        let block = self.parse_attached_branch_block("with")?;
+        let block = self.parse_attached_branch_block(method)?;
         args.push(Arg::Positional(Expr::BlockValue { block }));
         Ok(args)
+    }
+
+    fn method_allows_fluent_trailing_block(method: &str) -> bool {
+        matches!(
+            method,
+            "with" | "walk_leaves" | "map_leaves" | "reduce_leaves"
+        )
     }
 
     fn callee_allows_keyword_args(callee: &str) -> bool {
@@ -2086,6 +2113,63 @@ mod tests {
         assert!(
             err.contains("receiver .with() trailing block expects no parenthesized arguments"),
             "receiver .with(value) must stay outside the .14.4 surface: {err}"
+        );
+    }
+
+    #[test]
+    fn parse_hash_tree_receiver_trailing_blocks_as_fluent_calls() {
+        let block = CodeBlock::parse(
+            r#"return(meta.map_leaves() { return(cat(key, "=", value)) }.count_keys())"#,
+        )
+        .unwrap();
+        let Expr::Call { name, args } = &block.statements[0].expr else {
+            panic!("expected return call");
+        };
+        assert_eq!(name, "return");
+        let Expr::FluentChain { receiver, calls } = args[0].value() else {
+            panic!("expected hash-tree fluent chain");
+        };
+        assert!(matches!(receiver.as_ref(), Expr::Variable { name } if name == "meta"));
+        assert_eq!(calls.len(), 2);
+        assert_eq!(calls[0].method, "map_leaves");
+        assert_eq!(calls[0].args.len(), 1);
+        assert!(matches!(calls[0].args[0].value(), Expr::BlockValue { .. }));
+        assert_eq!(calls[1].method, "count_keys");
+
+        let reducer =
+            CodeBlock::parse(r#"return(meta.reduce_leaves("") { return(cat(acc, key)) })"#)
+                .unwrap();
+        let Expr::Call { args, .. } = &reducer.statements[0].expr else {
+            panic!("expected return call");
+        };
+        let Expr::FluentChain { calls, .. } = args[0].value() else {
+            panic!("expected reduce_leaves fluent chain");
+        };
+        assert_eq!(calls.len(), 1);
+        assert_eq!(calls[0].method, "reduce_leaves");
+        assert_eq!(calls[0].args.len(), 2);
+        assert!(
+            matches!(calls[0].args[0].value(), Expr::StringLiteral { value } if value.is_empty())
+        );
+        assert!(matches!(calls[0].args[1].value(), Expr::BlockValue { .. }));
+    }
+
+    #[test]
+    fn parse_hash_tree_receiver_trailing_blocks_reject_wrong_arity() {
+        let err =
+            CodeBlock::parse(r#"return(meta.map_leaves("bad") { return(value) })"#).unwrap_err();
+        assert!(
+            err.contains(
+                "receiver .map_leaves() trailing block expects no parenthesized arguments"
+            ),
+            "map_leaves must take only its trailing block: {err}"
+        );
+
+        let err = CodeBlock::parse(r#"return(meta.reduce_leaves() { return(acc) })"#).unwrap_err();
+        assert!(
+            err.contains("LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:reduce_leaves")
+                && err.contains(".reduce_leaves(initial)"),
+            "reduce_leaves trailing block requires an initial accumulator: {err}"
         );
     }
 

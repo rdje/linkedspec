@@ -1,5 +1,5 @@
 {
-   "case_count" : 95,
+   "case_count" : 96,
    "cases" : [
       "proof_edge_array_literal",
       "proof_edge_scalar_literal",
@@ -66,6 +66,7 @@
       "terse_2_3_5_5_block_valued_receiver_chains",
       "terse_14_3_with_helper_trailing_block",
       "terse_14_4_receiver_with_trailing_block",
+      "terse_12_3_hash_tree_traversal_receiver_blocks",
       "terse_2_3_5_6_typed_wrapper_quoted_names",
       "tclite_command_subst",
       "tclite_double_quote",

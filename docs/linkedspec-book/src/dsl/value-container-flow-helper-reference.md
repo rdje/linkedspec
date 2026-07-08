@@ -847,6 +847,9 @@ Hash helpers return scalar information about an object or a new hash/array value
 | `rename_key(hash_expr, old_key, new_key)` | hash value | return a copy with one key renamed if it exists. |
 | `drop_keys(hash_expr, key, ...)` | hash value | return a copy without selected keys. |
 | `pick_keys(hash_expr, key, ...)` | hash value | return a copy containing only selected keys that exist. |
+| `hash_expr.walk_leaves() { block }` | hash value | visit every non-hash leaf for side effects and return the original tree. |
+| `hash_expr.map_leaves() { block }` | hash value | return a new tree with every non-hash leaf replaced by the block result. |
+| `hash_expr.reduce_leaves(initial) { block }` | value | fold every non-hash leaf into an accumulator. |
 
 Examples:
 
@@ -865,6 +868,15 @@ flat_count = meta.copy().flat_hash().count_keys();
 set(hash(layered), meta.merge_hash(hash("kind", "fallback")));
 layered_kind = hash(layered).pick_keys("kind").sorted_values().first();
 summary_count = hash(meta).drop_keys("debug", "span").count_keys();
+
+tree = { "a" : "A", "b" : { "y" : "B" }, "arr" : ["u", "v"] };
+mapped = tree.map_leaves() {
+  leaf_text = if(count(array(value)), join_values("", array(value)), else(value));
+  return(cat(join_values("/", array(path)), "=", leaf_text))
+};
+leaf_count = tree.reduce_leaves(0) {
+  return(acc.add(1))
+};
 ```
 
 Use `has_key(...)` when the question is "does this field exist?" Use `is_defined(hash(meta).pick_keys("kind").sorted_values().first())` or `is_defined(retv["kind"])` when the question is "is the value defined?" Those are different questions.
@@ -882,6 +894,33 @@ are for scalar hashref payloads, not named working-hash value reads. Named mutat
 form yields the updated hash snapshot in value positions. Receiver-dot `meta.set_key(key, value)` is a pure
 derived value unless assigned back. A hash-yielding expression-valued block can enter the same family, for example
 `{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")`.
+
+Hash-tree traversal receiver blocks are the non-pure block-bearing part of the hash receiver family:
+
+- `walk_leaves() { block }` visits leaves for side effects and returns the original hash tree.
+- `map_leaves() { block }` returns a new hash tree whose leaves are the block results.
+- `reduce_leaves(initial) { block }` evaluates `initial`, then folds each leaf by binding the current accumulator
+  as `acc` and using the block result as the next accumulator.
+
+A hash tree has a hash root. Nested hash values are interior nodes. Every non-hash value is a leaf, including
+arrays. Traversal order is stable sorted-key depth-first order. For the tree
+`{ "a" : "A", "arr" : ["u", "v"], "b" : { "y" : "B" } }`, the leaf paths are `a`, `arr`, and `b/y`.
+During each callback the runtime binds scoped scalars:
+
+| Binding | Meaning |
+| --- | --- |
+| `value` | current leaf value. |
+| `key` | current leaf key. |
+| `path` | array value containing root-to-leaf path segments. |
+| `depth` | zero-based leaf depth. |
+| `acc` | current accumulator, for `reduce_leaves` only. |
+
+The scoped callback bindings are restored after each callback and after traversal completes. Ordinary side effects
+to other working variables remain visible, so `walk_leaves()` is the side-effect traversal form. Calling any of the
+three traversal methods on a non-hash receiver returns `undef` and does not execute the callback. `walk_leaves()`
+and `map_leaves()` take no parenthesized arguments; `reduce_leaves(initial)` requires exactly one initial
+accumulator argument. `walk_leaves()` and `map_leaves()` return hash values and can continue into later hash
+receiver methods such as `.count_keys()`. `reduce_leaves(...)` returns the accumulator as a terminal value.
 
 The terse hash-index operator is the statement form written with the key next to the target:
 

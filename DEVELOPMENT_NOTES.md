@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-FORMAT-TERSE.12.3 — Rust hash-tree traversal receiver blocks):
+  Rust now shares the Perl `.12` surface for `hash_value.walk_leaves() { ... }`,
+  `hash_value.map_leaves() { ... }`, and `hash_value.reduce_leaves(initial) { ... }`. The parser appends trailing
+  `BlockValue` arguments for those receiver methods, with `reduce_leaves` retaining its explicit initial
+  accumulator argument. Runtime execution reuses the receiver trailing-block chain path instead of adding plain
+  helpers, so missing blocks diagnose explicitly and successful `walk_leaves` / `map_leaves` results continue into
+  existing hash-family methods such as `count_keys`. Callback variables are scoped scalar `RuntimeValue`s; unlike
+  Perl, Rust does not need aggregate mirror lexicals because `array(path)` / `array(value)` can read scalar-held
+  array values directly. The generated Rust oracle corpus is now 96 fixtures after
+  `terse_12_3_hash_tree_traversal_receiver_blocks`; public helper docs and Knowledge Map facts were updated in
+  this slice, leaving `.12.4` as the final no-drift closeout leaf.
+
 - 2026-07-08 (SPEC-FORMAT-TERSE.12.2 — Perl hash-tree traversal receiver blocks):
   The Perl reference now lowers `hash_value.walk_leaves() { ... }`,
   `hash_value.map_leaves() { ... }`, and `hash_value.reduce_leaves(initial) { ... }` as immediate receiver

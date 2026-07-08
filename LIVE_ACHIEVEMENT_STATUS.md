@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-FORMAT-TERSE.12.3 — implement Rust hash-tree traversal**
+  (DONE Rust parser/runtime parity and 96th generated oracle fixture; frontier `.12.4` final no-drift next).
+
+  **Change:** Rust now parses and executes receiver attached-block hash-tree traversal methods:
+  `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)`. Runtime traversal is sorted depth-first over hash
+  keys, arrays are leaves, callbacks get scoped `value`/`key`/`path`/`depth` plus reduction `acc`, non-hash
+  receivers return `undef` without callbacks, malformed calls diagnose explicitly, and hash-family continuations
+  after `walk_leaves` / `map_leaves` work through the existing receiver dispatcher.
+
+  **Boundary:** Public helper examples, Knowledge Map facts, and current status/count docs now name the shipped
+  hash-tree traversal surface and 96-fixture Rust oracle boundary. `.12.4` remains the final no-drift
+  scan/closeout leaf.
+
+  **Verification:** Focused Rust parser/runtime tests pass; the generated oracle corpus has 96 fixtures; the full
+  Rust corpus oracle passes over all 96 fixtures. mdBook build, memory architecture, Knowledge Map, doctrine, and
+  whitespace gates pass.
+
 - 2026-07-08: **SPEC-FORMAT-TERSE.12.2 — implement Perl hash-tree traversal**
   (DONE Perl reference implementation; frontier `.12.3` Rust parity and oracle next).
 

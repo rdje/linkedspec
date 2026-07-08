@@ -18,25 +18,25 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.12.2` — Perl reference hash-tree receiver traversal landed for
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.12.3` — Rust parser/runtime parity and the Perl-backed 96th oracle
+  fixture landed for hash-tree receiver traversal blocks.
+- prior_leaf: `SPEC-FORMAT-TERSE.12.2` — Perl reference hash-tree receiver traversal landed for
   `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` with scoped callback bindings and sorted traversal.
-- prior_leaf: `SPEC-FORMAT-TERSE.12.1` — reactivated and split hash-tree attached-block traversal before
-  implementation; the accepted MVP surface is receiver-only `walk_leaves`, `map_leaves`, and `reduce_leaves`.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-FORMAT-TERSE.12.2 - implement Perl hash-tree traversal`; parent before this slice is
-  `SPEC-FORMAT-TERSE.12.1 - activate hash-tree traversal split`.
+  `SPEC-FORMAT-TERSE.12.3 - implement Rust hash-tree traversal`; parent before this slice is
+  `SPEC-FORMAT-TERSE.12.2 - implement Perl hash-tree traversal`.
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
 - active_work_unit: `SPEC-FORMAT-TERSE.12` hash-tree traversal lane reactivated by user directive 2026-07-08;
-  `.12.1` owns the committed split/spec contract and `.12.2` owns the Perl reference implementation.
-- next_action: implement `SPEC-FORMAT-TERSE.12.3` Rust parser/runtime parity plus generated oracle fixtures for
-  hash-tree traversal receiver blocks.
+  `.12.1` owns the split/spec contract, `.12.2` owns Perl reference, and `.12.3` owns Rust/oracle parity.
+- next_action: implement `SPEC-FORMAT-TERSE.12.4` final no-drift closeout for the shipped hash-tree traversal
+  receiver surface, verifying mdBook, Knowledge Map, live docs, oracle state, and task-tree frontier alignment.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, mdBook source, core Perl/Rust implementation, shipped specs, tooling, and focused
   test harness inventory. Startup found isolated Rust README drift now owned by `RUST-README-DRIFT-SYNC`.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine
   tracking update may be opened only after this repo is clean.
-- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests (e.g. 102 pplugin lazy-load) fail on the stale checkout. Full phase0 needs the **10-min timeout** (`timeout:600000`), else it caps mid-run (exit 144/143). **Generated Perl handlers are NON-strict.** **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`). Current phase0 reaches **PASS `1..1027`**. oracle = `tools/gen_oracle_corpus.pl` (per-case fork/SIGKILL; **95** fixtures → **run in background**; `manifest.json` + drift guards). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`. Rust numbered capture helpers are captures-only (`0`=first capture); whole match = `entry_text()`/`match_text()`.
+- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests (e.g. 102 pplugin lazy-load) fail on the stale checkout. Full phase0 needs the **10-min timeout** (`timeout:600000`), else it caps mid-run (exit 144/143). **Generated Perl handlers are NON-strict.** **Rust = interpreter** at `rust/` (working vars auto-vivify; fresh ctx per `execute`). Current phase0 reaches **PASS `1..1027`**. oracle = `tools/gen_oracle_corpus.pl` (per-case fork/SIGKILL; **96** fixtures → **run in background**; `manifest.json` + drift guards). `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`. Rust numbered capture helpers are captures-only (`0`=first capture); whole match = `entry_text()`/`match_text()`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Remaining open deferred/paused lanes outside current `.12`: `SPEC-FORMAT-TERSE`
   `.10`/`.13`, `DOCTRINE-ENFORCEMENT-ADOPT.3`, and `SPEC-LANG-REFERENCE`.

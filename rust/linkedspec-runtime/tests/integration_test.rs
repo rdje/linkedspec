@@ -2520,6 +2520,63 @@ fn terse_14_4_receiver_with_trailing_block_restores_outer_value_binding() {
     );
 }
 
+// ── SPEC-FORMAT-TERSE.12.3 — hash-tree receiver traversal parity:
+
+#[test]
+fn terse_12_3_hash_tree_receiver_blocks_map_reduce_walk() {
+    let grammar = "Top::\n /x/ -> Done { meta = { \"b\" : { \"y\" : \"B\" }, \"a\" : \"A\", \"arr\" : [\"u\", \"v\"] }; return(array(meta.map_leaves() { return(cat(join_values(\"/\", array(path)), \"=\", if(count(array(value)), join_values(\"\", array(value)), else(value)))) }, meta.reduce_leaves(\"\") { return(cat(acc, key)) }, meta.walk_leaves() { seen += join_values(\"/\", array(path)); return(value) }.count_keys(), array(seen))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[{"a": "a=A", "arr": "arr=uv", "b": {"y": "b/y=B"}}, "aarry", 3, ["a", "arr", "b/y"]]]),
+        "hash-tree receiver blocks traverse sorted depth-first leaves, treat arrays as leaves, and keep hash continuations"
+    );
+}
+
+#[test]
+fn terse_12_3_hash_tree_receiver_blocks_empty_tree_and_non_hash() {
+    let grammar = "Top::\n /x/ -> Done { empty = {}; scalar = \"x\"; return(array(empty.map_leaves() { touched += \"bad\" }.count_keys(), empty.reduce_leaves(\"seed\") { return(cat(acc, key)) }, empty.walk_leaves() { touched += \"bad\" }.count_keys(), array(touched), is_undefined(scalar.map_leaves() { touched += \"bad\" }), is_undefined(scalar.reduce_leaves(\"seed\") { touched += \"bad\" }), is_undefined(scalar.walk_leaves() { touched += \"bad\" }), array(touched))) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[0, "seed", 0, [], true, true, true, []]]),
+        "empty hash trees run no callbacks, and non-hash receivers return undef without callbacks"
+    );
+}
+
+#[test]
+fn terse_12_3_hash_tree_receiver_blocks_restore_callback_bindings() {
+    let grammar = "Top::\n /x/ -> Done { meta = { \"a\" : \"A\" }; value = \"outer_value\"; key = \"outer_key\"; path = \"outer_path\"; depth = \"outer_depth\"; acc = \"outer_acc\"; mapped = meta.map_leaves() { value = cat(value, \"!\"); key = \"inner_key\"; path = [\"inner_path\"]; depth = 99; return(value) }; reduced = meta.reduce_leaves(\"seed\") { acc = cat(acc, key); return(acc) }; return(array(mapped[\"a\"], reduced, value, key, path, depth, acc)) }\n\nDone::\n /[a-z]+/\n";
+    assert_eq!(
+        build_and_run(grammar, "xhello"),
+        serde_json::json!([[
+            "A!",
+            "seeda",
+            "outer_value",
+            "outer_key",
+            "outer_path",
+            "outer_depth",
+            "outer_acc"
+        ]]),
+        "callback scoped variables restore any outer bindings after map/reduce blocks"
+    );
+}
+
+#[test]
+fn terse_12_3_hash_tree_receiver_blocks_reject_malformed_calls() {
+    let missing_block = "Top::\n /x/ -> Done { meta = { \"a\" : \"A\" }; return(meta.map_leaves()) }\n\nDone::\n /[a-z]+/\n";
+    let err = build_and_run_result(missing_block, "xhello").unwrap_err();
+    assert!(
+        err.contains("LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:map_leaves"),
+        "map_leaves without a trailing block must produce an explicit diagnostic: {err}"
+    );
+
+    let missing_reduce_block = "Top::\n /x/ -> Done { meta = { \"a\" : \"A\" }; return(meta.reduce_leaves(\"seed\")) }\n\nDone::\n /[a-z]+/\n";
+    let err = build_and_run_result(missing_reduce_block, "xhello").unwrap_err();
+    assert!(
+        err.contains("LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:reduce_leaves"),
+        "reduce_leaves without a trailing block must produce an explicit diagnostic: {err}"
+    );
+}
+
 // ── SPEC-FORMAT-TERSE.2.3.2 — lifecycle block value/drop channel:
 // lifecycle blocks execute statements and discard statement values. A top-level
 // lifecycle return(expr) records a surrounding rule return event, while

@@ -1049,6 +1049,21 @@ Done::
  /[a-z]+/
 SPEC
     },
+    # ── SPEC-FORMAT-TERSE.12.3 — Rust hash-tree traversal parity ──
+    #
+    # Hash-tree receiver blocks traverse hash roots/interior nodes in sorted
+    # depth-first order, bind scoped leaf callback variables, treat arrays as
+    # leaves, and preserve hash-family continuation for walk/map.
+    {   case   => 'terse_12_3_hash_tree_traversal_receiver_blocks',
+        input  => 'xhello',
+        source => <<'SPEC',
+Top::
+ /x/ -> Done { meta = { "b" : { "y" : "B" }, "a" : "A", "arr" : ["u", "v"] }; nonhash = "x".map_leaves() { seen += "bad" }; return(array(meta.map_leaves() { return(cat(join_values("/", array(path)), "=", if(count(array(value)), join_values("", array(value)), else(value)))) }, meta.reduce_leaves("") { return(cat(acc, key)) }, meta.walk_leaves() { seen += join_values("/", array(path)); return(value) }.count_keys(), array(seen), if(is_undefined(nonhash), "undef", else("bad")))) }
+
+Done::
+ /[a-z]+/
+SPEC
+    },
     # ── SPEC-FORMAT-TERSE.2.3.5.6 — typed wrapper quoted-name boundaries ──
     #
     # Single-argument aggregate wrappers name a working variable only when the

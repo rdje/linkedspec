@@ -598,6 +598,8 @@ sorted_keys(hash)       — keys sorted by name, as array
 sorted_values(hash)     — values sorted by key name, as array
 hash_expr.set_key(k, v).sorted_keys().join_values(delim)
                         — receiver-dot hash value chain over compatible pure hash/array helpers
+hash_expr.map_leaves() { return(value) }
+                        — hash-tree receiver block traversal over non-hash leaves
 contains(arr, needle)   — array membership test
 index_of(arr, needle)   — first index of needle
 is_empty(arr)           — true if array/hash is empty
@@ -629,6 +631,12 @@ drop_keys(h, k1, k2...)  — remove keys (returns new hash)
 pick_keys(h, k1, k2...)  — keep only named keys (returns new hash)
 has_key(h, key)          — key presence test
 count_keys(h)            — number of keys
+hash_expr.walk_leaves() { block }
+                        — visit every non-hash leaf for side effects, returns original hash
+hash_expr.map_leaves() { block }
+                        — replace every non-hash leaf with block result, returns new hash
+hash_expr.reduce_leaves(initial) { block }
+                        — fold every non-hash leaf into acc, returns final accumulator
 ```
 
 ### 7.5 Numeric Helpers

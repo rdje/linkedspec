@@ -1,6 +1,34 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-FORMAT-TERSE.12.3 — implement Rust hash-tree traversal
+
+**Scope:** Rust parser/runtime parity plus generated Perl-backed oracle coverage for hash-tree attached-block
+receiver traversal.
+
+**Change:** The Rust expression parser now accepts receiver trailing blocks for `walk_leaves`,
+`map_leaves`, and `reduce_leaves(initial)` and preserves that syntax in fluent-chain display. The runtime routes
+hash-tree receiver calls through the trailing-block execution path, diagnoses missing/malformed blocks with
+`LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<method>`, walks hash-root/hash-interior value trees in sorted depth-first
+order, treats arrays as leaves, binds scoped `value`, `key`, `path`, `depth`, and reduction-only `acc`, restores
+outer bindings, returns `undef` for non-hash receivers without callbacks, and preserves hash-family continuations
+after `walk_leaves` / `map_leaves`. The generated oracle corpus now includes
+`terse_12_3_hash_tree_traversal_receiver_blocks`; the manifest is at 96 fixtures and the Rust corpus oracle passes.
+
+**Boundary:** Public mdBook helper/reference examples and Knowledge Map facts were updated in this slice to avoid
+post-commit drift. `.12.4` remains the final no-drift closeout and scan/verification leaf for the shipped `.12`
+surface.
+
+**Validation:** `cargo fmt --manifest-path rust/linkedspec-core/Cargo.toml`;
+`cargo fmt --manifest-path rust/linkedspec-runtime/Cargo.toml`;
+`cargo test --manifest-path rust/linkedspec-core/Cargo.toml hash_tree_receiver -- --nocapture`;
+`cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml terse_12_3 -- --nocapture`;
+`perl -Iperl -c tools/gen_oracle_corpus.pl`; direct Perl oracle probe for the new fixture;
+`perl -Iperl tools/gen_oracle_corpus.pl` (Generated 96 oracle fixtures);
+`cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference -- --nocapture`
+(PASS, 96 fixtures); `mdbook build docs/linkedspec-book`; `bash scripts/check_memory_architecture.sh`;
+`bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `git diff --check`.
+
 ## 2026-07-08 — SPEC-FORMAT-TERSE.12.2 — implement Perl hash-tree traversal
 
 **Scope:** Perl reference parser/lowering support for hash-tree attached-block receiver traversal.

@@ -638,6 +638,42 @@ dispatch rule.
 - **Block receivers**: An expression-valued block whose value is a hash can be the receiver, for example
   `{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")`.
 
+### Hash-tree receiver block traversal: `walk_leaves`, `map_leaves`, `reduce_leaves`
+- **Signatures**:
+  - `hash_expr.walk_leaves() { block }`
+  - `hash_expr.map_leaves() { block }`
+  - `hash_expr.reduce_leaves(initial_acc: expr) { block }`
+- **Returns**:
+  - `walk_leaves` returns the original hash tree after running callbacks.
+  - `map_leaves` returns a new hash tree with each leaf replaced by the callback result.
+  - `reduce_leaves` returns the final accumulator.
+- **Backend status**: Perl reference and Rust interpreter support are current.
+- **Tree shape**: The receiver must be a hash. Nested hashes are interior nodes. Every non-hash value is a leaf,
+  including arrays.
+- **Traversal order**: Sorted-key depth-first traversal. For `{ "a" : "A", "arr" : ["u", "v"], "b" : { "y" : "B" } }`,
+  callbacks run for paths `a`, `arr`, then `b/y`.
+- **Callback bindings**: Each callback runs immediately in the caller's current action/runtime context with scoped
+  scalar bindings:
+  - `value`: current leaf value.
+  - `key`: current leaf key.
+  - `path`: array value containing root-to-leaf path segments.
+  - `depth`: zero-based leaf depth.
+  - `acc`: current accumulator for `reduce_leaves` only.
+- **Binding restoration**: The traversal restores those scoped names after each callback and after traversal
+  completes. Mutations to other working variables are ordinary side effects and persist.
+- **Return semantics**: `return(expr)` inside the callback is block-local and supplies that callback's result. In
+  `map_leaves`, the result replaces the current leaf. In `reduce_leaves`, the result becomes the next accumulator.
+  In `walk_leaves`, the result is ignored.
+- **Edge cases**: A non-hash receiver yields `undef` and does not execute the callback. `walk_leaves()` and
+  `map_leaves()` take no parenthesized arguments. `reduce_leaves(initial)` requires exactly one parenthesized
+  initial accumulator expression. `walk_leaves()` and `map_leaves()` return hash values and can feed later hash
+  receiver links such as `.count_keys()`. `reduce_leaves(...)` is terminal. These are immediate receiver block
+  methods, not closures or delayed callbacks.
+- **Examples**:
+  - `return(tree.map_leaves() { return(cat(join_values("/", array(path)), "=", value)) })`
+  - `tree.walk_leaves() { paths += join_values("/", array(path)) }`
+  - `return(tree.reduce_leaves(0) { return(acc.add(1)) })`
+
 ### `contains(arr, needle)`
 - **Signature**: `contains(arr: array, needle: scalar)`
 - **Returns**: boolean
@@ -1335,7 +1371,8 @@ Receiver-dot methods are available for the value families that have a typed rece
   `sum`, `avg`, `median`, `range`, `min`, and `max`.
 - **Hash** receivers support pure hash links such as `copy`, `merge_hash`, `set_key`, `rename_key`,
   `drop_keys`, `pick_keys`, and `flat_hash`; `sorted_keys` and `sorted_values` bridge to array chains; `count_keys`
-  and `has_key` are terminal.
+  and `has_key` are terminal. Hash-tree traversal receiver methods `walk_leaves`, `map_leaves`, and
+  `reduce_leaves` are immediate block-bearing links with their own scoped callback bindings.
 - **Number** receivers support terse numeric links such as `abs`, `floor`, `ceil`, `round`, `add`, `sub`, `mul`,
   `div`, `mod`, `clamp`, `min`, and `max`; `eq`, `ne`, `gt`, `ge`, `lt`, and `le` are terminal numeric
   comparisons.
@@ -1357,7 +1394,7 @@ that subset remain a separately locked surface.
 Most helpers propagate `undef` from their inputs to their outputs. Explicit `coalesce(...)` is the canonical way to provide a default. No helper silently converts `undef` to `0` or `""` unless documented otherwise.
 
 ### No Mutation Guarantee
-Helpers that return arrays or hashes (`copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. Statement forms such as `name = value`, `items += value`, `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, `items.pop_front()`, `set_key(name, key, value)`, and `name[key] = value` are the explicit mutation forms.
+Helpers that return arrays or hashes (`copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `map_leaves`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. `walk_leaves` is the explicit hash-tree side-effect traversal: it returns the original tree and preserves ordinary callback side effects. Statement forms such as `name = value`, `items += value`, `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, `items.pop_front()`, `set_key(name, key, value)`, and `name[key] = value` are the explicit mutation forms.
 
 ### Terse Helper Renames (canonical going forward)
 The `.spec` format has migrated these helper families to terser spellings. The **terse spelling is canonical**;
