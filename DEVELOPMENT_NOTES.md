@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-FORMAT-TERSE.13.2 — Perl array-tree traversal):
+  `MethodLowering.pm` now uses one tree-traversal receiver path for `walk_leaves`, `map_leaves`, and
+  `reduce_leaves(initial)`, with runtime dispatch for hash vs array receiver values. Hash receivers preserve the
+  `.12` sorted-key traversal contract. Array receivers traverse nested arrays by zero-based index and treat hashes
+  as leaves; callback blocks get scoped `value`, `index`, `path`, `depth`, and reduce-only `acc`. Array
+  `walk_leaves` / `map_leaves` can feed compatible array receiver methods such as `.count()`. Rust parser/runtime
+  parity and the generated oracle fixture remain owned by `.13.3`, so book wording must label this as Perl
+  reference support until that parity leaf lands.
+
 - 2026-07-08 (SPEC-FORMAT-TERSE.13.1 — array-tree traversal split):
   `.13` is active and split before parser/runtime code. The accepted MVP reuses the `.12` immediate receiver
   block method names on array-valued receivers: `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)`.

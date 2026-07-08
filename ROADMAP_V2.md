@@ -293,8 +293,11 @@ DSL helper surface consistency note:
   `.14.3` landed Rust helper-function form parity and added the `terse_14_3_with_helper_trailing_block` oracle fixture;
   `.14.4` landed receiver `.with() { ... }` on Perl/Rust and added
   `terse_14_4_receiver_with_trailing_block`; and `.14.5` closed the trailing block-argument docs/KM/oracle
-  no-drift sweep. `SPEC-FORMAT-TERSE.10` and `.13` remain deferred unless explicitly activated; `.12` is closed
-  through `.12.4` after docs/KM/no-drift closeout. The Rust oracle corpus is now 96 fixtures after
+  no-drift sweep. `SPEC-FORMAT-TERSE.10` is closed by `.10.1`, which ratified dynamic/computed hash-literal keys
+  without parser/runtime changes. The user explicitly reactivated `.13`; `.13.1` split the array-tree traversal
+  work before code, `.13.2` landed Perl reference support for array-valued `walk_leaves`, `map_leaves`, and
+  `reduce_leaves(initial)` receiver blocks, and `.13.3` is the current Rust/oracle parity frontier. `.12` is
+  closed through `.12.4` after docs/KM/no-drift closeout. The Rust oracle corpus is now 96 fixtures after
   `.12.3` added `terse_12_3_hash_tree_traversal_receiver_blocks`; it had reached 95 fixtures after `.14.4`, and
   93 fixtures after `.15.2.3` added
   `terse_15_2_3_bare_value_reads_and_case_labels`, and 92 fixtures after

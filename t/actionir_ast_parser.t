@@ -126,6 +126,17 @@ subtest 'trailing block call arguments' => sub {
     is($hash_tree->{calls}[0]{args}[0]{kind}, 'block_value',
         'map_leaves() block is the final argument');
 
+    my $array_tree = parse_expr('items.map_leaves() { return(cat(index, "=", value)) }.count()');
+    is($array_tree->{kind}, 'fluent_chain', 'array-tree receiver trailing block parses as the same fluent chain shape');
+    is_deeply([map { $_->{method} } @{$array_tree->{calls}}], ['map_leaves', 'count'],
+        'array-tree receiver trailing block preserves later array-family fluent calls');
+    ok($array_tree->{calls}[0]{receiver_trailing_block_arg},
+        'array-tree receiver trailing block segment is explicitly flagged');
+    is(scalar(@{$array_tree->{calls}[0]{args}}), 1,
+        'array-tree map_leaves() carries only the trailing block argument');
+    is($array_tree->{calls}[0]{args}[0]{kind}, 'block_value',
+        'array-tree map_leaves() block is the final argument');
+
     my $reducer = parse_expr('meta.reduce_leaves("") { return(cat(acc,value)) }');
     ok($reducer->{calls}[0]{receiver_trailing_block_arg}, 'reduce_leaves(...) trailing block is flagged');
     is(scalar(@{$reducer->{calls}[0]{args}}), 2,

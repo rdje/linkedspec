@@ -10,16 +10,16 @@ answers:
   - "does array tree traversal use walk_leaves map_leaves reduce_leaves"
   - "is array tree traversal shipped"
 date: 2026-07-08
-status: planned
-tags: [spec-format-terse, array-tree, traversal, trailing-block, planned, SPEC-FORMAT-TERSE]
-evidence: "SPEC-FORMAT-TERSE.13.1 reactivated and split array-tree traversal before parser/runtime code. The accepted MVP reuses the immediate receiver block method names `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` on array-valued receivers. Array roots and nested arrays are traversal nodes; scalar and hash values are leaves; hashes are not traversed recursively. Traversal is depth-first in zero-based index order. Callback bindings are scoped `value`, `index`, `path`, `depth`, and reduce-only `acc`. This is planned until `.13.2` Perl implementation, `.13.3` Rust/oracle parity, and `.13.4` docs/KM/no-drift closeout land."
+status: partial
+tags: [spec-format-terse, array-tree, traversal, trailing-block, perl-reference, planned, SPEC-FORMAT-TERSE]
+evidence: "SPEC-FORMAT-TERSE.13.1 reactivated and split array-tree traversal before parser/runtime code. The accepted MVP reuses the immediate receiver block method names `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` on array-valued receivers. Array roots and nested arrays are traversal nodes; scalar and hash values are leaves; hashes are not traversed recursively. Traversal is depth-first in zero-based index order. Callback bindings are scoped `value`, `index`, `path`, `depth`, and reduce-only `acc`. SPEC-FORMAT-TERSE.13.2 landed the Perl reference implementation and phase0 `1..1028`; Rust/oracle parity remains pending under `.13.3`, and `.13.4` owns final docs/KM/no-drift closeout."
 reverify: "rg -n 'SPEC-FORMAT-TERSE\\.13|array-tree|array tree|walk_leaves|map_leaves|reduce_leaves|value`/`index`/`path`/`depth|hash values are leaves' docs/tasks/SPEC-FORMAT-TERSE.md docs/knowledge/array-tree-traversal-contract.md"
 ---
 
 # Array-Tree Traversal Contract
 
-`SPEC-FORMAT-TERSE.13.1` accepts array-tree traversal into the active terse-format roadmap, but it is not shipped
-until the implementation and closeout leaves land.
+`SPEC-FORMAT-TERSE.13.1` accepted array-tree traversal into the active terse-format roadmap. `SPEC-FORMAT-TERSE.13.2`
+landed the Perl reference implementation; Rust/oracle parity remains pending under `.13.3`.
 
 The planned receiver-only surface reuses the immediate trailing-block traversal methods:
 

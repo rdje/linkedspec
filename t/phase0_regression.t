@@ -47962,6 +47962,94 @@ subtest 'spec_format_terse_12_2_perl_hash_tree_traversal_receiver_blocks' => sub
         'hash-tree traversal spec remains ActionIR ready on the Perl reference');
 };
 
+subtest 'spec_format_terse_13_2_perl_array_tree_traversal_receiver_blocks' => sub {
+    # SPEC-FORMAT-TERSE.13.2: array-tree traversal receiver methods use
+    # immediate attached blocks. Traversal is depth-first by zero-based index;
+    # hashes are leaves; callback bindings are scoped.
+    plan tests => 19;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval { local $SIG{ALRM} = sub { die "hang\n" }; alarm(8); my $r = $p->(\$in); alarm(0); $J->encode($r) };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+    my $gen = sub {
+        my ($spec) = @_;
+        my $src = '';
+        eval { LinkedSpec::Get(\$spec, generate_only => 1, dump_parser_source => 1, parser_source_ref => \$src); 1 }
+            or return "ERR:$@";
+        return $src;
+    };
+
+    my $map_lowered = $L->('return(items.map_leaves() { return(cat(join_values("/", array(path)), "=", value)) }.count())');
+    like($map_lowered, qr/__ls_array_tree_map.*__ls_array_tree_leaf_index.*__ls_count/s,
+        'map_leaves lowers as array-tree traversal and can feed count');
+    unlike($map_lowered, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/,
+        'array map_leaves lowering has no unsupported-helper sentinel');
+    like($L->('return(items.reduce_leaves("") { return(cat(acc, value)) })'), qr/__ls_array_tree_reduce.*my \$acc/s,
+        'array reduce_leaves lowers with scoped accumulator binding');
+    like($L->('return(items.walk_leaves() { seen += join_values("/", array(path)); return(value) }.count())'),
+        qr/__ls_array_tree_walk.*push \@seen.*__ls_count/s,
+        'array walk_leaves lowers side-effect traversal and returns the original array value');
+    like($L->('return(items.map_leaves())'), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:map_leaves/,
+        'array map_leaves without a trailing block is rejected by lowering diagnostics');
+    like($L->('return(items.reduce_leaves() { return(value) })'), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:reduce_leaves/,
+        'array reduce_leaves requires an initial accumulator argument');
+
+    my $main_spec = "Top::\n"
+                  . " /x/ -> Done { items = [\"a\", [\"b\", \"c\"], { \"h\" : \"H\" }]; return(array(items.map_leaves() { return(cat(join_values(\"/\", array(path)), \"=\", if(count(hash(value).sorted_keys()), cat(\"{\", hash(value).sorted_keys().join_values(\",\"), \"}\"), else(value)))) }, items.reduce_leaves(\"\") { return(cat(acc, join_values(\"/\", array(path)), \":\", if(count(hash(value).sorted_keys()), cat(\"{\", hash(value).sorted_keys().join_values(\",\"), \"}\"), else(value)), \";\")) }, items.walk_leaves() { seen += join_values(\"/\", array(path)); return(value) }.count(), array(seen))) }\n"
+                  . "\nDone::\n /[a-z]+/\n";
+    my $main_parser = eval { LinkedSpec::Get(\$main_spec) };
+    ok(ref($main_parser) eq 'CODE', 'array-tree traversal spec compiles')
+        or diag(normalize_error($@));
+    is($run->($main_parser, 'xhello'),
+        '[["0=a",["1/0=b","1/1=c"],"2={h}"],"0:a;1/0:b;1/1:c;2:{h};",3,["0","1/0","1/1","2"]]',
+        'map/reduce/walk traverse array leaves in index order, treat hashes as leaves, and expose path/index/value');
+
+    my $empty_spec = "Top::\n"
+                   . " /x/ -> Done { items = []; return(array(items.map_leaves() { return(\"bad\") }.count(), items.reduce_leaves(\"seed\") { return(\"bad\") }, items.walk_leaves() { seen += \"bad\"; return(value) }.count(), array(seen))) }\n"
+                   . "\nDone::\n /[a-z]+/\n";
+    my $empty_parser = eval { LinkedSpec::Get(\$empty_spec) };
+    ok(ref($empty_parser) eq 'CODE', 'empty array-tree traversal spec compiles')
+        or diag(normalize_error($@));
+    is($run->($empty_parser, 'xhello'), '[0,"seed",0,[]]',
+        'empty valid array trees run no callbacks and reduce returns the initial accumulator');
+
+    my $invalid_spec = "Top::\n"
+                     . " /x/ -> Done { thing = \"x\"; return(array(is_undefined(thing.map_leaves() { touched += \"bad\"; return(value) }), is_undefined(thing.reduce_leaves(\"seed\") { touched += \"bad\"; return(value) }), is_undefined(thing.walk_leaves() { touched += \"bad\"; return(value) }), array(touched))) }\n"
+                     . "\nDone::\n /[a-z]+/\n";
+    my $invalid_parser = eval { LinkedSpec::Get(\$invalid_spec) };
+    ok(ref($invalid_parser) eq 'CODE', 'non-array scalar receiver traversal spec compiles')
+        or diag(normalize_error($@));
+    is($run->($invalid_parser, 'xhello'), '[1,1,1,[]]',
+        'non-array scalar receivers return undef without running callbacks');
+
+    my $scope_spec = "Top::\n"
+                   . " /x/ -> Done { value = \"outer\"; index = \"outer_index\"; path = \"outer_path\"; depth = \"outer_depth\"; acc = \"outer_acc\"; items = [\"A\"]; mapped = items.map_leaves() { value = cat(value,\"!\"); index = 9; path = [\"inner\"]; depth = 99; return(cat(value,index)) }; reduced = items.reduce_leaves(\"seed\") { acc = cat(acc,index); return(acc) }; return(array(mapped[0], reduced, value, index, path, depth, acc)) }\n"
+                   . "\nDone::\n /[a-z]+/\n";
+    my $scope_parser = eval { LinkedSpec::Get(\$scope_spec) };
+    ok(ref($scope_parser) eq 'CODE', 'array-tree traversal scoped-binding spec compiles')
+        or diag(normalize_error($@));
+    is($run->($scope_parser, 'xhello'), '["A!9","seed0","outer","outer_index","outer_path","outer_depth","outer_acc"]',
+        'callback bindings restore outer value/index/path/depth/acc scalars');
+
+    my $src = $gen->($main_spec);
+    unlike($src, qr/\.(?:map_leaves|walk_leaves|reduce_leaves)\b/,
+        'generated source has no receiver array-tree method syntax residue');
+    unlike($src, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/,
+        'generated source has no array-tree unsupported-helper sentinel');
+    my $d = LinkedSpec::Get(\$main_spec, return_descriptor => 1);
+    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
+    is($meta->{canonical_action_ir_fallback_count}, 0,
+        'array-tree traversal spec has no canonical fallback');
+    is($meta->{unresolved_helper_count}, 0,
+        'array-tree traversal spec has no unresolved helper');
+    ok($meta->{language_agnostic_action_ir_ready},
+        'array-tree traversal spec remains ActionIR ready on the Perl reference');
+};
+
 subtest 'spec_format_terse_2_3_4_2_perl_inline_value_control_lowering' => sub {
     # SPEC-FORMAT-TERSE.2.3.4.2: inline-composite if/switch are value expressions
     # on the Perl reference too. The statement-marker and attached-block control

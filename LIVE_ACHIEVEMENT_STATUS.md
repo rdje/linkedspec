@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-FORMAT-TERSE.13.2 — implement Perl array-tree traversal**
+  (DONE Perl reference implementation; frontier `.13.3` Rust/oracle parity).
+
+  **Change:** Perl now lowers receiver `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` through shared
+  tree traversal dispatch. Hash receivers keep the `.12` sorted-key semantics; array receivers traverse nested
+  arrays depth-first by zero-based index, treat hashes as leaves, bind scoped `value`, `index`, `path`, `depth`,
+  and reduce-only `acc`, and return `undef` without callbacks for scalar receivers.
+
+  **Boundary:** Rust runtime parity and the generated oracle fixture are not landed yet; `.13.3` owns that work.
+  The mdBook status note labels array-tree traversal as Perl-reference current / Rust pending until `.13.3` and
+  `.13.4` close.
+
+  **Verification:** `MethodLowering.pm` syntax check, focused lowering/runtime/source-residue probes, parser AST
+  test, and full Perl phase0 pass (`Files=1, Tests=1028`, `Result: PASS`), plus Knowledge/live-doc sync.
+
 - 2026-07-08: **SPEC-FORMAT-TERSE.13.1 — split array-tree traversal**
   (DONE spec-first split; frontier `.13.2` Perl reference implementation).
 

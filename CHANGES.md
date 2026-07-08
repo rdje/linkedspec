@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-FORMAT-TERSE.13.2 — implement Perl array-tree traversal
+
+**Scope:** Perl reference implementation for array-valued receiver block traversal methods.
+
+**Change:** Extended the shared receiver traversal lowering so `walk_leaves() { ... }`,
+`map_leaves() { ... }`, and `reduce_leaves(initial) { ... }` dispatch over hash or array receiver values at
+runtime. Hash receivers preserve the shipped `.12` sorted-key traversal behavior. Array receivers traverse nested
+arrays depth-first by zero-based index, treat hash values as leaves, bind scoped `value`, `index`, `path`, `depth`,
+and reduce-only `acc`, and return `undef` without callbacks for scalar receivers.
+
+**Validation:** `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`; focused lowering/runtime/source-residue
+probes; `prove -q -Iperl t/actionir_ast_parser.t`; full `PERL5LIB= prove -q -Iperl t/phase0_regression.t`
+(`Files=1, Tests=1028`, `Result: PASS`); mdBook/Knowledge/live-doc updates.
+
 ## 2026-07-08 — SPEC-FORMAT-TERSE.13.1 — split array-tree traversal
 
 **Scope:** Spec-first task split for the remaining `SPEC-FORMAT-TERSE` array-tree traversal backlog item.

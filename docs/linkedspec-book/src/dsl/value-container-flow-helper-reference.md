@@ -924,6 +924,31 @@ and `map_leaves()` take no parenthesized arguments; `reduce_leaves(initial)` req
 accumulator argument. `walk_leaves()` and `map_leaves()` return hash values and can continue into later hash
 receiver methods such as `.count_keys()`. `reduce_leaves(...)` returns the accumulator as a terminal value.
 
+Array-tree traversal uses the same receiver method names on array-valued receivers in the Perl reference. Rust
+runtime/oracle parity is tracked under `SPEC-FORMAT-TERSE.13.3`, so treat this as a staged rollout until that leaf
+lands. An array tree has an array root, nested arrays as interior nodes, and scalar or hash leaves. Hash leaves are
+not traversed recursively. Traversal is depth-first by zero-based index. Callback blocks get scoped `value`,
+`index`, `path`, `depth`, and reduction-only `acc`. Empty arrays run no callbacks and
+`reduce_leaves(initial)` returns `initial`; scalar receivers return `undef` without callbacks. `walk_leaves()` and
+`map_leaves()` can feed array-family links such as `.count()`.
+
+```text
+items = ["a", ["b", "c"], { "h" : "H" }];
+paths = [];
+
+mapped = items.map_leaves() {
+  return(cat(join_values("/", array(path)), "=", value))
+};
+
+items.walk_leaves() {
+  paths += join_values("/", array(path))
+};
+
+leaf_count = items.reduce_leaves(0) {
+  return(acc.add(1))
+};
+```
+
 The terse hash-index operator is the statement form written with the key next to the target:
 
 ```text

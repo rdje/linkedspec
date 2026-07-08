@@ -238,6 +238,27 @@ Calling one of these traversal methods on a non-hash receiver yields `undef` and
 initial accumulator argument. `walk_leaves()` and `map_leaves()` return hash values and can continue into later
 hash receiver methods such as `.count_keys()`. `reduce_leaves(...)` returns the accumulator as a terminal value.
 
+The Perl reference also supports the same receiver block methods on array trees while Rust parity is pending under
+`SPEC-FORMAT-TERSE.13.3`. Array roots and nested arrays are traversal nodes. Scalar and hash values are leaves, and
+hash leaves are not traversed recursively. Traversal is depth-first by zero-based index. Callback blocks get scoped
+`value`, `index`, `path`, `depth`, and reduction-only `acc`.
+
+```text
+items = ["a", ["b", "c"], { "h" : "H" }];
+
+return(items.map_leaves() {
+  return(cat(join_values("/", array(path)), "=", value))
+});
+
+items.walk_leaves() {
+  paths += join_values("/", array(path))
+};
+
+return(items.reduce_leaves(0) {
+  return(acc.add(1))
+});
+```
+
 ## Reading and copying collections
 
 Use explicit helpers when you need a snapshot or derived collection:
