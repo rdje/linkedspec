@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `RUST-README-DRIFT-SYNC`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Overall roadmap - documentation and book sync`
 - Created: `2026-07-08`
-- Last updated: `2026-07-08` (`.0` done; `.1` next)
+- Last updated: `2026-07-08` (`.1` done; tree complete)
 - Owner: repo-local workflow
 
 ## Goal
@@ -33,7 +33,7 @@ surface.
 ## Task Tree
 
 - ID: `RUST-README-DRIFT-SYNC`
-  Status: `active`
+  Status: `done`
   Goal: Reconcile Rust README oracle-count drift with the current 95-fixture corpus state.
   Children: `.0`, `.1`
 
@@ -47,19 +47,21 @@ surface.
   Commit: `RUST-README-DRIFT-SYNC.0 - own Rust README count drift`
 
 - ID: `RUST-README-DRIFT-SYNC.1`
-  Status: `pending`
+  Status: `done`
   Goal: Update `rust/README.md` from the stale 93-fixture interpreter oracle wording to the current 95-fixture
     boundary.
   Acceptance: `rust/README.md` aligns with the checked-in manifest and mdBook; focused stale-count scans pass; no
     parser/runtime behavior changes.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done - 2026-07-08. Focused stale-count scans over `rust/README.md` and the current mdBook status
+    pages pass; `bash scripts/check_memory_architecture.sh`, `bash scripts/check_doctrines.sh`, and
+    `git diff --check` pass.
+  Commit: `RUST-README-DRIFT-SYNC.1 - sync Rust README oracle count`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RUST-README-DRIFT-SYNC.1` | `pending` | The owner tree now exists; fix the isolated README count drift next. |
+| - | _none_ | - | Tree complete; return to `docs/TASK_TREE.md` for the next PNT-eligible frontier. |
 
 ## Decisions
 
@@ -82,14 +84,17 @@ surface.
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-07-08` | `RUST-README-DRIFT-SYNC.0` | `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `git diff --check` | PASS - tracking-only owner registered; README content left for `.1` |
+| `2026-07-08` | `RUST-README-DRIFT-SYNC.1` | Focused stale-count scans; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `git diff --check` | PASS - Rust README now names the 95-fixture interpreter oracle boundary |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `RUST-README-DRIFT-SYNC.0` | `RUST-README-DRIFT-SYNC.0 - own Rust README count drift` | Tracking-only owner for the Rust README count drift. |
-| `RUST-README-DRIFT-SYNC.1` | `pending` | README correction pending. |
+| `RUST-README-DRIFT-SYNC.1` | `RUST-README-DRIFT-SYNC.1 - sync Rust README oracle count` | README correction complete. |
 
 ## Changelog
 
 - `2026-07-08`: Created task tree to own the isolated Rust README oracle-count drift before editing the README.
+- `2026-07-08`: Completed `.1` by updating `rust/README.md` to the current 95-fixture interpreter oracle count and
+  closing the tree.

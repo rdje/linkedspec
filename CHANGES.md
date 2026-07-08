@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — RUST-README-DRIFT-SYNC.1 — sync Rust README oracle count
+
+**Scope:** Narrow Rust README documentation sync.
+
+**Change:** Updated `rust/README.md` so the generated-source overview names the full Rust interpreter oracle as the
+current 95-fixture corpus, matching `rust/linkedspec-runtime/tests/corpus/manifest.json` and the mdBook. Closed
+`RUST-README-DRIFT-SYNC` and moved it to Completed in the task-tree index.
+
+**Boundary:** No parser/runtime behavior changed and no mdBook content changed.
+
+**Validation:** Focused stale-count scans, memory-architecture check, doctrine driver, and diff checks pass.
+
 ## 2026-07-08 — RUST-README-DRIFT-SYNC.0 — own Rust README count drift
 
 **Scope:** Tracking-only owner for one startup-discovered documentation drift.

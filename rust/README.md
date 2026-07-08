@@ -17,7 +17,7 @@ It also exposes a generated-source path (`linkedspec_runtime::source_emitter`) t
 `CompiledSpec`, a validated rule-family plan, and a `parse(input)` entry point. Generated parsers now route through a
 plan-aware executor: default, OR acode, AND acode, AND bcode, OR bcode, REP acode, REP bcode, REP-AND acode, and
 REP-AND bcode families run directly. The generated-source test harness validates every supported structural family
-and a manifest-backed corpus subset; the full 93-fixture corpus remains the interpreter oracle gate.
+and a manifest-backed corpus subset; the full 95-fixture corpus remains the interpreter oracle gate.
 
 ## Quick Start
 

@@ -18,17 +18,17 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `RUST-README-DRIFT-SYNC.0` — tracking-only owner for startup-discovered drift:
-  `rust/README.md` still says the full Rust interpreter oracle has 93 fixtures while manifest/book/live/KM state is
-  at 95. README content is intentionally untouched until `.1`.
-- prior_leaf: `TASK-TREE-METADATA-HYGIENE.3` — added the narrow completed-tree `Current Frontier` doctrine gate.
+- latest_completed_leaf: `RUST-README-DRIFT-SYNC.1` — docs-only correction: `rust/README.md` now names the current
+  full Rust interpreter oracle as 95 fixtures. The tree is complete and moved to Completed in `docs/TASK_TREE.md`.
+- prior_leaf: `RUST-README-DRIFT-SYNC.0` — tracking-only owner for the startup-discovered Rust README count drift.
 - latest_commit: HEAD containing this pointer should be
-  `RUST-README-DRIFT-SYNC.0 - own Rust README count drift`; parent before this slice is
-  `TASK-TREE-METADATA-HYGIENE.3 - gate completed-tree frontiers`.
+  `RUST-README-DRIFT-SYNC.1 - sync Rust README oracle count`; parent before this slice is
+  `91f141b4 RUST-README-DRIFT-SYNC.0 - own Rust README count drift`.
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: `RUST-README-DRIFT-SYNC.1` pending after `.0`; repo should be clean between slices.
-- next_action: update `rust/README.md` from stale 93-fixture wording to current 95-fixture oracle boundary, run
-  focused scans/checks, update live docs/task tree, and commit `.1`.
+- active_work_unit: none in-flight after `.1`; repo should be handoff-ready after commit and
+  `git_message_brief.txt` cleanup.
+- next_action: return to `docs/TASK_TREE.md`; current active rows are empty, paused, or explicitly deferred, so no
+  PNT-eligible leaf is available unless a deferred lane is reactivated.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, mdBook source, core Perl/Rust implementation, shipped specs, tooling, and focused
   test harness inventory. Startup found isolated Rust README drift now owned by `RUST-README-DRIFT-SYNC`.
@@ -39,5 +39,4 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Deferred lanes: `SPEC-FORMAT-TERSE` `.10`/`.12`/`.13`;
   `ROADMAP-DRIFT-RECONCILE`, `DOCTRINE-ENFORCEMENT-ADOPT.3`, and `SPEC-LANG-REFERENCE` remain deferred/paused.
-- blockers: none. in_flight_uncommitted: `.0` tracking docs until commit; do not pivot unless the repo is
-  handoff-ready.
+- blockers: none. in_flight_uncommitted: none after this commit; do not pivot unless the repo is handoff-ready.

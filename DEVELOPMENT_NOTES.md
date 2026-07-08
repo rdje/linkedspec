@@ -1,6 +1,11 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (RUST-README-DRIFT-SYNC.1 — Rust README count sync):
+  `rust/README.md` now names the full Rust interpreter oracle gate as 95 fixtures, matching the checked-in manifest
+  and current mdBook status/handoff/corpora pages. This was a docs-only correction; no corpus regeneration or
+  runtime behavior changed. The drift tree is complete.
+
 - 2026-07-08 (RUST-README-DRIFT-SYNC.0 — Rust README count drift owner):
   Startup review found a narrow docs drift outside the mdBook: `rust/README.md` still says the full interpreter
   oracle is 93 fixtures, but the manifest and current public book/live/KM state are at 95 fixtures. The new
