@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.8 — blind-call orchestration examples):
+  `user-model/blind-calls-and-parser-orchestration.md` was mostly clean because its `::` blind-call
+  wrappers carry no regex slots. The remaining regex-on-`::` drift was in action-edge examples:
+  `Parent`, `BadRule`, `HeaderRule`, and `Field` now use single-colon `:AND`. The mixed-edge negative
+  example explicitly says the single-colon label is deliberate; validation reports the expected
+  `Cannot mix ACTION (->) and BLIND CALL (=>) code blocks`. The next scorch leaf is `.10.5.9` for
+  `dsl/action-and-lifecycle-placement.md`.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.7 — regex chapter examples):
   `user-model/regex-in-spec.md` no longer uses regex-on-`::` examples. Complete snippets use a
   no-regex `Top::` wrapper, and regex-bearing examples are normal `:` child rules. The capture

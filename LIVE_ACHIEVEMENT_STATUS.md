@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.8 — fix blind-call orchestration examples**
+  (DONE mdBook correction; frontier `.10.5.9` next).
+
+  **Change:** Kept no-regex blind-call `::` wrapper examples intact in
+  `user-model/blind-calls-and-parser-orchestration.md`, converted regex-owning action-edge examples
+  to single-colon labels, and clarified the mixed-edge negative example.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a documentation correction.
+
+  **Verification:** Focused scan finds no regex slot under a `::` header; the wrapped mixed-edge probe
+  logs the expected validation error; mdBook build passes.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.7 — fix regex chapter examples**
   (DONE mdBook correction; frontier `.10.5.8` next).
 

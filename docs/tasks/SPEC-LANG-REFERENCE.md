@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-07-08` (`.10.5.7` done: `user-model/regex-in-spec.md`
-  now keeps regex examples on no-regex `Top::` wrappers plus single-colon regex-bearing rules, and
-  frontier advances to `.10.5.8`. Earlier **MAJOR
+- Last updated: `2026-07-08` (`.10.5.8` done: `user-model/blind-calls-and-parser-orchestration.md`
+  now keeps blind-call `::` wrappers no-regex and action-edge regex examples single-colon, and
+  frontier advances to `.10.5.9`. Earlier **MAJOR
   CORRECTION** — user established that a `.spec` top (`::`) rule has NO regex; a valid spec needs >=2
   rules (top entry + >=1 normal `:` rule carrying the regex). Remediation remains documentation-only
   and owned by `.10.3`/`.10.5`; Perl reference untouched.)
@@ -67,7 +67,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   `.8`, `.9` (done — §5.5 drift fix, but used INVALID structure — superseded by `.10.4`), `.10`
   (**CORRECTED**: remediate structurally-invalid examples in `.5.2`/`.9`; NO engine bug; `.10.1`
   verdict superseded, `.10.2` superseded; remediation `.10.3`/`.10.5`; `.10.5.4.1` reactivated the
-  paused scorch and `.10.5.7` is done; `.10.5.8` is the next book-fix leaf)
+  paused scorch and `.10.5.8` is done; `.10.5.9` is the next book-fix leaf)
 
 - ID: `SPEC-LANG-REFERENCE.1`
   Status: `done`
@@ -558,12 +558,20 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.5.7` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.8`
-  Status: `pending`
+  Status: `done`
   Goal: Audit + fix `user-model/blind-calls-and-parser-orchestration.md` (blind-call `::` rules carry
   no regex — likely mostly clean; fix any regex-on-`::` and the `BadRule::` negative example framing)
   Acceptance: any regex-on-`::` removed; negative examples clearly marked; `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. Focused scan found the blind-call wrapper examples clean, but four
+  regex-owning action-edge examples still used `::`: `Parent::AND`, `BadRule::AND`, `HeaderRule::AND`,
+  and `Field::AND`. Converted them to single-colon labels while leaving no-regex blind-call wrappers
+  (`Document::AND`, `Atom::|`, `LineStream::OR`, bounded blind-call streams, `Record::AND`, etc.)
+  unchanged. Added a negative-example note that `BadRule:AND` uses single colon because it owns a regex
+  slot; the illustrated error is mixing `->` and `=>`. Reverified the mixed-edge case with a valid
+  `Top::` wrapper: validation reports `Cannot mix ACTION (->) and BLIND CALL (=>) code blocks`.
+  The page scan reports no `::` header followed by a regex slot, and `mdbook build docs/linkedspec-book`
+  exits 0.
+  Commit: `SPEC-LANG-REFERENCE.10.5.8` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.9`
   Status: `pending`
@@ -769,7 +777,7 @@ target) · CLEAN.
 | `user-model/spec-files-and-rule-paragraphs.md` | label-in-block `Top::AND … label:`; `Top::AND` sketches | A+D | "label belongs to the block" → **DSL compile error** (`Rule definition not allowed inside open block`, reverified 2026-07-08); fixed in `.10.5.5` | `.10.5.5` |
 | `user-model/rule-modes-and-parse-modes.md` | ~20 mode fragments `Pair::&`/`::AND`/`::OR`/`Top:: /foo/`…; line 24 "both valid shapes" framing | A | regex on `::` throughout; `Top:: /foo/ -> Top` → **`null`**; fixed in `.10.5.6` | `.10.5.6` |
 | `user-model/regex-in-spec.md` | `Top::` (l.38), `Pair::AND` (l.101), `Subdef::AND`, `Unit::AND` fragments | A | regex on `::` (capture-indexing teaching is correct); fixed in `.10.5.7` | `.10.5.7` |
-| `user-model/blind-calls-and-parser-orchestration.md` | `Document::AND`/`Atom::|`… (blind-call, no regex); `BadRule::` negative | mostly CLEAN | blind-call `::` rules carry no regex — audit + fix any stray regex-on-`::` | `.10.5.8` |
+| `user-model/blind-calls-and-parser-orchestration.md` | `Document::AND`/`Atom::|`… (blind-call, no regex); `BadRule::` negative | mostly CLEAN | blind-call `::` rules carry no regex; fixed stray action-edge regex-on-`::` examples in `.10.5.8` | `.10.5.8` |
 | `dsl/action-and-lifecycle-placement.md` | `Token::AND`,`List::AND`,`Name::AND`,`Delimited::AND`,`Block::AND`,`Tuple::AND`,`Pair::AND`,`MaybeName::OR`,`Items:*` | A | regex on `::` (helper-illustration); `ebnf.spec` quote at l.184 is CLEAN | `.10.5.9` |
 | `dsl/capture-marks-and-source-locations.md` | `Top::AND`; `Call::AND`/`Inner::AND` divergence | A | regex on `::` (entry-vs-match teaching correct) | `.10.5.10` |
 | `dsl/declaration-helper-reference.md` | `Token::AND`,`List::AND` worked examples | A | regex on `::` | `.10.5.11` |
@@ -817,18 +825,18 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.5.5` | `done` | `user-model/spec-files-and-rule-paragraphs.md` examples now use verified 2-rule forms; bare `label:` open-block validation error documented |
 | — | `SPEC-LANG-REFERENCE.10.5.6` | `done` | `user-model/rule-modes-and-parse-modes.md` regex-owning mode examples now use single-colon labels; `Top:: /foo/` parse-mode snippets replaced with verified 2-rule wrapper |
 | — | `SPEC-LANG-REFERENCE.10.5.7` | `done` | `user-model/regex-in-spec.md` examples now use no-regex `Top::` wrappers plus single-colon regex-bearing rules; capture compaction examples reverified |
-| 4 | `SPEC-LANG-REFERENCE.10.5.8` | `pending` | next: audit+fix `user-model/blind-calls-and-parser-orchestration.md` (mostly clean — blind-call `::` carry no regex) |
-| 5 | `SPEC-LANG-REFERENCE.10.5.9` | `pending` | fix `dsl/action-and-lifecycle-placement.md` worked examples → 2-rule idiom |
-| 6 | `SPEC-LANG-REFERENCE.10.5.10` | `pending` | fix `dsl/capture-marks-and-source-locations.md` (`Top::AND`, `Call::AND`/`Inner::AND`) |
-| 7 | `SPEC-LANG-REFERENCE.10.5.11` | `pending` | fix `dsl/declaration-helper-reference.md` (`Token::AND`, `List::AND`) |
-| 8 | `SPEC-LANG-REFERENCE.10.5.12` | `pending` | fix `dsl/source-boundary-helper-reference.md` (`Tuple::AND`/`Block::AND`/…) |
-| 9 | `SPEC-LANG-REFERENCE.10.5.13` | `pending` | fix `dsl/value-container-flow-helper-reference.md` (`Token::AND`/`Node::AND`/…) |
-| 10 | `SPEC-LANG-REFERENCE.10.5.14` | `pending` | fix remaining DSL pages (`values-containers` `Token::`, `action-model` `Top::`, `fluent-and-block-forms`, `actionir-lowering`) |
-| 11 | `SPEC-LANG-REFERENCE.10.5.15` | `pending` | fix `appendix/formal-grammar.md` §1 + §12 examples |
-| 12 | `SPEC-LANG-REFERENCE.10.5.16` | `pending` | fix `appendix/runtime-semantics.md` §5.5/§5.6 (folds `.10.4`) |
-| 13 | `SPEC-LANG-REFERENCE.10.5.17` | `pending` | fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts (`sens`/GROUP) |
-| 14 | `SPEC-LANG-REFERENCE.10.5.18` | `pending` | fix `specs-and-corpora/portmap-spec-walkthrough.md` 5 output-shape examples |
-| 15 | `SPEC-LANG-REFERENCE.10.5.19` | `pending` | finalize scorch — whole-book re-grep + `mdbook build`; close `.10.5`/`.10` |
+| — | `SPEC-LANG-REFERENCE.10.5.8` | `done` | `user-model/blind-calls-and-parser-orchestration.md` blind-call `::` wrappers stayed no-regex; stray regex-owning action-edge examples now use single-colon labels |
+| 4 | `SPEC-LANG-REFERENCE.10.5.9` | `pending` | next: fix `dsl/action-and-lifecycle-placement.md` worked examples → 2-rule idiom |
+| 5 | `SPEC-LANG-REFERENCE.10.5.10` | `pending` | fix `dsl/capture-marks-and-source-locations.md` (`Top::AND`, `Call::AND`/`Inner::AND`) |
+| 6 | `SPEC-LANG-REFERENCE.10.5.11` | `pending` | fix `dsl/declaration-helper-reference.md` (`Token::AND`, `List::AND`) |
+| 7 | `SPEC-LANG-REFERENCE.10.5.12` | `pending` | fix `dsl/source-boundary-helper-reference.md` (`Tuple::AND`/`Block::AND`/…) |
+| 8 | `SPEC-LANG-REFERENCE.10.5.13` | `pending` | fix `dsl/value-container-flow-helper-reference.md` (`Token::AND`/`Node::AND`/…) |
+| 9 | `SPEC-LANG-REFERENCE.10.5.14` | `pending` | fix remaining DSL pages (`values-containers` `Token::`, `action-model` `Top::`, `fluent-and-block-forms`, `actionir-lowering`) |
+| 10 | `SPEC-LANG-REFERENCE.10.5.15` | `pending` | fix `appendix/formal-grammar.md` §1 + §12 examples |
+| 11 | `SPEC-LANG-REFERENCE.10.5.16` | `pending` | fix `appendix/runtime-semantics.md` §5.5/§5.6 (folds `.10.4`) |
+| 12 | `SPEC-LANG-REFERENCE.10.5.17` | `pending` | fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts (`sens`/GROUP) |
+| 13 | `SPEC-LANG-REFERENCE.10.5.18` | `pending` | fix `specs-and-corpora/portmap-spec-walkthrough.md` 5 output-shape examples |
+| 14 | `SPEC-LANG-REFERENCE.10.5.19` | `pending` | finalize scorch — whole-book re-grep + `mdbook build`; close `.10.5`/`.10` |
 | — | `SPEC-LANG-REFERENCE.10.4` | `superseded` | folded into `.10.5.16` |
 | 18 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the scorch |
 | 19 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
@@ -940,7 +948,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 ## Blockers
 
 - None. (`.10.2`'s "blocked-on-decision" is gone — superseded; the decision was withdrawn after the
-  user's structural correction. The scorch is active again as of 2026-07-08; resume at `.10.5.8`.)
+  user's structural correction. The scorch is active again as of 2026-07-08; resume at `.10.5.9`.)
 
 ## Verification Log
 
@@ -965,6 +973,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.5` | four replacement snippets run through `LinkedSpec::Get` (minimal, label-in-block, compact same-line, multiline); explicit bad bare-`label:` probe; `mdbook build docs/linkedspec-book`; Knowledge Map fact card + regeneration | replacement snippets compile/run and return documented payloads; bare `label:` inside an open block reports `Rule definition not allowed inside open block`; mdBook build exit 0; new fact `rule-starts-open-block-validation` indexed |
 | `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.6` | representative runtime probes through `LinkedSpec::Get` (token-stream wrapper; `seek`/`consume` word wrapper); source-page scan for remaining `::` labels; `mdbook build docs/linkedspec-book` | token stream `foo "bar"` → `["foo","bar"]`; `seek` `junk foo` → `["foo"]`; `consume` `junk foo` → `[]`; `consume` `foo` → `["foo"]`; remaining `::` labels are no-regex entry/dispatcher examples; mdBook build exit 0 |
 | `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.7` | representative runtime probes through `LinkedSpec::Get` (keyword wrapper; numbered groups; named groups; numbered-compaction and named-compaction cases); source-page scan for remaining `::` labels; `mdbook build docs/linkedspec-book` | outputs match documented payloads: `["foo"]`, `[{"key":"foo","val":"bar"}]`, `[{"name":"alpha"}]`, numbered compaction `abc`→`[{"amount":"abc","name":null}]`, `12abc`→`[{"amount":"12","name":"abc"}]`, named groups stable; remaining `::` labels are no-regex wrappers; mdBook build exit 0 |
+| `2026-07-08` | `SPEC-LANG-REFERENCE.10.5.8` | source-page scan for `::` headers followed by regex slots; wrapped mixed-edge negative probe through `LinkedSpec::Get`; `mdbook build docs/linkedspec-book` | scan reports no regex slot under a `::` header; mixed-edge probe logs `Cannot mix ACTION (->) and BLIND CALL (=>) code blocks`; mdBook build exit 0 |
 
 ## Commit Log
 
@@ -989,6 +998,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.5.5` | `SPEC-LANG-REFERENCE.10.5.5 — fix spec file paragraph examples` | `spec-files-and-rule-paragraphs.md` runnable examples now use the verified 2-rule idiom; the malformed bare `label:` block is replaced with valid quoted `"label:"` helper content plus the exact validation-error note. Four snippets verified through `LinkedSpec::Get`; mdBook build exit 0; Knowledge fact card added |
 | `SPEC-LANG-REFERENCE.10.5.6` | `SPEC-LANG-REFERENCE.10.5.6 — fix rule mode and parse mode examples` | `rule-modes-and-parse-modes.md` regex-owning mode examples now use single-colon labels, the `::` framing teaches no-regex entry/dispatcher usage, and `Top:: /foo/` parse-mode snippets are replaced with the verified 2-rule wrapper. Runtime probes and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.7` | `SPEC-LANG-REFERENCE.10.5.7 — fix regex chapter examples` | `regex-in-spec.md` examples now use no-regex `Top::` wrappers plus single-colon regex-bearing rules. Numbered/named capture and compaction teaching is preserved with `entry_group` / `entry_named`; runtime probes and mdBook build pass |
+| `SPEC-LANG-REFERENCE.10.5.8` | `SPEC-LANG-REFERENCE.10.5.8 — fix blind-call orchestration examples` | `blind-calls-and-parser-orchestration.md` keeps no-regex blind-call `::` wrappers, converts regex-owning action-edge examples to single-colon labels, and clarifies the mixed-edge negative example. Scan/probe and mdBook build pass |
 
 ## Changelog
 
@@ -1241,3 +1251,11 @@ wrapped only where a complete worked example is intended) during the per-file fi
   groups stay stable when optional groups are absent. Runtime probes confirm the documented keyword,
   pair, named capture, numbered-compaction, and named-compaction outputs. `mdbook build` exit 0.
   Frontier → `.10.5.8` (`user-model/blind-calls-and-parser-orchestration.md` audit/fix).
+- `2026-07-08`: `.10.5.8` done — fixed
+  `docs/linkedspec-book/src/user-model/blind-calls-and-parser-orchestration.md`. The actual blind-call
+  examples were clean no-regex `::` wrappers; four action-edge examples that owned regex slots now use
+  single-colon labels (`Parent:AND`, `BadRule:AND`, `HeaderRule:AND`, `Field:AND`). The mixed-edge
+  negative example now explicitly says the single-colon label is deliberate and the error is mixing
+  `->` with `=>`. A focused scan reports no `::` header followed by a regex slot; the wrapped negative
+  probe logs the expected mixed-edge validation error. `mdbook build` exit 0. Frontier → `.10.5.9`
+  (`dsl/action-and-lifecycle-placement.md` worked examples).

@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.8 — fix blind-call orchestration examples
+
+**Scope:** mdBook blind-call chapter correction for the active whole-book scorch.
+
+**Change:** Reworked `user-model/blind-calls-and-parser-orchestration.md` so no-regex blind-call
+`::` wrappers stay intact while regex-owning action-edge examples use single-colon labels. Clarified
+that the mixed-edge negative example uses `BadRule:AND` because it owns a regex slot; the error is
+mixing `->` and `=>`.
+
+**Validation:** Focused scan finds no `::` header followed by a regex slot; a wrapped negative probe
+logs the expected `Cannot mix ACTION (->) and BLIND CALL (=>) code blocks` validation error; `mdbook
+build docs/linkedspec-book` passes.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.7 — fix regex chapter examples
 
 **Scope:** mdBook regex chapter correction for the active whole-book scorch.

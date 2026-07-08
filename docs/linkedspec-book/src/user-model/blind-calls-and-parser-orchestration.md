@@ -307,7 +307,7 @@ Use fluent post-call chains only when they remain short and obvious. Use an expl
 The examples above use explicit `return(array(...))` payloads because the returned shape is visible at the call site. For more complex shaping, prefer helper-style action blocks or explicit child-result dataflow:
 
 ```text
-Parent::AND
+Parent:AND
  I {
    retv = undef;
    children = [];
@@ -328,10 +328,13 @@ One rule body should use one edge family.
 This is invalid:
 
 ```text
-BadRule::AND
+BadRule:AND
  /header/ -> Header
  => Body
 ```
+
+The single-colon label is deliberate here: the negative example owns a regex slot, so the
+error being illustrated is the mixed edge family, not the entry marker.
 
 The reason is semantic, not cosmetic. `-> Header` says the parent owns a regex slot and then dispatches through an action edge. `=> Body` says the parent directly invokes `Body` as a parser step. Mixing both in one rule makes ownership unclear:
 
@@ -345,7 +348,7 @@ Split the rule instead.
 If the parent owns regex slots, keep it action-edge oriented:
 
 ```text
-HeaderRule::AND
+HeaderRule:AND
  /header/ -> HeaderRule[0] {
    return(hash("kind", "header", "text", entry_text()));
  }
@@ -395,7 +398,7 @@ Record::AND
 Use `call(Child)` inside an action edge when the parent has its own local regex slots and needs an explicit child result for helper logic:
 
 ```text
-Field::AND
+Field:AND
  I { retv = undef; }
  /field\s+/ -> Field[0] {
    retv = call(Name);

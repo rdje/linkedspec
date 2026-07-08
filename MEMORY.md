@@ -18,21 +18,21 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.7` — fixed
-  `user-model/regex-in-spec.md`: regex examples now use no-regex `Top::` wrappers plus single-colon
-  regex-bearing rules, while numbered/named capture and compaction teaching remains verified.
-- prior_leaf: `SPEC-LANG-REFERENCE.10.5.6` — fixed `user-model/rule-modes-and-parse-modes.md`
-  regex-owning mode examples, `::` framing, and seek/consume wrapper examples.
+- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.8` — fixed
+  `user-model/blind-calls-and-parser-orchestration.md`: no-regex blind-call `::` wrappers stay, regex-owning
+  action-edge examples use `:` labels, and the mixed-edge negative example is clarified.
+- prior_leaf: `SPEC-LANG-REFERENCE.10.5.7` — fixed `user-model/regex-in-spec.md` examples with
+  no-regex `Top::` wrappers plus single-colon regex-bearing rules.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-LANG-REFERENCE.10.5.7 - fix regex chapter examples`; parent before this slice is
-  `SPEC-LANG-REFERENCE.10.5.6 - fix rule mode and parse mode examples`.
+  `SPEC-LANG-REFERENCE.10.5.8 - fix blind-call orchestration examples`; parent before this slice is
+  `SPEC-LANG-REFERENCE.10.5.7 - fix regex chapter examples`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `SPEC-LANG-REFERENCE.10.5.8` is the next active leaf in the reactivated
+- active_work_unit: `SPEC-LANG-REFERENCE.10.5.9` is the next active leaf in the reactivated
   language-reference scorch.
-- next_action: from a clean repo, execute `.10.5.8`: audit and fix
-  `docs/linkedspec-book/src/user-model/blind-calls-and-parser-orchestration.md`; expected mostly clean
-  because blind-call `::` rules carry no regex, but fix any regex-on-`::` and the negative example framing.
+- next_action: from a clean repo, execute `.10.5.9`: fix
+  `docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md` worked examples to the 2-rule/no-regex
+  `Top::` idiom where complete snippets own regex slots.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
   enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.
