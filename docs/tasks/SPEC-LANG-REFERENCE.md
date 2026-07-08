@@ -723,13 +723,21 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.5.16` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.17`
-  Status: `pending`
+  Status: `done`
   Goal: Fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts — `sens` is `=` not `=~`
   (regex captures only `([!=])`); the GROUP example output (`{"group":["internal"]}`) is misquoted
   Acceptance: claimed outputs corrected to verified `LinkedSpec::Get` runs of `specs/tablegrep.spec`;
   `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. Re-ran the Perl reference parser through
+  `LinkedSpec::get_parser('tablegrep')` and replaced the two output examples with JSON renderings
+  of the actual ASTs. `field1 =~ /foo/` returns
+  `[{"field":"field1","re":"foo","sens":"=","type":"TERM"}]`; grouped input
+  `(field1 =~ /foo/ || field2 =~ /bar/)` returns
+  `[{"group":[{"field":"field1","re":"foo","sens":"=","type":"TERM"},{"type":"OR_OP"},{"field":"field2","re":"bar","sens":"=","type":"TERM"}],"type":"GROUP"}]`.
+  Also corrected the same page's stale descriptor helper list after checking the live spec and
+  descriptor metadata: five rules ready, zero blocked, zero compatibility, zero raw, zero unresolved.
+  `mdbook build docs/linkedspec-book` exits 0.
+  Commit: `SPEC-LANG-REFERENCE.10.5.17` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.18`
   Status: `pending`
@@ -928,7 +936,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.5.14` | `done` | remaining DSL pages fixed/audited 2026-07-08; Token/Value/Items examples reverified |
 | — | `SPEC-LANG-REFERENCE.10.5.15` | `done` | `appendix/formal-grammar.md` §1 + §12 examples fixed 2026-07-08; four probes reverified |
 | — | `SPEC-LANG-REFERENCE.10.5.16` | `done` | `appendix/runtime-semantics.md` §5.5/§5.6 fixed 2026-07-08; `.10.4` folded; five outputs reverified |
-| 8 | `SPEC-LANG-REFERENCE.10.5.17` | `pending` | fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts (`sens`/GROUP) |
+| — | `SPEC-LANG-REFERENCE.10.5.17` | `done` | `tablegrep-spec-walkthrough.md` output drift fixed 2026-07-08; parser outputs and descriptor metadata reverified |
 | 9 | `SPEC-LANG-REFERENCE.10.5.18` | `pending` | fix `specs-and-corpora/portmap-spec-walkthrough.md` 5 output-shape examples |
 | 10 | `SPEC-LANG-REFERENCE.10.5.19` | `pending` | finalize planned page scorch — whole-book re-grep + `mdbook build` |
 | 11 | `SPEC-LANG-REFERENCE.10.5.20` | `pending` | resolve lifecycle final-value / direct-`E` Perl handler drift found during `.10.5.9` |
@@ -1115,6 +1123,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.5.14` | `SPEC-LANG-REFERENCE.10.5.14 — fix remaining DSL examples` | `values-containers-and-flow-helpers.md`, `action-model-and-helper-surface.md`, and `fluent-and-block-forms.md` now avoid regex-bearing `::` examples for Token, Value, and Items. `actionir-lowering-mental-model.md` audited clean as helper/pipeline fragments only. Focused Token, Value, and Items probes pass; four-page scan and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.15` | `SPEC-LANG-REFERENCE.10.5.15 — fix formal grammar examples` | `formal-grammar.md` §1 and §12 now use no-regex top rules plus normal regex-owning matcher rules. The complete example defines every dispatch target and verifies DemoParser, SecondChild, and ThirdChild outputs; appendix scan and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.16` | `SPEC-LANG-REFERENCE.10.5.16 — fix runtime semantics examples` | `runtime-semantics.md` §5.5/§5.6 now uses no-regex `Top::` wrappers plus normal regex-owning `Done:`, `Pair:`, `object:`, and `manifest:` rules. The folded `.10.4` Pair target now returns the verified `entry_group` tagged array through `Top`; five focused outputs, page scan, and mdBook build pass |
+| `SPEC-LANG-REFERENCE.10.5.17` | `SPEC-LANG-REFERENCE.10.5.17 — fix tablegrep walkthrough outputs` | `tablegrep-spec-walkthrough.md` now shows verified JSON outputs for the simple term and grouped expression (`sens` is `=`), and its descriptor helper list matches the live spec. Parser probes, descriptor metadata probe, and mdBook build pass |
 
 ## Changelog
 

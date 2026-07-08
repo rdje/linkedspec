@@ -18,21 +18,21 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.16` — fixed
-  `appendix/runtime-semantics.md` §5.5/§5.6 examples: no-regex `Top::` wrappers, normal matcher
-  rules, `.10.4` Pair target folded, and five `LinkedSpec::Get` outputs reverified.
-- prior_leaf: `SPEC-LANG-REFERENCE.10.5.15` — fixed `appendix/formal-grammar.md`
-  §1 paragraph-model and §12 complete examples.
+- latest_completed_leaf: `SPEC-LANG-REFERENCE.10.5.17` — fixed
+  `tablegrep-spec-walkthrough.md` output drift: `sens` is `=` in verified JSON outputs, grouped
+  output is the real `GROUP` node, and descriptor helper list now matches the live spec.
+- prior_leaf: `SPEC-LANG-REFERENCE.10.5.16` — fixed `appendix/runtime-semantics.md`
+  §5.5/§5.6 examples and folded `.10.4`.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-LANG-REFERENCE.10.5.16 - fix runtime semantics examples`; parent before this slice is
-  `SPEC-LANG-REFERENCE.10.5.15 - fix formal grammar examples`.
+  `SPEC-LANG-REFERENCE.10.5.17 - fix tablegrep walkthrough outputs`; parent before this slice is
+  `SPEC-LANG-REFERENCE.10.5.16 - fix runtime semantics examples`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `SPEC-LANG-REFERENCE.10.5.17` is the next active leaf in the reactivated
+- active_work_unit: `SPEC-LANG-REFERENCE.10.5.18` is the next active leaf in the reactivated
   language-reference scorch.
-- next_action: from a clean repo, execute `.10.5.17`: fix
-  `docs/linkedspec-book/src/specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts
-  (`sens`/GROUP), reverify claimed outputs, and run `mdbook build`.
+- next_action: from a clean repo, execute `.10.5.18`: fix
+  `docs/linkedspec-book/src/specs-and-corpora/portmap-spec-walkthrough.md` output-shape examples,
+  reverify claimed outputs, and run `mdbook build`.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
   enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.

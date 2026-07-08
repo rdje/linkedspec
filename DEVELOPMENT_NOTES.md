@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.17 — tablegrep walkthrough outputs):
+  `specs-and-corpora/tablegrep-spec-walkthrough.md` now shows parser-output JSON from
+  `LinkedSpec::get_parser('tablegrep')`. The `re_term` rule captures `([!=])`, so `field1 =~ /foo/`
+  returns `"sens":"="`, not `"=~"`; the grouped example returns a `GROUP` hash whose `group`
+  array contains the nested term/operator nodes. The descriptor-readiness helper list was also
+  refreshed from the live spec (`return_undef`, `copy`, `is_empty`, `not`, `and`, `matches`,
+  `print`, `exit_now`, `push`, `hash`, `substr`, `entry_group`, `I.return(...)`). The next scorch
+  leaf is `.10.5.18` for `portmap-spec-walkthrough.md`.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.16 — runtime semantics examples):
   `appendix/runtime-semantics.md` §5.5 now teaches top-level output through no-regex `Top::`
   wrappers that explicitly call regex-owning body rules. The scalar/proof examples use `Done:`;

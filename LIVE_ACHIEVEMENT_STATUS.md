@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.17 — fix tablegrep walkthrough outputs**
+  (DONE mdBook correction; frontier `.10.5.18` next).
+
+  **Change:** Replaced tablegrep simple-term and grouped-expression output examples with
+  verified JSON from `specs/tablegrep.spec`, and refreshed the descriptor helper list.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a shipped-spec walkthrough
+  documentation correction for the whole-book scorch.
+
+  **Verification:** `LinkedSpec::get_parser('tablegrep')` probes cover both outputs; descriptor
+  metadata reports five ready rules and zero blocked/compat/raw/unresolved counts; mdBook,
+  doctrine, task-tree, memory, Knowledge Map, and whitespace checks pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.16 — fix runtime semantics examples**
   (DONE mdBook correction; frontier `.10.5.17` next).
 

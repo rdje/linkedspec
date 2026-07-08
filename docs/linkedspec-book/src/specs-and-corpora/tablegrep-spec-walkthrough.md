@@ -30,23 +30,32 @@ The parser returns an array of AST nodes, one per matched expression component, 
 
 ## Output shape
 
-The AST is shown below in the Perl reference backend's value rendering (hashes and
-arrays); another backend produces the equivalent structure in its own value types.
+The AST is shown below as JSON from the Perl reference backend; another backend produces
+the equivalent structure in its own value types. The `sens` field records the equality
+polarity captured by `([!=])` (`"="` or `"!"`); the `~` belongs to the match operator
+syntax and is not part of that captured value.
 
 For `field1 =~ /foo/`:
 
-```perl
-[{type => 'TERM', field => 'field1', sens => '=~', re => 'foo'}]
+```json
+[
+  {"field":"field1","re":"foo","sens":"=","type":"TERM"}
+]
 ```
 
 For `(field1 =~ /foo/ || field2 =~ /bar/)`:
 
-```perl
-[{type => 'GROUP', group => [
-  {type => 'TERM', field => 'field1', sens => '=~', re => 'foo'},
-  {type => 'OR_OP'},
-  {type => 'TERM', field => 'field2', sens => '=~', re => 'bar'},
-]}]
+```json
+[
+  {
+    "group": [
+      {"field":"field1","re":"foo","sens":"=","type":"TERM"},
+      {"type":"OR_OP"},
+      {"field":"field2","re":"bar","sens":"=","type":"TERM"}
+    ],
+    "type":"GROUP"
+  }
+]
 ```
 
 Invalid inputs produce error messages and non-zero exit codes: two consecutive operators without an intervening term (exit code 1), or an empty parenthesized group (exit code 2).
@@ -80,7 +89,7 @@ All five rules share the `I`/`LS`/`LE`/`LX` lifecycle pattern. Each rule:
 
 ## Descriptor readiness
 
-The `tablegrep.spec` compiles with `language_agnostic_ready_ratio == 1.0000` — zero language-agnostic blocked rules and zero compatibility-surface rules. All helper usage (`assign`, `declare`, `push_value`, `array_copy`, `is_empty`, `matches`, `if/else/endif`, `and`, `or`, `not`) is canonical ActionIR.
+The `tablegrep.spec` compiles with `language_agnostic_ready_ratio == 1.0000` — zero language-agnostic blocked rules and zero compatibility-surface rules. Its helper usage (`return_undef`, `copy`, `is_empty`, `not`, `and`, `matches`, `print`, `exit_now`, `push`, `hash`, `substr`, `entry_group`, and `I.return(...)`) is canonical ActionIR.
 
 ## Why this spec is interesting
 

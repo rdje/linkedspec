@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.17 — fix tablegrep walkthrough outputs
+
+**Scope:** mdBook tablegrep walkthrough output correction.
+
+**Change:** Replaced the tablegrep simple-term and grouped-expression output blocks with
+verified JSON from `specs/tablegrep.spec`. The `sens` field is now documented as `"="`
+for `=~` terms because the rule captures only `([!=])`; the grouped output now shows
+the actual `GROUP` node with nested term/operator nodes. Also corrected the stale
+descriptor helper list to match the live spec.
+
+**Validation:** `LinkedSpec::get_parser('tablegrep')` probes verify both outputs.
+Descriptor metadata reports five ready rules with zero blocked, compatibility, raw, or
+unresolved counts. `mdbook build docs/linkedspec-book` passes.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.16 — fix runtime semantics examples
 
 **Scope:** mdBook runtime semantics appendix correction.
