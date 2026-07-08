@@ -6,10 +6,10 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-17`
-- Last updated: `2026-07-08` (`.6` done: added a verified marker-form capture/mark cross-example,
-  corrected placement-sensitive named-mark examples to use block-local helper calls where exact action
-  timing is needed, added KM fact `split-boundary-marker-action-timing`, and advanced the frontier to
-  `.7` KM fact-card coverage. Earlier **MAJOR
+- Last updated: `2026-07-08` (`.7` done: KM fact-card coverage now routes the durable `.spec`
+  language subjects named by the audit — output/return shape, regex feature set, rule modes,
+  lifecycle/`retv`, action-vs-blind dispatch, and capture/mark taxonomy — and the frontier advances
+  to `.8` final consistency/closeout. Earlier **MAJOR
   CORRECTION** — user established that a `.spec` top (`::`) rule has NO regex; a valid spec needs >=2
   rules (top entry + >=1 normal `:` rule carrying the regex). Remediation remains documentation-only
   and owned by `.10.3`/`.10.5`; Perl reference untouched.)
@@ -64,11 +64,11 @@ The surface to cover (authoritative sources in parentheses) includes at least:
 - ID: `SPEC-LANG-REFERENCE`
   Status: `active`
   Goal: Complete + variant-agnostic + example-rich book coverage of the whole `.spec` language
-  Children: `.1`–`.6` (done, including `.5.1`–`.5.5`; `.5.3.1`/`.5.4.1` deferred), `.7`,
+  Children: `.1`–`.7` (done, including `.5.1`–`.5.5`; `.5.3.1`/`.5.4.1` deferred),
   `.8`, `.9` (done — §5.5 drift fix, but used INVALID structure — superseded by `.10.4`), `.10`
   (**CORRECTED**: remediate structurally-invalid examples in `.5.2`/`.9`; NO engine bug; `.10.1`
   verdict superseded, `.10.2` superseded; remediation `.10.3`/`.10.5`; `.10.5.4.1` reactivated the
-  paused scorch and `.10.5.20` is done; `.7` is the next language-reference leaf)
+  paused scorch and `.10.5.20` is done; `.8` is the next language-reference leaf)
 
 - ID: `SPEC-LANG-REFERENCE.1`
   Status: `done`
@@ -345,7 +345,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.6` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.7`
-  Status: `pending`
+  Status: `done`
   Goal: Knowledge Map fact cards for the durable `.spec`-language subjects
   Acceptance: KM cards (`docs/knowledge/<id>.md`, with `answers:` front-matter) for the key
   durable subjects — at least: the output/return-shape contract, the regex feature-set a
@@ -353,8 +353,14 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   order + `retv`, the action-vs-blind edge/dispatch model, and the capture/mark family
   taxonomy; KM gate regenerates `KNOWLEDGE_MAP.md` and passes. (Cards may be written alongside
   their originating leaf; this leaf ensures full coverage.)
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. Added canonical `.spec`-language KM facts
+  `spec-output-return-shape-contract`, `spec-regex-feature-contract`,
+  `spec-rule-mode-semantics-map`, `spec-lifecycle-retv-order`, and
+  `spec-capture-mark-family-taxonomy`; extended `spec-edge-syntax-contract` with the
+  action-vs-blind dispatch retrieval keys and summary. `KNOWLEDGE_MAP.md` now routes all six
+  audit-required questions to fact cards, and `knowledge-map/scripts/check_knowledge_map.sh`
+  passes.
+  Commit: `SPEC-LANG-REFERENCE.7` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.9`
   Status: `done`
@@ -1047,10 +1053,17 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.5.4.1` | `deferred` | optional implementation/parity follow-up for direct odd-arity `hash(...)`; not PNT-active unless explicitly activated |
 | — | `SPEC-LANG-REFERENCE.5.5` | `done` | worked examples added for Declaration, Capture/Mark, Entry/Match, Input, and Call families; helper-catalog sweep `.5` closes (2026-07-08) |
 | 11 | `SPEC-LANG-REFERENCE.6` | `done` | capture/mark cross-example + marker-placement thin spots fixed 2026-07-08 |
-| 12 | `SPEC-LANG-REFERENCE.7` | `pending` | KM fact cards for the durable subjects |
+| 12 | `SPEC-LANG-REFERENCE.7` | `done` | durable `.spec`-language KM fact cards completed 2026-07-08 |
 | 13 | `SPEC-LANG-REFERENCE.8` | `pending` | finalize — whole-book consistency + close |
 
 ## Decisions
+
+- **`2026-07-08` — DURABLE SPEC-LANGUAGE KM RETRIEVAL (`.7`).**
+  The `.spec` language reference now has canonical Knowledge Map cards for the audit-required
+  durable subjects: output/return shape, regex backend feature set, rule-mode semantics, lifecycle
+  order plus `retv`, action-vs-blind dispatch, and capture/mark taxonomy. Existing narrower
+  backend/parity cards remain as related links rather than replacement homes. `spec-edge-syntax-contract`
+  was extended instead of duplicated because it already owns the edge syntax contract.
 
 - **`2026-07-08` — MARKER-FORM CAPTURE/MARK TIMING (`.6`).**
   The public capture/mark cross-example uses a verified seek-mode delimiter shape: an opener action
@@ -1247,6 +1260,8 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.5.3` | `SPEC-LANG-REFERENCE.5.3 — add Array helper worked examples` | `helper-contract-catalog.md` now has verified Array examples for constructor/copy/splice, selectors, edge slices, ordering, membership, split, pipelines, mutations, receiver chains, and array-tree traversal. KM fact `array-helper-return-shape-caveats` records split/pipeline shape-sensitive caveats; optional normalization deferred to `.5.3.1` |
 | `SPEC-LANG-REFERENCE.5.4` | `SPEC-LANG-REFERENCE.5.4 — add Hash and Control Flow worked examples` | `helper-contract-catalog.md` now has verified Hash examples for constructor/copy/splice, pure/mutating updates, sorted views, receiver chains, and hash-tree traversal, plus Control Flow examples for branch forms, `switch`, `while`, `next`, `return`, `return_undef`, and descriptor-verified `exit_now`. KM fact `hash-helper-odd-arity-current-behavior` records the direct odd-arity `hash(...)` caveat; optional normalization deferred to `.5.4.1` |
 | `SPEC-LANG-REFERENCE.5.5` | `SPEC-LANG-REFERENCE.5.5 — add remaining helper-family worked examples` | `helper-contract-catalog.md` now has verified Declaration, Capture/Mark, Entry/Match, Input, and Call examples. Corrected stale entry-vs-match examples in the source-boundary chapters to the verified ordered-child shape and added KM fact `entry-match-divergence-verified-shape`. This closes the helper-catalog sweep `.5`; frontier advances to `.6` |
+| `SPEC-LANG-REFERENCE.6` | `SPEC-LANG-REFERENCE.6 — add capture/mark marker cross-example` | `source-boundary-helper-reference.md` and `action-and-lifecycle-placement.md` now include a verified marker-form cross-example for `@capture_slice`, `@mark(body_start)`, `mark_match_start(close_start)`, `capture_slice()`, `capture_from(...)`, and `capture_between(...)`. KM fact `split-boundary-marker-action-timing` records marker visibility timing; frontier advances to `.7` |
+| `SPEC-LANG-REFERENCE.7` | `SPEC-LANG-REFERENCE.7 — add spec-language Knowledge Map cards` | Added canonical KM fact cards for output/return shape, regex backend feature contract, rule-mode semantics, lifecycle/`retv` order, and capture/mark taxonomy; extended `spec-edge-syntax-contract` for action-vs-blind dispatch retrieval. KM gate passes; frontier advances to `.8` |
 | `SPEC-LANG-REFERENCE.9` | `SPEC-LANG-REFERENCE.9 — book: fix drifted §5.5 Pair example output (AND-[0] self-edge returns [] not the tagged array)` | Corrected the §5.5 Pair example to the verified OR self-ref `-> Pair` form (+ §5.7 cross-ref). Surfaced a SYSTEMIC variant across chapters → new leaf `.10` (blocked on a user decision). mdbook build exit 0 |
 | `SPEC-LANG-REFERENCE.10.1` | `SPEC-LANG-REFERENCE.10.1 — investigation: single-slot AND drops its edge return ([]) is a Perl-reference regression, not intended (KM card + verdict)` | Read-only root-cause investigation; VERDICT = accidental regression in `AND_SINGLE_ACODE` emitter (missing `push`); triple-verified vs source/git/card; KM card `and-single-acode-edge-return-dropped.md`. `.10.2` fix blocked on a user direction decision. No code/book change. **(Verdict later SUPERSEDED — see `.10` correction commit.)** |
 | `SPEC-LANG-REFERENCE.10` (correction) | `SPEC-LANG-REFERENCE.10 — correction: top rule has no regex; .5.2/.9 examples are structurally invalid (not an engine bug); retract .10.1, plan remediation (.10.3-.5)` | User-established structural invariant (top `::` rule no regex; valid spec ≥2 rules), verified vs Core.pm/RuleIR.pm + 20-spec audit. Deleted the wrong KM card, added `spec-top-rule-no-regex-two-rule-minimum.md` with the proven 2-rule idiom. Superseded `.10.1` verdict + `.10.2`; added remediation leaves. NO Perl change. Repo handoff-ready; fresh session recommended |
@@ -1596,3 +1611,8 @@ wrapped only where a complete worked example is intended) during the per-file fi
   `mark_here(...)` inside opener actions when exact block-local timing is required. KM fact
   `split-boundary-marker-action-timing` records the durable visibility rule. Frontier → `.7`
   (durable `.spec`-language KM fact-card coverage).
+- `2026-07-08`: `.7` done — added canonical KM fact cards for `.spec` output/return shape,
+  regex backend feature contract, rule-mode semantics, lifecycle/`retv` order, and capture/mark
+  taxonomy; extended the existing edge syntax card with action-vs-blind dispatch retrieval keys.
+  Regenerated `KNOWLEDGE_MAP.md`; required question spot-checks route to the expected facts and
+  the KM gate passes. Frontier → `.8` (final whole-book consistency + close).

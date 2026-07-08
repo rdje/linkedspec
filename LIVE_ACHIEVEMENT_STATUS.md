@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.7 — add spec-language Knowledge Map cards**
+  (DONE KM fact-card coverage; frontier `.8` next).
+
+  **Change:** Added canonical `.spec` language KM cards for output/return shape, regex backend
+  features, rule-mode semantics, lifecycle/`retv`, and capture/mark taxonomy. Extended
+  `spec-edge-syntax-contract` with action-vs-blind dispatch retrieval keys and summary.
+
+  **Boundary:** No parser/runtime/source or mdBook behavior changed. This is a durable retrieval
+  closeout for subjects already documented in the book.
+
+  **Verification:** Required question spot-checks route to the expected fact cards; Knowledge Map
+  regeneration and gate pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.6 — add capture/mark marker cross-example**
   (DONE mdBook capture/mark cross-example + thin-spot fixes; frontier `.7` next).
 

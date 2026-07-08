@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.7 — add spec-language Knowledge Map cards
+
+**Scope:** Knowledge Map fact cards for durable `.spec` language reference subjects.
+
+**Change:** Added canonical KM cards for the output/return-shape contract, regex backend feature
+contract, rule-mode semantics map, lifecycle/`retv` order, and capture/mark family taxonomy.
+Extended `spec-edge-syntax-contract` with action-vs-blind dispatch search keys and a dispatch
+model summary. Regenerated `KNOWLEDGE_MAP.md`.
+
+**Validation:** Required question spot-checks route to the expected fact cards, and
+`knowledge-map/scripts/check_knowledge_map.sh` passes.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.6 — add capture/mark marker cross-example
 
 **Scope:** mdBook source-boundary and action/lifecycle placement examples.

@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.7 — spec-language Knowledge Map cards):
+  The audit-required durable `.spec` language subjects now have canonical Knowledge Map retrieval cards:
+  `spec-output-return-shape-contract`, `spec-regex-feature-contract`, `spec-rule-mode-semantics-map`,
+  `spec-lifecycle-retv-order`, and `spec-capture-mark-family-taxonomy`. The existing
+  `spec-edge-syntax-contract` card now also routes action-vs-blind dispatch questions. Backend/parity
+  cards such as `rust-perl-output-oracle`, `rust-anonymous-capture-slice-family`, and
+  `rust-mark-based-capture-family` remain related evidence, but they are no longer the first stop for
+  language-reference retrieval.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.6 — capture/mark marker cross-example):
   `source-boundary-helper-reference.md` and `action-and-lifecycle-placement.md` now share a verified
   marker-form example that exercises `@capture_slice`, `@mark(body_start)`, `mark_match_start(close_start)`,

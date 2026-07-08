@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-LANG-REFERENCE.6` — added a verified marker-form capture/mark cross-example,
+- latest_completed_leaf: `SPEC-LANG-REFERENCE.7` — added canonical KM cards for output/return shape,
+  regex backend features, rule modes, lifecycle/`retv`, and capture/mark taxonomy; extended the edge card
+  for action-vs-blind dispatch retrieval.
+- prior_leaf: `SPEC-LANG-REFERENCE.6` — added a verified marker-form capture/mark cross-example,
   corrected placement-sensitive named-mark examples to helper-call timing, and recorded KM fact
   `split-boundary-marker-action-timing`.
-- prior_leaf: `SPEC-LANG-REFERENCE.5.5` — added verified Declaration, Capture/Mark, Entry/Match, Input,
-  and Call helper worked examples; corrected stale entry-vs-match examples to the verified ordered-child shape.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-LANG-REFERENCE.6 - add capture/mark marker cross-example`; parent before this slice is
-  `SPEC-LANG-REFERENCE.5.5 - add remaining helper-family worked examples`.
+  `SPEC-LANG-REFERENCE.7 - add spec-language Knowledge Map cards`; parent before this slice is
+  `SPEC-LANG-REFERENCE.6 - add capture/mark marker cross-example`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `SPEC-LANG-REFERENCE.7` is the next active language-reference leaf.
-- next_action: from a clean repo, execute `.7`: ensure KM fact cards cover the durable `.spec`-language
-  subjects named by the audit (output/return shape, regex feature set, rule modes, lifecycle, edges, and
-  capture/mark taxonomy), regenerating and checking `KNOWLEDGE_MAP.md`.
+- active_work_unit: `SPEC-LANG-REFERENCE.8` is the next active language-reference leaf.
+- next_action: from a clean repo, execute `.8`: final whole-book consistency and closeout for
+  `SPEC-LANG-REFERENCE`, including mdBook/KM/live-doc/task-tree no-drift checks.
 - latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
   enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.

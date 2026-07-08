@@ -4,13 +4,16 @@ title: .spec edge syntax contract - action edges, blind-call edges, and grouped 
 answers:
   - "what is the spec edge syntax contract"
   - "what is the difference between -> and => edges"
+  - "what is the action-vs-blind edge dispatch model"
+  - "when should I use -> instead of =>"
+  - "who owns the match for action and blind-call edges"
   - "are grouped action-edge targets valid"
   - "is -> A | B valid without a code block"
   - "where is grouped action-edge syntax regression locked"
 date: 2026-07-01
 status: locked
 tags: [spec-format, dsl, action-edge, blind-call, grouped-targets]
-evidence: "SPEC-FORMAT-TERSE.3.1; t/phase0_regression.t grouped-action subtests; perl/LinkedSpec/Validation.pm grouped-target diagnostic; docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md; docs/linkedspec-book/src/appendix/formal-grammar.md"
+evidence: "SPEC-FORMAT-TERSE.3.1; t/phase0_regression.t grouped-action subtests; perl/LinkedSpec/Validation.pm grouped-target diagnostic; docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md; docs/linkedspec-book/src/user-model/blind-calls-and-parser-orchestration.md; docs/linkedspec-book/src/appendix/formal-grammar.md; SPEC-LANG-REFERENCE.7 added the action-vs-blind dispatch retrieval keys."
 reverify: "perl -Iperl -c t/phase0_regression.t"
 ---
 
@@ -27,6 +30,20 @@ As of `SPEC-FORMAT-TERSE.3.1`, Round 3 keeps the existing edge syntax:
   and each target still dispatches independently.
 - `-> A | B` without `{ code }` is invalid. The validator reports "Grouped
   action-edge targets require a shared code block".
+
+## Dispatch model
+
+Use `->` when the current rule owns the regex slot and the attached code needs
+the current local match, capture groups, source locations, or slot-indexed
+action placement. The parent remains regex-slot oriented.
+
+Use `=>` when the parent is a composition shell and the child parser should own
+the next match. The parent rule label still decides whether those blind child
+calls are sequenced, chosen, repeated choice, or repeated ordered sequence.
+Blind calls do not imply `AND` by themselves.
+
+Do not mix action edges and blind-call edges in one rule body. Split the work
+into separate rules so each rule has one execution model.
 
 Existing locks are in `t/phase0_regression.t`:
 
