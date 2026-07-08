@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **TASK-TREE-METADATA-HYGIENE.2 — reconcile stale frontier rows**
+  (DONE metadata-only cleanup; frontier `.3` doctrine/check decision next).
+
+  **Change:** Completed/completed-like task files no longer carry stale live `pending` frontier/verification/commit
+  rows. `COMPAT-ALIAS-RETIREMENT` and `NONCORE-QUARANTINE` are explicitly classified as deferred/non-goal cases
+  where their surviving deferred rows are intentional. `LINKEDSPEC-LOW-EFFORT.2` now correctly says the
+  post-commit hook verifies/warns about `MEMORY.md` drift but does not auto-regenerate it.
+
+  **Boundary:** No parser/runtime behavior changed and no public mdBook behavior changed.
+
+  **Verification:** Focused stale-marker scans, Knowledge Map regeneration/check, memory/doctrine checks, and diff
+  checks pass.
+
 - 2026-07-07: **TASK-TREE-METADATA-HYGIENE.1 — reconcile top task metadata**
   (DONE metadata-only cleanup; frontier `.2` stale frontier/verification rows next).
 

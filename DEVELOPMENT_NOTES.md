@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (TASK-TREE-METADATA-HYGIENE.2 — stale frontier rows and hook behavior):
+  Reconciled stale current-frontier, verification, and commit rows in completed/completed-like task trees. The
+  stable rule observed so far: completed task files should not retain `pending` frontier/verification/commit rows,
+  but explicitly deferred leaves remain visible as `deferred` when they are true non-goals or future strategy
+  decisions. `COMPAT-ALIAS-RETIREMENT` is the completed-with-deferred-medium-term-leaves case;
+  `NONCORE-QUARANTINE.N` is an explicit non-goal deferral and was left intact. While checking
+  `LINKEDSPEC-LOW-EFFORT.2`, verified that `.githooks/post-commit` is verification-only: it warns when
+  `MEMORY.md` lacks a parseable `latest_commit` hash or drifts from HEAD, but it does not rewrite `MEMORY.md`.
+  Any future `.3` doctrine/check must account for intentional deferred rows and the current soft-warning hook
+  boundary.
+
 - 2026-07-07 (TASK-TREE-METADATA-HYGIENE.1 — top metadata reconciliation):
   Reconciled stale active top metadata in `docs/tasks/FLUENT-BLOCK-EQUIVALENCE.md`,
   `docs/tasks/MEDIUM-IMPACT.md`, and `docs/tasks/PHASE0-BACKHALF-TRIAGE.md`. This was metadata-only: no

@@ -43,7 +43,7 @@ regex with embedded-code position tracking.
 ## Task Tree
 
 - ID: `RGX-BRANCH-TRACKING`
-  Status: `active`
+  Status: `done`
   Goal: `Replace manual alternative iteration with rgx matched_branch_number.`
   Children: `.1, .2, .3`
 
@@ -52,27 +52,27 @@ regex with embedded-code position tracking.
   Goal: `Refactor CompiledAlternation to build one combined regex.`
   Acceptance: `Combined regex compiles. matched_branch_number correctly identifies winning alternative.`
   Verification: `CompiledAlternation refactored: 1 combined regex + AltInfo per branch. 126/126 PASS.`
-  Commit: `pending`
+  Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 - ID: `RGX-BRANCH-TRACKING.2`
   Status: `done`
   Goal: `Verify capture group extraction from combined regex.`
   Acceptance: `All regex_engine tests pass (positional + named captures).`
   Verification: `All 25 regex_engine tests pass. 2 test expectations adjusted for rgx ordered-alternation semantics. 126/126 PASS.`
-  Commit: `pending` (bundled with .1)
+  Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2` (bundled with .1)
 
 - ID: `RGX-BRANCH-TRACKING.3`
   Status: `done`
   Goal: `Finalization: update live docs, close tree.`
   Acceptance: `Live docs reflect rgx branch tracking. Tree moved to Completed.`
   Verification: `Live docs updated. Tree closed.`
-  Commit: `pending`
+  Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RGX-BRANCH-TRACKING.1` | `pending` | Core combined regex refactor |
+| — | `RGX-BRANCH-TRACKING` | `done` | All three leaves are complete; no live frontier remains. |
 
 ## Decisions
 
@@ -86,12 +86,20 @@ regex with embedded-code position tracking.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-06-15` | `RGX-BRANCH-TRACKING.1` | See leaf verification above | PASS / completed |
+| `2026-06-15` | `RGX-BRANCH-TRACKING.2` | See leaf verification above | PASS / completed |
+| `2026-06-15` | `RGX-BRANCH-TRACKING.3` | See leaf verification above | PASS / completed |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `RGX-BRANCH-TRACKING.1` | not backfilled | Classified stale commit metadata by `TASK-TREE-METADATA-HYGIENE.2`. |
+| `RGX-BRANCH-TRACKING.2` | not backfilled | Classified stale commit metadata by `TASK-TREE-METADATA-HYGIENE.2`; bundled with `.1` per leaf note. |
+| `RGX-BRANCH-TRACKING.3` | not backfilled | Classified stale commit metadata by `TASK-TREE-METADATA-HYGIENE.2`. |
 
 ## Changelog
 
 - `2026-06-15`: Created task tree. matched_branch_number is rgx's clean equivalent of Perl's (?{$pos=N}) position tracking.
+- `2026-07-07`: `TASK-TREE-METADATA-HYGIENE.2` reconciled stale frontier, verification, and commit rows against
+  the central completed-tree index.

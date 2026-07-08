@@ -53,66 +53,66 @@ canonical test corpus every backend runs against.
   Goal: `Multi-backend ADR 0006 — formalize the Rust/Julia/Dart backend vision as a durable decision record (layer C), with explicit lockstep contracts, the universal .spec surface, and HandlerIR as the decoupling seam.`
   Acceptance: `ADR 0006 recorded in docs/decisions/; INDEX.md updated; linked from ROADMAP_V2.md; linked from the owning task-tree.`
   Verification: `PASS — ADR 0006 created, INDEX.md updated, memory-arch check PASS`
-  Commit: `pending`
+  Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.2`
   Status: `done`
   Goal: `Formal .spec grammar specification — produce a standalone, unambiguous grammar reference that defines valid .spec syntax without depending on the Perl bootstrap parser. Covers rule labels, modes, regexes, lifecycles, edges, code blocks, split markers, fluent chains, and paragraph structure.`
   Acceptance: `Specification exists as a tracked document (mdBook chapter or standalone reference); covers all 37 syntax categories from PHASE7-SELF-HOSTED-SPEC.1 inventory; readable by a non-Perl implementer.`
   Verification: `PASS — docs/linkedspec-book/src/appendix/formal-grammar.md created (12 sections, covers all syntax categories); SUMMARY.md updated`
-  Commit: `pending`
+  Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.3`
   Status: `done`
   Goal: `HandlerIR specification — create the missing docs/knowledge/handler-ir-design.md card. Define every HandlerIR node type, every field, its semantics, and the contract between variant builders and backend emitters. Reference the existing JSON diagnostic backend as a concrete output example.`
   Acceptance: `docs/knowledge/handler-ir-design.md exists; all 10 variant builders' IR shapes documented; field semantics defined without Perl references; linked from language-agnostic-backend-vision.md (replaces the "(to be created)" placeholder).`
   Verification: `PASS — handler-ir-design.md created (all 10 variant kinds, field tables, emitter contract, lifecycle semantics, current limitations); language-agnostic-backend-vision.md placeholder fixed`
-  Commit: `pending`
+  Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.4`
   Status: `done`
   Goal: `Helper contract catalog — produce one canonical reference covering all 100+ helpers across 10 families. Each entry: helper name, signature, input/output types, behavioral contract, edge cases. Extract and formalize from existing Contracts.pm + USER_GUIDE files; organize by family.`
   Acceptance: `Catalog exists as a tracked document; covers all helper families (scalar, array, hash, arithmetic, string, flow, capture/mark, declaration, assignment, control-flow); each helper has a signature, type contract, and behavioral description in language-neutral terms.`
   Verification: `PASS — helper-contract-catalog.md created (10 families, 100+ helpers, cross-cutting contracts, compatibility alias table)`
-  Commit: `pending`
+  Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.5`
   Status: `done`
   Goal: `Runtime semantics specification — define precisely seek/consume, BACKTRACK, lifecycle execution order, accumulator conventions, edge dispatch, handler variant selection, zero-progress guard, error handling, determinism guarantees.`
   Acceptance: `Specification exists as a tracked document; each subsection is precise enough for independent reimplementation; cross-referenced with formal grammar and HandlerIR spec.`
   Verification: `PASS — runtime-semantics.md created (11 sections: parse modes, execution model, lifecycles, BACKTRACK, accumulators, edge dispatch, variant selection, regex dispatch, zero-progress, errors, determinism)`
-  Commit: `pending`
+  Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.6`
   Status: `done`
   Goal: `Language-neutral test corpus — create tests/corpus/ with JSON-serialized input/expected-output pairs. Cover: representative specs (Lispish, tablegrep, simple_grammar).`
   Acceptance: `tests/corpus/ exists with README.md; 3 entries seeded (simple_grammar with expected output, Lispish + tablegrep with generation scripts); format is self-describing and language-agnostic.`
   Verification: `PASS — tests/corpus/ created with README.md, 3 test entries (simple_grammar with expected JSON, Lispish + tablegrep with generation commands)`
-  Commit: `pending`
+  Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.7`
   Status: `done`
   Goal: `mdBook handoff chapter — create a single entry point linking all specification artifacts for backend implementers.`
   Acceptance: `backend-handoff.md created with reading order, architecture overview, what-to-build checklist, regex engine guidance, specification index; SUMMARY.md updated.`
   Verification: `PASS — backend-handoff.md created (specification index, architecture diagram, handoff checklist); SUMMARY.md updated`
-  Commit: `pending`
+  Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 - ID: `PHASE8-MULTI-BACKEND-HANDOFF.8`
   Status: `done`
   Goal: `Finalization — verify all deliverables, run memory-arch check, update ROADMAP_V2.md / ROADMAP.md, refresh live docs, move tree to Completed.`
   Acceptance: `All prior leaves done; scripts/check_memory_architecture.sh PASS; ROADMAP_V2.md Phase 8 → done; MEMORY.md updated; tree in Completed.`
   Verification: `PASS — memory-arch check PASS (no code changed, phase0 unchanged); ROADMAP_V2.md updated`
-  Commit: `pending`
+  Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 4 | `PHASE8-MULTI-BACKEND-HANDOFF.4` | `pending` | Helper catalog — extraction/formalization of existing Contracts.pm + USER_GUIDE content. |
-| 5 | `PHASE8-MULTI-BACKEND-HANDOFF.5` | `pending` | Runtime semantics — depends on .2 (grammar) and .4 (helpers) for cross-references. |
-| 6 | `PHASE8-MULTI-BACKEND-HANDOFF.6` | `pending` | Test corpus — depends on .2 (grammar) and .5 (semantics) to encode correct expectations. |
-| 7 | `PHASE8-MULTI-BACKEND-HANDOFF.7` | `pending` | mdBook handoff — links all prior artifacts; depends on .1–.6 being substantially complete. |
-| 8 | `PHASE8-MULTI-BACKEND-HANDOFF.8` | `pending` | Finalization — gates on all prior leaves done. |
+| 4 | `PHASE8-MULTI-BACKEND-HANDOFF.4` | `done` | Helper catalog complete. |
+| 5 | `PHASE8-MULTI-BACKEND-HANDOFF.5` | `done` | Runtime semantics complete. |
+| 6 | `PHASE8-MULTI-BACKEND-HANDOFF.6` | `done` | Test corpus complete. |
+| 7 | `PHASE8-MULTI-BACKEND-HANDOFF.7` | `done` | mdBook handoff complete. |
+| 8 | `PHASE8-MULTI-BACKEND-HANDOFF.8` | `done` | Finalization complete; no live frontier remains. |
 
 ## Decisions
 
@@ -148,8 +148,17 @@ canonical test corpus every backend runs against.
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `pending` | `pending` | `pending` |
+| `PHASE8-MULTI-BACKEND-HANDOFF.1` | not backfilled | Classified stale commit metadata by `TASK-TREE-METADATA-HYGIENE.2`. |
+| `PHASE8-MULTI-BACKEND-HANDOFF.2` | not backfilled | Classified stale commit metadata by `TASK-TREE-METADATA-HYGIENE.2`. |
+| `PHASE8-MULTI-BACKEND-HANDOFF.3` | not backfilled | Classified stale commit metadata by `TASK-TREE-METADATA-HYGIENE.2`. |
+| `PHASE8-MULTI-BACKEND-HANDOFF.4` | not backfilled | Classified stale commit metadata by `TASK-TREE-METADATA-HYGIENE.2`. |
+| `PHASE8-MULTI-BACKEND-HANDOFF.5` | not backfilled | Classified stale commit metadata by `TASK-TREE-METADATA-HYGIENE.2`. |
+| `PHASE8-MULTI-BACKEND-HANDOFF.6` | not backfilled | Classified stale commit metadata by `TASK-TREE-METADATA-HYGIENE.2`. |
+| `PHASE8-MULTI-BACKEND-HANDOFF.7` | not backfilled | Classified stale commit metadata by `TASK-TREE-METADATA-HYGIENE.2`. |
+| `PHASE8-MULTI-BACKEND-HANDOFF.8` | not backfilled | Classified stale commit metadata by `TASK-TREE-METADATA-HYGIENE.2`. |
 
 ## Changelog
 
 - `2026-06-14`: Created task tree — 8 leaves covering ADR, formal grammar, HandlerIR spec, helper catalog, runtime semantics, test corpus, mdBook handoff, and finalization.
+- `2026-07-07`: `TASK-TREE-METADATA-HYGIENE.2` reconciled stale frontier and commit rows against the central
+  completed-tree index.

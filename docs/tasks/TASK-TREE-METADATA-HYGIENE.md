@@ -6,7 +6,7 @@
 - Status: `active` (created 2026-07-07 from the user-requested open-task-tree audit)
 - Roadmap lane: `Overall roadmap - durable architecture / task-tree hygiene`
 - Created: `2026-07-07`
-- Last updated: `2026-07-07` (`.1` done; frontier `.2`)
+- Last updated: `2026-07-08` (`.2` done; frontier `.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -63,18 +63,22 @@ agents can determine the true open/closed task state without re-auditing old tas
   Commit: `TASK-TREE-METADATA-HYGIENE.1 - reconcile top task metadata`
 
 - ID: `TASK-TREE-METADATA-HYGIENE.2`
-  Status: `pending`
+  Status: `done`
   Goal: Reconcile stale current-frontier/verification rows in completed or completed-like task trees.
   Acceptance: The following candidates are corrected or explicitly classified:
     `COMPAT-ALIAS-TEST-CLEANUP.md`, `LIFECYCLE-FAMILY-AUDIT.md`, `LINKEDSPEC-LOW-EFFORT.md`,
     `RGX-BRANCH-TRACKING.md`, `PHASE8-MULTI-BACKEND-HANDOFF.md`,
     `COMPAT-ALIAS-RETIREMENT-V2.md`. `COMPAT-ALIAS-RETIREMENT.md` and `NONCORE-QUARANTINE.md` are classified as
     explicit deferred/non-goal cases before any edit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done - 2026-07-08. Reconciled stale frontier, verification, and commit metadata in the named
+    completed/completed-like task files. `COMPAT-ALIAS-RETIREMENT` is classified as completed with intentionally
+    deferred medium-term alias leaves; `NONCORE-QUARANTINE` is classified as done with `.N` as an explicit
+    deferred non-goal and needed no edit. Also corrected stale `LINKEDSPEC-LOW-EFFORT.2` wording: the
+    post-commit hook verifies/warns about `MEMORY.md` drift but does not auto-regenerate it.
+  Commit: `TASK-TREE-METADATA-HYGIENE.2 - reconcile stale frontier rows`
 
 - ID: `TASK-TREE-METADATA-HYGIENE.3`
-  Status: `pending` (deferred until `.1` and `.2` reveal the stable invariant)
+  Status: `pending`
   Goal: Decide whether to add a lightweight doctrine/check for stale task-tree metadata.
   Acceptance: Either a focused check is added to the doctrine registry with low false-positive risk, or the tree
     records why a manual audit is the safer policy for now.
@@ -86,8 +90,8 @@ agents can determine the true open/closed task state without re-auditing old tas
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `TASK-TREE-METADATA-HYGIENE.1` | `done` | Top-level metadata contradictions are reconciled so completed trees no longer look live. |
-| 2 | `TASK-TREE-METADATA-HYGIENE.2` | `pending` | Stale frontier rows are next; they are noisier but mostly within already completed task files. |
-| - | `TASK-TREE-METADATA-HYGIENE.3` | `pending` (deferred) | Gate design should wait until `.1`/`.2` show the real invariant and false-positive risk. |
+| 2 | `TASK-TREE-METADATA-HYGIENE.2` | `done` | Stale frontier/verification/commit rows are reconciled or explicitly classified. |
+| 3 | `TASK-TREE-METADATA-HYGIENE.3` | `pending` | Decide whether the observed invariant is safe enough for an automated doctrine check. |
 
 ## Decisions
 
@@ -109,11 +113,16 @@ agents can determine the true open/closed task state without re-auditing old tas
   `LINKEDSPEC-LOW-EFFORT.md`, `RGX-BRANCH-TRACKING.md`, `PHASE8-MULTI-BACKEND-HANDOFF.md`, and
   `COMPAT-ALIAS-RETIREMENT-V2.md`. `COMPAT-ALIAS-RETIREMENT.md` and `NONCORE-QUARANTINE.md` appear to include
   explicit deferred/non-goal leaves and must be classified carefully before any edit.
+- `2026-07-08`: `.2` reconciled the named completed/completed-like task files. `COMPAT-ALIAS-RETIREMENT.md` is a
+  completed tree with explicit deferred medium-term leaves, and `NONCORE-QUARANTINE.md` is a done tree with `.N` as
+  an explicit deferred non-goal; those deferred rows are not stale live frontiers. `.2` also corrected stale
+  `LINKEDSPEC-LOW-EFFORT.2` wording after verifying `.githooks/post-commit` is verification-only: it warns when
+  `MEMORY.md` lacks a parseable `latest_commit` hash or drifts from HEAD, but it does not rewrite `MEMORY.md`.
 
 ## Open Questions
 
-- None blocking `.1`. The `.3` gate design question is intentionally deferred until the cleanup leaves clarify the
-  stable checkable pattern.
+- None blocking `.3`. The next leaf decides whether the now-observed cleanup pattern can become a low-noise
+  doctrine check.
 
 ## Blockers
 
@@ -123,6 +132,7 @@ agents can determine the true open/closed task state without re-auditing old tas
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-08` | `TASK-TREE-METADATA-HYGIENE.2` | Focused stale-marker scans over the named completed/completed-like task files; post-commit hook inspection; memory/doctrine/diff gates | PASS — stale frontier/verification/commit rows reconciled or explicitly classified without parser/runtime/public-book behavior change. |
 | `2026-07-07` | `TASK-TREE-METADATA-HYGIENE.1` | Focused metadata/status scans over the three named task files; memory/doctrine/diff gates | PASS — stale active top metadata reconciled without parser/runtime/public-book behavior change. |
 | `2026-07-07` | `TASK-TREE-METADATA-HYGIENE.0` | Read-only audit of central index, active task files, and stale metadata candidates; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `git diff --check` | PASS |
 
@@ -130,6 +140,7 @@ agents can determine the true open/closed task state without re-auditing old tas
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `TASK-TREE-METADATA-HYGIENE.2` | `TASK-TREE-METADATA-HYGIENE.2 - reconcile stale frontier rows` | Reconciles stale current-frontier, verification, and commit rows in completed/completed-like task files; `.3` gate decision is next. |
 | `TASK-TREE-METADATA-HYGIENE.1` | `TASK-TREE-METADATA-HYGIENE.1 - reconcile top task metadata` | Reconciles stale active top metadata in the three named completed/exhausted task files; frontier becomes `.2`. |
 | `TASK-TREE-METADATA-HYGIENE.0` | `TASK-TREE-METADATA-HYGIENE.0 - own task-tree metadata audit` | Tracking-only owner for the user-requested open-task-tree audit finding. |
 
@@ -140,3 +151,6 @@ agents can determine the true open/closed task state without re-auditing old tas
   gate decision.
 - `2026-07-07`: Completed `.1` by reconciling stale top metadata in `FLUENT-BLOCK-EQUIVALENCE.md`,
   `MEDIUM-IMPACT.md`, and `PHASE0-BACKHALF-TRIAGE.md`. Frontier moves to `.2`.
+- `2026-07-08`: Completed `.2` by reconciling stale current-frontier/verification/commit metadata in
+  completed/completed-like task files and by explicitly classifying the surviving deferred/non-goal rows. Frontier
+  moves to `.3` for the doctrine/check decision.

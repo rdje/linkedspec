@@ -36,7 +36,7 @@ until a dedicated test migration strategy is available.
 ## Task Tree
 
 - ID: `COMPAT-ALIAS-RETIREMENT`
-  Status: `active`
+  Status: `completed` (done leaves plus explicit deferred medium-term leaves)
   Goal: `Remove all 8 compatibility aliases from code, tests, and docs.`
   Children: `COMPAT-ALIAS-RETIREMENT.1`, `COMPAT-ALIAS-RETIREMENT.2`, `COMPAT-ALIAS-RETIREMENT.3`, `COMPAT-ALIAS-RETIREMENT.4`
 
@@ -59,7 +59,7 @@ until a dedicated test migration strategy is available.
   Goal: `Update test references to medium-term aliases — blocked by .2 deferral. Three automated replacement strategies attempted (canonical with ', canonical with ", return(1) filler); all failed due to Perl quoting context conflicts across 692 references.`
   Acceptance: `Deferred with .2. Future approach: either (a) write a context-aware Perl parser for the test file, or (b) add internal compatibility redirects that keep return_a/m/ma/imatch working but undocumented.`
   Verification: `2026-06-12: Three replacement attempts; all produced Perl syntax errors in "..." contexts due to unescaped quotes.`
-  Commit: `pending`
+  Commit: `n/a (deferred with .2)`
 
 - ID: `COMPAT-ALIAS-RETIREMENT.4`
   Status: `done`
@@ -113,3 +113,5 @@ until a dedicated test migration strategy is available.
 - `2026-06-12`: Attempted .2 — infrastructure removal committed (`390a87e`), verified correct, but reverted (`9d5f20f`) because .3 test migration proved infeasible with current tooling.
 - `2026-06-12`: Completed .4 — documentation updated; .2/.3 deferred with detailed rationale.
 - `2026-06-12`: Tree marked `completed` — all 4 leaves done or deferred. Moved to Completed in `docs/TASK_TREE.md`. Commit logs backfilled.
+- `2026-07-07`: `TASK-TREE-METADATA-HYGIENE.2` classified this tree as an explicit completed-with-deferred-leaves
+  case, not a live frontier. Medium-term `.2`/`.3` remain deferred by design.

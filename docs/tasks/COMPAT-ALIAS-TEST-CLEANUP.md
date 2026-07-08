@@ -32,7 +32,7 @@ Remove the remaining ~115 stale test infrastructure blocks in `t/phase0_regressi
 ## Task Tree
 
 - ID: `COMPAT-ALIAS-TEST-CLEANUP`
-  Status: `active`
+  Status: `done`
   Goal: `Remove stale test infrastructure blocks referencing retired compatibility aliases.`
   Children: `COMPAT-ALIAS-TEST-CLEANUP.1`, `COMPAT-ALIAS-TEST-CLEANUP.2`, `COMPAT-ALIAS-TEST-CLEANUP.3`
 
@@ -41,29 +41,29 @@ Remove the remaining ~115 stale test infrastructure blocks in `t/phase0_regressi
   Goal: `Remove stale scanner contract test blocks and diagnostic contract tables that reference retired return_a/return_ma/return_m/return_imatch contracts.`
   Acceptance: `Scanned contract lists, diagnostic reference tables, and contract-exercising subtests no longer reference retired return helpers. Test file syntax OK.`
   Verification: `2026-06-14: contract_id return_a → return_general (2 occurrences), RETUR_A → RETURN expectations (multiple), call_spec_handler_subst tests updated (return_ma → return(payload), return_imatch → return(array(...)), return_array → return(array(...))). Test file syntax OK. 20/20 specs compile OK.`
-  Commit: `pending`
+  Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 - ID: `COMPAT-ALIAS-TEST-CLEANUP.2`
   Status: `done`
   Goal: `Remove stale delegation/override test blocks that reference removed _lower_return_imatch_statement and _lower_return_array_statement functions. Update callback registries and dep-spec lists.`
   Acceptance: `All references to removed lowering functions removed from delegation tests, callback lists, and override subtests. Test file syntax OK.`
   Verification: `2026-06-14: lower_return_imatch_statement removed from Contracts dep map override + Synthetic::ActionIROwner list. lower_return_array_statement removed from Contracts dep map override + Synthetic::ActionIROwner list. Callback registration list in dep-spec test updated. Test file syntax OK.`
-  Commit: `pending`
+  Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 - ID: `COMPAT-ALIAS-TEST-CLEANUP.3`
-  Status: `in_progress`
+  Status: `done`
   Goal: `Finalize: update live docs, verify 20/20 specs compile, close tree.`
   Acceptance: `Live docs updated. All 20 specs compile. Tree closed.`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `classified complete by TASK-TREE-METADATA-HYGIENE.2; central index marks all three leaves complete`
+  Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `COMPAT-ALIAS-TEST-CLEANUP.1` | `pending` | Scanner contract and diagnostics table blocks — most mechanical to clean up. |
-| 2 | `COMPAT-ALIAS-TEST-CLEANUP.2` | `pending` | Delegation/override tests — more delicate, need careful removal. |
-| 3 | `COMPAT-ALIAS-TEST-CLEANUP.3` | `pending` | Finalize: docs, verify, close tree. |
+| 1 | `COMPAT-ALIAS-TEST-CLEANUP.1` | `done` | Scanner contract and diagnostics table cleanup completed. |
+| 2 | `COMPAT-ALIAS-TEST-CLEANUP.2` | `done` | Delegation/override cleanup completed. |
+| 3 | `COMPAT-ALIAS-TEST-CLEANUP.3` | `done` | Finalization completed; central index marks the tree complete. |
 
 ## Decisions
 
@@ -81,18 +81,20 @@ Remove the remaining ~115 stale test infrastructure blocks in `t/phase0_regressi
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
-| `2026-06-14` | `COMPAT-ALIAS-TEST-CLEANUP.1` | `pending` | `pending` |
-| `2026-06-14` | `COMPAT-ALIAS-TEST-CLEANUP.2` | `pending` | `pending` |
-| `2026-06-14` | `COMPAT-ALIAS-TEST-CLEANUP.3` | `pending` | `pending` |
+| `2026-06-14` | `COMPAT-ALIAS-TEST-CLEANUP.1` | See leaf verification above | PASS / completed |
+| `2026-06-14` | `COMPAT-ALIAS-TEST-CLEANUP.2` | See leaf verification above | PASS / completed |
+| `2026-07-07` | `COMPAT-ALIAS-TEST-CLEANUP.3` | Classified from central index during `TASK-TREE-METADATA-HYGIENE.2` | COMPLETE; historical command detail not backfilled here |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `COMPAT-ALIAS-TEST-CLEANUP.1` | `pending` | `pending` |
-| `COMPAT-ALIAS-TEST-CLEANUP.2` | `pending` | `pending` |
-| `COMPAT-ALIAS-TEST-CLEANUP.3` | `pending` | `pending` |
+| `COMPAT-ALIAS-TEST-CLEANUP.1` | not backfilled | Classified stale commit metadata by `TASK-TREE-METADATA-HYGIENE.2`. |
+| `COMPAT-ALIAS-TEST-CLEANUP.2` | not backfilled | Classified stale commit metadata by `TASK-TREE-METADATA-HYGIENE.2`. |
+| `COMPAT-ALIAS-TEST-CLEANUP.3` | not backfilled | Classified stale commit metadata by `TASK-TREE-METADATA-HYGIENE.2`. |
 
 ## Changelog
 
 - `2026-06-14`: Created task tree as follow-on to COMPAT-ALIAS-RETIREMENT-V2.
+- `2026-07-07`: `TASK-TREE-METADATA-HYGIENE.2` reconciled stale frontier, verification, and commit rows against
+  the central completed-tree index.

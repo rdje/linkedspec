@@ -18,21 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `TASK-TREE-METADATA-HYGIENE.1` — metadata-only reconciliation of stale active top status
-  in `FLUENT-BLOCK-EQUIVALENCE`, `MEDIUM-IMPACT`, and `PHASE0-BACKHALF-TRIAGE`. Those completed/exhausted task
-  files now align their top metadata with their own body text, and the hygiene frontier advances to `.2`.
-- prior_leaf: `SPEC-FORMAT-TERSE.14.5` — final trailing block-argument no-drift closeout. Roadmap, mdBook project
-  status, Knowledge Map retrieval, task-tree state, live docs, and the generated 95-fixture oracle corpus agree
-  that the shipped surface is helper-function `with(value) { ... }` / `with() { ... }` plus receiver-method
-  `.with() { ... }` on Perl/Rust, with no closures or delayed callbacks.
+- latest_completed_leaf: `TASK-TREE-METADATA-HYGIENE.2` — metadata-only reconciliation of stale
+  current-frontier, verification, and commit rows in completed/completed-like task files. Intentional deferred rows
+  remain visible for `COMPAT-ALIAS-RETIREMENT` medium-term aliases and `NONCORE-QUARANTINE.N`.
+- prior_leaf: `TASK-TREE-METADATA-HYGIENE.1` — stale active top metadata reconciled in
+  `FLUENT-BLOCK-EQUIVALENCE`, `MEDIUM-IMPACT`, and `PHASE0-BACKHALF-TRIAGE`.
 - latest_commit: HEAD containing this pointer should be
-  `TASK-TREE-METADATA-HYGIENE.1 - reconcile top task metadata`; parent before this slice includes
-  `SPEC-FORMAT-TERSE.14.5 - close trailing block drift`.
+  `TASK-TREE-METADATA-HYGIENE.2 - reconcile stale frontier rows`; parent before this slice includes
+  `TASK-TREE-METADATA-HYGIENE.1 - reconcile top task metadata`.
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: none in-flight after `.1`; repo should be handoff-ready after commit and
+- active_work_unit: none in-flight after `.2`; repo should be handoff-ready after commit and
   `git_message_brief.txt` cleanup.
-- next_action: continue `TASK-TREE-METADATA-HYGIENE.2` after this `.1` commit is clean; it owns stale
-  frontier/verification rows in completed or completed-like task files. Do not pivot while the repo is dirty.
+- next_action: continue `TASK-TREE-METADATA-HYGIENE.3` after this `.2` commit is clean; decide whether the observed
+  metadata invariant is safe enough for a low-noise doctrine/check. Do not pivot while the repo is dirty.
 - latest_bootstrap_read: 2026-07-07/08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, mdBook source, core Perl/Rust implementation, shipped specs, tooling, and focused
   test harness inventory. The task-tree audit found stale per-file metadata; it is owned by

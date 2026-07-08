@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — TASK-TREE-METADATA-HYGIENE.2 — reconcile stale frontier rows
+
+**Scope:** Metadata-only reconciliation for completed/completed-like task trees that still carried stale
+`Current Frontier`, verification, or commit rows.
+
+**Change:** Reconciled stale rows in `COMPAT-ALIAS-TEST-CLEANUP.md`, `LIFECYCLE-FAMILY-AUDIT.md`,
+`LINKEDSPEC-LOW-EFFORT.md`, `RGX-BRANCH-TRACKING.md`, `PHASE8-MULTI-BACKEND-HANDOFF.md`, and
+`COMPAT-ALIAS-RETIREMENT-V2.md`. `COMPAT-ALIAS-RETIREMENT.md` is explicitly classified as completed with deferred
+medium-term leaves; `NONCORE-QUARANTINE.md` is classified as done with `.N` as an explicit deferred non-goal and
+needed no edit. Added a Knowledge fact for the post-commit hook behavior after confirming it verifies/warns about
+`MEMORY.md` drift but does not auto-regenerate the file.
+
+**Boundary:** No parser/runtime behavior changed and no public mdBook behavior changed.
+
+**Validation:** Focused stale-marker scans, Knowledge Map regeneration/check, memory/doctrine checks, and diff
+checks pass.
+
 ## 2026-07-07 — TASK-TREE-METADATA-HYGIENE.1 — reconcile top task metadata
 
 **Scope:** Metadata-only reconciliation for completed/exhausted task trees that still advertised `active` at the

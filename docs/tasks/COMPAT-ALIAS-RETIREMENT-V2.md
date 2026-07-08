@@ -51,14 +51,14 @@ Implement the compatibility alias retirement policy defined in METHOD-LIKE-DSL-M
   Goal: `Retire medium-term legacy return helpers (return_a, return_ma, return_m, return_imatch/return_im) from: LegacyRules.pm scanner contracts, Contracts.pm rewrite rules, CanonicalEvents/Core.pm event mappings, PrimitivePipelineRules.pm scanner, FlowRules.pm scanner, EmitContext.pm forwarders, MethodLowering.pm lowering functions.`
   Acceptance: `All 4 legacy return helper aliases removed from scanner contracts, rewrite rules, and canonical event mappings. Only canonical return(...) remains. 20/20 specs compile OK.`
   Verification: `2026-06-14: Removed from all 7 implementation files: LegacyRules.pm (3 dispatch entries + 3 scan functions = 57 lines), Contracts.pm (5 contract entries + 4 dep refs = 85 lines), CanonicalEvents/Core.pm (4 event mappings), PrimitivePipelineRules.pm (1 scan contract), FlowRules.pm (1 scan contract), EmitContext.pm (2 forwarders), MethodLowering.pm (2 lowering functions). All files syntax OK. 20/20 specs compile OK. Runtime verification: return_a(Top) in I-block now produces "Undefined subroutine" error — correctly unrecognized. Test file return_a references partially replaced with return(1); remaining test cleanup deferred to .3.`
-  Commit: `pending`
+  Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 - ID: `COMPAT-ALIAS-RETIREMENT-V2.3`
   Status: `done`
   Goal: `Finalize: migrate/remove alias-exercising regression tests, update live docs (DEVELOPMENT_NOTES.md mark all 8 aliases as retired, CHANGES.md record retirement), run full verification gate, close tree.`
   Acceptance: `All alias regression locks migrated to canonical forms or removed. Live docs updated. Full gate green. Tree closed.`
   Verification: `2026-06-14: ~130 return_a(X) → return(1) replacements in phase0_regression.t spec content strings. Remaining ~115 return_a references are in now-stale test infrastructure blocks (scanner contract lists, delegation tests, diagnostics assertions, callback registries) that reference removed functions — these blocks need targeted removal in a follow-on task. 20/20 specs compile OK. All 7 implementation files syntax-clean. Live docs updated across CHANGES.md, DEVELOPMENT_NOTES.md, LIVE_ACHIEVEMENT_STATUS.md. Tree closed. Remaining test cleanup tracked as open item.`
-  Commit: `pending`
+  Commit: `not backfilled in this file; classified stale metadata by TASK-TREE-METADATA-HYGIENE.2`
 
 ## Current Frontier
 
@@ -66,7 +66,7 @@ Implement the compatibility alias retirement policy defined in METHOD-LIKE-DSL-M
 | --- | --- | --- | --- |
 | 1 | `COMPAT-ALIAS-RETIREMENT-V2.1` | `done` | Audit confirms implementation already clean — remaining work is doc cleanup for stale compatibility claims. |
 | 2 | `COMPAT-ALIAS-RETIREMENT-V2.2` | `done` | Medium-term legacy return helpers removed from all 7 implementation files. |
-| 3 | `COMPAT-ALIAS-RETIREMENT-V2.3` | `pending` | Finalize: clean up tests, update docs, verify, close tree. |
+| 3 | `COMPAT-ALIAS-RETIREMENT-V2.3` | `done` | Finalization complete; follow-on test cleanup is tracked by `COMPAT-ALIAS-TEST-CLEANUP`. |
 
 ## Decisions
 
@@ -89,17 +89,20 @@ Implement the compatibility alias retirement policy defined in METHOD-LIKE-DSL-M
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-06-14` | `COMPAT-ALIAS-RETIREMENT-V2.1` | Implementation audit: BootstrapSpec/Core.pm, MethodLowering.pm (dispatch + rewrite regexes), FlowExpr.pm, DeclareMethod.pm, Scanner files, Contracts.pm — all canonical-only. USER_GUIDE.md: 7 stale compatibility claims removed. Book source clean. 20/20 specs compile OK. Phase0 test file syntax OK. Memory-arch check passes. | PASS — implementation already clean; docs fixed. |
-| `2026-06-14` | `COMPAT-ALIAS-RETIREMENT-V2.2` | `pending` | `pending` |
-| `2026-06-14` | `COMPAT-ALIAS-RETIREMENT-V2.3` | `pending` | `pending` |
+| `2026-06-14` | `COMPAT-ALIAS-RETIREMENT-V2.2` | See leaf verification above | PASS / completed |
+| `2026-06-14` | `COMPAT-ALIAS-RETIREMENT-V2.3` | See leaf verification above | PASS / completed; follow-on cleanup tracked separately |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `COMPAT-ALIAS-RETIREMENT-V2.1` | `COMPAT-ALIAS-RETIREMENT-V2.1 — Audit short-term aliases: implementation already clean + doc cleanup` | Implementation already canonical-only across all 7 layers; USER_GUIDE.md updated (7 edits); 20/20 specs compile. |
-| `COMPAT-ALIAS-RETIREMENT-V2.2` | `pending` | `pending` |
-| `COMPAT-ALIAS-RETIREMENT-V2.3` | `pending` | `pending` |
+| `COMPAT-ALIAS-RETIREMENT-V2.2` | not backfilled | Classified stale commit metadata by `TASK-TREE-METADATA-HYGIENE.2`. |
+| `COMPAT-ALIAS-RETIREMENT-V2.3` | not backfilled | Classified stale commit metadata by `TASK-TREE-METADATA-HYGIENE.2`. |
 
 ## Changelog
 
 - `2026-06-14`: Created task tree from ROADMAP_V2.md near-term priority 2 and METHOD-LIKE-DSL-MIGRATION.1 retirement policy.
+- `2026-07-07`: `TASK-TREE-METADATA-HYGIENE.2` reconciled stale frontier, verification, and commit rows against
+  the central completed-tree index. The remaining test cleanup noted by `.3` is classified as follow-on work owned
+  by `COMPAT-ALIAS-TEST-CLEANUP`, not a live frontier in this tree.
