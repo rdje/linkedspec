@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-07 — SPEC-FORMAT-TERSE.14.5 — close trailing block drift
+
+**Scope:** Final no-drift closeout for the shipped trailing block-argument surface.
+
+**Change:** Synchronized the execution roadmap, mdBook project-status wording, and Knowledge fact for the final
+`.14` state: helper-function form `with(value) { ... }` / `with() { ... }` and receiver-method form `.with() { ... }` are shipped
+on Perl and Rust, the Rust oracle corpus is at 95 fixtures after `terse_14_4_receiver_with_trailing_block`, and
+`.14` is closed after the docs/KM/oracle sweep.
+
+**Boundary:** No parser/runtime behavior changed. Bare `with { ... }`, explicit receiver `.with(value) { ... }`,
+closures, delayed callbacks, assignable/returnable blocks, and arbitrary non-`with` trailing blocks remain
+deferred behind future task-tree ownership.
+
+**Validation:** Focused stale-wording scans, mdBook build, Knowledge Map regeneration/check, oracle regeneration,
+Rust oracle pass, memory/doctrine checks, and diff checks pass.
+
 ## 2026-07-07 — SPEC-FORMAT-TERSE.14.4 — add receiver trailing blocks
 
 **Scope:** Receiver-form trailing block arguments for `.with() { ... }` on Perl and Rust.
@@ -37,9 +53,9 @@ generated artifacts.
 
 ## 2026-07-07 — SPEC-FORMAT-TERSE.14.3 — add Rust helper trailing blocks
 
-**Scope:** Rust helper-form parity for `with(value) { ... }` / `with() { ... }` trailing block arguments.
+**Scope:** Rust helper-function form parity for `with(value) { ... }` / `with() { ... }` trailing block arguments.
 
-**Change:** Rust now parses helper-form `with(...) { ... }` by appending a final `BlockValue` argument only for the
+**Change:** Rust now parses helper-function form `with(...) { ... }` by appending a final `BlockValue` argument only for the
 owned `with` helper form. Runtime dispatch treats `with` as lazy, evaluates the optional value argument, binds
 scoped scalar `value` for immediate block execution, restores the previous same-name runtime state afterward, and
 reuses expression-valued block semantics for block-local `return(expr)`. Public docs now state the lexical
@@ -57,7 +73,7 @@ callbacks, and non-`with` helper trailing blocks remain out of scope.
 
 ## 2026-07-07 — SPEC-FORMAT-TERSE.14.2 — add Perl helper trailing blocks
 
-**Scope:** Perl reference support for helper-form trailing block arguments under `SPEC-FORMAT-TERSE.14`.
+**Scope:** Perl reference support for helper-function form trailing block arguments under `SPEC-FORMAT-TERSE.14`.
 
 **Change:** `with(value) { ... }` and `with() { ... }` now parse as helper calls with flagged final `block_value`
 arguments. MethodLowering accepts the trailing block only for `with`, binds scoped lexical `value` during immediate
@@ -79,7 +95,7 @@ blocks, and delayed callbacks remain out of scope.
 surface under `SPEC-FORMAT-TERSE.14`.
 
 **Change:** Reactivated `.14`, split it into implementation children, selected `with(value) { ... }` /
-`with() { ... }` as the first helper-form MVP, and recorded the no-closure semantics before any parser/runtime code
+`with() { ... }` as the first helper-function MVP, and recorded the no-closure semantics before any parser/runtime code
 changes. Added a Knowledge fact so future sessions can find the owner, accepted contract, and next leaf without
 redoing the scan.
 

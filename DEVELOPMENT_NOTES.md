@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-07 (SPEC-FORMAT-TERSE.14.5 — trailing block no-drift closeout boundary):
+  The shipped trailing block-argument surface is closed for `.14`: helper-function form `with(value) { ... }` / `with() { ... }`
+  and receiver-method form `.with() { ... }` are documented as immediate non-closure callbacks on Perl/Rust, with a
+  95-fixture Rust oracle after `terse_14_4_receiver_with_trailing_block`. The closeout fixed `ROADMAP_V2.md` drift
+  that still named `.14.4` and 94 fixtures, refreshed the durable Knowledge fact, and tightened the mdBook project
+  status sentence so it no longer says `.3.3.4` owns the current closure state. Broader `ROADMAP.md` and
+  `ARCHITECTURE_STATE.md` count/status drift remains intentionally owned by deferred `ROADMAP-DRIFT-RECONCILE`
+  leaves and was not activated during this `.14` closeout.
+
 - 2026-07-07 (SPEC-FORMAT-TERSE.14.4 — receiver `.with() { ... }` normalizes through the `with` block model):
   Receiver-form trailing blocks are not a separate closure mechanism. Perl normalizes `receiver.with() { ... }`
   into the same scoped `with(receiver) { ... }` execution shape before continuing the compatible receiver chain,
@@ -19,8 +28,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   submodule's stimulus, fixture, or issue-artifact corpus and are not 100% safe to remove here. Any future `rgx`
   artifact pruning needs its own submodule-owned task and status check.
 
-- 2026-07-07 (SPEC-FORMAT-TERSE.14.3 — Rust `with(value) { ... }` helper-form parity):
-  Rust now mirrors the Perl helper-form trailing block surface. The expression parser appends a final `BlockValue`
+- 2026-07-07 (SPEC-FORMAT-TERSE.14.3 — Rust `with(value) { ... }` helper-function form parity):
+  Rust now mirrors the Perl helper-function form trailing block surface. The expression parser appends a final `BlockValue`
   only for `with(...) { ... }`, validation recognizes `with`, and runtime dispatch is lazy so the block is not
   evaluated before the scoped `value` binding exists. The lexical model is call-site execution, not a closure or
   function frame: captures, `retv`, cursor state, helper/function visibility, and ordinary working-variable side
@@ -29,7 +38,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   `terse_14_3_with_helper_trailing_block`.
 
 - 2026-07-07 (SPEC-FORMAT-TERSE.14.2 — Perl `with(value) { ... }` is a flagged trailing block call):
-  The ActionIR AST parser now represents helper-form trailing blocks as normal `call` nodes with
+  The ActionIR AST parser now represents helper-function form trailing blocks as normal `call` nodes with
   `trailing_block_arg => 1` and a final `block_value` argument. MethodLowering must treat that flag as a dispatch
   boundary: only `with` is accepted in this leaf; other trailing-block callees intentionally return
   `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<callee>` instead of becoming ordinary helper arguments. The accepted
@@ -39,11 +48,11 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 
 - 2026-07-07 (SPEC-FORMAT-TERSE.14.1 — trailing block args are immediate non-closure callbacks):
   `SPEC-FORMAT-TERSE.14` is the owner for trailing code blocks used as helper/receiver arguments. The first MVP is
-  helper-form `with(value) { ... }` / `with() { ... }`: evaluate the explicit value or `undef`, bind scoped scalar
+  helper-function form `with(value) { ... }` / `with() { ... }`: evaluate the explicit value or `undef`, bind scoped scalar
   `value` during immediate block execution, restore the previous binding afterward, and return the block result.
   This does not introduce closures, assignable block values, returnable block values, or delayed invocation. Bare
   `with { ... }` stays deferred because word-plus-brace overlaps existing lifecycle/code-block body syntax.
-  Implementation starts at `.14.2` on the Perl reference helper-form path; Rust parity and receiver
+  Implementation starts at `.14.2` on the Perl reference helper-function form path; Rust parity and receiver
   `.with() { ... }` are separate leaves.
 
 - 2026-07-07 (TASK-TREE-METADATA-HYGIENE.0 — central index is authoritative for live task state):

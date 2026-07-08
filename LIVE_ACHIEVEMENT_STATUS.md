@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-07: **SPEC-FORMAT-TERSE.14.5 — close trailing block drift**
+  (DONE no-drift closeout; `SPEC-FORMAT-TERSE.14` closed).
+
+  **Change:** The trailing block-argument lane is synchronized across roadmap, mdBook status, Knowledge Map, oracle
+  corpus, task-tree, and live docs. The shipped surface remains helper-function `with(value) { ... }` / `with() { ... }` and
+  receiver-method `.with() { ... }` on Perl/Rust, with the Rust oracle corpus at **95** fixtures.
+
+  **Boundary:** No parser/runtime behavior changed. Bare `with { ... }`, explicit receiver `.with(value) { ... }`,
+  closures, delayed callbacks, assignable/returnable blocks, and arbitrary non-`with` trailing blocks remain
+  deferred.
+
+  **Verification:** Focused stale-wording scans, mdBook build, Knowledge Map regeneration/check, oracle
+  regeneration, Rust oracle pass, memory/doctrine checks, and diff checks pass.
+
 - 2026-07-07: **SPEC-FORMAT-TERSE.14.4 — add receiver trailing blocks**
   (DONE implementation; frontier `.14.5` final trailing block no-drift closeout next).
 
@@ -37,7 +51,7 @@ Current execution status for interruption-safe batch workflow recovery.
 - 2026-07-07: **SPEC-FORMAT-TERSE.14.3 — add Rust helper trailing blocks**
   (DONE implementation; next at that time was `.14.4` receiver `.with() { ... }`).
 
-  **Change:** Rust parser/runtime parity now supports helper-form `with(value) { ... }` / `with() { ... }` as an
+  **Change:** Rust parser/runtime parity now supports helper-function form `with(value) { ... }` / `with() { ... }` as an
   immediate trailing block argument. The block runs in the caller's current action/runtime context; only scalar
   `value` is the portable scoped block parameter. Runtime restores the prior `value` binding after the block, and
   block-local `return(expr)` yields the `with` result.
@@ -49,7 +63,7 @@ Current execution status for interruption-safe batch workflow recovery.
   `oracle_corpus_matches_perl_reference` passes over the full manifest-backed corpus.
 
 - 2026-07-07: **SPEC-FORMAT-TERSE.14.2 — add Perl helper trailing blocks**
-  (DONE implementation; frontier `.14.3` Rust helper-form parity next).
+  (DONE implementation; frontier `.14.3` Rust helper-function form parity next).
 
   **Change:** The Perl reference now parses and lowers `with(value) { ... }` / `with() { ... }` as immediate
   trailing block arguments. The block gets scoped lexical `value`, block-local `return(expr)` behavior, hash-literal
@@ -62,7 +76,7 @@ Current execution status for interruption-safe batch workflow recovery.
   1025 tests; mdBook, memory, Knowledge Map, doctrine, and whitespace checks pass.
 
 - 2026-07-07: **SPEC-FORMAT-TERSE.14.1 — activate trailing block-argument plan**
-  (DONE tracking/specification; frontier `.14.2` Perl helper-form implementation next).
+  (DONE tracking/specification; frontier `.14.2` Perl helper-function form implementation next).
 
   **Change:** Reactivated the non-closed `SPEC-FORMAT-TERSE.14` trailing code-block owner and split it before code.
   The first MVP is `with(value) { ... }` / `with() { ... }` as an immediate, final-only block argument with scoped

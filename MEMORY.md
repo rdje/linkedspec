@@ -18,23 +18,25 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-FORMAT-TERSE.14.4` — receiver `.with() { ... }` trailing block arguments landed on
-  Perl/Rust. The receiver value is scoped as `value`, block-local return yields the `.with` result, that result can
-  feed later compatible receiver-family links, and explicit receiver `.with(value) { ... }` remains rejected/deferred.
-- prior_leaf: `REPO-HYGIENE.3` — urgent generated-artifact cleanup removed ignored/untracked `rust/target` (5.2G)
-  and `docs/linkedspec-book/book` (7.0M); Rust tests rebuilt `rust/target` during `.14.4` verification.
+- latest_completed_leaf: `SPEC-FORMAT-TERSE.14.5` — final trailing block-argument no-drift closeout. Roadmap,
+  mdBook project status, Knowledge Map retrieval, task-tree state, live docs, and the generated 95-fixture oracle
+  corpus now agree that the shipped surface is helper-function `with(value) { ... }` / `with() { ... }` plus
+  receiver-method `.with() { ... }` on Perl/Rust, with no closures or delayed callbacks.
+- prior_leaf: `SPEC-FORMAT-TERSE.14.4` — receiver `.with() { ... }` trailing block arguments landed on Perl/Rust;
+  receiver value is scoped as `value`, block results can feed compatible receiver-family links, and explicit
+  receiver `.with(value) { ... }` remains rejected/deferred.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-FORMAT-TERSE.14.4 - add receiver trailing blocks`; parent before this slice includes
-  `REPO-HYGIENE.3 - remove generated artifacts`.
+  `SPEC-FORMAT-TERSE.14.5 - close trailing block drift`; parent before this slice includes
+  `SPEC-FORMAT-TERSE.14.4 - add receiver trailing blocks`.
   **Branch is over the documented 300 push threshold; still do NOT push mid-PNT unless explicitly instructed.**
-- active_work_unit: none in-flight after `.14.4`; repo should be handoff-ready after commit and
+- active_work_unit: none in-flight after `.14.5`; repo should be handoff-ready after commit and
   `git_message_brief.txt` cleanup.
-- next_action: continue the user-selected `SPEC-FORMAT-TERSE.14` lane with `.14.5`: final mdBook/KM/oracle/no-drift
-  closeout for the shipped helper and receiver trailing block surface. Do not pivot to
-  `TASK-TREE-METADATA-HYGIENE.1` until this lane is clean or paused.
-- latest_bootstrap_read: 2026-07-07 read README, memory architecture, session bootstrap, task-tree index/active
+- next_action: after the `.14.5` commit is clean, PNT returns to the task-tree index. The next PNT-eligible leaf is
+  `TASK-TREE-METADATA-HYGIENE.1` top-level metadata reconciliation; do not pivot to it until this `.14.5` repo state
+  is committed and handoff-ready.
+- latest_bootstrap_read: 2026-07-07/08 read README, memory architecture, session bootstrap, task-tree index/active
   trees, relevant ADR/KM facts, mdBook source, core Perl/Rust implementation, shipped specs, tooling, and focused
-  test harness inventory. The task-tree audit found stale per-file metadata; it is now owned by
+  test harness inventory. The task-tree audit found stale per-file metadata; it is owned by
   `TASK-TREE-METADATA-HYGIENE`.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first. A future doctrine

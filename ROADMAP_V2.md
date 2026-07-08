@@ -288,12 +288,13 @@ DSL helper surface consistency note:
   migrated current source/docs/KM/corpus to colon syntax, `.9.5` hard-retired old hash-literal `=>` with
   colon-migration diagnostics, and `.9.6` closed final no-drift scans across current specs/corpora/docs/tests/KM
   and implementation support sites. The user explicitly reactivated `SPEC-FORMAT-TERSE.14` on 2026-07-07; `.14.1`
-  split trailing block arguments before code, selected `with(value) { ... }` as the first helper-form MVP, and
+  split trailing block arguments before code, selected `with(value) { ... }` as the first helper-function MVP, and
   `.14.2` landed Perl reference parsing/lowering/runtime support for `with(value) { ... }` / `with() { ... }`;
-  `.14.3` landed Rust helper-form parity and added the `terse_14_3_with_helper_trailing_block` oracle fixture.
-  The active frontier is `.14.4` for receiver `.with() { ... }`. `SPEC-FORMAT-TERSE.10`, `.12`, and `.13` remain
-  deferred unless explicitly activated. The Rust oracle corpus is now 94 fixtures
-  after `.14.3`; it had reached 93 fixtures after `.15.2.3` added
+  `.14.3` landed Rust helper-function form parity and added the `terse_14_3_with_helper_trailing_block` oracle fixture;
+  `.14.4` landed receiver `.with() { ... }` on Perl/Rust and added
+  `terse_14_4_receiver_with_trailing_block`; and `.14.5` closed the trailing block-argument docs/KM/oracle
+  no-drift sweep. `SPEC-FORMAT-TERSE.10`, `.12`, and `.13` remain deferred unless explicitly activated. The
+  Rust oracle corpus is now 95 fixtures after `.14.4`; it had reached 93 fixtures after `.15.2.3` added
   `terse_15_2_3_bare_value_reads_and_case_labels`, and 92 fixtures after
   `SPEC-FORMAT-TERSE.11.4` added `terse_11_4_nested_mixed_value_path_assignment`, the Lispish fixture was
   re-enabled, migrated to direct access under `SCALAREF-RETIREMENT`, the first `RUST-PARITY.7.2` shipped-spec
