@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.18 — verify portmap walkthrough outputs
+
+**Scope:** mdBook portmap walkthrough output verification.
+
+**Change:** Rechecked the five documented `portmap.spec` output-shape examples against
+the Perl reference backend. The current walkthrough already matches the live nested JSON
+for bare, bit, slice, constant, and concatenation cases, so no mdBook source rewrite was
+needed for this slice.
+
+**Validation:** `LinkedSpec::get_parser('portmap')` probes verify `clk`, `bar[3]`,
+`addr[7:0]`, `0x1f`, and `{sig_a sig_b[7:0] 0x1f}`. `mdbook build docs/linkedspec-book`
+passes.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.10.5.17 — fix tablegrep walkthrough outputs
 
 **Scope:** mdBook tablegrep walkthrough output correction.

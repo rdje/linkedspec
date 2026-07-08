@@ -740,13 +740,20 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Commit: `SPEC-LANG-REFERENCE.10.5.17` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.18`
-  Status: `pending`
+  Status: `done`
   Goal: Fix `specs-and-corpora/portmap-spec-walkthrough.md` — the 5 output-shape examples claim flat
   `['?bare:','clk',undef,undef,undef]` etc.; actual is nested `["?bare:",["clk"]]` / `["?slice:",["addr","7","0"]]`
   Acceptance: every claimed output corrected to verified `specs/portmap.spec` runs (and any wrong
   input like `4'b1011` corrected); `mdbook build` exit 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. Re-ran the Perl reference parser through
+  `LinkedSpec::get_parser('portmap')` for all five documented output-shape examples. The current
+  walkthrough already matches the live nested JSON shapes: `clk` ->
+  `["?bare:",["clk"]]`, `bar[3]` -> `["?bit:",["bar","3"]]`,
+  `addr[7:0]` -> `["?slice:",["addr","7","0"]]`, `0x1f` ->
+  `["?constant:",["0x1f"]]`, and `{sig_a sig_b[7:0] 0x1f}` ->
+  `["?concat:",[["?bare:",["sig_a"]],["?slice:",["sig_b","7","0"]],["?constant:",["0x1f"]]]]`.
+  `mdbook build docs/linkedspec-book` exits 0.
+  Commit: `SPEC-LANG-REFERENCE.10.5.18` (see Commit Log)
 
 - ID: `SPEC-LANG-REFERENCE.10.5.19`
   Status: `pending`
@@ -937,9 +944,9 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | — | `SPEC-LANG-REFERENCE.10.5.15` | `done` | `appendix/formal-grammar.md` §1 + §12 examples fixed 2026-07-08; four probes reverified |
 | — | `SPEC-LANG-REFERENCE.10.5.16` | `done` | `appendix/runtime-semantics.md` §5.5/§5.6 fixed 2026-07-08; `.10.4` folded; five outputs reverified |
 | — | `SPEC-LANG-REFERENCE.10.5.17` | `done` | `tablegrep-spec-walkthrough.md` output drift fixed 2026-07-08; parser outputs and descriptor metadata reverified |
-| 9 | `SPEC-LANG-REFERENCE.10.5.18` | `pending` | fix `specs-and-corpora/portmap-spec-walkthrough.md` 5 output-shape examples |
-| 10 | `SPEC-LANG-REFERENCE.10.5.19` | `pending` | finalize planned page scorch — whole-book re-grep + `mdbook build` |
-| 11 | `SPEC-LANG-REFERENCE.10.5.20` | `pending` | resolve lifecycle final-value / direct-`E` Perl handler drift found during `.10.5.9` |
+| — | `SPEC-LANG-REFERENCE.10.5.18` | `done` | `portmap-spec-walkthrough.md` output-shape examples reverified 2026-07-08; current page already matches live nested JSON |
+| 9 | `SPEC-LANG-REFERENCE.10.5.19` | `pending` | finalize planned page scorch — whole-book re-grep + `mdbook build` |
+| 10 | `SPEC-LANG-REFERENCE.10.5.20` | `pending` | resolve lifecycle final-value / direct-`E` Perl handler drift found during `.10.5.9` |
 | — | `SPEC-LANG-REFERENCE.10.4` | `superseded` | folded into `.10.5.16` |
 | 18 | `SPEC-LANG-REFERENCE.5.3` | `pending` | worked examples: Array family (largest) — resume after the scorch |
 | 19 | `SPEC-LANG-REFERENCE.5.4` | `pending` | worked examples: Hash + Control Flow families |
@@ -1124,6 +1131,7 @@ wrapped only where a complete worked example is intended) during the per-file fi
 | `SPEC-LANG-REFERENCE.10.5.15` | `SPEC-LANG-REFERENCE.10.5.15 — fix formal grammar examples` | `formal-grammar.md` §1 and §12 now use no-regex top rules plus normal regex-owning matcher rules. The complete example defines every dispatch target and verifies DemoParser, SecondChild, and ThirdChild outputs; appendix scan and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.16` | `SPEC-LANG-REFERENCE.10.5.16 — fix runtime semantics examples` | `runtime-semantics.md` §5.5/§5.6 now uses no-regex `Top::` wrappers plus normal regex-owning `Done:`, `Pair:`, `object:`, and `manifest:` rules. The folded `.10.4` Pair target now returns the verified `entry_group` tagged array through `Top`; five focused outputs, page scan, and mdBook build pass |
 | `SPEC-LANG-REFERENCE.10.5.17` | `SPEC-LANG-REFERENCE.10.5.17 — fix tablegrep walkthrough outputs` | `tablegrep-spec-walkthrough.md` now shows verified JSON outputs for the simple term and grouped expression (`sens` is `=`), and its descriptor helper list matches the live spec. Parser probes, descriptor metadata probe, and mdBook build pass |
+| `SPEC-LANG-REFERENCE.10.5.18` | `SPEC-LANG-REFERENCE.10.5.18 — verify portmap walkthrough outputs` | `portmap-spec-walkthrough.md`'s five output-shape examples were rechecked against `LinkedSpec::get_parser('portmap')`; the current page already matches the live nested JSON for bare, bit, slice, constant, and concatenation cases. Parser probes and mdBook build pass |
 
 ## Changelog
 
@@ -1393,3 +1401,9 @@ wrapped only where a complete worked example is intended) during the per-file fi
   reports no `::` header followed by a regex slot; `mdbook build` exit 0. Found and tracked a current Perl
   lifecycle handler-shape caveat in Knowledge fact `perl-lifecycle-final-value-e-drift` and follow-up leaf
   `.10.5.20`. Frontier → `.10.5.10` (`dsl/capture-marks-and-source-locations.md` worked examples).
+- `2026-07-08`: `.10.5.18` done — reverified
+  `docs/linkedspec-book/src/specs-and-corpora/portmap-spec-walkthrough.md` against the live
+  `specs/portmap.spec` Perl reference. The five documented output examples already match current
+  backend output: bare, bit, slice, constant, and concatenation cases are nested tagged arrays rather
+  than flat `undef`-padded records. `mdbook build` exit 0. Frontier → `.10.5.19`
+  (planned whole-book closeout sweep).

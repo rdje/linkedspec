@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-LANG-REFERENCE.10.5.18 — portmap walkthrough outputs):
+  `specs-and-corpora/portmap-spec-walkthrough.md` already matched the live Perl reference output
+  when this leaf was executed. `LinkedSpec::get_parser('portmap')` returns nested tagged arrays for
+  the five documented cases: `clk` -> `["?bare:",["clk"]]`, `bar[3]` ->
+  `["?bit:",["bar","3"]]`, `addr[7:0]` -> `["?slice:",["addr","7","0"]]`, `0x1f` ->
+  `["?constant:",["0x1f"]]`, and `{sig_a sig_b[7:0] 0x1f}` -> `?concat` with bare/slice/constant
+  children. The next scorch leaf is `.10.5.19` for the planned whole-book closeout sweep.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.10.5.17 — tablegrep walkthrough outputs):
   `specs-and-corpora/tablegrep-spec-walkthrough.md` now shows parser-output JSON from
   `LinkedSpec::get_parser('tablegrep')`. The `re_term` rule captures `([!=])`, so `field1 =~ /foo/`

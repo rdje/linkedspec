@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.18 — verify portmap walkthrough outputs**
+  (DONE mdBook verification; frontier `.10.5.19` next).
+
+  **Change:** Rechecked the five `portmap.spec` output-shape examples against the Perl
+  reference backend. The current walkthrough already shows the live nested JSON shapes, so
+  no mdBook source rewrite was needed.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a shipped-spec walkthrough
+  verification closeout for the whole-book scorch.
+
+  **Verification:** `LinkedSpec::get_parser('portmap')` probes cover bare, bit, slice,
+  constant, and concatenation cases; mdBook, doctrine, task-tree, memory, Knowledge Map,
+  and whitespace checks pass.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.10.5.17 — fix tablegrep walkthrough outputs**
   (DONE mdBook correction; frontier `.10.5.18` next).
 
