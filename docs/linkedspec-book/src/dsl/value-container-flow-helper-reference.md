@@ -180,8 +180,10 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 > accepted in value positions: `[]`, `[value, cat("a", "b")]`, `{ key : value }`, and nested combinations.
 > Shape members lower through the same scoped DSL value-expression rules as the surrounding site: primitive
 > literals stay typed, recognized helpers compose, direct access keeps its own bracket rules, and non-reserved
-> bare names read scalar working variables. A bare hash key is therefore dynamic (`{ key : value }` reads
-> `$key`), not a string literal; quote fixed field names (`{ "kind" : value }`). When a direct shape literal
+> bare names read scalar working variables. A direct hash key is any accepted value expression before the
+> top-level `:`. A bare hash key is therefore dynamic (`{ key : value }` reads `$key`), and a helper expression
+> such as `{ cat(prefix, suffix) : value }` uses the helper result as the runtime key. Quote fixed field names
+> (`{ "kind" : value }`). When a direct shape literal
 > is the RHS of a bare assignment target, the array or hash is stored as the variable's typed value on both
 > variants: `items = [value]` / `set(items, [])` bind array values, and
 > `meta = { key : value }` / `set(meta, {})` bind hash values. Explicit `array(...)` and `hash(...)` targets
@@ -206,7 +208,7 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 | `array(...)` | array value | construct an empty or argument-list array payload; prefer `[...]` as the terse constructor spelling in new examples. |
 | `hash(...)` | hash value | construct an empty or multi-argument hash/object payload from key/value pairs or flattened hashes; use `{ "key" : undef }` for a one-field literal hash with no value. |
 | `[]` / `[expr, ...]` | array value | construct one new array payload with direct literal syntax. |
-| `{ key_expr : value_expr, ... }` | hash value | construct one new hash/object payload with direct literal syntax; bare keys are scalar reads, so quote fixed field names. |
+| `{ key_expr : value_expr, ... }` | hash value | construct one new hash/object payload with direct literal syntax; key expressions are evaluated and stringified at runtime, so quote fixed field names. |
 | `copy(array_expr)` / `copy(name)` | array value | snapshot an array value as one nested payload. A bare name reads the working array of that name. |
 | `copy(hash_expr)` / `copy(name)` | hash value | snapshot a hash value as one nested payload. A bare name reads the working hash of that name. |
 

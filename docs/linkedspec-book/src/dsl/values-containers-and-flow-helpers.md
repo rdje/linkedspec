@@ -127,8 +127,10 @@ Older return helpers still exist and are useful when reading legacy specs, but n
 
 Direct shape literals (`[]` and `{ key : value }`) are value expressions on the Perl reference and Rust backend. Use
 them when the literal shape is clearer than the helper form. Shape members still follow DSL value-expression
-rules: a bare element such as `tag` reads scalar working variable `tag`, and a bare hash key such as
-`{ field : value }` reads scalar `field` as the runtime key. Quote fixed object field names:
+rules: a bare element such as `tag` reads scalar working variable `tag`, and a direct hash key is any accepted
+value expression before the top-level `:`. A bare hash key such as `{ field : value }` reads scalar `field` as
+the runtime key; a computed form such as `{ cat(prefix, suffix) : value }` uses the helper result as the key.
+Quote fixed object field names:
 
 ```text
 set(field, "kind");

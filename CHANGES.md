@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-FORMAT-TERSE.10.1 — ratify dynamic hash-literal keys
+
+**Scope:** Spec-ratification/no-engine-change closeout for direct hash-literal key semantics.
+
+**Change:** Reactivated and closed `.10` by recording the current contract explicitly: direct hash literals use
+`{ key_expr : value_expr }`, the key expression is evaluated and stringified at runtime, bare keys are scalar
+reads, quoted keys are fixed fields, and computed helper expressions such as `cat(prefix,suffix)` are valid keys.
+The mdBook wording and Knowledge Map fact now make that boundary durable.
+
+**Validation:** `LinkedSpec::call_spec_handler_subst` probes for bare, computed, and quoted keys; direct
+`LinkedSpec::Get` runtime probe; Rust parser/runtime code read for hash-literal key parsing/evaluation; mdBook,
+Knowledge Map, memory, doctrine, task-tree metadata, and whitespace checks.
+
 ## 2026-07-08 — MEMORY-PUSH-POINTER-SYNC.1 — remove stale push threshold claim
 
 **Scope:** Continuity-only correction for the layer-A resume pointer.
@@ -33,7 +46,8 @@ grammar, backend handoff, and development workflow wording, so no book source ed
 **Change:** Closed the `.12` lane after verifying mdBook helper/reference/formal/backend-handoff coverage,
 Knowledge Map retrieval, live docs, task-tree frontier state, and the 96-fixture oracle manifest all agree on
 `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` semantics. The closeout records that `.12.1` through
-`.12.4` are done and that `SPEC-FORMAT-TERSE.10` / `.13` remain deferred rather than automatically reactivated.
+`.12.4` are done and that `SPEC-FORMAT-TERSE.10` / `.13` remained deferred at that closeout point. `.10` was
+later closed by `.10.1`.
 
 **Validation:** No parser/runtime behavior changed. No-drift scans covered hash-tree method names, callback
 bindings, traversal semantics, trailing-block boundary wording, and the current 96-fixture oracle state.

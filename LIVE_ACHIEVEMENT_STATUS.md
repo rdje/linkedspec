@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-FORMAT-TERSE.10.1 — ratify dynamic hash-literal keys**
+  (DONE spec-ratification/no-engine-change closeout; `.10` CLOSED).
+
+  **Change:** The direct hash-literal key contract is now explicit in the task tree, mdBook, and Knowledge Map:
+  `{ key_expr : value_expr }` evaluates the key expression at runtime. Bare keys are scalar reads, quoted keys are
+  fixed fields, computed helper expressions can supply keys, and old `=>` remains retired.
+
+  **Boundary:** No parser/runtime behavior changed. This slice records current Perl/Rust behavior and moves the
+  remaining `SPEC-FORMAT-TERSE` frontier to `.13` under the user's exhaustion directive.
+
+  **Verification:** LinkedSpec lowering/runtime probes, Rust parser/runtime code read, mdBook, Knowledge Map,
+  memory architecture, doctrine, task-tree metadata, and whitespace checks pass.
+
 - 2026-07-08: **MEMORY-PUSH-POINTER-SYNC.1 — remove stale push threshold claim**
   (DONE continuity-only correction; tree CLOSED).
 

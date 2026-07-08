@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-FORMAT-TERSE.10.1 — dynamic hash-literal keys ratified):
+  `.10` is closed without parser/runtime changes. The existing direct hash-literal contract is expression-keyed:
+  `{ key_expr : value_expr }` evaluates the key expression and stringifies it for the runtime hash key. Bare keys
+  such as `{ key : value }` read scalar `key`; fixed fields must be quoted (`{ "kind" : value }`); computed helper
+  keys such as `{ cat(prefix,suffix) : value }` are accepted. This records the behavior already present after the
+  `.9` colon-hash migration and `.15` bare-read policy, and prevents future sessions from treating dynamic keys as
+  an accidental parser broadening.
+
 - 2026-07-08 (MEMORY-PUSH-POINTER-SYNC.1 — push threshold state is live, not durable):
   `MEMORY.md` should not fossilize a branch ahead-count as if it were a durable fact. A final clean-status check
   showed `git status -sb` at ahead 27 while the resume pointer still said the branch was over the documented
@@ -20,7 +28,9 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   reference, `.12.3` landed Rust/oracle parity, and `.12.4` verified docs/KM/live-doc/oracle/task-tree alignment.
   No parser/runtime behavior changed in `.12.4`. The shipped surface remains receiver-only
   `walk_leaves() { ... }`, `map_leaves() { ... }`, and `reduce_leaves(initial) { ... }` with immediate callbacks;
-  `SPEC-FORMAT-TERSE.10` dynamic/computed hash-literal keys and `.13` array-tree traversal stay deferred/backlog.
+  `SPEC-FORMAT-TERSE.10` dynamic/computed hash-literal keys and `.13` array-tree traversal stayed deferred/backlog
+  at that closeout point; `.10` was later closed by `.10.1`, and `.13` is the remaining terse-format frontier
+  under the 2026-07-08 exhaustion directive.
 
 - 2026-07-08 (SPEC-FORMAT-TERSE.12.3 — Rust hash-tree traversal receiver blocks):
   Rust now shares the Perl `.12` surface for `hash_value.walk_leaves() { ... }`,

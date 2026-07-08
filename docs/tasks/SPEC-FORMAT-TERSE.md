@@ -6,8 +6,12 @@
 - Status: `active` (activated 2026-06-18 by user; ratified in ADR `0007`)
 - Roadmap lane: `Overall roadmap — .spec language evolution (terse format)`
 - Created: `2026-06-16`
-- Last updated: `2026-07-08` (**`.12.4` DONE; hash-tree traversal no-drift closeout completed; `.12` exhausted**).
-  User directive 2026-07-08 reactivated the deferred `.12` hash-tree traversal backlog item. `.12.1` owns the
+- Last updated: `2026-07-08` (**`.10.1` DONE; dynamic hash-literal keys ratified; `.10` exhausted**).
+  User directive 2026-07-08 activated the remaining `SPEC-FORMAT-TERSE` parked work after `.12` closed. `.10.1`
+  records the current direct hash-literal key contract: `{ key_expr : value_expr }` evaluates the key expression;
+  bare keys are scalar reads, quoted keys are fixed fields, computed helper expressions may supply keys, and no
+  parser/runtime behavior changed. Prior user directive 2026-07-08 reactivated the deferred `.12` hash-tree
+  traversal backlog item. `.12.1` owns the
   spec-first split before any parser/runtime code, `.12.2` landed the Perl reference implementation for
   `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver attached blocks, and `.12.3` landed Rust
   parser/runtime parity plus the generated oracle fixture. `.12.4` closed mdBook/Knowledge Map/live-doc/oracle
@@ -3646,9 +3650,10 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.9.6 - close hash literal colon drift`
 
 - ID: `SPEC-FORMAT-TERSE.10`
-  Status: `deferred` / `potential` (tracked by user directive 2026-07-04; may be dropped)
+  Status: `done` (2026-07-08; closed by `.10.1`)
   Goal: Decide whether direct hash literals have any dynamic/computed key surface beyond the fixed-key syntax
     accepted by the spec, and implement it only if the spec explicitly defines that surface first.
+  Children: `.10.1` (done)
   Acceptance: No parser/runtime implementation may broaden hash-literal key semantics by accident. Before any
     code change, the leaf must either (a) be closed as `dropped` with the explicit decision that direct hash
     literals accept only the fixed key forms defined by `.9`, or (b) be split into a specification-first
@@ -3656,8 +3661,29 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     behavior, expression-key delimiters if any, block-vs-hash precedence, nested literal behavior, Perl/Rust parity,
     diagnostics for ambiguous key forms, mdBook examples, active tests, generated oracle fixtures, and Knowledge
     Map updates. This leaf is not PNT-eligible while `.8` and `.9` are pending.
-  Verification: `deferred`
-  Commit: `deferred`
+  Verification: `2026-07-08: closed as a spec-ratification/no-engine-change leaf. KM retrieval plus TOOLBOX
+    lowering/runtime probes show the current `.9`/`.15` surface already has a dynamic key-expression contract:
+    direct hash literals use `{ key_expr : value_expr }`; bare key names read scalar values; quoted keys are fixed
+    strings; computed helper expressions such as `cat(prefix,suffix)` are valid key expressions; old `=>` remains
+    retired; and block-vs-hash precedence stays unchanged. mdBook wording and a Knowledge fact now make the
+    current contract explicit.`
+  Commit: `SPEC-FORMAT-TERSE.10.1 - ratify dynamic hash-literal keys`
+
+- ID: `SPEC-FORMAT-TERSE.10.1`
+  Status: `done` (2026-07-08)
+  Goal: Reactivate `.10`, audit the current direct hash-literal key behavior, and close it as an explicit
+    spec contract without parser/runtime changes if the existing behavior is already intentional and documented.
+  Acceptance: The task tree records whether dynamic/computed keys are accepted or dropped; mdBook explains the
+    accepted key-expression contract and fixed-key quoting rule; a Knowledge fact gives future sessions the
+    answer and reverify command; live docs point to the next `SPEC-FORMAT-TERSE` frontier; no parser/runtime
+    behavior changes are made in this spec-ratification slice.
+  Verification: `2026-07-08: LinkedSpec::call_spec_handler_subst lowers return({ key : value }) as
+    $key => $value, lowers return({ cat(prefix,suffix) : value, "fixed" : key }) with the computed helper
+    expression as the hash key, and preserves quoted fixed keys. A direct `LinkedSpec::Get` runtime probe returns
+    `[{"stage":"ok"},{"fixed":"stage","stage":"ok"},{"key":"ok"}]` for bare, computed, and quoted key examples.
+    Rust code read confirms `parse_hash_literal` parses the key with `parse_expr()` before the top-level `:`, and
+    runtime evaluation stringifies the evaluated key with `to_str()`.`
+  Commit: `SPEC-FORMAT-TERSE.10.1 - ratify dynamic hash-literal keys`
 
 - ID: `SPEC-FORMAT-TERSE.11`
   Status: `done` (2026-07-05; `.11.1` through `.11.5` done)
@@ -3916,16 +3942,15 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.12.4 - close hash-tree traversal drift`
 
 - ID: `SPEC-FORMAT-TERSE.13`
-  Status: `deferred` / `backlog` (tracked by user directive 2026-07-05)
+  Status: `pending` (reactivated by user directive 2026-07-08; spec-first split/decision next)
   Goal: Track analogous array-tree traversal receiver methods as a lower-priority future feature.
-  Acceptance: No implementation is authorized by this backlog item. If activated later, the leaf must first define
-    what qualifies as an array-tree, what values count as leaves, whether hash values are leaves or nested
-    traversal nodes, the attached-block method surface, path/index context, deterministic traversal order,
-    return/mutation policy, diagnostics, mdBook examples, tests, oracle fixtures, and Knowledge Map updates. This
-    item is intentionally lower priority than hash-tree traversal and is not PNT-eligible unless explicitly
-    reactivated.
-  Verification: `deferred`
-  Commit: `deferred`
+  Acceptance: No implementation is authorized before a spec-first split or explicit drop decision. The next slice
+    must first define what qualifies as an array-tree, what values count as leaves, whether hash values are leaves
+    or nested traversal nodes, the attached-block method surface, path/index context, deterministic traversal
+    order, return/mutation policy, diagnostics, mdBook examples, tests, oracle fixtures, and Knowledge Map updates;
+    or close the idea as dropped with rationale.
+  Verification: `pending`
+  Commit: `pending`
 
 - ID: `SPEC-FORMAT-TERSE.14`
   Status: `done` (closed by `.14.5` on 2026-07-07)
@@ -4424,9 +4449,10 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | 38 | `SPEC-FORMAT-TERSE.12.2` | `done` | Perl reference implementation for receiver attached-block traversal landed; phase0 `1..1027` |
 | 39 | `SPEC-FORMAT-TERSE.12.3` | `done` | Rust parser/runtime parity landed with the 96th generated oracle fixture |
 | 40 | `SPEC-FORMAT-TERSE.12.4` | `done` | mdBook, Knowledge Map, live-doc, and no-drift closeout completed; `.12` exhausted |
-| — | `SPEC-FORMAT-TERSE.10` | `deferred` / `potential` | track dynamic/computed hash-literal keys as a spec-first decision that may be dropped; not PNT-eligible until explicitly activated |
+| — | `SPEC-FORMAT-TERSE.10.1` | `done` | dynamic/computed direct hash-literal key expressions are ratified as the current contract; no parser/runtime behavior changed |
+| — | `SPEC-FORMAT-TERSE.10` | `done` / `closed` | `.10` is exhausted: `{ key_expr : value_expr }` is the accepted direct hash-literal form, bare keys are scalar reads, quoted keys are fixed strings, and old `=>` stays retired |
 | — | `SPEC-FORMAT-TERSE.12` | `done` / `closed` | hash-tree attached-block traversal closed through `.12.4`; no current leaf remains |
-| — | `SPEC-FORMAT-TERSE.13` | `deferred` / `backlog` | track lower-priority array-tree traversal analog; not PNT-eligible until explicitly activated |
+| 41 | `SPEC-FORMAT-TERSE.13` | `pending` | user directive reactivated remaining terse-format work; next slice must split/decide array-tree traversal before any implementation |
 | — | `SPEC-FORMAT-TERSE.14` | `done` / `closed` | trailing block-argument type closed for helper-function and receiver-method `with` forms without closures; future expansions need new owned leaves |
 | — | `SPEC-FORMAT-TERSE.6.1` | `done` | User directive owned under the existing terse-format tree; shipped-spec inventory recorded before any `.spec` edit. |
 | — | `SPEC-FORMAT-TERSE.6.2.1` | `done` | shipped specs no longer use active `declare(...)` / `.declare(...)`; focused compile, phase0, and Rust corpus oracle pass |
@@ -4539,6 +4565,14 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE` | `no PNT-eligible leaf` | All concrete terse implementation/doc-closure leaves in the active roadmap are done. Future backend leaves `.5.1`/`.5.2` are deferred to roadmap selection, and `.5.3` is blocked on a Lua backend decision. |
 
 ## Decisions
+
+- `2026-07-08` (**`.10.1` dynamic hash-literal keys ratified, no engine change**).
+  The current direct hash-literal surface is intentionally expression-keyed, not fixed-key-only:
+  `{ key_expr : value_expr }` parses the key through the normal value-expression grammar up to the top-level
+  colon. A bare key name reads the scalar value of that name, so `{ key : value }` uses runtime scalar `key`;
+  quote fixed field names as `{ "kind" : value }`. Computed key expressions such as
+  `{ cat(prefix,suffix) : value }` are valid. This records existing Perl/Rust behavior from the `.9` colon
+  migration and `.15` bare-read policy; no parser/runtime broadening landed in `.10.1`.
 
 - `2026-07-03` (**`.6.1` user directive — finish the terse-format migration, not a runtime `declare` expansion**).
   The latest directive makes the earlier Round 1 intent actionable: `declare(...)` shall not be used in spec files
@@ -5387,6 +5421,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-07-08` | `SPEC-FORMAT-TERSE.10.1` | Knowledge Map retrieval for hash-literal colon facts; `LinkedSpec::call_spec_handler_subst` probes for bare, computed, and quoted hash-literal keys; direct `LinkedSpec::Get` runtime probe; Rust `expr.rs::parse_hash_literal` and `engine.rs` hash-literal evaluation read; mdBook/KM/live-doc updates; memory/doctrine/diff checks | `.10` is closed as a spec-ratification/no-engine-change leaf. Direct hash literals are expression-keyed (`{ key_expr : value_expr }`): bare keys are scalar reads, quoted keys are fixed strings, computed helper expressions can be keys, old `=>` remains retired, and block-vs-hash precedence is unchanged. Frontier moves to the remaining `SPEC-FORMAT-TERSE.13` backlog item under the user's exhaustion directive. |
 | `2026-07-07` | `SPEC-FORMAT-TERSE.14.5` | Final trailing block no-drift scans and wording cleanup; mdBook build; Knowledge Map regeneration/check; oracle generator syntax/regeneration; Rust `oracle_corpus_matches_perl_reference` over **95** fixtures; memory/doctrine/diff gates | Roadmap, mdBook status, Knowledge Map retrieval, live docs, task-tree state, and oracle corpus now agree that trailing block arguments are shipped for helper-function `with(value) { ... }` / `with() { ... }` and receiver-method `.with() { ... }` only. Deferred surfaces remain explicitly unshipped, no parser/runtime behavior changed, and `.14` closes. |
 | `2026-07-07` | `SPEC-FORMAT-TERSE.9.6` | Final hash-literal colon no-drift scans across current specs/corpora/generated oracle inputs/docs/mdBook/tests/KM/code; oracle regeneration over **93** fixtures; `prove -q -Iperl t/actionir_ast_parser.t`; focused Rust core/runtime `.9` filters; Rust `corpus_oracle`; full `prove -q -Iperl t/phase0_regression.t`; mdBook/KM/memory/doctrine/diff gates | Current `.spec` source inputs are clean for direct hash-literal `=>`; remaining `=>` owners are blind-call edge syntax, VHDL/source-language associations, generated Perl host output, metadata/test data, value-rendering examples, explicit retired-syntax diagnostics/tests, or historical records. mdBook documents `:` as the current direct hash-literal separator and treats old `{ key => value }` only as retired. Oracle generation remains **93** fixtures, Rust `corpus_oracle` passes, full phase0 PASS: `1..1024`, and `.9` closes with no PNT-eligible child remaining. |
 | `2026-07-07` | `SPEC-FORMAT-TERSE.9.5` | Perl/Rust hard-retirement implementation for old hash-literal `=>`; Perl syntax checks for touched ActionIR parser/lowering and phase0 files; `prove -q -Iperl t/actionir_ast_parser.t`; full `prove -q -Iperl t/phase0_regression.t`; focused Rust core parser/compiler and runtime filters for colon success and retired fat-arrow rejection; mdBook/KM/live-doc updates; memory/doctrine/diff/Rust-format checks; full local CI | Old `{ key => value }` no longer succeeds as current ActionIR hash-literal syntax. Perl emits `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon` instead of building current hash literals or falling back raw, Rust rejects the retired syntax during parse/compile, and the Rust compiler treats unsupported-ActionIR-helper parse diagnostics as fatal so action code cannot be accepted as `code: None`. The Perl AST multi-argument `array(...)` path now emits already-lowered constructor args directly so generated Perl host hashrefs are not reparsed as retired source fat arrows. Full phase0 PASS: `1..1024`; `tools/run_ci_local.sh` PASS. Frontier becomes `.9.6` for final hash-literal colon no-drift closeout. |
@@ -5534,7 +5569,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `SPEC-FORMAT-TERSE.12.4` | `SPEC-FORMAT-TERSE.12.4 - close hash-tree traversal drift` | Final no-drift closeout verified mdBook, Knowledge Map, live docs, task-tree rows, roadmap/architecture state, and the 96-fixture oracle manifest; `.12` is exhausted and `.10`/`.13` remain deferred. |
+| `SPEC-FORMAT-TERSE.10.1` | `SPEC-FORMAT-TERSE.10.1 - ratify dynamic hash-literal keys` | Direct hash literals are explicitly expression-keyed: bare keys are scalar reads, quoted keys are fixed strings, and computed helper expressions may supply keys. No parser/runtime behavior changed; `.10` is closed. |
+| `SPEC-FORMAT-TERSE.12.4` | `SPEC-FORMAT-TERSE.12.4 - close hash-tree traversal drift` | Final no-drift closeout verified mdBook, Knowledge Map, live docs, task-tree rows, roadmap/architecture state, and the 96-fixture oracle manifest; `.12` is exhausted. `.10` was later closed by `.10.1`; `.13` remains the next parked item under the exhaustion directive. |
 | `SPEC-FORMAT-TERSE.12.3` | `SPEC-FORMAT-TERSE.12.3 - implement Rust hash-tree traversal` | Rust parser/runtime parity landed for `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver attached blocks; generated oracle corpus is 96 fixtures with `terse_12_3_hash_tree_traversal_receiver_blocks`; frontier becomes `.12.4` docs/KM/no-drift closeout. |
 | `SPEC-FORMAT-TERSE.12.2` | `SPEC-FORMAT-TERSE.12.2 - implement Perl hash-tree traversal` | Perl reference receiver attached-block traversal landed for `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` with sorted hash-tree leaf traversal, scoped callback bindings, malformed-call diagnostics, and phase0 `1..1027`; frontier becomes `.12.3` Rust parity. |
 | `SPEC-FORMAT-TERSE.12.1` | `SPEC-FORMAT-TERSE.12.1 - activate hash-tree traversal split` | Reactivated `.12` by user directive and split hash-tree attached-block traversal into Perl, Rust/oracle, and docs/KM/no-drift leaves before parser/runtime code. |
@@ -5787,6 +5823,13 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   behavior, side effects, continuation through `count_keys`, scoped binding restoration, descriptor readiness, and
   generated-source residue. Phase0 now passes `1..1027`; frontier moves to `.12.3` for Rust parity and oracle.
 
+- `2026-07-08`: **`.10.1` DONE — dynamic hash-literal key contract ratified.**
+  User directive reactivated the remaining `SPEC-FORMAT-TERSE` parked work. `.10` is now closed without
+  parser/runtime changes: direct hash literals are expression-keyed (`{ key_expr : value_expr }`), bare keys are
+  scalar reads, quoted keys are fixed fields, computed helper expressions can supply keys, old `=>` remains
+  retired, and block-vs-hash precedence is unchanged. mdBook and Knowledge Map now state the contract explicitly.
+  Frontier moves to `.13` for the remaining array-tree traversal backlog item.
+
 - `2026-07-05`: **`.12`/`.13` DEFERRED/BACKLOG — tree traversal attached-block ideas.**
   User directive tracked hash-tree traversal methods with attached code blocks as future spec work and clarified
   that hash-tree leaves are scalar or array values. The analogous array-tree traversal idea is tracked as a
@@ -5851,8 +5894,8 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 
 - `2026-07-04`: **`.10` DEFERRED/POTENTIAL — dynamic/computed hash-literal keys.**
   User directive tracked a possible future implementation for dynamic/computed hash-literal keys, but only if the
-  spec explicitly defines the syntax and semantics first. The leaf is intentionally discardable: it may be closed
-  as dropped if the accepted hash-literal surface stays fixed-key only after `.9`.
+  spec explicitly defines the syntax and semantics first. This was later resolved by `.10.1`, which ratified the
+  existing expression-keyed contract without parser/runtime changes.
 
 - `2026-07-04`: **`.6.4` DONE — historical declaration-helper compatibility policy locked.**
   `declare(...)` and declaration aliases were kept as legacy compatibility for existing specs after the terse
