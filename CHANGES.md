@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — SPEC-FORMAT-TERSE.12.4 — close hash-tree traversal drift
+
+**Scope:** Final no-drift closeout for the shipped `.12` hash-tree traversal receiver surface.
+
+**Change:** Closed the `.12` lane after verifying mdBook helper/reference/formal/backend-handoff coverage,
+Knowledge Map retrieval, live docs, task-tree frontier state, and the 96-fixture oracle manifest all agree on
+`walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` semantics. The closeout records that `.12.1` through
+`.12.4` are done and that `SPEC-FORMAT-TERSE.10` / `.13` remain deferred rather than automatically reactivated.
+
+**Validation:** No parser/runtime behavior changed. No-drift scans covered hash-tree method names, callback
+bindings, traversal semantics, trailing-block boundary wording, and the current 96-fixture oracle state.
+`mdbook build docs/linkedspec-book`; `bash scripts/check_memory_architecture.sh`;
+`bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `git diff --check`.
+
 ## 2026-07-08 — SPEC-FORMAT-TERSE.12.3 — implement Rust hash-tree traversal
 
 **Scope:** Rust parser/runtime parity plus generated Perl-backed oracle coverage for hash-tree attached-block

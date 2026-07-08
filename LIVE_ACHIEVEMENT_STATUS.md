@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-08: **SPEC-FORMAT-TERSE.12.4 — close hash-tree traversal drift**
+  (DONE final no-drift closeout; `SPEC-FORMAT-TERSE.12` exhausted).
+
+  **Change:** Closed the hash-tree traversal lane after verifying mdBook helper/reference/formal/backend-handoff
+  coverage, Knowledge Map retrieval, live docs, task-tree state, and the 96-fixture oracle manifest agree on
+  `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` semantics. No parser/runtime behavior changed.
+
+  **Boundary:** No current PNT-eligible `.12` leaf remains. `SPEC-FORMAT-TERSE.10` and `.13` remain deferred
+  unless explicitly activated.
+
+  **Verification:** No-drift scans covered method names, callback bindings, traversal semantics, trailing-block
+  boundary wording, historical 95-fixture references, and the current 96-fixture oracle state. mdBook build,
+  memory architecture, Knowledge Map, doctrine, and whitespace gates pass.
+
 - 2026-07-08: **SPEC-FORMAT-TERSE.12.3 — implement Rust hash-tree traversal**
   (DONE Rust parser/runtime parity and 96th generated oracle fixture; frontier `.12.4` final no-drift next).
 

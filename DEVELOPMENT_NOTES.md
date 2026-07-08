@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (SPEC-FORMAT-TERSE.12.4 — hash-tree traversal no-drift closeout):
+  The `.12` hash-tree traversal lane is closed after `.12.1` split the contract, `.12.2` landed the Perl
+  reference, `.12.3` landed Rust/oracle parity, and `.12.4` verified docs/KM/live-doc/oracle/task-tree alignment.
+  No parser/runtime behavior changed in `.12.4`. The shipped surface remains receiver-only
+  `walk_leaves() { ... }`, `map_leaves() { ... }`, and `reduce_leaves(initial) { ... }` with immediate callbacks;
+  `SPEC-FORMAT-TERSE.10` dynamic/computed hash-literal keys and `.13` array-tree traversal stay deferred/backlog.
+
 - 2026-07-08 (SPEC-FORMAT-TERSE.12.3 — Rust hash-tree traversal receiver blocks):
   Rust now shares the Perl `.12` surface for `hash_value.walk_leaves() { ... }`,
   `hash_value.map_leaves() { ... }`, and `hash_value.reduce_leaves(initial) { ... }`. The parser appends trailing
