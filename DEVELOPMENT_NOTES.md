@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-08 (ROADMAP-DRIFT-RECONCILE.1 — long-form roadmap drift):
+  `ROADMAP.md` now reflects the current core status instead of the June drift snapshot: `SPEC-FORMAT-TERSE` /
+  ADR `0007` is the current `.spec` evolution track, `declare(...)` is historical/retired authoring rather than
+  the permanent required form, phase0 is `PASS 1..1026`, the Rust interpreter oracle is 95 fixtures, root
+  `plugin/` is gone, 13 legacy `.plg` files live under `noncore/plugin/`, and `perl/` is core-only except for
+  the `PPlugin.pm` compatibility adapter. The next owned reconciliation is
+  `ROADMAP-DRIFT-RECONCILE.2` for `ARCHITECTURE_STATE.md`.
+
 - 2026-07-08 (RUST-README-DRIFT-SYNC.1 — Rust README count sync):
   `rust/README.md` now names the full Rust interpreter oracle gate as 95 fixtures, matching the checked-in manifest
   and current mdBook status/handoff/corpora pages. This was a docs-only correction; no corpus regeneration or

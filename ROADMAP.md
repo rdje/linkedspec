@@ -12,17 +12,22 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Improve reliability, diagnostics, and maintainability without breaking existing users.
 
 ## Current Baseline (Observed)
-- Core compiler/runtime: `perl/LinkedSpec.pm`.
+- Core public facade: `perl/LinkedSpec.pm`; active compile/runtime ownership lives in the
+  `perl/LinkedSpec/*` owner modules.
 - Regex dispatch helper: `perl/LinkedRE.pm`.
 - Parser loading path: `LinkedSpec::get_parser(...)` + `PathSearch`.
-- Existing production consumers:
-  - `LibReader`
-  - `PPlugin`
-  - `RTLUtils`
-  - `TableGrep`
-  - Note: downstream-consumer compatibility is deferred and out of current implementation scope unless explicitly resumed later.
+- Existing shipped parser/spec surfaces include `LibReader`, `PPlugin`, `TableGrep`, and the
+  other checked-in `specs/*.spec` files. Downstream consumer compatibility outside the core
+  checkout remains deferred unless explicitly resumed later.
+- Legacy non-core/plugin code is no longer in the active core tree: `RTLUtils`, `FSMGen`,
+  `VHDL::ConstantEval`, and six exclusively dependent `.plg` files were deleted under
+  `LEGACY-VHDL-RETIRE`; the remaining 13 `.plg` files and their domain owners were relocated
+  under `noncore/` by `NONCORE-QUARANTINE`. The root `plugin/` directory is gone, and `perl/`
+  is core-only apart from the legacy compatibility adapter `PPlugin.pm`.
 - Specs baseline:
-  - All shipped files in `specs/*.spec` compile in the phase0 baseline.
+  - All 21 shipped files in `specs/*.spec` compile in the phase0 baseline.
+  - Current phase0 reaches `PASS 1..1026` when run with `PERL5LIB=` cleared.
+  - The Rust interpreter oracle is manifest-backed at 95 fixtures.
   - The former `specs/tclite.spec` literal `[` regex blocker is fixed.
 
 ## Strategic Principles
@@ -42,6 +47,11 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 4. Improve trust with deterministic diagnostics and regression tests.
 5. Maintain backward compatibility by default while introducing stricter optional modes.
 6. Drive `.spec` toward language-agnostic action semantics (no embedded Perl code-block dependency in final state).
+   - The active terse-format direction is tracked under `SPEC-FORMAT-TERSE` and ADR `0007`:
+     current `.spec` authoring prefers auto-existing variables, bare reads in value positions,
+     direct shape literals, `set(...)`/operators, method-style helpers, colon hash literals,
+     and immediate `with(...) { ... }` / `.with() { ... }` trailing block arguments over older
+     declaration-heavy or Perl-shaped forms.
 7. Treat documentation clarity as a product contract:
    - prioritize readability over cleverness,
    - remove ambiguity instead of hand-waving over it,
@@ -55,10 +65,12 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 ## Work Phases
 ## Phase 0: Safety Net and Baseline Lock
 - Build regression harness for all `specs/*.spec`.
-- Add smoke tests for `LibReader`, `TableGrep`, `RTLUtils` parser entry points.
+- Add smoke tests for shipped core parser entry points such as `LibReader`, `TableGrep`, and
+  `PPlugin`; retired non-core/plugin owners stay outside the core phase0 gate unless explicitly
+  reintroduced under a new owner.
 - Freeze baseline AST shapes for representative inputs.
 - Exit criteria:
-  - Green baseline suite.
+  - Green baseline suite (`PERL5LIB= prove -Iperl t/phase0_regression.t`, currently `PASS 1..1026`).
   - Known failures documented; no shipped-spec compile blocker is currently deferred.
 
 ## Phase 1: Parser-Core Isolation
@@ -499,8 +511,12 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Keep the Rust variant's native pipeline (parse -> AST -> CompiledSpec -> interpret) and hold it to cross-variant output parity with the Perl reference.
 - Exit criteria:
   - a Cargo workspace at `rust/` (`linkedspec-core` + `linkedspec-runtime`) parses, validates, compiles, and interprets `.spec` files (v0.1, interpreted mode).
-  - the variant is exercised by the Rust test suite and tracked toward full Perl-reference parity.
-- Follow-on: full behavioral parity with the Perl reference (conditional flow, BACKTRACK, helper completeness, the Perl<->Rust output oracle, and the code-gen emitter) is tracked under the active `RUST-PARITY` task tree — see `docs/tasks/RUST-PARITY.md`.
+  - the variant is exercised by the Rust test suite and the manifest-backed Perl-reference output oracle.
+- Current status: the Rust interpreter oracle is green over 95 fixtures. Generated Rust source emission remains a
+  structural/curated-subset proof, not the primary interpreter parity gate.
+- Variant model: `.spec` is the universal contract, Perl is the reference backend, Rust is the implemented
+  lockstep variant, and Julia/Dart are accepted future lockstep variants; Lua requires an explicit ADR before it
+  can join that set.
 
 ## Backbone Refactor Track (Explicit, Tracked)
 This track captures the core refactor items needed to make `LinkedSpec.pm` robust and extensible while preserving current behavior.
@@ -533,7 +549,8 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
      - and structured method blocks (`{ m1(...); m2(...); ...; mk(...) }`).
    - Treat those surfaces as semantically equivalent structured DSL notation rather than treating `{...}` itself as something to eliminate.
 5. Multi-backend enablement:
-   - Keep regex/execution semantics documented and map action IR to Perl first, then additional backends (e.g. Rust, Julia) incrementally.
+   - Keep regex/execution semantics documented and map action IR to the Perl reference first, the
+     Rust interpreter next, and future lockstep variants such as Julia and Dart incrementally.
 
 ## Method-Like DSL Migration Track (Planned, Under Item #3)
 Goal: converge `.spec` semantics on backend-neutral method-like operations while supporting two equivalent structured authoring surfaces:
@@ -549,8 +566,10 @@ Status interpretation note:
 1. Canonical method IR vocabulary (Planned)
    - Define backend-neutral method ops for declaration/assignment/call/push/return/scalar-array-object construction/regex-substitution/capture-backtrack surfaces.
    - Keep method semantics explicit and language-agnostic so every op can be implemented consistently across backends.
-   - Canonical declaration method form is `declare(type, ...)` where `type ∈ {array, scalar, hash}`.
-   - Optional short aliases (`declare_a`, `declare_s`, `declare_h`) remain syntax sugar only and must map to the same typed IR declaration node as `declare(array|scalar|hash, ...)`.
+   - Historical declaration forms such as `declare(type, ...)` and `declare_a`/`declare_s`/`declare_h`
+     have been retired from current authoring. The current terse contract uses auto-existing
+     working variables, direct assignments, type-implying helper positions, and explicit
+     `array(...)` / `hash(...)` views where the type matters.
 2. Chained method syntax support (Planned)
    - Action edges: `-> rule .method1(...).method2(...).methodN(...)`.
    - Lifecycle sections: `I/E/EX/IT/LX/LS/LE .methodA(...).methodB(...).methodK(...)`.
@@ -683,9 +702,14 @@ Historical rationale note:
 - the framework could then locate those files under the hood and return executable `sub { ... }` payloads without burdening callers with path-fiddling,
 - so the value worth preserving is low-friction discovered extensibility and resource lookup, not the specific `AUTOLOAD` + `.plg` + `PPlugin` implementation shape.
 
+Current status note (2026-07-08):
+- The migration sequence below is historical unless a line explicitly says otherwise. The root
+  `plugin/` directory no longer exists, the 13 surviving `.plg` files live under `noncore/plugin/`,
+  and the core phase0 gate does not inspect `noncore/`.
+
 1. Freeze the current compatibility surface
-   - Document the current bridge chain (`LinkedSpec::AUTOLOAD` -> `LinkedSpec::PluginBridge::_dispatch_autoload(...)` -> `LinkedSpec::PluginBridge::_dispatch_plugin_name(...)` -> `PPlugin->exec_plugin_name(...)`) and keep corpus coverage for `plugin/*.plg`.
-   - Treat current `.plg` behavior as legacy compatibility that must be preserved during migration, not as the desired end-state architecture.
+   - Historical first step: document the then-current bridge chain (`LinkedSpec::AUTOLOAD` -> `LinkedSpec::PluginBridge::_dispatch_autoload(...)` -> `LinkedSpec::PluginBridge::_dispatch_plugin_name(...)` -> `PPlugin->exec_plugin_name(...)`) and keep corpus coverage for the then-current root plugin corpus.
+   - Treat `.plg` behavior as legacy compatibility during migration, not as the desired end-state architecture.
 2. Introduce transitional explicit dispatch and package owners
    - New extracted helper entrypoints should live in normal Perl packages with explicit names and explicit ownership.
    - `LinkedSpec::PluginBridge` should remain only as a compatibility shim while legacy callers are migrated.
@@ -826,8 +850,8 @@ This is a saved future-enhancement note, not an active implementation item.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |
-| Overall roadmap | `done` | Whole-project delivery across parser core, semantics, runtime, docs, self-hosting, multi-backend handoff, and the Rust variant. | All numbered phases (0-9) done. All Backbone items done. Plugin modernization done. Method-like DSL migration done. Phase 7 self-hosting complete. Phase 8 multi-backend handoff surface specified; Phase 9 Rust variant operational (Cargo workspace at `rust/`, interpreted mode, v0.1). mdBook reframed variant-agnostic (`.spec` = universal contract; Perl = reference backend). Remaining: ongoing documentation/book sync; full Rust parity tracked under the active `RUST-PARITY` tree. |
-| Phase 0 | `done` | Regression safety net, baseline compilation coverage, and corpus-level guardrails. | Keep the regression baseline green; all shipped `specs/*.spec` files now participate in the baseline compile pass. |
+| Overall roadmap | `done` | Whole-project delivery across parser core, semantics, runtime, docs, self-hosting, multi-backend handoff, and the Rust variant. | All numbered phases (0-9) done. All Backbone items done. Plugin modernization done. Method-like DSL migration done. Phase 7 self-hosting complete. Phase 8 multi-backend handoff surface specified; Phase 9 Rust variant operational (Cargo workspace at `rust/`, interpreted mode, v0.1). mdBook reframed variant-agnostic (`.spec` = universal contract; Perl = reference backend; Rust = implemented lockstep variant; Julia/Dart = accepted future variants). Remaining: ongoing documentation/book sync and explicitly owned deferred feature lanes. |
+| Phase 0 | `done` | Regression safety net, baseline compilation coverage, and corpus-level guardrails. | Keep the regression baseline green; all 21 shipped `specs/*.spec` files now participate in the baseline compile pass, and the current gate reaches `PASS 1..1026` with `PERL5LIB=` cleared. |
 | Phase 1 | `done` | Parser-core isolation and dependency-surface reduction for the active compile/runtime path. | Task tree `docs/tasks/PHASE1-PARSER-CORE-ISOLATION.md` completed 2026-05-18 (3 leaves: inventory, ActionRewriter.pm removal, rewrite_action_code_for_compat evaluation). ActionRewriter.pm deleted (118 lines, 59 forwarders). |
 | Phase 1A | `done` | Thin-façade modularization of `LinkedSpec.pm` into focused owner modules with stable public APIs. | Task tree `docs/tasks/PHASE1A-CLOSE-OUT.md` completed 2026-05-16. `LinkedSpec.pm` is a thin façade; the lazy owner-dispatch / callback-value lookup / `$@` preservation plumbing is centralized in `LinkedSpec::OwnerDispatch` and shared across the owner modules. The then-present thin shim `ActionRewriter.pm` was later deleted in Phase 1; the focused helper-rewrite entrypoint now lives in `LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(...)`. |
 | Phase 2 | `done` | DSL frontend hardening, stricter validation, and clearer token/error handling. | Task tree `docs/tasks/PHASE2-DSL-FRONTEND.md` completed 2026-05-16 (6 leaves). Syntax-aware validation hardened across rule-paragraph, token, and error surfaces; further hardening is incidental follow-up. |
@@ -837,13 +861,13 @@ This is a saved future-enhancement note, not an active implementation item.
 | Phase 6 | `done` | User/developer documentation, architecture rationale, and live project-state upkeep. | Task tree `docs/tasks/PHASE6-DOCUMENTATION.md` completed 2026-05-17 (8 leaves). Book, USER_GUIDE, and architecture docs are maintained live; repo-root-relative doc paths are policy and regression-locked. Ongoing upkeep continues under the no-drift doctrine. |
 | Phase 7 | `done` | Self-hosted `spec.spec` grammar and `.spec` evolution through the DSL itself. | Task tree `docs/tasks/PHASE7-SELF-HOSTED-SPEC.md` completed 2026-05-17 (5 leaves). `spec.spec` captures the supported `.spec` envelope at `language_agnostic_ready_ratio == 1.0000` with regression coverage, and is the required change surface for `.spec` evolution. |
 | Phase 8 | `done` | Multi-backend specification and handoff surface. | Task tree `docs/tasks/PHASE8-MULTI-BACKEND-HANDOFF.md` completed 2026-06-14 (8 leaves: ADR, grammar, HandlerIR, helpers, semantics, corpus, handoff, finalization). Specification-only — zero code changes. |
-| Phase 9 | `done` | Rust variant implementation — LinkedSpec runtime in Rust. | Task tree `docs/tasks/PHASE9-RUST-VARIANT.md` completed 2026-06-14 (17 leaves). Cargo workspace at `rust/`: `linkedspec-core` + `linkedspec-runtime`. Interpreted mode. v0.1 operational. Full Perl-reference parity is the active follow-on `docs/tasks/RUST-PARITY.md`. |
+| Phase 9 | `done` | Rust variant implementation — LinkedSpec runtime in Rust. | Task tree `docs/tasks/PHASE9-RUST-VARIANT.md` completed 2026-06-14 (17 leaves). Cargo workspace at `rust/`: `linkedspec-core` + `linkedspec-runtime`. Interpreted mode. v0.1 operational. The manifest-backed Rust interpreter oracle is green over 95 Perl-reference fixtures; generated source remains structural/curated-subset proof. |
 | Backbone refactor track | `done` | Cross-cutting structural cleanup needed to make LinkedSpec robust, modular, and extensible. | All items complete (Items 1, 2, 3). |
 | Backbone Item 1 | `done` | Declarative bootstrap grammar registry replacing positional bootstrap coupling. | Declarative bootstrap registry landed. |
 | Backbone Item 2 | `done` | Staged `spec_entry()` compiler pipeline around RuleIR and explicit planning/validation phases. | Staged `spec_entry()` RuleIR pipeline landed. |
 | Backbone Item 3 | `done` | Structured ActionIR/rewrite/lowering pipeline replacing ad hoc helper regex-chain rewriting. | Task tree `docs/tasks/BACKBONE-ACTION-IR-LOWERING.md` completed 2026-05-17 (1 leaf: owner-contract audit — all 12 ActionIR owners clean). Structured ActionIR/rewrite/lowering pipeline replaces the ad hoc helper regex-chain rewriting. |
-| Method-like DSL migration track | `done` | Backend-neutral method-style `.spec` action syntax with equivalent fluent-chain and structured-block surfaces, plus unlimited nested method composition in arguments. | Task tree `docs/tasks/METHOD-LIKE-DSL-MIGRATION.md` completed 2026-05-17 (5 leaves). All 20 shipped specs at zero compatibility-surface rules; 100+ helpers across 10 families regression-locked. Compat alias retirement completed via `COMPAT-ALIAS-RETIREMENT-V2` (2026-06-14, 3 leaves) and `COMPAT-ALIAS-TEST-CLEANUP` (2026-06-14, 3 leaves). `PLUGIN-ACTION-MIGRATION` tree retired. Fluent-block equivalence verified via `FLUENT-BLOCK-EQUIVALENCE` (2026-06-14, 2 leaves). |
-| Plugin/resource-resolution modernization track | `done` | Keep deterministic spec/resource lookup while retiring dynamic `.plg`/plugin execution support. | Task tree `docs/tasks/PLUGIN-MODERNIZATION.md` completed 2026-05-17 (5 leaves). Facade deprecated, FSMGen de-scoped, dead `.plg` files removed, retirement path documented. Named `.spec` resolution stays a framework responsibility via `LinkedSpec::Resolver`; dynamic `.plg`/plugin loading is legacy-removal territory. Extracted helper owners live outside `LinkedSpec::*` (e.g. `HTTP::FileAccess`, `QC::Flow`, `QC::TclInterconn`, `RTLUtils`, `Timing::SetupHold`, `Timing::StanBackend`, `Timing::StanOmap2430cBackend`, `Table::GenericFilter`). 36 `.plg` files (~1,200+ actions) remain; follow-on `PLUGIN-ACTION-MIGRATION` tree was retired (all 5 leaves done, 17 dead files deleted, 19 kept as legacy corpus). |
+| Method-like DSL migration track | `done` | Backend-neutral method-style `.spec` action syntax with equivalent fluent-chain and structured-block surfaces, plus unlimited nested method composition in arguments. | Task tree `docs/tasks/METHOD-LIKE-DSL-MIGRATION.md` completed 2026-05-17 (5 leaves). All 21 shipped specs now report zero compatibility-surface rules in phase0 descriptor coverage; 100+ helpers across 10 families are regression-locked. Compat alias retirement completed via `COMPAT-ALIAS-RETIREMENT-V2` (2026-06-14, 3 leaves) and `COMPAT-ALIAS-TEST-CLEANUP` (2026-06-14, 3 leaves). `PLUGIN-ACTION-MIGRATION` tree retired. Fluent-block equivalence verified via `FLUENT-BLOCK-EQUIVALENCE` (2026-06-14, 2 leaves). |
+| Plugin/resource-resolution modernization track | `done` | Keep deterministic spec/resource lookup while retiring dynamic `.plg`/plugin execution support. | Task tree `docs/tasks/PLUGIN-MODERNIZATION.md` completed 2026-05-17 (5 leaves), with later `LEGACY-VHDL-RETIRE` and `NONCORE-QUARANTINE` cleanup now reflected here. Named `.spec` resolution stays a framework responsibility via `LinkedSpec::Resolver`; dynamic `.plg`/plugin loading is legacy-removal territory. The Perl-only VHDL/RTL/FSM-generation subsystem (`RTLUtils`, `FSMGen`, `VHDL::ConstantEval` plus six dependent `.plg`) was deleted; the remaining 13 `.plg` files and domain owners moved to `noncore/`; the root `plugin/` directory is gone and `perl/` is core-only apart from `PPlugin.pm` compatibility. |
 
 ## Deferred Architectural Concern Notes
 These are tracked implementation concerns, not immediate blockers.
@@ -875,8 +899,8 @@ These are tracked implementation concerns, not immediate blockers.
   - but continue prioritizing missing user-facing DSL features first unless one of these seams becomes a concrete bug or blocks a planned feature.
 
 ### Detailed Status Notes
-- Phase 0: `done` (Test::More baseline under `t/phase0_regression.t` for all shipped specs).
-- Phase 0 enhancement: corpus-level regression includes real project directories (`plugin/`, `conf/`, `tablescript/`, `ebnf/`).
+- Phase 0: `done` (Test::More baseline under `t/phase0_regression.t` for all 21 shipped specs; current gate `PASS 1..1026` with `PERL5LIB=` cleared).
+- Phase 0 enhancement: corpus-level regression includes active core project directories such as `conf/`, `tablescript/`, and `ebnf/`; the former root `plugin/` corpus is retired from the core gate after `NONCORE-QUARANTINE`.
 - Phase 1: `mostly done`.
 - Phase 1A (LinkedSpec.pm modularization): `mostly done`.
   - Planned first slice: extract tracing/logging APIs to `LinkedSpec/Trace.pm`.

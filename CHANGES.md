@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-08 — ROADMAP-DRIFT-RECONCILE.1 — reconcile long-form roadmap drift
+
+**Scope:** Documentation-only long-form roadmap reconciliation.
+
+**Change:** Updated `ROADMAP.md` so it reflects the current terse `.spec` direction, phase0 count, Rust oracle
+count, plugin/noncore state, and backend-variant model. The roadmap now names `SPEC-FORMAT-TERSE` / ADR `0007`,
+stops presenting `declare(...)` as current authoring, records `LEGACY-VHDL-RETIRE` and `NONCORE-QUARANTINE`, and
+states the current `.spec` = universal contract / Perl = reference / Rust = implemented lockstep variant model.
+The owning task tree and central index now advance the frontier to `ROADMAP-DRIFT-RECONCILE.2`.
+
+**Boundary:** No parser/runtime behavior changed. No mdBook edit was needed because the public book already carries
+the current status and 95-fixture oracle wording.
+
+**Validation:** Filesystem/status checks for shipped specs, noncore `.plg` files, root `plugin/` absence, Perl core
+modules, and the Rust corpus manifest; focused stale-wording scans; `git diff --check`, memory/KM/doctrine checks,
+and `bash tools/run_ci_local.sh` pass (including phase0 `1..1026`).
+
 ## 2026-07-08 — RUST-README-DRIFT-SYNC.1 — sync Rust README oracle count
 
 **Scope:** Narrow Rust README documentation sync.

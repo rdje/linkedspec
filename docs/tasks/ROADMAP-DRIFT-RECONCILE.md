@@ -3,12 +3,11 @@
 ## Metadata
 
 - Tree ID: `ROADMAP-DRIFT-RECONCILE`
-- Status: `active` (created 2026-06-23 to OWN a deferred reconciliation; leaves intentionally
-  parked behind the active `SPEC-FORMAT-TERSE` track per the user's 2026-06-23 decision —
-  "Defer — track as a new leaf")
+- Status: `active` (`.1` done 2026-07-08 after user `PNT` reactivated the previously deferred
+  lane; `.2` is the current frontier)
 - Roadmap lane: `Overall roadmap — documentation and book sync`
 - Created: `2026-06-23`
-- Last updated: `2026-06-23`
+- Last updated: `2026-07-08`
 - Owner: repo-local workflow
 
 ## Goal
@@ -56,30 +55,35 @@ the stale long-form companion.
   Commit: `ROADMAP-DRIFT-RECONCILE.0` (see Commit Log)
 
 - ID: `ROADMAP-DRIFT-RECONCILE.1`
-  Status: `pending` (deferred behind `SPEC-FORMAT-TERSE` — see Decisions)
+  Status: `done`
   Goal: Reconcile `ROADMAP.md` long-form drift with the current state
   Acceptance: `ROADMAP.md` is updated so it (a) names the active `SPEC-FORMAT-TERSE` tree and the
     terse `.spec` format direction (ADR `0007`); (b) stops presenting `declare(...)` as the
-    permanent required form — notes it is becoming an optional/deprecated alias as
-    `SPEC-FORMAT-TERSE.1.1.x` lands auto-existing working variables; (c) records the
+    permanent required form — notes the current terse contract uses auto-existing working variables,
+    assignments, type-implying helper positions, and explicit aggregate views; (c) records the
     `LEGACY-VHDL-RETIRE` deletion (RTLUtils/FSMGen/VHDL::ConstantEval + 6 `.plg`) and the
     `NONCORE-QUARANTINE` relocation of the remaining domain owners + 13 `.plg` to `noncore/`
-    (root `plugin/` gone; `perl/` core-only); (d) updates the Phase 0 baseline to the current
-    `t/phase0_regression.t` count (965 green) rather than a generic "all specs compile"; (e)
+    (root `plugin/` gone; `perl/` core-only except `PPlugin.pm` compatibility); (d) updates the
+    Phase 0 baseline to the current `t/phase0_regression.t` count (`PASS 1..1026`) rather than a
+    generic "all specs compile"; (e)
     states the `.spec` = single universal contract / Perl = reference / Rust+Julia+Dart = lockstep
     variants model. Doctrine "update both roadmaps in the same slice" honored for any shared
     statement. Gate EXIT 0.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Done — 2026-07-08. `ROADMAP.md` now names `SPEC-FORMAT-TERSE` / ADR `0007`,
+    current terse authoring, 21 shipped specs, phase0 `PASS 1..1026`, 95 Rust oracle fixtures,
+    `LEGACY-VHDL-RETIRE`, `NONCORE-QUARANTINE`, `noncore/plugin`'s 13 `.plg`, root `plugin/`
+    removal, and the Perl reference / Rust implemented / Julia+Dart future variant model. No
+    parser/runtime/mdBook behavior changed. `bash tools/run_ci_local.sh` passed.
+  Commit: `ROADMAP-DRIFT-RECONCILE.1 - reconcile long-form roadmap drift`
 
 - ID: `ROADMAP-DRIFT-RECONCILE.2`
-  Status: `pending` (deferred behind `SPEC-FORMAT-TERSE` — see Decisions)
+  Status: `pending`
   Goal: Refresh `ARCHITECTURE_STATE.md` dated header + status counts to current
   Acceptance: `ARCHITECTURE_STATE.md` "Last refreshed" header + Status block reflect work since
     `2026-06-14` (the `LEGACY-VHDL-RETIRE` / `NONCORE-QUARANTINE` retirements, `TOP-RULE-AS-NORMAL`,
-    `SPEC-FORMAT-TERSE` progress) and the current phase0 count (965). The architectural *model* in
-    the body is re-read and corrected only where a new deep reading changed the best model (much of
-    it is still accurate). Gate EXIT 0.
+    `SPEC-FORMAT-TERSE` progress) and the current phase0 count (`PASS 1..1026`). The architectural
+    *model* in the body is re-read and corrected only where a new deep reading changed the best
+    model (much of it is still accurate). Gate EXIT 0.
   Verification: `pending`
   Commit: `pending`
 
@@ -87,8 +91,8 @@ the stale long-form companion.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| — | `ROADMAP-DRIFT-RECONCILE.1` | `pending` (DEFERRED) | Tracked but **not PNT-eligible yet** — deferred behind the active `SPEC-FORMAT-TERSE` engine track per the user's 2026-06-23 decision. Pick up when the terse track pauses or the user directs. |
-| — | `ROADMAP-DRIFT-RECONCILE.2` | `pending` (DEFERRED) | Same deferral. The architectural model is still broadly accurate; only the dated header/counts lag, so this is low-urgency. |
+| 1 | `ROADMAP-DRIFT-RECONCILE.1` | `done` | Closed 2026-07-08 after user `PNT` reactivated the previously deferred lane. |
+| 2 | `ROADMAP-DRIFT-RECONCILE.2` | `pending` | Next PNT slice: refresh `ARCHITECTURE_STATE.md` header/status counts to current. |
 
 ## Decisions
 
@@ -102,6 +106,9 @@ the stale long-form companion.
   active terse track and are not in the immediate PNT frontier.
 - `2026-06-23`: Scope limited to `ROADMAP.md` (the stale long-form companion) and
   `ARCHITECTURE_STATE.md`; `ROADMAP_V2.md` is already current and is the canonical execution view.
+- `2026-07-08`: User `PNT` reactivated the previously deferred lane now that `SPEC-FORMAT-TERSE.14`
+  is closed and no terse leaf is PNT-eligible. `.1` was selected first because the long-form roadmap
+  had the broadest stale public-status surface; `.2` remains the next architecture-state refresh.
 
 ## Open Questions
 
@@ -117,15 +124,19 @@ the stale long-form companion.
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-06-23` | `ROADMAP-DRIFT-RECONCILE.0` | Tree authored from `docs/tasks/TEMPLATE.md`; drift findings transcribed from the 2026-06-23 bootstrap audit; index row registered; doctrine driver (2/2) + KM gate green via pre-commit hook | Tracking-only — no code/book/roadmap content changed in this slice; phase0 965 unaffected |
+| `2026-07-08` | `ROADMAP-DRIFT-RECONCILE.1` | Filesystem/status checks for shipped specs, `noncore/plugin`, root `plugin/`, Perl core modules, Rust corpus manifest; focused stale-wording scans; `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash tools/run_ci_local.sh` | PASS — local CI includes phase0 `1..1026`; no parser/runtime/mdBook behavior changed |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `ROADMAP-DRIFT-RECONCILE.0` | `ROADMAP-DRIFT-RECONCILE.0 — create tree to own deferred ROADMAP.md/ARCHITECTURE_STATE.md drift (tracking-only)` | Tracking-only; leaves `.1`/`.2` deferred behind `SPEC-FORMAT-TERSE` per user 2026-06-23. |
+| `ROADMAP-DRIFT-RECONCILE.1` | `ROADMAP-DRIFT-RECONCILE.1 - reconcile long-form roadmap drift` | Long-form `ROADMAP.md` reconciliation; `.2` remains next. |
 
 ## Changelog
 
 - `2026-06-23`: Created task tree to own the deferred `ROADMAP.md` / `ARCHITECTURE_STATE.md` drift
   reconciliation surfaced during session bootstrap. Leaves `.1` + `.2` parked `pending`-deferred
   behind the active `SPEC-FORMAT-TERSE` track (user decision: "Defer — track as a new leaf").
+- `2026-07-08`: User `PNT` reactivated the lane; `.1` reconciled `ROADMAP.md` with current terse
+  format, phase0, Rust oracle, noncore/plugin, and variant-model state. Frontier advances to `.2`.
