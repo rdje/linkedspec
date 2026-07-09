@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.1.3 — add Dart corpus manifest IO scaffold
+
+**Scope:** Dart corpus manifest IO scaffolding, corpus-runner CLI behavior, tests, task-tree frontier
+closure, mdBook/README/live-doc sync, and Knowledge Map update.
+
+**Change:** Added `dart/lib/src/corpus/manifest_runner.dart` to load and validate the manifest-backed
+corpus without parser execution. The loader validates manifest format, case count, case names, duplicate
+names, missing/stale fixture directories, required `input.spec` / `input.txt` / `expected.json` files,
+and expected JSON syntax. Updated `bin/corpus_runner.dart` so `--corpus <path>` reports loaded fixture
+count. Added `test/corpus_manifest_test.dart` for the checked-in 99-fixture corpus plus missing, stale,
+case-count, and missing-file failures. Closed the `.1` foundation container and advanced the Dart frontier
+to `.2.1` for frontend AST/data types.
+
+**Validation:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+`dart test`, `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`,
+`dart run bin/corpus_runner.dart --help`, and `dart run bin/linkedspec_dart.dart --help` pass.
+`git diff --check`, memory architecture, Knowledge Map regeneration/check, task-tree metadata, doctrine
+gates, and `mdbook build docs/linkedspec-book` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.1.2 — create Dart scaffold smoke package
 
 **Scope:** Dart package scaffold, smoke commands, root layout docs, mdBook sync, and Knowledge Map retrieval.

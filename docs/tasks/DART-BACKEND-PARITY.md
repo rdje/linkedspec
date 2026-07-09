@@ -54,7 +54,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Children: `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
 
 - ID: `DART-BACKEND-PARITY.1`
-  Status: `active`
+  Status: `done`
   Goal: Establish Dart toolchain, workspace, and parity harness foundations before parser code.
   Children: `.1.1`, `.1.2`, `.1.3`
 
@@ -87,15 +87,19 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.1.2 - create Dart scaffold smoke package`
 
 - ID: `DART-BACKEND-PARITY.1.3`
-  Status: `pending`
+  Status: `done`
   Goal: Add corpus-fixture IO scaffolding without executing parser semantics yet.
   Acceptance: Dart can load the manifest-backed corpus directory, validate manifest shape, and detect
     missing/stale fixture directories before any `.spec` runtime is implemented.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** `loadCorpusFixtures(...)` loads the checked-in
+    `rust/linkedspec-runtime/tests/corpus` manifest and 99 fixtures, validates manifest format/count/case
+    names/duplicates, detects missing and stale fixture directories, requires `input.spec`, `input.txt`,
+    and `expected.json`, and parses expected JSON without executing parser semantics. Dart format, analyze,
+    tests, corpus-runner real-corpus load, and CLI help checks pass.
+  Commit: `DART-BACKEND-PARITY.1.3 - add Dart corpus manifest IO scaffold`
 
 - ID: `DART-BACKEND-PARITY.2`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the Dart `.spec` frontend.
   Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`
 
@@ -315,7 +319,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-BACKEND-PARITY.1.3` | `pending` | Package scaffold exists; add manifest/corpus IO scaffolding before parser semantics. |
+| 1 | `DART-BACKEND-PARITY.2.1` | `pending` | Toolchain, package, and corpus IO foundations are green; define frontend AST/data types before parser code. |
 
 ## Dart Toolchain And Package Layout
 
@@ -389,6 +393,15 @@ The `.1.2` scaffold intentionally implements no parser, runtime, or corpus seman
 - `test/smoke_test.dart` as the first CI-facing Dart smoke test.
 - Root `.gitignore` entries for `dart/.dart_tool/`, `dart/.packages`, and `dart/build/`.
 
+The `.1.3` corpus IO scaffold adds:
+
+- `lib/src/corpus/manifest_runner.dart` with `loadCorpusFixtures(...)`.
+- `test/corpus_manifest_test.dart` covering the real 99-fixture corpus and negative drift cases.
+- `bin/corpus_runner.dart --corpus <path>` loading and reporting manifest-backed fixture count.
+- Manifest validation for format `1`, `case_count`, case names, duplicates, missing/stale directories,
+  required fixture files, and `expected.json` syntax.
+- No parser execution, runtime execution, or output comparison yet.
+
 ## Decisions
 
 - `2026-07-09`: Dart starts interpreter-first. The primary parity path is
@@ -402,14 +415,16 @@ The `.1.2` scaffold intentionally implements no parser, runtime, or corpus seman
   the backend implementation path.
 - `2026-07-09`: The initial Dart package commits `pubspec.lock` because this repo owns a non-published
   CLI/library backend package. Generated Dart tool state stays ignored under `dart/.dart_tool/`.
+- `2026-07-09`: Dart corpus IO starts by consuming the existing Rust-owned language-neutral corpus root
+  under `rust/linkedspec-runtime/tests/corpus/`. Backend-neutral corpus relocation remains separate.
 
 ## Open Questions
 
-- None blocking `.1.3`. The package scaffold is green; manifest IO is next.
+- None blocking `.2.1`. The `.1` foundation container is closed.
 
 ## Blockers
 
-- None known before `.1.3` manifest IO scaffolding.
+- None known before `.2.1` frontend AST/data-type work.
 
 ## Verification Log
 
@@ -418,6 +433,7 @@ The `.1.2` scaffold intentionally implements no parser, runtime, or corpus seman
 | `2026-07-09` | `DART-BACKEND-PARITY` | Plan created under `FUTURE-PARITY-BACKLOG.1.1`; `git diff --check`; memory architecture; Knowledge Map; doctrine; task-tree metadata; mdBook build; local CI. | PASS. Local CI includes phase0 `1..1028`; no Dart code yet. |
 | `2026-07-09` | `DART-BACKEND-PARITY.1.1` | `command -v dart`; `dart --version`; `command -v flutter`; approved `dart --disable-analytics`; `dart help format`; `dart help analyze`; `dart help test`; `dart pub --help`; `dart create --help`; `git diff --check`; memory architecture; Knowledge Map; task-tree metadata; doctrine; mdBook build. | PASS. Dart SDK `3.9.2` is available; Flutter absent/non-blocking; layout and commands recorded; no Dart package files created. |
 | `2026-07-09` | `DART-BACKEND-PARITY.1.2` | approved `dart pub get`; `dart format --set-exit-if-changed .`; approved `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Scaffold package, lockfile, CLI stubs, corpus-runner stub, and smoke test are green; no parser/runtime/corpus semantics yet. |
+| `2026-07-09` | `DART-BACKEND-PARITY.1.3` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Manifest IO loads 99 fixtures and catches missing/stale/malformed corpus state without parser execution. |
 
 ## Commit Log
 
@@ -426,6 +442,7 @@ The `.1.2` scaffold intentionally implements no parser, runtime, or corpus seman
 | `DART-BACKEND-PARITY` | `FUTURE-PARITY-BACKLOG.1.1 - scope Dart backend parity plan` | Tree created by the backlog scoping leaf; implementation commits use `DART-BACKEND-PARITY.*` leaf ids. |
 | `DART-BACKEND-PARITY.1.1` | `DART-BACKEND-PARITY.1.1 - record Dart toolchain and layout` | Toolchain/layout preflight; no package files. |
 | `DART-BACKEND-PARITY.1.2` | `DART-BACKEND-PARITY.1.2 - create Dart scaffold smoke package` | Minimal package scaffold; no parser/runtime/corpus semantics. |
+| `DART-BACKEND-PARITY.1.3` | `DART-BACKEND-PARITY.1.3 - add Dart corpus manifest IO scaffold` | Manifest IO scaffold; `.1` foundation container closes. |
 
 ## Changelog
 
@@ -434,3 +451,5 @@ The `.1.2` scaffold intentionally implements no parser, runtime, or corpus seman
   to `.1.2` for scaffold creation.
 - `2026-07-09`: Created the `dart/` scaffold package and smoke test; frontier advances to `.1.3` for
   corpus-fixture IO scaffolding.
+- `2026-07-09`: Added Dart corpus manifest IO and drift tests; `.1` foundation closes and frontier advances
+  to `.2.1` for frontend AST/data types.

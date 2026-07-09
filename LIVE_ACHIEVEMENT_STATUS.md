@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.1.3 — add Dart corpus manifest IO scaffold**
+  (DONE corpus manifest loading/drift guard; no parser/runtime execution yet).
+
+  **Change:** Added Dart manifest/corpus IO scaffolding and tests. The loader validates manifest shape,
+  duplicate/invalid case names, missing and stale fixture directories, required fixture files, and
+  `expected.json` syntax. The corpus runner now accepts `--corpus <path>` and reports the loaded fixture
+  count for the 99-fixture checked-in corpus.
+
+  **Boundary:** This is IO validation only. It does not parse `.spec`, compile, execute, compare expected
+  output, or claim corpus parity. The next frontier is `DART-BACKEND-PARITY.2.1` for frontend AST/data
+  types.
+
+  **Verification:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+  `dart test`, `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`,
+  `dart run bin/corpus_runner.dart --help`, and `dart run bin/linkedspec_dart.dart --help` pass.
+  `git diff --check`, memory architecture, Knowledge Map regeneration/check, task-tree metadata, doctrine
+  gates, and `mdbook build docs/linkedspec-book` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.1.2 — create Dart scaffold smoke package**
   (DONE minimal Dart package scaffold; parser/runtime/corpus semantics still deferred).
 

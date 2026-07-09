@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.1.3` added Dart corpus manifest IO scaffolding.
+  `dart/lib/src/corpus/manifest_runner.dart` now loads `manifest.json`, validates format/case-count/case
+  name shape, detects missing and stale fixture directories, requires `input.spec` / `input.txt` /
+  `expected.json`, parses expected JSON, and reports the 99 checked-in fixtures without executing parser
+  semantics. The `.1` toolchain/workspace/foundation container is closed; next frontier is `.2.1` AST/data types.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.1.2` created the repo-owned Dart package scaffold
   under `dart/`. The package has `pubspec.yaml`, committed `pubspec.lock`, analyzer options, README,
   public library entrypoint, CLI smoke entrypoint, corpus-runner entrypoint, and a `package:test`

@@ -18,27 +18,27 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.1.2` — created the repo-owned `dart/` package scaffold,
-  smoke CLI entrypoints, committed pub lockfile, analyzer options, package README, and `package:test`
-  smoke test. Parser/runtime/corpus semantics are still deferred.
-- prior_leaf: `DART-BACKEND-PARITY.1.1` — verified Dart SDK `3.9.2`, Flutter non-requirement, and
-  the repo-owned Dart package layout/commands before source scaffolding.
+- latest_completed_leaf: `DART-BACKEND-PARITY.1.3` — added Dart corpus manifest IO scaffolding and
+  tests. The runner loads the 99-fixture manifest, detects missing/stale fixture dirs and missing files,
+  and still performs no parser/runtime execution.
+- prior_leaf: `DART-BACKEND-PARITY.1.2` — created the repo-owned `dart/` package scaffold, CLI stubs,
+  lockfile, analyzer options, README, and smoke test.
 - latest_commit: HEAD containing this pointer should be
-  `DART-BACKEND-PARITY.1.2 - create Dart scaffold smoke package`; parent before this slice is
-  `DART-BACKEND-PARITY.1.1 - record Dart toolchain and layout`.
+  `DART-BACKEND-PARITY.1.3 - add Dart corpus manifest IO scaffold`; parent before this slice is
+  `DART-BACKEND-PARITY.1.2 - create Dart scaffold smoke package`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.1.3` pending.
-- next_action: from a clean repo, add corpus-fixture IO scaffolding under `DART-BACKEND-PARITY.1.3`
-  without implementing parser semantics.
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.2.1` pending.
+- next_action: from a clean repo, define Dart AST/data types for `.spec` files, rules, modes, body
+  elements, edges, lifecycles, source spans, parse jobs, and function definitions.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, task-tree index,
   ROADMAP/ROADMAP_V2, mdBook status/backend-handoff/formal grammar/helper chapters, relevant ADR/KM facts,
-  and codebase architecture/source inventory for the Dart scaffold slice.
+  and codebase architecture/source inventory for the Dart manifest IO slice.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1028`**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.1.2` pointer commit lands; do not pivot unless the repo is
+- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.1.3` pointer commit lands; do not pivot unless the repo is
   handoff-ready.

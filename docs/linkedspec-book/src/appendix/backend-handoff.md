@@ -243,8 +243,10 @@ state, Dart runtime interpreter, then the manifest-backed corpus runner.
 Generated Dart source is a later proof lane after interpreter/corpus parity, not
 the primary conformance gate. The repo now has a Dart CLI/library scaffold under
 `dart/`, including package metadata, committed lockfile, public library entrypoint,
-CLI smoke entrypoint, corpus-runner entrypoint, and smoke test. The next owned
-step is manifest/corpus IO scaffolding before parser semantics.
+CLI smoke entrypoint, and smoke tests. Its corpus-runner scaffold loads the
+manifest-backed corpus, rejects manifest drift, checks required fixture files and
+expected JSON syntax, and deliberately does not execute parser semantics yet. The
+next owned step is frontend AST/data types before parser code.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

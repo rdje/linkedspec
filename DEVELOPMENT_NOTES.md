@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.1.3 — Dart corpus manifest IO scaffold):
+  Added `dart/lib/src/corpus/manifest_runner.dart` and `test/corpus_manifest_test.dart`. Dart now loads
+  the Rust-owned language-neutral corpus manifest, validates format `1`, `case_count`, case names,
+  duplicate names, missing/stale fixture directories, required `input.spec` / `input.txt` /
+  `expected.json`, and expected JSON syntax. `bin/corpus_runner.dart --corpus ...` reports the loaded
+  fixture count but still does not parse or execute `.spec` semantics. The checked-in corpus currently
+  loads as 99 fixtures. This closes the `.1` toolchain/workspace/foundation container; `.2.1` starts the
+  frontend AST/data-type layer.
+
 - 2026-07-09 (DART-BACKEND-PARITY.1.2 — Dart scaffold package):
   Created the first repo-owned Dart package under `dart/`. It is deliberately scaffold-only:
   `pubspec.yaml` + committed `pubspec.lock`, strict analyzer options, package README, public library
