@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **252** facts · **1765** question keys.
+> **253** facts · **1771** question keys.
 
 ## Questions → fact
 
@@ -247,6 +247,12 @@
 - "does Dart runtime support capture position helpers" -> [dart-runtime-core-value-capture-helpers](docs/knowledge/dart-runtime-core-value-capture-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime support entry_map and match_map" -> [dart-runtime-core-value-capture-helpers](docs/knowledge/dart-runtime-core-value-capture-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime support entry_named and match_named" -> [dart-runtime-core-value-capture-helpers](docs/knowledge/dart-runtime-core-value-capture-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support number receiver chains" -> [dart-runtime-string-numeric-helpers](docs/knowledge/dart-runtime-string-numeric-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support numeric aliases and symbol callees" -> [dart-runtime-string-numeric-helpers](docs/knowledge/dart-runtime-string-numeric-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support numeric helpers" -> [dart-runtime-string-numeric-helpers](docs/knowledge/dart-runtime-string-numeric-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support str_eq string comparisons" -> [dart-runtime-string-numeric-helpers](docs/knowledge/dart-runtime-string-numeric-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support string receiver chains" -> [dart-runtime-string-numeric-helpers](docs/knowledge/dart-runtime-string-numeric-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support trim lowercase substr split" -> [dart-runtime-string-numeric-helpers](docs/knowledge/dart-runtime-string-numeric-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart stitch function body AST into registry records" -> [dart-function-registry](docs/knowledge/dart-function-registry.md) · 2026-07-09 · reverify: `cd dart && dart test test/function_registry_test.dart test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart strict syntax exist" -> [dart-frontend-validation](docs/knowledge/dart-frontend-validation.md) · 2026-07-09 · reverify: `cd dart && dart test test/spec_validator_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart support action-edge dispatch" -> [dart-runtime-rule-interpreter](docs/knowledge/dart-runtime-rule-interpreter.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
@@ -2008,6 +2014,15 @@ _Dart runtime rule interpreter executes compiled rules through dispatch, lifecyc
 - **evidence:** `DART-BACKEND-PARITY.4.2 adds dart/lib/src/runtime/interpreter.dart and exports LinkedSpecRuntimeEngine, RuntimeParseResult, RuntimeLifecycleEvent, and RuntimeInterpreterException. test/runtime_interpreter_test.dart covers regex repetition, action-edge fluent .push, blind AND/OR dispatch, bounded repetition, zero-progress cutoff, and lifecycle order.`
 - **reverify:** `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - **source:** [`docs/knowledge/dart-runtime-rule-interpreter.md`](docs/knowledge/dart-runtime-rule-interpreter.md)
+
+### dart-runtime-string-numeric-helpers
+_Dart runtime executes current string/scalar and numeric helper families_
+
+- **answers:** does Dart runtime support trim lowercase substr split | does Dart runtime support string receiver chains | does Dart runtime support numeric helpers | does Dart runtime support numeric aliases and symbol callees | does Dart runtime support number receiver chains | does Dart runtime support str_eq string comparisons
+- **date:** 2026-07-09 · **status:** current
+- **evidence:** `DART-BACKEND-PARITY.4.3.2 extends dart/lib/src/runtime/interpreter.dart and test/runtime_interpreter_test.dart. Focused tests prove string/scalar helpers, explicit str_* lexical comparisons, numeric arithmetic/reducer/comparison helpers, numeric aliases, arithmetic/comparison symbol callees, and string/number receiver chains.`
+- **reverify:** `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- **source:** [`docs/knowledge/dart-runtime-string-numeric-helpers.md`](docs/knowledge/dart-runtime-string-numeric-helpers.md)
 
 ### ebnf-push-nonempty-explicit-filter-migration
 _SPEC-FORMAT-TERSE.8.2.1: live EBNF no longer needs push_nonempty; scalar optional captures use assignment plus is_nonempty-guarded push._

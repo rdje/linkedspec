@@ -257,6 +257,103 @@ Top::
       'match_end': 9,
     });
   });
+
+  test('executes string scalar helpers and receiver chains', () {
+    final engine = _engine(r'''
+Top::
+ /(.+)/
+ E {
+   raw = entry_group(0);
+   set(array(tmp), ["x"]);
+   missing = tmp[5];
+   return(hash(
+     "trim", trim(raw),
+     "chain", raw.trim().lowercase().replace_substr("-", "_").rm_suffix("_end"),
+     "substr", substr(trim(raw), 1, 3),
+     "contains", contains_substr(raw, "-B-"),
+     "starts", starts_with(trim(raw), "A"),
+     "ends", ends_with(trim(raw), "END"),
+     "matches", matches(trim(raw), /^A/),
+     "split", raw.trim().split("-"),
+     "coalesce", coalesce(missing, "fallback"),
+     "coalesce_nonempty", coalesce_nonempty("", "filled"),
+     "defined", is_defined(""),
+     "undefined", is_undefined(missing),
+     "empty", is_empty(""),
+     "nonempty", is_nonempty("x"),
+     "empty_array", is_empty(array()),
+     "nonempty_hash", is_nonempty(hash("k", "v")),
+     "str_eq", str_eq("a", "a"),
+     "str_lt", str_lt("a", "b")
+   ))
+ }
+''');
+
+    final result = engine.parse(' A-B-END ');
+
+    expect(result.value, {
+      'trim': 'A-B-END',
+      'chain': 'a_b',
+      'substr': '-B-',
+      'contains': true,
+      'starts': true,
+      'ends': true,
+      'matches': true,
+      'split': ['A', 'B', 'END'],
+      'coalesce': 'fallback',
+      'coalesce_nonempty': 'filled',
+      'defined': true,
+      'undefined': true,
+      'empty': true,
+      'nonempty': true,
+      'empty_array': true,
+      'nonempty_hash': true,
+      'str_eq': true,
+      'str_lt': true,
+    });
+  });
+
+  test('executes numeric helpers aliases symbols and receivers', () {
+    final engine = _engine(r'''
+Top::
+ /x/
+ E {
+   return(hash(
+     "symbol_add", +(2, *(3, 4)),
+     "div", num_div(7, 2),
+     "mod", 17.mod(5),
+     "clamp", num_clamp(42, 0, 10),
+     "gt", gt(10, 2),
+     "le", <=(2, 2),
+     "round", 3.5.round(),
+     "range", num_range(array(3, 9, 1, 7)),
+     "avg", avg(array(2, 4, 6)),
+     "median", median(array(5, 1, 4, 2)),
+     "minimum", min(array(8, 3, 5, 1)),
+     "bad_div", num_div(5, 0),
+     "bad_number", num_add("x", 1)
+   ))
+ }
+''');
+
+    final result = engine.parse('x');
+
+    expect(result.value, {
+      'symbol_add': 14,
+      'div': 3.5,
+      'mod': 2,
+      'clamp': 10,
+      'gt': true,
+      'le': true,
+      'round': 4,
+      'range': 8,
+      'avg': 4,
+      'median': 3,
+      'minimum': 1,
+      'bad_div': null,
+      'bad_number': null,
+    });
+  });
 }
 
 LinkedSpecRuntimeEngine _engine(String source) {

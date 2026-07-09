@@ -313,9 +313,12 @@ null, boolean, and number shapes through assignment and wrapper snapshots;
 supports `array(...)`, `hash(...)`, `copy(...)`, `set(hash(...), ...)`,
 hash-index mutation, nested reads, non-numeric map keys, and regex literals as
 values; and exposes the named/map/length/start/end `entry_*` / `match_*`
-capture helper family. String/scalar helper breadth, numeric helpers, broader
-array/hash helper families, value-block/control/tree traversal helpers,
-BACKTRACK behavior, tracing/diagnostics, staged function execution, and
+capture helper family. It now also executes current string/scalar helpers,
+explicit `str_*` lexical comparisons, numeric arithmetic/reducer/comparison
+helpers, numeric word aliases, arithmetic/comparison symbol callees, and
+compatible string/number receiver chains. Broader array/hash helper families,
+value-block/control/tree traversal helpers, BACKTRACK behavior,
+tracing/diagnostics, staged function execution, and
 corpus-output parity remain later Dart leaves.
 
 ### Step 6: Validate Against the Test Corpus

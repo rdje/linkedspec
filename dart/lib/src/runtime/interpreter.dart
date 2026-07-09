@@ -1,4 +1,7 @@
+import 'dart:math' as math;
+
 import '../action/action_ast.dart';
+import '../action/action_contracts.dart';
 import '../ast/spec_ast.dart';
 import '../compiler/compiled_spec.dart';
 import 'matching.dart';
@@ -774,7 +777,8 @@ final class LinkedSpecRuntimeEngine {
     required _CurrentActionEdge? currentEdge,
   }) {
     final positionalArgs = call.args.map((arg) => arg.value).toList();
-    switch (call.name) {
+    final helperName = canonicalActionHelperName(call.name);
+    switch (helperName) {
       case 'return':
         final value = positionalArgs.isEmpty
             ? null
@@ -805,19 +809,22 @@ final class LinkedSpecRuntimeEngine {
           ruleLabel,
           currentEdge,
         );
-      case 'cat':
-        return positionalArgs
-            .map(
-              (arg) => _stringValue(
-                _evaluateExpression(
-                  arg,
-                  context,
-                  ruleLabel,
-                  currentEdge: currentEdge,
-                ),
-              ),
-            )
-            .join();
+      case 'coalesce':
+        return _callCoalesce(
+          positionalArgs,
+          context,
+          ruleLabel,
+          currentEdge,
+          requireNonempty: false,
+        );
+      case 'coalesce_nonempty':
+        return _callCoalesce(
+          positionalArgs,
+          context,
+          ruleLabel,
+          currentEdge,
+          requireNonempty: true,
+        );
       case 'entry_text':
         return context.registers.entryMatch?.text;
       case 'match_text':
@@ -918,6 +925,12 @@ final class LinkedSpecRuntimeEngine {
             : _executeRule(targetLabel, targetIndex, context);
         return child.value;
       default:
+        if (_runtimePureHelperNames.contains(helperName)) {
+          return _callPureHelper(
+            helperName,
+            _evaluateValues(positionalArgs, context, ruleLabel, currentEdge),
+          );
+        }
         throw RuntimeInterpreterException(
           "unsupported runtime helper '${call.name}' in rule $ruleLabel",
         );
@@ -931,24 +944,40 @@ final class LinkedSpecRuntimeEngine {
     String ruleLabel, {
     required _CurrentActionEdge? currentEdge,
   }) {
-    switch (call.method) {
+    final helperName = canonicalActionHelperName(call.method);
+    switch (helperName) {
       case 'copy':
         return _copyValue(receiver);
-      case 'cat':
-        return _stringValue(receiver) +
-            call.args
-                .map(
-                  (arg) => _stringValue(
-                    _evaluateExpression(
-                      arg.value,
-                      context,
-                      ruleLabel,
-                      currentEdge: currentEdge,
-                    ),
-                  ),
-                )
-                .join();
+      case 'coalesce':
+        return _callCoalesceWithReceiver(
+          receiver,
+          call.args,
+          context,
+          ruleLabel,
+          currentEdge,
+          requireNonempty: false,
+        );
+      case 'coalesce_nonempty':
+        return _callCoalesceWithReceiver(
+          receiver,
+          call.args,
+          context,
+          ruleLabel,
+          currentEdge,
+          requireNonempty: true,
+        );
       default:
+        if (_runtimeReceiverHelperNames.contains(helperName)) {
+          return _callPureHelper(helperName, [
+            receiver,
+            ..._evaluateArgumentValues(
+              call.args,
+              context,
+              ruleLabel,
+              currentEdge,
+            ),
+          ]);
+        }
         throw RuntimeInterpreterException(
           "unsupported runtime fluent method '.${call.method}' in rule $ruleLabel",
         );
@@ -1116,6 +1145,81 @@ final class LinkedSpecRuntimeEngine {
     return entries;
   }
 
+  List<Object?> _evaluateValues(
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    return [
+      for (final arg in args)
+        _evaluateExpression(arg, context, ruleLabel, currentEdge: currentEdge),
+    ];
+  }
+
+  List<Object?> _evaluateArgumentValues(
+    List<ActionArgument> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    return [
+      for (final arg in args)
+        _evaluateExpression(
+          arg.value,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+        ),
+    ];
+  }
+
+  Object? _callCoalesce(
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge, {
+    required bool requireNonempty,
+  }) {
+    for (final arg in args) {
+      final value = _evaluateExpression(
+        arg,
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      );
+      if (_coalesceAccepts(value, requireNonempty: requireNonempty)) {
+        return _copyValue(value);
+      }
+    }
+    return null;
+  }
+
+  Object? _callCoalesceWithReceiver(
+    Object? receiver,
+    List<ActionArgument> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge, {
+    required bool requireNonempty,
+  }) {
+    if (_coalesceAccepts(receiver, requireNonempty: requireNonempty)) {
+      return _copyValue(receiver);
+    }
+    for (final arg in args) {
+      final value = _evaluateExpression(
+        arg.value,
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      );
+      if (_coalesceAccepts(value, requireNonempty: requireNonempty)) {
+        return _copyValue(value);
+      }
+    }
+    return null;
+  }
+
   Object? _readRetv(
     _RuntimeExecutionContext context,
     _CurrentActionEdge? currentEdge,
@@ -1170,6 +1274,517 @@ final class LinkedSpecRuntimeEngine {
         rule.blindEdges.isEmpty &&
         rule.plainActionPayloads.isEmpty;
   }
+}
+
+const _runtimePureHelperNames = <String>{
+  'cat',
+  'contains_substr',
+  'ends_with',
+  'is_defined',
+  'is_empty',
+  'is_nonempty',
+  'is_undefined',
+  'length',
+  'lowercase',
+  'matches',
+  'num_abs',
+  'num_add',
+  'num_avg',
+  'num_ceil',
+  'num_clamp',
+  'num_div',
+  'num_eq',
+  'num_floor',
+  'num_ge',
+  'num_gt',
+  'num_le',
+  'num_lt',
+  'num_max',
+  'num_median',
+  'num_min',
+  'num_mod',
+  'num_mul',
+  'num_ne',
+  'num_range',
+  'num_round',
+  'num_sub',
+  'num_sum',
+  'replace_substr',
+  'rm_prefix',
+  'rm_suffix',
+  'split',
+  'starts_with',
+  'str_eq',
+  'str_ge',
+  'str_gt',
+  'str_le',
+  'str_lt',
+  'str_ne',
+  'substr',
+  'trim',
+  'uppercase',
+};
+
+const _runtimeReceiverHelperNames = <String>{
+  ..._runtimePureHelperNames,
+  'coalesce',
+  'coalesce_nonempty',
+};
+
+Object? _callPureHelper(String helperName, List<Object?> values) {
+  if (helperName.startsWith('num_')) {
+    return _callNumericHelper(helperName, values);
+  }
+  if (helperName.startsWith('str_')) {
+    return _callStringCompareHelper(helperName, values);
+  }
+  return switch (helperName) {
+    'cat' => _callCat(values),
+    'contains_substr' => _callStringPredicate(
+      values,
+      (value, needle) => value.contains(needle),
+    ),
+    'ends_with' => _callStringPredicate(
+      values,
+      (value, suffix) => value.endsWith(suffix),
+    ),
+    'is_defined' => values.isNotEmpty && values.first != null,
+    'is_empty' => _isEmptyValue(values.isEmpty ? null : values.first),
+    'is_nonempty' => !_isEmptyValue(values.isEmpty ? null : values.first),
+    'is_undefined' => values.isEmpty || values.first == null,
+    'length' => _lengthValue(values.isEmpty ? null : values.first),
+    'lowercase' => _stringTransform(values, (value) => value.toLowerCase()),
+    'matches' => _callMatches(values),
+    'replace_substr' => _callReplaceSubstr(values),
+    'rm_prefix' => _callRemoveEdge(values, prefix: true),
+    'rm_suffix' => _callRemoveEdge(values, prefix: false),
+    'split' => _callSplit(values),
+    'starts_with' => _callStringPredicate(
+      values,
+      (value, prefix) => value.startsWith(prefix),
+    ),
+    'substr' => _callSubstr(values),
+    'trim' => _stringTransform(values, (value) => value.trim()),
+    'uppercase' => _stringTransform(values, (value) => value.toUpperCase()),
+    _ => throw RuntimeInterpreterException(
+      "unsupported pure runtime helper '$helperName'",
+    ),
+  };
+}
+
+bool _coalesceAccepts(Object? value, {required bool requireNonempty}) {
+  if (value == null) {
+    return false;
+  }
+  if (!requireNonempty) {
+    return true;
+  }
+  return value is! String || value.isNotEmpty;
+}
+
+Object? _callCat(List<Object?> values) {
+  final buffer = StringBuffer();
+  for (final value in values) {
+    final string = _scalarString(value, nullAsEmpty: true);
+    if (string == null) {
+      return null;
+    }
+    buffer.write(string);
+  }
+  return buffer.toString();
+}
+
+Object? _stringTransform(
+  List<Object?> values,
+  String Function(String value) transform,
+) {
+  final value = values.isEmpty ? null : _scalarString(values.first);
+  return value == null ? null : transform(value);
+}
+
+Object? _callStringPredicate(
+  List<Object?> values,
+  bool Function(String value, String needle) test,
+) {
+  if (values.length < 2) {
+    return false;
+  }
+  final value = _scalarString(values[0]);
+  final needle = _scalarString(values[1], nullAsEmpty: true);
+  if (value == null || needle == null) {
+    return false;
+  }
+  return test(value, needle);
+}
+
+Object? _callMatches(List<Object?> values) {
+  if (values.length < 2) {
+    return false;
+  }
+  final value = _scalarString(values[0]);
+  final pattern = _scalarString(values[1]);
+  if (value == null || pattern == null) {
+    return false;
+  }
+  return RuntimeRegexAlternation.compile([pattern]).seekMatch(value, 0) != null;
+}
+
+Object? _callReplaceSubstr(List<Object?> values) {
+  if (values.length < 3) {
+    return null;
+  }
+  final value = _scalarString(values[0]);
+  final oldValue = _scalarString(values[1], nullAsEmpty: true);
+  final newValue = _scalarString(values[2], nullAsEmpty: true);
+  if (value == null || oldValue == null || newValue == null) {
+    return null;
+  }
+  if (oldValue.isEmpty) {
+    return value;
+  }
+  return value.replaceAll(oldValue, newValue);
+}
+
+Object? _callRemoveEdge(List<Object?> values, {required bool prefix}) {
+  if (values.length < 2) {
+    return null;
+  }
+  final value = _scalarString(values[0]);
+  final edge = _scalarString(values[1], nullAsEmpty: true);
+  if (value == null || edge == null) {
+    return null;
+  }
+  if (prefix) {
+    return value.startsWith(edge) ? value.substring(edge.length) : value;
+  }
+  return value.endsWith(edge)
+      ? value.substring(0, value.length - edge.length)
+      : value;
+}
+
+Object? _callSubstr(List<Object?> values) {
+  if (values.length < 2 || values.first == null || values[1] == null) {
+    return null;
+  }
+  final value = _scalarString(values[0]);
+  if (value == null) {
+    return null;
+  }
+  final start = math.max(0, _intValue(values[1]) ?? 0);
+  final length = values.length >= 3 && values[2] != null
+      ? math.max(0, _intValue(values[2]) ?? 0)
+      : null;
+  return _charSubstring(value, start, length);
+}
+
+Object? _callSplit(List<Object?> values) {
+  if (values.length < 2) {
+    return null;
+  }
+  final value = _scalarString(values[0]);
+  final delimiter = _scalarString(values[1], nullAsEmpty: true);
+  if (value == null || delimiter == null) {
+    return null;
+  }
+  if (delimiter.isEmpty) {
+    return [for (final rune in value.runes) String.fromCharCode(rune)];
+  }
+  return value.split(delimiter);
+}
+
+Object? _lengthValue(Object? value) {
+  if (value == null) {
+    return null;
+  }
+  if (value is String) {
+    return value.runes.length;
+  }
+  if (value is List) {
+    return value.length;
+  }
+  return _scalarString(value)?.runes.length;
+}
+
+bool _isEmptyValue(Object? value) {
+  return switch (value) {
+    null => true,
+    String value => value.isEmpty,
+    List<dynamic> value => value.isEmpty,
+    Map<dynamic, dynamic> value => value.isEmpty,
+    _ => false,
+  };
+}
+
+Object? _callStringCompareHelper(String helperName, List<Object?> values) {
+  if (values.length < 2) {
+    return null;
+  }
+  final left = _scalarString(values[0]);
+  final right = _scalarString(values[1]);
+  if (left == null || right == null) {
+    return null;
+  }
+  final comparison = left.compareTo(right);
+  return switch (helperName) {
+    'str_eq' => comparison == 0,
+    'str_ne' => comparison != 0,
+    'str_gt' => comparison > 0,
+    'str_ge' => comparison >= 0,
+    'str_lt' => comparison < 0,
+    'str_le' => comparison <= 0,
+    _ => throw RuntimeInterpreterException(
+      "unsupported string comparison helper '$helperName'",
+    ),
+  };
+}
+
+Object? _callNumericHelper(String helperName, List<Object?> values) {
+  switch (helperName) {
+    case 'num_add':
+      return _numericFold(values, (left, right) => left + right);
+    case 'num_sub':
+      return _numericFold(values, (left, right) => left - right);
+    case 'num_mul':
+      return _numericFold(values, (left, right) => left * right);
+    case 'num_div':
+      return _numericFold(values, (left, right) {
+        if (right == 0) {
+          throw const _InvalidNumericResult();
+        }
+        return left / right;
+      });
+    case 'num_mod':
+      if (values.length < 2) {
+        return null;
+      }
+      final left = _numValue(values[0]);
+      final right = _numValue(values[1]);
+      if (left == null ||
+          right == null ||
+          right == 0 ||
+          !_isInteger(left) ||
+          !_isInteger(right)) {
+        return null;
+      }
+      return left.toInt() % right.toInt();
+    case 'num_abs':
+      return _unaryNumber(values, (value) => value.abs());
+    case 'num_floor':
+      return _unaryNumber(values, (value) => value.floor());
+    case 'num_ceil':
+      return _unaryNumber(values, (value) => value.ceil());
+    case 'num_round':
+      return _unaryNumber(values, (value) => value.round());
+    case 'num_min':
+      return _minMax(values, math.min);
+    case 'num_max':
+      return _minMax(values, math.max);
+    case 'num_clamp':
+      if (values.length < 3) {
+        return null;
+      }
+      final value = _numValue(values[0]);
+      final lower = _numValue(values[1]);
+      final upper = _numValue(values[2]);
+      if (value == null || lower == null || upper == null || lower > upper) {
+        return null;
+      }
+      return _jsonNumber(value.clamp(lower, upper));
+    case 'num_sum':
+      final numbers = _numericList(values.isEmpty ? null : values.first);
+      if (numbers == null) {
+        return null;
+      }
+      return _jsonNumber(numbers.fold<num>(0, (sum, value) => sum + value));
+    case 'num_avg':
+      final numbers = _numericList(values.isEmpty ? null : values.first);
+      if (numbers == null || numbers.isEmpty) {
+        return null;
+      }
+      return _jsonNumber(
+        numbers.fold<num>(0, (sum, value) => sum + value) / numbers.length,
+      );
+    case 'num_median':
+      final numbers = _numericList(values.isEmpty ? null : values.first);
+      if (numbers == null || numbers.isEmpty) {
+        return null;
+      }
+      final sorted = [...numbers]..sort();
+      final middle = sorted.length ~/ 2;
+      if (sorted.length.isOdd) {
+        return _jsonNumber(sorted[middle]);
+      }
+      return _jsonNumber((sorted[middle - 1] + sorted[middle]) / 2);
+    case 'num_range':
+      final numbers = _numericList(values.isEmpty ? null : values.first);
+      if (numbers == null || numbers.isEmpty) {
+        return null;
+      }
+      var minimum = numbers.first;
+      var maximum = numbers.first;
+      for (final value in numbers.skip(1)) {
+        minimum = math.min(minimum, value);
+        maximum = math.max(maximum, value);
+      }
+      return _jsonNumber(maximum - minimum);
+    case 'num_eq':
+    case 'num_ne':
+    case 'num_gt':
+    case 'num_ge':
+    case 'num_lt':
+    case 'num_le':
+      return _numericCompare(helperName, values);
+    default:
+      throw RuntimeInterpreterException(
+        "unsupported numeric helper '$helperName'",
+      );
+  }
+}
+
+Object? _numericFold(
+  List<Object?> values,
+  num Function(num left, num right) combine,
+) {
+  if (values.isEmpty) {
+    return null;
+  }
+  final first = _numValue(values.first);
+  if (first == null) {
+    return null;
+  }
+  var current = first;
+  try {
+    for (final value in values.skip(1)) {
+      final next = _numValue(value);
+      if (next == null) {
+        return null;
+      }
+      current = combine(current, next);
+    }
+  } on _InvalidNumericResult {
+    return null;
+  }
+  return _jsonNumber(current);
+}
+
+Object? _unaryNumber(List<Object?> values, num Function(num value) transform) {
+  if (values.isEmpty) {
+    return null;
+  }
+  final value = _numValue(values.first);
+  return value == null ? null : _jsonNumber(transform(value));
+}
+
+Object? _minMax(
+  List<Object?> values,
+  num Function(num left, num right) select,
+) {
+  if (values.length == 1 && values.first is List) {
+    final numbers = _numericList(values.first);
+    if (numbers == null || numbers.isEmpty) {
+      return null;
+    }
+    return _jsonNumber(numbers.skip(1).fold<num>(numbers.first, select));
+  }
+  return _numericFold(values, select);
+}
+
+Object? _numericCompare(String helperName, List<Object?> values) {
+  if (values.length < 2) {
+    return null;
+  }
+  final left = _numValue(values[0]);
+  final right = _numValue(values[1]);
+  if (left == null || right == null) {
+    return null;
+  }
+  return switch (helperName) {
+    'num_eq' => left == right,
+    'num_ne' => left != right,
+    'num_gt' => left > right,
+    'num_ge' => left >= right,
+    'num_lt' => left < right,
+    'num_le' => left <= right,
+    _ => throw RuntimeInterpreterException(
+      "unsupported numeric comparison helper '$helperName'",
+    ),
+  };
+}
+
+List<num>? _numericList(Object? value) {
+  if (value is! List) {
+    return null;
+  }
+  final numbers = <num>[];
+  for (final item in value) {
+    final number = _numValue(item);
+    if (number == null) {
+      return null;
+    }
+    numbers.add(number);
+  }
+  return numbers;
+}
+
+num? _numValue(Object? value) {
+  if (value == null || value is List || value is Map || value is bool) {
+    return null;
+  }
+  if (value is num) {
+    return value.isFinite ? value : null;
+  }
+  final text = '$value'.trim();
+  if (text.isEmpty) {
+    return null;
+  }
+  final parsed = num.tryParse(text);
+  return parsed != null && parsed.isFinite ? parsed : null;
+}
+
+int? _intValue(Object? value) {
+  if (value == null || value is List || value is Map || value is bool) {
+    return null;
+  }
+  if (value is num) {
+    return value.toInt();
+  }
+  return int.tryParse('$value'.trim());
+}
+
+bool _isInteger(num value) {
+  return value.isFinite && value == value.truncateToDouble();
+}
+
+Object _jsonNumber(num value) {
+  if (_isInteger(value)) {
+    return value.toInt();
+  }
+  return value;
+}
+
+String? _scalarString(Object? value, {bool nullAsEmpty = false}) {
+  if (value == null) {
+    return nullAsEmpty ? '' : null;
+  }
+  if (value is List || value is Map) {
+    return null;
+  }
+  return '$value';
+}
+
+String _charSubstring(String value, int start, int? length) {
+  final chars = value.runes.toList();
+  if (start >= chars.length) {
+    return '';
+  }
+  final end = length == null
+      ? chars.length
+      : math.min(chars.length, start + length);
+  return String.fromCharCodes(chars.sublist(start, end));
+}
+
+final class _InvalidNumericResult implements Exception {
+  const _InvalidNumericResult();
 }
 
 final class _RuntimeExecutionContext {

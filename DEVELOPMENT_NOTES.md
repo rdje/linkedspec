@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.4.3.2 — Dart runtime string/numeric helpers):
+  Extended Dart pure helper execution in `dart/lib/src/runtime/interpreter.dart`. Helper names are now
+  canonicalized through the ActionIR contract table before runtime dispatch, so current aliases and symbol callees
+  share the same implementation path. The runtime now evaluates `cat`, trim/case/substring/prefix/suffix/search
+  helpers, regex `matches`, `split`, `coalesce`, definition/empty predicates, explicit `str_*` lexical
+  comparisons, numeric arithmetic/reducers/comparisons, numeric word aliases such as `avg` and `gt`,
+  arithmetic/comparison symbol callees such as `+(...)` and `<=(...)`, and compatible string/number receiver
+  chains such as `raw.trim().lowercase()` and `17.mod(5)`. Focused interpreter tests cover successful helper
+  values and invalid numeric inputs returning `null`. Next frontier is `.4.3.3`, array helper family and array
+  receiver/mutation behavior.
+
 - 2026-07-09 (DART-BACKEND-PARITY.4.3.1 — Dart runtime value/capture helpers):
   Extended the Dart interpreter's core ActionIR evaluator in `dart/lib/src/runtime/interpreter.dart`. The runtime
   now keeps separate scalar, array, and hash working stores while preserving typed JSON shapes for scalar

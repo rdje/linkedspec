@@ -368,12 +368,31 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.4.3.1 - add Dart runtime value capture helpers`
 
 - ID: `DART-BACKEND-PARITY.4.3.2`
-  Status: `pending`
+  Status: `done`
   Goal: Implement string/scalar and numeric helper families, including compatible receiver chains.
   Acceptance: `cat`, trimming/case/substr/prefix/suffix/contains/matches/split scalar helpers, numeric arithmetic
     and comparison helpers/aliases/symbol callees, and simple scalar receiver chains match helper-catalog examples.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.**
+    - [x] **ROOT CAUSE** — `.4.3.1` left the Dart runtime with only dispatch-facing helper execution. Parser and
+      ActionIR contracts recognized current string/scalar helpers, numeric aliases, symbol callees, and receiver
+      chains, but `LinkedSpecRuntimeEngine` still returned `null` for most of that pure helper surface.
+    - [x] **FIX** — `dart/lib/src/runtime/interpreter.dart` now canonicalizes helper names through
+      `canonicalActionHelperName(...)` and dispatches a shared pure-helper table for string/scalar helpers,
+      explicit `str_*` lexical comparisons, numeric arithmetic/reducers/comparisons, numeric word aliases,
+      arithmetic/comparison symbol callees, and compatible receiver-chain calls.
+    - [x] **ADDRESSED** — Focused runtime tests cover `trim`, `lowercase`, `replace_substr`, `rm_suffix`,
+      `substr`, `contains_substr`, `starts_with`, `ends_with`, `matches`, `split`, `coalesce`,
+      `coalesce_nonempty`, `is_defined`, `is_undefined`, `is_empty`, `is_nonempty`, `str_eq`, `str_lt`,
+      `+(...)`, `*(...)`, `num_div`, receiver `mod`, `num_clamp`, `gt`, `<=(...)`, receiver `round`,
+      `num_range`, `avg`, `median`, `min`, divide-by-zero, and non-numeric failure-to-null behavior.
+    - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, focused runtime interpreter tests,
+      `dart analyze --fatal-infos --fatal-warnings`, full `dart test`, the manifest-backed corpus runner,
+      CLI help checks, mdBook build, memory architecture, Knowledge Map, task-tree metadata, doctrine, diagnosis
+      evidence, and `git diff --check` pass.
+    - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
+      `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker rows, Knowledge Map
+      facts, `docs/TASK_TREE.md`, and this task tree are updated.
+  Commit: `DART-BACKEND-PARITY.4.3.2 - add Dart runtime string numeric helpers`
 
 - ID: `DART-BACKEND-PARITY.4.3.3`
   Status: `pending`
@@ -525,7 +544,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | --- | --- | --- | --- |
 | 1 | `DART-BACKEND-PARITY.4.3.0` | `done` | Broad helper/value runtime work is split before code. |
 | 2 | `DART-BACKEND-PARITY.4.3.1` | `done` | Core runtime value/store behavior and capture helper reads are implemented. |
-| 3 | `DART-BACKEND-PARITY.4.3.2` | `pending` | Implement string/scalar and numeric helper families. |
+| 3 | `DART-BACKEND-PARITY.4.3.2` | `done` | String/scalar and numeric helper families are implemented. |
+| 4 | `DART-BACKEND-PARITY.4.3.3` | `pending` | Implement array helper family and array receiver/mutation behavior. |
 
 ## Dart Toolchain And Package Layout
 

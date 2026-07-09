@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.4.3.2 — add Dart runtime string numeric helpers
+
+**Scope:** Dart runtime pure helper evaluator, focused interpreter tests, package README, mdBook Dart
+handoff/status text, live docs, roadmap/task-tree status, and Knowledge Map facts.
+
+**Change:** Extended `LinkedSpecRuntimeEngine` pure helper execution beyond the core value/capture subset.
+The Dart runtime now canonicalizes ActionIR helper names through the shared contract table, evaluates
+string/scalar helpers and receiver chains, executes explicit `str_*` lexical comparisons, and supports numeric
+arithmetic, reducers, comparisons, word aliases, arithmetic/comparison symbol callees, and numeric receiver chains.
+Unsupported numeric inputs and invalid arithmetic such as divide-by-zero return `null` rather than throwing.
+
+**Validation:** Focused runtime interpreter tests, Dart format/analyze/full tests, corpus runner, CLI help,
+mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, diagnosis evidence, and
+`git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.4.3.1 — add Dart runtime value capture helpers
 
 **Scope:** Dart runtime core value/store evaluator, focused interpreter tests, package README, mdBook Dart
