@@ -77,7 +77,8 @@ Top-level directories and files:
 - `dart/`
   - Dart backend parity package scaffold.
   - Current state: package metadata, public library entrypoint, CLI smoke entrypoint, manifest/corpus
-    IO scaffold, and smoke tests; parser/runtime semantics land under `DART-BACKEND-PARITY`.
+    IO scaffold, source-level AST/data types, staged parse-job sidecars, and smoke tests;
+    parser/runtime semantics land under `DART-BACKEND-PARITY`.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

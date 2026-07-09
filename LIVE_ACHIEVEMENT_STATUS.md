@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.2.1 — define Dart frontend AST data types**
+  (DONE source-level AST/data contracts; parser still deferred).
+
+  **Change:** Added Dart data types for `.spec` files, function definitions, source spans, staged parse
+  jobs, rules, rule headers, rule modes, body-element variants, edge targets, and fluent calls. Added JSON
+  round-trip tests and `RuleMode` helper parity tests.
+
+  **Boundary:** No parser, compiler, runtime, corpus output comparison, or helper/action lowering logic was
+  added. The next frontier is `DART-BACKEND-PARITY.2.2` for `.spec` parsing.
+
+  **Verification:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+  `dart test`, `dart run bin/linkedspec_dart.dart --help`,
+  `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`, and
+  `dart run bin/corpus_runner.dart --help` pass. `git diff --check`, memory architecture, Knowledge Map
+  regeneration/check, task-tree metadata, doctrine gates, and `mdbook build docs/linkedspec-book` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.1.3 — add Dart corpus manifest IO scaffold**
   (DONE corpus manifest loading/drift guard; no parser/runtime execution yet).
 

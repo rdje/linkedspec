@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.2.1 — Dart frontend AST data types):
+  Added `dart/lib/src/ast/spec_ast.dart` with source-level data types matching the Rust parsed AST and
+  staged parse-job JSON shape: `SpecFile`, `FunctionDefinition`, `SourceSpan`, `StagedParseJob`,
+  `Rule`, `RuleHeader`, `RuleMode`, body-element variants, `EdgeTarget`, and `FluentCall`.
+  `test/spec_ast_test.dart` proves JSON round-trips and `RuleMode` repetition helper parity. This is
+  deliberately data-only; no parser, compiler, runtime, or helper/action lowering code landed. `.2.2`
+  owns the actual `.spec` parser.
+
 - 2026-07-09 (DART-BACKEND-PARITY.1.3 — Dart corpus manifest IO scaffold):
   Added `dart/lib/src/corpus/manifest_runner.dart` and `test/corpus_manifest_test.dart`. Dart now loads
   the Rust-owned language-neutral corpus manifest, validates format `1`, `case_count`, case names,

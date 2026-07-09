@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.2.1` added Dart source-level AST/data types in
+  `dart/lib/src/ast/spec_ast.dart`. The types mirror the Rust parsed-AST and staged parse-job field names:
+  `SpecFile`, `FunctionDefinition`, `SourceSpan`, `StagedParseJob`, `Rule`, `RuleHeader`, `RuleMode`,
+  body element variants, `EdgeTarget`, and `FluentCall` all round-trip through JSON. This is still data-only;
+  parser code starts in `.2.2`.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.1.3` added Dart corpus manifest IO scaffolding.
   `dart/lib/src/corpus/manifest_runner.dart` now loads `manifest.json`, validates format/case-count/case
   name shape, detects missing and stale fixture directories, requires `input.spec` / `input.txt` /

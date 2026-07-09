@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.2.1 — define Dart frontend AST data types
+
+**Scope:** Dart source-level AST/data types, staged parse-job sidecars, JSON round-trip tests, docs,
+and frontier advancement.
+
+**Change:** Added `dart/lib/src/ast/spec_ast.dart` with data-only Dart types for `SpecFile`,
+`FunctionDefinition`, `SourceSpan`, staged parse jobs, rules, rule headers, rule modes, body-element
+variants, edge targets, and fluent calls. The JSON field names match the existing Rust parsed-AST and
+staged parse-job contract (`functions`, `rules`, `source_span`, `body_parse_job`, `line_start`,
+`parent_ast_path`, `result_policy`, etc.). Added `test/spec_ast_test.dart` for JSON round-trip coverage
+and Rust-equivalent `RuleMode` helper behavior. No parser, compiler, runtime, or helper/action lowering
+logic was added.
+
+**Validation:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+`dart test`, `dart run bin/linkedspec_dart.dart --help`,
+`dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`, and
+`dart run bin/corpus_runner.dart --help` pass. `git diff --check`, memory architecture, Knowledge Map
+regeneration/check, task-tree metadata, doctrine gates, and `mdbook build docs/linkedspec-book` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.1.3 — add Dart corpus manifest IO scaffold
 
 **Scope:** Dart corpus manifest IO scaffolding, corpus-runner CLI behavior, tests, task-tree frontier

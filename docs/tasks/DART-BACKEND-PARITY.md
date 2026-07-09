@@ -104,13 +104,17 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`
 
 - ID: `DART-BACKEND-PARITY.2.1`
-  Status: `pending`
+  Status: `done`
   Goal: Define Dart AST/data types for `.spec` files, rules, modes, body elements, edges, lifecycles,
     source spans, parse jobs, and function definitions.
   Acceptance: Types round-trip through JSON where needed for diagnostics/corpus tooling, and field
     names match the mdBook/compiled-state contract.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** `dart/lib/src/ast/spec_ast.dart` defines data-only types for
+    `SpecFile`, `FunctionDefinition`, `SourceSpan`, `StagedParseJob`, `Rule`, `RuleHeader`, `RuleMode`,
+    body-element variants, `EdgeTarget`, and `FluentCall`. `test/spec_ast_test.dart` proves JSON
+    round-trips and Rust-equivalent `RuleMode` helper behavior. Dart format, analyze, tests, and CLI
+    smoke checks pass.
+  Commit: `DART-BACKEND-PARITY.2.1 - define Dart frontend AST data types`
 
 - ID: `DART-BACKEND-PARITY.2.2`
   Status: `pending`
@@ -319,7 +323,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-BACKEND-PARITY.2.1` | `pending` | Toolchain, package, and corpus IO foundations are green; define frontend AST/data types before parser code. |
+| 1 | `DART-BACKEND-PARITY.2.2` | `pending` | Source-level AST/data types are defined; implement parser code that produces them. |
 
 ## Dart Toolchain And Package Layout
 
@@ -402,6 +406,15 @@ The `.1.3` corpus IO scaffold adds:
   required fixture files, and `expected.json` syntax.
 - No parser execution, runtime execution, or output comparison yet.
 
+The `.2.1` AST/data layer adds:
+
+- `lib/src/ast/spec_ast.dart` with data-only source AST and staged parse-job types.
+- `test/spec_ast_test.dart` for JSON round-trips and `RuleMode` helper parity.
+- JSON field names aligned with Rust/mdBook contracts: `functions`, `rules`, `source_span`,
+  `body_span`, `body_parse_job`, `line_start`, `line_end`, `parent_ast_path`, `result_policy`,
+  and `failure_policy`.
+- No parser, compiler, runtime, corpus output comparison, or helper/action lowering behavior.
+
 ## Decisions
 
 - `2026-07-09`: Dart starts interpreter-first. The primary parity path is
@@ -417,14 +430,16 @@ The `.1.3` corpus IO scaffold adds:
   CLI/library backend package. Generated Dart tool state stays ignored under `dart/.dart_tool/`.
 - `2026-07-09`: Dart corpus IO starts by consuming the existing Rust-owned language-neutral corpus root
   under `rust/linkedspec-runtime/tests/corpus/`. Backend-neutral corpus relocation remains separate.
+- `2026-07-09`: Dart source-level AST JSON names follow the existing Rust parsed-AST and staged parse-job
+  contract. `body_ast` remains a neutral JSON sidecar until later helper/action AST leaves type it further.
 
 ## Open Questions
 
-- None blocking `.2.1`. The `.1` foundation container is closed.
+- None blocking `.2.2`. Source-level data types are in place.
 
 ## Blockers
 
-- None known before `.2.1` frontend AST/data-type work.
+- None known before `.2.2` parser implementation.
 
 ## Verification Log
 
@@ -434,6 +449,7 @@ The `.1.3` corpus IO scaffold adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.1.1` | `command -v dart`; `dart --version`; `command -v flutter`; approved `dart --disable-analytics`; `dart help format`; `dart help analyze`; `dart help test`; `dart pub --help`; `dart create --help`; `git diff --check`; memory architecture; Knowledge Map; task-tree metadata; doctrine; mdBook build. | PASS. Dart SDK `3.9.2` is available; Flutter absent/non-blocking; layout and commands recorded; no Dart package files created. |
 | `2026-07-09` | `DART-BACKEND-PARITY.1.2` | approved `dart pub get`; `dart format --set-exit-if-changed .`; approved `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Scaffold package, lockfile, CLI stubs, corpus-runner stub, and smoke test are green; no parser/runtime/corpus semantics yet. |
 | `2026-07-09` | `DART-BACKEND-PARITY.1.3` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Manifest IO loads 99 fixtures and catches missing/stale/malformed corpus state without parser execution. |
+| `2026-07-09` | `DART-BACKEND-PARITY.2.1` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. AST/data types round-trip through JSON; no parser/runtime behavior yet. |
 
 ## Commit Log
 
@@ -443,6 +459,7 @@ The `.1.3` corpus IO scaffold adds:
 | `DART-BACKEND-PARITY.1.1` | `DART-BACKEND-PARITY.1.1 - record Dart toolchain and layout` | Toolchain/layout preflight; no package files. |
 | `DART-BACKEND-PARITY.1.2` | `DART-BACKEND-PARITY.1.2 - create Dart scaffold smoke package` | Minimal package scaffold; no parser/runtime/corpus semantics. |
 | `DART-BACKEND-PARITY.1.3` | `DART-BACKEND-PARITY.1.3 - add Dart corpus manifest IO scaffold` | Manifest IO scaffold; `.1` foundation container closes. |
+| `DART-BACKEND-PARITY.2.1` | `DART-BACKEND-PARITY.2.1 - define Dart frontend AST data types` | Source-level AST/data types; no parser behavior. |
 
 ## Changelog
 
@@ -453,3 +470,5 @@ The `.1.3` corpus IO scaffold adds:
   corpus-fixture IO scaffolding.
 - `2026-07-09`: Added Dart corpus manifest IO and drift tests; `.1` foundation closes and frontier advances
   to `.2.1` for frontend AST/data types.
+- `2026-07-09`: Added Dart source-level AST/data types and JSON round-trip tests; frontier advances to `.2.2`
+  for parser implementation.

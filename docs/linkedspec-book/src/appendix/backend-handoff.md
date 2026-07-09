@@ -245,8 +245,10 @@ the primary conformance gate. The repo now has a Dart CLI/library scaffold under
 `dart/`, including package metadata, committed lockfile, public library entrypoint,
 CLI smoke entrypoint, and smoke tests. Its corpus-runner scaffold loads the
 manifest-backed corpus, rejects manifest drift, checks required fixture files and
-expected JSON syntax, and deliberately does not execute parser semantics yet. The
-next owned step is frontend AST/data types before parser code.
+expected JSON syntax, and deliberately does not execute parser semantics yet. Dart
+also has source-level AST/data types and staged parse-job sidecars that round-trip
+through JSON with the Rust/mdBook field names. The next owned step is `.spec`
+parser implementation.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

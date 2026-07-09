@@ -2,9 +2,10 @@
 
 Repository-owned Dart backend scaffold for LinkedSpec parity work.
 
-This package is intentionally minimal. It establishes the Dart package boundary,
-public library entrypoint, CLI smoke entrypoint, corpus-runner entrypoint, and a
-`package:test` smoke test before parser or runtime semantics land.
+This package is intentionally staged. It establishes the Dart package boundary,
+public library entrypoint, CLI smoke entrypoint, corpus-runner entrypoint,
+manifest IO scaffold, source-level AST/data types, and `package:test` coverage
+before parser or runtime semantics land.
 
 ## Commands
 
@@ -22,8 +23,8 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.1.3` owns manifest IO scaffolding. The corpus runner loads
-and validates the manifest-backed corpus directory, including missing/stale
-fixture-directory detection and required fixture-file checks. Parser, compiler,
-runtime, tracing, and corpus parity remain later leaves in
+`DART-BACKEND-PARITY.2.1` owns the source-level AST/data types. The package can
+round-trip parsed `.spec` structures and staged parse-job sidecars through JSON,
+and the corpus runner loads and validates the manifest-backed corpus directory.
+Parser, compiler, runtime, tracing, and corpus parity remain later leaves in
 `docs/tasks/DART-BACKEND-PARITY.md`.
