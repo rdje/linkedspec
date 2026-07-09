@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.2.3 — purge Perl helper metadata names**
+  (DONE Perl contract/canonical metadata name cleanup; broader Perl source purge scans still active).
+
+  **Change:** Raw-Perl passthrough ActionIR contracts no longer publish exact retired helper names through
+  diagnostic metadata. Lexical declaration and raw assignment compatibility events now use neutral `raw_*`
+  diagnostic labels instead of `declare` / `assign`, and `t/noncurrent_helper_metadata.t` locks contract IDs,
+  diagnostic names, rewrite metadata, canonical events, and unsupported-helper events against the
+  `SPEC-FORMAT-TERSE.8` retired helper set.
+
+  **Boundary:** This slice is metadata-only. It preserves raw-Perl compatibility behavior and does not claim the
+  entire Perl purge is closed. The next frontier is `NONCURRENT-HELPER-CODE-PURGE.2.4` for broader Perl source
+  purge scans and current/unknown-helper behavior probes before Rust source work.
+
+  **Verification:** `perl -c -Iperl perl/LinkedSpec/ActionIR/Contracts.pm`, `perl -c -Iperl
+  t/noncurrent_helper_metadata.t`, `prove -q -Iperl t/noncurrent_helper_metadata.t`, focused exact metadata scan,
+  `prove -q -Iperl t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t
+  t/noncurrent_helper_metadata.t`, and `PERL5LIB= prove -q -Iperl t/phase0_regression.t` (`1027` tests) pass.
+
 - 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.2.1 — purge Perl current helper compatibility**
   (DONE Perl current-helper/source-owner cleanup; broader Perl metadata/source purge still active).
 

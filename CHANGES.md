@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — NONCURRENT-HELPER-CODE-PURGE.2.3 — purge Perl helper metadata names
+
+**Scope:** Perl ActionIR contract metadata, focused metadata regression coverage, mdBook/architecture
+status, live docs, and Knowledge Map facts for the non-current helper purge.
+
+**Change:** Raw-Perl passthrough contracts no longer publish exact retired helper names through
+`diag_name`: lexical declaration and raw assignment compatibility events now use neutral `raw_*`
+diagnostic labels instead of `declare` / `assign`. Added `t/noncurrent_helper_metadata.t` to lock the
+ActionIR contract table, rewrite-contract metadata, canonical ActionIR events, and generic unsupported-helper
+events against the `SPEC-FORMAT-TERSE.8` retired helper set. The mdBook and architecture notes now state that
+deleted helper names are not replacement-canonicalized and that retired `push_value(...)` /
+`push_nonempty(...)` statement spellings are not current typed helper statement contracts.
+
+**Validation:** `perl -c -Iperl perl/LinkedSpec/ActionIR/Contracts.pm`, `perl -c -Iperl
+t/noncurrent_helper_metadata.t`, `prove -q -Iperl t/noncurrent_helper_metadata.t`, focused exact metadata
+scan, `prove -q -Iperl t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t
+t/noncurrent_helper_metadata.t`, and `PERL5LIB= prove -q -Iperl t/phase0_regression.t` pass (`1027`
+tests).
+
 ## 2026-07-09 — NONCURRENT-HELPER-CODE-PURGE.2.2 — purge Perl declaration and return helper paths
 
 **Scope:** Perl ActionIR declaration/setup owners, return-family/helper-call classification, short-wrapper

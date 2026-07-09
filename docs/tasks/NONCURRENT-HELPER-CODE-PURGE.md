@@ -156,12 +156,35 @@ unknown-helper handling, not through a name-specific removal compatibility layer
   Commit: `NONCURRENT-HELPER-CODE-PURGE.2.2 - purge Perl declaration and return helper paths`
 
 - ID: `NONCURRENT-HELPER-CODE-PURGE.2.3`
-  Status: `pending`
+  Status: `done`
   Goal: Remove remaining Perl non-current helper IDs from contract/canonical/flow metadata.
   Acceptance: Perl contract scans and canonical event metadata only list current helper/control IDs or generic
     unknown-helper fallback paths.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Raw-Perl passthrough contracts no longer publish exact retired helper
+    names through `diag_name`; lexical declaration and raw assignment compatibility events use neutral `raw_*`
+    diagnostic labels. Added `t/noncurrent_helper_metadata.t` to lock contract ids, diagnostic names,
+    rewrite-contract metadata, canonical ActionIR events, and unsupported-helper events against the
+    `SPEC-FORMAT-TERSE.8` retired helper set. Focused exact metadata scan over contract/canonical/flow owners is
+    clean for exact retired helper `id` / `diag_name` fields. Syntax, focused metadata, ActionIR parser,
+    compact-lowerer, and full phase0 checks pass.
+  Acceptance Checklist:
+    - [x] **REPRODUCE / ISSUE** — Focused metadata scans showed raw-Perl passthrough compatibility contracts
+      still used exact retired helper names (`declare`, `assign`) as diagnostic labels, even though the helper
+      source-owner paths had been removed.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `_build_passthrough_ir_contracts` in
+      `perl/LinkedSpec/ActionIR/Contracts.pm` preserved old helper-shaped `diag_name` labels for raw Perl
+      declaration and assignment compatibility metadata.
+    - [x] **FIX** — Renamed those descriptor-facing labels to neutral `raw_*` names without changing the
+      underlying raw-Perl compatibility classification or lowering behavior.
+    - [x] **ADDRESSED (verified)** — `t/noncurrent_helper_metadata.t` and the focused exact metadata scan prove
+      contract IDs, diagnostic names, rewrite metadata, canonical events, and unsupported-helper events do not
+      re-publish the retired helper set.
+    - [x] **NO REGRESSION** — Syntax, focused metadata, AST parser, compact-lowerer, and full phase0 regression
+      pass.
+    - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
+      `docs/TASK_TREE.md`, mdBook, `ARCHITECTURE_STATE.md`, `ROADMAP_V2.md`, Knowledge Map facts, and this
+      task tree are updated.
+  Commit: `NONCURRENT-HELPER-CODE-PURGE.2.3 - purge Perl helper metadata names`
 
 - ID: `NONCURRENT-HELPER-CODE-PURGE.2.4`
   Status: `pending`
@@ -201,7 +224,7 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `NONCURRENT-HELPER-CODE-PURGE.2.3` | `pending` | Perl still has metadata/owner-name cleanup remaining after the source-owner path purge; close that before Rust source work. |
+| 1 | `NONCURRENT-HELPER-CODE-PURGE.2.4` | `pending` | Perl metadata is clean for the retired helper set; close broader Perl source scans and behavior probes before Rust source work. |
 
 ## Decisions
 
@@ -230,11 +253,14 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 - `2026-07-09` — `.2.2` removed Perl declaration/return/wrapper helper-call source-owner paths, rewrote active
   regression fixtures away from those spellings, and kept current return/setup/read behavior green. Focused syntax,
   AST parser, compact-lowerer, scoped exact scans, and full phase0 (`1027` tests) pass.
+- `2026-07-09` — `.2.3` removed exact retired helper names from raw-compat ActionIR diagnostic metadata, added a
+  focused metadata regression test, and kept Perl ActionIR metadata plus phase0 green.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.1` | Read-only scans over `perl`, `rust`, `t`, `tools`, `scripts`, `bin`, and `specs`; task-tree split. | PASS. Owner categories are known; implementation starts with Perl source. |
 | `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.2.2` | Perl syntax checks; `prove -q -Iperl t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t`; `PERL5LIB= prove -q -Iperl t/phase0_regression.t`; scoped exact scans; mdBook helper/status scan. | PASS. Source-owner paths for the removed declaration, return-family, and short-wrapper helper-call spellings are gone from the touched Perl/test surfaces. |
+| `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.2.3` | `perl -c -Iperl perl/LinkedSpec/ActionIR/Contracts.pm`; `perl -c -Iperl t/noncurrent_helper_metadata.t`; `prove -q -Iperl t/noncurrent_helper_metadata.t`; focused exact metadata scan; `prove -q -Iperl t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t t/noncurrent_helper_metadata.t`; `PERL5LIB= prove -q -Iperl t/phase0_regression.t`. | PASS. Raw-compat diagnostic labels no longer publish exact retired helper names, and metadata tests lock contract/canonical behavior against the retired helper set. |
 
 ## Commit Log
 
@@ -243,6 +269,7 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 | `NONCURRENT-HELPER-CODE-PURGE.1` | `NONCURRENT-HELPER-CODE-PURGE.1 - split code purge task tree` | Inventory/split before code edits. |
 | `NONCURRENT-HELPER-CODE-PURGE.2.1` | `NONCURRENT-HELPER-CODE-PURGE.2.1 - purge Perl current helper compatibility` | Current `cat`/`copy`/`set`/`push` paths stay on current names. |
 | `NONCURRENT-HELPER-CODE-PURGE.2.2` | `NONCURRENT-HELPER-CODE-PURGE.2.2 - purge Perl declaration and return helper paths` | Perl declaration/return/wrapper helper-call source-owner paths removed. |
+| `NONCURRENT-HELPER-CODE-PURGE.2.3` | `NONCURRENT-HELPER-CODE-PURGE.2.3 - purge Perl helper metadata names` | Perl raw-compat metadata no longer uses exact retired helper names as diagnostic labels. |
 
 ## Changelog
 

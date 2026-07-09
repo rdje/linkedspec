@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (NONCURRENT-HELPER-CODE-PURGE.2.3 — Perl helper metadata name purge):
+  Perl ActionIR raw-Perl passthrough contracts no longer publish exact retired helper names as diagnostic labels:
+  raw lexical declarations and raw assignment compatibility events now report neutral `raw_*` labels instead of
+  `declare` / `assign`. Added `t/noncurrent_helper_metadata.t` to lock contract IDs, diagnostic names,
+  rewrite-contract metadata, canonical events, and unsupported-helper events against the `SPEC-FORMAT-TERSE.8`
+  retired helper set. The focused metadata test, ActionIR AST/compact-lowerer tests, exact metadata scan, and full
+  phase0 regression (`1027` tests, `PERL5LIB=` cleared) pass. Next Perl leaf `.2.4` closes broader Perl source
+  purge scans and current/unknown-helper behavior probes before Rust source cleanup.
+
 - 2026-07-09 (NONCURRENT-HELPER-CODE-PURGE.2.2 — Perl declaration/return helper path purge):
   Removed the dedicated Perl source-owner paths for removed declaration helper spellings, old return-family
   helper spellings, and old short-wrapper spellings. `DeclareMethod`, `RuleIR::EmitContext`, method lowering,

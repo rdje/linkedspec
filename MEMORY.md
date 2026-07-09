@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `NONCURRENT-HELPER-CODE-PURGE.2.2` — Perl declaration/return/wrapper helper-call
-  source-owner paths are removed while current return/setup/read behavior remains green; phase0 passes `1027`
-  tests.
-- prior_leaf: `NONCURRENT-HELPER-CODE-PURGE.2.1` — Perl current `cat`/`copy`/`set`/`push` lowering no longer
-  routes through removed helper names or removed append-helper diagnostic branches.
+- latest_completed_leaf: `NONCURRENT-HELPER-CODE-PURGE.2.3` — Perl ActionIR contract/canonical metadata no longer
+  publishes exact retired helper names as raw-compat diagnostic labels; focused metadata scan/test and phase0 pass
+  `1027` tests.
+- prior_leaf: `NONCURRENT-HELPER-CODE-PURGE.2.2` — Perl declaration/return/wrapper helper-call source-owner paths
+  are removed while current return/setup/read behavior remains green.
 - latest_commit: HEAD containing this pointer should be
-  `NONCURRENT-HELPER-CODE-PURGE.2.2 - purge Perl declaration and return helper paths`; parent before this slice is
-  `NONCURRENT-HELPER-CODE-PURGE.2.1 - purge Perl current helper compatibility`.
+  `NONCURRENT-HELPER-CODE-PURGE.2.3 - purge Perl helper metadata names`; parent before this slice is
+  `NONCURRENT-HELPER-CODE-PURGE.2.2 - purge Perl declaration and return helper paths`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `NONCURRENT-HELPER-CODE-PURGE`; current frontier `NONCURRENT-HELPER-CODE-PURGE.2.3` pending.
-- next_action: from a clean repo, close remaining Perl metadata/owner-name cleanup for the non-current helper
-  purge before moving to Rust source work.
+- active_work_unit: `NONCURRENT-HELPER-CODE-PURGE`; current frontier `NONCURRENT-HELPER-CODE-PURGE.2.4` pending.
+- next_action: from a clean repo, close Perl source purge scans and focused current/unknown-helper behavior probes
+  before moving to Rust source work.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, task-tree index,
   ROADMAP/ROADMAP_V2, mdBook status/backend-handoff/formal grammar/helper chapters, relevant ADR/KM facts,
   and codebase architecture/source inventory for the Dart AST data-type slice.
@@ -40,5 +40,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none once the `NONCURRENT-HELPER-CODE-PURGE.2.2` pointer commit lands; do not pivot unless the repo is
+- blockers: none. in_flight_uncommitted: none once the `NONCURRENT-HELPER-CODE-PURGE.2.3` pointer commit lands; do not pivot unless the repo is
   handoff-ready.

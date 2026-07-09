@@ -223,9 +223,10 @@ reads such as `return(count)` and narrow compatibility payloads that are still u
 Assignment and mutation operator statements (`name = value`, `items += value`, and
 `meta[key] = value`) now also consume typed AST target/key/value fields before the legacy
 statement-regex fallback. Helper-call statements now consume typed AST `call` fields for
-`set`/`assign`, `set_key`, `push`, `push_value`, `push_nonempty`, `return`, and
-`return_undef`, while array end-mutation receiver statements consume AST `fluent_chain`
-receiver/call fields. Expression-valued block internals now consume AST `block_value`,
+current statement helpers: `set`, `set_key`, `push`, `return`, and `return_undef`, while
+array end-mutation receiver statements consume AST `fluent_chain` receiver/call fields.
+Retired helper-looking statement spellings are not current statement contracts.
+Expression-valued block internals now consume AST `block_value`,
 `action_block`, and `action_stmt` fields for side effects, block-local return payloads,
 and final expressions. The parser seam now also represents attached-block and marker
 structured-control statements as typed `control_*` nodes for `if`/`when`/`otherwise`,
