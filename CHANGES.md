@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — FUTURE-PARITY-BACKLOG.1.1 — scope Dart backend parity plan
+
+**Scope:** Dart backend parity task-tree scoping, roadmap/book/live-doc alignment, Knowledge Map
+retrieval.
+
+**Change:** Created `docs/tasks/DART-BACKEND-PARITY.md` as the dedicated Dart backend plan.
+The plan selects an interpreter-first path over typed `.spec` and helper/action AST plus compiled
+state, with generated Dart source deferred to a later proof lane after corpus parity. Updated the
+future backlog, central task-tree index, roadmaps, mdBook status/handoff pages, architecture/live
+docs, and added a Knowledge Map fact for the Dart strategy.
+
+**Validation:** `git diff --check`, `scripts/check_memory_architecture.sh`,
+`knowledge-map/scripts/check_knowledge_map.sh`, `scripts/check_doctrines.sh`,
+`scripts/check_task_tree_metadata.sh`, `mdbook build docs/linkedspec-book`, and
+`tools/run_ci_local.sh` pass. Local CI includes phase0 `1..1028`.
+
 ## 2026-07-09 — FUTURE-PARITY-BACKLOG.0 — create future parity backlog
 
 **Scope:** task-tree ownership, backend rollout decision, roadmap/book/KM/live-doc alignment.

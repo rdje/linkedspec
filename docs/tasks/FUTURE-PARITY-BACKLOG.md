@@ -57,13 +57,17 @@ then Julia, then Lua.
     runtime semantics, staged parsing, diagnostics, and corpus parity contract as Perl5 and Rust.
 
 - ID: `FUTURE-PARITY-BACKLOG.1.1`
-  Status: `pending`
+  Status: `done`
   Goal: Dart backend parity track - split/scaffold the Dart implementation path.
   Acceptance: Create or expand a dedicated Dart backend implementation plan before code, covering
     parser, helper/action AST, compiler/HandlerIR or interpreter strategy, runtime, regex engine,
     staged parser registry, corpus runner, docs, and parity gates against Perl5/Rust.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Created `docs/tasks/DART-BACKEND-PARITY.md` as the dedicated
+    Dart backend plan. The plan covers parser/frontend, typed helper/action AST, interpreter-first
+    compiled-state strategy, runtime, regex engine, staged parser registry, corpus runner, docs,
+    trace/diagnostics, parity gates, and generated Dart source as a later proof lane. No backend code
+    changed.
+  Commit: `FUTURE-PARITY-BACKLOG.1.1 - scope Dart backend parity plan`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.2`
   Status: `pending`
@@ -138,15 +142,14 @@ then Julia, then Lua.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `FUTURE-PARITY-BACKLOG.1.1` | `pending` | Director chose backend rollout first and ordered Dart before Julia and Lua. |
-| 2 | `FUTURE-PARITY-BACKLOG.1.2` | `pending` | Julia follows Dart after the Dart parity track reaches its scoped milestone. |
-| 3 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua is now adopted as a future backend by ADR `0021`, scheduled after Julia. |
-| 4 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
-| 5 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Rust generated-source breadth is independent follow-up after backend scheduling. |
-| 6 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
-| 7 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
-| 8 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
-| 9 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
+| 1 | `FUTURE-PARITY-BACKLOG.1.2` | `pending` | Julia follows Dart after `DART-BACKEND-PARITY` reaches its scoped milestone; PNT should select the active Dart tree first. |
+| 2 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua is now adopted as a future backend by ADR `0021`, scheduled after Julia. |
+| 3 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
+| 4 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Rust generated-source breadth is independent follow-up after backend scheduling. |
+| 5 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
+| 6 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
+| 7 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
+| 8 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 
 ## Decisions
 
@@ -155,11 +158,14 @@ then Julia, then Lua.
   scope change and supersedes the earlier "Lua blocked pending decision" wording.
 - `2026-07-09`: The tracking slice `.0` is documentation/task ownership only. No backend scaffold
   or runtime code is created until `.1.1` is selected and split.
+- `2026-07-09`: `.1.1` selects an interpreter-first Dart parity strategy and delegates executable Dart
+  work to `docs/tasks/DART-BACKEND-PARITY.md`. Generated Dart source is a later proof lane after
+  interpreter/corpus parity, not the primary gate.
 
 ## Open Questions
 
-- None blocking `.1.1`. Dart implementation strategy must still choose interpretation versus generated
-  code during the Dart scoping leaf, using the same `.spec` and corpus parity obligations.
+- None blocking the active Dart tree. Julia `.1.2` is intentionally gated until
+  `DART-BACKEND-PARITY` reaches its scoped milestone.
 
 ## Blockers
 
@@ -170,14 +176,18 @@ then Julia, then Lua.
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book`; `bash tools/run_ci_local.sh` | PASS. Local CI includes phase0 `1..1028`; no implementation code changed. |
+| `2026-07-09` | `FUTURE-PARITY-BACKLOG.1.1` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book`; `bash tools/run_ci_local.sh` | PASS. Local CI includes phase0 `1..1028`; no implementation code changed. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `FUTURE-PARITY-BACKLOG.0` | `FUTURE-PARITY-BACKLOG.0 - create future parity backlog` | Tracking/decision/doc sync; no implementation code. |
+| `FUTURE-PARITY-BACKLOG.1.1` | `FUTURE-PARITY-BACKLOG.1.1 - scope Dart backend parity plan` | Creates `DART-BACKEND-PARITY`; no implementation code. |
 
 ## Changelog
 
 - `2026-07-09`: Created the future parity backlog tree with seven owned lanes and Dart -> Julia -> Lua
   backend rollout order.
+- `2026-07-09`: Scoped the Dart backend lane into `docs/tasks/DART-BACKEND-PARITY.md` and selected
+  interpreter-first parity before generated Dart source.

@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (FUTURE-PARITY-BACKLOG.1.1 — Dart parity plan scoped):
+  Created `docs/tasks/DART-BACKEND-PARITY.md` as the dedicated Dart backend task tree. The Dart lane
+  starts interpreter-first: `.spec` parser, typed helper/action AST, compiled-spec state, Dart runtime
+  interpreter, and manifest-backed corpus runner. Generated Dart source is deliberately a later proof lane
+  after interpreter/corpus parity, matching the current Rust boundary where interpreter parity is the full
+  99-fixture gate and generated source is a structural/curated-subset proof. The first Dart leaf is
+  `DART-BACKEND-PARITY.1.1`, which verifies local Dart SDK/tool commands and package layout before code.
+
 - 2026-07-09 (FUTURE-PARITY-BACKLOG.0 — future parity backlog created; Lua accepted):
   Created `docs/tasks/FUTURE-PARITY-BACKLOG.md` as the active owner for deferred/future parity work after
   the language-reference closeout. The seven backlog lanes are now durable task-tree rows: future backend
@@ -9,8 +17,9 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   old Lua-decision gap: Lua is accepted as a future backend target and the scheduled rollout is Dart first,
   Julia second, Lua third. All three future backends must reach full parity with Perl5 and Rust under the
   same universal `.spec`, text-to-AST, staged parsing, runtime, diagnostics, and corpus contracts. This slice
-  is tracking/decision/docs only; the next executable frontier is `FUTURE-PARITY-BACKLOG.1.1` for Dart
-  parity scoping before implementation code.
+  is tracking/decision/docs only; `FUTURE-PARITY-BACKLOG.1.1` has since scoped Dart into
+  `DART-BACKEND-PARITY`, whose first executable frontier verifies the Dart SDK/tool commands and package
+  layout before implementation code.
 
 - 2026-07-08 (SPEC-LANG-REFERENCE.8 — top-rule doctrine drift correction):
   The current doctrine is the June 23 ADR `0010` model, not the older June 17 no-regex correction.

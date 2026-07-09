@@ -18,20 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.0` — created the active future parity backlog tree,
-  accepted Lua via ADR `0021`, and scheduled future backend parity as Dart first, Julia second, Lua third.
-  This was tracking/decision/docs only; no parser/runtime/backend code changed.
-- prior_leaf: `SPEC-LANG-REFERENCE.8` — corrected stale top-rule doctrine drift and closed the language
-  reference tree. Current doctrine is ADR `0010`: `::` marks the rule entered first; after entry selection,
-  `::` and `:` share the same regex/mode/action feature surface.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.1` — created `docs/tasks/DART-BACKEND-PARITY.md`
+  as the dedicated Dart backend parity plan and selected interpreter-first parity before generated Dart
+  source. This was planning/docs/KM only; no Dart/backend implementation code changed.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.0` — created the active future parity backlog tree, accepted Lua
+  via ADR `0021`, and scheduled future backend parity as Dart first, Julia second, Lua third.
 - latest_commit: HEAD containing this pointer should be
-  `FUTURE-PARITY-BACKLOG.0 - create future parity backlog`; parent before this slice is
-  `SPEC-LANG-REFERENCE.8 - correct top-rule doctrine drift and close language reference`.
+  `FUTURE-PARITY-BACKLOG.1.1 - scope Dart backend parity plan`; parent before this slice is
+  `FUTURE-PARITY-BACKLOG.0 - create future parity backlog`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; current frontier `FUTURE-PARITY-BACKLOG.1.1` pending.
-- next_action: from a clean repo, start Dart backend parity scoping under `FUTURE-PARITY-BACKLOG.1.1`
-  before any backend implementation code.
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.1.1` pending.
+- next_action: from a clean repo, verify the local Dart SDK/tool commands and define the repo-owned
+  Dart package layout under `DART-BACKEND-PARITY.1.1` before implementation code.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, task-tree index,
   ROADMAP/ROADMAP_V2, mdBook status/backend-handoff/formal grammar/helper chapters, relevant ADR/KM facts,
   and codebase architecture/source inventory for the docs/tracking slice.
@@ -41,5 +40,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none once the `.0` pointer commit lands; do not pivot unless the repo is
+- blockers: none. in_flight_uncommitted: none once the `.1.1` pointer commit lands; do not pivot unless the repo is
   handoff-ready.

@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `FUTURE-PARITY-BACKLOG.1.1` scoped the Dart lane into
+  `docs/tasks/DART-BACKEND-PARITY.md`. Dart parity starts interpreter-first: `.spec` parser, typed
+  helper/action AST, compiled-spec state, Dart runtime interpreter, then manifest-backed corpus parity.
+  Generated Dart source is a later proof lane after interpreter parity, not the primary gate. No
+  backend implementation code changed in this scoping slice.
 - `2026-07-09` refresh: `FUTURE-PARITY-BACKLOG.0` created the active future parity backlog and ADR
   `0021` accepted Lua as a scheduled future backend target. Future full-parity backend rollout is now Dart
   first, Julia second, and Lua third, all under the same `.spec`, text-to-AST, staged parsing, runtime,

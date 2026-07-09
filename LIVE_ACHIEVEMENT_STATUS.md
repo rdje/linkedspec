@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **FUTURE-PARITY-BACKLOG.1.1 — scope Dart backend parity plan**
+  (DONE scoping/task-tree/docs ownership; no Dart/backend implementation code change).
+
+  **Change:** Created `docs/tasks/DART-BACKEND-PARITY.md` as the dedicated Dart backend plan.
+  The Dart lane starts interpreter-first over typed `.spec` and helper/action AST plus compiled state,
+  then runtime/corpus parity. Generated Dart source is deferred to a later proof lane after interpreter
+  parity.
+
+  **Boundary:** Planning, roadmap, mdBook, Knowledge Map, and live-doc alignment only. Actual Dart
+  code starts under `DART-BACKEND-PARITY.1.1` after SDK/toolchain and package-layout preflight.
+
+  **Verification:** `git diff --check`, memory architecture, Knowledge Map, doctrine,
+  task-tree metadata, mdBook build, and `tools/run_ci_local.sh` pass. Local CI includes
+  phase0 `1..1028`.
+
 - 2026-07-09: **FUTURE-PARITY-BACKLOG.0 — create future parity backlog**
   (DONE task-tree/decision/docs ownership; no parser/runtime/backend code change).
 
@@ -15,7 +30,7 @@ Current execution status for interruption-safe batch workflow recovery.
   Julia second, Lua third, each targeting full parity with Perl5 and Rust.
 
   **Boundary:** Tracking, decision, roadmap, mdBook, Knowledge Map, and live-doc alignment only.
-  Actual backend implementation starts only after `FUTURE-PARITY-BACKLOG.1.1` scopes Dart.
+  Actual Dart implementation is now delegated to `DART-BACKEND-PARITY`.
 
   **Verification:** `git diff --check`, memory architecture, Knowledge Map, doctrine,
   task-tree metadata, mdBook build, and `tools/run_ci_local.sh` pass. Local CI includes

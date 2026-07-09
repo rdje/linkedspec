@@ -237,6 +237,12 @@ boundary: interpreter parity is the 99-fixture corpus contract, while generated
 source currently proves direct structural-family execution plus the curated
 manifest subset.
 
+The active Dart plan follows the same parity ordering. `DART-BACKEND-PARITY`
+starts interpreter-first: `.spec` parser, typed helper/action AST, compiled-spec
+state, Dart runtime interpreter, then the manifest-backed corpus runner.
+Generated Dart source is a later proof lane after interpreter/corpus parity, not
+the primary conformance gate.
+
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under
 `rust/linkedspec-runtime/tests/corpus/`. The corpus root has a `manifest.json`
