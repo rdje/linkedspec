@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.2 — bridge Dart helper action surfaces
+
+**Scope:** Dart action parser delimiter handling, runtime helper execution, focused parser/runtime tests, corpus
+diagnostics, Dart README/mdBook status, live docs, roadmap status, task-tree status, and Knowledge Map.
+
+**Change:** Added Dart execution for direct anonymous capture-slice helpers, diagnostic `print`/`print_each`/`say`
+helpers, logical `and`/`or`/`not`, and terminating `exit_now(...)`. The action parser now keeps delimiters inside
+quoted helper string arguments when matching call parentheses, so shipped `print("...", "\n")` forms no longer fall
+back to raw action expressions. The final shipped-spec/parser-smoke corpus window still measures 2/31 green, but
+the helper/action blockers now move to explicit recursion/default-mode/output mismatches, deliberate
+`exit_now(...)` diagnostic branches, and already routed PCRE structural regex blockers.
+
+**Validation:** Focused action parser/runtime interpreter tests, Dart format/analyze, full Dart tests, diagnostic
+corpus run, mdBook build, memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine, and
+`git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.1 — bridge Dart shipped regex dialect
 
 **Scope:** Dart runtime regex normalization, helper regex compilation, focused runtime tests, corpus diagnostics,

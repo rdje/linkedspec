@@ -37,8 +37,8 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.6.2.4.1` is the current completed corpus-parity boundary;
-`.6.2.4.2` is the next shipped-spec/parser-smoke helper/action frontier. The package can round-trip
+`DART-BACKEND-PARITY.6.2.4.2` is the current completed corpus-parity boundary;
+`.6.2.4.3` is the next shipped-spec/parser-smoke recursion/default-mode frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -103,6 +103,9 @@ POSIX character classes, inline `i`/`m`/`s` flags, scoped flag groups by lifting
 their options to the compiled Dart `RegExp`, possessive quantifier
 markers, lower-bound `{,n}` quantifiers, and Python-style named captures before
 using Dart `RegExp`.
+Direct capture-slice helpers, diagnostic `print`/`print_each`/`say`, logical
+`and`/`or`/`not`, and terminating `exit_now(...)` are available in the runtime,
+and helper-call parsing preserves literal delimiters inside quoted arguments.
 Runtime failures now expose `RuntimeDiagnostic` payloads through
 `RuntimeInterpreterException.diagnostic` with stable `type`, `stage`,
 `owner_stage`, `summary`, `detail`, `top_rule`, `rule_label`,
@@ -128,5 +131,8 @@ regex-dialect, helper/action, recursion/output, residual parity, and closeout le
 Basic regex-dialect bridging is now done; deeper PCRE structural constructs such as
 `\K`, recursive `(?&name)` subpatterns, and `(?(DEFINE)...)` are routed to
 `DART-BACKEND-PARITY.6.2.4.6`.
+The helper/action bridge is also done; remaining failures in that window are now
+recursive/default-mode/output mismatches, deliberate diagnostic `exit_now(...)`
+branches, and residual parser-smoke parity work.
 Full shipped-corpus output parity remains a later leaf in
 `docs/tasks/DART-BACKEND-PARITY.md`.

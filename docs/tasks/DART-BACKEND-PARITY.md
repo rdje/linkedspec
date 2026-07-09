@@ -901,20 +901,30 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.4.1 - bridge Dart shipped regex dialect`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.2`
-  Status: `pending`
+  Status: `done`
   Goal: Add missing parser-smoke runtime helper surfaces.
   Acceptance: The shipped-smoke fixtures no longer fail solely because Dart lacks `capture_slice`, diagnostic
-    output helper behavior (`print`/`say`), logical `or`/`not`, or typed parsing for current helper-form
+    output helper behavior (`print`/`say`), logical `or`/`not`, `exit_now`, or typed parsing for current helper-form
     `print(...)` expressions; helper behavior matches the Perl/Rust contract or is routed to narrower follow-up
     evidence.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Dart now executes direct anonymous capture-slice helpers
+    (`start_capture_slice`, `capture_slice`, `capture_slice_len`, `capture_slice_until_cursor`,
+    `capture_slice_until_cursor_len`, `capture_slice_pos`, `capture_slice_line`, `capture_slice_col`), logical
+    `and`/`or`/`not`, diagnostic `print`/`print_each`/`say` no-op output helpers, and terminating `exit_now`.
+    `action_parser.dart` now keeps delimiters inside quoted helper string arguments when matching call
+    parentheses, so current `print("...", "\n")` helper forms no longer fall back to raw expressions. Focused
+    parser/runtime tests, Dart format/analyze, and full Dart tests pass. The diagnostic `--execute --offset 68
+    --limit 31` window remains 2/31 green, but the missing-helper failures move to explicit
+    recursion/default-mode/output mismatches, deliberate `exit_now(...)` diagnostic branches, and the already split
+    PCRE structural regex blockers.
+  Commit: `DART-BACKEND-PARITY.6.2.4.2 - bridge Dart helper action surfaces`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.3`
   Status: `pending`
   Goal: Close recursive/default-mode and empty child-output semantics for parser-smoke fixtures.
-  Acceptance: Tclite, Lispish, and recursive top-rule fixtures either pass on Dart or each residual mismatch has a
-    narrowly owned root-cause leaf with Perl/Rust oracle evidence.
+  Acceptance: Tclite, Lispish, recursive top-rule, delimiter/default-mode, and explicit diagnostic-branch fixtures
+    either pass on Dart or each residual mismatch has a narrowly owned root-cause leaf with Perl/Rust oracle
+    evidence.
   Verification: `pending`
   Commit: `pending`
 

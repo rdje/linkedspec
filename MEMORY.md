@@ -18,20 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.6.2.4.1` — Dart now bridges basic shipped regex dialect forms
-  (POSIX classes, inline/scoped flags, possessive markers, `{,n}`, Python named captures) for rule and helper
-  regex compilation. Remaining PCRE structural regex constructs are routed to `.6.2.4.6`.
-- prior_leaf: `DART-BACKEND-PARITY.6.2.4.0` — final shipped-spec/parser-smoke Dart corpus window measured at
-  2/31 green and split into regex, helper/action, recursion/output, residual parity, and closeout leaves.
+- latest_completed_leaf: `DART-BACKEND-PARITY.6.2.4.2` — Dart now executes the missing helper/action surfaces
+  for direct capture-slice reads, diagnostic `print`/`say`, logical `and`/`or`/`not`, terminating `exit_now`, and
+  quoted helper-call delimiter parsing.
+- prior_leaf: `DART-BACKEND-PARITY.6.2.4.1` — Dart bridges basic shipped regex dialect forms for rule and helper
+  regex compilation; remaining PCRE structural regex constructs are routed to `.6.2.4.6`.
 - latest_commit: this resume block is prepared for commit
-  `DART-BACKEND-PARITY.6.2.4.1 - bridge Dart shipped regex dialect`; previous committed HEAD is
-  `bb4cc849 DART-BACKEND-PARITY.6.2.4.0 - split Dart shipped corpus smoke batch`.
+  `DART-BACKEND-PARITY.6.2.4.2 - bridge Dart helper action surfaces`; previous committed HEAD is
+  `919bf24a DART-BACKEND-PARITY.6.2.4.1 - bridge Dart shipped regex dialect`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.6.2.4.2` after the current commit is clean.
-- next_action: resume PNT at `DART-BACKEND-PARITY.6.2.4.2` for missing shipped-smoke helper/action surfaces
-  (`capture_slice`, diagnostic `print`/`say`, `or`/`not`, raw helper-form parsing). `.6.2.5` owns the routed top-level
-  `fn` corpus-shell gap. The director's single-source
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.6.2.4.3` after the current commit is clean.
+- next_action: resume PNT at `DART-BACKEND-PARITY.6.2.4.3` for recursive/default-mode, delimiter, empty-output,
+  and diagnostic-branch parser-smoke semantics. `.6.2.5` owns the routed top-level `fn` corpus-shell gap. The director's single-source
   `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`, not a current pivot.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, COMMIT, task-tree index,
   active Dart task tree, ROADMAP/ROADMAP_V2, mdBook trace/runtime/status/backend-handoff chapters, relevant ADR/KM
@@ -43,5 +42,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `.6.2.4.1` commit; do not pivot unless the repo is
+- blockers: none. in_flight_uncommitted: none expected after the `.6.2.4.2` commit; do not pivot unless the repo is
   handoff-ready.

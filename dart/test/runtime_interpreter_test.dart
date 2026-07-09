@@ -262,6 +262,57 @@ Boundary: /END/
     expect(result.cursorCodeUnit, 21);
   });
 
+  test('executes capture-slice logical and diagnostic helper surfaces', () {
+    final engine = _engine(r'''
+Body::AND /BEGIN/ /END/
+ -> Body[0] { start_capture_slice() }
+ -> Body[1] {
+   print("closing (", match_text(), "\n");
+   say("ignored");
+   return(hash(
+     "body", trim(capture_slice()),
+     "body_len", capture_slice_len(),
+     "until_cursor", capture_slice_until_cursor(),
+     "start_pos", capture_slice_pos(),
+     "start_line", capture_slice_line(),
+     "start_col", capture_slice_col(),
+     "logic", and(or(false, true), not(false))
+   ))
+ }
+''');
+
+    final result = engine.parse('BEGIN body END');
+
+    expect(result.value, {
+      'body': 'body',
+      'body_len': 6,
+      'until_cursor': ' body END',
+      'start_pos': 5,
+      'start_line': 1,
+      'start_col': 6,
+      'logic': true,
+    });
+  });
+
+  test('terminates on exit_now helper', () {
+    final engine = _engine(r'''
+Top::
+ /x/
+ E { print("fatal"); exit_now(7) }
+''');
+
+    expect(
+      () => engine.parse('x'),
+      throwsA(
+        isA<RuntimeInterpreterException>().having(
+          (error) => error.message,
+          'message',
+          contains('exit_now(7) in rule Top'),
+        ),
+      ),
+    );
+  });
+
   test('applies consume matching from a rewound cursor', () {
     final engine = _engine(r'''
 Top::AND

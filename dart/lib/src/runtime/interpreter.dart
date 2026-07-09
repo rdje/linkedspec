@@ -2641,6 +2641,32 @@ final class LinkedSpecRuntimeEngine {
           context.input,
           context.input.length,
         ).column;
+      case 'start_capture_slice':
+        context.startCaptureSlice();
+        return null;
+      case 'capture_slice':
+        return _captureSliceText(context, untilCursor: false);
+      case 'capture_slice_len':
+        return _captureSliceLength(context, untilCursor: false);
+      case 'capture_slice_until_cursor':
+        return _captureSliceText(context, untilCursor: true);
+      case 'capture_slice_until_cursor_len':
+        return _captureSliceLength(context, untilCursor: true);
+      case 'capture_slice_pos':
+        return codeUnitOffsetToCharOffset(
+          context.input,
+          _captureStartCodeUnit(context),
+        );
+      case 'capture_slice_line':
+        return lineColumnAtCodeUnitOffset(
+          context.input,
+          _captureStartCodeUnit(context),
+        ).line;
+      case 'capture_slice_col':
+        return lineColumnAtCodeUnitOffset(
+          context.input,
+          _captureStartCodeUnit(context),
+        ).column;
       case 'capture_until_boundary':
         return _callCaptureUntilBoundary(
           positionalArgs,
@@ -2715,6 +2741,31 @@ final class LinkedSpecRuntimeEngine {
             ? _executeActionEdgeChild(currentEdge, context)
             : _executeRule(targetLabel, targetIndex, context);
         return child.value;
+      case 'and':
+        return _callLogicalAnd(positionalArgs, context, ruleLabel, currentEdge);
+      case 'or':
+        return _callLogicalOr(positionalArgs, context, ruleLabel, currentEdge);
+      case 'not':
+        return _callLogicalNot(positionalArgs, context, ruleLabel, currentEdge);
+      case 'print':
+      case 'print_each':
+      case 'say':
+        _evaluateValues(positionalArgs, context, ruleLabel, currentEdge);
+        return null;
+      case 'exit_now':
+        final status = positionalArgs.isEmpty
+            ? ''
+            : _stringValue(
+                _evaluateExpression(
+                  positionalArgs.first,
+                  context,
+                  ruleLabel,
+                  currentEdge: currentEdge,
+                ),
+              );
+        throw RuntimeInterpreterException(
+          'exit_now($status) in rule $ruleLabel',
+        );
       default:
         if (_runtimeArrayHelperNames.contains(helperName)) {
           return _callArrayHelperFromExpressions(
@@ -3702,6 +3753,43 @@ final class LinkedSpecRuntimeEngine {
     return null;
   }
 
+  String? _captureSliceText(
+    _RuntimeExecutionContext context, {
+    required bool untilCursor,
+  }) {
+    final start = _captureStartCodeUnit(context);
+    final end = _captureEndCodeUnit(context, untilCursor: untilCursor);
+    if (end < start) {
+      return null;
+    }
+    return context.input.substring(start, end);
+  }
+
+  int? _captureSliceLength(
+    _RuntimeExecutionContext context, {
+    required bool untilCursor,
+  }) {
+    final text = _captureSliceText(context, untilCursor: untilCursor);
+    return text?.runes.length;
+  }
+
+  int _captureStartCodeUnit(_RuntimeExecutionContext context) {
+    return (context.registers.captureStartCodeUnit ?? 0).clamp(
+      0,
+      context.input.length,
+    );
+  }
+
+  int _captureEndCodeUnit(
+    _RuntimeExecutionContext context, {
+    required bool untilCursor,
+  }) {
+    final end = untilCursor
+        ? context.cursorCodeUnit
+        : context.registers.localMatch?.codeUnitStart ?? context.cursorCodeUnit;
+    return end.clamp(0, context.input.length);
+  }
+
   Object? _callCaptureUntilBoundary(
     List<ActionExpr> args,
     _RuntimeExecutionContext context,
@@ -3764,6 +3852,57 @@ final class LinkedSpecRuntimeEngine {
       LinkedSpecTraceLevel.debug,
     );
     return captured;
+  }
+
+  bool _callLogicalAnd(
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    for (final arg in args) {
+      if (!_truthy(
+        _evaluateExpression(arg, context, ruleLabel, currentEdge: currentEdge),
+      )) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  bool _callLogicalOr(
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    for (final arg in args) {
+      if (_truthy(
+        _evaluateExpression(arg, context, ruleLabel, currentEdge: currentEdge),
+      )) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool _callLogicalNot(
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    if (args.isEmpty) {
+      return true;
+    }
+    return !_truthy(
+      _evaluateExpression(
+        args.first,
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      ),
+    );
   }
 
   Object? _readRetv(
@@ -5046,6 +5185,10 @@ final class _RuntimeExecutionContext {
   void _setCursorCodeUnit(int codeUnitCursor) {
     cursorCodeUnit = codeUnitCursor.clamp(0, input.length);
     registers = registers.withCursorCodeUnit(cursorCodeUnit);
+  }
+
+  void startCaptureSlice() {
+    registers = registers.withCaptureStartCodeUnit(cursorCodeUnit);
   }
 }
 

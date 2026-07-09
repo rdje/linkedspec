@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.4.2 — Dart helper/action surface bridge):
+  Dart now executes the helper/action surfaces that were blocking the final shipped-spec/parser-smoke window after
+  the regex bridge: direct anonymous capture-slice helpers (`start_capture_slice`, `capture_slice`,
+  `capture_slice_len`, `capture_slice_until_cursor`, `capture_slice_until_cursor_len`, `capture_slice_pos`,
+  `capture_slice_line`, `capture_slice_col`), logical `and`/`or`/`not`, diagnostic output helpers
+  `print`/`print_each`/`say`, and Rust-style terminating `exit_now(...)`. The action parser delimiter matcher now
+  enters quote/regex scan modes while finding a callee's matching `)`, so literal delimiters inside quoted helper
+  arguments (for example `print("begin_end_blocks: BEGIN   (", ...)`) no longer turn the call into raw fallback.
+  The diagnostic corpus window remains 2/31 green, but helper/action gaps now route onward as measured
+  recursion/default-mode/output mismatches, explicit `exit_now(...)` diagnostic branches, and the `.6.2.4.6` PCRE
+  structural regex blockers.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.4.1 — Dart shipped regex dialect bridge):
   Dart rule regexes and helper regex values now share `compileRuntimeRegex(...)`. The bridge normalizes the
   shipped dialect subset that Dart `RegExp` does not accept directly: POSIX character classes such as

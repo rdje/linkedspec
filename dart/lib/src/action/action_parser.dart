@@ -957,6 +957,14 @@ int? _findMatchingDelimiter(
     if (_consumeQuotedOrRegex(state, text, index, ch)) {
       continue;
     }
+    if (ch == '"' || ch == "'") {
+      state.quote = ch;
+      continue;
+    }
+    if (ch == '/' && _looksLikeRegexStart(text, index)) {
+      state.inRegex = true;
+      continue;
+    }
     if (ch == open) {
       depth += 1;
     } else if (ch == close) {

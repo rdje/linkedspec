@@ -262,7 +262,10 @@ measured at 2/31 green and split into regex-dialect, helper/action,
 recursion/output, residual parity, and closeout leaves. The basic regex-dialect
 bridge is now in place for POSIX classes, inline/scoped flags, possessive
 markers, lower-bound quantifiers, and Python-style named captures. Scoped flag
-groups are accepted by lifting their options to the Dart `RegExp`; deeper PCRE
+groups are accepted by lifting their options to the Dart `RegExp`. The missing
+helper/action bridge is also in place for direct capture-slice helpers,
+diagnostic output helpers, logical helpers, `exit_now`, and quoted helper-call
+delimiter parsing; deeper PCRE
 structural constructs such as `\K`, `(?&name)`, and `(?(DEFINE)...)` are routed
 to a separate follow-up. The
 future Dart closeout now includes a distinct Dart-specific LinkedSpec CLI
@@ -397,8 +400,9 @@ Dart corpus parity has started with controlled manifest fixtures and now has saf
 named/bounded execution selection for shipped-corpus batching. The first 40
 manifest fixtures and the non-`fn` middle fixtures pass in bounded execute mode.
 The remaining shipped-spec/parser-smoke window is split after a 2/31 diagnostic
-run. The basic regex-dialect bridge is done; missing helper/action surfaces are
-the next Dart leaf, and full shipped 99-fixture corpus parity remains later.
+run. The basic regex-dialect bridge and helper/action bridge are done;
+recursive/default-mode parser-smoke semantics are the next Dart leaf, and full
+shipped 99-fixture corpus parity remains later.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

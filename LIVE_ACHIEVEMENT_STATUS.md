@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.2 — bridge Dart helper action surfaces**
+  (DONE — missing helper/action surfaces no longer block Dart).
+
+  **Change:** Dart now executes direct capture-slice helpers, diagnostic `print`/`print_each`/`say`, logical
+  `and`/`or`/`not`, and Rust-style terminating `exit_now(...)`. The action parser now keeps literal delimiters
+  inside quoted helper arguments while matching call parentheses, so shipped `print("...", "\n")` calls no longer
+  become raw fallback expressions.
+
+  **Boundary:** The final shipped-spec/parser-smoke window remains 2/31 green, but missing helper/action blockers
+  now move to explicit recursion/default-mode/output mismatches, deliberate `exit_now(...)` diagnostic branches,
+  and already-routed PCRE structural regex blockers. Active implementation work advances to
+  `DART-BACKEND-PARITY.6.2.4.3`.
+
+  **Verification:** Focused action parser/runtime interpreter tests, Dart format/analyze, full Dart tests,
+  diagnostic corpus run, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.2.4.1 — bridge Dart shipped regex dialect**
   (DONE — basic shipped regex dialect incompatibilities no longer block Dart).
 

@@ -111,6 +111,18 @@ void main() {
     );
   });
 
+  test('keeps delimiters inside helper string arguments quoted', () {
+    final printCall =
+        parseActionExpression(
+              r'''print("begin_end_blocks: BEGIN   (", entry_text(), "\n")''',
+            )
+            as ActionCallExpr;
+
+    expect(printCall.name, 'print');
+    expect(printCall.args, hasLength(3));
+    expect(printCall.args.first.value, isA<ActionStringLiteralExpr>());
+  });
+
   test('parses block values and attached control flow nodes', () {
     final blockValue =
         parseActionExpression(r'{ set(x, "a"); x }') as ActionBlockValueExpr;
