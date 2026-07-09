@@ -588,18 +588,19 @@ The rule is:
 
 ```text
 semantic_annotation: /@(\w+)\s*:\s*/
--> semantic_annotation | grammar_rule {BACKTRACK(); c = capture_slice(); substr(c, "\s*$", "", o); substr(c, "^\"|\"$", "", go); return(array("semantic_annotation", array(entry_group(0), c)))}
+-> semantic_annotation | grammar_rule {rewind_match_start(); c = capture_slice(); substr(c, "\s*$", "", o); substr(c, "^\"|\"$", "", go); return(array("semantic_annotation", array(entry_group(0), c)))}
 ```
 
 The key ideas are:
 
 - the first regex reads the annotation name and colon,
 - the following action captures the payload until the next semantic annotation or grammar rule,
-- `BACKTRACK()` positions the parser so the next structural token can be processed by its own rule,
+- `rewind_match_start()` positions the parser so the next structural token can be processed by its own rule,
 - the payload is trimmed before returning,
 - the action is written entirely in canonical helper DSL (`capture_slice()`, `substr(...)`, `entry_group(0)`, `return(array(...))`) — no raw host-language code, which is why the descriptor below reports this rule as ActionIR-ready.
 
 This rule is a good example of why capture-boundary helpers matter. It is parsing an open-ended payload where the right edge is not a fixed delimiter; it is the beginning of the next structural thing.
+The planned zero-width/lookahead boundary primitive will make this case more direct: the rule should be able to detect the next `grammar_rule` boundary without consuming it, capture up to that boundary, and leave the rule header for the normal `grammar_rule` path.
 
 ## Logging annotations
 
@@ -735,7 +736,7 @@ probability raw=0 unresolved=0 ready=1 nodes=DECLARE|IMATCH_TEXT_READ|REGEX_SUBS
 regex raw=0 unresolved=0 ready=1 nodes=DECLARE|IMATCH_TEXT_READ|REGEX_SUBST|RETURN
 include_dir raw=0 unresolved=0 ready=1 nodes=DECLARE|FILTER_NONEMPTY|IMATCH_TEXT_READ|REGEX_SUBST|RETURN|SPLIT|TRIM_EACH
 include_file raw=0 unresolved=0 ready=1 nodes=DECLARE|FILTER_NONEMPTY|IMATCH_TEXT_READ|REGEX_SUBST|RETURN|SPLIT|TRIM_EACH
-semantic_annotation raw=0 unresolved=0 ready=1 nodes=BACKTRACK|CAPTURE_SLICE|DECLARE|IMATCH_GROUP_READ|REGEX_SUBST|RETURN
+semantic_annotation raw=0 unresolved=0 ready=1 nodes=CAPTURE_SLICE|DECLARE|IMATCH_GROUP_READ|REGEX_SUBST|RETURN|REWIND_MATCH_START
 logging_annotation raw=0 unresolved=0 ready=1 nodes=CAPTURE_SLICE|CAPTURE_SLICE_START|DECLARE|IMATCH_GROUP_READ|PUSH|RETURN
 ```
 

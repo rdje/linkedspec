@@ -5,16 +5,17 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
-- `2026-07-09` refresh: `DART-BACKEND-PARITY.4.4` extended Dart runtime cursor semantics in
-  `dart/lib/src/runtime/interpreter.dart` and `dart/lib/src/runtime/matching.dart`. `LinkedSpecRuntimeEngine`
-  now executes `BACKTRACK()` as a cursor-only rewind to the current local match start, `IBACKTRACK()` as a
-  cursor-only rewind to the initial/entry match start for the current context, and char-based cursor/input helpers
-  such as `cursor_pos`, `cursor_rest`, `input_slice`, and `input_end_pos`. The `I` in `IBACKTRACK` is the
-  Initial/`I` lifecycle context. Rewinds update the live cursor/register cursor only; match records, stores,
-  accumulators, lifecycle effects, and branch decisions are not rolled back. Legacy lowercase
-  `backtrack(label)` / `ibacktrack(label)` calls canonicalize to the same runtime helpers and ignore the label
-  argument, matching the Perl compatibility contract. The active Dart frontier is `.4.5` for runtime diagnostics
-  and trace controls.
+- `2026-07-09` refresh: `BACKTRACK-SURFACE-RUST-ALIGNMENT.1` defines the current cross-variant cursor-control
+  surface. Perl, Rust, and Dart expose `save_cursor()` / `restore_cursor()` for explicit cursor-stack semantics and
+  `rewind_match_start()` / `rewind_entry_start()` for direct local-match or entry/initial-match anchor rewinds. The
+  old `BACKTRACK()` / `IBACKTRACK()` names and lowercase `backtrack(label)` / `ibacktrack(label)` forms are not
+  current portable API. `specs/ebnf.spec` uses `rewind_match_start()` as the semantic-preserving replacement until
+  `BACKTRACK-SURFACE-RUST-ALIGNMENT.2` lands the preferred zero-width/lookahead boundary primitive.
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.4.4` first extended Dart runtime cursor semantics in
+  `dart/lib/src/runtime/interpreter.dart` and `dart/lib/src/runtime/matching.dart`. That slice landed local
+  cursor rewinds and char-based cursor/input helpers such as `cursor_pos`, `cursor_rest`, `input_slice`, and
+  `input_end_pos`. `BACKTRACK-SURFACE-RUST-ALIGNMENT.1` has since renamed the current portable surface to
+  `save_cursor()` / `restore_cursor()` and `rewind_match_start()` / `rewind_entry_start()`.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.6` closed the Dart helper/value no-drift slice in
   `dart/lib/src/runtime/interpreter.dart`. Nested value-path assignment now matches the Perl/Rust contract:
   successful writes return the updated root aggregate, missing or wrong intermediate paths return `null` without

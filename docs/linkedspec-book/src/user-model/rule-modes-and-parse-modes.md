@@ -415,11 +415,11 @@ The LinkedSpec parser engine is forward-moving and non-backtracking. When a rege
 
 The engine does not maintain a search tree. It does not remember which alternatives were tried, does not unwind partial rule matches to try a different branch, and does not implement any form of systemic backtracking. A rule match either advances the cursor or leaves it unchanged on failure.
 
-This means the parser will not automatically reorder alternatives to find a successful match, will not retry a different decomposition of the input, and will not explore multiple parse paths. The only way the cursor moves backward is through an explicit `BACKTRACK()` or `IBACKTRACK()` call, and those are one-line `pos()` assignments — not search-tree operations.
+This means the parser will not automatically reorder alternatives to find a successful match, will not retry a different decomposition of the input, and will not explore multiple parse paths. The only way the cursor moves backward is through explicit cursor controls such as `restore_cursor()`, `rewind_match_start()`, or `rewind_entry_start()` — not search-tree operations.
 
 This design is intentional. LinkedSpec is built for extraction and recognition, not for exhaustive ambiguity resolution. The rule modes (`AND`, `OR`, `:|`, etc.) control composition within this forward-moving framework; the parse modes (`seek`, `consume`) control cursor discipline within this framework. Neither implies systemic backtracking.
 
-For more detail on `BACKTRACK` and `IBACKTRACK`, including their local cursor-rewind semantics and their interaction with `parse_mode`, see the [Source Boundary Helper Reference](../dsl/source-boundary-helper-reference.md#backtrack-and-ibacktrack-local-cursor-rewind).
+For more detail on cursor-stack helpers, anchor rewinds, and their interaction with `parse_mode`, see the [Source Boundary Helper Reference](../dsl/source-boundary-helper-reference.md#explicit-cursor-controls).
 
 ## Parse modes
 

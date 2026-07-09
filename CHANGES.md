@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — BACKTRACK-SURFACE-RUST-ALIGNMENT.1 — replace backtrack surface with explicit cursor controls
+
+**Scope:** Perl ActionIR contracts/scanner/canonical events, Rust runtime/validation/tests, Dart ActionIR
+contracts/runtime/tests, active EBNF spec/corpus copies, mdBook runtime/helper/status text, live docs, task-tree
+metadata, and Knowledge Map facts.
+
+**Change:** Retired the broad current `BACKTRACK`/`IBACKTRACK` helper surface and the lowercase
+`backtrack(label)` / `ibacktrack(label)` forms in favor of explicit cursor controls. Perl, Rust, and Dart now
+share `save_cursor()` / `restore_cursor()` for stack-based cursor save/restore, and
+`rewind_match_start()` / `rewind_entry_start()` for direct lifecycle-anchor rewinds. The active EBNF
+`semantic_annotation` rule and Rust corpus copies moved from `BACKTRACK()` to `rewind_match_start()` as the
+semantic-preserving current spelling. The zero-width/lookahead boundary primitive is recorded as the next required
+cross-variant capability so the EBNF case can later avoid consume-then-rewind entirely.
+
+**Validation:** Perl syntax checks for the edited ActionIR modules and phase0 test pass; `PERL5LIB= perl -Iperl
+t/phase0_regression.t` passes `1..1027`; `bash tools/run_ci_local.sh` passes; Rust `cargo fmt --all --check`,
+`cargo test -p linkedspec-core`, and `cargo test -p linkedspec-runtime` pass; Dart format/analyze/full tests, CLI
+help, and corpus runner pass; `mdbook build docs/linkedspec-book`, Knowledge Map, memory architecture, doctrine
+driver, active old-helper scan, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.4.4 — add Dart backtrack cursor rewinds
 
 **Scope:** Dart runtime cursor/input helper execution, BACKTRACK/IBACKTRACK cursor rewinds, focused runtime
@@ -13,9 +33,8 @@ the current context; the `I` is the Initial/`I` lifecycle context rather than ca
 cursor-only: match records, variables, accumulators, and branch state are not rolled back. The runtime also exposes
 char-based cursor/input helpers including `cursor_pos`, `cursor_line`, `cursor_col`, `cursor_rest`,
 `cursor_rest_len`, `input_text`, `input_len`, `input_slice`, `input_end_pos`, `input_end_line`, and
-`input_end_col`, while preserving Dart's internal code-unit cursor state. The legacy lowercase
-`backtrack(label)` / `ibacktrack(label)` spellings now canonicalize through ActionIR to the same runtime helpers
-and ignore the label argument, matching the Perl compatibility contract.
+`input_end_col`, while preserving Dart's internal code-unit cursor state. A later Rust-reference cleanup removes
+the short-lived Dart lowercase backtrack compatibility aliases before they become a durable public surface.
 
 **Validation:** Focused runtime tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook, memory
 architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.

@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **BACKTRACK-SURFACE-RUST-ALIGNMENT.1 — explicit cursor controls**
+  (DONE — replacing broad backtrack names with precise cursor controls across current variants).
+
+  **Change:** Perl, Rust, and Dart now target `save_cursor()` / `restore_cursor()` for explicit cursor-stack
+  semantics and `rewind_match_start()` / `rewind_entry_start()` for lifecycle-anchor rewinds. The old
+  `BACKTRACK()` / `IBACKTRACK()` and lowercase `backtrack(label)` / `ibacktrack(label)` forms are not current
+  portable API. `specs/ebnf.spec` and Rust corpus copies use `rewind_match_start()` as the semantic-preserving
+  replacement for the former annotation consume-then-rewind pattern.
+
+  **Boundary:** This closes the cross-variant cursor-stack and anchor-rewind rename. Active implementation work
+  advances to `BACKTRACK-SURFACE-RUST-ALIGNMENT.2`, which owns the preferred zero-width/lookahead boundary
+  primitive so annotation bodies can stop at the next structural token without consuming it.
+
+  **Verification:** Perl syntax checks, standalone phase0 `1..1027`, local CI, Rust format/core/runtime tests,
+  Dart format/analyze/full tests/CLI/corpus runner, mdBook, Knowledge Map, memory architecture, doctrine,
+  active old-helper scan, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.4.4 — add Dart backtrack cursor rewinds**
   (DONE BACKTRACK/IBACKTRACK cursor rewinds and cursor/input helpers).
 
@@ -14,8 +31,8 @@ Current execution status for interruption-safe batch workflow recovery.
   start and `IBACKTRACK()` as a cursor-only rewind to the initial/entry match start for the current context. The
   `I` in `IBACKTRACK` is the Initial/`I` lifecycle context. The runtime also exposes char-based cursor/input
   helpers such as `cursor_pos`, `cursor_rest`, `input_slice`, and `input_end_pos`, while preserving Dart's
-  internal code-unit cursor state. Legacy lowercase `backtrack(label)` / `ibacktrack(label)` calls canonicalize to
-  the same helpers and ignore the label argument.
+  internal code-unit cursor state. A later Rust-reference cleanup removes the short-lived Dart lowercase backtrack
+  compatibility aliases before they become a durable public surface.
 
   **Boundary:** This closes the BACKTRACK/cursor-helper slice. Runtime diagnostics/tracing, staged runtime
   execution, corpus output parity, Dart-specific CLI productization, and final parity closeout remain later

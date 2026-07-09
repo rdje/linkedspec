@@ -417,15 +417,20 @@ Used for AND-type rules and explicit `consume` directives. The regex is `\G`-anc
 it must match contiguously from the current position. Use `consume` for ordered
 sequences where input must be consumed in exact order.
 
-### 5.3 BACKTRACK and IBACKTRACK
+### 5.3 Explicit Cursor Controls
 
-`BACKTRACK` and `IBACKTRACK` perform **local cursor rewinds**. `BACKTRACK()`
-rewinds to the start of the current local match. `IBACKTRACK()` rewinds to the
-start of the initial/entry match for the current context; the `I` is the
-initial-match context also exposed to the `I` lifecycle.
+LinkedSpec exposes explicit cursor controls:
 
-This is local rewind only. LinkedSpec does not maintain a search tree, unwind
-partial rule matches, or restore alternative-choice state.
+- `save_cursor()` pushes the live cursor onto the cursor stack.
+- `restore_cursor()` pops the cursor stack and restores the live cursor when a
+  saved position exists.
+- `rewind_match_start()` rewinds to the start of the current local match.
+- `rewind_entry_start()` rewinds to the start of the initial/entry match for
+  the current context; this is the same initial-match context exposed to the `I`
+  lifecycle.
+
+These are local cursor operations only. LinkedSpec does not maintain a search
+tree, unwind partial rule matches, or restore alternative-choice state.
 
 ### 5.4 Recursion and Forward-Progress Termination
 

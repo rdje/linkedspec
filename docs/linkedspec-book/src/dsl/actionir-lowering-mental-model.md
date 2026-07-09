@@ -156,7 +156,7 @@ Each contract family has a dedicated lowering owner:
 
 | Family | Purpose |
 | --- | --- |
-| capture_and_backtrack | Boundary capture, mark, cursor, and BACKTRACK helpers |
+| capture_and_cursor | Boundary capture, mark, cursor-reader, and explicit cursor-control helpers |
 | call_and_dispatch | Rule dispatch and call helpers |
 | return | Return value construction |
 | passthrough_ir | Backend-owned pass-through surfaces |

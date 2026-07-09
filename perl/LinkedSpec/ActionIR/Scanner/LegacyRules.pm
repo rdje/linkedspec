@@ -135,10 +135,10 @@ sub try_scan_contract_ir_events {
   'match_line' => \&_scan_contract_match_line,
   'match_start_col' => \&_scan_contract_match_start_col,
   'match_col' => \&_scan_contract_match_col,
-  'ibacktrack_macro' => \&_scan_contract_ibacktrack_macro,
-  'backtrack_macro' => \&_scan_contract_backtrack_macro,
-  'ibacktrack' => \&_scan_contract_ibacktrack,
-  'backtrack' => \&_scan_contract_backtrack,
+  'save_cursor' => \&_scan_contract_save_cursor,
+  'restore_cursor' => \&_scan_contract_restore_cursor,
+  'rewind_entry_start' => \&_scan_contract_rewind_entry_start,
+  'rewind_match_start' => \&_scan_contract_rewind_match_start,
  );
  my $handler = $dispatch{$id};
  return undef unless $handler;
@@ -1119,38 +1119,38 @@ while ($code =~ /\bmatch_col\s*\(\s*\)/g) {
  return \@events
 }
 
-sub _scan_contract_ibacktrack_macro {
+sub _scan_contract_save_cursor {
  my ($code) = @_;
  my @events;
-while ($code =~ /\bIBACKTRACK\s*\(\s*\)/g) {
+while ($code =~ /\bsave_cursor\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events
 }
 
-sub _scan_contract_backtrack_macro {
+sub _scan_contract_restore_cursor {
  my ($code) = @_;
  my @events;
-while ($code =~ /\bBACKTRACK\s*\(\s*\)/g) {
+while ($code =~ /\brestore_cursor\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
 }
  return \@events
 }
 
-sub _scan_contract_ibacktrack {
+sub _scan_contract_rewind_entry_start {
  my ($code) = @_;
  my @events;
-while ($code =~ /\bibacktrack\s*\(\s*(?<label>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {label => $+{label}}};
+while ($code =~ /\brewind_entry_start\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
 }
  return \@events
 }
 
-sub _scan_contract_backtrack {
+sub _scan_contract_rewind_match_start {
  my ($code) = @_;
  my @events;
-while ($code =~ /\bbacktrack\s*\(\s*(?<label>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {label => $+{label}}};
+while ($code =~ /\brewind_match_start\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
 }
  return \@events
 }

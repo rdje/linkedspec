@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **258** facts · **1813** question keys.
+> **258** facts · **1814** question keys.
 
 ## Questions → fact
 
@@ -269,6 +269,8 @@
 - "does Dart runtime support numeric aliases and symbol callees" -> [dart-runtime-string-numeric-helpers](docs/knowledge/dart-runtime-string-numeric-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime support numeric helpers" -> [dart-runtime-string-numeric-helpers](docs/knowledge/dart-runtime-string-numeric-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime support push_back statement only" -> [dart-runtime-array-helpers](docs/knowledge/dart-runtime-array-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart test test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support rewind_match_start rewind_entry_start" -> [dart-runtime-backtrack-cursor-helpers](docs/knowledge/dart-runtime-backtrack-cursor-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart test/runtime_matching_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support save_cursor restore_cursor" -> [dart-runtime-backtrack-cursor-helpers](docs/knowledge/dart-runtime-backtrack-cursor-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart test/runtime_matching_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime support set_key statement mutation" -> [dart-runtime-hash-helpers](docs/knowledge/dart-runtime-hash-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart test test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime support sorted drop_front first" -> [dart-runtime-array-helpers](docs/knowledge/dart-runtime-array-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart test test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime support sorted_keys sorted_values count_keys" -> [dart-runtime-hash-helpers](docs/knowledge/dart-runtime-hash-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart test test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings`
@@ -291,7 +293,6 @@
 - "does Dart support hash tree traversal callbacks" -> [dart-runtime-value-control-tree-helpers](docs/knowledge/dart-runtime-value-control-tree-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/action_ast_parser_test.dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart support helper with trailing blocks" -> [dart-runtime-value-control-tree-helpers](docs/knowledge/dart-runtime-value-control-tree-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/action_ast_parser_test.dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart support inline if and switch helpers" -> [dart-runtime-value-control-tree-helpers](docs/knowledge/dart-runtime-value-control-tree-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/action_ast_parser_test.dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
-- "does Dart support lowercase backtrack ibacktrack" -> [dart-runtime-backtrack-cursor-helpers](docs/knowledge/dart-runtime-backtrack-cursor-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart test/runtime_matching_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart support nested access reads" -> [dart-runtime-core-value-capture-helpers](docs/knowledge/dart-runtime-core-value-capture-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart support receiver with trailing blocks" -> [dart-runtime-value-control-tree-helpers](docs/knowledge/dart-runtime-value-control-tree-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/action_ast_parser_test.dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart support retv and accumulators" -> [dart-runtime-rule-interpreter](docs/knowledge/dart-runtime-rule-interpreter.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
@@ -2040,11 +2041,11 @@ _Dart runtime executes array helper family and receiver chains_
 - **source:** [`docs/knowledge/dart-runtime-array-helpers.md`](docs/knowledge/dart-runtime-array-helpers.md)
 
 ### dart-runtime-backtrack-cursor-helpers
-_Dart runtime implements BACKTRACK/IBACKTRACK local cursor rewinds and cursor/input helpers_
+_Dart runtime implements explicit cursor controls and cursor/input helpers_
 
-- **answers:** does Dart runtime support BACKTRACK | does Dart runtime support IBACKTRACK | what does IBACKTRACK mean | does Dart support lowercase backtrack ibacktrack | does Dart runtime support cursor_pos cursor_rest input_slice | how does Dart implement local cursor rewind
+- **answers:** does Dart runtime support BACKTRACK | does Dart runtime support IBACKTRACK | does Dart runtime support save_cursor restore_cursor | does Dart runtime support rewind_match_start rewind_entry_start | what does IBACKTRACK mean | does Dart runtime support cursor_pos cursor_rest input_slice | how does Dart implement local cursor rewind
 - **date:** 2026-07-09 · **status:** current
-- **evidence:** `DART-BACKEND-PARITY.4.4 extends dart/lib/src/action/action_contracts.dart, dart/lib/src/runtime/interpreter.dart, dart/lib/src/runtime/matching.dart, test/action_contracts_test.dart, and test/runtime_interpreter_test.dart. Focused tests prove BACKTRACK rewinds to the current local match start, IBACKTRACK rewinds to the initial/entry I-context match start, lowercase backtrack(label)/ibacktrack(label) canonicalize to the same helpers, consume mode continues from the rewound cursor, and cursor/input helpers expose char-based values.`
+- **evidence:** `DART-BACKEND-PARITY.4.4 first landed Dart cursor/input helper execution. BACKTRACK-SURFACE-RUST-ALIGNMENT.1 replaces the ambiguous public backtrack surface with explicit cursor controls in dart/lib/src/action/action_contracts.dart, dart/lib/src/runtime/interpreter.dart, and test/runtime_interpreter_test.dart. Focused tests prove save_cursor()/restore_cursor() stack semantics, rewind_match_start()/rewind_entry_start() anchor rewinds, consume mode from a rewound cursor, and char-based cursor/input helper values. Old BACKTRACK/IBACKTRACK and lowercase backtrack(label)/ibacktrack(label) are not current API.`
 - **reverify:** `cd dart && dart test test/runtime_interpreter_test.dart test/runtime_matching_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - **source:** [`docs/knowledge/dart-runtime-backtrack-cursor-helpers.md`](docs/knowledge/dart-runtime-backtrack-cursor-helpers.md)
 

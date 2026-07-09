@@ -6824,13 +6824,21 @@ impl Engine {
                 // flow skip — equivalent to "continue matching"
                 Ok(RuntimeValue::Undef)
             }
-            // ── BACKTRACK / IBACKTRACK cursor save/restore ──
-            "BACKTRACK" => {
-                ctx.push_backtrack();
+            // ── Explicit cursor controls ──
+            "save_cursor" => {
+                ctx.save_cursor();
                 Ok(RuntimeValue::Undef)
             }
-            "IBACKTRACK" => {
-                ctx.pop_backtrack();
+            "restore_cursor" => {
+                ctx.restore_cursor();
+                Ok(RuntimeValue::Undef)
+            }
+            "rewind_match_start" => {
+                ctx.rewind_match_start();
+                Ok(RuntimeValue::Undef)
+            }
+            "rewind_entry_start" => {
+                ctx.rewind_entry_start();
                 Ok(RuntimeValue::Undef)
             }
             // ── Conditional flow: if/elseif/else/endif ──
@@ -7931,21 +7939,21 @@ ChildB:
     }
 
     // ═══════════════════════════════════════════════════════════
-    // BACKTRACK/IBACKTRACK tests
+    // Explicit cursor-control tests
     // ═══════════════════════════════════════════════════════════
 
     #[test]
-    fn backtrack_save_and_restore_cursor() {
+    fn cursor_stack_save_and_restore_cursor() {
         let grammar = r#"Top::
  /hello/
- I { BACKTRACK() }
- E { return(IBACKTRACK()) }
+ I { save_cursor() }
+ E { return(restore_cursor()) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
         let compiled = compile(&spec).unwrap();
         let engine = Engine::new(compiled);
-        // IBACKTRACK returns undef, BACKTRACK saves position
+        // restore_cursor returns undef, save_cursor saves position
         let result = engine.execute("hello");
         assert!(result.is_ok(), "expected ok, got {:?}", result);
         let val = result.unwrap();
@@ -7954,13 +7962,13 @@ ChildB:
     }
 
     #[test]
-    fn backtrack_restores_position_for_retry() {
+    fn cursor_stack_restores_position_for_retry() {
         // Save position before match, restore on no-match via LX
         let grammar = r#"Top::OR{1}
  /hello/
- I { BACKTRACK() }
+ I { save_cursor() }
  E { return() }
- LX { IBACKTRACK() }
+ LX { restore_cursor() }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -7969,17 +7977,17 @@ ChildB:
         let result = engine.execute("hello");
         assert!(
             result.is_ok(),
-            "backtrack restore should succeed, got {:?}",
+            "cursor restore should succeed, got {:?}",
             result
         );
     }
 
     #[test]
-    fn backtrack_empty_stack_no_op() {
-        // IBACKTRACK with empty stack should not crash
+    fn cursor_stack_empty_restore_no_op() {
+        // restore_cursor with empty stack should not crash
         let grammar = r#"Top::
  /(\w+)/
- E { IBACKTRACK(); return(entry_group(0)) }
+ E { restore_cursor(); return(entry_group(0)) }
 "#;
         let spec = parse_spec(grammar).unwrap();
         validate(&spec).unwrap();
@@ -7991,14 +7999,14 @@ ChildB:
     }
 
     #[test]
-    fn backtrack_multiple_push_pop() {
-        // BACKTRACK saves position; IBACKTRACK restores it
+    fn cursor_stack_multiple_save_restore() {
+        // save_cursor saves position; restore_cursor restores it
         let grammar = r#"Top::
  /(hello) (world)/
- I { set(array(log), []); BACKTRACK() }
+ I { set(array(log), []); save_cursor() }
  LE { push(array(log), cursor_pos()) }
  E { push(array(log), cursor_pos());
-      IBACKTRACK(); push(array(log), cursor_pos());
+      restore_cursor(); push(array(log), cursor_pos());
       return(copy(array(log))) }
 "#;
         let spec = parse_spec(grammar).unwrap();
@@ -8006,7 +8014,67 @@ ChildB:
         let compiled = compile(&spec).unwrap();
         let engine = Engine::new(compiled);
         let result = engine.execute("hello world");
-        assert!(result.is_ok(), "backtrack should work, got {:?}", result);
+        assert!(
+            result.is_ok(),
+            "cursor save/restore should work, got {:?}",
+            result
+        );
+    }
+
+    #[test]
+    fn cursor_rewinds_to_entry_or_match_start() {
+        let entry_grammar = r#"Top::AND
+ I { set(array(log), []) }
+ /ab/ -> Top[0] { push(array(log), hash("slot", 0, "cursor", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos())) }
+ /cd/ -> Top[1] {
+   before = cursor_pos();
+   rewind_entry_start();
+   push(array(log), hash("slot", 1, "before", before, "after", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos(), "rest", cursor_rest()))
+ }
+ E { return(copy(array(log))) }
+"#;
+        let match_grammar = r#"Top::AND
+ I { set(array(log), []) }
+ /ab/ -> Top[0] { push(array(log), hash("slot", 0, "cursor", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos())) }
+ /cd/ -> Top[1] {
+   before = cursor_pos();
+   rewind_match_start();
+   push(array(log), hash("slot", 1, "before", before, "after", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos(), "rest", cursor_rest()))
+ }
+ E { return(copy(array(log))) }
+"#;
+        let entry_engine = Engine::new(compile(&parse_spec(entry_grammar).unwrap()).unwrap());
+        let match_engine = Engine::new(compile(&parse_spec(match_grammar).unwrap()).unwrap());
+        let entry_json = entry_engine.execute("abcd").unwrap();
+        let match_json = match_engine.execute("abcd").unwrap();
+        let entry_outer = entry_json.as_array().unwrap();
+        let match_outer = match_json.as_array().unwrap();
+        let entry_arr = entry_outer[0].as_array().unwrap();
+        let match_arr = match_outer[0].as_array().unwrap();
+        assert_eq!(
+            entry_arr[0].get("cursor").and_then(|v| v.as_f64()),
+            Some(2.0)
+        );
+        assert_eq!(
+            entry_arr[1].get("after").and_then(|v| v.as_f64()),
+            Some(0.0)
+        );
+        assert_eq!(
+            entry_arr[1].get("rest").and_then(|v| v.as_str()),
+            Some("abcd")
+        );
+        assert_eq!(
+            match_arr[0].get("cursor").and_then(|v| v.as_f64()),
+            Some(2.0)
+        );
+        assert_eq!(
+            match_arr[1].get("after").and_then(|v| v.as_f64()),
+            Some(2.0)
+        );
+        assert_eq!(
+            match_arr[1].get("rest").and_then(|v| v.as_str()),
+            Some("cd")
+        );
     }
 
     // ── RUST-PARITY.5.3 — char-based (not byte) offsets/slicing ──

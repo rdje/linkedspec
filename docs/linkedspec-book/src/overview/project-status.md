@@ -12,7 +12,7 @@ Phases 0–9 of the modernization roadmap are done:
 - **Phase 1**: Thin facade + owner dispatch — `LinkedSpec.pm` is a lazy public facade over owner modules that route through uniform `OwnerDispatch`; the former `ActionRewriter.pm` forwarding shim was deleted (118 lines).
 - **Phase 1A**: Thin-façade modularization — `LinkedSpec.pm` delegated into focused owner modules (`Trace`, `Validation`, `Resolver`, `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, `RuleIR`, `EmitContext`); the shared `OwnerDispatch` seam replaced per-owner lazy-loading wrappers.
 - **Phase 2**: DSL frontend hardening — rule-label parsing, inside-block rejection, extra-colon rejection, fluent-continuation recognition, `strict_syntax` mode, construct-recognition alignment with bootstrap grammar.
-- **Phase 3**: Execution semantics — seek/consume parse modes documented; BACKTRACK/IBACKTRACK defined as local cursor-rewind, not systemic backtracking; forward-moving non-backtracking model stated.
+- **Phase 3**: Execution semantics — seek/consume parse modes documented; explicit cursor controls are local cursor operations, not systemic backtracking; forward-moving non-backtracking model stated.
 - **Phase 4**: Capture/mark API — 163 contracts across 6 families verified, compat aliases documented, mark-helper reference complete.
 - **Phase 5**: Runtime diagnostics — structured last_error is the single diagnostics channel; handler compile warnings routed through trace instead of stderr; eval minimized to one handler compilation; trace bridging from compile scopes into runtime handler scopes.
 - **Phase 6**: Documentation and adoption — the book you are reading. All identified documentation gaps closed (LinkedRE, Validation, public API, cross-linking, overviews, ActionIR lowering, per-spec walkthroughs).
@@ -62,8 +62,9 @@ Three backbone items tracked major structural modernization — all done:
   hash helper family breadth, hash receiver chains, statement/value mutation boundaries, nested value-path
   assignment with no-autovivification failure behavior, explicit flat-style hash splicing, expression-valued
   blocks with block-local return, attached and inline structured controls,
-  helper/receiver `with` trailing blocks, hash/array tree traversal receiver callbacks, `BACKTRACK()` local cursor
-  rewinds, `IBACKTRACK()` initial/entry cursor rewinds, and char-based cursor/input helpers. The next slice is
+  helper/receiver `with` trailing blocks, hash/array tree traversal receiver callbacks, `save_cursor()` /
+  `restore_cursor()` stack semantics, `rewind_match_start()` / `rewind_entry_start()` anchor rewinds, and
+  char-based cursor/input helpers. The next slice is
   runtime diagnostics and trace controls.
 - **Non-current helper code purge** - `NONCURRENT-HELPER-CODE-PURGE` is closed. Perl source cleanup, Rust source cleanup, active test/tool/generated fixture and checked-in `.spec` migration, and final no-drift scans are complete. Retired helper-looking calls use generic unknown-helper fallback behavior, active generic-unknown-helper tests use invented helper names, and active helper-call/label/tag scans are clean.
 - **Rust generated-source breadth** — the Rust interpreter oracle is the current cross-variant parity gate. Generated Rust source already covers the current structural families and a curated corpus subset; broadening generated-source proof to the full manifest remains a separately owned future follow-on.

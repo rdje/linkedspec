@@ -64,12 +64,14 @@ void main() {
     expect(isKnownActionIrCallName('gt'), isTrue);
     expect(isKnownActionIrCallName('push_back'), isTrue);
     expect(isKnownActionIrCallName('sorted_keys'), isTrue);
-    expect(isKnownActionIrCallName('backtrack'), isTrue);
-    expect(isKnownActionIrCallName('ibacktrack'), isTrue);
+    expect(isKnownActionIrCallName('save_cursor'), isTrue);
+    expect(isKnownActionIrCallName('restore_cursor'), isTrue);
+    expect(isKnownActionIrCallName('rewind_match_start'), isTrue);
+    expect(isKnownActionIrCallName('rewind_entry_start'), isTrue);
+    expect(isKnownActionIrCallName('BACKTRACK'), isFalse);
+    expect(isKnownActionIrCallName('IBACKTRACK'), isFalse);
     expect(isKnownActionIrCallName('mystery_helper'), isFalse);
     expect(canonicalActionHelperName('>='), 'num_ge');
-    expect(canonicalActionHelperName('backtrack'), 'BACKTRACK');
-    expect(canonicalActionHelperName('ibacktrack'), 'IBACKTRACK');
 
     final collision = SpecFile(
       rules: [

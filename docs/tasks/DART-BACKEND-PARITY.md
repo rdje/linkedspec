@@ -529,17 +529,16 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 
 - ID: `DART-BACKEND-PARITY.4.4`
   Status: `done`
-  Goal: Implement BACKTRACK, parse-mode cursor behavior, and deterministic safety limits.
-  Acceptance: BACKTRACK/IBACKTRACK rewinds only local cursor state, loops enforce documented safety, and
+  Goal: Implement cursor-rewind, parse-mode cursor behavior, and deterministic safety limits.
+  Acceptance: Cursor rewinds affect only local cursor state, loops enforce documented safety, and
     deterministic order is maintained for hash views and dispatch decisions.
-  Verification: **PASS 2026-07-09.** Dart runtime execution now supports `BACKTRACK()` as a cursor rewind to the
-    current local match start and `IBACKTRACK()` as a cursor rewind to the initial/entry match start for the
-    current context. The runtime also exposes char-based cursor/input helpers (`cursor_pos`, `cursor_line`,
+  Verification: **PASS 2026-07-09, superseded by `BACKTRACK-SURFACE-RUST-ALIGNMENT.1` for public names.**
+    Dart runtime execution first landed local-match and entry/initial-match cursor rewinds plus char-based
+    cursor/input helpers (`cursor_pos`, `cursor_line`,
     `cursor_col`, `cursor_rest`, `cursor_rest_len`, `input_text`, `input_len`, `input_slice`, `input_end_pos`,
-    `input_end_line`, `input_end_col`). The legacy lowercase `backtrack(label)` / `ibacktrack(label)` spellings
-    canonicalize to the same runtime helpers and ignore the label argument, matching the Perl compatibility
-    contract. Existing zero-progress loop guards and deterministic sorted hash/tree behavior remain covered by
-    the runtime suite.
+    `input_end_line`, `input_end_col`). Existing zero-progress loop guards and deterministic sorted hash/tree
+    behavior remain covered by the runtime suite. Current public helper names are `save_cursor()` /
+    `restore_cursor()` and `rewind_match_start()` / `rewind_entry_start()`.
   Acceptance Checklist:
     - [x] **REPRODUCE / ISSUE** — Dart ActionIR contracts recognized `BACKTRACK`, `IBACKTRACK`, and cursor/input
       helper names, but runtime evaluation still returned `null` for those helper calls and could not update the
@@ -549,16 +548,13 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
       helper branch and `_RuntimeExecutionContext` had no cursor-rewind operation. `dart/lib/src/runtime/matching.dart`
       tracked entry and local match registers but lacked a cursor-only update method that preserved those registers
       while moving the live cursor.
-    - [x] **FIXED** — Added ActionIR aliases for legacy lowercase `backtrack(label)` / `ibacktrack(label)`,
-      `RuntimeMatchRegisters.withCursorCodeUnit(...)`, runtime context cursor projection and rewind methods,
-      `BACKTRACK`/`IBACKTRACK` dispatch, and char-based whole-input/current-cursor helper execution. `BACKTRACK()`
-      rewinds to the current local match start; `IBACKTRACK()` rewinds to the initial/entry match start. The
-      director clarified that the `I` in `IBACKTRACK` refers to the Initial/`I` lifecycle context.
-    - [x] **ADDRESSED** — `test/action_contracts_test.dart` proves lowercase compatibility spellings canonicalize
-      to the uppercase runtime helpers. `test/runtime_interpreter_test.dart` proves `BACKTRACK` and `IBACKTRACK`
-      target different cursor anchors, lowercase compatibility calls use the same anchors, consume-mode matching
-      continues from a rewound cursor, and cursor/input helpers return char-based positions and slices while
-      internal Dart cursors remain code-unit based.
+    - [x] **FIXED** — Added `RuntimeMatchRegisters.withCursorCodeUnit(...)`, runtime context cursor projection and
+      rewind methods, and char-based whole-input/current-cursor helper execution. The current public surface now
+      lives in `BACKTRACK-SURFACE-RUST-ALIGNMENT.1`: `save_cursor()` / `restore_cursor()` plus
+      `rewind_match_start()` / `rewind_entry_start()`.
+    - [x] **ADDRESSED** — `test/runtime_interpreter_test.dart` proves direct cursor anchor rewinds, explicit
+      cursor-stack save/restore, consume-mode matching from a rewound cursor, and char-based cursor/input helper
+      values while internal Dart cursors remain code-unit based.
     - [x] **NO REGRESSION** — Focused runtime tests, Dart format/analyze/full tests, corpus-runner scaffold,
       CLI help checks, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
       `git diff --check` pass.
@@ -931,14 +927,13 @@ The `.4.1` runtime matching layer adds:
   dispatch.
 - `2026-07-09`: Dart `.4.1` adds regex/match-state primitives only. Rule dispatch, lifecycle execution, and helper
   runtime remain `.4.2` and later.
-- `2026-07-09`: Dart `.4.4` keeps both public cursor-rewind helpers for Perl/Rust parity. `BACKTRACK()` rewinds to
-  the current local match start. `IBACKTRACK()` rewinds to the initial/entry match start for the current context;
-  the director clarified that the `I` refers to the Initial/`I` lifecycle context. Any future simplification of the
-  user-facing surface would need a separate compatibility leaf.
+- `2026-07-09`: Dart `.4.4` first landed cursor-rewind runtime mechanics. `BACKTRACK-SURFACE-RUST-ALIGNMENT.1`
+  supersedes those short-lived public names with `save_cursor()` / `restore_cursor()` stack semantics and
+  `rewind_match_start()` / `rewind_entry_start()` anchor rewinds.
 
 ## Open Questions
 
-- None blocking `.4.5`. BACKTRACK/IBACKTRACK and cursor/input helper execution are implemented; runtime
+- None blocking `.4.5`. Cursor-control and cursor/input helper execution are implemented; runtime
   diagnostics and trace controls are next.
 
 ## Blockers

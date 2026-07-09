@@ -220,7 +220,7 @@ A shipped example is `ebnf.spec`, whose `semantic_annotation` rule shares one ac
 ```text
 semantic_annotation: /@(\w+)\s*:\s*/
 -> semantic_annotation | grammar_rule {
-  BACKTRACK();
+  rewind_match_start();
   c = capture_slice();
   substr(c, "\s*$", "", o);
   substr(c, "^\"|\"$", "", go);

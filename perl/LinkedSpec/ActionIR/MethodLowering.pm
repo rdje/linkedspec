@@ -1127,7 +1127,7 @@ sub _actionir_ast_known_value_call_method {
  return $numeric_alias if defined($numeric_alias) && length($numeric_alias);
  state %known = map { $_ => 1 } qw(
   _trace_runtime_mark_event
-  CAPTURE CAPTURE_IF BACKTRACK IBACKTRACK
+  CAPTURE CAPTURE_IF save_cursor restore_cursor rewind_match_start rewind_entry_start
   if i when elseif elif else otherwise endif switch case default endcase endswitch while
   or and not eq ne gt ge lt le is_defined is_undefined is_empty is_nonempty
   return return_undef

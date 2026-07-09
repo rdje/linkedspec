@@ -42,8 +42,8 @@ explicit `flat(...)` / `flat_hash(...)` hash arguments, while ordinary map field
 values remain nested values.
 
 `DART-BACKEND-PARITY.4.3.5` has since landed value blocks, structured controls,
-with-blocks, and tree traversal callback helpers. `DART-BACKEND-PARITY.4.4` has
-since landed BACKTRACK/IBACKTRACK cursor rewinds and cursor/input helpers.
+with-blocks, and tree traversal callback helpers. `BACKTRACK-SURFACE-RUST-ALIGNMENT.1`
+has since landed explicit cursor controls and cursor/input helpers.
 Tracing, staged function execution, full corpus output parity, and per-variant
 CLI productization remain later Dart leaves.
 

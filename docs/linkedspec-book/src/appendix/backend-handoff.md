@@ -194,7 +194,7 @@ knowledge is needed.
 
 ### Step 3: Understand Runtime Behavior
 Read the [Runtime Semantics](runtime-semantics.md). This defines how `.spec` rules
-execute: parse modes, lifecycles, BACKTRACK, accumulators, edge dispatch, repetition
+execute: parse modes, lifecycles, explicit cursor controls, accumulators, edge dispatch, repetition
 bounds, and determinism guarantees. Two independent implementations of this document
 must produce identical parser behavior.
 
@@ -329,10 +329,11 @@ direct hash-index assignment values, bare-overlay `merge_hash`, and explicit
 flat-style hash splicing inside `hash(...)`. It also executes expression-valued
 blocks with block-local `return(...)`, attached and inline structured controls,
 helper/receiver `with` trailing blocks, and hash/array tree traversal receiver
-callbacks with scoped callback bindings. It now also executes `BACKTRACK()` as a
-rewind to the current local match start, `IBACKTRACK()` as a rewind to the
-initial/entry match start for the current context, and char-based cursor/input
-helpers such as `cursor_pos`, `cursor_rest`, `input_slice`, and `input_end_pos`.
+callbacks with scoped callback bindings. It now also executes explicit cursor
+controls: `save_cursor()` / `restore_cursor()` for stack-based cursor restore,
+`rewind_match_start()` / `rewind_entry_start()` for lifecycle-anchor rewinds,
+and char-based cursor/input helpers such as `cursor_pos`, `cursor_rest`,
+`input_slice`, and `input_end_pos`.
 Tracing/diagnostics, staged function execution, and corpus-output parity remain
 later Dart leaves.
 
@@ -485,8 +486,11 @@ It provides:
    - Regex engine with position tracking (equivalent to `//gcp` and `\G` anchoring).
    - Accumulator model (arrays, hashes, scalars).
    - Lifecycle execution engine (I/LS/LE/E/EX/IT/LX ordering).
-   - BACKTRACK/IBACKTRACK local cursor rewinds (`BACKTRACK` to local match start,
-     `IBACKTRACK` to initial/entry match start).
+   - Explicit cursor controls: `save_cursor()` / `restore_cursor()` stack
+     semantics plus `rewind_match_start()` / `rewind_entry_start()` anchor
+     rewinds.
+   - Zero-width/lookahead boundary support for non-consuming structural boundary
+     detection.
    - Zero-progress guard.
 
 10. **Test harness** — runs `tests/corpus/` entries and compares output to

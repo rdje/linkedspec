@@ -148,19 +148,21 @@ I  →  [LS → match → LE → IT] × N  →  EX → LX → E
 - Used for final return value assembly.
 - The canonical place to return the rule's result.
 
-## 4. BACKTRACK and IBACKTRACK
+## 4. Explicit Cursor Controls
 
-### 4.1 Local Cursor Rewind
+### 4.1 Cursor Stack and Anchor Rewinds
 
-`BACKTRACK` and `IBACKTRACK` perform a **local cursor rewind**, not
-systemic backtracking:
+LinkedSpec exposes explicit cursor controls, not systemic backtracking:
 
-1. `BACKTRACK()` rewinds the live cursor to the start of the current local
-   match.
-2. `IBACKTRACK()` rewinds the live cursor to the start of the initial/entry
-   match for the current context. The `I` refers to that initial-match context,
-   the same context exposed to the `I` lifecycle.
-3. The rewind changes only the live input cursor. Match records, accumulators,
+1. `save_cursor()` pushes the live cursor onto an explicit cursor stack.
+2. `restore_cursor()` pops the stack and restores the live cursor to that saved
+   position. Empty stack is a no-op.
+3. `rewind_match_start()` rewinds the live cursor to the start of the current
+   local match.
+4. `rewind_entry_start()` rewinds the live cursor to the start of the
+   initial/entry match for the current context. This is the same initial-match
+   context exposed to the `I` lifecycle.
+5. These operations change only the live input cursor. Match records, accumulators,
    variables, and other side effects are not rolled back.
 
 **What these helpers are NOT:**
@@ -172,9 +174,14 @@ systemic backtracking:
 
 ### 4.2 Interaction with Parse Mode
 
-After either rewind, the next match attempt uses the **rule's declared parse
-mode** (seek or consume) from the restored position. These helpers do not change
-the parse mode.
+After either explicit restore or anchor rewind, the next match attempt uses the
+**rule's declared parse mode** (seek or consume) from the restored position.
+These helpers do not change the parse mode.
+
+The zero-width/lookahead boundary primitive is separate: it detects that a
+structural token would match at a boundary without consuming that token, so a
+rule can capture up to the boundary and leave the cursor ready for the normal
+rule path.
 
 ## 5. Accumulator and Output Shape
 

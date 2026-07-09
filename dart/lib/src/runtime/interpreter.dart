@@ -2059,10 +2059,16 @@ final class LinkedSpecRuntimeEngine {
           context.input,
           context.input.length,
         ).column;
-      case 'BACKTRACK':
+      case 'save_cursor':
+        context.saveCursor();
+        return null;
+      case 'restore_cursor':
+        context.restoreCursor();
+        return null;
+      case 'rewind_match_start':
         context.rewindToLocalMatchStart();
         return null;
-      case 'IBACKTRACK':
+      case 'rewind_entry_start':
         context.rewindToEntryMatchStart();
         return null;
       case 'call':
@@ -4057,6 +4063,7 @@ final class _RuntimeExecutionContext {
       <String, Map<String, Object?>>{};
   final Set<String> activeRuleEntries = <String>{};
   final List<RuntimeLifecycleEvent> lifecycleEvents = <RuntimeLifecycleEvent>[];
+  final List<int> cursorStack = <int>[];
 
   RuntimeMatchRegisters registers;
   Object? retv;
@@ -4091,6 +4098,17 @@ final class _RuntimeExecutionContext {
 
   void exitScopedVariable(_ScopedVariableBinding binding) {
     binding.snapshot.restore(this, binding.name);
+  }
+
+  void saveCursor() {
+    cursorStack.add(cursorCodeUnit);
+  }
+
+  void restoreCursor() {
+    if (cursorStack.isEmpty) {
+      return;
+    }
+    _setCursorCodeUnit(cursorStack.removeLast());
   }
 
   void rewindToLocalMatchStart() {

@@ -452,32 +452,39 @@ The following older helpers remain useful when reading or migrating legacy specs
 | `capture(label)` | `push(array(target), capture_slice())` when the target is explicit |
 | `capture_if(label)` | `part = trim(capture_slice()); if(is_nonempty(part)) { push(array(target), part) }` for the common trimmed-and-nonempty append case; explicit `if(...)` around `capture_slice()` when custom filtering is needed |
 | `CAPTURE_IF()` | `part = trim(capture_slice()); if(is_nonempty(part)) { push(array(current_rule), part) }` when replacing the legacy current-rule append shape |
-| `ibacktrack(label)` / `IBACKTRACK()` | keep as compatibility unless a clearer parser structure removes the need to backtrack |
-| `backtrack(label)` / `BACKTRACK()` | keep as compatibility unless a clearer parser structure removes the need to backtrack |
 
 The `label` argument on the legacy capture helpers is compatibility syntax. The active lowering uses the current rule context, not a new independent target selected by that label text. For `capture(label)`, `capture_if(label)`, and `CAPTURE_IF()`, that means the captured value is appended to the rule-local default accumulator array named after the current rule. New docs and examples should normally prefer explicit helper composition.
 
-### BACKTRACK and IBACKTRACK: local cursor rewind
+### Explicit cursor controls
 
-`BACKTRACK()` and `IBACKTRACK()` reposition the parser cursor. They do not unwind parser state, do not pop a search-tree stack, and do not implement any kind of systemic backtracking. They are single local cursor moves (in the Perl reference backend, one-line `pos()` assignments).
+Cursor-control helpers move or remember the live parser cursor. They do not
+unwind parser state, do not restore side effects, and do not implement systemic
+search-tree backtracking.
 
-- `BACKTRACK()` rewinds the cursor to just before the current **local** match being processed. Concretely, in the Perl reference backend: `pos($$STRING) = $LSPOS - length $LMATCH`. Use it when an action consumed characters for inspection and wants the next rule-level match to start from before those local-match characters.
+| Helper | Behavior | Use it when |
+| --- | --- | --- |
+| `save_cursor()` | Push the current live cursor onto the explicit cursor stack. | later action code may need to return to this exact cursor. |
+| `restore_cursor()` | Pop the explicit cursor stack and move the live cursor to that saved position. Empty stack is a no-op. | paired code should retry or inspect from a previously saved cursor. |
+| `rewind_match_start()` | Move the live cursor to the current local-match start. | the current local match was consumed only to inspect a boundary and should be re-scanned by the next rule-level match. |
+| `rewind_entry_start()` | Move the live cursor to the entry/initial-match start for this context. | the whole entry match should be re-scanned by the next rule-level match. |
 
-- `IBACKTRACK()` rewinds the cursor to just before the **initial/entry** match for the current context. The `I` is the same initial-match concept used by the `I` lifecycle context. Concretely, in the Perl reference backend: `pos($$STRING) = $IPOS - length $IMATCH`. Use it when the whole entry match should be re-consumed by the next rule-level match.
+Keep these semantics separate. `save_cursor()` / `restore_cursor()` are an
+explicit stack. `rewind_match_start()` / `rewind_entry_start()` are direct
+lifecycle-anchor rewinds and do not use hidden stack state.
 
-Both helpers remain visible because they target different runtime anchors: the
-rolling local-match register versus the initial/entry-match register.
+The previous `BACKTRACK()` / `IBACKTRACK()` and lowercase `backtrack(label)` /
+`ibacktrack(label)` spellings are not current portable API. Use the explicit
+helpers above in new specs.
 
-Both are relevant only inside action code attached to a regex slot. The lowercase forms `backtrack(label)` and `ibacktrack(label)` are legacy compatibility spelling; the `label` argument is ignored by the active lowering — the rewind always operates on the current parse cursor, not on a different target selected by label text.
+Because a rewind is just a local cursor move, the current `parse_mode` still
+applies to the next match that follows. Under `consume` mode, the next match
+must succeed contiguously from the rewound cursor position. Under `seek` mode,
+the parser may seek forward from the rewound position.
 
-The important distinction:
-
-- **Local cursor rewind** (`BACKTRACK`, `IBACKTRACK`): move the parser cursor backward so the next match re-scans characters that were already consumed (in the Perl reference backend, a `pos()` move). This is lightweight and does not touch any rule-match state.
-- **Systemic backtracking** (not implemented): unwind a stack of partial rule matches, restore alternative-choice state, and try a different branch. LinkedSpec does not do this. The parser engine is forward-moving: a rule match either advances the cursor or leaves it unchanged on failure.
-
-Because the rewind is just a local cursor move (a `pos()` manipulation in the Perl reference backend), the current `parse_mode` still applies to the next match that follows. Under `consume` mode, the next match must succeed contiguously from the rewound cursor position. Under `seek` mode, the parser may seek forward from the rewound position.
-
-Use `BACKTRACK()` or `IBACKTRACK()` when an action needs to inspect input and then let the next rule-level construct re-consume it. Prefer a clearer structural arrangement (separate rules, explicit marks, or `capture_take()`) when the rewind is avoidable.
+For open-ended captures, prefer a structural boundary when available: a
+zero-width/lookahead boundary can detect that the next structural token would
+match without consuming that token, capture up to the boundary, and leave the
+cursor ready for the normal rule path.
 
 ## Choosing the smallest helper
 

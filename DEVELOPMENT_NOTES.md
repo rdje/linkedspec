@@ -1,15 +1,24 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (BACKTRACK-SURFACE-RUST-ALIGNMENT.1 — explicit cursor controls):
+  Replaced the ambiguous current backtrack helper surface with explicit names across Perl, Rust, and Dart.
+  `save_cursor()` / `restore_cursor()` are the stack-based cursor primitive; `rewind_match_start()` /
+  `rewind_entry_start()` are direct lifecycle-anchor rewinds. The old `BACKTRACK()` / `IBACKTRACK()` and
+  lowercase `backtrack(label)` / `ibacktrack(label)` forms are not current portable API. `specs/ebnf.spec`
+  currently uses `rewind_match_start()` as the semantic-preserving replacement for its former consume-then-rewind
+  annotation boundary; `BACKTRACK-SURFACE-RUST-ALIGNMENT.2` owns the better zero-width/lookahead boundary
+  primitive so that case can detect the next structural token without consuming it.
+
 - 2026-07-09 (DART-BACKEND-PARITY.4.4 — Dart BACKTRACK cursor rewinds):
   Extended `LinkedSpecRuntimeEngine` with cursor/input helper execution and cursor-only rewind operations.
   `BACKTRACK()` rewinds to the current local match start, and `IBACKTRACK()` rewinds to the initial/entry match
   start for the current context. The director clarified that the `I` in `IBACKTRACK` is the Initial/`I` lifecycle
   context, not case-insensitivity. Rewinds update the live cursor/register cursor only; they do not roll back match
   records, stores, accumulators, lifecycle effects, or branch decisions. The runtime now also returns char-based
-  `cursor_*` and `input_*` helper values while preserving Dart's internal code-unit offsets. Lowercase legacy
-  `backtrack(label)` / `ibacktrack(label)` calls canonicalize to the same helpers and ignore the label argument,
-  matching the Perl compatibility contract. Next frontier is `.4.5`, runtime diagnostics and trace controls.
+  `cursor_*` and `input_*` helper values while preserving Dart's internal code-unit offsets. A later
+  Rust-reference cleanup removes the short-lived Dart lowercase backtrack compatibility aliases before they become
+  a durable public surface. Next frontier is `.4.5`, runtime diagnostics and trace controls.
 
 - 2026-07-09 (DART-BACKEND-PARITY.4.3.6 — Dart helper/value no-drift closeout):
   Fixed Dart nested value-path assignment in `LinkedSpecRuntimeEngine` to match the documented Perl/Rust contract.

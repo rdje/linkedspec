@@ -13230,7 +13230,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
     }
 };
 subtest 'emit_context_pipeline_helper_substitutions' => sub {
-    plan tests => 88;
+    plan tests => 90;
 
     my $label = 'Top';
 
@@ -13649,15 +13649,25 @@ subtest 'emit_context_pipeline_helper_substitutions' => sub {
         q{{"kind" => "node"}},
         'hash(...) canonical wrapper rewrite preserves hash constructor semantics'
     );
-    is(
-        LinkedSpec::call_spec_handler_subst($label, 'IBACKTRACK()'),
-        'pos($$STRING) = $IPOS  - length $IMATCH',
-        'IBACKTRACK() helper rewrite preserved'
+    like(
+        LinkedSpec::call_spec_handler_subst($label, 'save_cursor()'),
+        qr/push \@\{\$\$info\{cursor_stack\}\}, pos \$\$STRING/,
+        'save_cursor() helper rewrite saves the live parser cursor'
+    );
+    like(
+        LinkedSpec::call_spec_handler_subst($label, 'restore_cursor()'),
+        qr/pop \@\{\$__ls_cursor_stack\}/,
+        'restore_cursor() helper rewrite restores from the explicit cursor stack'
     );
     is(
-        LinkedSpec::call_spec_handler_subst($label, 'BACKTRACK()'),
+        LinkedSpec::call_spec_handler_subst($label, 'rewind_entry_start()'),
+        'pos($$STRING) = $IPOS  - length $IMATCH',
+        'rewind_entry_start() helper rewrite preserves entry-anchor rewind semantics'
+    );
+    is(
+        LinkedSpec::call_spec_handler_subst($label, 'rewind_match_start()'),
         'pos($$STRING)  = $LSPOS - length $LMATCH',
-        'BACKTRACK() helper rewrite preserved'
+        'rewind_match_start() helper rewrite preserves local-match rewind semantics'
     );
 
     is(
@@ -41443,13 +41453,13 @@ subtest 'ebnf_helper_flow_eliminates_compatibility_surface' => sub {
 
     my $semantic_meta = $descr->{spec}{semantic_annotation}{meta}{action_rewriter};
     ok(
-        scalar(grep { $_ eq 'BACKTRACK' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'REWIND_MATCH_START' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'CAPTURE_SLICE' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IMATCH_GROUP_READ' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'REGEX_SUBST' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$semantic_meta->{canonical_action_ir_nodes}}),
-        'ebnf semantic_annotation canonical action-IR nodes include backtrack/capture/assign/subst/return after declare retirement'
+        'ebnf semantic_annotation canonical action-IR nodes include match-rewind/capture/assign/subst/return after declare retirement'
     );
 
     my $logging_meta = $descr->{spec}{logging_annotation}{meta}{action_rewriter};

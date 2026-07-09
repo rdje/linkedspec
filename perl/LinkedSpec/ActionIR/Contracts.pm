@@ -348,10 +348,10 @@ sub _build_return_contracts {
 }
 
 #------------------------------------------------------------------------------
-# Function: _build_capture_and_backtrack_contracts
-# Purpose : Contracts that normalize capture/backtrack helper macros/functions.
+# Function: _build_capture_and_cursor_contracts
+# Purpose : Contracts that normalize capture and cursor-control helpers.
 #------------------------------------------------------------------------------
-sub _build_capture_and_backtrack_contracts {
+sub _build_capture_and_cursor_contracts {
  my ($label, $d) = @_;
  $d = {} unless ref($d) eq 'HASH';
  return [
@@ -1682,46 +1682,46 @@ sub _build_capture_and_backtrack_contracts {
    },
   },
   {
-   id                 => 'ibacktrack_macro',
-   ir_node            => 'IBACKTRACK',
-   diag_name          => 'IBACKTRACK',
-   unresolved_pattern => qr/\bIBACKTRACK\s*\(\s*\)/o,
+   id                 => 'save_cursor',
+   ir_node            => 'SAVE_CURSOR',
+   diag_name          => 'save_cursor',
+   unresolved_pattern => qr/\bsave_cursor\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bIBACKTRACK\s*\(\s*\)/pos\(\$\$STRING\) = \$IPOS  - length \$IMATCH/g;
+    $code =~ s/\bsave_cursor\s*\(\s*\)/do { \$\$info{cursor_stack} = [] unless ref\(\$\$info{cursor_stack}\) eq 'ARRAY'; push \@{\$\$info{cursor_stack}}, pos \$\$STRING; undef }/g;
     return $code
    },
   },
   {
-   id                 => 'backtrack_macro',
-   ir_node            => 'BACKTRACK',
-   diag_name          => 'BACKTRACK',
-   unresolved_pattern => qr/\bBACKTRACK\s*\(\s*\)/o,
+   id                 => 'restore_cursor',
+   ir_node            => 'RESTORE_CURSOR',
+   diag_name          => 'restore_cursor',
+   unresolved_pattern => qr/\brestore_cursor\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bBACKTRACK\s*\(\s*\)/pos\(\$\$STRING\)  = \$LSPOS - length \$LMATCH/g;
+    $code =~ s/\brestore_cursor\s*\(\s*\)/do { my \$__ls_cursor_stack = \(ref\(\$\$info{cursor_stack}\) eq 'ARRAY'\) ? \$\$info{cursor_stack} : undef; if \(\$__ls_cursor_stack && \@{\$__ls_cursor_stack}\) { my \$__ls_saved_cursor = pop \@{\$__ls_cursor_stack}; pos\(\$\$STRING\) = \$__ls_saved_cursor if defined\(\$__ls_saved_cursor\); } undef }/g;
     return $code
    },
   },
   {
-   id                 => 'ibacktrack',
-   ir_node            => 'IBACKTRACK',
-   diag_name          => 'ibacktrack',
-   unresolved_pattern => qr/\bibacktrack\s*\(\s*\w+\s*\)/o,
+   id                 => 'rewind_entry_start',
+   ir_node            => 'REWIND_ENTRY_START',
+   diag_name          => 'rewind_entry_start',
+   unresolved_pattern => qr/\brewind_entry_start\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bibacktrack\s*\(\s*\w+\s*\)/pos\(\$\$STRING\) = \$IPOS  - length \$IMATCH/g;
+    $code =~ s/\brewind_entry_start\s*\(\s*\)/pos\(\$\$STRING\) = \$IPOS  - length \$IMATCH/g;
     return $code
    },
   },
   {
-   id                 => 'backtrack',
-   ir_node            => 'BACKTRACK',
-   diag_name          => 'backtrack',
-   unresolved_pattern => qr/\bbacktrack\s*\(\s*\w+\s*\)/o,
+   id                 => 'rewind_match_start',
+   ir_node            => 'REWIND_MATCH_START',
+   diag_name          => 'rewind_match_start',
+   unresolved_pattern => qr/\brewind_match_start\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bbacktrack\s*\(\s*\w+\s*\)/pos\(\$\$STRING\)  = \$LSPOS - length \$LMATCH/g;
+    $code =~ s/\brewind_match_start\s*\(\s*\)/pos\(\$\$STRING\)  = \$LSPOS - length \$LMATCH/g;
     return $code
    },
   },
@@ -2196,7 +2196,7 @@ sub build_action_lowering_contracts {
  return [
   @{_build_call_and_dispatch_contracts($label)},
   @{_build_return_contracts($label, $d)},
-  @{_build_capture_and_backtrack_contracts($label, $d)},
+  @{_build_capture_and_cursor_contracts($label, $d)},
   @{_build_passthrough_ir_contracts()},
   @{_build_assignment_and_regex_contracts($d)},
   @{_build_array_pipeline_contracts($d)},

@@ -133,7 +133,6 @@ const knownActionIrCallNames = <String>{
 const supportedActionIrCallNames = <String>{
   'and',
   'array',
-  'BACKTRACK',
   'call',
   'capture_between',
   'capture_from',
@@ -211,7 +210,6 @@ const supportedActionIrCallNames = <String>{
   'flat_hash',
   'has_key',
   'hash',
-  'IBACKTRACK',
   'if',
   'index_of',
   'input_end_col',
@@ -287,10 +285,14 @@ const supportedActionIrCallNames = <String>{
   'replace_substr',
   'return',
   'return_undef',
+  'restore_cursor',
+  'rewind_entry_start',
+  'rewind_match_start',
   'reversed',
   'rm_prefix',
   'rm_suffix',
   'say',
+  'save_cursor',
   'set',
   'set_key',
   'slice',
@@ -360,10 +362,8 @@ const numericAliasActionIrCallNames = <String>{
 
 const currentAliasActionIrCallNames = <String>{
   '=',
-  'backtrack',
   'elif',
   'i',
-  'ibacktrack',
   'otherwise',
   'when',
 };
@@ -406,10 +406,8 @@ const _numericAliasCanonicalNames = <String, String>{
 
 const _currentAliasCanonicalNames = <String, String>{
   '=': 'set',
-  'backtrack': 'BACKTRACK',
   'elif': 'elseif',
   'i': 'if',
-  'ibacktrack': 'IBACKTRACK',
   'otherwise': 'else',
   'when': 'if',
 };
@@ -593,7 +591,12 @@ const _inputHelpers = <String>{
   'input_text',
 };
 
-const _runtimeHelpers = <String>{'BACKTRACK', 'IBACKTRACK'};
+const _runtimeHelpers = <String>{
+  'restore_cursor',
+  'rewind_entry_start',
+  'rewind_match_start',
+  'save_cursor',
+};
 
 const _outputHelpers = <String>{'print', 'print_each', 'say'};
 

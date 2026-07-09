@@ -160,34 +160,34 @@ Top::OR{1}
     ]);
   });
 
-  test('rewinds cursor through BACKTRACK and IBACKTRACK helpers', () {
-    final ibacktrackEngine = _engine(r'''
+  test('rewinds cursor through explicit match and entry helpers', () {
+    final entryRewindEngine = _engine(r'''
 Top::AND
  I { set(array(log), []) }
  /ab/ -> Top[0] { push(array(log), hash("slot", 0, "cursor", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos())) }
  /cd/ -> Top[1] {
    before = cursor_pos();
-   IBACKTRACK();
+   rewind_entry_start();
    push(array(log), hash("slot", 1, "before", before, "after", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos(), "rest", cursor_rest()))
  }
  E { return(copy(array(log))) }
 ''');
-    final backtrackEngine = _engine(r'''
+    final matchRewindEngine = _engine(r'''
 Top::AND
  I { set(array(log), []) }
  /ab/ -> Top[0] { push(array(log), hash("slot", 0, "cursor", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos())) }
  /cd/ -> Top[1] {
    before = cursor_pos();
-   BACKTRACK();
+   rewind_match_start();
    push(array(log), hash("slot", 1, "before", before, "after", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos(), "rest", cursor_rest()))
  }
  E { return(copy(array(log))) }
 ''');
 
-    final ibacktrackResult = ibacktrackEngine.parse('abcd');
-    final backtrackResult = backtrackEngine.parse('abcd');
+    final entryRewindResult = entryRewindEngine.parse('abcd');
+    final matchRewindResult = matchRewindEngine.parse('abcd');
 
-    expect(ibacktrackResult.value, [
+    expect(entryRewindResult.value, [
       {'slot': 0, 'cursor': 2, 'entry_start': 0, 'match_start': 0},
       {
         'slot': 1,
@@ -198,9 +198,9 @@ Top::AND
         'rest': 'abcd',
       },
     ]);
-    expect(ibacktrackResult.cursorCodeUnit, 0);
+    expect(entryRewindResult.cursorCodeUnit, 0);
 
-    expect(backtrackResult.value, [
+    expect(matchRewindResult.value, [
       {'slot': 0, 'cursor': 2, 'entry_start': 0, 'match_start': 0},
       {
         'slot': 1,
@@ -211,31 +211,27 @@ Top::AND
         'rest': 'cd',
       },
     ]);
-    expect(backtrackResult.cursorCodeUnit, 2);
+    expect(matchRewindResult.cursorCodeUnit, 2);
   });
 
-  test('canonicalizes legacy lowercase backtrack helper spellings', () {
-    final ibacktrackEngine = _engine(r'''
+  test('saves and restores cursor explicitly through stack helpers', () {
+    final engine = _engine(r'''
 Top::AND
- /ab/ -> Top[0] { cursor_pos() }
- /cd/ -> Top[1] { ibacktrack(Top) }
- E { return(cursor_pos()) }
-''');
-    final backtrackEngine = _engine(r'''
-Top::AND
- /ab/ -> Top[0] { cursor_pos() }
- /cd/ -> Top[1] { backtrack(Top) }
- E { return(cursor_pos()) }
-''');
+ /ab/ -> Top[0] { save_cursor() }
+ /cd/
+ E { restore_cursor(); return(hash("cursor", cursor_pos(), "rest", cursor_rest())) }
+''', parseMode: LinkedSpecParseMode.consume);
 
-    expect(ibacktrackEngine.parse('abcd').value, 0);
-    expect(backtrackEngine.parse('abcd').value, 2);
+    final result = engine.parse('abcd');
+
+    expect(result.value, {'cursor': 2, 'rest': 'cd'});
+    expect(result.cursorCodeUnit, 2);
   });
 
   test('applies consume matching from a rewound cursor', () {
     final engine = _engine(r'''
 Top::AND
- /ab/ -> Top[0] { BACKTRACK() }
+ /ab/ -> Top[0] { rewind_match_start() }
  /ab/
  E { return(hash("cursor", cursor_pos(), "rest", cursor_rest())) }
 ''', parseMode: LinkedSpecParseMode.consume);

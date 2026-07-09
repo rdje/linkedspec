@@ -55,8 +55,8 @@ pub struct RuntimeContext {
     pub capture_start: Option<usize>,
     /// Exit flag — set by exit_now(status).
     pub exit_status: Option<i32>,
-    /// BACKTRACK cursor save stack — BACKTRACK pushes, IBACKTRACK pops and restores.
-    backtrack_stack: Vec<usize>,
+    /// Explicit cursor save stack used by save_cursor()/restore_cursor().
+    cursor_stack: Vec<usize>,
     /// The current rule invocation's pending return value, set by `return(...)`.
     /// `execute_rule` clears it on entry and reads it on exit, so each rule
     /// invocation reports its own return value. This is the source of the
@@ -159,7 +159,7 @@ impl RuntimeContext {
             marks: std::collections::HashMap::new(),
             capture_start: None,
             exit_status: None,
-            backtrack_stack: Vec::new(),
+            cursor_stack: Vec::new(),
             return_value: None,
             recursion_active: std::collections::HashSet::new(),
             user_functions_active: Vec::new(),
@@ -734,22 +734,32 @@ impl RuntimeContext {
         self.recursion_active.remove(&(label.to_string(), pos));
     }
 
-    // ── BACKTRACK cursor stack ──
+    // ── Explicit cursor controls ──
 
-    /// Save current position onto the backtrack stack (BACKTRACK marker).
-    pub fn push_backtrack(&mut self) {
-        self.backtrack_stack.push(self.pos);
+    /// Save current position onto the explicit cursor stack.
+    pub fn save_cursor(&mut self) {
+        self.cursor_stack.push(self.pos);
     }
 
-    /// Restore position from the backtrack stack (IBACKTRACK marker).
+    /// Restore position from the explicit cursor stack.
     /// Returns false if the stack was empty (no saved position).
-    pub fn pop_backtrack(&mut self) -> bool {
-        if let Some(saved) = self.backtrack_stack.pop() {
+    pub fn restore_cursor(&mut self) -> bool {
+        if let Some(saved) = self.cursor_stack.pop() {
             self.pos = saved;
             true
         } else {
             false
         }
+    }
+
+    /// Rewind the live cursor to the current local-match start.
+    pub fn rewind_match_start(&mut self) {
+        self.pos = self.match_start_byte;
+    }
+
+    /// Rewind the live cursor to the entry/initial-match start for this context.
+    pub fn rewind_entry_start(&mut self) {
+        self.pos = self.entry_start_byte;
     }
 
     // ── Accumulator ──

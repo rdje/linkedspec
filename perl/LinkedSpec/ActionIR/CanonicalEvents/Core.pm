@@ -136,6 +136,10 @@ value_drop_statement             => 'VALUE_DROP',
  match_end_pos                    => 'MATCH_END_POS_READ',
  match_end_line                   => 'MATCH_END_LINE_READ',
  match_end_col                    => 'MATCH_END_COL_READ',
+ save_cursor                      => 'SAVE_CURSOR',
+ restore_cursor                   => 'RESTORE_CURSOR',
+ rewind_entry_start               => 'REWIND_ENTRY_START',
+ rewind_match_start               => 'REWIND_MATCH_START',
  if_flow                          => 'IF',
  elseif_flow                      => 'ELIF',
  else_flow                        => 'ELSE',
@@ -163,8 +167,6 @@ sub _kind_override_for_contract_id {
  return 'CALL'      if $contract_id eq 'return_call';
  return 'PUSH'      if $contract_id eq 'push_single_arg' || $contract_id eq 'push_indexed_arg' || $contract_id eq 'push_target_arg' || $contract_id eq 'push_target_indexed_arg' || $contract_id eq 'push_scope_target_arg';
  return 'CAPTURE_IF' if $contract_id eq 'capture_if' || $contract_id eq 'capture_if_macro';
- return 'IBACKTRACK' if $contract_id eq 'ibacktrack' || $contract_id eq 'ibacktrack_macro';
- return 'BACKTRACK'  if $contract_id eq 'backtrack' || $contract_id eq 'backtrack_macro';
  return undef
 }
 
