@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.2 — close Dart starter corpus batch**
+  (DONE — first 40 shipped manifest fixtures execute green on Dart).
+
+  **Change:** Dart now treats non-null empty array/hash returns as successful rule matches, uses the child
+  rule's `matched` bit for blind dispatch instead of output truthiness, and executes marker-form
+  `if(...)` / `elseif(...)` / `else()` / `endif()` statement chains as grouped branches in action and value
+  blocks. The starter shipped-corpus batch now passes with
+  `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40`.
+
+  **Boundary:** This is a bounded starter corpus proof, not full 99-fixture Dart corpus parity. Active
+  implementation work advances to `DART-BACKEND-PARITY.6.2.3` for helper/control/receiver/user-function/tree
+  traversal fixtures.
+
+  **Verification:** Dart format/analyze/full tests, default corpus loader/help, bounded 40-fixture execute
+  smoke, CLI help, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.5.3 — preserve Dart staged descriptor shapes**
   (DONE — staged parse-job/function-registry descriptor-shape proof).
 

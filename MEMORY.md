@@ -18,21 +18,22 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.6.2.1` — Dart corpus execution now has named/bounded selection:
+- latest_completed_leaf: `DART-BACKEND-PARITY.6.2.2` — Dart now executes the starter shipped-corpus batch green:
+  `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40`
+  passes after empty aggregate returns count as successful matches and marker-form if/else/endif chains execute
+  as grouped branches.
+- prior_leaf: `DART-BACKEND-PARITY.6.2.1` — Dart corpus execution has named/bounded selection:
   `executeCorpusFixtures(...)` accepts `caseNames`/`offset`/`limit`, and `bin/corpus_runner.dart --execute`
   reports selected fixture PASS/FAIL summaries while requiring `--case` or `--limit`.
-- prior_leaf: `DART-BACKEND-PARITY.6.2.0` — the broad Dart shipped-corpus expansion is split into recoverable
-  child leaves for opt-in runner reporting, starter/core fixtures, helper/control/runtime fixtures, and
-  shipped-spec/parser-smoke fixtures.
 - latest_commit: this resume block is prepared for commit
-  `DART-BACKEND-PARITY.6.2.1 - add Dart executable corpus selection`; previous committed HEAD is
-  `52cef626 DART-BACKEND-PARITY.6.2.0 - split Dart corpus expansion batches`.
+  `DART-BACKEND-PARITY.6.2.2 - close Dart starter corpus batch`; previous committed HEAD is
+  `e055185e DART-BACKEND-PARITY.6.2.1 - add Dart executable corpus selection`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.6.2.2` after the current commit is clean.
-- next_action: resume PNT at `DART-BACKEND-PARITY.6.2.2` for the starter proof-edge/autoexist/core terse corpus
-  batch. The director's single-source `foo.spec` parser+stimuli roundtrip idea is brainstorming for later, not a
-  current pivot. The AND-only compact sequence / child-edge
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.6.2.3` after the current commit is clean.
+- next_action: resume PNT at `DART-BACKEND-PARITY.6.2.3` for helper/control/receiver/user-function/tree traversal
+  corpus fixtures. The director's single-source `foo.spec` parser+stimuli roundtrip idea is brainstorming for
+  later, not a current pivot. The AND-only compact sequence / child-edge
   quantifier idea remains deferred in `BACKTRACK-SURFACE-RUST-ALIGNMENT`.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, COMMIT, task-tree index,
   active Dart task tree, ROADMAP/ROADMAP_V2, mdBook trace/runtime/status/backend-handoff chapters, relevant ADR/KM
@@ -44,5 +45,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `.6.2.1` commit; do not pivot unless the repo is
+- blockers: none. in_flight_uncommitted: none expected after the `.6.2.2` commit; do not pivot unless the repo is
   handoff-ready.

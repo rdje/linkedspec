@@ -444,7 +444,7 @@ final class LinkedSpecRuntimeEngine {
           edge.target.index,
           context,
         );
-        final childMatched = _truthy(child.value);
+        final childMatched = child.matched;
         context.trace?.traceDecision(
           'dart_runtime:child_dispatch',
           childMatched,
@@ -479,7 +479,7 @@ final class LinkedSpecRuntimeEngine {
       final edge = rule.blindEdges[edgeIndex];
       final before = context.cursorCodeUnit;
       final child = _executeRule(edge.target.label, edge.target.index, context);
-      final childMatched = _truthy(child.value);
+      final childMatched = child.matched;
       context.trace?.traceDecision(
         'dart_runtime:child_dispatch',
         childMatched,
@@ -899,6 +899,17 @@ final class LinkedSpecRuntimeEngine {
         currentEdge,
       );
     }
+    if (expr is ActionControlIfExpr &&
+        expr.branchRole == 'if' &&
+        expr.body == null) {
+      return _executeMarkerIfChainStatement(
+        statements,
+        index,
+        context,
+        ruleLabel,
+        currentEdge,
+      );
+    }
     if (expr is ActionControlWhileExpr && expr.body != null) {
       _executeAttachedWhileStatement(expr, context, ruleLabel, currentEdge);
       return _StatementStep(index);
@@ -983,6 +994,53 @@ final class LinkedSpecRuntimeEngine {
       }
     }
     return _StatementStep(nextIndex);
+  }
+
+  _StatementStep _executeMarkerIfChainStatement(
+    List<ActionStatement> statements,
+    int index,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final selection = _selectMarkerIfChain(
+      statements,
+      index,
+      context,
+      ruleLabel,
+      currentEdge,
+    );
+    if (selection.start != null && selection.end != null) {
+      _executeActionStatementRange(
+        statements,
+        selection.start!,
+        selection.end!,
+        context,
+        ruleLabel,
+        currentEdge,
+      );
+    }
+    return _StatementStep(selection.nextIndex);
+  }
+
+  void _executeActionStatementRange(
+    List<ActionStatement> statements,
+    int start,
+    int end,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    for (var cursor = start; cursor < end; cursor += 1) {
+      final step = _executeActionStatementAt(
+        statements,
+        cursor,
+        context,
+        ruleLabel,
+        currentEdge,
+      );
+      cursor = step.nextIndex;
+    }
   }
 
   void _executeAttachedWhileStatement(
@@ -1073,6 +1131,26 @@ final class LinkedSpecRuntimeEngine {
           expr.branchRole == 'if' &&
           expr.body != null) {
         final step = _executeValueIfChainStatement(
+          statements,
+          index,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+        if (step.flow.returned) {
+          return step.flow;
+        }
+        if (isLast && finalExpressionYields) {
+          return const _ValueBlockFlow.returned(null);
+        }
+        index = step.nextIndex;
+        continue;
+      }
+
+      if (expr is ActionControlIfExpr &&
+          expr.branchRole == 'if' &&
+          expr.body == null) {
+        final step = _executeValueMarkerIfChainStatement(
           statements,
           index,
           context,
@@ -1230,6 +1308,192 @@ final class LinkedSpecRuntimeEngine {
         finalExpressionYields: false,
       ),
     );
+  }
+
+  _ValueStatementStep _executeValueMarkerIfChainStatement(
+    List<ActionStatement> statements,
+    int index,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final selection = _selectMarkerIfChain(
+      statements,
+      index,
+      context,
+      ruleLabel,
+      currentEdge,
+    );
+    if (selection.start == null || selection.end == null) {
+      return _ValueStatementStep(
+        selection.nextIndex,
+        const _ValueBlockFlow.continued(),
+      );
+    }
+    return _ValueStatementStep(
+      selection.nextIndex,
+      _executeValueStatementRange(
+        statements,
+        selection.start!,
+        selection.end!,
+        context,
+        ruleLabel,
+        currentEdge,
+      ),
+    );
+  }
+
+  _ValueBlockFlow _executeValueStatementRange(
+    List<ActionStatement> statements,
+    int start,
+    int end,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    for (var cursor = start; cursor < end; cursor += 1) {
+      final statement = statements[cursor];
+      final expr = statement.expr;
+
+      if (expr is ActionControlIfExpr &&
+          expr.branchRole == 'if' &&
+          expr.body == null) {
+        final step = _executeValueMarkerIfChainStatement(
+          statements,
+          cursor,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+        if (step.flow.returned) {
+          return step.flow;
+        }
+        cursor = step.nextIndex;
+        continue;
+      }
+
+      final returnPayload = _localReturnPayload(expr);
+      if (returnPayload != null) {
+        return _ValueBlockFlow.returned(
+          returnPayload.hasValue
+              ? _copyValue(
+                  _evaluateExpression(
+                    returnPayload.value!,
+                    context,
+                    ruleLabel,
+                    currentEdge: currentEdge,
+                  ),
+                )
+              : null,
+        );
+      }
+
+      _evaluateExpression(
+        expr,
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+        statementContext: true,
+      );
+    }
+    return const _ValueBlockFlow.continued();
+  }
+
+  _MarkerIfSelection _selectMarkerIfChain(
+    List<ActionStatement> statements,
+    int index,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final first = statements[index].expr as ActionControlIfExpr;
+    int? selectedStart;
+    int? selectedEnd;
+    var selected = false;
+    var depth = 0;
+    var nextIndex = statements.length - 1;
+
+    if (_truthy(
+      _evaluateExpression(
+        first.condition,
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      ),
+    )) {
+      selectedStart = index + 1;
+      selected = true;
+    }
+
+    for (var cursor = index + 1; cursor < statements.length; cursor += 1) {
+      final expr = statements[cursor].expr;
+      if (_isMarkerIfStart(expr)) {
+        depth += 1;
+        continue;
+      }
+      if (_isMarkerIfEnd(expr)) {
+        if (depth > 0) {
+          depth -= 1;
+          continue;
+        }
+        if (selected && selectedEnd == null) {
+          selectedEnd = cursor;
+        }
+        nextIndex = cursor;
+        break;
+      }
+      if (depth != 0) {
+        continue;
+      }
+      if (expr is ActionControlIfExpr &&
+          expr.branchRole == 'elseif' &&
+          expr.body == null) {
+        if (selected && selectedEnd == null) {
+          selectedEnd = cursor;
+        }
+        if (!selected &&
+            _truthy(
+              _evaluateExpression(
+                expr.condition,
+                context,
+                ruleLabel,
+                currentEdge: currentEdge,
+              ),
+            )) {
+          selectedStart = cursor + 1;
+          selected = true;
+        }
+        continue;
+      }
+      if (expr is ActionControlElseExpr && expr.body == null) {
+        if (selected && selectedEnd == null) {
+          selectedEnd = cursor;
+        }
+        if (!selected) {
+          selectedStart = cursor + 1;
+          selected = true;
+        }
+      }
+    }
+
+    if (selected && selectedEnd == null) {
+      selectedEnd = statements.length;
+    }
+    return _MarkerIfSelection(
+      start: selectedStart,
+      end: selectedEnd,
+      nextIndex: nextIndex,
+    );
+  }
+
+  bool _isMarkerIfStart(ActionExpr expr) {
+    return expr is ActionControlIfExpr &&
+        expr.branchRole == 'if' &&
+        expr.body == null;
+  }
+
+  bool _isMarkerIfEnd(ActionExpr expr) {
+    return expr is ActionControlMarkerExpr && expr.canonicalKeyword == 'endif';
   }
 
   _ValueBlockFlow _executeValueWhileStatement(
@@ -4751,6 +5015,18 @@ final class _ValueStatementStep {
   final _ValueBlockFlow flow;
 }
 
+final class _MarkerIfSelection {
+  const _MarkerIfSelection({
+    required this.start,
+    required this.end,
+    required this.nextIndex,
+  });
+
+  final int? start;
+  final int? end;
+  final int nextIndex;
+}
+
 final class _ValueBlockFlow {
   const _ValueBlockFlow.continued() : returned = false, value = null;
 
@@ -4971,7 +5247,7 @@ final class _ActionReturn implements Exception {
 }
 
 _RuleResult _returned(Object? value) {
-  return _RuleResult(matched: _truthy(value), value: _copyValue(value));
+  return _RuleResult(matched: value != null, value: _copyValue(value));
 }
 
 Object? _captureAt(

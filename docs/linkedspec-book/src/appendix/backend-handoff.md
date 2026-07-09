@@ -251,7 +251,9 @@ the Dart parser, compiler, and runtime engine, then compares engine output to th
 backend-neutral expected value wrapped one level with structural JSON equality.
 It supports named and bounded fixture selection through the library and opt-in
 CLI `--execute` mode; unbounded CLI execution stays rejected until full corpus
-parity is ready. The
+parity is ready. The first 40 shipped manifest fixtures now pass through bounded
+execute mode, which proves the starter proof-edge, autoexist, mutation, and core
+terse runtime batch before the remaining corpus groups. The
 future Dart closeout now includes a distinct Dart-specific LinkedSpec CLI
 entrypoint; future Julia and Lua backend plans must own their own variant-specific
 CLIs rather than relying on one ambiguous shared command. Dart
@@ -346,7 +348,10 @@ direct hash-index assignment values, bare-overlay `merge_hash`, and explicit
 flat-style hash splicing inside `hash(...)`. It also executes expression-valued
 blocks with block-local `return(...)`, attached and inline structured controls,
 helper/receiver `with` trailing blocks, and hash/array tree traversal receiver
-callbacks with scoped callback bindings. It now also executes explicit cursor
+callbacks with scoped callback bindings. It also treats empty array/hash returns
+as successful non-null rule matches, uses child-rule match bits for blind
+dispatch, and executes marker-form `if(...)` / `elseif(...)` / `else()` /
+`endif()` statement chains as grouped branches. It now also executes explicit cursor
 controls: `save_cursor()` / `restore_cursor()` for stack-based cursor restore,
 `rewind_match_start()` / `rewind_entry_start()` for lifecycle-anchor rewinds,
 `capture_until_boundary(rule[, ...])` for non-consuming structural boundary
@@ -373,8 +378,9 @@ standalone calls discard their results, and direct/mutual recursion is
 diagnosed. Dart also preserves staged user-function descriptor shapes across
 parsed functions, compiled registry jobs, descriptor records, and runtime output.
 Dart corpus parity has started with controlled manifest fixtures and now has safe
-named/bounded execution selection for shipped-corpus batching. Full shipped
-99-fixture corpus parity remains a later Dart leaf.
+named/bounded execution selection for shipped-corpus batching. The first 40
+manifest fixtures pass in bounded execute mode; full shipped 99-fixture corpus
+parity remains a later Dart leaf.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

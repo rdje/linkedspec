@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.2 — close Dart starter corpus batch
+
+**Scope:** Dart runtime interpreter semantics, focused runtime tests, starter corpus-batch evidence, Dart
+README/mdBook status text, live docs, task-tree status, and Knowledge Map facts.
+
+**Change:** Closed the first shipped-corpus execution batch by making Dart treat non-null empty aggregate returns
+as successful rule matches, making blind child dispatch trust the child rule's match bit instead of output
+truthiness, and executing marker-form `if(...)` / `elseif(...)` / `else()` / `endif()` statement chains as one
+branch group. The previously failing starter fixtures for empty `copy(hash(...))` returns and boolean/mutation
+marker-form flow now pass, bringing the bounded `--execute --limit 40` corpus run green.
+
+**Validation:** Focused runtime interpreter tests, Dart format/analyze/full tests, default 99-fixture corpus loader,
+corpus runner help, bounded 40-fixture execute-mode smoke, CLI help, mdBook build, memory architecture, Knowledge
+Map check, task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.1 — add Dart executable corpus selection
 
 **Scope:** Dart corpus-runner CLI, corpus execution selection API, focused corpus tests, Dart README/mdBook

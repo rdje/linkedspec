@@ -30,12 +30,13 @@ dart run bin/linkedspec_dart.dart --help
 dart run bin/corpus_runner.dart --help
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1
+dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40
 ```
 
 ## Status
 
-`DART-BACKEND-PARITY.6.2.1` is the current completed corpus-parity boundary;
-`.6.2.2` is the next starter corpus-batch frontier. The package can round-trip
+`DART-BACKEND-PARITY.6.2.2` is the current completed corpus-parity boundary;
+`.6.2.3` is the next helper/control corpus-batch frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -87,6 +88,10 @@ with scoped callback bindings. It now also executes `save_cursor()` /
 `restore_cursor()` stack semantics, `rewind_match_start()` /
 `rewind_entry_start()` anchor rewinds, and char-based cursor/input helpers such
 as `cursor_pos`, `cursor_rest`, `input_slice`, and `input_end_pos`.
+The runtime now also treats empty array/hash returns as successful non-null rule
+matches, uses child-rule match bits for blind dispatch, and executes
+marker-form `if(...)` / `elseif(...)` / `else()` / `endif()` statement chains
+as grouped branches.
 Runtime failures now expose `RuntimeDiagnostic` payloads through
 `RuntimeInterpreterException.diagnostic` with stable `type`, `stage`,
 `owner_stage`, `summary`, `detail`, `top_rule`, `rule_label`,
@@ -103,6 +108,7 @@ It now accepts named or bounded fixture selection through `caseNames`, `offset`,
 and `limit`. The corpus-runner CLI exposes that surface through opt-in
 `--execute` mode with `--case`, `--offset`, and `--limit`; unbounded CLI
 execution is rejected until the full shipped-corpus gate is ready, so the default
-99-fixture command remains a manifest-loader smoke.
+99-fixture command remains a manifest-loader smoke. The first 40 shipped
+manifest fixtures now pass through bounded execute mode.
 Full shipped-corpus output parity remains a later leaf in
 `docs/tasks/DART-BACKEND-PARITY.md`.

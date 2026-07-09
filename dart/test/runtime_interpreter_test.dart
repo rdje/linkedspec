@@ -774,6 +774,59 @@ Top::
     expect(result.value, 'done');
   });
 
+  test('treats empty aggregate returns as successful matches', () {
+    final hashEngine = _engine(r'''
+Top::
+ /x/ -> Done { return(copy(hash(m))) }
+
+Done::
+ /[a-z]+/
+''');
+    final arrayEngine = _engine(r'''
+Top::
+ /x/ -> Done { return(copy(array(items))) }
+
+Done::
+ /[a-z]+/
+''');
+
+    final hashResult = hashEngine.parse('xhello');
+    final arrayResult = arrayEngine.parse('xhello');
+
+    expect(hashResult.matched, isTrue);
+    expect(hashResult.value, <String, Object?>{});
+    expect(hashResult.cursorCodeUnit, 1);
+    expect(arrayResult.matched, isTrue);
+    expect(arrayResult.value, <Object?>[]);
+    expect(arrayResult.cursorCodeUnit, 1);
+  });
+
+  test('executes marker-form if else endif statement chains', () {
+    final engine = _engine(r'''
+Top::
+ /x/
+ E {
+   flag = true;
+   items += false;
+   push(items, true);
+   meta["enabled"] = true;
+   if(false);
+   return("bad");
+   else();
+   return(array(flag, copy(array(items)), copy(hash(meta))));
+   endif()
+ }
+''');
+
+    final result = engine.parse('x');
+
+    expect(result.value, [
+      true,
+      [false, true],
+      {'enabled': true},
+    ]);
+  });
+
   test('executes hash and array tree traversal receiver blocks', () {
     final engine = _engine(r'''
 Top::

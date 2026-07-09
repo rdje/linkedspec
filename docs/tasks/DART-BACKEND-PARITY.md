@@ -817,13 +817,21 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.1 - add Dart executable corpus selection`
 
 - ID: `DART-BACKEND-PARITY.6.2.2`
-  Status: `pending`
+  Status: `done`
   Goal: Close the starter proof-edge, autoexist, and core terse runtime batch.
   Acceptance: The early manifest fixtures covering proof-edge returns, autoexist behavior, scalar/array/hash
     store reads, assignment/mutation, and primitive helper surfaces either pass on Dart or each blocked fixture is
     routed to a narrowly owned root-cause leaf with Perl/Rust oracle evidence.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** The bounded shipped-corpus starter run
+    `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40`
+    passes. Runtime fixes covered the observed root causes: `_returned(...)` now treats any non-null returned
+    value, including empty arrays and hashes, as a successful rule match; blind child dispatch trusts the child
+    rule's `matched` bit instead of output truthiness; and marker-form `if(...)` / `elseif(...)` / `else()` /
+    `endif()` statement chains execute as grouped branches in action and value blocks. Focused runtime tests lock
+    empty aggregate returns and marker-form branch execution. Dart format/analyze/full tests, default corpus
+    loader/help, bounded 40-fixture execute smoke, CLI help, mdBook, memory architecture, Knowledge Map,
+    task-tree metadata, doctrine, and `git diff --check` pass.
+  Commit: `DART-BACKEND-PARITY.6.2.2 - close Dart starter corpus batch`
 
 - ID: `DART-BACKEND-PARITY.6.2.3`
   Status: `pending`

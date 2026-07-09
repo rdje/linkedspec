@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.2 — Dart starter corpus batch):
+  The first 40 shipped manifest fixtures now execute green on Dart through `bin/corpus_runner.dart --execute
+  --limit 40`. Two runtime semantics were missing from the interpreter: rule return success cannot be based on
+  output truthiness because `[]` and `{}` are valid successful outputs, and marker-form `if(false); ... else();
+  ... endif()` must execute as one branch chain rather than as independent statements. `_returned(...)` now marks
+  any non-null return value as matched while `return_undef` / null remains a non-match, blind child dispatch uses
+  the child rule's `matched` bit, and the action/value block runners select marker-form `if` / `elseif` / `else`
+  ranges with nesting-depth tracking before executing the selected branch. Focused runtime tests lock empty
+  aggregate returns and marker-form branch execution; the bounded shipped-corpus proof covers starter proof-edge,
+  autoexist, mutation, and core terse cases.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.1 — Dart executable corpus selection):
   Added the safe selection surface for the executable Dart corpus harness. `executeCorpusFixtures(...)` now
   accepts `caseNames`, `offset`, and `limit` so callers can run named cases or bounded manifest slices without
