@@ -37,8 +37,8 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.6.2.4.4.2` is the current completed corpus-parity boundary;
-`.6.2.4.4.3` is the next shipped-spec/parser-smoke residual frontier for helper mutation/text normalization parity. The package
+`DART-BACKEND-PARITY.6.2.4.4.3` is the current completed corpus-parity boundary;
+`.6.2.4.4.4` is the next shipped-spec/parser-smoke residual frontier for legacy structural smoke output parity. The package
 can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
@@ -102,6 +102,10 @@ unless an explicit aggregate write supersedes the scalar-held value.
 Append-style mutations such as `push(array(name), value)` and `items += value`
 now update a current scalar-held list before falling back to aggregate storage,
 and `call(...)` refreshes the runtime `retv` channel with the child result.
+Statement-form `substr(...)` and `regex_subst(...)` now mutate scalar targets,
+replacement strings expand `$n` capture placeholders, explicit
+`split(array(target), ...)` replaces the named aggregate target, and entry/local
+regex start line/column helpers are available.
 Rule regexes and helper regex values now share a runtime compiler that normalizes
 POSIX character classes, inline `i`/`m`/`s` flags, scoped flag groups by lifting
 their options to the compiled Dart `RegExp`, possessive quantifier
@@ -136,7 +140,7 @@ execution is rejected until the full shipped-corpus gate is ready, so the defaul
 manifest fixtures and the non-`fn` middle helper/control/receiver fixtures now
 pass through bounded execute mode. Top-level `fn` corpus fixtures remain routed
 to `DART-BACKEND-PARITY.6.2.5` for spec-defined function-shell execution. The final
-31-fixture shipped-spec/parser-smoke window is now 19/31 green. The residual work is split into portmap/action-edge
+31-fixture shipped-spec/parser-smoke window is now 22/31 green. The residual work is split into portmap/action-edge
 result shape, hlink delimiter/capture, helper mutation/text normalization, legacy structural smoke output, residual
 closeout, and PCRE structural-regex leaves.
 Basic regex-dialect bridging is now done; deeper PCRE structural constructs such as
@@ -144,8 +148,9 @@ Basic regex-dialect bridging is now done; deeper PCRE structural constructs such
 `DART-BACKEND-PARITY.6.2.4.6`.
 The helper/action bridge, recursive/default-mode bridge, portmap result-shape bridge, and hlink delimiter/capture
 bridge are also done; tclite, recursive top-rule, all five portmap fixtures, all five hlink fixtures,
-`vhdl_library_use`, and `tablegrep_simple_term` pass. The diagnostic window is now 19/31 green. Remaining non-PCRE
-failures are split under `.6.2.4.4`, with `.6.2.4.4.3` next for helper mutation/text normalization parity; deeper
+`vhdl_library_use`, `tablegrep_simple_term`, `simenv_multiline_value`, `lib_reader_sattribute`, and
+`lib_reader_cattribute` pass. The diagnostic window is now 22/31 green. Remaining non-PCRE
+failures are split under `.6.2.4.4`, with `.6.2.4.4.4` next for legacy structural smoke output parity; deeper
 PCRE structural regex constructs such as Lispish `(?R)` stay routed to `.6.2.4.6`.
 Full shipped-corpus output parity remains a later leaf in
 `docs/tasks/DART-BACKEND-PARITY.md`.

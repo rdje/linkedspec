@@ -24,16 +24,20 @@ The active Dart backend follows the same interpreter-first path. It now has sour
 compiled-spec state, runtime interpretation, staged user-function body parsing, exact-arity user-function runtime
 execution, and a controlled executable corpus harness whose first 40 shipped manifest fixtures plus the non-`fn`
 middle helper/control/receiver fixtures pass through bounded execute mode. The final shipped-spec/parser-smoke
-window is now 19/31 green and split into focused residual leaves after the regex-dialect, helper/action,
-recursion/default-mode, portmap result-shape, and hlink delimiter/capture bridges. Basic
+window is now 22/31 green and split into focused residual leaves after the regex-dialect, helper/action,
+recursion/default-mode, portmap result-shape, hlink delimiter/capture, and helper mutation/text-normalization
+bridges. Basic
 Dart regex-dialect bridging is now in place for POSIX character classes, inline/scoped flags, possessive
 quantifier markers, lower-bound `{,n}` quantifiers, and Python-style named captures. Scoped flag groups are accepted
 by lifting their options to Dart `RegExp`. The missing helper/action bridge is also in place for direct
 capture-slice helpers, diagnostic output helpers, logical helpers, `exit_now`, and quoted helper-call delimiter
 parsing. Dart now also resolves tclite-style action-edge regex dispatch, scopes explicit aggregate resets per rule
 invocation, refreshes `retv` from `call(...)`, and appends into scalar-held lists created by assignments such as
-`items = []`, so the tclite, recursive top-rule, hlink, and tablegrep parser-smoke fixtures pass. Deeper PCRE
-structural constructs remain split follow-up work. Full shipped 99-fixture corpus parity is still in progress.
+`items = []`. Statement-form `substr(...)` / `regex_subst(...)` mutations, explicit
+`split(array(target), ...)` replacement, and entry/local line helpers are also implemented, so the tclite,
+recursive top-rule, hlink, tablegrep, simenv, and `lib_reader` parser-smoke fixtures pass. Deeper PCRE structural
+constructs and legacy structural-output mismatches remain split follow-up work. Full shipped 99-fixture corpus
+parity is still in progress.
 
 The Method-like DSL migration track is also complete: all 21 shipped specs are at zero compatibility-surface rules, 100+ helpers across 10 families are regression-locked, current helper names are the only documented helper surface, and fluent/block equivalence is verified. Current setup and read forms use direct assignments, `set(...)`, bare scalar reads, `array(...)`, `hash(...)`, `push(...)`, `copy(...)`, and `return(...)`. Unknown typed calls in return/value positions diagnose through the generic unknown-helper path instead of emitting generated host-language calls, while unregistered standalone function-shaped statements remain explicit raw compatibility debt. Top-level `fn name(args) { ... }` definition shells are parsed by `specs/user_function_definition.spec` and projected through the active user-function registry, with params, arity, source/body spans, body source, neutral `body_payload`, neutral `body_parse_job`, and body AST recorded. The parse-job sidecar now dispatches through the minimal staged registry provider for `actionir-body.spec` / `action_block`, and the returned `action_block` AST is stitched into `body_ast`; general public `parse_job(...)` authoring remains future work. On Perl, Rust, and Dart, registered exact-arity user-function calls now execute in value positions, compatible receiver chains, and standalone discard statements: arguments evaluate eagerly in the caller, params bind in a fresh function-local scope, and the result is the final expression or `return(expr)` payload. Recursive and unsupported function-body forms are fenced as diagnostics with zero raw fallback on the Perl reference; Rust and Dart directly diagnose recursive calls in their runtime resolvers. The accepted MVP surface is closed at explicit-paren, braced `fn` definitions; alternate spellings, omitted zero-arg parentheses, brace-less bodies, caller-state-mutating functions, recursion support, closures/lambdas/currying, and function namespaces remain deferred extension topics.
 
@@ -104,10 +108,11 @@ Three backbone items tracked major structural modernization — all done:
   and the non-`fn` middle
   fixtures pass through bounded corpus execute mode. Top-level `fn` corpus fixtures are routed to a later
   spec-defined function-shell corpus leaf. The final shipped-spec/parser-smoke window is split after a 2/31
-  diagnostic run and is now 19/31 green. The basic regex-dialect bridge, helper/action bridge,
-  recursive/default-mode bridge, portmap result-shape bridge, and hlink delimiter/capture bridge are done, while
-  deeper PCRE structural constructs remain routed to a follow-up; the next Dart frontier is helper mutation/text
-  normalization parity, followed by the structural-output leaf, closeout, and cross-backend gates.
+  diagnostic run and is now 22/31 green. The basic regex-dialect bridge, helper/action bridge,
+  recursive/default-mode bridge, portmap result-shape bridge, hlink delimiter/capture bridge, and helper
+  mutation/text-normalization bridge are done, while deeper PCRE structural constructs remain routed to a
+  follow-up; the next Dart frontier is legacy structural smoke output parity, followed by residual closeout and
+  cross-backend gates.
 - **Non-current helper code purge** - `NONCURRENT-HELPER-CODE-PURGE` is closed. Perl source cleanup, Rust source cleanup, active test/tool/generated fixture and checked-in `.spec` migration, and final no-drift scans are complete. Retired helper-looking calls use generic unknown-helper fallback behavior, active generic-unknown-helper tests use invented helper names, and active helper-call/label/tag scans are clean.
 - **Rust generated-source breadth** — the Rust interpreter oracle is the current cross-variant parity gate. Generated Rust source already covers the current structural families and a curated corpus subset; broadening generated-source proof to the full manifest remains a separately owned future follow-on.
 - **Lifecycle-family audit** — verified complete (2026-06-14). All 7 lifecycle markers (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`) have full semicolon-light structured authoring coverage. The current separator contract is newline-or-semicolon: newlines separate top-level helper statements, and multiple same-line statements require semicolons. No lifecycle-specific semantic gaps found.

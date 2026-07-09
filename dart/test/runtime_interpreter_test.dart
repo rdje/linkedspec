@@ -491,6 +491,31 @@ Top::AND
     expect(result.cursorCodeUnit, 2);
   });
 
+  test('exposes entry and match line helper values', () {
+    final engine = _engine(r'''
+Top::AND
+ /a\n/
+ /b/
+ E {
+   return(hash(
+     "entry_line", entry_line(),
+     "entry_col", entry_col(),
+     "match_line", match_line(),
+     "match_col", match_col()
+   ))
+ }
+''', parseMode: LinkedSpecParseMode.consume);
+
+    final result = engine.parse('a\nb');
+
+    expect(result.value, {
+      'entry_line': 1,
+      'entry_col': 1,
+      'match_line': 2,
+      'match_col': 1,
+    });
+  });
+
   test('preserves scalar array hash stores and nested reads', () {
     final engine = _engine(r'''
 Top::
@@ -913,6 +938,30 @@ Top::
         ['?tag:', 'a', 'field'],
         ['?tag:', 'b', 'field'],
       ],
+    });
+  });
+
+  test('executes statement-form regex substitution and split mutation', () {
+    final engine = _engine(r'''
+Top::
+ /x/
+ E {
+   value = "\"bar,baz\""
+   numbered = "a12b"
+   parts = []
+   substr(value, "\"|\\s", "", go)
+   regex_subst(numbered, /(\d+)/, "[$1]", g)
+   split(array(parts), value, /,/)
+   return(hash("value", value, "numbered", numbered, "parts", copy(array(parts))))
+ }
+''');
+
+    final result = engine.parse('x');
+
+    expect(result.value, {
+      'value': 'bar,baz',
+      'numbered': 'a[12]b',
+      'parts': ['bar', 'baz'],
     });
   });
 

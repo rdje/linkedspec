@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.4.4.3 — Dart helper mutation/text-normalization parity):
+  Dart now treats statement-form `substr(target, pattern, replacement, flags)` and
+  `regex_subst(target, pattern, replacement, flags)` as scalar mutations, matching the Rust/Perl contract used by
+  shipped specs such as `lib_reader.spec`. Replacement strings expand `$n` capture placeholders, helper flags
+  drive the shared runtime regex compiler, and `split(array(target), source, delimiter)` replaces the explicit
+  aggregate target rather than merely returning a list. Dart also exposes entry/local regex start line/column
+  helpers for `simenv.spec` diagnostic paths. The focused runtime fixture intentionally uses newline-separated
+  statements without semicolons, reflecting the current separator contract: semicolons are only needed to separate
+  multiple statements on the same line. `simenv_multiline_value`, `lib_reader_sattribute`, and
+  `lib_reader_cattribute` pass; the shipped-spec/parser-smoke window is now 22/31 green.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.4.4.2 — Dart hlink delimiter/capture parity):
   Hlink exposed a Dart store-channel mismatch rather than a capture-boundary bug: `word_items = []` creates a
   scalar-held list, `push(array(word_items), retv)` was appending to aggregate storage, and `array(word_items)`

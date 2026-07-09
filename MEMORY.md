@@ -18,21 +18,21 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.6.2.4.4.2` — Dart `call(...)` refreshes `retv`, and `push(...)` /
-  `items += ...` now mutate scalar-held lists, fixing all five hlink fixtures plus `tablegrep_simple_term` and
-  moving the parser-smoke window to 19/31 green.
-- prior_leaf: `DART-BACKEND-PARITY.6.2.4.4.1` — Dart `array(...)` splices explicit `flat*` call arguments in list
-  context, fixing all five portmap fixtures and moving the parser-smoke window to 13/31 green.
+- latest_completed_leaf: `DART-BACKEND-PARITY.6.2.4.4.3` — Dart statement-form `substr(...)` / `regex_subst(...)`
+  mutate scalar targets, explicit `split(array(...), ...)` replaces its target, entry/local line helpers are
+  exposed, and `simenv_multiline_value` plus both `lib_reader` fixtures pass, moving the parser-smoke window to
+  22/31 green.
+- prior_leaf: `DART-BACKEND-PARITY.6.2.4.4.2` — Dart `call(...)` refreshes `retv`, and `push(...)` /
+  `items += ...` now mutate scalar-held lists, fixing all five hlink fixtures plus `tablegrep_simple_term`.
 - latest_commit: this resume block is prepared for commit
-  `DART-BACKEND-PARITY.6.2.4.4.2 - close Dart hlink delimiter captures`; previous committed HEAD is
-  `2cc69919 DART-BACKEND-PARITY.6.2.4.4.1 - close Dart portmap result shapes`.
+  `DART-BACKEND-PARITY.6.2.4.4.3 - close Dart helper mutation surfaces`; previous committed HEAD is
+  `894d1087 DART-BACKEND-PARITY.6.2.4.4.2 - close Dart hlink delimiter captures`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.6.2.4.4.3` after the current commit is clean.
-- next_action: resume PNT at `DART-BACKEND-PARITY.6.2.4.4.3` for helper mutation/text normalization
-  (`simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute`). `.6.2.4.4.4` owns remaining
-  legacy structural smoke outputs, `.6.2.4.4.5` owns residual closeout, and `.6.2.4.6` owns deeper PCRE structural
-  regex constructs including
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.6.2.4.4.4` after the current commit is clean.
+- next_action: resume PNT at `DART-BACKEND-PARITY.6.2.4.4.4` for legacy structural smoke output parity
+  (`regdef_nested_register_fields` and `ds_vhistory_version_entry`). `.6.2.4.4.5` owns residual closeout, and
+  `.6.2.4.6` owns deeper PCRE structural regex constructs including
   Lispish `(?R)`, EBNF `\K`/`(?&name)`/`(?(DEFINE)...)`, and spec.spec recursive block regexes. `.6.2.5` owns the
   routed top-level `fn` corpus-shell gap. The director's single-source `foo.spec` parser+stimuli roundtrip idea is
   parked in `FUTURE-PARITY-BACKLOG.8.1`, not a current pivot.
@@ -46,5 +46,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `.6.2.4.4.2` commit; do not pivot unless the repo
+- blockers: none. in_flight_uncommitted: none expected after the `.6.2.4.4.3` commit; do not pivot unless the repo
   is handoff-ready.

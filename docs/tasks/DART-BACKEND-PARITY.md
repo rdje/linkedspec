@@ -952,7 +952,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Verification: Split 2026-07-09 after the `.6.2.4.3` diagnostic window reached 7/31 green. After `.6.2.4.4.1`,
     all five portmap fixtures and `vhdl_library_use` pass, bringing the diagnostic window to 13/31 green. After
     `.6.2.4.4.2`, all five hlink fixtures and `tablegrep_simple_term` pass, bringing the diagnostic window to 19/31
-    green.
+    green. After `.6.2.4.4.3`, `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute`
+    pass, bringing the diagnostic window to 22/31 green.
   Commit: `pending`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.0`
@@ -1051,14 +1052,45 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.4.4.2 - close Dart hlink delimiter captures`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.3`
-  Status: `pending`
+  Status: `done`
   Goal: Close helper mutation and text-normalization parser-smoke surfaces.
   Acceptance: `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute` pass on Dart or each
     residual is routed with root-cause evidence. This leaf owns missing helper surfaces such as `match_line`,
     statement-form scalar regex substitution, array split mutation, and quote/text normalization visible in those
     fixtures.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Dart now exposes `entry_line` / `entry_col` and `match_line` / `match_col`
+    over entry/local regex registers, executes statement-form `substr(...)` / `regex_subst(...)` scalar regex
+    mutation with helper flags, and routes explicit `split(array(target), source, delimiter)` through aggregate
+    replacement. The focused helper/text-normalization corpus command passes all three fixtures. The diagnostic
+    `--execute --offset 68 --limit 31` window is now 22/31 green. Remaining non-PCRE failures are
+    `regdef_nested_register_fields` and `ds_vhistory_version_entry`; deeper Lispish/EBNF/spec.spec PCRE
+    structural `FormatException` failures remain routed to `.6.2.4.6`.
+
+  ## Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — `dart run bin/corpus_runner.dart --corpus
+    ../rust/linkedspec-runtime/tests/corpus --execute --case simenv_multiline_value --case lib_reader_sattribute
+    --case lib_reader_cattribute` initially failed because `simenv_multiline_value` hit unsupported helper
+    `match_line`, while the `lib_reader` fixtures retained quoted group/value text and produced an empty
+    comma-split attribute list.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — `docs/knowledge/rust-statement-mutation-helpers.md` and
+    `specs/lib_reader.spec` showed that `substr(scalar, pattern, replacement, flags)`,
+    `regex_subst(scalar, pattern, replacement, flags)`, and `split(array(target), scalar, delimiter)` are
+    statement-form mutations, not pure value helpers. Dart evaluated pure helper paths but did not mutate scalar
+    targets or replace the explicit split target. `specs/simenv.spec` also uses `match_line()` diagnostics.
+  - [x] **FIX** — `dart/lib/src/runtime/interpreter.dart` now handles statement-context `substr(...)` /
+    `regex_subst(...)` mutations, expands `$n` replacement captures, honors `g` and regex flags through the shared
+    runtime compiler, replaces explicit split targets, and exposes entry/local match start line/column helpers.
+  - [x] **ADDRESSED (verified)** — Focused Dart tests `dart test test/runtime_interpreter_test.dart
+    test/corpus_manifest_test.dart` pass; the focused helper/text-normalization corpus command is FAIL->PASS with
+    3 passed and 0 failed.
+  - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+    and `dart test` all PASS; the 31-fixture diagnostic run moves from 19/31 to 22/31 green.
+  - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
+    `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, and
+    Knowledge Map are updated; `mdbook build docs/linkedspec-book`, `bash scripts/check_memory_architecture.sh`,
+    `bash knowledge-map/scripts/check_knowledge_map.sh`, `bash scripts/check_task_tree_metadata.sh`,
+    `bash scripts/check_doctrines.sh`, and `git diff --check` pass.
+  Commit: `DART-BACKEND-PARITY.6.2.4.4.3 - close Dart helper mutation surfaces`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.4`
   Status: `pending`
@@ -1066,7 +1098,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: `regdef_nested_register_fields` and `ds_vhistory_version_entry` pass on Dart or residual mismatches
     are routed with precise structural evidence. `vhdl_library_use` passed under `.6.2.4.4.1` from the Dart
     `array(flat*)` list-context splice fix, and `tablegrep_simple_term` passed under `.6.2.4.4.2` from the
-    scalar-held append fix.
+    scalar-held append fix. `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute` passed
+    under `.6.2.4.4.3` from statement helper mutation/text-normalization parity.
   Verification: `pending`
   Commit: `pending`
 
@@ -1194,7 +1227,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 14 | `DART-BACKEND-PARITY.5.1` | `done` | Minimal staged registry provider dispatches function-body parse jobs and stitches `body_ast`. |
 | 15 | `DART-BACKEND-PARITY.5.2` | `done` | Registered exact-arity user functions execute at runtime. |
 | 16 | `DART-BACKEND-PARITY.5.3` | `done` | Staged parse-job and function-registry descriptor shapes are preserved. |
-| 17 | `DART-BACKEND-PARITY.6` | `pending` | Prove Dart parity against the corpus and cross-backend gates. |
+| 17 | `DART-BACKEND-PARITY.6` | `active` | Corpus parity is in progress; current frontier is `.6.2.4.4.4` for legacy structural smoke output parity. |
 
 ## Dart Toolchain And Package Layout
 
@@ -1489,6 +1522,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.5.1` | Focused `dart test test/staged_parser_registry_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart staged registry resolves `actionir-body.spec`, records staged cache/compiled-parser metadata, executes jobs in stable order, and stitches `body_ast`; frontier advances to `.5.2` user-function runtime execution. |
 | `2026-07-09` | `DART-BACKEND-PARITY.5.2` | Focused `dart test test/runtime_interpreter_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart executes registered exact-arity user functions before helper fallback with eager caller-side args, fresh function-local stores, receiver continuation, standalone discard, arity diagnostics, and direct/mutual recursion diagnostics; frontier advances to `.5.3` descriptor-shape preservation. |
 | `2026-07-09` | `DART-BACKEND-PARITY.5.3` | Focused `dart test test/compiled_spec_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart preserves neutral staged user-function descriptor shapes through parsed functions, compiled registry jobs, descriptor functions records, stitched `body_ast`, descriptor metadata, and runtime output; `.5` closes and frontier advances to `.6` corpus parity. |
+| `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.4.3` | Focused `dart test test/runtime_interpreter_test.dart test/corpus_manifest_test.dart`; focused helper/text-normalizing corpus run; diagnostic `--execute --offset 68 --limit 31` boundary measurement; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; CLI/help corpus-loader smokes; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart statement-form helper mutation, explicit split replacement, and entry/local line helpers close `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute`; the parser-smoke window moves from 19/31 to 22/31 green and frontier advances to `.6.2.4.4.4`. |
 
 ## Commit Log
 
@@ -1525,6 +1559,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.5.2` | `DART-BACKEND-PARITY.5.2 - execute Dart user functions` | Registered exact-arity user functions execute at runtime. |
 | `DART-BACKEND-PARITY.5.3` | `DART-BACKEND-PARITY.5.3 - preserve Dart staged descriptor shapes` | Neutral staged user-function descriptor shapes are asserted through runtime output. |
 | `DART-BACKEND-PARITY.7.3` | `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement` | Docs-only split for per-variant LinkedSpec CLI productization. |
+| `DART-BACKEND-PARITY.6.2.4.4.3` | `DART-BACKEND-PARITY.6.2.4.4.3 - close Dart helper mutation surfaces` | Statement-form helper mutation, explicit split replacement, and entry/local line helpers close three parser-smoke fixtures. |
 
 ## Changelog
 
@@ -1595,3 +1630,7 @@ The `.4.1` runtime matching layer adds:
 - `2026-07-09`: Added Dart staged user-function descriptor-shape proof; parsed, compiled, descriptor, and runtime
   layers preserve neutral `body_payload`, `body_parse_job`, `body_ast`, and function-order fields; `.5` closes and
   frontier advances to `.6` corpus parity.
+- `2026-07-09`: Closed Dart helper mutation/text-normalization parser-smoke parity; statement-form
+  `substr(...)` / `regex_subst(...)`, explicit `split(array(...), ...)` replacement, and entry/local line helpers
+  make `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute` pass, moving the diagnostic
+  window to 22/31 green and frontier to `.6.2.4.4.4`.

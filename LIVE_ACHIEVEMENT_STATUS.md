@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.3 — close Dart helper mutation surfaces**
+  (DONE — helper mutation and text-normalization parser-smoke fixtures now pass on Dart).
+
+  **Change:** Dart now executes statement-context `substr(...)` / `regex_subst(...)` scalar mutations, expands
+  regex replacement captures, replaces explicit `split(array(target), ...)` targets, and exposes entry/local regex
+  start line/column helpers.
+
+  **Boundary:** `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute` pass. The
+  shipped-spec/parser-smoke diagnostic window is now 22/31 green. Active implementation work advances to
+  `DART-BACKEND-PARITY.6.2.4.4.4` for the remaining legacy structural smoke outputs:
+  `regdef_nested_register_fields` and `ds_vhistory_version_entry`.
+
+  **Verification:** Dart format/analyze/full tests, focused runtime/corpus tests, focused helper/text-normalizing
+  corpus run, CLI/help corpus-loader smokes, mdBook, memory architecture, Knowledge Map, task-tree metadata,
+  doctrine, and `git diff --check` pass. The diagnostic parser-smoke corpus run measures the expected 22/31
+  boundary with remaining failures routed.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.2 — close Dart hlink delimiter captures**
   (DONE — hlink delimiter/capture fixtures now pass on Dart).
 

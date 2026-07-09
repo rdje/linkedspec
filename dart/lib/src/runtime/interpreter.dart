@@ -2414,6 +2414,16 @@ final class LinkedSpecRuntimeEngine {
         _executeSetKeyStatement(call, context, ruleLabel, currentEdge)) {
       return null;
     }
+    if (statementContext &&
+        (helperName == 'substr' || helperName == 'regex_subst') &&
+        _executeRegexSubstitutionStatement(
+          call,
+          context,
+          ruleLabel,
+          currentEdge,
+        )) {
+      return null;
+    }
     final functionResolution = compiledSpec.functionRegistry.resolveCall(
       call.name,
       positionalArgs.length,
@@ -2581,6 +2591,15 @@ final class LinkedSpecRuntimeEngine {
         return context.registers.entryMatch?.charLength;
       case 'match_len':
         return context.registers.localMatch?.charLength;
+      case 'entry_line':
+      case 'entry_start_line':
+        return _matchStartLine(context.input, context.registers.entryMatch);
+      case 'entry_col':
+        return _matchStartColumn(context.input, context.registers.entryMatch);
+      case 'match_line':
+        return _matchStartLine(context.input, context.registers.localMatch);
+      case 'match_col':
+        return _matchStartColumn(context.input, context.registers.localMatch);
       case 'entry_start_pos':
         return context.registers.entryMatch?.charStart;
       case 'entry_end_pos':
@@ -3379,6 +3398,71 @@ final class LinkedSpecRuntimeEngine {
     return true;
   }
 
+  bool _executeRegexSubstitutionStatement(
+    ActionCallExpr call,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final helperName = canonicalActionHelperName(call.name);
+    if (helperName != 'substr' && helperName != 'regex_subst') {
+      return false;
+    }
+    final args = call.args.map((arg) => arg.value).toList();
+    if (args.length < 3) {
+      return false;
+    }
+    final target = _scalarTargetName(args[0]);
+    if (target == null || target.isEmpty) {
+      return false;
+    }
+    final source = _scalarString(context.variables[target], nullAsEmpty: true);
+    if (source == null) {
+      return false;
+    }
+    final patternValue = _evaluatePatternArgument(
+      args[1],
+      context,
+      ruleLabel,
+      currentEdge,
+    );
+    final pattern = patternValue is _RuntimeRegexPattern
+        ? patternValue.pattern
+        : _scalarString(patternValue);
+    if (pattern == null) {
+      return false;
+    }
+    final replacement = args[2] is ActionRegexLiteralExpr
+        ? (args[2] as ActionRegexLiteralExpr).pattern
+        : (_scalarString(
+                _evaluateExpression(
+                  args[2],
+                  context,
+                  ruleLabel,
+                  currentEdge: currentEdge,
+                ),
+                nullAsEmpty: true,
+              ) ??
+              '');
+    final flags = args.length >= 4
+        ? _regexFlagString(args[3], context, ruleLabel, currentEdge)
+        : '';
+    final regex = _compileRegex(pattern, flags: flags);
+    if (regex == null) {
+      return false;
+    }
+    final updated = _replaceRegex(
+      source,
+      regex,
+      replacement,
+      global: flags.contains('g'),
+    );
+    context.variables[target] = updated;
+    context.arrays.remove(target);
+    context.hashes.remove(target);
+    return true;
+  }
+
   Object? _callSplitFromExpressions(
     List<ActionExpr> args,
     _RuntimeExecutionContext context,
@@ -3407,8 +3491,7 @@ final class LinkedSpecRuntimeEngine {
         delimiter,
         regexDelimiter: delimiterExpr is ActionRegexLiteralExpr,
       );
-      context.arrays[target] = parts;
-      return List<Object?>.unmodifiable(context.arrayFor(target));
+      return _replaceArrayValue(context, target, parts);
     }
 
     final values = _evaluateValues(args, context, ruleLabel, currentEdge);
@@ -5013,12 +5096,83 @@ RegExp? _regexFromValue(Object? value) {
   return _compileRegex(pattern);
 }
 
-RegExp? _compileRegex(String pattern) {
+RegExp? _compileRegex(String pattern, {String flags = ''}) {
   try {
-    return compileRuntimeRegex(pattern);
+    return compileRuntimeRegex(
+      pattern,
+      caseSensitive: !flags.contains('i'),
+      multiLine: flags.contains('m'),
+      dotAll: flags.contains('s'),
+    );
   } on FormatException {
     return null;
   }
+}
+
+String _regexFlagString(
+  ActionExpr expr,
+  _RuntimeExecutionContext context,
+  String ruleLabel,
+  _CurrentActionEdge? currentEdge,
+) {
+  final name = _variableName(expr);
+  if (name != null) {
+    return name;
+  }
+  return _scalarString(
+        context.engine._evaluateExpression(
+          expr,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+        ),
+        nullAsEmpty: true,
+      ) ??
+      '';
+}
+
+String _replaceRegex(
+  String source,
+  RegExp regex,
+  String replacement, {
+  required bool global,
+}) {
+  if (global) {
+    return source.replaceAllMapped(
+      regex,
+      (match) => _expandRegexReplacement(replacement, match),
+    );
+  }
+  return source.replaceFirstMapped(
+    regex,
+    (match) => _expandRegexReplacement(replacement, match),
+  );
+}
+
+String _expandRegexReplacement(String replacement, Match match) {
+  return replacement.replaceAllMapped(RegExp(r'\$(\d+)'), (placeholder) {
+    final index = int.tryParse(placeholder[1] ?? '');
+    if (index == null || index < 0 || index > match.groupCount) {
+      return '';
+    }
+    return match.group(index) ?? '';
+  });
+}
+
+int? _matchStartLine(String input, RuntimeRegexMatch? match) {
+  final codeUnitStart = match?.codeUnitStart;
+  if (codeUnitStart == null) {
+    return null;
+  }
+  return lineColumnAtCodeUnitOffset(input, codeUnitStart).line;
+}
+
+int? _matchStartColumn(String input, RuntimeRegexMatch? match) {
+  final codeUnitStart = match?.codeUnitStart;
+  if (codeUnitStart == null) {
+    return null;
+  }
+  return lineColumnAtCodeUnitOffset(input, codeUnitStart).column;
 }
 
 String? _scalarString(Object? value, {bool nullAsEmpty = false}) {
@@ -5550,6 +5704,19 @@ String? _arrayReceiverTargetName(ActionExpr expr) {
   return _arrayTargetName(expr);
 }
 
+String? _scalarTargetName(ActionExpr expr) {
+  final variable = _variableName(expr);
+  if (variable != null) {
+    return variable;
+  }
+  if (expr is! ActionCallExpr ||
+      expr.name != 'scalar' ||
+      expr.args.length != 1) {
+    return null;
+  }
+  return _variableName(expr.args.single.value);
+}
+
 bool _hasArrayValue(_RuntimeExecutionContext context, String name) {
   return context.arrays.containsKey(name) || context.variables[name] is List;
 }
@@ -5635,6 +5802,19 @@ List<Object?> _appendArrayValue(
   final array = context.arrayFor(name);
   array.add(stored);
   return List<Object?>.unmodifiable(array);
+}
+
+List<Object?> _replaceArrayValue(
+  _RuntimeExecutionContext context,
+  String name,
+  List<Object?> values,
+) {
+  context.recordRuleLocalBinding(name);
+  final updated = [for (final item in values) _copyValue(item)];
+  context.variables.remove(name);
+  context.hashes.remove(name);
+  context.arrays[name] = updated;
+  return List<Object?>.unmodifiable(updated);
 }
 
 Map<String, Object?> _hashValueFor(

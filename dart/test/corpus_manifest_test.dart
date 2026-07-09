@@ -88,6 +88,61 @@ void main() {
     ]);
   });
 
+  test('executes helper mutation and text-normalization fixtures', () {
+    final result = executeCorpusFixtures(
+      '../rust/linkedspec-runtime/tests/corpus',
+      caseNames: const [
+        'simenv_multiline_value',
+        'lib_reader_sattribute',
+        'lib_reader_cattribute',
+      ],
+    );
+
+    expect(
+      result.failures
+          .map((failure) => '${failure.name}: ${failure.failure}')
+          .join('\n'),
+      isEmpty,
+    );
+    expect(result.passed, isTrue);
+    expect(result.passedCount, 3);
+    expect(result.fixture('simenv_multiline_value').actualValue, [
+      {
+        'name': 'top',
+        'content': [
+          [
+            {'type': 'anyvariable', 'content': 'BAR'},
+            {'type': 'multiline_value', 'content': 'baz'},
+          ],
+        ],
+      },
+    ]);
+    expect(result.fixture('lib_reader_sattribute').actualValue, [
+      [
+        'GROUP',
+        'cell',
+        'foo',
+        [
+          ['SATTRIBUTE', 'attr', 'bar'],
+        ],
+      ],
+    ]);
+    expect(result.fixture('lib_reader_cattribute').actualValue, [
+      [
+        'GROUP',
+        'cell',
+        'foo',
+        [
+          [
+            'CATTRIBUTE',
+            'attr',
+            ['bar', 'baz'],
+          ],
+        ],
+      ],
+    ]);
+  });
+
   test('executes controlled fixtures against runtime output shape', () {
     final root = Directory.systemTemp.createTempSync(
       'linkedspec-dart-controlled-',

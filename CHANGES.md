@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.4.3 — close Dart helper mutation surfaces
+
+**Scope:** Dart runtime statement-form helper mutation, entry/local line helpers, explicit split target
+replacement, focused runtime/corpus tests, Dart README/mdBook status, live docs, roadmap status, task-tree status,
+and Knowledge Map.
+
+**Change:** Dart now executes statement-context `substr(...)` / `regex_subst(...)` mutations against scalar
+targets, expands `$n` replacement captures, honors helper regex flags, replaces explicit `split(array(target), ...)`
+targets, and exposes entry/local regex start line/column helpers. `simenv_multiline_value`,
+`lib_reader_sattribute`, and `lib_reader_cattribute` now pass. The shipped-spec/parser-smoke diagnostic window is
+now 22/31 green.
+
+**Validation:** Dart format, analyze, focused runtime/corpus tests, full Dart tests, focused helper/text-normalizing
+corpus run, CLI/help corpus-loader smokes, mdBook build, memory architecture, Knowledge Map generation/check,
+task-tree metadata, doctrine, and `git diff --check` pass. The diagnostic parser-smoke corpus command measures the
+expected 22/31 boundary with the remaining failures routed.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.4.2 — close Dart hlink delimiter captures
 
 **Scope:** Dart runtime return-channel and scalar-held array append semantics, focused runtime/corpus tests, hlink
