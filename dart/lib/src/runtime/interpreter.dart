@@ -2,6 +2,8 @@ import 'dart:math' as math;
 
 import '../action/action_ast.dart';
 import '../action/action_contracts.dart';
+import '../action/action_parser.dart';
+import '../action/function_registry.dart';
 import '../ast/spec_ast.dart';
 import '../compiler/compiled_spec.dart';
 import '../trace/trace.dart';
@@ -127,6 +129,7 @@ final class LinkedSpecRuntimeEngine {
   final int maxIterations;
   final String? specName;
   final String? specPath;
+  final Map<int, ActionBlock> _userFunctionBodyCache = <int, ActionBlock>{};
 
   RuntimeParseResult parse(
     String input, {
@@ -2158,6 +2161,26 @@ final class LinkedSpecRuntimeEngine {
         _executeSetKeyStatement(call, context, ruleLabel, currentEdge)) {
       return null;
     }
+    final functionResolution = compiledSpec.functionRegistry.resolveCall(
+      call.name,
+      positionalArgs.length,
+    );
+    if (functionResolution.matched) {
+      return _executeUserFunction(
+        functionResolution.entry!,
+        positionalArgs,
+        context,
+        ruleLabel,
+        currentEdge,
+      );
+    }
+    if (functionResolution.arityMismatch) {
+      throw RuntimeInterpreterException(
+        "user function '${call.name}' expects "
+        '${_formatArities(functionResolution.expectedArities)} argument(s), '
+        'got ${positionalArgs.length} in rule $ruleLabel',
+      );
+    }
     switch (helperName) {
       case 'return':
         final value = positionalArgs.isEmpty
@@ -2443,6 +2466,105 @@ final class LinkedSpecRuntimeEngine {
         throw RuntimeInterpreterException(
           "unsupported runtime helper '${call.name}' in rule $ruleLabel",
         );
+    }
+  }
+
+  Object? _executeUserFunction(
+    UserFunctionEntry entry,
+    List<ActionExpr> argExprs,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final values = [
+      for (final arg in argExprs)
+        _copyValue(
+          _evaluateExpression(
+            arg,
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          ),
+        ),
+    ];
+    if (values.length != entry.arity) {
+      throw RuntimeInterpreterException(
+        "user function '${entry.name}' expects ${entry.arity} argument(s), "
+        'got ${values.length} in rule $ruleLabel',
+      );
+    }
+
+    final activeIndex = context.activeUserFunctions.indexOf(entry.name);
+    if (activeIndex >= 0) {
+      final cycle = [
+        ...context.activeUserFunctions.sublist(activeIndex),
+        entry.name,
+      ].join(' -> ');
+      final detail =
+          "user function recursion is not supported: $cycle in rule "
+          '$ruleLabel';
+      throw RuntimeInterpreterException(
+        detail,
+        diagnostic: context.diagnostic(
+          stage: 'user_function_call',
+          summary: 'Dart user function recursion failed',
+          detail: detail,
+          ruleLabel: ruleLabel,
+          handlerSourceLabel: 'dart_runtime:function:${entry.name}',
+        ),
+      );
+    }
+
+    final block = _userFunctionBodyBlock(entry, ruleLabel, context);
+    final snapshot = _RuntimeStoreSnapshot.capture(context);
+    context.activeUserFunctions.add(entry.name);
+    context.clearStores();
+    for (var index = 0; index < entry.params.length; index += 1) {
+      context.bindUserFunctionParam(entry.params[index], values[index]);
+    }
+
+    try {
+      final flow = _executeValueBlockStatements(
+        block,
+        context,
+        ruleLabel,
+        currentEdge,
+        finalExpressionYields: true,
+      );
+      return flow.returned ? _copyValue(flow.value) : null;
+    } finally {
+      snapshot.restore(context);
+      context.activeUserFunctions.removeLast();
+    }
+  }
+
+  ActionBlock _userFunctionBodyBlock(
+    UserFunctionEntry entry,
+    String ruleLabel,
+    _RuntimeExecutionContext context,
+  ) {
+    final cached = _userFunctionBodyCache[entry.index];
+    if (cached != null) {
+      return cached;
+    }
+    try {
+      final parsed = parseActionBlock(entry.bodySource);
+      _userFunctionBodyCache[entry.index] = parsed;
+      return parsed;
+    } catch (error) {
+      final detail =
+          "user function '${entry.name}' body parse failed in rule "
+          '$ruleLabel: $error';
+      throw RuntimeInterpreterException(
+        detail,
+        diagnostic: context.diagnostic(
+          stage: 'user_function_body_parse',
+          summary: 'Dart user function body parse failed',
+          detail: detail,
+          ruleLabel: ruleLabel,
+          handlerSourceLabel: 'dart_runtime:function:${entry.name}',
+        ),
+      );
     }
   }
 
@@ -4490,6 +4612,7 @@ final class _RuntimeExecutionContext {
   final Map<String, Map<String, Object?>> hashes =
       <String, Map<String, Object?>>{};
   final Set<String> activeRuleEntries = <String>{};
+  final List<String> activeUserFunctions = <String>[];
   final List<RuntimeLifecycleEvent> lifecycleEvents = <RuntimeLifecycleEvent>[];
   final List<int> cursorStack = <int>[];
   final List<String> _ruleStack = <String>[];
@@ -4516,6 +4639,27 @@ final class _RuntimeExecutionContext {
 
   Map<String, Object?> hashFor(String name) {
     return hashes.putIfAbsent(name, () => <String, Object?>{});
+  }
+
+  void clearStores() {
+    variables.clear();
+    arrays.clear();
+    hashes.clear();
+  }
+
+  void bindUserFunctionParam(String name, Object? value) {
+    final copied = _copyValue(value);
+    variables[name] = copied;
+    if (copied is List) {
+      arrays[name] = _asArray(copied);
+      hashes.remove(name);
+    } else if (copied is Map) {
+      hashes[name] = _asHash(copied);
+      arrays.remove(name);
+    } else {
+      arrays.remove(name);
+      hashes.remove(name);
+    }
   }
 
   void enterRule(String label) {
@@ -4687,6 +4831,56 @@ final class _VariableSnapshot {
     } else {
       context.hashes.remove(name);
     }
+  }
+}
+
+final class _RuntimeStoreSnapshot {
+  const _RuntimeStoreSnapshot({
+    required this.variables,
+    required this.arrays,
+    required this.hashes,
+  });
+
+  factory _RuntimeStoreSnapshot.capture(_RuntimeExecutionContext context) {
+    return _RuntimeStoreSnapshot(
+      variables: {
+        for (final entry in context.variables.entries)
+          entry.key: _copyValue(entry.value),
+      },
+      arrays: {
+        for (final entry in context.arrays.entries)
+          entry.key: [for (final item in entry.value) _copyValue(item)],
+      },
+      hashes: {
+        for (final entry in context.hashes.entries)
+          entry.key: {
+            for (final hashEntry in entry.value.entries)
+              hashEntry.key: _copyValue(hashEntry.value),
+          },
+      },
+    );
+  }
+
+  final Map<String, Object?> variables;
+  final Map<String, List<Object?>> arrays;
+  final Map<String, Map<String, Object?>> hashes;
+
+  void restore(_RuntimeExecutionContext context) {
+    context.clearStores();
+    context.variables.addAll({
+      for (final entry in variables.entries) entry.key: _copyValue(entry.value),
+    });
+    context.arrays.addAll({
+      for (final entry in arrays.entries)
+        entry.key: [for (final item in entry.value) _copyValue(item)],
+    });
+    context.hashes.addAll({
+      for (final entry in hashes.entries)
+        entry.key: {
+          for (final hashEntry in entry.value.entries)
+            hashEntry.key: _copyValue(hashEntry.value),
+        },
+    });
   }
 }
 
@@ -5285,6 +5479,13 @@ Object? _copyValue(Object? value) {
     };
   }
   return value;
+}
+
+String _formatArities(List<int> arities) {
+  if (arities.isEmpty) {
+    return 'no';
+  }
+  return arities.join('/');
 }
 
 String _stringValue(Object? value) {

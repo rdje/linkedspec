@@ -359,7 +359,12 @@ match/no-match decisions, action/blind child-dispatch decisions, lifecycle block
 marks, cursor-control marks, recursion-cutoff decisions, and
 `capture_until_boundary(...)` source-boundary marks while keeping untraced
 execution output-compatible. The diagnostics/trace no-drift sweep is closed.
-User-function runtime execution and corpus-output parity remain later Dart
+Dart also executes registered exact-arity user-function calls before helper
+fallback: arguments are eager in the caller, params bind into fresh
+function-local scalar/array/hash stores, results come from the final expression
+or local `return(...)`, receiver chains can continue from returned values,
+standalone calls discard their results, and direct/mutual recursion is
+diagnosed. Descriptor-shape hardening and corpus-output parity remain later Dart
 leaves.
 
 ### Step 6: Validate Against the Test Corpus

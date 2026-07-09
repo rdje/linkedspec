@@ -91,7 +91,11 @@ returned `action_block` JSON into `body_ast` before compile state is built. Dart
 structured refs plus pattern strings until the runtime interpreter consumes them for executable match dispatch.
 `LinkedSpecRuntimeEngine` now uses this state for rule-family dispatch, action-edge and blind-call child execution,
 lifecycle blocks, `retv`, accumulator collection, bounded repetition, zero-progress cutoffs, and recursion
-cutoffs; user-function runtime execution remains a later Dart runtime leaf.
+cutoffs. It also resolves registered exact-arity user-function calls before ordinary helper fallback, evaluates
+arguments eagerly in the caller, binds params into fresh function-local scalar/array/hash stores, executes the
+function body as an ActionIR value block, returns the final expression or local `return(...)` payload, feeds
+returned values into compatible receiver chains, discards standalone call results, and diagnoses direct or mutual
+recursion.
 
 This registry is intentionally flat for the MVP. It is not an overload table, namespace/module model, closure
 environment, lambda catalog, or currying/partial-application representation. Those extensions require their own

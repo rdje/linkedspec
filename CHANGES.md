@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.5.2 — execute Dart user functions
+
+**Scope:** Dart runtime interpreter, focused runtime tests, Dart CLI/scaffold status, Dart README, mdBook status
+text, live docs, roadmap/task-tree status, and Knowledge Map facts.
+
+**Change:** Added Dart runtime execution for registered exact-arity user functions before ordinary helper
+fallback. Calls evaluate args eagerly in the caller, bind params into fresh function-local scalar/array/hash
+stores, execute parsed ActionIR function bodies as value blocks, return the final expression or local
+`return(...)` payload, feed returned values into compatible receiver chains, execute standalone calls with
+dropped results, diagnose registered arity mismatches, and reject direct/mutual recursion with structured
+`user_function_call` diagnostics.
+
+**Validation:** Focused runtime interpreter tests, Dart format/analyze/full tests, corpus runner, CLI help,
+mdBook build, memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine, and
+`git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.5.1 — add Dart staged function-body registry
 
 **Scope:** Dart staged parser registry, package exports, focused staged-dispatch tests, Dart README, mdBook

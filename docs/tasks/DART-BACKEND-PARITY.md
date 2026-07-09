@@ -730,12 +730,20 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.5.1 - add Dart staged function-body registry`
 
 - ID: `DART-BACKEND-PARITY.5.2`
-  Status: `pending`
+  Status: `done`
   Goal: Execute registered user functions in value positions, receiver chains, and standalone discard.
   Acceptance: Exact-arity functions use fresh function-local stores, eager argument evaluation, compatible
     receiver continuation, standalone `VALUE_DROP`, and recursion diagnostics.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** `LinkedSpecRuntimeEngine` now resolves exact-arity
+    `UserFunctionRegistry` calls before ordinary helper fallback, evaluates arguments eagerly in the caller,
+    parses/caches function `body_source` as ActionIR value blocks, binds params into fresh function-local
+    scalar/array/hash stores, restores caller stores after return, returns final-expression or local
+    `return(...)` payloads, feeds returned values into compatible receiver chains, executes standalone calls
+    through the existing dropped-value statement path, diagnoses registered arity mismatches, and rejects direct
+    or mutual recursion with structured `user_function_call` diagnostics. Focused runtime tests, Dart
+    format/analyze/full tests, corpus runner/help, CLI help, mdBook, memory architecture, Knowledge Map,
+    task-tree metadata, doctrine, and `git diff --check` pass.
+  Commit: `DART-BACKEND-PARITY.5.2 - execute Dart user functions`
 
 - ID: `DART-BACKEND-PARITY.5.3`
   Status: `pending`
@@ -850,7 +858,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 12 | `DART-BACKEND-PARITY.4.5.3` | `done` | Runtime branch/lifecycle/source-boundary trace instrumentation is implemented. |
 | 13 | `DART-BACKEND-PARITY.4.5.4` | `done` | Diagnostics/trace no-drift is closed. |
 | 14 | `DART-BACKEND-PARITY.5.1` | `done` | Minimal staged registry provider dispatches function-body parse jobs and stitches `body_ast`. |
-| 15 | `DART-BACKEND-PARITY.5.2` | `pending` | Execute registered user functions at runtime. |
+| 15 | `DART-BACKEND-PARITY.5.2` | `done` | Registered exact-arity user functions execute at runtime. |
+| 16 | `DART-BACKEND-PARITY.5.3` | `pending` | Preserve staged parse-job and function-registry descriptor shapes. |
 
 ## Dart Toolchain And Package Layout
 
@@ -1098,14 +1107,19 @@ The `.4.1` runtime matching layer adds:
   now resolves `actionir-body.spec` deterministically, records the fixed adapter digest/cache key and compiled
   parser shape for top rule `action_block`, executes jobs in stable order, and stitches returned `action_block`
   JSON into `body_ast`. General public `parse_job(...)` authoring and recursive staged queues remain future work.
+- `2026-07-09`: Dart `.5.2` executes registered exact-arity user functions at runtime before helper fallback.
+  Arguments evaluate eagerly in the caller; params bind into fresh function-local scalar/array/hash stores; bodies
+  return the final expression or local `return(...)`; returned values continue through receiver chains; standalone
+  calls discard their results; wrong arity and direct/mutual recursion diagnose instead of falling to raw host code.
 
 ## Open Questions
 
-- None blocking `.5.2`. The minimal staged registry provider is closed; user-function runtime execution is next.
+- None blocking `.5.3`. The minimal staged registry provider and user-function runtime execution are closed;
+  staged parse-job/function-registry descriptor-shape preservation is next.
 
 ## Blockers
 
-- None known before `.5.2` user-function runtime work.
+- None known before `.5.3` descriptor-shape preservation.
 
 ## Verification Log
 
@@ -1135,6 +1149,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.4.5.3` | Focused `dart test test/trace_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart runtime tracing emits parse/rule scopes, regex decisions, child-dispatch decisions, lifecycle marks, cursor-control marks, recursion-cutoff decisions, and source-boundary marks while preserving untraced parse output; frontier advances to `.4.5.4` diagnostics/trace no-drift. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.5.4` | `dart run bin/linkedspec_dart.dart --help`; focused diagnostics/trace drift scans; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart diagnostics/trace status is aligned across README, CLI/scaffold, mdBook, live docs, roadmap, task tree, MEMORY, and Knowledge Map; `.4.5` closes and frontier advances to `.5.1` staged registry work. |
 | `2026-07-09` | `DART-BACKEND-PARITY.5.1` | Focused `dart test test/staged_parser_registry_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart staged registry resolves `actionir-body.spec`, records staged cache/compiled-parser metadata, executes jobs in stable order, and stitches `body_ast`; frontier advances to `.5.2` user-function runtime execution. |
+| `2026-07-09` | `DART-BACKEND-PARITY.5.2` | Focused `dart test test/runtime_interpreter_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart executes registered exact-arity user functions before helper fallback with eager caller-side args, fresh function-local stores, receiver continuation, standalone discard, arity diagnostics, and direct/mutual recursion diagnostics; frontier advances to `.5.3` descriptor-shape preservation. |
 
 ## Commit Log
 
@@ -1168,6 +1183,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.4.5.3` | `DART-BACKEND-PARITY.4.5.3 - add Dart runtime trace events` | Runtime branch/lifecycle/source-boundary trace instrumentation. |
 | `DART-BACKEND-PARITY.4.5.4` | `DART-BACKEND-PARITY.4.5.4 - close Dart diagnostics trace no drift` | Diagnostics/trace status no-drift closeout; `.4.5` container closes. |
 | `DART-BACKEND-PARITY.5.1` | `DART-BACKEND-PARITY.5.1 - add Dart staged function-body registry` | Minimal staged registry provider dispatches function-body parse jobs and stitches `body_ast`. |
+| `DART-BACKEND-PARITY.5.2` | `DART-BACKEND-PARITY.5.2 - execute Dart user functions` | Registered exact-arity user functions execute at runtime. |
 | `DART-BACKEND-PARITY.7.3` | `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement` | Docs-only split for per-variant LinkedSpec CLI productization. |
 
 ## Changelog
@@ -1233,3 +1249,6 @@ The `.4.1` runtime matching layer adds:
 - `2026-07-09`: Added Dart staged function-body registry dispatch; `actionir-body.spec` now resolves through the
   built-in provider, compiles top rule `action_block`, executes queued jobs in stable order, and stitches
   `body_ast`; frontier advances to `.5.2` user-function runtime execution.
+- `2026-07-09`: Added Dart registered exact-arity user-function runtime execution; calls resolve before helper
+  fallback, use eager caller-side args, fresh function-local stores, receiver-chain continuation, standalone
+  discard, and recursion diagnostics; frontier advances to `.5.3` descriptor-shape preservation.

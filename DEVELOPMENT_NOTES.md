@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.5.2 — Dart user-function runtime execution):
+  `LinkedSpecRuntimeEngine` now resolves exact-arity `UserFunctionRegistry` calls before ordinary helper
+  fallback. The runtime evaluates arguments eagerly in the caller, parses/caches each function `body_source` as an
+  ActionIR value block, snapshots and clears caller scalar/array/hash stores, binds params into fresh local stores
+  with aggregate mirrors for list/map values, executes the body through the existing final-expression/local-return
+  value-block evaluator, restores caller stores, and returns copied values so receiver chains can continue.
+  Standalone registered calls need no special lowering in Dart because `ActionStatement.dropsValue` already drives
+  discarded statement evaluation. Active-call tracking rejects direct and mutual recursion with a structured
+  `user_function_call` diagnostic. `.5.3` remains for descriptor/corpus-shape assertions around staged parse jobs
+  and function registry records.
+
 - 2026-07-09 (DART-BACKEND-PARITY.5.1 — Dart staged function-body registry):
   Added the Dart equivalent of the narrow function-body staged registry provider. `executeStagedParseJobs(...)`
   now validates and stable-sorts jobs by parent AST path, source span, and job id; resolves `actionir-body.spec`
@@ -8,8 +19,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   `action_block`; executes body text with the Dart ActionIR block parser; and returns staged result records.
   `dispatchFunctionBodyParseJobs(...)` and `parseSpecWithStagedUserFunctionDefinitionAsts(...)` stitch returned
   `action_block` JSON into function `body_ast` without widening the public staged-parsing contract. General
-  `parse_job(...)` authoring, provider search, recursive staged queues, and user-function runtime execution remain
-  later leaves; the active frontier is `.5.2`.
+  `parse_job(...)` authoring, provider search, and recursive staged queues remain future work; user-function
+  runtime execution has since landed in `.5.2`.
 
 - 2026-07-09 (DART-BACKEND-PARITY.4.5.4 — Dart diagnostics/trace no-drift):
   Closed the Dart diagnostics/trace container. The agreed boundary is now: structured runtime diagnostics,

@@ -18,23 +18,24 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.5.1` — Dart now has the minimal staged registry provider for
-  function-body parse jobs: deterministic `actionir-body.spec` resolution, `action_block` cache/compiled-parser
-  records, stable queue execution, and `body_ast` stitching.
-- prior_leaf: `DART-BACKEND-PARITY.4.5.4` — Dart diagnostics/trace no-drift is closed; README, CLI/scaffold,
-  mdBook, live docs, roadmap, task tree, MEMORY, and Knowledge Map agree on the implemented diagnostics/trace
-  boundary.
+- latest_completed_leaf: `DART-BACKEND-PARITY.5.2` — Dart registered exact-arity user functions now execute at
+  runtime before helper fallback with eager caller-side args, fresh function-local scalar/array/hash stores,
+  receiver-chain continuation, standalone discard, arity diagnostics, and direct/mutual recursion diagnostics.
+- prior_leaf: `DART-BACKEND-PARITY.5.1` — Dart staged registry dispatches function-body parse jobs through the
+  built-in `actionir-body.spec` / `action_block` provider and stitches returned `action_block` JSON into
+  `body_ast`.
 - latest_commit: this resume block is prepared for commit
-  `DART-BACKEND-PARITY.5.1 - add Dart staged function-body registry`; previous committed HEAD is
-  `e497ef65 DART-BACKEND-PARITY.4.5.4 - close Dart diagnostics trace no drift`.
+  `DART-BACKEND-PARITY.5.2 - execute Dart user functions`; previous committed HEAD is
+  `dc38739d DART-BACKEND-PARITY.5.1 - add Dart staged function-body registry`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.5.2` after the current commit is clean.
-- next_action: resume PNT at `DART-BACKEND-PARITY.5.2` user-function runtime execution. The AND-only compact
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.5.3` after the current commit is clean.
+- next_action: resume PNT at `DART-BACKEND-PARITY.5.3` descriptor/corpus-shape preservation for staged parse jobs
+  and function registries. The AND-only compact
   sequence / child-edge quantifier idea remains deferred in `BACKTRACK-SURFACE-RUST-ALIGNMENT`.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, COMMIT, task-tree index,
   active Dart task tree, ROADMAP/ROADMAP_V2, mdBook trace/runtime/status/backend-handoff chapters, relevant ADR/KM
-  facts, Dart runtime/package source owners through `.5.1`, Rust staged-registry/trace references, and the
+  facts, Dart runtime/package source owners through `.5.2`, Rust staged-registry/trace references, and the
   completed cursor-control split.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
@@ -42,5 +43,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `.5.1` commit; do not pivot unless the repo is
+- blockers: none. in_flight_uncommitted: none expected after the `.5.2` commit; do not pivot unless the repo is
   handoff-ready.

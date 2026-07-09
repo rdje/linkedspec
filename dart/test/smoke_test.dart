@@ -6,11 +6,11 @@ void main() {
     expect(linkedSpecDartPackageName, 'linkedspec_dart');
     expect(
       linkedSpecDartScaffoldStatus,
-      'runtime interpreter with trace controls and staged registry ready',
+      'runtime interpreter with staged user functions ready',
     );
     expect(
       describeLinkedSpecDartScaffold(),
-      'linkedspec_dart runtime interpreter with trace controls and staged registry ready',
+      'linkedspec_dart runtime interpreter with staged user functions ready',
     );
   });
 }

@@ -34,8 +34,9 @@ the convenience form that returns only the stitched `SpecFile`.
 spec-returned function-definition projection with this body dispatch.
 
 This does not implement public `parse_job(...)` authoring, filesystem/provider
-search roots, multiple parser families, recursive staged queues, or
-user-function runtime execution.
+search roots, multiple parser families, or recursive staged queues. Dart
+user-function runtime execution is tracked separately in
+[[dart-user-function-runtime-execution]].
 
 Related facts: [[function-body-staged-registry-dispatch]],
 [[dart-function-definition-shell-projection]], [[dart-function-registry]],

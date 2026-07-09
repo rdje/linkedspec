@@ -859,6 +859,145 @@ Top::
     ]);
   });
 
+  test('executes registered user functions in runtime value paths', () {
+    final engine = _engineWithFunctions(
+      r'''
+Top::
+ /x/
+ E {
+   set(value, "caller");
+   set(array(items), ["caller"]);
+   discard("ignored");
+   normalize(" A-B ").lowercase();
+   eager = echo(set(value, "arg"));
+   shaped = use_shapes(array("b", "a"), hash("key", "Value"));
+   return(hash(
+     "value", value,
+     "eager", eager,
+     "normal", normalize(" A-B ").lowercase().replace_substr("-", "_"),
+     "shaped", shaped,
+     "items", copy(array(items))
+   ))
+ }
+''',
+      [
+        _function('normalize', const ['value'], 'trim(value)'),
+        _function('echo', const ['value'], 'return(value)'),
+        _function('discard', const [
+          'value',
+        ], 'set(value, "inner"); return(value)'),
+        _function(
+          'use_shapes',
+          const ['items', 'meta'],
+          [
+            'set(array(items), items.sorted())',
+            'set_key(hash(meta), "extra", "ok")',
+            'return(hash("first", items.first(), "meta", copy(hash(meta))))',
+          ].join('; '),
+        ),
+      ],
+    );
+
+    final result = engine.parse('x');
+
+    expect(result.value, {
+      'value': 'arg',
+      'eager': 'arg',
+      'normal': 'a_b',
+      'shaped': {
+        'first': 'a',
+        'meta': {'key': 'Value', 'extra': 'ok'},
+      },
+      'items': ['caller'],
+    });
+  });
+
+  test('diagnoses direct and mutual user function recursion', () {
+    final direct = _engineWithFunctions(
+      r'''
+Top::
+ /x/
+ E { return(loop("x")) }
+''',
+      [
+        _function('loop', const ['value'], 'return(loop(value))'),
+      ],
+    );
+
+    expect(
+      () => direct.parse('x'),
+      throwsA(
+        isA<RuntimeInterpreterException>()
+            .having(
+              (error) => error.message,
+              'message',
+              contains(
+                'user function recursion is not supported: loop -> loop',
+              ),
+            )
+            .having(
+              (error) => error.diagnostic?.stage,
+              'diagnostic stage',
+              'user_function_call',
+            )
+            .having(
+              (error) => error.diagnostic?.handlerSourceLabel,
+              'handler source',
+              'dart_runtime:function:loop',
+            ),
+      ),
+    );
+
+    final mutual = _engineWithFunctions(
+      r'''
+Top::
+ /x/
+ E { return(alpha("x")) }
+''',
+      [
+        _function('alpha', const ['value'], 'return(beta(value))'),
+        _function('beta', const ['value'], 'return(alpha(value))'),
+      ],
+    );
+
+    expect(
+      () => mutual.parse('x'),
+      throwsA(
+        isA<RuntimeInterpreterException>().having(
+          (error) => error.message,
+          'message',
+          contains(
+            'user function recursion is not supported: alpha -> beta -> alpha',
+          ),
+        ),
+      ),
+    );
+  });
+
+  test('diagnoses registered user function arity mismatches at runtime', () {
+    final engine = _engineWithFunctions(
+      r'''
+Top::
+ /x/
+ E { return(echo()) }
+''',
+      [
+        _function('echo', const ['value'], 'return(value)'),
+      ],
+    );
+
+    expect(
+      () => engine.parse('x'),
+      throwsA(
+        isA<RuntimeInterpreterException>().having(
+          (error) => error.message,
+          'message',
+          contains("user function 'echo' expects 1 argument(s), got 0"),
+        ),
+      ),
+    );
+  });
+
   test('attaches structured diagnostics to missing runtime rule errors', () {
     final engine = _engine(
       r'''
@@ -939,5 +1078,34 @@ LinkedSpecRuntimeEngine _engine(
     parseMode: parseMode,
     specName: specName,
     specPath: specPath,
+  );
+}
+
+LinkedSpecRuntimeEngine _engineWithFunctions(
+  String source,
+  List<FunctionDefinition> functions, {
+  LinkedSpecParseMode parseMode = LinkedSpecParseMode.seek,
+}) {
+  final parsed = parseSpec(source);
+  return LinkedSpecRuntimeEngine(
+    compileSpec(SpecFile(functions: functions, rules: parsed.rules)),
+    parseMode: parseMode,
+  );
+}
+
+FunctionDefinition _function(
+  String name,
+  List<String> params,
+  String bodySource,
+) {
+  return FunctionDefinition(
+    name: name,
+    params: params,
+    arity: params.length,
+    bodySource: bodySource,
+    bodyAst: parseActionBlock(bodySource).toJson(),
+    source: 'fn $name(${params.join(", ")}) { $bodySource }',
+    sourceSpan: const SourceSpan(lineStart: 1, lineEnd: 1),
+    bodySpan: const SourceSpan(lineStart: 1, lineEnd: 1),
   );
 }

@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.5.2 — execute Dart user functions**
+  (DONE — registered exact-arity user-function runtime execution).
+
+  **Change:** Dart now resolves registered exact-arity user-function calls before ordinary runtime helper
+  fallback. Arguments evaluate eagerly in the caller, params bind into fresh function-local scalar/array/hash
+  stores, function bodies return the final expression or local `return(...)` payload, returned values continue
+  through compatible receiver chains, standalone calls execute with discarded results, and direct/mutual recursion
+  produces structured `user_function_call` diagnostics.
+
+  **Boundary:** This executes registered functions in the interpreter; it does not yet close descriptor/corpus
+  shape preservation or full corpus output parity. Active implementation work advances to
+  `DART-BACKEND-PARITY.5.3`.
+
+  **Verification:** Focused runtime tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook, memory
+  architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.5.1 — add Dart staged function-body registry**
   (DONE — minimal staged registry provider for function-body parse jobs).
 
@@ -16,9 +32,9 @@ Current execution status for interruption-safe batch workflow recovery.
   `action_block` JSON into `body_ast` through `dispatchFunctionBodyParseJobs(...)` and
   `parseSpecWithStagedUserFunctionDefinitionAsts(...)`.
 
-  **Boundary:** This is not general staged parsing and does not execute user functions at runtime yet. Public
-  `parse_job(...)` authoring, provider search roots, recursive staged queues, and function-call execution remain
-  later leaves. Active implementation work advances to `DART-BACKEND-PARITY.5.2`.
+  **Boundary:** This is not general staged parsing. Public `parse_job(...)` authoring, provider search roots, and
+  recursive staged queues remain future work. Runtime function-call execution has since landed in
+  `DART-BACKEND-PARITY.5.2`.
 
   **Verification:** Focused staged-registry tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
   memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.

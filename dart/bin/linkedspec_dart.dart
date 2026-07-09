@@ -11,7 +11,8 @@ Runtime structured diagnostics are available.
 Trace controls, event classes, and sink routing are available.
 Runtime branch/lifecycle/source-boundary trace events are available.
 Staged function-body registry dispatch is available.
-User-function runtime execution and corpus-output parity land in later DART-BACKEND-PARITY leaves.
+User-function runtime execution is available for registered exact-arity calls.
+Corpus-output parity lands in later DART-BACKEND-PARITY leaves.
 ''';
 
 void main(List<String> args) {

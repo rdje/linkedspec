@@ -12,8 +12,8 @@ a first rule-dispatch interpreter, core runtime value/capture helpers,
 string/numeric helper execution, array helper execution, and hash helper
 execution, plus value-block/control/tree helper execution, explicit
 cursor-control behavior, structured runtime diagnostics, and trace
-controls/sinks plus runtime trace events before staged runtime/corpus semantics
-land.
+controls/sinks plus runtime trace events, staged function-body dispatch, and
+registered user-function runtime execution before corpus semantics land.
 
 ## Commands
 
@@ -31,8 +31,8 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.5.1` is the current completed staged-registry boundary; `.5.2`
-is the next user-function runtime frontier. The package can round-trip
+`DART-BACKEND-PARITY.5.2` is the current completed user-function runtime
+boundary; `.5.3` is the next descriptor-shape frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -47,6 +47,12 @@ in stable queue order, dispatch records carry the staged cache key and compiled
 parser shape, and `dispatchFunctionBodyParseJobs(...)` /
 `parseSpecWithStagedUserFunctionDefinitionAsts(...)` stitch the returned
 `action_block` JSON into each function's `body_ast`.
+Registered exact-arity user-function calls now execute through the runtime
+interpreter before helper fallback: arguments evaluate eagerly in the caller,
+params bind into fresh function-local scalar/array/hash stores, function bodies
+return their final expression or local `return(...)` payload, returned values
+feed compatible receiver chains, standalone calls execute with their values
+discarded, and direct or mutual recursion throws a structured diagnostic.
 It also has runtime regex primitives for seek/consume matching, stable
 alternative identity, capture and named-capture records, char-offset projections,
 entry/local match registers, cursor state, and zero-progress detection.
@@ -82,6 +88,5 @@ also has `LinkedSpecTraceConfig`, `LinkedSpecTraceLevel`,
 `LinkedSpecTraceEmitter`, event/scope primitives, stdout/routed-file/mirror sink
 behavior with reset/truncate, and traced runtime entrypoints that preserve parse
 output while emitting parse/rule scopes plus regex, child-dispatch, lifecycle,
-cursor-control, recursion-cutoff, and source-boundary trace events. User-function
-runtime execution and corpus output parity remain later leaves in
-`docs/tasks/DART-BACKEND-PARITY.md`.
+cursor-control, recursion-cutoff, and source-boundary trace events. Corpus output
+parity remains a later leaf in `docs/tasks/DART-BACKEND-PARITY.md`.
