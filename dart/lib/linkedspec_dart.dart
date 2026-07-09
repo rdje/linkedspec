@@ -50,6 +50,12 @@ export 'src/action/action_contracts.dart'
         resolveActionExpressionContracts,
         resolveActionStatementContracts,
         supportedActionIrCallNames;
+export 'src/action/function_registry.dart'
+    show
+        UserFunctionCallResolution,
+        UserFunctionEntry,
+        UserFunctionRegistry,
+        UserFunctionRegistryException;
 export 'src/action/action_parser.dart'
     show parseActionBlock, parseActionExpression, parseActionStatement;
 export 'src/ast/spec_ast.dart'

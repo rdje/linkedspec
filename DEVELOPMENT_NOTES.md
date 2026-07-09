@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.3.3 — Dart function registry):
+  Added Dart's first user-function registry seam in `dart/lib/src/action/function_registry.dart`. The registry
+  builds ordered entries from `FunctionDefinition`, preserves params, arity, source/body spans, `body_payload`,
+  `body_parse_job`, optional stitched `body_ast`, and exposes staged function-body parse jobs for the next
+  compiled-state leaf. The ActionIR contract resolver now accepts an optional `UserFunctionRegistry`: exact-arity
+  registered calls classify as `user_function` before helper fallback, while wrong-arity registered calls diagnose
+  as `user_function_arity_mismatch`. Focused registry/contract tests, Dart format/analyze/full tests, corpus
+  runner, CLI help, and mdBook build pass. Next frontier is `DART-BACKEND-PARITY.3.4` compiled-spec/interpreter
+  state.
+
 - 2026-07-09 (NONCURRENT-HELPER-CODE-PURGE.5 — final helper purge no-drift closeout):
   Closed the Perl/Rust non-current helper code purge. Final exact retired-helper call-shape, label/tag, and
   `?concat:` scans over active source/test/tool/spec/book surfaces are clean. The closeout found one remaining Rust

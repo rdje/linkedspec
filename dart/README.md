@@ -5,8 +5,9 @@ Repository-owned Dart backend scaffold for LinkedSpec parity work.
 This package is intentionally staged. It establishes the Dart package boundary,
 public library entrypoint, CLI smoke entrypoint, corpus-runner entrypoint,
 manifest IO scaffold, source-level AST/data types, a core `.spec` rule parser,
-frontend validation, and `package:test` coverage before function-shell or runtime
-semantics land.
+frontend validation, spec-returned function-shell projection, typed ActionIR
+parsing/contract resolution, and user-function registry scaffolding before
+compiled-state or runtime semantics land.
 
 ## Commands
 
@@ -24,9 +25,11 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.2.3` owns frontend validation. The package can round-trip
+`DART-BACKEND-PARITY.3.3` owns the current boundary. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
-mode, and load/validate the manifest-backed corpus directory. Function-definition
-shell integration, compiler, runtime, tracing, and corpus parity remain later leaves in
-`docs/tasks/DART-BACKEND-PARITY.md`.
+mode, project spec-returned function-definition nodes, parse helper/action source
+into typed ActionIR nodes, resolve current helper/control contracts, build an
+ordered `UserFunctionRegistry`, and classify exact-arity user calls before helper
+fallback. Compiled state, runtime execution, tracing, and corpus output parity
+remain later leaves in `docs/tasks/DART-BACKEND-PARITY.md`.

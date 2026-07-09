@@ -108,6 +108,35 @@ void main() {
       ),
     );
   });
+
+  test('resolves exact-arity user calls before helper fallback', () {
+    final registry = UserFunctionRegistry.fromFunctions([
+      _function('normalize', const ['value']),
+    ]);
+    final block = parseActionBlock(
+      'return(normalize(" x ")); normalize("x", "y"); mystery("z")',
+    );
+
+    final resolution = resolveActionBlockContracts(
+      block,
+      functionRegistry: registry,
+    );
+
+    final userContract = resolution.contracts.singleWhere(
+      (contract) => contract.sourceName == 'normalize',
+    );
+    expect(userContract.family, 'user_function');
+    expect(userContract.canonicalName, 'normalize');
+    expect(userContract.positionalArgCount, 1);
+    expect(_diagnosticCodes(resolution), [
+      'user_function_arity_mismatch',
+      'unknown_helper',
+    ]);
+    expect(
+      resolution.diagnostics.first.message,
+      contains("expects arity 1, got 2"),
+    );
+  });
 }
 
 List<String> _canonicalNames(ActionContractResolution resolution) {
@@ -125,4 +154,16 @@ ActionResolvedContract _contract(
 
 List<String> _diagnosticCodes(ActionContractResolution resolution) {
   return [for (final diagnostic in resolution.diagnostics) diagnostic.code];
+}
+
+FunctionDefinition _function(String name, List<String> params) {
+  return FunctionDefinition(
+    name: name,
+    params: params,
+    arity: params.length,
+    bodySource: 'return(value)',
+    source: 'fn $name(${params.join(", ")}) { return(value) }',
+    sourceSpan: const SourceSpan(lineStart: 1, lineEnd: 1),
+    bodySpan: const SourceSpan(lineStart: 1, lineEnd: 1),
+  );
 }

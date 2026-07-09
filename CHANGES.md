@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.3.3 — add Dart function registry
+
+**Scope:** Dart user-function registry API, ActionIR contract resolver integration, Dart tests, package README,
+mdBook Dart handoff/status text, live docs, roadmap/task-tree status, and Knowledge Map facts.
+
+**Change:** Added `dart/lib/src/action/function_registry.dart` with `UserFunctionRegistry`,
+`UserFunctionEntry`, and `UserFunctionCallResolution`. The registry preserves ordered `FunctionDefinition`
+records, params, arity, source/body spans, `body_payload`, `body_parse_job`, optional stitched `body_ast`, and
+staged function-body parse jobs. `resolveActionBlockContracts(...)`, `resolveActionStatementContracts(...)`, and
+`resolveActionExpressionContracts(...)` now accept an optional registry and classify exact-arity user calls before
+helper fallback; wrong-arity registered calls diagnose as `user_function_arity_mismatch`.
+
+**Validation:** Focused `dart test test/function_registry_test.dart test/action_contracts_test.dart`,
+`dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`, full `dart test`,
+`dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`, corpus runner help, CLI help,
+and mdBook build pass.
+
 ## 2026-07-09 — NONCURRENT-HELPER-CODE-PURGE.5 — close helper purge no-drift
 
 **Scope:** Final active source/test/tool/spec no-drift scan, Rust runtime unit-test fixture cleanup, live docs,

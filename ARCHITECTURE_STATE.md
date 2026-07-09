@@ -5,6 +5,12 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.3.3` added Dart user-function registry infrastructure in
+  `dart/lib/src/action/function_registry.dart`. `UserFunctionRegistry` preserves ordered `FunctionDefinition`
+  records, staged `body_parse_job` records, `body_payload`, optional `body_ast`, params/arity, and source/body
+  spans. `action_contracts.dart` can now resolve exact-arity user calls as `user_function` before helper fallback
+  when passed a registry, and wrong-arity registered calls produce user-function arity diagnostics. Compiled-spec
+  state remains `DART-BACKEND-PARITY.3.4`.
 - `2026-07-09` refresh: `NONCURRENT-HELPER-CODE-PURGE.5` closed the final no-drift audit for retired helper
   spellings in active Perl/Rust code/test/tool/spec surfaces. Exact retired-helper call-shape, label/tag, and
   `?concat:` scans are clean. The last active Rust runtime unit-test fixture that still used retired helper-call
@@ -37,7 +43,7 @@ This document is the current high-level technical reading of the project shape. 
   shapes, and access expressions, then record current canonical helper/control contracts or generic
   diagnostics. `dart/lib/src/validation/spec_validator.dart` now shares the current helper/control name
   table through `isKnownActionIrCallName(...)` for function-name collision checks. Function registry
-  construction and compiled-spec state remain `.3.3` and later.
+  construction later landed in `.3.3`; compiled-spec state remains `.3.4`.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.3.1` added the Dart ActionIR AST parser.
   `dart/lib/src/action/action_ast.dart` defines typed action blocks, statements, expressions, arguments,
   access segments, literals, assignments, receiver chains, block values, and structured-control nodes.

@@ -201,12 +201,35 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.3.2 - add Dart ActionIR contract resolver`
 
 - ID: `DART-BACKEND-PARITY.3.3`
-  Status: `pending`
+  Status: `done`
   Goal: Build the function registry and staged function-body parse-job records.
   Acceptance: Function definitions preserve params, arity, source/body spans, `body_payload`,
     `body_parse_job`, and stitched `body_ast`, with exact-arity resolution before helper fallback.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Added `dart/lib/src/action/function_registry.dart` with
+    `UserFunctionRegistry`, `UserFunctionEntry`, and exact-arity call resolution over ordered
+    `FunctionDefinition` records. The registry preserves params, arity, source/body spans, `body_payload`,
+    `body_parse_job`, and optional stitched `body_ast`, and exposes staged function-body parse jobs. The ActionIR
+    contract resolver now accepts an optional registry and resolves exact-arity user calls before helper fallback;
+    wrong-arity registered calls diagnose as `user_function_arity_mismatch`. Focused registry/contract tests,
+    Dart format/analyze/test, corpus runner, CLI help, mdBook, memory, Knowledge Map, task-tree metadata, and
+    doctrine checks pass.
+  Acceptance Checklist:
+    - [x] **REPRODUCE / ISSUE** — `.3.2` could validate function names and resolve helper contracts, but Dart had
+      no reusable ordered user-function registry object and helper-contract resolution classified registered user
+      calls as ordinary unknown helpers.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `FunctionDefinition` already carried staged body sidecars in
+      `dart/lib/src/ast/spec_ast.dart`, and `.2.4` projected them from spec-returned nodes, but no Dart module
+      indexed those definitions or connected exact-arity user-call lookup to `action_contracts.dart`.
+    - [x] **FIX** — Added the registry module, exported it from the public package, and threaded an optional
+      `UserFunctionRegistry` through the ActionIR contract resolver entrypoints.
+    - [x] **ADDRESSED (verified)** — `test/function_registry_test.dart` proves ordered entries, parse-job
+      exposure, sidecar/body-AST preservation, duplicate-name rejection, exact matches, wrong arity, and missing
+      names. `test/action_contracts_test.dart` proves exact-arity user calls classify before helper fallback.
+    - [x] **NO REGRESSION** — Dart format/analyze/full tests, corpus runner, and CLI help pass.
+    - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
+      `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`, roadmap tracker rows, architecture state, Knowledge Map facts,
+      `docs/TASK_TREE.md`, and this task tree are updated.
+  Commit: `DART-BACKEND-PARITY.3.3 - add Dart function registry`
 
 - ID: `DART-BACKEND-PARITY.3.4`
   Status: `pending`
@@ -361,7 +384,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-BACKEND-PARITY.3.3` | `pending` | The ActionIR parser and current-contract resolver exist; build function registry and staged function-body parse-job records before compiled-state work. |
+| 1 | `DART-BACKEND-PARITY.3.3` | `done` | Function registry and staged parse-job records are built; compiled-state work is next. |
+| 2 | `DART-BACKEND-PARITY.3.4` | `pending` | Build the Dart compiled-spec/interpreter model over parsed rules, ActionIR payloads, and the function registry. |
 
 ## Dart Toolchain And Package Layout
 
@@ -497,6 +521,29 @@ The `.3.1` ActionIR AST parser layer adds:
 - `test/action_ast_parser_test.dart` for accepted node families and `raw_perl` structural fallback.
 - No helper-contract resolution, compiled-spec state, runtime execution, or corpus output comparison yet.
 
+The `.3.2` ActionIR contract layer adds:
+
+- `lib/src/action/action_contracts.dart` with public `resolveActionBlockContracts(...)`,
+  `resolveActionStatementContracts(...)`, `resolveActionExpressionContracts(...)`,
+  `canonicalActionHelperName(...)`, and `isKnownActionIrCallName(...)`.
+- Resolution of typed helper/action AST nodes against current canonical helper/control contracts.
+- Generic `unknown_helper` diagnostics for helper-looking calls outside the current contract table.
+- Shared current-name validation for user-function collisions.
+- No user-function call classification, compiled-spec state, runtime execution, or corpus output comparison yet.
+
+The `.3.3` function-registry layer adds:
+
+- `lib/src/action/function_registry.dart` with public `UserFunctionRegistry`, `UserFunctionEntry`, and
+  `UserFunctionCallResolution`.
+- Ordered registry entries built from `FunctionDefinition` records, with staged function-body parse jobs exposed
+  for later compiled-state/staged-dispatch work.
+- Preservation of params, arity, source/body spans, `body_payload`, `body_parse_job`, and optional stitched
+  `body_ast`.
+- Optional registry-aware ActionIR contract resolution: exact-arity user calls classify as `user_function` before
+  helper fallback; wrong-arity registered calls report `user_function_arity_mismatch`.
+- `test/function_registry_test.dart` plus resolver coverage in `test/action_contracts_test.dart`.
+- No compiled-spec state, runtime execution, or corpus output comparison yet.
+
 ## Decisions
 
 - `2026-07-09`: Dart starts interpreter-first. The primary parity path is
@@ -526,15 +573,18 @@ The `.3.1` ActionIR AST parser layer adds:
 - `2026-07-09`: Dart `.3.2` resolves typed ActionIR calls and structural forms against the current
   helper/control contract table only. Non-current helper-looking calls diagnose as `unknown_helper`; Dart
   does not carry non-current helper spelling tables or replacement maps.
+- `2026-07-09`: Dart `.3.3` builds user-function registry records from `FunctionDefinition` sidecars before
+  compiled-state work. Registry-aware ActionIR contract resolution checks exact-arity user calls before helper
+  fallback; wrong-arity registered calls produce user-function diagnostics.
 
 ## Open Questions
 
-- None blocking `.3.3`. Helper-contract mapping is available; function registry and staged body parse-job
-  records are next.
+- None blocking `.3.4`. Function registry and staged body parse-job records are available; compiled-spec state is
+  next.
 
 ## Blockers
 
-- None known before `.3.3` function-registry work.
+- None known before `.3.4` compiled-state work.
 
 ## Verification Log
 
@@ -550,6 +600,7 @@ The `.3.1` ActionIR AST parser layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.2.4` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Function-shell projection consumes spec-returned nodes, preserves staged sidecars, and does not raw-scan `fn` source. |
 | `2026-07-09` | `DART-BACKEND-PARITY.3.1` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. ActionIR parser tests cover typed helper/action AST node families and structural `raw_perl` fallback. |
 | `2026-07-09` | `DART-BACKEND-PARITY.3.2` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; Dart-tree non-current-spelling scan; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. ActionIR contract resolver records current canonical helper/control contracts and generic diagnostics without non-current spelling tables. |
+| `2026-07-09` | `DART-BACKEND-PARITY.3.3` | Focused `dart test test/function_registry_test.dart test/action_contracts_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart preserves staged function sidecars in an ordered registry and resolves exact-arity user calls before helper fallback. |
 
 ## Commit Log
 
@@ -565,6 +616,7 @@ The `.3.1` ActionIR AST parser layer adds:
 | `DART-BACKEND-PARITY.2.4` | `DART-BACKEND-PARITY.2.4 - integrate Dart function shell projection` | Spec-returned function-definition projection; `.2` frontend container closes. |
 | `DART-BACKEND-PARITY.3.1` | `DART-BACKEND-PARITY.3.1 - add Dart ActionIR AST parser` | Typed helper/action AST parser; helper-contract mapping remains `.3.2`. |
 | `DART-BACKEND-PARITY.3.2` | `DART-BACKEND-PARITY.3.2 - add Dart ActionIR contract resolver` | Current helper/control contract resolution; function registry uses the shared current-name table. |
+| `DART-BACKEND-PARITY.3.3` | `DART-BACKEND-PARITY.3.3 - add Dart function registry` | Ordered user-function registry and exact-arity resolver; compiled state remains `.3.4`. |
 
 ## Changelog
 
@@ -587,3 +639,5 @@ The `.3.1` ActionIR AST parser layer adds:
   to `.3.2` for canonical helper-contract mapping and diagnostics.
 - `2026-07-09`: Added Dart ActionIR contract resolution over typed helper/action AST nodes; frontier
   advances to `.3.3` for function registry and staged function-body parse jobs.
+- `2026-07-09`: Added Dart user-function registry and exact-arity resolver over staged function sidecars;
+  frontier advances to `.3.4` for compiled-spec/interpreter state.

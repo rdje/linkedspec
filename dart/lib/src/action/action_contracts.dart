@@ -1,4 +1,5 @@
 import 'action_ast.dart';
+import 'function_registry.dart';
 
 final class ActionContractResolution {
   const ActionContractResolution({
@@ -86,22 +87,29 @@ final class ActionContractDiagnostic {
   }
 }
 
-ActionContractResolution resolveActionBlockContracts(ActionBlock block) {
-  final resolver = _ActionContractResolver();
+ActionContractResolution resolveActionBlockContracts(
+  ActionBlock block, {
+  UserFunctionRegistry? functionRegistry,
+}) {
+  final resolver = _ActionContractResolver(functionRegistry: functionRegistry);
   resolver.visitBlock(block);
   return resolver.finish();
 }
 
 ActionContractResolution resolveActionStatementContracts(
-  ActionStatement statement,
-) {
-  final resolver = _ActionContractResolver();
+  ActionStatement statement, {
+  UserFunctionRegistry? functionRegistry,
+}) {
+  final resolver = _ActionContractResolver(functionRegistry: functionRegistry);
   resolver.visitStatement(statement);
   return resolver.finish();
 }
 
-ActionContractResolution resolveActionExpressionContracts(ActionExpr expr) {
-  final resolver = _ActionContractResolver();
+ActionContractResolution resolveActionExpressionContracts(
+  ActionExpr expr, {
+  UserFunctionRegistry? functionRegistry,
+}) {
+  final resolver = _ActionContractResolver(functionRegistry: functionRegistry);
   resolver.visitExpr(expr);
   return resolver.finish();
 }
@@ -622,6 +630,9 @@ String _familyForCanonical(String canonicalName) {
 }
 
 final class _ActionContractResolver {
+  _ActionContractResolver({this.functionRegistry});
+
+  final UserFunctionRegistry? functionRegistry;
   final List<ActionResolvedContract> _contracts = [];
   final List<ActionContractDiagnostic> _diagnostics = [];
 
@@ -898,6 +909,43 @@ final class _ActionContractResolver {
     required String surface,
     required List<ActionArgument> args,
   }) {
+    final positionalArgCount = _positionalArgCount(args);
+    final keywordArgCount = _keywordArgCount(args);
+    final argCount = positionalArgCount + keywordArgCount;
+    final registry = functionRegistry;
+    if (surface == 'function' && registry != null) {
+      final resolution = registry.resolveCall(name, argCount);
+      if (resolution.matched) {
+        _contracts.add(
+          ActionResolvedContract(
+            sourceName: name,
+            canonicalName: name,
+            family: 'user_function',
+            surface: surface,
+            source: source,
+            sourceSpan: sourceSpan,
+            positionalArgCount: positionalArgCount,
+            keywordArgCount: keywordArgCount,
+          ),
+        );
+        return;
+      }
+      if (resolution.arityMismatch) {
+        _diagnostics.add(
+          ActionContractDiagnostic(
+            code: 'user_function_arity_mismatch',
+            message:
+                "user function '$name' expects arity "
+                '${resolution.expectedArities.join(" or ")}, got $argCount',
+            helperName: name,
+            source: source,
+            sourceSpan: sourceSpan,
+          ),
+        );
+        return;
+      }
+    }
+
     if (!isKnownActionIrCallName(name)) {
       _diagnostics.add(
         ActionContractDiagnostic(
@@ -920,8 +968,8 @@ final class _ActionContractResolver {
         surface: surface,
         source: source,
         sourceSpan: sourceSpan,
-        positionalArgCount: _positionalArgCount(args),
-        keywordArgCount: _keywordArgCount(args),
+        positionalArgCount: positionalArgCount,
+        keywordArgCount: keywordArgCount,
       ),
     );
   }

@@ -278,8 +278,13 @@ nodes for diagnostics. Dart also has ActionIR contract resolution:
 canonical helper/control contracts for calls, receiver methods, structural
 assignments, controls, nested arguments, block values, shapes, and access
 expressions. Non-current helper-looking calls produce generic diagnostics rather
-than host-language fallback. Function registry construction, compiled state, and
-runtime execution remain later Dart leaves.
+than host-language fallback. Dart also has the first user-function registry seam:
+`UserFunctionRegistry.fromSpec(...)` / `fromFunctions(...)` preserve ordered
+`FunctionDefinition` records, expose their staged function-body parse jobs, keep
+`body_payload`, `body_parse_job`, and any stitched `body_ast`, and let the ActionIR
+contract resolver classify exact-arity user-function calls before helper fallback.
+Wrong-arity registered calls diagnose as user-function arity errors. Compiled
+state and runtime execution remain later Dart leaves.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

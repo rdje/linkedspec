@@ -18,29 +18,27 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `NONCURRENT-HELPER-CODE-PURGE.5` — final no-drift closeout for the Perl/Rust
-  non-current helper purge is complete. Active source/test/tool/spec scans are clean for retired helper call
-  shapes and label/tag collisions; one leftover Rust generic-fallback unit fixture now uses invented unknown names.
-- prior_leaf: `NONCURRENT-HELPER-CODE-PURGE.4` — active tests, tools, generated fixtures, and checked-in `.spec`
-  labels/source strings are migrated away from retired helper spellings. EBNF labels use
-  `return_scalar_value` / `return_array_value`; portmap concatenation uses `?concatenation:`.
+- latest_completed_leaf: `DART-BACKEND-PARITY.3.3` — Dart now has `UserFunctionRegistry` / `UserFunctionEntry`
+  over ordered `FunctionDefinition` records, exposes staged body parse jobs, preserves sidecars/body AST, and
+  resolves exact-arity user calls before helper fallback in ActionIR contract resolution.
+- prior_leaf: `NONCURRENT-HELPER-CODE-PURGE.5` — final no-drift closeout for the Perl/Rust non-current helper
+  purge is complete; active retired-helper call-shape/label/tag scans are clean.
 - latest_commit: HEAD containing this pointer should be
-  `NONCURRENT-HELPER-CODE-PURGE.5 - close helper purge no-drift`; parent before this slice is
-  `NONCURRENT-HELPER-CODE-PURGE.4 - migrate retired helper fixtures`.
+  `DART-BACKEND-PARITY.3.3 - add Dart function registry`; parent before this slice is
+  `NONCURRENT-HELPER-CODE-PURGE.5 - close helper purge no-drift`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `NONCURRENT-HELPER-CODE-PURGE` is closing; next eligible frontier after this clean commit is
-  `DART-BACKEND-PARITY.3.3` per `docs/TASK_TREE.md`.
-- next_action: from a clean repo, resume PNT on `DART-BACKEND-PARITY.3.3` (function registry and staged
-  function-body parse-job records).
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.3.4` pending.
+- next_action: from a clean repo, implement `DART-BACKEND-PARITY.3.4` compiled-spec/interpreter state over parsed
+  rules, ActionIR payloads, and the user-function registry.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, task-tree index,
   ROADMAP/ROADMAP_V2, mdBook status/backend-handoff/formal grammar/helper chapters, relevant ADR/KM facts,
-  and Rust core/runtime/test/spec owners for the non-current helper purge `.5` closeout.
+  Dart package/source owners for `.3.3`, and Rust/core/runtime/test/spec owners for the helper purge closeout.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1027` tests**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none once the `NONCURRENT-HELPER-CODE-PURGE.5` pointer commit lands; do not pivot unless the repo is
+- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.3.3` pointer commit lands; do not pivot unless the repo is
   handoff-ready.

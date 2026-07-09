@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.3.3 — add Dart function registry**
+  (DONE user-function registry and staged function-body parse-job records; compiled state is next).
+
+  **Change:** Added `UserFunctionRegistry`, `UserFunctionEntry`, and exact-arity call resolution over Dart
+  `FunctionDefinition` records. ActionIR contract resolution can now classify exact-arity user calls before helper
+  fallback and reports wrong-arity registered calls as user-function arity diagnostics.
+
+  **Boundary:** This is still non-executing frontend/contract infrastructure. Dart compiled-spec state, runtime
+  interpreter execution, and corpus output comparison remain later leaves.
+
+  **Verification:** Focused registry/contract tests, Dart format/analyze/full tests, corpus runner, CLI help, and
+  mdBook build pass.
+
 - 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.5 — close helper purge no-drift**
   (DONE final no-drift scan and documentation closeout; tree complete).
 
