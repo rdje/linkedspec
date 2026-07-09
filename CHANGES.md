@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.2.3 — add Dart frontend validation
+
+**Scope:** Dart frontend validation, strict-syntax checks, validation fixtures, docs, and frontier advancement.
+
+**Change:** Added `dart/lib/src/validation/spec_validator.dart` and exported `validateSpec(...)`.
+The validator checks top-rule presence, duplicate rule labels, duplicate/colliding function registry records,
+invalid function parameters, malformed raw body lines, mixed action/blind edge families, grouped action targets
+without a shared block, undefined targets, out-of-range regex slots, and lightweight regex structural errors.
+`strictSyntax: true` adds unused-rule rejection. Added `test/spec_validator_test.dart` for these failures plus
+non-strict validation over all checked-in `specs/*.spec` and rule-only corpus `input.spec` files.
+
+**Validation:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+`dart test`, `dart run bin/linkedspec_dart.dart --help`,
+`dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`, and
+`dart run bin/corpus_runner.dart --help` pass. `git diff --check`, memory architecture, Knowledge Map
+regeneration/check, task-tree metadata, doctrine gates, and `mdbook build docs/linkedspec-book` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.2.2 — implement Dart spec parser
 
 **Scope:** Dart core `.spec` rule parser, parser fixtures, shipped-spec/corpus parser coverage, docs,

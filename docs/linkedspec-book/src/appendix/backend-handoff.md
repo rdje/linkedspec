@@ -251,8 +251,11 @@ through JSON with the Rust/mdBook field names. The Dart core `parseSpec(...)`
 parser now produces those source AST types for rule paragraphs, headers/modes,
 regex literals, lifecycle blocks, action/blind-call edges, fluent continuations,
 markers, comments, and nested block boundaries, with tests over all checked-in
-`specs/*.spec` files and rule-only corpus specs. Strict validation and top-level
-function-definition shell integration remain the next frontend leaves.
+`specs/*.spec` files and rule-only corpus specs. Dart `validateSpec(...)` then
+checks top-rule presence, duplicates, source-AST edge consistency, target
+references/indexes, regex structure, malformed raw body lines, and strict-mode
+unused rules. Top-level function-definition shell integration remains the next
+frontend leaf.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

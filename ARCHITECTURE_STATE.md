@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.2.3` added Dart frontend validation in
+  `dart/lib/src/validation/spec_validator.dart`. `validateSpec(...)` now checks top-rule presence,
+  duplicate labels/functions, function registry collisions/parameters, raw malformed body lines, mixed edge
+  families, grouped action targets without shared blocks, undefined targets, regex-slot index ranges, and
+  lightweight regex structural errors; `strictSyntax: true` adds unused-rule rejection. Validation is still
+  source-AST only. Top-level `fn` shell extraction/staging remains `.2.4`; helper/action compilation and runtime
+  semantics remain later lanes.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.2.2` added the Dart core `.spec` rule parser in
   `dart/lib/src/parser/spec_parser.dart`. `parseSpec(...)` now produces the source AST for rule
   paragraphs, headers/modes, header-rest body elements, regex literals, lifecycle blocks, action and

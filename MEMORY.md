@@ -18,20 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.2.2` — added Dart core `.spec` rule parser
-  `parseSpec(...)`, parser tests, all-shipped-spec parser coverage, and rule-only corpus spec coverage.
-  Validation/function-shell/runtime semantics remain deferred.
-- prior_leaf: `DART-BACKEND-PARITY.2.1` — added Dart source-level AST/data types, staged parse-job
-  sidecars, JSON round-trip tests, and `RuleMode` helper tests.
+- latest_completed_leaf: `DART-BACKEND-PARITY.2.3` — added Dart frontend validation `validateSpec(...)`,
+  strict-syntax unused-rule checks, focused validator tests, and non-strict validation over shipped specs plus
+  rule-only corpus specs. Function-shell/runtime semantics remain deferred.
+- prior_leaf: `DART-BACKEND-PARITY.2.2` — added Dart core `.spec` rule parser `parseSpec(...)`, parser
+  tests, all-shipped-spec parser coverage, and rule-only corpus spec coverage.
 - latest_commit: HEAD containing this pointer should be
-  `DART-BACKEND-PARITY.2.2 - implement Dart spec parser`; parent before this slice is
-  `DART-BACKEND-PARITY.2.1 - define Dart frontend AST data types`.
+  `DART-BACKEND-PARITY.2.3 - add Dart frontend validation`; parent before this slice is
+  `DART-BACKEND-PARITY.2.2 - implement Dart spec parser`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.2.3` pending.
-- next_action: from a clean repo, implement Dart frontend validation and strict syntax behavior for duplicate
-  labels/functions, mixed edge families, undefined references, malformed regexes, malformed function shells,
-  and documented strict-syntax warnings.
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.2.4` pending.
+- next_action: from a clean repo, integrate `specs/user_function_definition.spec` as the Dart function-definition
+  shell owner, preserving function source/body spans and staged parse-job sidecars without raw host scanning.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, task-tree index,
   ROADMAP/ROADMAP_V2, mdBook status/backend-handoff/formal grammar/helper chapters, relevant ADR/KM facts,
   and codebase architecture/source inventory for the Dart AST data-type slice.
@@ -41,5 +40,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.2.2` pointer commit lands; do not pivot unless the repo is
+- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.2.3` pointer commit lands; do not pivot unless the repo is
   handoff-ready.

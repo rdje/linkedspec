@@ -1,0 +1,34 @@
+---
+id: dart-frontend-validation
+title: Dart frontend validation checks parsed source ASTs before compiler/runtime work
+answers:
+  - does Dart validate parsed spec ASTs
+  - where is the Dart spec validator
+  - what does validateSpec check
+  - does Dart strict syntax exist
+  - does Dart reject duplicate labels
+  - does Dart reject undefined edge targets
+  - does Dart validate user function registry records
+date: 2026-07-09
+status: current
+tags: [dart, validation, parser, ast, strict-syntax]
+evidence: "DART-BACKEND-PARITY.2.3 adds dart/lib/src/validation/spec_validator.dart and dart/test/spec_validator_test.dart. Tests cover focused validation failures, strictSyntax unused-rule rejection, all checked-in specs/*.spec in non-strict mode, and rule-only corpus input.spec files."
+reverify: "cd dart && dart test test/spec_validator_test.dart && dart analyze --fatal-infos --fatal-warnings"
+---
+
+Dart `validateSpec(...)` lives in `dart/lib/src/validation/spec_validator.dart`
+and is exported from `dart/lib/linkedspec_dart.dart`. It validates parsed
+source ASTs produced by `parseSpec(...)` or assembled by later frontend stages.
+
+Current checks cover top-rule presence, duplicate rule labels, duplicate user
+function names, function registry collisions and parameter shape, malformed raw
+body lines, mixed action/blind-call edge families, grouped action targets that
+lack a shared block, undefined targets, out-of-range regex-slot references, and
+lightweight regex structural errors.
+
+`validateSpec(spec, strictSyntax: true)` adds strict unused-rule rejection. The
+validator does not parse top-level `fn` definitions from source and does not
+execute helper/action or runtime semantics.
+
+Related facts: [[dart-core-spec-parser]], [[dart-backend-scaffold-package]],
+[[rust-strict-syntax-validation]].

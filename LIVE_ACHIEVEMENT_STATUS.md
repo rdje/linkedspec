@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.2.3 — add Dart frontend validation**
+  (DONE AST validation; top-level function-shell extraction and runtime behavior still deferred).
+
+  **Change:** Added `validateSpec(...)` for Dart source ASTs. It rejects missing top rules, duplicate labels,
+  duplicate/colliding function records, invalid function parameters, raw malformed body lines, mixed action/blind
+  edge families, grouped action targets without a shared block, undefined targets, out-of-range regex slots, and
+  lightweight regex structural errors. Strict mode adds unused-rule rejection.
+
+  **Boundary:** This validates parsed source ASTs only. It does not parse top-level `fn` shells from source,
+  compile helper/action AST, execute runtime semantics, or compare corpus outputs. The next frontier is
+  `DART-BACKEND-PARITY.2.4`.
+
+  **Verification:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+  `dart test`, `dart run bin/linkedspec_dart.dart --help`,
+  `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`, and
+  `dart run bin/corpus_runner.dart --help` pass. `git diff --check`, memory architecture, Knowledge Map
+  regeneration/check, task-tree metadata, doctrine gates, and `mdbook build docs/linkedspec-book` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.2.2 — implement Dart spec parser**
   (DONE core rule parser; validation/function-shell/runtime behavior still deferred).
 

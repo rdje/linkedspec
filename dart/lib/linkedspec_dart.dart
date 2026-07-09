@@ -35,3 +35,5 @@ export 'src/scaffold.dart'
         describeLinkedSpecDartScaffold,
         linkedSpecDartPackageName,
         linkedSpecDartScaffoldStatus;
+export 'src/validation/spec_validator.dart'
+    show SpecValidationException, validateSpec;

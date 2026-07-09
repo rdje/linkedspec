@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.2.3 — Dart frontend validation):
+  Added `dart/lib/src/validation/spec_validator.dart` with `validateSpec(...)`. The validator mirrors the
+  Rust/source-AST validation boundary: top-rule presence, duplicate rule/function names, function registry
+  collisions and parameter checks, raw malformed body lines, mixed action/blind edges, grouped action edges
+  without a shared block, undefined targets, regex-slot index range checks, and lightweight regex structural
+  checks. `strictSyntax: true` adds unused-rule rejection. `test/spec_validator_test.dart` covers focused
+  negative cases plus non-strict validation over all shipped `specs/*.spec` and rule-only corpus specs.
+  Top-level `fn` shell extraction remains `.2.4`; runtime semantics remain later lanes.
+
 - 2026-07-09 (DART-BACKEND-PARITY.2.2 — Dart `.spec` parser):
   Added `dart/lib/src/parser/spec_parser.dart` and exported `parseSpec(...)` from the public Dart library.
   The parser mirrors the current Rust core parser boundary: it parses rule paragraphs into source AST types,
