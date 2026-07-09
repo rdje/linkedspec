@@ -264,6 +264,17 @@ attaches ordered `FunctionDefinition` records. This is not a Dart raw scanner fo
 `fn` source; until Dart has an executable `.spec` engine, callers provide the
 spec-returned node list as the semantic input.
 
+Dart now also has a typed ActionIR parser seam. `parseActionBlock(...)`,
+`parseActionStatement(...)`, and `parseActionExpression(...)` produce structural
+nodes for helper/action code: action blocks, value-drop statements, calls,
+positional and keyword arguments, primitive and regex literals, variables,
+indexed/nested access, array/hash shape literals, scalar/array/hash/nested
+assignments, expression-valued blocks, attached `if`/`when`/`elseif`/`else` /
+`otherwise`, `while`, `switch`/`case`/`default`, receiver-dot fluent chains, and
+trailing block arguments. Unsupported expressions remain explicit `raw_perl`
+nodes for the next diagnostic layer; helper-family resolution, retired-helper
+diagnostics, compiled state, and runtime execution remain later Dart leaves.
+
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under
 `rust/linkedspec-runtime/tests/corpus/`. The corpus root has a `manifest.json`

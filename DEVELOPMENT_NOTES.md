@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.3.1 — Dart ActionIR AST parser):
+  Added `dart/lib/src/action/action_ast.dart` and `dart/lib/src/action/action_parser.dart`, exported from the
+  public Dart library. Dart now parses helper/action source into typed ActionIR nodes for action blocks,
+  value-drop statements, calls, positional/keyword args, literals, variables, indexed/nested access, array/hash
+  shape literals, scalar/array/hash/nested assignments, expression-valued blocks, receiver-dot fluent chains,
+  trailing block arguments, and attached structured controls (`if`/`when`, `elseif`/`else`/`otherwise`,
+  `while`, `switch`/`case`/`default`). Unsupported expressions remain structural `raw_perl` nodes for later
+  validation/diagnostics; no helper-family resolution or runtime behavior landed. `test/action_ast_parser_test.dart`
+  covers the accepted node families. `.3.2` owns mapping typed nodes to canonical helper contracts and
+  diagnostics.
+
 - 2026-07-09 (DART-BACKEND-PARITY.2.4 — Dart function-definition shell projection):
   Added `dart/lib/src/parser/user_function_definition_shell.dart` with
   `projectUserFunctionDefinitionAsts(...)` and `parseSpecWithUserFunctionDefinitionAsts(...)`.

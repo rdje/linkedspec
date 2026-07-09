@@ -32,8 +32,9 @@ manifest format/count/name shape, detects missing or stale fixture directories, 
 `dart/lib/src/validation/spec_validator.dart` validates parsed source ASTs in non-strict or strict mode.
 `dart/lib/src/parser/user_function_definition_shell.dart` projects spec-returned function-definition nodes
 into `FunctionDefinition` records without raw-scanning `fn` source. The package does not implement
-helper/action AST typing, compiled-spec state, runtime semantics, or corpus output comparison yet.
+canonical helper-contract mapping, compiled-spec state, runtime semantics, or corpus output comparison yet.
+`dart/lib/src/action/action_parser.dart` now parses helper/action source into typed ActionIR nodes.
 
 Related facts: [[dart-core-spec-parser]], [[dart-frontend-validation]],
-[[dart-function-definition-shell-projection]], [[dart-backend-interpreter-first-plan]],
-[[text-to-ast-backend-doctrine]], [[rust-perl-output-oracle]].
+[[dart-function-definition-shell-projection]], [[dart-actionir-ast-parser]],
+[[dart-backend-interpreter-first-plan]], [[text-to-ast-backend-doctrine]], [[rust-perl-output-oracle]].

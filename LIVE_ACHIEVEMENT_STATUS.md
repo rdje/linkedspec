@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.3.1 — add Dart ActionIR AST parser**
+  (DONE typed helper/action AST parser; helper-contract mapping and runtime behavior still deferred).
+
+  **Change:** Added Dart ActionIR AST node classes and parser entrypoints. `parseActionBlock(...)`,
+  `parseActionStatement(...)`, and `parseActionExpression(...)` now produce typed nodes for calls,
+  literals, variables, indexed/nested access, shape literals, scalar/array/hash/nested assignments,
+  expression-valued blocks, attached control flow, receiver chains, trailing block arguments, and standalone
+  value-drop statements. Unsupported expressions remain structural `raw_perl` nodes for later diagnostics.
+
+  **Boundary:** This is parsing only. It does not map helper families to canonical contracts, reject
+  unknown/retired helpers, build compiled-spec state, execute helper/action semantics, or compare corpus
+  outputs. The next frontier is `DART-BACKEND-PARITY.3.2`.
+
+  **Verification:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+  and `dart test` pass. Full repo gates are run during commit closeout.
+
 - 2026-07-09: **DART-BACKEND-PARITY.2.4 — integrate Dart function shell projection**
   (DONE spec-returned function-definition projection; helper/action AST and runtime behavior still deferred).
 

@@ -168,13 +168,23 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Children: `.3.1`, `.3.2`, `.3.3`, `.3.4`
 
 - ID: `DART-BACKEND-PARITY.3.1`
-  Status: `pending`
+  Status: `done`
   Goal: Parse helper/action source into typed expression and statement AST nodes.
   Acceptance: Calls, literals, variables, direct/nested access, shape literals, assignments, block
     values, attached control flow, receiver chains, and standalone value-drop statements are structural
     AST nodes, not text rewrites.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** `dart/lib/src/action/action_ast.dart` defines typed ActionIR
+    block, statement, expression, argument, access-segment, literal, assignment, receiver-chain, block-value,
+    and structured-control data nodes with JSON projection. `dart/lib/src/action/action_parser.dart` adds
+    `parseActionBlock(...)`, `parseActionStatement(...)`, and `parseActionExpression(...)`. The parser
+    covers calls, positional/keyword arguments, primitive literals, regex literals, variables, indexed and
+    nested access, array/hash shape literals, scalar assignment, array append, hash-index assignment,
+    nested-access assignment, expression-valued blocks, attached `if`/`when`/`elseif`/`else`/`otherwise`,
+    `while`, `switch`/`case`/`default`, receiver-dot fluent chains, trailing block arguments, and standalone
+    expression statements with `drops_value = true`. Unsupported expressions stay structural as `raw_perl`
+    nodes for later validation/diagnostics rather than being rewritten as host code. `test/action_ast_parser_test.dart`
+    covers each accepted node family.
+  Commit: `DART-BACKEND-PARITY.3.1 - add Dart ActionIR AST parser`
 
 - ID: `DART-BACKEND-PARITY.3.2`
   Status: `pending`
@@ -345,7 +355,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-BACKEND-PARITY.3.1` | `pending` | The `.2` frontend container is closed; start typed helper/action AST parsing before compiled-state and runtime work. |
+| 1 | `DART-BACKEND-PARITY.3.2` | `pending` | The ActionIR parser exists; map typed helper/action nodes to canonical helper contracts and diagnostics before compiled-state work. |
 
 ## Dart Toolchain And Package Layout
 
@@ -469,6 +479,18 @@ The `.2.4` function-shell projection layer adds:
   deterministic function-body parse-job ids, and stripped definition spans before rule parsing.
 - No helper/action AST typing, compiler/runtime execution, or corpus output comparison yet.
 
+The `.3.1` ActionIR AST parser layer adds:
+
+- `lib/src/action/action_ast.dart` with typed ActionIR block, statement, expression, argument, access,
+  literal, assignment, receiver-chain, block-value, and structured-control nodes.
+- `lib/src/action/action_parser.dart` with public `parseActionBlock(...)`,
+  `parseActionStatement(...)`, and `parseActionExpression(...)`.
+- Parser coverage for calls, literals, variables, direct/nested access, shape literals, assignments,
+  expression-valued blocks, attached control flow, receiver chains, trailing block arguments, and
+  standalone value-drop statements.
+- `test/action_ast_parser_test.dart` for accepted node families and `raw_perl` structural fallback.
+- No helper-contract resolution, compiled-spec state, runtime execution, or corpus output comparison yet.
+
 ## Decisions
 
 - `2026-07-09`: Dart starts interpreter-first. The primary parity path is
@@ -493,14 +515,16 @@ The `.2.4` function-shell projection layer adds:
   semantics and intentionally keeps top-level function shell extraction in `.2.4`.
 - `2026-07-09`: Dart `.2.4` consumes the AST node shape returned by `specs/user_function_definition.spec`
   and does not raw-scan `fn` source. Executing that owning spec inside Dart remains a later runtime capability.
+- `2026-07-09`: Dart `.3.1` adds typed helper/action AST parsing only. Canonical helper-family mapping,
+  unresolved/retired-helper diagnostics, and compiled-state construction remain `.3.2` and later.
 
 ## Open Questions
 
-- None blocking `.3.1`. The frontend source-AST layer is available; helper/action AST parsing is next.
+- None blocking `.3.2`. Typed ActionIR nodes are available; helper-contract mapping is next.
 
 ## Blockers
 
-- None known before `.3.1` helper/action AST parsing.
+- None known before `.3.2` helper-contract mapping.
 
 ## Verification Log
 
@@ -514,6 +538,7 @@ The `.2.4` function-shell projection layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.2.2` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Parser fixtures cover Rust-compatible seams, all checked-in `specs/*.spec`, and rule-only corpus `input.spec` files. |
 | `2026-07-09` | `DART-BACKEND-PARITY.2.3` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Validator tests cover focused failures plus shipped specs and rule-only corpus specs. |
 | `2026-07-09` | `DART-BACKEND-PARITY.2.4` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Function-shell projection consumes spec-returned nodes, preserves staged sidecars, and does not raw-scan `fn` source. |
+| `2026-07-09` | `DART-BACKEND-PARITY.3.1` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. ActionIR parser tests cover typed helper/action AST node families and structural `raw_perl` fallback. |
 
 ## Commit Log
 
@@ -527,6 +552,7 @@ The `.2.4` function-shell projection layer adds:
 | `DART-BACKEND-PARITY.2.2` | `DART-BACKEND-PARITY.2.2 - implement Dart spec parser` | Core rule parser; validation/function-shell/runtime behavior deferred. |
 | `DART-BACKEND-PARITY.2.3` | `DART-BACKEND-PARITY.2.3 - add Dart frontend validation` | Source-AST validation; function-shell/runtime behavior deferred. |
 | `DART-BACKEND-PARITY.2.4` | `DART-BACKEND-PARITY.2.4 - integrate Dart function shell projection` | Spec-returned function-definition projection; `.2` frontend container closes. |
+| `DART-BACKEND-PARITY.3.1` | `DART-BACKEND-PARITY.3.1 - add Dart ActionIR AST parser` | Typed helper/action AST parser; helper-contract mapping remains `.3.2`. |
 
 ## Changelog
 
@@ -545,3 +571,5 @@ The `.2.4` function-shell projection layer adds:
   function-definition shell integration.
 - `2026-07-09`: Added Dart function-definition shell projection for spec-returned AST nodes; `.2` closes
   and frontier advances to `.3.1` for helper/action AST parsing.
+- `2026-07-09`: Added Dart ActionIR AST node types and parser for helper/action source; frontier advances
+  to `.3.2` for canonical helper-contract mapping and diagnostics.

@@ -5,6 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.3.1` added the Dart ActionIR AST parser.
+  `dart/lib/src/action/action_ast.dart` defines typed action blocks, statements, expressions, arguments,
+  access segments, literals, assignments, receiver chains, block values, and structured-control nodes.
+  `dart/lib/src/action/action_parser.dart` exposes `parseActionBlock(...)`, `parseActionStatement(...)`,
+  and `parseActionExpression(...)`. The parser covers calls, positional/keyword arguments, primitive and
+  regex literals, variables, indexed/nested access, array/hash literals, scalar/array/hash/nested assignments,
+  expression-valued blocks, attached `if`/`when`/`elseif`/`else`/`otherwise`, `while`, `switch`/`case`/`default`,
+  receiver-dot fluent chains, trailing block arguments, standalone value-drop statements, and structural
+  `raw_perl` fallback for unsupported expressions. Helper-contract mapping and diagnostics remain `.3.2`.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.2.4` closed the Dart frontend container by
   adding `dart/lib/src/parser/user_function_definition_shell.dart`. Dart now consumes the
   `function_definition` / `function_definition_error` nodes returned by `specs/user_function_definition.spec`,

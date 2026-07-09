@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.3.1 — add Dart ActionIR AST parser
+
+**Scope:** Dart helper/action AST data model, source parser, tests, docs, and frontier advancement.
+
+**Change:** Added `dart/lib/src/action/action_ast.dart` with typed ActionIR nodes for action blocks,
+statements, expressions, arguments, access segments, calls, literals, array/hash shape literals,
+assignments, receiver chains, block values, and structured controls. Added
+`dart/lib/src/action/action_parser.dart` with `parseActionBlock(...)`, `parseActionStatement(...)`,
+and `parseActionExpression(...)`. The parser covers calls, positional/keyword arguments, primitive and
+regex literals, variables, indexed/nested access, scalar assignment, array append, hash-index assignment,
+nested-access assignment, expression-valued blocks, attached `if`/`when`/`elseif`/`else`/`otherwise`,
+`while`, `switch`/`case`/`default`, receiver-dot fluent chains, trailing block arguments, standalone
+value-drop statements, and structural `raw_perl` fallback for unsupported expressions. Added
+`test/action_ast_parser_test.dart` for those accepted node families.
+
+**Validation:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+and `dart test` pass. Full repo gates are run during commit closeout.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.2.4 — integrate Dart function shell projection
 
 **Scope:** Dart spec-defined function-definition projection, staged sidecar preservation, tests, docs,
