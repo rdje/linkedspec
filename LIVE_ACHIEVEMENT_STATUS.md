@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.4.3.0 — split Dart runtime helper families**
+  (DONE task-tree split before broad helper/value implementation).
+
+  **Change:** Split `.4.3` into focused runtime helper/value leaves: core value/store/capture helpers,
+  string/number helpers, array helpers, hash helpers, value-block/control/tree traversal helpers, and final
+  helper/value no-drift closeout.
+
+  **Boundary:** No runtime code changed in this planning slice. The next executable frontier is `.4.3.1`.
+
+  **Verification:** Memory architecture, task-tree metadata, doctrine checks, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.4.2 — add Dart runtime rule interpreter**
   (DONE first executable rule-dispatch interpreter; broader helper families are next).
 

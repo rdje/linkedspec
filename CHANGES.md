@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.4.3.0 — split Dart runtime helper families
+
+**Scope:** Dart runtime helper/value task-tree split, live docs, task-tree index, and resume pointer.
+
+**Change:** Split the broad `.4.3` runtime value/helper-family leaf before code. The child leaves now isolate
+core value/store/capture helpers, string/number helpers, array helpers, hash helpers, value-block/control/tree
+traversal helpers, and final helper/value no-drift closeout. The active frontier advances to `.4.3.1`.
+
+**Validation:** Memory architecture, task-tree metadata, doctrine checks, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.4.2 — add Dart runtime rule interpreter
 
 **Scope:** Dart runtime rule dispatch, lifecycle execution, focused interpreter tests, public exports,

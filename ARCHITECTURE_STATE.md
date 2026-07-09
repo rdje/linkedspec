@@ -5,6 +5,10 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.0` split the Dart runtime helper/value work before code.
+  The active helper frontier is now `.4.3.1` for core runtime value/store behavior and capture helper reads,
+  followed by string/number helpers, array helpers, hash helpers, value-block/control/tree traversal helpers, and
+  a helper/value no-drift closeout before BACKTRACK work.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.2` added Dart's first runtime rule interpreter in
   `dart/lib/src/runtime/interpreter.dart`. `LinkedSpecRuntimeEngine` executes `CompiledSpec` rules over the
   `.4.1` matching layer and returns `RuntimeParseResult` with top-rule value, Rust-style one-element output,

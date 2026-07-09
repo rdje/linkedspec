@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.4.3.0 — split Dart runtime helper families):
+  Split the broad Dart runtime value/helper work before implementation. `.4.3.1` owns core runtime
+  value/store behavior and capture helper reads; `.4.3.2` owns string/scalar and numeric helpers; `.4.3.3`
+  owns array helpers and array receiver/mutation behavior; `.4.3.4` owns hash helpers and hash receiver/mutation
+  behavior; `.4.3.5` owns value blocks, structured action controls, and tree traversal callback helpers; `.4.3.6`
+  owns helper/value no-drift closeout before BACKTRACK work starts.
+
 - 2026-07-09 (DART-BACKEND-PARITY.4.2 — Dart runtime rule interpreter):
   Added Dart's first executable runtime interpreter in `dart/lib/src/runtime/interpreter.dart`.
   `LinkedSpecRuntimeEngine` runs `CompiledSpec` rules over the `.4.1` regex/match-state layer and returns

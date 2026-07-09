@@ -318,11 +318,72 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.4.2 - add Dart runtime rule interpreter`
 
 - ID: `DART-BACKEND-PARITY.4.3`
-  Status: `pending`
+  Status: `active` / `split`
   Goal: Implement runtime value model and helper families.
+  Children: `.4.3.0`, `.4.3.1`, `.4.3.2`, `.4.3.3`, `.4.3.4`, `.4.3.5`, `.4.3.6`
   Acceptance: Scalars, arrays, hashes, booleans, numbers, null/undef, value blocks, mutation helpers,
     receiver chains, tree traversal helpers, capture/mark helpers, and string/number/hash/array families
     match the helper catalog.
+  Verification: `pending` — split before code because the helper/value surface is too broad for one signoff
+    implementation slice.
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.4.3.0`
+  Status: `done`
+  Goal: Split the broad runtime value/helper-family leaf into signoff-sized implementation leaves before code.
+  Acceptance: Helper/value work is divided by runtime surface area; the next executable frontier is explicit and
+    can land without bundling the complete helper catalog in one commit.
+  Verification: memory architecture; task-tree metadata; doctrine; `git diff --check`.
+  Commit: `DART-BACKEND-PARITY.4.3.0 - split Dart runtime helper families`
+
+- ID: `DART-BACKEND-PARITY.4.3.1`
+  Status: `pending`
+  Goal: Centralize Dart runtime value/store behavior and capture helper reads.
+  Acceptance: Runtime values preserve scalar/array/hash/null/boolean/number JSON shapes; typed array/hash
+    wrappers and bare reads follow the helper catalog; scalar assignment, array append, hash-index assignment,
+    nested access reads, `copy`, `array`, `hash`, `entry_*`, `match_*`, and capture position helpers have focused
+    runtime tests.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.4.3.2`
+  Status: `pending`
+  Goal: Implement string/scalar and numeric helper families, including compatible receiver chains.
+  Acceptance: `cat`, trimming/case/substr/prefix/suffix/contains/matches/split scalar helpers, numeric arithmetic
+    and comparison helpers/aliases/symbol callees, and simple scalar receiver chains match helper-catalog examples.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.4.3.3`
+  Status: `pending`
+  Goal: Implement array helper family and array receiver/mutation behavior.
+  Acceptance: `array`, `flat_array`, `copy`, count/select/order/membership/join/split bridges, append and
+    end-mutation forms, and array receiver chains match helper-catalog examples without mutating snapshots
+    unexpectedly.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.4.3.4`
+  Status: `pending`
+  Goal: Implement hash helper family and hash receiver/mutation behavior.
+  Acceptance: `hash`, `flat_hash`, `copy`, key/value views, sorted views, merge/pick/drop/rename/set-key
+    behavior, direct hash-index assignment values, and hash receiver chains match helper-catalog examples.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.4.3.5`
+  Status: `pending`
+  Goal: Implement value blocks, structured action controls, and tree traversal callback helpers.
+  Acceptance: Expression-valued blocks, attached/inline `if`/`when`/`switch`/`while` surfaces, receiver `.with`,
+    and `walk_leaves` / `map_leaves` / `reduce_leaves` traversal helpers match current Perl/Rust contracts.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.4.3.6`
+  Status: `pending`
+  Goal: Close helper/value no-drift for the Dart runtime slice.
+  Acceptance: mdBook helper examples, Dart focused runtime tests, corpus-runner status text, live docs, and
+    Knowledge Map facts agree on the helper/value boundary before `.4.4` BACKTRACK work starts.
   Verification: `pending`
   Commit: `pending`
 
@@ -441,8 +502,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-BACKEND-PARITY.4.2` | `done` | Rule dispatch and lifecycle execution are built; runtime helper/value breadth is next. |
-| 2 | `DART-BACKEND-PARITY.4.3` | `pending` | Implement runtime value model and helper families. |
+| 1 | `DART-BACKEND-PARITY.4.3.0` | `done` | Broad helper/value runtime work is split before code. |
+| 2 | `DART-BACKEND-PARITY.4.3.1` | `pending` | Implement core runtime value/store behavior and capture helper reads. |
 
 ## Dart Toolchain And Package Layout
 
