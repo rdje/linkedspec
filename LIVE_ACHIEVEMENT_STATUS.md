@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.3 — close Dart middle corpus batch**
+  (DONE — non-`fn` helper/control/receiver middle fixtures pass; `fn` corpus fixtures routed).
+
+  **Change:** Dart now preserves assignment expressions inside helper argument lists, supports plain fallback
+  values in inline `if(...)`, evaluates numeric aggregate reducer aliases such as `min(scores)` through
+  aggregate-aware reads, and follows the duck-typed scalar-held list/map readback contract through `array(name)`,
+  `hash(name)`, and `copy(name)`. Explicit aggregate writes clear stale scalar-held values.
+
+  **Boundary:** The owned middle corpus window is 25/28 green. The three top-level `fn` fixtures remain routed to
+  `DART-BACKEND-PARITY.6.2.5` because the corpus runner needs spec-produced `function_definition` nodes rather
+  than a Dart raw scanner. Active implementation work advances to `DART-BACKEND-PARITY.6.2.4`.
+
+  **Verification:** Focused parser/runtime tests, Dart format/analyze/full tests, split execute-mode corpus smokes
+  over the 25 passing middle fixtures, default corpus loader/help, CLI help, mdBook, memory architecture,
+  Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.2.2 — close Dart starter corpus batch**
   (DONE — first 40 shipped manifest fixtures execute green on Dart).
 

@@ -1678,9 +1678,15 @@ final class LinkedSpecRuntimeEngine {
             )
           : true;
     }
-    for (final arg in args.skip(2)) {
+    for (var index = 2; index < args.length; index += 1) {
+      final arg = args[index];
       if (arg is! ActionCallExpr) {
-        continue;
+        return _evaluateExpression(
+          arg,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+        );
       }
       final branchName = canonicalActionHelperName(arg.name);
       final branchArgs = arg.args.map((item) => item.value).toList();
@@ -1710,6 +1716,13 @@ final class LinkedSpecRuntimeEngine {
                 ruleLabel,
                 currentEdge: currentEdge,
               );
+      } else {
+        return _evaluateExpression(
+          arg,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+        );
       }
     }
     return null;
@@ -2724,7 +2737,13 @@ final class LinkedSpecRuntimeEngine {
         if (_runtimePureHelperNames.contains(helperName)) {
           return _callPureHelper(
             helperName,
-            _evaluateValues(positionalArgs, context, ruleLabel, currentEdge),
+            _evaluatePureHelperValues(
+              helperName,
+              positionalArgs,
+              context,
+              ruleLabel,
+              currentEdge,
+            ),
           );
         }
         throw RuntimeInterpreterException(
@@ -2963,11 +2982,15 @@ final class LinkedSpecRuntimeEngine {
     );
     final arrayTarget = _arrayTargetName(args[0]);
     if (arrayTarget != null) {
+      context.variables.remove(arrayTarget);
+      context.hashes.remove(arrayTarget);
       context.arrays[arrayTarget] = _asArray(value);
       return List<Object?>.unmodifiable(context.arrayFor(arrayTarget));
     }
     final hashTarget = _hashTargetName(args[0]);
     if (hashTarget != null) {
+      context.variables.remove(hashTarget);
+      context.arrays.remove(hashTarget);
       context.hashes[hashTarget] = _asHash(value);
       return Map<String, Object?>.unmodifiable(context.hashFor(hashTarget));
     }
@@ -3318,6 +3341,8 @@ final class LinkedSpecRuntimeEngine {
         currentEdge: currentEdge,
       ),
     );
+    context.variables.remove(target);
+    context.arrays.remove(target);
     context.hashFor(target)[key] = value;
     return true;
   }
@@ -3618,6 +3643,19 @@ final class LinkedSpecRuntimeEngine {
     );
   }
 
+  List<Object?> _evaluatePureHelperValues(
+    String helperName,
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    if (_numericAggregateHelperNames.contains(helperName) && args.length == 1) {
+      return [_copyArgument(args.first, context, ruleLabel, currentEdge)];
+    }
+    return _evaluateValues(args, context, ruleLabel, currentEdge);
+  }
+
   Object? _callCoalesce(
     List<ActionExpr> args,
     _RuntimeExecutionContext context,
@@ -3880,6 +3918,15 @@ const _runtimePureHelperNames = <String>{
   'substr',
   'trim',
   'uppercase',
+};
+
+const _numericAggregateHelperNames = <String>{
+  'num_avg',
+  'num_max',
+  'num_median',
+  'num_min',
+  'num_range',
+  'num_sum',
 };
 
 const _runtimeArrayHelperNames = <String>{
@@ -5367,13 +5414,13 @@ Map<String, Object?> _asHash(Object? value) {
 }
 
 List<Object?> _arrayValueFor(_RuntimeExecutionContext context, String name) {
-  final stored = context.arrays[name];
-  if (stored != null) {
-    return [for (final item in stored) _copyValue(item)];
-  }
   final variable = context.variables[name];
   if (variable is List) {
     return [for (final item in variable) _copyValue(item)];
+  }
+  final stored = context.arrays[name];
+  if (stored != null) {
+    return [for (final item in stored) _copyValue(item)];
   }
   return <Object?>[];
 }
@@ -5382,15 +5429,15 @@ Map<String, Object?> _hashValueFor(
   _RuntimeExecutionContext context,
   String name,
 ) {
+  final variable = context.variables[name];
+  if (variable is Map) {
+    return _asHash(variable);
+  }
   final stored = context.hashes[name];
   if (stored != null) {
     return {
       for (final entry in stored.entries) entry.key: _copyValue(entry.value),
     };
-  }
-  final variable = context.variables[name];
-  if (variable is Map) {
-    return _asHash(variable);
   }
   return <String, Object?>{};
 }
@@ -5671,6 +5718,12 @@ Object? _copyArgument(
 ) {
   final name = _variableName(expr);
   if (name != null) {
+    if (context.variables[name] is List) {
+      return _arrayValueFor(context, name);
+    }
+    if (context.variables[name] is Map) {
+      return _hashValueFor(context, name);
+    }
     if (context.arrays.containsKey(name)) {
       return _arrayValueFor(context, name);
     }

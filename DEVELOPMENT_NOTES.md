@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.3 — Dart middle corpus batch):
+  The middle helper/control/receiver corpus window is now 25/28 green on Dart. The runtime fixes were deliberately
+  contract-shaped: `if(false, then, fallback)` now treats a plain third argument as the else value while preserving
+  `elseif(...)` / `else(...)` branch forms; single-argument numeric aggregate helpers such as `min(scores)` and
+  `max(scores)` use the aggregate-aware argument path; `array(name)`, `hash(name)`, and `copy(name)` prefer
+  scalar-held list/map values before aggregate fallback to match the current duck-typed assignment contract; and
+  explicit aggregate writes clear stale scalar-held values. The parser fix is equally important: call arguments
+  like `items = [value]` must remain `ActionAssignScalarExpr` positional arguments, not keyword arguments with the
+  side effect stripped. The three remaining middle-window failures are top-level `fn` corpus fixtures; routing them
+  through Dart requires spec-produced `function_definition` nodes from the owning function shell, so they are split
+  to `DART-BACKEND-PARITY.6.2.5` instead of adding a Dart raw scanner.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.2 — Dart starter corpus batch):
   The first 40 shipped manifest fixtures now execute green on Dart through `bin/corpus_runner.dart --execute
   --limit 40`. Two runtime semantics were missing from the interpreter: rule return success cannot be based on

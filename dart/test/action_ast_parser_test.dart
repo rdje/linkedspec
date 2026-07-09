@@ -80,6 +80,12 @@ void main() {
             as ActionFluentChainExpr;
     expect(chain.receiver, isA<ActionAssignArrayAppendExpr>());
     expect(chain.calls.single.method, 'count');
+
+    final call =
+        parseActionExpression('array(items = [value], copy(array(items)))')
+            as ActionCallExpr;
+    expect(call.args.first, isA<ActionPositionalArgument>());
+    expect(call.args.first.value, isA<ActionAssignScalarExpr>());
   });
 
   test('parses receiver chains and trailing block calls', () {

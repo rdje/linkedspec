@@ -8,10 +8,11 @@ answers:
   - where is Dart function-definition shell projection
   - does Dart preserve function body parse jobs
   - what owns Dart function-definition shell semantics
+  - why do Dart top-level fn corpus fixtures still fail
 date: 2026-07-09
 status: current
 tags: [dart, parser, user-functions, staged-parsing, ast]
-evidence: "DART-BACKEND-PARITY.2.4 adds dart/lib/src/parser/user_function_definition_shell.dart and test/user_function_definition_shell_test.dart. The projection APIs consume function_definition / function_definition_error nodes returned by specs/user_function_definition.spec, validate spans and staged sidecars, normalize parent_ast_path and body_parse_job ids, strip returned source spans, and attach FunctionDefinition records before rule parsing. Tests assert successful projection, malformed-node diagnostics, sidecar drift rejection, and that empty-node parsing does not raw-scan a leading fn shell."
+evidence: "DART-BACKEND-PARITY.2.4 adds dart/lib/src/parser/user_function_definition_shell.dart and test/user_function_definition_shell_test.dart. The projection APIs consume function_definition / function_definition_error nodes returned by specs/user_function_definition.spec, validate spans and staged sidecars, normalize parent_ast_path and body_parse_job ids, strip returned source spans, and attach FunctionDefinition records before rule parsing. Tests assert successful projection, malformed-node diagnostics, sidecar drift rejection, and that empty-node parsing does not raw-scan a leading fn shell. DART-BACKEND-PARITY.6.2.3 routes top-level fn corpus fixtures to .6.2.5 because executeCorpusFixtures currently calls parseSpec directly and does not yet obtain spec-produced function_definition nodes."
 reverify: "cd dart && dart test test/user_function_definition_shell_test.dart test/staged_parser_registry_test.dart test/spec_ast_test.dart && dart analyze --fatal-infos --fatal-warnings"
 ---
 
@@ -37,6 +38,13 @@ JSON round-trips. The projection APIs remain the pre-dispatch shell boundary:
 provides `parseSpecWithStagedUserFunctionDefinitionAsts(...)` when callers want
 the body job dispatched and stitched into `body_ast`.
 
+`DART-BACKEND-PARITY.6.2.3` deliberately does not make the Dart corpus runner
+raw-scan top-level `fn` source. The routed corpus fixtures need the runner to
+obtain spec-produced `function_definition` nodes, then call
+`parseSpecWithStagedUserFunctionDefinitionAsts(...)`. That follow-up is owned by
+`DART-BACKEND-PARITY.6.2.5`.
+
 Related facts: [[spec-defined-user-function-definition-parser]],
 [[function-body-parse-job-sidecar]], [[dart-staged-function-body-registry]],
-[[dart-core-spec-parser]], [[dart-frontend-ast-json-contract]].
+[[dart-core-spec-parser]], [[dart-frontend-ast-json-contract]],
+[[dart-middle-corpus-batch]].

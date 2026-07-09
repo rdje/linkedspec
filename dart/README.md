@@ -31,12 +31,13 @@ dart run bin/corpus_runner.dart --help
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40
+dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 40 --limit 17
 ```
 
 ## Status
 
-`DART-BACKEND-PARITY.6.2.2` is the current completed corpus-parity boundary;
-`.6.2.3` is the next helper/control corpus-batch frontier. The package can round-trip
+`DART-BACKEND-PARITY.6.2.3` is the current completed corpus-parity boundary;
+`.6.2.4` is the next shipped-spec/parser-smoke corpus-batch frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -91,7 +92,11 @@ as `cursor_pos`, `cursor_rest`, `input_slice`, and `input_end_pos`.
 The runtime now also treats empty array/hash returns as successful non-null rule
 matches, uses child-rule match bits for blind dispatch, and executes
 marker-form `if(...)` / `elseif(...)` / `else()` / `endif()` statement chains
-as grouped branches.
+as grouped branches. It also preserves assignment expressions inside helper
+argument lists, supports plain fallback values in inline `if(...)`, evaluates
+single-argument numeric aggregate reducers through aggregate-aware reads, and
+uses scalar-held list/map values for `array(name)`, `hash(name)`, and `copy(name)`
+unless an explicit aggregate write supersedes the scalar-held value.
 Runtime failures now expose `RuntimeDiagnostic` payloads through
 `RuntimeInterpreterException.diagnostic` with stable `type`, `stage`,
 `owner_stage`, `summary`, `detail`, `top_rule`, `rule_label`,
@@ -109,6 +114,8 @@ and `limit`. The corpus-runner CLI exposes that surface through opt-in
 `--execute` mode with `--case`, `--offset`, and `--limit`; unbounded CLI
 execution is rejected until the full shipped-corpus gate is ready, so the default
 99-fixture command remains a manifest-loader smoke. The first 40 shipped
-manifest fixtures now pass through bounded execute mode.
+manifest fixtures and the non-`fn` middle helper/control/receiver fixtures now
+pass through bounded execute mode. Top-level `fn` corpus fixtures remain routed
+to `DART-BACKEND-PARITY.6.2.5` for spec-defined function-shell execution.
 Full shipped-corpus output parity remains a later leaf in
 `docs/tasks/DART-BACKEND-PARITY.md`.

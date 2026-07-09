@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.3 — close Dart middle corpus batch
+
+**Scope:** Dart ActionIR argument parsing, runtime helper/value semantics, middle corpus-batch evidence, Dart
+README/mdBook status text, live docs, task-tree status, and Knowledge Map facts.
+
+**Change:** Closed the non-`fn` middle terse corpus fixtures by preserving assignment expressions inside helper
+argument lists, supporting plain third-argument inline `if(...)` fallback values, evaluating single-argument
+numeric aggregate reducers through the aggregate-aware argument path, and aligning scalar-held list/map readback
+with the duck-typed assignment contract. Explicit aggregate writes now clear stale scalar-held values so
+`set(array(name), ...)` and `set_key(hash(name), ...)` are visible through later receiver/wrapper reads. The owned
+middle window is now 25/28 green; the three remaining top-level `fn` fixtures are routed to
+`DART-BACKEND-PARITY.6.2.5` because the corpus runner still needs spec-produced `function_definition` nodes rather
+than a Dart raw scanner.
+
+**Validation:** Focused ActionIR parser and runtime interpreter tests, Dart format/analyze/full tests, split
+execute-mode corpus smokes covering all 25 passing middle fixtures, default corpus loader, corpus runner/CLI help,
+mdBook build, memory architecture, Knowledge Map check, task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.2 — close Dart starter corpus batch
 
 **Scope:** Dart runtime interpreter semantics, focused runtime tests, starter corpus-batch evidence, Dart

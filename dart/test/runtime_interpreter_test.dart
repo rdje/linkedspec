@@ -352,7 +352,14 @@ Top::
    value = "ok";
    items = [value, "tail"];
    meta = { "key" : value };
-   return(array(items[0], copy(items), hash(meta), meta["key"]))
+   return(array(
+     items[0],
+     copy(items),
+     copy(array(items)),
+     hash(meta),
+     copy(hash(meta)),
+     meta["key"]
+   ))
  }
 ''');
 
@@ -361,10 +368,41 @@ Top::
     expect(result.value, [
       'ok',
       ['ok', 'tail'],
+      ['ok', 'tail'],
+      {'key': 'ok'},
       {'key': 'ok'},
       'ok',
     ]);
   });
+
+  test(
+    'keeps scalar-held assignment values visible to later call arguments',
+    () {
+      final engine = _engine(r'''
+Top::
+ /x/
+ E {
+   set(value, "ok");
+   set(key, "stage");
+   return(array(
+     items = [value],
+     copy(array(items)),
+     set(meta, { key : value }),
+     copy(hash(meta))
+   ))
+ }
+''');
+
+      final result = engine.parse('x');
+
+      expect(result.value, [
+        ['ok'],
+        ['ok'],
+        {'stage': 'ok'},
+        {'stage': 'ok'},
+      ]);
+    },
+  );
 
   test('executes nested value-path assignment without autovivification', () {
     final engine = _engine(r'''
@@ -532,6 +570,10 @@ Top::
 Top::
  /x/
  E {
+   scores += 1;
+   scores += 5;
+   scores += 3;
+   scores += 5;
    return(hash(
      "symbol_add", +(2, *(3, 4)),
      "div", num_div(7, 2),
@@ -544,6 +586,8 @@ Top::
      "avg", avg(array(2, 4, 6)),
      "median", median(array(5, 1, 4, 2)),
      "minimum", min(array(8, 3, 5, 1)),
+     "bare_min", min(scores),
+     "bare_max", max(scores),
      "bad_div", num_div(5, 0),
      "bad_number", num_add("x", 1)
    ))
@@ -564,6 +608,8 @@ Top::
       'avg': 4,
       'median': 3,
       'minimum': 1,
+      'bare_min': 1,
+      'bare_max': 5,
       'bad_div': null,
       'bad_number': null,
     });
@@ -739,9 +785,10 @@ Top::
    kind = "b";
    switched = { switch(kind) { case("a") { return("bad") } case("b") { return("hit") } default { return("miss") } } };
    inline = if(false, "bad", else("fallback"));
+   inline_plain = if(false, "bad", "fallback");
    with_result = with("inner") { value = cat(value, "!"); return(value) };
    receiver = " a-b ".trim().with() { return(value.split("-")) }.count();
-   return(array(counted, local, branch, switched, inline, with_result, receiver, value))
+   return(array(counted, local, branch, switched, inline, inline_plain, with_result, receiver, value))
  }
 ''');
 
@@ -752,6 +799,7 @@ Top::
       'local',
       'yes',
       'hit',
+      'fallback',
       'fallback',
       'inner!',
       2,

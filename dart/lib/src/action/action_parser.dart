@@ -816,8 +816,9 @@ final class _ActionParser {
       if (part.text.trim().isEmpty) {
         continue;
       }
+      final expression = _ActionParser(part.text, part.start).parseExpression();
       final keywordIndex = _findTopLevelAssignmentEquals(part.text);
-      if (keywordIndex != null) {
+      if (keywordIndex != null && expression is! ActionAssignScalarExpr) {
         final name = part.text.substring(0, keywordIndex).trim();
         if (_isIdentifier(name)) {
           final value = _trimWithOffsets(
@@ -833,11 +834,7 @@ final class _ActionParser {
           continue;
         }
       }
-      args.add(
-        ActionPositionalArgument(
-          _ActionParser(part.text, part.start).parseExpression(),
-        ),
-      );
+      args.add(ActionPositionalArgument(expression));
     }
     return args;
   }

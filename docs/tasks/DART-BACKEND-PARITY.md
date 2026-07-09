@@ -784,7 +784,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 - ID: `DART-BACKEND-PARITY.6.2`
   Status: `pending`
   Goal: Expand to the current 99-fixture manifest in safe batches.
-  Children: `.6.2.0`, `.6.2.1`, `.6.2.2`, `.6.2.3`, `.6.2.4`
+  Children: `.6.2.0`, `.6.2.1`, `.6.2.2`, `.6.2.3`, `.6.2.4`, `.6.2.5`
   Acceptance: Each batch either passes on Dart or records a narrowly owned root-cause leaf with Perl/Rust
     oracle evidence; no fixture is weakened to fit Dart.
   Verification: `pending`
@@ -834,14 +834,25 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.2 - close Dart starter corpus batch`
 
 - ID: `DART-BACKEND-PARITY.6.2.3`
-  Status: `pending`
+  Status: `done`
   Goal: Close the helper, control, receiver-chain, user-function, and tree traversal batch.
   Acceptance: The middle terse fixtures covering value blocks, attached/inline controls, helper composition,
     receiver chains, numeric/string/array/hash helpers, user-function runtime, with-blocks, and hash/array tree
     traversal either pass on Dart or each blocked fixture is routed to a narrowly owned root-cause leaf with
     Perl/Rust oracle evidence.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** The middle corpus window is now 25/28 green on Dart. Passing fixture groups
+    were verified with split bounded runs around the routed `fn` cases:
+    `--execute --offset 40 --limit 17`, `--execute --offset 58 --limit 2`, and
+    `--execute --offset 62 --limit 6`. Fixes covered assignment expressions inside helper arguments, plain
+    third-argument inline `if(...)` fallback values, numeric aggregate reducers over bare arrays, scalar-held
+    list/map readback through wrappers/copy, and stale scalar clearing after explicit aggregate writes. The three
+    remaining top-level `fn` fixtures (`terse_3_3_1_scalar_assignment_expressions`,
+    `terse_3_3_4_assignment_expression_closure`, and `terse_4_3_2_user_function_runtime`) still fail at
+    `parseSpec(...)` because the corpus runner has no spec-produced `function_definition` nodes; their checked-in
+    expected JSON proves the Perl/Rust oracle behavior, and the gap is routed to `.6.2.5` instead of adding a Dart
+    raw scanner. Focused parser/runtime tests, Dart format/analyze/full tests, corpus loader/help, mdBook, memory
+    architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+  Commit: `DART-BACKEND-PARITY.6.2.3 - close Dart middle corpus batch`
 
 - ID: `DART-BACKEND-PARITY.6.2.4`
   Status: `pending`
@@ -849,6 +860,17 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: The tclite, lispish, recursive top-rule, hlink, portmap, ebnf, spec.spec, regdef, tablegrep,
     simenv, VHDL/library, history, and plugin smoke fixtures either pass on Dart or each blocked fixture is routed
     to a narrowly owned root-cause leaf with Perl/Rust oracle evidence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.6.2.5`
+  Status: `pending`
+  Goal: Route top-level `fn` corpus fixtures through the spec-defined function shell.
+  Acceptance: Dart corpus execution obtains `function_definition` nodes from the owning spec-defined shell or a
+    documented staged equivalent, feeds them through `parseSpecWithStagedUserFunctionDefinitionAsts(...)`, and
+    passes the routed fixtures `terse_3_3_1_scalar_assignment_expressions`,
+    `terse_3_3_4_assignment_expression_closure`, and `terse_4_3_2_user_function_runtime`; no Dart raw scanner may
+    become the semantic source of truth for `fn` definitions.
   Verification: `pending`
   Commit: `pending`
 
