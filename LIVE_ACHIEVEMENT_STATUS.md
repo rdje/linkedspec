@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.0 — split Dart shipped corpus smoke batch**
+  (DONE — final shipped-spec/parser-smoke window measured and split).
+
+  **Change:** The bounded window `--execute --offset 68 --limit 31` is 2/31 green on Dart: `pplugin_empty` and
+  `tkgui_empty` pass. The 29 failures are now grouped into regex-dialect translation, missing helper/action
+  surfaces, recursive/default-mode output semantics, and residual shipped-spec smoke parity.
+
+  **Boundary:** Planning split only. No implementation code changed. Active implementation work advances to
+  `DART-BACKEND-PARITY.6.2.4.1` for the Dart regex-dialect bridge.
+
+  **Verification:** Diagnostic corpus run, mdBook, memory architecture, Knowledge Map, task-tree metadata,
+  doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **FUTURE-PARITY-BACKLOG.8.0 — capture spec-derived roundtrip idea**
   (DONE — director's single-source `.spec` parser/stimuli arc is parked for later design).
 

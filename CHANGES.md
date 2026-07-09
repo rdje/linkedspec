@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.0 — split Dart shipped corpus smoke batch
+
+**Scope:** Dart corpus-batch task-tree split, failure taxonomy, README/mdBook status, live docs, roadmap status,
+resume pointer, and Knowledge Map.
+
+**Change:** Measured the final shipped-spec/parser-smoke corpus window with `--execute --offset 68 --limit 31`.
+Dart currently passes `pplugin_empty` and `tkgui_empty`; the remaining failures split into regex-dialect
+translation, missing runtime/helper surfaces, recursive/default-mode output semantics, and residual shipped-spec
+smoke parity. `.6.2.4` now has focused implementation children with `.6.2.4.1` next for the regex-dialect bridge.
+No implementation code changed.
+
+**Validation:** Diagnostic corpus run, mdBook build, memory architecture, Knowledge Map generation/check,
+task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — FUTURE-PARITY-BACKLOG.8.0 — capture spec-derived roundtrip idea
 
 **Scope:** Future parity backlog task-tree, roadmap/live docs, mdBook status, resume pointer, and Knowledge Map.

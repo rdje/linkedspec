@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.4.0 — Dart shipped corpus smoke split):
+  The final Dart shipped-spec/parser-smoke corpus window is intentionally split before implementation. The
+  diagnostic run `--execute --offset 68 --limit 31` is 2/31 green (`pplugin_empty`, `tkgui_empty`). The failure
+  taxonomy is clear enough to slice: regex dialect translation blocks the portmap, EBNF, spec.spec, regdef, VHDL,
+  history, and library fixtures before runtime semantics can be measured; helper/action gaps cover
+  `capture_slice`, diagnostic `print`, logical `not`, and raw `print(...)` expression parsing; tclite/Lispish/top
+  recursion need their own output-semantics leaf; residual hlink/portmap/EBNF/spec/tablegrep/simenv/library
+  parity follows after those lower blockers. `.6.2.4.1` is next and owns the Dart regex-dialect bridge.
+
 - 2026-07-09 (FUTURE-PARITY-BACKLOG.8.0 — spec-derived parser/stimuli roundtrip idea):
   The director's `foo.spec` closed-loop validation idea is now parked under `FUTURE-PARITY-BACKLOG.8`. The useful
   core is strong: if `foo.spec` can drive both parser construction and stimuli generation, then `.spec` becomes the

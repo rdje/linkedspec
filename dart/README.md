@@ -32,12 +32,13 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 40 --limit 17
+dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31
 ```
 
 ## Status
 
-`DART-BACKEND-PARITY.6.2.3` is the current completed corpus-parity boundary;
-`.6.2.4` is the next shipped-spec/parser-smoke corpus-batch frontier. The package can round-trip
+`DART-BACKEND-PARITY.6.2.4.0` is the current completed corpus-parity boundary;
+`.6.2.4.1` is the next shipped-spec/parser-smoke regex-dialect frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -116,6 +117,8 @@ execution is rejected until the full shipped-corpus gate is ready, so the defaul
 99-fixture command remains a manifest-loader smoke. The first 40 shipped
 manifest fixtures and the non-`fn` middle helper/control/receiver fixtures now
 pass through bounded execute mode. Top-level `fn` corpus fixtures remain routed
-to `DART-BACKEND-PARITY.6.2.5` for spec-defined function-shell execution.
+to `DART-BACKEND-PARITY.6.2.5` for spec-defined function-shell execution. The final
+31-fixture shipped-spec/parser-smoke window is measured at 2/31 green and split into
+regex-dialect, helper/action, recursion/output, residual parity, and closeout leaves.
 Full shipped-corpus output parity remains a later leaf in
 `docs/tasks/DART-BACKEND-PARITY.md`.

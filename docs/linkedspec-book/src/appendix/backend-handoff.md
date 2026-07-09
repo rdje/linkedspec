@@ -257,7 +257,9 @@ terse runtime batch before the remaining corpus groups. The non-`fn` middle
 helper/control/receiver fixtures now pass as well; the top-level `fn` corpus
 fixtures are routed to a later function-shell corpus leaf because Dart must
 obtain spec-produced `function_definition` nodes rather than raw-scanning `fn`
-source in the corpus runner. The
+source in the corpus runner. The final shipped-spec/parser-smoke window has been
+measured at 2/31 green and split into regex-dialect, helper/action,
+recursion/output, residual parity, and closeout leaves. The
 future Dart closeout now includes a distinct Dart-specific LinkedSpec CLI
 entrypoint; future Julia and Lua backend plans must own their own variant-specific
 CLIs rather than relying on one ambiguous shared command. Dart
@@ -388,8 +390,10 @@ diagnosed. Dart also preserves staged user-function descriptor shapes across
 parsed functions, compiled registry jobs, descriptor records, and runtime output.
 Dart corpus parity has started with controlled manifest fixtures and now has safe
 named/bounded execution selection for shipped-corpus batching. The first 40
-manifest fixtures and the non-`fn` middle fixtures pass in bounded execute mode;
-full shipped 99-fixture corpus parity remains a later Dart leaf.
+manifest fixtures and the non-`fn` middle fixtures pass in bounded execute mode.
+The remaining shipped-spec/parser-smoke window is split after a 2/31 diagnostic
+run, with the regex-dialect bridge as the next Dart leaf; full shipped
+99-fixture corpus parity remains a later Dart leaf.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

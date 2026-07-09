@@ -855,11 +855,73 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.3 - close Dart middle corpus batch`
 
 - ID: `DART-BACKEND-PARITY.6.2.4`
-  Status: `pending`
+  Status: `active`
   Goal: Close the shipped-spec and parser-smoke corpus batch.
+  Children: `.6.2.4.0`, `.6.2.4.1`, `.6.2.4.2`, `.6.2.4.3`, `.6.2.4.4`, `.6.2.4.5`
   Acceptance: The tclite, lispish, recursive top-rule, hlink, portmap, ebnf, spec.spec, regdef, tablegrep,
     simenv, VHDL/library, history, and plugin smoke fixtures either pass on Dart or each blocked fixture is routed
     to a narrowly owned root-cause leaf with Perl/Rust oracle evidence.
+  Verification: Initial diagnostic run `dart run bin/corpus_runner.dart --corpus
+    ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31` is 2/31 green (`pplugin_empty`,
+    `tkgui_empty`). Failures cluster into Dart regex-dialect incompatibilities (POSIX classes, inline flags,
+    possessive quantifiers), missing runtime/helper surfaces (`capture_slice`, diagnostic `print`, logical `not`,
+    raw `print(...)` expression parsing), recursive/default-mode output mismatches, and residual shipped-spec smoke
+    semantics. Child leaves own those clusters before final closeout.
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.6.2.4.0`
+  Status: `done`
+  Goal: Split the shipped-spec/parser-smoke corpus batch after diagnostic execution.
+  Acceptance: The 31-fixture window is measured, failure clusters are recorded, and implementation children are
+    created before code changes; Dart frontier remains recoverable after the planning commit.
+  Verification: **PASS 2026-07-09.** Diagnostic corpus run `--execute --offset 68 --limit 31` reports 2 passed and
+    29 failed, with failures grouped into regex dialect translation, missing helpers/raw action parsing, recursion
+    and empty-output semantics, and residual shipped-spec smoke parity. `git diff --check`, memory architecture,
+    Knowledge Map generation/check, task-tree metadata, doctrine, and mdBook build pass. No implementation code
+    changed.
+  Commit: `DART-BACKEND-PARITY.6.2.4.0 - split Dart shipped corpus smoke batch`
+
+- ID: `DART-BACKEND-PARITY.6.2.4.1`
+  Status: `pending`
+  Goal: Add the Dart regex-dialect bridge needed by shipped-spec smoke fixtures.
+  Acceptance: Dart parser/runtime regex compilation handles the shipped fixture patterns that currently fail
+    before matching because of POSIX character classes, inline flag groups, and possessive quantifiers; any
+    remaining fixture failures after regex compilation are runtime/output failures with narrower owners.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.6.2.4.2`
+  Status: `pending`
+  Goal: Add missing parser-smoke runtime helper surfaces.
+  Acceptance: The shipped-smoke fixtures no longer fail solely because Dart lacks `capture_slice`, diagnostic
+    output helper behavior, logical `not`, or typed parsing for current helper-form `print(...)` expressions; helper
+    behavior matches the Perl/Rust contract or is routed to narrower follow-up evidence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.6.2.4.3`
+  Status: `pending`
+  Goal: Close recursive/default-mode and empty child-output semantics for parser-smoke fixtures.
+  Acceptance: Tclite, Lispish, and recursive top-rule fixtures either pass on Dart or each residual mismatch has a
+    narrowly owned root-cause leaf with Perl/Rust oracle evidence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.6.2.4.4`
+  Status: `pending`
+  Goal: Close residual shipped-spec parser-smoke fixture output parity.
+  Acceptance: Hlink, portmap, EBNF, spec.spec, regdef, tablegrep, simenv, VHDL/library, history, and plugin/library
+    smoke fixtures pass or are routed with precise root-cause evidence after regex/helper/recursion blockers are
+    removed.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.6.2.4.5`
+  Status: `pending`
+  Goal: Finalize the shipped-spec/parser-smoke corpus batch no-drift closeout.
+  Acceptance: The full `.6.2.4` 31-fixture window is green on Dart or all remaining blockers are split with
+    durable evidence; README, mdBook, roadmap, Knowledge Map, live docs, and task-tree status match the measured
+    boundary.
   Verification: `pending`
   Commit: `pending`
 
