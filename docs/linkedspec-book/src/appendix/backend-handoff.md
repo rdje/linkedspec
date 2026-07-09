@@ -247,8 +247,12 @@ CLI smoke entrypoint, and smoke tests. Its corpus-runner scaffold loads the
 manifest-backed corpus, rejects manifest drift, checks required fixture files and
 expected JSON syntax, and deliberately does not execute parser semantics yet. Dart
 also has source-level AST/data types and staged parse-job sidecars that round-trip
-through JSON with the Rust/mdBook field names. The next owned step is `.spec`
-parser implementation.
+through JSON with the Rust/mdBook field names. The Dart core `parseSpec(...)`
+parser now produces those source AST types for rule paragraphs, headers/modes,
+regex literals, lifecycle blocks, action/blind-call edges, fluent continuations,
+markers, comments, and nested block boundaries, with tests over all checked-in
+`specs/*.spec` files and rule-only corpus specs. Strict validation and top-level
+function-definition shell integration remain the next frontend leaves.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

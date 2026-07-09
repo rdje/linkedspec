@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.2.2 — Dart `.spec` parser):
+  Added `dart/lib/src/parser/spec_parser.dart` and exported `parseSpec(...)` from the public Dart library.
+  The parser mirrors the current Rust core parser boundary: it parses rule paragraphs into source AST types,
+  recognizes headers/modes/header-rest bodies, regex literals, lifecycle blocks, action and blind-call edges,
+  action-edge fluent continuations, receiver-fluent `when/otherwise` blocks, split/conditional markers, comments,
+  raw fallback lines, and nested block boundaries. `test/spec_parser_test.dart` covers the tricky Rust parity
+  seams, all shipped `specs/*.spec`, and corpus `input.spec` files that do not start with top-level `fn`
+  definitions. Strict validation is still `.2.3`; function-shell extraction/staging is still `.2.4`.
+
 - 2026-07-09 (DART-BACKEND-PARITY.2.1 — Dart frontend AST data types):
   Added `dart/lib/src/ast/spec_ast.dart` with source-level data types matching the Rust parsed AST and
   staged parse-job JSON shape: `SpecFile`, `FunctionDefinition`, `SourceSpan`, `StagedParseJob`,

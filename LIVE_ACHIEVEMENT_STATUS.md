@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.2.2 — implement Dart spec parser**
+  (DONE core rule parser; validation/function-shell/runtime behavior still deferred).
+
+  **Change:** Added the Dart `parseSpec(...)` source parser for rule paragraphs, headers/modes, header-rest
+  body elements, regex slots, lifecycle blocks, action/blind-call edges, action-edge fluent continuations,
+  receiver-fluent `when/otherwise` blocks, split/conditional markers, comments, raw fallback lines, and nested
+  block boundaries. Parser tests cover focused Rust-compatible seams, all shipped `specs/*.spec`, and rule-only
+  corpus `input.spec` files.
+
+  **Boundary:** Strict frontend validation remains `DART-BACKEND-PARITY.2.3`; top-level `fn` definition
+  extraction/staging remains `DART-BACKEND-PARITY.2.4`; no compiler/runtime/corpus output comparison was added.
+
+  **Verification:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+  `dart test`, `dart run bin/linkedspec_dart.dart --help`,
+  `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`, and
+  `dart run bin/corpus_runner.dart --help` pass. `git diff --check`, memory architecture, Knowledge Map
+  regeneration/check, task-tree metadata, doctrine gates, and `mdbook build docs/linkedspec-book` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.2.1 — define Dart frontend AST data types**
   (DONE source-level AST/data contracts; parser still deferred).
 

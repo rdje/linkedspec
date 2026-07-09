@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.2.2 — implement Dart spec parser
+
+**Scope:** Dart core `.spec` rule parser, parser fixtures, shipped-spec/corpus parser coverage, docs,
+and frontier advancement.
+
+**Change:** Added `dart/lib/src/parser/spec_parser.dart` and exported `parseSpec(...)`. The parser
+produces the existing source AST types for rule paragraphs, headers, mode suffixes, regex literals,
+lifecycle blocks, action and blind-call edges, fluent continuations, split/conditional markers, comments,
+raw fallback lines, and nested block boundaries. Added `test/spec_parser_test.dart` for Rust-compatible
+parser seams, all checked-in `specs/*.spec`, and rule-only corpus `input.spec` files. Top-level `fn`
+definition extraction remains deferred to `.2.4`, and strict validation remains deferred to `.2.3`.
+
+**Validation:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+`dart test`, `dart run bin/linkedspec_dart.dart --help`,
+`dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`, and
+`dart run bin/corpus_runner.dart --help` pass. `git diff --check`, memory architecture, Knowledge Map
+regeneration/check, task-tree metadata, doctrine gates, and `mdbook build docs/linkedspec-book` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.2.1 — define Dart frontend AST data types
 
 **Scope:** Dart source-level AST/data types, staged parse-job sidecars, JSON round-trip tests, docs,

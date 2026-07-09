@@ -117,12 +117,18 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.2.1 - define Dart frontend AST data types`
 
 - ID: `DART-BACKEND-PARITY.2.2`
-  Status: `pending`
+  Status: `done`
   Goal: Parse `.spec` rule paragraphs, headers, regex slots, lifecycle blocks, action/blind-call edges,
     fluent continuations, markers, comments, and block boundaries.
   Acceptance: Parser fixtures cover the formal grammar and the shipped-spec shapes used by the corpus.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** `dart/lib/src/parser/spec_parser.dart` implements `parseSpec(...)`
+    and produces the source AST data types for rule paragraphs, headers/modes, header-rest bodies, regex
+    literals, lifecycle blocks, action/blind-call edges, action-edge fluent continuations, receiver-fluent
+    `when/otherwise` blocks, split/conditional markers, comments, raw fallback lines, and nested block
+    boundaries. `test/spec_parser_test.dart` covers focused Rust-compatible parser seams, all checked-in
+    `specs/*.spec`, and corpus `input.spec` files that do not start with top-level `fn` definitions.
+    Strict validation remains `.2.3`; top-level function-shell integration remains `.2.4`.
+  Commit: `DART-BACKEND-PARITY.2.2 - implement Dart spec parser`
 
 - ID: `DART-BACKEND-PARITY.2.3`
   Status: `pending`
@@ -323,7 +329,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-BACKEND-PARITY.2.2` | `pending` | Source-level AST/data types are defined; implement parser code that produces them. |
+| 1 | `DART-BACKEND-PARITY.2.3` | `pending` | Parser produces source ASTs; add frontend validation and strict syntax behavior before function-shell integration. |
 
 ## Dart Toolchain And Package Layout
 
@@ -415,6 +421,17 @@ The `.2.1` AST/data layer adds:
   and `failure_policy`.
 - No parser, compiler, runtime, corpus output comparison, or helper/action lowering behavior.
 
+The `.2.2` parser layer adds:
+
+- `lib/src/parser/spec_parser.dart` with public `parseSpec(...)`.
+- `test/spec_parser_test.dart` for focused parser fixtures, all shipped `specs/*.spec`, and rule-only
+  corpus `input.spec` files.
+- Parsing for rule paragraphs, headers/modes, header-rest body elements, regex literals, lifecycle
+  blocks, action and blind-call edges, fluent continuations, split/conditional markers, comments, raw
+  fallback lines, and nested block boundaries.
+- No strict validation, top-level `fn` shell extraction/staging, compiler/runtime execution, or corpus
+  output comparison yet.
+
 ## Decisions
 
 - `2026-07-09`: Dart starts interpreter-first. The primary parity path is
@@ -432,14 +449,17 @@ The `.2.1` AST/data layer adds:
   under `rust/linkedspec-runtime/tests/corpus/`. Backend-neutral corpus relocation remains separate.
 - `2026-07-09`: Dart source-level AST JSON names follow the existing Rust parsed-AST and staged parse-job
   contract. `body_ast` remains a neutral JSON sidecar until later helper/action AST leaves type it further.
+- `2026-07-09`: Dart `.2.2` mirrors the Rust core parser boundary: parse rule paragraphs permissively into
+  source AST, leave strict rejection to validation, and leave top-level function-definition shell extraction
+  to the staged/function leaves.
 
 ## Open Questions
 
-- None blocking `.2.2`. Source-level data types are in place.
+- None blocking `.2.3`. Parser output is available; validation rules are the next frontier.
 
 ## Blockers
 
-- None known before `.2.2` parser implementation.
+- None known before `.2.3` validation implementation.
 
 ## Verification Log
 
@@ -450,6 +470,7 @@ The `.2.1` AST/data layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.1.2` | approved `dart pub get`; `dart format --set-exit-if-changed .`; approved `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Scaffold package, lockfile, CLI stubs, corpus-runner stub, and smoke test are green; no parser/runtime/corpus semantics yet. |
 | `2026-07-09` | `DART-BACKEND-PARITY.1.3` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Manifest IO loads 99 fixtures and catches missing/stale/malformed corpus state without parser execution. |
 | `2026-07-09` | `DART-BACKEND-PARITY.2.1` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. AST/data types round-trip through JSON; no parser/runtime behavior yet. |
+| `2026-07-09` | `DART-BACKEND-PARITY.2.2` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Parser fixtures cover Rust-compatible seams, all checked-in `specs/*.spec`, and rule-only corpus `input.spec` files. |
 
 ## Commit Log
 
@@ -460,6 +481,7 @@ The `.2.1` AST/data layer adds:
 | `DART-BACKEND-PARITY.1.2` | `DART-BACKEND-PARITY.1.2 - create Dart scaffold smoke package` | Minimal package scaffold; no parser/runtime/corpus semantics. |
 | `DART-BACKEND-PARITY.1.3` | `DART-BACKEND-PARITY.1.3 - add Dart corpus manifest IO scaffold` | Manifest IO scaffold; `.1` foundation container closes. |
 | `DART-BACKEND-PARITY.2.1` | `DART-BACKEND-PARITY.2.1 - define Dart frontend AST data types` | Source-level AST/data types; no parser behavior. |
+| `DART-BACKEND-PARITY.2.2` | `DART-BACKEND-PARITY.2.2 - implement Dart spec parser` | Core rule parser; validation/function-shell/runtime behavior deferred. |
 
 ## Changelog
 
@@ -472,3 +494,5 @@ The `.2.1` AST/data layer adds:
   to `.2.1` for frontend AST/data types.
 - `2026-07-09`: Added Dart source-level AST/data types and JSON round-trip tests; frontier advances to `.2.2`
   for parser implementation.
+- `2026-07-09`: Added Dart core `.spec` parser and parser fixtures; frontier advances to `.2.3` for
+  validation and strict syntax behavior.

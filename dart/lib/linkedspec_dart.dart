@@ -29,6 +29,7 @@ export 'src/corpus/manifest_runner.dart'
         CorpusManifestException,
         CorpusValidationResult,
         loadCorpusFixtures;
+export 'src/parser/spec_parser.dart' show SpecParseException, parseSpec;
 export 'src/scaffold.dart'
     show
         describeLinkedSpecDartScaffold,

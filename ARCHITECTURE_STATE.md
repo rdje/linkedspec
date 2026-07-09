@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.2.2` added the Dart core `.spec` rule parser in
+  `dart/lib/src/parser/spec_parser.dart`. `parseSpec(...)` now produces the source AST for rule
+  paragraphs, headers/modes, header-rest body elements, regex literals, lifecycle blocks, action and
+  blind-call edges, fluent continuations, split/conditional markers, comments, raw fallback lines, and
+  nested block boundaries. Tests cover focused Rust parser parity seams, all checked-in `specs/*.spec`,
+  and rule-only corpus `input.spec` files. Strict validation remains `.2.3`; top-level function-shell
+  extraction/staging remains `.2.4`.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.2.1` added Dart source-level AST/data types in
   `dart/lib/src/ast/spec_ast.dart`. The types mirror the Rust parsed-AST and staged parse-job field names:
   `SpecFile`, `FunctionDefinition`, `SourceSpan`, `StagedParseJob`, `Rule`, `RuleHeader`, `RuleMode`,
