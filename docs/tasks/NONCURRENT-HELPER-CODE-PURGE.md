@@ -60,7 +60,7 @@ unknown-helper handling, not through a name-specific removal compatibility layer
   Commit: `NONCURRENT-HELPER-CODE-PURGE.1 - split code purge task tree`
 
 - ID: `NONCURRENT-HELPER-CODE-PURGE.2`
-  Status: `active`
+  Status: `done`
   Goal: Remove Perl source recognition and diagnostic paths for non-current helper spellings.
   Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`
 
@@ -187,12 +187,34 @@ unknown-helper handling, not through a name-specific removal compatibility layer
   Commit: `NONCURRENT-HELPER-CODE-PURGE.2.3 - purge Perl helper metadata names`
 
 - ID: `NONCURRENT-HELPER-CODE-PURGE.2.4`
-  Status: `pending`
+  Status: `done`
   Goal: Close Perl source purge scans and focused tests.
   Acceptance: Perl ActionIR parser/lowering/runtime source stops branching on the removed helper names; current
     helpers still lower; non-current helper-looking calls use generic unknown-helper behavior.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Focused Perl source scans over `perl/LinkedSpec.pm` and `perl/LinkedSpec`
+    found no exact retired helper call-shape recognition for the `SPEC-FORMAT-TERSE.8` spelling set. Remaining
+    exact-name hits are ordinary implementation comments about raw declaration compatibility, not helper-call
+    branches. Current helper probes for `cat(...)`, `copy(...)`, `set(...)`, and `push(...)` still lower through
+    current helper names. Retired value-position calls such as `concat(...)`, short wrapper `a(...)`, and
+    `scalaref(...)` lower through the same generic unsupported-helper sentinel path as an invented unknown helper.
+    Syntax, focused ActionIR tests, and full phase0 pass.
+  Acceptance Checklist:
+    - [x] **REPRODUCE / ISSUE** — Broader Perl-source closeout required proof that prior leaves did not leave
+      exact non-current helper spelling recognition in untouched ActionIR/parser/runtime source owners.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: Previous `.2.1` through `.2.3` edits removed the source-owner
+      and metadata branches; the remaining broad textual hits were either current helper names (`concat_arrays`),
+      ordinary type words (`scalar`), internal declaration-generation names, or raw-compat comments.
+    - [x] **FIX** — No Perl source edit was needed in this leaf. The closeout is a verified source/probe boundary
+      plus durable status alignment before Rust source work.
+    - [x] **ADDRESSED (verified)** — Exact call-shape scans over Perl source are clean for removed helper spellings;
+      `call_spec_handler_subst` probes show current helpers lower and retired value-position helper-looking calls
+      use the generic unsupported-helper sentinel.
+    - [x] **NO REGRESSION** — `perl -c perl/LinkedSpec.pm`, `perl -c -Iperl t/noncurrent_helper_metadata.t`,
+      focused ActionIR tests, and full phase0 pass (`1027` tests).
+    - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
+      roadmap tracker rows, architecture state, mdBook project status, Knowledge Map facts, `docs/TASK_TREE.md`,
+      and this task tree are updated.
+  Commit: `NONCURRENT-HELPER-CODE-PURGE.2.4 - close Perl source purge scans`
 
 - ID: `NONCURRENT-HELPER-CODE-PURGE.3`
   Status: `pending`
@@ -224,7 +246,7 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `NONCURRENT-HELPER-CODE-PURGE.2.4` | `pending` | Perl metadata is clean for the retired helper set; close broader Perl source scans and behavior probes before Rust source work. |
+| 1 | `NONCURRENT-HELPER-CODE-PURGE.3` | `pending` | Perl source cleanup is complete through focused scans and behavior probes; remove Rust source recognition/diagnostic paths for the same retired helper set next. |
 
 ## Decisions
 
@@ -255,12 +277,17 @@ unknown-helper handling, not through a name-specific removal compatibility layer
   AST parser, compact-lowerer, scoped exact scans, and full phase0 (`1027` tests) pass.
 - `2026-07-09` — `.2.3` removed exact retired helper names from raw-compat ActionIR diagnostic metadata, added a
   focused metadata regression test, and kept Perl ActionIR metadata plus phase0 green.
+- `2026-07-09` — `.2.4` closed Perl source purge scans and behavior probes. Exact retired-helper call-shape scans
+  over Perl source are clean, current helper lowering probes pass, retired value-position helper-looking calls use
+  the generic unsupported-helper sentinel, focused ActionIR tests pass, and full phase0 remains green (`1027`
+  tests).
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.1` | Read-only scans over `perl`, `rust`, `t`, `tools`, `scripts`, `bin`, and `specs`; task-tree split. | PASS. Owner categories are known; implementation starts with Perl source. |
 | `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.2.2` | Perl syntax checks; `prove -q -Iperl t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t`; `PERL5LIB= prove -q -Iperl t/phase0_regression.t`; scoped exact scans; mdBook helper/status scan. | PASS. Source-owner paths for the removed declaration, return-family, and short-wrapper helper-call spellings are gone from the touched Perl/test surfaces. |
 | `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.2.3` | `perl -c -Iperl perl/LinkedSpec/ActionIR/Contracts.pm`; `perl -c -Iperl t/noncurrent_helper_metadata.t`; `prove -q -Iperl t/noncurrent_helper_metadata.t`; focused exact metadata scan; `prove -q -Iperl t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t t/noncurrent_helper_metadata.t`; `PERL5LIB= prove -q -Iperl t/phase0_regression.t`. | PASS. Raw-compat diagnostic labels no longer publish exact retired helper names, and metadata tests lock contract/canonical behavior against the retired helper set. |
+| `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.2.4` | Exact retired-helper call-shape scans over Perl source; direct current-helper and retired-helper behavior probes; `perl -c perl/LinkedSpec.pm`; `perl -c -Iperl t/noncurrent_helper_metadata.t`; `prove -q -Iperl t/noncurrent_helper_metadata.t t/actionir_ast_parser.t t/trace_actionir_method_lowering.t t/trace_actionir_pipeline.t`; `PERL5LIB= prove -q -Iperl t/phase0_regression.t`. | PASS. Perl source no longer has exact retired helper-call recognition paths; current helpers still lower; retired value-position helper-looking calls use the same unsupported-helper sentinel path as invented unknown helpers. |
 
 ## Commit Log
 
@@ -270,8 +297,11 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 | `NONCURRENT-HELPER-CODE-PURGE.2.1` | `NONCURRENT-HELPER-CODE-PURGE.2.1 - purge Perl current helper compatibility` | Current `cat`/`copy`/`set`/`push` paths stay on current names. |
 | `NONCURRENT-HELPER-CODE-PURGE.2.2` | `NONCURRENT-HELPER-CODE-PURGE.2.2 - purge Perl declaration and return helper paths` | Perl declaration/return/wrapper helper-call source-owner paths removed. |
 | `NONCURRENT-HELPER-CODE-PURGE.2.3` | `NONCURRENT-HELPER-CODE-PURGE.2.3 - purge Perl helper metadata names` | Perl raw-compat metadata no longer uses exact retired helper names as diagnostic labels. |
+| `NONCURRENT-HELPER-CODE-PURGE.2.4` | `NONCURRENT-HELPER-CODE-PURGE.2.4 - close Perl source purge scans` | Perl source purge closeout scans/probes passed; Rust source cleanup is next. |
 
 ## Changelog
 
 - `2026-07-09`: Created task tree after the director's Perl/Rust code purge directive and split implementation
   into Perl source, Rust source, active tests/tools/spec fixtures, and final no-drift closeout.
+- `2026-07-09`: Closed the Perl source purge container through `.2.4`; active frontier advances to Rust source
+  cleanup under `.3`.

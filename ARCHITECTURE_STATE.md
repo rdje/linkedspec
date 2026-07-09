@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `NONCURRENT-HELPER-CODE-PURGE.2.4` closed the Perl source purge container for the
+  retired `SPEC-FORMAT-TERSE.8` helper spelling set. Focused exact call-shape scans over `perl/LinkedSpec.pm`
+  and `perl/LinkedSpec` are clean for retired helper recognition paths; remaining exact-name hits are raw-compat
+  comments or ordinary implementation words, not helper-call source branches. Current `cat(...)`, `copy(...)`,
+  `set(...)`, and `push(...)` lowering still works, while retired value-position helper-looking calls such as
+  `concat(...)`, `a(...)`, and `scalaref(...)` lower through the same generic unsupported-helper sentinel path as
+  invented unknown helpers. `NONCURRENT-HELPER-CODE-PURGE.3` owns the next Rust source cleanup.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.3.2` added Dart ActionIR contract resolution in
   `dart/lib/src/action/action_contracts.dart`. `resolveActionBlockContracts(...)`,
   `resolveActionStatementContracts(...)`, and `resolveActionExpressionContracts(...)` walk typed ActionIR
@@ -82,7 +89,8 @@ This document is the current high-level technical reading of the project shape. 
   the four explicit REP subfamilies) and is proven by an all-family compile/run matrix plus a curated
   manifest-backed corpus subset. The full 99-fixture corpus remains the interpreter oracle gate;
   generated-source corpus coverage is intentionally a subset until a future leaf broadens it. Current phase0 is
-  `PASS 1..1028` over 21 shipped `.spec` files with `PERL5LIB=` cleared after the Perl array-tree traversal lock.
+  `PASS 1..1027` over 21 shipped `.spec` files with `PERL5LIB=` cleared after the non-current helper metadata and
+  source closeout slices.
 - `2026-07-04` refresh: RUST-PARITY follow-on closed. The Rust variant then had a green 88-fixture
   manifest-backed interpreter oracle with missing/stale fixture drift guards, and the generated Rust-source path
   emitted the first validated generated-family module/corpus proof.

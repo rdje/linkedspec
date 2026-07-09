@@ -7,6 +7,25 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.2.4 — close Perl source purge scans**
+  (DONE Perl source purge verification; Rust source cleanup is next).
+
+  **Change:** Focused source scans over `perl/LinkedSpec.pm` and `perl/LinkedSpec` are clean for exact retired
+  helper call-shape recognition paths from the `SPEC-FORMAT-TERSE.8` spelling set. Direct lowering probes confirm
+  current `cat(...)`, `copy(...)`, `set(...)`, and `push(...)` still lower through current helper names, while
+  retired value-position helper-looking calls such as `concat(...)`, `a(...)`, and `scalaref(...)` use the same
+  generic unsupported-helper sentinel path as an invented unknown helper.
+
+  **Boundary:** This is the Perl source closeout leaf. Standalone unregistered function-shaped statements remain
+  the existing raw compatibility debt documented in the mdBook; active test/tool/spec fixture migration remains
+  owned by `.4`. The next frontier is `NONCURRENT-HELPER-CODE-PURGE.3` for Rust source recognition/diagnostic
+  path cleanup.
+
+  **Verification:** Exact retired-helper call-shape scans over Perl source, direct current-helper and retired-helper
+  behavior probes, `perl -c perl/LinkedSpec.pm`, `perl -c -Iperl t/noncurrent_helper_metadata.t`,
+  `prove -q -Iperl t/noncurrent_helper_metadata.t t/actionir_ast_parser.t t/trace_actionir_method_lowering.t
+  t/trace_actionir_pipeline.t`, and `PERL5LIB= prove -q -Iperl t/phase0_regression.t` (`1027` tests) pass.
+
 - 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.2.3 — purge Perl helper metadata names**
   (DONE Perl contract/canonical metadata name cleanup; broader Perl source purge scans still active).
 

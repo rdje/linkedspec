@@ -9,7 +9,7 @@ answers:
 date: 2026-07-09
 status: current
 tags: [task-tree, helper-surface, perl, rust, tests, tools, specs, NONCURRENT-HELPER-CODE-PURGE]
-evidence: "NONCURRENT-HELPER-CODE-PURGE.1 created docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md after the director clarified that non-current helper spellings must be deleted from Perl/Rust code surfaces. Read-only scans found owner categories in Perl ActionIR source, Rust runtime source, active tests, tooling, oracle-generation paths, and checked-in specs. The same scans also showed common-word false positives, so the purge is split into context-aware leaves rather than a blind replacement. NONCURRENT-HELPER-CODE-PURGE.2.1 removed Perl current-helper normalization through old string/copy/assignment names and removed the removed append-helper paths from touched Perl owners. NONCURRENT-HELPER-CODE-PURGE.2.2 removed Perl declaration/return/wrapper helper-call source-owner paths and passed focused syntax/tests plus phase0 1027 tests. NONCURRENT-HELPER-CODE-PURGE.2.3 removed exact retired helper names from raw-compat ActionIR diagnostic metadata, added t/noncurrent_helper_metadata.t, and passed focused metadata scans/tests plus phase0 1027 tests; remaining Perl source purge closeout is queued under .2.4."
+evidence: "NONCURRENT-HELPER-CODE-PURGE.1 created docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md after the director clarified that non-current helper spellings must be deleted from Perl/Rust code surfaces. Read-only scans found owner categories in Perl ActionIR source, Rust runtime source, active tests, tooling, oracle-generation paths, and checked-in specs. The same scans also showed common-word false positives, so the purge is split into context-aware leaves rather than a blind replacement. NONCURRENT-HELPER-CODE-PURGE.2.1 removed Perl current-helper normalization through old string/copy/assignment names and removed the removed append-helper paths from touched Perl owners. NONCURRENT-HELPER-CODE-PURGE.2.2 removed Perl declaration/return/wrapper helper-call source-owner paths and passed focused syntax/tests plus phase0 1027 tests. NONCURRENT-HELPER-CODE-PURGE.2.3 removed exact retired helper names from raw-compat ActionIR diagnostic metadata, added t/noncurrent_helper_metadata.t, and passed focused metadata scans/tests plus phase0 1027 tests. NONCURRENT-HELPER-CODE-PURGE.2.4 closed Perl source purge scans/probes: exact retired helper call-shape recognition is absent from Perl source, current helpers still lower, retired value-position helper-looking calls use the generic unsupported-helper sentinel, and phase0 passes 1027 tests."
 reverify: "rg -n '_retired|retired_helper|legacy helper|LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER' perl rust t tools specs"
 ---
 
@@ -43,9 +43,14 @@ diagnostic labels, and `t/noncurrent_helper_metadata.t` locks the contract table
 rewrite metadata, canonical events, and unsupported-helper events against the
 retired helper set.
 
-The next executable leaf is `NONCURRENT-HELPER-CODE-PURGE.2.4`: close Perl source
-purge scans and focused current/unknown-helper behavior probes before moving to
-Rust source work.
+`NONCURRENT-HELPER-CODE-PURGE.2.4` closed the Perl source purge container:
+focused exact call-shape scans over Perl source are clean for the retired helper
+set, current helper lowering probes still pass, retired value-position
+helper-looking calls use the same generic unsupported-helper sentinel as an
+invented unknown helper, and phase0 passed with `1027` tests.
+
+The next executable leaf is `NONCURRENT-HELPER-CODE-PURGE.3`: remove Rust source
+recognition and diagnostic paths for the same retired helper set.
 
 Related facts: [[legacy-helper-retirement-split-inventory]],
 [[dart-actionir-contract-resolver]], [[terse-declaration-helper-compatibility-policy]].

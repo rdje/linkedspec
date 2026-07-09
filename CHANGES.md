@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — NONCURRENT-HELPER-CODE-PURGE.2.4 — close Perl source purge scans
+
+**Scope:** Perl source purge closeout scans/probes, roadmap/task-tree status, mdBook project status,
+architecture state, live docs, and Knowledge Map facts for the non-current helper purge.
+
+**Change:** Closed the Perl source container for the non-current helper spelling purge without additional source
+edits. Focused scans over `perl/LinkedSpec.pm` and `perl/LinkedSpec` show no exact retired helper call-shape
+recognition paths for the `SPEC-FORMAT-TERSE.8` spelling set; remaining exact-name matches are ordinary
+raw-compat comments about declaration generation. Direct `call_spec_handler_subst` probes confirm current
+`cat(...)`, `copy(...)`, `set(...)`, and `push(...)` still lower through current helper names, while retired
+value-position helper-looking calls such as `concat(...)`, `a(...)`, and `scalaref(...)` use the same generic
+unsupported-helper sentinel path as an invented unknown helper. The active frontier moves to Rust source cleanup.
+
+**Validation:** Exact retired-helper call-shape scans over Perl source, direct current-helper and retired-helper
+behavior probes, `perl -c perl/LinkedSpec.pm`, `perl -c -Iperl t/noncurrent_helper_metadata.t`, `prove -q -Iperl
+t/noncurrent_helper_metadata.t t/actionir_ast_parser.t t/trace_actionir_method_lowering.t
+t/trace_actionir_pipeline.t`, and `PERL5LIB= prove -q -Iperl t/phase0_regression.t` pass (`1027` tests).
+
 ## 2026-07-09 — NONCURRENT-HELPER-CODE-PURGE.2.3 — purge Perl helper metadata names
 
 **Scope:** Perl ActionIR contract metadata, focused metadata regression coverage, mdBook/architecture

@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (NONCURRENT-HELPER-CODE-PURGE.2.4 — Perl source purge closeout):
+  Closed the Perl source purge container with focused scans and behavior probes rather than new source edits.
+  Exact retired helper call-shape scans over `perl/LinkedSpec.pm` and `perl/LinkedSpec` are clean for the
+  `SPEC-FORMAT-TERSE.8` spelling set; remaining exact-name hits are raw-compat comments or implementation words,
+  not helper-call recognition branches. `call_spec_handler_subst` probes confirm current `cat(...)`, `copy(...)`,
+  `set(...)`, and `push(...)` still lower, while retired value-position helper-looking calls such as `concat(...)`,
+  `a(...)`, and `scalaref(...)` use the same generic unsupported-helper sentinel as an invented unknown helper.
+  Standalone unregistered function-shaped statements remain the existing raw compatibility debt documented in
+  the mdBook; this leaf closes Perl source recognition/diagnostic paths and advances to Rust source cleanup.
+  Focused syntax/ActionIR tests and full phase0 (`1027` tests, `PERL5LIB=` cleared) pass.
+
 - 2026-07-09 (NONCURRENT-HELPER-CODE-PURGE.2.3 — Perl helper metadata name purge):
   Perl ActionIR raw-Perl passthrough contracts no longer publish exact retired helper names as diagnostic labels:
   raw lexical declarations and raw assignment compatibility events now report neutral `raw_*` labels instead of
