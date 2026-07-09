@@ -21,7 +21,7 @@ subtest 'calls literals variables and value-drop statements' => sub {
     is($block->{kind}, 'action_block', 'parse_action_block returns an action block');
     is(scalar(@{$block->{statements}}), 2, 'AST parser refines newline-separated chain statements');
     is($block->{statements}[0]{expr}{kind}, 'call', 'method statement parses as a call');
-    is($block->{statements}[0]{expr}{name}, 'assign', 'set alias normalizes through MethodExpr');
+    is($block->{statements}[0]{expr}{name}, 'set', 'set helper name is preserved by MethodExpr');
     is($block->{statements}[0]{expr}{args}[0]{kind}, 'variable', 'bare call argument parses as a variable');
     is($block->{statements}[0]{expr}{args}[1]{kind}, 'string', 'quoted call argument parses as a string');
     is($block->{statements}[0]{expr}{args}[1]{value}, 'a', 'string payload is captured without delimiters');
@@ -88,7 +88,7 @@ subtest 'shape literals and expression-valued blocks' => sub {
     my $block = parse_expr('{ set(x,"a"); x }');
     is($block->{kind}, 'block_value', 'non-empty non-hash-pair braces parse as a block value');
     is(scalar(@{$block->{block}{statements}}), 2, 'block value owns nested statements');
-    is($block->{block}{statements}[0]{expr}{name}, 'assign', 'block statement calls use the same method parser seam');
+    is($block->{block}{statements}[0]{expr}{name}, 'set', 'block statement calls use the same method parser seam');
     is($block->{block}{statements}[1]{expr}{kind}, 'variable', 'block final expression parses as a variable');
 };
 
@@ -181,7 +181,7 @@ subtest 'structured control forms parse as typed AST nodes' => sub {
     is($if->{canonical_keyword}, 'if', 'control_if carries the canonical keyword');
     is($if->{condition}{kind}, 'variable', 'control_if condition is parsed as an expression');
     is($if->{body}{kind}, 'action_block', 'control_if owns its attached body block');
-    is($if->{body}{statements}[0]{expr}{name}, 'assign', 'control_if body statements are parsed');
+    is($if->{body}{statements}[0]{expr}{name}, 'set', 'control_if body statements are parsed');
 
     my $when = parse_expr('when(is_nonempty(array(items)))');
     is($when->{kind}, 'control_if', 'marker when parses through the if-family control node');
@@ -265,7 +265,7 @@ subtest 'structured control forms parse as typed AST nodes' => sub {
     my $while = parse_expr('while(num_lt(count,3)) { set(count,num_add(count,1)) }');
     is($while->{kind}, 'control_while', 'attached while parses as control_while');
     is($while->{condition}{name}, 'num_lt', 'while condition is parsed as a call');
-    is($while->{body}{statements}[0]{expr}{name}, 'assign', 'while body statements are parsed');
+    is($while->{body}{statements}[0]{expr}{name}, 'set', 'while body statements are parsed');
 
     my $inline_if = parse_expr('if(flag, "yes", "no")');
     is($inline_if->{kind}, 'call', 'inline value if remains a generic call');
@@ -708,19 +708,13 @@ subtest 'statement helper-call lowering consumes AST call nodes' => sub {
             my ($expr, @rest) = @_;
             ++$parse_calls;
             if ($expr eq 'set(name, [poison])') {
-                return $call->('assign', $var->('name'), $array->($var->('value')));
+                return $call->('set', $var->('name'), $array->($var->('value')));
             }
             if ($expr eq 'set_key(hash(meta), poison_key, poison_value)') {
                 return $call->('set_key', $call->('hash', $var->('meta')), $var->('key'), $var->('value'));
             }
-            if ($expr eq 'push_value(items, poison)') {
-                return $call->('push_value', $var->('items'), $var->('value'));
-            }
             if ($expr eq 'push(array(items), poison)') {
                 return $call->('push', $call->('array', $var->('items')), $var->('value'));
-            }
-            if ($expr eq 'push_nonempty(array(items), poison)') {
-                return $call->('push_nonempty', $call->('array', $var->('items')), $var->('value'));
             }
             if ($expr eq 'return([poison])') {
                 return $call->('return', $array->($var->('value')));
@@ -740,14 +734,8 @@ subtest 'statement helper-call lowering consumes AST call nodes' => sub {
         my $set_key = LinkedSpec::call_spec_handler_subst('Top', q{set_key(hash(meta), poison_key, poison_value)});
         is($set_key, '$meta{$key} = $value', 'set_key statement lowers target/key/value from AST call args');
 
-        my $push_value = LinkedSpec::call_spec_handler_subst('Top', q{push_value(items, poison)});
-        like($push_value, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:push_value/, 'retired push_value AST call emits a diagnostic');
-
         my $push = LinkedSpec::call_spec_handler_subst('Top', q{push(array(items), poison)});
         is($push, 'push @items, $value', 'push statement lowers explicit append from AST call args');
-
-        my $push_nonempty = LinkedSpec::call_spec_handler_subst('Top', q{push_nonempty(array(items), poison)});
-        like($push_nonempty, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:push_nonempty/, 'retired push_nonempty AST call emits a diagnostic');
 
         my $return = LinkedSpec::call_spec_handler_subst('Top', q{return([poison])});
         is($return, 'return [$value]', 'return statement lowers payload from AST call args');
@@ -758,15 +746,11 @@ subtest 'statement helper-call lowering consumes AST call nodes' => sub {
         my $push_back = LinkedSpec::call_spec_handler_subst('Top', q{items.push_back(poison)});
         is($push_back, 'push @items, $value', 'array end-mutation statement lowers from AST receiver/call fields');
 
-        my $all = join("\n", $assign, $set_key, $push_value, $push, $push_nonempty, $return, $return_undef, $push_back);
+        my $all = join("\n", $assign, $set_key, $push, $return, $return_undef, $push_back);
         unlike($all, qr/poison|__bad_/, 'statement helper-call lowering does not reuse fake AST source or original poison text');
     }
 
-    my $bad_push_nonempty = LinkedSpec::call_spec_handler_subst('Top', q{push_nonempty(items)});
-    unlike($bad_push_nonempty, qr/\bpush_nonempty\s*\(/, 'unsupported covered statement helper no longer leaks as a host call');
-    like($bad_push_nonempty, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:push_nonempty/, 'unsupported covered statement helper leaves diagnostic sentinel');
-
-    ok($parse_calls >= 8, 'statement helper calls entered through the AST parser');
+    ok($parse_calls >= 6, 'statement helper calls entered through the AST parser');
 };
 
 subtest 'receiver chains accept all expression receivers' => sub {
@@ -904,14 +888,14 @@ subtest 'aggregate helper-call lowering consumes AST call nodes' => sub {
             if ($expr eq 'copy(array(items))') {
                 return $call->(
                     'copy',
-                    '__bad_array_copy_host_call__()',
+                    '__bad_array_snapshot_host_call__()',
                     $call->('array', '__bad_array_wrapper_host_call__()', $var->('items')),
                 );
             }
             if ($expr eq 'copy(hash(meta))') {
                 return $call->(
                     'copy',
-                    '__bad_hash_copy_host_call__()',
+                    '__bad_hash_snapshot_host_call__()',
                     $call->('hash', '__bad_hash_wrapper_host_call__()', $var->('meta')),
                 );
             }
@@ -974,11 +958,11 @@ subtest 'aggregate helper-call lowering consumes AST call nodes' => sub {
             return $orig_parse_action_expr->($expr, @rest);
         };
 
-        my $array_copy = LinkedSpec::call_spec_handler_subst('Top', q{return(copy(array(items)))});
-        is($array_copy, q{return [@items]}, 'AST aggregate lowering preserves copy(array(items)) output');
+        my $array_snapshot = LinkedSpec::call_spec_handler_subst('Top', q{return(copy(array(items)))});
+        is($array_snapshot, q{return [@items]}, 'AST aggregate lowering preserves copy(array(items)) output');
 
-        my $hash_copy = LinkedSpec::call_spec_handler_subst('Top', q{return(copy(hash(meta)))});
-        is($hash_copy, q{return {%meta}}, 'AST aggregate lowering preserves copy(hash(meta)) output');
+        my $hash_snapshot = LinkedSpec::call_spec_handler_subst('Top', q{return(copy(hash(meta)))});
+        is($hash_snapshot, q{return {%meta}}, 'AST aggregate lowering preserves copy(hash(meta)) output');
 
         my $copy_hash = LinkedSpec::call_spec_handler_subst('Top', q{return(copy(hash(meta)))});
         is($copy_hash, q{return {%meta}}, 'AST aggregate lowering preserves copy(hash(meta)) array/hash resolution');
@@ -998,13 +982,13 @@ subtest 'aggregate helper-call lowering consumes AST call nodes' => sub {
         my $merge = LinkedSpec::call_spec_handler_subst('Top', q{return(merge_hash(hash(base),set_key(hash(overlay),"stage",cat("a","b"))))});
         like($merge, qr/%base/, 'AST aggregate lowering preserves merge_hash hash source slots');
         like($merge, qr/\\%overlay/, 'AST aggregate lowering preserves nested set_key hash source slots');
-        like($merge, qr/\@__ls_concat_parts/, 'AST aggregate lowering composes nested value-only helper slots');
+        like($merge, qr/\@__ls_cat_parts/, 'AST aggregate lowering composes nested value-only helper slots');
 
         my $has_key = LinkedSpec::call_spec_handler_subst('Top', q{return(has_key(pick_keys(hash(meta),"a"),"a"))});
         like($has_key, qr/\$__ls_pick_source/, 'AST aggregate lowering preserves nested pick_keys hash helper output');
         like($has_key, qr/\$__ls_has_key/, 'AST aggregate lowering preserves has_key terminal output');
 
-        my $all = join("\n", $array_copy, $hash_copy, $copy_hash, $quoted_count, $sum, $take, $merge, $has_key);
+        my $all = join("\n", $array_snapshot, $hash_snapshot, $copy_hash, $quoted_count, $sum, $take, $merge, $has_key);
         unlike($all, qr/__bad_/, 'AST aggregate lowering does not reuse fake source text for supported calls');
     }
 
@@ -1021,7 +1005,7 @@ subtest 'covered helper-call diagnostics retire AST host-call leakage' => sub {
     like($bad_count, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:count/, 'unsupported covered aggregate helper leaves diagnostic sentinel');
 
     my $nested_bad = LinkedSpec::call_spec_handler_subst('Top', q{return(cat(substr("abc"),"x"))});
-    unlike($nested_bad, qr/\@__ls_concat_parts = \(substr\s*\(/, 'nested unsupported covered helper no longer becomes a host-call cat operand');
+    unlike($nested_bad, qr/\@__ls_cat_parts = \(substr\s*\(/, 'nested unsupported covered helper no longer becomes a host-call cat operand');
     like($nested_bad, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr/, 'nested unsupported covered helper remains visible to diagnostics');
 
     my $spec = qq{Top::\n /x/ -> Done { return(substr("abc")) }\nDone::\n /y/\n};
@@ -1041,10 +1025,10 @@ subtest 'standalone AST value statements drop covered values without raw fallbac
         'standalone trim lowers as a discarded value expression');
     unlike($trim, qr/^trim\s*\(/, 'standalone trim no longer remains as raw host-call text');
 
-    my $concat = LinkedSpec::call_spec_handler_subst('Top', q{cat("a", "b")});
-    like($concat, qr/^do \{ do \{ my \@__ls_concat_parts = \("a", "b"\);.*undef \}$/s,
+    my $cat = LinkedSpec::call_spec_handler_subst('Top', q{cat("a", "b")});
+    like($cat, qr/^do \{ do \{ my \@__ls_cat_parts = \("a", "b"\);.*undef \}$/s,
         'standalone cat lowers as a discarded value expression');
-    unlike($concat, qr/^cat\s*\(/, 'standalone cat no longer remains as raw host-call text');
+    unlike($cat, qr/^cat\s*\(/, 'standalone cat no longer remains as raw host-call text');
 
     my $bad_count = LinkedSpec::call_spec_handler_subst('Top', q{count(1,2)});
     like($bad_count, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:count/,
@@ -1057,11 +1041,11 @@ subtest 'standalone AST value statements drop covered values without raw fallbac
     unlike($string_chain, qr/^" x "\.trim\(\)/, 'standalone string receiver chain no longer remains as raw source text');
 
     like(LinkedSpec::call_spec_handler_subst('Top', q{s(foo)}), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:s/,
-        'retired scalar shorthand lowers to an unresolved-helper diagnostic');
+        'unknown scalar shorthand lowers to an unresolved-helper diagnostic');
     like(LinkedSpec::call_spec_handler_subst('Top', q{a("A", "B")}), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:a/,
-        'retired array shorthand lowers to an unresolved-helper diagnostic');
+        'unknown array shorthand lowers to an unresolved-helper diagnostic');
     like(LinkedSpec::call_spec_handler_subst('Top', q{h("kind", "node")}), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:h/,
-        'retired hash shorthand lowers to an unresolved-helper diagnostic');
+        'unknown hash shorthand lowers to an unresolved-helper diagnostic');
 
     my $ready_spec = qq{Top::\n /x/ -> Done { trim(" x "); cat("a","b"); " y ".trim() }\nDone::\n /y/\n};
     my $ready_descriptor = eval { LinkedSpec::Get(\$ready_spec, return_descriptor => 1) };
@@ -1288,7 +1272,7 @@ subtest 'return-payload lowering consumes AST nodes before raw fallback' => sub 
         );
         like($payload, qr/\$value/, 'AST return payload lowers bare scalar reads from typed nodes');
         like($payload, qr/JSON::PP::true/, 'AST return payload lowers booleans from typed nodes');
-        like($payload, qr/__ls_concat_parts/, 'AST return payload lowers nested helper calls from typed nodes');
+        like($payload, qr/__ls_cat_parts/, 'AST return payload lowers nested helper calls from typed nodes');
         like($payload, qr/\$foo->\{"a"\}->\[\$i\]/, 'AST return payload lowers nested access from typed nodes');
         like($payload, qr/\{\$key => \$value\}/, 'AST return payload lowers hash literals from typed nodes');
 
@@ -1353,9 +1337,9 @@ subtest 'block-value lowering consumes AST action statements' => sub {
                 kind => 'action_block',
                 source => '__bad_action_block_source__()',
                 statements => [
-                    $stmt->('set_x', $call->('assign', $var->('x'), $str->('a'))),
+                    $stmt->('set_x', $call->('set', $var->('x'), $str->('a'))),
                     $stmt->('return_value', $call->('return', $var->('value'))),
-                    $stmt->('set_y', $call->('assign', $var->('y'), $str->('b'))),
+                    $stmt->('set_y', $call->('set', $var->('y'), $str->('b'))),
                     $stmt->('final_y', $var->('y')),
                 ],
             },

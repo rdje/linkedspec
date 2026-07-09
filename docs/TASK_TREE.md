@@ -23,7 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
-| `NONCURRENT-HELPER-CODE-PURGE` | `active` | `.spec language evolution / codebase no-drift` | `.1` done 2026-07-09 - read-only scans split the Perl/Rust code purge into source, test/tool/spec, and no-drift leaves. Next frontier `.2` removes Perl source recognition/diagnostic paths for non-current helper spellings. | [docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md](docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md) |
+| `NONCURRENT-HELPER-CODE-PURGE` | `active` | `.spec language evolution / codebase no-drift` | `.2.1` done 2026-07-09 - Perl current `cat`/`copy`/`set`/`push` lowering no longer routes through removed helper names or removed append-helper diagnostic branches. Next frontier `.2.2` removes declaration/return/wrapper source-owner paths. | [docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md](docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md) |
 | `DART-BACKEND-PARITY` | `active` | `Overall roadmap - future backend parity (Dart first)` | `.3.2` done 2026-07-09 - Dart now resolves typed helper/action AST nodes to current canonical helper/control contracts and generic diagnostics. Next frontier `.3.3` builds the function registry and staged function-body parse-job records. | [docs/tasks/DART-BACKEND-PARITY.md](docs/tasks/DART-BACKEND-PARITY.md) |
 | `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | `.1.1` done 2026-07-09 - Dart backend parity was scoped into `DART-BACKEND-PARITY`; Julia `.1.2` remains gated until the Dart scoped milestone is reached. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
 | `SPEC-SOURCE-TERSE-CLOSEOUT` | `done` / `closed` | `Overall roadmap - .spec language evolution (terse format)` | `.1` done 2026-07-08 - root `specs/*.spec` source-format closeout completed; retired-helper and host-action residue scans are clean, all 21 descriptors report `1.0000 0 0`, hlink bracket/mixed fixtures are active in the 99-fixture Rust oracle, and pplugin body execution is isolated in the Perl runtime adapter. | [docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md](docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md) |
@@ -93,6 +93,12 @@ Index note 2026-07-09: `NONCURRENT-HELPER-CODE-PURGE.1` is done. After the direc
 helper spellings must be deleted from the Perl and Rust codebases, read-only scans split the purge into Perl
 source, Rust source, active tests/tools/spec fixtures, and final no-drift leaves. Active frontier is
 `NONCURRENT-HELPER-CODE-PURGE.2` for Perl source recognition/diagnostic path removal.
+
+Index note 2026-07-09: `NONCURRENT-HELPER-CODE-PURGE.2.1` is done. Perl ActionIR current `cat(...)`,
+`copy(...)`, `set(...)`, and `push(...)` lowering now stays on current method/contract names, removed
+append-helper recognition/diagnostic branches are gone from the touched Perl source owners, and focused
+syntax, AST parser, compact-lowerer, direct current-helper probes, and removed-append scans pass. Active
+frontier advances to `NONCURRENT-HELPER-CODE-PURGE.2.2`.
 
 Index note 2026-07-04: `SPEC-FORMAT-TERSE.8` is now pending by explicit user directive. The `.6.4` decision to
 retain legacy compatibility helpers is superseded for this unreleased project; the new frontier removes remaining

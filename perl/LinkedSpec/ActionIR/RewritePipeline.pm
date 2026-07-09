@@ -128,7 +128,7 @@ sub _unmatched_event_is_statement_level {
  my $contract_id = $event->{contract_id} // '';
  return 1 if $contract_id =~ /^(?:call|return_call|return_general|return|return_array|return_bare|return_undef)$/o;
  return 1 if $contract_id =~ /^(?:declare_typed|declare_alias)$/o;
- return 1 if $contract_id =~ /^(?:push_single_arg|push_indexed_arg|push_target_arg|push_target_indexed_arg|push_scope_target_arg|push_value|push_nonempty)$/o;
+ return 1 if $contract_id =~ /^(?:push_single_arg|push_indexed_arg|push_target_arg|push_target_indexed_arg|push_scope_target_arg|push)$/o;
  return 1 if $contract_id =~ /^(?:set_value|assign_call|assign_call_my|assign_match_my|scalar_assignment_operator|array_append_operator|array_end_mutation_method|hash_index_assignment_operator|set_key_statement)$/o;
  return 1 if $contract_id eq 'value_drop_statement';
  return 1 if $contract_id =~ /^(?:if_flow|elseif_flow|else_flow|endif_flow|while_flow|switch_flow|case_flow|default_flow|endcase_flow|endswitch_flow)$/o;

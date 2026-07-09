@@ -7,6 +7,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.2.1 — purge Perl current helper compatibility**
+  (DONE Perl current-helper/source-owner cleanup; broader Perl metadata/source purge still active).
+
+  **Change:** Perl current `cat(...)`, `copy(...)`, `set(...)`, and `push(...)` lowering now stays on current
+  method/contract names. Removed the old normalization/compatibility paths in the current string/copy/assignment
+  family, deleted the removed append-helper scanner/contract/lowerer branches, and renamed the current explicit
+  append lowerer/dependency to `push` terminology. AST tests now fabricate current helper AST nodes and expect the
+  current `__ls_cat_*` generated local names. The current `set(...)` owner also handles slash-regex payloads
+  without routing through an old normalized method name, and the bootstrap classifier no longer whitelists deleted
+  current-helper-family spellings.
+
+  **Boundary:** This slice does not claim the whole Perl purge is done. Declaration, return-family, short-wrapper,
+  capture/named-map, Rust, active fixture/tool/spec, and historical doc cleanup remain in
+  `NONCURRENT-HELPER-CODE-PURGE`. The next frontier is `NONCURRENT-HELPER-CODE-PURGE.2.2`.
+
+  **Verification:** Syntax checks passed for touched Perl ActionIR/RuleIR owners. `prove -q -Iperl
+  t/actionir_ast_parser.t`, `prove -q -Iperl t/trace_actionir_compact_lowerers.t`, direct current-helper lowering
+  probes, `PERL5LIB= prove -q -Iperl t/phase0_regression.t` (`1..1028`), and a focused deleted-spelling scan over
+  touched Perl/test paths passed.
+
 - 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.1 — split code purge task tree**
   (DONE ownership/inventory split; no parser/runtime code edited in this slice).
 

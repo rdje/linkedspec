@@ -15,8 +15,7 @@ sub try_scan_contract_ir_events {
  my %dispatch = (
   'print_foreach_iterable' => \&_scan_contract_print_foreach_iterable,
   'split_trim_filter_assignment' => \&_scan_contract_split_trim_filter_assignment,
-  'push_value' => \&_scan_contract_push_value,
-  'push_nonempty' => \&_scan_contract_push_nonempty,
+  'push' => \&_scan_contract_push,
   'set_value' => \&_scan_contract_set_value,
   'scalar_assignment_operator' => \&_scan_contract_scalar_assignment_operator,
   'array_append_operator' => \&_scan_contract_array_append_operator,
@@ -91,33 +90,29 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
  return \@events
 }
 
-sub _scan_contract_push_value {
+sub _scan_contract_push {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>(?:push_value|push)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
+while ($code =~ /\b(?<expr>push\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
  my $raw_expr = $+{expr};
  my $call = _parse_method_function_expr($raw_expr);
- next unless $call && ($call->{method} eq 'push_value' || $call->{method} eq 'push');
+ next unless $call && $call->{method} eq 'push';
  my $raw_args = $call->{args} || [];
  my $effective_args;
-	 if ($call->{method} eq 'push_value') {
-	  $effective_args = _normalize_method_args_with_optional_scope($raw_args, 2, 2);
-	 } else {
-	  if (@$raw_args == 2) {
-	   $effective_args = $raw_args;
-	  } elsif (@$raw_args == 3) {
-	   my $scoped_target_expr = _trim_action_ir_value($raw_args->[1]);
-	   next unless defined($scoped_target_expr) && $scoped_target_expr =~ /^array\s*\(\s*\w+\s*\)$/o;
-	   $effective_args = [ $raw_args->[1], $raw_args->[2] ];
-	  } else {
-	   next;
-	  }
-	  my $first_expr = _trim_action_ir_value($effective_args->[0]);
-	  my $second_expr = _trim_action_ir_value($effective_args->[1]);
-	  next if defined($first_expr) && defined($second_expr)
-	       && $first_expr =~ /^\w+$/o && $second_expr =~ /^\w+$/o
-	       && !_is_primitive_literal_token($second_expr);
-	 }
+ if (@$raw_args == 2) {
+  $effective_args = $raw_args;
+ } elsif (@$raw_args == 3) {
+  my $scoped_target_expr = _trim_action_ir_value($raw_args->[1]);
+  next unless defined($scoped_target_expr) && $scoped_target_expr =~ /^array\s*\(\s*\w+\s*\)$/o;
+  $effective_args = [ $raw_args->[1], $raw_args->[2] ];
+ } else {
+  next;
+ }
+ my $first_expr = _trim_action_ir_value($effective_args->[0]);
+ my $second_expr = _trim_action_ir_value($effective_args->[1]);
+ next if defined($first_expr) && defined($second_expr)
+      && $first_expr =~ /^\w+$/o && $second_expr =~ /^\w+$/o
+      && !_is_primitive_literal_token($second_expr);
  next unless $effective_args;
  my $target_expr = _trim_action_ir_value($effective_args->[0]);
  my $value_expr = _trim_action_ir_value($effective_args->[1]);
@@ -133,43 +128,12 @@ while ($code =~ /\b(?<expr>(?:push_value|push)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"
  return \@events
 }
 
-sub _scan_contract_push_nonempty {
- my ($code) = @_;
- my @events;
-while ($code =~ /\b(?<expr>push_nonempty\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
- my $raw_expr = $+{expr};
- my $call = _parse_method_function_expr($raw_expr);
- next unless $call && $call->{method} eq 'push_nonempty';
- my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
- if (!$effective_args) {
-  push @events, {raw => $raw_expr, args => {}};
-  next;
- }
- my $target_expr = _trim_action_ir_value($effective_args->[0]);
- my $value_expr = _trim_action_ir_value($effective_args->[1]);
- if (!defined($target_expr) || !length($target_expr) || !defined($value_expr) || !length($value_expr)) {
-  push @events, {raw => $raw_expr, args => {}};
-  next;
- }
- my ($target_symbol) = $target_expr =~ /^array\s*\(\s*(\w+)\s*\)$/o;
- if (!defined($target_symbol) && $target_expr =~ /^(\w+)$/o) {
-  $target_symbol = $1;
- }
- if (!defined($target_symbol) || !length($target_symbol)) {
-  push @events, {raw => $raw_expr, args => {}};
-  next;
- }
- push @events, {raw => $raw_expr, args => {target => $target_symbol, value => $value_expr, predicate => 'nonempty'}};
-}
- return \@events
-}
-
 sub _scan_contract_set_value {
  my ($code) = @_;
  my @events;
-	while ($code =~ /\b(?<expr>set\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
-	 my $call = _parse_method_function_expr($+{expr});
-	 next unless $call && $call->{method} eq 'assign';
+ while ($code =~ /\b(?<expr>set\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
+  my $call = _parse_method_function_expr($+{expr});
+  next unless $call && $call->{method} eq 'set';
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
  next unless $effective_args;
  push @events, {
@@ -585,8 +549,8 @@ while ($code =~ /\b(?<expr>filter_match\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[
 sub _scan_contract_value_drop_statement {
  my ($code) = @_;
  my @events;
- my $value_call_re = qr/(?:s|a|h|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|num_eq|num_ne|num_gt|num_ge|num_lt|num_le|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|array|hash|array_copy|hash_copy|copy|flat|flat_array|flat_hash|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count_keys|sorted_keys|sorted_values|has_key|merge_hash|rename_key|drop_keys|pick_keys|join_values|entry_groups|match_groups|entry_map|entry_named_map|match_map|match_named_map|num_sum|num_avg|num_median|num_range)/;
- my $receiver_method_re = qr/(?:trim|lowercase|uppercase|length|sorted|reversed|count|first|last|is_empty|is_nonempty|hash_copy|flat_hash|count_keys|sorted_keys|sorted_values|abs|floor|ceil|round)/;
+ my $value_call_re = qr/(?:s|a|h|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|num_eq|num_ne|num_gt|num_ge|num_lt|num_le|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|array|hash|copy|flat|flat_array|flat_hash|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count_keys|sorted_keys|sorted_values|has_key|merge_hash|rename_key|drop_keys|pick_keys|join_values|entry_groups|match_groups|entry_map|entry_named_map|match_map|match_named_map|num_sum|num_avg|num_median|num_range)/;
+ my $receiver_method_re = qr/(?:trim|lowercase|uppercase|length|sorted|reversed|count|first|last|is_empty|is_nonempty|flat_hash|count_keys|sorted_keys|sorted_values|abs|floor|ceil|round)/;
  my $literal_receiver_re = qr/(?:"(?:\\.|[^\"])*"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|[A-Za-z_][A-Za-z0-9_]*(?!\s*\())/;
  foreach my $statement (@{_split_action_ir_statements($code)}) {
   my $trimmed = _trim_action_ir_value($statement);

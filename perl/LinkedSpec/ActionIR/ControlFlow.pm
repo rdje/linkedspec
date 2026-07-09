@@ -255,9 +255,7 @@ sub _control_ast_value_source_expr {
  }
  if ($kind eq 'call') {
   my $method = $node->{name};
-  $method = 'set'
-   if $method eq 'assign' && (($node->{source} // '') !~ /^\s*assign\s*\(/o);
-  $method = $node->{source_method}
+	  $method = $node->{source_method}
    if defined($node->{source_method}) && $node->{source_method} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   return undef unless defined($method) && $method =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   my @args;
@@ -451,7 +449,7 @@ sub _if_arg_starts_inline_action_or_branch {
  my ($expr) = @_;
  return 0 unless defined $expr;
  return 1 if $expr =~ /^\s*\{/s;
- return $expr =~ /^\s*(?:elif|elseif|else|if|i|when|while|switch|case|default|endcase|endswitch|return|return_undef|declare(?:_\w+)?|set|push|push_value|push_nonempty|say|print|print_each|exit_now|next)\s*(?:\(|\{|\z)/o ? 1 : 0
+ return $expr =~ /^\s*(?:elif|elseif|else|if|i|when|while|switch|case|default|endcase|endswitch|return|return_undef|declare(?:_\w+)?|set|push|say|print|print_each|exit_now|next)\s*(?:\(|\{|\z)/o ? 1 : 0
 }
 
 sub _lower_if_flow_statement {

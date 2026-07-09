@@ -61,10 +61,10 @@ sub _method_value_helper_family {
  return 'rule_call' if $method eq 'call';
  return 'input' if $method =~ /^input_/o || $method =~ /^cursor_/o;
  return 'entry_match' if $method =~ /^(?:entry_|match_)/o;
- return 'string' if $method =~ /^(?:trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|str_|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty)$/o;
+ return 'string' if $method =~ /^(?:trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|str_|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty)$/o;
  return 'numeric' if defined(_numeric_word_alias_helper_name($method)) || $method =~ /^num_/o;
- return 'array' if $method =~ /^(?:array|array_copy|copy|flat|flat_array|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|join_values|entry_groups|match_groups)$/o;
- return 'hash' if $method =~ /^(?:hash|hash_copy|flat_hash|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|entry_map|entry_named_map|match_map|match_named_map)$/o;
+ return 'array' if $method =~ /^(?:array|copy|flat|flat_array|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|join_values|entry_groups|match_groups)$/o;
+ return 'hash' if $method =~ /^(?:hash|flat_hash|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|entry_map|entry_named_map|match_map|match_named_map)$/o;
  return 'capture' if $method =~ /^(?:capture|start_capture|mark_|clear_mark)/o;
  return 'flow' if $method =~ /^(?:is_empty|is_nonempty|is_defined|is_undefined|and|or|not|eq|ne|gt|ge|lt|le)$/o;
  return 'unknown'
@@ -199,8 +199,8 @@ sub _infer_assignment_source_container_kind {
  my $call = $parse_method_function_expr->($trimmed);
  return undef unless $call;
  my $method = $call->{method} // '';
- return 'array' if $method =~ /^(?:array|array_copy|flat_array|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|entry_groups|match_groups)$/o;
- return 'hash' if $method =~ /^(?:hash|hash_copy|flat_hash|merge_hash|set_key|rename_key|drop_keys|pick_keys|entry_map|entry_named_map|match_map|match_named_map)$/o;
+ return 'array' if $method =~ /^(?:array|flat_array|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|entry_groups|match_groups)$/o;
+ return 'hash' if $method =~ /^(?:hash|flat_hash|merge_hash|set_key|rename_key|drop_keys|pick_keys|entry_map|entry_named_map|match_map|match_named_map)$/o;
 
  if ($method eq 'flat') {
   my $args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, 1);
@@ -634,14 +634,13 @@ sub _lower_block_side_effect_statement {
   \&_lower_array_end_mutation_method_statement,
   \&_lower_hash_index_assignment_operator_statement,
   \&_lower_set_key_statement,
-  \&_lower_push_value_statement,
-  \&_lower_push_nonempty_statement,
+  \&_lower_push_statement,
  ) {
   my $lowered = $lowerer->($trimmed, $deps);
   return $lowered if defined($lowered) && length($lowered);
  }
 
- if ($call && (($call->{method} // '') eq 'assign') && $trimmed =~ /^\s*set\s*\(/o) {
+ if ($call && (($call->{method} // '') eq 'set') && $trimmed =~ /^\s*set\s*\(/o) {
   my $args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, 2);
   return undef unless $args;
   my $lowered = _lower_assign_statement($args->[0], $args->[1], $deps);
@@ -673,10 +672,10 @@ sub _lower_ast_block_side_effect_statement {
  if ($kind eq 'call') {
   my $method = _actionir_ast_statement_method($node->{name}, $node->{source});
   return undef if defined($method) && $method eq 'return';
-  if (defined($method) && $method =~ /^(?:set|set_key|push|push_value|push_nonempty)$/o) {
+  if (defined($method) && $method =~ /^(?:set|set_key|push)$/o) {
    my $lowered = _lower_ast_call_statement(
     $node,
-    ['set', 'set_key', 'push', 'push_value', 'push_nonempty'],
+    ['set', 'set_key', 'push'],
     $deps,
    );
    return $lowered if defined($lowered) && length($lowered);
@@ -908,7 +907,7 @@ sub _actionir_ast_value_source_expr {
   return '{'.join(', ', @pairs).'}'
  }
  if ($kind eq 'call') {
-  my $name = _actionir_ast_parser_normalized_set_call($node) ? 'set' : $node->{name};
+  my $name = $node->{name};
   $name = $node->{source_method}
    if defined($node->{source_method}) && $node->{source_method} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   return undef unless defined($name) && $name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
@@ -923,10 +922,10 @@ sub _actionir_ast_value_source_expr {
  if ($kind eq 'fluent_chain') {
   my $receiver = _actionir_ast_value_source_expr($node->{receiver});
   return undef unless defined($receiver) && length($receiver);
-	 my $expr = $receiver;
-	 foreach my $call (@{$node->{calls} || []}) {
-	  return undef unless ref($call) eq 'HASH';
-	  my $method = $call->{method};
+  my $expr = $receiver;
+  foreach my $call (@{$node->{calls} || []}) {
+   return undef unless ref($call) eq 'HASH';
+   my $method = $call->{method};
    $method = $call->{source_method}
     if defined($call->{source_method}) && $call->{source_method} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
    return undef unless defined($method) && $method =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
@@ -1082,31 +1081,6 @@ sub _actionir_ast_unsupported_helper_expr {
  return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:'.$method.'"; undef }'
 }
 
-sub _actionir_retired_function_helper_name {
- my ($method, $source) = @_;
- return undef unless defined($method) && length($method);
- return $method if $method =~ /^(?:array_copy|hash_copy|push_value|push_nonempty)$/o;
-
- # `cat(...)` is the current spelling but is parser-normalized to method `concat`.
- # Retire only source text that actually used the old function-form name.
- return 'concat'
-  if $method eq 'concat'
-  && defined($source)
-  && $source =~ /^\s*concat\s*\(/o;
-
- return undef
-}
-
-sub _actionir_source_spelled_method_name {
- my ($method, $source) = @_;
- return $method unless defined($method) && length($method);
- return 'cat'
-  if $method eq 'concat'
-  && defined($source)
-  && $source =~ /^\s*cat\s*\(/o;
- return $method
-}
-
 sub _actionir_ast_retired_colon_scalar_slot_expr {
  my ($name) = @_;
  $name = '<unknown>' unless defined($name) && length($name);
@@ -1131,29 +1105,10 @@ sub _actionir_ast_retired_hash_literal_fat_arrow_expr {
  return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon"; undef }'
 }
 
-sub _actionir_ast_retired_wrapper_alias_method {
- my ($method) = @_;
- return undef unless defined($method) && length($method);
- return $method if $method =~ /^(?:a|h)$/o;
- return undef
-}
-
 sub _actionir_ast_statement_method {
  my ($method, $source) = @_;
  return undef unless defined($method) && length($method);
- if ($method eq 'assign') {
-  return undef if defined($source) && $source =~ /^\s*assign\s*\(/o;
-  return 'set';
- }
  return $method
-}
-
-sub _actionir_ast_parser_normalized_set_call {
- my ($node) = @_;
- return 0 unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
- return 0 unless ($node->{name} // '') eq 'assign';
- my $source = $node->{source} // '';
- return $source !~ /^\s*assign\s*\(/o ? 1 : 0
 }
 
 sub _actionir_ast_call_arg_sources {
@@ -1182,9 +1137,6 @@ sub _actionir_ast_known_value_call_method {
  my ($method) = @_;
  return undef unless defined($method) && length($method);
  return '=' if $method eq '=';
- my $retired_alias = _actionir_ast_retired_wrapper_alias_method($method);
- return $retired_alias if defined($retired_alias) && length($retired_alias);
- return 'concat' if $method eq 'cat';
  my $numeric_alias = _numeric_word_alias_helper_name($method);
  return $numeric_alias if defined($numeric_alias) && length($numeric_alias);
  state %known = map { $_ => 1 } qw(
@@ -1194,12 +1146,12 @@ sub _actionir_ast_known_value_call_method {
   or and not eq ne gt ge lt le is_defined is_undefined is_empty is_nonempty
   return return_undef return_array return_a return_m return_ma return_imatch return_im
   set declare declare_s declare_scalar declare_a declare_array declare_h declare_hash
-  call push push_value push_nonempty push_back push_front pop_back pop_front set_key print say exit_now exit next
-  trim lowercase uppercase length substr replace_substr rm_prefix rm_suffix concat
+  call push push_back push_front pop_back pop_front set_key print say exit_now exit next
+  trim lowercase uppercase length substr replace_substr rm_prefix rm_suffix cat
   str_eq str_ne str_gt str_ge str_lt str_le starts_with ends_with contains_substr matches coalesce coalesce_nonempty
   num_abs num_floor num_ceil num_round num_add num_sub num_mul num_div num_mod num_clamp
   num_min num_max num_eq num_ne num_gt num_ge num_lt num_le num_sum num_avg num_median num_range
-  array hash array_copy hash_copy copy flat flat_array flat_hash
+  array hash copy flat flat_array flat_hash
   count first last drop_front take slice take_last drop_back concat_arrays split split_tagged_records
   sorted reversed contains index_of split_each trim_each filter_nonempty lowercase_each uppercase_each
   __array_value_split_each __array_value_trim_each __array_value_filter_nonempty __array_value_lowercase_each
@@ -1368,7 +1320,7 @@ sub _user_function_collect_local_decls_from_node {
    if (ref($target) eq 'HASH' && ($target->{kind} // '') eq 'variable') {
     _user_function_record_local_decl($decls, $params, '%', $target->{name});
    }
-  } elsif ($name =~ /^(?:push|push_value|push_nonempty)$/o && ref($args) eq 'ARRAY' && @$args >= 1) {
+  } elsif ($name eq 'push' && ref($args) eq 'ARRAY' && @$args >= 1) {
    my $target = $args->[0];
    if (ref($target) eq 'HASH') {
     if (($target->{kind} // '') eq 'variable') {
@@ -1380,13 +1332,13 @@ sub _user_function_collect_local_decls_from_node {
       if ref($target_arg) eq 'HASH' && ($target_arg->{kind} // '') eq 'variable';
     }
    }
-  } elsif ($name =~ /^(?:array|array_copy|flat_array|copy)$/o && ref($args) eq 'ARRAY' && @$args == 1) {
+  } elsif ($name =~ /^(?:array|flat_array|copy)$/o && ref($args) eq 'ARRAY' && @$args == 1) {
    my $arg = $args->[0];
    if (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'variable') {
     _user_function_record_local_decl($decls, $params, '@', $arg->{name});
     return;
    }
-  } elsif ($name =~ /^(?:hash|hash_copy|flat_hash)$/o && ref($args) eq 'ARRAY' && @$args == 1) {
+  } elsif ($name =~ /^(?:hash|flat_hash)$/o && ref($args) eq 'ARRAY' && @$args == 1) {
    my $arg = $args->[0];
    if (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'variable') {
     _user_function_record_local_decl($decls, $params, '%', $arg->{name});
@@ -1475,9 +1427,7 @@ sub _actionir_ast_first_unknown_value_call_name {
  my $kind = $node->{kind} // '';
 
  if ($kind eq 'call') {
-  my $method = _actionir_ast_parser_normalized_set_call($node)
-   ? 'set'
-   : _actionir_ast_known_value_call_method($node->{name});
+  my $method = _actionir_ast_known_value_call_method($node->{name});
   my $definition = _user_function_definition_for_name($deps, $node->{name});
   return $node->{name}
    unless (defined($method) && length($method)) || ref($definition) eq 'HASH';
@@ -1610,9 +1560,6 @@ sub _lower_ast_call_statement {
  };
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
- my $retired_helper = _actionir_retired_function_helper_name($method, $node->{source});
- return _actionir_ast_unsupported_helper_expr($retired_helper)
-  if defined($retired_helper) && length($retired_helper);
 
  if ($method eq 'return') {
   _trace_method_decision(
@@ -1704,7 +1651,7 @@ sub _lower_ast_call_statement {
   return '$'.$hash_symbol.'{'.$key_lowered.'} = '.$value_lowered
  }
 
- if ($method eq 'push' || $method eq 'push_value') {
+ if ($method eq 'push') {
   _trace_method_decision(
    phase => 'lower_ast_call_statement',
    label => 'call',
@@ -2241,7 +2188,7 @@ sub _lower_method_value_expr {
   my $exit_call = $parse_method_function_expr->($exit_trimmed);
   return 0 unless $exit_call;
   my $exit_method = $exit_call->{method} // '';
-  return 1 if $exit_method =~ /^(?:array|array_copy|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|__array_value_split_each|__array_value_trim_each|__array_value_filter_nonempty|__array_value_lowercase_each|__array_value_uppercase_each|__array_value_uniq|__array_value_filter_match|entry_groups|match_groups)$/o;
+  return 1 if $exit_method =~ /^(?:array|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|__array_value_split_each|__array_value_trim_each|__array_value_filter_nonempty|__array_value_lowercase_each|__array_value_uppercase_each|__array_value_uniq|__array_value_filter_match|entry_groups|match_groups)$/o;
   if ($exit_method eq 'copy') {
    my $copy_args = $normalize_method_args_with_optional_scope->($exit_call->{args} || [], 1, 1);
    return 0 unless $copy_args;
@@ -2295,7 +2242,7 @@ sub _lower_method_value_expr {
   return 0 unless $candidate_call;
 
   my $candidate_method = $candidate_call->{method} // '';
-  return 1 if $candidate_method =~ /^(?:array|array_copy|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|__array_value_split_each|__array_value_trim_each|__array_value_filter_nonempty|__array_value_lowercase_each|__array_value_uppercase_each|__array_value_uniq|__array_value_filter_match|entry_groups|match_groups)$/o;
+  return 1 if $candidate_method =~ /^(?:array|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|__array_value_split_each|__array_value_trim_each|__array_value_filter_nonempty|__array_value_lowercase_each|__array_value_uppercase_each|__array_value_uniq|__array_value_filter_match|entry_groups|match_groups)$/o;
 
   if ($candidate_method eq 'coalesce') {
    my $candidate_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 2, undef);
@@ -2354,7 +2301,7 @@ sub _lower_method_value_expr {
   return 0 unless $candidate_call;
 
   my $candidate_method = $candidate_call->{method} // '';
-  return 1 if $candidate_method =~ /^(?:hash|hash_copy|merge_hash|set_key|rename_key|drop_keys|pick_keys|entry_map|entry_named_map|match_map|match_named_map)$/o;
+  return 1 if $candidate_method =~ /^(?:hash|merge_hash|set_key|rename_key|drop_keys|pick_keys|entry_map|entry_named_map|match_map|match_named_map)$/o;
 
   if ($candidate_method eq 'coalesce') {
    my $candidate_args = $normalize_method_args_with_optional_scope->($candidate_call->{args} || [], 2, undef);
@@ -2512,7 +2459,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
   replace_substr   => [3, 3],
   rm_prefix        => [2, 2],
   rm_suffix        => [2, 2],
-  concat           => [2, undef],
+  cat              => [2, undef],
   str_eq           => [2, 2],
   str_ne           => [2, 2],
   str_gt           => [2, 2],
@@ -2549,8 +2496,6 @@ my $lower_numeric_array_reducer_source_expr = sub {
  my %ast_aggregate_call_arity = (
   array                => [0, undef],
   hash                 => [0, undef],
-  array_copy           => [1, 1],
-  hash_copy            => [1, 1],
   copy                 => [1, 1],
   flat                 => [1, 1],
   flat_array           => [1, 1],
@@ -2603,7 +2548,6 @@ my $lower_numeric_array_reducer_source_expr = sub {
  my $normalize_ast_call_method = sub {
   my ($method) = @_;
   return undef unless defined($method) && length($method);
-  return 'concat' if $method eq 'cat';
   my $numeric_alias = _numeric_word_alias_helper_name($method);
   return $numeric_alias if defined($numeric_alias) && length($numeric_alias);
   return $method
@@ -2628,8 +2572,6 @@ my $lower_numeric_array_reducer_source_expr = sub {
  };
  my $ast_known_call_method = sub {
   my ($method) = @_;
-  my $retired_alias = _actionir_ast_retired_wrapper_alias_method($method);
-  return $retired_alias if defined($retired_alias) && length($retired_alias);
   $method = $normalize_ast_call_method->($method);
   return undef unless defined($method) && length($method);
   return $method
@@ -2947,9 +2889,6 @@ my $lower_numeric_array_reducer_source_expr = sub {
     }
     return '=('.join(', ', @args).')';
    }
-   my $retired_helper = _actionir_retired_function_helper_name($node->{name}, $node->{source});
-   return _actionir_ast_unsupported_helper_expr($retired_helper)
-    if defined($retired_helper) && length($retired_helper);
    my $user_function_call = $lower_ast_user_function_call_node->($node);
    return $user_function_call if defined($user_function_call) && length($user_function_call);
    my $call_expr = $lower_ast_supported_call_source_node->($node);
@@ -2959,11 +2898,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $legacy_call = $legacy_method_value_expr->($node->{source});
    return $legacy_call
     if defined($legacy_call) && length($legacy_call) && $legacy_call ne ($node->{source} // '');
-	   unless (_actionir_ast_parser_normalized_set_call($node)
-	       || defined(_actionir_ast_known_value_call_method($node->{name}))) {
-	    my $unknown_call = _actionir_ast_unsupported_helper_expr($node->{name});
-	    return $unknown_call if defined($unknown_call) && length($unknown_call);
-	   }
+   unless (defined(_actionir_ast_known_value_call_method($node->{name}))) {
+    my $unknown_call = _actionir_ast_unsupported_helper_expr($node->{name});
+    return $unknown_call if defined($unknown_call) && length($unknown_call);
+   }
    my $source = $node->{source};
    return $source if defined($source) && length($source);
   }
@@ -2987,7 +2925,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my ($node) = @_;
   return undef unless ref($node) eq 'HASH';
 
-	 my ($target_name, $target_sigil, $value_node);
+  my ($target_name, $target_sigil, $value_node);
   my $kind = $node->{kind} // '';
   if ($kind eq 'assign_array_append') {
    my $target = $node->{name};
@@ -3019,7 +2957,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return undef unless defined($key_lowered) && length($key_lowered);
    my $value_lowered = _lower_mutation_slot_value_expr($value_source, $deps);
    return undef unless defined($value_lowered) && length($value_lowered);
-	   return 'do { $'.$target.'{'.$key_lowered.'} = '.$value_lowered.'; +{%'.$target.'} }'
+   return 'do { $'.$target.'{'.$key_lowered.'} = '.$value_lowered.'; +{%'.$target.'} }'
   }
 
   if ($kind eq 'assign_nested_access') {
@@ -3032,25 +2970,21 @@ my $lower_numeric_array_reducer_source_expr = sub {
    $value_node = $node->{value};
   } elsif ($kind eq 'call') {
    my $method = $node->{name} // '';
-   if ($method eq 'assign') {
-    return undef if ($node->{source} // '') =~ /^\s*assign\s*\(/o;
-    $method = 'set';
-   }
    return undef unless $method eq '=' || $method eq 'set';
    my $args = $node->{args} || [];
    return undef unless ref($args) eq 'ARRAY' && @$args == 2;
    my $target_node = $args->[0];
    $value_node = $args->[1];
 
-	   if (ref($target_node) eq 'HASH' && ($target_node->{kind} // '') eq 'variable') {
-	    $target_name = $target_node->{name};
-	    $target_sigil = '$';
-	   } elsif (ref($target_node) eq 'HASH'
-	       && ($target_node->{kind} // '') eq 'colon_scalar_slot_removed') {
-	    return _actionir_ast_retired_colon_scalar_slot_expr($target_node->{name});
-	   } elsif (ref($target_node) eq 'HASH'
-	       && ($target_node->{kind} // '') eq 'call'
-	       && (($target_node->{name} // '') eq 'array' || ($target_node->{name} // '') eq 'hash')) {
+   if (ref($target_node) eq 'HASH' && ($target_node->{kind} // '') eq 'variable') {
+    $target_name = $target_node->{name};
+    $target_sigil = '$';
+   } elsif (ref($target_node) eq 'HASH'
+       && ($target_node->{kind} // '') eq 'colon_scalar_slot_removed') {
+    return _actionir_ast_retired_colon_scalar_slot_expr($target_node->{name});
+   } elsif (ref($target_node) eq 'HASH'
+       && ($target_node->{kind} // '') eq 'call'
+       && (($target_node->{name} // '') eq 'array' || ($target_node->{name} // '') eq 'hash')) {
     my $target_args = $target_node->{args} || [];
     if (ref($target_args) eq 'ARRAY'
      && @$target_args == 1
@@ -3090,14 +3024,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
     unless defined($source_expr) && length($source_expr);
    return undef unless defined($source_expr) && length($source_expr);
 
-	   if ($target_sigil eq '$') {
-	    my $value_expr = $lower_ast_value_node->($value_node, { bare_scalar_read => 1 });
-	    $value_expr = $legacy_method_value_expr->($value_node->{source})
-	     unless defined($value_expr) && length($value_expr);
-		    $value_expr = $source_expr unless defined($value_expr) && length($value_expr);
-		    return undef unless defined($value_expr) && length($value_expr);
-		    return 'do { $'.$target_name.' = '.$value_expr.'; $'.$target_name.' }'
-		   }
+   if ($target_sigil eq '$') {
+    my $value_expr = $lower_ast_value_node->($value_node, { bare_scalar_read => 1 });
+    $value_expr = $legacy_method_value_expr->($value_node->{source})
+     unless defined($value_expr) && length($value_expr);
+    $value_expr = $source_expr unless defined($value_expr) && length($value_expr);
+    return undef unless defined($value_expr) && length($value_expr);
+    return 'do { $'.$target_name.' = '.$value_expr.'; $'.$target_name.' }'
+   }
 
    my $lower_declare_initializer_expr = $require_dep->('lower_declare_initializer_expr');
    if ($target_sigil eq '@') {
@@ -3122,13 +3056,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
 
   return 'do { $'.$target_name.' = '.$value_expr.'; $'.$target_name.' }'
  };
- $lower_ast_supported_call_source_node = sub {
-  my ($node) = @_;
-  return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
-  my $retired_helper = _actionir_retired_function_helper_name($node->{name}, $node->{source});
-  return _actionir_ast_unsupported_helper_expr($retired_helper)
-   if defined($retired_helper) && length($retired_helper);
-  my $args = $node->{args} || [];
+	$lower_ast_supported_call_source_node = sub {
+	 my ($node) = @_;
+	 return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
+	 my $args = $node->{args} || [];
   return undef unless ref($args) eq 'ARRAY';
   my $method = $ast_value_only_call_method->($node->{name}, scalar(@$args));
   $method = $ast_aggregate_call_method->($node->{name}, scalar(@$args))
@@ -3141,8 +3072,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return undef unless defined($arg_expr) && length($arg_expr);
    push @arg_exprs, $arg_expr;
   }
-  my $source_method = _actionir_source_spelled_method_name($method, $node->{source});
-  return $source_method.'('.join(', ', @arg_exprs).')'
+	 return $method.'('.join(', ', @arg_exprs).')'
  };
  my $lower_ast_direct_access_node = sub {
   my ($node) = @_;
@@ -3407,20 +3337,16 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return $legacy_call
     if defined($legacy_call) && length($legacy_call) && $legacy_call ne ($node->{source} // '');
 	  return _actionir_ast_unsupported_helper_expr($node->{name})
-	   unless _actionir_ast_parser_normalized_set_call($node)
-	       || defined(_actionir_ast_known_value_call_method($node->{name}));
+	   unless defined(_actionir_ast_known_value_call_method($node->{name}));
    return undef;
   }
   return undef
  };
- $lower_ast_value_only_call_node = sub {
-  my ($node, $opts) = @_;
-  $opts = {} unless ref($opts) eq 'HASH';
-  return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
-  my $retired_helper = _actionir_retired_function_helper_name($node->{name}, $node->{source});
-  return _actionir_ast_unsupported_helper_expr($retired_helper)
-   if defined($retired_helper) && length($retired_helper);
-  my $args = $node->{args} || [];
+	$lower_ast_value_only_call_node = sub {
+	 my ($node, $opts) = @_;
+	 $opts = {} unless ref($opts) eq 'HASH';
+	 return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
+	 my $args = $node->{args} || [];
   return undef unless ref($args) eq 'ARRAY';
   my $method = $ast_value_only_call_method->($node->{name}, scalar(@$args));
   return undef unless defined($method) && length($method);
@@ -3454,20 +3380,16 @@ my $lower_numeric_array_reducer_source_expr = sub {
    push @lowered_args, $lowered_arg;
   }
 
-  my $source_method = _actionir_source_spelled_method_name($method, $node->{source});
-  return 'defined('.$lowered_args[0].')'
-   if $method eq 'is_defined';
-  return '(!defined('.$lowered_args[0].'))'
-   if $method eq 'is_undefined';
-  return $legacy_method_value_expr->($source_method.'('.join(', ', @lowered_args).')')
- };
- $lower_ast_aggregate_call_node = sub {
-  my ($node) = @_;
-  return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
-  my $retired_helper = _actionir_retired_function_helper_name($node->{name}, $node->{source});
-  return _actionir_ast_unsupported_helper_expr($retired_helper)
-   if defined($retired_helper) && length($retired_helper);
-  my $args = $node->{args} || [];
+	 return 'defined('.$lowered_args[0].')'
+	  if $method eq 'is_defined';
+	 return '(!defined('.$lowered_args[0].'))'
+	  if $method eq 'is_undefined';
+	 return $legacy_method_value_expr->($method.'('.join(', ', @lowered_args).')')
+	};
+	$lower_ast_aggregate_call_node = sub {
+	 my ($node) = @_;
+	 return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'call';
+	 my $args = $node->{args} || [];
   return undef unless ref($args) eq 'ARRAY';
   my $method = $ast_aggregate_call_method->($node->{name}, scalar(@$args));
   return undef unless defined($method) && length($method);
@@ -3605,10 +3527,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return \@arg_exprs
   };
 
-  my $array_chain_return_family = sub {
-   my ($method) = @_;
-   return 'array' if defined($method)
-    && $method =~ /^(?:array_copy|copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
+	  my $array_chain_return_family = sub {
+	   my ($method) = @_;
+	   return 'array' if defined($method)
+	    && $method =~ /^(?:copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
    return 'terminal'
   };
 
@@ -3782,7 +3704,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     if ($current_family eq 'hash') {
      my $return_family = _hash_receiver_value_chain_return_family($method);
      return undef unless defined($return_family);
-     if ($method eq 'hash_copy' || $method eq 'copy') {
+	     if ($method eq 'copy') {
       return undef unless @$arg_exprs == 0;
       $current_expr = 'copy('.$current_expr.')';
      } elsif ($method eq 'flat_hash') {
@@ -3840,7 +3762,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
       my $applied = $lower_tree_receiver_block_call->($method, $current_expr, $call, $tree_return_family);
       return undef unless ref($applied) eq 'ARRAY';
       ($current_expr, $current_family) = @$applied;
-     } elsif ($method eq 'hash_copy' || $method eq 'copy') {
+	     } elsif ($method eq 'copy') {
       return undef unless @$arg_exprs == 0;
       $current_expr = 'copy('.$current_expr.')';
      } elsif ($method eq 'flat_hash') {
@@ -3875,7 +3797,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     taken => 1,
     context => { first_method => $first_method, steps => scalar(@$calls) },
    );
-	  my $current_expr = $receiver_expr;
+   my $current_expr = $receiver_expr;
    my $current_family = 'string';
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
@@ -3891,10 +3813,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
      if ($method =~ /^(?:trim|lowercase|uppercase|length)$/o) {
       return undef unless @$arg_exprs == 0;
       $current_expr = $method.'('.$current_expr.')';
-     } elsif ($method eq 'concat') {
+     } elsif ($method eq 'cat') {
       return undef unless @$arg_exprs >= 1;
-      my $source_method = _actionir_source_spelled_method_name($method, $call->{source});
-      $current_expr = $source_method.'('.join(', ', ($current_expr, @$arg_exprs)).')';
+      $current_expr = 'cat('.join(', ', ($current_expr, @$arg_exprs)).')';
      } else {
       $current_expr = $method.'('.join(', ', ($current_expr, @$arg_exprs)).')';
      }
@@ -4403,22 +4324,19 @@ if ($method_call && $method_call->{method} eq 'rm_suffix') {
 
  return 'do { my $__ls_rm_suffix_value = '.$value_expr.'; my $__ls_rm_suffix_suffix = '.$suffix_expr.'; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_value) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_value, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_value, 0, length($__ls_rm_suffix_value) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } }';
 }
-if ($method_call && $method_call->{method} eq 'concat') {
- if (defined(my $retired_helper = _actionir_retired_function_helper_name($method_call->{method}, $trimmed))) {
-  return _actionir_ast_unsupported_helper_expr($retired_helper);
- }
- my $concat_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef);
- return undef unless $concat_args && @$concat_args >= 2;
+if ($method_call && $method_call->{method} eq 'cat') {
+ my $cat_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, undef);
+ return undef unless $cat_args && @$cat_args >= 2;
 
  my @lowered_parts = ();
- foreach my $arg (@$concat_args) {
+ foreach my $arg (@$cat_args) {
   my $part_expr = _lower_method_value_expr($arg, $deps);
   $part_expr = $trim_action_ir_value->($arg) unless defined($part_expr) && length($part_expr);
   return undef unless defined($part_expr) && length($part_expr);
   push @lowered_parts, $part_expr;
  }
 
- return 'do { my @__ls_concat_parts = ('.join(', ', @lowered_parts).'); my $__ls_concat_ok = 1; for my $__ls_concat_part (@__ls_concat_parts) { if (!defined($__ls_concat_part) || ref($__ls_concat_part)) { $__ls_concat_ok = 0; last; } } $__ls_concat_ok ? join(\'\', @__ls_concat_parts) : undef }';
+ return 'do { my @__ls_cat_parts = ('.join(', ', @lowered_parts).'); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part) || ref($__ls_cat_part)) { $__ls_cat_ok = 0; last; } } $__ls_cat_ok ? join(\'\', @__ls_cat_parts) : undef }';
 }
 if ($method_call && $method_call->{method} eq 'num_abs') {
  my $num_abs_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
@@ -5502,17 +5420,11 @@ if ($method_call && $method_call->{method} eq 'index_of') {
 
   return $build_coalesce_nonempty_expr->(@lowered_args);
  }
- if ($method_call && $method_call->{method} eq 'hash_copy') {
-  return _actionir_ast_unsupported_helper_expr('hash_copy');
- }
  my $flat_list_expr = $lower_flat_list_value_expr->($trimmed);
  return $flat_list_expr if defined($flat_list_expr) && length($flat_list_expr);
- if ($method_call && $method_call->{method} eq 'array_copy') {
-  return _actionir_ast_unsupported_helper_expr('array_copy');
- }
- # SPEC-FORMAT-TERSE.1.4.1 / .6.2.3.2 — unified terse `copy(NAME)` keeps explicit
+ # Current `copy(NAME)` keeps explicit
  # `array(NAME)` / `hash(NAME)` meanings and lets initialized bare names use their
- # remembered kind before the legacy array-first fallback for untyped bare names.
+ # remembered kind before the array-first fallback for untyped bare names.
  if ($method_call && $method_call->{method} eq 'copy') {
   my $copy_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
   return undef unless $copy_args;
@@ -5559,12 +5471,12 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   if (defined($container_kind) && $container_kind eq 'array') {
    my $lowered_container = _lower_method_value_expr($container_expr, $deps);
    return undef unless defined($lowered_container) && length($lowered_container);
-   return 'do { my $__ls_array_copy = '.$lowered_container.'; (defined($__ls_array_copy) && ref($__ls_array_copy) eq \'ARRAY\') ? [@{$__ls_array_copy}] : [] }';
+   return 'do { my $__ls_array_snapshot = '.$lowered_container.'; (defined($__ls_array_snapshot) && ref($__ls_array_snapshot) eq \'ARRAY\') ? [@{$__ls_array_snapshot}] : [] }';
   }
   if (defined($container_kind) && $container_kind eq 'hash') {
    my $lowered_container = _lower_method_value_expr($container_expr, $deps);
    return undef unless defined($lowered_container) && length($lowered_container);
-   return 'do { my $__ls_hash_copy = '.$lowered_container.'; (defined($__ls_hash_copy) && ref($__ls_hash_copy) eq \'HASH\') ? { %{$__ls_hash_copy} } : {} }';
+   return 'do { my $__ls_hash_snapshot = '.$lowered_container.'; (defined($__ls_hash_snapshot) && ref($__ls_hash_snapshot) eq \'HASH\') ? { %{$__ls_hash_snapshot} } : {} }';
   }
   return undef;
  }
@@ -5802,7 +5714,7 @@ sub _lower_return_payload_expr {
  if (
   defined($direct) &&
   length($direct) &&
-  ($trimmed =~ /^(?:array|hash|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy|flat_array|flat_hash|flat)\s*\(/o || $direct ne $trimmed)
+  ($trimmed =~ /^(?:array|hash|input_slice|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|copy|flat_array|flat_hash|flat)\s*\(/o || $direct ne $trimmed)
  ) {
  _trace_method_decision(
   phase => 'lower_return_payload_expr',
@@ -5831,7 +5743,7 @@ sub _lower_return_payload_expr {
  my $rewritten = $trimmed;
  for (1 .. 64) {
   my $before = $rewritten;
-  $rewritten =~ s/\b(?<helper>(?:array_copy|copy|input_slice|hash_copy|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
+  $rewritten =~ s/\b(?<helper>(?:copy|input_slice|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|split|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|is_empty|is_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|flat_array|flat_hash|flat|array|hash)\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/do {
    my $lowered = _lower_method_value_expr($+{helper}, $deps);
    (defined($lowered) && length($lowered)) ? $lowered : $+{helper};
   }/ge;
@@ -6116,13 +6028,13 @@ sub _split_receiver_dot_method_expr {
 sub _is_array_receiver_value_chain_method {
  my ($method) = @_;
  return 0 unless defined $method;
- return $method =~ /^(?:array_copy|copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count|first|last|contains|index_of|is_empty|is_nonempty|join_values|sum|avg|median|range|min|max)$/o ? 1 : 0
+ return $method =~ /^(?:copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count|first|last|contains|index_of|is_empty|is_nonempty|join_values|sum|avg|median|range|min|max)$/o ? 1 : 0
 }
 
 sub _hash_receiver_value_chain_return_family {
  my ($method) = @_;
  return undef unless defined $method;
- return 'hash' if $method =~ /^(?:hash_copy|copy|merge_hash|set_key|rename_key|drop_keys|pick_keys|flat_hash|walk_leaves|map_leaves)$/o;
+ return 'hash' if $method =~ /^(?:copy|merge_hash|set_key|rename_key|drop_keys|pick_keys|flat_hash|walk_leaves|map_leaves)$/o;
  return 'array' if $method =~ /^(?:sorted_keys|sorted_values)$/o;
  return 'terminal' if $method =~ /^(?:count_keys|has_key|reduce_leaves)$/o;
  return undef
@@ -6142,7 +6054,7 @@ sub _is_tree_traversal_receiver_method {
 sub _string_receiver_value_chain_return_family {
  my ($method) = @_;
  return undef unless defined $method;
- return 'string' if $method =~ /^(?:trim|lowercase|uppercase|replace_substr|rm_prefix|rm_suffix|substr|concat|cat|coalesce_nonempty)$/o;
+ return 'string' if $method =~ /^(?:trim|lowercase|uppercase|replace_substr|rm_prefix|rm_suffix|substr|cat|coalesce_nonempty)$/o;
  return 'array' if $method =~ /^(?:split)$/o;
  return 'terminal' if $method =~ /^(?:length|starts_with|ends_with|contains_substr|matches)$/o;
  return undef
@@ -6271,7 +6183,7 @@ sub _normalize_array_receiver_value_chain_expr {
    next;
   }
   $current_expr = $method.'('.join(', ', ($current_expr, @args)).')';
-  $current_family = ($method =~ /^(?:array_copy|copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays)$/o)
+  $current_family = ($method =~ /^(?:copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays)$/o)
    ? 'array'
    : 'terminal';
  }
@@ -6422,13 +6334,12 @@ sub _normalize_string_receiver_value_chain_expr {
    my $return_family = _string_receiver_value_chain_return_family($method);
    return undef unless defined($return_family);
 
-	   if ($method =~ /^(?:trim|lowercase|uppercase|length)$/o) {
-	    return undef unless @args == 0;
-	    $current_expr = $method.'('.$current_expr.')';
-   } elsif ($method eq 'concat' || $method eq 'cat') {
+   if ($method =~ /^(?:trim|lowercase|uppercase|length)$/o) {
+    return undef unless @args == 0;
+    $current_expr = $method.'('.$current_expr.')';
+   } elsif ($method eq 'cat') {
     return undef unless @args >= 1;
-    my $source_method = (($call->{__source_expr} // '') =~ /^\s*cat\s*\(/o) ? 'cat' : 'concat';
-    $current_expr = $source_method.'('.join(', ', ($current_expr, @args)).')';
+    $current_expr = 'cat('.join(', ', ($current_expr, @args)).')';
    } else {
     $current_expr = $method.'('.join(', ', ($current_expr, @args)).')';
    }
@@ -6458,7 +6369,7 @@ sub _normalize_string_receiver_value_chain_expr {
     next;
    }
    $current_expr = $method.'('.join(', ', ($current_expr, @args)).')';
-   $current_family = ($method =~ /^(?:array_copy|copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays)$/o)
+   $current_family = ($method =~ /^(?:copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays)$/o)
     ? 'array'
     : 'terminal';
    next;
@@ -6551,7 +6462,7 @@ sub _normalize_hash_receiver_value_chain_expr {
    my $return_family = _hash_receiver_value_chain_return_family($method);
    return undef unless defined($return_family);
 
-   if ($method eq 'hash_copy' || $method eq 'copy') {
+	  if ($method eq 'copy') {
     return undef unless @args == 0;
     $current_expr = 'copy('.$current_expr.')';
    } elsif ($method eq 'flat_hash') {
@@ -6586,7 +6497,7 @@ sub _normalize_hash_receiver_value_chain_expr {
     next;
    }
    $current_expr = $method.'('.join(', ', ($current_expr, @args)).')';
-   $current_family = ($method =~ /^(?:array_copy|copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays)$/o)
+   $current_family = ($method =~ /^(?:copy|sorted|reversed|take|take_last|drop_front|drop_back|slice|concat_arrays)$/o)
     ? 'array'
     : 'terminal';
    next;
@@ -6932,15 +6843,13 @@ sub _lower_set_key_statement {
 }
 
 #------------------------------------------------------------------------------
-# Function: _lower_push_value_statement
-# Purpose : Lower explicit value append helper calls:
-#           current `push(target, value)` spelling for non-child-call shapes.
-#           The retired `push_value(...)` spelling emits an unsupported-helper
-#           diagnostic before this lowerer accepts arguments.
+# Function: _lower_push_statement
+# Purpose : Lower explicit value append helper calls for current `push(target, value)`
+#           spelling in non-child-call shapes.
 # Args    : ($expr, $deps)
 # Returns : Perl statement string or undef
 #------------------------------------------------------------------------------
-sub _lower_push_value_statement {
+sub _lower_push_statement {
  my ($expr, $deps) = @_;
  my $require_dep = sub {
   my ($name) = @_;
@@ -6954,12 +6863,12 @@ sub _lower_push_value_statement {
  my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
  my $lower_primitive_literal_expr = $require_dep->('lower_primitive_literal_expr');
 
- my $ast_lowered = _lower_ast_call_statement($expr, ['push', 'push_value'], $deps);
+ my $ast_lowered = _lower_ast_call_statement($expr, 'push', $deps);
  if (defined($ast_lowered) && length($ast_lowered)) {
   _trace_method_decision(
-   phase => 'lower_push_value_statement',
+   phase => 'lower_push_statement',
    label => 'statement',
-   decision => 'ast_push_value_statement',
+   decision => 'ast_push_statement',
    taken => 1,
    context => {},
   );
@@ -6967,15 +6876,12 @@ sub _lower_push_value_statement {
  }
 
  my $call = $parse_method_function_expr->($expr);
- return undef unless $call && ($call->{method} eq 'push_value' || $call->{method} eq 'push');
- return _actionir_ast_unsupported_helper_expr('push_value')
-  if $call->{method} eq 'push_value';
+ return undef unless $call && $call->{method} eq 'push';
 
  my $raw_args = $call->{args} || [];
  my $effective_args;
  # SPEC-FORMAT-TERSE.1.3.2 / .8.3 — preserve child-call precedence for
- # `push(Child, target)` and `push(Child, index)`, while the retired
- # `push_value(...)` spelling has already emitted an unsupported-helper sentinel.
+ # `push(Child, target)` and `push(Child, index)`.
  if (@$raw_args == 2) {
   $effective_args = $raw_args;
  } elsif (@$raw_args == 3) {
@@ -7008,47 +6914,13 @@ sub _lower_push_value_statement {
  my $lowered_value = _lower_method_value_expr($value_expr, $deps);
  $lowered_value = $value_expr unless defined($lowered_value) && length($lowered_value);
  _trace_method_decision(
-  phase => 'lower_push_value_statement',
+  phase => 'lower_push_statement',
   label => 'statement',
-  decision => 'push_value_statement',
+  decision => 'push_statement',
   taken => 1,
   context => { target => $target_symbol, method => $call->{method} },
  );
  return "push \@$target_symbol, $lowered_value"
-}
-
-#------------------------------------------------------------------------------
-# Function: _lower_push_nonempty_statement
-# Purpose : Emit the retired-helper diagnostic for `push_nonempty(...)`.
-# Args    : ($expr, $deps)
-# Returns : Perl statement string or undef
-#------------------------------------------------------------------------------
-sub _lower_push_nonempty_statement {
- my ($expr, $deps) = @_;
- my $require_dep = sub {
-  my ($name) = @_;
-  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
-  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
-   unless ref($cb) eq 'CODE';
-  return $cb;
- };
- my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
-
- my $ast_lowered = _lower_ast_call_statement($expr, 'push_nonempty', $deps);
- if (defined($ast_lowered) && length($ast_lowered)) {
-  _trace_method_decision(
-   phase => 'lower_push_nonempty_statement',
-   label => 'statement',
-   decision => 'ast_push_nonempty_statement',
-   taken => 1,
-   context => {},
-  );
-  return $ast_lowered;
- }
-
- my $call = $parse_method_function_expr->($expr);
- return undef unless $call && $call->{method} eq 'push_nonempty';
- return _actionir_ast_unsupported_helper_expr('push_nonempty')
 }
 
 #------------------------------------------------------------------------------

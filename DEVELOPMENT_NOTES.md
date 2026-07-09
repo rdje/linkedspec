@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (NONCURRENT-HELPER-CODE-PURGE.2.1 — Perl current helper compatibility purge):
+  Perl ActionIR current helper lowering no longer normalizes through removed string/copy/assignment helper names,
+  and explicit append lowering is now named and contracted as current `push`. The removed append-helper scanner,
+  contract, source lowerer, AST-test fixture, flow lookahead, rewrite-pipeline, and preamble collection paths are
+  gone from the touched owners rather than retained as diagnostic-only branches. AST parser tests now preserve
+  current `set` method names and expect current `__ls_cat_*` temporary names. `DeclareMethod` now handles current
+  `set(...)` with slash-regex payloads through a current-only top-level argument splitter instead of the removed
+  normalized-name route, and the bootstrap helper classifier no longer accepts deleted current-helper-family
+  names as general return payloads. Focused syntax checks, the AST parser suite, compact-lowerer trace test,
+  full phase0 regression (`1..1028`), direct current-helper probes, and the deleted-spelling scan pass.
+  Remaining Perl purge work is deliberately not closed: declaration/return/wrapper source-owner paths and
+  contract metadata remnants stay queued under `NONCURRENT-HELPER-CODE-PURGE.2.2` / `.2.3`.
+
 - 2026-07-09 (NONCURRENT-HELPER-CODE-PURGE.1 — code purge inventory/split):
   Created `docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md` after the director clarified that non-current helper
   spellings must not remain as name-specific recognition or diagnostic surfaces in the Perl and Rust codebases.

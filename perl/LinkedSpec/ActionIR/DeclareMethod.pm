@@ -71,6 +71,7 @@ sub default_deps_for_package {
    { dep => 'parse_method_function_expr', pkg => 'LinkedSpec::ActionIR::MethodExpr' },
    { dep => 'is_bare_method_scope_token', pkg => 'LinkedSpec::ActionIR::MethodExpr' },
    { dep => 'normalize_method_args_with_optional_scope', pkg => 'LinkedSpec::ActionIR::MethodExpr' },
+   { dep => 'split_top_level_csv', pkg => 'LinkedSpec::ActionIR::MethodExpr' },
    'lower_flow_composite_expr',
    'lower_method_value_expr',
    'declare_alias_to_type',
@@ -193,10 +194,9 @@ sub _lower_declare_initializer_expr {
    return $finish->('('.$+{payload}.')', 'array_shape', { type => $type }) if $shape_expr =~ /^\[(?<payload>.*)\]$/s;
    return $finish->(undef, 'array_shape_unwrap_failed', { type => $type });
   }
-  # SPEC-FORMAT-TERSE.1.4.1 — `copy` (the unified terse rename of array_copy/hash_copy) is
-  # accepted as an array-initializer source here too; the target type ('array') disambiguates,
-  # and _lower_declare_value_expr resolves copy(...) to the same [@sym] the array_copy arm emits.
-  if ($array_ctor && ($array_ctor->{method} eq 'array_copy' || $array_ctor->{method} eq 'copy' || $array_ctor->{method} eq 'sorted' || $array_ctor->{method} eq 'reversed' || $array_ctor->{method} eq 'sorted_keys' || $array_ctor->{method} eq 'sorted_values' || $array_ctor->{method} eq 'concat_arrays' || $array_ctor->{method} eq 'split_tagged_records' || $array_ctor->{method} eq 'entry_groups' || $array_ctor->{method} eq 'match_groups')) {
+  # `copy` is scalar-context ambiguous when parsed as a method value. In array
+  # declarations, prefer array snapshot semantics.
+  if ($array_ctor && ($array_ctor->{method} eq 'copy' || $array_ctor->{method} eq 'sorted' || $array_ctor->{method} eq 'reversed' || $array_ctor->{method} eq 'sorted_keys' || $array_ctor->{method} eq 'sorted_values' || $array_ctor->{method} eq 'concat_arrays' || $array_ctor->{method} eq 'split_tagged_records' || $array_ctor->{method} eq 'entry_groups' || $array_ctor->{method} eq 'match_groups')) {
    my $derived_expr = _lower_declare_value_expr($trimmed, $deps);
    return $finish->(undef, 'array_derived_lowering_failed', { method => $array_ctor->{method} }) unless defined($derived_expr) && length($derived_expr);
    return $finish->('('.$+{payload}.')', 'array_derived_unwrapped', { method => $array_ctor->{method} }) if $derived_expr =~ /^\[(?<payload>.*)\]$/s;
@@ -226,10 +226,9 @@ sub _lower_declare_initializer_expr {
    return $finish->('('.$+{payload}.')', 'hash_shape', { type => $type }) if $shape_expr =~ /^\{(?<payload>.*)\}$/s;
    return $finish->(undef, 'hash_shape_unwrap_failed', { type => $type });
   }
-  # SPEC-FORMAT-TERSE.1.4.1 — `copy` is accepted as a hash-initializer source too; the target
-  # type ('hash') disambiguates, and _lower_declare_value_expr resolves copy(...) to the same
-  # {%sym} the hash_copy arm emits (then unwrapped to the (%sym) list initializer form).
-  if ($hash_ctor && ($hash_ctor->{method} eq 'hash_copy' || $hash_ctor->{method} eq 'copy' || $hash_ctor->{method} eq 'merge_hash' || $hash_ctor->{method} eq 'set_key' || $hash_ctor->{method} eq 'rename_key' || $hash_ctor->{method} eq 'drop_keys' || $hash_ctor->{method} eq 'pick_keys' || $hash_ctor->{method} eq 'entry_map' || $hash_ctor->{method} eq 'entry_named_map' || $hash_ctor->{method} eq 'match_map' || $hash_ctor->{method} eq 'match_named_map')) {
+  # `copy` is ambiguous in scalar context. Hash declarations prefer hash
+  # snapshot semantics and unwrap to list initializer form.
+  if ($hash_ctor && ($hash_ctor->{method} eq 'copy' || $hash_ctor->{method} eq 'merge_hash' || $hash_ctor->{method} eq 'set_key' || $hash_ctor->{method} eq 'rename_key' || $hash_ctor->{method} eq 'drop_keys' || $hash_ctor->{method} eq 'pick_keys' || $hash_ctor->{method} eq 'entry_map' || $hash_ctor->{method} eq 'match_map')) {
    my $derived_expr = _lower_declare_value_expr($trimmed, $deps);
    return $finish->(undef, 'hash_derived_lowering_failed', { method => $hash_ctor->{method} }) unless defined($derived_expr) && length($derived_expr);
    return $finish->('('.$+{payload}.')', 'hash_derived_unwrapped', { method => $hash_ctor->{method} }) if $derived_expr =~ /^\{(?<payload>.*)\}$/s;
@@ -382,6 +381,7 @@ sub _lower_assign_method_statement {
  };
  my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
  my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
+ my $split_top_level_csv = $require_dep->('split_top_level_csv');
  my $lower_assign_statement = $require_dep->('lower_assign_statement');
 
  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::MethodLowering');
@@ -425,14 +425,26 @@ sub _lower_assign_method_statement {
   }
  }
 
-	 my $call = $parse_method_function_expr->($expr);
-	 return $finish->(undef, 'not_legacy_set_assign', {}) unless $call && $call->{method} eq 'assign' && $expr =~ /^\s*set\s*\(/o;
+ my $call = $parse_method_function_expr->($expr);
+ if (!$call) {
+  my $trimmed_expr = defined($expr) ? $expr : '';
+  $trimmed_expr =~ s/^\s*|\s*$//go;
+  if ($trimmed_expr =~ /^set\s*\(/o && substr($trimmed_expr, -1) eq ')') {
+   my $open_idx = index($trimmed_expr, '(');
+   my $payload = substr($trimmed_expr, $open_idx + 1, length($trimmed_expr) - $open_idx - 2);
+   $call = {
+    method => 'set',
+    args   => $split_top_level_csv->($payload),
+   };
+  }
+ }
+ return $finish->(undef, 'not_set_call', {}) unless $call && $call->{method} eq 'set' && $expr =~ /^\s*set\s*\(/o;
 
  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 2, 2);
- return $finish->(undef, 'legacy_set_bad_arity', {}) unless $effective_args;
+ return $finish->(undef, 'set_bad_arity', {}) unless $effective_args;
  return $finish->(
   $lower_assign_statement->($effective_args->[0], $effective_args->[1]),
-  'legacy_set_lowered',
+  'set_lowered',
   { arg_count => scalar(@$effective_args) },
  )
 }

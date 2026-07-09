@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — NONCURRENT-HELPER-CODE-PURGE.2.1 — purge Perl current helper compatibility
+
+**Scope:** Perl ActionIR current helper lowering, append contract/scanner dispatch, bootstrap helper classification,
+AST/parser regression tests, mdBook, and live docs.
+
+**Change:** Current `cat(...)`, `copy(...)`, `set(...)`, and `push(...)` paths now stay on current method and
+contract names in Perl source. Removed the old current-helper normalization through non-current string/copy/
+assignment names, deleted the short-wrapper alias helper path from AST known-call handling, removed the
+removed append-helper contract/scanner/lowering branches, and renamed the explicit append lowerer/dependency
+to current `push` terminology. The `set(...)` owner now uses a current-only top-level argument fallback for
+slash-regex payloads instead of relying on the older normalized method name path, and the bootstrap return
+payload classifier no longer whitelists deleted current-helper-family names. `t/actionir_ast_parser.t` now
+fabricates current `set`/`push` AST calls and expects the current `__ls_cat_*` generated local names.
+
+**Validation:** Syntax checks pass for touched Perl ActionIR/RuleIR/bootstrap owners. `prove -q -Iperl
+t/actionir_ast_parser.t`, `prove -q -Iperl t/trace_actionir_compact_lowerers.t`, `PERL5LIB= prove -q -Iperl
+t/phase0_regression.t` (`1..1028`), direct `call_spec_handler_subst` probes for current `return(cat(...))`,
+`set(..., cat(...))`, aggregate `set(...)`, and `push(array(...), cat(...))`, plus a focused deleted-spelling
+scan over the touched Perl/test paths pass.
+
 ## 2026-07-09 — NONCURRENT-HELPER-CODE-PURGE.1 — split code purge task tree
 
 **Scope:** Task-tree ownership, read-only inventory, live docs, and Knowledge Map setup before Perl/Rust code edits.

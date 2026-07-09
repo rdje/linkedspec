@@ -60,8 +60,83 @@ unknown-helper handling, not through a name-specific removal compatibility layer
   Commit: `NONCURRENT-HELPER-CODE-PURGE.1 - split code purge task tree`
 
 - ID: `NONCURRENT-HELPER-CODE-PURGE.2`
-  Status: `pending`
+  Status: `active`
   Goal: Remove Perl source recognition and diagnostic paths for non-current helper spellings.
+  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`
+
+- ID: `NONCURRENT-HELPER-CODE-PURGE.2.1`
+  Status: `done`
+  Goal: Stop Perl current helper lowering from normalizing through old string/copy/assignment/append helper names.
+  Acceptance: Current `cat(...)`, `copy(...)`, `set(...)`, and `push(...)` semantics lower through current method
+    names; old source spellings in this family no longer have a name-specific parser/lowering/contract branch or
+    diagnostic-only lowerer in the touched Perl ActionIR source owners.
+  Verification: **PASS 2026-07-09.** Syntax checks pass for touched Perl owners:
+    `perl -c -Iperl perl/LinkedSpec/ActionIR/MethodExpr.pm`,
+    `perl -c -Iperl perl/LinkedSpec/ActionIR/MethodLowering.pm`,
+    `perl -c -Iperl perl/LinkedSpec/ActionIR/FlowExpr.pm`,
+    `perl -c -Iperl perl/LinkedSpec/RuleIR/EmitContext.pm`,
+    `perl -c -Iperl perl/LinkedSpec/ActionIR/ControlFlow.pm`,
+    `perl -c -Iperl perl/LinkedSpec/ActionIR/DeclareMethod.pm`,
+    `perl -c -Iperl perl/LinkedSpec/ActionIR/Contracts.pm`,
+    `perl -c -Iperl perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm`, and
+    `perl -c -Iperl perl/LinkedSpec/ActionIR/RewritePipeline.pm`, plus
+    `perl -c -Iperl perl/LinkedSpec/BootstrapSpec/Core.pm`. Focused tests/probes pass:
+    `prove -q -Iperl t/actionir_ast_parser.t`,
+    `prove -q -Iperl t/trace_actionir_compact_lowerers.t`,
+    `PERL5LIB= prove -q -Iperl t/phase0_regression.t` (`1..1028`), direct
+    `call_spec_handler_subst` probes for current `return(cat(...))`, `set(..., cat(...))`,
+    `set(array(...), filter_match(...))`, `set(hash(...), hash(...))`, and
+    `push(array(...), cat(...))`, plus a focused scan confirming no exact removed current-helper-family
+    spellings or old concat temporary name remain in the touched Perl/test surfaces.
+  Acceptance Checklist:
+    - [x] **REPRODUCE / ISSUE** — `PERL5LIB= prove -q -Iperl t/phase0_regression.t` initially failed after
+      current method names were preserved: current `set(...)` aggregate assignments returned raw helper text, and
+      the test suite still expected name-specific diagnostics for deleted append/copy/string helper spellings.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `call_spec_handler_subst` and
+      `LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr` probes showed
+      `perl/LinkedSpec/ActionIR/DeclareMethod.pm` still required a parsed old assignment method for
+      `set(...)`, while `perl/LinkedSpec/ActionIR/MethodLowering.pm`, `Contracts.pm`,
+      `Scanner/PrimitivePipelineRules.pm`, and `RuleIR/EmitContext.pm` still carried source-owner branches for
+      deleted current-helper-family spellings.
+    - [x] **FIX** — Removed those name-specific compatibility/diagnostic branches, kept current
+      `cat(...)`/`copy(...)`/`set(...)`/`push(...)` names through parsing/contracts/lowering, added a current-only
+      `set(...)` top-level argument fallback for slash-regex payloads, and narrowed the bootstrap helper classifier.
+    - [x] **ADDRESSED (verified)** — `call_spec_handler_subst` probes now lower current `return(cat(...))`,
+      `set(..., cat(...))`, `set(array(...), filter_match(...))`, `set(hash(...), hash(...))`, and
+      `push(array(...), cat(...))`; `rg -n` over touched Perl/test surfaces returns no deleted current-helper-family
+      spellings or old concat temporaries.
+    - [x] **NO REGRESSION** — Syntax checks pass for touched Perl owners plus `perl -c perl/LinkedSpec.pm` and
+      `perl -c -Iperl t/phase0_regression.t`; `prove -q -Iperl t/actionir_ast_parser.t`,
+      `prove -q -Iperl t/trace_actionir_compact_lowerers.t`, `PERL5LIB= prove -q -Iperl t/phase0_regression.t`,
+      and `PERL5LIB= prove -v -Iperl t/phase0_regression.t` all PASS (`1..1028`).
+    - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
+      `docs/TASK_TREE.md`, mdBook `docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md`,
+      Knowledge Map fact cards, and this task tree are updated; `git diff --check`, `mdbook build
+      docs/linkedspec-book`, `bash scripts/check_memory_architecture.sh`,
+      `bash knowledge-map/scripts/check_knowledge_map.sh`, `bash scripts/check_task_tree_metadata.sh`, and
+      `bash scripts/check_doctrines.sh` pass.
+  Commit: `NONCURRENT-HELPER-CODE-PURGE.2.1 - purge Perl current helper compatibility`
+
+- ID: `NONCURRENT-HELPER-CODE-PURGE.2.2`
+  Status: `pending`
+  Goal: Remove Perl declaration, return-family, and short-wrapper helper-specific source owner paths.
+  Acceptance: Declaration helper spellings, old return-family helper spellings, and short/old scalar-wrapper
+    helper spellings are no longer recognized through dedicated source-owner paths; current return, `return_undef`,
+    auto-existing variable, assignment/reset, `array(...)`, `hash(...)`, and bare-read behavior still lowers.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `NONCURRENT-HELPER-CODE-PURGE.2.3`
+  Status: `pending`
+  Goal: Remove remaining Perl non-current helper IDs from contract/canonical/flow metadata.
+  Acceptance: Perl contract scans and canonical event metadata only list current helper/control IDs or generic
+    unknown-helper fallback paths.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `NONCURRENT-HELPER-CODE-PURGE.2.4`
+  Status: `pending`
+  Goal: Close Perl source purge scans and focused tests.
   Acceptance: Perl ActionIR parser/lowering/runtime source stops branching on the removed helper names; current
     helpers still lower; non-current helper-looking calls use generic unknown-helper behavior.
   Verification: `pending`
@@ -97,7 +172,7 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `NONCURRENT-HELPER-CODE-PURGE.2` | `pending` | Perl ActionIR still carries explicit name-specific handling; remove that before Rust parity cleanup. |
+| 1 | `NONCURRENT-HELPER-CODE-PURGE.2.2` | `pending` | Perl still has declaration/return/wrapper source-owner paths for removed helper spellings; remove those before metadata-only cleanup. |
 
 ## Decisions
 
@@ -118,6 +193,11 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 - None known before `.2`.
 
 ## Verification Log
+
+- `2026-07-09` — `.2.1` removed Perl current-helper normalization through old string/copy/assignment names,
+  removed the removed append-helper contract/scanner/lowering branches, renamed the current append lowerer to
+  current `push` terminology, and updated AST tests to fabricate current helper AST calls only. Focused syntax,
+  AST parser, compact-lowerer, direct current-helper probes, and removed-append scans pass.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |

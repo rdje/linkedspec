@@ -111,7 +111,7 @@ sub _looks_like_array_value_expr {
  return 0 unless $call;
 
  my $method = $call->{method} // '';
- return 1 if $method =~ /^(?:array|array_copy|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
+ return 1 if $method =~ /^(?:array|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|split|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)$/o;
 
  # SPEC-FORMAT-TERSE.1.4.1 — the unified terse `copy(X)` is array-like iff X names an array
  # symbol (array-first resolution, mirroring the lowering dispatch); a bare `copy(x)` is array-like.
@@ -180,7 +180,7 @@ sub _looks_like_hash_value_expr {
  return 0 unless $call;
 
  my $method = $call->{method} // '';
- return 1 if $method =~ /^(?:hash|hash_copy|merge_hash|set_key|rename_key|drop_keys|pick_keys)$/o;
+ return 1 if $method =~ /^(?:hash|merge_hash|set_key|rename_key|drop_keys|pick_keys)$/o;
 
  # SPEC-FORMAT-TERSE.1.4.1 — `copy(X)` is hash-like iff X names a hash symbol AND does not
  # resolve as an array (array-first precedence), so a bare `copy(x)` / `copy(array(x))` stays array-only.
@@ -378,9 +378,9 @@ sub _lower_flow_composite_expr {
  return $finish->($direct_access, 'direct_nested_access', { expr => $trimmed })
   if defined($direct_access) && length($direct_access);
 
- # SPEC-FORMAT-TERSE.1.4.1 — the terse renames `cat` (== concat) and `copy` (== array_copy/
- # hash_copy) are recognized here too so a composite/assignment-source value lowers identically.
- if ($trimmed =~ /^(?:array|hash|hash_copy|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|concat|cat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|array_copy|copy)\s*\(/o) {
+ # Current helper calls are recognized here so composite assignment-source values
+ # lower through the same ActionIR path as return payloads.
+ if ($trimmed =~ /^(?:array|hash|trim|lowercase|uppercase|length|replace_substr|rm_prefix|rm_suffix|cat|num_abs|num_floor|num_ceil|num_round|num_sum|num_avg|num_median|num_range|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce_nonempty|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split_tagged_records|sorted|reversed|contains|index_of|count_keys|sorted_keys|sorted_values|has_key|merge_hash|set_key|rename_key|drop_keys|pick_keys|join_values|coalesce|copy)\s*\(/o) {
   my $lowered_value = $lower_method_value_expr->($trimmed);
   return $finish->($lowered_value, 'method_value_family', { expr => $trimmed })
    if defined($lowered_value) && length($lowered_value);

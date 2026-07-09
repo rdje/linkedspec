@@ -645,8 +645,8 @@ sub _infer_assignment_source_sigil {
  my $call = _parse_method_function_expr($trimmed);
  return undef unless $call;
  my $method = $call->{method} // '';
- return '@' if $method =~ /^(?:array|array_copy|flat_array|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|entry_groups|match_groups)$/o;
- return '%' if $method =~ /^(?:hash|hash_copy|flat_hash|merge_hash|set_key|rename_key|drop_keys|pick_keys|entry_map|entry_named_map|match_map|match_named_map)$/o;
+ return '@' if $method =~ /^(?:array|flat_array|sorted|reversed|sorted_keys|sorted_values|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|entry_groups|match_groups)$/o;
+ return '%' if $method =~ /^(?:hash|flat_hash|merge_hash|set_key|rename_key|drop_keys|pick_keys|entry_map|entry_named_map|match_map|match_named_map)$/o;
 
  if ($method eq 'flat') {
   my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
@@ -873,7 +873,7 @@ sub _collect_bare_identifier_type_memory {
      return;
     }
    }
-   if (($name eq '=' || $name eq 'set' || ($name eq 'assign' && (($node->{source} // '') !~ /^\s*assign\s*\(/o)))
+   if (($name eq '=' || $name eq 'set')
        && ref($args) eq 'ARRAY' && @$args == 2) {
     $record_ast_target->($args->[0], $args->[1]);
     $collect_ast_type_node->($args->[1]);
@@ -886,7 +886,7 @@ sub _collect_bare_identifier_type_memory {
        && ($args->[0]{kind} // '') eq 'variable') {
     return;
    }
-   if (($name eq 'push' || $name eq 'push_value' || $name eq 'push_nonempty' || $name eq 'split') && ref($args) eq 'ARRAY' && @$args) {
+   if (($name eq 'push' || $name eq 'split') && ref($args) eq 'ARRAY' && @$args) {
     my $target = $node_source_expr->($args->[0]);
     if (defined($target) && $target =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o) {
      $record->($1, 'array');
@@ -1039,12 +1039,12 @@ sub _collect_bare_identifier_type_memory {
     }
     next;
    }
-   if ($method eq 'assign' && $trimmed =~ /^\s*set\s*\(/o && @$args >= 2) {
+   if ($method eq 'set' && $trimmed =~ /^\s*set\s*\(/o && @$args >= 2) {
     my ($name, $kind) = _bare_symbol_kind_from_target_expr($args->[0], $args->[1]);
     $record->($name, $kind);
     next;
    }
-   if (($method eq 'push' || $method eq 'push_value' || $method eq 'push_nonempty' || $method eq 'split') && @$args) {
+   if (($method eq 'push' || $method eq 'split') && @$args) {
     my $target = _trim_action_ir_value($args->[0]);
     if (defined($target) && $target =~ /^array\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o) {
      $record->($1, 'array');
@@ -1073,14 +1073,9 @@ sub _lower_return_general_statement {
  return _call_actionir_owner_with_deps('method_lowering', '_lower_return_general_statement', @args)
 }
 
-sub _lower_push_value_statement {
+sub _lower_push_statement {
  my @args = @_;
- return _call_actionir_owner_with_deps('method_lowering', '_lower_push_value_statement', @args)
-}
-
-sub _lower_push_nonempty_statement {
- my @args = @_;
- return _call_actionir_owner_with_deps('method_lowering', '_lower_push_nonempty_statement', @args)
+ return _call_actionir_owner_with_deps('method_lowering', '_lower_push_statement', @args)
 }
 
 sub _lower_regex_subst_statement {
@@ -1720,19 +1715,15 @@ sub _mask_action_code_literals {
 #                 NAME = VALUE bind the scalar value slot regardless of RHS shape,
 #                 while statement-level set_key(NAME, KEY, VALUE) and
 #                 push(NAME, nonbare-value) keep their explicit hash/array mutation
-#                 targets. Retired push_value(NAME, ...) / push_nonempty(NAME, ...)
-#                 spelling is still recognized here only to keep legacy diagnostic
-#                 fixtures from introducing unrelated package globals. Such a bare
-#                 name already LOWERS to the matching variable in current accepted
-#                 shapes but otherwise gets no `my` (leaky global).
+#                 targets. Such a bare name already LOWERS to the matching variable
+#                 in current accepted shapes but otherwise gets no `my` (leaky
+#                 global).
 #                 The child-append push(Rule[, target]) / fluent .push(target) target
 #                 (all-bare child-call shape) and bare hash value-position reads
 #                 are deliberately NOT collected here.
 #             (c) SPEC-FORMAT-TERSE.1.2.3.1, Channel 2 aggregate subset — BARE
 #                 aggregate value reads that lower to a sigiled aggregate:
-#                 current copy(NAME) -> remembered kind / @NAME fallback; retired
-#                 array_copy(NAME) / hash_copy(NAME) are kept only for legacy
-#                 diagnostic fixture stability.
+#                 current copy(NAME) -> remembered kind / @NAME fallback.
 #             (d) SPEC-FORMAT-TERSE.1.2.3.3.1, Channel 2 scalar source-slot subset —
 #                 BARE scalar reads in return/assignment-like source slots:
 #                 return(NAME), set(out, NAME), and `out = NAME` -> $NAME.
@@ -2138,14 +2129,13 @@ sub _collect_auto_working_var_decls {
   if ($kind eq 'call') {
    my $name = $node->{name} // '';
    my $args = $node->{args} || [];
-	   my $is_assignment_call = ($name eq '=' || $name eq 'set')
-	    || ($name eq 'assign' && (($node->{source} // '') !~ /^\s*assign\s*\(/o));
-	   if ($is_assignment_call && ref($args) eq 'ARRAY' && @$args == 2) {
+   my $is_assignment_call = ($name eq '=' || $name eq 'set');
+   if ($is_assignment_call && ref($args) eq 'ARRAY' && @$args == 2) {
     $record_ast_assignment_target->($args->[0], $args->[1]);
     $collect_ast_node_refs->($args->[1], 1);
     return;
    }
-	   if (($name eq 'array' || $name eq 'hash')
+   if (($name eq 'array' || $name eq 'hash')
     && ref($args) eq 'ARRAY'
     && @$args == 1
     && ref($args->[0]) eq 'HASH'
@@ -2195,7 +2185,7 @@ sub _collect_auto_working_var_decls {
 
   # (a) SPEC-FORMAT-TERSE.1.1.1 / .11.2 — WRAPPED aggregate-wrapper refs.
   #     If the name is scalar-bound by assignment, the wrapper reads the typed
-  #     value from `$NAME`; otherwise the wrapper keeps the legacy aggregate
+  #     value from `$NAME`; otherwise the wrapper keeps the aggregate
   #     storage view and declares @NAME/%NAME.
   while ($masked =~ /\b(array|hash)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
    my ($wrapper, $name) = ($1, $2);
@@ -2206,9 +2196,8 @@ sub _collect_auto_working_var_decls {
   # (b) SPEC-FORMAT-TERSE.1.2.1, Channel 1 — BARE working var in a type-implying helper
   #     arg position. The bare name already lowers to the correctly-sigil'd variable
   #     (set -> $NAME;
-  #     push -> @NAME) but otherwise gets no preamble `my`. Retired
-  #     push_value/push_nonempty are matched below only for diagnostic fixture stability. The
-	  #     `\s*,` after the name means a WRAPPED target (array(x), whose name is
+  #     push -> @NAME) but otherwise gets no preamble `my`. The
+  #     `\s*,` after the name means a WRAPPED target (array(x), whose name is
   #     followed by `(`) is not matched here — it stays on path (a); both dedup to one `my`.
   # A bare `set(NAME, ...)` target follows the same scalar value-binding rule as operator
   # assignment. The scalar assignment operator (`NAME = VALUE`, SPEC-FORMAT-TERSE.1.3.4.1)
@@ -2216,16 +2205,9 @@ sub _collect_auto_working_var_decls {
   # (`NAME += VALUE`) and hash-index assignment operator (`NAME[KEY] = VALUE`)
   # are statement-level array/hash mutations; `.1.2.3.3.2` additionally collects
   # the accepted bare scalar key/RHS reads in those mutation slots.
-  while ($masked =~ /\b(?:push_value|push_nonempty)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/g) {
-   $record->('@', $1);   # push_value / push_nonempty target lowers to an array
-  }
   # (c) SPEC-FORMAT-TERSE.1.2.3.1 / .6.2.3.2, Channel 2 aggregate subset — BARE
   #     aggregate value reads. Current `copy(NAME)` follows remembered bare-name
-  #     kind before the legacy untyped array fallback. Retired array_copy/hash_copy
-  #     forms are still collected only for diagnostic fixture stability.
-  while ($masked =~ /\barray_copy\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
-   $record->('@', $1);
-  }
+  #     kind before the untyped array fallback.
   while ($masked =~ /\bcopy\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
    my $name = $1;
    my $kind = _bare_symbol_kind($name);
@@ -2235,9 +2217,6 @@ sub _collect_auto_working_var_decls {
     : '@',
     $name,
    );
-  }
-  while ($masked =~ /\bhash_copy\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g) {
-   $record->('%', $1);
   }
   # (d) SPEC-FORMAT-TERSE.1.2.3.3.1 — BARE scalar source-slot reads.
   #     These forms now lower to `$NAME`; collect the matching scalar lexical.
@@ -2249,9 +2228,9 @@ sub _collect_auto_working_var_decls {
    my $payload = _trim_action_ir_value($args->[0]);
    $collect_value_position_scalar_reads->($payload);
   }
-	  while ($masked =~ /\b(?<expr>set\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
-	   my $call = _parse_method_function_expr($+{expr});
-	   next unless $call && (($call->{method} // '') eq 'assign');
+  while ($masked =~ /\b(?<expr>set\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
+   my $call = _parse_method_function_expr($+{expr});
+   next unless $call && (($call->{method} // '') eq 'set');
    my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
    next unless $args;
    $record_assignment_target_for_source->($args->[0], $args->[1]);
@@ -2323,14 +2302,6 @@ sub _collect_auto_working_var_decls {
    my $slot_expr = _trim_action_ir_value($args->[$slot_index]);
    $collect_value_position_scalar_reads->($slot_expr);
    }
-  }
-  while ($masked =~ /\b(?<expr>(?:push_value|push_nonempty)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
-   my $call = _parse_method_function_expr($+{expr});
-   next unless $call && (($call->{method} // '') eq 'push_value' || ($call->{method} // '') eq 'push_nonempty');
-   my $args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
-   next unless $args;
-   my $value_expr = _trim_action_ir_value($args->[1]);
-   $collect_value_position_scalar_reads->($value_expr);
   }
   while ($masked =~ /\b(?<expr>push\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
    my $call = _parse_method_function_expr($+{expr});

@@ -45,8 +45,7 @@ sub default_deps_for_package {
    'lower_array_end_mutation_method_statement',
    'lower_hash_index_assignment_operator_statement',
    'lower_set_key_statement',
-   'lower_push_value_statement',
-   'lower_push_nonempty_statement',
+   'lower_push_statement',
    'lower_regex_subst_statement',
    'lower_array_pipeline_expr',
    'lower_if_flow_statement',
@@ -101,8 +100,7 @@ sub _require_lowering_deps {
   lower_array_end_mutation_method_statement => $require_dep->('lower_array_end_mutation_method_statement'),
   lower_hash_index_assignment_operator_statement => $require_dep->('lower_hash_index_assignment_operator_statement'),
   lower_set_key_statement        => $require_dep->('lower_set_key_statement'),
-  lower_push_value_statement     => $require_dep->('lower_push_value_statement'),
-  lower_push_nonempty_statement  => $require_dep->('lower_push_nonempty_statement'),
+  lower_push_statement           => $require_dep->('lower_push_statement'),
   lower_regex_subst_statement    => $require_dep->('lower_regex_subst_statement'),
   lower_array_pipeline_expr      => $require_dep->('lower_array_pipeline_expr'),
   lower_if_flow_statement        => $require_dep->('lower_if_flow_statement'),
@@ -1761,29 +1759,17 @@ sub _build_assignment_and_regex_contracts {
  my ($d) = @_;
  return [
   {
-   id                 => 'push_value',
+   id                 => 'push',
    ir_node            => 'PUSH',
-   diag_name          => 'push_value',
+   diag_name          => 'push',
    # SPEC-FORMAT-TERSE.1.3.2 — `push(target, value)` is the terse explicit-value
    # append spelling only for shapes that do not collide with child-call
    # `push(Rule[, target[, index]])`; bare child-call forms keep precedence.
-   unresolved_pattern => qr/\b(?:push_value|push)\s*\(/o,
+   unresolved_pattern => qr/\bpush\s*\(/o,
    lower              => sub {
     my ($code) = @_;
-    my $lower = $d->{lower_push_value_statement};
-    $code =~ s/\b(?<expr>(?:push_value|push)\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
-    return $code
-   },
-  },
-  {
-   id                 => 'push_nonempty',
-   ir_node            => 'PUSH',
-   diag_name          => 'push_nonempty',
-   unresolved_pattern => qr/\bpush_nonempty\s*\(/o,
-   lower              => sub {
-    my ($code) = @_;
-    my $lower = $d->{lower_push_nonempty_statement};
-    $code =~ s/\b(?<expr>push_nonempty\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    my $lower = $d->{lower_push_statement};
+    $code =~ s/\b(?<expr>push\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },
@@ -1831,18 +1817,18 @@ sub _build_assignment_and_regex_contracts {
     return $lower->($code) || $code
    },
   },
-	  {
-	   id                 => 'set_value',
-	   ir_node            => 'ASSIGN',
-	   diag_name          => 'set',
-	   unresolved_pattern => qr/\bset\s*\(/o,
-	   lower              => sub {
-	    my ($code) = @_;
-	    my $lower = $d->{lower_assign_method_statement};
-	    $code =~ s/\b(?<expr>set\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
-	    return $code
-	   },
-	  },
+  {
+   id                 => 'set_value',
+   ir_node            => 'ASSIGN',
+   diag_name          => 'set',
+   unresolved_pattern => qr/\bset\s*\(/o,
+   lower              => sub {
+    my ($code) = @_;
+    my $lower = $d->{lower_assign_method_statement};
+    $code =~ s/\b(?<expr>set\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
+    return $code
+   },
+  },
   {
    id                 => 'set_key_statement',
    ir_node            => 'ASSIGN',
@@ -1982,8 +1968,8 @@ sub _build_array_pipeline_contracts {
 #------------------------------------------------------------------------------
 sub _build_dropped_value_contracts {
  my ($d) = @_;
- my $value_call_re = qr/(?:s|a|h|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|concat|cat|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|num_eq|num_ne|num_gt|num_ge|num_lt|num_le|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|array|hash|array_copy|hash_copy|copy|flat|flat_array|flat_hash|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count_keys|sorted_keys|sorted_values|has_key|merge_hash|rename_key|drop_keys|pick_keys|join_values|entry_groups|match_groups|entry_map|entry_named_map|match_map|match_named_map|num_sum|num_avg|num_median|num_range)/;
- my $receiver_method_re = qr/(?:trim|lowercase|uppercase|length|sorted|reversed|count|first|last|is_empty|is_nonempty|hash_copy|flat_hash|count_keys|sorted_keys|sorted_values|abs|floor|ceil|round)/;
+ my $value_call_re = qr/(?:s|a|h|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|num_eq|num_ne|num_gt|num_ge|num_lt|num_le|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|array|hash|copy|flat|flat_array|flat_hash|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count_keys|sorted_keys|sorted_values|has_key|merge_hash|rename_key|drop_keys|pick_keys|join_values|entry_groups|match_groups|entry_map|entry_named_map|match_map|match_named_map|num_sum|num_avg|num_median|num_range)/;
+ my $receiver_method_re = qr/(?:trim|lowercase|uppercase|length|sorted|reversed|count|first|last|is_empty|is_nonempty|flat_hash|count_keys|sorted_keys|sorted_values|abs|floor|ceil|round)/;
  my $literal_receiver_re = qr/(?:"(?:\\.|[^\"])*"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|[A-Za-z_][A-Za-z0-9_]*(?!\s*\())/;
  my $value_drop_statement_re = qr/^\s*(?:(?:$value_call_re)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))|(?:$literal_receiver_re)\s*\.\s*(?:$receiver_method_re)\s*\(\s*\))\s*\z/so;
  return [

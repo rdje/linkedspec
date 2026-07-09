@@ -47,20 +47,18 @@ Semantic reading:
 
 The exact emitted Perl is an implementation detail for most users. What matters is that these helper forms describe operations LinkedSpec can reason about.
 
-## Canonical versus compatibility forms
+## Current Helper Forms
 
-LinkedSpec still recognizes older compatibility forms because real specs exist and migrations are incremental.
-
-However, new public examples should prefer canonical helper forms:
+Public `.spec` actions should use the current helper surface:
 
 ```text
 retv = call(Child);
 push(array(items), retv);
 ```
 
-over raw or compatibility-heavy shapes such as direct Perl assignment and manual array mutation.
-
-Compatibility is useful for migration. It should not be the teaching default.
+Deleted helper names are not part of the contract resolver. A backend may still report
+an unknown-helper diagnostic for an unrecognized helper-looking call, but that is not a
+compatibility path and it does not lower through a name-specific replacement table.
 
 ## What counts as a good helper form?
 
@@ -96,7 +94,7 @@ Then move into the more specialized helper families as needed.
 
 ## The lowering pipeline
 
-The lowering *pipeline* — discover which helper contracts are present, split statements, canonicalize helpers into ActionIR events, then dispatch each to a lowering owner before emitting backend code — is a **backend-neutral** sequence. The specific owner module names and counts in this section (`ActionIR::Scanner`, `ScannerCore`, `StatementSplit`, `CanonicalEvents`, `RewritePipeline`, the per-family lowering owners, and `ActionIR::Contracts` with its 2,110 lines / 158 contracts) are the **Perl reference backend's** realization of those stages; another backend organizes the same scan → split → canonicalize → lower → emit flow in its own modules.
+The lowering *pipeline* — discover which helper contracts are present, split statements, canonicalize helpers into ActionIR events, then dispatch each to a lowering owner before emitting backend code — is a **backend-neutral** sequence. The specific owner modules named in this section (`ActionIR::Scanner`, `ScannerCore`, `StatementSplit`, `CanonicalEvents`, `RewritePipeline`, the per-family lowering owners, and `ActionIR::Contracts`) are the **Perl reference backend's** realization of those stages; another backend organizes the same scan → split → canonicalize → lower → emit flow in its own modules.
 
 ActionIR lowering is not one monolithic pass. It flows through a pipeline of owners, each responsible for one stage:
 
@@ -125,7 +123,7 @@ create a boundary. Nested semicolons inside expression payloads stay inside the 
 
 ### CanonicalEvents
 
-`ActionIR::CanonicalEvents` normalizes recognized helper calls into canonical ActionIR event records. Each event carries a contract ID, resolved arguments, and metadata needed by the later lowering stages. Compatibility aliases (older helper names) are normalized to canonical forms here.
+`ActionIR::CanonicalEvents` records recognized current helper calls as ActionIR event records. Each event carries a contract ID, resolved arguments, and metadata needed by the later lowering stages. Deleted helper names are not canonicalized into replacement events.
 
 ### RewritePipeline
 
@@ -149,23 +147,23 @@ Each contract family has a dedicated lowering owner:
 - `ValueExpr` — value construction (bare scalar reads, `array(...)`, `hash(...)`)
 - `ControlFlow` — structured control flow (`if/elseif/else/endif`, `switch/case/default/endswitch`)
 - `MethodLowering` — method-like helper lowering to Perl code
-- `DeclareMethod` — legacy declaration helpers (`declare(...)`, `declare_s(...)`, `declare_a(...)`, `declare_h(...)`)
+- `DeclareMethod` — declaration, assignment, and reset-oriented helper lowering
 - `ArrayPipeline` — array pipeline operations (filter, map, sort, etc.)
 
 ### Contracts catalog
 
-`ActionIR::Contracts` (2,110 lines, 158 contracts) is the contract catalog. It defines every supported helper surface — its name, its ActionIR node type, its diagnostic identity, and its unresolved pattern (the template matched before lowering resolves it). The 8 contract families are:
+`ActionIR::Contracts` is the contract catalog. It defines supported helper surfaces: their names, ActionIR node types, diagnostic identities, and unresolved patterns (the templates matched before lowering resolves them). The main contract families are:
 
-| Family | Contracts | Purpose |
-| --- | --- | --- |
-| capture_and_backtrack | 103 | Boundary capture, mark, cursor, and BACKTRACK helpers |
-| call_and_dispatch | ~11 | Rule dispatch and call helpers |
-| return | 4 | Return value construction |
-| passthrough_ir | 12 | Compatibility pass-through surfaces |
-| emit_and_declare | 7 | Declaration and emit helpers |
-| array_pipeline | 8 | Array pipeline operations |
-| flow_control | 9 | Structured control flow |
-| assignment_and_regex | 4 | Assignment and regex-slot helpers |
+| Family | Purpose |
+| --- | --- |
+| capture_and_backtrack | Boundary capture, mark, cursor, and BACKTRACK helpers |
+| call_and_dispatch | Rule dispatch and call helpers |
+| return | Return value construction |
+| passthrough_ir | Backend-owned pass-through surfaces |
+| emit_and_declare | Declaration and emit helpers |
+| array_pipeline | Array pipeline operations |
+| flow_control | Structured control flow |
+| assignment_and_regex | Assignment and regex-slot helpers |
 
 Understanding the pipeline matters because it explains why a helper call in a `.spec` rule is not just a string substitution — it passes through discovery, normalization, classification, and lowering before becoming emitted backend code.
 

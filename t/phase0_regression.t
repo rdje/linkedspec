@@ -1584,7 +1584,7 @@ subtest 'actionir_method_lowering_helpers_keep_inline_callback_validation' => su
     my $method_lowering_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'MethodLowering.pm'));
     ok(defined($method_lowering_pm) && length($method_lowering_pm), 'MethodLowering.pm source is available for source-shape inspection');
     unlike($method_lowering_pm, qr/sub _require_dep\b/, 'MethodLowering.pm no longer carries a separate local dependency-validator wrapper');
-    like($method_lowering_pm, qr/sub _lower_typed_declare_statement\b.*my \$require_dep = sub \{.*\$split_declare_symbol_names = \$require_dep->\('split_declare_symbol_names'\).*sub _normalize_method_tag_expr\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\).*sub _lower_method_value_expr\b.*my \$require_dep = sub \{.*\$lower_array_pipeline_expr = \$require_dep->\('lower_array_pipeline_expr'\).*sub _lower_return_general_statement\b.*my \$require_dep = sub \{.*\$parse_method_function_expr = \$require_dep->\('parse_method_function_expr'\).*sub _lower_assign_statement\b.*my \$require_dep = sub \{.*\$lower_assignment_source_expr = \$require_dep->\('lower_assignment_source_expr'\).*sub _lower_push_value_statement\b.*my \$require_dep = sub \{.*\$extract_array_symbol_name = \$require_dep->\('extract_array_symbol_name'\).*sub _lower_regex_subst_statement\b.*my \$require_dep = sub \{.*\$strip_literal_delimiters = \$require_dep->\('strip_literal_delimiters'\).*sub _lower_return_undef_statement\b.*my \$require_dep = sub \{.*\$normalize_method_args_with_optional_scope = \$require_dep->\('normalize_method_args_with_optional_scope'\)/s, 'MethodLowering.pm now keeps callback validation inline inside its method/value/assignment/return lowering seams');
+    like($method_lowering_pm, qr/sub _lower_typed_declare_statement\b.*my \$require_dep = sub \{.*\$split_declare_symbol_names = \$require_dep->\('split_declare_symbol_names'\).*sub _normalize_method_tag_expr\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\).*sub _lower_method_value_expr\b.*my \$require_dep = sub \{.*\$lower_array_pipeline_expr = \$require_dep->\('lower_array_pipeline_expr'\).*sub _lower_return_general_statement\b.*my \$require_dep = sub \{.*\$parse_method_function_expr = \$require_dep->\('parse_method_function_expr'\).*sub _lower_assign_statement\b.*my \$require_dep = sub \{.*\$lower_assignment_source_expr = \$require_dep->\('lower_assignment_source_expr'\).*sub _lower_push_statement\b.*my \$require_dep = sub \{.*\$extract_array_symbol_name = \$require_dep->\('extract_array_symbol_name'\).*sub _lower_regex_subst_statement\b.*my \$require_dep = sub \{.*\$strip_literal_delimiters = \$require_dep->\('strip_literal_delimiters'\).*sub _lower_return_undef_statement\b.*my \$require_dep = sub \{.*\$normalize_method_args_with_optional_scope = \$require_dep->\('normalize_method_args_with_optional_scope'\)/s, 'MethodLowering.pm now keeps callback validation inline inside its method/value/assignment/return lowering seams');
 };
 subtest 'owner_dispatch_build_dep_map_resolves_callbacks_and_preserves_eval_error_state' => sub {
     plan tests => 7;
@@ -2103,8 +2103,7 @@ subtest 'emit_context_action_contract_deps_route_through_owner_default_map' => s
         return {
             lower_return_general_statement => sub { return "contract_for_$pkg" },
             lower_assign_method_statement  => sub { return 'assign_method_ok' },
-            lower_push_value_statement     => sub { return 'push_value_ok' },
-            lower_push_nonempty_statement  => sub { return 'push_nonempty_ok' },
+            lower_push_statement           => sub { return 'push_ok' },
             lower_regex_subst_statement    => sub { return 'regex_subst_ok' },
             lower_array_pipeline_expr      => sub { return 'array_pipeline_ok' },
             lower_if_flow_statement        => sub { return 'if_ok' },
@@ -2547,8 +2546,7 @@ subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
     local *Synthetic::ActionIROwner::_lower_array_end_mutation_method_statement = sub { return 'array_end_mutation_ok' };
     local *Synthetic::ActionIROwner::_lower_hash_index_assignment_operator_statement = sub { return 'hash_index_assignment_operator_ok' };
     local *Synthetic::ActionIROwner::_lower_set_key_statement = sub { return 'set_key_statement_ok' };
-    local *Synthetic::ActionIROwner::_lower_push_value_statement = sub { return 'push_value_ok' };
-    local *Synthetic::ActionIROwner::_lower_push_nonempty_statement = sub { return 'push_nonempty_ok' };
+    local *Synthetic::ActionIROwner::_lower_push_statement = sub { return 'push_ok' };
     local *Synthetic::ActionIROwner::_lower_regex_subst_statement = sub { return 'regex_subst_ok' };
     local *Synthetic::ActionIROwner::_lower_array_pipeline_expr = sub { return 'array_pipeline_ok' };
     local *Synthetic::ActionIROwner::_lower_if_flow_statement = sub { return 'if_ok' };
@@ -12383,7 +12381,7 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
         local *LinkedSpec::_build_array_pipeline_plan_from_expr = sub { die "__UNEXPECTED_LINKEDSPEC_BUILD_ARRAY_PIPELINE_PLAN_FROM_EXPR__\n" };
         local *LinkedSpec::_lower_return_general_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_RETURN_GENERAL_STATEMENT__\n" };
         local *LinkedSpec::_lower_return_imatch_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_RETURN_IMATCH_STATEMENT__\n" };
-        local *LinkedSpec::_lower_push_value_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_PUSH_VALUE_STATEMENT__\n" };
+        local *LinkedSpec::_lower_push_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_PUSH_STATEMENT__\n" };
         local *LinkedSpec::_lower_assign_method_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ASSIGN_METHOD_STATEMENT__\n" };
         local *LinkedSpec::_extract_declare_statement_from_method_expr = sub { die "__UNEXPECTED_LINKEDSPEC_EXTRACT_DECLARE_STATEMENT_FROM_METHOD_EXPR__\n" };
         local *LinkedSpec::_lower_declare_method_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_DECLARE_METHOD_STATEMENT__\n" };
@@ -12480,7 +12478,7 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
         'retired declare alias stays inside EmitContext-owned diagnostic lowering path'
     );
     is($rewritten{assign}, '$flag = (($on) || ($off))', 'assign lowering stays inside EmitContext-owned lowering path');
-    is($rewritten{push}, 'push @items, $retv', 'push_value lowering stays inside EmitContext-owned lowering path');
+    is($rewritten{push}, 'push @items, $retv', 'push lowering stays inside EmitContext-owned lowering path');
     is($rewritten{regex}, '$c =~ s{^"|"$}{}go', 'regex substitution lowering stays inside EmitContext-owned lowering path');
     is($rewritten{pipeline}, '@parts = split /\s*,\s*/, $args; @parts = map { my $v = $_; $v =~ s/^\s+|\s+$//g; $v } @parts; @parts = grep { length($_) } @parts',
         'array pipeline lowering stays inside EmitContext-owned lowering path');
@@ -13201,7 +13199,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'Contracts',
             module      => 'LinkedSpec::ActionIR::Contracts',
-            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_assign_method_statement _lower_scalar_assignment_operator_statement _lower_array_append_operator_statement _lower_array_end_mutation_method_statement _lower_hash_index_assignment_operator_statement _lower_set_key_statement _lower_push_value_statement _lower_push_nonempty_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_while_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_return_undef_statement _lower_declare_method_statement)],
+            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_assign_method_statement _lower_scalar_assignment_operator_statement _lower_array_append_operator_statement _lower_array_end_mutation_method_statement _lower_hash_index_assignment_operator_statement _lower_set_key_statement _lower_push_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_while_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_return_undef_statement _lower_declare_method_statement)],
             sample_key  => 'lower_return_general_statement',
             sample_name => '_lower_return_general_statement',
         },
@@ -16290,7 +16288,7 @@ SPEC
         'canonical action-IR nodes include RETURN/ASSIGN/REGEX_SUBST for method contracts'
     );
 };
-subtest 'emit_context_lowers_push_value_method_contract' => sub {
+subtest 'emit_context_lowers_push_method_contract' => sub {
     plan tests => 19;
 
     is(
@@ -16301,12 +16299,12 @@ subtest 'emit_context_lowers_push_value_method_contract' => sub {
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'push(array(items), array(tag, name))'),
         'push @items, [$tag, $name]',
-        'push_value accepts bare target symbol and lowers nested array(...) value expression'
+        'push accepts wrapped target symbol and lowers nested array(...) value expression'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'push(array(items), retv)'),
         'push @items, $retv',
-        'push_value optional scope argument is ignored during lowering'
+        'push preserves explicit wrapped target lowering'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'push(items, "a")'),
@@ -16335,13 +16333,13 @@ Top:: I.set(array(items), array()).set(retv, undef).set(retv, CAPTURE).push(arra
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
-    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for push_value method contract');
+    ok(defined($descr) && ref($descr) eq 'HASH', 'descriptor build succeeds for push method contract');
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
-    is($meta->{canonical_action_ir_fallback_count}, 0, 'push_value method contract avoids RAW_PERL fallback');
-    is($meta->{unresolved_helper_count}, 0, 'push_value method contract avoids unresolved-helper hits');
-    ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PUSH for push_value contract');
-    ok($meta->{language_agnostic_action_ir_ready}, 'push_value method contract remains language-agnostic action-IR ready');
+    is($meta->{canonical_action_ir_fallback_count}, 0, 'push method contract avoids RAW_PERL fallback');
+    is($meta->{unresolved_helper_count}, 0, 'push method contract avoids unresolved-helper hits');
+    ok(grep { $_ eq 'PUSH' } @{$meta->{canonical_action_ir_nodes}}, 'canonical action-IR nodes include PUSH for push contract');
+    ok($meta->{language_agnostic_action_ir_ready}, 'push method contract remains language-agnostic action-IR ready');
 
 my $push_alias_spec = <<'SPEC';
 Top::
@@ -16357,7 +16355,7 @@ SPEC
     is($push_alias_meta->{unresolved_helper_count}, 0, 'terse push explicit-value alias avoids unresolved-helper hits');
     my $push_alias_parser = LinkedSpec::Get(\$push_alias_spec);
     my $push_alias_input = 'xhello';
-    is_deeply($push_alias_parser->(\$push_alias_input), ['a', 'b'], 'terse push explicit-value alias appends and returns the same array value as push_value');
+    is_deeply($push_alias_parser->(\$push_alias_input), ['a', 'b'], 'terse push explicit-value form appends and returns the same array value');
 
     my $push_alias_source_spec = <<'SPEC';
 top:: /x/ -> top[0] { push(items, cat("a", "b")) }
@@ -16371,7 +16369,7 @@ SPEC
         or diag(normalize_error($@));
     my $push_alias_my_count = () = ($push_alias_source =~ /my \@items\b/g);
     is($push_alias_my_count, 1, 'bare target in terse push(target, value) auto-supplies exactly one `my @items`');
-    like($push_alias_source, qr/push \@items,\s*do \{ my \@__ls_concat_parts = \("a", "b"\)/,
+    like($push_alias_source, qr/push \@items,\s*do \{ my \@__ls_cat_parts = \("a", "b"\)/,
         'terse push(target, nested-comma-value) lowers after parser-backed target collection');
 };
 subtest 'emit_context_lowers_push_child_call_contracts' => sub {
@@ -16406,7 +16404,7 @@ subtest 'emit_context_lowers_push_child_call_contracts' => sub {
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'push(items, value)'),
         'push @value, &{$$descr{spec}{items}{handler}}($descr, $STRING, $minfo)',
-        'two-bare-token push(A, B) keeps child-call precedence; wrap the value or use push_value for explicit append'
+        'two-bare-token push(A, B) keeps child-call precedence; wrap the value for explicit append'
     );
 
     my $spec_content = <<'SPEC';
@@ -16443,21 +16441,8 @@ SPEC
     my $input = 'aa';
     is_deeply($parser->(\$input), [[['leaf', 'a']]], 'push(Rule) appends the whole child result as one element in the current rule array at runtime');
 };
-subtest 'emit_context_retires_push_nonempty_method_contract' => sub {
-    plan tests => 12;
-
-    my $diag = 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:push_nonempty"; undef }';
-    for my $expr (
-        'push_nonempty(array(items), trim(capture_slice()))',
-        'push_nonempty(array(items), "")',
-        'push_nonempty(array(items), "0")',
-        'push_nonempty(array(items), array())',
-        'push_nonempty(array(items), ["item"])',
-        'push_nonempty(array(items), hash())',
-        'push_nonempty(array(items), hash("key", "value"))',
-    ) {
-        is(LinkedSpec::call_spec_handler_subst('Top', $expr), $diag, "$expr is retired with an explicit diagnostic");
-    }
+subtest 'emit_context_lowers_explicit_nonempty_push_guard' => sub {
+    plan tests => 5;
 
     my $spec_content = <<'SPEC';
 Top::AND I.set(array(items), array())
@@ -16481,7 +16466,7 @@ SPEC
     is_deeply($parser->(\$input), [['a']], 'explicit is_nonempty guard plus push appends the trimmed capture slice at runtime');
 };
 subtest 'emit_context_lowers_array_snapshot_and_array_assign_method_contracts' => sub {
-    plan tests => 13;
+    plan tests => 12;
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'set(array(items), array(retv))'),
@@ -16496,12 +16481,7 @@ subtest 'emit_context_lowers_array_snapshot_and_array_assign_method_contracts' =
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'push(array(assigns), copy(array(keyval_pairs)))'),
         'push @assigns, [@keyval_pairs]',
-        'push_value accepts copy(array(...)) snapshot payloads'
-    );
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', 'push(array(assigns), copy(array(keyval_pairs)))'),
-        'push @assigns, [@keyval_pairs]',
-        'push_value accepts copy(array(...)) snapshot payloads as the clearer alias'
+        'push accepts copy(array(...)) snapshot payloads'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(copy(array(items)))'),
@@ -16698,7 +16678,7 @@ subtest 'method_like_collection_hash_pipeline_forms_lower_equivalently' => sub {
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'push(array(events), hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/))))'),
         'push @events, {"items" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }]}',
-        'push_value accepts hash payloads with nested collection-valued array-pipeline composition'
+        'push accepts hash payloads with nested collection-valued array-pipeline composition'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))))'),
@@ -21160,7 +21140,7 @@ SPEC
     );
     ok(
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge array snapshot helper fluent form preserves canonical RETURN coverage across array_copy payloads'
+        'action-edge array snapshot helper fluent form preserves canonical RETURN coverage across snapshot payloads'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_array_snapshot_helpers_lower_equivalently' => sub {
@@ -21201,7 +21181,7 @@ SPEC
     );
     ok(
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle array snapshot helper fluent form preserves canonical RETURN coverage across array_copy payloads'
+        'lifecycle array snapshot helper fluent form preserves canonical RETURN coverage across snapshot payloads'
     );
 };
 subtest 'method_like_fluent_and_structured_action_if_elseif_array_snapshot_branches_lower_equivalently' => sub {
@@ -36672,22 +36652,22 @@ subtest 'emit_context_lowers_concat_value_helpers' => sub {
 
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('cat(lowercase(trim(raw_name)), "_", stage)'),
-        q{do { my @__ls_concat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_concat_ok = 1; for my $__ls_concat_part (@__ls_concat_parts) { if (!defined($__ls_concat_part) || ref($__ls_concat_part)) { $__ls_concat_ok = 0; last; } } $__ls_concat_ok ? join('', @__ls_concat_parts) : undef }},
+        q{do { my @__ls_cat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part) || ref($__ls_cat_part)) { $__ls_cat_ok = 0; last; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }},
         'cat(...) lowers normalized scalar fragments into one guarded pure scalar expression'
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('cat(coalesce_nonempty(trim(retv["type"]), entry_text(), "word"), "::", uppercase(trim(kind)))'),
-        q{do { my @__ls_concat_parts = (do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{"type"}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = do { $IMATCH }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "word" } }, "::", do { my $__ls_upper = do { my $__ls_trim = $kind; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_upper) ? uc($__ls_upper) : $__ls_upper }); my $__ls_concat_ok = 1; for my $__ls_concat_part (@__ls_concat_parts) { if (!defined($__ls_concat_part) || ref($__ls_concat_part)) { $__ls_concat_ok = 0; last; } } $__ls_concat_ok ? join('', @__ls_concat_parts) : undef }},
+        q{do { my @__ls_cat_parts = (do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{"type"}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = do { $IMATCH }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "word" } }, "::", do { my $__ls_upper = do { my $__ls_trim = $kind; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_upper) ? uc($__ls_upper) : $__ls_upper }); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part) || ref($__ls_cat_part)) { $__ls_cat_ok = 0; last; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }},
         'cat(...) lowers composed fallback and normalization fragments into one guarded scalar value'
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(cat(lowercase(trim(raw_name)), "_", stage), "node_init")'),
-        q{do { my $__ls_str_cmp_lhs = do { my @__ls_concat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_concat_ok = 1; for my $__ls_concat_part (@__ls_concat_parts) { if (!defined($__ls_concat_part) || ref($__ls_concat_part)) { $__ls_concat_ok = 0; last; } } $__ls_concat_ok ? join('', @__ls_concat_parts) : undef }; my $__ls_str_cmp_rhs = "node_init"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
+        q{do { my $__ls_str_cmp_lhs = do { my @__ls_cat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part) || ref($__ls_cat_part)) { $__ls_cat_ok = 0; last; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; my $__ls_str_cmp_rhs = "node_init"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
         'cat(...) composes inside flow comparisons over normalized scalar expressions'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash("full_name", cat(lowercase(trim(raw_name)), "_", stage)))'),
-        q{return {"full_name" => do { my @__ls_concat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_concat_ok = 1; for my $__ls_concat_part (@__ls_concat_parts) { if (!defined($__ls_concat_part) || ref($__ls_concat_part)) { $__ls_concat_ok = 0; last; } } $__ls_concat_ok ? join('', @__ls_concat_parts) : undef }}},
+        q{return {"full_name" => do { my @__ls_cat_parts = (do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? lc($__ls_lower) : $__ls_lower }, "_", $stage); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part) || ref($__ls_cat_part)) { $__ls_cat_ok = 0; last; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }}},
         'cat(...) lowers inside general return payloads'
     );
 };
@@ -37251,7 +37231,7 @@ SPEC
         'lifecycle merge_hash fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
-subtest 'emit_context_lowers_hash_copy_value_helpers' => sub {
+subtest 'emit_context_lowers_hash_snapshot_value_helpers' => sub {
     plan tests => 4;
 
     is(
@@ -37266,16 +37246,16 @@ subtest 'emit_context_lowers_hash_copy_value_helpers' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(copy(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source", "stage")))'),
-        'return do { my $__ls_hash_copy = do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (defined($__ls_hash_copy) && ref($__ls_hash_copy) eq \'HASH\') ? { %{$__ls_hash_copy} } : {} }',
+        'return do { my $__ls_hash_snapshot = do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (defined($__ls_hash_snapshot) && ref($__ls_hash_snapshot) eq \'HASH\') ? { %{$__ls_hash_snapshot} } : {} }',
         'copy(...) lowers inside general return payloads'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'set(hash(meta_out), copy(pick_keys(merge_hash(hash(meta), hash("stage", "normalized")), "kind", "source", "stage")))'),
-        '%meta_out = (do { my $__ls_hash_init = do { my $__ls_hash_copy = do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (defined($__ls_hash_copy) && ref($__ls_hash_copy) eq \'HASH\') ? { %{$__ls_hash_copy} } : {} }; defined($__ls_hash_init) ? %{$__ls_hash_init} : () })',
+        '%meta_out = (do { my $__ls_hash_init = do { my $__ls_hash_snapshot = do { my $__ls_pick_source = {%meta, do { my $__ls_merge_hash = {"stage" => "normalized"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (defined($__ls_hash_snapshot) && ref($__ls_hash_snapshot) eq \'HASH\') ? { %{$__ls_hash_snapshot} } : {} }; defined($__ls_hash_init) ? %{$__ls_hash_init} : () })',
         'copy(...) lowers inside hash assignment sources'
     );
 };
-subtest 'method_like_fluent_and_structured_action_hash_copy_value_helpers_lower_equivalently' => sub {
+subtest 'method_like_fluent_and_structured_action_hash_snapshot_value_helpers_lower_equivalently' => sub {
     plan tests => 12;
 
     my $fluent_spec = <<'SPEC';
@@ -37291,23 +37271,23 @@ SPEC
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
     my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
-    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge hash_copy helper form');
-    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge hash_copy helper form');
-    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge hash_copy helper forms lower to identical ACODE output');
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent action-edge hash snapshot helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured action-edge hash snapshot helper form');
+    is_deeply($fluent_descr->{spec}{Top}{ACODE}, $block_descr->{spec}{Top}{ACODE}, 'fluent and structured action-edge hash snapshot helper forms lower to identical ACODE output');
 
     my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
     my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
 
-    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge hash_copy helper form avoids RAW_PERL fallback');
-    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge hash_copy helper form avoids RAW_PERL fallback');
-    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge hash_copy helper form avoids raw Perl dependency');
-    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge hash_copy helper form avoids raw Perl dependency');
-    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge hash_copy helper form avoids unresolved-helper hits');
-    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge hash_copy helper form avoids unresolved-helper hits');
-    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge hash_copy helper forms produce identical canonical action-IR node coverage');
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent action-edge hash snapshot helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured action-edge hash snapshot helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent action-edge hash snapshot helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured action-edge hash snapshot helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent action-edge hash snapshot helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured action-edge hash snapshot helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured action-edge hash snapshot helper forms produce identical canonical action-IR node coverage');
     ok(
         $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
-        'fluent and structured action-edge hash_copy helper forms remain language-agnostic action-IR ready'
+        'fluent and structured action-edge hash snapshot helper forms remain language-agnostic action-IR ready'
     );
     ok(
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
@@ -37315,7 +37295,7 @@ SPEC
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'action-edge hash_copy fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
+        'action-edge hash snapshot fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'method_like_fluent_and_structured_lifecycle_hash_copy_value_helpers_lower_equivalently' => sub {
@@ -37336,23 +37316,23 @@ SPEC
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
     my $block_descr = LinkedSpec::Get(\$block_spec, return_descriptor => 1);
 
-    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle hash_copy helper form');
-    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle hash_copy helper form');
-    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle hash_copy helper forms lower to identical LXCODE output');
+    ok(defined($fluent_descr) && ref($fluent_descr) eq 'HASH', 'descriptor build succeeds for fluent lifecycle hash snapshot helper form');
+    ok(defined($block_descr) && ref($block_descr) eq 'HASH', 'descriptor build succeeds for structured lifecycle hash snapshot helper form');
+    is_deeply($fluent_descr->{spec}{Top}{LXCODE}, $block_descr->{spec}{Top}{LXCODE}, 'fluent and structured lifecycle hash snapshot helper forms lower to identical LXCODE output');
 
     my $fluent_meta = $fluent_descr->{spec}{Top}{meta}{action_rewriter};
     my $block_meta = $block_descr->{spec}{Top}{meta}{action_rewriter};
 
-    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle hash_copy helper form avoids RAW_PERL fallback');
-    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle hash_copy helper form avoids RAW_PERL fallback');
-    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle hash_copy helper form avoids raw Perl dependency');
-    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle hash_copy helper form avoids raw Perl dependency');
-    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle hash_copy helper form avoids unresolved-helper hits');
-    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle hash_copy helper form avoids unresolved-helper hits');
-    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle hash_copy helper forms produce identical canonical action-IR node coverage');
+    is($fluent_meta->{canonical_action_ir_fallback_count}, 0, 'fluent lifecycle hash snapshot helper form avoids RAW_PERL fallback');
+    is($block_meta->{canonical_action_ir_fallback_count}, 0, 'structured lifecycle hash snapshot helper form avoids RAW_PERL fallback');
+    is($fluent_meta->{raw_perl_dependency_count}, 0, 'fluent lifecycle hash snapshot helper form avoids raw Perl dependency');
+    is($block_meta->{raw_perl_dependency_count}, 0, 'structured lifecycle hash snapshot helper form avoids raw Perl dependency');
+    is($fluent_meta->{unresolved_helper_count}, 0, 'fluent lifecycle hash snapshot helper form avoids unresolved-helper hits');
+    is($block_meta->{unresolved_helper_count}, 0, 'structured lifecycle hash snapshot helper form avoids unresolved-helper hits');
+    is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured lifecycle hash snapshot helper forms produce identical canonical action-IR node coverage');
     ok(
         $fluent_meta->{language_agnostic_action_ir_ready} && $block_meta->{language_agnostic_action_ir_ready},
-        'fluent and structured lifecycle hash_copy helper forms remain language-agnostic action-IR ready'
+        'fluent and structured lifecycle hash snapshot helper forms remain language-agnostic action-IR ready'
     );
     ok(
         scalar(grep { $_ eq 'ASSIGN' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
@@ -37360,7 +37340,7 @@ SPEC
         scalar(grep { $_ eq 'IF' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ELSE' } @{$fluent_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}),
-        'lifecycle hash_copy fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
+        'lifecycle hash snapshot fluent form preserves ASSIGN/IF/ELSE/RETURN coverage'
     );
 };
 subtest 'emit_context_lowers_set_key_value_helpers' => sub {
@@ -41655,7 +41635,7 @@ subtest 'ds_vhistory_vhistory_helper_flow_eliminates_raw_fallback' => sub {
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'ds_vhistory exposes no top blocked rule after vhistory migration');
 };
 subtest 'ds_vhistory_spec_prefers_canonical_container_wrappers_in_vhistory_band' => sub {
-    plan tests => 9;
+    plan tests => 8;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'ds_vhistory.spec');
     my $source_content = slurp($source_spec);
@@ -41666,7 +41646,6 @@ subtest 'ds_vhistory_spec_prefers_canonical_container_wrappers_in_vhistory_band'
     like($source_content, qr/cur_object = call\(object\)/, 'ds_vhistory object edge now prefers direct call assignment instead of compatibility assignment');
     like($source_content, qr/push\(array\(capt\), call\(branch\)\)/, 'ds_vhistory child capture edges now prefer push(array(capt), call(...))');
     ok(index($source_content, 'return(array("?ds_vhistory:", copy(array(vhistory))))') >= 0, 'ds_vhistory vhistory band now uses the canonical array wrapper plus copy in top-level return construction');
-    unlike($source_content, qr/push_value\(a\(vhistory\), a\("\?object:", s\(current_object_name\), array_(?:values|copy)\(a\(object_hier\)\)\)\)/, 'ds_vhistory migrated band no longer uses retired a()/s() aliases in object aggregation pushes');
     unlike($source_content, qr/\$cur_object\s*=\s*call\(object\)/, 'ds_vhistory object edge no longer uses compatibility assignment syntax');
     unlike($source_content, qr/push \@capt, call\(/, 'ds_vhistory child capture edges no longer use raw-looking push-call wrappers');
 };
@@ -42088,7 +42067,7 @@ subtest 'vhdl_subprogram_body_helper_flow_eliminates_raw_fallback' => sub {
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'vhdl exposes no top blocked rule after subprogram_body migration');
 };
 subtest 'vhdl_remaining_cursor_and_capture_boundary_reads_prefer_phase4_helpers' => sub {
-    plan tests => 9;
+    plan tests => 8;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'vhdl.spec');
     my $source_content = slurp($source_spec);
@@ -42099,7 +42078,6 @@ subtest 'vhdl_remaining_cursor_and_capture_boundary_reads_prefer_phase4_helpers'
     like($source_content, qr/subprogram_body\[1\]\s+\{pos_begin = cursor_pos\(\)\}/, 'vhdl subprogram_body now prefers direct cursor_pos() assignment for the live begin-position read');
     unlike($source_content, qr/subprogram_body\[1\]\s+\{assign\(scalar\(pos_begin\), pos \$\$STRING\)\}/, 'vhdl subprogram_body no longer uses the raw pos $$STRING begin-position read');
     like($source_content, qr/signal_decl_range: .*?LS \{push\(array\(capt\), capture_slice\(\)\)\}/s, 'vhdl signal_decl_range now prefers push plus capture_slice() for the anonymous capture-boundary read');
-    unlike($source_content, qr/signal_decl_range: .*?LS \{push_value\(array\(capt\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\)\}/s, 'vhdl signal_decl_range no longer uses the raw anonymous capture-boundary substr read');
     like($source_content, qr/signal_decl_range: .*?LE \{start_capture_slice\(\)\}/s, 'vhdl signal_decl_range now prefers start_capture_slice() for the anonymous capture-boundary write');
     unlike($source_content, qr/signal_decl_range: .*?LE \{assign\(scalar\(IPOS\), pos \$\$STRING\)\}/s, 'vhdl signal_decl_range no longer uses the raw IPOS assignment plus pos $$STRING write');
 };
@@ -42548,7 +42526,7 @@ subtest 'hlink_substitution_delimiter_rules_prefer_capture_slice' => sub {
     unlike($source_content, qr/\bexit 2\b/, 'hlink_substitution delimiter syntax-error paths no longer use bare exit compatibility syntax');
 };
 subtest 'hlink_substitution_spec_prefers_canonical_container_wrappers_in_top_band' => sub {
-    plan tests => 7;
+    plan tests => 6;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'hlink_substitution.spec');
     my $source_content = slurp($source_spec);
@@ -42558,7 +42536,6 @@ subtest 'hlink_substitution_spec_prefers_canonical_container_wrappers_in_top_ban
     like($source_content, qr/push\(array\(word_items\), retv\)/, 'hlink_substitution top band now uses push(...) plus array(word_items) and bare retv in accumulator pushes');
     ok(index($source_content, 'return(copy(array(word_items)));') >= 0, 'hlink_substitution top band now uses array(word_items) plus copy in aggregate return flow');
     like($source_content, qr/-> substitute_statement2\[1\] \{print\("\(HLinkSubst\) -E- Dangling closing bracket\\n"\); exit_now\(1\)\}/, 'hlink_substitution top dangling-bracket path now uses exit_now(1)');
-    unlike($source_content, qr/push_value\(a\(word_items\), s\(retv\)\)/, 'hlink_substitution migrated band no longer uses retired a()/s() aliases in accumulator pushes');
     unlike($source_content, qr/\bexit 1\b/, 'hlink_substitution top dangling-bracket path no longer uses bare exit compatibility syntax');
 };
 subtest 'hlink_substitution_raw_string_prefers_entry_text' => sub {
@@ -42709,7 +42686,7 @@ subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'sdce exposes no top blocked rule after helper migration');
 };
 subtest 'sdce_spec_prefers_canonical_container_wrappers_in_split_band' => sub {
-    plan tests => 20;
+    plan tests => 18;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'sdce.spec');
     my $source_content = slurp($source_spec);
@@ -42718,11 +42695,9 @@ subtest 'sdce_spec_prefers_canonical_container_wrappers_in_split_band' => sub {
     like($source_content, qr/sdc_esplit:: I \{pieces = \[\]; retv = undef; start_capture_slice\(\)\}/, 'sdce top band now prefers terse initialization plus start_capture_slice() for explicit anonymous capture-boundary initialization');
     unlike($source_content, qr/assign\(scalar\(IPOS\), 0\)/, 'sdce top band no longer uses direct IPOS initialization');
     like($source_content, qr/LS\s+\{retv = capture_slice\(\); push\(array\(pieces\), retv\)\}/, 'sdce top split band now prefers capture_slice() plus terse assignment/push for anonymous capture-boundary reads');
-    unlike($source_content, qr/LS\s+\{assign\(scalar\(retv\), substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\)\); push_value\(array\(pieces\), scalar\(retv\)\)\}/, 'sdce top split band no longer uses raw rule-entry substr capture');
     like($source_content, qr/LE\s+\{start_capture_slice\(\)\}/, 'sdce split bands now prefer start_capture_slice() for direct anonymous capture-boundary movement');
     unlike($source_content, qr/assign\(scalar\(IPOS\), cursor_pos\(\)\)/, 'sdce split bands no longer use explicit IPOS assignment plus cursor_pos() in the migrated anonymous-boundary writes');
     like($source_content, qr/LX\s+\{retv = capture_rest\(\); push\(array\(pieces\), retv\); return\(copy\(array\(pieces\)\)\)\}/, 'sdce trailing split band now prefers capture_rest() plus terse assignment/push/copy for anonymous capture-boundary tail reads');
-    unlike($source_content, qr/LX\s+\{assign\(scalar\(retv\), substr\(\$\$STRING, \$IPOS, length\(\$\$STRING\) - \$IPOS\)\); push_value\(array\(pieces\), scalar\(retv\)\); return\(array_(?:values|copy)\(array\(pieces\)\)\)\}/, 'sdce trailing split band no longer uses raw rule-entry tail substr capture');
     like($source_content, qr/push\(array\(pieces\), retv\)/, 'sdce top band now uses push(...) plus array(pieces) and bare retv in accumulator pushes');
     like($source_content, qr/segment = input_slice\(match_end_pos\(\), call\(oc_brace\)\)/, 'sdce get_pinport brace segment read now prefers direct assignment plus input_slice() with an explicit match-end start');
     unlike($source_content, qr/substr\(\$\$STRING, \$LSPOS, call\(oc_brace\)\)/, 'sdce get_pinport brace segment read no longer uses raw whole-input substr with LSPOS');
@@ -42779,7 +42754,7 @@ subtest 'ebnf_logging_annotation_runtime_parses_after_explicit_nonempty_migratio
 
     my $descr = LinkedSpec::get_parser('ebnf', return_descriptor => 1);
     my $nodes = $descr->{spec}{logging_annotation}{meta}{action_rewriter}{canonical_action_ir_nodes};
-    ok(grep { $_ eq 'PUSH' } @{$nodes}, 'logging_annotation descriptor records PUSH ActionIR coverage for push_nonempty');
+    ok(grep { $_ eq 'PUSH' } @{$nodes}, 'logging_annotation descriptor records PUSH ActionIR coverage for explicit guarded push');
     ok(grep { $_ eq 'CAPTURE_SLICE_START' } @{$nodes}, 'logging_annotation descriptor records explicit capture-boundary movement');
     ok(!grep { $_ eq 'CAPTURE_IF' } @{$nodes}, 'logging_annotation descriptor no longer records CAPTURE_IF ActionIR coverage');
 };
@@ -45139,7 +45114,7 @@ subtest 'spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist' => sub
 
     my $dedup_target_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push(items, match_group(0)); return(copy(items)) }\n");
     my $n_dedup_target = () = ($dedup_target_src =~ /my \@items\b/g);
-    is($n_dedup_target, 1, 'bare push target plus bare array_copy read dedup to one `my @items`');
+    is($n_dedup_target, 1, 'bare push target plus bare array snapshot read dedup to one `my @items`');
 
     my $wrapped_src = $gen->("top:: -> w { return(copy(array(items))) }\n\nw : /x/\n");
     my $n_wrapped = () = ($wrapped_src =~ /my \@items\b/g);
@@ -45147,7 +45122,7 @@ subtest 'spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist' => sub
 
     my $hash_dedup_src = $gen->("top:: -> w { set_key(meta, \"kind\", \"x\"); return(copy(meta)) }\n\nw : /x/\n");
     my $n_hash_dedup = () = ($hash_dedup_src =~ /my \%meta\b/g);
-    is($n_hash_dedup, 1, 'bare set_key target plus bare hash_copy read dedup to one `my %meta`');
+    is($n_hash_dedup, 1, 'bare set_key target plus bare hash snapshot read dedup to one `my %meta`');
 
     is($run->($array_spec, 'x'), '[]', 'bare copy(items) runtime smoke returns an empty array snapshot');
 
@@ -45412,15 +45387,14 @@ subtest 'spec_format_terse_1_2_3_3_3_direct_access_bare_path_atoms_auto_exist' =
         're-running the SAME parser remains stable with direct-access scalar index reads');
 };
 
-subtest 'spec_format_terse_1_4_1_current_spellings_lower_and_old_spellings_retire' => sub {
-    # SPEC-FORMAT-TERSE.8.3 hard-retires the old Perl helper spellings that were
-    # deprecated by .1.4.1. Keep positive coverage on the current spellings and
-    # pin old function-form helpers to explicit diagnostics.
-    plan tests => 16;
+subtest 'spec_format_terse_1_4_1_current_spellings_lower' => sub {
+    # Keep positive coverage on the current helper spellings. Deleted spellings
+    # are intentionally outside this lowering contract.
+    plan tests => 12;
     my $L = sub { LinkedSpec::call_spec_handler_subst('Top', $_[0]) };
     my @current = (
         ['set(x, 1)', '$x = 1', 'set lowers scalar assignment'],
-        ['return(cat("a","b"))', undef, 'cat lowers return payload through concat implementation'],
+        ['return(cat("a","b"))', undef, 'cat lowers return payload through current string composition'],
         ['return(copy(array(items)))', 'return [@items]', 'copy(array) lowers array snapshot return payload'],
         ['return(copy(hash(m)))', 'return {%m}', 'copy(hash) lowers hash snapshot return payload'],
         ['set(x, cat(a,b))', undef, 'cat lowers scalar assignment source'],
@@ -45441,10 +45415,6 @@ subtest 'spec_format_terse_1_4_1_current_spellings_lower_and_old_spellings_retir
             unlike($lowered, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/, $label);
         }
     }
-    is($L->('return(concat("a","b"))'), 'return do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:concat"; undef }', 'old concat(...) is retired');
-    is($L->('return(array_copy(array(items)))'), 'return do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:array_copy"; undef }', 'old array_copy(...) is retired');
-    is($L->('return(hash_copy(hash(m)))'), 'return do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_copy"; undef }', 'old hash_copy(...) is retired');
-    is($L->('push_value(array(items), cat(a,b))'), 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:push_value"; undef }', 'old push_value(...) is retired');
 };
 
 subtest 'spec_format_terse_1_4_1_set_is_full_assign_alias' => sub {
@@ -45519,7 +45489,7 @@ subtest 'spec_format_terse_1_4_1_terse_spec_runs_identically_to_canonical' => su
     my $tp = eval { LinkedSpec::Get(\$terse) };
     my $cp = eval { LinkedSpec::Get(\$canon) };
     ok(ref($tp) eq 'CODE', 'terse set/cat/copy spec compiles to a parser') or diag(normalize_error($@));
-    ok(ref($cp) eq 'CODE', 'canonical assign/concat/array_copy twin compiles to a parser') or diag(normalize_error($@));
+    ok(ref($cp) eq 'CODE', 'canonical current-helper twin compiles to a parser') or diag(normalize_error($@));
     is($run->($tp, 'a b c'), '["a!","b!","c!"]', 'terse spec returns the concatenated word list');
     is($run->($tp, 'a b c'), $run->($cp, 'a b c'), 'terse spec output == canonical twin (helper renames lower identically)');
     is($run->($tp, 'a b c'), '["a!","b!","c!"]', 're-running the same terse parser is stable (per-invocation lexicals)');
@@ -45546,7 +45516,7 @@ subtest 'spec_format_terse_1_3_3_set_key_statement_mutates_hash' => sub {
         return $src;
     };
 
-    like($L->('set_key(meta, "stage", cat("a", "b"))'), qr/^\$meta\{"stage"\} = do \{ my \@__ls_concat_parts/,
+    like($L->('set_key(meta, "stage", cat("a", "b"))'), qr/^\$meta\{"stage"\} = do \{ my \@__ls_cat_parts/,
         'top-level set_key(meta,...) lowers to direct hash-entry assignment');
     like($L->('return(set_key(hash(meta), "stage", "v"))'), qr/^return do \{ my \$__ls_set_key_source = \\%meta;/,
         'nested set_key(hash(meta),...) remains the pure hash-copy value helper');
@@ -46485,7 +46455,7 @@ subtest 'spec_format_terse_2_3_5_2_hash_receiver_value_chains' => sub {
         'hash receiver chains auto-supply one my %meta');
     is((() = ($src =~ /my \$meta\b/g)), 0,
         'hash receiver chains do not auto-supply my $meta');
-    unlike($src, qr/\.(?:set_key|merge_hash|hash_copy|copy|flat_hash)\b/,
+    unlike($src, qr/\.(?:set_key|merge_hash|copy|flat_hash)\b/,
         'generated source has no raw receiver-dot hash helper residue');
 
     my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
@@ -46519,7 +46489,7 @@ subtest 'spec_format_terse_2_3_5_3_string_receiver_value_chains' => sub {
     };
 
     like($L->('return(name.trim().lowercase().replace_substr("-","_").rm_prefix("node_").rm_suffix("_end").cat("!"))'),
-        qr/__ls_trim.*__ls_lower.*__ls_replace_substr.*__ls_rm_prefix.*__ls_rm_suffix.*__ls_concat_parts/s,
+        qr/__ls_trim.*__ls_lower.*__ls_replace_substr.*__ls_rm_prefix.*__ls_rm_suffix.*__ls_cat_parts/s,
         'string receiver chain lowers through trim/lowercase/replace/rm_prefix/rm_suffix/cat helper contracts');
     like($L->('return(entry_group(0).trim().length())'), qr/IMATCH_LIST.*__ls_trim.*__ls_length/s,
         'capture-group string receiver chains lower through scalar capture reads and length terminal');
@@ -47099,7 +47069,7 @@ subtest 'spec_format_terse_3_3_1_scalar_assignment_expression_values' => sub {
         'scalar assignment expressions compose in return/helper/block/function/receiver-chain contexts');
 
     my $src = $gen->($spec);
-    like($src, qr/\$name = "ok".*\$other = .*concat.*\$third = .*\$block = .*concat.*\$raw = " hi ".*__ls_trim/s,
+    like($src, qr/\$name = "ok".*\$other = .*__ls_cat_parts.*\$third = .*\$block = .*__ls_cat_parts.*\$raw = " hi ".*__ls_trim/s,
         'generated source contains lowered scalar assignment expressions and receiver-chain lowering');
     unlike($src, qr/\bassign\s*\(|\bset\s*\(|=\s*\(\s*(?:other|raw)\b/,
         'generated source has no raw assign helper or single-equals operator-call residue');
@@ -47307,7 +47277,7 @@ subtest 'spec_format_terse_3_3_4_assignment_expression_closure' => sub {
         'scalar value binding, explicit aggregate mutation, and function-local assignments compose');
 
     my $src = $gen->($spec);
-    like($src, qr/\$name = \$value.*\$other = .*__ls_concat_parts.*\$third = .*__ls_user_fn_arg_0 = "fn".*\$current = "surface"/s,
+    like($src, qr/\$name = \$value.*\$other = .*__ls_cat_parts.*\$third = .*__ls_user_fn_arg_0 = "fn".*\$current = "surface"/s,
         'generated source contains scalar, operator-call, set, and current assignment values');
     like($src, qr/(?=.*\$items = \[\$value\])(?=.*\$meta = \{\$key => \$value\})(?=.*\@items_mut = \(\$value\))(?=.*push \@items_mut, "tail")(?=.*%meta_mut = \(\$key => \$value\))(?=.*\$meta_mut\{"extra"\} = \$other)/s,
         'generated source contains scalar-held typed values plus explicit aggregate mutation values');
@@ -47733,7 +47703,7 @@ subtest 'spec_format_terse_14_2_perl_helper_trailing_block_arguments' => sub {
     my $lowered = $L->('return(with("x") { return(cat(value,"!")) })');
     like($lowered, qr/^return do \{ my \$__ls_with_value = "x"; my \$value = \$__ls_with_value; do \{/,
         'with(value) trailing block lowers through a scoped immediate do-block');
-    like($lowered, qr/\@__ls_concat_parts = \(\$value, "!"\)/,
+    like($lowered, qr/\@__ls_cat_parts = \(\$value, "!"\)/,
         'with block body sees the scoped value variable');
     unlike($lowered, qr/return with\b/,
         'with(value) trailing block no longer falls back to raw trailing-block syntax');
