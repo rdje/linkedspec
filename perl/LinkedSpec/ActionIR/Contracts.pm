@@ -62,7 +62,6 @@ sub default_deps_for_package {
    'lower_print_statement',
    'lower_print_each_statement',
    'lower_return_undef_statement',
-   'lower_declare_method_statement',
    'lower_method_value_expr',
   ],
  );
@@ -117,7 +116,6 @@ sub _require_lowering_deps {
   lower_print_statement          => $require_dep->('lower_print_statement'),
   lower_print_each_statement     => $require_dep->('lower_print_each_statement'),
   lower_return_undef_statement   => $require_dep->('lower_return_undef_statement'),
-  lower_declare_method_statement => $require_dep->('lower_declare_method_statement'),
   lower_method_value_expr        => $lower_method_value_expr,
   lower_dropped_value_statement  => $lower_dropped_value_statement,
  }
@@ -299,7 +297,7 @@ sub _build_return_contracts {
    id                 => 'return_general',
    ir_node            => 'RETURN',
    diag_name          => 'return',
-   unresolved_pattern => qr/\breturn\s*\(\s*(?:\[|\{|\"|'|-?\d+(?:\.\d+)?|(?:scalar|s)\s*\(|(?:array|a)\s*\(|(?:hash|h)\s*\(|flat_array\s*\(|flat_hash\s*\(|flat\s*\(|(?:entry_text|match_text|entry_group|match_group|entry_groups|match_groups|input_text|input_len|input_slice)\s*\()/o,
+   unresolved_pattern => qr/\breturn\s*\(\s*(?:\[|\{|\"|'|-?\d+(?:\.\d+)?|array\s*\(|hash\s*\(|flat_array\s*\(|flat_hash\s*\(|flat\s*\(|(?:entry_text|match_text|entry_group|match_group|entry_groups|match_groups|input_text|input_len|input_slice)\s*\()/o,
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_return_general_statement};
@@ -1968,7 +1966,7 @@ sub _build_array_pipeline_contracts {
 #------------------------------------------------------------------------------
 sub _build_dropped_value_contracts {
  my ($d) = @_;
- my $value_call_re = qr/(?:s|a|h|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|num_eq|num_ne|num_gt|num_ge|num_lt|num_le|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|array|hash|copy|flat|flat_array|flat_hash|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count_keys|sorted_keys|sorted_values|has_key|merge_hash|rename_key|drop_keys|pick_keys|join_values|entry_groups|match_groups|entry_map|entry_named_map|match_map|match_named_map|num_sum|num_avg|num_median|num_range)/;
+ my $value_call_re = qr/(?:trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|num_eq|num_ne|num_gt|num_ge|num_lt|num_le|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|array|hash|copy|flat|flat_array|flat_hash|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count_keys|sorted_keys|sorted_values|has_key|merge_hash|rename_key|drop_keys|pick_keys|join_values|entry_groups|match_groups|entry_map|entry_named_map|match_map|match_named_map|num_sum|num_avg|num_median|num_range)/;
  my $receiver_method_re = qr/(?:trim|lowercase|uppercase|length|sorted|reversed|count|first|last|is_empty|is_nonempty|flat_hash|count_keys|sorted_keys|sorted_values|abs|floor|ceil|round)/;
  my $literal_receiver_re = qr/(?:"(?:\\.|[^\"])*"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|[A-Za-z_][A-Za-z0-9_]*(?!\s*\())/;
  my $value_drop_statement_re = qr/^\s*(?:(?:$value_call_re)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))|(?:$literal_receiver_re)\s*\.\s*(?:$receiver_method_re)\s*\(\s*\))\s*\z/so;
@@ -2181,30 +2179,6 @@ sub _build_emit_and_declare_contracts {
    lower              => sub {
     my ($code) = @_;
     $code =~ s/\bnext\s*\(\s*\)/next/g;
-    return $code
-   },
-  },
-  {
-   id                 => 'declare_typed',
-   ir_node            => 'DECLARE',
-   diag_name          => 'declare',
-   unresolved_pattern => qr/\bdeclare\s*\(/o,
-   lower              => sub {
-    my ($code) = @_;
-    my $lower = $d->{lower_declare_method_statement};
-    $code =~ s/\b(?<expr>declare\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
-    return $code
-   },
-  },
-  {
-   id                 => 'declare_alias',
-   ir_node            => 'DECLARE',
-   diag_name          => 'declare',
-   unresolved_pattern => qr/\bdeclare_(?:a|array|s|scalar|h|hash)\s*\(/o,
-   lower              => sub {
-    my ($code) = @_;
-    my $lower = $d->{lower_declare_method_statement};
-    $code =~ s/\b(?<expr>declare_(?:a|array|s|scalar|h|hash)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
   },

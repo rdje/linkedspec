@@ -77,18 +77,13 @@ subtest 'FlowExpr and ValueExpr trace compact expression decisions' => sub {
  like($source_trace, qr/DECISION actionir:value_expr:lower_assignment_source_expr:source:bare_scalar_read => TAKEN/, 'trace reports assignment-source scalar read');
 };
 
-subtest 'ArrayPipeline and DeclareMethod trace plan and declaration decisions' => sub {
- plan tests => 10;
+subtest 'ArrayPipeline and DeclareMethod trace plan and assignment decisions' => sub {
+ plan tests => 6;
 
  my ($array, $array_trace) = _owner_call_with_trace(
   'array_pipeline',
   '_lower_array_pipeline_expr',
   q{filter_match(trim_each(items), /^a/)},
- );
- my ($decl, $decl_trace) = _owner_call_with_trace(
-	  'declare_method',
-	  '_lower_declare_method_statement',
-	  q{declare(array, items = ["a", name])},
  );
  my ($set, $set_trace) = _owner_call_with_trace(
 	  'declare_method',
@@ -100,10 +95,6 @@ subtest 'ArrayPipeline and DeclareMethod trace plan and declaration decisions' =
  like($array_trace, qr/DECISION actionir:array_pipeline:build_array_pipeline_plan_from_expr:expr:append_unary_op => TAKEN/, 'trace reports unary pipeline op');
  like($array_trace, qr/DECISION actionir:array_pipeline:build_array_pipeline_plan_from_expr:expr:append_filter_match_op => TAKEN/, 'trace reports filter-match op');
  like($array_trace, qr/DECISION actionir:array_pipeline:lower_array_pipeline_expr:expr:pipeline_lowered => TAKEN/, 'trace reports pipeline lowering success');
- is($decl, 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare"; undef }', 'retired declaration helper emits a diagnostic');
- like($decl_trace, qr/DECISION actionir:declare_method:lower_declare_method_statement:expr:retired_declare_helper => TAKEN/, 'trace reports retired declare(...) decision');
- like($decl_trace, qr/Context: method=declare\b/, 'trace reports the retired declare helper name');
- unlike($decl_trace, qr/typed_declare_lowered/, 'trace no longer reports typed declaration lowering');
  is($set, '$name = "x"', 'set assignment lowering is unchanged');
  like($set_trace, qr/DECISION actionir:declare_method:lower_assign_method_statement:expr:ast_set_lowered => TAKEN/, 'trace reports AST set assignment lowering');
 };

@@ -449,7 +449,7 @@ sub _if_arg_starts_inline_action_or_branch {
  my ($expr) = @_;
  return 0 unless defined $expr;
  return 1 if $expr =~ /^\s*\{/s;
- return $expr =~ /^\s*(?:elif|elseif|else|if|i|when|while|switch|case|default|endcase|endswitch|return|return_undef|declare(?:_\w+)?|set|push|say|print|print_each|exit_now|next)\s*(?:\(|\{|\z)/o ? 1 : 0
+ return $expr =~ /^\s*(?:elif|elseif|else|if|i|when|while|switch|case|default|endcase|endswitch|return|return_undef|set|push|say|print|print_each|exit_now|next)\s*(?:\(|\{|\z)/o ? 1 : 0
 }
 
 sub _lower_if_flow_statement {

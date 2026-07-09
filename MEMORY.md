@@ -18,28 +18,27 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `NONCURRENT-HELPER-CODE-PURGE.2.1` — Perl current `cat`/`copy`/`set`/`push`
-  lowering no longer routes through removed helper names or removed append-helper diagnostic branches; phase0
-  passes `1..1028`.
-- prior_leaf: `NONCURRENT-HELPER-CODE-PURGE.1` — created the task tree and read-only inventory split for
-  deleting non-current helper spelling recognition/references from Perl/Rust code surfaces.
+- latest_completed_leaf: `NONCURRENT-HELPER-CODE-PURGE.2.2` — Perl declaration/return/wrapper helper-call
+  source-owner paths are removed while current return/setup/read behavior remains green; phase0 passes `1027`
+  tests.
+- prior_leaf: `NONCURRENT-HELPER-CODE-PURGE.2.1` — Perl current `cat`/`copy`/`set`/`push` lowering no longer
+  routes through removed helper names or removed append-helper diagnostic branches.
 - latest_commit: HEAD containing this pointer should be
-  `NONCURRENT-HELPER-CODE-PURGE.2.1 - purge Perl current helper compatibility`; parent before this slice is
-  `NONCURRENT-HELPER-CODE-PURGE.1 - split code purge task tree`.
+  `NONCURRENT-HELPER-CODE-PURGE.2.2 - purge Perl declaration and return helper paths`; parent before this slice is
+  `NONCURRENT-HELPER-CODE-PURGE.2.1 - purge Perl current helper compatibility`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `NONCURRENT-HELPER-CODE-PURGE`; current frontier `NONCURRENT-HELPER-CODE-PURGE.2.2` pending.
-- next_action: from a clean repo, remove Perl declaration/return/wrapper source-owner paths for removed helper
-  spellings while keeping current return, `return_undef`, auto-existing variable, assignment/reset,
-  `array(...)`, `hash(...)`, and bare-read behavior intact.
+- active_work_unit: `NONCURRENT-HELPER-CODE-PURGE`; current frontier `NONCURRENT-HELPER-CODE-PURGE.2.3` pending.
+- next_action: from a clean repo, close remaining Perl metadata/owner-name cleanup for the non-current helper
+  purge before moving to Rust source work.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, task-tree index,
   ROADMAP/ROADMAP_V2, mdBook status/backend-handoff/formal grammar/helper chapters, relevant ADR/KM facts,
   and codebase architecture/source inventory for the Dart AST data-type slice.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
-- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1028`**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
+- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1027` tests**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none once the `NONCURRENT-HELPER-CODE-PURGE.2.1` pointer commit lands; do not pivot unless the repo is
+- blockers: none. in_flight_uncommitted: none once the `NONCURRENT-HELPER-CODE-PURGE.2.2` pointer commit lands; do not pivot unless the repo is
   handoff-ready.

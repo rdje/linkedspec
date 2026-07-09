@@ -14,8 +14,7 @@ array(items)
 hash(meta)
 ```
 
-These are DSL spellings. They are not Perl sigils. Older short wrapper aliases `s(...)`,
-`a(...)`, and `h(...)` are retired; public examples and migrated specs use the canonical
+These are DSL spellings. They are not Perl sigils. Public examples and migrated specs use the canonical
 forms above.
 
 For aggregate wrappers, a single **bare** name token names a working variable: `array(items)` reads the

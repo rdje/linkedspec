@@ -633,8 +633,6 @@ my $events = LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(
         parse_method_function_expr => sub { die "__UNEXPECTED_PARSE_METHOD_FUNCTION_EXPR__\n" },
         normalize_method_args_with_optional_scope => sub { die "__UNEXPECTED_NORMALIZE_METHOD_ARGS__\n" },
         build_array_pipeline_plan_from_expr => sub { die "__UNEXPECTED_BUILD_ARRAY_PIPELINE_PLAN__\n" },
-        extract_declare_statement_from_method_expr => sub { die "__UNEXPECTED_EXTRACT_DECLARE_STATEMENT__\n" },
-        parse_declare_binding_entry => sub { die "__UNEXPECTED_PARSE_DECLARE_BINDING_ENTRY__\n" },
     },
 );
 print ref($events) eq "ARRAY" ? "__EVENTS_ARRAY__\n" : "__EVENTS_OTHER__\n";
@@ -677,8 +675,6 @@ my $events = LinkedSpec::ActionIR::ScannerCore::scan_contract_ir_events(
         parse_method_function_expr => sub { die "__UNEXPECTED_PARSE_METHOD_FUNCTION_EXPR__\n" },
         normalize_method_args_with_optional_scope => sub { die "__UNEXPECTED_NORMALIZE_METHOD_ARGS__\n" },
         build_array_pipeline_plan_from_expr => sub { die "__UNEXPECTED_BUILD_ARRAY_PIPELINE_PLAN__\n" },
-        extract_declare_statement_from_method_expr => sub { die "__UNEXPECTED_EXTRACT_DECLARE_STATEMENT__\n" },
-        parse_declare_binding_entry => sub { die "__UNEXPECTED_PARSE_DECLARE_BINDING_ENTRY__\n" },
     },
 );
 print ref($events) eq "ARRAY" ? "__SCANNER_RULE_EVENTS_ARRAY__\n" : "__SCANNER_RULE_EVENTS_OTHER__\n";
@@ -1464,7 +1460,7 @@ subtest 'actionir_contracts_lowering_dep_builder_keeps_inline_callback_validatio
     my $contracts_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'Contracts.pm'));
     ok(defined($contracts_pm) && length($contracts_pm), 'Contracts.pm source is available for source-shape inspection');
     unlike($contracts_pm, qr/sub _require_dep\b/, 'Contracts.pm no longer carries a separate local dependency-validator wrapper');
-    like($contracts_pm, qr/sub _require_lowering_deps\b.*my \$require_dep = sub \{.*lower_return_general_statement => \$require_dep->\('lower_return_general_statement'\).*lower_declare_method_statement => \$require_dep->\('lower_declare_method_statement'\)/s, 'Contracts.pm now keeps callback validation inline inside its lowering-deps seam');
+    like($contracts_pm, qr/sub _require_lowering_deps\b.*my \$require_dep = sub \{.*lower_return_general_statement => \$require_dep->\('lower_return_general_statement'\).*lower_assign_method_statement\s+=> \$require_dep->\('lower_assign_method_statement'\)/s, 'Contracts.pm now keeps callback validation inline inside its lowering-deps seam');
 };
 subtest 'actionir_scannercore_binding_builder_keeps_inline_callback_validation' => sub {
     plan tests => 3;
@@ -1552,7 +1548,7 @@ subtest 'actionir_declare_method_helpers_keep_inline_callback_validation' => sub
     my $declare_method_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'DeclareMethod.pm'));
     ok(defined($declare_method_pm) && length($declare_method_pm), 'DeclareMethod.pm source is available for source-shape inspection');
     unlike($declare_method_pm, qr/sub _require_dep\b/, 'DeclareMethod.pm no longer carries a separate local dependency-validator wrapper');
-    like($declare_method_pm, qr/sub _parse_declare_binding_entry\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\).*sub _lower_declare_value_expr\b.*my \$require_dep = sub \{.*\$lower_flow_composite_expr = \$require_dep->\('lower_flow_composite_expr'\).*sub _lower_declare_initializer_expr\b.*my \$require_dep = sub \{.*\$parse_method_function_expr = \$require_dep->\('parse_method_function_expr'\).*sub _extract_declare_statement_from_method_expr\b.*my \$require_dep = sub \{.*\$declare_alias_to_type = \$require_dep->\('declare_alias_to_type'\).*sub _lower_declare_method_statement\b.*my \$require_dep = sub \{.*\$parse_method_function_expr = \$require_dep->\('parse_method_function_expr'\).*sub _lower_assign_method_statement\b.*my \$require_dep = sub \{.*\$lower_assign_statement = \$require_dep->\('lower_assign_statement'\)/s, 'DeclareMethod.pm now keeps callback validation inline inside its retired-declare/assign lowering seams');
+    like($declare_method_pm, qr/sub _parse_declare_binding_entry\b.*my \$require_dep = sub \{.*\$trim_action_ir_value = \$require_dep->\('trim_action_ir_value'\).*sub _lower_declare_value_expr\b.*my \$require_dep = sub \{.*\$lower_flow_composite_expr = \$require_dep->\('lower_flow_composite_expr'\).*sub _lower_declare_initializer_expr\b.*my \$require_dep = sub \{.*\$parse_method_function_expr = \$require_dep->\('parse_method_function_expr'\).*sub _lower_assign_method_statement\b.*my \$require_dep = sub \{.*\$lower_assign_statement = \$require_dep->\('lower_assign_statement'\)/s, 'DeclareMethod.pm now keeps callback validation inline inside its backend-declaration initializer and assign lowering seams');
 };
 subtest 'actionir_value_expr_helpers_keep_inline_callback_validation' => sub {
     plan tests => 3;
@@ -2019,7 +2015,7 @@ subtest 'emit_context_method_lowering_deps_route_through_owner_default_map' => s
     ok(LinkedSpec::RuleIR::EmitContext->can('_method_lowering_deps'), 'EmitContext still exposes the local method-lowering dep entrypoint');
 };
 
-subtest 'emit_context_declare_method_deps_route_through_owner_default_map' => sub {
+subtest 'emit_context_assign_method_deps_route_through_owner_default_map' => sub {
     plan tests => 4;
 
     no warnings 'redefine';
@@ -2032,27 +2028,24 @@ subtest 'emit_context_declare_method_deps_route_through_owner_default_map' => su
         $captured_pkg = $pkg;
         return {
             trim_action_ir_value => sub { return 'trim_ok' },
-            parse_method_function_expr => sub { return { method => 'declare_scalar', args => ['flag'] } },
-            is_bare_method_scope_token => sub { return 0 },
+            parse_method_function_expr => sub { return { method => 'set', args => ['flag', 'on'] } },
             normalize_method_args_with_optional_scope => sub { return ['flag'] },
             lower_flow_composite_expr => sub { return 'flow_ok' },
             lower_method_value_expr => sub { return 'value_ok' },
-            declare_alias_to_type => sub { return "scalar_for_$pkg" },
-            lower_typed_declare_statement => sub { return 'typed_ok' },
-            lower_assign_statement => sub { return 'assign_ok' },
+            lower_assign_statement => sub { return "assign_for_$pkg" },
         };
     };
-    local *LinkedSpec::ActionIR::DeclareMethod::_extract_declare_statement_from_method_expr = sub {
+    local *LinkedSpec::ActionIR::DeclareMethod::_lower_assign_method_statement = sub {
         my ($expr, $deps) = @_;
-        return { owner_pkg => $deps->{declare_alias_to_type}->('s') };
+        return { owner_pkg => $deps->{lower_assign_statement}->('flag', 'on') };
     };
 
     $@ = "__SAVED_ERR__\n";
-    my $ret = LinkedSpec::RuleIR::EmitContext::_extract_declare_statement_from_method_expr('declare_scalar(flag)');
-    is_deeply($ret, { owner_pkg => 'scalar_for_LinkedSpec::RuleIR::EmitContext' }, 'EmitContext declare-method helper now uses the owner default dependency map');
-    is($captured_pkg, 'LinkedSpec::RuleIR::EmitContext', 'EmitContext requests the declare-method owner map for its own package');
-    is($@, "__SAVED_ERR__\n", 'EmitContext declare-method helper preserves caller $@ on successful owner-map delegation');
-    ok(LinkedSpec::RuleIR::EmitContext->can('_declare_method_deps'), 'EmitContext still exposes the local declare-method dep entrypoint');
+    my $ret = LinkedSpec::RuleIR::EmitContext::_lower_assign_method_statement('set(flag, on)');
+    is_deeply($ret, { owner_pkg => 'assign_for_LinkedSpec::RuleIR::EmitContext' }, 'EmitContext assign-method helper now uses the owner default dependency map');
+    is($captured_pkg, 'LinkedSpec::RuleIR::EmitContext', 'EmitContext requests the assign-method owner map for its own package');
+    is($@, "__SAVED_ERR__\n", 'EmitContext assign-method helper preserves caller $@ on successful owner-map delegation');
+    ok(LinkedSpec::RuleIR::EmitContext->can('_declare_method_deps'), 'EmitContext still exposes the local assign-method dep entrypoint');
 };
 
 subtest 'emit_context_scanner_deps_route_through_owner_default_map' => sub {
@@ -2071,14 +2064,12 @@ subtest 'emit_context_scanner_deps_route_through_owner_default_map' => sub {
             trim_action_ir_value => sub { return 'trim_ok' },
             parse_method_function_expr => sub { return { method => 'assign', args => ['items', 'flag'] } },
             normalize_method_args_with_optional_scope => sub { return ['items', 'flag'] },
-            build_array_pipeline_plan_from_expr => sub { return { target => 'items' } },
-            extract_declare_statement_from_method_expr => sub { return { declaration_type => 'scalar', entries => ['flag'] } },
-            parse_declare_binding_entry => sub { return { owner => "scanner_for_$pkg" } },
+            build_array_pipeline_plan_from_expr => sub { return { owner => "scanner_for_$pkg" } },
         };
     };
     local *LinkedSpec::ActionIR::Scanner::scan_contract_ir_events = sub {
         my ($contract, $code, $deps) = @_;
-        return { owner_pkg => $deps->{parse_declare_binding_entry}->('items = flag')->{owner} };
+        return { owner_pkg => $deps->{build_array_pipeline_plan_from_expr}->('filter_nonempty(array(items))')->{owner} };
     };
 
     $@ = "__SAVED_ERR__\n";
@@ -2119,7 +2110,6 @@ subtest 'emit_context_action_contract_deps_route_through_owner_default_map' => s
             lower_say_statement            => sub { return 'say_ok' },
             lower_print_statement          => sub { return 'print_ok' },
             lower_return_undef_statement   => sub { return 'return_undef_ok' },
-            lower_declare_method_statement => sub { return 'declare_method_ok' },
         };
     };
     local *LinkedSpec::ActionIR::Contracts::build_action_lowering_contracts = sub {
@@ -2563,12 +2553,10 @@ subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
     local *Synthetic::ActionIROwner::_lower_print_statement = sub { return 'print_ok' };
     local *Synthetic::ActionIROwner::_lower_print_each_statement = sub { return 'print_each_ok' };
     local *Synthetic::ActionIROwner::_lower_return_undef_statement = sub { return 'return_undef_ok' };
-    local *Synthetic::ActionIROwner::_lower_declare_method_statement = sub { return 'declare_method_ok' };
     local *Synthetic::ActionIROwner::_trim_action_ir_value = sub { return 'trim_ok' };
     local *Synthetic::ActionIROwner::_lower_flow_composite_expr = sub { return 'flow_expr_ok' };
     local *Synthetic::ActionIROwner::_lower_method_value_expr = sub { return 'method_value_ok' };
     local *Synthetic::ActionIROwner::_lower_primitive_literal_expr = sub { return 'primitive_literal_ok' };
-    local *Synthetic::ActionIROwner::_declare_alias_to_type = sub { return 'array' };
     local *Synthetic::ActionIROwner::_lower_typed_declare_statement = sub { return 'typed_declare_ok' };
     local *Synthetic::ActionIROwner::_lower_assign_statement = sub { return 'assign_ok' };
     local *Synthetic::ActionIROwner::_normalize_method_tag_expr = sub { return 'tag_ok' };
@@ -2592,8 +2580,6 @@ subtest 'actionir_dep_builders_preserve_eval_error_state' => sub {
     local *Synthetic::ActionIROwner::_split_top_level_csv = sub { return ['a', 'b'] };
     local *Synthetic::ActionIROwner::_lower_assignment_source_expr = sub { return '$rhs' };
     local *Synthetic::ActionIROwner::_build_array_pipeline_plan_from_expr = sub { return { target_symbol => 'items', ops => [] } };
-    local *Synthetic::ActionIROwner::_extract_declare_statement_from_method_expr = sub { return { type => 'array', symbols => ['items'] } };
-
     local *LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr = sub { return { method => 'call', args => [] } };
     local *LinkedSpec::ActionIR::MethodExpr::_is_bare_method_scope_token = sub { return 0 };
     local *LinkedSpec::ActionIR::MethodExpr::_normalize_method_args_with_optional_scope = sub { return ['arg_ok'] };
@@ -12343,7 +12329,7 @@ SPEC
     ok(ref($info) eq 'HASH' && ref($info->{meta}{action_rewriter}) eq 'HASH', 'compile_spec_entry still returns compiled rule info with action-rewriter metadata');
 };
 subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
-    plan tests => 15;
+    plan tests => 12;
 
     my %rewritten;
     my ($ok_run, $err) = (0, '');
@@ -12362,7 +12348,6 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
         local *LinkedSpec::_lower_declare_initializer_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_DECLARE_INITIALIZER_EXPR__\n" };
         local *LinkedSpec::_declare_sigil_for_type = sub { die "__UNEXPECTED_LINKEDSPEC_DECLARE_SIGIL_FOR_TYPE__\n" };
         local *LinkedSpec::_lower_method_value_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_METHOD_VALUE_EXPR__\n" };
-        local *LinkedSpec::_declare_alias_to_type = sub { die "__UNEXPECTED_LINKEDSPEC_DECLARE_ALIAS_TO_TYPE__\n" };
         local *LinkedSpec::_lower_typed_declare_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_TYPED_DECLARE_STATEMENT__\n" };
         local *LinkedSpec::_normalize_method_tag_expr = sub { die "__UNEXPECTED_LINKEDSPEC_NORMALIZE_METHOD_TAG_EXPR__\n" };
         local *LinkedSpec::_value_expr_deps = sub { die "__UNEXPECTED_LINKEDSPEC_VALUE_EXPR_DEPS__\n" };
@@ -12380,11 +12365,8 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
         local *LinkedSpec::_lower_return_payload_expr = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_RETURN_PAYLOAD_EXPR__\n" };
         local *LinkedSpec::_build_array_pipeline_plan_from_expr = sub { die "__UNEXPECTED_LINKEDSPEC_BUILD_ARRAY_PIPELINE_PLAN_FROM_EXPR__\n" };
         local *LinkedSpec::_lower_return_general_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_RETURN_GENERAL_STATEMENT__\n" };
-        local *LinkedSpec::_lower_return_imatch_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_RETURN_IMATCH_STATEMENT__\n" };
         local *LinkedSpec::_lower_push_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_PUSH_STATEMENT__\n" };
         local *LinkedSpec::_lower_assign_method_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_ASSIGN_METHOD_STATEMENT__\n" };
-        local *LinkedSpec::_extract_declare_statement_from_method_expr = sub { die "__UNEXPECTED_LINKEDSPEC_EXTRACT_DECLARE_STATEMENT_FROM_METHOD_EXPR__\n" };
-        local *LinkedSpec::_lower_declare_method_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_DECLARE_METHOD_STATEMENT__\n" };
         local *LinkedSpec::_lower_regex_subst_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_REGEX_SUBST_STATEMENT__\n" };
         local *LinkedSpec::_normalize_split_delimiter_expr = sub { die "__UNEXPECTED_LINKEDSPEC_NORMALIZE_SPLIT_DELIMITER_EXPR__\n" };
         local *LinkedSpec::_parse_method_function_expr = sub { die "__UNEXPECTED_LINKEDSPEC_PARSE_METHOD_FUNCTION_EXPR__\n" };
@@ -12415,12 +12397,6 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
         local *LinkedSpec::_lower_uppercase_each_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_UPPERCASE_EACH_STATEMENT__\n" };
         local *LinkedSpec::_lower_uniq_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_UNIQ_STATEMENT__\n" };
         local *LinkedSpec::_lower_filter_match_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_FILTER_MATCH_STATEMENT__\n" };
-        local *LinkedSpec::_lower_return_array_statement = sub { die "__UNEXPECTED_LINKEDSPEC_LOWER_RETURN_ARRAY_STATEMENT__\n" };
-
-        $rewritten{declare} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
-            'Top',
-            'declare_s(Top, flag=or(on, off))',
-        );
         $rewritten{assign} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
             'set(Top, flag, or(on, off))',
@@ -12449,14 +12425,6 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
             'Top',
             'switch(kind); case(foo); print("hit"); default(); say("miss"); endswitch()',
         );
-        $rewritten{return_imatch} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
-            'Top',
-            'return_imatch(Top, semantic_annotation)',
-        );
-        $rewritten{return_array} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
-            'Top',
-            'return_array(Top, semantic_annotation, array(entry_group(0), c))',
-        );
         $rewritten{return_general} = LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(
             'Top',
             'return(copy(array(items)))',
@@ -12472,11 +12440,6 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
     ok($ok_run, 'EmitContext lowering succeeds without the removed LinkedSpec lowering facade helpers')
         or diag(normalize_error($err));
     unlike($err, qr/__UNEXPECTED_LINKEDSPEC_/, 'EmitContext lowering does not call the trapped removed LinkedSpec facade helpers');
-    is(
-        $rewritten{declare},
-        'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare_s"; undef }',
-        'retired declare alias stays inside EmitContext-owned diagnostic lowering path'
-    );
     is($rewritten{assign}, '$flag = (($on) || ($off))', 'assign lowering stays inside EmitContext-owned lowering path');
     is($rewritten{push}, 'push @items, $retv', 'push lowering stays inside EmitContext-owned lowering path');
     is($rewritten{regex}, '$c =~ s{^"|"$}{}go', 'regex substitution lowering stays inside EmitContext-owned lowering path');
@@ -12487,8 +12450,6 @@ subtest 'emit_context_avoids_removed_linkedspec_lowering_facade' => sub {
     like($rewritten{flow_empty}, qr/!\@items.*return undef/s, 'is_empty flow lowering stays inside EmitContext-owned lowering path');
     like($rewritten{switch}, qr/^do \{ my \$__ls_switch_value_\d+ = \$kind; my \$__ls_switch_hit_\d+ = 0; if \(!\$__ls_switch_hit_\d+ && \$__ls_switch_value_\d+ eq "foo"\) \{ \$__ls_switch_hit_\d+ = 1; print "hit"; \} if \(!\$__ls_switch_hit_\d+\) \{ \$__ls_switch_hit_\d+ = 1; say "miss"; \} \}$/s,
         'switch/case/default lowering stays inside EmitContext-owned lowering path');
-    is($rewritten{return_imatch}, 'return_imatch(Top, semantic_annotation)', 'retired return_imatch helper passes through unchanged (no EmitContext lowering)');
-    is($rewritten{return_array}, 'return_array(Top, semantic_annotation, array(do { scalar(@IMATCH_LIST) > 0 ? $IMATCH_LIST[0] : undef }, c))', 'retired return_array helper passes through unchanged while entry_group payload lowering stays backend-owned');
     is($rewritten{return_general}, 'return [@items]', 'general return(payload) lowering stays inside EmitContext-owned lowering path');
     like($rewritten{pipeline_match}, qr/lc\(\$_\)/, 'lowercase_each lowering stays inside EmitContext-owned lowering path');
     like($rewritten{pipeline_match}, qr/A-Z_/, 'filter_match/uppercase/uniq lowering stays inside EmitContext-owned lowering path');
@@ -12522,8 +12483,6 @@ subtest 'actionir_scannercore_uses_scanner_dep_binding_owner' => sub {
                 parse_method_function_expr => sub { die "__UNEXPECTED_PARSE_METHOD_FUNCTION_EXPR__\n" },
                 normalize_method_args_with_optional_scope => sub { die "__UNEXPECTED_NORMALIZE_METHOD_ARGS__\n" },
                 build_array_pipeline_plan_from_expr => sub { die "__UNEXPECTED_BUILD_ARRAY_PIPELINE_PLAN__\n" },
-                extract_declare_statement_from_method_expr => sub { die "__UNEXPECTED_EXTRACT_DECLARE_STATEMENT__\n" },
-                parse_declare_binding_entry => sub { die "__UNEXPECTED_PARSE_DECLARE_BINDING_ENTRY__\n" },
             },
         );
         1;
@@ -12537,9 +12496,7 @@ subtest 'actionir_scannercore_uses_scanner_dep_binding_owner' => sub {
         $captured_symbols,
         [
             '_build_array_pipeline_plan_from_expr',
-            '_extract_declare_statement_from_method_expr',
             '_normalize_method_args_with_optional_scope',
-            '_parse_declare_binding_entry',
             '_parse_method_function_expr',
             '_split_action_ir_statements',
             '_trim_action_ir_value',
@@ -12617,8 +12574,8 @@ subtest 'emit_context_avoids_deps_diagnostics_dep_builder' => sub {
         no warnings 'redefine';
         local *LinkedSpec::Deps::action_rewriter_diagnostics_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_DIAGNOSTICS_DEPS__\n" };
         $diag = LinkedSpec::RuleIR::EmitContext::_find_unresolved_action_helpers(
-            'return_a(1); return_a(1)',
-            [{ id => 'return_a', diag_name => 'return_a', unresolved_pattern => qr/\breturn_a\s*\(/ }],
+            'unknown_diag_helper(1); unknown_diag_helper(1)',
+            [{ id => 'unknown_diag_helper', diag_name => 'unknown_diag_helper', unresolved_pattern => qr/\bunknown_diag_helper\s*\(/ }],
         );
         1;
     };
@@ -12649,38 +12606,33 @@ subtest 'emit_context_avoids_deps_rewrite_pipeline_dep_builder' => sub {
     ok(ref($diag) eq 'HASH', 'EmitContext still returns diagnostics through the RewritePipeline-owned default deps');
     is_deeply($diag->{canonical_action_ir_nodes}, ['RETURN'], 'EmitContext preserves canonical-event diagnostics through the RewritePipeline-owned default deps');
 };
-subtest 'emit_context_avoids_deps_declare_method_dep_builder' => sub {
-    plan tests => 6;
+subtest 'emit_context_avoids_deps_assign_method_dep_builder' => sub {
+    plan tests => 4;
 
-    my ($ok_run, $err, $declare_stmt, $assign_stmt) = (0, '', undef, undef);
-    my $declare_diag = 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare"; undef }';
+    my ($ok_run, $err, $assign_stmt) = (0, '', undef);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::action_rewriter_declare_method_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_DECLARE_METHOD_DEPS__\n" };
-        $declare_stmt = LinkedSpec::RuleIR::EmitContext::_lower_declare_method_statement('declare(array, items)');
         $assign_stmt = LinkedSpec::RuleIR::EmitContext::_lower_assign_method_statement('set(retv, foo)');
         1;
     };
     $err = $@ // '' unless $ok_run;
 
-    ok($ok_run, 'EmitContext declare-method lowering succeeds without the removed Deps declare-method dep builder')
+    ok($ok_run, 'EmitContext assign-method lowering succeeds without the removed Deps declare-method dep builder')
         or diag(normalize_error($err));
     unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_DECLARE_METHOD_DEPS__/, 'EmitContext does not call the trapped Deps declare-method dep builder');
-    ok(defined($declare_stmt), 'EmitContext still returns retired-declare diagnostics through the DeclareMethod-owned default deps');
-    is($declare_stmt, $declare_diag, 'EmitContext preserves retired declare-method diagnostics after moving default deps into DeclareMethod');
     ok(defined($assign_stmt), 'EmitContext still returns lowered assign output through the DeclareMethod-owned default deps');
     is($assign_stmt, '$retv = $foo', 'EmitContext preserves assign-method lowering output after moving default deps into DeclareMethod');
 };
 subtest 'emit_context_avoids_deps_action_contract_dep_builder' => sub {
-    plan tests => 5;
+    plan tests => 4;
 
-    my ($ok_run, $err, $contracts, $declare_contract, $declare_output) = (0, '', undef, undef, undef);
+    my ($ok_run, $err, $contracts, $set_contract) = (0, '', undef, undef);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::action_rewriter_contract_deps_for_package = sub { die "__UNEXPECTED_DEPS_ACTION_REWRITER_CONTRACT_DEPS__\n" };
         $contracts = LinkedSpec::RuleIR::EmitContext::_build_action_lowering_contracts('Top');
-        ($declare_contract) = grep { $_->{id} eq 'declare_typed' } @{$contracts || []};
-        $declare_output = $declare_contract ? $declare_contract->{lower}->('declare(array, items)') : undef;
+        ($set_contract) = grep { $_->{id} eq 'set_value' } @{$contracts || []};
         1;
     };
     $err = $@ // '' unless $ok_run;
@@ -12689,8 +12641,7 @@ subtest 'emit_context_avoids_deps_action_contract_dep_builder' => sub {
         or diag(normalize_error($err));
     unlike($err, qr/__UNEXPECTED_DEPS_ACTION_REWRITER_CONTRACT_DEPS__/, 'EmitContext does not call the trapped Deps action-contract dep builder');
     ok(ref($contracts) eq 'ARRAY' && @{$contracts} > 0, 'EmitContext still returns lowering contracts through the Contracts-owned default deps');
-    ok($declare_contract && ref($declare_contract->{lower}) eq 'CODE', 'EmitContext still exposes the declare_typed lowering contract through the Contracts owner');
-    is($declare_output, 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare"; undef }', 'EmitContext preserves declare_typed retired diagnostics after moving default deps into Contracts');
+    ok($set_contract && ref($set_contract->{lower}) eq 'CODE', 'EmitContext still exposes the current set_value lowering contract through the Contracts owner');
 };
 subtest 'emit_context_avoids_deps_value_expr_dep_builder' => sub {
     plan tests => 6;
@@ -12781,11 +12732,11 @@ subtest 'emit_context_avoids_deps_control_flow_dep_builder' => sub {
 subtest 'emit_context_avoids_deps_method_lowering_dep_builder' => sub {
     plan tests => 6;
 
-    my ($ok_run, $err, $alias, $assign_stmt) = (0, '', undef, undef);
+    my ($ok_run, $err, $return_stmt, $assign_stmt) = (0, '', undef, undef);
     $ok_run = eval {
         no warnings 'redefine';
         local *LinkedSpec::Deps::method_lowering_deps_for_package = sub { die "__UNEXPECTED_DEPS_METHOD_LOWERING_DEPS__\n" };
-        $alias = LinkedSpec::RuleIR::EmitContext::_declare_alias_to_type('array');
+        $return_stmt = LinkedSpec::RuleIR::EmitContext::_lower_return_general_statement('return(foo)');
         $assign_stmt = LinkedSpec::RuleIR::EmitContext::_lower_assign_statement('foo', 'bar');
         1;
     };
@@ -12794,8 +12745,8 @@ subtest 'emit_context_avoids_deps_method_lowering_dep_builder' => sub {
     ok($ok_run, 'EmitContext method-lowering succeeds without the removed Deps method-lowering dep builder')
         or diag(normalize_error($err));
     unlike($err, qr/__UNEXPECTED_DEPS_METHOD_LOWERING_DEPS__/, 'EmitContext does not call the trapped Deps method-lowering dep builder');
-    ok(defined($alias), 'EmitContext still returns declaration alias output through the MethodLowering-owned default deps');
-    is($alias, 'array', 'EmitContext preserves declaration alias lowering after moving default deps into MethodLowering');
+    ok(defined($return_stmt), 'EmitContext still returns return output through the MethodLowering-owned default deps');
+    is($return_stmt, 'return $foo', 'EmitContext preserves return-general lowering after moving default deps into MethodLowering');
     ok(defined($assign_stmt), 'EmitContext still returns assign output through the MethodLowering-owned default deps');
     is($assign_stmt, '$foo = $bar', 'EmitContext preserves assign lowering after moving default deps into MethodLowering');
 };
@@ -12841,7 +12792,7 @@ subtest 'emit_context_require_avoids_canonical_events_load_until_canonical_build
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(
         'require LinkedSpec::RuleIR::EmitContext;'
       . 'print exists($INC{"LinkedSpec/ActionIR/CanonicalEvents.pm"}) ? "__CANONICAL_EVENTS_EAGER__\n" : "__CANONICAL_EVENTS_STILL_LAZY__\n";'
-      . 'my $diag = LinkedSpec::RuleIR::EmitContext::_build_canonical_action_ir_events("Top", "return(1)", [{ raw => "return(1)", args => { label => "Top" }, contract_id => "return_a", ir_node => "RETURN" }]);'
+      . 'my $diag = LinkedSpec::RuleIR::EmitContext::_build_canonical_action_ir_events("Top", "return(1)", [{ raw => "return(1)", args => { label => "Top" }, contract_id => "return_general", ir_node => "RETURN" }]);'
       . 'print ref($diag) eq "HASH" ? "__CANONICAL_EVENTS_DIAG_HASH__\n" : "__CANONICAL_EVENTS_DIAG_OTHER__\n";'
       . 'print exists($INC{"LinkedSpec/ActionIR/CanonicalEvents.pm"}) ? "__CANONICAL_EVENTS_AFTER_BUILD__\n" : "__CANONICAL_EVENTS_STILL_UNLOADED__\n";'
       . 'print ref($diag->{canonical_action_ir_nodes}) eq "ARRAY" && @{$diag->{canonical_action_ir_nodes}} == 1 && $diag->{canonical_action_ir_nodes}[0] eq "RETURN" ? "__CANONICAL_EVENTS_ARGS_OK__\n" : "__CANONICAL_EVENTS_ARGS_BAD__\n";'
@@ -12861,8 +12812,8 @@ subtest 'emit_context_require_avoids_diagnostics_load_until_diag_helper' => sub 
 require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/Diagnostics.pm"}) ? "__DIAGNOSTICS_EAGER__\n" : "__DIAGNOSTICS_STILL_LAZY__\n";
 my $diag = LinkedSpec::RuleIR::EmitContext::_find_unresolved_action_helpers(
-    "return_a(1); return_a(1)",
-    [{ id => "return_a", diag_name => "return_a", unresolved_pattern => qr/\breturn_a\s*\(/ }],
+    "unknown_diag_helper(1); unknown_diag_helper(1)",
+    [{ id => "unknown_diag_helper", diag_name => "unknown_diag_helper", unresolved_pattern => qr/\bunknown_diag_helper\s*\(/ }],
 );
 print ref($diag) eq "HASH" ? "__DIAGNOSTICS_HASH__\n" : "__DIAGNOSTICS_OTHER__\n";
 print exists($INC{"LinkedSpec/ActionIR/Diagnostics.pm"}) ? "__DIAGNOSTICS_AFTER_HELPER__\n" : "__DIAGNOSTICS_STILL_UNLOADED__\n";
@@ -12936,11 +12887,10 @@ subtest 'emit_context_require_avoids_contracts_load_until_contract_helper' => su
 require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/Contracts.pm"}) ? "__CONTRACTS_EAGER__\n" : "__CONTRACTS_STILL_LAZY__\n";
 my $contracts = LinkedSpec::RuleIR::EmitContext::_build_action_lowering_contracts("Top");
-my ($declare_contract) = grep { $_->{id} eq "declare_typed" } @{$contracts || []};
-my $declare_output = $declare_contract ? $declare_contract->{lower}->("declare(array, items)") : undef;
+my ($set_contract) = grep { $_->{id} eq "set_value" } @{$contracts || []};
 print ref($contracts) eq "ARRAY" ? "__CONTRACTS_ARRAY__\n" : "__CONTRACTS_OTHER__\n";
 print exists($INC{"LinkedSpec/ActionIR/Contracts.pm"}) ? "__CONTRACTS_AFTER_HELPER__\n" : "__CONTRACTS_STILL_UNLOADED__\n";
-if (defined($declare_output) && $declare_output eq q{do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare"; undef }}) {
+if (ref($set_contract) eq "HASH" && ref($set_contract->{lower}) eq "CODE") {
     print "__CONTRACTS_PAYLOAD_OK__\n";
 } else {
     print "__CONTRACTS_PAYLOAD_BAD__\n";
@@ -12951,7 +12901,7 @@ PERL
     like($out, qr/__CONTRACTS_STILL_LAZY__/, 'require EmitContext keeps Contracts unloaded');
     like($out, qr/__CONTRACTS_ARRAY__/, 'contract helper still returns a contract array after lazy Contracts loading');
     like($out, qr/__CONTRACTS_AFTER_HELPER__/, 'contract helper lazy-loads Contracts on demand');
-    like($out, qr/__CONTRACTS_PAYLOAD_OK__/, 'contract helper preserves declare_typed retired diagnostics after lazy Contracts loading');
+    like($out, qr/__CONTRACTS_PAYLOAD_OK__/, 'contract helper preserves current set_value contract after lazy Contracts loading');
     is($err, '', 'EmitContext require/contracts subprocess does not emit stderr');
 };
 subtest 'emit_context_require_avoids_rewrite_pipeline_load_until_rewrite_helper' => sub {
@@ -13107,18 +13057,17 @@ PERL
     like($out, qr/__METHOD_LOWERING_PAYLOAD_OK__/, 'method-lowering helpers preserve return-general and return-undef lowering after lazy MethodLowering loading');
     is($err, '', 'EmitContext require/method-lowering subprocess does not emit stderr');
 };
-subtest 'emit_context_require_avoids_declare_method_load_until_declare_helper' => sub {
+subtest 'emit_context_require_avoids_declare_method_load_until_assign_helper' => sub {
     plan tests => 7;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
 require LinkedSpec::RuleIR::EmitContext;
 print exists($INC{"LinkedSpec/ActionIR/DeclareMethod.pm"}) ? "__DECLARE_METHOD_EAGER__\n" : "__DECLARE_METHOD_STILL_LAZY__\n";
-my $declare_stmt = LinkedSpec::RuleIR::EmitContext::_lower_declare_method_statement("declare(array, items)");
 my $assign_stmt = LinkedSpec::RuleIR::EmitContext::_lower_assign_method_statement("set(retv, foo)");
-print defined($declare_stmt) && defined($assign_stmt) ? "__DECLARE_METHOD_RESULT_OK__\n" : "__DECLARE_METHOD_RESULT_BAD__\n";
+print defined($assign_stmt) ? "__DECLARE_METHOD_RESULT_OK__\n" : "__DECLARE_METHOD_RESULT_BAD__\n";
 print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/DeclareMethod.pm"}) ? "__DECLARE_METHOD_AFTER_HELPER__\n" : "__DECLARE_METHOD_STILL_UNLOADED__\n";
-if (defined($declare_stmt) && $declare_stmt eq q{do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare"; undef }} && defined($assign_stmt) && $assign_stmt eq "\$retv = \$foo") {
+if (defined($assign_stmt) && $assign_stmt eq "\$retv = \$foo") {
     print "__DECLARE_METHOD_PAYLOAD_OK__\n";
 } else {
     print "__DECLARE_METHOD_PAYLOAD_BAD__\n";
@@ -13127,20 +13076,20 @@ PERL
 
     is($exit_code, 0, 'EmitContext require/declare-method subprocess exits cleanly') or diag($err || $out);
         like($out, qr/__DECLARE_METHOD_STILL_LAZY__/, 'require EmitContext keeps DeclareMethod unloaded');
-    like($out, qr/__DECLARE_METHOD_RESULT_OK__/, 'declare-method helpers still return lowered output after lazy DeclareMethod loading');
-    like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'declare-method helpers lazy-load EmitContext on demand');
-    like($out, qr/__DECLARE_METHOD_AFTER_HELPER__/, 'declare-method helpers lazy-load DeclareMethod on demand through EmitContext');
-    like($out, qr/__DECLARE_METHOD_PAYLOAD_OK__/, 'declare-method helpers preserve retired declare diagnostics and assign-method lowering after lazy DeclareMethod loading');
+    like($out, qr/__DECLARE_METHOD_RESULT_OK__/, 'assign-method helper still returns lowered output after lazy DeclareMethod loading');
+    like($out, qr/__EMIT_CONTEXT_AFTER_HELPER__/, 'assign-method helper lazy-loads EmitContext on demand');
+    like($out, qr/__DECLARE_METHOD_AFTER_HELPER__/, 'assign-method helper lazy-loads DeclareMethod on demand through EmitContext');
+    like($out, qr/__DECLARE_METHOD_PAYLOAD_OK__/, 'assign-method helper preserves current set lowering after lazy DeclareMethod loading');
     is($err, '', 'EmitContext require/declare-method subprocess does not emit stderr');
 };
 subtest 'emit_context_dep_builders_avoid_method_expr_prefetch' => sub {
     plan tests => 6;
 
-    my ($declare_stmt, $events, $ok, $err);
+    my ($assign_stmt, $events, $ok, $err);
     $ok = eval {
         no warnings 'redefine';
         local *LinkedSpec::RuleIR::EmitContext::_require_method_expr_pkg = sub { die "__UNEXPECTED_EMIT_CONTEXT_REQUIRE_METHODEXPR__\n" };
-        $declare_stmt = LinkedSpec::RuleIR::EmitContext::_lower_declare_method_statement('declare(array, items)');
+        $assign_stmt = LinkedSpec::RuleIR::EmitContext::_lower_assign_method_statement('set(retv, foo)');
         $events = LinkedSpec::RuleIR::EmitContext::_scan_contract_ir_events(
             { id => 'set_value' },
             'set(retv, foo)',
@@ -13149,9 +13098,9 @@ subtest 'emit_context_dep_builders_avoid_method_expr_prefetch' => sub {
     };
     $err = $@;
 
-    ok($ok, 'declare/scanner dep-builder paths no longer prefetch MethodExpr through EmitContext') or diag($err);
+    ok($ok, 'assign/scanner dep-builder paths no longer prefetch MethodExpr through EmitContext') or diag($err);
     is($err, '', 'removed EmitContext MethodExpr prefetch seam is not touched');
-    is($declare_stmt, 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare"; undef }', 'declare-method lowering emits retired diagnostics after owner-side MethodExpr dep loading');
+    is($assign_stmt, '$retv = $foo', 'assign-method lowering works after owner-side MethodExpr dep loading');
     is(ref($events), 'ARRAY', 'scanner lowering path still returns an event array after owner-side MethodExpr dep loading');
     is(scalar(@{$events || []}), 1, 'scanner lowering path still finds one set-value event');
     is_deeply($events->[0], {
@@ -13199,7 +13148,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'Contracts',
             module      => 'LinkedSpec::ActionIR::Contracts',
-            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_assign_method_statement _lower_scalar_assignment_operator_statement _lower_array_append_operator_statement _lower_array_end_mutation_method_statement _lower_hash_index_assignment_operator_statement _lower_set_key_statement _lower_push_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_while_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_return_undef_statement _lower_declare_method_statement)],
+            callbacks   => [qw(_lower_method_value_expr _lower_return_general_statement _lower_assign_method_statement _lower_scalar_assignment_operator_statement _lower_array_append_operator_statement _lower_array_end_mutation_method_statement _lower_hash_index_assignment_operator_statement _lower_set_key_statement _lower_push_statement _lower_regex_subst_statement _lower_array_pipeline_expr _lower_if_flow_statement _lower_elseif_flow_statement _lower_else_flow_statement _lower_endif_flow_statement _lower_while_flow_statement _lower_switch_flow_statement _lower_case_flow_statement _lower_default_flow_statement _lower_endcase_flow_statement _lower_endswitch_flow_statement _lower_say_statement _lower_print_statement _lower_print_each_statement _lower_return_undef_statement)],
             sample_key  => 'lower_return_general_statement',
             sample_name => '_lower_return_general_statement',
         },
@@ -15359,33 +15308,6 @@ SPEC
         'typed slot/container lowering reuses the expected scalar/hash/array Perl shapes');
 };
 
-subtest 'short_container_aliases_are_retired_as_unresolved_helpers' => sub {
-    plan tests => 7;
-
-    for my $case (
-        ['s(foo)', 's'],
-        ['a("A", "B")', 'a'],
-        ['h("kind", "node")', 'h'],
-    ) {
-        my ($expr, $helper) = @$case;
-        like(
-            LinkedSpec::call_spec_handler_subst('Top', $expr),
-            qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:\Q$helper\E/,
-            "$expr lowers to the retired-helper sentinel"
-        );
-    }
-
-    my $spec = <<'SPEC';
-Top::
-LX { s(foo); a("A"); h("k", "v") }
-SPEC
-    my $d = LinkedSpec::Get(\$spec, return_descriptor => 1);
-    ok(ref($d) eq 'HASH', 'descriptor builds for retired short-wrapper aliases');
-    my $meta = $d->{spec}{Top}{meta}{action_rewriter};
-    is($meta->{raw_perl_dependency_count}, 0, 'retired aliases do not fall back to raw Perl');
-    is_deeply($meta->{unresolved_helpers}, [qw(a h s)], 'retired aliases are reported as unresolved helpers');
-    ok(!$meta->{language_agnostic_action_ir_ready}, 'retired aliases block language-agnostic ActionIR readiness');
-};
 subtest 'entry_length_helper_reads_rule_entry_match_width' => sub {
     plan tests => 5;
 
@@ -15833,43 +15755,8 @@ SPEC
     );
     ok(!defined($runtime_ctx{last_error}), 'mark_exists(name) flow-branch parse leaves runtime_ctx last_error clear on success');
 };
-subtest 'emit_context_retires_typed_declare_methods_and_aliases' => sub {
-    plan tests => 13;
-
-    my $diag = sub {
-        my ($name) = @_;
-        return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:'.$name.'"; undef }';
-    };
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', 'declare(array, items, captures)'),
-        $diag->('declare'),
-        'typed declare(type, ...) is retired with an explicit diagnostic'
-    );
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', 'declare_a(Top, items, captures)'),
-        $diag->('declare_a'),
-        'declare_a alias is retired with an explicit diagnostic'
-    );
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', 'declare_s(Top, flag)'),
-        $diag->('declare_s'),
-        'declare_s alias is retired with an explicit diagnostic'
-    );
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', 'declare_h(Top, by_name)'),
-        $diag->('declare_h'),
-        'declare_h alias is retired with an explicit diagnostic'
-    );
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', 'declare_array(Top, parts=array(a, b))'),
-        $diag->('declare_array'),
-        'declare_array alias is retired with an explicit diagnostic'
-    );
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', 'declare_hash(Top, by_name=hash("k1", v1, "k2", v2))'),
-        $diag->('declare_hash'),
-        'declare_hash alias is retired with an explicit diagnostic'
-    );
+subtest 'emit_context_lowers_current_setup_methods_without_declaration_helpers' => sub {
+    plan tests => 7;
 
     my $spec_content = <<'SPEC';
 Top:: I.set(array(items), array()).set(array(captures), array(seed)).set(flag, or(on, off)).set(hash(by_name), hash("k", v))
@@ -16683,7 +16570,7 @@ subtest 'method_like_collection_hash_pipeline_forms_lower_equivalently' => sub {
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(array(IMATCH_LIST))), /^A/)))))'),
         'return ["semantic_annotation", {"items" => [@IMATCH_LIST = grep { $_ =~ /^A/ } do { my %seen; grep { !$seen{$_}++ } map { uc($_) } @IMATCH_LIST }]}]',
-        'return_array accepts hash payloads with nested collection-valued array-pipeline composition'
+        'return(array(...)) accepts hash payloads with nested collection-valued array-pipeline composition'
     );
 
     my $fluent_spec = <<'SPEC';
@@ -17091,12 +16978,12 @@ subtest 'method_like_fluent_and_structured_action_inline_composite_switch_lower_
 
     my $fluent_spec = <<'SPEC';
 Top::&
- /a/ -> Top .switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef()))
+ /a/ -> Top .switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return(array("semantic_annotation", hash("items", array(events))))), default(say("miss"), return_undef()))
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
- /a/ -> Top { switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
+ /a/ -> Top { switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return(array("semantic_annotation", hash("items", array(events))))), default(say("miss"), return_undef())) }
 SPEC
 
     my $fluent_descr = LinkedSpec::Get(\$fluent_spec, return_descriptor => 1);
@@ -17134,13 +17021,13 @@ subtest 'method_like_fluent_and_structured_lifecycle_inline_composite_switch_low
 
     my $fluent_spec = <<'SPEC';
 Top::&
-LX.switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef()))
+LX.switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return(array("semantic_annotation", hash("items", array(events))))), default(say("miss"), return_undef()))
  /a/ -> Top { return(1) }
 SPEC
 
     my $block_spec = <<'SPEC';
 Top::&
-LX { switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
+LX { switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return(array("semantic_annotation", hash("items", array(events))))), default(say("miss"), return_undef())) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -17179,7 +17066,7 @@ subtest 'method_like_action_inline_composite_switch_branch_blocks_lower_equivale
 
     my $list_spec = <<'SPEC';
 Top::&
- /a/ -> Top { switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
+ /a/ -> Top { switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return(array("semantic_annotation", hash("items", array(events))))), default(say("miss"), return_undef())) }
 SPEC
 
     my $block_spec = <<'SPEC';
@@ -17190,7 +17077,7 @@ Top::&
     case("|", {
       set(array(events), array())
       push(array(events), hash("items", array(IMATCH_LIST)))
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     }),
     default({
       say("miss")
@@ -17235,7 +17122,7 @@ subtest 'method_like_lifecycle_inline_composite_switch_branch_blocks_lower_equiv
 
     my $list_spec = <<'SPEC';
 Top::&
-LX { switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events)))), default(say("miss"), return_undef())) }
+LX { switch(op, case("|", set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return(array("semantic_annotation", hash("items", array(events))))), default(say("miss"), return_undef())) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -17247,7 +17134,7 @@ LX {
     case("|", {
       set(array(events), array())
       push(array(events), hash("items", array(IMATCH_LIST)))
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     }),
     default({
       say("miss")
@@ -17573,7 +17460,7 @@ subtest 'method_like_action_inline_composite_if_branch_blocks_lower_equivalently
 
     my $list_spec = <<'SPEC';
 Top::&
- /a/ -> Top { if(on, set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events))), elseif(alt_on, say("alt"), return_undef()), else(return_undef())) }
+ /a/ -> Top { if(on, set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return(array("semantic_annotation", hash("items", array(events)))), elseif(alt_on, say("alt"), return_undef()), else(return_undef())) }
 SPEC
 
     my $block_spec = <<'SPEC';
@@ -17584,7 +17471,7 @@ Top::&
     {
       set(array(events), array())
       push(array(events), hash("items", array(IMATCH_LIST)))
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     },
     elseif(alt_on, {
       say("alt")
@@ -17633,7 +17520,7 @@ subtest 'method_like_lifecycle_inline_composite_if_branch_blocks_lower_equivalen
 
     my $list_spec = <<'SPEC';
 Top::&
-LX { if(on, set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return_array(semantic_annotation, hash("items", array(events))), elseif(alt_on, say("alt"), return_undef()), else(return_undef())) }
+LX { if(on, set(array(events), array()), push(array(events), hash("items", array(IMATCH_LIST))), return(array("semantic_annotation", hash("items", array(events)))), elseif(alt_on, say("alt"), return_undef()), else(return_undef())) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -17645,7 +17532,7 @@ LX {
     {
       set(array(events), array())
       push(array(events), hash("items", array(IMATCH_LIST)))
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     },
     elseif(alt_on, {
       say("alt")
@@ -17701,7 +17588,7 @@ Top::&
     {
       set(array(events), array())
       push(array(events), hash("items", array(IMATCH_LIST)))
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     },
     elseif(alt_on, {
       say("alt")
@@ -17720,7 +17607,7 @@ Top::&
   if(on) {
     set(array(events), array())
     push(array(events), hash("items", array(IMATCH_LIST)))
-    return_array(semantic_annotation, hash("items", array(events)))
+    return(array("semantic_annotation", hash("items", array(events))))
   }
   elseif(alt_on) {
     say("alt")
@@ -17774,7 +17661,7 @@ LX {
     {
       set(array(events), array())
       push(array(events), hash("items", array(IMATCH_LIST)))
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     },
     elseif(alt_on, {
       say("alt")
@@ -17794,7 +17681,7 @@ LX {
   if(on) {
     set(array(events), array())
     push(array(events), hash("items", array(IMATCH_LIST)))
-    return_array(semantic_annotation, hash("items", array(events)))
+    return(array("semantic_annotation", hash("items", array(events))))
   }
   elseif(alt_on) {
     say("alt")
@@ -20031,13 +19918,13 @@ subtest 'method_like_remaining_lifecycle_inline_composite_switch_lower_equivalen
 
             my $fluent_spec = <<"SPEC";
 Top::&
-$tag.switch(op, case("|", set(array(events), array()), return_array(semantic_annotation, hash("items", array(events)))), default(return_undef()))
+$tag.switch(op, case("|", set(array(events), array()), return(array("semantic_annotation", hash("items", array(events))))), default(return_undef()))
  /a/ -> Top { return(1) }
 SPEC
 
             my $block_spec = <<"SPEC";
 Top::&
-$tag { switch(op, case("|", set(array(events), array()), return_array(semantic_annotation, hash("items", array(events)))), default(return_undef())) }
+$tag { switch(op, case("|", set(array(events), array()), return(array("semantic_annotation", hash("items", array(events))))), default(return_undef())) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -20159,7 +20046,7 @@ subtest 'method_like_remaining_lifecycle_inline_composite_switch_branch_blocks_l
 
             my $list_spec = <<"SPEC";
 Top::&
-$tag { switch(op, case("|", set(array(events), array()), return_array(semantic_annotation, hash("items", array(events)))), default(return_undef())) }
+$tag { switch(op, case("|", set(array(events), array()), return(array("semantic_annotation", hash("items", array(events))))), default(return_undef())) }
  /a/ -> Top { return(1) }
 SPEC
 
@@ -20170,7 +20057,7 @@ $tag {
     op,
     case("|", {
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     }),
     default({
       return_undef()
@@ -21970,7 +21857,7 @@ Top::&
     op,
     case("|") {
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     },
     default {
       say("miss")
@@ -21986,7 +21873,7 @@ Top::&
   switch(op) {
     case("|") {
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     }
     default {
       say("miss")
@@ -22053,7 +21940,7 @@ $tag {
     op,
     case("|") {
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     },
     default {
       return_undef()
@@ -22069,7 +21956,7 @@ $tag {
   switch(op) {
     case("|") {
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     }
     default {
       return_undef()
@@ -22115,7 +22002,7 @@ Top::&
   switch(op) {
     case("|") {
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     }
     default {
       say("miss")
@@ -22131,7 +22018,7 @@ Top::&
   switch(op) {
     case("|")
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     default
       say("miss")
       return_undef()
@@ -22195,7 +22082,7 @@ $tag {
   switch(op) {
     case("|") {
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     }
     default {
       return_undef()
@@ -22211,7 +22098,7 @@ $tag {
   switch(op) {
     case("|")
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     default
       return_undef()
   }
@@ -22255,7 +22142,7 @@ Top::&
   switch(op) {
     case("|")
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     default
       say("miss")
       return_undef()
@@ -22268,7 +22155,7 @@ Top::&
  /a/ -> Top.switch(op) {
   case("|")
     set(array(events), array())
-    return_array(semantic_annotation, hash("items", array(events)))
+    return(array("semantic_annotation", hash("items", array(events))))
   default
     say("miss")
     return_undef()
@@ -22322,7 +22209,7 @@ $tag {
   switch(op) {
     case("|")
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     default
       return_undef()
   }
@@ -22335,7 +22222,7 @@ Top::&
 $tag.switch(op) {
   case("|")
     set(array(events), array())
-    return_array(semantic_annotation, hash("items", array(events)))
+    return(array("semantic_annotation", hash("items", array(events))))
   default
     return_undef()
  }
@@ -22378,7 +22265,7 @@ Top::&
   switch(op) {
     case("|") {
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     }
     case("&") {
       say("amp")
@@ -22397,7 +22284,7 @@ Top::&
   switch(op) {
     case("|") {
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     }
     case("&")
       say("amp")
@@ -22465,7 +22352,7 @@ $tag {
   switch(op) {
     case("|") {
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     }
     case("&") {
       return_undef()
@@ -22484,7 +22371,7 @@ $tag {
   switch(op) {
     case("|") {
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     }
     case("&")
       return_undef()
@@ -22532,7 +22419,7 @@ Top::&
   switch(op) {
     case("|") {
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     }
     case("&")
       say("amp")
@@ -22549,7 +22436,7 @@ Top::&
  /a/ -> Top.switch(op) {
   case("|") {
     set(array(events), array())
-    return_array(semantic_annotation, hash("items", array(events)))
+    return(array("semantic_annotation", hash("items", array(events))))
   }
   case("&")
     say("amp")
@@ -22612,7 +22499,7 @@ $tag {
   switch(op) {
     case("|") {
       set(array(events), array())
-      return_array(semantic_annotation, hash("items", array(events)))
+      return(array("semantic_annotation", hash("items", array(events))))
     }
     case("&")
       return_undef()
@@ -22629,7 +22516,7 @@ Top::&
 $tag.switch(op) {
   case("|") {
     set(array(events), array())
-    return_array(semantic_annotation, hash("items", array(events)))
+    return(array("semantic_annotation", hash("items", array(events))))
   }
   case("&")
     return_undef()
@@ -39128,7 +39015,7 @@ Top::&
  /a/ -> Top .if(on).push(pipe_operator, rule).elseif(alt_on).print("warn").else().say("Error: no context").return_undef().endif()
 
 pipe_operator:
- /a/ -> pipe_operator { return_a(pipe_operator) }
+ /a/ -> pipe_operator { return(array(pipe_operator)) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -39441,7 +39328,7 @@ Top::&
  /a/ -> Top .switch(op, case("|", push(pipe_operator, rule)), default(return_undef()))
 
 pipe_operator:
- /a/ -> pipe_operator { return_a(pipe_operator) }
+ /a/ -> pipe_operator { return(array(pipe_operator)) }
 SPEC
     my $composite_descr = LinkedSpec::Get(\$composite_spec_content, return_descriptor => 1);
     ok(defined($composite_descr) && ref($composite_descr) eq 'HASH', 'descriptor build succeeds for inline composite switch(case/default) method form');
@@ -39466,7 +39353,7 @@ Top::&
  /a/ -> Top .switch(op).case("|").push(pipe_operator, rule).case("&").push(pipe_operator, rule2).default().say("Error").return_undef().endswitch()
 
 pipe_operator:
- /a/ -> pipe_operator { return_a(pipe_operator) }
+ /a/ -> pipe_operator { return(array(pipe_operator)) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -39648,7 +39535,7 @@ Top::&
  /\|/ -> Top .if(on).push(pipe_operator, rule).else().say("Error: '|' operator occurrence with no container rule context").return_undef().endif()
 
 pipe_operator:
- /\|/ -> pipe_operator { return_a(pipe_operator) }
+ /\|/ -> pipe_operator { return(array(pipe_operator)) }
 SPEC
 
     my $descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
@@ -39919,7 +39806,7 @@ subtest 'emit_context_canonical_ir_lowering_preserves_helper_and_raw_behavior' =
     );
 };
 subtest 'emit_context_reports_unresolved_helpers_in_rule_meta' => sub {
-    plan tests => 8;
+    plan tests => 6;
 
     my $spec_content = <<'SPEC';
 Top::&
@@ -39935,9 +39822,7 @@ SPEC
 
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
     is($meta->{unresolved_helper_count}, 1, 'Top unresolved helper count captures unrewritten helper forms');
-    ok(!(grep { $_ eq 'return_a' } @{$meta->{unresolved_helpers}}), 'Top unresolved helpers no longer include the retired return_a form');
     ok(grep { $_ eq 'return' } @{$meta->{unresolved_helpers}}, 'Top unresolved helpers include return label-mismatch form');
-    is($meta->{unresolved_helper_hits}{return_a}, undef, 'retired return_a is no longer tracked as an unresolved helper hit');
     is($meta->{unresolved_helper_hits}{return}, 1, 'Top return unresolved helper hit count is tracked');
     is($descr->{spec}{Leaf}{meta}{action_rewriter}{unresolved_helper_count}, 0, 'Leaf rule has no unresolved helpers');
 };
@@ -41586,14 +41471,13 @@ subtest 'ebnf_helper_flow_eliminates_compatibility_surface' => sub {
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'ebnf exposes no top blocked rule after compatibility cleanup');
 };
 subtest 'ebnf_spec_prefers_canonical_container_wrappers_in_core_method_dsl_band' => sub {
-    plan tests => 5;
+    plan tests => 4;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'ebnf.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'ebnf source spec text is available for wrapper migration inspection');
     like($source_content, qr/\.if\(on\)/, 'ebnf core method-DSL band now prefers bare on in fluent guard checks');
-    unlike($source_content, qr/\.if\(s\(on\)\)/, 'ebnf fluent guard checks no longer use retired s(on) aliases in the migrated band');
     like($source_content, qr/I\.return\(array\("rule", entry_group\(0\)\)\)/, 'ebnf grammar_rule token reader now uses the canonical array constructor');
     like($source_content, qr/push\(array\(rules\), array\(rule_header, flat_array\(rule\)\)\)/, 'ebnf grammar_file accumulation band now uses push(...) plus bare rule_header and array(rule) wrappers');
 };
@@ -42171,37 +42055,34 @@ subtest 'vhdl_helper_returns_prefer_entry_groups' => sub {
     unlike($source_content, qr/return\(array\("\?type_declaration:", flat_array\(IMATCH_LIST\), scalar\(type_definition\)\)\)/, 'vhdl type_declaration no longer uses flat_array(IMATCH_LIST)');
     unlike($source_content, qr/return\(array\("\?process_statement:", flat_array\(IMATCH_LIST\), array_(?:values|copy)\(array\(process_statement\)\), scalar\(process_statement_part\)\)\)/, 'vhdl process_statement no longer uses flat_array(IMATCH_LIST)');
 };
-subtest 'vhdl_legacy_return_aliases_prefer_explicit_payloads' => sub {
-    plan tests => 11;
+subtest 'vhdl_explicit_payload_returns' => sub {
+    plan tests => 10;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'vhdl.spec');
     my $source_content = slurp($source_spec);
 
-    ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for legacy return-alias inspection');
-    unlike($source_content, qr/\breturn_(?:a|m|ma)\b/, 'vhdl source no longer uses legacy tagged return helper aliases');
+    ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for explicit return-payload inspection');
     unlike($source_content, qr/flat_array\(IMATCH_LIST\)/, 'vhdl source no longer uses raw IMATCH_LIST flattening for migrated helper returns');
-    like($source_content, qr/dquote_string:\s+.*?I\.return\(array\("\?dquote_string:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl dquote_string now spells return_m intent as an explicit entry_groups payload');
-    like($source_content, qr/library_clause:\s+.*?I\.return\(array\("\?library_clause:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl library_clause now spells return_m intent as an explicit entry_groups payload');
-    like($source_content, qr/-> generate_statement\[1\]\s+\.return\(array\("\?generate_statement:", flat_array\(entry_groups\(\)\), copy\(array\(generate_statement\)\)\)\)/, 'vhdl generate_statement now spells return_ma intent as an explicit entry_groups plus accumulator payload');
-    like($source_content, qr/-> generic_map_aspect\[1\]\s+\.return\(array\("\?generic_map_aspect:", copy\(array\(generic_map_aspect\)\)\)\)/, 'vhdl generic_map_aspect now spells return_a intent as an explicit accumulator payload');
-    like($source_content, qr/-> port_map_aspect\[1\]\s+\.return\(array\("\?port_map_aspect:", copy\(array\(port_map_aspect\)\)\)\)/, 'vhdl port_map_aspect now spells return_a intent as an explicit accumulator payload');
-    like($source_content, qr/association_element: .*?I\.return\(array\("\?association_element:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl association_element now spells return_m intent as an explicit entry_groups payload');
-    like($source_content, qr/-> component_declaration\[1\]\s+\.return\(array\("\?component_declaration:", flat_array\(entry_groups\(\)\), copy\(array\(component_declaration\)\)\)\)/, 'vhdl component_declaration now spells return_ma intent as an explicit entry_groups plus accumulator payload');
-    like($source_content, qr/-> configuration_declaration\[1\]\s+\.return\(array\("\?configuration_declaration:", flat_array\(entry_groups\(\)\), copy\(array\(configuration_declaration\)\)\)\)/, 'vhdl configuration_declaration now spells return_ma intent as an explicit entry_groups plus accumulator payload');
+    like($source_content, qr/dquote_string:\s+.*?I\.return\(array\("\?dquote_string:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl dquote_string uses an explicit entry_groups payload');
+    like($source_content, qr/library_clause:\s+.*?I\.return\(array\("\?library_clause:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl library_clause uses an explicit entry_groups payload');
+    like($source_content, qr/-> generate_statement\[1\]\s+\.return\(array\("\?generate_statement:", flat_array\(entry_groups\(\)\), copy\(array\(generate_statement\)\)\)\)/, 'vhdl generate_statement uses explicit entry_groups plus accumulator payload');
+    like($source_content, qr/-> generic_map_aspect\[1\]\s+\.return\(array\("\?generic_map_aspect:", copy\(array\(generic_map_aspect\)\)\)\)/, 'vhdl generic_map_aspect uses an explicit accumulator payload');
+    like($source_content, qr/-> port_map_aspect\[1\]\s+\.return\(array\("\?port_map_aspect:", copy\(array\(port_map_aspect\)\)\)\)/, 'vhdl port_map_aspect uses an explicit accumulator payload');
+    like($source_content, qr/association_element: .*?I\.return\(array\("\?association_element:", flat_array\(entry_groups\(\)\)\)\)/, 'vhdl association_element uses an explicit entry_groups payload');
+    like($source_content, qr/-> component_declaration\[1\]\s+\.return\(array\("\?component_declaration:", flat_array\(entry_groups\(\)\), copy\(array\(component_declaration\)\)\)\)/, 'vhdl component_declaration uses explicit entry_groups plus accumulator payload');
+    like($source_content, qr/-> configuration_declaration\[1\]\s+\.return\(array\("\?configuration_declaration:", flat_array\(entry_groups\(\)\), copy\(array\(configuration_declaration\)\)\)\)/, 'vhdl configuration_declaration uses explicit entry_groups plus accumulator payload');
 };
 subtest 'vhdl_lowercase_group_returns_prefer_entry_group_helpers' => sub {
-    plan tests => 7;
+    plan tests => 5;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'vhdl.spec');
     my $source_content = slurp($source_spec);
 
     ok(defined($source_content) && length($source_content), 'vhdl source spec text is available for lowercase helper-return inspection');
-    ok(index($source_content, "set(array(entity_header_parts), entry_groups());\n   lowercase_each(array(entity_header_parts));\n   return(array(\"?entity_declaration:\", flat_array(entity_header_parts), copy(array(entity_declaration))))") >= 0, 'vhdl entity_declaration now prefers set, entry_groups(), lowercase_each(), and copy while preserving the tagged return_a-style shape');
+    ok(index($source_content, "set(array(entity_header_parts), entry_groups());\n   lowercase_each(array(entity_header_parts));\n   return(array(\"?entity_declaration:\", flat_array(entity_header_parts), copy(array(entity_declaration))))") >= 0, 'vhdl entity_declaration now prefers set, entry_groups(), lowercase_each(), and copy for the tagged accumulator shape');
     ok(index($source_content, "set(array(architecture_header_parts), entry_groups());\n   lowercase_each(array(architecture_header_parts));\n   return(array(flat_array(architecture_header_parts), copy(array(architecture_body)), call(architecture_statement_part)))") >= 0, 'vhdl architecture_body now prefers set, entry_groups(), lowercase_each(), and copy for the lowercase header return');
-    ok(index($source_content, "set(array(instantiation_parts), entry_groups());\n   lowercase_each(array(instantiation_parts));\n   return(array(\"?component_instantiation_statement:\", flat_array(instantiation_parts), copy(array(component_instantiation_statement))))") >= 0, 'vhdl component_instantiation_statement now prefers set, entry_groups(), lowercase_each(), and copy while preserving the tagged return_a-style shape');
-    ok(index($source_content, '.return_a(map {lc} @IMATCH_LIST)') < 0, 'vhdl entity_declaration no longer uses raw map {lc} @IMATCH_LIST');
+    ok(index($source_content, "set(array(instantiation_parts), entry_groups());\n   lowercase_each(array(instantiation_parts));\n   return(array(\"?component_instantiation_statement:\", flat_array(instantiation_parts), copy(array(component_instantiation_statement))))") >= 0, 'vhdl component_instantiation_statement now prefers set, entry_groups(), lowercase_each(), and copy for the tagged accumulator shape');
     ok(index($source_content, '.return ((map {lc} @IMATCH_LIST), \@architecture_body, call(architecture_statement_part))') < 0, 'vhdl architecture_body no longer uses raw map {lc} @IMATCH_LIST in its architecture header return');
-    ok(index($source_content, '.return_a (map {lc} @IMATCH_LIST)') < 0, 'vhdl component_instantiation_statement no longer uses raw map {lc} @IMATCH_LIST');
 };
 subtest 'simenv_begin_end_blocks_method_flow_is_language_agnostic_ready' => sub {
     plan tests => 10;
@@ -42334,7 +42215,7 @@ subtest 'bnf_debug_print_helper_flow_eliminates_raw_fallback' => sub {
     is($descr->{meta}{action_rewriter_migration}{compatibility_surface_rule_count}, 0, 'BNF descriptor exposes no compatibility-surface rules after helper return migration');
 };
 subtest 'bnf_token_readers_prefer_entry_text' => sub {
-    plan tests => 8;
+    plan tests => 7;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'BNF.spec');
     my $source_content = slurp($source_spec);
@@ -42344,7 +42225,6 @@ subtest 'bnf_token_readers_prefer_entry_text' => sub {
     like($source_content, qr/node:\s+.*?entry_text\(\)/s, 'BNF node now prefers entry_text() for the immediate token read');
     ok(index($source_content, 'substr(text, "^/|/$", "", go);') >= 0, 'BNF regex now prefers helperized string-pattern cleanup after entry_text()');
     like($source_content, qr/group\[1\].*?return\(1\);/s, 'BNF group completion now prefers helper-form numeric return');
-    unlike($source_content, qr/declare\(scalar,\s*text=entry_text\(\)\)/, 'BNF token readers no longer use declare(...) for entry_text() locals');
     unlike($source_content, qr/scalar\(IMATCH\)/, 'BNF migrated token readers no longer rely on :IMATCH');
     unlike($source_content, qr/group\[1\].*?return\s+1;/s, 'BNF group completion no longer uses a bare compatibility return');
 };
@@ -42622,7 +42502,7 @@ subtest 'lib_reader_entry_group_migration_preserves_runtime_output' => sub {
     ok(!defined($runtime_ctx{top_rule}) || $runtime_ctx{top_rule} eq 'lib_file', 'lib_reader entry_group migration keeps top-level parser context stable');
 };
 subtest 'lib_reader_spec_prefers_canonical_container_wrappers_in_reader_band' => sub {
-    plan tests => 9;
+    plan tests => 8;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'lib_reader.spec');
     my $source_content = slurp($source_spec);
@@ -42634,7 +42514,6 @@ subtest 'lib_reader_spec_prefers_canonical_container_wrappers_in_reader_band' =>
     like($source_content, qr/LX \{say\("GROUP <", grouptype, ">\(", groupname, "\) Has a syntax error\."\); exit_now\(1\)\}/, 'lib_reader group syntax-error path keeps the structured diagnostic and exit_now helper');
     like($source_content, qr/exit_now\(1\)/, 'lib_reader group syntax-error path now uses exit_now(1)');
     like($source_content, qr/split\(array\(value_items\), value, \/,\//, 'lib_reader cattribute splitter now uses canonical array wrapper and a bare value read');
-    unlike($source_content, qr/\.return\(a\("GROUP", s\(grouptype\), s\(groupname\), array_(?:values|copy)\(a\(group\)\)\)\)/, 'lib_reader group return no longer uses retired s()/a() aliases in the migrated band');
     unlike($source_content, qr/return\s+\\\@lib_file|\bexit\s+1\b/, 'lib_reader migrated lifecycle paths no longer use compatibility return-ref or bare exit syntax');
 };
 subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
@@ -42686,7 +42565,7 @@ subtest 'sdce_helper_flow_eliminates_raw_fallback' => sub {
     ok(!defined($summary->{language_agnostic_top_blocked_rule}), 'sdce exposes no top blocked rule after helper migration');
 };
 subtest 'sdce_spec_prefers_canonical_container_wrappers_in_split_band' => sub {
-    plan tests => 18;
+    plan tests => 17;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'sdce.spec');
     my $source_content = slurp($source_spec);
@@ -42708,7 +42587,6 @@ subtest 'sdce_spec_prefers_canonical_container_wrappers_in_split_band' => sub {
     unlike($source_content, qr/-> get_pinport\[1\]\s+\{return\(array\(flat_array\(IMATCH_LIST\), array_(?:values|copy)\(array\(pieces\)\)\)\)\}/, 'sdce get_pinport no longer uses flat_array(IMATCH_LIST) in its helper return');
     like($source_content, qr/oc_brace: .*?\{return\(capture_slice_len\(\)\)\}/, 'sdce oc_brace now prefers capture_slice_len() for brace-body width reads');
     unlike($source_content, qr/\$LSPOS - \$IPOS - 1/, 'sdce oc_brace no longer uses raw cursor arithmetic for brace-body width reads');
-    unlike($source_content, qr/assign\(a\(pieces\), a\(flat_array\(pieces\), flat_array\(segment_parts\)\)\)/, 'sdce migrated band no longer uses retired a() aliases in segment accumulation');
 };
 subtest 'ebnf_logging_annotation_prefers_explicit_capture_slice_flow' => sub {
     plan tests => 12;
@@ -42816,7 +42694,7 @@ subtest 'portmap_bare_bit_slice_classification_smoke' => sub {
     }
 };
 subtest 'portmap_spec_prefers_canonical_container_wrappers_in_bare_bit_slice_band' => sub {
-    plan tests => 11;
+    plan tests => 10;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'portmap.spec');
     my $source_content = slurp($source_spec);
@@ -42830,7 +42708,6 @@ subtest 'portmap_spec_prefers_canonical_container_wrappers_in_bare_bit_slice_ban
     like($source_content, qr/return\(array\("\?slice:", array\(flat_array\(entry_parts\)\)\)\);/, 'portmap slice classification return now uses nested canonical array wrappers');
     like($source_content, qr/return\(array\("\?bare:", array\(flat_array\(entry_parts\)\)\)\);/, 'portmap bare classification return now uses nested canonical array wrappers');
     unlike($source_content, qr/(?:^|\n)\s*(?:if|elseif)\(.*\);\s*(?:\n|$)|(?:^|\n)\s*else\(\);/m, 'portmap flow markers no longer keep redundant standalone separators');
-    unlike($source_content, qr/return\(a\("\?slice:", a\(flat_array\(entry_parts\)\)\);/, 'portmap migrated band no longer uses retired a() aliases for slice returns');
     unlike($source_content, qr/return \@portmap == 1 \? \$portmap\[0\]/, 'portmap migrated band no longer uses bare Perl ternary return syntax');
 };
 subtest 'pplugin_helper_flow_eliminates_raw_fallback' => sub {
@@ -42907,7 +42784,7 @@ PPLUGIN
     is($registry->{bar}->(), 'ok', 'PPlugin bar coderef preserves evaluated body behavior');
 };
 subtest 'pplugin_spec_prefers_canonical_container_wrappers_in_top_aggregation_band' => sub {
-    plan tests => 14;
+    plan tests => 13;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'pplugin.spec');
     my $source_content = slurp($source_spec);
@@ -42922,7 +42799,6 @@ subtest 'pplugin_spec_prefers_canonical_container_wrappers_in_top_aggregation_ba
     like($source_content, qr/^LX \{return\(hash\(flat_array\(array\(defs\)\)\)\)\}/m, 'pplugin top LX now builds the returned definition hash through helper-form hash construction');
     like($source_content, qr/subdef\[1\]\s+\{return\(array\(entry_named\(subname\), capture_slice\(\)\)\)\}/, 'pplugin subdef body now returns parsed plugin body text through capture_slice()');
     like($source_content, qr/curlyb\[1\]\s+\{return_undef\(\)\}/, 'pplugin curlyb completion now uses helper-form return_undef()');
-    unlike($source_content, qr/assign\(a\(defs\), a\(flat_array\(defs\), retv\[0\], retv\[1\]\)\)\)/, 'pplugin top aggregation no longer uses retired a() aliases in the migrated band');
     unlike($source_content, qr/return undef unless defined \$retv/, 'pplugin top aggregation no longer uses bare return-unless compatibility syntax');
     unlike($source_content, qr/^LX \{return \{\@defs\}\}/m, 'pplugin top LX no longer uses bare hashref return compatibility syntax');
     unlike($source_content, qr/curlyb\[1\]\s+\{return\}/, 'pplugin curlyb completion no longer uses bare return compatibility syntax');
@@ -43271,7 +43147,7 @@ subtest 'lispish_parenthesis_helper_flow_eliminates_raw_fallback' => sub {
     ok($meta->{language_agnostic_action_ir_ready}, 'Lispish parenthesis is language-agnostic action-IR ready');
 };
 subtest 'lispish_spec_prefers_canonical_container_wrappers_in_parenthesis_and_reader_band' => sub {
-    plan tests => 10;
+    plan tests => 9;
 
     my $source_spec = File::Spec->catfile($spec_dir, 'Lispish.spec');
     my $source_content = slurp($source_spec);
@@ -43283,7 +43159,6 @@ subtest 'lispish_spec_prefers_canonical_container_wrappers_in_parenthesis_and_re
     like($source_content, qr/I\.return\(hash\("type", "DQUOTES", "content", entry_group\(0\)\)\)/, 'Lispish token readers now use the canonical hash constructor');
     like($source_content, qr/-> parenthesis\s+\{return\(call\(parenthesis\)\)\}/, 'Lispish top child-return edge now uses helper-form return(call(...))');
     like($source_content, qr/-> parenthesis\[1\]\s+\{say\("\(Lispish\) -E- Syntax Error"\); exit_now\(1\)\}/, 'Lispish top syntax-error edge now uses exit_now(1)');
-    unlike($source_content, qr/return\(a\(s\(head\), array_(?:values|copy)\(a\(tail\)\)\)\);/, 'Lispish parenthesis return path no longer uses retired s()/a() aliases in the migrated band');
     unlike($source_content, qr/return\s+call\(parenthesis\)/, 'Lispish top child-return edge no longer uses compatibility return-call spelling');
     unlike($source_content, qr/\bexit\s+1\b/, 'Lispish top syntax-error edge no longer uses bare exit compatibility spelling');
 };
@@ -44874,10 +44749,10 @@ subtest 'top_rule_as_normal_regex_on_top_reads_own_match_with_match_family' => s
         'entry_text() on a top rule (no entering match) yields null -- the footgun the book steers away from');
 };
 
-subtest 'spec_format_terse_1_1_1_auto_existing_variables_work_without_declare' => sub {
+subtest 'spec_format_terse_1_1_1_auto_existing_variables_work_without_setup' => sub {
     # SPEC-FORMAT-TERSE.1.1.1 (ADR 0007): a working variable referenced through a typed
     # wrapper -- :NAME/array(NAME)/hash(NAME) -- needs no
-    # declare(...). The engine auto-supplies one `my $NAME`/`@NAME`/`%NAME` in the handler
+    # setup helper. The engine auto-supplies one `my $NAME`/`@NAME`/`%NAME` in the handler
     # preamble, so the variable is a PER-INVOCATION lexical, not a leaky package global
     # (generated handlers are non-strict -- KM card working-vars-no-strict-need-my-lexical).
     # Decisive proof: run the SAME parser twice IN-PROCESS -- a leaky global would accumulate
@@ -44892,30 +44767,30 @@ subtest 'spec_format_terse_1_1_1_auto_existing_variables_work_without_declare' =
         return defined($out) ? $out : ('ERR:' . ($@ // 'undef'));
     };
 
-    # (a) scalar working variable used WITHOUT declare: a per-match counter.
+    # (a) scalar working variable used without setup: a per-match counter.
     my $scalar_spec = "top:: /(\\w+)\\s*/ -> top[0] { set(count, num_add(coalesce(count, 0), 1)) }\n"
                     . "LX {return(count)}\n";
     my $sp = eval { LinkedSpec::Get(\$scalar_spec) };
-    ok(ref($sp) eq 'CODE', 'no-declare scalar working var: spec compiles to a parser')
+    ok(ref($sp) eq 'CODE', 'scalar working var without setup: spec compiles to a parser')
         or diag(normalize_error($@));
-    is($run->($sp, 'a b c'), '3', 'no-declare scalar counter returns 3 for 3 words');
+    is($run->($sp, 'a b c'), '3', 'scalar counter without setup returns 3 for 3 words');
     is($run->($sp, 'a b c'), '3', 're-running the SAME parser still returns 3 (per-invocation my, not a leaky global)');
 
-    # (b) array working variable used WITHOUT declare: a per-match accumulator.
+    # (b) array working variable used without setup: a per-match accumulator.
     my $array_spec = "top:: /(\\w+)\\s*/ -> top[0] { push(array(items), match_group(0)) }\n"
                    . "LX {return(copy(array(items)))}\n";
     my $ap = eval { LinkedSpec::Get(\$array_spec) };
-    ok(ref($ap) eq 'CODE', 'no-declare array working var: spec compiles to a parser')
+    ok(ref($ap) eq 'CODE', 'array working var without setup: spec compiles to a parser')
         or diag(normalize_error($@));
-    is($run->($ap, 'a b c'), '["a","b","c"]', 'no-declare array accumulator collects all 3 words');
+    is($run->($ap, 'a b c'), '["a","b","c"]', 'array accumulator without setup collects all 3 words');
     is($run->($ap, 'a b c'), '["a","b","c"]', 're-running the SAME parser still returns 3 items (per-invocation my, not a leaky global)');
 };
 
-subtest 'spec_format_terse_1_1_1_declare_path_stays_single_my_no_double' => sub {
+subtest 'spec_format_terse_1_1_1_setup_path_stays_single_my_no_double' => sub {
     # The auto-collector dedups against any same-sigil `my` already in the lowered handler
-    # (declare(...) or raw my), so a spec that DOES declare its working vars emits exactly
+    # (setup assignment or raw my), so a spec that initializes its working vars emits exactly
     # one `my $NAME` -- byte-identical generated source, no double declaration -- while the
-    # no-declare spec gets the auto-injected `my`.
+    # version without setup gets the auto-injected `my`.
     plan tests => 2;
     my $gen = sub {
         my ($spec) = @_;
@@ -44927,11 +44802,11 @@ subtest 'spec_format_terse_1_1_1_declare_path_stays_single_my_no_double' => sub 
     my $declared = "top:: /(\\w+)\\s*/ -> top[0] { set(count, num_add(coalesce(count, 0), 1)) }\n"
                  . "I.set(count, undef)\n"
                  . "LX {return(count)}\n";
-    (my $no_declare = $declared) =~ s/^I\.declare\(scalar, count\)\n//m;
+    (my $without_setup = $declared) =~ s/^I\.set\(count, undef\)\n//m;
     my $declared_src = $gen->($declared);
     my $n = () = ($declared_src =~ /my \$count\b/g);
-    is($n, 1, 'declared scalar var emits exactly one `my $count` (dedup against the declare; no double my)');
-    like($gen->($no_declare), qr/my \$count\b/, 'no-declare scalar var auto-supplies `my $count` in the generated preamble');
+    is($n, 1, 'setup-initialized scalar var emits exactly one `my $count`');
+    like($gen->($without_setup), qr/my \$count\b/, 'scalar var without setup auto-supplies `my $count` in the generated preamble');
 };
 
 subtest 'spec_format_terse_1_1_1_reserved_literals_are_not_auto_declared' => sub {
@@ -44956,7 +44831,7 @@ subtest 'spec_format_terse_1_2_1_bare_arg_position_auto_exists' => sub {
     # Before this leaf such a bare var lowered to the right
     # sigil'd variable but got NO `my`, leaving a leaky package global (non-strict handlers
     # -- KM card terse-bare-working-vars-engine-gaps). The DECISIVE, isolating proof is
-    # source-level: with no wrapper or declare anywhere, the engine now emits exactly one
+    # source-level: with no wrapper or setup anywhere, the engine now emits exactly one
     # preamble `my` (before the while(1) dispatch loop = per-invocation lexical, not leaky).
     # (Reading a purely-bare var back through the DSL needs a wrapper, which would itself
     # trigger the .1.1.1 wrapped path -- so isolation is proven at the generated-source level;
@@ -44995,10 +44870,10 @@ subtest 'spec_format_terse_1_2_1_bare_arg_position_auto_exists' => sub {
         'fluent .push(items) child-append target is deferred (not auto-declared in .1.2.1)');
 };
 
-subtest 'spec_format_terse_1_2_1_dedup_with_wrapped_and_declare_single_my' => sub {
+subtest 'spec_format_terse_1_2_1_dedup_with_wrapped_and_setup_single_my' => sub {
     # The Channel-1 bare-arg collection shares the same de-dup as .1.1.1: by sigil+name,
     # against the @<label> accumulator and any same-sigil `my` already in the lowered code.
-    # So a name used both bare and wrapped, or bare and declared, still emits exactly one `my`,
+    # So a name used both bare and wrapped, or bare and setup-initialized, still emits exactly one `my`,
     # and a WRAPPED target is never double-counted by the bare-arg pattern (the `\s*,` after
     # the name means a wrapped target -- name followed by `(` -- does not match path (b)).
     plan tests => 4;
@@ -45024,7 +44899,7 @@ subtest 'spec_format_terse_1_2_1_dedup_with_wrapped_and_declare_single_my' => su
                         . "I.set(count, undef)\n"
                         . "LX {return(count)}\n");
     my $n3 = () = ($declared =~ /my \$count\b/g);
-    is($n3, 1, 'set(count, undef) + bare set(count,...) dedup to exactly one `my $count`');
+    is($n3, 1, 'setup set(count, undef) + bare set(count,...) dedup to exactly one `my $count`');
 
     my $mix_array = $gen->("top:: /(\\w+)\\s*/ -> top[0] { push(items, match_group(0)) }\n"
                          . "LX {return(copy(array(items)))}\n");
@@ -45073,7 +44948,7 @@ subtest 'spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist' => sub
     # hash-typed uses still use `copy(hash(meta))` or an established hash target)
     # but previously got no preamble `my`, leaving a
     # non-strict package-global hazard. This leaf supplies the per-invocation lexical
-    # without changing wrapped/declared forms or scalar bare reads.
+    # without changing wrapped/setup forms or scalar bare reads.
     plan tests => 17;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
@@ -45219,7 +45094,7 @@ subtest 'spec_format_terse_1_2_3_3_1_scalar_source_slot_bare_reads_auto_exist' =
     my $dedup_src = $gen->("top:: -> w { set(out, count); return(count) }\n"
                          . "I.set(count, undef)\n\nw : /x/\n");
     my $dedup_count = () = ($dedup_src =~ /my \$count\b/g);
-    is($dedup_count, 1, 'bare source read + wrapped/declared count dedup to one `my $count`');
+    is($dedup_count, 1, 'bare source read + wrapped/setup count dedup to one `my $count`');
 
     my $runtime_spec = "top:: /(\\w+)\\s*/ -> top[0] { set(out, match_group(0)) }\n"
                      . "LX { return(out) }\n";
@@ -45306,7 +45181,7 @@ subtest 'spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist' => sub
         my ($sigil, $name) = @$pair;
         my $q = quotemeta($sigil.$name);
         my $n = () = ($dedup_src =~ /my $q\b/g);
-        is($n, 1, "mutation-slot bare read/target dedups declared `$sigil$name`");
+        is($n, 1, "mutation-slot bare read/target dedups setup `$sigil$name`");
     }
 
     my $runtime_spec = "top:: /(\\w+)=(\\w+)\\s*/ -> top[0] { set(key, match_group(0)); set(value, match_group(1)); items += value; set_key(meta, key, value); meta[\"last\"] = value }\n"
@@ -45373,7 +45248,7 @@ subtest 'spec_format_terse_1_2_3_3_3_direct_access_bare_path_atoms_auto_exist' =
 
     my $dedup_src = $gen->("top:: -> w { set(z, undef); return(foo[\"a\"][z]) }\n\nw : /x/\n");
     my $dedup_z = () = ($dedup_src =~ /my \$z\b/g);
-    is($dedup_z, 1, 'direct-access bare path atom dedups declared z to one `my $z`');
+    is($dedup_z, 1, 'direct-access bare path atom dedups setup z to one `my $z`');
 
     my $runtime_spec = "Top::\n"
                      . " /x/ -> Done { set(foo, hash(\"a\", array(\"zero\", \"one\"))); set(z, 1); return(foo[\"a\"][z]) }\n"
@@ -45539,7 +45414,7 @@ subtest 'spec_format_terse_1_3_3_set_key_statement_mutates_hash' => sub {
     my $spec = "top:: /(\\w+)\\s*/ -> top[0] { set_key(meta, match_group(0), cat(match_group(0), \"!\")) }\n"
              . "LX { return(copy(hash(meta))) }\n";
     my $p = eval { LinkedSpec::Get(\$spec) };
-    is($run->($p, 'a b'), '{"a":"a!","b":"b!"}', 'set_key(meta,...) mutates a no-declare hash target');
+    is($run->($p, 'a b'), '{"a":"a!","b":"b!"}', 'set_key(meta,...) mutates a hash target without setup');
     is($run->($p, 'a b'), '{"a":"a!","b":"b!"}', 're-running the same parser is stable (per-invocation hash lexical)');
 
     my $pure = "top:: /(\\w+)\\s*/ -> top[0] { set_key(meta, \"existing\", \"old\"); set(hash(copy), set_key(hash(meta), \"stage\", \"v\")) }\n"
@@ -45600,13 +45475,13 @@ subtest 'spec_format_terse_1_3_4_1_scalar_assignment_operator_matches_set' => su
              . "LX { return(name) }\n";
     my $p = eval { LinkedSpec::Get(\$spec) };
     is($run->($p, 'a b'), '"b!"',
-        'scalar assignment operator mutates a no-declare scalar target at runtime');
+        'scalar assignment operator mutates a scalar target without setup at runtime');
     is($run->($p, 'a b'), '"b!"',
         're-running the same parser is stable (per-invocation scalar lexical)');
 
     my $kw_src = $gen->("top:: /(\\w+)\\s*/ -> top[0] { set(name, entry_group(1)); return(name) }\n");
     like($kw_src, qr/my \$name\b/,
-        'keyword argument name=entry_group(1) inside declare(...) remains a helper argument, not a top-level operator statement');
+        'keyword argument name=entry_group(1) inside a helper call remains a helper argument, not a top-level operator statement');
 };
 
 subtest 'spec_format_terse_1_3_4_2_array_append_operator_matches_push' => sub {
@@ -45663,7 +45538,7 @@ subtest 'spec_format_terse_1_3_4_2_array_append_operator_matches_push' => sub {
              . "LX { return(copy(array(items))) }\n";
     my $p = eval { LinkedSpec::Get(\$spec) };
     is($run->($p, 'a b'), '["a!","b!"]',
-        'array append operator mutates a no-declare array target at runtime');
+        'array append operator mutates an array target without setup at runtime');
     is($run->($p, 'a b'), '["a!","b!"]',
         're-running the same parser is stable (per-invocation array lexical)');
 };
@@ -45723,7 +45598,7 @@ subtest 'spec_format_terse_1_3_4_3_hash_index_assignment_operator_matches_set_ke
              . "LX { return(copy(hash(meta))) }\n";
     my $p = eval { LinkedSpec::Get(\$spec) };
     is($run->($p, 'a b'), '{"a":"a!","b":"b!"}',
-        'hash-index assignment operator mutates a no-declare hash target at runtime');
+        'hash-index assignment operator mutates a hash target without setup at runtime');
     is($run->($p, 'a b'), '{"a":"a!","b":"b!"}',
         're-running the same parser is stable (per-invocation hash lexical)');
 };

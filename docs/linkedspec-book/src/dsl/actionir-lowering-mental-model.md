@@ -147,7 +147,7 @@ Each contract family has a dedicated lowering owner:
 - `ValueExpr` — value construction (bare scalar reads, `array(...)`, `hash(...)`)
 - `ControlFlow` — structured control flow (`if/elseif/else/endif`, `switch/case/default/endswitch`)
 - `MethodLowering` — method-like helper lowering to Perl code
-- `DeclareMethod` — declaration, assignment, and reset-oriented helper lowering
+- `DeclareMethod` — current `set(...)` assignment lowering and backend declaration initializer helpers
 - `ArrayPipeline` — array pipeline operations (filter, map, sort, etc.)
 
 ### Contracts catalog

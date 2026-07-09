@@ -124,60 +124,28 @@ dispatch rule.
   - `return(" a-b ".trim().with() { return(value.split("-")) }.count())` yields `2`.
   - `set(value, "outer"); return(array(with("inner") { return(value) }, value))` yields `["inner", "outer"]`.
 
-## 1. Declaration Helpers
+## 1. Working Variables and Setup
 
-> **Declaration is optional — working variables auto-exist.** Referencing a variable through a
-> typed aggregate wrapper (`array(name)` / `hash(name)`) or a bare scalar read/target position
-> auto-creates it as a per-invocation working variable of that kind, so `declare(...)` is retired
-> and not required first. The wrapper is also optional in a **type-implying argument position**: the scalar
-> target of `set(name, …)` and the assignment operator `name = value`, which bind scalar, array, or hash RHS
-> values as the variable's current typed value; explicit aggregate targets such as `set(array(name), ...)` and
-> `set(hash(name), ...)`;
-> the scalar source in `return(name)`, `set(out, name)`, and `out = name`;
-> the array target of `push(name, …)` and the array append operator
-> `name += value`; and the hash target of
-> `set_key(name, key, value)` and hash-index assignment `name[key] = value`
-> auto-exist from a **bare** name too, with the kind fixed by that position. Aggregate snapshot reads
-> `copy(array(name))`, `copy(hash(name))`, and array-first `copy(name)` are also type-implying read
-> positions. A backend MUST supply
-> the same auto-existence: a wrapper- or position-referenced variable
-> with no `declare(...)` is a fresh working slot for the parse, not a value carried across parses.
-> Recursive re-entry uses the current aggregate reset form as the declaration replacement:
-> `set(array(name), [])` and `set(hash(name), {})` establish rule-local aggregate bindings before mutation.
-> `declare(...)` and declaration aliases now emit retired-helper diagnostics on both current variants.
-> New specs should use direct assignment initializers such as `name = value` or explicit aggregate resets
-> such as `set(array(items), [])` and `set(hash(meta), {})`.
-> The DSL literals
-> `undef`/`true`/`false` and the engine's own handler locals are never treated as working-variable
-> names (so `array(undef)` builds an array holding the `undef` literal, not a variable `undef`).
-
-### `declare(scalar, name)`
-- **Signature**: `declare("scalar", name: string)`
-- **Returns**: void
-- **Compatibility status**: Retired. Current runtimes diagnose this helper with
-  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare`.
-- **Use instead**: `name = undef` when an explicit initializer is useful, or first scalar assignment/use.
-
-### `declare(scalar, name = value)`
-- **Signature**: `declare("scalar", name: string, initializer: expr)`
-- **Returns**: void
-- **Compatibility status**: Retired. Current runtimes diagnose this helper with
-  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare`.
-- **Use instead**: `name = value`.
-
-### `declare(array, name)`
-- **Signature**: `declare("array", name: string)`
-- **Returns**: void
-- **Compatibility status**: Retired. Current runtimes diagnose this helper with
-  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare`.
-- **Use instead**: `set(array(name), [])` for an explicit aggregate reset, or `name += value` on first append.
-
-### `declare(hash, name)`
-- **Signature**: `declare("hash", name: string)`
-- **Returns**: void
-- **Compatibility status**: Retired. Current runtimes diagnose this helper with
-  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:declare`.
-- **Use instead**: `set(hash(name), {})` for an explicit aggregate reset, or `name[key] = value` on first mutation.
+> **Working variables auto-exist.** Referencing a variable through a typed aggregate wrapper
+> (`array(name)` / `hash(name)`) or a bare scalar read/target position auto-creates it as a
+> per-invocation working variable of that kind. The wrapper is also optional in a
+> **type-implying argument position**: the scalar target of `set(name, ...)` and the assignment
+> operator `name = value`, which bind scalar, array, or hash RHS values as the variable's current
+> typed value; explicit aggregate targets such as `set(array(name), ...)` and `set(hash(name), ...)`;
+> the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of
+> `push(name, ...)` and the array append operator `name += value`; and the hash target of
+> `set_key(name, key, value)` and hash-index assignment `name[key] = value` auto-exist from a
+> **bare** name too, with the kind fixed by that position. Aggregate snapshot reads
+> `copy(array(name))`, `copy(hash(name))`, and array-first `copy(name)` are also type-implying
+> read positions. A backend MUST supply the same auto-existence: a wrapper- or
+> position-referenced variable is a fresh working slot for the parse, not a value carried across
+> parses. Recursive re-entry uses explicit aggregate reset forms:
+> `set(array(name), [])` and `set(hash(name), {})` establish rule-local aggregate bindings before
+> mutation. New specs should use direct assignment initializers such as `name = value` or explicit
+> aggregate resets such as `set(array(items), [])` and `set(hash(meta), {})`.
+> The DSL literals `undef`/`true`/`false` and the engine's own handler locals are never treated as
+> working-variable names (so `array(undef)` builds an array holding the `undef` literal, not a
+> variable `undef`).
 
 ### `name = value` assignment operator
 - **Signature**: `name = value`
@@ -201,7 +169,7 @@ dispatch rule.
   ```
   Input `ok` returns `[["ok",["ok","ok!"],{"value":"ok"},"ok","ok"]]`.
   The scalar assignment `name = value` stores and yields `"ok"` in value position; the explicit
-  aggregate resets establish `items` and `meta` without using retired `declare(...)`.
+  aggregate resets establish `items` and `meta`.
 
 ## 2. Scalar Helpers
 
@@ -576,21 +544,6 @@ dispatch rule.
   On input `xhello`, the result is `["a"]`: the push methods build `["z", "a", "b"]`, then `pop_back()`
   removes `"b"` and `pop_front()` removes `"z"`.
 
-### `push_value(arr, value)`
-- **Signature**: `push_value(target: array, value: expr)`
-- **Returns**: void
-- **Compatibility status**: Retired on current runtimes. Current authoring uses `push(array(target), value)`, `target += value`, or an explicit typed target when both arguments are bare identifiers and child-call ambiguity must be avoided.
-- **Behavior**: Appends a value to the named accumulator. `push(target, value)` is the terse spelling for unambiguous value expressions.
-- **Edge cases**: Value can be any expression type. Undef values are appended as-is; use an explicit `is_nonempty(...)` guard before `push(...)` when empty values should be skipped. The target may be wrapped (`array(items)`) or a **bare** name (`items`); a bare target auto-exists as an array.
-
-### `push_nonempty(arr, value)`
-- **Signature**: `push_nonempty(target: array, value: expr)`
-- **Returns**: void
-- **Compatibility status**: Retired on current runtimes. Current authoring spells the filter explicitly:
-  `value = expr; if(is_nonempty(value)) { push(array(target), value) }`.
-- **Behavior**: Appends the value only if it is defined and non-empty. Skips undef, empty strings, empty arrays, and empty hashes while preserving `"0"`.
-- **Edge cases**: The current replacement `push(...)` accepts a wrapped target (`array(items)`) or a **bare** name (`items`) that auto-exists as an array.
-
 ### `count(arr)`
 - **Signature**: `count(arr: array)`
 - **Returns**: int
@@ -653,7 +606,6 @@ dispatch rule.
   `array(items)` reads the working array `items`. Quoted strings are literal constructor payloads, so
   `array("items")` constructs an array containing the string `"items"`. With zero or multiple arguments it
   constructs an array from the evaluated values.
-- **Retired short alias**: `a(...)`; use `array(...)`.
 - **Boundary**: The bare one-argument name form is a direct working-variable name, not an indirect scalar
   lookup. `array(alias)` reads the working array named `alias`; it does not read scalar `alias` and then use
   that scalar as another variable name. Prefer direct shape literals such as `["items"]` as the terse
@@ -879,7 +831,6 @@ dispatch rule.
   `hash("key", value)` constructs a hash entry whose key is `"key"`. With zero or multiple arguments it
   constructs a hash from flat key/value pairs. Arguments are interpreted as alternating keys and values. Accepts
   `flat_array(...)` and `flat_hash(...)` for list-context insertion.
-- **Retired short alias**: `h(...)`; use `hash(...)`.
 - **Boundary**: The bare one-argument name form is a direct working-variable name, not an indirect scalar
   lookup. `hash(alias)` reads the working hash named `alias`; it does not read scalar `alias` and then use
   that scalar as another variable name. Prefer direct shape literals such as `{ "alias" : value }` as the
@@ -1030,8 +981,7 @@ names and map to `num_*`: `value.abs()` -> `num_abs(value)`, `value.add(2, 3)` -
 `value.clamp(0, 10)` -> `num_clamp(value, 0, 10)`, and `value.gt(3)` -> `num_gt(value, 3)`. Bare receiver
 identifiers read scalar working variables. Integer and float literal receivers are accepted (`5.mod(2)`,
 `3.5.floor().add(1)`). Comparisons (`eq`, `ne`, `gt`, `ge`, `lt`, `le`) are terminal boolean values; a later
-receiver-dot call after a comparison returns `undef`/`null`. `declare(...)` and other statement/lifecycle
-methods are not numeric receiver methods. An expression-valued block whose value is numeric can be the
+receiver-dot call after a comparison returns `undef`/`null`. Statement and lifecycle methods are not numeric receiver methods. An expression-valued block whose value is numeric can be the
 receiver, for example `{ 3.5 }.floor().add(2)`.
 
 The same numeric family also has function-form word aliases:
@@ -1752,11 +1702,10 @@ Most helpers propagate `undef` from their inputs to their outputs. Explicit `coa
 ### No Mutation Guarantee
 Helpers that return arrays or hashes (`copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `map_leaves`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. `walk_leaves` is the explicit tree side-effect traversal: it returns the original hash or array tree and preserves ordinary callback side effects. Statement forms such as `name = value`, `items += value`, `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, `items.pop_front()`, `set_key(name, key, value)`, and `name[key] = value` are the explicit mutation forms.
 
-### Terse Helper Renames (canonical going forward)
-The `.spec` format has migrated these helper families to terser spellings. The **terse spelling is canonical**;
-old copy/concat/append helper names are retired diagnostics on current runtimes:
+### Canonical Terse Forms
+The `.spec` format has migrated these helper families to terser spellings. The **terse spelling is canonical**:
 
-| Canonical (terse) | Deprecated alias | Notes |
+| Canonical form | Related form | Notes |
 |---|---|---|
 | `set(target, value)` | `target = value` | typed value assignment. Bare assignments bind scalar, array, or hash RHS values and yield the stored value in value positions. Explicit `array(...)` / `hash(...)` targets keep aggregate storage. A bare scalar source `set(out, name)` reads `name`. |
 | `name = value` / `=(name, value)` | `set(name, value)` / `name = value` | assignment expression/operator spelling. It stores the target and yields the stored typed value in value positions. |
@@ -1764,8 +1713,8 @@ old copy/concat/append helper names are retired diagnostics on current runtimes:
 | `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()` | `items += value` for back append only | array end-mutation methods; statement-level only. The receiver may be bare or `array(...)`; pop methods discard the removed value. |
 | `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator. Bare key/RHS identifiers read scalar working variables in mutation slots; in value positions it yields the updated hash snapshot. |
 | `payload["items"][0]["name"] = value` | direct nested access assignment | mutates a scalar-held array/hash value path. Intermediate containers must exist; final hash keys may be created; final array indexes may replace or append at len. |
-| `cat(args...)` | `concat(args...)` retired | string concatenation. |
-| `copy(container)` | `array_copy(arr)` / `hash_copy(h)` retired | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
+| `cat(args...)` | string value expression | string concatenation. |
+| `copy(container)` | array/hash snapshot | one unified `copy(...)` resolves array-vs-hash by the wrapped symbol kind (array first); a bare `copy(x)` resolves as an array. |
 
 Direct nested access, for example `payload["children"][0]["name"]` or `payload["children"][i]["name"]`, is
 also part of the terse surface. It is not a helper rename; it is the replacement surface for the older nested
@@ -1782,24 +1731,8 @@ Array end mutations remain statement-only.
 Value-producing helper aliases such as `cat(...)` and `copy(...)` compose in the value positions documented by
 their contracts. New `.spec` authoring should prefer the terse names.
 
-### Compatibility Aliases (Retired)
-The following are retired and must not be used in new `.spec` authoring. Current runtimes diagnose retired helper calls instead of executing them successfully:
+### Removed Helper Spellings
 
-Declaration helpers (`declare(...)` plus declaration aliases) are retired. See [Declaration Helper Reference](../dsl/declaration-helper-reference.md).
-
-| Retired | Use Instead |
-|---|---|
-| `s(...)` | bare scalar reads |
-| `a(...)` | `array(...)` |
-| `h(...)` | `hash(...)` |
-| `array_values(...)` | `copy(...)` |
-| `flatten(...)` | `flat(...)` |
-| `tail(...)` | `drop_front(...)` |
-| `drop_last(...)` | `drop_back(...)` |
-| `return_a`, `return_m`, `return_ma` | `return(array(...))` |
-| `return_imatch`, `return_im` | `return(...)` |
-| `capture_slice_here()` | `start_capture_slice()` |
-| `capture_from_rule_start()` | `capture_slice()` |
-| `capture_slice_length()` | `capture_slice_len()` |
-| `capture_rest_length()` | `capture_rest_len()` |
-| `entry_named_map()` | `entry_map()` |
+This catalog intentionally lists the current helper surface only. Deleted helper spellings are not contract
+entries, not canonical ActionIR events, and not compatibility lowering paths. Update old specs to the current
+forms documented above.

@@ -126,8 +126,7 @@ sub _unmatched_event_is_statement_level {
  my ($event) = @_;
  return 0 unless ref($event) eq 'HASH';
  my $contract_id = $event->{contract_id} // '';
- return 1 if $contract_id =~ /^(?:call|return_call|return_general|return|return_array|return_bare|return_undef)$/o;
- return 1 if $contract_id =~ /^(?:declare_typed|declare_alias)$/o;
+ return 1 if $contract_id =~ /^(?:call|return_call|return_general|return|return_bare|return_undef)$/o;
  return 1 if $contract_id =~ /^(?:push_single_arg|push_indexed_arg|push_target_arg|push_target_indexed_arg|push_scope_target_arg|push)$/o;
  return 1 if $contract_id =~ /^(?:set_value|assign_call|assign_call_my|assign_match_my|scalar_assignment_operator|array_append_operator|array_end_mutation_method|hash_index_assignment_operator|set_key_statement)$/o;
  return 1 if $contract_id eq 'value_drop_statement';

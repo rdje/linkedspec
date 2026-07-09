@@ -29,8 +29,6 @@ sub try_scan_contract_ir_events {
   'exit_now' => \&_scan_contract_exit_now,
   'next_stmt' => \&_scan_contract_next_stmt,
   'return_undef' => \&_scan_contract_return_undef,
-  'declare_typed' => \&_scan_contract_declare_typed,
-  'declare_alias' => \&_scan_contract_declare_alias,
  );
  my $handler = $dispatch{$id};
  return undef unless $handler;
@@ -334,49 +332,5 @@ while ($code =~ /\b(?<expr>return_undef\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[
 }
 
 1;
-
-sub _scan_contract_declare_typed {
- my ($code) = @_;
- my @events;
-while ($code =~ /\b(?<expr>declare\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
- my $decl = _extract_declare_statement_from_method_expr($+{expr});
- next unless $decl;
- my @parsed_entries = map { _parse_declare_binding_entry($_) } @{$decl->{entries} || []};
- next if grep { !defined($_) || !defined($_->{name}) } @parsed_entries;
- my @names = map { $_->{name} } @parsed_entries;
- my %initializers = map { defined($_->{init}) ? ($_->{name} => $_->{init}) : () } @parsed_entries;
- push @events, {
-  raw => $+{expr},
-  args => {
-   declaration_type => $decl->{declaration_type},
-   names            => [@names],
-   initializers     => {%initializers},
-  },
- };
-}
- return \@events
-}
-
-sub _scan_contract_declare_alias {
- my ($code) = @_;
- my @events;
-while ($code =~ /\b(?<expr>declare_(?:a|array|s|scalar|h|hash)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
- my $decl = _extract_declare_statement_from_method_expr($+{expr});
- next unless $decl;
- my @parsed_entries = map { _parse_declare_binding_entry($_) } @{$decl->{entries} || []};
- next if grep { !defined($_) || !defined($_->{name}) } @parsed_entries;
- my @names = map { $_->{name} } @parsed_entries;
- my %initializers = map { defined($_->{init}) ? ($_->{name} => $_->{init}) : () } @parsed_entries;
- push @events, {
-  raw => $+{expr},
-  args => {
-   declaration_type => $decl->{declaration_type},
-   names            => [@names],
-   initializers     => {%initializers},
-  },
- };
-}
- return \@events
-}
 
 1;

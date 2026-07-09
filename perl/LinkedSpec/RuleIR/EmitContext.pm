@@ -566,11 +566,6 @@ sub _lower_typed_declare_statement {
  return _call_actionir_owner_with_deps('method_lowering', '_lower_typed_declare_statement', @args)
 }
 
-sub _declare_alias_to_type {
- my @args = @_;
- return _call_actionir_owner_with_deps('method_lowering', '_declare_alias_to_type', @args)
-}
-
 sub _lower_assign_statement {
  my @args = @_;
  return _call_actionir_owner_with_deps('method_lowering', '_lower_assign_statement', @args)
@@ -688,15 +683,6 @@ sub _bare_symbol_kind_from_sigil {
  return undef
 }
 
-sub _bare_symbol_kind_from_decl_type {
- my ($type) = @_;
- return undef unless defined($type) && length($type);
- return 'array' if $type =~ /^(?:array|a)$/o;
- return 'hash' if $type =~ /^(?:hash|h)$/o;
- return 'scalar' if $type =~ /^(?:scalar|s)$/o;
- return undef
-}
-
 sub _bare_symbol_kind_from_target_expr {
  my ($target_expr, $source_expr) = @_;
  my $target = _trim_action_ir_value($target_expr);
@@ -751,19 +737,6 @@ sub _collect_bare_identifier_type_memory {
   my $source = LinkedSpec::ActionIR::MethodLowering::_actionir_ast_value_source_expr($node);
   $source = $node->{source} if !(defined($source) && length($source)) && defined($node->{source});
   return $source
- };
- my $strip_decl_scope_arg = sub {
-  my ($args, $source_cb) = @_;
-  return [] unless ref($args) eq 'ARRAY';
-  my @effective = @$args;
-  return \@effective unless @effective >= 2;
-  my $first = $source_cb->($effective[0]);
-  my $second = $source_cb->($effective[1]);
-  if (defined($first) && defined($label) && $first eq $label
-      && defined(_bare_symbol_kind_from_decl_type($second))) {
-   shift @effective;
-  }
-  return \@effective;
  };
  my $record_ast_target = sub {
   my ($target_node, $value_node) = @_;
@@ -836,43 +809,6 @@ sub _collect_bare_identifier_type_memory {
   if ($kind eq 'call') {
    my $name = $node->{name} // '';
    my $args = $node->{args} || [];
-   if ($name eq 'declare' && ref($args) eq 'ARRAY' && @$args >= 1) {
-    my $effective_args = $strip_decl_scope_arg->($args, $node_source_expr);
-    my $type = $node_source_expr->($effective_args->[0]);
-    my $kind = _bare_symbol_kind_from_decl_type($type);
-    if (defined($kind)) {
-     for my $arg (@{$effective_args}[1 .. $#$effective_args]) {
-      my $entry = $node_source_expr->($arg);
-      my $binding = _parse_declare_binding_entry($entry);
-      my $decl_name = (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'assign_scalar')
-       ? $arg->{name}
-       : (ref($binding) eq 'HASH') ? $binding->{name} : _trim_action_ir_value($entry);
-      $record->($decl_name, $kind);
-      $collect_ast_type_node->($arg->{value})
-       if ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'assign_scalar';
-     }
-     return;
-    }
-   }
-   if ($name =~ /^declare_(?:s|scalar|a|array|h|hash)$/o && ref($args) eq 'ARRAY') {
-    my $decl_type = $name;
-    $decl_type =~ s/^declare_//o;
-    my $kind = _bare_symbol_kind_from_decl_type($decl_type);
-    if (defined($kind)) {
-     my $effective_args = $strip_decl_scope_arg->($args, $node_source_expr);
-     for my $arg (@$effective_args) {
-      my $entry = $node_source_expr->($arg);
-      my $binding = _parse_declare_binding_entry($entry);
-      my $decl_name = (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'assign_scalar')
-       ? $arg->{name}
-       : (ref($binding) eq 'HASH') ? $binding->{name} : _trim_action_ir_value($entry);
-      $record->($decl_name, $kind);
-      $collect_ast_type_node->($arg->{value})
-       if ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'assign_scalar';
-     }
-     return;
-    }
-   }
    if (($name eq '=' || $name eq 'set')
        && ref($args) eq 'ARRAY' && @$args == 2) {
     $record_ast_target->($args->[0], $args->[1]);
@@ -909,45 +845,7 @@ sub _collect_bare_identifier_type_memory {
    $collect_ast_type_node->($node->{receiver});
    foreach my $call (@{$node->{calls} || []}) {
     next unless ref($call) eq 'HASH';
-    my $method = $call->{method} // '';
     my $args = $call->{args} || [];
-    if ($method eq 'declare' && ref($args) eq 'ARRAY' && @$args >= 1) {
-     my $effective_args = $strip_decl_scope_arg->($args, $node_source_expr);
-     my $type = $node_source_expr->($effective_args->[0]);
-     my $kind = _bare_symbol_kind_from_decl_type($type);
-     if (defined($kind)) {
-      for my $arg (@{$effective_args}[1 .. $#$effective_args]) {
-       my $entry = $node_source_expr->($arg);
-       my $binding = _parse_declare_binding_entry($entry);
-       my $name = (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'assign_scalar')
-        ? $arg->{name}
-        : (ref($binding) eq 'HASH') ? $binding->{name} : _trim_action_ir_value($entry);
-       $record->($name, $kind);
-       $collect_ast_type_node->($arg->{value})
-        if ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'assign_scalar';
-      }
-      next;
-     }
-    }
-    if ($method =~ /^declare_(?:s|scalar|a|array|h|hash)$/o && ref($args) eq 'ARRAY') {
-     my $decl_type = $method;
-     $decl_type =~ s/^declare_//o;
-     my $kind = _bare_symbol_kind_from_decl_type($decl_type);
-     if (defined($kind)) {
-      my $effective_args = $strip_decl_scope_arg->($args, $node_source_expr);
-      for my $arg (@$effective_args) {
-       my $entry = $node_source_expr->($arg);
-       my $binding = _parse_declare_binding_entry($entry);
-       my $name = (ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'assign_scalar')
-        ? $arg->{name}
-        : (ref($binding) eq 'HASH') ? $binding->{name} : _trim_action_ir_value($entry);
-       $record->($name, $kind);
-       $collect_ast_type_node->($arg->{value})
-        if ref($arg) eq 'HASH' && ($arg->{kind} // '') eq 'assign_scalar';
-      }
-      next;
-     }
-    }
     $collect_ast_type_node->($_) for @$args;
    }
    return;
@@ -1014,31 +912,6 @@ sub _collect_bare_identifier_type_memory {
    my $args = $call->{args} || [];
    next unless ref($args) eq 'ARRAY';
 
-   if ($method eq 'declare') {
-    my $effective_args = $strip_decl_scope_arg->($args, sub { _trim_action_ir_value($_[0]) });
-    my $type = _trim_action_ir_value($effective_args->[0]);
-    my $kind = _bare_symbol_kind_from_decl_type($type);
-    next unless defined($kind);
-    for my $arg (@{$effective_args}[1 .. $#$effective_args]) {
-    my $binding = _parse_declare_binding_entry($arg);
-    my $name = (ref($binding) eq 'HASH') ? $binding->{name} : _trim_action_ir_value($arg);
-    $record->($name, $kind);
-   }
-   next;
-  }
-  if ($method =~ /^declare_(?:s|scalar|a|array|h|hash)$/o) {
-    my $decl_type = $method;
-    $decl_type =~ s/^declare_//o;
-    my $kind = _bare_symbol_kind_from_decl_type($decl_type);
-    next unless defined($kind);
-    my $effective_args = $strip_decl_scope_arg->($args, sub { _trim_action_ir_value($_[0]) });
-    for my $arg (@$effective_args) {
-     my $binding = _parse_declare_binding_entry($arg);
-     my $name = (ref($binding) eq 'HASH') ? $binding->{name} : _trim_action_ir_value($arg);
-     $record->($name, $kind);
-    }
-    next;
-   }
    if ($method eq 'set' && $trimmed =~ /^\s*set\s*\(/o && @$args >= 2) {
     my ($name, $kind) = _bare_symbol_kind_from_target_expr($args->[0], $args->[1]);
     $record->($name, $kind);
@@ -1089,16 +962,6 @@ sub _lower_return_undef_statement {
 }
 
 1;
-
-sub _extract_declare_statement_from_method_expr {
- my @args = @_;
- return _call_actionir_owner_with_deps('declare_method', '_extract_declare_statement_from_method_expr', @args)
-}
-
-sub _lower_declare_method_statement {
- my @args = @_;
- return _call_actionir_owner_with_deps('declare_method', '_lower_declare_method_statement', @args)
-}
 
 sub _lower_assign_method_statement {
  my @args = @_;
@@ -1652,9 +1515,8 @@ my %AUTO_WORKING_VAR_RESERVED = map { $_ => 1 } qw(
 #------------------------------------------------------------------------------
 # Function: _mask_action_code_literals
 # Purpose : Blank the *contents* of single-quoted, double-quoted, and /regex/
-#           literals (keeping the delimiters, length, and newlines) so a literal
-#           that happens to contain wrapper-call-looking text (e.g. a string
-#           "... s(x) ...") cannot produce a spurious working-variable collection.
+#           literals (keeping the delimiters, length, and newlines) so literal
+#           helper-looking text cannot produce a spurious working-variable collection.
 #           An unmatched delimiter is treated as an ordinary character (no runaway
 #           masking). The rule's regex `re` slots are never scanned, so this only
 #           guards literals embedded inside action code.
@@ -1745,9 +1607,7 @@ sub _mask_action_code_literals {
 #                 return(if(...)) / set(out, switch(...)) branches recurse through the
 #                 same scalar-read, shape-literal, direct-access, and block-value discovery.
 #           Deduped against (1) the per-rule accumulator @<label> and (2) any name
-#           already declared with the same sigil in the LOWERED handler code
-#           (historical declare(...) or raw `my`), so older declaration fixtures
-#           do not produce a second `my` while they are being diagnosed.
+#           already declared with the same sigil in the LOWERED handler code.
 # Args    : ($rule_ir, $lowered_text)  # $lowered_text = concatenated lowered code
 # Returns : arrayref of "my <sigil><name>;" declaration strings (possibly empty)
 #------------------------------------------------------------------------------

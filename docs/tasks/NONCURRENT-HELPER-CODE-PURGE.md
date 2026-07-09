@@ -118,13 +118,42 @@ unknown-helper handling, not through a name-specific removal compatibility layer
   Commit: `NONCURRENT-HELPER-CODE-PURGE.2.1 - purge Perl current helper compatibility`
 
 - ID: `NONCURRENT-HELPER-CODE-PURGE.2.2`
-  Status: `pending`
+  Status: `done`
   Goal: Remove Perl declaration, return-family, and short-wrapper helper-specific source owner paths.
   Acceptance: Declaration helper spellings, old return-family helper spellings, and short/old scalar-wrapper
     helper spellings are no longer recognized through dedicated source-owner paths; current return, `return_undef`,
     auto-existing variable, assignment/reset, `array(...)`, `hash(...)`, and bare-read behavior still lowers.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Removed the Perl source-owner paths that parsed/lowered/contracted
+    declaration helper spellings, old return-family helper spellings, and old short-wrapper spellings as
+    dedicated helper surfaces. Current `return(...)`, `return_undef(...)`, `set(...)`, assignment/reset,
+    auto-existing working variables, `array(...)`, `hash(...)`, and bare reads remain covered by the focused
+    AST/compact-lowerer tests and full phase0 regression. Syntax checks pass for touched Perl owners and tests:
+    `perl -c -Iperl perl/LinkedSpec/ActionIR/DeclareMethod.pm`,
+    `perl -c -Iperl perl/LinkedSpec/RuleIR/EmitContext.pm`,
+    `perl -c -Iperl t/phase0_regression.t`, `perl -c -Iperl t/actionir_ast_parser.t`, and
+    `perl -c -Iperl t/trace_actionir_compact_lowerers.t`. Focused tests pass:
+    `prove -q -Iperl t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t` and
+    `PERL5LIB= prove -q -Iperl t/phase0_regression.t` (`1027` tests). Scoped scans over touched
+    Perl/test surfaces confirm no exact helper-call recognition remains for the removed declaration,
+    old return-family, or old short-wrapper spellings; residual matches are internal Perl implementation words
+    such as lexical-declaration generation and ordinary `scalar(...)` Perl built-in usage, not DSL helper-call
+    branches.
+  Acceptance Checklist:
+    - [x] **REPRODUCE / ISSUE** — Focused scans showed dedicated Perl ActionIR owner paths for removed
+      declaration helper spellings, old return-family helper spellings, and old short-wrapper wrapper spellings.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `DeclareMethod.pm`, `RuleIR/EmitContext.pm`,
+      `MethodLowering.pm`, `Contracts.pm`, scanner metadata, canonical events, rewrite-pipeline, and control-flow
+      lookahead still carried source-owner branches or contract metadata for those removed helper-call spellings.
+    - [x] **FIX** — Deleted the helper-specific extractor/lowerer/contract/scanner/canonical/rewrite/lookahead
+      paths and rewrote focused tests to use current helper spellings or generic unknown helper names where the
+      test is about generic diagnostics.
+    - [x] **ADDRESSED (verified)** — Focused exact scans over touched Perl/test files show no helper-call
+      source-owner paths for the removed declaration, old return-family, or old short-wrapper spellings.
+    - [x] **NO REGRESSION** — Syntax checks, `t/actionir_ast_parser.t`,
+      `t/trace_actionir_compact_lowerers.t`, and full `t/phase0_regression.t` pass.
+    - [x] **LOCKSTEP** — mdBook helper/status chapters, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `MEMORY.md`,
+      `docs/TASK_TREE.md`, the Knowledge Map fact, and this task tree are updated.
+  Commit: `NONCURRENT-HELPER-CODE-PURGE.2.2 - purge Perl declaration and return helper paths`
 
 - ID: `NONCURRENT-HELPER-CODE-PURGE.2.3`
   Status: `pending`
@@ -172,7 +201,7 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `NONCURRENT-HELPER-CODE-PURGE.2.2` | `pending` | Perl still has declaration/return/wrapper source-owner paths for removed helper spellings; remove those before metadata-only cleanup. |
+| 1 | `NONCURRENT-HELPER-CODE-PURGE.2.3` | `pending` | Perl still has metadata/owner-name cleanup remaining after the source-owner path purge; close that before Rust source work. |
 
 ## Decisions
 
@@ -198,16 +227,22 @@ unknown-helper handling, not through a name-specific removal compatibility layer
   removed the removed append-helper contract/scanner/lowering branches, renamed the current append lowerer to
   current `push` terminology, and updated AST tests to fabricate current helper AST calls only. Focused syntax,
   AST parser, compact-lowerer, direct current-helper probes, and removed-append scans pass.
+- `2026-07-09` — `.2.2` removed Perl declaration/return/wrapper helper-call source-owner paths, rewrote active
+  regression fixtures away from those spellings, and kept current return/setup/read behavior green. Focused syntax,
+  AST parser, compact-lowerer, scoped exact scans, and full phase0 (`1027` tests) pass.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.1` | Read-only scans over `perl`, `rust`, `t`, `tools`, `scripts`, `bin`, and `specs`; task-tree split. | PASS. Owner categories are known; implementation starts with Perl source. |
+| `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.2.2` | Perl syntax checks; `prove -q -Iperl t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t`; `PERL5LIB= prove -q -Iperl t/phase0_regression.t`; scoped exact scans; mdBook helper/status scan. | PASS. Source-owner paths for the removed declaration, return-family, and short-wrapper helper-call spellings are gone from the touched Perl/test surfaces. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `NONCURRENT-HELPER-CODE-PURGE.1` | `NONCURRENT-HELPER-CODE-PURGE.1 - split code purge task tree` | Inventory/split before code edits. |
+| `NONCURRENT-HELPER-CODE-PURGE.2.1` | `NONCURRENT-HELPER-CODE-PURGE.2.1 - purge Perl current helper compatibility` | Current `cat`/`copy`/`set`/`push` paths stay on current names. |
+| `NONCURRENT-HELPER-CODE-PURGE.2.2` | `NONCURRENT-HELPER-CODE-PURGE.2.2 - purge Perl declaration and return helper paths` | Perl declaration/return/wrapper helper-call source-owner paths removed. |
 
 ## Changelog
 

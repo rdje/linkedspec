@@ -41,23 +41,16 @@ sub _trace_declare_exit {
  return LinkedSpec::ActionIR::Trace::exit_scope($scope, $details);
 }
 
-sub _retired_declare_helper_diagnostic_expr {
- my ($method) = @_;
- return undef unless defined($method) && $method =~ /\Adeclare(?:_(?:a|array|s|scalar|h|hash))?\z/o;
- return 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:'.$method.'"; undef }'
-}
-
 #------------------------------------------------------------------------------
-	# Package : LinkedSpec::ActionIR::DeclareMethod
-	# Purpose : ActionIR owner for declare/set helper parsing and lowering plus
-#           the default callback map that exposes those helpers to active
-#           callers.
+# Package : LinkedSpec::ActionIR::DeclareMethod
+# Purpose : ActionIR owner for current set(...) lowering and backend declaration
+#           initializer helpers.
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------
 # Function: default_deps_for_package
-# Purpose : Build the default callback map exported by this owner for active
-#           ActionIR declare/set lowering callers.
+# Purpose : Build the default callback map exported by this owner for current
+#           assignment lowering and backend declaration initializers.
 # Args    : ($pkg)
 # Returns : hashref dependency map
 #------------------------------------------------------------------------------
@@ -69,13 +62,10 @@ sub default_deps_for_package {
   [
    'trim_action_ir_value',
    { dep => 'parse_method_function_expr', pkg => 'LinkedSpec::ActionIR::MethodExpr' },
-   { dep => 'is_bare_method_scope_token', pkg => 'LinkedSpec::ActionIR::MethodExpr' },
    { dep => 'normalize_method_args_with_optional_scope', pkg => 'LinkedSpec::ActionIR::MethodExpr' },
    { dep => 'split_top_level_csv', pkg => 'LinkedSpec::ActionIR::MethodExpr' },
    'lower_flow_composite_expr',
    'lower_method_value_expr',
-   'declare_alias_to_type',
-   'lower_typed_declare_statement',
    'lower_assign_statement',
   ],
  )
@@ -237,120 +227,6 @@ sub _lower_declare_initializer_expr {
  }
 
  return $finish->(_lower_declare_value_expr($trimmed, $deps), 'scalar_or_passthrough', { type => $type })
-}
-
-sub _extract_declare_statement_from_method_expr {
- my ($expr, $deps) = @_;
- my $scope = _trace_declare_enter(
-  'extract_declare_statement_from_method_expr',
-  'expr',
-  { expr => defined($expr) ? $expr : '<undef>' },
- );
- my $finish = sub {
-  my ($result, $decision, $context) = @_;
-  _trace_declare_decision(
-   phase => 'extract_declare_statement_from_method_expr',
-   label => 'expr',
-   decision => $decision,
-   taken => ref($result) eq 'HASH' ? 1 : 0,
-   context => $context,
-  );
-  _trace_declare_exit($scope, { status => ref($result) eq 'HASH' ? 'ok' : 'undef', decision => $decision });
-  return $result
- };
- my $require_dep = sub {
-  my ($name) = @_;
-  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
-  die "(LinkedSpec::ActionIR::DeclareMethod::_require_dep) -E- missing dependency callback '$name'"
-   unless ref($cb) eq 'CODE';
-  return $cb;
- };
- my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
- my $is_bare_method_scope_token = $require_dep->('is_bare_method_scope_token');
- my $trim_action_ir_value = $require_dep->('trim_action_ir_value');
- my $declare_alias_to_type = $require_dep->('declare_alias_to_type');
- my $normalize_method_args_with_optional_scope = $require_dep->('normalize_method_args_with_optional_scope');
-
- my $call = $parse_method_function_expr->($expr);
- return $finish->(undef, 'not_method_call', {}) unless $call;
- my $method = $call->{method} // '';
-
- if ($method eq 'declare') {
-  my @effective_args = @{$call->{args} || []};
-  if (
-   @effective_args >= 3 &&
-   $is_bare_method_scope_token->($effective_args[0]) &&
-   defined($trim_action_ir_value->($effective_args[1])) &&
-   $trim_action_ir_value->($effective_args[1]) =~ /^(array|scalar|hash)$/o
-  ) {
-   shift @effective_args;
-   _trace_declare_decision(
-    phase => 'extract_declare_statement_from_method_expr',
-    label => 'expr',
-    decision => 'drop_scope_token',
-    taken => 1,
-    context => { method => $method },
-   );
-  }
-
-  return $finish->(undef, 'declare_bad_arity', { arg_count => scalar(@effective_args) }) unless @effective_args >= 2;
-  my $type = $trim_action_ir_value->($effective_args[0]);
-  return $finish->(undef, 'declare_bad_type', { type => defined($type) ? $type : '<undef>' })
-   unless defined($type) && $type =~ /^(array|scalar|hash)$/o;
-  my @entries = @effective_args[1 .. $#effective_args];
-  return $finish->(undef, 'declare_no_entries', { type => $type }) unless @entries;
-  return $finish->({
-   declaration_type => $type,
-   entries          => \@entries,
-  }, 'declare_statement', { type => $type, entry_count => scalar(@entries) });
- }
-
- if ($method =~ /^declare_(?<alias>a|array|s|scalar|h|hash)$/o) {
-  my $type = $declare_alias_to_type->($+{alias});
-  return $finish->(undef, 'declare_alias_bad_type', { alias => $+{alias} }) unless defined $type;
-  my $effective_args = $normalize_method_args_with_optional_scope->($call->{args} || [], 1, undef);
-  return $finish->(undef, 'declare_alias_bad_arity', { type => $type }) unless $effective_args && @$effective_args >= 1;
-  return $finish->({
-   declaration_type => $type,
-   entries          => [@$effective_args],
-  }, 'declare_alias_statement', { type => $type, entry_count => scalar(@$effective_args) });
- }
-
- return $finish->(undef, 'unsupported_method', { method => $method })
-}
-
-sub _lower_declare_method_statement {
- my ($expr, $deps) = @_;
- my $scope = _trace_declare_enter(
-  'lower_declare_method_statement',
-  'expr',
-  { expr => defined($expr) ? $expr : '<undef>' },
- );
- my $finish = sub {
-  my ($result, $decision, $context) = @_;
-  _trace_declare_decision(
-   phase => 'lower_declare_method_statement',
-   label => 'expr',
-   decision => $decision,
-   taken => defined($result) && length($result) ? 1 : 0,
-   context => $context,
-  );
-  _trace_declare_exit($scope, { status => defined($result) && length($result) ? 'ok' : 'undef', decision => $decision });
-  return $result
- };
- my $require_dep = sub {
-  my ($name) = @_;
-  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
-  die "(LinkedSpec::ActionIR::DeclareMethod::_require_dep) -E- missing dependency callback '$name'"
-   unless ref($cb) eq 'CODE';
-  return $cb;
- };
- my $parse_method_function_expr = $require_dep->('parse_method_function_expr');
- my $call = $parse_method_function_expr->($expr);
- if ($call && defined(my $diagnostic = _retired_declare_helper_diagnostic_expr($call->{method}))) {
-  return $finish->($diagnostic, 'retired_declare_helper', { method => $call->{method} });
- }
- return $finish->(undef, 'no_declaration', {})
 }
 
 sub _lower_assign_method_statement {

@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — NONCURRENT-HELPER-CODE-PURGE.2.2 — purge Perl declaration and return helper paths
+
+**Scope:** Perl ActionIR declaration/setup owners, return-family/helper-call classification, short-wrapper
+source-owner paths, active Perl regression fixtures, mdBook helper/status chapters, live docs, and Knowledge Map.
+
+**Change:** Removed the Perl source-owner paths that still recognized removed declaration helper spellings, old
+return-family helper spellings, and old short-wrapper spellings through dedicated extractor, lowerer, contract,
+scanner, canonical-event, rewrite-pipeline, and control-flow lookahead branches. Active tests now use current
+`return(...)`, `set(...)`, assignment/reset, `array(...)`, `hash(...)`, `push(...)`, `copy(...)`, and bare-read
+forms, or generic invented helper names where the test is specifically about generic diagnostics. The mdBook
+helper references now describe current working-variable setup and value/container flow without preserving removed
+helper-call spellings as compatibility/reference content.
+
+**Validation:** Syntax checks pass for touched Perl owners and tests. `prove -q -Iperl
+t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t` passes, and `PERL5LIB= prove -q -Iperl
+t/phase0_regression.t` passes with `1027` tests. Scoped scans over edited mdBook helper/status chapters and
+touched Perl/test surfaces are clean for exact removed helper-call source-owner spellings, with remaining matches
+limited to ordinary Perl implementation words or built-in `scalar(...)` usage.
+
 ## 2026-07-09 — NONCURRENT-HELPER-CODE-PURGE.2.1 — purge Perl current helper compatibility
 
 **Scope:** Perl ActionIR current helper lowering, append contract/scanner dispatch, bootstrap helper classification,

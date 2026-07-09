@@ -47,8 +47,6 @@ sub _scanner_dep_specs {
   { dep_name => 'parse_method_function_expr', binding_symbol => '_parse_method_function_expr', provider_pkg => 'LinkedSpec::ActionIR::MethodExpr' },
   { dep_name => 'normalize_method_args_with_optional_scope', binding_symbol => '_normalize_method_args_with_optional_scope', provider_pkg => 'LinkedSpec::ActionIR::MethodExpr' },
   { dep_name => 'build_array_pipeline_plan_from_expr', binding_symbol => '_build_array_pipeline_plan_from_expr' },
-  { dep_name => 'extract_declare_statement_from_method_expr', binding_symbol => '_extract_declare_statement_from_method_expr' },
-  { dep_name => 'parse_declare_binding_entry', binding_symbol => '_parse_declare_binding_entry' },
  )
 }
 

@@ -117,16 +117,14 @@ set(array(Parent), array());
 return(hash("children", copy(array(Parent))));
 ```
 
-Older capture and return helpers also use this convention:
+Some capture helpers also use this convention:
 
 | Helper | Current-rule accumulator behavior | Modern direction |
 | --- | --- | --- |
 | `capture(label)` | appends the anonymous capture slice into `@CurrentRule`; the label argument is compatibility syntax | prefer `push(array(CurrentRule), capture_slice())` or an explicit domain array |
 | `capture_if(label)` | trims and conditionally appends the anonymous capture slice into `@CurrentRule`; the label argument is compatibility syntax | prefer `part = trim(capture_slice()); if(is_nonempty(part)) { push(array(CurrentRule), part) }` or an explicit domain array |
 | `CAPTURE_IF()` | trims and conditionally appends the anonymous capture slice into `@CurrentRule` | prefer `part = trim(capture_slice()); if(is_nonempty(part)) { push(array(CurrentRule), part) }` |
-| *(removed 2026-06-14)* | `return_a`, `return_m`, `return_ma` were legacy tagged return shortcuts | Retired. Use `return(array(...))` with `copy(array(CurrentRule))` and/or `flat_array(entry_groups())` so payload shape is visible. |
-
-Historically, a VHDL-style rule might have used the now-removed `return_ma(generate_statement)` shorthand. The modern spelling makes each part explicit:
+For tagged aggregate returns, spell each payload part explicitly:
 
 ```text
 return(array(
@@ -157,7 +155,7 @@ A June 2026 audit of the then-20 shipped `.spec` files (88 total accumulator ope
 
 These helpers are the entry point into local working state and structured values.
 
-> **Working variables auto-exist.** `name`, `array(name)`, and `hash(name)` reference a per-rule working variable. `name` reads scalar `name`; `array(items)` reads the current array value or working array `items`; `hash(meta)` reads the current hash value or working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. You do **not** have to `declare(...)` a working variable first. The wrapper or type-implying position auto-creates a fresh per-invocation working value of that kind. A **bare** name works as the target of `set(name, ...)` and `name = value`, binding the evaluated typed RHS value whether it is scalar, array, or hash; the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push(name, ...)` and `name += expr`; the hash target of `set_key(name, key, value)` and `name[key] = value`; and aggregate snapshot reads such as `copy(array(name))`, `copy(hash(name))`, and `copy(name)`. Use explicit `set(array(name), ...)` / `set(hash(name), ...)` when you intentionally want aggregate working storage rather than replacing the bare variable's typed value. `declare(...)` now emits a retired-helper diagnostic on current runtimes. New examples should use direct assignments and typed wrappers. See the [Declaration Helper Reference](declaration-helper-reference.md#auto-existing-working-variables).
+> **Working variables auto-exist.** `name`, `array(name)`, and `hash(name)` reference a per-rule working variable. `name` reads scalar `name`; `array(items)` reads the current array value or working array `items`; `hash(meta)` reads the current hash value or working hash `meta`. Quoted strings are literal constructor payloads, so `array("items")` is a one-element array payload and `hash("key", value)` is a key/value hash constructor; they are not working-variable aliases or scalar-indirect lookup. The wrapper or type-implying position auto-creates a fresh per-invocation working value of that kind. A **bare** name works as the target of `set(name, ...)` and `name = value`, binding the evaluated typed RHS value whether it is scalar, array, or hash; the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of `push(name, ...)` and `name += expr`; the hash target of `set_key(name, key, value)` and `name[key] = value`; and aggregate snapshot reads such as `copy(array(name))`, `copy(hash(name))`, and `copy(name)`. Use explicit `set(array(name), ...)` / `set(hash(name), ...)` when you intentionally want aggregate working storage rather than replacing the bare variable's typed value. New examples should use direct assignments and typed wrappers. See [Working Variables and Setup](declaration-helper-reference.md#auto-existing-variables).
 
 > **Primitive literals are typed values.** Quoted strings (`"text"` or `'text'`), numbers
 > (`42`, `3.14`), `true`, `false`, and `undef` can be used anywhere an explicit value
@@ -215,9 +213,7 @@ if(false); return("unreachable"); else(); return("reachable"); endif()
 | `copy(array_expr)` / `copy(name)` | array value | snapshot an array value as one nested payload. A bare name reads the working array of that name. |
 | `copy(hash_expr)` / `copy(name)` | hash value | snapshot a hash value as one nested payload. A bare name reads the working hash of that name. |
 
-Retired short wrapper aliases `s(...)`, `a(...)`, and `h(...)` are not canonical wrapper
-spellings. Use `name`, `array(...)`, and `hash(...)` so descriptors and backend
-handoff metadata see the intended typed access directly.
+Use `name`, `array(...)`, and `hash(...)` so descriptors and backend handoff metadata see the intended typed access directly.
 
 In scalar value positions, a bare scalar name reads the working variable:
 `return(count)`, `set(out, count)`, `out = count`, `if(count, ...)`,
@@ -362,8 +358,6 @@ These helpers mutate or dispatch rule state. The assignment forms also have the 
 | `return_undef()` | return `undef` | an optional rule branch has no value. |
 | `next()` | skip the current action path | comments or ignored delimiters should be recognized without adding to the current accumulator. |
 | `exit_now(status)` | exit immediately with an optional status | a fatal parse-time diagnostic should stop execution after emitting its message. |
-| *(removed 2026-06-14)* | `return_a(label)`, `return_m(label)`, `return_ma(label)`, `return_imatch(...)`, `return_im(...)`, `return_array(tag, payload)` were legacy tagged return shortcuts | Retired. Use `return(...)` with `copy(...)` and/or `flat_array(entry_groups())` for structured payloads. |
-
 Canonical child-result pattern:
 
 ```text
@@ -505,7 +499,7 @@ Do not use it when an empty string is a meaningful token:
 push(array(fields), field_text);
 ```
 
-That distinction is deliberate. `push(...)` says "append exactly what I computed." The explicit guard says "append the computed value only if it survived the emptiness filter." The older `push_nonempty(...)` helper now emits a retired-helper diagnostic on current runtimes.
+That distinction is deliberate. `push(...)` says "append exactly what I computed." The explicit guard says "append the computed value only if it survived the emptiness filter."
 
 Append versus replace:
 

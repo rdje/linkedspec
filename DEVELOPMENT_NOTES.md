@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (NONCURRENT-HELPER-CODE-PURGE.2.2 — Perl declaration/return helper path purge):
+  Removed the dedicated Perl source-owner paths for removed declaration helper spellings, old return-family
+  helper spellings, and old short-wrapper spellings. `DeclareMethod`, `RuleIR::EmitContext`, method lowering,
+  contracts, scanner metadata, canonical events, rewrite-pipeline classification, and control-flow lookahead now
+  rely on current `return(...)`, `return_undef(...)`, `set(...)`, assignment/reset, auto-existing working
+  variables, `array(...)`, `hash(...)`, and bare-read behavior instead of helper-specific removal/compatibility
+  branches. Active focused tests were rewritten to current helper spellings or generic invented helper names.
+  Syntax checks, the AST parser suite, compact-lowerer trace test, full phase0 regression (`1027` tests),
+  scoped exact Perl/test scans, and mdBook helper/status scans pass. Remaining Perl cleanup is deliberately
+  confined to `NONCURRENT-HELPER-CODE-PURGE.2.3`: metadata/owner-name cleanup before Rust source work.
+
 - 2026-07-09 (NONCURRENT-HELPER-CODE-PURGE.2.1 — Perl current helper compatibility purge):
   Perl ActionIR current helper lowering no longer normalizes through removed string/copy/assignment helper names,
   and explicit append lowering is now named and contracted as current `push`. The removed append-helper scanner,

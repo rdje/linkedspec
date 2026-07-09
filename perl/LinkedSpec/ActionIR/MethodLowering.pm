@@ -127,20 +127,6 @@ sub _declare_sigil_for_type {
 }
 
 #------------------------------------------------------------------------------
-# Function: _declare_alias_to_type
-# Purpose : Resolve declaration alias tokens to canonical declaration type.
-# Args    : ($alias, $deps)
-# Returns : canonical type string or undef
-#------------------------------------------------------------------------------
-sub _declare_alias_to_type {
- my ($alias, $deps) = @_;
- return 'array'  if defined($alias) && ($alias eq 'a' || $alias eq 'array');
- return 'scalar' if defined($alias) && ($alias eq 's' || $alias eq 'scalar');
- return 'hash'   if defined($alias) && ($alias eq 'h' || $alias eq 'hash');
- return undef
-}
-
-#------------------------------------------------------------------------------
 # Function: _infer_direct_shape_literal_kind
 # Purpose : Classify an accepted direct [] / {} DSL value literal as an array or
 #           hash source. This delegates acceptance to _lower_method_value_expr so
@@ -1144,8 +1130,8 @@ sub _actionir_ast_known_value_call_method {
   CAPTURE CAPTURE_IF BACKTRACK IBACKTRACK
   if i when elseif elif else otherwise endif switch case default endcase endswitch while
   or and not eq ne gt ge lt le is_defined is_undefined is_empty is_nonempty
-  return return_undef return_array return_a return_m return_ma return_imatch return_im
-  set declare declare_s declare_scalar declare_a declare_array declare_h declare_hash
+  return return_undef
+  set
   call push push_back push_front pop_back pop_front set_key print say exit_now exit next
   trim lowercase uppercase length substr replace_substr rm_prefix rm_suffix cat
   str_eq str_ne str_gt str_ge str_lt str_le starts_with ends_with contains_substr matches coalesce coalesce_nonempty

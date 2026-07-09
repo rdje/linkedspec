@@ -1040,13 +1040,6 @@ subtest 'standalone AST value statements drop covered values without raw fallbac
         'standalone string receiver chain lowers as a discarded value expression');
     unlike($string_chain, qr/^" x "\.trim\(\)/, 'standalone string receiver chain no longer remains as raw source text');
 
-    like(LinkedSpec::call_spec_handler_subst('Top', q{s(foo)}), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:s/,
-        'unknown scalar shorthand lowers to an unresolved-helper diagnostic');
-    like(LinkedSpec::call_spec_handler_subst('Top', q{a("A", "B")}), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:a/,
-        'unknown array shorthand lowers to an unresolved-helper diagnostic');
-    like(LinkedSpec::call_spec_handler_subst('Top', q{h("kind", "node")}), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:h/,
-        'unknown hash shorthand lowers to an unresolved-helper diagnostic');
-
     my $ready_spec = qq{Top::\n /x/ -> Done { trim(" x "); cat("a","b"); " y ".trim() }\nDone::\n /y/\n};
     my $ready_descriptor = eval { LinkedSpec::Get(\$ready_spec, return_descriptor => 1) };
     ok(ref($ready_descriptor) eq 'HASH', 'descriptor builds for supported standalone value statements');
