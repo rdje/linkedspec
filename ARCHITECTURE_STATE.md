@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.6` closed the Dart helper/value no-drift slice in
+  `dart/lib/src/runtime/interpreter.dart`. Nested value-path assignment now matches the Perl/Rust contract:
+  successful writes return the updated root aggregate, missing or wrong intermediate paths return `null` without
+  mutation, final hash keys may be created, final array writes only replace or append exactly at `len`, and missing
+  intermediate containers are not autovivified. Segment index expressions evaluate before the RHS value expression,
+  matching the Rust/Perl lowering order. Direct hash-index assignment on scalar-held map/list roots now preserves
+  root ownership before named hash fallback. The active Dart frontier is `.4.4` for BACKTRACK and local cursor
+  rewind behavior.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.5` extended Dart runtime ActionIR execution in
   `dart/lib/src/runtime/interpreter.dart`. `LinkedSpecRuntimeEngine` now evaluates expression-valued blocks with
   block-local `return(...)` / `return_undef()`, attached `if` / `elseif` / `else` and `when` / `otherwise`
@@ -12,8 +20,8 @@ This document is the current high-level technical reading of the project shape. 
   inline lazy `if(...)` / `switch(...)`, helper-form `with(value) { ... }` / `with() { ... }`, receiver
   `.with() { ... }`, and hash/array `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver callbacks.
   Callback frames scope and restore `value`, `path`, `depth`, hash `key`, array `index`, and reduce-only `acc`;
-  hash traversal is sorted-key depth-first and array traversal is zero-based depth-first. The active Dart frontier
-  is `.4.3.6` for helper/value no-drift closeout before BACKTRACK work.
+  hash traversal is sorted-key depth-first and array traversal is zero-based depth-first. This fed the `.4.3.6`
+  helper/value no-drift closeout, which has since landed.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.7.3` recorded the director directive that each LinkedSpec backend
   variant should have a distinct CLI. This is a planning/documentation slice only: Dart-specific CLI
   productization is now `DART-BACKEND-PARITY.7.4`, final Dart no-drift closeout shifts to `.7.5`, and Julia/Lua

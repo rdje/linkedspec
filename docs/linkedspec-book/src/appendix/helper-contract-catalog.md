@@ -224,8 +224,9 @@ dispatch rule.
   kind. Writes do not autovivify intermediate containers: every intermediate hash key or array element must
   already exist and have the required array/hash shape. The final segment may create or replace a hash key, replace
   an existing array element, or append exactly at the current array length. Array gaps, missing intermediate keys,
-  and wrong intermediate shapes yield `undef` and leave the root unchanged. Primitive literals and engine locals
-  such as `[true]` or `[CAPTURE]` are not claimed as scalar path variables.
+  and wrong intermediate shapes yield `undef` and leave the root unchanged. Segment index expressions are evaluated
+  before the RHS value expression; the root path check and mutation happen after both. Primitive literals and engine
+  locals such as `[true]` or `[CAPTURE]` are not claimed as scalar path variables.
 - **Example**:
   ```text
   Top::

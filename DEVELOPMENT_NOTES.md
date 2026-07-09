@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.4.3.6 — Dart helper/value no-drift closeout):
+  Fixed Dart nested value-path assignment in `LinkedSpecRuntimeEngine` to match the documented Perl/Rust contract.
+  Successful nested writes now return the updated root aggregate; missing roots, missing or wrong intermediate
+  containers, array gaps, and string-literal keys on scalar-held arrays return `null` without mutation; final hash
+  keys may be created and final array indexes may replace or append exactly at `len`. The direct hash-index
+  assignment path now preserves scalar-held map/list root ownership before falling back to named hash storage, and
+  nested assignment evaluates segment index expressions before the RHS value expression to match Rust/Perl.
+  This closes the `.4.3` helper/value container. Next frontier is `.4.4`, BACKTRACK and local cursor rewind
+  behavior.
+
 - 2026-07-09 (DART-BACKEND-PARITY.4.3.5 — Dart runtime controls and tree callbacks):
   Extended `LinkedSpecRuntimeEngine` with expression-valued block execution, block-local `return(...)` /
   `return_undef()`, attached `if` / `elseif` / `else` and `when` / `otherwise` branch chains, attached
@@ -8,8 +18,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   `if(...)` / `switch(...)`, helper-form `with(value) { ... }` / `with() { ... }`, receiver `.with() { ... }`,
   and hash/array `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver callbacks. Callback frames
   scope and restore `value`, `path`, `depth`, hash `key`, array `index`, and reduce-only `acc`; hash traversal is
-  sorted-key depth-first and array traversal is zero-based depth-first. The next frontier is `.4.3.6`, helper/value
-  no-drift closeout before BACKTRACK work starts.
+  sorted-key depth-first and array traversal is zero-based depth-first. At completion, the next frontier was
+  `.4.3.6` helper/value no-drift closeout; that closeout has since landed.
 
 - 2026-07-09 (DART-BACKEND-PARITY.7.3 — variant-specific CLI requirement):
   Recorded the director directive that each LinkedSpec backend variant should have a distinct CLI. This is a

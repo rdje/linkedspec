@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.4.3.6 — close Dart helper value no drift**
+  (DONE helper/value no-drift; `.4.3` container closed).
+
+  **Change:** Dart nested value-path assignment now matches the Perl/Rust contract. Successful writes return the
+  updated root aggregate, missing or wrong intermediate paths return `null` without mutation, final hash keys may
+  be created, final array writes only replace or append exactly at `len`, and intermediate containers are not
+  autovivified. Direct hash-index assignment also preserves scalar-held map/list root ownership before named hash
+  fallback.
+
+  **Boundary:** This closes the Dart helper/value runtime container. BACKTRACK and local cursor rewind behavior,
+  tracing, staged runtime execution, corpus output parity, Dart-specific CLI productization, and final parity
+  closeout remain later leaves. Active implementation work advances to `DART-BACKEND-PARITY.4.4`.
+
+  **Verification:** Focused parser/runtime tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+  memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.4.3.5 — add Dart runtime controls and tree callbacks**
   (DONE value blocks, structured controls, with-blocks, and tree traversal receiver callbacks).
 

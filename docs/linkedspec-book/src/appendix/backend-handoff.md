@@ -314,8 +314,9 @@ accumulator collection, bounded repetition, zero-progress cutoffs, and recursion
 cutoffs. Its core ActionIR evaluator now also preserves scalar, array, hash,
 null, boolean, and number shapes through assignment and wrapper snapshots;
 supports `array(...)`, `hash(...)`, `copy(...)`, `set(hash(...), ...)`,
-hash-index mutation, nested reads, non-numeric map keys, and regex literals as
-values; and exposes the named/map/length/start/end `entry_*` / `match_*`
+hash-index mutation, nested reads, non-numeric map keys, regex literals as
+values, and nested value-path assignment with no-autovivification failure
+behavior; and exposes the named/map/length/start/end `entry_*` / `match_*`
 capture helper family. It now also executes current string/scalar helpers,
 explicit `str_*` lexical comparisons, numeric arithmetic/reducer/comparison
 helpers, numeric word aliases, arithmetic/comparison symbol callees, and

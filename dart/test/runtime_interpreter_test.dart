@@ -210,6 +210,64 @@ Top::
     ]);
   });
 
+  test('executes nested value-path assignment without autovivification', () {
+    final engine = _engine(r'''
+Top::
+ /x/
+ E {
+   payload = { "items" : [{ "name" : "old" }] };
+   root_array = [{ "name" : "old" }];
+   return(array(
+     (payload["items"][0]["name"] = "new").count_keys(),
+     payload["items"][1] = "tail",
+     payload,
+     payload["items"][3] = "gap",
+     payload,
+     payload["missing"][0] = "bad",
+     payload,
+     payload["items"][0][0] = "bad",
+     payload,
+     root_array[0]["name"] = "changed",
+     root_array[1] = { "name" : "tail" },
+     root_array["bad"] = { "name" : "bad" },
+     root_array
+   ))
+ }
+''');
+
+    final result = engine.parse('x');
+
+    final updatedPayload = {
+      'items': [
+        {'name': 'new'},
+        'tail',
+      ],
+    };
+    expect(result.value, [
+      1,
+      updatedPayload,
+      updatedPayload,
+      null,
+      updatedPayload,
+      null,
+      updatedPayload,
+      null,
+      updatedPayload,
+      [
+        {'name': 'changed'},
+      ],
+      [
+        {'name': 'changed'},
+        {'name': 'tail'},
+      ],
+      null,
+      [
+        {'name': 'changed'},
+        {'name': 'tail'},
+      ],
+    ]);
+  });
+
   test('exposes named capture maps and source positions', () {
     final engine = _engine(r'''
 Top::

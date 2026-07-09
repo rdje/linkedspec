@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.4.3.6 — close Dart helper value no drift
+
+**Scope:** Dart runtime nested assignment no-drift fix, focused runtime coverage, package README, mdBook
+status/handoff text, live docs, roadmap/task-tree status, and Knowledge Map facts.
+
+**Change:** Closed the `.4.3` Dart helper/value container by aligning nested value-path assignment with the
+Perl/Rust contract. Successful nested writes now return the updated root aggregate; missing or wrong intermediate
+paths return `null` without mutating; final hash keys may be created; final array writes only replace an existing
+slot or append exactly at `len`; and intermediate containers are no longer autovivified. Direct hash-index
+assignment on scalar-held map/list roots now preserves root ownership and array index boundaries before falling
+back to named hash storage. Nested assignment now also evaluates segment index expressions before the RHS value,
+matching the Perl/Rust lowering order.
+
+**Validation:** Focused parser/runtime tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.4.3.5 — add Dart runtime controls and tree callbacks
 
 **Scope:** Dart action parser branch splitting, runtime value-block/control/callback execution, focused

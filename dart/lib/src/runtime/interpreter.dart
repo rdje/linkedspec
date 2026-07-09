@@ -1744,46 +1744,27 @@ final class LinkedSpecRuntimeEngine {
         context.arrayFor(name).add(stored);
         return List<Object?>.unmodifiable(context.arrayFor(name));
       case ActionAssignHashIndexExpr(:final name, :final key, :final value):
-        final storedKey = _stringValue(
-          _evaluateExpression(
-            key,
-            context,
-            ruleLabel,
-            currentEdge: currentEdge,
-          ),
+        return _assignHashIndex(
+          context,
+          name,
+          key,
+          value,
+          ruleLabel,
+          currentEdge,
         );
-        final storedValue = _copyValue(
-          _evaluateExpression(
-            value,
-            context,
-            ruleLabel,
-            currentEdge: currentEdge,
-          ),
-        );
-        context.hashFor(name)[storedKey] = storedValue;
-        return Map<String, Object?>.unmodifiable(context.hashFor(name));
       case ActionAssignNestedAccessExpr(
         :final base,
         :final segments,
         :final value,
       ):
-        final stored = _copyValue(
-          _evaluateExpression(
-            value,
-            context,
-            ruleLabel,
-            currentEdge: currentEdge,
-          ),
-        );
-        _writeNested(
-          _rootForWrite(context, base, segments),
-          segments,
-          stored,
+        return _writeNested(
           context,
+          base,
+          segments,
+          value,
           ruleLabel,
           currentEdge,
         );
-        return _copyValue(stored);
       case ActionIndexedVarExpr(:final name, :final index):
         final collection =
             context.variables[name] ??
@@ -4132,6 +4113,52 @@ final class _VariableSnapshot {
   }
 }
 
+final class _NestedWriteRoot {
+  const _NestedWriteRoot._(this.name, this.value, this.kind);
+
+  const _NestedWriteRoot.scalar(String name, Object? value)
+    : this._(name, value, _NestedWriteRootKind.scalar);
+
+  const _NestedWriteRoot.array(String name, Object? value)
+    : this._(name, value, _NestedWriteRootKind.array);
+
+  const _NestedWriteRoot.hash(String name, Object? value)
+    : this._(name, value, _NestedWriteRootKind.hash);
+
+  final String name;
+  final Object? value;
+  final _NestedWriteRootKind kind;
+
+  void store(_RuntimeExecutionContext context, Object? value) {
+    switch (kind) {
+      case _NestedWriteRootKind.scalar:
+        context.variables[name] = _copyValue(value);
+      case _NestedWriteRootKind.array:
+        context.arrays[name] = _asArray(value);
+      case _NestedWriteRootKind.hash:
+        context.hashes[name] = _asHash(value);
+    }
+  }
+}
+
+enum _NestedWriteRootKind { scalar, array, hash }
+
+final class _EvaluatedAccessSegment {
+  const _EvaluatedAccessSegment.key(this.key)
+    : kind = _EvaluatedAccessSegmentKind.key,
+      index = null;
+
+  const _EvaluatedAccessSegment.index(this.index)
+    : kind = _EvaluatedAccessSegmentKind.arrayIndex,
+      key = null;
+
+  final _EvaluatedAccessSegmentKind kind;
+  final String? key;
+  final int? index;
+}
+
+enum _EvaluatedAccessSegmentKind { key, arrayIndex }
+
 final class _RegexPlan {
   const _RegexPlan({required this.patterns, required this.dependencyRefs});
 
@@ -4362,88 +4389,231 @@ Object? _indexValue(Object? collection, Object? indexValue) {
   return null;
 }
 
-Object _rootForWrite(
+Object? _assignHashIndex(
   _RuntimeExecutionContext context,
-  String base,
-  List<ActionAccessSegment> segments,
-) {
-  final existing =
-      context.variables[base] ?? context.arrays[base] ?? context.hashes[base];
-  if (existing != null) {
-    return existing;
-  }
-  final root = segments.first is ActionIndexAccessSegment
-      ? <Object?>[]
-      : <String, Object?>{};
-  context.variables[base] = root;
-  return root;
-}
-
-void _writeNested(
-  Object root,
-  List<ActionAccessSegment> segments,
-  Object? value,
-  _RuntimeExecutionContext context,
+  String name,
+  ActionExpr key,
+  ActionExpr value,
   String ruleLabel,
   _CurrentActionEdge? currentEdge,
 ) {
-  if (segments.isEmpty) {
-    throw RuntimeInterpreterException(
-      'nested assignment in rule $ruleLabel requires at least one segment',
-    );
+  if (context.variables.containsKey(name)) {
+    final root = context.variables[name];
+    if (root is Map) {
+      final hash = _asHash(root);
+      final storedKey = _stringValue(
+        context.engine._evaluateExpression(
+          key,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+        ),
+      );
+      final storedValue = _copyValue(
+        context.engine._evaluateExpression(
+          value,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+        ),
+      );
+      hash[storedKey] = storedValue;
+      context.variables[name] = hash;
+      return _copyValue(hash);
+    }
+    if (root is List) {
+      if (key is ActionStringLiteralExpr) {
+        return null;
+      }
+      final list = _asArray(root);
+      final indexValue = context.engine._evaluateExpression(
+        key,
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      );
+      final index = _arrayIndex(indexValue);
+      if (index == null || index > list.length) {
+        return null;
+      }
+      final storedValue = _copyValue(
+        context.engine._evaluateExpression(
+          value,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+        ),
+      );
+      if (index == list.length) {
+        list.add(storedValue);
+      } else {
+        list[index] = storedValue;
+      }
+      context.variables[name] = list;
+      return _copyValue(list);
+    }
+    return null;
   }
+
+  final storedKey = _stringValue(
+    context.engine._evaluateExpression(
+      key,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    ),
+  );
+  final storedValue = _copyValue(
+    context.engine._evaluateExpression(
+      value,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    ),
+  );
+  context.hashFor(name)[storedKey] = storedValue;
+  return Map<String, Object?>.unmodifiable(context.hashFor(name));
+}
+
+_NestedWriteRoot? _rootStorageForWrite(
+  _RuntimeExecutionContext context,
+  String base,
+) {
+  if (context.variables.containsKey(base)) {
+    return _NestedWriteRoot.scalar(base, context.variables[base]);
+  }
+  if (context.arrays.containsKey(base)) {
+    return _NestedWriteRoot.array(base, context.arrays[base]);
+  }
+  if (context.hashes.containsKey(base)) {
+    return _NestedWriteRoot.hash(base, context.hashes[base]);
+  }
+  return null;
+}
+
+Object? _writeNested(
+  _RuntimeExecutionContext context,
+  String base,
+  List<ActionAccessSegment> segments,
+  ActionExpr value,
+  String ruleLabel,
+  _CurrentActionEdge? currentEdge,
+) {
+  final evaluatedSegments = _evaluateAccessSegments(
+    segments,
+    context,
+    ruleLabel,
+    currentEdge,
+  );
+  final storedValue = _copyValue(
+    context.engine._evaluateExpression(
+      value,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    ),
+  );
+  final rootStorage = _rootStorageForWrite(context, base);
+  if (rootStorage == null || evaluatedSegments.isEmpty) {
+    return null;
+  }
+  final root = _copyValue(rootStorage.value);
+  if (root is! Map && root is! List) {
+    return null;
+  }
+  final updated = _assignNestedValue(root, evaluatedSegments, storedValue);
+  if (!updated) {
+    return null;
+  }
+  rootStorage.store(context, root);
+  return _copyValue(root);
+}
+
+bool _assignNestedValue(
+  Object? root,
+  List<_EvaluatedAccessSegment> segments,
+  Object? value,
+) {
   var node = root;
   for (var index = 0; index < segments.length; index += 1) {
     final isLast = index == segments.length - 1;
     final segment = segments[index];
-    switch (segment) {
-      case ActionKeyAccessSegment(value: final key):
+    switch (segment.kind) {
+      case _EvaluatedAccessSegmentKind.key:
+        final key = segment.key;
+        if (key == null) {
+          return false;
+        }
         if (node is! Map<String, Object?>) {
-          throw RuntimeInterpreterException(
-            'nested key assignment in rule $ruleLabel needs a hash parent',
-          );
+          return false;
         }
         if (isLast) {
-          node[key] = value;
+          node[key] = _copyValue(value);
         } else {
-          final child = node[key] ?? _emptyContainerFor(segments[index + 1]);
-          node[key] = child;
+          final child = node[key];
+          if (child == null) {
+            return false;
+          }
           node = child;
         }
-      case ActionIndexAccessSegment(:final expr):
-        final rawIndex = context.engine._evaluateExpression(
-          expr,
-          context,
-          ruleLabel,
-          currentEdge: currentEdge,
-        );
-        final listIndex = rawIndex is num
-            ? rawIndex.toInt()
-            : int.tryParse('$rawIndex');
-        if (node is! List<Object?> || listIndex == null || listIndex < 0) {
-          throw RuntimeInterpreterException(
-            'nested index assignment in rule $ruleLabel needs an array parent',
-          );
-        }
-        while (node.length <= listIndex) {
-          node.add(null);
+      case _EvaluatedAccessSegmentKind.arrayIndex:
+        final listIndex = segment.index;
+        if (node is! List<Object?> || listIndex == null) {
+          return false;
         }
         if (isLast) {
-          node[listIndex] = value;
+          if (listIndex > node.length) {
+            return false;
+          }
+          if (listIndex == node.length) {
+            node.add(_copyValue(value));
+          } else {
+            node[listIndex] = _copyValue(value);
+          }
         } else {
-          final child =
-              node[listIndex] ?? _emptyContainerFor(segments[index + 1]);
-          node[listIndex] = child;
+          if (listIndex >= node.length) {
+            return false;
+          }
+          final child = node[listIndex];
+          if (child == null) {
+            return false;
+          }
           node = child;
         }
     }
   }
+  return true;
 }
 
-Object _emptyContainerFor(ActionAccessSegment segment) {
-  return segment is ActionIndexAccessSegment
-      ? <Object?>[]
-      : <String, Object?>{};
+List<_EvaluatedAccessSegment> _evaluateAccessSegments(
+  List<ActionAccessSegment> segments,
+  _RuntimeExecutionContext context,
+  String ruleLabel,
+  _CurrentActionEdge? currentEdge,
+) {
+  return [
+    for (final segment in segments)
+      switch (segment) {
+        ActionKeyAccessSegment(value: final key) => _EvaluatedAccessSegment.key(
+          key,
+        ),
+        ActionIndexAccessSegment(:final expr) => _EvaluatedAccessSegment.index(
+          _arrayIndex(
+            context.engine._evaluateExpression(
+              expr,
+              context,
+              ruleLabel,
+              currentEdge: currentEdge,
+            ),
+          ),
+        ),
+      },
+  ];
+}
+
+int? _arrayIndex(Object? value) {
+  final index = value is num ? value.toInt() : int.tryParse('$value');
+  return index != null && index >= 0 ? index : null;
 }
 
 Object? _copyArgument(

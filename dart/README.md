@@ -29,8 +29,8 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.4.3.5` is the current completed runtime boundary; `.4.3.6`
-is the next helper/value no-drift frontier. The package can round-trip
+`DART-BACKEND-PARITY.4.3.6` is the current completed runtime boundary; `.4.4`
+is the next BACKTRACK frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -49,7 +49,8 @@ accumulator collection, bounded repetition, zero-progress cutoffs, and recursion
 cutoffs. The runtime evaluator now also preserves scalar/array/hash/null/boolean/
 number shapes through assignment and wrapper snapshots, supports `hash(...)`,
 `set(hash(...), ...)`, hash-index mutation, nested reads, non-numeric map keys,
-aggregate `copy(...)`, and named/map/position capture helpers. It now executes
+aggregate `copy(...)`, nested value-path assignment without autovivifying
+missing intermediates, and named/map/position capture helpers. It now executes
 string/scalar helpers, explicit `str_*` lexical comparisons, numeric
 arithmetic/reducer/comparison helpers, numeric aliases and symbol callees, and
 compatible string/number receiver chains. It now also executes array helpers,

@@ -6,13 +6,16 @@ answers:
   - does Dart support hash stores in the runtime interpreter
   - does Dart support hash index assignment
   - does Dart support nested access reads
+  - does Dart nested value path assignment autovivify
+  - does Dart nested value path assignment return the updated root
+  - when does Dart nested value path assignment evaluate index expressions
   - does Dart runtime support entry_named and match_named
   - does Dart runtime support entry_map and match_map
   - does Dart runtime support capture position helpers
 date: 2026-07-09
 status: current
 tags: [dart, runtime, helpers, values, captures, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.4.3.1 extends dart/lib/src/runtime/interpreter.dart and test/runtime_interpreter_test.dart. Focused tests prove scalar assignment, array append, hash reset/mutation, typed wrapper snapshots, variable-held array/hash reads, non-numeric map keys, nested access reads, bare capture-name lookup, named capture maps, compact capture groups, and start/end position helper values."
+evidence: "DART-BACKEND-PARITY.4.3.1 extends dart/lib/src/runtime/interpreter.dart and test/runtime_interpreter_test.dart. Focused tests prove scalar assignment, array append, hash reset/mutation, typed wrapper snapshots, variable-held array/hash reads, non-numeric map keys, nested access reads, bare capture-name lookup, named capture maps, compact capture groups, and start/end position helper values. DART-BACKEND-PARITY.4.3.6 closes helper/value no-drift by aligning Dart nested value-path assignment with the Perl/Rust contract: successful writes return the updated root, missing/wrong intermediate paths return null without mutation, segment index expressions evaluate before the RHS value expression, final array writes may replace or append exactly at len, and no missing intermediate container is autovivified."
 reverify: "cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings"
 ---
 
@@ -29,7 +32,12 @@ stores when the bare name is a type-implying read.
 
 Indexed and nested reads support array indexes plus string-key map access, so
 forms such as `meta["key"]` and `payload["children"][1]["name"]` evaluate inside
-the Dart interpreter.
+the Dart interpreter. Nested value-path assignment now mirrors the Perl/Rust
+contract: successful writes return the updated root value, missing or wrong-shape
+intermediate paths return `null` without mutation, final hash keys may be
+created, final array indexes may replace or append exactly at the current
+length, missing intermediate containers are not autovivified, and segment index
+expressions are evaluated before the RHS value expression.
 
 The capture-reader subset now includes `entry_named`, `match_named`,
 `entry_has`, `match_has`, `entry_map`, `match_map`, `entry_len`, `match_len`,
@@ -40,4 +48,4 @@ scalar variable reads.
 Related facts: [[dart-runtime-hash-helpers]], [[dart-runtime-string-numeric-helpers]],
 [[dart-runtime-rule-interpreter]], [[dart-runtime-matching-state]],
 [[typed-wrapper-quoted-name-boundaries]], [[terse-direct-access-explicit-segments]],
-[[rust-capture-group-helper-indexing]].
+[[terse-nested-value-path-assignment]], [[rust-capture-group-helper-indexing]].

@@ -53,8 +53,8 @@ also bind `key`; array callbacks also bind `index`; reduce callbacks also bind
 after callback execution.
 
 Boundary: BACKTRACK, tracing, staged runtime execution, corpus output parity,
-Dart-specific CLI productization, and final no-drift closeout remain later
-`DART-BACKEND-PARITY` leaves.
+Dart-specific CLI productization, and final Dart parity no-drift closeout remain
+later `DART-BACKEND-PARITY` leaves.
 
 Related facts: [[dart-runtime-hash-helpers]], [[dart-runtime-array-helpers]],
 [[dart-runtime-rule-interpreter]], [[terse-expression-valued-block-early-return]],

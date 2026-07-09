@@ -89,7 +89,8 @@ Nested writes mutate the array/hash value currently held by the bare variable. I
 already exist and have the required shape; LinkedSpec does not autovivify missing hashes or arrays. A final hash
 key may be created or replaced. A final array index may replace an existing element or append exactly at the
 current array length. An array gap, missing intermediate key, or wrong intermediate container leaves the root
-unchanged and yields `undef` in value positions.
+unchanged and yields `undef` in value positions. Segment index expressions are evaluated before the RHS value
+expression; the root path check and mutation happen after both.
 
 ## Pushing values
 
