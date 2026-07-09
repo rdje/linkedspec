@@ -7,6 +7,28 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.2.4 — integrate Dart function shell projection**
+  (DONE spec-returned function-definition projection; helper/action AST and runtime behavior still deferred).
+
+  **Change:** Added `projectUserFunctionDefinitionAsts(...)` and
+  `parseSpecWithUserFunctionDefinitionAsts(...)` in Dart. The projection consumes
+  `function_definition` / `function_definition_error` nodes returned by
+  `specs/user_function_definition.spec`, validates source/body spans and staged sidecars, normalizes
+  source-order `parent_ast_path` plus deterministic `body_parse_job` ids, strips returned definition
+  spans while preserving line layout, and attaches ordered `FunctionDefinition` records before rule parsing.
+  `StagedParseJob` now round-trips function-body metadata fields.
+
+  **Boundary:** Dart still does not execute `specs/user_function_definition.spec` itself and does not
+  raw-scan top-level `fn` source as a fallback. Until the Dart runtime can execute `.spec` grammars, the
+  semantic input is the owning spec's returned AST node list. The next frontier is `DART-BACKEND-PARITY.3.1`
+  for typed helper/action AST parsing.
+
+  **Verification:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+  `dart test`, `dart run bin/linkedspec_dart.dart --help`,
+  `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`, and
+  `dart run bin/corpus_runner.dart --help` pass. `git diff --check`, memory architecture, Knowledge Map
+  regeneration/check, task-tree metadata, doctrine gates, and `mdbook build docs/linkedspec-book` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.2.3 — add Dart frontend validation**
   (DONE AST validation; top-level function-shell extraction and runtime behavior still deferred).
 

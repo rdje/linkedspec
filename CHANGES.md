@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.2.4 — integrate Dart function shell projection
+
+**Scope:** Dart spec-defined function-definition projection, staged sidecar preservation, tests, docs,
+and frontier advancement.
+
+**Change:** Added `dart/lib/src/parser/user_function_definition_shell.dart` and exported
+`projectUserFunctionDefinitionAsts(...)` / `parseSpecWithUserFunctionDefinitionAsts(...)`.
+The projection consumes the `function_definition` / `function_definition_error` nodes returned by
+`specs/user_function_definition.spec`, validates source/body spans plus `body_payload` and
+`body_parse_job`, normalizes source-order parent paths and deterministic parse-job ids, strips returned
+definition spans while preserving line layout, and attaches ordered `FunctionDefinition` records before
+rule parsing. `StagedParseJob` now preserves the function-body sidecar metadata fields emitted by the
+spec (`version`, `function_name`, `params`, `arity`, `diagnostic_owner`). Added
+`test/user_function_definition_shell_test.dart` for successful projection, malformed-node diagnostics,
+sidecar drift rejection, and the no-raw-scanner boundary.
+
+**Validation:** `dart test test/spec_ast_test.dart test/spec_parser_test.dart test/spec_validator_test.dart
+test/user_function_definition_shell_test.dart` and `dart analyze --fatal-infos --fatal-warnings` pass.
+Full Dart and repo gates are run during commit closeout.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.2.3 — add Dart frontend validation
 
 **Scope:** Dart frontend validation, strict-syntax checks, validation fixtures, docs, and frontier advancement.

@@ -30,6 +30,11 @@ export 'src/corpus/manifest_runner.dart'
         CorpusValidationResult,
         loadCorpusFixtures;
 export 'src/parser/spec_parser.dart' show SpecParseException, parseSpec;
+export 'src/parser/user_function_definition_shell.dart'
+    show
+        UserFunctionDefinitionProjection,
+        parseSpecWithUserFunctionDefinitionAsts,
+        projectUserFunctionDefinitionAsts;
 export 'src/scaffold.dart'
     show
         describeLinkedSpecDartScaffold,

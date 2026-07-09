@@ -1,6 +1,19 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.2.4 — Dart function-definition shell projection):
+  Added `dart/lib/src/parser/user_function_definition_shell.dart` with
+  `projectUserFunctionDefinitionAsts(...)` and `parseSpecWithUserFunctionDefinitionAsts(...)`.
+  Dart now consumes the spec-defined `function_definition` / `function_definition_error` node shape from
+  `specs/user_function_definition.spec`, validates source/body spans, preserves and normalizes `body_payload`
+  plus `body_parse_job` sidecars, strips returned definition spans before rule parsing, and attaches ordered
+  `FunctionDefinition` records. The implementation intentionally does not raw-scan `fn` source; until Dart
+  has an executable `.spec` engine, the semantic input is the AST node list returned by the owning spec.
+  `StagedParseJob` now round-trips function-body metadata fields (`version`, `function_name`, `params`,
+  `arity`, `diagnostic_owner`). `test/user_function_definition_shell_test.dart` covers projection,
+  malformed-node diagnostics, sidecar drift rejection, and the no-raw-scanner boundary. The `.2` frontend
+  container is closed; `.3.1` starts typed helper/action AST parsing.
+
 - 2026-07-09 (DART-BACKEND-PARITY.2.3 — Dart frontend validation):
   Added `dart/lib/src/validation/spec_validator.dart` with `validateSpec(...)`. The validator mirrors the
   Rust/source-AST validation boundary: top-rule presence, duplicate rule/function names, function registry

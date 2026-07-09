@@ -30,8 +30,10 @@ manifest format/count/name shape, detects missing or stale fixture directories, 
 `dart/lib/src/ast/spec_ast.dart` defines AST/staged-parse-job types that round-trip through JSON.
 `dart/lib/src/parser/spec_parser.dart` parses core `.spec` rule paragraphs into those AST types.
 `dart/lib/src/validation/spec_validator.dart` validates parsed source ASTs in non-strict or strict mode.
-The package does not implement function-shell staging, compiled-spec state, runtime semantics, or corpus
-output comparison yet. `DART-BACKEND-PARITY.2.4` starts function-shell integration next.
+`dart/lib/src/parser/user_function_definition_shell.dart` projects spec-returned function-definition nodes
+into `FunctionDefinition` records without raw-scanning `fn` source. The package does not implement
+helper/action AST typing, compiled-spec state, runtime semantics, or corpus output comparison yet.
 
 Related facts: [[dart-core-spec-parser]], [[dart-frontend-validation]],
-[[dart-backend-interpreter-first-plan]], [[text-to-ast-backend-doctrine]], [[rust-perl-output-oracle]].
+[[dart-function-definition-shell-projection]], [[dart-backend-interpreter-first-plan]],
+[[text-to-ast-backend-doctrine]], [[rust-perl-output-oracle]].

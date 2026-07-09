@@ -254,8 +254,15 @@ markers, comments, and nested block boundaries, with tests over all checked-in
 `specs/*.spec` files and rule-only corpus specs. Dart `validateSpec(...)` then
 checks top-rule presence, duplicates, source-AST edge consistency, target
 references/indexes, regex structure, malformed raw body lines, and strict-mode
-unused rules. Top-level function-definition shell integration remains the next
-frontend leaf.
+unused rules. Dart also has the first function-shell projection layer:
+`parseSpecWithUserFunctionDefinitionAsts(...)` consumes the
+`function_definition` / `function_definition_error` nodes returned by
+`specs/user_function_definition.spec`, validates source/body spans and staged
+`body_payload` / `body_parse_job` sidecars, normalizes source-order parent paths
+and parse-job ids, strips returned definition spans before rule parsing, and
+attaches ordered `FunctionDefinition` records. This is not a Dart raw scanner for
+`fn` source; until Dart has an executable `.spec` engine, callers provide the
+spec-returned node list as the semantic input.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

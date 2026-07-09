@@ -99,7 +99,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.1.3 - add Dart corpus manifest IO scaffold`
 
 - ID: `DART-BACKEND-PARITY.2`
-  Status: `active`
+  Status: `done`
   Goal: Implement the Dart `.spec` frontend.
   Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`
 
@@ -145,15 +145,25 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.2.3 - add Dart frontend validation`
 
 - ID: `DART-BACKEND-PARITY.2.4`
-  Status: `pending`
+  Status: `done`
   Goal: Integrate `specs/user_function_definition.spec` as the function-definition shell owner.
   Acceptance: Dart consumes the spec-defined function-definition AST shape and does not maintain a
     competing host-language raw scanner as the semantic contract.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** `dart/lib/src/parser/user_function_definition_shell.dart`
+    adds `projectUserFunctionDefinitionAsts(...)` and `parseSpecWithUserFunctionDefinitionAsts(...)`.
+    These APIs consume the `function_definition` / `function_definition_error` node shape returned by
+    `specs/user_function_definition.spec`, validate source/body spans and staged sidecars, normalize
+    source-order `parent_ast_path` and deterministic `body_parse_job` ids, strip returned source spans
+    while preserving line layout, and attach ordered `FunctionDefinition` records before rule parsing.
+    `StagedParseJob` now preserves the function-body sidecar metadata (`version`, `function_name`,
+    `params`, `arity`, `diagnostic_owner`) during JSON round-trips. The production Dart path still
+    does not raw-scan `fn` source; it requires the spec-returned nodes as its semantic input.
+    `test/user_function_definition_shell_test.dart` covers successful projection, no-raw-scanner fallback,
+    malformed `function_definition_error` diagnostics, and sidecar drift rejection.
+  Commit: `DART-BACKEND-PARITY.2.4 - integrate Dart function shell projection`
 
 - ID: `DART-BACKEND-PARITY.3`
-  Status: `pending`
+  Status: `active`
   Goal: Implement helper/action AST and compiled-state construction.
   Children: `.3.1`, `.3.2`, `.3.3`, `.3.4`
 
@@ -335,7 +345,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-BACKEND-PARITY.2.4` | `pending` | Parser and validator are in place; integrate the spec-defined top-level function-definition shell. |
+| 1 | `DART-BACKEND-PARITY.3.1` | `pending` | The `.2` frontend container is closed; start typed helper/action AST parsing before compiled-state and runtime work. |
 
 ## Dart Toolchain And Package Layout
 
@@ -447,6 +457,18 @@ The `.2.3` validation layer adds:
   consistency, grouped action edges, target references/indexes, regex structure, and strict unused rules.
 - No top-level `fn` shell extraction/staging, compiler/runtime execution, or corpus output comparison yet.
 
+The `.2.4` function-shell projection layer adds:
+
+- `lib/src/parser/user_function_definition_shell.dart` with public
+  `projectUserFunctionDefinitionAsts(...)` and `parseSpecWithUserFunctionDefinitionAsts(...)`.
+- `test/user_function_definition_shell_test.dart` for projection, malformed-node diagnostics, sidecar
+  drift rejection, and the no-raw-scanner boundary.
+- Validation and normalization for the `function_definition` / `function_definition_error` AST node shape
+  returned by `specs/user_function_definition.spec`.
+- Preservation of `body_payload` and `body_parse_job` sidecars, normalized `parent_ast_path` values,
+  deterministic function-body parse-job ids, and stripped definition spans before rule parsing.
+- No helper/action AST typing, compiler/runtime execution, or corpus output comparison yet.
+
 ## Decisions
 
 - `2026-07-09`: Dart starts interpreter-first. The primary parity path is
@@ -469,14 +491,16 @@ The `.2.3` validation layer adds:
   to the staged/function leaves.
 - `2026-07-09`: Dart `.2.3` validation is source-AST validation only. It does not execute helper/action
   semantics and intentionally keeps top-level function shell extraction in `.2.4`.
+- `2026-07-09`: Dart `.2.4` consumes the AST node shape returned by `specs/user_function_definition.spec`
+  and does not raw-scan `fn` source. Executing that owning spec inside Dart remains a later runtime capability.
 
 ## Open Questions
 
-- None blocking `.2.4`. Parser and validation output are available; function-shell integration is next.
+- None blocking `.3.1`. The frontend source-AST layer is available; helper/action AST parsing is next.
 
 ## Blockers
 
-- None known before `.2.4` function-shell integration.
+- None known before `.3.1` helper/action AST parsing.
 
 ## Verification Log
 
@@ -489,6 +513,7 @@ The `.2.3` validation layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.2.1` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. AST/data types round-trip through JSON; no parser/runtime behavior yet. |
 | `2026-07-09` | `DART-BACKEND-PARITY.2.2` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Parser fixtures cover Rust-compatible seams, all checked-in `specs/*.spec`, and rule-only corpus `input.spec` files. |
 | `2026-07-09` | `DART-BACKEND-PARITY.2.3` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Validator tests cover focused failures plus shipped specs and rule-only corpus specs. |
+| `2026-07-09` | `DART-BACKEND-PARITY.2.4` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Function-shell projection consumes spec-returned nodes, preserves staged sidecars, and does not raw-scan `fn` source. |
 
 ## Commit Log
 
@@ -501,6 +526,7 @@ The `.2.3` validation layer adds:
 | `DART-BACKEND-PARITY.2.1` | `DART-BACKEND-PARITY.2.1 - define Dart frontend AST data types` | Source-level AST/data types; no parser behavior. |
 | `DART-BACKEND-PARITY.2.2` | `DART-BACKEND-PARITY.2.2 - implement Dart spec parser` | Core rule parser; validation/function-shell/runtime behavior deferred. |
 | `DART-BACKEND-PARITY.2.3` | `DART-BACKEND-PARITY.2.3 - add Dart frontend validation` | Source-AST validation; function-shell/runtime behavior deferred. |
+| `DART-BACKEND-PARITY.2.4` | `DART-BACKEND-PARITY.2.4 - integrate Dart function shell projection` | Spec-returned function-definition projection; `.2` frontend container closes. |
 
 ## Changelog
 
@@ -517,3 +543,5 @@ The `.2.3` validation layer adds:
   validation and strict syntax behavior.
 - `2026-07-09`: Added Dart frontend validation and strict syntax tests; frontier advances to `.2.4` for
   function-definition shell integration.
+- `2026-07-09`: Added Dart function-definition shell projection for spec-returned AST nodes; `.2` closes
+  and frontier advances to `.3.1` for helper/action AST parsing.

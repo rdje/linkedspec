@@ -155,10 +155,14 @@ final class StagedSourceSpan {
 
 final class StagedParseJob {
   const StagedParseJob({
+    this.version,
     required this.jobId,
     required this.parentAstPath,
     required this.nodeKind,
     required this.payloadKind,
+    this.functionName,
+    this.params,
+    this.arity,
     required this.text,
     required this.sourceSpan,
     required this.parserSpecId,
@@ -166,12 +170,17 @@ final class StagedParseJob {
     required this.resultPolicy,
     required this.resultField,
     required this.failurePolicy,
+    this.diagnosticOwner,
   });
 
+  final int? version;
   final String jobId;
   final List<String> parentAstPath;
   final String nodeKind;
   final String payloadKind;
+  final String? functionName;
+  final List<String>? params;
+  final int? arity;
   final String text;
   final StagedSourceSpan sourceSpan;
   final String parserSpecId;
@@ -179,6 +188,7 @@ final class StagedParseJob {
   final String resultPolicy;
   final String resultField;
   final String failurePolicy;
+  final String? diagnosticOwner;
 
   String get kind => 'parse_job';
 
@@ -190,10 +200,14 @@ final class StagedParseJob {
       );
     }
     return StagedParseJob(
+      version: _optionalIntField(json, 'version'),
       jobId: _stringField(json, 'job_id'),
       parentAstPath: _stringList(json, 'parent_ast_path'),
       nodeKind: _stringField(json, 'node_kind'),
       payloadKind: _stringField(json, 'payload_kind'),
+      functionName: _optionalStringField(json, 'function_name'),
+      params: _optionalStringList(json, 'params'),
+      arity: _optionalIntField(json, 'arity'),
       text: _stringField(json, 'text'),
       sourceSpan: StagedSourceSpan.fromJson(_objectField(json, 'source_span')),
       parserSpecId: _stringField(json, 'parser_spec_id'),
@@ -201,16 +215,21 @@ final class StagedParseJob {
       resultPolicy: _stringField(json, 'result_policy'),
       resultField: _stringField(json, 'result_field'),
       failurePolicy: _stringField(json, 'failure_policy'),
+      diagnosticOwner: _optionalStringField(json, 'diagnostic_owner'),
     );
   }
 
   JsonObject toJson() {
     return {
       'kind': 'parse_job',
+      if (version != null) 'version': version,
       'job_id': jobId,
       'parent_ast_path': parentAstPath,
       'node_kind': nodeKind,
       'payload_kind': payloadKind,
+      if (functionName != null) 'function_name': functionName,
+      if (params != null) 'params': params,
+      if (arity != null) 'arity': arity,
       'text': text,
       'source_span': sourceSpan.toJson(),
       'parser_spec_id': parserSpecId,
@@ -218,6 +237,7 @@ final class StagedParseJob {
       'result_policy': resultPolicy,
       'result_field': resultField,
       'failure_policy': failurePolicy,
+      if (diagnosticOwner != null) 'diagnostic_owner': diagnosticOwner,
     };
   }
 }
@@ -695,6 +715,17 @@ List<String> _stringList(JsonObject json, String field) {
   final value = json[field];
   if (value is! List) {
     throw FormatException('$field must be an array');
+  }
+  return [for (final item in value) _stringListItem(item, field)];
+}
+
+List<String>? _optionalStringList(JsonObject json, String field) {
+  final value = json[field];
+  if (value == null) {
+    return null;
+  }
+  if (value is! List) {
+    throw FormatException('$field must be an array when present');
   }
   return [for (final item in value) _stringListItem(item, field)];
 }
