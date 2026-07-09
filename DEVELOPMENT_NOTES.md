@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.0 — Dart corpus expansion split):
+  Split the broad Dart shipped-corpus expansion into recoverable child leaves before changing runner behavior or
+  fixture coverage. `.6.2.1` owns opt-in executable corpus selection/reporting while preserving the default
+  manifest-loader smoke. `.6.2.2` owns the starter proof-edge, autoexist, and core terse runtime batch. `.6.2.3`
+  owns helper/control/receiver/user-function/tree traversal fixtures. `.6.2.4` owns shipped-spec and parser-smoke
+  fixtures. Each implementation batch must either pass on Dart or open a narrowly owned root-cause leaf with
+  Perl/Rust oracle evidence; no fixture gets weakened to match Dart.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.1 — Dart controlled corpus execution):
   Added the first executable Dart corpus harness while keeping the default 99-fixture corpus runner command as a
   manifest-loader smoke. `executeCorpusFixtures(...)` reuses `loadCorpusFixtures(...)`, then runs each fixture

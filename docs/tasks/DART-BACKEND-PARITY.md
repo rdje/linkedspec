@@ -784,8 +784,56 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 - ID: `DART-BACKEND-PARITY.6.2`
   Status: `pending`
   Goal: Expand to the current 99-fixture manifest in safe batches.
+  Children: `.6.2.0`, `.6.2.1`, `.6.2.2`, `.6.2.3`, `.6.2.4`
   Acceptance: Each batch either passes on Dart or records a narrowly owned root-cause leaf with Perl/Rust
     oracle evidence; no fixture is weakened to fit Dart.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.6.2.0`
+  Status: `done`
+  Goal: Split shipped-corpus expansion into narrowly owned batches.
+  Acceptance: `.6.2` has child leaves for opt-in executable runner/reporting, starter corpus batches,
+    helper/control/runtime batches, and shipped-spec batches before any behavior changes are made.
+  Verification: **PASS 2026-07-09.** Split `.6.2` into child leaves `.6.2.1` through `.6.2.4` so the
+    99-fixture expansion can proceed in committed, recoverable batches without changing parser/runtime behavior in
+    the planning slice. Memory architecture, task-tree metadata, doctrine, mdBook, and `git diff --check` pass.
+  Commit: `DART-BACKEND-PARITY.6.2.0 - split Dart corpus expansion batches`
+
+- ID: `DART-BACKEND-PARITY.6.2.1`
+  Status: `pending`
+  Goal: Add opt-in executable corpus selection and reporting.
+  Acceptance: Dart can execute named or safely bounded fixture subsets through the corpus runner/library, report
+    pass/fail/mismatch details for every selected fixture, and keep the default 99-fixture command as a
+    manifest-loader smoke until full parity is ready.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.6.2.2`
+  Status: `pending`
+  Goal: Close the starter proof-edge, autoexist, and core terse runtime batch.
+  Acceptance: The early manifest fixtures covering proof-edge returns, autoexist behavior, scalar/array/hash
+    store reads, assignment/mutation, and primitive helper surfaces either pass on Dart or each blocked fixture is
+    routed to a narrowly owned root-cause leaf with Perl/Rust oracle evidence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.6.2.3`
+  Status: `pending`
+  Goal: Close the helper, control, receiver-chain, user-function, and tree traversal batch.
+  Acceptance: The middle terse fixtures covering value blocks, attached/inline controls, helper composition,
+    receiver chains, numeric/string/array/hash helpers, user-function runtime, with-blocks, and hash/array tree
+    traversal either pass on Dart or each blocked fixture is routed to a narrowly owned root-cause leaf with
+    Perl/Rust oracle evidence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.6.2.4`
+  Status: `pending`
+  Goal: Close the shipped-spec and parser-smoke corpus batch.
+  Acceptance: The tclite, lispish, recursive top-rule, hlink, portmap, ebnf, spec.spec, regdef, tablegrep,
+    simenv, VHDL/library, history, and plugin smoke fixtures either pass on Dart or each blocked fixture is routed
+    to a narrowly owned root-cause leaf with Perl/Rust oracle evidence.
   Verification: `pending`
   Commit: `pending`
 

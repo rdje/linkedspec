@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.0 — split Dart corpus expansion batches
+
+**Scope:** Dart corpus-parity task-tree split, live docs, roadmap status, and resume pointer.
+
+**Change:** Split the broad `.6.2` shipped 99-fixture corpus expansion into committed child leaves for
+opt-in executable corpus selection/reporting, starter proof-edge/autoexist/core terse fixtures,
+helper/control/receiver/user-function/tree traversal fixtures, and shipped-spec/parser-smoke fixtures. No
+parser/runtime behavior changed in this planning slice.
+
+**Validation:** mdBook build, memory architecture, Knowledge Map check, task-tree metadata, doctrine, and
+`git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.1 — add Dart controlled corpus execution
 
 **Scope:** Dart corpus execution harness, focused controlled corpus tests, public Dart exports, mdBook/status
