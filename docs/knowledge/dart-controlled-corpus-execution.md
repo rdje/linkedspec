@@ -13,12 +13,13 @@ answers:
   - "what does DART-BACKEND-PARITY.6.2.3 prove"
   - "what does DART-BACKEND-PARITY.6.2.4.0 prove"
   - "what does DART-BACKEND-PARITY.6.2.5 prove"
+  - "what does DART-BACKEND-PARITY.6.3 prove"
   - "is the Dart corpus runner full 99-fixture parity yet"
 date: 2026-07-09
 status: current
 tags: [dart, corpus, runtime, parity, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.6.1 adds executeCorpusFixtures plus CorpusExecutionResult and CorpusFixtureExecutionResult in dart/lib/src/corpus/manifest_runner.dart. DART-BACKEND-PARITY.6.2.1 adds caseNames/offset/limit selection to executeCorpusFixtures and opt-in bin/corpus_runner.dart --execute mode with --case/--offset/--limit. DART-BACKEND-PARITY.6.2.2 proves the first 40 shipped manifest fixtures green with `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40`. DART-BACKEND-PARITY.6.2.3 proves the non-fn middle helper/control/receiver fixtures green and routes three top-level fn fixtures to .6.2.5. DART-BACKEND-PARITY.6.2.4.0 measures the final shipped-spec/parser-smoke window at 2/31 green and splits the known failure clusters before implementation. DART-BACKEND-PARITY.6.2.5 routes the three top-level fn fixtures through specs/user_function_definition.spec and staged projection without a Dart raw scanner; the routed three-fixture corpus run passes. test/corpus_manifest_test.dart writes temporary manifest-backed fixtures that prove scalar output, nested array/hash/null/boolean output, blind rule dispatch, lifecycle output shape, mismatch reporting, named/bounded selection, CLI selected execution, and unbounded CLI execute rejection."
-reverify: "cd dart && dart test test/corpus_manifest_test.dart && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40 && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 40 --limit 17 && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 58 --limit 2 && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 62 --limit 6 && (dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31 || true) && dart analyze --fatal-infos --fatal-warnings"
+evidence: "DART-BACKEND-PARITY.6.1 adds executeCorpusFixtures plus CorpusExecutionResult and CorpusFixtureExecutionResult in dart/lib/src/corpus/manifest_runner.dart. DART-BACKEND-PARITY.6.2.1 adds caseNames/offset/limit selection to executeCorpusFixtures and opt-in bin/corpus_runner.dart --execute mode with --case/--offset/--limit. DART-BACKEND-PARITY.6.2.2 proves the first 40 shipped manifest fixtures green with `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40`. DART-BACKEND-PARITY.6.2.3 proves the non-fn middle helper/control/receiver fixtures green and routes three top-level fn fixtures to .6.2.5. DART-BACKEND-PARITY.6.2.4.0 measures the final shipped-spec/parser-smoke window at 2/31 green and splits the known failure clusters before implementation. DART-BACKEND-PARITY.6.2.5 routes the three top-level fn fixtures through specs/user_function_definition.spec and staged projection without a Dart raw scanner; the routed three-fixture corpus run passes. DART-BACKEND-PARITY.6.3 enables unbounded CLI --execute and proves the checked-in 99-fixture corpus green with 99 passed / 0 failed. test/corpus_manifest_test.dart locks scalar output, nested array/hash/null/boolean output, blind rule dispatch, lifecycle output shape, mismatch reporting, named/bounded selection, CLI selected execution, CLI full-manifest execution, unsupported manifest format rejection, invalid/duplicate case-name rejection, count mismatch, missing fixture dirs, stale extra dirs, and missing required fixture files."
+reverify: "cd dart && dart test test/corpus_manifest_test.dart && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute && dart analyze --fatal-infos --fatal-warnings"
 ---
 
 The Dart executable corpus harness lives in
@@ -37,8 +38,8 @@ fixture result, so one failing fixture does not hide later failures.
 `DART-BACKEND-PARITY.6.2.1` adds named and bounded selection. Library callers
 can pass `caseNames`, `offset`, and `limit` to `executeCorpusFixtures(...)`.
 The CLI exposes the same safe surface through opt-in `--execute` with repeated
-`--case`, `--offset`, and `--limit`; unbounded CLI execution is rejected until
-full corpus parity is ready.
+`--case`, `--offset`, and `--limit`; without a selector it runs the full
+manifest in order.
 
 `DART-BACKEND-PARITY.6.2.2` proves the first 40 shipped manifest fixtures green
 through bounded execute mode. This is a starter corpus-batch proof, not full
@@ -55,9 +56,15 @@ window and splits it by failure cluster before implementation.
 obtaining `function_definition` nodes from `specs/user_function_definition.spec`
 and feeding them through staged function-body projection.
 
+`DART-BACKEND-PARITY.6.3` proves full checked-in Dart corpus parity: the current
+99-fixture manifest runs through Dart parse/compile/runtime execution with 99
+passed and 0 failed. The same slice locks unsupported manifest formats, invalid
+or duplicate case names, count drift, directory drift, missing files, output
+mismatches, selected CLI execution, and full-manifest CLI execution.
+
 `DART-BACKEND-PARITY.6.1` proved execution with controlled temporary fixtures.
-The full shipped 99-fixture manifest expansion remains owned by
-later `.6` leaves.
+The next `.6` leaf is verification-story wiring for the already-green corpus
+gate.
 
 Related facts: [[dart-backend-scaffold-package]],
 [[dart-runtime-rule-interpreter]], [[dart-starter-corpus-batch]],

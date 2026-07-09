@@ -323,6 +323,23 @@ void main() {
     ]);
   });
 
+  test('executes full checked-in corpus gate', () {
+    final result = executeCorpusFixtures(
+      '../rust/linkedspec-runtime/tests/corpus',
+    );
+
+    expect(
+      result.failures
+          .map((failure) => '${failure.name}: ${failure.failure}')
+          .join('\n'),
+      isEmpty,
+    );
+    expect(result.validation.manifest.caseCount, 99);
+    expect(result.results, hasLength(result.validation.manifest.caseCount));
+    expect(result.passed, isTrue);
+    expect(result.passedCount, result.validation.manifest.caseCount);
+  });
+
   test('executes controlled fixtures against runtime output shape', () {
     final root = Directory.systemTemp.createTempSync(
       'linkedspec-dart-controlled-',
@@ -592,18 +609,25 @@ Done::
     }
   });
 
-  test('corpus runner execute mode requires explicit selection', () {
+  test('corpus runner execute mode runs the full manifest by default', () {
     final root = Directory.systemTemp.createTempSync(
-      'linkedspec-dart-cli-selection-',
+      'linkedspec-dart-cli-full-',
     );
     try {
-      _writeManifest(root, ['passing']);
+      _writeManifest(root, ['first', 'second']);
       _writeFixture(
         root,
-        'passing',
-        specSource: _returningSpec('ok'),
-        inputText: 'xpass',
-        expectedJson: 'ok',
+        'first',
+        specSource: _returningSpec('first'),
+        inputText: 'xfirst',
+        expectedJson: 'first',
+      );
+      _writeFixture(
+        root,
+        'second',
+        specSource: _returningSpec('second'),
+        inputText: 'xsecond',
+        expectedJson: 'second',
       );
 
       final process = Process.runSync(Platform.resolvedExecutable, [
@@ -614,13 +638,76 @@ Done::
         '--execute',
       ], workingDirectory: Directory.current.path);
 
-      expect(process.exitCode, 64);
+      expect(process.exitCode, 0);
+      final stdout = process.stdout as String;
+      expect(stdout, contains('PASS first'));
+      expect(stdout, contains('PASS second'));
+      expect(stdout, contains('2 passed, 0 failed'));
+    } finally {
+      root.deleteSync(recursive: true);
+    }
+  });
+
+  test('rejects unsupported manifest format', () {
+    final root = Directory.systemTemp.createTempSync('linkedspec-dart-format-');
+    try {
+      _writeManifest(root, ['alpha'], format: 2);
+      _writeFixture(root, 'alpha');
+
       expect(
-        process.stderr as String,
-        contains('--execute requires --case or --limit'),
+        () => loadCorpusFixtures(root.path),
+        throwsA(
+          isA<CorpusManifestException>().having(
+            (error) => error.message,
+            'message',
+            contains('unsupported corpus manifest format 2'),
+          ),
+        ),
       );
     } finally {
       root.deleteSync(recursive: true);
+    }
+  });
+
+  test('rejects invalid and duplicate manifest case names', () {
+    final invalidRoot = Directory.systemTemp.createTempSync(
+      'linkedspec-dart-invalid-name-',
+    );
+    try {
+      _writeManifest(invalidRoot, ['../bad']);
+
+      expect(
+        () => loadCorpusFixtures(invalidRoot.path),
+        throwsA(
+          isA<CorpusManifestException>().having(
+            (error) => error.message,
+            'message',
+            contains('invalid corpus manifest case name: ../bad'),
+          ),
+        ),
+      );
+    } finally {
+      invalidRoot.deleteSync(recursive: true);
+    }
+
+    final duplicateRoot = Directory.systemTemp.createTempSync(
+      'linkedspec-dart-duplicate-name-',
+    );
+    try {
+      _writeManifest(duplicateRoot, ['alpha', 'alpha']);
+
+      expect(
+        () => loadCorpusFixtures(duplicateRoot.path),
+        throwsA(
+          isA<CorpusManifestException>().having(
+            (error) => error.message,
+            'message',
+            contains('duplicate case names'),
+          ),
+        ),
+      );
+    } finally {
+      duplicateRoot.deleteSync(recursive: true);
     }
   });
 
@@ -712,9 +799,14 @@ Done::
   });
 }
 
-void _writeManifest(Directory root, List<String> cases, {int? caseCount}) {
+void _writeManifest(
+  Directory root,
+  List<String> cases, {
+  int? caseCount,
+  int format = 1,
+}) {
   final manifest = {
-    'format': 1,
+    'format': format,
     'case_count': caseCount ?? cases.length,
     'cases': cases,
   };

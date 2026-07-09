@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.3 — close full Dart corpus gate**
+  (DONE — the checked-in Dart corpus executes 99/99 green; frontier advances to verification wiring `.6.4`).
+
+  **Change:** Promoted the Dart corpus runner from bounded batch execution to full-manifest execution. CLI
+  `--execute` without a selector now runs the full manifest in order, while named and bounded selection remain
+  available for diagnostics.
+
+  **Boundary:** This closes the `.6` full-corpus output parity gate for the current 99-fixture manifest. Manifest
+  drift and malformed-manifest guards remain strict: unsupported formats, count mismatch, invalid/duplicate case
+  names, missing fixture dirs, stale extra dirs, missing files, and output mismatches are covered.
+
+  **Verification:** Full 99-fixture corpus execution, focused corpus tests, Dart format/analyze/full tests, mdBook,
+  memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.2.5 — route Dart fn corpus through spec shell**
   (DONE — the three routed top-level `fn` corpus fixtures now pass; frontier advances to full corpus gate `.6.3`).
 

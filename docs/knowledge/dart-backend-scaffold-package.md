@@ -18,8 +18,8 @@ answers:
 date: 2026-07-09
 status: current
 tags: [dart, backends, package, scaffold, corpus, ast, parser, validation, actionir, contracts, tests]
-evidence: "DART-BACKEND-PARITY.1.2 creates the Dart package scaffold; DART-BACKEND-PARITY.1.3 adds corpus manifest IO; DART-BACKEND-PARITY.2.1 adds dart/lib/src/ast/spec_ast.dart and JSON round-trip tests; DART-BACKEND-PARITY.2.2 adds dart/lib/src/parser/spec_parser.dart and parser fixtures; DART-BACKEND-PARITY.2.3 adds dart/lib/src/validation/spec_validator.dart and validation fixtures; DART-BACKEND-PARITY.3.1 adds typed ActionIR parsing; DART-BACKEND-PARITY.3.2 adds dart/lib/src/action/action_contracts.dart; DART-BACKEND-PARITY.3.3 adds dart/lib/src/action/function_registry.dart and exact-arity user-call classification; DART-BACKEND-PARITY.3.4 adds compiled-spec state; DART-BACKEND-PARITY.4.1 adds runtime matching; DART-BACKEND-PARITY.4.2 adds the first runtime rule interpreter; DART-BACKEND-PARITY.6.1 adds executeCorpusFixtures for controlled manifest fixtures; DART-BACKEND-PARITY.6.2.1 adds opt-in named/bounded corpus execution selection."
-reverify: "git ls-files dart && (cd dart && dart format --set-exit-if-changed . && dart analyze --fatal-infos --fatal-warnings && dart test && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus)"
+evidence: "DART-BACKEND-PARITY.1.2 creates the Dart package scaffold; DART-BACKEND-PARITY.1.3 adds corpus manifest IO; DART-BACKEND-PARITY.2.1 adds dart/lib/src/ast/spec_ast.dart and JSON round-trip tests; DART-BACKEND-PARITY.2.2 adds dart/lib/src/parser/spec_parser.dart and parser fixtures; DART-BACKEND-PARITY.2.3 adds dart/lib/src/validation/spec_validator.dart and validation fixtures; DART-BACKEND-PARITY.3.1 adds typed ActionIR parsing; DART-BACKEND-PARITY.3.2 adds dart/lib/src/action/action_contracts.dart; DART-BACKEND-PARITY.3.3 adds dart/lib/src/action/function_registry.dart and exact-arity user-call classification; DART-BACKEND-PARITY.3.4 adds compiled-spec state; DART-BACKEND-PARITY.4.1 adds runtime matching; DART-BACKEND-PARITY.4.2 adds the first runtime rule interpreter; DART-BACKEND-PARITY.6.1 adds executeCorpusFixtures for controlled manifest fixtures; DART-BACKEND-PARITY.6.2.1 adds opt-in named/bounded corpus execution selection; DART-BACKEND-PARITY.6.3 enables full-manifest CLI execution and proves the checked-in 99-fixture corpus green."
+reverify: "git ls-files dart && (cd dart && dart format --set-exit-if-changed . && dart analyze --fatal-infos --fatal-warnings && dart test && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute)"
 ---
 
 The Dart backend scaffold is the repo-owned package under `dart/`. It currently provides package
@@ -30,10 +30,10 @@ the core `parseSpec(...)` rule parser, `validateSpec(...)`, and `package:test` s
 The corpus IO layer loads the checked-in corpus under `rust/linkedspec-runtime/tests/corpus/`, validates
 manifest format/count/name shape, detects missing or stale fixture directories, requires `input.spec`,
 `input.txt`, and `expected.json`, and parses expected JSON. The executable corpus layer now also exposes
-`executeCorpusFixtures(...)` for controlled manifest-backed fixtures; it runs parse/compile/runtime and compares
+`executeCorpusFixtures(...)` for manifest-backed fixtures; it runs parse/compile/runtime and compares
 the Dart engine output against `[expected]` with structural JSON equality. It now supports `caseNames`, `offset`,
-and `limit`, and `bin/corpus_runner.dart --execute` exposes named/bounded execution while rejecting unbounded CLI
-execution until full parity is ready. Full shipped 99-fixture output parity remains a later `.6` leaf.
+and `limit`, and `bin/corpus_runner.dart --execute` exposes named/bounded execution plus full-manifest execution
+when no selector is supplied. The checked-in 99-fixture corpus is green through Dart execute mode.
 
 `dart/lib/src/ast/spec_ast.dart` defines AST/staged-parse-job types that round-trip through JSON.
 `dart/lib/src/parser/spec_parser.dart` parses core `.spec` rule paragraphs into those AST types.
@@ -45,9 +45,8 @@ into `FunctionDefinition` records without raw-scanning `fn` source.
 contract table. `dart/lib/src/action/function_registry.dart` builds ordered user-function registry entries
 from `FunctionDefinition` records, exposes staged body parse jobs, and lets contract resolution classify
 exact-arity user calls before helper fallback. It now also builds compiled-spec
-state, performs runtime regex matching, and executes the first rule-dispatch
-interpreter layer. It also has a controlled executable corpus harness. Full shipped
-corpus output parity remains a later Dart leaf.
+state, performs runtime regex matching, executes the rule-dispatch interpreter
+layer, and runs the checked-in 99-fixture corpus through execute mode.
 
 Related facts: [[dart-core-spec-parser]], [[dart-frontend-validation]],
 [[dart-function-definition-shell-projection]], [[dart-actionir-ast-parser]],

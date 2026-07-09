@@ -250,12 +250,11 @@ for controlled manifest fixtures. That executable harness runs fixtures through
 the Dart parser, compiler, and runtime engine, then compares engine output to the
 backend-neutral expected value wrapped one level with structural JSON equality.
 It supports named and bounded fixture selection through the library and opt-in
-CLI `--execute` mode; unbounded CLI execution stays rejected until full corpus
-parity is ready. The first 40 shipped manifest fixtures now pass through bounded
-execute mode, which proves the starter proof-edge, autoexist, mutation, and core
-terse runtime batch before the remaining corpus groups. The non-`fn` middle
-helper/control/receiver fixtures now pass as well, and the top-level `fn` corpus
-fixtures now route through the spec-defined function shell: Dart obtains
+CLI `--execute` mode; without a selector, the CLI now runs the full manifest in
+order. The checked-in 99-fixture manifest passes through Dart execute mode,
+covering the starter proof-edge, autoexist, mutation, core terse runtime,
+middle helper/control/receiver, shipped-spec/parser-smoke, and top-level
+function groups. The top-level `fn` corpus fixtures route through the spec-defined function shell: Dart obtains
 spec-produced `function_definition` nodes, feeds them through staged body
 projection, and does not raw-scan `fn` source in the corpus runner. The final shipped-spec/parser-smoke window started
 at 2/31 green, reached 7/31 green after the regex-dialect, helper/action, and
@@ -423,8 +422,8 @@ recursive/default-mode parser-smoke bridge, portmap result-shape bridge, and
 hlink delimiter/capture bridge are done; the helper mutation/text-normalization
 bridge is also done, the legacy accumulator bridge closes `regdef_nested_register_fields`, and the public-parser
 leading-trivia bridge closes `ds_vhistory_version_entry`. Final parser-smoke no-drift closeout, bounded
-structural regex work, and routed top-level `fn` corpus-shell execution are done; the next Dart leaf is the full
-shipped 99-fixture corpus gate.
+structural regex work, routed top-level `fn` corpus-shell execution, and the full shipped 99-fixture Dart corpus
+gate are done; the next Dart leaf wires that green gate into the local verification story.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

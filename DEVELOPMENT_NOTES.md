@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.3 — full Dart corpus gate):
+  The Dart corpus runner is now promoted from bounded execution batches to the full checked-in manifest gate.
+  `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute` runs all 99 fixtures
+  in manifest order and passes 99/99. Named and bounded selection remain available for diagnostics, but the CLI no
+  longer requires a selector for `--execute`. `corpus_manifest_test.dart` now locks the full checked-in corpus gate,
+  CLI full-run behavior, unsupported manifest format rejection, invalid and duplicate manifest case-name rejection,
+  existing count/drift/missing-file guards, and mismatch reporting. The next Dart parity leaf is verification-story
+  wiring rather than more corpus runtime implementation unless a future manifest update adds new fixtures.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.5 — Dart top-level fn corpus shell routing):
   Dart now has an executable bridge for `specs/user_function_definition.spec`.
   `parseUserFunctionDefinitionAsts(...)` compiles that checked-in spec through the Dart runtime and returns the
@@ -186,8 +195,9 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   Added the safe selection surface for the executable Dart corpus harness. `executeCorpusFixtures(...)` now
   accepts `caseNames`, `offset`, and `limit` so callers can run named cases or bounded manifest slices without
   executing all 99 fixtures. `bin/corpus_runner.dart` keeps its default command as a manifest-loader smoke, adds
-  opt-in `--execute` mode, and requires `--case` or `--limit` in CLI execution mode until full corpus parity is
-  ready. Execute mode prints each selected fixture as `PASS` or `FAIL`, reports a pass/fail summary, exits `1` for
+  opt-in `--execute` mode, and initially required `--case` or `--limit` in CLI execution mode until `.6.3`
+  enabled full-manifest execution. Execute mode prints each selected fixture as `PASS` or `FAIL`, reports a
+  pass/fail summary, exits `1` for
   selected fixture failures, and exits `64` for invalid selection flags. This is the reporting substrate for
   `.6.2.2` and later corpus batches.
 

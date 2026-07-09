@@ -8,7 +8,7 @@ Usage: dart run bin/corpus_runner.dart --corpus <path> [--execute] [--case <name
 LinkedSpec Dart corpus-runner scaffold.
 Without --execute, loads and validates the manifest-backed corpus directory.
 With --execute, runs selected fixtures through the current Dart parser, compiler, and runtime.
-Until full corpus parity lands, --execute requires --case or --limit.
+Without --case/--offset/--limit, --execute runs the full manifest in order.
 ''';
 
 void main(List<String> args) {
@@ -147,10 +147,6 @@ final class _CorpusRunnerOptions {
         !execute &&
         (caseNames.isNotEmpty || offset != 0 || limit != null)) {
       error = '--case, --offset, and --limit require --execute';
-    }
-    if (error == null && execute && caseNames.isEmpty && limit == null) {
-      error =
-          '--execute requires --case or --limit until full corpus parity is enabled';
     }
     if (error == null && limit == 0) {
       error = '--limit requires a value greater than zero';

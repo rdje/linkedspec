@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.3 — close full Dart corpus gate
+
+**Scope:** Dart corpus-runner CLI gate promotion, corpus manifest guard tests, full checked-in corpus execution
+test, Dart README, mdBook status/backend handoff, live docs, roadmap status, resume pointer, and Knowledge Map.
+
+**Change:** Dart `--execute` no longer requires `--case` or `--limit`; without a selector it runs the full
+manifest in order. The checked-in 99-fixture corpus now passes through Dart parse/compile/runtime execution, while
+the manifest loader remains strict about unsupported manifest formats, case-count drift, invalid or duplicate
+names, missing fixture directories, stale extra directories, missing required files, and output mismatches.
+
+**Validation:** Full 99-fixture corpus execution passes; focused corpus tests cover the full gate, CLI full-run
+mode, manifest format/name guards, drift guards, and mismatch reporting; Dart format, analyze, full tests, mdBook,
+memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.5 — route Dart fn corpus through spec shell
 
 **Scope:** Dart function-definition shell execution, corpus runner parsing route, runtime helper parity needed by

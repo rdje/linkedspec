@@ -805,13 +805,14 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Goal: Add opt-in executable corpus selection and reporting.
   Acceptance: Dart can execute named or safely bounded fixture subsets through the corpus runner/library, report
     pass/fail/mismatch details for every selected fixture, and keep the default 99-fixture command as a
-    manifest-loader smoke until full parity is ready.
+    manifest-loader smoke while full parity is still incomplete.
   Verification: **PASS 2026-07-09.** `executeCorpusFixtures(...)` accepts `caseNames`, `offset`, and `limit`;
     invalid named selections, duplicate names, name-plus-window combinations, invalid offsets, and invalid limits
     diagnose as `CorpusManifestException`. `bin/corpus_runner.dart` adds opt-in `--execute` mode with repeated
     `--case`, `--offset`, and `--limit`, prints per-fixture `PASS` / `FAIL` lines plus a summary, returns nonzero
-    for selected fixture failures, rejects unbounded CLI execution until full corpus parity is enabled, and keeps
-    default `--corpus <path>` behavior as the 99-fixture manifest-loader smoke. Focused corpus tests, Dart
+    for selected fixture failures, initially rejects unbounded CLI execution while corpus parity is incomplete, and
+    keeps default `--corpus <path>` behavior as the 99-fixture manifest-loader smoke. `.6.3` later enables
+    full-manifest CLI execution after 99/99 passes. Focused corpus tests, Dart
     format/analyze/full tests, default corpus loader/help, bounded execute smoke, unbounded execute rejection,
     mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
   Commit: `DART-BACKEND-PARITY.6.2.1 - add Dart executable corpus selection`
@@ -1292,12 +1293,17 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.5 - route Dart fn corpus through spec shell`
 
 - ID: `DART-BACKEND-PARITY.6.3`
-  Status: `pending`
+  Status: `done`
   Goal: Finalize manifest drift guard and full Dart corpus gate.
   Acceptance: Dart runner rejects unsupported manifest format, mismatched counts, invalid/duplicate names,
     missing fixture dirs, stale extra dirs, and output mismatches; all current fixtures pass.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Dart corpus execution now runs the full checked-in 99-fixture manifest with
+    no selector and reports 99 passed / 0 failed. CLI `--execute` without `--case`, `--offset`, or `--limit` runs
+    the full manifest in order; named and bounded selection remain available for diagnostics. Focused corpus tests
+    cover the full checked-in gate, CLI full-run mode, unsupported manifest formats, invalid and duplicate manifest
+    case names, count mismatch, missing fixture dirs, stale extra dirs, missing required fixture files, and output
+    mismatch reporting.
+  Commit: `DART-BACKEND-PARITY.6.3 - close full Dart corpus gate`
 
 - ID: `DART-BACKEND-PARITY.6.4`
   Status: `pending`
@@ -1377,7 +1383,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 14 | `DART-BACKEND-PARITY.5.1` | `done` | Minimal staged registry provider dispatches function-body parse jobs and stitches `body_ast`. |
 | 15 | `DART-BACKEND-PARITY.5.2` | `done` | Registered exact-arity user functions execute at runtime. |
 | 16 | `DART-BACKEND-PARITY.5.3` | `done` | Staged parse-job and function-registry descriptor shapes are preserved. |
-| 17 | `DART-BACKEND-PARITY.6` | `active` | Corpus parity is in progress; `.6.2.4` shipped-spec/parser-smoke is closed at 31/31 green, `.6.2.5` routes the top-level `fn` fixtures through the spec-defined shell, and the current frontier is `.6.3` for the full Dart corpus gate. |
+| 17 | `DART-BACKEND-PARITY.6` | `active` | Corpus parity is in progress; `.6.2.4` shipped-spec/parser-smoke is closed at 31/31 green, `.6.2.5` routes the top-level `fn` fixtures through the spec-defined shell, `.6.3` closes the full 99-fixture corpus gate, and the current frontier is `.6.4` for verification wiring. |
 
 ## Dart Toolchain And Package Layout
 
@@ -1679,6 +1685,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.5` | Diagnostic `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31`; final parser-smoke no-drift scans across README, mdBook, roadmaps, live docs, task tree, and Knowledge Map; Dart format/analyze/full tests; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Final no-drift closeout confirms the shipped-spec/parser-smoke window is 24/31 green, all non-PCRE residual leaves are closed, and only the seven PCRE structural regex blockers remain under `.6.2.4.6`. |
 | `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.6` | Focused `dart test test/runtime_matching_test.dart test/runtime_interpreter_test.dart test/corpus_manifest_test.dart`; diagnostic `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31`; default 99-fixture corpus loader; Dart format/analyze/full tests; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Bounded Dart structural matchers close the exact shipped recursive/DEFINE/`\K` PCRE forms, action-edge `push(child, index)` preserves EBNF logging payloads, the parser-smoke window is 31/31 green, and the frontier advances to `.6.2.5`. |
 | `2026-07-09` | `DART-BACKEND-PARITY.6.2.5` | Focused `dart test test/user_function_definition_parser_test.dart test/corpus_manifest_test.dart test/runtime_interpreter_test.dart test/action_contracts_test.dart`; routed three-fixture corpus run; Dart format/analyze/full tests; default 99-fixture corpus loader; diagnostic `--execute --offset 68 --limit 31`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart corpus execution obtains spec-produced function-definition nodes from `specs/user_function_definition.spec`, feeds them through staged function-body projection, and closes the three top-level `fn` fixtures without adding a raw Dart scanner. |
+| `2026-07-09` | `DART-BACKEND-PARITY.6.3` | Full `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute`; focused `dart test test/corpus_manifest_test.dart`; Dart format/analyze/full tests; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart corpus execution runs the current 99-fixture manifest end to end with 99 passed / 0 failed; CLI full-run mode is enabled, and manifest format/name/count/drift/file/mismatch guards are test-covered. |
 
 ## Commit Log
 
@@ -1722,6 +1729,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.6.2.4.5` | `DART-BACKEND-PARITY.6.2.4.5 - close parser smoke no drift` | No-drift closeout confirms the non-PCRE parser-smoke residual group is complete and advances the frontier to `.6.2.4.6` for PCRE structural regex constructs. |
 | `DART-BACKEND-PARITY.6.2.4.6` | `DART-BACKEND-PARITY.6.2.4.6 - close Dart structural regex smoke` | Bounded structural regex matchers and `push(child, index)` action-edge payload extraction close the seven PCRE structural fixtures and the `.6.2.4` parser-smoke parent. |
 | `DART-BACKEND-PARITY.6.2.5` | `DART-BACKEND-PARITY.6.2.5 - route Dart fn corpus through spec shell` | Corpus execution falls back from rule-only parsing to the spec-defined user-function shell for top-level `fn` fixtures; all three routed fixtures pass. |
+| `DART-BACKEND-PARITY.6.3` | `DART-BACKEND-PARITY.6.3 - close full Dart corpus gate` | Full Dart corpus execution is 99/99 green; CLI `--execute` without selectors runs the full manifest while drift guards remain strict. |
 
 ## Changelog
 
@@ -1815,3 +1823,5 @@ The `.4.1` runtime matching layer adds:
 - `2026-07-09`: Closed Dart top-level `fn` corpus routing by executing `specs/user_function_definition.spec` in
   Dart, feeding returned `function_definition` nodes through staged function-body projection, and passing the three
   routed terse user-function fixtures. Frontier advances to `.6.3`.
+- `2026-07-09`: Closed the full Dart corpus gate at 99/99 green, enabled unbounded CLI `--execute`, and locked
+  manifest format/name/count/drift/file/mismatch guards in focused tests. Frontier advances to `.6.4`.
