@@ -135,6 +135,11 @@ helper family breadth, bare hash working-variable receiver chains, statement-for
 pure value/receiver `set_key(...)` behavior, direct hash-index assignment values, bare-overlay `merge_hash`,
 and explicit flat-style hash splicing. Active frontier advances to `DART-BACKEND-PARITY.4.3.5`.
 
+Index note 2026-07-09: `DART-BACKEND-PARITY.7.3` is done as a docs-only planning slice. The director's
+per-variant CLI requirement is recorded: each backend variant should have its own distinct LinkedSpec CLI.
+Dart-specific CLI productization is split to `DART-BACKEND-PARITY.7.4`; final Dart closeout shifts to `.7.5`.
+The active implementation frontier remains `DART-BACKEND-PARITY.4.3.5`.
+
 Index note 2026-07-09: `NONCURRENT-HELPER-CODE-PURGE.1` is done. After the director clarified that removed
 helper spellings must be deleted from the Perl and Rust codebases, read-only scans split the purge into Perl
 source, Rust source, active tests/tools/spec fixtures, and final no-drift leaves. Active frontier is

@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.7.3 — record variant-specific CLI requirement**
+  (DONE docs-only planning split for per-variant LinkedSpec CLI ownership).
+
+  **Change:** Recorded the directive that each LinkedSpec backend variant should have a distinct CLI. Dart-specific
+  CLI productization is now owned by `DART-BACKEND-PARITY.7.4`; final Dart no-drift closeout shifts to `.7.5`.
+  The future-backlog tree records that Julia and Lua planning must include equivalent CLI ownership when activated.
+
+  **Boundary:** No CLI behavior changed in this slice. Active implementation work remains
+  `DART-BACKEND-PARITY.4.3.5`.
+
+  **Verification:** mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine checks, and
+  `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.4.3.4 — add Dart runtime hash helpers**
   (DONE hash helper family, hash receiver chains, and statement/value mutation boundaries).
 

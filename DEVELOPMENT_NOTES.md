@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.7.3 — variant-specific CLI requirement):
+  Recorded the director directive that each LinkedSpec backend variant should have a distinct CLI. This is a
+  planning/documentation slice only: no source behavior changed. The Dart tree now owns future Dart-specific CLI
+  productization as `DART-BACKEND-PARITY.7.4`, and final Dart no-drift closeout shifts to `.7.5`. The
+  `FUTURE-PARITY-BACKLOG` tree records that Julia and Lua planning must include equivalent variant-specific CLI
+  ownership when those lanes activate. Active implementation frontier remains `.4.3.5`.
+
 - 2026-07-09 (DART-BACKEND-PARITY.4.3.4 — Dart runtime hash helpers):
   Extended `LinkedSpecRuntimeEngine` with hash-aware helper dispatch. Function helper calls now consume bare hash
   working variables in the documented hash slots, while receiver chains such as

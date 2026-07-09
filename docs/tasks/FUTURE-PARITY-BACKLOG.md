@@ -27,6 +27,8 @@ then Julia, then Lua.
 
 - The seven backlog directions are represented as owned task-tree lanes.
 - The backend lane schedules Dart, Julia, and Lua in that order, all with full parity goals.
+- Each backend implementation track owns a distinct LinkedSpec CLI entrypoint for that variant; no future
+  variant should rely on a single ambiguous shared CLI name as its only user-facing command.
 - The central task-tree index points at the current frontier.
 - ADR, roadmap, mdBook, Knowledge Map, and live docs no longer contradict the backend order or
   Lua adoption decision.
@@ -161,6 +163,9 @@ then Julia, then Lua.
 - `2026-07-09`: `.1.1` selects an interpreter-first Dart parity strategy and delegates executable Dart
   work to `docs/tasks/DART-BACKEND-PARITY.md`. Generated Dart source is a later proof lane after
   interpreter/corpus parity, not the primary gate.
+- `2026-07-09`: Director directive: each LinkedSpec backend variant should have a distinct CLI. Dart records
+  this as `DART-BACKEND-PARITY.7.3` / `.7.4`; Julia and Lua planning leaves must include equivalent
+  variant-specific CLI ownership when activated.
 
 ## Open Questions
 

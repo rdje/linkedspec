@@ -553,7 +553,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 - ID: `DART-BACKEND-PARITY.7`
   Status: `pending`
   Goal: Close documentation, generated-source follow-up, and handoff alignment.
-  Children: `.7.1`, `.7.2`, `.7.3`
+  Children: `.7.1`, `.7.2`, `.7.3`, `.7.4`, `.7.5`
 
 - ID: `DART-BACKEND-PARITY.7.1`
   Status: `pending`
@@ -572,6 +572,27 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `pending`
 
 - ID: `DART-BACKEND-PARITY.7.3`
+  Status: `done`
+  Goal: Record the director directive that each LinkedSpec backend variant should have a distinct CLI.
+  Acceptance: The Dart task tree and future-backlog tree record the per-variant CLI requirement, a future
+    Dart-specific implementation leaf exists, and no CLI behavior changes are made in this planning slice.
+  Verification: **PASS 2026-07-09.** Added this directive record, split Dart CLI productization to `.7.4`,
+    moved final Dart no-drift closeout to `.7.5`, recorded the cross-variant obligation in
+    `FUTURE-PARITY-BACKLOG`, and added a Knowledge Map card. Memory architecture, Knowledge Map, task-tree
+    metadata, doctrine checks, mdBook build, and `git diff --check` pass. No source behavior changed.
+  Commit: `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement`
+
+- ID: `DART-BACKEND-PARITY.7.4`
+  Status: `pending`
+  Goal: Productize the Dart-specific LinkedSpec CLI entrypoint.
+  Acceptance: The Dart backend exposes its own clearly named LinkedSpec CLI entrypoint, help text, argument
+    contract, corpus/runtime invocation path, docs, and smoke tests without replacing or conflating the Perl and
+    Rust variant CLIs. Naming must be consistent with the cross-variant requirement that each backend variant has
+    a distinct CLI.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.7.5`
   Status: `pending`
   Goal: Final no-drift closeout for Dart parity.
   Acceptance: Roadmaps, task-tree index, live docs, mdBook, Knowledge Map, architecture snapshot, and
@@ -845,6 +866,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.3.4` | Focused `dart test test/compiled_spec_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart compiles parsed specs into ordered compiled rule/dependency/descriptor state with ActionIR payloads and function registry projection. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.1` | Focused `dart test test/runtime_matching_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart runtime matching supports seek/consume, stable alternative identity, capture/named-capture records, char offsets, entry/local match separation, cursor state, and zero-progress detection. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.3.4` | Focused `dart test test/runtime_interpreter_test.dart`; focused `dart test test/action_contracts_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; diagnosis evidence; `git diff --check`. | PASS. Dart executes hash helper family breadth, hash receiver chains, statement/value `set_key` boundaries, direct hash-index assignment values, bare-overlay merge behavior, and explicit flat-style hash splicing. |
+| `2026-07-09` | `DART-BACKEND-PARITY.7.3` | mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Director's per-variant CLI directive is recorded; Dart CLI productization is split to `.7.4`; final closeout shifts to `.7.5`; no source behavior changed. |
 
 ## Commit Log
 
@@ -869,6 +891,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.4.3.2` | `DART-BACKEND-PARITY.4.3.2 - add Dart runtime string numeric helpers` | String/scalar and numeric helper families. |
 | `DART-BACKEND-PARITY.4.3.3` | `DART-BACKEND-PARITY.4.3.3 - add Dart runtime array helpers` | Array helper family and statement-only array end mutations. |
 | `DART-BACKEND-PARITY.4.3.4` | `DART-BACKEND-PARITY.4.3.4 - add Dart runtime hash helpers` | Hash helper family and statement/value mutation boundaries. |
+| `DART-BACKEND-PARITY.7.3` | `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement` | Docs-only split for per-variant LinkedSpec CLI productization. |
 
 ## Changelog
 
@@ -909,3 +932,5 @@ The `.4.1` runtime matching layer adds:
   to `.4.3.4` for hash helper family and hash receiver/mutation behavior.
 - `2026-07-09`: Added Dart hash helper family execution, hash receiver chains, and statement/value mutation
   boundaries; frontier advances to `.4.3.5` for value blocks, structured controls, and tree traversal helpers.
+- `2026-07-09`: Recorded the director directive that each LinkedSpec backend variant should have its own CLI;
+  Dart-specific CLI productization is now `DART-BACKEND-PARITY.7.4`, and final closeout shifts to `.7.5`.

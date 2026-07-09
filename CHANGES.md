@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.7.3 — record variant-specific CLI requirement
+
+**Scope:** Dart backend task-tree planning, future-backlog directive capture, top-level task-tree index,
+live docs, mdBook Dart handoff text, roadmap trackers, and Knowledge Map facts.
+
+**Change:** Recorded the director directive that each LinkedSpec backend variant should have a distinct CLI.
+The Dart tree now has a docs-only `.7.3` planning slice, a pending `.7.4` Dart-specific CLI productization leaf,
+and `.7.5` as the shifted final no-drift closeout. The future-backlog tree now carries the cross-variant
+requirement so Julia and Lua planning must include their own CLI ownership when those lanes activate.
+
+**Validation:** mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine checks, and
+`git diff --check` pass. No source behavior changed.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.4.3.4 — add Dart runtime hash helpers
 
 **Scope:** Dart runtime hash helper evaluator, focused interpreter/contract tests, Dart CLI help, package README,

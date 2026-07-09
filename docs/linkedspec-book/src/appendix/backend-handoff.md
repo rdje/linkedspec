@@ -245,7 +245,10 @@ the primary conformance gate. The repo now has a Dart CLI/library scaffold under
 `dart/`, including package metadata, committed lockfile, public library entrypoint,
 CLI smoke entrypoint, and smoke tests. Its corpus-runner scaffold loads the
 manifest-backed corpus, rejects manifest drift, checks required fixture files and
-expected JSON syntax, and deliberately does not execute parser semantics yet. Dart
+expected JSON syntax, and deliberately does not execute parser semantics yet. The
+future Dart closeout now includes a distinct Dart-specific LinkedSpec CLI
+entrypoint; future Julia and Lua backend plans must own their own variant-specific
+CLIs rather than relying on one ambiguous shared command. Dart
 also has source-level AST/data types and staged parse-job sidecars that round-trip
 through JSON with the Rust/mdBook field names. The Dart core `parseSpec(...)`
 parser now produces those source AST types for rule paragraphs, headers/modes,

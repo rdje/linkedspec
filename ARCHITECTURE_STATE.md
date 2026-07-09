@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.7.3` recorded the director directive that each LinkedSpec backend
+  variant should have a distinct CLI. This is a planning/documentation slice only: Dart-specific CLI
+  productization is now `DART-BACKEND-PARITY.7.4`, final Dart no-drift closeout shifts to `.7.5`, and Julia/Lua
+  planning under `FUTURE-PARITY-BACKLOG` must include equivalent variant-specific CLI ownership. The active Dart
+  implementation frontier remains `.4.3.5`.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.4` extended Dart runtime hash helper execution in
   `dart/lib/src/runtime/interpreter.dart`. The evaluator now has hash-aware helper argument evaluation, bare hash
   working-variable receiver reads, pure hash receiver chains, key/value views, sorted key/value arrays, key
