@@ -1,0 +1,42 @@
+---
+id: dart-staged-function-body-registry
+title: Dart staged registry dispatches function-body parse jobs and stitches body_ast
+answers:
+  - "where is the Dart staged parser registry"
+  - "does Dart dispatch function body parse jobs"
+  - "how does Dart resolve actionir-body.spec"
+  - "does Dart stitch body_ast"
+  - "what Dart API parses specs with staged function bodies"
+  - "what is DART-BACKEND-PARITY.5.1"
+date: 2026-07-09
+status: current
+tags: [dart, staged-parsing, parser-registry, parse-jobs, user-functions, DART-BACKEND-PARITY]
+evidence: "DART-BACKEND-PARITY.5.1 adds dart/lib/src/parser/staged_parser_registry.dart, exports the staged registry APIs from dart/lib/linkedspec_dart.dart, and adds test/staged_parser_registry_test.dart. Focused tests cover stable queue order, deterministic actionir-body.spec resolution, cache-key/compiled-parser record shape, body_ast stitching, wrapper parsing with staged function bodies, unsupported parser diagnostics, and stitching contract drift."
+reverify: "cd dart && dart test test/staged_parser_registry_test.dart && dart analyze --fatal-infos --fatal-warnings"
+---
+
+Dart's minimal staged parser registry lives in
+`dart/lib/src/parser/staged_parser_registry.dart`.
+
+The supported provider is intentionally narrow. `executeStagedParseJobs(...)`
+validates and stable-sorts `StagedParseJob` values by `parent_ast_path`,
+`source_span`, then `job_id`; resolves `parser_spec_id = actionir-body.spec` to
+`builtin:actionir-body.spec`; records the fixed adapter digest
+`sha256:87ca81d966bb41f7025d31e4bae426af101e2ec75ff2ac14e96517d97fbbf55c`;
+compiles top rule `action_block` with the staged cache-key fields; and executes
+the body text through Dart's `parseActionBlock(...)` adapter.
+
+`dispatchFunctionBodyParseJobs(...)` stitches each staged result's
+`action_block` JSON into the matching `FunctionDefinition.bodyAst` when the job
+policy is `replace_field` / `body_ast`. `stitchFunctionBodyParseJobs(...)` is
+the convenience form that returns only the stitched `SpecFile`.
+`parseSpecWithStagedUserFunctionDefinitionAsts(...)` composes the existing
+spec-returned function-definition projection with this body dispatch.
+
+This does not implement public `parse_job(...)` authoring, filesystem/provider
+search roots, multiple parser families, recursive staged queues, or
+user-function runtime execution.
+
+Related facts: [[function-body-staged-registry-dispatch]],
+[[dart-function-definition-shell-projection]], [[dart-function-registry]],
+[[dart-actionir-ast-parser]].

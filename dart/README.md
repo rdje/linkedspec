@@ -31,8 +31,8 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.4.5.4` is the current completed diagnostics/trace boundary; `.5.1`
-is the next staged-runtime frontier. The package can round-trip
+`DART-BACKEND-PARITY.5.1` is the current completed staged-registry boundary; `.5.2`
+is the next user-function runtime frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -41,6 +41,12 @@ ordered `UserFunctionRegistry`, and classify exact-arity user calls before helpe
 fallback. It can now compile a validated `SpecFile` into `CompiledSpec` state
 with ordered rule tables, dependency-regex data, mode metadata, lifecycle/action
 ActionIR payloads, the function registry, and descriptor-shaped JSON projection.
+It also has a minimal staged parser registry for function-body parse jobs:
+`actionir-body.spec` resolves to the built-in `action_block` provider, jobs run
+in stable queue order, dispatch records carry the staged cache key and compiled
+parser shape, and `dispatchFunctionBodyParseJobs(...)` /
+`parseSpecWithStagedUserFunctionDefinitionAsts(...)` stitch the returned
+`action_block` JSON into each function's `body_ast`.
 It also has runtime regex primitives for seek/consume matching, stable
 alternative identity, capture and named-capture records, char-offset projections,
 entry/local match registers, cursor state, and zero-progress detection.
@@ -76,6 +82,6 @@ also has `LinkedSpecTraceConfig`, `LinkedSpecTraceLevel`,
 `LinkedSpecTraceEmitter`, event/scope primitives, stdout/routed-file/mirror sink
 behavior with reset/truncate, and traced runtime entrypoints that preserve parse
 output while emitting parse/rule scopes plus regex, child-dispatch, lifecycle,
-cursor-control, recursion-cutoff, and source-boundary trace events. Staged
+cursor-control, recursion-cutoff, and source-boundary trace events. User-function
 runtime execution and corpus output parity remain later leaves in
 `docs/tasks/DART-BACKEND-PARITY.md`.

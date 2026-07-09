@@ -104,6 +104,20 @@ export 'src/corpus/manifest_runner.dart'
         CorpusValidationResult,
         loadCorpusFixtures;
 export 'src/parser/spec_parser.dart' show SpecParseException, parseSpec;
+export 'src/parser/staged_parser_registry.dart'
+    show
+        StagedFunctionBodyDispatchResult,
+        StagedParseResult,
+        StagedParserRegistryException,
+        actionIrBodyAdapterDigest,
+        actionIrBodyResolvedSpecId,
+        actionIrBodySpecId,
+        actionIrBodyTopRule,
+        dispatchFunctionBodyParseJobs,
+        executeStagedParseJob,
+        executeStagedParseJobs,
+        parseSpecWithStagedUserFunctionDefinitionAsts,
+        stitchFunctionBodyParseJobs;
 export 'src/parser/user_function_definition_shell.dart'
     show
         UserFunctionDefinitionProjection,

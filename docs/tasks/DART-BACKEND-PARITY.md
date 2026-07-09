@@ -709,17 +709,25 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.4.5.4 - close Dart diagnostics trace no drift`
 
 - ID: `DART-BACKEND-PARITY.5`
-  Status: `pending`
+  Status: `in_progress`
   Goal: Implement staged parser registry and user-function runtime parity.
   Children: `.5.1`, `.5.2`, `.5.3`
 
 - ID: `DART-BACKEND-PARITY.5.1`
-  Status: `pending`
+  Status: `done`
   Goal: Implement minimal staged registry provider for function-body parse jobs.
   Acceptance: `actionir-body.spec` resolves deterministically, compiles top rule `action_block`, executes
     queued jobs in stable order, and stitches `body_ast`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** `dart/lib/src/parser/staged_parser_registry.dart` adds the narrow
+    function-body staged provider. `executeStagedParseJobs(...)` validates and stable-sorts jobs by parent AST
+    path, source span, then job id; resolves `actionir-body.spec` to `builtin:actionir-body.spec`; records the
+    fixed ActionIR-body adapter digest/cache key and compiled parser shape for top rule `action_block`; executes
+    body text through the Dart ActionIR block parser; and returns staged result records. `dispatchFunctionBodyParseJobs(...)`
+    and `parseSpecWithStagedUserFunctionDefinitionAsts(...)` stitch returned `action_block` JSON into function
+    `body_ast` while preserving the neutral `body_parse_job`. Focused staged-registry tests, Dart format/analyze,
+    full Dart tests, corpus runner/help, CLI help, mdBook, memory architecture, Knowledge Map, task-tree metadata,
+    doctrine, and `git diff --check` pass.
+  Commit: `DART-BACKEND-PARITY.5.1 - add Dart staged function-body registry`
 
 - ID: `DART-BACKEND-PARITY.5.2`
   Status: `pending`
@@ -841,7 +849,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 11 | `DART-BACKEND-PARITY.4.5.2` | `done` | Trace controls, levels, event classes, and sinks are implemented. |
 | 12 | `DART-BACKEND-PARITY.4.5.3` | `done` | Runtime branch/lifecycle/source-boundary trace instrumentation is implemented. |
 | 13 | `DART-BACKEND-PARITY.4.5.4` | `done` | Diagnostics/trace no-drift is closed. |
-| 14 | `DART-BACKEND-PARITY.5.1` | `pending` | Implement the minimal staged registry provider for function-body parse jobs. |
+| 14 | `DART-BACKEND-PARITY.5.1` | `done` | Minimal staged registry provider dispatches function-body parse jobs and stitches `body_ast`. |
+| 15 | `DART-BACKEND-PARITY.5.2` | `pending` | Execute registered user functions at runtime. |
 
 ## Dart Toolchain And Package Layout
 
@@ -1085,14 +1094,18 @@ The `.4.1` runtime matching layer adds:
 - `2026-07-09`: Dart `.4.5.4` closes diagnostics/trace no-drift. Dart status surfaces agree that diagnostics,
   trace controls/sinks/events, and runtime trace events are implemented; staged registry/user-function runtime
   work remains `.5`.
+- `2026-07-09`: Dart `.5.1` adds the minimal staged parser registry for function-body parse jobs. The Dart API
+  now resolves `actionir-body.spec` deterministically, records the fixed adapter digest/cache key and compiled
+  parser shape for top rule `action_block`, executes jobs in stable order, and stitches returned `action_block`
+  JSON into `body_ast`. General public `parse_job(...)` authoring and recursive staged queues remain future work.
 
 ## Open Questions
 
-- None blocking `.5.1`. Runtime diagnostics/trace work is closed; staged registry work is next.
+- None blocking `.5.2`. The minimal staged registry provider is closed; user-function runtime execution is next.
 
 ## Blockers
 
-- None known before `.5.1` staged registry provider work.
+- None known before `.5.2` user-function runtime work.
 
 ## Verification Log
 
@@ -1121,6 +1134,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.4.5.2` | Focused `dart test test/trace_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart trace levels, config/env controls, event primitives, stdout/route/mirror sinks, reset/truncate, and traced parse entrypoints are implemented; frontier advances to `.4.5.3` runtime trace instrumentation. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.5.3` | Focused `dart test test/trace_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart runtime tracing emits parse/rule scopes, regex decisions, child-dispatch decisions, lifecycle marks, cursor-control marks, recursion-cutoff decisions, and source-boundary marks while preserving untraced parse output; frontier advances to `.4.5.4` diagnostics/trace no-drift. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.5.4` | `dart run bin/linkedspec_dart.dart --help`; focused diagnostics/trace drift scans; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart diagnostics/trace status is aligned across README, CLI/scaffold, mdBook, live docs, roadmap, task tree, MEMORY, and Knowledge Map; `.4.5` closes and frontier advances to `.5.1` staged registry work. |
+| `2026-07-09` | `DART-BACKEND-PARITY.5.1` | Focused `dart test test/staged_parser_registry_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart staged registry resolves `actionir-body.spec`, records staged cache/compiled-parser metadata, executes jobs in stable order, and stitches `body_ast`; frontier advances to `.5.2` user-function runtime execution. |
 
 ## Commit Log
 
@@ -1153,6 +1167,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.4.5.2` | `DART-BACKEND-PARITY.4.5.2 - add Dart trace controls` | Trace controls, event classes, sinks, and traced runtime entrypoints. |
 | `DART-BACKEND-PARITY.4.5.3` | `DART-BACKEND-PARITY.4.5.3 - add Dart runtime trace events` | Runtime branch/lifecycle/source-boundary trace instrumentation. |
 | `DART-BACKEND-PARITY.4.5.4` | `DART-BACKEND-PARITY.4.5.4 - close Dart diagnostics trace no drift` | Diagnostics/trace status no-drift closeout; `.4.5` container closes. |
+| `DART-BACKEND-PARITY.5.1` | `DART-BACKEND-PARITY.5.1 - add Dart staged function-body registry` | Minimal staged registry provider dispatches function-body parse jobs and stitches `body_ast`. |
 | `DART-BACKEND-PARITY.7.3` | `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement` | Docs-only split for per-variant LinkedSpec CLI productization. |
 
 ## Changelog
@@ -1215,3 +1230,6 @@ The `.4.1` runtime matching layer adds:
   `.4.5.4` diagnostics/trace no-drift.
 - `2026-07-09`: Closed Dart diagnostics/trace no-drift; `.4.5` closes and frontier advances to `.5.1` staged
   registry provider work.
+- `2026-07-09`: Added Dart staged function-body registry dispatch; `actionir-body.spec` now resolves through the
+  built-in provider, compiles top rule `action_block`, executes queued jobs in stable order, and stitches
+  `body_ast`; frontier advances to `.5.2` user-function runtime execution.

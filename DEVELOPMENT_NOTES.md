@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.5.1 — Dart staged function-body registry):
+  Added the Dart equivalent of the narrow function-body staged registry provider. `executeStagedParseJobs(...)`
+  now validates and stable-sorts jobs by parent AST path, source span, and job id; resolves `actionir-body.spec`
+  to `builtin:actionir-body.spec`; records the fixed adapter digest and cache-key fields for top rule
+  `action_block`; executes body text with the Dart ActionIR block parser; and returns staged result records.
+  `dispatchFunctionBodyParseJobs(...)` and `parseSpecWithStagedUserFunctionDefinitionAsts(...)` stitch returned
+  `action_block` JSON into function `body_ast` without widening the public staged-parsing contract. General
+  `parse_job(...)` authoring, provider search, recursive staged queues, and user-function runtime execution remain
+  later leaves; the active frontier is `.5.2`.
+
 - 2026-07-09 (DART-BACKEND-PARITY.4.5.4 — Dart diagnostics/trace no-drift):
   Closed the Dart diagnostics/trace container. The agreed boundary is now: structured runtime diagnostics,
   `LinkedSpecTrace*` controls/sinks/events, traced runtime entrypoints, and runtime interpreter trace events are

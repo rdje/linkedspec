@@ -288,6 +288,17 @@ than host-language fallback. Dart also has the first user-function registry seam
 contract resolver classify exact-arity user-function calls before helper fallback.
 Wrong-arity registered calls diagnose as user-function arity errors.
 
+Dart now also has the minimal staged parser registry in
+`dart/lib/src/parser/staged_parser_registry.dart`. `executeStagedParseJobs(...)`
+normalizes and stable-sorts jobs by parent AST path, source span, and job id,
+resolves `actionir-body.spec` to `builtin:actionir-body.spec`, loads the fixed
+built-in adapter digest, compiles top rule `action_block`, and executes the body
+text through Dart's ActionIR block parser. `dispatchFunctionBodyParseJobs(...)`
+and `parseSpecWithStagedUserFunctionDefinitionAsts(...)` stitch the returned
+`action_block` JSON into each function definition's `body_ast`. This is still
+the narrow function-body provider, not general public `parse_job(...)` authoring
+or recursive staged queues.
+
 Dart now also has a compiled-state model in `dart/lib/src/compiler/compiled_spec.dart`.
 `compileSpec(...)` validates source ASTs by default and returns `CompiledSpec`
 state with `definition_order`, `compiled_rule_order`, `rules_by_label`,
@@ -348,7 +359,8 @@ match/no-match decisions, action/blind child-dispatch decisions, lifecycle block
 marks, cursor-control marks, recursion-cutoff decisions, and
 `capture_until_boundary(...)` source-boundary marks while keeping untraced
 execution output-compatible. The diagnostics/trace no-drift sweep is closed.
-Staged function execution and corpus-output parity remain later Dart leaves.
+User-function runtime execution and corpus-output parity remain later Dart
+leaves.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

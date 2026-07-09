@@ -161,13 +161,15 @@ exact text, source span, and diagnostic ownership.
 The function shell uses linked opener/closer rules: nested `body_brace` islands handle
 inner `{ ... }` blocks, while `function_definition[1]` owns the outer close edge.
 Quoted strings, comments, and regex literals are matched as body islands before brace
-dispatch so braces inside them do not end the function. The Perl registry and Rust
-adapter validate that returned AST, normalize source-order parent paths and parse-job
-ids, preserve the sidecar in descriptor/compiled function state, dispatch the
-`body_parse_job` through the minimal staged parser registry, and stitch the returned
-body ActionIR AST into `body_ast`. The current registry provider is intentionally narrow:
-`actionir-body.spec` is resolved as a built-in neutral identity and executed by the
-existing ActionIR body-parser adapter until a self-hosted body spec exists.
+dispatch so braces inside them do not end the function. The Perl registry, Rust
+adapter, and Dart staged-dispatch API validate that returned AST, normalize
+source-order parent paths and parse-job ids, preserve the sidecar in
+descriptor/compiled function state where that backend has the descriptor layer,
+dispatch the `body_parse_job` through the minimal staged parser registry, and
+stitch the returned body ActionIR AST into `body_ast`. The current registry
+provider is intentionally narrow: `actionir-body.spec` is resolved as a built-in
+neutral identity and executed by the existing ActionIR body-parser adapter until
+a self-hosted body spec exists.
 
 The current end-to-end proof covers both descriptor shape and runtime behavior. A spec
 with several function bodies such as:

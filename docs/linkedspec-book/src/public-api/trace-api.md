@@ -126,7 +126,8 @@ The `.4.5.3` proof adds runtime interpreter instrumentation: parse/rule scopes, 
 action-edge and blind-call child-dispatch decisions, lifecycle block mark events, cursor-control mark events,
 recursion-cutoff decisions, and `capture_until_boundary(...)` source-boundary mark events. `.4.5.4` closes the
 Dart diagnostics/trace no-drift sweep across Dart status text, mdBook pages, live docs, task-tree index, and
-Knowledge Map. The next Dart runtime leaf is `DART-BACKEND-PARITY.5.1`, the minimal staged registry provider.
+Knowledge Map. `DART-BACKEND-PARITY.5.1` then adds the minimal staged registry provider; the next Dart runtime
+leaf is `.5.2` user-function runtime execution.
 
 ## Future variant trace parity checklist
 

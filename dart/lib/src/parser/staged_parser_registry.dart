@@ -1,0 +1,591 @@
+import '../action/action_parser.dart';
+import '../ast/spec_ast.dart';
+import 'user_function_definition_shell.dart';
+
+const String actionIrBodySpecId = 'actionir-body.spec';
+const String actionIrBodyTopRule = 'action_block';
+const String actionIrBodyResolvedSpecId = 'builtin:actionir-body.spec';
+const String actionIrBodyAdapterDigest =
+    'sha256:87ca81d966bb41f7025d31e4bae426af101e2ec75ff2ac14e96517d97fbbf55c';
+
+const _actionIrBodyAdapterSource = 'linkedspec:staged-parser/actionir-body:v1';
+const _specLanguageVersion = 'spec-language-v1';
+const _helperActionContractVersion = 'actionir-v1';
+const _stagedParsingContractVersion = 'staged-parsing-v1';
+const _defaultCapabilities = ['actionir_ast_v1'];
+
+final class StagedParserRegistryException implements Exception {
+  const StagedParserRegistryException(this.message);
+
+  final String message;
+
+  @override
+  String toString() => 'StagedParserRegistryException: $message';
+}
+
+final class StagedParseResult {
+  const StagedParseResult({
+    required this.queueIndex,
+    required this.job,
+    required this.resolvedSpecId,
+    required this.registryProvider,
+    required this.cacheKey,
+    required this.compiledParser,
+    required this.result,
+  });
+
+  final int queueIndex;
+  final StagedParseJob job;
+  final String resolvedSpecId;
+  final String registryProvider;
+  final JsonObject cacheKey;
+  final JsonObject compiledParser;
+  final Object result;
+
+  String get jobId => job.jobId;
+
+  JsonObject toJson() {
+    return {
+      'kind': 'staged_parse_result',
+      'version': 1,
+      'stage_depth': 1,
+      'queue_index': queueIndex,
+      'phases': ['resolve', 'load', 'compile', 'execute'],
+      'job_id': job.jobId,
+      'parent_ast_path': job.parentAstPath,
+      'parser_spec_id': job.parserSpecId,
+      'resolved_spec_id': resolvedSpecId,
+      'registry_provider': registryProvider,
+      'top_rule': job.topRule,
+      'node_kind': job.nodeKind,
+      'payload_kind': job.payloadKind,
+      'source_span': job.sourceSpan.toJson(),
+      'result_policy': job.resultPolicy,
+      'result_field': job.resultField,
+      'failure_policy': job.failurePolicy,
+      'cache_key': cacheKey,
+      'compiled_parser': compiledParser,
+      'result': result,
+    };
+  }
+}
+
+final class StagedFunctionBodyDispatchResult {
+  const StagedFunctionBodyDispatchResult({
+    required this.spec,
+    required this.results,
+  });
+
+  final SpecFile spec;
+  final List<StagedParseResult> results;
+
+  JsonObject toJson() {
+    return {
+      'kind': 'staged_function_body_dispatch',
+      'spec': spec.toJson(),
+      'results': [for (final result in results) result.toJson()],
+    };
+  }
+}
+
+Object executeStagedParseJob(StagedParseJob job) {
+  final results = executeStagedParseJobs([job]);
+  if (results.isEmpty) {
+    throw const StagedParserRegistryException(
+      'staged parse dispatch produced no result',
+    );
+  }
+  return results.single.result;
+}
+
+List<StagedParseResult> executeStagedParseJobs(Iterable<StagedParseJob> jobs) {
+  final queue = [for (final job in jobs) _normalizeJob(job)]
+    ..sort(_compareJobs);
+
+  final results = <StagedParseResult>[];
+  for (var index = 0; index < queue.length; index += 1) {
+    final job = queue[index];
+    final resolved = _resolve(job);
+    final loaded = _load(resolved);
+    final compiled = _compile(loaded, job.topRule);
+    final result = _execute(compiled, job);
+    results.add(
+      StagedParseResult(
+        queueIndex: index,
+        job: job,
+        resolvedSpecId: resolved.resolvedSpecId,
+        registryProvider: resolved.provider,
+        cacheKey: compiled.cacheKey,
+        compiledParser: compiled.toJson(),
+        result: result,
+      ),
+    );
+  }
+  return List.unmodifiable(results);
+}
+
+StagedFunctionBodyDispatchResult dispatchFunctionBodyParseJobs(SpecFile spec) {
+  final functions = spec.functions;
+  final jobs = <StagedParseJob>[];
+
+  for (var index = 0; index < functions.length; index += 1) {
+    final function = functions[index];
+    final job = function.bodyParseJob;
+    if (job == null) {
+      continue;
+    }
+    _validateFunctionBodyJob(function, index, job);
+    jobs.add(job);
+  }
+
+  final results = executeStagedParseJobs(jobs);
+  final bodyAstByIndex = <int, Object>{};
+  for (final result in results) {
+    final index = _functionIndex(result.job);
+    if (bodyAstByIndex.containsKey(index)) {
+      throw StagedParserRegistryException(
+        'duplicate staged function-body result for functions.$index.body_source',
+      );
+    }
+    bodyAstByIndex[index] = result.result;
+  }
+
+  return StagedFunctionBodyDispatchResult(
+    spec: SpecFile(
+      functions: [
+        for (var index = 0; index < functions.length; index += 1)
+          if (bodyAstByIndex.containsKey(index))
+            _withBodyAst(functions[index], bodyAstByIndex[index])
+          else
+            functions[index],
+      ],
+      rules: spec.rules,
+    ),
+    results: results,
+  );
+}
+
+SpecFile stitchFunctionBodyParseJobs(SpecFile spec) {
+  return dispatchFunctionBodyParseJobs(spec).spec;
+}
+
+SpecFile parseSpecWithStagedUserFunctionDefinitionAsts(
+  String source,
+  Iterable<Object?> definitionNodes,
+) {
+  final spec = parseSpecWithUserFunctionDefinitionAsts(source, definitionNodes);
+  return stitchFunctionBodyParseJobs(spec);
+}
+
+final class _ResolvedParser {
+  const _ResolvedParser({
+    required this.parserSpecId,
+    required this.resolvedSpecId,
+    required this.provider,
+  });
+
+  final String parserSpecId;
+  final String resolvedSpecId;
+  final String provider;
+}
+
+final class _LoadedParser {
+  const _LoadedParser({
+    required this.parserSpecId,
+    required this.resolvedSpecId,
+    required this.sourceKind,
+    required this.adapterContract,
+    required this.contentDigest,
+    required this.importGraphFingerprint,
+  });
+
+  final String parserSpecId;
+  final String resolvedSpecId;
+  final String sourceKind;
+  final String adapterContract;
+  final String contentDigest;
+  final String importGraphFingerprint;
+}
+
+final class _CompiledParser {
+  const _CompiledParser({
+    required this.parserSpecId,
+    required this.resolvedSpecId,
+    required this.topRule,
+    required this.sourceKind,
+    required this.capabilities,
+    required this.cacheKey,
+  });
+
+  final String parserSpecId;
+  final String resolvedSpecId;
+  final String topRule;
+  final String sourceKind;
+  final List<String> capabilities;
+  final JsonObject cacheKey;
+
+  JsonObject toJson() {
+    return {
+      'kind': 'staged_compiled_parser',
+      'version': 1,
+      'parser_spec_id': parserSpecId,
+      'resolved_spec_id': resolvedSpecId,
+      'top_rule': topRule,
+      'source_kind': sourceKind,
+      'capabilities': capabilities,
+    };
+  }
+}
+
+StagedParseJob _normalizeJob(StagedParseJob job) {
+  if (job.jobId.isEmpty) {
+    throw const StagedParserRegistryException(
+      'staged parse job job_id must be non-empty',
+    );
+  }
+  final span = job.sourceSpan;
+  if (span.start > span.end ||
+      span.lineStart == 0 ||
+      span.lineEnd == 0 ||
+      span.lineStart > span.lineEnd) {
+    throw const StagedParserRegistryException(
+      'staged parse job source_span has invalid range',
+    );
+  }
+  return job;
+}
+
+int _compareJobs(StagedParseJob left, StagedParseJob right) {
+  final pathOrder = _compareStringLists(
+    left.parentAstPath,
+    right.parentAstPath,
+  );
+  if (pathOrder != 0) {
+    return pathOrder;
+  }
+  final startOrder = left.sourceSpan.start.compareTo(right.sourceSpan.start);
+  if (startOrder != 0) {
+    return startOrder;
+  }
+  final endOrder = left.sourceSpan.end.compareTo(right.sourceSpan.end);
+  if (endOrder != 0) {
+    return endOrder;
+  }
+  return left.jobId.compareTo(right.jobId);
+}
+
+int _compareStringLists(List<String> left, List<String> right) {
+  final shared = left.length < right.length ? left.length : right.length;
+  for (var index = 0; index < shared; index += 1) {
+    final itemOrder = left[index].compareTo(right[index]);
+    if (itemOrder != 0) {
+      return itemOrder;
+    }
+  }
+  return left.length.compareTo(right.length);
+}
+
+_ResolvedParser _resolve(StagedParseJob job) {
+  if (job.parserSpecId != actionIrBodySpecId) {
+    throw StagedParserRegistryException(
+      _dispatchError(
+        phase: 'resolve',
+        job: job,
+        detail: "unsupported parser spec id '${job.parserSpecId}'",
+      ),
+    );
+  }
+  return const _ResolvedParser(
+    parserSpecId: actionIrBodySpecId,
+    resolvedSpecId: actionIrBodyResolvedSpecId,
+    provider: 'builtin',
+  );
+}
+
+_LoadedParser _load(_ResolvedParser resolved) {
+  if (resolved.resolvedSpecId != actionIrBodyResolvedSpecId) {
+    throw StagedParserRegistryException(
+      "unsupported resolved spec id '${resolved.resolvedSpecId}'",
+    );
+  }
+  return _LoadedParser(
+    parserSpecId: resolved.parserSpecId,
+    resolvedSpecId: resolved.resolvedSpecId,
+    sourceKind: 'builtin_adapter',
+    adapterContract: _actionIrBodyAdapterSource,
+    contentDigest: actionIrBodyAdapterDigest,
+    importGraphFingerprint: 'none',
+  );
+}
+
+_CompiledParser _compile(_LoadedParser loaded, String topRule) {
+  final placeholder = _placeholderJob(loaded.parserSpecId, topRule);
+  if (loaded.resolvedSpecId != actionIrBodyResolvedSpecId) {
+    throw StagedParserRegistryException(
+      _dispatchError(
+        phase: 'compile',
+        job: placeholder,
+        resolvedSpecId: loaded.resolvedSpecId,
+        detail: "unsupported resolved spec id '${loaded.resolvedSpecId}'",
+      ),
+    );
+  }
+  if (topRule != actionIrBodyTopRule) {
+    throw StagedParserRegistryException(
+      _dispatchError(
+        phase: 'compile',
+        job: placeholder,
+        resolvedSpecId: loaded.resolvedSpecId,
+        detail: "unsupported top rule '$topRule'",
+      ),
+    );
+  }
+  final capabilities = _normalizeCapabilities(null);
+  return _CompiledParser(
+    parserSpecId: loaded.parserSpecId,
+    resolvedSpecId: loaded.resolvedSpecId,
+    topRule: topRule,
+    sourceKind: loaded.sourceKind,
+    capabilities: capabilities,
+    cacheKey: _cacheKey(loaded, topRule, capabilities),
+  );
+}
+
+Object _execute(_CompiledParser compiled, StagedParseJob job) {
+  if (compiled.resolvedSpecId != actionIrBodyResolvedSpecId ||
+      compiled.topRule != actionIrBodyTopRule) {
+    throw StagedParserRegistryException(
+      _dispatchError(
+        phase: 'execute',
+        job: job,
+        resolvedSpecId: compiled.resolvedSpecId,
+        detail: 'compiled parser identity is unsupported',
+      ),
+    );
+  }
+  try {
+    return parseActionBlock(job.text).toJson();
+  } on Object catch (error) {
+    throw StagedParserRegistryException(
+      _dispatchError(
+        phase: 'execute',
+        job: job,
+        resolvedSpecId: compiled.resolvedSpecId,
+        detail: 'action block parse failed: $error',
+      ),
+    );
+  }
+}
+
+JsonObject _cacheKey(
+  _LoadedParser loaded,
+  String topRule,
+  List<String> capabilities,
+) {
+  final capabilityText = capabilities.join(',');
+  final fingerprint = [
+    loaded.resolvedSpecId,
+    loaded.contentDigest,
+    loaded.importGraphFingerprint,
+    topRule,
+    _specLanguageVersion,
+    _helperActionContractVersion,
+    _stagedParsingContractVersion,
+    capabilityText,
+  ].join('|');
+  return {
+    'kind': 'staged_parser_cache_key',
+    'version': 1,
+    'normalized_spec_identity': loaded.resolvedSpecId,
+    'content_digest': loaded.contentDigest,
+    'import_graph_fingerprint': loaded.importGraphFingerprint,
+    'top_rule': topRule,
+    'spec_language_version': _specLanguageVersion,
+    'helper_action_contract_version': _helperActionContractVersion,
+    'staged_parsing_contract_version': _stagedParsingContractVersion,
+    'backend_capabilities': capabilities,
+    'fingerprint': fingerprint,
+    'source_kind': loaded.sourceKind,
+    'adapter_contract': loaded.adapterContract,
+  };
+}
+
+List<String> _normalizeCapabilities(Iterable<String>? capabilitySet) {
+  if (capabilitySet == null) {
+    return List.unmodifiable(_defaultCapabilities);
+  }
+  final capabilities = <String>[];
+  for (final capability in capabilitySet) {
+    if (capability.isNotEmpty && !capabilities.contains(capability)) {
+      capabilities.add(capability);
+    }
+  }
+  if (capabilities.isEmpty) {
+    capabilities.addAll(_defaultCapabilities);
+  }
+  return List.unmodifiable(capabilities);
+}
+
+void _validateFunctionBodyJob(
+  FunctionDefinition function,
+  int index,
+  StagedParseJob job,
+) {
+  _normalizeJob(job);
+  final expectedPath = ['functions', '$index', 'body_source'];
+  if (!_stringListsEqual(job.parentAstPath, expectedPath)) {
+    throw StagedParserRegistryException(
+      'function ${function.name} body_parse_job parent_ast_path must target '
+      'functions.$index.body_source',
+    );
+  }
+  if (job.nodeKind != 'function_definition') {
+    throw StagedParserRegistryException(
+      "function ${function.name} body_parse_job node_kind must be "
+      "'function_definition'",
+    );
+  }
+  if (job.payloadKind != 'function_body') {
+    throw StagedParserRegistryException(
+      "function ${function.name} body_parse_job payload_kind must be "
+      "'function_body'",
+    );
+  }
+  if (job.functionName != null && job.functionName != function.name) {
+    throw StagedParserRegistryException(
+      'function ${function.name} body_parse_job function_name does not match',
+    );
+  }
+  if (job.params != null && !_stringListsEqual(job.params!, function.params)) {
+    throw StagedParserRegistryException(
+      'function ${function.name} body_parse_job params do not match',
+    );
+  }
+  if (job.arity != null && job.arity != function.arity) {
+    throw StagedParserRegistryException(
+      'function ${function.name} body_parse_job arity does not match',
+    );
+  }
+  if (job.text != function.bodySource) {
+    throw StagedParserRegistryException(
+      'function ${function.name} body_parse_job text does not match body_source',
+    );
+  }
+  if (job.parserSpecId != actionIrBodySpecId) {
+    throw StagedParserRegistryException(
+      "function ${function.name} body_parse_job parser_spec_id must be "
+      "'$actionIrBodySpecId'",
+    );
+  }
+  if (job.topRule != actionIrBodyTopRule) {
+    throw StagedParserRegistryException(
+      "function ${function.name} body_parse_job top_rule must be "
+      "'$actionIrBodyTopRule'",
+    );
+  }
+  if (job.resultPolicy != 'replace_field') {
+    throw StagedParserRegistryException(
+      "function ${function.name} body_parse_job result_policy must be "
+      "'replace_field'",
+    );
+  }
+  if (job.resultField != 'body_ast') {
+    throw StagedParserRegistryException(
+      "function ${function.name} body_parse_job result_field must be "
+      "'body_ast'",
+    );
+  }
+  if (job.failurePolicy != 'fail') {
+    throw StagedParserRegistryException(
+      "function ${function.name} body_parse_job failure_policy must be 'fail'",
+    );
+  }
+}
+
+int _functionIndex(StagedParseJob job) {
+  if (job.parentAstPath.length != 3 ||
+      job.parentAstPath[0] != 'functions' ||
+      job.parentAstPath[2] != 'body_source') {
+    throw StagedParserRegistryException(
+      'staged parse result parent_ast_path must target functions[*].body_source',
+    );
+  }
+  final index = int.tryParse(job.parentAstPath[1]);
+  if (index == null) {
+    throw StagedParserRegistryException(
+      "staged parse result parent_ast_path has non-numeric function index "
+      "'${job.parentAstPath[1]}'",
+    );
+  }
+  return index;
+}
+
+FunctionDefinition _withBodyAst(FunctionDefinition function, Object? bodyAst) {
+  return FunctionDefinition(
+    name: function.name,
+    params: function.params,
+    arity: function.arity,
+    bodySource: function.bodySource,
+    bodyPayload: function.bodyPayload,
+    bodyParseJob: function.bodyParseJob,
+    bodyAst: bodyAst,
+    source: function.source,
+    sourceSpan: function.sourceSpan,
+    bodySpan: function.bodySpan,
+  );
+}
+
+bool _stringListsEqual(List<String> left, List<String> right) {
+  if (left.length != right.length) {
+    return false;
+  }
+  for (var index = 0; index < left.length; index += 1) {
+    if (left[index] != right[index]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+StagedParseJob _placeholderJob(String parserSpecId, String topRule) {
+  return StagedParseJob(
+    jobId: '<unknown>',
+    parentAstPath: const [],
+    nodeKind: '<unknown>',
+    payloadKind: '<unknown>',
+    text: '',
+    sourceSpan: const StagedSourceSpan(
+      start: 0,
+      end: 0,
+      lineStart: 1,
+      lineEnd: 1,
+    ),
+    parserSpecId: parserSpecId,
+    topRule: topRule,
+    resultPolicy: '<unknown>',
+    resultField: '<unknown>',
+    failurePolicy: '<unknown>',
+  );
+}
+
+String _dispatchError({
+  required String phase,
+  required StagedParseJob job,
+  required String detail,
+  String? resolvedSpecId,
+}) {
+  final parentPath = job.parentAstPath.isEmpty
+      ? '<unknown>'
+      : job.parentAstPath.join('.');
+  final span = '${job.sourceSpan.start}-${job.sourceSpan.end}';
+  return 'staged parse dispatch failed: phase=$phase; '
+      'job_id=${job.jobId}; '
+      'parent_ast_path=$parentPath; '
+      'parser_spec_id=${job.parserSpecId}; '
+      'resolved_spec_id=${resolvedSpecId ?? "<unresolved>"}; '
+      'top_rule=${job.topRule}; '
+      'payload_kind=${job.payloadKind}; '
+      'source_span=$span; '
+      'failure_policy=${job.failurePolicy}; '
+      'detail=$detail';
+}

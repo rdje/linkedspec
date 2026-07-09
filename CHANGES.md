@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.5.1 — add Dart staged function-body registry
+
+**Scope:** Dart staged parser registry, package exports, focused staged-dispatch tests, Dart README, mdBook
+pipeline/status/handoff text, live docs, roadmap/task-tree status, and Knowledge Map facts.
+
+**Change:** Added the minimal Dart staged parser registry for function-body parse jobs. `actionir-body.spec`
+resolves to `builtin:actionir-body.spec`, loads the fixed ActionIR-body adapter digest, compiles top rule
+`action_block` with staged cache-key metadata, executes queued jobs in stable parent-path/source-span/job-id order,
+and stitches returned `action_block` JSON into `body_ast` through `dispatchFunctionBodyParseJobs(...)` and
+`parseSpecWithStagedUserFunctionDefinitionAsts(...)`.
+
+**Validation:** Focused staged-registry tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook
+build, memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine, and `git diff --check`
+pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.4.5.4 — close Dart diagnostics trace no drift
 
 **Scope:** Dart diagnostics/trace status no-drift across README, CLI/scaffold text, mdBook trace/status/handoff

@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.5.1 — add Dart staged function-body registry**
+  (DONE — minimal staged registry provider for function-body parse jobs).
+
+  **Change:** Dart now exports the narrow staged registry path for function-body parse jobs. The registry resolves
+  `actionir-body.spec` to `builtin:actionir-body.spec`, records the fixed adapter digest/cache key and compiled
+  parser shape for top rule `action_block`, executes jobs in stable queue order, and stitches returned
+  `action_block` JSON into `body_ast` through `dispatchFunctionBodyParseJobs(...)` and
+  `parseSpecWithStagedUserFunctionDefinitionAsts(...)`.
+
+  **Boundary:** This is not general staged parsing and does not execute user functions at runtime yet. Public
+  `parse_job(...)` authoring, provider search roots, recursive staged queues, and function-call execution remain
+  later leaves. Active implementation work advances to `DART-BACKEND-PARITY.5.2`.
+
+  **Verification:** Focused staged-registry tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+  memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.4.5.4 — close Dart diagnostics trace no drift**
   (DONE — diagnostics/trace status closeout; `.4.5` container closed).
 
