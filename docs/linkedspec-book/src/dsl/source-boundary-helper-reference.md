@@ -467,6 +467,7 @@ search-tree backtracking.
 | `restore_cursor()` | Pop the explicit cursor stack and move the live cursor to that saved position. Empty stack is a no-op. | paired code should retry or inspect from a previously saved cursor. |
 | `rewind_match_start()` | Move the live cursor to the current local-match start. | the current local match was consumed only to inspect a boundary and should be re-scanned by the next rule-level match. |
 | `rewind_entry_start()` | Move the live cursor to the entry/initial-match start for this context. | the whole entry match should be re-scanned by the next rule-level match. |
+| `capture_until_boundary(rule[, ...])` | From the live cursor, seek for the earliest match of any named boundary rule, capture the text before it, and leave the cursor at that boundary start. | an open-ended payload should stop before the next structural token without consuming and rewinding that token. |
 
 Keep these semantics separate. `save_cursor()` / `restore_cursor()` are an
 explicit stack. `rewind_match_start()` / `rewind_entry_start()` are direct
@@ -481,10 +482,13 @@ applies to the next match that follows. Under `consume` mode, the next match
 must succeed contiguously from the rewound cursor position. Under `seek` mode,
 the parser may seek forward from the rewound position.
 
-For open-ended captures, prefer a structural boundary when available: a
-zero-width/lookahead boundary can detect that the next structural token would
-match without consuming that token, capture up to the boundary, and leave the
-cursor ready for the normal rule path.
+For open-ended captures, prefer a structural boundary when available:
+`capture_until_boundary(rule[, ...])` can detect that the next named structural
+rule would match without consuming that token, capture up to the boundary, and
+leave the cursor ready for the normal rule path. If the named boundary rules are
+valid but no later boundary is found, it captures through end-of-input and moves
+the cursor to end-of-input. If none of the requested boundary rules can be
+resolved, it returns `undef` and leaves the cursor unchanged.
 
 ## Choosing the smallest helper
 

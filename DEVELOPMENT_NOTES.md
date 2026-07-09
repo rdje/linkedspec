@@ -1,6 +1,29 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (BACKTRACK-SURFACE-RUST-ALIGNMENT.2 — non-consuming boundary capture):
+  Added the zero-width/lookahead member of the explicit cursor-control split:
+  `capture_until_boundary(rule[, ...])`. The helper is cursor-based, not
+  anonymous-capture-cursor based: from the live cursor it probes the named
+  boundary rules, captures the text before the earliest boundary match, and
+  leaves that boundary unconsumed for the ordinary rule path. This is the right
+  primitive for open-ended payloads such as EBNF semantic annotations. Do not try
+  to model this with `save_cursor()` / `restore_cursor()` or by consuming a
+  structural token and then using `rewind_match_start()`; those are still useful
+  controls, but boundary lookahead avoids consuming the token in the first place.
+  Deferred design direction surfaced during review: repeated identical child
+  slots in `AND` rules are legal but visually weak. If this is pursued, reserve
+  a target-side child-edge quantifier such as `-> Annotation{2}` or
+  `-> Annotation{1,3}` for `AND` rules only; keep `[N]` as regex-index syntax
+  and do not apply `{N,M}` to default/OR dispatch. A broader AND-only compact
+  sequence syntax is also plausible, for example `Foo:AND` followed by ordered
+  entries like `ruleA`, `ruleB { ... }`, or `ruleA[Q]{3} { ... }`; in that
+  model `-> ruleA` should remain the explicit action-edge spelling and should
+  still mean just `ruleA` in an AND sequence. A further refinement is to allow a
+  bare `ruleA` entry to mean the ordinary action-edge child parse in AND only,
+  making `->` optional there, while keeping `=>` mandatory for blind-call entries
+  because they have different result-channel semantics.
+
 - 2026-07-09 (BACKTRACK-SURFACE-RUST-ALIGNMENT.1 — explicit cursor controls):
   Replaced the ambiguous current backtrack helper surface with explicit names across Perl, Rust, and Dart.
   `save_cursor()` / `restore_cursor()` are the stack-based cursor primitive; `rewind_match_start()` /

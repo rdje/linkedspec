@@ -14198,6 +14198,42 @@ SPEC
     my $len_rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_slice_until_cursor_len()');
     like($len_rewrite, qr/\(\$__ls_cursor - \$IPOS\)/, 'capture_slice_until_cursor_len() lowering reads the anonymous capture-through-cursor width directly');
 };
+subtest 'capture_until_boundary_helper_captures_without_consuming_structural_boundary' => sub {
+    plan tests => 6;
+
+    my $spec_content = <<'SPEC';
+Top::
+ I { set(array(out), []) }
+ -> Annotation.push(out)
+ LX { return(copy(array(out))) }
+
+Annotation: /@(\w+):[ \t]*/
+ I { body = capture_until_boundary(Annotation, Boundary); return(hash("kind", "annotation", "name", entry_group(0), "body", trim(body), "cursor", cursor_pos(), "rest", cursor_rest())) }
+
+Boundary: /END/
+SPEC
+
+    my %runtime_ctx;
+    my $parser = LinkedSpec::Get(\$spec_content, parse_mode => 'seek', runtime_ctx_ref => \%runtime_ctx);
+    ok(defined($parser) && ref($parser) eq 'CODE', 'parser build succeeds for capture_until_boundary helper coverage');
+
+    my $input = '@a: first @b: second END';
+    my $ast = $parser->(\$input);
+    is_deeply(
+        $ast,
+        [
+            {kind => 'annotation', name => 'a', body => 'first', cursor => 10, rest => '@b: second END'},
+            {kind => 'annotation', name => 'b', body => 'second', cursor => 21, rest => 'END'},
+        ],
+        'capture_until_boundary(...) leaves the next structural boundary unconsumed so the normal rule path parses it'
+    );
+    ok(!defined($runtime_ctx{last_error}), 'capture_until_boundary helper parse leaves runtime_ctx last_error clear on success');
+
+    my $rewrite = LinkedSpec::call_spec_handler_subst('Top', 'capture_until_boundary(Annotation, Boundary)');
+    like($rewrite, qr/Annotation/, 'capture_until_boundary lowering keeps the first boundary label');
+    like($rewrite, qr/Boundary/, 'capture_until_boundary lowering keeps the second boundary label');
+    like($rewrite, qr/pos\(\$\$STRING\) = \$__ls_boundary_start/, 'capture_until_boundary lowering leaves the parser cursor at the chosen boundary start');
+};
 subtest 'anonymous_capture_take_until_cursor_helper_reads_and_advances_through_current_parser_position' => sub {
     plan tests => 5;
 
@@ -41453,13 +41489,12 @@ subtest 'ebnf_helper_flow_eliminates_compatibility_surface' => sub {
 
     my $semantic_meta = $descr->{spec}{semantic_annotation}{meta}{action_rewriter};
     ok(
-        scalar(grep { $_ eq 'REWIND_MATCH_START' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
-        scalar(grep { $_ eq 'CAPTURE_SLICE' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
+        scalar(grep { $_ eq 'CAPTURE_UNTIL_BOUNDARY' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'ASSIGN' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'IMATCH_GROUP_READ' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'REGEX_SUBST' } @{$semantic_meta->{canonical_action_ir_nodes}}) &&
         scalar(grep { $_ eq 'RETURN' } @{$semantic_meta->{canonical_action_ir_nodes}}),
-        'ebnf semantic_annotation canonical action-IR nodes include match-rewind/capture/assign/subst/return after declare retirement'
+        'ebnf semantic_annotation canonical action-IR nodes include boundary-capture/assign/subst/return after declare retirement'
     );
 
     my $logging_meta = $descr->{spec}{logging_annotation}{meta}{action_rewriter};

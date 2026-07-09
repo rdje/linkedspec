@@ -228,6 +228,40 @@ Top::AND
     expect(result.cursorCodeUnit, 2);
   });
 
+  test('captures until named boundary without consuming the boundary', () {
+    final engine = _engine(r'''
+Top::
+ I { set(array(out), []) }
+ -> Annotation.push(out)
+ LX { return(copy(array(out))) }
+
+Annotation: /@(\w+):[ \t]*/
+ I { body = capture_until_boundary(Annotation, Boundary); return(hash("kind", "annotation", "name", entry_group(0), "body", trim(body), "cursor", cursor_pos(), "rest", cursor_rest())) }
+
+Boundary: /END/
+''');
+
+    final result = engine.parse('@a: first @b: second END');
+
+    expect(result.value, [
+      {
+        'kind': 'annotation',
+        'name': 'a',
+        'body': 'first',
+        'cursor': 10,
+        'rest': '@b: second END',
+      },
+      {
+        'kind': 'annotation',
+        'name': 'b',
+        'body': 'second',
+        'cursor': 21,
+        'rest': 'END',
+      },
+    ]);
+    expect(result.cursorCodeUnit, 21);
+  });
+
   test('applies consume matching from a rewound cursor', () {
     final engine = _engine(r'''
 Top::AND

@@ -332,8 +332,9 @@ helper/receiver `with` trailing blocks, and hash/array tree traversal receiver
 callbacks with scoped callback bindings. It now also executes explicit cursor
 controls: `save_cursor()` / `restore_cursor()` for stack-based cursor restore,
 `rewind_match_start()` / `rewind_entry_start()` for lifecycle-anchor rewinds,
-and char-based cursor/input helpers such as `cursor_pos`, `cursor_rest`,
-`input_slice`, and `input_end_pos`.
+`capture_until_boundary(rule[, ...])` for non-consuming structural boundary
+capture, and char-based cursor/input helpers such as `cursor_pos`,
+`cursor_rest`, `input_slice`, and `input_end_pos`.
 Tracing/diagnostics, staged function execution, and corpus-output parity remain
 later Dart leaves.
 
@@ -489,8 +490,9 @@ It provides:
    - Explicit cursor controls: `save_cursor()` / `restore_cursor()` stack
      semantics plus `rewind_match_start()` / `rewind_entry_start()` anchor
      rewinds.
-   - Zero-width/lookahead boundary support for non-consuming structural boundary
-     detection.
+   - Zero-width/lookahead boundary support through
+     `capture_until_boundary(rule[, ...])` for non-consuming structural boundary
+     detection and capture.
    - Zero-progress guard.
 
 10. **Test harness** — runs `tests/corpus/` entries and compares output to

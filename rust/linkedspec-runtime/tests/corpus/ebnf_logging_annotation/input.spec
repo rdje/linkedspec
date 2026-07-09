@@ -188,7 +188,7 @@ include_dir: /\b(?:include_)?dir\(\s*[^)]*?\s*\)/ I {args = entry_text(); substr
 include_file: /\b(?:include(?:_file)?|file)\(\s*[^)]*?\s*\)/ I {args = entry_text(); substr(args, "^\s*(?:include(?:_file)?|file)\(\s*", "", g); substr(args, "\s*\)\s*$", "", g); parts = []; split(array(parts), args, /\s*,\s*/); trim_each(array(parts)); filter_nonempty(array(parts)); return(array("include_file", copy(array(parts))))}
 
 semantic_annotation: /@(\w+)\s*:\s*/
--> semantic_annotation | grammar_rule {rewind_match_start(); c = capture_slice(); substr(c, "\s*$", "", o); substr(c, "^\"|\"$", "", go); return(array("semantic_annotation", array(entry_group(0), c)))}
+I {c = capture_until_boundary(semantic_annotation, grammar_rule); substr(c, "\s*$", "", o); substr(c, "^\"|\"$", "", go); return(array("semantic_annotation", array(entry_group(0), c)))}
 
 logging_annotation: /@((?:log|debug|trace|benchmark|profile|timing)_\w+)\s*\(\s*/ /\s*\)/ I {logging_name = entry_group(0); start_capture_slice()}
 

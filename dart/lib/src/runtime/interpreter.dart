@@ -2059,6 +2059,13 @@ final class LinkedSpecRuntimeEngine {
           context.input,
           context.input.length,
         ).column;
+      case 'capture_until_boundary':
+        return _callCaptureUntilBoundary(
+          positionalArgs,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
       case 'save_cursor':
         context.saveCursor();
         return null;
@@ -2951,6 +2958,54 @@ final class LinkedSpecRuntimeEngine {
       }
     }
     return null;
+  }
+
+  Object? _callCaptureUntilBoundary(
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    if (args.isEmpty) {
+      return null;
+    }
+    var sawValidBoundary = false;
+    int? boundaryStart;
+    for (final arg in args) {
+      final targetLabel = _ruleNameFromExpr(
+        arg,
+        context,
+        ruleLabel,
+        currentEdge,
+      );
+      final targetRule = compiledSpec.rule(targetLabel);
+      if (targetRule == null) {
+        continue;
+      }
+      final plan = _regexPlanFor(targetRule);
+      if (plan.patterns.isEmpty) {
+        continue;
+      }
+      sawValidBoundary = true;
+      final boundaryMatch = RuntimeRegexAlternation.compile(
+        plan.patterns,
+      ).seekMatch(context.input, context.cursorCodeUnit);
+      if (boundaryMatch != null &&
+          (boundaryStart == null ||
+              boundaryMatch.codeUnitStart < boundaryStart)) {
+        boundaryStart = boundaryMatch.codeUnitStart;
+      }
+    }
+    if (!sawValidBoundary) {
+      return null;
+    }
+    boundaryStart ??= context.input.length;
+    final captureStart = context.cursorCodeUnit;
+    if (boundaryStart < captureStart) {
+      return null;
+    }
+    context._setCursorCodeUnit(boundaryStart);
+    return context.input.substring(captureStart, boundaryStart);
   }
 
   Object? _readRetv(

@@ -462,6 +462,32 @@ sub _build_capture_and_cursor_contracts {
    },
   },
   {
+   id                 => 'capture_until_boundary',
+   ir_node            => 'CAPTURE_UNTIL_BOUNDARY',
+   diag_name          => 'capture_until_boundary',
+   unresolved_pattern => qr/\bcapture_until_boundary\s*\(\s*(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\w+)(?:\s*,\s*(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\w+))*\s*\)/o,
+   lower              => sub {
+    my ($code) = @_;
+    $code =~ s{
+     \bcapture_until_boundary\s*\(\s*(?<boundaries>(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\w+)(?:\s*,\s*(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\w+))*)\s*\)
+    }{
+     my @boundary_labels;
+     for my $boundary (split(/\s*,\s*/, $+{boundaries})) {
+      if ($boundary =~ /\A(["'])(.*)\1\z/s) {
+       $boundary = $2;
+       $boundary =~ s/\\(["'\\])/$1/g;
+      }
+      $boundary =~ s/\\/\\\\/g;
+      $boundary =~ s/'/\\'/g;
+      push @boundary_labels, "'$boundary'" if length($boundary);
+     }
+     my $labels = join(', ', @boundary_labels);
+     'do { my @__ls_boundary_labels = ('.$labels.'); my $__ls_saved_cursor = pos $$STRING; my $__ls_capture_start = defined($__ls_saved_cursor) ? $__ls_saved_cursor : 0; my $__ls_boundary_start; my $__ls_boundary_valid = 0; for my $__ls_boundary_label (@__ls_boundary_labels) { pos($$STRING) = $__ls_saved_cursor if defined($__ls_saved_cursor); my $__ls_boundary_rule = (ref($$descr{spec}) eq "HASH") ? $$descr{spec}{$__ls_boundary_label} : undef; next unless ref($__ls_boundary_rule) eq "HASH" && ref($__ls_boundary_rule->{re}) eq "ARRAY" && @{$__ls_boundary_rule->{re}}; my $__ls_boundary_re = LinkedRE::oredRE(@{$__ls_boundary_rule->{re}}); $__ls_boundary_valid = 1; my $__ls_boundary_info = LinkedRE::or($STRING, $__ls_boundary_re, $info); next unless defined($__ls_boundary_info); my $__ls_candidate_start = (pos $$STRING) - length($__ls_boundary_info->{match}); $__ls_boundary_start = $__ls_candidate_start if !defined($__ls_boundary_start) || $__ls_candidate_start < $__ls_boundary_start; } $__ls_boundary_start = length($$STRING) if $__ls_boundary_valid && !defined($__ls_boundary_start); if ($__ls_boundary_valid && $__ls_boundary_start >= $__ls_capture_start) { pos($$STRING) = $__ls_boundary_start; substr($$STRING, $__ls_capture_start, $__ls_boundary_start - $__ls_capture_start) } else { pos($$STRING) = $__ls_saved_cursor if defined($__ls_saved_cursor); undef } }'
+    }gex;
+    return $code
+   },
+  },
+  {
    id                 => 'capture_take_until_cursor',
    ir_node            => 'CAPTURE_SLICE_TAKE_UNTIL_CURSOR',
    diag_name          => 'capture_take_until_cursor',

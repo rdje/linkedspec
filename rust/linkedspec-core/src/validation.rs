@@ -312,6 +312,7 @@ fn is_known_actionir_call_name(name: &str) -> bool {
                 | "capture_slice_pos"
                 | "capture_slice_until_cursor"
                 | "capture_slice_until_cursor_len"
+                | "capture_until_boundary"
                 | "capture_take"
                 | "capture_take_len"
                 | "capture_take_len_from"

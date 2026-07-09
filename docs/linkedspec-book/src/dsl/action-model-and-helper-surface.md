@@ -102,10 +102,11 @@ Write values into declared variables or containers:
 
 Control parser cursor boundaries and capture text spans:
 
-- `capture_slice()` — capture from last boundary to current position
+- `capture_slice()` — capture from the anonymous boundary to the current match start
+- `capture_until_boundary(rule[, ...])` — capture from the live cursor to the next named structural boundary without consuming that boundary
 - `capture_take()` — capture and advance the boundary
 - `mark_here(name)` — place a named durable mark at the current position
-- `capture_from(name)` — capture from a named mark to current position
+- `capture_from(name)` — capture from a named mark to the current match start
 - `capture_between(start_mark, end_mark)` — capture between two named marks
 - `capture_rest_from(name)` — capture from a named mark to end of input
 

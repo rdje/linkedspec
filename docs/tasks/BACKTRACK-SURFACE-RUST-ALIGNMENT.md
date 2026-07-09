@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `BACKTRACK-SURFACE-RUST-ALIGNMENT`
-- Status: `active`
+- Status: `done` / `closed`
 - Roadmap lane: `.spec language evolution / backend parity no-drift`
 - Created: `2026-07-09`
 - Last updated: `2026-07-09`
@@ -55,7 +55,7 @@ control primitives across all current and future variants:
 ## Task Tree
 
 - ID: `BACKTRACK-SURFACE-RUST-ALIGNMENT`
-  Status: `active`
+  Status: `done` / `closed`
   Goal: Replace the broad BACKTRACK surface with explicit cursor-stack, anchor-rewind, and zero-width boundary controls.
   Children: `.1`, `.2`
 
@@ -71,22 +71,24 @@ control primitives across all current and future variants:
   Commit: `BACKTRACK-SURFACE-RUST-ALIGNMENT.1 - replace backtrack surface`
 
 - ID: `BACKTRACK-SURFACE-RUST-ALIGNMENT.2`
-  Status: `pending`
+  Status: `done`
   Goal: Land cross-variant zero-width/lookahead boundary support.
   Acceptance: Perl, Rust, and Dart can detect a named structural boundary without
     consuming it; EBNF semantic annotations use the boundary primitive instead of
     consume-then-rewind; docs explain when to prefer boundary lookahead over cursor
     save/restore or anchor rewind; future-backend parity notes require the same
     primitive for new variants.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Focused Perl/Rust/Dart runtime coverage, full Perl phase0, Rust
+    core/runtime package tests, Dart format/analyze/full tests, mdBook, Knowledge
+    Map, memory architecture, doctrine, local CI, and whitespace checks pass.
+  Commit: `BACKTRACK-SURFACE-RUST-ALIGNMENT.2 - add boundary lookahead helper`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `BACKTRACK-SURFACE-RUST-ALIGNMENT.1` | `done` | User directive satisfied: all current variants have explicit cursor-stack and lifecycle-anchor rewind helpers, with old backtrack spellings retired from the current surface. |
-| 2 | `BACKTRACK-SURFACE-RUST-ALIGNMENT.2` | `pending` | User directive: all present and future variants must also support a zero-width/lookahead boundary primitive. |
+| 2 | `BACKTRACK-SURFACE-RUST-ALIGNMENT.2` | `done` | User directive satisfied: all present and future variants must support a zero-width/lookahead boundary primitive, and current Perl/Rust/Dart variants expose it as `capture_until_boundary(rule[, ...])`. |
 
 ## Decisions
 
@@ -98,10 +100,22 @@ control primitives across all current and future variants:
   lifecycle-anchor `rewind_match_start()` / `rewind_entry_start()`, and
   zero-width/lookahead boundary detection. The old broad `BACKTRACK` /
   `IBACKTRACK` names and lowercase label forms are not current user-facing API.
+- `2026-07-09`: Deferred follow-up surfaced during `.2`: repeated identical
+  child slots in `AND` rules could be expressed more clearly by an AND-only
+  target-side child-edge quantifier such as `-> Annotation{2}` or
+  `-> Annotation{1,3}`. This should not reuse `[N]`, which already means regex
+  index, and should not apply to default/OR dispatch without a separate design.
+  A broader compact AND sequence syntax is also plausible: in `Foo:AND`, ordered
+  entries like `ruleA`, `ruleB { ... }`, and `ruleA[Q]{3} { ... }` could avoid
+  repeated `->` noise while preserving `-> ruleA` as the explicit action-edge
+  spelling that simply matches `ruleA` in AND context. In that design, `->` can
+  be optional for ordinary AND child entries, but `=>` should remain mandatory
+  for blind-call entries because blind-call result-channel semantics are
+  different.
 
 ## Open Questions
 
-- None blocking `.1`.
+- None blocking `.2`; the AND-only child-edge quantifier idea above is deferred.
 
 ## Blockers
 
@@ -112,14 +126,14 @@ control primitives across all current and future variants:
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-07-09` | `BACKTRACK-SURFACE-RUST-ALIGNMENT.1` | Perl syntax checks for edited ActionIR modules and `t/phase0_regression.t`; `PERL5LIB= perl -Iperl t/phase0_regression.t`; `bash tools/run_ci_local.sh`; `cargo fmt --all --check`; `cargo test -p linkedspec-core`; `cargo test -p linkedspec-runtime`; Dart format/analyze/test/CLI/corpus runner; `mdbook build docs/linkedspec-book`; Knowledge Map, memory architecture, doctrine, active old-helper scan, and `git diff --check` | PASS |
-| `2026-07-09` | `BACKTRACK-SURFACE-RUST-ALIGNMENT.2` | `pending` | `pending` |
+| `2026-07-09` | `BACKTRACK-SURFACE-RUST-ALIGNMENT.2` | Focused Perl probe for `capture_until_boundary(...)`; focused Rust and Dart runtime tests; `PERL5LIB= perl -Iperl t/phase0_regression.t` (`1..1028`); Rust format/core/runtime package tests; Dart format/analyze/full tests; `mdbook build docs/linkedspec-book`; Knowledge Map generation/checks; memory architecture; doctrine driver; local CI; `git diff --check` | PASS |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `BACKTRACK-SURFACE-RUST-ALIGNMENT.1` | `BACKTRACK-SURFACE-RUST-ALIGNMENT.1 - replace backtrack surface` | Pending commit in this slice. |
-| `BACKTRACK-SURFACE-RUST-ALIGNMENT.2` | `pending` | `pending` |
+| `BACKTRACK-SURFACE-RUST-ALIGNMENT.1` | `f069e09a BACKTRACK-SURFACE-RUST-ALIGNMENT.1 - replace backtrack surface` | Committed. |
+| `BACKTRACK-SURFACE-RUST-ALIGNMENT.2` | `BACKTRACK-SURFACE-RUST-ALIGNMENT.2 - add boundary lookahead helper` | Prepared in this slice. |
 
 ## Changelog
 
@@ -130,3 +144,6 @@ control primitives across all current and future variants:
 - `2026-07-09`: `.1` done. Perl, Rust, and Dart now support explicit cursor-stack and
   anchor-rewind helpers under current names; old broad backtrack spellings are no longer the
   current user-facing API. Frontier advances to `.2` zero-width/lookahead boundary support.
+- `2026-07-09`: `.2` done. Perl, Rust, and Dart now support `capture_until_boundary(rule[, ...])`
+  as the portable non-consuming structural boundary helper; EBNF semantic annotations use it to stop
+  before the next annotation or grammar rule without consuming that boundary. The tree is closed.

@@ -428,6 +428,8 @@ LinkedSpec exposes explicit cursor controls:
 - `rewind_entry_start()` rewinds to the start of the initial/entry match for
   the current context; this is the same initial-match context exposed to the `I`
   lifecycle.
+- `capture_until_boundary(rule[, ...])` captures from the live cursor to the
+  earliest named structural boundary and leaves that boundary unconsumed.
 
 These are local cursor operations only. LinkedSpec does not maintain a search
 tree, unwind partial rule matches, or restore alternative-choice state.

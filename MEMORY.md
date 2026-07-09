@@ -18,29 +18,30 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `BACKTRACK-SURFACE-RUST-ALIGNMENT.1` — Perl, Rust, and Dart now use explicit
-  `save_cursor()` / `restore_cursor()` cursor-stack helpers and `rewind_match_start()` /
-  `rewind_entry_start()` anchor rewinds; old `BACKTRACK` / `IBACKTRACK` and lowercase label forms are not current
-  portable API.
-- prior_leaf: `DART-BACKEND-PARITY.4.4` — Dart first landed cursor rewinds and char-based cursor/input helpers;
-  its public names are superseded by `BACKTRACK-SURFACE-RUST-ALIGNMENT.1`.
+- latest_completed_leaf: `BACKTRACK-SURFACE-RUST-ALIGNMENT.2` — Perl, Rust, and Dart now share the full explicit
+  cursor-control split: `save_cursor()` / `restore_cursor()` stack semantics, `rewind_match_start()` /
+  `rewind_entry_start()` anchor rewinds, and `capture_until_boundary(rule[, ...])` non-consuming structural
+  boundary capture.
+- prior_leaf: `BACKTRACK-SURFACE-RUST-ALIGNMENT.1` — old `BACKTRACK` / `IBACKTRACK` and lowercase label forms were
+  retired from the current portable API before the boundary helper landed.
 - latest_commit: this resume block is prepared for commit
-  `BACKTRACK-SURFACE-RUST-ALIGNMENT.1 - replace backtrack surface`; use `git log -1 --oneline` for the exact hash.
+  `BACKTRACK-SURFACE-RUST-ALIGNMENT.2 - add boundary lookahead helper`; previous committed HEAD is
+  `f069e09a BACKTRACK-SURFACE-RUST-ALIGNMENT.1 - replace backtrack surface`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `BACKTRACK-SURFACE-RUST-ALIGNMENT`; current frontier `.2` pending.
-- next_action: after the `.1` commit is clean, start `.2` zero-width/lookahead boundary support so EBNF-style
-  annotation bodies can stop before the next structural token without consuming and rewinding it.
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.4.5` after the current commit is clean.
+- next_action: resume PNT at `DART-BACKEND-PARITY.4.5` runtime diagnostics and trace controls. The AND-only
+  compact sequence / child-edge quantifier idea remains deferred in `BACKTRACK-SURFACE-RUST-ALIGNMENT`.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, task-tree index,
   ROADMAP/ROADMAP_V2, mdBook status/backend-handoff/formal grammar/helper chapters, relevant ADR/KM facts,
-  Dart package/source owners through `.4.4`, and the active cursor-control split decision:
+  Dart package/source owners through `.4.4`, and the completed cursor-control split decision:
   `save_cursor()` / `restore_cursor()` are stack semantics, `rewind_match_start()` / `rewind_entry_start()` are
-  anchor rewinds, and `.2` owns zero-width/lookahead boundary support.
+  anchor rewinds, and `capture_until_boundary(rule[, ...])` is the non-consuming boundary primitive.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
-- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1027` tests**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
+- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1028`**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `.1` commit; do not pivot unless the repo is
+- blockers: none. in_flight_uncommitted: none expected after the `.2` commit; do not pivot unless the repo is
   handoff-ready.

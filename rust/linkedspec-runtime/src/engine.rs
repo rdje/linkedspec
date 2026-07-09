@@ -3730,6 +3730,7 @@ impl Engine {
                 | "capture_slice_pos"
                 | "capture_slice_until_cursor"
                 | "capture_slice_until_cursor_len"
+                | "capture_until_boundary"
                 | "capture_take_until_cursor"
                 | "capture_take_until_cursor_len"
                 | "capture_take"
@@ -5210,8 +5211,17 @@ impl Engine {
         raw_args: &[linkedspec_core::expr::Arg],
         val: Option<&RuntimeValue>,
     ) -> String {
+        self.resolve_rule_name_at(raw_args, val, 0)
+    }
+
+    fn resolve_rule_name_at(
+        &self,
+        raw_args: &[linkedspec_core::expr::Arg],
+        val: Option<&RuntimeValue>,
+        index: usize,
+    ) -> String {
         use linkedspec_core::expr::{Arg, Expr};
-        if let Some(Arg::Positional(Expr::Variable { name })) = raw_args.first() {
+        if let Some(Arg::Positional(Expr::Variable { name })) = raw_args.get(index) {
             return name.clone();
         }
         val.map(|v| v.to_str()).unwrap_or_default()
@@ -5784,6 +5794,41 @@ impl Engine {
                 Ok(span_char_len(&ctx.input, start, ctx.pos)
                     .map(|n| RuntimeValue::Number(n as f64))
                     .unwrap_or(RuntimeValue::Undef))
+            }
+            "capture_until_boundary" => {
+                let mut saw_valid_boundary = false;
+                let mut boundary_start: Option<usize> = None;
+                for index in 0..raw_args.len() {
+                    let target = self.resolve_rule_name_at(raw_args, args.get(index), index);
+                    if target.is_empty() {
+                        continue;
+                    }
+                    let Some(boundary_rule) = self.spec.find(&target) else {
+                        continue;
+                    };
+                    if boundary_rule.regex_patterns.is_empty() {
+                        continue;
+                    }
+                    saw_valid_boundary = true;
+                    let boundary_alt = CompiledAlternation::compile(&boundary_rule.regex_patterns)?;
+                    if let Some(candidate) = boundary_alt.seek_match(&ctx.input, ctx.pos) {
+                        if boundary_start.is_none_or(|current| candidate.start < current) {
+                            boundary_start = Some(candidate.start);
+                        }
+                    }
+                }
+                if !saw_valid_boundary {
+                    return Ok(RuntimeValue::Undef);
+                }
+                let boundary_start = boundary_start.unwrap_or(ctx.input.len());
+                let start = ctx.pos;
+                match span_text(&ctx.input, start, boundary_start) {
+                    Some(text) => {
+                        ctx.set_pos(boundary_start);
+                        Ok(RuntimeValue::Scalar(text))
+                    }
+                    None => Ok(RuntimeValue::Undef),
+                }
             }
             "capture_take_until_cursor" => {
                 let start = ctx.capture_start.unwrap_or(0);
@@ -8738,6 +8783,35 @@ ChildB:
         let acc = acc[0].as_array().unwrap();
         assert_eq!(acc[0].as_str().unwrap(), "  ab");
         assert_eq!(acc[1].as_f64().unwrap(), 4.0);
+    }
+
+    #[test]
+    fn helpers_capture_until_boundary_captures_without_consuming_boundary() {
+        let g = r#"Top::
+ I { set(array(out), []) }
+ -> Annotation.push(out)
+ LX { return(copy(array(out))) }
+
+Annotation: /@(\w+):[ \t]*/
+ I { body = capture_until_boundary(Annotation, Boundary); return(hash("kind", "annotation", "name", entry_group(0), "body", trim(body), "cursor", cursor_pos(), "rest", cursor_rest())) }
+
+Boundary: /END/
+"#;
+        let acc = run_5_5_3(g, "@a: first @b: second END");
+        let entries = acc[0].as_array().unwrap();
+        let obj = entries[0].as_object().unwrap();
+        let second = entries[1].as_object().unwrap();
+
+        assert_eq!(obj.get("kind").and_then(|v| v.as_str()), Some("annotation"));
+        assert_eq!(obj.get("name").and_then(|v| v.as_str()), Some("a"));
+        assert_eq!(obj.get("body").and_then(|v| v.as_str()), Some("first"));
+        assert_eq!(obj.get("cursor").and_then(|v| v.as_f64()), Some(10.0));
+        assert_eq!(
+            obj.get("rest").and_then(|v| v.as_str()),
+            Some("@b: second END")
+        );
+        assert_eq!(second.get("name").and_then(|v| v.as_str()), Some("b"));
+        assert_eq!(second.get("body").and_then(|v| v.as_str()), Some("second"));
     }
 
     #[test]

@@ -5,12 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
-- `2026-07-09` refresh: `BACKTRACK-SURFACE-RUST-ALIGNMENT.1` defines the current cross-variant cursor-control
-  surface. Perl, Rust, and Dart expose `save_cursor()` / `restore_cursor()` for explicit cursor-stack semantics and
-  `rewind_match_start()` / `rewind_entry_start()` for direct local-match or entry/initial-match anchor rewinds. The
-  old `BACKTRACK()` / `IBACKTRACK()` names and lowercase `backtrack(label)` / `ibacktrack(label)` forms are not
-  current portable API. `specs/ebnf.spec` uses `rewind_match_start()` as the semantic-preserving replacement until
-  `BACKTRACK-SURFACE-RUST-ALIGNMENT.2` lands the preferred zero-width/lookahead boundary primitive.
+- `2026-07-09` refresh: `BACKTRACK-SURFACE-RUST-ALIGNMENT` defines the current cross-variant cursor-control
+  surface. Perl, Rust, and Dart expose `save_cursor()` / `restore_cursor()` for explicit cursor-stack semantics,
+  `rewind_match_start()` / `rewind_entry_start()` for direct local-match or entry/initial-match anchor rewinds, and
+  `capture_until_boundary(rule[, ...])` for non-consuming structural boundary capture. The old `BACKTRACK()` /
+  `IBACKTRACK()` names and lowercase `backtrack(label)` / `ibacktrack(label)` forms are not current portable API.
+  `specs/ebnf.spec` uses `capture_until_boundary(semantic_annotation, grammar_rule)` so semantic annotation bodies
+  stop before the next annotation or grammar rule without consuming that boundary.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.4` first extended Dart runtime cursor semantics in
   `dart/lib/src/runtime/interpreter.dart` and `dart/lib/src/runtime/matching.dart`. That slice landed local
   cursor rewinds and char-based cursor/input helpers such as `cursor_pos`, `cursor_rest`, `input_slice`, and
@@ -22,8 +23,8 @@ This document is the current high-level technical reading of the project shape. 
   mutation, final hash keys may be created, final array writes only replace or append exactly at `len`, and missing
   intermediate containers are not autovivified. Segment index expressions evaluate before the RHS value expression,
   matching the Rust/Perl lowering order. Direct hash-index assignment on scalar-held map/list roots now preserves
-  root ownership before named hash fallback. The active Dart frontier is `.4.4` for BACKTRACK and local cursor
-  rewind behavior.
+  root ownership before named hash fallback. The Dart frontier has since advanced through cursor-control alignment
+  and is now `.4.5` for runtime diagnostics and trace controls.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.5` extended Dart runtime ActionIR execution in
   `dart/lib/src/runtime/interpreter.dart`. `LinkedSpecRuntimeEngine` now evaluates expression-valued blocks with
   block-local `return(...)` / `return_undef()`, attached `if` / `elseif` / `else` and `when` / `otherwise`
@@ -198,8 +199,8 @@ This document is the current high-level technical reading of the project shape. 
   the four explicit REP subfamilies) and is proven by an all-family compile/run matrix plus a curated
   manifest-backed corpus subset. The full 99-fixture corpus remains the interpreter oracle gate;
   generated-source corpus coverage is intentionally a subset until a future leaf broadens it. Current phase0 is
-  `PASS 1..1027` over 21 shipped `.spec` files with `PERL5LIB=` cleared after the non-current helper metadata and
-  source closeout slices.
+  `PASS 1..1028` over 21 shipped `.spec` files with `PERL5LIB=` cleared after the non-consuming boundary helper
+  regression landed.
 - `2026-07-04` refresh: RUST-PARITY follow-on closed. The Rust variant then had a green 88-fixture
   manifest-backed interpreter oracle with missing/stale fixture drift guards, and the generated Rust-source path
   emitted the first validated generated-family module/corpus proof.

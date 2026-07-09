@@ -7,6 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **BACKTRACK-SURFACE-RUST-ALIGNMENT.2 — add boundary lookahead helper**
+  (DONE — non-consuming structural boundary capture across current variants).
+
+  **Change:** Perl, Rust, and Dart now support `capture_until_boundary(rule[, ...])`. The helper starts from the
+  live cursor, probes named structural rules, captures the text before the earliest boundary, and leaves that
+  boundary unconsumed for the normal rule path. `specs/ebnf.spec` and Rust corpus copies now use it for
+  `semantic_annotation`, so annotation bodies stop before the next `semantic_annotation` or `grammar_rule`
+  without consume-then-rewind behavior.
+
+  **Boundary:** This closes the Rust-reference backtrack-surface alignment tree. The current portable cursor
+  surface is now `save_cursor()` / `restore_cursor()`, `rewind_match_start()` / `rewind_entry_start()`, and
+  `capture_until_boundary(rule[, ...])`; old broad backtrack spellings are not current user-facing API. The
+  AND-only compact child-sequence / quantifier idea is recorded as deferred design direction, not active work.
+
+  **Verification:** Focused Perl/Rust/Dart boundary tests, standalone phase0 `1..1028`, Rust format/core/runtime
+  package tests, Dart format/analyze/full tests, mdBook, Knowledge Map, memory architecture, doctrine, local CI,
+  and `git diff --check` pass.
+
 - 2026-07-09: **BACKTRACK-SURFACE-RUST-ALIGNMENT.1 — explicit cursor controls**
   (DONE — replacing broad backtrack names with precise cursor controls across current variants).
 

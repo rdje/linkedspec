@@ -68,6 +68,7 @@ void main() {
     expect(isKnownActionIrCallName('restore_cursor'), isTrue);
     expect(isKnownActionIrCallName('rewind_match_start'), isTrue);
     expect(isKnownActionIrCallName('rewind_entry_start'), isTrue);
+    expect(isKnownActionIrCallName('capture_until_boundary'), isTrue);
     expect(isKnownActionIrCallName('BACKTRACK'), isFalse);
     expect(isKnownActionIrCallName('IBACKTRACK'), isFalse);
     expect(isKnownActionIrCallName('mystery_helper'), isFalse);

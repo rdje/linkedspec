@@ -215,22 +215,19 @@ The shared block is bound to every listed target, so the same action runs for wh
 
 Grouped action-edge targets require that shared `{ ... }` block. The block-less form `-> RuleA | RuleB` is invalid; use separate edges when there is no shared action to factor.
 
-A shipped example is `ebnf.spec`, whose `semantic_annotation` rule shares one action across two targets:
+A compact grouped-edge example is a lexer-like rule where two child tokens
+return the same normalized payload:
 
 ```text
-semantic_annotation: /@(\w+)\s*:\s*/
--> semantic_annotation | grammar_rule {
-  rewind_match_start();
-  c = capture_slice();
-  substr(c, "\s*$", "", o);
-  substr(c, "^\"|\"$", "", go);
-  return(array("semantic_annotation", array(entry_group(0), c)));
+token::
+-> quoted_string | bare_word {
+  return(hash("kind", "token", "text", retv));
 }
 ```
 
 Here the identical cleanup-and-return code applies whether the dispatch lands on
-`semantic_annotation` or `grammar_rule` — the targets are alternatives, and the block sees
-whichever one matched. Use grouped targets when:
+`quoted_string` or `bare_word` - the targets are alternatives, and the block sees
+whichever child result was produced. Use grouped targets when:
 
 - two or more alternative child rules need the **identical** action, and
 - duplicating the block would otherwise be the only way to express it.

@@ -44,6 +44,7 @@ sub try_scan_contract_ir_events {
   'capture_slice_len' => \&_scan_contract_capture_slice_len,
   'capture_slice_until_cursor' => \&_scan_contract_capture_slice_until_cursor,
   'capture_slice_until_cursor_len' => \&_scan_contract_capture_slice_until_cursor_len,
+  'capture_until_boundary' => \&_scan_contract_capture_until_boundary,
   'capture_take_until_cursor' => \&_scan_contract_capture_take_until_cursor,
   'capture_take_until_cursor_len' => \&_scan_contract_capture_take_until_cursor_len,
   'capture_slice_pos' => \&_scan_contract_capture_slice_pos,
@@ -290,6 +291,23 @@ sub _scan_contract_capture_slice_until_cursor_len {
  my @events;
 while ($code =~ /\bcapture_slice_until_cursor_len\s*\(\s*\)/g) {
  push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_until_boundary {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_until_boundary\s*\(\s*(?<boundaries>(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\w+)(?:\s*,\s*(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\w+))*)\s*\)/g) {
+ my @boundaries;
+ for my $boundary (split(/\s*,\s*/, $+{boundaries})) {
+  if ($boundary =~ /\A(["'])(.*)\1\z/s) {
+   $boundary = $2;
+   $boundary =~ s/\\(["'\\])/$1/g;
+  }
+  push @boundaries, $boundary if length($boundary);
+ }
+ push @events, {raw => $&, args => {boundaries => \@boundaries}};
 }
  return \@events
 }

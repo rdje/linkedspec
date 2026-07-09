@@ -162,7 +162,13 @@ LinkedSpec exposes explicit cursor controls, not systemic backtracking:
 4. `rewind_entry_start()` rewinds the live cursor to the start of the
    initial/entry match for the current context. This is the same initial-match
    context exposed to the `I` lifecycle.
-5. These operations change only the live input cursor. Match records, accumulators,
+5. `capture_until_boundary(rule[, ...])` seeks from the live cursor for the
+   earliest match of any named boundary rule, captures the text before that
+   match, and leaves the cursor at the boundary start without consuming the
+   boundary. If valid boundary rules exist but no boundary is found, it captures
+   to end-of-input and moves the cursor there. If no requested boundary can be
+   resolved, it returns `undef` and leaves the cursor unchanged.
+6. These operations change only the live input cursor. Match records, accumulators,
    variables, and other side effects are not rolled back.
 
 **What these helpers are NOT:**

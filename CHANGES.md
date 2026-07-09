@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — BACKTRACK-SURFACE-RUST-ALIGNMENT.2 — add non-consuming boundary capture
+
+**Scope:** Perl ActionIR contracts/scanner/canonical events, Rust runtime/validation/tests, Dart ActionIR
+contracts/runtime/tests, active EBNF spec/corpus copies, mdBook helper/runtime/status text, live docs, task-tree
+metadata, and Knowledge Map facts.
+
+**Change:** Added `capture_until_boundary(rule[, ...])` as the cross-variant zero-width/lookahead boundary
+primitive. The helper starts at the live cursor, probes one or more named boundary rules, captures text before the
+earliest boundary match, and leaves that boundary unconsumed for the normal rule path. If at least one named
+boundary resolves but no later boundary is found, it captures to end-of-input and moves the cursor there; if no
+requested boundary resolves to a usable pattern, it returns `undef`/`null` and leaves the cursor unchanged. The
+active EBNF `semantic_annotation` rule now uses this helper to stop before the next `semantic_annotation` or
+`grammar_rule`, eliminating the previous consume-then-rewind workaround.
+
+**Validation:** Focused Perl probe for `capture_until_boundary(...)` passes and leaves the next structural
+boundary unconsumed; `PERL5LIB= perl -Iperl t/phase0_regression.t` passes `1..1028`; Rust formatting,
+`linkedspec-core`, and `linkedspec-runtime` package tests pass;
+Dart format/analyze/full tests pass; `mdbook build docs/linkedspec-book`, Knowledge Map generation/checks, memory
+architecture, doctrine driver, local CI, and `git diff --check` pass.
+
 ## 2026-07-09 — BACKTRACK-SURFACE-RUST-ALIGNMENT.1 — replace backtrack surface with explicit cursor controls
 
 **Scope:** Perl ActionIR contracts/scanner/canonical events, Rust runtime/validation/tests, Dart ActionIR
