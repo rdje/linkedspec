@@ -767,12 +767,19 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Children: `.6.1`, `.6.2`, `.6.3`, `.6.4`
 
 - ID: `DART-BACKEND-PARITY.6.1`
-  Status: `pending`
+  Status: `done`
   Goal: Bring up controlled proof fixtures.
   Acceptance: Minimal authored fixtures prove scalar output, nested arrays/hashes, rule dispatch, and
     lifecycle return shape before shipped-spec breadth.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Added `executeCorpusFixtures(...)` and public
+    `CorpusExecutionResult` / `CorpusFixtureExecutionResult` records. The harness preserves manifest validation,
+    runs each fixture through Dart `parseSpec(...)`, `compileSpec(...)`, and `LinkedSpecRuntimeEngine`, compares
+    runtime output to the backend-neutral expected value wrapped one level, uses structural JSON equality, and
+    reports all fixture failures without aborting the run. Focused temporary corpus fixtures prove scalar output,
+    nested array/hash/null/boolean output, blind rule dispatch, lifecycle output shape, and mismatch reporting.
+    Focused corpus tests, Dart format/analyze/full tests, default 99-fixture corpus loader/help, CLI help,
+    mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+  Commit: `DART-BACKEND-PARITY.6.1 - add Dart controlled corpus execution`
 
 - ID: `DART-BACKEND-PARITY.6.2`
   Status: `pending`

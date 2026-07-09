@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.1 — add Dart controlled corpus execution
+
+**Scope:** Dart corpus execution harness, focused controlled corpus tests, public Dart exports, mdBook/status
+text, live docs, roadmap/task-tree status, and Knowledge Map facts.
+
+**Change:** Added `executeCorpusFixtures(...)` plus `CorpusExecutionResult` /
+`CorpusFixtureExecutionResult` to run manifest-backed fixtures through `parseSpec(...)`, `compileSpec(...)`,
+and `LinkedSpecRuntimeEngine`. The harness preserves manifest validation, compares runtime output against the
+backend-neutral expected value wrapped one level, reports every fixture failure without aborting the run, and
+uses structural JSON equality for list/map payloads. Focused temporary corpus fixtures now prove scalar output,
+nested array/hash/null/boolean output, rule dispatch, lifecycle return shape, and mismatch reporting before the
+full 99-fixture manifest expansion.
+
+**Validation:** Focused corpus manifest tests, Dart format/analyze/full tests, default 99-fixture corpus loader,
+corpus runner help, CLI help, mdBook build, memory architecture, Knowledge Map generation/check, task-tree
+metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.5.3 — preserve Dart staged descriptor shapes
 
 **Scope:** Dart compiled-state descriptor tests, mdBook descriptor/status text, live docs, roadmap/task-tree

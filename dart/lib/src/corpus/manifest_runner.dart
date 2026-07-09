@@ -1,6 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 
+import '../compiler/compiled_spec.dart';
+import '../parser/spec_parser.dart';
+import '../runtime/interpreter.dart';
+import '../runtime/matching.dart';
+import '../validation/spec_validator.dart';
+
 final class CorpusManifestException implements Exception {
   const CorpusManifestException(this.message);
 
@@ -48,6 +54,88 @@ final class CorpusValidationResult {
   final List<CorpusFixture> fixtures;
 }
 
+final class CorpusExecutionResult {
+  CorpusExecutionResult({
+    required this.validation,
+    required List<CorpusFixtureExecutionResult> results,
+  }) : results = List<CorpusFixtureExecutionResult>.unmodifiable(results);
+
+  final CorpusValidationResult validation;
+  final List<CorpusFixtureExecutionResult> results;
+
+  bool get passed => failures.isEmpty;
+
+  int get passedCount => results.length - failures.length;
+
+  List<CorpusFixtureExecutionResult> get failures {
+    return [
+      for (final result in results)
+        if (!result.passed) result,
+    ];
+  }
+
+  CorpusFixtureExecutionResult fixture(String name) {
+    return results.firstWhere((result) => result.name == name);
+  }
+}
+
+final class CorpusFixtureExecutionResult {
+  const CorpusFixtureExecutionResult._({
+    required this.name,
+    required this.expectedJson,
+    required this.actualValue,
+    required this.actualOutput,
+    required this.matched,
+    required this.cursorCodeUnit,
+    required this.failure,
+  });
+
+  factory CorpusFixtureExecutionResult.success({
+    required String name,
+    required Object? expectedJson,
+    required RuntimeParseResult parseResult,
+  }) {
+    return CorpusFixtureExecutionResult._(
+      name: name,
+      expectedJson: expectedJson,
+      actualValue: parseResult.value,
+      actualOutput: List<Object?>.unmodifiable(parseResult.output),
+      matched: parseResult.matched,
+      cursorCodeUnit: parseResult.cursorCodeUnit,
+      failure: null,
+    );
+  }
+
+  factory CorpusFixtureExecutionResult.failure({
+    required String name,
+    required Object? expectedJson,
+    required String failure,
+    RuntimeParseResult? parseResult,
+  }) {
+    return CorpusFixtureExecutionResult._(
+      name: name,
+      expectedJson: expectedJson,
+      actualValue: parseResult?.value,
+      actualOutput: parseResult == null
+          ? null
+          : List<Object?>.unmodifiable(parseResult.output),
+      matched: parseResult?.matched,
+      cursorCodeUnit: parseResult?.cursorCodeUnit,
+      failure: failure,
+    );
+  }
+
+  final String name;
+  final Object? expectedJson;
+  final Object? actualValue;
+  final List<Object?>? actualOutput;
+  final bool? matched;
+  final int? cursorCodeUnit;
+  final String? failure;
+
+  bool get passed => failure == null;
+}
+
 CorpusValidationResult loadCorpusFixtures(String corpusPath) {
   final root = Directory(corpusPath);
   if (!root.existsSync()) {
@@ -66,6 +154,92 @@ CorpusValidationResult loadCorpusFixtures(String corpusPath) {
     manifest: manifest,
     fixtures: fixtures,
   );
+}
+
+CorpusExecutionResult executeCorpusFixtures(
+  String corpusPath, {
+  LinkedSpecParseMode parseMode = LinkedSpecParseMode.seek,
+}) {
+  final validation = loadCorpusFixtures(corpusPath);
+  final results = [
+    for (final fixture in validation.fixtures)
+      _executeFixture(fixture, parseMode: parseMode),
+  ];
+  return CorpusExecutionResult(validation: validation, results: results);
+}
+
+CorpusFixtureExecutionResult _executeFixture(
+  CorpusFixture fixture, {
+  required LinkedSpecParseMode parseMode,
+}) {
+  try {
+    final spec = parseSpec(fixture.specSource);
+    final compiled = compileSpec(spec);
+    final parseResult = LinkedSpecRuntimeEngine(
+      compiled,
+      parseMode: parseMode,
+      specName: fixture.name,
+    ).execute(fixture.inputText);
+
+    if (!parseResult.matched) {
+      return CorpusFixtureExecutionResult.failure(
+        name: fixture.name,
+        expectedJson: fixture.expectedJson,
+        parseResult: parseResult,
+        failure:
+            'runtime did not match input; cursor_code_unit=${parseResult.cursorCodeUnit}',
+      );
+    }
+
+    final expectedOutput = <Object?>[fixture.expectedJson];
+    if (!_jsonEquals(parseResult.output, expectedOutput)) {
+      return CorpusFixtureExecutionResult.failure(
+        name: fixture.name,
+        expectedJson: fixture.expectedJson,
+        parseResult: parseResult,
+        failure:
+            'output mismatch on input ${jsonEncode(fixture.inputText)}\n'
+            '    expected (reference, wrapped): ${_formatJson(expectedOutput)}\n'
+            '    actual   (engine.execute)    : ${_formatJson(parseResult.output)}',
+      );
+    }
+
+    return CorpusFixtureExecutionResult.success(
+      name: fixture.name,
+      expectedJson: fixture.expectedJson,
+      parseResult: parseResult,
+    );
+  } on SpecParseException catch (error) {
+    return CorpusFixtureExecutionResult.failure(
+      name: fixture.name,
+      expectedJson: fixture.expectedJson,
+      failure: 'parse failed: ${error.message}',
+    );
+  } on SpecValidationException catch (error) {
+    return CorpusFixtureExecutionResult.failure(
+      name: fixture.name,
+      expectedJson: fixture.expectedJson,
+      failure: 'validate failed: ${error.message}',
+    );
+  } on CompiledSpecException catch (error) {
+    return CorpusFixtureExecutionResult.failure(
+      name: fixture.name,
+      expectedJson: fixture.expectedJson,
+      failure: 'compile failed: ${error.message}',
+    );
+  } on RuntimeInterpreterException catch (error) {
+    return CorpusFixtureExecutionResult.failure(
+      name: fixture.name,
+      expectedJson: fixture.expectedJson,
+      failure: 'execute failed: ${error.message}',
+    );
+  } on Object catch (error) {
+    return CorpusFixtureExecutionResult.failure(
+      name: fixture.name,
+      expectedJson: fixture.expectedJson,
+      failure: 'unexpected failure: $error',
+    );
+  }
 }
 
 CorpusManifest _loadManifest(Directory root) {
@@ -246,4 +420,58 @@ String _basename(FileSystemEntity entity) {
 
 String _formatNames(List<String> names) {
   return '[${names.join(', ')}]';
+}
+
+bool _jsonEquals(Object? left, Object? right) {
+  if (identical(left, right)) {
+    return true;
+  }
+  if (left is num && right is num) {
+    return left == right;
+  }
+  if (left == null || right == null) {
+    return left == right;
+  }
+  if (left is String || left is bool || right is String || right is bool) {
+    return left == right;
+  }
+  if (left is List && right is List) {
+    if (left.length != right.length) {
+      return false;
+    }
+    for (var index = 0; index < left.length; index += 1) {
+      if (!_jsonEquals(left[index], right[index])) {
+        return false;
+      }
+    }
+    return true;
+  }
+  if (left is Map && right is Map) {
+    if (left.length != right.length) {
+      return false;
+    }
+    for (final entry in left.entries) {
+      final key = entry.key;
+      if (!right.containsKey(key) || !_jsonEquals(entry.value, right[key])) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}
+
+String _formatJson(Object? value) {
+  return jsonEncode(_canonicalJson(value));
+}
+
+Object? _canonicalJson(Object? value) {
+  if (value is List) {
+    return [for (final item in value) _canonicalJson(item)];
+  }
+  if (value is Map) {
+    final keys = value.keys.map((key) => key.toString()).toList()..sort();
+    return {for (final key in keys) key: _canonicalJson(value[key])};
+  }
+  return value;
 }

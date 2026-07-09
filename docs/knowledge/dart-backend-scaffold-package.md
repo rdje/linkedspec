@@ -12,11 +12,12 @@ answers:
   - where is the Dart ActionIR contract resolver
   - where is the Dart user function registry
   - does the Dart package implement runtime semantics yet
+  - does Dart have a controlled corpus execution harness
   - is pubspec.lock committed for the Dart backend
 date: 2026-07-09
 status: current
 tags: [dart, backends, package, scaffold, corpus, ast, parser, validation, actionir, contracts, tests]
-evidence: "DART-BACKEND-PARITY.1.2 creates the Dart package scaffold; DART-BACKEND-PARITY.1.3 adds corpus manifest IO; DART-BACKEND-PARITY.2.1 adds dart/lib/src/ast/spec_ast.dart and JSON round-trip tests; DART-BACKEND-PARITY.2.2 adds dart/lib/src/parser/spec_parser.dart and parser fixtures; DART-BACKEND-PARITY.2.3 adds dart/lib/src/validation/spec_validator.dart and validation fixtures; DART-BACKEND-PARITY.3.1 adds typed ActionIR parsing; DART-BACKEND-PARITY.3.2 adds dart/lib/src/action/action_contracts.dart; DART-BACKEND-PARITY.3.3 adds dart/lib/src/action/function_registry.dart and exact-arity user-call classification; DART-BACKEND-PARITY.3.4 adds compiled-spec state; DART-BACKEND-PARITY.4.1 adds runtime matching; DART-BACKEND-PARITY.4.2 adds the first runtime rule interpreter."
+evidence: "DART-BACKEND-PARITY.1.2 creates the Dart package scaffold; DART-BACKEND-PARITY.1.3 adds corpus manifest IO; DART-BACKEND-PARITY.2.1 adds dart/lib/src/ast/spec_ast.dart and JSON round-trip tests; DART-BACKEND-PARITY.2.2 adds dart/lib/src/parser/spec_parser.dart and parser fixtures; DART-BACKEND-PARITY.2.3 adds dart/lib/src/validation/spec_validator.dart and validation fixtures; DART-BACKEND-PARITY.3.1 adds typed ActionIR parsing; DART-BACKEND-PARITY.3.2 adds dart/lib/src/action/action_contracts.dart; DART-BACKEND-PARITY.3.3 adds dart/lib/src/action/function_registry.dart and exact-arity user-call classification; DART-BACKEND-PARITY.3.4 adds compiled-spec state; DART-BACKEND-PARITY.4.1 adds runtime matching; DART-BACKEND-PARITY.4.2 adds the first runtime rule interpreter; DART-BACKEND-PARITY.6.1 adds executeCorpusFixtures for controlled manifest fixtures."
 reverify: "git ls-files dart && (cd dart && dart format --set-exit-if-changed . && dart analyze --fatal-infos --fatal-warnings && dart test && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus)"
 ---
 
@@ -27,7 +28,10 @@ the core `parseSpec(...)` rule parser, `validateSpec(...)`, and `package:test` s
 
 The corpus IO layer loads the checked-in corpus under `rust/linkedspec-runtime/tests/corpus/`, validates
 manifest format/count/name shape, detects missing or stale fixture directories, requires `input.spec`,
-`input.txt`, and `expected.json`, and parses expected JSON.
+`input.txt`, and `expected.json`, and parses expected JSON. The executable corpus layer now also exposes
+`executeCorpusFixtures(...)` for controlled manifest-backed fixtures; it runs parse/compile/runtime and compares
+the Dart engine output against `[expected]` with structural JSON equality. Full shipped 99-fixture output parity
+remains a later `.6` leaf.
 
 `dart/lib/src/ast/spec_ast.dart` defines AST/staged-parse-job types that round-trip through JSON.
 `dart/lib/src/parser/spec_parser.dart` parses core `.spec` rule paragraphs into those AST types.
@@ -40,12 +44,13 @@ contract table. `dart/lib/src/action/function_registry.dart` builds ordered user
 from `FunctionDefinition` records, exposes staged body parse jobs, and lets contract resolution classify
 exact-arity user calls before helper fallback. It now also builds compiled-spec
 state, performs runtime regex matching, and executes the first rule-dispatch
-interpreter layer. Full helper-family semantics and corpus output parity remain
-later Dart leaves.
+interpreter layer. It also has a controlled executable corpus harness. Full shipped
+corpus output parity remains a later Dart leaf.
 
 Related facts: [[dart-core-spec-parser]], [[dart-frontend-validation]],
 [[dart-function-definition-shell-projection]], [[dart-actionir-ast-parser]],
 [[dart-actionir-contract-resolver]], [[dart-function-registry]],
 [[dart-compiled-spec-state]], [[dart-runtime-matching-state]],
-[[dart-runtime-rule-interpreter]], [[dart-backend-interpreter-first-plan]],
-[[text-to-ast-backend-doctrine]], [[rust-perl-output-oracle]].
+[[dart-runtime-rule-interpreter]], [[dart-controlled-corpus-execution]],
+[[dart-backend-interpreter-first-plan]], [[text-to-ast-backend-doctrine]],
+[[rust-perl-output-oracle]].

@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.1 — Dart controlled corpus execution):
+  Added the first executable Dart corpus harness while keeping the default 99-fixture corpus runner command as a
+  manifest-loader smoke. `executeCorpusFixtures(...)` reuses `loadCorpusFixtures(...)`, then runs each fixture
+  through the current Dart source parser, compiler, and `LinkedSpecRuntimeEngine`. The comparison uses the same
+  backend-neutral output contract as the Rust oracle runner: `expected.json` is the top-rule reference value, and
+  the engine output must equal `[expected]`. It reports every fixture failure in the returned result set instead
+  of aborting on the first parse/validate/compile/execute/output mismatch. The focused temporary corpus fixtures
+  cover scalar output, nested arrays/hashes/null/boolean output, blind rule dispatch, lifecycle output shape, and
+  mismatch reporting. `.6.2` remains the shipped 99-fixture expansion/batching leaf.
+
 - 2026-07-09 (DART-BACKEND-PARITY.5.3 — Dart staged descriptor-shape proof):
   Closed the Dart `.5` staged/user-function container with a descriptor-shape proof in `test/compiled_spec_test.dart`.
   The proof starts from spec-returned `function_definition` nodes, runs

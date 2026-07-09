@@ -16,6 +16,167 @@ void main() {
     expect(result.fixtures.first.specSource, isNotEmpty);
   });
 
+  test('executes controlled fixtures against runtime output shape', () {
+    final root = Directory.systemTemp.createTempSync(
+      'linkedspec-dart-controlled-',
+    );
+    try {
+      _writeManifest(root, [
+        'scalar_output',
+        'nested_aggregate_output',
+        'rule_dispatch_output',
+        'lifecycle_output_shape',
+      ]);
+      _writeFixture(
+        root,
+        'scalar_output',
+        specSource: r'''
+Top::
+ /x/ -> Done { return("scalar-ok") }
+
+Done::
+ /[a-z]+/
+''',
+        inputText: 'xhello',
+        expectedJson: 'scalar-ok',
+      );
+      _writeFixture(
+        root,
+        'nested_aggregate_output',
+        specSource: r'''
+Top::
+ /n/ -> Done { return(hash("items", array("a", hash("b", 2)), "flag", true, "none", undef)) }
+
+Done::
+ /ested/
+''',
+        inputText: 'nested',
+        expectedJson: {
+          'flag': true,
+          'items': [
+            'a',
+            {'b': 2},
+          ],
+          'none': null,
+        },
+      );
+      _writeFixture(
+        root,
+        'rule_dispatch_output',
+        specSource: r'''
+Top::AND
+ I { set(array(out), []) }
+ => First { push(array(out), retv) }
+ => Second { push(array(out), retv) }
+ E { return(copy(array(out))) }
+
+First:
+ /a/
+ E { return("first") }
+
+Second:
+ /b/
+ E { return("second") }
+''',
+        inputText: 'ab',
+        expectedJson: ['first', 'second'],
+      );
+      _writeFixture(
+        root,
+        'lifecycle_output_shape',
+        specSource: r'''
+Top::OR{1}
+ I { push(array(events), "I") }
+ LS { push(array(events), "LS") }
+ /x/
+ LE { push(array(events), "LE") }
+ IT { push(array(events), "IT") }
+ EX { push(array(events), "EX") }
+ LX { push(array(events), "LX") }
+ E { return(hash("cursor", cursor_pos(), "events", copy(array(events)))) }
+''',
+        inputText: 'x',
+        expectedJson: {
+          'cursor': 1,
+          'events': ['I', 'LS', 'LE', 'IT', 'EX', 'LX'],
+        },
+      );
+
+      final result = executeCorpusFixtures(root.path);
+
+      expect(result.passed, isTrue);
+      expect(result.passedCount, 4);
+      expect(result.failures, isEmpty);
+      expect(result.fixture('scalar_output').actualValue, 'scalar-ok');
+      expect(result.fixture('nested_aggregate_output').actualValue, {
+        'flag': true,
+        'items': [
+          'a',
+          {'b': 2},
+        ],
+        'none': null,
+      });
+      expect(result.fixture('rule_dispatch_output').actualOutput, [
+        ['first', 'second'],
+      ]);
+      expect(result.fixture('lifecycle_output_shape').actualOutput, [
+        {
+          'cursor': 1,
+          'events': ['I', 'LS', 'LE', 'IT', 'EX', 'LX'],
+        },
+      ]);
+    } finally {
+      root.deleteSync(recursive: true);
+    }
+  });
+
+  test('reports fixture output mismatches without aborting the run', () {
+    final root = Directory.systemTemp.createTempSync(
+      'linkedspec-dart-mismatch-',
+    );
+    try {
+      _writeManifest(root, ['passing', 'mismatched']);
+      _writeFixture(
+        root,
+        'passing',
+        specSource: r'''
+Top::
+ /x/ -> Done { return("ok") }
+
+Done::
+ /[a-z]+/
+''',
+        inputText: 'xpass',
+        expectedJson: 'ok',
+      );
+      _writeFixture(
+        root,
+        'mismatched',
+        specSource: r'''
+Top::
+ /x/ -> Done { return("actual") }
+
+Done::
+ /[a-z]+/
+''',
+        inputText: 'xfail',
+        expectedJson: 'expected',
+      );
+
+      final result = executeCorpusFixtures(root.path);
+
+      expect(result.passed, isFalse);
+      expect(result.passedCount, 1);
+      expect(result.failures, hasLength(1));
+      expect(result.failures.single.name, 'mismatched');
+      expect(result.failures.single.failure, contains('output mismatch'));
+      expect(result.failures.single.failure, contains('"expected"'));
+      expect(result.fixture('passing').passed, isTrue);
+    } finally {
+      root.deleteSync(recursive: true);
+    }
+  });
+
   test('detects missing fixture directory', () {
     final root = Directory.systemTemp.createTempSync(
       'linkedspec-dart-missing-',
@@ -113,12 +274,22 @@ void _writeManifest(Directory root, List<String> cases, {int? caseCount}) {
   _childFile(root, 'manifest.json').writeAsStringSync(jsonEncode(manifest));
 }
 
-void _writeFixture(Directory root, String name, {bool writeExpected = true}) {
+void _writeFixture(
+  Directory root,
+  String name, {
+  String specSource = 'Top:: /x/',
+  String inputText = 'x',
+  Object? expectedJson = const [],
+  bool writeExpected = true,
+}) {
   final fixture = _childDirectory(root, name)..createSync();
-  _childFile(fixture, 'input.spec').writeAsStringSync('Top:: /x/');
-  _childFile(fixture, 'input.txt').writeAsStringSync('x');
+  _childFile(fixture, 'input.spec').writeAsStringSync(specSource);
+  _childFile(fixture, 'input.txt').writeAsStringSync(inputText);
   if (writeExpected) {
-    _childFile(fixture, 'expected.json').writeAsStringSync(jsonEncode([]));
+    _childFile(
+      fixture,
+      'expected.json',
+    ).writeAsStringSync(jsonEncode(expectedJson));
   }
 }
 

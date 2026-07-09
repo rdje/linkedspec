@@ -13,7 +13,9 @@ string/numeric helper execution, array helper execution, and hash helper
 execution, plus value-block/control/tree helper execution, explicit
 cursor-control behavior, structured runtime diagnostics, and trace
 controls/sinks plus runtime trace events, staged function-body dispatch, and
-registered user-function runtime execution before corpus semantics land.
+registered user-function runtime execution. Its corpus layer now has a
+manifest-backed executable harness for controlled proof fixtures before full
+shipped-corpus parity lands.
 
 ## Commands
 
@@ -31,8 +33,8 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.5.3` is the current completed staged/user-function
-boundary; `.6` is the next corpus-parity frontier. The package can round-trip
+`DART-BACKEND-PARITY.6.1` is the current completed corpus-parity boundary;
+`.6.2` is the next shipped 99-fixture expansion frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -93,4 +95,8 @@ also has `LinkedSpecTraceConfig`, `LinkedSpecTraceLevel`,
 behavior with reset/truncate, and traced runtime entrypoints that preserve parse
 output while emitting parse/rule scopes plus regex, child-dispatch, lifecycle,
 cursor-control, recursion-cutoff, and source-boundary trace events. Corpus output
-parity remains a later leaf in `docs/tasks/DART-BACKEND-PARITY.md`.
+parity has started: `executeCorpusFixtures(...)` can run controlled manifest
+fixtures through parse/compile/runtime, compare the engine output against
+`[expected]` with structural JSON equality, and report every fixture failure.
+Full shipped-corpus output parity remains a later leaf in
+`docs/tasks/DART-BACKEND-PARITY.md`.

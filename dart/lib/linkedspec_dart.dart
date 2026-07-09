@@ -98,10 +98,13 @@ export 'src/compiler/compiled_spec.dart'
         compileSpec;
 export 'src/corpus/manifest_runner.dart'
     show
+        CorpusExecutionResult,
         CorpusFixture,
+        CorpusFixtureExecutionResult,
         CorpusManifest,
         CorpusManifestException,
         CorpusValidationResult,
+        executeCorpusFixtures,
         loadCorpusFixtures;
 export 'src/parser/spec_parser.dart' show SpecParseException, parseSpec;
 export 'src/parser/staged_parser_registry.dart'

@@ -128,7 +128,8 @@ recursion-cutoff decisions, and `capture_until_boundary(...)` source-boundary ma
 Dart diagnostics/trace no-drift sweep across Dart status text, mdBook pages, live docs, task-tree index, and
 Knowledge Map. `DART-BACKEND-PARITY.5.1` then adds the minimal staged registry provider, `.5.2` adds registered
 exact-arity user-function runtime execution, and `.5.3` preserves staged parse-job/function-registry descriptor
-shapes. Trace parity is unchanged by these staged/user-function leaves; the next Dart frontier is corpus parity.
+shapes. `DART-BACKEND-PARITY.6.1` adds the controlled executable corpus harness, but trace parity is unchanged
+by these staged/user-function/corpus-harness leaves; the next Dart frontier is shipped corpus expansion.
 
 ## Future variant trace parity checklist
 
