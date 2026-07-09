@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.0 — split Dart residual parser-smoke parity**
+  (DONE — residual shipped-spec parser-smoke work is split into narrow non-PCRE implementation leaves).
+
+  **Change:** The 7/31 parser-smoke boundary after `.6.2.4.3` is now classified into portmap/action-edge child
+  result shape, hlink delimiter/capture, helper mutation and text normalization, legacy structural smoke outputs,
+  residual closeout, and the already separate PCRE structural-regex follow-up.
+
+  **Boundary:** Planning split only. No implementation code changed. Active implementation work advances to
+  `DART-BACKEND-PARITY.6.2.4.4.1` for portmap/action-edge child result shape parity.
+
+  **Verification:** mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.2.4.3 — close Dart recursive dispatch semantics**
   (DONE — tclite/default-mode and recursive top-rule parser-smoke fixtures now pass on Dart).
 

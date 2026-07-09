@@ -857,7 +857,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 - ID: `DART-BACKEND-PARITY.6.2.4`
   Status: `active`
   Goal: Close the shipped-spec and parser-smoke corpus batch.
-  Children: `.6.2.4.0`, `.6.2.4.1`, `.6.2.4.2`, `.6.2.4.3`, `.6.2.4.4`, `.6.2.4.5`,
+  Children: `.6.2.4.0`, `.6.2.4.1`, `.6.2.4.2`, `.6.2.4.3`, `.6.2.4.4`, `.6.2.4.4.0`,
+    `.6.2.4.4.1`, `.6.2.4.4.2`, `.6.2.4.4.3`, `.6.2.4.4.4`, `.6.2.4.4.5`, `.6.2.4.5`,
     `.6.2.4.6`
   Acceptance: The tclite, lispish, recursive top-rule, hlink, portmap, ebnf, spec.spec, regdef, tablegrep,
     simenv, VHDL/library, history, and plugin smoke fixtures either pass on Dart or each blocked fixture is routed
@@ -940,11 +941,75 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.4.3 - close Dart recursive dispatch semantics`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4`
-  Status: `pending`
+  Status: `active`
   Goal: Close residual shipped-spec parser-smoke fixture output parity.
-  Acceptance: Hlink, portmap, EBNF, spec.spec, regdef, tablegrep, simenv, VHDL/library, history, and plugin/library
-    smoke fixtures pass or are routed with precise root-cause evidence after regex/helper/recursion blockers are
-    removed, including any observable semantic mismatch from Dart's normalized regex dialect bridge.
+  Children: `.6.2.4.4.0`, `.6.2.4.4.1`, `.6.2.4.4.2`, `.6.2.4.4.3`, `.6.2.4.4.4`,
+    `.6.2.4.4.5`
+  Acceptance: Hlink, portmap, regdef, tablegrep, simenv, VHDL/library, history, and plugin/library smoke fixtures
+    pass or are routed with precise root-cause evidence after regex/helper/recursion blockers are removed,
+    including any observable semantic mismatch from Dart's normalized regex dialect bridge. EBNF/spec.spec/Lispish
+    PCRE structural blockers remain owned by `.6.2.4.6`.
+  Verification: Split 2026-07-09 after the `.6.2.4.3` diagnostic window reached 7/31 green.
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.6.2.4.4.0`
+  Status: `done`
+  Goal: Split residual parser-smoke parity after the recursive/default-mode bridge.
+  Acceptance: The post-`.6.2.4.3` diagnostic window is classified into narrowly owned implementation leaves, with
+    PCRE structural blockers left under `.6.2.4.6`.
+  Verification: **PASS 2026-07-09.** Diagnostic command `dart run bin/corpus_runner.dart --corpus
+    ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31` is 7/31 green. Passing fixtures:
+    `tclite_command_subst`, `tclite_double_quote`, `top_rule_body_recursion_sexpr`,
+    `top_rule_lx_recursion_nested`, `top_rule_lx_recursion_sequence`, `pplugin_empty`, and `tkgui_empty`.
+    Remaining failures split to `.6.2.4.4.1` for portmap/action-edge child result shape, `.6.2.4.4.2` for hlink
+    delimiter/capture semantics, `.6.2.4.4.3` for helper mutation and text-normalization surfaces, `.6.2.4.4.4`
+    for legacy structural smoke outputs, `.6.2.4.4.5` for residual closeout, and `.6.2.4.6` for PCRE structural
+    regex constructs including Lispish `(?R)`, EBNF `\K`/`(?&name)`/`(?(DEFINE)...)`, and spec.spec recursive block
+    regexes.
+  Commit: `DART-BACKEND-PARITY.6.2.4.4.0 - split Dart residual parser-smoke parity`
+
+- ID: `DART-BACKEND-PARITY.6.2.4.4.1`
+  Status: `pending`
+  Goal: Close portmap/action-edge child result shape parity.
+  Acceptance: `portmap_bare`, `portmap_bit`, `portmap_slice`, `portmap_constant`, and `portmap_concatenation`
+    pass on Dart or remaining mismatches are routed with Perl/Rust oracle evidence. This leaf owns scoped
+    action-edge child results, passive terminal child re-search behavior, and aggregate/bare result unwrapping
+    exposed by those fixtures.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.6.2.4.4.2`
+  Status: `pending`
+  Goal: Close hlink delimiter/capture parser-smoke parity.
+  Acceptance: `hlink_raw_string`, `hlink_raw_escaped_brackets`, `hlink_curly_brace`, `hlink_bracket_body`, and
+    `hlink_mixed_bracket_brace` pass on Dart or remaining mismatches are routed with precise delimiter/capture
+    evidence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.6.2.4.4.3`
+  Status: `pending`
+  Goal: Close helper mutation and text-normalization parser-smoke surfaces.
+  Acceptance: `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute` pass on Dart or each
+    residual is routed with root-cause evidence. This leaf owns missing helper surfaces such as `match_line`,
+    statement-form scalar regex substitution, array split mutation, and quote/text normalization visible in those
+    fixtures.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.6.2.4.4.4`
+  Status: `pending`
+  Goal: Close legacy structural smoke output parity.
+  Acceptance: `regdef_nested_register_fields`, `tablegrep_simple_term`, `vhdl_library_use`, and
+    `ds_vhistory_version_entry` pass on Dart or residual mismatches are routed with precise structural evidence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.6.2.4.4.5`
+  Status: `pending`
+  Goal: Close residual parser-smoke parity after the focused output/helper leaves.
+  Acceptance: The `.6.2.4.4` residual group is green or every remaining non-PCRE blocker is split with durable
+    evidence before `.6.2.4.5` final no-drift closeout.
   Verification: `pending`
   Commit: `pending`
 

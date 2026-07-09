@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.4.4.0 — Dart residual parser-smoke split):
+  The residual shipped-spec/parser-smoke window is now split after the `.6.2.4.3` recursive/default-mode bridge.
+  The diagnostic boundary is 7/31 green. PCRE structural regex blockers stay in `.6.2.4.6`, while `.6.2.4.4`
+  now has narrow non-PCRE leaves: `.6.2.4.4.1` for portmap/action-edge child result shape parity, `.6.2.4.4.2`
+  for hlink delimiter/capture parity, `.6.2.4.4.3` for helper mutation and text normalization, `.6.2.4.4.4` for
+  legacy structural smoke outputs, and `.6.2.4.4.5` for residual closeout. No Dart runtime behavior changed in
+  this split; it exists to keep the next implementation slice recoverable.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.4.3 — Dart recursive/default-mode dispatch semantics):
   Dart now carries Rust-style action-edge dispatch metadata through compiled state: each edge records the regex
   alternative that triggers it, the target child regex index, and whether it was anchored to a same-line parent

@@ -37,8 +37,9 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.6.2.4.3` is the current completed corpus-parity boundary;
-`.6.2.4.4` is the next shipped-spec/parser-smoke residual parity frontier. The package can round-trip
+`DART-BACKEND-PARITY.6.2.4.4.0` is the current completed corpus-parity boundary;
+`.6.2.4.4.1` is the next shipped-spec/parser-smoke residual frontier for portmap/action-edge child result shape
+parity. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -132,14 +133,15 @@ execution is rejected until the full shipped-corpus gate is ready, so the defaul
 manifest fixtures and the non-`fn` middle helper/control/receiver fixtures now
 pass through bounded execute mode. Top-level `fn` corpus fixtures remain routed
 to `DART-BACKEND-PARITY.6.2.5` for spec-defined function-shell execution. The final
-31-fixture shipped-spec/parser-smoke window is measured at 7/31 green and split into
-regex-dialect, helper/action, recursion/output, residual parity, and closeout leaves.
+31-fixture shipped-spec/parser-smoke window is measured at 7/31 green and the residual work is split into
+portmap/action-edge result shape, hlink delimiter/capture, helper mutation/text normalization, legacy structural
+smoke output, residual closeout, and PCRE structural-regex leaves.
 Basic regex-dialect bridging is now done; deeper PCRE structural constructs such as
 `\K`, recursive `(?&name)` subpatterns, and `(?(DEFINE)...)` are routed to
 `DART-BACKEND-PARITY.6.2.4.6`.
 The helper/action bridge and recursive/default-mode bridge are also done; tclite
-and recursive top-rule parser-smoke fixtures pass. Remaining failures are residual
-hlink/output/helper parity work plus deeper PCRE structural regex constructs such
-as Lispish `(?R)`.
+and recursive top-rule parser-smoke fixtures pass. Remaining non-PCRE failures are now split under `.6.2.4.4`,
+with `.6.2.4.4.1` next for portmap/action-edge child result shape parity; deeper PCRE structural regex constructs
+such as Lispish `(?R)` stay routed to `.6.2.4.6`.
 Full shipped-corpus output parity remains a later leaf in
 `docs/tasks/DART-BACKEND-PARITY.md`.

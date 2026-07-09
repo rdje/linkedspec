@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.4.0 — split Dart residual parser-smoke parity
+
+**Scope:** Dart residual parser-smoke task-tree split, failure routing, Dart README/mdBook status, live docs,
+roadmap status, resume pointer, and Knowledge Map.
+
+**Change:** Split the post-recursive/default-mode parser-smoke residuals into focused implementation leaves:
+portmap/action-edge child result shape parity, hlink delimiter/capture parity, helper mutation and text
+normalization, legacy structural smoke output parity, residual closeout, and the separate PCRE structural-regex
+follow-up. The measured boundary remains 7/31 green; no implementation code changed. The next implementation
+frontier is `DART-BACKEND-PARITY.6.2.4.4.1`.
+
+**Validation:** mdBook build, memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine,
+and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.3 — close Dart recursive dispatch semantics
 
 **Scope:** Dart compiled action-edge dispatch metadata, runtime action-edge resolution, rule-local aggregate reset
