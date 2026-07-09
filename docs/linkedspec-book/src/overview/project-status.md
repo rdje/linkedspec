@@ -24,7 +24,7 @@ The active Dart backend follows the same interpreter-first path. It now has sour
 compiled-spec state, runtime interpretation, staged user-function body parsing, exact-arity user-function runtime
 execution, and a controlled executable corpus harness whose first 40 shipped manifest fixtures plus the non-`fn`
 middle helper/control/receiver fixtures pass through bounded execute mode. The final shipped-spec/parser-smoke
-window is now 24/31 green after final no-drift closeout of the non-PCRE residual leaves following the regex-dialect, helper/action,
+window is now 31/31 green after the structural regex closeout following the regex-dialect, helper/action,
 recursion/default-mode, portmap result-shape, hlink delimiter/capture, helper mutation/text-normalization, and
 legacy accumulator and public-parser leading-trivia bridges. Basic
 Dart regex-dialect bridging is now in place for POSIX character classes, inline/scoped flags, possessive
@@ -36,8 +36,9 @@ invocation, refreshes `retv` from `call(...)`, and appends into scalar-held list
 `items = []`. Statement-form `substr(...)` / `regex_subst(...)` mutations, explicit
 `split(array(target), ...)` replacement, and entry/local line helpers are also implemented, and Dart mirrors the
 Perl public parser's leading blank/comment-line skip before the top rule. The tclite, recursive top-rule, hlink,
-tablegrep, simenv, `lib_reader`, `regdef`, and `ds_vhistory` parser-smoke fixtures now pass. Deeper PCRE
-structural constructs are the next Dart frontier. Full shipped 99-fixture corpus parity is still in progress.
+tablegrep, simenv, `lib_reader`, `regdef`, `ds_vhistory`, Lispish, EBNF, and spec.spec parser-smoke fixtures now
+pass. Bounded structural matchers handle the exact shipped recursive/DEFINE/`\K` PCRE forms, and action-edge
+`push(child, index)` preserves EBNF logging payloads. Full shipped 99-fixture corpus parity is still in progress.
 
 The Method-like DSL migration track is also complete: all 21 shipped specs are at zero compatibility-surface rules, 100+ helpers across 10 families are regression-locked, current helper names are the only documented helper surface, and fluent/block equivalence is verified. Current setup and read forms use direct assignments, `set(...)`, bare scalar reads, `array(...)`, `hash(...)`, `push(...)`, `copy(...)`, and `return(...)`. Unknown typed calls in return/value positions diagnose through the generic unknown-helper path instead of emitting generated host-language calls, while unregistered standalone function-shaped statements remain explicit raw compatibility debt. Top-level `fn name(args) { ... }` definition shells are parsed by `specs/user_function_definition.spec` and projected through the active user-function registry, with params, arity, source/body spans, body source, neutral `body_payload`, neutral `body_parse_job`, and body AST recorded. The parse-job sidecar now dispatches through the minimal staged registry provider for `actionir-body.spec` / `action_block`, and the returned `action_block` AST is stitched into `body_ast`; general public `parse_job(...)` authoring remains future work. On Perl, Rust, and Dart, registered exact-arity user-function calls now execute in value positions, compatible receiver chains, and standalone discard statements: arguments evaluate eagerly in the caller, params bind in a fresh function-local scope, and the result is the final expression or `return(expr)` payload. Recursive and unsupported function-body forms are fenced as diagnostics with zero raw fallback on the Perl reference; Rust and Dart directly diagnose recursive calls in their runtime resolvers. The accepted MVP surface is closed at explicit-paren, braced `fn` definitions; alternate spellings, omitted zero-arg parentheses, brace-less bodies, caller-state-mutating functions, recursion support, closures/lambdas/currying, and function namespaces remain deferred extension topics.
 
@@ -108,11 +109,11 @@ Three backbone items tracked major structural modernization — all done:
   and the non-`fn` middle
   fixtures pass through bounded corpus execute mode. Top-level `fn` corpus fixtures are routed to a later
   spec-defined function-shell corpus leaf. The final shipped-spec/parser-smoke window is split after a 2/31
-  diagnostic run and is now 24/31 green. The basic regex-dialect bridge, helper/action bridge,
+  diagnostic run and is now 31/31 green. The basic regex-dialect bridge, helper/action bridge,
   recursive/default-mode bridge, portmap result-shape bridge, hlink delimiter/capture bridge, and helper
   mutation/text-normalization bridge are done, the legacy accumulator bridge closes `regdef`, and the public-parser
-  leading-trivia bridge closes `ds_vhistory`; final parser-smoke no-drift closeout is done, and the next Dart
-  frontier is the PCRE structural regex leaf followed by cross-backend gates.
+  leading-trivia bridge closes `ds_vhistory`; bounded structural matchers close the exact shipped PCRE structural
+  forms. The next Dart frontier is the routed top-level `fn` corpus leaf followed by cross-backend gates.
 - **Non-current helper code purge** - `NONCURRENT-HELPER-CODE-PURGE` is closed. Perl source cleanup, Rust source cleanup, active test/tool/generated fixture and checked-in `.spec` migration, and final no-drift scans are complete. Retired helper-looking calls use generic unknown-helper fallback behavior, active generic-unknown-helper tests use invented helper names, and active helper-call/label/tag scans are clean.
 - **Rust generated-source breadth** — the Rust interpreter oracle is the current cross-variant parity gate. Generated Rust source already covers the current structural families and a curated corpus subset; broadening generated-source proof to the full manifest remains a separately owned future follow-on.
 - **Lifecycle-family audit** — verified complete (2026-06-14). All 7 lifecycle markers (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`) have full semicolon-light structured authoring coverage. The current separator contract is newline-or-semicolon: newlines separate top-level helper statements, and multiple same-line statements require semicolons. No lifecycle-specific semantic gaps found.

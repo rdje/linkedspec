@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.4.6 — Dart structural PCRE smoke parity):
+  This is a deliberately bounded bridge, not a general PCRE engine. `compileRuntimeRegex(...)` recognizes only the
+  exact shipped structural pattern families that blocked the parser-smoke window: Lispish recursive square
+  brackets, EBNF return scalar/array/object forms using `\K`, `(?&name)`, and `(?(DEFINE)...)`, and spec.spec
+  recursive action/blind/lifecycle/function block forms. Those patterns run through small structural scanners that
+  preserve the match/capture/named-group surfaces the Dart runtime already consumes. The same slice also adds
+  action-edge `push(child, index)` payload extraction; `push(quoted_string, 1)` now appends the child return's
+  second element to the current rule accumulator, preserving `ebnf_logging_annotation` args. The shipped-spec/
+  parser-smoke window is now 31/31 green. Next frontier is `.6.2.5` for routed top-level `fn` corpus fixtures.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.4.5 — parser-smoke no-drift closeout):
   This is a docs/verification closeout, not a Dart runtime change. After the public-parser leading-trivia bridge,
   the shipped-spec/parser-smoke diagnostic window is 24/31 green. The seven remaining failures are all PCRE

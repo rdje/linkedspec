@@ -98,6 +98,26 @@ Top::
     expect(result.value, 'name');
   });
 
+  test('push child numeric index appends child payload to current rule', () {
+    final engine = _engine(r'''
+Top::
+ -> Item { push(Item, 1) }
+ -> Comma
+ -> Item { push(Item, 1) }
+ LX { return(copy(array(Top))) }
+
+Item: /"([^"]*)"/ I { return(array("item", entry_group(0))) }
+Comma: /,/ I { return(entry_text()) }
+''');
+
+    final result = engine.parse('"a","b"');
+
+    expect(result.value, ['a', 'b']);
+    expect(result.output, [
+      ['a', 'b'],
+    ]);
+  });
+
   test('executes self close edge that reuses the opener regex slot', () {
     final engine = _engine(r'''
 Top::

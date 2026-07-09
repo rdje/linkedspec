@@ -261,8 +261,8 @@ source in the corpus runner. The final shipped-spec/parser-smoke window started
 at 2/31 green, reached 7/31 green after the regex-dialect, helper/action, and
 recursive/default-mode bridges, reached 13/31 green after the portmap result-shape bridge, reached 19/31 green
 after the hlink delimiter/capture bridge, reached 22/31 green after the helper mutation/text-normalization bridge,
-and is now 24/31 green after the legacy accumulator, public-parser leading-trivia, and final no-drift closeout
-leaves. The non-PCRE residual group is closed. The
+reached 24/31 green after the legacy accumulator, public-parser leading-trivia, and final no-drift closeout
+leaves, and is now 31/31 green after the structural regex closeout. The parser-smoke group is closed. The
 portmap/action-edge result-shape leaf is
 done: Dart `array(...)` splices explicit `flat*` arguments, all five portmap fixtures pass, and `vhdl_library_use`
 also passes. The hlink leaf is also done: Dart `call(...)` refreshes `retv`, append-style mutations update
@@ -281,8 +281,10 @@ diagnostic output helpers, logical helpers, `exit_now`, and quoted helper-call
 delimiter parsing. The recursive/default-mode bridge is in place too: compiled
 action edges carry resolved regex-dispatch metadata, edge-only child regexes are
 folded into the parent alternation, and explicit aggregate resets are scoped to
-the current rule invocation. Deeper PCRE structural constructs such as `\K`,
-`(?&name)`, `(?R)`, and `(?(DEFINE)...)` are routed to a separate follow-up. The
+the current rule invocation. The structural regex leaf is now closed too:
+bounded Dart matchers handle the exact shipped Lispish `(?R)`, EBNF `\K` /
+`(?&name)` / `(?(DEFINE)...)`, and spec.spec recursive block forms, while
+action-edge `push(child, index)` preserves indexed child payloads. The
 future Dart closeout now includes a distinct Dart-specific LinkedSpec CLI
 entrypoint; future Julia and Lua backend plans must own their own variant-specific
 CLIs rather than relying on one ambiguous shared command. Dart
@@ -415,12 +417,13 @@ Dart corpus parity has started with controlled manifest fixtures and now has saf
 named/bounded execution selection for shipped-corpus batching. The first 40
 manifest fixtures and the non-`fn` middle fixtures pass in bounded execute mode.
 The remaining shipped-spec/parser-smoke window is split after a diagnostic run
-and is now 24/31 green. The basic regex-dialect bridge, helper/action bridge,
+and is now 31/31 green. The basic regex-dialect bridge, helper/action bridge,
 recursive/default-mode parser-smoke bridge, portmap result-shape bridge, and
 hlink delimiter/capture bridge are done; the helper mutation/text-normalization
 bridge is also done, the legacy accumulator bridge closes `regdef_nested_register_fields`, and the public-parser
-leading-trivia bridge closes `ds_vhistory_version_entry`. Final parser-smoke no-drift closeout is done; the next
-Dart leaf is the separately routed PCRE structural regex work, and full shipped 99-fixture corpus parity remains later.
+leading-trivia bridge closes `ds_vhistory_version_entry`. Final parser-smoke no-drift closeout and the bounded
+structural regex work are done; the next Dart leaf is the routed top-level `fn` corpus work, and full shipped
+99-fixture corpus parity remains later.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

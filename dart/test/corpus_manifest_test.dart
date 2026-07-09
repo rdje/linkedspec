@@ -172,6 +172,68 @@ void main() {
     ]);
   });
 
+  test('executes structural PCRE parser-smoke fixtures', () {
+    final result = executeCorpusFixtures(
+      '../rust/linkedspec-runtime/tests/corpus',
+      caseNames: const [
+        'lispish_x_y',
+        'ebnf_expression_rules',
+        'ebnf_logging_annotation',
+        'spec_spec_minimal_rule',
+        'spec_spec_action_edge',
+        'spec_spec_user_function_definition',
+        'spec_spec_comment_skip',
+      ],
+    );
+
+    expect(
+      result.failures
+          .map((failure) => '${failure.name}: ${failure.failure}')
+          .join('\n'),
+      isEmpty,
+    );
+    expect(result.passed, isTrue);
+    expect(result.passedCount, 7);
+    expect(result.fixture('lispish_x_y').actualValue, [
+      'x',
+      ['y'],
+    ]);
+    expect(result.fixture('ebnf_logging_annotation').actualValue, [
+      [
+        ['rule', 'Expr'],
+        ['rule_reference', 'Term'],
+        [
+          'logging_annotation',
+          [
+            'log_rule',
+            ['expr', 'term'],
+          ],
+        ],
+      ],
+    ]);
+    expect(result.fixture('spec_spec_user_function_definition').actualValue, [
+      [
+        {
+          'body': '{ return(trim(value)) }',
+          'name': 'norm',
+          'params': 'value',
+          'type': 'function_definition',
+        },
+        {'label': 'Top', 'mode': '', 'top': 1, 'type': 'rule'},
+        {'pattern': 'x', 'type': 'regex'},
+        {
+          'code': '{ return(norm(" x ")) }',
+          'targets': 'Done',
+          'type': 'action_edge',
+        },
+      ],
+      [
+        {'label': 'Done', 'mode': '', 'top': 1, 'type': 'rule'},
+        {'pattern': 'x', 'type': 'regex'},
+      ],
+    ]);
+  });
+
   test('executes ds_vhistory leading newline public parser fixture', () {
     final result = executeCorpusFixtures(
       '../rust/linkedspec-runtime/tests/corpus',

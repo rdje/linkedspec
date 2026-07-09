@@ -3115,13 +3115,22 @@ final class LinkedSpecRuntimeEngine {
       final secondTarget = _arrayTargetName(args[1]) ?? _variableName(args[1]);
       if (currentEdge != null &&
           firstName != null &&
-          compiledSpec.rule(firstName) != null &&
-          secondTarget != null) {
-        final child = firstName == currentEdge.target.label
-            ? _executeActionEdgeChild(currentEdge, context)
-            : _executeRule(firstName, 0, context);
-        context.retv = child.value;
-        return _appendArrayValue(context, secondTarget, child.value);
+          compiledSpec.rule(firstName) != null) {
+        final childIndex = _literalNonNegativeInteger(args[1]);
+        if (secondTarget != null || childIndex != null) {
+          final child = firstName == currentEdge.target.label
+              ? _executeActionEdgeChild(currentEdge, context)
+              : _executeRule(firstName, 0, context);
+          context.retv = child.value;
+          if (secondTarget != null) {
+            return _appendArrayValue(context, secondTarget, child.value);
+          }
+          return _appendArrayValue(
+            context,
+            ruleLabel,
+            _indexValue(child.value, childIndex),
+          );
+        }
       }
 
       final target = _arrayTargetName(args[0]) ?? _variableName(args[0]);
@@ -5777,6 +5786,17 @@ String? _variableName(ActionExpr expr) {
     ActionVariableExpr(:final name) => name,
     _ => null,
   };
+}
+
+int? _literalNonNegativeInteger(ActionExpr expr) {
+  if (expr is! ActionNumberLiteralExpr) {
+    return null;
+  }
+  final value = expr.value;
+  if (value < 0 || value != value.truncateToDouble()) {
+    return null;
+  }
+  return value.toInt();
 }
 
 List<Object?> _asArray(Object? value) {

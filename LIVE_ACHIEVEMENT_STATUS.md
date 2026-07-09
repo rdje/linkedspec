@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.6 — close Dart structural regex smoke**
+  (DONE — shipped-spec/parser-smoke window is now 31/31 green; frontier advances to top-level `fn` corpus fixtures).
+
+  **Change:** Dart now handles the exact shipped structural PCRE forms with bounded matchers instead of a broad
+  regex-engine replacement: Lispish recursive square brackets, EBNF `\K` / recursive named subpatterns /
+  `(?(DEFINE)...)` return structures, and spec.spec recursive block forms. Dart also implements action-edge
+  `push(child, index)`, preserving the EBNF logging annotation payloads.
+
+  **Boundary:** The `.6.2.4` shipped-spec/parser-smoke parent is closed at 31/31 green. The current frontier is
+  `DART-BACKEND-PARITY.6.2.5` for the routed top-level `fn` corpus fixtures.
+
+  **Verification:** Focused matching/interpreter/corpus-manifest tests, diagnostic 31-fixture parser-smoke corpus
+  run, default 99-fixture corpus loader, Dart format/analyze/full tests, mdBook, memory architecture, Knowledge
+  Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.2.4.5 — close parser smoke no drift**
   (DONE — final no-drift closeout confirms the shipped-smoke parser window is 24/31 green and advances to PCRE structural work).
 

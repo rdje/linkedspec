@@ -240,6 +240,455 @@ final class RuntimeRegexMatch {
   }
 }
 
+RegExp? _compileStructuralRegex(
+  String pattern, {
+  required bool caseSensitive,
+  required bool multiLine,
+  required bool unicode,
+  required bool dotAll,
+}) {
+  final kind = _StructuralRegexKind.fromPattern(pattern);
+  if (kind == null) {
+    return null;
+  }
+  return _StructuralRegExp(
+    pattern,
+    kind: kind,
+    isCaseSensitive: caseSensitive,
+    isMultiLine: multiLine,
+    isUnicode: unicode,
+    isDotAll: dotAll,
+  );
+}
+
+enum _StructuralRegexKind {
+  squareBrackets,
+  ebnfReturnScalar,
+  ebnfReturnArray,
+  ebnfReturnObject,
+  specActionBlock,
+  specActionFluent,
+  specBlindBlock,
+  specBlindFluent,
+  specLifecycleBlock,
+  specLifecycleFluent,
+  specFunctionDefinition;
+
+  static _StructuralRegexKind? fromPattern(String pattern) {
+    if (pattern == r'(\[(?:[^\[\]]++|(?R))+\])') {
+      return _StructuralRegexKind.squareBrackets;
+    }
+    if (pattern ==
+        r'->\s*\K(?:\$\d+|"[^"]*"|'
+            "'"
+            r"[^']*'"
+            r')') {
+      return _StructuralRegexKind.ebnfReturnScalar;
+    }
+    if (pattern.startsWith(r'->\s*\K(?&array_structure)(?(DEFINE)')) {
+      return _StructuralRegexKind.ebnfReturnArray;
+    }
+    if (pattern.startsWith(r'->\s*\K(?&object_structure)(?(DEFINE)')) {
+      return _StructuralRegexKind.ebnfReturnObject;
+    }
+    if (pattern.startsWith(r'->[ \t]*((?:\w+')) {
+      return _StructuralRegexKind.specActionBlock;
+    }
+    if (pattern.startsWith(r'->[ \t]*(\w+)') && pattern.contains('(?<chAF>')) {
+      return _StructuralRegexKind.specActionFluent;
+    }
+    if (pattern.startsWith(r'=>[ \t]*(\w+)[ \t]*(?<blkBB>')) {
+      return _StructuralRegexKind.specBlindBlock;
+    }
+    if (pattern.startsWith(r'=>[ \t]*(\w+)(?<chBF>')) {
+      return _StructuralRegexKind.specBlindFluent;
+    }
+    if (pattern.startsWith(r'(\w++)[ \t]*(?<blkLB>')) {
+      return _StructuralRegexKind.specLifecycleBlock;
+    }
+    if (pattern.startsWith(r'(\w++)(?<chLF>')) {
+      return _StructuralRegexKind.specLifecycleFluent;
+    }
+    if (pattern.startsWith(r'fn[ \t]+') && pattern.contains('(?<blkFN>')) {
+      return _StructuralRegexKind.specFunctionDefinition;
+    }
+    return null;
+  }
+}
+
+final class _StructuralRegExp implements RegExp {
+  _StructuralRegExp(
+    this.pattern, {
+    required this.kind,
+    required bool isCaseSensitive,
+    required bool isMultiLine,
+    required bool isUnicode,
+    required bool isDotAll,
+  }) : _isCaseSensitive = isCaseSensitive,
+       _isMultiLine = isMultiLine,
+       _isUnicode = isUnicode,
+       _isDotAll = isDotAll;
+
+  final _StructuralRegexKind kind;
+
+  @override
+  final String pattern;
+
+  final bool _isCaseSensitive;
+  final bool _isMultiLine;
+  final bool _isUnicode;
+  final bool _isDotAll;
+
+  @override
+  bool get isCaseSensitive => _isCaseSensitive;
+
+  @override
+  bool get isMultiLine => _isMultiLine;
+
+  @override
+  bool get isUnicode => _isUnicode;
+
+  @override
+  bool get isDotAll => _isDotAll;
+
+  @override
+  Iterable<RegExpMatch> allMatches(String input, [int start = 0]) sync* {
+    var cursor = _clampCodeUnitOffset(input, start);
+    while (cursor <= input.length) {
+      final match = _matchAt(input, cursor);
+      if (match != null) {
+        yield match;
+        cursor = match.end > cursor ? match.end : cursor + 1;
+        continue;
+      }
+      cursor += 1;
+    }
+  }
+
+  @override
+  RegExpMatch? firstMatch(String input) {
+    return allMatches(input).firstOrNull;
+  }
+
+  @override
+  bool hasMatch(String input) {
+    return firstMatch(input) != null;
+  }
+
+  @override
+  Match? matchAsPrefix(String input, [int start = 0]) {
+    return _matchAt(input, _clampCodeUnitOffset(input, start));
+  }
+
+  @override
+  String? stringMatch(String input) {
+    return firstMatch(input)?.group(0);
+  }
+
+  _StructuralRegExpMatch? _matchAt(String input, int start) {
+    return switch (kind) {
+      _StructuralRegexKind.squareBrackets => _matchSquareBrackets(input, start),
+      _StructuralRegexKind.ebnfReturnScalar => _matchEbnfReturnScalar(
+        input,
+        start,
+      ),
+      _StructuralRegexKind.ebnfReturnArray => _matchEbnfReturnStructure(
+        input,
+        start,
+        open: _openBracket,
+        close: _closeBracket,
+      ),
+      _StructuralRegexKind.ebnfReturnObject => _matchEbnfReturnStructure(
+        input,
+        start,
+        open: _openBrace,
+        close: _closeBrace,
+      ),
+      _StructuralRegexKind.specActionBlock => _matchSpecActionBlock(
+        input,
+        start,
+      ),
+      _StructuralRegexKind.specActionFluent => _matchSpecFluent(
+        input,
+        start,
+        prefix: _specActionFluentPrefix,
+        blockName: 'blkAF',
+        chainName: 'chAF',
+      ),
+      _StructuralRegexKind.specBlindBlock => _matchSpecBlock(
+        input,
+        start,
+        prefix: _specBlindBlockPrefix,
+        blockName: 'blkBB',
+      ),
+      _StructuralRegexKind.specBlindFluent => _matchSpecFluent(
+        input,
+        start,
+        prefix: _specBlindFluentPrefix,
+        blockName: 'blkBF',
+        chainName: 'chBF',
+      ),
+      _StructuralRegexKind.specLifecycleBlock => _matchSpecBlock(
+        input,
+        start,
+        prefix: _specLifecycleBlockPrefix,
+        blockName: 'blkLB',
+      ),
+      _StructuralRegexKind.specLifecycleFluent => _matchSpecFluent(
+        input,
+        start,
+        prefix: _specLifecycleFluentPrefix,
+        blockName: 'blkLF',
+        chainName: 'chLF',
+      ),
+      _StructuralRegexKind.specFunctionDefinition => _matchSpecFunction(
+        input,
+        start,
+      ),
+    };
+  }
+
+  _StructuralRegExpMatch? _matchSquareBrackets(String input, int start) {
+    if (!_hasCodeUnit(input, start, _openBracket)) {
+      return null;
+    }
+    final end = _parseBalanced(input, start, _openBracket, _closeBracket);
+    if (end == null || end == start + 2) {
+      return null;
+    }
+    final text = input.substring(start, end);
+    return _match(input, start, end, [text, text]);
+  }
+
+  _StructuralRegExpMatch? _matchEbnfReturnScalar(String input, int start) {
+    final valueStart = _ebnfReturnValueStart(input, start);
+    if (valueStart == null) {
+      return null;
+    }
+    final first = input.codeUnitAt(valueStart);
+    int? end;
+    if (first == _dollar) {
+      var cursor = valueStart + 1;
+      while (cursor < input.length && _isDigitCode(input.codeUnitAt(cursor))) {
+        cursor += 1;
+      }
+      if (cursor > valueStart + 1) {
+        end = cursor;
+      }
+    } else if (first == _doubleQuote || first == _singleQuote) {
+      end = _parseSimpleQuoted(input, valueStart, first);
+    }
+    if (end == null) {
+      return null;
+    }
+    return _match(input, valueStart, end, [input.substring(valueStart, end)]);
+  }
+
+  _StructuralRegExpMatch? _matchEbnfReturnStructure(
+    String input,
+    int start, {
+    required int open,
+    required int close,
+  }) {
+    final valueStart = _ebnfReturnValueStart(input, start);
+    if (valueStart == null || !_hasCodeUnit(input, valueStart, open)) {
+      return null;
+    }
+    final end = _parseBalanced(input, valueStart, open, close);
+    if (end == null) {
+      return null;
+    }
+    return _match(input, valueStart, end, [input.substring(valueStart, end)]);
+  }
+
+  int? _ebnfReturnValueStart(String input, int start) {
+    if (start + 2 > input.length ||
+        input.codeUnitAt(start) != _hyphen ||
+        input.codeUnitAt(start + 1) != _greaterThan) {
+      return null;
+    }
+    return _skipWhitespace(input, start + 2);
+  }
+
+  _StructuralRegExpMatch? _matchSpecActionBlock(String input, int start) {
+    final prefix = _specActionBlockPrefix.matchAsPrefix(input, start);
+    if (prefix == null) {
+      return null;
+    }
+    final blockStart = prefix.end;
+    final blockEnd = _parseBalancedCodeBlock(input, blockStart);
+    if (blockEnd == null) {
+      return null;
+    }
+    final block = input.substring(blockStart, blockEnd);
+    return _match(
+      input,
+      start,
+      blockEnd,
+      [input.substring(start, blockEnd), prefix.group(1), block],
+      named: {'blkAB': block},
+    );
+  }
+
+  _StructuralRegExpMatch? _matchSpecBlock(
+    String input,
+    int start, {
+    required RegExp prefix,
+    required String blockName,
+  }) {
+    final prefixMatch = prefix.matchAsPrefix(input, start);
+    if (prefixMatch == null) {
+      return null;
+    }
+    final blockStart = prefixMatch.end;
+    final blockEnd = _parseBalancedCodeBlock(input, blockStart);
+    if (blockEnd == null) {
+      return null;
+    }
+    final block = input.substring(blockStart, blockEnd);
+    return _match(
+      input,
+      start,
+      blockEnd,
+      [input.substring(start, blockEnd), prefixMatch.group(1), block],
+      named: {blockName: block},
+    );
+  }
+
+  _StructuralRegExpMatch? _matchSpecFluent(
+    String input,
+    int start, {
+    required RegExp prefix,
+    required String blockName,
+    required String chainName,
+  }) {
+    final prefixMatch = prefix.matchAsPrefix(input, start);
+    if (prefixMatch == null) {
+      return null;
+    }
+    final chainStart = prefixMatch.end;
+    final chainEnd = _parseFluentChain(input, chainStart);
+    if (chainEnd == null) {
+      return null;
+    }
+    var end = chainEnd;
+    String? block;
+    final afterChain = _skipWhitespace(input, chainEnd);
+    if (_hasCodeUnit(input, afterChain, _openBrace)) {
+      final blockEnd = _parseBalancedCodeBlock(input, afterChain);
+      if (blockEnd == null) {
+        return null;
+      }
+      block = input.substring(afterChain, blockEnd);
+      end = blockEnd;
+    }
+    final chain = input.substring(chainStart, chainEnd);
+    return _match(
+      input,
+      start,
+      end,
+      [input.substring(start, end), prefixMatch.group(1), chain, block],
+      named: {chainName: chain, if (block != null) blockName: block},
+    );
+  }
+
+  _StructuralRegExpMatch? _matchSpecFunction(String input, int start) {
+    final prefix = _specFunctionPrefix.matchAsPrefix(input, start);
+    if (prefix == null) {
+      return null;
+    }
+    final blockStart = prefix.end;
+    final blockEnd = _parseBalancedCodeBlock(input, blockStart);
+    if (blockEnd == null) {
+      return null;
+    }
+    final block = input.substring(blockStart, blockEnd);
+    return _match(
+      input,
+      start,
+      blockEnd,
+      [
+        input.substring(start, blockEnd),
+        prefix.group(1),
+        prefix.group(2),
+        block,
+      ],
+      named: {'blkFN': block},
+    );
+  }
+
+  _StructuralRegExpMatch _match(
+    String input,
+    int start,
+    int end,
+    List<String?> groups, {
+    Map<String, String> named = const {},
+  }) {
+    return _StructuralRegExpMatch(
+      pattern: this,
+      input: input,
+      start: start,
+      end: end,
+      groups: List.unmodifiable(groups),
+      named: Map.unmodifiable(named),
+    );
+  }
+}
+
+final class _StructuralRegExpMatch implements RegExpMatch {
+  const _StructuralRegExpMatch({
+    required RegExp pattern,
+    required this.input,
+    required this.start,
+    required this.end,
+    required List<String?> groups,
+    required Map<String, String> named,
+  }) : _pattern = pattern,
+       _groups = groups,
+       _named = named;
+
+  final RegExp _pattern;
+  final List<String?> _groups;
+  final Map<String, String> _named;
+
+  @override
+  RegExp get pattern => _pattern;
+
+  @override
+  final String input;
+
+  @override
+  final int start;
+
+  @override
+  final int end;
+
+  @override
+  int get groupCount => _groups.length - 1;
+
+  @override
+  Iterable<String> get groupNames => _named.keys;
+
+  @override
+  String? group(int group) {
+    if (group < 0 || group >= _groups.length) {
+      throw RangeError.range(group, 0, _groups.length - 1, 'group');
+    }
+    return _groups[group];
+  }
+
+  @override
+  String? operator [](int group) => this.group(group);
+
+  @override
+  List<String?> groups(List<int> groupIndices) {
+    return [for (final index in groupIndices) group(index)];
+  }
+
+  @override
+  String? namedGroup(String name) => _named[name];
+}
+
 final class RuntimeMatchRegisters {
   const RuntimeMatchRegisters({
     required this.input,
@@ -404,6 +853,17 @@ RegExp compileRuntimeRegex(
   bool unicode = false,
   bool dotAll = false,
 }) {
+  final structural = _compileStructuralRegex(
+    pattern,
+    caseSensitive: caseSensitive,
+    multiLine: multiLine,
+    unicode: unicode,
+    dotAll: dotAll,
+  );
+  if (structural != null) {
+    return structural;
+  }
+
   final normalized = _normalizePattern(pattern);
   return RegExp(
     normalized.pattern,
@@ -676,18 +1136,229 @@ bool _isQuantifierCode(int value) {
   return false;
 }
 
+int? _parseBalanced(String input, int start, int open, int close) {
+  if (!_hasCodeUnit(input, start, open)) {
+    return null;
+  }
+  var depth = 0;
+  for (var cursor = start; cursor < input.length; cursor += 1) {
+    final code = input.codeUnitAt(cursor);
+    if (code == open) {
+      depth += 1;
+    } else if (code == close) {
+      depth -= 1;
+      if (depth == 0) {
+        return cursor + 1;
+      }
+    }
+  }
+  return null;
+}
+
+int? _parseBalancedCodeBlock(String input, int start) {
+  if (!_hasCodeUnit(input, start, _openBrace)) {
+    return null;
+  }
+  var depth = 0;
+  for (var cursor = start; cursor < input.length; cursor += 1) {
+    final code = input.codeUnitAt(cursor);
+    if (code == _doubleQuote || code == _singleQuote) {
+      final quotedEnd = _parseEscapedQuoted(input, cursor, code);
+      if (quotedEnd == null) {
+        return null;
+      }
+      cursor = quotedEnd - 1;
+      continue;
+    }
+    if (code == _openBrace) {
+      depth += 1;
+    } else if (code == _closeBrace) {
+      depth -= 1;
+      if (depth == 0) {
+        return cursor + 1;
+      }
+    }
+  }
+  return null;
+}
+
+int? _parseBalancedParens(String input, int start) {
+  if (!_hasCodeUnit(input, start, _openParen)) {
+    return null;
+  }
+  var depth = 0;
+  for (var cursor = start; cursor < input.length; cursor += 1) {
+    final code = input.codeUnitAt(cursor);
+    if (code == _doubleQuote || code == _singleQuote) {
+      final quotedEnd = _parseEscapedQuoted(input, cursor, code);
+      if (quotedEnd == null) {
+        return null;
+      }
+      cursor = quotedEnd - 1;
+      continue;
+    }
+    if (code == _openParen) {
+      depth += 1;
+    } else if (code == _closeParen) {
+      depth -= 1;
+      if (depth == 0) {
+        return cursor + 1;
+      }
+    }
+  }
+  return null;
+}
+
+int? _parseEscapedQuoted(String input, int start, int quote) {
+  if (!_hasCodeUnit(input, start, quote)) {
+    return null;
+  }
+  var escaped = false;
+  for (var cursor = start + 1; cursor < input.length; cursor += 1) {
+    final code = input.codeUnitAt(cursor);
+    if (escaped) {
+      escaped = false;
+      continue;
+    }
+    if (code == _backslash) {
+      escaped = true;
+      continue;
+    }
+    if (code == quote) {
+      return cursor + 1;
+    }
+  }
+  return null;
+}
+
+int? _parseSimpleQuoted(String input, int start, int quote) {
+  if (!_hasCodeUnit(input, start, quote)) {
+    return null;
+  }
+  for (var cursor = start + 1; cursor < input.length; cursor += 1) {
+    if (input.codeUnitAt(cursor) == quote) {
+      return cursor + 1;
+    }
+  }
+  return null;
+}
+
+int? _parseFluentChain(String input, int start) {
+  var cursor = start;
+  var sawCall = false;
+  while (cursor < input.length) {
+    final beforeWhitespace = cursor;
+    cursor = _skipWhitespace(input, cursor);
+    if (!_hasCodeUnit(input, cursor, _dot)) {
+      return sawCall ? beforeWhitespace : null;
+    }
+    cursor += 1;
+    cursor = _skipWhitespace(input, cursor);
+    final nameStart = cursor;
+    if (cursor >= input.length || !_isWordStartCode(input.codeUnitAt(cursor))) {
+      return null;
+    }
+    cursor += 1;
+    while (cursor < input.length && _isWordCode(input.codeUnitAt(cursor))) {
+      cursor += 1;
+    }
+    if (cursor == nameStart) {
+      return null;
+    }
+    final beforeArgs = cursor;
+    cursor = _skipWhitespace(input, cursor);
+    if (_hasCodeUnit(input, cursor, _openParen)) {
+      final argsEnd = _parseBalancedParens(input, cursor);
+      if (argsEnd == null) {
+        return null;
+      }
+      cursor = argsEnd;
+    } else {
+      cursor = beforeArgs;
+    }
+    sawCall = true;
+  }
+  return sawCall ? cursor : null;
+}
+
+int _skipWhitespace(String input, int start) {
+  var cursor = start;
+  while (cursor < input.length) {
+    final code = input.codeUnitAt(cursor);
+    if (code != _space &&
+        code != _tab &&
+        code != _lineFeed &&
+        code != _carriageReturn) {
+      break;
+    }
+    cursor += 1;
+  }
+  return cursor;
+}
+
+bool _hasCodeUnit(String input, int index, int codeUnit) {
+  return index >= 0 &&
+      index < input.length &&
+      input.codeUnitAt(index) == codeUnit;
+}
+
+bool _isDigitCode(int code) {
+  return code >= _zero && code <= _nine;
+}
+
+bool _isWordStartCode(int code) {
+  return (code >= _upperA && code <= _upperZ) ||
+      (code >= _lowerA && code <= _lowerZ) ||
+      code == _underscore;
+}
+
+bool _isWordCode(int code) {
+  return _isWordStartCode(code) || _isDigitCode(code);
+}
+
 int _clampCodeUnitOffset(String input, int offset) {
   return offset.clamp(0, input.length);
 }
 
+final _specActionBlockPrefix = RegExp(
+  r'->[ \t]*((?:\w+[ \t]*(?:\[[ \t]*\d+[ \t]*\][ \t]*)?)(?:[ \t]*\|[ \t]*\w+[ \t]*(?:\[[ \t]*\d+[ \t]*\][ \t]*)?)*)[ \t]*',
+);
+final _specActionFluentPrefix = RegExp(
+  r'->[ \t]*(\w+)[ \t]*(?:\[[ \t]*\d+[ \t]*\][ \t]*)?',
+);
+final _specBlindBlockPrefix = RegExp(r'=>[ \t]*(\w+)[ \t]*');
+final _specBlindFluentPrefix = RegExp(r'=>[ \t]*(\w+)');
+final _specLifecycleBlockPrefix = RegExp(r'(\w+)[ \t]*');
+final _specLifecycleFluentPrefix = RegExp(r'(\w+)');
+final _specFunctionPrefix = RegExp(
+  r'fn[ \t]+([A-Za-z_]\w*)\s*\(([A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)*)?\)\s*',
+);
+
 const _lineFeed = 0x0a;
+const _carriageReturn = 0x0d;
+const _tab = 0x09;
+const _space = 0x20;
 const _asterisk = 0x2a;
 const _plus = 0x2b;
 const _question = 0x3f;
 const _colon = 0x3a;
 const _backslash = 0x5c;
+const _dollar = 0x24;
+const _dot = 0x2e;
+const _hyphen = 0x2d;
+const _greaterThan = 0x3e;
+const _doubleQuote = 0x22;
+const _singleQuote = 0x27;
+const _zero = 0x30;
+const _nine = 0x39;
+const _upperA = 0x41;
+const _upperZ = 0x5a;
+const _underscore = 0x5f;
+const _lowerA = 0x61;
+const _lowerZ = 0x7a;
 const _openParen = 0x28;
 const _closeParen = 0x29;
 const _openBracket = 0x5b;
 const _closeBracket = 0x5d;
+const _openBrace = 0x7b;
 const _closeBrace = 0x7d;

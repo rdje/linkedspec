@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.6 — close Dart structural regex smoke
+
+**Scope:** Dart runtime regex matching, action-edge child payload extraction, focused runtime/corpus tests,
+shipped-smoke status, Dart README, mdBook status/backend handoff, live docs, roadmap status, resume pointer, and
+Knowledge Map.
+
+**Change:** Dart now routes the exact shipped structural PCRE forms through bounded matchers before normal
+`RegExp` compilation: Lispish recursive square brackets, EBNF `\K` / recursive named subpatterns /
+`(?(DEFINE)...)` return structures, and spec.spec recursive action/blind/lifecycle/function block forms. Dart also
+implements action-edge `push(child, index)` so `ebnf_logging_annotation` preserves indexed quoted-string payloads.
+
+**Validation:** Focused matching/interpreter/corpus-manifest tests pass; the 31-fixture shipped-spec/parser-smoke
+window reports 31 passed / 0 failed; Dart format, analyze, full tests, and default 99-fixture corpus loader pass;
+mdBook, memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine, and `git diff --check`
+pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.5 — close parser smoke no drift
 
 **Scope:** Final shipped-spec/parser-smoke no-drift closeout for the non-PCRE residual group, task-tree frontier

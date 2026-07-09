@@ -11,7 +11,7 @@ answers:
 date: 2026-07-09
 status: current
 tags: [dart, perl, rust, oracle, ds_vhistory, leading-trivia, parser-smoke, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.6.2.4.4.5 probed the `ds_vhistory_version_entry` residual before changing Dart. Public `LinkedSpec::get_parser(\"ds_vhistory\")` returns the checked null object name for the leading-newline fixture, and Rust `oracle_corpus_matches_perl_reference` passes that fixture. Directly invoking the generated `vhistory` descriptor handler on the same source prints and returns `/proj/foo`. `call_spec_handler_subst` lowers `cur_object[1]` to `$cur_object->[1]`, and a minimal public parser with `payload = [\"tag\", \"name\"]; return(payload[1])` returns `\"name\"`, so scalar-held indexed reads are valid in ordinary public-parser execution. DART-BACKEND-PARITY.6.2.4.4.6 then root-caused the boundary to `perl/LinkedSpec/Runtime.pm`: the public parser wrapper resets `pos` and skips leading blank/comment lines before invoking the top handler, while direct descriptor handlers bypass that wrapper. Dart `LinkedSpecRuntimeEngine.parse` now mirrors that public-parser leading-trivia skip, the focused `ds_vhistory_version_entry` corpus run passes, and the parser-smoke diagnostic window is 24/31 green with only routed PCRE structural regex blockers remaining."
+evidence: "DART-BACKEND-PARITY.6.2.4.4.5 probed the `ds_vhistory_version_entry` residual before changing Dart. Public `LinkedSpec::get_parser(\"ds_vhistory\")` returns the checked null object name for the leading-newline fixture, and Rust `oracle_corpus_matches_perl_reference` passes that fixture. Directly invoking the generated `vhistory` descriptor handler on the same source prints and returns `/proj/foo`. `call_spec_handler_subst` lowers `cur_object[1]` to `$cur_object->[1]`, and a minimal public parser with `payload = [\"tag\", \"name\"]; return(payload[1])` returns `\"name\"`, so scalar-held indexed reads are valid in ordinary public-parser execution. DART-BACKEND-PARITY.6.2.4.4.6 then root-caused the boundary to `perl/LinkedSpec/Runtime.pm`: the public parser wrapper resets `pos` and skips leading blank/comment lines before invoking the top handler, while direct descriptor handlers bypass that wrapper. Dart `LinkedSpecRuntimeEngine.parse` now mirrors that public-parser leading-trivia skip, and the focused `ds_vhistory_version_entry` corpus run passes. DART-BACKEND-PARITY.6.2.4.6 later closes the remaining structural regex blockers, so the full parser-smoke diagnostic window is now 31/31 green."
 reverify: "cd dart && dart test test/runtime_interpreter_test.dart test/corpus_manifest_test.dart && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --case ds_vhistory_version_entry"
 ---
 
@@ -32,4 +32,5 @@ public-parser leading-trivia skip in Dart's public `parse(...)` entrypoint.
 reads remain valid.
 
 Related facts: [[dart-residual-parser-smoke-split]],
-[[dart-legacy-structural-accumulator-parity]], [[rust-perl-output-oracle]].
+[[dart-legacy-structural-accumulator-parity]], [[dart-structural-pcre-parser-smoke-parity]],
+[[rust-perl-output-oracle]].

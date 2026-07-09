@@ -95,6 +95,41 @@ void main() {
     expect(literalPosixText.consumeMatch('[:alpha:]', 0)!.text, '[:alpha:]');
   });
 
+  test('matches shipped structural PCRE forms with bounded parsers', () {
+    final square = RuntimeRegexAlternation.compile([
+      r'(\[(?:[^\[\]]++|(?R))+\])',
+    ]);
+    final bracket = square.consumeMatch('[x [y] z]', 0)!;
+    expect(bracket.text, '[x [y] z]');
+    expect(bracket.captures, ['[x [y] z]']);
+
+    final ebnfArray = RuntimeRegexAlternation.compile([
+      r'->\s*\K(?&array_structure)(?(DEFINE)(?<array_structure>\[(?&content)\])(?<object_structure>\{(?&content)\})(?<content>(?:[^{}\[\]]*|(?&array_structure)|(?&object_structure))*))',
+    ]);
+    final array = ebnfArray.seekMatch('rule -> [a {b [c]}]', 0)!;
+    expect(array.text, '[a {b [c]}]');
+    expect(array.codeUnitStart, 'rule -> '.length);
+
+    final actionBlock = RuntimeRegexAlternation.compile([
+      r'''->[ \t]*((?:\w+[ \t]*(?:\[[ \t]*\d+[ \t]*\][ \t]*)?)(?:[ \t]*\|[ \t]*\w+[ \t]*(?:\[[ \t]*\d+[ \t]*\][ \t]*)?)*)[ \t]*(?<blkAB>\{(?:[^{}"']++|"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|(?&blkAB))*\})''',
+    ]);
+    final action = actionBlock.consumeMatch(
+      r'''-> Done { return("{not a brace}") }''',
+      0,
+    )!;
+    expect(action.captures, ['Done ', r'''{ return("{not a brace}") }''']);
+    expect(action.namedCapture('blkAB'), r'''{ return("{not a brace}") }''');
+
+    final function = RuntimeRegexAlternation.compile([
+      r'''fn[ \t]+([A-Za-z_]\w*)\s*\(([A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)*)?\)\s*(?<blkFN>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkFN))*+\})''',
+    ]);
+    final fn = function.consumeMatch(
+      r'''fn norm(value) { return(trim(value)) }''',
+      0,
+    )!;
+    expect(fn.captures, ['norm', 'value', '{ return(trim(value)) }']);
+  });
+
   test('keeps local and entry match registers separate', () {
     final alternation = RuntimeRegexAlternation.compile(['parent', 'child']);
     final parentMatch = alternation.consumeMatch('parent child', 0)!;

@@ -855,7 +855,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.3 - close Dart middle corpus batch`
 
 - ID: `DART-BACKEND-PARITY.6.2.4`
-  Status: `active`
+  Status: `done`
   Goal: Close the shipped-spec and parser-smoke corpus batch.
   Children: `.6.2.4.0`, `.6.2.4.1`, `.6.2.4.2`, `.6.2.4.3`, `.6.2.4.4`, `.6.2.4.4.0`,
     `.6.2.4.4.1`, `.6.2.4.4.2`, `.6.2.4.4.3`, `.6.2.4.4.4`, `.6.2.4.4.5`,
@@ -863,7 +863,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: The tclite, lispish, recursive top-rule, hlink, portmap, ebnf, spec.spec, regdef, tablegrep,
     simenv, VHDL/library, history, and plugin smoke fixtures either pass on Dart or each blocked fixture is routed
     to a narrowly owned root-cause leaf with Perl/Rust oracle evidence.
-  Verification: Initial diagnostic run `dart run bin/corpus_runner.dart --corpus
+  Verification: **PASS 2026-07-09.** Initial diagnostic run `dart run bin/corpus_runner.dart --corpus
     ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31` is 2/31 green (`pplugin_empty`,
     `tkgui_empty`). Failures cluster into Dart regex-dialect incompatibilities (POSIX classes, inline flags,
     possessive quantifiers), missing runtime/helper surfaces (`capture_slice`, diagnostic `print`, logical `not`,
@@ -872,8 +872,9 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     constructs are now split to `.6.2.4.6`. `.6.2.4.4.1` through `.6.2.4.4.6` close the non-PCRE
     parser-smoke residual group. `.6.2.4.5` confirms the no-drift boundary: the 31-fixture window is 24/31 green,
     current docs match that state, and the only remaining seven failures are the PCRE structural regex blockers
-    owned by `.6.2.4.6`.
-  Commit: `pending`
+    owned by `.6.2.4.6`. `.6.2.4.6` then closes those blockers with bounded structural regex matchers and
+    action-edge child-index push parity; the 31-fixture shipped-spec/parser-smoke window is now 31/31 green.
+  Commit: `DART-BACKEND-PARITY.6.2.4.6 - close Dart structural regex smoke`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.0`
   Status: `done`
@@ -1255,14 +1256,22 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.4.5 - close parser smoke no drift`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.6`
-  Status: `pending`
+  Status: `done`
   Goal: Decide and implement or route unsupported PCRE structural regex constructs.
   Acceptance: EBNF and spec.spec smoke fixtures no longer fail merely because Dart `RegExp` rejects `\K`,
     recursive named subpatterns such as `(?&name)`, recursive whole-pattern forms such as Lispish `(?R)`,
     `(?(DEFINE)...)`, or related conditional/recursive constructs; the solution is explicitly bounded and
     documented, not an untracked broad regex-engine replacement.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Dart now recognizes the exact shipped structural PCRE pattern families that
+    block this window and routes them through bounded scanners before normal `RegExp` compilation: Lispish
+    recursive square brackets, EBNF return scalar/array/object patterns using `\K`, recursive named subpatterns,
+    and `(?(DEFINE)...)`, plus spec.spec recursive action/blind/lifecycle/function block forms. Dart also supports
+    action-edge `push(child, index)` over a child return array, preserving the `ebnf_logging_annotation` payload.
+    Focused matching/interpreter tests pass; `corpus_manifest_test.dart` locks the seven structural fixtures; the
+    diagnostic parser-smoke command `dart run bin/corpus_runner.dart --corpus
+    ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31` reports 31 passed / 0 failed; Dart
+    format/analyze/full tests and the default 99-fixture corpus loader pass.
+  Commit: `DART-BACKEND-PARITY.6.2.4.6 - close Dart structural regex smoke`
 
 - ID: `DART-BACKEND-PARITY.6.2.5`
   Status: `pending`
@@ -1361,7 +1370,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 14 | `DART-BACKEND-PARITY.5.1` | `done` | Minimal staged registry provider dispatches function-body parse jobs and stitches `body_ast`. |
 | 15 | `DART-BACKEND-PARITY.5.2` | `done` | Registered exact-arity user functions execute at runtime. |
 | 16 | `DART-BACKEND-PARITY.5.3` | `done` | Staged parse-job and function-registry descriptor shapes are preserved. |
-| 17 | `DART-BACKEND-PARITY.6` | `active` | Corpus parity is in progress; current frontier is `.6.2.4.6` for PCRE structural regex constructs after final parser-smoke no-drift closeout confirmed the 24/31 boundary. |
+| 17 | `DART-BACKEND-PARITY.6` | `active` | Corpus parity is in progress; `.6.2.4` shipped-spec/parser-smoke is closed at 31/31 green, and the current frontier is `.6.2.5` for the routed top-level `fn` corpus fixtures. |
 
 ## Dart Toolchain And Package Layout
 
@@ -1661,6 +1670,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.4.5` | Perl public-parser and descriptor-handler probes for `ds_vhistory`; `call_spec_handler_subst` direct-access lowering probe; minimal scalar-held `payload[1]` public-parser probe; minimal leading-newline action-edge reproduction; focused Dart `ds_vhistory_version_entry` corpus run; Rust `oracle_corpus_matches_perl_reference`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. The `ds_vhistory` residual is split with durable evidence: public Perl/Rust expect null for the leading-newline fixture, direct descriptor execution returns `/proj/foo`, ordinary scalar-held indexed access still works, and `.6.2.4.4.6` owns the actual boundary decision. No Dart runtime behavior changed. |
 | `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.4.6` | Focused `dart test test/runtime_interpreter_test.dart test/corpus_manifest_test.dart`; focused `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --case ds_vhistory_version_entry`; diagnostic `--execute --offset 68 --limit 31`; `dart format --set-exit-if-changed .`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart now mirrors Perl public-parser leading blank/comment-line skipping before the top rule; `ds_vhistory_version_entry` passes, ordinary scalar-held indexed reads remain public, and the parser-smoke window moves from 23/31 to 24/31 green with only PCRE structural regex blockers remaining. |
 | `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.5` | Diagnostic `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31`; final parser-smoke no-drift scans across README, mdBook, roadmaps, live docs, task tree, and Knowledge Map; Dart format/analyze/full tests; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Final no-drift closeout confirms the shipped-spec/parser-smoke window is 24/31 green, all non-PCRE residual leaves are closed, and only the seven PCRE structural regex blockers remain under `.6.2.4.6`. |
+| `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.6` | Focused `dart test test/runtime_matching_test.dart test/runtime_interpreter_test.dart test/corpus_manifest_test.dart`; diagnostic `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31`; default 99-fixture corpus loader; Dart format/analyze/full tests; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Bounded Dart structural matchers close the exact shipped recursive/DEFINE/`\K` PCRE forms, action-edge `push(child, index)` preserves EBNF logging payloads, the parser-smoke window is 31/31 green, and the frontier advances to `.6.2.5`. |
 
 ## Commit Log
 
@@ -1702,6 +1712,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.6.2.4.4.5` | `DART-BACKEND-PARITY.6.2.4.4.5 - split ds_vhistory oracle boundary` | Evidence-only split: public `ds_vhistory` parser leading-newline fixture returns null, direct descriptor handler returns `/proj/foo`, ordinary scalar-held indexed reads remain valid, and `.6.2.4.4.6` owns the boundary decision. |
 | `DART-BACKEND-PARITY.6.2.4.4.6` | `DART-BACKEND-PARITY.6.2.4.4.6 - mirror public parser leading trivia` | Dart runtime parse entrypoint now skips leading blank/comment lines like the Perl public parser, closing `ds_vhistory_version_entry` and moving parser-smoke to 24/31 green. |
 | `DART-BACKEND-PARITY.6.2.4.5` | `DART-BACKEND-PARITY.6.2.4.5 - close parser smoke no drift` | No-drift closeout confirms the non-PCRE parser-smoke residual group is complete and advances the frontier to `.6.2.4.6` for PCRE structural regex constructs. |
+| `DART-BACKEND-PARITY.6.2.4.6` | `DART-BACKEND-PARITY.6.2.4.6 - close Dart structural regex smoke` | Bounded structural regex matchers and `push(child, index)` action-edge payload extraction close the seven PCRE structural fixtures and the `.6.2.4` parser-smoke parent. |
 
 ## Changelog
 
@@ -1789,3 +1800,6 @@ The `.4.1` runtime matching layer adds:
 - `2026-07-09`: Closed final shipped-spec/parser-smoke no-drift for the non-PCRE residual group. The measured
   window remains 24/31 green, current docs and Knowledge Map agree, and the frontier advances to `.6.2.4.6` for
   the seven PCRE structural regex blockers.
+- `2026-07-09`: Closed the seven PCRE structural regex blockers with bounded Dart structural matchers and
+  action-edge `push(child, index)` parity. The shipped-spec/parser-smoke window is 31/31 green, `.6.2.4` is
+  closed, and the frontier advances to `.6.2.5`.
