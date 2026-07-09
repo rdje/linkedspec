@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.1 — bridge Dart shipped regex dialect
+
+**Scope:** Dart runtime regex normalization, helper regex compilation, focused runtime tests, corpus diagnostics,
+Dart README/mdBook status, live docs, roadmap status, task-tree status, and Knowledge Map.
+
+**Change:** Added a shared Dart runtime regex compiler that normalizes the shipped regex dialect forms Dart
+`RegExp` lacks: POSIX character classes, inline `i`/`m`/`s` flag groups, scoped inline flag groups accepted by
+lowering to non-capturing groups plus Dart `RegExp` flags, possessive quantifier markers, lower-bound `{,n}`
+quantifiers, and Python-style named captures. Rule regexes and helper regex values now share that path. The final
+shipped-spec/parser-smoke corpus window still measures 2/31 green, but the
+previous POSIX/inline-flag/possessive FormatExceptions now move to narrower runtime/helper/output failures. Deeper
+PCRE structural constructs (`\K`, `(?&name)`, `(?(DEFINE)...)`) are routed to `DART-BACKEND-PARITY.6.2.4.6`.
+
+**Validation:** Focused runtime matching/interpreter tests, Dart format/analyze, diagnostic corpus run, mdBook
+build, memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine, and `git diff --check`
+pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.0 — split Dart shipped corpus smoke batch
 
 **Scope:** Dart corpus-batch task-tree split, failure taxonomy, README/mdBook status, live docs, roadmap status,

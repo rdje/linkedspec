@@ -37,8 +37,8 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.6.2.4.0` is the current completed corpus-parity boundary;
-`.6.2.4.1` is the next shipped-spec/parser-smoke regex-dialect frontier. The package can round-trip
+`DART-BACKEND-PARITY.6.2.4.1` is the current completed corpus-parity boundary;
+`.6.2.4.2` is the next shipped-spec/parser-smoke helper/action frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -98,6 +98,11 @@ argument lists, supports plain fallback values in inline `if(...)`, evaluates
 single-argument numeric aggregate reducers through aggregate-aware reads, and
 uses scalar-held list/map values for `array(name)`, `hash(name)`, and `copy(name)`
 unless an explicit aggregate write supersedes the scalar-held value.
+Rule regexes and helper regex values now share a runtime compiler that normalizes
+POSIX character classes, inline `i`/`m`/`s` flags, scoped flag groups by lifting
+their options to the compiled Dart `RegExp`, possessive quantifier
+markers, lower-bound `{,n}` quantifiers, and Python-style named captures before
+using Dart `RegExp`.
 Runtime failures now expose `RuntimeDiagnostic` payloads through
 `RuntimeInterpreterException.diagnostic` with stable `type`, `stage`,
 `owner_stage`, `summary`, `detail`, `top_rule`, `rule_label`,
@@ -120,5 +125,8 @@ pass through bounded execute mode. Top-level `fn` corpus fixtures remain routed
 to `DART-BACKEND-PARITY.6.2.5` for spec-defined function-shell execution. The final
 31-fixture shipped-spec/parser-smoke window is measured at 2/31 green and split into
 regex-dialect, helper/action, recursion/output, residual parity, and closeout leaves.
+Basic regex-dialect bridging is now done; deeper PCRE structural constructs such as
+`\K`, recursive `(?&name)` subpatterns, and `(?(DEFINE)...)` are routed to
+`DART-BACKEND-PARITY.6.2.4.6`.
 Full shipped-corpus output parity remains a later leaf in
 `docs/tasks/DART-BACKEND-PARITY.md`.

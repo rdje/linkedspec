@@ -857,7 +857,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 - ID: `DART-BACKEND-PARITY.6.2.4`
   Status: `active`
   Goal: Close the shipped-spec and parser-smoke corpus batch.
-  Children: `.6.2.4.0`, `.6.2.4.1`, `.6.2.4.2`, `.6.2.4.3`, `.6.2.4.4`, `.6.2.4.5`
+  Children: `.6.2.4.0`, `.6.2.4.1`, `.6.2.4.2`, `.6.2.4.3`, `.6.2.4.4`, `.6.2.4.5`,
+    `.6.2.4.6`
   Acceptance: The tclite, lispish, recursive top-rule, hlink, portmap, ebnf, spec.spec, regdef, tablegrep,
     simenv, VHDL/library, history, and plugin smoke fixtures either pass on Dart or each blocked fixture is routed
     to a narrowly owned root-cause leaf with Perl/Rust oracle evidence.
@@ -866,7 +867,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     `tkgui_empty`). Failures cluster into Dart regex-dialect incompatibilities (POSIX classes, inline flags,
     possessive quantifiers), missing runtime/helper surfaces (`capture_slice`, diagnostic `print`, logical `not`,
     raw `print(...)` expression parsing), recursive/default-mode output mismatches, and residual shipped-spec smoke
-    semantics. Child leaves own those clusters before final closeout.
+    semantics. `.6.2.4.1` removes the basic Dart regex-dialect incompatibilities; deeper PCRE structural regex
+    constructs are now split to `.6.2.4.6`. Child leaves own the remaining clusters before final closeout.
   Commit: `pending`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.0`
@@ -882,20 +884,29 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.4.0 - split Dart shipped corpus smoke batch`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.1`
-  Status: `pending`
+  Status: `done`
   Goal: Add the Dart regex-dialect bridge needed by shipped-spec smoke fixtures.
   Acceptance: Dart parser/runtime regex compilation handles the shipped fixture patterns that currently fail
     before matching because of POSIX character classes, inline flag groups, and possessive quantifiers; any
-    remaining fixture failures after regex compilation are runtime/output failures with narrower owners.
-  Verification: `pending`
-  Commit: `pending`
+    remaining recursive/DEFINE/`\K` PCRE structural-regex failures are routed to `.6.2.4.6`.
+  Verification: **PASS 2026-07-09.** `compileRuntimeRegex(...)` now normalizes POSIX character classes, inline
+    `i`/`m`/`s` flag groups, scoped flag groups by lifting options to Dart `RegExp`, possessive quantifier markers,
+    lower-bound `{,n}`
+    quantifiers, and Python-style named captures; helper regex compilation uses the same path. Focused
+    `runtime_matching_test.dart` and `runtime_interpreter_test.dart` locks pass, as do Dart format and analyze.
+    The diagnostic `--execute --offset 68 --limit 31` window remains 2/31 green, but the earlier POSIX/inline
+    flag/possessive FormatExceptions have moved to narrower runtime/helper/output failures. Remaining
+    `FormatException` cases are unsupported PCRE structural constructs (`\K`, `(?&name)`, `(?(DEFINE)...)`) in
+    EBNF/spec.spec smoke fixtures and are split to `.6.2.4.6`.
+  Commit: `DART-BACKEND-PARITY.6.2.4.1 - bridge Dart shipped regex dialect`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.2`
   Status: `pending`
   Goal: Add missing parser-smoke runtime helper surfaces.
   Acceptance: The shipped-smoke fixtures no longer fail solely because Dart lacks `capture_slice`, diagnostic
-    output helper behavior, logical `not`, or typed parsing for current helper-form `print(...)` expressions; helper
-    behavior matches the Perl/Rust contract or is routed to narrower follow-up evidence.
+    output helper behavior (`print`/`say`), logical `or`/`not`, or typed parsing for current helper-form
+    `print(...)` expressions; helper behavior matches the Perl/Rust contract or is routed to narrower follow-up
+    evidence.
   Verification: `pending`
   Commit: `pending`
 
@@ -912,7 +923,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Goal: Close residual shipped-spec parser-smoke fixture output parity.
   Acceptance: Hlink, portmap, EBNF, spec.spec, regdef, tablegrep, simenv, VHDL/library, history, and plugin/library
     smoke fixtures pass or are routed with precise root-cause evidence after regex/helper/recursion blockers are
-    removed.
+    removed, including any observable semantic mismatch from Dart's normalized regex dialect bridge.
   Verification: `pending`
   Commit: `pending`
 
@@ -922,6 +933,15 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: The full `.6.2.4` 31-fixture window is green on Dart or all remaining blockers are split with
     durable evidence; README, mdBook, roadmap, Knowledge Map, live docs, and task-tree status match the measured
     boundary.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.6.2.4.6`
+  Status: `pending`
+  Goal: Decide and implement or route unsupported PCRE structural regex constructs.
+  Acceptance: EBNF and spec.spec smoke fixtures no longer fail merely because Dart `RegExp` rejects `\K`,
+    recursive named subpatterns such as `(?&name)`, `(?(DEFINE)...)`, or related conditional/recursive constructs;
+    the solution is explicitly bounded and documented, not an untracked broad regex-engine replacement.
   Verification: `pending`
   Commit: `pending`
 

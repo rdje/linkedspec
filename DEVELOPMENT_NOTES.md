@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.4.1 — Dart shipped regex dialect bridge):
+  Dart rule regexes and helper regex values now share `compileRuntimeRegex(...)`. The bridge normalizes the
+  shipped dialect subset that Dart `RegExp` does not accept directly: POSIX character classes such as
+  `[[:alpha:]]`, inline `(?i)` / `(?m)` / `(?s)` flag groups, scoped forms such as `(?s:...)` by lifting those
+  options to the compiled Dart `RegExp`, possessive
+  quantifier markers (`++`, `*+`, `?+`, `{m,n}+`), lower-bound `{,n}` quantifiers, and Python-style named capture
+  syntax. The final corpus window is still 2/31 green, but the previous portmap/EBNF/spec/regdef/VHDL/library
+  FormatExceptions caused by those basic dialect forms are gone. Remaining regex FormatExceptions are deeper PCRE
+  structural features (`\K`, `(?&name)`, `(?(DEFINE)...)`) and are split to `DART-BACKEND-PARITY.6.2.4.6`.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.4.0 — Dart shipped corpus smoke split):
   The final Dart shipped-spec/parser-smoke corpus window is intentionally split before implementation. The
   diagnostic run `--execute --offset 68 --limit 31` is 2/31 green (`pplugin_empty`, `tkgui_empty`). The failure

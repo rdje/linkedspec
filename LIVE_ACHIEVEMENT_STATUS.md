@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.1 — bridge Dart shipped regex dialect**
+  (DONE — basic shipped regex dialect incompatibilities no longer block Dart).
+
+  **Change:** Dart now normalizes POSIX character classes, inline/scoped `i`/`m`/`s` flag groups, possessive
+  quantifier markers, lower-bound `{,n}` quantifiers, and Python-style named captures through a shared runtime
+  regex compiler used by both rule matching and helper regex values.
+
+  **Boundary:** The final shipped-spec/parser-smoke window remains 2/31 green, but the earlier
+  POSIX/inline-flag/possessive FormatExceptions now move to narrower runtime/helper/output failures. Remaining
+  PCRE structural constructs (`\K`, `(?&name)`, `(?(DEFINE)...)`) are routed to `DART-BACKEND-PARITY.6.2.4.6`.
+  Active implementation work advances to `DART-BACKEND-PARITY.6.2.4.2`.
+
+  **Verification:** Focused runtime matching/interpreter tests, Dart format/analyze, diagnostic corpus run,
+  mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.2.4.0 — split Dart shipped corpus smoke batch**
   (DONE — final shipped-spec/parser-smoke window measured and split).
 

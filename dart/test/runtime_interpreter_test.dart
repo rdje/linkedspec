@@ -565,6 +565,26 @@ Top::
     });
   });
 
+  test('executes shipped regex dialect forms through helper regex values', () {
+    final engine = _engine(r'''
+Top::
+ /x/
+ E {
+   value = "0XFA";
+   case_insensitive = matches(value, "(?i)0x[0-9a-f]+");
+   posix_possessive = matches("NAME", "[[:alpha:]]++");
+   return(hash(
+     "case_insensitive", case_insensitive,
+     "posix_possessive", posix_possessive
+   ))
+ }
+''');
+
+    final result = engine.parse('x');
+
+    expect(result.value, {'case_insensitive': true, 'posix_possessive': true});
+  });
+
   test('executes numeric helpers aliases symbols and receivers', () {
     final engine = _engine(r'''
 Top::

@@ -36,8 +36,8 @@ final class RuntimeRegexAlternation {
           RuntimeRegexAlternative(
             index: index,
             pattern: pattern,
-            regex: RegExp(
-              _normalizePattern(pattern),
+            regex: compileRuntimeRegex(
+              pattern,
               caseSensitive: caseSensitive,
               multiLine: multiLine,
               unicode: unicode,
@@ -387,10 +387,51 @@ bool _isBetterSeekCandidate(
   return candidate.alternativeIndex < current.alternativeIndex;
 }
 
-String _normalizePattern(String pattern) {
-  return _normalizeLowerUnboundedQuantifiers(
-    _normalizePythonNamedCaptureSyntax(pattern),
+RegExp compileRuntimeRegex(
+  String pattern, {
+  bool caseSensitive = true,
+  bool multiLine = false,
+  bool unicode = false,
+  bool dotAll = false,
+}) {
+  final normalized = _normalizePattern(pattern);
+  return RegExp(
+    normalized.pattern,
+    caseSensitive: caseSensitive && !normalized.caseInsensitive,
+    multiLine: multiLine || normalized.multiLine,
+    unicode: unicode,
+    dotAll: dotAll || normalized.dotAll,
   );
+}
+
+_NormalizedRegexPattern _normalizePattern(String pattern) {
+  final inline = _normalizeInlineFlagGroups(pattern);
+  return _NormalizedRegexPattern(
+    pattern: _normalizePossessiveQuantifiers(
+      _normalizeLowerUnboundedQuantifiers(
+        _normalizePosixCharacterClasses(
+          _normalizePythonNamedCaptureSyntax(inline.pattern),
+        ),
+      ),
+    ),
+    caseInsensitive: inline.caseInsensitive,
+    multiLine: inline.multiLine,
+    dotAll: inline.dotAll,
+  );
+}
+
+final class _NormalizedRegexPattern {
+  const _NormalizedRegexPattern({
+    required this.pattern,
+    required this.caseInsensitive,
+    required this.multiLine,
+    required this.dotAll,
+  });
+
+  final String pattern;
+  final bool caseInsensitive;
+  final bool multiLine;
+  final bool dotAll;
 }
 
 String _normalizePythonNamedCaptureSyntax(String pattern) {
@@ -400,6 +441,171 @@ String _normalizePythonNamedCaptureSyntax(String pattern) {
   );
 }
 
+_NormalizedRegexPattern _normalizeInlineFlagGroups(String pattern) {
+  final output = StringBuffer();
+  var caseInsensitive = false;
+  var multiLine = false;
+  var dotAll = false;
+  var escaped = false;
+  var inClass = false;
+
+  for (var index = 0; index < pattern.length; index += 1) {
+    final code = pattern.codeUnitAt(index);
+    if (escaped) {
+      output.writeCharCode(code);
+      escaped = false;
+      continue;
+    }
+    if (code == _backslash) {
+      output.writeCharCode(code);
+      escaped = true;
+      continue;
+    }
+    if (code == _openBracket) {
+      inClass = true;
+      output.writeCharCode(code);
+      continue;
+    }
+    if (code == _closeBracket) {
+      inClass = false;
+      output.writeCharCode(code);
+      continue;
+    }
+    if (!inClass &&
+        index + 3 <= pattern.length &&
+        pattern.codeUnitAt(index) == _openParen &&
+        pattern.codeUnitAt(index + 1) == _question) {
+      var flagIndex = index + 2;
+      while (flagIndex < pattern.length &&
+          _isInlineRegexFlag(pattern[flagIndex])) {
+        flagIndex += 1;
+      }
+      if (flagIndex > index + 2 && flagIndex < pattern.length) {
+        final terminator = pattern.codeUnitAt(flagIndex);
+        if (terminator == _closeParen || terminator == _colon) {
+          final flags = pattern.substring(index + 2, flagIndex);
+          caseInsensitive = caseInsensitive || flags.contains('i');
+          multiLine = multiLine || flags.contains('m');
+          dotAll = dotAll || flags.contains('s');
+          if (terminator == _colon) {
+            output.write('(?:');
+          }
+          index = flagIndex;
+          continue;
+        }
+      }
+    }
+    output.write(pattern[index]);
+  }
+
+  return _NormalizedRegexPattern(
+    pattern: output.toString(),
+    caseInsensitive: caseInsensitive,
+    multiLine: multiLine,
+    dotAll: dotAll,
+  );
+}
+
+bool _isInlineRegexFlag(String value) {
+  return value == 'i' || value == 'm' || value == 's';
+}
+
+String _normalizePosixCharacterClasses(String pattern) {
+  final output = StringBuffer();
+  var escaped = false;
+  var inClass = false;
+
+  for (var index = 0; index < pattern.length; index += 1) {
+    final code = pattern.codeUnitAt(index);
+    if (escaped) {
+      output.writeCharCode(code);
+      escaped = false;
+      continue;
+    }
+    if (code == _backslash) {
+      output.writeCharCode(code);
+      escaped = true;
+      continue;
+    }
+    if (inClass && code == _openBracket) {
+      final replacement = _posixCharacterClassAt(pattern, index);
+      if (replacement != null) {
+        output.write(replacement.value);
+        index = replacement.endIndex;
+        continue;
+      }
+    }
+    if (code == _openBracket) {
+      inClass = true;
+      output.writeCharCode(code);
+      continue;
+    }
+    if (code == _closeBracket) {
+      inClass = false;
+      output.writeCharCode(code);
+      continue;
+    }
+    output.writeCharCode(code);
+  }
+
+  return output.toString();
+}
+
+_PosixCharacterClassReplacement? _posixCharacterClassAt(
+  String pattern,
+  int index,
+) {
+  if (index + 4 >= pattern.length ||
+      pattern.codeUnitAt(index) != _openBracket ||
+      pattern.codeUnitAt(index + 1) != _colon) {
+    return null;
+  }
+
+  var nameEnd = index + 2;
+  while (nameEnd + 1 < pattern.length &&
+      pattern.codeUnitAt(nameEnd) != _colon) {
+    nameEnd += 1;
+  }
+  if (nameEnd + 1 >= pattern.length ||
+      pattern.codeUnitAt(nameEnd + 1) != _closeBracket) {
+    return null;
+  }
+
+  final value =
+      _posixCharacterClassReplacements[pattern.substring(index + 2, nameEnd)];
+  if (value == null) {
+    return null;
+  }
+  return _PosixCharacterClassReplacement(value: value, endIndex: nameEnd + 1);
+}
+
+final class _PosixCharacterClassReplacement {
+  const _PosixCharacterClassReplacement({
+    required this.value,
+    required this.endIndex,
+  });
+
+  final String value;
+  final int endIndex;
+}
+
+const _posixCharacterClassReplacements = {
+  'alnum': 'A-Za-z0-9',
+  'alpha': 'A-Za-z',
+  'ascii': r'\x00-\x7F',
+  'blank': r'\t ',
+  'cntrl': r'\x00-\x1F\x7F',
+  'digit': '0-9',
+  'graph': r'\x21-\x7E',
+  'lower': 'a-z',
+  'print': r'\x20-\x7E',
+  'punct': r'''!"#$%&'()*+,\-./:;<=>?@\[\\\]^_`{|}~''',
+  'space': r'\s',
+  'upper': 'A-Z',
+  'word': r'A-Za-z0-9_',
+  'xdigit': 'A-Fa-f0-9',
+};
+
 String _normalizeLowerUnboundedQuantifiers(String pattern) {
   return pattern.replaceAllMapped(
     RegExp(r'\{,(\d+)\}'),
@@ -407,8 +613,71 @@ String _normalizeLowerUnboundedQuantifiers(String pattern) {
   );
 }
 
+String _normalizePossessiveQuantifiers(String pattern) {
+  final output = StringBuffer();
+  var escaped = false;
+  var inClass = false;
+  var previousWasQuantifier = false;
+
+  for (var index = 0; index < pattern.length; index += 1) {
+    final code = pattern.codeUnitAt(index);
+    if (escaped) {
+      output.writeCharCode(code);
+      previousWasQuantifier = false;
+      escaped = false;
+      continue;
+    }
+    if (code == _backslash) {
+      output.writeCharCode(code);
+      previousWasQuantifier = false;
+      escaped = true;
+      continue;
+    }
+    if (code == _openBracket) {
+      inClass = true;
+      output.writeCharCode(code);
+      previousWasQuantifier = false;
+      continue;
+    }
+    if (code == _closeBracket) {
+      inClass = false;
+      output.writeCharCode(code);
+      previousWasQuantifier = false;
+      continue;
+    }
+    if (!inClass && code == _plus && previousWasQuantifier) {
+      previousWasQuantifier = false;
+      continue;
+    }
+    output.writeCharCode(code);
+    previousWasQuantifier = !inClass && _isQuantifierCode(code);
+  }
+
+  return output.toString();
+}
+
+bool _isQuantifierCode(int value) {
+  if (value == _plus ||
+      value == _asterisk ||
+      value == _question ||
+      value == _closeBrace) {
+    return true;
+  }
+  return false;
+}
+
 int _clampCodeUnitOffset(String input, int offset) {
   return offset.clamp(0, input.length);
 }
 
 const _lineFeed = 0x0a;
+const _asterisk = 0x2a;
+const _plus = 0x2b;
+const _question = 0x3f;
+const _colon = 0x3a;
+const _backslash = 0x5c;
+const _openParen = 0x28;
+const _closeParen = 0x29;
+const _openBracket = 0x5b;
+const _closeBracket = 0x5d;
+const _closeBrace = 0x7d;

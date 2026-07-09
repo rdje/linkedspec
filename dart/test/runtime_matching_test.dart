@@ -65,6 +65,36 @@ void main() {
     expect(match.startLineColumn.toJson(), {'line': 1, 'column': 4});
   });
 
+  test('normalizes shipped regex dialect forms for Dart RegExp', () {
+    final portmap = RuntimeRegexAlternation.compile([
+      r"([[:alpha:]]\w*)|(?i)(0x[0-9a-f]+|\d+\'\d+)",
+    ]);
+    expect(portmap.consumeMatch('0XFA', 0)!.text, '0XFA');
+    expect(portmap.consumeMatch('Signal_1', 0)!.text, 'Signal_1');
+
+    final ebnf = RuntimeRegexAlternation.compile([
+      r'(?m)^\s*([[:alpha:]_]\w*)\s*:{,2}=',
+    ]);
+    final rule = ebnf.seekMatch('ignored\n_rule := value', 0)!;
+    expect(rule.text, '_rule :=');
+    expect(rule.captures, ['_rule']);
+
+    final libReader = RuntimeRegexAlternation.compile([
+      r'\b(\w+)\s*\(\s*((?s:.*?))\s*\)\s*\{',
+    ]);
+    final group = libReader.consumeMatch('group(first\nsecond){', 0)!;
+    expect(group.captures, ['group', 'first\nsecond']);
+
+    final possessive = RuntimeRegexAlternation.compile([r'(\w++)\s+[^}]++']);
+    expect(possessive.consumeMatch('name value', 0)!.captures, ['name']);
+
+    final escapedLiteral = RuntimeRegexAlternation.compile([r'\++']);
+    expect(escapedLiteral.consumeMatch('+++', 0)!.text, '+++');
+
+    final literalPosixText = RuntimeRegexAlternation.compile([r'\[:alpha:\]']);
+    expect(literalPosixText.consumeMatch('[:alpha:]', 0)!.text, '[:alpha:]');
+  });
+
   test('keeps local and entry match registers separate', () {
     final alternation = RuntimeRegexAlternation.compile(['parent', 'child']);
     final parentMatch = alternation.consumeMatch('parent child', 0)!;

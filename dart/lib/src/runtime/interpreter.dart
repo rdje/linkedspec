@@ -4862,7 +4862,7 @@ RegExp? _regexFromValue(Object? value) {
 
 RegExp? _compileRegex(String pattern) {
   try {
-    return RegExp(pattern);
+    return compileRuntimeRegex(pattern);
   } on FormatException {
     return null;
   }
