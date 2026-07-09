@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.1 — split code purge task tree**
+  (DONE ownership/inventory split; no parser/runtime code edited in this slice).
+
+  **Change:** Added `docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md` to own the director directive that
+  non-current helper spellings must be deleted from Perl/Rust code surfaces rather than preserved as
+  name-specific compatibility or diagnostic paths. Read-only scans split the work into Perl source cleanup,
+  Rust source cleanup, active test/tool/spec fixture migration, and final no-drift verification.
+
+  **Boundary:** This is task ownership and inventory only. It does not yet remove Perl or Rust source paths.
+  The next frontier is `NONCURRENT-HELPER-CODE-PURGE.2` for Perl source recognition/diagnostic path removal.
+
+  **Verification:** Read-only scans over `perl`, `rust`, `t`, `tools`, `scripts`, `bin`, and `specs` identified
+  the owner categories and false-positive classes. `git diff --check`, memory architecture, Knowledge Map,
+  task-tree metadata, doctrine gates, and mdBook build pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.3.2 — add Dart ActionIR contract resolver**
   (DONE current helper/control contract resolution; function registry compilation still deferred).
 

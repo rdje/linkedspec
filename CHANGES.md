@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — NONCURRENT-HELPER-CODE-PURGE.1 — split code purge task tree
+
+**Scope:** Task-tree ownership, read-only inventory, live docs, and Knowledge Map setup before Perl/Rust code edits.
+
+**Change:** Added `docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md` after the director clarified that non-current
+helper spellings must be deleted from Perl and Rust code surfaces, not preserved as name-specific compatibility
+or diagnostic logic. The inventory split the work into Perl source cleanup, Rust source cleanup, active
+test/tool/spec fixture migration, and final no-drift verification. `docs/TASK_TREE.md`, `MEMORY.md`, live
+status, and Knowledge Map facts now point to `NONCURRENT-HELPER-CODE-PURGE.2` as the next executable frontier.
+
+**Validation:** Read-only scans over `perl`, `rust`, `t`, `tools`, `scripts`, `bin`, and `specs` identify the
+owner categories and show why context-aware cleanup is required. `git diff --check`, memory architecture,
+Knowledge Map regeneration/check, task-tree metadata, doctrine gates, and `mdbook build docs/linkedspec-book`
+pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.3.2 — add Dart ActionIR contract resolver
 
 **Scope:** Dart ActionIR contract resolution, shared current helper/control name validation, tests,

@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (NONCURRENT-HELPER-CODE-PURGE.1 — code purge inventory/split):
+  Created `docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md` after the director clarified that non-current helper
+  spellings must not remain as name-specific recognition or diagnostic surfaces in the Perl and Rust codebases.
+  Read-only scans show owner categories across Perl ActionIR source, Rust runtime source, active tests, tooling,
+  generated corpus input production, and checked-in `.spec` labels/strings. The broad string scan also produces
+  false positives from ordinary implementation words, so the implementation leaves must be context-aware and
+  cannot use blind replacement. The first executable frontier is `.2`, Perl source recognition/diagnostic path
+  removal, before Rust source and fixture/tool/spec cleanup.
+
 - 2026-07-09 (DART-BACKEND-PARITY.3.2 — Dart ActionIR contract resolver):
   Added `dart/lib/src/action/action_contracts.dart` and exported the resolver APIs from the public Dart
   library. Dart now resolves typed ActionIR calls, receiver methods, structural assignments, structured
