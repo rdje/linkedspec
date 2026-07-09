@@ -160,6 +160,132 @@ Top::OR{1}
     ]);
   });
 
+  test('rewinds cursor through BACKTRACK and IBACKTRACK helpers', () {
+    final ibacktrackEngine = _engine(r'''
+Top::AND
+ I { set(array(log), []) }
+ /ab/ -> Top[0] { push(array(log), hash("slot", 0, "cursor", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos())) }
+ /cd/ -> Top[1] {
+   before = cursor_pos();
+   IBACKTRACK();
+   push(array(log), hash("slot", 1, "before", before, "after", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos(), "rest", cursor_rest()))
+ }
+ E { return(copy(array(log))) }
+''');
+    final backtrackEngine = _engine(r'''
+Top::AND
+ I { set(array(log), []) }
+ /ab/ -> Top[0] { push(array(log), hash("slot", 0, "cursor", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos())) }
+ /cd/ -> Top[1] {
+   before = cursor_pos();
+   BACKTRACK();
+   push(array(log), hash("slot", 1, "before", before, "after", cursor_pos(), "entry_start", entry_start_pos(), "match_start", match_start_pos(), "rest", cursor_rest()))
+ }
+ E { return(copy(array(log))) }
+''');
+
+    final ibacktrackResult = ibacktrackEngine.parse('abcd');
+    final backtrackResult = backtrackEngine.parse('abcd');
+
+    expect(ibacktrackResult.value, [
+      {'slot': 0, 'cursor': 2, 'entry_start': 0, 'match_start': 0},
+      {
+        'slot': 1,
+        'before': 4,
+        'after': 0,
+        'entry_start': 0,
+        'match_start': 2,
+        'rest': 'abcd',
+      },
+    ]);
+    expect(ibacktrackResult.cursorCodeUnit, 0);
+
+    expect(backtrackResult.value, [
+      {'slot': 0, 'cursor': 2, 'entry_start': 0, 'match_start': 0},
+      {
+        'slot': 1,
+        'before': 4,
+        'after': 2,
+        'entry_start': 0,
+        'match_start': 2,
+        'rest': 'cd',
+      },
+    ]);
+    expect(backtrackResult.cursorCodeUnit, 2);
+  });
+
+  test('canonicalizes legacy lowercase backtrack helper spellings', () {
+    final ibacktrackEngine = _engine(r'''
+Top::AND
+ /ab/ -> Top[0] { cursor_pos() }
+ /cd/ -> Top[1] { ibacktrack(Top) }
+ E { return(cursor_pos()) }
+''');
+    final backtrackEngine = _engine(r'''
+Top::AND
+ /ab/ -> Top[0] { cursor_pos() }
+ /cd/ -> Top[1] { backtrack(Top) }
+ E { return(cursor_pos()) }
+''');
+
+    expect(ibacktrackEngine.parse('abcd').value, 0);
+    expect(backtrackEngine.parse('abcd').value, 2);
+  });
+
+  test('applies consume matching from a rewound cursor', () {
+    final engine = _engine(r'''
+Top::AND
+ /ab/ -> Top[0] { BACKTRACK() }
+ /ab/
+ E { return(hash("cursor", cursor_pos(), "rest", cursor_rest())) }
+''', parseMode: LinkedSpecParseMode.consume);
+
+    final result = engine.parse('ab');
+
+    expect(result.value, {'cursor': 2, 'rest': ''});
+    expect(result.cursorCodeUnit, 2);
+  });
+
+  test('exposes char-based cursor and whole-input helper values', () {
+    final engine = _engine(r'''
+Top::AND
+ /é/
+ /x/
+ E {
+   return(hash(
+     "cursor", cursor_pos(),
+     "cursor_line", cursor_line(),
+     "cursor_col", cursor_col(),
+     "rest", cursor_rest(),
+     "rest_len", cursor_rest_len(),
+     "input", input_text(),
+     "input_len", input_len(),
+     "slice", input_slice(1, 1),
+     "end_pos", input_end_pos(),
+     "end_line", input_end_line(),
+     "end_col", input_end_col()
+   ))
+ }
+''', parseMode: LinkedSpecParseMode.consume);
+
+    final result = engine.parse('éx');
+
+    expect(result.value, {
+      'cursor': 2,
+      'cursor_line': 1,
+      'cursor_col': 3,
+      'rest': '',
+      'rest_len': 0,
+      'input': 'éx',
+      'input_len': 2,
+      'slice': 'x',
+      'end_pos': 2,
+      'end_line': 1,
+      'end_col': 3,
+    });
+    expect(result.cursorCodeUnit, 2);
+  });
+
   test('preserves scalar array hash stores and nested reads', () {
     final engine = _engine(r'''
 Top::
@@ -704,6 +830,12 @@ Top::
   });
 }
 
-LinkedSpecRuntimeEngine _engine(String source) {
-  return LinkedSpecRuntimeEngine(compileSpec(parseSpec(source)));
+LinkedSpecRuntimeEngine _engine(
+  String source, {
+  LinkedSpecParseMode parseMode = LinkedSpecParseMode.seek,
+}) {
+  return LinkedSpecRuntimeEngine(
+    compileSpec(parseSpec(source)),
+    parseMode: parseMode,
+  );
 }

@@ -62,8 +62,9 @@ Three backbone items tracked major structural modernization — all done:
   hash helper family breadth, hash receiver chains, statement/value mutation boundaries, nested value-path
   assignment with no-autovivification failure behavior, explicit flat-style hash splicing, expression-valued
   blocks with block-local return, attached and inline structured controls,
-  helper/receiver `with` trailing blocks, and hash/array tree traversal receiver callbacks. The next slice is
-  BACKTRACK behavior.
+  helper/receiver `with` trailing blocks, hash/array tree traversal receiver callbacks, `BACKTRACK()` local cursor
+  rewinds, `IBACKTRACK()` initial/entry cursor rewinds, and char-based cursor/input helpers. The next slice is
+  runtime diagnostics and trace controls.
 - **Non-current helper code purge** - `NONCURRENT-HELPER-CODE-PURGE` is closed. Perl source cleanup, Rust source cleanup, active test/tool/generated fixture and checked-in `.spec` migration, and final no-drift scans are complete. Retired helper-looking calls use generic unknown-helper fallback behavior, active generic-unknown-helper tests use invented helper names, and active helper-call/label/tag scans are clean.
 - **Rust generated-source breadth** — the Rust interpreter oracle is the current cross-variant parity gate. Generated Rust source already covers the current structural families and a curated corpus subset; broadening generated-source proof to the full manifest remains a separately owned future follow-on.
 - **Lifecycle-family audit** — verified complete (2026-06-14). All 7 lifecycle markers (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`) have full semicolon-light structured authoring coverage. The current separator contract is newline-or-semicolon: newlines separate top-level helper statements, and multiple same-line statements require semicolons. No lifecycle-specific semantic gaps found.

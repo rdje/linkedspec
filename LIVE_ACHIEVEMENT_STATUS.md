@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.4.4 — add Dart backtrack cursor rewinds**
+  (DONE BACKTRACK/IBACKTRACK cursor rewinds and cursor/input helpers).
+
+  **Change:** Dart runtime execution now supports `BACKTRACK()` as a cursor-only rewind to the current local match
+  start and `IBACKTRACK()` as a cursor-only rewind to the initial/entry match start for the current context. The
+  `I` in `IBACKTRACK` is the Initial/`I` lifecycle context. The runtime also exposes char-based cursor/input
+  helpers such as `cursor_pos`, `cursor_rest`, `input_slice`, and `input_end_pos`, while preserving Dart's
+  internal code-unit cursor state. Legacy lowercase `backtrack(label)` / `ibacktrack(label)` calls canonicalize to
+  the same helpers and ignore the label argument.
+
+  **Boundary:** This closes the BACKTRACK/cursor-helper slice. Runtime diagnostics/tracing, staged runtime
+  execution, corpus output parity, Dart-specific CLI productization, and final parity closeout remain later
+  leaves. Active implementation work advances to `DART-BACKEND-PARITY.4.5`.
+
+  **Verification:** Focused runtime tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+  memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.4.3.6 — close Dart helper value no drift**
   (DONE helper/value no-drift; `.4.3` container closed).
 

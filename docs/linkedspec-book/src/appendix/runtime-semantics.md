@@ -152,18 +152,18 @@ I  →  [LS → match → LE → IT] × N  →  EX → LX → E
 
 ### 4.1 Local Cursor Rewind
 
-`BACKTRACK` (case-sensitive) and `IBACKTRACK` (case-insensitive) perform a
-**local cursor rewind**, not systemic backtracking:
+`BACKTRACK` and `IBACKTRACK` perform a **local cursor rewind**, not
+systemic backtracking:
 
-1. Save the current cursor (input position).
-2. Execute the child or code block.
-3. If the child fails (no match) or a condition is unmet:
-   - Restore the cursor to the saved position.
-   - Continue as if the attempt never happened (the input cursor is unchanged).
-4. If the child succeeds:
-   - The position advance from the successful match is kept.
+1. `BACKTRACK()` rewinds the live cursor to the start of the current local
+   match.
+2. `IBACKTRACK()` rewinds the live cursor to the start of the initial/entry
+   match for the current context. The `I` refers to that initial-match context,
+   the same context exposed to the `I` lifecycle.
+3. The rewind changes only the live input cursor. Match records, accumulators,
+   variables, and other side effects are not rolled back.
 
-**What BACKTRACK is NOT:**
+**What these helpers are NOT:**
 - It does NOT maintain a search tree of alternative parse paths.
 - It does NOT unwind partial rule matches beyond the single local attempt.
 - It does NOT restore accumulator state, variable declarations, or side effects
@@ -172,8 +172,8 @@ I  →  [LS → match → LE → IT] × N  →  EX → LX → E
 
 ### 4.2 Interaction with Parse Mode
 
-After a BACKTRACK rewind, the next match attempt uses the **rule's declared parse
-mode** (seek or consume) from the restored position. BACKTRACK does not change
+After either rewind, the next match attempt uses the **rule's declared parse
+mode** (seek or consume) from the restored position. These helpers do not change
 the parse mode.
 
 ## 5. Accumulator and Output Shape

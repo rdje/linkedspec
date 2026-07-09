@@ -528,12 +528,43 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.4.3.6 - close Dart helper value no drift`
 
 - ID: `DART-BACKEND-PARITY.4.4`
-  Status: `pending`
+  Status: `done`
   Goal: Implement BACKTRACK, parse-mode cursor behavior, and deterministic safety limits.
   Acceptance: BACKTRACK/IBACKTRACK rewinds only local cursor state, loops enforce documented safety, and
     deterministic order is maintained for hash views and dispatch decisions.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Dart runtime execution now supports `BACKTRACK()` as a cursor rewind to the
+    current local match start and `IBACKTRACK()` as a cursor rewind to the initial/entry match start for the
+    current context. The runtime also exposes char-based cursor/input helpers (`cursor_pos`, `cursor_line`,
+    `cursor_col`, `cursor_rest`, `cursor_rest_len`, `input_text`, `input_len`, `input_slice`, `input_end_pos`,
+    `input_end_line`, `input_end_col`). The legacy lowercase `backtrack(label)` / `ibacktrack(label)` spellings
+    canonicalize to the same runtime helpers and ignore the label argument, matching the Perl compatibility
+    contract. Existing zero-progress loop guards and deterministic sorted hash/tree behavior remain covered by
+    the runtime suite.
+  Acceptance Checklist:
+    - [x] **REPRODUCE / ISSUE** — Dart ActionIR contracts recognized `BACKTRACK`, `IBACKTRACK`, and cursor/input
+      helper names, but runtime evaluation still returned `null` for those helper calls and could not update the
+      live cursor from action code.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `dart/lib/src/runtime/interpreter.dart` dispatched capture,
+      string, number, array, hash, control, and traversal helpers, but `_evaluateCall(...)` had no cursor/input
+      helper branch and `_RuntimeExecutionContext` had no cursor-rewind operation. `dart/lib/src/runtime/matching.dart`
+      tracked entry and local match registers but lacked a cursor-only update method that preserved those registers
+      while moving the live cursor.
+    - [x] **FIXED** — Added ActionIR aliases for legacy lowercase `backtrack(label)` / `ibacktrack(label)`,
+      `RuntimeMatchRegisters.withCursorCodeUnit(...)`, runtime context cursor projection and rewind methods,
+      `BACKTRACK`/`IBACKTRACK` dispatch, and char-based whole-input/current-cursor helper execution. `BACKTRACK()`
+      rewinds to the current local match start; `IBACKTRACK()` rewinds to the initial/entry match start. The
+      director clarified that the `I` in `IBACKTRACK` refers to the Initial/`I` lifecycle context.
+    - [x] **ADDRESSED** — `test/action_contracts_test.dart` proves lowercase compatibility spellings canonicalize
+      to the uppercase runtime helpers. `test/runtime_interpreter_test.dart` proves `BACKTRACK` and `IBACKTRACK`
+      target different cursor anchors, lowercase compatibility calls use the same anchors, consume-mode matching
+      continues from a rewound cursor, and cursor/input helpers return char-based positions and slices while
+      internal Dart cursors remain code-unit based.
+    - [x] **NO REGRESSION** — Focused runtime tests, Dart format/analyze/full tests, corpus-runner scaffold,
+      CLI help checks, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+      `git diff --check` pass.
+    - [x] **LOCKSTEP** — Dart README/CLI help, mdBook runtime/status/handoff text, live docs, task-tree index,
+      roadmap trackers, architecture state, Knowledge Map facts, and `MEMORY.md` are updated.
+  Commit: `DART-BACKEND-PARITY.4.4 - add Dart backtrack cursor rewinds`
 
 - ID: `DART-BACKEND-PARITY.4.5`
   Status: `pending`
@@ -670,7 +701,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 5 | `DART-BACKEND-PARITY.4.3.4` | `done` | Hash helper family and hash receiver/mutation behavior are implemented. |
 | 6 | `DART-BACKEND-PARITY.4.3.5` | `done` | Value blocks, structured controls, with-blocks, and tree traversal callbacks are implemented. |
 | 7 | `DART-BACKEND-PARITY.4.3.6` | `done` | Helper/value no-drift closeout fixed nested value-path assignment drift. |
-| 8 | `DART-BACKEND-PARITY.4.4` | `pending` | Implement BACKTRACK and local cursor-rewind behavior next. |
+| 8 | `DART-BACKEND-PARITY.4.4` | `done` | BACKTRACK/IBACKTRACK cursor rewinds and cursor/input helpers are implemented. |
+| 9 | `DART-BACKEND-PARITY.4.5` | `pending` | Implement runtime diagnostics and trace controls next. |
 
 ## Dart Toolchain And Package Layout
 
@@ -899,14 +931,19 @@ The `.4.1` runtime matching layer adds:
   dispatch.
 - `2026-07-09`: Dart `.4.1` adds regex/match-state primitives only. Rule dispatch, lifecycle execution, and helper
   runtime remain `.4.2` and later.
+- `2026-07-09`: Dart `.4.4` keeps both public cursor-rewind helpers for Perl/Rust parity. `BACKTRACK()` rewinds to
+  the current local match start. `IBACKTRACK()` rewinds to the initial/entry match start for the current context;
+  the director clarified that the `I` refers to the Initial/`I` lifecycle context. Any future simplification of the
+  user-facing surface would need a separate compatibility leaf.
 
 ## Open Questions
 
-- None blocking `.4.4`. Helper/value no-drift closeout is done; BACKTRACK work is next.
+- None blocking `.4.5`. BACKTRACK/IBACKTRACK and cursor/input helper execution are implemented; runtime
+  diagnostics and trace controls are next.
 
 ## Blockers
 
-- None known before `.4.4` BACKTRACK work.
+- None known before `.4.5` diagnostics/trace work.
 
 ## Verification Log
 
@@ -929,6 +966,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.4.3.5` | Focused `dart test test/action_ast_parser_test.dart`; focused `dart test test/runtime_interpreter_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart executes expression-valued blocks, attached/inline controls, helper/receiver `with` trailing blocks, and hash/array tree traversal receiver callbacks with scoped binding restoration. |
 | `2026-07-09` | `DART-BACKEND-PARITY.7.3` | mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Director's per-variant CLI directive is recorded; Dart CLI productization is split to `.7.4`; final closeout shifts to `.7.5`; no source behavior changed. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.3.6` | Focused `dart test test/action_ast_parser_test.dart`; focused `dart test test/runtime_interpreter_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Helper/value no-drift fixed Dart nested value-path assignment to match the Perl/Rust no-autovivification and updated-root/null contract; frontier advances to `.4.4` BACKTRACK. |
+| `2026-07-09` | `DART-BACKEND-PARITY.4.4` | Focused `dart test test/runtime_interpreter_test.dart test/runtime_matching_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart executes `BACKTRACK()` local cursor rewinds, `IBACKTRACK()` initial/entry cursor rewinds, char-based cursor/input helpers, and consume-mode matching from a rewound cursor; frontier advances to `.4.5` diagnostics/trace controls. |
 
 ## Commit Log
 
@@ -954,6 +992,8 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.4.3.3` | `DART-BACKEND-PARITY.4.3.3 - add Dart runtime array helpers` | Array helper family and statement-only array end mutations. |
 | `DART-BACKEND-PARITY.4.3.4` | `DART-BACKEND-PARITY.4.3.4 - add Dart runtime hash helpers` | Hash helper family and statement/value mutation boundaries. |
 | `DART-BACKEND-PARITY.4.3.5` | `DART-BACKEND-PARITY.4.3.5 - add Dart runtime controls and tree callbacks` | Value blocks, structured controls, with-blocks, and tree traversal receiver callbacks. |
+| `DART-BACKEND-PARITY.4.3.6` | `DART-BACKEND-PARITY.4.3.6 - close Dart helper value no drift` | Nested value-path assignment no-drift; `.4.3` helper/value container closes. |
+| `DART-BACKEND-PARITY.4.4` | `DART-BACKEND-PARITY.4.4 - add Dart backtrack cursor rewinds` | BACKTRACK/IBACKTRACK cursor rewinds and cursor/input helpers. |
 | `DART-BACKEND-PARITY.7.3` | `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement` | Docs-only split for per-variant LinkedSpec CLI productization. |
 
 ## Changelog
@@ -1003,3 +1043,5 @@ The `.4.1` runtime matching layer adds:
 - `2026-07-09`: Closed Dart helper/value no-drift by fixing nested value-path assignment to return the updated
   root on success, return `null` without mutation on missing/wrong paths, and avoid autovivifying intermediate
   containers; `.4.3` closes and frontier advances to `.4.4` for BACKTRACK behavior.
+- `2026-07-09`: Added Dart `BACKTRACK()` local cursor rewinds, `IBACKTRACK()` initial/entry cursor rewinds, and
+  char-based cursor/input helper execution; frontier advances to `.4.5` for runtime diagnostics and trace controls.

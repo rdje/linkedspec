@@ -461,9 +461,12 @@ The `label` argument on the legacy capture helpers is compatibility syntax. The 
 
 `BACKTRACK()` and `IBACKTRACK()` reposition the parser cursor. They do not unwind parser state, do not pop a search-tree stack, and do not implement any kind of systemic backtracking. They are single local cursor moves (in the Perl reference backend, one-line `pos()` assignments).
 
-- `BACKTRACK()` rewinds the cursor to just before the **parent** match that called the current handler. Concretely, in the Perl reference backend: `pos($$STRING) = $LSPOS - length $LMATCH`. Use it when an action consumed characters for inspection and wants the next rule-level match to start from before those characters.
+- `BACKTRACK()` rewinds the cursor to just before the current **local** match being processed. Concretely, in the Perl reference backend: `pos($$STRING) = $LSPOS - length $LMATCH`. Use it when an action consumed characters for inspection and wants the next rule-level match to start from before those local-match characters.
 
-- `IBACKTRACK()` rewinds the cursor to just before the **inner** (current) match that entered the handler. Concretely, in the Perl reference backend: `pos($$STRING) = $IPOS - length $IMATCH`. Use it when an inner rule read-ahead should be invisible to the next outer rule-level match.
+- `IBACKTRACK()` rewinds the cursor to just before the **initial/entry** match for the current context. The `I` is the same initial-match concept used by the `I` lifecycle context. Concretely, in the Perl reference backend: `pos($$STRING) = $IPOS - length $IMATCH`. Use it when the whole entry match should be re-consumed by the next rule-level match.
+
+Both helpers remain visible because they target different runtime anchors: the
+rolling local-match register versus the initial/entry-match register.
 
 Both are relevant only inside action code attached to a regex slot. The lowercase forms `backtrack(label)` and `ibacktrack(label)` are legacy compatibility spelling; the `label` argument is ignored by the active lowering — the rewind always operates on the current parse cursor, not on a different target selected by label text.
 

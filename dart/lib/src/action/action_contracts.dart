@@ -360,8 +360,10 @@ const numericAliasActionIrCallNames = <String>{
 
 const currentAliasActionIrCallNames = <String>{
   '=',
+  'backtrack',
   'elif',
   'i',
+  'ibacktrack',
   'otherwise',
   'when',
 };
@@ -404,8 +406,10 @@ const _numericAliasCanonicalNames = <String, String>{
 
 const _currentAliasCanonicalNames = <String, String>{
   '=': 'set',
+  'backtrack': 'BACKTRACK',
   'elif': 'elseif',
   'i': 'if',
+  'ibacktrack': 'IBACKTRACK',
   'otherwise': 'else',
   'when': 'if',
 };

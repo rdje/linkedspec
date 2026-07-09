@@ -2031,6 +2031,40 @@ final class LinkedSpecRuntimeEngine {
         return context.registers.localMatch?.charStart;
       case 'match_end_pos':
         return context.registers.localMatch?.charEnd;
+      case 'cursor_pos':
+        return context.cursorCharOffset;
+      case 'cursor_line':
+        return context.cursorLineColumn.line;
+      case 'cursor_col':
+        return context.cursorLineColumn.column;
+      case 'cursor_rest':
+        return context.input.substring(context.cursorCodeUnit);
+      case 'cursor_rest_len':
+        return context.input.substring(context.cursorCodeUnit).runes.length;
+      case 'input_text':
+        return context.input;
+      case 'input_len':
+        return context.input.runes.length;
+      case 'input_slice':
+        return _callInputSlice(positionalArgs, context, ruleLabel, currentEdge);
+      case 'input_end_pos':
+        return context.input.runes.length;
+      case 'input_end_line':
+        return lineColumnAtCodeUnitOffset(
+          context.input,
+          context.input.length,
+        ).line;
+      case 'input_end_col':
+        return lineColumnAtCodeUnitOffset(
+          context.input,
+          context.input.length,
+        ).column;
+      case 'BACKTRACK':
+        context.rewindToLocalMatchStart();
+        return null;
+      case 'IBACKTRACK':
+        context.rewindToEntryMatchStart();
+        return null;
       case 'call':
         if (positionalArgs.isEmpty) {
           return null;
@@ -2347,6 +2381,41 @@ final class LinkedSpecRuntimeEngine {
       }
     }
     return entries;
+  }
+
+  Object? _callInputSlice(
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    if (args.isEmpty) {
+      return context.input;
+    }
+    final start = _nonNegativeInt(
+      _evaluateExpression(
+        args[0],
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      ),
+      0,
+    );
+    final width = args.length >= 2
+        ? _nonNegativeInt(
+            _evaluateExpression(
+              args[1],
+              context,
+              ruleLabel,
+              currentEdge: currentEdge,
+            ),
+            context.input.runes.length,
+          )
+        : context.input.runes.length - start;
+    final end = math.min(context.input.runes.length, start + width);
+    final startCodeUnit = charOffsetToCodeUnitOffset(context.input, start);
+    final endCodeUnit = charOffsetToCodeUnitOffset(context.input, end);
+    return context.input.substring(startCodeUnit, endCodeUnit);
   }
 
   List<Object?> _evaluateValues(
@@ -3993,6 +4062,14 @@ final class _RuntimeExecutionContext {
   Object? retv;
   int cursorCodeUnit = 0;
 
+  int get cursorCharOffset {
+    return codeUnitOffsetToCharOffset(input, cursorCodeUnit);
+  }
+
+  LineColumn get cursorLineColumn {
+    return lineColumnAtCodeUnitOffset(input, cursorCodeUnit);
+  }
+
   List<Object?> arrayFor(String name) {
     return arrays.putIfAbsent(name, () => <Object?>[]);
   }
@@ -4014,6 +4091,27 @@ final class _RuntimeExecutionContext {
 
   void exitScopedVariable(_ScopedVariableBinding binding) {
     binding.snapshot.restore(this, binding.name);
+  }
+
+  void rewindToLocalMatchStart() {
+    final target = registers.localMatch?.codeUnitStart;
+    if (target == null) {
+      return;
+    }
+    _setCursorCodeUnit(target);
+  }
+
+  void rewindToEntryMatchStart() {
+    final target = registers.entryMatch?.codeUnitStart;
+    if (target == null) {
+      return;
+    }
+    _setCursorCodeUnit(target);
+  }
+
+  void _setCursorCodeUnit(int codeUnitCursor) {
+    cursorCodeUnit = codeUnitCursor.clamp(0, input.length);
+    registers = registers.withCursorCodeUnit(cursorCodeUnit);
   }
 }
 

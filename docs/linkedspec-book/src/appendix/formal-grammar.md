@@ -419,13 +419,13 @@ sequences where input must be consumed in exact order.
 
 ### 5.3 BACKTRACK and IBACKTRACK
 
-`BACKTRACK` performs a **local cursor rewind**: if a child match fails or a condition
-is unmet, the parser rewinds the input position (the cursor) to where it was before the
-attempt. This is a local rewind — not systemic backtracking. LinkedSpec does not
-maintain a search tree, unwind partial rule matches, or restore alternative-choice
-state.
+`BACKTRACK` and `IBACKTRACK` perform **local cursor rewinds**. `BACKTRACK()`
+rewinds to the start of the current local match. `IBACKTRACK()` rewinds to the
+start of the initial/entry match for the current context; the `I` is the
+initial-match context also exposed to the `I` lifecycle.
 
-`IBACKTRACK` is the case-insensitive variant.
+This is local rewind only. LinkedSpec does not maintain a search tree, unwind
+partial rule matches, or restore alternative-choice state.
 
 ### 5.4 Recursion and Forward-Progress Termination
 

@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.4.4 — add Dart backtrack cursor rewinds
+
+**Scope:** Dart runtime cursor/input helper execution, BACKTRACK/IBACKTRACK cursor rewinds, focused runtime
+coverage, Dart package/CLI status text, mdBook runtime/status/handoff text, live docs, roadmap/task-tree status,
+and Knowledge Map facts.
+
+**Change:** Extended `LinkedSpecRuntimeEngine` with cursor-aware helper dispatch. `BACKTRACK()` now rewinds the
+live cursor to the current local match start, while `IBACKTRACK()` rewinds it to the initial/entry match start for
+the current context; the `I` is the Initial/`I` lifecycle context rather than case-insensitivity. The rewind is
+cursor-only: match records, variables, accumulators, and branch state are not rolled back. The runtime also exposes
+char-based cursor/input helpers including `cursor_pos`, `cursor_line`, `cursor_col`, `cursor_rest`,
+`cursor_rest_len`, `input_text`, `input_len`, `input_slice`, `input_end_pos`, `input_end_line`, and
+`input_end_col`, while preserving Dart's internal code-unit cursor state. The legacy lowercase
+`backtrack(label)` / `ibacktrack(label)` spellings now canonicalize through ActionIR to the same runtime helpers
+and ignore the label argument, matching the Perl compatibility contract.
+
+**Validation:** Focused runtime tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook, memory
+architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.4.3.6 — close Dart helper value no drift
 
 **Scope:** Dart runtime nested assignment no-drift fix, focused runtime coverage, package README, mdBook

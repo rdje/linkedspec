@@ -294,6 +294,16 @@ final class RuntimeMatchRegisters {
     );
   }
 
+  RuntimeMatchRegisters withCursorCodeUnit(int codeUnitCursor) {
+    return RuntimeMatchRegisters(
+      input: input,
+      cursorCodeUnit: _clampCodeUnitOffset(input, codeUnitCursor),
+      entryMatch: entryMatch,
+      localMatch: localMatch,
+      captureStartCodeUnit: captureStartCodeUnit,
+    );
+  }
+
   bool zeroProgressSince(int previousCodeUnitCursor) {
     return cursorCodeUnit ==
         _clampCodeUnitOffset(input, previousCodeUnitCursor);

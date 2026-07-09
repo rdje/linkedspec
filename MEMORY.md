@@ -18,26 +18,26 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.4.3.6` — Dart helper/value no-drift is closed; nested value-path
-  assignment now returns updated roots on success and `null` without mutation for missing/wrong intermediate paths.
-- prior_leaf: `DART-BACKEND-PARITY.4.3.5` — Dart runtime value blocks, structured controls, helper/receiver
-  `with` trailing blocks, and hash/array tree traversal callbacks are implemented.
+- latest_completed_leaf: `DART-BACKEND-PARITY.4.4` — Dart runtime now executes `BACKTRACK()` local cursor rewinds,
+  `IBACKTRACK()` initial/entry cursor rewinds, and char-based cursor/input helpers.
+- prior_leaf: `DART-BACKEND-PARITY.4.3.6` — Dart helper/value no-drift is closed; nested value-path assignment
+  now returns updated roots on success and `null` without mutation for missing/wrong intermediate paths.
 - latest_commit: HEAD containing this pointer should be
-  `DART-BACKEND-PARITY.4.3.6 - close Dart helper value no drift`; parent before this slice is
-  `DART-BACKEND-PARITY.4.3.5 - add Dart runtime controls and tree callbacks`.
+  `DART-BACKEND-PARITY.4.4 - add Dart backtrack cursor rewinds`; parent before this slice is
+  `DART-BACKEND-PARITY.4.3.6 - close Dart helper value no drift`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.4.4` pending.
-- next_action: from a clean repo, implement `DART-BACKEND-PARITY.4.4` BACKTRACK and local cursor rewind behavior.
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.4.5` pending.
+- next_action: from a clean repo, implement `DART-BACKEND-PARITY.4.5` runtime diagnostics and trace controls.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, task-tree index,
   ROADMAP/ROADMAP_V2, mdBook status/backend-handoff/formal grammar/helper chapters, relevant ADR/KM facts,
-  Dart package/source owners through `.4.3.6`, and Rust nested value-path assignment owners used as the parity
-  reference for no-autovivification semantics.
+  Dart package/source owners through `.4.4`, and Perl lowering evidence for BACKTRACK (`LMATCH/LSPOS`) versus
+  IBACKTRACK (`IMATCH/IPOS`) cursor anchors.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1027` tests**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.4.3.6` pointer commit lands; do not
+- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.4.4` pointer commit lands; do not
   pivot unless the repo is handoff-ready.

@@ -52,11 +52,13 @@ also bind `key`; array callbacks also bind `index`; reduce callbacks also bind
 `acc`. Existing scalar, array, or hash bindings with those names are restored
 after callback execution.
 
-Boundary: BACKTRACK, tracing, staged runtime execution, corpus output parity,
-Dart-specific CLI productization, and final Dart parity no-drift closeout remain
-later `DART-BACKEND-PARITY` leaves.
+`DART-BACKEND-PARITY.4.4` has since landed BACKTRACK/IBACKTRACK cursor rewinds
+and cursor/input helpers. Boundary: tracing, staged runtime execution, corpus
+output parity, Dart-specific CLI productization, and final Dart parity no-drift
+closeout remain later `DART-BACKEND-PARITY` leaves.
 
 Related facts: [[dart-runtime-hash-helpers]], [[dart-runtime-array-helpers]],
-[[dart-runtime-rule-interpreter]], [[terse-expression-valued-block-early-return]],
+[[dart-runtime-rule-interpreter]], [[dart-runtime-backtrack-cursor-helpers]],
+[[terse-expression-valued-block-early-return]],
 [[terse-trailing-block-arguments-final-state]], [[rust-hash-tree-traversal-receiver-blocks]],
 [[rust-array-tree-traversal-receiver-blocks]].

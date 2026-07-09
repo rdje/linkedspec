@@ -329,9 +329,12 @@ direct hash-index assignment values, bare-overlay `merge_hash`, and explicit
 flat-style hash splicing inside `hash(...)`. It also executes expression-valued
 blocks with block-local `return(...)`, attached and inline structured controls,
 helper/receiver `with` trailing blocks, and hash/array tree traversal receiver
-callbacks with scoped callback bindings. BACKTRACK behavior,
-tracing/diagnostics, staged function execution, and
-corpus-output parity remain later Dart leaves.
+callbacks with scoped callback bindings. It now also executes `BACKTRACK()` as a
+rewind to the current local match start, `IBACKTRACK()` as a rewind to the
+initial/entry match start for the current context, and char-based cursor/input
+helpers such as `cursor_pos`, `cursor_rest`, `input_slice`, and `input_end_pos`.
+Tracing/diagnostics, staged function execution, and corpus-output parity remain
+later Dart leaves.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under
@@ -482,7 +485,8 @@ It provides:
    - Regex engine with position tracking (equivalent to `//gcp` and `\G` anchoring).
    - Accumulator model (arrays, hashes, scalars).
    - Lifecycle execution engine (I/LS/LE/E/EX/IT/LX ordering).
-   - BACKTRACK (local cursor save/restore).
+   - BACKTRACK/IBACKTRACK local cursor rewinds (`BACKTRACK` to local match start,
+     `IBACKTRACK` to initial/entry match start).
    - Zero-progress guard.
 
 10. **Test harness** — runs `tests/corpus/` entries and compares output to

@@ -10,8 +10,8 @@ parsing/contract resolution, user-function registry scaffolding, a
 backend-neutral compiled-spec state model, runtime regex/match-state primitives,
 a first rule-dispatch interpreter, core runtime value/capture helpers,
 string/numeric helper execution, array helper execution, and hash helper
-execution, plus value-block/control/tree helper execution before full
-BACKTRACK/tracing/corpus semantics land.
+execution, plus value-block/control/tree helper execution and BACKTRACK/cursor
+helper behavior before full tracing/corpus semantics land.
 
 ## Commands
 
@@ -29,8 +29,8 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.4.3.6` is the current completed runtime boundary; `.4.4`
-is the next BACKTRACK frontier. The package can round-trip
+`DART-BACKEND-PARITY.4.4` is the current completed runtime boundary; `.4.5`
+is the next diagnostics/trace frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -62,6 +62,9 @@ values, and explicit flat-style hash splicing inside `hash(...)`. It now also
 executes expression-valued blocks with block-local `return(...)`, attached and
 inline `if`/`when`/`switch`/`while` controls, helper-form `with(...) { ... }`,
 receiver `.with() { ... }`, and hash/array tree traversal receiver callbacks
-with scoped callback bindings.
-BACKTRACK, tracing, staged runtime execution, and corpus output parity remain
-later leaves in `docs/tasks/DART-BACKEND-PARITY.md`.
+with scoped callback bindings. It now also executes `BACKTRACK()` as a rewind
+to the current local match start, `IBACKTRACK()` as a rewind to the initial/entry
+match start for the current context, and char-based cursor/input helpers such as
+`cursor_pos`, `cursor_rest`, `input_slice`, and `input_end_pos`.
+Tracing, staged runtime execution, and corpus output parity remain later leaves
+in `docs/tasks/DART-BACKEND-PARITY.md`.
