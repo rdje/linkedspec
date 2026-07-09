@@ -8,7 +8,8 @@ Parser, compiled state, runtime matching, and first rule interpreter are availab
 Value blocks, structured controls, with-blocks, and tree traversal helpers are available.
 Explicit cursor controls and cursor/input helpers are available.
 Runtime structured diagnostics are available.
-Tracing, staged runtime execution, and corpus-output parity land in later DART-BACKEND-PARITY leaves.
+Trace controls, event classes, and sink routing are available.
+Runtime branch/lifecycle trace instrumentation, staged runtime execution, and corpus-output parity land in later DART-BACKEND-PARITY leaves.
 ''';
 
 void main(List<String> args) {

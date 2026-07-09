@@ -132,5 +132,21 @@ export 'src/scaffold.dart'
         describeLinkedSpecDartScaffold,
         linkedSpecDartPackageName,
         linkedSpecDartScaffoldStatus;
+export 'src/trace/trace.dart'
+    show
+        LinkedSpecTraceConfig,
+        LinkedSpecTraceEmitter,
+        LinkedSpecTraceEvent,
+        LinkedSpecTraceEventKind,
+        LinkedSpecTraceException,
+        LinkedSpecTraceLevel,
+        LinkedSpecTraceScope,
+        LinkedSpecTraceSinkMode,
+        linkedSpecTraceDumpDebug,
+        linkedSpecTraceDumpFull,
+        linkedSpecTraceDumpHigh,
+        linkedSpecTraceDumpLow,
+        linkedSpecTraceDumpMedium,
+        linkedSpecTraceDumpNone;
 export 'src/validation/spec_validator.dart'
     show SpecValidationException, validateSpec;

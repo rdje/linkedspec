@@ -31,4 +31,5 @@ keep child-rule attribution. The parse boundary remains a fallback wrapper and
 preserves richer lower-level diagnostics when they already exist.
 
 Related facts: [[dart-runtime-diagnostics-trace-split]],
-[[runtimecontext-boundary]], [[trace-cross-variant-capability-contract]].
+[[dart-trace-controls-sinks]], [[runtimecontext-boundary]],
+[[trace-cross-variant-capability-contract]].

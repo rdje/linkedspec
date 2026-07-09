@@ -4,6 +4,7 @@ import '../action/action_ast.dart';
 import '../action/action_contracts.dart';
 import '../ast/spec_ast.dart';
 import '../compiler/compiled_spec.dart';
+import '../trace/trace.dart';
 import 'matching.dart';
 
 final class RuntimeDiagnostic {
@@ -127,7 +128,11 @@ final class LinkedSpecRuntimeEngine {
   final String? specName;
   final String? specPath;
 
-  RuntimeParseResult parse(String input, {String? topRule}) {
+  RuntimeParseResult parse(
+    String input, {
+    String? topRule,
+    LinkedSpecTraceEmitter? trace,
+  }) {
     final label = topRule ?? _defaultTopRuleLabel();
     final context = _RuntimeExecutionContext(
       engine: this,
@@ -135,10 +140,16 @@ final class LinkedSpecRuntimeEngine {
       parseMode: parseMode,
       maxIterations: maxIterations,
       topRule: label,
+      trace: trace,
+    );
+    final traceScope = trace?.enterScope(
+      'dart_runtime:parse',
+      'top_rule=$label',
+      LinkedSpecTraceLevel.high,
     );
     try {
       final result = _executeRule(label, 0, context);
-      return RuntimeParseResult(
+      final parseResult = RuntimeParseResult(
         matched: result.matched,
         value: result.value,
         output: List<Object?>.unmodifiable([_copyValue(result.value)]),
@@ -151,8 +162,15 @@ final class LinkedSpecRuntimeEngine {
           context.lifecycleEvents,
         ),
       );
+      if (traceScope != null) {
+        trace?.exitScope(
+          traceScope,
+          'matched=${parseResult.matched} cursor=${parseResult.cursorCodeUnit}',
+        );
+      }
+      return parseResult;
     } on RuntimeInterpreterException catch (error) {
-      throw error.withDiagnostic(
+      final wrapped = error.withDiagnostic(
         context.diagnostic(
           stage: 'runtime_execution',
           summary: 'Dart runtime interpreter failed',
@@ -160,11 +178,36 @@ final class LinkedSpecRuntimeEngine {
           ruleLabel: context.currentRuleLabel ?? label,
         ),
       );
+      if (traceScope != null) {
+        trace?.exitScope(traceScope, 'error=${wrapped.message}');
+      }
+      throw wrapped;
     }
   }
 
-  RuntimeParseResult execute(String input, {String? topRule}) {
-    return parse(input, topRule: topRule);
+  RuntimeParseResult parseWithTrace(
+    String input,
+    LinkedSpecTraceConfig traceConfig, {
+    String? topRule,
+  }) {
+    final trace = LinkedSpecTraceEmitter(traceConfig);
+    return parse(input, topRule: topRule, trace: trace);
+  }
+
+  RuntimeParseResult execute(
+    String input, {
+    String? topRule,
+    LinkedSpecTraceEmitter? trace,
+  }) {
+    return parse(input, topRule: topRule, trace: trace);
+  }
+
+  RuntimeParseResult executeWithTrace(
+    String input,
+    LinkedSpecTraceConfig traceConfig, {
+    String? topRule,
+  }) {
+    return parseWithTrace(input, traceConfig, topRule: topRule);
   }
 
   String _defaultTopRuleLabel() {
@@ -4226,6 +4269,7 @@ final class _RuntimeExecutionContext {
     required this.parseMode,
     required this.maxIterations,
     required this.topRule,
+    required this.trace,
   }) : registers = RuntimeMatchRegisters.empty(input);
 
   final LinkedSpecRuntimeEngine engine;
@@ -4233,6 +4277,7 @@ final class _RuntimeExecutionContext {
   final LinkedSpecParseMode parseMode;
   final int maxIterations;
   final String topRule;
+  final LinkedSpecTraceEmitter? trace;
   final Map<String, Object?> variables = <String, Object?>{};
   final Map<String, List<Object?>> arrays = <String, List<Object?>>{};
   final Map<String, Map<String, Object?>> hashes =

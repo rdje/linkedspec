@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.4.5.2 — add Dart trace controls**
+  (DONE — trace levels, controls, event primitives, and sinks).
+
+  **Change:** Dart now exports trace levels/config/emitter/event primitives, parses the documented
+  `LINKEDSPEC_TRACE_*` environment controls, supports stdout/routed-file/mirror sinks with reset/truncate behavior,
+  and exposes traced runtime entrypoints that preserve parse output while emitting parse-scope events.
+
+  **Boundary:** This lands trace controls only. Runtime branch/lifecycle/source-boundary trace instrumentation
+  remains `.4.5.3`; staged runtime execution and corpus output parity remain later leaves. Active implementation
+  work advances to `DART-BACKEND-PARITY.4.5.3`.
+
+  **Verification:** Focused trace tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook, memory
+  architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.4.5.1 — add Dart runtime diagnostics**
   (DONE — structured diagnostics on Dart runtime exceptions).
 

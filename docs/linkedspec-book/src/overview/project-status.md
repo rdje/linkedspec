@@ -66,8 +66,10 @@ Three backbone items tracked major structural modernization — all done:
   `restore_cursor()` stack semantics, `rewind_match_start()` / `rewind_entry_start()` anchor rewinds, and
   char-based cursor/input helpers, and `capture_until_boundary(rule[, ...])` non-consuming structural boundary
   capture. Runtime failures now expose structured Dart `RuntimeDiagnostic` payloads through
-  `RuntimeInterpreterException.diagnostic` with stable owner/stage/rule/source attribution. The next slice is trace
-  controls, event classes, and sink behavior.
+  `RuntimeInterpreterException.diagnostic` with stable owner/stage/rule/source attribution. Dart also has ordered
+  trace levels, `LinkedSpecTraceConfig`, event/scope primitives, stdout/routed-file/mirror sinks with
+  reset/truncate behavior, and traced runtime entrypoints that preserve parse output while emitting a parse-scope
+  event. The next slice is runtime branch/lifecycle/source-boundary trace instrumentation.
 - **Non-current helper code purge** - `NONCURRENT-HELPER-CODE-PURGE` is closed. Perl source cleanup, Rust source cleanup, active test/tool/generated fixture and checked-in `.spec` migration, and final no-drift scans are complete. Retired helper-looking calls use generic unknown-helper fallback behavior, active generic-unknown-helper tests use invented helper names, and active helper-call/label/tag scans are clean.
 - **Rust generated-source breadth** — the Rust interpreter oracle is the current cross-variant parity gate. Generated Rust source already covers the current structural families and a curated corpus subset; broadening generated-source proof to the full manifest remains a separately owned future follow-on.
 - **Lifecycle-family audit** — verified complete (2026-06-14). All 7 lifecycle markers (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`) have full semicolon-light structured authoring coverage. The current separator contract is newline-or-semicolon: newlines separate top-level helper statements, and multiple same-line statements require semicolons. No lifecycle-specific semantic gaps found.

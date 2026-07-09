@@ -10,9 +10,9 @@ parsing/contract resolution, user-function registry scaffolding, a
 backend-neutral compiled-spec state model, runtime regex/match-state primitives,
 a first rule-dispatch interpreter, core runtime value/capture helpers,
 string/numeric helper execution, array helper execution, and hash helper
-execution, plus value-block/control/tree helper execution and explicit
-cursor-control behavior, and structured runtime diagnostics before full tracing/
-corpus semantics land.
+execution, plus value-block/control/tree helper execution, explicit
+cursor-control behavior, structured runtime diagnostics, and trace
+controls/sinks before full runtime trace instrumentation/corpus semantics land.
 
 ## Commands
 
@@ -30,8 +30,8 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.4.5.1` is the current completed runtime boundary; `.4.5.2`
-is the next trace-control frontier. The package can round-trip
+`DART-BACKEND-PARITY.4.5.2` is the current completed runtime boundary; `.4.5.3`
+is the next runtime trace-instrumentation frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -70,6 +70,10 @@ as `cursor_pos`, `cursor_rest`, `input_slice`, and `input_end_pos`.
 Runtime failures now expose `RuntimeDiagnostic` payloads through
 `RuntimeInterpreterException.diagnostic` with stable `type`, `stage`,
 `owner_stage`, `summary`, `detail`, `top_rule`, `rule_label`,
-`handler_source_label`, and optional `spec_name` / `spec_path` fields. Tracing,
-staged runtime execution, and corpus output parity remain later leaves
-in `docs/tasks/DART-BACKEND-PARITY.md`.
+`handler_source_label`, and optional `spec_name` / `spec_path` fields. Dart now
+also has `LinkedSpecTraceConfig`, `LinkedSpecTraceLevel`,
+`LinkedSpecTraceEmitter`, event/scope primitives, stdout/routed-file/mirror sink
+behavior with reset/truncate, and traced runtime entrypoints that preserve parse
+output while emitting a parse-scope event. Runtime branch/lifecycle/source-boundary
+trace instrumentation, staged runtime execution, and corpus output parity remain
+later leaves in `docs/tasks/DART-BACKEND-PARITY.md`.

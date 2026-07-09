@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.4.5.2 — Dart trace controls):
+  Added the Dart trace control layer under `dart/lib/src/trace/trace.dart`. It mirrors the documented external
+  contract: ordered `none`/`low`/`medium`/`high`/`full`/`debug` levels, `LINKEDSPEC_TRACE_*` environment controls,
+  stdout/route/mirror sinks, routed-file reset/truncate, structured event/scope/decision/log/dump primitives, and
+  default quiet behavior. `LinkedSpecRuntimeEngine` now accepts an optional trace emitter and exposes
+  `parseWithTrace(...)` / `executeWithTrace(...)`. This leaf emits only parse-scope enter/exit events so output
+  preservation and sink behavior are locked before `.4.5.3` adds runtime branch/lifecycle/source-boundary events.
+
 - 2026-07-09 (DART-BACKEND-PARITY.4.5.1 — Dart runtime diagnostics):
   Added the first Dart runtime structured diagnostic surface. `RuntimeDiagnostic` is public and is carried by
   `RuntimeInterpreterException.diagnostic`; it uses the neutral diagnostic fields from the mdBook contract rather

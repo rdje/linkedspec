@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.4.5.2 — add Dart trace controls
+
+**Scope:** Dart trace-control module, runtime traced entrypoints, public exports, focused trace tests, Dart
+README/CLI/scaffold status, mdBook trace/status/handoff text, live docs, task-tree metadata, and Knowledge Map
+facts.
+
+**Change:** Added Dart trace levels, `LinkedSpecTraceConfig`, documented environment control parsing, structured
+event/scope/decision/log/dump primitives, stdout/routed-file/mirror sink behavior, reset/truncate support, and
+`LinkedSpecRuntimeEngine` traced entrypoints. Traced runtime entrypoints preserve successful parse output and emit
+a parse-scope event; branch/lifecycle/source-boundary runtime instrumentation remains `.4.5.3`.
+
+**Validation:** Focused trace tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook build, memory
+architecture, Knowledge Map generation/check, task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.4.5.1 — add Dart runtime diagnostics
 
 **Scope:** Dart runtime diagnostic API, public package exports, focused runtime coverage, Dart README/CLI status,

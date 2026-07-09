@@ -339,8 +339,13 @@ carry a structured `RuntimeDiagnostic` on `RuntimeInterpreterException`, with
 the neutral diagnostic fields `type`, `stage`, `owner_stage`, `summary`,
 `detail`, `top_rule`, `rule_label`, `handler_source_label`, and optional
 `spec_name` / `spec_path`. Successful parse output remains unchanged.
-Trace controls, staged function execution, and corpus-output parity remain later
-Dart leaves.
+Dart now also has the trace-control layer: ordered trace levels,
+`LinkedSpecTraceConfig`, structured event/scope primitives, stdout/routed-file/
+mirror sinks with reset/truncate behavior, and `parseWithTrace(...)` /
+`executeWithTrace(...)` entrypoints that preserve parse output while emitting a
+parse-scope event. Runtime branch/lifecycle/source-boundary trace
+instrumentation, staged function execution, and corpus-output parity remain
+later Dart leaves.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

@@ -1,6 +1,6 @@
 const linkedSpecDartPackageName = 'linkedspec_dart';
 const linkedSpecDartScaffoldStatus =
-    'runtime interpreter with structured diagnostics ready';
+    'runtime interpreter with trace controls ready';
 
 String describeLinkedSpecDartScaffold() {
   return '$linkedSpecDartPackageName $linkedSpecDartScaffoldStatus';

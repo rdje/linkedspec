@@ -103,6 +103,27 @@ Rust compile/spec-parser/staged-dispatch trace events are present as of `.4.3`; 
 runtime branch/mark/capture events are present as of `.4.4`; `.4.5` closes the cross-variant parity proof and
 records the reusable future-variant checklist.
 
+## Dart variant trace status
+
+As of `DART-BACKEND-PARITY.4.5.2`, Dart has the trace-control layer but does not yet claim full trace parity.
+
+The Dart control surface is:
+
+- `LinkedSpecTraceLevel` with ordered levels equivalent to `none`, `low`, `medium`, `high`, `full`, and `debug`;
+- `LinkedSpecTraceConfig`, including `fromEnvironment(...)` for `LINKEDSPEC_TRACE_LEVEL`,
+  `LINKEDSPEC_DUMP_VERBOSITY`, `LINKEDSPEC_TRACE_FILE`, `LINKEDSPEC_TRACE_MIRROR_STDOUT`,
+  `LINKEDSPEC_TRACE_RESET_FILE`, and `LINKEDSPEC_TRACE_EMOJI`;
+- `LinkedSpecTraceSinkMode` for stdout, routed-file, and mirror sinks;
+- `LinkedSpecTraceEmitter` event primitives: `emitEvent`, `enterScope`, `exitScope`, `traceDecision`,
+  `logOutput`, and `logDump`;
+- `LinkedSpecRuntimeEngine.parse(..., trace: emitter)`, `execute(..., trace: emitter)`,
+  `parseWithTrace(...)`, and `executeWithTrace(...)`.
+
+The `.4.5.2` proof covers default-quiet behavior, level gating, routed-file reset/truncate, mirror output,
+structured event classes, decision/log/dump primitives, and runtime traced entrypoints preserving parse output.
+Current Dart runtime tracing emits the parse entry/exit scope only. Runtime branch, lifecycle, dispatch, and
+source-boundary trace instrumentation is the next Dart leaf (`DART-BACKEND-PARITY.4.5.3`).
+
 ## Future variant trace parity checklist
 
 Any future LinkedSpec variant must satisfy this checklist before it claims trace parity:
