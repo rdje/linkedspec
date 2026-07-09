@@ -1500,16 +1500,16 @@ fn terse_1_1_2_auto_existing_vars_are_per_parse_not_leaky() {
 
 // ── SPEC-FORMAT-TERSE.1.2.2 — Rust lockstep parity for .1.2.1 (Channel 1):
 // a BARE working var in a type-implying position auto-exists with
-// the position-implied kind (operator assignment target -> scalar, push/push_nonempty
+// the position-implied kind (operator assignment target -> scalar, append
 // target -> array). On the Perl reference (.1.2.1) the engine auto-supplies the
 // per-invocation `my`; on Rust resolve_scalar_target/resolve_array_target now map
 // the bare name to the working variable and the per-parse RuntimeContext HashMap
-// auto-vivifies it (no declare, no leak). The mutation target is bare (Channel 1);
+// auto-vivifies it (no predeclaration, no leak). The mutation target is bare (Channel 1);
 // the value is read back through `name`.
 
 #[test]
 fn terse_1_2_2_bare_scalar_arg_auto_exists() {
-    // v = ... with a BARE target -- no scalar-slot marker, no declare.
+    // v = ... with a BARE target -- no scalar-slot marker, no predeclaration.
     let grammar = "Top::\n /x/ -> Done { v = \"ok\"; return(v) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
@@ -1527,7 +1527,7 @@ fn terse_1_2_2_bare_array_arg_auto_exists() {
         serde_json::json!([["a", "b"]]),
         "bare push target auto-exists as an array (= Perl [\"a\",\"b\"] wrapped one level)"
     );
-    // The retired push_nonempty helper is modeled with an explicit current
+    // The old filtered append behavior is modeled with an explicit current
     // nonempty guard around push.
     let ne = "Top::\n /x/ -> Done { if(is_nonempty(\"a\"), push(items, \"a\")); if(is_nonempty(\"\"), push(items, \"\")); if(is_nonempty(\"b\"), push(items, \"b\")); return(copy(array(items))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
@@ -1694,8 +1694,8 @@ fn terse_1_2_3_2_bare_aggregate_reads_are_per_parse() {
 }
 
 // ── SPEC-FORMAT-TERSE.1.4.2 — Rust lockstep parity for .1.4.1:
-// `set` is an assign alias, `cat` is a concat alias, and `copy` is a unified
-// array/hash value-copy helper. These tests stay in the same non-recursive
+// `set`, `cat`, and `copy` cover current assignment, string-join, and value-copy
+// helper forms. These tests stay in the same non-recursive
 // parent-edge proof class as the oracle fixtures.
 
 #[test]
@@ -1749,7 +1749,7 @@ fn terse_1_3_3_set_key_statement_mutates_hash() {
     assert_eq!(
         r1,
         serde_json::json!([{"stage": "ab"}]),
-        "set_key(meta, key, value) mutates a no-declare hash target"
+        "set_key(meta, key, value) mutates a predeclaration-free hash target"
     );
     assert_eq!(
         r1, r2,
@@ -1777,7 +1777,7 @@ fn terse_1_3_4_1_scalar_assignment_operator_matches_set() {
     assert_eq!(
         actual,
         serde_json::json!(["ok"]),
-        "scalar assignment operator mutates a no-declare scalar target"
+        "scalar assignment operator mutates a predeclaration-free scalar target"
     );
     assert_eq!(
         actual,
@@ -1807,7 +1807,7 @@ fn terse_1_3_4_2_array_append_operator_matches_push() {
     assert_eq!(
         actual,
         serde_json::json!([["a", "b"]]),
-        "array append operator mutates a no-declare array target"
+        "array append operator mutates a predeclaration-free array target"
     );
     assert_eq!(
         actual,
@@ -1837,7 +1837,7 @@ fn terse_1_3_4_3_hash_index_assignment_operator_matches_set_key() {
     assert_eq!(
         actual,
         serde_json::json!([{"stage": "ab"}]),
-        "hash-index assignment operator mutates a no-declare hash target"
+        "hash-index assignment operator mutates a predeclaration-free hash target"
     );
     assert_eq!(
         actual,
@@ -1872,7 +1872,7 @@ fn terse_1_4_2_set_target_is_per_parse_not_leaky() {
     let r1 = engine.execute("xhello").expect("run1");
     let r2 = engine.execute("xhello").expect("run2");
     assert_eq!(r1, serde_json::json!(["ok"]), "set bare target first run");
-    assert_eq!(r1, r2, "set alias uses assign's per-parse target semantics");
+    assert_eq!(r1, r2, "set keeps per-parse target semantics");
 }
 
 // ── SPEC-FORMAT-TERSE.1.5.2 — primitive literal parity:
@@ -2860,7 +2860,10 @@ fn rust_parity_7_3_4_3_portmap_concatenation_aggregates_child_returns() {
 
     assert_eq!(
         build_and_run(&grammar, "{foo bar[2]}"),
-        serde_json::json!([["?concat:", [["?bare:", ["foo"]], ["?bit:", ["bar", "2"]]]]]),
+        serde_json::json!([[
+            "?concatenation:",
+            [["?bare:", ["foo"]], ["?bit:", ["bar", "2"]]]
+        ]]),
         "portmap recursive concatenation keeps child classification payloads in the concatenation target"
     );
 }
@@ -3217,9 +3220,9 @@ Done::
 }
 
 #[test]
-fn scalaref_retirement_4_function_helper_returns_undef_as_unknown_helper() {
+fn unknown_function_helper_returns_undef() {
     let grammar = r#"Top::
- /x/ -> Done { return(scalaref(retv, "content")) }
+ /x/ -> Done { return(unknown_scalar_ref(retv, "content")) }
 
 Done::
  /[a-z]+/ I.return(hash("content", entry_text()))
@@ -3227,14 +3230,14 @@ Done::
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([null]),
-        "function-form scalaref is no longer a recognized Rust helper"
+        "unknown function-form helper returns undef"
     );
 }
 
 #[test]
-fn scalaref_retirement_4_receiver_method_returns_undef() {
+fn unknown_receiver_method_returns_undef() {
     let grammar = r#"Top::
- /x/ -> Done { set_key(meta, "a", 1); return(hash(meta).scalaref("a")) }
+ /x/ -> Done { set_key(meta, "a", 1); return(hash(meta).unknown_hash_method("a")) }
 
 Done::
  /[a-z]+/
@@ -3242,7 +3245,7 @@ Done::
     assert_eq!(
         build_and_run(grammar, "xhello"),
         serde_json::json!([null]),
-        "receiver-dot scalaref is no longer a recognized Rust hash method"
+        "unknown receiver-dot hash method returns undef"
     );
 }
 

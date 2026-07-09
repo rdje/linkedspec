@@ -257,14 +257,38 @@ unknown-helper handling, not through a name-specific removal compatibility layer
   Commit: `NONCURRENT-HELPER-CODE-PURGE.3 - purge Rust helper diagnostics`
 
 - ID: `NONCURRENT-HELPER-CODE-PURGE.4`
-  Status: `pending`
+  Status: `done`
   Goal: Migrate active tests, tools, generated fixtures, and checked-in `.spec` labels away from non-current helper
     spellings.
   Acceptance: Active Perl/Rust test strings, tooling fixtures, generated corpus inputs, and checked-in `.spec`
     labels/source strings no longer carry the removed helper spellings except unavoidable generic-language false
     positives.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Active executable retired-helper call examples were migrated to current
+    syntax or invented unknown-helper names. `tools/inspect_spec_codegen.pl` now shows current return examples;
+    `t/noncurrent_helper_metadata.t` proves generic unknown-helper metadata without embedding retired helper calls;
+    deep-nesting validation uses current assignment syntax; Rust/Perl unknown-helper probes use invented names.
+    Checked-in `.spec`/corpus collisions were renamed deliberately: `ebnf.spec` and copied corpus inputs now use
+    `return_scalar_value` / `return_array_value`, and `portmap.spec` plus oracle corpus/book examples use
+    `?concatenation:` instead of the retired-name collision tag. Focused call-shape, label/tag, and `?concat:`
+    scans over active test/tool/spec/corpus/book surfaces are clean.
+  Acceptance Checklist:
+    - [x] **REPRODUCE / ISSUE** — Active test/tool strings and checked-in spec/corpus labels still carried removed
+      helper spellings after Perl and Rust source recognition paths were closed.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: the remaining matches were fixture/example text rather than
+      source recognition paths: `tools/inspect_spec_codegen.pl`, `t/noncurrent_helper_metadata.t`,
+      `t/phase0_validation_fuzz.t`, Rust/Perl unknown-helper regression strings, `specs/ebnf.spec`,
+      `specs/portmap.spec`, and their Rust oracle corpus copies.
+    - [x] **FIX** — Replaced active examples with current syntax or invented unknown-helper names; renamed EBNF
+      rule/output labels to `return_scalar_value` / `return_array_value`; renamed the portmap concatenation tag to
+      `?concatenation:` and regenerated the corpus.
+    - [x] **ADDRESSED (verified)** — Exact retired-helper call-shape scans, retired label/tag scans, and exact
+      `?concat:` scans are clean over active test/tool/spec/corpus/book surfaces.
+    - [x] **NO REGRESSION** — Syntax, focused Perl tests, full phase0, regenerated Rust corpus oracle, full
+      `linkedspec-runtime` package tests, and mdBook build pass.
+    - [x] **LOCKSTEP** — mdBook walkthroughs, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
+      `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`, roadmap tracker rows, architecture state, Knowledge Map facts,
+      `docs/TASK_TREE.md`, and this task tree are updated.
+  Commit: `NONCURRENT-HELPER-CODE-PURGE.4 - migrate retired helper fixtures`
 
 - ID: `NONCURRENT-HELPER-CODE-PURGE.5`
   Status: `pending`
@@ -278,7 +302,7 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `NONCURRENT-HELPER-CODE-PURGE.4` | `pending` | Perl and Rust source recognition/diagnostic paths are closed; migrate active tests, tools, generated fixtures, and checked-in `.spec` labels away from the retired helper spellings next. |
+| 1 | `NONCURRENT-HELPER-CODE-PURGE.5` | `pending` | Source and active fixture/spec migrations are closed; run the final no-drift scan and documentation closeout for the purge. |
 
 ## Decisions
 
@@ -292,11 +316,12 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 
 ## Open Questions
 
-- None blocking `.4`. Source recognition/diagnostic paths are closed; fixture/tool/spec migration remains.
+- None blocking `.5`. Source recognition/diagnostic paths and fixture/tool/spec migration are closed; final
+  no-drift closeout remains.
 
 ## Blockers
 
-- None known before `.4`.
+- None known before `.5`.
 
 ## Verification Log
 
@@ -317,6 +342,10 @@ unknown-helper handling, not through a name-specific removal compatibility layer
   known-call validation no longer admits retired helper spellings, `declare(...)` keyword arguments are not
   specially parsed, retired helper-looking runtime calls use the generic unknown-helper fallback, and full
   `linkedspec-core` plus `linkedspec-runtime` package tests pass.
+- `2026-07-09` — `.4` migrated active tests, tools, generated fixtures, and checked-in `.spec` labels/source
+  strings away from retired helper spellings. EBNF return-label collisions now use `return_scalar_value` /
+  `return_array_value`; portmap concatenation output now uses `?concatenation:`; focused scans, full phase0, full
+  `linkedspec-runtime`, corpus oracle, and mdBook build pass.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
@@ -325,6 +354,7 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 | `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.2.3` | `perl -c -Iperl perl/LinkedSpec/ActionIR/Contracts.pm`; `perl -c -Iperl t/noncurrent_helper_metadata.t`; `prove -q -Iperl t/noncurrent_helper_metadata.t`; focused exact metadata scan; `prove -q -Iperl t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t t/noncurrent_helper_metadata.t`; `PERL5LIB= prove -q -Iperl t/phase0_regression.t`. | PASS. Raw-compat diagnostic labels no longer publish exact retired helper names, and metadata tests lock contract/canonical behavior against the retired helper set. |
 | `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.2.4` | Exact retired-helper call-shape scans over Perl source; direct current-helper and retired-helper behavior probes; `perl -c perl/LinkedSpec.pm`; `perl -c -Iperl t/noncurrent_helper_metadata.t`; `prove -q -Iperl t/noncurrent_helper_metadata.t t/actionir_ast_parser.t t/trace_actionir_method_lowering.t t/trace_actionir_pipeline.t`; `PERL5LIB= prove -q -Iperl t/phase0_regression.t`. | PASS. Perl source no longer has exact retired helper-call recognition paths; current helpers still lower; retired value-position helper-looking calls use the same unsupported-helper sentinel path as invented unknown helpers. |
 | `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.3` | Rust focused retired-helper scans; `cargo fmt --manifest-path rust/Cargo.toml --all --check`; `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core`; `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime`; focused runtime generic-unknown-helper and `scalaref_retirement_4` runs. | PASS. Rust source no longer recognizes or diagnoses retired helper spellings through name-specific paths; current helpers and runtime package tests remain green. |
+| `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.4` | Exact retired-helper call-shape scans; exact retired label/tag scans; exact `?concat:` scan; `perl -c -Iperl` for touched tests/tools; `prove -q -Iperl t/noncurrent_helper_metadata.t`; `prove -q -Iperl t/phase0_validation_fuzz.t`; `PERL5LIB= prove -q -Iperl t/phase0_regression.t`; `perl tools/gen_oracle_corpus.pl`; Rust focused integration tests; `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle`; `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime`; `mdbook build docs/linkedspec-book`. | PASS. Active tests/tools/specs/corpus inputs no longer carry removed helper spellings as executable calls or colliding labels/tags. |
 
 ## Commit Log
 
@@ -336,6 +366,7 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 | `NONCURRENT-HELPER-CODE-PURGE.2.3` | `NONCURRENT-HELPER-CODE-PURGE.2.3 - purge Perl helper metadata names` | Perl raw-compat metadata no longer uses exact retired helper names as diagnostic labels. |
 | `NONCURRENT-HELPER-CODE-PURGE.2.4` | `NONCURRENT-HELPER-CODE-PURGE.2.4 - close Perl source purge scans` | Perl source purge closeout scans/probes passed; Rust source cleanup is next. |
 | `NONCURRENT-HELPER-CODE-PURGE.3` | `NONCURRENT-HELPER-CODE-PURGE.3 - purge Rust helper diagnostics` | Rust source recognition and name-specific retired-helper diagnostics removed; fixture/tool/spec migration is next. |
+| `NONCURRENT-HELPER-CODE-PURGE.4` | `NONCURRENT-HELPER-CODE-PURGE.4 - migrate retired helper fixtures` | Active test/tool/spec/corpus spellings migrated; final no-drift closeout is next. |
 
 ## Changelog
 
@@ -345,3 +376,5 @@ unknown-helper handling, not through a name-specific removal compatibility layer
   cleanup under `.3`.
 - `2026-07-09`: Closed Rust source recognition/diagnostic cleanup through `.3`; active frontier advances to
   active test/tool/generated fixture and checked-in `.spec` migration under `.4`.
+- `2026-07-09`: Closed active test/tool/generated fixture and checked-in `.spec` migration through `.4`; active
+  frontier advances to final no-drift scan and documentation closeout under `.5`.

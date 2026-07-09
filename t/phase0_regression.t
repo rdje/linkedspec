@@ -42682,7 +42682,7 @@ subtest 'portmap_bare_bit_slice_classification_smoke' => sub {
         [q{baz[7:0]}, ['?slice:', ['baz', '7', '0']]],
         [q{0x1f}, ['?constant:', ['0x1f']]],
         [q{foo[?bar]}, ['?bit:', ['foo', '?bar']]],
-        [q{{foo bar[2]}}, ['?concat:', [['?bare:', ['foo']], ['?bit:', ['bar', '2']]]]],
+        [q{{foo bar[2]}}, ['?concatenation:', [['?bare:', ['foo']], ['?bit:', ['bar', '2']]]]],
     );
 
     for my $case (@cases) {
@@ -42704,7 +42704,7 @@ subtest 'portmap_spec_prefers_canonical_container_wrappers_in_bare_bit_slice_ban
     like($source_content, qr/if\(num_eq\(count\(array\(portmap\)\), 1\)\)\s*\n/, 'portmap top lifecycle now branches through helper-form count comparison without a redundant marker separator');
     like($source_content, qr/return\(array\(portmap\)\.first\(\)\);/, 'portmap top lifecycle now returns singleton entries through the array receiver first() helper');
     like($source_content, qr/return\(array\("\?multi:", copy\(array\(portmap\)\)\)\);/, 'portmap top lifecycle now builds multi-entry return payload through helper-form copy');
-    like($source_content, qr/return\(array\("\?concat:", copy\(array\(concatenation\)\)\)\)/, 'portmap concatenation rule now builds concat payload through helper-form copy');
+    like($source_content, qr/return\(array\("\?concatenation:", copy\(array\(concatenation\)\)\)\)/, 'portmap concatenation rule now builds concatenation payload through helper-form copy');
     like($source_content, qr/return\(array\("\?slice:", array\(flat_array\(entry_parts\)\)\)\);/, 'portmap slice classification return now uses nested canonical array wrappers');
     like($source_content, qr/return\(array\("\?bare:", array\(flat_array\(entry_parts\)\)\)\);/, 'portmap bare classification return now uses nested canonical array wrappers');
     unlike($source_content, qr/(?:^|\n)\s*(?:if|elseif)\(.*\);\s*(?:\n|$)|(?:^|\n)\s*else\(\);/m, 'portmap flow markers no longer keep redundant standalone separators');
@@ -45818,9 +45818,9 @@ subtest 'spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments' => su
         'direct nested access lowers the explicit mixed path',
     );
     like(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(scalaref(foo, "a"))'),
-        qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:scalaref/,
-        'retired function-form scalaref is no longer lowered as a supported value helper',
+        LinkedSpec::call_spec_handler_subst('Top', 'return(unknown_scalar_ref(foo, "a"))'),
+        qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:unknown_scalar_ref/,
+        'unknown function-form helper is not lowered as a supported value helper',
     );
 
     my $spec = "Top::\n"
@@ -46300,8 +46300,8 @@ subtest 'spec_format_terse_2_3_5_2_hash_receiver_value_chains' => sub {
         'hash receiver chain lowers through set_key/sorted_keys/join_values helper contracts');
     like($L->('return(meta.pick_keys("a").sorted_values().first())'), qr/__ls_pick.*map \{.*sort keys.*->\[0\]/s,
         'named hash field reads use terse receiver pipelines');
-    like($L->('return(hash(meta).scalaref("a"))'), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:scalaref/s,
-        'retired receiver-dot scalaref is no longer lowered as a supported hash method');
+    like($L->('return(hash(meta).unknown_hash_method("a"))'), qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:unknown_hash_method/s,
+        'unknown receiver-dot hash method is not lowered as a supported hash method');
     like($L->('return(hash(meta).rename_key("a","aa").drop_keys("b").set_key("z",4).count_keys())'), qr/__ls_rename_key.*__ls_drop.*__ls_count_keys/s,
         'explicit hash receiver chains hash-returning helpers into count_keys');
     like($L->('return(meta.copy().flat_hash().count_keys())'), qr/__ls_flat_hash.*__ls_count_keys/s,

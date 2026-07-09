@@ -5,13 +5,19 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `NONCURRENT-HELPER-CODE-PURGE.4` migrated active tests, tooling examples, generated Rust
+  oracle corpus inputs, and checked-in `.spec` labels/source strings away from retired helper spellings. Generic
+  unknown-helper regressions now use invented helper names. `ebnf.spec` and copied corpus inputs use
+  `return_scalar_value` / `return_array_value`; `portmap.spec` and oracle/book examples use `?concatenation:` for
+  concatenation nodes. Final no-drift closeout is `NONCURRENT-HELPER-CODE-PURGE.5`.
 - `2026-07-09` refresh: `NONCURRENT-HELPER-CODE-PURGE.3` removed Rust source recognition and name-specific
   diagnostic paths for the retired `SPEC-FORMAT-TERSE.8` helper spelling set. `linkedspec-core` no longer lists
   retired helper spellings as known ActionIR calls and no longer preserves `declare(...)` keyword-argument syntax
   for retired-helper diagnostics. `linkedspec-runtime` no longer has a `retired_helper_error(...)` branch ahead of
   generic helper dispatch; retired helper-looking calls now use the generic unknown-helper fallback. Runtime context
   internals use neutral append/snapshot names, and Rust hash-literal display emits current `{ key : value }`
-  syntax. `NONCURRENT-HELPER-CODE-PURGE.4` owns active test/tool/generated fixture and checked-in `.spec` migration.
+  syntax. `NONCURRENT-HELPER-CODE-PURGE.4` later closed active test/tool/generated fixture and checked-in `.spec`
+  migration.
 - `2026-07-09` refresh: `NONCURRENT-HELPER-CODE-PURGE.2.4` closed the Perl source purge container for the
   retired `SPEC-FORMAT-TERSE.8` helper spelling set. Focused exact call-shape scans over `perl/LinkedSpec.pm`
   and `perl/LinkedSpec` are clean for retired helper recognition paths; remaining exact-name hits are raw-compat

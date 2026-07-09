@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (NONCURRENT-HELPER-CODE-PURGE.4 — active fixture/spec spelling migration):
+  Migrated the remaining active tests, tooling examples, generated corpus inputs, and checked-in `.spec` labels away
+  from retired helper spellings after the Perl/Rust source recognition paths were closed. Generic unknown-helper
+  tests now use invented helper names, inspection examples use current `return(...)` syntax, and the validation fuzz
+  deep-nesting case uses current assignment syntax. EBNF return annotation rules/output tags now use
+  `return_scalar_value` / `return_array_value`; portmap concatenation output now uses `?concatenation:` across
+  source spec, corpus input/expected output, Perl/Rust tests, and the mdBook walkthrough. Focused scans are clean for
+  retired call shapes, retired label/tag collisions, and exact `?concat:` over active surfaces. Syntax checks,
+  focused tests, full phase0 (`1027` tests, `PERL5LIB=` cleared), regenerated 99-fixture Rust oracle corpus, full
+  `linkedspec-runtime`, and mdBook build pass. Final no-drift closeout remains queued under `.5`.
+
 - 2026-07-09 (NONCURRENT-HELPER-CODE-PURGE.3 — Rust helper diagnostic purge):
   Removed Rust source recognition and name-specific diagnostic paths for the retired `SPEC-FORMAT-TERSE.8`
   helper spelling set. `linkedspec-core` no longer treats retired helper names as known ActionIR calls, the

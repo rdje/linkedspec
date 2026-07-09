@@ -177,7 +177,7 @@ It parses as:
       '80',
     ],
     [
-      'return_array',
+      'return_array_value',
       '[$1, $2]',
     ],
     [
@@ -214,7 +214,7 @@ The important details are:
 - `(` and `)` are explicit group tokens.
 - `*` is an `operator`.
 - `@80%` becomes a `probability` payload of `80`.
-- `-> [$1, $2]` becomes a `return_array` payload.
+- `-> [$1, $2]` becomes a `return_array_value` payload.
 - `@log_rule("expr", "term")` becomes a `logging_annotation` with its argument list normalized.
 - `/[a-z]+/` becomes a `regex` payload with the slash delimiters removed.
 
@@ -242,9 +242,9 @@ quantifier
 question_operator
 quoted_string
 regex
-return_array
+return_array_value
 return_object
-return_scalar
+return_scalar_value
 rule_name
 semantic_annotation
 star_operator
@@ -269,8 +269,8 @@ The main roles are:
 | `close_paren` | recognizes `)` and returns a `group_close` token. |
 | `probability` | recognizes annotations such as `@80%` and strips `@` / `%`. |
 | `regex` | recognizes slash-delimited regex literals and strips the slash delimiters. |
-| `return_scalar` | recognizes scalar return annotations after `->`. |
-| `return_array` | recognizes bracketed return annotations after `->`, including nested bracket/brace content. |
+| `return_scalar_value` | recognizes scalar return annotations after `->`. |
+| `return_array_value` | recognizes bracketed return annotations after `->`, including nested bracket/brace content. |
 | `return_object` | recognizes object return annotations after `->`, including nested bracket/brace content. |
 | `include_dir` | recognizes `dir(...)` / `include_dir(...)` and returns `include_dir` entries. |
 | `include_file` | recognizes `include(...)`, `include_file(...)`, or `file(...)` and returns `include_file` entries. |
@@ -503,8 +503,8 @@ This keeps small lexical readers easy to audit.
 `ebnf.spec` recognizes three return-annotation families after `->`:
 
 ```text
-return_scalar
-return_array
+return_scalar_value
+return_array_value
 return_object
 ```
 
@@ -519,8 +519,8 @@ Expr := Term -> {name: $1, tail: $2}
 Those become:
 
 ```text
-['return_scalar', '$1']
-['return_array', '[$1, $2]']
+['return_scalar_value', '$1']
+['return_array_value', '[$1, $2]']
 ['return_object', '{name: $1, tail: $2}']
 ```
 

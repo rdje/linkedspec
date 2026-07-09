@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.4 — migrate retired helper fixtures**
+  (DONE active test/tool/generated fixture and checked-in `.spec` spelling migration; final no-drift closeout is
+  next).
+
+  **Change:** Replaced active retired-helper call examples with current syntax or invented unknown-helper names,
+  renamed EBNF return annotation labels/output tags to `return_scalar_value` / `return_array_value`, and renamed
+  portmap concatenation output from `?concat:` to `?concatenation:` across source spec, generated corpus inputs,
+  expected output, Perl/Rust tests, and mdBook examples.
+
+  **Boundary:** This closes active fixture/tool/spec migration. Historical retirement documentation and explicit
+  retired-helper reference sections remain allowed; `NONCURRENT-HELPER-CODE-PURGE.5` owns the final no-drift scan
+  and closeout.
+
+  **Verification:** Exact retired-helper call-shape scans, retired label/tag scans, exact `?concat:` scan, touched
+  Perl syntax checks, focused Perl tests, full phase0 (`1027` tests), regenerated 99-fixture oracle corpus,
+  full `linkedspec-runtime` package tests, and `mdbook build docs/linkedspec-book` pass.
+
 - 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.3 — purge Rust helper diagnostics**
   (DONE Rust source recognition/diagnostic cleanup; active fixture/tool/spec migration is next).
 

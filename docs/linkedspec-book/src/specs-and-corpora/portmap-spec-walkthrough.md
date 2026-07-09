@@ -58,7 +58,7 @@ For a concatenation `{sig_a sig_b[7:0] 0x1f}`:
 
 ```json
 [
-  "?concat:",
+  "?concatenation:",
   [
     ["?bare:", ["sig_a"]],
     ["?slice:", ["sig_b", "7", "0"]],
@@ -68,7 +68,7 @@ For a concatenation `{sig_a sig_b[7:0] 0x1f}`:
 ```
 
 The first element of each array is a tag string (`?bare:`, `?slice:`, `?bit:`,
-`?constant:`, `?concat:`, `?multi:`) that identifies the node kind. Scalar
+`?constant:`, `?concatenation:`, `?multi:`) that identifies the node kind. Scalar
 classifications place the participating regex captures in the second element; a
 concatenation places its child nodes in the second element.
 
@@ -82,7 +82,7 @@ concatenation places its child nodes in the second element.
 
 The `portmap` entry rule uses `.push` fluent continuation on its action edges. In `LX`, it checks: if exactly one item accumulated, return it directly; otherwise return the array tagged `?multi:`.
 
-The `concatenation` rule does the same with `?concat:` tagging on its closing-bracket action edge (`[1]`).
+The `concatenation` rule does the same with `?concatenation:` tagging on its closing-bracket action edge (`[1]`).
 
 ## Key design points
 

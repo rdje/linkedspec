@@ -17,7 +17,7 @@ LX {
 concatenation: /\{/ /\}/
 -> concatenation  .push
 -> bare_bit_slice .push
--> concatenation[1]    {return(array("?concat:", copy(array(concatenation))))}
+-> concatenation[1]    {return(array("?concatenation:", copy(array(concatenation))))}
 bare_bit_slice: /([[:alpha:]]\w*)(?:\[(?:(\d+)(?::(\d+))?|(\?[[:alpha:]]\w+))\])?|(?i)(0x[0-9a-f]+|0b[01]+|\d+\'\d+)/ I {
 	entry_parts = [];
 	set(array(entry_parts), entry_groups());

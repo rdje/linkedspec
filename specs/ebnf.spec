@@ -73,17 +73,17 @@ LX {
     .return_undef()
   .endif()
 
--> return_scalar
+-> return_scalar_value
   .if(on)
-    .push(return_scalar, rule)
+    .push(return_scalar_value, rule)
   .else()
     .say("Error: Scalar return annotation occurrence with no container rule context")
     .return_undef()
   .endif()
 
--> return_array
+-> return_array_value
   .if(on)
-    .push(return_array, rule)
+    .push(return_array_value, rule)
   .else()
     .say("Error: Array return annotation occurrence with no container rule context")
     .return_undef()
@@ -175,8 +175,8 @@ pipe_operator: /\|/               I.return(array("operator", entry_text()))
 plus_operator: /\+/               I.return(array("operator", entry_text()))
 star_operator: /\*/               I.return(array("operator", entry_text()))
 question_operator: /\?/           I.return(array("operator", entry_text()))
-return_scalar: /->\s*\K(?:\$\d+|"[^"]*"|'[^']*')/  I.return(array("return_scalar", entry_text()))
-return_array: /->\s*\K(?&array_structure)(?(DEFINE)(?<array_structure>\[(?&content)\])(?<object_structure>\{(?&content)\})(?<content>(?:[^{}\[\]]*|(?&array_structure)|(?&object_structure))*))/   I.return(array("return_array", entry_text()))
+return_scalar_value: /->\s*\K(?:\$\d+|"[^"]*"|'[^']*')/  I.return(array("return_scalar_value", entry_text()))
+return_array_value: /->\s*\K(?&array_structure)(?(DEFINE)(?<array_structure>\[(?&content)\])(?<object_structure>\{(?&content)\})(?<content>(?:[^{}\[\]]*|(?&array_structure)|(?&object_structure))*))/   I.return(array("return_array_value", entry_text()))
 return_object: /->\s*\K(?&object_structure)(?(DEFINE)(?<array_structure>\[(?&content)\])(?<object_structure>\{(?&content)\})(?<content>(?:[^{}\[\]]*|(?&array_structure)|(?&object_structure))*))/ I.return(array("return_object", entry_text()))
 open_paren: /\(/                  I.return(array("group_open", entry_text()))
 close_paren: /\)/                 I.return(array("group_close", entry_text()))

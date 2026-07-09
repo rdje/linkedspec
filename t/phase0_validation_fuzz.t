@@ -388,7 +388,7 @@ subtest 'validate_dsl_syntax' => sub {
 
     # --- Edge: deeply nested lifecycle blocks ---
     my $deep_nest = "Top::\n /a/\n";
-    $deep_nest .= ('I {' x 30) . "  assign(scalar(x), 1);\n" . ('}' x 30) . "\n";
+    $deep_nest .= ('I {' x 30) . "  x = 1;\n" . ('}' x 30) . "\n";
     push @cases, [\$deep_nest, 1, 'spec with 30-level nested lifecycle blocks'];
 
     # --- Edge: valid paragraph member ordering ---

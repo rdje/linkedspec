@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — NONCURRENT-HELPER-CODE-PURGE.4 — migrate retired helper fixtures
+
+**Scope:** Active Perl/Rust tests, tooling examples, generated Rust oracle corpus inputs, checked-in `.spec`
+label/output strings, mdBook spec walkthroughs, live docs, and Knowledge Map facts for the non-current helper purge.
+
+**Change:** Active executable fixtures no longer embed retired helper spellings as helper calls or colliding
+labels/tags. Inspection-tool examples now use current `return(...)` syntax, metadata tests use invented
+unknown-helper names for generic diagnostics, and validation fuzzing uses current assignment syntax. EBNF return
+annotation rule/output labels were renamed to `return_scalar_value` / `return_array_value` in `specs/ebnf.spec`
+and the copied corpus inputs. Portmap concatenation output was renamed from `?concat:` to `?concatenation:` in
+`specs/portmap.spec`, Rust corpus expected output, integration tests, Perl regression locks, and mdBook examples.
+
+**Validation:** Exact retired-helper call-shape scans, retired label/tag scans, and exact `?concat:` scans are
+clean over active test/tool/spec/corpus/book surfaces. Syntax checks pass for touched Perl tests/tools. Focused
+Perl tests, full `t/phase0_regression.t` (`1027` tests), regenerated 99-fixture oracle corpus,
+`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle`, full
+`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime`, and `mdbook build
+docs/linkedspec-book` pass.
+
 ## 2026-07-09 — NONCURRENT-HELPER-CODE-PURGE.3 — purge Rust helper diagnostics
 
 **Scope:** Rust parser/validation/runtime retired-helper source paths, Rust docs/fixtures touched by verification,

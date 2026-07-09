@@ -67,7 +67,7 @@ my $TIMEOUT = $ENV{ORACLE_TIMEOUT} // 15;
 #
 # .7.1 GREEN PROOF SET — controlled authored grammars in the Rust-supported
 # subset (`::` rules, entry_text, assignment, push/copy/return, with a few
-# named compatibility twins that still exercise declare/old-helper aliases). They
+# named compatibility twins that still exercise older alias behavior). They
 # prove the full oracle loop end-to-end: Perl runs the grammar → canonical-JSON
 # fixture → the Rust engine reproduces it under the one-level wrap rule.
 #
@@ -385,8 +385,8 @@ SPEC
     # ── SPEC-FORMAT-TERSE.1.4.2 — Rust lockstep parity for .1.4.1 helper renames ──
     #
     # These fixtures freeze the Perl reference values for the new canonical terse
-    # spellings that .1.4.1 taught the book: set (assign), cat (concat), and copy
-    # (array/hash copy). They stay in the same divergence-free proof class as the
+    # spellings that .1.4.1 taught the book: set, cat, and copy. They stay in the
+    # same divergence-free proof class as the
     # earlier authored cases: non-recursive parent edge, action-less child, no retv.
     {   case   => 'terse_1_4_2_set_cat_copy_array',
         input  => 'xhello',
@@ -922,7 +922,7 @@ SPEC
     #
     # Scalar non-shape assignment forms now store and yield the assigned value
     # in value positions. This fixture covers infix `name = value`, operator
-    # call `=(name, value)`, scalar set/assign compatibility via `set(...)`, a
+    # call `=(name, value)`, scalar assignment compatibility via `set(...)`, a
     # function-local assignment return, an expression-valued block, and receiver
     # chaining on the assigned value. Direct RHS shapes, array append values, and
     # hash-index mutation values remain deferred to later `.3.3.x` leaves.

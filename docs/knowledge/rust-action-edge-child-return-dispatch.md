@@ -38,7 +38,7 @@ re-execution for passive terminal children after parent-edge consumption.
 
 The shipped oracle locks are:
 
-- `portmap_concatenation` — `{foo bar[2]}` keeps the `?bare` and `?bit` child payloads under `?concat`.
+- `portmap_concatenation` — `{foo bar[2]}` keeps the `?bare` and `?bit` child payloads under `?concatenation`.
 - `ebnf_expression_rules` — rule headers are not duplicated and body tokens are preserved.
 - `ebnf_logging_annotation` — `push(quoted_string, 1)` preserves the indexed logging annotation payload.
 

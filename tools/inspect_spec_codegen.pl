@@ -30,10 +30,10 @@ Accepted snippet forms:
   1) Lifecycle chain:
      I.lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)
   2) Lifecycle block:
-     I { my $x = 1; return_a(Top) }
+     I { x = 1; return(x) }
   3) Action edge:
      /a/ -> Top .lowercase_each(array(parts)).filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)
-     /a/ -> Top { return_a(Top) }
+     /a/ -> Top { return(retv) }
   4) Raw helper/expression:
      filter_match(uniq(uppercase_each(array(parts))), /^[A-Z_]+$/)
 
