@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.4.3 — Dart recursive/default-mode dispatch semantics):
+  Dart now carries Rust-style action-edge dispatch metadata through compiled state: each edge records the regex
+  alternative that triggers it, the target child regex index, and whether it was anchored to a same-line parent
+  regex. Edge-only child regexes are resolved into the parent alternation before runtime execution, and runtime
+  dispatch executes all edges for the selected regex index. This closes the tclite empty-child-output gap and
+  avoids guessing from action-edge list positions. Dart also now treats `set(array(name), ...)` and
+  `set(hash(name), ...)` as rule-local aggregate resets: the first reset in a rule invocation snapshots the prior
+  binding and restores it on rule exit, while ordinary undeclared child mutations remain caller-visible. The
+  recursive `sexpr` corpus cases now match the Rust/Perl oracle. The shipped-spec/parser-smoke window is 7/31
+  green; remaining Lispish failure is recursive PCRE `(?R)` routed to `.6.2.4.6`, while residual hlink/output/helper
+  parity stays in `.6.2.4.4`.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.4.2 — Dart helper/action surface bridge):
   Dart now executes the helper/action surfaces that were blocking the final shipped-spec/parser-smoke window after
   the regex bridge: direct anonymous capture-slice helpers (`start_capture_slice`, `capture_slice`,

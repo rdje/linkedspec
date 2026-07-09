@@ -9,7 +9,7 @@ answers:
 date: 2026-07-09
 status: current
 tags: [dart, corpus, shipped-specs, regex, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.6.2.4.0 runs `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31`. The window is 2/31 green (`pplugin_empty`, `tkgui_empty`). Failures cluster into Dart regex-dialect incompatibilities, missing helper/action surfaces, recursive/default-mode output mismatches, and residual shipped-spec smoke parity. DART-BACKEND-PARITY.6.2.4.1 closes the basic regex-dialect bridge; DART-BACKEND-PARITY.6.2.4.2 closes the missing helper/action bridge. Remaining PCRE structural regex blockers are routed to .6.2.4.6, and the next implementation leaf is .6.2.4.3 for recursive/default-mode parser-smoke semantics."
+evidence: "DART-BACKEND-PARITY.6.2.4.0 runs `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31`. The window started 2/31 green (`pplugin_empty`, `tkgui_empty`). Failures clustered into Dart regex-dialect incompatibilities, missing helper/action surfaces, recursive/default-mode output mismatches, and residual shipped-spec smoke parity. DART-BACKEND-PARITY.6.2.4.1 closes the basic regex-dialect bridge; .6.2.4.2 closes the missing helper/action bridge; .6.2.4.3 closes tclite/default-mode action-edge dispatch and recursive rule-local aggregate reset semantics. The window is now 7/31 green. Remaining PCRE structural regex blockers are routed to .6.2.4.6, and the next implementation leaf is .6.2.4.4 for residual parser-smoke output/helper parity."
 reverify: "cd dart && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31 || true"
 ---
 
@@ -31,12 +31,14 @@ The first diagnostic run is useful because it separates early blockers:
 - Residual shipped-spec output parity should wait until those lower blockers
   are removed.
 
-`DART-BACKEND-PARITY.6.2.4.1` closes the basic regex-dialect bridge, and
-`DART-BACKEND-PARITY.6.2.4.2` closes the missing helper/action bridge. Remaining
-regex `FormatException` cases are deeper PCRE structural features and are routed
-to `DART-BACKEND-PARITY.6.2.4.6`; the next frontier is recursive/default-mode
-parser-smoke semantics.
+`DART-BACKEND-PARITY.6.2.4.1` closes the basic regex-dialect bridge,
+`DART-BACKEND-PARITY.6.2.4.2` closes the missing helper/action bridge, and
+`DART-BACKEND-PARITY.6.2.4.3` closes the tclite/default-mode and recursive
+top-rule value gap. The diagnostic window is now 7/31 green. Remaining regex
+`FormatException` cases are deeper PCRE structural features and are routed to
+`DART-BACKEND-PARITY.6.2.4.6`; the next frontier is residual parser-smoke
+output/helper parity under `.6.2.4.4`.
 
 Related facts: [[dart-middle-corpus-batch]], [[dart-controlled-corpus-execution]],
 [[dart-regex-dialect-bridge]], [[dart-helper-action-surface-bridge]],
-[[rust-perl-output-oracle]].
+[[dart-recursive-dispatch-rule-local-scope]], [[rust-perl-output-oracle]].

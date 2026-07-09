@@ -47,6 +47,116 @@ item:
     },
   );
 
+  test('executes self close edge that reuses the opener regex slot', () {
+    final engine = _engine(r'''
+Top::
+ -> Quote .push
+ LX.return(array("top", copy(array(Top))))
+
+Quote: /"/
+ -> Text .push
+ -> Quote .return(array("quote", copy(array(Quote))))
+
+Text: /x/
+''');
+
+    final result = engine.parse('""');
+
+    expect(result.value, [
+      'top',
+      [
+        ['quote', <Object?>[]],
+      ],
+    ]);
+  });
+
+  test('executes indexed self close edge after unrelated child choices', () {
+    final engine = _engine(r'''
+Top::
+ -> Pair .push
+ LX.return(array("top", copy(array(Top))))
+
+Pair: /\[/ /\]/
+ -> Other .push
+ -> Another .push
+ -> Pair[1] .return(array("pair", copy(array(Pair))))
+
+Other: /x/
+Another: /y/
+''');
+
+    final result = engine.parse('[]');
+
+    expect(result.value, [
+      'top',
+      [
+        ['pair', <Object?>[]],
+      ],
+    ]);
+  });
+
+  test('keeps aggregate resets rule local across recursive calls', () {
+    final engine = _engine(r'''
+top::
+ -> sexpr { return(call(sexpr)) }
+
+sexpr: /\(/ /\)/  I { set(array(items), []) }
+ -> sexpr     { push(array(items), call(sexpr)) }
+ -> atom      { push(array(items), call(atom)) }
+ -> sexpr[1]  { return(copy(array(items))) }
+
+atom: /[A-Za-z0-9]+/   I.return(entry_text())
+''');
+
+    final result = engine.parse('(a(b)c)');
+
+    expect(result.value, [
+      'a',
+      ['b'],
+      'c',
+    ]);
+  });
+
+  test('preserves recursive top-rule LX sequence values', () {
+    final engine = _engine(r'''
+sexpr:: /\(/ /\)/  I { set(array(items), []) }
+ -> sexpr     { push(array(items), call(sexpr)) }
+ -> atom      { push(array(items), call(atom)) }
+ -> sexpr[1]  { return(copy(array(items))) }
+LX { return(copy(array(items))) }
+
+atom: /[A-Za-z0-9]+/   I.return(entry_text())
+''');
+
+    final nested = engine.parse('(a(b)c)');
+    expect(nested.value, [
+      [
+        'a',
+        ['b'],
+        'c',
+      ],
+    ]);
+
+    final sequence = engine.parse('(a) (b)');
+    expect(sequence.value, [
+      ['a'],
+      ['b'],
+    ]);
+  });
+
+  test('keeps undeclared child array mutations caller visible', () {
+    final engine = _engine(r'''
+Top::
+ -> Child { call(Child); return(copy(array(items))) }
+
+Child: /x/ I { push(array(items), "child") }
+''');
+
+    final result = engine.parse('x');
+
+    expect(result.value, ['child']);
+  });
+
   test('executes AND blind-call dispatch in sequence', () {
     final engine = _engine(r'''
 Top::AND

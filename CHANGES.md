@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.3 — close Dart recursive dispatch semantics
+
+**Scope:** Dart compiled action-edge dispatch metadata, runtime action-edge resolution, rule-local aggregate reset
+scoping, focused compiler/runtime tests, corpus diagnostics, Dart README/mdBook status, live docs, roadmap status,
+task-tree status, and Knowledge Map.
+
+**Change:** Dart compiled action edges now carry resolved regex-dispatch metadata and edge-only child regexes are
+folded into each rule's runtime alternation, so tclite-style close edges no longer depend on fragile action-edge
+list positions. Runtime dispatch now executes every action edge tied to the matched regex index. Explicit aggregate
+resets through `set(array(name), ...)` and `set(hash(name), ...)` now create rule-local bindings restored on rule
+exit, matching the Rust/Perl recursive `sexpr` contract while leaving undeclared child mutations caller-visible.
+The final shipped-spec/parser-smoke window moves from 2/31 to 7/31 green.
+
+**Validation:** Focused compiler/runtime tests, Dart format/analyze, full Dart tests, selected tclite/top-rule
+corpus cases, diagnostic corpus run, mdBook build, memory architecture, Knowledge Map generation/check, task-tree
+metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.2 — bridge Dart helper action surfaces
 
 **Scope:** Dart action parser delimiter handling, runtime helper execution, focused parser/runtime tests, corpus

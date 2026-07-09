@@ -37,8 +37,8 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.6.2.4.2` is the current completed corpus-parity boundary;
-`.6.2.4.3` is the next shipped-spec/parser-smoke recursion/default-mode frontier. The package can round-trip
+`DART-BACKEND-PARITY.6.2.4.3` is the current completed corpus-parity boundary;
+`.6.2.4.4` is the next shipped-spec/parser-smoke residual parity frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -106,6 +106,12 @@ using Dart `RegExp`.
 Direct capture-slice helpers, diagnostic `print`/`print_each`/`say`, logical
 `and`/`or`/`not`, and terminating `exit_now(...)` are available in the runtime,
 and helper-call parsing preserves literal delimiters inside quoted arguments.
+Compiled action edges now carry resolved regex-dispatch metadata, edge-only child
+regexes are folded into the parent alternation, and runtime action dispatch uses
+that metadata directly. Explicit aggregate resets through `set(array(name), ...)`
+and `set(hash(name), ...)` are scoped to the current rule invocation, preserving
+recursive parser value parity while ordinary undeclared child mutations remain
+caller-visible.
 Runtime failures now expose `RuntimeDiagnostic` payloads through
 `RuntimeInterpreterException.diagnostic` with stable `type`, `stage`,
 `owner_stage`, `summary`, `detail`, `top_rule`, `rule_label`,
@@ -126,13 +132,14 @@ execution is rejected until the full shipped-corpus gate is ready, so the defaul
 manifest fixtures and the non-`fn` middle helper/control/receiver fixtures now
 pass through bounded execute mode. Top-level `fn` corpus fixtures remain routed
 to `DART-BACKEND-PARITY.6.2.5` for spec-defined function-shell execution. The final
-31-fixture shipped-spec/parser-smoke window is measured at 2/31 green and split into
+31-fixture shipped-spec/parser-smoke window is measured at 7/31 green and split into
 regex-dialect, helper/action, recursion/output, residual parity, and closeout leaves.
 Basic regex-dialect bridging is now done; deeper PCRE structural constructs such as
 `\K`, recursive `(?&name)` subpatterns, and `(?(DEFINE)...)` are routed to
 `DART-BACKEND-PARITY.6.2.4.6`.
-The helper/action bridge is also done; remaining failures in that window are now
-recursive/default-mode/output mismatches, deliberate diagnostic `exit_now(...)`
-branches, and residual parser-smoke parity work.
+The helper/action bridge and recursive/default-mode bridge are also done; tclite
+and recursive top-rule parser-smoke fixtures pass. Remaining failures are residual
+hlink/output/helper parity work plus deeper PCRE structural regex constructs such
+as Lispish `(?R)`.
 Full shipped-corpus output parity remains a later leaf in
 `docs/tasks/DART-BACKEND-PARITY.md`.

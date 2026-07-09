@@ -920,13 +920,24 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.4.2 - bridge Dart helper action surfaces`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.3`
-  Status: `pending`
+  Status: `done`
   Goal: Close recursive/default-mode and empty child-output semantics for parser-smoke fixtures.
   Acceptance: Tclite, Lispish, recursive top-rule, delimiter/default-mode, and explicit diagnostic-branch fixtures
     either pass on Dart or each residual mismatch has a narrowly owned root-cause leaf with Perl/Rust oracle
     evidence.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Dart now mirrors the Rust/Perl action-edge dependency model closely enough
+    for the recursive/default-mode parser-smoke cluster: compiled action edges carry `regex_index`,
+    `child_regex_index`, and `has_parent_regex`; edge-only child regexes are resolved into the parent alternation;
+    runtime dispatch executes every action edge whose `regex_index` matches the selected alternative; and
+    `set(array(name), ...)` / `set(hash(name), ...)` aggregate resets record rule-local bindings restored on rule
+    exit. Focused compiler/runtime tests pass, including self-close regex-slot reuse, indexed self-close edges,
+    recursive `sexpr` body/top-rule value parity, and caller-visible undeclared child mutations. Corpus evidence:
+    `tclite_command_subst`, `tclite_double_quote`, `top_rule_body_recursion_sexpr`,
+    `top_rule_lx_recursion_nested`, and `top_rule_lx_recursion_sequence` now pass. The 31-fixture window is now
+    7/31 green (`pplugin_empty` and `tkgui_empty` also pass). Residual Lispish failure is a recursive PCRE
+    `(?R)` pattern routed to `.6.2.4.6`; residual hlink/portmap/regdef/tablegrep/simenv/VHDL/history/library
+    mismatches are routed to `.6.2.4.4`.
+  Commit: `DART-BACKEND-PARITY.6.2.4.3 - close Dart recursive dispatch semantics`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4`
   Status: `pending`
@@ -950,8 +961,9 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Status: `pending`
   Goal: Decide and implement or route unsupported PCRE structural regex constructs.
   Acceptance: EBNF and spec.spec smoke fixtures no longer fail merely because Dart `RegExp` rejects `\K`,
-    recursive named subpatterns such as `(?&name)`, `(?(DEFINE)...)`, or related conditional/recursive constructs;
-    the solution is explicitly bounded and documented, not an untracked broad regex-engine replacement.
+    recursive named subpatterns such as `(?&name)`, recursive whole-pattern forms such as Lispish `(?R)`,
+    `(?(DEFINE)...)`, or related conditional/recursive constructs; the solution is explicitly bounded and
+    documented, not an untracked broad regex-engine replacement.
   Verification: `pending`
   Commit: `pending`
 

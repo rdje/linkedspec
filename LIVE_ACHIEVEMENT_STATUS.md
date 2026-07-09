@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.3 — close Dart recursive dispatch semantics**
+  (DONE — tclite/default-mode and recursive top-rule parser-smoke fixtures now pass on Dart).
+
+  **Change:** Dart compiled action edges now carry resolved regex-dispatch metadata, edge-only child regexes are
+  folded into the parent alternation, and runtime dispatch executes all edges for the matched regex index. Explicit
+  aggregate resets through `set(array(name), ...)` / `set(hash(name), ...)` now scope those bindings to the current
+  rule invocation, preserving recursive `sexpr` value parity without hiding ordinary undeclared child mutations.
+
+  **Boundary:** The final shipped-spec/parser-smoke window is now 7/31 green. Lispish still hits recursive PCRE
+  `(?R)` and is routed to `.6.2.4.6`; residual hlink/output/helper mismatches advance to
+  `DART-BACKEND-PARITY.6.2.4.4`.
+
+  **Verification:** Focused compiler/runtime tests, Dart format/analyze, full Dart tests, selected tclite/top-rule
+  corpus cases, diagnostic corpus run, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine,
+  and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.2.4.2 — bridge Dart helper action surfaces**
   (DONE — missing helper/action surfaces no longer block Dart).
 

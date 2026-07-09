@@ -271,6 +271,7 @@ final class LinkedSpecRuntimeEngine {
           savedRegisters.localMatch?.codeUnitEnd ?? context.cursorCodeUnit,
     );
     context.enterRule(label);
+    context.enterRuleLocalBindingScope();
     final traceScope = context.trace?.enterScope(
       'dart_runtime:rule',
       'label=$label entry_regex=$entryRegexIndex '
@@ -316,6 +317,7 @@ final class LinkedSpecRuntimeEngine {
       if (traceScope != null) {
         context.trace?.exitScope(traceScope, traceExitDetails);
       }
+      context.exitRuleLocalBindingScope();
       context.exitRule();
       context.registers = savedRegisters;
       context.activeRuleEntries.remove(recursionKey);
@@ -635,7 +637,7 @@ final class LinkedSpecRuntimeEngine {
           match: match,
           reason: 'mode=AND expected_index=$expectedIndex',
         );
-        _acceptRegexMatch(rule, plan, match, context);
+        _acceptRegexMatch(rule, match, context);
         final loopEnd = _executeLifecycle(rule, 'LE', context);
         if (loopEnd != null) {
           throw _ActionReturn(loopEnd.value);
@@ -668,7 +670,7 @@ final class LinkedSpecRuntimeEngine {
       match: match,
       reason: 'entry_regex=$entryRegexIndex',
     );
-    _acceptRegexMatch(rule, plan, match, context);
+    _acceptRegexMatch(rule, match, context);
     final loopEnd = _executeLifecycle(rule, 'LE', context);
     if (loopEnd != null) {
       throw _ActionReturn(loopEnd.value);
@@ -714,87 +716,62 @@ final class LinkedSpecRuntimeEngine {
 
   void _acceptRegexMatch(
     CompiledRule rule,
-    _RegexPlan plan,
     RuntimeRegexMatch match,
     _RuntimeExecutionContext context,
   ) {
     context.cursorCodeUnit = match.codeUnitEnd;
     context.registers = context.registers.withLocalMatch(match);
 
-    final edgeMatch = _actionEdgeFor(rule, plan, match.alternativeIndex);
-    if (edgeMatch == null) {
+    final edgeMatches = _actionEdgesFor(rule, match.alternativeIndex);
+    if (edgeMatches.isEmpty) {
       return;
     }
 
-    final edgeContext = _CurrentActionEdge(
-      ruleLabel: rule.label,
-      edge: edgeMatch.edge,
-      target: edgeMatch.target,
-    );
-    if (edgeMatch.edge.actionPayload == null) {
-      final child = _executeActionEdgeChild(edgeContext, context);
-      context.retv = child.value;
-      return;
-    }
+    for (final edgeMatch in edgeMatches) {
+      final edgeContext = _CurrentActionEdge(
+        ruleLabel: rule.label,
+        edge: edgeMatch.edge,
+        target: edgeMatch.target,
+      );
+      if (edgeMatch.edge.actionPayload == null) {
+        final child = _executeActionEdgeChild(edgeContext, context);
+        context.retv = child.value;
+        continue;
+      }
 
-    final actionReturn = _executeActionBlock(
-      edgeMatch.edge.actionPayload!.actionAst,
-      context,
-      rule.label,
-      currentEdge: edgeContext,
-    );
-    if (actionReturn != null) {
-      throw _ActionReturn(actionReturn.value);
-    }
-    if (!edgeContext.childDispatched && edgeMatch.target.label != rule.label) {
-      final child = _executeActionEdgeChild(edgeContext, context);
-      context.retv = child.value;
+      final actionReturn = _executeActionBlock(
+        edgeMatch.edge.actionPayload!.actionAst,
+        context,
+        rule.label,
+        currentEdge: edgeContext,
+      );
+      if (actionReturn != null) {
+        throw _ActionReturn(actionReturn.value);
+      }
+      if (!edgeContext.childDispatched &&
+          edgeMatch.target.label != rule.label) {
+        final child = _executeActionEdgeChild(edgeContext, context);
+        context.retv = child.value;
+      }
     }
   }
 
   _RegexPlan _regexPlanFor(CompiledRule rule) {
-    if (rule.regexPatterns.isNotEmpty) {
-      return _RegexPlan(patterns: rule.regexPatterns, dependencyRefs: const []);
-    }
-    final dependencyEntry =
-        compiledSpec.dependencyRegexState.dependencyRegexMap[rule.label];
-    if (dependencyEntry == null) {
-      return const _RegexPlan(patterns: [], dependencyRefs: []);
-    }
-    return _RegexPlan(
-      patterns: dependencyEntry.patterns,
-      dependencyRefs: dependencyEntry.dependencyRefs,
-    );
+    return _RegexPlan(patterns: rule.regexPatterns);
   }
 
-  _MatchedActionEdge? _actionEdgeFor(
+  List<_MatchedActionEdge> _actionEdgesFor(
     CompiledRule rule,
-    _RegexPlan plan,
     int alternativeIndex,
   ) {
     if (rule.actionEdges.isEmpty) {
-      return null;
+      return const [];
     }
-    if (rule.regexPatterns.isNotEmpty) {
-      if (alternativeIndex >= rule.actionEdges.length) {
-        return null;
-      }
-      final edge = rule.actionEdges[alternativeIndex];
-      return _MatchedActionEdge(edge: edge, target: edge.targets.first);
-    }
-
-    if (alternativeIndex >= plan.dependencyRefs.length) {
-      return null;
-    }
-    final ref = plan.dependencyRefs[alternativeIndex];
-    for (final edge in rule.actionEdges) {
-      for (final target in edge.targets) {
-        if (target.label == ref.label && target.index == ref.index) {
-          return _MatchedActionEdge(edge: edge, target: ref);
-        }
-      }
-    }
-    return null;
+    return [
+      for (final edge in rule.actionEdges)
+        if (edge.regexIndex == alternativeIndex)
+          _MatchedActionEdge(edge: edge, target: edge.targets.first),
+    ];
   }
 
   _ActionReturn? _executeLifecycle(
@@ -2852,6 +2829,7 @@ final class LinkedSpecRuntimeEngine {
     final block = _userFunctionBodyBlock(entry, ruleLabel, context);
     final snapshot = _RuntimeStoreSnapshot.capture(context);
     context.activeUserFunctions.add(entry.name);
+    context.suspendRuleLocalBindingTracking();
     context.clearStores();
     for (var index = 0; index < entry.params.length; index += 1) {
       context.bindUserFunctionParam(entry.params[index], values[index]);
@@ -2867,6 +2845,7 @@ final class LinkedSpecRuntimeEngine {
       );
       return flow.returned ? _copyValue(flow.value) : null;
     } finally {
+      context.resumeRuleLocalBindingTracking();
       snapshot.restore(context);
       context.activeUserFunctions.removeLast();
     }
@@ -3033,6 +3012,7 @@ final class LinkedSpecRuntimeEngine {
     );
     final arrayTarget = _arrayTargetName(args[0]);
     if (arrayTarget != null) {
+      context.recordRuleLocalBinding(arrayTarget);
       context.variables.remove(arrayTarget);
       context.hashes.remove(arrayTarget);
       context.arrays[arrayTarget] = _asArray(value);
@@ -3040,6 +3020,7 @@ final class LinkedSpecRuntimeEngine {
     }
     final hashTarget = _hashTargetName(args[0]);
     if (hashTarget != null) {
+      context.recordRuleLocalBinding(hashTarget);
       context.variables.remove(hashTarget);
       context.arrays.remove(hashTarget);
       context.hashes[hashTarget] = _asHash(value);
@@ -5066,6 +5047,9 @@ final class _RuntimeExecutionContext {
   final List<RuntimeLifecycleEvent> lifecycleEvents = <RuntimeLifecycleEvent>[];
   final List<int> cursorStack = <int>[];
   final List<String> _ruleStack = <String>[];
+  final List<Map<String, _VariableSnapshot>> _ruleLocalBindingScopes =
+      <Map<String, _VariableSnapshot>>[];
+  int _ruleLocalBindingSuppressionDepth = 0;
 
   RuntimeMatchRegisters registers;
   Object? retv;
@@ -5119,6 +5103,39 @@ final class _RuntimeExecutionContext {
   void exitRule() {
     if (_ruleStack.isNotEmpty) {
       _ruleStack.removeLast();
+    }
+  }
+
+  void enterRuleLocalBindingScope() {
+    _ruleLocalBindingScopes.add(<String, _VariableSnapshot>{});
+  }
+
+  void exitRuleLocalBindingScope() {
+    if (_ruleLocalBindingScopes.isEmpty) {
+      return;
+    }
+    final scope = _ruleLocalBindingScopes.removeLast();
+    for (final entry in scope.entries) {
+      entry.value.restore(this, entry.key);
+    }
+  }
+
+  void recordRuleLocalBinding(String name) {
+    if (_ruleLocalBindingSuppressionDepth > 0 ||
+        _ruleLocalBindingScopes.isEmpty) {
+      return;
+    }
+    final scope = _ruleLocalBindingScopes.last;
+    scope.putIfAbsent(name, () => _VariableSnapshot.capture(this, name));
+  }
+
+  void suspendRuleLocalBindingTracking() {
+    _ruleLocalBindingSuppressionDepth += 1;
+  }
+
+  void resumeRuleLocalBindingTracking() {
+    if (_ruleLocalBindingSuppressionDepth > 0) {
+      _ruleLocalBindingSuppressionDepth -= 1;
     }
   }
 
@@ -5397,10 +5414,9 @@ final class _EvaluatedAccessSegment {
 enum _EvaluatedAccessSegmentKind { key, arrayIndex }
 
 final class _RegexPlan {
-  const _RegexPlan({required this.patterns, required this.dependencyRefs});
+  const _RegexPlan({required this.patterns});
 
   final List<String> patterns;
-  final List<DependencyRef> dependencyRefs;
 }
 
 final class _MatchedActionEdge {

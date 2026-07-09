@@ -39,15 +39,19 @@ CompiledSpec compileSpec(
   }
 
   final compiledRuleOrder = _lastDefinitionOrder(definitionOrder);
-  final dependencyRegexState = _buildDependencyRegexState(
+  final resolvedRulesByLabel = _resolveActionEdgeDependencyRegexes(
     compiledRuleOrder: compiledRuleOrder,
     rulesByLabel: rulesByLabel,
+  );
+  final dependencyRegexState = _buildDependencyRegexState(
+    compiledRuleOrder: compiledRuleOrder,
+    rulesByLabel: resolvedRulesByLabel,
   );
 
   return CompiledSpec(
     definitionOrder: List.unmodifiable(definitionOrder),
     compiledRuleOrder: List.unmodifiable(compiledRuleOrder),
-    rulesByLabel: Map.unmodifiable(rulesByLabel),
+    rulesByLabel: Map.unmodifiable(resolvedRulesByLabel),
     redefinedRuleLabels: List.unmodifiable(redefinedRuleLabels),
     functionRegistry: functionRegistry,
     dependencyRegexState: dependencyRegexState,
@@ -126,6 +130,24 @@ final class CompiledRule {
   final List<CompiledActionPayload> lifecycleActionPayloads;
   final List<CompiledActionPayload> plainActionPayloads;
   final List<BodyElement> bodyElements;
+
+  CompiledRule copyWith({
+    List<String>? regexPatterns,
+    List<CompiledActionEdge>? actionEdges,
+  }) {
+    return CompiledRule(
+      label: label,
+      header: header,
+      modeMetadata: modeMetadata,
+      regexPatterns: regexPatterns ?? this.regexPatterns,
+      dependencyRefs: dependencyRefs,
+      actionEdges: actionEdges ?? this.actionEdges,
+      blindEdges: blindEdges,
+      lifecycleActionPayloads: lifecycleActionPayloads,
+      plainActionPayloads: plainActionPayloads,
+      bodyElements: bodyElements,
+    );
+  }
 
   List<CompiledActionPayload> get actionPayloads {
     return [
@@ -238,6 +260,9 @@ final class CompiledActionEdge {
     required this.line,
     required this.source,
     required this.targets,
+    required this.regexIndex,
+    required this.childRegexIndex,
+    required this.hasParentRegex,
     required this.fluentChain,
     this.code,
     this.actionPayload,
@@ -246,15 +271,35 @@ final class CompiledActionEdge {
   final int line;
   final String source;
   final List<DependencyRef> targets;
+  final int regexIndex;
+  final int childRegexIndex;
+  final bool hasParentRegex;
   final String? code;
   final List<FluentCall> fluentChain;
   final CompiledActionPayload? actionPayload;
+
+  CompiledActionEdge copyWith({int? regexIndex}) {
+    return CompiledActionEdge(
+      line: line,
+      source: source,
+      targets: targets,
+      regexIndex: regexIndex ?? this.regexIndex,
+      childRegexIndex: childRegexIndex,
+      hasParentRegex: hasParentRegex,
+      code: code,
+      fluentChain: fluentChain,
+      actionPayload: actionPayload,
+    );
+  }
 
   JsonObject toJson() {
     return {
       'line': line,
       'source': source,
       'targets': [for (final target in targets) target.toJson()],
+      'regex_index': regexIndex,
+      'child_regex_index': childRegexIndex,
+      'has_parent_regex': hasParentRegex,
       if (code != null) 'code': code,
       'fluent_chain': [for (final call in fluentChain) call.toJson()],
       if (actionPayload != null) 'action_payload': actionPayload!.toJson(),
@@ -415,21 +460,23 @@ CompiledRule _compileRule(Rule rule, UserFunctionRegistry functionRegistry) {
   final blindEdges = <CompiledBlindEdge>[];
   final lifecycleActionPayloads = <CompiledActionPayload>[];
   final plainActionPayloads = <CompiledActionPayload>[];
+  var currentRegexIndex = 0;
+  int? lastRegexLine;
 
   for (final element in rule.body) {
     switch (element.kind) {
       case RegexBodyElementKind(:final pattern):
         regexPatterns.add(pattern);
+        currentRegexIndex += 1;
+        lastRegexLine = element.line;
       case ActionEdgeBodyElementKind(
         :final targets,
         :final code,
         :final fluentChain,
       ):
-        final refs = [
-          for (final target in targets)
-            DependencyRef(label: target.label, index: target.index),
-        ];
-        dependencyRefs.addAll(refs);
+        final hasParentRegex =
+            lastRegexLine == element.line && currentRegexIndex > 0;
+        final regexIndex = hasParentRegex ? currentRegexIndex - 1 : 0;
         final payload = _compileOptionalActionPayload(
           role: 'action_edge',
           element: element,
@@ -437,21 +484,30 @@ CompiledRule _compileRule(Rule rule, UserFunctionRegistry functionRegistry) {
           fluentChain: fluentChain,
           functionRegistry: functionRegistry,
         );
-        actionEdges.add(
-          CompiledActionEdge(
-            line: element.line,
-            source: element.source,
-            targets: List.unmodifiable(refs),
-            code: code,
-            fluentChain: List.unmodifiable(fluentChain),
-            actionPayload: payload,
-          ),
-        );
+        for (final target in targets) {
+          final ref = DependencyRef(label: target.label, index: target.index);
+          dependencyRefs.add(ref);
+          actionEdges.add(
+            CompiledActionEdge(
+              line: element.line,
+              source: element.source,
+              targets: List.unmodifiable([ref]),
+              regexIndex: regexIndex,
+              childRegexIndex: target.index,
+              hasParentRegex: hasParentRegex,
+              code: code,
+              fluentChain: List.unmodifiable(fluentChain),
+              actionPayload: payload,
+            ),
+          );
+        }
+        lastRegexLine = null;
       case BlindEdgeBodyElementKind(
         :final target,
         :final code,
         :final fluentChain,
       ):
+        lastRegexLine = null;
         final ref = DependencyRef(label: target, index: 0);
         dependencyRefs.add(ref);
         final payload = _compileOptionalActionPayload(
@@ -472,6 +528,7 @@ CompiledRule _compileRule(Rule rule, UserFunctionRegistry functionRegistry) {
           ),
         );
       case CodeBlockBodyElementKind(:final lifecycle, :final code):
+        lastRegexLine = null;
         lifecycleActionPayloads.add(
           _compileActionPayload(
             role: 'lifecycle',
@@ -482,6 +539,7 @@ CompiledRule _compileRule(Rule rule, UserFunctionRegistry functionRegistry) {
           ),
         );
       case PlainBlockBodyElementKind(:final code):
+        lastRegexLine = null;
         plainActionPayloads.add(
           _compileActionPayload(
             role: 'plain_block',
@@ -495,6 +553,7 @@ CompiledRule _compileRule(Rule rule, UserFunctionRegistry functionRegistry) {
       case FluentChainBodyElementKind():
       case ConditionalBodyElementKind():
       case RawBodyElementKind():
+        lastRegexLine = null;
         break;
     }
   }
@@ -511,6 +570,59 @@ CompiledRule _compileRule(Rule rule, UserFunctionRegistry functionRegistry) {
     plainActionPayloads: List.unmodifiable(plainActionPayloads),
     bodyElements: List.unmodifiable(rule.body),
   );
+}
+
+Map<String, CompiledRule> _resolveActionEdgeDependencyRegexes({
+  required List<String> compiledRuleOrder,
+  required Map<String, CompiledRule> rulesByLabel,
+}) {
+  final resolved = Map<String, CompiledRule>.from(rulesByLabel);
+  for (final label in compiledRuleOrder) {
+    final rule = resolved[label]!;
+    final patterns = List<String>.from(rule.regexPatterns);
+    final actionEdges = <CompiledActionEdge>[];
+    for (final edge in rule.actionEdges) {
+      if (edge.hasParentRegex) {
+        actionEdges.add(edge);
+        continue;
+      }
+
+      final target = edge.targets.single;
+      if (target.label == label) {
+        if (target.index < 0 || target.index >= patterns.length) {
+          throw CompiledSpecException(
+            "rule '$label' references its own regex slot ${target.index}, "
+            'but the rule has ${patterns.length} parent regex slot(s)',
+          );
+        }
+        actionEdges.add(edge.copyWith(regexIndex: target.index));
+        continue;
+      }
+
+      final child = resolved[target.label] ?? rulesByLabel[target.label];
+      if (child == null) {
+        throw CompiledSpecException(
+          "rule '$label' references undefined rule '${target.label}'",
+        );
+      }
+      if (target.index < 0 || target.index >= child.regexPatterns.length) {
+        throw CompiledSpecException(
+          "rule '$label' references rule '${target.label}' regex slot "
+          '${target.index}, but that rule has '
+          '${child.regexPatterns.length} regex slot(s)',
+        );
+      }
+      final regexIndex = patterns.length;
+      patterns.add(child.regexPatterns[target.index]);
+      actionEdges.add(edge.copyWith(regexIndex: regexIndex));
+    }
+
+    resolved[label] = rule.copyWith(
+      regexPatterns: List.unmodifiable(patterns),
+      actionEdges: List.unmodifiable(actionEdges),
+    );
+  }
+  return resolved;
 }
 
 CompiledActionPayload? _compileOptionalActionPayload({

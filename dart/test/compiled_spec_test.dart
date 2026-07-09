@@ -150,6 +150,52 @@ Child:
     });
   });
 
+  test('resolves edge-only action edges to compiled regex indices', () {
+    final compiled = compileSpec(
+      parseSpec(r'''
+Top::
+ /z/ -> Anchored { return(match_text()) }
+ -> Child .push
+
+Anchored: /z/
+Child: /c/
+Pair: /\[/ /\]/
+ -> Other .push
+ -> Pair[1] .return(array("pair"))
+
+Other: /x/
+'''),
+    );
+
+    final top = compiled.rule('Top')!;
+    expect(top.regexPatterns, ['z', 'c']);
+    expect(
+      top.actionEdges.map(
+        (edge) => (
+          edge.targets.single.label,
+          edge.regexIndex,
+          edge.childRegexIndex,
+          edge.hasParentRegex,
+        ),
+      ),
+      [('Anchored', 0, 0, true), ('Child', 1, 0, false)],
+    );
+
+    final pair = compiled.rule('Pair')!;
+    expect(pair.regexPatterns, [r'\[', r'\]', 'x']);
+    expect(
+      pair.actionEdges.map(
+        (edge) => (
+          edge.targets.single.label,
+          edge.regexIndex,
+          edge.childRegexIndex,
+          edge.hasParentRegex,
+        ),
+      ),
+      [('Other', 2, 0, false), ('Pair', 1, 1, false)],
+    );
+  });
+
   test(
     'uses last-definition order when validation is deliberately skipped',
     () {

@@ -265,9 +265,11 @@ markers, lower-bound quantifiers, and Python-style named captures. Scoped flag
 groups are accepted by lifting their options to the Dart `RegExp`. The missing
 helper/action bridge is also in place for direct capture-slice helpers,
 diagnostic output helpers, logical helpers, `exit_now`, and quoted helper-call
-delimiter parsing; deeper PCRE
-structural constructs such as `\K`, `(?&name)`, and `(?(DEFINE)...)` are routed
-to a separate follow-up. The
+delimiter parsing. The recursive/default-mode bridge is in place too: compiled
+action edges carry resolved regex-dispatch metadata, edge-only child regexes are
+folded into the parent alternation, and explicit aggregate resets are scoped to
+the current rule invocation. Deeper PCRE structural constructs such as `\K`,
+`(?&name)`, `(?R)`, and `(?(DEFINE)...)` are routed to a separate follow-up. The
 future Dart closeout now includes a distinct Dart-specific LinkedSpec CLI
 entrypoint; future Julia and Lua backend plans must own their own variant-specific
 CLIs rather than relying on one ambiguous shared command. Dart
@@ -399,10 +401,11 @@ parsed functions, compiled registry jobs, descriptor records, and runtime output
 Dart corpus parity has started with controlled manifest fixtures and now has safe
 named/bounded execution selection for shipped-corpus batching. The first 40
 manifest fixtures and the non-`fn` middle fixtures pass in bounded execute mode.
-The remaining shipped-spec/parser-smoke window is split after a 2/31 diagnostic
-run. The basic regex-dialect bridge and helper/action bridge are done;
-recursive/default-mode parser-smoke semantics are the next Dart leaf, and full
-shipped 99-fixture corpus parity remains later.
+The remaining shipped-spec/parser-smoke window is split after a diagnostic run
+and is now 7/31 green. The basic regex-dialect bridge, helper/action bridge, and
+recursive/default-mode parser-smoke bridge are done; residual output/helper
+parity is the next Dart leaf, and full shipped 99-fixture corpus parity remains
+later.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under
