@@ -7,3 +7,8 @@ git_message_brief.txt
 
 # Local agent state
 .claude/projects/
+
+# Dart tooling
+dart/.dart_tool/
+dart/.packages
+dart/build/

@@ -74,6 +74,10 @@ Top-level directories and files:
 - `bin/`
   - Utility/command scripts.
   - `bin/linkedspec`: Perl reference compile/run CLI with discoverable trace flags.
+- `dart/`
+  - Dart backend parity package scaffold.
+  - Current state: package metadata, public library entrypoint, CLI smoke entrypoint, corpus-runner
+    entrypoint, and smoke test; parser/runtime semantics land under `DART-BACKEND-PARITY`.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

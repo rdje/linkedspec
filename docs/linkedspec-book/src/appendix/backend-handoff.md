@@ -241,10 +241,10 @@ The active Dart plan follows the same parity ordering. `DART-BACKEND-PARITY`
 starts interpreter-first: `.spec` parser, typed helper/action AST, compiled-spec
 state, Dart runtime interpreter, then the manifest-backed corpus runner.
 Generated Dart source is a later proof lane after interpreter/corpus parity, not
-the primary conformance gate. The local preflight has verified Dart SDK 3.9.2 at
-`/opt/homebrew/bin/dart`; Flutter is absent and non-blocking because the backend
-starts as a CLI/library package under `dart/`. The next owned step is the minimal
-Dart package scaffold and smoke test.
+the primary conformance gate. The repo now has a Dart CLI/library scaffold under
+`dart/`, including package metadata, committed lockfile, public library entrypoint,
+CLI smoke entrypoint, corpus-runner entrypoint, and smoke test. The next owned
+step is manifest/corpus IO scaffolding before parser semantics.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

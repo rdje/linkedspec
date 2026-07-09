@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.1.2 — create Dart scaffold smoke package**
+  (DONE minimal Dart package scaffold; parser/runtime/corpus semantics still deferred).
+
+  **Change:** Added the repo-owned `dart/` package with metadata, committed lockfile, analyzer options,
+  package README, public scaffold API, CLI smoke entrypoint, corpus-runner entrypoint, and a
+  `package:test` smoke test. Added Dart tool-state ignores for `.dart_tool/`, `.packages`, and build output.
+
+  **Boundary:** The CLI and corpus-runner are scaffold-only. Manifest IO starts in
+  `DART-BACKEND-PARITY.1.3`; parser/compiler/runtime work starts in later leaves.
+
+  **Verification:** `dart pub get`, `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos
+  --fatal-warnings`, `dart test`, `dart run bin/linkedspec_dart.dart --help`, and
+  `dart run bin/corpus_runner.dart --help` pass. Pub dependency download and analyzer state initialization
+  required approved access outside the workspace sandbox. `git diff --check`, memory architecture,
+  Knowledge Map regeneration/check, task-tree metadata, doctrine gates, and
+  `mdbook build docs/linkedspec-book` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.1.1 — record Dart toolchain and layout**
   (DONE toolchain/package-layout preflight; no Dart package files created).
 

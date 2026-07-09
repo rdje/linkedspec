@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.1.2 — Dart scaffold package):
+  Created the first repo-owned Dart package under `dart/`. It is deliberately scaffold-only:
+  `pubspec.yaml` + committed `pubspec.lock`, strict analyzer options, package README, public library
+  entrypoint, `bin/linkedspec_dart.dart`, `bin/corpus_runner.dart`, and a `package:test` smoke test.
+  The only dependency is the hosted `test` dev dependency; `.dart_tool/` and build outputs are ignored.
+  `dart pub get` needed approved network access to pub.dev, and `dart analyze` needed approved analyzer
+  state initialization under `~/.dartServer`. Next leaf `DART-BACKEND-PARITY.1.3` adds manifest/corpus
+  IO scaffolding without parser semantics.
+
 - 2026-07-09 (DART-BACKEND-PARITY.1.1 — Dart toolchain/layout preflight):
   `/opt/homebrew/bin/dart` is available and reports Dart SDK `3.9.2 (stable)` on `macos_arm64`.
   Flutter is not installed, which is non-blocking because the backend starts as a Dart CLI/library package.

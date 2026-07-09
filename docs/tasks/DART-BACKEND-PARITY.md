@@ -73,12 +73,18 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.1.1 - record Dart toolchain and layout`
 
 - ID: `DART-BACKEND-PARITY.1.2`
-  Status: `pending`
+  Status: `done`
   Goal: Create the minimal Dart package scaffold and CI-facing smoke test.
   Acceptance: `dart/` has package metadata, library/test entrypoints, a no-op smoke test, documented
     commands, and no dependency on unpublished local state.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** `dart/` has package metadata, committed `pubspec.lock`, strict
+    analyzer options, README, public library entrypoint, CLI smoke entrypoint, corpus-runner entrypoint,
+    and a `package:test` smoke test. `dart pub get`, `dart format --set-exit-if-changed .`,
+    `dart analyze --fatal-infos --fatal-warnings`, `dart test`, `dart run bin/linkedspec_dart.dart --help`,
+    and `dart run bin/corpus_runner.dart --help` pass. Pub dependency download and analyzer state initialization
+    required approved out-of-sandbox access. Repository gates pass after Knowledge Map regeneration.
+    Parser/runtime/corpus semantics remain deferred.
+  Commit: `DART-BACKEND-PARITY.1.2 - create Dart scaffold smoke package`
 
 - ID: `DART-BACKEND-PARITY.1.3`
   Status: `pending`
@@ -309,7 +315,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-BACKEND-PARITY.1.2` | `pending` | Toolchain and layout are known; create the minimal package scaffold and smoke test next. |
+| 1 | `DART-BACKEND-PARITY.1.3` | `pending` | Package scaffold exists; add manifest/corpus IO scaffolding before parser semantics. |
 
 ## Dart Toolchain And Package Layout
 
@@ -320,7 +326,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 - One-time local SDK initialization: `dart --disable-analytics` creates user-level SDK analytics config.
   This required approved execution outside the workspace sandbox because the SDK writes `~/.dart-tool`.
 
-Planned package root: `dart/`
+Package root: `dart/` (created by `DART-BACKEND-PARITY.1.2`)
 
 ```text
 dart/
@@ -372,6 +378,17 @@ The package name should be `linkedspec_dart`. Initial dependencies should stay m
 `args` for CLI parsing if needed, `test` as a dev dependency, and a lints package only if the scaffold
 requires one. Any dependency download belongs to `.1.2`, not this preflight leaf.
 
+The `.1.2` scaffold intentionally implements no parser, runtime, or corpus semantics yet. It includes:
+
+- `pubspec.yaml` with the hosted `test` dev dependency only.
+- Committed `pubspec.lock` for reproducible local package checks.
+- `analysis_options.yaml` with strict analyzer language settings and generated-output excludes.
+- `README.md` documenting local Dart commands and current boundaries.
+- `lib/linkedspec_dart.dart` plus `lib/src/scaffold.dart` as the public scaffold API.
+- `bin/linkedspec_dart.dart` and `bin/corpus_runner.dart` as help-capable scaffold entrypoints.
+- `test/smoke_test.dart` as the first CI-facing Dart smoke test.
+- Root `.gitignore` entries for `dart/.dart_tool/`, `dart/.packages`, and `dart/build/`.
+
 ## Decisions
 
 - `2026-07-09`: Dart starts interpreter-first. The primary parity path is
@@ -383,14 +400,16 @@ requires one. Any dependency download belongs to `.1.2`, not this preflight leaf
   fixture truth until a backend-neutral corpus directory is separately adopted.
 - `2026-07-09`: Dart package layout starts as a CLI/library package under `dart/`; Flutter is not required for
   the backend implementation path.
+- `2026-07-09`: The initial Dart package commits `pubspec.lock` because this repo owns a non-published
+  CLI/library backend package. Generated Dart tool state stays ignored under `dart/.dart_tool/`.
 
 ## Open Questions
 
-- None blocking `.1.2`. The Dart SDK is available locally after one-time analytics initialization.
+- None blocking `.1.3`. The package scaffold is green; manifest IO is next.
 
 ## Blockers
 
-- None known before `.1.2` scaffold creation.
+- None known before `.1.3` manifest IO scaffolding.
 
 ## Verification Log
 
@@ -398,6 +417,7 @@ requires one. Any dependency download belongs to `.1.2`, not this preflight leaf
 | --- | --- | --- | --- |
 | `2026-07-09` | `DART-BACKEND-PARITY` | Plan created under `FUTURE-PARITY-BACKLOG.1.1`; `git diff --check`; memory architecture; Knowledge Map; doctrine; task-tree metadata; mdBook build; local CI. | PASS. Local CI includes phase0 `1..1028`; no Dart code yet. |
 | `2026-07-09` | `DART-BACKEND-PARITY.1.1` | `command -v dart`; `dart --version`; `command -v flutter`; approved `dart --disable-analytics`; `dart help format`; `dart help analyze`; `dart help test`; `dart pub --help`; `dart create --help`; `git diff --check`; memory architecture; Knowledge Map; task-tree metadata; doctrine; mdBook build. | PASS. Dart SDK `3.9.2` is available; Flutter absent/non-blocking; layout and commands recorded; no Dart package files created. |
+| `2026-07-09` | `DART-BACKEND-PARITY.1.2` | approved `dart pub get`; `dart format --set-exit-if-changed .`; approved `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Scaffold package, lockfile, CLI stubs, corpus-runner stub, and smoke test are green; no parser/runtime/corpus semantics yet. |
 
 ## Commit Log
 
@@ -405,9 +425,12 @@ requires one. Any dependency download belongs to `.1.2`, not this preflight leaf
 | --- | --- | --- |
 | `DART-BACKEND-PARITY` | `FUTURE-PARITY-BACKLOG.1.1 - scope Dart backend parity plan` | Tree created by the backlog scoping leaf; implementation commits use `DART-BACKEND-PARITY.*` leaf ids. |
 | `DART-BACKEND-PARITY.1.1` | `DART-BACKEND-PARITY.1.1 - record Dart toolchain and layout` | Toolchain/layout preflight; no package files. |
+| `DART-BACKEND-PARITY.1.2` | `DART-BACKEND-PARITY.1.2 - create Dart scaffold smoke package` | Minimal package scaffold; no parser/runtime/corpus semantics. |
 
 ## Changelog
 
 - `2026-07-09`: Created the Dart backend parity task tree and selected an interpreter-first parity path.
 - `2026-07-09`: Recorded Dart SDK `3.9.2`, CLI/library package layout, and planned commands; frontier advances
   to `.1.2` for scaffold creation.
+- `2026-07-09`: Created the `dart/` scaffold package and smoke test; frontier advances to `.1.3` for
+  corpus-fixture IO scaffolding.

@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.1.2 — create Dart scaffold smoke package
+
+**Scope:** Dart package scaffold, smoke commands, root layout docs, mdBook sync, and Knowledge Map retrieval.
+
+**Change:** Created the repo-owned `dart/` package with `pubspec.yaml`, committed `pubspec.lock`,
+strict analyzer options, package README, public scaffold library, `bin/linkedspec_dart.dart`,
+`bin/corpus_runner.dart`, and a `package:test` smoke test. Added Dart tool-state ignores for
+`.dart_tool/`, `.packages`, and build output. The CLI entrypoints are scaffold-only and do not implement
+parser, runtime, or corpus semantics yet; `.1.3` owns manifest IO scaffolding.
+
+**Validation:** `dart pub get` passed with approved pub.dev network access; `dart format --set-exit-if-changed .`
+is clean after formatting the new test once; `dart analyze --fatal-infos --fatal-warnings` passed with
+approved analyzer state initialization under `~/.dartServer`; `dart test`,
+`dart run bin/linkedspec_dart.dart --help`, and `dart run bin/corpus_runner.dart --help` pass.
+`git diff --check`, memory architecture, Knowledge Map regeneration/check, task-tree metadata, doctrine
+gates, and `mdbook build docs/linkedspec-book` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.1.1 — record Dart toolchain and layout
 
 **Scope:** Dart backend preflight, package layout, mdBook status sync, and task-tree frontier advancement.

@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.1.2` created the repo-owned Dart package scaffold
+  under `dart/`. The package has `pubspec.yaml`, committed `pubspec.lock`, analyzer options, README,
+  public library entrypoint, CLI smoke entrypoint, corpus-runner entrypoint, and a `package:test`
+  smoke test. `.dart_tool/` and build outputs are ignored. This is scaffold only: manifest IO starts
+  in `.1.3`, and parser/compiler/runtime semantics remain later leaves.
 - `2026-07-09` refresh: `FUTURE-PARITY-BACKLOG.1.1` scoped the Dart lane into
   `docs/tasks/DART-BACKEND-PARITY.md`. Dart parity starts interpreter-first: `.spec` parser, typed
   helper/action AST, compiled-spec state, Dart runtime interpreter, then manifest-backed corpus parity.
