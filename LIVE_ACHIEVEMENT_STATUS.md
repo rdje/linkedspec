@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.2 — close Dart hlink delimiter captures**
+  (DONE — hlink delimiter/capture fixtures now pass on Dart).
+
+  **Change:** Dart `call(...)` refreshes the runtime `retv` channel with child results, and append-style mutations
+  now update scalar-held lists created by assignments such as `items = []`. That makes
+  `push(array(word_items), retv)` visible through `array(word_items)` in `hlink_substitution.spec`.
+
+  **Boundary:** All five hlink fixtures pass. The shipped-spec/parser-smoke diagnostic window is now 19/31 green;
+  `tablegrep_simple_term` is also green from the same scalar-held append behavior. Active implementation work
+  advances to `DART-BACKEND-PARITY.6.2.4.4.3` for helper mutation and text-normalization parity.
+
+  **Verification:** Dart format/analyze/full tests, focused runtime/corpus tests, focused hlink corpus run,
+  diagnostic corpus run, CLI/help corpus-loader smokes, mdBook, memory architecture, Knowledge Map, task-tree
+  metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.1 — close Dart portmap result shapes**
   (DONE — explicit `flat*` arguments splice correctly inside Dart `array(...)`).
 

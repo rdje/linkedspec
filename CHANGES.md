@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.4.2 — close Dart hlink delimiter captures
+
+**Scope:** Dart runtime return-channel and scalar-held array append semantics, focused runtime/corpus tests, hlink
+corpus diagnostics, Dart README/mdBook status, live docs, roadmap status, task-tree status, and Knowledge Map.
+
+**Change:** Dart `call(...)` now refreshes the runtime `retv` channel with the called child result, and
+append-style array mutations now update scalar-held lists created by assignments such as `items = []`. This makes
+`push(array(word_items), retv)` visible through later `array(word_items)` reads in `hlink_substitution.spec`, so
+all five hlink delimiter/capture fixtures pass. The shipped-spec/parser-smoke diagnostic window is now 19/31 green;
+`tablegrep_simple_term` is also green from the same scalar-held append path.
+
+**Validation:** Dart format, analyze, focused runtime/corpus tests, full Dart tests, focused hlink corpus run,
+diagnostic corpus run, CLI/help corpus-loader smokes, mdBook build, memory architecture, Knowledge Map
+generation/check, task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.4.1 — close Dart portmap result shapes
 
 **Scope:** Dart runtime array constructor list-context splicing, focused runtime/corpus tests, portmap corpus

@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.4.4.2 — Dart hlink delimiter/capture parity):
+  Hlink exposed a Dart store-channel mismatch rather than a capture-boundary bug: `word_items = []` creates a
+  scalar-held list, `push(array(word_items), retv)` was appending to aggregate storage, and `array(word_items)`
+  correctly preferred the still-empty scalar-held list. Dart now routes `push(...)` and `items += value` through
+  one append helper that mutates the scalar-held list when it is the current owner, while explicit
+  `set(array(name), ...)` aggregate resets keep their existing aggregate-storage behavior. `call(...)` also
+  refreshes the runtime `retv` channel after child execution, so hlink's `retv = call(child)` plus lifecycle
+  collection path matches the Rust/Perl oracle. All five hlink fixtures pass; the shipped-spec/parser-smoke window
+  is now 19/31 green, with `tablegrep_simple_term` also passing from the scalar-held append fix.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.4.4.1 — Dart array flat list-context splice):
   Dart now mirrors the Rust/Perl list-context rule for `array(...)`: explicit `flat(...)`, `flat_array(...)`, and
   `flat_hash(...)` call or fluent arguments splice their returned aggregate into the constructed array, while

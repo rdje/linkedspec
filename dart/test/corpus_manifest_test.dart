@@ -55,6 +55,39 @@ void main() {
     ]);
   });
 
+  test('executes hlink corpus fixtures with delimiter capture shapes', () {
+    final result = executeCorpusFixtures(
+      '../rust/linkedspec-runtime/tests/corpus',
+      caseNames: const [
+        'hlink_raw_string',
+        'hlink_raw_escaped_brackets',
+        'hlink_curly_brace',
+        'hlink_bracket_body',
+        'hlink_mixed_bracket_brace',
+      ],
+    );
+
+    expect(
+      result.failures
+          .map((failure) => '${failure.name}: ${failure.failure}')
+          .join('\n'),
+      isEmpty,
+    );
+    expect(result.passed, isTrue);
+    expect(result.passedCount, 5);
+    expect(result.fixture('hlink_raw_string').actualValue, ['plain text']);
+    expect(result.fixture('hlink_raw_escaped_brackets').actualValue, [
+      r'plain \[text\]',
+    ]);
+    expect(result.fixture('hlink_curly_brace').actualValue, ['{abc}']);
+    expect(result.fixture('hlink_bracket_body').actualValue, ['abc']);
+    expect(result.fixture('hlink_mixed_bracket_brace').actualValue, [
+      'foo',
+      'bar',
+      '{baz}',
+    ]);
+  });
+
   test('executes controlled fixtures against runtime output shape', () {
     final root = Directory.systemTemp.createTempSync(
       'linkedspec-dart-controlled-',

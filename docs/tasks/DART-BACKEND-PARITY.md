@@ -950,7 +950,9 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     including any observable semantic mismatch from Dart's normalized regex dialect bridge. EBNF/spec.spec/Lispish
     PCRE structural blockers remain owned by `.6.2.4.6`.
   Verification: Split 2026-07-09 after the `.6.2.4.3` diagnostic window reached 7/31 green. After `.6.2.4.4.1`,
-    all five portmap fixtures and `vhdl_library_use` pass, bringing the diagnostic window to 13/31 green.
+    all five portmap fixtures and `vhdl_library_use` pass, bringing the diagnostic window to 13/31 green. After
+    `.6.2.4.4.2`, all five hlink fixtures and `tablegrep_simple_term` pass, bringing the diagnostic window to 19/31
+    green.
   Commit: `pending`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.0`
@@ -1010,13 +1012,43 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.4.4.1 - close Dart portmap result shapes`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.2`
-  Status: `pending`
+  Status: `done`
   Goal: Close hlink delimiter/capture parser-smoke parity.
   Acceptance: `hlink_raw_string`, `hlink_raw_escaped_brackets`, `hlink_curly_brace`, `hlink_bracket_body`, and
     `hlink_mixed_bracket_brace` pass on Dart or remaining mismatches are routed with precise delimiter/capture
     evidence.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Dart `call(...)` now refreshes the runtime `retv` channel with called child
+    results, and append-style mutations now route through one helper that mutates scalar-held lists created by
+    assignments such as `items = []` before falling back to aggregate storage. This makes
+    `push(array(word_items), retv)` visible through later `array(word_items)` reads in `hlink_substitution.spec`.
+    Focused hlink execution passes all five fixtures. The diagnostic `--execute --offset 68 --limit 31` window is
+    now 19/31 green; `tablegrep_simple_term` also passes from the same scalar-held append behavior. Dart
+    format/analyze/full tests pass.
+
+  ## Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — `dart run bin/corpus_runner.dart --corpus
+    ../rust/linkedspec-runtime/tests/corpus --execute --case hlink_raw_string --case hlink_raw_escaped_brackets
+    --case hlink_curly_brace --case hlink_bracket_body --case hlink_mixed_bracket_brace` initially failed all five
+    hlink fixtures with `matched: false` at end-of-input.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — `LinkedSpecTraceEmitter` diagnostics showed the child rule matched and
+    `substitute_top` ran `LE { push(array(word_items), retv) }`, but `LX` still saw `array(word_items)` as empty.
+    `word_items = []` stores a scalar-held list in `context.variables`, while Dart `push(array(...), ...)` was
+    appending to `context.arrays`; `_arrayValueFor(...)` correctly preferred the scalar-held list and hid the
+    aggregate append. `call(...)` also needed to refresh `context.retv` after child execution.
+  - [x] **FIX** — `dart/lib/src/runtime/interpreter.dart` now routes `push(...)` and `items += value` through
+    `_appendArrayValue(...)`, mutating scalar-held lists when present and preserving explicit aggregate storage
+    behavior otherwise. `call(...)` now sets `context.retv = child.value` before returning.
+  - [x] **ADDRESSED (verified)** — Focused Dart tests `dart test test/runtime_interpreter_test.dart
+    test/corpus_manifest_test.dart` pass; the focused hlink corpus command is FAIL->PASS with 5 passed and 0
+    failed.
+  - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+    and `dart test` all PASS; the 31-fixture diagnostic run moves from 13/31 to 19/31 green.
+  - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
+    `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, and
+    Knowledge Map are updated; `mdbook build docs/linkedspec-book`, `bash scripts/check_memory_architecture.sh`,
+    `bash knowledge-map/scripts/check_knowledge_map.sh`, `bash scripts/check_task_tree_metadata.sh`,
+    `bash scripts/check_doctrines.sh`, and `git diff --check` pass.
+  Commit: `DART-BACKEND-PARITY.6.2.4.4.2 - close Dart hlink delimiter captures`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.3`
   Status: `pending`
@@ -1031,9 +1063,10 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 - ID: `DART-BACKEND-PARITY.6.2.4.4.4`
   Status: `pending`
   Goal: Close legacy structural smoke output parity.
-  Acceptance: `regdef_nested_register_fields`, `tablegrep_simple_term`, and `ds_vhistory_version_entry` pass on
-    Dart or residual mismatches are routed with precise structural evidence. `vhdl_library_use` passed under
-    `.6.2.4.4.1` from the Dart `array(flat*)` list-context splice fix.
+  Acceptance: `regdef_nested_register_fields` and `ds_vhistory_version_entry` pass on Dart or residual mismatches
+    are routed with precise structural evidence. `vhdl_library_use` passed under `.6.2.4.4.1` from the Dart
+    `array(flat*)` list-context splice fix, and `tablegrep_simple_term` passed under `.6.2.4.4.2` from the
+    scalar-held append fix.
   Verification: `pending`
   Commit: `pending`
 

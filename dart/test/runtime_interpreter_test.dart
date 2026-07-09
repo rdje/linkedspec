@@ -117,6 +117,20 @@ atom: /[A-Za-z0-9]+/   I.return(entry_text())
     ]);
   });
 
+  test('push and append mutate scalar-held array values', () {
+    final engine = _engine(r'''
+Top::
+ I { items = [] }
+ /x/
+ LE { push(array(items), "head"); items += "tail" }
+ LX { return(copy(array(items))) }
+''');
+
+    final result = engine.parse('x');
+
+    expect(result.value, ['head', 'tail']);
+  });
+
   test('preserves recursive top-rule LX sequence values', () {
     final engine = _engine(r'''
 sexpr:: /\(/ /\)/  I { set(array(items), []) }

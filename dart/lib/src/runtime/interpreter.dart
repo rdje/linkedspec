@@ -2280,8 +2280,7 @@ final class LinkedSpecRuntimeEngine {
             currentEdge: currentEdge,
           ),
         );
-        context.arrayFor(name).add(stored);
-        return List<Object?>.unmodifiable(context.arrayFor(name));
+        return _appendArrayValue(context, name, stored);
       case ActionAssignHashIndexExpr(:final name, :final key, :final value):
         return _assignHashIndex(
           context,
@@ -2717,6 +2716,7 @@ final class LinkedSpecRuntimeEngine {
             currentEdge != null && currentEdge.target.label == targetLabel
             ? _executeActionEdgeChild(currentEdge, context)
             : _executeRule(targetLabel, targetIndex, context);
+        context.retv = child.value;
         return child.value;
       case 'and':
         return _callLogicalAnd(positionalArgs, context, ruleLabel, currentEdge);
@@ -3044,8 +3044,7 @@ final class LinkedSpecRuntimeEngine {
   ) {
     if (args.isEmpty) {
       final child = _requireCurrentEdgeChild(currentEdge, context, ruleLabel);
-      context.arrayFor(ruleLabel).add(_copyValue(child.value));
-      return List<Object?>.unmodifiable(context.arrayFor(ruleLabel));
+      return _appendArrayValue(context, ruleLabel, child.value);
     }
 
     if (args.length == 1 && currentEdge != null) {
@@ -3057,8 +3056,7 @@ final class LinkedSpecRuntimeEngine {
       }
       final child = _executeActionEdgeChild(currentEdge, context);
       context.retv = child.value;
-      context.arrayFor(target).add(_copyValue(child.value));
-      return List<Object?>.unmodifiable(context.arrayFor(target));
+      return _appendArrayValue(context, target, child.value);
     }
 
     if (args.length >= 2) {
@@ -3072,8 +3070,7 @@ final class LinkedSpecRuntimeEngine {
             ? _executeActionEdgeChild(currentEdge, context)
             : _executeRule(firstName, 0, context);
         context.retv = child.value;
-        context.arrayFor(secondTarget).add(_copyValue(child.value));
-        return List<Object?>.unmodifiable(context.arrayFor(secondTarget));
+        return _appendArrayValue(context, secondTarget, child.value);
       }
 
       final target = _arrayTargetName(args[0]) ?? _variableName(args[0]);
@@ -3090,8 +3087,7 @@ final class LinkedSpecRuntimeEngine {
           currentEdge: currentEdge,
         ),
       );
-      context.arrayFor(target).add(value);
-      return List<Object?>.unmodifiable(context.arrayFor(target));
+      return _appendArrayValue(context, target, value);
     }
 
     return null;
@@ -5619,6 +5615,26 @@ List<Object?> _arrayValueFor(_RuntimeExecutionContext context, String name) {
     return [for (final item in stored) _copyValue(item)];
   }
   return <Object?>[];
+}
+
+List<Object?> _appendArrayValue(
+  _RuntimeExecutionContext context,
+  String name,
+  Object? value,
+) {
+  final stored = _copyValue(value);
+  final variable = context.variables[name];
+  if (variable is List) {
+    final updated = [for (final item in variable) _copyValue(item), stored];
+    context.variables[name] = updated;
+    if (context.arrays.containsKey(name)) {
+      context.arrays[name] = [for (final item in updated) _copyValue(item)];
+    }
+    return List<Object?>.unmodifiable(updated);
+  }
+  final array = context.arrayFor(name);
+  array.add(stored);
+  return List<Object?>.unmodifiable(array);
 }
 
 Map<String, Object?> _hashValueFor(
