@@ -80,13 +80,16 @@ runs through the compiled ActionIR body. The Rust runtime resolves those compile
 executes them in fresh function-local variable stores, restores caller stores after return, and supports
 compatible receiver chains and standalone discard.
 
-The Dart backend now has the same state boundary as non-executing compiler data. `compileSpec(...)` in
+The Dart backend now has the same compiled-state boundary. `compileSpec(...)` in
 `dart/lib/src/compiler/compiled_spec.dart` validates parsed `SpecFile` input by default, builds ordered
 `CompiledSpec` / `CompiledRule` records, carries the `UserFunctionRegistry`, records mode metadata, regexes,
 dependency refs, action/blind edges, and lifecycle/plain/edge `ActionBlock` payloads, derives structured
 `CompiledDependencyRegexState`, and projects `CompiledDescriptorState` as `spec`, `functions`,
 `dependency_regex_map`, and `meta`. Dart stores dependency regexes as structured refs plus pattern strings until
-the runtime interpreter leaf owns executable match dispatch.
+the runtime interpreter consumes them for executable match dispatch. `LinkedSpecRuntimeEngine` now uses this
+state for rule-family dispatch, action-edge and blind-call child execution, lifecycle blocks, `retv`,
+accumulator collection, bounded repetition, zero-progress cutoffs, and recursion cutoffs; the broader helper
+value model remains a later Dart runtime leaf.
 
 This registry is intentionally flat for the MVP. It is not an overload table, namespace/module model, closure
 environment, lambda catalog, or currying/partial-application representation. Those extensions require their own

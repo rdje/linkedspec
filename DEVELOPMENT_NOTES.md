@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.4.2 — Dart runtime rule interpreter):
+  Added Dart's first executable runtime interpreter in `dart/lib/src/runtime/interpreter.dart`.
+  `LinkedSpecRuntimeEngine` runs `CompiledSpec` rules over the `.4.1` regex/match-state layer and returns
+  `RuntimeParseResult` with the top rule value, Rust-style one-element output wrapper, cursor offsets, and
+  lifecycle events. The interpreter now covers rule dispatch, default/AND/OR/repetition modes, action-edge and
+  blind-call child dispatch, entry/local match handoff, explicit returns, `retv`, accumulator collection, bounded
+  repetition, zero-progress cutoffs, and recursion cutoffs. The embedded ActionIR evaluator is intentionally
+  narrow and dispatch-facing (`return`, `return_undef`, `set`, `push`, `array`, `copy`, `cat`, `call`,
+  `entry_*`, `match_*`); `.4.3` owns the broader helper/value model. Focused runtime interpreter tests cover
+  regex repetition collection, action-edge fluent `.push`, blind AND/OR dispatch, bounded OR repetition,
+  zero-progress repetition, and lifecycle ordering.
+
 - 2026-07-09 (DART-BACKEND-PARITY.4.1 — Dart runtime matching state):
   Added Dart runtime matching primitives in `dart/lib/src/runtime/matching.dart`. `RuntimeRegexAlternation`
   compiles ordered regex lists from compiled rules and supports `seek` and `consume` matching with stable

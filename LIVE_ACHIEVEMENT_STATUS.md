@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.4.2 — add Dart runtime rule interpreter**
+  (DONE first executable rule-dispatch interpreter; broader helper families are next).
+
+  **Change:** Added `LinkedSpecRuntimeEngine` and `RuntimeParseResult` over `CompiledSpec`, with
+  default/AND/OR/repetition dispatch, action-edge and blind-call child execution, lifecycle blocks, explicit
+  returns, `retv`, accumulator collection, bounded repetition, zero-progress cutoffs, and recursion cutoffs.
+
+  **Boundary:** The embedded ActionIR evaluator is intentionally dispatch-facing only. Full helper/value
+  families, BACKTRACK, runtime diagnostics/tracing, staged function execution, and corpus output parity remain
+  later leaves.
+
+  **Verification:** Focused runtime interpreter test, Dart format/analyze/full tests, corpus runner, CLI help,
+  mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.4.1 — add Dart runtime matching state**
   (DONE regex matching and match-state primitives; rule dispatch is next).
 

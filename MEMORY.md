@@ -18,18 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.4.1` — Dart now has runtime regex/match-state primitives:
-  seek/consume matching over compiled rule regex lists, stable alternative identity, capture/named-capture records,
-  char-offset projection, entry/local match registers, cursor state, and zero-progress detection.
-- prior_leaf: `DART-BACKEND-PARITY.3.4` — Dart compiled rule/dependency/descriptor state is complete.
+- latest_completed_leaf: `DART-BACKEND-PARITY.4.2` — Dart now has the first runtime interpreter:
+  rule dispatch over compiled rules, default/AND/OR/repetition modes, action-edge and blind-call child dispatch,
+  lifecycle execution, explicit returns, `retv`, accumulator collection, recursion cutoffs, and bounded/zero-progress
+  repetition.
+- prior_leaf: `DART-BACKEND-PARITY.4.1` — Dart runtime regex/match-state primitives are complete.
 - latest_commit: HEAD containing this pointer should be
-  `DART-BACKEND-PARITY.4.1 - add Dart runtime matching state`; parent before this slice is
-  `DART-BACKEND-PARITY.3.4 - add Dart compiled spec state`.
+  `DART-BACKEND-PARITY.4.2 - add Dart runtime rule interpreter`; parent before this slice is
+  `DART-BACKEND-PARITY.4.1 - add Dart runtime matching state`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.4.2` pending.
-- next_action: from a clean repo, implement `DART-BACKEND-PARITY.4.2` rule dispatch, rule modes, recursion
-  guards, repetition bounds, and lifecycle order over the Dart runtime matching state.
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.4.3` pending.
+- next_action: from a clean repo, implement `DART-BACKEND-PARITY.4.3` runtime value model and helper families
+  over the Dart interpreter introduced in `.4.2`.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, task-tree index,
   ROADMAP/ROADMAP_V2, mdBook status/backend-handoff/formal grammar/helper chapters, relevant ADR/KM facts,
   Dart package/source owners for `.4.1`, and Rust/core/runtime/test/spec owners for the helper purge closeout.
@@ -39,5 +40,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.4.1` pointer commit lands; do not pivot unless the repo is
+- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.4.2` pointer commit lands; do not pivot unless the repo is
   handoff-ready.

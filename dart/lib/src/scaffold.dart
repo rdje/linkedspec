@@ -1,5 +1,5 @@
 const linkedSpecDartPackageName = 'linkedspec_dart';
-const linkedSpecDartScaffoldStatus = 'scaffold ready';
+const linkedSpecDartScaffoldStatus = 'runtime interpreter ready';
 
 String describeLinkedSpecDartScaffold() {
   return '$linkedSpecDartPackageName $linkedSpecDartScaffoldStatus';

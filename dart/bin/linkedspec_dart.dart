@@ -3,8 +3,9 @@ import 'package:linkedspec_dart/linkedspec_dart.dart';
 const _usage = '''
 Usage: dart run bin/linkedspec_dart.dart [--help]
 
-LinkedSpec Dart backend scaffold.
-Parser and runtime semantics land in later DART-BACKEND-PARITY leaves.
+LinkedSpec Dart backend.
+Parser, compiled state, runtime matching, and first rule interpreter are available.
+Full helper-family and corpus-output parity land in later DART-BACKEND-PARITY leaves.
 ''';
 
 void main(List<String> args) {

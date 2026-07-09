@@ -120,6 +120,12 @@ export 'src/runtime/matching.dart'
         charOffsetToCodeUnitOffset,
         codeUnitOffsetToCharOffset,
         lineColumnAtCodeUnitOffset;
+export 'src/runtime/interpreter.dart'
+    show
+        LinkedSpecRuntimeEngine,
+        RuntimeInterpreterException,
+        RuntimeLifecycleEvent,
+        RuntimeParseResult;
 export 'src/scaffold.dart'
     show
         describeLinkedSpecDartScaffold,

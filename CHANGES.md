@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.4.2 — add Dart runtime rule interpreter
+
+**Scope:** Dart runtime rule dispatch, lifecycle execution, focused interpreter tests, public exports,
+package README, mdBook Dart handoff/status text, live docs, roadmap/task-tree status, and Knowledge Map facts.
+
+**Change:** Added `dart/lib/src/runtime/interpreter.dart` with `LinkedSpecRuntimeEngine`,
+`RuntimeParseResult`, `RuntimeLifecycleEvent`, and `RuntimeInterpreterException`. The interpreter runs compiled
+rules over the `.4.1` matching state, supports default/AND/OR/repetition families, action-edge and blind-call
+dispatch, entry/local match handoff, explicit `return(...)` / `return_undef()`, `retv`, accumulator collection,
+bounded repetition, zero-progress cutoffs, and a small dispatch-facing ActionIR evaluator for `set`, `push`,
+`array`, `copy`, `cat`, `call`, `entry_*`, and `match_*`. Broader helper/value semantics remain owned by `.4.3`.
+
+**Validation:** Focused `dart test test/runtime_interpreter_test.dart`, `dart format --set-exit-if-changed .`,
+`dart analyze --fatal-infos --fatal-warnings`, full `dart test`, the 99-fixture corpus manifest runner, corpus
+runner help, CLI help, mdBook build, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+`git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.4.1 — add Dart runtime matching state
 
 **Scope:** Dart runtime regex matching primitives, match-state tracking API, focused tests, package README,

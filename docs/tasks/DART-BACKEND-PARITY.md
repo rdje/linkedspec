@@ -290,12 +290,32 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.4.1 - add Dart runtime matching state`
 
 - ID: `DART-BACKEND-PARITY.4.2`
-  Status: `pending`
+  Status: `done`
   Goal: Implement rule dispatch, rule modes, recursion guards, repetition bounds, and lifecycle order.
   Acceptance: Default/AND/OR/REP families, action and blind-call edges, `I/LS/LE/E/EX/IT/LX`, `retv`,
     accumulator collection, and explicit returns match Perl/Rust parity fixtures.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: focused `dart test test/runtime_interpreter_test.dart`; `dart format --set-exit-if-changed .`;
+    `dart analyze --fatal-infos --fatal-warnings`; full `dart test`;
+    `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`;
+    `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build;
+    memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`.
+  Findings:
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `.4.1` could match regexes and track entry/local state, but
+      Dart still had no runtime owner that consumed `CompiledSpec` rule families, dependency refs, lifecycle
+      ActionIR payloads, child dispatch, `retv`, accumulator collection, repetition bounds, or recursion cutoffs.
+    - [x] **FIX** — Added `dart/lib/src/runtime/interpreter.dart` with `LinkedSpecRuntimeEngine`,
+      `RuntimeParseResult`, lifecycle events, runtime exceptions, compiled-rule dispatch, action-edge and
+      blind-call execution, bounded/zero-progress repetition, explicit returns, and a small dispatch-facing
+      ActionIR evaluator. Added `RuntimeRegexMatch.reindexed(...)` for single-slot AND dispatch identity and
+      exported the interpreter API from `linkedspec_dart.dart`.
+    - [x] **ADDRESSED (verified)** — `test/runtime_interpreter_test.dart` proves regex repetition with lifecycle
+      accumulation, action-edge child entry handoff with fluent `.push`, blind AND sequence, OR miss through `LX`,
+      bounded OR repetition, zero-progress cutoff, and lifecycle order.
+    - [x] **NO REGRESSION** — Dart format/analyze/full tests, corpus runner, CLI help, and mdBook build pass.
+    - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
+      `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker row, Knowledge Map
+      facts, `docs/TASK_TREE.md`, and this task tree are updated.
+  Commit: `DART-BACKEND-PARITY.4.2 - add Dart runtime rule interpreter`
 
 - ID: `DART-BACKEND-PARITY.4.3`
   Status: `pending`
@@ -421,8 +441,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-BACKEND-PARITY.4.1` | `done` | Runtime regex matching and match-state primitives are built; rule dispatch is next. |
-| 2 | `DART-BACKEND-PARITY.4.2` | `pending` | Implement rule dispatch, rule modes, recursion guards, repetition bounds, and lifecycle order. |
+| 1 | `DART-BACKEND-PARITY.4.2` | `done` | Rule dispatch and lifecycle execution are built; runtime helper/value breadth is next. |
+| 2 | `DART-BACKEND-PARITY.4.3` | `pending` | Implement runtime value model and helper families. |
 
 ## Dart Toolchain And Package Layout
 

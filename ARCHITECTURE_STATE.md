@@ -5,12 +5,19 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.4.2` added Dart's first runtime rule interpreter in
+  `dart/lib/src/runtime/interpreter.dart`. `LinkedSpecRuntimeEngine` executes `CompiledSpec` rules over the
+  `.4.1` matching layer and returns `RuntimeParseResult` with top-rule value, Rust-style one-element output,
+  cursor offsets, and lifecycle events. It now covers default/AND/OR/repetition dispatch, action-edge and
+  blind-call child execution, entry/local match handoff, explicit `return(...)` / `return_undef()`, `retv`,
+  accumulator collection, bounded repetition, zero-progress cutoffs, and recursion cutoffs. Full helper-family
+  value semantics, BACKTRACK, diagnostics/tracing, and corpus output parity remain later Dart leaves.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.1` added Dart runtime regex/match-state primitives in
   `dart/lib/src/runtime/matching.dart`. `RuntimeRegexAlternation` consumes ordered compiled-rule regex lists and
   supports seek/consume matching with stable alternative identity. `RuntimeRegexMatch` records captures, named
   captures, code-unit spans, char offsets, line/column projection, and zero-progress helpers. `RuntimeMatchRegisters`
-  keeps entry and local match registers separate for later child dispatch and tracks cursor state. Rule dispatch
-  starts at `DART-BACKEND-PARITY.4.2`.
+  keeps entry and local match registers separate for child dispatch and tracks cursor state. Rule dispatch
+  landed on top of this state in `DART-BACKEND-PARITY.4.2`.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.3.4` added Dart compiled-spec state in
   `dart/lib/src/compiler/compiled_spec.dart`. `compileSpec(...)` validates source ASTs by default, builds ordered
   `CompiledSpec` / `CompiledRule` state, carries `UserFunctionRegistry`, preserves rule redefinition metadata when

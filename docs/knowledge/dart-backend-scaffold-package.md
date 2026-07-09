@@ -16,7 +16,7 @@ answers:
 date: 2026-07-09
 status: current
 tags: [dart, backends, package, scaffold, corpus, ast, parser, validation, actionir, contracts, tests]
-evidence: "DART-BACKEND-PARITY.1.2 creates the Dart package scaffold; DART-BACKEND-PARITY.1.3 adds corpus manifest IO; DART-BACKEND-PARITY.2.1 adds dart/lib/src/ast/spec_ast.dart and JSON round-trip tests; DART-BACKEND-PARITY.2.2 adds dart/lib/src/parser/spec_parser.dart and parser fixtures; DART-BACKEND-PARITY.2.3 adds dart/lib/src/validation/spec_validator.dart and validation fixtures; DART-BACKEND-PARITY.3.1 adds typed ActionIR parsing; DART-BACKEND-PARITY.3.2 adds dart/lib/src/action/action_contracts.dart; DART-BACKEND-PARITY.3.3 adds dart/lib/src/action/function_registry.dart and exact-arity user-call classification."
+evidence: "DART-BACKEND-PARITY.1.2 creates the Dart package scaffold; DART-BACKEND-PARITY.1.3 adds corpus manifest IO; DART-BACKEND-PARITY.2.1 adds dart/lib/src/ast/spec_ast.dart and JSON round-trip tests; DART-BACKEND-PARITY.2.2 adds dart/lib/src/parser/spec_parser.dart and parser fixtures; DART-BACKEND-PARITY.2.3 adds dart/lib/src/validation/spec_validator.dart and validation fixtures; DART-BACKEND-PARITY.3.1 adds typed ActionIR parsing; DART-BACKEND-PARITY.3.2 adds dart/lib/src/action/action_contracts.dart; DART-BACKEND-PARITY.3.3 adds dart/lib/src/action/function_registry.dart and exact-arity user-call classification; DART-BACKEND-PARITY.3.4 adds compiled-spec state; DART-BACKEND-PARITY.4.1 adds runtime matching; DART-BACKEND-PARITY.4.2 adds the first runtime rule interpreter."
 reverify: "git ls-files dart && (cd dart && dart format --set-exit-if-changed . && dart analyze --fatal-infos --fatal-warnings && dart test && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus)"
 ---
 
@@ -38,11 +38,14 @@ into `FunctionDefinition` records without raw-scanning `fn` source.
 `dart/lib/src/action/action_contracts.dart` resolves those nodes against the current helper/control
 contract table. `dart/lib/src/action/function_registry.dart` builds ordered user-function registry entries
 from `FunctionDefinition` records, exposes staged body parse jobs, and lets contract resolution classify
-exact-arity user calls before helper fallback. The package does not implement compiled-spec state, runtime
-semantics, or corpus output comparison yet.
+exact-arity user calls before helper fallback. It now also builds compiled-spec
+state, performs runtime regex matching, and executes the first rule-dispatch
+interpreter layer. Full helper-family semantics and corpus output parity remain
+later Dart leaves.
 
 Related facts: [[dart-core-spec-parser]], [[dart-frontend-validation]],
 [[dart-function-definition-shell-projection]], [[dart-actionir-ast-parser]],
 [[dart-actionir-contract-resolver]], [[dart-function-registry]],
-[[dart-backend-interpreter-first-plan]],
+[[dart-compiled-spec-state]], [[dart-runtime-matching-state]],
+[[dart-runtime-rule-interpreter]], [[dart-backend-interpreter-first-plan]],
 [[text-to-ast-backend-doctrine]], [[rust-perl-output-oracle]].

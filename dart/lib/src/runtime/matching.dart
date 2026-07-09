@@ -132,6 +132,22 @@ final class RuntimeRegexMatch {
     required this.named,
   });
 
+  factory RuntimeRegexMatch.reindexed(
+    RuntimeRegexMatch match,
+    int alternativeIndex,
+  ) {
+    return RuntimeRegexMatch._(
+      input: match.input,
+      alternativeIndex: alternativeIndex,
+      pattern: match.pattern,
+      codeUnitStart: match.codeUnitStart,
+      codeUnitEnd: match.codeUnitEnd,
+      groups: match.groups,
+      captures: match.captures,
+      named: match.named,
+    );
+  }
+
   factory RuntimeRegexMatch._fromRegExpMatch({
     required String input,
     required int alternativeIndex,

@@ -25,9 +25,11 @@ a combined-regex branch side channel.
 full/capture-only groups, named captures, char-offset projection, line/column
 projection, and zero-width/progress helpers.
 
-`RuntimeMatchRegisters` is the handoff state for later rule dispatch. It keeps
-entry and local matches separate, seeds child entry state from the caller's local
-match, tracks cursor position, and exposes zero-progress detection.
+`RuntimeMatchRegisters` is the handoff state used by the Dart rule interpreter.
+It keeps entry and local matches separate, seeds child entry state from the
+caller's local match, tracks cursor position, and exposes zero-progress
+detection.
 
 Related facts: [[dart-compiled-spec-state]], [[rust-entry-match-separation]],
-[[rust-char-based-offsets]], [[dart-backend-interpreter-first-plan]].
+[[rust-char-based-offsets]], [[dart-runtime-rule-interpreter]],
+[[dart-backend-interpreter-first-plan]].

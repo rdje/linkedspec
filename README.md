@@ -75,13 +75,13 @@ Top-level directories and files:
   - Utility/command scripts.
   - `bin/linkedspec`: Perl reference compile/run CLI with discoverable trace flags.
 - `dart/`
-  - Dart backend parity package scaffold.
+  - Dart backend parity package.
   - Current state: package metadata, public library entrypoint, CLI smoke entrypoint, manifest/corpus
     IO scaffold, source-level AST/data types, staged parse-job sidecars, core `.spec` rule parser,
     frontend validation, spec-returned function-definition projection, typed ActionIR/helper-action AST
-    parsing, ActionIR contract resolution, and smoke/parser/validation tests; function-registry compilation
-    and runtime semantics land under
-    `DART-BACKEND-PARITY`.
+    parsing, ActionIR contract resolution, user-function registry, compiled-spec state, runtime regex/match
+    state, and the first rule-dispatch interpreter; broader helper semantics and corpus output parity continue
+    under `DART-BACKEND-PARITY`.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.
