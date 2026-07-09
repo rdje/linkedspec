@@ -1318,17 +1318,21 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.4 - wire Dart local verification`
 
 - ID: `DART-BACKEND-PARITY.7`
-  Status: `pending`
+  Status: `active`
   Goal: Close documentation, generated-source follow-up, and handoff alignment.
   Children: `.7.1`, `.7.2`, `.7.3`, `.7.4`, `.7.5`
 
 - ID: `DART-BACKEND-PARITY.7.1`
-  Status: `pending`
+  Status: `done`
   Goal: Document Dart backend usage, status, and parity boundaries in the mdBook.
   Acceptance: Book pages explain how to run Dart, what parity gate it satisfies, and any remaining
     limitations in variant-neutral terms.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** The mdBook backend handoff appendix now has explicit Dart command
+    coverage for `bash tools/run_dart_local.sh`, opt-in `LINKEDSPEC_RUN_DART=1 bash tools/run_ci_local.sh`,
+    direct `dart test`, and full corpus-runner execution. Project status and trace-status pages agree that the
+    current Dart parity boundary is interpreter-first and 99/99 corpus-green, while generated Dart source and
+    Dart-specific CLI productization remain follow-up lanes. No runtime behavior changed.
+  Commit: `DART-BACKEND-PARITY.7.1 - close Dart mdBook usage status`
 
 - ID: `DART-BACKEND-PARITY.7.2`
   Status: `pending`
@@ -1388,7 +1392,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 15 | `DART-BACKEND-PARITY.5.2` | `done` | Registered exact-arity user functions execute at runtime. |
 | 16 | `DART-BACKEND-PARITY.5.3` | `done` | Staged parse-job and function-registry descriptor shapes are preserved. |
 | 17 | `DART-BACKEND-PARITY.6` | `done` | Corpus parity is closed: `.6.2.4` shipped-spec/parser-smoke is 31/31 green, `.6.2.5` routes the top-level `fn` fixtures through the spec-defined shell, `.6.3` closes the full 99-fixture corpus gate, and `.6.4` wires the focused Dart gate into local verification. |
-| 18 | `DART-BACKEND-PARITY.7.1` | `active` | Current frontier: close Dart mdBook usage/status/handoff documentation against the green `.6` corpus and verification boundary. |
+| 18 | `DART-BACKEND-PARITY.7.1` | `done` | mdBook usage/status/handoff documentation now matches the green `.6` corpus and verification boundary. |
+| 19 | `DART-BACKEND-PARITY.7.2` | `active` | Current frontier: decide whether generated Dart source should be implemented now as a post-interpreter proof or explicitly deferred with blockers. |
 
 ## Dart Toolchain And Package Layout
 
@@ -1646,12 +1651,12 @@ The `.4.1` runtime matching layer adds:
 
 ## Open Questions
 
-- None blocking `.6`. The staged registry, user-function runtime execution, and descriptor-shape preservation
-  leaves are closed; corpus parity and cross-backend gates are next.
+- None blocking `.7.2`. Dart interpreter corpus parity and mdBook usage/status documentation are closed; generated
+  Dart source proof remains a decision/proof lane, not the primary parity gate.
 
 ## Blockers
 
-- None known before `.6` corpus parity.
+- None known before `.7.2`.
 
 ## Verification Log
 
@@ -1692,6 +1697,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.6.2.5` | Focused `dart test test/user_function_definition_parser_test.dart test/corpus_manifest_test.dart test/runtime_interpreter_test.dart test/action_contracts_test.dart`; routed three-fixture corpus run; Dart format/analyze/full tests; default 99-fixture corpus loader; diagnostic `--execute --offset 68 --limit 31`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart corpus execution obtains spec-produced function-definition nodes from `specs/user_function_definition.spec`, feeds them through staged function-body projection, and closes the three top-level `fn` fixtures without adding a raw Dart scanner. |
 | `2026-07-09` | `DART-BACKEND-PARITY.6.3` | Full `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute`; focused `dart test test/corpus_manifest_test.dart`; Dart format/analyze/full tests; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart corpus execution runs the current 99-fixture manifest end to end with 99 passed / 0 failed; CLI full-run mode is enabled, and manifest format/name/count/drift/file/mismatch guards are test-covered. |
 | `2026-07-09` | `DART-BACKEND-PARITY.6.4` | `bash tools/run_dart_local.sh`; default `bash tools/run_ci_local.sh` skip-path smoke; Dart format/analyze/full tests; full 99-fixture corpus execution; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Focused Dart verification is repo-owned and documented, and the canonical local gate can include it with `LINKEDSPEC_RUN_DART=1` without depending on Dart SDK availability by default. |
+| `2026-07-09` | `DART-BACKEND-PARITY.7.1` | mdBook build; `bash tools/run_dart_local.sh`; default `bash tools/run_ci_local.sh`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Dart usage/status/handoff docs now describe the focused gate, optional local-CI inclusion, direct Dart commands, the interpreter-first 99/99 corpus boundary, and generated-source / Dart-specific CLI follow-ups. |
 
 ## Commit Log
 
@@ -1737,6 +1743,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.6.2.5` | `DART-BACKEND-PARITY.6.2.5 - route Dart fn corpus through spec shell` | Corpus execution falls back from rule-only parsing to the spec-defined user-function shell for top-level `fn` fixtures; all three routed fixtures pass. |
 | `DART-BACKEND-PARITY.6.3` | `DART-BACKEND-PARITY.6.3 - close full Dart corpus gate` | Full Dart corpus execution is 99/99 green; CLI `--execute` without selectors runs the full manifest while drift guards remain strict. |
 | `DART-BACKEND-PARITY.6.4` | `DART-BACKEND-PARITY.6.4 - wire Dart local verification` | `tools/run_dart_local.sh` owns the focused Dart gate; `tools/run_ci_local.sh` includes it only under `LINKEDSPEC_RUN_DART=1`. |
+| `DART-BACKEND-PARITY.7.1` | `DART-BACKEND-PARITY.7.1 - close Dart mdBook usage status` | mdBook command/status/handoff docs now match the 99/99 interpreter-first Dart parity boundary and follow-up lanes. |
 
 ## Changelog
 
@@ -1834,3 +1841,6 @@ The `.4.1` runtime matching layer adds:
   manifest format/name/count/drift/file/mismatch guards in focused tests. Frontier advances to `.6.4`.
 - `2026-07-09`: Closed Dart local verification wiring with `tools/run_dart_local.sh` and optional
   `LINKEDSPEC_RUN_DART=1` integration in `tools/run_ci_local.sh`. Frontier advances to `.7.1`.
+- `2026-07-09`: Closed Dart mdBook usage/status/handoff documentation. The book now names the focused Dart gate,
+  optional local-CI inclusion, direct Dart test/full-corpus commands, the 99/99 interpreter-first parity boundary,
+  and generated-source / Dart-specific CLI follow-ups. Frontier advances to `.7.2`.

@@ -284,9 +284,39 @@ the current rule invocation. The structural regex leaf is now closed too:
 bounded Dart matchers handle the exact shipped Lispish `(?R)`, EBNF `\K` /
 `(?&name)` / `(?(DEFINE)...)`, and spec.spec recursive block forms, while
 action-edge `push(child, index)` preserves indexed child payloads. The
-future Dart closeout now includes a distinct Dart-specific LinkedSpec CLI
-entrypoint; future Julia and Lua backend plans must own their own variant-specific
-CLIs rather than relying on one ambiguous shared command. Dart
+Dart follow-up work includes a distinct Dart-specific LinkedSpec CLI entrypoint;
+future Julia and Lua backend plans must own their own variant-specific CLIs
+rather than relying on one ambiguous shared command.
+
+### Dart Backend Commands
+
+Run the focused Dart gate from the repository root:
+
+```bash
+bash tools/run_dart_local.sh
+```
+
+That command runs Dart formatting, analyzer checks, the full Dart test suite,
+Dart CLI help checks, and full 99-fixture corpus execution. To include Dart in
+the canonical local gate on a machine with a Dart SDK, opt in explicitly:
+
+```bash
+LINKEDSPEC_RUN_DART=1 bash tools/run_ci_local.sh
+```
+
+Direct Dart commands live under `dart/`:
+
+```bash
+dart test
+dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute
+```
+
+Current Dart parity is interpreter-first and corpus-green. Generated Dart source
+remains a later proof lane, and Dart-specific CLI productization remains a
+separate follow-up; neither is required for the current backend-neutral corpus
+conformance claim.
+
+Dart
 also has source-level AST/data types and staged parse-job sidecars that round-trip
 through JSON with the Rust/mdBook field names. The Dart core `parseSpec(...)`
 parser now produces those source AST types for rule paragraphs, headers/modes,
@@ -302,8 +332,9 @@ unused rules. Dart also has the first function-shell projection layer:
 `body_payload` / `body_parse_job` sidecars, normalizes source-order parent paths
 and parse-job ids, strips returned definition spans before rule parsing, and
 attaches ordered `FunctionDefinition` records. This is not a Dart raw scanner for
-`fn` source; until Dart has an executable `.spec` engine, callers provide the
-spec-returned node list as the semantic input.
+`fn` source. The corpus runner now obtains the semantic node list by executing
+`specs/user_function_definition.spec` through Dart runtime shell code and then
+feeds those nodes through staged function-body projection.
 
 Dart now also has a typed ActionIR parser seam. `parseActionBlock(...)`,
 `parseActionStatement(...)`, and `parseActionExpression(...)` produce structural

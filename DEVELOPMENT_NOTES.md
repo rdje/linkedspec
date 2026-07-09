@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.7.1 — Dart mdBook usage/status closeout):
+  The Dart backend docs now have a single reader-facing command path in the mdBook: `bash tools/run_dart_local.sh`
+  for the focused Dart gate, `LINKEDSPEC_RUN_DART=1 bash tools/run_ci_local.sh` for opt-in local-CI inclusion, and
+  direct `dart test` / full corpus-runner commands under `dart/`. The docs state the current parity boundary as
+  interpreter-first, 99/99 corpus-green, with generated Dart source and Dart-specific CLI productization remaining
+  follow-up lanes rather than prerequisites for the current conformance claim.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.4 — Dart local verification gate):
   Dart parity now has a focused repo-owned local gate at `tools/run_dart_local.sh`. The script runs Dart format,
   analyzer, full tests, CLI help checks, and the 99-fixture corpus execution. `tools/run_ci_local.sh` deliberately

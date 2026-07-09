@@ -44,8 +44,9 @@ values remain nested values.
 `DART-BACKEND-PARITY.4.3.5` has since landed value blocks, structured controls,
 with-blocks, and tree traversal callback helpers. `BACKTRACK-SURFACE-RUST-ALIGNMENT.1`
 has since landed explicit cursor controls and cursor/input helpers.
-Tracing, staged function execution, full corpus output parity, and per-variant
-CLI productization remain later Dart leaves.
+Later Dart leaves landed tracing, staged function execution, full corpus output
+parity, and local verification wiring; per-variant CLI productization remains
+`DART-BACKEND-PARITY.7.4`.
 
 Related facts: [[dart-runtime-array-helpers]],
 [[dart-runtime-value-control-tree-helpers]],

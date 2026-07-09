@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.7.1 — close Dart mdBook usage status
+
+**Scope:** mdBook Dart backend usage/status/handoff docs, trace-status cross-reference, task tree, live docs,
+roadmaps, resume pointer, and Knowledge Map.
+
+**Change:** The mdBook now gives Dart readers one explicit command surface for the focused Dart gate, optional
+local-CI integration, direct Dart tests/corpus execution, the 99/99 interpreter-first parity claim, and remaining
+limitations: generated Dart source and Dart-specific CLI productization are follow-up lanes, not requirements for
+the current corpus conformance claim.
+
+**Validation:** mdBook build, focused Dart gate, default local-CI gate, memory architecture, Knowledge Map
+generation/check, task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.4 — wire Dart local verification
 
 **Scope:** Dart local verification script, optional local-CI integration, root/Dart READMEs, mdBook local-CI and

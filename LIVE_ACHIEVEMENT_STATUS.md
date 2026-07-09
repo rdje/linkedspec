@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.7.1 — close Dart mdBook usage status**
+  (DONE — mdBook usage/status/handoff docs match the green `.6` boundary; frontier advances to `.7.2`).
+
+  **Change:** Added an explicit Dart backend command/status section to the backend handoff appendix and aligned
+  project status plus trace-status cross-references around the focused Dart gate, optional local-CI integration,
+  full 99-fixture corpus parity, and remaining generated-source / Dart-specific CLI follow-ups.
+
+  **Boundary:** No Dart runtime behavior changed. This is a documentation closeout for the public book after the
+  `.6` corpus and verification boundary landed.
+
+  **Verification:** mdBook build, focused Dart gate, default local-CI gate, memory architecture, Knowledge Map,
+  task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.4 — wire Dart local verification**
   (DONE — focused Dart gate is documented and optional from local CI; frontier advances to `.7.1`).
 

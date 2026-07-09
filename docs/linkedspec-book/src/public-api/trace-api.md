@@ -129,8 +129,8 @@ Dart diagnostics/trace no-drift sweep across Dart status text, mdBook pages, liv
 Knowledge Map. `DART-BACKEND-PARITY.5.1` then adds the minimal staged registry provider, `.5.2` adds registered
 exact-arity user-function runtime execution, and `.5.3` preserves staged parse-job/function-registry descriptor
 shapes. `DART-BACKEND-PARITY.6.1` adds the controlled executable corpus harness, `.6.3` closes full 99-fixture
-Dart corpus execution, and `.6.4` wires the focused Dart local verification gate. Trace parity is unchanged by
-these staged/user-function/corpus leaves; the next Dart frontier is mdBook usage/status/handoff closeout.
+Dart corpus execution, `.6.4` wires the focused Dart local verification gate, and `.7.1` closes Dart mdBook
+usage/status/handoff documentation. Trace parity is unchanged by these staged/user-function/corpus leaves.
 
 ## Future variant trace parity checklist
 

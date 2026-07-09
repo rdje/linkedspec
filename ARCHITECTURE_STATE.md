@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.7.1` closes Dart mdBook usage/status/handoff documentation.
+  The book now names `bash tools/run_dart_local.sh`, opt-in `LINKEDSPEC_RUN_DART=1 bash tools/run_ci_local.sh`,
+  direct `dart test`, and full corpus-runner execution as the Dart command surface. Current Dart parity is
+  interpreter-first and 99/99 corpus-green; generated Dart source proof is the `.7.2` decision lane, and
+  Dart-specific CLI productization remains `.7.4`.
 - `2026-07-09` refresh: `BACKTRACK-SURFACE-RUST-ALIGNMENT` defines the current cross-variant cursor-control
   surface. Perl, Rust, and Dart expose `save_cursor()` / `restore_cursor()` for explicit cursor-stack semantics,
   `rewind_match_start()` / `rewind_entry_start()` for direct local-match or entry/initial-match anchor rewinds, and
@@ -23,8 +28,8 @@ This document is the current high-level technical reading of the project shape. 
   mutation, final hash keys may be created, final array writes only replace or append exactly at `len`, and missing
   intermediate containers are not autovivified. Segment index expressions evaluate before the RHS value expression,
   matching the Rust/Perl lowering order. Direct hash-index assignment on scalar-held map/list roots now preserves
-  root ownership before named hash fallback. The Dart frontier has since advanced through cursor-control alignment
-  and is now `.4.5` for runtime diagnostics and trace controls.
+  root ownership before named hash fallback. Later Dart slices closed cursor-control alignment, diagnostics/trace,
+  full corpus parity, local verification wiring, and mdBook usage/status documentation.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.5` extended Dart runtime ActionIR execution in
   `dart/lib/src/runtime/interpreter.dart`. `LinkedSpecRuntimeEngine` now evaluates expression-valued blocks with
   block-local `return(...)` / `return_undef()`, attached `if` / `elseif` / `else` and `when` / `otherwise`
@@ -44,29 +49,27 @@ This document is the current high-level technical reading of the project shape. 
   working-variable receiver reads, pure hash receiver chains, key/value views, sorted key/value arrays, key
   predicates, `merge_hash`, `set_key`, `rename_key`, `drop_keys`, `pick_keys`, `flat_hash`, statement-form
   `set_key(...)` mutation, direct hash-index assignment values, and explicit flat-style hash splicing inside
-  `hash(...)`. The next helper frontier after this slice was `.4.3.5`, which has since landed; BACKTRACK,
-  tracing, corpus output parity, and per-variant CLI productization remain later Dart leaves.
+  `hash(...)`. Later Dart slices landed `.4.3.5`, BACKTRACK/cursor controls, tracing, corpus output parity, and
+  local verification wiring; per-variant CLI productization remains `.7.4`.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.3` extended Dart runtime array helper execution in
   `dart/lib/src/runtime/interpreter.dart`. The evaluator now has array-aware helper argument evaluation, bare array
   working-variable receiver reads, pure array receiver chains, regex split/filter bridges, delimiter-first
   `join_values`, `flat_array` / `concat_arrays`, `split_tagged_records`, terminal array numeric reducers, and
-  statement-only array end mutations. The next helper frontier is `.4.3.4` for hash helper family and hash
-  receiver/mutation behavior; value-block/control/tree traversal helpers, BACKTRACK, tracing, and corpus output
-  parity remain later Dart leaves.
+  statement-only array end mutations. Later Dart slices landed hash helpers, value-block/control/tree traversal
+  helpers, BACKTRACK/cursor controls, tracing, corpus output parity, and local verification wiring.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.2` extended Dart runtime helper execution in
   `dart/lib/src/runtime/interpreter.dart`. `LinkedSpecRuntimeEngine` now canonicalizes ActionIR helper names and
   executes current string/scalar helpers, explicit `str_*` lexical comparisons, numeric arithmetic/reducer/
   comparison helpers, numeric word aliases, arithmetic/comparison symbol callees, and compatible string/number
-  receiver chains. The next helper frontier is `.4.3.3` for array helper family and array receiver/mutation
-  behavior; broader hash helpers, value-block/control/tree traversal helpers, BACKTRACK, tracing, and corpus output
-  parity remain later Dart leaves.
+  receiver chains. Later Dart slices landed array/hash helpers, value-block/control/tree traversal helpers,
+  BACKTRACK/cursor controls, tracing, corpus output parity, and local verification wiring.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.1` extended Dart runtime core values and capture reads in
   `dart/lib/src/runtime/interpreter.dart`. The interpreter now preserves scalar, array, hash, null, boolean, and
   number shapes through assignment and wrapper snapshots; supports `hash(...)`, `set(hash(...), ...)`, hash-index
   mutation, nested reads, non-numeric map indexing, aggregate `copy(...)`, and the named/map/length/start/end
-  `entry_*` / `match_*` helper family. The next helper frontier is `.4.3.2` for string/scalar and numeric helper
-  families; broader array/hash helper families, value-block/control/tree traversal helpers, BACKTRACK, tracing, and
-  corpus output parity remain later Dart leaves.
+  `entry_*` / `match_*` helper family. Later Dart slices landed the broader helper families, value-block/control
+  and tree traversal helpers, BACKTRACK/cursor controls, tracing, corpus output parity, and local verification
+  wiring.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.0` split the Dart runtime helper/value work before code.
   The active helper frontier is now `.4.3.1` for core runtime value/store behavior and capture helper reads,
   followed by string/number helpers, array helpers, hash helpers, value-block/control/tree traversal helpers, and
@@ -76,8 +79,9 @@ This document is the current high-level technical reading of the project shape. 
   `.4.1` matching layer and returns `RuntimeParseResult` with top-rule value, Rust-style one-element output,
   cursor offsets, and lifecycle events. It now covers default/AND/OR/repetition dispatch, action-edge and
   blind-call child execution, entry/local match handoff, explicit `return(...)` / `return_undef()`, `retv`,
-  accumulator collection, bounded repetition, zero-progress cutoffs, and recursion cutoffs. Full helper-family
-  value semantics, BACKTRACK, diagnostics/tracing, and corpus output parity remain later Dart leaves.
+  accumulator collection, bounded repetition, zero-progress cutoffs, and recursion cutoffs. Later Dart slices
+  landed helper-family value semantics, BACKTRACK/cursor controls, diagnostics/tracing, corpus output parity, and
+  local verification wiring.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.1` added Dart runtime regex/match-state primitives in
   `dart/lib/src/runtime/matching.dart`. `RuntimeRegexAlternation` consumes ordered compiled-rule regex lists and
   supports seek/consume matching with stable alternative identity. `RuntimeRegexMatch` records captures, named
@@ -144,9 +148,9 @@ This document is the current high-level technical reading of the project shape. 
   `function_definition` / `function_definition_error` nodes returned by `specs/user_function_definition.spec`,
   validates source/body spans and staged `body_payload` / `body_parse_job` sidecars, normalizes source-order
   parent paths and deterministic parse-job ids, strips returned definition spans before rule parsing, and
-  attaches ordered `FunctionDefinition` records. This is intentionally not a raw `fn` source scanner; callers
-  must provide the spec-returned AST nodes until Dart has an executable `.spec` engine. Next frontier is
-  helper/action AST parsing in `.3.1`.
+  attaches ordered `FunctionDefinition` records. This is intentionally not a raw `fn` source scanner; later corpus
+  execution obtains the spec-returned AST nodes by running `specs/user_function_definition.spec` through Dart
+  runtime shell code before projecting staged function bodies.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.2.3` added Dart frontend validation in
   `dart/lib/src/validation/spec_validator.dart`. `validateSpec(...)` now checks top-rule presence,
   duplicate labels/functions, function registry collisions/parameters, raw malformed body lines, mixed edge
