@@ -709,7 +709,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.4.5.4 - close Dart diagnostics trace no drift`
 
 - ID: `DART-BACKEND-PARITY.5`
-  Status: `in_progress`
+  Status: `done`
   Goal: Implement staged parser registry and user-function runtime parity.
   Children: `.5.1`, `.5.2`, `.5.3`
 
@@ -746,12 +746,20 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.5.2 - execute Dart user functions`
 
 - ID: `DART-BACKEND-PARITY.5.3`
-  Status: `pending`
+  Status: `done`
   Goal: Preserve staged parse-job and function-registry descriptor shapes.
   Acceptance: Descriptor/corpus fixtures can assert the neutral function-definition payload, parse-job,
     and stitched AST fields without Dart-specific field drift.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** `test/compiled_spec_test.dart` now proves the staged function descriptor
+    shape through parsed, compiled, descriptor, and runtime layers. The focused test builds source from
+    spec-returned `function_definition` nodes, dispatches `body_parse_job` records through
+    `parseSpecWithStagedUserFunctionDefinitionAsts(...)`, compiles the stitched `SpecFile`, asserts parsed
+    function order, compiled `UserFunctionRegistry.bodyParseJobs`, descriptor `body_payload`, normalized
+    `body_parse_job`, stitched `body_ast`, `meta.function_order`, `meta.function_count`, and stable runtime output
+    from the same compiled state. Focused compiled-state tests, Dart format/analyze/full tests, corpus
+    runner/help, CLI help, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+    `git diff --check` pass.
+  Commit: `DART-BACKEND-PARITY.5.3 - preserve Dart staged descriptor shapes`
 
 - ID: `DART-BACKEND-PARITY.6`
   Status: `pending`
@@ -859,7 +867,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 13 | `DART-BACKEND-PARITY.4.5.4` | `done` | Diagnostics/trace no-drift is closed. |
 | 14 | `DART-BACKEND-PARITY.5.1` | `done` | Minimal staged registry provider dispatches function-body parse jobs and stitches `body_ast`. |
 | 15 | `DART-BACKEND-PARITY.5.2` | `done` | Registered exact-arity user functions execute at runtime. |
-| 16 | `DART-BACKEND-PARITY.5.3` | `pending` | Preserve staged parse-job and function-registry descriptor shapes. |
+| 16 | `DART-BACKEND-PARITY.5.3` | `done` | Staged parse-job and function-registry descriptor shapes are preserved. |
+| 17 | `DART-BACKEND-PARITY.6` | `pending` | Prove Dart parity against the corpus and cross-backend gates. |
 
 ## Dart Toolchain And Package Layout
 
@@ -1111,15 +1120,18 @@ The `.4.1` runtime matching layer adds:
   Arguments evaluate eagerly in the caller; params bind into fresh function-local scalar/array/hash stores; bodies
   return the final expression or local `return(...)`; returned values continue through receiver chains; standalone
   calls discard their results; wrong arity and direct/mutual recursion diagnose instead of falling to raw host code.
+- `2026-07-09`: Dart `.5.3` closes the staged/user-function descriptor-shape proof. Dart now asserts neutral
+  `body_payload`, normalized `body_parse_job`, stitched `body_ast`, `function_order`, and runtime output from the
+  same compiled state, keeping the staged prototype shape aligned before corpus parity work starts.
 
 ## Open Questions
 
-- None blocking `.5.3`. The minimal staged registry provider and user-function runtime execution are closed;
-  staged parse-job/function-registry descriptor-shape preservation is next.
+- None blocking `.6`. The staged registry, user-function runtime execution, and descriptor-shape preservation
+  leaves are closed; corpus parity and cross-backend gates are next.
 
 ## Blockers
 
-- None known before `.5.3` descriptor-shape preservation.
+- None known before `.6` corpus parity.
 
 ## Verification Log
 
@@ -1150,6 +1162,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.4.5.4` | `dart run bin/linkedspec_dart.dart --help`; focused diagnostics/trace drift scans; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart diagnostics/trace status is aligned across README, CLI/scaffold, mdBook, live docs, roadmap, task tree, MEMORY, and Knowledge Map; `.4.5` closes and frontier advances to `.5.1` staged registry work. |
 | `2026-07-09` | `DART-BACKEND-PARITY.5.1` | Focused `dart test test/staged_parser_registry_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart staged registry resolves `actionir-body.spec`, records staged cache/compiled-parser metadata, executes jobs in stable order, and stitches `body_ast`; frontier advances to `.5.2` user-function runtime execution. |
 | `2026-07-09` | `DART-BACKEND-PARITY.5.2` | Focused `dart test test/runtime_interpreter_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart executes registered exact-arity user functions before helper fallback with eager caller-side args, fresh function-local stores, receiver continuation, standalone discard, arity diagnostics, and direct/mutual recursion diagnostics; frontier advances to `.5.3` descriptor-shape preservation. |
+| `2026-07-09` | `DART-BACKEND-PARITY.5.3` | Focused `dart test test/compiled_spec_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart preserves neutral staged user-function descriptor shapes through parsed functions, compiled registry jobs, descriptor functions records, stitched `body_ast`, descriptor metadata, and runtime output; `.5` closes and frontier advances to `.6` corpus parity. |
 
 ## Commit Log
 
@@ -1184,6 +1197,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.4.5.4` | `DART-BACKEND-PARITY.4.5.4 - close Dart diagnostics trace no drift` | Diagnostics/trace status no-drift closeout; `.4.5` container closes. |
 | `DART-BACKEND-PARITY.5.1` | `DART-BACKEND-PARITY.5.1 - add Dart staged function-body registry` | Minimal staged registry provider dispatches function-body parse jobs and stitches `body_ast`. |
 | `DART-BACKEND-PARITY.5.2` | `DART-BACKEND-PARITY.5.2 - execute Dart user functions` | Registered exact-arity user functions execute at runtime. |
+| `DART-BACKEND-PARITY.5.3` | `DART-BACKEND-PARITY.5.3 - preserve Dart staged descriptor shapes` | Neutral staged user-function descriptor shapes are asserted through runtime output. |
 | `DART-BACKEND-PARITY.7.3` | `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement` | Docs-only split for per-variant LinkedSpec CLI productization. |
 
 ## Changelog
@@ -1252,3 +1266,6 @@ The `.4.1` runtime matching layer adds:
 - `2026-07-09`: Added Dart registered exact-arity user-function runtime execution; calls resolve before helper
   fallback, use eager caller-side args, fresh function-local stores, receiver-chain continuation, standalone
   discard, and recursion diagnostics; frontier advances to `.5.3` descriptor-shape preservation.
+- `2026-07-09`: Added Dart staged user-function descriptor-shape proof; parsed, compiled, descriptor, and runtime
+  layers preserve neutral `body_payload`, `body_parse_job`, `body_ast`, and function-order fields; `.5` closes and
+  frontier advances to `.6` corpus parity.

@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.5.3 — preserve Dart staged descriptor shapes
+
+**Scope:** Dart compiled-state descriptor tests, mdBook descriptor/status text, live docs, roadmap/task-tree
+status, and Knowledge Map facts.
+
+**Change:** Added a focused Dart descriptor-shape proof for staged user functions. The new compiled-state test
+starts from spec-returned `function_definition` nodes, dispatches `body_parse_job` records through the Dart staged
+registry, compiles the stitched `SpecFile`, asserts parsed function order, compiled registry jobs, descriptor
+`body_payload`, normalized `body_parse_job`, stitched `body_ast`, descriptor `function_order` / `function_count`,
+and stable runtime output from the same compiled state.
+
+**Validation:** Focused compiled-state tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook
+build, memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine, and `git diff --check`
+pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.5.2 — execute Dart user functions
 
 **Scope:** Dart runtime interpreter, focused runtime tests, Dart CLI/scaffold status, Dart README, mdBook status

@@ -42,4 +42,5 @@ compiled function state. Dart exposes it through
 
 This does not implement the full future surface. Public `parse_job(...)` authoring,
 filesystem/import/provider search roots, multiple next-stage parser families, recursive
-staged queues, user-function runtime execution on Dart, and cycle diagnostics remain future leaves.
+staged queues, and cycle diagnostics remain future leaves. Dart user-function runtime
+execution has since landed under `DART-BACKEND-PARITY.5.2`.

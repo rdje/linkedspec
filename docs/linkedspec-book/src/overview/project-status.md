@@ -77,8 +77,10 @@ Three backbone items tracked major structural modernization — all done:
   jobs execute in stable order, and the returned `action_block` JSON is stitched into `body_ast`. Dart registered
   exact-arity user-function calls now execute before helper fallback with eager caller-side arguments, fresh
   function-local scalar/array/hash stores, final-expression or local-return results, receiver-chain continuation,
-  standalone discard, and direct/mutual recursion diagnostics. The next Dart slice preserves descriptor and corpus
-  fixture shapes for staged parse jobs and function registries.
+  standalone discard, and direct/mutual recursion diagnostics. Dart now also preserves neutral staged function
+  descriptor shapes through parsed functions, compiled registry jobs, descriptor `body_payload`,
+  `body_parse_job`, stitched `body_ast`, function-order metadata, and runtime output. The next Dart frontier is
+  corpus parity and cross-backend gates.
 - **Non-current helper code purge** - `NONCURRENT-HELPER-CODE-PURGE` is closed. Perl source cleanup, Rust source cleanup, active test/tool/generated fixture and checked-in `.spec` migration, and final no-drift scans are complete. Retired helper-looking calls use generic unknown-helper fallback behavior, active generic-unknown-helper tests use invented helper names, and active helper-call/label/tag scans are clean.
 - **Rust generated-source breadth** — the Rust interpreter oracle is the current cross-variant parity gate. Generated Rust source already covers the current structural families and a curated corpus subset; broadening generated-source proof to the full manifest remains a separately owned future follow-on.
 - **Lifecycle-family audit** — verified complete (2026-06-14). All 7 lifecycle markers (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`) have full semicolon-light structured authoring coverage. The current separator contract is newline-or-semicolon: newlines separate top-level helper statements, and multiple same-line statements require semicolons. No lifecycle-specific semantic gaps found.

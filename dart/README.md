@@ -31,8 +31,8 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.5.2` is the current completed user-function runtime
-boundary; `.5.3` is the next descriptor-shape frontier. The package can round-trip
+`DART-BACKEND-PARITY.5.3` is the current completed staged/user-function
+boundary; `.6` is the next corpus-parity frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -53,6 +53,10 @@ params bind into fresh function-local scalar/array/hash stores, function bodies
 return their final expression or local `return(...)` payload, returned values
 feed compatible receiver chains, standalone calls execute with their values
 discarded, and direct or mutual recursion throws a structured diagnostic.
+The descriptor projection now preserves neutral staged function fields through
+parsed, compiled, descriptor, and runtime layers: `body_payload`, normalized
+`body_parse_job`, stitched `body_ast`, `function_order`, and runtime output are
+covered by focused compiled-state tests.
 It also has runtime regex primitives for seek/consume matching, stable
 alternative identity, capture and named-capture records, char-offset projections,
 entry/local match registers, cursor state, and zero-progress detection.

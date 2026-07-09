@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.5.3 — preserve Dart staged descriptor shapes**
+  (DONE — staged parse-job/function-registry descriptor-shape proof).
+
+  **Change:** Dart now has a focused descriptor proof for staged user functions. The compiled-state test starts
+  from spec-returned `function_definition` nodes, dispatches `body_parse_job` records through the staged registry,
+  compiles the stitched `SpecFile`, asserts neutral `body_payload`, normalized `body_parse_job`, stitched
+  `body_ast`, function-order metadata, and verifies runtime output from the same compiled state.
+
+  **Boundary:** This closes the `.5` staged/user-function container. It does not claim full corpus output parity;
+  active implementation work advances to `DART-BACKEND-PARITY.6`.
+
+  **Verification:** Focused compiled-state tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+  memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.5.2 — execute Dart user functions**
   (DONE — registered exact-arity user-function runtime execution).
 

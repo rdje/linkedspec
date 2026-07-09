@@ -180,6 +180,11 @@ metadata with zero raw fallback. A standalone `normalize(" x ")` lowers as a can
 The Rust backend has matching parsed/compiled registry support and runtime MVP execution:
 registered calls resolve before helper fallback, run in fresh function-local stores, feed
 compatible receiver chains, and discard standalone results.
+The Dart backend now preserves the same neutral staged fields through parsed
+`SpecFile.functions`, compiled `UserFunctionRegistry` entries, public descriptor
+projection, and runtime execution: focused descriptor tests assert `body_payload`,
+normalized `body_parse_job`, stitched `body_ast`, `function_order`, and stable
+runtime output from registered calls.
 
 The `functions` registry is a flat MVP registry keyed by function name. It does not yet
 model namespaces/modules, overload sets, optional-argument variants, closures, lambdas, or

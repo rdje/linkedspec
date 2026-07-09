@@ -89,6 +89,67 @@ Child:
     expect(meta['function_count'], 1);
   });
 
+  test('preserves staged function descriptor shape through runtime', () {
+    const normalizeBody = 'return(trim(value))';
+    const pairBody = 'return(hash("left", left, "right", right))';
+    final source = [
+      'fn normalize(value) {$normalizeBody}',
+      'fn pair(left, right) {$pairBody}',
+      'Top::',
+      ' /x/',
+      ' E { return(hash("name", normalize(" x "), "pair", pair("a", "b"))) }',
+    ].join('\n');
+    final nodes = [
+      _definitionNode(source, 'normalize', const ['value'], normalizeBody),
+      _definitionNode(source, 'pair', const ['left', 'right'], pairBody),
+    ];
+
+    final spec = parseSpecWithStagedUserFunctionDefinitionAsts(source, nodes);
+    final compiled = compileSpec(spec);
+    final descriptor = compiled.toDescriptorJson();
+
+    expect(spec.functions.map((function) => function.name), [
+      'normalize',
+      'pair',
+    ]);
+    expect(compiled.functionRegistry.bodyParseJobs.map((job) => job.jobId), [
+      _expectedJobId(spec.functions[0].bodyParseJob!),
+      _expectedJobId(spec.functions[1].bodyParseJob!),
+    ]);
+
+    final functions = descriptor['functions']! as Map<String, Object?>;
+    expect(functions.keys, ['normalize', 'pair']);
+    final normalize = functions['normalize']! as Map<String, Object?>;
+    final pair = functions['pair']! as Map<String, Object?>;
+
+    _expectFunctionDescriptor(
+      normalize,
+      index: 0,
+      name: 'normalize',
+      params: const ['value'],
+      bodySource: normalizeBody,
+      job: spec.functions[0].bodyParseJob!,
+    );
+    _expectFunctionDescriptor(
+      pair,
+      index: 1,
+      name: 'pair',
+      params: const ['left', 'right'],
+      bodySource: pairBody,
+      job: spec.functions[1].bodyParseJob!,
+    );
+
+    final meta = descriptor['meta']! as Map<String, Object?>;
+    expect(meta['function_order'], ['normalize', 'pair']);
+    expect(meta['function_count'], 2);
+
+    final result = LinkedSpecRuntimeEngine(compiled).parse('x');
+    expect(result.value, {
+      'name': 'x',
+      'pair': {'left': 'a', 'right': 'b'},
+    });
+  });
+
   test(
     'uses last-definition order when validation is deliberately skipped',
     () {
@@ -153,6 +214,63 @@ Child:
   });
 }
 
+void _expectFunctionDescriptor(
+  Map<String, Object?> function, {
+  required int index,
+  required String name,
+  required List<String> params,
+  required String bodySource,
+  required StagedParseJob job,
+}) {
+  expect(function['name'], name);
+  expect(function['params'], params);
+  expect(function['arity'], params.length);
+  expect(function['body_source'], bodySource);
+
+  final payload = function['body_payload']! as Map<String, Object?>;
+  expect(payload['kind'], 'staged_payload');
+  expect(payload['node_kind'], 'function_definition');
+  expect(payload['payload_kind'], 'function_body');
+  expect(payload['parent_ast_path'], ['functions', '$index', 'body_source']);
+  expect(payload['function_name'], name);
+  expect(payload['params'], params);
+  expect(payload['arity'], params.length);
+  expect(payload['text'], bodySource);
+  expect(payload['source_span'], job.sourceSpan.toJson());
+
+  final jobJson = function['body_parse_job']! as Map<String, Object?>;
+  expect(jobJson['kind'], 'parse_job');
+  expect(jobJson['job_id'], _expectedJobId(job));
+  expect(jobJson['parent_ast_path'], ['functions', '$index', 'body_source']);
+  expect(jobJson['node_kind'], 'function_definition');
+  expect(jobJson['payload_kind'], 'function_body');
+  expect(jobJson['function_name'], name);
+  expect(jobJson['params'], params);
+  expect(jobJson['arity'], params.length);
+  expect(jobJson['text'], bodySource);
+  expect(jobJson['source_span'], job.sourceSpan.toJson());
+  expect(jobJson['parser_spec_id'], actionIrBodySpecId);
+  expect(jobJson['top_rule'], actionIrBodyTopRule);
+  expect(jobJson['result_policy'], 'replace_field');
+  expect(jobJson['result_field'], 'body_ast');
+  expect(jobJson['failure_policy'], 'fail');
+  expect(jobJson['diagnostic_owner'], 'function_body');
+
+  final bodyAst = function['body_ast']! as Map<String, Object?>;
+  expect(bodyAst['kind'], 'action_block');
+  final statements = bodyAst['statements']! as List<Object?>;
+  expect(statements, isNotEmpty);
+  final firstStatement = statements.first! as Map<String, Object?>;
+  final expr = firstStatement['expr']! as Map<String, Object?>;
+  expect(expr['name'], 'return');
+}
+
+String _expectedJobId(StagedParseJob job) {
+  return 'parse_job:function_body:${job.parentAstPath.join(".")}:'
+      '${job.parserSpecId}:${job.topRule}:'
+      '${job.sourceSpan.start}-${job.sourceSpan.end}';
+}
+
 FunctionDefinition _function({
   required String name,
   required List<String> params,
@@ -202,4 +320,99 @@ FunctionDefinition _function({
     sourceSpan: const SourceSpan(lineStart: 1, lineEnd: 1),
     bodySpan: const SourceSpan(lineStart: 1, lineEnd: 1),
   );
+}
+
+Map<String, Object?> _definitionNode(
+  String source,
+  String name,
+  List<String> params,
+  String bodySource,
+) {
+  final sourceStart = source.indexOf('fn $name');
+  if (sourceStart < 0) {
+    throw StateError('missing function $name');
+  }
+  final bodyStart = source.indexOf(bodySource, sourceStart);
+  if (bodyStart < 0) {
+    throw StateError('missing body for $name');
+  }
+  final bodyEnd = bodyStart + bodySource.length;
+  final sourceEnd = source.indexOf('}', bodyEnd) + 1;
+  final sourceText = source.substring(sourceStart, sourceEnd);
+  final sourceSpan = _span(source, sourceStart, sourceEnd);
+  final bodySpan = _span(source, bodyStart, bodyEnd);
+
+  return {
+    'type': 'function_definition',
+    'kind': 'user_function_definition',
+    'version': 1,
+    'name': name,
+    'params': params,
+    'arity': params.length,
+    'source_text': sourceText,
+    'source_span': sourceSpan,
+    'body_source': bodySource,
+    'body_span': bodySpan,
+    'body_payload': {
+      'kind': 'staged_payload',
+      'version': 1,
+      'node_kind': 'function_definition',
+      'payload_kind': 'function_body',
+      'parent_ast_path': [
+        'functions',
+        '__pending_source_order__',
+        'body_source',
+      ],
+      'function_name': name,
+      'params': params,
+      'arity': params.length,
+      'text': bodySource,
+      'source_span': bodySpan,
+      'provenance': [
+        {'kind': 'source_slice', 'source_span': bodySpan},
+      ],
+    },
+    'body_parse_job': {
+      'kind': 'parse_job',
+      'version': 1,
+      'job_id': 'parse_job:function_body:$name:actionir-body.spec:action_block',
+      'parent_ast_path': [
+        'functions',
+        '__pending_source_order__',
+        'body_source',
+      ],
+      'node_kind': 'function_definition',
+      'payload_kind': 'function_body',
+      'function_name': name,
+      'params': params,
+      'arity': params.length,
+      'text': bodySource,
+      'source_span': bodySpan,
+      'parser_spec_id': actionIrBodySpecId,
+      'top_rule': actionIrBodyTopRule,
+      'result_policy': 'replace_field',
+      'result_field': 'body_ast',
+      'failure_policy': 'fail',
+      'diagnostic_owner': 'function_body',
+    },
+  };
+}
+
+Map<String, Object?> _span(String source, int start, int end) {
+  return {
+    'start': start,
+    'end': end,
+    'line_start': _lineAt(source, start),
+    'line_end': _lineAt(source, end),
+  };
+}
+
+int _lineAt(String source, int offset) {
+  var line = 1;
+  for (var index = 0; index < offset && index < source.length; index += 1) {
+    if (source.codeUnitAt(index) == 10) {
+      line += 1;
+    }
+  }
+  return line;
 }

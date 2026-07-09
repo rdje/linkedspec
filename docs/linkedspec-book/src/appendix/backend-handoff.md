@@ -364,8 +364,9 @@ fallback: arguments are eager in the caller, params bind into fresh
 function-local scalar/array/hash stores, results come from the final expression
 or local `return(...)`, receiver chains can continue from returned values,
 standalone calls discard their results, and direct/mutual recursion is
-diagnosed. Descriptor-shape hardening and corpus-output parity remain later Dart
-leaves.
+diagnosed. Dart also preserves staged user-function descriptor shapes across
+parsed functions, compiled registry jobs, descriptor records, and runtime output.
+Corpus-output parity remains a later Dart leaf.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

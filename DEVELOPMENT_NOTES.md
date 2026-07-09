@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.5.3 — Dart staged descriptor-shape proof):
+  Closed the Dart `.5` staged/user-function container with a descriptor-shape proof in `test/compiled_spec_test.dart`.
+  The proof starts from spec-returned `function_definition` nodes, runs
+  `parseSpecWithStagedUserFunctionDefinitionAsts(...)`, compiles the stitched spec, and asserts the neutral staged
+  fields through parsed functions, compiled `UserFunctionRegistry.bodyParseJobs`, descriptor `functions`,
+  `meta.function_order`, and runtime output. This is deliberately a shape-preservation layer before `.6` corpus
+  parity; it does not widen staged parsing into public `parse_job(...)` authoring.
+
 - 2026-07-09 (DART-BACKEND-PARITY.5.2 — Dart user-function runtime execution):
   `LinkedSpecRuntimeEngine` now resolves exact-arity `UserFunctionRegistry` calls before ordinary helper
   fallback. The runtime evaluates arguments eagerly in the caller, parses/caches each function `body_source` as an
