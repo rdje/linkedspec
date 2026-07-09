@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.1.1 — record Dart toolchain and layout**
+  (DONE toolchain/package-layout preflight; no Dart package files created).
+
+  **Change:** Verified `/opt/homebrew/bin/dart` with Dart SDK `3.9.2` on macOS arm64. Flutter is absent
+  and non-blocking for the CLI/library backend path. Recorded the planned `dart/` package layout and
+  commands for scaffold creation, formatting, analysis, tests, corpus runner, and CLI smoke entrypoint.
+
+  **Boundary:** No source scaffold yet. The next leaf, `DART-BACKEND-PARITY.1.2`, creates the minimal
+  package and smoke test.
+
+  **Verification:** Dart command probes passed after one approved `dart --disable-analytics` initialization
+  outside the sandbox. `git diff --check`, memory architecture, Knowledge Map, task-tree metadata,
+  doctrine gates, and `mdbook build docs/linkedspec-book` pass.
+
 - 2026-07-09: **FUTURE-PARITY-BACKLOG.1.1 — scope Dart backend parity plan**
   (DONE scoping/task-tree/docs ownership; no Dart/backend implementation code change).
 

@@ -59,13 +59,18 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Children: `.1.1`, `.1.2`, `.1.3`
 
 - ID: `DART-BACKEND-PARITY.1.1`
-  Status: `pending`
+  Status: `done`
   Goal: Verify local Dart toolchain availability and define the repository-owned Dart package layout.
   Acceptance: Record the exact Dart SDK/tool commands available locally, or record a real blocker if
     no Dart SDK is available; define the intended `dart/` package layout, test command, formatter
     command, and corpus-runner entrypoint before source implementation.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** `/opt/homebrew/bin/dart` is available; `dart --version`
+    reports Dart SDK `3.9.2 (stable)` on `macos_arm64`; `flutter` is not installed and is non-blocking
+    for this CLI/library backend. `dart --disable-analytics` needed one approved user-home write because
+    the SDK initializes `~/.dart-tool`; after that, `dart help format`, `dart help analyze`,
+    `dart help test`, `dart pub --help`, and `dart create --help` run cleanly in the workspace.
+    Package layout and commands are recorded below. No Dart package files were created.
+  Commit: `DART-BACKEND-PARITY.1.1 - record Dart toolchain and layout`
 
 - ID: `DART-BACKEND-PARITY.1.2`
   Status: `pending`
@@ -304,7 +309,68 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-BACKEND-PARITY.1.1` | `pending` | Dart implementation must not start until the local SDK/tool commands and repo package layout are known. |
+| 1 | `DART-BACKEND-PARITY.1.2` | `pending` | Toolchain and layout are known; create the minimal package scaffold and smoke test next. |
+
+## Dart Toolchain And Package Layout
+
+- SDK command: `/opt/homebrew/bin/dart`
+- SDK version: `Dart SDK version: 3.9.2 (stable) (Wed Aug 27 03:49:40 2025 -0700) on "macos_arm64"`
+- Flutter: not installed; non-blocking because this backend starts as a Dart CLI/library backend, not a
+  Flutter/mobile integration.
+- One-time local SDK initialization: `dart --disable-analytics` creates user-level SDK analytics config.
+  This required approved execution outside the workspace sandbox because the SDK writes `~/.dart-tool`.
+
+Planned package root: `dart/`
+
+```text
+dart/
+  pubspec.yaml
+  analysis_options.yaml
+  README.md
+  bin/
+    linkedspec_dart.dart
+    corpus_runner.dart
+  lib/
+    linkedspec_dart.dart
+    src/
+      ast/
+        spec_ast.dart
+        action_ast.dart
+      compiler/
+        compiled_spec.dart
+        compiler.dart
+      corpus/
+        manifest_runner.dart
+      parser/
+        spec_parser.dart
+        action_parser.dart
+      runtime/
+        engine.dart
+        helpers.dart
+        regex_engine.dart
+        staged_parser_registry.dart
+        values.dart
+      trace/
+        trace.dart
+  test/
+    smoke_test.dart
+    corpus_manifest_test.dart
+```
+
+Planned commands:
+
+- Create scaffold: `dart create --template package --no-pub dart` or an equivalent hand-curated package
+  layout that avoids generated noise.
+- Fetch dependencies after the package exists: `cd dart && dart pub get`.
+- Format check: `cd dart && dart format --set-exit-if-changed .`.
+- Analyze: `cd dart && dart analyze --fatal-infos --fatal-warnings`.
+- Test: `cd dart && dart test`.
+- Corpus runner entrypoint: `cd dart && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`.
+- CLI smoke entrypoint: `cd dart && dart run bin/linkedspec_dart.dart --help`.
+
+The package name should be `linkedspec_dart`. Initial dependencies should stay minimal:
+`args` for CLI parsing if needed, `test` as a dev dependency, and a lints package only if the scaffold
+requires one. Any dependency download belongs to `.1.2`, not this preflight leaf.
 
 ## Decisions
 
@@ -315,28 +381,33 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   is the conformance doctrine for new backends.
 - `2026-07-09`: The Rust corpus under `rust/linkedspec-runtime/tests/corpus/` remains the source of language-neutral
   fixture truth until a backend-neutral corpus directory is separately adopted.
+- `2026-07-09`: Dart package layout starts as a CLI/library package under `dart/`; Flutter is not required for
+  the backend implementation path.
 
 ## Open Questions
 
-- None blocking `.1.1`. If the local Dart SDK is unavailable, `.1.1` must record the exact blocker and unblock
-  condition rather than guessing implementation commands.
+- None blocking `.1.2`. The Dart SDK is available locally after one-time analytics initialization.
 
 ## Blockers
 
-- None known before `.1.1` toolchain verification.
+- None known before `.1.2` scaffold creation.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-07-09` | `DART-BACKEND-PARITY` | Plan created under `FUTURE-PARITY-BACKLOG.1.1`; `git diff --check`; memory architecture; Knowledge Map; doctrine; task-tree metadata; mdBook build; local CI. | PASS. Local CI includes phase0 `1..1028`; no Dart code yet. |
+| `2026-07-09` | `DART-BACKEND-PARITY.1.1` | `command -v dart`; `dart --version`; `command -v flutter`; approved `dart --disable-analytics`; `dart help format`; `dart help analyze`; `dart help test`; `dart pub --help`; `dart create --help`; `git diff --check`; memory architecture; Knowledge Map; task-tree metadata; doctrine; mdBook build. | PASS. Dart SDK `3.9.2` is available; Flutter absent/non-blocking; layout and commands recorded; no Dart package files created. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `DART-BACKEND-PARITY` | `FUTURE-PARITY-BACKLOG.1.1 - scope Dart backend parity plan` | Tree created by the backlog scoping leaf; implementation commits use `DART-BACKEND-PARITY.*` leaf ids. |
+| `DART-BACKEND-PARITY.1.1` | `DART-BACKEND-PARITY.1.1 - record Dart toolchain and layout` | Toolchain/layout preflight; no package files. |
 
 ## Changelog
 
 - `2026-07-09`: Created the Dart backend parity task tree and selected an interpreter-first parity path.
+- `2026-07-09`: Recorded Dart SDK `3.9.2`, CLI/library package layout, and planned commands; frontier advances
+  to `.1.2` for scaffold creation.

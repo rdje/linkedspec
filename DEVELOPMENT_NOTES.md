@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.1.1 — Dart toolchain/layout preflight):
+  `/opt/homebrew/bin/dart` is available and reports Dart SDK `3.9.2 (stable)` on `macos_arm64`.
+  Flutter is not installed, which is non-blocking because the backend starts as a Dart CLI/library package.
+  The SDK tried to initialize analytics under `~/.dart-tool`; running `dart --disable-analytics` once with
+  approved out-of-sandbox access resolved the sandbox-only write failure. The planned package root is
+  `dart/`, package name `linkedspec_dart`, with `bin/linkedspec_dart.dart` and `bin/corpus_runner.dart`
+  entrypoints and source split across AST, parser, compiler, runtime, corpus, and trace owners. Next leaf:
+  `DART-BACKEND-PARITY.1.2` creates the minimal package scaffold and smoke test.
+
 - 2026-07-09 (FUTURE-PARITY-BACKLOG.1.1 — Dart parity plan scoped):
   Created `docs/tasks/DART-BACKEND-PARITY.md` as the dedicated Dart backend task tree. The Dart lane
   starts interpreter-first: `.spec` parser, typed helper/action AST, compiled-spec state, Dart runtime

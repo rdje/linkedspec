@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.1.1 — record Dart toolchain and layout
+
+**Scope:** Dart backend preflight, package layout, mdBook status sync, and task-tree frontier advancement.
+
+**Change:** Verified local Dart SDK availability (`/opt/homebrew/bin/dart`, SDK 3.9.2 on macOS
+arm64), recorded Flutter absence as non-blocking for the CLI/library backend path, and documented
+the planned `dart/` package layout plus format/analyze/test/corpus-runner commands. Advanced the
+Dart task frontier to `.1.2` for the minimal package scaffold and smoke test. Updated the mdBook status
+and backend-handoff pages with the verified preflight state. No Dart package files were created.
+
+**Validation:** Dart command probes passed after one approved `dart --disable-analytics` initialization
+outside the workspace sandbox. `git diff --check`, `bash scripts/check_memory_architecture.sh`,
+`bash knowledge-map/scripts/check_knowledge_map.sh`, `bash scripts/check_task_tree_metadata.sh`,
+`bash scripts/check_doctrines.sh`, and `mdbook build docs/linkedspec-book` pass.
+
 ## 2026-07-09 — FUTURE-PARITY-BACKLOG.1.1 — scope Dart backend parity plan
 
 **Scope:** Dart backend parity task-tree scoping, roadmap/book/live-doc alignment, Knowledge Map
