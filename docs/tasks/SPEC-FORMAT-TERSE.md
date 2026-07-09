@@ -269,8 +269,8 @@
   invalid. Existing phase0 locks already cover parse expansion, validation acceptance, rejection diagnostics,
   and three-target grouping; the mdBook now states the invalid boundary explicitly. Prior **`.5.0`
   DONE; future variant parity ownership/inventory complete** — current implemented backends are Perl
-  reference + Rust; Julia/Dart remain accepted future targets from ADR `0006`; Lua needs an explicit decision
-  record before any implementation leaf or code. Prior **`.2.3.5.5` DONE; receiver-chain family
+  reference + Rust; later ADR `0021` schedules future parity rollout as Dart, then Julia, then Lua under
+  `FUTURE-PARITY-BACKLOG`. Prior **`.2.3.5.5` DONE; receiver-chain family
   complete** — expression-valued
   blocks now continue through compatible receiver-dot value chains by the runtime type they yield, with no
   block-only helper semantics. Locked examples cover array, early-return array, string-to-array, hash-to-array,
@@ -2799,17 +2799,17 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.4.4 - finalize function surface ledger`
 
 - ID: `SPEC-FORMAT-TERSE.5`
-  Status: `done` / `closed` (split 2026-07-01; implementation leaves deferred/blocked pending future roadmap decisions)
+  Status: `done` / `closed` (split 2026-07-01; future backend leaves now superseded by `FUTURE-PARITY-BACKLOG`)
   Goal: Future backend variant parity ownership before any non-Rust variant code
-  Children: `.5.0` (done), `.5.1` (deferred), `.5.2` (deferred), `.5.3` (blocked)
+  Children: `.5.0` (done), `.5.1` (deferred), `.5.2` (deferred), `.5.3` (superseded by `FUTURE-PARITY-BACKLOG.1.3`)
   Acceptance: The implemented-variant inventory is explicit, the accepted future backend targets are tied
-    back to ADR `0006`, and no Julia/Dart/Lua implementation can begin without a concrete owning leaf/tree
+    back to ADR `0006`, and no future backend implementation can begin without a concrete owning leaf/tree
     plus a corpus-parity acceptance contract. This ownership slice must not add backend code.
   Verification: **SPLIT/OWNED 2026-07-01.** `.5.0` records the current backend inventory and future-backend
-    boundaries. Julia and Dart remain accepted future targets from ADR `0006`; Lua is not adopted by any
-    current ADR, task tree, mdBook handoff chapter, or tracked source path and therefore requires a decision
-    record before any implementation leaf can exist. The executable terse-language frontier returns to
-    `.3.1` after this ownership slice.
+    boundaries. Julia and Dart remained accepted future targets from ADR `0006`; Lua had not yet been adopted
+    by any then-current ADR, task tree, mdBook handoff chapter, or tracked source path. ADR `0021` later adopted
+    Lua as a future backend target and scheduled backend rollout as Dart -> Julia -> Lua under
+    `FUTURE-PARITY-BACKLOG`. The executable terse-language frontier returned to `.3.1` after this ownership slice.
   Commit: `SPEC-FORMAT-TERSE.5.0 - own future variant parity inventory`
 
 - ID: `SPEC-FORMAT-TERSE.5.0`
@@ -2817,9 +2817,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Goal: Inventory implemented/future backend variants and split future parity ownership
   Acceptance: Re-read the active roadmap/task tree, ADR `0006`, Phase 8/9 task trees, mdBook backend handoff,
     Knowledge Map backend facts, and tracked source layout. Record that the implemented backends are the Perl
-    reference and the Rust interpreter, that Julia/Dart are accepted future targets but not implemented here,
-    and that Lua is outside the accepted backend set until an ADR or task tree explicitly adopts it. Update
-    live docs and retrieval docs; do not change parser/compiler/runtime code.
+    reference and the Rust interpreter, that future backend work needs explicit ownership before code, and
+    that later adoption decisions belong in ADR/task-tree records. Update live docs and retrieval docs; do not
+    change parser/compiler/runtime code.
   Verification: **PASS 2026-07-01.** Bootstrap/roadmap/mdBook/codebase read completed before edits. Source
     inventory found no tracked Julia, Dart, or Lua implementation paths outside the unrelated nested `rgx`
     checkout. ADR `0006`, Phase 8, and the mdBook backend handoff name Rust/Julia/Dart, while Phase 9 is
@@ -2850,14 +2850,14 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `pending`
 
 - ID: `SPEC-FORMAT-TERSE.5.3`
-  Status: `blocked`
+  Status: `superseded` (2026-07-09 by ADR `0021` and `FUTURE-PARITY-BACKLOG.1.3`)
   Goal: Lua backend scope decision before any Lua parity leaf
   Acceptance: Lua may enter the backend set only after an explicit decision record or roadmap update adopts it
-    and defines the same universal `.spec` / corpus-parity obligations as the accepted future backends. Until
-    then, do not create Lua implementation leaves and do not write Lua backend code.
-  Verification: Blocked on accepted Lua-backend decision; current ADR/book/codebase backend set is Perl,
-    Rust, Julia, and Dart.
-  Commit: `pending`
+    and defines the same universal `.spec` / corpus-parity obligations as the accepted future backends.
+  Verification: Superseded — ADR `0021` adopts Lua as a future backend target and schedules it after Dart
+    and Julia. Implementation remains future work under `FUTURE-PARITY-BACKLOG.1.3`; no Lua backend code
+    exists in this closed terse-format tree.
+  Commit: `FUTURE-PARITY-BACKLOG.0 - create future parity backlog`
 
 - ID: `SPEC-FORMAT-TERSE.6`
   Status: `done` (2026-07-04)
@@ -4657,7 +4657,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.2.3.5.4` | `done` 2026-07-01 | Number receiver-dot value chains landed on Perl/Rust; numeric literal receivers parse, comparisons are terminal, value-form numeric comparisons lower on Perl, Rust `num_add`/`num_mul` consume all operands, phase0 999 green, corpus 50 fixtures. |
 | — | `SPEC-FORMAT-TERSE.2.3.5.6` | `done` 2026-07-01 | Typed wrapper quoted-name boundary locked: bare aggregate wrapper args read typed working variables; quoted args stay constructor payloads; direct `[...]` / `{...}` shapes are the preferred terse constructors. |
 | — | `SPEC-FORMAT-TERSE.2.3.5.5` | `done` 2026-07-01 | Block-valued receiver-dot chaining landed by yielded runtime type; expression-valued blocks feed the existing compatible array/string/hash/number receiver families. |
-| — | `SPEC-FORMAT-TERSE.5.0` | `done` 2026-07-01 | Future backend parity ownership is explicit before any non-Rust variant code: Perl reference and Rust are implemented; Julia/Dart are accepted future targets; Lua needs an ADR before inclusion. |
+| — | `SPEC-FORMAT-TERSE.5.0` | `done` 2026-07-01 | Future backend parity ownership is explicit before any non-Rust variant code; ADR `0021` later schedules Dart, Julia, and Lua under `FUTURE-PARITY-BACKLOG`. |
 | — | `SPEC-FORMAT-TERSE.3.1` | `done` 2026-07-01 | Edge syntax contract confirmed and locked with existing regression coverage: `->` action edges and `=>` blind-call edges stay as-is; grouped action targets require a shared block; block-less grouping stays invalid. |
 | — | `SPEC-FORMAT-TERSE.3.2` | `done` | Arithmetic/comparison call surface split before code: word aliases, symbol callees, and comparison-name policy are separate mechanisms; all children are complete. |
 | — | `SPEC-FORMAT-TERSE.3.2.1` | `done` 2026-07-01 | Non-conflicting numeric word aliases map to `num_*` on Perl/Rust; comparison words stayed string helpers until `.3.2.3.3` later flipped them. |
@@ -4679,7 +4679,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | — | `SPEC-FORMAT-TERSE.3.3.2` | `done` 2026-07-02 | Direct RHS shape assignment expressions now store and return array/hash values on Perl/Rust after target-kind inference; scalar wrapper targets still keep scalar-held payloads. |
 | — | `SPEC-FORMAT-TERSE.3.3.3` | `done` 2026-07-02 | Array append and hash-index mutation expression values now mutate and return updated aggregate snapshots on Perl/Rust; corpus 61 fixtures and phase0 1014 green. |
 | — | `SPEC-FORMAT-TERSE.3.3.4` | `done` 2026-07-02 | Legacy `assign(...)` compatibility is documented as an alias while public examples prefer `set(...)`/operators; the parent assignment-expression fixture passes on Perl/Rust with 62 corpus fixtures and phase0 1015 green. |
-| — | `SPEC-FORMAT-TERSE` | `no PNT-eligible leaf` | All concrete terse implementation/doc-closure leaves in the active roadmap are done. Future backend leaves `.5.1`/`.5.2` are deferred to roadmap selection, and `.5.3` is blocked on a Lua backend decision. |
+| — | `SPEC-FORMAT-TERSE` | `no PNT-eligible leaf` | All concrete terse implementation/doc-closure leaves in this tree are done. Future backend leaves `.5.1`/`.5.2`/`.5.3` are superseded by `FUTURE-PARITY-BACKLOG`, where Lua is accepted and scheduled after Dart and Julia. |
 
 ## Decisions
 
@@ -4904,9 +4904,9 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 - `2026-07-01` (**`.5.0` future variant parity ownership split**). The implemented backend set is the Perl
   reference plus the Rust interpreter under `rust/`. ADR `0006`, Phase 8, the mdBook backend handoff chapter,
   and the Knowledge Map define Julia and Dart as accepted future backend targets that must consume identical
-  `.spec` files and pass the language-neutral corpus when implemented. Lua appears only in the current frontier
-  wording that triggered this split; it is not adopted by ADR `0006`, the backend handoff chapter, or any
-  tracked implementation path, so Lua work is blocked on an explicit decision record before any code leaf.
+  `.spec` files and pass the language-neutral corpus when implemented. This 2026-07-01 split kept Lua outside
+  code ownership until an explicit adoption decision existed; ADR `0021` now supplies that decision and moves
+  Dart, Julia, and Lua future parity work to `FUTURE-PARITY-BACKLOG`.
 
 - `2026-06-30` (**`.2.3.4.2` Perl inline value-control lowering landed**). Inline-composite `if(...)` and
   `switch(...)` are now portable value expressions in the supported value-consuming slots: `return(...)`,
@@ -5458,7 +5458,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   chaining by return type"). (c) **semicolons are mandatory between statements on the same line**
   (reconfirms `.1.5` / the card — no change). (d) Guiding principle the user stated for the wider
   codebase (not terse-format-specific, captured in [[feedback_keep-only-portable-cross-variant]]):
-  **keep only what can be ported / have a Rust/Julia/Dart variant** — Perl-only non-portable legacy
+  **keep only what can be ported / have a Rust/Dart/Julia/Lua variant** — Perl-only non-portable legacy
   is retirement debt (drives the RTLUtils/FSMGen/VHDL retirement, see Blockers).
 - `2026-06-18`: **ACTIVATED + RATIFIED (user).** The user activated the tree (AskUserQuestion choice
   "Activate SPEC-FORMAT-TERSE now", during `SPEC-LANG-REFERENCE.10.5.4`) and reinforced the key
@@ -5620,7 +5620,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.4` | Perl syntax checks for `MethodLowering.pm`, `t/phase0_regression.t`, and oracle generator; focused lowering/runtime/source probes; focused Rust parser/runtime tests (`parse_number_receiver`, `parse_decimal_number_receiver`, `terse_2_3_5_4`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; phase0 (`prove -q -Iperl t/phase0_regression.t`) | Number receiver-dot value chains landed. Numeric links compose through `num_*` helpers, integer/decimal literal receivers parse, comparison methods are terminal, value-form numeric comparisons lower on Perl, Rust `num_add`/`num_mul` consume all operands, and statement/lifecycle methods such as `declare(...)` remain outside terse receiver methods. Phase0 PASS (999 tests); oracle corpus PASS over 50 fixtures. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.6` | Perl syntax checks for `MethodLowering.pm`, `ValueExpr.pm`, `t/phase0_regression.t`, and oracle generator; focused lowering/runtime/source probes for bare vs quoted aggregate wrappers and direct shapes; full phase0 (`prove -q -Iperl t/phase0_regression.t`); focused Rust `.2.3.5.6` integration tests; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; `mdbook build docs/linkedspec-book`; Knowledge Map/memory/doctrine/diff/local CI gates | Typed wrapper quoted-name boundaries landed. Bare `array(foo)` / `a(foo)` and `hash(bar)` / `h(bar)` are explicit aggregate working-variable reads; quoted wrapper arguments remain literal constructor payloads and are not scalar-indirect aliases; direct `[...]` and `{...}` shapes are the preferred terse constructors. Perl generic value-expression lowering now recognizes direct shape literals in helper composition and avoids reserving primitive literals or inappropriate engine locals as aggregate symbols. Phase0 PASS (1000 tests); oracle corpus PASS over 51 fixtures. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.2.3.5.5` | Perl syntax checks for `MethodLowering.pm`, `t/phase0_regression.t`, and oracle generator; focused Perl lowering/runtime probes; focused Rust parser/runtime tests (`parse_block_valued_receiver_chain`, `terse_2_3_5_5`); `perl -Iperl tools/gen_oracle_corpus.pl`; Rust `corpus_oracle`; full phase0 (`prove -q -Iperl t/phase0_regression.t`); `mdbook build docs/linkedspec-book`; Knowledge Map/memory/doctrine/diff checks | Block-valued receiver-dot chains landed. Expression-valued blocks now feed their yielded array/string/hash/number values into the compatible receiver-family chains; Perl array-yielding blocks use narrow visible-exit recognition and Rust parses fluent chains after block/hash/array primaries. Phase0 PASS (1001 tests); oracle corpus PASS over 52 fixtures. |
-| `2026-07-01` | `SPEC-FORMAT-TERSE.5.0` | Full bootstrap/roadmap/mdBook/codebase read; ADR `0006` + Phase 8/9 task-tree audit; `rg` source inventory for Julia/Dart/Lua implementation paths; Knowledge Map backend fact correction; mdBook backend-handoff status update; memory/doctrine/KM/diff checks; `mdbook build docs/linkedspec-book` | Future variant parity ownership landed before any non-Rust variant code. Implemented backends are Perl reference and Rust; Julia/Dart are accepted future targets but deferred to dedicated backend task trees; Lua is blocked on an explicit decision record before any task-tree leaf or code. No parser/compiler/runtime code changed. |
+| `2026-07-01` | `SPEC-FORMAT-TERSE.5.0` | Full bootstrap/roadmap/mdBook/codebase read; ADR `0006` + Phase 8/9 task-tree audit; `rg` source inventory for Julia/Dart/Lua implementation paths; Knowledge Map backend fact correction; mdBook backend-handoff status update; memory/doctrine/KM/diff checks; `mdbook build docs/linkedspec-book` | Future variant parity ownership landed before any non-Rust variant code. Implemented backends are Perl reference and Rust; later ADR `0021` adopts Lua and schedules Dart, Julia, and Lua in `FUTURE-PARITY-BACKLOG`. No parser/compiler/runtime code changed. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.3.1` | Existing phase0 locks audited (`bootstrap_grouped_action_edge_targets_share_one_code_block`, `validation_accepts_grouped_action_edge_targets_with_shared_code_block`, `validation_rejects_grouped_action_edge_targets_without_shared_code_block`, `validation_accepts_grouped_action_edge_with_three_targets`); focused `perl -Iperl` validation/bootstrap probes for grouped shared-block acceptance, two-target `ACODE` expansion, and block-less grouped-target rejection; full phase0 (`prove -q -Iperl t/phase0_regression.t`, 1001 tests); `bash tools/run_ci_local.sh`; mdBook boundary wording; Knowledge Map fact card | Edge syntax contract locked without parser/compiler/runtime code change. `->` action edges and `=>` blind-call edges stay as-is. Grouped targets are valid only with one shared `{ ... }` block; the block-less `-> A | B` form stays invalid with the existing diagnostic. Frontier becomes `.3.2` for arithmetic/comparison function spellings. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.3.2` | Knowledge Map retrieval (`spec-format-brainstorm-rounds-1-3`, `terse-number-receiver-value-chains`, `terse-composability-audit-boundaries`); TOOLBOX `call_spec_handler_subst`/runtime/flow-lowering probes for `num_*`, bare word aliases, symbol callees, and comparison helpers; source reads of Perl `MethodExpr`/`MethodLowering` and Rust expression parser/runtime helper dispatch; mdBook comparison-helper audit; memory/doctrine/KM/diff checks | Arithmetic/comparison call surface split before code. Current ground truth: `num_*` helpers are the implemented numeric family, bare `add(...)`/`sum(...)` do not lower as numeric helpers, symbol callees are not parsed portably, raw Perl can misinterpret `+(2,3)`, and bare `eq`/`gt`/etc. are current string comparisons. Frontier becomes `.3.2.1` for non-conflicting numeric word aliases. |
 | `2026-07-01` | `SPEC-FORMAT-TERSE.3.2.1` | Perl syntax checks for `MethodExpr.pm`, `MethodLowering.pm`, `FlowExpr.pm`, `BootstrapSpec/Core.pm`, phase0, and oracle generator; focused Perl lowering/runtime probes for numeric aliases, comparison boundary, and receiver-chain preservation; `perl -Iperl tools/gen_oracle_corpus.pl`; Rust corpus oracle; full phase0 (`prove -q -Iperl t/phase0_regression.t`); focused Rust integration test; `mdbook build docs/linkedspec-book` | Numeric word aliases landed on Perl/Rust. `add`/`sub`/`mul`/`div`/`mod`, unary/rounding helpers, `min`/`max`/`clamp`, and reducers `sum`/`avg`/`median`/`range` now dispatch to the existing `num_*` family. Receiver-dot number chains remain stable because Perl aliasing happens after receiver normalization. Bare `gt(...)` remains string comparison. Phase0 PASS (1002 tests); oracle corpus PASS over 53 fixtures. Frontier becomes `.3.2.2`. |
@@ -5765,7 +5765,7 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
 | `SPEC-FORMAT-TERSE.4.2.1` | `SPEC-FORMAT-TERSE.4.2.1 - add Perl user function registry` | Perl registry/descriptor seam landed: `specs/spec.spec` owns active `function_definition`, descriptors expose `functions`, and registered calls intentionally remain unresolved until `.4.2.2`. Frontier becomes `.4.2.2`. |
 | `SPEC-FORMAT-TERSE.4.1` | `SPEC-FORMAT-TERSE.4.1 - lock user function contract` | User-function MVP contract/inventory locked before code; implementation split into `.4.2.1`–`.4.2.3` and `.4.3.1`–`.4.3.2`. Frontier becomes `.4.2.1`. |
 | `SPEC-FORMAT-TERSE.4` | `SPEC-FORMAT-TERSE.4 - own user-defined function surface` | User-defined pure functions are now owned under Round 4. Calls are value expressions, may feed receiver-dot chains, and standalone results are silently discarded. Frontier becomes `.4.1`, then `.3.2.2`. |
-| `SPEC-FORMAT-TERSE.5.0` | `SPEC-FORMAT-TERSE.5.0 - own future variant parity inventory` | Future backend parity ownership is explicit: Perl reference and Rust are implemented; Julia/Dart are accepted future targets; Lua needs a new decision record before any code. Frontier returns to `.3.1`. |
+| `SPEC-FORMAT-TERSE.5.0` | `SPEC-FORMAT-TERSE.5.0 - own future variant parity inventory` | Future backend parity ownership is explicit: Perl reference and Rust are implemented; ADR `0021` later adopts Lua and moves future backend rollout to `FUTURE-PARITY-BACKLOG`. Frontier returns to `.3.1`. |
 | `SPEC-FORMAT-TERSE.3.1` | `SPEC-FORMAT-TERSE.3.1 - lock edge syntax contract` | Edge syntax confirmed without behavior change: `->` action edges and `=>` blind-call edges stay as-is; grouped action targets require a shared block; block-less grouping stays invalid. Frontier becomes `.3.2`. |
 | `SPEC-FORMAT-TERSE.3.2` | `SPEC-FORMAT-TERSE.3.2 - split arithmetic call surface` | Arithmetic/comparison calls split before code: `.3.2.1` owns non-conflicting numeric word aliases, `.3.2.2` owns arithmetic symbol callees, and `.3.2.3` owns the comparison spelling policy before implementation. Frontier becomes `.3.2.1`. |
 | `SPEC-FORMAT-TERSE.3.2.1` | `SPEC-FORMAT-TERSE.3.2.1 - implement numeric word aliases` | Function-form numeric word aliases dispatch to the existing `num_*` family on Perl/Rust; bare comparison words stayed string helpers only until `.3.2.3.3`. Phase0 1002 green; oracle corpus 53 fixtures; frontier becomes `.3.2.2`. |

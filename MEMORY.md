@@ -18,31 +18,28 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `SPEC-LANG-REFERENCE.8` — corrected stale top-rule doctrine drift and closed
-  the language-reference tree. Current doctrine is ADR `0010` (2026-06-23): `::` marks the rule entered
-  first; after entry selection, `::` and `:` share the same regex/mode/action feature surface. The older
-  no-regex/two-rule-minimum correction is historical, and the no-regex wrapper remains a stream-parser
-  idiom only.
-- prior_leaf: `SPEC-LANG-REFERENCE.7` — added canonical KM cards for output/return shape, regex backend
-  features, rule modes, lifecycle/`retv`, and capture/mark taxonomy; extended the edge card for
-  action-vs-blind dispatch retrieval.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.0` — created the active future parity backlog tree,
+  accepted Lua via ADR `0021`, and scheduled future backend parity as Dart first, Julia second, Lua third.
+  This was tracking/decision/docs only; no parser/runtime/backend code changed.
+- prior_leaf: `SPEC-LANG-REFERENCE.8` — corrected stale top-rule doctrine drift and closed the language
+  reference tree. Current doctrine is ADR `0010`: `::` marks the rule entered first; after entry selection,
+  `::` and `:` share the same regex/mode/action feature surface.
 - latest_commit: HEAD containing this pointer should be
-  `SPEC-LANG-REFERENCE.8 - correct top-rule doctrine drift and close language reference`; parent before
-  this slice is `SPEC-LANG-REFERENCE.7 - add spec-language Knowledge Map cards`.
+  `FUTURE-PARITY-BACKLOG.0 - create future parity backlog`; parent before this slice is
+  `SPEC-LANG-REFERENCE.8 - correct top-rule doctrine drift and close language reference`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: none known after `SPEC-LANG-REFERENCE` closeout; `docs/TASK_TREE.md` has no
-  active/pending PNT-eligible row at this pointer.
-- next_action: from a clean repo, confirm `docs/TASK_TREE.md` / roadmap for any newly activated work;
-  otherwise await a new user-directed task.
-- latest_bootstrap_read: 2026-07-08 read README, memory architecture, session bootstrap, task-tree index/active
-  trees, relevant ADR/KM facts, ROADMAP/ROADMAP_V2, mdBook status/dev/architecture chapters, core import tree,
-  enforcement scripts/hooks, shipped specs, tooling, and focused test harness inventory.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; current frontier `FUTURE-PARITY-BACKLOG.1.1` pending.
+- next_action: from a clean repo, start Dart backend parity scoping under `FUTURE-PARITY-BACKLOG.1.1`
+  before any backend implementation code.
+- latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, task-tree index,
+  ROADMAP/ROADMAP_V2, mdBook status/backend-handoff/formal grammar/helper chapters, relevant ADR/KM facts,
+  and codebase architecture/source inventory for the docs/tracking slice.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1028`**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none once the `.8` pointer commit lands; do not pivot unless the repo is
+- blockers: none. in_flight_uncommitted: none once the `.0` pointer commit lands; do not pivot unless the repo is
   handoff-ready.

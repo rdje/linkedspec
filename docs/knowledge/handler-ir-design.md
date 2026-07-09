@@ -213,7 +213,7 @@ HandlerIR and ActionIR serve different roles:
 
 ActionIR lowering happens first: `.spec` DSL → ActionIR scanner → canonical events →
 lowered code strings. Then HandlerIR assembly: lowered code strings + rule metadata →
-HandlerIR node. Finally, backend emission: HandlerIR node → Perl/JSON/Rust/Julia/Dart.
+HandlerIR node. Finally, backend emission: HandlerIR node -> Perl/JSON/Rust/Dart/Julia/Lua.
 
 ## Current Limitations (Phase 8 awareness)
 
@@ -226,7 +226,7 @@ HandlerIR node. Finally, backend emission: HandlerIR node → Perl/JSON/Rust/Jul
 - **Repetition bounds use `10**9` for unbounded**: A sentinel constant, not an
   explicit "unbounded" marker. Ports should treat `rep_max >= 10**9` as unbounded.
 
-These are documented so a Rust/Julia/Dart implementer knows where the Perl coupling
+These are documented so a Rust/Dart/Julia/Lua implementer knows where the Perl coupling
 still exists and can plan their shim or reimplementation accordingly.
 
 ## Links

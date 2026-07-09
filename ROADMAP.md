@@ -515,8 +515,8 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 - Current status: the Rust interpreter oracle is green over 99 fixtures. Generated Rust source emission remains a
   structural/curated-subset proof, not the primary interpreter parity gate.
 - Variant model: `.spec` is the universal contract, Perl is the reference backend, Rust is the implemented
-  lockstep variant, and Julia/Dart are accepted future lockstep variants; Lua requires an explicit ADR before it
-  can join that set.
+  lockstep variant, and ADR `0021` schedules Dart, Julia, and Lua as future full-parity lockstep variants in
+  that order.
 
 ## Backbone Refactor Track (Explicit, Tracked)
 This track captures the core refactor items needed to make `LinkedSpec.pm` robust and extensible while preserving current behavior.
@@ -550,7 +550,8 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
    - Treat those surfaces as semantically equivalent structured DSL notation rather than treating `{...}` itself as something to eliminate.
 5. Multi-backend enablement:
    - Keep regex/execution semantics documented and map action IR to the Perl reference first, the
-     Rust interpreter next, and future lockstep variants such as Julia and Dart incrementally.
+     Rust interpreter next, and future lockstep variants in the ADR `0021` order: Dart, then Julia,
+     then Lua.
 
 ## Method-Like DSL Migration Track (Planned, Under Item #3)
 Goal: converge `.spec` semantics on backend-neutral method-like operations while supporting two equivalent structured authoring surfaces:
@@ -850,7 +851,8 @@ This is a saved future-enhancement note, not an active implementation item.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |
-| Overall roadmap | `done` | Whole-project delivery across parser core, semantics, runtime, docs, self-hosting, multi-backend handoff, and the Rust variant. | All numbered phases (0-9) done. All Backbone items done. Plugin modernization done. Method-like DSL migration done. Phase 7 self-hosting complete. Phase 8 multi-backend handoff surface specified; Phase 9 Rust variant operational (Cargo workspace at `rust/`, interpreted mode, v0.1). mdBook reframed variant-agnostic (`.spec` = universal contract; Perl = reference backend; Rust = implemented lockstep variant; Julia/Dart = accepted future variants). Remaining: ongoing documentation/book sync and explicitly owned deferred feature lanes. |
+| Overall roadmap | `done` | Whole-project delivery across parser core, semantics, runtime, docs, self-hosting, multi-backend handoff, and the Rust variant. | All numbered phases (0-9) done. All Backbone items done. Plugin modernization done. Method-like DSL migration done. Phase 7 self-hosting complete. Phase 8 multi-backend handoff surface specified; Phase 9 Rust variant operational (Cargo workspace at `rust/`, interpreted mode, v0.1). mdBook reframed variant-agnostic (`.spec` = universal contract; Perl = reference backend; Rust = implemented lockstep variant; Dart/Julia/Lua = scheduled future full-parity variants). Remaining: ongoing documentation/book sync and explicitly owned deferred feature lanes. |
+| Future parity backlog | `in progress` | Deferred/future parity lanes after the closed language-reference and terse-format trees: new backend parity, staged parsing generalization, generated-source breadth, function extensions, helper caveats, plugin fate, and richer Rust oracle candidates. | Active task tree `docs/tasks/FUTURE-PARITY-BACKLOG.md`; current frontier `FUTURE-PARITY-BACKLOG.1.1` scopes Dart backend parity first, followed by Julia and Lua under ADR `0021`. |
 | Phase 0 | `done` | Regression safety net, baseline compilation coverage, and corpus-level guardrails. | Keep the regression baseline green; all 21 shipped `specs/*.spec` files now participate in the baseline compile pass, and the current gate reaches `PASS 1..1028` with `PERL5LIB=` cleared. |
 | Phase 1 | `done` | Parser-core isolation and dependency-surface reduction for the active compile/runtime path. | Task tree `docs/tasks/PHASE1-PARSER-CORE-ISOLATION.md` completed 2026-05-18 (3 leaves: inventory, ActionRewriter.pm removal, rewrite_action_code_for_compat evaluation). ActionRewriter.pm deleted (118 lines, 59 forwarders). |
 | Phase 1A | `done` | Thin-façade modularization of `LinkedSpec.pm` into focused owner modules with stable public APIs. | Task tree `docs/tasks/PHASE1A-CLOSE-OUT.md` completed 2026-05-16. `LinkedSpec.pm` is a thin façade; the lazy owner-dispatch / callback-value lookup / `$@` preservation plumbing is centralized in `LinkedSpec::OwnerDispatch` and shared across the owner modules. The then-present thin shim `ActionRewriter.pm` was later deleted in Phase 1; the focused helper-rewrite entrypoint now lives in `LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(...)`. |

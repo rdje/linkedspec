@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (FUTURE-PARITY-BACKLOG.0 — future parity backlog created; Lua accepted):
+  Created `docs/tasks/FUTURE-PARITY-BACKLOG.md` as the active owner for deferred/future parity work after
+  the language-reference closeout. The seven backlog lanes are now durable task-tree rows: future backend
+  parity, staged parsing generalization, Rust generated-source breadth, user-function extensions, helper
+  caveats, Perl legacy plugin machinery fate, and richer Rust oracle candidates. ADR `0021` supersedes the
+  old Lua-decision gap: Lua is accepted as a future backend target and the scheduled rollout is Dart first,
+  Julia second, Lua third. All three future backends must reach full parity with Perl5 and Rust under the
+  same universal `.spec`, text-to-AST, staged parsing, runtime, diagnostics, and corpus contracts. This slice
+  is tracking/decision/docs only; the next executable frontier is `FUTURE-PARITY-BACKLOG.1.1` for Dart
+  parity scoping before implementation code.
+
 - 2026-07-08 (SPEC-LANG-REFERENCE.8 — top-rule doctrine drift correction):
   The current doctrine is the June 23 ADR `0010` model, not the older June 17 no-regex correction.
   `::` marks the rule entered first; once selected, a `::` rule has the same regex slots, rule modes,
@@ -2319,8 +2330,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   text into typed AST/IR before lowering, interpretation, or code emission. (2) **Perl text-to-text is debt.**
   Existing structured source scans remain only as migration baseline; new supported surfaces must not extend
   them. (3) **User functions depend on this.** Implement `fn` through AST call/function nodes, not textual macro
-  expansion. (4) **Future variants inherit the rule.** Julia and Dart must start text-to-AST; Lua gets the same
-  rule if later accepted by ADR. (5) **Migration must be sliced.** Inventory first, parser seam second, then
+  expansion. (4) **Future variants inherit the rule.** Dart, Julia, and Lua must start text-to-AST under
+  ADR `0021`. (5) **Migration must be sliced.** Inventory first, parser seam second, then
   value/receiver and statement/control family replacement under phase0/oracle locks.
 
 - 2026-07-01 (SPEC-FORMAT-TERSE.4 — user-defined function surface owned): Accepted user-defined functions
@@ -2379,12 +2390,12 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   unnumbered "Julia/Lua/Dart variant parity" frontier as an ownership slice before any backend code. Durable
   points. (1) **Implemented backends are Perl and Rust.** Perl remains the reference implementation; Rust is
   the implemented interpreter variant under `rust/`, validated incrementally by the language-neutral oracle
-  corpus. (2) **Julia and Dart are accepted future targets, not current implementations.** ADR `0006`, Phase 8,
-  and the backend handoff chapter define Rust/Julia/Dart lockstep obligations, while Phase 9 explicitly scoped
-  implementation to Rust only. (3) **Lua is not in the accepted backend set today.** It appeared in the stale
-  current-frontier wording that triggered the split, but not in ADR `0006`, the mdBook backend handoff, Phase 8
-  deliverables, or tracked source paths. Lua backend work therefore needs a decision record before a task-tree
-  leaf or code exists. (4) **The next executable language slice is Round 3, not backend code.** Future backend
+  corpus. (2) **Julia and Dart were the accepted future targets at this slice, not current implementations.**
+  ADR `0006`, Phase 8, and the backend handoff chapter defined Rust/Julia/Dart lockstep obligations at that
+  time, while Phase 9 explicitly scoped implementation to Rust only. (3) **Lua needed an explicit adoption
+  decision at that time; ADR `0021` now
+  supplies it.** The future backend rollout is now owned by `FUTURE-PARITY-BACKLOG` as Dart, then Julia, then
+  Lua. (4) **The next executable language slice is Round 3, not backend code.** Future backend
   leaves are owned/deferred, so PNT returns to `SPEC-FORMAT-TERSE.3.1` (edge syntax confirmation). (5) **Keep
   KM facts current after roadmap milestones.** The older backend-vision card still said "Perl 5 only" after
   Phase 9; correcting that avoids future archaeology.
@@ -3419,7 +3430,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
 - 2026-06-15 (RUST-FUNCTIONAL-PARITY.3.1): Expression parser brought to signoff quality. Added `Expr::FluentChain` variant (`receiver: Box<Expr>` + `calls: Vec<FluentCall>`) for representing fluent method chains in the AST. Added `FluentCall` struct (`method` + `args`). Replaced broken placeholder fluent chain code (which produced a fake `Call { name: "chain", args: [Variable, Call { name: "" }] }`) with a proper recursive `parse_fluent_chain()` that handles unlimited `.method(args)` chains on calls, variables, and indexed vars. Added boolean literal parsing (`true`/`false`) with word-boundary guards so longer identifiers like `trueword` are not false-matched. Applied same word-boundary guard to `undef`. Extended fluent chain support to `parse_expr` for all three primary forms (call, indexed-var, plain variable). Added `Expr::FluentChain` interpreter support in `engine.rs`: evaluates the receiver expression (for side effects like `push_value`), then evaluates each fluent call in sequence. Test suite expanded 9→51 tests with comprehensive roundtrip validation: Display→Parse produces equivalent AST for all expression forms. Design decision: fluent chains are represented as a dedicated AST node rather than desugared into nested calls, keeping the AST close to the source and leaving desugaring decisions to the lowering layer (as in the Perl reference).
 - 2026-06-15 (RUST-FUNCTIONAL-PARITY.2.3): Completed rgx evaluation as `regex` crate replacement for the Rust variant. API audit confirms all required primitives exist (`Regex::compile()`, `find_first_at()`, `find_first()`, `MatchResult.start`/`.end`/`.groups`, `capture_names()`). Migration mapping is mechanical: `Regex::new(p)` → `Regex::compile(p)`, `.find(text)` → `.find_first(text)`, `.find_at(text, pos)` → `.find_first_at(text, pos)`, method calls → field access (`.start()` → `.start`). rgx supports PCRE2-level features the `regex` crate lacks (look-around, backreferences, subroutine calls). Decision: DEFER — rgx is not on crates.io; requires cold-clone bootstrap (`make -C subs/pgen/rust regex_parser_bootstrap` per rgx README) before compilation. Re-evaluate when rgx is published to crates.io or the bootstrap has been run and workspace integration confirmed. Existing `regex` crate with look-around workaround (.2.2) sufficient for v1.
 - 2026-06-14 (PHASE8-MULTI-BACKEND-HANDOFF.1): Created ADR 0006 — multi-backend vision formalized. Rust, Julia, Dart backends alongside Perl; same .spec files, lockstep semantics; HandlerIR as decoupling seam; specification-first (Phase 8 deliverables: formal grammar, HandlerIR spec, helper catalog, runtime semantics, test corpus, mdBook handoff). No bytecode VM — direct language emitters preferred.
-- 2026-06-14 (PHASE8-MULTI-BACKEND-HANDOFF): Created Phase 8 task tree — 8 leaves for multi-backend specification and handoff. This is specification-only work: formal .spec grammar, HandlerIR spec, helper contract catalog, runtime semantics, language-neutral test corpus, and mdBook handoff chapter. The goal is that a Rust/Julia/Dart backend implementer can build a compliant LinkedSpec runtime without reading Perl source. Zero code changes planned — every deliverable is a document or test artifact. The multi-backend vision (Rust/Julia/Dart consuming identical .spec files in lockstep) was previously captured only as a KM fact card; Phase 8 formalizes it as a decision record (ADR 0006) and produces the specification surface.
+- 2026-06-14 (PHASE8-MULTI-BACKEND-HANDOFF): Created Phase 8 task tree — 8 leaves for multi-backend specification and handoff. This is specification-only work: formal .spec grammar, HandlerIR spec, helper contract catalog, runtime semantics, language-neutral test corpus, and mdBook handoff chapter. The goal is that a Rust/Dart/Julia/Lua backend implementer can build a compliant LinkedSpec runtime without reading Perl source. Zero code changes planned — every deliverable is a document or test artifact. The multi-backend vision (lockstep backends consuming identical .spec files) was previously captured only as a KM fact card; Phase 8 formalizes it as a decision record (ADR 0006) and produces the specification surface. ADR 0021 later fixes the future rollout order as Dart, then Julia, then Lua.
 - 2026-06-14 (PLUGIN-ACTION-MIGRATION-STALE-REFERENCES.1): Fixed 10 stale references across 6 files that still described PLUGIN-ACTION-MIGRATION as "proposed" when the tree is `retired`. The tree completed all 5 leaves on 2026-06-11 (17 dead files deleted, 19 kept as legacy corpus) then was retired by user decision. ROADMAP_V2.md, DEVELOPMENT_NOTES.md, LIVE_ACHIEVEMENT_STATUS.md, and 3 task-tree files now correctly reflect retired status.
 - 2026-06-14 (DOC-BOOK-SYNC.1): Completed full mdBook and live docs audit. 19 gaps found across 13 files. The most significant findings: (1) HandlerVariantEmitter/HandlerIR is completely undocumented despite being a critical architectural layer (10 variant builders, JSON backend, backend dispatch table); (2) 5 legacy return helpers (return_a, return_m, return_ma, return_imatch, return_im) were removed from code on 2026-06-14 but are still documented as current in both the mdBook and USER_GUIDE.md; (3) configure_trace option names in trace-api.md don't match the actual implementation. The gap list is recorded in docs/tasks/DOC-BOOK-SYNC.md. Remediation follows in .2.
 - 2026-06-14 (DOC-BOOK-SYNC): Created task tree for documentation and mdBook synchronization. This is the last remaining work item from ROADMAP_V2.md's overall roadmap tracker (status: mostly_done → remaining: ongoing documentation/book sync). The tree follows the standard 3-leaf + bootstrap pattern: audit (.1), remediate (.2), finalize (.3), with a bootstrap leaf (.0) for tree creation/registration. This is a documentation-only tree — no code changes expected. The prior BOOK-DOCUMENTATION-SYNC tree (completed) covered a sync pass in an earlier state of the codebase; this is a fresh sweep to catch any drift accumulated since.

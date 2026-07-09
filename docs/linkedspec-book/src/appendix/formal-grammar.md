@@ -1,7 +1,7 @@
 # Formal `.spec` Grammar
 
 This appendix defines the `.spec` file syntax with enough precision for an independent
-implementation in any language (Rust, Julia, Dart, etc.). It does **not** describe how
+implementation in any language (Rust, Dart, Julia, Lua, etc.). It does **not** describe how
 the Perl backend parses — it describes **what** constitutes valid `.spec` syntax and
 **what** each construct means.
 

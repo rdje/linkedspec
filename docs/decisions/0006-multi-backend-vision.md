@@ -4,6 +4,10 @@
 - Status: accepted
 - Tags: architecture, portability, backends, roadmap
 
+> Update 2026-07-09: ADR `0021` extends the future backend rollout order to Dart,
+> then Julia, then Lua, and adopts Lua as a future lockstep backend target. This
+> record remains the original multi-backend vision.
+
 ## Context
 
 At the time this ADR was written, LinkedSpec was Perl 5 only. The HandlerVariantEmitter
@@ -12,11 +16,12 @@ dispatch table and a JSON diagnostic backend as proof of pluggability. All 20 sh
 `.spec` files compiled with `language_agnostic_ready_ratio == 1.0000` and zero
 compatibility-surface rules. The ActionIR lowering stack (100+ helpers across 10 families)
 was largely backend-neutral in intent. Subsequent Phase 9 work implemented the Rust
-interpreter variant; Julia and Dart remain accepted future backend targets.
+interpreter variant; ADR `0021` later scheduled future backend rollout as Dart, then
+Julia, then Lua.
 
 The user's vision, discussed during MEDIUM-IMPACT.1.3 HandlerIR work (2026-06-12) and
 now formalized, is to grow LinkedSpec beyond Perl — not by abandoning Perl, but by
-adding Rust, Julia, and Dart backends alongside it.
+adding lockstep backends alongside it.
 
 ## Decision
 
@@ -41,7 +46,7 @@ adding Rust, Julia, and Dart backends alongside it.
 
 5. **Specification-first, not reverse-engineering.** Phase 8
    (`PHASE8-MULTI-BACKEND-HANDOFF`) produces the specification and test-artifact
-   surface so a Rust/Julia/Dart implementer can build a compliant runtime without
+   surface so a Rust/Dart/Julia/Lua implementer can build a compliant runtime without
    reading Perl source: a formal `.spec` grammar, a HandlerIR specification, a helper
    contract catalog, a runtime semantics specification, and a language-neutral test
    corpus.
@@ -56,8 +61,9 @@ adding Rust, Julia, and Dart backends alongside it.
 |---------|-----|----------|------|--------|
 | Perl    | ✅  | —        | —    | —      |
 | Rust    | ✅  | ✅ (wasm-bindgen) | ✅ | — |
-| Julia   | ✅  | —        | —    | —      |
 | Dart    | ✅  | ✅ (dart2js) | ✅ (dart2wasm) | ✅ (Flutter) |
+| Julia   | ✅  | —        | —    | —      |
+| Lua     | ✅  | —        | —    | —      |
 
 ## Consequences
 
@@ -71,7 +77,7 @@ adding Rust, Julia, and Dart backends alongside it.
   backend validates against.
 - **SpecEntry remains the portability ceiling.** Runtime handler generation still
   bottoms out in emitted Perl and `eval`. Backend-specific `SpecEntry` equivalents
-  (consuming HandlerIR, emitting Rust/Julia/Dart) are the first implementation step
+  (consuming HandlerIR, emitting Rust/Dart/Julia/Lua) are the first implementation step
   for each new backend.
 - **No bytecode VM.** Direct language emitters (HandlerIR → Rust codegen, HandlerIR →
   Julia codegen, etc.) are more idiomatic and performant than a VM layer. The HandlerIR

@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — FUTURE-PARITY-BACKLOG.0 — create future parity backlog
+
+**Scope:** task-tree ownership, backend rollout decision, roadmap/book/KM/live-doc alignment.
+
+**Change:** Created `docs/tasks/FUTURE-PARITY-BACKLOG.md` with seven deferred backlog lanes.
+ADR `0021` accepts Lua as a future backend target and schedules future full-parity backend work
+as Dart first, Julia second, and Lua third. Updated the task-tree index, roadmaps, mdBook backend
+handoff/status pages, Knowledge Map backend facts, and live docs so Lua is no longer treated as
+blocked.
+
+**Validation:** `git diff --check`, `scripts/check_memory_architecture.sh`,
+`knowledge-map/scripts/check_knowledge_map.sh`, `scripts/check_doctrines.sh`,
+`scripts/check_task_tree_metadata.sh`, `mdbook build docs/linkedspec-book`, and
+`tools/run_ci_local.sh` pass. Local CI includes phase0 `1..1028`.
+
 ## 2026-07-08 — SPEC-LANG-REFERENCE.8 — correct top-rule doctrine drift and close language reference
 
 **Scope:** current-facing top-rule doctrine records, mdBook wording, Knowledge Map facts, and
@@ -4228,9 +4243,10 @@ backend fact correction. No parser/compiler/runtime code changed.
 
 **What changed:** Future backend parity is now a concrete task-tree-owned surface before any non-Rust variant
 code. The implemented backend inventory is explicit: Perl remains the reference implementation and Rust is the
-implemented interpreter variant under `rust/`. Julia and Dart remain accepted future targets from ADR `0006`
-and Phase 8, but require dedicated backend implementation task trees before code. Lua is not adopted by the
-current ADR/book/codebase set and is blocked on an explicit decision record before any leaf or code can exist.
+implemented interpreter variant under `rust/`. Julia and Dart remained accepted future targets from ADR `0006`
+and Phase 8 at this slice, but required dedicated backend implementation task trees before code. Lua was not
+yet adopted by the then-current ADR/book/codebase set; ADR `0021` now supersedes that blocker and schedules Lua
+after Dart and Julia under `FUTURE-PARITY-BACKLOG`.
 
 **Docs:** The stale Knowledge Map backend fact that still said LinkedSpec was "currently Perl 5 only" was
 updated to the post-Phase-9 inventory. The backend handoff chapter now reflects the current 52-fixture Rust

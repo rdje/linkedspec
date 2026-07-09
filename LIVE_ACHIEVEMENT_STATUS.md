@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **FUTURE-PARITY-BACKLOG.0 — create future parity backlog**
+  (DONE task-tree/decision/docs ownership; no parser/runtime/backend code change).
+
+  **Change:** Created `docs/tasks/FUTURE-PARITY-BACKLOG.md` with seven owned lanes for the
+  deferred backlog. ADR `0021` accepts Lua and fixes future backend rollout order as Dart first,
+  Julia second, Lua third, each targeting full parity with Perl5 and Rust.
+
+  **Boundary:** Tracking, decision, roadmap, mdBook, Knowledge Map, and live-doc alignment only.
+  Actual backend implementation starts only after `FUTURE-PARITY-BACKLOG.1.1` scopes Dart.
+
+  **Verification:** `git diff --check`, memory architecture, Knowledge Map, doctrine,
+  task-tree metadata, mdBook build, and `tools/run_ci_local.sh` pass. Local CI includes
+  phase0 `1..1028`.
+
 - 2026-07-08: **SPEC-LANG-REFERENCE.8 — correct top-rule doctrine drift and close language reference**
   (DONE final consistency/closeout; `SPEC-LANG-REFERENCE` closed).
 
@@ -3348,8 +3362,8 @@ Current execution status for interruption-safe batch workflow recovery.
 - 2026-07-01: **PERL-ACTIONIR-AST-MIGRATION.0 — text-to-AST doctrine adopted**
   (ADR + TASK TREE + BOOK/KM/LIVE DOCS; **no runtime behavior change**). The Rust-style text-to-AST path is now
   the cross-variant doctrine: helper/action language must parse into typed AST/IR before lowering, execution, or
-  code emission. Perl ActionIR text-to-text lowering is migration debt; future Julia/Dart backends must start
-  with AST, and Lua inherits the same rule if later adopted. User-defined functions must be implemented through
+  code emission. Perl ActionIR text-to-text lowering is migration debt; future Dart, Julia, and Lua backends
+  must start with AST. User-defined functions must be implemented through
   AST call/function nodes, not textual macros.
   **Then-frontier:** `PERL-ACTIONIR-AST-MIGRATION.1` (now completed above), then `.2`.
 - 2026-07-01: **SPEC-FORMAT-TERSE.4 — user-defined function surface owned**
@@ -3399,8 +3413,8 @@ Current execution status for interruption-safe batch workflow recovery.
   concrete ownership container for future backend parity before any non-Rust variant code. Current implemented
   backends are the Perl reference and the Rust interpreter under `rust/`. Julia and Dart remain the accepted
   future backend targets from ADR `0006` and Phase 8, but are deferred to dedicated backend implementation
-  task trees before code. Lua is not adopted by the current ADR/book/codebase set and is blocked on an explicit
-  decision record before any task-tree leaf or implementation can exist.
+  task trees before code. ADR `0021` now accepts Lua too and moves the scheduled Dart, Julia, and Lua rollout
+  to `FUTURE-PARITY-BACKLOG`.
   **Verification:** full bootstrap/roadmap/mdBook/codebase read completed; source inventory found no tracked
   Julia/Dart/Lua implementation paths outside the unrelated nested `rgx` checkout; Knowledge Map backend fact
   corrected from the stale pre-Phase-9 "Perl only" wording; backend handoff chapter status updated to the

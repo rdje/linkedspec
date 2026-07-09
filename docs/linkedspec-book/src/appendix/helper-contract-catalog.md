@@ -2,7 +2,7 @@
 
 This appendix is the **canonical behavioral reference** for every ActionIR helper.
 Each entry defines the helper's contract — signature, input/output types, semantics,
-edge cases — at enough precision for a Rust, Julia, or Dart backend to implement
+edge cases — at enough precision for a Rust, Dart, Julia, or Lua backend to implement
 identically. No Perl implementation knowledge is required.
 
 Helper calls use the `callee(args)` shape. Whitespace before the opening parenthesis

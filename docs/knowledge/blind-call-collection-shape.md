@@ -33,6 +33,6 @@ triage) still asserted the old tag and were re-blessed to the current shape in
 (`return(...)` on a multi-indexed AND edge), which was a real engine bug — see
 [[and-return-edge-codegen-defect]].
 
-This shape is part of the cross-variant contract: the Rust/Julia/Dart variants must mirror it (the
+This shape is part of the cross-variant contract: the Rust/Dart/Julia/Lua variants must mirror it (the
 Perl reference is the oracle). Related: [[blind-call-rule-label-contract]],
 [[and-return-edge-codegen-defect]], [[phase0-regression-structure]].

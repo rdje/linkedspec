@@ -1,7 +1,7 @@
 # Backend Handoff
 
 This chapter is the **single entry point** for anyone building a LinkedSpec backend
-in a new language (Rust, Julia, Dart, etc.). It links every specification, contract,
+in a new language (Rust, Dart, Julia, Lua, etc.). It links every specification, contract,
 and test artifact you need — in reading order.
 
 ## What You're Building
@@ -21,6 +21,10 @@ The backend contract is implementation-language neutral. The same `.spec` source
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics
 apply whether the implementation is Perl5, Raku, Rust, Julia, Lua, Dart, Zig, Go, or a
 future language.
+
+The scheduled future full-parity rollout is Dart first, Julia second, and Lua third
+(ADR 0021). That order affects task-tree sequencing only; the conformance contract is
+the same for every backend.
 
 Text-to-AST is a backend conformance rule, not an optional implementation style.
 Do not build a backend by applying textual helper rewrites directly into host-language
@@ -300,7 +304,8 @@ owner promotes them safely.
            ▼
 ┌─────────────────────────┐
 │  Backend Emitter         │  ← YOUR CODE HERE
-│  (Rust / Julia / Dart)   │
+│  (Rust / Dart / Julia /  │
+│   Lua)                   │
 └──────────┬──────────────┘
            │
            ▼

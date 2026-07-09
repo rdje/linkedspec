@@ -195,7 +195,7 @@ The repository used to ship a top-level `plugin/` directory of legacy `.plg` fil
 > **Perl reference implementation.** The `.plg` plugin system, the `PPlugin` runtime,
 > and the package-owner migration it once drove are part of the **Perl reference
 > backend's** legacy transition. They are **not** part of the backend-neutral `.spec`
-> contract — a new backend (Rust, Julia, Dart, ...) implements none of it. The detail
+> contract — a new backend (Rust, Dart, Julia, Lua, ...) implements none of it. The detail
 > is kept only as a faithful record of the reference implementation's plugin retirement.
 
 Two passes resolved the legacy island:

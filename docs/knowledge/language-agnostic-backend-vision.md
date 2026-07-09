@@ -1,6 +1,6 @@
 ---
 id: language-agnostic-backend-vision
-title: LinkedSpec language-agnostic backend vision — Perl reference plus Rust today; Julia/Dart future backends consume same .spec files in lockstep
+title: LinkedSpec language-agnostic backend vision — Perl reference plus Rust today; Dart, Julia, and Lua future backends consume same .spec files in lockstep
 answers:
   - what backends will LinkedSpec support
   - what is the language-agnostic architecture vision
@@ -14,20 +14,18 @@ answers:
 date: 2026-06-12
 status: accepted
 tags: [architecture, portability, backends, roadmap, vision]
-evidence: "User-specified vision during MEDIUM-IMPACT.1.3 HandlerIR work; ADR 0006 formalized Rust, Julia, and Dart future-backend targets. Phase 9 then implemented the Rust interpreter under rust/ and explicitly did not implement Julia or Dart. SPEC-FORMAT-TERSE.5.0 reverified that no tracked Julia/Dart/Lua implementation paths exist outside the unrelated nested rgx checkout, and that Lua is not in ADR 0006 or the mdBook backend handoff."
-reverify: "grep -n 'Rust\\|Julia\\|Dart\\|Lua\\|backend' ROADMAP_V2.md docs/decisions/0006-multi-backend-vision.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/tasks/PHASE9-RUST-VARIANT.md | head -40"
+evidence: "User-specified vision during MEDIUM-IMPACT.1.3 HandlerIR work; ADR 0006 formalized the multi-backend vision and accepted Julia/Dart as future targets. Phase 9 implemented the Rust interpreter under rust/. SPEC-FORMAT-TERSE.5.0 reverified the then-current backend inventory. ADR 0021 later accepted Lua and fixed the future rollout order as Dart, then Julia, then Lua, all to full parity with Perl5 and Rust."
+reverify: "grep -n 'Rust\\|Julia\\|Dart\\|Lua\\|backend' ROADMAP_V2.md docs/decisions/0006-multi-backend-vision.md docs/decisions/0021-future-backend-rollout-order.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/tasks/FUTURE-PARITY-BACKLOG.md | head -60"
 ---
 
 ## Context
 
 LinkedSpec currently has the Perl reference implementation and the Rust interpreter variant
-under `rust/`. The accepted future backend vision is to add Julia and Dart backends as
-separate implementation tracks — not replacing Perl, but alongside it. All backends consume
-the exact same `.spec` files and produce identical parser behavior. JS and Wasm targets are
-reached via Rust (wasm-bindgen/wasm-pack) or Dart (dart2js/dart2wasm).
-
-Lua is not part of the accepted backend set today. It needs an explicit decision record or
-roadmap update before any Lua backend task-tree leaf or implementation code is created.
+under `rust/`. The accepted future backend vision is to add Dart, Julia, and Lua backends as
+separate implementation tracks — not replacing Perl, but alongside it. ADR 0021 fixes the
+rollout order as Dart first, Julia second, and Lua third. All backends consume the exact
+same `.spec` files and produce identical parser behavior. JS and Wasm targets are reached
+via Rust (wasm-bindgen/wasm-pack) or Dart (dart2js/dart2wasm).
 
 ## Decision
 
@@ -36,7 +34,7 @@ roadmap update before any Lua backend task-tree leaf or implementation code is c
 2. **`.spec` files are the universal contract** — each backend parses the identical `.spec`
    grammar files. No per-backend spec dialects.
 3. **Backends stay in lockstep** — same features, same runtime semantics, same `.spec`
-   compatibility. A spec that compiles on Perl must compile identically on Rust/Julia/Dart
+   compatibility. A spec that compiles on Perl must compile identically on Rust/Dart/Julia/Lua
    once those backend tracks exist.
 4. **Language-agnostic architecture** — every component that can be language-neutral should
    be:
@@ -63,8 +61,9 @@ roadmap update before any Lua backend task-tree leaf or implementation code is c
 |---------|-----|----------|------|--------|
 | Perl    | ✅  | —        | —    | —      |
 | Rust    | ✅ implemented | ✅ (wasm-bindgen future target) | ✅ future target | — |
-| Julia   | ✅ accepted future target | —        | —    | —      |
-| Dart    | ✅ accepted future target | ✅ (dart2js future target) | ✅ (dart2wasm future target) | ✅ (Flutter future target) |
+| Dart    | ✅ scheduled future target, first | ✅ (dart2js future target) | ✅ (dart2wasm future target) | ✅ (Flutter future target) |
+| Julia   | ✅ scheduled future target, second | —        | —    | —      |
+| Lua     | ✅ scheduled future target, third | —        | —    | —      |
 
 ## Speculated VM consideration
 

@@ -65,7 +65,7 @@ Both hangs are cleared and the back half is green:
   `bash tools/run_ci_local.sh` exits **0**. The `SPEC-FORMAT-TERSE` implementation gate this card blocked
   is therefore **cleared** (its `.1.x`+ leaves are now PNT-eligible).
 
-## The subsystem (Perl-only, no Rust/Julia/Dart counterpart)
+## The subsystem (Perl-only, no Rust/Dart/Julia/Lua counterpart)
 
 - `perl/RTLUtils.pm` (877), `perl/FSMGen.pm` (3,549, `use RTLUtils`, ≈30 calls; `AUTOLOAD`→PluginBridge),
   `perl/VHDL/ConstantEval.pm` (90, `require RTLUtils`). = **4,516 lines**.

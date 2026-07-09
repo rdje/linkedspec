@@ -25,5 +25,5 @@ value/receiver and statement/control lowering families under regression locks.
 New supported surfaces, including user-defined functions, must consume AST/IR call nodes.
 They must not be implemented as broad textual macros or by relying on generated
 host-language fallback. Rust already follows this direction with typed `Expr` and `Stmt`
-nodes. Future Julia and Dart backends must start text-to-AST; Lua inherits the same rule if
-it is later adopted by decision record.
+nodes. Future Dart, Julia, and Lua backends inherit the same text-to-AST requirement under
+ADR 0021.

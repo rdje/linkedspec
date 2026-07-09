@@ -63,7 +63,7 @@ regex, mode, edge, lifecycle, and recursion feature surface.
 
 3. **Cross-variant parity is required.** Perl is the reference, but the `.spec` file is the one
    universal contract ([[spec-contract-is-unique]], [[cross-variant-output-parity]]); the same `.spec`
-   must behave identically in the Rust (and future Julia/Dart) variants. The change is mirrored to /
+   must behave identically in the Rust (and future Dart/Julia/Lua) variants. The change is mirrored to /
    tracked for the other variants — it does not land as a Perl-only divergence.
 
 4. **Ownership.** The work is owned by the new active task tree `TOP-RULE-AS-NORMAL`

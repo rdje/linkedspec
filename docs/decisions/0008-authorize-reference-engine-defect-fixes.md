@@ -60,7 +60,7 @@ documented surface and the now-fixed engine agree.
   combined with `.2.x` re-bless and `.5` verification this is the path to a green
   `t/phase0_regression.t`, which in turn unblocks the `SPEC-FORMAT-TERSE`,
   `LEGACY-VHDL-RETIRE.4/.5`, and `NONCORE-QUARANTINE.V` gates.
-- Cross-variant parity obligation: the reference is the oracle for Rust/Julia/Dart, so any behavior
+- Cross-variant parity obligation: the reference is the oracle for Rust/Dart/Julia/Lua, so any behavior
   the fix establishes (an AND edge `return(...)` surfaces the author payload) becomes part of the
   cross-variant contract and must be mirrored in the non-Perl variants in a follow-on. Recorded so the
   parity sweep does not miss it.

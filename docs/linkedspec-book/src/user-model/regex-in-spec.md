@@ -11,7 +11,7 @@ helpers in full, see [Capture, Marks, and Source Locations](../dsl/capture-marks
 and the [Source Boundary Helper Reference](../dsl/source-boundary-helper-reference.md).
 
 Everything here is part of the **backend-neutral `.spec` contract**. The runnable
-snippets use the Perl reference backend, but a Rust/Julia/Dart backend matches the same
+snippets use the Perl reference backend, but a Rust/Dart/Julia/Lua backend matches the same
 patterns with the same results.
 
 ## The regex literal

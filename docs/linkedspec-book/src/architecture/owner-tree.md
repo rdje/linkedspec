@@ -474,7 +474,7 @@ Architecturally, this branch should be read as transition machinery. The root `p
 
 The package-owner extraction work this section used to narrate — moving each legacy `.plg` helper family (`HTTP::FileAccess`, `HTML::PathLinks`, `Text::VariableSubstitution`, `Table::GenericFilter`, the `QC::*` and `Timing::*` report backends, the RTL/VHDL/FSM helpers, `MSOffice::Excel`, `InteractivePrompt`, and the rest) out of `.plg` plugin subdefs into a package owner — is now **complete and moot**: that code has left the active core.
 
-- The Perl-only, non-portable VHDL/RTL/FSM-generation subsystem (`RTLUtils`, `FSMGen`, `VHDL::ConstantEval`, and the `.plg` files that depended exclusively on it) was **deleted** under `LEGACY-VHDL-RETIRE` — it had no Rust/Julia/Dart counterpart, so it was removed rather than ported.
+- The Perl-only, non-portable VHDL/RTL/FSM-generation subsystem (`RTLUtils`, `FSMGen`, `VHDL::ConstantEval`, and the `.plg` files that depended exclusively on it) was **deleted** under `LEGACY-VHDL-RETIRE` — it had no Rust/Dart/Julia/Lua counterpart, so it was removed rather than ported.
 - Every remaining non-core domain owner and the surviving `.plg` corpus was **relocated to `noncore/`** under `NONCORE-QUARANTINE`, with `noncore/README.md` as the parked-fate ledger (refactor / port / publish / delete each on its own merits later).
 
 `perl/` is now core-only, and `t/phase0_regression.t` is green without any of it. The deprecated facade entrypoints listed above remain only as transition machinery; `git log` for `LEGACY-VHDL-RETIRE` and `NONCORE-QUARANTINE` preserves the per-helper migration history.
