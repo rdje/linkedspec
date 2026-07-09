@@ -647,13 +647,35 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.4.5.2 - add Dart trace controls`
 
 - ID: `DART-BACKEND-PARITY.4.5.3`
-  Status: `pending`
+  Status: `done`
   Goal: Instrument the Dart runtime interpreter with branch, lifecycle, dispatch, and source-boundary trace events.
   Acceptance: Traced runtime execution emits structured enter/exit scopes and decisions for rule dispatch,
     regex/blind branches, lifecycle blocks, cursor/source-boundary helpers where implemented, and dump/log events
     where relevant while untraced execution remains output-compatible.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** `LinkedSpecRuntimeEngine` now emits trace events through the optional
+    `LinkedSpecTraceEmitter` for parse/rule scopes, recursion cutoffs, regex match/no-match decisions,
+    action-edge and blind-call child-dispatch decisions, lifecycle block marks, cursor-control helpers, and
+    `capture_until_boundary(...)` source-boundary captures. Focused trace coverage proves those event topics while
+    comparing traced and untraced parse-result JSON for output preservation. Focused trace tests pass; broader gate
+    evidence is recorded in the verification log.
+  Acceptance Checklist:
+    - [x] **REPRODUCE / ISSUE** — `.4.5.2` proved trace controls and sinks, but runtime tracing only emitted the
+      top-level parse scope. Branch, lifecycle, dispatch, cursor, and source-boundary execution remained invisible.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `dart/lib/src/runtime/interpreter.dart` threaded the optional
+      trace emitter into `_RuntimeExecutionContext`, but `_executeRule(...)`, `_executeRegexOnce(...)`,
+      `_executeBlindOnce(...)`, `_executeLifecycle(...)`, `_executeActionEdgeChild(...)`, and the cursor/boundary
+      helper cases did not emit events.
+    - [x] **FIX** — Added trace-only rule scopes, regex decisions, child-dispatch decisions, lifecycle marks,
+      cursor-control marks, recursion-cutoff decisions, and source-boundary capture marks. All events are behind the
+      optional trace emitter and preserve default quiet behavior.
+    - [x] **ADDRESSED (verified)** — `test/trace_test.dart` now proves runtime event coverage for regex matching,
+      lifecycle blocks, action-child dispatch, blind-child dispatch, cursor helpers, and
+      `capture_until_boundary(...)`; it also compares traced and untraced parse results.
+    - [x] **NO REGRESSION** — Focused trace tests pass; full Dart/package/book/repo checks are recorded in the
+      verification log before commit.
+    - [x] **LOCKSTEP** — Dart README/CLI/scaffold status, mdBook trace/status/handoff text, live docs, roadmap
+      tracker, task-tree index, Knowledge Map facts, and `MEMORY.md` are updated.
+  Commit: `DART-BACKEND-PARITY.4.5.3 - add Dart runtime trace events`
 
 - ID: `DART-BACKEND-PARITY.4.5.4`
   Status: `pending`
@@ -795,7 +817,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 9 | `DART-BACKEND-PARITY.4.5.0` | `done` | Diagnostics/trace controls are split before code. |
 | 10 | `DART-BACKEND-PARITY.4.5.1` | `done` | Structured runtime diagnostics are implemented. |
 | 11 | `DART-BACKEND-PARITY.4.5.2` | `done` | Trace controls, levels, event classes, and sinks are implemented. |
-| 12 | `DART-BACKEND-PARITY.4.5.3` | `pending` | Add runtime branch/lifecycle/source-boundary trace instrumentation. |
+| 12 | `DART-BACKEND-PARITY.4.5.3` | `done` | Runtime branch/lifecycle/source-boundary trace instrumentation is implemented. |
 | 13 | `DART-BACKEND-PARITY.4.5.4` | `pending` | Close diagnostics/trace no-drift before staged runtime work. |
 
 ## Dart Toolchain And Package Layout
@@ -1034,18 +1056,18 @@ The `.4.1` runtime matching layer adds:
   `RuntimeInterpreterException.diagnostic` rather than changing successful parse-result JSON or adding a Perl-style
   mutable `last_error` channel. Optional `specName` / `specPath` engine fields carry file identity when callers
   have it.
-- `2026-07-09`: Dart `.4.5.2` adds trace controls and sinks without claiming full trace parity. Runtime traced
-  entrypoints emit parse-scope enter/exit events only; branch/lifecycle/source-boundary runtime events remain
-  `.4.5.3`.
+- `2026-07-09`: Dart `.4.5.2` adds trace controls and sinks without claiming full trace parity.
+- `2026-07-09`: Dart `.4.5.3` adds runtime interpreter trace events for rule scopes, regex matching,
+  action/blind child dispatch, lifecycle blocks, cursor controls, recursion cutoffs, and source-boundary capture.
 
 ## Open Questions
 
-- None blocking `.4.5.3`. Trace controls/sinks are implemented; branch/lifecycle/source-boundary runtime trace
-  instrumentation is next.
+- None blocking `.4.5.4`. Runtime diagnostics, trace controls/sinks, and runtime trace events are implemented;
+  no-drift closeout is next.
 
 ## Blockers
 
-- None known before `.4.5.3` runtime trace instrumentation.
+- None known before `.4.5.4` diagnostics/trace no-drift closeout.
 
 ## Verification Log
 
@@ -1072,6 +1094,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.4.5.0` | memory architecture; Knowledge Map generation/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Runtime diagnostics/trace controls are split into structured diagnostics, trace controls/sinks, runtime trace instrumentation, and no-drift closeout leaves; no source behavior changed. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.5.1` | Focused `dart test test/runtime_interpreter_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart runtime failures now carry structured `RuntimeDiagnostic` payloads through `RuntimeInterpreterException.diagnostic` without changing successful parse output; frontier advances to `.4.5.2` trace controls/sinks. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.5.2` | Focused `dart test test/trace_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart trace levels, config/env controls, event primitives, stdout/route/mirror sinks, reset/truncate, and traced parse entrypoints are implemented; frontier advances to `.4.5.3` runtime trace instrumentation. |
+| `2026-07-09` | `DART-BACKEND-PARITY.4.5.3` | Focused `dart test test/trace_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart runtime tracing emits parse/rule scopes, regex decisions, child-dispatch decisions, lifecycle marks, cursor-control marks, recursion-cutoff decisions, and source-boundary marks while preserving untraced parse output; frontier advances to `.4.5.4` diagnostics/trace no-drift. |
 
 ## Commit Log
 
@@ -1102,6 +1125,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.4.5.0` | `DART-BACKEND-PARITY.4.5.0 - split Dart diagnostics trace controls` | Diagnostics/trace leaf split before code. |
 | `DART-BACKEND-PARITY.4.5.1` | `DART-BACKEND-PARITY.4.5.1 - add Dart runtime diagnostics` | Structured runtime diagnostics on Dart runtime exceptions. |
 | `DART-BACKEND-PARITY.4.5.2` | `DART-BACKEND-PARITY.4.5.2 - add Dart trace controls` | Trace controls, event classes, sinks, and traced runtime entrypoints. |
+| `DART-BACKEND-PARITY.4.5.3` | `DART-BACKEND-PARITY.4.5.3 - add Dart runtime trace events` | Runtime branch/lifecycle/source-boundary trace instrumentation. |
 | `DART-BACKEND-PARITY.7.3` | `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement` | Docs-only split for per-variant LinkedSpec CLI productization. |
 
 ## Changelog
@@ -1159,3 +1183,6 @@ The `.4.1` runtime matching layer adds:
   advances to `.4.5.2` for trace controls, event classes, and sink behavior.
 - `2026-07-09`: Added Dart trace levels, controls, event primitives, stdout/routed-file/mirror sinks, and traced
   runtime entrypoints; frontier advances to `.4.5.3` for branch/lifecycle/source-boundary runtime trace events.
+- `2026-07-09`: Added Dart runtime interpreter trace events for rule scopes, regex matching, action/blind child
+  dispatch, lifecycle blocks, cursor controls, recursion cutoffs, and source-boundary capture; frontier advances to
+  `.4.5.4` diagnostics/trace no-drift.

@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.4.5.3 — add Dart runtime trace events
+
+**Scope:** Dart runtime interpreter tracing, focused trace coverage, Dart CLI/scaffold status, Dart README,
+mdBook trace/status/handoff text, live docs, roadmap/task-tree status, and Knowledge Map facts.
+
+**Change:** Added trace-only runtime instrumentation behind the optional `LinkedSpecTraceEmitter`: rule scopes,
+recursion-cutoff decisions, regex match/no-match decisions, action-edge and blind-call child-dispatch decisions,
+lifecycle block marks, cursor-control helper marks, and `capture_until_boundary(...)` source-boundary marks.
+Untraced execution remains default-quiet and traced parse results preserve the untraced output JSON.
+
+**Validation:** Focused trace tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook build, memory
+architecture, Knowledge Map generation/check, task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.4.5.2 — add Dart trace controls
 
 **Scope:** Dart trace-control module, runtime traced entrypoints, public exports, focused trace tests, Dart

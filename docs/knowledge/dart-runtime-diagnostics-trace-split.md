@@ -21,11 +21,12 @@ The split is:
 - `.4.5.0`: done planning split before code;
 - `.4.5.1`: done — structured runtime diagnostics and diagnostic-carrying runtime exceptions;
 - `.4.5.2`: done — trace levels, controls, structured event classes, and stdout/routed-file/mirror sinks;
-- `.4.5.3`: runtime interpreter branch, lifecycle, dispatch, and source-boundary trace instrumentation;
+- `.4.5.3`: done — runtime interpreter branch, lifecycle, dispatch, recursion-cutoff, cursor-control, and
+  source-boundary trace instrumentation;
 - `.4.5.4`: no-drift closeout across Dart README/CLI status, mdBook, live docs, task-tree index, and Knowledge Map.
 
-The active executable frontier after `.4.5.2` is `DART-BACKEND-PARITY.4.5.3`.
+The active executable frontier after `.4.5.3` is `DART-BACKEND-PARITY.4.5.4`.
 
 Related facts: [[dart-runtime-rule-interpreter]], [[dart-runtime-backtrack-cursor-helpers]],
 [[dart-runtime-structured-diagnostics]], [[dart-trace-controls-sinks]],
-[[trace-cross-variant-capability-contract]].
+[[dart-runtime-trace-events]], [[trace-cross-variant-capability-contract]].

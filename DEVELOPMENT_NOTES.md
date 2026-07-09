@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.4.5.3 — Dart runtime trace events):
+  Added runtime interpreter instrumentation on top of the `.4.5.2` Dart trace controls. `LinkedSpecRuntimeEngine`
+  now emits parse/rule scopes, recursion-cutoff decisions, regex match/no-match decisions, action-edge and
+  blind-call child-dispatch decisions, lifecycle block marks, cursor-control helper marks, and
+  `capture_until_boundary(...)` source-boundary marks through the optional `LinkedSpecTraceEmitter`. These are
+  trace-only side effects: no emitter keeps the runtime quiet, and focused tests compare traced and untraced
+  parse-result JSON to lock output preservation. `.4.5.4` remains the no-drift closeout before staged runtime work.
+
 - 2026-07-09 (DART-BACKEND-PARITY.4.5.2 — Dart trace controls):
   Added the Dart trace control layer under `dart/lib/src/trace/trace.dart`. It mirrors the documented external
   contract: ordered `none`/`low`/`medium`/`high`/`full`/`debug` levels, `LINKEDSPEC_TRACE_*` environment controls,

@@ -9,7 +9,8 @@ Value blocks, structured controls, with-blocks, and tree traversal helpers are a
 Explicit cursor controls and cursor/input helpers are available.
 Runtime structured diagnostics are available.
 Trace controls, event classes, and sink routing are available.
-Runtime branch/lifecycle trace instrumentation, staged runtime execution, and corpus-output parity land in later DART-BACKEND-PARITY leaves.
+Runtime branch/lifecycle/source-boundary trace events are available.
+Staged runtime execution and corpus-output parity land in later DART-BACKEND-PARITY leaves.
 ''';
 
 void main(List<String> args) {

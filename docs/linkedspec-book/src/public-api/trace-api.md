@@ -105,7 +105,8 @@ records the reusable future-variant checklist.
 
 ## Dart variant trace status
 
-As of `DART-BACKEND-PARITY.4.5.2`, Dart has the trace-control layer but does not yet claim full trace parity.
+As of `DART-BACKEND-PARITY.4.5.3`, Dart has trace controls and runtime interpreter trace events, but does not yet
+claim full trace parity.
 
 The Dart control surface is:
 
@@ -121,8 +122,10 @@ The Dart control surface is:
 
 The `.4.5.2` proof covers default-quiet behavior, level gating, routed-file reset/truncate, mirror output,
 structured event classes, decision/log/dump primitives, and runtime traced entrypoints preserving parse output.
-Current Dart runtime tracing emits the parse entry/exit scope only. Runtime branch, lifecycle, dispatch, and
-source-boundary trace instrumentation is the next Dart leaf (`DART-BACKEND-PARITY.4.5.3`).
+The `.4.5.3` proof adds runtime interpreter instrumentation: parse/rule scopes, regex match/no-match decisions,
+action-edge and blind-call child-dispatch decisions, lifecycle block mark events, cursor-control mark events,
+recursion-cutoff decisions, and `capture_until_boundary(...)` source-boundary mark events. The next Dart leaf is
+`DART-BACKEND-PARITY.4.5.4`, a no-drift closeout before staged runtime work.
 
 ## Future variant trace parity checklist
 

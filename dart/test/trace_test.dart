@@ -168,6 +168,88 @@ Top::
     expect(trace, contains('top_rule=Top'));
     expect(trace, contains('matched=true cursor=1'));
   });
+
+  test('runtime trace covers branch lifecycle cursor and boundary events', () {
+    final engine = _engine(r'''
+Top::
+ I { set(array(out), []) }
+ /@(\w+):[ \t]*/ -> Boundary {
+   save_cursor();
+   body = capture_until_boundary(Boundary);
+   push(array(out), hash("name", match_group(0), "body", trim(body), "cursor", cursor_pos()));
+   restore_cursor();
+   rewind_match_start()
+ }
+ E { return(copy(array(out))) }
+
+Boundary: /END/
+''');
+    final untraced = engine.parse('@a: first END');
+
+    final stdout = StringBuffer();
+    final emitter = LinkedSpecTraceEmitter(
+      LinkedSpecTraceConfig.enabled(LinkedSpecTraceLevel.debug),
+      stdoutWriter: stdout.write,
+    );
+    final traced = engine.parse('@a: first END', trace: emitter);
+
+    expect(traced.toJson(), untraced.toJson());
+    final trace = stdout.toString();
+    expect(trace, contains('dart_runtime:rule label=Top'));
+    expect(trace, contains('dart_runtime:regex_match'));
+    expect(trace, contains('dart_runtime:lifecycle_block'));
+    expect(trace, contains('dart_runtime:cursor_control'));
+    expect(trace, contains('helper=save_cursor rule=Top'));
+    expect(trace, contains('helper=restore_cursor rule=Top'));
+    expect(trace, contains('helper=rewind_match_start rule=Top'));
+    expect(trace, contains('dart_runtime:source_boundary'));
+    expect(trace, contains('helper=capture_until_boundary rule=Top'));
+    expect(trace, contains('edge_family=action rule=Top target=Boundary[0]'));
+
+    expect(
+      emitter.events.map((event) => event.topic),
+      containsAll({
+        'dart_runtime:rule',
+        'dart_runtime:regex_match',
+        'dart_runtime:lifecycle_block',
+        'dart_runtime:cursor_control',
+        'dart_runtime:source_boundary',
+        'dart_runtime:child_dispatch',
+      }),
+    );
+
+    final blindEngine = _engine(r'''
+Top::AND
+ => ChildA
+ => ChildB
+ E { return(retv) }
+
+ChildA:
+ /a/
+ E { return("A") }
+
+ChildB:
+ /[ \t]+b/
+ E { return("B") }
+''');
+    final blindStdout = StringBuffer();
+    final blindEmitter = LinkedSpecTraceEmitter(
+      LinkedSpecTraceConfig.enabled(LinkedSpecTraceLevel.debug),
+      stdoutWriter: blindStdout.write,
+    );
+    final blindResult = blindEngine.parse('a b', trace: blindEmitter);
+
+    expect(blindResult.value, 'B');
+    final blindTrace = blindStdout.toString();
+    expect(
+      blindTrace,
+      contains('edge_family=blind mode=AND rule=Top index=0 target=ChildA[0]'),
+    );
+    expect(
+      blindTrace,
+      contains('edge_family=blind mode=AND rule=Top index=1 target=ChildB[0]'),
+    );
+  });
 }
 
 LinkedSpecRuntimeEngine _engine(String source) {

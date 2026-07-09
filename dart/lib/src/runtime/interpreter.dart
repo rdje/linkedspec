@@ -250,6 +250,12 @@ final class LinkedSpecRuntimeEngine {
 
     final recursionKey = '$label:$entryRegexIndex:${context.cursorCodeUnit}';
     if (!context.activeRuleEntries.add(recursionKey)) {
+      context.trace?.traceDecision(
+        'dart_runtime:recursion_guard',
+        true,
+        'rule=$label entry_regex=$entryRegexIndex cursor=${context.cursorCodeUnit}',
+        LinkedSpecTraceLevel.debug,
+      );
       return _RuleResult(matched: false, value: null);
     }
 
@@ -262,22 +268,39 @@ final class LinkedSpecRuntimeEngine {
           savedRegisters.localMatch?.codeUnitEnd ?? context.cursorCodeUnit,
     );
     context.enterRule(label);
+    final traceScope = context.trace?.enterScope(
+      'dart_runtime:rule',
+      'label=$label entry_regex=$entryRegexIndex '
+          'mode=${rule.modeMetadata.name} cursor=${context.cursorCodeUnit}',
+      LinkedSpecTraceLevel.high,
+    );
+    var traceExitDetails = 'matched=false cursor=${context.cursorCodeUnit}';
 
     try {
       final initReturn = _executeLifecycle(rule, 'I', context);
       if (initReturn != null) {
-        return _returned(initReturn.value);
+        final result = _returned(initReturn.value);
+        traceExitDetails =
+            'matched=${result.matched} cursor=${context.cursorCodeUnit}';
+        return result;
       }
 
       try {
         final result = rule.blindEdges.isNotEmpty
             ? _executeBlindRule(rule, context)
             : _executeRegexRule(rule, entryRegexIndex, context);
+        traceExitDetails =
+            'matched=${result.matched} cursor=${context.cursorCodeUnit}';
         return result;
       } on _ActionReturn catch (returnSignal) {
-        return _returned(returnSignal.value);
+        final result = _returned(returnSignal.value);
+        traceExitDetails =
+            'matched=${result.matched} cursor=${context.cursorCodeUnit}';
+        return result;
       }
     } on RuntimeInterpreterException catch (error) {
+      traceExitDetails =
+          'error=${error.message} cursor=${context.cursorCodeUnit}';
       throw error.withDiagnostic(
         context.diagnostic(
           stage: 'runtime_execution',
@@ -287,6 +310,9 @@ final class LinkedSpecRuntimeEngine {
         ),
       );
     } finally {
+      if (traceScope != null) {
+        context.trace?.exitScope(traceScope, traceExitDetails);
+      }
       context.exitRule();
       context.registers = savedRegisters;
       context.activeRuleEntries.remove(recursionKey);
@@ -403,11 +429,26 @@ final class LinkedSpecRuntimeEngine {
   bool _executeBlindOnce(CompiledRule rule, _RuntimeExecutionContext context) {
     if (rule.modeMetadata.isAnd) {
       var matchedAll = true;
-      for (final edge in rule.blindEdges) {
+      for (
+        var edgeIndex = 0;
+        edgeIndex < rule.blindEdges.length;
+        edgeIndex += 1
+      ) {
+        final edge = rule.blindEdges[edgeIndex];
+        final before = context.cursorCodeUnit;
         final child = _executeRule(
           edge.target.label,
           edge.target.index,
           context,
+        );
+        final childMatched = _truthy(child.value);
+        context.trace?.traceDecision(
+          'dart_runtime:child_dispatch',
+          childMatched,
+          'edge_family=blind mode=AND rule=${rule.label} index=$edgeIndex '
+              'target=${edge.target.label}[${edge.target.index}] '
+              'cursor_before=$before cursor_after=${context.cursorCodeUnit}',
+          LinkedSpecTraceLevel.debug,
         );
         context.retv = child.value;
         final edgeReturn = _executeOptionalPayload(
@@ -419,7 +460,7 @@ final class LinkedSpecRuntimeEngine {
         if (edgeReturn != null) {
           throw _ActionReturn(edgeReturn.value);
         }
-        if (!_truthy(child.value)) {
+        if (!childMatched) {
           matchedAll = false;
           break;
         }
@@ -427,8 +468,23 @@ final class LinkedSpecRuntimeEngine {
       return matchedAll;
     }
 
-    for (final edge in rule.blindEdges) {
+    for (
+      var edgeIndex = 0;
+      edgeIndex < rule.blindEdges.length;
+      edgeIndex += 1
+    ) {
+      final edge = rule.blindEdges[edgeIndex];
+      final before = context.cursorCodeUnit;
       final child = _executeRule(edge.target.label, edge.target.index, context);
+      final childMatched = _truthy(child.value);
+      context.trace?.traceDecision(
+        'dart_runtime:child_dispatch',
+        childMatched,
+        'edge_family=blind mode=OR rule=${rule.label} index=$edgeIndex '
+            'target=${edge.target.label}[${edge.target.index}] '
+            'cursor_before=$before cursor_after=${context.cursorCodeUnit}',
+        LinkedSpecTraceLevel.debug,
+      );
       context.retv = child.value;
       final edgeReturn = _executeOptionalPayload(
         edge.actionPayload,
@@ -439,7 +495,7 @@ final class LinkedSpecRuntimeEngine {
       if (edgeReturn != null) {
         throw _ActionReturn(edgeReturn.value);
       }
-      if (_truthy(child.value)) {
+      if (childMatched) {
         return true;
       }
     }
@@ -539,7 +595,15 @@ final class LinkedSpecRuntimeEngine {
     bool andSequence = false,
   }) {
     final plan = _regexPlanFor(rule);
+    final cursorBefore = context.cursorCodeUnit;
     if (plan.patterns.isEmpty) {
+      _traceRegexDecision(
+        context,
+        rule,
+        matched: false,
+        cursorBefore: cursorBefore,
+        reason: 'patterns=0',
+      );
       return false;
     }
 
@@ -551,8 +615,23 @@ final class LinkedSpecRuntimeEngine {
       ) {
         final match = _matchSpecific(plan, expectedIndex, context);
         if (match == null) {
+          _traceRegexDecision(
+            context,
+            rule,
+            matched: false,
+            cursorBefore: context.cursorCodeUnit,
+            reason: 'mode=AND expected_index=$expectedIndex',
+          );
           return false;
         }
+        _traceRegexDecision(
+          context,
+          rule,
+          matched: true,
+          cursorBefore: context.cursorCodeUnit,
+          match: match,
+          reason: 'mode=AND expected_index=$expectedIndex',
+        );
         _acceptRegexMatch(rule, plan, match, context);
         final loopEnd = _executeLifecycle(rule, 'LE', context);
         if (loopEnd != null) {
@@ -568,15 +647,49 @@ final class LinkedSpecRuntimeEngine {
             plan.patterns,
           ).match(context.input, context.cursorCodeUnit, parseMode: parseMode);
     if (match == null) {
+      _traceRegexDecision(
+        context,
+        rule,
+        matched: false,
+        cursorBefore: cursorBefore,
+        reason: 'entry_regex=$entryRegexIndex',
+      );
       return false;
     }
 
+    _traceRegexDecision(
+      context,
+      rule,
+      matched: true,
+      cursorBefore: cursorBefore,
+      match: match,
+      reason: 'entry_regex=$entryRegexIndex',
+    );
     _acceptRegexMatch(rule, plan, match, context);
     final loopEnd = _executeLifecycle(rule, 'LE', context);
     if (loopEnd != null) {
       throw _ActionReturn(loopEnd.value);
     }
     return true;
+  }
+
+  void _traceRegexDecision(
+    _RuntimeExecutionContext context,
+    CompiledRule rule, {
+    required bool matched,
+    required int cursorBefore,
+    required String reason,
+    RuntimeRegexMatch? match,
+  }) {
+    context.trace?.traceDecision(
+      'dart_runtime:regex_match',
+      matched,
+      'rule=${rule.label} $reason alternative=${match?.alternativeIndex ?? -1} '
+          'match_start=${match?.codeUnitStart ?? -1} '
+          'match_end=${match?.codeUnitEnd ?? -1} '
+          'cursor_before=$cursorBefore',
+      LinkedSpecTraceLevel.debug,
+    );
   }
 
   RuntimeRegexMatch? _matchSpecific(
@@ -696,6 +809,13 @@ final class LinkedSpecRuntimeEngine {
           lifecycle: lifecycle,
           line: payload.line,
         ),
+      );
+      context.trace?.emitEvent(
+        LinkedSpecTraceEventKind.mark,
+        'dart_runtime:lifecycle_block',
+        'rule=${rule.label} lifecycle=$lifecycle line=${payload.line} '
+            'cursor=${context.cursorCodeUnit}',
+        LinkedSpecTraceLevel.high,
       );
       final result = _executeActionBlock(
         payload.actionAst,
@@ -2229,16 +2349,52 @@ final class LinkedSpecRuntimeEngine {
           currentEdge,
         );
       case 'save_cursor':
+        final before = context.cursorCodeUnit;
+        final stackBefore = context.cursorStack.length;
         context.saveCursor();
+        _traceCursorControl(
+          context,
+          ruleLabel,
+          'save_cursor',
+          before: before,
+          stackBefore: stackBefore,
+        );
         return null;
       case 'restore_cursor':
+        final before = context.cursorCodeUnit;
+        final stackBefore = context.cursorStack.length;
         context.restoreCursor();
+        _traceCursorControl(
+          context,
+          ruleLabel,
+          'restore_cursor',
+          before: before,
+          stackBefore: stackBefore,
+        );
         return null;
       case 'rewind_match_start':
+        final before = context.cursorCodeUnit;
+        final stackBefore = context.cursorStack.length;
         context.rewindToLocalMatchStart();
+        _traceCursorControl(
+          context,
+          ruleLabel,
+          'rewind_match_start',
+          before: before,
+          stackBefore: stackBefore,
+        );
         return null;
       case 'rewind_entry_start':
+        final before = context.cursorCodeUnit;
+        final stackBefore = context.cursorStack.length;
         context.rewindToEntryMatchStart();
+        _traceCursorControl(
+          context,
+          ruleLabel,
+          'rewind_entry_start',
+          before: before,
+          stackBefore: stackBefore,
+        );
         return null;
       case 'call':
         if (positionalArgs.isEmpty) {
@@ -3164,10 +3320,26 @@ final class LinkedSpecRuntimeEngine {
     boundaryStart ??= context.input.length;
     final captureStart = context.cursorCodeUnit;
     if (boundaryStart < captureStart) {
+      context.trace?.traceDecision(
+        'dart_runtime:source_boundary',
+        false,
+        'helper=capture_until_boundary rule=$ruleLabel '
+            'capture_start=$captureStart boundary=$boundaryStart',
+        LinkedSpecTraceLevel.debug,
+      );
       return null;
     }
     context._setCursorCodeUnit(boundaryStart);
-    return context.input.substring(captureStart, boundaryStart);
+    final captured = context.input.substring(captureStart, boundaryStart);
+    context.trace?.emitEvent(
+      LinkedSpecTraceEventKind.mark,
+      'dart_runtime:source_boundary',
+      'helper=capture_until_boundary rule=$ruleLabel '
+          'capture_start=$captureStart boundary=$boundaryStart '
+          'length=${boundaryStart - captureStart}',
+      LinkedSpecTraceLevel.debug,
+    );
+    return captured;
   }
 
   Object? _readRetv(
@@ -3202,6 +3374,7 @@ final class LinkedSpecRuntimeEngine {
     _RuntimeExecutionContext context,
   ) {
     currentEdge.childDispatched = true;
+    final before = context.cursorCodeUnit;
     final childRule = compiledSpec.rule(currentEdge.target.label);
     if (childRule == null) {
       throw RuntimeInterpreterException(
@@ -3209,12 +3382,46 @@ final class LinkedSpecRuntimeEngine {
       );
     }
     if (_isPassiveTerminalRule(childRule)) {
+      context.trace?.traceDecision(
+        'dart_runtime:child_dispatch',
+        false,
+        'edge_family=action rule=${currentEdge.ruleLabel} '
+            'target=${currentEdge.target.label}[${currentEdge.target.index}] '
+            'passive=1 cursor_before=$before cursor_after=${context.cursorCodeUnit}',
+        LinkedSpecTraceLevel.debug,
+      );
       return _RuleResult(matched: false, value: null);
     }
-    return _executeRule(
+    final child = _executeRule(
       currentEdge.target.label,
       currentEdge.target.index,
       context,
+    );
+    context.trace?.traceDecision(
+      'dart_runtime:child_dispatch',
+      child.matched,
+      'edge_family=action rule=${currentEdge.ruleLabel} '
+          'target=${currentEdge.target.label}[${currentEdge.target.index}] '
+          'cursor_before=$before cursor_after=${context.cursorCodeUnit}',
+      LinkedSpecTraceLevel.debug,
+    );
+    return child;
+  }
+
+  void _traceCursorControl(
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    String helperName, {
+    required int before,
+    required int stackBefore,
+  }) {
+    context.trace?.emitEvent(
+      LinkedSpecTraceEventKind.mark,
+      'dart_runtime:cursor_control',
+      'helper=$helperName rule=$ruleLabel before=$before '
+          'after=${context.cursorCodeUnit} stack_before=$stackBefore '
+          'stack_after=${context.cursorStack.length}',
+      LinkedSpecTraceLevel.debug,
     );
   }
 

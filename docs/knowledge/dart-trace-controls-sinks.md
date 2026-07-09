@@ -7,6 +7,7 @@ answers:
   - what is LinkedSpecTraceConfig
   - which Dart entrypoints have traced variants
   - can Dart claim trace parity after DART-BACKEND-PARITY.4.5.2
+  - what runtime trace events does Dart emit after DART-BACKEND-PARITY.4.5.3
 date: 2026-07-09
 status: current
 tags: [dart, trace, runtime, diagnostics, DART-BACKEND-PARITY]
@@ -31,10 +32,13 @@ from `package:linkedspec_dart/linkedspec_dart.dart`.
   `execute(..., trace: emitter)`, `parseWithTrace(...)`, and
   `executeWithTrace(...)`.
 
-This does not complete Dart trace parity. `.4.5.2` emits only parse-scope
-runtime events to prove controls, sinks, and output preservation. Runtime
-branch/lifecycle/source-boundary event coverage is owned by
-`DART-BACKEND-PARITY.4.5.3`.
+This does not complete Dart trace parity. `.4.5.2` proved controls, sinks, and
+output preservation with parse-scope events. `.4.5.3` adds runtime interpreter
+events for parse/rule scopes, regex match/no-match decisions, action-edge and
+blind-call child-dispatch decisions, lifecycle marks, cursor-control marks,
+recursion-cutoff decisions, and `capture_until_boundary(...)`
+source-boundary marks.
 
 Related facts: [[dart-runtime-diagnostics-trace-split]],
-[[trace-cross-variant-capability-contract]], [[dart-runtime-structured-diagnostics]].
+[[trace-cross-variant-capability-contract]], [[dart-runtime-structured-diagnostics]],
+[[dart-runtime-trace-events]].

@@ -12,7 +12,8 @@ a first rule-dispatch interpreter, core runtime value/capture helpers,
 string/numeric helper execution, array helper execution, and hash helper
 execution, plus value-block/control/tree helper execution, explicit
 cursor-control behavior, structured runtime diagnostics, and trace
-controls/sinks before full runtime trace instrumentation/corpus semantics land.
+controls/sinks plus runtime trace events before staged runtime/corpus semantics
+land.
 
 ## Commands
 
@@ -30,8 +31,8 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.4.5.2` is the current completed runtime boundary; `.4.5.3`
-is the next runtime trace-instrumentation frontier. The package can round-trip
+`DART-BACKEND-PARITY.4.5.3` is the current completed runtime boundary; `.4.5.4`
+is the next diagnostics/trace no-drift frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -74,6 +75,7 @@ Runtime failures now expose `RuntimeDiagnostic` payloads through
 also has `LinkedSpecTraceConfig`, `LinkedSpecTraceLevel`,
 `LinkedSpecTraceEmitter`, event/scope primitives, stdout/routed-file/mirror sink
 behavior with reset/truncate, and traced runtime entrypoints that preserve parse
-output while emitting a parse-scope event. Runtime branch/lifecycle/source-boundary
-trace instrumentation, staged runtime execution, and corpus output parity remain
-later leaves in `docs/tasks/DART-BACKEND-PARITY.md`.
+output while emitting parse/rule scopes plus regex, child-dispatch, lifecycle,
+cursor-control, recursion-cutoff, and source-boundary trace events. Diagnostics/
+trace no-drift, staged runtime execution, and corpus output parity remain later
+leaves in `docs/tasks/DART-BACKEND-PARITY.md`.
