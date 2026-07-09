@@ -40,7 +40,7 @@ Three backbone items tracked major structural modernization — all done:
 
 - **Documentation and book sync** — the book is kept aligned with the codebase as features land and surfaces evolve.
 - **Variant-agnostic documentation** — this book is being aligned so it describes the `.spec` contract, DSL, and helper semantics backend-neutrally, with the Perl implementation shown as the reference backend rather than as "the" implementation.
-- **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred parity work. `FUTURE-PARITY-BACKLOG.1.1` scoped Dart into `DART-BACKEND-PARITY`; Julia and Lua remain gated until the Dart scoped milestone is reached. Each backend variant is expected to own a distinct LinkedSpec CLI entrypoint.
+- **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred parity work. `FUTURE-PARITY-BACKLOG.1.1` scoped Dart into `DART-BACKEND-PARITY`; Julia and Lua remain gated until the Dart scoped milestone is reached. Each backend variant is expected to own a distinct LinkedSpec CLI entrypoint. The backlog also parks a future spec-derived closed-loop validation arc: both a parser and a stimuli generator should be derived from the same `.spec` source of truth, with design work required before any implementation.
 - **Dart backend parity** - `DART-BACKEND-PARITY` is the active first future-backend lane. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
   deferred to a later proof lane after corpus parity. The repo now has a `dart/` CLI/library scaffold,

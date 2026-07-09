@@ -14,7 +14,8 @@
 Own the deferred backlog surfaced after the language-reference closeout, with the first lane
 driving new backend implementations toward full parity with the Perl reference backend and the
 Rust backend. Backend rollout order is fixed by director directive and ADR `0021`: Dart first,
-then Julia, then Lua.
+then Julia, then Lua. The backlog also parks later architecture arcs that need design ownership
+before implementation.
 
 ## Non-Goals
 
@@ -25,10 +26,12 @@ then Julia, then Lua.
 
 ## Acceptance Criteria
 
-- The seven backlog directions are represented as owned task-tree lanes.
+- The eight backlog directions are represented as owned task-tree lanes.
 - The backend lane schedules Dart, Julia, and Lua in that order, all with full parity goals.
 - Each backend implementation track owns a distinct LinkedSpec CLI entrypoint for that variant; no future
   variant should rely on a single ambiguous shared CLI name as its only user-facing command.
+- The spec-derived parser/stimuli roundtrip idea is recorded as future design work, with `.spec` kept as the
+  sole semantic source of truth for both parser construction and generated stimuli.
 - The central task-tree index points at the current frontier.
 - ADR, roadmap, mdBook, Knowledge Map, and live docs no longer contradict the backend order or
   Lua adoption decision.
@@ -39,7 +42,7 @@ then Julia, then Lua.
 - ID: `FUTURE-PARITY-BACKLOG`
   Status: `active`
   Goal: Own the future parity backlog after the closed language-reference/terse-format trees.
-  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
+  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`
 
 - ID: `FUTURE-PARITY-BACKLOG.0`
   Status: `done`
@@ -140,6 +143,33 @@ then Julia, then Lua.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `FUTURE-PARITY-BACKLOG.8`
+  Status: `active`
+  Goal: Explore spec-derived parser/stimuli closed-loop validation.
+  Children: `.8.0`, `.8.1`
+  Acceptance: The director's `foo.spec` idea is durable, design work is split before implementation, and any
+    later prototype derives both the parser and the stimuli generator solely from the normalized `.spec` contract.
+    No second hidden grammar or backend-specific fixture generator may become a competing source of truth.
+
+- ID: `FUTURE-PARITY-BACKLOG.8.0`
+  Status: `done`
+  Goal: Capture the director's single-source `foo.spec` parser/stimuli roundtrip idea.
+  Acceptance: The task tree, index, roadmap/live docs, mdBook, resume pointer, and Knowledge Map record the future
+    arc without changing active parser/runtime behavior or pivoting away from the Dart frontier.
+  Verification: **PASS 2026-07-09.** `git diff --check`, memory architecture, Knowledge Map generation/check,
+    task-tree metadata, doctrine, and mdBook build pass. No implementation code changed.
+  Commit: `FUTURE-PARITY-BACKLOG.8.0 - capture spec-derived roundtrip idea`
+
+- ID: `FUTURE-PARITY-BACKLOG.8.1`
+  Status: `pending`
+  Goal: Design the `.spec`-derived parser/stimuli roundtrip contract before code.
+  Acceptance: Define the normalized grammar/semantic metadata needed to construct a parser and a stimuli generator
+    from one `.spec`; specify bounded generation, termination/progress guards, expected-output oracles,
+    shrink/minimize behavior, negative-case handling, staged parser composition, and cross-backend parity checks;
+    explicitly reject any generator rule language that duplicates or drifts from `.spec`.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -152,6 +182,7 @@ then Julia, then Lua.
 | 6 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 7 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 8 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
+| 9 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser/stimuli roundtrip arc is parked for later design; not a current Dart pivot. |
 
 ## Decisions
 
@@ -166,6 +197,9 @@ then Julia, then Lua.
 - `2026-07-09`: Director directive: each LinkedSpec backend variant should have a distinct CLI. Dart records
   this as `DART-BACKEND-PARITY.7.3` / `.7.4`; Julia and Lua planning leaves must include equivalent
   variant-specific CLI ownership when activated.
+- `2026-07-09`: Director brainstorm captured: a future closed-loop validation arc should explore deriving both
+  a parser for `foo` and a stimuli generator for that parser solely from `foo.spec`, making `.spec` the sole source
+  of truth. This is parked under `.8.1` and is not a current pivot from Dart.
 
 ## Open Questions
 
@@ -182,6 +216,7 @@ then Julia, then Lua.
 | --- | --- | --- | --- |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book`; `bash tools/run_ci_local.sh` | PASS. Local CI includes phase0 `1..1028`; no implementation code changed. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.1.1` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book`; `bash tools/run_ci_local.sh` | PASS. Local CI includes phase0 `1..1028`; no implementation code changed. |
+| `2026-07-09` | `FUTURE-PARITY-BACKLOG.8.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning capture only; no implementation code changed. |
 
 ## Commit Log
 
@@ -189,10 +224,13 @@ then Julia, then Lua.
 | --- | --- | --- |
 | `FUTURE-PARITY-BACKLOG.0` | `FUTURE-PARITY-BACKLOG.0 - create future parity backlog` | Tracking/decision/doc sync; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.1` | `FUTURE-PARITY-BACKLOG.1.1 - scope Dart backend parity plan` | Creates `DART-BACKEND-PARITY`; no implementation code. |
+| `FUTURE-PARITY-BACKLOG.8.0` | `FUTURE-PARITY-BACKLOG.8.0 - capture spec-derived roundtrip idea` | Captures future `foo.spec` parser/stimuli closed-loop validation arc; no implementation code. |
 
 ## Changelog
 
-- `2026-07-09`: Created the future parity backlog tree with seven owned lanes and Dart -> Julia -> Lua
+- `2026-07-09`: Created the future parity backlog tree with seven initial owned lanes and Dart -> Julia -> Lua
   backend rollout order.
 - `2026-07-09`: Scoped the Dart backend lane into `docs/tasks/DART-BACKEND-PARITY.md` and selected
   interpreter-first parity before generated Dart source.
+- `2026-07-09`: Captured the director's single-source `foo.spec` parser/stimuli generator roundtrip idea as a
+  low-priority future design lane.

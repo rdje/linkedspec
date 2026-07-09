@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **FUTURE-PARITY-BACKLOG.8.0 — capture spec-derived roundtrip idea**
+  (DONE — director's single-source `.spec` parser/stimuli arc is parked for later design).
+
+  **Change:** Added `FUTURE-PARITY-BACKLOG.8` with completed capture leaf `.8.0` and pending design leaf `.8.1`.
+  The idea is to derive both a parser and a stimuli generator from the same `foo.spec`, making `.spec` the sole
+  source of truth for future closed-loop roundtrip validation.
+
+  **Boundary:** Planning capture only. No implementation code changed, no generator grammar was introduced, and
+  active implementation work remains on `DART-BACKEND-PARITY.6.2.4`.
+
+  **Verification:** mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.2.3 — close Dart middle corpus batch**
   (DONE — non-`fn` helper/control/receiver middle fixtures pass; `fn` corpus fixtures routed).
 

@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — FUTURE-PARITY-BACKLOG.8.0 — capture spec-derived roundtrip idea
+
+**Scope:** Future parity backlog task-tree, roadmap/live docs, mdBook status, resume pointer, and Knowledge Map.
+
+**Change:** Captured the director's `foo.spec` closed-loop idea as a future design lane:
+derive both the parser for `foo` and a stimuli generator for that parser solely from `foo.spec`, making `.spec`
+the semantic source of truth. The active follow-up is `FUTURE-PARITY-BACKLOG.8.1`; no implementation code changed,
+and the Dart frontier remains `DART-BACKEND-PARITY.6.2.4`.
+
+**Validation:** mdBook build, memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine,
+and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.3 — close Dart middle corpus batch
 
 **Scope:** Dart ActionIR argument parsing, runtime helper/value semantics, middle corpus-batch evidence, Dart

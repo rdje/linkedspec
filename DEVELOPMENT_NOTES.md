@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (FUTURE-PARITY-BACKLOG.8.0 — spec-derived parser/stimuli roundtrip idea):
+  The director's `foo.spec` closed-loop validation idea is now parked under `FUTURE-PARITY-BACKLOG.8`. The useful
+  core is strong: if `foo.spec` can drive both parser construction and stimuli generation, then `.spec` becomes the
+  sole semantic source for parse/roundtrip checks. The guardrail is equally important: the future generator must be
+  derived from the normalized `.spec` contract and associated semantic metadata, not from a second hand-written
+  grammar that can drift. `.8.1` owns the design pass for bounded generation, progress/termination, expected-output
+  oracles, shrinking, negative cases, staged parser composition, and cross-backend parity checks. No implementation
+  code changed in the capture slice.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.3 — Dart middle corpus batch):
   The middle helper/control/receiver corpus window is now 25/28 green on Dart. The runtime fixes were deliberately
   contract-shaped: `if(false, then, fallback)` now treats a plain third argument as the else value while preserving
