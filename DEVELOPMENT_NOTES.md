@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.5 — Dart top-level fn corpus shell routing):
+  Dart now has an executable bridge for `specs/user_function_definition.spec`.
+  `parseUserFunctionDefinitionAsts(...)` compiles that checked-in spec through the Dart runtime and returns the
+  shell-owned AST nodes; `parseSpecWithStagedUserFunctionDefinitions(...)` feeds them through the existing staged
+  projection so function bodies receive `body_ast`. `executeCorpusFixtures(...)` deliberately keeps direct
+  `parseSpec(...)` for rule-only fixtures and invokes the shell only when rule-only parsing rejects top-level
+  function source. That preserves the no-raw-scanner boundary for `fn` semantics without forcing the shell to be a
+  universal pre-parser for every existing rule-only spec. The shell execution also closed two runtime helper gaps:
+  statement-form `next()` now continues the enclosing rule loop, while expression-form `next()` still yields null;
+  `entry_end_line` / `entry_end_col` and `match_start_*` / `match_end_*` line/column aliases now share the existing
+  match-register offsets. The three routed terse user-function corpus fixtures pass.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.4.6 — Dart structural PCRE smoke parity):
   This is a deliberately bounded bridge, not a general PCRE engine. `compileRuntimeRegex(...)` recognizes only the
   exact shipped structural pattern families that blocked the parser-smoke window: Lispish recursive square

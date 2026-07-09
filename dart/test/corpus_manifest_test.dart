@@ -234,6 +234,61 @@ void main() {
     ]);
   });
 
+  test('executes top-level function corpus fixtures through spec shell', () {
+    final result = executeCorpusFixtures(
+      '../rust/linkedspec-runtime/tests/corpus',
+      caseNames: const [
+        'terse_3_3_1_scalar_assignment_expressions',
+        'terse_3_3_4_assignment_expression_closure',
+        'terse_4_3_2_user_function_runtime',
+      ],
+    );
+
+    expect(
+      result.failures
+          .map((failure) => '${failure.name}: ${failure.failure}')
+          .join('\n'),
+      isEmpty,
+    );
+    expect(result.passed, isTrue);
+    expect(result.passedCount, 3);
+    expect(
+      result.fixture('terse_3_3_1_scalar_assignment_expressions').actualValue,
+      ['ok', 'ok', 'ok!', 'ok!', 'fn', 'fn', 'fn!', 'hi'],
+    );
+    expect(
+      result.fixture('terse_3_3_4_assignment_expression_closure').actualValue,
+      [
+        'ok',
+        'ok',
+        'ok!',
+        'ok!',
+        'fn',
+        'fn',
+        'surface',
+        'surface',
+        ['ok'],
+        ['ok'],
+        {'stage': 'ok'},
+        {'stage': 'ok'},
+        ['ok'],
+        ['ok', 'tail'],
+        ['ok', 'tail'],
+        {'stage': 'ok'},
+        {'extra': 'ok!', 'stage': 'ok'},
+        {'extra': 'ok!', 'stage': 'ok'},
+        3,
+        3,
+      ],
+    );
+    expect(result.fixture('terse_4_3_2_user_function_runtime').actualValue, [
+      'x',
+      'go|GO',
+      2,
+      null,
+    ]);
+  });
+
   test('executes ds_vhistory leading newline public parser fixture', () {
     final result = executeCorpusFixtures(
       '../rust/linkedspec-runtime/tests/corpus',

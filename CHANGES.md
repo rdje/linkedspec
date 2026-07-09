@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.5 — route Dart fn corpus through spec shell
+
+**Scope:** Dart function-definition shell execution, corpus runner parsing route, runtime helper parity needed by
+the shell, focused parser/runtime/corpus tests, Dart README, mdBook status/backend handoff, live docs, roadmap
+status, resume pointer, and Knowledge Map.
+
+**Change:** Dart now executes `specs/user_function_definition.spec` through the runtime to obtain
+`function_definition` nodes, normalizes the returned output wrapper shape, and feeds those nodes through
+`parseSpecWithStagedUserFunctionDefinitionAsts(...)`. Corpus execution keeps the rule-only `parseSpec(...)` path
+for ordinary fixtures and falls back to the spec-defined shell when top-level `fn` source requires it. Runtime
+support for statement-form `next()` loop continuation and the documented entry/match line-end helper family was
+added because the shell spec depends on those current helper contracts.
+
+**Validation:** The routed three-fixture corpus run passes; focused parser/corpus/runtime/contract tests pass; Dart
+format, analyze, full tests, default 99-fixture corpus loader, and the 31-fixture parser-smoke window pass; mdBook,
+memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.6 — close Dart structural regex smoke
 
 **Scope:** Dart runtime regex matching, action-edge child payload extraction, focused runtime/corpus tests,

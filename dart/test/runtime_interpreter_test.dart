@@ -1455,6 +1455,53 @@ Top::
     }
   });
 
+  test('reports entry and local match line boundary helpers', () {
+    final engine = _engine(r'''
+Top::
+ /b\nc/
+ E {
+   return(hash(
+     "entry_start_line", entry_start_line(),
+     "entry_start_col", entry_start_col(),
+     "entry_end_line", entry_end_line(),
+     "entry_end_col", entry_end_col(),
+     "match_start_line", match_start_line(),
+     "match_start_col", match_start_col(),
+     "match_end_line", match_end_line(),
+     "match_end_col", match_end_col(),
+     "next", next()
+   ))
+ }
+''');
+
+    final result = engine.parse('a\nb\nc');
+
+    expect(result.value, {
+      'entry_start_line': 2,
+      'entry_start_col': 1,
+      'entry_end_line': 3,
+      'entry_end_col': 2,
+      'match_start_line': 2,
+      'match_start_col': 1,
+      'match_end_line': 3,
+      'match_end_col': 2,
+      'next': null,
+    });
+  });
+
+  test('statement next skips to the next rule iteration', () {
+    final engine = _engine(r'''
+Top::
+ /skip/ { next() }
+ /keep/
+ E { return(match_text()) }
+''');
+
+    final result = engine.parse('skipkeep');
+
+    expect(result.value, 'keep');
+  });
+
   test('wraps action runtime failures with structured diagnostics', () {
     final engine = _engine(r'''
 Top::

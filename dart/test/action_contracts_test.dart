@@ -68,6 +68,8 @@ void main() {
     expect(isKnownActionIrCallName('restore_cursor'), isTrue);
     expect(isKnownActionIrCallName('rewind_match_start'), isTrue);
     expect(isKnownActionIrCallName('rewind_entry_start'), isTrue);
+    expect(isKnownActionIrCallName('entry_end_line'), isTrue);
+    expect(isKnownActionIrCallName('match_end_line'), isTrue);
     expect(isKnownActionIrCallName('capture_until_boundary'), isTrue);
     expect(isKnownActionIrCallName('BACKTRACK'), isFalse);
     expect(isKnownActionIrCallName('IBACKTRACK'), isFalse);

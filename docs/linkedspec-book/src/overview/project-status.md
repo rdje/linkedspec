@@ -22,8 +22,8 @@ Phases 0–9 of the modernization roadmap are done:
 
 The active Dart backend follows the same interpreter-first path. It now has source parsing, validation,
 compiled-spec state, runtime interpretation, staged user-function body parsing, exact-arity user-function runtime
-execution, and a controlled executable corpus harness whose first 40 shipped manifest fixtures plus the non-`fn`
-middle helper/control/receiver fixtures pass through bounded execute mode. The final shipped-spec/parser-smoke
+execution, and a controlled executable corpus harness whose first 40 shipped manifest fixtures, non-`fn`
+middle helper/control/receiver fixtures, and routed top-level `fn` fixtures pass through bounded execute mode. The final shipped-spec/parser-smoke
 window is now 31/31 green after the structural regex closeout following the regex-dialect, helper/action,
 recursion/default-mode, portmap result-shape, hlink delimiter/capture, helper mutation/text-normalization, and
 legacy accumulator and public-parser leading-trivia bridges. Basic
@@ -105,15 +105,15 @@ Three backbone items tracked major structural modernization — all done:
   also preserves assignment expressions inside helper arguments, supports plain fallback values in inline
   `if(...)`, evaluates numeric aggregate reducers over bare arrays, and follows scalar-held list/map readback for
   `array(name)`, `hash(name)`, and `copy(name)`. Append-style mutations now update scalar-held lists before
-  aggregate fallback, and `call(...)` refreshes the runtime `retv` channel. The first 40 shipped manifest fixtures
-  and the non-`fn` middle
-  fixtures pass through bounded corpus execute mode. Top-level `fn` corpus fixtures are routed to a later
-  spec-defined function-shell corpus leaf. The final shipped-spec/parser-smoke window is split after a 2/31
+  aggregate fallback, and `call(...)` refreshes the runtime `retv` channel. The first 40 shipped manifest fixtures,
+  the non-`fn` middle fixtures, and the top-level `fn` fixtures pass through bounded corpus execute mode. Those
+  function fixtures obtain `function_definition` nodes from `specs/user_function_definition.spec` and staged body
+  projection rather than a Dart raw scanner. The final shipped-spec/parser-smoke window is split after a 2/31
   diagnostic run and is now 31/31 green. The basic regex-dialect bridge, helper/action bridge,
   recursive/default-mode bridge, portmap result-shape bridge, hlink delimiter/capture bridge, and helper
   mutation/text-normalization bridge are done, the legacy accumulator bridge closes `regdef`, and the public-parser
   leading-trivia bridge closes `ds_vhistory`; bounded structural matchers close the exact shipped PCRE structural
-  forms. The next Dart frontier is the routed top-level `fn` corpus leaf followed by cross-backend gates.
+  forms. The next Dart frontier is the full corpus gate followed by cross-backend gates.
 - **Non-current helper code purge** - `NONCURRENT-HELPER-CODE-PURGE` is closed. Perl source cleanup, Rust source cleanup, active test/tool/generated fixture and checked-in `.spec` migration, and final no-drift scans are complete. Retired helper-looking calls use generic unknown-helper fallback behavior, active generic-unknown-helper tests use invented helper names, and active helper-call/label/tag scans are clean.
 - **Rust generated-source breadth** — the Rust interpreter oracle is the current cross-variant parity gate. Generated Rust source already covers the current structural families and a curated corpus subset; broadening generated-source proof to the full manifest remains a separately owned future follow-on.
 - **Lifecycle-family audit** — verified complete (2026-06-14). All 7 lifecycle markers (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`) have full semicolon-light structured authoring coverage. The current separator contract is newline-or-semicolon: newlines separate top-level helper statements, and multiple same-line statements require semicolons. No lifecycle-specific semantic gaps found.

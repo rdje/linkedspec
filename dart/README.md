@@ -37,9 +37,9 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.6.2.4.6` is the current completed corpus-parity boundary;
-`.6.2.5` is the next frontier for routed top-level `fn` corpus fixtures after the shipped-spec/parser-smoke
-window reached 31/31 green. The package
+`DART-BACKEND-PARITY.6.2.5` is the current completed corpus-parity boundary;
+`.6.3` is the next frontier for the full Dart corpus gate after the shipped-spec/parser-smoke window reached
+31/31 green and the routed top-level `fn` fixtures passed through the spec-defined shell. The package
 can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
@@ -138,9 +138,10 @@ and `limit`. The corpus-runner CLI exposes that surface through opt-in
 `--execute` mode with `--case`, `--offset`, and `--limit`; unbounded CLI
 execution is rejected until the full shipped-corpus gate is ready, so the default
 99-fixture command remains a manifest-loader smoke. The first 40 shipped
-manifest fixtures and the non-`fn` middle helper/control/receiver fixtures now
-pass through bounded execute mode. Top-level `fn` corpus fixtures remain routed
-to `DART-BACKEND-PARITY.6.2.5` for spec-defined function-shell execution. The final
+manifest fixtures, the non-`fn` middle helper/control/receiver fixtures, and the
+three routed top-level `fn` fixtures now pass through bounded execute mode. The top-level function fixtures obtain
+`function_definition` nodes by executing `specs/user_function_definition.spec` and then use staged body projection;
+there is no Dart raw `fn` scanner as the semantic source of truth. The final
 31-fixture shipped-spec/parser-smoke window is now 31/31 green. The completed residual work is split into
 portmap/action-edge result shape, hlink delimiter/capture, helper mutation/text normalization, legacy structural
 smoke output, residual closeout, and structural-regex leaves.
@@ -154,6 +155,7 @@ bridge are also done; tclite, recursive top-rule, all five portmap fixtures, all
 passes. Dart now also mirrors Perl's public-parser leading blank/comment-line skip, so
 `ds_vhistory_version_entry` passes without weakening ordinary scalar-held indexed reads. Dart also supports
 action-edge `push(child, index)`, so `ebnf_logging_annotation` preserves indexed quoted-string payloads. The
-diagnostic window is now 31/31 green, and `.6.2.4` is closed.
+diagnostic window is now 31/31 green, `.6.2.4` is closed, and `.6.2.5` closes the routed top-level function
+corpus fixtures.
 Full shipped-corpus output parity remains a later leaf in
 `docs/tasks/DART-BACKEND-PARITY.md`.

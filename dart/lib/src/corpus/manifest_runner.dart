@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import '../ast/spec_ast.dart';
 import '../compiler/compiled_spec.dart';
-import '../parser/spec_parser.dart';
+import '../parser/spec_parser.dart' show SpecParseException, parseSpec;
+import '../parser/staged_parser_registry.dart';
+import '../parser/user_function_definition_parser.dart';
 import '../runtime/interpreter.dart';
 import '../runtime/matching.dart';
 import '../validation/spec_validator.dart';
@@ -237,7 +240,7 @@ CorpusFixtureExecutionResult _executeFixture(
   required LinkedSpecParseMode parseMode,
 }) {
   try {
-    final spec = parseSpec(fixture.specSource);
+    final spec = _parseCorpusSpec(fixture.specSource);
     final compiled = compileSpec(spec);
     final parseResult = LinkedSpecRuntimeEngine(
       compiled,
@@ -291,6 +294,24 @@ CorpusFixtureExecutionResult _executeFixture(
       expectedJson: fixture.expectedJson,
       failure: 'compile failed: ${error.message}',
     );
+  } on UserFunctionDefinitionParserException catch (error) {
+    return CorpusFixtureExecutionResult.failure(
+      name: fixture.name,
+      expectedJson: fixture.expectedJson,
+      failure: 'parse failed: ${error.message}',
+    );
+  } on StagedParserRegistryException catch (error) {
+    return CorpusFixtureExecutionResult.failure(
+      name: fixture.name,
+      expectedJson: fixture.expectedJson,
+      failure: 'parse failed: ${error.message}',
+    );
+  } on FormatException catch (error) {
+    return CorpusFixtureExecutionResult.failure(
+      name: fixture.name,
+      expectedJson: fixture.expectedJson,
+      failure: 'parse failed: ${error.message}',
+    );
   } on RuntimeInterpreterException catch (error) {
     return CorpusFixtureExecutionResult.failure(
       name: fixture.name,
@@ -303,6 +324,14 @@ CorpusFixtureExecutionResult _executeFixture(
       expectedJson: fixture.expectedJson,
       failure: 'unexpected failure: $error',
     );
+  }
+}
+
+SpecFile _parseCorpusSpec(String source) {
+  try {
+    return parseSpec(source);
+  } on SpecParseException {
+    return parseSpecWithStagedUserFunctionDefinitions(source);
   }
 }
 

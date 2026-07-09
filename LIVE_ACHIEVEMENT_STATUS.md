@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.5 — route Dart fn corpus through spec shell**
+  (DONE — the three routed top-level `fn` corpus fixtures now pass; frontier advances to full corpus gate `.6.3`).
+
+  **Change:** Added Dart execution of `specs/user_function_definition.spec` for returned function-definition nodes,
+  public shell helpers for staged parsing, and corpus-runner routing that falls back to the shell when rule-only
+  parsing rejects top-level `fn` source. Runtime statement-form `next()` and entry/match line-end helpers now cover
+  the shell's current helper requirements.
+
+  **Boundary:** No Dart raw scanner owns `fn` semantics. Rule-only corpus fixtures still use the established
+  `parseSpec(...)` path; top-level function fixtures use the spec-defined shell and staged body projection.
+  The next active leaf is `DART-BACKEND-PARITY.6.3` for the full Dart corpus gate.
+
+  **Verification:** Focused parser/corpus/runtime/contract tests, routed three-fixture corpus run, Dart
+  format/analyze/full tests, default 99-fixture corpus loader, diagnostic 31-fixture parser-smoke corpus run,
+  mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.2.4.6 — close Dart structural regex smoke**
   (DONE — shipped-spec/parser-smoke window is now 31/31 green; frontier advances to top-level `fn` corpus fixtures).
 

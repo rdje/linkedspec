@@ -18,22 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.6.2.4.6` — bounded Dart structural matchers and action-edge
-  `push(child, index)` parity close the seven PCRE structural fixtures; shipped-spec/parser-smoke is 31/31 green.
-- prior_leaf: `DART-BACKEND-PARITY.6.2.4.5` — final no-drift closeout confirmed the non-PCRE residual group was
-  closed at the 24/31 boundary before the structural regex slice.
+- latest_completed_leaf: `DART-BACKEND-PARITY.6.2.5` — Dart routes top-level `fn` corpus fixtures through the
+  spec-defined `user_function_definition.spec` shell, stages function bodies, and passes the three routed fixtures.
+- prior_leaf: `DART-BACKEND-PARITY.6.2.4.6` — bounded Dart structural matchers and action-edge
+  `push(child, index)` parity closed the seven PCRE structural fixtures; shipped-spec/parser-smoke is 31/31 green.
 - latest_commit: this resume block is prepared for commit
-  `DART-BACKEND-PARITY.6.2.4.6 - close Dart structural regex smoke`; previous committed HEAD is
-  `0291ba89 DART-BACKEND-PARITY.6.2.4.5 - close parser smoke no drift`.
+  `DART-BACKEND-PARITY.6.2.5 - route Dart fn corpus through spec shell`; previous committed HEAD is
+  `4ac4518e DART-BACKEND-PARITY.6.2.4.6 - close Dart structural regex smoke`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.6.2.5` after the current commit is clean.
-- next_action: resume PNT at `DART-BACKEND-PARITY.6.2.5` for top-level `fn` corpus fixtures:
-  `terse_3_3_1_scalar_assignment_expressions`, `terse_3_3_4_assignment_expression_closure`, and
-  `terse_4_3_2_user_function_runtime`. They must route through the spec-defined function shell or a documented
-  staged equivalent, not a Dart raw `fn` scanner. The director's single-source `foo.spec` parser+stimuli
-  roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`; the corrected AND/OR edge-default model is parked in
-  `.9.1`; neither is a current pivot.
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.6.3` after the current commit is clean.
+- next_action: resume PNT at `DART-BACKEND-PARITY.6.3` for the full Dart executable corpus gate after `.6.2.5`
+  routed top-level function fixtures through the spec-defined shell. The director's single-source `foo.spec`
+  parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`; the corrected AND/OR edge-default model
+  is parked in `.9.1`; neither is a current pivot.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, COMMIT, task-tree index,
   active Dart task tree, ROADMAP/ROADMAP_V2, mdBook trace/runtime/status/backend-handoff chapters, relevant ADR/KM
   facts, Dart runtime/package/corpus source owners through `.6.1`, Rust staged-registry/trace references, and the
@@ -44,5 +42,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `DART-BACKEND-PARITY.6.2.4.6` commit; do not pivot unless the repo
+- blockers: none. in_flight_uncommitted: none expected after the `DART-BACKEND-PARITY.6.2.5` commit; do not pivot unless the repo
   is handoff-ready.

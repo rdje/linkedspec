@@ -381,18 +381,42 @@ final class LinkedSpecRuntimeEngine {
   ) {
     final min = rule.modeMetadata.repMin;
     if (min == null) {
-      final matched = _executeBlindOnce(rule, context);
-      if (!matched) {
-        final loopExit = _executeLifecycle(rule, 'LX', context);
-        if (loopExit != null) {
-          return _returned(loopExit.value);
+      var matchedAny = false;
+      for (
+        var iteration = 0;
+        iteration < context.maxIterations;
+        iteration += 1
+      ) {
+        final before = context.cursorCodeUnit;
+        final matched = _nextableBool(() => _executeBlindOnce(rule, context));
+        if (matched.nexted) {
+          matchedAny = true;
+          if (context.cursorCodeUnit == before) {
+            break;
+          }
+          continue;
         }
+        if (!matched.value) {
+          final loopExit = _executeLifecycle(rule, 'LX', context);
+          if (loopExit != null) {
+            return _returned(loopExit.value);
+          }
+        }
+        final exitReturn = _executeLifecycle(rule, 'E', context);
+        if (exitReturn != null) {
+          return _returned(exitReturn.value);
+        }
+        return _RuleResult(matched: matched.value || matchedAny, value: null);
+      }
+      final loopExit = _executeLifecycle(rule, 'LX', context);
+      if (loopExit != null) {
+        return _returned(loopExit.value);
       }
       final exitReturn = _executeLifecycle(rule, 'E', context);
       if (exitReturn != null) {
         return _returned(exitReturn.value);
       }
-      return _RuleResult(matched: matched, value: null);
+      return _RuleResult(matched: matchedAny, value: null);
     }
 
     var matches = 0;
@@ -408,8 +432,15 @@ final class LinkedSpecRuntimeEngine {
         return _returned(loopStart.value);
       }
 
-      final matched = _executeBlindOnce(rule, context);
-      if (!matched) {
+      final matched = _nextableBool(() => _executeBlindOnce(rule, context));
+      if (matched.nexted) {
+        matches += 1;
+        if (context.cursorCodeUnit == before) {
+          break;
+        }
+        continue;
+      }
+      if (!matched.value) {
         madeFailedAttempt = true;
         break;
       }
@@ -538,23 +569,50 @@ final class LinkedSpecRuntimeEngine {
   ) {
     final min = rule.modeMetadata.repMin;
     if (min == null) {
-      final matched = _executeRegexOnce(
-        rule,
-        context,
-        entryRegexIndex: entryRegexIndex,
-        andSequence: rule.modeMetadata.isAnd && rule.regexPatterns.length > 1,
-      );
-      if (!matched) {
-        final loopExit = _executeLifecycle(rule, 'LX', context);
-        if (loopExit != null) {
-          return _returned(loopExit.value);
+      var matchedAny = false;
+      for (
+        var iteration = 0;
+        iteration < context.maxIterations;
+        iteration += 1
+      ) {
+        final before = context.cursorCodeUnit;
+        final matched = _nextableBool(
+          () => _executeRegexOnce(
+            rule,
+            context,
+            entryRegexIndex: entryRegexIndex,
+            andSequence:
+                rule.modeMetadata.isAnd && rule.regexPatterns.length > 1,
+          ),
+        );
+        if (matched.nexted) {
+          matchedAny = true;
+          if (context.cursorCodeUnit == before) {
+            break;
+          }
+          continue;
         }
+        if (!matched.value) {
+          final loopExit = _executeLifecycle(rule, 'LX', context);
+          if (loopExit != null) {
+            return _returned(loopExit.value);
+          }
+        }
+        final exitReturn = _executeLifecycle(rule, 'E', context);
+        if (exitReturn != null) {
+          return _returned(exitReturn.value);
+        }
+        return _RuleResult(matched: matched.value || matchedAny, value: null);
+      }
+      final loopExit = _executeLifecycle(rule, 'LX', context);
+      if (loopExit != null) {
+        return _returned(loopExit.value);
       }
       final exitReturn = _executeLifecycle(rule, 'E', context);
       if (exitReturn != null) {
         return _returned(exitReturn.value);
       }
-      return _RuleResult(matched: matched, value: null);
+      return _RuleResult(matched: matchedAny, value: null);
     }
 
     var matches = 0;
@@ -570,12 +628,21 @@ final class LinkedSpecRuntimeEngine {
         return _returned(loopStart.value);
       }
 
-      final matched = _executeRegexOnce(
-        rule,
-        context,
-        andSequence: rule.modeMetadata.isAnd && rule.regexPatterns.length > 1,
+      final matched = _nextableBool(
+        () => _executeRegexOnce(
+          rule,
+          context,
+          andSequence: rule.modeMetadata.isAnd && rule.regexPatterns.length > 1,
+        ),
       );
-      if (!matched) {
+      if (matched.nexted) {
+        matches += 1;
+        if (context.cursorCodeUnit == before) {
+          break;
+        }
+        continue;
+      }
+      if (!matched.value) {
         madeFailedAttempt = true;
         break;
       }
@@ -871,6 +938,8 @@ final class LinkedSpecRuntimeEngine {
       return null;
     } on _ActionReturn catch (returnSignal) {
       return returnSignal;
+    } on _ActionNext {
+      rethrow;
     } on RuntimeInterpreterException {
       rethrow;
     } catch (error) {
@@ -2481,6 +2550,11 @@ final class LinkedSpecRuntimeEngine {
         throw _ActionReturn(_copyValue(value));
       case 'return_undef':
         throw const _ActionReturn(null);
+      case 'next':
+        if (statementContext) {
+          throw const _ActionNext();
+        }
+        return null;
       case 'if':
         return _callInlineIf(positionalArgs, context, ruleLabel, currentEdge);
       case 'switch':
@@ -2619,11 +2693,22 @@ final class LinkedSpecRuntimeEngine {
       case 'entry_start_line':
         return _matchStartLine(context.input, context.registers.entryMatch);
       case 'entry_col':
+      case 'entry_start_col':
         return _matchStartColumn(context.input, context.registers.entryMatch);
+      case 'entry_end_line':
+        return _matchEndLine(context.input, context.registers.entryMatch);
+      case 'entry_end_col':
+        return _matchEndColumn(context.input, context.registers.entryMatch);
       case 'match_line':
+      case 'match_start_line':
         return _matchStartLine(context.input, context.registers.localMatch);
       case 'match_col':
+      case 'match_start_col':
         return _matchStartColumn(context.input, context.registers.localMatch);
+      case 'match_end_line':
+        return _matchEndLine(context.input, context.registers.localMatch);
+      case 'match_end_col':
+        return _matchEndColumn(context.input, context.registers.localMatch);
       case 'entry_start_pos':
         return context.registers.entryMatch?.charStart;
       case 'entry_end_pos':
@@ -5216,6 +5301,22 @@ int? _matchStartColumn(String input, RuntimeRegexMatch? match) {
   return lineColumnAtCodeUnitOffset(input, codeUnitStart).column;
 }
 
+int? _matchEndLine(String input, RuntimeRegexMatch? match) {
+  final codeUnitEnd = match?.codeUnitEnd;
+  if (codeUnitEnd == null) {
+    return null;
+  }
+  return lineColumnAtCodeUnitOffset(input, codeUnitEnd).line;
+}
+
+int? _matchEndColumn(String input, RuntimeRegexMatch? match) {
+  final codeUnitEnd = match?.codeUnitEnd;
+  if (codeUnitEnd == null) {
+    return null;
+  }
+  return lineColumnAtCodeUnitOffset(input, codeUnitEnd).column;
+}
+
 String? _scalarString(Object? value, {bool nullAsEmpty = false}) {
   if (value == null) {
     return nullAsEmpty ? '' : null;
@@ -5678,6 +5779,27 @@ final class _ActionReturn implements Exception {
   const _ActionReturn(this.value);
 
   final Object? value;
+}
+
+final class _ActionNext implements Exception {
+  const _ActionNext();
+}
+
+final class _NextableBool {
+  const _NextableBool.value(this.value) : nexted = false;
+
+  const _NextableBool.nexted() : value = false, nexted = true;
+
+  final bool value;
+  final bool nexted;
+}
+
+_NextableBool _nextableBool(bool Function() callback) {
+  try {
+    return _NextableBool.value(callback());
+  } on _ActionNext {
+    return const _NextableBool.nexted();
+  }
 }
 
 _RuleResult _returned(Object? value) {

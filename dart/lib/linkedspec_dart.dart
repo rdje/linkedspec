@@ -126,6 +126,14 @@ export 'src/parser/user_function_definition_shell.dart'
         UserFunctionDefinitionProjection,
         parseSpecWithUserFunctionDefinitionAsts,
         projectUserFunctionDefinitionAsts;
+export 'src/parser/user_function_definition_parser.dart'
+    show
+        UserFunctionDefinitionAstParser,
+        UserFunctionDefinitionParserException,
+        definitionNodesFromUserFunctionDefinitionOutput,
+        parseSpecWithStagedUserFunctionDefinitions,
+        parseUserFunctionDefinitionAsts,
+        userFunctionDefinitionSpecRelativePath;
 export 'src/runtime/matching.dart'
     show
         LineColumn,

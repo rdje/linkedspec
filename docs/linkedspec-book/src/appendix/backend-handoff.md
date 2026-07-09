@@ -254,10 +254,10 @@ CLI `--execute` mode; unbounded CLI execution stays rejected until full corpus
 parity is ready. The first 40 shipped manifest fixtures now pass through bounded
 execute mode, which proves the starter proof-edge, autoexist, mutation, and core
 terse runtime batch before the remaining corpus groups. The non-`fn` middle
-helper/control/receiver fixtures now pass as well; the top-level `fn` corpus
-fixtures are routed to a later function-shell corpus leaf because Dart must
-obtain spec-produced `function_definition` nodes rather than raw-scanning `fn`
-source in the corpus runner. The final shipped-spec/parser-smoke window started
+helper/control/receiver fixtures now pass as well, and the top-level `fn` corpus
+fixtures now route through the spec-defined function shell: Dart obtains
+spec-produced `function_definition` nodes, feeds them through staged body
+projection, and does not raw-scan `fn` source in the corpus runner. The final shipped-spec/parser-smoke window started
 at 2/31 green, reached 7/31 green after the regex-dialect, helper/action, and
 recursive/default-mode bridges, reached 13/31 green after the portmap result-shape bridge, reached 19/31 green
 after the hlink delimiter/capture bridge, reached 22/31 green after the helper mutation/text-normalization bridge,
@@ -415,15 +415,16 @@ diagnosed. Dart also preserves staged user-function descriptor shapes across
 parsed functions, compiled registry jobs, descriptor records, and runtime output.
 Dart corpus parity has started with controlled manifest fixtures and now has safe
 named/bounded execution selection for shipped-corpus batching. The first 40
-manifest fixtures and the non-`fn` middle fixtures pass in bounded execute mode.
+manifest fixtures, the non-`fn` middle fixtures, and the three top-level `fn`
+fixtures pass in bounded execute mode.
 The remaining shipped-spec/parser-smoke window is split after a diagnostic run
 and is now 31/31 green. The basic regex-dialect bridge, helper/action bridge,
 recursive/default-mode parser-smoke bridge, portmap result-shape bridge, and
 hlink delimiter/capture bridge are done; the helper mutation/text-normalization
 bridge is also done, the legacy accumulator bridge closes `regdef_nested_register_fields`, and the public-parser
-leading-trivia bridge closes `ds_vhistory_version_entry`. Final parser-smoke no-drift closeout and the bounded
-structural regex work are done; the next Dart leaf is the routed top-level `fn` corpus work, and full shipped
-99-fixture corpus parity remains later.
+leading-trivia bridge closes `ds_vhistory_version_entry`. Final parser-smoke no-drift closeout, bounded
+structural regex work, and routed top-level `fn` corpus-shell execution are done; the next Dart leaf is the full
+shipped 99-fixture corpus gate.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

@@ -1274,15 +1274,22 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.4.6 - close Dart structural regex smoke`
 
 - ID: `DART-BACKEND-PARITY.6.2.5`
-  Status: `pending`
+  Status: `done`
   Goal: Route top-level `fn` corpus fixtures through the spec-defined function shell.
   Acceptance: Dart corpus execution obtains `function_definition` nodes from the owning spec-defined shell or a
     documented staged equivalent, feeds them through `parseSpecWithStagedUserFunctionDefinitionAsts(...)`, and
     passes the routed fixtures `terse_3_3_1_scalar_assignment_expressions`,
     `terse_3_3_4_assignment_expression_closure`, and `terse_4_3_2_user_function_runtime`; no Dart raw scanner may
     become the semantic source of truth for `fn` definitions.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Dart adds `parseUserFunctionDefinitionAsts(...)` and
+    `parseSpecWithStagedUserFunctionDefinitions(...)`, which execute `specs/user_function_definition.spec` through
+    the Dart runtime, normalize the returned node wrapper shape, and feed spec-produced `function_definition`
+    nodes through the staged shell projection. Corpus execution keeps the existing rule-only `parseSpec(...)` path
+    for rule-only fixtures and falls back to the staged function shell when rule-only parsing rejects top-level
+    `fn` source; no Dart raw `fn` scanner owns the semantic definition shape. The three routed fixtures pass by
+    name; focused parser/corpus/runtime/contract tests pass; Dart format, analyze, full tests, default 99-fixture
+    loader, and the 31-fixture parser-smoke window pass.
+  Commit: `DART-BACKEND-PARITY.6.2.5 - route Dart fn corpus through spec shell`
 
 - ID: `DART-BACKEND-PARITY.6.3`
   Status: `pending`
@@ -1370,7 +1377,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 14 | `DART-BACKEND-PARITY.5.1` | `done` | Minimal staged registry provider dispatches function-body parse jobs and stitches `body_ast`. |
 | 15 | `DART-BACKEND-PARITY.5.2` | `done` | Registered exact-arity user functions execute at runtime. |
 | 16 | `DART-BACKEND-PARITY.5.3` | `done` | Staged parse-job and function-registry descriptor shapes are preserved. |
-| 17 | `DART-BACKEND-PARITY.6` | `active` | Corpus parity is in progress; `.6.2.4` shipped-spec/parser-smoke is closed at 31/31 green, and the current frontier is `.6.2.5` for the routed top-level `fn` corpus fixtures. |
+| 17 | `DART-BACKEND-PARITY.6` | `active` | Corpus parity is in progress; `.6.2.4` shipped-spec/parser-smoke is closed at 31/31 green, `.6.2.5` routes the top-level `fn` fixtures through the spec-defined shell, and the current frontier is `.6.3` for the full Dart corpus gate. |
 
 ## Dart Toolchain And Package Layout
 
@@ -1671,6 +1678,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.4.6` | Focused `dart test test/runtime_interpreter_test.dart test/corpus_manifest_test.dart`; focused `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --case ds_vhistory_version_entry`; diagnostic `--execute --offset 68 --limit 31`; `dart format --set-exit-if-changed .`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart now mirrors Perl public-parser leading blank/comment-line skipping before the top rule; `ds_vhistory_version_entry` passes, ordinary scalar-held indexed reads remain public, and the parser-smoke window moves from 23/31 to 24/31 green with only PCRE structural regex blockers remaining. |
 | `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.5` | Diagnostic `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31`; final parser-smoke no-drift scans across README, mdBook, roadmaps, live docs, task tree, and Knowledge Map; Dart format/analyze/full tests; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Final no-drift closeout confirms the shipped-spec/parser-smoke window is 24/31 green, all non-PCRE residual leaves are closed, and only the seven PCRE structural regex blockers remain under `.6.2.4.6`. |
 | `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.6` | Focused `dart test test/runtime_matching_test.dart test/runtime_interpreter_test.dart test/corpus_manifest_test.dart`; diagnostic `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31`; default 99-fixture corpus loader; Dart format/analyze/full tests; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Bounded Dart structural matchers close the exact shipped recursive/DEFINE/`\K` PCRE forms, action-edge `push(child, index)` preserves EBNF logging payloads, the parser-smoke window is 31/31 green, and the frontier advances to `.6.2.5`. |
+| `2026-07-09` | `DART-BACKEND-PARITY.6.2.5` | Focused `dart test test/user_function_definition_parser_test.dart test/corpus_manifest_test.dart test/runtime_interpreter_test.dart test/action_contracts_test.dart`; routed three-fixture corpus run; Dart format/analyze/full tests; default 99-fixture corpus loader; diagnostic `--execute --offset 68 --limit 31`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart corpus execution obtains spec-produced function-definition nodes from `specs/user_function_definition.spec`, feeds them through staged function-body projection, and closes the three top-level `fn` fixtures without adding a raw Dart scanner. |
 
 ## Commit Log
 
@@ -1713,6 +1721,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.6.2.4.4.6` | `DART-BACKEND-PARITY.6.2.4.4.6 - mirror public parser leading trivia` | Dart runtime parse entrypoint now skips leading blank/comment lines like the Perl public parser, closing `ds_vhistory_version_entry` and moving parser-smoke to 24/31 green. |
 | `DART-BACKEND-PARITY.6.2.4.5` | `DART-BACKEND-PARITY.6.2.4.5 - close parser smoke no drift` | No-drift closeout confirms the non-PCRE parser-smoke residual group is complete and advances the frontier to `.6.2.4.6` for PCRE structural regex constructs. |
 | `DART-BACKEND-PARITY.6.2.4.6` | `DART-BACKEND-PARITY.6.2.4.6 - close Dart structural regex smoke` | Bounded structural regex matchers and `push(child, index)` action-edge payload extraction close the seven PCRE structural fixtures and the `.6.2.4` parser-smoke parent. |
+| `DART-BACKEND-PARITY.6.2.5` | `DART-BACKEND-PARITY.6.2.5 - route Dart fn corpus through spec shell` | Corpus execution falls back from rule-only parsing to the spec-defined user-function shell for top-level `fn` fixtures; all three routed fixtures pass. |
 
 ## Changelog
 
@@ -1803,3 +1812,6 @@ The `.4.1` runtime matching layer adds:
 - `2026-07-09`: Closed the seven PCRE structural regex blockers with bounded Dart structural matchers and
   action-edge `push(child, index)` parity. The shipped-spec/parser-smoke window is 31/31 green, `.6.2.4` is
   closed, and the frontier advances to `.6.2.5`.
+- `2026-07-09`: Closed Dart top-level `fn` corpus routing by executing `specs/user_function_definition.spec` in
+  Dart, feeding returned `function_definition` nodes through staged function-body projection, and passing the three
+  routed terse user-function fixtures. Frontier advances to `.6.3`.
