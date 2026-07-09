@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.4.4 — close Dart legacy accumulator smoke
+
+**Scope:** Dart runtime action-edge `push(Child)` accumulator convention, focused runtime/corpus tests, residual
+`ds_vhistory` routing evidence, Dart README/mdBook status, live docs, roadmap status, task-tree status, and
+Knowledge Map.
+
+**Change:** Dart now detects one-argument action-edge `push(Child)` calls whose argument names a rule, executes the
+child, refreshes `retv`, and appends the child result to the current rule accumulator. This closes
+`regdef_nested_register_fields`. `ds_vhistory_version_entry` remains routed to residual closeout because the
+checked fixture expects a null object name while the current direct-access surface reads `cur_object[1]` from the
+scalar-held `call(object)` payload as `/proj/foo`. The shipped-spec/parser-smoke diagnostic window is now 23/31
+green.
+
+**Validation:** Dart format, analyze, focused runtime/corpus tests, full Dart tests, focused structural corpus run,
+diagnostic 31-fixture parser-smoke measurement, CLI/help corpus-loader smokes, mdBook build, memory architecture,
+Knowledge Map generation/check, task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.4.3 — close Dart helper mutation surfaces
 
 **Scope:** Dart runtime statement-form helper mutation, entry/local line helpers, explicit split target

@@ -3067,6 +3067,14 @@ final class LinkedSpecRuntimeEngine {
     }
 
     if (args.length == 1 && currentEdge != null) {
+      final childRule = _variableName(args[0]);
+      if (childRule != null && compiledSpec.rule(childRule) != null) {
+        final child = childRule == currentEdge.target.label
+            ? _executeActionEdgeChild(currentEdge, context)
+            : _executeRule(childRule, 0, context);
+        context.retv = child.value;
+        return _appendArrayValue(context, ruleLabel, child.value);
+      }
       final target = _arrayTargetName(args[0]) ?? _variableName(args[0]);
       if (target == null) {
         throw RuntimeInterpreterException(

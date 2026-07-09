@@ -100,8 +100,8 @@ plus the recursive top-rule/body value fixtures `top_rule_body_recursion_sexpr`,
 `top_rule_lx_recursion_nested`, and `top_rule_lx_recursion_sequence`.
 Those fixtures verify grouped attributes, port-map scalar classification and
 concatenation, EBNF payload extraction, self-hosted `.spec` grammar AST shape, and
-minimal RTL/plugin/legacy parser reachability, hlink delimiter/link payload parity, and recursive top-rule value parity
-against the Perl reference output. `BNF.spec`,
+minimal RTL/plugin/legacy parser reachability, hlink delimiter/link payload parity, regdef accumulator shape, and
+recursive top-rule value parity against the Perl reference output. `BNF.spec`,
 `DT.spec`, `ifelse.spec`, and `operators_try.spec` remain useful diagnostic/debug-print
 examples, but their probed inputs currently return Perl `null`, so they are not promoted
 as semantic output fixtures. Richer `pplugin`, `tkgui`, `sdce`, recursive `tablegrep`,

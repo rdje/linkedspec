@@ -143,6 +143,35 @@ void main() {
     ]);
   });
 
+  test('executes legacy structural accumulator fixture', () {
+    final result = executeCorpusFixtures(
+      '../rust/linkedspec-runtime/tests/corpus',
+      caseNames: const ['regdef_nested_register_fields'],
+    );
+
+    expect(
+      result.failures
+          .map((failure) => '${failure.name}: ${failure.failure}')
+          .join('\n'),
+      isEmpty,
+    );
+    expect(result.passed, isTrue);
+    expect(result.passedCount, 1);
+    expect(result.fixture('regdef_nested_register_fields').actualValue, [
+      '?regdef_top:',
+      [
+        [
+          '?reg_def:',
+          'CTRL',
+          [
+            ['?reg_fld:', 'ENABLE', 'RW'],
+            ['?reg_fld:', 'MODE', 'RO'],
+          ],
+        ],
+      ],
+    ]);
+  });
+
   test('executes controlled fixtures against runtime output shape', () {
     final root = Directory.systemTemp.createTempSync(
       'linkedspec-dart-controlled-',

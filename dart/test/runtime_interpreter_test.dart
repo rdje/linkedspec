@@ -47,6 +47,23 @@ item:
     },
   );
 
+  test('push child convention appends to current rule accumulator', () {
+    final engine = _engine(r'''
+Top::
+ -> Item { push(Item) }
+ LX { return(copy(array(Top))) }
+
+Item: /x/ I { return("item") }
+''');
+
+    final result = engine.parse('x');
+
+    expect(result.value, ['item']);
+    expect(result.output, [
+      ['item'],
+    ]);
+  });
+
   test('executes self close edge that reuses the opener regex slot', () {
     final engine = _engine(r'''
 Top::

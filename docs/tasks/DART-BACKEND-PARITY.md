@@ -953,7 +953,9 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     all five portmap fixtures and `vhdl_library_use` pass, bringing the diagnostic window to 13/31 green. After
     `.6.2.4.4.2`, all five hlink fixtures and `tablegrep_simple_term` pass, bringing the diagnostic window to 19/31
     green. After `.6.2.4.4.3`, `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute`
-    pass, bringing the diagnostic window to 22/31 green.
+    pass, bringing the diagnostic window to 22/31 green. After `.6.2.4.4.4`,
+    `regdef_nested_register_fields` passes and `ds_vhistory_version_entry` is routed with direct-access/oracle
+    evidence, bringing the diagnostic window to 23/31 green.
   Commit: `pending`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.0`
@@ -1093,21 +1095,55 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.4.4.3 - close Dart helper mutation surfaces`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.4`
-  Status: `pending`
+  Status: `done`
   Goal: Close legacy structural smoke output parity.
   Acceptance: `regdef_nested_register_fields` and `ds_vhistory_version_entry` pass on Dart or residual mismatches
     are routed with precise structural evidence. `vhdl_library_use` passed under `.6.2.4.4.1` from the Dart
     `array(flat*)` list-context splice fix, and `tablegrep_simple_term` passed under `.6.2.4.4.2` from the
     scalar-held append fix. `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute` passed
     under `.6.2.4.4.3` from statement helper mutation/text-normalization parity.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Dart now recognizes one-argument action-edge `push(Child)` calls whose
+    argument names a rule, executes that child, refreshes `retv`, and appends the child result to the current
+    rule accumulator instead of treating the argument as the target accumulator. This closes
+    `regdef_nested_register_fields`. Focused runtime and corpus tests pass. The focused structural corpus command
+    passes `regdef_nested_register_fields` and still fails `ds_vhistory_version_entry` only on object name:
+    expected `null`, actual `/proj/foo`. Code/source evidence routes that residual to `.6.2.4.4.5`: the live spec
+    assigns `cur_object = call(object)` and reads `cur_object[1]`; Dart follows the current scalar-held
+    direct-access surface, while Rust's current `IndexedVar` implementation reads aggregate arrays and yields
+    `undef`/`null`. The diagnostic 31-fixture parser-smoke window is now 23/31 green; the seven PCRE structural
+    regex failures remain routed to `.6.2.4.6`.
+
+  ## Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — `regdef_nested_register_fields` returned `["?regdef_top:", []]` because Dart
+    appended `push(reg_def)` into the child-named accumulator instead of the current rule accumulator. The focused
+    structural corpus run also showed `ds_vhistory_version_entry` differed only at object name (`null` expected,
+    `/proj/foo` actual).
+  - [x] **ROOT CAUSE (WHY + WHERE)** — `specs/regdef.spec` uses the documented implicit-target `push(Child)`
+    convention in `regdef_top` and `reg_def`. Dart `dart/lib/src/runtime/interpreter.dart::_callPush(...)`
+    treated one-argument action-edge pushes as target appends before checking whether the argument names a rule.
+    For `ds_vhistory`, `specs/ds_vhistory.spec` uses `cur_object[1]` after `call(object)`; Dart
+    `ActionIndexedVarExpr` reads scalar-held variables first, while Rust `Expr::IndexedVar` reads aggregate arrays.
+  - [x] **FIX** — `_callPush(...)` now routes one-argument rule-name pushes through child execution plus
+    current-rule accumulator append, preserving explicit target behavior for non-rule arguments.
+  - [x] **ADDRESSED (verified)** — Focused Dart tests lock the general `push(Child)` convention and the
+    `regdef_nested_register_fields` corpus fixture. The focused structural corpus command is FAIL->PASS for
+    `regdef_nested_register_fields`.
+  - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+    focused runtime/corpus tests, full `dart test`, the focused structural corpus command, CLI/help corpus-loader
+    smokes, mdBook, repository gates, and the diagnostic 31-fixture parser-smoke run pass/measure the expected
+    boundary.
+  - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
+    `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, and
+    Knowledge Map are updated.
+  Commit: `DART-BACKEND-PARITY.6.2.4.4.4 - close Dart legacy accumulator smoke`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.5`
   Status: `pending`
   Goal: Close residual parser-smoke parity after the focused output/helper leaves.
   Acceptance: The `.6.2.4.4` residual group is green or every remaining non-PCRE blocker is split with durable
-    evidence before `.6.2.4.5` final no-drift closeout.
+    evidence before `.6.2.4.5` final no-drift closeout. First residual: decide `ds_vhistory_version_entry`
+    object-name parity, where the checked oracle expects `null` for `cur_object[1]` but Dart follows the current
+    scalar-held direct-access contract and returns `/proj/foo`.
   Verification: `pending`
   Commit: `pending`
 
@@ -1227,7 +1263,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 14 | `DART-BACKEND-PARITY.5.1` | `done` | Minimal staged registry provider dispatches function-body parse jobs and stitches `body_ast`. |
 | 15 | `DART-BACKEND-PARITY.5.2` | `done` | Registered exact-arity user functions execute at runtime. |
 | 16 | `DART-BACKEND-PARITY.5.3` | `done` | Staged parse-job and function-registry descriptor shapes are preserved. |
-| 17 | `DART-BACKEND-PARITY.6` | `active` | Corpus parity is in progress; current frontier is `.6.2.4.4.4` for legacy structural smoke output parity. |
+| 17 | `DART-BACKEND-PARITY.6` | `active` | Corpus parity is in progress; current frontier is `.6.2.4.4.5` for residual parser-smoke closeout. |
 
 ## Dart Toolchain And Package Layout
 
@@ -1523,6 +1559,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.5.2` | Focused `dart test test/runtime_interpreter_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart executes registered exact-arity user functions before helper fallback with eager caller-side args, fresh function-local stores, receiver continuation, standalone discard, arity diagnostics, and direct/mutual recursion diagnostics; frontier advances to `.5.3` descriptor-shape preservation. |
 | `2026-07-09` | `DART-BACKEND-PARITY.5.3` | Focused `dart test test/compiled_spec_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart preserves neutral staged user-function descriptor shapes through parsed functions, compiled registry jobs, descriptor functions records, stitched `body_ast`, descriptor metadata, and runtime output; `.5` closes and frontier advances to `.6` corpus parity. |
 | `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.4.3` | Focused `dart test test/runtime_interpreter_test.dart test/corpus_manifest_test.dart`; focused helper/text-normalizing corpus run; diagnostic `--execute --offset 68 --limit 31` boundary measurement; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; CLI/help corpus-loader smokes; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart statement-form helper mutation, explicit split replacement, and entry/local line helpers close `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute`; the parser-smoke window moves from 19/31 to 22/31 green and frontier advances to `.6.2.4.4.4`. |
+| `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.4.4` | Focused `dart test test/runtime_interpreter_test.dart test/corpus_manifest_test.dart`; focused structural corpus run; diagnostic `--execute --offset 68 --limit 31` boundary measurement; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; CLI/help corpus-loader smokes; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart `push(Child)` current-rule accumulator semantics close `regdef_nested_register_fields`; `ds_vhistory_version_entry` is routed to `.6.2.4.4.5` with direct-access/oracle evidence; the parser-smoke window moves from 22/31 to 23/31 green. |
 
 ## Commit Log
 
@@ -1560,6 +1597,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.5.3` | `DART-BACKEND-PARITY.5.3 - preserve Dart staged descriptor shapes` | Neutral staged user-function descriptor shapes are asserted through runtime output. |
 | `DART-BACKEND-PARITY.7.3` | `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement` | Docs-only split for per-variant LinkedSpec CLI productization. |
 | `DART-BACKEND-PARITY.6.2.4.4.3` | `DART-BACKEND-PARITY.6.2.4.4.3 - close Dart helper mutation surfaces` | Statement-form helper mutation, explicit split replacement, and entry/local line helpers close three parser-smoke fixtures. |
+| `DART-BACKEND-PARITY.6.2.4.4.4` | `DART-BACKEND-PARITY.6.2.4.4.4 - close Dart legacy accumulator smoke` | `push(Child)` current-rule accumulator semantics close `regdef_nested_register_fields`; `ds_vhistory_version_entry` is routed with direct-access/oracle evidence. |
 
 ## Changelog
 
@@ -1634,3 +1672,7 @@ The `.4.1` runtime matching layer adds:
   `substr(...)` / `regex_subst(...)`, explicit `split(array(...), ...)` replacement, and entry/local line helpers
   make `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute` pass, moving the diagnostic
   window to 22/31 green and frontier to `.6.2.4.4.4`.
+- `2026-07-09`: Closed Dart legacy accumulator parser-smoke parity; one-argument action-edge `push(Child)` now
+  appends child returns to the current rule accumulator, making `regdef_nested_register_fields` pass. The
+  diagnostic window is 23/31 green, and `ds_vhistory_version_entry` is routed to `.6.2.4.4.5` for direct-access
+  oracle/contract closeout.

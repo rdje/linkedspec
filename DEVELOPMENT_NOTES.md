@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.4.4.4 — Dart legacy structural accumulator parity):
+  Dart now implements the documented `push(Child)` convention in action-edge blocks: when the sole argument names
+  a rule, the runtime executes that child, refreshes `retv`, and appends the child result to the current rule's
+  implicit accumulator. This fixes `regdef.spec`, where `regdef_top` uses `push(reg_def)` and `reg_def` uses
+  `push(reg_fld)` before returning snapshots of their own accumulators. `regdef_nested_register_fields` now
+  passes, moving the shipped-spec/parser-smoke window to 23/31 green. `ds_vhistory_version_entry` remains routed:
+  the fixture expects `null` for the object name, while the live spec assigns `cur_object = call(object)` and then
+  reads `cur_object[1]`. Dart follows the current scalar-held direct-access surface and returns `/proj/foo`; Rust's
+  current `IndexedVar` path reads aggregate arrays only and yields `undef`/`null`. That mismatch needs an explicit
+  residual oracle/contract decision rather than a hidden Dart semantic regression.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.4.4.3 — Dart helper mutation/text-normalization parity):
   Dart now treats statement-form `substr(target, pattern, replacement, flags)` and
   `regex_subst(target, pattern, replacement, flags)` as scalar mutations, matching the Rust/Perl contract used by

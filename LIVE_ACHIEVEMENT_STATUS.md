@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.4 — close Dart legacy accumulator smoke**
+  (DONE — `regdef_nested_register_fields` now passes on Dart; `ds_vhistory_version_entry` is routed with evidence).
+
+  **Change:** Dart one-argument action-edge `push(Child)` now recognizes rule arguments, executes the child, updates
+  `retv`, and appends the child result to the current rule accumulator instead of treating the argument as the
+  target accumulator.
+
+  **Boundary:** `regdef_nested_register_fields` passes. The shipped-spec/parser-smoke diagnostic window is now
+  23/31 green. `ds_vhistory_version_entry` remains routed to `DART-BACKEND-PARITY.6.2.4.4.5` because its checked
+  null object-name oracle conflicts with the current scalar-held direct-access contract for `cur_object[1]`.
+
+  **Verification:** Dart format/analyze/full tests, focused runtime/corpus tests, focused structural corpus run,
+  diagnostic parser-smoke corpus measurement, CLI/help corpus-loader smokes, mdBook, memory architecture,
+  Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.3 — close Dart helper mutation surfaces**
   (DONE — helper mutation and text-normalization parser-smoke fixtures now pass on Dart).
 
