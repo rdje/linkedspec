@@ -6,11 +6,11 @@ void main() {
     expect(linkedSpecDartPackageName, 'linkedspec_dart');
     expect(
       linkedSpecDartScaffoldStatus,
-      'runtime interpreter with cursor rewinds ready',
+      'runtime interpreter with structured diagnostics ready',
     );
     expect(
       describeLinkedSpecDartScaffold(),
-      'linkedspec_dart runtime interpreter with cursor rewinds ready',
+      'linkedspec_dart runtime interpreter with structured diagnostics ready',
     );
   });
 }

@@ -123,6 +123,7 @@ export 'src/runtime/matching.dart'
 export 'src/runtime/interpreter.dart'
     show
         LinkedSpecRuntimeEngine,
+        RuntimeDiagnostic,
         RuntimeInterpreterException,
         RuntimeLifecycleEvent,
         RuntimeParseResult;

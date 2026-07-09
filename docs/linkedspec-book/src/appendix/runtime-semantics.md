@@ -530,17 +530,26 @@ This guard applies to all repetition modes (`:*`, `:+`, `OR+`, `AND+`, bounded f
 ### 10.1 Structured Error Payloads
 
 All errors produce structured payloads with:
+- `type`: diagnostic family, such as runtime parser or handler failure
+- `stage`: the operation that failed
+- `owner_stage`: the backend owner/stage attribution when available
 - `summary`: human-readable error description
 - `detail`: structured detail (what, where, why)
 - `handler_source_label`: which handler generated the error (the Perl reference backend spells this `LinkedSpec::generated_handler:<rule_label>`)
 - `spec_name` / `spec_path`: which `.spec` file
 - `top_rule`: the top-level entry point
+- `rule_label`: the failing rule when known
 
 ### 10.2 Non-Throwing Errors
 
 LinkedSpec uses structured error returns (`last_error` channel) rather than
 throwing exceptions for most failure paths. The caller checks for a defined
 error payload to determine success/failure.
+
+Perl exposes that channel as `runtime_ctx->{last_error}`. Dart currently exposes
+the same neutral fields as `RuntimeDiagnostic` on
+`RuntimeInterpreterException.diagnostic`; successful Dart parse output is
+unchanged when no runtime error occurs.
 
 ### 10.3 Input Validation
 

@@ -858,14 +858,86 @@ Top::
       'outer_acc',
     ]);
   });
+
+  test('attaches structured diagnostics to missing runtime rule errors', () {
+    final engine = _engine(
+      r'''
+Top::
+ /x/
+ E { return(match_text()) }
+''',
+      specName: 'diagnostic.spec',
+      specPath: 'specs/diagnostic.spec',
+    );
+
+    try {
+      engine.parse('x', topRule: 'Missing');
+      fail('missing runtime rule should throw');
+    } on RuntimeInterpreterException catch (error) {
+      expect(error.message, "rule 'Missing' is not compiled");
+      final diagnostic = error.diagnostic;
+      expect(diagnostic, isNotNull);
+      expect(diagnostic!.toJson(), {
+        'type': 'runtime_parser',
+        'stage': 'rule_lookup',
+        'owner_stage': 'dart_runtime',
+        'summary': 'Dart runtime rule lookup failed',
+        'detail': "rule 'Missing' is not compiled",
+        'spec_name': 'diagnostic.spec',
+        'spec_path': 'specs/diagnostic.spec',
+        'top_rule': 'Missing',
+        'rule_label': 'Missing',
+        'handler_source_label': 'dart_runtime:rule:Missing',
+      });
+      expect(error.toJson()['diagnostic'], diagnostic.toJson());
+    }
+  });
+
+  test('wraps action runtime failures with structured diagnostics', () {
+    final engine = _engine(r'''
+Top::
+ -> Child
+
+Child:
+ /x/
+ E { unknown_helper() }
+''');
+
+    try {
+      engine.parse('x');
+      fail('unsupported runtime helper should throw');
+    } on RuntimeInterpreterException catch (error) {
+      expect(
+        error.message,
+        "unsupported runtime helper 'unknown_helper' in rule Child",
+      );
+      final diagnostic = error.diagnostic;
+      expect(diagnostic, isNotNull);
+      expect(diagnostic!.toJson(), containsPair('stage', 'runtime_execution'));
+      expect(
+        diagnostic.toJson(),
+        containsPair('summary', 'Dart runtime interpreter failed'),
+      );
+      expect(diagnostic.toJson(), containsPair('top_rule', 'Top'));
+      expect(diagnostic.toJson(), containsPair('rule_label', 'Child'));
+      expect(
+        diagnostic.toJson(),
+        containsPair('handler_source_label', 'dart_runtime:rule:Child'),
+      );
+    }
+  });
 }
 
 LinkedSpecRuntimeEngine _engine(
   String source, {
   LinkedSpecParseMode parseMode = LinkedSpecParseMode.seek,
+  String? specName,
+  String? specPath,
 }) {
   return LinkedSpecRuntimeEngine(
     compileSpec(parseSpec(source)),
     parseMode: parseMode,
+    specName: specName,
+    specPath: specPath,
   );
 }

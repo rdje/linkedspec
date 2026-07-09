@@ -7,6 +7,7 @@ LinkedSpec Dart backend.
 Parser, compiled state, runtime matching, and first rule interpreter are available.
 Value blocks, structured controls, with-blocks, and tree traversal helpers are available.
 Explicit cursor controls and cursor/input helpers are available.
+Runtime structured diagnostics are available.
 Tracing, staged runtime execution, and corpus-output parity land in later DART-BACKEND-PARITY leaves.
 ''';
 

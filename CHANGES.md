@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.4.5.1 — add Dart runtime diagnostics
+
+**Scope:** Dart runtime diagnostic API, public package exports, focused runtime coverage, Dart README/CLI status,
+mdBook diagnostics/runtime/status/handoff text, live docs, task-tree metadata, and Knowledge Map facts.
+
+**Change:** Added `RuntimeDiagnostic` and attached it to `RuntimeInterpreterException.diagnostic`. Runtime failures
+now carry stable structured fields for `type`, `stage`, `owner_stage`, `summary`, `detail`, `top_rule`,
+`rule_label`, `handler_source_label`, and optional `spec_name` / `spec_path`; `LinkedSpecRuntimeEngine` accepts
+optional source identity and preserves richer lower-level diagnostics when wrapping failures. Successful
+`RuntimeParseResult` output remains unchanged.
+
+**Validation:** Focused runtime interpreter tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook
+build, memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine, and `git diff --check`
+pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.4.5.0 — split Dart diagnostics trace controls
 
 **Scope:** Dart backend task-tree planning, task-tree index, roadmap tracker, live docs, and Knowledge Map facts.

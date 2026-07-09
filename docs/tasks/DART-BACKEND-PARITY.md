@@ -585,12 +585,35 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.4.5.0 - split Dart diagnostics trace controls`
 
 - ID: `DART-BACKEND-PARITY.4.5.1`
-  Status: `pending`
+  Status: `done`
   Goal: Add Dart runtime structured diagnostic payloads and diagnostic-carrying runtime exceptions.
   Acceptance: Runtime failures expose stable structured fields for type, stage, owner stage, summary, detail,
     top rule, rule label, and handler/source attribution without changing successful parse output.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** `RuntimeDiagnostic` is exported from the Dart package and carried by
+    `RuntimeInterpreterException.diagnostic`. `LinkedSpecRuntimeEngine` now accepts optional `specName` /
+    `specPath`, preserves successful `RuntimeParseResult` output, attaches rule/top-rule/source attribution at
+    runtime failure boundaries, and keeps richer lower-level diagnostics when present. Focused runtime tests,
+    Dart format/analyze/full tests, corpus runner, CLI help, mdBook build, memory architecture, Knowledge Map,
+    task-tree metadata, doctrine, and `git diff --check` pass.
+  Acceptance Checklist:
+    - [x] **REPRODUCE / ISSUE** — `.4.5.0` split diagnostics from trace controls, and Dart runtime failures still
+      exposed only `RuntimeInterpreterException.message`, so callers had no stable structured equivalent of the
+      mdBook diagnostic fields.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `dart/lib/src/runtime/interpreter.dart` threw plain
+      `RuntimeInterpreterException` values from rule lookup and helper/action failure paths, and
+      `LinkedSpecRuntimeEngine.parse(...)` did not preserve top-rule/current-rule attribution when rethrowing.
+    - [x] **FIX** — Added `RuntimeDiagnostic`, diagnostic-carrying `RuntimeInterpreterException`, optional engine
+      `specName` / `specPath`, runtime context rule-stack attribution, rule-level diagnostic wrapping, parse-boundary
+      fallback wrapping, and a direct `rule_lookup` diagnostic for missing compiled rules.
+    - [x] **ADDRESSED (verified)** — `test/runtime_interpreter_test.dart` proves missing-rule diagnostics include
+      type/stage/owner/summary/detail/spec/top/rule/handler fields, and unsupported child action-helper failures are
+      wrapped with top-rule and child-rule attribution. The checks include `dart test test/runtime_interpreter_test.dart`.
+    - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+      full `dart test`, corpus-runner scaffold, CLI help checks, mdBook build, memory architecture, Knowledge Map,
+      task-tree metadata, doctrine, and `git diff --check` pass.
+    - [x] **LOCKSTEP** — Dart README/CLI status, public exports, mdBook diagnostics/runtime/status/handoff text,
+      live docs, roadmap tracker, task-tree index, Knowledge Map facts, and `MEMORY.md` are updated.
+  Commit: `DART-BACKEND-PARITY.4.5.1 - add Dart runtime diagnostics`
 
 - ID: `DART-BACKEND-PARITY.4.5.2`
   Status: `pending`
@@ -747,7 +770,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 7 | `DART-BACKEND-PARITY.4.3.6` | `done` | Helper/value no-drift closeout fixed nested value-path assignment drift. |
 | 8 | `DART-BACKEND-PARITY.4.4` | `done` | BACKTRACK/IBACKTRACK cursor rewinds and cursor/input helpers are implemented. |
 | 9 | `DART-BACKEND-PARITY.4.5.0` | `done` | Diagnostics/trace controls are split before code. |
-| 10 | `DART-BACKEND-PARITY.4.5.1` | `pending` | Add structured runtime diagnostics first. |
+| 10 | `DART-BACKEND-PARITY.4.5.1` | `done` | Structured runtime diagnostics are implemented. |
 | 11 | `DART-BACKEND-PARITY.4.5.2` | `pending` | Add trace controls, levels, event classes, and sinks. |
 | 12 | `DART-BACKEND-PARITY.4.5.3` | `pending` | Add runtime branch/lifecycle/source-boundary trace instrumentation. |
 | 13 | `DART-BACKEND-PARITY.4.5.4` | `pending` | Close diagnostics/trace no-drift before staged runtime work. |
@@ -984,15 +1007,18 @@ The `.4.1` runtime matching layer adds:
   `rewind_match_start()` / `rewind_entry_start()` anchor rewinds.
 - `2026-07-09`: `BACKTRACK-SURFACE-RUST-ALIGNMENT.2` added Dart runtime support for
   `capture_until_boundary(rule[, ...])`, matching Perl/Rust non-consuming structural boundary semantics.
+- `2026-07-09`: Dart `.4.5.1` exposes structured runtime diagnostics through
+  `RuntimeInterpreterException.diagnostic` rather than changing successful parse-result JSON or adding a Perl-style
+  mutable `last_error` channel. Optional `specName` / `specPath` engine fields carry file identity when callers
+  have it.
 
 ## Open Questions
 
-- None blocking `.4.5`. Cursor-control, boundary-capture, and cursor/input helper execution are implemented; runtime
-  diagnostics and trace controls are next.
+- None blocking `.4.5.2`. Structured runtime diagnostics are implemented; trace controls and sink behavior are next.
 
 ## Blockers
 
-- None known before `.4.5` diagnostics/trace work.
+- None known before `.4.5.2` trace controls and sink behavior.
 
 ## Verification Log
 
@@ -1017,6 +1043,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.4.3.6` | Focused `dart test test/action_ast_parser_test.dart`; focused `dart test test/runtime_interpreter_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Helper/value no-drift fixed Dart nested value-path assignment to match the Perl/Rust no-autovivification and updated-root/null contract; frontier advances to `.4.4` BACKTRACK. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.4` | Focused `dart test test/runtime_interpreter_test.dart test/runtime_matching_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart executes `BACKTRACK()` local cursor rewinds, `IBACKTRACK()` initial/entry cursor rewinds, char-based cursor/input helpers, and consume-mode matching from a rewound cursor; frontier advances to `.4.5` diagnostics/trace controls. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.5.0` | memory architecture; Knowledge Map generation/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Runtime diagnostics/trace controls are split into structured diagnostics, trace controls/sinks, runtime trace instrumentation, and no-drift closeout leaves; no source behavior changed. |
+| `2026-07-09` | `DART-BACKEND-PARITY.4.5.1` | Focused `dart test test/runtime_interpreter_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart runtime failures now carry structured `RuntimeDiagnostic` payloads through `RuntimeInterpreterException.diagnostic` without changing successful parse output; frontier advances to `.4.5.2` trace controls/sinks. |
 
 ## Commit Log
 
@@ -1045,6 +1072,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.4.3.6` | `DART-BACKEND-PARITY.4.3.6 - close Dart helper value no drift` | Nested value-path assignment no-drift; `.4.3` helper/value container closes. |
 | `DART-BACKEND-PARITY.4.4` | `DART-BACKEND-PARITY.4.4 - add Dart backtrack cursor rewinds` | BACKTRACK/IBACKTRACK cursor rewinds and cursor/input helpers. |
 | `DART-BACKEND-PARITY.4.5.0` | `DART-BACKEND-PARITY.4.5.0 - split Dart diagnostics trace controls` | Diagnostics/trace leaf split before code. |
+| `DART-BACKEND-PARITY.4.5.1` | `DART-BACKEND-PARITY.4.5.1 - add Dart runtime diagnostics` | Structured runtime diagnostics on Dart runtime exceptions. |
 | `DART-BACKEND-PARITY.7.3` | `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement` | Docs-only split for per-variant LinkedSpec CLI productization. |
 
 ## Changelog
@@ -1098,3 +1126,5 @@ The `.4.1` runtime matching layer adds:
   char-based cursor/input helper execution; frontier advances to `.4.5` for runtime diagnostics and trace controls.
 - `2026-07-09`: Split Dart runtime diagnostics/trace controls into `.4.5.1` structured diagnostics, `.4.5.2`
   trace controls/sinks, `.4.5.3` runtime trace instrumentation, and `.4.5.4` no-drift closeout.
+- `2026-07-09`: Added Dart `RuntimeDiagnostic` payloads on `RuntimeInterpreterException.diagnostic`; frontier
+  advances to `.4.5.2` for trace controls, event classes, and sink behavior.

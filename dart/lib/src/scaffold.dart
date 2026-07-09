@@ -1,6 +1,6 @@
 const linkedSpecDartPackageName = 'linkedspec_dart';
 const linkedSpecDartScaffoldStatus =
-    'runtime interpreter with cursor rewinds ready';
+    'runtime interpreter with structured diagnostics ready';
 
 String describeLinkedSpecDartScaffold() {
   return '$linkedSpecDartPackageName $linkedSpecDartScaffoldStatus';

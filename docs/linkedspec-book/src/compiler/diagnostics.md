@@ -45,6 +45,13 @@ my $parser = LinkedSpec::Get(
 
 When a structured failure occurs, `last_error` is a hashref rather than an unstructured string.
 
+For the Dart backend, the equivalent runtime surface is
+`RuntimeInterpreterException.diagnostic`. That value is a `RuntimeDiagnostic`
+with the same neutral field names (`type`, `stage`, `owner_stage`, `summary`,
+`detail`, `top_rule`, `rule_label`, `handler_source_label`, and optional
+`spec_name` / `spec_path`). Dart keeps successful parse output unchanged; the
+diagnostic object appears on runtime failures.
+
 ## Typical payload shape
 
 A payload can include fields such as:

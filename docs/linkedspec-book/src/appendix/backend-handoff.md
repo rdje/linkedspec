@@ -334,9 +334,13 @@ controls: `save_cursor()` / `restore_cursor()` for stack-based cursor restore,
 `rewind_match_start()` / `rewind_entry_start()` for lifecycle-anchor rewinds,
 `capture_until_boundary(rule[, ...])` for non-consuming structural boundary
 capture, and char-based cursor/input helpers such as `cursor_pos`,
-`cursor_rest`, `input_slice`, and `input_end_pos`.
-Tracing/diagnostics, staged function execution, and corpus-output parity remain
-later Dart leaves.
+`cursor_rest`, `input_slice`, and `input_end_pos`. Dart runtime failures now
+carry a structured `RuntimeDiagnostic` on `RuntimeInterpreterException`, with
+the neutral diagnostic fields `type`, `stage`, `owner_stage`, `summary`,
+`detail`, `top_rule`, `rule_label`, `handler_source_label`, and optional
+`spec_name` / `spec_path`. Successful parse output remains unchanged.
+Trace controls, staged function execution, and corpus-output parity remain later
+Dart leaves.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

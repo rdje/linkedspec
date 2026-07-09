@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.4.5.1 — Dart runtime diagnostics):
+  Added the first Dart runtime structured diagnostic surface. `RuntimeDiagnostic` is public and is carried by
+  `RuntimeInterpreterException.diagnostic`; it uses the neutral diagnostic fields from the mdBook contract rather
+  than a Dart-only shape. `LinkedSpecRuntimeEngine` accepts optional `specName` / `specPath` for callers that have
+  file identity. The parse boundary wraps otherwise-plain runtime exceptions with top-rule/current-rule
+  attribution, while missing compiled-rule lookup emits a more specific `rule_lookup` diagnostic. Successful
+  `RuntimeParseResult` JSON is intentionally unchanged. Trace levels, event classes, and sinks remain `.4.5.2`.
+
 - 2026-07-09 (DART-BACKEND-PARITY.4.5.0 — Dart diagnostics/trace split):
   Split the broad Dart runtime diagnostics/trace-controls leaf before implementation. `.4.5.1` now owns
   structured runtime diagnostics and diagnostic-carrying exceptions/result metadata; `.4.5.2` owns trace levels,

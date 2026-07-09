@@ -6,10 +6,62 @@ import '../ast/spec_ast.dart';
 import '../compiler/compiled_spec.dart';
 import 'matching.dart';
 
+final class RuntimeDiagnostic {
+  const RuntimeDiagnostic({
+    required this.type,
+    required this.stage,
+    required this.summary,
+    required this.detail,
+    this.ownerStage,
+    this.specName,
+    this.specPath,
+    this.topRule,
+    this.ruleLabel,
+    this.handlerSourceLabel,
+  });
+
+  final String type;
+  final String stage;
+  final String? ownerStage;
+  final String summary;
+  final String detail;
+  final String? specName;
+  final String? specPath;
+  final String? topRule;
+  final String? ruleLabel;
+  final String? handlerSourceLabel;
+
+  JsonObject toJson() => {
+    'type': type,
+    'stage': stage,
+    if (ownerStage != null) 'owner_stage': ownerStage,
+    'summary': summary,
+    'detail': detail,
+    if (specName != null) 'spec_name': specName,
+    if (specPath != null) 'spec_path': specPath,
+    if (topRule != null) 'top_rule': topRule,
+    if (ruleLabel != null) 'rule_label': ruleLabel,
+    if (handlerSourceLabel != null) 'handler_source_label': handlerSourceLabel,
+  };
+}
+
 final class RuntimeInterpreterException implements Exception {
-  const RuntimeInterpreterException(this.message);
+  const RuntimeInterpreterException(this.message, {this.diagnostic});
 
   final String message;
+  final RuntimeDiagnostic? diagnostic;
+
+  RuntimeInterpreterException withDiagnostic(RuntimeDiagnostic diagnostic) {
+    if (this.diagnostic != null) {
+      return this;
+    }
+    return RuntimeInterpreterException(message, diagnostic: diagnostic);
+  }
+
+  JsonObject toJson() => {
+    'message': message,
+    if (diagnostic != null) 'diagnostic': diagnostic!.toJson(),
+  };
 
   @override
   String toString() => 'RuntimeInterpreterException: $message';
@@ -65,11 +117,15 @@ final class LinkedSpecRuntimeEngine {
     this.compiledSpec, {
     this.parseMode = LinkedSpecParseMode.seek,
     this.maxIterations = 10000,
+    this.specName,
+    this.specPath,
   });
 
   final CompiledSpec compiledSpec;
   final LinkedSpecParseMode parseMode;
   final int maxIterations;
+  final String? specName;
+  final String? specPath;
 
   RuntimeParseResult parse(String input, {String? topRule}) {
     final label = topRule ?? _defaultTopRuleLabel();
@@ -78,21 +134,33 @@ final class LinkedSpecRuntimeEngine {
       input: input,
       parseMode: parseMode,
       maxIterations: maxIterations,
+      topRule: label,
     );
-    final result = _executeRule(label, 0, context);
-    return RuntimeParseResult(
-      matched: result.matched,
-      value: result.value,
-      output: List<Object?>.unmodifiable([_copyValue(result.value)]),
-      cursorCodeUnit: context.cursorCodeUnit,
-      cursorCharOffset: codeUnitOffsetToCharOffset(
-        input,
-        context.cursorCodeUnit,
-      ),
-      lifecycleEvents: List<RuntimeLifecycleEvent>.unmodifiable(
-        context.lifecycleEvents,
-      ),
-    );
+    try {
+      final result = _executeRule(label, 0, context);
+      return RuntimeParseResult(
+        matched: result.matched,
+        value: result.value,
+        output: List<Object?>.unmodifiable([_copyValue(result.value)]),
+        cursorCodeUnit: context.cursorCodeUnit,
+        cursorCharOffset: codeUnitOffsetToCharOffset(
+          input,
+          context.cursorCodeUnit,
+        ),
+        lifecycleEvents: List<RuntimeLifecycleEvent>.unmodifiable(
+          context.lifecycleEvents,
+        ),
+      );
+    } on RuntimeInterpreterException catch (error) {
+      throw error.withDiagnostic(
+        context.diagnostic(
+          stage: 'runtime_execution',
+          summary: 'Dart runtime interpreter failed',
+          detail: error.message,
+          ruleLabel: context.currentRuleLabel ?? label,
+        ),
+      );
+    }
   }
 
   RuntimeParseResult execute(String input, {String? topRule}) {
@@ -107,8 +175,13 @@ final class LinkedSpecRuntimeEngine {
       }
     }
     if (compiledSpec.compiledRuleOrder.isEmpty) {
-      throw const RuntimeInterpreterException(
+      throw RuntimeInterpreterException(
         'compiled spec does not contain any rules',
+        diagnostic: _diagnostic(
+          stage: 'top_rule_selection',
+          summary: 'Dart runtime top-rule selection failed',
+          detail: 'compiled spec does not contain any rules',
+        ),
       );
     }
     return compiledSpec.compiledRuleOrder.first;
@@ -121,7 +194,15 @@ final class LinkedSpecRuntimeEngine {
   ) {
     final rule = compiledSpec.rule(label);
     if (rule == null) {
-      throw RuntimeInterpreterException("rule '$label' is not compiled");
+      throw RuntimeInterpreterException(
+        "rule '$label' is not compiled",
+        diagnostic: context.diagnostic(
+          stage: 'rule_lookup',
+          summary: 'Dart runtime rule lookup failed',
+          detail: "rule '$label' is not compiled",
+          ruleLabel: label,
+        ),
+      );
     }
 
     final recursionKey = '$label:$entryRegexIndex:${context.cursorCodeUnit}';
@@ -137,6 +218,7 @@ final class LinkedSpecRuntimeEngine {
       captureStartCodeUnit:
           savedRegisters.localMatch?.codeUnitEnd ?? context.cursorCodeUnit,
     );
+    context.enterRule(label);
 
     try {
       final initReturn = _executeLifecycle(rule, 'I', context);
@@ -152,10 +234,47 @@ final class LinkedSpecRuntimeEngine {
       } on _ActionReturn catch (returnSignal) {
         return _returned(returnSignal.value);
       }
+    } on RuntimeInterpreterException catch (error) {
+      throw error.withDiagnostic(
+        context.diagnostic(
+          stage: 'runtime_execution',
+          summary: 'Dart runtime interpreter failed',
+          detail: error.message,
+          ruleLabel: label,
+        ),
+      );
     } finally {
+      context.exitRule();
       context.registers = savedRegisters;
       context.activeRuleEntries.remove(recursionKey);
     }
+  }
+
+  RuntimeDiagnostic _diagnostic({
+    required String stage,
+    required String summary,
+    required String detail,
+    String? topRule,
+    String? ruleLabel,
+    String? handlerSourceLabel,
+  }) {
+    final effectiveRule = ruleLabel ?? topRule;
+    return RuntimeDiagnostic(
+      type: 'runtime_parser',
+      stage: stage,
+      ownerStage: 'dart_runtime',
+      summary: summary,
+      detail: detail,
+      specName: specName,
+      specPath: specPath,
+      topRule: topRule,
+      ruleLabel: ruleLabel,
+      handlerSourceLabel:
+          handlerSourceLabel ??
+          (effectiveRule == null
+              ? 'dart_runtime'
+              : 'dart_runtime:rule:$effectiveRule'),
+    );
   }
 
   _RuleResult _executeBlindRule(
@@ -4106,12 +4225,14 @@ final class _RuntimeExecutionContext {
     required this.input,
     required this.parseMode,
     required this.maxIterations,
+    required this.topRule,
   }) : registers = RuntimeMatchRegisters.empty(input);
 
   final LinkedSpecRuntimeEngine engine;
   final String input;
   final LinkedSpecParseMode parseMode;
   final int maxIterations;
+  final String topRule;
   final Map<String, Object?> variables = <String, Object?>{};
   final Map<String, List<Object?>> arrays = <String, List<Object?>>{};
   final Map<String, Map<String, Object?>> hashes =
@@ -4119,10 +4240,15 @@ final class _RuntimeExecutionContext {
   final Set<String> activeRuleEntries = <String>{};
   final List<RuntimeLifecycleEvent> lifecycleEvents = <RuntimeLifecycleEvent>[];
   final List<int> cursorStack = <int>[];
+  final List<String> _ruleStack = <String>[];
 
   RuntimeMatchRegisters registers;
   Object? retv;
   int cursorCodeUnit = 0;
+
+  String? get currentRuleLabel {
+    return _ruleStack.isEmpty ? null : _ruleStack.last;
+  }
 
   int get cursorCharOffset {
     return codeUnitOffsetToCharOffset(input, cursorCodeUnit);
@@ -4138,6 +4264,34 @@ final class _RuntimeExecutionContext {
 
   Map<String, Object?> hashFor(String name) {
     return hashes.putIfAbsent(name, () => <String, Object?>{});
+  }
+
+  void enterRule(String label) {
+    _ruleStack.add(label);
+  }
+
+  void exitRule() {
+    if (_ruleStack.isNotEmpty) {
+      _ruleStack.removeLast();
+    }
+  }
+
+  RuntimeDiagnostic diagnostic({
+    required String stage,
+    required String summary,
+    required String detail,
+    String? ruleLabel,
+    String? handlerSourceLabel,
+  }) {
+    final effectiveRule = ruleLabel ?? currentRuleLabel ?? topRule;
+    return engine._diagnostic(
+      stage: stage,
+      summary: summary,
+      detail: detail,
+      topRule: topRule,
+      ruleLabel: effectiveRule,
+      handlerSourceLabel: handlerSourceLabel,
+    );
   }
 
   _ScopedVariableBinding enterScopedScalar(String name, Object? value) {
