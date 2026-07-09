@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.4.4.1 — Dart array flat list-context splice):
+  Dart now mirrors the Rust/Perl list-context rule for `array(...)`: explicit `flat(...)`, `flat_array(...)`, and
+  `flat_hash(...)` call or fluent arguments splice their returned aggregate into the constructed array, while
+  `copy(...)` and ordinary array-valued expressions remain one nested argument. This closes the portmap result
+  shape mismatch where tagged payloads such as `["foo"]` were emitted as `[["foo"]]`. The five portmap corpus
+  fixtures pass, and `vhdl_library_use` also passes because it used the same splice mechanism. The final
+  shipped-spec/parser-smoke diagnostic window moves to 13/31 green; the next residual leaf is hlink
+  delimiter/capture parity.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.4.4.0 — Dart residual parser-smoke split):
   The residual shipped-spec/parser-smoke window is now split after the `.6.2.4.3` recursive/default-mode bridge.
   The diagnostic boundary is 7/31 green. PCRE structural regex blockers stay in `.6.2.4.6`, while `.6.2.4.4`

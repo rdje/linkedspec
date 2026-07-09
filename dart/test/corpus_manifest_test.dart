@@ -16,6 +16,45 @@ void main() {
     expect(result.fixtures.first.specSource, isNotEmpty);
   });
 
+  test('executes portmap corpus fixtures with reference result shapes', () {
+    final result = executeCorpusFixtures(
+      '../rust/linkedspec-runtime/tests/corpus',
+      caseNames: const [
+        'portmap_bare',
+        'portmap_bit',
+        'portmap_slice',
+        'portmap_constant',
+        'portmap_concatenation',
+      ],
+    );
+
+    expect(
+      result.failures
+          .map((failure) => '${failure.name}: ${failure.failure}')
+          .join('\n'),
+      isEmpty,
+    );
+    expect(result.passed, isTrue);
+    expect(result.passedCount, 5);
+    expect(result.fixture('portmap_bare').actualValue, [
+      '?bare:',
+      ['foo'],
+    ]);
+    expect(result.fixture('portmap_concatenation').actualValue, [
+      '?concatenation:',
+      [
+        [
+          '?bare:',
+          ['foo'],
+        ],
+        [
+          '?bit:',
+          ['bar', '2'],
+        ],
+      ],
+    ]);
+  });
+
   test('executes controlled fixtures against runtime output shape', () {
     final root = Directory.systemTemp.createTempSync(
       'linkedspec-dart-controlled-',

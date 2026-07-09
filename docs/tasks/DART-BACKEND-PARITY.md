@@ -949,7 +949,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     pass or are routed with precise root-cause evidence after regex/helper/recursion blockers are removed,
     including any observable semantic mismatch from Dart's normalized regex dialect bridge. EBNF/spec.spec/Lispish
     PCRE structural blockers remain owned by `.6.2.4.6`.
-  Verification: Split 2026-07-09 after the `.6.2.4.3` diagnostic window reached 7/31 green.
+  Verification: Split 2026-07-09 after the `.6.2.4.3` diagnostic window reached 7/31 green. After `.6.2.4.4.1`,
+    all five portmap fixtures and `vhdl_library_use` pass, bringing the diagnostic window to 13/31 green.
   Commit: `pending`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.0`
@@ -969,14 +970,44 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.4.4.0 - split Dart residual parser-smoke parity`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.1`
-  Status: `pending`
+  Status: `done`
   Goal: Close portmap/action-edge child result shape parity.
   Acceptance: `portmap_bare`, `portmap_bit`, `portmap_slice`, `portmap_constant`, and `portmap_concatenation`
     pass on Dart or remaining mismatches are routed with Perl/Rust oracle evidence. This leaf owns scoped
     action-edge child results, passive terminal child re-search behavior, and aggregate/bare result unwrapping
     exposed by those fixtures.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Dart `array(...)` now treats explicit `flat(...)`, `flat_array(...)`, and
+    `flat_hash(...)` call or fluent arguments as list-context splices, while `copy(...)` and ordinary array-valued
+    arguments stay nested. Focused runtime tests lock `array(flat_array(...))` splicing and `array(copy(...))`
+    nesting. `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --case
+    portmap_bare --case portmap_bit --case portmap_slice --case portmap_constant --case portmap_concatenation`
+    passes 5/5. The diagnostic `--execute --offset 68 --limit 31` window is now 13/31 green; `vhdl_library_use`
+    also passes from the same list-context splice fix. Dart format/analyze/full tests pass.
+
+  ## Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — `dart run bin/corpus_runner.dart --corpus
+    ../rust/linkedspec-runtime/tests/corpus --execute --case portmap_bare --case portmap_bit --case portmap_slice
+    --case portmap_constant --case portmap_concatenation` initially failed all five portmap fixtures with an
+    extra nested array layer, for example `["?bare:", [["foo"]]]` instead of `["?bare:", ["foo"]]`.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Knowledge Map facts `rust-action-edge-child-return-dispatch` and
+    `rust-simple-spec-structural-owners`, plus `rg -n 'flat_array|array\\(' specs/portmap.spec
+    rust/linkedspec-runtime/src/engine.rs dart/lib/src/runtime/interpreter.dart`, showed the mechanism: Rust/Perl
+    treat explicit `flat*` calls as list-context splices inside `array(...)`, while Dart
+    `dart/lib/src/runtime/interpreter.dart` wrapped each evaluated constructor argument as one item.
+  - [x] **FIX** — `dart/lib/src/runtime/interpreter.dart` now detects explicit `flat`, `flat_array`, and
+    `flat_hash` call/fluent arguments before evaluation results are appended to `array(...)`, splicing lists and
+    hash key/value entries while leaving non-`flat*` aggregate values nested.
+  - [x] **ADDRESSED (verified)** — Focused Dart tests `dart test test/runtime_interpreter_test.dart
+    test/corpus_manifest_test.dart` pass; the focused portmap corpus command is FAIL->PASS with 5 passed and 0
+    failed.
+  - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+    and `dart test` all PASS; the 31-fixture diagnostic run moves from 7/31 to 13/31 green.
+  - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
+    `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, and
+    Knowledge Map are updated; `mdbook build docs/linkedspec-book`, `bash scripts/check_memory_architecture.sh`,
+    `bash knowledge-map/scripts/check_knowledge_map.sh`, `bash scripts/check_task_tree_metadata.sh`,
+    `bash scripts/check_doctrines.sh`, and `git diff --check` pass.
+  Commit: `DART-BACKEND-PARITY.6.2.4.4.1 - close Dart portmap result shapes`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.2`
   Status: `pending`
@@ -1000,8 +1031,9 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 - ID: `DART-BACKEND-PARITY.6.2.4.4.4`
   Status: `pending`
   Goal: Close legacy structural smoke output parity.
-  Acceptance: `regdef_nested_register_fields`, `tablegrep_simple_term`, `vhdl_library_use`, and
-    `ds_vhistory_version_entry` pass on Dart or residual mismatches are routed with precise structural evidence.
+  Acceptance: `regdef_nested_register_fields`, `tablegrep_simple_term`, and `ds_vhistory_version_entry` pass on
+    Dart or residual mismatches are routed with precise structural evidence. `vhdl_library_use` passed under
+    `.6.2.4.4.1` from the Dart `array(flat*)` list-context splice fix.
   Verification: `pending`
   Commit: `pending`
 

@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.1 — close Dart portmap result shapes**
+  (DONE — explicit `flat*` arguments splice correctly inside Dart `array(...)`).
+
+  **Change:** Dart `array(...)` now splices explicit `flat(...)`, `flat_array(...)`, and `flat_hash(...)` call or
+  fluent arguments into the constructed array, while `copy(...)` remains nested. This fixes the extra array layer
+  in the five portmap corpus fixtures and also turns `vhdl_library_use` green.
+
+  **Boundary:** The shipped-spec/parser-smoke diagnostic window is now 13/31 green. Active implementation work
+  advances to `DART-BACKEND-PARITY.6.2.4.4.2` for hlink delimiter/capture parity. PCRE structural regex blockers
+  remain routed to `.6.2.4.6`.
+
+  **Verification:** Dart format/analyze/full tests, focused runtime/corpus tests, focused portmap corpus run,
+  diagnostic corpus run, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.0 — split Dart residual parser-smoke parity**
   (DONE — residual shipped-spec parser-smoke work is split into narrow non-PCRE implementation leaves).
 

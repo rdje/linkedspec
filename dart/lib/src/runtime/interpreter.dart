@@ -3109,17 +3109,21 @@ final class LinkedSpecRuntimeEngine {
         return List<Object?>.unmodifiable(_arrayValueFor(context, name));
       }
     }
-    return [
-      for (final arg in args)
-        _copyValue(
-          _evaluateExpression(
-            arg,
-            context,
-            ruleLabel,
-            currentEdge: currentEdge,
-          ),
-        ),
-    ];
+    final values = <Object?>[];
+    for (final arg in args) {
+      final value = _evaluateExpression(
+        arg,
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      );
+      if (_isArraySpliceArgument(arg)) {
+        _appendArraySpliceValue(values, value);
+      } else {
+        values.add(_copyValue(value));
+      }
+    }
+    return values;
   }
 
   Object? _callHash(
@@ -3989,6 +3993,39 @@ bool _isHashSpliceArgument(ActionExpr expr) {
     }.contains(canonicalActionHelperName(calls.last.method)),
     _ => false,
   };
+}
+
+bool _isArraySpliceArgument(ActionExpr expr) {
+  return switch (expr) {
+    ActionCallExpr(:final name) => {
+      'flat',
+      'flat_array',
+      'flat_hash',
+    }.contains(canonicalActionHelperName(name)),
+    ActionFluentChainExpr(:final calls) when calls.isNotEmpty => {
+      'flat',
+      'flat_array',
+      'flat_hash',
+    }.contains(canonicalActionHelperName(calls.last.method)),
+    _ => false,
+  };
+}
+
+void _appendArraySpliceValue(List<Object?> values, Object? value) {
+  if (value is Map) {
+    for (final entry in _asHash(value).entries) {
+      values.add(entry.key);
+      values.add(_copyValue(entry.value));
+    }
+    return;
+  }
+  if (value is List) {
+    for (final item in value) {
+      values.add(_copyValue(item));
+    }
+    return;
+  }
+  values.add(_copyValue(value));
 }
 
 const _runtimePureHelperNames = <String>{

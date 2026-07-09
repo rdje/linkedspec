@@ -258,10 +258,11 @@ helper/control/receiver fixtures now pass as well; the top-level `fn` corpus
 fixtures are routed to a later function-shell corpus leaf because Dart must
 obtain spec-produced `function_definition` nodes rather than raw-scanning `fn`
 source in the corpus runner. The final shipped-spec/parser-smoke window started
-at 2/31 green and is now 7/31 green after the regex-dialect, helper/action, and
-recursive/default-mode bridges. Residual non-PCRE work is split into focused
-portmap/action-edge result shape, hlink delimiter/capture, helper mutation/text
-normalization, legacy structural smoke output, and closeout leaves. The basic regex-dialect
+at 2/31 green, reached 7/31 green after the regex-dialect, helper/action, and
+recursive/default-mode bridges, and is now 13/31 green after the portmap result-shape bridge. Residual non-PCRE
+work is split into focused hlink delimiter/capture, helper mutation/text normalization, legacy structural smoke
+output, and closeout leaves. The portmap/action-edge result-shape leaf is done: Dart `array(...)` splices explicit
+`flat*` arguments, all five portmap fixtures pass, and `vhdl_library_use` also passes. The basic regex-dialect
 bridge is now in place for POSIX classes, inline/scoped flags, possessive
 markers, lower-bound quantifiers, and Python-style named captures. Scoped flag
 groups are accepted by lifting their options to the Dart `RegExp`. The missing
@@ -404,10 +405,10 @@ Dart corpus parity has started with controlled manifest fixtures and now has saf
 named/bounded execution selection for shipped-corpus batching. The first 40
 manifest fixtures and the non-`fn` middle fixtures pass in bounded execute mode.
 The remaining shipped-spec/parser-smoke window is split after a diagnostic run
-and is now 7/31 green. The basic regex-dialect bridge, helper/action bridge, and
-recursive/default-mode parser-smoke bridge are done; the next Dart leaf is
-portmap/action-edge child result shape parity, and full shipped 99-fixture corpus
-parity remains later.
+and is now 13/31 green. The basic regex-dialect bridge, helper/action bridge,
+recursive/default-mode parser-smoke bridge, and portmap result-shape bridge are
+done; the next Dart leaf is hlink delimiter/capture parity, and full shipped
+99-fixture corpus parity remains later.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

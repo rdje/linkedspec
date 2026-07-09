@@ -24,8 +24,8 @@ The active Dart backend follows the same interpreter-first path. It now has sour
 compiled-spec state, runtime interpretation, staged user-function body parsing, exact-arity user-function runtime
 execution, and a controlled executable corpus harness whose first 40 shipped manifest fixtures plus the non-`fn`
 middle helper/control/receiver fixtures pass through bounded execute mode. The final shipped-spec/parser-smoke
-window is measured at 7/31 green and split into focused residual leaves after the regex-dialect, helper/action,
-and recursion/default-mode bridges. Basic
+window is now 13/31 green and split into focused residual leaves after the regex-dialect, helper/action,
+recursion/default-mode, and portmap result-shape bridges. Basic
 Dart regex-dialect bridging is now in place for POSIX character classes, inline/scoped flags, possessive
 quantifier markers, lower-bound `{,n}` quantifiers, and Python-style named captures. Scoped flag groups are accepted
 by lifting their options to Dart `RegExp`. The missing helper/action bridge is also in place for direct
@@ -101,10 +101,10 @@ Three backbone items tracked major structural modernization — all done:
   `array(name)`, `hash(name)`, and `copy(name)`. The first 40 shipped manifest fixtures and the non-`fn` middle
   fixtures pass through bounded corpus execute mode. Top-level `fn` corpus fixtures are routed to a later
   spec-defined function-shell corpus leaf. The final shipped-spec/parser-smoke window is split after a 2/31
-  diagnostic run and is now 7/31 green. The basic regex-dialect bridge, helper/action bridge, and
-  recursive/default-mode bridge are done, while deeper PCRE structural constructs remain routed to a follow-up; the
-  next Dart frontier is portmap/action-edge child result shape parity under the residual parser-smoke split,
-  followed by the hlink/helper/structural-output leaves, closeout, and cross-backend gates.
+  diagnostic run and is now 13/31 green. The basic regex-dialect bridge, helper/action bridge,
+  recursive/default-mode bridge, and portmap result-shape bridge are done, while deeper PCRE structural constructs
+  remain routed to a follow-up; the next Dart frontier is hlink delimiter/capture parity, followed by the
+  helper/structural-output leaves, closeout, and cross-backend gates.
 - **Non-current helper code purge** - `NONCURRENT-HELPER-CODE-PURGE` is closed. Perl source cleanup, Rust source cleanup, active test/tool/generated fixture and checked-in `.spec` migration, and final no-drift scans are complete. Retired helper-looking calls use generic unknown-helper fallback behavior, active generic-unknown-helper tests use invented helper names, and active helper-call/label/tag scans are clean.
 - **Rust generated-source breadth** — the Rust interpreter oracle is the current cross-variant parity gate. Generated Rust source already covers the current structural families and a curated corpus subset; broadening generated-source proof to the full manifest remains a separately owned future follow-on.
 - **Lifecycle-family audit** — verified complete (2026-06-14). All 7 lifecycle markers (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`) have full semicolon-light structured authoring coverage. The current separator contract is newline-or-semicolon: newlines separate top-level helper statements, and multiple same-line statements require semicolons. No lifecycle-specific semantic gaps found.

@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.4.1 — close Dart portmap result shapes
+
+**Scope:** Dart runtime array constructor list-context splicing, focused runtime/corpus tests, portmap corpus
+diagnostics, Dart README/mdBook status, live docs, roadmap status, task-tree status, and Knowledge Map.
+
+**Change:** Dart `array(...)` now treats explicit `flat(...)`, `flat_array(...)`, and `flat_hash(...)` call or
+fluent arguments as list-context splices, matching the Rust/Perl contract while leaving `copy(...)` and ordinary
+array-valued arguments nested. This removes the extra result nesting from `portmap_bare`, `portmap_bit`,
+`portmap_slice`, `portmap_constant`, and `portmap_concatenation`; `vhdl_library_use` also turns green because it
+depended on the same splice behavior. The shipped-spec/parser-smoke diagnostic window is now 13/31 green.
+
+**Validation:** Dart format, analyze, focused runtime/corpus tests, full Dart tests, focused portmap corpus run,
+diagnostic corpus run, mdBook build, memory architecture, Knowledge Map generation/check, task-tree metadata,
+doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.4.0 — split Dart residual parser-smoke parity
 
 **Scope:** Dart residual parser-smoke task-tree split, failure routing, Dart README/mdBook status, live docs,

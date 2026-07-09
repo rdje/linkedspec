@@ -18,24 +18,22 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.6.2.4.4.0` — the residual shipped-spec/parser-smoke window is split
-  after the 7/31 recursive/default-mode boundary into narrow non-PCRE implementation leaves.
-- prior_leaf: `DART-BACKEND-PARITY.6.2.4.3` — Dart resolves action-edge regex dispatch metadata for
-  tclite/default-mode close edges and scopes explicit aggregate resets per rule invocation, so tclite and recursive
-  top-rule parser-smoke fixtures pass.
+- latest_completed_leaf: `DART-BACKEND-PARITY.6.2.4.4.1` — Dart `array(...)` now splices explicit `flat*` call
+  arguments in list context, fixing all five portmap fixtures and moving the parser-smoke window to 13/31 green.
+- prior_leaf: `DART-BACKEND-PARITY.6.2.4.4.0` — the residual shipped-spec/parser-smoke window was split after the
+  7/31 recursive/default-mode boundary into narrow non-PCRE implementation leaves.
 - latest_commit: this resume block is prepared for commit
-  `DART-BACKEND-PARITY.6.2.4.4.0 - split Dart residual parser-smoke parity`; previous committed HEAD is
-  `dbde5cfd DART-BACKEND-PARITY.6.2.4.3 - close Dart recursive dispatch semantics`.
+  `DART-BACKEND-PARITY.6.2.4.4.1 - close Dart portmap result shapes`; previous committed HEAD is
+  `6f504750 DART-BACKEND-PARITY.6.2.4.4.0 - split Dart residual parser-smoke parity`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.6.2.4.4.1` after the current commit is clean.
-- next_action: resume PNT at `DART-BACKEND-PARITY.6.2.4.4.1` for portmap/action-edge child result shape parity.
-  `.6.2.4.4.2` owns hlink delimiter/capture parity, `.6.2.4.4.3` owns helper mutation/text normalization,
-  `.6.2.4.4.4` owns legacy structural smoke outputs, `.6.2.4.4.5` owns residual closeout, and `.6.2.4.6` owns
-  deeper PCRE structural regex constructs including Lispish `(?R)`, EBNF `\K`/`(?&name)`/`(?(DEFINE)...)`, and
-  spec.spec recursive block regexes. `.6.2.5` owns the routed top-level `fn` corpus-shell gap. The director's
-  single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`, not a current
-  pivot.
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.6.2.4.4.2` after the current commit is clean.
+- next_action: resume PNT at `DART-BACKEND-PARITY.6.2.4.4.2` for hlink delimiter/capture parity. `.6.2.4.4.3`
+  owns helper mutation/text normalization, `.6.2.4.4.4` owns remaining legacy structural smoke outputs,
+  `.6.2.4.4.5` owns residual closeout, and `.6.2.4.6` owns deeper PCRE structural regex constructs including
+  Lispish `(?R)`, EBNF `\K`/`(?&name)`/`(?(DEFINE)...)`, and spec.spec recursive block regexes. `.6.2.5` owns the
+  routed top-level `fn` corpus-shell gap. The director's single-source `foo.spec` parser+stimuli roundtrip idea is
+  parked in `FUTURE-PARITY-BACKLOG.8.1`, not a current pivot.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, COMMIT, task-tree index,
   active Dart task tree, ROADMAP/ROADMAP_V2, mdBook trace/runtime/status/backend-handoff chapters, relevant ADR/KM
   facts, Dart runtime/package/corpus source owners through `.6.1`, Rust staged-registry/trace references, and the
@@ -46,5 +44,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `.6.2.4.4.0` commit; do not pivot unless the repo
+- blockers: none. in_flight_uncommitted: none expected after the `.6.2.4.4.1` commit; do not pivot unless the repo
   is handoff-ready.
