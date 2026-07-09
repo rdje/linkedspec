@@ -241,7 +241,7 @@ impl std::fmt::Display for Expr {
                     if i > 0 {
                         write!(f, ", ")?;
                     }
-                    write!(f, "{} => {}", entry.key, entry.value)?;
+                    write!(f, "{} : {}", entry.key, entry.value)?;
                 }
                 write!(f, "}}")
             }
@@ -1551,38 +1551,16 @@ impl<'a> Parser<'a> {
         )
     }
 
-    fn callee_allows_keyword_args(callee: &str) -> bool {
-        matches!(callee, "declare")
-    }
-
-    fn parse_args_for_callee(&mut self, callee: &str) -> Result<Vec<Arg>, String> {
+    fn parse_args_for_callee(&mut self, _callee: &str) -> Result<Vec<Arg>, String> {
         let mut args = Vec::new();
-        let allow_keywords = Self::callee_allows_keyword_args(callee);
         loop {
             self.skip_whitespace();
             if self.pos >= self.src.len() || self.peek() == Some(')') {
                 break;
             }
 
-            // Check for keyword arg only on callees that own keyword syntax.
-            let start = self.pos;
-            let maybe_name = self.parse_name();
-            self.skip_whitespace();
-
-            if allow_keywords && !maybe_name.is_empty() && self.peek() == Some('=') {
-                self.advance(1); // consume '='
-                self.skip_whitespace();
-                let value = self.parse_expr()?;
-                args.push(Arg::Keyword {
-                    name: maybe_name,
-                    value: Box::new(value),
-                });
-            } else {
-                // Not a keyword — backtrack and parse as positional expr
-                self.pos = start;
-                let value = self.parse_expr()?;
-                args.push(Arg::Positional(value));
-            }
+            let value = self.parse_expr()?;
+            args.push(Arg::Positional(value));
 
             self.skip_whitespace();
             if self.peek() == Some(',') {
@@ -2210,25 +2188,6 @@ mod tests {
     }
 
     #[test]
-    fn parse_keyword_arg() {
-        // Parser-only legacy keyword syntax stays accepted so runtime can
-        // diagnose retired declare(...) calls instead of failing earlier.
-        let code = r#"declare(scalar, name=entry_group(1))"#;
-        let block = CodeBlock::parse(code).unwrap();
-        match &block.statements[0].expr {
-            Expr::Call { name, args } => {
-                assert_eq!(name, "declare");
-                assert_eq!(args.len(), 2);
-                match &args[1] {
-                    Arg::Keyword { name, .. } => assert_eq!(name, "name"),
-                    _ => panic!("expected keyword arg"),
-                }
-            }
-            _ => panic!("expected Call"),
-        }
-    }
-
-    #[test]
     fn parse_scalar_assignment_statement() {
         let code = r#"name = cat("o", "k"); return(name)"#;
         let block = CodeBlock::parse(code).unwrap();
@@ -2289,19 +2248,6 @@ mod tests {
                 }
             }
             _ => panic!("expected hash-index assignment"),
-        }
-    }
-
-    #[test]
-    fn parse_keyword_arg_is_not_scalar_assignment() {
-        let code = r#"declare(scalar, name=entry_group(1))"#;
-        let block = CodeBlock::parse(code).unwrap();
-        match &block.statements[0].expr {
-            Expr::Call { args, .. } => match &args[1] {
-                Arg::Keyword { name, .. } => assert_eq!(name, "name"),
-                _ => panic!("expected keyword arg"),
-            },
-            _ => panic!("expected Call"),
         }
     }
 
@@ -3213,8 +3159,8 @@ mod tests {
     }
 
     #[test]
-    fn roundtrip_keyword_arg() {
-        assert_roundtrip("declare(scalar, name=entry_group(1))");
+    fn roundtrip_current_assignment_call() {
+        assert_roundtrip("set(name, entry_group(1))");
     }
 
     #[test]

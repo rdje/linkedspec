@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.3 — purge Rust helper diagnostics**
+  (DONE Rust source recognition/diagnostic cleanup; active fixture/tool/spec migration is next).
+
+  **Change:** Rust known-call validation no longer lists retired helper spellings, the expression parser no longer
+  special-cases `declare(...)` keyword arguments, and runtime helper dispatch no longer returns name-specific
+  retired-helper diagnostics. Retired helper-looking calls now follow the generic unknown-helper fallback. Runtime
+  context internals were renamed away from public-looking retired helper names, and stale positive Rust fixtures now
+  use current colon hash-literal syntax.
+
+  **Boundary:** This closes Rust source recognition/diagnostic paths. It deliberately leaves broader active
+  test/tool/generated fixture and checked-in `.spec` spelling migration for `NONCURRENT-HELPER-CODE-PURGE.4`.
+
+  **Verification:** Rust focused retired-helper scans, `cargo fmt --manifest-path rust/Cargo.toml --all --check`,
+  `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core`,
+  `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime`, and focused runtime
+  `helpers_5_1_retired_terse_8_4_spellings_use_generic_unknown_helper_path` / `scalaref_retirement_4` runs pass.
+
 - 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.2.4 — close Perl source purge scans**
   (DONE Perl source purge verification; Rust source cleanup is next).
 

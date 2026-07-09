@@ -67,7 +67,7 @@ On no-match: `I → LS → no match → LX → E`
 The engine implements 80+ helpers covering:
 
 - **Working variables and assignment**: auto-existing scalar/array/hash variables, `name = value`, `set(target, value)`, `set(array(name), [])`, `set(hash(name), {})`
-- **Retired diagnostics**: `declare`, declaration aliases, `array_copy`, `hash_copy`, source-spelled `concat`, `push_value`, `push_nonempty`, and short wrapper aliases `a(...)` / `h(...)`
+- **Unknown helper fallback**: helper-looking calls outside the current contract return `undef` through the generic unknown-helper path rather than a name-specific retired-helper implementation
 - **Arrays**: `array`, `copy`, `push`, explicit `is_nonempty(...)` guard plus `push(...)`, `count`
 - **Scalars**: bare scalar reads, `coalesce`, `coalesce_nonempty`, `cat`
 - **Capture**: `entry_text`, `entry_group`, `entry_groups`, `entry_len`

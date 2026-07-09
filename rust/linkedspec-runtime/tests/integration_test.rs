@@ -824,8 +824,8 @@ fn regression_edge_only_child_i_return_pushes_parent_entry_match() {
 Bad:
  /(?m)^[ \t]*fn\b[^\n]*/
  I.return({
-  "type" => "function_definition_error",
-  "source_text" => entry_text()
+  "type" : "function_definition_error",
+  "source_text" : entry_text()
  })
 "#;
     let spec = parse_spec(grammar).unwrap();
@@ -1386,7 +1386,7 @@ fn top_rule_as_normal_3_2_top_lx_recursion_value_parity() {
 //
 // The Rust runtime needs NO such change: it is an interpreter, not a codegen+eval
 // backend. Working variables live in HashMaps on `RuntimeContext` that auto-vivify
-// on write (`set_scalar`/`push_value`) and read as Undef/empty when absent
+// on write (`set_scalar`/array append) and read as Undef/empty when absent
 // (`get_scalar`/`get_array`) -- so they already "auto-exist" with no declaration. And
 // `Engine::execute` builds a FRESH `RuntimeContext` per call, so a value can never
 // leak across parses (the Rust analogue of Perl's per-invocation `my` lexical).

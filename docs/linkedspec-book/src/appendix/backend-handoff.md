@@ -47,8 +47,8 @@ run. Generalized return payloads now lower typed value/call/chain nodes through 
 AST traversal before raw fallback, while narrow untyped compatibility payloads still
 remain migration debt. Assignment and mutation operator statements now consume typed AST
 target/key/value fields before legacy fallback. Helper-call statements and returns now
-consume typed AST `call` fields for `set`/`assign`, `set_key`, `push`, `push_value`,
-`push_nonempty`, `return`, and `return_undef`, and array end-mutation receiver statements
+consume typed AST `call` fields for `set`, `set_key`, `push`, `return`, and
+`return_undef`, and array end-mutation receiver statements
 consume typed AST `fluent_chain` fields. Expression-valued block side effects,
 block-local returns, and final block expressions now consume typed block/statement AST
 fields. Structured control-flow lowering now consumes typed AST fields for the if/when,
@@ -451,7 +451,7 @@ compiling a combined alternation.
 
 ### Memory Model
 LinkedSpec uses mutable working variables (scalars, arrays, hashes) within
-rule scope. These are declare-and-assign, not functional. Your runtime needs
+rule scope. These are assignment-backed, not functional. Your runtime needs
 a variable store per rule invocation.
 
 ### Determinism

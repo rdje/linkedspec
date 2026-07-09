@@ -4,7 +4,7 @@
 //! - An interpreted runtime engine that executes compiled rule specifications
 //! - A regex dispatch engine with seek/consume modes
 //! - Helper function dispatch for lifecycle code execution
-//! - Variable store (declare/assign with scoping)
+//! - Variable store (working variables and assignment with scoping)
 //!
 //! The Perl reference implementation lives at `perl/LinkedSpec.pm`.
 //! The Rust implementation is idiomatic Rust — no code generation, no eval.

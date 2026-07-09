@@ -217,12 +217,44 @@ unknown-helper handling, not through a name-specific removal compatibility layer
   Commit: `NONCURRENT-HELPER-CODE-PURGE.2.4 - close Perl source purge scans`
 
 - ID: `NONCURRENT-HELPER-CODE-PURGE.3`
-  Status: `pending`
+  Status: `done`
   Goal: Remove Rust source recognition and diagnostic paths for non-current helper spellings.
   Acceptance: Rust parser/runtime source stops branching on the removed helper names; current helpers still parse
     and execute; non-current helper-looking calls use generic unknown-helper behavior.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Rust no longer lists the retired helper spelling set as known ActionIR call
+    names, no longer keeps the `declare(...)` keyword-argument parser exception, and no longer has a
+    name-specific `retired_helper_error(...)` runtime diagnostic path. Runtime context internals were renamed away
+    from retired helper API names (`push_array_value`, `array_snapshot`, `hash_snapshot`). Retired helper-looking
+    calls now use the generic unknown-helper fallback (`undef` plus warning) in Rust, while current helpers and
+    current hash-literal display/roundtrip behavior remain green. One positive runtime/parser fixture was migrated
+    from retired `=>` hash-literal syntax to current `{ key : value }`; explicit fat-arrow retirement diagnostics
+    remain intact. Focused scans over Rust source find no removed parser hook, retired-helper diagnostic function,
+    or name-specific retired-helper sentinel; remaining retired spellings are confined to the explicit
+    generic-unknown-helper regression fixture, and unrelated `hash_literal_use_colon` diagnostics.
+  Acceptance Checklist:
+    - [x] **REPRODUCE / ISSUE** — Rust source still treated removed helper spellings as recognized helper names,
+      preserved `declare(...)` keyword argument syntax, and returned name-specific retired-helper diagnostics
+      before normal helper dispatch.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `rust/linkedspec-core/src/validation.rs` listed retired names
+      as known ActionIR calls; `rust/linkedspec-core/src/expr.rs` had a `declare` keyword-argument parse exception;
+      `rust/linkedspec-runtime/src/engine.rs` had `retired_helper_error(...)`; and runtime context internals used
+      public-looking retired helper names for append/snapshot operations.
+    - [x] **FIX** — Removed retired names from the known-call table, deleted the `declare(...)` keyword-argument
+      parser exception/tests, removed the Rust name-specific retired-helper diagnostic branch, renamed internal
+      context helpers to neutral current names, updated Rust docs, and migrated the stale positive hash-literal
+      fixture to colon syntax.
+    - [x] **ADDRESSED (verified)** — Focused scans are clean for `retired_helper_error`,
+      `callee_allows_keyword_args`, parser keyword-argument tests, and name-specific retired-helper sentinel
+      strings; only the explicit generic-unknown-helper regression fixture retains retired helper call strings.
+    - [x] **NO REGRESSION** — `cargo fmt --manifest-path rust/Cargo.toml --all --check`,
+      `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core`,
+      `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime`, and focused
+      `helpers_5_1_retired_terse_8_4_spellings_use_generic_unknown_helper_path` /
+      `scalaref_retirement_4` runs pass.
+    - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
+      roadmap tracker rows, architecture state, mdBook status/backend handoff, Knowledge Map facts,
+      `docs/TASK_TREE.md`, and this task tree are updated.
+  Commit: `NONCURRENT-HELPER-CODE-PURGE.3 - purge Rust helper diagnostics`
 
 - ID: `NONCURRENT-HELPER-CODE-PURGE.4`
   Status: `pending`
@@ -246,7 +278,7 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `NONCURRENT-HELPER-CODE-PURGE.3` | `pending` | Perl source cleanup is complete through focused scans and behavior probes; remove Rust source recognition/diagnostic paths for the same retired helper set next. |
+| 1 | `NONCURRENT-HELPER-CODE-PURGE.4` | `pending` | Perl and Rust source recognition/diagnostic paths are closed; migrate active tests, tools, generated fixtures, and checked-in `.spec` labels away from the retired helper spellings next. |
 
 ## Decisions
 
@@ -260,11 +292,11 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 
 ## Open Questions
 
-- None blocking `.2`. The Perl source owners are visible from the read-only scan and can be edited first.
+- None blocking `.4`. Source recognition/diagnostic paths are closed; fixture/tool/spec migration remains.
 
 ## Blockers
 
-- None known before `.2`.
+- None known before `.4`.
 
 ## Verification Log
 
@@ -281,6 +313,10 @@ unknown-helper handling, not through a name-specific removal compatibility layer
   over Perl source are clean, current helper lowering probes pass, retired value-position helper-looking calls use
   the generic unsupported-helper sentinel, focused ActionIR tests pass, and full phase0 remains green (`1027`
   tests).
+- `2026-07-09` — `.3` removed Rust source recognition and name-specific retired-helper diagnostic paths. Rust
+  known-call validation no longer admits retired helper spellings, `declare(...)` keyword arguments are not
+  specially parsed, retired helper-looking runtime calls use the generic unknown-helper fallback, and full
+  `linkedspec-core` plus `linkedspec-runtime` package tests pass.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
@@ -288,6 +324,7 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 | `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.2.2` | Perl syntax checks; `prove -q -Iperl t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t`; `PERL5LIB= prove -q -Iperl t/phase0_regression.t`; scoped exact scans; mdBook helper/status scan. | PASS. Source-owner paths for the removed declaration, return-family, and short-wrapper helper-call spellings are gone from the touched Perl/test surfaces. |
 | `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.2.3` | `perl -c -Iperl perl/LinkedSpec/ActionIR/Contracts.pm`; `perl -c -Iperl t/noncurrent_helper_metadata.t`; `prove -q -Iperl t/noncurrent_helper_metadata.t`; focused exact metadata scan; `prove -q -Iperl t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t t/noncurrent_helper_metadata.t`; `PERL5LIB= prove -q -Iperl t/phase0_regression.t`. | PASS. Raw-compat diagnostic labels no longer publish exact retired helper names, and metadata tests lock contract/canonical behavior against the retired helper set. |
 | `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.2.4` | Exact retired-helper call-shape scans over Perl source; direct current-helper and retired-helper behavior probes; `perl -c perl/LinkedSpec.pm`; `perl -c -Iperl t/noncurrent_helper_metadata.t`; `prove -q -Iperl t/noncurrent_helper_metadata.t t/actionir_ast_parser.t t/trace_actionir_method_lowering.t t/trace_actionir_pipeline.t`; `PERL5LIB= prove -q -Iperl t/phase0_regression.t`. | PASS. Perl source no longer has exact retired helper-call recognition paths; current helpers still lower; retired value-position helper-looking calls use the same unsupported-helper sentinel path as invented unknown helpers. |
+| `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.3` | Rust focused retired-helper scans; `cargo fmt --manifest-path rust/Cargo.toml --all --check`; `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core`; `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime`; focused runtime generic-unknown-helper and `scalaref_retirement_4` runs. | PASS. Rust source no longer recognizes or diagnoses retired helper spellings through name-specific paths; current helpers and runtime package tests remain green. |
 
 ## Commit Log
 
@@ -298,6 +335,7 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 | `NONCURRENT-HELPER-CODE-PURGE.2.2` | `NONCURRENT-HELPER-CODE-PURGE.2.2 - purge Perl declaration and return helper paths` | Perl declaration/return/wrapper helper-call source-owner paths removed. |
 | `NONCURRENT-HELPER-CODE-PURGE.2.3` | `NONCURRENT-HELPER-CODE-PURGE.2.3 - purge Perl helper metadata names` | Perl raw-compat metadata no longer uses exact retired helper names as diagnostic labels. |
 | `NONCURRENT-HELPER-CODE-PURGE.2.4` | `NONCURRENT-HELPER-CODE-PURGE.2.4 - close Perl source purge scans` | Perl source purge closeout scans/probes passed; Rust source cleanup is next. |
+| `NONCURRENT-HELPER-CODE-PURGE.3` | `NONCURRENT-HELPER-CODE-PURGE.3 - purge Rust helper diagnostics` | Rust source recognition and name-specific retired-helper diagnostics removed; fixture/tool/spec migration is next. |
 
 ## Changelog
 
@@ -305,3 +343,5 @@ unknown-helper handling, not through a name-specific removal compatibility layer
   into Perl source, Rust source, active tests/tools/spec fixtures, and final no-drift closeout.
 - `2026-07-09`: Closed the Perl source purge container through `.2.4`; active frontier advances to Rust source
   cleanup under `.3`.
+- `2026-07-09`: Closed Rust source recognition/diagnostic cleanup through `.3`; active frontier advances to
+  active test/tool/generated fixture and checked-in `.spec` migration under `.4`.

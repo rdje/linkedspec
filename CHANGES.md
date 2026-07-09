@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — NONCURRENT-HELPER-CODE-PURGE.3 — purge Rust helper diagnostics
+
+**Scope:** Rust parser/validation/runtime retired-helper source paths, Rust docs/fixtures touched by verification,
+mdBook status/backend handoff, live docs, and Knowledge Map facts for the non-current helper purge.
+
+**Change:** Rust no longer preserves retired helper spellings as known ActionIR helper names or as
+name-specific runtime diagnostics. Removed the `declare(...)` keyword-argument parser exception, deleted the
+runtime `retired_helper_error(...)` dispatch branch, and renamed internal runtime context append/snapshot helpers
+away from retired public-looking names. Retired helper-looking calls now follow the generic unknown-helper fallback
+(`undef` plus warning). Current hash-literal display now emits `{ key : value }`, and one positive Rust
+parser/runtime fixture was migrated from retired fat-arrow hash-literal syntax to current colon syntax while the
+explicit fat-arrow retirement diagnostic tests remain.
+
+**Validation:** Rust focused retired-helper scans, `cargo fmt --manifest-path rust/Cargo.toml --all --check`,
+`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core`,
+`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime`, and focused runtime
+`helpers_5_1_retired_terse_8_4_spellings_use_generic_unknown_helper_path` / `scalaref_retirement_4` runs pass.
+
 ## 2026-07-09 — NONCURRENT-HELPER-CODE-PURGE.2.4 — close Perl source purge scans
 
 **Scope:** Perl source purge closeout scans/probes, roadmap/task-tree status, mdBook project status,

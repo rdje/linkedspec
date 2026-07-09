@@ -1415,8 +1415,8 @@ Done:
     fn parse_lifecycle_compact_fluent_chain_multiline_args_as_code_block() {
         let src = r#"Top::
  I.return({
-  "type" => "function_definition_error",
-  "source_text" => entry_text()
+  "type" : "function_definition_error",
+  "source_text" : entry_text()
  })
  /x/
 "#;
@@ -1434,13 +1434,10 @@ Done:
             BodyElementKind::CodeBlock { code, .. } => {
                 assert!(code.starts_with("return({"), "{code:?}");
                 assert!(
-                    code.contains(r#""type" => "function_definition_error""#),
+                    code.contains(r#""type" : "function_definition_error""#),
                     "{code:?}"
                 );
-                assert!(
-                    code.contains(r#""source_text" => entry_text()"#),
-                    "{code:?}"
-                );
+                assert!(code.contains(r#""source_text" : entry_text()"#), "{code:?}");
             }
             _ => panic!("expected lifecycle CodeBlock"),
         }

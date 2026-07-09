@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (NONCURRENT-HELPER-CODE-PURGE.3 — Rust helper diagnostic purge):
+  Removed Rust source recognition and name-specific diagnostic paths for the retired `SPEC-FORMAT-TERSE.8`
+  helper spelling set. `linkedspec-core` no longer treats retired helper names as known ActionIR calls, the
+  expression parser no longer preserves `declare(...)` keyword-argument syntax just to reach a retired-helper
+  diagnostic, and `linkedspec-runtime` no longer has a `retired_helper_error(...)` branch ahead of generic helper
+  dispatch. Internal runtime context append/snapshot methods now use neutral names (`push_array_value`,
+  `array_snapshot`, `hash_snapshot`) rather than public-looking retired helper names. The explicit regression for
+  retired helper-looking calls now expects generic unknown-helper behavior, and a stale positive Rust fixture was
+  migrated from retired `=>` hash-literal syntax to current `{ key : value }`. Full `linkedspec-core` and
+  `linkedspec-runtime` package tests pass; active test/tool/spec fixture migration remains queued under `.4`.
+
 - 2026-07-09 (NONCURRENT-HELPER-CODE-PURGE.2.4 — Perl source purge closeout):
   Closed the Perl source purge container with focused scans and behavior probes rather than new source edits.
   Exact retired helper call-shape scans over `perl/LinkedSpec.pm` and `perl/LinkedSpec` are clean for the

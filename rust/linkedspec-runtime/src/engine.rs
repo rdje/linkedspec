@@ -2379,7 +2379,7 @@ impl Engine {
 
         let child_retv = self.execute_action_edge_child_rule(&child_label, child_regex_idx, ctx)?;
         ctx.set_retv(child_retv.clone());
-        ctx.push_value(&target_label, child_retv);
+        ctx.push_array_value(&target_label, child_retv);
         Ok(())
     }
 
@@ -2812,7 +2812,7 @@ impl Engine {
             return Ok(false);
         };
         let evaluated = self.eval_expr(value, ctx, rule_label)?;
-        ctx.push_value(name, evaluated);
+        ctx.push_array_value(name, evaluated);
         Ok(true)
     }
 
@@ -2860,7 +2860,7 @@ impl Engine {
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
         let evaluated = self.eval_expr(value, ctx, rule_label)?;
-        ctx.push_value(name, evaluated);
+        ctx.push_array_value(name, evaluated);
         Ok(RuntimeValue::Array(ctx.get_array(name)))
     }
 
@@ -3053,7 +3053,7 @@ impl Engine {
         match call.method.as_str() {
             "push_back" if call.args.len() == 1 => {
                 let value = self.eval_expr(call.args[0].value(), ctx, rule_label)?;
-                ctx.push_value(&target, value);
+                ctx.push_array_value(&target, value);
                 Ok(true)
             }
             "push_front" if call.args.len() == 1 => {
@@ -3166,11 +3166,11 @@ impl Engine {
 
         match args.as_slice() {
             [_child] => {
-                ctx.push_value(rule_label, child_value);
+                ctx.push_array_value(rule_label, child_value);
             }
             [_child, second] => {
                 if let Some(index) = Self::literal_usize_arg(second) {
-                    ctx.push_value(rule_label, Self::array_index_value(&child_value, index));
+                    ctx.push_array_value(rule_label, Self::array_index_value(&child_value, index));
                 } else {
                     let target_value = self.eval_expr(second.value(), ctx, rule_label)?;
                     let target = self.resolve_array_target(
@@ -3178,7 +3178,7 @@ impl Engine {
                         &target_value,
                         true,
                     );
-                    ctx.push_value(&target, child_value);
+                    ctx.push_array_value(&target, child_value);
                 }
             }
             [_child, target_arg, index_arg] => {
@@ -3190,7 +3190,7 @@ impl Engine {
                     &target_value,
                     true,
                 );
-                ctx.push_value(&target, Self::array_index_value(&child_value, index));
+                ctx.push_array_value(&target, Self::array_index_value(&child_value, index));
             }
             _ => return Ok(false),
         }
@@ -4431,12 +4431,12 @@ impl Engine {
         let mut current = match receiver {
             Expr::Variable { name } => Self::scalar_held_array_snapshot(ctx, name)
                 .map(RuntimeValue::Array)
-                .unwrap_or_else(|| RuntimeValue::Array(ctx.array_copy(name))),
+                .unwrap_or_else(|| RuntimeValue::Array(ctx.array_snapshot(name))),
             Expr::Call { name, args } if name == "array" && args.len() == 1 => match &args[0] {
                 Arg::Positional(Expr::Variable { name }) => {
                     Self::scalar_held_array_snapshot(ctx, name)
                         .map(RuntimeValue::Array)
-                        .unwrap_or_else(|| RuntimeValue::Array(ctx.array_copy(name)))
+                        .unwrap_or_else(|| RuntimeValue::Array(ctx.array_snapshot(name)))
                 }
                 _ => self.eval_expr(receiver, ctx, rule_label)?,
             },
@@ -4515,12 +4515,12 @@ impl Engine {
         let mut current = match receiver {
             Expr::Variable { name } => Self::scalar_held_hash_snapshot(ctx, name)
                 .map(RuntimeValue::Hash)
-                .unwrap_or_else(|| RuntimeValue::Hash(ctx.hash_copy(name))),
+                .unwrap_or_else(|| RuntimeValue::Hash(ctx.hash_snapshot(name))),
             Expr::Call { name, args } if name == "hash" && args.len() == 1 => match &args[0] {
                 Arg::Positional(Expr::Variable { name }) => {
                     Self::scalar_held_hash_snapshot(ctx, name)
                         .map(RuntimeValue::Hash)
-                        .unwrap_or_else(|| RuntimeValue::Hash(ctx.hash_copy(name)))
+                        .unwrap_or_else(|| RuntimeValue::Hash(ctx.hash_snapshot(name)))
                 }
                 _ => self.eval_expr(receiver, ctx, rule_label)?,
             },
@@ -5051,7 +5051,8 @@ impl Engine {
         // the working variable itself — mirrors the Perl reference's `^(\w+)$`
         // fallback in ValueExpr::_extract_scalar_symbol_name. The per-parse
         // RuntimeContext HashMap auto-vivifies on set_scalar, so it auto-exists
-        // with no declare and never leaks across parses (fresh ctx per execute).
+        // without a separate declaration step and never leaks across parses
+        // (fresh ctx per execute).
         if let Some(Arg::Positional(Expr::Variable { name: var_name })) = raw_args.first() {
             return var_name.clone();
         }
@@ -5141,7 +5142,7 @@ impl Engine {
             if let Some(values) = Self::scalar_held_hash_snapshot(ctx, name) {
                 return RuntimeValue::Hash(values);
             }
-            return RuntimeValue::Hash(ctx.hash_copy(name));
+            return RuntimeValue::Hash(ctx.hash_snapshot(name));
         }
 
         if matches!(evaluated, RuntimeValue::Hash(_)) {
@@ -5165,7 +5166,7 @@ impl Engine {
             if let Some(values) = Self::scalar_held_array_snapshot(ctx, name) {
                 return RuntimeValue::Array(values);
             }
-            return RuntimeValue::Array(ctx.array_copy(name));
+            return RuntimeValue::Array(ctx.array_snapshot(name));
         }
 
         if matches!(evaluated, RuntimeValue::Array(_)) {
@@ -5263,27 +5264,6 @@ impl Engine {
         self.call_helper(name, raw_args, evaluated, ctx, rule_label)
     }
 
-    fn retired_helper_error(name: &str) -> Option<String> {
-        let replacement = match name {
-            "declare" => {
-                "use auto-existing working variables; use assignment for scalars, set(array(name), []) for a rule-local array reset, or set(hash(name), {}) for a rule-local hash reset"
-            }
-            "array_copy" => "use copy(array(name)) or copy(name) for an array-first bare read",
-            "hash_copy" => "use copy(hash(name)) for a hash working variable",
-            "concat" => "use cat(...)",
-            "push_value" => "use push(...)",
-            "push_nonempty" => {
-                "use if(is_nonempty(value), push(array(name), value)) or an equivalent explicit guard"
-            }
-            "a" => "use array(...)",
-            "h" => "use hash(...)",
-            _ => return None,
-        };
-        Some(format!(
-            "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:{name}: retired helper `{name}(...)` is not supported by the Rust backend; {replacement}"
-        ))
-    }
-
     /// Dispatch a helper call by name with original args and evaluated args.
     fn call_helper(
         &self,
@@ -5294,9 +5274,6 @@ impl Engine {
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
         let name = Self::numeric_word_helper_name(name).unwrap_or(name);
-        if let Some(message) = Self::retired_helper_error(name) {
-            return Err(message);
-        }
         if Self::is_mark_capture_helper(name) {
             ctx.trace_mark(
                 "rust_runtime:engine:mark_capture",
@@ -5372,7 +5349,7 @@ impl Engine {
                                 {
                                     return Ok(RuntimeValue::Array(values));
                                 }
-                                Ok(RuntimeValue::Array(ctx.array_copy(&arr_name)))
+                                Ok(RuntimeValue::Array(ctx.array_snapshot(&arr_name)))
                             } else {
                                 let hash_name = self.resolve_hash_target(raw_args, arg, true);
                                 if !hash_name.is_empty() {
@@ -5381,7 +5358,7 @@ impl Engine {
                                     {
                                         return Ok(RuntimeValue::Hash(values));
                                     }
-                                    Ok(RuntimeValue::Hash(ctx.hash_copy(&hash_name)))
+                                    Ok(RuntimeValue::Hash(ctx.hash_snapshot(&hash_name)))
                                 } else {
                                     Ok(RuntimeValue::Array(Vec::new()))
                                 }
@@ -5396,7 +5373,7 @@ impl Engine {
             "push" => {
                 if args.len() >= 2 {
                     let arr_name = self.resolve_array_target(raw_args, &args[0], true);
-                    ctx.push_value(&arr_name, args[1].clone());
+                    ctx.push_array_value(&arr_name, args[1].clone());
                 }
                 Ok(RuntimeValue::Undef)
             }
@@ -5526,10 +5503,8 @@ impl Engine {
                 Err(format!("exit_now({status})"))
             }
             // `print` is handled by the consolidated `say | print | print_each`
-            // arm below; `hash`/`h` and `hash_copy` by the `Hash helpers` arms
-            // below. (RUST-PARITY.5.4: removed the earlier shadowing duplicates
-            // so the more complete behavior — Hash-arg merge for `hash`, raw-AST
-            // target resolution for `hash_copy` — wins.)
+            // arm below. (RUST-PARITY.5.4 removed earlier shadowing duplicates
+            // so the more complete hash behavior remains in the current arms.)
             // ── String/array index ──
             "substr" | "regex_subst" => {
                 if let Some((target, pattern_idx, replacement_idx, flags_idx)) =
@@ -7198,8 +7173,7 @@ Item: /x/ I.return("x")
     #[test]
     fn blind_call_and_rule_dispatches_children() {
         // Child dispatch is still allowed to mutate caller-visible working
-        // variables when the child does not declare a local variable with the
-        // same name.
+        // variables when the child does not bind the same name locally.
         let grammar = r#"Top::AND
  I { set(array(log), []) }
  => ChildA
@@ -7432,36 +7406,42 @@ ChildB:
     }
 
     #[test]
-    fn helpers_5_1_retired_terse_8_4_spellings_diagnose() {
-        fn execute_snippet(snippet: &str) -> Result<Value, String> {
+    fn helpers_5_1_retired_terse_8_4_spellings_use_generic_unknown_helper_path() {
+        fn execute_snippet(snippet: &str) -> Value {
             let grammar = format!("Top::\n /x/\n E {{ {snippet} }}\n");
             let spec = parse_spec(&grammar).expect("parse retired-helper fixture");
             validate(&spec).expect("validate retired-helper fixture");
             let compiled = compile(&spec).expect("compile retired-helper fixture");
-            Engine::new(compiled).execute("x")
+            Engine::new(compiled)
+                .execute("x")
+                .expect("generic unknown helper should return undef instead of failing")
         }
 
         let cases = [
-            ("declare", "declare(scalar, v)"),
-            ("array_copy", "return(array_copy(array(items)))"),
-            ("hash_copy", "return(hash_copy(hash(meta)))"),
-            ("concat", "return(concat(\"a\", \"b\"))"),
-            ("push_value", "push_value(array(items), \"a\")"),
-            ("push_nonempty", "push_nonempty(array(items), \"a\")"),
-            ("a", "return(a(items))"),
-            ("h", "return(h(meta))"),
+            ("declare(scalar, v); return(v)", serde_json::json!([null])),
+            (
+                "return(array_copy(array(items)))",
+                serde_json::json!([null]),
+            ),
+            ("return(hash_copy(hash(meta)))", serde_json::json!([null])),
+            ("return(concat(\"a\", \"b\"))", serde_json::json!([null])),
+            (
+                "push_value(array(items), \"a\"); return(copy(array(items)))",
+                serde_json::json!([[]]),
+            ),
+            (
+                "push_nonempty(array(items), \"a\"); return(copy(array(items)))",
+                serde_json::json!([[]]),
+            ),
+            ("return(a(items))", serde_json::json!([null])),
+            ("return(h(meta))", serde_json::json!([null])),
         ];
 
-        for (helper, snippet) in cases {
-            let err = match execute_snippet(snippet) {
-                Ok(value) => {
-                    panic!("retired helper {helper} must fail instead of executing: {value:?}")
-                }
-                Err(err) => err,
-            };
-            assert!(
-                err.contains(&format!("LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:{helper}")),
-                "expected retired-helper diagnostic for {helper}, got {err}"
+        for (snippet, expected) in cases {
+            assert_eq!(
+                execute_snippet(snippet),
+                expected,
+                "retired helper spelling should follow generic unknown-helper behavior: {snippet}"
             );
         }
     }

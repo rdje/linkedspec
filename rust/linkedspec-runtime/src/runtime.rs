@@ -374,7 +374,7 @@ impl RuntimeContext {
         self.arrays.insert(name.to_string(), values);
     }
 
-    pub fn push_value(&mut self, arr_name: &str, value: RuntimeValue) {
+    pub fn push_array_value(&mut self, arr_name: &str, value: RuntimeValue) {
         self.bare_kinds
             .insert(arr_name.to_string(), RuntimeVarKind::Array);
         self.arrays
@@ -417,7 +417,7 @@ impl RuntimeContext {
         self.arrays.get(name).cloned().unwrap_or_default()
     }
 
-    pub fn array_copy(&self, name: &str) -> Vec<RuntimeValue> {
+    pub fn array_snapshot(&self, name: &str) -> Vec<RuntimeValue> {
         self.get_array(name)
     }
 
@@ -451,7 +451,7 @@ impl RuntimeContext {
         }
     }
 
-    pub fn hash_copy(&self, name: &str) -> Vec<(String, RuntimeValue)> {
+    pub fn hash_snapshot(&self, name: &str) -> Vec<(String, RuntimeValue)> {
         self.get_hash(name)
     }
 
