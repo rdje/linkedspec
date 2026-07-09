@@ -248,7 +248,10 @@ manifest-backed corpus, rejects manifest drift, checks required fixture files an
 expected JSON syntax, and the Dart library now exposes `executeCorpusFixtures(...)`
 for controlled manifest fixtures. That executable harness runs fixtures through
 the Dart parser, compiler, and runtime engine, then compares engine output to the
-backend-neutral expected value wrapped one level with structural JSON equality. The
+backend-neutral expected value wrapped one level with structural JSON equality.
+It supports named and bounded fixture selection through the library and opt-in
+CLI `--execute` mode; unbounded CLI execution stays rejected until full corpus
+parity is ready. The
 future Dart closeout now includes a distinct Dart-specific LinkedSpec CLI
 entrypoint; future Julia and Lua backend plans must own their own variant-specific
 CLIs rather than relying on one ambiguous shared command. Dart
@@ -369,9 +372,9 @@ or local `return(...)`, receiver chains can continue from returned values,
 standalone calls discard their results, and direct/mutual recursion is
 diagnosed. Dart also preserves staged user-function descriptor shapes across
 parsed functions, compiled registry jobs, descriptor records, and runtime output.
-Dart corpus parity has started with controlled manifest fixtures that prove scalar
-output, nested aggregate values, rule dispatch, lifecycle output shape, and
-mismatch reporting. Full shipped 99-fixture corpus parity remains a later Dart leaf.
+Dart corpus parity has started with controlled manifest fixtures and now has safe
+named/bounded execution selection for shipped-corpus batching. Full shipped
+99-fixture corpus parity remains a later Dart leaf.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

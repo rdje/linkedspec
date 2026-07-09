@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.1 — Dart executable corpus selection):
+  Added the safe selection surface for the executable Dart corpus harness. `executeCorpusFixtures(...)` now
+  accepts `caseNames`, `offset`, and `limit` so callers can run named cases or bounded manifest slices without
+  executing all 99 fixtures. `bin/corpus_runner.dart` keeps its default command as a manifest-loader smoke, adds
+  opt-in `--execute` mode, and requires `--case` or `--limit` in CLI execution mode until full corpus parity is
+  ready. Execute mode prints each selected fixture as `PASS` or `FAIL`, reports a pass/fail summary, exits `1` for
+  selected fixture failures, and exits `64` for invalid selection flags. This is the reporting substrate for
+  `.6.2.2` and later corpus batches.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.0 — Dart corpus expansion split):
   Split the broad Dart shipped-corpus expansion into recoverable child leaves before changing runner behavior or
   fixture coverage. `.6.2.1` owns opt-in executable corpus selection/reporting while preserving the default

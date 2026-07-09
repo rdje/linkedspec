@@ -29,12 +29,13 @@ dart test
 dart run bin/linkedspec_dart.dart --help
 dart run bin/corpus_runner.dart --help
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
+dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1
 ```
 
 ## Status
 
-`DART-BACKEND-PARITY.6.1` is the current completed corpus-parity boundary;
-`.6.2` is the next shipped 99-fixture expansion frontier. The package can round-trip
+`DART-BACKEND-PARITY.6.2.1` is the current completed corpus-parity boundary;
+`.6.2.2` is the next starter corpus-batch frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -98,5 +99,10 @@ cursor-control, recursion-cutoff, and source-boundary trace events. Corpus outpu
 parity has started: `executeCorpusFixtures(...)` can run controlled manifest
 fixtures through parse/compile/runtime, compare the engine output against
 `[expected]` with structural JSON equality, and report every fixture failure.
+It now accepts named or bounded fixture selection through `caseNames`, `offset`,
+and `limit`. The corpus-runner CLI exposes that surface through opt-in
+`--execute` mode with `--case`, `--offset`, and `--limit`; unbounded CLI
+execution is rejected until the full shipped-corpus gate is ready, so the default
+99-fixture command remains a manifest-loader smoke.
 Full shipped-corpus output parity remains a later leaf in
 `docs/tasks/DART-BACKEND-PARITY.md`.

@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.1 — add Dart executable corpus selection
+
+**Scope:** Dart corpus-runner CLI, corpus execution selection API, focused corpus tests, Dart README/mdBook
+status text, live docs, task-tree status, and Knowledge Map facts.
+
+**Change:** Added named and bounded fixture selection to `executeCorpusFixtures(...)` via `caseNames`,
+`offset`, and `limit`. `bin/corpus_runner.dart` now supports opt-in `--execute` mode with repeated `--case`,
+`--offset`, and `--limit` flags, prints per-fixture pass/fail lines plus a summary, returns nonzero on selected
+fixture failures, and rejects unbounded CLI execution until the full corpus gate is ready. The default
+`--corpus <path>` command remains the stable 99-fixture manifest-loader smoke.
+
+**Validation:** Focused corpus manifest tests, Dart format/analyze/full tests, default 99-fixture corpus loader,
+corpus runner help, bounded execute-mode smoke, explicit unbounded-execute rejection, mdBook build, memory
+architecture, Knowledge Map check, task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.0 — split Dart corpus expansion batches
 
 **Scope:** Dart corpus-parity task-tree split, live docs, roadmap status, and resume pointer.

@@ -801,13 +801,20 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.0 - split Dart corpus expansion batches`
 
 - ID: `DART-BACKEND-PARITY.6.2.1`
-  Status: `pending`
+  Status: `done`
   Goal: Add opt-in executable corpus selection and reporting.
   Acceptance: Dart can execute named or safely bounded fixture subsets through the corpus runner/library, report
     pass/fail/mismatch details for every selected fixture, and keep the default 99-fixture command as a
     manifest-loader smoke until full parity is ready.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** `executeCorpusFixtures(...)` accepts `caseNames`, `offset`, and `limit`;
+    invalid named selections, duplicate names, name-plus-window combinations, invalid offsets, and invalid limits
+    diagnose as `CorpusManifestException`. `bin/corpus_runner.dart` adds opt-in `--execute` mode with repeated
+    `--case`, `--offset`, and `--limit`, prints per-fixture `PASS` / `FAIL` lines plus a summary, returns nonzero
+    for selected fixture failures, rejects unbounded CLI execution until full corpus parity is enabled, and keeps
+    default `--corpus <path>` behavior as the 99-fixture manifest-loader smoke. Focused corpus tests, Dart
+    format/analyze/full tests, default corpus loader/help, bounded execute smoke, unbounded execute rejection,
+    mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+  Commit: `DART-BACKEND-PARITY.6.2.1 - add Dart executable corpus selection`
 
 - ID: `DART-BACKEND-PARITY.6.2.2`
   Status: `pending`

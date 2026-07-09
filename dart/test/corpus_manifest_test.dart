@@ -177,6 +177,146 @@ Done::
     }
   });
 
+  test('executes named and bounded fixture subsets', () {
+    final root = Directory.systemTemp.createTempSync('linkedspec-dart-subset-');
+    try {
+      _writeManifest(root, ['mismatched', 'first', 'second']);
+      _writeFixture(
+        root,
+        'mismatched',
+        specSource: _returningSpec('actual'),
+        inputText: 'xmismatch',
+        expectedJson: 'expected',
+      );
+      _writeFixture(
+        root,
+        'first',
+        specSource: _returningSpec('first'),
+        inputText: 'xfirst',
+        expectedJson: 'first',
+      );
+      _writeFixture(
+        root,
+        'second',
+        specSource: _returningSpec('second'),
+        inputText: 'xsecond',
+        expectedJson: 'second',
+      );
+
+      final named = executeCorpusFixtures(root.path, caseNames: ['second']);
+      expect(named.passed, isTrue);
+      expect(named.results.map((result) => result.name), ['second']);
+
+      final bounded = executeCorpusFixtures(root.path, offset: 1, limit: 1);
+      expect(bounded.passed, isTrue);
+      expect(bounded.results.map((result) => result.name), ['first']);
+
+      expect(
+        () => executeCorpusFixtures(root.path, caseNames: ['missing']),
+        throwsA(
+          isA<CorpusManifestException>().having(
+            (error) => error.message,
+            'message',
+            contains('selected corpus case not found in manifest: missing'),
+          ),
+        ),
+      );
+      expect(
+        () => executeCorpusFixtures(root.path, caseNames: ['first', 'first']),
+        throwsA(
+          isA<CorpusManifestException>().having(
+            (error) => error.message,
+            'message',
+            contains('duplicate case name: first'),
+          ),
+        ),
+      );
+      expect(
+        () => executeCorpusFixtures(root.path, caseNames: ['first'], limit: 1),
+        throwsA(
+          isA<CorpusManifestException>().having(
+            (error) => error.message,
+            'message',
+            contains('cannot be combined with offset or limit'),
+          ),
+        ),
+      );
+    } finally {
+      root.deleteSync(recursive: true);
+    }
+  });
+
+  test('corpus runner execute mode reports selected fixtures', () {
+    final root = Directory.systemTemp.createTempSync('linkedspec-dart-cli-');
+    try {
+      _writeManifest(root, ['mismatched', 'passing']);
+      _writeFixture(
+        root,
+        'mismatched',
+        specSource: _returningSpec('actual'),
+        inputText: 'xfail',
+        expectedJson: 'expected',
+      );
+      _writeFixture(
+        root,
+        'passing',
+        specSource: _returningSpec('ok'),
+        inputText: 'xpass',
+        expectedJson: 'ok',
+      );
+
+      final process = Process.runSync(Platform.resolvedExecutable, [
+        'run',
+        'bin/corpus_runner.dart',
+        '--corpus',
+        root.path,
+        '--execute',
+        '--case',
+        'passing',
+      ], workingDirectory: Directory.current.path);
+
+      expect(process.exitCode, 0);
+      final stdout = process.stdout as String;
+      expect(stdout, contains('PASS passing'));
+      expect(stdout, contains('1 passed, 0 failed'));
+      expect(stdout, isNot(contains('mismatched')));
+    } finally {
+      root.deleteSync(recursive: true);
+    }
+  });
+
+  test('corpus runner execute mode requires explicit selection', () {
+    final root = Directory.systemTemp.createTempSync(
+      'linkedspec-dart-cli-selection-',
+    );
+    try {
+      _writeManifest(root, ['passing']);
+      _writeFixture(
+        root,
+        'passing',
+        specSource: _returningSpec('ok'),
+        inputText: 'xpass',
+        expectedJson: 'ok',
+      );
+
+      final process = Process.runSync(Platform.resolvedExecutable, [
+        'run',
+        'bin/corpus_runner.dart',
+        '--corpus',
+        root.path,
+        '--execute',
+      ], workingDirectory: Directory.current.path);
+
+      expect(process.exitCode, 64);
+      expect(
+        process.stderr as String,
+        contains('--execute requires --case or --limit'),
+      );
+    } finally {
+      root.deleteSync(recursive: true);
+    }
+  });
+
   test('detects missing fixture directory', () {
     final root = Directory.systemTemp.createTempSync(
       'linkedspec-dart-missing-',
@@ -272,6 +412,16 @@ void _writeManifest(Directory root, List<String> cases, {int? caseCount}) {
     'cases': cases,
   };
   _childFile(root, 'manifest.json').writeAsStringSync(jsonEncode(manifest));
+}
+
+String _returningSpec(String value) {
+  return '''
+Top::
+ /x/ -> Done { return("$value") }
+
+Done::
+ /[a-z]+/
+''';
 }
 
 void _writeFixture(

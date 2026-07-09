@@ -159,13 +159,77 @@ CorpusValidationResult loadCorpusFixtures(String corpusPath) {
 CorpusExecutionResult executeCorpusFixtures(
   String corpusPath, {
   LinkedSpecParseMode parseMode = LinkedSpecParseMode.seek,
+  Iterable<String> caseNames = const <String>[],
+  int offset = 0,
+  int? limit,
 }) {
   final validation = loadCorpusFixtures(corpusPath);
+  final selectedFixtures = _selectExecutionFixtures(
+    validation.fixtures,
+    caseNames: caseNames,
+    offset: offset,
+    limit: limit,
+  );
   final results = [
-    for (final fixture in validation.fixtures)
+    for (final fixture in selectedFixtures)
       _executeFixture(fixture, parseMode: parseMode),
   ];
   return CorpusExecutionResult(validation: validation, results: results);
+}
+
+List<CorpusFixture> _selectExecutionFixtures(
+  List<CorpusFixture> fixtures, {
+  required Iterable<String> caseNames,
+  required int offset,
+  required int? limit,
+}) {
+  final requestedNames = caseNames.toList(growable: false);
+  if (offset < 0) {
+    throw const CorpusManifestException(
+      'corpus execution offset must be zero or greater',
+    );
+  }
+  if (limit != null && limit <= 0) {
+    throw const CorpusManifestException(
+      'corpus execution limit must be greater than zero',
+    );
+  }
+
+  if (requestedNames.isNotEmpty) {
+    if (offset != 0 || limit != null) {
+      throw const CorpusManifestException(
+        'corpus execution case selection cannot be combined with offset or limit',
+      );
+    }
+    final byName = {for (final fixture in fixtures) fixture.name: fixture};
+    final seen = <String>{};
+    final selected = <CorpusFixture>[];
+    for (final name in requestedNames) {
+      if (!seen.add(name)) {
+        throw CorpusManifestException(
+          'corpus execution selection contains duplicate case name: $name',
+        );
+      }
+      final fixture = byName[name];
+      if (fixture == null) {
+        throw CorpusManifestException(
+          'selected corpus case not found in manifest: $name',
+        );
+      }
+      selected.add(fixture);
+    }
+    return selected;
+  }
+
+  if (offset >= fixtures.length) {
+    throw CorpusManifestException(
+      'corpus execution offset $offset is outside fixture count ${fixtures.length}',
+    );
+  }
+  final unboundedEnd = fixtures.length;
+  final boundedEnd = limit == null ? unboundedEnd : offset + limit;
+  final end = boundedEnd > unboundedEnd ? unboundedEnd : boundedEnd;
+  return List<CorpusFixture>.unmodifiable(fixtures.sublist(offset, end));
 }
 
 CorpusFixtureExecutionResult _executeFixture(
