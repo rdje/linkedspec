@@ -434,6 +434,15 @@ the current corpus gate when it produces structurally equivalent output for
 every manifest entry, and its runner rejects missing fixture directories or
 stale extra fixture directories.
 
+For the Dart backend, the focused local gate is:
+
+```bash
+bash tools/run_dart_local.sh
+```
+
+The core local CI gate remains independent of Dart SDK availability by default; set
+`LINKEDSPEC_RUN_DART=1` when invoking `tools/run_ci_local.sh` to include the Dart gate.
+
 The checked-in Rust corpus is kept green while parity work lands incrementally. It now has
 99 fixtures, including the `with(...) { ... }` helper, `.with() { ... }` receiver trailing block case, hash-tree traversal receiver block case, and array-tree traversal receiver block case; the two minimal shipped `tclite.spec` cases restored by the
 default-mode repetition parity work; the shipped `Lispish.spec` `lispish_x_y` case now

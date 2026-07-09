@@ -130,4 +130,12 @@ log "RAM ${GUARD_PCT}% used — within threshold (${DANGER_PCT}%)"
 log "running phase0 regression suite"
 prove -v -Iperl t/phase0_regression.t
 
+if [[ "${LINKEDSPEC_RUN_DART:-0}" == "1" ]]; then
+ log "running optional Dart local gate (LINKEDSPEC_RUN_DART=1)"
+ require_tracked_file tools/run_dart_local.sh
+ bash "$REPO_ROOT/tools/run_dart_local.sh"
+else
+ log "skipping optional Dart local gate (set LINKEDSPEC_RUN_DART=1 to include it when a Dart SDK is available)"
+fi
+
 log "local CI gate passed"

@@ -18,18 +18,18 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.6.3` — Dart full-manifest corpus execution is 99/99 green; CLI
-  `--execute` without a selector now runs the checked-in corpus in order while drift guards stay strict.
-- prior_leaf: `DART-BACKEND-PARITY.6.2.5` — Dart routes top-level `fn` corpus fixtures through the spec-defined
-  `user_function_definition.spec` shell, stages function bodies, and passes the three routed fixtures.
+- latest_completed_leaf: `DART-BACKEND-PARITY.6.4` — Dart parity is wired into local verification through
+  `tools/run_dart_local.sh` and optional `LINKEDSPEC_RUN_DART=1` integration in `tools/run_ci_local.sh`.
+- prior_leaf: `DART-BACKEND-PARITY.6.3` — Dart full-manifest corpus execution is 99/99 green; CLI `--execute`
+  without a selector now runs the checked-in corpus in order while drift guards stay strict.
 - latest_commit: this resume block is prepared for commit
-  `DART-BACKEND-PARITY.6.3 - close full Dart corpus gate`; previous committed HEAD is
-  `74eb6163 DART-BACKEND-PARITY.6.2.5 - route Dart fn corpus through spec shell`.
+  `DART-BACKEND-PARITY.6.4 - wire Dart local verification`; previous committed HEAD is
+  `7f7d3fe2 DART-BACKEND-PARITY.6.3 - close full Dart corpus gate`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.6.4` after the current commit is clean.
-- next_action: resume PNT at `DART-BACKEND-PARITY.6.4` to wire the green Dart corpus gate into the local
-  verification story without depending on absent SDK state. The director's single-source `foo.spec`
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.7.1` after the current commit is clean.
+- next_action: resume PNT at `DART-BACKEND-PARITY.7.1` for Dart mdBook usage/status/handoff documentation
+  closeout now that `.6` corpus parity and verification wiring are complete. The director's single-source `foo.spec`
   parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`; the corrected AND/OR edge-default model
   is parked in `.9.1`; neither is a current pivot.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, COMMIT, task-tree index,
@@ -42,5 +42,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `DART-BACKEND-PARITY.6.3` commit; do not pivot unless the repo
+- blockers: none. in_flight_uncommitted: none expected after the `DART-BACKEND-PARITY.6.4` commit; do not pivot unless the repo
   is handoff-ready.

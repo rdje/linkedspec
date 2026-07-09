@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.4 — wire Dart local verification
+
+**Scope:** Dart local verification script, optional local-CI integration, root/Dart READMEs, mdBook local-CI and
+backend-handoff docs, live docs, roadmap status, resume pointer, and Knowledge Map.
+
+**Change:** Added `tools/run_dart_local.sh` as the focused Dart gate: format, analyzer, full Dart tests, CLI help,
+and the full 99-fixture corpus execution. `tools/run_ci_local.sh` remains core-only by default but can include the
+Dart gate with `LINKEDSPEC_RUN_DART=1`, avoiding a hard dependency on Dart SDK availability in every checkout.
+
+**Validation:** The focused Dart gate passes; the default local CI gate still skips Dart unless opted in; Dart
+format/analyze/full tests, full 99-fixture corpus execution, mdBook, memory architecture, Knowledge Map
+generation/check, task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.3 — close full Dart corpus gate
 
 **Scope:** Dart corpus-runner CLI gate promotion, corpus manifest guard tests, full checked-in corpus execution

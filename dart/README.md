@@ -14,8 +14,8 @@ execution, plus value-block/control/tree helper execution, explicit
 cursor-control behavior, structured runtime diagnostics, and trace
 controls/sinks plus runtime trace events, staged function-body dispatch, and
 registered user-function runtime execution. Its corpus layer now has a
-manifest-backed executable harness for controlled proof fixtures before full
-shipped-corpus parity lands.
+manifest-backed executable harness whose checked-in 99-fixture corpus gate is
+green.
 
 ## Commands
 
@@ -33,6 +33,8 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 40 --limit 17
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31
+dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute
+bash ../tools/run_dart_local.sh
 ```
 
 ## Status

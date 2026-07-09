@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.4 — wire Dart local verification**
+  (DONE — focused Dart gate is documented and optional from local CI; frontier advances to `.7.1`).
+
+  **Change:** Added `tools/run_dart_local.sh` for Dart format/analyze/tests/CLI help/full-corpus execution and
+  wired it into `tools/run_ci_local.sh` behind `LINKEDSPEC_RUN_DART=1`.
+
+  **Boundary:** The canonical local CI gate stays core-only by default, so checkouts without Dart SDK availability
+  still have a reliable regression path. Dart checks are explicit through the focused script or the opt-in env var.
+
+  **Verification:** Focused Dart gate, default local-CI skip behavior, Dart format/analyze/full tests, full
+  99-fixture corpus execution, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.3 — close full Dart corpus gate**
   (DONE — the checked-in Dart corpus executes 99/99 green; frontier advances to verification wiring `.6.4`).
 

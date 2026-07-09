@@ -63,8 +63,8 @@ or duplicate case names, count drift, directory drift, missing files, output
 mismatches, selected CLI execution, and full-manifest CLI execution.
 
 `DART-BACKEND-PARITY.6.1` proved execution with controlled temporary fixtures.
-The next `.6` leaf is verification-story wiring for the already-green corpus
-gate.
+`DART-BACKEND-PARITY.6.4` then wires that green corpus gate into the focused
+Dart local verification script and optional local-CI path.
 
 Related facts: [[dart-backend-scaffold-package]],
 [[dart-runtime-rule-interpreter]], [[dart-starter-corpus-batch]],

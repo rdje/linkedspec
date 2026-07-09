@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.4 — Dart local verification gate):
+  Dart parity now has a focused repo-owned local gate at `tools/run_dart_local.sh`. The script runs Dart format,
+  analyzer, full tests, CLI help checks, and the 99-fixture corpus execution. `tools/run_ci_local.sh` deliberately
+  remains core-only by default so the canonical Perl gate does not fail in checkouts without a Dart SDK; setting
+  `LINKEDSPEC_RUN_DART=1` includes the Dart gate. This closes the `.6` verification-story leaf without making Dart
+  SDK availability a hidden precondition for the existing local CI contract.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.3 — full Dart corpus gate):
   The Dart corpus runner is now promoted from bounded execution batches to the full checked-in manifest gate.
   `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute` runs all 99 fixtures

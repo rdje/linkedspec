@@ -29,6 +29,22 @@ The GitHub workflow is intentionally kept as a thin wrapper around the same comm
 
 That means local validation and hosted validation are intentionally not two separate systems when hosted CI is enabled.
 
+## Optional Dart Gate
+
+The Dart backend has its own focused local gate:
+
+```bash
+bash tools/run_dart_local.sh
+```
+
+It runs Dart formatting, analyzer checks, the full Dart test suite, Dart CLI help checks, and the full
+99-fixture corpus execution. The canonical local gate does not require a Dart SDK by default. When a checkout has
+Dart installed and you want one command to include both gates, run:
+
+```bash
+LINKEDSPEC_RUN_DART=1 bash tools/run_ci_local.sh
+```
+
 ## Hosted GitHub Actions status
 
 Hosted GitHub Actions CI is currently disabled for cost-control reasons.
@@ -53,7 +69,8 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
 - runs `scripts/check_diagnosis_evidence.sh` through the doctrine driver; in a pre-commit context this requires
   staged code/spec/test/tooling changes to carry a task-tree acceptance checklist with LinkedSpec-tool evidence
   signatures,
-- enforces a RAM usage guard that refuses to run the test suite when system memory utilization exceeds 88%, preventing resource-exhaustion failures from masking real test results.
+- enforces a RAM usage guard that refuses to run the test suite when system memory utilization exceeds 88%, preventing resource-exhaustion failures from masking real test results,
+- optionally runs `tools/run_dart_local.sh` when `LINKEDSPEC_RUN_DART=1` is set.
 
 The command sequence includes:
 
