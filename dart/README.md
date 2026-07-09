@@ -31,8 +31,8 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.4.5.3` is the current completed runtime boundary; `.4.5.4`
-is the next diagnostics/trace no-drift frontier. The package can round-trip
+`DART-BACKEND-PARITY.4.5.4` is the current completed diagnostics/trace boundary; `.5.1`
+is the next staged-runtime frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -76,6 +76,6 @@ also has `LinkedSpecTraceConfig`, `LinkedSpecTraceLevel`,
 `LinkedSpecTraceEmitter`, event/scope primitives, stdout/routed-file/mirror sink
 behavior with reset/truncate, and traced runtime entrypoints that preserve parse
 output while emitting parse/rule scopes plus regex, child-dispatch, lifecycle,
-cursor-control, recursion-cutoff, and source-boundary trace events. Diagnostics/
-trace no-drift, staged runtime execution, and corpus output parity remain later
-leaves in `docs/tasks/DART-BACKEND-PARITY.md`.
+cursor-control, recursion-cutoff, and source-boundary trace events. Staged
+runtime execution and corpus output parity remain later leaves in
+`docs/tasks/DART-BACKEND-PARITY.md`.

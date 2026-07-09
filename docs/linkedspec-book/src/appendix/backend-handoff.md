@@ -347,8 +347,8 @@ parse-scope event. Dart runtime tracing now also emits rule scopes, regex
 match/no-match decisions, action/blind child-dispatch decisions, lifecycle block
 marks, cursor-control marks, recursion-cutoff decisions, and
 `capture_until_boundary(...)` source-boundary marks while keeping untraced
-execution output-compatible. Diagnostics/trace no-drift, staged function
-execution, and corpus-output parity remain later Dart leaves.
+execution output-compatible. The diagnostics/trace no-drift sweep is closed.
+Staged function execution and corpus-output parity remain later Dart leaves.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

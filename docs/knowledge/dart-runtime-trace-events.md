@@ -30,7 +30,9 @@ When tracing is enabled, `LinkedSpecRuntimeEngine` now emits:
 
 The instrumentation is trace-only. Without an emitter, the runtime stays quiet.
 Focused trace tests compare traced and untraced parse-result JSON to lock output
-preservation.
+preservation. `DART-BACKEND-PARITY.4.5.4` closes the follow-on no-drift sweep
+for this diagnostics/trace boundary.
 
 Related facts: [[dart-trace-controls-sinks]], [[dart-runtime-diagnostics-trace-split]],
-[[trace-cross-variant-capability-contract]], [[rust-trace-runtime-branch-events]].
+[[dart-diagnostics-trace-boundary]], [[trace-cross-variant-capability-contract]],
+[[rust-trace-runtime-branch-events]].

@@ -565,13 +565,17 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.4.4 - add Dart backtrack cursor rewinds`
 
 - ID: `DART-BACKEND-PARITY.4.5`
-  Status: `active`
+  Status: `done`
   Goal: Implement runtime diagnostics and trace controls.
   Children: `.4.5.0`, `.4.5.1`, `.4.5.2`, `.4.5.3`, `.4.5.4`
   Acceptance: Dart exposes default-quiet trace controls, event classes, sink behavior, branch/lifecycle
     trace points, and structured errors equivalent to the documented cross-variant trace contract.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** `.4.5.1` added structured runtime diagnostics, `.4.5.2` added trace
+    controls/sinks/events, `.4.5.3` added runtime trace instrumentation, and `.4.5.4` closed the no-drift sweep.
+    Dart README/CLI/scaffold status, mdBook trace/status/handoff pages, live docs, task-tree index, roadmap, and
+    Knowledge Map agree that diagnostics/trace work is implemented while staged runtime and corpus parity remain
+    later leaves.
+  Commit: `DART-BACKEND-PARITY.4.5.4 - close Dart diagnostics trace no drift`
 
 - ID: `DART-BACKEND-PARITY.4.5.0`
   Status: `done`
@@ -678,13 +682,31 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.4.5.3 - add Dart runtime trace events`
 
 - ID: `DART-BACKEND-PARITY.4.5.4`
-  Status: `pending`
+  Status: `done`
   Goal: Close Dart runtime diagnostics/trace no-drift.
   Acceptance: Dart README, CLI help/status text, mdBook trace/runtime/backend-handoff pages, live docs, task-tree
     index, and Knowledge Map agree on the implemented diagnostics/trace boundary before `.5` staged runtime work
     begins.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Audited Dart README, CLI help/scaffold status, mdBook trace/status/handoff
+    pages, live docs, roadmap, task-tree index, and Knowledge Map facts for diagnostics/trace drift. They now agree
+    that Dart has structured runtime diagnostics, trace controls/sinks/events, and runtime trace events, does not
+    claim full backend parity, and advances to `.5.1` staged registry work. Verification covers CLI help,
+    mdBook build, Knowledge Map regeneration/check, memory architecture, task-tree metadata, doctrine, and
+    `git diff --check`.
+  Acceptance Checklist:
+    - [x] **REPRODUCE / ISSUE** — `.4.5.3` implemented runtime trace events, leaving several live status surfaces
+      intentionally pointing at `.4.5.4` for the final no-drift sweep.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: the implementation leaves updated their own status text, but
+      the `.4.5` parent, active task-tree frontier, roadmap row, README boundary, mdBook trace/status/handoff
+      paragraphs, live docs, MEMORY pointer, and Knowledge Map facts still needed a single closeout pass.
+    - [x] **FIX** — Marked `.4.5` and `.4.5.4` done, advanced the active frontier to `.5.1`, and aligned Dart
+      status text around the completed diagnostics/trace boundary and remaining staged-runtime/corpus leaves.
+    - [x] **ADDRESSED (verified)** — Focused drift scans and the standard docs/KM/doctrine gates pass.
+    - [x] **NO REGRESSION** — No runtime source changed in this leaf; CLI help, mdBook, Knowledge Map, memory
+      architecture, task-tree metadata, doctrine, and `git diff --check` pass.
+    - [x] **LOCKSTEP** — Dart README/CLI/scaffold status, mdBook trace/status/handoff text, live docs, roadmap
+      tracker, task-tree index, Knowledge Map facts, and `MEMORY.md` are updated.
+  Commit: `DART-BACKEND-PARITY.4.5.4 - close Dart diagnostics trace no drift`
 
 - ID: `DART-BACKEND-PARITY.5`
   Status: `pending`
@@ -818,7 +840,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 10 | `DART-BACKEND-PARITY.4.5.1` | `done` | Structured runtime diagnostics are implemented. |
 | 11 | `DART-BACKEND-PARITY.4.5.2` | `done` | Trace controls, levels, event classes, and sinks are implemented. |
 | 12 | `DART-BACKEND-PARITY.4.5.3` | `done` | Runtime branch/lifecycle/source-boundary trace instrumentation is implemented. |
-| 13 | `DART-BACKEND-PARITY.4.5.4` | `pending` | Close diagnostics/trace no-drift before staged runtime work. |
+| 13 | `DART-BACKEND-PARITY.4.5.4` | `done` | Diagnostics/trace no-drift is closed. |
+| 14 | `DART-BACKEND-PARITY.5.1` | `pending` | Implement the minimal staged registry provider for function-body parse jobs. |
 
 ## Dart Toolchain And Package Layout
 
@@ -1059,15 +1082,17 @@ The `.4.1` runtime matching layer adds:
 - `2026-07-09`: Dart `.4.5.2` adds trace controls and sinks without claiming full trace parity.
 - `2026-07-09`: Dart `.4.5.3` adds runtime interpreter trace events for rule scopes, regex matching,
   action/blind child dispatch, lifecycle blocks, cursor controls, recursion cutoffs, and source-boundary capture.
+- `2026-07-09`: Dart `.4.5.4` closes diagnostics/trace no-drift. Dart status surfaces agree that diagnostics,
+  trace controls/sinks/events, and runtime trace events are implemented; staged registry/user-function runtime
+  work remains `.5`.
 
 ## Open Questions
 
-- None blocking `.4.5.4`. Runtime diagnostics, trace controls/sinks, and runtime trace events are implemented;
-  no-drift closeout is next.
+- None blocking `.5.1`. Runtime diagnostics/trace work is closed; staged registry work is next.
 
 ## Blockers
 
-- None known before `.4.5.4` diagnostics/trace no-drift closeout.
+- None known before `.5.1` staged registry provider work.
 
 ## Verification Log
 
@@ -1095,6 +1120,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.4.5.1` | Focused `dart test test/runtime_interpreter_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart runtime failures now carry structured `RuntimeDiagnostic` payloads through `RuntimeInterpreterException.diagnostic` without changing successful parse output; frontier advances to `.4.5.2` trace controls/sinks. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.5.2` | Focused `dart test test/trace_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart trace levels, config/env controls, event primitives, stdout/route/mirror sinks, reset/truncate, and traced parse entrypoints are implemented; frontier advances to `.4.5.3` runtime trace instrumentation. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.5.3` | Focused `dart test test/trace_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart runtime tracing emits parse/rule scopes, regex decisions, child-dispatch decisions, lifecycle marks, cursor-control marks, recursion-cutoff decisions, and source-boundary marks while preserving untraced parse output; frontier advances to `.4.5.4` diagnostics/trace no-drift. |
+| `2026-07-09` | `DART-BACKEND-PARITY.4.5.4` | `dart run bin/linkedspec_dart.dart --help`; focused diagnostics/trace drift scans; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart diagnostics/trace status is aligned across README, CLI/scaffold, mdBook, live docs, roadmap, task tree, MEMORY, and Knowledge Map; `.4.5` closes and frontier advances to `.5.1` staged registry work. |
 
 ## Commit Log
 
@@ -1126,6 +1152,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.4.5.1` | `DART-BACKEND-PARITY.4.5.1 - add Dart runtime diagnostics` | Structured runtime diagnostics on Dart runtime exceptions. |
 | `DART-BACKEND-PARITY.4.5.2` | `DART-BACKEND-PARITY.4.5.2 - add Dart trace controls` | Trace controls, event classes, sinks, and traced runtime entrypoints. |
 | `DART-BACKEND-PARITY.4.5.3` | `DART-BACKEND-PARITY.4.5.3 - add Dart runtime trace events` | Runtime branch/lifecycle/source-boundary trace instrumentation. |
+| `DART-BACKEND-PARITY.4.5.4` | `DART-BACKEND-PARITY.4.5.4 - close Dart diagnostics trace no drift` | Diagnostics/trace status no-drift closeout; `.4.5` container closes. |
 | `DART-BACKEND-PARITY.7.3` | `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement` | Docs-only split for per-variant LinkedSpec CLI productization. |
 
 ## Changelog
@@ -1186,3 +1213,5 @@ The `.4.1` runtime matching layer adds:
 - `2026-07-09`: Added Dart runtime interpreter trace events for rule scopes, regex matching, action/blind child
   dispatch, lifecycle blocks, cursor controls, recursion cutoffs, and source-boundary capture; frontier advances to
   `.4.5.4` diagnostics/trace no-drift.
+- `2026-07-09`: Closed Dart diagnostics/trace no-drift; `.4.5` closes and frontier advances to `.5.1` staged
+  registry provider work.

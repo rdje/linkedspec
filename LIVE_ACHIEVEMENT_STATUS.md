@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.4.5.4 — close Dart diagnostics trace no drift**
+  (DONE — diagnostics/trace status closeout; `.4.5` container closed).
+
+  **Change:** Dart README, CLI/scaffold status, mdBook trace/status/handoff pages, live docs, roadmap, task-tree
+  index, MEMORY, and Knowledge Map now agree on the diagnostics/trace boundary: structured runtime diagnostics,
+  trace controls/sinks/events, traced runtime entrypoints, and runtime interpreter trace events are implemented.
+
+  **Boundary:** This is a no-runtime-source closeout. Dart does not claim full backend parity yet; staged registry
+  execution, user-function runtime parity, corpus output parity, Dart-specific CLI productization, and final Dart
+  parity closeout remain later leaves. Active implementation work advances to `DART-BACKEND-PARITY.5.1`.
+
+  **Verification:** CLI help, focused drift scans, mdBook, memory architecture, Knowledge Map, task-tree metadata,
+  doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.4.5.3 — add Dart runtime trace events**
   (DONE — branch/lifecycle/source-boundary runtime trace instrumentation).
 

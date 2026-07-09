@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.4.5.4 — close Dart diagnostics trace no drift
+
+**Scope:** Dart diagnostics/trace status no-drift across README, CLI/scaffold text, mdBook trace/status/handoff
+pages, live docs, roadmap, task-tree index, MEMORY, and Knowledge Map facts.
+
+**Change:** Closed the `.4.5` diagnostics/trace container. All live status surfaces now agree that Dart has
+structured runtime diagnostics, trace controls/sinks/events, and runtime interpreter trace events; Dart still does
+not claim full backend parity, and the active frontier advances to `.5.1` staged registry work.
+
+**Validation:** CLI help, focused drift scans, mdBook build, memory architecture, Knowledge Map generation/check,
+task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.4.5.3 — add Dart runtime trace events
 
 **Scope:** Dart runtime interpreter tracing, focused trace coverage, Dart CLI/scaffold status, Dart README,

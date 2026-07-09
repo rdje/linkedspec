@@ -32,13 +32,14 @@ from `package:linkedspec_dart/linkedspec_dart.dart`.
   `execute(..., trace: emitter)`, `parseWithTrace(...)`, and
   `executeWithTrace(...)`.
 
-This does not complete Dart trace parity. `.4.5.2` proved controls, sinks, and
-output preservation with parse-scope events. `.4.5.3` adds runtime interpreter
-events for parse/rule scopes, regex match/no-match decisions, action-edge and
-blind-call child-dispatch decisions, lifecycle marks, cursor-control marks,
-recursion-cutoff decisions, and `capture_until_boundary(...)`
-source-boundary marks.
+This does not complete Dart backend parity. `.4.5.2` proved controls, sinks,
+and output preservation with parse-scope events. `.4.5.3` adds runtime
+interpreter events for parse/rule scopes, regex match/no-match decisions,
+action-edge and blind-call child-dispatch decisions, lifecycle marks,
+cursor-control marks, recursion-cutoff decisions, and
+`capture_until_boundary(...)` source-boundary marks. `.4.5.4` closes the
+diagnostics/trace no-drift sweep and advances Dart to staged registry work.
 
 Related facts: [[dart-runtime-diagnostics-trace-split]],
 [[trace-cross-variant-capability-contract]], [[dart-runtime-structured-diagnostics]],
-[[dart-runtime-trace-events]].
+[[dart-runtime-trace-events]], [[dart-diagnostics-trace-boundary]].

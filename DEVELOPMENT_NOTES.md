@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.4.5.4 — Dart diagnostics/trace no-drift):
+  Closed the Dart diagnostics/trace container. The agreed boundary is now: structured runtime diagnostics,
+  `LinkedSpecTrace*` controls/sinks/events, traced runtime entrypoints, and runtime interpreter trace events are
+  implemented; staged registry execution, user-function runtime parity, corpus output parity, and Dart-specific CLI
+  productization remain later leaves. The active frontier is `.5.1`, the minimal staged registry provider.
+
 - 2026-07-09 (DART-BACKEND-PARITY.4.5.3 — Dart runtime trace events):
   Added runtime interpreter instrumentation on top of the `.4.5.2` Dart trace controls. `LinkedSpecRuntimeEngine`
   now emits parse/rule scopes, recursion-cutoff decisions, regex match/no-match decisions, action-edge and
