@@ -55,10 +55,10 @@ also bind `key`; array callbacks also bind `index`; reduce callbacks also bind
 after callback execution.
 
 `BACKTRACK-SURFACE-RUST-ALIGNMENT.1` has since landed explicit cursor controls
-and cursor/input helpers. `DART-BACKEND-PARITY.6.2.2` has since proven the first
-40 shipped manifest fixtures green in bounded Dart corpus execute mode. Boundary:
-full 99-fixture corpus output parity, Dart-specific CLI productization, and final
-Dart parity no-drift closeout remain later `DART-BACKEND-PARITY` leaves.
+and cursor/input helpers. Later `DART-BACKEND-PARITY` leaves closed the full
+99-fixture corpus gate, wired focused Dart verification, deferred generated
+source to a future source-emitter lane, and productized the Dart-specific CLI.
+The remaining Dart parity frontier is final no-drift closeout.
 
 Related facts: [[dart-runtime-hash-helpers]], [[dart-runtime-array-helpers]],
 [[dart-runtime-rule-interpreter]], [[dart-runtime-backtrack-cursor-helpers]],

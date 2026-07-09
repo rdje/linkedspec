@@ -1358,17 +1358,23 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement`
 
 - ID: `DART-BACKEND-PARITY.7.4`
-  Status: `pending`
+  Status: `done`
   Goal: Productize the Dart-specific LinkedSpec CLI entrypoint.
   Acceptance: The Dart backend exposes its own clearly named LinkedSpec CLI entrypoint, help text, argument
     contract, corpus/runtime invocation path, docs, and smoke tests without replacing or conflating the Perl and
     Rust variant CLIs. Naming must be consistent with the cross-variant requirement that each backend variant has
     a distinct CLI.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** `dart/bin/linkedspec_dart.dart` is now the Dart-specific backend CLI. It
+    exposes `--help` and a `corpus --corpus <path> [--execute] [--case ...] [--offset ...] [--limit ...]` command
+    that routes through the existing manifest-backed Dart parser/compiler/runtime harness. `bin/corpus_runner.dart`
+    remains a corpus-focused compatibility wrapper over the same CLI implementation. Focused tests cover CLI help
+    text and selected fixture execution through the Dart-specific entrypoint, while the focused Dart gate passes
+    format, analyzer, 140 tests, CLI help, bounded Dart-specific CLI corpus smoke, and full 99-fixture corpus
+    execution.
+  Commit: `DART-BACKEND-PARITY.7.4 - productize Dart-specific CLI`
 
 - ID: `DART-BACKEND-PARITY.7.5`
-  Status: `pending`
+  Status: `active`
   Goal: Final no-drift closeout for Dart parity.
   Acceptance: Roadmaps, task-tree index, live docs, mdBook, Knowledge Map, architecture snapshot, and
     verification commands agree that Dart reaches the accepted scoped milestone.
@@ -1398,7 +1404,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 17 | `DART-BACKEND-PARITY.6` | `done` | Corpus parity is closed: `.6.2.4` shipped-spec/parser-smoke is 31/31 green, `.6.2.5` routes the top-level `fn` fixtures through the spec-defined shell, `.6.3` closes the full 99-fixture corpus gate, and `.6.4` wires the focused Dart gate into local verification. |
 | 18 | `DART-BACKEND-PARITY.7.1` | `done` | mdBook usage/status/handoff documentation now matches the green `.6` corpus and verification boundary. |
 | 19 | `DART-BACKEND-PARITY.7.2` | `done` | Generated Dart source is deferred to a future split source-emitter lane; the interpreter-first 99/99 corpus run remains the conformance gate. |
-| 20 | `DART-BACKEND-PARITY.7.4` | `active` | Current frontier: productize the Dart-specific LinkedSpec CLI entrypoint. |
+| 20 | `DART-BACKEND-PARITY.7.4` | `done` | Dart-specific CLI productization is complete; the command routes corpus validation/execution through the existing Dart runtime harness. |
+| 21 | `DART-BACKEND-PARITY.7.5` | `active` | Current frontier: final Dart no-drift closeout. |
 
 ## Dart Toolchain And Package Layout
 
@@ -1660,12 +1667,12 @@ The `.4.1` runtime matching layer adds:
 
 ## Open Questions
 
-- None blocking `.7.4`. Dart interpreter corpus parity, mdBook usage/status documentation, and generated-source
-  deferral decision are closed; Dart-specific CLI productization is next.
+- None blocking `.7.5`. Dart interpreter corpus parity, mdBook usage/status documentation, generated-source
+  deferral decision, and Dart-specific CLI productization are closed; final no-drift closeout is next.
 
 ## Blockers
 
-- None known before `.7.4`.
+- None known before `.7.5`.
 
 ## Verification Log
 
@@ -1708,6 +1715,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.6.4` | `bash tools/run_dart_local.sh`; default `bash tools/run_ci_local.sh` skip-path smoke; Dart format/analyze/full tests; full 99-fixture corpus execution; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Focused Dart verification is repo-owned and documented, and the canonical local gate can include it with `LINKEDSPEC_RUN_DART=1` without depending on Dart SDK availability by default. |
 | `2026-07-09` | `DART-BACKEND-PARITY.7.1` | mdBook build; `bash tools/run_dart_local.sh`; default `bash tools/run_ci_local.sh`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Dart usage/status/handoff docs now describe the focused gate, optional local-CI inclusion, direct Dart commands, the interpreter-first 99/99 corpus boundary, and generated-source / Dart-specific CLI follow-ups. |
 | `2026-07-09` | `DART-BACKEND-PARITY.7.2` | mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Generated Dart source is deferred to a future split source-emitter lane; the interpreter-first 99/99 corpus run remains the Dart conformance gate. |
+| `2026-07-09` | `DART-BACKEND-PARITY.7.4` | `bash tools/run_dart_local.sh`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/linkedspec_dart.dart corpus --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Dart-specific CLI productization is complete: `bin/linkedspec_dart.dart` owns help text plus the corpus command, `bin/corpus_runner.dart` remains a compatibility wrapper, and the full focused Dart gate is green over 140 tests, bounded Dart-specific CLI corpus smoke, and the 99-fixture corpus. |
 
 ## Commit Log
 
@@ -1755,10 +1763,12 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.6.4` | `DART-BACKEND-PARITY.6.4 - wire Dart local verification` | `tools/run_dart_local.sh` owns the focused Dart gate; `tools/run_ci_local.sh` includes it only under `LINKEDSPEC_RUN_DART=1`. |
 | `DART-BACKEND-PARITY.7.1` | `DART-BACKEND-PARITY.7.1 - close Dart mdBook usage status` | mdBook command/status/handoff docs now match the 99/99 interpreter-first Dart parity boundary and follow-up lanes. |
 | `DART-BACKEND-PARITY.7.2` | `DART-BACKEND-PARITY.7.2 - defer Dart generated source proof` | Generated Dart source is deferred to a future split source-emitter lane with explicit proof prerequisites. |
+| `DART-BACKEND-PARITY.7.4` | `DART-BACKEND-PARITY.7.4 - productize Dart-specific CLI` | Dart-specific CLI help and corpus command route through the shared manifest-backed runtime command implementation; corpus runner remains a compatibility wrapper. |
 
 ## Changelog
 
 - `2026-07-09`: Created the Dart backend parity task tree and selected an interpreter-first parity path.
+- `2026-07-09`: Productized the Dart-specific CLI under `.7.4`; frontier advances to `.7.5` final no-drift closeout.
 - `2026-07-09`: Recorded Dart SDK `3.9.2`, CLI/library package layout, and planned commands; frontier advances
   to `.1.2` for scaffold creation.
 - `2026-07-09`: Created the `dart/` scaffold package and smoke test; frontier advances to `.1.3` for

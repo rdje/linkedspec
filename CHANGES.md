@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.7.4 — productize Dart-specific CLI
+
+**Scope:** Dart-specific CLI entrypoint, shared corpus command runner, compatibility corpus-runner wrapper, CLI
+smoke coverage, Dart README, mdBook status/handoff text, live docs, roadmaps, resume pointer, and Knowledge Map.
+
+**Change:** `dart run bin/linkedspec_dart.dart` now owns the Dart backend CLI contract. Its `corpus` command
+validates or executes the manifest-backed corpus through the existing Dart parse/compile/runtime path, while
+`bin/corpus_runner.dart` remains as a compatibility wrapper over the same implementation. Help text, selected
+fixture execution, full-manifest execution, and package status text now reflect the 99-fixture corpus boundary.
+
+**Validation:** Focused Dart local gate passes: format, analyzer, 140 tests, CLI help, bounded Dart-specific CLI
+corpus smoke, and full 99-fixture corpus execution. Additional `.7.4` validation covers mdBook, memory
+architecture, Knowledge Map, task-tree metadata, doctrine, stale-status scans, and `git diff --check`.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.7.2 — defer Dart generated source
 
 **Scope:** Dart generated-source deferral, mdBook status, task-tree frontier, live docs, roadmaps, resume

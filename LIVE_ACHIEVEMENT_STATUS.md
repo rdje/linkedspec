@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.7.4 — productize Dart-specific CLI**
+  (DONE — Dart now has a productized variant-specific CLI; frontier advances to `.7.5`).
+
+  **Change:** `dart run bin/linkedspec_dart.dart` now exposes the Dart backend command contract. Its `corpus`
+  command validates or executes the manifest-backed corpus through the existing Dart parser/compiler/runtime
+  harness. `bin/corpus_runner.dart` remains available as a compatibility wrapper over the same shared CLI runner.
+
+  **Boundary:** This is CLI productization over the already-green 99/99 interpreter corpus path. It does not add
+  generated Dart source and does not change trace parity or runtime semantics.
+
+  **Verification:** Focused Dart local gate passes: format, analyzer, 140 tests, CLI help checks, bounded
+  Dart-specific CLI corpus smoke, and full 99-fixture corpus execution. Commit-time docs/governance gates also pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.7.2 — defer Dart generated source proof**
   (DONE — generated Dart source is explicitly deferred; frontier advances to `.7.4`).
 

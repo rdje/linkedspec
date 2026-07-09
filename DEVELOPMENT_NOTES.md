@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.7.4 — Dart-specific CLI productization):
+  `dart/bin/linkedspec_dart.dart` is now the Dart-specific LinkedSpec CLI rather than a scaffold status printer.
+  It supports `--help` plus `corpus --corpus <path> [--execute] [--case ...] [--offset ...] [--limit ...]`,
+  routing execution through the same manifest-backed parser/compiler/runtime harness used by
+  `executeCorpusFixtures(...)`. `dart/bin/corpus_runner.dart` remains available as a corpus-focused compatibility
+  wrapper, but both entrypoints share `lib/src/cli/linkedspec_dart_cli.dart` so their argument parsing and reporting
+  do not drift. CLI smoke tests now cover help text and selected fixture execution through the Dart-specific
+  command; the focused Dart local gate now also runs a bounded Dart-specific CLI corpus smoke and remains green over
+  140 tests plus the 99-fixture corpus.
+
 - 2026-07-09 (DART-BACKEND-PARITY.7.2 — Dart generated-source deferral):
   Generated Dart source is deferred instead of being implemented as a one-slice add-on. The Rust source-emitter
   proof took a split lane with an emitter scaffold, generated family-plan metadata, direct execution by structural

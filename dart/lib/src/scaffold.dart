@@ -1,6 +1,6 @@
 const linkedSpecDartPackageName = 'linkedspec_dart';
 const linkedSpecDartScaffoldStatus =
-    'runtime interpreter with staged user functions ready';
+    'runtime interpreter with 99-fixture corpus parity and Dart CLI ready';
 
 String describeLinkedSpecDartScaffold() {
   return '$linkedSpecDartPackageName $linkedSpecDartScaffoldStatus';

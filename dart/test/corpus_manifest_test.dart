@@ -609,6 +609,63 @@ Done::
     }
   });
 
+  test('Dart-specific CLI help advertises corpus runtime command', () {
+    final process = Process.runSync(Platform.resolvedExecutable, [
+      'run',
+      'bin/linkedspec_dart.dart',
+      '--help',
+    ], workingDirectory: Directory.current.path);
+
+    expect(process.exitCode, 0);
+    final stdout = process.stdout as String;
+    expect(stdout, contains('LinkedSpec Dart backend CLI'));
+    expect(stdout, contains('corpus --corpus <path>'));
+    expect(stdout, contains('Run fixtures through parse/compile/runtime'));
+    expect(stdout, isNot(contains('lands in later')));
+  });
+
+  test('Dart-specific CLI corpus command reports selected fixtures', () {
+    final root = Directory.systemTemp.createTempSync(
+      'linkedspec-dart-cli-specific-',
+    );
+    try {
+      _writeManifest(root, ['mismatched', 'passing']);
+      _writeFixture(
+        root,
+        'mismatched',
+        specSource: _returningSpec('actual'),
+        inputText: 'xfail',
+        expectedJson: 'expected',
+      );
+      _writeFixture(
+        root,
+        'passing',
+        specSource: _returningSpec('ok'),
+        inputText: 'xpass',
+        expectedJson: 'ok',
+      );
+
+      final process = Process.runSync(Platform.resolvedExecutable, [
+        'run',
+        'bin/linkedspec_dart.dart',
+        'corpus',
+        '--corpus',
+        root.path,
+        '--execute',
+        '--case',
+        'passing',
+      ], workingDirectory: Directory.current.path);
+
+      expect(process.exitCode, 0);
+      final stdout = process.stdout as String;
+      expect(stdout, contains('PASS passing'));
+      expect(stdout, contains('1 passed, 0 failed'));
+      expect(stdout, isNot(contains('mismatched')));
+    } finally {
+      root.deleteSync(recursive: true);
+    }
+  });
+
   test('corpus runner execute mode runs the full manifest by default', () {
     final root = Directory.systemTemp.createTempSync(
       'linkedspec-dart-cli-full-',

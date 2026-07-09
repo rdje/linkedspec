@@ -1,9 +1,9 @@
 # linkedspec_dart
 
-Repository-owned Dart backend scaffold for LinkedSpec parity work.
+Repository-owned Dart backend package for LinkedSpec parity work.
 
 This package is intentionally staged. It establishes the Dart package boundary,
-public library entrypoint, CLI smoke entrypoint, corpus-runner entrypoint,
+public library entrypoint, Dart-specific CLI entrypoint, compatibility corpus-runner entrypoint,
 manifest IO scaffold, source-level AST/data types, a core `.spec` rule parser,
 frontend validation, spec-returned function-shell projection, typed ActionIR
 parsing/contract resolution, user-function registry scaffolding, a
@@ -27,6 +27,9 @@ dart format --set-exit-if-changed .
 dart analyze --fatal-infos --fatal-warnings
 dart test
 dart run bin/linkedspec_dart.dart --help
+dart run bin/linkedspec_dart.dart corpus --corpus ../rust/linkedspec-runtime/tests/corpus
+dart run bin/linkedspec_dart.dart corpus --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1
+dart run bin/linkedspec_dart.dart corpus --corpus ../rust/linkedspec-runtime/tests/corpus --execute
 dart run bin/corpus_runner.dart --help
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1
@@ -39,9 +42,13 @@ bash ../tools/run_dart_local.sh
 
 ## Status
 
-`DART-BACKEND-PARITY.6.3` is the current completed corpus-parity boundary:
-the full checked-in 99-fixture manifest now passes through Dart execute mode after the shipped-spec/parser-smoke
-window reached 31/31 green and the routed top-level `fn` fixtures passed through the spec-defined shell. The package
+`DART-BACKEND-PARITY.7.4` is the current completed Dart CLI boundary:
+`bin/linkedspec_dart.dart` is the Dart-specific LinkedSpec CLI, with help text and a `corpus` command that can
+validate or execute the manifest-backed corpus through the Dart parser, compiler, and runtime. The compatibility
+`bin/corpus_runner.dart` entrypoint remains available for existing corpus-focused diagnostics and delegates to the
+same command implementation. The earlier `DART-BACKEND-PARITY.6.3` corpus-parity boundary remains green: the full
+checked-in 99-fixture manifest passes through Dart execute mode after the shipped-spec/parser-smoke window reached
+31/31 green and the routed top-level `fn` fixtures passed through the spec-defined shell. The package
 can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
@@ -132,12 +139,13 @@ also has `LinkedSpecTraceConfig`, `LinkedSpecTraceLevel`,
 behavior with reset/truncate, and traced runtime entrypoints that preserve parse
 output while emitting parse/rule scopes plus regex, child-dispatch, lifecycle,
 cursor-control, recursion-cutoff, and source-boundary trace events. Corpus output
-parity has started: `executeCorpusFixtures(...)` can run controlled manifest
-fixtures through parse/compile/runtime, compare the engine output against
+parity is closed for the current checked-in manifest: `executeCorpusFixtures(...)` runs controlled manifest
+fixtures through parse/compile/runtime, compares the engine output against
 `[expected]` with structural JSON equality, and report every fixture failure.
 It accepts named or bounded fixture selection through `caseNames`, `offset`, and
-`limit`. The corpus-runner CLI exposes that surface through opt-in `--execute`
-mode with `--case`, `--offset`, and `--limit`; without a selector, `--execute`
+`limit`. The Dart-specific CLI exposes that surface as
+`dart run bin/linkedspec_dart.dart corpus --corpus <path> [--execute] ...`; the compatibility corpus-runner CLI
+exposes the same options through `bin/corpus_runner.dart`. Without a selector, `--execute`
 runs the full checked-in manifest in order. The full 99-fixture corpus now passes
 through execute mode, including the first 40 shipped manifest fixtures, the
 non-`fn` middle helper/control/receiver fixtures, the shipped-spec/parser-smoke window, and the three routed

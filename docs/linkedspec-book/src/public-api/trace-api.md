@@ -130,8 +130,9 @@ Knowledge Map. `DART-BACKEND-PARITY.5.1` then adds the minimal staged registry p
 exact-arity user-function runtime execution, and `.5.3` preserves staged parse-job/function-registry descriptor
 shapes. `DART-BACKEND-PARITY.6.1` adds the controlled executable corpus harness, `.6.3` closes full 99-fixture
 Dart corpus execution, `.6.4` wires the focused Dart local verification gate, `.7.1` closes Dart mdBook
-usage/status/handoff documentation, and `.7.2` defers generated Dart source to a future source-emitter lane. Trace
-parity is unchanged by these staged/user-function/corpus/generated-source decision leaves.
+usage/status/handoff documentation, `.7.2` defers generated Dart source to a future source-emitter lane, and `.7.4`
+productizes the Dart-specific CLI around the existing corpus/runtime command path. Trace parity is unchanged by
+these staged/user-function/corpus/generated-source/CLI leaves.
 
 ## Future variant trace parity checklist
 
