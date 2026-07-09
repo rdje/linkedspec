@@ -858,8 +858,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Status: `active`
   Goal: Close the shipped-spec and parser-smoke corpus batch.
   Children: `.6.2.4.0`, `.6.2.4.1`, `.6.2.4.2`, `.6.2.4.3`, `.6.2.4.4`, `.6.2.4.4.0`,
-    `.6.2.4.4.1`, `.6.2.4.4.2`, `.6.2.4.4.3`, `.6.2.4.4.4`, `.6.2.4.4.5`, `.6.2.4.5`,
-    `.6.2.4.6`
+    `.6.2.4.4.1`, `.6.2.4.4.2`, `.6.2.4.4.3`, `.6.2.4.4.4`, `.6.2.4.4.5`,
+    `.6.2.4.4.6`, `.6.2.4.5`, `.6.2.4.6`
   Acceptance: The tclite, lispish, recursive top-rule, hlink, portmap, ebnf, spec.spec, regdef, tablegrep,
     simenv, VHDL/library, history, and plugin smoke fixtures either pass on Dart or each blocked fixture is routed
     to a narrowly owned root-cause leaf with Perl/Rust oracle evidence.
@@ -869,7 +869,10 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     possessive quantifiers), missing runtime/helper surfaces (`capture_slice`, diagnostic `print`, logical `not`,
     raw `print(...)` expression parsing), recursive/default-mode output mismatches, and residual shipped-spec smoke
     semantics. `.6.2.4.1` removes the basic Dart regex-dialect incompatibilities; deeper PCRE structural regex
-    constructs are now split to `.6.2.4.6`. Child leaves own the remaining clusters before final closeout.
+    constructs are now split to `.6.2.4.6`. `.6.2.4.4.1` through `.6.2.4.4.6` close the non-PCRE
+    parser-smoke residual group. `.6.2.4.5` confirms the no-drift boundary: the 31-fixture window is 24/31 green,
+    current docs match that state, and the only remaining seven failures are the PCRE structural regex blockers
+    owned by `.6.2.4.6`.
   Commit: `pending`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.0`
@@ -1221,13 +1224,35 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.4.4.6 - mirror public parser leading trivia`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.5`
-  Status: `pending`
+  Status: `done`
   Goal: Finalize the shipped-spec/parser-smoke corpus batch no-drift closeout.
   Acceptance: The full `.6.2.4` 31-fixture window is green on Dart or all remaining blockers are split with
     durable evidence; README, mdBook, roadmap, Knowledge Map, live docs, and task-tree status match the measured
     boundary.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** No Dart runtime behavior changed in this closeout leaf. The measured
+    shipped-spec/parser-smoke diagnostic window remains 24/31 green: `ds_vhistory_version_entry` now passes after
+    `.6.2.4.4.6`, and the seven remaining failures are only PCRE structural regex constructs already owned by
+    `.6.2.4.6` (`lispish_x_y`, two EBNF smoke fixtures, and four spec.spec smoke fixtures). Current-status scans
+    now agree across `dart/README.md`, mdBook status/backend-handoff chapters, roadmaps, `MEMORY.md`,
+    `LIVE_ACHIEVEMENT_STATUS.md`, `docs/TASK_TREE.md`, this task tree, and Knowledge Map cards. The implementation
+    frontier advances to `.6.2.4.6`.
+
+  ## Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — The `.6.2.4` 31-fixture shipped-spec/parser-smoke window is no longer a mixed
+    residual: the non-PCRE leaves are closed, and the diagnostic run reports 24 passed / 7 failed.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — The remaining failures are all Dart `RegExp` rejection of PCRE structural
+    constructs: Lispish recursive `(?R)`, EBNF `\K` / recursive named subpatterns / `(?(DEFINE)...)`, and
+    spec.spec recursive block regexes. They are already owned by `.6.2.4.6`.
+  - [x] **FIX / CLOSEOUT** — Closed the no-drift leaf by aligning current docs, task-tree frontier state, roadmap
+    text, mdBook status/handoff pages, and Knowledge Map retrieval facts with the measured 24/31 boundary.
+  - [x] **ADDRESSED (verified)** — Diagnostic corpus execution shows `ds_vhistory_version_entry` passing and only
+    the seven PCRE structural fixtures failing.
+  - [x] **NO REGRESSION** — Docs-only closeout; Dart format/analyze/full tests remain green from the immediately
+    preceding runtime slice, and closeout gates pass.
+  - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
+    `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, this task
+    tree, and Knowledge Map are updated.
+  Commit: `DART-BACKEND-PARITY.6.2.4.5 - close parser smoke no drift`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.6`
   Status: `pending`
@@ -1336,7 +1361,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 14 | `DART-BACKEND-PARITY.5.1` | `done` | Minimal staged registry provider dispatches function-body parse jobs and stitches `body_ast`. |
 | 15 | `DART-BACKEND-PARITY.5.2` | `done` | Registered exact-arity user functions execute at runtime. |
 | 16 | `DART-BACKEND-PARITY.5.3` | `done` | Staged parse-job and function-registry descriptor shapes are preserved. |
-| 17 | `DART-BACKEND-PARITY.6` | `active` | Corpus parity is in progress; current frontier is `.6.2.4.5` for final shipped-spec/parser-smoke no-drift closeout after the non-PCRE residual group reached 24/31 green. |
+| 17 | `DART-BACKEND-PARITY.6` | `active` | Corpus parity is in progress; current frontier is `.6.2.4.6` for PCRE structural regex constructs after final parser-smoke no-drift closeout confirmed the 24/31 boundary. |
 
 ## Dart Toolchain And Package Layout
 
@@ -1635,6 +1660,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.4.4` | Focused `dart test test/runtime_interpreter_test.dart test/corpus_manifest_test.dart`; focused structural corpus run; diagnostic `--execute --offset 68 --limit 31` boundary measurement; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; CLI/help corpus-loader smokes; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart `push(Child)` current-rule accumulator semantics close `regdef_nested_register_fields`; `ds_vhistory_version_entry` is routed to `.6.2.4.4.5` with direct-access/oracle evidence; the parser-smoke window moves from 22/31 to 23/31 green. |
 | `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.4.5` | Perl public-parser and descriptor-handler probes for `ds_vhistory`; `call_spec_handler_subst` direct-access lowering probe; minimal scalar-held `payload[1]` public-parser probe; minimal leading-newline action-edge reproduction; focused Dart `ds_vhistory_version_entry` corpus run; Rust `oracle_corpus_matches_perl_reference`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. The `ds_vhistory` residual is split with durable evidence: public Perl/Rust expect null for the leading-newline fixture, direct descriptor execution returns `/proj/foo`, ordinary scalar-held indexed access still works, and `.6.2.4.4.6` owns the actual boundary decision. No Dart runtime behavior changed. |
 | `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.4.6` | Focused `dart test test/runtime_interpreter_test.dart test/corpus_manifest_test.dart`; focused `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --case ds_vhistory_version_entry`; diagnostic `--execute --offset 68 --limit 31`; `dart format --set-exit-if-changed .`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart now mirrors Perl public-parser leading blank/comment-line skipping before the top rule; `ds_vhistory_version_entry` passes, ordinary scalar-held indexed reads remain public, and the parser-smoke window moves from 23/31 to 24/31 green with only PCRE structural regex blockers remaining. |
+| `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.5` | Diagnostic `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31`; final parser-smoke no-drift scans across README, mdBook, roadmaps, live docs, task tree, and Knowledge Map; Dart format/analyze/full tests; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Final no-drift closeout confirms the shipped-spec/parser-smoke window is 24/31 green, all non-PCRE residual leaves are closed, and only the seven PCRE structural regex blockers remain under `.6.2.4.6`. |
 
 ## Commit Log
 
@@ -1675,6 +1701,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.6.2.4.4.4` | `DART-BACKEND-PARITY.6.2.4.4.4 - close Dart legacy accumulator smoke` | `push(Child)` current-rule accumulator semantics close `regdef_nested_register_fields`; `ds_vhistory_version_entry` is routed with direct-access/oracle evidence. |
 | `DART-BACKEND-PARITY.6.2.4.4.5` | `DART-BACKEND-PARITY.6.2.4.4.5 - split ds_vhistory oracle boundary` | Evidence-only split: public `ds_vhistory` parser leading-newline fixture returns null, direct descriptor handler returns `/proj/foo`, ordinary scalar-held indexed reads remain valid, and `.6.2.4.4.6` owns the boundary decision. |
 | `DART-BACKEND-PARITY.6.2.4.4.6` | `DART-BACKEND-PARITY.6.2.4.4.6 - mirror public parser leading trivia` | Dart runtime parse entrypoint now skips leading blank/comment lines like the Perl public parser, closing `ds_vhistory_version_entry` and moving parser-smoke to 24/31 green. |
+| `DART-BACKEND-PARITY.6.2.4.5` | `DART-BACKEND-PARITY.6.2.4.5 - close parser smoke no drift` | No-drift closeout confirms the non-PCRE parser-smoke residual group is complete and advances the frontier to `.6.2.4.6` for PCRE structural regex constructs. |
 
 ## Changelog
 
@@ -1759,3 +1786,6 @@ The `.4.1` runtime matching layer adds:
 - `2026-07-09`: Resolved the `ds_vhistory_version_entry` leading-newline boundary by mirroring the Perl public
   parser's leading blank/comment-line skip in Dart. The fixture now passes, the non-PCRE residual group is green,
   the shipped-smoke window is 24/31, and the frontier advances to `.6.2.4.5` for final no-drift closeout.
+- `2026-07-09`: Closed final shipped-spec/parser-smoke no-drift for the non-PCRE residual group. The measured
+  window remains 24/31 green, current docs and Knowledge Map agree, and the frontier advances to `.6.2.4.6` for
+  the seven PCRE structural regex blockers.

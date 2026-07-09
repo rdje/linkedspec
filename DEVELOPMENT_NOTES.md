@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.4.5 — parser-smoke no-drift closeout):
+  This is a docs/verification closeout, not a Dart runtime change. After the public-parser leading-trivia bridge,
+  the shipped-spec/parser-smoke diagnostic window is 24/31 green. The seven remaining failures are all PCRE
+  structural regex constructs already routed to `.6.2.4.6`: Lispish recursive `(?R)`, EBNF `\K` /
+  `(?&name)` / `(?(DEFINE)...)`, and spec.spec recursive block regexes. Treat the non-PCRE residual group as
+  closed; do not reopen hlink, portmap, helper mutation/text normalization, regdef, or ds_vhistory unless a fresh
+  regression changes the measured boundary.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.4.4.6 — Dart public-parser leading trivia):
   The `ds_vhistory` boundary came from Perl's public parser wrapper, not from indexed access. `Runtime.pm` resets
   `pos()` and skips leading blank/comment lines before invoking the generated top handler; direct descriptor

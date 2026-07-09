@@ -18,18 +18,17 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.6.2.4.4.6` — Dart mirrors the Perl public parser leading
-  blank/comment-line skip, so `ds_vhistory_version_entry` passes and the shipped-smoke window is 24/31 green.
-- prior_leaf: `DART-BACKEND-PARITY.6.2.4.4.5` — `ds_vhistory_version_entry` was split with public-parser,
-  descriptor-handler, scalar-held indexed-read, and leading-newline evidence before the runtime fix.
+- latest_completed_leaf: `DART-BACKEND-PARITY.6.2.4.5` — final parser-smoke no-drift closeout confirms the
+  shipped-smoke window is 24/31 green, all non-PCRE residual leaves are closed, and only PCRE structural blockers remain.
+- prior_leaf: `DART-BACKEND-PARITY.6.2.4.4.6` — Dart mirrors the Perl public parser leading blank/comment-line
+  skip, so `ds_vhistory_version_entry` passes without weakening scalar-held indexed reads.
 - latest_commit: this resume block is prepared for commit
-  `DART-BACKEND-PARITY.6.2.4.4.6 - mirror public parser leading trivia`; previous committed HEAD is
-  `c37a7673 DART-BACKEND-PARITY.6.2.4.4.5 - split ds_vhistory oracle boundary`.
+  `DART-BACKEND-PARITY.6.2.4.5 - close parser smoke no drift`; previous committed HEAD is
+  `ba5177a1 DART-BACKEND-PARITY.6.2.4.4.6 - mirror public parser leading trivia`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.6.2.4.5` after the current commit is clean.
-- next_action: resume PNT at `DART-BACKEND-PARITY.6.2.4.5` for final shipped-spec/parser-smoke no-drift closeout
-  after the non-PCRE residual group reached 24/31 green. `.6.2.4.6` owns deeper PCRE structural regex constructs including
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.6.2.4.6` after the current commit is clean.
+- next_action: resume PNT at `DART-BACKEND-PARITY.6.2.4.6` for deeper PCRE structural regex constructs including
   Lispish `(?R)`, EBNF `\K`/`(?&name)`/`(?(DEFINE)...)`, and spec.spec recursive block regexes. `.6.2.5` owns the
   routed top-level `fn` corpus-shell gap. The director's single-source `foo.spec` parser+stimuli roundtrip idea is
   parked in `FUTURE-PARITY-BACKLOG.8.1`; the corrected AND/OR edge-default model is parked in `.9.1`; neither is
@@ -44,5 +43,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `DART-BACKEND-PARITY.6.2.4.4.6` commit; do not pivot unless the repo
+- blockers: none. in_flight_uncommitted: none expected after the `DART-BACKEND-PARITY.6.2.4.5` commit; do not pivot unless the repo
   is handoff-ready.

@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.5 — close parser smoke no drift
+
+**Scope:** Final shipped-spec/parser-smoke no-drift closeout for the non-PCRE residual group, task-tree frontier
+state, Dart README, mdBook status/backend handoff, roadmaps, live docs, resume pointer, and Knowledge Map.
+
+**Change:** No Dart runtime behavior changed. This slice closes the final no-drift leaf after
+`ds_vhistory_version_entry` turned green: the 31-fixture shipped-spec/parser-smoke diagnostic window is 24/31
+green, all non-PCRE residual leaves are complete, and the only remaining failures are the seven PCRE structural
+regex blockers already owned by `DART-BACKEND-PARITY.6.2.4.6`.
+
+**Validation:** Diagnostic shipped-smoke corpus execution reports 24 passed / 7 PCRE structural failures; Dart
+format, analyze, and full tests pass; mdBook, memory architecture, Knowledge Map generation/check,
+task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.4.6 — mirror public parser leading trivia
 
 **Scope:** Dart runtime parse entry boundary, focused runtime/corpus tests, shipped-smoke status, Dart README,

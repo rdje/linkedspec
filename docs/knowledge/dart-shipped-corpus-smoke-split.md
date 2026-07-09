@@ -12,10 +12,11 @@ answers:
   - "what is the Dart shipped-spec parser-smoke boundary after regdef parity"
   - "what is the next Dart shipped-spec parser-smoke boundary after ds_vhistory split"
   - "what is the Dart shipped-spec parser-smoke boundary after ds_vhistory parity"
+  - "what is the Dart shipped-spec parser-smoke frontier after no-drift closeout"
 date: 2026-07-09
 status: current
 tags: [dart, corpus, shipped-specs, regex, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.6.2.4.0 runs `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31`. The window started 2/31 green (`pplugin_empty`, `tkgui_empty`). Failures clustered into Dart regex-dialect incompatibilities, missing helper/action surfaces, recursive/default-mode output mismatches, and residual shipped-spec smoke parity. DART-BACKEND-PARITY.6.2.4.1 closes the basic regex-dialect bridge; .6.2.4.2 closes the missing helper/action bridge; .6.2.4.3 closes tclite/default-mode action-edge dispatch and recursive rule-local aggregate reset semantics. .6.2.4.4.0 splits remaining non-PCRE parser-smoke work. .6.2.4.4.1 closes the portmap/action-edge child result shape leaf through Dart `array(flat*)` list-context splicing, and `vhdl_library_use` also passes. .6.2.4.4.2 closes hlink delimiter/capture parity through `retv` refresh and scalar-held array append, and `tablegrep_simple_term` also passes. .6.2.4.4.3 closes helper mutation/text-normalization parity through statement-form scalar regex mutation, explicit split target replacement, and entry/local line helpers; `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute` pass. .6.2.4.4.4 closes `regdef_nested_register_fields` through the `push(Child)` current-accumulator convention. .6.2.4.4.5 splits `ds_vhistory_version_entry` with public-parser, descriptor-handler, scalar-held indexed-read, and leading-newline evidence rather than weakening Dart direct access. .6.2.4.4.6 closes that boundary by mirroring Perl's public-parser leading blank/comment-line skip in Dart. The window is now 24/31 green. Remaining PCRE structural regex blockers are routed to .6.2.4.6, and the next implementation leaf is .6.2.4.5."
+evidence: "DART-BACKEND-PARITY.6.2.4.0 runs `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31`. The window started 2/31 green (`pplugin_empty`, `tkgui_empty`). Failures clustered into Dart regex-dialect incompatibilities, missing helper/action surfaces, recursive/default-mode output mismatches, and residual shipped-spec smoke parity. DART-BACKEND-PARITY.6.2.4.1 closes the basic regex-dialect bridge; .6.2.4.2 closes the missing helper/action bridge; .6.2.4.3 closes tclite/default-mode action-edge dispatch and recursive rule-local aggregate reset semantics. .6.2.4.4.0 splits remaining non-PCRE parser-smoke work. .6.2.4.4.1 closes the portmap/action-edge child result shape leaf through Dart `array(flat*)` list-context splicing, and `vhdl_library_use` also passes. .6.2.4.4.2 closes hlink delimiter/capture parity through `retv` refresh and scalar-held array append, and `tablegrep_simple_term` also passes. .6.2.4.4.3 closes helper mutation/text-normalization parity through statement-form scalar regex mutation, explicit split target replacement, and entry/local line helpers; `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute` pass. .6.2.4.4.4 closes `regdef_nested_register_fields` through the `push(Child)` current-accumulator convention. .6.2.4.4.5 splits `ds_vhistory_version_entry` with public-parser, descriptor-handler, scalar-held indexed-read, and leading-newline evidence rather than weakening Dart direct access. .6.2.4.4.6 closes that boundary by mirroring Perl's public-parser leading blank/comment-line skip in Dart. .6.2.4.5 closes final parser-smoke no-drift for the non-PCRE residual group. The window is now 24/31 green, and the next implementation leaf is .6.2.4.6 for PCRE structural regex blockers."
 reverify: "cd dart && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31 || true"
 ---
 
@@ -59,8 +60,9 @@ then closes the boundary by mirroring Perl's public-parser leading
 blank/comment-line skip before the top rule, so `ds_vhistory_version_entry`
 passes. The diagnostic window is now 24/31 green. Remaining regex
 `FormatException` cases are deeper PCRE structural features and are routed to
-`DART-BACKEND-PARITY.6.2.4.6`; the next implementation leaf is `.6.2.4.5`
-for final parser-smoke no-drift closeout.
+`DART-BACKEND-PARITY.6.2.4.6`. `DART-BACKEND-PARITY.6.2.4.5` closes final
+parser-smoke no-drift for the non-PCRE residual group; the next implementation
+leaf is `.6.2.4.6`.
 
 Related facts: [[dart-middle-corpus-batch]], [[dart-controlled-corpus-execution]],
 [[dart-regex-dialect-bridge]], [[dart-helper-action-surface-bridge]],

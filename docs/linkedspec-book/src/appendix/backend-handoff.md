@@ -261,8 +261,8 @@ source in the corpus runner. The final shipped-spec/parser-smoke window started
 at 2/31 green, reached 7/31 green after the regex-dialect, helper/action, and
 recursive/default-mode bridges, reached 13/31 green after the portmap result-shape bridge, reached 19/31 green
 after the hlink delimiter/capture bridge, reached 22/31 green after the helper mutation/text-normalization bridge,
-and is now 24/31 green after the legacy accumulator and public-parser leading-trivia bridges. Residual non-PCRE work is split into focused
-structural smoke output and closeout leaves. The
+and is now 24/31 green after the legacy accumulator, public-parser leading-trivia, and final no-drift closeout
+leaves. The non-PCRE residual group is closed. The
 portmap/action-edge result-shape leaf is
 done: Dart `array(...)` splices explicit `flat*` arguments, all five portmap fixtures pass, and `vhdl_library_use`
 also passes. The hlink leaf is also done: Dart `call(...)` refreshes `retv`, append-style mutations update
@@ -419,8 +419,8 @@ and is now 24/31 green. The basic regex-dialect bridge, helper/action bridge,
 recursive/default-mode parser-smoke bridge, portmap result-shape bridge, and
 hlink delimiter/capture bridge are done; the helper mutation/text-normalization
 bridge is also done, the legacy accumulator bridge closes `regdef_nested_register_fields`, and the public-parser
-leading-trivia bridge closes `ds_vhistory_version_entry`. The next Dart leaf is final parser-smoke no-drift
-closeout before the separately routed PCRE structural regex work, and full shipped 99-fixture corpus parity remains later.
+leading-trivia bridge closes `ds_vhistory_version_entry`. Final parser-smoke no-drift closeout is done; the next
+Dart leaf is the separately routed PCRE structural regex work, and full shipped 99-fixture corpus parity remains later.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

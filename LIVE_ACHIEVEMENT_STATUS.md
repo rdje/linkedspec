@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.5 — close parser smoke no drift**
+  (DONE — final no-drift closeout confirms the shipped-smoke parser window is 24/31 green and advances to PCRE structural work).
+
+  **Change:** No Dart runtime behavior changed. This slice reconciles task-tree status, roadmaps, Dart README,
+  mdBook status/backend handoff, live docs, and Knowledge Map around the measured shipped-spec/parser-smoke
+  boundary after the non-PCRE residual group closed.
+
+  **Boundary:** The 31-fixture shipped-spec/parser-smoke window remains 24/31 green. The seven remaining failures
+  are PCRE structural regex constructs already routed to `DART-BACKEND-PARITY.6.2.4.6`; active implementation work
+  advances there.
+
+  **Verification:** Diagnostic 31-fixture parser-smoke corpus run, current-status no-drift scans, Dart
+  format/analyze/full tests, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.6 — mirror public parser leading trivia**
   (DONE — `ds_vhistory_version_entry` now passes on Dart; shipped-smoke parser window is 24/31 green).
 
