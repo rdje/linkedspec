@@ -7406,42 +7406,57 @@ ChildB:
     }
 
     #[test]
-    fn helpers_5_1_retired_terse_8_4_spellings_use_generic_unknown_helper_path() {
+    fn helpers_5_1_unknown_helper_spellings_use_generic_unknown_helper_path() {
         fn execute_snippet(snippet: &str) -> Value {
             let grammar = format!("Top::\n /x/\n E {{ {snippet} }}\n");
-            let spec = parse_spec(&grammar).expect("parse retired-helper fixture");
-            validate(&spec).expect("validate retired-helper fixture");
-            let compiled = compile(&spec).expect("compile retired-helper fixture");
+            let spec = parse_spec(&grammar).expect("parse unknown-helper fixture");
+            validate(&spec).expect("validate unknown-helper fixture");
+            let compiled = compile(&spec).expect("compile unknown-helper fixture");
             Engine::new(compiled)
                 .execute("x")
                 .expect("generic unknown helper should return undef instead of failing")
         }
 
         let cases = [
-            ("declare(scalar, v); return(v)", serde_json::json!([null])),
             (
-                "return(array_copy(array(items)))",
+                "unknown_decl_helper(v); return(v)",
                 serde_json::json!([null]),
             ),
-            ("return(hash_copy(hash(meta)))", serde_json::json!([null])),
-            ("return(concat(\"a\", \"b\"))", serde_json::json!([null])),
             (
-                "push_value(array(items), \"a\"); return(copy(array(items)))",
+                "return(unknown_array_copy_helper(array(items)))",
+                serde_json::json!([null]),
+            ),
+            (
+                "return(unknown_hash_copy_helper(hash(meta)))",
+                serde_json::json!([null]),
+            ),
+            (
+                "return(unknown_concat_helper(\"a\", \"b\"))",
+                serde_json::json!([null]),
+            ),
+            (
+                "unknown_push_value_helper(array(items), \"a\"); return(copy(array(items)))",
                 serde_json::json!([[]]),
             ),
             (
-                "push_nonempty(array(items), \"a\"); return(copy(array(items)))",
+                "unknown_push_nonempty_helper(array(items), \"a\"); return(copy(array(items)))",
                 serde_json::json!([[]]),
             ),
-            ("return(a(items))", serde_json::json!([null])),
-            ("return(h(meta))", serde_json::json!([null])),
+            (
+                "return(unknown_array_wrapper(items))",
+                serde_json::json!([null]),
+            ),
+            (
+                "return(unknown_hash_wrapper(meta))",
+                serde_json::json!([null]),
+            ),
         ];
 
         for (snippet, expected) in cases {
             assert_eq!(
                 execute_snippet(snippet),
                 expected,
-                "retired helper spelling should follow generic unknown-helper behavior: {snippet}"
+                "unknown helper spelling should follow generic unknown-helper behavior: {snippet}"
             );
         }
     }

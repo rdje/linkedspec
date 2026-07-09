@@ -23,7 +23,7 @@ evidence for one top-level task.
 
 | Tree | Status | Roadmap lane | Current frontier | File |
 | --- | --- | --- | --- | --- |
-| `NONCURRENT-HELPER-CODE-PURGE` | `active` | `.spec language evolution / codebase no-drift` | `.4` done 2026-07-09 - active test/tool/generated fixture and checked-in `.spec` spelling migration is closed; EBNF labels use `return_scalar_value` / `return_array_value`, portmap concatenation uses `?concatenation:`, and focused scans plus phase0/runtime/book checks pass. Next frontier `.5` final no-drift scan and documentation closeout. | [docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md](docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md) |
+| `NONCURRENT-HELPER-CODE-PURGE` | `done` / `closed` | `.spec language evolution / codebase no-drift` | `.5` done 2026-07-09 - Perl/Rust retired-helper source cleanup, active fixture/spec migration, and final no-drift closeout are complete. Active retired-helper call-shape, label/tag, and `?concat:` scans are clean; generic unknown-helper tests use invented helper names. | [docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md](docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md) |
 | `DART-BACKEND-PARITY` | `active` | `Overall roadmap - future backend parity (Dart first)` | `.3.2` done 2026-07-09 - Dart now resolves typed helper/action AST nodes to current canonical helper/control contracts and generic diagnostics. Next frontier `.3.3` builds the function registry and staged function-body parse-job records. | [docs/tasks/DART-BACKEND-PARITY.md](docs/tasks/DART-BACKEND-PARITY.md) |
 | `FUTURE-PARITY-BACKLOG` | `active` | `Overall roadmap - future parity backlog` | `.1.1` done 2026-07-09 - Dart backend parity was scoped into `DART-BACKEND-PARITY`; Julia `.1.2` remains gated until the Dart scoped milestone is reached. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
 | `SPEC-SOURCE-TERSE-CLOSEOUT` | `done` / `closed` | `Overall roadmap - .spec language evolution (terse format)` | `.1` done 2026-07-08 - root `specs/*.spec` source-format closeout completed; retired-helper and host-action residue scans are clean, all 21 descriptors report `1.0000 0 0`, hlink bracket/mixed fixtures are active in the 99-fixture Rust oracle, and pplugin body execution is isolated in the Perl runtime adapter. | [docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md](docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md) |
@@ -127,6 +127,11 @@ Index note 2026-07-09: `NONCURRENT-HELPER-CODE-PURGE.4` is done. Active tests, t
 and checked-in `.spec` labels/source strings were migrated away from the retired helper spelling set; EBNF return
 labels now use `return_scalar_value` / `return_array_value`, portmap concatenation now uses `?concatenation:`,
 and phase0/runtime/book checks pass. Active frontier advances to `NONCURRENT-HELPER-CODE-PURGE.5`.
+
+Index note 2026-07-09: `NONCURRENT-HELPER-CODE-PURGE.5` is done. Final no-drift scans are clean for active
+retired-helper call shapes, label/tag collisions, and exact `?concat:`; one remaining Rust runtime unit-test
+fixture was migrated from retired helper examples to invented unknown helper names while preserving generic
+fallback coverage. The tree is closed, and the next eligible active frontier is `DART-BACKEND-PARITY.3.3`.
 
 Index note 2026-07-04: `SPEC-FORMAT-TERSE.8` is now pending by explicit user directive. The `.6.4` decision to
 retain legacy compatibility helpers is superseded for this unreleased project; the new frontier removes remaining

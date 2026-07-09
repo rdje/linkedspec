@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.5 — close helper purge no-drift**
+  (DONE final no-drift scan and documentation closeout; tree complete).
+
+  **Change:** Migrated the last active Rust runtime unit-test fixture that still used retired helper-call strings
+  for generic fallback coverage to invented unknown helper names. Closed the task tree, Knowledge facts, roadmap
+  row, and resume pointer. PNT returns to `DART-BACKEND-PARITY.3.3` after the clean commit.
+
+  **Boundary:** Historical migration notes and retired-helper reference documentation remain allowed, but active
+  source/test/tool/spec helper-call examples and colliding labels are closed for this purge.
+
+  **Verification:** Final exact retired-helper call-shape scans, label/tag scans, exact `?concat:` scans,
+  scalar-wrapper scans, short-wrapper spec-surface scan classification, Rust formatting, and the focused runtime
+  generic unknown-helper unit test pass.
+
 - 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.4 — migrate retired helper fixtures**
   (DONE active test/tool/generated fixture and checked-in `.spec` spelling migration; final no-drift closeout is
   next).

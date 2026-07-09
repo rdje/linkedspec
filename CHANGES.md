@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — NONCURRENT-HELPER-CODE-PURGE.5 — close helper purge no-drift
+
+**Scope:** Final active source/test/tool/spec no-drift scan, Rust runtime unit-test fixture cleanup, live docs,
+task-tree closure, roadmap status, and Knowledge Map facts for the non-current helper purge.
+
+**Change:** Closed the purge by migrating the last active Rust runtime unit-test fixture that still embedded
+retired helper-call strings for generic fallback coverage. The fixture now uses invented unknown helper names and
+keeps the same null/no-mutation expectations. The task tree is marked done, roadmap rows move the purge to done,
+and the resume pointer returns the PNT frontier to `DART-BACKEND-PARITY.3.3`.
+
+**Validation:** Final exact retired-helper call-shape scans, retired label/tag scans, exact `?concat:` scans,
+scalar-wrapper scans, and short-wrapper spec-surface scans are clean or classified as non-helper input text.
+`cargo fmt --manifest-path rust/Cargo.toml --all --check` and focused
+`cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime
+helpers_5_1_unknown_helper_spellings_use_generic_unknown_helper_path` pass.
+
 ## 2026-07-09 — NONCURRENT-HELPER-CODE-PURGE.4 — migrate retired helper fixtures
 
 **Scope:** Active Perl/Rust tests, tooling examples, generated Rust oracle corpus inputs, checked-in `.spec`

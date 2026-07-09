@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `NONCURRENT-HELPER-CODE-PURGE.5` closed the final no-drift audit for retired helper
+  spellings in active Perl/Rust code/test/tool/spec surfaces. Exact retired-helper call-shape, label/tag, and
+  `?concat:` scans are clean. The last active Rust runtime unit-test fixture that still used retired helper-call
+  strings for generic unknown-helper coverage now uses invented unknown names instead. `NONCURRENT-HELPER-CODE-PURGE`
+  is complete; the next PNT frontier is `DART-BACKEND-PARITY.3.3`.
 - `2026-07-09` refresh: `NONCURRENT-HELPER-CODE-PURGE.4` migrated active tests, tooling examples, generated Rust
   oracle corpus inputs, and checked-in `.spec` labels/source strings away from retired helper spellings. Generic
   unknown-helper regressions now use invented helper names. `ebnf.spec` and copied corpus inputs use

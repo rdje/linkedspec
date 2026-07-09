@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (NONCURRENT-HELPER-CODE-PURGE.5 — final helper purge no-drift closeout):
+  Closed the Perl/Rust non-current helper code purge. Final exact retired-helper call-shape, label/tag, and
+  `?concat:` scans over active source/test/tool/spec/book surfaces are clean. The closeout found one remaining Rust
+  runtime unit-test fixture that used retired helper strings only as generic unknown-helper examples; it now uses
+  invented unknown helper names and still proves unknown helpers return `undef` without mutating aggregates. The
+  short-wrapper `s/a/h` spec-surface scan only hits parser input text `(a(b)c)`, not helper calls. Rust formatting
+  and the focused runtime unknown-helper unit test pass. The next PNT frontier returns to
+  `DART-BACKEND-PARITY.3.3`.
+
 - 2026-07-09 (NONCURRENT-HELPER-CODE-PURGE.4 — active fixture/spec spelling migration):
   Migrated the remaining active tests, tooling examples, generated corpus inputs, and checked-in `.spec` labels away
   from retired helper spellings after the Perl/Rust source recognition paths were closed. Generic unknown-helper

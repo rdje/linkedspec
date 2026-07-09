@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `NONCURRENT-HELPER-CODE-PURGE`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `.spec language evolution / codebase no-drift`
 - Created: `2026-07-09`
 - Last updated: `2026-07-09`
@@ -43,7 +43,7 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 ## Task Tree
 
 - ID: `NONCURRENT-HELPER-CODE-PURGE`
-  Status: `active`
+  Status: `done`
   Goal: Remove non-current helper spelling support/references from Perl and Rust code surfaces.
   Children: `.1`, `.2`, `.3`, `.4`, `.5`
 
@@ -291,18 +291,40 @@ unknown-helper handling, not through a name-specific removal compatibility layer
   Commit: `NONCURRENT-HELPER-CODE-PURGE.4 - migrate retired helper fixtures`
 
 - ID: `NONCURRENT-HELPER-CODE-PURGE.5`
-  Status: `pending`
+  Status: `done`
   Goal: Final no-drift scan and documentation closeout for the Perl/Rust code purge.
   Acceptance: Focused scans and gates prove no remaining code/test/tool/spec references to the removed helper
     spelling set, and live docs/KM record the current generic unknown-helper policy.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Final no-drift scans over active Perl/Rust source, tests, tools, scripts,
+    bins, checked-in specs, corpus specs, and mdBook spec examples are clean for exact retired helper call shapes,
+    retired label/tag collisions, and exact `?concat:`. The closeout found one remaining Rust runtime unit-test
+    fixture that embedded retired helper-call strings only to test generic fallback; it now uses invented unknown
+    helper names and still proves generic unknown-helper behavior. Short-wrapper `s/a/h` spec-surface scans only
+    hit parser input text `(a(b)c)`, not helper calls. Rust formatting and the focused runtime unit test pass.
+  Acceptance Checklist:
+    - [x] **REPRODUCE / ISSUE** — Final broad scan found a remaining active Rust runtime unit-test fixture using
+      retired helper-call strings as examples for generic unknown-helper behavior.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `rust/linkedspec-runtime/src/engine.rs` kept the old spellings
+      in `helpers_5_1_retired_terse_8_4_spellings_use_generic_unknown_helper_path`; the behavior under test was
+      the generic fallback, not name-specific retirement handling.
+    - [x] **FIX** — Renamed the fixture to generic unknown-helper terminology and replaced the snippets with
+      invented unknown helper names while preserving the null/no-mutation expectations.
+    - [x] **ADDRESSED (verified)** — Exact retired-helper call-shape scans, retired label/tag scans, exact
+      `?concat:` scans, scalar wrapper scans, and short-wrapper scans are clean or classified as non-helper input
+      text false positives.
+    - [x] **NO REGRESSION** — `cargo fmt --manifest-path rust/Cargo.toml --all --check` and
+      `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime
+      helpers_5_1_unknown_helper_spellings_use_generic_unknown_helper_path` pass.
+    - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
+      roadmap tracker rows, architecture state, Knowledge Map facts, `docs/TASK_TREE.md`, and this task tree are
+      updated for tree completion.
+  Commit: `NONCURRENT-HELPER-CODE-PURGE.5 - close helper purge no-drift`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `NONCURRENT-HELPER-CODE-PURGE.5` | `pending` | Source and active fixture/spec migrations are closed; run the final no-drift scan and documentation closeout for the purge. |
+| 1 | `NONCURRENT-HELPER-CODE-PURGE.5` | `done` | Final no-drift scan and documentation closeout completed; tree is closed. |
 
 ## Decisions
 
@@ -316,8 +338,7 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 
 ## Open Questions
 
-- None blocking `.5`. Source recognition/diagnostic paths and fixture/tool/spec migration are closed; final
-  no-drift closeout remains.
+- None. Tree complete.
 
 ## Blockers
 
@@ -346,6 +367,11 @@ unknown-helper handling, not through a name-specific removal compatibility layer
   strings away from retired helper spellings. EBNF return-label collisions now use `return_scalar_value` /
   `return_array_value`; portmap concatenation output now uses `?concatenation:`; focused scans, full phase0, full
   `linkedspec-runtime`, corpus oracle, and mdBook build pass.
+- `2026-07-09` — `.5` closed the final no-drift audit. One remaining Rust runtime unit-test fixture that used
+  retired helper strings for generic fallback coverage was migrated to invented unknown helper names. Final exact
+  retired-helper call-shape, label/tag, `?concat:`, scalar-wrapper, and short-wrapper scans are clean or classified
+  as non-helper input text false positives; Rust formatting and the focused generic unknown-helper runtime unit
+  test pass.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
@@ -355,6 +381,7 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 | `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.2.4` | Exact retired-helper call-shape scans over Perl source; direct current-helper and retired-helper behavior probes; `perl -c perl/LinkedSpec.pm`; `perl -c -Iperl t/noncurrent_helper_metadata.t`; `prove -q -Iperl t/noncurrent_helper_metadata.t t/actionir_ast_parser.t t/trace_actionir_method_lowering.t t/trace_actionir_pipeline.t`; `PERL5LIB= prove -q -Iperl t/phase0_regression.t`. | PASS. Perl source no longer has exact retired helper-call recognition paths; current helpers still lower; retired value-position helper-looking calls use the same unsupported-helper sentinel path as invented unknown helpers. |
 | `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.3` | Rust focused retired-helper scans; `cargo fmt --manifest-path rust/Cargo.toml --all --check`; `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core`; `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime`; focused runtime generic-unknown-helper and `scalaref_retirement_4` runs. | PASS. Rust source no longer recognizes or diagnoses retired helper spellings through name-specific paths; current helpers and runtime package tests remain green. |
 | `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.4` | Exact retired-helper call-shape scans; exact retired label/tag scans; exact `?concat:` scan; `perl -c -Iperl` for touched tests/tools; `prove -q -Iperl t/noncurrent_helper_metadata.t`; `prove -q -Iperl t/phase0_validation_fuzz.t`; `PERL5LIB= prove -q -Iperl t/phase0_regression.t`; `perl tools/gen_oracle_corpus.pl`; Rust focused integration tests; `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle`; `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime`; `mdbook build docs/linkedspec-book`. | PASS. Active tests/tools/specs/corpus inputs no longer carry removed helper spellings as executable calls or colliding labels/tags. |
+| `2026-07-09` | `NONCURRENT-HELPER-CODE-PURGE.5` | Final exact retired-helper call-shape scans; retired label/tag scans; exact `?concat:` scan; scalar-wrapper scan; short-wrapper spec-surface scan; `cargo fmt --manifest-path rust/Cargo.toml --all --check`; focused `linkedspec-runtime` unknown-helper unit test. | PASS. Final active code/test/tool/spec no-drift closeout is clean; only short-wrapper scan hits are parser input text, not helper calls. |
 
 ## Commit Log
 
@@ -367,6 +394,7 @@ unknown-helper handling, not through a name-specific removal compatibility layer
 | `NONCURRENT-HELPER-CODE-PURGE.2.4` | `NONCURRENT-HELPER-CODE-PURGE.2.4 - close Perl source purge scans` | Perl source purge closeout scans/probes passed; Rust source cleanup is next. |
 | `NONCURRENT-HELPER-CODE-PURGE.3` | `NONCURRENT-HELPER-CODE-PURGE.3 - purge Rust helper diagnostics` | Rust source recognition and name-specific retired-helper diagnostics removed; fixture/tool/spec migration is next. |
 | `NONCURRENT-HELPER-CODE-PURGE.4` | `NONCURRENT-HELPER-CODE-PURGE.4 - migrate retired helper fixtures` | Active test/tool/spec/corpus spellings migrated; final no-drift closeout is next. |
+| `NONCURRENT-HELPER-CODE-PURGE.5` | `NONCURRENT-HELPER-CODE-PURGE.5 - close helper purge no-drift` | Final no-drift scan and docs/KM closeout; tree closed. |
 
 ## Changelog
 
@@ -378,3 +406,4 @@ unknown-helper handling, not through a name-specific removal compatibility layer
   active test/tool/generated fixture and checked-in `.spec` migration under `.4`.
 - `2026-07-09`: Closed active test/tool/generated fixture and checked-in `.spec` migration through `.4`; active
   frontier advances to final no-drift scan and documentation closeout under `.5`.
+- `2026-07-09`: Closed final no-drift scan and documentation closeout through `.5`; tree complete.
