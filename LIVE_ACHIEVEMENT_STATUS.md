@@ -7,6 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.4.5.0 — split Dart diagnostics trace controls**
+  (DONE — task-tree split before code).
+
+  **Change:** The broad Dart runtime diagnostics/trace-controls leaf is now a container. `.4.5.1` owns structured
+  runtime diagnostics, `.4.5.2` owns trace levels/controls/event classes and stdout/routed-file/mirror sinks,
+  `.4.5.3` owns runtime branch/lifecycle/source-boundary trace instrumentation, and `.4.5.4` owns no-drift
+  closeout.
+
+  **Boundary:** No Dart runtime behavior changed. Active implementation work advances to
+  `DART-BACKEND-PARITY.4.5.1` for structured runtime diagnostics.
+
+  **Verification:** Memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
 - 2026-07-09: **BACKTRACK-SURFACE-RUST-ALIGNMENT.2 — add boundary lookahead helper**
   (DONE — non-consuming structural boundary capture across current variants).
 

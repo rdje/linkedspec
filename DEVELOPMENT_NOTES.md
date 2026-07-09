@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.4.5.0 — Dart diagnostics/trace split):
+  Split the broad Dart runtime diagnostics/trace-controls leaf before implementation. `.4.5.1` now owns
+  structured runtime diagnostics and diagnostic-carrying exceptions/result metadata; `.4.5.2` owns trace levels,
+  controls, event classes, and stdout/routed-file/mirror sinks; `.4.5.3` owns runtime interpreter instrumentation
+  for rule dispatch, regex/blind branches, lifecycle blocks, and source-boundary/cursor helpers where implemented;
+  `.4.5.4` owns the no-drift closeout across Dart README/CLI status, mdBook, live docs, task-tree index, and
+  Knowledge Map. This is a planning split only; the next executable frontier is `.4.5.1`.
+
 - 2026-07-09 (BACKTRACK-SURFACE-RUST-ALIGNMENT.2 — non-consuming boundary capture):
   Added the zero-width/lookahead member of the explicit cursor-control split:
   `capture_until_boundary(rule[, ...])`. The helper is cursor-based, not

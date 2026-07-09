@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.4.5.0 — split Dart diagnostics trace controls
+
+**Scope:** Dart backend task-tree planning, task-tree index, roadmap tracker, live docs, and Knowledge Map facts.
+
+**Change:** Split the broad Dart runtime diagnostics/trace-controls leaf before code. The `.4.5` container now has
+focused implementation leaves for structured runtime diagnostics (`.4.5.1`), trace levels/controls/event
+classes/sinks (`.4.5.2`), runtime branch/lifecycle/source-boundary trace instrumentation (`.4.5.3`), and
+no-drift closeout (`.4.5.4`). The active implementation frontier is `.4.5.1`.
+
+**Validation:** Memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine, and
+`git diff --check` pass. No Dart runtime behavior changed.
+
 ## 2026-07-09 — BACKTRACK-SURFACE-RUST-ALIGNMENT.2 — add non-consuming boundary capture
 
 **Scope:** Perl ActionIR contracts/scanner/canonical events, Rust runtime/validation/tests, Dart ActionIR

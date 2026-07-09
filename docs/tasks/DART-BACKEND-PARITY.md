@@ -565,10 +565,56 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.4.4 - add Dart backtrack cursor rewinds`
 
 - ID: `DART-BACKEND-PARITY.4.5`
-  Status: `pending`
+  Status: `active`
   Goal: Implement runtime diagnostics and trace controls.
+  Children: `.4.5.0`, `.4.5.1`, `.4.5.2`, `.4.5.3`, `.4.5.4`
   Acceptance: Dart exposes default-quiet trace controls, event classes, sink behavior, branch/lifecycle
     trace points, and structured errors equivalent to the documented cross-variant trace contract.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.4.5.0`
+  Status: `done`
+  Goal: Split the broad runtime diagnostics/trace-controls leaf into signoff-sized implementation leaves before code.
+  Acceptance: Diagnostic payloads, trace controls/sinks, runtime trace instrumentation, and closeout proof are
+    separately owned so no code slice must carry the whole cross-variant trace contract at once.
+  Verification: **PASS 2026-07-09.** Split `.4.5` into `.4.5.1` structured runtime diagnostics, `.4.5.2`
+    trace levels/controls/event classes/sinks, `.4.5.3` runtime branch/lifecycle/source-boundary trace
+    instrumentation, and `.4.5.4` no-drift closeout. Memory architecture, Knowledge Map generation/check,
+    task-tree metadata, doctrine, and `git diff --check` pass. No Dart runtime behavior changed.
+  Commit: `DART-BACKEND-PARITY.4.5.0 - split Dart diagnostics trace controls`
+
+- ID: `DART-BACKEND-PARITY.4.5.1`
+  Status: `pending`
+  Goal: Add Dart runtime structured diagnostic payloads and diagnostic-carrying runtime exceptions.
+  Acceptance: Runtime failures expose stable structured fields for type, stage, owner stage, summary, detail,
+    top rule, rule label, and handler/source attribution without changing successful parse output.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.4.5.2`
+  Status: `pending`
+  Goal: Add Dart trace levels, controls, structured event classes, and stdout/routed-file/mirror sink behavior.
+  Acceptance: Trace controls are default-quiet, available from normal Dart entrypoints, preserve successful parse
+    results, support reset/truncate for routed files, and provide focused tests for level gating and sink routing.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.4.5.3`
+  Status: `pending`
+  Goal: Instrument the Dart runtime interpreter with branch, lifecycle, dispatch, and source-boundary trace events.
+  Acceptance: Traced runtime execution emits structured enter/exit scopes and decisions for rule dispatch,
+    regex/blind branches, lifecycle blocks, cursor/source-boundary helpers where implemented, and dump/log events
+    where relevant while untraced execution remains output-compatible.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-BACKEND-PARITY.4.5.4`
+  Status: `pending`
+  Goal: Close Dart runtime diagnostics/trace no-drift.
+  Acceptance: Dart README, CLI help/status text, mdBook trace/runtime/backend-handoff pages, live docs, task-tree
+    index, and Knowledge Map agree on the implemented diagnostics/trace boundary before `.5` staged runtime work
+    begins.
   Verification: `pending`
   Commit: `pending`
 
@@ -700,7 +746,11 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 6 | `DART-BACKEND-PARITY.4.3.5` | `done` | Value blocks, structured controls, with-blocks, and tree traversal callbacks are implemented. |
 | 7 | `DART-BACKEND-PARITY.4.3.6` | `done` | Helper/value no-drift closeout fixed nested value-path assignment drift. |
 | 8 | `DART-BACKEND-PARITY.4.4` | `done` | BACKTRACK/IBACKTRACK cursor rewinds and cursor/input helpers are implemented. |
-| 9 | `DART-BACKEND-PARITY.4.5` | `pending` | Implement runtime diagnostics and trace controls next. |
+| 9 | `DART-BACKEND-PARITY.4.5.0` | `done` | Diagnostics/trace controls are split before code. |
+| 10 | `DART-BACKEND-PARITY.4.5.1` | `pending` | Add structured runtime diagnostics first. |
+| 11 | `DART-BACKEND-PARITY.4.5.2` | `pending` | Add trace controls, levels, event classes, and sinks. |
+| 12 | `DART-BACKEND-PARITY.4.5.3` | `pending` | Add runtime branch/lifecycle/source-boundary trace instrumentation. |
+| 13 | `DART-BACKEND-PARITY.4.5.4` | `pending` | Close diagnostics/trace no-drift before staged runtime work. |
 
 ## Dart Toolchain And Package Layout
 
@@ -966,6 +1016,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.7.3` | mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Director's per-variant CLI directive is recorded; Dart CLI productization is split to `.7.4`; final closeout shifts to `.7.5`; no source behavior changed. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.3.6` | Focused `dart test test/action_ast_parser_test.dart`; focused `dart test test/runtime_interpreter_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Helper/value no-drift fixed Dart nested value-path assignment to match the Perl/Rust no-autovivification and updated-root/null contract; frontier advances to `.4.4` BACKTRACK. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.4` | Focused `dart test test/runtime_interpreter_test.dart test/runtime_matching_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart executes `BACKTRACK()` local cursor rewinds, `IBACKTRACK()` initial/entry cursor rewinds, char-based cursor/input helpers, and consume-mode matching from a rewound cursor; frontier advances to `.4.5` diagnostics/trace controls. |
+| `2026-07-09` | `DART-BACKEND-PARITY.4.5.0` | memory architecture; Knowledge Map generation/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Runtime diagnostics/trace controls are split into structured diagnostics, trace controls/sinks, runtime trace instrumentation, and no-drift closeout leaves; no source behavior changed. |
 
 ## Commit Log
 
@@ -993,6 +1044,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.4.3.5` | `DART-BACKEND-PARITY.4.3.5 - add Dart runtime controls and tree callbacks` | Value blocks, structured controls, with-blocks, and tree traversal receiver callbacks. |
 | `DART-BACKEND-PARITY.4.3.6` | `DART-BACKEND-PARITY.4.3.6 - close Dart helper value no drift` | Nested value-path assignment no-drift; `.4.3` helper/value container closes. |
 | `DART-BACKEND-PARITY.4.4` | `DART-BACKEND-PARITY.4.4 - add Dart backtrack cursor rewinds` | BACKTRACK/IBACKTRACK cursor rewinds and cursor/input helpers. |
+| `DART-BACKEND-PARITY.4.5.0` | `DART-BACKEND-PARITY.4.5.0 - split Dart diagnostics trace controls` | Diagnostics/trace leaf split before code. |
 | `DART-BACKEND-PARITY.7.3` | `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement` | Docs-only split for per-variant LinkedSpec CLI productization. |
 
 ## Changelog
@@ -1044,3 +1096,5 @@ The `.4.1` runtime matching layer adds:
   containers; `.4.3` closes and frontier advances to `.4.4` for BACKTRACK behavior.
 - `2026-07-09`: Added Dart `BACKTRACK()` local cursor rewinds, `IBACKTRACK()` initial/entry cursor rewinds, and
   char-based cursor/input helper execution; frontier advances to `.4.5` for runtime diagnostics and trace controls.
+- `2026-07-09`: Split Dart runtime diagnostics/trace controls into `.4.5.1` structured diagnostics, `.4.5.2`
+  trace controls/sinks, `.4.5.3` runtime trace instrumentation, and `.4.5.4` no-drift closeout.
