@@ -453,6 +453,66 @@ Top::
       ],
     });
   });
+
+  test('executes hash helpers receiver chains and mutation boundaries', () {
+    final engine = _engine(r'''
+Top::
+ /x/
+ E {
+   set_key(meta, "b", 2);
+   set_key(meta, "a", 1);
+   set_key(meta, "drop", 0);
+   set_key(hash(meta), "stmt_hash", 4);
+   set_key(overlay, "a", 10);
+   set_key(overlay, "c", 3);
+   value_set = set_key(meta, "value_only", 9);
+   receiver_set = meta.set_key("receiver_only", 5);
+   return(hash(
+     "keys", meta.sorted_keys().join_values(","),
+     "values", meta.sorted_values().join_values("|"),
+     "count", meta.count_keys(),
+     "has_a", meta.has_key("a"),
+     "drop_pick", meta.drop_keys("drop").pick_keys("a", "stmt_hash").sorted_values(),
+     "rename", hash(meta).rename_key("a", "aa").drop_keys("drop").set_key("z", 7).sorted_keys().join_values(","),
+     "merged", merge_hash(copy(hash(meta)), overlay).sorted_values(),
+     "bare_first_merge", merge_hash(meta, overlay).sorted_keys(),
+     "value_set_has", value_set.has_key("value_only"),
+     "receiver_set_has", receiver_set.has_key("receiver_only"),
+     "after_value_set", copy(hash(meta)).has_key("value_only"),
+     "after_receiver_set", copy(hash(meta)).has_key("receiver_only"),
+     "index_value", meta["expr"] = "E",
+     "after_index_value", copy(hash(meta)).has_key("expr"),
+     "flat_splice", hash("z", 0, flat(hash(meta))).sorted_keys().join_values(","),
+     "flat_hash_splice", hash("z", 0, meta.flat_hash()).sorted_keys().join_values(","),
+     "map_field", hash("nested", copy(hash(meta))).pick_keys("nested")
+   ))
+ }
+''');
+
+    final result = engine.parse('x');
+
+    expect(result.value, {
+      'keys': 'a,b,drop,stmt_hash',
+      'values': '1|2|0|4',
+      'count': 4,
+      'has_a': true,
+      'drop_pick': [1, 4],
+      'rename': 'aa,b,stmt_hash,z',
+      'merged': [10, 2, 3, 0, 4],
+      'bare_first_merge': ['a', 'c'],
+      'value_set_has': true,
+      'receiver_set_has': true,
+      'after_value_set': false,
+      'after_receiver_set': false,
+      'index_value': {'b': 2, 'a': 1, 'drop': 0, 'stmt_hash': 4, 'expr': 'E'},
+      'after_index_value': true,
+      'flat_splice': 'a,b,drop,expr,stmt_hash,z',
+      'flat_hash_splice': 'a,b,drop,expr,stmt_hash,z',
+      'map_field': {
+        'nested': {'b': 2, 'a': 1, 'drop': 0, 'stmt_hash': 4, 'expr': 'E'},
+      },
+    });
+  });
 }
 
 LinkedSpecRuntimeEngine _engine(String source) {

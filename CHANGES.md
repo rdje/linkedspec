@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.4.3.4 — add Dart runtime hash helpers
+
+**Scope:** Dart runtime hash helper evaluator, focused interpreter/contract tests, Dart CLI help, package README,
+mdBook Dart handoff/status text, live docs, roadmap/task-tree status, and Knowledge Map facts.
+
+**Change:** Extended Dart runtime helper execution with hash-aware argument evaluation and receiver dispatch.
+The runtime now executes `count_keys`, `sorted_keys`, `sorted_values`, `has_key`, `merge_hash`, `set_key`,
+`rename_key`, `drop_keys`, `pick_keys`, `flat_hash`, and hash receiver chains. Statement-form `set_key(...)`
+mutates named working hashes, while value-form and receiver-form `set_key(...)` remain pure unless assigned back.
+`merge_hash(copy(hash(base)), overlay)` preserves the documented bare-overlay boundary, direct hash-index
+assignment values return hash snapshots, and `hash(... flat(...))` splices only explicit flat-style hash arguments
+instead of ordinary map field values.
+
+**Validation:** Focused runtime interpreter and ActionIR contract tests, Dart format/analyze/full tests, corpus
+runner, CLI help, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, diagnosis evidence,
+and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.4.3.3 — add Dart runtime array helpers
 
 **Scope:** Dart runtime array helper evaluator, ActionIR contract recognition, focused interpreter/contract tests,

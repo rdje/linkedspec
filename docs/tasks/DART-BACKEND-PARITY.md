@@ -425,12 +425,32 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.4.3.3 - add Dart runtime array helpers`
 
 - ID: `DART-BACKEND-PARITY.4.3.4`
-  Status: `pending`
+  Status: `done`
   Goal: Implement hash helper family and hash receiver/mutation behavior.
   Acceptance: `hash`, `flat_hash`, `copy`, key/value views, sorted views, merge/pick/drop/rename/set-key
     behavior, direct hash-index assignment values, and hash receiver chains match helper-catalog examples.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.**
+    - [x] **ROOT CAUSE** — `.4.3.3` executed array helpers, but hash helper calls still fell through the
+      generic pure-helper dispatcher or unsupported fluent-method path. Bare hash working variables in receiver
+      chains also evaluated as scalar variables, so `meta.sorted_keys()` could not read the aggregate store.
+    - [x] **FIX** — `dart/lib/src/runtime/interpreter.dart` now routes hash helpers through a hash-aware
+      dispatcher, reads bare hash stores in supported hash-consuming helper slots and compatible receiver chains,
+      implements key/value views, sorted key/value arrays, key predicates, `merge_hash`, `set_key`, `rename_key`,
+      `drop_keys`, `pick_keys`, `flat_hash`, statement-form `set_key(...)`, and explicit flat-style hash
+      splicing inside `hash(...)`.
+    - [x] **ADDRESSED** — Focused runtime tests cover `sorted_keys`, `sorted_values`, `count_keys`, `has_key`,
+      `drop_keys`, `pick_keys`, `rename_key`, `set_key`, `merge_hash`, `flat_hash`, hash receiver chains,
+      direct hash-index assignment values, pure value/receiver `set_key(...)` no-mutation behavior, statement
+      mutation, the bare-overlay merge boundary, and ordinary map field values not being flattened into
+      `hash(...)`. Contract tests confirm `sorted_keys` is recognized as a current helper name.
+    - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, focused runtime/contract tests,
+      `dart analyze --fatal-infos --fatal-warnings`, full `dart test`, the manifest-backed corpus runner,
+      CLI help checks, mdBook build, memory architecture, Knowledge Map, task-tree metadata, doctrine, diagnosis
+      evidence, and `git diff --check` pass.
+    - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
+      `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker rows, Knowledge Map
+      facts, `docs/TASK_TREE.md`, and this task tree are updated.
+  Commit: `DART-BACKEND-PARITY.4.3.4 - add Dart runtime hash helpers`
 
 - ID: `DART-BACKEND-PARITY.4.3.5`
   Status: `pending`
@@ -567,7 +587,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 2 | `DART-BACKEND-PARITY.4.3.1` | `done` | Core runtime value/store behavior and capture helper reads are implemented. |
 | 3 | `DART-BACKEND-PARITY.4.3.2` | `done` | String/scalar and numeric helper families are implemented. |
 | 4 | `DART-BACKEND-PARITY.4.3.3` | `done` | Array helper family and array receiver/mutation behavior are implemented. |
-| 5 | `DART-BACKEND-PARITY.4.3.4` | `pending` | Implement hash helper family and hash receiver/mutation behavior. |
+| 5 | `DART-BACKEND-PARITY.4.3.4` | `done` | Hash helper family and hash receiver/mutation behavior are implemented. |
+| 6 | `DART-BACKEND-PARITY.4.3.5` | `pending` | Implement value blocks, structured action controls, and tree traversal callback helpers. |
 
 ## Dart Toolchain And Package Layout
 
@@ -799,11 +820,12 @@ The `.4.1` runtime matching layer adds:
 
 ## Open Questions
 
-- None blocking `.4.2`. Runtime matching primitives are available; rule dispatch and lifecycle order are next.
+- None blocking `.4.3.5`. Hash helper breadth is available; value blocks, structured controls, and tree traversal
+  callback helpers are next.
 
 ## Blockers
 
-- None known before `.4.2` rule-dispatch work.
+- None known before `.4.3.5` value-block/control/tree traversal work.
 
 ## Verification Log
 
@@ -822,6 +844,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.3.3` | Focused `dart test test/function_registry_test.dart test/action_contracts_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart preserves staged function sidecars in an ordered registry and resolves exact-arity user calls before helper fallback. |
 | `2026-07-09` | `DART-BACKEND-PARITY.3.4` | Focused `dart test test/compiled_spec_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart compiles parsed specs into ordered compiled rule/dependency/descriptor state with ActionIR payloads and function registry projection. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.1` | Focused `dart test test/runtime_matching_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart runtime matching supports seek/consume, stable alternative identity, capture/named-capture records, char offsets, entry/local match separation, cursor state, and zero-progress detection. |
+| `2026-07-09` | `DART-BACKEND-PARITY.4.3.4` | Focused `dart test test/runtime_interpreter_test.dart`; focused `dart test test/action_contracts_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; diagnosis evidence; `git diff --check`. | PASS. Dart executes hash helper family breadth, hash receiver chains, statement/value `set_key` boundaries, direct hash-index assignment values, bare-overlay merge behavior, and explicit flat-style hash splicing. |
 
 ## Commit Log
 
@@ -840,6 +863,12 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.3.3` | `DART-BACKEND-PARITY.3.3 - add Dart function registry` | Ordered user-function registry and exact-arity resolver; compiled state remains `.3.4`. |
 | `DART-BACKEND-PARITY.3.4` | `DART-BACKEND-PARITY.3.4 - add Dart compiled spec state` | Ordered compiled rule/dependency/descriptor state; runtime matching starts in `.4.1`. |
 | `DART-BACKEND-PARITY.4.1` | `DART-BACKEND-PARITY.4.1 - add Dart runtime matching state` | Seek/consume regex matching and match-state primitives; rule dispatch starts in `.4.2`. |
+| `DART-BACKEND-PARITY.4.2` | `DART-BACKEND-PARITY.4.2 - add Dart runtime rule interpreter` | First executable compiled-rule interpreter; broader helper families remain `.4.3`. |
+| `DART-BACKEND-PARITY.4.3.0` | `DART-BACKEND-PARITY.4.3.0 - split Dart runtime helper families` | Helper/value runtime work split before code. |
+| `DART-BACKEND-PARITY.4.3.1` | `DART-BACKEND-PARITY.4.3.1 - add Dart runtime value capture helpers` | Core value/store/capture helper subset. |
+| `DART-BACKEND-PARITY.4.3.2` | `DART-BACKEND-PARITY.4.3.2 - add Dart runtime string numeric helpers` | String/scalar and numeric helper families. |
+| `DART-BACKEND-PARITY.4.3.3` | `DART-BACKEND-PARITY.4.3.3 - add Dart runtime array helpers` | Array helper family and statement-only array end mutations. |
+| `DART-BACKEND-PARITY.4.3.4` | `DART-BACKEND-PARITY.4.3.4 - add Dart runtime hash helpers` | Hash helper family and statement/value mutation boundaries. |
 
 ## Changelog
 
@@ -869,3 +898,14 @@ The `.4.1` runtime matching layer adds:
   matching and match-state tracking.
 - `2026-07-09`: Added Dart runtime regex/match-state primitives over compiled rule regex lists; frontier advances
   to `.4.2` for rule dispatch, rule modes, recursion guards, repetition bounds, and lifecycle order.
+- `2026-07-09`: Added Dart runtime rule dispatch/interpreter execution; frontier advances to `.4.3` for broader
+  helper/value semantics.
+- `2026-07-09`: Split Dart runtime helper/value semantics into focused leaves `.4.3.1` through `.4.3.6`.
+- `2026-07-09`: Added Dart core runtime value/store behavior and capture helper reads; frontier advances to
+  `.4.3.2` for string/scalar and numeric helper families.
+- `2026-07-09`: Added Dart string/scalar and numeric helper execution; frontier advances to `.4.3.3` for array
+  helper family and array receiver/mutation behavior.
+- `2026-07-09`: Added Dart array helper family execution and statement-only array end mutations; frontier advances
+  to `.4.3.4` for hash helper family and hash receiver/mutation behavior.
+- `2026-07-09`: Added Dart hash helper family execution, hash receiver chains, and statement/value mutation
+  boundaries; frontier advances to `.4.3.5` for value blocks, structured controls, and tree traversal helpers.

@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.4.3.4 — add Dart runtime hash helpers**
+  (DONE hash helper family, hash receiver chains, and statement/value mutation boundaries).
+
+  **Change:** Dart runtime helper execution now covers `count_keys`, `sorted_keys`, `sorted_values`, `has_key`,
+  `merge_hash`, pure/value `set_key`, `rename_key`, `drop_keys`, `pick_keys`, `flat_hash`, bare hash
+  working-variable receiver chains, statement-form `set_key(...)` mutation, direct hash-index assignment values,
+  and explicit flat-style hash splicing inside `hash(...)`.
+
+  **Boundary:** This closes hash helper breadth only. Value-block/control/tree traversal helpers, BACKTRACK,
+  tracing, staged function execution, full corpus output parity, and per-variant CLI productization remain later
+  leaves.
+
+  **Verification:** Focused runtime interpreter and ActionIR contract tests, Dart format/analyze/full tests,
+  corpus runner, CLI help, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, diagnosis
+  evidence, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.4.3.3 — add Dart runtime array helpers**
   (DONE array helper family, array receiver chains, split bridges, reducers, and statement-only end mutations).
 

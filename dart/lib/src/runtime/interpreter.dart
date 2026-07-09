@@ -735,6 +735,7 @@ final class LinkedSpecRuntimeEngine {
           context,
           ruleLabel,
           currentEdge: currentEdge,
+          statementContext: statementContext,
         );
       case ActionFluentChainExpr(:final receiver, :final calls):
         if (statementContext &&
@@ -795,9 +796,15 @@ final class LinkedSpecRuntimeEngine {
     _RuntimeExecutionContext context,
     String ruleLabel, {
     required _CurrentActionEdge? currentEdge,
+    bool statementContext = false,
   }) {
     final positionalArgs = call.args.map((arg) => arg.value).toList();
     final helperName = canonicalActionHelperName(call.name);
+    if (statementContext &&
+        helperName == 'set_key' &&
+        _executeSetKeyStatement(call, context, ruleLabel, currentEdge)) {
+      return null;
+    }
     switch (helperName) {
       case 'return':
         final value = positionalArgs.isEmpty
@@ -961,6 +968,15 @@ final class LinkedSpecRuntimeEngine {
             currentEdge,
           );
         }
+        if (_runtimeHashHelperNames.contains(helperName)) {
+          return _callHashHelperFromExpressions(
+            helperName,
+            positionalArgs,
+            context,
+            ruleLabel,
+            currentEdge,
+          );
+        }
         if (_runtimePureHelperNames.contains(helperName)) {
           return _callPureHelper(
             helperName,
@@ -1030,6 +1046,17 @@ final class LinkedSpecRuntimeEngine {
         }
         if (_runtimeArrayHelperNames.contains(helperName)) {
           return _callArrayHelper(helperName, [
+            receiver,
+            ..._evaluateArgumentValues(
+              call.args,
+              context,
+              ruleLabel,
+              currentEdge,
+            ),
+          ]);
+        }
+        if (_runtimeHashHelperNames.contains(helperName)) {
+          return _callHashHelper(helperName, [
             receiver,
             ..._evaluateArgumentValues(
               call.args,
@@ -1193,26 +1220,21 @@ final class LinkedSpecRuntimeEngine {
     }
 
     final entries = <String, Object?>{};
-    for (var index = 0; index < args.length; index += 2) {
-      final key = _stringValue(
-        _evaluateExpression(
-          args[index],
-          context,
-          ruleLabel,
-          currentEdge: currentEdge,
-        ),
-      );
-      final value = index + 1 < args.length
-          ? _copyValue(
-              _evaluateExpression(
-                args[index + 1],
-                context,
-                ruleLabel,
-                currentEdge: currentEdge,
-              ),
-            )
-          : null;
+    final values = [
+      for (final arg in args)
+        _evaluateExpression(arg, context, ruleLabel, currentEdge: currentEdge),
+    ];
+    for (var index = 0; index + 1 < values.length; index += 2) {
+      final key = _stringValue(values[index]);
+      final value = _copyValue(values[index + 1]);
       entries[key] = value;
+    }
+    for (final (index, value) in values.indexed) {
+      if (_isHashSpliceArgument(args[index]) && value is Map) {
+        for (final entry in _asHash(value).entries) {
+          entries[entry.key] = _copyValue(entry.value);
+        }
+      }
     }
     return entries;
   }
@@ -1253,14 +1275,41 @@ final class LinkedSpecRuntimeEngine {
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
   ) {
-    final arrayName = _variableName(receiver);
-    if (arrayName != null) {
+    final receiverName = _variableName(receiver);
+    if (receiverName != null) {
+      if ((helperName == 'copy' || helperName == 'flat') &&
+          _hasArrayValue(context, receiverName)) {
+        return List<Object?>.unmodifiable(
+          _arrayValueFor(context, receiverName),
+        );
+      }
+      if ((helperName == 'copy' || helperName == 'flat') &&
+          _hasHashValue(context, receiverName)) {
+        return Map<String, Object?>.unmodifiable(
+          _hashValueFor(context, receiverName),
+        );
+      }
       if (_arrayOnlyReceiverHelpers.contains(helperName)) {
-        return List<Object?>.unmodifiable(_arrayValueFor(context, arrayName));
+        return List<Object?>.unmodifiable(
+          _arrayValueFor(context, receiverName),
+        );
       }
       if (_arrayPreferredReceiverHelpers.contains(helperName) &&
-          _hasArrayValue(context, arrayName)) {
-        return List<Object?>.unmodifiable(_arrayValueFor(context, arrayName));
+          _hasArrayValue(context, receiverName)) {
+        return List<Object?>.unmodifiable(
+          _arrayValueFor(context, receiverName),
+        );
+      }
+      if (_hashOnlyReceiverHelpers.contains(helperName)) {
+        return Map<String, Object?>.unmodifiable(
+          _hashValueFor(context, receiverName),
+        );
+      }
+      if (_hashPreferredReceiverHelpers.contains(helperName) &&
+          _hasHashValue(context, receiverName)) {
+        return Map<String, Object?>.unmodifiable(
+          _hashValueFor(context, receiverName),
+        );
       }
     }
     return _evaluateExpression(
@@ -1323,6 +1372,46 @@ final class LinkedSpecRuntimeEngine {
       default:
         return false;
     }
+  }
+
+  bool _executeSetKeyStatement(
+    ActionCallExpr call,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    if (canonicalActionHelperName(call.name) != 'set_key') {
+      return false;
+    }
+    var args = call.args.map((arg) => arg.value).toList();
+    if (args.length == 4 && _variableName(args.first) != null) {
+      args = args.sublist(1);
+    }
+    if (args.length != 3) {
+      return false;
+    }
+    final target = _hashReceiverTargetName(args[0]);
+    if (target == null || target.isEmpty) {
+      return false;
+    }
+    final key = _stringValue(
+      _evaluateExpression(
+        args[1],
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      ),
+    );
+    final value = _copyValue(
+      _evaluateExpression(
+        args[2],
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      ),
+    );
+    context.hashFor(target)[key] = value;
+    return true;
   }
 
   Object? _callSplitFromExpressions(
@@ -1473,6 +1562,65 @@ final class LinkedSpecRuntimeEngine {
     };
   }
 
+  Object? _callHashHelperFromExpressions(
+    String helperName,
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    return _callHashHelper(
+      helperName,
+      _evaluateHashHelperValues(
+        helperName,
+        args,
+        context,
+        ruleLabel,
+        currentEdge,
+      ),
+    );
+  }
+
+  List<Object?> _evaluateHashHelperValues(
+    String helperName,
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    Object? evaluate(ActionExpr arg) =>
+        _evaluateExpression(arg, context, ruleLabel, currentEdge: currentEdge);
+    Object? hashArg(int index) => index < args.length
+        ? _evaluateHashArgument(args[index], context, ruleLabel, currentEdge)
+        : null;
+    Object? maybeHashArg(int index) => index < args.length
+        ? _evaluateMaybeHashArgument(
+            args[index],
+            context,
+            ruleLabel,
+            currentEdge,
+          )
+        : null;
+
+    return switch (helperName) {
+      'merge_hash' => [
+        if (args.isNotEmpty) evaluate(args[0]),
+        for (var index = 1; index < args.length; index += 1)
+          maybeHashArg(index),
+      ],
+      'flat_hash' => [
+        for (var index = 0; index < args.length; index += 1)
+          maybeHashArg(index),
+      ],
+      'count_keys' || 'sorted_keys' || 'sorted_values' => [hashArg(0)],
+      'has_key' || 'set_key' || 'rename_key' || 'drop_keys' || 'pick_keys' => [
+        hashArg(0),
+        for (final arg in args.skip(1)) evaluate(arg),
+      ],
+      _ => [for (final arg in args) evaluate(arg)],
+    };
+  }
+
   Object? _evaluateArrayArgument(
     ActionExpr arg,
     _RuntimeExecutionContext context,
@@ -1500,6 +1648,42 @@ final class LinkedSpecRuntimeEngine {
     final name = _variableName(arg);
     if (name != null && _hasArrayValue(context, name)) {
       return List<Object?>.unmodifiable(_arrayValueFor(context, name));
+    }
+    return _evaluateExpression(
+      arg,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    );
+  }
+
+  Object? _evaluateHashArgument(
+    ActionExpr arg,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final name = _variableName(arg);
+    if (name != null) {
+      return Map<String, Object?>.unmodifiable(_hashValueFor(context, name));
+    }
+    return _evaluateExpression(
+      arg,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    );
+  }
+
+  Object? _evaluateMaybeHashArgument(
+    ActionExpr arg,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final name = _variableName(arg);
+    if (name != null && _hasHashValue(context, name)) {
+      return Map<String, Object?>.unmodifiable(_hashValueFor(context, name));
     }
     return _evaluateExpression(
       arg,
@@ -1628,6 +1812,20 @@ final class LinkedSpecRuntimeEngine {
   }
 }
 
+bool _isHashSpliceArgument(ActionExpr expr) {
+  return switch (expr) {
+    ActionCallExpr(:final name) => {
+      'flat',
+      'flat_hash',
+    }.contains(canonicalActionHelperName(name)),
+    ActionFluentChainExpr(:final calls) when calls.isNotEmpty => {
+      'flat',
+      'flat_hash',
+    }.contains(canonicalActionHelperName(calls.last.method)),
+    _ => false,
+  };
+}
+
 const _runtimePureHelperNames = <String>{
   'cat',
   'contains_substr',
@@ -1704,6 +1902,19 @@ const _runtimeArrayHelperNames = <String>{
   'uppercase_each',
 };
 
+const _runtimeHashHelperNames = <String>{
+  'count_keys',
+  'drop_keys',
+  'flat_hash',
+  'has_key',
+  'merge_hash',
+  'pick_keys',
+  'rename_key',
+  'set_key',
+  'sorted_keys',
+  'sorted_values',
+};
+
 const _arrayOnlyReceiverHelpers = <String>{
   ..._runtimeArrayHelperNames,
   'num_avg',
@@ -1719,9 +1930,14 @@ const _arrayPreferredReceiverHelpers = <String>{
   'num_min',
 };
 
+const _hashOnlyReceiverHelpers = <String>{..._runtimeHashHelperNames};
+
+const _hashPreferredReceiverHelpers = <String>{'is_empty', 'is_nonempty'};
+
 const _runtimeReceiverHelperNames = <String>{
   ..._runtimePureHelperNames,
   ..._runtimeArrayHelperNames,
+  ..._runtimeHashHelperNames,
   'coalesce',
   'coalesce_nonempty',
 };
@@ -1811,6 +2027,25 @@ Object? _callArrayHelper(String helperName, List<Object?> values) {
     'uppercase_each' => _mapStringItems(values, (value) => value.toUpperCase()),
     _ => throw RuntimeInterpreterException(
       "unsupported array runtime helper '$helperName'",
+    ),
+  };
+}
+
+Object? _callHashHelper(String helperName, List<Object?> values) {
+  return switch (helperName) {
+    'count_keys' =>
+      _hashItems(values.isEmpty ? null : values.first)?.length ?? 0,
+    'drop_keys' => _callDropKeys(values),
+    'flat_hash' => _callFlatHash(values),
+    'has_key' => _callHasKey(values),
+    'merge_hash' => _callMergeHash(values),
+    'pick_keys' => _callPickKeys(values),
+    'rename_key' => _callRenameKey(values),
+    'set_key' => _callSetKey(values),
+    'sorted_keys' => _callSortedKeys(values),
+    'sorted_values' => _callSortedValues(values),
+    _ => throw RuntimeInterpreterException(
+      "unsupported hash runtime helper '$helperName'",
     ),
   };
 }
@@ -1972,6 +2207,9 @@ Object? _callFlat(List<Object?> values) {
     return [null];
   }
   final value = values.first;
+  if (value is Map) {
+    return _asHash(value);
+  }
   if (value is List) {
     return [for (final item in value) _copyValue(item)];
   }
@@ -2004,6 +2242,123 @@ Object? _callSplitTaggedRecords(List<Object?> values) {
     ))
       [tag, item, ...fields.map(_copyValue)],
   ];
+}
+
+Map<String, Object?>? _hashItems(Object? value) {
+  if (value is! Map) {
+    return null;
+  }
+  return _asHash(value);
+}
+
+Object? _callMergeHash(List<Object?> values) {
+  final merged = <String, Object?>{};
+  for (final value in values) {
+    final hash = _hashItems(value);
+    if (hash == null) {
+      continue;
+    }
+    for (final entry in hash.entries) {
+      merged[entry.key] = _copyValue(entry.value);
+    }
+  }
+  return merged;
+}
+
+Object? _callSetKey(List<Object?> values) {
+  if (values.length < 3) {
+    return null;
+  }
+  final hash = _hashItems(values.first);
+  if (hash == null) {
+    return _copyValue(values.first);
+  }
+  hash[_stringValue(values[1])] = _copyValue(values[2]);
+  return hash;
+}
+
+Object? _callRenameKey(List<Object?> values) {
+  if (values.length < 3) {
+    return null;
+  }
+  final hash = _hashItems(values.first);
+  if (hash == null) {
+    return _copyValue(values.first);
+  }
+  final oldKey = _stringValue(values[1]);
+  final newKey = _stringValue(values[2]);
+  return {
+    for (final entry in hash.entries)
+      if (entry.key == oldKey)
+        newKey: _copyValue(entry.value)
+      else
+        entry.key: _copyValue(entry.value),
+  };
+}
+
+Object? _callDropKeys(List<Object?> values) {
+  final hash = _hashItems(values.isEmpty ? null : values.first);
+  if (hash == null) {
+    return values.isEmpty ? null : _copyValue(values.first);
+  }
+  final keys = {for (final value in values.skip(1)) _stringValue(value)};
+  return {
+    for (final entry in hash.entries)
+      if (!keys.contains(entry.key)) entry.key: _copyValue(entry.value),
+  };
+}
+
+Object? _callPickKeys(List<Object?> values) {
+  final hash = _hashItems(values.isEmpty ? null : values.first);
+  if (hash == null) {
+    return null;
+  }
+  final keys = {for (final value in values.skip(1)) _stringValue(value)};
+  return {
+    for (final entry in hash.entries)
+      if (keys.contains(entry.key)) entry.key: _copyValue(entry.value),
+  };
+}
+
+Object? _callSortedKeys(List<Object?> values) {
+  final hash = _hashItems(values.isEmpty ? null : values.first);
+  if (hash == null) {
+    return <Object?>[];
+  }
+  final keys = hash.keys.toList()..sort();
+  return keys;
+}
+
+Object? _callSortedValues(List<Object?> values) {
+  final hash = _hashItems(values.isEmpty ? null : values.first);
+  if (hash == null) {
+    return <Object?>[];
+  }
+  final entries = hash.entries.toList()
+    ..sort((left, right) => left.key.compareTo(right.key));
+  return [for (final entry in entries) _copyValue(entry.value)];
+}
+
+Object? _callHasKey(List<Object?> values) {
+  final hash = _hashItems(values.isEmpty ? null : values.first);
+  if (hash == null || values.length < 2) {
+    return false;
+  }
+  return hash.containsKey(_stringValue(values[1]));
+}
+
+Object? _callFlatHash(List<Object?> values) {
+  final flattened = <String, Object?>{};
+  for (final value in values) {
+    final hash = _hashItems(value);
+    if (hash == null) {
+      continue;
+    }
+    for (final entry in hash.entries) {
+      flattened[entry.key] = _copyValue(entry.value);
+    }
+  }
+  return flattened;
 }
 
 bool _coalesceAccepts(Object? value, {required bool requireNonempty}) {
@@ -2633,6 +2988,18 @@ String? _hashTargetName(ActionExpr expr) {
     return null;
   }
   return _variableName(expr.args.single.value);
+}
+
+String? _hashReceiverTargetName(ActionExpr expr) {
+  final variable = _variableName(expr);
+  if (variable != null) {
+    return variable;
+  }
+  return _hashTargetName(expr);
+}
+
+bool _hasHashValue(_RuntimeExecutionContext context, String name) {
+  return context.hashes.containsKey(name) || context.variables[name] is Map;
 }
 
 String? _variableName(ActionExpr expr) {

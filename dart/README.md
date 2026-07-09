@@ -9,7 +9,8 @@ frontend validation, spec-returned function-shell projection, typed ActionIR
 parsing/contract resolution, user-function registry scaffolding, a
 backend-neutral compiled-spec state model, runtime regex/match-state primitives,
 a first rule-dispatch interpreter, core runtime value/capture helpers,
-string/numeric helper execution, and array helper execution before full
+string/numeric helper execution, array helper execution, and hash helper
+execution before full
 helper/corpus semantics land.
 
 ## Commands
@@ -28,7 +29,7 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.4.3.3` owns the current boundary. The package can round-trip
+`DART-BACKEND-PARITY.4.3.4` owns the current boundary. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -53,5 +54,8 @@ arithmetic/reducer/comparison helpers, numeric aliases and symbol callees, and
 compatible string/number receiver chains. It now also executes array helpers,
 array receiver chains, regex split/filter bridges, delimiter-first
 `join_values`, array numeric reducers, and statement-only array end mutations.
-Full hash, control/tree, tracing, and corpus output parity remain later leaves in
+It now also executes hash helpers, hash receiver chains, statement/value
+`set_key` boundaries, bare-overlay `merge_hash`, direct hash-index assignment
+values, and explicit flat-style hash splicing inside `hash(...)`.
+Control/tree, tracing, and corpus output parity remain later leaves in
 `docs/tasks/DART-BACKEND-PARITY.md`.

@@ -39,10 +39,10 @@ helper calls. Invalid numeric input or invalid arithmetic such as divide-by-zero
 returns `null`.
 
 `DART-BACKEND-PARITY.4.3.3` has since landed the broader array helper family,
-array receiver chains, and array mutation behavior. Hash helper breadth remains
-owned by `DART-BACKEND-PARITY.4.3.4`.
+array receiver chains, and array mutation behavior. `DART-BACKEND-PARITY.4.3.4`
+has since landed hash helper breadth and hash receiver/mutation behavior.
 
-Related facts: [[dart-runtime-array-helpers]],
+Related facts: [[dart-runtime-array-helpers]], [[dart-runtime-hash-helpers]],
 [[dart-runtime-core-value-capture-helpers]],
 [[terse-string-scalar-receiver-chains]], [[terse-number-receiver-dot-value-chains]],
 [[terse-numeric-comparison-symbol-callees]], [[terse-string-comparison-bridge]].

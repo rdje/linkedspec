@@ -63,6 +63,7 @@ void main() {
     expect(isKnownActionIrCallName('cat'), isTrue);
     expect(isKnownActionIrCallName('gt'), isTrue);
     expect(isKnownActionIrCallName('push_back'), isTrue);
+    expect(isKnownActionIrCallName('sorted_keys'), isTrue);
     expect(isKnownActionIrCallName('mystery_helper'), isFalse);
     expect(canonicalActionHelperName('>='), 'num_ge');
 

@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.4.3.4 — Dart runtime hash helpers):
+  Extended `LinkedSpecRuntimeEngine` with hash-aware helper dispatch. Function helper calls now consume bare hash
+  working variables in the documented hash slots, while receiver chains such as
+  `meta.set_key("stage", "normalized").sorted_keys().join_values(",")` read a hash snapshot and remain pure.
+  The runtime now covers key/value views, sorted key/value arrays, key predicates, `merge_hash`, `set_key`,
+  `rename_key`, `drop_keys`, `pick_keys`, `flat_hash`, direct hash-index assignment values, and explicit
+  `flat(...)`/`flat_hash(...)` splicing inside `hash(...)`. The merge boundary remains intentional:
+  `merge_hash(copy(hash(base)), overlay)` consumes the later bare overlay, while a bare first argument is not
+  treated as the base hash. Next frontier is `.4.3.5`, value blocks, structured action controls, and tree
+  traversal callback helpers.
+
 - 2026-07-09 (DART-BACKEND-PARITY.4.3.3 — Dart runtime array helpers):
   Extended `LinkedSpecRuntimeEngine` with array-aware helper dispatch. Function helper calls now evaluate bare
   array working variables as array snapshots in array-consuming slots, while receiver chains such as

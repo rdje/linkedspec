@@ -37,7 +37,7 @@ The capture-reader subset now includes `entry_named`, `match_named`,
 Bare capture names such as `entry_named(name)` are treated as capture keys, not
 scalar variable reads.
 
-Related facts: [[dart-runtime-string-numeric-helpers]],
+Related facts: [[dart-runtime-hash-helpers]], [[dart-runtime-string-numeric-helpers]],
 [[dart-runtime-rule-interpreter]], [[dart-runtime-matching-state]],
 [[typed-wrapper-quoted-name-boundaries]], [[terse-direct-access-explicit-segments]],
 [[rust-capture-group-helper-indexing]].

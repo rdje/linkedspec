@@ -319,8 +319,11 @@ helpers, numeric word aliases, arithmetic/comparison symbol callees, and
 compatible string/number receiver chains. It also executes array helper family
 breadth, bare array working-variable receiver chains, regex split/filter
 bridges, delimiter-first `join_values`, array numeric reducers, and
-statement-only array end mutations. Broader hash helper families,
-value-block/control/tree traversal helpers, BACKTRACK behavior,
+statement-only array end mutations. It also executes hash helper family breadth,
+bare hash working-variable receiver chains, statement/value mutation boundaries,
+direct hash-index assignment values, bare-overlay `merge_hash`, and explicit
+flat-style hash splicing inside `hash(...)`. Value-block/control/tree traversal
+helpers, BACKTRACK behavior,
 tracing/diagnostics, staged function execution, and
 corpus-output parity remain later Dart leaves.
 

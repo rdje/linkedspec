@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.4` extended Dart runtime hash helper execution in
+  `dart/lib/src/runtime/interpreter.dart`. The evaluator now has hash-aware helper argument evaluation, bare hash
+  working-variable receiver reads, pure hash receiver chains, key/value views, sorted key/value arrays, key
+  predicates, `merge_hash`, `set_key`, `rename_key`, `drop_keys`, `pick_keys`, `flat_hash`, statement-form
+  `set_key(...)` mutation, direct hash-index assignment values, and explicit flat-style hash splicing inside
+  `hash(...)`. The next helper frontier is `.4.3.5` for value blocks, structured controls, and tree traversal
+  callback helpers; BACKTRACK, tracing, corpus output parity, and per-variant CLI productization remain later Dart
+  leaves.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.3` extended Dart runtime array helper execution in
   `dart/lib/src/runtime/interpreter.dart`. The evaluator now has array-aware helper argument evaluation, bare array
   working-variable receiver reads, pure array receiver chains, regex split/filter bridges, delimiter-first
