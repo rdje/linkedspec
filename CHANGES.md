@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.4.3.3 — add Dart runtime array helpers
+
+**Scope:** Dart runtime array helper evaluator, ActionIR contract recognition, focused interpreter/contract tests,
+package README, mdBook Dart handoff/status text, live docs, roadmap/task-tree status, and Knowledge Map facts.
+
+**Change:** Extended Dart runtime helper execution with array-aware argument evaluation and receiver dispatch.
+The runtime now executes array helper family breadth: count/first/last, order/select helpers, membership/index
+helpers, delimiter-first `join_values`, split bridges with regex delimiters, transform/filter pipelines,
+`flat_array` / `concat_arrays`, `split_tagged_records`, array numeric reducers, bare array working-variable
+receiver chains, and statement-only `push_back` / `push_front` / `pop_back` / `pop_front` mutations. Value-slot end
+mutations return `null` and leave arrays unchanged.
+
+**Validation:** Focused runtime interpreter and ActionIR contract tests, Dart format/analyze/full tests, corpus
+runner, CLI help, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, diagnosis evidence,
+and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.4.3.2 — add Dart runtime string numeric helpers
 
 **Scope:** Dart runtime pure helper evaluator, focused interpreter tests, package README, mdBook Dart

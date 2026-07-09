@@ -38,10 +38,11 @@ receiver chains such as `17.mod(5)` and `3.5.round()` execute as first-argument
 helper calls. Invalid numeric input or invalid arithmetic such as divide-by-zero
 returns `null`.
 
-Boundary: `split(...)` can return arrays, but the broader array helper family,
-array receiver chains, and array mutation behavior remain owned by
-`DART-BACKEND-PARITY.4.3.3`.
+`DART-BACKEND-PARITY.4.3.3` has since landed the broader array helper family,
+array receiver chains, and array mutation behavior. Hash helper breadth remains
+owned by `DART-BACKEND-PARITY.4.3.4`.
 
-Related facts: [[dart-runtime-core-value-capture-helpers]],
+Related facts: [[dart-runtime-array-helpers]],
+[[dart-runtime-core-value-capture-helpers]],
 [[terse-string-scalar-receiver-chains]], [[terse-number-receiver-dot-value-chains]],
 [[terse-numeric-comparison-symbol-callees]], [[terse-string-comparison-bridge]].

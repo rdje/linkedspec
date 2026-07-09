@@ -395,13 +395,34 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.4.3.2 - add Dart runtime string numeric helpers`
 
 - ID: `DART-BACKEND-PARITY.4.3.3`
-  Status: `pending`
+  Status: `done`
   Goal: Implement array helper family and array receiver/mutation behavior.
   Acceptance: `array`, `flat_array`, `copy`, count/select/order/membership/join/split bridges, append and
     end-mutation forms, and array receiver chains match helper-catalog examples without mutating snapshots
     unexpectedly.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.**
+    - [x] **ROOT CAUSE** — `.4.3.2` executed string/scalar and numeric helpers, but array helper calls still
+      fell through the generic pure-helper dispatcher or unsupported fluent-method path. Bare array working
+      variables in receiver chains also evaluated as scalar variables, so `items.sorted()` could not read the
+      aggregate store.
+    - [x] **FIX** — `dart/lib/src/runtime/interpreter.dart` now routes array helpers through an array-aware
+      dispatcher, reads bare array stores in array-consuming helper slots and compatible receiver chains,
+      preserves regex delimiter/filter arguments, implements `split(array(target), ...)`, array pipelines,
+      delimiter-first `join_values`, `flat_array` / `concat_arrays`, `split_tagged_records`, and statement-only
+      `push_back` / `push_front` / `pop_back` / `pop_front`.
+    - [x] **ADDRESSED** — Focused runtime tests cover sorted/drop/first chains, reversed/take/last, contains,
+      index, drop/join, uniq/join, regex `filter_match`, `split_each`, trim/filter/lowercase pipelines,
+      `take_last`, `slice`, `flat_array`, `concat_arrays`, array numeric reducers, missing-array emptiness,
+      regex `split` bridges, statement-only end mutations, value-slot end-mutation no-op behavior, and tagged
+      record splitting. Contract tests confirm `push_back` is recognized as a current helper name.
+    - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, focused runtime/contract tests,
+      `dart analyze --fatal-infos --fatal-warnings`, full `dart test`, the manifest-backed corpus runner,
+      CLI help checks, mdBook build, memory architecture, Knowledge Map, task-tree metadata, doctrine, diagnosis
+      evidence, and `git diff --check` pass.
+    - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
+      `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker rows, Knowledge Map
+      facts, `docs/TASK_TREE.md`, and this task tree are updated.
+  Commit: `DART-BACKEND-PARITY.4.3.3 - add Dart runtime array helpers`
 
 - ID: `DART-BACKEND-PARITY.4.3.4`
   Status: `pending`
@@ -545,7 +566,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 1 | `DART-BACKEND-PARITY.4.3.0` | `done` | Broad helper/value runtime work is split before code. |
 | 2 | `DART-BACKEND-PARITY.4.3.1` | `done` | Core runtime value/store behavior and capture helper reads are implemented. |
 | 3 | `DART-BACKEND-PARITY.4.3.2` | `done` | String/scalar and numeric helper families are implemented. |
-| 4 | `DART-BACKEND-PARITY.4.3.3` | `pending` | Implement array helper family and array receiver/mutation behavior. |
+| 4 | `DART-BACKEND-PARITY.4.3.3` | `done` | Array helper family and array receiver/mutation behavior are implemented. |
+| 5 | `DART-BACKEND-PARITY.4.3.4` | `pending` | Implement hash helper family and hash receiver/mutation behavior. |
 
 ## Dart Toolchain And Package Layout
 

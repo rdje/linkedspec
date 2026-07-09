@@ -578,6 +578,7 @@ final class LinkedSpecRuntimeEngine {
           context,
           ruleLabel,
           currentEdge: currentEdge,
+          statementContext: statement.dropsValue,
         );
       }
       return null;
@@ -597,6 +598,7 @@ final class LinkedSpecRuntimeEngine {
     _RuntimeExecutionContext context,
     String ruleLabel, {
     required _CurrentActionEdge? currentEdge,
+    bool statementContext = false,
   }) {
     switch (expr) {
       case ActionStringLiteralExpr(:final value):
@@ -735,11 +737,29 @@ final class LinkedSpecRuntimeEngine {
           currentEdge: currentEdge,
         );
       case ActionFluentChainExpr(:final receiver, :final calls):
-        var value = _evaluateExpression(
+        if (statementContext &&
+            _executeArrayEndMutationStatement(
+              expr,
+              context,
+              ruleLabel,
+              currentEdge,
+            )) {
+          return null;
+        }
+        if (calls.isEmpty) {
+          return _evaluateExpression(
+            receiver,
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          );
+        }
+        var value = _evaluateFluentReceiver(
           receiver,
+          canonicalActionHelperName(calls.first.method),
           context,
           ruleLabel,
-          currentEdge: currentEdge,
+          currentEdge,
         );
         for (final call in calls) {
           value = _evaluateFluentCall(
@@ -824,6 +844,13 @@ final class LinkedSpecRuntimeEngine {
           ruleLabel,
           currentEdge,
           requireNonempty: true,
+        );
+      case 'split':
+        return _callSplitFromExpressions(
+          positionalArgs,
+          context,
+          ruleLabel,
+          currentEdge,
         );
       case 'entry_text':
         return context.registers.entryMatch?.text;
@@ -925,6 +952,15 @@ final class LinkedSpecRuntimeEngine {
             : _executeRule(targetLabel, targetIndex, context);
         return child.value;
       default:
+        if (_runtimeArrayHelperNames.contains(helperName)) {
+          return _callArrayHelperFromExpressions(
+            helperName,
+            positionalArgs,
+            context,
+            ruleLabel,
+            currentEdge,
+          );
+        }
         if (_runtimePureHelperNames.contains(helperName)) {
           return _callPureHelper(
             helperName,
@@ -966,7 +1002,43 @@ final class LinkedSpecRuntimeEngine {
           currentEdge,
           requireNonempty: true,
         );
+      case 'split':
+        return _callSplitWithReceiver(
+          receiver,
+          call.args,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+      case 'push_back':
+      case 'push_front':
+      case 'pop_back':
+      case 'pop_front':
+        return null;
       default:
+        if (helperName == 'join_values') {
+          final values = _evaluateArgumentValues(
+            call.args,
+            context,
+            ruleLabel,
+            currentEdge,
+          );
+          return _callArrayHelper(helperName, [
+            values.isEmpty ? '' : values.first,
+            receiver,
+          ]);
+        }
+        if (_runtimeArrayHelperNames.contains(helperName)) {
+          return _callArrayHelper(helperName, [
+            receiver,
+            ..._evaluateArgumentValues(
+              call.args,
+              context,
+              ruleLabel,
+              currentEdge,
+            ),
+          ]);
+        }
         if (_runtimeReceiverHelperNames.contains(helperName)) {
           return _callPureHelper(helperName, [
             receiver,
@@ -1174,6 +1246,286 @@ final class LinkedSpecRuntimeEngine {
     ];
   }
 
+  Object? _evaluateFluentReceiver(
+    ActionExpr receiver,
+    String helperName,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final arrayName = _variableName(receiver);
+    if (arrayName != null) {
+      if (_arrayOnlyReceiverHelpers.contains(helperName)) {
+        return List<Object?>.unmodifiable(_arrayValueFor(context, arrayName));
+      }
+      if (_arrayPreferredReceiverHelpers.contains(helperName) &&
+          _hasArrayValue(context, arrayName)) {
+        return List<Object?>.unmodifiable(_arrayValueFor(context, arrayName));
+      }
+    }
+    return _evaluateExpression(
+      receiver,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    );
+  }
+
+  bool _executeArrayEndMutationStatement(
+    ActionFluentChainExpr expr,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    if (expr.calls.length != 1) {
+      return false;
+    }
+    final call = expr.calls.single;
+    final target = _arrayReceiverTargetName(expr.receiver);
+    if (target == null) {
+      return false;
+    }
+    switch (call.method) {
+      case 'push_back':
+      case 'push_front':
+        if (call.args.length != 1) {
+          return false;
+        }
+        final value = _copyValue(
+          _evaluateExpression(
+            call.args.single.value,
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          ),
+        );
+        final array = context.arrayFor(target);
+        if (call.method == 'push_back') {
+          array.add(value);
+        } else {
+          array.insert(0, value);
+        }
+        return true;
+      case 'pop_back':
+      case 'pop_front':
+        if (call.args.isNotEmpty) {
+          return false;
+        }
+        final array = context.arrayFor(target);
+        if (array.isNotEmpty) {
+          if (call.method == 'pop_back') {
+            array.removeLast();
+          } else {
+            array.removeAt(0);
+          }
+        }
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  Object? _callSplitFromExpressions(
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final target = args.isEmpty ? null : _arrayTargetName(args.first);
+    if (target != null && args.length >= 2) {
+      final source = _evaluateExpression(
+        args[1],
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      );
+      final delimiterExpr = args.length >= 3 ? args[2] : null;
+      final delimiter = delimiterExpr == null
+          ? ''
+          : _evaluateExpression(
+              delimiterExpr,
+              context,
+              ruleLabel,
+              currentEdge: currentEdge,
+            );
+      final parts = _splitStringValue(
+        source,
+        delimiter,
+        regexDelimiter: delimiterExpr is ActionRegexLiteralExpr,
+      );
+      context.arrays[target] = parts;
+      return List<Object?>.unmodifiable(context.arrayFor(target));
+    }
+
+    final values = _evaluateValues(args, context, ruleLabel, currentEdge);
+    return _callSplit(
+      values,
+      regexDelimiter: args.length >= 2 && args[1] is ActionRegexLiteralExpr,
+    );
+  }
+
+  Object? _callSplitWithReceiver(
+    Object? receiver,
+    List<ActionArgument> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    if (args.isEmpty) {
+      return null;
+    }
+    final delimiterExpr = args.first.value;
+    final delimiter = _evaluateExpression(
+      delimiterExpr,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    );
+    return _splitStringValue(
+      receiver,
+      delimiter,
+      regexDelimiter: delimiterExpr is ActionRegexLiteralExpr,
+    );
+  }
+
+  Object? _callArrayHelperFromExpressions(
+    String helperName,
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    return _callArrayHelper(
+      helperName,
+      _evaluateArrayHelperValues(
+        helperName,
+        args,
+        context,
+        ruleLabel,
+        currentEdge,
+      ),
+    );
+  }
+
+  List<Object?> _evaluateArrayHelperValues(
+    String helperName,
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    Object? evaluate(ActionExpr arg) =>
+        _evaluateExpression(arg, context, ruleLabel, currentEdge: currentEdge);
+    Object? arrayArg(int index) => index < args.length
+        ? _evaluateArrayArgument(args[index], context, ruleLabel, currentEdge)
+        : null;
+    Object? maybeArrayArg(int index) => index < args.length
+        ? _evaluateMaybeArrayArgument(
+            args[index],
+            context,
+            ruleLabel,
+            currentEdge,
+          )
+        : null;
+
+    return switch (helperName) {
+      'count' || 'is_empty' || 'is_nonempty' => [maybeArrayArg(0)],
+      'first' ||
+      'last' ||
+      'sorted' ||
+      'reversed' ||
+      'trim_each' ||
+      'filter_nonempty' ||
+      'lowercase_each' ||
+      'uppercase_each' ||
+      'uniq' => [arrayArg(0)],
+      'take' ||
+      'take_last' ||
+      'drop_front' ||
+      'drop_back' ||
+      'contains' ||
+      'index_of' => [
+        arrayArg(0),
+        for (final arg in args.skip(1)) evaluate(arg),
+      ],
+      'filter_match' || 'split_each' => [
+        arrayArg(0),
+        if (args.length >= 2)
+          _evaluatePatternArgument(args[1], context, ruleLabel, currentEdge),
+      ],
+      'slice' => [arrayArg(0), for (final arg in args.skip(1)) evaluate(arg)],
+      'join_values' => [
+        args.isEmpty ? '' : evaluate(args[0]),
+        args.length >= 2 ? arrayArg(1) : <Object?>[],
+      ],
+      'flat' => [if (args.isNotEmpty) maybeArrayArg(0)],
+      'flat_array' || 'concat_arrays' => [
+        for (final arg in args)
+          _evaluateMaybeArrayArgument(arg, context, ruleLabel, currentEdge),
+      ],
+      'split_tagged_records' => [
+        if (args.isNotEmpty) evaluate(args[0]),
+        if (args.length >= 2)
+          _evaluatePatternArgument(args[1], context, ruleLabel, currentEdge),
+        for (final arg in args.skip(2)) evaluate(arg),
+      ],
+      _ => [for (final arg in args) evaluate(arg)],
+    };
+  }
+
+  Object? _evaluateArrayArgument(
+    ActionExpr arg,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final name = _variableName(arg);
+    if (name != null) {
+      return List<Object?>.unmodifiable(_arrayValueFor(context, name));
+    }
+    return _evaluateExpression(
+      arg,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    );
+  }
+
+  Object? _evaluateMaybeArrayArgument(
+    ActionExpr arg,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final name = _variableName(arg);
+    if (name != null && _hasArrayValue(context, name)) {
+      return List<Object?>.unmodifiable(_arrayValueFor(context, name));
+    }
+    return _evaluateExpression(
+      arg,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    );
+  }
+
+  Object? _evaluatePatternArgument(
+    ActionExpr arg,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    if (arg is ActionRegexLiteralExpr) {
+      return _RuntimeRegexPattern(arg.pattern);
+    }
+    return _evaluateExpression(
+      arg,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    );
+  }
+
   Object? _callCoalesce(
     List<ActionExpr> args,
     _RuntimeExecutionContext context,
@@ -1325,8 +1677,51 @@ const _runtimePureHelperNames = <String>{
   'uppercase',
 };
 
+const _runtimeArrayHelperNames = <String>{
+  'concat_arrays',
+  'contains',
+  'count',
+  'drop_back',
+  'drop_front',
+  'filter_match',
+  'filter_nonempty',
+  'first',
+  'flat',
+  'flat_array',
+  'index_of',
+  'join_values',
+  'last',
+  'lowercase_each',
+  'reversed',
+  'slice',
+  'sorted',
+  'split_each',
+  'split_tagged_records',
+  'take',
+  'take_last',
+  'trim_each',
+  'uniq',
+  'uppercase_each',
+};
+
+const _arrayOnlyReceiverHelpers = <String>{
+  ..._runtimeArrayHelperNames,
+  'num_avg',
+  'num_median',
+  'num_range',
+  'num_sum',
+};
+
+const _arrayPreferredReceiverHelpers = <String>{
+  'is_empty',
+  'is_nonempty',
+  'num_max',
+  'num_min',
+};
+
 const _runtimeReceiverHelperNames = <String>{
   ..._runtimePureHelperNames,
+  ..._runtimeArrayHelperNames,
   'coalesce',
   'coalesce_nonempty',
 };
@@ -1370,6 +1765,245 @@ Object? _callPureHelper(String helperName, List<Object?> values) {
       "unsupported pure runtime helper '$helperName'",
     ),
   };
+}
+
+Object? _callArrayHelper(String helperName, List<Object?> values) {
+  return switch (helperName) {
+    'concat_arrays' => _callConcatArrays(values),
+    'contains' => _callArrayContains(values),
+    'count' => _lengthValue(values.isEmpty ? null : values.first) ?? 0,
+    'drop_back' => _callDrop(values, front: false),
+    'drop_front' => _callDrop(values, front: true),
+    'filter_match' => _callFilterMatch(values),
+    'filter_nonempty' => _arrayTransform(values, (items) {
+      return [
+        for (final item in items)
+          if (!_isEmptyValue(item)) _copyValue(item),
+      ];
+    }),
+    'first' => _arrayItem(values, first: true),
+    'flat' => _callFlat(values),
+    'flat_array' => _callFlatArray(values),
+    'index_of' => _callIndexOf(values),
+    'join_values' => _callJoinValues(values),
+    'last' => _arrayItem(values, first: false),
+    'lowercase_each' => _mapStringItems(values, (value) => value.toLowerCase()),
+    'reversed' => _arrayTransform(values, (items) {
+      return [for (final item in items.reversed) _copyValue(item)];
+    }),
+    'slice' => _callSlice(values),
+    'sorted' => _arrayTransform(values, (items) {
+      final sorted = [for (final item in items) _copyValue(item)]
+        ..sort(
+          (left, right) => _scalarString(
+            left,
+            nullAsEmpty: true,
+          )!.compareTo(_scalarString(right, nullAsEmpty: true)!),
+        );
+      return sorted;
+    }),
+    'split_each' => _callSplitEach(values),
+    'split_tagged_records' => _callSplitTaggedRecords(values),
+    'take' => _callTake(values, front: true),
+    'take_last' => _callTake(values, front: false),
+    'trim_each' => _mapStringItems(values, (value) => value.trim()),
+    'uniq' => _callUniq(values),
+    'uppercase_each' => _mapStringItems(values, (value) => value.toUpperCase()),
+    _ => throw RuntimeInterpreterException(
+      "unsupported array runtime helper '$helperName'",
+    ),
+  };
+}
+
+Object? _arrayItem(List<Object?> values, {required bool first}) {
+  final items = _arrayItems(values.isEmpty ? null : values.first);
+  if (items == null || items.isEmpty) {
+    return null;
+  }
+  return _copyValue(first ? items.first : items.last);
+}
+
+Object? _arrayTransform(
+  List<Object?> values,
+  List<Object?> Function(List<Object?> items) transform,
+) {
+  final items = _arrayItems(values.isEmpty ? null : values.first);
+  if (items == null) {
+    return <Object?>[];
+  }
+  return transform(items);
+}
+
+Object? _callTake(List<Object?> values, {required bool front}) {
+  final items = _arrayItems(values.isEmpty ? null : values.first);
+  if (items == null) {
+    return <Object?>[];
+  }
+  final count = _nonNegativeInt(values.length >= 2 ? values[1] : null, 1);
+  if (front) {
+    return [for (final item in items.take(count)) _copyValue(item)];
+  }
+  final start = math.max(0, items.length - count);
+  return [for (final item in items.skip(start)) _copyValue(item)];
+}
+
+Object? _callDrop(List<Object?> values, {required bool front}) {
+  final items = _arrayItems(values.isEmpty ? null : values.first);
+  if (items == null) {
+    return <Object?>[];
+  }
+  final count = _nonNegativeInt(values.length >= 2 ? values[1] : null, 1);
+  if (front) {
+    return [for (final item in items.skip(count)) _copyValue(item)];
+  }
+  final end = math.max(0, items.length - count);
+  return [for (final item in items.take(end)) _copyValue(item)];
+}
+
+Object? _callSlice(List<Object?> values) {
+  final items = _arrayItems(values.isEmpty ? null : values.first);
+  if (items == null) {
+    return <Object?>[];
+  }
+  final start = _nonNegativeInt(values.length >= 2 ? values[1] : null, 0);
+  final length = _nonNegativeInt(
+    values.length >= 3 ? values[2] : null,
+    items.length,
+  );
+  if (start >= items.length) {
+    return <Object?>[];
+  }
+  final end = math.min(items.length, start + length);
+  return [for (final item in items.sublist(start, end)) _copyValue(item)];
+}
+
+Object? _callArrayContains(List<Object?> values) {
+  final items = _arrayItems(values.isEmpty ? null : values.first);
+  if (items == null || values.length < 2) {
+    return false;
+  }
+  final needle = _scalarString(values[1], nullAsEmpty: true);
+  return items.any((item) => _scalarString(item, nullAsEmpty: true) == needle);
+}
+
+Object? _callIndexOf(List<Object?> values) {
+  final items = _arrayItems(values.isEmpty ? null : values.first);
+  if (items == null || values.length < 2) {
+    return null;
+  }
+  final needle = _scalarString(values[1], nullAsEmpty: true);
+  for (final (index, item) in items.indexed) {
+    if (_scalarString(item, nullAsEmpty: true) == needle) {
+      return index;
+    }
+  }
+  return null;
+}
+
+Object? _callJoinValues(List<Object?> values) {
+  final delimiter = _scalarString(
+    values.isEmpty ? '' : values.first,
+    nullAsEmpty: true,
+  );
+  if (delimiter == null) {
+    return '';
+  }
+  final items = values.length >= 2 ? _arrayItems(values[1]) : const <Object?>[];
+  final parts = items ?? (values.length >= 2 ? <Object?>[values[1]] : const []);
+  return parts
+      .map((value) => _scalarString(value, nullAsEmpty: true) ?? '')
+      .join(delimiter);
+}
+
+Object? _mapStringItems(
+  List<Object?> values,
+  String Function(String value) transform,
+) {
+  return _arrayTransform(values, (items) {
+    return [
+      for (final item in items)
+        transform(_scalarString(item, nullAsEmpty: true) ?? ''),
+    ];
+  });
+}
+
+Object? _callSplitEach(List<Object?> values) {
+  return _arrayTransform(values, (items) {
+    final delimiter = values.length >= 2 ? values[1] : '';
+    return [
+      for (final item in items)
+        ..._splitStringValue(item, delimiter, regexDelimiter: false),
+    ];
+  });
+}
+
+Object? _callFilterMatch(List<Object?> values) {
+  final items = _arrayItems(values.isEmpty ? null : values.first);
+  if (items == null || values.length < 2) {
+    return <Object?>[];
+  }
+  final regex = _regexFromValue(values[1]);
+  if (regex == null) {
+    return <Object?>[];
+  }
+  return [
+    for (final item in items)
+      if (regex.hasMatch(_scalarString(item, nullAsEmpty: true) ?? ''))
+        _copyValue(item),
+  ];
+}
+
+Object? _callUniq(List<Object?> values) {
+  return _arrayTransform(values, (items) {
+    final seen = <String>{};
+    final result = <Object?>[];
+    for (final item in items) {
+      final key = _scalarString(item, nullAsEmpty: true) ?? '';
+      if (seen.add(key)) {
+        result.add(_copyValue(item));
+      }
+    }
+    return result;
+  });
+}
+
+Object? _callFlat(List<Object?> values) {
+  if (values.isEmpty) {
+    return [null];
+  }
+  final value = values.first;
+  if (value is List) {
+    return [for (final item in value) _copyValue(item)];
+  }
+  return [_copyValue(value)];
+}
+
+Object? _callFlatArray(List<Object?> values) {
+  return [
+    for (final value in values)
+      if (value is List)
+        for (final item in value) _copyValue(item)
+      else
+        _copyValue(value),
+  ];
+}
+
+Object? _callConcatArrays(List<Object?> values) => _callFlatArray(values);
+
+Object? _callSplitTaggedRecords(List<Object?> values) {
+  if (values.length < 3) {
+    return <Object?>[];
+  }
+  final tag = _scalarString(values[2], nullAsEmpty: true) ?? '';
+  final fields = [for (final field in values.skip(3)) _copyValue(field)];
+  return [
+    for (final item in _splitStringValue(
+      values[0],
+      values[1],
+      regexDelimiter: false,
+    ))
+      [tag, item, ...fields.map(_copyValue)],
+  ];
 }
 
 bool _coalesceAccepts(Object? value, {required bool requireNonempty}) {
@@ -1477,19 +2111,15 @@ Object? _callSubstr(List<Object?> values) {
   return _charSubstring(value, start, length);
 }
 
-Object? _callSplit(List<Object?> values) {
+Object? _callSplit(List<Object?> values, {bool regexDelimiter = false}) {
   if (values.length < 2) {
     return null;
   }
-  final value = _scalarString(values[0]);
-  final delimiter = _scalarString(values[1], nullAsEmpty: true);
-  if (value == null || delimiter == null) {
-    return null;
-  }
-  if (delimiter.isEmpty) {
-    return [for (final rune in value.runes) String.fromCharCode(rune)];
-  }
-  return value.split(delimiter);
+  return _splitStringValue(
+    values[0],
+    values[1],
+    regexDelimiter: regexDelimiter,
+  );
 }
 
 Object? _lengthValue(Object? value) {
@@ -1500,6 +2130,9 @@ Object? _lengthValue(Object? value) {
     return value.runes.length;
   }
   if (value is List) {
+    return value.length;
+  }
+  if (value is Map) {
     return value.length;
   }
   return _scalarString(value)?.runes.length;
@@ -1762,12 +2395,73 @@ Object _jsonNumber(num value) {
   return value;
 }
 
+List<Object?>? _arrayItems(Object? value) {
+  if (value is! List) {
+    return null;
+  }
+  return [for (final item in value) _copyValue(item)];
+}
+
+int _nonNegativeInt(Object? value, int defaultValue) {
+  return math.max(0, _intValue(value) ?? defaultValue);
+}
+
+List<Object?> _splitStringValue(
+  Object? value,
+  Object? delimiter, {
+  required bool regexDelimiter,
+}) {
+  final source = _scalarString(value);
+  if (source == null) {
+    return <Object?>[];
+  }
+  if (delimiter is _RuntimeRegexPattern || regexDelimiter) {
+    final pattern = delimiter is _RuntimeRegexPattern
+        ? delimiter.pattern
+        : (_scalarString(delimiter) ?? '');
+    final regex = _compileRegex(pattern);
+    if (regex == null) {
+      return <Object?>[];
+    }
+    return source.split(regex);
+  }
+  final literal = _scalarString(delimiter, nullAsEmpty: true);
+  if (literal == null) {
+    return <Object?>[];
+  }
+  if (literal.isEmpty) {
+    return [for (final rune in source.runes) String.fromCharCode(rune)];
+  }
+  return source.split(literal);
+}
+
+RegExp? _regexFromValue(Object? value) {
+  final pattern = value is _RuntimeRegexPattern
+      ? value.pattern
+      : _scalarString(value);
+  if (pattern == null) {
+    return null;
+  }
+  return _compileRegex(pattern);
+}
+
+RegExp? _compileRegex(String pattern) {
+  try {
+    return RegExp(pattern);
+  } on FormatException {
+    return null;
+  }
+}
+
 String? _scalarString(Object? value, {bool nullAsEmpty = false}) {
   if (value == null) {
     return nullAsEmpty ? '' : null;
   }
+  if (value is _RuntimeRegexPattern) {
+    return value.pattern;
+  }
   if (value is List || value is Map) {
-    return null;
+    return nullAsEmpty ? '' : null;
   }
   return '$value';
 }
@@ -1785,6 +2479,12 @@ String _charSubstring(String value, int start, int? length) {
 
 final class _InvalidNumericResult implements Exception {
   const _InvalidNumericResult();
+}
+
+final class _RuntimeRegexPattern {
+  const _RuntimeRegexPattern(this.pattern);
+
+  final String pattern;
 }
 
 final class _RuntimeExecutionContext {
@@ -1914,6 +2614,18 @@ String? _arrayTargetName(ActionExpr expr) {
     return null;
   }
   return _variableName(expr.args.single.value);
+}
+
+String? _arrayReceiverTargetName(ActionExpr expr) {
+  final variable = _variableName(expr);
+  if (variable != null) {
+    return variable;
+  }
+  return _arrayTargetName(expr);
+}
+
+bool _hasArrayValue(_RuntimeExecutionContext context, String name) {
+  return context.arrays.containsKey(name) || context.variables[name] is List;
 }
 
 String? _hashTargetName(ActionExpr expr) {

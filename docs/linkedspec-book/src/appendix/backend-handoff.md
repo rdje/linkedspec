@@ -316,7 +316,10 @@ values; and exposes the named/map/length/start/end `entry_*` / `match_*`
 capture helper family. It now also executes current string/scalar helpers,
 explicit `str_*` lexical comparisons, numeric arithmetic/reducer/comparison
 helpers, numeric word aliases, arithmetic/comparison symbol callees, and
-compatible string/number receiver chains. Broader array/hash helper families,
+compatible string/number receiver chains. It also executes array helper family
+breadth, bare array working-variable receiver chains, regex split/filter
+bridges, delimiter-first `join_values`, array numeric reducers, and
+statement-only array end mutations. Broader hash helper families,
 value-block/control/tree traversal helpers, BACKTRACK behavior,
 tracing/diagnostics, staged function execution, and
 corpus-output parity remain later Dart leaves.

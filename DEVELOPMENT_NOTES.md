@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.4.3.3 — Dart runtime array helpers):
+  Extended `LinkedSpecRuntimeEngine` with array-aware helper dispatch. Function helper calls now evaluate bare
+  array working variables as array snapshots in array-consuming slots, while receiver chains such as
+  `items.sorted().drop_front(2).first()` read the aggregate store without mutating it. The runtime now covers
+  array ordering/selection/membership helpers, transform/filter pipelines, delimiter-first receiver
+  `join_values`, regex split/filter bridges, `flat_array`, `concat_arrays`, `split_tagged_records`, and terminal
+  array numeric reducers. Top-level statement receiver methods `push_back`, `push_front`, `pop_back`, and
+  `pop_front` mutate named working arrays; the same calls in value positions return `null` and do not mutate.
+  Adjacent split delimiters preserve empty fields, leaving `filter_nonempty` as the explicit cleanup step. Next
+  frontier is `.4.3.4`, hash helper family and hash receiver/mutation behavior.
+
 - 2026-07-09 (DART-BACKEND-PARITY.4.3.2 — Dart runtime string/numeric helpers):
   Extended Dart pure helper execution in `dart/lib/src/runtime/interpreter.dart`. Helper names are now
   canonicalized through the ActionIR contract table before runtime dispatch, so current aliases and symbol callees

@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.4.3.3 — add Dart runtime array helpers**
+  (DONE array helper family, array receiver chains, split bridges, reducers, and statement-only end mutations).
+
+  **Change:** Dart runtime helper execution now covers array count/select/order/membership helpers, transform and
+  filter pipelines, delimiter-first `join_values`, regex split/filter bridges, `flat_array`, `concat_arrays`,
+  `split_tagged_records`, array numeric reducers, bare array working-variable receiver chains, and statement-only
+  `push_back` / `push_front` / `pop_back` / `pop_front` mutation forms.
+
+  **Boundary:** This closes array helper breadth only. Hash helper breadth, value-block/control/tree traversal
+  helpers, BACKTRACK, tracing, staged function execution, and full corpus output parity remain later leaves.
+
+  **Verification:** Focused runtime interpreter and ActionIR contract tests, Dart format/analyze/full tests,
+  corpus runner, CLI help, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, diagnosis
+  evidence, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.4.3.2 — add Dart runtime string numeric helpers**
   (DONE string/scalar helper family, numeric helper family, aliases/symbol callees, and scalar receiver chains).
 

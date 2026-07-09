@@ -354,6 +354,105 @@ Top::
       'bad_number': null,
     });
   });
+
+  test(
+    'executes array helpers and receiver chains without mutating snapshots',
+    () {
+      final engine = _engine(r'''
+Top::
+ /x/
+ E {
+   items += "b";
+   items += "a";
+   items += "c";
+   items += "a";
+   phrases += "aa-b";
+   phrases += "cc-aa";
+   set(array(public), [" x ", "", "Y"]);
+   return(hash(
+     "sorted_drop_first", items.sorted().drop_front(2).first(),
+     "reverse_take_last", array(items).reversed().take(2).last(),
+     "contains", items.sorted().contains("c"),
+     "index", items.sorted().index_of("c"),
+     "drop_join", items.drop_back().join_values("|"),
+     "uniq_join", items.uniq().join_values(","),
+     "filter_count", items.filter_match(/^a$/).count(),
+     "split_filter_count", phrases.split_each("-").filter_match(/^aa$/).count(),
+     "transform_join", public.trim_each().filter_nonempty().lowercase_each().join_values("|"),
+     "take_last", items.take_last(2),
+     "slice", items.sorted().slice(1, 2),
+     "flat", flat_array(array("p", "q"), "r"),
+     "concat", concat_arrays(array("x"), array("y", "z")),
+     "sum", array(2, 4, 6).sum(),
+     "avg", array(2, 4, 6).avg(),
+     "source", copy(array(items)),
+     "empty_missing", missing.sorted().is_empty()
+   ))
+ }
+''');
+
+      final result = engine.parse('x');
+
+      expect(result.value, {
+        'sorted_drop_first': 'b',
+        'reverse_take_last': 'c',
+        'contains': true,
+        'index': 3,
+        'drop_join': 'b|a|c',
+        'uniq_join': 'b,a,c',
+        'filter_count': 2,
+        'split_filter_count': 2,
+        'transform_join': 'x|y',
+        'take_last': ['c', 'a'],
+        'slice': ['a', 'b'],
+        'flat': ['p', 'q', 'r'],
+        'concat': ['x', 'y', 'z'],
+        'sum': 12,
+        'avg': 4,
+        'source': ['b', 'a', 'c', 'a'],
+        'empty_missing': true,
+      });
+    },
+  );
+
+  test('executes array split bridges and statement-only end mutations', () {
+    final engine = _engine(r'''
+Top::
+ /x/
+ E {
+   raw = " left , right,,third ";
+   split(array(parts), raw, /\s*,\s*/);
+   items.push_back("a");
+   items.push_back("b");
+   items.push_front("z");
+   items.pop_back();
+   items.pop_front();
+   array(items).push_back("c");
+   return(hash(
+     "parts", copy(array(parts)),
+     "receiver_split", "a, b".split(/\s*,\s*/),
+     "items", copy(array(items)),
+     "value_push", items.push_back("bad"),
+     "after_value_push", copy(array(items)),
+     "tagged", split_tagged_records("a,b", /,/, "?tag:", "field")
+   ))
+ }
+''');
+
+    final result = engine.parse('x');
+
+    expect(result.value, {
+      'parts': [' left', 'right', '', 'third '],
+      'receiver_split': ['a', 'b'],
+      'items': ['a', 'c'],
+      'value_push': null,
+      'after_value_push': ['a', 'c'],
+      'tagged': [
+        ['?tag:', 'a', 'field'],
+        ['?tag:', 'b', 'field'],
+      ],
+    });
+  });
 }
 
 LinkedSpecRuntimeEngine _engine(String source) {

@@ -62,6 +62,7 @@ void main() {
   test('shares known helper names with function registry validation', () {
     expect(isKnownActionIrCallName('cat'), isTrue);
     expect(isKnownActionIrCallName('gt'), isTrue);
+    expect(isKnownActionIrCallName('push_back'), isTrue);
     expect(isKnownActionIrCallName('mystery_helper'), isFalse);
     expect(canonicalActionHelperName('>='), 'num_ge');
 

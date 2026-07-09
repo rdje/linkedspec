@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.3` extended Dart runtime array helper execution in
+  `dart/lib/src/runtime/interpreter.dart`. The evaluator now has array-aware helper argument evaluation, bare array
+  working-variable receiver reads, pure array receiver chains, regex split/filter bridges, delimiter-first
+  `join_values`, `flat_array` / `concat_arrays`, `split_tagged_records`, terminal array numeric reducers, and
+  statement-only array end mutations. The next helper frontier is `.4.3.4` for hash helper family and hash
+  receiver/mutation behavior; value-block/control/tree traversal helpers, BACKTRACK, tracing, and corpus output
+  parity remain later Dart leaves.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.2` extended Dart runtime helper execution in
   `dart/lib/src/runtime/interpreter.dart`. `LinkedSpecRuntimeEngine` now canonicalizes ActionIR helper names and
   executes current string/scalar helpers, explicit `str_*` lexical comparisons, numeric arithmetic/reducer/

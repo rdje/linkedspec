@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **253** facts · **1771** question keys.
+> **254** facts · **1778** question keys.
 
 ## Questions → fact
 
@@ -244,12 +244,19 @@
 - "does Dart resolve ActionIR helper contracts" -> [dart-actionir-contract-resolver](docs/knowledge/dart-actionir-contract-resolver.md) · 2026-07-09 · reverify: `cd dart && dart test test/action_contracts_test.dart test/action_ast_parser_test.dart test/spec_parser_test.dart test/spec_validator_test.dart && dart analyze --fatal-infos --fatal-warnings && cd .. && ! rg -n 'retired|replacement map|non-current helper spelling table' dart`
 - "does Dart run lifecycle blocks" -> [dart-runtime-rule-interpreter](docs/knowledge/dart-runtime-rule-interpreter.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime preserve scalar array hash null boolean number shapes" -> [dart-runtime-core-value-capture-helpers](docs/knowledge/dart-runtime-core-value-capture-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime read bare array working variables in receiver chains" -> [dart-runtime-array-helpers](docs/knowledge/dart-runtime-array-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart test test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support array receiver chains" -> [dart-runtime-array-helpers](docs/knowledge/dart-runtime-array-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart test test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime support capture position helpers" -> [dart-runtime-core-value-capture-helpers](docs/knowledge/dart-runtime-core-value-capture-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime support entry_map and match_map" -> [dart-runtime-core-value-capture-helpers](docs/knowledge/dart-runtime-core-value-capture-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime support entry_named and match_named" -> [dart-runtime-core-value-capture-helpers](docs/knowledge/dart-runtime-core-value-capture-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support join_values delimiter first" -> [dart-runtime-array-helpers](docs/knowledge/dart-runtime-array-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart test test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime support number receiver chains" -> [dart-runtime-string-numeric-helpers](docs/knowledge/dart-runtime-string-numeric-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime support numeric aliases and symbol callees" -> [dart-runtime-string-numeric-helpers](docs/knowledge/dart-runtime-string-numeric-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime support numeric helpers" -> [dart-runtime-string-numeric-helpers](docs/knowledge/dart-runtime-string-numeric-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support push_back statement only" -> [dart-runtime-array-helpers](docs/knowledge/dart-runtime-array-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart test test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support sorted drop_front first" -> [dart-runtime-array-helpers](docs/knowledge/dart-runtime-array-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart test test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support split_each trim_each filter_nonempty" -> [dart-runtime-array-helpers](docs/knowledge/dart-runtime-array-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart test test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support split_tagged_records" -> [dart-runtime-array-helpers](docs/knowledge/dart-runtime-array-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart test test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime support str_eq string comparisons" -> [dart-runtime-string-numeric-helpers](docs/knowledge/dart-runtime-string-numeric-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime support string receiver chains" -> [dart-runtime-string-numeric-helpers](docs/knowledge/dart-runtime-string-numeric-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart runtime support trim lowercase substr split" -> [dart-runtime-string-numeric-helpers](docs/knowledge/dart-runtime-string-numeric-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
@@ -1987,6 +1994,15 @@ _Dart user-function registry preserves staged sidecars and resolves exact-arity 
 - **evidence:** `DART-BACKEND-PARITY.3.3 adds dart/lib/src/action/function_registry.dart, exports UserFunctionRegistry/UserFunctionEntry/UserFunctionCallResolution, and threads optional registry input through the ActionIR contract resolver. test/function_registry_test.dart verifies ordered entries, staged body_parse_job exposure, body_payload/body_ast preservation, exact match, wrong arity, missing name, and duplicate-name rejection. test/action_contracts_test.dart verifies exact-arity user calls classify before helper fallback and wrong arity reports user_function_arity_mismatch.`
 - **reverify:** `cd dart && dart test test/function_registry_test.dart test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - **source:** [`docs/knowledge/dart-function-registry.md`](docs/knowledge/dart-function-registry.md)
+
+### dart-runtime-array-helpers
+_Dart runtime executes array helper family and receiver chains_
+
+- **answers:** does Dart runtime support array receiver chains | does Dart runtime support sorted drop_front first | does Dart runtime support split_each trim_each filter_nonempty | does Dart runtime support join_values delimiter first | does Dart runtime support push_back statement only | does Dart runtime support split_tagged_records | does Dart runtime read bare array working variables in receiver chains
+- **date:** 2026-07-09 · **status:** current
+- **evidence:** `DART-BACKEND-PARITY.4.3.3 extends dart/lib/src/runtime/interpreter.dart, dart/lib/src/action/action_contracts.dart, test/runtime_interpreter_test.dart, and test/action_contracts_test.dart. Focused tests prove array receiver chains, regex split/filter bridges, delimiter-first join_values, transform/filter pipelines, flat_array/concat_arrays, split_tagged_records, terminal array numeric reducers, statement-only end mutations, and value-slot no-op behavior for end mutations.`
+- **reverify:** `cd dart && dart test test/runtime_interpreter_test.dart && dart test test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- **source:** [`docs/knowledge/dart-runtime-array-helpers.md`](docs/knowledge/dart-runtime-array-helpers.md)
 
 ### dart-runtime-core-value-capture-helpers
 _Dart runtime core value stores and capture helpers preserve typed shapes_
