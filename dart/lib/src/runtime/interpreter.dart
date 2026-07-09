@@ -9,6 +9,9 @@ import '../compiler/compiled_spec.dart';
 import '../trace/trace.dart';
 import 'matching.dart';
 
+final _leadingBlankLine = RegExp(r'[ \t]*\n');
+final _leadingCommentLine = RegExp(r'[ \t]*#[^\n]*(?:\n|$)');
+
 final class RuntimeDiagnostic {
   const RuntimeDiagnostic({
     required this.type,
@@ -145,6 +148,9 @@ final class LinkedSpecRuntimeEngine {
       topRule: label,
       trace: trace,
     );
+    // Mirror Perl's public parser wrapper; direct descriptor handlers bypass
+    // this leading trivia skip.
+    context._setCursorCodeUnit(_publicParserStartCursor(input));
     final traceScope = trace?.enterScope(
       'dart_runtime:parse',
       'top_rule=$label',
@@ -231,6 +237,24 @@ final class LinkedSpecRuntimeEngine {
       );
     }
     return compiledSpec.compiledRuleOrder.first;
+  }
+
+  int _publicParserStartCursor(String input) {
+    var cursor = 0;
+    while (cursor < input.length) {
+      final blank = _leadingBlankLine.matchAsPrefix(input, cursor);
+      if (blank != null) {
+        cursor = blank.end;
+        continue;
+      }
+      final comment = _leadingCommentLine.matchAsPrefix(input, cursor);
+      if (comment != null) {
+        cursor = comment.end;
+        continue;
+      }
+      break;
+    }
+    return cursor;
   }
 
   _RuleResult _executeRule(

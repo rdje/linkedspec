@@ -37,9 +37,9 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.6.2.4.4.5` is the current completed corpus-parity boundary;
-`.6.2.4.4.6` is the next shipped-spec/parser-smoke residual frontier for resolving the remaining non-PCRE
-`ds_vhistory` leading-newline public-parser/oracle boundary. The package
+`DART-BACKEND-PARITY.6.2.4.4.6` is the current completed corpus-parity boundary;
+`.6.2.4.5` is the next shipped-spec/parser-smoke frontier for final no-drift closeout after the non-PCRE residual
+group reached 24/31 green. The package
 can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
@@ -141,7 +141,7 @@ execution is rejected until the full shipped-corpus gate is ready, so the defaul
 manifest fixtures and the non-`fn` middle helper/control/receiver fixtures now
 pass through bounded execute mode. Top-level `fn` corpus fixtures remain routed
 to `DART-BACKEND-PARITY.6.2.5` for spec-defined function-shell execution. The final
-31-fixture shipped-spec/parser-smoke window is now 23/31 green. The residual work is split into portmap/action-edge
+31-fixture shipped-spec/parser-smoke window is now 24/31 green. The residual work is split into portmap/action-edge
 result shape, hlink delimiter/capture, helper mutation/text normalization, legacy structural smoke output, residual
 closeout, and PCRE structural-regex leaves.
 Basic regex-dialect bridging is now done; deeper PCRE structural constructs such as
@@ -151,9 +151,9 @@ The helper/action bridge, recursive/default-mode bridge, portmap result-shape br
 bridge are also done; tclite, recursive top-rule, all five portmap fixtures, all five hlink fixtures,
 `vhdl_library_use`, `tablegrep_simple_term`, `simenv_multiline_value`, `lib_reader_sattribute`, and
 `lib_reader_cattribute` pass. The legacy accumulator bridge is also done, so `regdef_nested_register_fields`
-passes. The diagnostic window is now 23/31 green. The remaining non-PCRE `ds_vhistory_version_entry` work is split
-under `.6.2.4.4.6` after `.6.2.4.4.5` proved a leading-newline public-parser/oracle boundary rather than a safe
-global indexed-read weakening; deeper PCRE structural regex constructs such as Lispish `(?R)` stay routed to
-`.6.2.4.6`.
+passes. Dart now also mirrors Perl's public-parser leading blank/comment-line skip, so
+`ds_vhistory_version_entry` passes without weakening ordinary scalar-held indexed reads. The diagnostic window is
+now 24/31 green. The remaining shipped-smoke failures are deeper PCRE structural regex constructs such as Lispish
+`(?R)`, routed to `.6.2.4.6`.
 Full shipped-corpus output parity remains a later leaf in
 `docs/tasks/DART-BACKEND-PARITY.md`.

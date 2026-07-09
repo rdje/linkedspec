@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.4.6 — mirror public parser leading trivia
+
+**Scope:** Dart runtime parse entry boundary, focused runtime/corpus tests, shipped-smoke status, Dart README,
+mdBook status, live docs, roadmap status, resume pointer, and Knowledge Map.
+
+**Change:** Dart now mirrors the Perl public parser wrapper that resets the input cursor and skips leading blank
+lines or `#` comment lines before invoking the top rule. Direct descriptor handlers still bypass that wrapper on
+Perl; Dart's public runtime entrypoint now matches the public parser oracle. This closes
+`ds_vhistory_version_entry` without weakening ordinary scalar-held indexed reads.
+
+**Validation:** Focused runtime/corpus tests pass; focused `ds_vhistory_version_entry` corpus execution passes; the
+31-fixture shipped-smoke diagnostic run is now 24/31 green with only the routed PCRE structural regex blockers
+remaining; Dart format, mdBook, memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine,
+and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.4.5 — split ds_vhistory oracle boundary
 
 **Scope:** Dart residual parser-smoke task-tree split, Perl/Rust/Dart oracle evidence, mdBook status, live docs,

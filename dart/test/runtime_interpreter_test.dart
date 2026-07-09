@@ -51,7 +51,7 @@ item:
     final engine = _engine(r'''
 Top::
  -> Item { push(Item) }
- LX { return(copy(array(Top))) }
+LX { return(copy(array(Top))) }
 
 Item: /x/ I { return("item") }
 ''');
@@ -62,6 +62,40 @@ Item: /x/ I { return("item") }
     expect(result.output, [
       ['item'],
     ]);
+  });
+
+  test('skips leading public-parser blank lines before top rule', () {
+    final engine = _engine(r'''
+Top::
+ I { cur = undef; items = [] }
+ LX { return(array(cur[1], copy(array(items)))) }
+ -> object { cur = call(object) }
+ -> version { push(array(items), call(version)) }
+
+object: /(?i)\nobject:\s+(\S+)/ I.return(array("?object:", flat_array(entry_groups())))
+version: /(?i)\nversion:\s+(\S+)/ I.return(array("?version:", flat_array(entry_groups())))
+''');
+
+    final result = engine.parse('\nobject: /proj/foo\nversion: 1\n');
+
+    expect(result.value, [
+      null,
+      [
+        ['?version:', '1'],
+      ],
+    ]);
+  });
+
+  test('keeps ordinary scalar-held indexed reads public', () {
+    final engine = _engine(r'''
+Top::
+ /x/
+ LE { payload = ["tag", "name"]; return(payload[1]) }
+''');
+
+    final result = engine.parse('x');
+
+    expect(result.value, 'name');
   });
 
   test('executes self close edge that reuses the opener regex slot', () {

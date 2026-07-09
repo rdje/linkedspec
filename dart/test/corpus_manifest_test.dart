@@ -172,6 +172,40 @@ void main() {
     ]);
   });
 
+  test('executes ds_vhistory leading newline public parser fixture', () {
+    final result = executeCorpusFixtures(
+      '../rust/linkedspec-runtime/tests/corpus',
+      caseNames: const ['ds_vhistory_version_entry'],
+    );
+
+    expect(
+      result.failures
+          .map((failure) => '${failure.name}: ${failure.failure}')
+          .join('\n'),
+      isEmpty,
+    );
+    expect(result.passed, isTrue);
+    expect(result.passedCount, 1);
+    expect(result.fixture('ds_vhistory_version_entry').actualValue, [
+      '?ds_vhistory:',
+      [
+        [
+          '?object:',
+          null,
+          [
+            [
+              '?version_entry:',
+              [
+                ['?version:', '1'],
+                ['?date:', 'today'],
+              ],
+            ],
+          ],
+        ],
+      ],
+    ]);
+  });
+
   test('executes controlled fixtures against runtime output shape', () {
     final root = Directory.systemTemp.createTempSync(
       'linkedspec-dart-controlled-',

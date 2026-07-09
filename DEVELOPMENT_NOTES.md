@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.4.4.6 — Dart public-parser leading trivia):
+  The `ds_vhistory` boundary came from Perl's public parser wrapper, not from indexed access. `Runtime.pm` resets
+  `pos()` and skips leading blank/comment lines before invoking the generated top handler; direct descriptor
+  handlers bypass that wrapper. Dart now mirrors the public wrapper in `LinkedSpecRuntimeEngine.parse(...)`, so the
+  leading `\nobject:` line in `ds_vhistory_version_entry` is skipped before the top dispatch loop begins, matching
+  the checked null object-name oracle. Focused tests also lock that ordinary scalar-held `payload[1]` still returns
+  the indexed item. The shipped-smoke window is 24/31 green; only the routed PCRE structural regex blockers remain.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.4.4.5 — ds_vhistory oracle boundary split):
   The remaining `ds_vhistory_version_entry` mismatch is narrower and stranger than the earlier direct-access
   shorthand suggested. Public `LinkedSpec::get_parser("ds_vhistory")` returns a null object name for the checked

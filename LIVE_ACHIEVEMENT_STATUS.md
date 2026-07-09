@@ -7,6 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.6 — mirror public parser leading trivia**
+  (DONE — `ds_vhistory_version_entry` now passes on Dart; shipped-smoke parser window is 24/31 green).
+
+  **Change:** Dart `LinkedSpecRuntimeEngine.parse(...)` now mirrors the Perl public parser wrapper by skipping
+  leading blank lines and leading `#` comment lines before invoking the top rule. Direct descriptor handlers on
+  Perl bypass that wrapper; Dart's public runtime entrypoint now matches the public parser oracle.
+
+  **Boundary:** The non-PCRE `.6.2.4.4` residual group is green. The 31-fixture shipped-spec/parser-smoke window is
+  24/31 green; the seven remaining failures are PCRE structural regex constructs routed to
+  `DART-BACKEND-PARITY.6.2.4.6`. Active implementation work advances to `DART-BACKEND-PARITY.6.2.4.5` for final
+  no-drift closeout.
+
+  **Verification:** Focused runtime/corpus tests, focused `ds_vhistory_version_entry` corpus run, diagnostic
+  31-fixture parser-smoke corpus run, Dart format, mdBook, memory architecture, Knowledge Map, task-tree metadata,
+  doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.5 — split ds_vhistory oracle boundary**
   (DONE — `ds_vhistory_version_entry` has public-parser, descriptor-handler, scalar-held indexed-read, and
   leading-newline evidence; no Dart runtime behavior changed).
