@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.3.4 — add Dart compiled spec state
+
+**Scope:** Dart compiled-spec state API, descriptor projection, dependency-regex data, focused tests, package
+README, mdBook Dart handoff/status text, live docs, roadmap/task-tree status, and Knowledge Map facts.
+
+**Change:** Added `dart/lib/src/compiler/compiled_spec.dart` with `compileSpec(...)`, `CompiledSpec`,
+`CompiledRule`, `CompiledDependencyRegexState`, `CompiledDescriptorState`, dependency refs, rule mode metadata,
+and compiled action payload records. The compiler validates source ASTs by default, preserves definition and
+compiled rule order, records last-definition metadata when validation is deliberately skipped, derives structured
+dependency-regex entries from child rule regex slots, carries the `UserFunctionRegistry`, parses lifecycle and
+edge action payloads into `ActionBlock` ASTs, resolves their ActionIR contracts with registry-aware user-call
+classification, and projects public descriptor-shaped JSON with `spec`, `functions`, `dependency_regex_map`, and
+`meta`.
+
+**Validation:** Focused `dart test test/compiled_spec_test.dart`, `dart format --set-exit-if-changed .`,
+`dart analyze --fatal-infos --fatal-warnings`, full `dart test`, the 99-fixture corpus manifest runner, corpus
+runner help, CLI help, mdBook build, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+`git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.3.3 — add Dart function registry
 
 **Scope:** Dart user-function registry API, ActionIR contract resolver integration, Dart tests, package README,

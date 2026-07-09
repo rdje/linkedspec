@@ -82,6 +82,20 @@ export 'src/ast/spec_ast.dart'
         SplitMarkerBodyElementKind,
         StagedParseJob,
         StagedSourceSpan;
+export 'src/compiler/compiled_spec.dart'
+    show
+        CompiledActionEdge,
+        CompiledActionPayload,
+        CompiledBlindEdge,
+        CompiledDependencyRegexEntry,
+        CompiledDependencyRegexState,
+        CompiledDescriptorState,
+        CompiledRule,
+        CompiledRuleModeMetadata,
+        CompiledSpec,
+        CompiledSpecException,
+        DependencyRef,
+        compileSpec;
 export 'src/corpus/manifest_runner.dart'
     show
         CorpusFixture,

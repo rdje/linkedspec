@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.3.4` added Dart compiled-spec state in
+  `dart/lib/src/compiler/compiled_spec.dart`. `compileSpec(...)` validates source ASTs by default, builds ordered
+  `CompiledSpec` / `CompiledRule` state, carries `UserFunctionRegistry`, preserves rule redefinition metadata when
+  validation is deliberately skipped, records mode metadata, regexes, dependency refs, edge and lifecycle ActionIR
+  payloads, derives structured `CompiledDependencyRegexState`, and projects `CompiledDescriptorState` as
+  `spec` / `functions` / `dependency_regex_map` / `meta`. Runtime match-state and interpreter execution now begin
+  at `DART-BACKEND-PARITY.4.1`.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.3.3` added Dart user-function registry infrastructure in
   `dart/lib/src/action/function_registry.dart`. `UserFunctionRegistry` preserves ordered `FunctionDefinition`
   records, staged `body_parse_job` records, `body_payload`, optional `body_ast`, params/arity, and source/body

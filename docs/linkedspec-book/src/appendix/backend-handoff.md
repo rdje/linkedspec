@@ -283,8 +283,18 @@ than host-language fallback. Dart also has the first user-function registry seam
 `FunctionDefinition` records, expose their staged function-body parse jobs, keep
 `body_payload`, `body_parse_job`, and any stitched `body_ast`, and let the ActionIR
 contract resolver classify exact-arity user-function calls before helper fallback.
-Wrong-arity registered calls diagnose as user-function arity errors. Compiled
-state and runtime execution remain later Dart leaves.
+Wrong-arity registered calls diagnose as user-function arity errors.
+
+Dart now also has a compiled-state model in `dart/lib/src/compiler/compiled_spec.dart`.
+`compileSpec(...)` validates source ASTs by default and returns `CompiledSpec`
+state with `definition_order`, `compiled_rule_order`, `rules_by_label`,
+`redefined_rule_labels`, carried user-function registry data, per-rule regexes,
+dependency refs, mode metadata, action/blind edges, lifecycle/plain/edge
+`ActionBlock` payloads, and registry-aware ActionIR contract results. Its
+`CompiledDependencyRegexState` derives structured child-regex dispatch data, and
+`CompiledDescriptorState` projects the public descriptor shape with `spec`,
+`functions`, `dependency_regex_map`, and `meta`. Runtime matching and execution
+remain later Dart leaves.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

@@ -18,27 +18,27 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.3.3` — Dart now has `UserFunctionRegistry` / `UserFunctionEntry`
-  over ordered `FunctionDefinition` records, exposes staged body parse jobs, preserves sidecars/body AST, and
-  resolves exact-arity user calls before helper fallback in ActionIR contract resolution.
-- prior_leaf: `NONCURRENT-HELPER-CODE-PURGE.5` — final no-drift closeout for the Perl/Rust non-current helper
-  purge is complete; active retired-helper call-shape/label/tag scans are clean.
+- latest_completed_leaf: `DART-BACKEND-PARITY.3.4` — Dart now has `compileSpec(...)` and compiled rule/dependency/
+  descriptor state over parsed `SpecFile`s: ordered rules, mode metadata, dependency refs/regex data, lifecycle and
+  edge `ActionBlock` payloads, carried `UserFunctionRegistry`, and descriptor-shaped JSON projection.
+- prior_leaf: `DART-BACKEND-PARITY.3.3` — Dart user-function registry and exact-arity ActionIR contract
+  classification are complete.
 - latest_commit: HEAD containing this pointer should be
-  `DART-BACKEND-PARITY.3.3 - add Dart function registry`; parent before this slice is
-  `NONCURRENT-HELPER-CODE-PURGE.5 - close helper purge no-drift`.
+  `DART-BACKEND-PARITY.3.4 - add Dart compiled spec state`; parent before this slice is
+  `DART-BACKEND-PARITY.3.3 - add Dart function registry`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.3.4` pending.
-- next_action: from a clean repo, implement `DART-BACKEND-PARITY.3.4` compiled-spec/interpreter state over parsed
-  rules, ActionIR payloads, and the user-function registry.
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.4.1` pending.
+- next_action: from a clean repo, implement `DART-BACKEND-PARITY.4.1` runtime regex matching and match-state
+  tracking over the compiled Dart state.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, task-tree index,
   ROADMAP/ROADMAP_V2, mdBook status/backend-handoff/formal grammar/helper chapters, relevant ADR/KM facts,
-  Dart package/source owners for `.3.3`, and Rust/core/runtime/test/spec owners for the helper purge closeout.
+  Dart package/source owners for `.3.4`, and Rust/core/runtime/test/spec owners for the helper purge closeout.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1027` tests**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.3.3` pointer commit lands; do not pivot unless the repo is
+- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.3.4` pointer commit lands; do not pivot unless the repo is
   handoff-ready.

@@ -1,0 +1,628 @@
+import '../action/action_ast.dart';
+import '../action/action_contracts.dart';
+import '../action/action_parser.dart';
+import '../action/function_registry.dart';
+import '../ast/spec_ast.dart';
+import '../validation/spec_validator.dart';
+
+final class CompiledSpecException implements Exception {
+  const CompiledSpecException(this.message);
+
+  final String message;
+
+  @override
+  String toString() => 'CompiledSpecException: $message';
+}
+
+CompiledSpec compileSpec(
+  SpecFile spec, {
+  bool validateSource = true,
+  bool strictSyntax = false,
+}) {
+  if (validateSource) {
+    validateSpec(spec, strictSyntax: strictSyntax);
+  }
+
+  final functionRegistry = UserFunctionRegistry.fromSpec(spec);
+  final definitionOrder = <String>[];
+  final rulesByLabel = <String, CompiledRule>{};
+  final redefinedRuleLabels = <String>[];
+  final redefinedSeen = <String>{};
+
+  for (final rule in spec.rules) {
+    final label = rule.header.label;
+    definitionOrder.add(label);
+    if (rulesByLabel.containsKey(label) && redefinedSeen.add(label)) {
+      redefinedRuleLabels.add(label);
+    }
+    rulesByLabel[label] = _compileRule(rule, functionRegistry);
+  }
+
+  final compiledRuleOrder = _lastDefinitionOrder(definitionOrder);
+  final dependencyRegexState = _buildDependencyRegexState(
+    compiledRuleOrder: compiledRuleOrder,
+    rulesByLabel: rulesByLabel,
+  );
+
+  return CompiledSpec(
+    definitionOrder: List.unmodifiable(definitionOrder),
+    compiledRuleOrder: List.unmodifiable(compiledRuleOrder),
+    rulesByLabel: Map.unmodifiable(rulesByLabel),
+    redefinedRuleLabels: List.unmodifiable(redefinedRuleLabels),
+    functionRegistry: functionRegistry,
+    dependencyRegexState: dependencyRegexState,
+  );
+}
+
+final class CompiledSpec {
+  const CompiledSpec({
+    required this.definitionOrder,
+    required this.compiledRuleOrder,
+    required this.rulesByLabel,
+    required this.redefinedRuleLabels,
+    required this.functionRegistry,
+    required this.dependencyRegexState,
+  });
+
+  final List<String> definitionOrder;
+  final List<String> compiledRuleOrder;
+  final Map<String, CompiledRule> rulesByLabel;
+  final List<String> redefinedRuleLabels;
+  final UserFunctionRegistry functionRegistry;
+  final CompiledDependencyRegexState dependencyRegexState;
+
+  Iterable<UserFunctionEntry> get functions => functionRegistry.entries;
+
+  CompiledRule? rule(String label) => rulesByLabel[label];
+
+  CompiledDescriptorState get descriptorState {
+    return CompiledDescriptorState(
+      compiledSpecState: this,
+      dependencyRegexState: dependencyRegexState,
+    );
+  }
+
+  JsonObject toJson() {
+    return {
+      'kind': 'compiled_spec_state',
+      'definition_order': definitionOrder,
+      'compiled_rule_order': compiledRuleOrder,
+      'rules_by_label': {
+        for (final label in compiledRuleOrder)
+          label: rulesByLabel[label]!.toJson(),
+      },
+      'redefined_rule_labels': redefinedRuleLabels,
+      'function_order': [for (final function in functions) function.name],
+      'functions_by_name': {
+        for (final function in functions) function.name: function.toJson(),
+      },
+    };
+  }
+
+  JsonObject toDescriptorJson() => descriptorState.toJson();
+}
+
+final class CompiledRule {
+  const CompiledRule({
+    required this.label,
+    required this.header,
+    required this.modeMetadata,
+    required this.regexPatterns,
+    required this.dependencyRefs,
+    required this.actionEdges,
+    required this.blindEdges,
+    required this.lifecycleActionPayloads,
+    required this.plainActionPayloads,
+    required this.bodyElements,
+  });
+
+  final String label;
+  final RuleHeader header;
+  final CompiledRuleModeMetadata modeMetadata;
+  final List<String> regexPatterns;
+  final List<DependencyRef> dependencyRefs;
+  final List<CompiledActionEdge> actionEdges;
+  final List<CompiledBlindEdge> blindEdges;
+  final List<CompiledActionPayload> lifecycleActionPayloads;
+  final List<CompiledActionPayload> plainActionPayloads;
+  final List<BodyElement> bodyElements;
+
+  List<CompiledActionPayload> get actionPayloads {
+    return [
+      for (final edge in actionEdges)
+        if (edge.actionPayload != null) edge.actionPayload!,
+      for (final edge in blindEdges)
+        if (edge.actionPayload != null) edge.actionPayload!,
+      ...lifecycleActionPayloads,
+      ...plainActionPayloads,
+    ];
+  }
+
+  JsonObject toJson() {
+    return {
+      'label': label,
+      'header': header.toJson(),
+      're': regexPatterns,
+      'dependency_refs': [for (final ref in dependencyRefs) ref.toJson()],
+      'mode_metadata': modeMetadata.toJson(),
+      'action_edges': [for (final edge in actionEdges) edge.toJson()],
+      'blind_edges': [for (final edge in blindEdges) edge.toJson()],
+      'lifecycle_action_payloads': [
+        for (final payload in lifecycleActionPayloads) payload.toJson(),
+      ],
+      'plain_action_payloads': [
+        for (final payload in plainActionPayloads) payload.toJson(),
+      ],
+      'body': [for (final element in bodyElements) element.toJson()],
+    };
+  }
+
+  JsonObject toDescriptorRuleJson() {
+    return {
+      'handler': {
+        'kind': 'dart_interpreter_rule',
+        'label': label,
+        'status': 'compiled_state_only',
+      },
+      're': regexPatterns,
+      'dependency_refs': [for (final ref in dependencyRefs) ref.toJson()],
+      'action_edges': [for (final edge in actionEdges) edge.toJson()],
+      'blind_edges': [for (final edge in blindEdges) edge.toJson()],
+      'lifecycle_action_payloads': [
+        for (final payload in lifecycleActionPayloads) payload.toJson(),
+      ],
+      'plain_action_payloads': [
+        for (final payload in plainActionPayloads) payload.toJson(),
+      ],
+      'meta': {
+        'label': label,
+        'line': header.line,
+        'is_top': header.isTop,
+        'mode': modeMetadata.toJson(),
+      },
+    };
+  }
+}
+
+final class CompiledRuleModeMetadata {
+  const CompiledRuleModeMetadata({
+    required this.name,
+    required this.isTop,
+    required this.isAnd,
+    required this.isRepetition,
+    this.repMin,
+    this.repMax,
+  });
+
+  factory CompiledRuleModeMetadata.fromHeader(RuleHeader header) {
+    return CompiledRuleModeMetadata(
+      name: header.mode.name,
+      isTop: header.isTop,
+      isAnd: header.mode.isAnd,
+      isRepetition: header.mode.isRepetition,
+      repMin: header.mode.repMin,
+      repMax: header.mode.repMax,
+    );
+  }
+
+  final String name;
+  final bool isTop;
+  final bool isAnd;
+  final bool isRepetition;
+  final int? repMin;
+  final int? repMax;
+
+  JsonObject toJson() {
+    return {
+      'name': name,
+      'is_top': isTop,
+      'is_and': isAnd,
+      'is_repetition': isRepetition,
+      if (repMin != null) 'rep_min': repMin,
+      if (repMax != null) 'rep_max': repMax,
+    };
+  }
+}
+
+final class DependencyRef {
+  const DependencyRef({required this.label, required this.index});
+
+  final String label;
+  final int index;
+
+  JsonObject toJson() => {'label': label, 'idx': index};
+}
+
+final class CompiledActionEdge {
+  const CompiledActionEdge({
+    required this.line,
+    required this.source,
+    required this.targets,
+    required this.fluentChain,
+    this.code,
+    this.actionPayload,
+  });
+
+  final int line;
+  final String source;
+  final List<DependencyRef> targets;
+  final String? code;
+  final List<FluentCall> fluentChain;
+  final CompiledActionPayload? actionPayload;
+
+  JsonObject toJson() {
+    return {
+      'line': line,
+      'source': source,
+      'targets': [for (final target in targets) target.toJson()],
+      if (code != null) 'code': code,
+      'fluent_chain': [for (final call in fluentChain) call.toJson()],
+      if (actionPayload != null) 'action_payload': actionPayload!.toJson(),
+    };
+  }
+}
+
+final class CompiledBlindEdge {
+  const CompiledBlindEdge({
+    required this.line,
+    required this.source,
+    required this.target,
+    required this.fluentChain,
+    this.code,
+    this.actionPayload,
+  });
+
+  final int line;
+  final String source;
+  final DependencyRef target;
+  final String? code;
+  final List<FluentCall> fluentChain;
+  final CompiledActionPayload? actionPayload;
+
+  JsonObject toJson() {
+    return {
+      'line': line,
+      'source': source,
+      'target': target.toJson(),
+      if (code != null) 'code': code,
+      'fluent_chain': [for (final call in fluentChain) call.toJson()],
+      if (actionPayload != null) 'action_payload': actionPayload!.toJson(),
+    };
+  }
+}
+
+final class CompiledActionPayload {
+  const CompiledActionPayload({
+    required this.role,
+    required this.line,
+    required this.source,
+    required this.code,
+    required this.actionAst,
+    required this.contracts,
+    this.lifecycle,
+  });
+
+  final String role;
+  final int line;
+  final String source;
+  final String code;
+  final String? lifecycle;
+  final ActionBlock actionAst;
+  final ActionContractResolution contracts;
+
+  JsonObject toJson() {
+    return {
+      'role': role,
+      'line': line,
+      'source': source,
+      'code': code,
+      if (lifecycle != null) 'lifecycle': lifecycle,
+      'action_ast': actionAst.toJson(),
+      'contracts': contracts.toJson(),
+    };
+  }
+}
+
+final class CompiledDependencyRegexState {
+  const CompiledDependencyRegexState({required this.dependencyRegexMap});
+
+  final Map<String, CompiledDependencyRegexEntry> dependencyRegexMap;
+
+  JsonObject toJson() {
+    return {
+      'kind': 'compiled_dependency_regex_state',
+      'dependency_regex_map': {
+        for (final entry in dependencyRegexMap.entries)
+          entry.key: entry.value.toJson(),
+      },
+    };
+  }
+
+  JsonObject toDescriptorJson() {
+    return {
+      for (final entry in dependencyRegexMap.entries)
+        entry.key: entry.value.toJson(),
+    };
+  }
+}
+
+final class CompiledDependencyRegexEntry {
+  const CompiledDependencyRegexEntry({
+    required this.ownerLabel,
+    required this.dependencyRefs,
+    required this.patterns,
+  });
+
+  final String ownerLabel;
+  final List<DependencyRef> dependencyRefs;
+  final List<String> patterns;
+
+  String get combinedPattern {
+    return patterns.map((pattern) => '(?:$pattern)').join('|');
+  }
+
+  JsonObject toJson() {
+    return {
+      'owner_label': ownerLabel,
+      'dependency_refs': [for (final ref in dependencyRefs) ref.toJson()],
+      'patterns': patterns,
+      'combined_pattern': combinedPattern,
+    };
+  }
+}
+
+final class CompiledDescriptorState {
+  const CompiledDescriptorState({
+    required this.compiledSpecState,
+    required this.dependencyRegexState,
+  });
+
+  final CompiledSpec compiledSpecState;
+  final CompiledDependencyRegexState dependencyRegexState;
+
+  JsonObject toJson() {
+    return {
+      'spec': {
+        for (final label in compiledSpecState.compiledRuleOrder)
+          label: compiledSpecState.rulesByLabel[label]!.toDescriptorRuleJson(),
+      },
+      'functions': {
+        for (final function in compiledSpecState.functions)
+          function.name: function.toJson(),
+      },
+      'dependency_regex_map': dependencyRegexState.toDescriptorJson(),
+      'meta': {
+        'descriptor_model': 'compiled_descriptor_state',
+        'compiled_spec_model': 'compiled_spec_state',
+        'compiled_dependency_regex_model': 'compiled_dependency_regex_state',
+        'parse_mode': 'seek',
+        'definition_order': compiledSpecState.definitionOrder,
+        'compiled_rule_order': compiledSpecState.compiledRuleOrder,
+        'redefined_rule_labels': compiledSpecState.redefinedRuleLabels,
+        'function_order': [
+          for (final function in compiledSpecState.functions) function.name,
+        ],
+        'function_count': compiledSpecState.functionRegistry.entries.length,
+      },
+    };
+  }
+}
+
+CompiledRule _compileRule(Rule rule, UserFunctionRegistry functionRegistry) {
+  final regexPatterns = <String>[];
+  final dependencyRefs = <DependencyRef>[];
+  final actionEdges = <CompiledActionEdge>[];
+  final blindEdges = <CompiledBlindEdge>[];
+  final lifecycleActionPayloads = <CompiledActionPayload>[];
+  final plainActionPayloads = <CompiledActionPayload>[];
+
+  for (final element in rule.body) {
+    switch (element.kind) {
+      case RegexBodyElementKind(:final pattern):
+        regexPatterns.add(pattern);
+      case ActionEdgeBodyElementKind(
+        :final targets,
+        :final code,
+        :final fluentChain,
+      ):
+        final refs = [
+          for (final target in targets)
+            DependencyRef(label: target.label, index: target.index),
+        ];
+        dependencyRefs.addAll(refs);
+        final payload = _compileOptionalActionPayload(
+          role: 'action_edge',
+          element: element,
+          sourceCode: code,
+          fluentChain: fluentChain,
+          functionRegistry: functionRegistry,
+        );
+        actionEdges.add(
+          CompiledActionEdge(
+            line: element.line,
+            source: element.source,
+            targets: List.unmodifiable(refs),
+            code: code,
+            fluentChain: List.unmodifiable(fluentChain),
+            actionPayload: payload,
+          ),
+        );
+      case BlindEdgeBodyElementKind(
+        :final target,
+        :final code,
+        :final fluentChain,
+      ):
+        final ref = DependencyRef(label: target, index: 0);
+        dependencyRefs.add(ref);
+        final payload = _compileOptionalActionPayload(
+          role: 'blind_edge',
+          element: element,
+          sourceCode: code,
+          fluentChain: fluentChain,
+          functionRegistry: functionRegistry,
+        );
+        blindEdges.add(
+          CompiledBlindEdge(
+            line: element.line,
+            source: element.source,
+            target: ref,
+            code: code,
+            fluentChain: List.unmodifiable(fluentChain),
+            actionPayload: payload,
+          ),
+        );
+      case CodeBlockBodyElementKind(:final lifecycle, :final code):
+        lifecycleActionPayloads.add(
+          _compileActionPayload(
+            role: 'lifecycle',
+            element: element,
+            code: code,
+            lifecycle: lifecycle,
+            functionRegistry: functionRegistry,
+          ),
+        );
+      case PlainBlockBodyElementKind(:final code):
+        plainActionPayloads.add(
+          _compileActionPayload(
+            role: 'plain_block',
+            element: element,
+            code: code,
+            functionRegistry: functionRegistry,
+          ),
+        );
+      case SplitMarkerBodyElementKind():
+      case LifecycleMarkerBodyElementKind():
+      case FluentChainBodyElementKind():
+      case ConditionalBodyElementKind():
+      case RawBodyElementKind():
+        break;
+    }
+  }
+
+  return CompiledRule(
+    label: rule.header.label,
+    header: rule.header,
+    modeMetadata: CompiledRuleModeMetadata.fromHeader(rule.header),
+    regexPatterns: List.unmodifiable(regexPatterns),
+    dependencyRefs: List.unmodifiable(dependencyRefs),
+    actionEdges: List.unmodifiable(actionEdges),
+    blindEdges: List.unmodifiable(blindEdges),
+    lifecycleActionPayloads: List.unmodifiable(lifecycleActionPayloads),
+    plainActionPayloads: List.unmodifiable(plainActionPayloads),
+    bodyElements: List.unmodifiable(rule.body),
+  );
+}
+
+CompiledActionPayload? _compileOptionalActionPayload({
+  required String role,
+  required BodyElement element,
+  required String? sourceCode,
+  required List<FluentCall> fluentChain,
+  required UserFunctionRegistry functionRegistry,
+}) {
+  final code = sourceCode ?? _fluentChainToActionCode(fluentChain);
+  if (code == null || code.trim().isEmpty) {
+    return null;
+  }
+  return _compileActionPayload(
+    role: role,
+    element: element,
+    code: code,
+    functionRegistry: functionRegistry,
+  );
+}
+
+CompiledActionPayload _compileActionPayload({
+  required String role,
+  required BodyElement element,
+  required String code,
+  required UserFunctionRegistry functionRegistry,
+  String? lifecycle,
+}) {
+  final ast = parseActionBlock(code);
+  return CompiledActionPayload(
+    role: role,
+    line: element.line,
+    source: element.source,
+    code: code,
+    lifecycle: lifecycle,
+    actionAst: ast,
+    contracts: resolveActionBlockContracts(
+      ast,
+      functionRegistry: functionRegistry,
+    ),
+  );
+}
+
+String? _fluentChainToActionCode(List<FluentCall> fluentChain) {
+  if (fluentChain.isEmpty) {
+    return null;
+  }
+  return fluentChain
+      .map((call) {
+        final args = call.args.trim();
+        return args.isEmpty ? '${call.method}()' : '${call.method}($args)';
+      })
+      .join('; ');
+}
+
+List<String> _lastDefinitionOrder(List<String> definitionOrder) {
+  final seen = <String>{};
+  final reversed = <String>[];
+  for (final label in definitionOrder.reversed) {
+    if (seen.add(label)) {
+      reversed.add(label);
+    }
+  }
+  return reversed.reversed.toList(growable: false);
+}
+
+CompiledDependencyRegexState _buildDependencyRegexState({
+  required List<String> compiledRuleOrder,
+  required Map<String, CompiledRule> rulesByLabel,
+}) {
+  final dependencyRegexMap = <String, CompiledDependencyRegexEntry>{};
+  for (final label in compiledRuleOrder) {
+    final rule = rulesByLabel[label]!;
+    if (rule.dependencyRefs.isEmpty) {
+      continue;
+    }
+    final patterns = [
+      for (final ref in rule.dependencyRefs)
+        _dependencyPatternFor(
+          ownerLabel: label,
+          ref: ref,
+          rulesByLabel: rulesByLabel,
+        ),
+    ];
+    dependencyRegexMap[label] = CompiledDependencyRegexEntry(
+      ownerLabel: label,
+      dependencyRefs: rule.dependencyRefs,
+      patterns: List.unmodifiable(patterns),
+    );
+  }
+  return CompiledDependencyRegexState(
+    dependencyRegexMap: Map.unmodifiable(dependencyRegexMap),
+  );
+}
+
+String _dependencyPatternFor({
+  required String ownerLabel,
+  required DependencyRef ref,
+  required Map<String, CompiledRule> rulesByLabel,
+}) {
+  final target = rulesByLabel[ref.label];
+  if (target == null) {
+    throw CompiledSpecException(
+      "rule '$ownerLabel' references undefined rule '${ref.label}'",
+    );
+  }
+  if (ref.index < 0 || ref.index >= target.regexPatterns.length) {
+    throw CompiledSpecException(
+      "rule '$ownerLabel' references rule '${ref.label}' regex slot "
+      '${ref.index}, but that rule has ${target.regexPatterns.length} regex '
+      'slot(s)',
+    );
+  }
+  return target.regexPatterns[ref.index];
+}

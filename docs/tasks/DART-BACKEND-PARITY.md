@@ -163,7 +163,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.2.4 - integrate Dart function shell projection`
 
 - ID: `DART-BACKEND-PARITY.3`
-  Status: `active`
+  Status: `done`
   Goal: Implement helper/action AST and compiled-state construction.
   Children: `.3.1`, `.3.2`, `.3.3`, `.3.4`
 
@@ -232,15 +232,33 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.3.3 - add Dart function registry`
 
 - ID: `DART-BACKEND-PARITY.3.4`
-  Status: `pending`
+  Status: `done`
   Goal: Compile parsed specs into a Dart compiled-spec/interpreter model.
   Acceptance: Compiled state has ordered rules, dependency-regex data, function registry, lifecycle/action
     AST payloads, mode metadata, and descriptor projection equivalent to the mdBook model.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: focused `dart test test/compiled_spec_test.dart`; `dart format --set-exit-if-changed .`;
+    `dart analyze --fatal-infos --fatal-warnings`; full `dart test`;
+    `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`;
+    `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build;
+    memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`.
+  Findings:
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: Dart had parsed `SpecFile` / `Rule` / ActionIR / function
+      registry records, but no owner under `dart/lib/src/compiler/` assembled them into the mdBook
+      `compiled_spec_state` / `compiled_dependency_regex_state` / `compiled_descriptor_state` contract.
+    - [x] **FIX** — Added `compileSpec(...)`, `CompiledSpec`, `CompiledRule`, `CompiledDependencyRegexState`,
+      and `CompiledDescriptorState`, plus public exports.
+    - [x] **ADDRESSED (verified)** — `test/compiled_spec_test.dart` proves ordered rule state, source validation
+      reuse, redefinition metadata when validation is deliberately skipped, dependency-regex derivation, mode
+      metadata, lifecycle/action `ActionBlock` payloads, registry-aware user-call contracts, and descriptor-shaped
+      JSON projection.
+    - [x] **NO REGRESSION** — Dart format/analyze/full tests, corpus runner, CLI help, and mdBook build pass.
+    - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, compiled-state model, `CHANGES.md`,
+      `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker
+      row, Knowledge Map facts, `docs/TASK_TREE.md`, and this task tree are updated.
+  Commit: `DART-BACKEND-PARITY.3.4 - add Dart compiled spec state`
 
 - ID: `DART-BACKEND-PARITY.4`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the Dart runtime interpreter.
   Children: `.4.1`, `.4.2`, `.4.3`, `.4.4`, `.4.5`
 
@@ -384,8 +402,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-BACKEND-PARITY.3.3` | `done` | Function registry and staged parse-job records are built; compiled-state work is next. |
-| 2 | `DART-BACKEND-PARITY.3.4` | `pending` | Build the Dart compiled-spec/interpreter model over parsed rules, ActionIR payloads, and the function registry. |
+| 1 | `DART-BACKEND-PARITY.3.4` | `done` | Compiled rule/dependency/descriptor state is built; runtime matching is next. |
+| 2 | `DART-BACKEND-PARITY.4.1` | `pending` | Implement regex matching and match-state tracking over compiled Dart state. |
 
 ## Dart Toolchain And Package Layout
 
@@ -544,6 +562,23 @@ The `.3.3` function-registry layer adds:
 - `test/function_registry_test.dart` plus resolver coverage in `test/action_contracts_test.dart`.
 - No compiled-spec state, runtime execution, or corpus output comparison yet.
 
+The `.3.4` compiled-state layer adds:
+
+- `lib/src/compiler/compiled_spec.dart` with public `compileSpec(...)`, `CompiledSpec`, `CompiledRule`,
+  `CompiledDependencyRegexState`, `CompiledDescriptorState`, rule mode metadata, dependency refs, and compiled
+  action payload records.
+- Default source validation reuse before compiled-state construction, with explicit `validateSource: false` support
+  only for lower-level state tests such as last-definition metadata.
+- Ordered `definition_order` / `compiled_rule_order`, `rules_by_label`, `redefined_rule_labels`, and carried
+  `UserFunctionRegistry` state.
+- Per-rule regex lists, dependency refs, action/blind edges, mode metadata, lifecycle/plain/edge `ActionBlock`
+  payloads, and registry-aware ActionIR contract results.
+- Structured dependency-regex data derived from child rule regex slots.
+- Descriptor projection with public `spec`, `functions`, `dependency_regex_map`, and `meta` keys.
+- `test/compiled_spec_test.dart` for compiled-state shape, dependency-regex derivation, descriptor projection,
+  source validation reuse, and redefinition metadata.
+- No runtime execution, tracing, or corpus output comparison yet.
+
 ## Decisions
 
 - `2026-07-09`: Dart starts interpreter-first. The primary parity path is
@@ -576,15 +611,18 @@ The `.3.3` function-registry layer adds:
 - `2026-07-09`: Dart `.3.3` builds user-function registry records from `FunctionDefinition` sidecars before
   compiled-state work. Registry-aware ActionIR contract resolution checks exact-arity user calls before helper
   fallback; wrong-arity registered calls produce user-function diagnostics.
+- `2026-07-09`: Dart `.3.4` builds `CompiledSpec` / `CompiledRule` / dependency-regex / descriptor state over
+  parsed `SpecFile`s. Dependency regexes are structured refs plus pattern strings until `.4` owns executable match
+  dispatch.
 
 ## Open Questions
 
-- None blocking `.3.4`. Function registry and staged body parse-job records are available; compiled-spec state is
-  next.
+- None blocking `.4.1`. Compiled state and descriptor projection are available; runtime regex matching and
+  match-state tracking are next.
 
 ## Blockers
 
-- None known before `.3.4` compiled-state work.
+- None known before `.4.1` runtime matching work.
 
 ## Verification Log
 
@@ -601,6 +639,7 @@ The `.3.3` function-registry layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.3.1` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. ActionIR parser tests cover typed helper/action AST node families and structural `raw_perl` fallback. |
 | `2026-07-09` | `DART-BACKEND-PARITY.3.2` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; Dart-tree non-current-spelling scan; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. ActionIR contract resolver records current canonical helper/control contracts and generic diagnostics without non-current spelling tables. |
 | `2026-07-09` | `DART-BACKEND-PARITY.3.3` | Focused `dart test test/function_registry_test.dart test/action_contracts_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart preserves staged function sidecars in an ordered registry and resolves exact-arity user calls before helper fallback. |
+| `2026-07-09` | `DART-BACKEND-PARITY.3.4` | Focused `dart test test/compiled_spec_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart compiles parsed specs into ordered compiled rule/dependency/descriptor state with ActionIR payloads and function registry projection. |
 
 ## Commit Log
 
@@ -617,6 +656,7 @@ The `.3.3` function-registry layer adds:
 | `DART-BACKEND-PARITY.3.1` | `DART-BACKEND-PARITY.3.1 - add Dart ActionIR AST parser` | Typed helper/action AST parser; helper-contract mapping remains `.3.2`. |
 | `DART-BACKEND-PARITY.3.2` | `DART-BACKEND-PARITY.3.2 - add Dart ActionIR contract resolver` | Current helper/control contract resolution; function registry uses the shared current-name table. |
 | `DART-BACKEND-PARITY.3.3` | `DART-BACKEND-PARITY.3.3 - add Dart function registry` | Ordered user-function registry and exact-arity resolver; compiled state remains `.3.4`. |
+| `DART-BACKEND-PARITY.3.4` | `DART-BACKEND-PARITY.3.4 - add Dart compiled spec state` | Ordered compiled rule/dependency/descriptor state; runtime matching starts in `.4.1`. |
 
 ## Changelog
 
@@ -641,3 +681,6 @@ The `.3.3` function-registry layer adds:
   advances to `.3.3` for function registry and staged function-body parse jobs.
 - `2026-07-09`: Added Dart user-function registry and exact-arity resolver over staged function sidecars;
   frontier advances to `.3.4` for compiled-spec/interpreter state.
+- `2026-07-09`: Added Dart compiled rule/dependency/descriptor state with lifecycle/action ActionIR payloads and
+  function registry projection; `.3` compiler-state container closes and frontier advances to `.4.1` for runtime
+  matching and match-state tracking.

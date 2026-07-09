@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.3.4 — Dart compiled spec state):
+  Added Dart's backend-neutral compiled state in `dart/lib/src/compiler/compiled_spec.dart`. `compileSpec(...)`
+  validates `SpecFile` inputs by default, builds deterministic `definition_order` / `compiled_rule_order`,
+  preserves redefinition metadata for deliberate validation-skipped builds, carries the `UserFunctionRegistry`,
+  records per-rule regexes, dependency refs, mode metadata, action/blind edges, and lifecycle/plain/edge
+  `ActionBlock` payloads with registry-aware ActionIR contract resolution. `CompiledDependencyRegexState` derives
+  structured child-regex dispatch data, and `CompiledDescriptorState` projects the mdBook descriptor shape:
+  `spec`, `functions`, `dependency_regex_map`, and `meta`. Focused compiled-state tests, Dart analyze, and the
+  full Dart suite pass before the full slice gate. Next frontier is `DART-BACKEND-PARITY.4.1` runtime matching
+  and match-state tracking.
+
 - 2026-07-09 (DART-BACKEND-PARITY.3.3 — Dart function registry):
   Added Dart's first user-function registry seam in `dart/lib/src/action/function_registry.dart`. The registry
   builds ordered entries from `FunctionDefinition`, preserves params, arity, source/body spans, `body_payload`,

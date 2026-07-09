@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.3.4 — add Dart compiled spec state**
+  (DONE compiled rule/dependency/descriptor state; runtime matching is next).
+
+  **Change:** Added `compileSpec(...)` and the Dart compiled-state model: ordered rules, rule metadata,
+  dependency refs, structured dependency-regex entries, lifecycle/action `ActionBlock` payloads, registry-aware
+  ActionIR contract resolution, user-function registry carry-through, and descriptor-shaped JSON projection.
+
+  **Boundary:** This is still non-executing compiler/interpreter state. Dart runtime matching, rule dispatch,
+  helper execution, tracing, and corpus output comparison remain later leaves.
+
+  **Verification:** Focused compiled-state test, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+  memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.3.3 — add Dart function registry**
   (DONE user-function registry and staged function-body parse-job records; compiled state is next).
 
