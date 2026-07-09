@@ -240,8 +240,8 @@ manifest subset.
 The active Dart plan follows the same parity ordering. `DART-BACKEND-PARITY`
 starts interpreter-first: `.spec` parser, typed helper/action AST, compiled-spec
 state, Dart runtime interpreter, then the manifest-backed corpus runner.
-Generated Dart source is a later proof lane after interpreter/corpus parity, not
-the primary conformance gate. The repo now has a Dart CLI/library scaffold under
+Generated Dart source is explicitly deferred to a future split source-emitter
+lane after interpreter/corpus parity, not the primary conformance gate. The repo now has a Dart CLI/library scaffold under
 `dart/`, including package metadata, committed lockfile, public library entrypoint,
 CLI smoke entrypoint, and smoke tests. Its corpus-runner scaffold loads the
 manifest-backed corpus, rejects manifest drift, checks required fixture files and
@@ -311,10 +311,12 @@ dart test
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute
 ```
 
-Current Dart parity is interpreter-first and corpus-green. Generated Dart source
-remains a later proof lane, and Dart-specific CLI productization remains a
-separate follow-up; neither is required for the current backend-neutral corpus
-conformance claim.
+Current Dart parity is interpreter-first and corpus-green. `DART-BACKEND-PARITY.7.2`
+deliberately defers generated Dart source to a future source-emitter lane with its
+own scaffold, generated family plan, direct structural-family execution proof, and
+curated corpus subset. Dart-specific CLI productization remains a separate follow-up;
+neither generated source nor CLI productization is required for the current
+backend-neutral corpus conformance claim.
 
 Dart
 also has source-level AST/data types and staged parse-job sidecars that round-trip

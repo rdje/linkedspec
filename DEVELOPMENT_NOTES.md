@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.7.2 — Dart generated-source deferral):
+  Generated Dart source is deferred instead of being implemented as a one-slice add-on. The Rust source-emitter
+  proof took a split lane with an emitter scaffold, generated family-plan metadata, direct execution by structural
+  family, and a curated manifest-backed corpus subset; Dart should follow that shape in a future dedicated
+  source-emitter lane if needed. The current Dart conformance claim remains the interpreter-first 99/99 corpus
+  gate. PNT advances to `.7.4` for Dart-specific CLI productization.
+
 - 2026-07-09 (DART-BACKEND-PARITY.7.1 — Dart mdBook usage/status closeout):
   The Dart backend docs now have a single reader-facing command path in the mdBook: `bash tools/run_dart_local.sh`
   for the focused Dart gate, `LINKEDSPEC_RUN_DART=1 bash tools/run_ci_local.sh` for opt-in local-CI inclusion, and

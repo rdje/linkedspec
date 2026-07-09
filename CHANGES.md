@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.7.2 — defer Dart generated source
+
+**Scope:** Dart generated-source deferral, mdBook status, task-tree frontier, live docs, roadmaps, resume
+pointer, and Knowledge Map.
+
+**Change:** Generated Dart source is deliberately deferred out of the current Dart parity closeout. The decision
+records the prerequisites for a future source-emitter lane: a minimal Dart emitter scaffold/compile-run harness,
+generated family-plan metadata, direct execution coverage by structural family, and a curated manifest-backed corpus
+subset. The 99/99 interpreter corpus remains the current Dart conformance gate.
+
+**Validation:** mdBook build, memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine,
+stale-status scans, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.7.1 — close Dart mdBook usage status
 
 **Scope:** mdBook Dart backend usage/status/handoff docs, trace-status cross-reference, task tree, live docs,

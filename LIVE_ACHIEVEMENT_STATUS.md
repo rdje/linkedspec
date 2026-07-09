@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.7.2 — defer Dart generated source proof**
+  (DONE — generated Dart source is explicitly deferred; frontier advances to `.7.4`).
+
+  **Change:** Recorded that generated Dart source is not part of the current Dart parity closeout. A future source
+  emitter must be split into scaffold/compile-run harness, generated family-plan metadata, direct structural-family
+  execution, and curated manifest-backed corpus proof before it can claim parity evidence.
+
+  **Boundary:** No Dart runtime behavior changed. The current Dart conformance gate remains the interpreter-first
+  99/99 corpus run, matching the Rust model where generated source is a separate curated proof layer.
+
+  **Verification:** mdBook build, memory architecture, Knowledge Map, task-tree metadata, doctrine,
+  stale-status scans, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.7.1 — close Dart mdBook usage status**
   (DONE — mdBook usage/status/handoff docs match the green `.6` boundary; frontier advances to `.7.2`).
 

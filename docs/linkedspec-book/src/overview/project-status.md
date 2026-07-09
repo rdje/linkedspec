@@ -58,7 +58,7 @@ Three backbone items tracked major structural modernization — all done:
 - **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred parity work. `FUTURE-PARITY-BACKLOG.1.1` scoped Dart into `DART-BACKEND-PARITY`; Julia and Lua remain gated until the Dart scoped milestone is reached. Each backend variant is expected to own a distinct LinkedSpec CLI entrypoint. The backlog also parks a future spec-derived closed-loop validation arc: both a parser and a stimuli generator should be derived from the same `.spec` source of truth, with design work required before any implementation. A separate parked language-design arc captures the corrected edge-default model: AND rules should default bare entries to blind-call sequence semantics, while OR/default rules should default bare entries to action-edge regex-dispatch semantics.
 - **Dart backend parity** - `DART-BACKEND-PARITY` is the active first future-backend lane. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
-  deferred to a later proof lane after corpus parity. The repo now has a `dart/` CLI/library scaffold,
+  deferred to a future split source-emitter lane rather than required for the current conformance claim. The repo now has a `dart/` CLI/library scaffold,
   manifest/corpus IO validation, source-level AST/data types with JSON round-trip coverage, a core `.spec` rule
   parser with shipped-spec plus rule-only corpus parser coverage, frontend validation/strict-syntax checks,
   spec-returned function-definition projection, typed ActionIR helper/action parsing, ActionIR contract
@@ -114,8 +114,9 @@ Three backbone items tracked major structural modernization — all done:
   recursive/default-mode bridge, portmap result-shape bridge, hlink delimiter/capture bridge, and helper
   mutation/text-normalization bridge are done, the legacy accumulator bridge closes `regdef`, and the public-parser
   leading-trivia bridge closes `ds_vhistory`; bounded structural matchers close the exact shipped PCRE structural
-  forms. The green corpus gate is wired into a focused Dart local gate and optional local-CI path; the next Dart
-  frontier is the generated-source proof decision.
+  forms. The green corpus gate is wired into a focused Dart local gate and optional local-CI path. Generated Dart
+  source is explicitly deferred to a future source-emitter lane with scaffold, family-plan, direct-family execution,
+  and curated-corpus proof prerequisites; the next Dart frontier is Dart-specific CLI productization.
 - **Non-current helper code purge** - `NONCURRENT-HELPER-CODE-PURGE` is closed. Perl source cleanup, Rust source cleanup, active test/tool/generated fixture and checked-in `.spec` migration, and final no-drift scans are complete. Retired helper-looking calls use generic unknown-helper fallback behavior, active generic-unknown-helper tests use invented helper names, and active helper-call/label/tag scans are clean.
 - **Rust generated-source breadth** — the Rust interpreter oracle is the current cross-variant parity gate. Generated Rust source already covers the current structural families and a curated corpus subset; broadening generated-source proof to the full manifest remains a separately owned future follow-on.
 - **Lifecycle-family audit** — verified complete (2026-06-14). All 7 lifecycle markers (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`) have full semicolon-light structured authoring coverage. The current separator contract is newline-or-semicolon: newlines separate top-level helper statements, and multiple same-line statements require semicolons. No lifecycle-specific semantic gaps found.

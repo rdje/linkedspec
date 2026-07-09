@@ -8,8 +8,13 @@ This document is the current high-level technical reading of the project shape. 
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.7.1` closes Dart mdBook usage/status/handoff documentation.
   The book now names `bash tools/run_dart_local.sh`, opt-in `LINKEDSPEC_RUN_DART=1 bash tools/run_ci_local.sh`,
   direct `dart test`, and full corpus-runner execution as the Dart command surface. Current Dart parity is
-  interpreter-first and 99/99 corpus-green; generated Dart source proof is the `.7.2` decision lane, and
-  Dart-specific CLI productization remains `.7.4`.
+  interpreter-first and 99/99 corpus-green; `.7.2` has since deferred generated Dart source to a future split
+  source-emitter lane, and Dart-specific CLI productization remains `.7.4`.
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.7.2` deliberately defers generated Dart source implementation.
+  A future Dart source-emitter proof must be split like the Rust source-emitter lane: scaffold/compile-run harness,
+  generated family-plan metadata, direct structural-family execution, and curated manifest-backed corpus subset.
+  The current Dart conformance gate remains the interpreter-first 99/99 corpus run; current frontier advances to
+  `.7.4` for Dart-specific CLI productization.
 - `2026-07-09` refresh: `BACKTRACK-SURFACE-RUST-ALIGNMENT` defines the current cross-variant cursor-control
   surface. Perl, Rust, and Dart expose `save_cursor()` / `restore_cursor()` for explicit cursor-stack semantics,
   `rewind_match_start()` / `rewind_entry_start()` for direct local-match or entry/initial-match anchor rewinds, and
@@ -182,7 +187,7 @@ This document is the current high-level technical reading of the project shape. 
 - `2026-07-09` refresh: `FUTURE-PARITY-BACKLOG.1.1` scoped the Dart lane into
   `docs/tasks/DART-BACKEND-PARITY.md`. Dart parity starts interpreter-first: `.spec` parser, typed
   helper/action AST, compiled-spec state, Dart runtime interpreter, then manifest-backed corpus parity.
-  Generated Dart source is a later proof lane after interpreter parity, not the primary gate. No
+  Generated Dart source was later deferred by `DART-BACKEND-PARITY.7.2`, not made the primary gate. No
   backend implementation code changed in this scoping slice.
 - `2026-07-09` refresh: `FUTURE-PARITY-BACKLOG.0` created the active future parity backlog and ADR
   `0021` accepted Lua as a scheduled future backend target. Future full-parity backend rollout is now Dart

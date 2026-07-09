@@ -18,23 +18,23 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.7.1` — the mdBook now documents Dart backend commands, the
-  interpreter-first 99/99 corpus parity boundary, and generated-source / Dart-specific CLI follow-up lanes.
-- prior_leaf: `DART-BACKEND-PARITY.6.4` — Dart parity is wired into local verification through
-  `tools/run_dart_local.sh` and optional `LINKEDSPEC_RUN_DART=1` integration in `tools/run_ci_local.sh`.
+- latest_completed_leaf: `DART-BACKEND-PARITY.7.2` — generated Dart source is deliberately deferred to a future
+  split source-emitter lane; the Dart conformance gate remains the interpreter-first 99/99 corpus run.
+- prior_leaf: `DART-BACKEND-PARITY.7.1` — the mdBook documents Dart backend commands, the interpreter-first
+  99/99 corpus parity boundary, and generated-source / Dart-specific CLI follow-up lanes.
 - latest_commit: this resume block is prepared for commit
-  `DART-BACKEND-PARITY.7.1 - close Dart mdBook usage status`; previous committed HEAD is
-  `e985be99 DART-BACKEND-PARITY.6.4 - wire Dart local verification`.
+  `DART-BACKEND-PARITY.7.2 - defer Dart generated source proof`; previous committed HEAD is
+  `4f67e069 DART-BACKEND-PARITY.7.1 - close Dart mdBook usage status`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.7.2` after the current commit is clean.
-- next_action: resume PNT at `DART-BACKEND-PARITY.7.2` for the generated Dart source proof decision now that the
-  `.7.1` mdBook usage/status/handoff closeout is complete. The director's single-source `foo.spec`
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `.7.4` after the current commit is clean.
+- next_action: resume PNT at `DART-BACKEND-PARITY.7.4` for Dart-specific LinkedSpec CLI productization now that
+  `.7.2` explicitly defers generated Dart source to a future source-emitter lane. The director's single-source `foo.spec`
   parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`; the corrected AND/OR edge-default model
   is parked in `.9.1`; neither is a current pivot.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, COMMIT, task-tree index,
   active Dart task tree, ROADMAP/ROADMAP_V2, mdBook trace/runtime/status/backend-handoff chapters, relevant ADR/KM
-  facts, Dart runtime/package/corpus source owners through `.7.1`, Rust staged-registry/trace references, and the
+  facts, Dart runtime/package/corpus source owners through `.7.2`, Rust staged-registry/trace references, and the
   completed cursor-control split.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
@@ -42,5 +42,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `DART-BACKEND-PARITY.7.1` commit; do not pivot unless the repo
+- blockers: none. in_flight_uncommitted: none expected after the `DART-BACKEND-PARITY.7.2` commit; do not pivot unless the repo
   is handoff-ready.
