@@ -270,8 +270,10 @@ scalar-held lists, all five hlink fixtures pass, and `tablegrep_simple_term` als
 is also done: statement-form `substr(...)` / `regex_subst(...)`, explicit split replacement, and entry/local line
 helpers make `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute` pass. The basic
 legacy accumulator leaf is also done: Dart `push(Child)` now appends child returns to the current rule accumulator,
-so `regdef_nested_register_fields` passes; `ds_vhistory_version_entry` remains routed for an explicit
-direct-access/oracle decision. The regex-dialect bridge is now in place for POSIX classes, inline/scoped flags, possessive
+so `regdef_nested_register_fields` passes. The `ds_vhistory_version_entry` residual is split again because public
+Perl/Rust keep the leading-newline fixture's checked null object name, while direct generated descriptor-handler
+execution returns `/proj/foo`; the next leaf owns that public-parser/oracle boundary explicitly. The regex-dialect
+bridge is now in place for POSIX classes, inline/scoped flags, possessive
 markers, lower-bound quantifiers, and Python-style named captures. Scoped flag
 groups are accepted by lifting their options to the Dart `RegExp`. The missing
 helper/action bridge is also in place for direct capture-slice helpers,
@@ -417,8 +419,8 @@ and is now 23/31 green. The basic regex-dialect bridge, helper/action bridge,
 recursive/default-mode parser-smoke bridge, portmap result-shape bridge, and
 hlink delimiter/capture bridge are done; the helper mutation/text-normalization
 bridge is also done, and the legacy accumulator bridge closes `regdef_nested_register_fields`. The next Dart leaf
-is residual parser-smoke closeout for `ds_vhistory_version_entry`, and full shipped 99-fixture corpus parity
-remains later.
+resolves the `ds_vhistory_version_entry` leading-newline public-parser/oracle boundary before final parser-smoke
+closeout, and full shipped 99-fixture corpus parity remains later.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

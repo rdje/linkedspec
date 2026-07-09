@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.5 — split ds_vhistory oracle boundary**
+  (DONE — `ds_vhistory_version_entry` has public-parser, descriptor-handler, scalar-held indexed-read, and
+  leading-newline evidence; no Dart runtime behavior changed).
+
+  **Change:** Closed the residual parser-smoke leaf as an evidence split. Public `LinkedSpec::get_parser` returns
+  the checked null object name for the leading-newline fixture, but the direct generated `vhistory` descriptor
+  handler returns `/proj/foo`; a minimal public scalar-held `payload[1]` probe still returns `"name"`.
+
+  **Boundary:** The shipped-spec/parser-smoke diagnostic window remains 23/31 green. The new active frontier is
+  `DART-BACKEND-PARITY.6.2.4.4.6`, which must resolve the leading-newline public-parser/oracle boundary without
+  weakening ordinary scalar-held direct access.
+
+  **Verification:** Perl public-parser, descriptor-handler, scalar-held indexed-read, and leading-newline minimal
+  probes; focused Dart `ds_vhistory_version_entry` corpus run; Rust `oracle_corpus_matches_perl_reference`;
+  mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass or record
+  the expected Dart mismatch as evidence.
+
 - 2026-07-09: **FUTURE-PARITY-BACKLOG.9.0 — capture AND OR edge default correction**
   (DONE — director's corrected AND/OR edge-default model is parked for later design).
 
@@ -14,8 +31,8 @@ Current execution status for interruption-safe batch workflow recovery.
   The future direction is that AND rules default bare entries to blind-call sequence semantics, while OR/default
   rules default bare entries to action-edge regex-dispatch semantics.
 
-  **Boundary:** Planning capture only. No parser/runtime behavior changed, and active implementation work remains
-  on `DART-BACKEND-PARITY.6.2.4.4.5`.
+  **Boundary:** Planning capture only. No parser/runtime behavior changed, and then-active implementation work
+  remained on `DART-BACKEND-PARITY.6.2.4.4.5`.
 
   **Verification:** mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
   `git diff --check` pass.

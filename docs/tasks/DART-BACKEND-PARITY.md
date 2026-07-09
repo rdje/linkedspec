@@ -944,7 +944,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Status: `active`
   Goal: Close residual shipped-spec parser-smoke fixture output parity.
   Children: `.6.2.4.4.0`, `.6.2.4.4.1`, `.6.2.4.4.2`, `.6.2.4.4.3`, `.6.2.4.4.4`,
-    `.6.2.4.4.5`
+    `.6.2.4.4.5`, `.6.2.4.4.6`
   Acceptance: Hlink, portmap, regdef, tablegrep, simenv, VHDL/library, history, and plugin/library smoke fixtures
     pass or are routed with precise root-cause evidence after regex/helper/recursion blockers are removed,
     including any observable semantic mismatch from Dart's normalized regex dialect bridge. EBNF/spec.spec/Lispish
@@ -955,7 +955,9 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     green. After `.6.2.4.4.3`, `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute`
     pass, bringing the diagnostic window to 22/31 green. After `.6.2.4.4.4`,
     `regdef_nested_register_fields` passes and `ds_vhistory_version_entry` is routed with direct-access/oracle
-    evidence, bringing the diagnostic window to 23/31 green.
+    evidence, bringing the diagnostic window to 23/31 green. After `.6.2.4.4.5`, the `ds_vhistory` residual is
+    split again with public-parser, descriptor-handler, and minimal scalar-held access evidence; the next frontier
+    is `.6.2.4.4.6` for the actual leading-newline public-parser/oracle boundary decision.
   Commit: `pending`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.0`
@@ -1138,12 +1140,52 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.2.4.4.4 - close Dart legacy accumulator smoke`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.5`
-  Status: `pending`
+  Status: `done`
   Goal: Close residual parser-smoke parity after the focused output/helper leaves.
   Acceptance: The `.6.2.4.4` residual group is green or every remaining non-PCRE blocker is split with durable
     evidence before `.6.2.4.5` final no-drift closeout. First residual: decide `ds_vhistory_version_entry`
     object-name parity, where the checked oracle expects `null` for `cur_object[1]` but Dart follows the current
     scalar-held direct-access contract and returns `/proj/foo`.
+  Verification: **PASS 2026-07-09.** This leaf deliberately makes no Dart runtime change. Tool-backed Perl probes
+    show the checked fixture expectation is not a simple scalar-held indexed-read contract: public
+    `LinkedSpec::get_parser("ds_vhistory")` returns a null object name for the leading-newline fixture, while the
+    direct descriptor handler for `vhistory` prints and returns `/proj/foo` for the same source. A minimal public
+    parser still returns `"name"` for ordinary scalar-held `payload[1]`, proving that globally weakening Dart
+    `ActionIndexedVarExpr` would regress valid direct-access behavior. A minimal leading-newline action-edge
+    reproduction returns null, while the same grammar/input shape without the leading-newline regex returns
+    `/proj/foo`. Dart's focused corpus run still differs at expected `null` versus actual `/proj/foo`, and Rust's
+    full `oracle_corpus_matches_perl_reference` gate passes the checked null fixture. The residual is therefore
+    split to `.6.2.4.4.6` for the leading-newline public-parser/oracle boundary rather than patched blindly.
+
+  ## Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — `dart run bin/corpus_runner.dart --corpus
+    ../rust/linkedspec-runtime/tests/corpus --execute --case ds_vhistory_version_entry` still fails only at object
+    name: expected `null`, actual `/proj/foo`.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — `specs/ds_vhistory.spec` assigns `cur_object = call(object)` and later
+    reads `cur_object[1]`; `call_spec_handler_subst` lowers that read to `$cur_object->[1]`. The public parser,
+    however, returns null for the leading-newline fixture while the direct descriptor handler returns `/proj/foo`.
+    Minimal probes isolate the difference to a leading-newline/start-of-input action-edge boundary, not to ordinary
+    scalar-held direct indexing.
+  - [x] **FIX / SPLIT** — Opened `.6.2.4.4.6` as the next owned leaf for the actual
+    `ds_vhistory_version_entry` leading-newline public-parser/oracle boundary. No Dart semantic weakening landed
+    in this slice.
+  - [x] **ADDRESSED (verified)** — Rust `oracle_corpus_matches_perl_reference` passes all 99 fixtures including
+    `ds_vhistory_version_entry`; Perl public-parser, direct descriptor-handler, ordinary scalar-held indexed-read,
+    and leading-newline minimal probes are recorded in this task tree and Knowledge Map.
+  - [x] **NO REGRESSION** — Documentation/task-tree split only; focused evidence commands plus mdBook, memory
+    architecture, Knowledge Map, task-tree metadata, doctrine, and whitespace gates pass.
+  - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
+    `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, and
+    Knowledge Map are updated.
+  Commit: `DART-BACKEND-PARITY.6.2.4.4.5 - split ds_vhistory oracle boundary`
+
+- ID: `DART-BACKEND-PARITY.6.2.4.4.6`
+  Status: `pending`
+  Goal: Resolve `ds_vhistory_version_entry` leading-newline public-parser/oracle boundary.
+  Acceptance: Dart either matches the public Perl/Rust oracle for the leading-newline `ds_vhistory` fixture without
+    weakening ordinary scalar-held direct access, or the corpus/oracle contract is corrected with Perl, Rust, Dart,
+    mdBook, and Knowledge Map lockstep. The public-parser versus descriptor-handler discrepancy must have a durable
+    decision or evidence record before `.6.2.4.5`.
   Verification: `pending`
   Commit: `pending`
 
@@ -1263,7 +1305,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 14 | `DART-BACKEND-PARITY.5.1` | `done` | Minimal staged registry provider dispatches function-body parse jobs and stitches `body_ast`. |
 | 15 | `DART-BACKEND-PARITY.5.2` | `done` | Registered exact-arity user functions execute at runtime. |
 | 16 | `DART-BACKEND-PARITY.5.3` | `done` | Staged parse-job and function-registry descriptor shapes are preserved. |
-| 17 | `DART-BACKEND-PARITY.6` | `active` | Corpus parity is in progress; current frontier is `.6.2.4.4.5` for residual parser-smoke closeout. |
+| 17 | `DART-BACKEND-PARITY.6` | `active` | Corpus parity is in progress; current frontier is `.6.2.4.4.6` for the `ds_vhistory` leading-newline public-parser/oracle boundary. |
 
 ## Dart Toolchain And Package Layout
 
@@ -1560,6 +1602,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.5.3` | Focused `dart test test/compiled_spec_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart preserves neutral staged user-function descriptor shapes through parsed functions, compiled registry jobs, descriptor functions records, stitched `body_ast`, descriptor metadata, and runtime output; `.5` closes and frontier advances to `.6` corpus parity. |
 | `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.4.3` | Focused `dart test test/runtime_interpreter_test.dart test/corpus_manifest_test.dart`; focused helper/text-normalizing corpus run; diagnostic `--execute --offset 68 --limit 31` boundary measurement; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; CLI/help corpus-loader smokes; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart statement-form helper mutation, explicit split replacement, and entry/local line helpers close `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute`; the parser-smoke window moves from 19/31 to 22/31 green and frontier advances to `.6.2.4.4.4`. |
 | `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.4.4` | Focused `dart test test/runtime_interpreter_test.dart test/corpus_manifest_test.dart`; focused structural corpus run; diagnostic `--execute --offset 68 --limit 31` boundary measurement; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; CLI/help corpus-loader smokes; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart `push(Child)` current-rule accumulator semantics close `regdef_nested_register_fields`; `ds_vhistory_version_entry` is routed to `.6.2.4.4.5` with direct-access/oracle evidence; the parser-smoke window moves from 22/31 to 23/31 green. |
+| `2026-07-09` | `DART-BACKEND-PARITY.6.2.4.4.5` | Perl public-parser and descriptor-handler probes for `ds_vhistory`; `call_spec_handler_subst` direct-access lowering probe; minimal scalar-held `payload[1]` public-parser probe; minimal leading-newline action-edge reproduction; focused Dart `ds_vhistory_version_entry` corpus run; Rust `oracle_corpus_matches_perl_reference`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. The `ds_vhistory` residual is split with durable evidence: public Perl/Rust expect null for the leading-newline fixture, direct descriptor execution returns `/proj/foo`, ordinary scalar-held indexed access still works, and `.6.2.4.4.6` owns the actual boundary decision. No Dart runtime behavior changed. |
 
 ## Commit Log
 
@@ -1598,6 +1641,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.7.3` | `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement` | Docs-only split for per-variant LinkedSpec CLI productization. |
 | `DART-BACKEND-PARITY.6.2.4.4.3` | `DART-BACKEND-PARITY.6.2.4.4.3 - close Dart helper mutation surfaces` | Statement-form helper mutation, explicit split replacement, and entry/local line helpers close three parser-smoke fixtures. |
 | `DART-BACKEND-PARITY.6.2.4.4.4` | `DART-BACKEND-PARITY.6.2.4.4.4 - close Dart legacy accumulator smoke` | `push(Child)` current-rule accumulator semantics close `regdef_nested_register_fields`; `ds_vhistory_version_entry` is routed with direct-access/oracle evidence. |
+| `DART-BACKEND-PARITY.6.2.4.4.5` | `DART-BACKEND-PARITY.6.2.4.4.5 - split ds_vhistory oracle boundary` | Evidence-only split: public `ds_vhistory` parser leading-newline fixture returns null, direct descriptor handler returns `/proj/foo`, ordinary scalar-held indexed reads remain valid, and `.6.2.4.4.6` owns the boundary decision. |
 
 ## Changelog
 
@@ -1676,3 +1720,6 @@ The `.4.1` runtime matching layer adds:
   appends child returns to the current rule accumulator, making `regdef_nested_register_fields` pass. The
   diagnostic window is 23/31 green, and `ds_vhistory_version_entry` is routed to `.6.2.4.4.5` for direct-access
   oracle/contract closeout.
+- `2026-07-09`: Split the `ds_vhistory_version_entry` residual again after public-parser and descriptor-handler
+  probes showed a leading-newline public-parser/oracle boundary, not a safe global direct-access weakening. The
+  next frontier is `.6.2.4.4.6` for the actual boundary decision before final parser-smoke no-drift closeout.

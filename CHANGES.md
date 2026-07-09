@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.4.5 — split ds_vhistory oracle boundary
+
+**Scope:** Dart residual parser-smoke task-tree split, Perl/Rust/Dart oracle evidence, mdBook status, live docs,
+roadmap status, resume pointer, and Knowledge Map.
+
+**Change:** Closed `.6.2.4.4.5` as an evidence split rather than a runtime patch. Public
+`LinkedSpec::get_parser("ds_vhistory")` returns the checked null object name for the leading-newline fixture, while
+the direct `vhistory` descriptor handler returns `/proj/foo` for the same source. A minimal public parser still
+returns `"name"` for ordinary scalar-held `payload[1]`, so globally weakening Dart `ActionIndexedVarExpr` would
+regress valid direct-access behavior. The new `.6.2.4.4.6` leaf owns the actual leading-newline public-parser/oracle
+boundary decision.
+
+**Validation:** Perl public-parser, descriptor-handler, scalar-held indexed-read, and leading-newline minimal
+probes; focused Dart `ds_vhistory_version_entry` corpus run; Rust `oracle_corpus_matches_perl_reference`; mdBook
+build; memory architecture; Knowledge Map generation/check; task-tree metadata; doctrine; and `git diff --check`
+pass or record the expected Dart mismatch as evidence. No Dart runtime behavior changed.
+
 ## 2026-07-09 — FUTURE-PARITY-BACKLOG.9.0 — capture AND OR edge default correction
 
 **Scope:** Future parity backlog task-tree, roadmap/live docs, mdBook status, resume pointer, and Knowledge Map.

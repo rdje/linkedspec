@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.6.2.4.4.5 — ds_vhistory oracle boundary split):
+  The remaining `ds_vhistory_version_entry` mismatch is narrower and stranger than the earlier direct-access
+  shorthand suggested. Public `LinkedSpec::get_parser("ds_vhistory")` returns a null object name for the checked
+  leading-newline fixture, and Rust's oracle corpus matches that. Directly invoking the generated `vhistory`
+  descriptor handler on the same source prints and returns `/proj/foo`. A minimal public parser still returns
+  `"name"` for a normal scalar-held `payload[1]`, while a minimal grammar with a leading-newline object regex
+  reproduces the null. Conclusion for this slice: do not weaken Dart indexed-variable reads globally. The next
+  owned leaf is `.6.2.4.4.6`, which must resolve the leading-newline public-parser/oracle boundary explicitly.
+
 - 2026-07-09 (FUTURE-PARITY-BACKLOG.9.0 — AND/OR edge-default correction captured):
   The director corrected the earlier optional-edge-marker brainstorm. The future design direction is now
   mode-sensitive: AND rules should be the low-ceremony sequence surface, so a bare `entry { ... }` line in an AND
