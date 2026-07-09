@@ -513,6 +513,137 @@ Top::
       },
     });
   });
+
+  test('executes value blocks controls and trailing with blocks', () {
+    final engine = _engine(r'''
+Top::
+ /x/
+ E {
+   counted = { count = 0; while(num_lt(count, 2)) { count = num_add(count, 1) }; count };
+   local = { while(true) { return("local") }; "bad" };
+   branch = { if(false) { return("bad") } elseif(true) { return("yes") } else { return("no") } };
+   kind = "b";
+   switched = { switch(kind) { case("a") { return("bad") } case("b") { return("hit") } default { return("miss") } } };
+   inline = if(false, "bad", else("fallback"));
+   with_result = with("inner") { value = cat(value, "!"); return(value) };
+   receiver = " a-b ".trim().with() { return(value.split("-")) }.count();
+   return(array(counted, local, branch, switched, inline, with_result, receiver, value))
+ }
+''');
+
+    final result = engine.parse('x');
+
+    expect(result.value, [
+      2,
+      'local',
+      'yes',
+      'hit',
+      'fallback',
+      'inner!',
+      2,
+      null,
+    ]);
+  });
+
+  test('keeps attached while returns rule-level outside value blocks', () {
+    final engine = _engine(r'''
+Top::
+ /x/
+ E {
+   while(true) { return("done") };
+   return("bad")
+ }
+''');
+
+    final result = engine.parse('x');
+
+    expect(result.value, 'done');
+  });
+
+  test('executes hash and array tree traversal receiver blocks', () {
+    final engine = _engine(r'''
+Top::
+ /x/
+ E {
+   meta = { "b" : { "y" : "B" }, "a" : "A", "arr" : ["u", "v"] };
+   items = ["a", ["b", "c"], { "h" : "H" }];
+   nonhash = "x".map_leaves() { seen += "bad" };
+   nonarray = "x".walk_leaves() { seen += "bad" };
+   return(array(
+     meta.map_leaves() { return(cat(join_values("/", array(path)), "=", if(count(array(value)), join_values("", array(value)), else(value)))) },
+     meta.reduce_leaves("") { return(cat(acc, key)) },
+     meta.walk_leaves() { seen += join_values("/", array(path)); return(value) }.count_keys(),
+     items.map_leaves() { return(cat(join_values("/", array(path)), "=", if(count(hash(value).sorted_keys()), cat("{", hash(value).sorted_keys().join_values(","), "}"), else(value)))) },
+     items.reduce_leaves("") { return(cat(acc, join_values("/", array(path)), ":", if(count(hash(value).sorted_keys()), cat("{", hash(value).sorted_keys().join_values(","), "}"), else(value)), ";")) },
+     items.walk_leaves() { seen += join_values("/", array(path)); return(value) }.count(),
+     array(seen),
+     is_undefined(nonhash),
+     is_undefined(nonarray)
+   ))
+ }
+''');
+
+    final result = engine.parse('x');
+
+    expect(result.value, [
+      {
+        'a': 'a=A',
+        'arr': 'arr=uv',
+        'b': {'y': 'b/y=B'},
+      },
+      'aarry',
+      3,
+      [
+        '0=a',
+        ['1/0=b', '1/1=c'],
+        '2={h}',
+      ],
+      '0:a;1/0:b;1/1:c;2:{h};',
+      3,
+      ['a', 'arr', 'b/y', '0', '1/0', '1/1', '2'],
+      true,
+      true,
+    ]);
+  });
+
+  test('restores scoped tree callback bindings', () {
+    final engine = _engine(r'''
+Top::
+ /x/
+ E {
+   meta = { "a" : "A" };
+   items = ["B"];
+   value = "outer_value";
+   key = "outer_key";
+   index = "outer_index";
+   path = "outer_path";
+   depth = "outer_depth";
+   acc = "outer_acc";
+   mapped_hash = meta.map_leaves() { value = cat(value, "!"); key = "inner"; path = ["inner"]; depth = 99; return(value) };
+   reduced_hash = meta.reduce_leaves("seed") { acc = cat(acc, key); return(acc) };
+   mapped_array = items.map_leaves() { value = cat(value, "?"); index = 9; path = ["inner"]; depth = 99; return(cat(value, index)) };
+   reduced_array = items.reduce_leaves("seed") { acc = cat(acc, index); return(acc) };
+   null_reduced = meta.reduce_leaves(if(false, "unused")) { before = is_undefined(acc); acc = "inner_acc"; return(before) };
+   return(array(mapped_hash["a"], reduced_hash, mapped_array.first(), reduced_array, null_reduced, value, key, index, path, depth, acc))
+ }
+''');
+
+    final result = engine.parse('x');
+
+    expect(result.value, [
+      'A!',
+      'seeda',
+      'B?9',
+      'seed0',
+      true,
+      'outer_value',
+      'outer_key',
+      'outer_index',
+      'outer_path',
+      'outer_depth',
+      'outer_acc',
+    ]);
+  });
 }
 
 LinkedSpecRuntimeEngine _engine(String source) {

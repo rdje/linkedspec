@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.4.3.5 — add Dart runtime controls and tree callbacks
+
+**Scope:** Dart action parser branch splitting, runtime value-block/control/callback execution, focused
+parser/runtime tests, Dart CLI help, package README, mdBook Dart handoff/status text, live docs,
+roadmap/task-tree status, and Knowledge Map facts.
+
+**Change:** Extended Dart runtime helper/value execution with expression-valued blocks, block-local
+`return(...)` / `return_undef()`, attached `if` / `elseif` / `else` and `when` / `otherwise` branch chains,
+attached `switch` / `case` / `default`, attached `while` with the deterministic iteration guard, inline lazy
+`if(...)` / `switch(...)`, helper-form `with(value) { ... }` / `with() { ... }`, receiver `.with() { ... }`,
+and hash/array `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver callbacks. Callback frames
+bind scoped `value`, `path`, `depth`, hash `key`, array `index`, and reduce-only `acc`, then restore any outer
+scalar/array/hash bindings.
+
+**Validation:** Focused parser/runtime tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.7.3 — record variant-specific CLI requirement
 
 **Scope:** Dart backend task-tree planning, future-backlog directive capture, top-level task-tree index,

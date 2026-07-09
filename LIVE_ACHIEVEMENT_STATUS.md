@@ -7,6 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.4.3.5 — add Dart runtime controls and tree callbacks**
+  (DONE value blocks, structured controls, with-blocks, and tree traversal receiver callbacks).
+
+  **Change:** Dart runtime execution now supports expression-valued blocks with block-local `return(...)` /
+  `return_undef()`, final-expression yields, attached `if` / `elseif` / `else` and `when` / `otherwise`, attached
+  `switch` / `case` / `default`, attached `while` with the deterministic iteration guard, inline lazy `if(...)` /
+  `switch(...)`, helper-form `with(value) { ... }` / `with() { ... }`, receiver `.with() { ... }`, and hash/array
+  `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver callbacks. Callback frames scope and restore
+  `value`, `path`, `depth`, hash `key`, array `index`, and reduce-only `acc`.
+
+  **Boundary:** This closes the helper/control/tree runtime execution slice. BACKTRACK, tracing, staged runtime
+  execution, corpus output parity, Dart-specific CLI productization, and final no-drift closeout remain later
+  leaves. Active implementation work advances to `DART-BACKEND-PARITY.4.3.6`.
+
+  **Verification:** Focused parser/runtime tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+  memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.7.3 — record variant-specific CLI requirement**
   (DONE docs-only planning split for per-variant LinkedSpec CLI ownership).
 
@@ -14,8 +31,8 @@ Current execution status for interruption-safe batch workflow recovery.
   CLI productization is now owned by `DART-BACKEND-PARITY.7.4`; final Dart no-drift closeout shifts to `.7.5`.
   The future-backlog tree records that Julia and Lua planning must include equivalent CLI ownership when activated.
 
-  **Boundary:** No CLI behavior changed in this slice. Active implementation work remains
-  `DART-BACKEND-PARITY.4.3.5`.
+  **Boundary:** No CLI behavior changed in this slice. It recorded future CLI ownership before the runtime frontier
+  advanced through `DART-BACKEND-PARITY.4.3.5`.
 
   **Verification:** mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine checks, and
   `git diff --check` pass.
@@ -28,9 +45,9 @@ Current execution status for interruption-safe batch workflow recovery.
   working-variable receiver chains, statement-form `set_key(...)` mutation, direct hash-index assignment values,
   and explicit flat-style hash splicing inside `hash(...)`.
 
-  **Boundary:** This closes hash helper breadth only. Value-block/control/tree traversal helpers, BACKTRACK,
-  tracing, staged function execution, full corpus output parity, and per-variant CLI productization remain later
-  leaves.
+  **Boundary:** This closed hash helper breadth only. Value-block/control/tree traversal helpers landed later in
+  `.4.3.5`; BACKTRACK, tracing, staged function execution, full corpus output parity, and per-variant CLI
+  productization remain later leaves.
 
   **Verification:** Focused runtime interpreter and ActionIR contract tests, Dart format/analyze/full tests,
   corpus runner, CLI help, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, diagnosis

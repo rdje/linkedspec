@@ -118,6 +118,21 @@ void main() {
     expect(ifNode.condition, isA<ActionVariableExpr>());
     expect(ifNode.body!.statements.single.expr, isA<ActionCallExpr>());
 
+    final branchBlock = parseActionBlock(
+      'if(false) { set(out, "bad") } '
+      'elseif(true) { set(out, "yes") } '
+      'else { set(out, "no") }',
+    );
+    expect(branchBlock.statements.map((statement) => statement.expr.kind), [
+      'control_if',
+      'control_if',
+      'control_else',
+    ]);
+    expect(
+      (branchBlock.statements[1].expr as ActionControlIfExpr).branchRole,
+      'elseif',
+    );
+
     final whileNode =
         parseActionExpression('while(flag) { next() }')
             as ActionControlWhileExpr;

@@ -10,8 +10,8 @@ parsing/contract resolution, user-function registry scaffolding, a
 backend-neutral compiled-spec state model, runtime regex/match-state primitives,
 a first rule-dispatch interpreter, core runtime value/capture helpers,
 string/numeric helper execution, array helper execution, and hash helper
-execution before full
-helper/corpus semantics land.
+execution, plus value-block/control/tree helper execution before full
+BACKTRACK/tracing/corpus semantics land.
 
 ## Commands
 
@@ -29,7 +29,8 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.4.3.4` owns the current boundary. The package can round-trip
+`DART-BACKEND-PARITY.4.3.5` is the current completed runtime boundary; `.4.3.6`
+is the next helper/value no-drift frontier. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -56,6 +57,10 @@ array receiver chains, regex split/filter bridges, delimiter-first
 `join_values`, array numeric reducers, and statement-only array end mutations.
 It now also executes hash helpers, hash receiver chains, statement/value
 `set_key` boundaries, bare-overlay `merge_hash`, direct hash-index assignment
-values, and explicit flat-style hash splicing inside `hash(...)`.
-Control/tree, tracing, and corpus output parity remain later leaves in
-`docs/tasks/DART-BACKEND-PARITY.md`.
+values, and explicit flat-style hash splicing inside `hash(...)`. It now also
+executes expression-valued blocks with block-local `return(...)`, attached and
+inline `if`/`when`/`switch`/`while` controls, helper-form `with(...) { ... }`,
+receiver `.with() { ... }`, and hash/array tree traversal receiver callbacks
+with scoped callback bindings.
+BACKTRACK, tracing, staged runtime execution, and corpus output parity remain
+later leaves in `docs/tasks/DART-BACKEND-PARITY.md`.

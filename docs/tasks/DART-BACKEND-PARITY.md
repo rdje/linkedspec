@@ -453,12 +453,41 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.4.3.4 - add Dart runtime hash helpers`
 
 - ID: `DART-BACKEND-PARITY.4.3.5`
-  Status: `pending`
+  Status: `done`
   Goal: Implement value blocks, structured action controls, and tree traversal callback helpers.
   Acceptance: Expression-valued blocks, attached/inline `if`/`when`/`switch`/`while` surfaces, receiver `.with`,
     and `walk_leaves` / `map_leaves` / `reduce_leaves` traversal helpers match current Perl/Rust contracts.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Dart runtime execution now supports expression-valued blocks with
+    block-local `return(...)` / `return_undef()`, final-expression yields, and nested statement side effects;
+    attached `if` / `elseif` / `else` and `when` / `otherwise` branch chains; attached `switch` / `case` /
+    `default`; attached `while` with the deterministic iteration guard; inline lazy `if(...)` / `switch(...)`;
+    helper-form `with(value) { ... }` / `with() { ... }`; receiver `.with() { ... }` continuations; and
+    hash/array `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver callbacks. Callback frames bind
+    scoped scalar `value`, `path`, `depth`, plus hash `key`, array `index`, and reduce-only `acc`, and restore
+    any outer scalar/array/hash bindings afterward. Hash traversal is sorted-key depth-first with nested hashes as
+    interiors and arrays as leaves; array traversal is depth-first by zero-based index with nested arrays as
+    interiors and hashes as leaves. Focused parser/runtime tests cover branch splitting, block-local vs rule-level
+    returns, with-block binding restoration, traversal return shapes, non-aggregate receivers, and callback-scope
+    restoration. Dart format, analyze, full test suite, corpus-loader, CLI help, mdBook, memory architecture,
+    Knowledge Map, task-tree metadata, doctrine, and whitespace checks pass.
+  Acceptance Checklist:
+    - [x] **REPRODUCE / ISSUE** — `.4.3.4` executed hash helpers but value blocks used the surrounding
+      action-block return channel, attached branch chains had no runtime gating, `with(...)` and receiver `.with()`
+      were parsed but unsupported at runtime, and tree traversal receiver callbacks had no Dart execution path.
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `dart/lib/src/runtime/interpreter.dart` evaluated every
+      `ActionBlockValueExpr` through `_executeActionBlock(...)`, so `return(...)` could not be block-local.
+      `_evaluateExpression(...)` had no cases for structured control nodes or trailing-block callback helpers, and
+      `dart/lib/src/action/action_parser.dart` did not split adjacent attached branch continuations into sibling
+      statements.
+    - [x] **FIXED** — Added branch-continuation statement splitting, value-block flow evaluation, attached/inline
+      control execution, scoped `with` / receiver `.with` execution, hash/array tree traversal callbacks, scoped
+      callback variable snapshots/restoration, and targeted parser/runtime coverage.
+    - [x] **NO REGRESSION** — Focused parser/runtime tests, `dart format --set-exit-if-changed`, Dart analyze,
+      full `dart test`, corpus-loader, CLI help checks, mdBook, memory architecture, Knowledge Map, task-tree
+      metadata, doctrine, and `git diff --check` pass.
+    - [x] **LOCKSTEP** — Dart README/CLI help, mdBook Dart handoff/status text, live docs, task-tree index,
+      roadmap trackers, Knowledge Map facts, and `MEMORY.md` are updated.
+  Commit: `DART-BACKEND-PARITY.4.3.5 - add Dart runtime controls and tree callbacks`
 
 - ID: `DART-BACKEND-PARITY.4.3.6`
   Status: `pending`
@@ -609,7 +638,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 3 | `DART-BACKEND-PARITY.4.3.2` | `done` | String/scalar and numeric helper families are implemented. |
 | 4 | `DART-BACKEND-PARITY.4.3.3` | `done` | Array helper family and array receiver/mutation behavior are implemented. |
 | 5 | `DART-BACKEND-PARITY.4.3.4` | `done` | Hash helper family and hash receiver/mutation behavior are implemented. |
-| 6 | `DART-BACKEND-PARITY.4.3.5` | `pending` | Implement value blocks, structured action controls, and tree traversal callback helpers. |
+| 6 | `DART-BACKEND-PARITY.4.3.5` | `done` | Value blocks, structured controls, with-blocks, and tree traversal callbacks are implemented. |
+| 7 | `DART-BACKEND-PARITY.4.3.6` | `pending` | Close helper/value no-drift before BACKTRACK work. |
 
 ## Dart Toolchain And Package Layout
 
@@ -841,12 +871,12 @@ The `.4.1` runtime matching layer adds:
 
 ## Open Questions
 
-- None blocking `.4.3.5`. Hash helper breadth is available; value blocks, structured controls, and tree traversal
-  callback helpers are next.
+- None blocking `.4.3.6`. Value-block/control/tree callback execution is available; helper/value no-drift
+  closeout is next before BACKTRACK work.
 
 ## Blockers
 
-- None known before `.4.3.5` value-block/control/tree traversal work.
+- None known before `.4.3.6` helper/value no-drift closeout.
 
 ## Verification Log
 
@@ -866,6 +896,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.3.4` | Focused `dart test test/compiled_spec_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart compiles parsed specs into ordered compiled rule/dependency/descriptor state with ActionIR payloads and function registry projection. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.1` | Focused `dart test test/runtime_matching_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart runtime matching supports seek/consume, stable alternative identity, capture/named-capture records, char offsets, entry/local match separation, cursor state, and zero-progress detection. |
 | `2026-07-09` | `DART-BACKEND-PARITY.4.3.4` | Focused `dart test test/runtime_interpreter_test.dart`; focused `dart test test/action_contracts_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; diagnosis evidence; `git diff --check`. | PASS. Dart executes hash helper family breadth, hash receiver chains, statement/value `set_key` boundaries, direct hash-index assignment values, bare-overlay merge behavior, and explicit flat-style hash splicing. |
+| `2026-07-09` | `DART-BACKEND-PARITY.4.3.5` | Focused `dart test test/action_ast_parser_test.dart`; focused `dart test test/runtime_interpreter_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart executes expression-valued blocks, attached/inline controls, helper/receiver `with` trailing blocks, and hash/array tree traversal receiver callbacks with scoped binding restoration. |
 | `2026-07-09` | `DART-BACKEND-PARITY.7.3` | mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Director's per-variant CLI directive is recorded; Dart CLI productization is split to `.7.4`; final closeout shifts to `.7.5`; no source behavior changed. |
 
 ## Commit Log
@@ -891,6 +922,7 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.4.3.2` | `DART-BACKEND-PARITY.4.3.2 - add Dart runtime string numeric helpers` | String/scalar and numeric helper families. |
 | `DART-BACKEND-PARITY.4.3.3` | `DART-BACKEND-PARITY.4.3.3 - add Dart runtime array helpers` | Array helper family and statement-only array end mutations. |
 | `DART-BACKEND-PARITY.4.3.4` | `DART-BACKEND-PARITY.4.3.4 - add Dart runtime hash helpers` | Hash helper family and statement/value mutation boundaries. |
+| `DART-BACKEND-PARITY.4.3.5` | `DART-BACKEND-PARITY.4.3.5 - add Dart runtime controls and tree callbacks` | Value blocks, structured controls, with-blocks, and tree traversal receiver callbacks. |
 | `DART-BACKEND-PARITY.7.3` | `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement` | Docs-only split for per-variant LinkedSpec CLI productization. |
 
 ## Changelog
@@ -934,3 +966,6 @@ The `.4.1` runtime matching layer adds:
   boundaries; frontier advances to `.4.3.5` for value blocks, structured controls, and tree traversal helpers.
 - `2026-07-09`: Recorded the director directive that each LinkedSpec backend variant should have its own CLI;
   Dart-specific CLI productization is now `DART-BACKEND-PARITY.7.4`, and final closeout shifts to `.7.5`.
+- `2026-07-09`: Added Dart expression-valued block execution, structured attached/inline controls, helper/receiver
+  `with` trailing blocks, and hash/array tree traversal receiver callbacks; frontier advances to `.4.3.6` for
+  helper/value no-drift closeout before BACKTRACK work.

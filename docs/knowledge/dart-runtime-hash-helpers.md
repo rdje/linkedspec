@@ -41,10 +41,12 @@ scalar/value read and is not treated as the base hash. `hash(...)` splices
 explicit `flat(...)` / `flat_hash(...)` hash arguments, while ordinary map field
 values remain nested values.
 
-Boundary: value blocks, structured action controls, tree traversal callback
-helpers, BACKTRACK, tracing, staged function execution, full corpus output
-parity, and per-variant CLI productization remain later Dart leaves.
+`DART-BACKEND-PARITY.4.3.5` has since landed value blocks, structured controls,
+with-blocks, and tree traversal callback helpers. BACKTRACK, tracing, staged
+function execution, full corpus output parity, and per-variant CLI
+productization remain later Dart leaves.
 
 Related facts: [[dart-runtime-array-helpers]],
+[[dart-runtime-value-control-tree-helpers]],
 [[dart-runtime-core-value-capture-helpers]], [[terse-hash-receiver-value-chains]],
 [[terse-merge-hash-bare-overlay-boundary]], [[typed-wrapper-quoted-name-boundaries]].

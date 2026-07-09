@@ -1,12 +1,22 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.4.3.5 — Dart runtime controls and tree callbacks):
+  Extended `LinkedSpecRuntimeEngine` with expression-valued block execution, block-local `return(...)` /
+  `return_undef()`, attached `if` / `elseif` / `else` and `when` / `otherwise` branch chains, attached
+  `switch` / `case` / `default`, attached `while` with the deterministic iteration guard, inline lazy
+  `if(...)` / `switch(...)`, helper-form `with(value) { ... }` / `with() { ... }`, receiver `.with() { ... }`,
+  and hash/array `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver callbacks. Callback frames
+  scope and restore `value`, `path`, `depth`, hash `key`, array `index`, and reduce-only `acc`; hash traversal is
+  sorted-key depth-first and array traversal is zero-based depth-first. The next frontier is `.4.3.6`, helper/value
+  no-drift closeout before BACKTRACK work starts.
+
 - 2026-07-09 (DART-BACKEND-PARITY.7.3 — variant-specific CLI requirement):
   Recorded the director directive that each LinkedSpec backend variant should have a distinct CLI. This is a
   planning/documentation slice only: no source behavior changed. The Dart tree now owns future Dart-specific CLI
   productization as `DART-BACKEND-PARITY.7.4`, and final Dart no-drift closeout shifts to `.7.5`. The
   `FUTURE-PARITY-BACKLOG` tree records that Julia and Lua planning must include equivalent variant-specific CLI
-  ownership when those lanes activate. Active implementation frontier remains `.4.3.5`.
+  ownership when those lanes activate. The implementation frontier later advanced through `.4.3.5`.
 
 - 2026-07-09 (DART-BACKEND-PARITY.4.3.4 — Dart runtime hash helpers):
   Extended `LinkedSpecRuntimeEngine` with hash-aware helper dispatch. Function helper calls now consume bare hash

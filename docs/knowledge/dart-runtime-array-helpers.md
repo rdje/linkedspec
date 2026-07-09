@@ -42,10 +42,11 @@ Statement-level `items.push_back(value)`, `items.push_front(value)`,
 same method calls in value positions return `null` and do not mutate, matching
 the statement-only end-mutation contract.
 
-Boundary: `DART-BACKEND-PARITY.4.3.4` has since landed hash helper breadth and
-hash receiver/mutation behavior; value blocks, structured controls, and tree
-traversal callback helpers remain later Dart leaves.
+`DART-BACKEND-PARITY.4.3.4` has since landed hash helper breadth and hash
+receiver/mutation behavior. `DART-BACKEND-PARITY.4.3.5` has since landed value
+blocks, structured controls, with-blocks, and tree traversal callback helpers.
 
-Related facts: [[dart-runtime-hash-helpers]], [[dart-runtime-string-numeric-helpers]],
+Related facts: [[dart-runtime-hash-helpers]], [[dart-runtime-value-control-tree-helpers]],
+[[dart-runtime-string-numeric-helpers]],
 [[terse-array-receiver-value-chains]], [[array-helper-return-shape-caveats]],
 [[terse-array-numeric-reducer-receiver-methods]], [[terse-type-method-surface-inventory]].

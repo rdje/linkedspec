@@ -981,6 +981,21 @@ List<_TextSpan> _splitTopLevelStatements(String text, int baseStart) {
     if (_consumeScanChar(state, text, index, ch)) {
       continue;
     }
+    if (ch == '}' && state.isTopLevel) {
+      final next = _nextNonWhitespaceIndex(text, index + 1);
+      if (next != null && _startsAttachedBranchContinuation(text, next)) {
+        final piece = _trimWithOffsets(
+          text.substring(segmentStart, index + 1),
+          baseStart + segmentStart,
+        );
+        if (piece.text.isNotEmpty) {
+          pieces.add(piece);
+        }
+        segmentStart = next;
+        index = next - 1;
+        continue;
+      }
+    }
     final separator =
         state.isTopLevel && (ch == ';' || ch == '\n' || ch == '\r');
     if (!separator) {
@@ -1003,6 +1018,32 @@ List<_TextSpan> _splitTopLevelStatements(String text, int baseStart) {
     pieces.add(finalPiece);
   }
   return pieces;
+}
+
+int? _nextNonWhitespaceIndex(String text, int start) {
+  for (var index = start; index < text.length; index += 1) {
+    if (text[index].trim().isNotEmpty) {
+      return index;
+    }
+  }
+  return null;
+}
+
+bool _startsAttachedBranchContinuation(String text, int index) {
+  for (final keyword in const ['elseif', 'elif', 'else', 'otherwise']) {
+    if (!text.startsWith(keyword, index)) {
+      continue;
+    }
+    final end = index + keyword.length;
+    if (end >= text.length) {
+      return true;
+    }
+    final next = text[end];
+    if (next.trim().isEmpty || next == '(' || next == '{') {
+      return true;
+    }
+  }
+  return false;
 }
 
 List<_TextSpan> _splitTopLevelCsv(String text, int baseStart) {

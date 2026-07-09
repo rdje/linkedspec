@@ -572,14 +572,15 @@ final class LinkedSpecRuntimeEngine {
     required _CurrentActionEdge? currentEdge,
   }) {
     try {
-      for (final statement in block.statements) {
-        _evaluateExpression(
-          statement.expr,
+      for (var index = 0; index < block.statements.length; index += 1) {
+        final step = _executeActionStatementAt(
+          block.statements,
+          index,
           context,
           ruleLabel,
-          currentEdge: currentEdge,
-          statementContext: statement.dropsValue,
+          currentEdge,
         );
+        index = step.nextIndex;
       }
       return null;
     } on _ActionReturn catch (returnSignal) {
@@ -590,6 +591,1079 @@ final class LinkedSpecRuntimeEngine {
       throw RuntimeInterpreterException(
         'action block failed in rule $ruleLabel: $error',
       );
+    }
+  }
+
+  _StatementStep _executeActionStatementAt(
+    List<ActionStatement> statements,
+    int index,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final statement = statements[index];
+    final expr = statement.expr;
+    if (expr is ActionControlIfExpr &&
+        expr.branchRole == 'if' &&
+        expr.body != null) {
+      return _executeAttachedIfChainStatement(
+        statements,
+        index,
+        context,
+        ruleLabel,
+        currentEdge,
+      );
+    }
+    if (expr is ActionControlWhileExpr && expr.body != null) {
+      _executeAttachedWhileStatement(expr, context, ruleLabel, currentEdge);
+      return _StatementStep(index);
+    }
+    if (expr is ActionControlSwitchExpr &&
+        (expr.cases.isNotEmpty || expr.defaultCase != null)) {
+      _executeAttachedSwitchStatement(expr, context, ruleLabel, currentEdge);
+      return _StatementStep(index);
+    }
+    if ((expr is ActionControlIfExpr && expr.branchRole == 'elseif') ||
+        expr is ActionControlElseExpr ||
+        expr is ActionControlCaseExpr ||
+        expr is ActionControlDefaultExpr ||
+        expr is ActionControlMarkerExpr) {
+      return _StatementStep(index);
+    }
+    _evaluateExpression(
+      statement.expr,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+      statementContext: statement.dropsValue,
+    );
+    return _StatementStep(index);
+  }
+
+  _StatementStep _executeAttachedIfChainStatement(
+    List<ActionStatement> statements,
+    int index,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    var nextIndex = index;
+    ActionBlock? selectedBody;
+    for (var cursor = index; cursor < statements.length; cursor += 1) {
+      final expr = statements[cursor].expr;
+      if (cursor == index) {
+        final first = expr as ActionControlIfExpr;
+        if (_truthy(
+          _evaluateExpression(
+            first.condition,
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          ),
+        )) {
+          selectedBody = first.body;
+        }
+      } else if (expr is ActionControlIfExpr && expr.branchRole == 'elseif') {
+        if (selectedBody == null &&
+            _truthy(
+              _evaluateExpression(
+                expr.condition,
+                context,
+                ruleLabel,
+                currentEdge: currentEdge,
+              ),
+            )) {
+          selectedBody = expr.body;
+        }
+      } else if (expr is ActionControlElseExpr) {
+        selectedBody ??= expr.body;
+      } else {
+        break;
+      }
+      nextIndex = cursor;
+      if (expr is ActionControlElseExpr) {
+        break;
+      }
+    }
+
+    if (selectedBody != null) {
+      final result = _executeActionBlock(
+        selectedBody,
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      );
+      if (result != null) {
+        throw _ActionReturn(result.value);
+      }
+    }
+    return _StatementStep(nextIndex);
+  }
+
+  void _executeAttachedWhileStatement(
+    ActionControlWhileExpr expr,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final body = expr.body;
+    if (body == null) {
+      return;
+    }
+    for (var iteration = 0; iteration < context.maxIterations; iteration += 1) {
+      if (!_truthy(
+        _evaluateExpression(
+          expr.condition,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+        ),
+      )) {
+        return;
+      }
+      final result = _executeActionBlock(
+        body,
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      );
+      if (result != null) {
+        throw _ActionReturn(result.value);
+      }
+    }
+    throw RuntimeInterpreterException(_whileIterationLimitMessage(context));
+  }
+
+  void _executeAttachedSwitchStatement(
+    ActionControlSwitchExpr expr,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final body = _selectSwitchBody(expr, context, ruleLabel, currentEdge);
+    if (body == null) {
+      return;
+    }
+    final result = _executeActionBlock(
+      body,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    );
+    if (result != null) {
+      throw _ActionReturn(result.value);
+    }
+  }
+
+  Object? _evaluateBlockValue(
+    ActionBlock block,
+    _RuntimeExecutionContext context,
+    String ruleLabel, {
+    required _CurrentActionEdge? currentEdge,
+  }) {
+    final flow = _executeValueBlockStatements(
+      block,
+      context,
+      ruleLabel,
+      currentEdge,
+      finalExpressionYields: true,
+    );
+    return flow.returned ? flow.value : null;
+  }
+
+  _ValueBlockFlow _executeValueBlockStatements(
+    ActionBlock block,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge, {
+    required bool finalExpressionYields,
+  }) {
+    final statements = block.statements;
+    for (var index = 0; index < statements.length; index += 1) {
+      final statement = statements[index];
+      final expr = statement.expr;
+      final isLast = index == statements.length - 1;
+
+      if (expr is ActionControlIfExpr &&
+          expr.branchRole == 'if' &&
+          expr.body != null) {
+        final step = _executeValueIfChainStatement(
+          statements,
+          index,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+        if (step.flow.returned) {
+          return step.flow;
+        }
+        if (isLast && finalExpressionYields) {
+          return const _ValueBlockFlow.returned(null);
+        }
+        index = step.nextIndex;
+        continue;
+      }
+
+      if (expr is ActionControlWhileExpr && expr.body != null) {
+        final flow = _executeValueWhileStatement(
+          expr,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+        if (flow.returned) {
+          return flow;
+        }
+        if (isLast && finalExpressionYields) {
+          return const _ValueBlockFlow.returned(null);
+        }
+        continue;
+      }
+
+      if (expr is ActionControlSwitchExpr &&
+          (expr.cases.isNotEmpty || expr.defaultCase != null)) {
+        final flow = _executeValueSwitchStatement(
+          expr,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+        if (flow.returned) {
+          return flow;
+        }
+        if (isLast && finalExpressionYields) {
+          return const _ValueBlockFlow.returned(null);
+        }
+        continue;
+      }
+
+      if ((expr is ActionControlIfExpr && expr.branchRole == 'elseif') ||
+          expr is ActionControlElseExpr ||
+          expr is ActionControlCaseExpr ||
+          expr is ActionControlDefaultExpr ||
+          expr is ActionControlMarkerExpr) {
+        if (isLast && finalExpressionYields) {
+          return const _ValueBlockFlow.returned(null);
+        }
+        continue;
+      }
+
+      final returnPayload = _localReturnPayload(expr);
+      if (returnPayload != null) {
+        return _ValueBlockFlow.returned(
+          returnPayload.hasValue
+              ? _copyValue(
+                  _evaluateExpression(
+                    returnPayload.value!,
+                    context,
+                    ruleLabel,
+                    currentEdge: currentEdge,
+                  ),
+                )
+              : null,
+        );
+      }
+
+      if (isLast && finalExpressionYields) {
+        return _ValueBlockFlow.returned(
+          _evaluateExpression(
+            expr,
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          ),
+        );
+      }
+
+      _evaluateExpression(
+        expr,
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+        statementContext: true,
+      );
+    }
+    return const _ValueBlockFlow.continued();
+  }
+
+  _ValueStatementStep _executeValueIfChainStatement(
+    List<ActionStatement> statements,
+    int index,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    var nextIndex = index;
+    ActionBlock? selectedBody;
+    for (var cursor = index; cursor < statements.length; cursor += 1) {
+      final expr = statements[cursor].expr;
+      if (cursor == index) {
+        final first = expr as ActionControlIfExpr;
+        if (_truthy(
+          _evaluateExpression(
+            first.condition,
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          ),
+        )) {
+          selectedBody = first.body;
+        }
+      } else if (expr is ActionControlIfExpr && expr.branchRole == 'elseif') {
+        if (selectedBody == null &&
+            _truthy(
+              _evaluateExpression(
+                expr.condition,
+                context,
+                ruleLabel,
+                currentEdge: currentEdge,
+              ),
+            )) {
+          selectedBody = expr.body;
+        }
+      } else if (expr is ActionControlElseExpr) {
+        selectedBody ??= expr.body;
+      } else {
+        break;
+      }
+      nextIndex = cursor;
+      if (expr is ActionControlElseExpr) {
+        break;
+      }
+    }
+
+    if (selectedBody == null) {
+      return _ValueStatementStep(nextIndex, const _ValueBlockFlow.continued());
+    }
+    return _ValueStatementStep(
+      nextIndex,
+      _executeValueBlockStatements(
+        selectedBody,
+        context,
+        ruleLabel,
+        currentEdge,
+        finalExpressionYields: false,
+      ),
+    );
+  }
+
+  _ValueBlockFlow _executeValueWhileStatement(
+    ActionControlWhileExpr expr,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final body = expr.body;
+    if (body == null) {
+      return const _ValueBlockFlow.continued();
+    }
+    for (var iteration = 0; iteration < context.maxIterations; iteration += 1) {
+      if (!_truthy(
+        _evaluateExpression(
+          expr.condition,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+        ),
+      )) {
+        return const _ValueBlockFlow.continued();
+      }
+      final flow = _executeValueBlockStatements(
+        body,
+        context,
+        ruleLabel,
+        currentEdge,
+        finalExpressionYields: false,
+      );
+      if (flow.returned) {
+        return flow;
+      }
+    }
+    throw RuntimeInterpreterException(_whileIterationLimitMessage(context));
+  }
+
+  _ValueBlockFlow _executeValueSwitchStatement(
+    ActionControlSwitchExpr expr,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final body = _selectSwitchBody(expr, context, ruleLabel, currentEdge);
+    if (body == null) {
+      return const _ValueBlockFlow.continued();
+    }
+    return _executeValueBlockStatements(
+      body,
+      context,
+      ruleLabel,
+      currentEdge,
+      finalExpressionYields: false,
+    );
+  }
+
+  ActionBlock? _selectSwitchBody(
+    ActionControlSwitchExpr expr,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final selector = _evaluateExpression(
+      expr.sourceExpr,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    );
+    for (final item in expr.cases) {
+      final candidate = _evaluateSwitchCaseMatch(
+        item.match,
+        context,
+        ruleLabel,
+        currentEdge,
+      );
+      if (_stringValue(candidate) == _stringValue(selector)) {
+        return item.body;
+      }
+    }
+    return expr.defaultCase?.body;
+  }
+
+  Object? _evaluateSwitchCaseMatch(
+    ActionExpr expr,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    if (expr is ActionVariableExpr) {
+      return expr.name;
+    }
+    return _evaluateExpression(
+      expr,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    );
+  }
+
+  _LocalReturnPayload? _localReturnPayload(ActionExpr expr) {
+    if (expr is! ActionCallExpr) {
+      return null;
+    }
+    final helperName = canonicalActionHelperName(expr.name);
+    if (helperName == 'return_undef' && expr.args.isEmpty) {
+      return const _LocalReturnPayload.undef();
+    }
+    if (helperName != 'return') {
+      return null;
+    }
+    final positionalArgs = expr.args.map((arg) => arg.value).toList();
+    return positionalArgs.isEmpty
+        ? const _LocalReturnPayload.undef()
+        : _LocalReturnPayload.value(positionalArgs.first);
+  }
+
+  String _whileIterationLimitMessage(_RuntimeExecutionContext context) {
+    return 'LinkedSpec while iteration safety limit exceeded after '
+        '${context.maxIterations} iterations';
+  }
+
+  Object? _evaluateStructuredControlExpression(
+    ActionExpr expr,
+    _RuntimeExecutionContext context,
+    String ruleLabel, {
+    required _CurrentActionEdge? currentEdge,
+  }) {
+    switch (expr) {
+      case ActionControlIfExpr(:final body):
+        if (body == null) {
+          return null;
+        }
+        final statements = [
+          ActionStatement(
+            source: expr.source,
+            sourceSpan: expr.sourceSpan,
+            expr: expr,
+          ),
+        ];
+        _executeAttachedIfChainStatement(
+          statements,
+          0,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+        return null;
+      case ActionControlWhileExpr():
+        _executeAttachedWhileStatement(expr, context, ruleLabel, currentEdge);
+        return null;
+      case ActionControlSwitchExpr():
+        _executeAttachedSwitchStatement(expr, context, ruleLabel, currentEdge);
+        return null;
+      default:
+        return null;
+    }
+  }
+
+  Object? _callInlineIf(
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    if (args.isEmpty) {
+      return null;
+    }
+    if (_truthy(
+      _evaluateExpression(
+        args[0],
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      ),
+    )) {
+      return args.length >= 2
+          ? _evaluateExpression(
+              args[1],
+              context,
+              ruleLabel,
+              currentEdge: currentEdge,
+            )
+          : true;
+    }
+    for (final arg in args.skip(2)) {
+      if (arg is! ActionCallExpr) {
+        continue;
+      }
+      final branchName = canonicalActionHelperName(arg.name);
+      final branchArgs = arg.args.map((item) => item.value).toList();
+      if (branchName == 'elseif') {
+        if (branchArgs.length >= 2 &&
+            _truthy(
+              _evaluateExpression(
+                branchArgs[0],
+                context,
+                ruleLabel,
+                currentEdge: currentEdge,
+              ),
+            )) {
+          return _evaluateExpression(
+            branchArgs[1],
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          );
+        }
+      } else if (branchName == 'else') {
+        return branchArgs.isEmpty
+            ? null
+            : _evaluateExpression(
+                branchArgs[0],
+                context,
+                ruleLabel,
+                currentEdge: currentEdge,
+              );
+      }
+    }
+    return null;
+  }
+
+  Object? _callInlineSwitch(
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    if (args.isEmpty) {
+      return null;
+    }
+    final selector = _evaluateExpression(
+      args.first,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    );
+    ActionExpr? defaultExpr;
+    for (final branch in args.skip(1)) {
+      if (branch is! ActionCallExpr) {
+        continue;
+      }
+      final branchName = canonicalActionHelperName(branch.name);
+      final branchArgs = branch.args.map((arg) => arg.value).toList();
+      if (branchName == 'case' && branchArgs.length >= 2) {
+        final candidate = _evaluateSwitchCaseMatch(
+          branchArgs[0],
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+        if (_stringValue(candidate) == _stringValue(selector)) {
+          return _evaluateExpression(
+            branchArgs[1],
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          );
+        }
+      } else if (branchName == 'default' && branchArgs.isNotEmpty) {
+        defaultExpr ??= branchArgs.first;
+      }
+    }
+    return defaultExpr == null
+        ? null
+        : _evaluateExpression(
+            defaultExpr,
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          );
+  }
+
+  Object? _callWithTrailingBlock(
+    ActionCallExpr call,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    if (!call.trailingBlockArg || call.args.isEmpty || call.args.length > 2) {
+      throw RuntimeInterpreterException(
+        "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: helper "
+        "`with(...) { ... }` expects zero or one value argument plus a "
+        "trailing block in rule '$ruleLabel'",
+      );
+    }
+    final blockExpr = call.args.last.value;
+    if (blockExpr is! ActionBlockValueExpr) {
+      throw RuntimeInterpreterException(
+        "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: helper `with(...)` "
+        "requires a trailing block argument in rule '$ruleLabel'",
+      );
+    }
+    final scopedValue = call.args.length == 2
+        ? _evaluateExpression(
+            call.args.first.value,
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          )
+        : null;
+    final binding = context.enterScopedScalar('value', scopedValue);
+    try {
+      return _evaluateBlockValue(
+        blockExpr.block,
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      );
+    } finally {
+      context.exitScopedVariable(binding);
+    }
+  }
+
+  Object? _callReceiverWithTrailingBlock(
+    Object? receiver,
+    ActionFluentCall call,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    if (!call.receiverTrailingBlockArg || call.args.length != 1) {
+      throw RuntimeInterpreterException(
+        "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: receiver "
+        "`.with() { ... }` expects no parenthesized arguments in rule "
+        "'$ruleLabel'",
+      );
+    }
+    final blockExpr = call.args.single.value;
+    if (blockExpr is! ActionBlockValueExpr) {
+      throw RuntimeInterpreterException(
+        "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: receiver `.with()` "
+        "requires a trailing block argument in rule '$ruleLabel'",
+      );
+    }
+    final binding = context.enterScopedScalar('value', _copyValue(receiver));
+    try {
+      return _evaluateBlockValue(
+        blockExpr.block,
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      );
+    } finally {
+      context.exitScopedVariable(binding);
+    }
+  }
+
+  Object? _callTreeTraversalTrailingBlock(
+    Object? receiver,
+    ActionFluentCall call,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final method = canonicalActionHelperName(call.method);
+    if (!_treeTraversalHelperNames.contains(method)) {
+      return null;
+    }
+    if (call.args.isEmpty || call.args.last.value is! ActionBlockValueExpr) {
+      throw RuntimeInterpreterException(
+        _treeTraversalMalformedMessage(method, ruleLabel),
+      );
+    }
+    if ((method == 'walk_leaves' || method == 'map_leaves') &&
+        call.args.length != 1) {
+      throw RuntimeInterpreterException(
+        _treeTraversalMalformedMessage(method, ruleLabel),
+      );
+    }
+    if (method == 'reduce_leaves' && call.args.length != 2) {
+      throw RuntimeInterpreterException(
+        _treeTraversalMalformedMessage(method, ruleLabel),
+      );
+    }
+    final block = (call.args.last.value as ActionBlockValueExpr).block;
+    if (receiver is Map) {
+      final hash = _asHash(receiver);
+      return switch (method) {
+        'walk_leaves' => _walkHashTree(
+          hash,
+          block,
+          context,
+          ruleLabel,
+          currentEdge,
+        ),
+        'map_leaves' => _mapHashTree(
+          hash,
+          block,
+          context,
+          ruleLabel,
+          currentEdge,
+        ),
+        'reduce_leaves' => _reduceHashTree(
+          hash,
+          _evaluateExpression(
+            call.args.first.value,
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          ),
+          block,
+          context,
+          ruleLabel,
+          currentEdge,
+        ),
+        _ => null,
+      };
+    }
+    if (receiver is List) {
+      final items = _asArray(receiver);
+      return switch (method) {
+        'walk_leaves' => _walkArrayTree(
+          items,
+          block,
+          context,
+          ruleLabel,
+          currentEdge,
+        ),
+        'map_leaves' => _mapArrayTree(
+          items,
+          block,
+          context,
+          ruleLabel,
+          currentEdge,
+        ),
+        'reduce_leaves' => _reduceArrayTree(
+          items,
+          _evaluateExpression(
+            call.args.first.value,
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          ),
+          block,
+          context,
+          ruleLabel,
+          currentEdge,
+        ),
+        _ => null,
+      };
+    }
+    return null;
+  }
+
+  String _treeTraversalMalformedMessage(String method, String ruleLabel) {
+    final signature = switch (method) {
+      'reduce_leaves' => '.reduce_leaves(initial) { ... }',
+      'walk_leaves' => '.walk_leaves() { ... }',
+      'map_leaves' => '.map_leaves() { ... }',
+      _ => '.<tree-traversal-method>() { ... }',
+    };
+    return 'LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:$method: receiver '
+        '`$signature` requires the accepted tree traversal trailing-block '
+        "arity in rule '$ruleLabel'";
+  }
+
+  Object? _walkHashTree(
+    Map<String, Object?> hash,
+    ActionBlock block,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    void walk(Map<String, Object?> node, List<String> path) {
+      final keys = node.keys.toList()..sort();
+      for (final key in keys) {
+        final value = node[key];
+        final nextPath = [...path, key];
+        if (value is Map) {
+          walk(_asHash(value), nextPath);
+        } else {
+          _evaluateHashLeafBlock(
+            block,
+            value,
+            key,
+            nextPath,
+            null,
+            false,
+            context,
+            ruleLabel,
+            currentEdge,
+          );
+        }
+      }
+    }
+
+    walk(hash, const []);
+    return _copyValue(hash);
+  }
+
+  Object? _mapHashTree(
+    Map<String, Object?> hash,
+    ActionBlock block,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    Map<String, Object?> mapNode(Map<String, Object?> node, List<String> path) {
+      final result = <String, Object?>{};
+      final keys = node.keys.toList()..sort();
+      for (final key in keys) {
+        final value = node[key];
+        final nextPath = [...path, key];
+        result[key] = value is Map
+            ? mapNode(_asHash(value), nextPath)
+            : _evaluateHashLeafBlock(
+                block,
+                value,
+                key,
+                nextPath,
+                null,
+                false,
+                context,
+                ruleLabel,
+                currentEdge,
+              );
+      }
+      return result;
+    }
+
+    return mapNode(hash, const []);
+  }
+
+  Object? _reduceHashTree(
+    Map<String, Object?> hash,
+    Object? initial,
+    ActionBlock block,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    var acc = _copyValue(initial);
+    void reduceNode(Map<String, Object?> node, List<String> path) {
+      final keys = node.keys.toList()..sort();
+      for (final key in keys) {
+        final value = node[key];
+        final nextPath = [...path, key];
+        if (value is Map) {
+          reduceNode(_asHash(value), nextPath);
+        } else {
+          acc = _evaluateHashLeafBlock(
+            block,
+            value,
+            key,
+            nextPath,
+            acc,
+            true,
+            context,
+            ruleLabel,
+            currentEdge,
+          );
+        }
+      }
+    }
+
+    reduceNode(hash, const []);
+    return acc;
+  }
+
+  Object? _evaluateHashLeafBlock(
+    ActionBlock block,
+    Object? value,
+    String key,
+    List<String> path,
+    Object? acc,
+    bool bindAcc,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final bindings = <_ScopedVariableBinding>[
+      if (bindAcc) context.enterScopedScalar('acc', _copyValue(acc)),
+      context.enterScopedScalar('value', _copyValue(value)),
+      context.enterScopedScalar('key', key),
+      context.enterScopedScalar('path', [for (final item in path) item]),
+      context.enterScopedScalar('depth', path.length),
+    ];
+    try {
+      return _evaluateBlockValue(
+        block,
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      );
+    } finally {
+      for (final binding in bindings.reversed) {
+        context.exitScopedVariable(binding);
+      }
+    }
+  }
+
+  Object? _walkArrayTree(
+    List<Object?> items,
+    ActionBlock block,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    void walk(List<Object?> node, List<int> path) {
+      for (final (index, value) in node.indexed) {
+        final nextPath = [...path, index];
+        if (value is List) {
+          walk(_asArray(value), nextPath);
+        } else {
+          _evaluateArrayLeafBlock(
+            block,
+            value,
+            index,
+            nextPath,
+            null,
+            false,
+            context,
+            ruleLabel,
+            currentEdge,
+          );
+        }
+      }
+    }
+
+    walk(items, const []);
+    return _copyValue(items);
+  }
+
+  Object? _mapArrayTree(
+    List<Object?> items,
+    ActionBlock block,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    List<Object?> mapNode(List<Object?> node, List<int> path) {
+      final result = <Object?>[];
+      for (final (index, value) in node.indexed) {
+        final nextPath = [...path, index];
+        result.add(
+          value is List
+              ? mapNode(_asArray(value), nextPath)
+              : _evaluateArrayLeafBlock(
+                  block,
+                  value,
+                  index,
+                  nextPath,
+                  null,
+                  false,
+                  context,
+                  ruleLabel,
+                  currentEdge,
+                ),
+        );
+      }
+      return result;
+    }
+
+    return mapNode(items, const []);
+  }
+
+  Object? _reduceArrayTree(
+    List<Object?> items,
+    Object? initial,
+    ActionBlock block,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    var acc = _copyValue(initial);
+    void reduceNode(List<Object?> node, List<int> path) {
+      for (final (index, value) in node.indexed) {
+        final nextPath = [...path, index];
+        if (value is List) {
+          reduceNode(_asArray(value), nextPath);
+        } else {
+          acc = _evaluateArrayLeafBlock(
+            block,
+            value,
+            index,
+            nextPath,
+            acc,
+            true,
+            context,
+            ruleLabel,
+            currentEdge,
+          );
+        }
+      }
+    }
+
+    reduceNode(items, const []);
+    return acc;
+  }
+
+  Object? _evaluateArrayLeafBlock(
+    ActionBlock block,
+    Object? value,
+    int index,
+    List<int> path,
+    Object? acc,
+    bool bindAcc,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final bindings = <_ScopedVariableBinding>[
+      if (bindAcc) context.enterScopedScalar('acc', _copyValue(acc)),
+      context.enterScopedScalar('value', _copyValue(value)),
+      context.enterScopedScalar('index', index),
+      context.enterScopedScalar('path', [for (final item in path) item]),
+      context.enterScopedScalar('depth', path.length),
+    ];
+    try {
+      return _evaluateBlockValue(
+        block,
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      );
+    } finally {
+      for (final binding in bindings.reversed) {
+        context.exitScopedVariable(binding);
+      }
     }
   }
 
@@ -729,6 +1803,20 @@ final class LinkedSpecRuntimeEngine {
                   context.arrays[base] ??
                   context.hashes[base]);
         return _readNested(root, segments, context, ruleLabel, currentEdge);
+      case ActionControlIfExpr():
+      case ActionControlWhileExpr():
+      case ActionControlSwitchExpr():
+        return _evaluateStructuredControlExpression(
+          expr,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+        );
+      case ActionControlElseExpr():
+      case ActionControlCaseExpr():
+      case ActionControlDefaultExpr():
+      case ActionControlMarkerExpr():
+        return null;
       case ActionCallExpr():
         return _evaluateCall(
           expr,
@@ -773,13 +1861,12 @@ final class LinkedSpecRuntimeEngine {
         }
         return value;
       case ActionBlockValueExpr(:final block):
-        final result = _executeActionBlock(
+        return _evaluateBlockValue(
           block,
           context,
           ruleLabel,
           currentEdge: currentEdge,
         );
-        return result?.value;
       case ActionRawExpr(:final source):
         throw RuntimeInterpreterException(
           'unsupported raw action expression in rule $ruleLabel: $source',
@@ -800,6 +1887,9 @@ final class LinkedSpecRuntimeEngine {
   }) {
     final positionalArgs = call.args.map((arg) => arg.value).toList();
     final helperName = canonicalActionHelperName(call.name);
+    if (helperName == 'with' && call.trailingBlockArg) {
+      return _callWithTrailingBlock(call, context, ruleLabel, currentEdge);
+    }
     if (statementContext &&
         helperName == 'set_key' &&
         _executeSetKeyStatement(call, context, ruleLabel, currentEdge)) {
@@ -818,6 +1908,27 @@ final class LinkedSpecRuntimeEngine {
         throw _ActionReturn(_copyValue(value));
       case 'return_undef':
         throw const _ActionReturn(null);
+      case 'if':
+        return _callInlineIf(positionalArgs, context, ruleLabel, currentEdge);
+      case 'switch':
+        return _callInlineSwitch(
+          positionalArgs,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+      case 'else':
+      case 'elseif':
+      case 'case':
+      case 'default':
+        return positionalArgs.isEmpty
+            ? null
+            : _evaluateExpression(
+                positionalArgs.last,
+                context,
+                ruleLabel,
+                currentEdge: currentEdge,
+              );
       case 'set':
         return _callSet(positionalArgs, context, ruleLabel, currentEdge);
       case 'push':
@@ -997,6 +2108,24 @@ final class LinkedSpecRuntimeEngine {
     required _CurrentActionEdge? currentEdge,
   }) {
     final helperName = canonicalActionHelperName(call.method);
+    if (helperName == 'with') {
+      return _callReceiverWithTrailingBlock(
+        receiver,
+        call,
+        context,
+        ruleLabel,
+        currentEdge,
+      );
+    }
+    if (_treeTraversalHelperNames.contains(helperName)) {
+      return _callTreeTraversalTrailingBlock(
+        receiver,
+        call,
+        context,
+        ruleLabel,
+        currentEdge,
+      );
+    }
     switch (helperName) {
       case 'copy':
         return _copyValue(receiver);
@@ -1277,6 +2406,18 @@ final class LinkedSpecRuntimeEngine {
   ) {
     final receiverName = _variableName(receiver);
     if (receiverName != null) {
+      if (_treeTraversalHelperNames.contains(helperName)) {
+        if (_hasHashValue(context, receiverName)) {
+          return Map<String, Object?>.unmodifiable(
+            _hashValueFor(context, receiverName),
+          );
+        }
+        if (_hasArrayValue(context, receiverName)) {
+          return List<Object?>.unmodifiable(
+            _arrayValueFor(context, receiverName),
+          );
+        }
+      }
       if ((helperName == 'copy' || helperName == 'flat') &&
           _hasArrayValue(context, receiverName)) {
         return List<Object?>.unmodifiable(
@@ -1913,6 +3054,12 @@ const _runtimeHashHelperNames = <String>{
   'set_key',
   'sorted_keys',
   'sorted_values',
+};
+
+const _treeTraversalHelperNames = <String>{
+  'walk_leaves',
+  'map_leaves',
+  'reduce_leaves',
 };
 
 const _arrayOnlyReceiverHelpers = <String>{
@@ -2871,6 +4018,117 @@ final class _RuntimeExecutionContext {
 
   Map<String, Object?> hashFor(String name) {
     return hashes.putIfAbsent(name, () => <String, Object?>{});
+  }
+
+  _ScopedVariableBinding enterScopedScalar(String name, Object? value) {
+    final binding = _ScopedVariableBinding(
+      name: name,
+      snapshot: _VariableSnapshot.capture(this, name),
+    );
+    variables[name] = _copyValue(value);
+    arrays.remove(name);
+    hashes.remove(name);
+    return binding;
+  }
+
+  void exitScopedVariable(_ScopedVariableBinding binding) {
+    binding.snapshot.restore(this, binding.name);
+  }
+}
+
+final class _StatementStep {
+  const _StatementStep(this.nextIndex);
+
+  final int nextIndex;
+}
+
+final class _ValueStatementStep {
+  const _ValueStatementStep(this.nextIndex, this.flow);
+
+  final int nextIndex;
+  final _ValueBlockFlow flow;
+}
+
+final class _ValueBlockFlow {
+  const _ValueBlockFlow.continued() : returned = false, value = null;
+
+  const _ValueBlockFlow.returned(this.value) : returned = true;
+
+  final bool returned;
+  final Object? value;
+}
+
+final class _LocalReturnPayload {
+  const _LocalReturnPayload.undef() : hasValue = false, value = null;
+
+  const _LocalReturnPayload.value(this.value) : hasValue = true;
+
+  final bool hasValue;
+  final ActionExpr? value;
+}
+
+final class _ScopedVariableBinding {
+  const _ScopedVariableBinding({required this.name, required this.snapshot});
+
+  final String name;
+  final _VariableSnapshot snapshot;
+}
+
+final class _VariableSnapshot {
+  const _VariableSnapshot({
+    required this.hadVariable,
+    required this.variable,
+    required this.hadArray,
+    required this.array,
+    required this.hadHash,
+    required this.hash,
+  });
+
+  factory _VariableSnapshot.capture(
+    _RuntimeExecutionContext context,
+    String name,
+  ) {
+    return _VariableSnapshot(
+      hadVariable: context.variables.containsKey(name),
+      variable: _copyValue(context.variables[name]),
+      hadArray: context.arrays.containsKey(name),
+      array: [
+        for (final item in context.arrays[name] ?? const []) _copyValue(item),
+      ],
+      hadHash: context.hashes.containsKey(name),
+      hash: {
+        for (final entry
+            in (context.hashes[name] ?? const <String, Object?>{}).entries)
+          entry.key: _copyValue(entry.value),
+      },
+    );
+  }
+
+  final bool hadVariable;
+  final Object? variable;
+  final bool hadArray;
+  final List<Object?> array;
+  final bool hadHash;
+  final Map<String, Object?> hash;
+
+  void restore(_RuntimeExecutionContext context, String name) {
+    if (hadVariable) {
+      context.variables[name] = _copyValue(variable);
+    } else {
+      context.variables.remove(name);
+    }
+    if (hadArray) {
+      context.arrays[name] = [for (final item in array) _copyValue(item)];
+    } else {
+      context.arrays.remove(name);
+    }
+    if (hadHash) {
+      context.hashes[name] = {
+        for (final entry in hash.entries) entry.key: _copyValue(entry.value),
+      };
+    } else {
+      context.hashes.remove(name);
+    }
   }
 }
 

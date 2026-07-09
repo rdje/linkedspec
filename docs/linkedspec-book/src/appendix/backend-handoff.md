@@ -325,8 +325,10 @@ bridges, delimiter-first `join_values`, array numeric reducers, and
 statement-only array end mutations. It also executes hash helper family breadth,
 bare hash working-variable receiver chains, statement/value mutation boundaries,
 direct hash-index assignment values, bare-overlay `merge_hash`, and explicit
-flat-style hash splicing inside `hash(...)`. Value-block/control/tree traversal
-helpers, BACKTRACK behavior,
+flat-style hash splicing inside `hash(...)`. It also executes expression-valued
+blocks with block-local `return(...)`, attached and inline structured controls,
+helper/receiver `with` trailing blocks, and hash/array tree traversal receiver
+callbacks with scoped callback bindings. BACKTRACK behavior,
 tracing/diagnostics, staged function execution, and
 corpus-output parity remain later Dart leaves.
 

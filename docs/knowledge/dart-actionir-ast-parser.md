@@ -32,9 +32,10 @@ and attached `if`/`when`/`elseif`/`else`/`otherwise`, `while`, and
 Unsupported expressions stay as explicit `raw_perl` nodes. This preserves the
 frontend shape for diagnostics without doing text-to-text rewriting or host-code
 fallback. Canonical helper-family mapping is now owned by
-[[dart-actionir-contract-resolver]]; compiled-spec construction and runtime
-execution remain later Dart leaves.
+[[dart-actionir-contract-resolver]]. Later `DART-BACKEND-PARITY` leaves have
+since added compiled-spec construction and the first runtime interpreter layers.
 
 Related facts: [[text-to-ast-backend-doctrine]],
 [[perl-actionir-ast-parser-seam]], [[dart-backend-interpreter-first-plan]],
-[[dart-actionir-contract-resolver]], [[dart-backend-scaffold-package]].
+[[dart-actionir-contract-resolver]], [[dart-runtime-value-control-tree-helpers]],
+[[dart-backend-scaffold-package]].

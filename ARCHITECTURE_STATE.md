@@ -5,19 +5,27 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.5` extended Dart runtime ActionIR execution in
+  `dart/lib/src/runtime/interpreter.dart`. `LinkedSpecRuntimeEngine` now evaluates expression-valued blocks with
+  block-local `return(...)` / `return_undef()`, attached `if` / `elseif` / `else` and `when` / `otherwise`
+  branch chains, attached `switch` / `case` / `default`, attached `while` with the deterministic iteration guard,
+  inline lazy `if(...)` / `switch(...)`, helper-form `with(value) { ... }` / `with() { ... }`, receiver
+  `.with() { ... }`, and hash/array `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver callbacks.
+  Callback frames scope and restore `value`, `path`, `depth`, hash `key`, array `index`, and reduce-only `acc`;
+  hash traversal is sorted-key depth-first and array traversal is zero-based depth-first. The active Dart frontier
+  is `.4.3.6` for helper/value no-drift closeout before BACKTRACK work.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.7.3` recorded the director directive that each LinkedSpec backend
   variant should have a distinct CLI. This is a planning/documentation slice only: Dart-specific CLI
   productization is now `DART-BACKEND-PARITY.7.4`, final Dart no-drift closeout shifts to `.7.5`, and Julia/Lua
-  planning under `FUTURE-PARITY-BACKLOG` must include equivalent variant-specific CLI ownership. The active Dart
-  implementation frontier remains `.4.3.5`.
+  planning under `FUTURE-PARITY-BACKLOG` must include equivalent variant-specific CLI ownership. The runtime
+  implementation frontier later advanced through `.4.3.5`.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.4` extended Dart runtime hash helper execution in
   `dart/lib/src/runtime/interpreter.dart`. The evaluator now has hash-aware helper argument evaluation, bare hash
   working-variable receiver reads, pure hash receiver chains, key/value views, sorted key/value arrays, key
   predicates, `merge_hash`, `set_key`, `rename_key`, `drop_keys`, `pick_keys`, `flat_hash`, statement-form
   `set_key(...)` mutation, direct hash-index assignment values, and explicit flat-style hash splicing inside
-  `hash(...)`. The next helper frontier is `.4.3.5` for value blocks, structured controls, and tree traversal
-  callback helpers; BACKTRACK, tracing, corpus output parity, and per-variant CLI productization remain later Dart
-  leaves.
+  `hash(...)`. The next helper frontier after this slice was `.4.3.5`, which has since landed; BACKTRACK,
+  tracing, corpus output parity, and per-variant CLI productization remain later Dart leaves.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.3` extended Dart runtime array helper execution in
   `dart/lib/src/runtime/interpreter.dart`. The evaluator now has array-aware helper argument evaluation, bare array
   working-variable receiver reads, pure array receiver chains, regex split/filter bridges, delimiter-first

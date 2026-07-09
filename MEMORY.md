@@ -18,18 +18,18 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.7.3` — docs-only record of the director's per-variant
-  LinkedSpec CLI requirement; Dart CLI productization is split to `.7.4`.
-- prior_leaf: `DART-BACKEND-PARITY.4.3.4` — Dart runtime hash helpers, hash receiver chains, statement/value
-  `set_key` boundaries, merge/pick/drop/rename helpers, and flat hash splicing are implemented.
+- latest_completed_leaf: `DART-BACKEND-PARITY.4.3.5` — Dart runtime value blocks, structured controls,
+  helper/receiver `with` trailing blocks, and hash/array tree traversal callbacks are implemented.
+- prior_leaf: `DART-BACKEND-PARITY.7.3` — docs-only record of the director's per-variant LinkedSpec CLI
+  requirement; Dart CLI productization is split to `.7.4`.
 - latest_commit: HEAD containing this pointer should be
-  `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement`; parent before this slice is
-  `DART-BACKEND-PARITY.4.3.4 - add Dart runtime hash helpers`.
+  `DART-BACKEND-PARITY.4.3.5 - add Dart runtime controls and tree callbacks`; parent before this slice is
+  `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.4.3.5` pending.
-- next_action: from a clean repo, implement `DART-BACKEND-PARITY.4.3.5` value blocks, structured action controls,
-  and tree traversal callback helpers.
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.4.3.6` pending.
+- next_action: from a clean repo, run `DART-BACKEND-PARITY.4.3.6` helper/value no-drift closeout before
+  BACKTRACK work starts.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, task-tree index,
   ROADMAP/ROADMAP_V2, mdBook status/backend-handoff/formal grammar/helper chapters, relevant ADR/KM facts,
   Dart package/source owners through `.4.3.4`, and Rust/core/runtime/test/spec owners for the helper purge closeout.
@@ -39,5 +39,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.7.3` pointer commit lands; do not
+- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.4.3.5` pointer commit lands; do not
   pivot unless the repo is handoff-ready.
