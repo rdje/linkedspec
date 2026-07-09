@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — FUTURE-PARITY-BACKLOG.9.0 — capture AND OR edge default correction
+
+**Scope:** Future parity backlog task-tree, roadmap/live docs, mdBook status, resume pointer, and Knowledge Map.
+
+**Change:** Captured the director's corrected AND/OR edge-default model as a future design lane. The parked design
+direction is mode-sensitive: AND rules should default bare entries to blind-call sequence semantics, while
+OR/default rules should default bare entries to action-edge regex-dispatch semantics. Related questions around
+explicit `->` in AND rules, explicit `=>` in OR rules, first-rule-as-top, and OR-rule pipe sugar are owned by the
+future design leaf. No parser/runtime behavior changed.
+
+**Validation:** `git diff --check`, memory architecture, Knowledge Map generation/check, task-tree metadata,
+doctrine, and mdBook build pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.6.2.4.4.4 — close Dart legacy accumulator smoke
 
 **Scope:** Dart runtime action-edge `push(Child)` accumulator convention, focused runtime/corpus tests, residual

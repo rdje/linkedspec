@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **FUTURE-PARITY-BACKLOG.9.0 — capture AND OR edge default correction**
+  (DONE — director's corrected AND/OR edge-default model is parked for later design).
+
+  **Change:** Added `FUTURE-PARITY-BACKLOG.9` with completed capture leaf `.9.0` and pending design leaf `.9.1`.
+  The future direction is that AND rules default bare entries to blind-call sequence semantics, while OR/default
+  rules default bare entries to action-edge regex-dispatch semantics.
+
+  **Boundary:** Planning capture only. No parser/runtime behavior changed, and active implementation work remains
+  on `DART-BACKEND-PARITY.6.2.4.4.5`.
+
+  **Verification:** mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.4 — close Dart legacy accumulator smoke**
   (DONE — `regdef_nested_register_fields` now passes on Dart; `ds_vhistory_version_entry` is routed with evidence).
 

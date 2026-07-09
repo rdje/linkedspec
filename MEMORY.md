@@ -18,13 +18,13 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.6.2.4.4.4` — Dart `push(Child)` now appends child results to the
-  current rule accumulator, so `regdef_nested_register_fields` passes and the parser-smoke window is 23/31 green.
-- prior_leaf: `DART-BACKEND-PARITY.6.2.4.4.3` — Dart statement-form helper mutation, explicit split replacement,
-  and entry/local line helpers made `simenv_multiline_value` plus both `lib_reader` fixtures pass.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.9.0` — director's corrected AND/OR edge-default model is captured
+  as parked design leaf `.9.1`; no parser/runtime behavior changed.
+- prior_leaf: `DART-BACKEND-PARITY.6.2.4.4.4` — Dart `push(Child)` now appends child results to the current rule
+  accumulator, so `regdef_nested_register_fields` passes and the parser-smoke window is 23/31 green.
 - latest_commit: this resume block is prepared for commit
-  `DART-BACKEND-PARITY.6.2.4.4.4 - close Dart legacy accumulator smoke`; previous committed HEAD is
-  `4f10b1b2 DART-BACKEND-PARITY.6.2.4.4.3 - close Dart helper mutation surfaces`.
+  `FUTURE-PARITY-BACKLOG.9.0 - capture AND OR edge default correction`; previous committed HEAD is
+  `09ee1f2f DART-BACKEND-PARITY.6.2.4.4.4 - close Dart legacy accumulator smoke`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
 - active_work_unit: `DART-BACKEND-PARITY`; current frontier `.6.2.4.4.5` after the current commit is clean.
@@ -33,7 +33,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   structural regex constructs including
   Lispish `(?R)`, EBNF `\K`/`(?&name)`/`(?(DEFINE)...)`, and spec.spec recursive block regexes. `.6.2.5` owns the
   routed top-level `fn` corpus-shell gap. The director's single-source `foo.spec` parser+stimuli roundtrip idea is
-  parked in `FUTURE-PARITY-BACKLOG.8.1`, not a current pivot.
+  parked in `FUTURE-PARITY-BACKLOG.8.1`; the corrected AND/OR edge-default model is parked in `.9.1`; neither is
+  a current pivot.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, COMMIT, task-tree index,
   active Dart task tree, ROADMAP/ROADMAP_V2, mdBook trace/runtime/status/backend-handoff chapters, relevant ADR/KM
   facts, Dart runtime/package/corpus source owners through `.6.1`, Rust staged-registry/trace references, and the
@@ -44,5 +45,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `.6.2.4.4.4` commit; do not pivot unless the repo
+- blockers: none. in_flight_uncommitted: none expected after the `FUTURE-PARITY-BACKLOG.9.0` commit; do not pivot unless the repo
   is handoff-ready.

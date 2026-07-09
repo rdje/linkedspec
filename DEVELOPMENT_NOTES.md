@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (FUTURE-PARITY-BACKLOG.9.0 — AND/OR edge-default correction captured):
+  The director corrected the earlier optional-edge-marker brainstorm. The future design direction is now
+  mode-sensitive: AND rules should be the low-ceremony sequence surface, so a bare `entry { ... }` line in an AND
+  rule should mean blind-call `=> entry { ... }`; OR/default rules should stay regex-dispatch surfaces, so a bare
+  `entry { ... }` line there should mean action-edge `-> entry { ... }`. Explicit `=>` remains the blind-call
+  marker and explicit `-> entry[k]` remains regex-slot action-edge dispatch. Important boundary: blind-call means
+  the parent does not preselect by the child regex; a normal child call still runs the child rule's own parser
+  semantics unless a future design intentionally defines a separate bypass. First-rule-as-top and OR pipe sugar are
+  related future design questions, not current behavior.
+
 - 2026-07-09 (DART-BACKEND-PARITY.6.2.4.4.4 — Dart legacy structural accumulator parity):
   Dart now implements the documented `push(Child)` convention in action-edge blocks: when the sole argument names
   a rule, the runtime executes that child, refreshes `retv`, and appends the child result to the current rule's

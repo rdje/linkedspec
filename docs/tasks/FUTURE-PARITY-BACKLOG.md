@@ -6,7 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-09`
+- Last updated: `2026-07-09` (`.9.0` captured the director's corrected AND/OR edge-default model as parked
+  future design work; no parser/runtime behavior changed).
 - Owner: repo-local workflow
 
 ## Goal
@@ -26,12 +27,15 @@ before implementation.
 
 ## Acceptance Criteria
 
-- The eight backlog directions are represented as owned task-tree lanes.
+- The nine backlog directions are represented as owned task-tree lanes.
 - The backend lane schedules Dart, Julia, and Lua in that order, all with full parity goals.
 - Each backend implementation track owns a distinct LinkedSpec CLI entrypoint for that variant; no future
   variant should rely on a single ambiguous shared CLI name as its only user-facing command.
 - The spec-derived parser/stimuli roundtrip idea is recorded as future design work, with `.spec` kept as the
   sole semantic source of truth for both parser construction and generated stimuli.
+- The director's AND/OR edge-default correction is recorded as future design work: AND rules should default bare
+  entries to blind-call sequence semantics, while OR rules should default bare entries to action-edge regex
+  dispatch semantics.
 - The central task-tree index points at the current frontier.
 - ADR, roadmap, mdBook, Knowledge Map, and live docs no longer contradict the backend order or
   Lua adoption decision.
@@ -42,7 +46,7 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG`
   Status: `active`
   Goal: Own the future parity backlog after the closed language-reference/terse-format trees.
-  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`
+  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`
 
 - ID: `FUTURE-PARITY-BACKLOG.0`
   Status: `done`
@@ -170,6 +174,37 @@ before implementation.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `FUTURE-PARITY-BACKLOG.9`
+  Status: `active`
+  Goal: Revisit AND/OR edge defaults and top-rule ceremony as future `.spec` language design.
+  Children: `.9.0`, `.9.1`
+  Acceptance: The director's correction to edge defaults is durable, design work is split before implementation,
+    and any later implementation keeps Perl/Rust/Dart semantics aligned instead of silently changing one backend.
+
+- ID: `FUTURE-PARITY-BACKLOG.9.0`
+  Status: `done`
+  Goal: Capture the director's corrected AND/OR edge-default model.
+  Acceptance: The task tree, index, roadmap/live docs, mdBook, resume pointer, and Knowledge Map record the future
+    arc without changing parser/runtime behavior or pivoting away from the Dart frontier.
+  Verification: **PASS 2026-07-09.** `git diff --check`, memory architecture, Knowledge Map generation/check,
+    task-tree metadata, doctrine, and mdBook build pass. No implementation code changed.
+  Commit: `FUTURE-PARITY-BACKLOG.9.0 - capture AND OR edge default correction`
+
+- ID: `FUTURE-PARITY-BACKLOG.9.1`
+  Status: `pending`
+  Goal: Design the corrected AND/OR edge-default contract before code.
+  Acceptance: Specify grammar and runtime semantics for mode-sensitive bare edge lines. In AND rules (`:&`, `::&`,
+    `:AND`, `::AND`, and bounded/repeated variants), a bare `entry { ... }` line should mean an explicit
+    blind-call `=> entry { ... }`; in OR/default rules, a bare `entry { ... }` line should mean an explicit
+    action-edge `-> entry { ... }`. Decide whether explicit `->` action-edges remain legal in AND rules, whether
+    explicit `=>` blind-calls remain legal in OR rules, how this composes with `entry[k]`, fluent `.push` /
+    `.return(...)` continuations, grouped/shared blocks, and diagnostics for ambiguous cases. Keep the boundary
+    clear: blind-call means the parent does not preselect by the child rule's regex; the called child rule still
+    owns its own parser/matching semantics unless this design explicitly creates a separate bypass. Treat
+    first-rule-as-top instead of `::` and optional OR pipe sugar as separate decisions under this design leaf.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -183,6 +218,7 @@ before implementation.
 | 7 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 8 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 9 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser/stimuli roundtrip arc is parked for later design; not a current Dart pivot. |
+| 10 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design; not a current Dart pivot. |
 
 ## Decisions
 
@@ -200,6 +236,10 @@ before implementation.
 - `2026-07-09`: Director brainstorm captured: a future closed-loop validation arc should explore deriving both
   a parser for `foo` and a stimuli generator for that parser solely from `foo.spec`, making `.spec` the sole source
   of truth. This is parked under `.8.1` and is not a current pivot from Dart.
+- `2026-07-09`: Director correction captured: future `.spec` design should swap the earlier optional-marker idea.
+  AND rules should default bare entries to blind-call sequence semantics, while OR/default rules should default
+  bare entries to action-edge regex dispatch semantics. This is parked under `.9.1` and is not a current pivot from
+  Dart.
 
 ## Open Questions
 
@@ -217,6 +257,7 @@ before implementation.
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book`; `bash tools/run_ci_local.sh` | PASS. Local CI includes phase0 `1..1028`; no implementation code changed. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.1.1` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book`; `bash tools/run_ci_local.sh` | PASS. Local CI includes phase0 `1..1028`; no implementation code changed. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.8.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning capture only; no implementation code changed. |
+| `2026-07-09` | `FUTURE-PARITY-BACKLOG.9.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning capture only; no implementation code changed. |
 
 ## Commit Log
 
@@ -225,6 +266,7 @@ before implementation.
 | `FUTURE-PARITY-BACKLOG.0` | `FUTURE-PARITY-BACKLOG.0 - create future parity backlog` | Tracking/decision/doc sync; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.1` | `FUTURE-PARITY-BACKLOG.1.1 - scope Dart backend parity plan` | Creates `DART-BACKEND-PARITY`; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.8.0` | `FUTURE-PARITY-BACKLOG.8.0 - capture spec-derived roundtrip idea` | Captures future `foo.spec` parser/stimuli closed-loop validation arc; no implementation code. |
+| `FUTURE-PARITY-BACKLOG.9.0` | `FUTURE-PARITY-BACKLOG.9.0 - capture AND OR edge default correction` | Captures future AND/OR mode-sensitive edge-default design arc; no implementation code. |
 
 ## Changelog
 
@@ -234,3 +276,6 @@ before implementation.
   interpreter-first parity before generated Dart source.
 - `2026-07-09`: Captured the director's single-source `foo.spec` parser/stimuli generator roundtrip idea as a
   low-priority future design lane.
+- `2026-07-09`: Captured the director's corrected AND/OR edge-default model as a future design lane: AND defaults
+  to blind-call sequence entries, OR/default rules default to action-edge regex-dispatch entries, and top-rule
+  marker reduction plus OR pipe sugar are parked as related design questions.
