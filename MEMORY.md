@@ -18,27 +18,26 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.3.4` — Dart now has `compileSpec(...)` and compiled rule/dependency/
-  descriptor state over parsed `SpecFile`s: ordered rules, mode metadata, dependency refs/regex data, lifecycle and
-  edge `ActionBlock` payloads, carried `UserFunctionRegistry`, and descriptor-shaped JSON projection.
-- prior_leaf: `DART-BACKEND-PARITY.3.3` — Dart user-function registry and exact-arity ActionIR contract
-  classification are complete.
+- latest_completed_leaf: `DART-BACKEND-PARITY.4.1` — Dart now has runtime regex/match-state primitives:
+  seek/consume matching over compiled rule regex lists, stable alternative identity, capture/named-capture records,
+  char-offset projection, entry/local match registers, cursor state, and zero-progress detection.
+- prior_leaf: `DART-BACKEND-PARITY.3.4` — Dart compiled rule/dependency/descriptor state is complete.
 - latest_commit: HEAD containing this pointer should be
-  `DART-BACKEND-PARITY.3.4 - add Dart compiled spec state`; parent before this slice is
-  `DART-BACKEND-PARITY.3.3 - add Dart function registry`.
+  `DART-BACKEND-PARITY.4.1 - add Dart runtime matching state`; parent before this slice is
+  `DART-BACKEND-PARITY.3.4 - add Dart compiled spec state`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.4.1` pending.
-- next_action: from a clean repo, implement `DART-BACKEND-PARITY.4.1` runtime regex matching and match-state
-  tracking over the compiled Dart state.
+- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.4.2` pending.
+- next_action: from a clean repo, implement `DART-BACKEND-PARITY.4.2` rule dispatch, rule modes, recursion
+  guards, repetition bounds, and lifecycle order over the Dart runtime matching state.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, task-tree index,
   ROADMAP/ROADMAP_V2, mdBook status/backend-handoff/formal grammar/helper chapters, relevant ADR/KM facts,
-  Dart package/source owners for `.3.4`, and Rust/core/runtime/test/spec owners for the helper purge closeout.
+  Dart package/source owners for `.4.1`, and Rust/core/runtime/test/spec owners for the helper purge closeout.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1027` tests**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.3.4` pointer commit lands; do not pivot unless the repo is
+- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.4.1` pointer commit lands; do not pivot unless the repo is
   handoff-ready.

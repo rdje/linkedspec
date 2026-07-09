@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.4.1 — Dart runtime matching state):
+  Added Dart runtime matching primitives in `dart/lib/src/runtime/matching.dart`. `RuntimeRegexAlternation`
+  compiles ordered regex lists from compiled rules and supports `seek` and `consume` matching with stable
+  alternative identity. `RuntimeRegexMatch` records code-unit spans, compact capture-only groups, named captures,
+  char offsets, line/column projection, and zero-width/progress helpers. `RuntimeMatchRegisters` keeps entry and
+  local match registers separate for later child dispatch, tracks cursor position, and exposes zero-progress
+  detection. Focused runtime matching tests prove seek/consume behavior, compiled-rule regex-list use, capture
+  shape, UTF-16/code-point offset projection, entry/local separation, and zero-progress candidates. Next frontier
+  is `DART-BACKEND-PARITY.4.2` rule dispatch, rule modes, recursion guards, repetition bounds, and lifecycle order.
+
 - 2026-07-09 (DART-BACKEND-PARITY.3.4 — Dart compiled spec state):
   Added Dart's backend-neutral compiled state in `dart/lib/src/compiler/compiled_spec.dart`. `compileSpec(...)`
   validates `SpecFile` inputs by default, builds deterministic `definition_order` / `compiled_rule_order`,

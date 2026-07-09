@@ -293,8 +293,17 @@ dependency refs, mode metadata, action/blind edges, lifecycle/plain/edge
 `ActionBlock` payloads, and registry-aware ActionIR contract results. Its
 `CompiledDependencyRegexState` derives structured child-regex dispatch data, and
 `CompiledDescriptorState` projects the public descriptor shape with `spec`,
-`functions`, `dependency_regex_map`, and `meta`. Runtime matching and execution
-remain later Dart leaves.
+`functions`, `dependency_regex_map`, and `meta`. Runtime execution remains a
+later Dart leaf.
+
+Dart now has the first runtime matching layer in `dart/lib/src/runtime/matching.dart`.
+`RuntimeRegexAlternation` consumes ordered compiled-rule regex lists and supports
+`seek` versus `consume` matching while preserving stable alternative indexes.
+`RuntimeRegexMatch` records capture-only groups, named captures, code-unit spans,
+char-offset and line/column projections, and zero-width/progress checks.
+`RuntimeMatchRegisters` keeps entry and local match state separate for future
+child dispatch and tracks the parser cursor. Rule dispatch, lifecycle execution,
+helpers, tracing, and corpus-output parity remain later Dart leaves.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

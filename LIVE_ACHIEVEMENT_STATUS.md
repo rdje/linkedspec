@@ -7,6 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.4.1 — add Dart runtime matching state**
+  (DONE regex matching and match-state primitives; rule dispatch is next).
+
+  **Change:** Added Dart seek/consume regex alternation, stable alternative identity, capture and named-capture
+  records, char-offset/line-column projection, entry/local match registers, cursor state, and zero-progress
+  helpers over compiled rule regex lists.
+
+  **Boundary:** This is still below rule dispatch. Lifecycle order, rule modes, recursion guards, helper/action
+  execution, tracing, and corpus output comparison remain later leaves.
+
+  **Verification:** Focused runtime matching test, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+  memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.3.4 — add Dart compiled spec state**
   (DONE compiled rule/dependency/descriptor state; runtime matching is next).
 

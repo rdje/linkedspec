@@ -109,6 +109,17 @@ export 'src/parser/user_function_definition_shell.dart'
         UserFunctionDefinitionProjection,
         parseSpecWithUserFunctionDefinitionAsts,
         projectUserFunctionDefinitionAsts;
+export 'src/runtime/matching.dart'
+    show
+        LineColumn,
+        LinkedSpecParseMode,
+        RuntimeMatchRegisters,
+        RuntimeRegexAlternation,
+        RuntimeRegexAlternative,
+        RuntimeRegexMatch,
+        charOffsetToCodeUnitOffset,
+        codeUnitOffsetToCharOffset,
+        lineColumnAtCodeUnitOffset;
 export 'src/scaffold.dart'
     show
         describeLinkedSpecDartScaffold,

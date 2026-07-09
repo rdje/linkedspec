@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.4.1 — add Dart runtime matching state
+
+**Scope:** Dart runtime regex matching primitives, match-state tracking API, focused tests, package README,
+mdBook Dart handoff/status text, live docs, roadmap/task-tree status, and Knowledge Map facts.
+
+**Change:** Added `dart/lib/src/runtime/matching.dart` with `RuntimeRegexAlternation`,
+`RuntimeRegexMatch`, `RuntimeMatchRegisters`, `LinkedSpecParseMode`, line/column helpers, and char/code-unit
+offset conversion helpers. The matcher supports seek and consume modes, stable alternative indexes, compiled-rule
+regex lists, capture-only groups, named captures, char-offset projection over Dart code-unit match spans,
+entry/local match separation for child invocation state, cursor position reporting, and zero-progress detection.
+
+**Validation:** Focused `dart test test/runtime_matching_test.dart`, `dart format --set-exit-if-changed .`,
+`dart analyze --fatal-infos --fatal-warnings`, full `dart test`, the 99-fixture corpus manifest runner, corpus
+runner help, CLI help, mdBook build, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+`git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.3.4 — add Dart compiled spec state
 
 **Scope:** Dart compiled-spec state API, descriptor projection, dependency-regex data, focused tests, package

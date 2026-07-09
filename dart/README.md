@@ -7,7 +7,8 @@ public library entrypoint, CLI smoke entrypoint, corpus-runner entrypoint,
 manifest IO scaffold, source-level AST/data types, a core `.spec` rule parser,
 frontend validation, spec-returned function-shell projection, typed ActionIR
 parsing/contract resolution, user-function registry scaffolding, and a
-backend-neutral compiled-spec state model before runtime semantics land.
+backend-neutral compiled-spec state model plus runtime regex/match-state
+primitives before full runtime semantics land.
 
 ## Commands
 
@@ -25,7 +26,7 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.3.4` owns the current boundary. The package can round-trip
+`DART-BACKEND-PARITY.4.1` owns the current boundary. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -34,5 +35,8 @@ ordered `UserFunctionRegistry`, and classify exact-arity user calls before helpe
 fallback. It can now compile a validated `SpecFile` into `CompiledSpec` state
 with ordered rule tables, dependency-regex data, mode metadata, lifecycle/action
 ActionIR payloads, the function registry, and descriptor-shaped JSON projection.
-Runtime execution, tracing, and corpus output parity remain later leaves in
-`docs/tasks/DART-BACKEND-PARITY.md`.
+It also has runtime regex primitives for seek/consume matching, stable
+alternative identity, capture and named-capture records, char-offset projections,
+entry/local match registers, cursor state, and zero-progress detection. Rule
+dispatch, helper execution, tracing, and corpus output parity remain later leaves
+in `docs/tasks/DART-BACKEND-PARITY.md`.

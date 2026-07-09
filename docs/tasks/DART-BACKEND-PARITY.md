@@ -263,12 +263,31 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Children: `.4.1`, `.4.2`, `.4.3`, `.4.4`, `.4.5`
 
 - ID: `DART-BACKEND-PARITY.4.1`
-  Status: `pending`
+  Status: `done`
   Goal: Implement regex matching and match-state tracking.
   Acceptance: Seek/consume modes, alternative identity, capture groups, named captures, char offsets,
     cursor position, entry/local match separation, and zero-progress detection match the contract.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: focused `dart test test/runtime_matching_test.dart`; `dart format --set-exit-if-changed .`;
+    `dart analyze --fatal-infos --fatal-warnings`; full `dart test`;
+    `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`;
+    `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build;
+    memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`.
+  Findings:
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `.3.4` produced compiled rule regex lists and descriptor
+      data, but Dart had no runtime owner for seek/consume matching, match registers, capture extraction, or
+      cursor/progress state. Those semantics belong below `.4.2` rule dispatch.
+    - [x] **FIX** — Added `dart/lib/src/runtime/matching.dart` with `RuntimeRegexAlternation`,
+      `RuntimeRegexMatch`, `RuntimeMatchRegisters`, `LinkedSpecParseMode`, char/code-unit offset helpers, and
+      line/column projection helpers.
+    - [x] **ADDRESSED (verified)** — `test/runtime_matching_test.dart` proves seek and consume behavior, stable
+      alternative identity, compiled-rule regex-list matching, compact capture-only groups, named captures,
+      char-offset projections over Dart code-unit spans, entry/local match separation, cursor state, and
+      zero-progress detection.
+    - [x] **NO REGRESSION** — Dart format/analyze/full tests, corpus runner, CLI help, and mdBook build pass.
+    - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
+      `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker row, Knowledge Map
+      facts, `docs/TASK_TREE.md`, and this task tree are updated.
+  Commit: `DART-BACKEND-PARITY.4.1 - add Dart runtime matching state`
 
 - ID: `DART-BACKEND-PARITY.4.2`
   Status: `pending`
@@ -402,8 +421,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-BACKEND-PARITY.3.4` | `done` | Compiled rule/dependency/descriptor state is built; runtime matching is next. |
-| 2 | `DART-BACKEND-PARITY.4.1` | `pending` | Implement regex matching and match-state tracking over compiled Dart state. |
+| 1 | `DART-BACKEND-PARITY.4.1` | `done` | Runtime regex matching and match-state primitives are built; rule dispatch is next. |
+| 2 | `DART-BACKEND-PARITY.4.2` | `pending` | Implement rule dispatch, rule modes, recursion guards, repetition bounds, and lifecycle order. |
 
 ## Dart Toolchain And Package Layout
 
@@ -579,6 +598,22 @@ The `.3.4` compiled-state layer adds:
   source validation reuse, and redefinition metadata.
 - No runtime execution, tracing, or corpus output comparison yet.
 
+The `.4.1` runtime matching layer adds:
+
+- `lib/src/runtime/matching.dart` with public `RuntimeRegexAlternation`, `RuntimeRegexMatch`,
+  `RuntimeMatchRegisters`, `LinkedSpecParseMode`, `LineColumn`, and char/code-unit offset helpers.
+- Seek and consume regex matching over ordered pattern lists, including `CompiledRule.regexPatterns`.
+- Stable alternative indexes without relying on a backend-specific combined-regex branch side channel.
+- Capture-only group compaction, named-capture maps, raw code-unit spans, char-offset projection, and line/column
+  projection.
+- Entry/local match-register separation for future child dispatch: child entry state is seeded from the caller's
+  local match, while the child local match is independent.
+- Cursor state and zero-progress detection helpers for later repetition/recursion guards.
+- `test/runtime_matching_test.dart` for seek/consume behavior, compiled-rule regex-list integration, captures,
+  named captures, UTF-16/code-point offset projection, entry/local separation, cursor state, and zero-progress
+  candidates.
+- No rule dispatch, lifecycle execution, helper runtime, tracing, or corpus output comparison yet.
+
 ## Decisions
 
 - `2026-07-09`: Dart starts interpreter-first. The primary parity path is
@@ -614,15 +649,16 @@ The `.3.4` compiled-state layer adds:
 - `2026-07-09`: Dart `.3.4` builds `CompiledSpec` / `CompiledRule` / dependency-regex / descriptor state over
   parsed `SpecFile`s. Dependency regexes are structured refs plus pattern strings until `.4` owns executable match
   dispatch.
+- `2026-07-09`: Dart `.4.1` adds regex/match-state primitives only. Rule dispatch, lifecycle execution, and helper
+  runtime remain `.4.2` and later.
 
 ## Open Questions
 
-- None blocking `.4.1`. Compiled state and descriptor projection are available; runtime regex matching and
-  match-state tracking are next.
+- None blocking `.4.2`. Runtime matching primitives are available; rule dispatch and lifecycle order are next.
 
 ## Blockers
 
-- None known before `.4.1` runtime matching work.
+- None known before `.4.2` rule-dispatch work.
 
 ## Verification Log
 
@@ -640,6 +676,7 @@ The `.3.4` compiled-state layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.3.2` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; Dart-tree non-current-spelling scan; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. ActionIR contract resolver records current canonical helper/control contracts and generic diagnostics without non-current spelling tables. |
 | `2026-07-09` | `DART-BACKEND-PARITY.3.3` | Focused `dart test test/function_registry_test.dart test/action_contracts_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart preserves staged function sidecars in an ordered registry and resolves exact-arity user calls before helper fallback. |
 | `2026-07-09` | `DART-BACKEND-PARITY.3.4` | Focused `dart test test/compiled_spec_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart compiles parsed specs into ordered compiled rule/dependency/descriptor state with ActionIR payloads and function registry projection. |
+| `2026-07-09` | `DART-BACKEND-PARITY.4.1` | Focused `dart test test/runtime_matching_test.dart`; `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`. | PASS. Dart runtime matching supports seek/consume, stable alternative identity, capture/named-capture records, char offsets, entry/local match separation, cursor state, and zero-progress detection. |
 
 ## Commit Log
 
@@ -657,6 +694,7 @@ The `.3.4` compiled-state layer adds:
 | `DART-BACKEND-PARITY.3.2` | `DART-BACKEND-PARITY.3.2 - add Dart ActionIR contract resolver` | Current helper/control contract resolution; function registry uses the shared current-name table. |
 | `DART-BACKEND-PARITY.3.3` | `DART-BACKEND-PARITY.3.3 - add Dart function registry` | Ordered user-function registry and exact-arity resolver; compiled state remains `.3.4`. |
 | `DART-BACKEND-PARITY.3.4` | `DART-BACKEND-PARITY.3.4 - add Dart compiled spec state` | Ordered compiled rule/dependency/descriptor state; runtime matching starts in `.4.1`. |
+| `DART-BACKEND-PARITY.4.1` | `DART-BACKEND-PARITY.4.1 - add Dart runtime matching state` | Seek/consume regex matching and match-state primitives; rule dispatch starts in `.4.2`. |
 
 ## Changelog
 
@@ -684,3 +722,5 @@ The `.3.4` compiled-state layer adds:
 - `2026-07-09`: Added Dart compiled rule/dependency/descriptor state with lifecycle/action ActionIR payloads and
   function registry projection; `.3` compiler-state container closes and frontier advances to `.4.1` for runtime
   matching and match-state tracking.
+- `2026-07-09`: Added Dart runtime regex/match-state primitives over compiled rule regex lists; frontier advances
+  to `.4.2` for rule dispatch, rule modes, recursion guards, repetition bounds, and lifecycle order.
