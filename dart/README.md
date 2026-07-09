@@ -6,9 +6,10 @@ This package is intentionally staged. It establishes the Dart package boundary,
 public library entrypoint, CLI smoke entrypoint, corpus-runner entrypoint,
 manifest IO scaffold, source-level AST/data types, a core `.spec` rule parser,
 frontend validation, spec-returned function-shell projection, typed ActionIR
-parsing/contract resolution, user-function registry scaffolding, and a
+parsing/contract resolution, user-function registry scaffolding, a
 backend-neutral compiled-spec state model, runtime regex/match-state primitives,
-and a first rule-dispatch interpreter before full helper/corpus semantics land.
+a first rule-dispatch interpreter, and core runtime value/capture helpers before
+full helper/corpus semantics land.
 
 ## Commands
 
@@ -26,7 +27,7 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 
 ## Status
 
-`DART-BACKEND-PARITY.4.2` owns the current boundary. The package can round-trip
+`DART-BACKEND-PARITY.4.3.1` owns the current boundary. The package can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
 paragraphs into source AST types, validate those ASTs in non-strict or strict
 mode, project spec-returned function-definition nodes, parse helper/action source
@@ -42,5 +43,9 @@ entry/local match registers, cursor state, and zero-progress detection.
 interpreter layer: default/AND/OR/repetition dispatch, action-edge and
 blind-call child dispatch, lifecycle blocks, explicit returns, `retv`,
 accumulator collection, bounded repetition, zero-progress cutoffs, and recursion
-cutoffs. Full helper-family execution, tracing, and corpus output parity remain
+cutoffs. The runtime evaluator now also preserves scalar/array/hash/null/boolean/
+number shapes through assignment and wrapper snapshots, supports `hash(...)`,
+`set(hash(...), ...)`, hash-index mutation, nested reads, non-numeric map keys,
+aggregate `copy(...)`, and named/map/position capture helpers. Full string,
+numeric, array, hash, control/tree, tracing, and corpus output parity remain
 later leaves in `docs/tasks/DART-BACKEND-PARITY.md`.

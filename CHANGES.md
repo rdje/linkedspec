@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.4.3.1 — add Dart runtime value capture helpers
+
+**Scope:** Dart runtime core value/store evaluator, focused interpreter tests, package README, mdBook Dart
+handoff/status text, live docs, roadmap/task-tree status, and Knowledge Map facts.
+
+**Change:** Extended `LinkedSpecRuntimeEngine` beyond the `.4.2` dispatch-facing evaluator with core value
+semantics: scalar/array/hash/null/boolean/number shapes survive assignment and wrapper snapshots; `hash(...)` and
+`set(hash(...), ...)` work; hash-index mutation and nested reads execute; map indexing supports non-numeric keys;
+`copy(...)`, `array(...)`, and `hash(...)` read typed aggregate stores or variable-held shapes; and `entry_*` /
+`match_*` now include named capture reads, participation checks, named maps, lengths, and start/end positions with
+bare capture-name syntax.
+
+**Validation:** Focused runtime interpreter test, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.4.3.0 — split Dart runtime helper families
 
 **Scope:** Dart runtime helper/value task-tree split, live docs, task-tree index, and resume pointer.

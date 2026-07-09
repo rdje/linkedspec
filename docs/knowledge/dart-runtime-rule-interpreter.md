@@ -28,10 +28,11 @@ families; action-edge and blind-call child dispatch; entry/local match handoff;
 explicit `return(...)` and `return_undef()`; `retv`; accumulator collection;
 bounded repetition; zero-progress cutoffs; and recursion cutoffs.
 
-The embedded ActionIR evaluator is deliberately narrow and dispatch-facing:
-`return`, `return_undef`, `set`, `push`, `array`, `copy`, `cat`, `call`,
-`entry_*`, and `match_*`. Broad helper/value semantics remain the next runtime
-leaf (`DART-BACKEND-PARITY.4.3`).
+The `.4.2` embedded ActionIR evaluator was deliberately narrow and
+dispatch-facing. `DART-BACKEND-PARITY.4.3.1` later extended its core value/store
+and capture-reader subset; broader string/number/array/hash/control helper
+families remain follow-up runtime leaves.
 
 Related facts: [[dart-runtime-matching-state]], [[dart-compiled-spec-state]],
+[[dart-runtime-core-value-capture-helpers]],
 [[dart-backend-interpreter-first-plan]].

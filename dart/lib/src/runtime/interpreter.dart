@@ -602,6 +602,8 @@ final class LinkedSpecRuntimeEngine {
         return value;
       case ActionBooleanLiteralExpr(:final value):
         return value;
+      case ActionRegexLiteralExpr(:final pattern):
+        return pattern;
       case ActionUndefExpr():
         return null;
       case ActionVariableExpr(:final name):
@@ -662,8 +664,52 @@ final class LinkedSpecRuntimeEngine {
         );
         context.arrayFor(name).add(stored);
         return List<Object?>.unmodifiable(context.arrayFor(name));
+      case ActionAssignHashIndexExpr(:final name, :final key, :final value):
+        final storedKey = _stringValue(
+          _evaluateExpression(
+            key,
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          ),
+        );
+        final storedValue = _copyValue(
+          _evaluateExpression(
+            value,
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          ),
+        );
+        context.hashFor(name)[storedKey] = storedValue;
+        return Map<String, Object?>.unmodifiable(context.hashFor(name));
+      case ActionAssignNestedAccessExpr(
+        :final base,
+        :final segments,
+        :final value,
+      ):
+        final stored = _copyValue(
+          _evaluateExpression(
+            value,
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          ),
+        );
+        _writeNested(
+          _rootForWrite(context, base, segments),
+          segments,
+          stored,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+        return _copyValue(stored);
       case ActionIndexedVarExpr(:final name, :final index):
-        final collection = context.variables[name] ?? context.arrays[name];
+        final collection =
+            context.variables[name] ??
+            context.arrays[name] ??
+            context.hashes[name];
         final indexValue = _evaluateExpression(
           index,
           context,
@@ -674,7 +720,9 @@ final class LinkedSpecRuntimeEngine {
       case ActionNestedAccessExpr(:final base, :final segments):
         final root = base == 'retv'
             ? _readRetv(context, currentEdge)
-            : (context.variables[base] ?? context.arrays[base]);
+            : (context.variables[base] ??
+                  context.arrays[base] ??
+                  context.hashes[base]);
         return _readNested(root, segments, context, ruleLabel, currentEdge);
       case ActionCallExpr():
         return _evaluateCall(
@@ -745,17 +793,17 @@ final class LinkedSpecRuntimeEngine {
         return _callPush(positionalArgs, context, ruleLabel, currentEdge);
       case 'array':
         return _callArray(positionalArgs, context, ruleLabel, currentEdge);
+      case 'hash':
+        return _callHash(positionalArgs, context, ruleLabel, currentEdge);
       case 'copy':
         if (positionalArgs.isEmpty) {
           return null;
         }
-        return _copyValue(
-          _evaluateExpression(
-            positionalArgs.first,
-            context,
-            ruleLabel,
-            currentEdge: currentEdge,
-          ),
+        return _copyArgument(
+          positionalArgs.first,
+          context,
+          ruleLabel,
+          currentEdge,
         );
       case 'cat':
         return positionalArgs
@@ -798,6 +846,58 @@ final class LinkedSpecRuntimeEngine {
         return List<Object?>.unmodifiable(
           context.registers.localMatch?.captures ?? const [],
         );
+      case 'entry_named':
+        return _namedCapture(
+          context.registers.entryMatch,
+          positionalArgs,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+      case 'match_named':
+        return _namedCapture(
+          context.registers.localMatch,
+          positionalArgs,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+      case 'entry_has':
+        return _hasNamedCapture(
+          context.registers.entryMatch,
+          positionalArgs,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+      case 'match_has':
+        return _hasNamedCapture(
+          context.registers.localMatch,
+          positionalArgs,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+      case 'entry_map':
+        return Map<String, Object?>.unmodifiable(
+          context.registers.entryMatch?.named ?? const <String, String>{},
+        );
+      case 'match_map':
+        return Map<String, Object?>.unmodifiable(
+          context.registers.localMatch?.named ?? const <String, String>{},
+        );
+      case 'entry_len':
+        return context.registers.entryMatch?.charLength;
+      case 'match_len':
+        return context.registers.localMatch?.charLength;
+      case 'entry_start_pos':
+        return context.registers.entryMatch?.charStart;
+      case 'entry_end_pos':
+        return context.registers.entryMatch?.charEnd;
+      case 'match_start_pos':
+        return context.registers.localMatch?.charStart;
+      case 'match_end_pos':
+        return context.registers.localMatch?.charEnd;
       case 'call':
         if (positionalArgs.isEmpty) {
           return null;
@@ -876,6 +976,11 @@ final class LinkedSpecRuntimeEngine {
     if (arrayTarget != null) {
       context.arrays[arrayTarget] = _asArray(value);
       return List<Object?>.unmodifiable(context.arrayFor(arrayTarget));
+    }
+    final hashTarget = _hashTargetName(args[0]);
+    if (hashTarget != null) {
+      context.hashes[hashTarget] = _asHash(value);
+      return Map<String, Object?>.unmodifiable(context.hashFor(hashTarget));
     }
     final variableTarget = _variableName(args[0]);
     if (variableTarget == null) {
@@ -957,7 +1062,7 @@ final class LinkedSpecRuntimeEngine {
     if (args.length == 1) {
       final name = _variableName(args.first);
       if (name != null) {
-        return List<Object?>.unmodifiable(context.arrayFor(name));
+        return List<Object?>.unmodifiable(_arrayValueFor(context, name));
       }
     }
     return [
@@ -971,6 +1076,44 @@ final class LinkedSpecRuntimeEngine {
           ),
         ),
     ];
+  }
+
+  Object? _callHash(
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    if (args.length == 1) {
+      final name = _variableName(args.first);
+      if (name != null) {
+        return Map<String, Object?>.unmodifiable(_hashValueFor(context, name));
+      }
+    }
+
+    final entries = <String, Object?>{};
+    for (var index = 0; index < args.length; index += 2) {
+      final key = _stringValue(
+        _evaluateExpression(
+          args[index],
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+        ),
+      );
+      final value = index + 1 < args.length
+          ? _copyValue(
+              _evaluateExpression(
+                args[index + 1],
+                context,
+                ruleLabel,
+                currentEdge: currentEdge,
+              ),
+            )
+          : null;
+      entries[key] = value;
+    }
+    return entries;
   }
 
   Object? _readRetv(
@@ -1043,6 +1186,8 @@ final class _RuntimeExecutionContext {
   final int maxIterations;
   final Map<String, Object?> variables = <String, Object?>{};
   final Map<String, List<Object?>> arrays = <String, List<Object?>>{};
+  final Map<String, Map<String, Object?>> hashes =
+      <String, Map<String, Object?>>{};
   final Set<String> activeRuleEntries = <String>{};
   final List<RuntimeLifecycleEvent> lifecycleEvents = <RuntimeLifecycleEvent>[];
 
@@ -1052,6 +1197,10 @@ final class _RuntimeExecutionContext {
 
   List<Object?> arrayFor(String name) {
     return arrays.putIfAbsent(name, () => <Object?>[]);
+  }
+
+  Map<String, Object?> hashFor(String name) {
+    return hashes.putIfAbsent(name, () => <String, Object?>{});
   }
 }
 
@@ -1152,6 +1301,13 @@ String? _arrayTargetName(ActionExpr expr) {
   return _variableName(expr.args.single.value);
 }
 
+String? _hashTargetName(ActionExpr expr) {
+  if (expr is! ActionCallExpr || expr.name != 'hash' || expr.args.length != 1) {
+    return null;
+  }
+  return _variableName(expr.args.single.value);
+}
+
 String? _variableName(ActionExpr expr) {
   return switch (expr) {
     ActionVariableExpr(:final name) => name,
@@ -1167,6 +1323,50 @@ List<Object?> _asArray(Object? value) {
     return [for (final item in value) _copyValue(item)];
   }
   return <Object?>[];
+}
+
+Map<String, Object?> _asHash(Object? value) {
+  if (value is Map<String, Object?>) {
+    return {
+      for (final entry in value.entries) entry.key: _copyValue(entry.value),
+    };
+  }
+  if (value is Map) {
+    return {
+      for (final entry in value.entries)
+        '${entry.key}': _copyValue(entry.value),
+    };
+  }
+  return <String, Object?>{};
+}
+
+List<Object?> _arrayValueFor(_RuntimeExecutionContext context, String name) {
+  final stored = context.arrays[name];
+  if (stored != null) {
+    return [for (final item in stored) _copyValue(item)];
+  }
+  final variable = context.variables[name];
+  if (variable is List) {
+    return [for (final item in variable) _copyValue(item)];
+  }
+  return <Object?>[];
+}
+
+Map<String, Object?> _hashValueFor(
+  _RuntimeExecutionContext context,
+  String name,
+) {
+  final stored = context.hashes[name];
+  if (stored != null) {
+    return {
+      for (final entry in stored.entries) entry.key: _copyValue(entry.value),
+    };
+  }
+  final variable = context.variables[name];
+  if (variable is Map) {
+    return _asHash(variable);
+  }
+  return <String, Object?>{};
 }
 
 Object? _readNested(
@@ -1195,16 +1395,176 @@ Object? _readNested(
 }
 
 Object? _indexValue(Object? collection, Object? indexValue) {
+  if (collection is Map) {
+    return collection[_stringValue(indexValue)];
+  }
   final index = indexValue is num
       ? indexValue.toInt()
       : int.tryParse('$indexValue');
-  if (index == null || index < 0) {
-    return null;
-  }
-  if (collection is List && index < collection.length) {
+  if (collection is List &&
+      index != null &&
+      index >= 0 &&
+      index < collection.length) {
     return collection[index];
   }
   return null;
+}
+
+Object _rootForWrite(
+  _RuntimeExecutionContext context,
+  String base,
+  List<ActionAccessSegment> segments,
+) {
+  final existing =
+      context.variables[base] ?? context.arrays[base] ?? context.hashes[base];
+  if (existing != null) {
+    return existing;
+  }
+  final root = segments.first is ActionIndexAccessSegment
+      ? <Object?>[]
+      : <String, Object?>{};
+  context.variables[base] = root;
+  return root;
+}
+
+void _writeNested(
+  Object root,
+  List<ActionAccessSegment> segments,
+  Object? value,
+  _RuntimeExecutionContext context,
+  String ruleLabel,
+  _CurrentActionEdge? currentEdge,
+) {
+  if (segments.isEmpty) {
+    throw RuntimeInterpreterException(
+      'nested assignment in rule $ruleLabel requires at least one segment',
+    );
+  }
+  var node = root;
+  for (var index = 0; index < segments.length; index += 1) {
+    final isLast = index == segments.length - 1;
+    final segment = segments[index];
+    switch (segment) {
+      case ActionKeyAccessSegment(value: final key):
+        if (node is! Map<String, Object?>) {
+          throw RuntimeInterpreterException(
+            'nested key assignment in rule $ruleLabel needs a hash parent',
+          );
+        }
+        if (isLast) {
+          node[key] = value;
+        } else {
+          final child = node[key] ?? _emptyContainerFor(segments[index + 1]);
+          node[key] = child;
+          node = child;
+        }
+      case ActionIndexAccessSegment(:final expr):
+        final rawIndex = context.engine._evaluateExpression(
+          expr,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+        );
+        final listIndex = rawIndex is num
+            ? rawIndex.toInt()
+            : int.tryParse('$rawIndex');
+        if (node is! List<Object?> || listIndex == null || listIndex < 0) {
+          throw RuntimeInterpreterException(
+            'nested index assignment in rule $ruleLabel needs an array parent',
+          );
+        }
+        while (node.length <= listIndex) {
+          node.add(null);
+        }
+        if (isLast) {
+          node[listIndex] = value;
+        } else {
+          final child =
+              node[listIndex] ?? _emptyContainerFor(segments[index + 1]);
+          node[listIndex] = child;
+          node = child;
+        }
+    }
+  }
+}
+
+Object _emptyContainerFor(ActionAccessSegment segment) {
+  return segment is ActionIndexAccessSegment
+      ? <Object?>[]
+      : <String, Object?>{};
+}
+
+Object? _copyArgument(
+  ActionExpr expr,
+  _RuntimeExecutionContext context,
+  String ruleLabel,
+  _CurrentActionEdge? currentEdge,
+) {
+  final name = _variableName(expr);
+  if (name != null) {
+    if (context.arrays.containsKey(name)) {
+      return _arrayValueFor(context, name);
+    }
+    if (context.hashes.containsKey(name)) {
+      return _hashValueFor(context, name);
+    }
+  }
+  return _copyValue(
+    context.engine._evaluateExpression(
+      expr,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    ),
+  );
+}
+
+Object? _namedCapture(
+  RuntimeRegexMatch? match,
+  List<ActionExpr> args,
+  _RuntimeExecutionContext context,
+  String ruleLabel,
+  _CurrentActionEdge? currentEdge,
+) {
+  if (match == null || args.isEmpty) {
+    return null;
+  }
+  final name = _captureName(args.first, context, ruleLabel, currentEdge);
+  return match.namedCapture(name);
+}
+
+bool _hasNamedCapture(
+  RuntimeRegexMatch? match,
+  List<ActionExpr> args,
+  _RuntimeExecutionContext context,
+  String ruleLabel,
+  _CurrentActionEdge? currentEdge,
+) {
+  if (match == null || args.isEmpty) {
+    return false;
+  }
+  final name = _captureName(args.first, context, ruleLabel, currentEdge);
+  return match.named.containsKey(name);
+}
+
+String _captureName(
+  ActionExpr expr,
+  _RuntimeExecutionContext context,
+  String ruleLabel,
+  _CurrentActionEdge? currentEdge,
+) {
+  final literalName = _variableName(expr);
+  if (literalName != null) {
+    return literalName;
+  }
+  return _stringValue(
+    context.engine._evaluateExpression(
+      expr,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    ),
+  );
 }
 
 Object? _copyValue(Object? value) {

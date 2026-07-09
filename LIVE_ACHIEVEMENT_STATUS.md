@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.4.3.1 — add Dart runtime value capture helpers**
+  (DONE core runtime value/store and capture-reader subset).
+
+  **Change:** Dart runtime execution now preserves scalar/array/hash/null/boolean/number shapes through
+  assignment and wrapper snapshots; supports `hash(...)`, `set(hash(...), ...)`, hash-index mutation, nested
+  access reads, non-numeric map indexing, aggregate `copy(...)`, and the named/map/length/start/end
+  `entry_*` / `match_*` capture helper family.
+
+  **Boundary:** This is still the core value/capture subset. String/scalar helpers, numeric helpers, array helper
+  family breadth, hash helper breadth, value-block/control/tree traversal helpers, BACKTRACK, tracing, staged
+  function execution, and full corpus output parity remain later leaves.
+
+  **Verification:** Focused runtime interpreter test, Dart format/analyze/full tests, corpus runner, CLI help,
+  mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.4.3.0 — split Dart runtime helper families**
   (DONE task-tree split before broad helper/value implementation).
 

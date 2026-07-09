@@ -308,9 +308,15 @@ Dart also has the first runtime rule interpreter in `dart/lib/src/runtime/interp
 AND, OR, and repetition rule families with action-edge and blind-call child
 dispatch, entry/local match handoff, lifecycle blocks, explicit returns, `retv`,
 accumulator collection, bounded repetition, zero-progress cutoffs, and recursion
-cutoffs. Its ActionIR evaluator is intentionally narrow and dispatch-facing;
-full helper families, BACKTRACK behavior, tracing/diagnostics, staged function
-execution, and corpus-output parity remain later Dart leaves.
+cutoffs. Its core ActionIR evaluator now also preserves scalar, array, hash,
+null, boolean, and number shapes through assignment and wrapper snapshots;
+supports `array(...)`, `hash(...)`, `copy(...)`, `set(hash(...), ...)`,
+hash-index mutation, nested reads, non-numeric map keys, and regex literals as
+values; and exposes the named/map/length/start/end `entry_*` / `match_*`
+capture helper family. String/scalar helper breadth, numeric helpers, broader
+array/hash helper families, value-block/control/tree traversal helpers,
+BACKTRACK behavior, tracing/diagnostics, staged function execution, and
+corpus-output parity remain later Dart leaves.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

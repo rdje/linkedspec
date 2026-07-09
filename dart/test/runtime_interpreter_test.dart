@@ -159,6 +159,104 @@ Top::OR{1}
       'E',
     ]);
   });
+
+  test('preserves scalar array hash stores and nested reads', () {
+    final engine = _engine(r'''
+Top::
+ /x/
+ E {
+   set(value, "ok");
+   set(array(items), ["a"]);
+   items += value;
+   set(hash(meta), { "k" : "v" });
+   meta["n"] = 2;
+   payload = { "children" : [ { "name" : "zero" }, { "name" : value } ] };
+   return(hash(
+     "items", copy(array(items)),
+     "meta", copy(hash(meta)),
+     "name", payload["children"][1]["name"]
+   ))
+ }
+''');
+
+    final result = engine.parse('x');
+
+    expect(result.value, {
+      'items': ['a', 'ok'],
+      'meta': {'k': 'v', 'n': 2},
+      'name': 'ok',
+    });
+  });
+
+  test('reads variable-held shapes through wrappers and indexed vars', () {
+    final engine = _engine(r'''
+Top::
+ /x/
+ E {
+   value = "ok";
+   items = [value, "tail"];
+   meta = { "key" : value };
+   return(array(items[0], copy(items), hash(meta), meta["key"]))
+ }
+''');
+
+    final result = engine.parse('x');
+
+    expect(result.value, [
+      'ok',
+      ['ok', 'tail'],
+      {'key': 'ok'},
+      'ok',
+    ]);
+  });
+
+  test('exposes named capture maps and source positions', () {
+    final engine = _engine(r'''
+Top::
+ /(?<name>\w+)=(\d+)/
+ E {
+   return(hash(
+     "entry_text", entry_text(),
+     "match_text", match_text(),
+     "entry_groups", entry_groups(),
+     "match_group_1", match_group(1),
+     "entry_named", entry_named(name),
+     "match_named", match_named(name),
+     "entry_has", entry_has(name),
+     "match_has", match_has(name),
+     "entry_map", entry_map(),
+     "match_map", match_map(),
+     "entry_len", entry_len(),
+     "match_len", match_len(),
+     "entry_start", entry_start_pos(),
+     "entry_end", entry_end_pos(),
+     "match_start", match_start_pos(),
+     "match_end", match_end_pos()
+   ))
+ }
+''');
+
+    final result = engine.parse('xx key=42');
+
+    expect(result.value, {
+      'entry_text': 'key=42',
+      'match_text': 'key=42',
+      'entry_groups': ['key', '42'],
+      'match_group_1': '42',
+      'entry_named': 'key',
+      'match_named': 'key',
+      'entry_has': true,
+      'match_has': true,
+      'entry_map': {'name': 'key'},
+      'match_map': {'name': 'key'},
+      'entry_len': 6,
+      'match_len': 6,
+      'entry_start': 3,
+      'entry_end': 9,
+      'match_start': 3,
+      'match_end': 9,
+    });
+  });
 }
 
 LinkedSpecRuntimeEngine _engine(String source) {

@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.1` extended Dart runtime core values and capture reads in
+  `dart/lib/src/runtime/interpreter.dart`. The interpreter now preserves scalar, array, hash, null, boolean, and
+  number shapes through assignment and wrapper snapshots; supports `hash(...)`, `set(hash(...), ...)`, hash-index
+  mutation, nested reads, non-numeric map indexing, aggregate `copy(...)`, and the named/map/length/start/end
+  `entry_*` / `match_*` helper family. The next helper frontier is `.4.3.2` for string/scalar and numeric helper
+  families; broader array/hash helper families, value-block/control/tree traversal helpers, BACKTRACK, tracing, and
+  corpus output parity remain later Dart leaves.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.0` split the Dart runtime helper/value work before code.
   The active helper frontier is now `.4.3.1` for core runtime value/store behavior and capture helper reads,
   followed by string/number helpers, array helpers, hash helpers, value-block/control/tree traversal helpers, and

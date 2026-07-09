@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **251** facts · **1758** question keys.
+> **252** facts · **1765** question keys.
 
 ## Questions → fact
 
@@ -243,10 +243,17 @@
 - "does Dart reserve built-in helper names for functions" -> [dart-actionir-contract-resolver](docs/knowledge/dart-actionir-contract-resolver.md) · 2026-07-09 · reverify: `cd dart && dart test test/action_contracts_test.dart test/action_ast_parser_test.dart test/spec_parser_test.dart test/spec_validator_test.dart && dart analyze --fatal-infos --fatal-warnings && cd .. && ! rg -n 'retired|replacement map|non-current helper spelling table' dart`
 - "does Dart resolve ActionIR helper contracts" -> [dart-actionir-contract-resolver](docs/knowledge/dart-actionir-contract-resolver.md) · 2026-07-09 · reverify: `cd dart && dart test test/action_contracts_test.dart test/action_ast_parser_test.dart test/spec_parser_test.dart test/spec_validator_test.dart && dart analyze --fatal-infos --fatal-warnings && cd .. && ! rg -n 'retired|replacement map|non-current helper spelling table' dart`
 - "does Dart run lifecycle blocks" -> [dart-runtime-rule-interpreter](docs/knowledge/dart-runtime-rule-interpreter.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime preserve scalar array hash null boolean number shapes" -> [dart-runtime-core-value-capture-helpers](docs/knowledge/dart-runtime-core-value-capture-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support capture position helpers" -> [dart-runtime-core-value-capture-helpers](docs/knowledge/dart-runtime-core-value-capture-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support entry_map and match_map" -> [dart-runtime-core-value-capture-helpers](docs/knowledge/dart-runtime-core-value-capture-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart runtime support entry_named and match_named" -> [dart-runtime-core-value-capture-helpers](docs/knowledge/dart-runtime-core-value-capture-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart stitch function body AST into registry records" -> [dart-function-registry](docs/knowledge/dart-function-registry.md) · 2026-07-09 · reverify: `cd dart && dart test test/function_registry_test.dart test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart strict syntax exist" -> [dart-frontend-validation](docs/knowledge/dart-frontend-validation.md) · 2026-07-09 · reverify: `cd dart && dart test test/spec_validator_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart support action-edge dispatch" -> [dart-runtime-rule-interpreter](docs/knowledge/dart-runtime-rule-interpreter.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart support blind-call dispatch" -> [dart-runtime-rule-interpreter](docs/knowledge/dart-runtime-rule-interpreter.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart support hash index assignment" -> [dart-runtime-core-value-capture-helpers](docs/knowledge/dart-runtime-core-value-capture-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart support hash stores in the runtime interpreter" -> [dart-runtime-core-value-capture-helpers](docs/knowledge/dart-runtime-core-value-capture-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "does Dart support nested access reads" -> [dart-runtime-core-value-capture-helpers](docs/knowledge/dart-runtime-core-value-capture-helpers.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart support retv and accumulators" -> [dart-runtime-rule-interpreter](docs/knowledge/dart-runtime-rule-interpreter.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart support seek and consume regex matching" -> [dart-runtime-matching-state](docs/knowledge/dart-runtime-matching-state.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_matching_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "does Dart use text to AST for helper code" -> [dart-actionir-ast-parser](docs/knowledge/dart-actionir-ast-parser.md) · 2026-07-09 · reverify: `cd dart && dart test test/action_ast_parser_test.dart && dart analyze --fatal-infos --fatal-warnings`
@@ -1974,6 +1981,15 @@ _Dart user-function registry preserves staged sidecars and resolves exact-arity 
 - **evidence:** `DART-BACKEND-PARITY.3.3 adds dart/lib/src/action/function_registry.dart, exports UserFunctionRegistry/UserFunctionEntry/UserFunctionCallResolution, and threads optional registry input through the ActionIR contract resolver. test/function_registry_test.dart verifies ordered entries, staged body_parse_job exposure, body_payload/body_ast preservation, exact match, wrong arity, missing name, and duplicate-name rejection. test/action_contracts_test.dart verifies exact-arity user calls classify before helper fallback and wrong arity reports user_function_arity_mismatch.`
 - **reverify:** `cd dart && dart test test/function_registry_test.dart test/action_contracts_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - **source:** [`docs/knowledge/dart-function-registry.md`](docs/knowledge/dart-function-registry.md)
+
+### dart-runtime-core-value-capture-helpers
+_Dart runtime core value stores and capture helpers preserve typed shapes_
+
+- **answers:** does Dart runtime preserve scalar array hash null boolean number shapes | does Dart support hash stores in the runtime interpreter | does Dart support hash index assignment | does Dart support nested access reads | does Dart runtime support entry_named and match_named | does Dart runtime support entry_map and match_map | does Dart runtime support capture position helpers
+- **date:** 2026-07-09 · **status:** current
+- **evidence:** `DART-BACKEND-PARITY.4.3.1 extends dart/lib/src/runtime/interpreter.dart and test/runtime_interpreter_test.dart. Focused tests prove scalar assignment, array append, hash reset/mutation, typed wrapper snapshots, variable-held array/hash reads, non-numeric map keys, nested access reads, bare capture-name lookup, named capture maps, compact capture groups, and start/end position helper values.`
+- **reverify:** `cd dart && dart test test/runtime_interpreter_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- **source:** [`docs/knowledge/dart-runtime-core-value-capture-helpers.md`](docs/knowledge/dart-runtime-core-value-capture-helpers.md)
 
 ### dart-runtime-matching-state
 _Dart runtime matching state supports seek/consume regex matching, char offsets, and entry/local match registers_

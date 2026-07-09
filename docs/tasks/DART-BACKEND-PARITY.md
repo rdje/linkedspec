@@ -337,14 +337,35 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.4.3.0 - split Dart runtime helper families`
 
 - ID: `DART-BACKEND-PARITY.4.3.1`
-  Status: `pending`
+  Status: `done`
   Goal: Centralize Dart runtime value/store behavior and capture helper reads.
   Acceptance: Runtime values preserve scalar/array/hash/null/boolean/number JSON shapes; typed array/hash
     wrappers and bare reads follow the helper catalog; scalar assignment, array append, hash-index assignment,
     nested access reads, `copy`, `array`, `hash`, `entry_*`, `match_*`, and capture position helpers have focused
     runtime tests.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: focused `dart test test/runtime_interpreter_test.dart`; `dart format --set-exit-if-changed .`;
+    `dart analyze --fatal-infos --fatal-warnings`; full `dart test`;
+    `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`;
+    `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build;
+    memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`.
+  Findings:
+    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `.4.2` intentionally kept the embedded ActionIR evaluator
+      dispatch-facing. It could return, push arrays, concatenate simple values, and read basic captures, but
+      `dart/lib/src/runtime/interpreter.dart` did not yet own hash stores, direct map reads, aggregate wrapper
+      snapshots, hash-index mutation, named-capture maps, or capture position helpers.
+    - [x] **FIX** — Added runtime hash storage and `hash(...)` / `set(hash(...), ...)`, hash-index and nested
+      assignment evaluation, map-aware indexed/nested reads, typed array/hash snapshot reads through `array(...)`,
+      `hash(...)`, and `copy(...)`, regex-literal value evaluation, and the named/map/length/start/end
+      `entry_*` / `match_*` helper family.
+    - [x] **ADDRESSED (verified)** — `test/runtime_interpreter_test.dart` now proves scalar assignment, array
+      append, hash reset/mutation, typed wrapper snapshots, variable-held array/hash reads, non-numeric map
+      indexing, nested access reads, bare capture-name lookup, named capture maps, compact capture groups, and
+      char-position helper values.
+    - [x] **NO REGRESSION** — Dart format/analyze/full tests, corpus runner, CLI help, and mdBook build pass.
+    - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
+      `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker rows, Knowledge Map
+      facts, `docs/TASK_TREE.md`, and this task tree are updated.
+  Commit: `DART-BACKEND-PARITY.4.3.1 - add Dart runtime value capture helpers`
 
 - ID: `DART-BACKEND-PARITY.4.3.2`
   Status: `pending`
@@ -503,7 +524,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `DART-BACKEND-PARITY.4.3.0` | `done` | Broad helper/value runtime work is split before code. |
-| 2 | `DART-BACKEND-PARITY.4.3.1` | `pending` | Implement core runtime value/store behavior and capture helper reads. |
+| 2 | `DART-BACKEND-PARITY.4.3.1` | `done` | Core runtime value/store behavior and capture helper reads are implemented. |
+| 3 | `DART-BACKEND-PARITY.4.3.2` | `pending` | Implement string/scalar and numeric helper families. |
 
 ## Dart Toolchain And Package Layout
 

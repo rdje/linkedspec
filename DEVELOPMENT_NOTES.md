@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.4.3.1 — Dart runtime value/capture helpers):
+  Extended the Dart interpreter's core ActionIR evaluator in `dart/lib/src/runtime/interpreter.dart`. The runtime
+  now keeps separate scalar, array, and hash working stores while preserving typed JSON shapes for scalar
+  assignment, array append, hash-index mutation, direct shape literals, and wrapper snapshots. `set(hash(name), ...)`
+  and `hash(name)` read/write hash stores, `array(name)` / `hash(name)` also snapshot variable-held list/map
+  values, `copy(name)` snapshots aggregate stores when the bare name is type-implying, and indexed/nested reads
+  support string-key map access. The capture helper surface now includes `entry_named`, `match_named`,
+  `entry_has`, `match_has`, `entry_map`, `match_map`, `entry_len`, `match_len`, `entry_start_pos`,
+  `entry_end_pos`, `match_start_pos`, and `match_end_pos`; bare capture-name arguments such as
+  `entry_named(name)` are interpreted as capture keys, not scalar variable reads. Focused runtime interpreter tests
+  cover these value/store/capture seams. Next frontier is `.4.3.2`, string/scalar and numeric helper families.
+
 - 2026-07-09 (DART-BACKEND-PARITY.4.3.0 — split Dart runtime helper families):
   Split the broad Dart runtime value/helper work before implementation. `.4.3.1` owns core runtime
   value/store behavior and capture helper reads; `.4.3.2` owns string/scalar and numeric helpers; `.4.3.3`
