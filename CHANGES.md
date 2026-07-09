@@ -1,6 +1,29 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.3.2 — add Dart ActionIR contract resolver
+
+**Scope:** Dart ActionIR contract resolution, shared current helper/control name validation, tests,
+docs, mdBook, and Knowledge Map sync.
+
+**Change:** Added `dart/lib/src/action/action_contracts.dart` and exported
+`resolveActionBlockContracts(...)`, `resolveActionStatementContracts(...)`,
+`resolveActionExpressionContracts(...)`, `canonicalActionHelperName(...)`, and
+`isKnownActionIrCallName(...)`. The resolver walks typed ActionIR calls, receiver methods, structural
+assignments, structured controls, nested arguments, block values, shapes, and access expressions, records
+current canonical helper/control contracts, and reports non-current helper-looking calls as
+`unknown_helper` without host-language fallback. `validateSpec(...)` now shares the same current
+helper/control name table for function-name collision checks. Dart source carries no non-current helper
+spelling tables or replacement maps. Added `test/action_contracts_test.dart` and cleaned Dart fixtures
+that still used non-current helper spellings as variable names or source examples.
+
+**Validation:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+`dart test`, `dart run bin/linkedspec_dart.dart --help`,
+`dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`, and
+`dart run bin/corpus_runner.dart --help` pass. A Dart-tree non-current-spelling scan is clean. `git diff --check`,
+memory architecture, Knowledge Map regeneration/check, task-tree metadata, doctrine gates, and
+`mdbook build docs/linkedspec-book` pass.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.3.1 — add Dart ActionIR AST parser
 
 **Scope:** Dart helper/action AST data model, source parser, tests, docs, and frontier advancement.

@@ -38,6 +38,18 @@ export 'src/action/action_ast.dart'
         ActionStringLiteralExpr,
         ActionUndefExpr,
         ActionVariableExpr;
+export 'src/action/action_contracts.dart'
+    show
+        ActionContractDiagnostic,
+        ActionContractResolution,
+        ActionResolvedContract,
+        canonicalActionHelperName,
+        isKnownActionIrCallName,
+        knownActionIrCallNames,
+        resolveActionBlockContracts,
+        resolveActionExpressionContracts,
+        resolveActionStatementContracts,
+        supportedActionIrCallNames;
 export 'src/action/action_parser.dart'
     show parseActionBlock, parseActionExpression, parseActionStatement;
 export 'src/ast/spec_ast.dart'

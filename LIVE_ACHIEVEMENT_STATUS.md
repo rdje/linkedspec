@@ -7,6 +7,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.3.2 — add Dart ActionIR contract resolver**
+  (DONE current helper/control contract resolution; function registry compilation still deferred).
+
+  **Change:** Added Dart ActionIR contract resolver APIs over typed helper/action AST nodes. The resolver
+  records current canonical helper/control contracts for calls, receiver methods, structural assignments,
+  controls, nested arguments, block values, shapes, and access expressions. Function registry validation now
+  shares the same current helper/control name table, and non-current helper-looking calls diagnose
+  generically instead of falling through to host-language calls.
+
+  **Boundary:** This is still frontend/contract resolution. It does not build the staged function-body
+  registry, compile specs into runtime state, execute helper/action semantics, or compare corpus outputs.
+  The Dart frontier is `DART-BACKEND-PARITY.3.3`; the director also requested a separately owned Perl/Rust
+  source purge after this dirty Dart leaf is committed clean.
+
+  **Verification:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+  `dart test`, `dart run bin/linkedspec_dart.dart --help`,
+  `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`,
+  `dart run bin/corpus_runner.dart --help`, Dart-tree non-current-spelling scan, `git diff --check`, memory
+  architecture, Knowledge Map, task-tree metadata, doctrine gates, and mdBook build pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.3.1 — add Dart ActionIR AST parser**
   (DONE typed helper/action AST parser; helper-contract mapping and runtime behavior still deferred).
 
@@ -16,8 +36,8 @@ Current execution status for interruption-safe batch workflow recovery.
   expression-valued blocks, attached control flow, receiver chains, trailing block arguments, and standalone
   value-drop statements. Unsupported expressions remain structural `raw_perl` nodes for later diagnostics.
 
-  **Boundary:** This is parsing only. It does not map helper families to canonical contracts, reject
-  unknown/retired helpers, build compiled-spec state, execute helper/action semantics, or compare corpus
+  **Boundary:** This is parsing only. It does not map helper families to canonical contracts, emit
+  current-contract diagnostics, build compiled-spec state, execute helper/action semantics, or compare corpus
   outputs. The next frontier is `DART-BACKEND-PARITY.3.2`.
 
   **Verification:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,

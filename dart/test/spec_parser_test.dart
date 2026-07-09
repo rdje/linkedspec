@@ -87,7 +87,7 @@ Helper: /h/
     final spec = parseSpec(r'''
 Top::
  -> item
-  .if(scalar(on))
+  .if(on)
     .push(item, out)
   .else()
     .return_undef()
@@ -98,7 +98,7 @@ item: /x/
 
     final edge = spec.topRule!.body.single.kind as ActionEdgeBodyElementKind;
     expect(edge.fluentChain.map((call) => (call.method, call.args)), [
-      ('if', 'scalar(on)'),
+      ('if', 'on'),
       ('push', 'item, out'),
       ('else', ''),
       ('return_undef', ''),

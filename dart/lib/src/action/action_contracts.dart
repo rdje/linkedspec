@@ -1,0 +1,986 @@
+import 'action_ast.dart';
+
+final class ActionContractResolution {
+  const ActionContractResolution({
+    required this.contracts,
+    required this.diagnostics,
+  });
+
+  final List<ActionResolvedContract> contracts;
+  final List<ActionContractDiagnostic> diagnostics;
+
+  bool get ok => diagnostics.isEmpty;
+
+  ActionJsonObject toJson() {
+    return {
+      'ok': ok,
+      'contracts': [for (final contract in contracts) contract.toJson()],
+      'diagnostics': [
+        for (final diagnostic in diagnostics) diagnostic.toJson(),
+      ],
+    };
+  }
+}
+
+final class ActionResolvedContract {
+  const ActionResolvedContract({
+    required this.sourceName,
+    required this.canonicalName,
+    required this.family,
+    required this.surface,
+    required this.source,
+    required this.sourceSpan,
+    required this.positionalArgCount,
+    required this.keywordArgCount,
+  });
+
+  final String sourceName;
+  final String canonicalName;
+  final String family;
+  final String surface;
+  final String source;
+  final ActionSourceSpan sourceSpan;
+  final int positionalArgCount;
+  final int keywordArgCount;
+
+  bool get canonicalized => sourceName != canonicalName;
+
+  ActionJsonObject toJson() {
+    return {
+      'source_name': sourceName,
+      'canonical_name': canonicalName,
+      'family': family,
+      'surface': surface,
+      'source': source,
+      'source_span': sourceSpan.toJson(),
+      'positional_arg_count': positionalArgCount,
+      'keyword_arg_count': keywordArgCount,
+      if (canonicalized) 'canonicalized': true,
+    };
+  }
+}
+
+final class ActionContractDiagnostic {
+  const ActionContractDiagnostic({
+    required this.code,
+    required this.message,
+    required this.source,
+    required this.sourceSpan,
+    this.helperName,
+  });
+
+  final String code;
+  final String message;
+  final String source;
+  final ActionSourceSpan sourceSpan;
+  final String? helperName;
+
+  ActionJsonObject toJson() {
+    return {
+      'code': code,
+      'message': message,
+      'source': source,
+      'source_span': sourceSpan.toJson(),
+      if (helperName != null) 'helper_name': helperName,
+    };
+  }
+}
+
+ActionContractResolution resolveActionBlockContracts(ActionBlock block) {
+  final resolver = _ActionContractResolver();
+  resolver.visitBlock(block);
+  return resolver.finish();
+}
+
+ActionContractResolution resolveActionStatementContracts(
+  ActionStatement statement,
+) {
+  final resolver = _ActionContractResolver();
+  resolver.visitStatement(statement);
+  return resolver.finish();
+}
+
+ActionContractResolution resolveActionExpressionContracts(ActionExpr expr) {
+  final resolver = _ActionContractResolver();
+  resolver.visitExpr(expr);
+  return resolver.finish();
+}
+
+String canonicalActionHelperName(String name) {
+  return _numericAliasCanonicalNames[name] ??
+      _currentAliasCanonicalNames[name] ??
+      name;
+}
+
+bool isKnownActionIrCallName(String name) {
+  return knownActionIrCallNames.contains(name);
+}
+
+const knownActionIrCallNames = <String>{
+  ...supportedActionIrCallNames,
+  ...numericAliasActionIrCallNames,
+  ...currentAliasActionIrCallNames,
+};
+
+const supportedActionIrCallNames = <String>{
+  'and',
+  'array',
+  'BACKTRACK',
+  'call',
+  'capture_between',
+  'capture_from',
+  'capture_len_between',
+  'capture_len_from',
+  'capture_rest',
+  'capture_rest_from',
+  'capture_rest_len',
+  'capture_rest_len_from',
+  'capture_slice',
+  'capture_slice_col',
+  'capture_slice_len',
+  'capture_slice_line',
+  'capture_slice_pos',
+  'capture_slice_until_cursor',
+  'capture_slice_until_cursor_len',
+  'capture_take',
+  'capture_take_between',
+  'capture_take_between_len',
+  'capture_take_len',
+  'capture_take_len_from',
+  'capture_take_rest',
+  'capture_take_rest_from',
+  'capture_take_rest_len',
+  'capture_take_rest_len_from',
+  'capture_take_until_cursor',
+  'capture_take_until_cursor_from',
+  'capture_take_until_cursor_len',
+  'capture_take_until_cursor_len_from',
+  'capture_until_cursor_from',
+  'capture_until_cursor_len_from',
+  'case',
+  'cat',
+  'coalesce',
+  'coalesce_nonempty',
+  'concat_arrays',
+  'contains',
+  'contains_substr',
+  'copy',
+  'count',
+  'count_keys',
+  'cursor_col',
+  'cursor_line',
+  'cursor_pos',
+  'cursor_rest',
+  'cursor_rest_len',
+  'default',
+  'drop_back',
+  'drop_front',
+  'drop_keys',
+  'else',
+  'elseif',
+  'endcase',
+  'endif',
+  'ends_with',
+  'endswitch',
+  'entry_col',
+  'entry_end_pos',
+  'entry_group',
+  'entry_groups',
+  'entry_has',
+  'entry_len',
+  'entry_line',
+  'entry_map',
+  'entry_named',
+  'entry_start_line',
+  'entry_start_pos',
+  'entry_text',
+  'exit_now',
+  'filter_match',
+  'filter_nonempty',
+  'first',
+  'flat',
+  'flat_array',
+  'flat_hash',
+  'has_key',
+  'hash',
+  'IBACKTRACK',
+  'if',
+  'index_of',
+  'input_end_col',
+  'input_end_line',
+  'input_end_pos',
+  'input_len',
+  'input_slice',
+  'input_text',
+  'is_defined',
+  'is_empty',
+  'is_nonempty',
+  'is_undefined',
+  'join_values',
+  'last',
+  'length',
+  'lowercase',
+  'lowercase_each',
+  'map_leaves',
+  'mark_copy',
+  'mark_exists',
+  'mark_here',
+  'mark_input_end',
+  'mark_input_start',
+  'mark_pos',
+  'match_col',
+  'match_end_pos',
+  'match_group',
+  'match_groups',
+  'match_has',
+  'match_len',
+  'match_line',
+  'match_map',
+  'match_named',
+  'match_start_pos',
+  'match_text',
+  'matches',
+  'merge_hash',
+  'next',
+  'not',
+  'num_abs',
+  'num_add',
+  'num_avg',
+  'num_ceil',
+  'num_clamp',
+  'num_div',
+  'num_eq',
+  'num_floor',
+  'num_ge',
+  'num_gt',
+  'num_le',
+  'num_lt',
+  'num_max',
+  'num_median',
+  'num_min',
+  'num_mod',
+  'num_mul',
+  'num_ne',
+  'num_range',
+  'num_round',
+  'num_sub',
+  'num_sum',
+  'or',
+  'pick_keys',
+  'print',
+  'print_each',
+  'push',
+  'reduce_leaves',
+  'rename_key',
+  'replace_substr',
+  'return',
+  'return_undef',
+  'reversed',
+  'rm_prefix',
+  'rm_suffix',
+  'say',
+  'set',
+  'set_key',
+  'slice',
+  'sorted',
+  'sorted_keys',
+  'sorted_values',
+  'split',
+  'split_each',
+  'split_tagged_records',
+  'start_capture_slice',
+  'starts_with',
+  'str_eq',
+  'str_ge',
+  'str_gt',
+  'str_le',
+  'str_lt',
+  'str_ne',
+  'substr',
+  'switch',
+  'take',
+  'take_last',
+  'trim',
+  'trim_each',
+  'uniq',
+  'uppercase',
+  'uppercase_each',
+  'walk_leaves',
+  'while',
+  'with',
+};
+
+const numericAliasActionIrCallNames = <String>{
+  '+',
+  '-',
+  '*',
+  '/',
+  '%',
+  '==',
+  '!=',
+  '>',
+  '>=',
+  '<',
+  '<=',
+  'abs',
+  'add',
+  'avg',
+  'ceil',
+  'clamp',
+  'div',
+  'eq',
+  'floor',
+  'ge',
+  'gt',
+  'le',
+  'lt',
+  'max',
+  'median',
+  'min',
+  'mod',
+  'mul',
+  'ne',
+  'range',
+  'round',
+  'sub',
+  'sum',
+};
+
+const currentAliasActionIrCallNames = <String>{
+  '=',
+  'elif',
+  'i',
+  'otherwise',
+  'when',
+};
+
+const _numericAliasCanonicalNames = <String, String>{
+  '+': 'num_add',
+  '-': 'num_sub',
+  '*': 'num_mul',
+  '/': 'num_div',
+  '%': 'num_mod',
+  '==': 'num_eq',
+  '!=': 'num_ne',
+  '>': 'num_gt',
+  '>=': 'num_ge',
+  '<': 'num_lt',
+  '<=': 'num_le',
+  'abs': 'num_abs',
+  'add': 'num_add',
+  'avg': 'num_avg',
+  'ceil': 'num_ceil',
+  'clamp': 'num_clamp',
+  'div': 'num_div',
+  'eq': 'num_eq',
+  'floor': 'num_floor',
+  'ge': 'num_ge',
+  'gt': 'num_gt',
+  'le': 'num_le',
+  'lt': 'num_lt',
+  'max': 'num_max',
+  'median': 'num_median',
+  'min': 'num_min',
+  'mod': 'num_mod',
+  'mul': 'num_mul',
+  'ne': 'num_ne',
+  'range': 'num_range',
+  'round': 'num_round',
+  'sub': 'num_sub',
+  'sum': 'num_sum',
+};
+
+const _currentAliasCanonicalNames = <String, String>{
+  '=': 'set',
+  'elif': 'elseif',
+  'i': 'if',
+  'otherwise': 'else',
+  'when': 'if',
+};
+
+const _stringHelpers = <String>{
+  'cat',
+  'coalesce',
+  'coalesce_nonempty',
+  'contains_substr',
+  'ends_with',
+  'length',
+  'lowercase',
+  'matches',
+  'replace_substr',
+  'rm_prefix',
+  'rm_suffix',
+  'starts_with',
+  'substr',
+  'trim',
+  'uppercase',
+};
+
+const _arrayHelpers = <String>{
+  'array',
+  'concat_arrays',
+  'contains',
+  'copy',
+  'count',
+  'drop_back',
+  'drop_front',
+  'filter_match',
+  'filter_nonempty',
+  'first',
+  'flat',
+  'flat_array',
+  'index_of',
+  'is_empty',
+  'is_nonempty',
+  'join_values',
+  'last',
+  'lowercase_each',
+  'push',
+  'reversed',
+  'slice',
+  'sorted',
+  'split',
+  'split_each',
+  'split_tagged_records',
+  'take',
+  'take_last',
+  'trim_each',
+  'uniq',
+  'uppercase_each',
+  'walk_leaves',
+  'map_leaves',
+  'reduce_leaves',
+};
+
+const _hashHelpers = <String>{
+  'copy',
+  'count_keys',
+  'drop_keys',
+  'flat',
+  'flat_hash',
+  'has_key',
+  'hash',
+  'merge_hash',
+  'pick_keys',
+  'rename_key',
+  'set_key',
+  'sorted_keys',
+  'sorted_values',
+  'walk_leaves',
+  'map_leaves',
+  'reduce_leaves',
+};
+
+const _controlHelpers = <String>{
+  'and',
+  'case',
+  'call',
+  'default',
+  'else',
+  'elseif',
+  'endcase',
+  'endif',
+  'endswitch',
+  'exit_now',
+  'if',
+  'next',
+  'not',
+  'or',
+  'return',
+  'return_undef',
+  'switch',
+  'while',
+  'with',
+};
+
+const _captureMarkHelpers = <String>{
+  'capture_between',
+  'capture_from',
+  'capture_len_between',
+  'capture_len_from',
+  'capture_rest',
+  'capture_rest_from',
+  'capture_rest_len',
+  'capture_rest_len_from',
+  'capture_slice',
+  'capture_slice_col',
+  'capture_slice_len',
+  'capture_slice_line',
+  'capture_slice_pos',
+  'capture_slice_until_cursor',
+  'capture_slice_until_cursor_len',
+  'capture_take',
+  'capture_take_between',
+  'capture_take_between_len',
+  'capture_take_len',
+  'capture_take_len_from',
+  'capture_take_rest',
+  'capture_take_rest_from',
+  'capture_take_rest_len',
+  'capture_take_rest_len_from',
+  'capture_take_until_cursor',
+  'capture_take_until_cursor_from',
+  'capture_take_until_cursor_len',
+  'capture_take_until_cursor_len_from',
+  'capture_until_cursor_from',
+  'capture_until_cursor_len_from',
+  'mark_copy',
+  'mark_exists',
+  'mark_here',
+  'mark_input_end',
+  'mark_input_start',
+  'mark_pos',
+  'start_capture_slice',
+};
+
+const _entryMatchHelpers = <String>{
+  'entry_col',
+  'entry_end_pos',
+  'entry_group',
+  'entry_groups',
+  'entry_has',
+  'entry_len',
+  'entry_line',
+  'entry_map',
+  'entry_named',
+  'entry_start_line',
+  'entry_start_pos',
+  'entry_text',
+  'match_col',
+  'match_end_pos',
+  'match_group',
+  'match_groups',
+  'match_has',
+  'match_len',
+  'match_line',
+  'match_map',
+  'match_named',
+  'match_start_pos',
+  'match_text',
+};
+
+const _inputHelpers = <String>{
+  'cursor_col',
+  'cursor_line',
+  'cursor_pos',
+  'cursor_rest',
+  'cursor_rest_len',
+  'input_end_col',
+  'input_end_line',
+  'input_end_pos',
+  'input_len',
+  'input_slice',
+  'input_text',
+};
+
+const _runtimeHelpers = <String>{'BACKTRACK', 'IBACKTRACK'};
+
+const _outputHelpers = <String>{'print', 'print_each', 'say'};
+
+String _familyForCanonical(String canonicalName) {
+  if (canonicalName.startsWith('num_')) {
+    return 'numeric';
+  }
+  if (canonicalName.startsWith('str_')) {
+    return 'string';
+  }
+  if (_controlHelpers.contains(canonicalName)) {
+    return 'control';
+  }
+  if (_captureMarkHelpers.contains(canonicalName)) {
+    return 'capture_mark';
+  }
+  if (_entryMatchHelpers.contains(canonicalName)) {
+    return 'entry_match';
+  }
+  if (_inputHelpers.contains(canonicalName)) {
+    return 'input_cursor';
+  }
+  if (_stringHelpers.contains(canonicalName)) {
+    return 'string';
+  }
+  if (_arrayHelpers.contains(canonicalName) &&
+      _hashHelpers.contains(canonicalName)) {
+    return 'container';
+  }
+  if (_arrayHelpers.contains(canonicalName)) {
+    return 'array';
+  }
+  if (_hashHelpers.contains(canonicalName)) {
+    return 'hash';
+  }
+  if (_outputHelpers.contains(canonicalName)) {
+    return 'output';
+  }
+  if (_runtimeHelpers.contains(canonicalName)) {
+    return 'runtime';
+  }
+  if (canonicalName == 'set') {
+    return 'assignment';
+  }
+  return 'helper';
+}
+
+final class _ActionContractResolver {
+  final List<ActionResolvedContract> _contracts = [];
+  final List<ActionContractDiagnostic> _diagnostics = [];
+
+  ActionContractResolution finish() {
+    return ActionContractResolution(
+      contracts: List.unmodifiable(_contracts),
+      diagnostics: List.unmodifiable(_diagnostics),
+    );
+  }
+
+  void visitBlock(ActionBlock block) {
+    for (final statement in block.statements) {
+      visitStatement(statement);
+    }
+  }
+
+  void visitStatement(ActionStatement statement) {
+    visitExpr(statement.expr);
+  }
+
+  void visitExpr(ActionExpr expr) {
+    switch (expr) {
+      case ActionCallExpr(:final name, :final args):
+        _resolveHelperCall(
+          name: name,
+          source: expr.source,
+          sourceSpan: expr.sourceSpan,
+          surface: 'function',
+          args: args,
+        );
+        _visitArgs(args);
+      case ActionFluentChainExpr(:final receiver, :final calls):
+        visitExpr(receiver);
+        for (final call in calls) {
+          _resolveHelperCall(
+            name: call.method,
+            source: call.source,
+            sourceSpan: call.sourceSpan,
+            surface: 'receiver_method',
+            args: call.args,
+          );
+          _visitArgs(call.args);
+        }
+      case ActionAssignScalarExpr(:final value):
+        _recordStructuralContract(
+          sourceName: '=',
+          canonicalName: 'set',
+          family: 'assignment',
+          surface: 'assignment',
+          source: expr.source,
+          sourceSpan: expr.sourceSpan,
+          positionalArgCount: 2,
+        );
+        visitExpr(value);
+      case ActionAssignArrayAppendExpr(:final value):
+        _recordStructuralContract(
+          sourceName: '+=',
+          canonicalName: 'push',
+          family: 'array',
+          surface: 'assignment',
+          source: expr.source,
+          sourceSpan: expr.sourceSpan,
+          positionalArgCount: 2,
+        );
+        visitExpr(value);
+      case ActionAssignHashIndexExpr(:final key, :final value):
+        _recordStructuralContract(
+          sourceName: '[]=',
+          canonicalName: 'set_key',
+          family: 'hash',
+          surface: 'assignment',
+          source: expr.source,
+          sourceSpan: expr.sourceSpan,
+          positionalArgCount: 3,
+        );
+        visitExpr(key);
+        visitExpr(value);
+      case ActionAssignNestedAccessExpr(:final segments, :final value):
+        _recordStructuralContract(
+          sourceName: 'nested_access=',
+          canonicalName: 'nested_access_assignment',
+          family: 'assignment',
+          surface: 'assignment',
+          source: expr.source,
+          sourceSpan: expr.sourceSpan,
+          positionalArgCount: 2,
+        );
+        _visitAccessSegments(segments);
+        visitExpr(value);
+      case ActionBlockValueExpr(:final block):
+        visitBlock(block);
+      case ActionArrayLiteralExpr(:final items):
+        for (final item in items) {
+          visitExpr(item);
+        }
+      case ActionHashLiteralExpr(:final entries):
+        for (final entry in entries) {
+          visitExpr(entry.key);
+          visitExpr(entry.value);
+        }
+      case ActionIndexedVarExpr(:final index):
+        visitExpr(index);
+      case ActionNestedAccessExpr(:final segments):
+        _visitAccessSegments(segments);
+      case ActionControlIfExpr(
+        :final canonicalKeyword,
+        :final keyword,
+        :final args,
+        :final body,
+      ):
+        _recordStructuralContract(
+          sourceName: keyword,
+          canonicalName: canonicalKeyword,
+          family: 'control',
+          surface: 'control',
+          source: expr.source,
+          sourceSpan: expr.sourceSpan,
+          positionalArgCount: _positionalArgCount(args),
+          keywordArgCount: _keywordArgCount(args),
+        );
+        _visitArgs(args);
+        if (body != null) {
+          visitBlock(body);
+        }
+      case ActionControlElseExpr(
+        :final canonicalKeyword,
+        :final keyword,
+        :final args,
+        :final body,
+      ):
+        _recordStructuralContract(
+          sourceName: keyword,
+          canonicalName: canonicalKeyword,
+          family: 'control',
+          surface: 'control',
+          source: expr.source,
+          sourceSpan: expr.sourceSpan,
+          positionalArgCount: _positionalArgCount(args),
+          keywordArgCount: _keywordArgCount(args),
+        );
+        _visitArgs(args);
+        if (body != null) {
+          visitBlock(body);
+        }
+      case ActionControlMarkerExpr(
+        :final canonicalKeyword,
+        :final keyword,
+        :final args,
+      ):
+        _recordStructuralContract(
+          sourceName: keyword,
+          canonicalName: canonicalKeyword,
+          family: 'control',
+          surface: 'control',
+          source: expr.source,
+          sourceSpan: expr.sourceSpan,
+          positionalArgCount: _positionalArgCount(args),
+          keywordArgCount: _keywordArgCount(args),
+        );
+        _visitArgs(args);
+      case ActionControlWhileExpr(
+        :final canonicalKeyword,
+        :final keyword,
+        :final args,
+        :final body,
+      ):
+        _recordStructuralContract(
+          sourceName: keyword,
+          canonicalName: canonicalKeyword,
+          family: 'control',
+          surface: 'control',
+          source: expr.source,
+          sourceSpan: expr.sourceSpan,
+          positionalArgCount: _positionalArgCount(args),
+          keywordArgCount: _keywordArgCount(args),
+        );
+        _visitArgs(args);
+        if (body != null) {
+          visitBlock(body);
+        }
+      case ActionControlSwitchExpr(
+        :final canonicalKeyword,
+        :final keyword,
+        :final args,
+        :final cases,
+        :final defaultCase,
+        :final body,
+      ):
+        _recordStructuralContract(
+          sourceName: keyword,
+          canonicalName: canonicalKeyword,
+          family: 'control',
+          surface: 'control',
+          source: expr.source,
+          sourceSpan: expr.sourceSpan,
+          positionalArgCount: _positionalArgCount(args),
+          keywordArgCount: _keywordArgCount(args),
+        );
+        _visitArgs(args);
+        if (cases.isNotEmpty || defaultCase != null) {
+          for (final item in cases) {
+            visitExpr(item);
+          }
+          if (defaultCase != null) {
+            visitExpr(defaultCase);
+          }
+        } else if (body != null) {
+          visitBlock(body);
+        }
+      case ActionControlCaseExpr(
+        :final canonicalKeyword,
+        :final keyword,
+        :final args,
+        :final body,
+      ):
+        _recordStructuralContract(
+          sourceName: keyword,
+          canonicalName: canonicalKeyword,
+          family: 'control',
+          surface: 'control',
+          source: expr.source,
+          sourceSpan: expr.sourceSpan,
+          positionalArgCount: _positionalArgCount(args),
+          keywordArgCount: _keywordArgCount(args),
+        );
+        _visitArgs(args);
+        if (body != null) {
+          visitBlock(body);
+        }
+      case ActionControlDefaultExpr(
+        :final canonicalKeyword,
+        :final keyword,
+        :final args,
+        :final body,
+      ):
+        _recordStructuralContract(
+          sourceName: keyword,
+          canonicalName: canonicalKeyword,
+          family: 'control',
+          surface: 'control',
+          source: expr.source,
+          sourceSpan: expr.sourceSpan,
+          positionalArgCount: _positionalArgCount(args),
+          keywordArgCount: _keywordArgCount(args),
+        );
+        _visitArgs(args);
+        if (body != null) {
+          visitBlock(body);
+        }
+      case ActionRawExpr(:final reason):
+        _diagnostics.add(
+          ActionContractDiagnostic(
+            code: 'raw_perl',
+            message:
+                'unsupported ActionIR expression remains raw_perl: $reason',
+            source: expr.source,
+            sourceSpan: expr.sourceSpan,
+          ),
+        );
+      case ActionVariableExpr():
+      case ActionStringLiteralExpr():
+      case ActionNumberLiteralExpr():
+      case ActionBooleanLiteralExpr():
+      case ActionRegexLiteralExpr():
+      case ActionUndefExpr():
+        break;
+    }
+  }
+
+  void _resolveHelperCall({
+    required String name,
+    required String source,
+    required ActionSourceSpan sourceSpan,
+    required String surface,
+    required List<ActionArgument> args,
+  }) {
+    if (!isKnownActionIrCallName(name)) {
+      _diagnostics.add(
+        ActionContractDiagnostic(
+          code: 'unknown_helper',
+          message:
+              "unknown helper '$name' is not part of the canonical ActionIR helper contract",
+          helperName: name,
+          source: source,
+          sourceSpan: sourceSpan,
+        ),
+      );
+      return;
+    }
+    final canonicalName = canonicalActionHelperName(name);
+    _contracts.add(
+      ActionResolvedContract(
+        sourceName: name,
+        canonicalName: canonicalName,
+        family: _familyForCanonical(canonicalName),
+        surface: surface,
+        source: source,
+        sourceSpan: sourceSpan,
+        positionalArgCount: _positionalArgCount(args),
+        keywordArgCount: _keywordArgCount(args),
+      ),
+    );
+  }
+
+  void _recordStructuralContract({
+    required String sourceName,
+    required String canonicalName,
+    required String family,
+    required String surface,
+    required String source,
+    required ActionSourceSpan sourceSpan,
+    required int positionalArgCount,
+    int keywordArgCount = 0,
+  }) {
+    _contracts.add(
+      ActionResolvedContract(
+        sourceName: sourceName,
+        canonicalName: canonicalName,
+        family: family,
+        surface: surface,
+        source: source,
+        sourceSpan: sourceSpan,
+        positionalArgCount: positionalArgCount,
+        keywordArgCount: keywordArgCount,
+      ),
+    );
+  }
+
+  void _visitArgs(List<ActionArgument> args) {
+    for (final arg in args) {
+      visitExpr(arg.value);
+    }
+  }
+
+  void _visitAccessSegments(List<ActionAccessSegment> segments) {
+    for (final segment in segments) {
+      if (segment is ActionIndexAccessSegment) {
+        visitExpr(segment.expr);
+      }
+    }
+  }
+}
+
+int _positionalArgCount(List<ActionArgument> args) {
+  var count = 0;
+  for (final arg in args) {
+    if (arg is ActionPositionalArgument) {
+      count += 1;
+    }
+  }
+  return count;
+}
+
+int _keywordArgCount(List<ActionArgument> args) {
+  var count = 0;
+  for (final arg in args) {
+    if (arg is ActionKeywordArgument) {
+      count += 1;
+    }
+  }
+  return count;
+}

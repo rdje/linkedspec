@@ -995,12 +995,12 @@ List<_TextSpan> _splitTopLevelStatements(String text, int baseStart) {
     }
     segmentStart = index + 1;
   }
-  final tail = _trimWithOffsets(
+  final finalPiece = _trimWithOffsets(
     text.substring(segmentStart),
     baseStart + segmentStart,
   );
-  if (tail.text.isNotEmpty) {
-    pieces.add(tail);
+  if (finalPiece.text.isNotEmpty) {
+    pieces.add(finalPiece);
   }
   return pieces;
 }
@@ -1029,12 +1029,12 @@ List<_TextSpan> _splitTopLevelOn(String text, int baseStart, String separator) {
       segmentStart = index + 1;
     }
   }
-  final tail = _trimWithOffsets(
+  final finalPiece = _trimWithOffsets(
     text.substring(segmentStart),
     baseStart + segmentStart,
   );
-  if (tail.text.isNotEmpty) {
-    pieces.add(tail);
+  if (finalPiece.text.isNotEmpty) {
+    pieces.add(finalPiece);
   }
   return pieces;
 }

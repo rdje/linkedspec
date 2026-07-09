@@ -187,12 +187,18 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.3.1 - add Dart ActionIR AST parser`
 
 - ID: `DART-BACKEND-PARITY.3.2`
-  Status: `pending`
+  Status: `done`
   Goal: Map helper/action AST to canonical helper contracts and diagnostics.
-  Acceptance: Supported helper families resolve through typed nodes; unknown/retired helpers diagnose
-    instead of falling back to host-language calls.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance: Current helper/control families resolve through typed nodes; non-current helper-looking
+    calls diagnose generically instead of falling back to host-language calls. The Dart variant must not
+    encode non-current helper spelling tables or replacement maps.
+  Verification: **PASS 2026-07-09.** `dart/lib/src/action/action_contracts.dart` resolves typed ActionIR
+    calls, receiver methods, structural assignments, structured controls, nested arguments, block values,
+    shapes, and access expressions into current canonical helper/control contracts. Function registry
+    validation now shares the current helper/control name table through `isKnownActionIrCallName(...)`.
+    Non-current helper-looking calls produce `unknown_helper`; `raw_perl` AST nodes stay diagnostic-only.
+    A Dart-tree non-current-spelling scan is clean.
+  Commit: `DART-BACKEND-PARITY.3.2 - add Dart ActionIR contract resolver`
 
 - ID: `DART-BACKEND-PARITY.3.3`
   Status: `pending`
@@ -355,7 +361,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-BACKEND-PARITY.3.2` | `pending` | The ActionIR parser exists; map typed helper/action nodes to canonical helper contracts and diagnostics before compiled-state work. |
+| 1 | `DART-BACKEND-PARITY.3.3` | `pending` | The ActionIR parser and current-contract resolver exist; build function registry and staged function-body parse-job records before compiled-state work. |
 
 ## Dart Toolchain And Package Layout
 
@@ -516,15 +522,19 @@ The `.3.1` ActionIR AST parser layer adds:
 - `2026-07-09`: Dart `.2.4` consumes the AST node shape returned by `specs/user_function_definition.spec`
   and does not raw-scan `fn` source. Executing that owning spec inside Dart remains a later runtime capability.
 - `2026-07-09`: Dart `.3.1` adds typed helper/action AST parsing only. Canonical helper-family mapping,
-  unresolved/retired-helper diagnostics, and compiled-state construction remain `.3.2` and later.
+  current-contract diagnostics, and compiled-state construction remain `.3.2` and later.
+- `2026-07-09`: Dart `.3.2` resolves typed ActionIR calls and structural forms against the current
+  helper/control contract table only. Non-current helper-looking calls diagnose as `unknown_helper`; Dart
+  does not carry non-current helper spelling tables or replacement maps.
 
 ## Open Questions
 
-- None blocking `.3.2`. Typed ActionIR nodes are available; helper-contract mapping is next.
+- None blocking `.3.3`. Helper-contract mapping is available; function registry and staged body parse-job
+  records are next.
 
 ## Blockers
 
-- None known before `.3.2` helper-contract mapping.
+- None known before `.3.3` function-registry work.
 
 ## Verification Log
 
@@ -539,6 +549,7 @@ The `.3.1` ActionIR AST parser layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.2.3` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Validator tests cover focused failures plus shipped specs and rule-only corpus specs. |
 | `2026-07-09` | `DART-BACKEND-PARITY.2.4` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. Function-shell projection consumes spec-returned nodes, preserves staged sidecars, and does not raw-scan `fn` source. |
 | `2026-07-09` | `DART-BACKEND-PARITY.3.1` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. ActionIR parser tests cover typed helper/action AST node families and structural `raw_perl` fallback. |
+| `2026-07-09` | `DART-BACKEND-PARITY.3.2` | `dart format --set-exit-if-changed .`; `dart analyze --fatal-infos --fatal-warnings`; `dart test`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`; `dart run bin/corpus_runner.dart --help`; Dart-tree non-current-spelling scan; `git diff --check`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; mdBook build. | PASS. ActionIR contract resolver records current canonical helper/control contracts and generic diagnostics without non-current spelling tables. |
 
 ## Commit Log
 
@@ -553,6 +564,7 @@ The `.3.1` ActionIR AST parser layer adds:
 | `DART-BACKEND-PARITY.2.3` | `DART-BACKEND-PARITY.2.3 - add Dart frontend validation` | Source-AST validation; function-shell/runtime behavior deferred. |
 | `DART-BACKEND-PARITY.2.4` | `DART-BACKEND-PARITY.2.4 - integrate Dart function shell projection` | Spec-returned function-definition projection; `.2` frontend container closes. |
 | `DART-BACKEND-PARITY.3.1` | `DART-BACKEND-PARITY.3.1 - add Dart ActionIR AST parser` | Typed helper/action AST parser; helper-contract mapping remains `.3.2`. |
+| `DART-BACKEND-PARITY.3.2` | `DART-BACKEND-PARITY.3.2 - add Dart ActionIR contract resolver` | Current helper/control contract resolution; function registry uses the shared current-name table. |
 
 ## Changelog
 
@@ -573,3 +585,5 @@ The `.3.1` ActionIR AST parser layer adds:
   and frontier advances to `.3.1` for helper/action AST parsing.
 - `2026-07-09`: Added Dart ActionIR AST node types and parser for helper/action source; frontier advances
   to `.3.2` for canonical helper-contract mapping and diagnostics.
+- `2026-07-09`: Added Dart ActionIR contract resolution over typed helper/action AST nodes; frontier
+  advances to `.3.3` for function registry and staged function-body parse jobs.

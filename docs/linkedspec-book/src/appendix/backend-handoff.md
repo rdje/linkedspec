@@ -272,8 +272,14 @@ indexed/nested access, array/hash shape literals, scalar/array/hash/nested
 assignments, expression-valued blocks, attached `if`/`when`/`elseif`/`else` /
 `otherwise`, `while`, `switch`/`case`/`default`, receiver-dot fluent chains, and
 trailing block arguments. Unsupported expressions remain explicit `raw_perl`
-nodes for the next diagnostic layer; helper-family resolution, retired-helper
-diagnostics, compiled state, and runtime execution remain later Dart leaves.
+nodes for diagnostics. Dart also has ActionIR contract resolution:
+`resolveActionBlockContracts(...)`, `resolveActionStatementContracts(...)`, and
+`resolveActionExpressionContracts(...)` walk the typed nodes and record current
+canonical helper/control contracts for calls, receiver methods, structural
+assignments, controls, nested arguments, block values, shapes, and access
+expressions. Non-current helper-looking calls produce generic diagnostics rather
+than host-language fallback. Function registry construction, compiled state, and
+runtime execution remain later Dart leaves.
 
 ### Step 6: Validate Against the Test Corpus
 Run your backend against the manifest-backed corpus under

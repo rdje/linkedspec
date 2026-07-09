@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.3.2` added Dart ActionIR contract resolution in
+  `dart/lib/src/action/action_contracts.dart`. `resolveActionBlockContracts(...)`,
+  `resolveActionStatementContracts(...)`, and `resolveActionExpressionContracts(...)` walk typed ActionIR
+  calls, receiver methods, structural assignments, structured controls, nested arguments, block values,
+  shapes, and access expressions, then record current canonical helper/control contracts or generic
+  diagnostics. `dart/lib/src/validation/spec_validator.dart` now shares the current helper/control name
+  table through `isKnownActionIrCallName(...)` for function-name collision checks. Function registry
+  construction and compiled-spec state remain `.3.3` and later.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.3.1` added the Dart ActionIR AST parser.
   `dart/lib/src/action/action_ast.dart` defines typed action blocks, statements, expressions, arguments,
   access segments, literals, assignments, receiver chains, block values, and structured-control nodes.
@@ -13,7 +21,7 @@ This document is the current high-level technical reading of the project shape. 
   regex literals, variables, indexed/nested access, array/hash literals, scalar/array/hash/nested assignments,
   expression-valued blocks, attached `if`/`when`/`elseif`/`else`/`otherwise`, `while`, `switch`/`case`/`default`,
   receiver-dot fluent chains, trailing block arguments, standalone value-drop statements, and structural
-  `raw_perl` fallback for unsupported expressions. Helper-contract mapping and diagnostics remain `.3.2`.
+  `raw_perl` fallback for unsupported expressions.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.2.4` closed the Dart frontend container by
   adding `dart/lib/src/parser/user_function_definition_shell.dart`. Dart now consumes the
   `function_definition` / `function_definition_error` nodes returned by `specs/user_function_definition.spec`,

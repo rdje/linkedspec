@@ -765,15 +765,19 @@ _AttachedCode? _parseAttachedFluentWhenChain(
       break;
     }
 
-    final tail = afterOtherwise.trimLeft();
-    if (!tail.startsWith('{')) {
+    final remainderAfterOtherwise = afterOtherwise.trimLeft();
+    if (!remainderAfterOtherwise.startsWith('{')) {
       break;
     }
 
     final blockOriginIndex = remainingOriginIndex;
     final currentFloorIndex = cursor.index;
     final blockCursor = _LineCursor(blockOriginIndex);
-    final otherwiseBody = _consumeBlockFromRest(lines, blockCursor, tail);
+    final otherwiseBody = _consumeBlockFromRest(
+      lines,
+      blockCursor,
+      remainderAfterOtherwise,
+    );
     if (otherwiseBody == null) {
       break;
     }

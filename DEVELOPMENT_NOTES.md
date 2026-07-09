@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (DART-BACKEND-PARITY.3.2 — Dart ActionIR contract resolver):
+  Added `dart/lib/src/action/action_contracts.dart` and exported the resolver APIs from the public Dart
+  library. Dart now resolves typed ActionIR calls, receiver methods, structural assignments, structured
+  controls, nested arguments, block values, shape literals, and access expressions into current canonical
+  helper/control contracts. Non-current helper-looking calls produce a generic `unknown_helper` diagnostic;
+  unsupported parser expressions remain `raw_perl` diagnostics. `spec_validator.dart` now imports the
+  shared current helper/control name table through `isKnownActionIrCallName(...)`, so user function names
+  collide with active built-ins without maintaining a second validator list. The Dart variant intentionally
+  carries no non-current helper spelling table or replacement map. `test/action_contracts_test.dart` covers
+  canonicalization, structural assignment contracts, unknown/raw diagnostics, and function-registry collisions.
+  `.3.3` owns the staged function-body registry and exact-arity resolution work.
+
 - 2026-07-09 (DART-BACKEND-PARITY.3.1 — Dart ActionIR AST parser):
   Added `dart/lib/src/action/action_ast.dart` and `dart/lib/src/action/action_parser.dart`, exported from the
   public Dart library. Dart now parses helper/action source into typed ActionIR nodes for action blocks,

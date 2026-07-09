@@ -79,7 +79,8 @@ Top-level directories and files:
   - Current state: package metadata, public library entrypoint, CLI smoke entrypoint, manifest/corpus
     IO scaffold, source-level AST/data types, staged parse-job sidecars, core `.spec` rule parser,
     frontend validation, spec-returned function-definition projection, typed ActionIR/helper-action AST
-    parsing, and smoke/parser/validation tests; helper-contract mapping and runtime semantics land under
+    parsing, ActionIR contract resolution, and smoke/parser/validation tests; function-registry compilation
+    and runtime semantics land under
     `DART-BACKEND-PARITY`.
 - `.github/workflows/`
   - GitHub Actions automation.

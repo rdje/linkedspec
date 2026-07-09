@@ -18,21 +18,22 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.3.1` — added Dart typed ActionIR node classes and
-  `parseActionBlock(...)` / `parseActionStatement(...)` / `parseActionExpression(...)` for helper/action
-  source: calls, literals, access, shape literals, assignments, block values, attached controls, receiver
-  chains, trailing blocks, standalone value-drop statements, and structural `raw_perl` fallback.
-- prior_leaf: `DART-BACKEND-PARITY.2.4` — added Dart projection for the `function_definition` /
-  `function_definition_error` AST shape returned by `specs/user_function_definition.spec`, preserving
-  staged sidecars and stripping returned spans before rule parsing without raw-scanning `fn` source.
+- latest_completed_leaf: `DART-BACKEND-PARITY.3.2` — added Dart ActionIR contract resolution in
+  `dart/lib/src/action/action_contracts.dart`. Typed ActionIR calls, receiver methods, structural
+  assignments, controls, nested arguments, block values, shapes, and access expressions now resolve to
+  current canonical helper/control contracts or generic diagnostics; Dart carries no non-current helper
+  spelling tables.
+- prior_leaf: `DART-BACKEND-PARITY.3.1` — added Dart typed ActionIR node classes and parser entrypoints
+  for helper/action source, including structural `raw_perl` fallback for unsupported expressions.
 - latest_commit: HEAD containing this pointer should be
-  `DART-BACKEND-PARITY.3.1 - add Dart ActionIR AST parser`; parent before this slice is
-  `DART-BACKEND-PARITY.2.4 - integrate Dart function shell projection`.
+  `DART-BACKEND-PARITY.3.2 - add Dart ActionIR contract resolver`; parent before this slice is
+  `DART-BACKEND-PARITY.3.1 - add Dart ActionIR AST parser`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `DART-BACKEND-PARITY`; current frontier `DART-BACKEND-PARITY.3.2` pending.
-- next_action: from a clean repo, map Dart helper/action AST nodes to canonical helper contracts and diagnostics,
-  keeping supported helper families structural and reporting unknown/retired helpers without host fallback.
+- active_work_unit: `DART-BACKEND-PARITY`; current Dart frontier `DART-BACKEND-PARITY.3.3` pending.
+- next_action: after `.3.2` is committed and the repo is clean, honor the 2026-07-09 director directive:
+  create/find an owning task-tree for purging non-current helper spelling support from Perl/Rust source
+  before editing those codebases; then return to Dart `.3.3` function-registry work.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, task-tree index,
   ROADMAP/ROADMAP_V2, mdBook status/backend-handoff/formal grammar/helper chapters, relevant ADR/KM facts,
   and codebase architecture/source inventory for the Dart AST data-type slice.
@@ -42,5 +43,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.3.1` pointer commit lands; do not pivot unless the repo is
+- blockers: none. in_flight_uncommitted: none once the `DART-BACKEND-PARITY.3.2` pointer commit lands; do not pivot unless the repo is
   handoff-ready.

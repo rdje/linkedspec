@@ -54,10 +54,10 @@ void main() {
   });
 
   test('parses assignments and assignment receiver chains', () {
-    final scalar =
+    final assignment =
         parseActionExpression('items = [value]') as ActionAssignScalarExpr;
-    expect(scalar.name, 'items');
-    expect(scalar.value, isA<ActionArrayLiteralExpr>());
+    expect(assignment.name, 'items');
+    expect(assignment.value, isA<ActionArrayLiteralExpr>());
 
     final append =
         parseActionExpression('items += value') as ActionAssignArrayAppendExpr;
