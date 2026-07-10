@@ -10,6 +10,8 @@ answers:
   - does Julia corpus execution preserve structured diagnostics
   - how do Julia controlled fixtures parse staged function shells
   - what is JULIA-BACKEND-PARITY.6.1
+  - how is the Julia 99 fixture corpus rollout split
+  - what is JULIA-BACKEND-PARITY.6.2.0
 date: 2026-07-10
 status: current
 tags: [julia, corpus, runtime, diagnostics, trace, user-functions, JULIA-BACKEND-PARITY]
@@ -39,6 +41,11 @@ separation with no trailing semicolons.
 
 This is a library execution surface, not full corpus parity. The Julia CLI and corpus-runner `--execute` command
 remain deliberately unavailable, and the checked-in 99-fixture manifest is owned by later `.6` batches.
+
+`JULIA-BACKEND-PARITY.6.2.0` splits that rollout before behavior changes: `.6.2.1` owns bounded selection/reporting,
+`.6.2.2` owns starter fixtures 0–39, `.6.2.3` owns non-function fixtures 40–67, `.6.2.4` owns shipped-spec/parser-
+smoke fixtures 68–98, and `.6.2.5` owns top-level function fixtures through the spec-defined shell. These mirror
+the stable Dart workload windows but do not assume Dart and Julia share failure mechanisms.
 
 Related facts: [[julia-corpus-manifest-io]], [[julia-core-spec-parser]], [[julia-compiled-spec-state]],
 [[julia-diagnostics-trace-boundary]], [[julia-user-function-runtime-execution]],

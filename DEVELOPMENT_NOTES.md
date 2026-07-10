@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.0 — Julia corpus rollout split):
+  The shipped manifest is divided by recoverable mechanism boundaries rather than treated as one 99-case fix
+  batch. Bounded selection/reporting lands first so every later window is reproducible. The first 40 fixtures own
+  proof-edge/autoexist/core terse behavior; 40–67 own non-function helper/control/receiver/tree breadth; 68–98 own
+  shipped-spec/parser-smoke behavior; and top-level function fixtures have a separate spec-defined shell owner.
+  The ranges mirror the proven Dart rollout only as workload boundaries—Julia must diagnose its own results, retain
+  shared oracle evidence, and never inherit Dart-specific fixes without a Julia failure mechanism.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.1 — Julia controlled corpus execution):
   Corpus execution is a composition layer, not another parser/runtime path. The harness first reuses strict
   manifest validation, then records one immutable-style result per manifest fixture while continuing after

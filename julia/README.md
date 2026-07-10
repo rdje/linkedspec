@@ -129,7 +129,9 @@ fixture through parse/compile/runtime, compares runtime output to the expected J
 optional trace lines and structured runtime diagnostics, and records every failure without aborting later fixtures.
 The optional `spec_parser` callback is a controlled seam for already-projected staged function shells; the default
 is direct rule-only `parse_spec(...)`. The full suite passes with 715 assertions and status
-`runtime-controlled-corpus`. `.6.1` is closed and `.6.2` owns recoverable shipped-manifest batches.
+`runtime-controlled-corpus`. `.6.2.0` splits the 99-fixture rollout into bounded selection/reporting, starter
+0–39, middle non-function 40–67, shipped-spec/parser-smoke 68–98, and spec-defined function-shell owners;
+`.6.2.1` selection/reporting is active.
 
 Library example:
 

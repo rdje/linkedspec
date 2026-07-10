@@ -106,8 +106,9 @@ Top-level directories and files:
     Neutral staged function payload/job/AST and descriptor metadata shapes are locked through the same executable
     compiled state. Controlled library corpus execution now composes manifest validation, parse/compile/runtime,
     one-level wrapped structural comparison, optional trace capture, structured diagnostics, and all-fixture
-    failure reporting. The full suite passes with 715 assertions, status is `runtime-controlled-corpus`, `.6.1` is
-    closed, and `.6.2` recoverable manifest batches are active.
+    failure reporting. The full suite passes with 715 assertions and status `runtime-controlled-corpus`. `.6.2.0`
+    splits the 99-fixture rollout into bounded selection/reporting plus starter, middle, shipped-spec, and
+    spec-defined function-shell batches; `.6.2.1` selection/reporting is active.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

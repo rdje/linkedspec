@@ -325,7 +325,9 @@ registry order, public descriptor metadata, and runtime output. Full tests pass 
 `runtime-user-functions` at that boundary. `.6.1` adds controlled library corpus execution with public result
 records, manifest-to-runtime composition, one-level wrapped structural comparison, optional trace lines,
 structured diagnostic retention, and all-fixture reporting. Full tests pass with 715 assertions; status is
-`runtime-controlled-corpus`, `.6.1` is closed, and `.6.2` recoverable manifest batches are active.
+`runtime-controlled-corpus`. `.6.2.0` splits the 99-fixture rollout into bounded selection/reporting, starter
+0–39, middle non-function 40–67, shipped-spec/parser-smoke 68–98, and spec-defined function-shell owners;
+`.6.2.1` is active.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -444,7 +446,8 @@ scalar/array/hash store set, restores caller stores in `finally`, returns the fi
 `return(...)`, composes compatible receiver chains, drops standalone results, and diagnoses exact-arity and
 direct/mutual recursion failures. `.5.3` locks the neutral descriptor shape through runtime without a production
 projection correction. `.6.1` adds the controlled corpus library surface described below; package status is now
-`runtime-controlled-corpus`, the full suite passes with 715 assertions, and `.6.2` owns manifest batches.
+`runtime-controlled-corpus`, and the full suite passes with 715 assertions. `.6.2.0` splits the manifest rollout
+before behavior changes; `.6.2.1` bounded library/runner selection and reporting is active.
 
 ### Julia Controlled Corpus Execution
 
@@ -543,6 +546,11 @@ function-definition nodes available. Ordinary calls use direct rule-only `parse_
 top-level function-shell execution, fixture selection, CLI reporting, and the full checked-in 99-fixture gate are
 later `.6` work. Accordingly, `julia/bin/corpus_runner.jl --execute` still rejects the request rather than
 overclaiming corpus parity.
+
+The rollout is explicitly recoverable. `.6.2.1` owns named and bounded selection/reporting; `.6.2.2` owns starter
+fixtures 0–39; `.6.2.3` owns non-function helper/control fixtures 40–67; `.6.2.4` owns shipped-spec/parser-smoke
+fixtures 68–98; and `.6.2.5` owns spec-defined top-level function shells. Those are workload boundaries, not an
+assumption that Julia shares Dart's historical failure causes.
 
 ### Dart Backend Commands
 

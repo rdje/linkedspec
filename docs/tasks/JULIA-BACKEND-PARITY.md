@@ -437,8 +437,65 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 - ID: `JULIA-BACKEND-PARITY.6.2`
   Status: `active`
   Goal: Expand to the current manifest in recoverable corpus batches.
+  Children: `.6.2.0`, `.6.2.1`, `.6.2.2`, `.6.2.3`, `.6.2.4`, `.6.2.5`
   Acceptance: Each batch either passes on Julia or records a narrowly owned root-cause leaf with Perl/Rust/Dart
     oracle evidence; no fixture is weakened to fit Julia.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.0`
+  Status: `done`
+  Goal: Split shipped-corpus expansion into narrowly owned batches.
+  Acceptance: `.6.2` has child leaves for bounded executable selection/reporting, starter fixtures, middle
+    helper/control/runtime fixtures, shipped-spec/parser-smoke fixtures, and spec-defined top-level function shells
+    before any parser/runtime behavior changes or broad diagnostic run.
+  Verification: `PASS` - `.6.2` now has separate bounded execution/reporting, starter 0–39, middle non-function
+    40–67, shipped-spec/parser-smoke 68–98, and spec-defined top-level function-shell owners before diagnostic or
+    behavior changes. mdBook, memory, Knowledge Map, task metadata, doctrine, and whitespace gates pass; Julia
+    source/runtime behavior remains the green 715-assertion `runtime-controlled-corpus` boundary.
+  Commit: `JULIA-BACKEND-PARITY.6.2.0 - split Julia corpus expansion batches`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.1`
+  Status: `active`
+  Goal: Add opt-in executable corpus selection and reporting.
+  Acceptance: Julia can execute named or safely bounded fixture subsets through the library and corpus runner,
+    report pass/fail details for every selected fixture, and keep default validation-only behavior while full
+    manifest parity remains incomplete.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.2`
+  Status: `pending`
+  Goal: Close the starter proof-edge, autoexist, and core terse runtime batch.
+  Acceptance: Manifest fixtures `0..39` either pass unchanged on Julia or each mismatch is routed to a narrowly
+    owned root-cause child with Perl/Rust/Dart oracle evidence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.3`
+  Status: `pending`
+  Goal: Close the middle helper, control, receiver-chain, and tree traversal batch.
+  Acceptance: Non-function manifest fixtures `40..67` covering value blocks, controls, helper composition,
+    receivers, numeric/string/array/hash helpers, with-blocks, and tree traversal pass unchanged or are routed with
+    oracle evidence; top-level `fn` fixtures remain owned by `.6.2.5`.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.4`
+  Status: `pending`
+  Goal: Close the shipped-spec and parser-smoke corpus batch.
+  Acceptance: Manifest fixtures `68..98` covering tclite, lispish, recursive top rules, hlink, portmap, EBNF,
+    spec.spec, regdef, tablegrep, simenv, VHDL/library, history, and plugin smokes pass unchanged or each failure
+    cluster is split before implementation with Perl/Rust/Dart oracle evidence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.5`
+  Status: `pending`
+  Goal: Execute top-level user-function corpus fixtures through the spec-defined shell.
+  Acceptance: Julia obtains neutral `function_definition` nodes from `specs/user_function_definition.spec`, feeds
+    them through staged body projection, and passes the routed `fn` fixtures without introducing a Julia raw
+    function scanner or a fixture-only semantic shortcut.
   Verification: `pending`
   Commit: `pending`
 
@@ -497,7 +554,40 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 4 | `JULIA-BACKEND-PARITY.5.2` | `done` | Registered exact-arity functions execute through isolated runtime scopes. |
 | 5 | `JULIA-BACKEND-PARITY.5.3` | `done` | Neutral function/parse-job/stitched-AST shapes are locked through runtime. |
 | 6 | `JULIA-BACKEND-PARITY.6.1` | `done` | Controlled fixtures prove value, dispatch, lifecycle, function, trace, diagnostic, and boundary behavior. |
-| 7 | `JULIA-BACKEND-PARITY.6.2` | `active` | Split and execute the current manifest in recoverable batches. |
+| 7 | `JULIA-BACKEND-PARITY.6.2.0` | `done` | Shipped-corpus rollout is split into recoverable execution and behavior batches before code. |
+| 8 | `JULIA-BACKEND-PARITY.6.2.1` | `active` | Add bounded library selection and opt-in corpus-runner reporting. |
+
+## `JULIA-BACKEND-PARITY.6.2.0` Corpus Expansion Split Result
+
+Planning evidence recorded on 2026-07-10:
+
+- `.6.2.1` owns named/offset/limit library selection plus bounded opt-in corpus-runner execution/reporting while
+  validation-only default behavior remains intact.
+- `.6.2.2` owns manifest fixtures 0–39: proof-edge, autoexist, core store/mutation, primitive helper, and early terse
+  runtime behavior.
+- `.6.2.3` owns non-function fixtures 40–67: value blocks, controls, helper composition, receivers, helper-family
+  breadth, with-blocks, and tree traversal.
+- `.6.2.4` owns fixtures 68–98: shipped-spec and parser-smoke behavior. It must run a diagnostic window and split
+  observed Julia failure clusters before implementation if the window is not already green.
+- `.6.2.5` owns top-level `fn` fixtures through `specs/user_function_definition.spec` and staged body projection;
+  no Julia raw scanner or fixture-specific semantic shortcut is allowed.
+- These ranges reuse the proven Dart rollout only as stable workload boundaries. Julia behavior changes require a
+  reproduced Julia failure and shared oracle evidence; Dart-specific fixes are not assumed to apply.
+
+## `JULIA-BACKEND-PARITY.6.2.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.6.2` originally represented the full 99-fixture rollout as one leaf, too broad for
+  per-slice commits and recoverable root-cause ownership.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The task tree lacked a selection/reporting prerequisite and separate owners
+  for early terse, middle helper/control, shipped-spec smoke, and spec-defined function-shell mechanisms.
+- [x] **FIX** — Added `.6.2.1` through `.6.2.5` with explicit ranges, behavior boundaries, and oracle/no-weakening
+  constraints before any parser/runtime change or broad diagnostic execution.
+- [x] **ADDRESSED (verified)** — The current frontier is the single safe prerequisite `.6.2.1`; every subsequent
+  manifest family has one durable owner and can split again from measured Julia evidence.
+- [x] **NO REGRESSION** — Planning/docs only; Julia source, fixtures, runtime output, and the green 715-assertion
+  `runtime-controlled-corpus` implementation are unchanged.
+- [x] **LOCKSTEP** — Task/index/roadmaps, Julia README, mdBook status/handoff, Knowledge Map, architecture/live docs,
+  and `MEMORY.md` agree that `.6.2.1` bounded selection/reporting is next.
 
 ## `JULIA-BACKEND-PARITY.6.1` Controlled Corpus Execution Result
 
@@ -1622,6 +1712,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.5.2` | Full Julia `Pkg.test()`; Julia CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Nine focused assertions prove eager args, fresh typed stores, final/local returns, value/receiver/drop positions, exact arity, and direct/mutual recursion diagnostics; total Julia tests pass with 671 assertions and `.5.3` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.5.3` | Full Julia `Pkg.test()`; Julia CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Twenty focused assertions prove neutral staged function fields through parsed source order, compiled jobs, descriptor payload/job/AST records, metadata order/count, and runtime output; total Julia tests pass with 691 assertions, `.5` closes, and `.6.1` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.1` | Full Julia `Pkg.test()`; Julia CLI status/help and manifest validation; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Twenty-four focused assertions prove controlled scalar/nested/dispatch/lifecycle/function/boundary execution, trace/diagnostic retention, wrapped output comparison, mismatch reporting, and continuation; total Julia tests pass with 715 assertions and `.6.2` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.0` | Planning-only task decomposition; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. The 99-fixture rollout is split into bounded execution/reporting, starter 0–39, middle non-function 40–67, shipped-spec 68–98, and spec-defined function-shell owners; source behavior remains unchanged and `.6.2.1` becomes active. |
 
 ## Commit Log
 
@@ -1658,14 +1749,19 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.5.2` | `JULIA-BACKEND-PARITY.5.2 - execute Julia user functions` | Exact-arity registered value/receiver/drop execution with isolated typed stores and recursion diagnostics; descriptor parity advances to `.5.3`. |
 | `JULIA-BACKEND-PARITY.5.3` | `JULIA-BACKEND-PARITY.5.3 - preserve Julia staged descriptor shapes` | End-to-end neutral staged function descriptor/runtime proof; `.5` closes and corpus execution advances to `.6.1`. |
 | `JULIA-BACKEND-PARITY.6.1` | `JULIA-BACKEND-PARITY.6.1 - add Julia controlled corpus execution` | Library corpus composition, result/query records, wrapped comparison, trace/diagnostic retention, and all-fixture reporting; manifest batches advance to `.6.2`. |
+| `JULIA-BACKEND-PARITY.6.2.0` | `JULIA-BACKEND-PARITY.6.2.0 - split Julia corpus expansion batches` | Planning-only split into selection/reporting, starter, middle, shipped-spec, and function-shell owners; `.6.2.1` becomes active. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.2.0` corpus rollout decomposition. The 99-fixture manifest now has bounded
+  selection/reporting, starter 0–39, middle non-function 40–67, shipped-spec/parser-smoke 68–98, and spec-defined
+  top-level function-shell owners. No behavior changed; the executable boundary remains 715 assertions at
+  `runtime-controlled-corpus`, and `.6.2.1` is active.
 - `2026-07-10`: Completed `.6.1` controlled corpus execution. Julia now validates then executes every fixture
   through parse/compile/runtime, compares the expected value after one backend-neutral output wrap, captures
   optional trace lines and structured runtime diagnostics, and records failures without aborting later fixtures.
   Twenty-four focused assertions bring full `Pkg.test()` to 715 and status `runtime-controlled-corpus`; CLI
-  `--execute` remains later work and `.6.2` recoverable manifest batches are active.
+  `--execute` remains later work; `.6.2.0` has since split the rollout and `.6.2.1` is active.
 - `2026-07-10`: Completed `.5.3` staged descriptor-shape proof. A 20-assertion fixture preserves two spec-returned
   functions through normalized staged payload/jobs, immutable body-AST stitching, compiled registry and descriptor
   metadata, then executes the same state. `Pkg.test()` passes with 691 assertions; no production correction was

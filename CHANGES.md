@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.0 — split Julia corpus expansion batches
+
+**Scope:** Planning-only decomposition of the Julia 99-fixture rollout, task/frontier metadata, roadmap/live docs,
+mdBook handoff/status, Knowledge Map, architecture, and resume pointer.
+
+**Change:** Split `.6.2` before shipped-corpus behavior changes into `.6.2.1` bounded library/CLI selection and
+reporting, `.6.2.2` fixtures 0–39, `.6.2.3` non-function fixtures 40–67, `.6.2.4` shipped-spec/parser-smoke fixtures
+68–98, and `.6.2.5` spec-defined top-level function-shell execution. Each implementation batch must pass unchanged
+fixtures or split observed mismatches with Perl/Rust/Dart oracle evidence; Julia-only fixture weakening and raw
+function scanning remain prohibited.
+
+**Validation:** Planning/docs only; Julia behavior and the green 715-assertion `.6.1` boundary are unchanged.
+mdBook, memory architecture, Knowledge Map, task metadata, doctrine, and whitespace gates pass; `.6.2.1` is next.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.1 — add Julia controlled corpus execution
 
 **Scope:** Julia library-level corpus execution/results, wrapped output comparison, trace/diagnostic retention,
