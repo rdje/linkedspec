@@ -76,6 +76,10 @@ batches are green. The permanent starter batch can be rerun with `--execute --of
 40/40. The middle non-function regression runs offsets/limits `40/17`, `58/2`, and `62/6` for another 25/25 while
 locking the three intervening top-level function routes. Full 99-fixture Julia parity is not yet claimed.
 
+The next bounded command, `--execute --offset 68 --limit 31`, currently reports 10 passed and 21 failed. Its
+capture-boundary, logical/output helper, recursive top-rule, structural-output, and quote-normalization groups have
+separate task-tree owners before implementation. The package status therefore remains `runtime-corpus-middle`.
+
 ## Hosted GitHub Actions status
 
 Hosted GitHub Actions CI is currently disabled for cost-control reasons.

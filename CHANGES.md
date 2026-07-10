@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.0 — split Julia shipped corpus smoke batch
+
+**Scope:** Diagnostic execution and planning-only decomposition of Julia manifest fixtures 68–98, plus task,
+roadmap/live, mdBook, Knowledge Map, architecture, and resume-pointer alignment.
+
+**Change:** Measured the complete shipped-spec/parser-smoke window at 10 passed / 21 failed. Split every failure
+into owned capture-boundary, logical helper, diagnostic-output helper, recursive top-rule, EBNF/spec.spec structural
+output, and lib_reader quote-normalization leaves before source changes. Status remains `runtime-corpus-middle`.
+
+**Validation:** Bounded runner `--offset 68 --limit 31` accounts for all 31 fixtures. mdBook, memory, Knowledge Map,
+task, doctrine, and whitespace gates pass; no Julia source, test, fixture, or runtime behavior changed.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.3 — close Julia middle corpus batch
 
 **Scope:** Julia non-function manifest fixtures 40–67, permanent three-window regression proof, explicit function

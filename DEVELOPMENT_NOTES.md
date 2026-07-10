@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.0 — Julia shipped-smoke split at 10/31):
+  The Julia window reaches substantially farther than Dart's initial shipped-smoke boundary, so Dart's historical
+  leaf order is reference evidence rather than a template to copy blindly. Julia already passes Tclite, Lispish,
+  raw hlink, portmap slice, regdef, VHDL, and empty plugin/library smokes. Explicit unsupported-helper failures can
+  be removed before investigating the already-executing recursion, structural-output, and quote-normalization gaps.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.3 — Julia middle corpus 25/25):
   The non-function middle window also required no implementation correction. Three disjoint bounded runs keep the
   known top-level function offsets out of the claim while proving every surrounding helper/control/receiver/tree

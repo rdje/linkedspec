@@ -111,7 +111,8 @@ Top-level directories and files:
     spec-defined function-shell batches. `.6.2.1` adds ordered named/offset/limit selection plus bounded runner
     PASS/FAIL reporting. `.6.2.2` proves starter fixtures 0–39 green at 40/40 without a production correction;
     `.6.2.3` proves the surrounding middle non-function windows green at 25/25 while routing three top-level
-    function fixtures. Full tests pass with 757 assertions, status is `runtime-corpus-middle`, and `.6.2.4` is active.
+    function fixtures. Full tests pass with 757 assertions and status `runtime-corpus-middle`. `.6.2.4.0` measures
+    shipped-spec/parser-smoke fixtures 68–98 at 10/31 and splits the failure families; `.6.2.4.1` is active.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

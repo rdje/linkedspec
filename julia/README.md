@@ -134,8 +134,9 @@ selection/reporting, starter 0–39, middle non-function 40–67, shipped-spec/p
 function-shell owners. `.6.2.1` adds ordered named/offset/limit library selection plus bounded runner PASS/FAIL
 reporting. `.6.2.2` proves starter fixtures 0–39 green at 40/40 without a production correction. `.6.2.3` proves
 non-function windows 40–56, 58–59, and 62–67 green at 25/25 unchanged and explicitly routes offsets 57, 60, and
-61 to the function-shell leaf. Full tests pass with 757 assertions, status is `runtime-corpus-middle`, and `.6.2.4`
-is active.
+61 to the function-shell leaf. Full tests pass with 757 assertions and status `runtime-corpus-middle`. `.6.2.4.0`
+measures shipped-spec/parser-smoke fixtures 68–98 at 10 passed / 21 failed and splits the failures into recoverable
+mechanism leaves; `.6.2.4.1` anonymous capture-boundary helpers are active.
 
 Library example:
 

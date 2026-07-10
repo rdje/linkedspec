@@ -1,0 +1,42 @@
+---
+id: julia-shipped-corpus-smoke-split
+title: Julia shipped-spec parser-smoke window starts 10/31 and is split by failure family
+answers:
+  - what does JULIA-BACKEND-PARITY.6.2.4.0 prove
+  - why is the Julia shipped corpus smoke batch split
+  - which Julia shipped-spec corpus fixtures already pass
+  - which Julia shipped-spec corpus failures are known
+  - what is the Julia corpus frontier after the middle batch
+  - how many Julia shipped-spec parser-smoke fixtures pass initially
+date: 2026-07-10
+status: current
+tags: [julia, corpus, shipped-specs, parser-smoke, helpers, JULIA-BACKEND-PARITY]
+evidence: "JULIA-BACKEND-PARITY.6.2.4.0 runs julia/bin/corpus_runner.jl with --offset 68 --limit 31 and records 10 passed / 21 failed. The task tree accounts for every failure under anonymous capture boundaries, logical helpers, diagnostic-output helpers, recursive top-rule outputs, EBNF/spec.spec structural outputs, or lib_reader quote normalization before Julia behavior changes."
+reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31"
+---
+
+`JULIA-BACKEND-PARITY.6.2.4.0` is a planning split, not a runtime fix. The complete shipped-spec/parser-smoke
+window at manifest offsets 68 through 98 starts at 10 passed and 21 failed.
+
+The initially passing fixtures are `tclite_command_subst`, `tclite_double_quote`, `lispish_x_y`,
+`hlink_raw_string`, `hlink_raw_escaped_brackets`, `portmap_slice`, `regdef_nested_register_fields`,
+`vhdl_library_use`, `pplugin_empty`, and `tkgui_empty`.
+
+Every failing fixture is routed exactly once before implementation:
+
+- `.6.2.4.1`: three hlink delimiter fixtures plus `ebnf_logging_annotation`, blocked by unsupported anonymous
+  `capture_slice` / `start_capture_slice` helpers.
+- `.6.2.4.2.1`: four portmap fixtures plus `tablegrep_simple_term`, blocked by unsupported `or` / `not` helpers.
+- `.6.2.4.2.2`: `simenv_multiline_value` and `ds_vhistory_version_entry`, blocked by unsupported `print`.
+- `.6.2.4.3`: three recursive top-rule fixtures that execute but return incorrect nested/caller values.
+- `.6.2.4.4`: `ebnf_expression_rules` plus four spec.spec smokes that execute but lose structural records.
+- `.6.2.4.5`: both lib_reader cases, which retain quotes in group/value payloads.
+- `.6.2.4.6`: final 31/31 regression and no-drift closeout.
+
+The checked-in expected JSON remains the Perl/Rust oracle. Completed Dart facts identify portable mechanism
+contracts, but the Julia leaves must establish their own root causes. Package status remains
+`runtime-corpus-middle` at 757 assertions; `.6.2.4.1` is active.
+
+Related facts: [[julia-middle-corpus-batch]], [[julia-controlled-corpus-execution]],
+[[dart-shipped-corpus-smoke-split]], [[dart-helper-action-surface-bridge]],
+[[rust-anonymous-capture-slice-family]], [[rust-perl-output-oracle]].

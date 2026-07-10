@@ -494,9 +494,91 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 - ID: `JULIA-BACKEND-PARITY.6.2.4`
   Status: `active`
   Goal: Close the shipped-spec and parser-smoke corpus batch.
+  Children: `.6.2.4.0`, `.6.2.4.1`, `.6.2.4.2`, `.6.2.4.2.1`, `.6.2.4.2.2`, `.6.2.4.3`, `.6.2.4.4`,
+    `.6.2.4.5`, `.6.2.4.6`
   Acceptance: Manifest fixtures `68..98` covering tclite, lispish, recursive top rules, hlink, portmap, EBNF,
     spec.spec, regdef, tablegrep, simenv, VHDL/library, history, and plugin smokes pass unchanged or each failure
     cluster is split before implementation with Perl/Rust/Dart oracle evidence.
+  Verification: Initial bounded diagnostic reports 10 passed and 21 failed. `.6.2.4.0` records the exact boundary
+    and splits capture-boundary helpers, logical/diagnostic helpers, recursive top-rule outputs, EBNF/spec.spec
+    structural outputs, lib_reader quote normalization, and final no-drift before implementation.
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.4.0`
+  Status: `done`
+  Goal: Split the shipped-spec/parser-smoke batch after diagnostic execution.
+  Acceptance: The 31-fixture window is measured, all failures are named and grouped by observed mechanism, and
+    recoverable implementation children exist before Julia source behavior changes.
+  Verification: `PASS` - bounded `--offset 68 --limit 31` execution reports 10 passed and 21 failed. The failures
+    split into four capture-boundary helper cases, five logical-helper cases, two diagnostic-output helper cases,
+    three recursive top-rule output mismatches, five EBNF/spec.spec structural-output mismatches, and two
+    lib_reader quote-normalization mismatches. Checked-in Perl/Rust expected JSON plus the completed Dart shipped-
+    smoke fact cards preserve the shared oracle boundary. No Julia source, test, or fixture behavior changed.
+  Commit: `JULIA-BACKEND-PARITY.6.2.4.0 - split Julia shipped corpus smoke batch`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.4.1`
+  Status: `active`
+  Goal: Add the missing anonymous capture-boundary helper family.
+  Acceptance: `start_capture_slice`, `capture_slice`, and the directly related anonymous boundary helpers match
+    the documented Perl/Rust contract; the three hlink delimiter fixtures and `ebnf_logging_annotation` either
+    pass or every residual is split with direct oracle evidence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.4.2`
+  Status: `pending`
+  Goal: Close logical and diagnostic-output helper gaps.
+  Children: `.6.2.4.2.1`, `.6.2.4.2.2`
+  Acceptance: Current logical and diagnostic-output helpers execute with the documented portable contracts, with
+    boolean and output behavior isolated into separate implementation leaves.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.4.2.1`
+  Status: `pending`
+  Goal: Add logical `and`/`or`/`not` helper execution.
+  Acceptance: The four blocked portmap cases and `tablegrep_simple_term` no longer fail for unsupported logical
+    helpers, with short-circuit/value behavior matched to Perl/Rust or a narrower residual split.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.4.2.2`
+  Status: `pending`
+  Goal: Add diagnostic `print`/`print_each`/`say` helper execution.
+  Acceptance: Diagnostic-output helpers preserve runtime output while matching the portable side-effect contract;
+    `simenv_multiline_value` and `ds_vhistory_version_entry` advance past unsupported-helper failures.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.4.3`
+  Status: `pending`
+  Goal: Close recursive top-rule lifecycle and accumulator outputs.
+  Acceptance: All three recursive top-rule fixtures match checked-in Perl/Rust outputs, with caller/child local
+    state and LX result composition proven by focused Julia tests.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.4.4`
+  Status: `pending`
+  Goal: Close EBNF and spec.spec structural output mismatches.
+  Acceptance: `ebnf_expression_rules` and the four spec.spec smoke fixtures preserve their expected structural
+    records, or independent parser/runtime mechanisms are split again before implementation.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.4.5`
+  Status: `pending`
+  Goal: Close lib_reader statement mutation and quote normalization.
+  Acceptance: `lib_reader_sattribute` and `lib_reader_cattribute` strip quoted group/value payloads and construct
+    the expected scalar/compound attribute shapes without fixture-specific cleanup.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.4.6`
+  Status: `pending`
+  Goal: Close final shipped-spec/parser-smoke no-drift.
+  Acceptance: The complete offset-68/limit-31 window is 31/31 green, a permanent regression locks it, all residual
+    mechanisms are explicitly owned, and package/docs/status surfaces agree before `.6.2.5` begins.
   Verification: `pending`
   Commit: `pending`
 
@@ -568,7 +650,41 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 8 | `JULIA-BACKEND-PARITY.6.2.1` | `done` | Bounded library selection and opt-in corpus-runner reporting are green. |
 | 9 | `JULIA-BACKEND-PARITY.6.2.2` | `done` | Starter manifest fixtures 0–39 pass unchanged at 40/40. |
 | 10 | `JULIA-BACKEND-PARITY.6.2.3` | `done` | Non-function middle fixtures pass unchanged at 25/25; three `fn` cases remain routed. |
-| 11 | `JULIA-BACKEND-PARITY.6.2.4` | `active` | Diagnose and close shipped-spec/parser-smoke fixtures 68–98. |
+| 11 | `JULIA-BACKEND-PARITY.6.2.4.0` | `done` | Initial shipped-spec/parser-smoke boundary is 10/31 and split into owned failure families. |
+| 12 | `JULIA-BACKEND-PARITY.6.2.4.1` | `active` | Implement the anonymous capture-boundary helper family first. |
+
+## `JULIA-BACKEND-PARITY.6.2.4.0` Shipped Corpus Smoke Split
+
+Planning evidence recorded on 2026-07-10:
+
+- `julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31`
+  reports 10 passed and 21 failed.
+- Passing fixtures are both tclite cases, `lispish_x_y`, both raw hlink cases, `portmap_slice`,
+  `regdef_nested_register_fields`, `vhdl_library_use`, `pplugin_empty`, and `tkgui_empty`.
+- Unsupported capture-boundary helpers block three hlink delimiter cases plus `ebnf_logging_annotation`; `.6.2.4.1`
+  owns the shared anonymous boundary family.
+- Unsupported `or`/`not` blocks four portmap cases and `tablegrep_simple_term`; `.6.2.4.2.1` owns logical helpers.
+  Unsupported `print` blocks simenv and history cases; `.6.2.4.2.2` owns diagnostic-output helpers.
+- Three recursive top-rule cases produce incorrect nested/caller values and are isolated under `.6.2.4.3`.
+- `ebnf_expression_rules` plus four spec.spec smokes execute but lose structural records; `.6.2.4.4` owns that
+  output-shape group and must split again if it contains independent parser/runtime mechanisms.
+- Two lib_reader cases retain source quotes in group/value payloads; `.6.2.4.5` owns statement mutation and quote
+  normalization. `.6.2.4.6` owns final 31/31 regression and no-drift closeout.
+- Checked-in expected JSON is the Perl/Rust oracle. Completed Dart shipped-smoke facts provide the cross-backend
+  mechanism reference without assuming that Julia shares Dart's historical implementation causes.
+
+## `JULIA-BACKEND-PARITY.6.2.4.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The full bounded 31-fixture window was executed before any `.6.2.4` source change.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The diagnostic distinguishes explicit unsupported-helper failures from
+  already-executing recursive, structural-output, and quote-normalization mismatches; deeper causes remain owned by
+  the corresponding implementation leaves rather than guessed in this planning slice.
+- [x] **FIX / SPLIT** — Created recoverable owners for capture boundaries, logical/output helpers, recursion,
+  structural output, quote normalization, and final no-drift; logical and output helpers are separate children.
+- [x] **ADDRESSED (verified)** — All 21 failures and all 10 passing fixtures are accounted for exactly once.
+- [x] **NO REGRESSION** — No Julia source, tests, fixtures, package status, or runtime behavior changed.
+- [x] **LOCKSTEP** — Task/index/roadmaps, live docs, mdBook, Knowledge Map, architecture, and `MEMORY.md` record the
+  10/31 boundary and `.6.2.4.1` frontier.
 
 ## `JULIA-BACKEND-PARITY.6.2.3` Middle Corpus Batch Result
 
@@ -1828,6 +1944,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.1` | Full Julia `Pkg.test()`; Julia CLI status/help, validation-only manifest load, named/bounded execute and unbounded rejection; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Thirty added assertions prove library/CLI selection, validation, reporting, exit codes, and rollout guards; total Julia tests pass with 745 assertions, status is `runtime-corpus-selection`, and `.6.2.2` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.2` | Bounded runner offsets 0–39; full Julia `Pkg.test()`; Julia CLI status/help and validation-only load; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. The starter window is 40/40 green without parser/runtime or fixture changes; six permanent assertions bring total Julia tests to 751, status is `runtime-corpus-starter`, and `.6.2.3` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.3` | Bounded runner windows 40–56, 58–59, and 62–67; full Julia `Pkg.test()`; Julia CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. The 25 non-function middle fixtures pass unchanged, six permanent assertions lock the windows and routed `fn` offsets, total Julia tests pass with 757 assertions, status is `runtime-corpus-middle`, and `.6.2.4` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.0` | Bounded runner offsets 68–98; planning-only task decomposition; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. The shipped-spec/parser-smoke window starts at 10 passed / 21 failed, every fixture is accounted for under a recoverable mechanism owner, runtime behavior remains unchanged at 757 assertions and `runtime-corpus-middle`, and `.6.2.4.1` becomes active. |
 
 ## Commit Log
 
@@ -1868,9 +1985,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.6.2.1` | `JULIA-BACKEND-PARITY.6.2.1 - add Julia executable corpus selection` | Named/bounded library selection plus opt-in runner PASS/FAIL reporting and unbounded guard; starter fixtures advance to `.6.2.2`. |
 | `JULIA-BACKEND-PARITY.6.2.2` | `JULIA-BACKEND-PARITY.6.2.2 - close Julia starter corpus batch` | Permanent 40/40 starter-window regression proof with no production correction; middle fixtures advance to `.6.2.3`. |
 | `JULIA-BACKEND-PARITY.6.2.3` | `JULIA-BACKEND-PARITY.6.2.3 - close Julia middle corpus batch` | Permanent 25/25 non-function middle-window proof with exact `fn` routes; shipped-spec fixtures advance to `.6.2.4`. |
+| `JULIA-BACKEND-PARITY.6.2.4.0` | `JULIA-BACKEND-PARITY.6.2.4.0 - split Julia shipped corpus smoke batch` | Planning-only 10/31 shipped-smoke diagnostic split into capture, logical/output helper, recursion, structural-output, quote-normalization, and final no-drift owners. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.2.4.0` planning split. The complete shipped-spec/parser-smoke window starts at
+  10 passed / 21 failed; every failure is routed to a capture-boundary, logical/output helper, recursive top-rule,
+  EBNF/spec.spec structural-output, lib_reader quote-normalization, or final no-drift leaf before source changes.
+  Status remains `runtime-corpus-middle` at 757 assertions, and `.6.2.4.1` is active.
 - `2026-07-10`: Completed `.6.2.3` middle corpus batch. Non-function windows 40–56, 58–59, and 62–67 pass 25/25
   unchanged across helper/control/receiver/assignment/with/tree behavior. Six permanent assertions bring
   `Pkg.test()` to 757 and status `runtime-corpus-middle`; the three top-level `fn` offsets remain routed to `.6.2.5`,
