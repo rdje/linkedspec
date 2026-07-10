@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.4.5.1 — Julia structured runtime diagnostics):
+  Julia attaches structured data to the existing exception channel rather than changing success results or
+  textual display. Direct lookup failures create specific diagnostics; rule boundaries add current-rule
+  attribution before their register/context cleanup; parent and parse wrappers only add a fallback when no richer
+  child payload exists. This ordering preserves the deepest useful rule/handler identity. Optional spec identity
+  lives on the engine and is copied into failures, while ordinary in-memory callers omit those fields naturally.
+  `.4.5.2` can now add optional tracing without becoming a prerequisite for usable failure data.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.4.5.0 — split Julia diagnostics/trace controls):
   Structured diagnostics and optional tracing share runtime attribution but not an implementation owner.
   Diagnostics must remain available on failures without any trace setup; trace levels/events/sinks form a reusable

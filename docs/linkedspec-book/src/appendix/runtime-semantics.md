@@ -551,6 +551,11 @@ the same neutral fields as `RuntimeDiagnostic` on
 `RuntimeInterpreterException.diagnostic`; successful Dart parse output is
 unchanged when no runtime error occurs.
 
+Julia exposes the same neutral fields through exported `RuntimeDiagnostic` on
+`RuntimeInterpreterException.diagnostic`. Optional engine `spec_name` /
+`spec_path` identity and top/rule/handler attribution are attached only on
+failure; successful `RuntimeParseResult` output remains unchanged.
+
 ### 10.3 Input Validation
 
 Before parsing, the input is validated:

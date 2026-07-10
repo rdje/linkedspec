@@ -308,7 +308,9 @@ deterministic while guards, immediate helper/receiver with-blocks, and scoped ha
 explicit LIFO cursor stack, entry/local anchor rewinds, synchronized live/register cursor updates,
 character-based cursor/input helpers, and earliest usable non-consuming named-rule boundary capture. Full Julia
 tests pass with 581 assertions and package status `runtime-cursor-boundary`. `.4.5.0` splits diagnostics/trace
-before code; `.4.5.1` is active for structured runtime diagnostics.
+before code; `.4.5.1` now adds structured runtime diagnostics with spec/top/rule/handler attribution and
+successful-output preservation. Full tests pass with 588 assertions, status is `runtime-diagnostics`, and
+`.4.5.2` is active for trace controls/events/sinks.
 Future Julia and
 Lua backend plans must own their own
 variant-specific CLIs rather than relying on one
@@ -417,8 +419,9 @@ assertions; package status remains `runtime-value-control-tree`, and no runtime 
 adds explicit LIFO cursor save/restore, entry/local anchor rewinds, character-based cursor/input helpers, and
 earliest usable non-consuming boundary capture. Full tests pass with 581 assertions and status
 `runtime-cursor-boundary`. `.4.5.0` splits diagnostics/trace into structured diagnostics, trace
-controls/events/sinks, runtime instrumentation, and no-drift. `.4.5.1` owns structured diagnostics first; later
-leaves own staged parser and corpus execution.
+controls/events/sinks, runtime instrumentation, and no-drift. `.4.5.1` implements exported neutral-field
+diagnostic payloads on runtime exceptions while preserving successful output and richer child attribution.
+`.4.5.2` owns trace controls/events/sinks; later leaves own staged parser and corpus execution.
 
 ### Dart Backend Commands
 

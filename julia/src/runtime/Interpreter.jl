@@ -1,6 +1,50 @@
+struct RuntimeDiagnostic
+    type::String
+    stage::String
+    owner_stage::Union{Nothing,String}
+    summary::String
+    detail::String
+    spec_name::Union{Nothing,String}
+    spec_path::Union{Nothing,String}
+    top_rule::Union{Nothing,String}
+    rule_label::Union{Nothing,String}
+    handler_source_label::Union{Nothing,String}
+end
+
+function RuntimeDiagnostic(;
+    type,
+    stage,
+    summary,
+    detail,
+    owner_stage = nothing,
+    spec_name = nothing,
+    spec_path = nothing,
+    top_rule = nothing,
+    rule_label = nothing,
+    handler_source_label = nothing,
+)
+    optional_string(value) = value === nothing ? nothing : String(value)
+    return RuntimeDiagnostic(
+        String(type),
+        String(stage),
+        optional_string(owner_stage),
+        String(summary),
+        String(detail),
+        optional_string(spec_name),
+        optional_string(spec_path),
+        optional_string(top_rule),
+        optional_string(rule_label),
+        optional_string(handler_source_label),
+    )
+end
+
 struct RuntimeInterpreterException <: Exception
     message::String
+    diagnostic::Union{Nothing,RuntimeDiagnostic}
 end
+
+RuntimeInterpreterException(message::AbstractString; diagnostic = nothing) =
+    RuntimeInterpreterException(String(message), diagnostic)
 
 Base.showerror(io::IO, error::RuntimeInterpreterException) = print(io, error.message)
 
@@ -23,12 +67,16 @@ struct LinkedSpecRuntimeEngine
     compiled_spec::CompiledSpec
     parse_mode::LinkedSpecParseMode
     max_iterations::Int
+    spec_name::Union{Nothing,String}
+    spec_path::Union{Nothing,String}
 end
 
 function LinkedSpecRuntimeEngine(
     compiled_spec::CompiledSpec;
     parse_mode = SeekParseMode,
     max_iterations::Int = 10_000,
+    spec_name = nothing,
+    spec_path = nothing,
 )
     if max_iterations <= 0
         throw(ArgumentError("max_iterations must be positive"))
@@ -37,6 +85,8 @@ function LinkedSpecRuntimeEngine(
         compiled_spec,
         _normalize_parse_mode(parse_mode),
         max_iterations,
+        spec_name === nothing ? nothing : String(spec_name),
+        spec_path === nothing ? nothing : String(spec_path),
     )
 end
 
@@ -51,9 +101,10 @@ mutable struct _RuntimeExecutionContext
     cursor_stack::Vector{Int}
     active_rule_entries::Set{Tuple{String,Int,Int}}
     lifecycle_events::Vector{RuntimeLifecycleEvent}
+    top_rule::String
 end
 
-function _RuntimeExecutionContext(input::AbstractString)
+function _RuntimeExecutionContext(input::AbstractString, top_rule::AbstractString)
     input_text = String(input)
     return _RuntimeExecutionContext(
         input_text,
@@ -66,6 +117,7 @@ function _RuntimeExecutionContext(input::AbstractString)
         Int[],
         Set{Tuple{String,Int,Int}}(),
         RuntimeLifecycleEvent[],
+        String(top_rule),
     )
 end
 
@@ -123,24 +175,42 @@ function runtime_parse(
     input::AbstractString;
     top_rule = nothing,
 )
-    context = _RuntimeExecutionContext(input)
-    label = top_rule === nothing ? _default_runtime_top_rule(engine.compiled_spec) : String(top_rule)
-    result = _execute_runtime_rule!(engine, label, 0, context)
-    return RuntimeParseResult(
-        result.matched,
-        _runtime_copy(result.value),
-        # Backend-neutral parser output wraps the top-rule value exactly once.
-        Any[_runtime_copy(result.value)],
-        context.cursor_codeunit,
-        codeunit_offset_to_char_offset(context.input, context.cursor_codeunit),
-        RuntimeLifecycleEvent[context.lifecycle_events...],
-    )
+    label = top_rule === nothing ? _default_runtime_top_rule(engine) : String(top_rule)
+    context = _RuntimeExecutionContext(input, label)
+    try
+        result = _execute_runtime_rule!(engine, label, 0, context)
+        return RuntimeParseResult(
+            result.matched,
+            _runtime_copy(result.value),
+            # Backend-neutral parser output wraps the top-rule value exactly once.
+            Any[_runtime_copy(result.value)],
+            context.cursor_codeunit,
+            codeunit_offset_to_char_offset(context.input, context.cursor_codeunit),
+            RuntimeLifecycleEvent[context.lifecycle_events...],
+        )
+    catch error
+        if error isa RuntimeInterpreterException
+            throw(_with_runtime_diagnostic(
+                error,
+                _runtime_diagnostic(
+                    engine;
+                    stage = "runtime_execution",
+                    summary = "Julia runtime interpreter failed",
+                    detail = error.message,
+                    top_rule = label,
+                    rule_label = label,
+                ),
+            ))
+        end
+        rethrow()
+    end
 end
 
 runtime_execute(engine::LinkedSpecRuntimeEngine, input::AbstractString; top_rule = nothing) =
     runtime_parse(engine, input; top_rule = top_rule)
 
-function _default_runtime_top_rule(compiled::CompiledSpec)
+function _default_runtime_top_rule(engine::LinkedSpecRuntimeEngine)
+    compiled = engine.compiled_spec
     for label in compiled.compiled_rule_order
         rule = compiled.rules_by_label[label]
         if rule.header.is_top
@@ -148,7 +218,16 @@ function _default_runtime_top_rule(compiled::CompiledSpec)
         end
     end
     if isempty(compiled.compiled_rule_order)
-        throw(RuntimeInterpreterException("compiled spec does not contain any rules"))
+        detail = "compiled spec does not contain any rules"
+        throw(RuntimeInterpreterException(
+            detail;
+            diagnostic = _runtime_diagnostic(
+                engine;
+                stage = "top_rule_selection",
+                summary = "Julia runtime top-rule selection failed",
+                detail = detail,
+            ),
+        ))
     end
     return first(compiled.compiled_rule_order)
 end
@@ -161,7 +240,18 @@ function _execute_runtime_rule!(
 )
     rule = compiled_rule(engine.compiled_spec, label)
     if rule === nothing
-        throw(RuntimeInterpreterException("rule '$label' is not compiled"))
+        detail = "rule '$label' is not compiled"
+        throw(RuntimeInterpreterException(
+            detail;
+            diagnostic = _runtime_context_diagnostic(
+                engine,
+                context;
+                stage = "rule_lookup",
+                summary = "Julia runtime rule lookup failed",
+                detail = detail,
+                rule_label = label,
+            ),
+        ))
     end
 
     recursion_key = (label, entry_regex_index, context.cursor_codeunit)
@@ -190,6 +280,21 @@ function _execute_runtime_rule!(
             end
             rethrow()
         end
+    catch error
+        if error isa RuntimeInterpreterException
+            throw(_with_runtime_diagnostic(
+                error,
+                _runtime_context_diagnostic(
+                    engine,
+                    context;
+                    stage = "runtime_execution",
+                    summary = "Julia runtime interpreter failed",
+                    detail = error.message,
+                    rule_label = label,
+                ),
+            ))
+        end
+        rethrow()
     finally
         context.registers = saved_registers
         delete!(context.active_rule_entries, recursion_key)
@@ -4136,6 +4241,86 @@ end
 
 _runtime_returned(value) = _RuntimeRuleResult(value !== nothing, _runtime_copy(value))
 _runtime_copy(value) = deepcopy(value)
+
+_with_runtime_diagnostic(error::RuntimeInterpreterException, diagnostic::RuntimeDiagnostic) =
+    error.diagnostic === nothing ? RuntimeInterpreterException(error.message; diagnostic = diagnostic) : error
+
+function _runtime_diagnostic(
+    engine::LinkedSpecRuntimeEngine;
+    stage,
+    summary,
+    detail,
+    top_rule = nothing,
+    rule_label = nothing,
+    handler_source_label = nothing,
+)
+    effective_rule = rule_label === nothing ? top_rule : rule_label
+    return RuntimeDiagnostic(
+        type = "runtime_parser",
+        stage = stage,
+        owner_stage = "julia_runtime",
+        summary = summary,
+        detail = detail,
+        spec_name = engine.spec_name,
+        spec_path = engine.spec_path,
+        top_rule = top_rule,
+        rule_label = rule_label,
+        handler_source_label = handler_source_label === nothing ?
+            (effective_rule === nothing ? "julia_runtime" : "julia_runtime:rule:$effective_rule") :
+            handler_source_label,
+    )
+end
+
+function _runtime_context_diagnostic(
+    engine::LinkedSpecRuntimeEngine,
+    context::_RuntimeExecutionContext;
+    stage,
+    summary,
+    detail,
+    rule_label = nothing,
+    handler_source_label = nothing,
+)
+    return _runtime_diagnostic(
+        engine;
+        stage = stage,
+        summary = summary,
+        detail = detail,
+        top_rule = context.top_rule,
+        rule_label = rule_label,
+        handler_source_label = handler_source_label,
+    )
+end
+
+function to_json(diagnostic::RuntimeDiagnostic)
+    value = Dict{String,Any}(
+        "type" => diagnostic.type,
+        "stage" => diagnostic.stage,
+        "summary" => diagnostic.summary,
+        "detail" => diagnostic.detail,
+    )
+    optional_fields = (
+        "owner_stage" => diagnostic.owner_stage,
+        "spec_name" => diagnostic.spec_name,
+        "spec_path" => diagnostic.spec_path,
+        "top_rule" => diagnostic.top_rule,
+        "rule_label" => diagnostic.rule_label,
+        "handler_source_label" => diagnostic.handler_source_label,
+    )
+    for (key, field_value) in optional_fields
+        if field_value !== nothing
+            value[key] = field_value
+        end
+    end
+    return value
+end
+
+function to_json(error::RuntimeInterpreterException)
+    value = Dict{String,Any}("message" => error.message)
+    if error.diagnostic !== nothing
+        value["diagnostic"] = to_json(error.diagnostic)
+    end
+    return value
+end
 
 to_json(event::RuntimeLifecycleEvent) = Dict{String,Any}(
     "rule_label" => event.rule_label,

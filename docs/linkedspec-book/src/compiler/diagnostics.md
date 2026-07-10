@@ -52,6 +52,14 @@ with the same neutral field names (`type`, `stage`, `owner_stage`, `summary`,
 `spec_name` / `spec_path`). Dart keeps successful parse output unchanged; the
 diagnostic object appears on runtime failures.
 
+For the Julia backend, the equivalent surface is also
+`RuntimeInterpreterException.diagnostic`. Julia exports `RuntimeDiagnostic`
+with the same neutral field names, accepts optional `spec_name` / `spec_path`
+on `LinkedSpecRuntimeEngine`, and preserves the failing child rule and
+`julia_runtime:rule:<label>` handler attribution before parent context unwind.
+Successful Julia `RuntimeParseResult` JSON and textual exception display remain
+unchanged.
+
 ## Typical payload shape
 
 A payload can include fields such as:

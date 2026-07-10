@@ -333,15 +333,18 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.4.5.0 - split Julia diagnostics trace controls`
 
 - ID: `JULIA-BACKEND-PARITY.4.5.1`
-  Status: `active`
+  Status: `done`
   Goal: Add Julia runtime structured diagnostic payloads and diagnostic-carrying runtime exceptions.
   Acceptance: Runtime failures expose stable structured fields for type, stage, owner stage, summary, detail,
     top rule, rule label, and handler/source attribution without changing successful parse output.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - exported `RuntimeDiagnostic` carries the neutral diagnostic fields through
+    `RuntimeInterpreterException.diagnostic`; engine spec identity, top/rule attribution, Julia handler labels,
+    richer inner-payload preservation, JSON projection, unchanged textual errors, and successful-output
+    preservation pass seven focused assertions. Full `Pkg.test()` passes with 588 assertions.
+  Commit: `JULIA-BACKEND-PARITY.4.5.1 - add Julia runtime diagnostics`
 
 - ID: `JULIA-BACKEND-PARITY.4.5.2`
-  Status: `pending`
+  Status: `active`
   Goal: Add Julia trace levels, controls, structured event classes, and stdout/routed-file/mirror sink behavior.
   Acceptance: Trace controls are default-quiet, available from normal Julia entrypoints, preserve successful parse
     results, support reset/truncate for routed files, and provide focused tests for level gating and sink routing.
@@ -463,7 +466,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.4.5.1` | `active` | Add stable structured runtime diagnostic payloads before trace controls or runtime event instrumentation. |
+| 1 | `JULIA-BACKEND-PARITY.4.5.2` | `active` | Add ordered trace levels, configuration/environment controls, structured events, and stdout/route/mirror sinks. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -1049,6 +1052,40 @@ Planning evidence recorded on 2026-07-10:
 - [x] **LOCKSTEP** — Task tree/index, roadmaps, README, mdBook status/handoff, Knowledge Map, architecture/live
   docs, and `MEMORY.md` advance the precise frontier to `.4.5.1`.
 
+## `JULIA-BACKEND-PARITY.4.5.1` Structured Runtime Diagnostics Result
+
+Diagnostic evidence recorded on 2026-07-10:
+
+- Exported `RuntimeDiagnostic` owns the neutral `type`, `stage`, `owner_stage`, `summary`, `detail`, `spec_name`,
+  `spec_path`, `top_rule`, `rule_label`, and `handler_source_label` fields with deterministic JSON projection.
+- `RuntimeInterpreterException` keeps its existing message/showerror behavior and adds an optional `diagnostic`
+  field plus JSON projection.
+- `LinkedSpecRuntimeEngine` accepts optional `spec_name` / `spec_path`; ordinary successful parse JSON is
+  identical whether or not source identity is configured.
+- Missing compiled rules receive a direct `rule_lookup` diagnostic. Rule execution attaches
+  `runtime_execution` attribution before context unwind, so a child helper failure remains attributed to the child
+  rule and `julia_runtime:rule:<label>` handler.
+- Parent-rule and parse-boundary wrappers preserve an existing richer diagnostic instead of replacing it with a
+  generic outer payload.
+- Package/CLI status advances to `runtime-diagnostics`; trace controls/events/sinks advance to `.4.5.2`.
+
+## `JULIA-BACKEND-PARITY.4.5.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Julia runtime failures exposed only `RuntimeInterpreterException.message`, leaving
+  callers without the stable structured fields documented by the backend-neutral diagnostic contract.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The exception carried one string, the engine had no optional spec identity,
+  and rule/parse boundaries rethrew failures without attaching top-rule, current-rule, or handler ownership.
+- [x] **FIX** — Added exported diagnostic records/JSON, diagnostic-carrying exceptions, engine spec identity,
+  context top-rule identity, direct lookup diagnostics, rule-boundary attribution, and fallback-preserving parse
+  wrapping.
+- [x] **ADDRESSED (verified)** — Seven focused assertions prove successful-output preservation, exact missing-rule
+  field shape, child-rule attribution through parent unwind, richer-payload preservation, and unchanged textual
+  exception display.
+- [x] **NO REGRESSION** — Full Julia `Pkg.test()` passes with 588 assertions; CLI status reports
+  `runtime-diagnostics`; mdBook, memory, Knowledge Map, task-tree, doctrine, and whitespace gates cover the slice.
+- [x] **LOCKSTEP** — Public exports, Julia README, task tree/index, roadmaps, mdBook diagnostics/runtime/trace/
+  status/handoff pages, Knowledge Map, architecture/live docs, and `MEMORY.md` advance to `.4.5.2`.
+
 ## `JULIA-BACKEND-PARITY.4.2` Runtime Rule Interpreter Result
 
 Rule-interpreter evidence recorded on 2026-07-10:
@@ -1262,6 +1299,9 @@ Rule-interpreter evidence recorded on 2026-07-10:
   boundaries without consuming them. The cursor stack remains separate from direct match/entry anchor rewinds.
 - `2026-07-10`: `.4.5.0` splits diagnostics/trace before code: `.4.5.1` owns stable structured diagnostics,
   `.4.5.2` trace controls/events/sinks, `.4.5.3` runtime instrumentation, and `.4.5.4` no-drift closeout.
+- `2026-07-10`: `.4.5.1` keeps structured failure data on `RuntimeInterpreterException` rather than changing
+  successful result shape. Rule boundaries attach attribution before unwind, outer wrappers preserve richer inner
+  payloads, and Julia handler identity uses `julia_runtime:rule:<label>`.
 
 ## Open Questions
 
@@ -1272,8 +1312,8 @@ Rule-interpreter evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.4.5.1`. The diagnostics/trace container is split; stable structured runtime diagnostics are the next
-  owned implementation boundary.
+- None for `.4.5.2`. Structured runtime diagnostics are implemented; trace levels, controls, events, and sinks
+  are the next owned implementation boundary.
 
 ## Verification Log
 
@@ -1302,6 +1342,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.6` | No runtime behavior change; full Julia `Pkg.test()`; Julia CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Helper/value tests, status, mdBook contracts, live docs, and fact cards agree at 567 assertions; `.3`/`.4.3` metadata and helper-catalog separator style are reconciled, and `.4.4` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.4` | Full Julia `Pkg.test()`; Julia CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Fourteen focused assertions prove explicit save/restore, entry/local rewinds, consume continuation, character-based cursor/input helpers, earliest non-consuming boundary selection, EOF fallback, and unresolved-rule no-op behavior; total Julia tests pass with 581 assertions and `.4.5` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.5.0` | No Julia runtime behavior change; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Structured diagnostics, trace controls/events/sinks, runtime instrumentation, and no-drift closeout have separate owners; `.4.5.1` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.4.5.1` | Full Julia `Pkg.test()`; Julia CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Seven focused assertions prove stable diagnostic fields/JSON, spec/top/rule/handler attribution, richer-payload preservation, successful-output compatibility, and unchanged textual errors; total Julia tests pass with 588 assertions and `.4.5.2` becomes active. |
 
 ## Commit Log
 
@@ -1330,9 +1371,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.4.3.6` | `JULIA-BACKEND-PARITY.4.3.6 - close Julia helper value no drift` | Runtime/status/docs/KM no-drift closeout, parent metadata reconciliation, and helper-catalog separator alignment; cursor controls advance to `.4.4`. |
 | `JULIA-BACKEND-PARITY.4.4` | `JULIA-BACKEND-PARITY.4.4 - add Julia runtime cursor controls` | Explicit cursor stack and anchor rewinds, character-based cursor/input helpers, and non-consuming earliest-boundary capture; diagnostics/trace advances to `.4.5`. |
 | `JULIA-BACKEND-PARITY.4.5.0` | `JULIA-BACKEND-PARITY.4.5.0 - split Julia diagnostics trace controls` | Planning-only split into structured diagnostics, trace controls/events/sinks, runtime instrumentation, and no-drift; `.4.5.1` becomes active. |
+| `JULIA-BACKEND-PARITY.4.5.1` | `JULIA-BACKEND-PARITY.4.5.1 - add Julia runtime diagnostics` | Exported structured runtime diagnostic payloads on exceptions with spec/top/rule/handler attribution; trace controls advance to `.4.5.2`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.4.5.1` structured runtime diagnostics. Julia runtime exceptions now carry exported
+  neutral-field diagnostic payloads with deterministic JSON, optional spec identity, top/rule/handler attribution,
+  and richer-inner-payload preservation without changing successful parse results or textual errors. `Pkg.test()`
+  passes with 588 assertions; package status is `runtime-diagnostics`, and `.4.5.2` owns trace controls/events/sinks.
 - `2026-07-10`: Completed `.4.5.0` diagnostics/trace decomposition before implementation code. `.4.5.1` owns
   stable runtime diagnostic payloads, `.4.5.2` trace levels/config/events/sinks, `.4.5.3` runtime branch/lifecycle/
   cursor/boundary instrumentation, and `.4.5.4` final no-drift. Runtime behavior and the

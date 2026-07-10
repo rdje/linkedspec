@@ -107,5 +107,7 @@ assertions. `.4.4` adds explicit LIFO cursor save/restore, entry/local anchor re
 cursor/input helpers, and earliest named-rule boundary capture without consuming the boundary. Valid boundary
 rules with no later match capture to EOF; wholly unresolved boundary sets return `nothing` without moving the
 cursor. The full suite passes with 581 assertions and package status `runtime-cursor-boundary`. `.4.5` owns
-diagnostics and tracing through four scoped children; `.4.5.1` owns structured runtime diagnostic payloads first.
-Staged parser execution and corpus execution remain later leaves.
+diagnostics and tracing through four scoped children. `.4.5.1` exports `RuntimeDiagnostic`, attaches optional
+spec/top/rule/handler attribution to `RuntimeInterpreterException`, preserves richer child diagnostics, and keeps
+successful output unchanged. The full suite passes with 588 assertions and status `runtime-diagnostics`;
+`.4.5.2` owns trace controls/events/sinks. Staged parser and corpus execution remain later leaves.

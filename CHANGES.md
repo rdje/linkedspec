@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.4.5.1 — add Julia runtime diagnostics
+
+**Scope:** Exported Julia runtime diagnostic payloads, diagnostic-carrying exceptions, optional spec identity,
+top/rule/handler attribution, successful-output compatibility, package/CLI status, focused tests, mdBook
+diagnostics/runtime/trace/status/handoff, task-tree/live docs, Knowledge Map, architecture, and resume pointer.
+
+**Change:** Added `RuntimeDiagnostic` with deterministic neutral-field JSON and optional
+`RuntimeInterpreterException.diagnostic`. `LinkedSpecRuntimeEngine` accepts `spec_name` / `spec_path`; direct rule
+lookup and rule execution attach top/current-rule/Julia-handler attribution before unwind, while outer wrappers
+preserve richer inner payloads. Existing textual errors and successful parse output are unchanged. Package status
+now reports `runtime-diagnostics`.
+
+**Validation:** `Pkg.test()` passes with 588 assertions, including seven focused diagnostic assertions; Julia CLI
+status, mdBook build, memory architecture, task-tree metadata, Knowledge Map, doctrine, and `git diff --check`
+pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.4.5.0 — split Julia diagnostics trace controls
 
 **Scope:** Planning-only decomposition of Julia runtime diagnostics and trace parity into structured diagnostics,

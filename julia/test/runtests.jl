@@ -292,7 +292,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-cursor-boundary"
+    @test status.parity == "runtime-diagnostics"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -302,7 +302,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-cursor-boundary", String(take!(status_output)))
+    @test occursin("parity: runtime-diagnostics", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1815,6 +1815,79 @@ Top::
         "after" => 1,
     )
     @test unresolved_result.cursor_codeunit == 1
+end
+
+@testset "Runtime structured diagnostics" begin
+    success_spec = compile_spec(parse_spec(raw"""
+Top::
+ /x/
+ E { return(hash("value", "ok")) }
+"""))
+    plain_engine = LinkedSpecRuntimeEngine(success_spec)
+    identified_engine = LinkedSpecRuntimeEngine(
+        success_spec;
+        spec_name = "diagnostic-example",
+        spec_path = "/specs/diagnostic-example.spec",
+    )
+    @test to_json(runtime_parse(identified_engine, "x")) ==
+        to_json(runtime_parse(plain_engine, "x"))
+
+    missing_rule_error = try
+        runtime_parse(identified_engine, "x"; top_rule = "Missing")
+        nothing
+    catch error
+        error
+    end
+    @test missing_rule_error isa RuntimeInterpreterException
+    @test to_json(missing_rule_error) == Dict{String,Any}(
+        "message" => "rule 'Missing' is not compiled",
+        "diagnostic" => Dict{String,Any}(
+            "type" => "runtime_parser",
+            "stage" => "rule_lookup",
+            "owner_stage" => "julia_runtime",
+            "summary" => "Julia runtime rule lookup failed",
+            "detail" => "rule 'Missing' is not compiled",
+            "spec_name" => "diagnostic-example",
+            "spec_path" => "/specs/diagnostic-example.spec",
+            "top_rule" => "Missing",
+            "rule_label" => "Missing",
+            "handler_source_label" => "julia_runtime:rule:Missing",
+        ),
+    )
+
+    child_failure_engine = LinkedSpecRuntimeEngine(
+        compile_spec(parse_spec(raw"""
+Top::
+ => Child
+
+Child:
+ /x/
+ E { unknown_runtime_helper(match_text()) }
+"""));
+        spec_name = "child-failure",
+        spec_path = "/specs/child-failure.spec",
+    )
+    child_error = try
+        runtime_parse(child_failure_engine, "x")
+        nothing
+    catch error
+        error
+    end
+    @test child_error isa RuntimeInterpreterException
+    @test child_error.diagnostic !== nothing
+    @test to_json(child_error.diagnostic) == Dict{String,Any}(
+        "type" => "runtime_parser",
+        "stage" => "runtime_execution",
+        "owner_stage" => "julia_runtime",
+        "summary" => "Julia runtime interpreter failed",
+        "detail" => "unsupported runtime helper 'unknown_runtime_helper' in rule Child",
+        "spec_name" => "child-failure",
+        "spec_path" => "/specs/child-failure.spec",
+        "top_rule" => "Top",
+        "rule_label" => "Child",
+        "handler_source_label" => "julia_runtime:rule:Child",
+    )
+    @test sprint(showerror, child_error) == child_error.message
 end
 
 @testset "Spec parser" begin

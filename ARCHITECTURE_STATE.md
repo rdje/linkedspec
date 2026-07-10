@@ -5,6 +5,10 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.5.1` exports neutral-field `RuntimeDiagnostic` payloads on Julia
+  runtime exceptions, carries optional spec identity plus top/rule/handler attribution through nested failures,
+  preserves richer inner diagnostics, and leaves successful parse output/textual errors unchanged. Package status
+  is `runtime-diagnostics`, the full suite passes with 588 assertions, and trace controls advance to `.4.5.2`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.5.0` splits Julia diagnostics/trace before code into stable
   structured runtime diagnostics, reusable trace levels/config/events/sinks, interpreter instrumentation, and
   final no-drift owners. Runtime behavior and `runtime-cursor-boundary` status are unchanged; `.4.5.1` is the sole
