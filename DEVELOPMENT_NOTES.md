@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.3.0 — replace adapters without discarding developer tools):
+  Dart's 0/61 primary-command result is interface drift, not evidence that its parser/runtime is absent. Preserve
+  the corpus command under `bin/corpus_runner.dart`, replace only the public primary boundary, and compose the
+  existing staged parser, validator/compiler, direct-value execution, top-rule/global-mode controls, and native
+  trace infrastructure. Keep portable trace as a separate adapter projection. For strict UTF-8, load raw bytes
+  explicitly so a leading U+FEFF remains data and malformed input is classified inside the correct command phase.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.2.4 — backend gates should be explicit and composable):
   Give each non-reference backend one repo-owned end-to-end gate, then make the canonical Perl/core gate opt into
   it via an explicit environment flag. This preserves reproducible full backend proof without making a Rust,

@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.3.0 — split Dart primary CLI work**
+  (DONE — current Dart primary is 0/61; `.1.5.3.1` is active for exact boundary/loading).
+
+  **Audit/split:** The corpus-oriented primary command is isolated from the reusable staged parser,
+  validation/compiler, native direct-value execution, top-rule/global-mode controls, rich trace, and canonical
+  JSON pattern. Separate leaves now own boundary/loading, execution/results/failures, canonical trace, and
+  unchanged default/POSIX closeout. `bin/corpus_runner.dart` remains the developer corpus surface.
+
+  **Proof:** The unchanged shared runner establishes 0/61; source/API/manifest inspection and docs/KM/governance/
+  mdBook/whitespace checks pass. No Dart implementation or fixture bytes changed.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.2.4 — close Rust primary CLI**
   (DONE — Rust `.1.5.2` closed at 61/61 default/POSIX; Dart `.1.5.3` active).
 

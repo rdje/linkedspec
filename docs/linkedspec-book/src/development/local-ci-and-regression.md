@@ -88,8 +88,10 @@ The Dart backend has its own focused local gate:
 bash tools/run_dart_local.sh
 ```
 
-It runs Dart formatting, analyzer checks, the full Dart test suite, Dart CLI help checks, a bounded Dart-specific
-CLI corpus smoke, and the full 99-fixture corpus execution. The canonical local gate does not require a Dart SDK by default. When a checkout has
+It currently runs Dart formatting, analyzer checks, the full Dart test suite, corpus-oriented Dart CLI help,
+a bounded Dart-specific corpus smoke, and the full 99-fixture corpus execution. The shared 61-case primary-command
+legs are scheduled in `FUTURE-PARITY-BACKLOG.1.5.3.4` after the split boundary/execution/trace work; the separate
+corpus runner remains the 99-fixture owner. The canonical local gate does not require a Dart SDK by default. When a checkout has
 Dart installed and you want one command to include both gates, run:
 
 ```bash

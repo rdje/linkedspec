@@ -1033,8 +1033,8 @@ Run the focused Dart gate from the repository root:
 bash tools/run_dart_local.sh
 ```
 
-That command runs Dart formatting, analyzer checks, the full Dart test suite,
-Dart CLI help checks, a bounded Dart-specific CLI corpus smoke, and full 99-fixture corpus execution. To include Dart in
+That command currently runs Dart formatting, analyzer checks, the full Dart test suite,
+Dart corpus-oriented CLI help checks, a bounded Dart-specific corpus smoke, and full 99-fixture corpus execution. To include Dart in
 the canonical local gate on a machine with a Dart SDK, opt in explicitly:
 
 ```bash
@@ -1057,6 +1057,13 @@ curated corpus subset. Dart's backend-local corpus CLI implementation closed in
 `DART-BACKEND-PARITY.7.4`, and `DART-BACKEND-PARITY.7.5` closed the scoped
 Dart milestone. The later strict-interface audit records that this is not yet the
 shared parser CLI contract; generated source remains outside the current corpus claim.
+`FUTURE-PARITY-BACKLOG.1.5.3.0` measures the current primary executable at 0/61
+unchanged shared command cases and splits the correction. `.1` replaces only the
+primary process arguments/help/loading boundary while preserving
+`bin/corpus_runner.dart`; `.2` composes the existing staged parser, validator/compiler,
+direct-value runtime, top-rule/global-mode controls, and recursively canonical JSON;
+`.3` adds the portable CLI trace independently of rich Dart tracing; `.4` closes both
+default and POSIX environments plus recurring verification.
 
 Dart
 also has source-level AST/data types and staged parse-job sidecars that round-trip

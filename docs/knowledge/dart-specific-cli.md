@@ -31,5 +31,11 @@ full manifest in order.
 compatibility wrapper, but it delegates to the same shared CLI implementation as
 `linkedspec_dart.dart`. Do not treat it as a separate contract owner.
 
+This records the scoped `DART-BACKEND-PARITY.7.4` surface. The later global audit
+`FUTURE-PARITY-BACKLOG.1.5.3.0` proves that `linkedspec_dart.dart` is not yet the
+shared ADR `0023` primary parser command and routes its replacement through `.1`-`.4`.
+The corpus workflow will remain available through `corpus_runner.dart` after that
+replacement.
+
 Related facts: [[variant-specific-cli-requirement]], [[dart-controlled-corpus-execution]],
-[[dart-scoped-parity-milestone-complete]].
+[[dart-scoped-parity-milestone-complete]], [[dart-primary-cli-mechanism-audit]].

@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.3.0 — split Dart primary CLI work
+
+**Audit:** Dart's primary executable is still the scoped corpus command: it accepts corpus selectors, treats no
+arguments as scaffold status, exits `64` for usage errors, and passes 0/61 unchanged shared primary-command cases.
+The separate `bin/corpus_runner.dart` is the correct durable owner for this developer workflow.
+
+**Reusable seams:** Dart already exports staged full-spec parsing, validation/compilation, native execution with
+global parse mode and optional top rule, direct `RuntimeParseResult.value`, rich native trace, and recursive
+key-sorted JSON logic. The primary repair is adapter work, not a duplicate language pipeline.
+
+**Split/frontier:** `.1` owns exact arguments/help/resolution/strict UTF-8 loading; `.2` owns execution composition,
+direct canonical results, and failures; `.3` owns canonical CLI trace; `.4` owns unchanged 61-case default/POSIX
+and recurring-gate closeout. No Dart behavior or shared fixture bytes changed. `.1.5.3.1` is active.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.2.4 — close Rust primary CLI
 
 **Recurring gate:** Added `tools/run_rust_local.sh`, which checks formatting, runs the full Rust runtime package,
