@@ -292,7 +292,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-dispatch"
+    @test status.parity == "runtime-core-values"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -302,7 +302,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-dispatch", String(take!(status_output)))
+    @test occursin("parity: runtime-core-values", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1026,6 +1026,172 @@ Top::
     @test_throws RuntimeInterpreterException runtime_parse(unsupported, "x")
     @test_throws RuntimeInterpreterException runtime_parse(repetition, "x"; top_rule = "Missing")
     @test_throws ArgumentError LinkedSpecRuntimeEngine(repetition.compiled_spec; max_iterations = 0)
+end
+
+@testset "Runtime core value stores and capture helpers" begin
+    runtime_engine(source; parse_mode = SeekParseMode) =
+        LinkedSpecRuntimeEngine(compile_spec(parse_spec(source)); parse_mode = parse_mode)
+
+    typed_stores = runtime_engine(raw"""
+Top::
+ /x/
+ E {
+   set(value, "ok");
+   set(array(items), ["a"]);
+   items += value;
+   set(hash(meta), { "k" : "v" });
+   meta["n"] = 2;
+   payload = { "children" : [ { "name" : "zero" }, { "name" : value } ] };
+   return(hash(
+     "scalar", value,
+     "items", copy(array(items)),
+     "bare_items", items,
+     "meta", copy(hash(meta)),
+     "bare_meta", meta,
+     "name", payload["children"][1]["name"],
+     "shapes", array(undef, false, 3, 2.5)
+   ))
+ }
+""")
+    @test runtime_parse(typed_stores, "x").value == Dict{String,Any}(
+        "scalar" => "ok",
+        "items" => Any["a", "ok"],
+        "bare_items" => Any["a", "ok"],
+        "meta" => Dict{String,Any}("k" => "v", "n" => 2),
+        "bare_meta" => Dict{String,Any}("k" => "v", "n" => 2),
+        "name" => "ok",
+        "shapes" => Any[nothing, false, 3, 2.5],
+    )
+
+    variable_shapes = runtime_engine(raw"""
+Top::
+ /x/
+ E {
+   value = "ok";
+   items = [value, "tail"];
+   meta = { "key" : value };
+   key = "key";
+   return(array(
+     items[0],
+     copy(items),
+     copy(array(items)),
+     meta[key],
+     hash(meta),
+     copy(hash(meta))
+   ))
+ }
+""")
+    @test runtime_parse(variable_shapes, "x").value == Any[
+        "ok",
+        Any["ok", "tail"],
+        Any["ok", "tail"],
+        "ok",
+        Dict{String,Any}("key" => "ok"),
+        Dict{String,Any}("key" => "ok"),
+    ]
+
+    nested_writes = runtime_engine(raw"""
+Top::
+ /x/
+ E {
+   payload = { "items" : [{ "name" : "old" }] };
+   root_array = [{ "name" : "old" }];
+   return(array(
+     payload["items"][0]["name"] = "new",
+     payload["items"][1] = "tail",
+     payload,
+     payload["items"][3] = "gap",
+     payload["missing"][0] = "bad",
+     payload["items"][0][0] = "bad",
+     root_array[0]["name"] = "changed",
+     root_array[1] = { "name" : "tail" },
+     root_array["bad"] = { "name" : "bad" },
+     root_array
+   ))
+ }
+""")
+    updated_payload_once = Dict{String,Any}(
+        "items" => Any[Dict{String,Any}("name" => "new")],
+    )
+    updated_payload = Dict{String,Any}(
+        "items" => Any[Dict{String,Any}("name" => "new"), "tail"],
+    )
+    updated_root_once = Any[Dict{String,Any}("name" => "changed")]
+    updated_root = Any[
+        Dict{String,Any}("name" => "changed"),
+        Dict{String,Any}("name" => "tail"),
+    ]
+    @test runtime_parse(nested_writes, "x").value == Any[
+        updated_payload_once,
+        updated_payload,
+        updated_payload,
+        nothing,
+        nothing,
+        nothing,
+        updated_root_once,
+        updated_root,
+        nothing,
+        updated_root,
+    ]
+
+    captures = runtime_engine(raw"""
+Top::
+ /(?<name>\w+)=(\d+)/
+ E {
+   return(hash(
+     "entry_text", entry_text(),
+     "match_text", match_text(),
+     "entry_groups", entry_groups(),
+     "match_group_1", match_group(1),
+     "entry_named", entry_named(name),
+     "match_named", match_named(name),
+     "entry_has", entry_has(name),
+     "match_has", match_has(name),
+     "entry_map", entry_map(),
+     "match_map", match_map(),
+     "entry_len", entry_len(),
+     "match_len", match_len(),
+     "entry_start", entry_start_pos(),
+     "entry_end", entry_end_pos(),
+     "match_start", match_start_pos(),
+     "match_end", match_end_pos(),
+     "entry_line", entry_line(),
+     "entry_col", entry_col(),
+     "entry_end_line", entry_end_line(),
+     "entry_end_col", entry_end_col(),
+     "match_line", match_line(),
+     "match_col", match_col(),
+     "match_end_line", match_end_line(),
+     "match_end_col", match_end_col()
+   ))
+ }
+""")
+    @test runtime_parse(captures, "🙂\n key=42").value == Dict{String,Any}(
+        "entry_text" => "key=42",
+        "match_text" => "key=42",
+        "entry_groups" => Any["key", "42"],
+        "match_group_1" => "42",
+        "entry_named" => "key",
+        "match_named" => "key",
+        "entry_has" => true,
+        "match_has" => true,
+        "entry_map" => Dict{String,Any}("name" => "key"),
+        "match_map" => Dict{String,Any}("name" => "key"),
+        "entry_len" => 6,
+        "match_len" => 6,
+        "entry_start" => 3,
+        "entry_end" => 9,
+        "match_start" => 3,
+        "match_end" => 9,
+        "entry_line" => 2,
+        "entry_col" => 2,
+        "entry_end_line" => 2,
+        "entry_end_col" => 8,
+        "match_line" => 2,
+        "match_col" => 2,
+        "match_end_line" => 2,
+        "match_end_col" => 8,
+    )
 end
 
 @testset "Spec parser" begin

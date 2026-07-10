@@ -45,7 +45,9 @@ mutable struct _RuntimeExecutionContext
     cursor_codeunit::Int
     registers::RuntimeMatchRegisters
     retv::Any
+    variables::Dict{String,Any}
     arrays::Dict{String,Vector{Any}}
+    hashes::Dict{String,Dict{String,Any}}
     active_rule_entries::Set{Tuple{String,Int,Int}}
     lifecycle_events::Vector{RuntimeLifecycleEvent}
 end
@@ -57,10 +59,17 @@ function _RuntimeExecutionContext(input::AbstractString)
         0,
         RuntimeMatchRegisters(input_text),
         nothing,
+        Dict{String,Any}(),
         Dict{String,Vector{Any}}(),
+        Dict{String,Dict{String,Any}}(),
         Set{Tuple{String,Int,Int}}(),
         RuntimeLifecycleEvent[],
     )
+end
+
+struct _RuntimeEvaluatedAccessSegment
+    kind::Symbol
+    value::Any
 end
 
 struct _RuntimeRuleResult
@@ -633,8 +642,6 @@ function _evaluate_runtime_action_expr!(
     current_edge,
     statement_context::Bool = false,
 )
-    # Keep this evaluator dispatch-facing. JULIA-BACKEND-PARITY.4.3 owns the
-    # general store model and the broader helper/control/block families.
     if expr isa ActionStringLiteralExpr || expr isa ActionNumberLiteralExpr || expr isa ActionBooleanLiteralExpr
         return expr.value
     elseif expr isa ActionRegexLiteralExpr
@@ -645,9 +652,7 @@ function _evaluate_runtime_action_expr!(
         if expr.name == "retv"
             return _read_runtime_retv!(engine, context, current_edge)
         end
-        throw(RuntimeInterpreterException(
-            "runtime variable reads are deferred beyond rule dispatch in rule $rule_label: $(expr.name)",
-        ))
+        return _runtime_copy(_read_runtime_store(context, expr.name))
     elseif expr isa ActionArrayLiteralExpr
         return Any[
             _runtime_copy(_evaluate_runtime_action_expr!(
@@ -658,6 +663,86 @@ function _evaluate_runtime_action_expr!(
                 current_edge,
             )) for item in expr.items
         ]
+    elseif expr isa ActionHashLiteralExpr
+        result = Dict{String,Any}()
+        for entry in expr.entries
+            key = _runtime_string(_evaluate_runtime_action_expr!(
+                engine,
+                entry.key,
+                context,
+                rule_label,
+                current_edge,
+            ))
+            result[key] = _runtime_copy(_evaluate_runtime_action_expr!(
+                engine,
+                entry.value,
+                context,
+                rule_label,
+                current_edge,
+            ))
+        end
+        return result
+    elseif expr isa ActionAssignScalarExpr
+        value = _runtime_copy(_evaluate_runtime_action_expr!(
+            engine,
+            expr.value,
+            context,
+            rule_label,
+            current_edge,
+        ))
+        context.variables[expr.name] = value
+        return _runtime_copy(value)
+    elseif expr isa ActionAssignArrayAppendExpr
+        value = _runtime_copy(_evaluate_runtime_action_expr!(
+            engine,
+            expr.value,
+            context,
+            rule_label,
+            current_edge,
+        ))
+        return _append_runtime_array_value!(context, expr.name, value)
+    elseif expr isa ActionAssignHashIndexExpr
+        return _assign_runtime_index!(
+            engine,
+            context,
+            expr.name,
+            expr.key,
+            expr.value,
+            rule_label,
+            current_edge,
+        )
+    elseif expr isa ActionAssignNestedAccessExpr
+        return _assign_runtime_nested!(
+            engine,
+            context,
+            expr.base,
+            expr.segments,
+            expr.value,
+            rule_label,
+            current_edge,
+        )
+    elseif expr isa ActionIndexedVarExpr
+        collection = _read_runtime_store(context, expr.name)
+        index = _evaluate_runtime_action_expr!(
+            engine,
+            expr.index,
+            context,
+            rule_label,
+            current_edge,
+        )
+        return _runtime_copy(_runtime_index_value(collection, index))
+    elseif expr isa ActionNestedAccessExpr
+        root = expr.base == "retv" ?
+            _read_runtime_retv!(engine, context, current_edge) :
+            _read_runtime_store(context, expr.base)
+        return _runtime_copy(_read_runtime_nested(
+            engine,
+            root,
+            expr.segments,
+            context,
+            rule_label,
+            current_edge,
+        ))
     elseif expr isa ActionCallExpr
         return _evaluate_runtime_call!(
             engine,
@@ -723,14 +808,16 @@ function _evaluate_runtime_call!(
         return _call_runtime_push!(engine, args, context, rule_label, current_edge)
     elseif helper_name == "array"
         return _call_runtime_array(engine, args, context, rule_label, current_edge)
+    elseif helper_name == "hash"
+        return _call_runtime_hash(engine, args, context, rule_label, current_edge)
     elseif helper_name == "copy"
-        return isempty(args) ? nothing : _runtime_copy(_evaluate_runtime_action_expr!(
+        return isempty(args) ? nothing : _copy_runtime_argument(
             engine,
             first(args),
             context,
             rule_label,
             current_edge,
-        ))
+        )
     elseif helper_name == "entry_text"
         return context.registers.entry_match === nothing ? nothing : match_text(context.registers.entry_match)
     elseif helper_name == "match_text"
@@ -747,6 +834,60 @@ function _evaluate_runtime_call!(
         return _runtime_named_capture(engine, context.registers.entry_match, args, context, rule_label, current_edge)
     elseif helper_name == "match_named"
         return _runtime_named_capture(engine, context.registers.local_match, args, context, rule_label, current_edge)
+    elseif helper_name == "entry_has"
+        return _runtime_has_named_capture(
+            engine,
+            context.registers.entry_match,
+            args,
+            context,
+            rule_label,
+            current_edge,
+        )
+    elseif helper_name == "match_has"
+        return _runtime_has_named_capture(
+            engine,
+            context.registers.local_match,
+            args,
+            context,
+            rule_label,
+            current_edge,
+        )
+    elseif helper_name == "entry_map"
+        return context.registers.entry_match === nothing ?
+            Dict{String,Any}() :
+            Dict{String,Any}(context.registers.entry_match.named)
+    elseif helper_name == "match_map"
+        return context.registers.local_match === nothing ?
+            Dict{String,Any}() :
+            Dict{String,Any}(context.registers.local_match.named)
+    elseif helper_name == "entry_len"
+        return _runtime_match_length(context.registers.entry_match)
+    elseif helper_name == "match_len"
+        return _runtime_match_length(context.registers.local_match)
+    elseif helper_name == "entry_line" || helper_name == "entry_start_line"
+        return _runtime_match_line(context.registers.entry_match, false)
+    elseif helper_name == "entry_col" || helper_name == "entry_start_col"
+        return _runtime_match_column(context.registers.entry_match, false)
+    elseif helper_name == "entry_end_line"
+        return _runtime_match_line(context.registers.entry_match, true)
+    elseif helper_name == "entry_end_col"
+        return _runtime_match_column(context.registers.entry_match, true)
+    elseif helper_name == "match_line" || helper_name == "match_start_line"
+        return _runtime_match_line(context.registers.local_match, false)
+    elseif helper_name == "match_col" || helper_name == "match_start_col"
+        return _runtime_match_column(context.registers.local_match, false)
+    elseif helper_name == "match_end_line"
+        return _runtime_match_line(context.registers.local_match, true)
+    elseif helper_name == "match_end_col"
+        return _runtime_match_column(context.registers.local_match, true)
+    elseif helper_name == "entry_start_pos"
+        return context.registers.entry_match === nothing ? nothing : char_start(context.registers.entry_match)
+    elseif helper_name == "entry_end_pos"
+        return context.registers.entry_match === nothing ? nothing : char_end(context.registers.entry_match)
+    elseif helper_name == "match_start_pos"
+        return context.registers.local_match === nothing ? nothing : char_start(context.registers.local_match)
+    elseif helper_name == "match_end_pos"
+        return context.registers.local_match === nothing ? nothing : char_end(context.registers.local_match)
     elseif helper_name == "call"
         if isempty(args)
             return nothing
@@ -785,11 +926,25 @@ function _call_runtime_set!(engine, args, context, rule_label, current_edge)
     ))
     array_target = _runtime_array_target_name(args[1])
     if array_target !== nothing
+        delete!(context.variables, array_target)
+        delete!(context.hashes, array_target)
         context.arrays[array_target] = _runtime_as_array(value)
         return _runtime_copy(context.arrays[array_target])
     end
+    hash_target = _runtime_hash_target_name(args[1])
+    if hash_target !== nothing
+        delete!(context.variables, hash_target)
+        delete!(context.arrays, hash_target)
+        context.hashes[hash_target] = _runtime_as_hash(value)
+        return _runtime_copy(context.hashes[hash_target])
+    end
+    variable_target = _runtime_variable_name(args[1])
+    if variable_target !== nothing
+        context.variables[variable_target] = value
+        return _runtime_copy(value)
+    end
     throw(RuntimeInterpreterException(
-        "set target in rule $rule_label must be array(name) at the rule-dispatch boundary",
+        "set target in rule $rule_label must be a variable, array(name), or hash(name)",
     ))
 end
 
@@ -848,6 +1003,10 @@ function _call_runtime_array(engine, args, context, rule_label, current_edge)
     if length(args) == 1
         name = _runtime_variable_name(first(args))
         if name !== nothing
+            variable = get(context.variables, name, nothing)
+            if variable isa AbstractVector
+                return _runtime_as_array(variable)
+            end
             return _runtime_copy(get(context.arrays, name, Any[]))
         end
     end
@@ -860,6 +1019,40 @@ function _call_runtime_array(engine, args, context, rule_label, current_edge)
             current_edge,
         )) for arg in args
     ]
+end
+
+function _call_runtime_hash(engine, args, context, rule_label, current_edge)
+    if length(args) == 1
+        name = _runtime_variable_name(first(args))
+        if name !== nothing
+            variable = get(context.variables, name, nothing)
+            if variable isa AbstractDict
+                return _runtime_as_hash(variable)
+            end
+            return _runtime_copy(get(context.hashes, name, Dict{String,Any}()))
+        end
+    end
+
+    result = Dict{String,Any}()
+    index = 1
+    while index + 1 <= length(args)
+        key = _runtime_string(_evaluate_runtime_action_expr!(
+            engine,
+            args[index],
+            context,
+            rule_label,
+            current_edge,
+        ))
+        result[key] = _runtime_copy(_evaluate_runtime_action_expr!(
+            engine,
+            args[index + 1],
+            context,
+            rule_label,
+            current_edge,
+        ))
+        index += 2
+    end
+    return result
 end
 
 function _read_runtime_retv!(engine, context, current_edge)
@@ -939,14 +1132,48 @@ function _runtime_named_capture(engine, one_match, args, context, rule_label, cu
     if one_match === nothing || isempty(args)
         return nothing
     end
-    name = string(_evaluate_runtime_action_expr!(
+    name = _runtime_capture_name(engine, first(args), context, rule_label, current_edge)
+    return named_capture(one_match, name)
+end
+
+function _runtime_has_named_capture(engine, one_match, args, context, rule_label, current_edge)
+    if one_match === nothing || isempty(args)
+        return false
+    end
+    name = _runtime_capture_name(engine, first(args), context, rule_label, current_edge)
+    return haskey(one_match.named, name)
+end
+
+function _runtime_capture_name(engine, expr, context, rule_label, current_edge)
+    name = _runtime_variable_name(expr)
+    if name !== nothing
+        return name
+    end
+    return _runtime_string(_evaluate_runtime_action_expr!(
         engine,
-        first(args),
+        expr,
         context,
         rule_label,
         current_edge,
     ))
-    return named_capture(one_match, name)
+end
+
+_runtime_match_length(one_match) = one_match === nothing ? nothing : char_length(one_match)
+
+function _runtime_match_line(one_match, at_end::Bool)
+    if one_match === nothing
+        return nothing
+    end
+    offset = at_end ? one_match.codeunit_end : one_match.codeunit_start
+    return line_column_at_codeunit_offset(one_match.input, offset).line
+end
+
+function _runtime_match_column(one_match, at_end::Bool)
+    if one_match === nothing
+        return nothing
+    end
+    offset = at_end ? one_match.codeunit_end : one_match.codeunit_start
+    return line_column_at_codeunit_offset(one_match.input, offset).column
 end
 
 function _runtime_rule_name_from_expr(engine, expr, context, rule_label, current_edge)
@@ -964,7 +1191,18 @@ function _runtime_rule_name_from_expr(engine, expr, context, rule_label, current
 end
 
 function _runtime_array_target_name(expr)
-    if !(expr isa ActionCallExpr) || expr.name != "array" || length(expr.args) != 1
+    if !(expr isa ActionCallExpr) ||
+            canonical_action_helper_name(expr.name) != "array" ||
+            length(expr.args) != 1
+        return nothing
+    end
+    return _runtime_variable_name(getfield(only(expr.args), :value))
+end
+
+function _runtime_hash_target_name(expr)
+    if !(expr isa ActionCallExpr) ||
+            canonical_action_helper_name(expr.name) != "hash" ||
+            length(expr.args) != 1
         return nothing
     end
     return _runtime_variable_name(getfield(only(expr.args), :value))
@@ -974,9 +1212,274 @@ _runtime_variable_name(expr) = expr isa ActionVariableExpr ? expr.name : nothing
 
 function _append_runtime_array_value!(context::_RuntimeExecutionContext, name::String, value)
     stored = _runtime_copy(value)
+    variable = get(context.variables, name, nothing)
+    if variable isa AbstractVector
+        updated = _runtime_as_array(variable)
+        push!(updated, stored)
+        context.variables[name] = updated
+        if haskey(context.arrays, name)
+            context.arrays[name] = _runtime_as_array(updated)
+        end
+        return _runtime_copy(updated)
+    end
     target = get!(context.arrays, name, Any[])
     push!(target, stored)
     return _runtime_copy(target)
+end
+
+function _read_runtime_store(context::_RuntimeExecutionContext, name::String)
+    if haskey(context.variables, name)
+        return context.variables[name]
+    elseif haskey(context.arrays, name)
+        return context.arrays[name]
+    elseif haskey(context.hashes, name)
+        return context.hashes[name]
+    end
+    return nothing
+end
+
+function _copy_runtime_argument(engine, expr, context, rule_label, current_edge)
+    name = _runtime_variable_name(expr)
+    if name !== nothing
+        return _runtime_copy(_read_runtime_store(context, name))
+    end
+    return _runtime_copy(_evaluate_runtime_action_expr!(
+        engine,
+        expr,
+        context,
+        rule_label,
+        current_edge,
+    ))
+end
+
+function _read_runtime_nested(engine, root, segments, context, rule_label, current_edge)
+    value = root
+    for segment in segments
+        if segment isa ActionKeyAccessSegment
+            if !(value isa AbstractDict)
+                return nothing
+            end
+            value = get(value, segment.value, nothing)
+        else
+            index_value = _evaluate_runtime_action_expr!(
+                engine,
+                segment.expr,
+                context,
+                rule_label,
+                current_edge,
+            )
+            value = _runtime_index_value(value, index_value)
+        end
+    end
+    return value
+end
+
+function _runtime_index_value(collection, index_value)
+    if collection isa AbstractDict
+        return get(collection, _runtime_string(index_value), nothing)
+    elseif collection isa AbstractVector
+        index = _runtime_nonnegative_int(index_value)
+        if index !== nothing && index < length(collection)
+            return collection[index + 1]
+        end
+    end
+    return nothing
+end
+
+function _assign_runtime_index!(
+    engine,
+    context,
+    name,
+    key_expr,
+    value_expr,
+    rule_label,
+    current_edge,
+)
+    if haskey(context.variables, name)
+        root = context.variables[name]
+        if root isa AbstractDict
+            key = _runtime_string(_evaluate_runtime_action_expr!(
+                engine,
+                key_expr,
+                context,
+                rule_label,
+                current_edge,
+            ))
+            value = _runtime_copy(_evaluate_runtime_action_expr!(
+                engine,
+                value_expr,
+                context,
+                rule_label,
+                current_edge,
+            ))
+            updated = _runtime_as_hash(root)
+            updated[key] = value
+            context.variables[name] = updated
+            return _runtime_copy(updated)
+        elseif root isa AbstractVector
+            if key_expr isa ActionStringLiteralExpr
+                return nothing
+            end
+            index_value = _evaluate_runtime_action_expr!(
+                engine,
+                key_expr,
+                context,
+                rule_label,
+                current_edge,
+            )
+            index = _runtime_nonnegative_int(index_value)
+            if index === nothing || index > length(root)
+                return nothing
+            end
+            value = _runtime_copy(_evaluate_runtime_action_expr!(
+                engine,
+                value_expr,
+                context,
+                rule_label,
+                current_edge,
+            ))
+            updated = _runtime_as_array(root)
+            if index == length(updated)
+                push!(updated, value)
+            else
+                updated[index + 1] = value
+            end
+            context.variables[name] = updated
+            return _runtime_copy(updated)
+        end
+        return nothing
+    end
+
+    key = _runtime_string(_evaluate_runtime_action_expr!(
+        engine,
+        key_expr,
+        context,
+        rule_label,
+        current_edge,
+    ))
+    value = _runtime_copy(_evaluate_runtime_action_expr!(
+        engine,
+        value_expr,
+        context,
+        rule_label,
+        current_edge,
+    ))
+    target = get!(context.hashes, name, Dict{String,Any}())
+    target[key] = value
+    return _runtime_copy(target)
+end
+
+function _assign_runtime_nested!(
+    engine,
+    context,
+    base,
+    segments,
+    value_expr,
+    rule_label,
+    current_edge,
+)
+    evaluated_segments = _RuntimeEvaluatedAccessSegment[]
+    for segment in segments
+        if segment isa ActionKeyAccessSegment
+            push!(evaluated_segments, _RuntimeEvaluatedAccessSegment(:key, segment.value))
+        else
+            value = _evaluate_runtime_action_expr!(
+                engine,
+                segment.expr,
+                context,
+                rule_label,
+                current_edge,
+            )
+            push!(evaluated_segments, _RuntimeEvaluatedAccessSegment(:index, value))
+        end
+    end
+    stored_value = _runtime_copy(_evaluate_runtime_action_expr!(
+        engine,
+        value_expr,
+        context,
+        rule_label,
+        current_edge,
+    ))
+
+    storage_kind, root = _runtime_store_for_write(context, base)
+    if storage_kind === nothing || isempty(evaluated_segments) ||
+            !(root isa AbstractDict || root isa AbstractVector)
+        return nothing
+    end
+
+    updated_root = _runtime_copy(root)
+    if !_assign_runtime_nested_value!(updated_root, evaluated_segments, stored_value)
+        return nothing
+    end
+    _store_runtime_updated_root!(context, storage_kind, base, updated_root)
+    return _runtime_copy(updated_root)
+end
+
+function _runtime_store_for_write(context::_RuntimeExecutionContext, name::String)
+    if haskey(context.variables, name)
+        return (:variable, context.variables[name])
+    elseif haskey(context.arrays, name)
+        return (:array, context.arrays[name])
+    elseif haskey(context.hashes, name)
+        return (:hash, context.hashes[name])
+    end
+    return (nothing, nothing)
+end
+
+function _store_runtime_updated_root!(context, storage_kind, name, value)
+    if storage_kind == :variable
+        context.variables[name] = _runtime_copy(value)
+    elseif storage_kind == :array
+        context.arrays[name] = _runtime_as_array(value)
+    else
+        context.hashes[name] = _runtime_as_hash(value)
+    end
+    return nothing
+end
+
+function _assign_runtime_nested_value!(root, segments, stored_value)
+    node = root
+    for (position, segment) in enumerate(segments)
+        is_last = position == length(segments)
+        if segment.kind == :key
+            if !(node isa AbstractDict)
+                return false
+            end
+            key = _runtime_string(segment.value)
+            if is_last
+                node[key] = _runtime_copy(stored_value)
+            else
+                if !haskey(node, key) || node[key] === nothing
+                    return false
+                end
+                node = node[key]
+            end
+            continue
+        end
+
+        if !(node isa AbstractVector)
+            return false
+        end
+        index = _runtime_nonnegative_int(segment.value)
+        if index === nothing
+            return false
+        end
+        if is_last
+            if index > length(node)
+                return false
+            elseif index == length(node)
+                push!(node, _runtime_copy(stored_value))
+            else
+                node[index + 1] = _runtime_copy(stored_value)
+            end
+        else
+            if index >= length(node) || node[index + 1] === nothing
+                return false
+            end
+            node = node[index + 1]
+        end
+    end
+    return true
 end
 
 function _runtime_int(value)
@@ -990,7 +1493,23 @@ function _runtime_int(value)
     return nothing
 end
 
+function _runtime_nonnegative_int(value)
+    integer = _runtime_int(value)
+    return integer !== nothing && integer >= 0 ? integer : nothing
+end
+
+_runtime_string(value) = value === nothing ? "" : string(value)
+
 _runtime_as_array(value) = value isa AbstractVector ? Any[_runtime_copy(item) for item in value] : Any[]
+
+function _runtime_as_hash(value)
+    if !(value isa AbstractDict)
+        return Dict{String,Any}()
+    end
+    return Dict{String,Any}(
+        _runtime_string(key) => _runtime_copy(item) for (key, item) in pairs(value)
+    )
+end
 
 function _runtime_nextable_bool(callback)
     try

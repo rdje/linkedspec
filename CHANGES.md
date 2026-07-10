@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.4.3.1 — add Julia runtime value capture helpers
+
+**Scope:** Julia runtime scalar/array/hash stores, typed snapshots, structural assignments/access, capture helper
+reads, package status, focused runtime tests, README, task-tree frontier, roadmaps/index, mdBook status/handoff,
+Knowledge Map, architecture snapshot, live docs, and resume pointer.
+
+**Change:** Extended `julia/src/runtime/Interpreter.jl` with separate scalar, array, and hash stores; copied bare
+reads; `array(...)` / `hash(...)` / `copy(...)`; array/hash literals; scalar, append, hash-index, and nested
+assignment; indexed/nested reads; and final checked no-autovivification nested writes that return updated roots or
+`nothing` without partial mutation. Entry/local capture execution now covers bare-name named reads, existence,
+named maps, character lengths/spans, and start/end line-column helpers. Package status now reports
+`runtime-core-values`.
+
+**Validation:** `Pkg.test()` passes with 554 assertions, including four focused end-to-end core-value/store/capture
+cases and all prior Julia coverage. Commit-time docs/governance validation covers mdBook, memory architecture,
+task-tree metadata, Knowledge Map, doctrine, and `git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.4.3.0 — split Julia runtime helper families
 
 **Scope:** Planning-only decomposition of the broad Julia helper/value runtime container, task-tree frontier,
@@ -952,7 +969,7 @@ memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff 
 
 **Change:** Split the broad `.4.3` runtime value/helper-family leaf before code. The child leaves now isolate
 core value/store/capture helpers, string/number helpers, array helpers, hash helpers, value-block/control/tree
-traversal helpers, and final helper/value no-drift closeout. The active frontier advances to `.4.3.1`.
+traversal helpers, and final helper/value no-drift closeout. The first child frontier was `.4.3.1`.
 
 **Validation:** Memory architecture, task-tree metadata, doctrine checks, and `git diff --check` pass.
 

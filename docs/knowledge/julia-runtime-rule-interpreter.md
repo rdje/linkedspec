@@ -13,7 +13,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, runtime, interpreter, dispatch, lifecycle, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.4.2 adds julia/src/runtime/Interpreter.jl and exports LinkedSpecRuntimeEngine, runtime_parse(...), runtime_execute(...), RuntimeParseResult, RuntimeLifecycleEvent, and RuntimeInterpreterException. julia/test/runtests.jl verifies default repetition, action-edge and blind-call child dispatch, explicit call/returns, passive terminals, AND/OR modes, bounded repetition, zero-progress cutoff, lifecycle order/events, retv, accumulators, consume mode, nested output shapes, recursion cutoff, and runtime error boundaries. JULIA-BACKEND-PARITY.4.3.0 subsequently splits general stores/captures and broad helper/control/block/callback families into mechanism-sized children beginning at .4.3.1."
+evidence: "JULIA-BACKEND-PARITY.4.2 adds julia/src/runtime/Interpreter.jl and exports LinkedSpecRuntimeEngine, runtime_parse(...), runtime_execute(...), RuntimeParseResult, RuntimeLifecycleEvent, and RuntimeInterpreterException. julia/test/runtests.jl verifies default repetition, action-edge and blind-call child dispatch, explicit call/returns, passive terminals, AND/OR modes, bounded repetition, zero-progress cutoff, lifecycle order/events, retv, accumulators, consume mode, nested output shapes, recursion cutoff, and runtime error boundaries. JULIA-BACKEND-PARITY.4.3.0 subsequently splits helper/value families, and .4.3.1 adds the core scalar/array/hash store model, assignments/access, snapshots, and capture maps/positions over the same interpreter."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
@@ -31,10 +31,11 @@ same-rule/slot/cursor guards.
 `RuntimeParseResult` records matched/value state, the backend-neutral one-element output wrapper, final code-unit
 and character cursors, and lifecycle events.
 
-The `.4.2` ActionIR evaluator is intentionally narrow: literals, `retv`, explicit arrays,
-`set(array(...), ...)`, `push(...)`, `copy(...)`, `call(...)`, explicit returns, and entry/local capture reads are
-available only to support dispatch and lifecycle proofs. `.4.3.0` splits general variable/store/capture behavior
-and the documented string/number/array/hash/control/block/callback families into `.4.3.1` through `.4.3.6`.
+The `.4.2` ActionIR evaluator began as a deliberately narrow dispatch surface. `.4.3.1` now extends that same
+owner with the portable core scalar/array/hash store model, structural assignments/access, typed snapshots, and
+entry/local capture maps and positions. String/numeric/array/hash helper breadth plus control/block/callback
+families remain split across `.4.3.2` through `.4.3.6`.
 
 Related facts: [[julia-runtime-matching-state]], [[julia-compiled-spec-state]],
-[[dart-runtime-rule-interpreter]], [[spec-lifecycle-retv-order]], [[julia-backend-interpreter-first-plan]].
+[[julia-runtime-core-value-capture-helpers]], [[dart-runtime-rule-interpreter]],
+[[spec-lifecycle-retv-order]], [[julia-backend-interpreter-first-plan]].

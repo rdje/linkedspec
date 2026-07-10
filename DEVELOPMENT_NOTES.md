@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.4.3.1 — Julia runtime core values/stores/captures):
+  `julia/src/runtime/Interpreter.jl` now has one portable core value model shared by later helper families: scalar,
+  array, and hash stores; copied bare/typed snapshots; structural literal/assignment/access execution; and capture
+  map/position reads. Nested value-path assignment implements the final cross-backend contract immediately:
+  segment expressions precede the RHS, roots mutate only after full validation, missing/wrong intermediates do not
+  autovivify, successful writes return the updated root, and failed writes return `nothing` without mutation.
+  This avoids reproducing the transient Dart nested-write drift already corrected by its no-drift leaf. `.4.3.2`
+  can build pure string/numeric helpers and receiver chains over this stable copied-value boundary.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.4.3.0 — split Julia runtime helper families):
   The Julia helper/value rollout now mirrors the proven Dart mechanism order instead of treating the complete
   helper catalog as one implementation unit. Core JSON-shaped stores/captures land first, then string/numeric

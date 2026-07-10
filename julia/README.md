@@ -4,7 +4,8 @@ This directory is the repository-owned Julia backend scaffold. The current statu
 surface, manifest-backed corpus validation, source AST/data types, core `.spec` source parsing, frontend source
 validation, spec-shaped user-function shell projection, typed helper/action AST parsing, canonical ActionIR contract
 resolution, a user-function registry seam, compiled-spec state, runtime regex/match-state primitives, and first
-compiled-rule interpreter dispatch: broader helper/value families and corpus execution are not implemented yet.
+compiled-rule interpreter dispatch with core value/store/capture semantics: broader helper families and corpus
+execution are not implemented yet.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -15,7 +16,8 @@ Typed helper/action AST parsing was added by `JULIA-BACKEND-PARITY.3.1`, ActionI
 compiled-spec state was added by `JULIA-BACKEND-PARITY.3.4`. Runtime regex matching and match-state tracking were
 added by `JULIA-BACKEND-PARITY.4.1`, and first executable rule dispatch was added by
 `JULIA-BACKEND-PARITY.4.2`. `JULIA-BACKEND-PARITY.4.3.0` split helper/value work by runtime mechanism. The active
-next boundary is `JULIA-BACKEND-PARITY.4.3.1` for core value/store/capture semantics.
+core value/store/capture boundary landed in `JULIA-BACKEND-PARITY.4.3.1`; the active next boundary is `.4.3.2`
+for string/scalar and numeric helper families.
 
 ## Commands
 
@@ -86,7 +88,9 @@ quantifiers, and recursive patterns directly.
 `RuntimeParseResult`, `RuntimeLifecycleEvent`, and `RuntimeInterpreterException`. It executes compiled default,
 AND, OR, and bounded/unbounded repetition families; action/blind child edges; lifecycle order; `retv`; explicit
 returns; narrow array accumulators/capture reads; recursion guards; and zero-progress cutoffs in seek or consume
-mode. The embedded ActionIR evaluator is intentionally dispatch-facing. `.4.3.0` splits general stores/captures,
-string/number, array, hash, and control/block/callback families into `.4.3.1` through `.4.3.5`, with `.4.3.6`
-owning no-drift closeout; cursor controls, staged parser execution, diagnostics, tracing, and corpus execution remain
-later leaves.
+mode. The embedded ActionIR evaluator now preserves scalar/array/hash/null/boolean/number shapes through separate
+stores, bare reads, typed `array(name)` / `hash(name)` snapshots, `copy(...)`, literals, assignments, indexed and
+nested reads, and checked no-autovivification nested writes. It also exposes entry/local capture text, groups,
+named maps/existence, character spans, and line-column helpers. `.4.3.2` through `.4.3.5` own string/number, array,
+hash, and control/block/callback breadth, with `.4.3.6` owning no-drift closeout; cursor controls, staged parser
+execution, diagnostics, tracing, and corpus execution remain later leaves.

@@ -297,7 +297,9 @@ frontend validation and strict syntax behavior, `.2.4` has added spec-shaped top
 `.3.1` has added typed helper/action AST parsing, `.3.2` has added ActionIR contract resolution, `.3.3` has added
 the user-function registry seam, `.3.4` has added compiled-spec state, and `.4.1` has added runtime regex matching
 and match-state tracking. `.4.2` has added first compiled-rule dispatch, and `.4.3.0` has split helper/value work by
-runtime mechanism. The active Julia frontier is `.4.3.1` for core value/store/capture semantics. Future Julia and
+runtime mechanism. `.4.3.1` has added core scalar/array/hash stores, typed snapshots, assignments/access, checked
+nested writes, and capture maps/positions. The active Julia frontier is `.4.3.2` for string/scalar and numeric
+helpers. Future Julia and
 Lua backend plans must own their own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -386,9 +388,11 @@ without a dialect-rewrite layer. `julia/src/runtime/Interpreter.jl` exposes `Lin
 `runtime_parse(...)`, `runtime_execute(...)`, result/lifecycle/error records, and first execution over compiled
 default/AND/OR/repetition families. It runs lifecycle order, action/blind children, `retv`, explicit returns,
 narrow array/rule accumulators and capture reads, output projection, repetition bounds, zero-progress cutoffs, and
-recursion guards in seek or consume mode. The evaluator remains dispatch-facing: `.4.3` owns general stores and
-the broader helper families. `.4.3.0` splits those into `.4.3.1` core stores/captures, `.4.3.2` string/numeric,
-`.4.3.3` array, `.4.3.4` hash, `.4.3.5` value/control/block/callback, and `.4.3.6` no-drift leaves. Later leaves own
+recursion guards in seek or consume mode. `.4.3.0` splits the broader evaluator into `.4.3.1` core
+stores/captures, `.4.3.2` string/numeric,
+`.4.3.3` array, `.4.3.4` hash, `.4.3.5` value/control/block/callback, and `.4.3.6` no-drift leaves. `.4.3.1` is now
+implemented: scalar/array/hash stores, bare and typed snapshots, structural assignments/access, checked
+no-autovivification nested writes, and entry/local capture maps/positions pass focused tests. Later leaves own
 cursor controls, staged parser execution, diagnostics/trace, and corpus execution.
 
 ### Dart Backend Commands

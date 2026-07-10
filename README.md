@@ -88,9 +88,10 @@ Top-level directories and files:
   - Current state: package/corpus scaffold, source frontend, typed ActionIR and contracts, user-function registry,
     compiled-spec state, and runtime seek/consume regex matching with capture/offset projection, cursor state,
     entry/local match registers, and zero-progress detection. First compiled-rule dispatch now executes rule modes,
-    lifecycle flow, action/blind children, `retv`, explicit returns, narrow accumulators, and recursion/progress
-    guards. Helper/value families are split by mechanism; core value/store/capture semantics are the active
-    `JULIA-BACKEND-PARITY.4.3.1` frontier.
+    lifecycle flow, action/blind children, `retv`, explicit returns, and recursion/progress guards. Core
+    scalar/array/hash stores, typed snapshots, structural assignments/access, checked nested writes, and
+    entry/local capture maps/positions are implemented. String/scalar and numeric helpers are the active
+    `JULIA-BACKEND-PARITY.4.3.2` frontier.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.
