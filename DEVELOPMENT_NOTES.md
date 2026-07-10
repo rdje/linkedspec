@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.4 — optional SDK verification boundary):
+  Backend gates should be canonical without making every core checkout install every SDK. Julia now mirrors the
+  Dart pattern: one focused repo-owned script is authoritative for backend changes, and the shared local gate opts
+  in through an explicit environment flag. The executable and depot are inputs because Julia installations and
+  writable precompile locations vary by host. The default temp-root depot keeps generated artifacts out of the
+  repository and leaves cleanup safely scoped to one `compiled/` directory.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.3 — atomic full-corpus gate):
   Green disjoint windows are necessary diagnostics but not an aggregate parity proof: manifest insertion, ordering,
   or cross-window composition could drift while each historical subset still passes. The permanent 99-result test

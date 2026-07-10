@@ -138,4 +138,12 @@ else
  log "skipping optional Dart local gate (set LINKEDSPEC_RUN_DART=1 to include it when a Dart SDK is available)"
 fi
 
+if [[ "${LINKEDSPEC_RUN_JULIA:-0}" == "1" ]]; then
+ log "running optional Julia local gate (LINKEDSPEC_RUN_JULIA=1)"
+ require_tracked_file tools/run_julia_local.sh
+ bash "$REPO_ROOT/tools/run_julia_local.sh"
+else
+ log "skipping optional Julia local gate (set LINKEDSPEC_RUN_JULIA=1 to include it when a Julia SDK is available)"
+fi
+
 log "local CI gate passed"

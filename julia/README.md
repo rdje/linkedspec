@@ -21,11 +21,31 @@ value/store/capture behavior landed in `.4.3.1`, and string/scalar plus numeric 
 array helper and mutation boundary landed in `.4.3.3`, and hash helper and mutation behavior landed in `.4.3.4`;
 `.4.3.5` landed value/control/block/callback execution, and `.4.3.6` closed final helper/value no-drift. Cursor,
 diagnostic/trace, staged-function, shipped-corpus, function-shell, and full-corpus work through `.6.3` has since
-landed; `.6.4` is active.
+landed; `.6.4` now owns the focused optional-SDK verification gate, and `.7.1` is active.
 
 ## Commands
 
-From the repository root:
+Run the complete repo-owned Julia gate from the repository root:
+
+```bash
+bash tools/run_julia_local.sh
+```
+
+It runs package tests, Julia CLI help/status checks, corpus-runner help, and the full 99-fixture corpus. The shared
+core gate includes it only when explicitly requested:
+
+```bash
+LINKEDSPEC_RUN_JULIA=1 bash tools/run_ci_local.sh
+```
+
+Use `LINKEDSPEC_JULIA_CMD=/path/to/julia` to select a Julia executable and
+`LINKEDSPEC_JULIA_DEPOT_PATH=/path/to/depot` to select a writable depot. Without a depot override, the script
+respects `JULIA_DEPOT_PATH` or uses a platform temp directory outside the repository.
+The focused gate prints the resolved depot. Under disk pressure, remove only that depot's regenerable `compiled/`
+subdirectory after confirming no Julia process is using it; preserve packages, registries, environments, and
+artifacts.
+
+Direct commands from the repository root:
 
 ```bash
 julia --project=julia -e 'import Pkg; Pkg.instantiate()'
@@ -33,12 +53,12 @@ julia --project=julia -e 'import Pkg; Pkg.test()'
 julia --project=julia julia/bin/linkedspec_julia.jl --help
 julia --project=julia julia/bin/linkedspec_julia.jl status
 julia --project=julia julia/bin/linkedspec_julia.jl corpus --corpus rust/linkedspec-runtime/tests/corpus
-julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus
+julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute
 ```
 
 The corpus commands validate `manifest.json`, fixture directory drift, required `input.spec` / `input.txt` /
-`expected.json` files, and expected JSON syntax. `--execute` is intentionally unavailable until parser/runtime
-semantics land.
+`expected.json` files, and expected JSON syntax. Bare `--execute` runs all 99 fixtures; selectors narrow a run
+without bypassing complete manifest validation.
 
 Under managed harnesses where the default Julia depot is not writable, prefix commands with a writable depot:
 
@@ -167,7 +187,7 @@ outputs, and zero failures. The shipped window is permanently 31/31. `.6.2.5` ad
 executes the checked-in definition spec over source, normalizes neutral nodes, and reuses staged body parsing. All
 three routed top-level function fixtures pass. `.6.3` adds one atomic complete-corpus regression and enables
 unbounded CLI execution: the manifest runs 99/99 green in exact order. Full tests pass with 840 assertions, status
-is `runtime-corpus-full`, and `.6.4` owns local verification wiring.
+is `runtime-corpus-full`, `.6.4` owns the focused optional-SDK gate, and `.7.1` is active for public documentation.
 
 Library example:
 

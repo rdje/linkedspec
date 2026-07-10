@@ -7,8 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.4 — wire Julia local verification**
+  (DONE — focused Julia gate and optional shared-CI inclusion are green; `.7.1` is active).
+
+  **Change:** Added `tools/run_julia_local.sh` over package tests, Julia CLI checks, and the full corpus. The Julia
+  binary/depot are configurable. Shared local CI remains core-only unless `LINKEDSPEC_RUN_JULIA=1` is set.
+
+  **Verification:** The focused gate passes 840 assertions and 99/99 corpus execution. Shell syntax, default local
+  CI, mdBook, Knowledge Map, and governance gates pass without a default Julia SDK requirement.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.6.3 — close full Julia corpus gate**
-  (DONE — complete ordered corpus execution is 99/99 green; `.6.4` is active).
+  (DONE — complete ordered corpus execution is 99/99 green; `.6.4` has since closed).
 
   **Change:** Removed the temporary rollout fence so bare CLI `--execute` runs the complete validated manifest;
   named, bounded, and offset-only selection remains available. Added one permanent aggregate regression over all

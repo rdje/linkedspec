@@ -167,8 +167,12 @@ Top-level project docs:
 - Run `bash tools/run_ci_local.sh` from the repo root to execute the canonical regression gate.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 99-fixture corpus execution.
-- The canonical local gate stays core-only by default so it does not depend on a Dart SDK being installed. To opt
-  into Dart checks from the shared gate, run `LINKEDSPEC_RUN_DART=1 bash tools/run_ci_local.sh`.
+- Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI
+  checks, and the 99-fixture corpus execution. Override the executable/depot with `LINKEDSPEC_JULIA_CMD` and
+  `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.
+- The canonical local gate stays core-only by default so it does not depend on Dart or Julia being installed. To
+  opt into backend checks, set `LINKEDSPEC_RUN_DART=1` and/or `LINKEDSPEC_RUN_JULIA=1` before
+  `bash tools/run_ci_local.sh`.
 - `.github/workflows/ci.yml` remains tracked and delegates to that shared script, but hosted automatic GitHub Actions runs are disabled until intentionally re-enabled.
 
 ## Maintenance Policy for README

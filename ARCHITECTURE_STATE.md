@@ -5,6 +5,10 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.4` adds `tools/run_julia_local.sh` as the repo-owned package/CLI/
+  99-fixture gate. Julia executable and depot paths are configurable, with generated depot state outside the
+  repository. Shared local CI includes the gate only under `LINKEDSPEC_RUN_JULIA=1`, so default core verification
+  has no Julia SDK dependency. The focused gate passes 840 assertions plus 99/99; `.7.1` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.3` closes the full Julia corpus gate. Complete manifest validation
   remains mandatory before execution; one atomic regression locks format/order/count/endpoints, 99/99 passes,
   zero failures, and every exact output. Unbounded CLI `--execute` now runs the full manifest, with selectors

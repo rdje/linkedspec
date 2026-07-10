@@ -420,7 +420,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.5.3 - preserve Julia staged descriptor shapes`
 
 - ID: `JULIA-BACKEND-PARITY.6`
-  Status: `active`
+  Status: `done`
   Goal: Prove Julia parity against the corpus and cross-backend gates.
   Children: `.6.1`, `.6.2`, `.6.3`, `.6.4`
 
@@ -718,20 +718,25 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.3 - close full Julia corpus gate`
 
 - ID: `JULIA-BACKEND-PARITY.6.4`
-  Status: `active`
+  Status: `done`
   Goal: Wire Julia parity into the local verification story.
   Acceptance: Focused Julia test commands are documented; broader local gate integration is added only when
     reliable and not dependent on absent local SDK state.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `tools/run_julia_local.sh` provides one repo-owned focused gate over package tests,
+    Julia CLI help/status, corpus-runner help, and full 99-fixture execution. The Julia command and depot are
+    configurable through `LINKEDSPEC_JULIA_CMD` and `LINKEDSPEC_JULIA_DEPOT_PATH`; the default depot is outside
+    the repository. `tools/run_ci_local.sh` stays core-only by default and includes Julia only when
+    `LINKEDSPEC_RUN_JULIA=1`, so machines without Julia retain the canonical gate. The focused gate passes 840
+    assertions and 99/99 corpus execution; shell syntax, default local CI, docs, and governance gates pass.
+  Commit: `JULIA-BACKEND-PARITY.6.4 - wire Julia local verification`
 
 - ID: `JULIA-BACKEND-PARITY.7`
-  Status: `pending`
+  Status: `active`
   Goal: Close documentation, generated-source follow-up, and handoff alignment.
   Children: `.7.1`, `.7.2`, `.7.3`
 
 - ID: `JULIA-BACKEND-PARITY.7.1`
-  Status: `pending`
+  Status: `active`
   Goal: Document Julia backend usage, status, and parity boundaries in the mdBook.
   Acceptance: Book pages explain how to run Julia, what parity gate it satisfies, and any remaining limitations in
     variant-neutral terms.
@@ -781,7 +786,37 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 21 | `JULIA-BACKEND-PARITY.6.2.4.6` | `done` | Permanent full-window execution locks 31/31 exact output and closes shipped no-drift. |
 | 22 | `JULIA-BACKEND-PARITY.6.2.5` | `done` | Spec-driven source parsing executes all three routed top-level function fixtures without a raw scanner. |
 | 23 | `JULIA-BACKEND-PARITY.6.3` | `done` | Full manifest order/output is locked at 99/99 and unbounded CLI execution is enabled. |
-| 24 | `JULIA-BACKEND-PARITY.6.4` | `active` | Wire the proven Julia gate into the documented local verification story. |
+| 24 | `JULIA-BACKEND-PARITY.6.4` | `done` | Focused Julia verification is repo-owned and optional shared-CI inclusion preserves SDK independence. |
+| 25 | `JULIA-BACKEND-PARITY.7.1` | `active` | Close public Julia usage, status, and parity-boundary documentation. |
+
+## `JULIA-BACKEND-PARITY.6.4` Local Verification Result
+
+Verification evidence recorded on 2026-07-10:
+
+- `tools/run_julia_local.sh` runs Julia `Pkg.test()`, both Julia CLI help/status surfaces, corpus-runner help, and
+  the complete 99-fixture corpus gate from the repository root.
+- `LINKEDSPEC_JULIA_CMD` selects a non-default Julia executable.
+  `LINKEDSPEC_JULIA_DEPOT_PATH` selects a dedicated writable depot; otherwise the script respects
+  `JULIA_DEPOT_PATH` or uses a temp-root depot outside the repository.
+- `tools/run_ci_local.sh` runs the Julia gate only under `LINKEDSPEC_RUN_JULIA=1`; default local CI emits an
+  explicit skip message and has no Julia SDK dependency.
+- The focused gate passes all 840 package assertions and the direct 99/99 corpus run. The default canonical local
+  gate passes its core suite while skipping both optional backend gates.
+
+## `JULIA-BACKEND-PARITY.6.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Julia had documented individual commands but no repo-owned focused gate or shared-CI
+  opt-in equivalent to the completed Dart backend.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `tools/` contained only the Dart backend wrapper, and
+  `tools/run_ci_local.sh` had no optional Julia branch; documentation therefore could not point to one canonical
+  Julia verification command.
+- [x] **FIX** — Added the configurable focused Julia gate, optional `LINKEDSPEC_RUN_JULIA=1` integration, and
+  aligned root/backend/book usage docs.
+- [x] **ADDRESSED (verified)** — The focused script passes 840 package assertions, CLI checks, and 99/99 corpus.
+- [x] **NO REGRESSION** — Shell syntax checks pass; default local CI remains core-only and passes without opting
+  into either backend SDK.
+- [x] **LOCKSTEP** — Root/Julia READMEs, public book, task/index, Knowledge Map, live docs, and `MEMORY.md` agree;
+  `.7.1` is the sole active Julia frontier.
 
 ## `JULIA-BACKEND-PARITY.6.3` Full Corpus Result
 
@@ -2429,6 +2464,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.6` | Permanent offset-68/limit-31 regression; direct 31-case corpus CLI; full Julia `Pkg.test()`; CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. The full shipped window is permanently locked at 31/31 with stable endpoints and exact outputs; full tests pass with 816 assertions, status is `runtime-corpus-shipped`, `.6.2.4` closes, and `.6.2.5` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.5` | Rule-only failure reproduction; direct `user_function_definition.spec` execution; seven source-driven parser assertions; permanent three-case corpus regression; direct three-case corpus CLI; full Julia tests; CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Spec-driven source parsing returns neutral function nodes and composes existing staging/runtime paths; all three routed fixtures pass exact output, full tests pass with 827 assertions, status is `runtime-corpus-function-shells`, and `.6.3` becomes active without a raw Julia scanner. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.3` | Existing focused manifest/drift/mismatch guards; permanent complete 99-fixture regression; full unbounded corpus CLI; offset-only CLI regression; full Julia tests; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. The atomic library gate and direct CLI both execute all 99 fixtures in order with exact outputs and zero failures; full tests pass with 840 assertions, status is `runtime-corpus-full`, and `.6.4` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.4` | `bash -n tools/run_julia_local.sh tools/run_ci_local.sh`; focused `tools/run_julia_local.sh` with explicit Julia/depot overrides; default `tools/run_ci_local.sh`; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. The focused gate passes 840 package assertions, Julia CLI checks, and 99/99 corpus execution; default shared CI remains core-only unless `LINKEDSPEC_RUN_JULIA=1`, and `.7.1` becomes active. |
 
 ## Commit Log
 
@@ -2482,9 +2518,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.6.2.4.6` | `JULIA-BACKEND-PARITY.6.2.4.6 - close Julia shipped corpus no drift` | Permanent complete 31/31 shipped-window regression; `.6.2.4` closes and function-shell fixtures advance to `.6.2.5`. |
 | `JULIA-BACKEND-PARITY.6.2.5` | `JULIA-BACKEND-PARITY.6.2.5 - execute Julia function shell corpus` | Spec-driven function-definition parsing closes all three routed top-level `fn` fixtures; full-manifest gate advances to `.6.3`. |
 | `JULIA-BACKEND-PARITY.6.3` | `JULIA-BACKEND-PARITY.6.3 - close full Julia corpus gate` | Full ordered library/CLI corpus execution is 99/99 green; verification wiring advances to `.6.4`. |
+| `JULIA-BACKEND-PARITY.6.4` | `JULIA-BACKEND-PARITY.6.4 - wire Julia local verification` | Focused package/CLI/99-fixture gate plus optional shared-CI integration; documentation advances to `.7.1`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.4` local verification wiring. Added configurable `tools/run_julia_local.sh` over
+  package tests, Julia CLI checks, and full 99-fixture execution. `tools/run_ci_local.sh` remains core-only by
+  default and includes Julia only under `LINKEDSPEC_RUN_JULIA=1`. Focused verification passes 840 assertions and
+  99/99; root/backend/book docs name the focused, direct, and opt-in commands; `.7.1` is active.
 - `2026-07-10`: Completed `.6.3` full Julia corpus gate. The temporary unbounded CLI rollout fence is removed;
   bare `--execute` runs the complete validated manifest, while named, bounded, and offset-only diagnostics remain.
   A permanent regression locks manifest/result count `99`, exact order/endpoints, 99 passes, zero failures, and

@@ -45,15 +45,27 @@ Dart installed and you want one command to include both gates, run:
 LINKEDSPEC_RUN_DART=1 bash tools/run_ci_local.sh
 ```
 
-## Focused Julia Checks
+## Focused Julia Gate
 
-The Julia backend currently has a package-level gate rather than a shared local-CI integration. From the repository
-root, run:
+Run the repo-owned focused gate from the repository root:
 
 ```bash
-JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot julia --project=julia -e 'import Pkg; Pkg.test()'
-JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot julia --project=julia julia/bin/linkedspec_julia.jl status
-JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute
+bash tools/run_julia_local.sh
+```
+
+It runs `Pkg.test()`, Julia CLI help/status, corpus-runner help, and the complete 99-fixture corpus. The Julia
+executable and depot are configurable:
+
+```bash
+LINKEDSPEC_JULIA_CMD=/path/to/julia \
+LINKEDSPEC_JULIA_DEPOT_PATH=/path/to/depot \
+bash tools/run_julia_local.sh
+```
+
+The canonical shared gate does not require Julia by default. Opt in explicitly on a Julia-capable checkout:
+
+```bash
+LINKEDSPEC_RUN_JULIA=1 bash tools/run_ci_local.sh
 ```
 
 These checks currently cover package loading, source parsing/validation, function-shell projection, typed ActionIR
@@ -91,6 +103,8 @@ rm -rf ~/.julia/compiled
 
 Remove only Julia's `compiled/` cache, never the whole depot. Preserve `packages/`, `registries/`, `environments/`,
 `logs/`, `scratchspaces/`, `artifacts/`, project manifests, source, and fixture data.
+`tools/run_julia_local.sh` prints its resolved depot path; apply the same `compiled/`-only rule there when the
+configured/default depot differs from the examples above.
 
 Large generation logs under `/private/tmp` need a stricter check: inspect the file header to prove it came from a
 completed LinkedSpec/RGX run and confirm no process still has it open before deleting that exact file. Never
@@ -100,7 +114,7 @@ The bounded command `--execute --offset 68 --limit 31` now passes 31/31. Anonymo
 recursive top-rule, structural child-push, statement mutation, and public-parser leading-trivia leaves closed each
 independent mechanism. `.6.2.4.6` now permanently runs that full window and locks its counts, endpoints, zero
 failures, and exact outputs. Julia has since closed the routed top-level function fixtures under `.6.2.5` and the
-complete 99/99 manifest gate under `.6.3`; `.6.4` owns verification wiring.
+complete 99/99 manifest gate under `.6.3`; `.6.4` has since added the focused gate and optional shared-CI wiring.
 
 ## Hosted GitHub Actions status
 
@@ -127,7 +141,8 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
   staged code/spec/test/tooling changes to carry a task-tree acceptance checklist with LinkedSpec-tool evidence
   signatures,
 - enforces a RAM usage guard that refuses to run the test suite when system memory utilization exceeds 88%, preventing resource-exhaustion failures from masking real test results,
-- optionally runs `tools/run_dart_local.sh` when `LINKEDSPEC_RUN_DART=1` is set.
+- optionally runs `tools/run_dart_local.sh` when `LINKEDSPEC_RUN_DART=1` is set,
+- optionally runs `tools/run_julia_local.sh` when `LINKEDSPEC_RUN_JULIA=1` is set.
 
 The command sequence includes:
 

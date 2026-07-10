@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.4` done; delegated Julia frontier is `.6.4`).
+- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.4` done; delegated Julia frontier is `.7.1`).
 - Owner: repo-local workflow
 
 ## Goal
@@ -233,7 +233,7 @@ before implementation.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.6.4` | `active` | Julia is 99/99 green; wire its focused commands into the local verification story next. |
+| 1 | `JULIA-BACKEND-PARITY.7.1` | `active` | Julia is 99/99 with focused verification; close public usage/status documentation next. |
 | 2 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua is adopted by ADR `0021` and inherits ADR `0022`'s native-module gate after Julia reaches its scoped milestone. |
 | 3 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
 | 4 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Rust generated-source breadth is independent follow-up after backend scheduling. |
@@ -281,7 +281,7 @@ before implementation.
 
 ## Blockers
 
-- None. Julia `.6.4` is the next active PNT leaf; Lua `.1.3` remains deliberately sequenced after Julia.
+- None. Julia `.7.1` is the next active PNT leaf; Lua `.1.3` remains deliberately sequenced after Julia.
 
 ## Verification Log
 

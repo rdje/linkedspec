@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.4 — wire Julia local verification
+
+**Scope:** Repo-owned focused Julia gate, optional shared-CI integration, configurable executable/depot handling,
+root/backend/mdBook commands, Knowledge Map, task/index/roadmap alignment, live docs, and resume pointer.
+
+**Change:** Added `tools/run_julia_local.sh`. It runs Julia `Pkg.test()`, both Julia CLI help/status surfaces,
+corpus-runner help, and the full 99-fixture corpus from the repository root. `LINKEDSPEC_JULIA_CMD` and
+`LINKEDSPEC_JULIA_DEPOT_PATH` override the executable and writable depot. `tools/run_ci_local.sh` invokes this gate
+only under `LINKEDSPEC_RUN_JULIA=1`; default local CI remains SDK-independent.
+
+**Validation:** The focused gate passes all 840 package assertions, CLI checks, and 99/99 corpus execution. Shell
+syntax and the default core local-CI gate pass. The mdBook, root README, and Julia README document focused/direct/
+opt-in commands; `.7.1` now owns public Julia documentation closeout.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.3 — close full Julia corpus gate
 
 **Scope:** Complete manifest execution, unbounded/offset-only CLI behavior, permanent 99-fixture regression,

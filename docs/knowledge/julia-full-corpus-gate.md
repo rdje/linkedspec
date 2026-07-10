@@ -33,6 +33,6 @@ and output mismatches.
 The direct complete CLI run reports 99 passed and 0 failed. Full Julia tests pass with 840 assertions, and
 package/CLI status is `runtime-corpus-full`.
 
-Related facts: [[julia-corpus-manifest-io]], [[julia-corpus-selection-reporting]],
+Related facts: [[julia-local-verification-gate]], [[julia-corpus-manifest-io]], [[julia-corpus-selection-reporting]],
 [[julia-controlled-corpus-execution]], [[julia-spec-driven-function-shell-parser]],
 [[dart-scoped-parity-milestone-complete]], [[rust-perl-output-oracle]].

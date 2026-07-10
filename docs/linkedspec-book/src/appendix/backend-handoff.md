@@ -366,7 +366,8 @@ offset-68/limit-31 window in one permanent test: stable endpoints, 31/31 exact o
 normalizes its neutral nodes, and composes the existing staged body parser and runtime registry. The corpus path
 tries rule-only parsing first and falls back only after a source parse error. All three routed fixtures pass.
 `.6.3` then locks complete manifest validation plus ordered execution at 99/99 exact outputs and enables unbounded
-CLI execution. Full tests pass with 840 assertions and status `runtime-corpus-full`; `.6.4` owns verification wiring.
+CLI execution. Full tests pass with 840 assertions and status `runtime-corpus-full`; `.6.4` has since added focused
+optional-SDK verification, and `.7.1` owns public documentation closeout.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -380,6 +381,21 @@ can set `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot` to avoid writing 
 `~/.julia`. The Julia package now depends on `JSON3` for manifest and expected-JSON parsing. Global
 `JuliaFormatter` and `JET` packages are not installed today, so formatter/linter commands are optional until a
 scaffold or verification leaf commits them as dev dependencies.
+
+Run the complete focused Julia gate from the repository root:
+
+```bash
+bash tools/run_julia_local.sh
+```
+
+It covers package tests, Julia CLI help/status, corpus-runner help, and full 99/99 corpus execution. The shared
+core gate remains SDK-independent unless explicitly opted in:
+
+```bash
+LINKEDSPEC_RUN_JULIA=1 bash tools/run_ci_local.sh
+```
+
+`LINKEDSPEC_JULIA_CMD` and `LINKEDSPEC_JULIA_DEPOT_PATH` select a non-default executable and writable depot.
 
 The current Julia package scaffold is:
 
