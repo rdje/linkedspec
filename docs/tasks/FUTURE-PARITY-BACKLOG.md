@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`.1.5.2` closes the 61-case Rust command; `.1.5.3.0` audits/splits Dart; `.11.1` parked).
+- Last updated: `2026-07-10` (`.1.5.3.1` closes Dart boundary at 29/61; `.1.5.3.2` active; `.11.1` parked).
 - Owner: repo-local workflow
 
 ## Goal
@@ -420,17 +420,23 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.5.3.0 - split Dart primary CLI work`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.3.1`
-  Status: `active`
+  Status: `done`
   Goal: Replace the Dart primary process boundary with exact arguments, help, strict UTF-8 loading, and resolution.
   Acceptance: `dart/bin/linkedspec_dart.dart` exposes only ADR `0023`'s case-sensitive, non-abbreviating options;
     exact help/usage and exits match shared bytes; named/file/inline source plus literal/file input preparation
     obeys compile-before-input ordering, repository fallback, and ADR `0025` strict preserved UTF-8. The separate
     `dart/bin/corpus_runner.dart` retains corpus-only options and behavior.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-10.** The primary binary now uses an exact manual option parser and shared help,
+    rejects old corpus/positional/alias surfaces, resolves named/current/repository source deterministically,
+    loads raw source before deferred input with strict preserved UTF-8, keeps leading source BOM visible to phase
+    policy, and emits raw stable usage/phase bytes. The reusable staged function parser now treats no definitions
+    as an empty list, allowing ordinary specs through the same API. Six focused boundary tests, the staged-parser
+    regression, analyzer, all 147 Dart tests, 99/99 corpus, and the exact 29-case boundary/failure subset in default
+    and POSIX environments pass. The remaining 32 cases are exactly 11 results plus 21 trace cases under `.2`/`.3`.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.3.1 - add Dart CLI boundary`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.3.2`
-  Status: `pending`
+  Status: `active`
   Goal: Complete Dart primary execution, direct canonical JSON results, and stable operational failures.
   Acceptance: The adapter composes exported staged full-spec parsing, validation/compilation, and
     `LinkedSpecRuntimeEngine` execution; entry rule and global parse mode remain reusable native controls; direct
@@ -675,8 +681,8 @@ before implementation.
 | 15 | `FUTURE-PARITY-BACKLOG.1.5.2.3` | `done` | Canonical levels/events/sinks/failures close the unchanged Rust suite at 61/61. |
 | 16 | `FUTURE-PARITY-BACKLOG.1.5.2.4` | `done` | Default/POSIX plus recurring Rust and broader local gates close the Rust primary command. |
 | 17 | `FUTURE-PARITY-BACKLOG.1.5.3.0` | `done` | Dart's 0/61 corpus-oriented primary boundary and reusable native seams are audited/split. |
-| 18 | `FUTURE-PARITY-BACKLOG.1.5.3.1` | `active` | Replace only the primary arguments/help/resolution/strict-UTF-8 loading boundary. |
-| 19 | `FUTURE-PARITY-BACKLOG.1.5.3.2` | `pending` | Compose native execution, direct canonical results, and stable failures. |
+| 18 | `FUTURE-PARITY-BACKLOG.1.5.3.1` | `done` | Exact arguments/help/loading plus staged no-function repair pass the 29-case boundary subset. |
+| 19 | `FUTURE-PARITY-BACKLOG.1.5.3.2` | `active` | Compose native execution, direct canonical results, and stable failures. |
 | 20 | `FUTURE-PARITY-BACKLOG.1.5.3.3` | `pending` | Add the portable canonical CLI trace independently of rich Dart trace. |
 | 21 | `FUTURE-PARITY-BACKLOG.1.5.3.4` | `pending` | Close unchanged default/POSIX cases and recurring verification. |
 | 22 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
@@ -1012,6 +1018,22 @@ Read-only evidence recorded on 2026-07-10:
 - [x] **LOCKSTEP** — Task index, roadmap/live/book status, Knowledge Map, and resume pointer advance only to
   `.1.5.1.1`; Rust/Dart/Julia remain later consumers of the same not-yet-created fixture manifest.
 
+## `FUTURE-PARITY-BACKLOG.1.5.3.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The shared runner establishes the old Dart primary at 0/61; direct staged API
+  regression reproduces an ordinary no-`fn` spec failing with `cursor_code_unit=0`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `bin/linkedspec_dart.dart` routed to the corpus command, while
+  `UserFunctionDefinitionAstParser.parse(...)` interpreted a no-match extraction as an error instead of the valid
+  empty-definition case. Dart `String.trim()` also erases leading U+FEFF unless the adapter preserves policy first.
+- [x] **FIX** — Added the exact raw-byte primary adapter, strict manual arguments/help, deterministic resolution,
+  compile-before-input UTF-8 loading, source-BOM guard, and empty-definition staged result; kept corpus options only
+  in `bin/corpus_runner.dart`.
+- [x] **ADDRESSED (verified)** — Six direct adapter tests, the staged ordinary-spec regression, and 29 exact shared
+  cases cover every boundary/loading/phase behavior owned by this leaf in default and POSIX environments.
+- [x] **NO REGRESSION** — Analyzer, all 147 Dart tests, and the independent 99/99 corpus gate pass.
+- [x] **LOCKSTEP** — README, mdBook, Knowledge Map, task/roadmap/live docs, and local gate distinguish the shared
+  primary boundary from the separate corpus runner; `.1.5.3.2` owns only native execution/results/failures.
+
 ## Decisions
 
 - `2026-07-09`: Director directive schedules future backend parity as Dart first, then Julia,
@@ -1073,6 +1095,10 @@ Read-only evidence recorded on 2026-07-10:
   language pipeline. `bin/corpus_runner.dart` retains the corpus workflow. The primary command will reuse staged
   full-spec parsing, validation/compilation, direct-value execution, top-rule/global-mode controls, and rich native
   trace, while exact process/loading, results/failures, portable trace, and closeout remain separate leaves.
+- `2026-07-10`: `.1.5.3.1` replaces the corpus primary with exact arguments/help/resolution/strict UTF-8 and stable
+  phase bytes, reaching 29/61 in both option environments. A native probe exposed the staged extractor's no-`fn`
+  no-match as an erroneous failure; no definitions now correctly returns an empty list. Source U+FEFF is preserved
+  and rejected before Dart frontend trimming can erase it. `.2` owns the 11 direct results; `.3` owns 21 trace cases.
 - `2026-07-10`: `.1.5.1.0` proves Perl's primary adapter is parser-oriented but not strict/deterministic enough to
   be the neutral executable reference. Fixture infrastructure, arguments, success/IO, failures, and trace/gate are
   separate leaves; `.1.5.1.1` became active there and has since closed the runner/help baseline. No behavior changed
@@ -1152,6 +1178,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.2.3` | Six focused adapter tests; full runtime package; 61/61 unchanged suite; formatting/touched-file Clippy; docs/KM/governance/mdBook/cleanup. | PASS. Canonical Rust CLI trace landed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.2.4` | `tools/run_rust_local.sh`; 137 unit/99 oracle/190 integration/3 emitter/10 native trace; 61/61 default/POSIX; full local gate through Phase 0 `1..1028`; docs/KM/governance/mdBook/cleanup. | PASS. Rust primary CLI closed; Dart `.1.5.3` active. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.3.0` | Dart CLI/native/API/manifest audit; unchanged 0/61 baseline; memory architecture; Knowledge Map; task metadata; doctrine; whitespace; mdBook; cleanup. | PASS. Four implementation/closeout mechanisms split before Dart behavior changes; `.1.5.3.1` active. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.3.1` | Six boundary tests; staged ordinary-spec regression; analyzer; 147 Dart tests; 99/99 corpus; 29/29 selected shared cases default/POSIX; docs/KM/governance/mdBook/cleanup. | PASS. Exact Dart process/loading boundary landed; `.1.5.3.2` active. |
 
 ## Commit Log
 
@@ -1183,12 +1210,16 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.5.2.3` | `FUTURE-PARITY-BACKLOG.1.5.2.3 - add canonical Rust CLI trace` | Exact portable trace events/levels/sinks/failures; 61/61 baseline. |
 | `FUTURE-PARITY-BACKLOG.1.5.2.4` | `FUTURE-PARITY-BACKLOG.1.5.2.4 - close Rust primary CLI` | Recurring Rust gate, default/POSIX proof, full local gate, parent closeout. |
 | `FUTURE-PARITY-BACKLOG.1.5.3.0` | `FUTURE-PARITY-BACKLOG.1.5.3.0 - split Dart primary CLI work` | Audits 0/61 primary drift, reusable native seams, separate corpus ownership, and four ordered leaves. |
+| `FUTURE-PARITY-BACKLOG.1.5.3.1` | `FUTURE-PARITY-BACKLOG.1.5.3.1 - add Dart CLI boundary` | Exact arguments/help/resolution/UTF-8/phase bytes plus staged no-function correction; 29/61. |
 
 ## Changelog
 
 - `2026-07-10`: `.1.5.3.0` measures Dart's corpus-oriented primary executable at 0/61, confirms reusable staged
   parse/compile/direct-execute/mode/top-rule/trace/JSON seams, and splits exact boundary, execution, trace, and
   closeout. The corpus runner remains separate; no Dart behavior or shared fixture bytes change.
+- `2026-07-10`: `.1.5.3.1` replaces the primary process boundary, preserves the corpus runner, corrects ordinary
+  no-function staged parsing, and locks strict raw UTF-8/BOM/newline behavior plus phase order. The exact subset is
+  29/29 default/POSIX; all 147 Dart tests and 99/99 corpus pass; `.2` is active for 11 direct result cases.
 - `2026-07-10`: `.1.5.2.4` adds the recurring Rust gate, proves 61/61 in default/POSIX environments plus the full
   runtime package and broader local gate through Phase 0 `1..1028`, closes parent `.1.5.2`, and activates Dart
   `.1.5.3`. Help and fixture bytes remain unchanged.

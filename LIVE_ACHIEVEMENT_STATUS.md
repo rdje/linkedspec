@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.3.1 — add Dart CLI boundary**
+  (DONE — exact boundary/loading/failures are 29/29 default/POSIX; `.1.5.3.2` active for direct results).
+
+  **Implementation:** Replaced the corpus primary with exact shared options/help, deterministic resolution,
+  strict raw UTF-8 and source-BOM policy, deferred input, stable phases, and raw channels. The corpus runner stays
+  separate. The staged extractor now treats an ordinary no-function spec as an empty definition result.
+
+  **Proof:** Six focused tests, staged regression, analyzer, 147 Dart tests, 99/99 corpus, and both 29-case legs
+  pass. The residual 11 results and 21 trace cases map exactly to `.2` and `.3`.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.3.0 — split Dart primary CLI work**
   (DONE — current Dart primary is 0/61; `.1.5.3.1` is active for exact boundary/loading).
 

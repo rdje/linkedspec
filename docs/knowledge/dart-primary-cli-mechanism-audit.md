@@ -10,8 +10,8 @@ answers:
 date: 2026-07-10
 status: current
 tags: [dart, cli, parser, runtime, utf8, json, trace, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.3.0 audits the corpus-oriented primary command, records its 0/61 shared baseline, and splits boundary, execution, trace, and closeout leaves without changing Dart behavior."
-reverify: "sed -n '1,240p' dart/lib/src/cli/linkedspec_dart_cli.dart; rg -n 'parseSpecWithStagedUserFunctionDefinitions|compileSpec|class LinkedSpecRuntimeEngine|RuntimeParseResult execute|_canonicalJson' dart/lib; perl tools/run_cli_conformance.pl --display-command 'dart run bin/linkedspec_dart.dart' -- dart --packages={{REPO_ROOT}}/dart/.dart_tool/package_config.json {{REPO_ROOT}}/dart/bin/linkedspec_dart.dart"
+evidence: "FUTURE-PARITY-BACKLOG.1.5.3.0 audits/splits the 0/61 corpus primary; .1 replaces the exact boundary and reaches 29/61, leaving 11 direct-result and 21 trace cases under .2/.3."
+reverify: "sed -n '1,240p' dart/lib/src/cli/primary_cli.dart; rg -n 'parseSpecWithStagedUserFunctionDefinitions|compileSpec|class LinkedSpecRuntimeEngine|RuntimeParseResult execute|_canonicalJson' dart/lib; bash tools/run_dart_local.sh"
 ---
 
 At the `.1.5.3.0` audit, `dart/bin/linkedspec_dart.dart` was a corpus-oriented command rather than ADR `0023`'s
@@ -32,6 +32,10 @@ trace (`.3`), and unchanged 61-case default/POSIX plus recurring-gate closeout (
 an explicit raw-byte boundary so valid text, including a leading U+FEFF, is preserved and malformed bytes remain
 in their owning compilation or input-load phase.
 
+`.1.5.3.1` has since landed that boundary at 29/61 in default and POSIX environments. The residuals are exactly 11
+successful direct-value cases and 21 canonical-trace cases; corpus execution remains separately 99/99 green.
+
 Related facts: [[dart-specific-cli]], [[native-in-memory-backend-contract]],
 [[primary-cli-strict-utf8-text-contract]], [[canonical-primary-cli-trace-protocol]],
-[[neutral-cli-fixture-runner]], [[user-observable-backend-cli-parity-contract]].
+[[neutral-cli-fixture-runner]], [[user-observable-backend-cli-parity-contract]],
+[[dart-primary-cli-boundary]].

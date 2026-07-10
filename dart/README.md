@@ -27,9 +27,6 @@ dart format --set-exit-if-changed .
 dart analyze --fatal-infos --fatal-warnings
 dart test
 dart run bin/linkedspec_dart.dart --help
-dart run bin/linkedspec_dart.dart corpus --corpus ../rust/linkedspec-runtime/tests/corpus
-dart run bin/linkedspec_dart.dart corpus --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1
-dart run bin/linkedspec_dart.dart corpus --corpus ../rust/linkedspec-runtime/tests/corpus --execute
 dart run bin/corpus_runner.dart --help
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1
@@ -43,11 +40,13 @@ bash ../tools/run_dart_local.sh
 ## Status
 
 `DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first Dart milestone.
-`DART-BACKEND-PARITY.7.4` completed the Dart CLI boundary:
-`bin/linkedspec_dart.dart` is the Dart-specific LinkedSpec CLI, with help text and a `corpus` command that can
-validate or execute the manifest-backed corpus through the Dart parser, compiler, and runtime. The compatibility
-`bin/corpus_runner.dart` entrypoint remains available for existing corpus-focused diagnostics and delegates to the
-same command implementation. The earlier `DART-BACKEND-PARITY.6.3` corpus-parity boundary remains green: the full
+`FUTURE-PARITY-BACKLOG.1.5.3.1` replaces the old corpus-oriented primary boundary:
+`bin/linkedspec_dart.dart` now exposes the exact shared source/input/parser/trace option grammar, help and usage
+bytes, deterministic named/file/inline resolution, strict preserved UTF-8 loading, and stable compile/input/invoke
+phase failures. It passes the 29 shared boundary/loading/failure cases in default and POSIX environments; native
+execution/results and canonical trace remain the immediately following `.2` and `.3` leaves. The separate
+`bin/corpus_runner.dart` retains all corpus validation/execution and selector behavior. The earlier
+`DART-BACKEND-PARITY.6.3` corpus-parity boundary remains green: the full
 checked-in 99-fixture manifest passes through Dart execute mode after the shipped-spec/parser-smoke window reached
 31/31 green and the routed top-level `fn` fixtures passed through the spec-defined shell. The package
 can round-trip
@@ -144,9 +143,8 @@ parity is closed for the current checked-in manifest: `executeCorpusFixtures(...
 fixtures through parse/compile/runtime, compares the engine output against
 `[expected]` with structural JSON equality, and report every fixture failure.
 It accepts named or bounded fixture selection through `caseNames`, `offset`, and
-`limit`. The Dart-specific CLI exposes that surface as
-`dart run bin/linkedspec_dart.dart corpus --corpus <path> [--execute] ...`; the compatibility corpus-runner CLI
-exposes the same options through `bin/corpus_runner.dart`. Without a selector, `--execute`
+`limit`. The corpus-runner CLI exposes those developer options through
+`bin/corpus_runner.dart`; they are deliberately absent from the shared primary parser command. Without a selector, `--execute`
 runs the full checked-in manifest in order. The full 99-fixture corpus now passes
 through execute mode, including the first 40 shipped manifest fixtures, the
 non-`fn` middle helper/control/receiver fixtures, the shipped-spec/parser-smoke window, and the three routed

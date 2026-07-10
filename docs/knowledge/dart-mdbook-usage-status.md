@@ -22,7 +22,7 @@ commands are:
 bash tools/run_dart_local.sh
 LINKEDSPEC_RUN_DART=1 bash tools/run_ci_local.sh
 cd dart && dart test
-cd dart && dart run bin/linkedspec_dart.dart corpus --corpus ../rust/linkedspec-runtime/tests/corpus --execute
+cd dart && dart run bin/linkedspec_dart.dart --help
 cd dart && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute
 ```
 
@@ -31,9 +31,10 @@ passes the current 99-fixture backend-neutral corpus through the runtime
 interpreter path. Generated Dart source is not required for that scoped corpus
 claim; `DART-BACKEND-PARITY.7.2` defers it to a future split source-emitter lane.
 The backend-local corpus CLI closed under `.7.4`, and `.7.5` closed the scoped Dart
-tree. ADR `0023` has since made the exact parser CLI and public codegen/capability
-surface global completion obligations under `.1.5`, `.1.6`, and `.3`.
+tree. ADR `0023` made the exact parser CLI and public codegen/capability surface
+global completion obligations under `.1.5`, `.1.6`, and `.3`; `.1.5.3.1` now
+closes the 29-case Dart boundary/loading subset while `.2`-`.4` remain.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[dart-local-verification-gate]], [[dart-controlled-corpus-execution]],
 [[dart-backend-interpreter-first-plan]], [[dart-generated-source-deferred]], [[dart-specific-cli]],
-[[dart-scoped-parity-milestone-complete]].
+[[dart-scoped-parity-milestone-complete]], [[dart-primary-cli-boundary]].

@@ -404,11 +404,10 @@ for controlled manifest fixtures. That executable harness runs fixtures through
 the Dart parser, compiler, and runtime engine, then compares engine output to the
 backend-neutral expected value wrapped one level with structural JSON equality.
 It supports named and bounded fixture selection through the library and opt-in
-CLI `--execute` mode; without a selector, the CLI runs the full manifest in
-order. The Dart-specific CLI exposes this as
-`dart run bin/linkedspec_dart.dart corpus --corpus <path> [--execute] ...`;
-`bin/corpus_runner.dart` remains a compatibility wrapper for corpus-focused
-diagnostics. The checked-in 99-fixture manifest passes through Dart execute mode,
+CLI `--execute` mode; without a selector, the corpus runner executes the full manifest in
+order. `bin/corpus_runner.dart` is now the sole corpus-focused command; the primary
+`bin/linkedspec_dart.dart` rejects corpus subcommands/options and follows the shared parser interface.
+The checked-in 99-fixture manifest passes through Dart execute mode,
 covering the starter proof-edge, autoexist, mutation, core terse runtime,
 middle helper/control/receiver, shipped-spec/parser-smoke, and top-level
 function groups. The top-level `fn` corpus fixtures route through the spec-defined function shell: Dart obtains
@@ -1033,8 +1032,8 @@ Run the focused Dart gate from the repository root:
 bash tools/run_dart_local.sh
 ```
 
-That command currently runs Dart formatting, analyzer checks, the full Dart test suite,
-Dart corpus-oriented CLI help checks, a bounded Dart-specific corpus smoke, and full 99-fixture corpus execution. To include Dart in
+That command runs Dart formatting, analyzer checks, the full Dart test suite,
+shared Dart primary-CLI help checks, a bounded corpus-runner smoke, and full 99-fixture corpus execution. To include Dart in
 the canonical local gate on a machine with a Dart SDK, opt in explicitly:
 
 ```bash
@@ -1046,7 +1045,6 @@ Direct Dart commands live under `dart/`:
 ```bash
 dart test
 dart run bin/linkedspec_dart.dart --help
-dart run bin/linkedspec_dart.dart corpus --corpus ../rust/linkedspec-runtime/tests/corpus --execute
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute
 ```
 
@@ -1055,12 +1053,11 @@ deliberately defers generated Dart source to a future source-emitter lane with i
 own scaffold, generated family plan, direct structural-family execution proof, and
 curated corpus subset. Dart's backend-local corpus CLI implementation closed in
 `DART-BACKEND-PARITY.7.4`, and `DART-BACKEND-PARITY.7.5` closed the scoped
-Dart milestone. The later strict-interface audit records that this is not yet the
-shared parser CLI contract; generated source remains outside the current corpus claim.
-`FUTURE-PARITY-BACKLOG.1.5.3.0` measures the current primary executable at 0/61
-unchanged shared command cases and splits the correction. `.1` replaces only the
-primary process arguments/help/loading boundary while preserving
-`bin/corpus_runner.dart`; `.2` composes the existing staged parser, validator/compiler,
+Dart milestone. The later strict-interface audit recorded the old primary command at 0/61.
+`FUTURE-PARITY-BACKLOG.1.5.3.1` now passes the exact 29-case argument/loading/failure subset in both
+default and POSIX environments while preserving `bin/corpus_runner.dart`. The new boundary is case-sensitive,
+non-abbreviating, positional-free, strict UTF-8, deterministic for named/file/inline source resolution, and
+compile-before-input phase ordered. `.2` composes the existing staged parser, validator/compiler,
 direct-value runtime, top-rule/global-mode controls, and recursively canonical JSON;
 `.3` adds the portable CLI trace independently of rich Dart tracing; `.4` closes both
 default and POSIX environments plus recurring verification.

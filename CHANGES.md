@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.3.1 — add Dart CLI boundary
+
+**Primary adapter:** Replaced `bin/linkedspec_dart.dart`'s corpus command with exact shared arguments/help, raw
+stdout/stderr bytes, deterministic named/file/inline resolution, compile-before-input loading, strict preserved
+UTF-8, source-BOM phase policy, and stable usage/compile/input/invoke failures. Corpus behavior remains only in
+`bin/corpus_runner.dart`; the Dart local gate now runs its bounded smoke there.
+
+**Native correction:** The spec-driven function-definition extractor previously treated a normal no-`fn` source
+as an execution error. It now returns an empty definition list and lets the ordinary parser consume that source;
+function-bearing staged behavior is unchanged and both paths are regression-locked.
+
+**Proof/frontier:** Six boundary tests, staged-parser regression, analyzer, all 147 Dart tests, 99/99 corpus, and
+the exact 29-case boundary/loading/failure subset pass under default and POSIX environments. The remaining 32
+cases are exactly 11 direct results under active `.1.5.3.2` plus 21 trace cases under `.3`.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.3.0 — split Dart primary CLI work
 
 **Audit:** Dart's primary executable is still the scoped corpus command: it accepts corpus selectors, treats no

@@ -1,30 +1,9 @@
 import 'dart:io';
 
 import '../corpus/manifest_runner.dart';
-import '../scaffold.dart';
+import '../scaffold.dart' show linkedSpecDartPackageName;
 
 typedef CliWriteLine = void Function(String line);
-
-const linkedspecDartCliUsage = '''
-Usage:
-  dart run bin/linkedspec_dart.dart --help
-  dart run bin/linkedspec_dart.dart corpus --corpus <path> [--execute] [--case <name> ...] [--offset <n>] [--limit <n>]
-  dart run bin/linkedspec_dart.dart --corpus <path> [--execute] [--case <name> ...] [--offset <n>] [--limit <n>]
-
-LinkedSpec Dart backend CLI.
-
-Commands:
-  corpus  Load or execute a manifest-backed LinkedSpec corpus with the Dart parser, compiler, and runtime.
-
-Corpus options:
-  --corpus <path>    Manifest-backed corpus root.
-  --execute          Run fixtures through parse/compile/runtime instead of only validating corpus IO.
-  --case <name>      Execute one named fixture; may be repeated.
-  --offset <n>       Execute fixtures starting at zero-based manifest offset.
-  --limit <n>        Execute at most n fixtures.
-
-Without --case/--offset/--limit, --execute runs the full manifest in order.
-''';
 
 const corpusRunnerCliUsage = '''
 Usage: dart run bin/corpus_runner.dart --corpus <path> [--execute] [--case <name> ...] [--offset <n>] [--limit <n>]
@@ -58,44 +37,6 @@ final class LinkedSpecDartCliIo {
       writer(line);
     }
   }
-}
-
-int runLinkedSpecDartCli(
-  List<String> args, {
-  LinkedSpecDartCliIo io = const LinkedSpecDartCliIo(),
-}) {
-  final argList = List<String>.unmodifiable(args);
-  if (_hasHelp(argList)) {
-    io.writeOutput(linkedspecDartCliUsage.trimRight());
-    return 0;
-  }
-
-  if (argList.isEmpty) {
-    io.writeOutput(describeLinkedSpecDartScaffold());
-    io.writeOutput('');
-    io.writeOutput(linkedspecDartCliUsage.trimRight());
-    return 0;
-  }
-
-  if (argList.first == 'corpus') {
-    return runLinkedSpecDartCorpusCommand(
-      argList.sublist(1),
-      usage: linkedspecDartCliUsage,
-      io: io,
-    );
-  }
-
-  if (_looksLikeCorpusInvocation(argList)) {
-    return runLinkedSpecDartCorpusCommand(
-      argList,
-      usage: linkedspecDartCliUsage,
-      io: io,
-    );
-  }
-
-  io.writeError('unknown command: ${argList.first}');
-  io.writeError(linkedspecDartCliUsage.trimRight());
-  return 64;
 }
 
 int runLinkedSpecDartCorpusRunnerCli(
@@ -173,21 +114,6 @@ int runLinkedSpecDartCorpusCommand(
 
 bool _hasHelp(List<String> args) {
   return args.contains('--help') || args.contains('-h');
-}
-
-bool _looksLikeCorpusInvocation(List<String> args) {
-  return args.any(
-    (arg) =>
-        arg == '--corpus' ||
-        arg.startsWith('--corpus=') ||
-        arg == '--execute' ||
-        arg == '--case' ||
-        arg.startsWith('--case=') ||
-        arg == '--offset' ||
-        arg.startsWith('--offset=') ||
-        arg == '--limit' ||
-        arg.startsWith('--limit='),
-  );
 }
 
 final class _CorpusRunnerOptions {

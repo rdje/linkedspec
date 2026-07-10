@@ -609,7 +609,7 @@ Done::
     }
   });
 
-  test('Dart-specific CLI help advertises corpus runtime command', () {
+  test('Dart primary CLI help advertises the shared parser command', () {
     final process = Process.runSync(Platform.resolvedExecutable, [
       'run',
       'bin/linkedspec_dart.dart',
@@ -618,52 +618,27 @@ Done::
 
     expect(process.exitCode, 0);
     final stdout = process.stdout as String;
-    expect(stdout, contains('LinkedSpec Dart backend CLI'));
-    expect(stdout, contains('corpus --corpus <path>'));
-    expect(stdout, contains('Run fixtures through parse/compile/runtime'));
-    expect(stdout, isNot(contains('lands in later')));
+    expect(stdout, startsWith('Usage:\n'));
+    expect(stdout, contains('--inline-spec TEXT'));
+    expect(stdout, contains('strict UTF-8'));
+    expect(stdout, isNot(contains('corpus --corpus')));
   });
 
-  test('Dart-specific CLI corpus command reports selected fixtures', () {
-    final root = Directory.systemTemp.createTempSync(
-      'linkedspec-dart-cli-specific-',
+  test('Dart primary CLI rejects the corpus subcommand', () {
+    final process = Process.runSync(Platform.resolvedExecutable, [
+      'run',
+      'bin/linkedspec_dart.dart',
+      'corpus',
+    ], workingDirectory: Directory.current.path);
+
+    expect(process.exitCode, 2);
+    expect(process.stdout, isEmpty);
+    expect(
+      process.stderr,
+      startsWith(
+        "linkedspec: unexpected positional argument 'corpus'\n\nUsage:\n",
+      ),
     );
-    try {
-      _writeManifest(root, ['mismatched', 'passing']);
-      _writeFixture(
-        root,
-        'mismatched',
-        specSource: _returningSpec('actual'),
-        inputText: 'xfail',
-        expectedJson: 'expected',
-      );
-      _writeFixture(
-        root,
-        'passing',
-        specSource: _returningSpec('ok'),
-        inputText: 'xpass',
-        expectedJson: 'ok',
-      );
-
-      final process = Process.runSync(Platform.resolvedExecutable, [
-        'run',
-        'bin/linkedspec_dart.dart',
-        'corpus',
-        '--corpus',
-        root.path,
-        '--execute',
-        '--case',
-        'passing',
-      ], workingDirectory: Directory.current.path);
-
-      expect(process.exitCode, 0);
-      final stdout = process.stdout as String;
-      expect(stdout, contains('PASS passing'));
-      expect(stdout, contains('1 passed, 0 failed'));
-      expect(stdout, isNot(contains('mismatched')));
-    } finally {
-      root.deleteSync(recursive: true);
-    }
   });
 
   test('corpus runner execute mode runs the full manifest by default', () {

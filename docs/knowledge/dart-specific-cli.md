@@ -1,6 +1,6 @@
 ---
 id: dart-specific-cli
-title: Dart backend CLI entrypoint and corpus command
+title: Dart primary parser CLI and separate corpus runner
 answers:
   - how do I run the Dart backend CLI
   - what is the Dart-specific LinkedSpec CLI
@@ -10,32 +10,28 @@ answers:
 date: 2026-07-09
 status: current
 tags: [dart, cli, corpus, runtime, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.7.4 adds dart/lib/src/cli/linkedspec_dart_cli.dart, routes dart/bin/linkedspec_dart.dart through it, and keeps dart/bin/corpus_runner.dart as a compatibility wrapper over the same manifest-backed command implementation. dart/test/corpus_manifest_test.dart covers Dart-specific CLI help text and selected corpus execution; tools/run_dart_local.sh now includes a bounded Dart-specific CLI corpus smoke and passes with 140 Dart tests plus full 99-fixture corpus execution."
-reverify: "cd dart && dart run bin/linkedspec_dart.dart --help && dart run bin/linkedspec_dart.dart corpus --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1 && dart run bin/corpus_runner.dart --help && cd .. && bash tools/run_dart_local.sh"
+evidence: "DART-BACKEND-PARITY.7.4 created the historical corpus-oriented primary command; FUTURE-PARITY-BACKLOG.1.5.3.1 replaces that boundary with the shared parser interface and leaves dart/bin/corpus_runner.dart as the separate corpus owner."
+reverify: "cd dart && dart run bin/linkedspec_dart.dart --help && dart run bin/corpus_runner.dart --help && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1 && cd .. && bash tools/run_dart_local.sh"
 ---
 
-The Dart backend CLI is:
+The Dart primary backend CLI is:
 
 ```sh
 cd dart
 dart run bin/linkedspec_dart.dart --help
-dart run bin/linkedspec_dart.dart corpus --corpus ../rust/linkedspec-runtime/tests/corpus --execute
 ```
 
-The `corpus` command validates or executes the manifest-backed corpus through
-the Dart parser, compiler, and runtime. It accepts `--case`, `--offset`, and
-`--limit` selectors for diagnostics; without a selector, `--execute` runs the
-full manifest in order.
+It exposes the exact shared parser-oriented options and rejects corpus subcommands.
+At `.1.5.3.1`, its argument/loading/failure boundary is 29/29; native result and
+trace projection immediately follow under `.2` and `.3`.
 
-`dart/bin/corpus_runner.dart` remains available as a corpus-focused
-compatibility wrapper, but it delegates to the same shared CLI implementation as
-`linkedspec_dart.dart`. Do not treat it as a separate contract owner.
+`dart/bin/corpus_runner.dart` is the separate corpus-focused command. It retains
+`--corpus`, `--execute`, `--case`, `--offset`, and `--limit`; without a selector,
+`--execute` runs the full manifest in order.
 
-This records the scoped `DART-BACKEND-PARITY.7.4` surface. The later global audit
-`FUTURE-PARITY-BACKLOG.1.5.3.0` proves that `linkedspec_dart.dart` is not yet the
-shared ADR `0023` primary parser command and routes its replacement through `.1`-`.4`.
-The corpus workflow will remain available through `corpus_runner.dart` after that
-replacement.
+The earlier `DART-BACKEND-PARITY.7.4` corpus-primary arrangement is historical;
+`.1.5.3.1` performs the replacement without removing the developer workflow.
 
 Related facts: [[variant-specific-cli-requirement]], [[dart-controlled-corpus-execution]],
-[[dart-scoped-parity-milestone-complete]], [[dart-primary-cli-mechanism-audit]].
+[[dart-scoped-parity-milestone-complete]], [[dart-primary-cli-mechanism-audit]],
+[[dart-primary-cli-boundary]].

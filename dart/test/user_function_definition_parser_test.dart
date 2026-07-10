@@ -67,6 +67,14 @@ void main() {
     expect(spec.rules.map((rule) => rule.header.label), ['Top', 'Done']);
   });
 
+  test('parses an ordinary spec with no user functions through staged API', () {
+    final spec = parseSpecWithStagedUserFunctionDefinitions('Top::\n /x/\n');
+
+    expect(spec.functions, isEmpty);
+    expect(spec.rules.map((rule) => rule.header.label), ['Top']);
+    expect(() => compileSpec(spec), returnsNormally);
+  });
+
   test('normalizes supported shell output wrapper shapes', () {
     final node = {'type': 'function_definition'};
 

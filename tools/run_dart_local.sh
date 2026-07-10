@@ -29,8 +29,8 @@ log "running Dart tests"
 
 log "checking Dart CLIs"
 "$DART_CMD" run bin/linkedspec_dart.dart --help >/dev/null
-"$DART_CMD" run bin/linkedspec_dart.dart corpus --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1 >/dev/null
 "$DART_CMD" run bin/corpus_runner.dart --help >/dev/null
+"$DART_CMD" run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1 >/dev/null
 
 log "running full Dart corpus gate"
 "$DART_CMD" run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute

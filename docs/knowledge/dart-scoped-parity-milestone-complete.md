@@ -22,8 +22,8 @@ The accepted claim is:
 - Dart executes the current runtime interpreter, staged user-function body flow,
   diagnostics/trace controls, and manifest-backed corpus runner.
 - `tools/run_dart_local.sh` is the focused Dart gate.
-- `dart run bin/linkedspec_dart.dart corpus --corpus <path> --execute` is the
-  Dart-specific CLI corpus command.
+- `dart run bin/corpus_runner.dart --corpus <path> --execute` is the separate
+  Dart corpus command; the later global `.1.5.3.1` primary boundary rejects corpus options.
 - The checked-in 99-fixture corpus passes through Dart execute mode.
 
 Generated Dart source is not part of this milestone. It remains a future split
@@ -32,4 +32,4 @@ matrix, and generated source requirements for a complete Dart-parity claim; glob
 `.1.5.3`, `.1.6`, and `.3` own them without reopening the historical scoped tree.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[dart-backend-interpreter-first-plan]], [[dart-generated-source-deferred]],
-[[dart-specific-cli]], [[language-agnostic-backend-vision]], [[julia-backend-interpreter-first-plan]].
+[[dart-specific-cli]], [[dart-primary-cli-boundary]], [[language-agnostic-backend-vision]], [[julia-backend-interpreter-first-plan]].

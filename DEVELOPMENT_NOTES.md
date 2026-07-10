@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.3.1 — extraction no-match can be a valid empty result):
+  A staged extractor is not necessarily a whole-document recognizer. For the function-definition shell, no `fn`
+  match means an empty definition list, after which the ordinary `.spec` parser still validates the full source.
+  Keep malformed source ownership in that parser. At the CLI boundary, decode raw UTF-8 before compilation and
+  defer input bytes; explicitly guard preserved leading U+FEFF because Dart `String.trim()` otherwise erases it.
+  Exact partial conformance is useful: 29/61 proves the entire process/loading phase while 11 result and 21 trace
+  residuals stay mechanically assigned to the next leaves.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.3.0 — replace adapters without discarding developer tools):
   Dart's 0/61 primary-command result is interface drift, not evidence that its parser/runtime is absent. Preserve
   the corpus command under `bin/corpus_runner.dart`, replace only the public primary boundary, and compose the

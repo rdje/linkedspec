@@ -61,11 +61,8 @@ final class UserFunctionDefinitionAstParser {
       );
     }
 
-    if (!result.matched && !_hasOnlyIgnorableRemainder(source, result)) {
-      throw UserFunctionDefinitionParserException(
-        'user_function_definition.spec did not match input; '
-        'cursor_code_unit=${result.cursorCodeUnit}',
-      );
+    if (!result.matched) {
+      return const [];
     }
     return definitionNodesFromUserFunctionDefinitionOutput(result.value);
   }
@@ -186,11 +183,4 @@ File? _findUpward(Directory start, String relativePath) {
     }
     directory = parent;
   }
-}
-
-bool _hasOnlyIgnorableRemainder(String source, RuntimeParseResult result) {
-  if (result.cursorCodeUnit >= source.length) {
-    return true;
-  }
-  return source.substring(result.cursorCodeUnit).trim().isEmpty;
 }
