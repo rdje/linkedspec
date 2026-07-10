@@ -322,7 +322,10 @@ stores, final/local returns, receiver continuation, standalone result drop, and 
 tests pass with 671 assertions and status `runtime-user-functions`. `.5.3` preserves two spec-returned functions
 through normalized payload/jobs, stitched bodies, compiled
 registry order, public descriptor metadata, and runtime output. Full tests pass with 691 assertions; status remains
-`runtime-user-functions`, `.5` is closed, and `.6.1` controlled corpus execution is active.
+`runtime-user-functions` at that boundary. `.6.1` adds controlled library corpus execution with public result
+records, manifest-to-runtime composition, one-level wrapped structural comparison, optional trace lines,
+structured diagnostic retention, and all-fixture reporting. Full tests pass with 715 assertions; status is
+`runtime-controlled-corpus`, `.6.1` is closed, and `.6.2` recoverable manifest batches are active.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -439,9 +442,107 @@ correction. `.5.1` is implemented through `julia/src/parser/StagedParserRegistry
 registered user functions through `julia/src/runtime/Interpreter.jl`. It evaluates args before entering a fresh
 scalar/array/hash store set, restores caller stores in `finally`, returns the final expression or first local
 `return(...)`, composes compatible receiver chains, drops standalone results, and diagnoses exact-arity and
-direct/mutual recursion failures. Package status is `runtime-user-functions`; `.5.3` locks the neutral descriptor
-shape through runtime without a production projection correction; `.5`
-is closed and `.6.1` owns controlled corpus execution.
+direct/mutual recursion failures. `.5.3` locks the neutral descriptor shape through runtime without a production
+projection correction. `.6.1` adds the controlled corpus library surface described below; package status is now
+`runtime-controlled-corpus`, the full suite passes with 715 assertions, and `.6.2` owns manifest batches.
+
+### Julia Controlled Corpus Execution
+
+`execute_corpus_fixtures(...)` is the first executable Julia corpus surface. It deliberately composes existing
+owners instead of creating a second parser or runtime:
+
+1. `load_corpus_fixtures(...)` validates the format-1 manifest and loads every named fixture.
+2. Each `input.spec` is parsed, validated/compiled, and executed by `LinkedSpecRuntimeEngine`.
+3. Runtime `output` is compared structurally with the expected JSON wrapped exactly once.
+4. Every fixture produces a result, even when earlier fixtures fail.
+
+The one-level wrapper is important. If `expected.json` contains:
+
+```json
+{"body":" text ","cursor":10}
+```
+
+the required engine output is:
+
+```json
+[{"body":" text ","cursor":10}]
+```
+
+This matches the backend-neutral convention that the top-rule value occupies one output item. The fixture result
+still exposes both `actual_value` (the object itself) and `actual_output` (the wrapped list).
+
+A minimal controlled fixture directory looks like this:
+
+```text
+controlled-corpus/
+  manifest.json
+  boundary/
+    input.spec
+    input.txt
+    expected.json
+```
+
+For example, `input.spec` can capture text up to a structural boundary:
+
+```text
+Top::
+ /BEGIN/
+ E {
+   body = capture_until_boundary(Boundary)
+   return(hash("body", body, "cursor", cursor_pos()))
+ }
+
+Boundary: /END/
+```
+
+The two statements in the multiline `E` block are separated by the newline. No line-ending semicolon is used:
+semicolon is only an infix separator between adjacent statements on the same physical line.
+
+Execute the corpus from Julia code:
+
+```julia
+using LinkedSpecJulia
+
+execution = execute_corpus_fixtures("controlled-corpus")
+println("passed: ", corpus_passed_count(execution), "/", length(execution.results))
+
+for failure in corpus_failures(execution)
+    println(failure.name, ": ", failure.failure)
+end
+```
+
+For a traced controlled run:
+
+```julia
+execution = execute_corpus_fixtures(
+    "controlled-corpus";
+    trace_config = trace_config_enabled(LinkedSpecTraceDebug),
+)
+
+boundary = corpus_fixture_result(execution, "boundary")
+for line in boundary.trace_lines
+    print(line)
+end
+```
+
+`CorpusFixtureExecutionResult` retains:
+
+- fixture name and decoded expected JSON;
+- actual value and wrapped output when runtime reached a result;
+- match state and zero-based code-unit cursor;
+- captured rendered trace lines when tracing was enabled;
+- the structured `RuntimeDiagnostic` when execution produced one;
+- failure text, or `nothing` on success.
+
+Failure records distinguish parse, validation, compile, execute, no-match, output-mismatch, and unexpected
+boundaries. `corpus_execution_passed(...)`, `corpus_passed_count(...)`, `corpus_failures(...)`,
+`corpus_fixture_passed(...)`, and `corpus_fixture_result(...)` provide the common queries.
+
+The optional `spec_parser` keyword is a narrow controlled-test seam for source that already has neutral staged
+function-definition nodes available. Ordinary calls use direct rule-only `parse_spec(...)`. Source-driven
+top-level function-shell execution, fixture selection, CLI reporting, and the full checked-in 99-fixture gate are
+later `.6` work. Accordingly, `julia/bin/corpus_runner.jl --execute` still rejects the request rather than
+overclaiming corpus parity.
 
 ### Dart Backend Commands
 

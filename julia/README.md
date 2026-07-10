@@ -1,12 +1,11 @@
 # LinkedSpec Julia Backend
 
-This directory is the repository-owned Julia backend scaffold. The current status is package and command
-surface, manifest-backed corpus validation, source AST/data types, core `.spec` source parsing, frontend source
-validation, spec-shaped user-function shell projection, typed helper/action AST parsing, canonical ActionIR contract
-resolution, a user-function registry seam, compiled-spec state, runtime regex/match-state primitives, and first
-compiled-rule interpreter dispatch with core value/store/capture semantics plus string/numeric, array, hash,
-value/control/block, and tree-callback families: cursor/diagnostic/staged-function/corpus breadth is not implemented
-yet.
+This directory is the repository-owned Julia backend. Its current `runtime-controlled-corpus` status covers the
+package/command surface, manifest validation, source and ActionIR frontends, staged user-function projection/body
+parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch, value/helper/control/callback
+families, cursor/boundary behavior, structured diagnostics/tracing, registered function execution, and controlled
+library-level corpus execution. The current 99-fixture manifest, executable corpus CLI, local-gate integration, and
+final parity closeout remain later leaves.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -55,7 +54,7 @@ julia --project=julia -e 'using JET; JET.test_package("LinkedSpecJulia")'
 
 ## Current Boundary
 
-The scaffold proves that Julia package metadata, library loading, CLI routing, manifest-backed corpus validation,
+The backend proves that Julia package metadata, library loading, CLI routing, manifest-backed corpus validation,
 drift/file guards, and source AST JSON round-tripping exist. `src/spec/Ast.jl` defines spec files, functions,
 source spans, staged parse jobs, rule headers/modes, body element variants, edge targets, and fluent calls.
 `src/spec/Parser.jl` exposes `parse_spec(...)` for rule paragraphs, headers/modes, regex slots, lifecycle blocks,
@@ -118,9 +117,33 @@ full suite now passes with 631 assertions and status `runtime-trace-events`; `.4
 without changing source or overclaiming broader trace parity. `.5.1` adds the minimal staged registry provider:
 `actionir-body.spec` resolves to the fixed built-in adapter, jobs execute in stable path/span/id order, portable
 cache/compiled/result records are exposed, and neutral `action_block` JSON is immutably stitched into `body_ast`.
-The full suite now passes with 671 assertions and status `runtime-user-functions`. Registered exact-arity calls
+The staged-registry boundary passed with 662 assertions and status `runtime-staged-registry`. Registered exact-arity calls
 execute before helper fallback with eager caller arguments, fresh function-local scalar/array/hash stores,
 final-expression or local-return results, compatible receiver continuation, standalone result discard, and
-direct/mutual recursion diagnostics. `.5.3` now proves source-ordered definitions, normalized staged payload/jobs, stitched `body_ast`, descriptor
-function metadata, and runtime output through one executable compiled state. The full suite passes with 691
-assertions; status remains `runtime-user-functions`, `.5` is closed, and `.6.1` owns controlled corpus fixtures.
+direct/mutual recursion diagnostics. `.5.3` proves source-ordered definitions, normalized staged payload/jobs,
+stitched `body_ast`, descriptor function metadata, and runtime output through one executable compiled state.
+
+`src/corpus/CorpusManifest.jl` now also exposes `execute_corpus_fixtures(...)`, `CorpusExecutionResult`,
+`CorpusFixtureExecutionResult`, and result-query helpers. The library executor validates the manifest, runs every
+fixture through parse/compile/runtime, compares runtime output to the expected JSON wrapped exactly once, retains
+optional trace lines and structured runtime diagnostics, and records every failure without aborting later fixtures.
+The optional `spec_parser` callback is a controlled seam for already-projected staged function shells; the default
+is direct rule-only `parse_spec(...)`. The full suite passes with 715 assertions and status
+`runtime-controlled-corpus`. `.6.1` is closed and `.6.2` owns recoverable shipped-manifest batches.
+
+Library example:
+
+```julia
+using LinkedSpecJulia
+
+result = execute_corpus_fixtures("path/to/corpus")
+if !corpus_execution_passed(result)
+    for failure in corpus_failures(result)
+        println(failure.name, ": ", failure.failure)
+    end
+end
+```
+
+The CLI and `bin/corpus_runner.jl` still reject `--execute`. CLI selection/reporting is intentionally deferred to
+the later corpus leaves; library-level controlled execution does not imply that the current 99-fixture corpus is
+green yet.

@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.1 — add Julia controlled corpus execution
+
+**Scope:** Julia library-level corpus execution/results, wrapped output comparison, trace/diagnostic retention,
+controlled value/dispatch/lifecycle/function/boundary fixtures, failure continuation, package status, task/roadmap/
+live docs, mdBook, Knowledge Map, architecture, and resume pointer.
+
+**Change:** Added `execute_corpus_fixtures(...)`, public execution/result records, and result query helpers. The
+harness reuses manifest validation, runs every fixture through parse/compile/runtime, compares the backend-neutral
+expected value after the required one-level output wrap, preserves optional trace lines and structured diagnostics,
+and accumulates parse/validate/compile/execute/no-match/mismatch failures without aborting. Controlled staged
+function fixtures can provide a parser callback; ordinary callers default to `parse_spec(...)`. Package status
+advances to `runtime-controlled-corpus`. All new multiline fixtures use newline separators without terminator-style
+semicolons.
+
+**Validation:** Twenty-four focused assertions cover six passing fixtures and diagnostic/mismatch continuation;
+full `Pkg.test()` passes with 715 assertions. CLI `--execute` remains deliberately rejected until its later owner.
+mdBook, memory, Knowledge Map, task metadata, doctrine, and whitespace gates pass; `.6.2` manifest batches are next.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.5.3 — preserve Julia staged descriptor shapes
 
 **Scope:** Julia neutral staged user-function shape proof across spec-returned definitions, staged dispatch,

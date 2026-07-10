@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.1 — Julia controlled corpus execution):
+  Corpus execution is a composition layer, not another parser/runtime path. The harness first reuses strict
+  manifest validation, then records one immutable-style result per manifest fixture while continuing after
+  failures. Success compares `RuntimeParseResult.output` to the expected JSON wrapped exactly once; failures retain
+  any partial parse result, captured trace lines, and the deepest structured runtime diagnostic. `spec_name` and
+  `spec_path` come from the fixture for actionable attribution. The optional `spec_parser` seam proves already-
+  projected staged function shells without inventing a Julia raw function scanner; the default remains the honest
+  rule-only `parse_spec(...)` path until shipped-corpus expansion owns source-driven shell execution. Multiline
+  fixture statements are newline-separated and never carry trailing semicolons.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.5.3 — Julia staged function descriptor shapes):
   The existing Julia projection was already neutral; the missing piece was a single proof spanning every layer.
   The focused fixture therefore starts at spec-returned definition nodes rather than handcrafted

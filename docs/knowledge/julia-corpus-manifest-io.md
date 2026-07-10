@@ -21,5 +21,8 @@ the corpus directory, manifest format `1`, `case_count`, case-name shape, duplic
 directories, required `input.spec` / `input.txt` / `expected.json` files, and expected JSON syntax.
 
 The checked-in corpus under `rust/linkedspec-runtime/tests/corpus` loads as 99 fixtures. The Julia CLI and
-corpus-runner non-execute commands report the validated fixture count. Corpus execution is still not implemented:
-`--execute` deliberately returns an error until parser/runtime leaves land.
+corpus-runner non-execute commands report the validated fixture count. `JULIA-BACKEND-PARITY.6.1` now composes
+this loader into the library-level `execute_corpus_fixtures(...)` controlled executor. The CLI `--execute` path
+still deliberately returns an error until later selection/reporting and full-manifest leaves land.
+
+Related fact: [[julia-controlled-corpus-execution]].

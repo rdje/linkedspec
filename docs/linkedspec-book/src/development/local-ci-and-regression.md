@@ -60,8 +60,13 @@ These checks currently cover package loading, source parsing/validation, functio
 parsing, ActionIR contract resolution, user-function registry projection/stitching, compiled-state descriptor
 projection, seek/consume runtime regex selection, capture/offset projection, cursor and entry/local match registers,
 zero-progress detection, first default/AND/OR/repetition dispatch, lifecycle and child-edge flow, narrow
-accumulators/returns, recursion/progress guards, and manifest-backed corpus validation. Julia corpus `--execute`
-remains unavailable until the helper/value and executable corpus leaves land.
+accumulators/returns, recursion/progress guards, registered user functions, diagnostics/tracing, boundary capture,
+manifest-backed corpus validation, and controlled library corpus execution. The full package suite currently passes
+with 715 assertions and status `runtime-controlled-corpus`.
+
+The library executor is available as `execute_corpus_fixtures(...)`, but Julia corpus CLI `--execute` remains
+unavailable until selection/reporting and shipped-manifest batches land. The validation-only command above is
+therefore still the correct CLI check; full 99-fixture Julia parity is not yet claimed.
 
 ## Hosted GitHub Actions status
 

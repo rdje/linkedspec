@@ -104,8 +104,10 @@ Top-level directories and files:
     stitches `body_ast`. Registered exact-arity functions now execute before helper fallback with eager caller
     arguments, fresh typed local stores, receiver continuation, standalone result drop, and recursion diagnostics.
     Neutral staged function payload/job/AST and descriptor metadata shapes are locked through the same executable
-    compiled state; the full suite passes with 691 assertions, status remains `runtime-user-functions`, `.5` is
-    closed, and `.6.1` controlled corpus execution is active.
+    compiled state. Controlled library corpus execution now composes manifest validation, parse/compile/runtime,
+    one-level wrapped structural comparison, optional trace capture, structured diagnostics, and all-fixture
+    failure reporting. The full suite passes with 715 assertions, status is `runtime-controlled-corpus`, `.6.1` is
+    closed, and `.6.2` recoverable manifest batches are active.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

@@ -31,7 +31,7 @@ Package/CLI status remains the precise `runtime-trace-events`. This closeout
 does not overclaim complete compile/parser trace parity or later staged
 runtime/corpus parity. `.5.1` has since added the minimal staged registry
 provider, `.5.2` has since added registered function execution, `.5.3` has closed descriptor-shape parity, and
-`.6.1` is active for controlled corpus execution.
+`.6.1` has since added controlled corpus execution; `.6.2` manifest batches are active.
 
 Related facts: [[julia-runtime-structured-diagnostics]],
 [[julia-trace-controls-sinks]], [[julia-runtime-trace-events]],

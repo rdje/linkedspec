@@ -342,7 +342,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-user-functions"
+    @test status.parity == "runtime-controlled-corpus"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -352,7 +352,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-user-functions", String(take!(status_output)))
+    @test occursin("parity: runtime-controlled-corpus", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -365,7 +365,7 @@ end
 
     execute_error = IOBuffer()
     @test run_corpus_runner(["--corpus", "fixtures", "--execute"]; io = IOBuffer(), err = execute_error) == 2
-    @test occursin("not implemented", String(take!(execute_error)))
+    @test occursin("CLI is not enabled", String(take!(execute_error)))
 end
 
 @testset "Action AST parser" begin
@@ -2951,6 +2951,219 @@ end
         _write_manifest(root, ["alpha"])
         _write_fixture(root, "alpha"; expected_text = "{")
         @test _throws_corpus_message(() -> load_corpus_fixtures(root), "malformed expected.json for corpus case alpha")
+    end
+end
+
+@testset "Controlled corpus execution" begin
+    mktempdir() do root
+        cases = [
+            "scalar_output",
+            "nested_aggregate_output",
+            "rule_dispatch_output",
+            "lifecycle_output_shape",
+            "boundary_capture",
+            "user_function_call",
+        ]
+        _write_manifest(root, cases)
+        _write_fixture(
+            root,
+            "scalar_output";
+            spec_source = raw"""
+Top::
+ /x/ -> Done { return("scalar-ok") }
+
+Done::
+ /[a-z]+/
+""",
+            input_text = "xhello",
+            expected_json = "scalar-ok",
+        )
+        _write_fixture(
+            root,
+            "nested_aggregate_output";
+            spec_source = raw"""
+Top::
+ /n/ -> Done { return(hash("items", array("a", hash("b", 2)), "flag", true, "none", undef)) }
+
+Done::
+ /ested/
+""",
+            input_text = "nested",
+            expected_json = Dict{String,Any}(
+                "flag" => true,
+                "items" => Any["a", Dict{String,Any}("b" => 2)],
+                "none" => nothing,
+            ),
+        )
+        _write_fixture(
+            root,
+            "rule_dispatch_output";
+            spec_source = raw"""
+Top::AND
+ I { set(array(out), []) }
+ => First { push(array(out), retv) }
+ => Second { push(array(out), retv) }
+ E { return(copy(array(out))) }
+
+First:
+ /a/
+ E { return("first") }
+
+Second:
+ /b/
+ E { return("second") }
+""",
+            input_text = "ab",
+            expected_json = Any["first", "second"],
+        )
+        _write_fixture(
+            root,
+            "lifecycle_output_shape";
+            spec_source = raw"""
+Top::OR{1}
+ I { push(array(events), "I") }
+ LS { push(array(events), "LS") }
+ /x/
+ LE { push(array(events), "LE") }
+ IT { push(array(events), "IT") }
+ EX { push(array(events), "EX") }
+ LX { push(array(events), "LX") }
+ E { return(hash("cursor", cursor_pos(), "events", copy(array(events)))) }
+""",
+            input_text = "x",
+            expected_json = Dict{String,Any}(
+                "cursor" => 1,
+                "events" => Any["I", "LS", "LE", "IT", "EX", "LX"],
+            ),
+        )
+        _write_fixture(
+            root,
+            "boundary_capture";
+            spec_source = raw"""
+Top::
+ /BEGIN/
+ E {
+   body = capture_until_boundary(Boundary, EarlierBoundary)
+   return(hash("body", body, "cursor", cursor_pos(), "rest", cursor_rest()))
+ }
+
+Boundary: /END/
+EarlierBoundary: /STOP/
+""",
+            input_text = "BEGIN body STOP later END",
+            expected_json = Dict{String,Any}(
+                "body" => " body ",
+                "cursor" => 11,
+                "rest" => "STOP later END",
+            ),
+        )
+        function_body = "return(hash(\"wrapped\", value))"
+        function_source = join([
+            "fn wrap(value) {$function_body}",
+            "Top::",
+            " /x/",
+            " E { return(wrap(match_text())) }",
+        ], "\n")
+        _write_fixture(
+            root,
+            "user_function_call";
+            spec_source = function_source,
+            input_text = "x",
+            expected_json = Dict{String,Any}("wrapped" => "x"),
+        )
+
+        function controlled_spec_parser(source)
+            if _starts_with_top_level_function(source)
+                nodes = [_definition_node(source, "wrap", ["value"], function_body)]
+                return parse_spec_with_staged_user_function_definition_asts(source, nodes)
+            end
+            return parse_spec(source)
+        end
+
+        execution = execute_corpus_fixtures(
+            root;
+            spec_parser = controlled_spec_parser,
+            trace_config = trace_config_enabled(LinkedSpecTraceDebug),
+        )
+        @test execution.validation.manifest.cases == cases
+        @test length(execution.results) == 6
+        @test corpus_execution_passed(execution)
+        @test corpus_passed_count(execution) == 6
+        @test isempty(corpus_failures(execution))
+        @test corpus_fixture_result(execution, "scalar_output").actual_value == "scalar-ok"
+        @test corpus_fixture_result(execution, "nested_aggregate_output").actual_value ==
+            Dict{String,Any}(
+                "flag" => true,
+                "items" => Any["a", Dict{String,Any}("b" => 2)],
+                "none" => nothing,
+            )
+        @test corpus_fixture_result(execution, "rule_dispatch_output").actual_output ==
+            Any[Any["first", "second"]]
+        @test corpus_fixture_result(execution, "lifecycle_output_shape").actual_output == Any[
+            Dict{String,Any}(
+                "cursor" => 1,
+                "events" => Any["I", "LS", "LE", "IT", "EX", "LX"],
+            ),
+        ]
+        boundary_result = corpus_fixture_result(execution, "boundary_capture")
+        @test boundary_result.cursor_codeunit == 11
+        @test any(
+            line -> occursin("julia_runtime:source_boundary", line),
+            boundary_result.trace_lines,
+        )
+        function_result = corpus_fixture_result(execution, "user_function_call")
+        @test corpus_fixture_passed(function_result)
+        @test function_result.actual_value == Dict{String,Any}("wrapped" => "x")
+        @test_throws CorpusManifestException corpus_fixture_result(execution, "missing")
+    end
+
+    mktempdir() do root
+        _write_manifest(root, ["runtime_failure", "output_mismatch", "passing_after_failures"])
+        _write_fixture(
+            root,
+            "runtime_failure";
+            spec_source = raw"""
+Top::
+ /x/
+ E { unknown_runtime_helper(match_text()) }
+""",
+            expected_json = "unused",
+        )
+        _write_fixture(
+            root,
+            "output_mismatch";
+            spec_source = raw"""
+Top::
+ /x/
+ E { return("actual") }
+""",
+            expected_json = "expected",
+        )
+        _write_fixture(
+            root,
+            "passing_after_failures";
+            spec_source = raw"""
+Top::
+ /x/
+ E { return("ok") }
+""",
+            expected_json = "ok",
+        )
+
+        execution = execute_corpus_fixtures(root)
+        @test !corpus_execution_passed(execution)
+        @test corpus_passed_count(execution) == 1
+        @test [result.name for result in corpus_failures(execution)] ==
+            ["runtime_failure", "output_mismatch"]
+        runtime_failure = corpus_fixture_result(execution, "runtime_failure")
+        @test occursin("execute failed: unsupported runtime helper", runtime_failure.failure)
+        @test runtime_failure.diagnostic isa RuntimeDiagnostic
+        @test runtime_failure.diagnostic.stage == "runtime_execution"
+        @test runtime_failure.diagnostic.spec_name == "runtime_failure"
+        mismatch = corpus_fixture_result(execution, "output_mismatch")
+        @test occursin("output mismatch", mismatch.failure)
+        @test occursin("[\"expected\"]", mismatch.failure)
+        @test corpus_fixture_passed(corpus_fixture_result(execution, "passing_after_failures"))
     end
 end
 

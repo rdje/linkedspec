@@ -24,7 +24,9 @@ export backend_name,
     ActionControlMarkerExpr,
     ActionControlSwitchExpr,
     ActionControlWhileExpr,
+    CorpusExecutionResult,
     CorpusFixture,
+    CorpusFixtureExecutionResult,
     CorpusManifest,
     CorpusManifestException,
     CorpusValidationResult,
@@ -99,6 +101,12 @@ export backend_name,
     LinkedSpecTraceSinkMode,
     LinkedSpecTraceStdout,
     LinkedSpecParseMode,
+    corpus_execution_passed,
+    corpus_failures,
+    corpus_fixture_passed,
+    corpus_fixture_result,
+    corpus_passed_count,
+    execute_corpus_fixtures,
     load_corpus_fixtures,
     parse_spec,
     parse_trace_level,
@@ -246,7 +254,7 @@ const PACKAGE_NAME = "LinkedSpecJulia"
 const PACKAGE_VERSION = v"0.1.0"
 const CLI_ENTRYPOINT = "julia/bin/linkedspec_julia.jl"
 const CORPUS_RUNNER_ENTRYPOINT = "julia/bin/corpus_runner.jl"
-const PARITY_STATUS = "runtime-user-functions"
+const PARITY_STATUS = "runtime-controlled-corpus"
 
 include("corpus/CorpusManifest.jl")
 include("spec/Ast.jl")

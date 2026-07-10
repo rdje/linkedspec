@@ -18,29 +18,31 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.5.3` — one executable fixture locks neutral function payload/job/AST
-  shape through spec-returned definitions, staged dispatch, compiled registry, public descriptor metadata, and
-  runtime output; full tests pass with 691 assertions, status remains `runtime-user-functions`, and `.5` is closed.
-- prior_leaf: `JULIA-BACKEND-PARITY.5.2` — registered exact-arity value/receiver/drop runtime execution landed at
-  671 assertions and status `runtime-user-functions`.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.6.1` — public controlled corpus execution composes manifest
+  validation, parse/compile/runtime, wrapped structural output comparison, optional trace capture, structured
+  diagnostics, and all-fixture failure reporting; full tests pass with 715 assertions and status
+  `runtime-controlled-corpus`.
+- prior_leaf: `JULIA-BACKEND-PARITY.5.3` — neutral staged function payload/job/AST and descriptor shape is locked
+  through runtime; `.5` is closed.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.5.3 - preserve Julia staged descriptor shapes`; previous committed HEAD is
-  `c73a8f45 JULIA-BACKEND-PARITY.5.2 - execute Julia user functions`.
+  `JULIA-BACKEND-PARITY.6.1 - add Julia controlled corpus execution`; previous committed HEAD is
+  `74c5742f JULIA-BACKEND-PARITY.5.3 - preserve Julia staged descriptor shapes`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; the frontier after the current commit is `.6.1`.
-- next_action: resume PNT at `JULIA-BACKEND-PARITY.6.1` to bring up minimal controlled executable corpus fixtures
-  for scalar/nested values, dispatch/lifecycle, functions, trace/diagnostics, and boundary capture.
+- active_work_unit: `JULIA-BACKEND-PARITY`; the frontier after the current commit is `.6.2`.
+- next_action: resume PNT at `JULIA-BACKEND-PARITY.6.2` by decomposing the 99-fixture manifest into recoverable,
+  roadmap-aligned execution batches before changing shipped-corpus behavior; each mismatch must retain oracle
+  evidence and a narrow owner.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
 - latest_bootstrap_read: 2026-07-10 read the full roadmap and roadmap-v2, full codebase inventory and active Julia
   source/tests, full mdBook source, README/memory architecture/session bootstrap/COMMIT/task-tree doctrine, active
   Julia tree, relevant ADR/KM/toolbox facts, Dart matching/interpreter source/tests/task evidence, lifecycle/retv
   contract, Rust/Perl cursor/capture references, and final nested-value assignment contract before implementing
-  `.4.1` through `.5.3`, Dart staged registry/runtime/descriptor reference facts, and the portable staged registry contract;
+  `.4.1` through `.6.1`, Dart staged registry/runtime/descriptor/corpus reference facts, and the portable staged registry contract;
   Dart diagnostics/trace split and implementation facts, and the portable trace
   capability contract; the canonical statement-separator fact was also applied so focused `.spec` fixtures
   use newlines between lines and semicolons only between adjacent statements on one physical line.
@@ -50,5 +52,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.5.3` commit;
+- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.6.1` commit;
   do not pivot unless the repo is handoff-ready.

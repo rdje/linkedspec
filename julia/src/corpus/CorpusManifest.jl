@@ -25,6 +25,44 @@ struct CorpusValidationResult
     fixtures::Vector{CorpusFixture}
 end
 
+struct CorpusFixtureExecutionResult
+    name::String
+    expected_json::Any
+    actual_value::Any
+    actual_output::Any
+    matched::Union{Nothing,Bool}
+    cursor_codeunit::Union{Nothing,Int}
+    trace_lines::Vector{String}
+    diagnostic::Any
+    failure::Union{Nothing,String}
+end
+
+struct CorpusExecutionResult
+    validation::CorpusValidationResult
+    results::Vector{CorpusFixtureExecutionResult}
+end
+
+corpus_fixture_passed(result::CorpusFixtureExecutionResult) = result.failure === nothing
+
+corpus_failures(result::CorpusExecutionResult) = CorpusFixtureExecutionResult[
+    fixture_result for fixture_result in result.results
+    if !corpus_fixture_passed(fixture_result)
+]
+
+corpus_execution_passed(result::CorpusExecutionResult) = isempty(corpus_failures(result))
+
+corpus_passed_count(result::CorpusExecutionResult) =
+    count(corpus_fixture_passed, result.results)
+
+function corpus_fixture_result(result::CorpusExecutionResult, name::AbstractString)
+    fixture_name = String(name)
+    index = findfirst(fixture_result -> fixture_result.name == fixture_name, result.results)
+    if index === nothing
+        throw(CorpusManifestException("executed corpus fixture not found: $fixture_name"))
+    end
+    return result.results[index]
+end
+
 function _print_corpus_help(io)
     println(io, "LinkedSpec Julia corpus runner")
     println(io)
@@ -83,7 +121,7 @@ function run_corpus_runner(args = ARGS; io = stdout, err = stderr)
     end
 
     if parsed.execute
-        println(err, "error: corpus execution is not implemented in the Julia backend")
+        println(err, "error: corpus --execute CLI is not enabled in the Julia backend yet")
         return 2
     end
 
@@ -92,7 +130,7 @@ function run_corpus_runner(args = ARGS; io = stdout, err = stderr)
         println(io, "corpus: ", validation.root)
         println(io, "format: ", validation.manifest.format)
         println(io, "fixtures: ", validation.manifest.case_count)
-        println(io, "status: manifest validated; execution is not implemented in the Julia backend")
+        println(io, "status: manifest validated; library execution is available; CLI --execute is not enabled")
     catch error
         if error isa CorpusManifestException
             println(err, "error: ", error.message)
@@ -120,6 +158,129 @@ function load_corpus_fixtures(corpus_path::AbstractString)
 
     return CorpusValidationResult(root, manifest, fixtures)
 end
+
+function execute_corpus_fixtures(
+    corpus_path::AbstractString;
+    parse_mode = nothing,
+    spec_parser = nothing,
+    trace_config = nothing,
+)
+    validation = load_corpus_fixtures(corpus_path)
+    effective_parse_mode = parse_mode === nothing ? SeekParseMode : parse_mode
+    results = CorpusFixtureExecutionResult[
+        _execute_corpus_fixture(
+            validation,
+            fixture;
+            parse_mode = effective_parse_mode,
+            spec_parser = spec_parser,
+            trace_config = trace_config,
+        )
+        for fixture in validation.fixtures
+    ]
+    return CorpusExecutionResult(validation, results)
+end
+
+function _execute_corpus_fixture(
+    validation::CorpusValidationResult,
+    fixture::CorpusFixture;
+    parse_mode,
+    spec_parser,
+    trace_config,
+)
+    parse_result = nothing
+    trace = nothing
+    try
+        spec = spec_parser === nothing ? parse_spec(fixture.spec_source) : spec_parser(fixture.spec_source)
+        compiled = compile_spec(spec)
+        engine = LinkedSpecRuntimeEngine(
+            compiled;
+            parse_mode = parse_mode,
+            spec_name = fixture.name,
+            spec_path = joinpath(validation.root, fixture.name, "input.spec"),
+        )
+        if trace_config !== nothing
+            trace = LinkedSpecTraceEmitter(trace_config; stdout_io = IOBuffer())
+        end
+        parse_result = runtime_execute(engine, fixture.input_text; trace = trace)
+        expected_output = Any[fixture.expected_json]
+        if !parse_result.matched
+            return _corpus_fixture_failure(
+                fixture,
+                "runtime did not match input; cursor_codeunit=$(parse_result.cursor_codeunit)";
+                parse_result = parse_result,
+                trace = trace,
+            )
+        end
+        if !isequal(parse_result.output, expected_output)
+            return _corpus_fixture_failure(
+                fixture,
+                "output mismatch on input $(_format_corpus_json(fixture.input_text))\n" *
+                "    expected (reference, wrapped): $(_format_corpus_json(expected_output))\n" *
+                "    actual   (runtime_execute)    : $(_format_corpus_json(parse_result.output))";
+                parse_result = parse_result,
+                trace = trace,
+            )
+        end
+        return CorpusFixtureExecutionResult(
+            fixture.name,
+            deepcopy(fixture.expected_json),
+            deepcopy(parse_result.value),
+            deepcopy(parse_result.output),
+            parse_result.matched,
+            parse_result.cursor_codeunit,
+            _corpus_trace_lines(trace),
+            nothing,
+            nothing,
+        )
+    catch error
+        return _corpus_fixture_failure(
+            fixture,
+            "$(_corpus_failure_stage(error)) failed: $(sprint(showerror, error))";
+            parse_result = parse_result,
+            trace = trace,
+            diagnostic = error isa RuntimeInterpreterException ? error.diagnostic : nothing,
+        )
+    end
+end
+
+function _corpus_fixture_failure(
+    fixture::CorpusFixture,
+    failure::AbstractString;
+    parse_result = nothing,
+    trace = nothing,
+    diagnostic = nothing,
+)
+    return CorpusFixtureExecutionResult(
+        fixture.name,
+        deepcopy(fixture.expected_json),
+        parse_result === nothing ? nothing : deepcopy(parse_result.value),
+        parse_result === nothing ? nothing : deepcopy(parse_result.output),
+        parse_result === nothing ? nothing : parse_result.matched,
+        parse_result === nothing ? nothing : parse_result.cursor_codeunit,
+        _corpus_trace_lines(trace),
+        diagnostic,
+        String(failure),
+    )
+end
+
+_corpus_trace_lines(trace) = trace === nothing ? String[] : String[trace_lines(trace)...]
+
+function _corpus_failure_stage(error)
+    if error isa SpecParseException ||
+            error isa UserFunctionDefinitionException ||
+            error isa StagedParserRegistryException
+        return "parse"
+    elseif error isa SpecValidationException
+        return "validate"
+    elseif error isa CompiledSpecException
+        return "compile"
+    elseif error isa RuntimeInterpreterException
+        return "execute"
+    end
+    return "unexpected"
+end
+
+_format_corpus_json(value) = String(JSON3.write(value))
 
 function _load_manifest(root::AbstractString)
     manifest_file = joinpath(root, "manifest.json")

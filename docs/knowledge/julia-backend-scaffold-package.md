@@ -21,7 +21,11 @@ The Julia backend lives under `julia/` as package `LinkedSpecJulia`. It has pack
 module status helpers, CLI and corpus-runner entrypoints, README commands, smoke tests, and JSON3-backed corpus
 manifest validation.
 
-The scaffold implements no `.spec` parser, runtime interpreter, or corpus execution yet.
+The package has since grown beyond the original scaffold: it now includes source/ActionIR parsers, compiled state,
+an executable interpreter, staged and runtime user functions, structured diagnostics/tracing, and controlled
+library-level corpus execution. See the linked current Julia fact cards for each mechanism.
 `julia/bin/linkedspec_julia.jl` is the variant-specific CLI, and `julia/bin/corpus_runner.jl` is the corpus-runner
-entrypoint. The corpus runner accepts `--corpus <path>` for manifest validation and deliberately rejects
-`--execute` until a later task-tree leaf implements execution.
+entrypoint. The corpus runner accepts `--corpus <path>` for manifest validation and still deliberately rejects
+`--execute` until later corpus selection/reporting and full-manifest leaves productize the library executor.
+
+Related fact: [[julia-controlled-corpus-execution]].

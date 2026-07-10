@@ -423,15 +423,19 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Children: `.6.1`, `.6.2`, `.6.3`, `.6.4`
 
 - ID: `JULIA-BACKEND-PARITY.6.1`
-  Status: `active`
+  Status: `done`
   Goal: Bring up controlled proof fixtures.
   Acceptance: Minimal authored fixtures prove scalar output, nested arrays/hashes, rule dispatch, lifecycle return
     shape, function calls, trace/diagnostic basics, and boundary capture before shipped-spec breadth.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `execute_corpus_fixtures(...)` validates then executes every fixture through
+    parse/compile/runtime, compares the one-level wrapped backend-neutral output structurally, captures optional
+    trace lines and structured runtime diagnostics, and reports every failure without aborting. Twenty-four
+    focused assertions cover six passing authored fixtures plus runtime-error/output-mismatch continuation; full
+    `Pkg.test()` passes with 715 assertions and status `runtime-controlled-corpus`.
+  Commit: `JULIA-BACKEND-PARITY.6.1 - add Julia controlled corpus execution`
 
 - ID: `JULIA-BACKEND-PARITY.6.2`
-  Status: `pending`
+  Status: `active`
   Goal: Expand to the current manifest in recoverable corpus batches.
   Acceptance: Each batch either passes on Julia or records a narrowly owned root-cause leaf with Perl/Rust/Dart
     oracle evidence; no fixture is weakened to fit Julia.
@@ -492,7 +496,45 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 3 | `JULIA-BACKEND-PARITY.5.1` | `done` | Minimal staged registry dispatches function-body jobs and stitches `body_ast`. |
 | 4 | `JULIA-BACKEND-PARITY.5.2` | `done` | Registered exact-arity functions execute through isolated runtime scopes. |
 | 5 | `JULIA-BACKEND-PARITY.5.3` | `done` | Neutral function/parse-job/stitched-AST shapes are locked through runtime. |
-| 6 | `JULIA-BACKEND-PARITY.6.1` | `active` | Bring up controlled executable corpus fixtures. |
+| 6 | `JULIA-BACKEND-PARITY.6.1` | `done` | Controlled fixtures prove value, dispatch, lifecycle, function, trace, diagnostic, and boundary behavior. |
+| 7 | `JULIA-BACKEND-PARITY.6.2` | `active` | Split and execute the current manifest in recoverable batches. |
+
+## `JULIA-BACKEND-PARITY.6.1` Controlled Corpus Execution Result
+
+Controlled execution evidence recorded on 2026-07-10:
+
+- `julia/src/corpus/CorpusManifest.jl` now exports `CorpusExecutionResult`,
+  `CorpusFixtureExecutionResult`, `execute_corpus_fixtures(...)`, and focused result-query helpers.
+- The executor reuses manifest validation, runs each fixture through parse, validation/compile, and
+  `LinkedSpecRuntimeEngine`, and compares runtime `output` to `[expected.json]` using structural equality.
+- Every manifest fixture receives a result even when an earlier fixture fails. Failure text distinguishes parse,
+  validate, compile, execute, no-match, output-mismatch, and unexpected boundaries.
+- Results preserve the actual value/output, match/cursor state, captured trace lines, and structured runtime
+  diagnostic when present. Engine identity points diagnostics at the fixture name and `input.spec` path.
+- An optional `spec_parser` callback is the controlled seam for already-projected staged function shells. The
+  default remains direct `parse_spec(...)`; raw/source-driven function-shell execution belongs to shipped-corpus
+  expansion rather than being overclaimed here.
+- Authored fixtures prove scalar output, nested hash/array/null/boolean shape, blind AND dispatch, lifecycle return
+  shape, earliest boundary capture with debug trace evidence, and an exact-arity staged function call. A second
+  corpus proves runtime diagnostic preservation, output mismatch reporting, and continued execution afterward.
+- Multiline action blocks use newline separators and no trailing semicolons. The fixture style therefore matches
+  the canonical language rule that semicolons only separate adjacent same-line statements.
+
+## `JULIA-BACKEND-PARITY.6.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Julia could validate the 99-fixture manifest but exposed no library execution result,
+  wrapped-output comparator, or per-fixture failure accumulator for controlled proofs.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `julia/src/corpus/CorpusManifest.jl` stopped after loading fixtures, while the
+  already-green parser/compiler/runtime/trace/diagnostic layers had no corpus owner composing them.
+- [x] **FIX** — Added public execution/result/query APIs, structural wrapped-output comparison, trace/diagnostic
+  retention, failure-stage attribution, and all-fixture continuation. Advanced status to
+  `runtime-controlled-corpus` while leaving CLI `--execute` deliberately unavailable.
+- [x] **ADDRESSED (verified)** — Twenty-four focused assertions prove six passing controlled fixtures plus
+  diagnostic/mismatch continuation, including functions, boundary trace lines, and structured diagnostic identity.
+- [x] **NO REGRESSION** — Full Julia `Pkg.test()` passes with 715 assertions; manifest-only CLI validation remains
+  green and `--execute` stays explicitly rejected until the later corpus command leaf.
+- [x] **LOCKSTEP** — Julia README, task/index/roadmaps, mdBook API/status/handoff/check pages, Knowledge Map,
+  architecture/live docs, and `MEMORY.md` close `.6.1` and advance to `.6.2` batch decomposition/execution.
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -1579,6 +1621,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.5.1` | Full Julia `Pkg.test()`; Julia CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Thirty-one focused assertions prove stable staged queue order, provider/digest/cache/compiled/result shape, immutable `body_ast` stitching, wrapper composition, resolve/compile diagnostics, and policy fences; total Julia tests pass with 662 assertions and `.5.2` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.5.2` | Full Julia `Pkg.test()`; Julia CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Nine focused assertions prove eager args, fresh typed stores, final/local returns, value/receiver/drop positions, exact arity, and direct/mutual recursion diagnostics; total Julia tests pass with 671 assertions and `.5.3` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.5.3` | Full Julia `Pkg.test()`; Julia CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Twenty focused assertions prove neutral staged function fields through parsed source order, compiled jobs, descriptor payload/job/AST records, metadata order/count, and runtime output; total Julia tests pass with 691 assertions, `.5` closes, and `.6.1` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.1` | Full Julia `Pkg.test()`; Julia CLI status/help and manifest validation; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Twenty-four focused assertions prove controlled scalar/nested/dispatch/lifecycle/function/boundary execution, trace/diagnostic retention, wrapped output comparison, mismatch reporting, and continuation; total Julia tests pass with 715 assertions and `.6.2` becomes active. |
 
 ## Commit Log
 
@@ -1614,9 +1657,15 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.5.1` | `JULIA-BACKEND-PARITY.5.1 - add Julia staged function-body registry` | Minimal staged provider dispatch, stable queue, and immutable `body_ast` stitching; runtime calls advance to `.5.2`. |
 | `JULIA-BACKEND-PARITY.5.2` | `JULIA-BACKEND-PARITY.5.2 - execute Julia user functions` | Exact-arity registered value/receiver/drop execution with isolated typed stores and recursion diagnostics; descriptor parity advances to `.5.3`. |
 | `JULIA-BACKEND-PARITY.5.3` | `JULIA-BACKEND-PARITY.5.3 - preserve Julia staged descriptor shapes` | End-to-end neutral staged function descriptor/runtime proof; `.5` closes and corpus execution advances to `.6.1`. |
+| `JULIA-BACKEND-PARITY.6.1` | `JULIA-BACKEND-PARITY.6.1 - add Julia controlled corpus execution` | Library corpus composition, result/query records, wrapped comparison, trace/diagnostic retention, and all-fixture reporting; manifest batches advance to `.6.2`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.1` controlled corpus execution. Julia now validates then executes every fixture
+  through parse/compile/runtime, compares the expected value after one backend-neutral output wrap, captures
+  optional trace lines and structured runtime diagnostics, and records failures without aborting later fixtures.
+  Twenty-four focused assertions bring full `Pkg.test()` to 715 and status `runtime-controlled-corpus`; CLI
+  `--execute` remains later work and `.6.2` recoverable manifest batches are active.
 - `2026-07-10`: Completed `.5.3` staged descriptor-shape proof. A 20-assertion fixture preserves two spec-returned
   functions through normalized staged payload/jobs, immutable body-AST stitching, compiled registry and descriptor
   metadata, then executes the same state. `Pkg.test()` passes with 691 assertions; no production correction was
