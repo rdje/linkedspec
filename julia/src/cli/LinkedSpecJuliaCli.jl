@@ -32,7 +32,7 @@ struct _PrimaryCliRequest
     spec_source::String
     spec_name::String
     spec_path::Union{Nothing,String}
-    input::String
+    input::Union{Nothing,String}
     input_path::Union{Nothing,String}
 end
 
@@ -242,6 +242,7 @@ function _prepare_primary_cli_request(
     options::_PrimaryCliOptions;
     cwd::AbstractString = pwd(),
     repo_root::AbstractString = _primary_cli_repo_root(),
+    load_input_file::Bool = true,
 )
     spec_source, spec_name, spec_path = if options.spec !== nothing
         resolved = _resolve_named_spec_path(
@@ -259,7 +260,10 @@ function _prepare_primary_cli_request(
 
     input, input_path = if options.input_file !== nothing
         path = _primary_cli_explicit_path(options.input_file, cwd)
-        (_read_primary_cli_file(path, "input file"), path)
+        (
+            load_input_file ? _read_primary_cli_file(path, "input file") : nothing,
+            path,
+        )
     else
         (something(options.input, ""), nothing)
     end
@@ -374,8 +378,8 @@ function _primary_cli_trace_emitter(options::_PrimaryCliOptions; stdout_io::IO =
     if options.trace_level !== nothing
         config = with_trace_level(config, options.trace_level)
     end
-    if options.trace_file !== nothing
-        config = with_trace_file(config, options.trace_file)
+    if options.trace_file !== nothing && !isempty(strip(options.trace_file))
+        config = with_trace_file(config, strip(options.trace_file))
     end
     if options.trace_mode !== nothing
         config = with_trace_sink_mode(config, options.trace_mode)
@@ -403,22 +407,39 @@ function _parse_primary_cli_spec(
     end
 end
 
-function _execute_primary_cli_request(request::_PrimaryCliRequest; stdout_io::IO = stdout)
-    trace = _primary_cli_trace_emitter(request.options; stdout_io = stdout_io)
+function _compile_primary_cli_request(
+    request::_PrimaryCliRequest;
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+)
     spec = _parse_primary_cli_spec(request.spec_source; trace = trace)
     compiled = compile_spec(spec; trace = trace)
-    engine = LinkedSpecRuntimeEngine(
+    return LinkedSpecRuntimeEngine(
         compiled;
         parse_mode = something(request.options.parse_mode, "seek"),
         spec_name = request.spec_name,
         spec_path = request.spec_path,
     )
+end
+
+function _invoke_primary_cli_request(
+    engine::LinkedSpecRuntimeEngine,
+    request::_PrimaryCliRequest,
+    input::AbstractString;
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+)
     return runtime_execute(
         engine,
-        request.input;
+        input;
         top_rule = request.options.top_rule,
         trace = trace,
     )
+end
+
+function _execute_primary_cli_request(request::_PrimaryCliRequest; stdout_io::IO = stdout)
+    trace = _primary_cli_trace_emitter(request.options; stdout_io = stdout_io)
+    engine = _compile_primary_cli_request(request; trace = trace)
+    input = _load_primary_cli_request_input(request)
+    return _invoke_primary_cli_request(engine, request, input; trace = trace)
 end
 
 function _primary_cli_canonical_json(value)
@@ -486,6 +507,45 @@ function _print_primary_cli_usage_error(err, message)
     print(err, _primary_cli_usage())
 end
 
+function _print_primary_cli_runtime_error(err::IO, message::String, error)
+    println(err, "linkedspec: ", message)
+    diagnostic = error isa RuntimeInterpreterException ? error.diagnostic : nothing
+    if diagnostic !== nothing
+        fields = (
+            "owner_stage" => diagnostic.owner_stage,
+            "summary" => diagnostic.summary,
+            "detail" => diagnostic.detail,
+            "spec_name" => diagnostic.spec_name,
+            "spec_path" => diagnostic.spec_path,
+            "top_rule" => diagnostic.top_rule,
+            "rule_label" => diagnostic.rule_label,
+        )
+        for (name, value) in fields
+            if value !== nothing
+                println(err, "  ", name, ": ", value)
+            end
+        end
+    end
+    raw_error = sprint(showerror, error)
+    if !isempty(raw_error)
+        println(err, "  error: ", raw_error)
+    end
+    return nothing
+end
+
+function _load_primary_cli_request_input(request::_PrimaryCliRequest)
+    if request.input !== nothing
+        return request.input
+    end
+    if request.input_path === nothing
+        throw(ArgumentError("primary CLI request has neither loaded input nor an input path"))
+    end
+    return _read_primary_cli_file(request.input_path, "input file")
+end
+
+_primary_cli_fatal_error(error) =
+    error isa InterruptException || error isa OutOfMemoryError || error isa StackOverflowError
+
 function run_cli(args = ARGS; io = stdout, err = stderr)
     options = try
         _parse_primary_cli_args(args)
@@ -503,24 +563,48 @@ function run_cli(args = ARGS; io = stdout, err = stderr)
     end
 
     request = try
-        _prepare_primary_cli_request(options)
+        _prepare_primary_cli_request(options; load_input_file = false)
     catch error
-        if error isa _PrimaryCliLoadException
-            println(err, "linkedspec: ", error.stage, " load failed")
-            println(err, "  error: ", error.message)
-            return 1
+        if _primary_cli_fatal_error(error)
+            rethrow()
         end
-        rethrow()
-    end
-
-    result = try
-        _execute_primary_cli_request(request; stdout_io = io)
-    catch error
-        println(err, "linkedspec: parser execution failed")
-        println(err, "  error: ", sprint(showerror, error))
+        _print_primary_cli_runtime_error(err, "parser compilation failed", error)
         return 1
     end
 
-    println(io, _primary_cli_canonical_json(result.value))
+    trace = nothing
+    engine = try
+        trace = _primary_cli_trace_emitter(options; stdout_io = io)
+        _compile_primary_cli_request(request; trace = trace)
+    catch error
+        if _primary_cli_fatal_error(error)
+            rethrow()
+        end
+        _print_primary_cli_runtime_error(err, "parser compilation failed", error)
+        return 1
+    end
+
+    input = try
+        _load_primary_cli_request_input(request)
+    catch error
+        if _primary_cli_fatal_error(error)
+            rethrow()
+        end
+        _print_primary_cli_runtime_error(err, "input load failed", error)
+        return 1
+    end
+
+    output = try
+        result = _invoke_primary_cli_request(engine, request, input; trace = trace)
+        _primary_cli_canonical_json(result.value)
+    catch error
+        if _primary_cli_fatal_error(error)
+            rethrow()
+        end
+        _print_primary_cli_runtime_error(err, "parser invocation failed", error)
+        return 1
+    end
+
+    println(io, output)
     return 0
 end

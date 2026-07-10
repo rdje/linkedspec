@@ -263,7 +263,8 @@ function LinkedSpecTraceEmitter(config::LinkedSpecTraceConfig; stdout_io::IO = s
         String[],
         0,
     )
-    if _trace_uses_file_sink(config) && _trace_file_path(config) !== nothing
+    if (_trace_uses_file_sink(config) || config.reset_file) &&
+            _trace_file_path(config) !== nothing
         _prepare_trace_file(_trace_file_path(config), config.reset_file)
     end
     return emitter
@@ -345,15 +346,33 @@ end
 
 function _render_trace_event(emitter::LinkedSpecTraceEmitter, event::LinkedSpecTraceEvent)
     indent = repeat("  ", emitter.indent_level)
+    emoji = _trace_emoji_prefix(emitter.config, event.level)
     details = isempty(strip(event.details)) ? "" : " $(event.details)"
     level = uppercase(trace_level_name(event.level))
     kind = trace_event_kind_name(event.kind)
     if event.kind == LinkedSpecTraceEnter
-        return "[$level][$kind] $indent-> $(event.topic)$details"
+        return "[$level][$kind] $indent$emoji-> $(event.topic)$details"
     elseif event.kind == LinkedSpecTraceExit
-        return "[$level][$kind] $indent<- $(event.topic)$details"
+        return "[$level][$kind] $indent$emoji<- $(event.topic)$details"
     end
-    return "[$level][$kind] $indent$(event.topic)$details"
+    return "[$level][$kind] $indent$emoji$(event.topic)$details"
+end
+
+function _trace_emoji_prefix(config::LinkedSpecTraceConfig, level::LinkedSpecTraceLevel)
+    if !config.emoji
+        return ""
+    elseif level.value <= LINKED_SPEC_TRACE_DUMP_NONE
+        return "🛑 "
+    elseif level.value <= LINKED_SPEC_TRACE_DUMP_LOW
+        return "ℹ️ "
+    elseif level.value <= LINKED_SPEC_TRACE_DUMP_MEDIUM
+        return "🔎 "
+    elseif level.value <= LINKED_SPEC_TRACE_DUMP_HIGH
+        return "🧭 "
+    elseif level.value <= LINKED_SPEC_TRACE_DUMP_FULL
+        return "🐞 "
+    end
+    return "🔥 "
 end
 
 _trace_uses_file_sink(config::LinkedSpecTraceConfig) =

@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, parity, perl, rust, dart, julia, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.3.0 finds Perl parser CLI, Dart/Julia corpus CLIs, and no Rust binary. ADR 0023 defines the target. Julia now accepts and executes exact requests with canonical JSON; .7.3.2.4 still owns its final error/trace normalization."
+evidence: "JULIA-BACKEND-PARITY.7.3.0 finds Perl parser CLI, Dart/Julia corpus CLIs, and no Rust binary. ADR 0023 defines the target. Julia now accepts/executes requests with stable local errors/trace routing; .7.3.2.5 and global .1.5 remain."
 reverify: "sed -n '1,230p' bin/linkedspec; sed -n '1,330p' dart/lib/src/cli/linkedspec_dart_cli.dart; sed -n '1,220p' julia/src/cli/LinkedSpecJuliaCli.jl; rg -n '\[\[bin\]\]|^name =|^members =' rust/Cargo.toml rust/*/Cargo.toml; find rust -type f -path '*/src/bin/*' -print"
 ---
 
@@ -24,8 +24,8 @@ The implemented backend CLI surfaces are not currently interface-equivalent:
   and it reports usage failure as `64`.
 - Julia `bin/linkedspec_julia.jl` now accepts only the exact parser option contract, rejects subcommands/
   positionals as usage `2`, prepares deterministic named/file/inline source plus literal/file input, executes it
-  through the native pipeline, and emits recursively key-sorted direct JSON. Final error/trace normalization
-  remains active `.7.3.2.4` work.
+  through the native pipeline, emits recursively key-sorted direct JSON, and has stable local failure/trace
+  routing. Direct-process no-drift remains active `.7.3.2.5` work.
 - The Rust workspace contains library crates and no binary target or `src/bin` entrypoint.
 
 ADR `0006` already requires the same backend features and semantics. The director clarified that distinct backend
@@ -40,4 +40,5 @@ canonical JSON.
 Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specific-cli-requirement]], [[native-in-memory-backend-contract]],
 [[language-agnostic-backend-vision]], [[dart-specific-cli]], [[julia-mdbook-usage-status]],
 [[julia-primary-cli-arguments-resolution-loading]],
-[[julia-primary-cli-native-execution-canonical-json]].
+[[julia-primary-cli-native-execution-canonical-json]],
+[[julia-primary-cli-failure-trace-routing]].

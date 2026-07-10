@@ -31,9 +31,11 @@ Missing compiled-rule lookup emits a specific `rule_lookup` payload. Ordinary
 rule failures receive `runtime_execution` attribution before the rule context
 unwinds, so nested failures retain the child rule and
 `julia_runtime:rule:<label>` handler identity. Parent and parse wrappers preserve
-an existing richer payload instead of replacing it.
+an existing richer payload instead of replacing it. `.7.3.2.4` now renders the
+CLI-visible subset of these fields in stable order before raw error text.
 
 Related facts: [[julia-runtime-diagnostics-trace-split]],
 [[julia-trace-controls-sinks]], [[julia-runtime-rule-interpreter]],
 [[dart-runtime-structured-diagnostics]],
-[[trace-cross-variant-capability-contract]].
+[[trace-cross-variant-capability-contract]],
+[[julia-primary-cli-failure-trace-routing]].

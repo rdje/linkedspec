@@ -5,12 +5,17 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.2.4` normalizes Julia's primary failure and trace-routing
+  boundary. Source compilation precedes deferred input-file loading; stable compilation/input/invocation stderr
+  exits `1`, usage exits `2`, and runtime diagnostics render ordered fields. Stdout/route/mirror, empty/missing/file
+  sinks, reset, quiet, and level-specific emoji now compose through the existing emitter. Seventy-five focused
+  assertions, the 1,017-assertion suite, and 99/99 pass; `.7.3.2.5` is active for direct-process/no-drift closeout.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.2.3` connects Julia's prepared primary requests to the same
   native rule-first/spec-driven-function fallback, compiler, and runtime used in memory. Top-rule, seek/consume,
   source identity, and one trace emitter propagate through the pipeline. The CLI serializes the direct top-rule
   value, not the corpus wrapper, through a recursive compact writer that sorts every object level. Twenty-two
-  focused assertions, the 942-assertion suite, direct canonical primary smoke, and 99/99 pass; `.7.3.2.4` is active
-  for normalized failures/exits/trace routing.
+  focused assertions, the 942-assertion suite, direct canonical primary smoke, and 99/99 pass; `.7.3.2.4` has since
+  closed normalized failures/exits/trace routing.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.2.2` replaces Julia's rollout-era primary `status`/`corpus`
   dispatch with ADR `0023`'s exact option and preparation model. It rejects subcommands/positionals with usage `2`,
   validates selector/mode/trace contracts, resolves named specs through current path/current `.spec`/repository

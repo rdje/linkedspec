@@ -146,8 +146,9 @@ Top-level directories and files:
     `.7.3.2.1` now propagates the existing emitter through compile/parser/function-shell/staged phases with 868
     assertions and 99/99 green. `.7.3.2.2` locks exact arguments, subcommand/positional rejection, deterministic
     named resolution, and source/input loading. `.7.3.2.3` now executes rule/function requests through the native
-    pipeline and emits direct recursively key-sorted JSON at 942 assertions; `.7.3.2.4` is active for normalized
-    failures/exits/trace routing. Global repair/census/codegen remain `.1.5`/`.1.6`/`.3`.
+    pipeline and emits direct recursively key-sorted JSON. `.7.3.2.4` now locks phase-ordered failure stderr,
+    exit 1/2, and stdout/route/mirror/file/reset/emoji behavior at 1,017 assertions; `.7.3.2.5` is active for direct-
+    process/no-drift closeout. Global repair/census/codegen remain `.1.5`/`.1.6`/`.3`.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

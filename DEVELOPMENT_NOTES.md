@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.7.3.2.4 — CLI parity includes failure phase order and dormant controls):
+  A correct option list is insufficient if input IO happens before compilation or a stored trace flag never affects
+  output. Defer input-file reads until a parser exists, centralize fixed operational headings and ordered structured
+  fields, and preserve fatal host errors. Trace configuration must cover the full state matrix: a file implies route,
+  stdout can still reset but not append that file, mirror duplicates trace only, no-file route discards, and emoji
+  belongs in the shared renderer so CLI and native traced entrypoints cannot drift.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.7.3.2.3 — serialize the public value, not the corpus adapter shape):
   A primary CLI should be a thin native-library composition. Julia can reuse rule-first parsing with precise
   spec-driven function fallback, compile once, construct the runtime with source identity and parser controls, and

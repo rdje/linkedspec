@@ -12,7 +12,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, ci, verification, corpus, depot, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.4 adds tools/run_julia_local.sh; .7.3.2.3 adds real canonical primary output to its CLI checks. The focused gate passes 942 assertions, separate corpus-runner help, and 99/99; shared CI remains opt-in."
+evidence: "JULIA-BACKEND-PARITY.6.4 adds tools/run_julia_local.sh; .7.3.2.4 passes its current package/CLI/corpus gate at 1,017 assertions and 99/99. .7.3.2.5 owns final direct-process gate expansion; shared CI remains opt-in."
 reverify: "LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n 'LINKEDSPEC_RUN_JULIA|run_julia_local' tools/run_ci_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md"
 ---
 
@@ -48,4 +48,5 @@ one explicit opt-in that composes the focused gate without duplicating its comma
 
 Related facts: [[julia-mdbook-usage-status]], [[julia-full-corpus-gate]], [[julia-backend-scaffold-package]],
 [[dart-local-verification-gate]], [[native-in-memory-backend-contract]], [[phase0-regression-structure]],
-[[julia-primary-cli-native-execution-canonical-json]].
+[[julia-primary-cli-native-execution-canonical-json]],
+[[julia-primary-cli-failure-trace-routing]].

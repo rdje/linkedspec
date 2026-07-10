@@ -848,15 +848,19 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.7.3.2.3 - execute Julia primary parser requests`
 
 - ID: `JULIA-BACKEND-PARITY.7.3.2.4`
-  Status: `active`
+  Status: `done`
   Goal: Normalize Julia primary-CLI failures, exit status, and trace routing.
   Acceptance: Compile/input/runtime failures emit ADR `0023`'s stable stderr shape and exit `1`; usage exits `2`;
     stdout/route/mirror, reset, emoji, and trace-file behavior compose with machine-readable JSON exactly.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - source preparation/compile precede deferred input-file loading; operational failures use
+    stable compilation/input/invocation headings, ordered runtime diagnostic fields, raw-error lines, and exit `1`
+    while usage remains `2`. Default route, explicit stdout/route/mirror, empty/missing/file sinks, reset with or
+    without file routing, quiet levels, and level-specific emoji compose with canonical JSON. Seventy-five focused
+    assertions, the complete 1,017-assertion suite, and 99/99 corpus gate pass.
+  Commit: `JULIA-BACKEND-PARITY.7.3.2.4 - normalize Julia CLI failures and trace routing`
 
 - ID: `JULIA-BACKEND-PARITY.7.3.2.5`
-  Status: `pending`
+  Status: `active`
   Goal: Close Julia direct-command conformance and public status after the mechanism leaves.
   Acceptance: Julia exposes the canonical parser CLI through its native in-memory library, with exact argument,
     output/error, trace, and exit behavior locked by focused/unit/direct-process tests; old status/corpus primary
@@ -909,9 +913,49 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 30 | `JULIA-BACKEND-PARITY.7.3.2.1` | `done` | Optional shared-emitter tracing covers frontend, compiler, function shell, and staged phases without output drift. |
 | 31 | `JULIA-BACKEND-PARITY.7.3.2.2` | `done` | Exact options, exclusivity, positional rejection, named resolution, and source/input loading are locked. |
 | 32 | `JULIA-BACKEND-PARITY.7.3.2.3` | `done` | Native rule/function parsing, compile/runtime controls, and direct recursive canonical JSON are locked. |
-| 33 | `JULIA-BACKEND-PARITY.7.3.2.4` | `active` | Normalize failures/exits and complete trace routing. |
-| 34 | `JULIA-BACKEND-PARITY.7.3.2.5` | `pending` | Prove unit/direct-process conformance and align focused verification/docs. |
+| 33 | `JULIA-BACKEND-PARITY.7.3.2.4` | `done` | Stable operational failures and the complete trace sink/reset/emoji matrix are locked. |
+| 34 | `JULIA-BACKEND-PARITY.7.3.2.5` | `active` | Prove unit/direct-process conformance and align focused verification/docs. |
 | 35 | `JULIA-BACKEND-PARITY.7.3.3` | `pending` | Close no-drift honestly or split any remaining user-observable parity residual. |
+
+## `JULIA-BACKEND-PARITY.7.3.2.4` Primary CLI Failure and Trace-Routing Proof
+
+Implementation evidence recorded on 2026-07-10:
+
+- Primary execution now respects the reference phase order: source resolution/loading and native compilation
+  finish before an input file is read. A broken spec therefore reports compilation even when the selected input
+  file is also absent; a valid compiled parser reports the later input-load failure.
+- Operational failures use exactly three stable headings: `parser compilation failed`, `input load failed`, and
+  `parser invocation failed`. All exit `1`. Runtime diagnostics render the available `owner_stage`, `summary`,
+  `detail`, `spec_name`, `spec_path`, `top_rule`, and `rule_label` fields in fixed order before the raw `error:`
+  line. Usage parsing remains independently normalized at exit `2`; interrupts, OOM, and stack overflow rethrow.
+- Trace files default to route mode. Explicit `stdout` interleaves trace before canonical JSON, `route` preserves
+  machine-readable JSON, and `mirror` writes byte-identical trace to stdout and file before JSON. Route without a
+  file discards trace; mirror without a file writes stdout; an empty file option behaves as no file.
+- `--trace-reset` truncates a selected file even when explicit stdout mode prevents later file writes, matching
+  the reference configuration order. Without reset, stdout mode leaves a selected file untouched. Disabled trace
+  can still perform the requested reset without emitting events.
+- `--trace-emoji` now renders the shared level prefixes: `🛑`, `ℹ️`, `🔎`, `🧭`, `🐞`, and `🔥` for none through
+  debug thresholds. Quiet/none still emits no trace and leaves canonical JSON exact.
+- Seventy-five focused assertions cover failure order/headings/fields/status, source identity, fatal rethrows,
+  every sink/file combination, reset, emoji, quietness, and trace-file setup failure. Full package tests pass at
+  1,017 assertions and the 99-fixture interpreter oracle remains exact.
+
+## `JULIA-BACKEND-PARITY.7.3.2.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Execution errors used a temporary generic heading, spec/input load errors had
+  backend-local headings, input files loaded before compilation, reset ignored files in stdout mode, and emoji
+  configuration never affected rendered trace.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The primary adapter composed all IO during preparation and bypassed the
+  existing structured runtime diagnostic fields; trace configuration stored emoji/reset intent but rendering and
+  emitter file preparation did not consume it completely.
+- [x] **FIX** — Defer input-file IO until after compilation, add one ordered operational-error formatter, preserve
+  fatal Julia errors, complete sink/reset semantics, and render level-specific emoji in the existing emitter.
+- [x] **ADDRESSED (verified)** — Seventy-five focused assertions cover the complete owned failure/routing matrix.
+- [x] **NO REGRESSION** — `tools/run_julia_local.sh` passes 1,017 assertions, canonical primary smoke, retired-
+  subcommand rejection, and all 99 exact corpus outputs; generated depot compilation artifacts were removed.
+- [x] **LOCKSTEP** — mdBook, task/live docs, Knowledge Map, and resume memory describe the normalized boundary;
+  `.7.3.2.5` is the sole active Julia frontier for direct-process/no-drift closeout. Cross-backend neutral fixture
+  comparison remains explicitly owned by `FUTURE-PARITY-BACKLOG.1.5` and is not falsely claimed here.
 
 ## `JULIA-BACKEND-PARITY.7.3.2.3` Primary CLI Execution and Canonical JSON Proof
 
@@ -930,8 +974,8 @@ Implementation evidence recorded on 2026-07-10:
 - Rule-only and top-level-function sources, explicit top rule, consume mode, inline/file source and input, routed
   trace reset, scalars, nulls, arrays, escaped strings, and nested unsorted maps are covered by 22 focused
   assertions. The focused gate now executes a real primary process and requires `{"a":1,"b":2}`.
-- Failure text and the complete stdout/route/mirror/reset/emoji matrix remain deliberately owned by `.7.3.2.4`;
-  this leaf does not treat its temporary generic execution-error boundary as final normalization.
+- At this leaf boundary, failure text and the complete stdout/route/mirror/reset/emoji matrix remained deliberately
+  owned by `.7.3.2.4`; that leaf has since closed the temporary generic execution-error boundary.
 
 ## `JULIA-BACKEND-PARITY.7.3.2.3` Acceptance Checklist
 
@@ -946,8 +990,8 @@ Implementation evidence recorded on 2026-07-10:
 - [x] **NO REGRESSION** — `tools/run_julia_local.sh` passes 942 assertions, a direct canonical primary parse,
   retired-subcommand rejection, and all 99 exact corpus outputs; generated depot compilation artifacts were
   removed afterward.
-- [x] **LOCKSTEP** — mdBook, task/live docs, Knowledge Map, and resume memory describe executable primary requests;
-  `.7.3.2.4` is the sole active Julia frontier for final errors/exits/trace routing.
+- [x] **LOCKSTEP** — At this leaf boundary, mdBook, task/live docs, Knowledge Map, and resume memory described
+  executable primary requests and advanced the sole frontier to `.7.3.2.4`.
 
 ## `JULIA-BACKEND-PARITY.7.3.2.2` Primary CLI Arguments and Loading Proof
 
@@ -2855,6 +2899,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.2.1` | Optional shared-emitter frontend/compiler/function-shell/staged instrumentation; 28 focused assertions; 868-assertion package suite; CLI smokes; 99/99 corpus gate; mdBook/KM/memory/task/doctrine/whitespace gates; generated cache cleanup. | PASS. Julia's existing trace controls/sinks now cover every native phase needed by the future primary trace options without output drift; `.7.3.2.2` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.2.2` | Exact primary option/preparation model; current/repository/fallback resolution; file/inline loading; 50 focused assertions; 920-assertion suite; direct help/subcommand-rejection checks; 99/99 corpus; docs/KM/governance/whitespace; cache cleanup. | PASS. Julia now accepts only ADR `0023` arguments and prepares exact native inputs without backend-only primary commands; `.7.3.2.3` becomes active for execution/JSON. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.2.3` | Native rule/function parse fallback, traced compile/runtime composition, top-rule/parse-mode controls, recursive canonical JSON, 22 focused assertions, 942-assertion suite, direct canonical primary smoke, 99/99 corpus, docs/KM/governance/whitespace, and cache cleanup. | PASS. Valid Julia primary requests now execute in-process and print the direct top-rule value with recursively sorted object keys plus one newline; `.7.3.2.4` becomes active for normalized errors/exits/trace routing. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.2.4` | Reference failure/sink probes; deferred input loading; stable operational formatter; fatal rethrows; complete stdout/route/mirror/file/reset/emoji matrix; 75 focused assertions; 1,017-assertion suite; 99/99 corpus; docs/KM/governance/whitespace; cache cleanup. | PASS. Compilation/input/invocation failures have stable exit-1 stderr, usage remains exit 2, and trace routing composes with canonical JSON; `.7.3.2.5` becomes active for direct-process/no-drift closeout. |
 
 ## Commit Log
 
@@ -2917,14 +2962,20 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.7.3.2.1` | `JULIA-BACKEND-PARITY.7.3.2.1 - trace Julia frontend compiler and staged dispatch` | One optional existing emitter now spans parse/validate/compile/function-shell/staged phases; 868 assertions and 99/99 pass; `.7.3.2.2` becomes active. |
 | `JULIA-BACKEND-PARITY.7.3.2.2` | `JULIA-BACKEND-PARITY.7.3.2.2 - align Julia CLI arguments and loading` | Strict canonical options, deterministic named resolution, exact source/input loading, separate corpus runner, 920 assertions/99-fixture proof; `.7.3.2.3` becomes active. |
 | `JULIA-BACKEND-PARITY.7.3.2.3` | `JULIA-BACKEND-PARITY.7.3.2.3 - execute Julia primary parser requests` | Native rule/function parsing, compiler/runtime controls, and direct recursively key-sorted canonical JSON; 942 assertions/99-fixture proof; `.7.3.2.4` becomes active. |
+| `JULIA-BACKEND-PARITY.7.3.2.4` | `JULIA-BACKEND-PARITY.7.3.2.4 - normalize Julia CLI failures and trace routing` | Stable phase-ordered failure stderr/exit 1 plus complete sink/file/reset/emoji behavior; 1,017 assertions/99-fixture proof; `.7.3.2.5` becomes active. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.7.3.2.4` Julia primary failure/trace normalization. Compilation precedes deferred
+  input-file loading; compilation/input/invocation failures use stable headings, ordered runtime fields, raw error,
+  and exit `1`, while usage remains `2` and fatal Julia errors rethrow. Stdout/route/mirror, empty/missing/file
+  sinks, reset, quiet, and level-specific emoji compose with canonical JSON. Seventy-five focused assertions, the
+  1,017-assertion suite, and 99/99 pass. `.7.3.2.5` is active for direct-process/no-drift closeout.
 - `2026-07-10`: Completed `.7.3.2.3` Julia primary execution/canonical JSON. Prepared rule-only and top-level-
   function source now flows through one traced native parse/compile/runtime pipeline with exact top-rule and
   parse-mode controls. A recursive writer emits the direct top-rule value with lexicographically sorted nested
   keys plus one newline. Twenty-two focused assertions, the 942-assertion suite, direct canonical primary smoke,
-  and 99/99 pass. `.7.3.2.4` is active for normalized failures/exits/trace routing.
+  and 99/99 pass. `.7.3.2.4` became active there and has since closed normalized failures/exits/trace routing.
 - `2026-07-10`: Completed `.7.3.2.2` Julia primary arguments/resolution/loading. The primary module accepts only
   ADR `0023` options, rejects subcommands/positionals with exit `2`, resolves named specs through current/repository/
   deterministic fallback precedence, and loads exact file/inline content. Fifty focused assertions, the 920-

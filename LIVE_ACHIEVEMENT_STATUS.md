@@ -7,8 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.2.4 — normalize Julia CLI failures and trace routing**
+  (DONE — failure/trace behavior is green; `.7.3.2.5` is active for direct-process/no-drift closeout).
+
+  **Change:** Compilation now precedes deferred input-file loading. Compilation/input/invocation errors have stable
+  stderr/exit `1`, usage remains `2`, and runtime fields are ordered. Stdout/route/mirror, file/no-file, reset,
+  quiet, and level-specific emoji now compose with canonical JSON; fatal Julia errors still rethrow.
+
+  **Proof:** Seventy-five focused assertions, the full 1,017-assertion suite, and all 99 exact corpus outputs pass.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.7.3.2.3 — execute Julia primary parser requests**
-  (DONE — native execution/canonical JSON is green; `.7.3.2.4` is active for error/exit/trace normalization).
+  (DONE — native execution/canonical JSON is green; `.7.3.2.4` subsequently closed error/trace normalization).
 
   **Change:** Prepared rule-only and top-level-function requests now execute through one traced native parse,
   compile, and runtime pipeline with top-rule/parse-mode controls. A recursive serializer emits the direct

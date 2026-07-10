@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.5.0` done; delegated Julia CLI frontier is `.7.3.2.4`).
+- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.5.0` done; delegated Julia CLI frontier is `.7.3.2.5`).
 - Owner: repo-local workflow
 
 ## Goal
@@ -293,7 +293,7 @@ before implementation.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.7.3.2.4` | `active` | Normalize Julia primary failures, exit status, and trace routing. |
+| 1 | `JULIA-BACKEND-PARITY.7.3.2.5` | `active` | Close Julia direct-process conformance and public no-drift. |
 | 2 | `JULIA-BACKEND-PARITY.7.3.3` | `pending` | Reconcile Julia's scoped milestone and remaining complete-parity obligations without false closure. |
 | 3 | `FUTURE-PARITY-BACKLOG.1.5.1` | `pending` | Lock neutral CLI fixtures and normalize the Perl reference after Julia's active leaf is clean. |
 | 4 | `FUTURE-PARITY-BACKLOG.1.5.2` | `pending` | Add the missing Rust primary CLI against the shared fixtures. |
@@ -360,8 +360,9 @@ before implementation.
   `.7.3.2.2` is active for exact arguments and source/input loading.
 - `2026-07-10`: Delegated Julia `.7.3.2.2` replaces the rollout primary commands with exact ADR `0023` options,
   positional/subcommand rejection, deterministic named resolution, and exact source/input loading. `.7.3.2.3`
-  now executes rule/function source through the native pipeline and emits recursively key-sorted direct JSON. The
-  942-assertion suite and 99/99 pass; `.7.3.2.4` is active for normalized failures/exits/trace routing.
+  now executes rule/function source through the native pipeline and emits recursively key-sorted direct JSON;
+  `.7.3.2.4` locks stable phase-ordered failures plus the trace sink/reset/emoji matrix. The 1,017-assertion
+  suite and 99/99 pass; `.7.3.2.5` is active for direct-process/no-drift closeout.
 
 ## Open Questions
 
@@ -370,7 +371,7 @@ before implementation.
 
 ## Blockers
 
-- None. Julia `.7.3.2.4` is the next active PNT leaf; global CLI/capability convergence precedes Lua `.1.3`.
+- None. Julia `.7.3.2.5` is the next active PNT leaf; global CLI/capability convergence precedes Lua `.1.3`.
 
 ## Verification Log
 

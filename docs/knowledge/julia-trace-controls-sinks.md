@@ -12,7 +12,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, trace, runtime, diagnostics, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.4.5.2 adds trace controls/sinks. JULIA-BACKEND-PARITY.7.3.2.1 reuses the emitter across frontend/compiler/function-shell/staged entrypoints; 28 focused additions and its 868-assertion/99-fixture gate prove routing, quietness, and result identity."
+evidence: "JULIA-BACKEND-PARITY.4.5.2 adds trace controls/sinks; .7.3.2.1 spans the native pipeline; .7.3.2.4 completes CLI stdout/route/mirror/file/reset/emoji behavior. The current suite is 1,017 and corpus 99/99."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
@@ -27,7 +27,9 @@ to none/low/medium/high/full/debug, named aliases and numeric thresholds,
 
 `LinkedSpecTraceEmitter` records structured enter/exit/decision/mark/dump/log
 events and rendered lines. It routes output to stdout, a routed file, or both;
-routed files support reset/truncate at emitter creation.
+routed files support reset/truncate at emitter creation. Reset also truncates a
+selected file in stdout mode, where later trace is not appended. The shared
+renderer applies level-specific emoji when enabled.
 
 `runtime_parse(...)` and `runtime_execute(...)` accept an optional emitter.
 `runtime_parse_with_trace(...)` and `runtime_execute_with_trace(...)` construct
@@ -49,4 +51,5 @@ Related facts: [[julia-runtime-structured-diagnostics]],
 [[julia-runtime-diagnostics-trace-split]], [[julia-runtime-trace-events]],
 [[julia-diagnostics-trace-boundary]],
 [[dart-trace-controls-sinks]],
-[[trace-cross-variant-capability-contract]], [[julia-frontend-compiler-staged-trace-events]].
+[[trace-cross-variant-capability-contract]], [[julia-frontend-compiler-staged-trace-events]],
+[[julia-primary-cli-failure-trace-routing]].

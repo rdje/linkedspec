@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.2.4 — normalize Julia CLI failures and trace routing
+
+**Scope:** Primary phase ordering, stable operational stderr/exit status, structured runtime fields, complete trace
+sink/file/reset/emoji behavior, fatal-error preservation, focused tests, and docs.
+
+**Implementation:** Source preparation and native compilation now precede deferred input-file loading. Compilation,
+input, and invocation failures use fixed headings, ordered available runtime fields, raw error text, and exit `1`;
+usage remains `2`. The existing emitter now honors level-specific emoji and reset even with explicit stdout mode.
+Empty/no-file, stdout, route, and mirror semantics preserve canonical JSON exactly where expected.
+
+**Verification:** Seventy-five focused assertions cover failure precedence/headings/fields/status, source identity,
+fatal rethrows, every sink/file combination, reset, quietness, emoji, and file setup failure. The complete 1,017-
+assertion suite and 99/99 corpus gate pass. `.7.3.2.5` owns direct-process/no-drift closeout.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.2.3 — execute Julia primary parser requests
 
 **Scope:** Native primary request execution, rule/function source composition, top-rule/parse-mode/trace controls,

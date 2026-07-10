@@ -727,6 +727,236 @@ Top::
     end
 end
 
+@testset "Primary CLI failures and trace routing" begin
+    function cli_run(args)
+        output = IOBuffer()
+        error_output = IOBuffer()
+        status = run_cli(args; io = output, err = error_output)
+        return status, String(take!(output)), String(take!(error_output))
+    end
+
+    missing_input_path = joinpath(
+        tempdir(),
+        "definitely-missing-linkedspec-primary-input.txt",
+    )
+    status, output, error_output = cli_run([
+        "--inline-spec",
+        "not a spec",
+        "--input-file",
+        missing_input_path,
+    ])
+    @test status == 1
+    @test isempty(output)
+    @test startswith(error_output, "linkedspec: parser compilation failed\n")
+    @test occursin("  error: ", error_output)
+    @test !occursin("input load failed", error_output)
+
+    status, output, error_output = cli_run([
+        "--spec-file",
+        joinpath(tempdir(), "definitely-missing-linkedspec-primary.spec"),
+        "--input",
+        "x",
+    ])
+    @test status == 1
+    @test isempty(output)
+    @test startswith(error_output, "linkedspec: parser compilation failed\n")
+    @test occursin("spec file not found", error_output)
+
+    status, output, error_output = cli_run([
+        "--inline-spec",
+        _returning_spec("unused"),
+        "--input-file",
+        missing_input_path,
+    ])
+    @test status == 1
+    @test isempty(output)
+    @test startswith(error_output, "linkedspec: input load failed\n")
+    @test occursin("input file not found", error_output)
+
+    status, output, error_output = cli_run([
+        "--inline-spec",
+        "Top::\n /x/\n",
+        "--input",
+        "x",
+        "--top-rule",
+        "Missing",
+    ])
+    @test status == 1
+    @test isempty(output)
+    @test error_output ==
+        "linkedspec: parser invocation failed\n" *
+        "  owner_stage: julia_runtime\n" *
+        "  summary: Julia runtime rule lookup failed\n" *
+        "  detail: rule 'Missing' is not compiled\n" *
+        "  spec_name: <inline>\n" *
+        "  top_rule: Missing\n" *
+        "  rule_label: Missing\n" *
+        "  error: rule 'Missing' is not compiled\n"
+    @test LinkedSpecJulia._primary_cli_fatal_error(InterruptException())
+    @test LinkedSpecJulia._primary_cli_fatal_error(OutOfMemoryError())
+    @test LinkedSpecJulia._primary_cli_fatal_error(StackOverflowError())
+    @test !LinkedSpecJulia._primary_cli_fatal_error(ArgumentError("ordinary"))
+
+    mktempdir() do directory
+        trace_path = joinpath(directory, "trace.log")
+        trace_spec = _returning_spec("trace")
+        base_args = ["--inline-spec", trace_spec, "--input", "x", "--trace", "high"]
+        expected_json = "\"trace\"\n"
+
+        identified_spec_path = joinpath(directory, "identified.spec")
+        write(identified_spec_path, trace_spec)
+        status, output, error_output = cli_run([
+            "--spec-file",
+            identified_spec_path,
+            "--input",
+            "x",
+            "--top-rule",
+            "Missing",
+        ])
+        @test status == 1
+        @test isempty(output)
+        @test occursin("  spec_name: identified.spec\n", error_output)
+        @test occursin("  spec_path: $identified_spec_path\n", error_output)
+        @test first(findfirst("  spec_name:", error_output)) <
+            first(findfirst("  spec_path:", error_output)) <
+            first(findfirst("  top_rule:", error_output))
+
+        status, output, error_output = cli_run([base_args..., "--trace-mode", "stdout"])
+        @test status == 0
+        @test occursin("julia_frontend:parse_spec", output)
+        @test endswith(output, expected_json)
+        @test isempty(error_output)
+
+        write(trace_path, "stale\n")
+        status, output, error_output = cli_run([
+            base_args...,
+            "--trace-file",
+            trace_path,
+            "--trace-reset",
+        ])
+        @test status == 0
+        @test output == expected_json
+        @test isempty(error_output)
+        routed_trace = read(trace_path, String)
+        @test !occursin("stale", routed_trace)
+        @test occursin("julia_runtime:parse", routed_trace)
+
+        status, output, error_output = cli_run([
+            base_args...,
+            "--trace-file",
+            trace_path,
+            "--trace-mode",
+            "mirror",
+            "--trace-reset",
+        ])
+        mirrored_trace = read(trace_path, String)
+        @test status == 0
+        @test !isempty(mirrored_trace)
+        @test output == mirrored_trace * expected_json
+        @test isempty(error_output)
+
+        write(trace_path, "stale\n")
+        status, output, error_output = cli_run([
+            base_args...,
+            "--trace-file",
+            trace_path,
+            "--trace-mode",
+            "stdout",
+            "--trace-reset",
+        ])
+        @test status == 0
+        @test occursin("julia_compiler:compile_spec", output)
+        @test endswith(output, expected_json)
+        @test isempty(read(trace_path, String))
+        @test isempty(error_output)
+
+        write(trace_path, "preserved\n")
+        status, output, error_output = cli_run([
+            base_args...,
+            "--trace-file",
+            trace_path,
+            "--trace-mode",
+            "stdout",
+        ])
+        @test status == 0
+        @test endswith(output, expected_json)
+        @test read(trace_path, String) == "preserved\n"
+        @test isempty(error_output)
+
+        status, output, error_output = cli_run([
+            base_args...,
+            "--trace-file",
+            "",
+        ])
+        @test status == 0
+        @test occursin("julia_frontend:parse_spec", output)
+        @test endswith(output, expected_json)
+        @test isempty(error_output)
+
+        status, output, error_output = cli_run([base_args..., "--trace-mode", "route"])
+        @test status == 0
+        @test output == expected_json
+        @test isempty(error_output)
+
+        status, output, error_output = cli_run([base_args..., "--trace-mode", "mirror"])
+        @test status == 0
+        @test occursin("julia_runtime:parse", output)
+        @test endswith(output, expected_json)
+        @test isempty(error_output)
+
+        status, output, error_output = cli_run([
+            base_args...,
+            "--trace-mode",
+            "stdout",
+            "--trace-emoji",
+        ])
+        @test status == 0
+        @test occursin("ℹ️ ", output)
+        @test occursin("🔎 ", output)
+        @test occursin("🧭 ", output)
+        @test endswith(output, expected_json)
+        @test isempty(error_output)
+
+        status, output, error_output = cli_run([
+            "--inline-spec",
+            trace_spec,
+            "--input",
+            "x",
+            "--trace",
+            "none",
+            "--trace-emoji",
+        ])
+        @test status == 0
+        @test output == expected_json
+        @test isempty(error_output)
+
+        write(trace_path, "stale\n")
+        status, output, error_output = cli_run([
+            "--inline-spec",
+            trace_spec,
+            "--input",
+            "x",
+            "--trace-file",
+            trace_path,
+            "--trace-reset",
+        ])
+        @test status == 0
+        @test output == expected_json
+        @test isempty(read(trace_path, String))
+        @test isempty(error_output)
+
+        status, output, error_output = cli_run([
+            base_args...,
+            "--trace-file",
+            directory,
+        ])
+        @test status == 1
+        @test isempty(output)
+        @test startswith(error_output, "linkedspec: parser compilation failed\n")
+        @test occursin("  error: ", error_output)
+    end
+end
+
 @testset "Action AST parser" begin
     block = parse_action_block(
         "set(array(results), []); push(array(results), retv)\n" *

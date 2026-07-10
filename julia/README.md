@@ -6,8 +6,9 @@ parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch
 families, cursor/boundary behavior, structured diagnostics/tracing, registered function execution, and controlled
 library-level corpus execution, bounded CLI selection/reporting, and spec-driven top-level user-function source
 composition plus full ordered 99-fixture library and CLI execution. Local-gate integration and native primary
-rule/function execution with direct canonical JSON are complete; normalized error/trace conformance, capability
-census, generated source, and final complete-parity closeout remain open.
+rule/function execution with direct canonical JSON and stable failure/trace routing are complete; direct-process
+no-drift, cross-backend neutral fixtures, capability census, generated source, and final complete-parity closeout
+remain open.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -26,8 +27,9 @@ landed; `.6.4` owns the focused optional-SDK verification gate, `.7.1` closes pu
 complete with generated source deferred to the future split proof lane. `.7.3.0` found that this corpus/status CLI
 does not yet match the required cross-variant parser CLI contract. ADR `0023` defines that exact interface;
 `.7.3.2.0` splits repair, `.7.3.2.1` closes compile/parser/function-shell/staged trace coverage, `.7.3.2.2`
-closes exact arguments plus source/input resolution/loading, and `.7.3.2.3` closes native rule/function execution
-plus recursively key-sorted direct JSON. `.7.3.2.4` is active for normalized failures/exits/trace routing.
+closes exact arguments plus source/input resolution/loading, `.7.3.2.3` closes native rule/function execution plus
+recursively key-sorted direct JSON, and `.7.3.2.4` closes normalized failures/exits/trace routing. `.7.3.2.5` is
+active for direct-process/no-drift closeout.
 
 ## Commands
 
@@ -67,7 +69,10 @@ julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtim
 The primary command validates the exact cross-backend options, prepares named/file/inline source plus literal/file
 input, executes rule-only or spec-driven top-level-function source through the native library, and prints the
 direct top-rule value as compact JSON with every nested object key sorted plus one newline. The example prints
-`{"a":1,"b":2}`. `status` and `corpus` are rejected as primary subcommands. The separate corpus runner validates
+`{"a":1,"b":2}`. Compilation, input loading, and invocation failures use stable stderr headings and exit `1`;
+usage failures exit `2`. Trace defaults to stdout without a file and route with one; explicit stdout/route/mirror,
+reset, and emoji compose without changing routed canonical stdout. `status` and `corpus` are rejected as primary
+subcommands. The separate corpus runner validates
 `manifest.json`, fixture directory drift, required `input.spec` / `input.txt` /
 `expected.json` files, and expected JSON syntax. Bare `--execute` runs all 99 fixtures; selectors narrow a run
 without bypassing complete manifest validation.
@@ -259,9 +264,10 @@ parity gap. `.7.3.1` ratifies ADR `0023`; `.7.3.2.0` splits Julia CLI alignment 
 now closes parse/validation/compile/function-shell/staged trace propagation through the existing emitter and sinks;
 the full suite passed with 868 assertions and the focused gate remained 99/99. `.7.3.2.2` closes exact options,
 resolution, and loading with 50 focused assertions. `.7.3.2.3` closes native primary execution and recursively
-key-sorted direct JSON with 22 focused assertions; the full suite passes with 942 assertions and 99/99 remains
-green. `.7.3.2.4` is active for normalized failures/exits/trace routing. Generated source remains deferred but
-blocks complete parity because Rust exports it.
+key-sorted direct JSON with 22 focused assertions. `.7.3.2.4` closes phase-ordered failures, stable stderr/exit,
+and the complete trace sink/reset/emoji matrix with 75 focused assertions; the full suite passes with 1,017
+assertions and 99/99 remains green. `.7.3.2.5` is active for direct-process/no-drift closeout. Generated source
+remains deferred but blocks complete parity because Rust exports it.
 
 Library example:
 

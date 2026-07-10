@@ -76,8 +76,8 @@ zero-progress detection, first default/AND/OR/repetition dispatch, lifecycle and
 accumulators/returns, recursion/progress guards, registered user functions, diagnostics/tracing, boundary capture,
 manifest-backed corpus validation, controlled and full library corpus execution, public-parser leading-trivia
 parity, spec-driven top-level user-function source composition, native primary request execution/canonical JSON,
-and unbounded full-manifest CLI execution. The full package suite currently passes with 942 assertions and status
-`runtime-corpus-full`.
+stable primary failure/trace routing, and unbounded full-manifest CLI execution. The full package suite currently
+passes with 1,017 assertions and status `runtime-corpus-full`.
 
 The library executor and corpus CLI support named or bounded subsets. For example:
 

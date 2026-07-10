@@ -34,14 +34,18 @@ Named `--spec NAME` resolution is deterministic:
 Explicit paths and explicit `.spec` names never use fallback. Repository
 metadata and generated dependency/build trees are pruned, so generated artifacts
 cannot unexpectedly win named resolution. `--spec-file` and `--input-file` load
-exact string contents; inline source and literal input remain unchanged.
+exact string contents; inline source and literal input remain unchanged. The
+public CLI defers input-file loading until source compilation succeeds, preserving
+the reference failure order.
 
-The typed preparation record retains the validated controls, source identity/path
-and text, and input path/text for native execution. `.7.3.2.3` now consumes that
-record through the native pipeline and emits canonical direct-value JSON; this
-card remains the canonical home for the argument/loading half of that composition.
+The typed request retains the validated controls, source identity/path and text,
+plus literal input or a deferred input path for native execution. `.7.3.2.3`
+consumes it through the native pipeline, and `.7.3.2.4` locks deferred input IO;
+this card remains the canonical home for the argument/loading half of that
+composition.
 
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[julia-primary-cli-mechanism-audit]], [[cross-backend-cli-contract-gap]],
 [[native-in-memory-backend-contract]],
-[[julia-primary-cli-native-execution-canonical-json]].
+[[julia-primary-cli-native-execution-canonical-json]],
+[[julia-primary-cli-failure-trace-routing]].

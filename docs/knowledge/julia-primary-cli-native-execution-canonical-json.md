@@ -36,9 +36,10 @@ newline, so Julia dictionary insertion order cannot change stdout.
 Focused coverage includes rule-only and top-level-function source, explicit top
 rule, consume mode, inline/file source and input, routed trace reset, direct
 scalar/null/array values, JSON escaping, nested unsorted maps, and rejection of
-non-string object keys. Final failure text, exit normalization, and the complete
-trace routing matrix remain owned by `.7.3.2.4`.
+non-string object keys. `.7.3.2.4` has since closed failure/exit normalization
+and the complete trace routing matrix.
 
 Related facts: [[julia-primary-cli-arguments-resolution-loading]],
 [[julia-primary-cli-mechanism-audit]], [[julia-frontend-compiler-staged-trace-events]],
-[[user-observable-backend-cli-parity-contract]], [[native-in-memory-backend-contract]].
+[[user-observable-backend-cli-parity-contract]], [[native-in-memory-backend-contract]],
+[[julia-primary-cli-failure-trace-routing]].

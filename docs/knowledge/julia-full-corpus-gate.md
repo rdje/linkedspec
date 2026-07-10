@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, corpus, parity, cli, manifest, regression, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.3 adds the complete-corpus regression and unbounded runner execution. JULIA-BACKEND-PARITY.7.3.2.3 re-runs the focused gate: corpus runner reports 99/0 and the current suite passes with 942 assertions at status runtime-corpus-full."
+evidence: "JULIA-BACKEND-PARITY.6.3 adds the complete-corpus regression and unbounded runner execution. JULIA-BACKEND-PARITY.7.3.2.4 re-runs the focused gate: corpus reports 99/0 and the suite passes with 1,017 assertions."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute"
 ---
 
@@ -30,7 +30,7 @@ reserved for argument, selection, or manifest validation errors. Existing regres
 format, count mismatch, invalid/duplicate names, missing/stale fixture directories, missing files, malformed JSON,
 and output mismatches.
 
-The direct complete corpus-runner CLI reports 99 passed and 0 failed. Full Julia tests now pass with 942 assertions, and
+The direct complete corpus-runner CLI reports 99 passed and 0 failed. Full Julia tests now pass with 1,017 assertions, and
 package/CLI status is `runtime-corpus-full`.
 
 Related facts: [[julia-local-verification-gate]], [[julia-corpus-manifest-io]], [[julia-corpus-selection-reporting]],

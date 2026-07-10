@@ -70,10 +70,12 @@ the same language-neutral fixtures for every backend.
 This is a contract and active convergence target, not a claim that every current executable
     already passes. The current gap census is: Perl is parser-oriented but still needs the neutral
     fixture lock; Rust has no primary binary; Dart remains corpus/status-oriented; Julia now accepts and executes
-    the exact parser request shape but still needs final failure/trace normalization. `FUTURE-PARITY-BACKLOG.1.5`
+    the exact parser request shape with stable local failures and trace routing but still needs direct-process
+    closeout and the global neutral fixture comparison. `FUTURE-PARITY-BACKLOG.1.5`
     owns convergence. Julia's repair is split under `JULIA-BACKEND-PARITY.7.3.2`; `.7.3.2.1` closes compile/parser/
     function-shell/staged trace coverage, `.7.3.2.2` closes exact argument/source/input handling, `.7.3.2.3`
-    closes execution/direct canonical JSON, and `.7.3.2.4` is active before direct-command conformance.
+    closes execution/direct canonical JSON, `.7.3.2.4` closes errors/exits/trace routing, and `.7.3.2.5` is active
+    for direct-command no-drift.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics
@@ -422,7 +424,7 @@ implementing the same cross-variant command interface.
 ### Julia Backend Commands, Embedding, and Status
 
 Julia is green at the accepted interpreter-first boundary: the complete validated corpus executes 99/99 with
-exact checked-in output, full package tests pass with 942 assertions, and package/CLI status is
+exact checked-in output, full package tests pass with 1,017 assertions, and package/CLI status is
 `runtime-corpus-full`. The primary product surface is the native `LinkedSpecJulia` module; the Julia CLI and corpus
 runner are thin adapters over the same in-process parser/compiler/runtime path.
 
@@ -432,7 +434,10 @@ remains in the separate runner. Named specs resolve through exact current path, 
 `specs/NAME.spec`, then deterministic authored fallback. File and inline content is loaded exactly. Rule-only and
 spec-driven top-level-function source now execute through the native compiler/runtime with top-rule, parse-mode,
 and trace controls. Success prints the direct top-rule value with recursively sorted object keys and one newline.
-`.7.3.2.4` remains active for final failure/exit/trace-routing normalization.
+Source compilation precedes input-file loading. Compilation, input-load, and invocation failures use stable stderr
+headings and exit `1`; usage errors exit `2`. The existing trace emitter now composes stdout/route/mirror, reset,
+quiet, and level-specific emoji behavior with canonical output. `.7.3.2.5` remains active for direct-process/no-
+drift closeout; global cross-backend fixture identity remains owned by `FUTURE-PARITY-BACKLOG.1.5`.
 
 The boundary does not claim generated Julia source or the exact primary CLI yet. `.7.2` deliberately
 defers generated Julia source to the split future source-emitter lane under `FUTURE-PARITY-BACKLOG.3`; Julia
@@ -516,6 +521,33 @@ The shown primary parse invocation prints `{"a":1,"b":2}` followed by one newlin
 every nesting level, independent of Julia `Dict` insertion order, and the serialized value is the direct top-rule
 result rather than the corpus runner's one-level comparison wrapper. Newlines separate the example's statements;
 semicolon is needed only between multiple statements on one physical line.
+
+Operational failures have one of these first lines and exit `1`:
+
+```text
+linkedspec: parser compilation failed
+linkedspec: input load failed
+linkedspec: parser invocation failed
+```
+
+When a runtime failure carries structured context, stderr continues in stable order with the available
+`owner_stage`, `summary`, `detail`, `spec_name`, `spec_path`, `top_rule`, and `rule_label` fields, then an `error:`
+line. Compilation completes before `--input-file` is read, so an invalid spec is reported before a simultaneously
+missing input file. Argument/selector/mode errors remain usage failures with exit `2` and the usage text.
+
+Trace routing is independent of canonical result generation:
+
+| Controls | stdout | trace file |
+| --- | --- | --- |
+| `--trace high` | trace, then JSON | none |
+| `--trace high --trace-file run.log` | JSON only | trace (implicit `route`) |
+| add `--trace-mode mirror` | trace, then JSON | the same trace bytes |
+| add `--trace-mode stdout` | trace, then JSON | unchanged; truncated first only with `--trace-reset` |
+| `--trace-mode route` without a file | JSON only | none; trace is discarded |
+
+`--trace-reset` truncates a selected file before compilation even when the selected mode is `stdout` or the trace
+level is `none`. `--trace-emoji` adds level-specific `🛑` / `ℹ️` / `🔎` / `🧭` / `🐞` / `🔥` prefixes to emitted
+events; it does not cause a quiet trace level to emit.
 
 The corpus commands validate `manifest.json`, case-count/name shape, missing/stale fixture directories, required
 `input.spec` / `input.txt` / `expected.json` files, and expected JSON syntax over the checked-in 99-fixture corpus.

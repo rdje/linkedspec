@@ -140,9 +140,9 @@ leaves.
 As of `JULIA-BACKEND-PARITY.7.3.2.1`, Julia has stable structured runtime
 diagnostics, trace controls/events/sinks, interpreter instrumentation, and
 opt-in source-parser, validation, compiler, function-shell, and staged-dispatch
-events. `.7.3.2.3` now composes that emitter through native primary execution;
-final failure and trace-routing conformance remains `.7.3.2.4`, so this does not
-claim complete backend or CLI parity.
+events. `.7.3.2.3` composes that emitter through native primary execution, and
+`.7.3.2.4` closes Julia's sink/reset/emoji CLI behavior. Direct-process no-drift
+remains `.7.3.2.5`, so this does not claim complete backend or CLI parity.
 
 The Julia control surface is:
 
@@ -213,7 +213,7 @@ result = runtime_execute(LinkedSpecRuntimeEngine(compiled), "x"; trace = trace)
 The focused proof adds 28 assertions for success/failure events, routed output,
 disabled quietness, and traced/untraced identity. At that leaf the complete Julia
 package suite passed with 868 assertions and the focused corpus gate remained 99/99;
-later CLI preparation/execution tests bring the current total to 942 without trace or corpus drift.
+later CLI preparation/execution/failure-routing tests bring the current total to 1,017 without trace or corpus drift.
 
 ## Future variant trace parity checklist
 
@@ -233,10 +233,19 @@ Any future LinkedSpec variant must satisfy this checklist before it claims trace
 
 ## Command-line trace control
 
-The Perl reference backend ships a small command-line runner at `bin/linkedspec`. It exists to make the same trace controls discoverable without writing a custom driver script.
+The Perl reference backend ships `bin/linkedspec`, and the Julia variant ships
+`julia/bin/linkedspec_julia.jl`. Both expose the same trace controls without a
+custom driver script.
 
 ```sh
 perl bin/linkedspec --spec-file demo.spec --input-file demo.txt \
+  --trace debug \
+  --trace-file linkedspec.trace.log \
+  --trace-mode route \
+  --trace-reset
+
+julia --project=julia julia/bin/linkedspec_julia.jl \
+  --spec-file demo.spec --input-file demo.txt \
   --trace debug \
   --trace-file linkedspec.trace.log \
   --trace-mode route \
@@ -251,7 +260,11 @@ The trace flags map directly to the public API options:
 - `--trace-reset` -> `trace_reset_log => 1`
 - `--trace-emoji` -> `trace_emoji => 1`
 
-The runner prints the parser result as canonical JSON on stdout. If trace output is routed to stdout, trace text is intentionally interleaved with that JSON. Use `--trace-file ... --trace-mode route` when stdout must remain machine-readable.
+The runner prints the parser result as canonical JSON on stdout. If trace output is routed to stdout, trace text
+is intentionally interleaved with that JSON. Use `--trace-file ... --trace-mode route` when stdout must remain
+machine-readable. A file implies `route` when no mode is explicit; `mirror` copies the same trace to stdout and
+file; `stdout` does not append the selected file. `--trace-reset` still truncates that file before execution, and
+`--trace-emoji` adds the shared level-specific emoji prefix without enabling a quiet trace.
 
 ## Trace entry points
 
