@@ -314,8 +314,10 @@ successful-output preservation. Full tests pass with 588 assertions, status is `
 stdout/route/mirror sinks with reset, and output-preserving traced entrypoints. Full tests pass with 617
 assertions at that controls boundary. `.4.5.3` now adds rule/regex/dispatch/lifecycle/recursion/cursor/boundary
 events with traced/untraced identity. Full tests pass with 631 assertions, status is `runtime-trace-events`, and
-`.4.5.4` closes final diagnostics/trace no-drift without a source correction. `.5.1` is active for the minimal
-staged registry provider.
+`.4.5.4` closes final diagnostics/trace no-drift without a source correction. `.5.1` then
+resolves/compiles/executes the built-in ActionIR body adapter in stable queue
+order, stitches neutral JSON `body_ast`, and passes 662 assertions with status `runtime-staged-registry`; `.5.2`
+is active for registered user-function runtime execution.
 Future Julia and
 Lua backend plans must own their own
 variant-specific CLIs rather than relying on one
@@ -429,7 +431,8 @@ diagnostic payloads on runtime exceptions while preserving successful output and
 `.4.5.2` implements trace levels/environment/config, event primitives, stdout/route/mirror sinks, parse-scope
 routing, and traced entrypoints with default-quiet output preservation. `.4.5.3` implements internal rule, regex,
 dispatch, lifecycle, recursion, cursor, and boundary events; `.4.5.4` closes final no-drift without a source
-correction. `.5.1` is the next staged execution leaf, and later leaves own user-function/corpus execution.
+correction. `.5.1` is implemented through `julia/src/parser/StagedParserRegistry.jl`; `.5.2` is active, and later
+leaves own descriptor/corpus execution.
 
 ### Dart Backend Commands
 

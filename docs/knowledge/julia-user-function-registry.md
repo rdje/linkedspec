@@ -10,7 +10,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, actionir, functions, staged-parsing, registry, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.3.3 adds julia/src/action/FunctionRegistry.jl, exports UserFunctionRegistry/UserFunctionEntry/UserFunctionCallResolution, and threads optional registry input through the ActionIR contract resolver. julia/test/runtests.jl verifies ordered entries, staged body_parse_job exposure, body_payload/body_ast preservation, exact match, wrong arity, missing name, duplicate-name rejection, immutable body_ast stitching through stitch_function_body_ast(...), and registry-aware ActionIR contract diagnostics. Runtime execution remains deferred to later Julia leaves."
+evidence: "JULIA-BACKEND-PARITY.3.3 adds julia/src/action/FunctionRegistry.jl and registry-aware ActionIR contracts. JULIA-BACKEND-PARITY.5.1 adds deterministic staged function-body dispatch and immutable body_ast stitching through julia/src/parser/StagedParserRegistry.jl. Runtime user-function execution remains .5.2."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
@@ -29,10 +29,9 @@ running function bodies. The ActionIR contract resolver accepts optional `functi
 exact-arity calls classify as `family = "user_function"` before helper fallback, while wrong-arity registered calls
 emit `user_function_arity_mismatch`.
 
-This is a registry and contract-classification seam only. Compiled-spec state has since landed in
-`JULIA-BACKEND-PARITY.3.4`; staged parser execution, runtime interpretation, diagnostics/trace breadth, and corpus
-execution remain later Julia leaves.
+Compiled-spec state landed in `.3.4`, and `.5.1` now consumes the exposed job queue through the built-in staged
+provider and returns a new spec with neutral JSON `body_ast` values. User-function runtime execution remains `.5.2`.
 
 Related facts: [[julia-actionir-contract-resolver]], [[julia-user-function-definition-projection]],
 [[julia-compiled-spec-state]], [[dart-function-registry]], [[function-body-parse-job-sidecar]],
-[[text-to-ast-backend-doctrine]].
+[[julia-staged-function-body-registry]], [[text-to-ast-backend-doctrine]].

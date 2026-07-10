@@ -29,9 +29,10 @@ The implemented boundary is:
 
 Package/CLI status remains the precise `runtime-trace-events`. This closeout
 does not overclaim complete compile/parser trace parity or later staged
-runtime/corpus parity. The active frontier is `JULIA-BACKEND-PARITY.5.1`, the
-minimal staged registry provider.
+runtime/corpus parity. `.5.1` has since added the minimal staged registry
+provider, and `.5.2` is active for registered function execution.
 
 Related facts: [[julia-runtime-structured-diagnostics]],
 [[julia-trace-controls-sinks]], [[julia-runtime-trace-events]],
+[[julia-staged-function-body-registry]],
 [[trace-cross-variant-capability-contract]].

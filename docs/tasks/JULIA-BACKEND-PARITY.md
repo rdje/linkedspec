@@ -383,15 +383,18 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Children: `.5.1`, `.5.2`, `.5.3`
 
 - ID: `JULIA-BACKEND-PARITY.5.1`
-  Status: `active`
+  Status: `done`
   Goal: Implement the minimal staged registry provider for function-body parse jobs.
   Acceptance: `actionir-body.spec` resolves deterministically, compiles top rule `action_block`, executes queued
     jobs in stable order, and stitches `body_ast`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - Julia resolves `actionir-body.spec` to the fixed built-in provider, records the neutral
+    digest/cache/compiled-parser shape, executes jobs in stable path/span/id order through `parse_action_block`,
+    and immutably stitches JSON `action_block` results into `body_ast`. Thirty-one focused assertions cover
+    ordering, wrapper composition, diagnostics, and contract drift; full `Pkg.test()` passes with 662 assertions.
+  Commit: `JULIA-BACKEND-PARITY.5.1 - add Julia staged function-body registry`
 
 - ID: `JULIA-BACKEND-PARITY.5.2`
-  Status: `pending`
+  Status: `active`
   Goal: Execute registered user functions in value positions, receiver chains, and standalone discard.
   Acceptance: Exact-arity functions use fresh function-local stores, eager argument evaluation, compatible receiver
     continuation, standalone `VALUE_DROP`, and recursion diagnostics.
@@ -478,7 +481,8 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | --- | --- | --- | --- |
 | 1 | `JULIA-BACKEND-PARITY.4.5.3` | `done` | Runtime mechanism instrumentation emits structured trace scopes, decisions, and marks. |
 | 2 | `JULIA-BACKEND-PARITY.4.5.4` | `done` | Diagnostics/trace status, tests, book, KM, and live docs are no-drift. |
-| 3 | `JULIA-BACKEND-PARITY.5.1` | `active` | Implement the minimal staged registry provider before user-function execution. |
+| 3 | `JULIA-BACKEND-PARITY.5.1` | `done` | Minimal staged registry dispatches function-body jobs and stitches `body_ast`. |
+| 4 | `JULIA-BACKEND-PARITY.5.2` | `active` | Execute registered exact-arity user functions through the runtime. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -1193,6 +1197,40 @@ Closeout evidence recorded on 2026-07-10:
 - [x] **LOCKSTEP** — README, Julia README, task/index/roadmaps, mdBook, Knowledge Map, architecture/live docs, and
   `MEMORY.md` advance together to `.5.1`.
 
+## `JULIA-BACKEND-PARITY.5.1` Staged Function-Body Registry Result
+
+Staged registry evidence recorded on 2026-07-10:
+
+- `julia/src/parser/StagedParserRegistry.jl` exports the narrow provider API, staged result/dispatch records, and
+  source-aware `StagedParserRegistryException` diagnostics.
+- `actionir-body.spec` resolves to `builtin:actionir-body.spec`; load records the portable fixed adapter digest;
+  compile selects `action_block` and records the neutral cache fingerprint/version/capability fields.
+- Jobs execute in deterministic parent-path, source-span, then job-id order. Execute parses exact body text through
+  Julia's typed `parse_action_block(...)` adapter and stores neutral JSON `action_block` results.
+- Function dispatch validates sidecar/path/name/params/arity/text/parser/top/result/failure contracts and
+  immutably stitches each result into `body_ast` while preserving `body_parse_job` and the original `SpecFile`.
+- `parse_spec_with_staged_user_function_definition_asts(...)` composes the existing spec-returned function shell
+  projection with staged body dispatch. General provider search, recursive staged queues, and public
+  `parse_job(...)` authoring remain outside this narrow leaf.
+- Thirty-one focused assertions cover ordering, cache/compiled/result shape, stitching, wrapper parsing, resolve
+  diagnostics, compile diagnostics, and result-field drift; full tests pass with 662 assertions and package status
+  `runtime-staged-registry`.
+
+## `JULIA-BACKEND-PARITY.5.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Julia preserved function `body_parse_job` records and had a one-job manual stitch
+  helper, but had no deterministic provider dispatch that resolved, compiled, executed, and stitched the queue.
+- [x] **ROOT CAUSE (WHY + WHERE)** — No Julia owner implemented the accepted staged registry phases over
+  `StagedParseJob`; function-shell projection therefore stopped before `body_ast` population.
+- [x] **FIX** — Added the built-in ActionIR-body provider, stable queue, portable cache/compiled/result records,
+  contextual diagnostics, immutable function-body dispatch/stitch APIs, and the composed shell+staged parser API.
+- [x] **ADDRESSED (verified)** — Focused tests prove stable reversed-input ordering, exact adapter identity,
+  stitched immutability, wrapper composition, unsupported parser/top-rule diagnostics, and stitching-policy fences.
+- [x] **NO REGRESSION** — Full Julia `Pkg.test()` passes with 662 assertions; CLI status reports
+  `runtime-staged-registry`; mdBook, memory, Knowledge Map, task-tree, doctrine, and whitespace gates cover the slice.
+- [x] **LOCKSTEP** — Public exports, Julia README, task/index/roadmaps, mdBook staged/status/handoff pages,
+  Knowledge Map, architecture/live docs, and `MEMORY.md` advance to `.5.2` user-function runtime execution.
+
 ## `JULIA-BACKEND-PARITY.4.2` Runtime Rule Interpreter Result
 
 Rule-interpreter evidence recorded on 2026-07-10:
@@ -1418,6 +1456,9 @@ Rule-interpreter evidence recorded on 2026-07-10:
 - `2026-07-10`: `.4.5.4` retains package status `runtime-trace-events`. The scoped runtime diagnostics/trace
   milestone is no-drift, but it does not claim later staged runtime/corpus parity or invent compile/parser events
   beyond the implemented Julia surface. `.5.1` is the next executable boundary.
+- `2026-07-10`: `.5.1` mirrors the accepted Perl/Rust/Dart minimal provider contract rather than generalizing it:
+  one built-in `actionir-body.spec` identity/digest/capability set, stable queue order, typed ActionIR parsing with
+  neutral JSON stitching, and hard contextual diagnostics. General registry search/recursion stays deferred.
 
 ## Open Questions
 
@@ -1428,8 +1469,8 @@ Rule-interpreter evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.5.1`. The compiled function registry and staged body-parse job records exist; the minimal provider
-  execution/stitching path is the next owned boundary.
+- None for `.5.2`. Staged function bodies are now populated as neutral ActionIR JSON; registered exact-arity
+  runtime execution is the next owned boundary.
 
 ## Verification Log
 
@@ -1462,6 +1503,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.5.2` | Full Julia `Pkg.test()`; Julia CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Twenty-nine focused assertions prove trace levels/environment config, structured events/scopes/decisions/logs/dumps, stdout/route/mirror sinks, reset behavior, default quiet, parse-scope routing, and output preservation; total Julia tests pass with 617 assertions and `.4.5.3` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.5.3` | Full Julia `Pkg.test()`; Julia CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Fourteen added trace assertions prove rule scopes, regex decisions, action/blind dispatch, lifecycle marks, recursion cutoffs, cursor transitions, source boundaries, and traced/untraced identity; total Julia tests pass with 631 assertions and `.4.5.4` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.5.4` | Full Julia `Pkg.test()`; Julia CLI status/help; stale status/frontier scans; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Runtime diagnostics/trace tests and all public/durable status surfaces agree at 631 assertions and `runtime-trace-events`; `.4.5` closes and `.5.1` becomes active without a source correction. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.5.1` | Full Julia `Pkg.test()`; Julia CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Thirty-one focused assertions prove stable staged queue order, provider/digest/cache/compiled/result shape, immutable `body_ast` stitching, wrapper composition, resolve/compile diagnostics, and policy fences; total Julia tests pass with 662 assertions and `.5.2` becomes active. |
 
 ## Commit Log
 
@@ -1494,9 +1536,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.4.5.2` | `JULIA-BACKEND-PARITY.4.5.2 - add Julia trace controls` | Ordered levels, environment/config controls, event primitives, stdout/route/mirror sinks, and traced runtime entrypoints; instrumentation advances to `.4.5.3`. |
 | `JULIA-BACKEND-PARITY.4.5.3` | `JULIA-BACKEND-PARITY.4.5.3 - add Julia runtime trace events` | Rule/regex/dispatch/lifecycle/recursion/cursor/boundary instrumentation; no-drift advances to `.4.5.4`. |
 | `JULIA-BACKEND-PARITY.4.5.4` | `JULIA-BACKEND-PARITY.4.5.4 - close Julia diagnostics trace no drift` | Scoped runtime diagnostics/trace no-drift; `.4.5` closes and staged registry work advances to `.5.1`. |
+| `JULIA-BACKEND-PARITY.5.1` | `JULIA-BACKEND-PARITY.5.1 - add Julia staged function-body registry` | Minimal staged provider dispatch, stable queue, and immutable `body_ast` stitching; runtime calls advance to `.5.2`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.5.1` staged function-body registry. Julia now resolves the built-in ActionIR body
+  provider, records portable cache/compiled/result metadata, executes jobs in stable order, stitches neutral
+  `action_block` JSON into `body_ast`, and diagnoses resolution/compile/policy drift. `Pkg.test()` passes with 662
+  assertions; package status is `runtime-staged-registry`, and `.5.2` user-function execution is active.
 - `2026-07-10`: Completed `.4.5.4` diagnostics/trace no-drift. Full tests remain green with 631 assertions and
   package status `runtime-trace-events`; README/CLI, mdBook, KM, task/index/roadmaps, architecture, and live docs
   agree on the scoped runtime boundary. `.4.5` closes without source correction and `.5.1` becomes active.

@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.5.1 — add Julia staged function-body registry
+
+**Scope:** Julia staged parser registry/provider, stable function-body job queue, portable dispatch records,
+immutable `body_ast` stitching, composed shell API, focused tests, package/CLI status, mdBook staged/status/handoff,
+task/roadmap/live docs, Knowledge Map, architecture, and resume pointer.
+
+**Change:** Added `julia/src/parser/StagedParserRegistry.jl` with the fixed built-in ActionIR-body provider,
+portable adapter digest/cache/compiled/result records, path/span/id ordering, contextual diagnostics, immutable
+function-body dispatch/stitching, and `parse_spec_with_staged_user_function_definition_asts(...)`. Package status
+advances to `runtime-staged-registry`.
+
+**Validation:** Thirty-one focused assertions cover queue order, provider metadata, exact ActionIR parsing,
+stitching immutability, wrapper composition, resolve/compile failures, and policy drift; full `Pkg.test()` passes
+with 662 assertions. CLI status, mdBook, memory, KM, task, doctrine, and whitespace gates pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.4.5.4 — close Julia diagnostics trace no drift
 
 **Scope:** Julia diagnostics/trace status and test audit, `.4.5` parent closeout, README/CLI status, mdBook

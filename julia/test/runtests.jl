@@ -169,6 +169,47 @@ function _function_with_body_sidecar(
     )
 end
 
+function _staged_job_with(
+    job::StagedParseJob;
+    parser_spec_id = job.parser_spec_id,
+    top_rule = job.top_rule,
+    result_field = job.result_field,
+)
+    return StagedParseJob(
+        version = job.version,
+        job_id = job.job_id,
+        parent_ast_path = job.parent_ast_path,
+        node_kind = job.node_kind,
+        payload_kind = job.payload_kind,
+        function_name = job.function_name,
+        params = job.params,
+        arity = job.arity,
+        text = job.text,
+        source_span = job.source_span,
+        parser_spec_id = parser_spec_id,
+        top_rule = top_rule,
+        result_policy = job.result_policy,
+        result_field = result_field,
+        failure_policy = job.failure_policy,
+        diagnostic_owner = job.diagnostic_owner,
+    )
+end
+
+function _function_with_parse_job(definition::FunctionDefinition, job::StagedParseJob)
+    return FunctionDefinition(
+        name = definition.name,
+        params = definition.params,
+        arity = definition.arity,
+        body_source = definition.body_source,
+        body_payload = definition.body_payload,
+        body_parse_job = job,
+        body_ast = definition.body_ast,
+        source = definition.source,
+        source_span = definition.source_span,
+        body_span = definition.body_span,
+    )
+end
+
 function _canonical_names(resolution::ActionContractResolution)
     return [contract.canonical_name for contract in resolution.contracts]
 end
@@ -292,7 +333,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-trace-events"
+    @test status.parity == "runtime-staged-registry"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -302,7 +343,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-trace-events", String(take!(status_output)))
+    @test occursin("parity: runtime-staged-registry", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -582,6 +623,110 @@ end
     @test user_contract.positional_arg_count == 1
     @test _diagnostic_codes(resolution) == ["user_function_arity_mismatch", "unknown_helper"]
     @test occursin("expects arity 1, got 2", resolution.diagnostics[1].message)
+end
+
+@testset "Staged function-body parser registry" begin
+    earlier = _function_with_body_sidecar(
+        "earlier",
+        String[];
+        body_source = "return(\"a\")",
+        index = 0,
+    )
+    later = _function_with_body_sidecar(
+        "later",
+        String[];
+        body_source = "return(\"b\")",
+        index = 1,
+    )
+    results = execute_staged_parse_jobs([
+        later.body_parse_job,
+        earlier.body_parse_job,
+    ])
+    @test [result.job.job_id for result in results] == [
+        "parse_job:function_body:functions.0.body_source",
+        "parse_job:function_body:functions.1.body_source",
+    ]
+    @test [result.queue_index for result in results] == [0, 1]
+
+    encoded = to_json(first(results))
+    @test encoded["kind"] == "staged_parse_result"
+    @test encoded["phases"] == ["resolve", "load", "compile", "execute"]
+    @test encoded["resolved_spec_id"] == ACTION_IR_BODY_RESOLVED_SPEC_ID
+    @test encoded["registry_provider"] == "builtin"
+    @test encoded["compiled_parser"]["top_rule"] == ACTION_IR_BODY_TOP_RULE
+    cache_key = encoded["cache_key"]
+    @test cache_key["kind"] == "staged_parser_cache_key"
+    @test cache_key["normalized_spec_identity"] == ACTION_IR_BODY_RESOLVED_SPEC_ID
+    @test cache_key["content_digest"] == ACTION_IR_BODY_ADAPTER_DIGEST
+    @test cache_key["fingerprint"] == join([
+        ACTION_IR_BODY_RESOLVED_SPEC_ID,
+        ACTION_IR_BODY_ADAPTER_DIGEST,
+        "none",
+        ACTION_IR_BODY_TOP_RULE,
+        "spec-language-v1",
+        "actionir-v1",
+        "staged-parsing-v1",
+        "actionir_ast_v1",
+    ], "|")
+    @test encoded["result"]["kind"] == "action_block"
+    @test encoded["result"]["statements"][1]["expr"]["name"] == "return"
+
+    spec = SpecFile(functions = [earlier, later], rules = _spec_with_functions(FunctionDefinition[]).rules)
+    dispatch = dispatch_function_body_parse_jobs(spec)
+    @test [result.queue_index for result in dispatch.results] == [0, 1]
+    @test [definition.name for definition in dispatch.spec.functions] == ["earlier", "later"]
+    @test dispatch.spec.functions[1].body_ast["kind"] == "action_block"
+    @test dispatch.spec.functions[1].body_parse_job.result_field == "body_ast"
+    @test spec.functions[1].body_ast === nothing
+    @test stitch_function_body_parse_jobs(spec).functions[2].body_ast["kind"] == "action_block"
+
+    source = join([
+        "fn zero() {return(\"zero\")}",
+        "Top::",
+        " /x/",
+    ], "\n")
+    nodes = [_definition_node(source, "zero", String[], "return(\"zero\")")]
+    staged_spec = parse_spec_with_staged_user_function_definition_asts(source, nodes)
+    @test length(staged_spec.functions) == 1
+    @test staged_spec.functions[1].body_ast["kind"] == "action_block"
+    @test [rule.header.label for rule in staged_spec.rules] == ["Top"]
+
+    unsupported = _staged_job_with(
+        earlier.body_parse_job;
+        parser_spec_id = "missing.spec",
+    )
+    unsupported_error = try
+        execute_staged_parse_job(unsupported)
+        nothing
+    catch error
+        error
+    end
+    @test unsupported_error isa StagedParserRegistryException
+    @test occursin("phase=resolve", unsupported_error.message)
+    @test occursin("parser_spec_id=missing.spec", unsupported_error.message)
+    @test occursin("source_span=0-1", unsupported_error.message)
+    @test occursin("failure_policy=fail", unsupported_error.message)
+
+    wrong_top = _staged_job_with(earlier.body_parse_job; top_rule = "missing_top")
+    wrong_top_error = try
+        execute_staged_parse_job(wrong_top)
+        nothing
+    catch error
+        error
+    end
+    @test wrong_top_error isa StagedParserRegistryException
+    @test occursin("phase=compile", wrong_top_error.message)
+
+    wrong_field = _staged_job_with(earlier.body_parse_job; result_field = "wrong_field")
+    drifted = _function_with_parse_job(earlier, wrong_field)
+    drift_error = try
+        dispatch_function_body_parse_jobs(SpecFile(functions = [drifted], rules = spec.rules))
+        nothing
+    catch error
+        error
+    end
+    @test drift_error isa StagedParserRegistryException
+    @test occursin("result_field must be 'body_ast'", drift_error.message)
 end
 
 @testset "Compiled spec state" begin

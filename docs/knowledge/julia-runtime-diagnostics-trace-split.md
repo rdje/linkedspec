@@ -28,7 +28,8 @@ The split is:
 - `.4.5.4`: done — no-drift closeout across Julia status, mdBook, live docs,
   task-tree index, and Knowledge Map.
 
-The active frontier after `.4.5.4` is `.5.1` staged registry provider execution.
+The `.4.5.4` successor `.5.1` staged registry provider has since landed; `.5.2`
+registered function execution is active.
 Julia-native exception, configuration, and I/O
 types may differ from Dart and Rust, but each leaf maps to the same portable
 diagnostic/trace capability contract.
@@ -37,5 +38,6 @@ Related facts: [[julia-runtime-cursor-boundary-helpers]],
 [[julia-runtime-structured-diagnostics]],
 [[julia-trace-controls-sinks]], [[julia-runtime-trace-events]],
 [[julia-diagnostics-trace-boundary]],
+[[julia-staged-function-body-registry]],
 [[dart-runtime-diagnostics-trace-split]],
 [[trace-cross-variant-capability-contract]], [[trace-backend-parity-split]].

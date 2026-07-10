@@ -168,6 +168,13 @@ through the minimal staged registry provider for `actionir-body.spec` / `action_
 `body_ast`; general public `parse_job(...)` authoring and provider search remain future work. The definition
 parser uses linked body-island rules for nested braces, strings, comments, and regex literals, so normal
 nested function-body constructs do not depend on a host-language scanner.
+
+Julia exposes the same staged function-body shape through `execute_staged_parse_jobs(...)`,
+`dispatch_function_body_parse_jobs(...)`, `stitch_function_body_parse_jobs(...)`, and
+`parse_spec_with_staged_user_function_definition_asts(...)`. Its dispatch results include the stable queue index,
+four registry phases, resolved built-in identity, cache key, compiled-parser record, source/job policies, and
+neutral `action_block` result. The stitched `FunctionDefinition` retains the original `body_payload` and
+`body_parse_job`; only `body_ast` is added on a new immutable `SpecFile` value.
 Function definitions are validated before runtime: duplicate names, invalid or duplicate parameters, reserved
 runtime/lifecycle/function symbols, built-in helper/control-name collisions including numeric word aliases, and
 rule-label collisions are rejected.

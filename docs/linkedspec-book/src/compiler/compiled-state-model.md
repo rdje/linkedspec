@@ -97,6 +97,22 @@ function body as an ActionIR value block, returns the final expression or local 
 returned values into compatible receiver chains, discards standalone call results, and diagnoses direct or mutual
 recursion.
 
+The Julia backend now implements the same narrow staged provider before compiled state is built. Its public path is:
+
+```julia
+spec = parse_spec_with_user_function_definition_asts(source, definition_nodes)
+dispatch = dispatch_function_body_parse_jobs(spec)
+stitched = dispatch.spec
+```
+
+`execute_staged_parse_jobs(...)` orders jobs by parent AST path, source span, then job id; resolves
+`actionir-body.spec` to `builtin:actionir-body.spec`; records the fixed adapter digest and portable cache/compiled
+metadata; and parses each exact body through `parse_action_block(...)`. `dispatch_function_body_parse_jobs(...)`
+validates the function/job sidecar contract and returns a new `SpecFile` whose matching definitions carry neutral
+JSON `action_block` values in `body_ast`. The original spec and its `body_parse_job` records remain unchanged.
+`parse_spec_with_staged_user_function_definition_asts(...)` is the composed projection-plus-dispatch convenience
+API. General provider search and recursive staged queues remain future work.
+
 This registry is intentionally flat for the MVP. It is not an overload table, namespace/module model, closure
 environment, lambda catalog, or currying/partial-application representation. Those extensions require their own
 future contract before the internal state model grows fields for them.

@@ -115,5 +115,8 @@ stdout/routed-file/mirror sinks with reset, and output-preserving traced runtime
 passes with 617 assertions at that controls-only boundary. `.4.5.3` adds rule scopes, regex decisions,
 action/blind dispatch, lifecycle marks, recursion cutoffs, cursor transitions, and source-boundary events. The
 full suite now passes with 631 assertions and status `runtime-trace-events`; `.4.5.4` closes that no-drift boundary
-without changing source or overclaiming broader trace parity. `.5.1` now owns the minimal staged registry provider;
-later leaves own user-function runtime and corpus execution.
+without changing source or overclaiming broader trace parity. `.5.1` adds the minimal staged registry provider:
+`actionir-body.spec` resolves to the fixed built-in adapter, jobs execute in stable path/span/id order, portable
+cache/compiled/result records are exposed, and neutral `action_block` JSON is immutably stitched into `body_ast`.
+The full suite now passes with 662 assertions and status `runtime-staged-registry`; `.5.2` owns registered
+user-function runtime execution, and later leaves own descriptor/corpus parity.

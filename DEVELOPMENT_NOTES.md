@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.5.1 — Julia staged function-body registry):
+  Julia keeps the staged boundary neutral by parsing function text through its typed ActionIR parser and stitching
+  JSON, not Julia objects, into `body_ast`. Stable ordering is structural (parent path, span, job id), and provider
+  identity/cache fields match the accepted cross-backend contract exactly. Function/job contract validation occurs
+  before dispatch, the original spec remains immutable, and general provider search/recursive queues are not
+  inferred from this deliberately narrow built-in adapter. `.5.2` can now execute bodies from one proven shape.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.4.5.4 — Julia diagnostics/trace no-drift):
   The accurate closeout status is `runtime-trace-events`: Julia has structured runtime diagnostics, complete
   control/sink/event primitives, and instrumented runtime ownership boundaries, while compile/parser tracing and

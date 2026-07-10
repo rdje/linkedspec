@@ -51,6 +51,10 @@ export backend_name,
     ActionStringLiteralExpr,
     ActionUndefExpr,
     ActionVariableExpr,
+    ACTION_IR_BODY_ADAPTER_DIGEST,
+    ACTION_IR_BODY_RESOLVED_SPEC_ID,
+    ACTION_IR_BODY_SPEC_ID,
+    ACTION_IR_BODY_TOP_RULE,
     BlindEdgeBodyElementKind,
     BodyElement,
     CompiledActionEdge,
@@ -100,6 +104,7 @@ export backend_name,
     parse_trace_level,
     parse_trace_sink_mode,
     parse_spec_with_user_function_definition_asts,
+    parse_spec_with_staged_user_function_definition_asts,
     parse_action_block,
     parse_action_expression,
     parse_action_statement,
@@ -127,7 +132,10 @@ export backend_name,
     SpecValidationException,
     SpecFile,
     SplitMarkerBodyElementKind,
+    StagedFunctionBodyDispatchResult,
     StagedParseJob,
+    StagedParseResult,
+    StagedParserRegistryException,
     StagedSourceSpan,
     UserFunctionCallResolution,
     UserFunctionDefinitionException,
@@ -155,8 +163,11 @@ export backend_name,
     definition_nodes_from_user_function_definition_output,
     DependencyRef,
     descriptor_state,
+    dispatch_function_body_parse_jobs,
     empty_user_function_registry,
     enter_child,
+    execute_staged_parse_job,
+    execute_staged_parse_jobs,
     expected_arities_for,
     find_rule,
     function_definition_with_body_ast,
@@ -202,6 +213,7 @@ export backend_name,
     log_trace_dump!,
     log_trace_output!,
     stitch_function_body_ast,
+    stitch_function_body_parse_jobs,
     to_descriptor_json,
     top_rule,
     to_json,
@@ -234,7 +246,7 @@ const PACKAGE_NAME = "LinkedSpecJulia"
 const PACKAGE_VERSION = v"0.1.0"
 const CLI_ENTRYPOINT = "julia/bin/linkedspec_julia.jl"
 const CORPUS_RUNNER_ENTRYPOINT = "julia/bin/corpus_runner.jl"
-const PARITY_STATUS = "runtime-trace-events"
+const PARITY_STATUS = "runtime-staged-registry"
 
 include("corpus/CorpusManifest.jl")
 include("spec/Ast.jl")
@@ -244,6 +256,7 @@ include("action/FunctionRegistry.jl")
 include("action/ActionContracts.jl")
 include("spec/Parser.jl")
 include("spec/UserFunctionDefinitionShell.jl")
+include("parser/StagedParserRegistry.jl")
 include("spec/Validator.jl")
 include("compiler/CompiledSpec.jl")
 include("runtime/Matching.jl")
