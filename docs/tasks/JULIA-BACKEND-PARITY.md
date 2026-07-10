@@ -256,15 +256,18 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.4.3.2 - add Julia runtime string numeric helpers`
 
 - ID: `JULIA-BACKEND-PARITY.4.3.3`
-  Status: `active`
+  Status: `done`
   Goal: Implement array helper family and array receiver/mutation behavior.
   Acceptance: Array construction/flattening, copy, count/select/order/membership/join/split bridges, append/end
     mutation forms, and receiver chains match helper-catalog examples without mutating snapshots unexpectedly.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - two focused end-to-end runtime cases cover pure array selection/order/membership,
+    transform/filter/split pipelines, delimiter-first joins, one-level flatten/concat and constructor splicing,
+    numeric reducer terminals, explicit split replacement, named and scalar-held statement-only end mutations,
+    value-position mutation no-ops, and tagged records; full `Pkg.test()` passes with 558 assertions.
+  Commit: `JULIA-BACKEND-PARITY.4.3.3 - add Julia runtime array helpers`
 
 - ID: `JULIA-BACKEND-PARITY.4.3.4`
-  Status: `pending`
+  Status: `active`
   Goal: Implement hash helper family and hash receiver/mutation behavior.
   Acceptance: Hash construction/flattening, copy, key/value views, merge/pick/drop/rename/set-key behavior, direct
     hash-index assignment values, and receiver chains match helper-catalog examples.
@@ -403,7 +406,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.4.3.3` | `active` | Add array-aware construction, transformation, selection, reducer, receiver, and mutation behavior over the stable pure-helper dispatcher. |
+| 1 | `JULIA-BACKEND-PARITY.4.3.4` | `active` | Add hash-aware construction, views, pure transformations, statement mutation, flattening, and receiver chains over the stable value/helper model. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -767,6 +770,43 @@ Pure helper evidence recorded on 2026-07-10:
   snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `MEMORY.md` advance the frontier
   to `.4.3.3`.
 
+## `JULIA-BACKEND-PARITY.4.3.3` Array Helper Result
+
+Array helper evidence recorded on 2026-07-10:
+
+- Function and receiver array calls route through a dedicated dispatcher over copied values. Supported pure
+  operations cover count/first/last, take/drop/slice, lexical sort/reverse, membership/index, string transforms,
+  empty filtering, stable uniqueness, regex filtering, split/flatten pipelines, delimiter-first joins,
+  one-level flatten/concat, and tagged-record construction.
+- `array(...)` splices only explicit `flat(...)` / `flat_array(...)` results; ordinary nested arrays and
+  `copy(array(...))` remain one array element, preserving the documented shape boundary.
+- Numeric reducer methods such as `.sum()` / `.avg()` reuse the `.4.3.2` numeric dispatcher as terminal array
+  consumers, while string `.split(...)` bridges into later array receiver links.
+- `split(array(target), source, delimiter)` replaces named typed storage and preserves empty fields plus regex
+  flags. Other array transforms are pure snapshots unless their result is assigned explicitly.
+- Single-call statement forms of `push_back`, `push_front`, `pop_back`, and `pop_front` mutate named or
+  scalar-held arrays. The same methods in value positions return `nothing` and do not evaluate/mutate their target.
+- Package status advances to `runtime-array-helpers`; hash-aware helper breadth advances to `.4.3.4`.
+
+## `JULIA-BACKEND-PARITY.4.3.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.4.3.2` supported scalar and numeric receiver calls, but array helper names still
+  produced unsupported helper/method errors and statement-only end methods had no mutation path.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `julia/src/runtime/Interpreter.jl` had no array helper dispatcher,
+  delimiter-first receiver rewrite, explicit flatten-splice marker, split-to-target path, or statement-context
+  receiver mutation gate.
+- [x] **FIX** — Added copied array helper execution, string/regex bridges, flatten/concat/splice behavior, numeric
+  terminal reuse, typed split replacement, and isolated statement-only end mutation for named/scalar-held arrays.
+- [x] **ADDRESSED (verified)** — Two focused end-to-end cases cover pure chains and source immutability, regex and
+  split bridges, transforms/filters, flattening/constructor shape, reducer terminals, typed/scalar mutations,
+  value-position no-op behavior, and tagged records.
+- [x] **NO REGRESSION** — Full Julia `Pkg.test()` passes with 558 assertions; CLI status reports
+  `runtime-array-helpers`; commit-time docs/governance gates cover mdBook, memory, Knowledge Map, task metadata,
+  doctrine, and whitespace.
+- [x] **LOCKSTEP** — Julia README, task tree/index, roadmaps, mdBook status/handoff, Knowledge Map, architecture
+  snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `MEMORY.md` advance the frontier
+  to `.4.3.4`.
+
 ## `JULIA-BACKEND-PARITY.4.2` Runtime Rule Interpreter Result
 
 Rule-interpreter evidence recorded on 2026-07-10:
@@ -964,6 +1004,8 @@ Rule-interpreter evidence recorded on 2026-07-10:
 - `2026-07-10`: `.4.3.2` routes function and receiver string/numeric calls through one canonical helper dispatcher;
   regex values retain flags internally, numeric failures return `nothing`, and array-aware continuation remains
   owned by `.4.3.3`.
+- `2026-07-10`: `.4.3.3` preserves the statement/value boundary for destructive array end methods and uses
+  explicit flat-result detection for constructor splicing; ordinary copied arrays remain nested values.
 
 ## Open Questions
 
@@ -974,7 +1016,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.4.3.3`. Core values plus string/scalar/numeric helpers are green; array-aware helper and receiver/
+- None for `.4.3.4`. Core values plus string/numeric/array helpers are green; hash-aware helper and receiver/
   mutation behavior is the next owned implementation boundary.
 
 ## Verification Log
@@ -998,6 +1040,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.0` | No implementation behavior change; mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, stale-frontier scans, and `git diff --check`. | PASS. Julia helper/value work is split into six mechanism-sized implementation/closeout leaves; `.4.3.1` is the next executable frontier. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.1` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Four focused core-value cases prove typed stores and snapshots, variable-held aggregates, checked nested assignment, and capture maps/positions; total Julia tests pass with 554 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Two focused pure-helper cases prove string/scalar and numeric families, regex flags, aliases/symbol callees, failure-to-nothing, and receiver chains; total Julia tests pass with 556 assertions. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.3` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Two focused array cases prove pure pipelines, string/regex bridges, flatten/splice shape, numeric terminals, split replacement, statement-only mutations, and tagged records; total Julia tests pass with 558 assertions. |
 
 ## Commit Log
 
@@ -1020,9 +1063,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.4.3.0` | `JULIA-BACKEND-PARITY.4.3.0 - split Julia runtime helper families` | Planning-only split into core stores/captures, string/numeric, array, hash, value/control/block/callback, and no-drift leaves; `.4.3.1` becomes active. |
 | `JULIA-BACKEND-PARITY.4.3.1` | `JULIA-BACKEND-PARITY.4.3.1 - add Julia runtime value capture helpers` | Core typed stores, structural assignment/access, snapshots, and entry/local capture helpers; string/numeric helpers advance to `.4.3.2`. |
 | `JULIA-BACKEND-PARITY.4.3.2` | `JULIA-BACKEND-PARITY.4.3.2 - add Julia runtime string numeric helpers` | Canonical string/scalar and numeric pure helpers plus compatible receiver chains; array-aware behavior advances to `.4.3.3`. |
+| `JULIA-BACKEND-PARITY.4.3.3` | `JULIA-BACKEND-PARITY.4.3.3 - add Julia runtime array helpers` | Pure array helper/receiver pipelines, flatten/splice and split bridges, reducer terminals, and statement-only end mutations; hashes advance to `.4.3.4`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.4.3.3` array helper execution. Julia now supports copied array pipelines and receiver
+  chains, string/regex/split bridges, flatten/concat and explicit constructor splicing, numeric reducer terminals,
+  typed split replacement, and statement-only end mutations with value-position no-op behavior. `Pkg.test()`
+  passes with 558 assertions; `.4.3.4` owns hash-aware helper and mutation behavior.
 - `2026-07-10`: Completed `.4.3.2` string/scalar and numeric helper execution. Julia now canonicalizes aliases and
   symbol callees through one pure-helper path, preserves regex flags, returns `nothing` for invalid numeric work,
   and composes compatible string/number receiver chains. `Pkg.test()` passes with 556 assertions; `.4.3.3` owns

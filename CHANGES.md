@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.4.3.3 — add Julia runtime array helpers
+
+**Scope:** Julia runtime array helper/receiver dispatch, flatten/splice and split bridges, statement-only end
+mutations, package status, focused runtime tests, README, task-tree frontier, roadmaps/index, mdBook
+status/handoff, Knowledge Map, architecture snapshot, live docs, and resume pointer.
+
+**Change:** Extended `julia/src/runtime/Interpreter.jl` with copied array selection/order/membership and
+transform/filter pipelines, delimiter-first joins, one-level flatten/concat and explicit constructor splicing,
+tagged records, string/regex split bridges, numeric reducer terminals, `split(array(target), ...)` replacement,
+and statement-only `push_back` / `push_front` / `pop_back` / `pop_front` over named and scalar-held arrays. The same
+end methods in value positions return `nothing` without mutation. Package status now reports
+`runtime-array-helpers`.
+
+**Validation:** `Pkg.test()` passes with 558 assertions, including two focused end-to-end array cases and all
+prior Julia coverage. Commit-time docs/governance validation covers mdBook, memory architecture, task-tree
+metadata, Knowledge Map, doctrine, and `git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.4.3.2 — add Julia runtime string numeric helpers
 
 **Scope:** Julia runtime string/scalar and numeric pure helpers, regex value flags, fluent-chain execution, package

@@ -40,7 +40,7 @@ Compatible string and number receiver chains prepend the current receiver to
 the same helper call, so function and fluent forms cannot drift. Array-aware
 continuations and mutations remain owned by `JULIA-BACKEND-PARITY.4.3.3`.
 
-Related facts: [[julia-runtime-core-value-capture-helpers]],
+Related facts: [[julia-runtime-core-value-capture-helpers]], [[julia-runtime-array-helpers]],
 [[julia-runtime-rule-interpreter]], [[dart-runtime-string-numeric-helpers]],
 [[terse-string-receiver-value-chains]], [[terse-number-receiver-value-chains]],
 [[terse-string-comparison-bridge-contract]], [[terse-numeric-comparison-symbol-callees]].

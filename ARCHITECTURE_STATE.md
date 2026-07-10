@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.3.3` adds a copied Julia array helper/receiver dispatcher,
+  string/regex split and filter bridges, explicit flatten/constructor-splice semantics, numeric reducer terminals,
+  typed split replacement, and isolated statement-only end mutation for named and scalar-held arrays.
+  Value-position end methods return `nothing` without mutation. Package status is `runtime-array-helpers`;
+  `.4.3.4` owns hashes.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.3.2` adds a canonical Julia runtime pure-helper dispatcher.
   Current string/scalar transforms, predicates, regex operations, coalescing, definedness/emptiness, explicit
   lexical comparisons, numeric arithmetic/unary/reducers/comparisons, aliases and symbol callees, JSON-number

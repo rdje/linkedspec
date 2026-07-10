@@ -91,8 +91,9 @@ Top-level directories and files:
     lifecycle flow, action/blind children, `retv`, explicit returns, and recursion/progress guards. Core
     scalar/array/hash stores, typed snapshots, structural assignments/access, checked nested writes, and
     entry/local capture maps/positions are implemented. Current string/scalar and numeric helpers, aliases/symbol
-    callees, invalid-input boundaries, and compatible receiver chains are implemented too. Array-aware helper and
-    mutation behavior is the active `JULIA-BACKEND-PARITY.4.3.3` frontier.
+    callees, invalid-input boundaries, and compatible receiver chains are implemented too. Copied array pipelines,
+    string/regex/split bridges, flattening, reducer terminals, and statement-only end mutations are now green.
+    Hash-aware helper and mutation behavior is the active `JULIA-BACKEND-PARITY.4.3.4` frontier.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

@@ -773,6 +773,7 @@ function _evaluate_runtime_action_expr!(
             context,
             rule_label,
             current_edge,
+            statement_context,
         )
     elseif expr isa ActionRawExpr
         throw(RuntimeInterpreterException(
@@ -835,6 +836,14 @@ function _evaluate_runtime_call!(
             rule_label,
             current_edge;
             require_nonempty = helper_name == "coalesce_nonempty",
+        )
+    elseif helper_name == "split"
+        return _call_runtime_split_from_expressions!(
+            engine,
+            args,
+            context,
+            rule_label,
+            current_edge,
         )
     elseif helper_name == "entry_text"
         return context.registers.entry_match === nothing ? nothing : match_text(context.registers.entry_match)
@@ -926,7 +935,18 @@ function _evaluate_runtime_call!(
         return _runtime_copy(child.value)
     end
 
-    if helper_name in _RUNTIME_PURE_HELPER_NAMES
+    if helper_name in _RUNTIME_ARRAY_HELPER_NAMES
+        values = Any[
+            _runtime_copy(_evaluate_runtime_action_expr!(
+                engine,
+                arg,
+                context,
+                rule_label,
+                current_edge,
+            )) for arg in args
+        ]
+        return _call_runtime_array_helper(helper_name, values)
+    elseif helper_name in _RUNTIME_PURE_HELPER_NAMES
         values = Any[
             _runtime_copy(_evaluate_runtime_action_expr!(
                 engine,
@@ -1041,15 +1061,22 @@ function _call_runtime_array(engine, args, context, rule_label, current_edge)
             return _runtime_copy(get(context.arrays, name, Any[]))
         end
     end
-    return Any[
-        _runtime_copy(_evaluate_runtime_action_expr!(
+    result = Any[]
+    for arg in args
+        value = _runtime_copy(_evaluate_runtime_action_expr!(
             engine,
             arg,
             context,
             rule_label,
             current_edge,
-        )) for arg in args
-    ]
+        ))
+        if _runtime_is_array_splice_argument(arg) && value isa AbstractVector
+            append!(result, _runtime_as_array(value))
+        else
+            push!(result, value)
+        end
+    end
+    return result
 end
 
 function _call_runtime_hash(engine, args, context, rule_label, current_edge)
@@ -1135,7 +1162,57 @@ const _RUNTIME_PURE_HELPER_NAMES = Set{String}([
     "uppercase",
 ])
 
-function _evaluate_runtime_fluent_chain!(engine, chain, context, rule_label, current_edge)
+const _RUNTIME_ARRAY_HELPER_NAMES = Set{String}([
+    "concat_arrays",
+    "contains",
+    "count",
+    "drop_back",
+    "drop_front",
+    "filter_match",
+    "filter_nonempty",
+    "first",
+    "flat",
+    "flat_array",
+    "index_of",
+    "join_values",
+    "last",
+    "lowercase_each",
+    "reversed",
+    "slice",
+    "sorted",
+    "split_each",
+    "split_tagged_records",
+    "take",
+    "take_last",
+    "trim_each",
+    "uniq",
+    "uppercase_each",
+])
+
+const _RUNTIME_ARRAY_END_MUTATION_NAMES = Set{String}([
+    "pop_back",
+    "pop_front",
+    "push_back",
+    "push_front",
+])
+
+function _evaluate_runtime_fluent_chain!(
+    engine,
+    chain,
+    context,
+    rule_label,
+    current_edge,
+    statement_context::Bool,
+)
+    if statement_context && _execute_runtime_array_end_mutation!(
+            engine,
+            chain,
+            context,
+            rule_label,
+            current_edge,
+        )
+        return nothing
+    end
     value = _evaluate_runtime_action_expr!(
         engine,
         chain.receiver,
@@ -1145,6 +1222,9 @@ function _evaluate_runtime_fluent_chain!(engine, chain, context, rule_label, cur
     )
     for call in chain.calls
         helper_name = canonical_action_helper_name(call.method)
+        if helper_name in _RUNTIME_ARRAY_END_MUTATION_NAMES
+            return nothing
+        end
         if helper_name == "copy"
             value = _runtime_copy(value)
             continue
@@ -1162,6 +1242,23 @@ function _evaluate_runtime_fluent_chain!(engine, chain, context, rule_label, cur
                 current_edge;
                 require_nonempty = helper_name == "coalesce_nonempty",
             )
+            continue
+        elseif helper_name in _RUNTIME_ARRAY_HELPER_NAMES
+            values = Any[_runtime_copy(value)]
+            for arg in call.args
+                push!(values, _runtime_copy(_evaluate_runtime_action_expr!(
+                    engine,
+                    getfield(arg, :value),
+                    context,
+                    rule_label,
+                    current_edge,
+                )))
+            end
+            if helper_name == "join_values"
+                delimiter = length(values) >= 2 ? values[2] : ""
+                values = Any[delimiter, values[1]]
+            end
+            value = _call_runtime_array_helper(helper_name, values)
             continue
         elseif !(helper_name in _RUNTIME_PURE_HELPER_NAMES)
             throw(RuntimeInterpreterException(
@@ -1205,6 +1302,124 @@ function _call_runtime_coalesce(
         end
     end
     return nothing
+end
+
+function _execute_runtime_array_end_mutation!(
+    engine,
+    chain,
+    context,
+    rule_label,
+    current_edge,
+)
+    if length(chain.calls) != 1
+        return false
+    end
+    call = only(chain.calls)
+    helper_name = canonical_action_helper_name(call.method)
+    if !(helper_name in _RUNTIME_ARRAY_END_MUTATION_NAMES)
+        return false
+    end
+    target = _runtime_array_receiver_target_name(chain.receiver)
+    if target === nothing
+        return false
+    end
+
+    if helper_name == "push_back" || helper_name == "push_front"
+        if length(call.args) != 1
+            return false
+        end
+        value = _runtime_copy(_evaluate_runtime_action_expr!(
+            engine,
+            getfield(only(call.args), :value),
+            context,
+            rule_label,
+            current_edge,
+        ))
+        _mutate_runtime_array_storage!(context, target) do items
+            if helper_name == "push_back"
+                push!(items, value)
+            else
+                pushfirst!(items, value)
+            end
+        end
+        return true
+    end
+
+    if !isempty(call.args)
+        return false
+    end
+    _mutate_runtime_array_storage!(context, target) do items
+        if !isempty(items)
+            helper_name == "pop_back" ? pop!(items) : popfirst!(items)
+        end
+    end
+    return true
+end
+
+function _runtime_array_receiver_target_name(expr)
+    name = _runtime_variable_name(expr)
+    return name === nothing ? _runtime_array_target_name(expr) : name
+end
+
+function _mutate_runtime_array_storage!(mutator, context::_RuntimeExecutionContext, name::String)
+    variable = get(context.variables, name, nothing)
+    if variable isa AbstractVector
+        updated = _runtime_as_array(variable)
+        mutator(updated)
+        context.variables[name] = updated
+        if haskey(context.arrays, name)
+            context.arrays[name] = _runtime_as_array(updated)
+        end
+        return nothing
+    end
+    target = get!(context.arrays, name, Any[])
+    mutator(target)
+    return nothing
+end
+
+function _call_runtime_split_from_expressions!(engine, args, context, rule_label, current_edge)
+    target = isempty(args) ? nothing : _runtime_array_target_name(first(args))
+    if target !== nothing && length(args) >= 2
+        source = _evaluate_runtime_action_expr!(
+            engine,
+            args[2],
+            context,
+            rule_label,
+            current_edge,
+        )
+        delimiter = length(args) >= 3 ? _evaluate_runtime_action_expr!(
+            engine,
+            args[3],
+            context,
+            rule_label,
+            current_edge,
+        ) : ""
+        parts = _call_runtime_split(Any[source, delimiter])
+        delete!(context.variables, target)
+        delete!(context.hashes, target)
+        context.arrays[target] = _runtime_as_array(parts)
+        return _runtime_copy(context.arrays[target])
+    end
+
+    values = Any[
+        _runtime_copy(_evaluate_runtime_action_expr!(
+            engine,
+            arg,
+            context,
+            rule_label,
+            current_edge,
+        )) for arg in args
+    ]
+    return _call_runtime_split(values)
+end
+
+function _runtime_is_array_splice_argument(expr)
+    if expr isa ActionCallExpr
+        return canonical_action_helper_name(expr.name) in ("flat", "flat_array")
+    elseif expr isa ActionFluentChainExpr && !isempty(expr.calls)
+        return canonical_action_helper_name(last(expr.calls).method) in ("flat", "flat_array")
+    end
+    return false
 end
 
 function _runtime_coalesce_accepts(value, require_nonempty::Bool)
@@ -1265,6 +1480,216 @@ function _call_runtime_pure_helper(helper_name::String, values::Vector{Any})
         return _runtime_string_transform(values, uppercase)
     end
     throw(RuntimeInterpreterException("unsupported pure runtime helper '$helper_name'"))
+end
+
+function _call_runtime_array_helper(helper_name::String, values::Vector{Any})
+    if helper_name == "concat_arrays" || helper_name == "flat_array"
+        return _call_runtime_flat_array(values)
+    elseif helper_name == "contains"
+        return _call_runtime_array_contains(values)
+    elseif helper_name == "count"
+        return something(_runtime_value_length(isempty(values) ? nothing : first(values)), 0)
+    elseif helper_name == "drop_back"
+        return _call_runtime_array_drop(values, false)
+    elseif helper_name == "drop_front"
+        return _call_runtime_array_drop(values, true)
+    elseif helper_name == "filter_match"
+        return _call_runtime_array_filter_match(values)
+    elseif helper_name == "filter_nonempty"
+        return Any[
+            _runtime_copy(item) for item in _runtime_array_items(values)
+            if !_runtime_is_empty(item)
+        ]
+    elseif helper_name == "first"
+        items = _runtime_array_items(values)
+        return isempty(items) ? nothing : _runtime_copy(first(items))
+    elseif helper_name == "flat"
+        if isempty(values)
+            return Any[nothing]
+        elseif first(values) isa AbstractVector
+            return _runtime_as_array(first(values))
+        end
+        return Any[_runtime_copy(first(values))]
+    elseif helper_name == "index_of"
+        return _call_runtime_array_index_of(values)
+    elseif helper_name == "join_values"
+        return _call_runtime_join_values(values)
+    elseif helper_name == "last"
+        items = _runtime_array_items(values)
+        return isempty(items) ? nothing : _runtime_copy(last(items))
+    elseif helper_name == "lowercase_each"
+        return _map_runtime_array_strings(values, lowercase)
+    elseif helper_name == "reversed"
+        return Any[_runtime_copy(item) for item in reverse(_runtime_array_items(values))]
+    elseif helper_name == "slice"
+        return _call_runtime_array_slice(values)
+    elseif helper_name == "sorted"
+        items = _runtime_array_items(values)
+        sort!(items; by = item -> something(_runtime_scalar_string(item; null_as_empty = true), ""))
+        return items
+    elseif helper_name == "split_each"
+        return _call_runtime_array_split_each(values)
+    elseif helper_name == "split_tagged_records"
+        return _call_runtime_split_tagged_records(values)
+    elseif helper_name == "take"
+        return _call_runtime_array_take(values, true)
+    elseif helper_name == "take_last"
+        return _call_runtime_array_take(values, false)
+    elseif helper_name == "trim_each"
+        return _map_runtime_array_strings(values, strip)
+    elseif helper_name == "uniq"
+        return _call_runtime_array_uniq(values)
+    elseif helper_name == "uppercase_each"
+        return _map_runtime_array_strings(values, uppercase)
+    end
+    throw(RuntimeInterpreterException("unsupported array runtime helper '$helper_name'"))
+end
+
+function _runtime_array_items(values)
+    if isempty(values) || !(first(values) isa AbstractVector)
+        return Any[]
+    end
+    return _runtime_as_array(first(values))
+end
+
+function _call_runtime_array_take(values, front::Bool)
+    items = _runtime_array_items(values)
+    count = _runtime_nonnegative_int(length(values) >= 2 ? values[2] : nothing)
+    count = count === nothing ? 1 : count
+    if front
+        return items[1:min(count, length(items))]
+    end
+    start = max(1, length(items) - count + 1)
+    return items[start:end]
+end
+
+function _call_runtime_array_drop(values, front::Bool)
+    items = _runtime_array_items(values)
+    count = _runtime_nonnegative_int(length(values) >= 2 ? values[2] : nothing)
+    count = count === nothing ? 1 : count
+    if front
+        start = min(length(items) + 1, count + 1)
+        return items[start:end]
+    end
+    stop = max(0, length(items) - count)
+    return items[1:stop]
+end
+
+function _call_runtime_array_slice(values)
+    items = _runtime_array_items(values)
+    start = _runtime_nonnegative_int(length(values) >= 2 ? values[2] : nothing)
+    start = start === nothing ? 0 : start
+    width = _runtime_nonnegative_int(length(values) >= 3 ? values[3] : nothing)
+    width = width === nothing ? length(items) : width
+    if start >= length(items)
+        return Any[]
+    end
+    stop = min(length(items), start + width)
+    return items[start + 1:stop]
+end
+
+function _call_runtime_array_contains(values)
+    if length(values) < 2
+        return false
+    end
+    needle = _runtime_scalar_string(values[2]; null_as_empty = true)
+    return any(
+        item -> _runtime_scalar_string(item; null_as_empty = true) == needle,
+        _runtime_array_items(values),
+    )
+end
+
+function _call_runtime_array_index_of(values)
+    if length(values) < 2
+        return nothing
+    end
+    needle = _runtime_scalar_string(values[2]; null_as_empty = true)
+    for (index, item) in enumerate(_runtime_array_items(values))
+        if _runtime_scalar_string(item; null_as_empty = true) == needle
+            return index - 1
+        end
+    end
+    return nothing
+end
+
+function _call_runtime_join_values(values)
+    delimiter = _runtime_scalar_string(isempty(values) ? "" : values[1]; null_as_empty = true)
+    delimiter = delimiter === nothing ? "" : delimiter
+    raw_items = length(values) >= 2 ? values[2] : Any[]
+    items = raw_items isa AbstractVector ? raw_items : Any[raw_items]
+    return join(
+        [something(_runtime_scalar_string(item; null_as_empty = true), "") for item in items],
+        delimiter,
+    )
+end
+
+function _map_runtime_array_strings(values, transform)
+    return Any[
+        transform(something(_runtime_scalar_string(item; null_as_empty = true), ""))
+        for item in _runtime_array_items(values)
+    ]
+end
+
+function _call_runtime_array_split_each(values)
+    items = _runtime_array_items(values)
+    delimiter = length(values) >= 2 ? values[2] : ""
+    result = Any[]
+    for item in items
+        append!(result, _call_runtime_split(Any[item, delimiter]))
+    end
+    return result
+end
+
+function _call_runtime_array_filter_match(values)
+    if length(values) < 2
+        return Any[]
+    end
+    pattern = values[2]
+    result = Any[]
+    for item in _runtime_array_items(values)
+        text = something(_runtime_scalar_string(item; null_as_empty = true), "")
+        if _call_runtime_matches(Any[text, pattern])
+            push!(result, _runtime_copy(item))
+        end
+    end
+    return result
+end
+
+function _call_runtime_array_uniq(values)
+    seen = Set{String}()
+    result = Any[]
+    for item in _runtime_array_items(values)
+        key = something(_runtime_scalar_string(item; null_as_empty = true), "")
+        if !(key in seen)
+            push!(seen, key)
+            push!(result, _runtime_copy(item))
+        end
+    end
+    return result
+end
+
+function _call_runtime_flat_array(values)
+    result = Any[]
+    for value in values
+        if value isa AbstractVector
+            append!(result, _runtime_as_array(value))
+        else
+            push!(result, _runtime_copy(value))
+        end
+    end
+    return result
+end
+
+function _call_runtime_split_tagged_records(values)
+    if length(values) < 3
+        return Any[]
+    end
+    tag = something(_runtime_scalar_string(values[3]; null_as_empty = true), "")
+    fields = Any[_runtime_copy(value) for value in Iterators.drop(values, 3)]
+    return Any[
+        Any[tag, item, (_runtime_copy(field) for field in fields)...]
+        for item in _call_runtime_split(Any[values[1], values[2]])
+    ]
 end
 
 function _runtime_scalar_string(value; null_as_empty::Bool = false)

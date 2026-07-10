@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.4.3.3 — Julia runtime array helpers):
+  Array calls now operate on copied snapshots through a dedicated dispatcher, with `join_values` explicitly
+  rewriting receiver form to the delimiter-first canonical function contract. `array(...)` splices only values
+  marked structurally by `flat(...)` / `flat_array(...)`; `copy(array(...))` remains nested, so value shape does
+  not depend on runtime guessing. Destructive end methods are intercepted only for a single fluent call in
+  statement context and can update either named typed storage or scalar-held arrays. Generic value evaluation
+  returns `nothing` before evaluating mutation arguments, guaranteeing no hidden mutation or side effect.
+  `.4.3.4` can add hash behavior without weakening that statement/value boundary.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.4.3.2 — Julia runtime string/scalar/numeric helpers):
   Julia now canonicalizes helper function names and fluent methods through the same pure-helper dispatcher, so
   word aliases, symbol callees, and receiver chains cannot acquire separate arithmetic/string semantics. Regex

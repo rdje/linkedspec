@@ -292,7 +292,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-string-numeric"
+    @test status.parity == "runtime-array-helpers"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -302,7 +302,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-string-numeric", String(take!(status_output)))
+    @test occursin("parity: runtime-array-helpers", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1314,6 +1314,101 @@ Top::
         "bad_div" => nothing,
         "bad_mod" => nothing,
         "bad_number" => nothing,
+    )
+end
+
+@testset "Runtime array helpers and mutations" begin
+    runtime_engine(source) = LinkedSpecRuntimeEngine(compile_spec(parse_spec(source)))
+
+    array_helpers = runtime_engine(raw"""
+Top::
+ /x/
+ E {
+   items += "b";
+   items += "a";
+   items += "c";
+   items += "a";
+   phrases += "aa-b";
+   phrases += "cc-aa";
+   set(array(public), [" x ", "", "Y"]);
+   return(hash(
+     "sorted_drop_first", items.sorted().drop_front(2).first(),
+     "reverse_take_last", array(items).reversed().take(2).last(),
+     "contains", items.sorted().contains("c"),
+     "index", items.sorted().index_of("c"),
+     "drop_join", items.drop_back().join_values("|"),
+     "uniq_join", items.uniq().join_values(","),
+     "filter_count", items.filter_match(/^a$/).count(),
+     "split_filter_count", phrases.split_each("-").filter_match(/^aa$/).count(),
+     "transform_join", public.trim_each().filter_nonempty().lowercase_each().join_values("|"),
+     "take_last", items.take_last(2),
+     "slice", items.sorted().slice(1, 2),
+     "flat", flat_array(array("p", "q"), "r"),
+     "array_flat_splice", array("tag", flat_array(array("p", "q")), "tail"),
+     "array_copy_nested", array("tag", copy(array("p", "q"))),
+     "concat", concat_arrays(array("x"), array("y", "z")),
+     "sum", array(2, 4, 6).sum(),
+     "avg", array(2, 4, 6).avg(),
+     "source", copy(array(items)),
+     "empty_missing", missing.sorted().is_empty()
+   ))
+ }
+""")
+    @test runtime_parse(array_helpers, "x").value == Dict{String,Any}(
+        "sorted_drop_first" => "b",
+        "reverse_take_last" => "c",
+        "contains" => true,
+        "index" => 3,
+        "drop_join" => "b|a|c",
+        "uniq_join" => "b,a,c",
+        "filter_count" => 2,
+        "split_filter_count" => 2,
+        "transform_join" => "x|y",
+        "take_last" => Any["c", "a"],
+        "slice" => Any["a", "b"],
+        "flat" => Any["p", "q", "r"],
+        "array_flat_splice" => Any["tag", "p", "q", "tail"],
+        "array_copy_nested" => Any["tag", Any["p", "q"]],
+        "concat" => Any["x", "y", "z"],
+        "sum" => 12,
+        "avg" => 4,
+        "source" => Any["b", "a", "c", "a"],
+        "empty_missing" => true,
+    )
+
+    array_mutations = runtime_engine(raw"""
+Top::
+ /x/
+ E {
+   raw = " left , right,,third ";
+   split(array(parts), raw, /\s*,\s*/);
+   items.push_back("a");
+   items.push_back("b");
+   items.push_front("z");
+   items.pop_back();
+   items.pop_front();
+   array(items).push_back("c");
+   scalar_items = ["s"];
+   scalar_items.push_back("t");
+   return(hash(
+     "parts", copy(array(parts)),
+     "receiver_split", "a, b".split(/\s*,\s*/),
+     "items", copy(array(items)),
+     "scalar_items", scalar_items,
+     "value_push", items.push_back("bad"),
+     "after_value_push", copy(array(items)),
+     "tagged", split_tagged_records("a,b", /,/, "?tag:", "field")
+   ))
+ }
+""")
+    @test runtime_parse(array_mutations, "x").value == Dict{String,Any}(
+        "parts" => Any[" left", "right", "", "third "],
+        "receiver_split" => Any["a", "b"],
+        "items" => Any["a", "c"],
+        "scalar_items" => Any["s", "t"],
+        "value_push" => nothing,
+        "after_value_push" => Any["a", "c"],
+        "tagged" => Any[Any["?tag:", "a", "field"], Any["?tag:", "b", "field"]],
     )
 end
 
