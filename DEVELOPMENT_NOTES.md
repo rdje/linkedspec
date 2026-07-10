@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.2.3 — portable CLI trace is an adapter protocol):
+  Keep rich native trace scopes/events for embedding, but make each primary command project the same small,
+  deterministic phase protocol. The adapter owns thresholds, UTF-8 byte accounting, one-line field escaping,
+  emoji, and sink/reset semantics; it must not route backend-internal trace through the portable command. Trace
+  setup/write failures are compilation-boundary failures because the requested diagnostic channel could not be
+  established reliably.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.2.2 — direct result is an execution operation, not JSON postprocessing):
   Preserve legacy accumulator-returning APIs, but expose the backend-neutral top-rule value as a first-class native
   operation with per-invocation entry/mode options. This keeps engines reusable and avoids compiled-state mutation

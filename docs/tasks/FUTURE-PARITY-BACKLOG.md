@@ -362,16 +362,24 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.5.2.2 - add Rust direct execution API`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.2.3`
-  Status: `active`
+  Status: `done`
   Goal: Implement the canonical primary CLI trace projection and exact sink behavior in Rust.
   Acceptance: Rust emits ADR `0024`'s deterministic phase records, thresholds/aliases, percent escaping, UTF-8
     byte counts, emoji, stdout/route/mirror defaults, reset/append/persistence, and failure events while keeping the
     rich native trace API independent and suppressing ambient backend-specific trace configuration.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-10.** `linkedspec_runtime::primary_cli` now owns a backend-neutral canonical
+    trace adapter separate from `linkedspec_core::trace`: exact 100/200/300/400/500 thresholds and aliases,
+    portable compile/input/invoke phase records, UTF-8 byte counts, uppercase percent escaping, optional emoji,
+    stdout/route/mirror sinks, default routing, reset/truncate, append/persistence, and stable failure records.
+    Trace-file setup/write failures remain stable compilation failures, and quiet/none reset without emitting.
+    Six focused adapter tests pass; the full runtime package passes 137 unit, 99 oracle, 190 integration, three
+    source-emitter, and 10 native trace-control tests. Strict Clippy reports no touched-file diagnostic beyond the
+    pre-existing runtime/core backlog, formatting passes, and all 61 unchanged neutral cases pass exactly for the
+    built Rust command. Governance, mdBook, Knowledge Map, whitespace, and regenerated-cache cleanup pass.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.2.3 - add canonical Rust CLI trace`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.2.4`
-  Status: `pending`
+  Status: `active`
   Goal: Close Rust primary-command conformance and recurring focused verification.
   Acceptance: The built Rust command passes all 61 unchanged neutral cases in default and POSIX environments;
     focused Rust tests and the broader local gate pass; the Rust primary command is wired into relevant local
@@ -602,8 +610,8 @@ before implementation.
 | 12 | `FUTURE-PARITY-BACKLOG.1.5.2.0` | `done` | Rust native/adapter seams are audited and implementation is split before code. |
 | 13 | `FUTURE-PARITY-BACKLOG.1.5.2.1` | `done` | Exact Rust binary arguments/help/UTF-8 loading and named resolution pass their shared cases. |
 | 14 | `FUTURE-PARITY-BACKLOG.1.5.2.2` | `done` | Native direct-result/entry/mode execution closes all 11 result cases; Rust is 41/61. |
-| 15 | `FUTURE-PARITY-BACKLOG.1.5.2.3` | `active` | Add the remaining 20 canonical Rust primary trace cases and sinks. |
-| 16 | `FUTURE-PARITY-BACKLOG.1.5.2.4` | `pending` | Prove all 61 cases, gate Rust, and close no-drift. |
+| 15 | `FUTURE-PARITY-BACKLOG.1.5.2.3` | `done` | Canonical levels/events/sinks/failures close the unchanged Rust suite at 61/61. |
+| 16 | `FUTURE-PARITY-BACKLOG.1.5.2.4` | `active` | Prove default/POSIX identity, gate Rust, and close no-drift. |
 | 17 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
 | 18 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
 | 19 | `FUTURE-PARITY-BACKLOG.1.6` | `pending` | Census every documented/exported user capability and split all residual parity gaps. |
@@ -1040,7 +1048,8 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Perl `.1.5.1` is closed at 61 cases; Rust `.1.5.2.2` is done at 41/61 and `.1.5.2.3` is active.
+- None. Perl `.1.5.1` is closed at 61 cases; Rust `.1.5.2.3` is done at 61/61 and `.1.5.2.4` is active for
+  recurring-gate and no-drift closeout.
   Global CLI/capability convergence precedes Lua `.1.3`.
 
 ## Verification Log

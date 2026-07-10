@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.2.3 — add canonical Rust CLI trace**
+  (DONE — 61/61 exact; `.1.5.2.4` active for recurring-gate/default-POSIX no-drift closeout).
+
+  **Implementation:** Added the deterministic canonical compile/input/invoke trace adapter with exact aliases/
+  thresholds, UTF-8 byte counts, escaped fields, emoji, stdout/route/mirror, reset/append, and portable failures;
+  rich native Rust trace remains independent.
+
+  **Proof:** Six focused adapter tests, the full 137-unit/99-oracle/190-integration/three-emitter/10-native-trace
+  package, and all 61 unchanged process cases pass. Formatting, touched-file Clippy, docs/KM/governance/book, and
+  cache cleanup pass; strict package Clippy remains at the pre-existing backlog.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.2.2 — add Rust direct execution API**
   (DONE — 41/61 exact; `.1.5.2.3` active for 20 non-quiet trace cases).
 

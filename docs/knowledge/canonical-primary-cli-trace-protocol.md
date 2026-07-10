@@ -15,8 +15,8 @@ answers:
 date: 2026-07-10
 status: accepted
 tags: [cli, trace, protocol, deterministic, utf8, backends, ADR-0024, FUTURE-PARITY-BACKLOG]
-evidence: "ADR 0024 and FUTURE-PARITY-BACKLOG.1.5.1.5 define canonical primary phase trace; 20 exact trace cases brought Perl to 53/53, and FUTURE-PARITY-BACKLOG.1.5.1.6.2 adds eight UTF-8 cases for the current 61/61 default/POSIX suite."
-reverify: "PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec && POSIXLY_CORRECT=1 PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec && PERL5LIB= prove -v -Iperl t/trace_cli.t"
+evidence: "ADR 0024 and FUTURE-PARITY-BACKLOG.1.5.1.5 define canonical primary phase trace; Perl is the 61/61 default/POSIX reference, and FUTURE-PARITY-BACKLOG.1.5.2.3 makes Rust pass the same unchanged 61 cases."
+reverify: "PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec && cargo build --manifest-path rust/Cargo.toml -p linkedspec-runtime --bin linkedspec-rust && PERL5LIB= perl tools/run_cli_conformance.pl --display-command linkedspec-rust -- {{REPO_ROOT}}/rust/target/debug/linkedspec-rust"
 ---
 
 ADR `0024` separates two valid trace surfaces:
@@ -63,9 +63,11 @@ threshold, default route, append, UTF-8 byte counts, escaped user fields, and al
 three routed failure phases. Together with help/usage/success/failure, Perl passed
 53/53 at trace closure; eight later strict UTF-8 cases make the current suite 61/61
 in both option environments.
-`tools/run_ci_local.sh` executes this same manifest twice before Phase 0.
+`tools/run_ci_local.sh` executes this same manifest twice for the Perl reference before Phase 0. Rust `.1.5.2.3`
+now passes the same 61 unchanged cases; `.1.5.2.4` owns recurring-gate/default-POSIX closeout.
 
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[neutral-cli-fixture-runner]], [[trace-cli-control]],
 [[trace-verbosity-and-formatting]], [[perl-primary-cli-operational-failures]],
-[[cross-backend-cli-contract-gap]], [[primary-cli-utf8-process-boundary-gap]].
+[[cross-backend-cli-contract-gap]], [[primary-cli-utf8-process-boundary-gap]],
+[[rust-canonical-primary-cli-trace]].

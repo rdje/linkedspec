@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, parity, perl, rust, dart, julia, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.3.0 found no Rust binary. ADR 0023 defines the target. Perl is the 61-case reference; Rust .1.5.2.2 now lands direct execution at 41/61 and .3 is active for trace; Julia has local exact-process proof but global fixture identity remains."
+evidence: "JULIA-BACKEND-PARITY.7.3.0 found no Rust binary. ADR 0023 defines the target. Perl is the 61-case reference; Rust .1.5.2.3 now passes 61/61 and .4 owns closeout; Julia has local exact-process proof but global fixture identity remains."
 reverify: "sed -n '1,230p' bin/linkedspec; sed -n '1,330p' dart/lib/src/cli/linkedspec_dart_cli.dart; sed -n '1,220p' julia/src/cli/LinkedSpecJuliaCli.jl; rg -n '\[\[bin\]\]|^name =|^members =' rust/Cargo.toml rust/*/Cargo.toml; find rust -type f -path '*/src/bin/*' -print"
 ---
 
@@ -20,16 +20,17 @@ The implemented backend CLI surfaces are not currently interface-equivalent:
 - Perl `bin/linkedspec` parses an arbitrary named, file-backed, or inline spec against literal or file-backed
   input. It exposes top-rule, parse-mode, and trace controls, prints canonical JSON, and distinguishes runtime
   failure (`1`) from usage failure (`2`). `.1.5.1.5` closes canonical trace, and `.1.5.1.6` resolves the surfaced
-  UTF-8 argv/JSON gap. Perl passes the complete 61-case default/POSIX reference; Rust `.1.5.2.0` has split the
-  missing command; `.1.5.2.2` now lands its exact direct execution layer at 41/61 and `.1.5.2.3` is active.
+  UTF-8 argv/JSON gap. Perl passes the complete 61-case default/POSIX reference; Rust `.1.5.2.3` now passes the
+  unchanged suite with exact direct execution and canonical trace, while `.1.5.2.4` owns recurring-gate/default-
+  POSIX no-drift closeout.
 - Dart `bin/linkedspec_dart.dart` is a manifest corpus validator/executor. Its options select corpus cases/windows,
   and it reports usage failure as `64`.
 - Julia `bin/linkedspec_julia.jl` now accepts only the exact parser option contract, rejects subcommands/
   positionals as usage `2`, prepares deterministic named/file/inline source plus literal/file input, executes it
   through the native pipeline, emits recursively key-sorted direct JSON, and has stable local failure/trace
   routing and nine-family local process conformance. Global neutral fixture identity remains open.
-- The Rust workspace now contains `linkedspec-rust`. Exact arguments/loading plus reusable direct-result/entry/mode
-  execution pass 41/61 shared cases; canonical CLI trace remains active under `.1.5.2.3`.
+- The Rust workspace now contains `linkedspec-rust`. Exact arguments/loading, reusable direct-result/entry/mode
+  execution, and canonical CLI trace pass all 61 shared cases; `.1.5.2.4` owns closeout.
 
 ADR `0006` already requires the same backend features and semantics. The director clarified that distinct backend
 executable names must also expose the exact same command structure, option list and meanings, positional arguments,
@@ -48,5 +49,5 @@ Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specif
 [[julia-scoped-parity-no-drift]], [[perl-primary-cli-conformance-audit]],
 [[neutral-cli-fixture-runner]], [[perl-primary-cli-strict-arguments]],
 [[perl-primary-cli-success-conformance]], [[perl-primary-cli-operational-failures]],
-[[primary-cli-utf8-process-boundary-gap]].
+[[primary-cli-utf8-process-boundary-gap]], [[rust-canonical-primary-cli-trace]].
 Canonical trace: [[canonical-primary-cli-trace-protocol]].

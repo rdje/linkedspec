@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.2.3 — add canonical Rust CLI trace
+
+**Adapter trace:** Added the ADR `0024` canonical phase projection to `linkedspec_runtime::primary_cli`, separate
+from the rich native Rust trace API. It emits exact compile/input/invoke records, named/numeric thresholds,
+UTF-8 byte counts, uppercase percent-escaped fields, optional emoji, and canonical JSON byte length.
+
+**Sinks/failures:** Implemented stdout/route/mirror, file-implied route, reset even at silent levels,
+append/persistence, byte-identical mirror output, and phase-stable failure records. Trace-file setup/write errors
+map to the stable compilation failure without leaking host details.
+
+**Proof/frontier:** Six focused adapter tests, the full runtime package (137 unit, 99 oracle, 190 integration,
+three source-emitter, 10 native trace-control), and all 61 unchanged neutral CLI cases pass. Formatting and
+touched-file Clippy are clean; strict package Clippy remains blocked only by the pre-existing runtime/core lint
+backlog. Docs/KM/governance/book/whitespace and safe cache cleanup pass. `.1.5.2.4` now owns default/POSIX
+recurring-gate and no-drift closeout.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.2.2 — add Rust direct execution API
 
 **Native API:** Added owned `ExecutionOptions` plus `Engine::execute_value` and native traced variants. Each call

@@ -31,9 +31,10 @@ must not guess by unwrapping one-element JSON arrays.
 The same slice corrected a related Rust-only nested-value drift exposed by the shared CLI fixture. `hash(key,
 value, ...)` now preserves an ordinary hash-valued `value` as a nested object. Only explicit `flat(...)` or
 `flat_hash(...)` arguments splice entries into the surrounding constructor, matching the already-documented
-Perl/Dart/Julia behavior. With direct results and this nested-hash correction, `linkedspec-rust` passes 41/61
-unchanged cases; only 20 non-quiet canonical CLI trace cases remain.
+Perl/Dart/Julia behavior. This slice established the 41/61 direct-result baseline; `.1.5.2.3` has since added the
+canonical CLI trace projection and brought `linkedspec-rust` to 61/61 unchanged cases.
 
 Related facts: [[rust-perl-output-oracle]], [[rust-primary-cli-mechanism-audit]],
 [[user-observable-backend-cli-parity-contract]], [[julia-runtime-hash-helpers]],
-[[dart-runtime-hash-helpers]], [[canonical-primary-cli-trace-protocol]].
+[[dart-runtime-hash-helpers]], [[canonical-primary-cli-trace-protocol]],
+[[rust-canonical-primary-cli-trace]].

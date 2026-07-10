@@ -198,8 +198,9 @@ Top-level project docs:
   defines Unicode scalar text encoded as strict preserved UTF-8—not Unicode as synonymous with UTF-8. `.1.5.1.6.2`
   now decodes Perl argv/files strictly, preserves BOM/code points/newlines, rejects invalid files by phase, and
   emits recursive canonical JSON once; `.6.3` closes Perl as the 61-case reference. Rust `.1.5.2.1` adds
-  `linkedspec-rust`; `.1.5.2.2` adds reusable entry/mode/direct-result execution and brings it to 41/61 exact
-  cases. `.1.5.2.3` is active for the remaining 20 non-quiet canonical trace cases.
+  `linkedspec-rust`, `.1.5.2.2` adds reusable entry/mode/direct-result execution, and `.1.5.2.3` adds the exact
+  canonical trace projection, bringing Rust to 61/61. `.1.5.2.4` is active for default/POSIX recurring-gate and
+  no-drift closeout.
 - Deep semantic introspection plus MCP is parked under `FUTURE-PARITY-BACKLOG.10.1`: native backend APIs own one
   versioned semantic model, while MCP remains a thin transport rather than a backend-specific source of truth.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full

@@ -117,9 +117,10 @@ input-file bytes produce the stable input-load failure. Invalid-byte OS argv is
 outside the portable text interface, and arbitrary binary parsing would require a
 future explicit byte-stream contract. Perl implementation is exact through `.1.5.1.6.2`: strict argv/file
 decoding, preserved BOM/code points/newlines, recursive canonical JSON, stable invalid-file phases, and exact
-trace byte counts pass 61 shared cases. `.6.3` closes final reference no-drift; Rust `.1.5.2.0` audits/splits its
-missing command. `.1.5.2.2` now lands reusable entry/mode/direct-result execution at 41/61; `.1.5.2.3` owns the
-remaining 20 non-quiet canonical trace cases. This does not claim full Rust conformance yet.
+trace byte counts pass 61 shared cases. `.6.3` closes final reference no-drift; Rust `.1.5.2.3` now combines its
+exact boundary, reusable entry/mode/direct-result execution, and canonical trace projection to pass all 61
+unchanged cases. `.1.5.2.4` still owns recurring-gate/default-POSIX no-drift closeout, so this is not yet the
+closed Rust primary-command milestone.
 
 For example, this portable action-edge grammar deliberately constructs object keys out of
 order:
@@ -146,7 +147,8 @@ file loading does not trim content and output framing does not add a second newl
 This is a contract and active convergence target, not a claim that every current executable
     already passes. The current gap census is: Perl is parser-oriented but direct audit found implicit option
     aliases, ignored positionals, environment-dependent parsing, and failure trace on stdout before the neutral
-    fixture lock; Rust has no primary binary; Dart remains corpus/status-oriented; Julia now accepts and executes
+    fixture lock; Rust now passes the unchanged suite but still needs recurring-gate/default-POSIX closeout; Dart
+    remains corpus/status-oriented; Julia now accepts and executes
     the exact parser request shape with stable local failures, trace routing, and nine-family process proof, but
     still needs the global neutral fixture comparison. `FUTURE-PARITY-BACKLOG.1.5`
     owns convergence. Julia's repair is split under `JULIA-BACKEND-PARITY.7.3.2`; `.7.3.2.1` closes compile/parser/
@@ -156,8 +158,8 @@ This is a contract and active convergence target, not a claim that every current
     Global `.1.5.1.5` closed 53 exact Perl cases: two help, 20 usage, seven success, four operational failure, and
     20 trace families in default/POSIX environments. A signoff probe then exposed UTF-8 argv/JSON mojibake;
     `.1.5.1.6.2` fixes the adapter and adds eight exact Unicode/invalid families, bringing Perl to 61/61. `.6.3`
-    closes final reference no-drift; Rust `.1.5.2.2` lands reusable direct-result/entry/mode execution at 41/61
-    and `.1.5.2.3` owns canonical trace against that manifest.
+    closes final reference no-drift; Rust `.1.5.2.3` combines reusable direct-result/entry/mode execution with
+    canonical trace and passes 61/61, while `.1.5.2.4` owns recurring-gate/default-POSIX no-drift closeout.
 
 A separate parked direction, `FUTURE-PARITY-BACKLOG.10.1`, will design deep semantic introspection. The intended
 contract is one versioned, deterministic semantic query model exposed idiomatically from every native backend:
