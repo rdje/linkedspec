@@ -53,8 +53,8 @@ Run the repo-owned focused gate from the repository root:
 bash tools/run_julia_local.sh
 ```
 
-It runs `Pkg.test()`, primary Julia CLI help, one real canonical-output parse, retired-subcommand rejection,
-corpus-runner help, and the complete 99-fixture corpus. The Julia
+It runs `Pkg.test()`, the nine-family `tools/check_julia_primary_cli.sh` real-process checker, corpus-runner help,
+and the complete 99-fixture corpus. The Julia
 executable and depot are configurable:
 
 ```bash
@@ -77,7 +77,7 @@ accumulators/returns, recursion/progress guards, registered user functions, diag
 manifest-backed corpus validation, controlled and full library corpus execution, public-parser leading-trivia
 parity, spec-driven top-level user-function source composition, native primary request execution/canonical JSON,
 stable primary failure/trace routing, and unbounded full-manifest CLI execution. The full package suite currently
-passes with 1,017 assertions and status `runtime-corpus-full`.
+passes with 1,017 assertions and status `runtime-corpus-primary-cli`.
 
 The library executor and corpus CLI support named or bounded subsets. For example:
 

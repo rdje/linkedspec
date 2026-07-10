@@ -12,7 +12,7 @@ date: 2026-07-10
 status: current
 tags: [julia, codegen, source-emitter, corpus, embedding, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.7.2 compares Julia's green native 99/99 interpreter path with the Rust source-emitter precedent and defers generated Julia source to FUTURE-PARITY-BACKLOG.3. ADR 0023 later clarifies that Rust's exported source_emitter makes equivalent capability mandatory for complete user-visible parity, while the 99/99 interpreter gate remains valid."
-reverify: "rg -n 'JULIA-BACKEND-PARITY\.7\.2|FUTURE-PARITY-BACKLOG\.3|generated Julia source|emitter scaffold|family-plan|curated.*corpus|runtime-corpus-full' docs/tasks/JULIA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/linkedspec-book/src/overview/project-status.md ROADMAP.md ROADMAP_V2.md"
+reverify: "rg -n 'JULIA-BACKEND-PARITY\.7\.2|FUTURE-PARITY-BACKLOG\.3|generated Julia source|emitter scaffold|family-plan|curated.*corpus|runtime-corpus-primary-cli' docs/tasks/JULIA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/linkedspec-book/src/overview/project-status.md ROADMAP.md ROADMAP_V2.md"
 ---
 
 Generated Julia source does not exist as a current implementation surface and is not required for the accepted
@@ -28,8 +28,8 @@ closeout. Rust's generated-source work demonstrates the minimum credible proof a
 - a curated manifest-backed corpus subset that first passes the interpreter oracle.
 
 `FUTURE-PARITY-BACKLOG.3` now owns generated-source breadth across Rust plus separate future Dart and Julia emitter
-splits. Until a Julia-specific split independently satisfies those proof classes, `runtime-corpus-full` refers to
-the native interpreter gate only. ADR `0023` classifies Rust's exported `source_emitter` as a user-observable
+splits. The later `runtime-corpus-primary-cli` status adds a local CLI gate but still does not include generated
+source. ADR `0023` classifies Rust's exported `source_emitter` as a user-observable
 capability, so this deferral blocks complete Julia feature parity even though it does not weaken interpreter proof.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[julia-backend-interpreter-first-plan]], [[julia-mdbook-usage-status]],

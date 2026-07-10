@@ -346,7 +346,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-corpus-full"
+    @test status.parity == "runtime-corpus-primary-cli"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()

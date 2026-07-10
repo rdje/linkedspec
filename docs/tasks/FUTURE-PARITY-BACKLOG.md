@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.5.0` done; delegated Julia CLI frontier is `.7.3.2.5`).
+- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.5.0` done; delegated Julia frontier is `.7.3.3`).
 - Owner: repo-local workflow
 
 ## Goal
@@ -293,22 +293,21 @@ before implementation.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.7.3.2.5` | `active` | Close Julia direct-process conformance and public no-drift. |
-| 2 | `JULIA-BACKEND-PARITY.7.3.3` | `pending` | Reconcile Julia's scoped milestone and remaining complete-parity obligations without false closure. |
-| 3 | `FUTURE-PARITY-BACKLOG.1.5.1` | `pending` | Lock neutral CLI fixtures and normalize the Perl reference after Julia's active leaf is clean. |
-| 4 | `FUTURE-PARITY-BACKLOG.1.5.2` | `pending` | Add the missing Rust primary CLI against the shared fixtures. |
-| 5 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
-| 6 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
-| 7 | `FUTURE-PARITY-BACKLOG.1.6` | `pending` | Census every documented/exported user capability and split all residual parity gaps. |
-| 8 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
-| 9 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
-| 10 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
-| 11 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
-| 12 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
-| 13 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
-| 14 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
-| 15 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser/stimuli roundtrip arc is parked for later design. |
-| 16 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
+| 1 | `JULIA-BACKEND-PARITY.7.3.3` | `active` | Reconcile Julia's scoped milestone and remaining complete-parity obligations without false closure. |
+| 2 | `FUTURE-PARITY-BACKLOG.1.5.1` | `pending` | Lock neutral CLI fixtures and normalize the Perl reference after Julia's active leaf is clean. |
+| 3 | `FUTURE-PARITY-BACKLOG.1.5.2` | `pending` | Add the missing Rust primary CLI against the shared fixtures. |
+| 4 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
+| 5 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
+| 6 | `FUTURE-PARITY-BACKLOG.1.6` | `pending` | Census every documented/exported user capability and split all residual parity gaps. |
+| 7 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
+| 8 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 9 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
+| 10 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
+| 11 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
+| 12 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
+| 13 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
+| 14 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser/stimuli roundtrip arc is parked for later design. |
+| 15 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
 
 ## Decisions
 
@@ -361,8 +360,9 @@ before implementation.
 - `2026-07-10`: Delegated Julia `.7.3.2.2` replaces the rollout primary commands with exact ADR `0023` options,
   positional/subcommand rejection, deterministic named resolution, and exact source/input loading. `.7.3.2.3`
   now executes rule/function source through the native pipeline and emits recursively key-sorted direct JSON;
-  `.7.3.2.4` locks stable phase-ordered failures plus the trace sink/reset/emoji matrix. The 1,017-assertion
-  suite and 99/99 pass; `.7.3.2.5` is active for direct-process/no-drift closeout.
+  `.7.3.2.4` locks stable phase-ordered failures plus the trace sink/reset/emoji matrix. `.7.3.2.5` now locks nine
+  direct process families and `runtime-corpus-primary-cli`; 1,017 assertions and 99/99 pass. `.7.3.3` is active for
+  honest outer no-drift.
 
 ## Open Questions
 
@@ -371,7 +371,7 @@ before implementation.
 
 ## Blockers
 
-- None. Julia `.7.3.2.5` is the next active PNT leaf; global CLI/capability convergence precedes Lua `.1.3`.
+- None. Julia `.7.3.3` is the next active PNT leaf; global CLI/capability convergence precedes Lua `.1.3`.
 
 ## Verification Log
 

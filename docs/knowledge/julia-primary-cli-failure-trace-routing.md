@@ -45,10 +45,11 @@ Emoji rendering is owned by the shared emitter, not the CLI adapter. The level
 threshold prefixes are `🛑`, `ℹ️`, `🔎`, `🧭`, `🐞`, and `🔥` from none through
 debug. A disabled level still emits nothing.
 
-This is Julia-local completion. Direct-process no-drift remains `.7.3.2.5`, and
-the cross-backend language-neutral fixture comparison/wording convergence
-remains `FUTURE-PARITY-BACKLOG.1.5`.
+This is Julia-local completion. `.7.3.2.5` has since locked it across real
+processes; the cross-backend language-neutral fixture comparison/wording
+convergence remains `FUTURE-PARITY-BACKLOG.1.5`.
 
 Related facts: [[julia-primary-cli-native-execution-canonical-json]],
 [[julia-primary-cli-arguments-resolution-loading]], [[julia-trace-controls-sinks]],
 [[julia-runtime-structured-diagnostics]], [[user-observable-backend-cli-parity-contract]].
+See also [[julia-primary-cli-process-conformance]].

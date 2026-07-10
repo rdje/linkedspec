@@ -12,7 +12,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, ci, verification, corpus, depot, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.4 adds tools/run_julia_local.sh; .7.3.2.4 passes its current package/CLI/corpus gate at 1,017 assertions and 99/99. .7.3.2.5 owns final direct-process gate expansion; shared CI remains opt-in."
+evidence: "JULIA-BACKEND-PARITY.6.4 adds tools/run_julia_local.sh; .7.3.2.5 delegates primary checks to the nine-family real-process checker. The gate passes 1,017 assertions and 99/99; shared CI remains opt-in."
 reverify: "LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n 'LINKEDSPEC_RUN_JULIA|run_julia_local' tools/run_ci_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md"
 ---
 
@@ -22,9 +22,9 @@ Use the focused Julia gate when changing the Julia backend or its parity documen
 bash tools/run_julia_local.sh
 ```
 
-The script runs Julia `Pkg.test()`, primary CLI help plus a real canonical-output parse and retired-subcommand
-rejection, corpus-runner help, and complete 99-fixture execution. It runs from the repository root and uses the
-committed Julia project/manifest.
+The script runs Julia `Pkg.test()`, the complete `tools/check_julia_primary_cli.sh` process checker, corpus-runner
+help, and complete 99-fixture execution. It runs from the repository root and uses the committed Julia project/
+manifest.
 
 Host installations may select an executable and writable depot:
 
@@ -49,4 +49,4 @@ one explicit opt-in that composes the focused gate without duplicating its comma
 Related facts: [[julia-mdbook-usage-status]], [[julia-full-corpus-gate]], [[julia-backend-scaffold-package]],
 [[dart-local-verification-gate]], [[native-in-memory-backend-contract]], [[phase0-regression-structure]],
 [[julia-primary-cli-native-execution-canonical-json]],
-[[julia-primary-cli-failure-trace-routing]].
+[[julia-primary-cli-failure-trace-routing]], [[julia-primary-cli-process-conformance]].

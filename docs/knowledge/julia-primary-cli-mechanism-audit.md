@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, cli, trace, parser, compiler, parity, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.3.2.0 splits five mechanisms. .7.3.2.1 through .4 close trace, arguments/loading, execution/JSON, and failures/routing with 1,017 assertions and 99/99 green; .7.3.2.5 is active."
+evidence: "JULIA-BACKEND-PARITY.7.3.2.0 splits five mechanisms. .7.3.2.1 through .5 close all five with nine process families, 1,017 assertions, 99/99, and runtime-corpus-primary-cli; .7.3.3 is active."
 reverify: "rg -n 'JULIA-BACKEND-PARITY\\.7\\.3\\.2|status|corpus|parse_spec|parse_spec_with_staged|compile_spec|LinkedSpecRuntimeEngine|runtime_execute|LinkedSpecTraceConfig|JSON3\\.write' docs/tasks/JULIA-BACKEND-PARITY.md julia/src julia/test"
 ---
 
@@ -25,8 +25,8 @@ The audit found a rollout-era status/corpus dispatcher with none of the required
 parser-option, resolution, execution, canonical JSON, or normalized diagnostic
 mechanisms. `.7.3.2.1` through `.7.3.2.3` have since closed trace propagation,
 argument/loading preparation, native execution/direct canonical JSON, and the
-normalized diagnostic/exit plus complete trace-routing boundary. Direct-process
-no-drift remains active.
+normalized diagnostic/exit plus complete trace-routing boundary, and direct-
+process/public-status no-drift.
 
 Runtime trace instrumentation already existed. `.7.3.2.1` now propagates that same
 emitter through source parsing, validation, compilation, function-shell parsing,
@@ -39,11 +39,12 @@ native-pipeline meaning required by ADR `0023`.
 2. `.7.3.2.2` — exact arguments plus source/input loading and named resolution (done);
 3. `.7.3.2.3` — native execution and canonical direct-value JSON (done);
 4. `.7.3.2.4` — normalized failures, exits, and trace routing (done);
-5. `.7.3.2.5` — unit/direct-process conformance and public no-drift (active).
+5. `.7.3.2.5` — unit/direct-process conformance and public no-drift (done).
 
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[julia-diagnostics-trace-boundary]], [[julia-mdbook-usage-status]],
 [[native-in-memory-backend-contract]], [[julia-frontend-compiler-staged-trace-events]],
 [[julia-primary-cli-arguments-resolution-loading]],
 [[julia-primary-cli-native-execution-canonical-json]],
-[[julia-primary-cli-failure-trace-routing]].
+[[julia-primary-cli-failure-trace-routing]],
+[[julia-primary-cli-process-conformance]].

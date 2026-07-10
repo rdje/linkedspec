@@ -74,8 +74,8 @@ This is a contract and active convergence target, not a claim that every current
     closeout and the global neutral fixture comparison. `FUTURE-PARITY-BACKLOG.1.5`
     owns convergence. Julia's repair is split under `JULIA-BACKEND-PARITY.7.3.2`; `.7.3.2.1` closes compile/parser/
     function-shell/staged trace coverage, `.7.3.2.2` closes exact argument/source/input handling, `.7.3.2.3`
-    closes execution/direct canonical JSON, `.7.3.2.4` closes errors/exits/trace routing, and `.7.3.2.5` is active
-    for direct-command no-drift.
+    closes execution/direct canonical JSON, `.7.3.2.4` closes errors/exits/trace routing, and `.7.3.2.5` closes
+    nine-family direct-command conformance. `.7.3.3` is active for honest outer no-drift.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics
@@ -425,7 +425,7 @@ implementing the same cross-variant command interface.
 
 Julia is green at the accepted interpreter-first boundary: the complete validated corpus executes 99/99 with
 exact checked-in output, full package tests pass with 1,017 assertions, and package/CLI status is
-`runtime-corpus-full`. The primary product surface is the native `LinkedSpecJulia` module; the Julia CLI and corpus
+`runtime-corpus-primary-cli`. The primary product surface is the native `LinkedSpecJulia` module; the Julia CLI and corpus
 runner are thin adapters over the same in-process parser/compiler/runtime path.
 
 The Julia primary command now exposes ADR `0023`'s parser-oriented help and accepts only its exact source/input/
@@ -436,8 +436,9 @@ spec-driven top-level-function source now execute through the native compiler/ru
 and trace controls. Success prints the direct top-rule value with recursively sorted object keys and one newline.
 Source compilation precedes input-file loading. Compilation, input-load, and invocation failures use stable stderr
 headings and exit `1`; usage errors exit `2`. The existing trace emitter now composes stdout/route/mirror, reset,
-quiet, and level-specific emoji behavior with canonical output. `.7.3.2.5` remains active for direct-process/no-
-drift closeout; global cross-backend fixture identity remains owned by `FUTURE-PARITY-BACKLOG.1.5`.
+quiet, and level-specific emoji behavior with canonical output. `.7.3.2.5` locks nine real-process families with
+exact stdout/stderr/newline/file bytes and exit 0/1/2. `.7.3.3` remains active for honest outer no-drift; global
+cross-backend fixture identity remains owned by `FUTURE-PARITY-BACKLOG.1.5`.
 
 The boundary does not claim generated Julia source or the exact primary CLI yet. `.7.2` deliberately
 defers generated Julia source to the split future source-emitter lane under `FUTURE-PARITY-BACKLOG.3`; Julia
@@ -515,6 +516,7 @@ julia --project=julia julia/bin/linkedspec_julia.jl \
   --input x
 julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus
 julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute
+bash tools/check_julia_primary_cli.sh
 ```
 
 The shown primary parse invocation prints `{"a":1,"b":2}` followed by one newline. Object keys are sorted at

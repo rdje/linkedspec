@@ -141,8 +141,9 @@ As of `JULIA-BACKEND-PARITY.7.3.2.1`, Julia has stable structured runtime
 diagnostics, trace controls/events/sinks, interpreter instrumentation, and
 opt-in source-parser, validation, compiler, function-shell, and staged-dispatch
 events. `.7.3.2.3` composes that emitter through native primary execution, and
-`.7.3.2.4` closes Julia's sink/reset/emoji CLI behavior. Direct-process no-drift
-remains `.7.3.2.5`, so this does not claim complete backend or CLI parity.
+`.7.3.2.4` closes Julia's sink/reset/emoji CLI behavior. `.7.3.2.5` now locks
+routed/mirrored behavior across real processes; this still does not claim
+complete backend or CLI parity.
 
 The Julia control surface is:
 
@@ -173,8 +174,8 @@ four cursor-control transitions; and source-boundary marks/decisions. Traced
 and untraced action, blind, and recursion paths preserve identical results.
 Package status was `runtime-trace-events` at the `.4.5.4` runtime-trace boundary; that
 mechanism label is historical, not the current overall backend status. The
-current Julia package/CLI status is `runtime-corpus-full` after the 99/99
-interpreter gate.
+current Julia package/CLI status is `runtime-corpus-primary-cli` after the
+99/99 interpreter and nine-family direct-process gates.
 
 `.7.3.2.1` propagates one caller-owned emitter through the native pipeline. At
 low level, `julia_frontend:parse_spec`, `julia_frontend:validate_spec`,

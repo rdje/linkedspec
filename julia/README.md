@@ -1,14 +1,14 @@
 # LinkedSpec Julia Backend
 
-This directory is the repository-owned Julia backend. Its current `runtime-corpus-full` status covers the
+This directory is the repository-owned Julia backend. Its current `runtime-corpus-primary-cli` status covers the
 package/command surface, manifest validation, source and ActionIR frontends, staged user-function projection/body
 parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch, value/helper/control/callback
 families, cursor/boundary behavior, structured diagnostics/tracing, registered function execution, and controlled
 library-level corpus execution, bounded CLI selection/reporting, and spec-driven top-level user-function source
 composition plus full ordered 99-fixture library and CLI execution. Local-gate integration and native primary
-rule/function execution with direct canonical JSON and stable failure/trace routing are complete; direct-process
-no-drift, cross-backend neutral fixtures, capability census, generated source, and final complete-parity closeout
-remain open.
+rule/function execution with direct canonical JSON, stable failure/trace routing, and nine-family direct-process
+conformance are complete. Cross-backend neutral fixtures, capability census, generated source, and final complete-
+parity closeout remain open; this status is a Julia-local milestone, not a complete backend-parity claim.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -28,8 +28,9 @@ complete with generated source deferred to the future split proof lane. `.7.3.0`
 does not yet match the required cross-variant parser CLI contract. ADR `0023` defines that exact interface;
 `.7.3.2.0` splits repair, `.7.3.2.1` closes compile/parser/function-shell/staged trace coverage, `.7.3.2.2`
 closes exact arguments plus source/input resolution/loading, `.7.3.2.3` closes native rule/function execution plus
-recursively key-sorted direct JSON, and `.7.3.2.4` closes normalized failures/exits/trace routing. `.7.3.2.5` is
-active for direct-process/no-drift closeout.
+recursively key-sorted direct JSON, and `.7.3.2.4` closes normalized failures/exits/trace routing. `.7.3.2.5` now
+closes nine-family direct-process conformance and focused-gate/public-status alignment; `.7.3.2` is done and
+`.7.3.3` is active for honest outer no-drift.
 
 ## Commands
 
@@ -39,8 +40,8 @@ Run the complete repo-owned Julia gate from the repository root:
 bash tools/run_julia_local.sh
 ```
 
-It runs package tests, primary CLI help, a direct canonical-output parse, retired-subcommand rejection,
-corpus-runner help, and the full 99-fixture corpus. The shared
+It runs package tests, the nine-family primary process checker in `tools/check_julia_primary_cli.sh`, corpus-
+runner help, and the full 99-fixture corpus. The shared
 core gate includes it only when explicitly requested:
 
 ```bash
@@ -266,8 +267,9 @@ the full suite passed with 868 assertions and the focused gate remained 99/99. `
 resolution, and loading with 50 focused assertions. `.7.3.2.3` closes native primary execution and recursively
 key-sorted direct JSON with 22 focused assertions. `.7.3.2.4` closes phase-ordered failures, stable stderr/exit,
 and the complete trace sink/reset/emoji matrix with 75 focused assertions; the full suite passes with 1,017
-assertions and 99/99 remains green. `.7.3.2.5` is active for direct-process/no-drift closeout. Generated source
-remains deferred but blocks complete parity because Rust exports it.
+assertions and 99/99 remains green. `.7.3.2.5` now closes nine direct process families and status is
+`runtime-corpus-primary-cli`; `.7.3.3` is active for honest outer no-drift. Generated source remains deferred but
+blocks complete parity because Rust exports it.
 
 Library example:
 

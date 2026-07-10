@@ -25,7 +25,7 @@ The implemented backend CLI surfaces are not currently interface-equivalent:
 - Julia `bin/linkedspec_julia.jl` now accepts only the exact parser option contract, rejects subcommands/
   positionals as usage `2`, prepares deterministic named/file/inline source plus literal/file input, executes it
   through the native pipeline, emits recursively key-sorted direct JSON, and has stable local failure/trace
-  routing. Direct-process no-drift remains active `.7.3.2.5` work.
+  routing and nine-family local process conformance. Global neutral fixture identity remains open.
 - The Rust workspace contains library crates and no binary target or `src/bin` entrypoint.
 
 ADR `0006` already requires the same backend features and semantics. The director clarified that distinct backend
@@ -41,4 +41,4 @@ Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specif
 [[language-agnostic-backend-vision]], [[dart-specific-cli]], [[julia-mdbook-usage-status]],
 [[julia-primary-cli-arguments-resolution-loading]],
 [[julia-primary-cli-native-execution-canonical-json]],
-[[julia-primary-cli-failure-trace-routing]].
+[[julia-primary-cli-failure-trace-routing]], [[julia-primary-cli-process-conformance]].

@@ -55,7 +55,7 @@ Three backbone items tracked major structural modernization — all done:
 
 - **Documentation and book sync** — the book is kept aligned with the codebase as features land and surfaces evolve.
 - **Variant-agnostic documentation** — this book is being aligned so it describes the `.spec` contract, DSL, and helper semantics backend-neutrally, with the Perl implementation shown as the reference backend rather than as "the" implementation.
-- **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred parity work. Dart and Julia both have green 99/99 interpreter milestones. ADR `0023` owns the stricter completion boundary. Julia `.7.3.2.4` now closes stable primary failures/exits and trace routing after native execution/JSON; `.7.3.2.5` is active for direct-process/no-drift closeout. Global `.1.5` owns Perl/Rust/Dart/four-backend CLI convergence, `.1.6` the full public capability census, and `.3` public generated-source parity. Lua follows after current-backend convergence and inherits both native embedding and exact interface gates.
+- **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred parity work. Dart and Julia both have green 99/99 interpreter milestones. ADR `0023` owns the stricter completion boundary. Julia `.7.3.2` now closes its local primary CLI through nine real-process families and status `runtime-corpus-primary-cli`; `.7.3.3` is active for honest outer no-drift. Global `.1.5` owns Perl/Rust/Dart/four-backend CLI convergence, `.1.6` the full public capability census, and `.3` public generated-source parity. Lua follows after current-backend convergence and inherits both native embedding and exact interface gates.
 - **Dart backend parity** - `DART-BACKEND-PARITY` is complete only for the scoped interpreter-first Dart milestone. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
   deferred to a future split source-emitter lane rather than required for the current conformance claim. The repo now has a `dart/` backend package with a Dart-specific CLI,
@@ -222,7 +222,8 @@ Three backbone items tracked major structural modernization — all done:
   positional rejection, named resolution, and source/input loading. `.7.3.2.3` now closes native rule/function
   primary execution and recursively key-sorted direct JSON. `.7.3.2.4` now closes phase-ordered failures, stable
   stderr/exit, and stdout/route/mirror/file/reset/emoji behavior with 75 focused assertions; 1,017 package
-  assertions and 99/99 pass. `.7.3.2.5` is active for direct-process/no-drift closeout. Public generated source remains deferred to `.3` and blocks a complete Julia
+  assertions and 99/99 pass. `.7.3.2.5` now adds nine direct process families and focused-gate delegation; status
+  is `runtime-corpus-primary-cli`, `.7.3.2` is done, and `.7.3.3` is active for honest outer no-drift. Public generated source remains deferred to `.3` and blocks a complete Julia
   capability-parity claim.
 - **Non-current helper code purge** - `NONCURRENT-HELPER-CODE-PURGE` is closed. Perl source cleanup, Rust source cleanup, active test/tool/generated fixture and checked-in `.spec` migration, and final no-drift scans are complete. Retired helper-looking calls use generic unknown-helper fallback behavior, active generic-unknown-helper tests use invented helper names, and active helper-call/label/tag scans are clean.
 - **Rust generated-source breadth** — the Rust interpreter oracle is the current cross-variant parity gate. Generated Rust source already covers the current structural families and a curated corpus subset; broadening generated-source proof to the full manifest remains a separately owned future follow-on.

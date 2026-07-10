@@ -10,7 +10,7 @@ answers:
 date: 2026-07-10
 status: accepted
 tags: [julia, corpus, manifest, json, backend]
-evidence: "JULIA-BACKEND-PARITY.1.3 adds strict manifest IO and .6.3 permanently executes 99/99 through the runner. JULIA-BACKEND-PARITY.7.3.2.2 re-proves 99/99 with the current 920-assertion suite and status runtime-corpus-full."
+evidence: "JULIA-BACKEND-PARITY.1.3 adds strict manifest IO and .6.3 permanently executes 99/99 through the runner. .7.3.2.5 retains 99/99 with 1,017 assertions at runtime-corpus-primary-cli."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
 ---
 

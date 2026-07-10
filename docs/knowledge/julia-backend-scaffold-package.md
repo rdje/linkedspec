@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: accepted
 tags: [julia, backend, scaffold, cli, corpus]
-evidence: "The repo-owned julia package exposes native APIs, primary CLI and separate corpus runner. .6.3 locks 99/99, .7.3.2.3 adds primary execution/JSON, and .7.3.2.4 closes local failure/trace routing. Current tests pass with 1,017 assertions."
+evidence: "The repo-owned julia package exposes native APIs, primary CLI and separate corpus runner. .6.3 locks 99/99; .7.3.2.5 locks nine primary process families. Current tests pass with 1,017 assertions at runtime-corpus-primary-cli."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
 ---
 
@@ -33,4 +33,4 @@ the direct top-rule value as canonical JSON.
 Related facts: [[julia-mdbook-usage-status]], [[julia-local-verification-gate]], [[julia-full-corpus-gate]],
 [[julia-controlled-corpus-execution]], [[julia-corpus-selection-reporting]],
 [[julia-primary-cli-native-execution-canonical-json]],
-[[julia-primary-cli-failure-trace-routing]].
+[[julia-primary-cli-failure-trace-routing]], [[julia-primary-cli-process-conformance]].

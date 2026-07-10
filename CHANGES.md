@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.2.5 — close Julia primary CLI conformance
+
+**Scope:** Standalone real-process conformance, focused-gate delegation, precise public status, task/live/book/
+Knowledge Map alignment, and safe generated-artifact cleanup.
+
+**Implementation:** `tools/check_julia_primary_cli.sh` runs nine isolated Julia process families and compares exact
+stdout/stderr/newline/file bytes plus exit 0/1/2. It covers help, rule/file and function/inline success, parser
+controls, retired usage, compilation/input/invocation failure, ordered context, routed emoji, and byte-identical
+mirror trace. The focused gate delegates primary checks to it. Status is now `runtime-corpus-primary-cli`.
+
+**Verification:** The standalone checker passes; `tools/run_julia_local.sh` additionally passes all 1,017 package
+assertions, separate corpus-runner help, and 99/99 exact corpus outputs. The local status deliberately does not
+claim global CLI fixtures, capability census, or generated-source parity; `.7.3.3` owns honest outer no-drift.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.2.4 — normalize Julia CLI failures and trace routing
 
 **Scope:** Primary phase ordering, stable operational stderr/exit status, structured runtime fields, complete trace

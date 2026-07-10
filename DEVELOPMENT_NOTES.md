@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.7.3.2.5 — exact CLI bytes require process proof, not captured functions):
+  Unit tests over an injectable IO adapter are necessary but cannot prove launch-wrapper exit status, actual stdout/
+  stderr separation, or a trailing newline. One standalone checker should own temp isolation and exact byte
+  comparisons, then be called by the focused gate instead of duplicating partial smokes. A backend-local status can
+  name that completed surface (`runtime-corpus-primary-cli`) only while docs state explicitly that global fixtures,
+  capability census, and public generated-source parity remain separate completion gates.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.7.3.2.4 — CLI parity includes failure phase order and dormant controls):
   A correct option list is insufficient if input IO happens before compilation or a stored trace flag never affects
   output. Defer input-file reads until a parser exists, centralize fixed operational headings and ordered structured

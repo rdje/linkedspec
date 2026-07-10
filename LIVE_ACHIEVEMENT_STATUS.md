@@ -7,8 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.2.5 — close Julia primary CLI conformance**
+  (DONE — local primary CLI is process-locked; `.7.3.3` is active for honest outer no-drift).
+
+  **Change:** A standalone checker now owns nine real-process families with exact stdout/stderr/newline/file bytes
+  and exit 0/1/2. The focused gate delegates to it, and public status advances precisely to
+  `runtime-corpus-primary-cli` without claiming global capability/codegen parity.
+
+  **Proof:** Direct help, rule/function success, retired usage, three operational failures, route, and mirror pass;
+  1,017 package assertions and all 99 corpus outputs remain green.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.7.3.2.4 — normalize Julia CLI failures and trace routing**
-  (DONE — failure/trace behavior is green; `.7.3.2.5` is active for direct-process/no-drift closeout).
+  (DONE — failure/trace behavior is green; `.7.3.2.5` subsequently closed direct-process/no-drift).
 
   **Change:** Compilation now precedes deferred input-file loading. Compilation/input/invocation errors have stable
   stderr/exit `1`, usage remains `2`, and runtime fields are ordered. Stdout/route/mirror, file/no-file, reset,

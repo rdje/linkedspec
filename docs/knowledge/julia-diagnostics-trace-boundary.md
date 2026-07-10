@@ -33,7 +33,7 @@ The historical package/CLI status at this boundary was the precise
 the exact primary CLI, and `.7.3.2.1` now closes source parse/validation/compile,
 function-shell, and staged-dispatch events through the same trace controls/sinks.
 `.7.3.2.4` has since completed primary sink/reset/emoji composition and stable
-runtime-diagnostic rendering; direct-process no-drift remains `.7.3.2.5`.
+runtime-diagnostic rendering; `.7.3.2.5` locks it across real processes.
 `.5.1` added the minimal staged registry
 provider, `.5.2` has since added registered function execution, `.5.3` has closed descriptor-shape parity, and
 `.6.1` added controlled corpus execution; the interpreter corpus has since reached 99/99.
@@ -44,4 +44,4 @@ Related facts: [[julia-runtime-structured-diagnostics]],
 [[julia-user-function-runtime-execution]],
 [[trace-cross-variant-capability-contract]], [[julia-primary-cli-mechanism-audit]],
 [[julia-frontend-compiler-staged-trace-events]],
-[[julia-primary-cli-failure-trace-routing]].
+[[julia-primary-cli-failure-trace-routing]], [[julia-primary-cli-process-conformance]].

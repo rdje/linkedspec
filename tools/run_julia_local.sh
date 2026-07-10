@@ -27,18 +27,9 @@ log "running Julia package tests"
 "$JULIA_CMD" --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'
 
 log "checking Julia CLIs"
-"$JULIA_CMD" --project=julia --startup-file=no --history-file=no julia/bin/linkedspec_julia.jl --help >/dev/null
-primary_output=$("$JULIA_CMD" --project=julia --startup-file=no --history-file=no \
- julia/bin/linkedspec_julia.jl \
- --inline-spec $'Top::\n /x/\n E { return(hash("b", 2, "a", 1)) }\n' \
- --input x)
-[[ "$primary_output" == '{"a":1,"b":2}' ]] || \
- fail "primary Julia CLI did not emit the expected canonical direct value"
-set +e
-"$JULIA_CMD" --project=julia --startup-file=no --history-file=no julia/bin/linkedspec_julia.jl status >/dev/null 2>&1
-primary_status_code=$?
-set -e
-[[ "$primary_status_code" -eq 2 ]] || fail "primary Julia CLI accepted retired status subcommand"
+LINKEDSPEC_JULIA_CMD="$JULIA_CMD" \
+LINKEDSPEC_JULIA_DEPOT_PATH="$JULIA_DEPOT_PATH" \
+bash tools/check_julia_primary_cli.sh
 "$JULIA_CMD" --project=julia --startup-file=no --history-file=no julia/bin/corpus_runner.jl --help >/dev/null
 
 log "running full Julia corpus gate"

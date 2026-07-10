@@ -5,11 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.2.5` closes Julia-local primary CLI conformance. A standalone
+  checker owns nine real-process help/success/usage/operational/route/mirror families with exact stdout/stderr/
+  newline/file bytes and exit 0/1/2; the focused gate delegates to it, 1,017 package assertions, and 99/99 corpus.
+  Public status is the precise `runtime-corpus-primary-cli`, not complete parity. `.7.3.2` is done and `.7.3.3` is
+  active; global CLI fixtures, capability census, and generated-source convergence remain separately owned.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.2.4` normalizes Julia's primary failure and trace-routing
   boundary. Source compilation precedes deferred input-file loading; stable compilation/input/invocation stderr
   exits `1`, usage exits `2`, and runtime diagnostics render ordered fields. Stdout/route/mirror, empty/missing/file
   sinks, reset, quiet, and level-specific emoji now compose through the existing emitter. Seventy-five focused
-  assertions, the 1,017-assertion suite, and 99/99 pass; `.7.3.2.5` is active for direct-process/no-drift closeout.
+  assertions, the 1,017-assertion suite, and 99/99 pass; `.7.3.2.5` has since closed direct-process/no-drift.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.2.3` connects Julia's prepared primary requests to the same
   native rule-first/spec-driven-function fallback, compiler, and runtime used in memory. Top-rule, seek/consume,
   source identity, and one trace emitter propagate through the pipeline. The CLI serializes the direct top-rule
