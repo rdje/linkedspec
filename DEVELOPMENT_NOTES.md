@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.4.3.6 — Julia helper/value no-drift):
+  The final `.4.3` audit found no runtime semantic correction: Julia `.4.3.1` already implemented the
+  no-autovivification updated-root/failed-`nothing` assignment contract that Dart needed to repair during its own
+  closeout, and `.4.3.2` through `.4.3.5` align with the scoped helper catalog. Package status deliberately stays
+  `runtime-value-control-tree` so later cursor, trace, staged-function, and corpus work is not overclaimed. The
+  only drift was durable presentation state: stale `.3`/`.4.3` parent statuses and redundant end-of-line
+  semicolons in central helper-catalog `.spec` examples. `.4.4` now owns cursor controls and boundary capture.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.4.3.5 — Julia runtime value/control/tree helpers):
   Julia now keeps value-block flow distinct from the rule return exception channel, so local returns can short
   circuit immediate blocks without escaping the enclosing action. Structured statement controls share indexed

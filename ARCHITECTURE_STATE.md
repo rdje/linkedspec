@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.3.6` closes Julia helper/value no-drift. The 567-assertion suite,
+  `runtime-value-control-tree` package status, mdBook contracts, live docs, and Knowledge Map agree; `.4.3.1`
+  already supplied the final checked no-autovivification nested-write contract, so no runtime correction was
+  required. Stale `.3`/`.4.3` parent metadata and central helper-catalog line-ending semicolons are reconciled;
+  `.4.4` owns cursor controls and boundary capture.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.3.5` separates Julia rule-level action flow from block-local
   value flow; adds attached and marker controls, lazy inline branches, deterministic while guards, immediate
   helper/receiver with-blocks, scoped binding snapshots, and hash/array tree walk/map/reduce callbacks. Hash

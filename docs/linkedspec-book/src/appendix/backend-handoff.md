@@ -303,8 +303,9 @@ aliases/symbol callees, invalid-input boundaries, and compatible receiver chains
 pipelines, split/flatten/reducer bridges, and statement-only end mutations. `.4.3.4` has added copied hash views
 and transformations, statement-only named set-key mutation, direct hash-index assignment, merge-slot resolution,
 and explicit flat-style splicing. `.4.3.5` has added expression-valued blocks, attached/marker/inline controls,
-deterministic while guards, immediate helper/receiver with-blocks, and scoped hash/array tree callbacks. The active
-Julia frontier is `.4.3.6` for final helper/value no-drift.
+deterministic while guards, immediate helper/receiver with-blocks, and scoped hash/array tree callbacks. The
+`.4.3.6` closeout confirms helper/value no-drift at 567 assertions without a runtime correction. The active Julia
+frontier is `.4.4` for cursor controls and boundary capture.
 Future Julia and
 Lua backend plans must own their own
 variant-specific CLIs rather than relying on one
@@ -408,8 +409,10 @@ set-key mutation, direct hash-index assignment, merge-slot resolution, explicit 
 preservation pass focused tests. `.4.3.5` is now implemented too: expression-valued blocks with local returns,
 attached/marker/inline controls, deterministic while guards, immediate helper/receiver with-blocks, scoped binding
 restoration, and hash/array walk/map/reduce callbacks pass focused tests. `.4.3.6` owns final helper/value no-drift.
-Later leaves own
-cursor controls, staged parser execution, diagnostics/trace, and corpus execution.
+The closeout confirms runtime tests/status, mdBook contracts, live docs, and fact cards agree at 567
+assertions; package status remains `runtime-value-control-tree`, and no runtime correction was required. `.4.4`
+owns cursor controls and boundary capture. Later leaves own staged parser execution, diagnostics/trace, and corpus
+execution.
 
 ### Dart Backend Commands
 

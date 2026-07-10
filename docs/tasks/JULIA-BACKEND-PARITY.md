@@ -135,7 +135,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.2.4 - project Julia function-definition shells`
 
 - ID: `JULIA-BACKEND-PARITY.3`
-  Status: `active`
+  Status: `done`
   Goal: Implement helper/action AST, contract resolution, user-function registry, and compiled-state construction.
   Children: `.3.1`, `.3.2`, `.3.3`, `.3.4`
 
@@ -213,14 +213,16 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.4.2 - add Julia runtime rule interpreter`
 
 - ID: `JULIA-BACKEND-PARITY.4.3`
-  Status: `active`
+  Status: `done`
   Goal: Implement helper/value runtime families in safe batches.
   Children: `.4.3.0`, `.4.3.1`, `.4.3.2`, `.4.3.3`, `.4.3.4`, `.4.3.5`, `.4.3.6`
   Acceptance: Core value/store/capture helpers, string/number helpers, array helpers, hash helpers,
     expression-valued blocks, structured controls, `with` trailing blocks, and tree traversal callbacks either pass
     focused tests or are split into narrower leaves before code.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `.4.3.1` through `.4.3.5` implement the scoped value/helper/control/callback families;
+    `.4.3.6` confirms focused runtime coverage, status, mdBook helper contracts, live docs, and Knowledge Map facts
+    agree at 567 assertions before cursor-control work.
+  Commit: closed by `JULIA-BACKEND-PARITY.4.3.6 - close Julia helper value no drift`
 
 - ID: `JULIA-BACKEND-PARITY.4.3.0`
   Status: `done`
@@ -289,15 +291,18 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.4.3.5 - add Julia runtime controls and tree callbacks`
 
 - ID: `JULIA-BACKEND-PARITY.4.3.6`
-  Status: `active`
+  Status: `done`
   Goal: Close helper/value no-drift for the Julia runtime slice.
   Acceptance: mdBook helper examples, Julia focused runtime tests/status, live docs, and Knowledge Map facts agree
     on the helper/value boundary before `.4.4` cursor-control work starts.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - the audit confirms Julia already implements the final no-autovivification nested-write
+    contract and current block/helper/tree semantics; full `Pkg.test()` passes with 567 assertions, CLI status
+    remains `runtime-value-control-tree`, mdBook/KM/live-doc/governance gates pass, the stale `.3` container status
+    is reconciled, and central helper-catalog examples use semicolons only as same-line separators.
+  Commit: `JULIA-BACKEND-PARITY.4.3.6 - close Julia helper value no drift`
 
 - ID: `JULIA-BACKEND-PARITY.4.4`
-  Status: `pending`
+  Status: `active`
   Goal: Implement explicit cursor controls, boundary capture, parse-mode cursor behavior, and deterministic safety
     limits.
   Acceptance: `save_cursor()` / `restore_cursor()`, `rewind_match_start()` / `rewind_entry_start()`, and
@@ -412,7 +417,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.4.3.6` | `active` | Close helper/value no-drift across focused tests, status surfaces, mdBook examples, live docs, and the Knowledge Map before cursor-control work. |
+| 1 | `JULIA-BACKEND-PARITY.4.4` | `active` | Add explicit cursor save/restore, match/entry rewinds, and non-consuming boundary capture over the closed helper/value model. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -889,6 +894,42 @@ Value/control/callback evidence recorded on 2026-07-10:
   snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `MEMORY.md` advance the frontier
   to `.4.3.6`.
 
+## `JULIA-BACKEND-PARITY.4.3.6` Helper/Value No-Drift Result
+
+No-drift evidence recorded on 2026-07-10:
+
+- Focused Julia runtime coverage and the canonical helper catalog agree on typed values/stores, checked nested
+  assignment, capture reads, string/numeric helpers, arrays, hashes, expression-valued blocks, controls,
+  immediate with-blocks, and hash/array tree callbacks.
+- The Dart closeout's behavioral correction is already present from Julia `.4.3.1`: nested writes validate the
+  complete path before mutation, never autovivify intermediates, return the updated root on success, return
+  `nothing` on failure, and allow array replacement or append exactly at length.
+- Package/CLI status remains `runtime-value-control-tree`, accurately naming the last implemented family rather
+  than claiming later cursor, trace, staged-function, or corpus work.
+- The audit found no runtime semantic correction. It reconciled the stale `.3` parent container to `done` and
+  removed redundant line-ending semicolons from central helper-catalog `.spec` examples; semicolons remain only
+  where they separate adjacent statements on one physical line.
+- The `.4.3` helper/value container is closed; explicit cursor controls and boundary capture advance to `.4.4`.
+
+## `JULIA-BACKEND-PARITY.4.3.6` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The scoped runtime families were green, but their final no-drift agreement had not
+  been audited and the task metadata still marked the exhausted `.3` container active. Central helper-catalog
+  examples also retained redundant end-of-line semicolons after the separator contract was clarified.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `.4.3.1` through `.4.3.5` landed behavior one mechanism at a time; no final
+  slice had yet compared their tests/status/facts to mdBook contracts or reconciled parent metadata and example
+  authoring style.
+- [x] **FIX** — Confirmed the final nested-write and helper/control/callback contracts against focused tests,
+  retained the accurate package status, closed `.3` and `.4.3`, normalized central helper-catalog examples, and
+  advanced the single frontier to `.4.4`.
+- [x] **ADDRESSED (verified)** — Full Julia tests, CLI status, mdBook build, Knowledge Map generation/check,
+  memory architecture, task-tree metadata, doctrine, and whitespace gates pass with no runtime behavior change.
+- [x] **NO REGRESSION** — Full Julia `Pkg.test()` remains green with 567 assertions; CLI status remains
+  `runtime-value-control-tree` and no later runtime family is overclaimed.
+- [x] **LOCKSTEP** — Julia README, task tree/index, roadmaps, mdBook status/handoff/catalog, Knowledge Map,
+  architecture snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `MEMORY.md`
+  advance the frontier to `.4.4`.
+
 ## `JULIA-BACKEND-PARITY.4.2` Runtime Rule Interpreter Result
 
 Rule-interpreter evidence recorded on 2026-07-10:
@@ -1094,6 +1135,9 @@ Rule-interpreter evidence recorded on 2026-07-10:
 - `2026-07-10`: `.4.3.5` separates block-local value flow from rule-level returns, restores every shadowed store
   category after immediate callbacks, and preserves lazy failure: non-aggregate tree receivers do not run callback
   blocks or evaluate reduce initial expressions.
+- `2026-07-10`: `.4.3.6` confirms the Julia helper/value runtime already follows the final nested-write contract
+  and retains `runtime-value-control-tree` as an intentionally scoped status; the closeout corrects metadata and
+  mdBook example style without changing runtime behavior.
 
 ## Open Questions
 
@@ -1104,8 +1148,8 @@ Rule-interpreter evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.4.3.6`. Core values and all current helper/control/block/callback families are green; the final
-  helper/value no-drift sweep is the next owned boundary.
+- None for `.4.4`. The `.4.3` helper/value container is closed; explicit cursor controls and non-consuming
+  boundary capture are the next owned implementation boundary.
 
 ## Verification Log
 
@@ -1131,6 +1175,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.3` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Two focused array cases prove pure pipelines, string/regex bridges, flatten/splice shape, numeric terminals, split replacement, statement-only mutations, and tagged records; total Julia tests pass with 558 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.4` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. One focused hash case proves copied views/transforms, pure and statement mutation boundaries, merge-slot resolution, direct assignment, explicit flatten splicing, and nested-map preservation; total Julia tests pass with 559 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.5` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Eight focused assertions prove expression-valued blocks, local/rule return boundaries, attached/marker/inline controls, while limits, helper/receiver with-blocks and arity fences, hash/array traversal callbacks, lazy non-aggregate failure, and scoped restoration; total Julia tests pass with 567 assertions. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.6` | No runtime behavior change; full Julia `Pkg.test()`; Julia CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Helper/value tests, status, mdBook contracts, live docs, and fact cards agree at 567 assertions; `.3`/`.4.3` metadata and helper-catalog separator style are reconciled, and `.4.4` becomes active. |
 
 ## Commit Log
 
@@ -1156,9 +1201,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.4.3.3` | `JULIA-BACKEND-PARITY.4.3.3 - add Julia runtime array helpers` | Pure array helper/receiver pipelines, flatten/splice and split bridges, reducer terminals, and statement-only end mutations; hashes advance to `.4.3.4`. |
 | `JULIA-BACKEND-PARITY.4.3.4` | `JULIA-BACKEND-PARITY.4.3.4 - add Julia runtime hash helpers` | Copied hash helper/receiver views and transformations, statement-only named set-key mutation, direct assignment integration, merge-slot resolution, and explicit hash splicing; controls/blocks/callbacks advance to `.4.3.5`. |
 | `JULIA-BACKEND-PARITY.4.3.5` | `JULIA-BACKEND-PARITY.4.3.5 - add Julia runtime controls and tree callbacks` | Expression-valued blocks, attached/marker/inline controls, helper/receiver with-blocks, and scoped hash/array tree traversal callbacks; no-drift advances to `.4.3.6`. |
+| `JULIA-BACKEND-PARITY.4.3.6` | `JULIA-BACKEND-PARITY.4.3.6 - close Julia helper value no drift` | Runtime/status/docs/KM no-drift closeout, parent metadata reconciliation, and helper-catalog separator alignment; cursor controls advance to `.4.4`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.4.3.6` helper/value no-drift. Julia's 567-assertion suite already proves the final
+  checked nested-write contract and scoped helper/control/callback behavior; package status remains
+  `runtime-value-control-tree`. The closeout reconciles stale `.3`/`.4.3` metadata and central helper-catalog
+  line-ending semicolons, closes `.4.3`, and advances cursor controls to `.4.4` without runtime behavior change.
 - `2026-07-10`: Completed `.4.3.5` value/control/block/callback execution. Julia now supports expression-valued
   blocks with local return flow, attached and marker structured controls, lazy inline branches, deterministic
   while limits, helper/receiver with-blocks, and scoped hash/array walk/map/reduce callbacks with lazy

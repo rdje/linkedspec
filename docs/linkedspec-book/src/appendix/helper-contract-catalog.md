@@ -23,10 +23,10 @@ These literals are accepted in return payloads, constructor payloads, assignment
 append RHS values, hash keys/values, and flow predicates:
 
 ```text
-return(array(true, false, "ready", 42, undef));
-flag = true;
-items += false;
-meta["enabled"] = true;
+return(array(true, false, "ready", 42, undef))
+flag = true
+items += false
+meta["enabled"] = true
 if(false); return("bad"); else(); return("good"); endif()
 ```
 
@@ -55,8 +55,8 @@ such as blind-call edges, source-language payloads, generated Perl host hashrefs
 A bare hash-literal key is a dynamic scalar key, not a fixed string field name:
 
 ```text
-set(key, "kind");
-set(value, "token");
+set(key, "kind")
+set(value, "token")
 return({ key : value });       # {"kind": "token"}
 return({ "kind" : value });    # fixed "kind" field
 ```
@@ -89,7 +89,7 @@ return({ set(x, "a"); x });                    # "a"
 set(out, { set(x, "a"); return(x) });          # $out = "a"
 return({ return("a"); "b" });                  # "a"
 set(out, { set(x, "a"); return(x); set(x, "b"); x });  # $out = "a"
-return(array({ set(x, "a"); x }, { "k" : x }));
+return(array({ set(x, "a"); x }, { "k" : x }))
 return({ [3, 1, 2] }.sorted().join_values(","));        # "1,2,3"
 return({ " a-b " }.trim().split("-").count());          # 2
 ```
@@ -161,9 +161,9 @@ dispatch rule.
 
   value : /(\w+)/
    I {
-     value = entry_group(0);
-     set(array(items), [value, cat(value, "!")]);
-     set(hash(meta), { "value" : value });
+     value = entry_group(0)
+     set(array(items), [value, cat(value, "!")])
+     set(hash(meta), { "value" : value })
      return(array(value, array(items), hash(meta), name = value, name))
    }
   ```
@@ -231,9 +231,9 @@ dispatch rule.
   ```text
   Top::
    -> Done {
-     set(payload, hash("children", array(hash("name", "one"), hash("name", "two"))));
-     set(i, 1);
-     payload["children"][i]["name"] = "updated";
+     set(payload, hash("children", array(hash("name", "one"), hash("name", "two"))))
+     set(i, 1)
+     payload["children"][i]["name"] = "updated"
      return(payload["children"][i]["name"])
    }
 
@@ -530,12 +530,12 @@ dispatch rule.
   ```text
   Top::
    -> Done {
-    set(value, "b");
-    items.push_back("a");
-    items.push_back(value);
-    items.push_front("z");
-    items.pop_back();
-    items.pop_front();
+    set(value, "b")
+    items.push_back("a")
+    items.push_back(value)
+    items.push_front("z")
+    items.pop_back()
+    items.pop_front()
     return(copy(array(items)))
    }
 
@@ -1311,12 +1311,12 @@ pair:AND
  /\]/
  -> pair[0] { mark_here(body_start) }
  -> pair[2] {
-   mark_match_start(colon_start);
-   left = capture_between(body_start, colon_start);
+   mark_match_start(colon_start)
+   left = capture_between(body_start, colon_start)
    mark_here(right_start)
  }
  -> pair[4] {
-   mark_match_start(close_start);
+   mark_match_start(close_start)
    return(hash(
      "left", left,
      "left_len", capture_len_between(body_start, colon_start),
@@ -1503,7 +1503,7 @@ These helpers read from the **current match** — the regex capture that trigger
 >  /\s*=\s*/
 >  /(?<value>[A-Za-z_]+)/
 >  -> value[1] {
->    eq = match_text();
+>    eq = match_text()
 >  }
 >  -> value[2] {
 >    return(hash(
@@ -1638,7 +1638,7 @@ These helpers read from the **current match** — the regex capture that trigger
   ```text
   demo::
    -> child {
-     retv = call(child);
+     retv = call(child)
      return(hash("child", retv, "len", length(retv)))
    }
 

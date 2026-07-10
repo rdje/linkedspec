@@ -19,7 +19,8 @@ added by `JULIA-BACKEND-PARITY.4.1`, and first executable rule dispatch was adde
 `JULIA-BACKEND-PARITY.4.2`. `JULIA-BACKEND-PARITY.4.3.0` split helper/value work by runtime mechanism. Core
 value/store/capture behavior landed in `.4.3.1`, and string/scalar plus numeric helpers landed in `.4.3.2`. The
 array helper and mutation boundary landed in `.4.3.3`, and hash helper and mutation behavior landed in `.4.3.4`;
-`.4.3.5` landed value/control/block/callback execution, and `.4.3.6` is active for final helper/value no-drift.
+`.4.3.5` landed value/control/block/callback execution, and `.4.3.6` closed final helper/value no-drift. `.4.4` is
+active for explicit cursor controls and boundary capture.
 
 ## Commands
 
@@ -101,5 +102,6 @@ typed split replacement, and statement-only named/scalar-held end mutations. `.4
 and pure transformations, base/overlay-aware merge resolution, direct hash-index assignment, explicit flat-style
 splicing, and statement-only named set-key mutation. `.4.3.5` executes expression-valued blocks with local returns,
 attached/marker/inline controls, deterministic while guards, immediate helper/receiver with-blocks, and scoped
-hash/array tree traversal callbacks. `.4.3.6` owns final helper/value no-drift; cursor
-controls, staged parser execution, diagnostics, tracing, and corpus execution remain later leaves.
+hash/array tree traversal callbacks. `.4.3.6` confirms the complete helper/value boundary is no-drift at 567
+assertions while retaining package status `runtime-value-control-tree`. `.4.4` owns cursor controls and boundary
+capture; staged parser execution, diagnostics, tracing, and corpus execution remain later leaves.

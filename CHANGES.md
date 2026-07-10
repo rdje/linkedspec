@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.4.3.6 — close Julia helper value no drift
+
+**Scope:** Final Julia helper/value runtime no-drift across focused tests, package/CLI status, mdBook helper
+contracts and status/handoff, live docs, task metadata, Knowledge Map, architecture snapshot, and resume pointer.
+
+**Change:** Audited the `.4.3.1` through `.4.3.5` implementation boundary against the portable helper catalog and
+confirmed Julia already implements final checked nested writes plus current helper/control/callback behavior.
+Runtime behavior and package status `runtime-value-control-tree` are unchanged. Reconciled stale `.3` and `.4.3`
+parent statuses, normalized central helper-catalog `.spec` examples so end-of-line statements do not carry
+redundant semicolons, closed `.4.3`, and advanced the frontier to `.4.4` cursor controls.
+
+**Validation:** `Pkg.test()` remains green with 567 assertions; Julia CLI status, mdBook build, memory architecture,
+task-tree metadata, Knowledge Map, doctrine, and `git diff --check` pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.4.3.5 — add Julia runtime controls and tree callbacks
 
 **Scope:** Julia expression-valued block flow, structured action controls, lazy inline branches, helper/receiver

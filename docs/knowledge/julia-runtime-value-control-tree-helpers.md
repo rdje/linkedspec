@@ -43,7 +43,7 @@ and reduce-only `acc`. `walk_leaves` returns a copied source tree,
 `reduce_leaves(initial)` returns the final accumulator. Non-aggregate receivers
 return `nothing` without executing either the callback or reduce initializer.
 
-Related facts: [[julia-runtime-hash-helpers]], [[julia-runtime-array-helpers]],
+Related facts: [[julia-runtime-helper-value-no-drift]], [[julia-runtime-hash-helpers]], [[julia-runtime-array-helpers]],
 [[dart-runtime-value-control-tree-helpers]],
 [[terse-expression-valued-block-early-return]],
 [[terse-trailing-block-argument-mvp]],
