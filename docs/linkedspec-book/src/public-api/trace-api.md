@@ -237,9 +237,9 @@ Any future LinkedSpec variant must satisfy this checklist before it claims trace
 The Perl reference backend ships `bin/linkedspec`, and the Julia variant ships
 `julia/bin/linkedspec_julia.jl`. ADR `0024` requires every primary command to
 project these controls through one canonical phase protocol; Perl is the current
-61-case reference after strict UTF-8 expansion. Rust's missing command is split into exact boundary/loading,
-native entry/mode execution, canonical trace, and unchanged-manifest closeout leaves; Dart/Julia convergence
-remains under the global CLI lane.
+61-case reference after strict UTF-8 expansion. `linkedspec-rust` now passes its exact boundary/loading and
+operational-failure subset (29/61); native entry/mode/direct-result execution and canonical trace remain separate
+active leaves. Dart/Julia convergence remains under the global CLI lane.
 
 ```sh
 perl bin/linkedspec --spec-file demo.spec --input-file demo.txt \

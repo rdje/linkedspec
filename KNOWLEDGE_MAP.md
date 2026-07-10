@@ -2635,7 +2635,7 @@ _Implemented backend CLIs do not yet expose one identical user-facing interface_
 
 - **answers:** do all LinkedSpec backend CLIs have the same options | are the Perl Rust Dart and Julia CLIs equivalent | does Rust have a LinkedSpec CLI binary | what does the current Perl CLI do | what do the current Dart and Julia CLIs do | why was JULIA-BACKEND-PARITY.7.3 split
 - **date:** 2026-07-10 · **status:** current
-- **evidence:** `JULIA-BACKEND-PARITY.7.3.0 finds Perl parser CLI, Dart/Julia corpus CLIs, and no Rust binary. ADR 0023 defines the target. Perl is the exact 61-case reference; Rust .1.5.2.0 splits its repair and .1 is active; Julia has local exact-process proof but global fixture identity remains.`
+- **evidence:** `JULIA-BACKEND-PARITY.7.3.0 found no Rust binary. ADR 0023 defines the target. Perl is the 61-case reference; Rust .1.5.2.1 now lands its binary boundary at 29/61 and .2 is active; Julia has local exact-process proof but global fixture identity remains.`
 - **reverify:** `sed -n '1,230p' bin/linkedspec; sed -n '1,330p' dart/lib/src/cli/linkedspec_dart_cli.dart; sed -n '1,220p' julia/src/cli/LinkedSpecJuliaCli.jl; rg -n '\[\[bin\]\]|^name =|^members =' rust/Cargo.toml rust/*/Cargo.toml; find rust -type f -path '*/src/bin/*' -print`
 - **source:** [`docs/knowledge/cross-backend-cli-contract-gap.md`](docs/knowledge/cross-backend-cli-contract-gap.md)
 
@@ -4354,7 +4354,7 @@ _Rust primary CLI work is split across adapter and native execution seams_
 
 - **answers:** what Rust APIs can a primary LinkedSpec CLI reuse | why does Rust need a native top rule execution option | why does Rust need a global parse mode execution option | does Rust already have a LinkedSpec CLI binary | how is FUTURE-PARITY-BACKLOG 1.5.2 split
 - **date:** 2026-07-10 · **status:** current
-- **evidence:** `FUTURE-PARITY-BACKLOG.1.5.2.0 audits the two-crate workspace and splits .1-.4 before code.`
+- **evidence:** `FUTURE-PARITY-BACKLOG.1.5.2.0 audits/splits the workspace. .1 lands the command boundary at 29/61; .2 is active for native controls/direct result.`
 - **reverify:** `sed -n '1,120p' rust/Cargo.toml; find rust -type f -path '*/src/bin/*' -print; rg -n 'parse_spec_with_user_functions|pub fn compile|pub fn validate|pub fn execute|top_rule\\(|parse_mode' rust/linkedspec-core/src rust/linkedspec-runtime/src`
 - **source:** [`docs/knowledge/rust-primary-cli-mechanism-audit.md`](docs/knowledge/rust-primary-cli-mechanism-audit.md)
 

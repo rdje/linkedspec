@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.2.1 — add Rust CLI boundary**
+  (DONE — 29/61 exact; `.1.5.2.2` active for reusable direct-result/entry/mode execution).
+
+  **Implementation:** Added `linkedspec_runtime::primary_cli` and `linkedspec-rust` with exact manual arguments,
+  shared help bytes, deterministic named/file/inline source loading, deferred input files, strict preserved UTF-8,
+  stable phase failures, raw channels, and native parser/compiler/runtime delegation.
+
+  **Proof:** Four unit tests, all 22 help/usage fixtures, three invalid-UTF-8 cases, and four operational failures
+  pass. The 32 residuals are exactly 11 known accumulator-wrapped results plus 21 trace cases. The full package's
+  133 unit, 99 oracle, 190 integration, three emitter, and 10 trace-control tests pass, as do formatting/build,
+  default/POSIX argument fixtures, docs/KM/governance/book, and safe artifact cleanup.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.2.0 — split Rust primary CLI work**
   (DONE — `.1.5.2.1` is active for the exact binary/argument/loading boundary).
 

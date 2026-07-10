@@ -92,7 +92,7 @@ backend-internal scope/decision/mark/dump streams.
 
 The Rust rollout audit found that its libraries already own full-source parsing, validation, compilation,
 structured execution, and rich native tracing, while no primary binary exists yet. The command work is therefore
-split into adapter-only argument/loading/UTF-8 policy, reusable native entry-rule and global parse-mode controls,
+split into adapter-only argument/loading/UTF-8 policy, reusable native entry-rule/global parse-mode/direct-result controls,
 canonical result/failure projection, portable phase trace, and the unchanged 61-case gate. Entry/mode controls are
 library capabilities—not CLI-only mutations—so native callers retain the same observable operation.
 
@@ -105,8 +105,8 @@ outside the portable text interface, and arbitrary binary parsing would require 
 future explicit byte-stream contract. Perl implementation is exact through `.1.5.1.6.2`: strict argv/file
 decoding, preserved BOM/code points/newlines, recursive canonical JSON, stable invalid-file phases, and exact
 trace byte counts pass 61 shared cases. `.6.3` closes final reference no-drift; Rust `.1.5.2.0` audits/splits its
-missing command and `.1.5.2.1` owns the exact boundary/loading implementation. This does not claim that other
-backends already pass the manifest.
+missing command. `.1.5.2.1` now lands the exact boundary/loading layer at 29/61; `.1.5.2.2` owns reusable
+entry/mode/direct-result execution and `.3` owns canonical trace. This does not claim full Rust conformance yet.
 
 For example, this portable action-edge grammar deliberately constructs object keys out of
 order:
@@ -143,8 +143,8 @@ This is a contract and active convergence target, not a claim that every current
     Global `.1.5.1.5` closed 53 exact Perl cases: two help, 20 usage, seven success, four operational failure, and
     20 trace families in default/POSIX environments. A signoff probe then exposed UTF-8 argv/JSON mojibake;
     `.1.5.1.6.2` fixes the adapter and adds eight exact Unicode/invalid families, bringing Perl to 61/61. `.6.3`
-    closes final reference no-drift; Rust `.1.5.2.0` splits the missing primary binary and `.1.5.2.1` owns its
-    exact argument/loading boundary against that manifest.
+    closes final reference no-drift; Rust `.1.5.2.1` lands its exact argument/loading boundary at 29/61 and
+    `.1.5.2.2` owns reusable direct-result/entry/mode execution against that manifest.
 
 A separate parked direction, `FUTURE-PARITY-BACKLOG.10.1`, will design deep semantic introspection. The intended
 contract is one versioned, deterministic semantic query model exposed idiomatically from every native backend:

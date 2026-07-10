@@ -323,17 +323,27 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.5.2.0 - split Rust primary CLI work`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.2.1`
-  Status: `active`
+  Status: `done`
   Goal: Add the Rust binary boundary with exact arguments, help, strict UTF-8 loading, and deterministic resolution.
   Acceptance: A `linkedspec-rust` binary exposes only ADR `0023`'s case-sensitive, non-abbreviating options; exact
     help/usage and exit `2` match shared bytes; named/file/inline source plus literal/file input preparation obeys
     compile-before-input ordering, repository fallback rules, and ADR `0025` strict preserved UTF-8 without owning
     parser/runtime semantics.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-10.** `linkedspec-runtime::primary_cli` and the `linkedspec-rust` binary now share
+    one exact manual parser, fixture-derived help, deterministic current-directory/repository named resolution,
+    deferred input loading, strict `String::from_utf8` file decoding, stable phase headings, and raw process-channel
+    bytes. Four focused unit tests pass. The built binary passes all 22 shared help/usage cases byte-for-byte and
+    the full manifest baseline passes 29/61: the other seven passes are all three invalid-UTF-8 phase cases and all
+    four operational failures. The full runtime package passes 133 unit, 99 oracle, 190 integration, three source-
+    emitter, and 10 trace-control tests. The 32 expected residuals are exactly 11 direct top-value result cases (the
+    existing documented Rust accumulator wrapper) plus 21 canonical-trace cases owned by `.2`/`.3`. Formatting,
+    build, runtime tests, default/POSIX argument fixtures, governance, mdBook, and cleanup pass. Strict Clippy on
+    the touched crate remains obstructed only by pre-existing core/runtime lints; the new module's large-enum lint
+    was fixed; formatting and `cargo build` are green.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.2.1 - add Rust CLI boundary`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Expose native Rust entry-rule/parse-mode controls and complete primary execution/result/failure projection.
   Acceptance: The native runtime provides idiomatic reusable controls for optional entry rule and global parse
     mode; the CLI composes full-spec parse, validation, compile, and `Engine` execution through public APIs; nested
@@ -581,8 +591,8 @@ before implementation.
 | 10 | `FUTURE-PARITY-BACKLOG.1.5.1.6.2` | `done` | Strict Perl argv/files/JSON and eight Unicode/invalid cases bring the shared suite to 61. |
 | 11 | `FUTURE-PARITY-BACKLOG.1.5.1.6.3` | `done` | Perl task/book/KM/help/fixtures agree on the 61-case strict UTF-8 reference. |
 | 12 | `FUTURE-PARITY-BACKLOG.1.5.2.0` | `done` | Rust native/adapter seams are audited and implementation is split before code. |
-| 13 | `FUTURE-PARITY-BACKLOG.1.5.2.1` | `active` | Add exact Rust binary arguments/help/UTF-8 loading and named resolution. |
-| 14 | `FUTURE-PARITY-BACKLOG.1.5.2.2` | `pending` | Add reusable native entry/mode controls plus execution/result/failure projection. |
+| 13 | `FUTURE-PARITY-BACKLOG.1.5.2.1` | `done` | Exact Rust binary arguments/help/UTF-8 loading and named resolution pass their shared cases. |
+| 14 | `FUTURE-PARITY-BACKLOG.1.5.2.2` | `active` | Add reusable native entry/mode/direct-result controls and close execution projection. |
 | 15 | `FUTURE-PARITY-BACKLOG.1.5.2.3` | `pending` | Add canonical Rust primary trace projection and sinks. |
 | 16 | `FUTURE-PARITY-BACKLOG.1.5.2.4` | `pending` | Prove all 61 cases, gate Rust, and close no-drift. |
 | 17 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
@@ -1021,7 +1031,7 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Perl `.1.5.1` is closed at 61 cases; Rust `.1.5.2.0` is done and `.1.5.2.1` is active.
+- None. Perl `.1.5.1` is closed at 61 cases; Rust `.1.5.2.1` is done at 29/61 and `.1.5.2.2` is active.
   Global CLI/capability convergence precedes Lua `.1.3`.
 
 ## Verification Log

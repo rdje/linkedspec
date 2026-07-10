@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, parity, perl, rust, dart, julia, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.3.0 finds Perl parser CLI, Dart/Julia corpus CLIs, and no Rust binary. ADR 0023 defines the target. Perl is the exact 61-case reference; Rust .1.5.2.0 splits its repair and .1 is active; Julia has local exact-process proof but global fixture identity remains."
+evidence: "JULIA-BACKEND-PARITY.7.3.0 found no Rust binary. ADR 0023 defines the target. Perl is the 61-case reference; Rust .1.5.2.1 now lands its binary boundary at 29/61 and .2 is active; Julia has local exact-process proof but global fixture identity remains."
 reverify: "sed -n '1,230p' bin/linkedspec; sed -n '1,330p' dart/lib/src/cli/linkedspec_dart_cli.dart; sed -n '1,220p' julia/src/cli/LinkedSpecJuliaCli.jl; rg -n '\[\[bin\]\]|^name =|^members =' rust/Cargo.toml rust/*/Cargo.toml; find rust -type f -path '*/src/bin/*' -print"
 ---
 
@@ -21,14 +21,15 @@ The implemented backend CLI surfaces are not currently interface-equivalent:
   input. It exposes top-rule, parse-mode, and trace controls, prints canonical JSON, and distinguishes runtime
   failure (`1`) from usage failure (`2`). `.1.5.1.5` closes canonical trace, and `.1.5.1.6` resolves the surfaced
   UTF-8 argv/JSON gap. Perl passes the complete 61-case default/POSIX reference; Rust `.1.5.2.0` has split the
-  missing command and `.1.5.2.1` is active for its exact boundary/loading layer.
+  missing command; `.1.5.2.1` now lands its exact boundary/loading layer at 29/61 and `.1.5.2.2` is active.
 - Dart `bin/linkedspec_dart.dart` is a manifest corpus validator/executor. Its options select corpus cases/windows,
   and it reports usage failure as `64`.
 - Julia `bin/linkedspec_julia.jl` now accepts only the exact parser option contract, rejects subcommands/
   positionals as usage `2`, prepares deterministic named/file/inline source plus literal/file input, executes it
   through the native pipeline, emits recursively key-sorted direct JSON, and has stable local failure/trace
   routing and nine-family local process conformance. Global neutral fixture identity remains open.
-- The Rust workspace contains library crates and no binary target or `src/bin` entrypoint.
+- The Rust workspace now contains `linkedspec-rust`. Its exact arguments/help/loading boundary passes 29/61 shared
+  cases; reusable direct-result/entry/mode execution and canonical CLI trace remain active under `.1.5.2.2`/`.3`.
 
 ADR `0006` already requires the same backend features and semantics. The director clarified that distinct backend
 executable names must also expose the exact same command structure, option list and meanings, positional arguments,

@@ -73,6 +73,8 @@ Top-level directories and files:
 - `rust/`
   - Native Rust backend workspace. `linkedspec-core` exposes `.spec` parsing/compilation and
     `linkedspec-runtime::engine::Engine` executes compiled specs directly over Rust string/result values.
+  - `linkedspec-runtime/src/bin/linkedspec-rust.rs` is the Rust primary command. Its exact argument/help/loading
+    boundary is landed; direct-result execution and canonical trace remain active convergence work.
 - `specs/`
   - LinkedSpec grammar/spec definitions (`*.spec`).
 - `t/`
@@ -195,8 +197,9 @@ Top-level project docs:
   failure, 20 canonical trace, and eight strict UTF-8 behavior cases. Perl passes all 61 current cases. ADR `0025`
   defines Unicode scalar text encoded as strict preserved UTF-8—not Unicode as synonymous with UTF-8. `.1.5.1.6.2`
   now decodes Perl argv/files strictly, preserves BOM/code points/newlines, rejects invalid files by phase, and
-  emits recursive canonical JSON once; `.6.3` closes Perl as the 61-case reference. Rust `.1.5.2.0` audits/splits
-  the missing command, and `.1.5.2.1` is active for exact binary arguments/help/strict-UTF-8 loading.
+  emits recursive canonical JSON once; `.6.3` closes Perl as the 61-case reference. Rust `.1.5.2.1` adds
+  `linkedspec-rust`, exact arguments/help/strict-UTF-8 loading, and a 29/61 baseline; `.1.5.2.2` is active for
+  reusable entry/mode/direct-result execution before canonical trace.
 - Deep semantic introspection plus MCP is parked under `FUTURE-PARITY-BACKLOG.10.1`: native backend APIs own one
   versioned semantic model, while MCP remains a thin transport rather than a backend-specific source of truth.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full

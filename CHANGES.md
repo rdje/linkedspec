@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.2.1 — add Rust CLI boundary
+
+**Implementation:** Added `linkedspec_runtime::primary_cli` plus `linkedspec-rust`. The adapter uses one exact
+case-sensitive/non-abbreviating parser and the shared help template, prepares named/file/inline source and
+literal/deferred-file input deterministically, strictly decodes file bytes as UTF-8, preserves text unchanged,
+delegates language execution to native APIs, and projects stable usage/phase exits onto raw process channels.
+
+**Proof/frontier:** Four focused tests and all 22 exact help/usage cases pass. The full unchanged manifest baseline
+is 29/61: strict invalid-UTF-8 phases and all operational failures also pass. Eleven direct-value cases isolate the
+documented Rust accumulator wrapper for `.1.5.2.2`; 21 trace cases remain owned by `.3`. The full Rust runtime
+package (133 unit, 99 oracle, 190 integration, three source-emitter, 10 trace-control) passes, as do formatting,
+build, default/POSIX arguments, docs/KM/governance/book, and safe Rust artifact cleanup.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.2.0 — split Rust primary CLI work
 
 **Audit:** The Rust workspace has native full-spec parsing, validation, compilation, structured execution, and rich

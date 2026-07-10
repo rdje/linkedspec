@@ -53,8 +53,9 @@ escaping, and all failure phases. The canonical local gate invokes this same run
 ADR `0025` defines Unicode scalar text encoded as strict preserved UTF-8 at process/file boundaries. `.6.2`
 now decodes Perl argv/files, emits recursive UTF-8 JSON once, and locks inline/file Unicode, normalization
 preservation, input BOM/newlines, non-stripped source BOM, invalid phases, and trace byte counts. `.6.3` closes
-the reference; Rust `.1.5.2.0` splits its missing command and `.1.5.2.1` now implements the exact boundary before
-consuming the completed manifest. UTF-16/UTF-32 are not implicit inputs.
+the reference. Rust `.1.5.2.1` now passes the 22 help/usage, three invalid-UTF-8, and four operational-failure
+cases (29/61); `.1.5.2.2` owns direct-result execution and `.3` owns the remaining trace cases. UTF-16/UTF-32 are
+not implicit inputs.
 
 Schema version 1 workspace inputs use `path` plus exactly one checked-in `source`
 or explicit `bytes_hex`. Hex data is non-empty, lowercase, and even-length, and is

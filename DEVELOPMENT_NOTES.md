@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.2.1 — a shared process suite cleanly partitions backend work):
+  An exact CLI boundary can land before result/trace completion without obscuring scope. Rust's 29/61 baseline
+  proves argument grammar, help bytes, source/input phase order, strict UTF-8 failures, and operational headings.
+  Every residual maps to an already-owned mechanism: 11 direct results expose `Engine::execute`'s documented
+  accumulator wrapper and 21 need canonical trace. Fix direct top-value behavior through a reusable native API;
+  never guess that an arbitrary one-element JSON array should be unwrapped in the CLI.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.2.0 — CLI controls must expose reusable native capability):
   A thin CLI may own portable option grammar, loading policy, stable diagnostics, and trace projection, but it
   must not gain exclusive semantic controls. Rust already owns parsing/compilation/execution in libraries, yet its
