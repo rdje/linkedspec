@@ -18,22 +18,23 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.2.3` — Julia `validate_spec(...)` validates parsed source ASTs for
-  top-rule presence, duplicate labels/functions, function registry shape, edge consistency, references, regex
-  structure, and strict unused-rule behavior.
-- prior_leaf: `JULIA-BACKEND-PARITY.2.2` — Julia `parse_spec(...)` parses core `.spec` rule paragraphs into source
-  AST types, with focused tests over all checked-in specs and rule-only corpus specs.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.2.4` — Julia consumes spec-shaped `function_definition` /
+  `function_definition_error` nodes, validates staged sidecars, strips function spans, and parses the remaining
+  rule source without a raw Julia `fn` scanner.
+- prior_leaf: `JULIA-BACKEND-PARITY.2.3` — Julia `validate_spec(...)` validates parsed source ASTs for top-rule
+  presence, duplicate labels/functions, function registry shape, edge consistency, references, regex structure,
+  and strict unused-rule behavior.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.2.3 - add Julia frontend validation`; previous committed HEAD is
-  `cebe92f0 JULIA-BACKEND-PARITY.2.2 - add Julia source spec parser`.
+  `JULIA-BACKEND-PARITY.2.4 - project Julia function-definition shells`; previous committed HEAD is
+  `b91e441a JULIA-BACKEND-PARITY.2.3 - add Julia frontend validation`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; current frontier after the current commit is `.2.4`.
-- next_action: resume PNT at `JULIA-BACKEND-PARITY.2.4` to consume top-level `fn` shells through the
-  spec-defined `function_definition` / `function_definition_error` owner before ActionIR and runtime work.
+- active_work_unit: `JULIA-BACKEND-PARITY`; current frontier after the current commit is `.3.1`.
+- next_action: resume PNT at `JULIA-BACKEND-PARITY.3.1` to parse helper/action source into typed AST nodes before
+  contract resolution, compilation, or runtime behavior.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
 - latest_bootstrap_read: 2026-07-10 read README, memory architecture, session bootstrap, COMMIT, task-tree index,
@@ -46,5 +47,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.2.3` commit; do not pivot unless the repo
+- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.2.4` commit; do not pivot unless the repo
   is handoff-ready.

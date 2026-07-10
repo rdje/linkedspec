@@ -26,9 +26,9 @@ mismatches, raw fallback lines, mixed action/blind-call edge families, grouped a
 block, undefined edge targets, target regex-slot bounds, structural regex errors, and strict unused-rule behavior.
 
 The focused Julia tests mirror the Dart frontend validator cases and validate all 21 checked-in `specs/*.spec`
-files plus rule-only corpus `input.spec` files. Top-level `fn` shells are still intentionally deferred to
-`JULIA-BACKEND-PARITY.2.4`, which must consume `specs/user_function_definition.spec` as the function-definition
-owner.
+files plus rule-only corpus `input.spec` files. `JULIA-BACKEND-PARITY.2.4` has since added projection of
+`function_definition` / `function_definition_error` nodes shaped by `specs/user_function_definition.spec`, so
+`validate_spec(...)` can validate `SpecFile.functions` produced by that frontend path.
 
 Related facts: [[julia-core-spec-parser]], [[julia-frontend-ast-json-contract]],
-[[dart-frontend-validation]], [[text-to-ast-backend-doctrine]].
+[[julia-user-function-definition-projection]], [[dart-frontend-validation]], [[text-to-ast-backend-doctrine]].

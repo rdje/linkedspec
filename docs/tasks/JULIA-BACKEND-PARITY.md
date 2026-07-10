@@ -90,7 +90,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.1.3 - add Julia corpus manifest IO`
 
 - ID: `JULIA-BACKEND-PARITY.2`
-  Status: `active`
+  Status: `done`
   Goal: Implement the Julia `.spec` frontend.
   Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`
 
@@ -125,15 +125,17 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.2.3 - add Julia frontend validation`
 
 - ID: `JULIA-BACKEND-PARITY.2.4`
-  Status: `pending`
+  Status: `done`
   Goal: Integrate `specs/user_function_definition.spec` as the function-definition shell owner.
   Acceptance: Julia consumes the spec-defined `function_definition` / `function_definition_error` AST shape and
     does not maintain a competing host-language raw scanner as the semantic contract.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `Pkg.test()` covers spec-shaped function-definition node projection, malformed
+    `function_definition_error` handling, staged sidecar drift rejection, wrapper-shape normalization, stripped
+    rule-source parsing, and validation of the resulting `SpecFile`.
+  Commit: `JULIA-BACKEND-PARITY.2.4 - project Julia function-definition shells`
 
 - ID: `JULIA-BACKEND-PARITY.3`
-  Status: `pending`
+  Status: `active`
   Goal: Implement helper/action AST, contract resolution, user-function registry, and compiled-state construction.
   Children: `.3.1`, `.3.2`, `.3.3`, `.3.4`
 
@@ -316,7 +318,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.2.4` | `pending` | Consume top-level `fn` shells through the spec-defined function-definition owner before ActionIR work. |
+| 1 | `JULIA-BACKEND-PARITY.3.1` | `pending` | Parse helper/action source into typed AST nodes before contract resolution or compilation. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -437,6 +439,25 @@ Source validation evidence recorded on 2026-07-10:
 - Validation smoke tests cover all 21 checked-in `specs/*.spec` files and rule-only corpus `input.spec` files while
   top-level `fn` corpus shells remain intentionally skipped until `.2.4`.
 
+## `JULIA-BACKEND-PARITY.2.4` Function-Definition Shell Projection Result
+
+Function-shell projection evidence recorded on 2026-07-10:
+
+- `julia/src/spec/UserFunctionDefinitionShell.jl` adds `project_user_function_definition_asts(source, nodes)`,
+  `parse_spec_with_user_function_definition_asts(source, nodes)`, and
+  `definition_nodes_from_user_function_definition_output(output)`.
+- Julia consumes the neutral `function_definition` / `function_definition_error` AST shape owned by
+  `specs/user_function_definition.spec`; it does not add a competing host-language scanner for top-level `fn`
+  shells.
+- Projection validates name/params/arity, source and body spans, `body_payload`, `body_parse_job`, parser/top-rule
+  sidecar identity, result/failure policies, and diagnostic owner, then normalizes parent AST paths and body-parse
+  job IDs to `functions.<index>.body_source`.
+- Function-definition source spans are replaced with spaces while preserving newlines before rule parsing, so
+  `parse_spec(...)` remains rule-only and callers with spec-returned function nodes use
+  `parse_spec_with_user_function_definition_asts(...)`.
+- Focused tests cover successful projection, malformed error nodes, sidecar drift rejection, output wrapper
+  normalization, stripped rule parsing, and validation of the resulting `SpecFile`.
+
 ## Decisions
 
 - `2026-07-09`: Julia follows Dart in the ADR `0021` backend rollout order. `FUTURE-PARITY-BACKLOG.1.2`
@@ -464,6 +485,9 @@ Source validation evidence recorded on 2026-07-10:
 - `2026-07-10`: `.2.3` follows the Dart frontend-validator boundary for parsed source ASTs. It deliberately does
   not parse top-level `fn` shells, lower helper/action code, compile specs, execute runtime behavior, or enable
   corpus `--execute`.
+- `2026-07-10`: `.2.4` follows the spec-defined top-level user-function shell boundary. Julia consumes
+  `function_definition` nodes produced by `specs/user_function_definition.spec` and keeps `parse_spec(...)`
+  rule-only; executing that shell spec in Julia remains a later runtime/staged-registry concern.
 
 ## Open Questions
 
@@ -474,8 +498,8 @@ Source validation evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.2.4`. Julia now parses and validates rule source; top-level `fn` shell projection is the next owned
-  boundary.
+- None for `.3.1`. Julia frontend parsing, validation, and function-shell projection are in place; typed
+  helper/action AST parsing is the next owned boundary.
 
 ## Verification Log
 
@@ -488,6 +512,7 @@ Source validation evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.2.1` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia source AST/data types round-trip through JSON over spec files, function definitions, staged parse jobs, rule modes, body elements, edges, and fluent calls. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.2.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia source parser tests cover focused syntax fixtures, all 21 checked-in specs, and rule-only corpus specs; total Julia tests pass. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.2.3` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia source validation tests cover Dart parity validator cases, all 21 checked-in specs, and rule-only corpus specs; total Julia tests pass. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.2.4` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia function-shell projection tests cover spec-shaped nodes, staged sidecar validation, stripped source parsing, and output-shape normalization; total Julia tests pass. |
 
 ## Commit Log
 
@@ -500,9 +525,15 @@ Source validation evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.2.1` | `JULIA-BACKEND-PARITY.2.1 - define Julia frontend AST data types` | Source AST/data model and JSON projection; parser implementation advances to `.2.2`. |
 | `JULIA-BACKEND-PARITY.2.2` | `JULIA-BACKEND-PARITY.2.2 - add Julia source spec parser` | Source parser for rule paragraphs and shipped-spec/corpus parser smoke; validation advances to `.2.3`. |
 | `JULIA-BACKEND-PARITY.2.3` | `JULIA-BACKEND-PARITY.2.3 - add Julia frontend validation` | Source AST validation and strict-syntax checks; function-shell projection advances to `.2.4`. |
+| `JULIA-BACKEND-PARITY.2.4` | `JULIA-BACKEND-PARITY.2.4 - project Julia function-definition shells` | Spec-defined function-shell AST projection; frontend container closes and ActionIR parsing advances to `.3.1`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.2.4` function-definition shell projection. Julia now consumes the spec-defined
+  `function_definition` / `function_definition_error` node shape, validates source/body spans and staged sidecars,
+  normalizes function body parse-job paths, strips function spans before rule parsing, and keeps direct
+  `parse_spec(...)` rule-only. `Pkg.test()` covers the projection path and the `.2` frontend container is closed;
+  `.3.1` owns typed helper/action AST parsing.
 - `2026-07-10`: Completed `.2.3` frontend validation. `julia/src/spec/Validator.jl` now validates parsed source
   ASTs for top-rule presence, duplicate labels/functions, function registry collisions, malformed raw/body regex
   structure, edge family consistency, undefined references, target slot bounds, and strict unused-rule behavior.

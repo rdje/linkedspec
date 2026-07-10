@@ -23,6 +23,24 @@ function _throws_validation_message(call, needle)
     return false
 end
 
+function _throws_parse_message(call, needle)
+    try
+        call()
+    catch error
+        return error isa SpecParseException && occursin(needle, sprint(showerror, error))
+    end
+    return false
+end
+
+function _throws_user_function_message(call, needle)
+    try
+        call()
+    catch error
+        return error isa UserFunctionDefinitionException && occursin(needle, sprint(showerror, error))
+    end
+    return false
+end
+
 function _write_manifest(root, cases; case_count = length(cases), format = 1)
     manifest = Dict(
         "format" => format,
@@ -89,6 +107,107 @@ function _function_definition(name, params; arity = length(params))
     )
 end
 
+function _definition_node(source, name, params, body_source)
+    source_start = _find_offset(source, "fn $name")
+    body_start = _find_offset(source, body_source; start = source_start)
+    body_end = body_start + length(collect(body_source))
+    source_end = _find_offset(source, "}"; start = body_end) + 1
+    source_text = _slice_chars(source, source_start, source_end)
+    source_span = _span(source, source_start, source_end)
+    body_span = _span(source, body_start, body_end)
+
+    return Dict{String,Any}(
+        "type" => "function_definition",
+        "kind" => "user_function_definition",
+        "version" => 1,
+        "name" => name,
+        "params" => params,
+        "arity" => length(params),
+        "source_text" => source_text,
+        "source_span" => source_span,
+        "body_source" => body_source,
+        "body_span" => body_span,
+        "body_payload" => Dict{String,Any}(
+            "kind" => "staged_payload",
+            "version" => 1,
+            "node_kind" => "function_definition",
+            "payload_kind" => "function_body",
+            "parent_ast_path" => ["functions", "__pending_source_order__", "body_source"],
+            "function_name" => name,
+            "params" => params,
+            "arity" => length(params),
+            "text" => body_source,
+            "source_span" => body_span,
+            "provenance" => Any[
+                Dict("kind" => "source_slice", "source_span" => body_span),
+            ],
+        ),
+        "body_parse_job" => Dict{String,Any}(
+            "kind" => "parse_job",
+            "version" => 1,
+            "job_id" => "parse_job:function_body:$name:actionir-body.spec:action_block",
+            "parent_ast_path" => ["functions", "__pending_source_order__", "body_source"],
+            "node_kind" => "function_definition",
+            "payload_kind" => "function_body",
+            "function_name" => name,
+            "params" => params,
+            "arity" => length(params),
+            "text" => body_source,
+            "source_span" => body_span,
+            "parser_spec_id" => "actionir-body.spec",
+            "top_rule" => "action_block",
+            "result_policy" => "replace_field",
+            "result_field" => "body_ast",
+            "failure_policy" => "fail",
+            "diagnostic_owner" => "function_body",
+        ),
+    )
+end
+
+function _find_offset(source, needle; start = 0)
+    chars = collect(source)
+    needle_chars = collect(needle)
+    if isempty(needle_chars)
+        return start
+    end
+    last_start = length(chars) - length(needle_chars) + 1
+    for index in (start + 1):last_start
+        if chars[index:(index + length(needle_chars) - 1)] == needle_chars
+            return index - 1
+        end
+    end
+    error("missing $needle")
+end
+
+function _slice_chars(source, start, stop)
+    if start == stop
+        return ""
+    end
+    return String(collect(source)[(start + 1):stop])
+end
+
+function _span(source, start, stop)
+    return Dict{String,Any}(
+        "start" => start,
+        "end" => stop,
+        "line_start" => _line_at(source, start),
+        "line_end" => _line_at(source, stop),
+    )
+end
+
+function _line_at(source, offset)
+    line = 1
+    for (index, char) in enumerate(collect(source))
+        if index > offset
+            break
+        end
+        if char == '\n'
+            line += 1
+        end
+    end
+    return line
+end
+
 @testset "LinkedSpecJulia scaffold" begin
     @test backend_name() == "julia"
     @test cli_entrypoint() == "julia/bin/linkedspec_julia.jl"
@@ -97,7 +216,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "source-validator"
+    @test status.parity == "function-shell-projection"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -107,7 +226,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: source-validator", String(take!(status_output)))
+    @test occursin("parity: function-shell-projection", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -395,6 +514,83 @@ B: /b/
         parsed_count += 1
     end
     @test parsed_count > 80
+end
+
+@testset "User function definition shell projection" begin
+    source = join([
+        "fn zero() {return(\"zero\")}",
+        "Top::",
+        " /x/ -> Done { return(zero()) }",
+        "",
+        "Done:",
+        " /[a-z]+/",
+        "",
+        "fn after(value) { return(value) }",
+        "",
+    ], "\n")
+
+    nodes = [
+        _definition_node(source, "zero", String[], "return(\"zero\")"),
+        _definition_node(source, "after", ["value"], " return(value) "),
+    ]
+
+    @test _throws_parse_message(
+        () -> parse_spec_with_user_function_definition_asts(source, Any[]),
+        "rule parse after function extraction failed",
+    )
+
+    projection = project_user_function_definition_asts(source, nodes)
+    @test [function_definition.name for function_definition in projection.functions] == ["zero", "after"]
+    @test length(split(projection.stripped_source, '\n'; keepempty = true)) ==
+        length(split(source, '\n'; keepempty = true))
+    @test !occursin("fn zero", projection.stripped_source)
+    @test occursin("Top::", projection.stripped_source)
+
+    zero = projection.functions[1]
+    @test isempty(zero.params)
+    @test zero.arity == 0
+    @test zero.body_source == "return(\"zero\")"
+    @test zero.body_payload["parent_ast_path"] == ["functions", "0", "body_source"]
+    @test zero.body_parse_job.parent_ast_path == ["functions", "0", "body_source"]
+    @test zero.body_parse_job.job_id ==
+        "parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:11-25"
+    @test zero.body_parse_job.version == 1
+    @test zero.body_parse_job.function_name == "zero"
+    @test zero.body_parse_job.params == String[]
+    @test zero.body_parse_job.arity == 0
+    @test zero.body_parse_job.diagnostic_owner == "function_body"
+    @test zero.body_ast === nothing
+
+    parsed = parse_spec_with_user_function_definition_asts(source, nodes)
+    @test validate_spec(parsed) === nothing
+    @test length(parsed.functions) == 2
+    @test [rule.header.label for rule in parsed.rules] == ["Top", "Done"]
+
+    malformed = Dict{String,Any}(
+        "type" => "function_definition_error",
+        "kind" => "user_function_definition_error",
+        "message" => "invalid user function definition",
+        "source_text" => "fn bad(value",
+        "source_span" => Dict("start" => 0, "end" => 12, "line_start" => 1, "line_end" => 1),
+    )
+    @test _throws_parse_message(
+        () -> project_user_function_definition_asts("fn bad(value\nTop::\n /x/\n", [malformed]),
+        "user function definition parse error at line 1",
+    )
+
+    drift = _definition_node("fn zero() {return(\"zero\")}\nTop::\n /x/\n", "zero", String[], "return(\"zero\")")
+    drift["body_parse_job"]["text"] = "return(\"drift\")"
+    @test _throws_user_function_message(
+        () -> project_user_function_definition_asts("fn zero() {return(\"zero\")}\nTop::\n /x/\n", [drift]),
+        "body_parse_job text does not match body_source",
+    )
+
+    node = Dict{String,Any}("type" => "function_definition")
+    @test definition_nodes_from_user_function_definition_output(nothing) == Any[]
+    @test definition_nodes_from_user_function_definition_output(Any[]) == Any[]
+    @test definition_nodes_from_user_function_definition_output(node) == Any[node]
+    @test definition_nodes_from_user_function_definition_output(Any[node]) == Any[node]
+    @test definition_nodes_from_user_function_definition_output(Any[Any[node], Any[]]) == Any[node]
 end
 
 @testset "Corpus manifest IO" begin

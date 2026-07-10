@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.2.4 — project Julia function-definition shells
+
+**Scope:** Julia spec-defined user-function shell projection, package exports/status, focused projection tests,
+README, task-tree frontier update, roadmap/task-tree index alignment, mdBook status/handoff text, Knowledge Map,
+architecture snapshot, live docs, and resume pointer.
+
+**Change:** Added `julia/src/spec/UserFunctionDefinitionShell.jl` with
+`project_user_function_definition_asts(...)`, `parse_spec_with_user_function_definition_asts(...)`, and
+`definition_nodes_from_user_function_definition_output(...)`. Julia now consumes the neutral
+`function_definition` / `function_definition_error` node shape owned by `specs/user_function_definition.spec`,
+validates source/body spans and staged sidecars, normalizes `functions.<index>.body_source` paths/job IDs, strips
+function-definition spans before rule parsing, and preserves direct `parse_spec(...)` as rule-only rather than a
+raw Julia scanner. The Julia package status now reports `function-shell-projection`.
+
+**Validation:** `Pkg.test()` passes with 279 tests, including 27 function-shell projection tests. Commit-time
+docs/governance validation covers mdBook, memory architecture, task-tree metadata, Knowledge Map, doctrine, and
+`git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.2.3 — add Julia frontend validation
 
 **Scope:** Julia source-AST validation, package exports/status, focused validation tests, README, task-tree

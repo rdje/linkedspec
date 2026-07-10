@@ -1,15 +1,15 @@
 # LinkedSpec Julia Backend
 
 This directory is the repository-owned Julia backend scaffold. The current status is package and command
-surface, manifest-backed corpus validation, source AST/data types, core `.spec` source parsing, and frontend
-source validation: no top-level function-shell projection, ActionIR parser, runtime interpreter, or corpus
+surface, manifest-backed corpus validation, source AST/data types, core `.spec` source parsing, frontend source
+validation, and spec-shaped user-function shell projection: no ActionIR parser, runtime interpreter, or corpus
 execution semantics are implemented yet.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
 was added by `JULIA-BACKEND-PARITY.2.2`. Frontend validation and strict syntax behavior were added by
-`JULIA-BACKEND-PARITY.2.3`. The active next boundary is `JULIA-BACKEND-PARITY.2.4` for top-level function-shell
-projection through `specs/user_function_definition.spec`.
+`JULIA-BACKEND-PARITY.2.3`. Function-definition shell projection was added by `JULIA-BACKEND-PARITY.2.4`. The
+active next boundary is `JULIA-BACKEND-PARITY.3.1` for typed helper/action AST parsing.
 
 ## Commands
 
@@ -51,6 +51,9 @@ source spans, staged parse jobs, rule headers/modes, body element variants, edge
 action/blind-call edges, fluent continuations, markers, comments, and block boundaries. `src/spec/Validator.jl`
 exposes `validate_spec(...)` for top-rule presence, duplicate labels/functions, user-function registry shape,
 raw body-line rejection, mixed edge-family rejection, grouped action-edge block requirements, undefined edge
-targets, regex-slot bounds, regex structure, and strict unused-rule checks. Later leaves own top-level function
-shell parsing, typed helper/action AST, compiled state, runtime interpretation, staged functions, diagnostics,
-tracing, and corpus execution.
+targets, regex-slot bounds, regex structure, and strict unused-rule checks. `src/spec/UserFunctionDefinitionShell.jl`
+exposes `project_user_function_definition_asts(...)` and
+`parse_spec_with_user_function_definition_asts(...)` for consuming `function_definition` /
+`function_definition_error` nodes shaped by `specs/user_function_definition.spec`; direct `parse_spec(...)` remains
+rule-only and does not raw-scan `fn` shells. Later leaves own typed helper/action AST, compiled state, runtime
+interpretation, staged functions, diagnostics, tracing, and corpus execution.

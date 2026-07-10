@@ -27,8 +27,10 @@ braces inside code blocks, raw fallback lines, all 21 checked-in `specs/*.spec` 
 `input.spec` files.
 
 This is source parsing only. Frontend validation and strict syntax have since landed in
-`JULIA-BACKEND-PARITY.2.3`; top-level function-shell projection through `specs/user_function_definition.spec`
-remains `JULIA-BACKEND-PARITY.2.4`.
+`JULIA-BACKEND-PARITY.2.3`; top-level function-shell projection through the
+`specs/user_function_definition.spec` node shape has since landed in `JULIA-BACKEND-PARITY.2.4`. Direct
+`parse_spec(...)` remains rule-only.
 
-Related facts: [[julia-frontend-ast-json-contract]], [[julia-frontend-validation]], [[dart-core-spec-parser]],
-[[julia-corpus-manifest-io]], [[text-to-ast-backend-doctrine]].
+Related facts: [[julia-frontend-ast-json-contract]], [[julia-frontend-validation]],
+[[julia-user-function-definition-projection]], [[dart-core-spec-parser]], [[julia-corpus-manifest-io]],
+[[text-to-ast-backend-doctrine]].

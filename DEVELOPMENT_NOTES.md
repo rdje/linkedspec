@@ -1,13 +1,22 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.2.4 — Julia function-definition shell projection):
+  Julia now consumes the spec-defined top-level user-function shell node shape without adding a Julia raw scanner.
+  `julia/src/spec/UserFunctionDefinitionShell.jl` projects `function_definition` nodes returned by
+  `specs/user_function_definition.spec` into `FunctionDefinition` records, validates source/body spans and staged
+  sidecars, normalizes `functions.<index>.body_source` paths and body-parse job IDs, strips function-definition
+  spans before rule parsing, and rejects `function_definition_error` nodes as `SpecParseException`s. `parse_spec(...)`
+  remains rule-only; callers that have spec-returned function nodes use
+  `parse_spec_with_user_function_definition_asts(...)`. Next leaf is `.3.1` for typed helper/action AST parsing.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.2.3 — Julia frontend validation):
   Julia now validates parsed source ASTs before helper/action lowering or runtime behavior. `validate_spec(...)`
   lives in `julia/src/spec/Validator.jl` and checks top-rule presence, duplicate rules/functions, user-function
   registry collisions and reserved params, raw body fallback lines, mixed action/blind edge families, grouped
   action-edge block requirements, undefined references, regex-slot bounds, regex structure, and strict unused
   rules. The testset mirrors the Dart frontend validator cases and validates all checked-in specs plus rule-only
-  corpus specs. Next leaf is `.2.4` for top-level `fn` shell projection through `specs/user_function_definition.spec`.
+  corpus specs. Top-level `fn` shell projection has since landed in `.2.4`.
 
 - 2026-07-10 (JULIA-BACKEND-PARITY.2.2 — Julia source parser):
   Julia now parses core `.spec` rule paragraphs into the `.2.1` source AST types. `parse_spec(source)` lives in

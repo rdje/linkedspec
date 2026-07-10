@@ -5,18 +5,24 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.2.4` adds Julia function-definition shell projection.
+  `julia/src/spec/UserFunctionDefinitionShell.jl` consumes `function_definition` / `function_definition_error`
+  nodes shaped by `specs/user_function_definition.spec`, validates source/body spans and staged sidecars,
+  normalizes `functions.<index>.body_source` parse-job paths, strips function-definition spans before rule parsing,
+  and keeps direct `parse_spec(...)` rule-only. The next frontier is typed helper/action AST parsing in
+  `JULIA-BACKEND-PARITY.3.1`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.2.3` adds Julia frontend validation.
   `julia/src/spec/Validator.jl` exposes `validate_spec(spec; strict_syntax=false)` and
   `SpecValidationException`, checking top-rule presence, duplicate labels/functions, user-function registry shape,
   raw fallback lines, mixed edge families, grouped action blocks, undefined references, regex-slot bounds, regex
   structure, and strict unused-rule behavior. Tests validate all checked-in specs and rule-only corpus specs.
-  Top-level `fn` shells remain `JULIA-BACKEND-PARITY.2.4`.
+  Top-level `fn` shell projection has since landed in `JULIA-BACKEND-PARITY.2.4`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.2.2` adds Julia source parsing.
   `julia/src/spec/Parser.jl` exposes `parse_spec(source)` and `SpecParseException`, producing the `.2.1` source AST
   types for rule headers/modes, regex slots, lifecycle blocks, action/blind-call edges, fluent continuations,
   markers, comments, and block boundaries. Tests parse all 21 checked-in `specs/*.spec` files and rule-only corpus
   specs. Frontend validation has since landed in `JULIA-BACKEND-PARITY.2.3`; top-level `fn` shells remain
-  `JULIA-BACKEND-PARITY.2.4`.
+  rule-only for direct `parse_spec(...)`, with spec-shaped projection added in `JULIA-BACKEND-PARITY.2.4`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.2.1` adds Julia source AST/data types.
   `julia/src/spec/Ast.jl` defines data records and JSON projection for spec files, function definitions, source
   spans, staged parse jobs, rule headers/modes, body element variants, edge targets, and fluent calls. The field

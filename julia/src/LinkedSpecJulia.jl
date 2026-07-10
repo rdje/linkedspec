@@ -20,7 +20,9 @@ export backend_name,
     LifecycleMarkerBodyElementKind,
     load_corpus_fixtures,
     parse_spec,
+    parse_spec_with_user_function_definition_asts,
     PlainBlockBodyElementKind,
+    project_user_function_definition_asts,
     RawBodyElementKind,
     RegexBodyElementKind,
     Rule,
@@ -34,8 +36,11 @@ export backend_name,
     SplitMarkerBodyElementKind,
     StagedParseJob,
     StagedSourceSpan,
+    UserFunctionDefinitionException,
+    UserFunctionDefinitionProjection,
     and_bounded_rule_mode,
     default_rule_mode,
+    definition_nodes_from_user_function_definition_output,
     find_rule,
     from_json,
     is_and,
@@ -54,11 +59,12 @@ const PACKAGE_NAME = "LinkedSpecJulia"
 const PACKAGE_VERSION = v"0.1.0"
 const CLI_ENTRYPOINT = "julia/bin/linkedspec_julia.jl"
 const CORPUS_RUNNER_ENTRYPOINT = "julia/bin/corpus_runner.jl"
-const PARITY_STATUS = "source-validator"
+const PARITY_STATUS = "function-shell-projection"
 
 include("corpus/CorpusManifest.jl")
 include("spec/Ast.jl")
 include("spec/Parser.jl")
+include("spec/UserFunctionDefinitionShell.jl")
 include("spec/Validator.jl")
 include("cli/LinkedSpecJuliaCli.jl")
 
