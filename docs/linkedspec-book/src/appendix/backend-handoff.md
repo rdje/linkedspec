@@ -77,8 +77,8 @@ This is a contract and active convergence target, not a claim that every current
     function-shell/staged trace coverage, `.7.3.2.2` closes exact argument/source/input handling, `.7.3.2.3`
     closes execution/direct canonical JSON, `.7.3.2.4` closes errors/exits/trace routing, and `.7.3.2.5` closes
     nine-family direct-command conformance. `.7.3.3` closes the local audit without claiming global identity.
-    Global `.1.5.1.0` splits Perl normalization into harness/help, arguments, success/IO, failures, and trace/gate;
-    `.1.5.1.1` is the active neutral-fixture frontier.
+    Global `.1.5.1.1` now supplies the strict arbitrary-command manifest/runner and exact help baseline;
+    `.1.5.1.2` is active for strict argument/usage fixtures.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics

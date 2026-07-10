@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`.1.5.1.0` Perl/neutral-CLI audit split done; `.1.5.1.1` active).
+- Last updated: `2026-07-10` (`.1.5.1.1` neutral runner/help baseline done; `.1.5.1.2` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -159,16 +159,21 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.5.1.0 - split neutral CLI fixture work`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.1.1`
-  Status: `active`
+  Status: `done`
   Goal: Establish the language-neutral fixture schema/runner and exact help baseline.
   Acceptance: A checked-in manifest and backend-independent process runner validate schema, command arrays,
     executable-display substitution, isolated fixture workspaces, exact stdout/stderr bytes, and exit status; the
     first help fixture passes on Perl without weakening later four-backend reuse.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `cli_conformance/manifest.json` and `tools/run_cli_conformance.pl` define a strict schema,
+    arbitrary launch command after `--`, explicit placeholders, per-case canonicalized temp workspaces, exact raw
+    stdout/stderr/exit and generated-file comparisons, safe relative paths, focused selection, and useful first-
+    mismatch diagnostics. The exact help fixture passes Perl and uses backend-neutral wording plus the complete
+    trace alias/help surface. Four runner subtests (13 assertions), the existing two trace CLI subtests, direct
+    conformance execution, syntax, docs, Knowledge Map, governance, mdBook, and whitespace checks pass.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.1.1 - add neutral CLI fixture runner`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Normalize and fixture-lock Perl's exact argument and usage-error surface.
   Acceptance: Only ADR `0023` options/spellings are accepted; case aliases, abbreviations, negated aliases,
     subcommands, positionals, missing values, invalid modes/levels, and selector conflicts produce deterministic
@@ -354,8 +359,8 @@ before implementation.
 | --- | --- | --- | --- |
 | 1 | `JULIA-BACKEND-PARITY.7.3.3` | `done` | Julia-local status is reconciled; its root remains active/delegated rather than falsely complete. |
 | 2 | `FUTURE-PARITY-BACKLOG.1.5.1.0` | `done` | Perl/fixture source and process audit is split before implementation. |
-| 3 | `FUTURE-PARITY-BACKLOG.1.5.1.1` | `active` | Establish the neutral manifest/runner and exact Perl help baseline. |
-| 4 | `FUTURE-PARITY-BACKLOG.1.5.1.2` | `pending` | Reject every undocumented/implicit Perl argument surface deterministically. |
+| 3 | `FUTURE-PARITY-BACKLOG.1.5.1.1` | `done` | Neutral manifest/runner, exact help bytes, workspaces, and output-file proof are locked. |
+| 4 | `FUTURE-PARITY-BACKLOG.1.5.1.2` | `active` | Reject every undocumented/implicit Perl argument surface deterministically. |
 | 5 | `FUTURE-PARITY-BACKLOG.1.5.1.3` | `pending` | Lock source/input/parser controls and canonical success bytes. |
 | 6 | `FUTURE-PARITY-BACKLOG.1.5.1.4` | `pending` | Normalize compile/input/invocation failures and stdout purity. |
 | 7 | `FUTURE-PARITY-BACKLOG.1.5.1.5` | `pending` | Lock deterministic trace behavior and close the Perl neutral-fixture gate. |
@@ -372,6 +377,43 @@ before implementation.
 | 18 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 19 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser/stimuli roundtrip arc is parked for later design. |
 | 20 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
+
+## `FUTURE-PARITY-BACKLOG.1.5.1.1` Neutral Fixture Runner and Help Baseline
+
+Implementation evidence recorded on 2026-07-10:
+
+- `cli_conformance/manifest.json` is the language-neutral ordered case inventory. Schema version 1 strictly rejects
+  unknown keys, duplicate/invalid ids and output paths, unsafe relative paths, absent fixture/expected files,
+  malformed placeholders, invalid channel definitions, and exit statuses outside 0–255.
+- `tools/run_cli_conformance.pl` accepts any backend launch array after an explicit `--`; no backend name or
+  implementation is embedded in fixture cases. It expands `{{REPO_ROOT}}` for launch, `{{COMMAND}}` for the allowed
+  user-facing executable/wrapper difference, and exact `{{WORKSPACE}}`/`{{CASE_ID}}` runner inputs.
+- Each case receives a canonicalized private temporary working directory. Checked-in input files are copied as raw
+  bytes. `IO::Select` drains child stdout/stderr concurrently as separate raw byte streams, and the runner compares
+  exit status, both channels, and expected generated workspace files byte-for-byte.
+- A mismatch reports its first byte offset, expected/actual lengths, and escaped excerpts. Runner/schema misuse is
+  exit `2`; conformance mismatch is `1`; a completely green selected set is `0`. `--case` can select focused ids.
+- The first public case locks complete help stdout, empty stderr, and exit `0`. Its wording is backend-neutral (no
+  Perl `Get`/`get_parser` names), documents numeric plus all named trace aliases and `--help`/`-h`, and substitutes
+  only `{{COMMAND}}`. Perl passes it exactly.
+- Four runner subtests (13 assertions) lock the checked-in Perl case, schema rejection before launch, command/
+  workspace/case substitution with input and generated-file bytes, and first-byte mismatch reporting. The existing
+  two trace CLI subtests remain green.
+
+## `FUTURE-PARITY-BACKLOG.1.5.1.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The split proved there was no checked-in backend-neutral case schema or arbitrary-
+  command byte runner; only Perl-specific trace smokes existed.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Existing tests owned one command directly and used regex/inline expectations,
+  so later backends had no common data model, isolated workspace, generated-file contract, or byte diagnostics.
+- [x] **FIX** — Add the strict manifest, arbitrary command-array runner, raw channel/file comparison, exact help
+  case, runner tests, backend-neutral help text, and public/toolbox documentation.
+- [x] **ADDRESSED (verified)** — Schema, path safety, command/display substitution, macOS canonical workspace
+  identity, file materialization/output, stdout/stderr/exit exactness, and mismatch behavior are locked.
+- [x] **NO REGRESSION** — `perl -c` passes for CLI/runner/test; four runner subtests and two trace CLI subtests pass;
+  direct `help` conformance passes. No parser/compiler/runtime semantics changed.
+- [x] **LOCKSTEP** — README, TOOLBOX, mdBook, task/live/roadmap docs, and Knowledge Map describe one reusable suite;
+  `.1.5.1.2` is active for strict argument fixtures and no later backend has a forked manifest.
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.0` Neutral CLI / Perl Audit and Split
 
@@ -468,7 +510,12 @@ Read-only evidence recorded on 2026-07-10:
   gated behind current-backend CLI/capability/generated-source convergence.
 - `2026-07-10`: `.1.5.1.0` proves Perl's primary adapter is parser-oriented but not strict/deterministic enough to
   be the neutral executable reference. Fixture infrastructure, arguments, success/IO, failures, and trace/gate are
-  separate leaves; `.1.5.1.1` is active and no behavior changed in the split.
+  separate leaves; `.1.5.1.1` became active there and has since closed the runner/help baseline. No behavior changed
+  in the split.
+- `2026-07-10`: `.1.5.1.1` adopts `cli_conformance/manifest.json` plus one arbitrary-command Perl runner as the
+  reusable cross-backend fixture architecture. Explicit placeholders represent command/runner inputs; they do not
+  authorize backend-specific expected outputs. Exact generated workspace files are part of schema version 1 so
+  later trace cases do not require a schema fork. `.1.5.1.2` is active for strict Perl arguments.
 
 ## Open Questions
 
@@ -477,8 +524,8 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. `.1.5.1.0` is done and `.1.5.1.1` is active for the neutral fixture harness/help baseline. Global CLI/
-  capability convergence precedes Lua `.1.3`.
+- None. `.1.5.1.1` is done and `.1.5.1.2` is active for strict Perl argument/usage fixtures. Global CLI/capability
+  convergence precedes Lua `.1.3`.
 
 ## Verification Log
 
@@ -492,7 +539,8 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.4` | Perl direct `LinkedSpec::Get` coderef probe; focused Dart runtime tests (50); direct Julia parse/compile/execute probe; static Rust core/runtime API and Dart/Julia CLI-adapter audit; `mdbook build docs/linkedspec-book`; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check` | PASS. ADR `0022` makes native in-memory embedding primary and CLIs secondary; current/future backend acceptance and public docs agree; no parser/compiler/runtime source changed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.0` | Delegated Julia `.7.3.1`: ADR `0023`; Perl CLI/trace contract and Rust public source-emitter audit; global task routing; mdBook build; Knowledge Map generation/check; memory/task/doctrine/whitespace gates. | PASS. Exact primary CLI and public-capability parity are durable; `.1.5.1`–`.1.5.4`, `.1.6`, and `.3` own convergence; no implementation behavior changed. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.3` | Delegated current-surface audit; stale mdBook provenance/correction; exact owner routing; prior `431f0472` Julia proof; docs/KM/governance/whitespace and mdBook. | PASS. Julia's local audit is done while its root remains active/delegated; `.1.5.1` became next and `.1.5.1.0` has since split it. |
-| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.0` | ADR/KM/toolbox and Perl source/test audit; existing trace test; direct argument/environment/failure probes with separated stdout/stderr; docs/KM/governance/whitespace/mdBook. | PASS. Five implementation mechanisms are split; no behavior source changed; `.1.5.1.1` is active. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.0` | ADR/KM/toolbox and Perl source/test audit; existing trace test; direct argument/environment/failure probes with separated stdout/stderr; docs/KM/governance/whitespace/mdBook. | PASS. Five implementation mechanisms are split; no behavior source changed; `.1.5.1.1` became active and has since closed. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.1` | CLI/runner/test syntax; 4 runner subtests/13 assertions; 2 trace CLI subtests; direct neutral help execution; docs/KM/governance/whitespace/mdBook and cleanup. | PASS. Schema/runner/workspace/channels/generated files and exact help are locked; `.1.5.1.2` is active. |
 
 ## Commit Log
 
@@ -507,13 +555,18 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |
 | `FUTURE-PARITY-BACKLOG.1.5.1.0` | `FUTURE-PARITY-BACKLOG.1.5.1.0 - split neutral CLI fixture work` | Read-only Perl/process audit and five-leaf implementation split. |
+| `FUTURE-PARITY-BACKLOG.1.5.1.1` | `FUTURE-PARITY-BACKLOG.1.5.1.1 - add neutral CLI fixture runner` | Strict schema, arbitrary command runner, exact help case, output-file support, and focused tests. |
 
 ## Changelog
 
+- `2026-07-10`: `.1.5.1.1` adds the backend-neutral CLI fixture architecture. A strict manifest and arbitrary
+  command runner own private workspaces, raw stdout/stderr, exit status, generated files, safe paths, explicit
+  placeholders, and byte diagnostics. Perl passes the exact backend-neutral help case; 13 runner assertions and
+  the existing trace tests pass. `.1.5.1.2` is active for strict argument/usage cases.
 - `2026-07-10`: `.1.5.1.0` audits the Perl reference adapter and splits neutral CLI work. Direct probes find
   ignored positionals, case/abbreviation/negated aliases, environment-dependent `Getopt::Long` behavior,
   uncontrolled option warnings, and level-zero timestamped failure trace on stdout. Harness/help, arguments,
-  success/IO, failures, and trace/gate now have ordered owners; `.1.5.1.1` is active.
+  success/IO, failures, and trace/gate now have ordered owners; `.1.5.1.1` became active there and has since closed.
 - `2026-07-10`: Delegated Julia `.7.3.3` closes the local no-drift audit at
   `runtime-corpus-primary-cli` while preserving the active/delegated full-parity boundary. `.1.5.1` becomes the
   next PNT leaf; `.1.6`, `.3`, and then Lua remain ordered behind it.

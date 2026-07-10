@@ -41,3 +41,4 @@ allow visible `DUMP_NONE` records onto stdout, and the neutral fixture lane owns
 adapter-level output normalization without weakening the general trace contract.
 
 Related fact: [[perl-primary-cli-conformance-audit]].
+Shared process fixture architecture: [[neutral-cli-fixture-runner]].

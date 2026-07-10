@@ -43,4 +43,5 @@ Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specif
 [[julia-primary-cli-arguments-resolution-loading]],
 [[julia-primary-cli-native-execution-canonical-json]],
 [[julia-primary-cli-failure-trace-routing]], [[julia-primary-cli-process-conformance]],
-[[julia-scoped-parity-no-drift]], [[perl-primary-cli-conformance-audit]].
+[[julia-scoped-parity-no-drift]], [[perl-primary-cli-conformance-audit]],
+[[neutral-cli-fixture-runner]].

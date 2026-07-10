@@ -261,7 +261,21 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **WHEN:** self-host divergence; Perl↔Rust parity work ([[cross-variant-output-parity]]).
 - **HOW:** `perl -Iperl tools/cross_check_spec_parsers.pl` · `perl -Iperl tools/gen_oracle_corpus.pl`.
 
-### 4.3 `tools/run_ci_local.sh` / `tools/ram_guard.sh`
+### 4.3 `tools/run_cli_conformance.pl` — backend-neutral primary CLI byte contract
+- **WHAT:** execute any backend command array against `cli_conformance/manifest.json` in isolated per-case
+  workspaces, capturing stdout/stderr separately and comparing exact bytes, exit status, and expected generated
+  files. `{{COMMAND}}` substitutes only the allowed executable token/host wrapper difference.
+- **WHEN:** changing a primary CLI, its help/errors/trace behavior, or the shared cross-backend command contract.
+- **HOW:**
+  ```bash
+  PERL5LIB= perl tools/run_cli_conformance.pl \
+    --display-command 'perl bin/linkedspec' \
+    -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec
+  ```
+  Use `--case ID` before `--` for focused execution. The current `.1.5.1.1` baseline contains the exact help
+  case; later owned leaves add strict usage, success/IO, operational failure, and trace families to the same suite.
+
+### 4.4 `tools/run_ci_local.sh` / `tools/ram_guard.sh`
 - **WHAT:** `run_ci_local.sh` = the canonical local CI gate (regression + doctrine checks, E4);
   `ram_guard.sh` = a memory guard for heavy runs. **HOW:** `bash tools/run_ci_local.sh`.
 

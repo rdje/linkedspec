@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "suite": "linkedspec-primary-cli",
+  "cases": [
+    {
+      "id": "help",
+      "family": "help",
+      "args": ["--help"],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {
+          "file": "cases/help/stdout.txt"
+        },
+        "stderr": {
+          "text": ""
+        },
+        "files": []
+      }
+    }
+  ]
+}

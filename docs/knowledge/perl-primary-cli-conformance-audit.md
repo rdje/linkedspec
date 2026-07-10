@@ -13,7 +13,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [perl, cli, conformance, getopt-long, trace, stdout, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.1.0 audits bin/linkedspec/t/trace_cli.t and direct processes: positionals, case/abbreviation/negation aliases, POSIXLY_CORRECT drift, GetOptions warnings, and DUMP_NONE failure trace on stdout are current gaps; .1-.5 own repair."
+evidence: "FUTURE-PARITY-BACKLOG.1.5.1.0 audits bin/linkedspec/t/trace_cli.t and direct processes: positionals, case/abbreviation/negation aliases, POSIXLY_CORRECT drift, GetOptions warnings, and DUMP_NONE failure trace on stdout are current gaps; .1 now owns the runner/help and .2-.5 own repair."
 reverify: "PERL5LIB= prove -v -Iperl t/trace_cli.t; sed -n '1,260p' bin/linkedspec; rg -n 'DUMP_NONE|sub log_output|sub trace_decision' perl/LinkedSpec/Trace.pm perl/LinkedSpec/Validation.pm perl/LinkedSpec/Compiler.pm; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -41,7 +41,7 @@ The level-zero events are intentional in the general trace owner, so the primary
 CLI adapter must own stdout purity and a deterministic cross-backend projection
 without silently changing the library-wide diagnostic contract.
 
-`FUTURE-PARITY-BACKLOG.1.5.1` is split into neutral harness/help (`.1`), strict
+`FUTURE-PARITY-BACKLOG.1.5.1` is split into neutral harness/help (`.1`, now done), strict
 arguments (`.2`), success/source/input/parser controls (`.3`), operational
 failure normalization (`.4`), and trace/final Perl gate (`.5`). Rust, Dart, and
 Julia will later consume the same manifest; they do not get backend-specific
@@ -49,4 +49,5 @@ fixture forks.
 
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[cross-backend-cli-contract-gap]], [[trace-cli-control]],
-[[trace-verbosity-and-formatting]], [[julia-primary-cli-process-conformance]].
+[[trace-verbosity-and-formatting]], [[julia-primary-cli-process-conformance]],
+[[neutral-cli-fixture-runner]].

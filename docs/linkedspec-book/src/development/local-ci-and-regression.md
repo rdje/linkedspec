@@ -29,6 +29,26 @@ The GitHub workflow is intentionally kept as a thin wrapper around the same comm
 
 That means local validation and hosted validation are intentionally not two separate systems when hosted CI is enabled.
 
+## Primary CLI conformance fixtures
+
+The primary command has a separate backend-neutral, byte-exact fixture runner:
+
+```bash
+PERL5LIB= perl tools/run_cli_conformance.pl \
+  --display-command 'perl bin/linkedspec' \
+  -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec
+```
+
+`cli_conformance/manifest.json` is data, not a Perl-only test table. The runner accepts an arbitrary command array,
+creates one isolated workspace per case, materializes checked-in inputs, captures raw stdout/stderr separately, and
+compares exact channel bytes, exit status, and expected generated files. `{{COMMAND}}` represents the only allowed
+help/diagnostic difference: the backend executable token or unavoidable host launch wrapper. `{{REPO_ROOT}}`,
+`{{WORKSPACE}}`, and `{{CASE_ID}}` represent exact runner inputs rather than backend-specific expected results.
+
+The `.1.5.1.1` baseline locks the complete help output on Perl. Active `.1.5.1.2` adds strict usage next, followed
+by successful source/input/parser controls, operational failures, and trace routing in this same manifest before
+Rust, Dart, and Julia consume it. Until those cases land, a green help fixture is not a complete CLI-parity claim.
+
 ## Optional Dart Gate
 
 The Dart backend has its own focused local gate:

@@ -18,9 +18,9 @@ Usage:
   perl bin/linkedspec --inline-spec TEXT --input TEXT [options]
 
 Source selection (choose exactly one):
-  --spec NAME          Resolve and compile specs/NAME.spec through get_parser(...)
-  --spec-file PATH     Compile .spec source read from PATH through Get(...)
-  --inline-spec TEXT   Compile the literal .spec source TEXT through Get(...)
+  --spec NAME          Resolve and compile a named .spec
+  --spec-file PATH     Compile .spec source read from PATH
+  --inline-spec TEXT   Compile the literal .spec source TEXT
 
 Input selection (choose exactly one):
   --input TEXT         Parse TEXT
@@ -31,11 +31,15 @@ Parser options:
   --parse-mode MODE    MODE is seek or consume
 
 Trace options:
-  --trace LEVEL        Enable trace level: none, low, medium, high, full, debug
+  --trace LEVEL        LEVEL is none/quiet, low, medium/med, high, full,
+                       debug/verbose, or an integer
   --trace-file PATH    Write trace output to PATH
   --trace-mode MODE    MODE is stdout, route, or mirror
   --trace-reset        Truncate --trace-file before writing
   --trace-emoji        Enable emoji trace prefixes
+
+Help:
+  --help, -h           Show this help
 
 Output:
   Prints the parser result as canonical JSON on stdout. When trace output is sent

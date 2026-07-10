@@ -1,0 +1,38 @@
+Usage:
+  {{COMMAND}} --spec NAME --input TEXT [options]
+  {{COMMAND}} --spec-file PATH --input-file PATH [options]
+  {{COMMAND}} --inline-spec TEXT --input TEXT [options]
+
+Source selection (choose exactly one):
+  --spec NAME          Resolve and compile a named .spec
+  --spec-file PATH     Compile .spec source read from PATH
+  --inline-spec TEXT   Compile the literal .spec source TEXT
+
+Input selection (choose exactly one):
+  --input TEXT         Parse TEXT
+  --input-file PATH    Parse file contents read from PATH
+
+Parser options:
+  --top-rule NAME      Select the entry rule
+  --parse-mode MODE    MODE is seek or consume
+
+Trace options:
+  --trace LEVEL        LEVEL is none/quiet, low, medium/med, high, full,
+                       debug/verbose, or an integer
+  --trace-file PATH    Write trace output to PATH
+  --trace-mode MODE    MODE is stdout, route, or mirror
+  --trace-reset        Truncate --trace-file before writing
+  --trace-emoji        Enable emoji trace prefixes
+
+Help:
+  --help, -h           Show this help
+
+Output:
+  Prints the parser result as canonical JSON on stdout. When trace output is sent
+  to stdout it is intentionally interleaved with that JSON; use --trace-file with
+  --trace-mode route for machine-readable stdout plus routed trace.
+
+Examples:
+  {{COMMAND}} --spec Lispish --input '(hello world)'
+  {{COMMAND}} --spec-file demo.spec --input-file demo.txt \
+    --trace high --trace-file linkedspec.trace.log --trace-mode route --trace-reset

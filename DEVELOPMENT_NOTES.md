@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.1 — neutral fixture data must outlive every backend adapter):
+  Keep the cross-backend contract in a strict manifest, not in one backend's test code. An arbitrary launch array
+  plus explicit `COMMAND`/runner-input placeholders preserves the permitted executable-wrapper difference without
+  normalizing arbitrary output. Canonical private workspaces and raw concurrent channel capture prevent cwd aliases,
+  pipe deadlocks, newline loss, or Unicode/emoji decoding from weakening exactness. Include generated workspace
+  files in schema version 1 now so routed trace proof later reuses the same runner rather than forking the contract.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.0 — CLI exactness starts by pinning option-parser policy and channels):
   A parser-oriented command is not a byte-testable reference merely because its happy path works. Ambient
   `Getopt::Long` defaults can create undocumented case/abbreviation/negation aliases and make behavior depend on

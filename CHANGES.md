@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.1 — add neutral CLI fixture runner
+
+**Scope:** Backend-neutral fixture schema, arbitrary command runner, exact help case, runner regressions, neutral
+Perl help wording, and synchronized public/toolbox/task/live documentation.
+
+**Implementation:** `cli_conformance/manifest.json` defines ordered cases and exact expected channels/files.
+`tools/run_cli_conformance.pl` validates strict schema/path invariants, runs any command array in canonical private
+workspaces, materializes raw fixture files, drains stdout/stderr concurrently, and compares raw channels, exit
+status, and generated files byte-for-byte. Explicit command/repo/workspace/case placeholders and first-byte
+mismatch excerpts make one manifest reusable and diagnosable across host wrappers/backends.
+
+**Verification:** Perl passes the exact backend-neutral help case with empty stderr and exit `0`. CLI/runner/test
+syntax passes; four runner subtests (13 assertions) cover checked-in help, schema failure before launch,
+placeholder/workspace/input/generated-file behavior, and a one-byte mismatch; two existing trace CLI subtests pass.
+`.1.5.1.2` owns strict argument/usage fixtures.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.0 — split neutral CLI fixture work
 
 **Scope:** Read-only Perl primary-CLI/source/test/toolbox audit, direct process probes, durable gap record, and

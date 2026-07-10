@@ -7,8 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.1 — add neutral CLI fixture runner**
+  (DONE — exact help baseline green; `.1.5.1.2` active for strict usage).
+
+  **Change:** Added a strict manifest and arbitrary-command runner with private canonical workspaces, safe raw file
+  materialization, explicit placeholders, concurrent raw stdout/stderr capture, exact exit/generated-file checks,
+  and first-byte mismatch diagnostics. Perl help is now backend-neutral and documents all trace/help aliases.
+
+  **Proof:** CLI/runner/test syntax, four runner subtests (13 assertions), two trace CLI subtests, and direct exact
+  Perl help conformance pass. README, TOOLBOX, mdBook, task/roadmap/live docs, and Knowledge Map use one suite.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.0 — split neutral CLI fixture work**
-  (DONE — read-only audit/split; `.1.5.1.1` active for harness/help).
+  (DONE — read-only audit/split; `.1.5.1.1` subsequently closed harness/help).
 
   **Finding:** Perl's parser CLI passes its two existing trace smokes but accepts ignored positionals, uppercase/
   abbreviated/negated option aliases, and environment-dependent `Getopt::Long` behavior. Unknown options prepend

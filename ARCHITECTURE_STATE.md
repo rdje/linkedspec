@@ -5,11 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.1` establishes the neutral primary-CLI fixture architecture.
+  A strict JSON manifest and arbitrary command-array runner own canonical private workspaces, safe checked-in file
+  materialization, explicit command/repo/workspace/case placeholders, raw stdout/stderr, exit status, generated
+  files, and byte-offset mismatch diagnostics. Perl passes the exact backend-neutral help case; four runner
+  subtests (13 assertions) and two trace subtests pass. `.1.5.1.2` is active for strict argument/usage fixtures.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.0` audits and splits the neutral CLI/Perl reference lane.
   The existing trace smoke passes, but direct processes prove ignored positionals, case/abbreviation/negated option
   aliases, `POSIXLY_CORRECT`-dependent parsing, uncontrolled `Getopt::Long` warnings, and timestamped `DUMP_NONE`
   failure records on stdout. Five ordered leaves own harness/help, arguments, success/IO, failures, and trace/gate;
-  `.1.5.1.1` is active and no behavior source changed.
+  `.1.5.1.1` has since closed the neutral runner/help baseline.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.3` closes the local outer no-drift audit without closing the
   Julia parity tree. One mdBook limitation sentence inherited from `.7.3.2.1` incorrectly denied the exact primary
   CLI after later leaves implemented it; current surfaces now agree on `runtime-corpus-primary-cli`, 1,017 package
