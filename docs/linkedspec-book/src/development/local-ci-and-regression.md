@@ -45,12 +45,15 @@ compares exact channel bytes, exit status, and expected generated files. `{{COMM
 help/diagnostic difference: the backend executable token or unavoidable host launch wrapper. `{{REPO_ROOT}}`,
 `{{WORKSPACE}}`, and `{{CASE_ID}}` represent exact runner inputs rather than backend-specific expected results.
 
-The suite locks both help forms, 20 strict usage cases, seven success cases, four operational failures, and 20
-canonical trace cases on Perl. All 53 pass with `POSIXLY_CORRECT` unset or set. ADR `0024` trace cases cover exact
+The suite locks both help forms, 20 strict usage cases, seven baseline success cases, four baseline operational
+failures, 20 canonical trace cases, and eight strict UTF-8 behavior cases on Perl. All 61 pass with
+`POSIXLY_CORRECT` unset or set. ADR `0024` trace cases cover exact
 UTF-8 phase records, stdout/route/mirror, reset/persistence/append, levels/aliases, emoji, byte counts, field
 escaping, and all failure phases. The canonical local gate invokes this same runner in both environments.
-ADR `0025` splits the surfaced UTF-8 process boundary; `.1.5.1.6.1` supplies neutral invalid-byte fixtures,
-active `.6.2` repairs Perl, and `.6.3` closes the reference before Rust `.1.5.2` consumes the completed manifest.
+ADR `0025` defines Unicode scalar text encoded as strict preserved UTF-8 at process/file boundaries. `.6.2`
+now decodes Perl argv/files, emits recursive UTF-8 JSON once, and locks inline/file Unicode, normalization
+preservation, input BOM/newlines, non-stripped source BOM, invalid phases, and trace byte counts. Active `.6.3`
+closes the reference before Rust `.1.5.2` consumes the completed manifest. UTF-16/UTF-32 are not implicit inputs.
 
 Schema version 1 workspace inputs use `path` plus exactly one checked-in `source`
 or explicit `bytes_hex`. Hex data is non-empty, lowercase, and even-length, and is

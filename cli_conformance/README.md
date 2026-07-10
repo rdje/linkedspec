@@ -16,9 +16,10 @@ Use `--case ID` before the separator to select one or more manifest cases. Every
 after `--` is an arbitrary command array, so later Rust, Dart, Julia, Lua, and other
 backends consume this same manifest without backend-specific fixture copies.
 
-The current manifest contains 53 cases: exact long/short help, 20 strict usage
-families, seven successful source/input/parser-control families, and four
-operational-failure plus 20 canonical trace families. Success cases
+The current manifest contains 61 cases: exact long/short help, 20 strict usage
+families, seven baseline successful source/input/parser-control families, four
+baseline operational failures, 20 canonical trace families, and eight strict UTF-8
+behavior cases. Success cases
 lock named/file/inline source, literal/file input, explicit top rule, seek/consume,
 nested canonical JSON, exact input bytes, empty stderr, exit `0`, and one record
 newline. Failure cases lock compile-before-input order, stable one-line stderr,
@@ -26,6 +27,13 @@ empty stdout, exit `1`, and no output files. Trace cases lock deterministic UTF-
 phase records, stdout/route/mirror, reset/persistence/append, every named level and alias,
 a numeric threshold, default file routing, emoji, UTF-8 byte counts, percent-escaped
 user fields, and compile/input/invocation failures.
+
+The UTF-8 family proves decoded inline/file source, recursively encoded nested
+Unicode JSON, composed/decomposed literal input without normalization, input-file
+U+FEFF plus CRLF/LF preservation, non-stripping of a leading spec BOM, stable
+invalid-spec/input byte phases, and exact Unicode input/result trace byte counts.
+Unicode is the logical text model; UTF-8 is the selected process/file encoding.
+UTF-16 and UTF-32 are not implicit alternatives in this primary command.
 
 ## Schema version 1
 

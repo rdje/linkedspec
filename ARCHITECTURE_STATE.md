@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.2` closes the Perl primary UTF-8 adapter gap.
+  `bin/linkedspec` strictly decodes valid argv and raw source/input files, preserves normalization/BOM/newlines,
+  keeps invalid files in stable compilation/input-load phases, and emits recursively canonical UTF-8 JSON once.
+  Eight exact cases cover inline/file/nested Unicode, composed/decomposed text, input U+FEFF/CRLF/LF, source BOM
+  non-stripping, invalid bytes, and trace input/result byte counts; the current shared suite is 61/61 under default
+  and POSIX environments. Unicode is the logical text model; UTF-8 is the selected wire encoding, not a synonym.
+  `.6.3` is active for final reference no-drift before Rust `.1.5.2`.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.11.0` captures a correction to the closed trailing-block MVP.
   Current Perl/Rust/Dart/Julia runtimes support named `with` and tree-traversal block surfaces; Lua is absent, and
   generic attached/parenthesized equivalence is not implemented. The intended model has four object/value kinds—
@@ -14,8 +21,8 @@ This document is the current high-level technical reading of the project shape. 
   Active implementation remains `.1.5.1.6.2`; this capture changes no runtime behavior.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.1` extends neutral manifest schema version 1 with exact
   `bytes_hex` input-file materialization. Exactly one checked-in source or non-empty lowercase even hex is allowed;
-  raw workspace bytes and malformed/ambiguous pre-launch rejection are focused-locked. The existing 53 cases are
-  unchanged; `.6.2` is active for strict Perl decoding plus valid/invalid behavior fixtures.
+  raw workspace bytes and malformed/ambiguous pre-launch rejection are focused-locked. The then-existing 53 cases
+  were unchanged; `.6.2` has since added strict Perl decoding plus eight valid/invalid behavior fixtures.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.0` ratifies ADR `0025`: primary source/input/arguments,
   JSON, and trace are strict UTF-8 text, preserved without normalization/BOM stripping/newline conversion/trimming.
   Invalid spec/input file bytes map to compilation/input-load failures; binary input is not implicit. Direct decoded

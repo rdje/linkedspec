@@ -12,6 +12,11 @@ Input selection (choose exactly one):
   --input TEXT         Parse TEXT
   --input-file PATH    Parse file contents read from PATH
 
+Text encoding:
+  Arguments, source, input, JSON, help/errors, and trace use strict UTF-8.
+  Text is not normalized, trimmed, or newline/BOM converted. UTF-16/UTF-32
+  files are not detected implicitly.
+
 Parser options:
   --top-rule NAME      Select the entry rule
   --parse-mode MODE    MODE is seek or consume

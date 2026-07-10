@@ -12,7 +12,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, conformance, fixtures, runner, exact-bytes, backends, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.1.1 adds cli_conformance/manifest.json, tools/run_cli_conformance.pl, exact help bytes, output-file support, and t/cli_conformance_runner.t; .1.5.1.2-.5 expand to 53 cases; .1.5.1.6.1 adds validated bytes_hex workspace inputs."
+evidence: "FUTURE-PARITY-BACKLOG.1.5.1.1 adds cli_conformance/manifest.json, tools/run_cli_conformance.pl, exact help bytes, output-file support, and t/cli_conformance_runner.t; .1.5.1.2-.5 expand to 53 cases; .1.5.1.6.1 adds validated bytes_hex workspace inputs; .1.5.1.6.2 adds eight strict UTF-8 cases for 61 total."
 reverify: "perl -c tools/run_cli_conformance.pl && PERL5LIB= prove -v -Iperl t/cli_conformance_runner.t t/trace_cli.t && PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec"
 ---
 
@@ -52,7 +52,8 @@ routed trace bytes without a schema or runner fork.
 ADR `0025` requires invalid UTF-8 source/input file cases. `.1.5.1.6.1` adds a
 schema-v1-compatible explicit `bytes_hex` source for workspace files. It is
 mutually exclusive with checked-in `source`, non-empty/lowercase/even-length,
-and materialized as raw bytes. `.6.2` now owns the behavior cases that consume it.
+and materialized as raw bytes. `.6.2` now uses that form for invalid bytes, source
+BOM preservation, and exact Unicode input bytes; the current suite has 61 cases.
 
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[perl-primary-cli-conformance-audit]], [[cross-backend-cli-contract-gap]],

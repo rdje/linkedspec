@@ -15,7 +15,7 @@ answers:
 date: 2026-07-10
 status: accepted
 tags: [cli, trace, protocol, deterministic, utf8, backends, ADR-0024, FUTURE-PARITY-BACKLOG]
-evidence: "ADR 0024 and FUTURE-PARITY-BACKLOG.1.5.1.5 define canonical primary phase trace; 20 exact trace cases bring Perl to 53/53 under default/POSIX environments and the local gate runs both."
+evidence: "ADR 0024 and FUTURE-PARITY-BACKLOG.1.5.1.5 define canonical primary phase trace; 20 exact trace cases brought Perl to 53/53, and FUTURE-PARITY-BACKLOG.1.5.1.6.2 adds eight UTF-8 cases for the current 61/61 default/POSIX suite."
 reverify: "PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec && POSIXLY_CORRECT=1 PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec && PERL5LIB= prove -v -Iperl t/trace_cli.t"
 ---
 
@@ -60,8 +60,9 @@ stable operational stderr/exit behavior.
 Twenty trace cases lock stdout, route+reset+emoji, mirror+reset, stdout with an
 unchanged selected file, none+reset, quiet, every named level/alias, a numeric
 threshold, default route, append, UTF-8 byte counts, escaped user fields, and all
-three routed failure phases. Together with help/usage/success/failure, Perl passes
-53/53 in both option environments.
+three routed failure phases. Together with help/usage/success/failure, Perl passed
+53/53 at trace closure; eight later strict UTF-8 cases make the current suite 61/61
+in both option environments.
 `tools/run_ci_local.sh` executes this same manifest twice before Phase 0.
 
 Related facts: [[user-observable-backend-cli-parity-contract]],

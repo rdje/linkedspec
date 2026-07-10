@@ -391,6 +391,145 @@
       }
     },
     {
+      "id": "success_inline_source_unicode",
+      "family": "unicode",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return({ \"é\" : [\"café\", \"e\u0301\"] }) }\n\nDone::\n /x/\n",
+        "--input",
+        "x"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "{\"é\":[\"café\",\"e\u0301\"]}\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "success_literal_input_unicode_no_normalization",
+      "family": "unicode",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(input_text()) }\n\nDone::\n /x/\n",
+        "--input",
+        "xé-e\u0301"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "\"xé-e\u0301\"\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "success_spec_file_unicode",
+      "family": "unicode",
+      "args": ["--spec-file", "unicode.spec", "--input", "x"],
+      "files": [
+        {
+          "path": "unicode.spec",
+          "bytes_hex": "546f703a3a0a202f782f202d3e20446f6e65207b2072657475726e2822666963686965722dc3a92229207d0a0a446f6e653a3a0a202f782f0a"
+        }
+      ],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "\"fichier-é\"\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "success_input_file_unicode_bom_newlines",
+      "family": "unicode",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(input_text()) }\n\nDone::\n /x/\n",
+        "--input-file",
+        "unicode.txt"
+      ],
+      "files": [
+        {"path": "unicode.txt", "bytes_hex": "78efbbbfc3a90d0a65cc810a"}
+      ],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "\"x\ufeffé\\r\\ne\u0301\\n\"\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "failure_invalid_utf8_spec_file",
+      "family": "unicode",
+      "args": ["--spec-file", "invalid.spec", "--input", "x"],
+      "files": [
+        {"path": "invalid.spec", "bytes_hex": "546f703a3a0a202f782f2045207b2072657475726e2822c3282229207d0a"}
+      ],
+      "expect": {
+        "exit": 1,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/failure/stderr.txt", "variables": {"ERROR": "parser compilation failed"}},
+        "files": []
+      }
+    },
+    {
+      "id": "failure_spec_file_utf8_bom_preserved",
+      "family": "unicode",
+      "args": ["--spec-file", "bom.spec", "--input", "x"],
+      "files": [
+        {
+          "path": "bom.spec",
+          "bytes_hex": "efbbbf546f703a3a0a202f782f202d3e20446f6e65207b2072657475726e28226f6b2229207d0a0a446f6e653a3a0a202f782f0a"
+        }
+      ],
+      "expect": {
+        "exit": 1,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/failure/stderr.txt", "variables": {"ERROR": "parser compilation failed"}},
+        "files": []
+      }
+    },
+    {
+      "id": "failure_invalid_utf8_input_file",
+      "family": "unicode",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(input_text()) }\n\nDone::\n /x/\n",
+        "--input-file",
+        "invalid.txt"
+      ],
+      "files": [
+        {"path": "invalid.txt", "bytes_hex": "78c328ff0a"}
+      ],
+      "expect": {
+        "exit": 1,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/failure/stderr.txt", "variables": {"ERROR": "input load failed"}},
+        "files": []
+      }
+    },
+    {
+      "id": "trace_stdout_full_unicode_json_bytes",
+      "family": "unicode",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(input_text()) }\n\nDone::\n /x/\n",
+        "--input",
+        "xé",
+        "--trace",
+        "full"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "[linkedspec][low] compile:start\n[linkedspec][medium] request source=inline input=literal top_rule=<default> parse_mode=seek\n[linkedspec][high] arguments source_bytes=57 input_bytes=3\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][high] input bytes=3\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n[linkedspec][full] result json_bytes=5\n\"xé\"\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
       "id": "failure_compile_precedes_input_load",
       "family": "failure",
       "args": ["--inline-spec", "not a spec", "--input-file", "missing-input.txt"],

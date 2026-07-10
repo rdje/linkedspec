@@ -7,8 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.6.2 — enforce Perl CLI UTF-8 text**
+  (DONE — Perl passes 61/61 strict shared cases; `.1.5.1.6.3` active for reference closeout).
+
+  **Implementation:** Valid argv and raw source/input files decode strictly as UTF-8; code points, normalization,
+  BOM, and newlines are preserved; canonical nested JSON and stable help/errors encode once; invalid files retain
+  compilation/input-load headings. UTF-16/UTF-32 are not implicitly detected.
+
+  **Proof:** Eight new cases cover inline/file/nested Unicode, composed/decomposed input, U+FEFF with CRLF/LF,
+  source-BOM non-stripping, invalid spec/input bytes, and exact full-trace byte counts. Focused suites, 61/61 in
+  default/POSIX environments, full local CI/Phase 0, docs/KM/governance/book/cleanup pass.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.11.0 — capture generic trailing codeblocks**
-  (DONE — corrective direction parked; `.1.5.1.6.2` remains the active implementation frontier).
+  (DONE — corrective direction parked; `.1.5.1.6.2` later closed and `.6.3` is active).
 
   **Finding/direction:** Perl/Rust/Dart/Julia all implement the narrow named `with` surface, selected traversal
   methods also take blocks, and Lua is not implemented. The closed `.14` contract explicitly excluded

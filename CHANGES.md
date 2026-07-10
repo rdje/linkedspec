@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.6.2 — enforce Perl CLI UTF-8 text
+
+**Implementation:** `bin/linkedspec` strictly decodes valid argv before option parsing and raw source/input files
+inside their compilation/input-load phases. It preserves code points, U+FEFF, CRLF/LF, and normalization form;
+usage/errors and recursive canonical JSON are encoded as UTF-8 exactly once. Invalid spec/input bytes keep their
+stable phase headings. UTF-16/UTF-32 remain outside the implicit primary-command contract.
+
+**Fixtures:** Eight shared cases add inline and file Unicode source, nested Unicode JSON, composed/decomposed
+literal input, input-file BOM/newline preservation, non-stripped leading spec BOM, invalid source/input bytes, and
+full-trace input/result byte counts. The neutral suite grows from 53 to 61 cases.
+
+**Verification:** Adapter/runner syntax, focused runner/trace suites, selected UTF-8 cases, 61/61 default and POSIX
+contracts, full local CI through Phase 0, docs/KM/governance/mdBook/whitespace, and generated-artifact cleanup pass.
+`.1.5.1.6.3` is active for final Perl-reference no-drift before Rust.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.11.0 — capture generic trailing codeblocks
 
 **Audit:** Perl, Rust, Dart, and Julia implement helper `with(...) { ... }`, receiver `.with() { ... }`, and

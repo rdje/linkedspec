@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.0` — captures generic final-codeblock argument equivalence and
-  parks canonical design plus `with` disposition without changing the active implementation frontier.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.1.6.1` — neutral `bytes_hex` files make invalid text fixtureable.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.1.6.2` — strict Perl argv/file decoding, recursive UTF-8 JSON,
+  and eight Unicode/invalid behavior families bring the shared process suite to 61/61.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.11.0` — parks generic final-codeblock equivalence and `with` disposition.
 - recent_context: Dart/Julia are 99/99 interpreter-green scoped milestones, not complete public parity; global
   `.1.5`, `.1.6`, and `.3` own current-backend CLI, capability, and generated-source convergence before Lua.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.11.0 - capture generic trailing codeblocks`; previous committed HEAD is
-  `35094def FUTURE-PARITY-BACKLOG.1.5.1.6.1 - add neutral hex byte fixtures`.
+  `FUTURE-PARITY-BACKLOG.1.5.1.6.2 - enforce Perl CLI UTF-8 text`; previous committed HEAD is
+  `95a7f080 FUTURE-PARITY-BACKLOG.11.0 - capture generic trailing codeblocks`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.1.6.2` is the sole active PNT leaf.
-- next_action: implement strict phase-correct Perl argv/file decoding and add shared valid/preserved/invalid UTF-8
-  cases using `bytes_hex`; `.6.3` then closes the reference before Rust.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.1.6.3` is the sole active PNT leaf.
+- next_action: re-audit strict UTF-8/task/book/KM/help/fixture/gate surfaces, close the Perl reference at 61 cases,
+  then activate Rust primary-command leaf `.1.5.2` without changing the shared contract.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
@@ -54,5 +54,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: `.11.0` planning capture is being verified for commit; no behavior code.
-  Resume `.1.5.1.6.2` after clean handoff. Do not implement `.1.5.2` until the Perl UTF-8 closeout is committed.
+- blockers: none. in_flight_uncommitted: `.1.5.1.6.2` adapter/fixtures/docs are being verified for commit.
+  Resume `.1.5.1.6.3` after clean handoff. Do not implement `.1.5.2` until that no-drift closeout is committed.

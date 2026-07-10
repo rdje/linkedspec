@@ -191,10 +191,11 @@ Top-level project docs:
 - Run `bash tools/run_ci_local.sh` from the repo root to execute the canonical regression gate.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
-  {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven success, four failure, and 20
-  trace cases. Perl passes all 53 current cases. ADR `0025` defines strict preserved UTF-8 text; `.1.5.1.6.0`
-  isolates/splits the adapter gap; `.1.5.1.6.1` now adds exact hex-byte fixture materialization and `.6.2` is active
-  for Perl decoding/valid-invalid behavior before the pending Rust command consumes the manifest.
+  {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven baseline success, four baseline
+  failure, 20 canonical trace, and eight strict UTF-8 behavior cases. Perl passes all 61 current cases. ADR `0025`
+  defines Unicode scalar text encoded as strict preserved UTF-8—not Unicode as synonymous with UTF-8. `.1.5.1.6.2`
+  now decodes Perl argv/files strictly, preserves BOM/code points/newlines, rejects invalid files by phase, and
+  emits recursive canonical JSON once; `.6.3` is active for reference closeout before Rust consumes the manifest.
 - Deep semantic introspection plus MCP is parked under `FUTURE-PARITY-BACKLOG.10.1`: native backend APIs own one
   versioned semantic model, while MCP remains a thin transport rather than a backend-specific source of truth.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full

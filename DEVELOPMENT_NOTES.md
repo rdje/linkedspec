@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.6.2 — Unicode text needs one explicit wire encoding):
+  Unicode defines characters/code points; UTF-8, UTF-16, and UTF-32 are encodings. A portable CLI must choose one
+  boundary encoding rather than treating raw bytes as characters or guessing from BOMs. Decode argv and file bytes
+  once into host text, preserve normalization/BOM/newlines, then encode JSON/trace once back to UTF-8. Strict
+  decoding must occur inside the owning compile/input phase so host decoder text never leaks into the shared API.
+  Recursive Unicode JSON and exact byte-count fixtures are necessary because a top-level ASCII result can conceal
+  mojibake in nested data or input state.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.11.0 — model trailing braces as syntax, not helper semantics):
   A parser-level special case for `with` conflates two layers. Codeblock is a language value kind; a callable
   signature decides whether it accepts that kind as its final argument, while trailing braces are only alternate

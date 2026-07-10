@@ -16,7 +16,7 @@ answers:
 date: 2026-07-10
 status: accepted
 tags: [cli, utf8, unicode, files, json, trace, parity, ADR-0025, FUTURE-PARITY-BACKLOG]
-evidence: "ADR 0025 and FUTURE-PARITY-BACKLOG.1.5.1.6.0 define strict preserved UTF-8 text; decoded Perl Get probes return exact c3 a9 for input_text() and a Unicode regex, isolating the current mojibake to the Perl CLI adapter."
+evidence: "ADR 0025 defines strict preserved UTF-8 text; FUTURE-PARITY-BACKLOG.1.5.1.6.2 makes the Perl adapter decode argv/files with FB_CROAK, emit recursive UTF-8 JSON, and pass 61 exact shared cases including eight Unicode/invalid families."
 reverify: "sed -n '1,240p' docs/decisions/0025-primary-cli-strict-utf8-text-boundary.md; rg -n 'FUTURE-PARITY-BACKLOG.1.5.1.6.[0-3]|strict UTF-8|hex byte' docs/tasks/FUTURE-PARITY-BACKLOG.md tools/run_cli_conformance.pl bin/linkedspec cli_conformance"
 ---
 
@@ -46,10 +46,15 @@ is outside the portable interface; invalid file bytes remain fixture-testable.
 Arbitrary binary parsing is not implicitly supported by this text command. It
 would need a future explicit typed byte-stream API/option contract.
 
-The `.1.5.1.6.0` audit proves decoded Perl native input and a Unicode regex both
-execute and serialize with exact `c3 a9` bytes. It splits implementation into
-neutral runner hex-byte materialization (`.6.1`, now done), Perl decoding and exact
-fixtures (`.6.2`, active), and final reference/no-drift closure (`.6.3`).
+The `.1.5.1.6.0` audit proved decoded Perl native input and a Unicode regex both
+execute and serialize with exact `c3 a9` bytes. `.6.1` added neutral hex-byte
+materialization. `.6.2` now strictly decodes valid argv/source/input, emits recursive
+UTF-8 JSON once, and passes 61 shared cases including preservation, invalid-file,
+and byte-count boundaries. `.6.3` remains active for final reference no-drift.
+
+Unicode is the logical character/code-point standard; UTF-8 is the portable
+process/file encoding selected by ADR `0025`. UTF-16 and UTF-32 are valid Unicode
+encodings generally, but they are not implicit inputs to this primary command.
 
 Related facts: [[primary-cli-utf8-process-boundary-gap]],
 [[user-observable-backend-cli-parity-contract]],

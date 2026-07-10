@@ -2612,7 +2612,7 @@ _Every primary CLI uses one deterministic phase trace while native embedding kee
 
 - **answers:** what trace format must every LinkedSpec primary CLI emit | why does primary CLI trace differ from native embedding trace | what events does low medium high full debug CLI trace add | are primary CLI trace records allowed to contain timestamps or source paths | how do stdout route mirror reset and trace files behave | what emoji prefixes does canonical CLI trace use | are none and quiet trace levels silent | how many neutral CLI cases pass after trace conformance | what did FUTURE-PARITY-BACKLOG.1.5.1.5 implement | what does ADR 0024 decide
 - **date:** 2026-07-10 · **status:** accepted
-- **evidence:** `ADR 0024 and FUTURE-PARITY-BACKLOG.1.5.1.5 define canonical primary phase trace; 20 exact trace cases bring Perl to 53/53 under default/POSIX environments and the local gate runs both.`
+- **evidence:** `ADR 0024 and FUTURE-PARITY-BACKLOG.1.5.1.5 define canonical primary phase trace; 20 exact trace cases brought Perl to 53/53, and FUTURE-PARITY-BACKLOG.1.5.1.6.2 adds eight UTF-8 cases for the current 61/61 default/POSIX suite.`
 - **reverify:** `PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec && POSIXLY_CORRECT=1 PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec && PERL5LIB= prove -v -Iperl t/trace_cli.t`
 - **source:** [`docs/knowledge/canonical-primary-cli-trace-protocol.md`](docs/knowledge/canonical-primary-cli-trace-protocol.md)
 
@@ -3764,7 +3764,7 @@ _One strict manifest and arbitrary-command runner own primary CLI conformance_
 
 - **answers:** where are the LinkedSpec primary CLI conformance fixtures | how do I run primary CLI conformance | what does tools run_cli_conformance.pl do | how are CLI stdout stderr and exit status compared | how are routed trace files checked by CLI conformance | what placeholders does the CLI conformance runner support | what did FUTURE-PARITY-BACKLOG.1.5.1.1 implement
 - **date:** 2026-07-10 · **status:** current
-- **evidence:** `FUTURE-PARITY-BACKLOG.1.5.1.1 adds cli_conformance/manifest.json, tools/run_cli_conformance.pl, exact help bytes, output-file support, and t/cli_conformance_runner.t; .1.5.1.2-.5 expand to 53 cases; .1.5.1.6.1 adds validated bytes_hex workspace inputs.`
+- **evidence:** `FUTURE-PARITY-BACKLOG.1.5.1.1 adds cli_conformance/manifest.json, tools/run_cli_conformance.pl, exact help bytes, output-file support, and t/cli_conformance_runner.t; .1.5.1.2-.5 expand to 53 cases; .1.5.1.6.1 adds validated bytes_hex workspace inputs; .1.5.1.6.2 adds eight strict UTF-8 cases for 61 total.`
 - **reverify:** `perl -c tools/run_cli_conformance.pl && PERL5LIB= prove -v -Iperl t/cli_conformance_runner.t t/trace_cli.t && PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec`
 - **source:** [`docs/knowledge/neutral-cli-fixture-runner.md`](docs/knowledge/neutral-cli-fixture-runner.md)
 
@@ -4052,16 +4052,16 @@ _Every primary CLI treats source input arguments JSON and trace as strict preser
 
 - **answers:** what encoding does the LinkedSpec primary CLI use | are source and input files required to be valid UTF-8 | does LinkedSpec normalize Unicode text in the primary CLI | does LinkedSpec strip a UTF-8 BOM from input or spec files | what happens when a spec file contains invalid UTF-8 | what happens when an input file contains invalid UTF-8 | how does canonical CLI JSON encode Unicode | are invalid byte argv values part of the portable CLI contract | does LinkedSpec primary CLI support arbitrary binary input | what does ADR 0025 decide | what did FUTURE-PARITY-BACKLOG.1.5.1.6.0 do
 - **date:** 2026-07-10 · **status:** accepted
-- **evidence:** `ADR 0025 and FUTURE-PARITY-BACKLOG.1.5.1.6.0 define strict preserved UTF-8 text; decoded Perl Get probes return exact c3 a9 for input_text() and a Unicode regex, isolating the current mojibake to the Perl CLI adapter.`
+- **evidence:** `ADR 0025 defines strict preserved UTF-8 text; FUTURE-PARITY-BACKLOG.1.5.1.6.2 makes the Perl adapter decode argv/files with FB_CROAK, emit recursive UTF-8 JSON, and pass 61 exact shared cases including eight Unicode/invalid families.`
 - **reverify:** `sed -n '1,240p' docs/decisions/0025-primary-cli-strict-utf8-text-boundary.md; rg -n 'FUTURE-PARITY-BACKLOG.1.5.1.6.[0-3]|strict UTF-8|hex byte' docs/tasks/FUTURE-PARITY-BACKLOG.md tools/run_cli_conformance.pl bin/linkedspec cli_conformance`
 - **source:** [`docs/knowledge/primary-cli-strict-utf8-text-contract.md`](docs/knowledge/primary-cli-strict-utf8-text-contract.md)
 
 ### primary-cli-utf8-process-boundary-gap
-_Perl primary CLI raw UTF-8 argv currently mojibakes successful JSON and must be normalized before Rust_
+_Perl primary CLI UTF-8 argv mojibake was an adapter decode gap fixed before Rust_
 
 - **answers:** why does Perl primary CLI output xÃ© for UTF-8 input xé | does the current Perl primary CLI decode argv as UTF-8 | who owns the primary CLI UTF-8 argv file and JSON boundary | why is FUTURE-PARITY-BACKLOG.1.5.1 still active after trace conformance | what did trace signoff discover about Unicode JSON | should Rust primary CLI start before Perl UTF-8 behavior is defined
-- **date:** 2026-07-10 · **status:** implementation-active
-- **evidence:** `A separated input_text() process probe passed UTF-8 argv xé and observed stdout hex 22 78 c3 83 c2 a9 22 0a rather than 22 78 c3 a9 22 0a; isolated JSON::PP probing shows unflagged c3 a9 bytes are treated as two code points before UTF-8 output.`
+- **date:** 2026-07-10 · **status:** resolved
+- **evidence:** `The initiating process probe emitted mojibake bytes 22 78 c3 83 c2 a9 22 0a. FUTURE-PARITY-BACKLOG.1.5.1.6.2 now decodes argv/files strictly and the shared literal-input fixture emits exact 22 78 c3 a9 22 0a; 61/61 default/POSIX cases pass.`
 - **reverify:** `rg -n 'FUTURE-PARITY-BACKLOG.1.5.1.6|c3 83 c2 a9|UTF-8 argv' docs/tasks/FUTURE-PARITY-BACKLOG.md CHANGES.md MEMORY.md docs/knowledge/primary-cli-utf8-process-boundary-gap.md`
 - **source:** [`docs/knowledge/primary-cli-utf8-process-boundary-gap.md`](docs/knowledge/primary-cli-utf8-process-boundary-gap.md)
 
