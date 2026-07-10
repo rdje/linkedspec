@@ -67,6 +67,28 @@ failure exits `2`. Successful parsing writes one canonical JSON value plus one n
 stdout. CLI-controlled stdout, stderr, diagnostic structure, and trace routing are locked by
 the same language-neutral fixtures for every backend.
 
+For example, this portable action-edge grammar deliberately constructs object keys out of
+order:
+
+```text
+Top::
+ /x/ -> Done { return(hash("z", 0, "a", hash("d", 4, "b", 2))) }
+
+Done::
+ /x/
+```
+
+Given input `x`, every conforming primary command must write these exact bytes, including the
+single line ending:
+
+```text
+{"a":{"b":2,"d":4},"z":0}
+```
+
+The neutral suite also returns an input file ending in `x` plus a newline through
+`input_text()`. Its JSON bytes are `"x\n"` followed by the one record newline, which proves
+file loading does not trim content and output framing does not add a second newline.
+
 This is a contract and active convergence target, not a claim that every current executable
     already passes. The current gap census is: Perl is parser-oriented but direct audit found implicit option
     aliases, ignored positionals, environment-dependent parsing, and failure trace on stdout before the neutral
@@ -77,8 +99,8 @@ This is a contract and active convergence target, not a claim that every current
     function-shell/staged trace coverage, `.7.3.2.2` closes exact argument/source/input handling, `.7.3.2.3`
     closes execution/direct canonical JSON, `.7.3.2.4` closes errors/exits/trace routing, and `.7.3.2.5` closes
     nine-family direct-command conformance. `.7.3.3` closes the local audit without claiming global identity.
-    Global `.1.5.1.2` now locks two help plus 20 exact argument/usage cases in default/POSIX environments;
-    `.1.5.1.3` is active for successful source/input/parser controls and canonical bytes.
+    Global `.1.5.1.3` now locks 29 exact Perl cases: two help, 20 usage, and seven source/input/parser success
+    families in default/POSIX environments. `.1.5.1.4` is active for operational failures and stdout purity.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics

@@ -269,6 +269,126 @@
         "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "unexpected positional argument 'one'; unknown option '--UNKNOWN'; unexpected positional argument 'two'"}},
         "files": []
       }
+    },
+    {
+      "id": "success_named_source_literal_input",
+      "family": "success",
+      "args": ["--spec", "Lispish", "--input", "(hello world)"],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "[\"hello\",[\"world\"]]\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "success_file_source_file_input_nested_json",
+      "family": "success",
+      "args": ["--spec-file", "nested.spec", "--input-file", "input.txt"],
+      "files": [
+        {"source": "cases/success/nested.spec", "path": "nested.spec"},
+        {"source": "cases/success/input.txt", "path": "input.txt"}
+      ],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "{\"a\":{\"b\":2,\"d\":4},\"z\":0}\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "success_inline_source_literal_input",
+      "family": "success",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"inline\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "\"inline\"\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "success_explicit_top_rule",
+      "family": "success",
+      "args": [
+        "--inline-spec",
+        "Top::\n /a/ -> Done { return(\"top\") }\n\nAlternate:\n /b/ -> Done { return(\"alternate\") }\n\nDone::\n /[ab]/\n",
+        "--input",
+        "b",
+        "--top-rule",
+        "Alternate"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "\"alternate\"\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "success_seek_mode",
+      "family": "success",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"seek\") }\n\nDone::\n /x/\n",
+        "--input",
+        "prefix x",
+        "--parse-mode",
+        "seek"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "\"seek\"\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "success_consume_mode",
+      "family": "success",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"consume\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--parse-mode",
+        "consume"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "\"consume\"\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "success_input_file_exact_bytes",
+      "family": "success",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(input_text()) }\n\nDone::\n /x/\n",
+        "--input-file",
+        "input.txt"
+      ],
+      "files": [
+        {"source": "cases/success/input.txt", "path": "input.txt"}
+      ],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "\"x\\n\"\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
     }
   ]
 }

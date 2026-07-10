@@ -45,10 +45,12 @@ compares exact channel bytes, exit status, and expected generated files. `{{COMM
 help/diagnostic difference: the backend executable token or unavoidable host launch wrapper. `{{REPO_ROOT}}`,
 `{{WORKSPACE}}`, and `{{CASE_ID}}` represent exact runner inputs rather than backend-specific expected results.
 
-The suite now locks both help forms plus 20 strict usage cases on Perl. All 22 pass with `POSIXLY_CORRECT` unset or
-set, proving ambient option-parser policy cannot change the command. Active `.1.5.1.3` adds successful source/input/
-parser controls, followed by operational failures and trace routing in this same manifest before Rust, Dart, and
-Julia consume it. Until those later cases land, green help/usage fixtures are not a complete CLI-parity claim.
+The suite now locks both help forms, 20 strict usage cases, and seven success cases on Perl. All 29 pass with
+`POSIXLY_CORRECT` unset or set. The success cases cover named/file/inline source, literal/file input, explicit top
+rule, seek/consume, recursively canonical nested JSON, exact input-newline preservation, empty stderr, exit `0`,
+and one output-record newline. Active `.1.5.1.4` adds operational failures, followed by trace routing in this same
+manifest before Rust, Dart, and Julia consume it. Until those later cases land, a green Perl suite is not a complete
+four-backend CLI-parity claim.
 
 ## Optional Dart Gate
 

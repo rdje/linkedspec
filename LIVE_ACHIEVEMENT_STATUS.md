@@ -7,8 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.3 — lock Perl CLI success behavior**
+  (DONE — 29/29 exact cases; `.1.5.1.4` active for operational failures).
+
+  **Change:** Added seven neutral success cases for named/file/inline source, literal/file input, explicit top
+  rule, seek/consume, nested canonical JSON, exact input-newline bytes, empty stderr, exit `0`, and one record
+  newline. Existing Perl runtime behavior was sufficient; portable action-edge grammars avoid ADR `0020` drift.
+
+  **Proof:** Toolbox `Get`/`get_parser`/generated-source/trace probes established the mechanisms. All 29 cases pass
+  in default and POSIX environments; runner/trace tests and governance/book gates pass.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.2 — normalize Perl CLI arguments**
-  (DONE — 22/22 exact help/usage cases; `.1.5.1.3` active for success/IO).
+  (DONE — 22/22 exact help/usage cases; `.1.5.1.3` subsequently closed success/IO).
 
   **Change:** Replaced ambient `Getopt::Long` behavior with one explicit case-sensitive parser. Positionals,
   subcommands, `--`, uppercase/abbreviated/negated aliases, malformed values, selector conflicts, and invalid

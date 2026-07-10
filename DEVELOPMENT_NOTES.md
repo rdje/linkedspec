@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.3 — success fixtures must expose bytes, not merely accept options):
+  Pair each selector/control with an observable invariant: run named resolution from an isolated cwd, return a
+  deliberately unsorted nested hash for recursive canonicalization, and return `input_text()` from a newline-ended
+  file to prove exact loading. Use toolbox probes and existing ADRs before inventing a grammar; ADR `0020` already
+  explains direct-default-rule `E` drift, so portable action-edge returns are the correct neutral fixture surface.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.2 — public argument syntax must not inherit a host option library):
   Exact cross-backend syntax is clearest as one small explicit parser: case-sensitive option table, deterministic
   equals/separate value handling, ordered lexical errors, then selector/value validation. This removes ambient

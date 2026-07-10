@@ -436,7 +436,7 @@ perl bin/linkedspec --spec-file demo.spec --input-file demo.txt \
   --trace-reset
 ```
 
-Use `--spec NAME` for shipped specs resolved by `get_parser(...)`, `--spec-file PATH` for a `.spec` file on disk, or `--inline-spec TEXT` for a literal source string. Use either `--input TEXT` or `--input-file PATH` for parser input. The runner writes the parser result as canonical JSON on stdout, so routed trace files are the cleanest mode for repeatable command-line debugging.
+Use `--spec NAME` for shipped specs resolved by `get_parser(...)`, `--spec-file PATH` for a `.spec` file on disk, or `--inline-spec TEXT` for a literal source string. Use either `--input TEXT` or `--input-file PATH` for parser input. `--top-rule` selects a non-default entry; `--parse-mode seek` scans forward while `consume` matches at the current cursor. File input is loaded byte-for-byte, without trimming. The runner writes recursively key-sorted canonical JSON followed by exactly one newline on stdout, so routed trace files are the cleanest mode for repeatable command-line debugging.
 
 ## Trace scopes and decisions
 

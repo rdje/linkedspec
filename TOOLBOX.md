@@ -272,8 +272,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
     --display-command 'perl bin/linkedspec' \
     -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec
   ```
-  Use `--case ID` before `--` for focused execution. The current baseline contains two exact help forms plus 20
-  strict usage cases; active `.1.5.1.3` adds success/IO before later operational failure and trace families.
+  Use `--case ID` before `--` for focused execution. The current baseline contains two exact help, 20 strict
+  usage, and seven source/input/parser success cases; active `.1.5.1.4` adds operational failures before trace.
 
 ### 4.4 `tools/run_ci_local.sh` / `tools/ram_guard.sh`
 - **WHAT:** `run_ci_local.sh` = the canonical local CI gate (regression + doctrine checks, E4);

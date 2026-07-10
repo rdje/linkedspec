@@ -55,3 +55,4 @@ Julia local/root status: [[julia-scoped-parity-no-drift]].
 Perl reference audit: [[perl-primary-cli-conformance-audit]].
 Neutral fixture runner: [[neutral-cli-fixture-runner]].
 Perl exact argument proof: [[perl-primary-cli-strict-arguments]].
+Perl exact success proof: [[perl-primary-cli-success-conformance]].

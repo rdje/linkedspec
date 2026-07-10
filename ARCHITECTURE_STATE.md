@@ -5,11 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.3` extends the neutral Perl baseline to 29 cases. Seven new
+  success families lock named/file/inline source, literal/file input, explicit top rule, seek/consume, nested
+  canonical JSON, exact input-newline preservation, empty stderr, exit `0`, and one JSON-record newline. Toolbox
+  probes reverified ADR `0020`'s known direct-default-rule `E` caveat, so portable action-edge returns own the
+  fixtures. `.1.5.1.4` is active for operational failures and stdout purity.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.2` makes Perl primary argument parsing explicit and exact.
   Ambient `Getopt::Long` policy is gone; only case-sensitive ADR `0023` spellings and `-h` exist. A shared usage
   template plus channel variables yields 20 exact usage cases without duplicated help snapshots. With both help
   forms, 22/22 pass with `POSIXLY_CORRECT` unset and set; stdout is empty and exit is `2` for every usage failure.
-  `.1.5.1.3` is active for source/input/parser controls and canonical success bytes.
+  `.1.5.1.3` has since closed source/input/parser controls and canonical success bytes.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.1` establishes the neutral primary-CLI fixture architecture.
   A strict JSON manifest and arbitrary command-array runner own canonical private workspaces, safe checked-in file
   materialization, explicit command/repo/workspace/case placeholders, raw stdout/stderr, exit status, generated

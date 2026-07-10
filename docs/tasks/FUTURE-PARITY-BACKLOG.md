@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`.1.5.1.2` strict Perl arguments done; `.1.5.1.3` active).
+- Last updated: `2026-07-10` (`.1.5.1.3` Perl success/IO bytes done; `.1.5.1.4` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -187,15 +187,19 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.5.1.2 - normalize Perl CLI arguments`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.1.3`
-  Status: `active`
+  Status: `done`
   Goal: Lock Perl source/input/parser controls and canonical successful output through neutral fixtures.
   Acceptance: Named/file/inline source, literal/file input, top-rule, seek/consume, nested canonical JSON, and one
     trailing newline are exact; source/input bytes and documented resolution have no backend-local side channel.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - seven backend-neutral success cases lock repository named resolution from an isolated
+    workspace, exact file/inline source and literal/file input, explicit top rule, distinct seek/consume controls,
+    recursively sorted nested JSON, preserved input-file newline bytes, empty stderr, exit `0`, and exactly one
+    JSON-record newline. `LinkedSpec::Get`, `get_parser`, generated-source, and trace probes confirmed the portable
+    action-edge return shape and ADR `0020`'s already-owned direct-default-rule `E` caveat before fixture authoring.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.1.3 - lock Perl CLI success behavior`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.1.4`
-  Status: `pending`
+  Status: `active`
   Goal: Normalize and fixture-lock Perl compilation, input-load, and invocation failures.
   Acceptance: Phase order is compilation then input then invocation; each failure has backend-neutral stable stderr,
     empty stdout unless trace is explicitly selected, and exit `1`; paths and host exception text do not make the
@@ -366,8 +370,8 @@ before implementation.
 | 2 | `FUTURE-PARITY-BACKLOG.1.5.1.0` | `done` | Perl/fixture source and process audit is split before implementation. |
 | 3 | `FUTURE-PARITY-BACKLOG.1.5.1.1` | `done` | Neutral manifest/runner, exact help bytes, workspaces, and output-file proof are locked. |
 | 4 | `FUTURE-PARITY-BACKLOG.1.5.1.2` | `done` | Twenty-two cases lock exact case-sensitive arguments and usage bytes in both POSIX environments. |
-| 5 | `FUTURE-PARITY-BACKLOG.1.5.1.3` | `active` | Lock source/input/parser controls and canonical success bytes. |
-| 6 | `FUTURE-PARITY-BACKLOG.1.5.1.4` | `pending` | Normalize compile/input/invocation failures and stdout purity. |
+| 5 | `FUTURE-PARITY-BACKLOG.1.5.1.3` | `done` | Seven success cases lock source/input/parser controls and canonical bytes. |
+| 6 | `FUTURE-PARITY-BACKLOG.1.5.1.4` | `active` | Normalize compile/input/invocation failures and stdout purity. |
 | 7 | `FUTURE-PARITY-BACKLOG.1.5.1.5` | `pending` | Lock deterministic trace behavior and close the Perl neutral-fixture gate. |
 | 8 | `FUTURE-PARITY-BACKLOG.1.5.2` | `pending` | Add the missing Rust primary CLI against the shared fixtures. |
 | 9 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
@@ -382,6 +386,39 @@ before implementation.
 | 18 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 19 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser/stimuli roundtrip arc is parked for later design. |
 | 20 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
+
+## `FUTURE-PARITY-BACKLOG.1.5.1.3` Perl Source, Input, Parser Controls, and Success Bytes
+
+Implementation evidence recorded on 2026-07-10:
+
+- Seven shared success cases extend the manifest from 22 to 29 cases. They cover the repository `Lispish` named
+  spec from the runner's isolated working directory, file source plus file input, inline source plus literal input,
+  explicit `--top-rule`, explicit seek and consume modes, and exact file-input byte preservation.
+- The file-backed grammar returns a deliberately unsorted nested hash. Perl's canonical JSON writer emits
+  `{"a":{"b":2,"d":4},"z":0}` with recursive lexical key ordering. Every success writes empty stderr,
+  exits `0`, creates no unexpected files, and terminates the one JSON value with exactly one newline.
+- `cli_conformance/cases/success/input.txt` contains `x` plus a newline. The `input_text()` case emits `"x\\n"` plus the JSON
+  record newline, proving `_slurp` does not trim or normalize file input before parser invocation.
+- Toolbox `LinkedSpec::Get`, `get_parser`, generated-source, and debug-trace probes were used before choosing the
+  grammar. They reverified ADR `0020`'s known Perl direct-default-rule `E` omission. The fixtures therefore use the
+  established action-edge return shape already present in the cross-variant corpus; lifecycle normalization stays
+  outside this CLI-only leaf and remains a later complete-capability parity obligation.
+
+## `FUTURE-PARITY-BACKLOG.1.5.1.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Direct CLI probes established exact named/file/inline, literal/file, top-rule,
+  seek/consume, nested JSON, stderr, exit, and newline behavior before fixtures were written.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `bin/linkedspec` already forwards exact loaded bytes and parser controls to
+  `get_parser`/`Get`; its canonical `JSON::PP` writer sorts keys and appends one newline. No success-path code gap
+  existed. ADR `0020` explains why direct default-rule `E` is not a portable fixture shape.
+- [x] **FIX** — Add seven language-neutral success cases and two raw checked-in source/input files; no backend
+  implementation change or expected-output normalization was necessary.
+- [x] **ADDRESSED (verified)** — All acceptance dimensions are independently represented, including isolated named
+  resolution, nested recursive key ordering, and an input newline visible inside the returned JSON string.
+- [x] **NO REGRESSION** — The complete 29-case suite passes in default and POSIX environments; runner/trace focused
+  tests, syntax, governance, Knowledge Map, mdBook, whitespace, and cleanup gates pass.
+- [x] **LOCKSTEP** — Manifest/docs/book/task/KM surfaces report exactly 2 help + 20 usage + 7 success cases;
+  `.1.5.1.4` is active for operational failures and `.1.5.1.5` retains trace/final-gate ownership.
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.2` Strict Perl Arguments and Usage Bytes
 
@@ -415,7 +452,7 @@ Implementation evidence recorded on 2026-07-10:
 - [x] **NO REGRESSION** — CLI/runner/test syntax passes; 22/22 cases pass twice (default and POSIX), four runner
   subtests and two trace CLI subtests remain green; parser/compiler/runtime behavior is unchanged.
 - [x] **LOCKSTEP** — Manifest/README/TOOLBOX/mdBook/task/live/KM surfaces report exact help+usage scope only;
-  `.1.5.1.3` is active for source/input/parser success bytes, while failures/trace retain their later owners.
+  `.1.5.1.3` became active there and has since closed success bytes, while failures/trace retain later owners.
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.1` Neutral Fixture Runner and Help Baseline
 
@@ -558,7 +595,10 @@ Read-only evidence recorded on 2026-07-10:
   arguments.
 - `2026-07-10`: `.1.5.1.2` removes ambient option-parser policy from Perl's public command. Exact shared parsing is
   manual and case-sensitive; usage-template variables are manifest data and cannot override reserved runner inputs.
-  Twenty-two cases pass under both default and POSIX environments; `.1.5.1.3` is active for successful IO/control.
+  Twenty-two cases pass under both default and POSIX environments; `.1.5.1.3` has since closed successful IO/control.
+- `2026-07-10`: `.1.5.1.3` adds seven portable success cases without changing Perl behavior. Named/file/inline
+  source, literal/file input, top-rule, seek/consume, nested canonical JSON, exact input newline bytes, empty
+  stderr, exit `0`, and one record newline are locked. `.1.5.1.4` is active for operational failures/stdout purity.
 
 ## Open Questions
 
@@ -567,7 +607,7 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. `.1.5.1.2` is done and `.1.5.1.3` is active for successful Perl source/input/parser-control fixtures.
+- None. `.1.5.1.3` is done and `.1.5.1.4` is active for Perl operational failures and stdout purity.
   Global CLI/capability convergence precedes Lua `.1.3`.
 
 ## Verification Log
@@ -584,7 +624,8 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.3` | Delegated current-surface audit; stale mdBook provenance/correction; exact owner routing; prior `431f0472` Julia proof; docs/KM/governance/whitespace and mdBook. | PASS. Julia's local audit is done while its root remains active/delegated; `.1.5.1` became next and `.1.5.1.0` has since split it. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.0` | ADR/KM/toolbox and Perl source/test audit; existing trace test; direct argument/environment/failure probes with separated stdout/stderr; docs/KM/governance/whitespace/mdBook. | PASS. Five implementation mechanisms are split; no behavior source changed; `.1.5.1.1` became active and has since closed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.1` | CLI/runner/test syntax; 4 runner subtests/13 assertions; 2 trace CLI subtests; direct neutral help execution; docs/KM/governance/whitespace/mdBook and cleanup. | PASS. Schema/runner/workspace/channels/generated files and exact help are locked; `.1.5.1.2` became active and has since closed. |
-| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.2` | CLI/runner/test syntax; 22/22 exact cases under default and `POSIXLY_CORRECT=1`; 4 runner subtests; 2 trace CLI subtests; docs/KM/governance/whitespace/mdBook and cleanup. | PASS. Exact arguments/usage are environment-independent; `.1.5.1.3` is active. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.2` | CLI/runner/test syntax; 22/22 exact cases under default and `POSIXLY_CORRECT=1`; 4 runner subtests; 2 trace CLI subtests; docs/KM/governance/whitespace/mdBook and cleanup. | PASS. Exact arguments/usage are environment-independent; `.1.5.1.3` became active and has since closed. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.3` | Toolbox Get/get_parser/generated-source/trace probes; 29/29 exact cases under default and `POSIXLY_CORRECT=1`; runner/trace tests; docs/KM/governance/whitespace/mdBook and cleanup. | PASS. Seven success cases lock exact source/input/parser/JSON behavior; `.1.5.1.4` is active. |
 
 ## Commit Log
 
@@ -601,13 +642,18 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.5.1.0` | `FUTURE-PARITY-BACKLOG.1.5.1.0 - split neutral CLI fixture work` | Read-only Perl/process audit and five-leaf implementation split. |
 | `FUTURE-PARITY-BACKLOG.1.5.1.1` | `FUTURE-PARITY-BACKLOG.1.5.1.1 - add neutral CLI fixture runner` | Strict schema, arbitrary command runner, exact help case, output-file support, and focused tests. |
 | `FUTURE-PARITY-BACKLOG.1.5.1.2` | `FUTURE-PARITY-BACKLOG.1.5.1.2 - normalize Perl CLI arguments` | Explicit parser plus 20 exact usage cases; 22/22 green in default/POSIX environments. |
+| `FUTURE-PARITY-BACKLOG.1.5.1.3` | `FUTURE-PARITY-BACKLOG.1.5.1.3 - lock Perl CLI success behavior` | Seven exact success cases; source/input/parser controls and canonical JSON locked. |
 
 ## Changelog
 
+- `2026-07-10`: `.1.5.1.3` extends the neutral suite to 29 cases with seven successful process families. Isolated
+  named resolution, file/inline source, literal/file input, explicit top rule, seek/consume, recursively sorted
+  nested JSON, exact input newline bytes, empty stderr, exit `0`, and one output newline are byte-locked. Existing
+  ADR `0020` direct-`E` drift was reverified with the toolbox, so portable action-edge sources own these fixtures.
 - `2026-07-10`: `.1.5.1.2` replaces Perl's ambient `Getopt::Long` boundary with an explicit exact parser. The
   shared manifest now has two help plus 20 usage cases covering positionals/subcommands, `--`, unknown/case/
   abbreviation/negation aliases, required/flag values, selector conflicts, modes/levels, and ordered multi-error
-  text. All 22 pass with and without `POSIXLY_CORRECT`; `.1.5.1.3` is active for successful IO/control bytes.
+  text. All 22 pass with and without `POSIXLY_CORRECT`; `.1.5.1.3` subsequently closed successful IO/control bytes.
 - `2026-07-10`: `.1.5.1.1` adds the backend-neutral CLI fixture architecture. A strict manifest and arbitrary
   command runner own private workspaces, raw stdout/stderr, exit status, generated files, safe paths, explicit
   placeholders, and byte diagnostics. Perl passes the exact backend-neutral help case; 13 runner assertions and

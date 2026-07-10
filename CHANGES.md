@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.3 — lock Perl CLI success behavior
+
+**Scope:** Seven backend-neutral success cases for exact source/input loading, parser controls, canonical JSON,
+process channels/status, durable task/Knowledge Map facts, and synchronized user-facing documentation.
+
+**Fixtures:** The suite now covers repository-named `Lispish`, file and inline source, literal and file input,
+explicit top rule, seek/consume, recursively sorted nested objects, and an input newline returned through
+`input_text()`. Each success requires empty stderr, exit `0`, no unexpected files, and one JSON-record newline.
+
+**Evidence:** `LinkedSpec::Get`, `get_parser`, generated-source, and debug-trace probes reverified both the selected
+portable action-edge return shape and ADR `0020`'s existing direct-default-rule `E` caveat. Perl needed no runtime
+change. All 29 cases pass with `POSIXLY_CORRECT` unset and set; `.1.5.1.4` owns operational failures next.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.2 — normalize Perl CLI arguments
 
 **Scope:** Explicit Perl primary option parser, reusable expected-channel template variables, 20 exact usage cases,

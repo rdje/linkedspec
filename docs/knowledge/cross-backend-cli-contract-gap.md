@@ -19,8 +19,8 @@ The implemented backend CLI surfaces are not currently interface-equivalent:
 
 - Perl `bin/linkedspec` parses an arbitrary named, file-backed, or inline spec against literal or file-backed
   input. It exposes top-rule, parse-mode, and trace controls, prints canonical JSON, and distinguishes runtime
-  failure (`1`) from usage failure (`2`). `.1.5.1.2` now closes strict deterministic help/argument/usage behavior;
-  success/IO, failure stdout purity, and trace fixtures remain `.1.5.1.3` through `.5`.
+  failure (`1`) from usage failure (`2`). `.1.5.1.3` now locks 29 exact help/usage/success cases; operational
+  failure stdout purity and trace fixtures remain `.1.5.1.4` and `.5`.
 - Dart `bin/linkedspec_dart.dart` is a manifest corpus validator/executor. Its options select corpus cases/windows,
   and it reports usage failure as `64`.
 - Julia `bin/linkedspec_julia.jl` now accepts only the exact parser option contract, rejects subcommands/
@@ -44,4 +44,5 @@ Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specif
 [[julia-primary-cli-native-execution-canonical-json]],
 [[julia-primary-cli-failure-trace-routing]], [[julia-primary-cli-process-conformance]],
 [[julia-scoped-parity-no-drift]], [[perl-primary-cli-conformance-audit]],
-[[neutral-cli-fixture-runner]], [[perl-primary-cli-strict-arguments]].
+[[neutral-cli-fixture-runner]], [[perl-primary-cli-strict-arguments]],
+[[perl-primary-cli-success-conformance]].

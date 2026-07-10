@@ -13,7 +13,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [perl, cli, conformance, getopt-long, trace, stdout, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.1.0 audited positionals, case/abbreviation/negation aliases, POSIXLY_CORRECT drift, GetOptions warnings, and DUMP_NONE failure trace; .1/.2 now close runner/help/arguments while .3-.5 retain success/failure/trace."
+evidence: "FUTURE-PARITY-BACKLOG.1.5.1.0 audited positionals, case/abbreviation/negation aliases, POSIXLY_CORRECT drift, GetOptions warnings, and DUMP_NONE failure trace; .1/.2/.3 now close runner/help/arguments/success while .4/.5 retain failure/trace."
 reverify: "PERL5LIB= prove -v -Iperl t/trace_cli.t; sed -n '1,260p' bin/linkedspec; rg -n 'DUMP_NONE|sub log_output|sub trace_decision' perl/LinkedSpec/Trace.pm perl/LinkedSpec/Validation.pm perl/LinkedSpec/Compiler.pm; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -41,19 +41,20 @@ The level-zero events are intentional in the general trace owner, so the primary
 CLI adapter must own stdout purity and a deterministic cross-backend projection
 without silently changing the library-wide diagnostic contract.
 
-`.1.5.1.1` and `.1.5.1.2` have since added the neutral runner/help baseline and
-replaced the argument boundary with an explicit exact parser. The historical
-positionals/aliases/environment/warning defects above are now closed; successful
-IO/control, operational failure stdout purity, and deterministic trace remain
-owned by `.3`, `.4`, and `.5`.
+`.1.5.1.1` through `.1.5.1.3` have since added the neutral runner/help baseline,
+replaced the argument boundary with an explicit exact parser, and locked seven
+successful IO/control families. The historical positionals/aliases/environment/
+warning defects above are now closed; operational failure stdout purity and
+deterministic trace remain owned by `.4` and `.5`.
 
 `FUTURE-PARITY-BACKLOG.1.5.1` is split into neutral harness/help (`.1`, now done), strict
-arguments (`.2`, now done), success/source/input/parser controls (`.3`), operational
-failure normalization (`.4`), and trace/final Perl gate (`.5`). Rust, Dart, and
+arguments (`.2`, now done), success/source/input/parser controls (`.3`, now done),
+operational failure normalization (`.4`), and trace/final Perl gate (`.5`). Rust, Dart, and
 Julia will later consume the same manifest; they do not get backend-specific
 fixture forks.
 
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[cross-backend-cli-contract-gap]], [[trace-cli-control]],
 [[trace-verbosity-and-formatting]], [[julia-primary-cli-process-conformance]],
-[[neutral-cli-fixture-runner]], [[perl-primary-cli-strict-arguments]].
+[[neutral-cli-fixture-runner]], [[perl-primary-cli-strict-arguments]],
+[[perl-primary-cli-success-conformance]].
