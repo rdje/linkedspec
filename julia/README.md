@@ -23,8 +23,8 @@ array helper and mutation boundary landed in `.4.3.3`, and hash helper and mutat
 diagnostic/trace, staged-function, shipped-corpus, function-shell, and full-corpus work through `.6.3` has since
 landed; `.6.4` owns the focused optional-SDK verification gate, `.7.1` closes public documentation, and `.7.2` is
 complete with generated source deferred to the future split proof lane. `.7.3.0` found that this corpus/status CLI
-does not yet match the required cross-variant parser CLI contract. ADR `0023` now defines that exact interface;
-`.7.3.2` is active for Julia implementation repair.
+does not yet match the required cross-variant parser CLI contract. ADR `0023` defines that exact interface;
+`.7.3.2.0` splits repair and `.7.3.2.1` is active for compile/parser/staged trace coverage.
 
 ## Commands
 
@@ -192,8 +192,8 @@ three routed top-level function fixtures pass. `.6.3` adds one atomic complete-c
 unbounded CLI execution: the manifest runs 99/99 green in exact order. Full tests pass with 840 assertions, status
 is `runtime-corpus-full`, `.6.4` owns the focused optional-SDK gate, and `.7.1` closes public documentation. `.7.2`
 defers generated source to `FUTURE-PARITY-BACKLOG.3`. `.7.3.0` splits the newly clarified exact user-facing CLI
-parity gap. `.7.3.1` ratifies ADR `0023` and routes global repairs; `.7.3.2` owns Julia CLI alignment. Generated
-source remains deferred but blocks complete capability parity because Rust exports it publicly.
+parity gap. `.7.3.1` ratifies ADR `0023`; `.7.3.2.0` splits Julia CLI alignment into five mechanisms and `.1` is
+active for trace prerequisites. Generated source remains deferred but blocks complete parity because Rust exports it.
 
 Library example:
 

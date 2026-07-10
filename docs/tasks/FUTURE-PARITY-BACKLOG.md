@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.5.0` done through delegated Julia `.7.3.1`; delegated Julia frontier is `.7.3.2`).
+- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.5.0` done; delegated Julia CLI frontier is `.7.3.2.1`).
 - Owner: repo-local workflow
 
 ## Goal
@@ -293,7 +293,7 @@ before implementation.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.7.3.2` | `active` | Align Julia's primary CLI to ADR `0023` before its honest no-drift leaf. |
+| 1 | `JULIA-BACKEND-PARITY.7.3.2.1` | `active` | Close Julia compile/parser/staged trace coverage before primary CLI options. |
 | 2 | `JULIA-BACKEND-PARITY.7.3.3` | `pending` | Reconcile Julia's scoped milestone and remaining complete-parity obligations without false closure. |
 | 3 | `FUTURE-PARITY-BACKLOG.1.5.1` | `pending` | Lock neutral CLI fixtures and normalize the Perl reference after Julia's active leaf is clean. |
 | 4 | `FUTURE-PARITY-BACKLOG.1.5.2` | `pending` | Add the missing Rust primary CLI against the shared fixtures. |
@@ -352,6 +352,9 @@ before implementation.
   `.1.5.0` closes through `JULIA-BACKEND-PARITY.7.3.1`; `.1.5.1`–`.1.5.4` own the current-backend CLI repairs,
   `.1.6` owns the full public capability census, and `.3` is mandatory for complete parity because Rust exports
   source emission publicly. Julia `.7.3.2` remains first to preserve the current task-tree sequence.
+- `2026-07-10`: Julia `.7.3.2.0` splits primary CLI alignment after source audit found five mechanisms: compile/
+  parser/staged trace coverage, exact arguments and source/input resolution, execution/canonical JSON, normalized
+  errors/trace routing, and direct-command conformance. `.7.3.2.1` is active; no implementation changed.
 
 ## Open Questions
 
@@ -360,7 +363,7 @@ before implementation.
 
 ## Blockers
 
-- None. Julia `.7.3.2` is the next active PNT leaf; global CLI/capability convergence now precedes Lua `.1.3`.
+- None. Julia `.7.3.2.1` is the next active PNT leaf; global CLI/capability convergence precedes Lua `.1.3`.
 
 ## Verification Log
 

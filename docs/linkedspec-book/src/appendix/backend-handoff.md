@@ -70,8 +70,9 @@ the same language-neutral fixtures for every backend.
 This is a contract and active convergence target, not a claim that every current executable
 already passes. The current gap census is: Perl is parser-oriented but still needs the neutral
 fixture lock; Rust has no primary binary; Dart and Julia currently use corpus/status-oriented
-primary commands. `FUTURE-PARITY-BACKLOG.1.5` owns convergence, with Julia's immediate repair
-under `JULIA-BACKEND-PARITY.7.3.2`.
+primary commands. `FUTURE-PARITY-BACKLOG.1.5` owns convergence. Julia's repair is split under
+`JULIA-BACKEND-PARITY.7.3.2`; `.7.3.2.1` is active for compile/parser/staged trace coverage before
+argument/IO, execution/JSON, failure/routing, and direct-command conformance leaves.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics
@@ -427,7 +428,8 @@ runner are thin adapters over the same in-process parser/compiler/runtime path.
 The current Julia primary command exposes help/status/corpus operations, not the parser-oriented interface of
 Perl `bin/linkedspec`. `JULIA-BACKEND-PARITY.7.3.0` records that user-visible drift and also confirms that Dart is
 corpus-oriented and Rust currently has no binary target. `.7.3.1` ratifies ADR `0023` and routes repairs;
-`.7.3.2` is active for Julia CLI implementation. 99/99 corpus success does not erase this interface gap.
+`.7.3.2.0` splits Julia implementation by mechanism and `.7.3.2.1` is active for tracing prerequisites. 99/99
+corpus success does not erase this interface gap.
 
 The boundary does not claim generated Julia source or broader compile/parser trace parity. `.7.2` deliberately
 defers generated Julia source to the split future source-emitter lane under `FUTURE-PARITY-BACKLOG.3`; Julia

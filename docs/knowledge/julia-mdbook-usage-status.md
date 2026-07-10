@@ -13,8 +13,8 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, mdbook, documentation, parity, embedding, limitations, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.1 documents native usage and the 99/99 runtime-corpus-full boundary; .7.2 defers generated source. ADR 0023 later defines the exact primary CLI and classifies public generated source as mandatory for complete parity; .7.3.2 owns Julia CLI repair and FUTURE-PARITY-BACKLOG.3 owns codegen."
-reverify: "rg -n 'Julia Backend Commands, Embedding, and Status|Julia in-memory example|runtime-corpus-full|run_julia_local|LINKEDSPEC_RUN_JULIA|generated Julia source|compile/parser trace parity' docs/linkedspec-book/src/appendix/backend-handoff.md docs/linkedspec-book/src/public-api/get-and-get-parser.md docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/development/local-ci-and-regression.md && mdbook build docs/linkedspec-book"
+evidence: "JULIA-BACKEND-PARITY.7.1 documents native usage and the 99/99 runtime-corpus-full boundary; .7.2 defers generated source. ADR 0023 defines the exact primary CLI and classifies public generated source as mandatory for complete parity; .7.3.2.0 splits Julia CLI repair and makes parser/compiler/staged trace leaf .7.3.2.1 active."
+reverify: "rg -n 'Julia Backend Commands, Embedding, and Status|Julia in-memory example|runtime-corpus-full|run_julia_local|LINKEDSPEC_RUN_JULIA|generated Julia source|compile/parser trace parity|JULIA-BACKEND-PARITY\.7\.3\.2\.1' docs/linkedspec-book/src/appendix/backend-handoff.md docs/linkedspec-book/src/public-api/get-and-get-parser.md docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/development/local-ci-and-regression.md docs/tasks/JULIA-BACKEND-PARITY.md && mdbook build docs/linkedspec-book"
 ---
 
 The mdBook presents Julia as a native in-memory LinkedSpec backend, not as a command-line clone or an unfinished
@@ -35,10 +35,11 @@ status `runtime-corpus-full`.
 
 The limitations are explicit. Generated Julia source is not part of the current interpreter gate; `.7.2` defers
 it to the future split source-emitter lane under `FUTURE-PARITY-BACKLOG.3`. ADR `0023` makes it mandatory before
-complete public parity, and `.7.3.2` owns the exact primary CLI. Julia's trace claim covers structured runtime
-controls/events/sinks and interpreter instrumentation, not broader compile/parser trace parity. `JuliaFormatter`
+complete public parity. `.7.3.2.0` splits the exact primary CLI into five mechanisms, with `.7.3.2.1` active first.
+Julia's trace claim covers structured runtime controls/events/sinks and interpreter instrumentation, not yet broader
+compile/parser/staged trace parity. `JuliaFormatter`
 and `JET` remain optional local tooling rather than behavior prerequisites.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[julia-generated-source-deferred]], [[julia-local-verification-gate]], [[julia-full-corpus-gate]],
 [[julia-spec-driven-function-shell-parser]], [[native-in-memory-backend-contract]],
-[[dart-mdbook-usage-status]].
+[[dart-mdbook-usage-status]], [[julia-primary-cli-mechanism-audit]].

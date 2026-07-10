@@ -142,8 +142,8 @@ Top-level directories and files:
     generated Julia source to the future split source-emitter lane. `.7.3.0` then proves the implemented CLIs are
     not interface-equivalent (Perl parser CLI, Dart/Julia corpus/status CLIs, no Rust binary) and splits repair.
     `.7.3.1` ratifies ADR `0023`: complete user-observable capability identity plus one exact primary CLI contract.
-    `.7.3.2` is active for Julia CLI alignment; neutral Perl/Rust/Dart/global repair, full capability census, and
-    public generated-source parity are owned in `FUTURE-PARITY-BACKLOG.1.5`, `.1.6`, and `.3`.
+    `.7.3.2.0` splits Julia alignment into trace, arguments/IO, execution/JSON, error/routing, and conformance;
+    `.7.3.2.1` is active for compile/parser/staged trace coverage. Global repair/census/codegen remain `.1.5`/`.1.6`/`.3`.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

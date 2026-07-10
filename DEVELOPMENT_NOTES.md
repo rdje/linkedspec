@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.7.3.2.0 — CLI adapters reveal missing library-observable mechanisms):
+  Argument parsing is the small part of the Julia CLI gap. Correct `--trace` meaning first requires compile/parser/
+  staged instrumentation; correct `--spec` needs stable resolver ownership; canonical JSON needs deterministic key
+  order; errors need a normalized stage boundary. Splitting by those mechanisms prevents an option-compatible but
+  behavior-incompatible façade.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.7.3.1 — parity claims need a capability matrix, not a corpus count):
   The 99-fixture oracle is strong interpreter evidence, but it cannot prove an exported feature is present when no
   fixture invokes that public API. Rust's `pub mod source_emitter` is the concrete counterexample. ADR `0023`

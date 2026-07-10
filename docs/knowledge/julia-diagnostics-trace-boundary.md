@@ -1,16 +1,17 @@
 ---
 id: julia-diagnostics-trace-boundary
-title: Julia diagnostics and runtime trace boundary is closed through no-drift
+title: Julia runtime diagnostics and trace boundary is closed; parser and compiler trace remain active
 answers:
   - is Julia diagnostics trace no-drift closed
   - what is the Julia frontier after JULIA-BACKEND-PARITY.4.5.4
   - does Julia have structured runtime diagnostics and trace events
   - does Julia claim full trace parity after diagnostics trace closeout
+  - what Julia trace coverage remains before primary CLI trace options
 date: 2026-07-10
 status: current
 tags: [julia, diagnostics, trace, runtime, task-tree, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.4.5.4 closes the .4.5 diagnostics/trace container in docs/tasks/JULIA-BACKEND-PARITY.md after the 631-assertion suite, CLI status runtime-trace-events, README, mdBook, roadmap/task/live docs, architecture, and Knowledge Map agree without a source correction."
-reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()' && rg -n 'JULIA-BACKEND-PARITY\.4\.5\.4|JULIA-BACKEND-PARITY\.5\.1|runtime-trace-events|RuntimeDiagnostic|LinkedSpecTrace' docs/tasks/JULIA-BACKEND-PARITY.md docs/TASK_TREE.md julia/README.md julia/src docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/appendix/backend-handoff.md MEMORY.md ROADMAP_V2.md"
+evidence: "JULIA-BACKEND-PARITY.4.5.4 closes the runtime diagnostics/trace container. The later .7.3.2.0 primary-CLI audit confirms compile/spec-parser/function-shell/staged trace remains outside that scoped claim and assigns it to active .7.3.2.1."
+reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()' && rg -n 'JULIA-BACKEND-PARITY\.4\.5\.4|JULIA-BACKEND-PARITY\.7\.3\.2\.1|runtime-trace-events|RuntimeDiagnostic|LinkedSpecTrace' docs/tasks/JULIA-BACKEND-PARITY.md docs/TASK_TREE.md julia/README.md julia/src docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/appendix/backend-handoff.md MEMORY.md ROADMAP_V2.md"
 ---
 
 `JULIA-BACKEND-PARITY.4.5.4` closes the Julia diagnostics/trace no-drift
@@ -27,14 +28,16 @@ The implemented boundary is:
   action/blind child dispatch, lifecycle marks, cursor/source-boundary marks,
   and recursion cutoffs.
 
-Package/CLI status remains the precise `runtime-trace-events`. This closeout
-does not overclaim complete compile/parser trace parity or later staged
-runtime/corpus parity. `.5.1` has since added the minimal staged registry
+The historical package/CLI status at this boundary was the precise
+`runtime-trace-events`. This closeout does not overclaim complete compile/parser
+trace parity. `.7.3.2.0` later audited that residual for the exact primary CLI and
+made `.7.3.2.1` active for source parse/validation/compile, function-shell, and
+staged-dispatch events through the same trace controls/sinks. `.5.1` added the minimal staged registry
 provider, `.5.2` has since added registered function execution, `.5.3` has closed descriptor-shape parity, and
-`.6.1` has since added controlled corpus execution; `.6.2` manifest batches are active.
+`.6.1` added controlled corpus execution; the interpreter corpus has since reached 99/99.
 
 Related facts: [[julia-runtime-structured-diagnostics]],
 [[julia-trace-controls-sinks]], [[julia-runtime-trace-events]],
 [[julia-staged-function-body-registry]],
 [[julia-user-function-runtime-execution]],
-[[trace-cross-variant-capability-contract]].
+[[trace-cross-variant-capability-contract]], [[julia-primary-cli-mechanism-audit]].

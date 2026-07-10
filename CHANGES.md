@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.2.0 — split Julia primary CLI alignment
+
+**Scope:** Read-only Julia native/CLI seam audit, mechanism task split, public/live status, Knowledge Map, and
+resume pointer. No parser/compiler/runtime/CLI behavior changed.
+
+**Finding:** The native package already provides rule/staged source parsing, compilation, top-rule/parse-mode
+runtime execution, structured diagnostics, and runtime trace configs/sinks. The primary CLI still only dispatches
+status/corpus and lacks compile/parser/staged trace events, the ADR `0023` option/resolution model, parser execution,
+key-sorted canonical JSON, normalized failures, and direct-command proof.
+
+**Split:** `.7.3.2.1` owns trace prerequisites, `.2` arguments/source/input resolution, `.3` execution/JSON, `.4`
+failures/exits/trace routing, and `.5` direct conformance plus focused verification/docs. Governance/book checks
+pass; `.7.3.2.1` is active.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.1 — ratify exact backend interface parity
 
 **Scope:** ADR `0023`, canonical primary CLI schema, strict completion terminology, global repair/capability owners,

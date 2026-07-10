@@ -795,8 +795,59 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 - ID: `JULIA-BACKEND-PARITY.7.3.2`
   Status: `active`
   Goal: Align Julia's primary CLI with the ratified cross-variant command contract.
+  Children: `.7.3.2.0`, `.7.3.2.1`, `.7.3.2.2`, `.7.3.2.3`, `.7.3.2.4`, `.7.3.2.5`
+
+- ID: `JULIA-BACKEND-PARITY.7.3.2.0`
+  Status: `done`
+  Goal: Audit and split Julia primary-CLI alignment by implementation mechanism before code.
+  Acceptance: Identify native library seams and every missing ADR `0023` mechanism; split trace prerequisites,
+    argument/source/input handling, execution/canonical JSON, normalized errors/trace routing, and direct-command
+    conformance into recoverable leaves.
+  Verification: `PASS` - Julia already exposes rule/staged source parsing, compilation, runtime top-rule/parse-mode,
+    structured diagnostics, trace configs/sinks, and corpus JSON utilities. Its primary CLI still owns only
+    status/corpus dispatch; no named-spec resolver, parser-option model, canonical key-sorted result serializer, or
+    compile/parser trace instrumentation exists. `.7.3.2.1` through `.7.3.2.5` own those mechanisms before repair.
+  Commit: `JULIA-BACKEND-PARITY.7.3.2.0 - split Julia primary CLI alignment`
+
+- ID: `JULIA-BACKEND-PARITY.7.3.2.1`
+  Status: `active`
+  Goal: Close Julia compile/spec-parser/staged trace coverage required by the primary trace options.
+  Acceptance: Opt-in structured trace events cover source parse/validation/compile, function-shell parsing, and
+    staged dispatch through existing levels/config/sinks; default APIs remain quiet and output-compatible.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.7.3.2.2`
+  Status: `pending`
+  Goal: Implement the exact primary-CLI argument model plus source/input loading and named-spec resolution.
+  Acceptance: Julia accepts only ADR `0023`'s source/input/parser/trace/help options, rejects subcommands and
+    positionals with usage exit `2`, resolves named/current/repo specs consistently, and loads files without
+    leaking backend-specific primary options.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.7.3.2.3`
+  Status: `pending`
+  Goal: Connect primary CLI execution to the shared Julia library pipeline and canonical JSON output.
+  Acceptance: Rule-only and top-level-function source flow through spec-defined parsing, compilation, engine
+    parse-mode/top-rule execution, and key-sorted canonical JSON of the direct top-rule value plus one newline.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.7.3.2.4`
+  Status: `pending`
+  Goal: Normalize Julia primary-CLI failures, exit status, and trace routing.
+  Acceptance: Compile/input/runtime failures emit ADR `0023`'s stable stderr shape and exit `1`; usage exits `2`;
+    stdout/route/mirror, reset, emoji, and trace-file behavior compose with machine-readable JSON exactly.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.7.3.2.5`
+  Status: `pending`
+  Goal: Close Julia direct-command conformance and public status after the mechanism leaves.
   Acceptance: Julia exposes the canonical parser CLI through its native in-memory library, with exact argument,
-    output/error, and exit behavior locked by focused tests; corpus tooling remains a separate developer adapter.
+    output/error, trace, and exit behavior locked by focused/unit/direct-process tests; old status/corpus primary
+    subcommands are rejected, corpus tooling remains separate, and the focused local gate/book are current.
   Verification: `pending`
   Commit: `pending`
 
@@ -841,8 +892,43 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 26 | `JULIA-BACKEND-PARITY.7.2` | `done` | Generated Julia source is deferred to the split future source-emitter lane; 99/99 interpreter parity remains primary. |
 | 27 | `JULIA-BACKEND-PARITY.7.3.0` | `done` | Source audit proves the existing backend CLIs are not user-interface equivalent and splits the closeout. |
 | 28 | `JULIA-BACKEND-PARITY.7.3.1` | `done` | ADR 0023 defines exact user-observable and primary-CLI parity; global repairs and feature census are owned. |
-| 29 | `JULIA-BACKEND-PARITY.7.3.2` | `active` | Align Julia's primary CLI to the ratified cross-variant command contract. |
-| 30 | `JULIA-BACKEND-PARITY.7.3.3` | `pending` | Close no-drift honestly or split any remaining user-observable parity residual. |
+| 29 | `JULIA-BACKEND-PARITY.7.3.2.0` | `done` | Native seam audit splits primary CLI repair into trace, argument/IO, execution/JSON, error/routing, and conformance mechanisms. |
+| 30 | `JULIA-BACKEND-PARITY.7.3.2.1` | `active` | Close compile/spec-parser/staged trace coverage before exposing the shared primary trace options. |
+| 31 | `JULIA-BACKEND-PARITY.7.3.2.2` | `pending` | Implement exact arguments plus named/file/inline source and literal/file input loading. |
+| 32 | `JULIA-BACKEND-PARITY.7.3.2.3` | `pending` | Execute the native parser pipeline and emit direct canonical JSON. |
+| 33 | `JULIA-BACKEND-PARITY.7.3.2.4` | `pending` | Normalize failures/exits and complete trace routing. |
+| 34 | `JULIA-BACKEND-PARITY.7.3.2.5` | `pending` | Prove unit/direct-process conformance and align focused verification/docs. |
+| 35 | `JULIA-BACKEND-PARITY.7.3.3` | `pending` | Close no-drift honestly or split any remaining user-observable parity residual. |
+
+## `JULIA-BACKEND-PARITY.7.3.2.0` Primary-CLI Mechanism Audit
+
+Audit evidence recorded on 2026-07-10:
+
+- `parse_spec(...)` handles rule-only sources; `parse_spec_with_staged_user_function_definitions(...)` and the
+  corpus path provide spec-driven top-level function fallback. `compile_spec(...)`, `LinkedSpecRuntimeEngine`, and
+  `runtime_execute(...)` already accept the data needed for `--top-rule` and `--parse-mode`.
+- `LinkedSpecTraceConfig` already supports numeric/named levels, stdout/route/mirror sinks, file reset, and emoji;
+  the runtime is instrumented. Julia still explicitly lacks compile/spec-parser/staged trace events, so merely
+  accepting CLI trace flags would not satisfy their cross-variant meaning.
+- `RuntimeDiagnostic` carries stable owner/stage/spec/path/top/rule/handler fields, but the primary CLI has no
+  normalized formatter or stage-to-exit boundary.
+- `julia/src/cli/LinkedSpecJuliaCli.jl` only dispatches `status` and `corpus`. It has no ADR `0023` option parser,
+  named/current/repo spec resolver, input loader, parser execution, or canonical result writer.
+- `JSON3.write(...)` is used for corpus tooling but does not establish Perl-style lexicographically key-sorted
+  canonical JSON for arbitrary nested result dictionaries. Direct CLI output needs its own locked serializer.
+- These are separate failure domains and validation surfaces; `.7.3.2` is therefore a parent rather than a single
+  implementation leaf.
+
+## `JULIA-BACKEND-PARITY.7.3.2.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Audited Julia exports, primary CLI, corpus composition, parser/compiler/runtime,
+  diagnostics, trace configuration/sinks, JSON use, and current tests from source.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The CLI was scaffolded/productized around corpus rollout before ADR `0023`;
+  the native runtime grew behind it without a parser-oriented command adapter or compile/parser trace layer.
+- [x] **FIX / SPLIT** — Split five implementation/conformance mechanisms before changing code.
+- [x] **ADDRESSED (verified)** — Every known Julia primary-CLI gap has one ordered child owner.
+- [x] **NO REGRESSION** — Read-only audit/task split; no Julia source/test behavior changed.
+- [x] **LOCKSTEP** — `.7.3.2.1` is the sole active leaf and preserves ADR `0023` as the target contract.
 
 ## `JULIA-BACKEND-PARITY.7.3.1` Exact Interface-Parity Decision
 
@@ -2648,6 +2734,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.2` | Read-only Rust source-emitter/Dart deferral/ADR `0022` evidence; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Generated Julia source is deferred to expanded future owner `FUTURE-PARITY-BACKLOG.3` with scaffold/harness, family-plan, direct structural, and curated corpus prerequisites; `.7.3` becomes active without behavior change. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.0` | ADR/KM retrieval; source audit of Perl, Rust, Dart, and Julia CLI/package targets; Cargo binary-target census; task split; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Perl exposes a parser CLI, Dart/Julia expose corpus/status CLIs, and Rust has no binary target; `.7.3.1` becomes active before any repair. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.1` | Perl primary CLI and backend-neutral trace contract; Rust public source-emitter export; ADR `0023`; global task routing; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Exact capability/behavior and primary-CLI parity are durable; Julia `.7.3.2` and global `.1.5`/`.1.6`/`.3` own all known gaps; no implementation behavior changed. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.2.0` | Julia primary CLI, exports, parser/compiler/runtime, function-shell/corpus composition, diagnostics, trace config/sinks, JSON use, and tests audited from source; task split; mdBook/KM/memory/task/doctrine/whitespace gates. | PASS. Five independent mechanisms are owned by `.7.3.2.1`–`.7.3.2.5`; no implementation behavior changed. |
 
 ## Commit Log
 
@@ -2706,9 +2793,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.7.2` | `JULIA-BACKEND-PARITY.7.2 - defer Julia generated source proof` | Generated proof is routed to future `.3` with explicit split prerequisites; final no-drift advances to `.7.3`. |
 | `JULIA-BACKEND-PARITY.7.3.0` | `JULIA-BACKEND-PARITY.7.3.0 - split strict user-facing parity closeout` | Current CLI drift is source-proven and split into contract/routing, Julia repair, and honest no-drift leaves. |
 | `JULIA-BACKEND-PARITY.7.3.1` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | ADR `0023`, canonical CLI schema, strict completion terms, and global CLI/capability/codegen owners; `.7.3.2` becomes active. |
+| `JULIA-BACKEND-PARITY.7.3.2.0` | `JULIA-BACKEND-PARITY.7.3.2.0 - split Julia primary CLI alignment` | Read-only native seam/gap audit; five ordered implementation/conformance leaves; `.7.3.2.1` becomes active. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.7.3.2.0` Julia primary-CLI mechanism audit/split. Existing native parser/compiler/
+  runtime, diagnostics, and runtime trace seams are reusable, while compile/parser trace, arguments/resolution,
+  execution/canonical JSON, error/routing, and direct conformance need separate leaves. `.7.3.2.1` is active; no
+  behavior changed.
 - `2026-07-10`: Completed `.7.3.1` exact interface-parity decision. ADR `0023` defines complete parity as
   user-observable capability/behavior identity and gives distinct executable names one exact primary CLI.
   Julia `.7.3.2`, global `.1.5`, capability census `.1.6`, and public codegen `.3` own all known work; no behavior

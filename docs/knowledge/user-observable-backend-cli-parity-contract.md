@@ -14,8 +14,8 @@ answers:
 date: 2026-07-10
 status: accepted
 tags: [cli, parity, public-api, backends, ADR-0023, FUTURE-PARITY-BACKLOG]
-evidence: "ADR 0023 interprets parity from the user's point of view and defines the canonical primary CLI: distinct executable token only; no subcommands or positional args; exact source/input/parser/trace/help options; canonical JSON success; normalized stdout/stderr; exits 0/1/2. FUTURE-PARITY-BACKLOG.1.5 owns CLI repair, .1.6 owns complete capability census, and .3 owns public generated-source parity."
-reverify: "sed -n '1,260p' docs/decisions/0023-user-observable-backend-and-cli-parity.md; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5|FUTURE-PARITY-BACKLOG\.1\.6|FUTURE-PARITY-BACKLOG\.3|JULIA-BACKEND-PARITY\.7\.3\.2' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/tasks/JULIA-BACKEND-PARITY.md"
+evidence: "ADR 0023 interprets parity from the user's point of view and defines the canonical primary CLI: distinct executable token only; no subcommands or positional args; exact source/input/parser/trace/help options; canonical JSON success; normalized stdout/stderr; exits 0/1/2. FUTURE-PARITY-BACKLOG.1.5 owns CLI repair, .1.6 owns complete capability census, and .3 owns public generated-source parity. Julia .7.3.2.1 is the first active implementation prerequisite."
+reverify: "sed -n '1,260p' docs/decisions/0023-user-observable-backend-and-cli-parity.md; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5|FUTURE-PARITY-BACKLOG\.1\.6|FUTURE-PARITY-BACKLOG\.3|JULIA-BACKEND-PARITY\.7\.3\.2\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/tasks/JULIA-BACKEND-PARITY.md"
 ---
 
 ADR `0023` makes backend parity a user-observable contract. All active variants expose the same public capability
@@ -38,7 +38,9 @@ status across variants. Corpus runners and status tools remain separate develope
 `FUTURE-PARITY-BACKLOG.1.5` owns current Perl/Rust/Dart/Julia CLI convergence, `.1.6` owns the complete public
 capability census, and `.3` owns generated-source parity. Because Rust publicly exports `source_emitter`, generated
 source is required before another active backend can claim complete user-visible parity, even though interpreter
-corpus execution remains the primary correctness oracle.
+corpus execution remains the primary correctness oracle. Julia `.7.3.2.1` first closes the missing parser/compiler/
+staged trace meaning required by the shared trace options.
 
 Related facts: [[cross-backend-cli-contract-gap]], [[variant-specific-cli-requirement]],
 [[native-in-memory-backend-contract]], [[julia-generated-source-deferred]], [[rust-source-emitter-lane-split]].
+See also [[julia-primary-cli-mechanism-audit]].

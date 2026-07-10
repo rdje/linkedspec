@@ -7,8 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.2.0 — split Julia primary CLI alignment**
+  (DONE — five mechanisms are owned; `.7.3.2.1` is active).
+
+  **Finding:** Native parse/compile/runtime, structured diagnostics, and runtime trace sinks exist. Missing primary
+  CLI mechanisms are compile/parser/staged tracing, exact arguments/resolution, execution/canonical JSON,
+  normalized failure/routing, and direct-command conformance.
+
+  **Boundary:** Read-only audit/task split; no behavior changed. Trace prerequisites are first because accepting
+  `--trace` without compile/parser meaning would violate ADR `0023`.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.7.3.1 — ratify exact backend interface parity**
-  (DONE — ADR `0023` and global repair owners are durable; `.7.3.2` is active).
+  (DONE — ADR `0023` and global repair owners are durable; `.7.3.2` has since been split).
 
   **Contract:** Complete parity is identical user-observable capability/behavior. Distinct command names expose
   one parser interface with the same options/meanings, no subcommands/positionals, canonical JSON, normalized

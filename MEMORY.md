@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.7.3.1` — ADR `0023` ratifies exact user-observable capability/
-  behavior and primary-CLI parity; global repair and census owners are durable.
-- prior_leaf: `JULIA-BACKEND-PARITY.7.3.0` — source audit proves current backend CLIs are not interface-equivalent.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.7.3.2.0` — Julia primary CLI alignment is split into five
+  implementation/conformance mechanisms after native seam audit.
+- prior_leaf: `JULIA-BACKEND-PARITY.7.3.1` — ADR `0023` ratifies exact public capability and primary-CLI parity.
 - recent_context: Dart/Julia are 99/99 interpreter-green scoped milestones, not complete public parity; global
   `.1.5`, `.1.6`, and `.3` own current-backend CLI, capability, and generated-source convergence before Lua.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity`; previous committed HEAD is
-  `214ad7b6 JULIA-BACKEND-PARITY.7.3.0 - split strict user-facing parity closeout`.
+  `JULIA-BACKEND-PARITY.7.3.2.0 - split Julia primary CLI alignment`; previous committed HEAD is
+  `b4ee722f JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; its frontier after this commit is `.7.3.2`.
-- next_action: align Julia's primary command to ADR `0023`'s parser CLI, splitting implementation mechanisms first
-  if source selection, trace routing, normalized diagnostics, and exact fixture proof exceed one safe slice.
+- active_work_unit: `JULIA-BACKEND-PARITY`; its frontier after this commit is `.7.3.2.1`.
+- next_action: add opt-in compile/spec-parser/function-shell/staged trace events through Julia's existing trace
+  config/sinks while preserving default-quiet APIs and 99/99 runtime behavior.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
@@ -49,5 +49,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: `.7.3.1` is verified and ready for its prepared commit; none expected
-  afterward. Do not advance to `.7.3.2` until the tree is clean.
+- blockers: none. in_flight_uncommitted: `.7.3.2.0` is verified and ready for its prepared commit; none expected
+  afterward. Do not advance to `.7.3.2.1` until the tree is clean.
