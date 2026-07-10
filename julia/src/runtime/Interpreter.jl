@@ -102,9 +102,14 @@ mutable struct _RuntimeExecutionContext
     active_rule_entries::Set{Tuple{String,Int,Int}}
     lifecycle_events::Vector{RuntimeLifecycleEvent}
     top_rule::String
+    trace::Union{Nothing,LinkedSpecTraceEmitter}
 end
 
-function _RuntimeExecutionContext(input::AbstractString, top_rule::AbstractString)
+function _RuntimeExecutionContext(
+    input::AbstractString,
+    top_rule::AbstractString,
+    trace::Union{Nothing,LinkedSpecTraceEmitter},
+)
     input_text = String(input)
     return _RuntimeExecutionContext(
         input_text,
@@ -118,6 +123,7 @@ function _RuntimeExecutionContext(input::AbstractString, top_rule::AbstractStrin
         Set{Tuple{String,Int,Int}}(),
         RuntimeLifecycleEvent[],
         String(top_rule),
+        trace,
     )
 end
 
@@ -174,12 +180,20 @@ function runtime_parse(
     engine::LinkedSpecRuntimeEngine,
     input::AbstractString;
     top_rule = nothing,
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
 )
     label = top_rule === nothing ? _default_runtime_top_rule(engine) : String(top_rule)
-    context = _RuntimeExecutionContext(input, label)
+    context = _RuntimeExecutionContext(input, label, trace)
+    trace_scope = trace === nothing ? nothing : enter_trace_scope!(
+        trace,
+        "julia_runtime:parse",
+        "top_rule=$label",
+        LinkedSpecTraceHigh,
+    )
+    trace_exit_details = "error=unknown"
     try
         result = _execute_runtime_rule!(engine, label, 0, context)
-        return RuntimeParseResult(
+        parse_result = RuntimeParseResult(
             result.matched,
             _runtime_copy(result.value),
             # Backend-neutral parser output wraps the top-rule value exactly once.
@@ -188,9 +202,12 @@ function runtime_parse(
             codeunit_offset_to_char_offset(context.input, context.cursor_codeunit),
             RuntimeLifecycleEvent[context.lifecycle_events...],
         )
+        trace_exit_details =
+            "matched=$(parse_result.matched) cursor=$(parse_result.cursor_codeunit)"
+        return parse_result
     catch error
         if error isa RuntimeInterpreterException
-            throw(_with_runtime_diagnostic(
+            wrapped = _with_runtime_diagnostic(
                 error,
                 _runtime_diagnostic(
                     engine;
@@ -200,14 +217,52 @@ function runtime_parse(
                     top_rule = label,
                     rule_label = label,
                 ),
-            ))
+            )
+            trace_exit_details = "error=$(wrapped.message)"
+            throw(wrapped)
         end
+        trace_exit_details = "error=$(sprint(showerror, error))"
         rethrow()
+    finally
+        if trace !== nothing && trace_scope !== nothing
+            exit_trace_scope!(trace, trace_scope, trace_exit_details)
+        end
     end
 end
 
-runtime_execute(engine::LinkedSpecRuntimeEngine, input::AbstractString; top_rule = nothing) =
-    runtime_parse(engine, input; top_rule = top_rule)
+runtime_execute(
+    engine::LinkedSpecRuntimeEngine,
+    input::AbstractString;
+    top_rule = nothing,
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+) = runtime_parse(engine, input; top_rule = top_rule, trace = trace)
+
+function runtime_parse_with_trace(
+    engine::LinkedSpecRuntimeEngine,
+    input::AbstractString,
+    config::LinkedSpecTraceConfig;
+    top_rule = nothing,
+    stdout_io::IO = stdout,
+)
+    trace = LinkedSpecTraceEmitter(config; stdout_io = stdout_io)
+    return runtime_parse(engine, input; top_rule = top_rule, trace = trace)
+end
+
+function runtime_execute_with_trace(
+    engine::LinkedSpecRuntimeEngine,
+    input::AbstractString,
+    config::LinkedSpecTraceConfig;
+    top_rule = nothing,
+    stdout_io::IO = stdout,
+)
+    return runtime_parse_with_trace(
+        engine,
+        input,
+        config;
+        top_rule = top_rule,
+        stdout_io = stdout_io,
+    )
+end
 
 function _default_runtime_top_rule(engine::LinkedSpecRuntimeEngine)
     compiled = engine.compiled_spec

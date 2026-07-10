@@ -5,6 +5,10 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.5.2` adds Julia-native ordered trace levels,
+  environment/config controls, structured event/scope/decision/log/dump primitives, stdout/route/mirror sinks
+  with reset, optional runtime emitter injection, and output-preserving traced wrappers. Package status is
+  `runtime-trace-controls`, the full suite passes with 617 assertions, and instrumentation advances to `.4.5.3`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.5.1` exports neutral-field `RuntimeDiagnostic` payloads on Julia
   runtime exceptions, carries optional spec identity plus top/rule/handler attribution through nested failures,
   preserves richer inner diagnostics, and leaves successful parse output/textual errors unchanged. Package status

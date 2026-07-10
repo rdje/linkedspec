@@ -110,4 +110,7 @@ cursor. The full suite passes with 581 assertions and package status `runtime-cu
 diagnostics and tracing through four scoped children. `.4.5.1` exports `RuntimeDiagnostic`, attaches optional
 spec/top/rule/handler attribution to `RuntimeInterpreterException`, preserves richer child diagnostics, and keeps
 successful output unchanged. The full suite passes with 588 assertions and status `runtime-diagnostics`;
-`.4.5.2` owns trace controls/events/sinks. Staged parser and corpus execution remain later leaves.
+`.4.5.2` adds ordered trace levels, environment/config controls, structured events/scopes/decisions/logs/dumps,
+stdout/routed-file/mirror sinks with reset, and output-preserving traced runtime entrypoints. The full suite now
+passes with 617 assertions and status `runtime-trace-controls`; `.4.5.3` owns runtime instrumentation. Staged
+parser and corpus execution remain later leaves.

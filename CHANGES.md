@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.4.5.2 — add Julia trace controls
+
+**Scope:** Julia trace levels, environment/config controls, structured events/scopes/decisions/logs/dumps,
+stdout/routed-file/mirror sinks, reset behavior, optional runtime emitter plumbing, traced entrypoints, package/CLI
+status, focused tests, mdBook trace/status/handoff, task-tree/live docs, Knowledge Map, architecture, and resume
+pointer.
+
+**Change:** Added `julia/src/trace/Trace.jl` with the portable control/sink/event capabilities in Julia-native
+types and exported functions. `runtime_parse` / `runtime_execute` accept optional emitters, while traced wrappers
+construct an emitter from config and emit a parse scope. Disabled/default execution stays quiet; traced results
+match untraced results. Package status now reports `runtime-trace-controls`; internal runtime events remain `.4.5.3`.
+
+**Validation:** `Pkg.test()` passes with 617 assertions, including 29 focused trace assertions; Julia CLI status,
+mdBook build, memory architecture, task-tree metadata, Knowledge Map, doctrine, and `git diff --check` pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.4.5.1 — add Julia runtime diagnostics
 
 **Scope:** Exported Julia runtime diagnostic payloads, diagnostic-carrying exceptions, optional spec identity,

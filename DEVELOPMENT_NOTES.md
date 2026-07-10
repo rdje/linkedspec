@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.4.5.2 — Julia trace controls/events/sinks):
+  The trace owner is independent from the interpreter: immutable config selects levels and routing, while a
+  mutable emitter owns event/line history, indentation, and output. File sinks append per event, with eager reset
+  and parent-directory creation at emitter construction, avoiding long-lived file handles. Ordinary runtime
+  entrypoints accept an optional emitter; convenience wrappers construct one from config. This leaf intentionally
+  emits only the parse scope, keeping control/sink/output-preservation proof separate from `.4.5.3` mechanism
+  instrumentation.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.4.5.1 — Julia structured runtime diagnostics):
   Julia attaches structured data to the existing exception channel rather than changing success results or
   textual display. Direct lookup failures create specific diagnostics; rule boundaries add current-rule

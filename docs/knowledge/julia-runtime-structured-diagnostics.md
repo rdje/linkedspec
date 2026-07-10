@@ -34,5 +34,6 @@ unwinds, so nested failures retain the child rule and
 an existing richer payload instead of replacing it.
 
 Related facts: [[julia-runtime-diagnostics-trace-split]],
-[[julia-runtime-rule-interpreter]], [[dart-runtime-structured-diagnostics]],
+[[julia-trace-controls-sinks]], [[julia-runtime-rule-interpreter]],
+[[dart-runtime-structured-diagnostics]],
 [[trace-cross-variant-capability-contract]].

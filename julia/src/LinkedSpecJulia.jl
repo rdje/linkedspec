@@ -71,9 +71,34 @@ export backend_name,
     FunctionDefinition,
     LifecycleMarkerBodyElementKind,
     LinkedSpecRuntimeEngine,
+    LinkedSpecTraceConfig,
+    LinkedSpecTraceDebug,
+    LinkedSpecTraceDecision,
+    LinkedSpecTraceDump,
+    LinkedSpecTraceEmitter,
+    LinkedSpecTraceEnter,
+    LinkedSpecTraceEvent,
+    LinkedSpecTraceEventKind,
+    LinkedSpecTraceException,
+    LinkedSpecTraceExit,
+    LinkedSpecTraceFull,
+    LinkedSpecTraceHigh,
+    LinkedSpecTraceLevel,
+    LinkedSpecTraceLog,
+    LinkedSpecTraceLow,
+    LinkedSpecTraceMark,
+    LinkedSpecTraceMedium,
+    LinkedSpecTraceMirror,
+    LinkedSpecTraceNone,
+    LinkedSpecTraceRoute,
+    LinkedSpecTraceScope,
+    LinkedSpecTraceSinkMode,
+    LinkedSpecTraceStdout,
     LinkedSpecParseMode,
     load_corpus_fixtures,
     parse_spec,
+    parse_trace_level,
+    parse_trace_sink_mode,
     parse_spec_with_user_function_definition_asts,
     parse_action_block,
     parse_action_expression,
@@ -161,17 +186,35 @@ export backend_name,
     resolve_user_function_call,
     runtime_match,
     runtime_execute,
+    runtime_execute_with_trace,
     runtime_parse,
+    runtime_parse_with_trace,
     run_cli,
     run_corpus_runner,
     consume_match,
     cursor_char_offset,
     cursor_line_column,
     seek_match,
+    emit_trace_event!,
+    emit_trace_line!,
+    enter_trace_scope!,
+    exit_trace_scope!,
+    log_trace_dump!,
+    log_trace_output!,
     stitch_function_body_ast,
     to_descriptor_json,
     top_rule,
     to_json,
+    trace_allows,
+    trace_config_disabled,
+    trace_config_enabled,
+    trace_config_from_environment,
+    trace_decision!,
+    trace_event_kind_name,
+    trace_events,
+    trace_level_name,
+    trace_lines,
+    trace_should_emit,
     user_function_names,
     user_function_registry_from_functions,
     user_function_registry_from_spec,
@@ -179,6 +222,11 @@ export backend_name,
     with_capture_start_codeunit,
     with_cursor_codeunit,
     with_local_match,
+    with_trace_emoji,
+    with_trace_file,
+    with_trace_level,
+    with_trace_reset_file,
+    with_trace_sink_mode,
     zero_progress_since
 
 const BACKEND_NAME = "julia"
@@ -186,7 +234,7 @@ const PACKAGE_NAME = "LinkedSpecJulia"
 const PACKAGE_VERSION = v"0.1.0"
 const CLI_ENTRYPOINT = "julia/bin/linkedspec_julia.jl"
 const CORPUS_RUNNER_ENTRYPOINT = "julia/bin/corpus_runner.jl"
-const PARITY_STATUS = "runtime-diagnostics"
+const PARITY_STATUS = "runtime-trace-controls"
 
 include("corpus/CorpusManifest.jl")
 include("spec/Ast.jl")
@@ -199,6 +247,7 @@ include("spec/UserFunctionDefinitionShell.jl")
 include("spec/Validator.jl")
 include("compiler/CompiledSpec.jl")
 include("runtime/Matching.jl")
+include("trace/Trace.jl")
 include("runtime/Interpreter.jl")
 include("cli/LinkedSpecJuliaCli.jl")
 

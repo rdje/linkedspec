@@ -137,14 +137,33 @@ leaves.
 
 ## Julia variant trace status
 
-As of `JULIA-BACKEND-PARITY.4.5.1`, Julia has stable structured runtime
-diagnostics but does not yet claim trace parity. Runtime failures carry
-neutral-field `RuntimeDiagnostic` payloads while successful output remains
-unchanged. `.4.5.2` owns ordered levels,
-configuration, structured events, traced entrypoints, and stdout/routed-file/
-mirror sinks, `.4.5.3` owns runtime interpreter instrumentation, and `.4.5.4`
-owns final no-drift proof against this chapter. Julia package status is
-`runtime-diagnostics` until the trace-control leaf lands.
+As of `JULIA-BACKEND-PARITY.4.5.2`, Julia has stable structured runtime
+diagnostics plus trace controls/events/sinks, but does not yet claim trace
+parity. `.4.5.3` still owns internal interpreter instrumentation, and `.4.5.4`
+owns final no-drift proof against this chapter.
+
+The Julia control surface is:
+
+- `LinkedSpecTraceLevel` plus exported `LinkedSpecTraceNone`,
+  `LinkedSpecTraceLow`, `LinkedSpecTraceMedium`, `LinkedSpecTraceHigh`,
+  `LinkedSpecTraceFull`, and `LinkedSpecTraceDebug` values; named aliases and
+  numeric thresholds are accepted by `parse_trace_level(...)`;
+- `LinkedSpecTraceConfig`, `trace_config_from_environment(...)`, and immutable
+  `with_trace_*` helpers for the documented `LINKEDSPEC_TRACE_*` controls;
+- `LinkedSpecTraceSinkMode` values for stdout, routed-file, and mirror output,
+  including reset/truncate behavior for routed files;
+- `LinkedSpecTraceEmitter`, structured event/scope records, and
+  `emit_trace_event!`, `enter_trace_scope!`, `exit_trace_scope!`,
+  `trace_decision!`, `log_trace_output!`, and `log_trace_dump!` primitives;
+- optional `trace=...` emitter injection on `runtime_parse(...)` /
+  `runtime_execute(...)`, plus `runtime_parse_with_trace(...)` and
+  `runtime_execute_with_trace(...)` config wrappers.
+
+The `.4.5.2` proof covers default-quiet behavior, level/environment controls,
+routed-file reset, mirror output, event JSON/rendering, decisions/logs/dumps,
+parse-scope routing, and result preservation. Package status is
+`runtime-trace-controls`; rule/regex/dispatch/lifecycle/recursion/cursor/
+boundary events remain `.4.5.3`.
 
 ## Future variant trace parity checklist
 

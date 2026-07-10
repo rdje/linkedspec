@@ -292,7 +292,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-diagnostics"
+    @test status.parity == "runtime-trace-controls"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -302,7 +302,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-diagnostics", String(take!(status_output)))
+    @test occursin("parity: runtime-trace-controls", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1888,6 +1888,128 @@ Child:
         "handler_source_label" => "julia_runtime:rule:Child",
     )
     @test sprint(showerror, child_error) == child_error.message
+end
+
+@testset "Trace controls events and sinks" begin
+    @test parse_trace_level("none") == LinkedSpecTraceNone
+    @test parse_trace_level("quiet") == LinkedSpecTraceNone
+    @test parse_trace_level("med") == LinkedSpecTraceMedium
+    @test parse_trace_level("verbose") == LinkedSpecTraceDebug
+    @test parse_trace_level("350").value == 350
+    @test_throws LinkedSpecTraceException parse_trace_level("unknown")
+    @test trace_allows(LinkedSpecTraceMedium, LinkedSpecTraceLow)
+    @test !trace_allows(LinkedSpecTraceLow, LinkedSpecTraceMedium)
+    @test trace_level_name(LinkedSpecTraceLevel(350)) == "full"
+    @test parse_trace_sink_mode("both") == LinkedSpecTraceMirror
+
+    environment_config = trace_config_from_environment(Dict(
+        "LINKEDSPEC_TRACE_LEVEL" => "debug",
+        "LINKEDSPEC_TRACE_FILE" => "trace.log",
+        "LINKEDSPEC_TRACE_MIRROR_STDOUT" => "1",
+        "LINKEDSPEC_TRACE_RESET_FILE" => "yes",
+        "LINKEDSPEC_TRACE_EMOJI" => "on",
+    ))
+    @test (
+        environment_config.level,
+        environment_config.trace_file,
+        environment_config.sink_mode,
+        environment_config.reset_file,
+        environment_config.emoji,
+    ) == (
+        LinkedSpecTraceDebug,
+        "trace.log",
+        LinkedSpecTraceMirror,
+        true,
+        true,
+    )
+
+    mktempdir() do directory
+        trace_path = joinpath(directory, "route.log")
+        write(trace_path, "old\n")
+        route_stdout = IOBuffer()
+        route_config = with_trace_reset_file(with_trace_file(
+            trace_config_enabled(LinkedSpecTraceDebug),
+            trace_path,
+        ))
+        route_emitter = LinkedSpecTraceEmitter(route_config; stdout_io = route_stdout)
+        emit_trace_line!(route_emitter, LinkedSpecTraceLow, "hello")
+        @test isempty(String(take!(route_stdout)))
+        @test read(trace_path, String) == "hello\n"
+
+        mirror_stdout = IOBuffer()
+        mirror_config = with_trace_sink_mode(route_config, LinkedSpecTraceMirror)
+        mirror_emitter = LinkedSpecTraceEmitter(mirror_config; stdout_io = mirror_stdout)
+        emit_trace_event!(
+            mirror_emitter,
+            LinkedSpecTraceLog,
+            "topic",
+            "details",
+            LinkedSpecTraceLow,
+        )
+        expected = "[LOW][log] topic details\n"
+        @test String(take!(mirror_stdout)) == expected
+        @test read(trace_path, String) == expected
+    end
+
+    primitive_stdout = IOBuffer()
+    primitive_emitter = LinkedSpecTraceEmitter(
+        trace_config_enabled(LinkedSpecTraceDebug);
+        stdout_io = primitive_stdout,
+    )
+    scope = enter_trace_scope!(
+        primitive_emitter,
+        "compile",
+        "start",
+        LinkedSpecTraceHigh,
+    )
+    @test !trace_decision!(
+        primitive_emitter,
+        "use_cache",
+        false,
+        "miss",
+        LinkedSpecTraceDebug,
+    )
+    log_trace_output!(primitive_emitter, LinkedSpecTraceLow, "runtime message", "ctx=run")
+    log_trace_dump!(primitive_emitter, LinkedSpecTraceFull, "compiled descriptor dump")
+    exit_trace_scope!(primitive_emitter, scope, "done")
+    primitive_output = String(take!(primitive_stdout))
+    @test occursin("[HIGH][enter] -> compile start", primitive_output)
+    @test occursin("[DEBUG][decision]   use_cache taken=0 reason=miss", primitive_output)
+    @test occursin("[LOW][log]   log_output runtime message context=ctx=run", primitive_output)
+    @test occursin("[FULL][dump]   log_dump compiled descriptor dump", primitive_output)
+    @test occursin("[HIGH][exit] <- compile done", primitive_output)
+    @test [to_json(event)["kind"] for event in trace_events(primitive_emitter)] ==
+        ["enter", "decision", "log", "dump", "exit"]
+
+    runtime_engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+Top::
+ /x/
+ E { return(match_text()) }
+""")))
+    untraced = runtime_parse(runtime_engine, "x")
+    quiet_stdout = IOBuffer()
+    quiet_emitter = LinkedSpecTraceEmitter(
+        trace_config_disabled();
+        stdout_io = quiet_stdout,
+    )
+    quiet = runtime_parse(runtime_engine, "x"; trace = quiet_emitter)
+    @test to_json(quiet) == to_json(untraced)
+    @test isempty(String(take!(quiet_stdout)))
+    @test isempty(trace_events(quiet_emitter))
+
+    mktempdir() do directory
+        trace_path = joinpath(directory, "runtime.log")
+        trace_config = with_trace_reset_file(with_trace_file(
+            trace_config_enabled(LinkedSpecTraceDebug),
+            trace_path,
+        ))
+        routed = runtime_execute_with_trace(runtime_engine, "x", trace_config)
+        @test to_json(routed) == to_json(untraced)
+        runtime_trace = read(trace_path, String)
+        @test occursin("julia_runtime:parse", runtime_trace)
+        @test occursin("top_rule=Top", runtime_trace)
+        @test occursin("matched=true cursor=1", runtime_trace)
+    end
 end
 
 @testset "Spec parser" begin

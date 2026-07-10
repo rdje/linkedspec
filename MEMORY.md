@@ -18,29 +18,29 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.4.5.1` — exported Julia runtime diagnostics preserve neutral
-  fields, optional spec identity, top/child-rule/handler attribution, richer inner payloads, successful output,
-  and textual errors; full tests pass with 588 assertions and status `runtime-diagnostics`.
-- prior_leaf: `JULIA-BACKEND-PARITY.4.5.0` — Julia diagnostics/trace is split into structured diagnostics, trace
-  controls/events/sinks, runtime instrumentation, and no-drift.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.4.5.2` — Julia exports ordered trace levels, environment/config
+  controls, structured event primitives, stdout/route/mirror sinks with reset, optional emitter injection, and
+  output-preserving traced entrypoints; full tests pass with 617 assertions and status `runtime-trace-controls`.
+- prior_leaf: `JULIA-BACKEND-PARITY.4.5.1` — structured runtime diagnostics preserve spec/top/child-rule/handler
+  attribution, richer inner payloads, successful output, and textual errors.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.4.5.1 - add Julia runtime diagnostics`; previous committed HEAD is
-  `9cb4a4d5 JULIA-BACKEND-PARITY.4.5.0 - split Julia diagnostics trace controls`.
+  `JULIA-BACKEND-PARITY.4.5.2 - add Julia trace controls`; previous committed HEAD is
+  `b469e4c8 JULIA-BACKEND-PARITY.4.5.1 - add Julia runtime diagnostics`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; current frontier after the current commit is `.4.5.2`.
-- next_action: resume PNT at `JULIA-BACKEND-PARITY.4.5.2` to add ordered trace levels, environment/config
-  controls, structured events, traced entrypoints, and stdout/routed-file/mirror sinks.
+- active_work_unit: `JULIA-BACKEND-PARITY`; current frontier after the current commit is `.4.5.3`.
+- next_action: resume PNT at `JULIA-BACKEND-PARITY.4.5.3` to instrument runtime rule/regex/dispatch/lifecycle/
+  recursion/cursor/source-boundary mechanisms through the optional emitter while preserving untraced output.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
 - latest_bootstrap_read: 2026-07-10 read the full roadmap and roadmap-v2, full codebase inventory and active Julia
   source/tests, full mdBook source, README/memory architecture/session bootstrap/COMMIT/task-tree doctrine, active
   Julia tree, relevant ADR/KM/toolbox facts, Dart matching/interpreter source/tests/task evidence, lifecycle/retv
   contract, Rust/Perl cursor/capture references, and final nested-value assignment contract before implementing
-  `.4.1` through `.4.5.1`, Dart diagnostics/trace split and implementation facts, and the portable trace
+  `.4.1` through `.4.5.2`, Dart diagnostics/trace split and implementation facts, and the portable trace
   capability contract; the canonical statement-separator fact was also applied so focused `.spec` fixtures
   use newlines between lines and semicolons only between adjacent statements on one physical line.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
@@ -49,5 +49,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.4.5.1` commit; do not pivot
+- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.4.5.2` commit; do not pivot
   unless the repo is handoff-ready.
