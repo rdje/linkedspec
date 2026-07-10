@@ -51,3 +51,4 @@ Julia preparation detail: [[julia-primary-cli-arguments-resolution-loading]].
 Julia execution/JSON detail: [[julia-primary-cli-native-execution-canonical-json]].
 Julia failure/trace detail: [[julia-primary-cli-failure-trace-routing]].
 Julia process proof: [[julia-primary-cli-process-conformance]].
+Julia local/root status: [[julia-scoped-parity-no-drift]].

@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, cli, trace, parser, compiler, parity, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.3.2.0 splits five mechanisms. .7.3.2.1 through .5 close all five with nine process families, 1,017 assertions, 99/99, and runtime-corpus-primary-cli; .7.3.3 is active."
+evidence: "JULIA-BACKEND-PARITY.7.3.2.0 splits five mechanisms. .7.3.2.1 through .5 close all five with nine process families, 1,017 assertions, 99/99, and runtime-corpus-primary-cli; .7.3.3 closes local no-drift."
 reverify: "rg -n 'JULIA-BACKEND-PARITY\\.7\\.3\\.2|status|corpus|parse_spec|parse_spec_with_staged|compile_spec|LinkedSpecRuntimeEngine|runtime_execute|LinkedSpecTraceConfig|JSON3\\.write' docs/tasks/JULIA-BACKEND-PARITY.md julia/src julia/test"
 ---
 
@@ -47,4 +47,4 @@ Related facts: [[user-observable-backend-cli-parity-contract]],
 [[julia-primary-cli-arguments-resolution-loading]],
 [[julia-primary-cli-native-execution-canonical-json]],
 [[julia-primary-cli-failure-trace-routing]],
-[[julia-primary-cli-process-conformance]].
+[[julia-primary-cli-process-conformance]], [[julia-scoped-parity-no-drift]].

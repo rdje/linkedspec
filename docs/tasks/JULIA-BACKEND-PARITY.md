@@ -6,7 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Julia second)`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10`
+- Last updated: `2026-07-10` (`.7.3.3` outer no-drift audit done; tree remains active through delegated global
+  `.1.5`, `.1.6`, and `.3` obligations).
 - Owner: repo-local workflow
 
 ## Goal
@@ -873,13 +874,20 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.7.3.2.5 - close Julia primary CLI conformance`
 
 - ID: `JULIA-BACKEND-PARITY.7.3.3`
-  Status: `active`
+  Status: `done`
   Goal: Final no-drift closeout without treating a scoped corpus milestone as full user-visible parity.
   Acceptance: Roadmaps, task-tree index, live docs, mdBook, Knowledge Map, architecture snapshot, and verification
     commands agree on Julia's exact proven surface. Any remaining feature/behavior gap is split into owned leaves
     and keeps this tree active rather than being described as complete parity.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - current-facing surfaces now agree that `runtime-corpus-primary-cli` means Julia-local
+    99/99 interpreter execution plus 1,017 package assertions and nine direct primary-process families. The audit
+    found and corrected one stale mdBook sentence inherited from `.7.3.2.1` that still denied the now-implemented
+    exact primary CLI. No implementation source changed. Julia's tree deliberately remains active/delegated rather
+    than complete: `.1.5` owns language-neutral/four-backend CLI identity, `.1.6` owns the public capability census
+    and residual splits, and `.3` owns generated-source equivalence. Static current-status scans, Knowledge Map,
+    memory/task/doctrine gates, mdBook build, and whitespace checks pass; commit `431f0472` is the immediately prior
+    full Julia proof (1,017 assertions, nine process families, and 99/99 corpus).
+  Commit: `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status`
 
 ## Current Frontier
 
@@ -919,7 +927,41 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 32 | `JULIA-BACKEND-PARITY.7.3.2.3` | `done` | Native rule/function parsing, compile/runtime controls, and direct recursive canonical JSON are locked. |
 | 33 | `JULIA-BACKEND-PARITY.7.3.2.4` | `done` | Stable operational failures and the complete trace sink/reset/emoji matrix are locked. |
 | 34 | `JULIA-BACKEND-PARITY.7.3.2.5` | `done` | Nine direct process families, focused gate, public status, and docs are aligned. |
-| 35 | `JULIA-BACKEND-PARITY.7.3.3` | `active` | Close no-drift honestly or split any remaining user-observable parity residual. |
+| 35 | `JULIA-BACKEND-PARITY.7.3.3` | `done` | Local proof and three delegated complete-parity obligations are aligned without false closure. |
+
+## `JULIA-BACKEND-PARITY.7.3.3` Outer No-Drift Proof
+
+Audit evidence recorded on 2026-07-10:
+
+- Julia's exact proven surface is unchanged: native in-memory parse/compile/execute, all 99 checked-in interpreter
+  fixtures, 1,017 package assertions, and nine real primary-process families. The precise package/CLI label remains
+  `runtime-corpus-primary-cli`; it is not renamed or inflated to complete parity.
+- `git blame` traced one contradictory mdBook sentence to `.7.3.2.1`: it still said the exact primary CLI was not
+  claimed “yet,” even though `.7.3.2.2` through `.7.3.2.5` subsequently implemented and process-locked it. The
+  sentence now distinguishes the implemented Julia-local CLI from the still-open cross-backend fixture identity.
+- No unowned residual was found. `FUTURE-PARITY-BACKLOG.1.5` owns neutral fixtures plus Perl/Rust/Dart/four-backend
+  CLI convergence, `.1.6` owns the complete public capability census and every residual split, and `.3` owns
+  generated-source equivalence because Rust exports that capability.
+- This leaf closes the local no-drift audit, not the Julia parity tree. The tree remains `active` and delegated to
+  those global owners; the next PNT leaf is `.1.5.1`. Julia may be described as locally process-locked, but not as
+  a complete/full-parity backend while any of those obligations remain open.
+
+## `JULIA-BACKEND-PARITY.7.3.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Current docs were scanned for active-frontier and completion language; the mdBook
+  simultaneously claimed an implemented exact primary CLI and denied that same claim in the following paragraph.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `git blame` tied the stale denial in
+  `docs/linkedspec-book/src/appendix/backend-handoff.md` to the `.7.3.2.1` boundary; later CLI mechanism leaves
+  updated the proof paragraph but not that adjacent limitation sentence.
+- [x] **FIX** — Correct the contradiction and advance every current roadmap/task/live/book/KM surface from an
+  active `.7.3.3` audit to a done local audit with an active/delegated Julia root.
+- [x] **ADDRESSED (verified)** — Julia-local proof, precise status, non-claims, global owners, and next PNT action
+  are identical across current-facing surfaces.
+- [x] **NO REGRESSION** — No implementation source changed. Static scans, derived Knowledge Map, memory/task/
+  doctrine gates, mdBook build, and whitespace checks pass; prior commit `431f0472` supplies the immediately
+  adjacent full Julia runtime/process/corpus proof.
+- [x] **LOCKSTEP** — `.7.3.3` is done, `JULIA-BACKEND-PARITY` remains active/delegated (not complete), and
+  `FUTURE-PARITY-BACKLOG.1.5.1` is the next PNT leaf before `.1.6`, `.3`, and Lua.
 
 ## `JULIA-BACKEND-PARITY.7.3.2.5` Direct-Process Conformance and Public Status Proof
 
@@ -954,8 +996,9 @@ Implementation evidence recorded on 2026-07-10:
 - [x] **NO REGRESSION** — The focused gate passes the direct checker, all 1,017 package assertions, separate corpus-
   runner help, and all 99 exact corpus outputs; generated depot and mdBook artifacts were removed afterward.
 - [x] **LOCKSTEP** — Primary source/test/script, Julia README, public status, mdBook, roadmap/task/live docs, and
-  Knowledge Map agree. `.7.3.2` is done; `.7.3.3` is active for honest outer no-drift. Global cross-backend CLI,
-  full capability, and generated-source owners remain `.1.5`, `.1.6`, and `.3` rather than being hidden here.
+  Knowledge Map agree. `.7.3.2` is done; `.7.3.3` became the honest outer no-drift leaf there and has since
+  closed. Global cross-backend CLI, full capability, and generated-source owners remain `.1.5`, `.1.6`, and `.3`
+  rather than being hidden here.
 
 ## `JULIA-BACKEND-PARITY.7.3.2.4` Primary CLI Failure and Trace-Routing Proof
 
@@ -2941,6 +2984,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.2.3` | Native rule/function parse fallback, traced compile/runtime composition, top-rule/parse-mode controls, recursive canonical JSON, 22 focused assertions, 942-assertion suite, direct canonical primary smoke, 99/99 corpus, docs/KM/governance/whitespace, and cache cleanup. | PASS. Valid Julia primary requests now execute in-process and print the direct top-rule value with recursively sorted object keys plus one newline; `.7.3.2.4` becomes active for normalized errors/exits/trace routing. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.2.4` | Reference failure/sink probes; deferred input loading; stable operational formatter; fatal rethrows; complete stdout/route/mirror/file/reset/emoji matrix; 75 focused assertions; 1,017-assertion suite; 99/99 corpus; docs/KM/governance/whitespace; cache cleanup. | PASS. Compilation/input/invocation failures have stable exit-1 stderr, usage remains exit 2, and trace routing composes with canonical JSON; `.7.3.2.5` becomes active for direct-process/no-drift closeout. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.2.5` | Standalone nine-family Julia-process checker; exact stdout/stderr/exit/newline/file bytes; focused-gate delegation; `runtime-corpus-primary-cli` status; 1,017 package assertions; 99/99 corpus; docs/KM/governance/whitespace; cache cleanup. | PASS. Julia-local primary CLI conformance is direct-process locked and `.7.3.2` closes without claiming global fixture/capability/codegen parity; `.7.3.3` becomes active for outer no-drift. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.3` | Current-surface stale-status scan; mdBook contradiction provenance; global owner audit; prior `431f0472` full Julia proof; docs/KM/governance/whitespace; mdBook build and cleanup. | PASS. Local audit closes at `runtime-corpus-primary-cli`; the Julia tree stays active/delegated to `.1.5`, `.1.6`, and `.3`, and PNT advances to `.1.5.1` without a full-parity claim. |
 
 ## Commit Log
 
@@ -3005,14 +3049,21 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.7.3.2.3` | `JULIA-BACKEND-PARITY.7.3.2.3 - execute Julia primary parser requests` | Native rule/function parsing, compiler/runtime controls, and direct recursively key-sorted canonical JSON; 942 assertions/99-fixture proof; `.7.3.2.4` becomes active. |
 | `JULIA-BACKEND-PARITY.7.3.2.4` | `JULIA-BACKEND-PARITY.7.3.2.4 - normalize Julia CLI failures and trace routing` | Stable phase-ordered failure stderr/exit 1 plus complete sink/file/reset/emoji behavior; 1,017 assertions/99-fixture proof; `.7.3.2.5` becomes active. |
 | `JULIA-BACKEND-PARITY.7.3.2.5` | `JULIA-BACKEND-PARITY.7.3.2.5 - close Julia primary CLI conformance` | Nine real-process families plus focused gate/public status/book no-drift; `.7.3.2` closes and `.7.3.3` becomes active. |
+| `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Correct stale book contradiction; close local audit; keep root active/delegated; advance global PNT to `.1.5.1`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.7.3.3` outer no-drift without claiming full parity. The audit corrected one mdBook
+  sentence inherited from `.7.3.2.1` that denied the now-process-locked exact Julia primary CLI. Current surfaces
+  agree on `runtime-corpus-primary-cli`, 1,017 assertions, nine process families, and 99/99. The Julia tree remains
+  active/delegated to global `.1.5` CLI identity, `.1.6` capability census, and `.3` generated-source equivalence;
+  PNT advances to `.1.5.1`.
 - `2026-07-10`: Completed `.7.3.2.5` Julia primary direct-process conformance. A standalone checker locks nine
   process families across exact output/newline, separate stderr, exit 0/1/2, rule/function source, parser controls,
   three failure stages, runtime context, routed emoji, and byte-identical mirror trace. The focused gate delegates
   to it, retains 1,017 package assertions and 99/99, and status advances precisely to `runtime-corpus-primary-cli`.
-  `.7.3.2` is done; `.7.3.3` is active for outer no-drift, while global parity remains owned elsewhere.
+  `.7.3.2` is done; `.7.3.3` became active there and has since closed outer no-drift, while global parity remains
+  owned elsewhere.
 - `2026-07-10`: Completed `.7.3.2.4` Julia primary failure/trace normalization. Compilation precedes deferred
   input-file loading; compilation/input/invocation failures use stable headings, ordered runtime fields, raw error,
   and exit `1`, while usage remains `2` and fatal Julia errors rethrow. Stdout/route/mirror, empty/missing/file

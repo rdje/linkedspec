@@ -29,8 +29,8 @@ does not yet match the required cross-variant parser CLI contract. ADR `0023` de
 `.7.3.2.0` splits repair, `.7.3.2.1` closes compile/parser/function-shell/staged trace coverage, `.7.3.2.2`
 closes exact arguments plus source/input resolution/loading, `.7.3.2.3` closes native rule/function execution plus
 recursively key-sorted direct JSON, and `.7.3.2.4` closes normalized failures/exits/trace routing. `.7.3.2.5` now
-closes nine-family direct-process conformance and focused-gate/public-status alignment; `.7.3.2` is done and
-`.7.3.3` is active for honest outer no-drift.
+closes nine-family direct-process conformance and focused-gate/public-status alignment. `.7.3.3` closes local
+outer no-drift; the Julia tree remains active/delegated to global `.1.5`, `.1.6`, and `.3`, not complete.
 
 ## Commands
 
@@ -268,8 +268,9 @@ resolution, and loading with 50 focused assertions. `.7.3.2.3` closes native pri
 key-sorted direct JSON with 22 focused assertions. `.7.3.2.4` closes phase-ordered failures, stable stderr/exit,
 and the complete trace sink/reset/emoji matrix with 75 focused assertions; the full suite passes with 1,017
 assertions and 99/99 remains green. `.7.3.2.5` now closes nine direct process families and status is
-`runtime-corpus-primary-cli`; `.7.3.3` is active for honest outer no-drift. Generated source remains deferred but
-blocks complete parity because Rust exports it.
+`runtime-corpus-primary-cli`; `.7.3.3` closes the local audit without a full-parity claim. Generated source remains
+deferred and blocks complete parity because Rust exports it; neutral CLI fixtures and capability census remain
+global `.1.5` and `.1.6` work.
 
 Library example:
 

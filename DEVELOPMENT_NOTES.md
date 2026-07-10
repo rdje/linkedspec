@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.7.3.3 — close a local milestone without erasing global obligations):
+  A no-drift closeout must audit adjacent limitation prose, not only status tables: the Julia handoff simultaneously
+  claimed and denied the exact primary CLI because a `.7.3.2.1` sentence survived later implementation leaves.
+  Preserve scoped proof with a precise status label, mark the audit leaf done, and keep the backend root active/
+  delegated to explicit global CLI, capability-census, and generated-source owners. This lets PNT advance without
+  turning a locally complete adapter into a false full-parity claim.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.7.3.2.5 — exact CLI bytes require process proof, not captured functions):
   Unit tests over an injectable IO adapter are necessary but cannot prove launch-wrapper exit status, actual stdout/
   stderr separation, or a trailing newline. One standalone checker should own temp isolation and exact byte

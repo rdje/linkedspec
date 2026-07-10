@@ -148,8 +148,9 @@ Top-level directories and files:
     named resolution, and source/input loading. `.7.3.2.3` now executes rule/function requests through the native
     pipeline and emits direct recursively key-sorted JSON. `.7.3.2.4` now locks phase-ordered failure stderr,
     exit 1/2, and stdout/route/mirror/file/reset/emoji behavior. `.7.3.2.5` adds nine direct process families and
-    advances the precise local status to `runtime-corpus-primary-cli` at 1,017 assertions plus 99/99; `.7.3.2` is
-    done and `.7.3.3` is active for honest outer no-drift. Global repair/census/codegen remain `.1.5`/`.1.6`/`.3`.
+    advances the precise local status to `runtime-corpus-primary-cli` at 1,017 assertions plus 99/99. `.7.3.3`
+    closes outer no-drift, but the Julia tree remains active/delegated—not complete—through global CLI identity,
+    capability census, and generated-source owners `.1.5`/`.1.6`/`.3`; `.1.5.1` is the next PNT leaf.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

@@ -46,4 +46,4 @@ capability parity, or generated-source parity; those remain global `.1.5`,
 Related facts: [[julia-primary-cli-failure-trace-routing]],
 [[julia-primary-cli-native-execution-canonical-json]],
 [[julia-local-verification-gate]], [[user-observable-backend-cli-parity-contract]],
-[[cross-backend-cli-contract-gap]].
+[[cross-backend-cli-contract-gap]], [[julia-scoped-parity-no-drift]].

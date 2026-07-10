@@ -7,8 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.3 — reconcile Julia scoped parity status**
+  (DONE — local audit closed; Julia root remains active/delegated; `.1.5.1` is next PNT).
+
+  **Change:** Corrected one stale mdBook sentence that denied the exact Julia primary CLI after it had been
+  process-locked. Current task, roadmap, live, book, architecture, and Knowledge Map surfaces now distinguish the
+  local `runtime-corpus-primary-cli` milestone from complete cross-backend parity.
+
+  **Proof:** No implementation source changed. Current-status/provenance scans, Knowledge Map, memory/task/doctrine
+  gates, mdBook build, and whitespace pass. Commit `431f0472` immediately prior proves 1,017 package assertions,
+  nine direct process families, and 99/99. Global `.1.5`, `.1.6`, and `.3` remain explicit owners.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.7.3.2.5 — close Julia primary CLI conformance**
-  (DONE — local primary CLI is process-locked; `.7.3.3` is active for honest outer no-drift).
+  (DONE — local primary CLI is process-locked; `.7.3.3` subsequently closed honest outer no-drift).
 
   **Change:** A standalone checker now owns nine real-process families with exact stdout/stderr/newline/file bytes
   and exit 0/1/2. The focused gate delegates to it, and public status advances precisely to

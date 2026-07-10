@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, parity, perl, rust, dart, julia, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.3.0 finds Perl parser CLI, Dart/Julia corpus CLIs, and no Rust binary. ADR 0023 defines the target. Julia now accepts/executes requests with stable local errors/trace routing; .7.3.2.5 and global .1.5 remain."
+evidence: "JULIA-BACKEND-PARITY.7.3.0 finds Perl parser CLI, Dart/Julia corpus CLIs, and no Rust binary. ADR 0023 defines the target. Julia now has local exact-process proof and .7.3.3 no-drift; global .1.5 remains."
 reverify: "sed -n '1,230p' bin/linkedspec; sed -n '1,330p' dart/lib/src/cli/linkedspec_dart_cli.dart; sed -n '1,220p' julia/src/cli/LinkedSpecJuliaCli.jl; rg -n '\[\[bin\]\]|^name =|^members =' rust/Cargo.toml rust/*/Cargo.toml; find rust -type f -path '*/src/bin/*' -print"
 ---
 
@@ -34,11 +34,12 @@ outputs/errors, and exit semantics. `JULIA-BACKEND-PARITY.7.3.0` therefore split
 repair, and honest no-drift work rather than treating 99/99 corpus execution as complete CLI parity.
 
 ADR `0023` has since ratified the exact interface. `FUTURE-PARITY-BACKLOG.1.5` owns the neutral fixtures and
-Perl/Rust/Dart/global repairs; `JULIA-BACKEND-PARITY.7.3.2` owns Julia's repair, now complete through execution/
-canonical JSON.
+Perl/Rust/Dart/global repairs; `JULIA-BACKEND-PARITY.7.3.2` owns Julia's repair, now complete through exact local
+process conformance. `.7.3.3` closes the local audit without claiming global fixture identity.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specific-cli-requirement]], [[native-in-memory-backend-contract]],
 [[language-agnostic-backend-vision]], [[dart-specific-cli]], [[julia-mdbook-usage-status]],
 [[julia-primary-cli-arguments-resolution-loading]],
 [[julia-primary-cli-native-execution-canonical-json]],
-[[julia-primary-cli-failure-trace-routing]], [[julia-primary-cli-process-conformance]].
+[[julia-primary-cli-failure-trace-routing]], [[julia-primary-cli-process-conformance]],
+[[julia-scoped-parity-no-drift]].

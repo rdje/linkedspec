@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.5.0` done; delegated Julia frontier is `.7.3.3`).
+- Last updated: `2026-07-10` (delegated Julia `.7.3.3` no-drift done; next PNT leaf is `.1.5.1`).
 - Owner: repo-local workflow
 
 ## Goal
@@ -293,8 +293,8 @@ before implementation.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.7.3.3` | `active` | Reconcile Julia's scoped milestone and remaining complete-parity obligations without false closure. |
-| 2 | `FUTURE-PARITY-BACKLOG.1.5.1` | `pending` | Lock neutral CLI fixtures and normalize the Perl reference after Julia's active leaf is clean. |
+| 1 | `JULIA-BACKEND-PARITY.7.3.3` | `done` | Julia-local status is reconciled; its root remains active/delegated rather than falsely complete. |
+| 2 | `FUTURE-PARITY-BACKLOG.1.5.1` | `pending` | Next PNT: lock neutral CLI fixtures and normalize the Perl reference. |
 | 3 | `FUTURE-PARITY-BACKLOG.1.5.2` | `pending` | Add the missing Rust primary CLI against the shared fixtures. |
 | 4 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
 | 5 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
@@ -361,17 +361,21 @@ before implementation.
   positional/subcommand rejection, deterministic named resolution, and exact source/input loading. `.7.3.2.3`
   now executes rule/function source through the native pipeline and emits recursively key-sorted direct JSON;
   `.7.3.2.4` locks stable phase-ordered failures plus the trace sink/reset/emoji matrix. `.7.3.2.5` now locks nine
-  direct process families and `runtime-corpus-primary-cli`; 1,017 assertions and 99/99 pass. `.7.3.3` is active for
-  honest outer no-drift.
+  direct process families and `runtime-corpus-primary-cli`; 1,017 assertions and 99/99 pass. `.7.3.3` then closes
+  the outer audit without declaring complete parity. Julia remains active/delegated to `.1.5`, `.1.6`, and `.3`.
+- `2026-07-10`: Delegated Julia `.7.3.3` corrects a stale mdBook limitation sentence and proves current surfaces
+  agree on the exact local milestone and remaining global obligations. PNT now advances to `.1.5.1`; Lua remains
+  gated behind current-backend CLI/capability/generated-source convergence.
 
 ## Open Questions
 
-- None blocking the active Julia tree. Lua `.1.3` is intentionally gated until current implemented backends close
+- None blocking the global CLI frontier. Lua `.1.3` is intentionally gated until current implemented backends close
   ADR `0023` CLI/capability convergence, including any `.1.6`-split gaps and public generated source under `.3`.
 
 ## Blockers
 
-- None. Julia `.7.3.3` is the next active PNT leaf; global CLI/capability convergence precedes Lua `.1.3`.
+- None. Delegated Julia `.7.3.3` is done; `.1.5.1` is the next PNT leaf. Global CLI/capability convergence precedes
+  Lua `.1.3`.
 
 ## Verification Log
 
@@ -384,6 +388,7 @@ before implementation.
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.9.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning capture only; no implementation code changed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.4` | Perl direct `LinkedSpec::Get` coderef probe; focused Dart runtime tests (50); direct Julia parse/compile/execute probe; static Rust core/runtime API and Dart/Julia CLI-adapter audit; `mdbook build docs/linkedspec-book`; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check` | PASS. ADR `0022` makes native in-memory embedding primary and CLIs secondary; current/future backend acceptance and public docs agree; no parser/compiler/runtime source changed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.0` | Delegated Julia `.7.3.1`: ADR `0023`; Perl CLI/trace contract and Rust public source-emitter audit; global task routing; mdBook build; Knowledge Map generation/check; memory/task/doctrine/whitespace gates. | PASS. Exact primary CLI and public-capability parity are durable; `.1.5.1`–`.1.5.4`, `.1.6`, and `.3` own convergence; no implementation behavior changed. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.3` | Delegated current-surface audit; stale mdBook provenance/correction; exact owner routing; prior `431f0472` Julia proof; docs/KM/governance/whitespace and mdBook. | PASS. Julia's local audit is done while its root remains active/delegated; `.1.5.1` is next. |
 
 ## Commit Log
 
@@ -396,9 +401,13 @@ before implementation.
 | `FUTURE-PARITY-BACKLOG.9.0` | `FUTURE-PARITY-BACKLOG.9.0 - capture AND OR edge default correction` | Captures future AND/OR mode-sensitive edge-default design arc; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
+| `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |
 
 ## Changelog
 
+- `2026-07-10`: Delegated Julia `.7.3.3` closes the local no-drift audit at
+  `runtime-corpus-primary-cli` while preserving the active/delegated full-parity boundary. `.1.5.1` becomes the
+  next PNT leaf; `.1.6`, `.3`, and then Lua remain ordered behind it.
 - `2026-07-10`: Delegated `.1.5.0` closes through Julia `.7.3.1`. ADR `0023` defines one exact parser-oriented
   primary CLI and complete public capability/behavior parity; `.1.5.1`–`.1.5.4`, `.1.6`, and `.3` own convergence.
 - `2026-07-09`: Created the future parity backlog tree with seven initial owned lanes and Dart -> Julia -> Lua

@@ -35,4 +35,4 @@ capability, so this deferral blocks complete Julia feature parity even though it
 Related facts: [[user-observable-backend-cli-parity-contract]], [[julia-backend-interpreter-first-plan]], [[julia-mdbook-usage-status]],
 [[julia-full-corpus-gate]], [[native-in-memory-backend-contract]], [[rust-source-emitter-lane-split]],
 [[rust-generated-source-family-plan]], [[rust-generated-source-corpus-subset]],
-[[dart-generated-source-deferred]].
+[[dart-generated-source-deferred]], [[julia-scoped-parity-no-drift]].

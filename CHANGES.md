@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.3 — reconcile Julia scoped parity status
+
+**Scope:** Outer current-surface audit, stale mdBook correction, exact global-owner routing, and handoff to the
+language-neutral CLI fixture frontier; no implementation behavior change.
+
+**Finding and correction:** The Julia handoff section correctly described the process-locked exact primary CLI,
+but an adjacent sentence inherited from `.7.3.2.1` still denied that capability “yet.” `git blame` confirmed the
+provenance. The limitation now names only the still-open cross-backend fixture identity and generated-source gap.
+
+**Result:** `.7.3.3` is done at the precise `runtime-corpus-primary-cli` milestone. The Julia root remains active/
+delegated—not complete—through `.1.5` CLI identity, `.1.6` capability census, and `.3` generated-source parity;
+`.1.5.1` is next. No source changed. Static status scans, Knowledge Map, governance, mdBook, and whitespace pass;
+commit `431f0472` immediately prior supplies the full 1,017/nine-process/99-fixture Julia proof.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.2.5 — close Julia primary CLI conformance
 
 **Scope:** Standalone real-process conformance, focused-gate delegation, precise public status, task/live/book/
@@ -13,7 +27,8 @@ mirror trace. The focused gate delegates primary checks to it. Status is now `ru
 
 **Verification:** The standalone checker passes; `tools/run_julia_local.sh` additionally passes all 1,017 package
 assertions, separate corpus-runner help, and 99/99 exact corpus outputs. The local status deliberately does not
-claim global CLI fixtures, capability census, or generated-source parity; `.7.3.3` owns honest outer no-drift.
+claim global CLI fixtures, capability census, or generated-source parity; `.7.3.3` has since closed honest outer
+no-drift while keeping those global owners explicit.
 
 ## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.2.4 — normalize Julia CLI failures and trace routing
 

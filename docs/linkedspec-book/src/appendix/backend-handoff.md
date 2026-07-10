@@ -70,12 +70,12 @@ the same language-neutral fixtures for every backend.
 This is a contract and active convergence target, not a claim that every current executable
     already passes. The current gap census is: Perl is parser-oriented but still needs the neutral
     fixture lock; Rust has no primary binary; Dart remains corpus/status-oriented; Julia now accepts and executes
-    the exact parser request shape with stable local failures and trace routing but still needs direct-process
-    closeout and the global neutral fixture comparison. `FUTURE-PARITY-BACKLOG.1.5`
+    the exact parser request shape with stable local failures, trace routing, and nine-family process proof, but
+    still needs the global neutral fixture comparison. `FUTURE-PARITY-BACKLOG.1.5`
     owns convergence. Julia's repair is split under `JULIA-BACKEND-PARITY.7.3.2`; `.7.3.2.1` closes compile/parser/
     function-shell/staged trace coverage, `.7.3.2.2` closes exact argument/source/input handling, `.7.3.2.3`
     closes execution/direct canonical JSON, `.7.3.2.4` closes errors/exits/trace routing, and `.7.3.2.5` closes
-    nine-family direct-command conformance. `.7.3.3` is active for honest outer no-drift.
+    nine-family direct-command conformance. `.7.3.3` closes the local audit without claiming global identity.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics
@@ -437,12 +437,13 @@ and trace controls. Success prints the direct top-rule value with recursively so
 Source compilation precedes input-file loading. Compilation, input-load, and invocation failures use stable stderr
 headings and exit `1`; usage errors exit `2`. The existing trace emitter now composes stdout/route/mirror, reset,
 quiet, and level-specific emoji behavior with canonical output. `.7.3.2.5` locks nine real-process families with
-exact stdout/stderr/newline/file bytes and exit 0/1/2. `.7.3.3` remains active for honest outer no-drift; global
-cross-backend fixture identity remains owned by `FUTURE-PARITY-BACKLOG.1.5`.
+exact stdout/stderr/newline/file bytes and exit 0/1/2. `.7.3.3` closes honest local no-drift; global cross-backend
+fixture identity remains owned by `FUTURE-PARITY-BACKLOG.1.5`.
 
-The boundary does not claim generated Julia source or the exact primary CLI yet. `.7.2` deliberately
-defers generated Julia source to the split future source-emitter lane under `FUTURE-PARITY-BACKLOG.3`; Julia
-currently guarantees the interpreter path. A credible later emitter must own its scaffold/compile-run harness,
+The boundary claims the exact Julia-local primary CLI, but not four-backend fixture identity, complete public
+capability parity, or generated Julia source. `.7.2` deliberately defers generated Julia source to the split
+future source-emitter lane under `FUTURE-PARITY-BACKLOG.3`; Julia currently guarantees the interpreter and local
+primary-command paths. A credible later emitter must own its scaffold/compile-run harness,
 typed generated-family plan, direct structural-family execution, and curated corpus proof. Runtime diagnostics/
 tracing now span frontend, compiler, function-shell, staged, and interpreter phases through one optional emitter;
 the trace chapter documents the event families and examples. `JuliaFormatter` and `JET` are

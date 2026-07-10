@@ -5,11 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.3` closes the local outer no-drift audit without closing the
+  Julia parity tree. One mdBook limitation sentence inherited from `.7.3.2.1` incorrectly denied the exact primary
+  CLI after later leaves implemented it; current surfaces now agree on `runtime-corpus-primary-cli`, 1,017 package
+  assertions, nine process families, and 99/99. The Julia root remains active/delegated to global `.1.5` CLI
+  identity, `.1.6` capability census, and `.3` generated-source equivalence; `.1.5.1` is next PNT.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.2.5` closes Julia-local primary CLI conformance. A standalone
   checker owns nine real-process help/success/usage/operational/route/mirror families with exact stdout/stderr/
   newline/file bytes and exit 0/1/2; the focused gate delegates to it, 1,017 package assertions, and 99/99 corpus.
-  Public status is the precise `runtime-corpus-primary-cli`, not complete parity. `.7.3.2` is done and `.7.3.3` is
-  active; global CLI fixtures, capability census, and generated-source convergence remain separately owned.
+  Public status is the precise `runtime-corpus-primary-cli`, not complete parity. `.7.3.3` has since closed the
+  local audit; global CLI fixtures, capability census, and generated-source convergence remain separately owned.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.2.4` normalizes Julia's primary failure and trace-routing
   boundary. Source compilation precedes deferred input-file loading; stable compilation/input/invocation stderr
   exits `1`, usage exits `2`, and runtime diagnostics render ordered fields. Stdout/route/mirror, empty/missing/file
