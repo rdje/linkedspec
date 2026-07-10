@@ -291,14 +291,15 @@ Dart-specific LinkedSpec CLI productization is now done, and
 `DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first milestone.
 `FUTURE-PARITY-BACKLOG.1.2` creates the dedicated `JULIA-BACKEND-PARITY`
 plan. `JULIA-BACKEND-PARITY.1.1` has completed Julia toolchain/package-layout preflight, `.1.2` has created the
-minimal Julia package scaffold, and `.1.3` has added manifest-backed corpus IO and drift detection. The active Julia
-frontier is now `.2.1` for source AST/data types. Future Julia and Lua backend plans must own their own
+minimal Julia package scaffold, `.1.3` has added manifest-backed corpus IO and drift detection, and `.2.1` has
+added source AST/data types with neutral JSON projection. The active Julia frontier is now `.2.2` for parsing
+`.spec` rule paragraphs into those types. Future Julia and Lua backend plans must own their own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
 
 ### Julia Backend Scaffold
 
-`JULIA-BACKEND-PARITY.1.1` through `.1.3` are complete. The local Julia toolchain is Homebrew-managed:
+`JULIA-BACKEND-PARITY.1.1` through `.2.1` are complete. The local Julia toolchain is Homebrew-managed:
 `/opt/homebrew/bin/julia` reports Julia `1.12.6`, and the official Julia downloads page lists `v1.12.6` as the
 current stable release. `Pkg` and `Test` work when Julia has a writable depot; under the managed harness, commands
 can set `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot` to avoid writing precompile artifacts into
@@ -316,6 +317,7 @@ julia/
   src/LinkedSpecJulia.jl
   src/cli/LinkedSpecJuliaCli.jl
   src/corpus/CorpusManifest.jl
+  src/spec/Ast.jl
   bin/linkedspec_julia.jl
   bin/corpus_runner.jl
   test/runtests.jl
@@ -334,9 +336,10 @@ julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtim
 
 The corpus commands validate `manifest.json`, case-count/name shape, missing/stale fixture directories, required
 `input.spec` / `input.txt` / `expected.json` files, and expected JSON syntax over the checked-in 99-fixture corpus.
-`--execute` still reports not implemented. The next Julia frontier is `JULIA-BACKEND-PARITY.2.1`, which defines
-source AST/data types before parsing `.spec` text. Future leaves own `src/spec/`, `src/action/`, `src/compiler/`,
-and `src/runtime/`.
+`--execute` still reports not implemented. `julia/src/spec/Ast.jl` defines data records and JSON projection for
+spec files, function definitions, source spans, staged parse jobs, rule headers/modes, body element variants, edge
+targets, and fluent calls. The next Julia frontier is `JULIA-BACKEND-PARITY.2.2`, which parses `.spec` text into
+those source AST types. Future leaves own `src/action/`, `src/compiler/`, and `src/runtime/`.
 
 ### Dart Backend Commands
 

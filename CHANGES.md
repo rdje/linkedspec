@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.2.1 — define Julia frontend AST data types
+
+**Scope:** Julia source AST/data records, JSON projection, package exports, focused tests, README, task-tree
+frontier update, roadmap/task-tree index alignment, mdBook status/handoff text, Knowledge Map, architecture
+snapshot, live docs, and resume pointer.
+
+**Change:** Added `julia/src/spec/Ast.jl` with Julia data types for spec files, function definitions, source spans,
+staged parse jobs, rule headers/modes, body element variants, edge targets, and fluent calls. The JSON projection
+uses the neutral Rust/Dart/mdBook field names (`functions`, `rules`, `source_span`, `body_parse_job`,
+`parent_ast_path`, `result_policy`, `failure_policy`, and related span fields). Parser behavior is still deferred;
+`.2.2` owns parsing `.spec` text into this data model.
+
+**Validation:** `Pkg.test()` passes with 52 tests, including source-AST JSON round-trip coverage. Commit-time
+docs/governance validation covers mdBook, memory architecture, task-tree metadata, Knowledge Map, doctrine, and
+`git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.1.3 — add Julia corpus manifest IO
 
 **Scope:** Julia corpus manifest IO, JSON dependency lock, corpus-runner validation behavior, tests, README,

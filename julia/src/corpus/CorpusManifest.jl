@@ -83,7 +83,7 @@ function run_corpus_runner(args = ARGS; io = stdout, err = stderr)
     end
 
     if parsed.execute
-        println(err, "error: corpus execution is not implemented in the Julia scaffold")
+        println(err, "error: corpus execution is not implemented in the Julia backend")
         return 2
     end
 
@@ -92,7 +92,7 @@ function run_corpus_runner(args = ARGS; io = stdout, err = stderr)
         println(io, "corpus: ", validation.root)
         println(io, "format: ", validation.manifest.format)
         println(io, "fixtures: ", validation.manifest.case_count)
-        println(io, "status: manifest validated; execution is not implemented in the Julia scaffold")
+        println(io, "status: manifest validated; execution is not implemented in the Julia backend")
     catch error
         if error isa CorpusManifestException
             println(err, "error: ", error.message)

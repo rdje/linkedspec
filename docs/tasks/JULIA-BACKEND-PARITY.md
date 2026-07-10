@@ -90,18 +90,19 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.1.3 - add Julia corpus manifest IO`
 
 - ID: `JULIA-BACKEND-PARITY.2`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the Julia `.spec` frontend.
   Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`
 
 - ID: `JULIA-BACKEND-PARITY.2.1`
-  Status: `pending`
+  Status: `done`
   Goal: Define Julia AST/data types for `.spec` files, rules, modes, body elements, edges, lifecycles, source spans,
     parse jobs, and function definitions.
   Acceptance: Types project to JSON where needed for diagnostics/corpus tooling, and field names match the
     Rust/Dart/mdBook contract.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `Pkg.test()` covers JSON round-trip over source spans, staged parse jobs, function
+    definitions, rule modes, body elements, action/blind edges, and spec files.
+  Commit: `JULIA-BACKEND-PARITY.2.1 - define Julia frontend AST data types`
 
 - ID: `JULIA-BACKEND-PARITY.2.2`
   Status: `pending`
@@ -311,7 +312,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.2.1` | `pending` | Define Julia source AST/data types before parsing `.spec` text or executing corpus fixtures. |
+| 1 | `JULIA-BACKEND-PARITY.2.2` | `pending` | Parse `.spec` rule paragraphs into the source AST types defined by `.2.1`. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -386,6 +387,21 @@ Corpus IO evidence recorded on 2026-07-10:
   fixtures after validation.
 - `--execute` remains deliberately rejected until later parser/runtime leaves implement execution.
 
+## `JULIA-BACKEND-PARITY.2.1` Source AST Data Result
+
+Source AST evidence recorded on 2026-07-10:
+
+- `julia/src/spec/Ast.jl` defines the Julia data model for parsed `.spec` source: `SpecFile`,
+  `FunctionDefinition`, `SourceSpan`, `StagedSourceSpan`, `StagedParseJob`, `Rule`, `RuleHeader`, `RuleMode`,
+  body element variants, `EdgeTarget`, and `FluentCall`.
+- The JSON projection uses the same neutral field names used by Rust, Dart, and the mdBook contract, including
+  `functions`, `rules`, `source_span`, `body_span`, `body_parse_job`, `line_start`, `line_end`,
+  `parent_ast_path`, `result_policy`, and `failure_policy`.
+- `RuleMode` helpers cover default, bounded AND, and bounded OR modes with repetition metadata accessors.
+- `top_rule(spec)` and `find_rule(spec, label)` provide data-only AST lookup helpers for later parser/compiler
+  leaves.
+- Parser behavior is still deliberately absent. `.2.2` owns parsing `.spec` rule paragraphs into these types.
+
 ## Decisions
 
 - `2026-07-09`: Julia follows Dart in the ADR `0021` backend rollout order. `FUTURE-PARITY-BACKLOG.1.2`
@@ -404,6 +420,9 @@ Corpus IO evidence recorded on 2026-07-10:
   state while the package has only the stdlib `Test` target.
 - `2026-07-10`: `.1.3` adds the committed JSON dependency `JSON3` instead of hand-rolling JSON parsing. Manifest
   IO must validate the shared corpus format and expected JSON syntax before parser/runtime semantics exist.
+- `2026-07-10`: `.2.1` mirrors the Rust/Dart/mdBook parsed-source contract in Julia data types and JSON field
+  names before implementing any text parser. The parser leaf `.2.2` must produce this data model rather than
+  introducing a competing Julia-only AST shape.
 
 ## Open Questions
 
@@ -414,7 +433,7 @@ Corpus IO evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.2.1`. The Julia foundation container is complete; source AST/data types are the next owned boundary.
+- None for `.2.2`. Julia now has the source AST data model; parser implementation is the next owned boundary.
 
 ## Verification Log
 
@@ -424,6 +443,7 @@ Corpus IO evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.1.1` | `command -v julia`; `julia --version`; official Julia downloads page stable-release check; `brew list --versions julia`; `brew list --cask --versions julia`; `/opt/homebrew/bin/julia --startup-file=no --history-file=no -e 'println(VERSION)'`; `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --startup-file=no --history-file=no -e 'import Pkg; import Test; println("Pkg+Test available")'`; optional `JuliaFormatter` and `JET` import probes. | PASS for Julia/Homebrew version, `Pkg`, and `Test`; `JuliaFormatter` and `JET` are absent optional tools. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.1.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.instantiate()'`; `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; `julia --project=julia julia/bin/linkedspec_julia.jl --help`; `julia --project=julia julia/bin/linkedspec_julia.jl status`; `julia --project=julia julia/bin/linkedspec_julia.jl corpus --corpus rust/linkedspec-runtime/tests/corpus`; `julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus`; `git diff --check`; memory architecture, task-tree metadata, Knowledge Map, doctrine, and mdBook checks. | PASS. Initial fresh-depot registry access needed approved network once; the committed manifest records only the local package, and the scaffold still deliberately rejects `--execute`. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.1.3` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.instantiate()'`; `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; `julia --project=julia julia/bin/linkedspec_julia.jl corpus --corpus rust/linkedspec-runtime/tests/corpus`; `julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus`; `julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute` returns code `2`; `git diff --check`; memory architecture, task-tree metadata, Knowledge Map, doctrine, and mdBook checks. | PASS. Julia validates the 99-fixture manifest and drift/file/JSON guards without parser/runtime execution; `--execute` remains unavailable. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.2.1` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia source AST/data types round-trip through JSON over spec files, function definitions, staged parse jobs, rule modes, body elements, edges, and fluent calls. |
 
 ## Commit Log
 
@@ -433,9 +453,14 @@ Corpus IO evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.1.1` | `JULIA-BACKEND-PARITY.1.1 - verify Julia toolchain preflight` | Toolchain/package-layout preflight; no Julia source scaffold yet. |
 | `JULIA-BACKEND-PARITY.1.2` | `JULIA-BACKEND-PARITY.1.2 - scaffold Julia package` | Minimal Julia package, command stubs, scaffold tests, and docs; no parser/runtime semantics yet. |
 | `JULIA-BACKEND-PARITY.1.3` | `JULIA-BACKEND-PARITY.1.3 - add Julia corpus manifest IO` | Manifest IO/drift guard scaffold; `.1` foundation container closes. |
+| `JULIA-BACKEND-PARITY.2.1` | `JULIA-BACKEND-PARITY.2.1 - define Julia frontend AST data types` | Source AST/data model and JSON projection; parser implementation advances to `.2.2`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.2.1` source AST/data types. `julia/src/spec/Ast.jl` now defines Julia data records
+  and JSON projection for spec files, functions, source spans, staged parse jobs, rule headers/modes, body element
+  variants, edge targets, and fluent calls. `Pkg.test()` covers the JSON round-trip; `.2.2` owns parsing `.spec`
+  text into these types.
 - `2026-07-10`: Completed `.1.3` manifest IO. Julia now uses JSON3 to load the manifest-backed 99-fixture corpus,
   validate manifest shape, detect missing/stale fixture directories, require `input.spec` / `input.txt` /
   `expected.json`, decode expected JSON, and report validated fixture count through the CLI/corpus runner. `.1`

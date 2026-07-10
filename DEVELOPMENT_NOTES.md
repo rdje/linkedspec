@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.2.1 — Julia source AST data types):
+  Julia now has the data-only source AST contract before parser behavior. `julia/src/spec/Ast.jl` defines
+  `SpecFile`, `FunctionDefinition`, source spans, staged parse jobs, rule headers/modes, body element variants,
+  edge targets, and fluent calls, with JSON field names matching the Rust/Dart/mdBook contract. `Pkg.test()` now
+  includes a JSON round-trip fixture over functions, parse jobs, bounded rule modes, regex/action/code elements,
+  edge targets, and spec files. Next leaf is `.2.2` for parsing `.spec` rule paragraphs into these types.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.1.3 — Julia corpus manifest IO):
   Julia now has manifest-backed corpus IO before parser/runtime semantics. `load_corpus_fixtures(path)` validates
   manifest format/count/names, duplicate names, missing/stale fixture directories, required fixture files, and

@@ -8,18 +8,52 @@ export backend_name,
     CorpusManifest,
     CorpusManifestException,
     CorpusValidationResult,
+    ActionEdgeBodyElementKind,
+    BlindEdgeBodyElementKind,
+    BodyElement,
+    CodeBlockBodyElementKind,
+    ConditionalBodyElementKind,
+    EdgeTarget,
+    FluentCall,
+    FluentChainBodyElementKind,
+    FunctionDefinition,
+    LifecycleMarkerBodyElementKind,
     load_corpus_fixtures,
+    PlainBlockBodyElementKind,
+    RawBodyElementKind,
+    RegexBodyElementKind,
+    Rule,
+    RuleHeader,
+    RuleMode,
+    SourceSpan,
+    SpecAstException,
+    SpecFile,
+    SplitMarkerBodyElementKind,
+    StagedParseJob,
+    StagedSourceSpan,
+    and_bounded_rule_mode,
+    default_rule_mode,
+    find_rule,
+    from_json,
+    is_and,
+    is_repetition,
+    or_bounded_rule_mode,
+    rep_max,
+    rep_min,
     run_cli,
-    run_corpus_runner
+    run_corpus_runner,
+    top_rule,
+    to_json
 
 const BACKEND_NAME = "julia"
 const PACKAGE_NAME = "LinkedSpecJulia"
 const PACKAGE_VERSION = v"0.1.0"
 const CLI_ENTRYPOINT = "julia/bin/linkedspec_julia.jl"
 const CORPUS_RUNNER_ENTRYPOINT = "julia/bin/corpus_runner.jl"
-const PARITY_STATUS = "scaffold"
+const PARITY_STATUS = "frontend-ast-data"
 
 include("corpus/CorpusManifest.jl")
+include("spec/Ast.jl")
 include("cli/LinkedSpecJuliaCli.jl")
 
 backend_name() = BACKEND_NAME

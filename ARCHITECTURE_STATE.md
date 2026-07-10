@@ -5,12 +5,18 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.2.1` adds Julia source AST/data types.
+  `julia/src/spec/Ast.jl` defines data records and JSON projection for spec files, function definitions, source
+  spans, staged parse jobs, rule headers/modes, body element variants, edge targets, and fluent calls. The field
+  names mirror the Rust/Dart/mdBook source contract (`functions`, `rules`, `source_span`, `body_span`,
+  `body_parse_job`, `line_start`, `line_end`, `parent_ast_path`, `result_policy`, `failure_policy`). This is still
+  data-only; parser behavior starts in `JULIA-BACKEND-PARITY.2.2`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.1.3` adds Julia corpus manifest IO.
   `julia/src/corpus/CorpusManifest.jl` now uses JSON3 to parse `manifest.json` and expected JSON, validates format
   `1`, case count, case names, duplicates, missing/stale fixture directories, required fixture files, and expected
   JSON syntax over the checked-in 99-fixture corpus. The Julia CLI/corpus runner report the validated fixture count
   in non-execute mode, and `--execute` still returns not implemented. The `.1` foundation container is closed; the
-  active frontier is `JULIA-BACKEND-PARITY.2.1` for source AST/data types.
+  source AST/data boundary has since landed in `JULIA-BACKEND-PARITY.2.1`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.1.2` creates the minimal Julia backend package scaffold.
   `julia/` now contains `Project.toml`, committed `Manifest.toml`, `src/LinkedSpecJulia.jl`, CLI/corpus modules,
   `bin/linkedspec_julia.jl`, `bin/corpus_runner.jl`, README commands, and a Julia `Test` smoke suite.

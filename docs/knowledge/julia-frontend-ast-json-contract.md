@@ -1,0 +1,33 @@
+---
+id: julia-frontend-ast-json-contract
+title: Julia frontend AST types mirror the Rust/Dart parsed-source JSON contract
+answers:
+  - what Julia types represent parsed spec files
+  - how do Julia AST types serialize to JSON
+  - what fields does the Julia staged parse job use
+  - where are Julia rule mode and body element data types
+  - what Julia AST types will the parser produce
+date: 2026-07-10
+status: current
+tags: [julia, ast, parser, json, staged-parsing]
+evidence: "julia/src/spec/Ast.jl; julia/test/runtests.jl; docs/tasks/JULIA-BACKEND-PARITY.md"
+reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
+---
+
+## Fact
+
+`JULIA-BACKEND-PARITY.2.1` adds data-only Julia source AST types in `julia/src/spec/Ast.jl`. They cover
+`SpecFile`, `FunctionDefinition`, `SourceSpan`, `StagedSourceSpan`, `StagedParseJob`, `Rule`, `RuleHeader`,
+`RuleMode`, body element variants, `EdgeTarget`, and `FluentCall`.
+
+The JSON projection intentionally follows the Rust/Dart/mdBook contract, including `functions`, `rules`,
+`source_span`, `body_span`, `body_parse_job`, `line_start`, `line_end`, `parent_ast_path`, `result_policy`, and
+`failure_policy`.
+
+`julia/test/runtests.jl` round-trips a representative `SpecFile` through JSON, including a function definition,
+staged function-body parse job, bounded AND rule mode, regex/action/code body elements, edge targets, and fluent
+calls. Parser behavior is not implemented yet; `JULIA-BACKEND-PARITY.2.2` owns producing these types from `.spec`
+text.
+
+Related facts: [[julia-corpus-manifest-io]], [[dart-frontend-ast-json-contract]],
+[[dart-core-spec-parser]], [[text-to-ast-backend-doctrine]].
