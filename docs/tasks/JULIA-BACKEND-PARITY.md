@@ -531,13 +531,15 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.2.4.1 - add Julia anonymous capture boundaries`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.2`
-  Status: `active`
+  Status: `done`
   Goal: Close logical and diagnostic-output helper gaps.
   Children: `.6.2.4.2.1`, `.6.2.4.2.2`, `.6.2.4.2.3`
   Acceptance: Current logical and diagnostic-output helpers execute with the documented portable contracts, with
     boolean and output behavior isolated into separate implementation leaves.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `.6.2.4.2.1` adds eager boolean helpers, `.6.2.4.2.3` normalizes helper regex flags,
+    and `.6.2.4.2.2` adds diagnostic output without changing parse results. All three owned helper mechanisms are
+    covered by focused runtime and shipped-corpus regressions.
+  Commit: closed by `JULIA-BACKEND-PARITY.6.2.4.2.2 - add Julia diagnostic output helpers`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.2.1`
   Status: `done`
@@ -555,12 +557,19 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.2.4.2.1 - add Julia logical helpers`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.2.2`
-  Status: `active`
+  Status: `done`
   Goal: Add diagnostic `print`/`print_each`/`say` helper execution.
   Acceptance: Diagnostic-output helpers preserve runtime output while matching the portable side-effect contract;
     `simenv_multiline_value` and `ds_vhistory_version_entry` advance past unsupported-helper failures.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - Julia eagerly evaluates all diagnostic arguments, emits `print`, `say`, and
+    `print_each` messages through the configured low-level trace/diagnostic sink, returns `nothing`, and leaves
+    parser output unchanged. Focused runtime coverage locks concatenation, newline/suffix behavior, array walking,
+    and result neutrality. Both routed corpus cases advance past unsupported `print`: `simenv_multiline_value`
+    now stops at unsupported `exit_now`, while `ds_vhistory_version_entry` reaches its already-known leading-trivia
+    output mismatch. Seven permanent corpus-boundary assertions bring full `Pkg.test()` to 780. The complete
+    shipped window remains 18/31 because this helper leaf advances failure mechanisms rather than closing either
+    fixture; status is `runtime-corpus-diagnostic-output`, and `.6.2.4.3` becomes active.
+  Commit: `JULIA-BACKEND-PARITY.6.2.4.2.2 - add Julia diagnostic output helpers`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.2.3`
   Status: `done`
@@ -571,11 +580,11 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
     `i`/`m`/`s`/`x`, ignores execution-only `g` and Perl compile-once `o`, and returns failure for unknown flags or
     invalid patterns. Both `matches(...)` and regex `split(...)` use the seam. Focused helper coverage locks `igo`,
     regex split `go`, and unknown `q`; `portmap_constant` passes at exact expected output. Full tests remain 772,
-    shipped smoke moves from 17/31 to 18/31, status is `runtime-corpus-helper-regex-flags`, and `.6.2.4.2.2` is active.
+    shipped smoke moves from 17/31 to 18/31, status is `runtime-corpus-helper-regex-flags`, and `.6.2.4.2.2` is next.
   Commit: `JULIA-BACKEND-PARITY.6.2.4.2.3 - normalize Julia helper regex flags`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.3`
-  Status: `pending`
+  Status: `active`
   Goal: Close recursive top-rule lifecycle and accumulator outputs.
   Acceptance: All three recursive top-rule fixtures match checked-in Perl/Rust outputs, with caller/child local
     state and LX result composition proven by focused Julia tests.
@@ -679,7 +688,37 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 12 | `JULIA-BACKEND-PARITY.6.2.4.1` | `done` | Anonymous capture boundaries close all three hlink delimiter cases; EBNF logging is structurally routed. |
 | 13 | `JULIA-BACKEND-PARITY.6.2.4.2.1` | `done` | Eager logical helpers close four cases and isolate one helper-regex flag residual. |
 | 14 | `JULIA-BACKEND-PARITY.6.2.4.2.3` | `done` | Shared helper regex compilation closes portmap constant while preserving invalid-flag failure. |
-| 15 | `JULIA-BACKEND-PARITY.6.2.4.2.2` | `active` | Add diagnostic print/say helpers for simenv and history. |
+| 15 | `JULIA-BACKEND-PARITY.6.2.4.2.2` | `done` | Diagnostic output is trace-routed and parse-result neutral; both corpus cases advance to successor-owned mechanisms. |
+| 16 | `JULIA-BACKEND-PARITY.6.2.4.3` | `active` | Close recursive top-rule lifecycle and accumulator outputs. |
+
+## `JULIA-BACKEND-PARITY.6.2.4.2.2` Diagnostic Output Result
+
+Diagnostic-output evidence recorded on 2026-07-10:
+
+- `print(...)` concatenates evaluated arguments, `say(...)` adds a newline, and `print_each(...)` walks an array
+  with optional prefix/suffix text. All return `nothing`, so diagnostic side effects never enter parser output.
+- Julia routes diagnostic messages through the configured `LinkedSpecTraceEmitter` at low level. With tracing
+  absent or disabled the helpers remain quiet, preserving default execution and corpus-runner output.
+- `simenv_multiline_value` advances from unsupported `print` to unsupported `exit_now`; that control helper and
+  later statement-mutation behavior remain outside this leaf. `ds_vhistory_version_entry` advances to the exact
+  expected-null versus actual-`/proj/foo` output boundary already documented for the public-parser leading-newline
+  wrapper. The later structural/parity leaves own those mechanisms.
+- The permanent regression locks both advanced failure classes and explicitly rejects renewed unsupported-`print`
+  failures. Full `Pkg.test()` passes with 780 assertions; the complete shipped window remains 18/31 with no
+  regression, and status is `runtime-corpus-diagnostic-output`.
+
+## `JULIA-BACKEND-PARITY.6.2.4.2.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Both routed fixtures stopped on unsupported runtime helper `print`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — ActionIR already parsed and classified the helper calls, but the Julia
+  interpreter had no diagnostic-output dispatcher or sink integration.
+- [x] **FIX** — Added eager diagnostic helper dispatch and low-level trace-sink emission with parse-result-neutral
+  return behavior.
+- [x] **ADDRESSED (verified)** — Focused runtime output is correct, and both shipped fixtures advance beyond
+  unsupported `print` to precise successor-owned mechanisms.
+- [x] **NO REGRESSION** — Full `Pkg.test()` passes with 780 assertions; shipped smoke remains 18/31.
+- [x] **LOCKSTEP** — Julia README, task/index/roadmaps, debug-output mdBook contract, Knowledge Map,
+  architecture/live docs, package status, and `MEMORY.md` advance to `.6.2.4.3`.
 
 ## `JULIA-BACKEND-PARITY.6.2.4.2.3` Helper Regex Flag Result
 
@@ -2063,6 +2102,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.1` | Focused anonymous capture runtime tests; hlink/EBNF focused corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. The complete direct anonymous capture family is Unicode/location/mutation safe; all three hlink delimiter fixtures pass, EBNF logging reaches its structural residual, the window improves to 13/31, full tests pass with 766 assertions, status is `runtime-corpus-capture-boundaries`, and `.6.2.4.2.1` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.2.1` | Focused eager logical-helper runtime proof; portmap/tablegrep focused corpus run; direct compiled-regex capture probe; traced portmap constant run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Eager `and`/`or`/`not` closes four corpus cases and advances portmap constant to a no-op helper-regex flag residual under `.6.2.4.2.3`; shipped smoke is 17/31, full tests pass with 772 assertions, status is `runtime-corpus-logical-helpers`. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.2.3` | Focused helper regex `igo`/split `go`/invalid `q` tests; focused portmap constant run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Strict shared helper-regex flag normalization closes portmap constant, shipped smoke is 18/31, full tests pass with 772 assertions, status is `runtime-corpus-helper-regex-flags`, and `.6.2.4.2.2` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.2.2` | Focused diagnostic-output runtime proof; focused simenv/history corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Trace-routed `print`/`print_each`/`say` preserve parser output and advance both corpus cases past unsupported `print`; exact successor failures are locked, shipped smoke remains 18/31, full tests pass with 780 assertions, status is `runtime-corpus-diagnostic-output`, and `.6.2.4.3` becomes active. |
 
 ## Commit Log
 
@@ -2107,12 +2147,17 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.6.2.4.1` | `JULIA-BACKEND-PARITY.6.2.4.1 - add Julia anonymous capture boundaries` | Full direct anonymous capture family closes three hlink cases and routes the EBNF structural residual; logical helpers advance to `.6.2.4.2.1`. |
 | `JULIA-BACKEND-PARITY.6.2.4.2.1` | `JULIA-BACKEND-PARITY.6.2.4.2.1 - add Julia logical helpers` | Eager boolean composition closes four corpus cases and splits portmap constant's helper-regex `o` flag residual to `.6.2.4.2.3`. |
 | `JULIA-BACKEND-PARITY.6.2.4.2.3` | `JULIA-BACKEND-PARITY.6.2.4.2.3 - normalize Julia helper regex flags` | Shared strict helper regex flag normalization closes portmap constant and advances diagnostic-output helpers to `.6.2.4.2.2`. |
+| `JULIA-BACKEND-PARITY.6.2.4.2.2` | `JULIA-BACKEND-PARITY.6.2.4.2.2 - add Julia diagnostic output helpers` | Trace-routed, parse-result-neutral diagnostic output advances both routed fixtures to successor-owned mechanisms; recursive top-rule parity advances to `.6.2.4.3`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.2.4.2.2` diagnostic output. Eager `print`/`say` concatenation and `print_each` array
+  walking emit through Julia's low-level trace sink and remain parse-result neutral. Simenv advances to unsupported
+  `exit_now`; history advances to its leading-trivia output mismatch. Full tests pass with 780 assertions, shipped
+  smoke remains 18/31, status is `runtime-corpus-diagnostic-output`, `.6.2.4.2` closes, and `.6.2.4.3` is active.
 - `2026-07-10`: Completed `.6.2.4.2.3` helper regex flags. Shared `matches`/regex-`split` compilation preserves
   `imsx`, ignores runtime-only `g` and Perl no-op `o`, and rejects unknown flags. Portmap constant passes, full tests
-  remain 772, shipped smoke is 18/31, status is `runtime-corpus-helper-regex-flags`, and `.6.2.4.2.2` is active.
+  remain 772, shipped smoke is 18/31, status is `runtime-corpus-helper-regex-flags`, and `.6.2.4.2.2` is next.
 - `2026-07-10`: Completed `.6.2.4.2.1` logical helpers. Eager `and`/`or`/`not` matches Perl/Rust truthiness and
   empty arities, closes three portmap cases plus tablegrep, and routes portmap constant's independently proven
   helper-regex `o` flag residual to `.6.2.4.2.3`. Full tests pass with 772 assertions, shipped smoke is 17/31, and

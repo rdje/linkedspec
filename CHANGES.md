@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.2.2 — add Julia diagnostic output helpers
+
+**Scope:** Julia `print`/`print_each`/`say` runtime execution, focused diagnostic-sink coverage, permanent shipped-
+corpus boundary regression, package status, lockstep docs, mdBook, Knowledge Map, and resume pointer.
+
+**Change:** Added eager diagnostic helper dispatch. `print` concatenates values, `say` adds a newline, and
+`print_each` walks array items with optional prefix/suffix text. Messages route through the configured low-level
+trace sink; all helpers return `nothing` and never enter parser output. The touched mdBook examples use newlines as
+statement separators and omit line-ending semicolons.
+
+**Validation:** Simenv advances from unsupported `print` to unsupported `exit_now`; history reaches its known
+leading-trivia output mismatch. Seven permanent corpus assertions lock both advanced boundaries and reject renewed
+unsupported-`print` failures. The full window remains 18/31; full `Pkg.test()` passes with 780 assertions and
+status `runtime-corpus-diagnostic-output`. CLI, mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates
+pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.2.3 — normalize Julia helper regex flags
 
 **Scope:** Shared Julia helper-regex flag compilation, focused matches/split/invalid-flag coverage, portmap constant

@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.2.2 — diagnostic output helpers):
+  Diagnostic helpers are side-effect statements, not parser values. Julia evaluates arguments normally, then
+  routes human-facing output through its existing low-level trace sink and returns `nothing`; default untraced
+  execution stays quiet and parse output stays structural. Corpus advancement is intentionally distinct from
+  corpus closure: simenv now exposes `exit_now`, while history exposes the public-parser leading-trivia boundary.
+  The permanent regression asserts those exact successor mechanisms and guards against unsupported `print`
+  returning. Multiline examples use newlines alone; semicolons remain same-line statement separators only.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.2.3 — helper regex flag normalization):
   Regex literals carry both compile flags and operation flags. Julia's helper regex seam now deliberately filters
   them: `imsx` reach `Regex`, `g`/`o` remain accepted operation/compatibility no-ops at compile time, and unknown

@@ -114,9 +114,10 @@ Top-level directories and files:
     function fixtures. Full tests pass with 757 assertions and status `runtime-corpus-middle`. `.6.2.4.0` measures
     shipped-spec/parser-smoke fixtures 68–98 at 10/31 and splits the failure families. `.6.2.4.1` adds anonymous
     capture-boundary execution and closes three hlink cases. `.6.2.4.2.1` adds eager logical helpers, closes three
-    portmap cases plus tablegrep. `.6.2.4.2.3` normalizes helper regex flags and closes portmap constant. Full tests
-    pass with 772 assertions, status is `runtime-corpus-helper-regex-flags`, shipped smoke is 18/31, and
-    `.6.2.4.2.2` is active.
+    portmap cases plus tablegrep. `.6.2.4.2.3` normalizes helper regex flags and closes portmap constant.
+    `.6.2.4.2.2` adds trace-routed, parse-result-neutral diagnostic output and advances simenv/history past
+    unsupported `print`. Full tests pass with 780 assertions, status is `runtime-corpus-diagnostic-output`, shipped
+    smoke remains 18/31, and `.6.2.4.3` is active.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

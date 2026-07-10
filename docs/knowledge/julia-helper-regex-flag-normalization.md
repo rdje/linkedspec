@@ -28,8 +28,9 @@ use the same normalization, preventing helper-specific flag drift.
 
 This closes `portmap_constant`. Its compacted `entry_group(0)` was already correct at `0x1f`; the prior
 `?bare:` output came from `matches(entry_group(0), /^\d/io)` returning false when raw `io` was passed to Julia
-`Regex`. It now returns exact checked-in `?constant:` output. Full tests remain green with 772 assertions, the
-shipped-smoke window is 18/31, status is `runtime-corpus-helper-regex-flags`, and `.6.2.4.2.2` is active.
+`Regex`. It now returns exact checked-in `?constant:` output. At that boundary full tests were green with 772
+assertions, the shipped-smoke window was 18/31, and status was `runtime-corpus-helper-regex-flags`.
+`.6.2.4.2.2` has since closed diagnostic output and `.6.2.4.3` is active.
 
 Related facts: [[julia-logical-helper-execution]], [[julia-shipped-corpus-smoke-split]],
 [[rust-capture-group-helper-indexing]], [[rust-perl-output-oracle]].

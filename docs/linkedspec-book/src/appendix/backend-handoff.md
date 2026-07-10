@@ -334,7 +334,9 @@ pass with 757 assertions and status `runtime-corpus-middle` at that boundary. `.
 shipped-spec/parser-smoke window at 10/31. `.6.2.4.1` adds the complete direct anonymous capture family, closes
 three hlink delimiter cases, and routes EBNF logging to structural output. `.6.2.4.2.1` adds eager logical helpers,
 closes three portmap cases plus tablegrep. `.6.2.4.2.3` centralizes helper regex flags and closes portmap constant.
-Full tests remain 772, status is `runtime-corpus-helper-regex-flags`, the window is 18/31, and `.6.2.4.2.2` is active.
+`.6.2.4.2.2` adds trace-routed, parse-result-neutral diagnostic output and advances simenv/history beyond
+unsupported `print`. Full tests pass with 780 assertions, status is `runtime-corpus-diagnostic-output`, the window
+remains 18/31, and `.6.2.4.3` is active.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -686,7 +688,15 @@ comparison but remains `?bare:` because helper `matches(..., /^\d/io)` passes Pe
 Helper regex literals now spend one strict compiler seam: `i`, `m`, `s`, and `x` reach Julia `Regex`; execution-
 only `g` and Perl compile-once `o` are compile-time no-ops; unknown flags and invalid patterns still fail closed.
 Both `matches(...)` and regex-delimiter `split(...)` use the seam. Portmap constant passes exact checked-in output,
-the window is 18/31, full tests remain 772, status is `runtime-corpus-helper-regex-flags`, and `.6.2.4.2.2` is active.
+and the window is 18/31 at that boundary.
+
+Diagnostic `print(...)` and `say(...)` concatenate evaluated values, with `say(...)` adding a newline;
+`print_each(...)` walks an array with optional prefix and suffix text. Julia emits these messages through a
+configured low-level trace sink, returns no parse value, and remains quiet when tracing is absent or disabled.
+`simenv_multiline_value` now reaches unsupported `exit_now`, and `ds_vhistory_version_entry` reaches the known
+leading-trivia output mismatch. The permanent regression rejects renewed unsupported-`print` failures. The full
+window remains 18/31, full tests pass with 780 assertions, status is `runtime-corpus-diagnostic-output`, and
+`.6.2.4.3` is active.
 
 ### Dart Backend Commands
 

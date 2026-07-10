@@ -30,16 +30,19 @@ Every failing fixture is routed exactly once before implementation:
 - `.6.2.4.2.1`: four portmap fixtures plus `tablegrep_simple_term`, initially blocked by unsupported `or` / `not`
   helpers. That leaf now closes three portmap cases plus tablegrep; `.6.2.4.2.3` owns portmap constant's proven
   helper-regex `o` flag residual. `.6.2.4.2.3` has since closed that residual and all five cases pass.
-- `.6.2.4.2.2`: `simenv_multiline_value` and `ds_vhistory_version_entry`, blocked by unsupported `print`.
+  - `.6.2.4.2.2`: `simenv_multiline_value` and `ds_vhistory_version_entry`, initially blocked by unsupported
+    `print`. That leaf now advances simenv to unsupported `exit_now` and history to its leading-trivia output
+    mismatch; later mechanism leaves own those residuals.
 - `.6.2.4.3`: three recursive top-rule fixtures that execute but return incorrect nested/caller values.
 - `.6.2.4.4`: `ebnf_expression_rules` plus four spec.spec smokes that execute but lose structural records.
 - `.6.2.4.5`: both lib_reader cases, which retain quotes in group/value payloads.
 - `.6.2.4.6`: final 31/31 regression and no-drift closeout.
 
 The checked-in expected JSON remains the Perl/Rust oracle. Completed Dart facts identify portable mechanism
-contracts, but the Julia leaves must establish their own root causes. After `.6.2.4.2.3`, the complete window is
-18/31, full tests pass with 772 assertions, status is `runtime-corpus-helper-regex-flags`, and `.6.2.4.2.2` is active.
+contracts, but the Julia leaves must establish their own root causes. After `.6.2.4.2.2`, the complete window
+remains 18/31 because both cases advance rather than close. Full tests pass with 780 assertions, status is
+`runtime-corpus-diagnostic-output`, and `.6.2.4.3` is active.
 
-Related facts: [[julia-helper-regex-flag-normalization]], [[julia-logical-helper-execution]], [[julia-anonymous-capture-boundary-helpers]], [[julia-middle-corpus-batch]], [[julia-controlled-corpus-execution]],
+Related facts: [[julia-diagnostic-output-helpers]], [[julia-helper-regex-flag-normalization]], [[julia-logical-helper-execution]], [[julia-anonymous-capture-boundary-helpers]], [[julia-middle-corpus-batch]], [[julia-controlled-corpus-execution]],
 [[dart-shipped-corpus-smoke-split]], [[dart-helper-action-surface-bridge]],
 [[rust-anonymous-capture-slice-family]], [[rust-perl-output-oracle]].

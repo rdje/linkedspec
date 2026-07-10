@@ -1983,6 +1983,17 @@ function _evaluate_runtime_call!(
             rule_label,
             current_edge,
         )
+    elseif helper_name in _RUNTIME_DIAGNOSTIC_OUTPUT_HELPER_NAMES
+        values = Any[
+            _runtime_copy(_evaluate_runtime_action_expr!(
+                engine,
+                arg,
+                context,
+                rule_label,
+                current_edge,
+            )) for arg in args
+        ]
+        return _call_runtime_diagnostic_output_helper!(helper_name, values, context, rule_label)
     elseif helper_name == "save_cursor"
         cursor_before = context.cursor_codeunit
         stack_before = length(context.cursor_stack)
@@ -2689,6 +2700,12 @@ const _RUNTIME_ANONYMOUS_CAPTURE_HELPER_NAMES = Set{String}([
     "capture_take_until_cursor",
     "capture_take_until_cursor_len",
     "start_capture_slice",
+])
+
+const _RUNTIME_DIAGNOSTIC_OUTPUT_HELPER_NAMES = Set{String}([
+    "print",
+    "print_each",
+    "say",
 ])
 
 const _RUNTIME_ARRAY_END_MUTATION_NAMES = Set{String}([
@@ -4308,6 +4325,47 @@ function _call_runtime_anonymous_capture_helper!(
         _set_runtime_capture_start!(context, ncodeunits(context.input))
     end
     return result
+end
+
+function _runtime_diagnostic_string(value)
+    scalar = _runtime_scalar_string(value; null_as_empty = true)
+    return scalar === nothing ? "" : scalar
+end
+
+function _emit_runtime_diagnostic_output!(context, helper_name, rule_label, message)
+    if context.trace !== nothing
+        log_trace_output!(
+            context.trace,
+            LinkedSpecTraceLow,
+            message,
+            "helper=$helper_name rule=$rule_label",
+        )
+    end
+    return nothing
+end
+
+function _call_runtime_diagnostic_output_helper!(helper_name, values, context, rule_label)
+    if helper_name == "print_each"
+        items = !isempty(values) && first(values) isa AbstractVector ? first(values) : Any[]
+        prefix = length(values) >= 2 ? _runtime_diagnostic_string(values[2]) : ""
+        suffix = length(values) >= 3 ? _runtime_diagnostic_string(values[3]) : "\n"
+        for item in items
+            _emit_runtime_diagnostic_output!(
+                context,
+                helper_name,
+                rule_label,
+                prefix * _runtime_diagnostic_string(item) * suffix,
+            )
+        end
+        return nothing
+    end
+
+    message = join(_runtime_diagnostic_string(value) for value in values)
+    if helper_name == "say"
+        message *= "\n"
+    end
+    _emit_runtime_diagnostic_output!(context, helper_name, rule_label, message)
+    return nothing
 end
 
 function _runtime_codeunit_slice(input::String, start_codeunit::Int, end_codeunit::Int)

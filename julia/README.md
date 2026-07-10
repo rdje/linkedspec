@@ -1,6 +1,6 @@
 # LinkedSpec Julia Backend
 
-This directory is the repository-owned Julia backend. Its current `runtime-corpus-helper-regex-flags` status covers the
+This directory is the repository-owned Julia backend. Its current `runtime-corpus-diagnostic-output` status covers the
 package/command surface, manifest validation, source and ActionIR frontends, staged user-function projection/body
 parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch, value/helper/control/callback
 families, cursor/boundary behavior, structured diagnostics/tracing, registered function execution, and controlled
@@ -139,8 +139,10 @@ measures shipped-spec/parser-smoke fixtures 68–98 at 10 passed / 21 failed and
 mechanism leaves. `.6.2.4.1` adds the complete direct anonymous capture-boundary family, closes all three hlink
 delimiter cases, and routes EBNF logging to structural output. `.6.2.4.2.1` adds eager logical helpers, closes
 three portmap cases plus tablegrep. `.6.2.4.2.3` adds shared strict helper regex flag normalization and closes
-`portmap_constant`. Full tests pass with 772 assertions, status is `runtime-corpus-helper-regex-flags`, the
-shipped-smoke window is 18/31, and `.6.2.4.2.2` is active.
+`portmap_constant`. `.6.2.4.2.2` adds eager `print`/`print_each`/`say` execution through the configured low-level
+trace sink without changing parse output. Simenv advances to unsupported `exit_now`, while history reaches its
+leading-trivia output mismatch. Full tests pass with 780 assertions, status is
+`runtime-corpus-diagnostic-output`, the shipped-smoke window remains 18/31, and `.6.2.4.3` is active.
 
 Library example:
 

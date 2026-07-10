@@ -346,7 +346,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-corpus-helper-regex-flags"
+    @test status.parity == "runtime-corpus-diagnostic-output"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -358,7 +358,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-corpus-helper-regex-flags", String(take!(status_output)))
+    @test occursin("parity: runtime-corpus-diagnostic-output", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1552,6 +1552,30 @@ Top::
         "str_lt" => true,
         "str_ge" => true,
     )
+
+    diagnostic_output = runtime_engine(raw"""
+Top::
+ /x/
+ E {
+   items = ["a", "b"]
+   print("prefix=", "x")
+   say(" line")
+   print_each(array(items), "item:", "!")
+   return("ok")
+ }
+""")
+    diagnostic_io = IOBuffer()
+    diagnostic_trace = LinkedSpecTraceEmitter(
+        trace_config_enabled(LinkedSpecTraceLow);
+        stdout_io = diagnostic_io,
+    )
+    diagnostic_result = runtime_parse(diagnostic_output, "x"; trace = diagnostic_trace)
+    diagnostic_text = String(take!(diagnostic_io))
+    @test diagnostic_result.value == "ok" &&
+        occursin("prefix=x", diagnostic_text) &&
+        occursin(" line", diagnostic_text) &&
+        occursin("item:a!", diagnostic_text) &&
+        occursin("item:b!", diagnostic_text)
 
     numeric_helpers = runtime_engine(raw"""
 Top::
@@ -3482,6 +3506,25 @@ end
     @test corpus_fixture_passed(constant_result)
     @test constant_result.actual_output == Any[Any["?constant:", Any["0x1f"]]]
     @test constant_result.failure === nothing
+end
+
+@testset "Shipped diagnostic-output corpus boundary" begin
+    execution = execute_corpus_fixtures(
+        CORPUS_ROOT;
+        case_names = ["simenv_multiline_value", "ds_vhistory_version_entry"],
+    )
+    simenv, history = execution.results
+
+    @test [result.name for result in execution.results] == [
+        "simenv_multiline_value",
+        "ds_vhistory_version_entry",
+    ]
+    @test !corpus_fixture_passed(simenv)
+    @test occursin("unsupported runtime helper 'exit_now'", simenv.failure)
+    @test !occursin("unsupported runtime helper 'print'", simenv.failure)
+    @test !corpus_fixture_passed(history)
+    @test occursin("output mismatch", history.failure)
+    @test !occursin("unsupported runtime helper 'print'", history.failure)
 end
 
 @testset "Spec AST JSON contract" begin

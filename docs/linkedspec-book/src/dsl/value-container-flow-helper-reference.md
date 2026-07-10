@@ -1299,9 +1299,9 @@ interpreter execution.
 Examples:
 
 ```text
-say("normalized kind: ", kind);
-print("token=", text, " kind=", kind, "\n");
-print_each(array(matches), "match:<<", ">>\n");
+say("normalized kind: ", kind)
+print("token=", text, " kind=", kind, "\n")
+print_each(array(matches), "match:<<", ">>\n")
 ```
 
 Use `print_each(...)` when debug output should walk an accumulated array. It is the helper-form replacement for raw Perl loops such as `print "...$_..." foreach (@matches)`.
