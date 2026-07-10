@@ -201,15 +201,19 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.4.1 - add Julia runtime matching state`
 
 - ID: `JULIA-BACKEND-PARITY.4.2`
-  Status: `active`
+  Status: `done`
   Goal: Implement first executable rule dispatch over compiled state.
   Acceptance: Default, AND, OR, and repetition modes execute with lifecycle order, action-edge/blind-call child
     dispatch, explicit return behavior, accumulators, recursion guards, and output shape parity.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `Pkg.test()` covers 34 focused rule-interpreter assertions over default repetition,
+    action-edge and blind-call child dispatch, explicit `call(...)` / returns, passive terminal children, AND/OR
+    modes, bounded repetition, zero-progress cutoff, full lifecycle order, `retv`, accumulators, consume mode,
+    nested output shapes, recursion cutoff, lower-bound errors, unsupported-helper errors, top-rule lookup, and
+    safety-limit validation; total Julia tests pass with 550 assertions.
+  Commit: `JULIA-BACKEND-PARITY.4.2 - add Julia runtime rule interpreter`
 
 - ID: `JULIA-BACKEND-PARITY.4.3`
-  Status: `pending`
+  Status: `active`
   Goal: Implement helper/value runtime families in safe batches.
   Acceptance: Core value/store/capture helpers, string/number helpers, array helpers, hash helpers,
     expression-valued blocks, structured controls, `with` trailing blocks, and tree traversal callbacks either pass
@@ -333,7 +337,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.4.2` | `active` | Execute compiled default, AND, OR, and repetition rule families now that Julia has stable runtime match identity and entry/local cursor state. |
+| 1 | `JULIA-BACKEND-PARITY.4.3` | `active` | Split and implement broader helper/value families now that compiled rule dispatch, lifecycle flow, and narrow accumulator actions execute. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -581,8 +585,51 @@ Runtime matching evidence recorded on 2026-07-10:
 - Native Julia `Regex`/PCRE probes cover Python-style and angle-bracket named captures, POSIX classes,
   inline/scoped flags, possessive quantifiers, and recursive `(?R)` directly; Julia therefore needs no Dart-like
   regex-dialect normalization at this boundary.
-- The package parity status is now `runtime-matching`. First executable rule dispatch advances to `.4.2`; staged
-  parser execution, diagnostics/trace, and corpus execution remain later leaves.
+- At this leaf the package parity status was `runtime-matching`; `.4.2` has since advanced it to
+  `runtime-dispatch`. Broader helper/value semantics, staged parser execution, diagnostics/trace, and corpus
+  execution remain later leaves.
+
+## `JULIA-BACKEND-PARITY.4.2` Runtime Rule Interpreter Result
+
+Rule-interpreter evidence recorded on 2026-07-10:
+
+- `julia/src/runtime/Interpreter.jl` adds `LinkedSpecRuntimeEngine`, `RuntimeParseResult`,
+  `RuntimeLifecycleEvent`, `RuntimeInterpreterException`, `runtime_parse(...)`, and `runtime_execute(...)`.
+- The engine consumes `CompiledSpec` plus `.4.1` match registers to execute default, AND, OR, and bounded/unbounded
+  repetition families in seek or consume mode, with same-rule/same-slot/same-cursor recursion cutoffs and
+  zero-progress termination.
+- Action and blind-call edges hand entry/local match state into child rules, carry child results through `retv`,
+  avoid double-running passive regex-only terminal children, and support explicit `call(...)`, `return(...)`,
+  `return_undef()`, `next()`, and rule/explicit-array accumulator `push(...)` at the dispatch boundary.
+- Lifecycle payloads run in `I`, `LS`, `LE`, `IT`, `EX`, `LX`, `E` order as applicable and emit stable
+  `RuntimeLifecycleEvent` records. `RuntimeParseResult` preserves matched/value state, the backend-neutral
+  one-element output wrapper, final code-unit/character cursors, and lifecycle events.
+- The embedded ActionIR evaluator is deliberately dispatch-facing: literals, `retv`, explicit arrays,
+  `set(array(...), ...)`, `push(...)`, `copy(...)`, `call(...)`, and entry/local capture reads are present;
+  general variables/stores, scalar/string/number/array/hash helper families, controls, blocks, and callbacks remain
+  owned by `.4.3`.
+- The package parity status is now `runtime-dispatch`; broader helper/value semantics advance to `.4.3`.
+
+## `JULIA-BACKEND-PARITY.4.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.4.2` acceptance required executable default/AND/OR/repetition families,
+  action/blind edges, lifecycle order, `retv`, accumulators, explicit returns, output shape, and recursion/progress
+  guards; the canonical Dart parity boundary was inspected in `dart/lib/src/runtime/interpreter.dart`,
+  `dart/test/runtime_interpreter_test.dart`, `docs/tasks/DART-BACKEND-PARITY.md`, and
+  `docs/knowledge/dart-runtime-rule-interpreter.md` before Julia implementation.
+- [x] **ROOT CAUSE (WHY + WHERE)** — After `.4.1`, Julia could compile and select regex alternatives and preserve
+  match registers, but no `julia/src/runtime/` owner consumed `CompiledSpec` rule modes, lifecycle ActionIR,
+  dependency edges, `retv`, accumulators, repetition bounds, or recursion cutoffs.
+- [x] **FIX** — Added `julia/src/runtime/Interpreter.jl`, exported its engine/result/event/exception and execution
+  APIs from `julia/src/LinkedSpecJulia.jl`, advanced status to `runtime-dispatch`, and kept the embedded evaluator
+  explicitly narrow so `.4.3` retains helper/value ownership.
+- [x] **ADDRESSED (verified)** — `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia
+  --project=julia -e 'using Pkg; Pkg.test()'` passes with 34 focused runtime-interpreter assertions.
+- [x] **NO REGRESSION** — The same `Pkg.test()` run passes scaffold, frontend, ActionIR, registry, compiled-state,
+  runtime-matching, and corpus-IO coverage for 550 total assertions.
+- [x] **LOCKSTEP** — README, task tree, live docs, roadmaps, mdBook handoff/status/check pages, Knowledge Map fact
+  card, architecture snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` updated for the `.4.2`
+  boundary.
 
 ## `JULIA-BACKEND-PARITY.4.1` Acceptance Checklist
 
@@ -724,7 +771,11 @@ Runtime matching evidence recorded on 2026-07-10:
   data, and descriptor metadata; executable regex matching has since landed in `.4.1`.
 - `2026-07-10`: `.4.1` follows the Dart runtime matching contract while using Julia's native PCRE engine directly.
   Match state keeps stable alternative indexes, full/compact/named captures, character projections, distinct
-  entry/local registers, and zero-progress detection; executable rule dispatch remains isolated in `.4.2`.
+  entry/local registers, and zero-progress detection; executable rule dispatch has since landed in `.4.2`.
+- `2026-07-10`: `.4.2` follows the Dart first-interpreter boundary with a dispatch-facing ActionIR evaluator.
+  Julia executes compiled rule families, lifecycle order, action/blind children, `retv`, explicit returns,
+  accumulators, repetition bounds, and recursion/progress guards while leaving broader helper/value semantics to
+  `.4.3`.
 
 ## Open Questions
 
@@ -735,8 +786,8 @@ Runtime matching evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.4.2`. Compiled-state records and runtime matching registers are in place; executable rule dispatch is
-  the next owned runtime boundary.
+- None for `.4.3`. Compiled rule dispatch is in place; the helper/value container must be split into safe owned
+  batches before broader evaluator code.
 
 ## Verification Log
 
@@ -755,6 +806,7 @@ Runtime matching evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.3.3` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia user-function registry tests cover ordered entries, staged body parse jobs, sidecar/body-AST preservation, immutable body-AST stitching, duplicate rejection, exact match, wrong arity, missing names, and registry-aware ActionIR contract resolution; total Julia tests pass with 415 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.3.4` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia compiled-state tests cover ordered rules, dependency refs, dependency-regex rows, descriptor projection, lifecycle/action payload ASTs, registry-aware contracts, last-definition-wins metadata when validation is skipped, validation reuse, and compiled-state diagnostics; total Julia tests pass with 456 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.1` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Julia runtime-matching tests cover seek/consume modes, stable alternative identity, compiled-rule pattern input, full/compact/named captures, multibyte character offsets, line/column projection, entry/local registers, cursor state, immutable updates, native PCRE dialect forms, zero-width/progress detection, and boundary/input guards; total Julia tests pass with 516 assertions. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.4.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Julia rule-interpreter tests cover default repetition, action/blind children, explicit call/returns, passive terminals, current-edge `retv`, AND/OR modes, bounded and zero-progress repetition, lifecycle order/events, accumulators, consume mode, nested output shapes, recursion cutoff, and runtime errors; total Julia tests pass with 550 assertions. |
 
 ## Commit Log
 
@@ -773,9 +825,15 @@ Runtime matching evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.3.3` | `JULIA-BACKEND-PARITY.3.3 - add Julia user-function registry` | Ordered user-function registry, staged body parse-job queue, body-AST stitching helper, and registry-aware ActionIR contracts; compiled state advances to `.3.4`. |
 | `JULIA-BACKEND-PARITY.3.4` | `JULIA-BACKEND-PARITY.3.4 - add Julia compiled-spec state` | Compiled-spec/interpreter-state records, dependency-regex state, action payload contracts, and descriptor projection; runtime matching advances to `.4.1`. |
 | `JULIA-BACKEND-PARITY.4.1` | `JULIA-BACKEND-PARITY.4.1 - add Julia runtime matching state` | Seek/consume regex alternatives, capture/offset projection, cursor and entry/local match registers, and zero-progress detection; executable rule dispatch advances to `.4.2`. |
+| `JULIA-BACKEND-PARITY.4.2` | `JULIA-BACKEND-PARITY.4.2 - add Julia runtime rule interpreter` | First compiled-rule interpreter, lifecycle/edge dispatch, narrow accumulator actions, and recursion/progress guards; broader helper/value semantics advance to `.4.3`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.4.2` first executable rule dispatch. `julia/src/runtime/Interpreter.jl` now executes
+  compiled default/AND/OR/repetition families with lifecycle events, action/blind children, `retv`, explicit
+  returns, narrow accumulators/capture reads, bounded and zero-progress termination, recursion cutoffs, seek/consume
+  modes, and one-element output projection. `Pkg.test()` passes with 550 total assertions; `.4.3` owns broader
+  helper/value semantics and must split them into safe batches before code.
 - `2026-07-10`: Completed `.4.1` runtime regex matching and match-state tracking.
   `julia/src/runtime/Matching.jl` now compiles stable indexed alternatives, selects seek/consume matches, records
   full/compact/named capture state, projects code-unit spans to character and line/column positions, keeps cursor

@@ -70,6 +70,7 @@ export backend_name,
     FluentChainBodyElementKind,
     FunctionDefinition,
     LifecycleMarkerBodyElementKind,
+    LinkedSpecRuntimeEngine,
     LinkedSpecParseMode,
     load_corpus_fixtures,
     parse_spec,
@@ -82,7 +83,10 @@ export backend_name,
     RawBodyElementKind,
     RegexBodyElementKind,
     RuntimeLineColumn,
+    RuntimeInterpreterException,
+    RuntimeLifecycleEvent,
     RuntimeMatchRegisters,
+    RuntimeParseResult,
     RuntimeRegexAlternative,
     RuntimeRegexAlternation,
     RuntimeRegexException,
@@ -155,6 +159,8 @@ export backend_name,
     resolve_action_statement_contracts,
     resolve_user_function_call,
     runtime_match,
+    runtime_execute,
+    runtime_parse,
     run_cli,
     run_corpus_runner,
     consume_match,
@@ -179,7 +185,7 @@ const PACKAGE_NAME = "LinkedSpecJulia"
 const PACKAGE_VERSION = v"0.1.0"
 const CLI_ENTRYPOINT = "julia/bin/linkedspec_julia.jl"
 const CORPUS_RUNNER_ENTRYPOINT = "julia/bin/corpus_runner.jl"
-const PARITY_STATUS = "runtime-matching"
+const PARITY_STATUS = "runtime-dispatch"
 
 include("corpus/CorpusManifest.jl")
 include("spec/Ast.jl")
@@ -192,6 +198,7 @@ include("spec/UserFunctionDefinitionShell.jl")
 include("spec/Validator.jl")
 include("compiler/CompiledSpec.jl")
 include("runtime/Matching.jl")
+include("runtime/Interpreter.jl")
 include("cli/LinkedSpecJuliaCli.jl")
 
 backend_name() = BACKEND_NAME

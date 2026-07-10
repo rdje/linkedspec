@@ -296,14 +296,14 @@ added source AST/data types with neutral JSON projection, `.2.2` has added the s
 frontend validation and strict syntax behavior, `.2.4` has added spec-shaped top-level `fn` shell projection, and
 `.3.1` has added typed helper/action AST parsing, `.3.2` has added ActionIR contract resolution, `.3.3` has added
 the user-function registry seam, `.3.4` has added compiled-spec state, and `.4.1` has added runtime regex matching
-and match-state tracking. The active Julia frontier is now `.4.2` for first executable rule dispatch. Future Julia
-and Lua backend plans must own their own
+and match-state tracking. `.4.2` has now added first compiled-rule dispatch. The active Julia frontier is `.4.3`
+for split helper/value runtime families. Future Julia and Lua backend plans must own their own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
 
 ### Julia Backend Scaffold
 
-`JULIA-BACKEND-PARITY.1.1` through `.4.1` are complete. The local Julia toolchain is Homebrew-managed:
+`JULIA-BACKEND-PARITY.1.1` through `.4.2` are complete. The local Julia toolchain is Homebrew-managed:
 `/opt/homebrew/bin/julia` reports Julia `1.12.6`, and the official Julia downloads page lists `v1.12.6` as the
 current stable release. `Pkg` and `Test` work when Julia has a writable depot; under the managed harness, commands
 can set `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot` to avoid writing precompile artifacts into
@@ -331,6 +331,7 @@ julia/
   src/action/FunctionRegistry.jl
   src/compiler/CompiledSpec.jl
   src/runtime/Matching.jl
+  src/runtime/Interpreter.jl
   bin/linkedspec_julia.jl
   bin/corpus_runner.jl
   test/runtests.jl
@@ -380,8 +381,13 @@ projection, and descriptor-shaped JSON with `julia_interpreter_rule` handlers ma
 full and compact capture vectors, named captures, zero-based code-unit spans, public character offsets,
 line/column projection, cursor/capture anchors, separate entry/local match registers, and zero-progress detection.
 Julia's native PCRE engine accepts the required named-capture, POSIX, flag, possessive, and recursive constructs
-without a dialect-rewrite layer. Future leaves own executable rule dispatch, staged parser execution,
-diagnostics/trace, and corpus execution.
+without a dialect-rewrite layer. `julia/src/runtime/Interpreter.jl` exposes `LinkedSpecRuntimeEngine`,
+`runtime_parse(...)`, `runtime_execute(...)`, result/lifecycle/error records, and first execution over compiled
+default/AND/OR/repetition families. It runs lifecycle order, action/blind children, `retv`, explicit returns,
+narrow array/rule accumulators and capture reads, output projection, repetition bounds, zero-progress cutoffs, and
+recursion guards in seek or consume mode. The evaluator remains dispatch-facing: `.4.3` owns general stores and
+the broader string/number/array/hash/control/block/callback families. Later leaves own cursor controls, staged parser
+execution, diagnostics/trace, and corpus execution.
 
 ### Dart Backend Commands
 

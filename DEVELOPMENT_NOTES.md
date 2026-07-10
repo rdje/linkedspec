@@ -1,14 +1,23 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.4.2 — Julia runtime rule interpreter):
+  Julia now consumes `CompiledSpec` through its first executable rule-dispatch layer.
+  `julia/src/runtime/Interpreter.jl` owns default/AND/OR/repetition mode execution, action and blind-call child
+  dispatch, entry/local register handoff, `retv`, lifecycle order/events, explicit return flow, narrow array/rule
+  accumulators and capture reads, output projection, bounds, zero-progress termination, and recursion cutoff state.
+  The embedded evaluator deliberately rejects general variable/store/helper/control/block/callback behavior so the
+  broad `.4.3` helper/value container can be split and landed in reviewable batches rather than being hidden inside
+  this dispatch slice.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.4.1 — Julia runtime matching state):
   Julia now has the regex/match-state foundation required by executable rule dispatch.
   `julia/src/runtime/Matching.jl` compiles stable zero-based regex alternatives, implements earliest seek and
   cursor-anchored consume modes, records full/compact/named captures, projects Julia code-unit spans to public
   character and line/column positions, and keeps cursor/capture anchors plus entry/local matches in immutable
   `RuntimeMatchRegisters`. Direct native-PCRE probes established that Python/angle named captures, POSIX classes,
-  inline/scoped flags, possessive quantifiers, and recursive `(?R)` need no Julia dialect bridge. `.4.2` owns first
-  executable rule dispatch; `.4.1` does not interpret ActionIR or compiled rule modes.
+  inline/scoped flags, possessive quantifiers, and recursive `(?R)` need no Julia dialect bridge. `.4.2` has since
+  added first executable rule dispatch; `.4.1` itself does not interpret ActionIR or compiled rule modes.
 
 - 2026-07-10 (JULIA-BACKEND-PARITY.3.4 — Julia compiled-spec state):
   Julia now has a compiled-state model before runtime matching. `julia/src/compiler/CompiledSpec.jl` exposes

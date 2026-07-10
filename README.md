@@ -87,8 +87,9 @@ Top-level directories and files:
   - Julia backend parity package.
   - Current state: package/corpus scaffold, source frontend, typed ActionIR and contracts, user-function registry,
     compiled-spec state, and runtime seek/consume regex matching with capture/offset projection, cursor state,
-    entry/local match registers, and zero-progress detection. First executable rule dispatch is the active
-    `JULIA-BACKEND-PARITY.4.2` frontier.
+    entry/local match registers, and zero-progress detection. First compiled-rule dispatch now executes rule modes,
+    lifecycle flow, action/blind children, `retv`, explicit returns, narrow accumulators, and recursion/progress
+    guards. Split helper/value families are the active `JULIA-BACKEND-PARITY.4.3` frontier.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

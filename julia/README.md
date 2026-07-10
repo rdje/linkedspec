@@ -3,8 +3,8 @@
 This directory is the repository-owned Julia backend scaffold. The current status is package and command
 surface, manifest-backed corpus validation, source AST/data types, core `.spec` source parsing, frontend source
 validation, spec-shaped user-function shell projection, typed helper/action AST parsing, canonical ActionIR contract
-resolution, a user-function registry seam, compiled-spec state, and runtime regex/match-state primitives: no rule
-interpreter or corpus execution semantics are implemented yet.
+resolution, a user-function registry seam, compiled-spec state, runtime regex/match-state primitives, and first
+compiled-rule interpreter dispatch: broader helper/value families and corpus execution are not implemented yet.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -13,8 +13,9 @@ was added by `JULIA-BACKEND-PARITY.2.2`. Frontend validation and strict syntax b
 Typed helper/action AST parsing was added by `JULIA-BACKEND-PARITY.3.1`, ActionIR contract resolution was added by
 `JULIA-BACKEND-PARITY.3.2`, the user-function registry seam was added by `JULIA-BACKEND-PARITY.3.3`, and
 compiled-spec state was added by `JULIA-BACKEND-PARITY.3.4`. Runtime regex matching and match-state tracking were
-added by `JULIA-BACKEND-PARITY.4.1`. The active next boundary is `JULIA-BACKEND-PARITY.4.2` for first executable
-rule dispatch over compiled state.
+added by `JULIA-BACKEND-PARITY.4.1`, and first executable rule dispatch was added by
+`JULIA-BACKEND-PARITY.4.2`. The active next boundary is `JULIA-BACKEND-PARITY.4.3` for split helper/value runtime
+families.
 
 ## Commands
 
@@ -80,5 +81,11 @@ lifecycle/action payload ASTs with registry-aware contracts, function registry p
 capture projections, named captures, zero-based code-unit spans, public character offsets, line/column projection,
 cursor state, separate entry/local match registers, and zero-progress detection. Julia's native PCRE integration
 accepts the currently required Python-style named captures, POSIX classes, inline/scoped flags, possessive
-quantifiers, and recursive patterns directly. Later leaves own executable rule dispatch, staged parser execution,
-diagnostics, tracing, and corpus execution.
+quantifiers, and recursive patterns directly.
+`src/runtime/Interpreter.jl` exposes `LinkedSpecRuntimeEngine`, `runtime_parse(...)`, `runtime_execute(...)`,
+`RuntimeParseResult`, `RuntimeLifecycleEvent`, and `RuntimeInterpreterException`. It executes compiled default,
+AND, OR, and bounded/unbounded repetition families; action/blind child edges; lifecycle order; `retv`; explicit
+returns; narrow array accumulators/capture reads; recursion guards; and zero-progress cutoffs in seek or consume
+mode. The embedded ActionIR evaluator is intentionally dispatch-facing. General stores and the documented
+string/number/array/hash/control/block/callback families remain `.4.3`; cursor controls, staged parser execution,
+diagnostics, tracing, and corpus execution remain later leaves.

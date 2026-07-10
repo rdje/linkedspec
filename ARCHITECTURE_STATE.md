@@ -5,13 +5,20 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.2` adds the first Julia compiled-rule interpreter.
+  `julia/src/runtime/Interpreter.jl` defines `LinkedSpecRuntimeEngine`, `runtime_parse(...)`,
+  `runtime_execute(...)`, `RuntimeParseResult`, `RuntimeLifecycleEvent`, and `RuntimeInterpreterException`.
+  It executes default/AND/OR/repetition modes, action and blind-call children, `I/LS/LE/IT/EX/LX/E` lifecycle
+  order, `retv`, explicit returns, narrow array accumulators/capture reads, seek/consume matching, bounded and
+  zero-progress termination, and same-rule/slot/cursor recursion cutoffs. The evaluator remains intentionally
+  dispatch-facing; broader value/store/helper/control/block/callback behavior advances to `.4.3`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.1` adds Julia runtime regex matching and match-state tracking.
   `julia/src/runtime/Matching.jl` defines seek/consume parse modes, compiled regex alternatives with stable
   zero-based identity, complete and compact capture projections, named captures, zero-based code-unit spans,
   public character offsets, line/column projection, cursor/capture anchors, separate entry/local match registers,
   and zero-width/zero-progress predicates. Julia's native PCRE integration accepts the currently required named
   capture, POSIX, flag, possessive, and recursive constructs directly, so this leaf needs no dialect-rewrite layer.
-  First executable rule dispatch starts in `JULIA-BACKEND-PARITY.4.2`.
+  First executable rule dispatch has since landed in `JULIA-BACKEND-PARITY.4.2`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.3.4` adds Julia compiled-spec state.
   `julia/src/compiler/CompiledSpec.jl` defines `compile_spec(...)`, `CompiledSpec`, `CompiledRule`,
   `CompiledRuleModeMetadata`, `DependencyRef`, action/blind edge records, `CompiledActionPayload`,

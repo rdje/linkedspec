@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.4.2 — add Julia runtime rule interpreter
+
+**Scope:** Julia compiled-rule execution engine, parse result/lifecycle event records, dispatch-facing ActionIR
+evaluation, package exports/status, focused interpreter tests, README, task-tree frontier update, roadmap/task-tree
+index alignment, mdBook status/handoff/check text, Knowledge Map, architecture snapshot, live docs, and resume
+pointer.
+
+**Change:** Added `julia/src/runtime/Interpreter.jl` with `LinkedSpecRuntimeEngine`, `runtime_parse(...)`,
+`runtime_execute(...)`, `RuntimeParseResult`, `RuntimeLifecycleEvent`, and `RuntimeInterpreterException`. Julia now
+executes compiled default, AND, OR, and bounded/unbounded repetition families in seek/consume mode; preserves
+entry/local state across action and blind-call children; carries `retv`; applies `I/LS/LE/IT/EX/LX/E` lifecycle
+order; supports explicit call/return, narrow explicit-array/rule accumulators, and entry/local capture reads; emits
+the one-element output wrapper; and enforces repetition bounds, zero-progress cutoffs, and same-rule/slot/cursor
+recursion guards. Broader helper/value semantics remain `.4.3`. Package status now reports `runtime-dispatch`.
+
+**Validation:** `Pkg.test()` passes with 550 assertions, including 34 focused runtime-interpreter assertions and
+the existing runtime-matching/compiled-state/registry/ActionIR/frontend/corpus coverage. Commit-time
+docs/governance validation covers mdBook, memory architecture, task-tree metadata, Knowledge Map, doctrine, and
+`git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.4.1 — add Julia runtime matching state
 
 **Scope:** Julia runtime regex alternatives, match/capture records, cursor and entry/local registers, character and

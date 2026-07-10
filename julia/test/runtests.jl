@@ -292,7 +292,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-matching"
+    @test status.parity == "runtime-dispatch"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -302,7 +302,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-matching", String(take!(status_output)))
+    @test occursin("parity: runtime-dispatch", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -826,6 +826,206 @@ end
         RuntimeMatchRegisters("other"),
         advanced_match,
     )
+end
+
+@testset "Runtime rule interpreter" begin
+    runtime_engine(source; parse_mode = SeekParseMode, max_iterations = 10_000) =
+        LinkedSpecRuntimeEngine(
+            compile_spec(parse_spec(source));
+            parse_mode = parse_mode,
+            max_iterations = max_iterations,
+        )
+
+    repetition = runtime_engine(raw"""
+Top::
+ I { set(array(words), []) }
+ /hello[ \t]+(\w+)/
+ LE { push(array(words), match_group(0)) }
+ E { return(copy(array(words))) }
+""")
+    repetition_result = runtime_parse(repetition, "hello one hello two")
+    @test repetition_result.matched
+    @test repetition_result.value == Any["one", "two"]
+    @test repetition_result.output == Any[Any["one", "two"]]
+    @test repetition_result.cursor_codeunit == ncodeunits("hello one hello two")
+    @test repetition_result.cursor_char_offset == length("hello one hello two")
+    @test [event.lifecycle for event in repetition_result.lifecycle_events] == ["I", "LE", "LE", "E"]
+    @test to_json(repetition_result)["output"] == Any[Any["one", "two"]]
+
+    action_edge = runtime_engine(raw"""
+top::
+ -> item .push
+ E { return(copy(array(top))) }
+
+item:
+ /x/
+ I { return(entry_text()) }
+""")
+    action_result = runtime_execute(action_edge, "xx")
+    @test action_result.value == Any["x", "x"]
+    @test action_result.cursor_codeunit == 2
+
+    explicit_call = runtime_engine(raw"""
+Top::
+ -> Item { return(call(Item)) }
+
+Item:
+ /x/
+ I { return(entry_text()) }
+""")
+    @test runtime_parse(explicit_call, "x").value == "x"
+
+    action_retv = runtime_engine(raw"""
+Top::
+ I { set(array(out), []) }
+ -> A { push(array(out), retv) }
+ -> B { push(array(out), retv) }
+ E { return(copy(array(out))) }
+
+A: /a/ I { return("A") }
+B: /b/ I { return("B") }
+""")
+    @test runtime_parse(action_retv, "ab").value == Any["A", "B"]
+
+    passive_child = runtime_engine(raw"""
+Top::
+ -> Item
+ E { return(match_text()) }
+
+Item: /x/
+""")
+    passive_result = runtime_parse(passive_child, "x")
+    @test passive_result.value == "x"
+    @test passive_result.cursor_codeunit == 1
+
+    blind_and = runtime_engine(raw"""
+Top::AND
+ I { set(array(log), []) }
+ => ChildA { push(array(log), retv) }
+ => ChildB { push(array(log), retv) }
+ E { return(copy(array(log))) }
+
+ChildA:
+ /a/
+ E { return("A") }
+
+ChildB:
+ /[ \t]+b/
+ E { return("B") }
+""")
+    blind_and_result = runtime_parse(blind_and, "a b")
+    @test blind_and_result.value == Any["A", "B"]
+    @test blind_and_result.cursor_codeunit == 3
+
+    blind_or = runtime_engine(raw"""
+Top::OR
+ => ChildA
+ => ChildB
+ LX { return("or-miss") }
+ E { return("unexpected") }
+
+ChildA::
+ I { return_undef() }
+ /never/
+
+ChildB::
+ I { return_undef() }
+ /never/
+""")
+    blind_or_result = runtime_parse(blind_or, "c")
+    @test blind_or_result.value == "or-miss"
+    @test [event.lifecycle for event in blind_or_result.lifecycle_events] == ["I", "I", "LX"]
+
+    bounded_or = runtime_engine(raw"""
+Top::OR{2,3}
+ I { set(array(out), []) }
+ /a/ -> A { push(array(out), match_text()) }
+ /b/ -> B { push(array(out), match_text()) }
+ E { return(copy(array(out))) }
+
+A: /a/
+B: /b/
+""")
+    bounded_result = runtime_parse(bounded_or, "abab")
+    @test bounded_result.value == Any["a", "b", "a"]
+    @test bounded_result.cursor_codeunit == 3
+
+    zero_width = runtime_engine(raw"""
+Top::OR+
+ I { set(array(iters), []) }
+ /x*/
+ LE { push(array(iters), "i") }
+ E { return(copy(array(iters))) }
+""")
+    zero_width_result = runtime_parse(zero_width, "abc")
+    @test zero_width_result.value == Any["i"]
+    @test zero_width_result.cursor_codeunit == 0
+
+    lifecycle = runtime_engine(raw"""
+Top::OR{1}
+ I { push(array(events), "I") }
+ LS { push(array(events), "LS") }
+ /a/
+ LE { push(array(events), "LE") }
+ IT { push(array(events), "IT") }
+ EX { push(array(events), "EX") }
+ LX { push(array(events), "LX") }
+ E { return(copy(array(events))) }
+""")
+    lifecycle_result = runtime_parse(lifecycle, "a")
+    @test lifecycle_result.value == Any["I", "LS", "LE", "IT", "EX", "LX"]
+    @test [event.lifecycle for event in lifecycle_result.lifecycle_events] ==
+        ["I", "LS", "LE", "IT", "EX", "LX", "E"]
+    @test to_json(first(lifecycle_result.lifecycle_events)) == Dict{String,Any}(
+        "rule_label" => "Top",
+        "lifecycle" => "I",
+        "line" => 2,
+    )
+
+    consume_and = runtime_engine(
+        raw"""
+Top::AND
+ /ab/
+ /cd/
+ E { return(match_text()) }
+""";
+        parse_mode = "consume",
+    )
+    consume_result = runtime_parse(consume_and, "abcd")
+    @test consume_result.value == "cd"
+    @test consume_result.cursor_codeunit == 4
+
+    shaped = runtime_engine(raw"""
+Top::
+ /x/
+ E { return(array("ok", array(1, true, undef))) }
+""")
+    @test runtime_parse(shaped, "x").value == Any["ok", Any[1, true, nothing]]
+
+    recursion_guard = runtime_engine(raw"""
+Loop::OR
+ /x*/
+ => Loop
+""")
+    recursion_result = runtime_parse(recursion_guard, "x")
+    @test !recursion_result.matched
+    @test recursion_result.value === nothing
+    @test recursion_result.cursor_codeunit == 0
+
+    below_minimum = runtime_engine(raw"""
+Top::OR{2}
+ /a/
+""")
+    @test_throws RuntimeInterpreterException runtime_parse(below_minimum, "a")
+
+    unsupported = runtime_engine(raw"""
+Top::
+ /x/
+ E { unknown_runtime_helper(match_text()) }
+""")
+    @test_throws RuntimeInterpreterException runtime_parse(unsupported, "x")
+    @test_throws RuntimeInterpreterException runtime_parse(repetition, "x"; top_rule = "Missing")
+    @test_throws ArgumentError LinkedSpecRuntimeEngine(repetition.compiled_spec; max_iterations = 0)
 end
 
 @testset "Spec parser" begin
