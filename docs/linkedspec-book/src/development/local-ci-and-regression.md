@@ -76,6 +76,26 @@ batches are green. The permanent starter batch can be rerun with `--execute --of
 40/40. The middle non-function regression runs offsets/limits `40/17`, `58/2`, and `62/6` for another 25/25 while
 locking the three intervening top-level function routes. Full 99-fixture Julia parity is not yet claimed.
 
+### Cleaning generated build caches
+
+Julia's generated precompile output lives in depot `compiled/` directories, not in a project-local Rust-style
+target directory. When disk space is tight and no Cargo, mdBook, or Julia job is running, these are rebuildable
+cleanup targets:
+
+```bash
+rm -rf rust/target
+rm -rf docs/linkedspec-book/book
+rm -rf /private/tmp/linkedspec-julia-depot/compiled
+rm -rf ~/.julia/compiled
+```
+
+Remove only Julia's `compiled/` cache, never the whole depot. Preserve `packages/`, `registries/`, `environments/`,
+`logs/`, `scratchspaces/`, `artifacts/`, project manifests, source, and fixture data.
+
+Large generation logs under `/private/tmp` need a stricter check: inspect the file header to prove it came from a
+completed LinkedSpec/RGX run and confirm no process still has it open before deleting that exact file. Never
+blanket-delete `/private/tmp`; it may contain agent state, application IPC, or another project's active test data.
+
 The next bounded command, `--execute --offset 68 --limit 31`, started at 10 passed and 21 failed. Anonymous
 capture-boundary execution now closes all three hlink delimiter fixtures, moving the window to 13/31; EBNF logging
 is explicitly routed to the structural-output owner. Logical/output helper, recursive top-rule, structural-output,

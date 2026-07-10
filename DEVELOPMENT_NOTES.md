@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (REPO-HYGIENE.4 — Julia-aware generated cache cleanup):
+  Julia build artifacts require depot-aware cleanup. Safe precompile targets are the active depot's `compiled/`
+  directory—here both `/private/tmp/linkedspec-julia-depot/compiled` and `~/.julia/compiled`—not the whole depot.
+  Packages, registries, environments, logs, scratchspaces, and artifacts are separate state and were preserved.
+  Combined with ignored `rust/target` and mdBook output, that first pass reclaimed about 2.1G. The apparent free-
+  space rebound exposed the real pressure source: `/private/tmp` was 46G, including twelve stale LinkedSpec/RGX
+  generation logs totaling about 18G. Header provenance plus process/`lsof` checks made those exact logs safe to
+  delete; blanket temp deletion remained forbidden. The complete leaf reclaimed about 20G and moved the filesystem
+  from 50G/90% to 68G/86%, while preserving the unrelated 29G `claude-501` and cargo-mutants temp trees.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.5.2 — statement regex mutation):
   The overload boundary is statement context plus a bare scalar target and four arguments. That discriminator
   keeps numeric `substr(value, start, width)` pure—even when its result is discarded—while enabling the historical

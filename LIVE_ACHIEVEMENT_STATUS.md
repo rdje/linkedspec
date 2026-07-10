@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **REPO-HYGIENE.4 — clean Rust and Julia generated caches**
+  (DONE — about 20G reclaimed; Julia backend frontier resumes at `.6.2.4.5.3`).
+
+  **Change:** Removed only ignored/untracked Rust/mdBook output and the dedicated/user Julia depot `compiled/`
+  caches, then removed twelve provenance-checked stale LinkedSpec/RGX generation logs from `/private/tmp`. Julia
+  depot content, unrelated temp trees, and all source/fixture data remain.
+
+  **Verification:** Availability moved from 50G/90% to 68G/86%; all generated targets are absent, noncompiled Julia
+  depot content remains, and the unrelated 29G `claude-501` plus cargo-mutants trees were preserved.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.5.2 — add Julia statement regex mutation**
   (DONE — five parser smokes close; `.6.2.4.5.3` history leading trivia is active).
 

@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — REPO-HYGIENE.4 — clean Rust and Julia generated caches
+
+**Scope:** Recurring disk-pressure cleanup covering ignored Rust/mdBook output, Julia-specific compiled cache
+locations, and provenance-checked stale LinkedSpec/RGX temp logs, with depot data, unrelated temp trees, and `rgx`
+corpus artifacts preserved.
+
+**Change:** Removed ignored/untracked `rust/target` (1.7G) and mdBook output (7.8M), plus only the regenerable
+`compiled/` directories from the dedicated LinkedSpec Julia depot (148M) and the user Julia depot (261M). Julia
+packages, registries, environments, logs, scratchspaces, and all source/fixture data remain intact.
+
+**Root cause and validation:** A follow-up scan found `/private/tmp` at 46G. Twelve closed July 6–9 LinkedSpec/RGX
+parser-generation logs accounted for about 18G; headers tied them to repo generation commands and process/`lsof`
+checks found no writers. Removing exactly those logs brings this leaf's reclaimed total to about 20G and moves
+availability from 50G/90% to 68G/86%. Post-clean checks confirm all targets are absent and Julia depots retain
+their noncompiled content. The unrelated 29G `claude-501` directory, unrelated cargo-mutants trees, and `rgx`
+corpus artifacts remain untouched.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.5.2 — add Julia statement regex mutation
 
 **Scope:** Julia statement-form `substr(...)` / `regex_subst(...)` scalar mutation, replacement capture/flag

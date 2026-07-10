@@ -6,17 +6,18 @@
 - Status: `completed`
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-07-07` (`REPO-HYGIENE.3` done: generated artifact cleanup)
+- Last updated: `2026-07-10` (`REPO-HYGIENE.4` done: recurring Rust/Julia generated-artifact cleanup)
 - Owner: repo-local workflow
 
 ## Goal
 
-Stop tracking files that are tool/local artifacts (vim swap, git commit message scratch, macOS metadata, and local
-agent state) and bring MEMORY.md current.
+Keep tool/local artifacts out of version control, safely reclaim generated build/cache space when needed, and keep
+the durable handoff state current.
 
 ## Non-Goals
 
-- Does not change any project code, tests, docs, or book content.
+- Does not change product code, tests, or documented language behavior; maintenance docs may record the cleanup
+  boundary and evidence.
 - Does not delete source, fixtures, checked-in docs, or any user-authored working-tree content.
 - Does not remove the `rgx/` submodule.
 
@@ -36,8 +37,8 @@ agent state) and bring MEMORY.md current.
 
 - ID: `REPO-HYGIENE`
   Status: `completed`
-  Goal: `Repository hygiene — .gitignore and untrack artifacts`
-  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`
+  Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
+  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`
 
 - ID: `REPO-HYGIENE.1`
   Status: `done`
@@ -74,11 +75,34 @@ agent state) and bring MEMORY.md current.
     stimulus, or issue-artifact trees and are not 100% safe parent-repo cleanup targets.
   Commit: `REPO-HYGIENE.3 - remove generated artifacts`
 
+- ID: `REPO-HYGIENE.4`
+  Status: `done` (2026-07-10)
+  Goal: `Repeat safe artifact cleanup with Julia-specific cache coverage`
+  Acceptance: Measure current disk pressure and generated-output sizes; delete only ignored/untracked Rust build
+    output, mdBook output, Julia compiled/precompile caches, and stale temp logs proven to be regenerable; do not
+    delete Julia packages, registries, environments, unrelated temp trees, source, fixtures, or user-authored data;
+    record before/after evidence and return the repo to a clean committed handoff state.
+  Surfaced finding: `/private/tmp` held 46G after the first cache pass. Twelve closed LinkedSpec/RGX parser-
+    generation logs dated July 6–9 accounted for about 18G, including three 5.1G SystemVerilog logs. Their headers
+    identify repo generation commands and `lsof`/process checks found no writers. The unrelated 29G `claude-501`
+    directory and two unrelated `cargo-mutants-nexsim` trees were deliberately preserved.
+  Verification: `PASS` — the filesystem started at 50G available / 90% used. `git check-ignore` and
+    `git ls-files` confirmed `rust/target` (1.7G) and `docs/linkedspec-book/book` (7.8M) were ignored, untracked,
+    and rebuildable. Julia depot measurement isolated compiled/precompile caches at 148M in the dedicated
+    `/private/tmp/linkedspec-julia-depot/compiled` and 261M in `~/.julia/compiled`; packages, registries,
+    environments, logs, and scratchspaces were measured separately and preserved. Removing only those four
+    generated targets reclaimed about 2.1G. Root-cause follow-up then removed only twelve proven stale
+    LinkedSpec/RGX generation logs (about 18G) from `/private/tmp`. The complete leaf reclaimed about 20G and
+    raised availability from 50G / 90% used to 68G / 86% used. All targets are absent, both Julia depots retain
+    their noncompiled content, unrelated temp trees remain, and the tracked tree contains only this leaf's docs.
+  Commit: `REPO-HYGIENE.4 - clean Rust and Julia generated caches`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `REPO-HYGIENE.3` | `done` | User-requested urgent cleanup of safe generated artifacts, including Rust target directories and mdBook output |
+| 2 | `REPO-HYGIENE.4` | `done` | Reclaimed about 20G from Rust/mdBook output, Julia compiled caches, and proven stale generation logs without deleting depot or unrelated temp content |
 
 ## Decisions
 
@@ -88,6 +112,12 @@ agent state) and bring MEMORY.md current.
   `ignore = dirty`.
 - `2026-07-07`: Rust `target/` trees and mdBook `book/` output are generated/rebuildable artifacts and may be
   deleted for disk-space recovery when the repo is otherwise handoff-ready.
+- `2026-07-10`: Julia's generated compiled/precompile output lives under depot `compiled/` directories, including
+  the dedicated test depot and the user depot. Those `compiled/` directories are regenerable cleanup targets;
+  packages, registries, environments, logs, scratchspaces, and artifacts are distinct and remain preserved.
+- `2026-07-10`: Large `/private/tmp` logs may be deleted only after their headers identify a completed repo
+  generation run and process/`lsof` checks show no writer. Do not blanket-delete `/private/tmp`; unrelated agent,
+  application, and other-project temp trees remain outside this cleanup boundary.
 
 ## Open Questions
 
@@ -103,6 +133,7 @@ agent state) and bring MEMORY.md current.
 | --- | --- | --- | --- |
 | `2026-07-06` | `REPO-HYGIENE.2` | `.gitignore` update; `.gitmodules` `ignore = dirty`; `git status --ignored`; `git ls-files --stage rgx`; `git submodule status -- rgx`; memory/doctrine/Knowledge Map/diff checks | `.claude/projects/` is ignored; `rgx` remains a tracked submodule/gitlink at `8763a0e`; dirty submodule worktree state no longer dirties parent status. |
 | `2026-07-07` | `REPO-HYGIENE.3` | `du -sh rust/target docs/linkedspec-book/book`; ignored/tracked checks; artifact scans for `.log`, `.bin`, `.tmp`, `.bak`, `.DS_Store`, and `.swp`; `rm -rf rust/target docs/linkedspec-book/book`; post-clean existence/status checks; memory/KM/doctrine/diff gates | PASS — removed ignored/untracked `rust/target` (5.2G) and `docs/linkedspec-book/book` (7.0M). Main checkout has no remaining safe log/bin/temp artifact hits outside `.git`, ignored targets, and `rgx`. Submodule `rgx` log/bin hits were preserved as fixture/stimulus/issue corpus material. Cargo/mdBook were not run because they would recreate the removed artifacts. |
+| `2026-07-10` | `REPO-HYGIENE.4` | `df -h .`; `du -sh` over Rust target/mdBook output, Julia depot components, `/private/tmp`, and user temp; ignored/tracked checks; Julia `jl_*` scan; process/`lsof`/header provenance checks; removal of four generated cache targets plus twelve stale LinkedSpec/RGX generation logs; post-clean existence/depot/status checks; memory/KM/task/doctrine/diff gates | PASS — removed 1.7G Rust target, 7.8M mdBook output, 148M dedicated-depot Julia compiled cache, 261M user-depot Julia compiled cache, and about 18G of stale generation logs. Availability increased from 50G/90% to 68G/86%; Julia depot data, `claude-501`, unrelated cargo-mutants trees, and `rgx` corpus artifacts remain. |
 | `2026-06-16` | `REPO-HYGIENE.1` | `scripts/check_memory_architecture.sh` exit 0; `perl -c perl/LinkedSpec.pm` OK; git status clean | PASS |
 
 ## Commit Log
@@ -111,6 +142,7 @@ agent state) and bring MEMORY.md current.
 | --- | --- | --- |
 | `REPO-HYGIENE.2` | `REPO-HYGIENE.2 - ignore Claude project state and rgx local dirt` | `.claude/projects/` ignore plus `rgx` submodule local-dirt ignore. |
 | `REPO-HYGIENE.3` | `REPO-HYGIENE.3 - remove generated artifacts` | Removed ignored/untracked `rust/target` and mdBook build output; left `rgx` corpus artifacts intact. |
+| `REPO-HYGIENE.4` | `REPO-HYGIENE.4 - clean Rust and Julia generated caches` | Depot-aware cache and provenance-checked temp-log cleanup; preserved package, registry, and unrelated temp data. |
 | `REPO-HYGIENE.1` | `pending` | Populated after commit |
 
 ## Changelog
@@ -120,3 +152,6 @@ agent state) and bring MEMORY.md current.
   `ignore = dirty` for local worktree noise.
 - `2026-07-07`: Completed REPO-HYGIENE.3 — removed ignored/untracked `rust/target` and mdBook build output,
   reclaiming roughly 5.2G plus 7.0M; preserved `rgx` submodule `.log`/`.bin` corpus artifacts.
+- `2026-07-10`: Completed REPO-HYGIENE.4 — reclaimed roughly 20G from regenerated Rust/mdBook output, Julia
+  compiled/precompile caches, and twelve stale repo generation logs; preserved Julia depot content, unrelated temp
+  trees, and all source data.
