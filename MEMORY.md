@@ -18,20 +18,22 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.4.5.2` — Julia exports ordered trace levels, environment/config
-  controls, structured event primitives, stdout/route/mirror sinks with reset, optional emitter injection, and
-  output-preserving traced entrypoints; full tests pass with 617 assertions and status `runtime-trace-controls`.
-- prior_leaf: `JULIA-BACKEND-PARITY.4.5.1` — structured runtime diagnostics preserve spec/top/child-rule/handler
-  attribution, richer inner payloads, successful output, and textual errors.
+- latest_completed_leaf: `STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.1` — the director-identified Dart hash-helper
+  fixture uses newlines between its eight multiline statements and no trailing semicolons; focused execution is
+  unchanged and the book/KM restate separator-only example style.
+- prior_leaf: `JULIA-BACKEND-PARITY.4.5.2` — Julia exports ordered trace levels, environment/config controls,
+  structured event primitives, stdout/route/mirror sinks with reset, optional emitter injection, and
+  output-preserving traced entrypoints; full tests pass with 617 assertions.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.4.5.2 - add Julia trace controls`; previous committed HEAD is
-  `b469e4c8 JULIA-BACKEND-PARITY.4.5.1 - add Julia runtime diagnostics`.
+  `STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.1 - align separator example style`; previous committed HEAD is
+  `7ed9b939 JULIA-BACKEND-PARITY.4.5.2 - add Julia trace controls`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; current frontier after the current commit is `.4.5.3`.
+- active_work_unit: `JULIA-BACKEND-PARITY`; the corrective separator tree is closed and the resumed frontier after
+  the current commit is `.4.5.3`.
 - next_action: resume PNT at `JULIA-BACKEND-PARITY.4.5.3` to instrument runtime rule/regex/dispatch/lifecycle/
   recursion/cursor/source-boundary mechanisms through the optional emitter while preserving untraced output.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
@@ -49,5 +51,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.4.5.2` commit; do not pivot
-  unless the repo is handoff-ready.
+- blockers: none. in_flight_uncommitted: none expected after the `STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.1` commit;
+  do not pivot unless the repo is handoff-ready.

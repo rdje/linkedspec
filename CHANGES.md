@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.1 — align separator example style
+
+**Scope:** The director-identified Dart hash-helper executable fixture, statement-separator mdBook/KM wording,
+task-tree ownership, live docs, and resume state.
+
+**Change:** Removed eight redundant line-ending semicolons from multiline `.spec` source. Each newline remains the
+statement boundary; no grammar or runtime behavior changed. The book and Knowledge Map now also state that
+executable examples omit terminator-style semicolons.
+
+**Validation:** The focused Dart runtime test passes with unchanged output; mdBook, memory architecture, task-tree
+metadata, Knowledge Map, doctrine, and whitespace checks pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.4.5.2 — add Julia trace controls
 
 **Scope:** Julia trace levels, environment/config controls, structured events/scopes/decisions/logs/dumps,

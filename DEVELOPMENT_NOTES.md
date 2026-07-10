@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.1 — separator-only fixture style):
+  The `.spec` semicolon is an infix separator, never a line terminator. Multiline fixtures should use the newline
+  alone; compact same-line fixtures use `;` only between adjacent statements, including no semicolon after the
+  last statement. The corrected Dart hash-helper fixture is executable proof that removing redundant line-ending
+  semicolons preserves behavior.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.4.5.2 — Julia trace controls/events/sinks):
   The trace owner is independent from the interpreter: immutable config selects levels and routing, while a
   mutable emitter owns event/line history, indentation, and output. File sinks append per event, with eager reset

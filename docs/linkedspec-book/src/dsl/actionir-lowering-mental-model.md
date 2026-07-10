@@ -120,7 +120,8 @@ The separator contract is deliberately narrow: top-level newlines split helper s
 and a semicolon separates adjacent statements on one physical line. It is a separator, not
 a line terminator, so the last statement on that line needs no trailing semicolon. Plain
 spaces do not create a boundary. Nested semicolons inside expression payloads stay inside
-the payload.
+the payload. Executable examples therefore omit line-ending semicolons whenever a newline
+already separates the statements.
 
 ### CanonicalEvents
 

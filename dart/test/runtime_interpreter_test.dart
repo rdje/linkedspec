@@ -1041,14 +1041,14 @@ Top::
 Top::
  /x/
  E {
-   set_key(meta, "b", 2);
-   set_key(meta, "a", 1);
-   set_key(meta, "drop", 0);
-   set_key(hash(meta), "stmt_hash", 4);
-   set_key(overlay, "a", 10);
-   set_key(overlay, "c", 3);
-   value_set = set_key(meta, "value_only", 9);
-   receiver_set = meta.set_key("receiver_only", 5);
+   set_key(meta, "b", 2)
+   set_key(meta, "a", 1)
+   set_key(meta, "drop", 0)
+   set_key(hash(meta), "stmt_hash", 4)
+   set_key(overlay, "a", 10)
+   set_key(overlay, "c", 3)
+   value_set = set_key(meta, "value_only", 9)
+   receiver_set = meta.set_key("receiver_only", 5)
    return(hash(
      "keys", meta.sorted_keys().join_values(","),
      "values", meta.sorted_values().join_values("|"),

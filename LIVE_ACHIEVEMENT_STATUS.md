@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.1 — align separator example style**
+  (DONE — the director-identified fixture is canonical; Julia `.4.5.3` remains the active PNT frontier).
+
+  **Change:** Removed redundant trailing semicolons from eight newline-separated statements in the Dart
+  hash-helper runtime fixture. mdBook and Knowledge Map wording explicitly preserve separator-only style.
+
+  **Boundary:** Presentation/test-source alignment only; no parser or runtime semantic change.
+
+  **Verification:** Focused Dart execution passes unchanged; commit-time documentation/governance gates pass.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.4.5.2 — add Julia trace controls**
   (DONE — trace controls/events/sinks are green; next active leaf is `JULIA-BACKEND-PARITY.4.5.3`).
 
