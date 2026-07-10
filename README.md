@@ -118,7 +118,9 @@ Top-level directories and files:
     `.6.2.4.2.2` adds trace-routed, parse-result-neutral diagnostic output and advances simenv/history past
     unsupported `print`. `.6.2.4.3` scopes explicit aggregate resets per recursive rule invocation and closes all
     three recursive top-rule cases. Full tests pass with 785 assertions, status is
-    `runtime-corpus-recursive-rule-scope`, shipped smoke is 21/31, and `.6.2.4.4` is active.
+    `runtime-corpus-recursive-rule-scope` at that boundary. `.6.2.4.4` adds all four action-edge child-push forms,
+    closes the four spec.spec smokes, and routes EBNF quote mutation. Full tests pass with 793 assertions, status is
+    `runtime-corpus-action-edge-child-push`, shipped smoke is 25/31, and `.6.2.4.5.1` is active.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

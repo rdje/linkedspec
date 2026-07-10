@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.4 — action-edge child push):
+  Parent action-edge regex matching already consumes the token and establishes a scoped child result. All-bare
+  `push(child, target)` and literal `push(child, index)` therefore need child-call precedence and must reuse that
+  result rather than evaluate the arguments as an ordinary append or re-search. Julia now covers all four
+  implicit/explicit whole/indexed forms. EBNF's newly visible quote-only difference is independent statement
+  mutation and is routed with lib_reader, not hidden inside structural dispatch.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.3 — recursive rule-local reset scope):
   Rule calls must not isolate every working variable: ordinary child mutations are intentionally caller-visible.
   The portable boundary is the first explicit aggregate reset in a rule invocation. Julia now snapshots all typed

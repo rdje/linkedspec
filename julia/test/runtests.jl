@@ -346,7 +346,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-corpus-recursive-rule-scope"
+    @test status.parity == "runtime-corpus-action-edge-child-push"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -358,7 +358,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-corpus-recursive-rule-scope", String(take!(status_output)))
+    @test occursin("parity: runtime-corpus-action-edge-child-push", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1330,6 +1330,29 @@ Child:
  }
 """)
     @test runtime_parse(shared_mutation, "x").value == Any["child"]
+
+    child_push_forms = runtime_engine(raw"""
+Parent::
+ I { set(array(explicit), []) }
+ -> Child {
+   push(Child)
+   push(Child, explicit)
+   push(Child, 1)
+   push(Child, explicit, 0)
+   return(hash(
+     "implicit", copy(array(Parent)),
+     "explicit", copy(array(explicit))
+   ))
+ }
+
+Child:
+ /x/
+ I { return(["zero", "one"]) }
+""")
+    @test runtime_parse(child_push_forms, "x").value == Dict{String,Any}(
+        "implicit" => Any[Any["zero", "one"], "one"],
+        "explicit" => Any[Any["zero", "one"], "zero"],
+    )
 
     below_minimum = runtime_engine(raw"""
 Top::OR{2}
@@ -3591,6 +3614,41 @@ end
     @test [result.name for result in execution.results] == passing_names
     @test corpus_passed_count(execution) == 3
     @test isempty(failures)
+end
+
+@testset "Shipped structural child-push corpus boundary" begin
+    passing_names = [
+        "spec_spec_minimal_rule",
+        "spec_spec_action_edge",
+        "spec_spec_user_function_definition",
+        "spec_spec_comment_skip",
+    ]
+    passing = execute_corpus_fixtures(CORPUS_ROOT; case_names = passing_names)
+    failures = [
+        "$(result.name): $(result.failure)"
+        for result in passing.results if !corpus_fixture_passed(result)
+    ]
+    ebnf = execute_corpus_fixtures(
+        CORPUS_ROOT;
+        case_names = ["ebnf_expression_rules", "ebnf_logging_annotation"],
+    )
+
+    @test [result.name for result in passing.results] == passing_names
+    @test corpus_passed_count(passing) == 4
+    @test isempty(failures)
+    @test all(result -> !corpus_fixture_passed(result), ebnf.results)
+    @test all(result -> occursin("output mismatch", result.failure), ebnf.results)
+    @test ebnf.results[1].actual_output == Any[Any[
+        Any[Any["rule", "Expr"], Any["rule_reference", "Term"], Any["group_open", "("],
+            Any["quoted_string", "\"+\""], Any["rule_reference", "Term"],
+            Any["group_close", ")"], Any["operator", "*"]],
+        Any[Any["rule", "Term"], Any["rule_reference", "Factor"]],
+    ]]
+    @test ebnf.results[2].actual_output == Any[Any[Any[
+        Any["rule", "Expr"],
+        Any["rule_reference", "Term"],
+        Any["logging_annotation", Any["log_rule", Any["\"expr\"", "\"term\""]]],
+    ]]]
 end
 
 @testset "Spec AST JSON contract" begin

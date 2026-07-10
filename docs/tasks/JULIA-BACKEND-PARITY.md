@@ -598,19 +598,52 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.2.4.3 - scope Julia recursive rule resets`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.4`
-  Status: `active`
+  Status: `done`
   Goal: Close EBNF and spec.spec structural output mismatches.
   Acceptance: Both EBNF fixtures and the four spec.spec smoke fixtures preserve their expected structural records,
     or independent parser/runtime mechanisms are split again before implementation. `ebnf_logging_annotation`
     reaches structural execution after `.6.2.4.1`; it no longer belongs to the capture-helper leaf.
+  Verification: `PASS/SPLIT` - Julia now recognizes action-edge `push(child)`, `push(child, target)`,
+    `push(child, index)`, and `push(child, target, index)`, reuses the current edge's already-dispatched child
+    result, and appends the whole/indexed value to the implicit or explicit accumulator. Focused coverage locks all
+    four forms. All four spec.spec smokes pass. Both EBNF fixtures preserve every structural record and now differ
+    only because statement-form `substr(...)` has not stripped quotes; that independent mutation/normalization
+    mechanism is routed to `.6.2.4.5.2`. Seven permanent corpus assertions bring full `Pkg.test()` to 793. The
+    complete window moves from 21/31 to 25/31, status is `runtime-corpus-action-edge-child-push`, and
+    `.6.2.4.5.1` becomes active.
+  Commit: `JULIA-BACKEND-PARITY.6.2.4.4 - add Julia action-edge child push`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.4.5`
+  Status: `active`
+  Goal: Close the remaining non-final shipped-smoke mechanisms.
+  Children: `.6.2.4.5.1`, `.6.2.4.5.2`, `.6.2.4.5.3`
+  Acceptance: Fatal diagnostic control, statement mutation/quote normalization, and public-parser leading trivia
+    each have an independent executable leaf; simenv, both EBNF cases, both lib_reader cases, and history either
+    pass or expose a newly split mechanism before final 31/31 no-drift.
   Verification: `pending`
   Commit: `pending`
 
-- ID: `JULIA-BACKEND-PARITY.6.2.4.5`
+- ID: `JULIA-BACKEND-PARITY.6.2.4.5.1`
+  Status: `active`
+  Goal: Add terminating `exit_now(...)` runtime control.
+  Acceptance: `simenv_multiline_value` advances past unsupported `exit_now` with the fatal-control contract locked
+    independently from later statement mutation.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.4.5.2`
   Status: `pending`
-  Goal: Close lib_reader statement mutation and quote normalization.
-  Acceptance: `lib_reader_sattribute` and `lib_reader_cattribute` strip quoted group/value payloads and construct
-    the expected scalar/compound attribute shapes without fixture-specific cleanup.
+  Goal: Close statement-form scalar mutation and quote normalization.
+  Acceptance: Both EBNF cases, both lib_reader cases, and the post-`exit_now` simenv boundary apply portable
+    statement mutation without fixture-specific cleanup and match checked-in outputs or split a narrower residual.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.6.2.4.5.3`
+  Status: `pending`
+  Goal: Mirror public-parser leading trivia for the history smoke.
+  Acceptance: `ds_vhistory_version_entry` matches the checked-in public Perl/Rust output without weakening ordinary
+    indexed variable reads or direct descriptor semantics.
   Verification: `pending`
   Commit: `pending`
 
@@ -696,7 +729,39 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 14 | `JULIA-BACKEND-PARITY.6.2.4.2.3` | `done` | Shared helper regex compilation closes portmap constant while preserving invalid-flag failure. |
 | 15 | `JULIA-BACKEND-PARITY.6.2.4.2.2` | `done` | Diagnostic output is trace-routed and parse-result neutral; both corpus cases advance to successor-owned mechanisms. |
 | 16 | `JULIA-BACKEND-PARITY.6.2.4.3` | `done` | Rule-local aggregate reset snapshots close all three recursive top-rule fixtures. |
-| 17 | `JULIA-BACKEND-PARITY.6.2.4.4` | `active` | Close EBNF and spec.spec structural output mismatches. |
+| 17 | `JULIA-BACKEND-PARITY.6.2.4.4` | `done` | Action-edge child-push forms close all four spec.spec smokes and route EBNF quote mutation. |
+| 18 | `JULIA-BACKEND-PARITY.6.2.4.5.1` | `active` | Add terminating `exit_now(...)` control before simenv mutation work. |
+
+## `JULIA-BACKEND-PARITY.6.2.4.4` Action-Edge Child Push Result
+
+Structural-output evidence recorded on 2026-07-10:
+
+- Julia debug traces showed EBNF and spec.spec child rules returning correct structures through the current action
+  edge, while the parent action block treated `push(child, target)` as ordinary target/value append and lost them.
+- Julia now gives compiled-rule first arguments the documented child-call precedence for one to three arguments.
+  The current edge's cached child result is reused; other child labels execute normally. A literal nonnegative
+  final index selects from the child array before append.
+- Focused runtime coverage locks implicit whole, explicit whole, implicit indexed, and explicit indexed forms.
+  All four spec.spec smokes pass unchanged.
+- Both EBNF fixtures now retain complete rule/token/logging structures. Their only residual is quoted string text:
+  statement-form regex `substr(...)` currently does not mutate its scalar target. That independent mechanism is
+  routed with lib_reader to `.6.2.4.5.2`.
+- Full `Pkg.test()` passes with 793 assertions; the complete shipped window moves from 21/31 to 25/31, and status
+  is `runtime-corpus-action-edge-child-push`.
+
+## `JULIA-BACKEND-PARITY.6.2.4.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Child rules returned correct structures, but EBNF/spec.spec parent arrays lost every
+  action-edge child payload.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `_call_runtime_push!` handled two arguments only as `(target, value)` and had
+  no all-bare child/target or literal child/index precedence.
+- [x] **FIX / SPLIT** — Added all four documented action-edge child-push forms and routed the newly exposed EBNF
+  statement-mutation residual to `.6.2.4.5.2`.
+- [x] **ADDRESSED (verified)** — Four spec.spec fixtures pass; both EBNF fixtures preserve their complete
+  structures and are locked at quote-only mismatches.
+- [x] **NO REGRESSION** — Full `Pkg.test()` passes with 793 assertions; shipped smoke is 25/31.
+- [x] **LOCKSTEP** — Julia README, task/index/roadmaps, child-push mdBook handoff, Knowledge Map,
+  architecture/live docs, package status, and `MEMORY.md` advance to `.6.2.4.5.1`.
 
 ## `JULIA-BACKEND-PARITY.6.2.4.3` Recursive Rule Scope Result
 
@@ -2141,6 +2206,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.2.3` | Focused helper regex `igo`/split `go`/invalid `q` tests; focused portmap constant run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Strict shared helper-regex flag normalization closes portmap constant, shipped smoke is 18/31, full tests pass with 772 assertions, status is `runtime-corpus-helper-regex-flags`, and `.6.2.4.2.2` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.2.2` | Focused diagnostic-output runtime proof; focused simenv/history corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Trace-routed `print`/`print_each`/`say` preserve parser output and advance both corpus cases past unsupported `print`; exact successor failures are locked, shipped smoke remains 18/31, full tests pass with 780 assertions, status is `runtime-corpus-diagnostic-output`, and `.6.2.4.3` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.3` | Julia debug trace on recursive nested fixture; focused rule-local array/hash reset and shared-mutation tests; three-case recursive corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. First-reset rule-local snapshots preserve caller stores while ordinary child mutations remain visible; all three recursive fixtures pass, shipped smoke is 21/31, full tests pass with 785 assertions, status is `runtime-corpus-recursive-rule-scope`, and `.6.2.4.4` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.4` | Julia debug traces on EBNF logging and spec.spec minimal fixtures; focused four-form action-edge child-push test; six-case structural corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS/SPLIT. All four spec.spec smokes pass; both EBNF cases retain complete structures and route quote-only statement mutation to `.6.2.4.5.2`; shipped smoke is 25/31, full tests pass with 793 assertions, status is `runtime-corpus-action-edge-child-push`, and `.6.2.4.5.1` becomes active. |
 
 ## Commit Log
 
@@ -2187,9 +2253,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.6.2.4.2.3` | `JULIA-BACKEND-PARITY.6.2.4.2.3 - normalize Julia helper regex flags` | Shared strict helper regex flag normalization closes portmap constant and advances diagnostic-output helpers to `.6.2.4.2.2`. |
 | `JULIA-BACKEND-PARITY.6.2.4.2.2` | `JULIA-BACKEND-PARITY.6.2.4.2.2 - add Julia diagnostic output helpers` | Trace-routed, parse-result-neutral diagnostic output advances both routed fixtures to successor-owned mechanisms; recursive top-rule parity advances to `.6.2.4.3`. |
 | `JULIA-BACKEND-PARITY.6.2.4.3` | `JULIA-BACKEND-PARITY.6.2.4.3 - scope Julia recursive rule resets` | Rule-local explicit aggregate reset snapshots close all three recursive top-rule fixtures; structural outputs advance to `.6.2.4.4`. |
+| `JULIA-BACKEND-PARITY.6.2.4.4` | `JULIA-BACKEND-PARITY.6.2.4.4 - add Julia action-edge child push` | Four child-push forms close all four spec.spec smokes and route EBNF quote mutation to `.6.2.4.5.2`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.2.4.4` action-edge child push. Julia now reuses edge-scoped child results for
+  implicit/explicit whole and indexed append forms. All four spec.spec smokes pass; both EBNF cases preserve full
+  structures and route quote-only statement mutation to `.6.2.4.5.2`. Full tests pass with 793 assertions, shipped
+  smoke is 25/31, status is `runtime-corpus-action-edge-child-push`, and `.6.2.4.5.1` is active.
 - `2026-07-10`: Completed `.6.2.4.3` recursive rule scope. Explicit array/hash resets now snapshot and restore the
   caller binding per rule invocation, while ordinary undeclared child mutations remain visible and user functions
   retain independent whole-store isolation. All three recursive fixtures pass; full tests pass with 785 assertions,

@@ -2526,6 +2526,34 @@ function _call_runtime_set!(engine, args, context, rule_label, current_edge)
 end
 
 function _call_runtime_push!(engine, args, context, rule_label, current_edge)
+    child_rule = isempty(args) ? nothing : _runtime_variable_name(first(args))
+    if child_rule !== nothing &&
+            compiled_rule(engine.compiled_spec, child_rule) !== nothing &&
+            length(args) <= 3
+        index = if length(args) == 2
+            _runtime_literal_nonnegative_int(args[2])
+        elseif length(args) == 3
+            _runtime_literal_nonnegative_int(args[3])
+        else
+            nothing
+        end
+        target = if length(args) == 1 || (length(args) == 2 && index !== nothing)
+            rule_label
+        else
+            candidate = _runtime_array_target_name(args[2])
+            candidate === nothing ? _runtime_variable_name(args[2]) : candidate
+        end
+        valid_shape = target !== nothing && (length(args) < 3 || index !== nothing)
+        if valid_shape
+            child = current_edge !== nothing && child_rule == current_edge.target.label ?
+                _execute_runtime_action_edge_child!(engine, current_edge, context) :
+                _execute_runtime_rule!(engine, child_rule, 0, context)
+            context.retv = child.value
+            value = index === nothing ? child.value : _runtime_index_value(child.value, index)
+            return _append_runtime_array_value!(context, target, value)
+        end
+    end
+
     if isempty(args)
         child = _require_runtime_action_edge_child!(engine, current_edge, context, rule_label)
         return _append_runtime_array_value!(context, rule_label, child.value)
@@ -2574,6 +2602,13 @@ function _call_runtime_push!(engine, args, context, rule_label, current_edge)
         return _append_runtime_array_value!(context, target, value)
     end
     return nothing
+end
+
+function _runtime_literal_nonnegative_int(expr)
+    if !(expr isa ActionNumberLiteralExpr)
+        return nothing
+    end
+    return _runtime_nonnegative_int(expr.value)
 end
 
 function _call_runtime_array(engine, args, context, rule_label, current_edge)

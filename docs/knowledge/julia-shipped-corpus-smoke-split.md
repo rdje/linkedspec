@@ -35,15 +35,18 @@ Every failing fixture is routed exactly once before implementation:
     mismatch; later mechanism leaves own those residuals.
 - `.6.2.4.3`: three recursive top-rule fixtures that initially returned incorrect nested/caller values. That leaf
   now scopes explicit aggregate resets per rule invocation and all three cases pass.
-- `.6.2.4.4`: `ebnf_expression_rules` plus four spec.spec smokes that execute but lose structural records.
-- `.6.2.4.5`: both lib_reader cases, which retain quotes in group/value payloads.
+- `.6.2.4.4`: `ebnf_expression_rules` plus four spec.spec smokes initially lost structural records. Action-edge
+  child-push parity now closes all four spec.spec cases and advances both EBNF cases to quote-only statement
+  mutation residuals under `.6.2.4.5.2`.
+- `.6.2.4.5`: the remaining non-final mechanisms are split into `exit_now` control (`.5.1`), EBNF/lib_reader/
+  simenv statement mutation (`.5.2`), and history public-parser leading trivia (`.5.3`).
 - `.6.2.4.6`: final 31/31 regression and no-drift closeout.
 
 The checked-in expected JSON remains the Perl/Rust oracle. Completed Dart facts identify portable mechanism
-contracts, but the Julia leaves must establish their own root causes. After `.6.2.4.3`, the complete window is
-21/31. Full tests pass with 785 assertions, status is `runtime-corpus-recursive-rule-scope`, and `.6.2.4.4` is
+contracts, but the Julia leaves must establish their own root causes. After `.6.2.4.4`, the complete window is
+25/31. Full tests pass with 793 assertions, status is `runtime-corpus-action-edge-child-push`, and `.6.2.4.5.1` is
 active.
 
-Related facts: [[julia-recursive-rule-local-reset-scope]], [[julia-diagnostic-output-helpers]], [[julia-helper-regex-flag-normalization]], [[julia-logical-helper-execution]], [[julia-anonymous-capture-boundary-helpers]], [[julia-middle-corpus-batch]], [[julia-controlled-corpus-execution]],
+Related facts: [[julia-action-edge-child-push]], [[julia-recursive-rule-local-reset-scope]], [[julia-diagnostic-output-helpers]], [[julia-helper-regex-flag-normalization]], [[julia-logical-helper-execution]], [[julia-anonymous-capture-boundary-helpers]], [[julia-middle-corpus-batch]], [[julia-controlled-corpus-execution]],
 [[dart-shipped-corpus-smoke-split]], [[dart-helper-action-surface-bridge]],
 [[rust-anonymous-capture-slice-family]], [[rust-perl-output-oracle]].

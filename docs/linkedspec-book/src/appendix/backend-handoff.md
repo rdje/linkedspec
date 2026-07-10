@@ -336,8 +336,9 @@ three hlink delimiter cases, and routes EBNF logging to structural output. `.6.2
 closes three portmap cases plus tablegrep. `.6.2.4.2.3` centralizes helper regex flags and closes portmap constant.
 `.6.2.4.2.2` adds trace-routed, parse-result-neutral diagnostic output and advances simenv/history beyond
 unsupported `print`. `.6.2.4.3` scopes explicit aggregate resets per recursive rule invocation and closes all
-three recursive top-rule cases. Full tests pass with 785 assertions, status is
-`runtime-corpus-recursive-rule-scope`, the window is 21/31, and `.6.2.4.4` is active.
+three recursive top-rule cases. `.6.2.4.4` adds action-edge child-push result reuse/indexing, closes all four
+spec.spec smokes, and routes EBNF quote-only statement mutation. Full tests pass with 793 assertions, status is
+`runtime-corpus-action-edge-child-push`, the window is 25/31, and `.6.2.4.5.1` is active.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -704,7 +705,14 @@ Recursive rule calls now carry a first-reset binding snapshot for explicit `set(
 while ordinary undeclared `push(...)`/append mutations remain caller-visible; registered user functions retain
 their separate whole-store isolation. This closes the body-recursive, nested top-LX, and top-LX sequence fixtures.
 The full window is 21/31, full tests pass with 785 assertions, status is
-`runtime-corpus-recursive-rule-scope`, and `.6.2.4.4` is active.
+`runtime-corpus-recursive-rule-scope` at that boundary.
+
+Action-edge child-push forms now give a compiled-rule first argument child-call precedence and reuse the current
+edge's cached child result. `push(Child)`, `push(Child, target)`, `push(Child, index)`, and
+`push(Child, target, index)` append whole or zero-based indexed values without re-searching the consumed token.
+All four spec.spec smokes pass. Both EBNF cases now retain complete structures and are locked at quote-only
+statement-mutation residuals under `.6.2.4.5.2`. The full window is 25/31, full tests pass with 793 assertions,
+status is `runtime-corpus-action-edge-child-push`, and `.6.2.4.5.1` is active.
 
 ### Dart Backend Commands
 

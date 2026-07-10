@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.4 — add Julia action-edge child push
+
+**Scope:** Julia action-edge child-result append overloads, focused whole/indexed tests, spec.spec closeout, EBNF
+residual routing, package status, lockstep docs, mdBook, Knowledge Map, and resume pointer.
+
+**Change:** A compiled-rule first argument now gives `push(...)` child-call precedence. Julia reuses the current
+edge's cached child result and supports implicit/explicit whole and literal-indexed appends while retaining ordinary
+`push(array(target), value)` semantics.
+
+**Validation:** All four push forms pass in focused runtime coverage. Four spec.spec smokes pass. Both EBNF cases
+retain complete structures and are locked at quote-only statement-mutation residuals under `.6.2.4.5.2`. The full
+window moves from 21/31 to 25/31; full `Pkg.test()` passes with 793 assertions and status
+`runtime-corpus-action-edge-child-push`. CLI, mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates
+pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.3 — scope Julia recursive rule resets
 
 **Scope:** Julia per-rule aggregate reset scoping, focused caller/child store tests, recursive top-rule corpus
