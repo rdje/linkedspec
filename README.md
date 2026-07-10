@@ -97,7 +97,8 @@ Top-level directories and files:
     mutation are now green. Expression-valued blocks, attached/marker/inline controls, helper/receiver with-blocks,
     and scoped hash/array tree callbacks are now green too. Helper/value no-drift is closed. Explicit cursor
     save/restore, entry/local rewinds, character-based cursor/input helpers, and non-consuming boundary capture
-    are green at 581 assertions; runtime diagnostics and trace controls are the active `.4.5` frontier.
+    are green at 581 assertions; diagnostics/trace is split, and structured runtime diagnostics are the active
+    `.4.5.1` frontier.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.4.5.0 — split Julia diagnostics/trace controls):
+  Structured diagnostics and optional tracing share runtime attribution but not an implementation owner.
+  Diagnostics must remain available on failures without any trace setup; trace levels/events/sinks form a reusable
+  control layer; interpreter instrumentation consumes that layer; and parity/no-drift is only meaningful after all
+  mechanisms land. Julia therefore mirrors the proven Dart four-leaf split while keeping Julia-native exception,
+  configuration, and I/O types. `.4.5.1` owns diagnostic payloads before any trace plumbing.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.4.4 — Julia runtime cursor controls and boundary capture):
   Julia keeps its efficient internal cursor as a zero-based UTF-8 code-unit offset, but every public cursor/input
   position, length, and slice is character-based. One `_set_runtime_cursor!` path updates the mutable execution

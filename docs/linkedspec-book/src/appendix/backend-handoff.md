@@ -307,8 +307,8 @@ deterministic while guards, immediate helper/receiver with-blocks, and scoped ha
 `.4.3.6` closeout confirms helper/value no-drift at 567 assertions without a runtime correction. `.4.4` adds an
 explicit LIFO cursor stack, entry/local anchor rewinds, synchronized live/register cursor updates,
 character-based cursor/input helpers, and earliest usable non-consuming named-rule boundary capture. Full Julia
-tests pass with 581 assertions and package status `runtime-cursor-boundary`; `.4.5` is active for runtime
-diagnostics and trace controls.
+tests pass with 581 assertions and package status `runtime-cursor-boundary`. `.4.5.0` splits diagnostics/trace
+before code; `.4.5.1` is active for structured runtime diagnostics.
 Future Julia and
 Lua backend plans must own their own
 variant-specific CLIs rather than relying on one
@@ -416,7 +416,9 @@ The closeout confirms runtime tests/status, mdBook contracts, live docs, and fac
 assertions; package status remains `runtime-value-control-tree`, and no runtime correction was required. `.4.4`
 adds explicit LIFO cursor save/restore, entry/local anchor rewinds, character-based cursor/input helpers, and
 earliest usable non-consuming boundary capture. Full tests pass with 581 assertions and status
-`runtime-cursor-boundary`. `.4.5` owns diagnostics/trace; later leaves own staged parser and corpus execution.
+`runtime-cursor-boundary`. `.4.5.0` splits diagnostics/trace into structured diagnostics, trace
+controls/events/sinks, runtime instrumentation, and no-drift. `.4.5.1` owns structured diagnostics first; later
+leaves own staged parser and corpus execution.
 
 ### Dart Backend Commands
 

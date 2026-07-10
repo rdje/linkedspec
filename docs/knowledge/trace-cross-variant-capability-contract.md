@@ -39,4 +39,9 @@ reference vocabulary, not mandatory package names for every backend.
 Rust now has the `.4.2` trace control/sink surface, `.4.3` compile/spec-parser/staged-dispatch events, `.4.4`
 interpreted/generated-plan runtime branch/mark/capture events, and `.4.5` parity proof. Rust can claim trace parity
 for the documented external contract. Future variants must pass the mdBook checklist and record proof before making
-the same claim.
+the same claim. Julia has split that proof through `JULIA-BACKEND-PARITY.4.5.0`; its `.4.5.1` through `.4.5.4`
+leaves separately own diagnostics, controls/sinks, runtime instrumentation, and no-drift before any Julia trace
+parity claim.
+
+Related facts: [[julia-runtime-diagnostics-trace-split]], [[trace-backend-parity-split]],
+[[dart-runtime-diagnostics-trace-split]].

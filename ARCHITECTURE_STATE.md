@@ -5,6 +5,10 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.5.0` splits Julia diagnostics/trace before code into stable
+  structured runtime diagnostics, reusable trace levels/config/events/sinks, interpreter instrumentation, and
+  final no-drift owners. Runtime behavior and `runtime-cursor-boundary` status are unchanged; `.4.5.1` is the sole
+  active frontier.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.4` adds Julia's explicit LIFO cursor stack, synchronized
   live/register cursor updates, entry/local anchor rewinds, character-based cursor/input helper projection, and
   earliest usable non-consuming named-rule boundary capture. Cursor moves preserve match records and semantic

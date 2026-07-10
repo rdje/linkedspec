@@ -42,5 +42,6 @@ EOF and moves there. If no requested rule resolves to regex patterns, it
 returns `nothing` and leaves the cursor unchanged.
 
 Related facts: [[julia-runtime-matching-state]], [[julia-runtime-rule-interpreter]],
-[[julia-runtime-value-control-tree-helpers]], [[cursor-boundary-lookahead-helper]],
+[[julia-runtime-value-control-tree-helpers]], [[julia-runtime-diagnostics-trace-split]],
+[[cursor-boundary-lookahead-helper]],
 [[dart-runtime-backtrack-cursor-helpers]].

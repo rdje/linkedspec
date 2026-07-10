@@ -135,6 +135,16 @@ productizes the Dart-specific CLI around the existing corpus/runtime command pat
 Dart milestone. Trace parity is unchanged by these staged/user-function/corpus/generated-source/CLI/closeout
 leaves.
 
+## Julia variant trace status
+
+As of `JULIA-BACKEND-PARITY.4.5.0`, Julia diagnostics/trace work is split before
+implementation code and Julia does not yet claim trace parity. `.4.5.1` owns
+stable structured runtime diagnostics, `.4.5.2` owns ordered levels,
+configuration, structured events, traced entrypoints, and stdout/routed-file/
+mirror sinks, `.4.5.3` owns runtime interpreter instrumentation, and `.4.5.4`
+owns final no-drift proof against this chapter. Julia runtime behavior and
+package status remain at the cursor/boundary milestone until those leaves land.
+
 ## Future variant trace parity checklist
 
 Any future LinkedSpec variant must satisfy this checklist before it claims trace parity:

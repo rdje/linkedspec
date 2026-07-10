@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.4.5.0 — split Julia diagnostics trace controls
+
+**Scope:** Planning-only decomposition of Julia runtime diagnostics and trace parity into structured diagnostics,
+trace controls/events/sinks, runtime instrumentation, and final no-drift owners.
+
+**Change:** Converted `.4.5` into a container with `.4.5.1` stable runtime diagnostic payloads, `.4.5.2` ordered
+trace levels/config/events/stdout-route-mirror sinks, `.4.5.3` runtime branch/lifecycle/cursor/boundary events, and
+`.4.5.4` no-drift closeout. Selected `.4.5.1` as the sole active frontier. Julia runtime behavior and package
+status `runtime-cursor-boundary` are unchanged.
+
+**Validation:** mdBook build, memory architecture, task-tree metadata, Knowledge Map generation/check, doctrine,
+and `git diff --check` pass; no Julia package test rerun is required for this documentation-only split.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.4.4 — add Julia runtime cursor controls
 
 **Scope:** Julia explicit cursor stack and anchor rewinds, cursor/input helper reads, non-consuming named-rule

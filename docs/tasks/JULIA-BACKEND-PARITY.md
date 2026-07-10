@@ -316,8 +316,51 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 - ID: `JULIA-BACKEND-PARITY.4.5`
   Status: `active`
   Goal: Implement runtime diagnostics and trace controls.
+  Children: `.4.5.0`, `.4.5.1`, `.4.5.2`, `.4.5.3`, `.4.5.4`
   Acceptance: Julia exposes default-quiet trace controls, event classes, sink behavior, branch/lifecycle trace
     points, and structured errors equivalent to the documented cross-variant trace contract.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.4.5.0`
+  Status: `done`
+  Goal: Split the broad runtime diagnostics/trace-controls leaf into signoff-sized implementation leaves before code.
+  Acceptance: Diagnostic payloads, trace controls/sinks, runtime trace instrumentation, and closeout proof are
+    separately owned so no code slice must carry the whole cross-variant trace contract at once.
+  Verification: `PASS` - split `.4.5` into `.4.5.1` structured runtime diagnostics, `.4.5.2` trace
+    levels/controls/event classes/sinks, `.4.5.3` runtime branch/lifecycle/cursor/source-boundary instrumentation,
+    and `.4.5.4` no-drift closeout. No Julia runtime behavior changed.
+  Commit: `JULIA-BACKEND-PARITY.4.5.0 - split Julia diagnostics trace controls`
+
+- ID: `JULIA-BACKEND-PARITY.4.5.1`
+  Status: `active`
+  Goal: Add Julia runtime structured diagnostic payloads and diagnostic-carrying runtime exceptions.
+  Acceptance: Runtime failures expose stable structured fields for type, stage, owner stage, summary, detail,
+    top rule, rule label, and handler/source attribution without changing successful parse output.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.4.5.2`
+  Status: `pending`
+  Goal: Add Julia trace levels, controls, structured event classes, and stdout/routed-file/mirror sink behavior.
+  Acceptance: Trace controls are default-quiet, available from normal Julia entrypoints, preserve successful parse
+    results, support reset/truncate for routed files, and provide focused tests for level gating and sink routing.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.4.5.3`
+  Status: `pending`
+  Goal: Instrument the Julia runtime interpreter with branch, lifecycle, dispatch, cursor, and boundary events.
+  Acceptance: Traced execution emits structured scopes and decisions for rule dispatch, regex/blind branches,
+    lifecycle blocks, recursion cutoffs, cursor controls, and source boundaries while untraced output is unchanged.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.4.5.4`
+  Status: `pending`
+  Goal: Close Julia runtime diagnostics/trace no-drift.
+  Acceptance: Julia README/CLI status, mdBook trace/runtime/handoff pages, live docs, task-tree index, and
+    Knowledge Map agree on the implemented diagnostics/trace boundary before `.5` staged runtime work begins.
   Verification: `pending`
   Commit: `pending`
 
@@ -420,7 +463,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.4.5` | `active` | Add structured runtime diagnostics and default-quiet trace controls over the now-complete cursor-aware interpreter. |
+| 1 | `JULIA-BACKEND-PARITY.4.5.1` | `active` | Add stable structured runtime diagnostic payloads before trace controls or runtime event instrumentation. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -974,6 +1017,38 @@ Cursor/boundary evidence recorded on 2026-07-10:
   snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `MEMORY.md` advance the frontier
   to `.4.5`.
 
+## `JULIA-BACKEND-PARITY.4.5.0` Diagnostics/Trace Split Result
+
+Planning evidence recorded on 2026-07-10:
+
+- The mdBook trace capability contract requires ordered levels, default-quiet normal entrypoints, structured
+  scopes/decisions/marks/logs/dumps, stdout/routed-file/mirror sinks, routed-file reset, and output preservation.
+- Stable runtime diagnostic payloads are independent of optional trace routing and land first in `.4.5.1`.
+- Trace levels, environment/config controls, event primitives, sinks, and traced entrypoints form one reusable
+  control layer in `.4.5.2`.
+- Runtime rule/regex/dispatch/lifecycle/recursion/cursor/boundary instrumentation depends on that control layer and
+  lands separately in `.4.5.3`.
+- `.4.5.4` owns the final status/mdBook/live-doc/Knowledge Map no-drift proof before staged runtime work.
+- This mirrors the completed Dart split while retaining Julia-native types and I/O ownership; no Julia source or
+  runtime behavior changes in `.4.5.0`.
+
+## `JULIA-BACKEND-PARITY.4.5.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The original `.4.5` acceptance combined stable runtime error payloads, trace
+  controls, sink routing, entrypoint plumbing, runtime branch instrumentation, and final parity documentation in
+  one executable leaf.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Structured errors belong at runtime exception boundaries, trace controls own
+  reusable configuration/events/I/O, instrumentation consumes those controls inside interpreter mechanisms, and
+  no-drift can only run after all three implementation boundaries are green.
+- [x] **FIX** — Converted `.4.5` into a container with `.4.5.1` diagnostics, `.4.5.2` controls/sinks,
+  `.4.5.3` runtime events, and `.4.5.4` closeout; selected `.4.5.1` as the sole active frontier.
+- [x] **ADDRESSED (verified)** — The split maps every parent acceptance item and the mdBook future-variant trace
+  checklist to one implementation or closeout owner without overlap.
+- [x] **NO REGRESSION** — Planning only: no Julia source, package status, or runtime behavior changed; mdBook,
+  memory, Knowledge Map, task-tree, doctrine, and whitespace gates cover the split.
+- [x] **LOCKSTEP** — Task tree/index, roadmaps, README, mdBook status/handoff, Knowledge Map, architecture/live
+  docs, and `MEMORY.md` advance the precise frontier to `.4.5.1`.
+
 ## `JULIA-BACKEND-PARITY.4.2` Runtime Rule Interpreter Result
 
 Rule-interpreter evidence recorded on 2026-07-10:
@@ -1185,6 +1260,8 @@ Rule-interpreter evidence recorded on 2026-07-10:
 - `2026-07-10`: `.4.4` centralizes live/register cursor updates while keeping match anchors and semantic stores
   intact, exposes character-based cursor/input helpers over the UTF-8 code-unit cursor, and seeks named structural
   boundaries without consuming them. The cursor stack remains separate from direct match/entry anchor rewinds.
+- `2026-07-10`: `.4.5.0` splits diagnostics/trace before code: `.4.5.1` owns stable structured diagnostics,
+  `.4.5.2` trace controls/events/sinks, `.4.5.3` runtime instrumentation, and `.4.5.4` no-drift closeout.
 
 ## Open Questions
 
@@ -1195,8 +1272,8 @@ Rule-interpreter evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.4.5`. Cursor controls and non-consuming boundary capture are closed; structured runtime diagnostics
-  and default-quiet trace controls are the next owned implementation boundary.
+- None for `.4.5.1`. The diagnostics/trace container is split; stable structured runtime diagnostics are the next
+  owned implementation boundary.
 
 ## Verification Log
 
@@ -1224,6 +1301,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.5` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Eight focused assertions prove expression-valued blocks, local/rule return boundaries, attached/marker/inline controls, while limits, helper/receiver with-blocks and arity fences, hash/array traversal callbacks, lazy non-aggregate failure, and scoped restoration; total Julia tests pass with 567 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.6` | No runtime behavior change; full Julia `Pkg.test()`; Julia CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Helper/value tests, status, mdBook contracts, live docs, and fact cards agree at 567 assertions; `.3`/`.4.3` metadata and helper-catalog separator style are reconciled, and `.4.4` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.4` | Full Julia `Pkg.test()`; Julia CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Fourteen focused assertions prove explicit save/restore, entry/local rewinds, consume continuation, character-based cursor/input helpers, earliest non-consuming boundary selection, EOF fallback, and unresolved-rule no-op behavior; total Julia tests pass with 581 assertions and `.4.5` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.4.5.0` | No Julia runtime behavior change; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Structured diagnostics, trace controls/events/sinks, runtime instrumentation, and no-drift closeout have separate owners; `.4.5.1` becomes active. |
 
 ## Commit Log
 
@@ -1251,9 +1329,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.4.3.5` | `JULIA-BACKEND-PARITY.4.3.5 - add Julia runtime controls and tree callbacks` | Expression-valued blocks, attached/marker/inline controls, helper/receiver with-blocks, and scoped hash/array tree traversal callbacks; no-drift advances to `.4.3.6`. |
 | `JULIA-BACKEND-PARITY.4.3.6` | `JULIA-BACKEND-PARITY.4.3.6 - close Julia helper value no drift` | Runtime/status/docs/KM no-drift closeout, parent metadata reconciliation, and helper-catalog separator alignment; cursor controls advance to `.4.4`. |
 | `JULIA-BACKEND-PARITY.4.4` | `JULIA-BACKEND-PARITY.4.4 - add Julia runtime cursor controls` | Explicit cursor stack and anchor rewinds, character-based cursor/input helpers, and non-consuming earliest-boundary capture; diagnostics/trace advances to `.4.5`. |
+| `JULIA-BACKEND-PARITY.4.5.0` | `JULIA-BACKEND-PARITY.4.5.0 - split Julia diagnostics trace controls` | Planning-only split into structured diagnostics, trace controls/events/sinks, runtime instrumentation, and no-drift; `.4.5.1` becomes active. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.4.5.0` diagnostics/trace decomposition before implementation code. `.4.5.1` owns
+  stable runtime diagnostic payloads, `.4.5.2` trace levels/config/events/sinks, `.4.5.3` runtime branch/lifecycle/
+  cursor/boundary instrumentation, and `.4.5.4` final no-drift. Runtime behavior and the
+  `runtime-cursor-boundary` package status are unchanged.
 - `2026-07-10`: Completed `.4.4` cursor controls and boundary capture. Julia now supports explicit LIFO
   save/restore, entry/local anchor rewinds, character-based cursor/input helpers, consume-mode continuation from
   rewound positions, and earliest usable non-consuming boundary capture with EOF/unresolved-rule behavior.
