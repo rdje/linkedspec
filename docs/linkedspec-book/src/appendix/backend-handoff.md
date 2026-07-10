@@ -372,7 +372,17 @@ The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
 
-### Julia Backend Scaffold
+### Julia Backend Commands, Embedding, and Status
+
+Julia is green at the accepted interpreter-first boundary: the complete validated corpus executes 99/99 with
+exact checked-in output, full package tests pass with 840 assertions, and package/CLI status is
+`runtime-corpus-full`. The primary product surface is the native `LinkedSpecJulia` module; the Julia CLI and corpus
+runner are thin adapters over the same in-process parser/compiler/runtime path.
+
+The boundary does not claim generated Julia source or broader compile/parser trace parity. Generated-source proof
+is a separate post-interpreter decision under `JULIA-BACKEND-PARITY.7.2`; Julia currently guarantees the
+interpreter path. Runtime diagnostics/tracing are implemented, while the trace chapter records the narrower trace
+scope. `JuliaFormatter` and `JET` are optional local tools rather than parity prerequisites.
 
 `JULIA-BACKEND-PARITY.1.1` through `.4.2` are complete. The local Julia toolchain is Homebrew-managed:
 `/opt/homebrew/bin/julia` reports Julia `1.12.6`, and the official Julia downloads page lists `v1.12.6` as the
@@ -397,7 +407,7 @@ LINKEDSPEC_RUN_JULIA=1 bash tools/run_ci_local.sh
 
 `LINKEDSPEC_JULIA_CMD` and `LINKEDSPEC_JULIA_DEPOT_PATH` select a non-default executable and writable depot.
 
-The current Julia package scaffold is:
+The current Julia package layout is:
 
 ```text
 julia/
@@ -416,14 +426,17 @@ julia/
   src/action/ActionContracts.jl
   src/action/FunctionRegistry.jl
   src/compiler/CompiledSpec.jl
+  src/parser/StagedParserRegistry.jl
+  src/parser/UserFunctionDefinitionParser.jl
   src/runtime/Matching.jl
   src/runtime/Interpreter.jl
+  src/trace/Trace.jl
   bin/linkedspec_julia.jl
   bin/corpus_runner.jl
   test/runtests.jl
 ```
 
-The first command surface is:
+The direct command surface is:
 
 ```bash
 julia --project=julia -e 'import Pkg; Pkg.instantiate()'
@@ -611,9 +624,21 @@ Native callers can use the source-driven composition directly:
 ```julia
 using LinkedSpecJulia
 
+spec_source = raw"""
+fn normalize(value) { return(trim(value)) }
+
+Top::
+ /x/
+ E {
+   return(normalize(" ok "))
+ }
+"""
+
 spec = parse_spec_with_staged_user_function_definitions(spec_source)
 compiled = compile_spec(spec)
-result = runtime_execute(LinkedSpecRuntimeEngine(compiled), input_source)
+result = runtime_execute(LinkedSpecRuntimeEngine(compiled), "x")
+
+println(result.output)
 ```
 
 `parser_spec_source = ...` may be supplied when an embedding application keeps an alternate compatible definition

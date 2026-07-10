@@ -736,15 +736,19 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Children: `.7.1`, `.7.2`, `.7.3`
 
 - ID: `JULIA-BACKEND-PARITY.7.1`
-  Status: `active`
+  Status: `done`
   Goal: Document Julia backend usage, status, and parity boundaries in the mdBook.
   Acceptance: Book pages explain how to run Julia, what parity gate it satisfies, and any remaining limitations in
     variant-neutral terms.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - the backend handoff now presents Julia as a mature native in-memory backend rather than a
+    scaffold, documents focused/direct/opt-in commands, gives self-contained rule-only and top-level-function
+    embedding examples, names the 99/99 `runtime-corpus-full` boundary, and distinguishes interpreter parity from
+    generated-source and compile/parser trace claims. The public API table/example, trace status, project status,
+    local verification page, Julia README, and Knowledge Map agree. mdBook and governance checks pass.
+  Commit: `JULIA-BACKEND-PARITY.7.1 - document Julia usage and parity boundary`
 
 - ID: `JULIA-BACKEND-PARITY.7.2`
-  Status: `pending`
+  Status: `active`
   Goal: Decide generated Julia source as a post-interpreter proof lane.
   Acceptance: Generated Julia source is either implemented against the already-green interpreter model or
     deliberately deferred with clear prerequisites; it is not the primary parity gate.
@@ -787,7 +791,38 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 22 | `JULIA-BACKEND-PARITY.6.2.5` | `done` | Spec-driven source parsing executes all three routed top-level function fixtures without a raw scanner. |
 | 23 | `JULIA-BACKEND-PARITY.6.3` | `done` | Full manifest order/output is locked at 99/99 and unbounded CLI execution is enabled. |
 | 24 | `JULIA-BACKEND-PARITY.6.4` | `done` | Focused Julia verification is repo-owned and optional shared-CI inclusion preserves SDK independence. |
-| 25 | `JULIA-BACKEND-PARITY.7.1` | `active` | Close public Julia usage, status, and parity-boundary documentation. |
+| 25 | `JULIA-BACKEND-PARITY.7.1` | `done` | Public commands, embedding examples, 99/99 status, and limitations are explicit and aligned. |
+| 26 | `JULIA-BACKEND-PARITY.7.2` | `active` | Decide generated Julia source as a separate post-interpreter proof lane. |
+
+## `JULIA-BACKEND-PARITY.7.1` Public Documentation Result
+
+Documentation evidence recorded on 2026-07-10:
+
+- The mdBook backend handoff now calls the mature surface “Julia Backend Commands, Embedding, and Status,” lists
+  the complete package layout, and documents focused/direct/optional-shared-CI commands.
+- Public API examples show rule-only `parse_spec(...)` and source-driven
+  `parse_spec_with_staged_user_function_definitions(...)` flowing through native compile/runtime APIs without a
+  CLI, subprocess, temporary file, or raw Julia source scanner.
+- Status text names the accepted interpreter-first boundary: 99/99 exact corpus outputs, 840 assertions, and
+  `runtime-corpus-full`.
+- Limitations are precise: generated Julia source is a separate `.7.2` decision; runtime tracing does not claim
+  broader compile/parser trace parity; optional formatter/linter tools are not parity prerequisites.
+- All new multiline `.spec` examples use newline statement separation with no trailing line-ending semicolons.
+
+## `JULIA-BACKEND-PARITY.7.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The mdBook had correct mechanisms and commands but still labeled Julia a scaffold,
+  showed one historical trace mechanism label as current package status, and lacked a self-contained native
+  in-memory Julia example plus a concise limitations boundary.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Successive implementation leaves updated status fragments, while the original
+  backend-handoff heading/layout and trace page retained their earlier lifecycle context.
+- [x] **FIX** — Reframed the backend page, completed the package layout, added native examples, and separated the
+  accepted interpreter gate from generated-source/trace/tooling non-claims.
+- [x] **ADDRESSED (verified)** — Book searches and rendered mdBook prove commands, examples, current status, and
+  remaining limitations are present and consistent.
+- [x] **NO REGRESSION** — No parser/compiler/runtime behavior changed; the focused Julia gate remains 840 + 99/99.
+- [x] **LOCKSTEP** — mdBook, Julia README, project status, roadmaps, task/index, Knowledge Map, live docs, and
+  `MEMORY.md` agree; `.7.2` is the sole active Julia frontier.
 
 ## `JULIA-BACKEND-PARITY.6.4` Local Verification Result
 
@@ -2465,6 +2500,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.5` | Rule-only failure reproduction; direct `user_function_definition.spec` execution; seven source-driven parser assertions; permanent three-case corpus regression; direct three-case corpus CLI; full Julia tests; CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Spec-driven source parsing returns neutral function nodes and composes existing staging/runtime paths; all three routed fixtures pass exact output, full tests pass with 827 assertions, status is `runtime-corpus-function-shells`, and `.6.3` becomes active without a raw Julia scanner. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.3` | Existing focused manifest/drift/mismatch guards; permanent complete 99-fixture regression; full unbounded corpus CLI; offset-only CLI regression; full Julia tests; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. The atomic library gate and direct CLI both execute all 99 fixtures in order with exact outputs and zero failures; full tests pass with 840 assertions, status is `runtime-corpus-full`, and `.6.4` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.4` | `bash -n tools/run_julia_local.sh tools/run_ci_local.sh`; focused `tools/run_julia_local.sh` with explicit Julia/depot overrides; default `tools/run_ci_local.sh`; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. The focused gate passes 840 package assertions, Julia CLI checks, and 99/99 corpus execution; default shared CI remains core-only unless `LINKEDSPEC_RUN_JULIA=1`, and `.7.1` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.7.1` | Direct execution assertions for both mdBook native examples; mdBook Julia usage/status/limitation searches; focused Julia gate status retained from `.6.4`; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Native in-memory rule/function examples execute exact output; focused/direct/opt-in commands, 99/99 interpreter status, and generated-source/trace/tooling limitations are explicit; `.7.2` becomes active. |
 
 ## Commit Log
 
@@ -2519,9 +2555,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.6.2.5` | `JULIA-BACKEND-PARITY.6.2.5 - execute Julia function shell corpus` | Spec-driven function-definition parsing closes all three routed top-level `fn` fixtures; full-manifest gate advances to `.6.3`. |
 | `JULIA-BACKEND-PARITY.6.3` | `JULIA-BACKEND-PARITY.6.3 - close full Julia corpus gate` | Full ordered library/CLI corpus execution is 99/99 green; verification wiring advances to `.6.4`. |
 | `JULIA-BACKEND-PARITY.6.4` | `JULIA-BACKEND-PARITY.6.4 - wire Julia local verification` | Focused package/CLI/99-fixture gate plus optional shared-CI integration; documentation advances to `.7.1`. |
+| `JULIA-BACKEND-PARITY.7.1` | `JULIA-BACKEND-PARITY.7.1 - document Julia usage and parity boundary` | Public commands, native examples, current 99/99 status, and precise limitations; generated-source decision advances to `.7.2`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.7.1` public Julia documentation. The mdBook now presents the mature native in-memory
+  backend with self-contained rule-only/function examples, focused/direct/opt-in commands, full package layout,
+  99/99 `runtime-corpus-full` status, and explicit generated-source/trace/tooling non-claims. No behavior changed;
+  `.7.2` is active for the separate generated-source decision.
 - `2026-07-10`: Completed `.6.4` local verification wiring. Added configurable `tools/run_julia_local.sh` over
   package tests, Julia CLI checks, and full 99-fixture execution. `tools/run_ci_local.sh` remains core-only by
   default and includes Julia only under `LINKEDSPEC_RUN_JULIA=1`. Focused verification passes 840 assertions and

@@ -21,7 +21,8 @@ value/store/capture behavior landed in `.4.3.1`, and string/scalar plus numeric 
 array helper and mutation boundary landed in `.4.3.3`, and hash helper and mutation behavior landed in `.4.3.4`;
 `.4.3.5` landed value/control/block/callback execution, and `.4.3.6` closed final helper/value no-drift. Cursor,
 diagnostic/trace, staged-function, shipped-corpus, function-shell, and full-corpus work through `.6.3` has since
-landed; `.6.4` now owns the focused optional-SDK verification gate, and `.7.1` is active.
+landed; `.6.4` owns the focused optional-SDK verification gate, `.7.1` closes public documentation, and `.7.2` is
+active for the separate generated-source decision.
 
 ## Commands
 
@@ -187,7 +188,8 @@ outputs, and zero failures. The shipped window is permanently 31/31. `.6.2.5` ad
 executes the checked-in definition spec over source, normalizes neutral nodes, and reuses staged body parsing. All
 three routed top-level function fixtures pass. `.6.3` adds one atomic complete-corpus regression and enables
 unbounded CLI execution: the manifest runs 99/99 green in exact order. Full tests pass with 840 assertions, status
-is `runtime-corpus-full`, `.6.4` owns the focused optional-SDK gate, and `.7.1` is active for public documentation.
+is `runtime-corpus-full`, `.6.4` owns the focused optional-SDK gate, `.7.1` closes public documentation, and `.7.2`
+owns the separate generated-source decision.
 
 Library example:
 

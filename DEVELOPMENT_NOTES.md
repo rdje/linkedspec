@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.7.1 — document product boundaries, not chronology):
+  A backend handoff page should lead with what users can rely on now, not retain the lifecycle label from when the
+  directory was first scaffolded. Julia's public story is native source → parse/stage → compile → runtime value,
+  with CLI/corpus as adapters and 99/99 as the accepted interpreter proof. Mechanism status labels remain useful
+  only when dated to their boundary. Generated-source and broader trace claims are independent axes, so naming
+  them as non-claims is more accurate than letting “parity” imply them silently.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.4 — optional SDK verification boundary):
   Backend gates should be canonical without making every core checkout install every SDK. Julia now mirrors the
   Dart pattern: one focused repo-owned script is authoritative for backend changes, and the shared local gate opts

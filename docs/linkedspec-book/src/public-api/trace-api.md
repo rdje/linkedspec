@@ -165,10 +165,11 @@ parse-scope routing, and result preservation. `.4.5.3` adds `julia_runtime:rule`
 scopes; regex, child-dispatch, and recursion decisions; lifecycle marks; all
 four cursor-control transitions; and source-boundary marks/decisions. Traced
 and untraced action, blind, and recursion paths preserve identical results.
-Package status is `runtime-trace-events`; `.4.5.4` confirms that this scoped
-runtime status, the controls/events/sinks, and the documented event families
-are no-drift. `.5.1` then advances to staged registry execution without
-changing the trace claim.
+Package status was `runtime-trace-events` at the `.4.5.4` trace boundary; that
+mechanism label is historical, not the current overall backend status. The
+current Julia package/CLI status is `runtime-corpus-full` after the 99/99
+interpreter gate. Later staged, corpus, and verification leaves do not broaden
+the narrower runtime-trace claim described here.
 
 ## Future variant trace parity checklist
 

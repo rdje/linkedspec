@@ -26,6 +26,33 @@ parser, compiler, runtime, or `.spec` semantics unavailable to native library ca
 Backend tests therefore call the library directly; CLI and corpus tests add integration
 proof but do not replace host-process API proof.
 
+### Julia in-memory example
+
+Rule-only `.spec` source stays entirely in the Julia process:
+
+```julia
+using LinkedSpecJulia
+
+spec_source = raw"""
+Top::
+ /x/
+ E {
+   return("ok")
+ }
+"""
+
+spec = parse_spec(spec_source)
+compiled = compile_spec(spec)
+result = runtime_parse(LinkedSpecRuntimeEngine(compiled), "x")
+
+println(result.output)
+```
+
+When the source contains top-level `fn` definitions, replace `parse_spec(spec_source)` with
+`parse_spec_with_staged_user_function_definitions(spec_source)`. That entrypoint executes the shared checked-in
+function-definition spec and staged body parser in memory; it does not invoke the CLI or raw-scan Julia source.
+Both paths feed the same compiled/runtime API.
+
 ## `LinkedSpec::Get(...)`
 
 `Get(...)` is the inline compile path. It works from in-memory spec content and is convenient for direct parser construction, experiments, and tooling flows.

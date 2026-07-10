@@ -45,5 +45,5 @@ LINKEDSPEC_RUN_JULIA=1 bash tools/run_ci_local.sh
 That boundary keeps ordinary core verification available on machines without Julia. A Julia-capable checkout has
 one explicit opt-in that composes the focused gate without duplicating its commands.
 
-Related facts: [[julia-full-corpus-gate]], [[julia-backend-scaffold-package]],
+Related facts: [[julia-mdbook-usage-status]], [[julia-full-corpus-gate]], [[julia-backend-scaffold-package]],
 [[dart-local-verification-gate]], [[native-in-memory-backend-contract]], [[phase0-regression-structure]].

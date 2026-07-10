@@ -136,8 +136,9 @@ Top-level directories and files:
     31/31 exact outputs. `.6.2.5` then executes `specs/user_function_definition.spec` over top-level `fn` source,
     feeds its neutral nodes through the existing staged body parser, and closes all three routed fixtures without
     a raw Julia scanner. `.6.3` now locks the complete manifest as one ordered 99/99 exact-output gate and enables
-    unbounded CLI execution. Full tests pass with 840 assertions, status is `runtime-corpus-full`, and `.6.4` is
-    active for local verification wiring.
+    unbounded CLI execution. Full tests pass with 840 assertions and status is `runtime-corpus-full`. `.6.4` adds
+    focused optional-SDK verification, `.7.1` closes public usage/status/limitation docs, and `.7.2` is active for
+    the separate generated-source decision.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

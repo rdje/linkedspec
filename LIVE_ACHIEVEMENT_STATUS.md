@@ -7,8 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.1 — document Julia usage and parity boundary**
+  (DONE — public commands, native examples, status, and limitations are aligned; `.7.2` is active).
+
+  **Change:** Reframed the mdBook Julia handoff from scaffold to mature native backend; added self-contained
+  rule-only and top-level-function in-memory examples; corrected historical trace status; documented focused,
+  direct, and opt-in commands plus generated-source/trace/tooling non-claims.
+
+  **Boundary:** No behavior changed. The accepted interpreter gate remains 840 assertions and 99/99 exact outputs
+  at `runtime-corpus-full`; generated Julia source is a separate `.7.2` decision.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.6.4 — wire Julia local verification**
-  (DONE — focused Julia gate and optional shared-CI inclusion are green; `.7.1` is active).
+  (DONE — focused Julia gate and optional shared-CI inclusion are green; `.7.1` has since closed docs).
 
   **Change:** Added `tools/run_julia_local.sh` over package tests, Julia CLI checks, and the full corpus. The Julia
   binary/depot are configurable. Shared local CI remains core-only unless `LINKEDSPEC_RUN_JULIA=1` is set.

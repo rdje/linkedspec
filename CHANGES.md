@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.7.1 — document Julia usage and parity boundary
+
+**Scope:** mdBook backend handoff, public native API, trace status, project status, local verification page, Julia
+README, Knowledge Map, roadmaps/tasks/live docs, and resume pointer.
+
+**Change:** The public book now presents Julia as a mature native in-memory backend rather than a scaffold. It adds
+self-contained rule-only and top-level-function embedding examples, completes the package layout, retains focused/
+direct/optional-shared-CI commands, and names the accepted 99/99 `runtime-corpus-full` interpreter boundary.
+Historical `runtime-trace-events` wording is explicitly scoped to its old mechanism boundary.
+
+**Limitations and validation:** Generated Julia source remains a separate `.7.2` decision; current tracing covers
+runtime controls/events/sinks and interpreter instrumentation, not compile/parser trace parity; JuliaFormatter/JET
+remain optional tooling. No behavior changed. mdBook, Knowledge Map, memory, task, doctrine, and whitespace checks
+pass; the previously verified focused gate remains 840 assertions plus 99/99.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.4 — wire Julia local verification
 
 **Scope:** Repo-owned focused Julia gate, optional shared-CI integration, configurable executable/depot handling,

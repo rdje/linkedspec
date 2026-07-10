@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.6.4` — focused package/CLI/99-fixture verification is repo-owned;
-  shared local CI includes it only under `LINKEDSPEC_RUN_JULIA=1`.
-- prior_leaf: `JULIA-BACKEND-PARITY.6.3` — atomic ordered library/CLI corpus execution passes 99/99; full tests
-  pass with 840 assertions and status is `runtime-corpus-full`.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.7.1` — public native usage, focused/direct commands, 99/99 status,
+  and generated-source/trace/tooling limitations are aligned in the mdBook.
+- prior_leaf: `JULIA-BACKEND-PARITY.6.4` — focused package/CLI/99-fixture verification is repo-owned; shared local
+  CI includes it only under `LINKEDSPEC_RUN_JULIA=1`.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.6.4 - wire Julia local verification`; previous committed HEAD is
-  `06a9c06e JULIA-BACKEND-PARITY.6.3 - close full Julia corpus gate`.
+  `JULIA-BACKEND-PARITY.7.1 - document Julia usage and parity boundary`; previous committed HEAD is
+  `46da4dcb JULIA-BACKEND-PARITY.6.4 - wire Julia local verification`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; its frontier after this commit is `.7.1`.
-- next_action: close public Julia usage/status/parity-boundary documentation under `JULIA-BACKEND-PARITY.7.1`.
+- active_work_unit: `JULIA-BACKEND-PARITY`; its frontier after this commit is `.7.2`.
+- next_action: decide generated Julia source as a post-interpreter proof lane under `JULIA-BACKEND-PARITY.7.2`.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
@@ -49,5 +49,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: `.6.4` is verified and ready for its prepared commit; none expected
-  afterward. Do not advance to `.7.1` until the tree is clean.
+- blockers: none. in_flight_uncommitted: `.7.1` is verified and ready for its prepared commit; none expected
+  afterward. Do not advance to `.7.2` until the tree is clean.
