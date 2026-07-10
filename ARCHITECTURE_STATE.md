@@ -5,11 +5,17 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.2.3` adds Julia frontend validation.
+  `julia/src/spec/Validator.jl` exposes `validate_spec(spec; strict_syntax=false)` and
+  `SpecValidationException`, checking top-rule presence, duplicate labels/functions, user-function registry shape,
+  raw fallback lines, mixed edge families, grouped action blocks, undefined references, regex-slot bounds, regex
+  structure, and strict unused-rule behavior. Tests validate all checked-in specs and rule-only corpus specs.
+  Top-level `fn` shells remain `JULIA-BACKEND-PARITY.2.4`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.2.2` adds Julia source parsing.
   `julia/src/spec/Parser.jl` exposes `parse_spec(source)` and `SpecParseException`, producing the `.2.1` source AST
   types for rule headers/modes, regex slots, lifecycle blocks, action/blind-call edges, fluent continuations,
   markers, comments, and block boundaries. Tests parse all 21 checked-in `specs/*.spec` files and rule-only corpus
-  specs. Frontend validation and strict syntax remain `JULIA-BACKEND-PARITY.2.3`; top-level `fn` shells remain
+  specs. Frontend validation has since landed in `JULIA-BACKEND-PARITY.2.3`; top-level `fn` shells remain
   `JULIA-BACKEND-PARITY.2.4`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.2.1` adds Julia source AST/data types.
   `julia/src/spec/Ast.jl` defines data records and JSON projection for spec files, function definitions, source

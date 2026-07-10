@@ -114,12 +114,15 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.2.2 - add Julia source spec parser`
 
 - ID: `JULIA-BACKEND-PARITY.2.3`
-  Status: `pending`
+  Status: `done`
   Goal: Implement frontend validation and strict syntax behavior.
   Acceptance: Validation rejects duplicate labels/functions, mixed edge families, undefined references, malformed
     regexes, malformed helper/function definitions, and strict-syntax warnings as documented.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `Pkg.test()` covers top-rule presence, duplicate labels/functions, function registry
+    collisions and reserved params, raw fallback lines, mixed edge families, grouped action targets, undefined
+    references, regex slot bounds, regex structure, strict unused-rule behavior, all checked-in specs, and rule-only
+    corpus specs.
+  Commit: `JULIA-BACKEND-PARITY.2.3 - add Julia frontend validation`
 
 - ID: `JULIA-BACKEND-PARITY.2.4`
   Status: `pending`
@@ -313,7 +316,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.2.3` | `pending` | Validate parsed source ASTs before helper/action lowering or runtime behavior. |
+| 1 | `JULIA-BACKEND-PARITY.2.4` | `pending` | Consume top-level `fn` shells through the spec-defined function-definition owner before ActionIR work. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -419,6 +422,21 @@ Source parser evidence recorded on 2026-07-10:
 - Parser smoke tests cover all 21 checked-in `specs/*.spec` files plus rule-only corpus `input.spec` files. Top-level
   `fn` corpus shells remain intentionally skipped until `.2.4` consumes `specs/user_function_definition.spec`.
 
+## `JULIA-BACKEND-PARITY.2.3` Source Validation Result
+
+Source validation evidence recorded on 2026-07-10:
+
+- `julia/src/spec/Validator.jl` adds `validate_spec(spec; strict_syntax=false)` and
+  `SpecValidationException`.
+- The validator checks top-rule presence, duplicate rule labels, duplicate user function names, user-function
+  registry collisions with rule labels / runtime symbols / lifecycle markers / ActionIR helper-control names, invalid
+  function names and params, parameter duplicates, arity mismatches, raw fallback lines, mixed action/blind-call edge
+  families, grouped action-edge targets without a shared block, undefined edge targets, target regex-slot bounds,
+  structural regex errors, and strict unused-rule behavior.
+- Focused tests mirror the Dart frontend validation cases and add coverage for Julia arity mismatch handling.
+- Validation smoke tests cover all 21 checked-in `specs/*.spec` files and rule-only corpus `input.spec` files while
+  top-level `fn` corpus shells remain intentionally skipped until `.2.4`.
+
 ## Decisions
 
 - `2026-07-09`: Julia follows Dart in the ADR `0021` backend rollout order. `FUTURE-PARITY-BACKLOG.1.2`
@@ -443,6 +461,9 @@ Source parser evidence recorded on 2026-07-10:
 - `2026-07-10`: `.2.2` follows the Dart source-parser boundary for core rule parsing. It deliberately does not add
   frontend validation, function-shell projection, helper/action parsing, compilation, runtime execution, or corpus
   `--execute`.
+- `2026-07-10`: `.2.3` follows the Dart frontend-validator boundary for parsed source ASTs. It deliberately does
+  not parse top-level `fn` shells, lower helper/action code, compile specs, execute runtime behavior, or enable
+  corpus `--execute`.
 
 ## Open Questions
 
@@ -453,7 +474,8 @@ Source parser evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.2.3`. Julia now parses source into the AST model; frontend validation is the next owned boundary.
+- None for `.2.4`. Julia now parses and validates rule source; top-level `fn` shell projection is the next owned
+  boundary.
 
 ## Verification Log
 
@@ -465,6 +487,7 @@ Source parser evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.1.3` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.instantiate()'`; `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; `julia --project=julia julia/bin/linkedspec_julia.jl corpus --corpus rust/linkedspec-runtime/tests/corpus`; `julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus`; `julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute` returns code `2`; `git diff --check`; memory architecture, task-tree metadata, Knowledge Map, doctrine, and mdBook checks. | PASS. Julia validates the 99-fixture manifest and drift/file/JSON guards without parser/runtime execution; `--execute` remains unavailable. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.2.1` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia source AST/data types round-trip through JSON over spec files, function definitions, staged parse jobs, rule modes, body elements, edges, and fluent calls. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.2.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia source parser tests cover focused syntax fixtures, all 21 checked-in specs, and rule-only corpus specs; total Julia tests pass. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.2.3` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia source validation tests cover Dart parity validator cases, all 21 checked-in specs, and rule-only corpus specs; total Julia tests pass. |
 
 ## Commit Log
 
@@ -476,9 +499,15 @@ Source parser evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.1.3` | `JULIA-BACKEND-PARITY.1.3 - add Julia corpus manifest IO` | Manifest IO/drift guard scaffold; `.1` foundation container closes. |
 | `JULIA-BACKEND-PARITY.2.1` | `JULIA-BACKEND-PARITY.2.1 - define Julia frontend AST data types` | Source AST/data model and JSON projection; parser implementation advances to `.2.2`. |
 | `JULIA-BACKEND-PARITY.2.2` | `JULIA-BACKEND-PARITY.2.2 - add Julia source spec parser` | Source parser for rule paragraphs and shipped-spec/corpus parser smoke; validation advances to `.2.3`. |
+| `JULIA-BACKEND-PARITY.2.3` | `JULIA-BACKEND-PARITY.2.3 - add Julia frontend validation` | Source AST validation and strict-syntax checks; function-shell projection advances to `.2.4`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.2.3` frontend validation. `julia/src/spec/Validator.jl` now validates parsed source
+  ASTs for top-rule presence, duplicate labels/functions, function registry collisions, malformed raw/body regex
+  structure, edge family consistency, undefined references, target slot bounds, and strict unused-rule behavior.
+  `Pkg.test()` covers focused validation fixtures, all checked-in specs, and rule-only corpus specs. `.2.4` owns
+  top-level `fn` shell projection through `specs/user_function_definition.spec`.
 - `2026-07-10`: Completed `.2.2` source parser. `julia/src/spec/Parser.jl` now parses core `.spec` rule
   paragraphs into the `.2.1` AST types, including headers/modes, regex slots, lifecycle blocks, action/blind-call
   edges, fluent continuations, markers, comments, and block boundaries. `Pkg.test()` covers focused parser fixtures,

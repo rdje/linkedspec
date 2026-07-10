@@ -14,6 +14,15 @@ function _throws_corpus_message(call, needle)
     return false
 end
 
+function _throws_validation_message(call, needle)
+    try
+        call()
+    catch error
+        return error isa SpecValidationException && occursin(needle, sprint(showerror, error))
+    end
+    return false
+end
+
 function _write_manifest(root, cases; case_count = length(cases), format = 1)
     manifest = Dict(
         "format" => format,
@@ -60,6 +69,26 @@ function _starts_with_top_level_function(source::AbstractString)
     return false
 end
 
+function _spec_with_functions(functions)
+    rule = Rule(
+        header = RuleHeader("Top", true, default_rule_mode(), "", 1),
+        body = [BodyElement(RegexBodyElementKind("x"), "/x/", 2)],
+    )
+    return SpecFile(functions = functions, rules = [rule])
+end
+
+function _function_definition(name, params; arity = length(params))
+    return FunctionDefinition(
+        name = name,
+        params = params,
+        arity = arity,
+        body_source = "return(value)",
+        source = "fn $name($(join(params, ", "))) { return(value) }",
+        source_span = SourceSpan(1, 1),
+        body_span = SourceSpan(1, 1),
+    )
+end
+
 @testset "LinkedSpecJulia scaffold" begin
     @test backend_name() == "julia"
     @test cli_entrypoint() == "julia/bin/linkedspec_julia.jl"
@@ -68,7 +97,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "source-parser"
+    @test status.parity == "source-validator"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -78,7 +107,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: source-parser", String(take!(status_output)))
+    @test occursin("parity: source-validator", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -268,6 +297,104 @@ Top::
     end
     @test parsed_count > 80
     @test skipped_function_shells > 0
+end
+
+@testset "Spec validation" begin
+    valid = parse_spec("Top::\n /a/ -> Child\n\nChild:\n /b/")
+    @test validate_spec(valid) === nothing
+
+    no_top = parse_spec("Rule:\n /a/")
+    @test _throws_validation_message(() -> validate_spec(no_top), "no top rule")
+
+    duplicate = parse_spec("Top::\n /a/\n\nTop:\n /b/")
+    @test _throws_validation_message(() -> validate_spec(duplicate), "duplicate rule label")
+
+    mixed = parse_spec(raw"""
+Top::
+ /a/ -> A
+ /b/ => B
+
+A: /a/
+B: /b/
+""")
+    @test _throws_validation_message(() -> validate_spec(mixed), "mixes action")
+
+    missing = parse_spec("Top::\n /a/ -> Ghost")
+    @test _throws_validation_message(() -> validate_spec(missing), "undefined rule")
+
+    bad_index = parse_spec("Top::\n /a/ -> Child[1]\n\nChild:\n /b/")
+    @test _throws_validation_message(() -> validate_spec(bad_index), "regex slot 1")
+
+    grouped = parse_spec("Top::\n -> A | B\n\nA: /a/\nB: /b/")
+    @test _throws_validation_message(() -> validate_spec(grouped), "grouped action-edge targets")
+
+    raw = parse_spec("Top::\n unsupported helper line")
+    @test _throws_validation_message(() -> validate_spec(raw), "unrecognized body syntax")
+
+    invalid_regex = parse_spec("Top::\n /[invalid/")
+    @test _throws_validation_message(() -> validate_spec(invalid_regex), "invalid regex pattern")
+
+    strict_unused = parse_spec("Top::\n /a/ -> Child\n\nChild:\n /b/")
+    @test validate_spec(strict_unused) === nothing
+    @test _throws_validation_message(() -> validate_spec(strict_unused; strict_syntax = true), "unused")
+    @test _throws_validation_message(() -> validate_spec(strict_unused; strict_syntax = true), "Top")
+
+    recursive_top = parse_spec("Top::\n /a/ -> Top")
+    @test validate_spec(recursive_top; strict_syntax = true) === nothing
+
+    ok_function = _spec_with_functions([_function_definition("normalize", ["value"])])
+    @test validate_spec(ok_function) === nothing
+
+    duplicate_function = _spec_with_functions([
+        _function_definition("normalize", ["value"]),
+        _function_definition("normalize", ["other"]),
+    ])
+    @test _throws_validation_message(() -> validate_spec(duplicate_function), "duplicate user function")
+
+    rule_collision = _spec_with_functions([_function_definition("Top", ["value"])])
+    @test _throws_validation_message(() -> validate_spec(rule_collision), "collides with rule label")
+
+    builtin_collision = _spec_with_functions([_function_definition("trim", ["value"])])
+    @test _throws_validation_message(() -> validate_spec(builtin_collision), "built-in helper")
+
+    invalid_function_name = _spec_with_functions([_function_definition("1bad", ["value"])])
+    @test _throws_validation_message(() -> validate_spec(invalid_function_name), "invalid user function name")
+
+    duplicate_param = _spec_with_functions([_function_definition("normalize", ["value", "value"])])
+    @test _throws_validation_message(() -> validate_spec(duplicate_param), "duplicate parameter")
+
+    reserved_param = _spec_with_functions([_function_definition("normalize", ["ctx"])])
+    @test _throws_validation_message(() -> validate_spec(reserved_param), "parameter 'ctx' is reserved")
+
+    arity_mismatch = _spec_with_functions([_function_definition("normalize", ["value"]; arity = 2)])
+    @test _throws_validation_message(() -> validate_spec(arity_mismatch), "arity")
+
+    spec_files = sort(filter(path -> endswith(path, ".spec"), readdir(joinpath(REPO_ROOT, "specs"); join = true)))
+    @test !isempty(spec_files)
+    for file in spec_files
+        validate_spec(parse_spec(read(file, String)))
+    end
+
+    corpus_specs = String[]
+    for (root, _, files) in walkdir(CORPUS_ROOT)
+        for file in files
+            if file == "input.spec"
+                push!(corpus_specs, joinpath(root, file))
+            end
+        end
+    end
+    sort!(corpus_specs)
+
+    parsed_count = 0
+    for file in corpus_specs
+        source = read(file, String)
+        if _starts_with_top_level_function(source)
+            continue
+        end
+        validate_spec(parse_spec(source))
+        parsed_count += 1
+    end
+    @test parsed_count > 80
 end
 
 @testset "Corpus manifest IO" begin

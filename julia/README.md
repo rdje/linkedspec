@@ -1,13 +1,15 @@
 # LinkedSpec Julia Backend
 
 This directory is the repository-owned Julia backend scaffold. The current status is package and command
-surface, manifest-backed corpus validation, source AST/data types, and core `.spec` source parsing: no frontend
-validation, ActionIR parser, runtime interpreter, or corpus execution semantics are implemented yet.
+surface, manifest-backed corpus validation, source AST/data types, core `.spec` source parsing, and frontend
+source validation: no top-level function-shell projection, ActionIR parser, runtime interpreter, or corpus
+execution semantics are implemented yet.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
-was added by `JULIA-BACKEND-PARITY.2.2`. The active next boundary is `JULIA-BACKEND-PARITY.2.3` for frontend
-validation and strict syntax behavior.
+was added by `JULIA-BACKEND-PARITY.2.2`. Frontend validation and strict syntax behavior were added by
+`JULIA-BACKEND-PARITY.2.3`. The active next boundary is `JULIA-BACKEND-PARITY.2.4` for top-level function-shell
+projection through `specs/user_function_definition.spec`.
 
 ## Commands
 
@@ -46,6 +48,9 @@ The scaffold proves that Julia package metadata, library loading, CLI routing, m
 drift/file guards, and source AST JSON round-tripping exist. `src/spec/Ast.jl` defines spec files, functions,
 source spans, staged parse jobs, rule headers/modes, body element variants, edge targets, and fluent calls.
 `src/spec/Parser.jl` exposes `parse_spec(...)` for rule paragraphs, headers/modes, regex slots, lifecycle blocks,
-action/blind-call edges, fluent continuations, markers, comments, and block boundaries. Later leaves own frontend
-validation, typed helper/action AST, compiled state, runtime interpretation, staged functions, diagnostics,
+action/blind-call edges, fluent continuations, markers, comments, and block boundaries. `src/spec/Validator.jl`
+exposes `validate_spec(...)` for top-rule presence, duplicate labels/functions, user-function registry shape,
+raw body-line rejection, mixed edge-family rejection, grouped action-edge block requirements, undefined edge
+targets, regex-slot bounds, regex structure, and strict unused-rule checks. Later leaves own top-level function
+shell parsing, typed helper/action AST, compiled state, runtime interpretation, staged functions, diagnostics,
 tracing, and corpus execution.

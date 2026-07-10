@@ -27,7 +27,8 @@ The JSON projection intentionally follows the Rust/Dart/mdBook contract, includi
 `julia/test/runtests.jl` round-trips a representative `SpecFile` through JSON, including a function definition,
 staged function-body parse job, bounded AND rule mode, regex/action/code body elements, edge targets, and fluent
 calls. `JULIA-BACKEND-PARITY.2.2` has since added `parse_spec(source)` as the first producer of these rule AST
-types from `.spec` text; frontend validation remains a later leaf.
+types from `.spec` text, and `JULIA-BACKEND-PARITY.2.3` has since added `validate_spec(...)` as the first
+consumer and validator of those parsed source ASTs.
 
-Related facts: [[julia-core-spec-parser]], [[julia-corpus-manifest-io]], [[dart-frontend-ast-json-contract]],
-[[dart-core-spec-parser]], [[text-to-ast-backend-doctrine]].
+Related facts: [[julia-core-spec-parser]], [[julia-frontend-validation]], [[julia-corpus-manifest-io]],
+[[dart-frontend-ast-json-contract]], [[dart-core-spec-parser]], [[text-to-ast-backend-doctrine]].

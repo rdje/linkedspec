@@ -1,12 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.2.3 — Julia frontend validation):
+  Julia now validates parsed source ASTs before helper/action lowering or runtime behavior. `validate_spec(...)`
+  lives in `julia/src/spec/Validator.jl` and checks top-rule presence, duplicate rules/functions, user-function
+  registry collisions and reserved params, raw body fallback lines, mixed action/blind edge families, grouped
+  action-edge block requirements, undefined references, regex-slot bounds, regex structure, and strict unused
+  rules. The testset mirrors the Dart frontend validator cases and validates all checked-in specs plus rule-only
+  corpus specs. Next leaf is `.2.4` for top-level `fn` shell projection through `specs/user_function_definition.spec`.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.2.2 — Julia source parser):
   Julia now parses core `.spec` rule paragraphs into the `.2.1` source AST types. `parse_spec(source)` lives in
   `julia/src/spec/Parser.jl` and covers headers/modes, regex slots, lifecycle blocks, action/blind-call edges,
   fluent continuations, markers, comments, and block boundaries. The focused parser tests also parse all 21
   checked-in `specs/*.spec` files plus rule-only corpus specs, while top-level `fn` shells stay deferred to `.2.4`.
-  Next leaf is `.2.3` for frontend validation and strict syntax behavior.
+  Frontend validation has since landed in `.2.3`.
 
 - 2026-07-10 (JULIA-BACKEND-PARITY.2.1 — Julia source AST data types):
   Julia now has the data-only source AST contract before parser behavior. `julia/src/spec/Ast.jl` defines

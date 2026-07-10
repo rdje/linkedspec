@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.2.3 — add Julia frontend validation
+
+**Scope:** Julia source-AST validation, package exports/status, focused validation tests, README, task-tree
+frontier update, roadmap/task-tree index alignment, mdBook status/handoff text, Knowledge Map, architecture
+snapshot, live docs, and resume pointer.
+
+**Change:** Added `julia/src/spec/Validator.jl` with `validate_spec(spec; strict_syntax=false)` and
+`SpecValidationException`. The validator checks top-rule presence, duplicate rule labels, duplicate/function
+registry records, user-function name/parameter reservations, raw body fallback lines, mixed action/blind edge
+families, grouped action-edge target blocks, undefined edge targets, target regex-slot bounds, structural regex
+errors, and strict unused-rule detection. The Julia package status now reports `source-validator`.
+
+**Validation:** `Pkg.test()` passes with 252 tests, including 23 source-validator tests over the Dart parity
+validation cases, all 21 checked-in `specs/*.spec` files, and rule-only corpus `input.spec` files. Commit-time
+docs/governance validation covers mdBook, memory architecture, task-tree metadata, Knowledge Map, doctrine, and
+`git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.2.2 — add Julia source spec parser
 
 **Scope:** Julia source `.spec` parser, package exports/status, focused parser tests, README, task-tree frontier

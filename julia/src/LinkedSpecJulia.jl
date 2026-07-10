@@ -29,6 +29,7 @@ export backend_name,
     SourceSpan,
     SpecAstException,
     SpecParseException,
+    SpecValidationException,
     SpecFile,
     SplitMarkerBodyElementKind,
     StagedParseJob,
@@ -45,18 +46,20 @@ export backend_name,
     run_cli,
     run_corpus_runner,
     top_rule,
-    to_json
+    to_json,
+    validate_spec
 
 const BACKEND_NAME = "julia"
 const PACKAGE_NAME = "LinkedSpecJulia"
 const PACKAGE_VERSION = v"0.1.0"
 const CLI_ENTRYPOINT = "julia/bin/linkedspec_julia.jl"
 const CORPUS_RUNNER_ENTRYPOINT = "julia/bin/corpus_runner.jl"
-const PARITY_STATUS = "source-parser"
+const PARITY_STATUS = "source-validator"
 
 include("corpus/CorpusManifest.jl")
 include("spec/Ast.jl")
 include("spec/Parser.jl")
+include("spec/Validator.jl")
 include("cli/LinkedSpecJuliaCli.jl")
 
 backend_name() = BACKEND_NAME

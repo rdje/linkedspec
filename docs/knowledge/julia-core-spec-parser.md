@@ -26,8 +26,9 @@ edges, attached `when`/`otherwise` blocks, compact lifecycle fluent chains, mult
 braces inside code blocks, raw fallback lines, all 21 checked-in `specs/*.spec` files, and rule-only corpus
 `input.spec` files.
 
-This is source parsing only. Frontend validation and strict syntax remain `JULIA-BACKEND-PARITY.2.3`; top-level
-function-shell projection through `specs/user_function_definition.spec` remains `JULIA-BACKEND-PARITY.2.4`.
+This is source parsing only. Frontend validation and strict syntax have since landed in
+`JULIA-BACKEND-PARITY.2.3`; top-level function-shell projection through `specs/user_function_definition.spec`
+remains `JULIA-BACKEND-PARITY.2.4`.
 
-Related facts: [[julia-frontend-ast-json-contract]], [[dart-core-spec-parser]],
+Related facts: [[julia-frontend-ast-json-contract]], [[julia-frontend-validation]], [[dart-core-spec-parser]],
 [[julia-corpus-manifest-io]], [[text-to-ast-backend-doctrine]].
