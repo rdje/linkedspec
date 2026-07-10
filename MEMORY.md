@@ -18,14 +18,14 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.1.6.1` — neutral schema-v1 `bytes_hex` inputs materialize exact
-  non-text workspace bytes and reject ambiguous/malformed data before backend launch.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.1.6.0` — ADR `0025` ratifies/splits strict primary UTF-8.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.0` — captures generic final-codeblock argument equivalence and
+  parks canonical design plus `with` disposition without changing the active implementation frontier.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.1.6.1` — neutral `bytes_hex` files make invalid text fixtureable.
 - recent_context: Dart/Julia are 99/99 interpreter-green scoped milestones, not complete public parity; global
   `.1.5`, `.1.6`, and `.3` own current-backend CLI, capability, and generated-source convergence before Lua.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.5.1.6.1 - add neutral hex byte fixtures`; previous committed HEAD is
-  `a3ee2c63 FUTURE-PARITY-BACKLOG.1.5.1.6.0 - split primary CLI UTF-8 boundary`.
+  `FUTURE-PARITY-BACKLOG.11.0 - capture generic trailing codeblocks`; previous committed HEAD is
+  `35094def FUTURE-PARITY-BACKLOG.1.5.1.6.1 - add neutral hex byte fixtures`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
 - active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.1.6.2` is the sole active PNT leaf.
@@ -34,6 +34,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
+  generic final-codeblock equivalence and `with` disposition are parked in `.11.1`;
   none is the next backend rollout leaf.
 - latest_bootstrap_read: 2026-07-10 read the full roadmap and roadmap-v2, full codebase inventory and active Julia
   source/tests, full mdBook source, README/memory architecture/session bootstrap/COMMIT/task-tree doctrine, active
@@ -45,12 +46,13 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   parser leading-trivia fact, the director's native in-memory multi-backend rationale, four-backend CLI source/
   target audit, public Rust source-emitter export, ADR `0023` exact interface/capability contract, and Julia
   primary CLI argument/loading/execution/canonical JSON/failures/trace, nine direct process families, the precise
-  `runtime-corpus-primary-cli` status, and the 1,017/99 proof.
+  `runtime-corpus-primary-cli` status, the 1,017/99 proof, and the current Perl/Rust/Dart/Julia narrow trailing-block
+  implementations versus the director's four-kind generic final-codeblock model.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1028`**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: `.1.5.1.5` canonical trace/fixtures/local-gate/docs are being verified for
-  their prepared commit; none expected afterward. Do not implement `.1.5.2` until the tree is clean.
+- blockers: none. in_flight_uncommitted: `.11.0` planning capture is being verified for commit; no behavior code.
+  Resume `.1.5.1.6.2` after clean handoff. Do not implement `.1.5.2` until the Perl UTF-8 closeout is committed.

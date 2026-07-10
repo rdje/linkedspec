@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.11.0` captures a correction to the closed trailing-block MVP.
+  Current Perl/Rust/Dart/Julia runtimes support named `with` and tree-traversal block surfaces; Lua is absent, and
+  generic attached/parenthesized equivalence is not implemented. The intended model has four object/value kinds—
+  scalar, array, harray/hash, and codeblock—and lets a callable signature accept a final codeblock so
+  `call(args) { block }` and `call(args, { block })` normalize identically. Parked `.11.1` owns canonical AST/IR,
+  evaluation/diagnostics/parity, terminology, and whether `with` remains an ordinary helper or is removed.
+  Active implementation remains `.1.5.1.6.2`; this capture changes no runtime behavior.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.1` extends neutral manifest schema version 1 with exact
   `bytes_hex` input-file materialization. Exactly one checked-in source or non-empty lowercase even hex is allowed;
   raw workspace bytes and malformed/ambiguous pre-launch rejection are focused-locked. The existing 53 cases are

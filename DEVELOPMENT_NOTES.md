@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.11.0 — model trailing braces as syntax, not helper semantics):
+  A parser-level special case for `with` conflates two layers. Codeblock is a language value kind; a callable
+  signature decides whether it accepts that kind as its final argument, while trailing braces are only alternate
+  syntax for the same argument. Canonicalize `call(args) { block }` and `call(args, { block })` before contract
+  validation so helpers, user functions, receiver methods, and every backend share one AST/IR and diagnostic path.
+  The current named `with` and traversal implementations remain factual compatibility surfaces until `.11.1`
+  decides migration/removal; do not delete `with` from a planning clarification alone.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.6.1 — represent invalid text as explicit data):
   A byte-exact cross-backend fixture should not depend on an opaque repository binary. Add a validated hex source
   beside ordinary checked-in files, keep the two mutually exclusive, materialize through the same raw workspace

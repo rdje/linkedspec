@@ -4084,6 +4084,12 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
     oracle fixture, `.14.4` shipped receiver-method form `.with() { ... }` and the 95th oracle fixture, and `.14.5`
     closed roadmap/mdBook/Knowledge/live-doc/task-tree/oracle drift without parser/runtime behavior change.
   Commit: `SPEC-FORMAT-TERSE.14.5 - close trailing block drift`
+  Supersession note: Director clarification on 2026-07-10 establishes codeblock as the fourth object/value kind
+    beside scalar, array, and harray, with `call(args) { block }` equivalent to `call(args, { block })` whenever a
+    helper, user function, or receiver method accepts a final codeblock. The `.14` implementation remains accurate
+    current-behavior history but its `with`-first, non-parenthesized abstraction is too narrow. Corrective design,
+    every-backend parity, and the decision to retain or remove `with` are owned by
+    `FUTURE-PARITY-BACKLOG.11.1`; no behavior changed in capture leaf `.11.0`.
 
 - ID: `SPEC-FORMAT-TERSE.14.1`
   Status: `done` (2026-07-07)

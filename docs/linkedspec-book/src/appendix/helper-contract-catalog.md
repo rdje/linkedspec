@@ -103,8 +103,9 @@ dispatch rule.
 
 - **Signature**: `with(value?: expr) { block }`; receiver form `receiver.with() { block }`
 - **Returns**: the immediate block result.
-- **Backend status**: Perl reference and Rust interpreter support are current for helper form and receiver form.
-  Bare `with { ... }` and explicit receiver `.with(value) { ... }` are not current portable surfaces yet.
+- **Backend status**: Perl, Rust, Dart, and Julia support the current helper and receiver forms. Lua is not yet
+  implemented. Bare `with { ... }`, explicit receiver `.with(value) { ... }`, and the equivalent parenthesized
+  final-codeblock spelling `with(value, { ... })` are not current portable surfaces.
 - **Behavior**: Helper form evaluates the optional value argument, binds scoped scalar `value` while the trailing
   block executes, restores any surrounding `value` binding afterward, and yields the block result. `with() { ... }`
   binds `value` to `undef`. Receiver form evaluates the receiver first, binds that receiver value as scoped
@@ -123,6 +124,12 @@ dispatch rule.
   - `return(" x ".with() { return(cat(value, "!")) }.trim())` yields `"x !"`.
   - `return(" a-b ".trim().with() { return(value.split("-")) }.count())` yields `2`.
   - `set(value, "outer"); return(array(with("inner") { return(value) }, value))` yields `["inner", "outer"]`.
+
+> **Corrective direction:** `with` is currently a special-cased MVP, not the final syntax abstraction. The language
+> model has scalar, array, harray/hash, and codeblock values. A block-taking callable should declare a final
+> codeblock parameter, after which `call(args) { block }` and `call(args, { block })` normalize to the same call on
+> helper, user-function, and receiver-method surfaces. Generic parsing/validation and the decision to retain or
+> remove `with` are parked under `FUTURE-PARITY-BACKLOG.11.1`; do not infer that equivalence from current behavior.
 
 ## 1. Working Variables and Setup
 

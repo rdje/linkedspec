@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`.1.5.1.6.1` adds neutral hex-byte fixtures; `.1.5.1.6.2` active; `.10.1` parked).
+- Last updated: `2026-07-10` (`.11.0` captures the trailing-codeblock correction; `.1.5.1.6.2` remains active; `.11.1` parked).
 - Owner: repo-local workflow
 
 ## Goal
@@ -26,7 +26,7 @@ before implementation.
 
 ## Acceptance Criteria
 
-- The ten backlog directions are represented as owned task-tree lanes.
+- The eleven backlog directions are represented as owned task-tree lanes.
 - The backend lane schedules Dart, Julia, and Lua in that order, all with full parity goals.
 - Every backend is primarily a native in-memory library for its host language. Variant CLIs are secondary thin
   adapters and may not become the only complete product surface or own CLI-only semantics.
@@ -40,6 +40,9 @@ before implementation.
   dispatch semantics.
 - Deep semantic introspection is recorded as a first-class, backend-neutral in-memory API direction with a thin
   MCP projection; backend IR must not leak into or fragment the public semantic model.
+- The trailing-codeblock correction records `codeblock` alongside scalar, array, and harray as a language value
+  kind; for callables whose signature accepts a final codeblock, `call(args) { ... }` and
+  `call(args, { ... })` must be equivalent on helper, user-function, and receiver-method surfaces in every variant.
 - The central task-tree index points at the current frontier.
 - ADR, roadmap, mdBook, Knowledge Map, and live docs no longer contradict the backend order or
   Lua adoption decision.
@@ -50,7 +53,7 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG`
   Status: `active`
   Goal: Own the future parity backlog after the closed language-reference/terse-format trees.
-  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`, `.10`
+  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`, `.10`, `.11`
 
 - ID: `FUTURE-PARITY-BACKLOG.0`
   Status: `done`
@@ -463,6 +466,42 @@ before implementation.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `FUTURE-PARITY-BACKLOG.11`
+  Status: `active`
+  Goal: Correct trailing code blocks from the narrow `with` MVP to the language's generic final-codeblock argument model.
+  Children: `.11.0`, `.11.1`
+  Acceptance: The director's four-kind model—scalar, array, harray, and codeblock—is durable; a callable signature,
+    not a parser hard-code for a particular helper name, decides whether its final argument may be a codeblock;
+    `call(args) { block }` is semantically equivalent to `call(args, { block })`, including receiver methods and
+    user/helper functions; every implemented and future variant exposes identical parsing, validation, evaluation,
+    diagnostics, and API behavior.
+
+- ID: `FUTURE-PARITY-BACKLOG.11.0`
+  Status: `done`
+  Goal: Audit and capture the director's generic final-codeblock argument correction without changing behavior or
+    pivoting from `.1.5.1.6.2`.
+  Acceptance: Record current Perl/Rust/Dart/Julia behavior, the absent Lua implementation, the contradiction in
+    closed `SPEC-FORMAT-TERSE.14`, the required syntax equivalence, and the explicit design question of retaining
+    `with` as an ordinary block-taking helper versus removing it. Update roadmap/live docs, mdBook, resume pointer,
+    and Knowledge Map; make no parser/runtime code change; keep `.1.5.1.6.2` active.
+  Verification: **PASS 2026-07-10.** Knowledge Map generation/check, memory architecture, task-tree metadata,
+    doctrine, whitespace, mdBook build, and generated-book cleanup pass. LinkedSpec lowering probes plus current
+    task/source/test facts establish the narrow existing surface and parenthesized-form rejection. No parser,
+    compiler, runtime, fixture, or backend behavior changed; `.1.5.1.6.2` remains active.
+  Commit: `FUTURE-PARITY-BACKLOG.11.0 - capture generic trailing codeblocks`
+
+- ID: `FUTURE-PARITY-BACKLOG.11.1`
+  Status: `pending`
+  Goal: Design and split generic final-codeblock argument parity before implementation.
+  Acceptance: Define the four value kinds precisely, including whether public terminology is `harray` or the
+    current `hash`; define the callable-signature declaration for final `codeblock`; make attached and
+    parenthesized forms one canonical AST/IR shape; specify evaluation timing, block-local return, lexical/runtime
+    context, receiver behavior, arity and non-final diagnostics, and hash-literal disambiguation; decide whether
+    `with` remains as an ordinary helper, is migrated, or is removed; inventory every existing block-taking helper
+    and method; split reference plus Rust/Dart/Julia/Lua parity and neutral conformance fixtures before code.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -492,6 +531,7 @@ before implementation.
 | 23 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
 | 24 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
 | 25 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
+| 26 | `FUTURE-PARITY-BACKLOG.11.1` | `pending` | Director's generic final-codeblock argument correction is parked behind the active UTF-8/CLI frontier. |
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.6.1` Neutral Hex-Byte Fixture Materialization
 
@@ -853,12 +893,19 @@ Read-only evidence recorded on 2026-07-10:
   timestamped multi-megabyte backend stream becomes a concise portable phase protocol while native tracing remains
   rich. Signoff also exposes a pre-existing UTF-8 argv-to-JSON mojibake boundary, now owned by active `.1.5.1.6`;
   Rust `.1.5.2` stays pending until the Perl/shared reference boundary is exact.
+- `2026-07-10`: Director clarification corrects the closed `.14` abstraction: scalar, array, harray, and codeblock
+  are the four object/value kinds, and a signature accepting a final codeblock must make `call(args) { block }`
+  equivalent to `call(args, { block })` across helper/user-function/receiver surfaces and all variants. Current
+  Perl/Rust/Dart/Julia behavior remains name-specific; Lua is absent. `.11.0` captures this without pivoting, and
+  `.11.1` owns canonical design, parity splitting, terminology, and whether `with` remains or is removed.
 
 ## Open Questions
 
 - None blocking `.1.5.1.6.2`: ADR `0025` fixes the text policy and `.6.1` now supplies exact invalid bytes. Lua
   `.1.3` remains gated until implemented
   backends close CLI/capability convergence, including `.1.6`-split gaps and generated source under `.3`.
+- Parked `.11.1` must decide public `harray` versus current `hash` terminology and retain/migrate/remove `with`;
+  neither question blocks `.1.5.1.6.2` and neither is silently decided by capture leaf `.11.0`.
 
 ## Blockers
 
@@ -875,6 +922,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.8.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning capture only; no implementation code changed. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.9.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning capture only; no implementation code changed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.10.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; Knowledge Map generation/check; doctrine; task-tree metadata; `mdbook build docs/linkedspec-book`; cleanup | PASS. Semantic introspection/MCP is durably parked with native-API ownership and transport separation; no implementation or active-frontier change. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.11.0` | Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; whitespace; `mdbook build docs/linkedspec-book`; generated-book cleanup; LinkedSpec lowering probes | PASS. Four-kind generic final-codeblock correction is parked with `with` disposition undecided; no behavior or active-frontier change. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.4` | Perl direct `LinkedSpec::Get` coderef probe; focused Dart runtime tests (50); direct Julia parse/compile/execute probe; static Rust core/runtime API and Dart/Julia CLI-adapter audit; `mdbook build docs/linkedspec-book`; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check` | PASS. ADR `0022` makes native in-memory embedding primary and CLIs secondary; current/future backend acceptance and public docs agree; no parser/compiler/runtime source changed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.0` | Delegated Julia `.7.3.1`: ADR `0023`; Perl CLI/trace contract and Rust public source-emitter audit; global task routing; mdBook build; Knowledge Map generation/check; memory/task/doctrine/whitespace gates. | PASS. Exact primary CLI and public-capability parity are durable; `.1.5.1`–`.1.5.4`, `.1.6`, and `.3` own convergence; no implementation behavior changed. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.3` | Delegated current-surface audit; stale mdBook provenance/correction; exact owner routing; prior `431f0472` Julia proof; docs/KM/governance/whitespace and mdBook. | PASS. Julia's local audit is done while its root remains active/delegated; `.1.5.1` became next and `.1.5.1.0` has since split it. |
@@ -897,6 +945,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.8.0` | `FUTURE-PARITY-BACKLOG.8.0 - capture spec-derived roundtrip idea` | Captures future `foo.spec` parser/stimuli closed-loop validation arc; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.9.0` | `FUTURE-PARITY-BACKLOG.9.0 - capture AND OR edge default correction` | Captures future AND/OR mode-sensitive edge-default design arc; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.10.0` | `FUTURE-PARITY-BACKLOG.10.0 - capture semantic introspection MCP direction` | Captures a backend-neutral native semantic API plus thin MCP projection; no implementation code. |
+| `FUTURE-PARITY-BACKLOG.11.0` | `FUTURE-PARITY-BACKLOG.11.0 - capture generic trailing codeblocks` | Captures four-kind final-codeblock equivalence and parks `with` disposition; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |
@@ -911,6 +960,10 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-10`: `.11.0` audits the current trailing-block surface and captures the director's correction. Four
+  implemented backends support narrow named `with`/traversal blocks, Lua is absent, and the old contract rejects
+  the parenthesized equivalent. Parked `.11.1` will make callable signatures own final codeblock acceptance,
+  canonicalize attached/parenthesized spellings, split every-backend parity, and decide `with`; `.6.2` stays active.
 - `2026-07-10`: `.1.5.1.6.1` adds `bytes_hex` as a mutually exclusive schema-v1 input-file source. Raw
   materialization and six runner subtests lock exact invalid bytes plus both/neither/empty/case/length/character
   validation before launch. `.6.2` can now express strict UTF-8 failures without checked-in binary blobs.

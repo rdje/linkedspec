@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.11.0 — capture generic trailing codeblocks
+
+**Audit:** Perl, Rust, Dart, and Julia implement helper `with(...) { ... }`, receiver `.with() { ... }`, and
+selected traversal receiver blocks; Lua is not implemented. The closed `SPEC-FORMAT-TERSE.14` contract explicitly
+excluded inline parenthesized final blocks and arbitrary block-taking callables. A LinkedSpec lowering probe proves
+`with("x") { ... }` succeeds while `with("x", { ... })` and unknown trailing-block callees are unsupported.
+
+**Corrective direction:** The language has four object/value kinds—scalar, array, harray/hash, and codeblock. A
+callable signature that accepts a final codeblock must make `call(args) { block }` equivalent to
+`call(args, { block })` for helpers, user functions, and receiver methods in every backend. The parser must not
+hard-code `with` as the syntax abstraction.
+
+**Next owner:** Parked `.11.1` designs canonical AST/IR, runtime/return/context semantics, diagnostics, hash-literal
+boundaries, neutral parity fixtures, terminology, and the choice to retain `with` as an ordinary helper or remove
+it. The active UTF-8/CLI frontier remains `.1.5.1.6.2`; this slice changes no behavior.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.6.1 — add neutral hex byte fixtures
 
 **Implementation:** Schema-v1 input workspace records accept `path` plus exactly one of checked-in `source` or

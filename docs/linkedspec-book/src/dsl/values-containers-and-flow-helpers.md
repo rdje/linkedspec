@@ -183,8 +183,8 @@ When a block is used as a receiver, its yielded value enters the same compatible
 `{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")`, and `{ 3.5 }.floor().add(2)` use the existing
 array, string, hash, and number contracts.
 
-Perl and Rust also accept trailing block arguments for helper-form `with(value) { ... }` and receiver-form
-`.with() { ... }`:
+Perl, Rust, Dart, and Julia currently accept trailing block arguments for helper-form `with(value) { ... }` and
+receiver-form `.with() { ... }`:
 
 ```text
 return(with(entry_group(0)) { return(cat(value, "!")) });
@@ -204,6 +204,15 @@ working-variable side effects are the same as the call site. Only the scalar bin
 scoped block parameter in this MVP; mutations to other variable names persist after `with` returns. Bare
 `with { ... }`, explicit receiver `.with(value) { ... }`, and delayed callback semantics are not current portable
 surfaces.
+
+This shipped surface is narrower than the intended language abstraction. LinkedSpec's four object/value kinds are
+scalar, array, harray (called `hash` by the current authoring helpers), and codeblock. For a callable whose
+signature accepts a final codeblock, the intended contract is that `call(args) { ... }` and
+`call(args, { ... })` are equivalent spellings of the same call; the same rule applies to helper functions, user
+functions, and receiver methods. That generic equivalence is not implemented yet: current backends special-case
+the named `with` and tree-traversal surfaces, the parenthesized final-codeblock form is not portable, and Lua is
+not implemented. `FUTURE-PARITY-BACKLOG.11.1` owns the corrective design and must decide whether `with` remains
+as an ordinary block-taking helper or is removed. Until that leaf lands, use only the current named forms above.
 
 Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
 values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each

@@ -60,6 +60,12 @@ Three backbone items tracked major structural modernization — all done:
   query model exposed from every native backend. It covers rules/edges/calls, spans/provenance, inferred shapes,
   resolution, generated-source relationships, diagnostics, and explanations. MCP is a thin transport over that
   model; backend AST/IR layouts and transport-specific behavior are explicitly outside the public contract.
+- **Generic trailing codeblock correction** - parked `.11.1` supersedes the narrow abstraction chosen by the
+  closed `SPEC-FORMAT-TERSE.14` MVP. Current Perl/Rust/Dart/Julia implementations support named `with` and tree
+  traversal block surfaces, not generic equivalence. The intended four-kind model is scalar, array, harray/hash,
+  and codeblock; for a signature with a final codeblock, `call(args) { block }` and
+  `call(args, { block })` must become the same call in every backend. The design will decide whether `with` remains
+  an ordinary block-taking helper or is removed. Lua has no implementation yet.
 - **Dart backend parity** - `DART-BACKEND-PARITY` is complete only for the scoped interpreter-first Dart milestone. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
   deferred to a future split source-emitter lane rather than required for the current conformance claim. The repo now has a `dart/` backend package with a Dart-specific CLI,

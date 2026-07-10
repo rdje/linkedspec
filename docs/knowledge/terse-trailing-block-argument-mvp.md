@@ -30,6 +30,12 @@ receiver-method form `.with() { ... }` on Perl and Rust plus the 95th oracle fix
 and `.14.5` closed the mdBook/Knowledge Map/oracle/no-drift sweep for the
 shipped `.14` surface.
 
+This card remains the factual record of the currently implemented MVP, but its abstraction is superseded for
+future design by [[generic-trailing-codeblock-argument-correction]]. Director clarification on 2026-07-10 defines
+codeblock as the fourth object/value kind and requires attached `call(args) { block }` to be equivalent to
+parenthesized `call(args, { block })` for any callable signature accepting a final codeblock, on every backend.
+`FUTURE-PARITY-BACKLOG.11.1` owns that correction and the decision to retain or remove `with`; it has not landed.
+
 The MVP is an immediate callback argument, not a closure. Blocks are not assignable,
 not returnable, and not callable later. The first implementation target is helper-function form
 `with(value) { ... }`: evaluate `value`, bind scoped scalar `value` during immediate
