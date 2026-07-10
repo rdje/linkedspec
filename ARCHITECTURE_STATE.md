@@ -5,22 +5,26 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.4.5.3` mirrors the public parser's leading blank/comment-line
+  skip through Julia's existing in-memory cursor/register seam. History now matches the null-object public oracle
+  without weakening scalar-held indexed reads. Full tests pass with 810 assertions, shipped smoke is 31/31,
+  status is `runtime-corpus-leading-trivia`, and `.6.2.4.6` is active for final no-drift.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.4.5.2` distinguishes statement regex substitution from pure
   string slicing. In statement context, four-argument `substr(...)` / `regex_subst(...)` mutates a bare scalar
   target through strict helper flags and `$n` replacement; numeric slicing remains pure. Both EBNF, both lib_reader,
   and simenv fixtures pass. Full tests pass with 808 assertions, shipped smoke is 30/31, status is
-  `runtime-corpus-statement-mutation`, and `.6.2.4.5.3` is active for history leading trivia.
+  `runtime-corpus-statement-mutation` at that boundary; `.6.2.4.5.3` has since closed history.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.4.5.1` executes `exit_now(...)` as immediate fatal parser
   control. The optional first argument is evaluated as a numeric status, absent/nonnumeric status defaults to `1`,
   and `RuntimeInterpreterException` retains structured rule/top/spec attribution. Simenv now reaches
   `exit_now(1) in rule begin_end_blocks`, exposing the earlier statement-form scalar mutation prerequisite under
   `.6.2.4.5.2`. Full tests pass with 801 assertions, shipped smoke remains 25/31, status is
-  `runtime-corpus-exit-now`, and `.6.2.4.5.3` is active.
+  `runtime-corpus-exit-now` at that boundary; `.6.2.4.5.2` and `.5.3` have since closed.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.4.4` gives compiled-rule first arguments child-call precedence
   in action-edge `push(...)`, reuses cached edge child results, and supports implicit/explicit whole and indexed
   appends. All four spec.spec smokes pass. Both EBNF cases retain complete structures and route quote-only
   statement mutation to `.6.2.4.5.2`. Full tests pass with 793 assertions, shipped smoke is 25/31, status is
-  `runtime-corpus-action-edge-child-push`, and `.6.2.4.5.3` is active.
+  `runtime-corpus-action-edge-child-push` at that boundary; `.6.2.4.5` has since closed.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.4.3` scopes explicit aggregate resets per rule invocation.
   First-reset snapshots restore prior scalar/array/hash bindings at rule exit; ordinary undeclared child mutations
   remain caller-visible, and registered user functions retain their independent whole-store isolation. All three

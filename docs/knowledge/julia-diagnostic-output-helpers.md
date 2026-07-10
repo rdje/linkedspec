@@ -31,7 +31,8 @@ control, and `.6.2.4.5.2` has since implemented its earlier statement-form mutat
 oracle output.
 `ds_vhistory_version_entry` executes to output comparison and returns `/proj/foo` where the checked oracle expects
 `null`; the existing cross-backend evidence attributes that boundary to public-parser leading-trivia handling, not
-diagnostic output or indexed access.
+diagnostic output or indexed access. `.6.2.4.5.3` has since mirrored that public-entry boundary in Julia, so
+history now passes without weakening direct access.
 
 Related facts: [[julia-statement-regex-mutation]], [[julia-exit-now-control]], [[julia-shipped-corpus-smoke-split]], [[dart-helper-action-surface-bridge]],
 [[ds-vhistory-leading-newline-oracle-boundary]], [[julia-controlled-corpus-execution]].

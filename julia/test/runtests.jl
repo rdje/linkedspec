@@ -346,7 +346,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-corpus-statement-mutation"
+    @test status.parity == "runtime-corpus-leading-trivia"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -358,7 +358,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-corpus-statement-mutation", String(take!(status_output)))
+    @test occursin("parity: runtime-corpus-leading-trivia", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1105,6 +1105,35 @@ end
             parse_mode = parse_mode,
             max_iterations = max_iterations,
         )
+
+    public_parser_trivia = runtime_engine(raw"""
+Top::
+ I {
+   cur = undef
+   set(array(items), [])
+ }
+ -> object { cur = call(object) }
+ -> version { push(array(items), call(version)) }
+ LX { return(array(cur[1], copy(array(items)))) }
+
+object: /(?i)\nobject:\s+(\S+)/ I { return(array("?object:", flat_array(entry_groups()))) }
+version: /(?i)\nversion:\s+(\S+)/ I { return(array("?version:", flat_array(entry_groups()))) }
+""")
+    public_parser_result = runtime_parse(
+        public_parser_trivia,
+        "\n \t# generated report\nobject: /proj/foo\nversion: 1\n",
+    )
+    @test public_parser_result.value == Any[nothing, Any[Any["?version:", "1"]]]
+
+    indexed_read = runtime_engine(raw"""
+Top::
+ /x/
+ E {
+   payload = array("tag", "name")
+   return(payload[1])
+ }
+""")
+    @test runtime_parse(indexed_read, "x").value == "name"
 
     repetition = runtime_engine(raw"""
 Top::
@@ -3646,7 +3675,7 @@ end
     @test constant_result.failure === nothing
 end
 
-@testset "Shipped mutation and leading-trivia corpus boundary" begin
+@testset "Shipped mutation and leading-trivia corpus batch" begin
     execution = execute_corpus_fixtures(
         CORPUS_ROOT;
         case_names = ["simenv_multiline_value", "ds_vhistory_version_entry"],
@@ -3660,9 +3689,9 @@ end
     @test corpus_fixture_passed(simenv)
     @test simenv.actual_output == Any[simenv.expected_json]
     @test simenv.failure === nothing
-    @test !corpus_fixture_passed(history)
-    @test occursin("output mismatch", history.failure)
-    @test !occursin("unsupported runtime helper 'print'", history.failure)
+    @test corpus_fixture_passed(history)
+    @test history.actual_output == Any[history.expected_json]
+    @test history.failure === nothing
 end
 
 @testset "Shipped recursive top-rule corpus batch" begin

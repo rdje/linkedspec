@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.5.3 — public-parser leading trivia):
+  The history mismatch was an entrypoint boundary, not an indexed-read defect. Perl's public wrapper skips only
+  leading blank and `#` comment lines before the top handler; direct handlers bypass that wrapper, explaining why
+  they see `\nobject:` and return `/proj/foo` while the public oracle returns `null`. Julia now initializes its
+  existing cursor/register seam at the same public start offset. A focused `payload[1]` proof prevents accidental
+  weakening of ordinary direct access. History passes, the shipped window is 31/31, and full tests pass at 810.
+
 - 2026-07-10 (REPO-HYGIENE.4 — Julia-aware generated cache cleanup):
   Julia build artifacts require depot-aware cleanup. Safe precompile targets are the active depot's `compiled/`
   directory—here both `/private/tmp/linkedspec-julia-depot/compiled` and `~/.julia/compiled`—not the whole depot.

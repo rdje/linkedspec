@@ -30,7 +30,8 @@ This closes `portmap_constant`. Its compacted `entry_group(0)` was already corre
 `?bare:` output came from `matches(entry_group(0), /^\d/io)` returning false when raw `io` was passed to Julia
 `Regex`. It now returns exact checked-in `?constant:` output. At that boundary full tests were green with 772
 assertions, the shipped-smoke window was 18/31, and status was `runtime-corpus-helper-regex-flags`.
-`.6.2.4.2.2` has since closed diagnostic output and `.6.2.4.5.3` is active.
+`.6.2.4.2.2` has since closed diagnostic output, `.6.2.4.5.3` has closed history leading trivia, and `.6.2.4.6`
+is active for final shipped-window no-drift.
 
 Related facts: [[julia-logical-helper-execution]], [[julia-shipped-corpus-smoke-split]],
 [[rust-capture-group-helper-indexing]], [[rust-perl-output-oracle]].

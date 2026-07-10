@@ -41,6 +41,8 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   external contracts.
 - A Julia corpus runner consumes `rust/linkedspec-runtime/tests/corpus/manifest.json`, rejects manifest drift, and
   passes all current fixtures against the Perl/Rust/Dart expected values.
+- Julia exposes native in-memory parse/compile/execute APIs suitable for embedding in a Julia process; the CLI and
+  corpus runner are thin adapters over that library surface, not the reason the backend exists.
 - Julia exposes its own distinct LinkedSpec CLI entrypoint; it must not rely on the Perl, Rust, or Dart CLI names as
   the only user-facing command.
 - mdBook, live docs, task-tree status, and Knowledge Map cards stay aligned with the implemented Julia surface after
@@ -614,14 +616,16 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.2.4.4 - add Julia action-edge child push`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.5`
-  Status: `active`
+  Status: `done`
   Goal: Close the remaining non-final shipped-smoke mechanisms.
   Children: `.6.2.4.5.1`, `.6.2.4.5.2`, `.6.2.4.5.3`
   Acceptance: Fatal diagnostic control, statement mutation/quote normalization, and public-parser leading trivia
     each have an independent executable leaf; simenv, both EBNF cases, both lib_reader cases, and history either
     pass or expose a newly split mechanism before final 31/31 no-drift.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `.5.1` adds fatal exit control, `.5.2` adds portable statement regex mutation, and
+    `.5.3` mirrors public-parser leading trivia. All six routed fixtures pass, the shipped window is 31/31, and
+    final no-drift advances independently to `.6`.
+  Commit: `closed by JULIA-BACKEND-PARITY.6.2.4.5.3`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.5.1`
   Status: `done`
@@ -655,15 +659,20 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.2.4.5.2 - add Julia statement regex mutation`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.5.3`
-  Status: `active`
+  Status: `done`
   Goal: Mirror public-parser leading trivia for the history smoke.
   Acceptance: `ds_vhistory_version_entry` matches the checked-in public Perl/Rust output without weakening ordinary
     indexed variable reads or direct descriptor semantics.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - Julia now initializes the public `runtime_parse(...)` context after only leading blank
+    lines and leading `#` comment lines, matching the Perl wrapper and completed Dart backend. A focused minimal
+    locks the leading blank/comment boundary while a second assertion proves scalar-held `payload[1]` still
+    returns the indexed value. `ds_vhistory_version_entry` passes exact checked-in output, the complete shipped
+    window is 31/31, full `Pkg.test()` passes with 810 assertions, and status is
+    `runtime-corpus-leading-trivia`. `.6.2.4.5` closes and `.6.2.4.6` becomes active for no-drift.
+  Commit: `JULIA-BACKEND-PARITY.6.2.4.5.3 - mirror Julia public parser leading trivia`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.6`
-  Status: `pending`
+  Status: `active`
   Goal: Close final shipped-spec/parser-smoke no-drift.
   Acceptance: The complete offset-68/limit-31 window is 31/31 green, a permanent regression locks it, all residual
     mechanisms are explicitly owned, and package/docs/status surfaces agree before `.6.2.5` begins.
@@ -747,7 +756,40 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 17 | `JULIA-BACKEND-PARITY.6.2.4.4` | `done` | Action-edge child-push forms close all four spec.spec smokes and route EBNF quote mutation. |
 | 18 | `JULIA-BACKEND-PARITY.6.2.4.5.1` | `done` | Terminating explicit/default `exit_now(...)` control is diagnostic-attributed and immediate. |
 | 19 | `JULIA-BACKEND-PARITY.6.2.4.5.2` | `done` | Statement regex mutation closes both EBNF, both lib_reader, and simenv fixtures. |
-| 20 | `JULIA-BACKEND-PARITY.6.2.4.5.3` | `active` | Mirror public-parser leading trivia for the sole history residual. |
+| 20 | `JULIA-BACKEND-PARITY.6.2.4.5.3` | `done` | Public-parser leading blank/comment skipping closes the sole history residual without weakening indexed reads. |
+| 21 | `JULIA-BACKEND-PARITY.6.2.4.6` | `active` | Lock the now-green 31/31 shipped window and close final no-drift before function-shell corpus work. |
+
+## `JULIA-BACKEND-PARITY.6.2.4.5.3` Public-Parser Leading Trivia Result
+
+Public-entry evidence recorded on 2026-07-10:
+
+- The Perl public parser wrapper resets its input position and skips only leading `[ \t]*\n` blank lines and
+  `[ \t]*#...` comment lines. Direct generated descriptor handlers bypass that wrapper, explaining the historical
+  `null` versus `/proj/foo` discrepancy without making indexed reads context-dependent.
+- Julia now computes the same public start cursor before entering the top rule. The cursor update flows through
+  the existing match-register seam; rule dispatch, regex selection, and direct access remain unchanged.
+- A focused runtime minimal combines a blank line and an indented comment before `object:` and proves that the
+  leading `\nobject:` action edge is skipped while the later version edge still runs. A separate scalar-held
+  `payload[1]` assertion returns `"name"`, locking the non-regression side of the boundary.
+- `ds_vhistory_version_entry` passes its checked-in Perl/Rust oracle output. Full `Pkg.test()` passes with 810
+  assertions, status is `runtime-corpus-leading-trivia`, and the complete offset-68/limit-31 window is 31/31.
+  `.6.2.4.6` owns the separate permanent window/no-drift closeout.
+
+## `JULIA-BACKEND-PARITY.6.2.4.5.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Focused Julia corpus execution failed only at history object name: expected `null`,
+  actual `/proj/foo`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Julia `runtime_parse(...)` constructed its public context at cursor zero;
+  Perl `Runtime.pm` and Dart begin the top rule after leading blank/comment lines. Direct descriptor handlers
+  intentionally bypass the public wrapper, so the mismatch was not an indexed-access defect.
+- [x] **FIX** — Added a byte-safe public start-cursor scan and initialized Julia's existing cursor/register seam
+  before top-rule execution.
+- [x] **ADDRESSED (verified)** — Focused leading-trivia and ordinary indexed-read assertions pass;
+  `ds_vhistory_version_entry` and the complete 31-case shipped window pass.
+- [x] **NO REGRESSION** — Full Julia `Pkg.test()` passes with 810 assertions; CLI status/help and documentation/
+  governance gates pass.
+- [x] **LOCKSTEP** — Package status, Julia README, roadmaps/live docs, task tree, mdBook, and Knowledge Map agree;
+  `.6.2.4.6` owns final no-drift.
 
 ## `JULIA-BACKEND-PARITY.6.2.4.5.2` Statement Regex Mutation Result
 
@@ -2127,6 +2169,10 @@ Rule-interpreter evidence recorded on 2026-07-10:
 - `2026-07-09`: Julia must own a distinct variant-specific CLI entrypoint from the beginning of package planning.
   The `.1.1` preflight selects `julia/bin/linkedspec_julia.jl` as the Julia-specific LinkedSpec CLI and
   `julia/bin/corpus_runner.jl` as the corpus-runner entrypoint.
+- `2026-07-10`: Director clarification: multi-backend LinkedSpec exists primarily so applications can use the
+  engine in memory through each host language's native library API—Rust, Dart, Julia, Lua, and future backends.
+  Variant-specific CLIs remain useful but secondary thin adapters. This Julia tree must preserve library-first
+  architecture; a clean-tree cross-backend owner will align the global architecture/docs after this in-flight leaf.
 - `2026-07-09`: The Rust corpus under `rust/linkedspec-runtime/tests/corpus/` remains the checked-in
   language-neutral corpus root until a separate backend-neutral corpus relocation is adopted.
 - `2026-07-10`: Julia `1.12.6` is both the locally installed Homebrew version and the current stable release listed
@@ -2268,6 +2314,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.4` | Julia debug traces on EBNF logging and spec.spec minimal fixtures; focused four-form action-edge child-push test; six-case structural corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS/SPLIT. All four spec.spec smokes pass; both EBNF cases retain complete structures and route quote-only statement mutation to `.6.2.4.5.2`; shipped smoke is 25/31, full tests pass with 793 assertions, status is `runtime-corpus-action-edge-child-push`, and `.6.2.4.5.1` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.5.1` | Focused explicit/default `exit_now(...)` runtime and structured-diagnostic proof; simenv/history boundary regression; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Immediate fatal control preserves explicit status, defaults to `1`, and retains structured attribution. Simenv advances from unsupported helper to `exit_now(1) in rule begin_end_blocks`, routing the earlier scalar-mutation prerequisite to `.6.2.4.5.2`; shipped smoke remains 25/31, full tests pass with 801 assertions, status is `runtime-corpus-exit-now`, and `.6.2.4.5.2` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.5.2` | Focused statement regex mutation/pure-slice proof using the single-quoted pattern; five-case EBNF/simenv/lib_reader corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; Perl `actionir_ast_parser.t`; Rust `parse_string_literal_single_quotes`; Dart `action_ast_parser_test.dart`; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Statement-context four-argument regex substitution mutates bare scalar targets with strict flags and `$n` expansion while numeric slicing stays pure. Exact parser locks preserve single-quoted action strings as the shared Perl/Rust/Dart/Julia language contract. Both EBNF, both lib_reader, and simenv pass; shipped smoke is 30/31, full tests pass with 808 assertions, status is `runtime-corpus-statement-mutation`, and `.6.2.4.5.3` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.5.3` | Knowledge Map public-parser fact; Perl `Runtime.pm` and Dart cursor seam; focused Julia leading-trivia/indexed-read proof; focused history corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Julia's public in-memory runtime entrypoint skips only leading blank/comment lines through the existing cursor/register seam. History passes without weakening indexed reads, shipped smoke is 31/31, full tests pass with 810 assertions, status is `runtime-corpus-leading-trivia`, `.5` closes, and `.6` becomes active. |
 
 ## Commit Log
 
@@ -2317,9 +2364,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.6.2.4.4` | `JULIA-BACKEND-PARITY.6.2.4.4 - add Julia action-edge child push` | Four child-push forms close all four spec.spec smokes and route EBNF quote mutation to `.6.2.4.5.2`. |
 | `JULIA-BACKEND-PARITY.6.2.4.5.1` | `JULIA-BACKEND-PARITY.6.2.4.5.1 - add Julia terminating exit control` | Immediate explicit/default fatal control advances simenv to its statement-mutation prerequisite; `.6.2.4.5.2` becomes active. |
 | `JULIA-BACKEND-PARITY.6.2.4.5.2` | `JULIA-BACKEND-PARITY.6.2.4.5.2 - add Julia statement regex mutation` | Portable scalar substitution closes both EBNF, both lib_reader, and simenv; history advances alone to `.6.2.4.5.3`. |
+| `JULIA-BACKEND-PARITY.6.2.4.5.3` | `JULIA-BACKEND-PARITY.6.2.4.5.3 - mirror Julia public parser leading trivia` | Public-entry cursor parity closes history and `.5`; final 31/31 no-drift advances to `.6`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.2.4.5.3` public-parser leading trivia. Julia's in-memory `runtime_parse(...)`
+  entrypoint now begins after leading blank and `#` comment lines through the existing cursor/register seam.
+  Focused coverage preserves ordinary scalar-held indexed reads. History passes, full tests pass with 810
+  assertions, shipped smoke is 31/31, status is `runtime-corpus-leading-trivia`, `.5` closes, and `.6` is active.
 - `2026-07-10`: Completed `.6.2.4.5.2` statement regex mutation. Dropped four-argument `substr(...)` and
   `regex_subst(...)` calls now mutate bare scalar targets with strict helper flags, global/first-only behavior, and
   `$n` expansion; numeric slicing remains pure. Both EBNF, both lib_reader, and simenv pass exact oracle output.

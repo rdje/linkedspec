@@ -222,6 +222,30 @@ struct _RuntimeValueBlockFlow
     value::Any
 end
 
+function _runtime_public_parser_start_codeunit(input::String)
+    cursor = firstindex(input)
+    while cursor <= lastindex(input)
+        first_nonspace = cursor
+        while first_nonspace <= lastindex(input) && input[first_nonspace] in (' ', '\t')
+            first_nonspace = nextind(input, first_nonspace)
+        end
+
+        if first_nonspace <= lastindex(input) && input[first_nonspace] == '\n'
+            cursor = nextind(input, first_nonspace)
+            continue
+        elseif first_nonspace <= lastindex(input) && input[first_nonspace] == '#'
+            newline = findnext('\n', input, first_nonspace)
+            if newline === nothing
+                return ncodeunits(input)
+            end
+            cursor = nextind(input, newline)
+            continue
+        end
+        break
+    end
+    return cursor - 1
+end
+
 struct _RuntimeScopedBinding
     name::String
     variable_present::Bool
@@ -248,6 +272,7 @@ function runtime_parse(
 )
     label = top_rule === nothing ? _default_runtime_top_rule(engine) : String(top_rule)
     context = _RuntimeExecutionContext(input, label, trace)
+    _set_runtime_cursor!(context, _runtime_public_parser_start_codeunit(context.input))
     trace_scope = trace === nothing ? nothing : enter_trace_scope!(
         trace,
         "julia_runtime:parse",

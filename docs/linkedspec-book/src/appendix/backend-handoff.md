@@ -344,7 +344,9 @@ prerequisite under `.6.2.4.5.2`. Full tests pass with 801 assertions, status is 
 window remains 25/31 at that boundary. `.6.2.4.5.2` adds statement-context four-argument scalar regex mutation
 with strict flags and `$n` expansion while preserving pure numeric slicing. Both EBNF, both lib_reader, and simenv
 fixtures pass. Full tests pass with 808 assertions, status is `runtime-corpus-statement-mutation`, the window is
-30/31, and `.6.2.4.5.3` is active for history leading trivia.
+30/31 at that boundary. `.6.2.4.5.3` mirrors the public parser's leading blank/comment-line skip through Julia's
+in-memory runtime cursor seam. History passes without weakening indexed reads; full tests pass with 810 assertions,
+status is `runtime-corpus-leading-trivia`, the window is 31/31, and `.6.2.4.6` owns final no-drift.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -731,8 +733,12 @@ Statement-context four-argument `substr(...)` / `regex_subst(...)` now mutates a
 pure helper fallback. The strict helper compiler preserves `i`/`m`/`s`/`x`, applies global `g`, accepts no-op `o`,
 and replacement text expands `$n` captures. Numeric `substr(value, start, width)` remains pure even when discarded.
 Both EBNF, both lib_reader, and simenv fixtures now pass exact oracle output. The full window is 30/31, full tests
-pass with 808 assertions, status is `runtime-corpus-statement-mutation`, and `.6.2.4.5.3` owns the sole history
-leading-trivia residual.
+pass with 808 assertions, and status is `runtime-corpus-statement-mutation` at that boundary.
+
+Julia's public in-memory `runtime_parse(...)` entrypoint now begins after only leading blank lines and leading `#`
+comment lines, matching the Perl wrapper and Dart backend. A focused minimal proves the history boundary while an
+ordinary scalar-held `payload[1]` still returns its indexed item. `ds_vhistory_version_entry` passes, full tests
+pass with 810 assertions, status is `runtime-corpus-leading-trivia`, and the complete window is 31/31.
 
 ### Dart Backend Commands
 

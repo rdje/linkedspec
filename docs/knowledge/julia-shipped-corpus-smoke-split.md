@@ -44,10 +44,11 @@ Every failing fixture is routed exactly once before implementation:
 
 The checked-in expected JSON remains the Perl/Rust oracle. Completed Dart facts identify portable mechanism
 contracts, but the Julia leaves must establish their own root causes. After `.6.2.4.5.2`, statement regex mutation
-closes both EBNF, both lib_reader, and simenv fixtures without fixture-specific cleanup. The complete window is
-30/31. Full tests pass with 808 assertions, status is `runtime-corpus-statement-mutation`, and `.6.2.4.5.3` is
-active for the sole history leading-trivia residual.
+closes both EBNF, both lib_reader, and simenv fixtures without fixture-specific cleanup. `.6.2.4.5.3` then mirrors
+public-parser leading blank/comment skipping and closes history without weakening indexed reads. The complete
+window is 31/31. Full tests pass with 810 assertions, status is `runtime-corpus-leading-trivia`, and `.6.2.4.6` is
+active for final no-drift.
 
-Related facts: [[julia-statement-regex-mutation]], [[julia-exit-now-control]], [[julia-action-edge-child-push]], [[julia-recursive-rule-local-reset-scope]], [[julia-diagnostic-output-helpers]], [[julia-helper-regex-flag-normalization]], [[julia-logical-helper-execution]], [[julia-anonymous-capture-boundary-helpers]], [[julia-middle-corpus-batch]], [[julia-controlled-corpus-execution]],
+Related facts: [[ds-vhistory-leading-newline-oracle-boundary]], [[julia-statement-regex-mutation]], [[julia-exit-now-control]], [[julia-action-edge-child-push]], [[julia-recursive-rule-local-reset-scope]], [[julia-diagnostic-output-helpers]], [[julia-helper-regex-flag-normalization]], [[julia-logical-helper-execution]], [[julia-anonymous-capture-boundary-helpers]], [[julia-middle-corpus-batch]], [[julia-controlled-corpus-execution]],
 [[dart-shipped-corpus-smoke-split]], [[dart-helper-action-surface-bridge]],
 [[rust-anonymous-capture-slice-family]], [[rust-perl-output-oracle]].

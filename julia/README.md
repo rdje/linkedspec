@@ -1,6 +1,6 @@
 # LinkedSpec Julia Backend
 
-This directory is the repository-owned Julia backend. Its current `runtime-corpus-statement-mutation` status covers the
+This directory is the repository-owned Julia backend. Its current `runtime-corpus-leading-trivia` status covers the
 package/command surface, manifest validation, source and ActionIR frontends, staged user-function projection/body
 parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch, value/helper/control/callback
 families, cursor/boundary behavior, structured diagnostics/tracing, registered function execution, and controlled
@@ -157,7 +157,9 @@ statement-form mutation prerequisite owned by `.6.2.4.5.2`. Full tests pass with
 scalar targets mutate through strict helper flags and `$n` replacement expansion; standalone/value-form numeric
 `substr(...)` stays pure. Both EBNF, both lib_reader, and simenv fixtures now pass exact oracle output. Full tests
 pass with 808 assertions, status is `runtime-corpus-statement-mutation`, the shipped-smoke window is 30/31, and
-`.6.2.4.5.3` is active.
+`.6.2.4.5.3` has since mirrored public-parser leading blank/comment skipping without weakening ordinary indexed
+reads. History passes, the shipped window is 31/31, full tests pass with 810 assertions, status is
+`runtime-corpus-leading-trivia`, and `.6.2.4.6` owns final no-drift.
 
 Library example:
 

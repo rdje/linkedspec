@@ -28,6 +28,7 @@ quote cleanup exists.
 
 That single mechanism removes EBNF token/logging quotes, cleans and splits lib_reader group/attribute values, and
 allows simenv to normalize its BEGIN/END block names before comparison. The sole remaining shipped-smoke failure is
-the separately owned history leading-trivia boundary.
+the separately owned history leading-trivia boundary at the `.5.2` checkpoint; `.6.2.4.5.3` has since closed it,
+so the shipped window is now 31/31.
 
-Related fact: [[single-quoted-action-strings-variant-contract]].
+Related facts: [[single-quoted-action-strings-variant-contract]], [[ds-vhistory-leading-newline-oracle-boundary]].

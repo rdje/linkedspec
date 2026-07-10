@@ -18,23 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `REPO-HYGIENE.4` — recurring safe cleanup reclaimed about 20G from regenerated
-  Rust/mdBook output, Julia compiled caches, and twelve provenance-checked stale generation logs while preserving
-  depot data, unrelated temp trees, and source.
-- prior_leaf: `JULIA-BACKEND-PARITY.6.2.4.5.2` — statement regex mutation closes both EBNF, both lib_reader,
-  and simenv; full tests pass with 808 assertions, shipped smoke is 30/31, and status is
-  `runtime-corpus-statement-mutation`.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.6.2.4.5.3` — public-parser leading trivia closes history; full
+  tests pass with 810 assertions, shipped smoke is 31/31, and status is `runtime-corpus-leading-trivia`.
+- prior_leaf: `REPO-HYGIENE.4` — safe cleanup reclaimed about 20G while preserving depot and unrelated temp data.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `REPO-HYGIENE.4 - clean Rust and Julia generated caches`; previous committed HEAD is
-  `7411cccf JULIA-BACKEND-PARITY.6.2.4.5.2 - add Julia statement regex mutation`.
+  `JULIA-BACKEND-PARITY.6.2.4.5.3 - mirror Julia public parser leading trivia`; previous committed HEAD is
+  `37e985ce REPO-HYGIENE.4 - clean Rust and Julia generated caches`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; its resumed frontier after the cleanup commit is `.6.2.4.5.3`.
-- next_action: resume `JULIA-BACKEND-PARITY.6.2.4.5.3` for the sole history leading-trivia residual; use
-  LinkedSpec toolbox evidence before implementation, then commit the bounded leaf before any other pivot.
+- active_work_unit: `JULIA-BACKEND-PARITY`; its frontier after the current commit is `.6.2.4.6`.
+- next_action: close `JULIA-BACKEND-PARITY.6.2.4.6` with a permanent 31/31 regression and no-drift evidence,
+  then give the director's native in-memory multi-backend rationale a clean-tree cross-backend documentation owner.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
 - latest_bootstrap_read: 2026-07-10 read the full roadmap and roadmap-v2, full codebase inventory and active Julia
@@ -43,13 +40,13 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   contract, Rust/Perl cursor/capture references, and final nested-value assignment contract before implementing
   `.4.1` through `.6.1`, Dart staged registry/runtime/descriptor/corpus reference facts, and the portable staged registry contract;
   Dart diagnostics/trace split and implementation facts, and the portable trace
-  capability contract, the canonical statement-separator fact, and the `REPO-HYGIENE.4` Julia depot-aware
-  cleanup boundary.
+  capability contract, canonical statement-separator fact, Julia depot-aware cleanup boundary, history public-
+  parser leading-trivia fact, and the director's native in-memory multi-backend rationale.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1028`**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `REPO-HYGIENE.4` commit;
+- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.6.2.4.5.3` commit;
   do not pivot unless the repo is handoff-ready.

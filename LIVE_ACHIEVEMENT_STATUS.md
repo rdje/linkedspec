@@ -7,8 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.5.3 — mirror Julia public parser leading trivia**
+  (DONE — history closes; `.6.2.4.6` final shipped-window no-drift is active).
+
+  **Change:** Julia's in-memory `runtime_parse(...)` entrypoint now begins after leading blank and `#` comment
+  lines, matching the public Perl/Rust oracle and completed Dart backend without changing ordinary indexed reads.
+
+  **Verification:** Focused entry/indexed-read assertions, history exact output, and the full 31-case shipped
+  window pass. Full Julia tests pass with 810 assertions; status is `runtime-corpus-leading-trivia`.
+
 - 2026-07-10: **REPO-HYGIENE.4 — clean Rust and Julia generated caches**
-  (DONE — about 20G reclaimed; Julia backend frontier resumes at `.6.2.4.5.3`).
+  (DONE — about 20G reclaimed; Julia `.6.2.4.5.3` has since closed and `.6.2.4.6` is active).
 
   **Change:** Removed only ignored/untracked Rust/mdBook output and the dedicated/user Julia depot `compiled/`
   caches, then removed twelve provenance-checked stale LinkedSpec/RGX generation logs from `/private/tmp`. Julia
@@ -18,7 +27,7 @@ Current execution status for interruption-safe batch workflow recovery.
   depot content remains, and the unrelated 29G `claude-501` plus cargo-mutants trees were preserved.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.5.2 — add Julia statement regex mutation**
-  (DONE — five parser smokes close; `.6.2.4.5.3` history leading trivia is active).
+  (DONE — five parser smokes close; `.6.2.4.5.3` has since closed history and `.6.2.4.6` is active).
 
   **Change:** Added statement-context four-argument scalar regex substitution with strict flags, global/first-only
   replacement, and `$n` capture expansion while preserving pure numeric slicing. Status advances to

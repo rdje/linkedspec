@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.5.3 — mirror Julia public parser leading trivia
+
+**Scope:** Julia public in-memory runtime entry cursor, focused leading-trivia/indexed-read proof, history fixture
+closeout, shipped-window verification, package status, live docs, mdBook, Knowledge Map, and resume pointer.
+
+**Change:** `runtime_parse(...)` now starts the top rule after only leading blank lines and leading `#` comment
+lines, mirroring the Perl public wrapper and completed Dart backend. The scan is byte-safe and updates the existing
+cursor/register seam; direct indexing and rule execution are otherwise unchanged.
+
+**Validation:** A focused minimal skips a blank line plus indented comment before `object:` while still parsing the
+later version record; ordinary scalar-held `payload[1]` still returns `"name"`. `ds_vhistory_version_entry` passes
+exact checked-in output, the offset-68/limit-31 shipped window is 31/31, and full `Pkg.test()` passes with 810
+assertions. Status is `runtime-corpus-leading-trivia`; `.6.2.4.6` owns permanent 31/31 no-drift.
+
 ## 2026-07-10 — REPO-HYGIENE.4 — clean Rust and Julia generated caches
 
 **Scope:** Recurring disk-pressure cleanup covering ignored Rust/mdBook output, Julia-specific compiled cache
