@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.4.1 — add Julia runtime matching state
+
+**Scope:** Julia runtime regex alternatives, match/capture records, cursor and entry/local registers, character and
+line/column projection, zero-progress detection, package exports/status, focused matching tests, README, task-tree
+frontier update, roadmap/task-tree index alignment, mdBook status/handoff/check text, Knowledge Map, architecture
+snapshot, live docs, and resume pointer.
+
+**Change:** Added `julia/src/runtime/Matching.jl` with seek/consume parse modes, stable zero-based alternative
+identity, native-PCRE compilation diagnostics, earliest-match/tie ordering, full and compact capture projections,
+named captures, zero-based code-unit spans, public character offsets, line/column positions, cursor/capture anchors,
+separate entry/local match registers, immutable register updates, and zero-width/zero-progress predicates. Julia's
+native PCRE engine accepts the currently required named-capture, POSIX, flag, possessive, and recursive forms
+directly. The Julia package status now reports `runtime-matching`.
+
+**Validation:** `Pkg.test()` passes with 516 assertions, including 60 runtime-matching assertions and the existing
+compiled-state/registry/ActionIR/frontend/corpus coverage. Commit-time docs/governance validation covers mdBook,
+memory architecture, task-tree metadata, Knowledge Map, doctrine, and `git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.3.4 — add Julia compiled-spec state
 
 **Scope:** Julia compiled-spec/interpreter-state records, dependency-regex state, descriptor projection, package

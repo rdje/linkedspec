@@ -58,8 +58,9 @@ JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot julia --project=julia julia
 
 These checks currently cover package loading, source parsing/validation, function-shell projection, typed ActionIR
 parsing, ActionIR contract resolution, user-function registry projection/stitching, compiled-state descriptor
-projection, and manifest-backed corpus validation. Julia corpus `--execute` remains unavailable until later runtime
-leaves land.
+projection, seek/consume runtime regex selection, capture/offset projection, cursor and entry/local match registers,
+zero-progress detection, and manifest-backed corpus validation. Julia corpus `--execute` remains unavailable until
+the executable interpreter leaves land.
 
 ## Hosted GitHub Actions status
 

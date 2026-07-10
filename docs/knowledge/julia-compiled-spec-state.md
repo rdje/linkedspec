@@ -10,7 +10,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, compiler, compiled-state, descriptor, dependency-regex, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.3.4 adds julia/src/compiler/CompiledSpec.jl and exports compile_spec plus CompiledSpec, CompiledRule, CompiledRuleModeMetadata, CompiledDependencyRegexState, CompiledDependencyRegexEntry, CompiledDescriptorState, compiled_rule(...), action_payloads(...), and to_descriptor_json(...). julia/test/runtests.jl verifies ordered rule state, redefinition metadata when validation is deliberately skipped, dependency-ref and dependency-regex derivation, lifecycle/action ActionBlock payloads, registry-aware contracts, source validation reuse, compiled-state diagnostics, function registry projection, and descriptor-shaped JSON. Runtime matching remains deferred to JULIA-BACKEND-PARITY.4.1."
+evidence: "JULIA-BACKEND-PARITY.3.4 adds julia/src/compiler/CompiledSpec.jl and exports compile_spec plus CompiledSpec, CompiledRule, CompiledRuleModeMetadata, CompiledDependencyRegexState, CompiledDependencyRegexEntry, CompiledDescriptorState, compiled_rule(...), action_payloads(...), and to_descriptor_json(...). julia/test/runtests.jl verifies ordered rule state, redefinition metadata when validation is deliberately skipped, dependency-ref and dependency-regex derivation, lifecycle/action ActionBlock payloads, registry-aware contracts, source validation reuse, compiled-state diagnostics, function registry projection, and descriptor-shaped JSON. Runtime matching subsequently landed in JULIA-BACKEND-PARITY.4.1."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
@@ -25,10 +25,11 @@ rule mode metadata, action/blind edges, lifecycle/plain `ActionBlock` payloads, 
 registry-aware ActionIR contract results.
 
 `CompiledDependencyRegexState` derives structured dependency-regex rows from child rule regex slots. Julia stores
-dependency refs plus pattern strings until runtime matching owns executable regex dispatch.
+dependency refs plus pattern strings; runtime matching now compiles those pattern lists in
+`julia/src/runtime/Matching.jl`.
 
 `CompiledDescriptorState` projects the public descriptor shape: `spec`, `functions`, `dependency_regex_map`, and
 `meta`, with rule handlers marked as `julia_interpreter_rule` / `compiled_state_only`.
 
-Related facts: [[julia-user-function-registry]], [[julia-actionir-contract-resolver]],
+Related facts: [[julia-runtime-matching-state]], [[julia-user-function-registry]], [[julia-actionir-contract-resolver]],
 [[dart-compiled-spec-state]], [[julia-backend-interpreter-first-plan]], [[compilerstate-internal-model]].

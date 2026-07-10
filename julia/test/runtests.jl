@@ -292,7 +292,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "compiled-state"
+    @test status.parity == "runtime-matching"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -302,7 +302,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: compiled-state", String(take!(status_output)))
+    @test occursin("parity: runtime-matching", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -695,6 +695,136 @@ Other: /x/
     @test _throws_compiled_spec_message(
         () -> compile_spec(missing; validate_source = false),
         "undefined rule 'Ghost'",
+    )
+end
+
+@testset "Runtime regex matching state" begin
+    @test parse_mode_from_name("seek") == SeekParseMode
+    @test parse_mode_from_name("consume") == ConsumeParseMode
+    @test parse_mode_name(SeekParseMode) == "seek"
+    @test to_json(ConsumeParseMode) == "consume"
+    @test_throws RuntimeRegexException parse_mode_from_name("scan")
+    @test_throws RuntimeRegexException RuntimeRegexAlternation(["("])
+
+    alternation = RuntimeRegexAlternation(["cat", "dog"])
+    @test length(alternation) == 2
+    @test !isempty(alternation)
+    @test to_json(alternation)["patterns"] == ["cat", "dog"]
+
+    seek = runtime_match(alternation, "xx dog cat", 0; parse_mode = SeekParseMode)
+    @test seek !== nothing
+    @test seek.alternative_index == 1
+    @test seek.pattern == "dog"
+    @test match_text(seek) == "dog"
+    @test seek.codeunit_start == 3
+
+    @test runtime_match(alternation, "xx dog cat", 0; parse_mode = "consume") === nothing
+    consume = consume_match(alternation, "dog cat", 0)
+    @test consume !== nothing
+    @test consume.alternative_index == 1
+    @test match_text(consume) == "dog"
+
+    tie = RuntimeRegexAlternation(["c.t", "cat"])
+    @test seek_match(tie, "cat", 0).alternative_index == 0
+    @test isempty(RuntimeRegexAlternation(String[]))
+
+    compiled = compile_spec(parse_spec("Top::\n /cat/ /dog/"))
+    compiled_alternation = RuntimeRegexAlternation(compiled_rule(compiled, "Top"))
+    compiled_match = seek_match(compiled_alternation, "xx dog cat", 0)
+    @test compiled_match.alternative_index == 1
+    @test compiled_match.pattern == "dog"
+
+    capture_input = "e🙂 abc-42"
+    capture_match = seek_match(
+        RuntimeRegexAlternation([raw"(?P<word>[a-z]+)-(a)?(\d+)()"]),
+        capture_input,
+        0,
+    )
+    @test match_text(capture_match) == "abc-42"
+    @test capture_match.groups == ["abc-42", "abc", "", "42", ""]
+    @test capture_match.captures == ["abc", "42", ""]
+    @test named_capture(capture_match, "word") == "abc"
+    @test capture_match.codeunit_start == 6
+    @test capture_match.codeunit_end == 12
+    @test codeunit_length(capture_match) == 6
+    @test char_start(capture_match) == 3
+    @test char_end(capture_match) == 9
+    @test char_length(capture_match) == 6
+    @test to_json(match_start_line_column(capture_match)) == Dict{String,Any}(
+        "line" => 1,
+        "column" => 4,
+    )
+    @test to_json(capture_match)["captures"] == ["abc", "42", ""]
+    @test !is_zero_width(capture_match)
+
+    @test named_capture(
+        consume_match(RuntimeRegexAlternation([raw"(?<word>[a-z]+)"]), "name", 0),
+        "word",
+    ) == "name"
+    @test match_text(
+        consume_match(RuntimeRegexAlternation([raw"[[:alpha:]]+"]), "Name", 0),
+    ) == "Name"
+    @test match_text(
+        consume_match(RuntimeRegexAlternation([raw"(?i)name"]), "NAME", 0),
+    ) == "NAME"
+    @test match_text(
+        consume_match(RuntimeRegexAlternation([raw"(?i:name)"]), "NAME", 0),
+    ) == "NAME"
+    @test match_text(
+        consume_match(RuntimeRegexAlternation([raw"\w++\s+[^}]++"]), "name value", 0),
+    ) == "name value"
+    @test match_text(
+        consume_match(
+            RuntimeRegexAlternation([raw"(\[(?:[^\[\]]++|(?R))+\])"]),
+            "[x [y] z]",
+            0,
+        ),
+    ) == "[x [y] z]"
+
+    register_input = "parent child"
+    parent_match = consume_match(RuntimeRegexAlternation(["parent", "child"]), register_input, 0)
+    parent_registers = with_local_match(RuntimeMatchRegisters(register_input), parent_match)
+    child_entry = enter_child(parent_registers)
+    @test match_text(child_entry.entry_match) == "parent"
+    @test child_entry.local_match === nothing
+    @test child_entry.capture_start_codeunit == parent_match.codeunit_end
+
+    child_match = consume_match(
+        RuntimeRegexAlternation(["parent", "child"]),
+        register_input,
+        ncodeunits("parent "),
+    )
+    child_registers = with_local_match(child_entry, child_match)
+    @test match_text(child_registers.entry_match) == "parent"
+    @test match_text(child_registers.local_match) == "child"
+    @test match_text(parent_registers.local_match) == "parent"
+
+    cursor_input = "a\n🙂b"
+    cursor_codeunit = char_offset_to_codeunit_offset(cursor_input, 3)
+    @test cursor_codeunit == 6
+    @test codeunit_offset_to_char_offset(cursor_input, cursor_codeunit) == 3
+    cursor_registers = RuntimeMatchRegisters(cursor_input; cursor_codeunit = cursor_codeunit)
+    @test cursor_char_offset(cursor_registers) == 3
+    @test to_json(cursor_line_column(cursor_registers)) == Dict{String,Any}(
+        "line" => 2,
+        "column" => 2,
+    )
+
+    empty_match = consume_match(RuntimeRegexAlternation([""]), cursor_input, 1)
+    @test is_zero_width(empty_match)
+    @test is_zero_progress_from(empty_match, 1)
+    @test !made_progress_from(empty_match, 1)
+
+    advanced_match = seek_match(RuntimeRegexAlternation(["🙂"]), cursor_input, 0)
+    advanced_registers = with_local_match(RuntimeMatchRegisters(cursor_input), advanced_match)
+    @test !zero_progress_since(advanced_registers, 0)
+    @test reindex_runtime_regex_match(advanced_match, 7).alternative_index == 7
+    @test with_cursor_codeunit(advanced_registers, 0).cursor_codeunit == 0
+    @test with_capture_start_codeunit(advanced_registers, 0).capture_start_codeunit == 0
+    @test_throws ArgumentError RuntimeMatchRegisters(cursor_input; cursor_codeunit = 3)
+    @test_throws ArgumentError with_local_match(
+        RuntimeMatchRegisters("other"),
+        advanced_match,
     )
 end
 

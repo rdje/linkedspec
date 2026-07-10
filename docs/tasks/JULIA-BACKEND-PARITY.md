@@ -184,20 +184,24 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.3.4 - add Julia compiled-spec state`
 
 - ID: `JULIA-BACKEND-PARITY.4`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the Julia runtime interpreter and helper/value semantics.
   Children: `.4.1`, `.4.2`, `.4.3`, `.4.4`, `.4.5`
 
 - ID: `JULIA-BACKEND-PARITY.4.1`
-  Status: `active`
+  Status: `done`
   Goal: Implement regex matching and match-state tracking.
   Acceptance: Seek/consume modes, alternative identity, capture groups, named captures, char offsets, cursor
     position, entry/local match separation, and zero-progress detection match the contract.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `Pkg.test()` covers 60 runtime-matching assertions over parse modes, invalid-pattern
+    diagnostics, seek/consume selection, stable alternative identity, compiled-rule patterns, compact/full/named
+    captures, multibyte character offsets, line/column projection, cursor and entry/local registers, zero-width /
+    zero-progress behavior, reindexing, immutable cursor/capture-start updates, and boundary/input guards; total
+    Julia tests pass with 516 assertions.
+  Commit: `JULIA-BACKEND-PARITY.4.1 - add Julia runtime matching state`
 
 - ID: `JULIA-BACKEND-PARITY.4.2`
-  Status: `pending`
+  Status: `active`
   Goal: Implement first executable rule dispatch over compiled state.
   Acceptance: Default, AND, OR, and repetition modes execute with lifecycle order, action-edge/blind-call child
     dispatch, explicit return behavior, accumulators, recursion guards, and output shape parity.
@@ -329,7 +333,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.4.1` | `active` | Add Julia regex matching and match-state tracking now that compiled-state records carry ordered rules, dependency refs, action payloads, and descriptor metadata. |
+| 1 | `JULIA-BACKEND-PARITY.4.2` | `active` | Execute compiled default, AND, OR, and repetition rule families now that Julia has stable runtime match identity and entry/local cursor state. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -553,12 +557,53 @@ Compiled-state evidence recorded on 2026-07-10:
   and resolve contracts with the compiled function registry, so exact-arity user calls remain classified before
   helper fallback inside compiled state.
 - Dependency-regex state derives child-rule regex patterns into `CompiledDependencyRegexEntry` rows with dependency
-  refs, pattern lists, and combined pattern strings while keeping executable regex matching deferred to `.4.1`.
+  refs, pattern lists, and combined pattern strings; executable regex matching has since landed in `.4.1`.
 - `to_json(compiled)` exposes the internal compiled-spec model; `to_descriptor_json(compiled)` projects the public
   descriptor-shaped `spec`, `functions`, `dependency_regex_map`, and `meta` shape with
   `julia_interpreter_rule` handlers marked `compiled_state_only`.
-- The package parity status is now `compiled-state`. Runtime matching, executable rule dispatch, staged parser
-  execution, diagnostics/trace, and corpus execution remain later leaves.
+- At this leaf the package parity status was `compiled-state`; `.4.1` has since advanced it to `runtime-matching`.
+  Executable rule dispatch, staged parser execution, diagnostics/trace, and corpus execution remain later leaves.
+
+## `JULIA-BACKEND-PARITY.4.1` Runtime Matching Result
+
+Runtime matching evidence recorded on 2026-07-10:
+
+- `julia/src/runtime/Matching.jl` adds `LinkedSpecParseMode`, `RuntimeRegexAlternative`,
+  `RuntimeRegexAlternation`, `RuntimeRegexMatch`, `RuntimeLineColumn`, `RuntimeMatchRegisters`, and
+  `RuntimeRegexException`.
+- `runtime_match(...)`, `seek_match(...)`, and `consume_match(...)` preserve stable zero-based alternative identity;
+  seek mode selects the earliest match and breaks same-position ties by lower source alternative, while consume
+  mode accepts only a match beginning at the cursor.
+- Match records preserve the full group-slot vector with empty placeholders, the compact participating-capture
+  vector, named captures, zero-based Julia code-unit spans, public character offsets, and line/column projection.
+- `RuntimeMatchRegisters` tracks the code-unit cursor and capture start, separates rule-entry and current-local
+  matches across child entry, and exposes immutable updates plus zero-width/zero-progress predicates.
+- Native Julia `Regex`/PCRE probes cover Python-style and angle-bracket named captures, POSIX classes,
+  inline/scoped flags, possessive quantifiers, and recursive `(?R)` directly; Julia therefore needs no Dart-like
+  regex-dialect normalization at this boundary.
+- The package parity status is now `runtime-matching`. First executable rule dispatch advances to `.4.2`; staged
+  parser execution, diagnostics/trace, and corpus execution remain later leaves.
+
+## `JULIA-BACKEND-PARITY.4.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.4.1` acceptance required Julia seek/consume selection, stable alternative identity,
+  capture/named-capture state, public character offsets, cursor position, entry/local separation, and zero-progress
+  detection; the Dart parity target was inspected in `dart/lib/src/runtime/matching.dart` and
+  `dart/test/runtime_matching_test.dart`, with the Perl/Rust cursor and capture owners checked through the linked
+  Knowledge Map records.
+- [x] **ROOT CAUSE (WHY + WHERE)** — After `.3.4`, `julia/src/compiler/CompiledSpec.jl` carried ordered regex
+  strings but the package had no `julia/src/runtime/` owner to compile alternatives, select matches, preserve
+  capture identity, translate Julia code-unit offsets to public character offsets, or carry interpreter match
+  registers. Direct Julia native-regex probes established the backend-specific PCRE behavior before code.
+- [x] **FIX** — Added `julia/src/runtime/Matching.jl`, exported the matching/register API from
+  `julia/src/LinkedSpecJulia.jl`, advanced package status to `runtime-matching`, and added focused parity tests.
+- [x] **ADDRESSED (verified)** — `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia
+  --project=julia -e 'using Pkg; Pkg.test()'` passes with 60 focused runtime-matching assertions.
+- [x] **NO REGRESSION** — The same `Pkg.test()` run passes scaffold, frontend, ActionIR, registry, compiled-state,
+  and corpus-IO coverage for 516 total assertions.
+- [x] **LOCKSTEP** — README, task tree, live docs, roadmaps, mdBook handoff/status/check pages, Knowledge Map fact
+  card, architecture snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` updated for the `.4.1`
+  boundary.
 
 ## `JULIA-BACKEND-PARITY.3.4` Acceptance Checklist
 
@@ -676,7 +721,10 @@ Compiled-state evidence recorded on 2026-07-10:
   execution of user-function bodies remains deferred to runtime leaves.
 - `2026-07-10`: `.3.4` follows the Dart compiled-spec state boundary without importing runtime execution. Julia now
   records compiled rules, dependency refs, dependency-regex rows, action payload ASTs/contracts, function registry
-  data, and descriptor metadata; executable regex matching starts in `.4.1`.
+  data, and descriptor metadata; executable regex matching has since landed in `.4.1`.
+- `2026-07-10`: `.4.1` follows the Dart runtime matching contract while using Julia's native PCRE engine directly.
+  Match state keeps stable alternative indexes, full/compact/named captures, character projections, distinct
+  entry/local registers, and zero-progress detection; executable rule dispatch remains isolated in `.4.2`.
 
 ## Open Questions
 
@@ -687,8 +735,8 @@ Compiled-state evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.4.1`. Compiled-state records are in place; regex matching and match-state tracking are the next owned
-  runtime boundary.
+- None for `.4.2`. Compiled-state records and runtime matching registers are in place; executable rule dispatch is
+  the next owned runtime boundary.
 
 ## Verification Log
 
@@ -706,6 +754,7 @@ Compiled-state evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.3.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia Action contract resolver tests cover canonical helper/control contracts, aliases, structural assignment contracts, receiver methods, generic unknown-helper/raw diagnostics, and validation sharing of the current helper table; total Julia tests pass with 392 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.3.3` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia user-function registry tests cover ordered entries, staged body parse jobs, sidecar/body-AST preservation, immutable body-AST stitching, duplicate rejection, exact match, wrong arity, missing names, and registry-aware ActionIR contract resolution; total Julia tests pass with 415 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.3.4` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia compiled-state tests cover ordered rules, dependency refs, dependency-regex rows, descriptor projection, lifecycle/action payload ASTs, registry-aware contracts, last-definition-wins metadata when validation is skipped, validation reuse, and compiled-state diagnostics; total Julia tests pass with 456 assertions. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.4.1` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Julia runtime-matching tests cover seek/consume modes, stable alternative identity, compiled-rule pattern input, full/compact/named captures, multibyte character offsets, line/column projection, entry/local registers, cursor state, immutable updates, native PCRE dialect forms, zero-width/progress detection, and boundary/input guards; total Julia tests pass with 516 assertions. |
 
 ## Commit Log
 
@@ -723,9 +772,15 @@ Compiled-state evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.3.2` | `JULIA-BACKEND-PARITY.3.2 - add Julia ActionIR contract resolver` | Current helper/control contract resolution; user-function registry advances to `.3.3`. |
 | `JULIA-BACKEND-PARITY.3.3` | `JULIA-BACKEND-PARITY.3.3 - add Julia user-function registry` | Ordered user-function registry, staged body parse-job queue, body-AST stitching helper, and registry-aware ActionIR contracts; compiled state advances to `.3.4`. |
 | `JULIA-BACKEND-PARITY.3.4` | `JULIA-BACKEND-PARITY.3.4 - add Julia compiled-spec state` | Compiled-spec/interpreter-state records, dependency-regex state, action payload contracts, and descriptor projection; runtime matching advances to `.4.1`. |
+| `JULIA-BACKEND-PARITY.4.1` | `JULIA-BACKEND-PARITY.4.1 - add Julia runtime matching state` | Seek/consume regex alternatives, capture/offset projection, cursor and entry/local match registers, and zero-progress detection; executable rule dispatch advances to `.4.2`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.4.1` runtime regex matching and match-state tracking.
+  `julia/src/runtime/Matching.jl` now compiles stable indexed alternatives, selects seek/consume matches, records
+  full/compact/named capture state, projects code-unit spans to character and line/column positions, keeps cursor
+  and entry/local registers separate, and detects zero progress. `Pkg.test()` passes with 516 total assertions;
+  `.4.2` owns first executable rule dispatch.
 - `2026-07-10`: Completed `.3.4` compiled-spec state. `julia/src/compiler/CompiledSpec.jl` now builds ordered
   compiled rule records, dependency refs, dependency-regex rows, lifecycle/action payload ASTs with registry-aware
   contracts, mode metadata, function-registry descriptor records, and descriptor-shaped JSON. `Pkg.test()` passes

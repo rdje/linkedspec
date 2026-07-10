@@ -18,35 +18,35 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.3.4` — Julia now compiles parsed specs into ordered compiled-state
-  records with dependency refs, dependency-regex rows, lifecycle/action payload ASTs, registry-aware contracts,
-  mode metadata, function registry projection, and descriptor JSON.
-- prior_leaf: `JULIA-BACKEND-PARITY.3.3` — Julia has an ordered user-function registry, staged body parse-job queue
-  exposure, immutable `body_ast` stitching, and registry-aware exact-arity ActionIR contract resolution before
-  helper fallback.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.4.1` — Julia now has seek/consume regex alternatives, stable
+  alternative/capture identity, public character and line/column projection, cursor/capture anchors, separate
+  entry/local match registers, and zero-progress detection.
+- prior_leaf: `JULIA-BACKEND-PARITY.3.4` — Julia compiles parsed specs into ordered compiled-state records with
+  dependency refs, dependency-regex rows, lifecycle/action payload ASTs, registry-aware contracts, mode metadata,
+  function registry projection, and descriptor JSON.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.3.4 - add Julia compiled-spec state`; previous committed HEAD is
-  `388098dd JULIA-BACKEND-PARITY.3.3 - add Julia user-function registry`.
+  `JULIA-BACKEND-PARITY.4.1 - add Julia runtime matching state`; previous committed HEAD is
+  `062c66f2 JULIA-BACKEND-PARITY.3.4 - add Julia compiled-spec state`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; current frontier after the current commit is `.4.1`.
-- next_action: resume PNT at `JULIA-BACKEND-PARITY.4.1` to implement Julia regex matching and match-state tracking
-  over compiled rules: seek/consume modes, stable alternative indexes, capture/named-capture records, char offsets,
-  cursor state, entry/local match separation, and zero-progress detection.
+- active_work_unit: `JULIA-BACKEND-PARITY`; current frontier after the current commit is `.4.2`.
+- next_action: resume PNT at `JULIA-BACKEND-PARITY.4.2` to implement first executable Julia rule dispatch over
+  compiled state: default, AND, OR, and repetition families; lifecycle order; action/blind child edges; explicit
+  returns; accumulators; recursion and zero-progress guards; and backend-neutral output shapes.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
-- latest_bootstrap_read: 2026-07-10 read README, memory architecture, session bootstrap, COMMIT, task-tree index,
-  completed Dart task tree, active future-backlog/Julia task context, ROADMAP/ROADMAP_V2, mdBook
-  trace/runtime/status/backend-handoff chapters, relevant ADR/KM facts, Dart runtime/package/corpus/CLI source
-  owners through `.7.5`, Rust staged-registry/trace references, and the completed cursor-control split.
+- latest_bootstrap_read: 2026-07-10 read the full roadmap and roadmap-v2, full codebase inventory and active Julia
+  source/tests, full mdBook source, README/memory architecture/session bootstrap/COMMIT/task-tree doctrine, active
+  Julia tree, relevant ADR/KM/toolbox facts, Dart matching/interpreter references, and Rust/Perl cursor/capture
+  references before implementing `.4.1`.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1028`**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.3.4` commit; do not pivot unless the repo
-  is handoff-ready.
+- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.4.1` commit; do not pivot
+  unless the repo is handoff-ready.

@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.1` adds Julia runtime regex matching and match-state tracking.
+  `julia/src/runtime/Matching.jl` defines seek/consume parse modes, compiled regex alternatives with stable
+  zero-based identity, complete and compact capture projections, named captures, zero-based code-unit spans,
+  public character offsets, line/column projection, cursor/capture anchors, separate entry/local match registers,
+  and zero-width/zero-progress predicates. Julia's native PCRE integration accepts the currently required named
+  capture, POSIX, flag, possessive, and recursive constructs directly, so this leaf needs no dialect-rewrite layer.
+  First executable rule dispatch starts in `JULIA-BACKEND-PARITY.4.2`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.3.4` adds Julia compiled-spec state.
   `julia/src/compiler/CompiledSpec.jl` defines `compile_spec(...)`, `CompiledSpec`, `CompiledRule`,
   `CompiledRuleModeMetadata`, `DependencyRef`, action/blind edge records, `CompiledActionPayload`,
@@ -12,7 +19,7 @@ This document is the current high-level technical reading of the project shape. 
   `validate_spec(...)` by default, records ordered rule/last-definition metadata, derives dependency-regex rows,
   parses lifecycle/action payloads into `ActionBlock` ASTs, resolves payload contracts with the user-function
   registry, carries function registry projection, and emits descriptor-shaped JSON with `julia_interpreter_rule`
-  handlers marked `compiled_state_only`. Runtime regex matching starts in `JULIA-BACKEND-PARITY.4.1`.
+  handlers marked `compiled_state_only`. Runtime regex matching has since landed in `JULIA-BACKEND-PARITY.4.1`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.3.3` adds the Julia user-function registry seam.
   `julia/src/action/FunctionRegistry.jl` defines `UserFunctionRegistry`, `UserFunctionEntry`, and
   `UserFunctionCallResolution`, builds ordered entries from `SpecFile.functions`, exposes staged

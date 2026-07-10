@@ -3,8 +3,8 @@
 This directory is the repository-owned Julia backend scaffold. The current status is package and command
 surface, manifest-backed corpus validation, source AST/data types, core `.spec` source parsing, frontend source
 validation, spec-shaped user-function shell projection, typed helper/action AST parsing, canonical ActionIR contract
-resolution, a user-function registry seam, and compiled-spec state: no runtime interpreter or corpus execution
-semantics are implemented yet.
+resolution, a user-function registry seam, compiled-spec state, and runtime regex/match-state primitives: no rule
+interpreter or corpus execution semantics are implemented yet.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -12,8 +12,9 @@ was added by `JULIA-BACKEND-PARITY.2.2`. Frontend validation and strict syntax b
 `JULIA-BACKEND-PARITY.2.3`. Function-definition shell projection was added by `JULIA-BACKEND-PARITY.2.4`.
 Typed helper/action AST parsing was added by `JULIA-BACKEND-PARITY.3.1`, ActionIR contract resolution was added by
 `JULIA-BACKEND-PARITY.3.2`, the user-function registry seam was added by `JULIA-BACKEND-PARITY.3.3`, and
-compiled-spec state was added by `JULIA-BACKEND-PARITY.3.4`. The active next boundary is
-`JULIA-BACKEND-PARITY.4.1` for regex matching and match-state tracking.
+compiled-spec state was added by `JULIA-BACKEND-PARITY.3.4`. Runtime regex matching and match-state tracking were
+added by `JULIA-BACKEND-PARITY.4.1`. The active next boundary is `JULIA-BACKEND-PARITY.4.2` for first executable
+rule dispatch over compiled state.
 
 ## Commands
 
@@ -75,4 +76,9 @@ parse-job queues, exact-arity lookup, JSON projection, and immutable `body_ast` 
 `CompiledDependencyRegexState`, `CompiledDescriptorState`, `compiled_rule(...)`, `action_payloads(...)`, and
 `to_descriptor_json(...)` for ordered compiled rules, dependency refs, dependency-regex rows, mode metadata,
 lifecycle/action payload ASTs with registry-aware contracts, function registry projection, and descriptor-shaped JSON.
-Later leaves own runtime interpretation, staged parser execution, diagnostics, tracing, and corpus execution.
+`src/runtime/Matching.jl` exposes seek/consume regex matching with stable alternative indexes, complete and compact
+capture projections, named captures, zero-based code-unit spans, public character offsets, line/column projection,
+cursor state, separate entry/local match registers, and zero-progress detection. Julia's native PCRE integration
+accepts the currently required Python-style named captures, POSIX classes, inline/scoped flags, possessive
+quantifiers, and recursive patterns directly. Later leaves own executable rule dispatch, staged parser execution,
+diagnostics, tracing, and corpus execution.

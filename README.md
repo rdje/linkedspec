@@ -83,6 +83,12 @@ Top-level directories and files:
     parsing, ActionIR contract resolution, user-function registry, staged function-body registry dispatch,
     compiled-spec state, runtime regex/match state, rule-dispatch interpreter, staged user-function runtime
     execution, and 99-fixture corpus output parity under `DART-BACKEND-PARITY`.
+- `julia/`
+  - Julia backend parity package.
+  - Current state: package/corpus scaffold, source frontend, typed ActionIR and contracts, user-function registry,
+    compiled-spec state, and runtime seek/consume regex matching with capture/offset projection, cursor state,
+    entry/local match registers, and zero-progress detection. First executable rule dispatch is the active
+    `JULIA-BACKEND-PARITY.4.2` frontier.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

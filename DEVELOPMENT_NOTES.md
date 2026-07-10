@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.4.1 — Julia runtime matching state):
+  Julia now has the regex/match-state foundation required by executable rule dispatch.
+  `julia/src/runtime/Matching.jl` compiles stable zero-based regex alternatives, implements earliest seek and
+  cursor-anchored consume modes, records full/compact/named captures, projects Julia code-unit spans to public
+  character and line/column positions, and keeps cursor/capture anchors plus entry/local matches in immutable
+  `RuntimeMatchRegisters`. Direct native-PCRE probes established that Python/angle named captures, POSIX classes,
+  inline/scoped flags, possessive quantifiers, and recursive `(?R)` need no Julia dialect bridge. `.4.2` owns first
+  executable rule dispatch; `.4.1` does not interpret ActionIR or compiled rule modes.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.3.4 — Julia compiled-spec state):
   Julia now has a compiled-state model before runtime matching. `julia/src/compiler/CompiledSpec.jl` exposes
   `compile_spec(...)`, `CompiledSpec`, `CompiledRule`, `CompiledDependencyRegexState`, `CompiledDescriptorState`,
@@ -8,7 +17,7 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   `validate_spec(...)` by default, carries ordered rule state and function registry projection, derives
   dependency-regex rows, parses lifecycle/action payloads into `ActionBlock` ASTs, resolves those payload contracts
   with the function registry, and projects descriptor-shaped JSON with `julia_interpreter_rule` handlers marked
-  `compiled_state_only`. Runtime regex matching and match registers start in `.4.1`.
+  `compiled_state_only`. Runtime regex matching and match registers have since landed in `.4.1`.
 
 - 2026-07-10 (JULIA-BACKEND-PARITY.3.3 — Julia user-function registry):
   Julia now has the data-layer user-function registry seam before compiled-state/runtime work.
