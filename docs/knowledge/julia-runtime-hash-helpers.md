@@ -36,7 +36,7 @@ when a typed named hash must be the explicit base. `hash(...)` splices a map
 only when its argument is structurally marked by `flat(...)` or
 `flat_hash(...)`; ordinary map values remain nested.
 
-Related facts: [[julia-runtime-array-helpers]],
+Related facts: [[julia-runtime-value-control-tree-helpers]], [[julia-runtime-array-helpers]],
 [[julia-runtime-core-value-capture-helpers]], [[dart-runtime-hash-helpers]],
 [[terse-hash-receiver-value-chains]], [[hash-helper-return-shape-caveats]],
 [[terse-statement-separator-contract]].

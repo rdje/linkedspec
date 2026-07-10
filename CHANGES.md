@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.4.3.5 — add Julia runtime controls and tree callbacks
+
+**Scope:** Julia expression-valued block flow, structured action controls, lazy inline branches, helper/receiver
+trailing with-blocks, hash/array tree traversal callbacks, scoped binding restoration, package status, focused
+runtime tests, README, task-tree frontier, roadmaps/index, mdBook status/handoff, Knowledge Map, architecture
+snapshot, live docs, and resume pointer.
+
+**Change:** Extended `julia/src/runtime/Interpreter.jl` with distinct rule/value block flow, block-local
+`return(...)` / `return_undef()`, attached and marker controls, lazy inline `if` / `switch`, deterministic while
+limits, immediate helper/receiver with-blocks, full scalar/array/hash binding snapshots, and hash/array
+walk/map/reduce receiver callbacks. Traversals preserve their current sorted-key or zero-based depth-first
+contracts and return `nothing` lazily for non-aggregate receivers. Package status now reports
+`runtime-value-control-tree`.
+
+**Validation:** `Pkg.test()` passes with 567 assertions, including eight focused block/control/callback assertions
+and all prior Julia coverage. Commit-time docs/governance validation covers mdBook, memory architecture,
+task-tree metadata, Knowledge Map, doctrine, and `git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.4.3.4 — add Julia runtime hash helpers
 
 **Scope:** Julia runtime hash helper/receiver dispatch, copied views and transformations, statement-only named

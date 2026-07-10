@@ -4,8 +4,9 @@ This directory is the repository-owned Julia backend scaffold. The current statu
 surface, manifest-backed corpus validation, source AST/data types, core `.spec` source parsing, frontend source
 validation, spec-shaped user-function shell projection, typed helper/action AST parsing, canonical ActionIR contract
 resolution, a user-function registry seam, compiled-spec state, runtime regex/match-state primitives, and first
-compiled-rule interpreter dispatch with core value/store/capture semantics plus string/numeric, array, and hash
-helper families: value/control/block/callback breadth and corpus execution are not implemented yet.
+compiled-rule interpreter dispatch with core value/store/capture semantics plus string/numeric, array, hash,
+value/control/block, and tree-callback families: cursor/diagnostic/staged-function/corpus breadth is not implemented
+yet.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -18,7 +19,7 @@ added by `JULIA-BACKEND-PARITY.4.1`, and first executable rule dispatch was adde
 `JULIA-BACKEND-PARITY.4.2`. `JULIA-BACKEND-PARITY.4.3.0` split helper/value work by runtime mechanism. Core
 value/store/capture behavior landed in `.4.3.1`, and string/scalar plus numeric helpers landed in `.4.3.2`. The
 array helper and mutation boundary landed in `.4.3.3`, and hash helper and mutation behavior landed in `.4.3.4`;
-`.4.3.5` is active for value/control/block/callback execution.
+`.4.3.5` landed value/control/block/callback execution, and `.4.3.6` is active for final helper/value no-drift.
 
 ## Commands
 
@@ -92,13 +93,13 @@ returns; narrow array accumulators/capture reads; recursion guards; and zero-pro
 mode. The embedded ActionIR evaluator now preserves scalar/array/hash/null/boolean/number shapes through separate
 stores, bare reads, typed `array(name)` / `hash(name)` snapshots, `copy(...)`, literals, assignments, indexed and
 nested reads, and checked no-autovivification nested writes. It also exposes entry/local capture text, groups,
-named maps/existence, character spans, and line-column helpers. `.4.3.2` through `.4.3.5` own string/number, array,
-hash, and control/block/callback breadth. `.4.3.2` now executes current string/scalar and numeric transforms,
-predicates, lexical comparisons, aliases and symbol callees, reducers, invalid-input boundaries, and compatible
-string/number receiver chains through one canonical dispatcher. `.4.3.3` through `.4.3.5` own array, hash, and
-control/block/callback breadth. `.4.3.3` now executes copied array pipelines, string/regex/split bridges,
-flatten/concat and explicit constructor splicing, numeric reducer terminals, typed split replacement, and
-statement-only named/scalar-held end mutations. `.4.3.4` now executes copied hash views and pure transformations,
-base/overlay-aware merge resolution, direct hash-index assignment, explicit flat-style splicing, and statement-only
-named set-key mutation. `.4.3.5` owns control/block/callback breadth, with `.4.3.6` owning no-drift closeout; cursor controls, staged parser
-execution, diagnostics, tracing, and corpus execution remain later leaves.
+named maps/existence, character spans, and line-column helpers. `.4.3.2` executes current string/scalar and numeric
+transforms, predicates, lexical comparisons, aliases and symbol callees, reducers, invalid-input boundaries, and
+compatible string/number receiver chains through one canonical dispatcher. `.4.3.3` executes copied array
+pipelines, string/regex/split bridges, flatten/concat and explicit constructor splicing, numeric reducer terminals,
+typed split replacement, and statement-only named/scalar-held end mutations. `.4.3.4` executes copied hash views
+and pure transformations, base/overlay-aware merge resolution, direct hash-index assignment, explicit flat-style
+splicing, and statement-only named set-key mutation. `.4.3.5` executes expression-valued blocks with local returns,
+attached/marker/inline controls, deterministic while guards, immediate helper/receiver with-blocks, and scoped
+hash/array tree traversal callbacks. `.4.3.6` owns final helper/value no-drift; cursor
+controls, staged parser execution, diagnostics, tracing, and corpus execution remain later leaves.

@@ -292,7 +292,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-hash-helpers"
+    @test status.parity == "runtime-value-control-tree"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -302,7 +302,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-hash-helpers", String(take!(status_output)))
+    @test occursin("parity: runtime-value-control-tree", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1480,6 +1480,172 @@ Top::
             ),
         ),
     )
+end
+
+@testset "Runtime value blocks controls and trailing blocks" begin
+    engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+Top::
+ /x/
+ E {
+   counted = { count = 0; while(num_lt(count, 2)) { count = num_add(count, 1) }; count }
+   local = { while(true) { return("local") }; "bad" }
+   local_undef = { return_undef(); "bad" }
+   branch = { if(false) { return("bad") } elseif(true) { return("yes") } else { return("no") } }
+   alias_branch = { when(false) { return("bad") } otherwise { return("alias") } }
+   marker = { if(false); return("bad"); else(); return("marker"); endif() }
+   kind = "b"
+   switched = { switch(kind) { case("a") { return("bad") } case("b") { return("hit") } default { return("miss") } } }
+   inline = if(false, "bad", else("fallback"))
+   inline_plain = if(false, "bad", "fallback")
+   inline_switch = switch(kind, case("a", "bad"), case("b", "inline-hit"), default("miss"))
+   value = "outer"
+   with_result = with("inner") { value = cat(value, "!"); return(value) }
+   with_undef = with() { return(is_undefined(value)) }
+   receiver = " a-b ".trim().with() { return(value.split("-")) }.count()
+   return(array(counted, local, is_undefined(local_undef), branch, alias_branch, marker, switched, inline, inline_plain, inline_switch, with_result, with_undef, receiver, value))
+ }
+""")))
+
+    @test runtime_parse(engine, "x").value == Any[
+        2,
+        "local",
+        true,
+        "yes",
+        "alias",
+        "marker",
+        "hit",
+        "fallback",
+        "fallback",
+        "inline-hit",
+        "inner!",
+        true,
+        2,
+        "outer",
+    ]
+
+    return_engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+Top::
+ /x/
+ E {
+   while(true) { return("done") }
+   return("bad")
+ }
+""")))
+    @test runtime_parse(return_engine, "x").value == "done"
+
+    marker_engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+Top::
+ /x/
+ E {
+   if(false)
+   return("bad")
+   else()
+   return("marker-rule")
+   endif()
+ }
+""")))
+    @test runtime_parse(marker_engine, "x").value == "marker-rule"
+
+    limited_engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+Top::
+ /x/
+ E {
+   while(true) { count = num_add(count, 1) }
+ }
+""")); max_iterations = 2)
+    @test_throws RuntimeInterpreterException runtime_parse(limited_engine, "x")
+
+    unsupported_block_engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+Top::
+ /x/
+ E {
+   cat("x") { return("bad") }
+   return("ok")
+ }
+""")))
+    @test_throws RuntimeInterpreterException runtime_parse(unsupported_block_engine, "x")
+
+    receiver_arity_engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+Top::
+ /x/
+ E { return("x".with("bad") { return(value) }) }
+""")))
+    @test_throws RuntimeInterpreterException runtime_parse(receiver_arity_engine, "x")
+end
+
+@testset "Runtime hash and array tree traversal callbacks" begin
+    engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+Top::
+ /x/
+ E {
+   meta = { "b" : { "y" : "B" }, "a" : "A", "arr" : ["u", "v"] }
+   items = ["a", ["b", "c"], { "h" : "H" }]
+   value = "outer"
+   key = "outer-key"
+   index = 99
+   path = ["outer"]
+   depth = 99
+   acc = "outer-acc"
+   nonhash = "x".map_leaves() { seen += "bad" }
+   nonarray = "x".walk_leaves() { seen += "bad" }
+   nonreduce = "x".reduce_leaves(seen += "bad") { return(acc) }
+   return(array(
+     meta.map_leaves() { return(cat(join_values("/", array(path)), "=", if(count(array(value)), join_values("", array(value)), else(value)))) },
+     meta.reduce_leaves("") { return(cat(acc, key)) },
+     meta.walk_leaves() { seen += join_values("/", array(path)); return(value) }.count_keys(),
+     items.map_leaves() { return(cat(join_values("/", array(path)), "=", if(count(hash(value).sorted_keys()), cat("{", hash(value).sorted_keys().join_values(","), "}"), else(value)))) },
+     items.reduce_leaves("") { return(cat(acc, join_values("/", array(path)), ":", if(count(hash(value).sorted_keys()), cat("{", hash(value).sorted_keys().join_values(","), "}"), else(value)), ";")) },
+     items.walk_leaves() { seen += join_values("/", array(path)); return(value) }.count(),
+     array(seen),
+     is_undefined(nonhash),
+     is_undefined(nonarray),
+     is_undefined(nonreduce),
+     value,
+     key,
+     index,
+     array(path),
+     depth,
+     acc
+   ))
+ }
+""")))
+
+    @test runtime_parse(engine, "x").value == Any[
+        Dict{String,Any}(
+            "a" => "a=A",
+            "arr" => "arr=uv",
+            "b" => Dict{String,Any}("y" => "b/y=B"),
+        ),
+        "aarry",
+        3,
+        Any[
+            "0=a",
+            Any["1/0=b", "1/1=c"],
+            "2={h}",
+        ],
+        "0:a;1/0:b;1/1:c;2:{h};",
+        3,
+        Any["a", "arr", "b/y", "0", "1/0", "1/1", "2"],
+        true,
+        true,
+        true,
+        "outer",
+        "outer-key",
+        99,
+        Any["outer"],
+        99,
+        "outer-acc",
+    ]
+
+    malformed_engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+Top::
+ /x/
+ E {
+   items = ["x"]
+   return(items.map_leaves("bad") { return(value) })
+ }
+""")))
+    @test_throws RuntimeInterpreterException runtime_parse(malformed_engine, "x")
 end
 
 @testset "Spec parser" begin

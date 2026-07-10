@@ -93,6 +93,21 @@ struct _RuntimeNextableBool
     nexted::Bool
 end
 
+struct _RuntimeValueBlockFlow
+    returned::Bool
+    value::Any
+end
+
+struct _RuntimeScopedBinding
+    name::String
+    variable_present::Bool
+    variable::Any
+    array_present::Bool
+    array::Any
+    hash_present::Bool
+    hash::Any
+end
+
 mutable struct _CurrentRuntimeActionEdge
     rule_label::String
     edge::CompiledActionEdge
@@ -616,15 +631,18 @@ function _execute_runtime_action_block!(
     current_edge,
 )
     try
-        for statement in block.statements
-            _evaluate_runtime_action_expr!(
+        index = 1
+        stop = length(block.statements) + 1
+        while index < stop
+            index = _execute_runtime_action_statement_at!(
                 engine,
-                statement.expr,
+                block.statements,
+                index,
+                stop,
                 context,
                 rule_label,
                 current_edge,
-                statement.drops_value,
-            )
+            ) + 1
         end
         return nothing
     catch error
@@ -637,6 +655,585 @@ function _execute_runtime_action_block!(
             "action block failed in rule $rule_label: $(sprint(showerror, error))",
         ))
     end
+end
+
+function _execute_runtime_action_statement_at!(
+    engine,
+    statements,
+    index,
+    stop,
+    context,
+    rule_label,
+    current_edge,
+)
+    statement = statements[index]
+    expr = statement.expr
+    if expr isa ActionControlIfExpr && expr.branch_role == "if" && expr.body !== nothing
+        return _execute_runtime_attached_if_chain!(
+            engine,
+            statements,
+            index,
+            stop,
+            context,
+            rule_label,
+            current_edge,
+        )
+    elseif expr isa ActionControlIfExpr && expr.branch_role == "if" && expr.body === nothing
+        selection = _select_runtime_marker_if_chain(
+            engine,
+            statements,
+            index,
+            stop,
+            context,
+            rule_label,
+            current_edge,
+        )
+        if selection.start !== nothing && selection.stop !== nothing
+            _execute_runtime_action_statement_range!(
+                engine,
+                statements,
+                selection.start,
+                selection.stop,
+                context,
+                rule_label,
+                current_edge,
+            )
+        end
+        return selection.next_index
+    elseif expr isa ActionControlWhileExpr && expr.body !== nothing
+        _execute_runtime_attached_while!(
+            engine,
+            expr,
+            context,
+            rule_label,
+            current_edge,
+        )
+        return index
+    elseif expr isa ActionControlSwitchExpr && (!isempty(expr.cases) || expr.default_case !== nothing)
+        body = _select_runtime_switch_body(
+            engine,
+            expr,
+            context,
+            rule_label,
+            current_edge,
+        )
+        if body !== nothing
+            result = _execute_runtime_action_block!(
+                engine,
+                body,
+                context,
+                rule_label,
+                current_edge,
+            )
+            if result !== nothing
+                throw(result)
+            end
+        end
+        return index
+    elseif (expr isa ActionControlIfExpr && expr.branch_role == "elseif") ||
+           expr isa ActionControlElseExpr || expr isa ActionControlCaseExpr ||
+           expr isa ActionControlDefaultExpr || expr isa ActionControlMarkerExpr
+        return index
+    end
+
+    _evaluate_runtime_action_expr!(
+        engine,
+        expr,
+        context,
+        rule_label,
+        current_edge,
+        statement.drops_value,
+    )
+    return index
+end
+
+function _execute_runtime_action_statement_range!(
+    engine,
+    statements,
+    start,
+    stop,
+    context,
+    rule_label,
+    current_edge,
+)
+    index = start
+    while index < stop
+        index = _execute_runtime_action_statement_at!(
+            engine,
+            statements,
+            index,
+            stop,
+            context,
+            rule_label,
+            current_edge,
+        ) + 1
+    end
+    return nothing
+end
+
+function _execute_runtime_attached_if_chain!(
+    engine,
+    statements,
+    index,
+    stop,
+    context,
+    rule_label,
+    current_edge,
+)
+    selected_body = nothing
+    next_index = index
+    cursor = index
+    while cursor < stop
+        expr = statements[cursor].expr
+        if cursor == index
+            if _runtime_truthy(_evaluate_runtime_action_expr!(
+                    engine,
+                    expr.condition,
+                    context,
+                    rule_label,
+                    current_edge,
+                ))
+                selected_body = expr.body
+            end
+        elseif expr isa ActionControlIfExpr && expr.branch_role == "elseif"
+            if selected_body === nothing && _runtime_truthy(_evaluate_runtime_action_expr!(
+                    engine,
+                    expr.condition,
+                    context,
+                    rule_label,
+                    current_edge,
+                ))
+                selected_body = expr.body
+            end
+        elseif expr isa ActionControlElseExpr
+            if selected_body === nothing
+                selected_body = expr.body
+            end
+        else
+            break
+        end
+        next_index = cursor
+        if expr isa ActionControlElseExpr
+            break
+        end
+        cursor += 1
+    end
+    if selected_body !== nothing
+        result = _execute_runtime_action_block!(
+            engine,
+            selected_body,
+            context,
+            rule_label,
+            current_edge,
+        )
+        if result !== nothing
+            throw(result)
+        end
+    end
+    return next_index
+end
+
+function _execute_runtime_attached_while!(engine, expr, context, rule_label, current_edge)
+    for _ in 1:engine.max_iterations
+        if !_runtime_truthy(_evaluate_runtime_action_expr!(
+                engine,
+                expr.condition,
+                context,
+                rule_label,
+                current_edge,
+            ))
+            return nothing
+        end
+        result = _execute_runtime_action_block!(
+            engine,
+            expr.body,
+            context,
+            rule_label,
+            current_edge,
+        )
+        if result !== nothing
+            throw(result)
+        end
+    end
+    throw(RuntimeInterpreterException(
+        "LinkedSpec while iteration safety limit exceeded after $(engine.max_iterations) iterations",
+    ))
+end
+
+function _select_runtime_switch_body(engine, expr, context, rule_label, current_edge)
+    selector = _evaluate_runtime_action_expr!(
+        engine,
+        expr.source_expr,
+        context,
+        rule_label,
+        current_edge,
+    )
+    for item in expr.cases
+        if !(item isa ActionControlCaseExpr)
+            continue
+        end
+        candidate = item.match isa ActionVariableExpr ? item.match.name :
+            _evaluate_runtime_action_expr!(
+                engine,
+                item.match,
+                context,
+                rule_label,
+                current_edge,
+            )
+        if _runtime_string(candidate) == _runtime_string(selector)
+            return item.body
+        end
+    end
+    return expr.default_case isa ActionControlDefaultExpr ? expr.default_case.body : nothing
+end
+
+function _select_runtime_marker_if_chain(
+    engine,
+    statements,
+    index,
+    stop,
+    context,
+    rule_label,
+    current_edge,
+)
+    first_expr = statements[index].expr
+    selected_start = nothing
+    selected_stop = nothing
+    selected = _runtime_truthy(_evaluate_runtime_action_expr!(
+        engine,
+        first_expr.condition,
+        context,
+        rule_label,
+        current_edge,
+    ))
+    if selected
+        selected_start = index + 1
+    end
+    depth = 0
+    next_index = stop - 1
+    cursor = index + 1
+    while cursor < stop
+        expr = statements[cursor].expr
+        if _runtime_is_marker_if_start(expr)
+            depth += 1
+            cursor += 1
+            continue
+        elseif _runtime_is_marker_if_end(expr)
+            if depth > 0
+                depth -= 1
+                cursor += 1
+                continue
+            end
+            if selected && selected_stop === nothing
+                selected_stop = cursor
+            end
+            next_index = cursor
+            break
+        elseif depth == 0 && expr isa ActionControlIfExpr &&
+               expr.branch_role == "elseif" && expr.body === nothing
+            if selected && selected_stop === nothing
+                selected_stop = cursor
+            end
+            if !selected && _runtime_truthy(_evaluate_runtime_action_expr!(
+                    engine,
+                    expr.condition,
+                    context,
+                    rule_label,
+                    current_edge,
+                ))
+                selected_start = cursor + 1
+                selected = true
+            end
+        elseif depth == 0 && expr isa ActionControlElseExpr && expr.body === nothing
+            if selected && selected_stop === nothing
+                selected_stop = cursor
+            end
+            if !selected
+                selected_start = cursor + 1
+                selected = true
+            end
+        end
+        cursor += 1
+    end
+    if selected && selected_stop === nothing
+        selected_stop = stop
+    end
+    return (start = selected_start, stop = selected_stop, next_index = next_index)
+end
+
+_runtime_is_marker_if_start(expr) = expr isa ActionControlIfExpr &&
+    expr.branch_role == "if" && expr.body === nothing
+
+_runtime_is_marker_if_end(expr) = expr isa ActionControlMarkerExpr &&
+    expr.canonical_keyword == "endif"
+
+function _evaluate_runtime_block_value!(engine, block, context, rule_label, current_edge)
+    flow = _execute_runtime_value_statements!(
+        engine,
+        block.statements,
+        1,
+        length(block.statements) + 1,
+        context,
+        rule_label,
+        current_edge;
+        final_expression_yields = true,
+    )
+    return flow.returned ? flow.value : nothing
+end
+
+function _execute_runtime_value_statements!(
+    engine,
+    statements,
+    start,
+    stop,
+    context,
+    rule_label,
+    current_edge;
+    final_expression_yields::Bool,
+)
+    index = start
+    while index < stop
+        statement = statements[index]
+        expr = statement.expr
+        is_last = index == stop - 1
+
+        if expr isa ActionControlIfExpr && expr.branch_role == "if" && expr.body !== nothing
+            step = _execute_runtime_value_attached_if_chain!(
+                engine,
+                statements,
+                index,
+                stop,
+                context,
+                rule_label,
+                current_edge,
+            )
+            if step.flow.returned
+                return step.flow
+            elseif is_last && final_expression_yields
+                return _RuntimeValueBlockFlow(true, nothing)
+            end
+            index = step.next_index + 1
+            continue
+        elseif expr isa ActionControlIfExpr && expr.branch_role == "if" && expr.body === nothing
+            selection = _select_runtime_marker_if_chain(
+                engine,
+                statements,
+                index,
+                stop,
+                context,
+                rule_label,
+                current_edge,
+            )
+            if selection.start !== nothing && selection.stop !== nothing
+                flow = _execute_runtime_value_statements!(
+                    engine,
+                    statements,
+                    selection.start,
+                    selection.stop,
+                    context,
+                    rule_label,
+                    current_edge;
+                    final_expression_yields = false,
+                )
+                if flow.returned
+                    return flow
+                end
+            end
+            if is_last && final_expression_yields
+                return _RuntimeValueBlockFlow(true, nothing)
+            end
+            index = selection.next_index + 1
+            continue
+        elseif expr isa ActionControlWhileExpr && expr.body !== nothing
+            flow = _execute_runtime_value_while!(
+                engine,
+                expr,
+                context,
+                rule_label,
+                current_edge,
+            )
+            if flow.returned
+                return flow
+            elseif is_last && final_expression_yields
+                return _RuntimeValueBlockFlow(true, nothing)
+            end
+            index += 1
+            continue
+        elseif expr isa ActionControlSwitchExpr && (!isempty(expr.cases) || expr.default_case !== nothing)
+            body = _select_runtime_switch_body(
+                engine,
+                expr,
+                context,
+                rule_label,
+                current_edge,
+            )
+            if body !== nothing
+                flow = _execute_runtime_value_statements!(
+                    engine,
+                    body.statements,
+                    1,
+                    length(body.statements) + 1,
+                    context,
+                    rule_label,
+                    current_edge;
+                    final_expression_yields = false,
+                )
+                if flow.returned
+                    return flow
+                end
+            end
+            if is_last && final_expression_yields
+                return _RuntimeValueBlockFlow(true, nothing)
+            end
+            index += 1
+            continue
+        elseif (expr isa ActionControlIfExpr && expr.branch_role == "elseif") ||
+               expr isa ActionControlElseExpr || expr isa ActionControlCaseExpr ||
+               expr isa ActionControlDefaultExpr || expr isa ActionControlMarkerExpr
+            if is_last && final_expression_yields
+                return _RuntimeValueBlockFlow(true, nothing)
+            end
+            index += 1
+            continue
+        end
+
+        local_return = _runtime_local_return_payload(expr)
+        if local_return !== nothing
+            value = local_return.has_value ? _runtime_copy(_evaluate_runtime_action_expr!(
+                engine,
+                local_return.value,
+                context,
+                rule_label,
+                current_edge,
+            )) : nothing
+            return _RuntimeValueBlockFlow(true, value)
+        elseif is_last && final_expression_yields
+            return _RuntimeValueBlockFlow(true, _runtime_copy(_evaluate_runtime_action_expr!(
+                engine,
+                expr,
+                context,
+                rule_label,
+                current_edge,
+            )))
+        end
+
+        _evaluate_runtime_action_expr!(
+            engine,
+            expr,
+            context,
+            rule_label,
+            current_edge,
+            true,
+        )
+        index += 1
+    end
+    return _RuntimeValueBlockFlow(false, nothing)
+end
+
+function _execute_runtime_value_attached_if_chain!(
+    engine,
+    statements,
+    index,
+    stop,
+    context,
+    rule_label,
+    current_edge,
+)
+    selected_body = nothing
+    next_index = index
+    cursor = index
+    while cursor < stop
+        expr = statements[cursor].expr
+        if cursor == index
+            if _runtime_truthy(_evaluate_runtime_action_expr!(
+                    engine,
+                    expr.condition,
+                    context,
+                    rule_label,
+                    current_edge,
+                ))
+                selected_body = expr.body
+            end
+        elseif expr isa ActionControlIfExpr && expr.branch_role == "elseif"
+            if selected_body === nothing && _runtime_truthy(_evaluate_runtime_action_expr!(
+                    engine,
+                    expr.condition,
+                    context,
+                    rule_label,
+                    current_edge,
+                ))
+                selected_body = expr.body
+            end
+        elseif expr isa ActionControlElseExpr
+            if selected_body === nothing
+                selected_body = expr.body
+            end
+        else
+            break
+        end
+        next_index = cursor
+        if expr isa ActionControlElseExpr
+            break
+        end
+        cursor += 1
+    end
+
+    flow = selected_body === nothing ? _RuntimeValueBlockFlow(false, nothing) :
+        _execute_runtime_value_statements!(
+            engine,
+            selected_body.statements,
+            1,
+            length(selected_body.statements) + 1,
+            context,
+            rule_label,
+            current_edge;
+            final_expression_yields = false,
+        )
+    return (next_index = next_index, flow = flow)
+end
+
+function _execute_runtime_value_while!(engine, expr, context, rule_label, current_edge)
+    for _ in 1:engine.max_iterations
+        if !_runtime_truthy(_evaluate_runtime_action_expr!(
+                engine,
+                expr.condition,
+                context,
+                rule_label,
+                current_edge,
+            ))
+            return _RuntimeValueBlockFlow(false, nothing)
+        end
+        flow = _execute_runtime_value_statements!(
+            engine,
+            expr.body.statements,
+            1,
+            length(expr.body.statements) + 1,
+            context,
+            rule_label,
+            current_edge;
+            final_expression_yields = false,
+        )
+        if flow.returned
+            return flow
+        end
+    end
+    throw(RuntimeInterpreterException(
+        "LinkedSpec while iteration safety limit exceeded after $(engine.max_iterations) iterations",
+    ))
+end
+
+function _runtime_local_return_payload(expr)
+    if !(expr isa ActionCallExpr)
+        return nothing
+    end
+    helper_name = canonical_action_helper_name(expr.name)
+    if helper_name == "return_undef" && isempty(expr.args)
+        return (has_value = false, value = nothing)
+    elseif helper_name != "return"
+        return nothing
+    end
+    return isempty(expr.args) ? (has_value = false, value = nothing) :
+        (has_value = true, value = first(expr.args).value)
 end
 
 function _evaluate_runtime_action_expr!(
@@ -748,6 +1345,18 @@ function _evaluate_runtime_action_expr!(
             rule_label,
             current_edge,
         ))
+    elseif expr isa ActionControlIfExpr || expr isa ActionControlWhileExpr ||
+           expr isa ActionControlSwitchExpr
+        return _evaluate_runtime_structured_control!(
+            engine,
+            expr,
+            context,
+            rule_label,
+            current_edge,
+        )
+    elseif expr isa ActionControlElseExpr || expr isa ActionControlCaseExpr ||
+           expr isa ActionControlDefaultExpr || expr isa ActionControlMarkerExpr
+        return nothing
     elseif expr isa ActionCallExpr
         return _evaluate_runtime_call!(
             engine,
@@ -775,6 +1384,14 @@ function _evaluate_runtime_action_expr!(
             current_edge,
             statement_context,
         )
+    elseif expr isa ActionBlockValueExpr
+        return _evaluate_runtime_block_value!(
+            engine,
+            expr.block,
+            context,
+            rule_label,
+            current_edge,
+        )
     elseif expr isa ActionRawExpr
         throw(RuntimeInterpreterException(
             "unsupported raw action expression in rule $rule_label: $(expr.source)",
@@ -783,6 +1400,46 @@ function _evaluate_runtime_action_expr!(
     throw(RuntimeInterpreterException(
         "unsupported action expression $(expr.kind) in rule $rule_label",
     ))
+end
+
+function _evaluate_runtime_structured_control!(engine, expr, context, rule_label, current_edge)
+    if expr isa ActionControlIfExpr
+        if expr.body !== nothing && _runtime_truthy(_evaluate_runtime_action_expr!(
+                engine,
+                expr.condition,
+                context,
+                rule_label,
+                current_edge,
+            ))
+            result = _execute_runtime_action_block!(
+                engine,
+                expr.body,
+                context,
+                rule_label,
+                current_edge,
+            )
+            if result !== nothing
+                throw(result)
+            end
+        end
+    elseif expr isa ActionControlWhileExpr && expr.body !== nothing
+        _execute_runtime_attached_while!(engine, expr, context, rule_label, current_edge)
+    elseif expr isa ActionControlSwitchExpr
+        body = _select_runtime_switch_body(engine, expr, context, rule_label, current_edge)
+        if body !== nothing
+            result = _execute_runtime_action_block!(
+                engine,
+                body,
+                context,
+                rule_label,
+                current_edge,
+            )
+            if result !== nothing
+                throw(result)
+            end
+        end
+    end
+    return nothing
 end
 
 function _evaluate_runtime_call!(
@@ -795,6 +1452,37 @@ function _evaluate_runtime_call!(
 )
     args = ActionExpr[getfield(arg, :value) for arg in call.args]
     helper_name = canonical_action_helper_name(call.name)
+
+    if helper_name == "with" && call.trailing_block_arg
+        return _call_runtime_with_trailing_block!(
+            engine,
+            call,
+            context,
+            rule_label,
+            current_edge,
+        )
+    elseif call.trailing_block_arg
+        throw(RuntimeInterpreterException(
+            "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:$helper_name: trailing block arguments " *
+            "are not supported for helper '$(call.name)' in rule '$rule_label'",
+        ))
+    elseif helper_name == "if"
+        return _call_runtime_inline_if!(
+            engine,
+            args,
+            context,
+            rule_label,
+            current_edge,
+        )
+    elseif helper_name == "switch"
+        return _call_runtime_inline_switch!(
+            engine,
+            args,
+            context,
+            rule_label,
+            current_edge,
+        )
+    end
 
     if statement_context && helper_name == "set_key" && _execute_runtime_set_key_statement!(
             engine,
@@ -1010,6 +1698,193 @@ function _evaluate_runtime_hash_helper_values(
         )))
     end
     return values
+end
+
+function _call_runtime_inline_if!(engine, args, context, rule_label, current_edge)
+    if isempty(args)
+        return nothing
+    end
+    if _runtime_truthy(_evaluate_runtime_action_expr!(
+            engine,
+            first(args),
+            context,
+            rule_label,
+            current_edge,
+        ))
+        return length(args) >= 2 ? _evaluate_runtime_action_expr!(
+            engine,
+            args[2],
+            context,
+            rule_label,
+            current_edge,
+        ) : true
+    end
+    for arg in Iterators.drop(args, 2)
+        if !(arg isa ActionCallExpr)
+            return _evaluate_runtime_action_expr!(
+                engine,
+                arg,
+                context,
+                rule_label,
+                current_edge,
+            )
+        end
+        branch_name = canonical_action_helper_name(arg.name)
+        branch_args = ActionExpr[getfield(item, :value) for item in arg.args]
+        if branch_name == "elseif"
+            if length(branch_args) >= 2 && _runtime_truthy(_evaluate_runtime_action_expr!(
+                    engine,
+                    branch_args[1],
+                    context,
+                    rule_label,
+                    current_edge,
+                ))
+                return _evaluate_runtime_action_expr!(
+                    engine,
+                    branch_args[2],
+                    context,
+                    rule_label,
+                    current_edge,
+                )
+            end
+        elseif branch_name == "else"
+            return isempty(branch_args) ? nothing : _evaluate_runtime_action_expr!(
+                engine,
+                first(branch_args),
+                context,
+                rule_label,
+                current_edge,
+            )
+        else
+            return _evaluate_runtime_action_expr!(
+                engine,
+                arg,
+                context,
+                rule_label,
+                current_edge,
+            )
+        end
+    end
+    return nothing
+end
+
+function _call_runtime_inline_switch!(engine, args, context, rule_label, current_edge)
+    if isempty(args)
+        return nothing
+    end
+    selector = _evaluate_runtime_action_expr!(
+        engine,
+        first(args),
+        context,
+        rule_label,
+        current_edge,
+    )
+    default_expr = nothing
+    has_default = false
+    for branch in Iterators.drop(args, 1)
+        if !(branch isa ActionCallExpr)
+            continue
+        end
+        branch_name = canonical_action_helper_name(branch.name)
+        branch_args = ActionExpr[getfield(item, :value) for item in branch.args]
+        if branch_name == "case" && length(branch_args) >= 2
+            candidate = branch_args[1] isa ActionVariableExpr ? branch_args[1].name :
+                _evaluate_runtime_action_expr!(
+                    engine,
+                    branch_args[1],
+                    context,
+                    rule_label,
+                    current_edge,
+                )
+            if _runtime_string(candidate) == _runtime_string(selector)
+                return _evaluate_runtime_action_expr!(
+                    engine,
+                    branch_args[2],
+                    context,
+                    rule_label,
+                    current_edge,
+                )
+            end
+        elseif branch_name == "default" && !isempty(branch_args) && !has_default
+            default_expr = first(branch_args)
+            has_default = true
+        end
+    end
+    return has_default ? _evaluate_runtime_action_expr!(
+        engine,
+        default_expr,
+        context,
+        rule_label,
+        current_edge,
+    ) : nothing
+end
+
+function _call_runtime_with_trailing_block!(engine, call, context, rule_label, current_edge)
+    if !call.trailing_block_arg || isempty(call.args) || length(call.args) > 2
+        throw(RuntimeInterpreterException(
+            "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: helper `with(...) { ... }` " *
+            "expects zero or one value argument plus a trailing block in rule '$rule_label'",
+        ))
+    end
+    block_expr = last(call.args).value
+    if !(block_expr isa ActionBlockValueExpr)
+        throw(RuntimeInterpreterException(
+            "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: helper `with(...)` " *
+            "requires a trailing block argument in rule '$rule_label'",
+        ))
+    end
+    scoped_value = length(call.args) == 2 ? _evaluate_runtime_action_expr!(
+        engine,
+        first(call.args).value,
+        context,
+        rule_label,
+        current_edge,
+    ) : nothing
+    binding = _enter_runtime_scoped_scalar!(context, "value", scoped_value)
+    try
+        return _evaluate_runtime_block_value!(
+            engine,
+            block_expr.block,
+            context,
+            rule_label,
+            current_edge,
+        )
+    finally
+        _exit_runtime_scoped_binding!(context, binding)
+    end
+end
+
+function _enter_runtime_scoped_scalar!(context, name::String, value)
+    binding = _RuntimeScopedBinding(
+        name,
+        haskey(context.variables, name),
+        _runtime_copy(get(context.variables, name, nothing)),
+        haskey(context.arrays, name),
+        _runtime_copy(get(context.arrays, name, nothing)),
+        haskey(context.hashes, name),
+        _runtime_copy(get(context.hashes, name, nothing)),
+    )
+    delete!(context.variables, name)
+    delete!(context.arrays, name)
+    delete!(context.hashes, name)
+    context.variables[name] = _runtime_copy(value)
+    return binding
+end
+
+function _exit_runtime_scoped_binding!(context, binding::_RuntimeScopedBinding)
+    delete!(context.variables, binding.name)
+    delete!(context.arrays, binding.name)
+    delete!(context.hashes, binding.name)
+    if binding.variable_present
+        context.variables[binding.name] = _runtime_copy(binding.variable)
+    end
+    if binding.array_present
+        context.arrays[binding.name] = _runtime_as_array(binding.array)
+    end
+    if binding.hash_present
+        context.hashes[binding.name] = _runtime_as_hash(binding.hash)
+    end
+    return nothing
 end
 
 function _call_runtime_set!(engine, args, context, rule_label, current_edge)
@@ -1265,6 +2140,12 @@ const _RUNTIME_ARRAY_END_MUTATION_NAMES = Set{String}([
     "push_front",
 ])
 
+const _RUNTIME_TREE_TRAVERSAL_NAMES = Set{String}([
+    "map_leaves",
+    "reduce_leaves",
+    "walk_leaves",
+])
+
 function _evaluate_runtime_fluent_chain!(
     engine,
     chain,
@@ -1294,7 +2175,27 @@ function _evaluate_runtime_fluent_chain!(
         if helper_name in _RUNTIME_ARRAY_END_MUTATION_NAMES
             return nothing
         end
-        if helper_name == "copy"
+        if helper_name == "with" && call.receiver_trailing_block_arg
+            value = _call_runtime_receiver_with_trailing_block!(
+                engine,
+                value,
+                call,
+                context,
+                rule_label,
+                current_edge,
+            )
+            continue
+        elseif helper_name in _RUNTIME_TREE_TRAVERSAL_NAMES
+            value = _call_runtime_tree_traversal_block!(
+                engine,
+                value,
+                call,
+                context,
+                rule_label,
+                current_edge,
+            )
+            continue
+        elseif helper_name == "copy"
             value = _runtime_copy(value)
             continue
         elseif helper_name == "coalesce" || helper_name == "coalesce_nonempty"
@@ -1361,6 +2262,323 @@ function _evaluate_runtime_fluent_chain!(
         value = _call_runtime_pure_helper(helper_name, values)
     end
     return value
+end
+
+function _call_runtime_receiver_with_trailing_block!(
+    engine,
+    receiver,
+    call,
+    context,
+    rule_label,
+    current_edge,
+)
+    if !call.receiver_trailing_block_arg || length(call.args) != 1
+        throw(RuntimeInterpreterException(
+            "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: receiver `.with() { ... }` " *
+            "expects no parenthesized arguments in rule '$rule_label'",
+        ))
+    end
+    block_expr = first(call.args).value
+    if !(block_expr isa ActionBlockValueExpr)
+        throw(RuntimeInterpreterException(
+            "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: receiver `.with()` " *
+            "requires a trailing block argument in rule '$rule_label'",
+        ))
+    end
+    binding = _enter_runtime_scoped_scalar!(context, "value", receiver)
+    try
+        return _evaluate_runtime_block_value!(
+            engine,
+            block_expr.block,
+            context,
+            rule_label,
+            current_edge,
+        )
+    finally
+        _exit_runtime_scoped_binding!(context, binding)
+    end
+end
+
+function _call_runtime_tree_traversal_block!(
+    engine,
+    receiver,
+    call,
+    context,
+    rule_label,
+    current_edge,
+)
+    method = canonical_action_helper_name(call.method)
+    if isempty(call.args) || !(last(call.args).value isa ActionBlockValueExpr) ||
+       (method in ("walk_leaves", "map_leaves") && length(call.args) != 1) ||
+       (method == "reduce_leaves" && length(call.args) != 2)
+        signature = method == "reduce_leaves" ? ".reduce_leaves(initial) { ... }" :
+            ".$method() { ... }"
+        throw(RuntimeInterpreterException(
+            "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:$method: receiver `$signature` " *
+            "requires the accepted tree traversal trailing-block arity in rule '$rule_label'",
+        ))
+    end
+    block = last(call.args).value.block
+
+    if receiver isa AbstractDict
+        hash = _runtime_as_hash(receiver)
+        if method == "walk_leaves"
+            _walk_runtime_hash_tree!(engine, hash, block, context, rule_label, current_edge)
+            return _runtime_copy(hash)
+        elseif method == "map_leaves"
+            return _map_runtime_hash_tree(engine, hash, block, context, rule_label, current_edge)
+        end
+        initial = _runtime_copy(_evaluate_runtime_action_expr!(
+            engine,
+            first(call.args).value,
+            context,
+            rule_label,
+            current_edge,
+        ))
+        return _reduce_runtime_hash_tree(
+            engine,
+            hash,
+            initial,
+            block,
+            context,
+            rule_label,
+            current_edge,
+        )
+    elseif receiver isa AbstractVector
+        items = _runtime_as_array(receiver)
+        if method == "walk_leaves"
+            _walk_runtime_array_tree!(engine, items, block, context, rule_label, current_edge)
+            return _runtime_copy(items)
+        elseif method == "map_leaves"
+            return _map_runtime_array_tree(engine, items, block, context, rule_label, current_edge)
+        end
+        initial = _runtime_copy(_evaluate_runtime_action_expr!(
+            engine,
+            first(call.args).value,
+            context,
+            rule_label,
+            current_edge,
+        ))
+        return _reduce_runtime_array_tree(
+            engine,
+            items,
+            initial,
+            block,
+            context,
+            rule_label,
+            current_edge,
+        )
+    end
+    return nothing
+end
+
+function _walk_runtime_hash_tree!(engine, hash, block, context, rule_label, current_edge)
+    function walk(node, path)
+        for key in sort!(collect(keys(node)))
+            value = node[key]
+            next_path = Any[path..., key]
+            if value isa AbstractDict
+                walk(_runtime_as_hash(value), next_path)
+            else
+                _evaluate_runtime_tree_leaf!(
+                    engine,
+                    block,
+                    value,
+                    next_path,
+                    context,
+                    rule_label,
+                    current_edge;
+                    key = key,
+                )
+            end
+        end
+    end
+    walk(hash, Any[])
+    return nothing
+end
+
+function _map_runtime_hash_tree(engine, hash, block, context, rule_label, current_edge)
+    function map_node(node, path)
+        result = Dict{String,Any}()
+        for key in sort!(collect(keys(node)))
+            value = node[key]
+            next_path = Any[path..., key]
+            result[key] = value isa AbstractDict ? map_node(_runtime_as_hash(value), next_path) :
+                _evaluate_runtime_tree_leaf!(
+                    engine,
+                    block,
+                    value,
+                    next_path,
+                    context,
+                    rule_label,
+                    current_edge;
+                    key = key,
+                )
+        end
+        return result
+    end
+    return map_node(hash, Any[])
+end
+
+function _reduce_runtime_hash_tree(
+    engine,
+    hash,
+    initial,
+    block,
+    context,
+    rule_label,
+    current_edge,
+)
+    acc = _runtime_copy(initial)
+    function reduce_node(node, path)
+        for key in sort!(collect(keys(node)))
+            value = node[key]
+            next_path = Any[path..., key]
+            if value isa AbstractDict
+                reduce_node(_runtime_as_hash(value), next_path)
+            else
+                acc = _evaluate_runtime_tree_leaf!(
+                    engine,
+                    block,
+                    value,
+                    next_path,
+                    context,
+                    rule_label,
+                    current_edge;
+                    key = key,
+                    acc = acc,
+                    bind_acc = true,
+                )
+            end
+        end
+    end
+    reduce_node(hash, Any[])
+    return acc
+end
+
+function _walk_runtime_array_tree!(engine, items, block, context, rule_label, current_edge)
+    function walk(node, path)
+        for (offset, value) in enumerate(node)
+            index = offset - 1
+            next_path = Any[path..., index]
+            if value isa AbstractVector
+                walk(_runtime_as_array(value), next_path)
+            else
+                _evaluate_runtime_tree_leaf!(
+                    engine,
+                    block,
+                    value,
+                    next_path,
+                    context,
+                    rule_label,
+                    current_edge;
+                    index = index,
+                )
+            end
+        end
+    end
+    walk(items, Any[])
+    return nothing
+end
+
+function _map_runtime_array_tree(engine, items, block, context, rule_label, current_edge)
+    function map_node(node, path)
+        result = Any[]
+        for (offset, value) in enumerate(node)
+            index = offset - 1
+            next_path = Any[path..., index]
+            push!(result, value isa AbstractVector ? map_node(_runtime_as_array(value), next_path) :
+                _evaluate_runtime_tree_leaf!(
+                    engine,
+                    block,
+                    value,
+                    next_path,
+                    context,
+                    rule_label,
+                    current_edge;
+                    index = index,
+                ))
+        end
+        return result
+    end
+    return map_node(items, Any[])
+end
+
+function _reduce_runtime_array_tree(
+    engine,
+    items,
+    initial,
+    block,
+    context,
+    rule_label,
+    current_edge,
+)
+    acc = _runtime_copy(initial)
+    function reduce_node(node, path)
+        for (offset, value) in enumerate(node)
+            index = offset - 1
+            next_path = Any[path..., index]
+            if value isa AbstractVector
+                reduce_node(_runtime_as_array(value), next_path)
+            else
+                acc = _evaluate_runtime_tree_leaf!(
+                    engine,
+                    block,
+                    value,
+                    next_path,
+                    context,
+                    rule_label,
+                    current_edge;
+                    index = index,
+                    acc = acc,
+                    bind_acc = true,
+                )
+            end
+        end
+    end
+    reduce_node(items, Any[])
+    return acc
+end
+
+function _evaluate_runtime_tree_leaf!(
+    engine,
+    block,
+    value,
+    path,
+    context,
+    rule_label,
+    current_edge;
+    key = nothing,
+    index = nothing,
+    acc = nothing,
+    bind_acc::Bool = false,
+)
+    bindings = _RuntimeScopedBinding[]
+    try
+        if bind_acc
+            push!(bindings, _enter_runtime_scoped_scalar!(context, "acc", acc))
+        end
+        push!(bindings, _enter_runtime_scoped_scalar!(context, "value", value))
+        if key !== nothing
+            push!(bindings, _enter_runtime_scoped_scalar!(context, "key", key))
+        end
+        if index !== nothing
+            push!(bindings, _enter_runtime_scoped_scalar!(context, "index", index))
+        end
+        push!(bindings, _enter_runtime_scoped_scalar!(context, "path", path))
+        push!(bindings, _enter_runtime_scoped_scalar!(context, "depth", length(path)))
+        return _evaluate_runtime_block_value!(
+            engine,
+            block,
+            context,
+            rule_label,
+            current_edge,
+        )
+    finally
+        for binding in Iterators.reverse(bindings)
+            _exit_runtime_scoped_binding!(context, binding)
+        end
+    end
 end
 
 function _call_runtime_coalesce(
@@ -2728,6 +3946,19 @@ function _runtime_nonnegative_int(value)
 end
 
 _runtime_string(value) = value === nothing ? "" : string(value)
+
+function _runtime_truthy(value)
+    if value === nothing
+        return false
+    elseif value isa Bool
+        return value
+    elseif value isa Number
+        return value != 0
+    elseif value isa AbstractString || value isa AbstractVector || value isa AbstractDict
+        return !isempty(value)
+    end
+    return true
+end
 
 _runtime_as_array(value) = value isa AbstractVector ? Any[_runtime_copy(item) for item in value] : Any[]
 

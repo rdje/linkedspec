@@ -302,7 +302,9 @@ nested writes, and capture maps/positions. `.4.3.2` has added string/scalar and 
 aliases/symbol callees, invalid-input boundaries, and compatible receiver chains. `.4.3.3` has added copied array
 pipelines, split/flatten/reducer bridges, and statement-only end mutations. `.4.3.4` has added copied hash views
 and transformations, statement-only named set-key mutation, direct hash-index assignment, merge-slot resolution,
-and explicit flat-style splicing. The active Julia frontier is `.4.3.5` for value/control/block/callback execution.
+and explicit flat-style splicing. `.4.3.5` has added expression-valued blocks, attached/marker/inline controls,
+deterministic while guards, immediate helper/receiver with-blocks, and scoped hash/array tree callbacks. The active
+Julia frontier is `.4.3.6` for final helper/value no-drift.
 Future Julia and
 Lua backend plans must own their own
 variant-specific CLIs rather than relying on one
@@ -403,7 +405,10 @@ well: copied array helper/receiver pipelines, regex and split bridges, explicit 
 terminals, typed split replacement, and statement-only end mutations pass focused tests. `.4.3.4` is now
 implemented too: copied hash views and pure transformations, compatible receiver chains, statement-only named
 set-key mutation, direct hash-index assignment, merge-slot resolution, explicit flat-style splicing, and nested-map
-preservation pass focused tests. `.4.3.5` owns value/control/block/callback execution. Later leaves own
+preservation pass focused tests. `.4.3.5` is now implemented too: expression-valued blocks with local returns,
+attached/marker/inline controls, deterministic while guards, immediate helper/receiver with-blocks, scoped binding
+restoration, and hash/array walk/map/reduce callbacks pass focused tests. `.4.3.6` owns final helper/value no-drift.
+Later leaves own
 cursor controls, staged parser execution, diagnostics/trace, and corpus execution.
 
 ### Dart Backend Commands

@@ -278,15 +278,18 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.4.3.4 - add Julia runtime hash helpers`
 
 - ID: `JULIA-BACKEND-PARITY.4.3.5`
-  Status: `active`
+  Status: `done`
   Goal: Implement value blocks, structured action controls, trailing-block execution, and tree callbacks.
   Acceptance: Expression-valued blocks, attached/inline controls, helper/receiver `with`, and `walk_leaves` /
     `map_leaves` / `reduce_leaves` traversal callbacks match current Perl/Rust/Dart contracts.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - eight focused runtime assertions cover expression-valued blocks with final values and
+    block-local return/return-undef, attached and marker controls, lazy inline controls, deterministic while
+    limits, helper/receiver `with`, hash/array tree walk/map/reduce callbacks, non-aggregate lazy failure, and
+    scoped binding restoration plus unsupported trailing-block/arity fences; full `Pkg.test()` passes with 567 assertions.
+  Commit: `JULIA-BACKEND-PARITY.4.3.5 - add Julia runtime controls and tree callbacks`
 
 - ID: `JULIA-BACKEND-PARITY.4.3.6`
-  Status: `pending`
+  Status: `active`
   Goal: Close helper/value no-drift for the Julia runtime slice.
   Acceptance: mdBook helper examples, Julia focused runtime tests/status, live docs, and Knowledge Map facts agree
     on the helper/value boundary before `.4.4` cursor-control work starts.
@@ -409,7 +412,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.4.3.5` | `active` | Add expression-valued blocks, structured action controls, trailing-block execution, and tree callbacks over the stable helper/value model. |
+| 1 | `JULIA-BACKEND-PARITY.4.3.6` | `active` | Close helper/value no-drift across focused tests, status surfaces, mdBook examples, live docs, and the Knowledge Map before cursor-control work. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -844,6 +847,48 @@ Hash helper evidence recorded on 2026-07-10:
   snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `MEMORY.md` advance the frontier
   to `.4.3.5`.
 
+## `JULIA-BACKEND-PARITY.4.3.5` Value, Control, and Tree Callback Result
+
+Value/control/callback evidence recorded on 2026-07-10:
+
+- Non-empty expression-valued blocks execute statements in order and yield the final expression. Block-local
+  `return(...)` / `return_undef()` skips later block statements without setting the surrounding rule return.
+- Action blocks execute attached `if` / `elseif` / `else`, `when` / `otherwise`, switch/case/default, and while
+  controls; marker-form if/elseif/else/endif chains are grouped. While loops use the runtime iteration guard, and
+  returns outside value blocks remain rule-level.
+- Inline `if(...)` and `switch(...)` evaluate only the selected value branch. Helper `with(value) { ... }`,
+  `with() { ... }`, and receiver `.with() { ... }` bind scoped `value`, restore any prior scalar/array/hash
+  binding, and allow compatible receiver continuation.
+- Hash tree traversal is sorted-key depth-first with nested hashes as interiors and arrays/scalars as leaves.
+  Array traversal is zero-based depth-first with nested arrays as interiors and hashes/scalars as leaves.
+- `walk_leaves` returns the copied source tree, `map_leaves` preserves structure with callback results, and
+  `reduce_leaves(initial)` returns the final accumulator. Non-aggregate receivers return `nothing` without running
+  the callback or evaluating the reduce initial expression.
+- Callback frames restore prior bindings after exposing `value`, `path`, `depth`, hash `key`, array `index`, and
+  reduce-only `acc`. Other working-variable side effects persist in the caller context.
+- Package status advances to `runtime-value-control-tree`; final helper/value no-drift advances to `.4.3.6`.
+
+## `JULIA-BACKEND-PARITY.4.3.5` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.4.3.4` executed core helper families, but block values used the surrounding
+  return channel, control nodes had no runtime gating, trailing blocks were unsupported, and tree receiver methods
+  had no callback execution path.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `julia/src/runtime/Interpreter.jl` executed action blocks as an undifferentiated
+  statement loop and had no value-block flow record, structured-control dispatcher, scoped binding snapshot, or
+  receiver trailing-block traversal path.
+- [x] **FIX** — Added distinct action/value block flow, attached and marker statement controls, lazy inline
+  controls, deterministic while guards, helper/receiver `with`, scoped binding restoration, and hash/array
+  walk/map/reduce traversal callbacks.
+- [x] **ADDRESSED (verified)** — Focused cases cover final-expression yields, local and rule returns, aliases,
+  marker branches, switches, with binding restoration, continuation, traversal order/shapes, callback variables,
+  non-aggregate lazy failure, and caller-side effects.
+- [x] **NO REGRESSION** — Full Julia `Pkg.test()` passes with 567 assertions; CLI status reports
+  `runtime-value-control-tree`; commit-time docs/governance gates cover mdBook, memory, Knowledge Map, task
+  metadata, doctrine, and whitespace.
+- [x] **LOCKSTEP** — Julia README, task tree/index, roadmaps, mdBook status/handoff, Knowledge Map, architecture
+  snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `MEMORY.md` advance the frontier
+  to `.4.3.6`.
+
 ## `JULIA-BACKEND-PARITY.4.2` Runtime Rule Interpreter Result
 
 Rule-interpreter evidence recorded on 2026-07-10:
@@ -1046,6 +1091,9 @@ Rule-interpreter evidence recorded on 2026-07-10:
 - `2026-07-10`: `.4.3.4` preserves copied/pure hash helper semantics and isolates named typed mutation to
   statement-form `set_key`. `merge_hash` resolves its base as an ordinary value expression and later overlays as
   maybe-hash arguments; constructor splicing remains explicitly marked by `flat` / `flat_hash` syntax.
+- `2026-07-10`: `.4.3.5` separates block-local value flow from rule-level returns, restores every shadowed store
+  category after immediate callbacks, and preserves lazy failure: non-aggregate tree receivers do not run callback
+  blocks or evaluate reduce initial expressions.
 
 ## Open Questions
 
@@ -1056,8 +1104,8 @@ Rule-interpreter evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.4.3.5`. Core values plus string/numeric/array/hash helpers are green; value blocks, structured
-  controls, trailing blocks, and tree callbacks are the next owned implementation boundary.
+- None for `.4.3.6`. Core values and all current helper/control/block/callback families are green; the final
+  helper/value no-drift sweep is the next owned boundary.
 
 ## Verification Log
 
@@ -1082,6 +1130,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Two focused pure-helper cases prove string/scalar and numeric families, regex flags, aliases/symbol callees, failure-to-nothing, and receiver chains; total Julia tests pass with 556 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.3` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Two focused array cases prove pure pipelines, string/regex bridges, flatten/splice shape, numeric terminals, split replacement, statement-only mutations, and tagged records; total Julia tests pass with 558 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.4` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. One focused hash case proves copied views/transforms, pure and statement mutation boundaries, merge-slot resolution, direct assignment, explicit flatten splicing, and nested-map preservation; total Julia tests pass with 559 assertions. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.5` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Eight focused assertions prove expression-valued blocks, local/rule return boundaries, attached/marker/inline controls, while limits, helper/receiver with-blocks and arity fences, hash/array traversal callbacks, lazy non-aggregate failure, and scoped restoration; total Julia tests pass with 567 assertions. |
 
 ## Commit Log
 
@@ -1106,9 +1155,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.4.3.2` | `JULIA-BACKEND-PARITY.4.3.2 - add Julia runtime string numeric helpers` | Canonical string/scalar and numeric pure helpers plus compatible receiver chains; array-aware behavior advances to `.4.3.3`. |
 | `JULIA-BACKEND-PARITY.4.3.3` | `JULIA-BACKEND-PARITY.4.3.3 - add Julia runtime array helpers` | Pure array helper/receiver pipelines, flatten/splice and split bridges, reducer terminals, and statement-only end mutations; hashes advance to `.4.3.4`. |
 | `JULIA-BACKEND-PARITY.4.3.4` | `JULIA-BACKEND-PARITY.4.3.4 - add Julia runtime hash helpers` | Copied hash helper/receiver views and transformations, statement-only named set-key mutation, direct assignment integration, merge-slot resolution, and explicit hash splicing; controls/blocks/callbacks advance to `.4.3.5`. |
+| `JULIA-BACKEND-PARITY.4.3.5` | `JULIA-BACKEND-PARITY.4.3.5 - add Julia runtime controls and tree callbacks` | Expression-valued blocks, attached/marker/inline controls, helper/receiver with-blocks, and scoped hash/array tree traversal callbacks; no-drift advances to `.4.3.6`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.4.3.5` value/control/block/callback execution. Julia now supports expression-valued
+  blocks with local return flow, attached and marker structured controls, lazy inline branches, deterministic
+  while limits, helper/receiver with-blocks, and scoped hash/array walk/map/reduce callbacks with lazy
+  non-aggregate failure. `Pkg.test()` passes with 567 assertions; `.4.3.6` owns final helper/value no-drift.
 - `2026-07-10`: Completed `.4.3.4` hash helper execution. Julia now supports copied hash views and pure
   merge/pick/drop/rename/set-key transformations, statement-form named typed set-key mutation, direct hash-index
   assignment values, base/overlay-aware merge resolution, explicit flat-style hash splicing, ordinary nested-map

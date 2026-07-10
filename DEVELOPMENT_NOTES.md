@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.4.3.5 — Julia runtime value/control/tree helpers):
+  Julia now keeps value-block flow distinct from the rule return exception channel, so local returns can short
+  circuit immediate blocks without escaping the enclosing action. Structured statement controls share indexed
+  block execution for attached and marker chains; inline value controls stay lazy. Immediate callbacks snapshot
+  all three same-name store categories before binding `value`, `key`/`index`, `path`, `depth`, or `acc`, then
+  restore them in reverse order while preserving unrelated caller mutations. Tree reduction evaluates its initial
+  expression only after confirming a hash or array receiver, matching the non-aggregate lazy-failure contract.
+  `.4.3.6` can now audit helper/value no-drift over one complete execution boundary.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.4.3.4 — Julia runtime hash helpers):
   Hash calls now route through a copied-value dispatcher shared by function and receiver forms. Statement-form
   `set_key` is the only new named-storage mutation path; value and receiver forms return changed copies. The

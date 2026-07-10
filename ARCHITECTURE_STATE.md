@@ -5,11 +5,17 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.3.5` separates Julia rule-level action flow from block-local
+  value flow; adds attached and marker controls, lazy inline branches, deterministic while guards, immediate
+  helper/receiver with-blocks, scoped binding snapshots, and hash/array tree walk/map/reduce callbacks. Hash
+  traversal is sorted-key depth-first; array traversal is zero-based depth-first; non-aggregate receivers do not
+  evaluate callbacks or reduce initializers. Package status is `runtime-value-control-tree`; `.4.3.6` owns final
+  helper/value no-drift.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.3.4` adds copied Julia hash helper/receiver dispatch, pure
   merge/pick/drop/rename/set-key transformations, statement-only named typed set-key mutation, direct hash-index
   assignment integration, base/overlay-aware merge resolution, and explicit flat-style constructor splicing.
-  Ordinary map values stay nested. Package status is `runtime-hash-helpers`; `.4.3.5` owns value/control/block/
-  callback execution.
+  Ordinary map values stay nested. At that leaf package status was `runtime-hash-helpers`; `.4.3.5` has since
+  added value/control/block/callback execution.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.3.3` adds a copied Julia array helper/receiver dispatcher,
   string/regex split and filter bridges, explicit flatten/constructor-splice semantics, numeric reducer terminals,
   typed split replacement, and isolated statement-only end mutation for named and scalar-held arrays.
