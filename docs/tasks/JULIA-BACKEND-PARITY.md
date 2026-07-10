@@ -517,16 +517,21 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.2.4.0 - split Julia shipped corpus smoke batch`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.1`
-  Status: `active`
+  Status: `done`
   Goal: Add the missing anonymous capture-boundary helper family.
   Acceptance: `start_capture_slice`, `capture_slice`, and the directly related anonymous boundary helpers match
     the documented Perl/Rust contract; the three hlink delimiter fixtures and `ebnf_logging_annotation` either
     pass or every residual is split with direct oracle evidence.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - Julia executes the complete anonymous direct family: start, match-start/cursor/input-end
+    text and character-length readers, position/line/column readers, and destructive take variants. Three focused
+    Unicode/location/mutation assertions plus six permanent corpus assertions bring full `Pkg.test()` to 766.
+    All three hlink delimiter fixtures pass; `ebnf_logging_annotation` advances from unsupported-helper failure to
+    the same structural-item output mismatch as `ebnf_expression_rules` and is routed to `.6.2.4.4`. The complete
+    window improves from 10/31 to 13/31 with no regression; status is `runtime-corpus-capture-boundaries`.
+  Commit: `JULIA-BACKEND-PARITY.6.2.4.1 - add Julia anonymous capture boundaries`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.2`
-  Status: `pending`
+  Status: `active`
   Goal: Close logical and diagnostic-output helper gaps.
   Children: `.6.2.4.2.1`, `.6.2.4.2.2`
   Acceptance: Current logical and diagnostic-output helpers execute with the documented portable contracts, with
@@ -535,7 +540,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `pending`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.2.1`
-  Status: `pending`
+  Status: `active`
   Goal: Add logical `and`/`or`/`not` helper execution.
   Acceptance: The four blocked portmap cases and `tablegrep_simple_term` no longer fail for unsupported logical
     helpers, with short-circuit/value behavior matched to Perl/Rust or a narrower residual split.
@@ -561,8 +566,9 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 - ID: `JULIA-BACKEND-PARITY.6.2.4.4`
   Status: `pending`
   Goal: Close EBNF and spec.spec structural output mismatches.
-  Acceptance: `ebnf_expression_rules` and the four spec.spec smoke fixtures preserve their expected structural
-    records, or independent parser/runtime mechanisms are split again before implementation.
+  Acceptance: Both EBNF fixtures and the four spec.spec smoke fixtures preserve their expected structural records,
+    or independent parser/runtime mechanisms are split again before implementation. `ebnf_logging_annotation`
+    reaches structural execution after `.6.2.4.1`; it no longer belongs to the capture-helper leaf.
   Verification: `pending`
   Commit: `pending`
 
@@ -651,7 +657,41 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 9 | `JULIA-BACKEND-PARITY.6.2.2` | `done` | Starter manifest fixtures 0–39 pass unchanged at 40/40. |
 | 10 | `JULIA-BACKEND-PARITY.6.2.3` | `done` | Non-function middle fixtures pass unchanged at 25/25; three `fn` cases remain routed. |
 | 11 | `JULIA-BACKEND-PARITY.6.2.4.0` | `done` | Initial shipped-spec/parser-smoke boundary is 10/31 and split into owned failure families. |
-| 12 | `JULIA-BACKEND-PARITY.6.2.4.1` | `active` | Implement the anonymous capture-boundary helper family first. |
+| 12 | `JULIA-BACKEND-PARITY.6.2.4.1` | `done` | Anonymous capture boundaries close all three hlink delimiter cases; EBNF logging is structurally routed. |
+| 13 | `JULIA-BACKEND-PARITY.6.2.4.2.1` | `active` | Add logical `and`/`or`/`not` execution for portmap and tablegrep. |
+
+## `JULIA-BACKEND-PARITY.6.2.4.1` Anonymous Capture Boundary Result
+
+Capture-boundary evidence recorded on 2026-07-10:
+
+- Julia now executes `start_capture_slice`, match-start readers `capture_slice` / `capture_slice_len`, cursor
+  readers `capture_slice_until_cursor` / `_len`, input-end readers `capture_rest` / `_len`, origin location readers
+  `capture_slice_pos` / `_line` / `_col`, and all direct destructive `capture_take*` variants.
+- Text slicing is code-unit safe and reported lengths/positions are character-based. Focused runtime coverage uses
+  `é` plus a newline to lock Unicode length, character offset, line/column, match-start versus cursor endpoints,
+  and destructive origin movement through cursor and end-of-input.
+- A permanent corpus regression locks `hlink_curly_brace`, `hlink_bracket_body`, and
+  `hlink_mixed_bracket_brace` at 3/3. They previously stopped on unsupported `capture_slice`.
+- `ebnf_logging_annotation` no longer stops on `start_capture_slice`; it now produces the same missing structural
+  item class as `ebnf_expression_rules` and is routed to `.6.2.4.4` rather than overclaimed as capture parity.
+- The full shipped-spec/parser-smoke window moves from 10/31 to 13/31. The remaining 18 failures are unchanged:
+  five logical helpers, two diagnostic-output helpers, three recursive outputs, six structural outputs, and two
+  lib_reader quote-normalization cases.
+
+## `JULIA-BACKEND-PARITY.6.2.4.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Three hlink cases failed on unsupported `capture_slice`; EBNF logging failed on
+  unsupported `start_capture_slice`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Action contracts recognized the anonymous helpers and runtime registers
+  already carried the rule-local capture origin, but `julia/src/runtime/Interpreter.jl` had no execution dispatch.
+- [x] **FIX** — Added one direct anonymous-family dispatcher over existing match registers, preserving distinct
+  match-start, live-cursor, and end-of-input endpoints plus destructive take semantics.
+- [x] **ADDRESSED (verified)** — Focused runtime tests lock Unicode-safe values, lengths, locations, and mutations;
+  three hlink cases pass, and EBNF logging is no longer blocked by a capture helper.
+- [x] **NO REGRESSION** — Full `Pkg.test()` passes with 766 assertions; the 31-fixture window is 13/31 with no new
+  failure, and the EBNF residual is routed to `.6.2.4.4`.
+- [x] **LOCKSTEP** — Julia README, task/index/roadmaps, mdBook, Knowledge Map, architecture/live docs, package
+  status, and `MEMORY.md` record capture-boundary parity and advance to `.6.2.4.2.1`.
 
 ## `JULIA-BACKEND-PARITY.6.2.4.0` Shipped Corpus Smoke Split
 
@@ -1945,6 +1985,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.2` | Bounded runner offsets 0–39; full Julia `Pkg.test()`; Julia CLI status/help and validation-only load; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. The starter window is 40/40 green without parser/runtime or fixture changes; six permanent assertions bring total Julia tests to 751, status is `runtime-corpus-starter`, and `.6.2.3` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.3` | Bounded runner windows 40–56, 58–59, and 62–67; full Julia `Pkg.test()`; Julia CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. The 25 non-function middle fixtures pass unchanged, six permanent assertions lock the windows and routed `fn` offsets, total Julia tests pass with 757 assertions, status is `runtime-corpus-middle`, and `.6.2.4` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.0` | Bounded runner offsets 68–98; planning-only task decomposition; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. The shipped-spec/parser-smoke window starts at 10 passed / 21 failed, every fixture is accounted for under a recoverable mechanism owner, runtime behavior remains unchanged at 757 assertions and `runtime-corpus-middle`, and `.6.2.4.1` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.1` | Focused anonymous capture runtime tests; hlink/EBNF focused corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. The complete direct anonymous capture family is Unicode/location/mutation safe; all three hlink delimiter fixtures pass, EBNF logging reaches its structural residual, the window improves to 13/31, full tests pass with 766 assertions, status is `runtime-corpus-capture-boundaries`, and `.6.2.4.2.1` becomes active. |
 
 ## Commit Log
 
@@ -1986,9 +2027,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.6.2.2` | `JULIA-BACKEND-PARITY.6.2.2 - close Julia starter corpus batch` | Permanent 40/40 starter-window regression proof with no production correction; middle fixtures advance to `.6.2.3`. |
 | `JULIA-BACKEND-PARITY.6.2.3` | `JULIA-BACKEND-PARITY.6.2.3 - close Julia middle corpus batch` | Permanent 25/25 non-function middle-window proof with exact `fn` routes; shipped-spec fixtures advance to `.6.2.4`. |
 | `JULIA-BACKEND-PARITY.6.2.4.0` | `JULIA-BACKEND-PARITY.6.2.4.0 - split Julia shipped corpus smoke batch` | Planning-only 10/31 shipped-smoke diagnostic split into capture, logical/output helper, recursion, structural-output, quote-normalization, and final no-drift owners. |
+| `JULIA-BACKEND-PARITY.6.2.4.1` | `JULIA-BACKEND-PARITY.6.2.4.1 - add Julia anonymous capture boundaries` | Full direct anonymous capture family closes three hlink cases and routes the EBNF structural residual; logical helpers advance to `.6.2.4.2.1`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.2.4.1` anonymous capture boundaries. Julia now executes start/read/location/take
+  variants across match-start, cursor, and input-end endpoints with character-based Unicode semantics. Three hlink
+  delimiter fixtures pass; EBNF logging is structurally routed; full tests pass with 766 assertions, the window is
+  13/31, status is `runtime-corpus-capture-boundaries`, and `.6.2.4.2.1` is active.
 - `2026-07-10`: Completed `.6.2.4.0` planning split. The complete shipped-spec/parser-smoke window starts at
   10 passed / 21 failed; every failure is routed to a capture-boundary, logical/output helper, recursive top-rule,
   EBNF/spec.spec structural-output, lib_reader quote-normalization, or final no-drift leaf before source changes.

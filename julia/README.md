@@ -1,6 +1,6 @@
 # LinkedSpec Julia Backend
 
-This directory is the repository-owned Julia backend. Its current `runtime-corpus-middle` status covers the
+This directory is the repository-owned Julia backend. Its current `runtime-corpus-capture-boundaries` status covers the
 package/command surface, manifest validation, source and ActionIR frontends, staged user-function projection/body
 parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch, value/helper/control/callback
 families, cursor/boundary behavior, structured diagnostics/tracing, registered function execution, and controlled
@@ -136,7 +136,9 @@ reporting. `.6.2.2` proves starter fixtures 0–39 green at 40/40 without a prod
 non-function windows 40–56, 58–59, and 62–67 green at 25/25 unchanged and explicitly routes offsets 57, 60, and
 61 to the function-shell leaf. Full tests pass with 757 assertions and status `runtime-corpus-middle`. `.6.2.4.0`
 measures shipped-spec/parser-smoke fixtures 68–98 at 10 passed / 21 failed and splits the failures into recoverable
-mechanism leaves; `.6.2.4.1` anonymous capture-boundary helpers are active.
+mechanism leaves. `.6.2.4.1` adds the complete direct anonymous capture-boundary family, closes all three hlink
+delimiter cases, and routes EBNF logging to structural output. Full tests pass with 766 assertions, status is
+`runtime-corpus-capture-boundaries`, the shipped-smoke window is 13/31, and `.6.2.4.2.1` is active.
 
 Library example:
 

@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.1 — anonymous capture boundaries):
+  Julia already carried the correct rule-local capture origin in `RuntimeMatchRegisters`; the gap was execution
+  dispatch, not state architecture. One family dispatcher now derives all endpoints from that register and keeps
+  text slicing code-unit safe while exposing character lengths/positions. The EBNF logging case proves why helper
+  availability and downstream structural semantics must be claimed separately.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.0 — Julia shipped-smoke split at 10/31):
   The Julia window reaches substantially farther than Dart's initial shipped-smoke boundary, so Dart's historical
   leaf order is reference evidence rather than a template to copy blindly. Julia already passes Tclite, Lispish,

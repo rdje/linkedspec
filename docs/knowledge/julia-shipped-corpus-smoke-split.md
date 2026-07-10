@@ -24,8 +24,9 @@ The initially passing fixtures are `tclite_command_subst`, `tclite_double_quote`
 
 Every failing fixture is routed exactly once before implementation:
 
-- `.6.2.4.1`: three hlink delimiter fixtures plus `ebnf_logging_annotation`, blocked by unsupported anonymous
-  `capture_slice` / `start_capture_slice` helpers.
+- `.6.2.4.1`: three hlink delimiter fixtures plus `ebnf_logging_annotation`, initially blocked by unsupported
+  anonymous `capture_slice` / `start_capture_slice` helpers. That leaf now closes all three hlink cases; EBNF
+  logging reaches the structural-output residual under `.6.2.4.4`.
 - `.6.2.4.2.1`: four portmap fixtures plus `tablegrep_simple_term`, blocked by unsupported `or` / `not` helpers.
 - `.6.2.4.2.2`: `simenv_multiline_value` and `ds_vhistory_version_entry`, blocked by unsupported `print`.
 - `.6.2.4.3`: three recursive top-rule fixtures that execute but return incorrect nested/caller values.
@@ -34,9 +35,9 @@ Every failing fixture is routed exactly once before implementation:
 - `.6.2.4.6`: final 31/31 regression and no-drift closeout.
 
 The checked-in expected JSON remains the Perl/Rust oracle. Completed Dart facts identify portable mechanism
-contracts, but the Julia leaves must establish their own root causes. Package status remains
-`runtime-corpus-middle` at 757 assertions; `.6.2.4.1` is active.
+contracts, but the Julia leaves must establish their own root causes. After `.6.2.4.1`, the complete window is
+13/31, full tests pass with 766 assertions, status is `runtime-corpus-capture-boundaries`, and `.6.2.4.2.1` is active.
 
-Related facts: [[julia-middle-corpus-batch]], [[julia-controlled-corpus-execution]],
+Related facts: [[julia-anonymous-capture-boundary-helpers]], [[julia-middle-corpus-batch]], [[julia-controlled-corpus-execution]],
 [[dart-shipped-corpus-smoke-split]], [[dart-helper-action-surface-bridge]],
 [[rust-anonymous-capture-slice-family]], [[rust-perl-output-oracle]].

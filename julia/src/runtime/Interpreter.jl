@@ -1973,6 +1973,8 @@ function _evaluate_runtime_call!(
         return line_column_at_codeunit_offset(context.input, ncodeunits(context.input)).line
     elseif helper_name == "input_end_col"
         return line_column_at_codeunit_offset(context.input, ncodeunits(context.input)).column
+    elseif helper_name in _RUNTIME_ANONYMOUS_CAPTURE_HELPER_NAMES
+        return _call_runtime_anonymous_capture_helper!(helper_name, context)
     elseif helper_name == "capture_until_boundary"
         return _call_runtime_capture_until_boundary!(
             engine,
@@ -2665,6 +2667,25 @@ const _RUNTIME_HASH_HELPER_NAMES = Set{String}([
     "set_key",
     "sorted_keys",
     "sorted_values",
+])
+
+const _RUNTIME_ANONYMOUS_CAPTURE_HELPER_NAMES = Set{String}([
+    "capture_rest",
+    "capture_rest_len",
+    "capture_slice",
+    "capture_slice_col",
+    "capture_slice_len",
+    "capture_slice_line",
+    "capture_slice_pos",
+    "capture_slice_until_cursor",
+    "capture_slice_until_cursor_len",
+    "capture_take",
+    "capture_take_len",
+    "capture_take_rest",
+    "capture_take_rest_len",
+    "capture_take_until_cursor",
+    "capture_take_until_cursor_len",
+    "start_capture_slice",
 ])
 
 const _RUNTIME_ARRAY_END_MUTATION_NAMES = Set{String}([
@@ -4200,6 +4221,68 @@ function _set_runtime_cursor!(context::_RuntimeExecutionContext, codeunit_cursor
     context.registers = with_cursor_codeunit(context.registers, cursor)
     context.cursor_codeunit = cursor
     return nothing
+end
+
+function _set_runtime_capture_start!(context::_RuntimeExecutionContext, codeunit_cursor::Int)
+    capture_start = clamp(codeunit_cursor, 0, ncodeunits(context.input))
+    context.registers = with_capture_start_codeunit(context.registers, capture_start)
+    return nothing
+end
+
+function _call_runtime_anonymous_capture_helper!(
+    helper_name::String,
+    context::_RuntimeExecutionContext,
+)
+    if helper_name == "start_capture_slice"
+        _set_runtime_capture_start!(context, context.cursor_codeunit)
+        return nothing
+    end
+
+    capture_start = context.registers.capture_start_codeunit
+    if capture_start === nothing
+        return nothing
+    elseif helper_name == "capture_slice_pos"
+        return codeunit_offset_to_char_offset(context.input, capture_start)
+    elseif helper_name == "capture_slice_line"
+        return line_column_at_codeunit_offset(context.input, capture_start).line
+    elseif helper_name == "capture_slice_col"
+        return line_column_at_codeunit_offset(context.input, capture_start).column
+    end
+
+    endpoint = if helper_name in (
+            "capture_rest",
+            "capture_rest_len",
+            "capture_take_rest",
+            "capture_take_rest_len",
+        )
+        ncodeunits(context.input)
+    elseif helper_name in (
+            "capture_slice_until_cursor",
+            "capture_slice_until_cursor_len",
+            "capture_take_until_cursor",
+            "capture_take_until_cursor_len",
+        )
+        context.cursor_codeunit
+    else
+        context.registers.local_match === nothing ? nothing : context.registers.local_match.codeunit_start
+    end
+    if endpoint === nothing || endpoint < capture_start
+        return nothing
+    end
+
+    captured = _runtime_codeunit_slice(context.input, capture_start, endpoint)
+    result = endswith(helper_name, "_len") ? length(captured) : captured
+    if helper_name in (
+            "capture_take",
+            "capture_take_len",
+            "capture_take_until_cursor",
+            "capture_take_until_cursor_len",
+        )
+        _set_runtime_capture_start!(context, context.cursor_codeunit)
+    elseif helper_name in ("capture_take_rest", "capture_take_rest_len")
+        _set_runtime_capture_start!(context, ncodeunits(context.input))
+    end
+    return result
 end
 
 function _runtime_codeunit_slice(input::String, start_codeunit::Int, end_codeunit::Int)

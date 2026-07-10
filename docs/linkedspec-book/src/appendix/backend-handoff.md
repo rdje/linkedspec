@@ -330,8 +330,10 @@ structured diagnostic retention, and all-fixture reporting. Full tests pass with
 `.6.2.1` then adds bounded selection/reporting at 745 assertions and status `runtime-corpus-selection`.
 `.6.2.2` proves starter fixtures 0–39 green at 40/40 without a production correction. `.6.2.3` proves non-function
 windows 40–56, 58–59, and 62–67 green at 25/25 unchanged while routing three top-level function cases. Full tests
-pass with 757 assertions and status `runtime-corpus-middle`. `.6.2.4.0` measures the shipped-spec/parser-smoke
-window at 10 passed / 21 failed and splits the failure families; `.6.2.4.1` is active.
+pass with 757 assertions and status `runtime-corpus-middle` at that boundary. `.6.2.4.0` measures and splits the
+shipped-spec/parser-smoke window at 10/31. `.6.2.4.1` adds the complete direct anonymous capture family, closes
+three hlink delimiter cases, and routes EBNF logging to structural output. Full tests pass with 766 assertions and
+status `runtime-corpus-capture-boundaries`; the window is 13/31 and `.6.2.4.2.1` is active.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -597,7 +599,8 @@ later subset never bypasses manifest drift checks.
 The rollout is explicitly recoverable. `.6.2.1` has landed named and bounded selection/reporting; `.6.2.2` proves
 starter fixtures 0–39 green at 40/40; `.6.2.3` proves the surrounding non-function helper/control fixtures 40–67
 green at 25/25 while routing three top-level function fixtures; `.6.2.4.0` measures shipped-spec/parser-smoke
-fixtures 68–98 at 10/31 and splits their mechanism owners; `.6.2.5` owns spec-defined top-level function shells.
+fixtures 68–98 at 10/31 and splits their mechanism owners; `.6.2.4.1` then closes anonymous capture execution and
+moves the window to 13/31. `.6.2.5` owns spec-defined top-level function shells.
 Those are workload boundaries, not an assumption that Julia shares Dart's historical failure causes.
 
 #### Julia starter corpus proof
@@ -651,7 +654,8 @@ The initial result is 10 passes and 21 failures. Julia already passes both tclit
 cases, portmap slice, regdef, VHDL library use, and the empty plugin/library smokes. The failures are split before
 source changes:
 
-- `.6.2.4.1` owns anonymous capture-boundary helpers blocking three hlink delimiter cases and EBNF logging.
+- `.6.2.4.1` adds anonymous capture-boundary helpers and closes all three hlink delimiter cases. EBNF logging
+  advances to the structural-output group under `.6.2.4.4`.
 - `.6.2.4.2.1` owns logical helpers blocking four portmap cases and tablegrep; `.6.2.4.2.2` owns diagnostic-output
   helpers blocking simenv and history.
 - `.6.2.4.3` owns three already-executing recursive top-rule output mismatches.
@@ -660,7 +664,14 @@ source changes:
 
 The checked-in expected JSON remains the Perl/Rust oracle. Dart's completed shipped-smoke facts are useful
 mechanism references, but Julia leaves establish their own root causes rather than copying Dart's historical path.
-The active frontier is `.6.2.4.1`.
+
+The direct anonymous capture family now uses Julia's existing rule-local match register. `start_capture_slice()`
+sets the origin; `capture_slice*` reads to the current match start, `*_until_cursor*` reads to the live cursor, and
+`*_rest*` reads to input end. Location readers are character-based, and `capture_take*` advances the origin only
+after a valid read. Focused Unicode/newline tests lock endpoint, length, position, line/column, and destructive
+behavior. All three hlink delimiter fixtures pass; a permanent corpus regression preserves them and ensures EBNF
+logging is routed as an output mismatch rather than an unsupported helper. The window is 13/31, package status is
+`runtime-corpus-capture-boundaries`, full tests pass with 766 assertions, and `.6.2.4.2.1` is active.
 
 ### Dart Backend Commands
 

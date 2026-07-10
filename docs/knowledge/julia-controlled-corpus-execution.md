@@ -46,10 +46,11 @@ owned by later `.6` batches.
 `JULIA-BACKEND-PARITY.6.2.0` splits that rollout before behavior changes: `.6.2.1` owns bounded selection/reporting,
 `.6.2.2` owns starter fixtures 0–39, `.6.2.3` owns non-function fixtures 40–67, and `.6.2.4.0` has split the
 measured 10/31 shipped-spec/parser-smoke boundary for fixtures 68–98. `.6.2.5` owns top-level function fixtures
-through the spec-defined shell. These mirror
+through the spec-defined shell. `.6.2.4.1` has since added direct anonymous capture-boundary execution and moved
+the shipped-smoke window to 13/31. These mirror
 the stable Dart workload windows but do not assume Dart and Julia share failure mechanisms.
 
-Related facts: [[julia-shipped-corpus-smoke-split]], [[julia-corpus-selection-reporting]], [[julia-corpus-manifest-io]], [[julia-core-spec-parser]],
+Related facts: [[julia-anonymous-capture-boundary-helpers]], [[julia-shipped-corpus-smoke-split]], [[julia-corpus-selection-reporting]], [[julia-corpus-manifest-io]], [[julia-core-spec-parser]],
 [[julia-compiled-spec-state]],
 [[julia-diagnostics-trace-boundary]], [[julia-user-function-runtime-execution]],
 [[dart-controlled-corpus-execution]], [[statement-separator-semantics]].

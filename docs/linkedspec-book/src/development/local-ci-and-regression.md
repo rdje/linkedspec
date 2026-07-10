@@ -62,7 +62,7 @@ projection, seek/consume runtime regex selection, capture/offset projection, cur
 zero-progress detection, first default/AND/OR/repetition dispatch, lifecycle and child-edge flow, narrow
 accumulators/returns, recursion/progress guards, registered user functions, diagnostics/tracing, boundary capture,
 manifest-backed corpus validation, and controlled library corpus execution. The full package suite currently passes
-with 757 assertions and status `runtime-corpus-middle`.
+with 766 assertions and status `runtime-corpus-capture-boundaries`.
 
 The library executor and corpus CLI support named or bounded subsets. For example:
 
@@ -76,9 +76,10 @@ batches are green. The permanent starter batch can be rerun with `--execute --of
 40/40. The middle non-function regression runs offsets/limits `40/17`, `58/2`, and `62/6` for another 25/25 while
 locking the three intervening top-level function routes. Full 99-fixture Julia parity is not yet claimed.
 
-The next bounded command, `--execute --offset 68 --limit 31`, currently reports 10 passed and 21 failed. Its
-capture-boundary, logical/output helper, recursive top-rule, structural-output, and quote-normalization groups have
-separate task-tree owners before implementation. The package status therefore remains `runtime-corpus-middle`.
+The next bounded command, `--execute --offset 68 --limit 31`, started at 10 passed and 21 failed. Anonymous
+capture-boundary execution now closes all three hlink delimiter fixtures, moving the window to 13/31; EBNF logging
+is explicitly routed to the structural-output owner. Logical/output helper, recursive top-rule, structural-output,
+and quote-normalization groups remain separately owned.
 
 ## Hosted GitHub Actions status
 

@@ -346,7 +346,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-corpus-middle"
+    @test status.parity == "runtime-corpus-capture-boundaries"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -358,7 +358,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-corpus-middle", String(take!(status_output)))
+    @test occursin("parity: runtime-corpus-capture-boundaries", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -2193,6 +2193,89 @@ Top::AND
         "end_col" => 3,
     )
 
+    anonymous_capture_readers = runtime_engine(
+        raw"""
+Top::AND
+ /BEGIN\n/ -> Top[0] { start_capture_slice() }
+ /ébody/
+ /END/ -> Top[2] {
+   slice = capture_slice()
+   slice_len = capture_slice_len()
+   through_cursor = capture_slice_until_cursor()
+   through_cursor_len = capture_slice_until_cursor_len()
+   rest = capture_rest()
+   rest_len = capture_rest_len()
+   capture_pos = capture_slice_pos()
+   capture_line = capture_slice_line()
+   capture_col = capture_slice_col()
+   taken_len = capture_take_len()
+   tail = capture_take_rest()
+   return(hash(
+     "slice", slice,
+     "slice_len", slice_len,
+     "through_cursor", through_cursor,
+     "through_cursor_len", through_cursor_len,
+     "rest", rest,
+     "rest_len", rest_len,
+     "capture_pos", capture_pos,
+     "capture_line", capture_line,
+     "capture_col", capture_col,
+     "taken_len", taken_len,
+     "tail", tail,
+     "remaining_len", capture_rest_len()
+   ))
+ }
+""";
+        parse_mode = ConsumeParseMode,
+    )
+    @test runtime_parse(anonymous_capture_readers, "BEGIN\nébodyENDTAIL").value == Dict{String,Any}(
+        "slice" => "ébody",
+        "slice_len" => 5,
+        "through_cursor" => "ébodyEND",
+        "through_cursor_len" => 8,
+        "rest" => "ébodyENDTAIL",
+        "rest_len" => 12,
+        "capture_pos" => 6,
+        "capture_line" => 2,
+        "capture_col" => 1,
+        "taken_len" => 5,
+        "tail" => "TAIL",
+        "remaining_len" => 0,
+    )
+
+    anonymous_capture_take = runtime_engine(
+        raw"""
+Top::AND
+ /BEGIN\n/ -> Top[0] { start_capture_slice() }
+ /ébody/
+ /END/ -> Top[2] {
+   taken = capture_take()
+   tail_len = capture_take_rest_len()
+   return(array(taken, tail_len, capture_rest()))
+ }
+""";
+        parse_mode = ConsumeParseMode,
+    )
+    @test runtime_parse(anonymous_capture_take, "BEGIN\nébodyENDTAIL").value == Any["ébody", 4, ""]
+
+    anonymous_capture_until_cursor = runtime_engine(
+        raw"""
+Top::AND
+ /BEGIN\n/ -> Top[0] { start_capture_slice() }
+ /ébody/ -> Top[1] {
+   body = capture_take_until_cursor()
+   body_remainder_len = capture_slice_until_cursor_len()
+ }
+ /END/ -> Top[2] {
+   close_len = capture_take_until_cursor_len()
+   return(array(body, body_remainder_len, close_len, capture_slice_pos(), capture_rest()))
+ }
+""";
+        parse_mode = ConsumeParseMode,
+    )
+    @test runtime_parse(anonymous_capture_until_cursor, "BEGIN\nébodyENDTAIL").value ==
+        Any["ébody", 0, 3, 14, "TAIL"]
+
     boundary_capture = runtime_engine(raw"""
 Top::
  /BEGIN/
@@ -3328,6 +3411,31 @@ end
         "terse_3_3_4_assignment_expression_closure",
         "terse_4_3_2_user_function_runtime",
     ]
+end
+
+@testset "Shipped capture-boundary corpus batch" begin
+    passing_names = [
+        "hlink_curly_brace",
+        "hlink_bracket_body",
+        "hlink_mixed_bracket_brace",
+    ]
+    passing = execute_corpus_fixtures(CORPUS_ROOT; case_names = passing_names)
+    failures = [
+        "$(result.name): $(result.failure)"
+        for result in passing.results if !corpus_fixture_passed(result)
+    ]
+    residual = execute_corpus_fixtures(
+        CORPUS_ROOT;
+        case_names = ["ebnf_logging_annotation"],
+    )
+    residual_result = only(residual.results)
+
+    @test [result.name for result in passing.results] == passing_names
+    @test corpus_passed_count(passing) == 3
+    @test isempty(failures)
+    @test !corpus_fixture_passed(residual_result)
+    @test occursin("output mismatch", residual_result.failure)
+    @test !occursin("unsupported runtime helper", residual_result.failure)
 end
 
 @testset "Spec AST JSON contract" begin

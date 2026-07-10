@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.1 — add Julia anonymous capture boundaries
+
+**Scope:** Julia anonymous capture-boundary runtime execution, Unicode/location/mutation tests, permanent hlink/
+EBNF corpus routing proof, package status, task/roadmap/live docs, mdBook, Knowledge Map, and resume pointer.
+
+**Change:** Added the complete direct anonymous family over existing match registers: capture start; match-start,
+cursor, and input-end text/character-length readers; origin position/line/column; and destructive take variants.
+All three hlink delimiter fixtures pass. EBNF logging now reaches its structural residual and routes to `.6.2.4.4`.
+
+**Validation:** Focused corpus is 3 hlink passes plus one explicitly structural EBNF residual; the full window moves
+from 10/31 to 13/31. Full `Pkg.test()` passes with 766 assertions and status
+`runtime-corpus-capture-boundaries`; CLI, mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.0 — split Julia shipped corpus smoke batch
 
 **Scope:** Diagnostic execution and planning-only decomposition of Julia manifest fixtures 68–98, plus task,
