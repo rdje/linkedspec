@@ -5,6 +5,10 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.1` extends neutral manifest schema version 1 with exact
+  `bytes_hex` input-file materialization. Exactly one checked-in source or non-empty lowercase even hex is allowed;
+  raw workspace bytes and malformed/ambiguous pre-launch rejection are focused-locked. The existing 53 cases are
+  unchanged; `.6.2` is active for strict Perl decoding plus valid/invalid behavior fixtures.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.0` ratifies ADR `0025`: primary source/input/arguments,
   JSON, and trace are strict UTF-8 text, preserved without normalization/BOM stripping/newline conversion/trimming.
   Invalid spec/input file bytes map to compilation/input-load failures; binary input is not implicit. Direct decoded

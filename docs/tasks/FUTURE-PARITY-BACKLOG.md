@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`.1.5.1.6.0` ratifies/splits strict UTF-8; `.1.5.1.6.1` active; `.10.1` remains parked).
+- Last updated: `2026-07-10` (`.1.5.1.6.1` adds neutral hex-byte fixtures; `.1.5.1.6.2` active; `.10.1` parked).
 - Owner: repo-local workflow
 
 ## Goal
@@ -257,16 +257,19 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.5.1.6.0 - split primary CLI UTF-8 boundary`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.1.6.1`
-  Status: `active`
+  Status: `done`
   Goal: Let the neutral runner materialize exact invalid/non-text fixture bytes without checked-in binary blobs.
   Acceptance: Extend schema version 1 input-file records with one validated mutually exclusive lowercase-even
     hex byte source beside checked-in `source`; preserve safe paths/workspaces/raw comparison; add focused schema,
     materialization, and malformed-hex tests; document the portable mechanism without backend-specific cases.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - schema-v1 input-file records accept exactly one of checked-in `source` or non-empty
+    lowercase even-length `bytes_hex`; materialization uses raw `pack` bytes and preserves safe-path/workspace
+    handling. Six runner subtests cover exact `00 c3 28 ff 0a` bytes plus both/neither/empty/uppercase/odd/non-hex
+    rejection before backend launch. Syntax, checked-in help, full local gate, docs/KM/governance/book pass.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.1.6.1 - add neutral hex byte fixtures`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.1.6.2`
-  Status: `pending`
+  Status: `active`
   Goal: Implement Perl strict UTF-8 process/file decoding and add exact valid/invalid neutral fixtures.
   Acceptance: Decode valid option values at the correct phase, decode source/input files strictly, preserve code
     points/BOM/newlines without normalization/trimming, emit canonical UTF-8 JSON, keep trace byte counts exact,
@@ -472,8 +475,8 @@ before implementation.
 | 6 | `FUTURE-PARITY-BACKLOG.1.5.1.4` | `done` | Four cases lock phase-ordered operational failures and stdout purity. |
 | 7 | `FUTURE-PARITY-BACKLOG.1.5.1.5` | `done` | Twenty trace cases and the local gate close canonical trace at 53/53. |
 | 8 | `FUTURE-PARITY-BACKLOG.1.5.1.6.0` | `done` | ADR 0025 and probes isolate/split the strict UTF-8 text boundary before code. |
-| 9 | `FUTURE-PARITY-BACKLOG.1.5.1.6.1` | `active` | Add exact hex-byte input materialization to the neutral runner. |
-| 10 | `FUTURE-PARITY-BACKLOG.1.5.1.6.2` | `pending` | Decode Perl argv/files and lock valid/invalid Unicode behavior. |
+| 9 | `FUTURE-PARITY-BACKLOG.1.5.1.6.1` | `done` | Exact hex-byte inputs and validation are reusable in the neutral runner. |
+| 10 | `FUTURE-PARITY-BACKLOG.1.5.1.6.2` | `active` | Decode Perl argv/files and lock valid/invalid Unicode behavior. |
 | 11 | `FUTURE-PARITY-BACKLOG.1.5.1.6.3` | `pending` | Close Perl reference no-drift and activate Rust. |
 | 12 | `FUTURE-PARITY-BACKLOG.1.5.2` | `pending` | Add the missing Rust primary CLI against the completed Perl/shared fixtures. |
 | 13 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
@@ -489,6 +492,32 @@ before implementation.
 | 23 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
 | 24 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
 | 25 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
+
+## `FUTURE-PARITY-BACKLOG.1.5.1.6.1` Neutral Hex-Byte Fixture Materialization
+
+Implementation evidence recorded on 2026-07-10:
+
+- Schema version 1 input workspace records now require `path` plus exactly one of checked-in `source` or inline
+  `bytes_hex`. Existing source-backed cases are unchanged and later backends consume the same manifest.
+- `bytes_hex` is validated as a non-empty lowercase even-length sequence of byte pairs. Both/neither source forms,
+  empty values, uppercase, odd length, and non-hex text fail manifest validation before command launch.
+- Materialization uses `pack('H*', ...)` and the existing raw writer. A focused fake backend reads the generated
+  file and proves exact bytes `00 c3 28 ff 0a`, including NUL and invalid UTF-8, inside the canonical workspace.
+- `cli_conformance/README.md` documents the portable mechanism and why explicit bytes avoid opaque binary blobs.
+  The current checked-in process suite remains 53 cases until `.6.2` adds valid/invalid UTF-8 behavior families.
+
+## `FUTURE-PARITY-BACKLOG.1.5.1.6.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.6.0` proved invalid source/input bytes are required but the runner only copied
+  checked-in files, forcing an opaque binary blob without a schema mechanism.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `_validate_manifest` and `_materialize_case_files` required `source` for every
+  `files` record; no exact inline byte representation existed.
+- [x] **FIX** — Add mutually exclusive validated `bytes_hex`, raw `pack` materialization, focused tests, and docs.
+- [x] **ADDRESSED (verified)** — Exact non-text bytes, both/neither/empty/case/length/character validation,
+  pre-launch failure, source compatibility, safe paths, and workspace behavior are locked.
+- [x] **NO REGRESSION** — Six runner subtests, syntax, checked-in help, full local CI, Knowledge Map, governance,
+  mdBook, whitespace, and cleanup pass.
+- [x] **LOCKSTEP** — Runner/docs/task/KM/book surfaces expose one neutral mechanism; `.6.2` is active for behavior.
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.6.0` Strict UTF-8 Policy Audit and Split
 
@@ -520,7 +549,7 @@ Implementation evidence recorded on 2026-07-10:
   exclusion, other-backend alignment, and runner capability gap each have an explicit contract/owner.
 - [x] **NO REGRESSION** — Read-only probes plus Knowledge Map, governance, mdBook, whitespace, and cleanup pass;
   no implementation source changed.
-- [x] **LOCKSTEP** — Roadmap/live/task/KM/book/ADR surfaces identify `.6.1` as active and keep Rust pending.
+- [x] **LOCKSTEP** — Roadmap/live/task/KM/book/ADR surfaces identify `.6.1` as the next leaf and keep Rust gated.
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.5` Canonical Trace Protocol and Final Perl Gate
 
@@ -827,13 +856,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None blocking `.1.5.1.6.1`: ADR `0025` fixes the text policy, and the runner extension is deliberately limited to
-  validated mutually exclusive lowercase even-length hex bytes. Lua `.1.3` remains gated until implemented
+- None blocking `.1.5.1.6.2`: ADR `0025` fixes the text policy and `.6.1` now supplies exact invalid bytes. Lua
+  `.1.3` remains gated until implemented
   backends close CLI/capability convergence, including `.1.6`-split gaps and generated source under `.3`.
 
 ## Blockers
 
-- None. `.1.5.1.6.1` is the active neutral-runner byte-materialization leaf; `.1.5.2` is deliberately pending.
+- None. `.1.5.1.6.2` is active for Perl decoding/fixtures; `.1.5.2` is deliberately pending.
   Global CLI/capability convergence precedes Lua `.1.3`.
 
 ## Verification Log
@@ -856,6 +885,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.4` | Direct separated failure probes; 33/33 exact cases under default and `POSIXLY_CORRECT=1`; ambient trace isolation; 4 runner + 3 trace subtests; docs/KM/governance/whitespace/mdBook and cleanup. | PASS. Operational phases/channels/exit are stable; `.1.5.1.5` became active and has since closed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.5` | Raw old-trace size/byte probes; signoff coverage/UTF-8/control-field audit; 53/53 exact cases under default and POSIX; 4 runner + 3 trace subtests; full local gate/Phase 0; docs/KM/ADR/governance/whitespace/mdBook and cleanup. | PASS. Canonical primary trace is closed; the surfaced pre-existing argv/JSON mojibake is owned by active `.1.5.1.6` before Rust. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.6.0` | Separated argv/JSON and isolated `JSON::PP` bytes; decoded `LinkedSpec::Get` input/Unicode-regex probes; Perl/Julia/Rust/runner/doc audit; ADR 0025; Knowledge Map; memory/task/doctrine/whitespace/mdBook/cleanup | PASS. Strict UTF-8 is ratified and split without implementation change; `.6.1` active. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.6.1` | Runner/test syntax; 6 runner subtests including exact `00c328ff0a` materialization and six invalid schema forms; checked-in help case; full local gate/Phase 0; docs/KM/governance/whitespace/mdBook/cleanup | PASS. Reusable hex bytes are locked; `.6.2` active. |
 
 ## Commit Log
 
@@ -877,9 +907,13 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.5.1.4` | `FUTURE-PARITY-BACKLOG.1.5.1.4 - normalize Perl CLI failures` | Four failures; phase order, stable stderr, stdout purity, and exit `1` locked. |
 | `FUTURE-PARITY-BACKLOG.1.5.1.5` | `FUTURE-PARITY-BACKLOG.1.5.1.5 - close canonical CLI trace` | ADR 0024, 20 trace cases, 53-case suite, and canonical local gate. |
 | `FUTURE-PARITY-BACKLOG.1.5.1.6.0` | `FUTURE-PARITY-BACKLOG.1.5.1.6.0 - split primary CLI UTF-8 boundary` | ADR 0025, root-cause probes, and three implementation/no-drift owners; no behavior code. |
+| `FUTURE-PARITY-BACKLOG.1.5.1.6.1` | `FUTURE-PARITY-BACKLOG.1.5.1.6.1 - add neutral hex byte fixtures` | Schema-v1 exact non-text input materialization with focused validation/proof. |
 
 ## Changelog
 
+- `2026-07-10`: `.1.5.1.6.1` adds `bytes_hex` as a mutually exclusive schema-v1 input-file source. Raw
+  materialization and six runner subtests lock exact invalid bytes plus both/neither/empty/case/length/character
+  validation before launch. `.6.2` can now express strict UTF-8 failures without checked-in binary blobs.
 - `2026-07-10`: `.1.5.1.6.0` proves Perl mojibake is an adapter decode defect, not a native parser limitation.
   ADR `0025` ratifies strict preserved UTF-8 text across args/files/JSON/trace, stable invalid-file phase projection,
   and no accidental binary-input contract. Runner hex materialization (`.6.1`), Perl decode/fixtures (`.6.2`), and

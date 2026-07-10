@@ -3748,7 +3748,7 @@ _One strict manifest and arbitrary-command runner own primary CLI conformance_
 
 - **answers:** where are the LinkedSpec primary CLI conformance fixtures | how do I run primary CLI conformance | what does tools run_cli_conformance.pl do | how are CLI stdout stderr and exit status compared | how are routed trace files checked by CLI conformance | what placeholders does the CLI conformance runner support | what did FUTURE-PARITY-BACKLOG.1.5.1.1 implement
 - **date:** 2026-07-10 · **status:** current
-- **evidence:** `FUTURE-PARITY-BACKLOG.1.5.1.1 adds cli_conformance/manifest.json, tools/run_cli_conformance.pl, exact help bytes, output-file support, and t/cli_conformance_runner.t; .1.5.1.2-.5 expand to 53 help/usage/success/failure/trace cases.`
+- **evidence:** `FUTURE-PARITY-BACKLOG.1.5.1.1 adds cli_conformance/manifest.json, tools/run_cli_conformance.pl, exact help bytes, output-file support, and t/cli_conformance_runner.t; .1.5.1.2-.5 expand to 53 cases; .1.5.1.6.1 adds validated bytes_hex workspace inputs.`
 - **reverify:** `perl -c tools/run_cli_conformance.pl && PERL5LIB= prove -v -Iperl t/cli_conformance_runner.t t/trace_cli.t && PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec`
 - **source:** [`docs/knowledge/neutral-cli-fixture-runner.md`](docs/knowledge/neutral-cli-fixture-runner.md)
 

@@ -48,8 +48,8 @@ would need a future explicit typed byte-stream API/option contract.
 
 The `.1.5.1.6.0` audit proves decoded Perl native input and a Unicode regex both
 execute and serialize with exact `c3 a9` bytes. It splits implementation into
-neutral runner hex-byte materialization (`.6.1`), Perl decoding and exact fixtures
-(`.6.2`), and final reference/no-drift closure (`.6.3`).
+neutral runner hex-byte materialization (`.6.1`, now done), Perl decoding and exact
+fixtures (`.6.2`, active), and final reference/no-drift closure (`.6.3`).
 
 Related facts: [[primary-cli-utf8-process-boundary-gap]],
 [[user-observable-backend-cli-parity-contract]],

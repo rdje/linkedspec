@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.6.1 — add neutral hex byte fixtures**
+  (DONE — reusable non-text inputs locked; `.1.5.1.6.2` active for Perl UTF-8 behavior).
+
+  **Change:** Schema version 1 file inputs accept exactly one checked-in `source` or explicit `bytes_hex`; the
+  latter is non-empty lowercase even hex and materializes through the existing raw workspace writer.
+
+  **Proof:** Six runner subtests prove `00 c3 28 ff 0a` exactly and reject both/neither/empty/uppercase/odd/non-hex
+  before launch. Syntax/help/full local gate/docs/KM/governance/book/cleanup pass.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.6.0 — split primary CLI UTF-8 boundary**
   (DONE — ADR `0025` ratified; `.1.5.1.6.1` active for neutral hex-byte fixtures).
 

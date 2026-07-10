@@ -34,8 +34,8 @@ user fields, and compile/input/invocation failures.
 - a unique lowercase `id` and a descriptive `family`;
 - an `args` array appended verbatim to the selected backend command after placeholder
   expansion;
-- a `files` array of `{ "source": ..., "path": ... }` records copied byte-for-byte
-  into a fresh per-case workspace;
+- a `files` array of records with `path` plus exactly one of checked-in `source`
+  or explicit `bytes_hex`, materialized byte-for-byte into a fresh per-case workspace;
 - an `expect` object with an integer `exit`, `stdout` and `stderr` objects, plus
   an expected workspace `files` array;
 - exactly one `file` or inline `text` source for each expected channel.
@@ -53,6 +53,12 @@ Paths are relative to this directory, may not traverse upward, and are validated
 before any command runs. Duplicate ids, duplicate destination paths, unknown keys,
 invalid types, absent fixture files, and unsupported schema versions are hard runner
 errors.
+
+`bytes_hex` is a non-empty lowercase even-length hexadecimal string. It exists for
+exact non-text inputs such as malformed UTF-8 fixtures; it avoids opaque checked-in
+binary blobs and never performs placeholder expansion. Defining both `source` and
+`bytes_hex`, neither one, uppercase hex, odd-length hex, or non-hex characters is a
+schema error before the backend command launches.
 
 ## Placeholders and exactness
 

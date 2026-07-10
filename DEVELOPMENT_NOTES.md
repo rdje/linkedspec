@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.6.1 — represent invalid text as explicit data):
+  A byte-exact cross-backend fixture should not depend on an opaque repository binary. Add a validated hex source
+  beside ordinary checked-in files, keep the two mutually exclusive, materialize through the same raw workspace
+  writer, and reject case/length/character errors before launching a backend. This keeps malformed UTF-8 readable,
+  reviewable, deterministic, and reusable by every implementation.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.6.0 — separate logical text from wire bytes):
   A byte-exact CLI still needs a declared text model. Treat source/input/options/results as Unicode scalar text and
   UTF-8 only at boundaries; otherwise Perl byte strings silently diverge from `String`/`str` backends. Prove the

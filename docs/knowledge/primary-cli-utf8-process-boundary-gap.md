@@ -43,8 +43,8 @@ double-counting by distinguishing already-byte-oriented values from decoded text
 but deliberately does not hide this broader pre-existing successful-JSON gap.
 
 ADR `0025` now ratifies strict preserved UTF-8 text and `.1.5.1.6.0` splits the
-repair. `.6.1` is active for neutral hex-byte fixture materialization; `.6.2` owns
-Perl decoding/fixtures and `.6.3` final closure before Rust.
+repair. `.6.1` has added neutral hex-byte fixture materialization; active `.6.2`
+owns Perl decoding/fixtures and `.6.3` final closure before Rust.
 
 Related facts: [[cross-backend-cli-contract-gap]],
 [[canonical-primary-cli-trace-protocol]], [[neutral-cli-fixture-runner]],

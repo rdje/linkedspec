@@ -191,6 +191,73 @@ PERL
  is($stderr, '', 'placeholder/workspace case writes no stderr');
 };
 
+subtest 'hex bytes materialize exact non-text workspace input' => sub {
+ my $root = tempdir(CLEANUP => 1);
+ my $path = File::Spec->catfile($root, 'manifest.json');
+ _write_manifest($path, _one_case_manifest(
+  files => [{bytes_hex => '00c328ff0a', path => 'nested/payload.bin'}],
+  stdout => {text => "00c328ff0a\n"},
+  stderr => {text => ''},
+  exit => 0,
+ ));
+
+ my ($exit, $stdout, $stderr) = _run_cmd(
+  $^X,
+  $runner,
+  '--manifest',
+  $path,
+  '--display-command',
+  'fake',
+  '--',
+  $^X,
+  '-e',
+  'open(my $fh, q{<:raw}, q{nested/payload.bin}) or die $!; local $/; print unpack(q{H*}, <$fh>), qq{\n}',
+ );
+ is($exit, 0, 'hex-byte fixture case passes');
+ like($stdout, qr/\[cli-conformance\] PASS contract/, 'hex-byte case passed exactly');
+ is($stderr, '', 'hex-byte materialization writes no stderr');
+};
+
+subtest 'hex byte source rejects ambiguity and malformed data before launch' => sub {
+ my @cases = (
+  [ambiguous => {source => 'payload.txt', bytes_hex => 'ff', path => 'payload.bin'},
+   qr/must define exactly one of source or bytes_hex/],
+  [missing => {path => 'payload.bin'},
+   qr/must define exactly one of source or bytes_hex/],
+  [empty => {bytes_hex => '', path => 'payload.bin'},
+   qr/bytes_hex must not be empty/],
+  [uppercase => {bytes_hex => 'FF', path => 'payload.bin'},
+   qr/must contain lowercase even-length hexadecimal bytes/],
+  [odd => {bytes_hex => 'f', path => 'payload.bin'},
+   qr/must contain lowercase even-length hexadecimal bytes/],
+  [non_hex => {bytes_hex => 'fg', path => 'payload.bin'},
+   qr/must contain lowercase even-length hexadecimal bytes/],
+ );
+
+ for my $case (@cases) {
+  my ($name, $file, $error_pattern) = @$case;
+  my $root = tempdir(CLEANUP => 1);
+  _write_bytes(File::Spec->catfile($root, 'payload.txt'), "unused\n");
+  my $path = File::Spec->catfile($root, 'manifest.json');
+  _write_manifest($path, _one_case_manifest(files => [$file]));
+  my ($exit, $stdout, $stderr) = _run_cmd(
+   $^X,
+   $runner,
+   '--manifest',
+   $path,
+   '--display-command',
+   'fake',
+   '--',
+   $^X,
+   '-e',
+   'die "command must not launch"',
+  );
+  is($exit, 2, "$name hex schema error exits two");
+  is($stdout, '', "$name hex schema error writes no stdout");
+  like($stderr, $error_pattern, "$name hex schema error is precise");
+ }
+};
+
 subtest 'a one-byte channel mismatch is a conformance failure' => sub {
  my $root = tempdir(CLEANUP => 1);
  my $path = File::Spec->catfile($root, 'manifest.json');

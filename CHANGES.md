@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.6.1 — add neutral hex byte fixtures
+
+**Implementation:** Schema-v1 input workspace records accept `path` plus exactly one of checked-in `source` or
+explicit `bytes_hex`. Hex is non-empty, lowercase, and even-length; raw `pack` materialization reuses safe workspace
+paths. Ambiguous/missing/empty/uppercase/odd/non-hex data fails before backend launch.
+
+**Verification:** Six runner subtests prove exact `00c328ff0a` bytes and every validation boundary; syntax,
+checked-in help, full local CI/Phase 0, docs/KM/governance/mdBook/cleanup pass. The current suite remains 53 cases.
+
+**Next:** `.1.5.1.6.2` uses this mechanism for invalid UTF-8 source/input fixtures while repairing Perl decoding.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.6.0 — split primary CLI UTF-8 boundary
 
 **Scope:** Read-only root-cause/variant/runner audit, ADR `0025`, three-leaf implementation split, and synchronized

@@ -185,12 +185,22 @@ sub _validate_manifest {
   for (my $file_index = 0; $file_index < @$files; ++$file_index) {
    my $file_label = "$label.files[$file_index]";
    my $file = _require_object($files->[$file_index], $file_label);
-   _reject_unknown_keys($file, $file_label, qw(source path));
-   my $source = _safe_relative_path($file->{source}, "$file_label.source");
+   _reject_unknown_keys($file, $file_label, qw(source bytes_hex path));
+   my $has_source = exists($file->{source});
+   my $has_bytes_hex = exists($file->{bytes_hex});
+   die "$file_label must define exactly one of source or bytes_hex"
+    if $has_source == $has_bytes_hex;
    my $destination = _safe_relative_path($file->{path}, "$file_label.path");
    die "$file_label.path duplicates '$destination'" if $destinations{$destination}++;
-   my $source_path = _manifest_path($manifest_root, $source, "$file_label.source");
-   die "$file_label.source does not exist: '$source'" unless -f $source_path;
+   if ($has_source) {
+    my $source = _safe_relative_path($file->{source}, "$file_label.source");
+    my $source_path = _manifest_path($manifest_root, $source, "$file_label.source");
+    die "$file_label.source does not exist: '$source'" unless -f $source_path;
+   } else {
+    my $bytes_hex = _require_string($file->{bytes_hex}, "$file_label.bytes_hex");
+    die "$file_label.bytes_hex must contain lowercase even-length hexadecimal bytes"
+     unless $bytes_hex =~ /\A(?:[0-9a-f]{2})+\z/;
+   }
   }
 
   my $expect = _require_object($case->{expect}, "$label.expect");
@@ -227,9 +237,15 @@ sub _validate_manifest {
 sub _materialize_case_files {
  my ($case, $manifest_root, $workspace) = @_;
  for my $file (@{$case->{files}}) {
-  my $source = _manifest_path($manifest_root, $file->{source}, "case '$case->{id}' source");
   my $destination = File::Spec->catfile($workspace, split(m{/}, $file->{path}));
-  _write_bytes($destination, _read_bytes($source, "case '$case->{id}' source"), "case file");
+  my $content;
+  if (exists $file->{source}) {
+   my $source = _manifest_path($manifest_root, $file->{source}, "case '$case->{id}' source");
+   $content = _read_bytes($source, "case '$case->{id}' source");
+  } else {
+   $content = pack('H*', $file->{bytes_hex});
+  }
+  _write_bytes($destination, $content, "case file");
  }
  return 1;
 }
