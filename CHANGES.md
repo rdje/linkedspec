@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.1.2 — scaffold Julia package
+
+**Scope:** Minimal Julia backend package scaffold, CLI/corpus-runner stubs, smoke tests, README, task-tree frontier
+update, roadmap/task-tree index alignment, mdBook status/handoff text, Knowledge Map, architecture snapshot, live
+docs, and resume pointer.
+
+**Change:** Added the repo-owned `julia/` package for `LinkedSpecJulia`: `Project.toml`, committed
+`Manifest.toml`, module status helpers, Julia-specific CLI entrypoint, corpus-runner entrypoint, scaffold README,
+and a Julia `Test` smoke suite. The CLI exposes help/status and a scaffold `corpus` command. The corpus runner
+accepts `--corpus <path>` but deliberately rejects `--execute` until `.1.3` adds manifest IO/drift detection.
+
+**Validation:** `Pkg.instantiate()`, `Pkg.test()`, Julia-specific CLI help/status, and corpus-runner scaffold
+commands pass with `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot`. Docs/governance validation covers
+mdBook, memory architecture, task-tree metadata, Knowledge Map, doctrine, and `git diff --check`. The initial
+fresh-depot registry access needed approved network once; the committed manifest records only the local package.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.1.1 — verify Julia toolchain preflight
 
 **Scope:** Julia backend toolchain/package-layout preflight, task-tree frontier update, roadmap/task-tree index

@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.1.2 — Julia package scaffold):
+  The `julia/` backend scaffold now exists as package `LinkedSpecJulia` with `Project.toml`, committed
+  `Manifest.toml`, module status helpers, CLI/corpus modules, `bin/linkedspec_julia.jl`, `bin/corpus_runner.jl`,
+  README commands, and a Julia `Test` smoke suite. It is intentionally command/package surface only: no `.spec`
+  parser, manifest IO, runtime interpreter, or corpus execution semantics exist yet. `Pkg.instantiate()`,
+  `Pkg.test()`, CLI help/status, and corpus-runner scaffold commands pass with `JULIA_DEPOT_PATH` set to the
+  writable depot. Next leaf is `.1.3` for manifest-backed corpus IO and drift detection.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.1.1 — Julia toolchain/package preflight):
   The local Julia toolchain is usable for the Julia backend lane: `/opt/homebrew/bin/julia` is Homebrew-managed,
   reports Julia 1.12.6, and matches the official current stable release. `Pkg` and `Test` import successfully when
@@ -9,7 +17,8 @@ Engineering notes for LinkedSpec refactoring and stabilization.
   `Project.toml`, `src/LinkedSpecJulia.jl`, package subtrees for CLI/corpus/spec/action/compiler/runtime, distinct
   `bin/linkedspec_julia.jl` and `bin/corpus_runner.jl` entrypoints, and `test/runtests.jl`. `JuliaFormatter` and
   `JET` are not installed globally, so formatter/linter commands are optional until a scaffold or verification leaf
-  commits them as dev dependencies. Next leaf is `.1.2` for the minimal package scaffold; no parser semantics yet.
+  commits them as dev dependencies. `.1.2` has since created the minimal package scaffold; current next work is
+  `.1.3` corpus manifest IO, with no parser semantics yet.
 
 - 2026-07-09 (FUTURE-PARITY-BACKLOG.1.2 — Julia backend plan):
   Julia parity is now a dedicated task tree at `docs/tasks/JULIA-BACKEND-PARITY.md`. The plan deliberately follows

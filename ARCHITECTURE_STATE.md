@@ -5,14 +5,21 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.1.2` creates the minimal Julia backend package scaffold.
+  `julia/` now contains `Project.toml`, committed `Manifest.toml`, `src/LinkedSpecJulia.jl`, CLI/corpus modules,
+  `bin/linkedspec_julia.jl`, `bin/corpus_runner.jl`, README commands, and a Julia `Test` smoke suite.
+  `Pkg.instantiate()`, `Pkg.test()`, Julia CLI help/status, and corpus-runner scaffold commands pass with
+  `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot`. The scaffold intentionally has no `.spec` parser,
+  manifest IO, runtime interpreter, or corpus execution semantics yet; the active frontier is
+  `JULIA-BACKEND-PARITY.1.3` for manifest-backed corpus IO and drift detection.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.1.1` completes Julia toolchain/package-layout preflight.
   The local backend toolchain is Homebrew-managed Julia 1.12.6 at `/opt/homebrew/bin/julia`, matching the official
   current stable release. `Pkg` and `Test` are usable with a writable Julia depot; the managed harness should set
   `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot` or equivalent when the default `~/.julia` depot is not
   writable. The planned repo-owned scaffold is `julia/` with `Project.toml`, `src/LinkedSpecJulia.jl`, CLI/corpus/
   spec/action/compiler/runtime subtrees, `bin/linkedspec_julia.jl`, `bin/corpus_runner.jl`, and `test/runtests.jl`.
-  `JuliaFormatter` and `JET` are absent global optional tools. The active frontier is
-  `JULIA-BACKEND-PARITY.1.2` for the minimal package scaffold; no Julia parser semantics exist yet.
+  `JuliaFormatter` and `JET` are absent global optional tools. That planned scaffold has since landed in `.1.2`;
+  no Julia parser semantics exist yet.
 - `2026-07-09` refresh: `FUTURE-PARITY-BACKLOG.1.2` creates `docs/tasks/JULIA-BACKEND-PARITY.md` as the
   dedicated Julia backend plan. Julia follows Dart in the ADR `0021` rollout and starts interpreter-first:
   package/toolchain preflight, typed `.spec` frontend, typed helper/action AST, compiled state, runtime

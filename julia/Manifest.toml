@@ -1,0 +1,10 @@
+# This file is machine-generated - editing it directly is not advised
+
+julia_version = "1.12.6"
+manifest_format = "2.0"
+project_hash = "d7d33eeb7207f00c7b4fcc6ef3cf9c47ebe0b0e4"
+
+[[deps.LinkedSpecJulia]]
+path = "."
+uuid = "8eec5991-a432-4f89-ae45-eeda2e697757"
+version = "0.1.0"

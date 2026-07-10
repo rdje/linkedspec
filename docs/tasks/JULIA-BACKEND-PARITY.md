@@ -72,12 +72,13 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.1.1 - verify Julia toolchain preflight`
 
 - ID: `JULIA-BACKEND-PARITY.1.2`
-  Status: `pending`
+  Status: `done`
   Goal: Create the minimal Julia package scaffold and CI-facing smoke test.
   Acceptance: `julia/` has package metadata, library/test entrypoints, a no-op smoke test, documented commands,
     and no dependency on unpublished local state.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `Pkg.instantiate()`, `Pkg.test()`, Julia-specific CLI help/status, and corpus-runner
+    scaffold smoke commands pass with `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot`.
+  Commit: `JULIA-BACKEND-PARITY.1.2 - scaffold Julia package`
 
 - ID: `JULIA-BACKEND-PARITY.1.3`
   Status: `pending`
@@ -309,7 +310,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.1.2` | `pending` | Create the minimal repo-owned Julia package scaffold using the verified toolchain and preflight command layout. |
+| 1 | `JULIA-BACKEND-PARITY.1.3` | `pending` | Add manifest-backed corpus directory IO and drift detection before parser/runtime semantics. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -330,45 +331,32 @@ Toolchain evidence recorded on 2026-07-10:
 - `JuliaFormatter` is not installed in the current global Julia environment.
 - `JET` is not installed in the current global Julia environment.
 
-Repository-owned package layout to create in `.1.2`:
+Repository-owned package scaffold created in `.1.2`:
 
 ```text
 julia/
   Project.toml
+  Manifest.toml
   README.md
-  src/
-    LinkedSpecJulia.jl
-    cli/
-      LinkedSpecJuliaCli.jl
-    corpus/
-      CorpusManifest.jl
-    spec/
-      Ast.jl
-      Parser.jl
-      Validation.jl
-    action/
-      Ast.jl
-      Parser.jl
-      Contracts.jl
-    compiler/
-      CompiledSpec.jl
-    runtime/
-      Matching.jl
-      Interpreter.jl
-      Diagnostics.jl
-      Trace.jl
-  bin/
-    linkedspec_julia.jl
-    corpus_runner.jl
-  test/
-    runtests.jl
+  src/LinkedSpecJulia.jl
+  src/cli/LinkedSpecJuliaCli.jl
+  src/corpus/CorpusManifest.jl
+  bin/linkedspec_julia.jl
+  bin/corpus_runner.jl
+  test/runtests.jl
 ```
 
-Planned command surface:
+Planned future implementation subtrees remain deferred to later leaves: `src/spec/`, `src/action/`, `src/compiler/`,
+and `src/runtime/`.
+
+Current command surface:
 
 - Package manager / dependency setup: `julia --project=julia -e 'import Pkg; Pkg.instantiate()'`
 - Tests: `julia --project=julia -e 'import Pkg; Pkg.test()'`
 - Julia-specific CLI: `julia --project=julia julia/bin/linkedspec_julia.jl --help`
+- Julia-specific CLI status: `julia --project=julia julia/bin/linkedspec_julia.jl status`
+- Julia-specific CLI corpus scaffold: `julia --project=julia julia/bin/linkedspec_julia.jl corpus --corpus
+  rust/linkedspec-runtime/tests/corpus`
 - Corpus runner: `julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus`
 - Future executable corpus command: `julia --project=julia julia/bin/corpus_runner.jl --corpus
   rust/linkedspec-runtime/tests/corpus --execute`
@@ -394,6 +382,9 @@ constraint, not a project dependency or a checked-in artifact.
   language-neutral corpus root until a separate backend-neutral corpus relocation is adopted.
 - `2026-07-10`: Julia `1.12.6` is both the locally installed Homebrew version and the current stable release listed
   on the official Julia manual downloads page. No Julia installation or upgrade is needed for `.1.2`.
+- `2026-07-10`: `.1.2` commits `julia/Manifest.toml` because `Pkg.instantiate()` writes it and the tiny manifest
+  records only the local `LinkedSpecJulia` package with no external dependency state. This avoids unpublished local
+  state while the package has only the stdlib `Test` target.
 
 ## Open Questions
 
@@ -404,7 +395,8 @@ constraint, not a project dependency or a checked-in artifact.
 
 ## Blockers
 
-- None for `.1.2`. Julia `1.12.6`, `Pkg`, and `Test` are locally usable when commands run with a writable depot.
+- None for `.1.3`. The Julia package scaffold is in place; corpus manifest IO/drift detection is the next owned
+  boundary.
 
 ## Verification Log
 
@@ -412,6 +404,7 @@ constraint, not a project dependency or a checked-in artifact.
 | --- | --- | --- | --- |
 | `2026-07-09` | `JULIA-BACKEND-PARITY` | Created under `FUTURE-PARITY-BACKLOG.1.2`; parent leaf ran mdBook, memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine, stale handoff/frontier scan, and `git diff --check`. | PASS. Planning only; no Julia package or implementation code exists yet. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.1.1` | `command -v julia`; `julia --version`; official Julia downloads page stable-release check; `brew list --versions julia`; `brew list --cask --versions julia`; `/opt/homebrew/bin/julia --startup-file=no --history-file=no -e 'println(VERSION)'`; `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --startup-file=no --history-file=no -e 'import Pkg; import Test; println("Pkg+Test available")'`; optional `JuliaFormatter` and `JET` import probes. | PASS for Julia/Homebrew version, `Pkg`, and `Test`; `JuliaFormatter` and `JET` are absent optional tools. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.1.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.instantiate()'`; `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; `julia --project=julia julia/bin/linkedspec_julia.jl --help`; `julia --project=julia julia/bin/linkedspec_julia.jl status`; `julia --project=julia julia/bin/linkedspec_julia.jl corpus --corpus rust/linkedspec-runtime/tests/corpus`; `julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus`; `git diff --check`; memory architecture, task-tree metadata, Knowledge Map, doctrine, and mdBook checks. | PASS. Initial fresh-depot registry access needed approved network once; the committed manifest records only the local package, and the scaffold still deliberately rejects `--execute`. |
 
 ## Commit Log
 
@@ -419,9 +412,14 @@ constraint, not a project dependency or a checked-in artifact.
 | --- | --- | --- |
 | `JULIA-BACKEND-PARITY` | `FUTURE-PARITY-BACKLOG.1.2 - scope Julia backend parity plan` | Tree created by the backlog scoping leaf; implementation commits use `JULIA-BACKEND-PARITY.*` leaf ids. |
 | `JULIA-BACKEND-PARITY.1.1` | `JULIA-BACKEND-PARITY.1.1 - verify Julia toolchain preflight` | Toolchain/package-layout preflight; no Julia source scaffold yet. |
+| `JULIA-BACKEND-PARITY.1.2` | `JULIA-BACKEND-PARITY.1.2 - scaffold Julia package` | Minimal Julia package, command stubs, scaffold tests, and docs; no parser/runtime semantics yet. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.1.2` scaffold. `julia/` now has `Project.toml`, committed `Manifest.toml`,
+  `src/LinkedSpecJulia.jl`, CLI/corpus modules, `bin/linkedspec_julia.jl`, `bin/corpus_runner.jl`, README
+  commands, and a smoke test. `Pkg.instantiate()`, `Pkg.test()`, Julia-specific CLI help/status, and corpus-runner
+  scaffold commands pass with a writable depot. `.1.3` owns manifest-backed corpus IO and drift detection.
 - `2026-07-10`: Completed `.1.1` preflight. Julia `1.12.6` is available through Homebrew and matches the official
   current stable release; the repo-owned `julia/` package layout, package/test commands, Julia-specific CLI,
   corpus-runner entrypoint, optional formatter/linter commands, and writable-depot harness note are recorded.

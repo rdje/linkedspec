@@ -7,9 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.1.2 — scaffold Julia package**
+  (DONE — the minimal Julia package scaffold is in place; next active leaf is `JULIA-BACKEND-PARITY.1.3`).
+
+  **Change:** Added `julia/` as the repo-owned `LinkedSpecJulia` package with package metadata, committed
+  `Manifest.toml`, status helpers, CLI/corpus modules, `bin/linkedspec_julia.jl`, `bin/corpus_runner.jl`, README
+  commands, and a Julia smoke test.
+
+  **Boundary:** Package and command surface only. No `.spec` parser, manifest IO/drift detection, runtime
+  interpreter, or corpus execution semantics exist yet; `--execute` deliberately reports not implemented.
+
+  **Verification:** `Pkg.instantiate()`, `Pkg.test()`, Julia-specific CLI help/status, and corpus-runner scaffold
+  commands pass with a writable Julia depot. Commit-time docs/governance checks pass.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.1.1 — verify Julia toolchain preflight**
-  (DONE — Julia toolchain/package-layout preflight is complete; next active leaf is
-  `JULIA-BACKEND-PARITY.1.2`).
+  (DONE — Julia toolchain/package-layout preflight is complete; `.1.2` has since created the scaffold, and the
+  current active leaf is `JULIA-BACKEND-PARITY.1.3`).
 
   **Change:** Verified local Homebrew Julia 1.12.6 and matched it to the official current stable release. Recorded
   the intended `julia/` package layout, package/test commands, optional formatter/linter commands, Julia-specific
@@ -22,8 +35,8 @@ Current execution status for interruption-safe batch workflow recovery.
   `JuliaFormatter` and `JET` are absent optional tools. Commit-time docs/governance checks pass.
 
 - 2026-07-09: **FUTURE-PARITY-BACKLOG.1.2 — scope Julia backend parity plan**
-  (DONE — Julia backend parity now has a dedicated task tree; `.1.1` preflight has since completed, and the next
-  active leaf is `JULIA-BACKEND-PARITY.1.2`).
+  (DONE — Julia backend parity now has a dedicated task tree; `.1.1` and `.1.2` have since completed, and the
+  current active leaf is `JULIA-BACKEND-PARITY.1.3`).
 
   **Change:** Created `docs/tasks/JULIA-BACKEND-PARITY.md` with the full parity plan for the Julia backend:
   toolchain/package preflight, scaffold, corpus IO, `.spec` frontend, typed ActionIR, compiled state, runtime
@@ -38,8 +51,8 @@ Current execution status for interruption-safe batch workflow recovery.
 
 - 2026-07-09: **DART-BACKEND-PARITY.7.5 — close Dart parity milestone**
   (DONE — the scoped interpreter-first Dart milestone is complete; Julia planning has since completed in
-  `FUTURE-PARITY-BACKLOG.1.2`, and executable Julia work has advanced through `.1.1` to
-  `JULIA-BACKEND-PARITY.1.2`).
+  `FUTURE-PARITY-BACKLOG.1.2`, and executable Julia work has advanced through `.1.2` to
+  `JULIA-BACKEND-PARITY.1.3`).
 
   **Change:** Closed the Dart task tree after aligning the roadmaps, task-tree index, future-backlog frontier,
   mdBook status/handoff text, architecture snapshot, live docs, resume pointer, and Knowledge Map around the
