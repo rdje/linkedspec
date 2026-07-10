@@ -49,9 +49,14 @@ failures. `.1.5.1.5` adds 20 deterministic trace cases to this same manifest;
 generated-file expectations support
 routed trace bytes without a schema or runner fork.
 
+ADR `0025` requires invalid UTF-8 source/input file cases. Active `.1.5.1.6.1`
+owns a schema-v1-compatible explicit hex-byte source for input workspace files;
+until that leaf lands, checked-in `source` files remain the only materialization
+form and no invalid-byte fixture is yet claimed.
+
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[perl-primary-cli-conformance-audit]], [[cross-backend-cli-contract-gap]],
 [[trace-cli-control]], [[julia-primary-cli-process-conformance]],
 [[perl-primary-cli-strict-arguments]], [[perl-primary-cli-success-conformance]],
 [[perl-primary-cli-operational-failures]], [[canonical-primary-cli-trace-protocol]],
-[[primary-cli-utf8-process-boundary-gap]].
+[[primary-cli-utf8-process-boundary-gap]], [[primary-cli-strict-utf8-text-contract]].

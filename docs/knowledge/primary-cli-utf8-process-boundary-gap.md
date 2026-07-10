@@ -9,7 +9,7 @@ answers:
   - what did trace signoff discover about Unicode JSON
   - should Rust primary CLI start before Perl UTF-8 behavior is defined
 date: 2026-07-10
-status: current
+status: implementation-active
 tags: [cli, utf8, unicode, perl, json, parity, FUTURE-PARITY-BACKLOG]
 evidence: "A separated input_text() process probe passed UTF-8 argv xé and observed stdout hex 22 78 c3 83 c2 a9 22 0a rather than 22 78 c3 a9 22 0a; isolated JSON::PP probing shows unflagged c3 a9 bytes are treated as two code points before UTF-8 output."
 reverify: "rg -n 'FUTURE-PARITY-BACKLOG.1.5.1.6|c3 83 c2 a9|UTF-8 argv' docs/tasks/FUTURE-PARITY-BACKLOG.md CHANGES.md MEMORY.md docs/knowledge/primary-cli-utf8-process-boundary-gap.md"
@@ -42,6 +42,10 @@ then add exact shared fixtures. The preceding `.1.5.1.5` trace leaf fixes its ow
 double-counting by distinguishing already-byte-oriented values from decoded text,
 but deliberately does not hide this broader pre-existing successful-JSON gap.
 
+ADR `0025` now ratifies strict preserved UTF-8 text and `.1.5.1.6.0` splits the
+repair. `.6.1` is active for neutral hex-byte fixture materialization; `.6.2` owns
+Perl decoding/fixtures and `.6.3` final closure before Rust.
+
 Related facts: [[cross-backend-cli-contract-gap]],
 [[canonical-primary-cli-trace-protocol]], [[neutral-cli-fixture-runner]],
-[[perl-primary-cli-success-conformance]].
+[[perl-primary-cli-success-conformance]], [[primary-cli-strict-utf8-text-contract]].

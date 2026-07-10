@@ -90,6 +90,15 @@ UTF-8 byte counts, percent-escaped user fields, and traced failures are exact sh
 behavior. Native in-memory APIs retain their
 backend-internal scope/decision/mark/dump streams.
 
+ADR `0025` makes this a strict UTF-8 text command. Argument values, source, input,
+canonical JSON, help/errors, and trace are Unicode scalar text encoded once as UTF-8.
+Valid text is preserved without normalization, BOM removal, newline conversion, or
+trimming. Invalid spec-file bytes produce the stable compilation failure; invalid
+input-file bytes produce the stable input-load failure. Invalid-byte OS argv is
+outside the portable text interface, and arbitrary binary parsing would require a
+future explicit byte-stream contract. Perl implementation/fixtures are active under
+`.1.5.1.6.1`–`.6.3`; this states the convergence contract, not premature completion.
+
 For example, this portable action-edge grammar deliberately constructs object keys out of
 order:
 

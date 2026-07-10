@@ -49,7 +49,8 @@ The suite locks both help forms, 20 strict usage cases, seven success cases, fou
 canonical trace cases on Perl. All 53 pass with `POSIXLY_CORRECT` unset or set. ADR `0024` trace cases cover exact
 UTF-8 phase records, stdout/route/mirror, reset/persistence/append, levels/aliases, emoji, byte counts, field
 escaping, and all failure phases. The canonical local gate invokes this same runner in both environments.
-`.1.5.1.6` is active for the surfaced UTF-8 process boundary; Rust `.1.5.2` follows against the completed manifest.
+ADR `0025` splits the surfaced UTF-8 process boundary; `.1.5.1.6.1` is active for neutral invalid-byte fixtures,
+then `.6.2` repairs Perl and `.6.3` closes the reference before Rust `.1.5.2` consumes the completed manifest.
 Until later backends pass, a green Perl suite is not a complete four-backend CLI-parity claim.
 
 ## Optional Dart Gate

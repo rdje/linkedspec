@@ -68,7 +68,7 @@ primary-command contract every backend must reproduce.
 
 ## Links
 
-- Parent contracts: ADR `0022`, ADR `0023`
+- Parent contracts: ADR `0022`, ADR `0023`; primary text encoding: ADR `0025`
 - Task owner: `docs/tasks/FUTURE-PARITY-BACKLOG.md`
   (`FUTURE-PARITY-BACKLOG.1.5.1.5`)
 - Fixture contract: `cli_conformance/manifest.json`

@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`.10.0` captures semantic introspection/MCP as a parked direction; `.1.5.1.6` remains active).
+- Last updated: `2026-07-10` (`.1.5.1.6.0` ratifies/splits strict UTF-8; `.1.5.1.6.1` active; `.10.1` remains parked).
 - Owner: repo-local workflow
 
 ## Goal
@@ -233,12 +233,55 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.1.5.1.6`
   Status: `active`
   Goal: Define and fixture-lock the primary CLI UTF-8 process boundary before declaring Perl the reusable reference.
+  Children: `.1.5.1.6.0`, `.1.5.1.6.1`, `.1.5.1.6.2`, `.1.5.1.6.3`
   Acceptance: Audit argv and file decoding for inline/file/named source and literal/file input, canonical JSON
     encoding, invalid UTF-8 handling, error phase/status, and trace byte counts; ratify one backend-neutral policy;
     split implementation if needed; add exact neutral fixtures that prevent mojibake or host-specific decoding.
   Verification: `pending` - the initiating separated-byte probe passed UTF-8 argv `xé` through `input_text()` and
     observed stdout `22 78 c3 83 c2 a9 22 0a` instead of UTF-8 JSON `22 78 c3 a9 22 0a`. This is a real Perl-versus-
-    Unicode-host divergence risk, not a trace-only issue. No `.1.5.1.6` repair has started while `.1.5.1.5` is dirty.
+    Unicode-host divergence risk, not a trace-only issue. `.1.5.1.6.0` now owns policy/audit/splitting.
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.1.6.0`
+  Status: `done`
+  Goal: Audit, ratify, and split the exact primary CLI UTF-8 text boundary before implementation.
+  Acceptance: Use Knowledge Map/toolbox facts and direct native/process probes; inspect Perl, Julia, Rust, runner,
+    and public docs; decide argv/file/JSON/trace encoding, normalization/BOM/newline behavior, invalid-byte phase,
+    and contract exclusions; split runner, adapter/fixtures, and no-drift work before code.
+  Verification: `PASS` - ADR `0025` defines strict UTF-8 text with no normalization, BOM stripping, newline
+    conversion, or trimming; valid argv is the interface precondition; invalid source/input file bytes project to
+    compilation/input-load failures. Perl `Get` probes prove decoded `xé` and `/é/` execute and serialize as exact
+    `c3 a9`, isolating mojibake to adapter decoding. Julia uses `String` argv/files, Rust APIs use `&str` and
+    `read_to_string`, and the neutral runner lacks invalid-byte materialization. Three implementation leaves own
+    runner hex bytes, Perl boundary/fixtures, and final closeout; no behavior code changed.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.1.6.0 - split primary CLI UTF-8 boundary`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.1.6.1`
+  Status: `active`
+  Goal: Let the neutral runner materialize exact invalid/non-text fixture bytes without checked-in binary blobs.
+  Acceptance: Extend schema version 1 input-file records with one validated mutually exclusive lowercase-even
+    hex byte source beside checked-in `source`; preserve safe paths/workspaces/raw comparison; add focused schema,
+    materialization, and malformed-hex tests; document the portable mechanism without backend-specific cases.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.1.6.2`
+  Status: `pending`
+  Goal: Implement Perl strict UTF-8 process/file decoding and add exact valid/invalid neutral fixtures.
+  Acceptance: Decode valid option values at the correct phase, decode source/input files strictly, preserve code
+    points/BOM/newlines without normalization/trimming, emit canonical UTF-8 JSON, keep trace byte counts exact,
+    map invalid source/input bytes to stable compilation/input-load failures, and cover literal/file Unicode plus
+    invalid files in the shared manifest under default/POSIX environments.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.1.6.3`
+  Status: `pending`
+  Goal: Close Perl UTF-8/reference conformance and advance to the Rust primary command no-drift.
+  Acceptance: Re-audit all task/roadmap/KM/book/help/fixture/gate surfaces; run focused suites, both full neutral
+    environments, mdBook/governance, and full local CI; mark `.1.5.1` done only if no stale byte-oriented or
+    mojibake claim remains; activate `.1.5.2` without changing the shared contract.
+  Verification: `pending`
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.2`
@@ -428,21 +471,56 @@ before implementation.
 | 5 | `FUTURE-PARITY-BACKLOG.1.5.1.3` | `done` | Seven success cases lock source/input/parser controls and canonical bytes. |
 | 6 | `FUTURE-PARITY-BACKLOG.1.5.1.4` | `done` | Four cases lock phase-ordered operational failures and stdout purity. |
 | 7 | `FUTURE-PARITY-BACKLOG.1.5.1.5` | `done` | Twenty trace cases and the local gate close canonical trace at 53/53. |
-| 8 | `FUTURE-PARITY-BACKLOG.1.5.1.6` | `active` | Define/lock UTF-8 argv/file/JSON behavior before Perl becomes the reusable reference. |
-| 9 | `FUTURE-PARITY-BACKLOG.1.5.2` | `pending` | Add the missing Rust primary CLI against the completed Perl/shared fixtures. |
-| 10 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
-| 11 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
-| 12 | `FUTURE-PARITY-BACKLOG.1.6` | `pending` | Census every documented/exported user capability and split all residual parity gaps. |
-| 13 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
-| 14 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
-| 15 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
-| 16 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
-| 17 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
-| 18 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
-| 19 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
-| 20 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
-| 21 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
-| 22 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
+| 8 | `FUTURE-PARITY-BACKLOG.1.5.1.6.0` | `done` | ADR 0025 and probes isolate/split the strict UTF-8 text boundary before code. |
+| 9 | `FUTURE-PARITY-BACKLOG.1.5.1.6.1` | `active` | Add exact hex-byte input materialization to the neutral runner. |
+| 10 | `FUTURE-PARITY-BACKLOG.1.5.1.6.2` | `pending` | Decode Perl argv/files and lock valid/invalid Unicode behavior. |
+| 11 | `FUTURE-PARITY-BACKLOG.1.5.1.6.3` | `pending` | Close Perl reference no-drift and activate Rust. |
+| 12 | `FUTURE-PARITY-BACKLOG.1.5.2` | `pending` | Add the missing Rust primary CLI against the completed Perl/shared fixtures. |
+| 13 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
+| 14 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
+| 15 | `FUTURE-PARITY-BACKLOG.1.6` | `pending` | Census every documented/exported user capability and split all residual parity gaps. |
+| 16 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
+| 17 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 18 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
+| 19 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
+| 20 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
+| 21 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
+| 22 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
+| 23 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
+| 24 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
+| 25 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
+
+## `FUTURE-PARITY-BACKLOG.1.5.1.6.0` Strict UTF-8 Policy Audit and Split
+
+Implementation evidence recorded on 2026-07-10:
+
+- A separated process probe passed UTF-8 argv `xé` through `input_text()`. Perl emitted JSON hex
+  `22 78 c3 83 c2 a9 22 0a` (`"xÃ©"`) instead of `22 78 c3 a9 22 0a` (`"xé"`). Isolated `JSON::PP`
+  probing showed byte strings `c3 a9` become two code points before UTF-8 output.
+- Toolbox-style direct `LinkedSpec::Get` probes passed decoded strings with native trace suppressed. A decoded
+  `input_text()` result and a Unicode `/é/` regex both compiled/executed and serialized as exact `c3 a9`. The engine
+  already supports this boundary; the primary adapter's missing decode is the root cause.
+- Source audit found Julia primary argv/file state is `String` and Rust native boundaries are `&str`/`String` plus
+  `read_to_string`. Keeping Perl byte-oriented would guarantee backend drift. Dart will inherit the same explicit
+  contract when its primary CLI is repaired.
+- ADR `0025` defines strict UTF-8 text, no normalization/BOM removal/newline conversion/trimming, UTF-8 JSON and
+  trace byte counts, stable invalid-source/input phase projection, valid argv as interface precondition, and an
+  explicit exclusion for accidental binary input.
+- The neutral runner can only copy checked-in source files today. `.6.1` adds validated hex-byte materialization,
+  `.6.2` implements Perl decode plus valid/invalid shared fixtures, and `.6.3` closes the reference/no-drift gate.
+
+## `FUTURE-PARITY-BACKLOG.1.5.1.6.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Exact separated bytes prove UTF-8 argv is currently double-encoded in successful JSON.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Raw `@ARGV`/ordinary reads remain byte strings at `bin/linkedspec`; native
+  decoded `Get`/regex probes are correct, so the defect is isolated to the CLI process adapter.
+- [x] **FIX** — Ratify ADR `0025` and split hex fixture materialization, Perl decode/fixtures, and final closeout
+  before changing runner or adapter behavior.
+- [x] **ADDRESSED (verified)** — Arg/file/source/input/JSON/trace encoding, preservation, invalid phases, binary
+  exclusion, other-backend alignment, and runner capability gap each have an explicit contract/owner.
+- [x] **NO REGRESSION** — Read-only probes plus Knowledge Map, governance, mdBook, whitespace, and cleanup pass;
+  no implementation source changed.
+- [x] **LOCKSTEP** — Roadmap/live/task/KM/book/ADR surfaces identify `.6.1` as active and keep Rust pending.
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.5` Canonical Trace Protocol and Final Perl Gate
 
@@ -749,14 +827,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- `.1.5.1.6` must decide and lock the backend-neutral UTF-8 argv/file/JSON and invalid-input policy. The observed
-  Perl mojibake mechanism is known; source/file breadth and the exact rejection phase still require the owned audit.
-  Lua `.1.3` remains gated until current implemented backends close ADR `0023` CLI/capability convergence,
-  including any `.1.6`-split gaps and public generated source under `.3`.
+- None blocking `.1.5.1.6.1`: ADR `0025` fixes the text policy, and the runner extension is deliberately limited to
+  validated mutually exclusive lowercase even-length hex bytes. Lua `.1.3` remains gated until implemented
+  backends close CLI/capability convergence, including `.1.6`-split gaps and generated source under `.3`.
 
 ## Blockers
 
-- None. `.1.5.1.6` is the active, source-backed UTF-8 reference-boundary leaf; `.1.5.2` is deliberately pending.
+- None. `.1.5.1.6.1` is the active neutral-runner byte-materialization leaf; `.1.5.2` is deliberately pending.
   Global CLI/capability convergence precedes Lua `.1.3`.
 
 ## Verification Log
@@ -778,6 +855,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.3` | Toolbox Get/get_parser/generated-source/trace probes; 29/29 exact cases under default and `POSIXLY_CORRECT=1`; runner/trace tests; docs/KM/governance/whitespace/mdBook and cleanup. | PASS. Seven success cases lock exact source/input/parser/JSON behavior; `.1.5.1.4` became active and has since closed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.4` | Direct separated failure probes; 33/33 exact cases under default and `POSIXLY_CORRECT=1`; ambient trace isolation; 4 runner + 3 trace subtests; docs/KM/governance/whitespace/mdBook and cleanup. | PASS. Operational phases/channels/exit are stable; `.1.5.1.5` became active and has since closed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.5` | Raw old-trace size/byte probes; signoff coverage/UTF-8/control-field audit; 53/53 exact cases under default and POSIX; 4 runner + 3 trace subtests; full local gate/Phase 0; docs/KM/ADR/governance/whitespace/mdBook and cleanup. | PASS. Canonical primary trace is closed; the surfaced pre-existing argv/JSON mojibake is owned by active `.1.5.1.6` before Rust. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.6.0` | Separated argv/JSON and isolated `JSON::PP` bytes; decoded `LinkedSpec::Get` input/Unicode-regex probes; Perl/Julia/Rust/runner/doc audit; ADR 0025; Knowledge Map; memory/task/doctrine/whitespace/mdBook/cleanup | PASS. Strict UTF-8 is ratified and split without implementation change; `.6.1` active. |
 
 ## Commit Log
 
@@ -798,9 +876,14 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.5.1.3` | `FUTURE-PARITY-BACKLOG.1.5.1.3 - lock Perl CLI success behavior` | Seven exact success cases; source/input/parser controls and canonical JSON locked. |
 | `FUTURE-PARITY-BACKLOG.1.5.1.4` | `FUTURE-PARITY-BACKLOG.1.5.1.4 - normalize Perl CLI failures` | Four failures; phase order, stable stderr, stdout purity, and exit `1` locked. |
 | `FUTURE-PARITY-BACKLOG.1.5.1.5` | `FUTURE-PARITY-BACKLOG.1.5.1.5 - close canonical CLI trace` | ADR 0024, 20 trace cases, 53-case suite, and canonical local gate. |
+| `FUTURE-PARITY-BACKLOG.1.5.1.6.0` | `FUTURE-PARITY-BACKLOG.1.5.1.6.0 - split primary CLI UTF-8 boundary` | ADR 0025, root-cause probes, and three implementation/no-drift owners; no behavior code. |
 
 ## Changelog
 
+- `2026-07-10`: `.1.5.1.6.0` proves Perl mojibake is an adapter decode defect, not a native parser limitation.
+  ADR `0025` ratifies strict preserved UTF-8 text across args/files/JSON/trace, stable invalid-file phase projection,
+  and no accidental binary-input contract. Runner hex materialization (`.6.1`), Perl decode/fixtures (`.6.2`), and
+  final no-drift (`.6.3`) are separate; Rust remains pending.
 - `2026-07-10`: `.10.0` captures the director's deep semantic-introspection/API/MCP direction without pivoting
   from `.1.5.1.6`. The parked design requires a versioned backend-neutral semantic model, deterministic stable ids
   and provenance, exact cross-variant query fixtures, idiomatic in-memory APIs, and MCP as a thin transport with no

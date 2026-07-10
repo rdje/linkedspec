@@ -7,8 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.6.0 — split primary CLI UTF-8 boundary**
+  (DONE — ADR `0025` ratified; `.1.5.1.6.1` active for neutral hex-byte fixtures).
+
+  **Change:** Defined strict preserved UTF-8 for args/source/input/JSON/trace, stable invalid-file phases, and binary
+  exclusion. Split runner byte materialization, Perl decode/fixtures, and final no-drift before Rust.
+
+  **Proof:** Raw argv `xé` reproduces mojibake, while decoded native `input_text()` and `/é/` probes return exact
+  `c3 a9`, isolating the adapter. Perl/Julia/Rust/runner/docs audit and KM/governance/book/cleanup pass; no code.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.10.0 — capture semantic introspection MCP direction**
-  (DONE — future direction parked; active frontier remains `.1.5.1.6`).
+  (DONE — future direction parked; active frontier is now `.1.5.1.6.1`).
 
   **Change:** Added `.10` with a completed capture leaf and pending design leaf `.10.1`. The intended product
   surface is a versioned backend-neutral semantic query API in every native variant, with deterministic results,

@@ -59,3 +59,4 @@ Perl exact success proof: [[perl-primary-cli-success-conformance]].
 Perl exact operational-failure proof: [[perl-primary-cli-operational-failures]].
 Canonical primary trace protocol: [[canonical-primary-cli-trace-protocol]].
 Primary CLI UTF-8 boundary gap: [[primary-cli-utf8-process-boundary-gap]].
+Primary CLI UTF-8 text contract: [[primary-cli-strict-utf8-text-contract]].

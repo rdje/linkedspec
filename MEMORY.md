@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.0` — deep semantic introspection is parked as a versioned
-  backend-neutral in-memory API with MCP as thin transport; no implementation or active-frontier change.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.1.5` — canonical trace is closed at 53/53 current Perl cases.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.1.6.0` — ADR `0025` ratifies/splits strict primary UTF-8;
+  decoded native probes are correct and the mojibake defect is isolated to the Perl process adapter.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.10.0` — semantic introspection/MCP is durably parked without a frontier pivot.
 - recent_context: Dart/Julia are 99/99 interpreter-green scoped milestones, not complete public parity; global
   `.1.5`, `.1.6`, and `.3` own current-backend CLI, capability, and generated-source convergence before Lua.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.10.0 - capture semantic introspection MCP direction`; previous committed HEAD is
-  `47d30171 FUTURE-PARITY-BACKLOG.1.5.1.5 - close canonical CLI trace`.
+  `FUTURE-PARITY-BACKLOG.1.5.1.6.0 - split primary CLI UTF-8 boundary`; previous committed HEAD is
+  `2e286348 FUTURE-PARITY-BACKLOG.10.0 - capture semantic introspection MCP direction`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.1.6` is the sole active PNT leaf.
-- next_action: after this commit is clean, audit/split and repair the UTF-8 argv/file/JSON process boundary exposed
-  by `input_text()` (`xé` currently serializes as `xÃ©`); Rust `.1.5.2` stays pending behind the exact reference.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.1.6.1` is the sole active PNT leaf.
+- next_action: extend neutral runner schema/materialization/tests with validated explicit hex bytes for invalid
+  UTF-8 fixtures; `.6.2` then repairs Perl decoding and `.6.3` closes the reference before Rust.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

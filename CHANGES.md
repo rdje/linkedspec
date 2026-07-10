@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.6.0 — split primary CLI UTF-8 boundary
+
+**Scope:** Read-only root-cause/variant/runner audit, ADR `0025`, three-leaf implementation split, and synchronized
+task/roadmap/live/book/Knowledge Map/memory state; no behavior code.
+
+**Finding/decision:** Perl raw argv `xé` becomes JSON `xÃ©`, but decoded native `Get` input and Unicode regex probes
+emit exact `c3 a9`, isolating the defect to the adapter. All primary text is strict UTF-8, preserved without
+normalization/BOM stripping/newline conversion/trimming; invalid source/input files retain stable phase errors.
+
+**Next:** `.1.5.1.6.1` adds neutral runner hex-byte materialization, `.6.2` implements Perl decoding and shared
+valid/invalid fixtures, and `.6.3` closes the reference before Rust.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.10.0 — capture semantic introspection MCP direction
 
 **Scope:** Durable planning capture across task tree, roadmaps/live docs, mdBook, resume pointer, and Knowledge Map;

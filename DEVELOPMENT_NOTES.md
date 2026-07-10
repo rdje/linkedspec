@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.6.0 — separate logical text from wire bytes):
+  A byte-exact CLI still needs a declared text model. Treat source/input/options/results as Unicode scalar text and
+  UTF-8 only at boundaries; otherwise Perl byte strings silently diverge from `String`/`str` backends. Prove the
+  native engine with decoded non-ASCII before changing it, preserve normalization/BOM/newlines, project decoder
+  failures by command phase, and extend neutral fixtures with explicit hex bytes instead of opaque binary blobs.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.10.0 — semantic introspection belongs below MCP):
   Deep introspection is strategically aligned with a parser/compiler/runtime system, but transport must not define
   meaning. Design a versioned semantic projection over deliberate concepts—rules, edges, calls, spans, provenance,

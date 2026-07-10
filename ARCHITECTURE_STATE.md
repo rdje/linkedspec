@@ -5,11 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.0` ratifies ADR `0025`: primary source/input/arguments,
+  JSON, and trace are strict UTF-8 text, preserved without normalization/BOM stripping/newline conversion/trimming.
+  Invalid spec/input file bytes map to compilation/input-load failures; binary input is not implicit. Direct decoded
+  Perl native probes return exact Unicode, isolating mojibake to `bin/linkedspec`. `.6.1` is active for neutral
+  hex-byte fixture materialization, then `.6.2` adapter/fixtures and `.6.3` closeout; no behavior changed here.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.10.0` durably captures deep semantic introspection as a future
   first-class surface. One versioned, deterministic semantic model belongs to idiomatic in-memory APIs across all
   backends; MCP is a thin projection and owns no semantics. Stable ids/order, source spans/provenance, exact parity
   fixtures, cost/privacy controls, and an explicit anti-backend-IR boundary are mandatory design inputs in `.10.1`.
-  Active execution remains `.1.5.1.6`; no implementation changed.
+  Active execution remains `.1.5.1.6.1`; no implementation changed.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.5` closes canonical primary trace at 53 cases and adopts
   ADR `0024`. The primary command emits a concise deterministic UTF-8 phase protocol across stdout/route/mirror,
   reset/persistence/append, every named level and alias, numeric thresholds, emoji, and all three failure phases;

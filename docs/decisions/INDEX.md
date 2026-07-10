@@ -35,6 +35,7 @@ changed* lives in git (layer D), not here.
 | [0022](0022-native-in-memory-backend-embedding.md) | Native in-memory embedding is the primary multi-backend product contract; CLIs are thin secondary adapters | 2026-07-10 | accepted | architecture, portability, backends, embedding, public-api, cross-variant-parity |
 | [0023](0023-user-observable-backend-and-cli-parity.md) | Backend parity is exact user-observable capability/behavior identity; distinct executable names expose one identical CLI interface | 2026-07-10 | accepted | architecture, portability, backends, cli, public-api, cross-variant-parity |
 | [0024](0024-canonical-primary-cli-trace-protocol.md) | Primary CLIs use one deterministic phase-trace protocol while native embedding retains rich backend trace | 2026-07-10 | accepted | architecture, cli, trace, diagnostics, portability, cross-variant-parity |
+| [0025](0025-primary-cli-strict-utf8-text-boundary.md) | Primary CLI source, input, arguments, JSON, and trace are strict UTF-8 text | 2026-07-10 | accepted | architecture, cli, utf8, unicode, files, json, portability, cross-variant-parity |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

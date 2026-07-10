@@ -188,8 +188,9 @@ Top-level project docs:
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
   {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven success, four failure, and 20
-  trace cases. Perl passes all 53 current cases; active `.1.5.1.6` now locks UTF-8 process semantics before the
-  pending Rust primary command consumes the same manifest.
+  trace cases. Perl passes all 53 current cases. ADR `0025` defines strict preserved UTF-8 text; `.1.5.1.6.0`
+  isolates/splits the adapter gap and `.1.5.1.6.1` is active for exact invalid-byte fixture materialization before
+  the pending Rust primary command consumes the manifest.
 - Deep semantic introspection plus MCP is parked under `FUTURE-PARITY-BACKLOG.10.1`: native backend APIs own one
   versioned semantic model, while MCP remains a thin transport rather than a backend-specific source of truth.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
