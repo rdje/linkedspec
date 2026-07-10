@@ -7,6 +7,10 @@
 > Update 2026-07-09: ADR `0021` extends the future backend rollout order to Dart,
 > then Julia, then Lua, and adopts Lua as a future lockstep backend target. This
 > record remains the original multi-backend vision.
+>
+> Update 2026-07-10: ADR `0022` clarifies the primary product surface: every
+> backend is a native in-memory host-language library; CLIs are thin secondary
+> adapters. This record's reach matrix does not make CLI reach the completion gate.
 
 ## Context
 

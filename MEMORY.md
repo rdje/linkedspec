@@ -18,21 +18,22 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.6.2.4.5.3` — public-parser leading trivia closes history; full
-  tests pass with 810 assertions, shipped smoke is 31/31, and status is `runtime-corpus-leading-trivia`.
-- prior_leaf: `REPO-HYGIENE.4` — safe cleanup reclaimed about 20G while preserving depot and unrelated temp data.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.4` — ADR `0022` ratifies native in-memory host-language
+  embedding as the primary backend product contract; CLIs and corpus runners are thin secondary adapters.
+- prior_leaf: `JULIA-BACKEND-PARITY.6.2.4.5.3` — public-parser leading trivia closes history; full tests pass with
+  810 assertions, shipped smoke is 31/31, and status is `runtime-corpus-leading-trivia`.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.6.2.4.5.3 - mirror Julia public parser leading trivia`; previous committed HEAD is
-  `37e985ce REPO-HYGIENE.4 - clean Rust and Julia generated caches`.
+  `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract`; previous committed HEAD is
+  `e5138b35 JULIA-BACKEND-PARITY.6.2.4.5.3 - mirror Julia public parser leading trivia`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; its frontier after the current commit is `.6.2.4.6`.
+- active_work_unit: `JULIA-BACKEND-PARITY`; its frontier after this cross-backend commit is `.6.2.4.6`.
 - next_action: close `JULIA-BACKEND-PARITY.6.2.4.6` with a permanent 31/31 regression and no-drift evidence,
-  then give the director's native in-memory multi-backend rationale a clean-tree cross-backend documentation owner.
-  The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
+  then continue Julia's remaining corpus/parity frontier. The director's single-source `foo.spec`
+  parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
 - latest_bootstrap_read: 2026-07-10 read the full roadmap and roadmap-v2, full codebase inventory and active Julia
   source/tests, full mdBook source, README/memory architecture/session bootstrap/COMMIT/task-tree doctrine, active
@@ -48,5 +49,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.6.2.4.5.3` commit;
-  do not pivot unless the repo is handoff-ready.
+- blockers: none. in_flight_uncommitted: `.1.4` is verified and ready for its prepared commit; none expected
+  afterward. Do not pivot to Julia `.6.2.4.6` until the tree is clean.

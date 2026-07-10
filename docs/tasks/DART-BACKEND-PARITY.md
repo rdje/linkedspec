@@ -6,7 +6,7 @@
 - Status: `done`
 - Roadmap lane: `Overall roadmap - future backend parity (Dart first)`
 - Created: `2026-07-09`
-- Last updated: `2026-07-09`
+- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.4` cross-tree native in-memory API audit; tree remains closed)
 - Owner: repo-local workflow
 
 ## Goal
@@ -42,6 +42,9 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   the documented external contracts.
 - A Dart corpus runner consumes `rust/linkedspec-runtime/tests/corpus/manifest.json`, rejects manifest
   drift, and passes all current fixtures against the Perl-reference expected values.
+- Dart exposes native in-memory parse/compile/execute APIs suitable for embedding in a Dart process;
+  `parseSpec(...)`, `compileSpec(...)`, and `LinkedSpecRuntimeEngine` are the primary product surface,
+  while the CLI and corpus runner are thin adapters with no exclusive semantics (ADR `0022`).
 - mdBook, live docs, task-tree status, and Knowledge Map cards stay aligned with the implemented Dart
   surface after every slice.
 - Each completed leaf is committed through `COMMIT.md` with the leaf id in the subject.
@@ -1603,6 +1606,11 @@ The `.4.1` runtime matching layer adds:
 
 ## Decisions
 
+- `2026-07-10` cross-tree audit (`FUTURE-PARITY-BACKLOG.1.4`): Dart's implemented package already satisfies
+  ADR `0022` structurally. `parseSpec(...)`, `compileSpec(...)`, and `LinkedSpecRuntimeEngine.parse(...)` are
+  native in-process APIs; `executeCorpusFixtures(...)` composes them; the Dart-specific CLI delegates to that
+  library/corpus implementation and owns no exclusive parser/compiler/runtime semantics. The closed Dart
+  behavioral claim remains the existing 99/99 scoped interpreter milestone.
 - `2026-07-09`: Dart starts interpreter-first. The primary parity path is
   `.spec` parser -> typed helper/action AST -> compiled-spec state -> Dart runtime interpreter -> manifest-backed
   corpus runner. Generated Dart source is deferred to `.7.2` after interpreter parity because the Rust interpreter

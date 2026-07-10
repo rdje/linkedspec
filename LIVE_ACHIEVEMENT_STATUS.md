@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.4 — ratify native in-memory backend contract**
+  (DONE — native embedding is the primary cross-backend gate; Julia `.6.2.4.6` remains next).
+
+  **Change:** ADR `0022`, the mdBook, roadmap, backend task acceptance, and Knowledge Map now require native
+  host-process parse/compile/execute APIs for Rust, Dart, Julia, Lua, and future backends. Variant CLIs and corpus
+  runners are thin adapters with no exclusive semantics.
+
+  **Boundary:** The audited Perl/Rust/Dart/Julia library surfaces already follow this architecture. This leaf
+  changes no parser/compiler/runtime behavior; Lua must expose a native module and direct embedding tests.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.5.3 — mirror Julia public parser leading trivia**
   (DONE — history closes; `.6.2.4.6` final shipped-window no-drift is active).
 

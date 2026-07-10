@@ -8,14 +8,26 @@ and test artifact you need — in reading order.
 
 A LinkedSpec backend compiles `.spec` grammar files into runnable parsers. It must:
 
-1. Parse `.spec` files according to the formal grammar.
-2. Parse helper/action language text into typed AST/IR nodes before lowering,
+1. Expose an idiomatic native library, module, package, or crate that applications can
+   call in the host process.
+2. Accept `.spec` source and parser input as in-memory host-language values, then return
+   structured host-language results without requiring a CLI, subprocess, temporary file,
+   or serialized inter-process handoff.
+3. Parse `.spec` files according to the formal grammar.
+4. Parse helper/action language text into typed AST/IR nodes before lowering,
    interpretation, or code emission.
-3. Preserve staged linked parsing semantics: extracted text payloads can become
+5. Preserve staged linked parsing semantics: extracted text payloads can become
    source-provenance parse jobs routed to later `.spec` parsers.
-4. Compile the parsed model into runtime handlers via the HandlerIR pipeline.
-5. Execute those handlers with identical semantics to the Perl reference.
-6. Pass the language-neutral test corpus.
+6. Compile the parsed model into runtime handlers or an equivalent executable compiled
+   model through the accepted backend-neutral seams.
+7. Execute with identical semantics to the Perl reference.
+8. Pass direct library-level tests plus the language-neutral test corpus.
+
+Native in-memory embedding is the primary completion gate (ADR 0022). A backend CLI is a
+secondary thin adapter over the same parser/compiler/runtime library and may not own
+exclusive `.spec` or runtime semantics. Named/file-oriented convenience APIs are welcome,
+but they cannot be the only complete data path. Interpreter versus generated-source
+execution remains a backend choice and does not change this embedding requirement.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics
@@ -24,7 +36,8 @@ future language.
 
 The scheduled future full-parity rollout is Dart first, Julia second, and Lua third
 (ADR 0021). That order affects task-tree sequencing only; the conformance contract is
-the same for every backend.
+the same for every backend. Lua and any later backend must define its native module API
+before CLI productization can satisfy its backend plan.
 
 Text-to-AST is a backend conformance rule, not an optional implementation style.
 Do not build a backend by applying textual helper rewrites directly into host-language
@@ -185,7 +198,9 @@ specified in the documents below.
 ### Step 1: Understand the Big Picture
 Read the [ADR 0006](../../../docs/decisions/0006-multi-backend-vision.md) — the multi-backend
 decision record. It defines the lockstep contract: same `.spec` files, same semantics,
-same test corpus across all backends.
+same test corpus across all backends. Then read
+[ADR 0022](../../../docs/decisions/0022-native-in-memory-backend-embedding.md), which makes
+native host-process parse/compile/execute APIs primary and CLIs secondary adapters.
 
 ### Step 2: Learn the `.spec` Language
 Read the [Formal `.spec` Grammar](formal-grammar.md). This is the definitive syntax

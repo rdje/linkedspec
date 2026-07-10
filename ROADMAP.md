@@ -503,6 +503,9 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 ## Phase 8: Multi-Backend Specification and Handoff Surface
 - Specify, in a language-neutral way, everything a non-Perl backend needs to implement the `.spec` contract: the formal grammar, the HandlerIR node model, the helper-contract catalog, runtime/parse-mode semantics, and a self-contained cross-variant test corpus.
 - Keep `.spec` as the single universal contract and the Perl implementation as the reference backend, so a new backend can be implemented from the public book without reading Perl source (no archaeology).
+- Treat a native in-memory host-language library as the primary backend deliverable. Per-variant CLIs, corpus
+  runners, and platform wrappers must remain adapters over parse/compile/execute APIs and may not own exclusive
+  semantics (ADR `0022`).
 - Exit criteria:
   - the multi-backend handoff surface (ADR, formal grammar, HandlerIR, helper contracts, semantics, corpus, handoff guide) is documented in `docs/linkedspec-book/`.
   - specification-only: no change to the Perl reference behavior.
@@ -510,6 +513,8 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 ## Phase 9: Rust Variant Implementation
 - Prove the multi-backend specification by implementing a second backend: a Rust variant of the LinkedSpec runtime that consumes the same `.spec` contract.
 - Keep the Rust variant's native pipeline (parse -> AST -> CompiledSpec -> interpret) and hold it to cross-variant output parity with the Perl reference.
+- Keep the Rust crates directly embeddable over in-memory `&str` source/input and Rust result values; command-line
+  or platform adapters are secondary to the crate APIs.
 - Exit criteria:
   - a Cargo workspace at `rust/` (`linkedspec-core` + `linkedspec-runtime`) parses, validates, compiles, and interprets `.spec` files (v0.1, interpreted mode).
   - the variant is exercised by the Rust test suite and the manifest-backed Perl-reference output oracle.
@@ -553,6 +558,8 @@ This track captures the core refactor items needed to make `LinkedSpec.pm` robus
    - Keep regex/execution semantics documented and map action IR to the Perl reference first, the
      Rust interpreter next, and future lockstep variants in the ADR `0021` order: Dart, then Julia,
      then Lua.
+   - Require every variant to expose an idiomatic native in-memory parse/compile/execute library before CLI
+     productization can satisfy backend completion (ADR `0022`).
 
 ## Method-Like DSL Migration Track (Planned, Under Item #3)
 Goal: converge `.spec` semantics on backend-neutral method-like operations while supporting two equivalent structured authoring surfaces:
@@ -849,6 +856,10 @@ This is a saved future-enhancement note, not an active implementation item.
   - `mostly done`: core objective landed; remaining work is bounded cleanup, integration, or narrow follow-up slices.
   - `in progress`: active work has started, but the core objective is not yet landed.
   - `not started`: no meaningful roadmap execution has landed yet.
+
+Cross-backend product-surface note (2026-07-10, `FUTURE-PARITY-BACKLOG.1.4` / ADR `0022`): native in-memory
+host-language embedding is primary for Perl, Rust, Dart, Julia, Lua, and future variants. Distinct variant CLIs
+remain secondary thin adapters and may not own exclusive parser/compiler/runtime semantics.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

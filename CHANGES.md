@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.4 — ratify native in-memory backend contract
+
+**Scope:** Cross-backend product architecture, public API/handoff documentation, Perl/Rust/Dart/Julia surface
+audit, future Lua acceptance, ADR/Knowledge Map, roadmap/task-tree alignment, and live continuity docs.
+
+**Change:** ADR `0022` now states why LinkedSpec is multi-backend: Rust, Dart, Julia, Lua, and later host-language
+applications must be able to embed LinkedSpec natively and keep `.spec` source, parser input, and structured
+results in memory. Every backend must expose host-process parse/compile/execute APIs without requiring a CLI,
+subprocess, temporary file, or serialized handoff. Distinct variant CLIs and corpus runners remain thin adapters
+with no exclusive semantics.
+
+**Audit boundary:** Perl already exposes `LinkedSpec::Get(...)`; Rust exposes core parser/compiler crates plus
+the runtime `Engine`; Dart exports `parseSpec(...)`, `compileSpec(...)`, and `LinkedSpecRuntimeEngine`; Julia
+exports `parse_spec(...)`, `compile_spec(...)`, `runtime_parse(...)`, and `runtime_execute(...)`. This is a
+documentation/architecture ratification only—no parser/compiler/runtime behavior changed. Lua's future plan now
+requires a native module and direct library-level tests before CLI completion can count.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.5.3 — mirror Julia public parser leading trivia
 
 **Scope:** Julia public in-memory runtime entry cursor, focused leading-trivia/indexed-read proof, history fixture

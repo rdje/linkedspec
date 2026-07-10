@@ -6,8 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-09` (`FUTURE-PARITY-BACKLOG.1.2` created the dedicated Julia backend parity plan and
-  delegated executable Julia work to `JULIA-BACKEND-PARITY.1.1`).
+- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.4` done: native in-memory backend embedding contract).
 - Owner: repo-local workflow
 
 ## Goal
@@ -29,6 +28,8 @@ before implementation.
 
 - The nine backlog directions are represented as owned task-tree lanes.
 - The backend lane schedules Dart, Julia, and Lua in that order, all with full parity goals.
+- Every backend is primarily a native in-memory library for its host language. Variant CLIs are secondary thin
+  adapters and may not become the only complete product surface or own CLI-only semantics.
 - Each backend implementation track owns a distinct LinkedSpec CLI entrypoint for that variant; no future
   variant should rely on a single ambiguous shared CLI name as its only user-facing command.
 - The spec-derived parser/stimuli roundtrip idea is recorded as future design work, with `.spec` kept as the
@@ -61,9 +62,10 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.1`
   Status: `active`
   Goal: Add future backend implementations in full parity with Perl5 and Rust.
-  Children: `.1.1`, `.1.2`, `.1.3`
+  Children: `.1.1`, `.1.2`, `.1.3`, `.1.4`
   Acceptance: Dart, Julia, and Lua each reach the same `.spec` language, helper/action AST,
-    runtime semantics, staged parsing, diagnostics, and corpus parity contract as Perl5 and Rust.
+    runtime semantics, staged parsing, diagnostics, and corpus parity contract as Perl5 and Rust; each exposes an
+    idiomatic native in-memory library API, with its CLI and corpus runner remaining secondary adapters.
 
 - ID: `FUTURE-PARITY-BACKLOG.1.1`
   Status: `done`
@@ -94,9 +96,27 @@ before implementation.
   Status: `pending`
   Goal: Lua backend parity track - split/scaffold after Julia reaches its scoped parity milestone.
   Acceptance: Create or expand a dedicated Lua backend implementation plan with the same universal
-    `.spec`, helper/action AST, runtime, staged parsing, diagnostics, and corpus parity obligations.
+    `.spec`, helper/action AST, runtime, staged parsing, diagnostics, and corpus parity obligations; define an
+    idiomatic native Lua module that parses/compiles/executes in memory, direct library-level embedding tests,
+    and a distinct Lua-specific LinkedSpec CLI that remains a thin adapter.
   Verification: `pending`
   Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.4`
+  Status: `done`
+  Goal: Ratify native in-memory embedding as the primary multi-backend product contract.
+  Acceptance: Audit the current Perl, Rust, Dart, and Julia public library surfaces; record a durable decision that
+    each backend must compile/parse/execute in the host process without requiring a CLI, subprocess, or serialized
+    file handoff; require Lua and future backend plans to expose equivalent native library APIs; define CLIs and
+    corpus runners as thin adapters with no exclusive semantics; align roadmap, mdBook public API/handoff,
+    Knowledge Map, live docs, and backend task acceptance; make no parser/runtime behavior change.
+  Verification: **PASS 2026-07-10.** Audited the native Perl `Get`/`get_parser`, Rust core parser/compiler plus
+    runtime `Engine`, Dart package parse/compile/runtime exports and CLI adapter, and Julia module
+    parse/compile/runtime exports and CLI adapter. ADR `0022`, roadmaps, mdBook public API/handoff, backend task
+    acceptance, Knowledge Map, live docs, and Lua/future acceptance now agree. Direct Perl coderef construction,
+    50 focused Dart runtime tests, direct Julia parse/compile/execute, mdBook build, Knowledge Map, memory,
+    task-tree, doctrine, and whitespace gates pass. No parser/compiler/runtime source changed.
+  Commit: `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.2`
   Status: `pending`
@@ -213,8 +233,8 @@ before implementation.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.1.1` | `pending` | Julia executable work is delegated to the dedicated Julia tree; PNT should select that active tree before returning to backlog lanes. |
-| 2 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua is now adopted as a future backend by ADR `0021`, scheduled after Julia reaches its scoped milestone. |
+| 1 | `JULIA-BACKEND-PARITY.6.2.4.6` | `active` | Resume final Julia shipped-window no-drift after the cross-backend product contract is durable. |
+| 2 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua is adopted by ADR `0021` and inherits ADR `0022`'s native-module gate after Julia reaches its scoped milestone. |
 | 3 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
 | 4 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Rust generated-source breadth is independent follow-up after backend scheduling. |
 | 5 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
@@ -250,6 +270,9 @@ before implementation.
   AND rules should default bare entries to blind-call sequence semantics, while OR/default rules should default
   bare entries to action-edge regex dispatch semantics. This is parked under `.9.1` and is not the current Julia
   rollout pivot.
+- `2026-07-10`: Director clarification: the reason for multiple LinkedSpec backends is native in-memory use from
+  Rust, Dart, Julia, Lua, and later host languages. ADR `0022` makes host-process parse/compile/execute APIs the
+  primary backend completion gate. Distinct CLIs remain useful thin adapters and may not own exclusive semantics.
 
 ## Open Questions
 
@@ -258,7 +281,7 @@ before implementation.
 
 ## Blockers
 
-- None for `.1.2`. Julia toolchain availability is intentionally deferred to `JULIA-BACKEND-PARITY.1.1`.
+- None. Julia `.6.2.4.6` is the next active PNT leaf; Lua `.1.3` remains deliberately sequenced after Julia.
 
 ## Verification Log
 
@@ -269,6 +292,7 @@ before implementation.
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.1.2` | `git diff --check`; stale handoff/frontier `rg` scan; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_task_tree_metadata.sh`; `bash scripts/check_doctrines.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning only; created `JULIA-BACKEND-PARITY` and no Julia package or implementation code. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.8.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning capture only; no implementation code changed. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.9.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning capture only; no implementation code changed. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.4` | Perl direct `LinkedSpec::Get` coderef probe; focused Dart runtime tests (50); direct Julia parse/compile/execute probe; static Rust core/runtime API and Dart/Julia CLI-adapter audit; `mdbook build docs/linkedspec-book`; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check` | PASS. ADR `0022` makes native in-memory embedding primary and CLIs secondary; current/future backend acceptance and public docs agree; no parser/compiler/runtime source changed. |
 
 ## Commit Log
 
@@ -279,6 +303,7 @@ before implementation.
 | `FUTURE-PARITY-BACKLOG.1.2` | `FUTURE-PARITY-BACKLOG.1.2 - scope Julia backend parity plan` | Creates `JULIA-BACKEND-PARITY`; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.8.0` | `FUTURE-PARITY-BACKLOG.8.0 - capture spec-derived roundtrip idea` | Captures future `foo.spec` parser/stimuli closed-loop validation arc; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.9.0` | `FUTURE-PARITY-BACKLOG.9.0 - capture AND OR edge default correction` | Captures future AND/OR mode-sensitive edge-default design arc; no implementation code. |
+| `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 
 ## Changelog
 
@@ -297,3 +322,6 @@ before implementation.
 - `2026-07-09`: Dart's scoped interpreter-first milestone closed in `DART-BACKEND-PARITY.7.5`; Julia planning
   completed in `.1.2`, with active executable Julia work delegated to `JULIA-BACKEND-PARITY.1.1`. Lua remains
   scheduled after Julia.
+- `2026-07-10`: Ratified native in-memory host-language embedding as the primary multi-backend product contract
+  in ADR `0022`. Perl/Rust/Dart/Julia library surfaces satisfy the structural requirement; CLIs remain thin
+  adapters, and Lua/future plans must expose native modules plus direct library tests.

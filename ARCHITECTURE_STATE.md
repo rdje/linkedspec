@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: ADR `0022` ratifies native in-memory embedding as the reason for LinkedSpec's multiple
+  backends. Perl `Get`, Rust core/runtime crates, Dart package APIs, and Julia module APIs already expose the
+  structural host-process parse/compile/execute path. CLIs, corpus runners, and platform wrappers are secondary
+  adapters with no exclusive semantics. Lua and future backends must meet the native library gate first. This
+  architecture leaf changes no parser/compiler/runtime behavior; Julia `.6.2.4.6` remains next.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.4.5.3` mirrors the public parser's leading blank/comment-line
   skip through Julia's existing in-memory cursor/register seam. History now matches the null-object public oracle
   without weakening scalar-held indexed reads. Full tests pass with 810 assertions, shipped smoke is 31/31,

@@ -4,6 +4,10 @@
 - Status: accepted
 - Tags: architecture, portability, backends, roadmap, cross-variant-parity
 
+> Update 2026-07-10: ADR `0022` makes native in-memory host-language embedding
+> the primary completion gate for Lua and every future backend. The rollout order
+> in this record is unchanged; per-variant CLIs are secondary adapters.
+
 ## Context
 
 ADR `0006` accepted the multi-backend vision with Perl as the reference backend, Rust as
@@ -46,3 +50,4 @@ Dart, then Julia, then Lua. The stated goal is full parity with Perl5 and Rust.
 - Original backend vision: `docs/decisions/0006-multi-backend-vision.md`
 - Text-to-AST doctrine: `docs/decisions/0011-text-to-ast-backend-doctrine.md`
 - Backend handoff: `docs/linkedspec-book/src/appendix/backend-handoff.md`
+- Native in-memory backend contract: `docs/decisions/0022-native-in-memory-backend-embedding.md`

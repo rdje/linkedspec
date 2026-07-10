@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.4 — native in-memory backend contract):
+  Backend plurality exists for native host-language embedding, not for duplicating command-line programs. The
+  stable architecture is `.spec` source value → native parse/compile state → in-process execution → structured
+  host value. File resolution is a convenience layer; CLI, corpus, Wasm, web, mobile, FFI, and service surfaces
+  are adapters. This boundary stays independent of interpreter versus generated-source strategy. Current
+  Perl/Rust/Dart/Julia surfaces already satisfy the structural embedding requirement, while their behavior claims
+  remain governed by existing parity gates. Lua and later backends must begin from a native module/library plan.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.5.3 — public-parser leading trivia):
   The history mismatch was an entrypoint boundary, not an indexed-read defect. Perl's public wrapper skips only
   leading blank and `#` comment lines before the top handler; direct handlers bypass that wrapper, explaining why

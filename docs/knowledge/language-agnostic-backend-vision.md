@@ -1,6 +1,6 @@
 ---
 id: language-agnostic-backend-vision
-title: LinkedSpec language-agnostic backend vision — Perl reference plus Rust and scoped Dart today; Julia active planning and Lua future backend consume same .spec files in lockstep
+title: LinkedSpec language-agnostic backend vision — Perl reference plus Rust, Dart, and active Julia; Lua follows under one lockstep .spec contract
 answers:
   - what backends will LinkedSpec support
   - what is the language-agnostic architecture vision
@@ -14,20 +14,20 @@ answers:
 date: 2026-06-12
 status: accepted
 tags: [architecture, portability, backends, roadmap, vision]
-evidence: "User-specified vision during MEDIUM-IMPACT.1.3 HandlerIR work; ADR 0006 formalized the multi-backend vision and accepted Julia/Dart as future targets. Phase 9 implemented the Rust interpreter under rust/. SPEC-FORMAT-TERSE.5.0 reverified the then-current backend inventory. ADR 0021 later accepted Lua and fixed the future rollout order as Dart, then Julia, then Lua, all to full parity with Perl5 and Rust. DART-BACKEND-PARITY.7.5 closes Dart's scoped interpreter-first milestone, and FUTURE-PARITY-BACKLOG.1.2 creates JULIA-BACKEND-PARITY for active Julia planning."
-reverify: "grep -n 'Rust\\|Julia\\|Dart\\|Lua\\|backend' ROADMAP_V2.md docs/decisions/0006-multi-backend-vision.md docs/decisions/0021-future-backend-rollout-order.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/tasks/FUTURE-PARITY-BACKLOG.md | head -60"
+evidence: "User-specified vision during MEDIUM-IMPACT.1.3 HandlerIR work; ADR 0006 formalized the multi-backend vision. Phase 9 implemented Rust. ADR 0021 fixed the rollout order as Dart, Julia, then Lua. DART-BACKEND-PARITY.7.5 closed Dart's scoped interpreter-first milestone, JULIA-BACKEND-PARITY is active with native runtime/corpus APIs, and ADR 0022 now states that native in-memory host-language embedding is the primary backend product contract while CLIs remain thin adapters."
+reverify: "grep -n 'Rust\\|Julia\\|Dart\\|Lua\\|backend' ROADMAP_V2.md docs/decisions/0006-multi-backend-vision.md docs/decisions/0021-future-backend-rollout-order.md docs/decisions/0022-native-in-memory-backend-embedding.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/tasks/FUTURE-PARITY-BACKLOG.md | head -80"
 ---
 
 ## Context
 
 LinkedSpec currently has the Perl reference implementation, the Rust interpreter variant
-under `rust/`, and a scoped interpreter-first Dart milestone under `dart/`. The accepted
-future backend vision is to add Julia and Lua as separate implementation tracks — not
-replacing Perl, but alongside it. ADR 0021 fixes the rollout order as Dart first, Julia
-second, and Lua third; Dart's scoped milestone is now closed and Julia planning is active
-under `JULIA-BACKEND-PARITY`. All backends consume the exact same `.spec` files and produce
-identical parser behavior. JS and Wasm targets are reached via Rust (wasm-bindgen/wasm-pack)
-or Dart (dart2js/dart2wasm).
+under `rust/`, a closed scoped interpreter-first Dart milestone under `dart/`, and an active
+Julia backend under `julia/`. Lua follows as a separate implementation track — not replacing
+Perl, but alongside it. ADR 0021 fixes the rollout order as Dart first, Julia second, and Lua
+third. All backends consume the exact same `.spec` files and produce identical parser
+behavior. ADR 0022 additionally makes native in-memory host-language embedding the primary
+product surface; see [[native-in-memory-backend-contract]]. JS and Wasm targets are reached
+through adapters over Rust or Dart rather than separate `.spec` dialects.
 
 ## Decision
 
@@ -47,6 +47,9 @@ or Dart (dart2js/dart2wasm).
 5. **HandlerIR is the first concrete decoupling step** — it separates structural decisions
    (which loop, which dispatch) from code generation (Perl source strings). Future backends
    consume the same HandlerIR nodes and emit their own language equivalents.
+6. **Native in-memory embedding is primary** — every backend exposes host-process
+   parse/compile/execute APIs. CLIs and corpus runners are thin adapters and may not own
+   exclusive language or runtime semantics.
 
 ## Consequences
 
@@ -62,9 +65,9 @@ or Dart (dart2js/dart2wasm).
 | Backend | CLI | Web (JS) | Wasm | Mobile |
 |---------|-----|----------|------|--------|
 | Perl    | ✅  | —        | —    | —      |
-| Rust    | ✅ implemented | ✅ (wasm-bindgen future target) | ✅ future target | — |
-| Dart    | ✅ scoped interpreter-first milestone complete | ✅ (dart2js future target) | ✅ (dart2wasm future target) | ✅ (Flutter future target) |
-| Julia   | ✅ active planning target, second | —        | —    | —      |
+| Rust    | ✅ adapter over native crates | ✅ (wasm-bindgen future target) | ✅ future target | — |
+| Dart    | ✅ adapter over native package | ✅ (dart2js future target) | ✅ (dart2wasm future target) | ✅ (Flutter future target) |
+| Julia   | ✅ adapter over active native module | —        | —    | —      |
 | Lua     | ✅ scheduled future target, third | —        | —    | —      |
 
 ## Speculated VM consideration
@@ -77,5 +80,6 @@ a VM would need; the decision of emit-vs-interpret is per-backend.
 ## Links
 
 - [[handler-ir-design]] — formal HandlerIR specification (created 2026-06-14, PHASE8-MULTI-BACKEND-HANDOFF.3)
+- [[native-in-memory-backend-contract]] — primary host-process library surface (ADR 0022)
 - [[specentry-backend-portability-ceiling]]
 - [[actionir-lowering-stack]]

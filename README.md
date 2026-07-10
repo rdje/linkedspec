@@ -24,6 +24,8 @@ This `README.md` is the **single entry point** to the project.
 - Provide a robust, trustworthy parser-prototyping platform that is intentionally different from strict EBNF-centric tooling.
 - Preserve LinkedSpec strengths (recursive parsing + multi-pass extraction workflows).
 - Evolve `.spec` toward language-agnostic action semantics over time.
+- Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
+  must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters.
 
 ## Fast Ramp-Up Documentation Map
 Read these in order for fastest onboarding:
@@ -61,8 +63,11 @@ Top-level directories and files:
 
 - `perl/`
   - Core implementation and runtime modules.
-  - Primary core entrypoint: `perl/LinkedSpec.pm`
+  - Primary native in-memory entrypoint: `perl/LinkedSpec.pm` (`LinkedSpec::Get(...)`).
   - Supporting core modules include `perl/LinkedRE.pm` and `perl/PathSearch.pm`.
+- `rust/`
+  - Native Rust backend workspace. `linkedspec-core` exposes `.spec` parsing/compilation and
+    `linkedspec-runtime::engine::Engine` executes compiled specs directly over Rust string/result values.
 - `specs/`
   - LinkedSpec grammar/spec definitions (`*.spec`).
 - `t/`
@@ -75,7 +80,8 @@ Top-level directories and files:
   - Utility/command scripts.
   - `bin/linkedspec`: Perl reference compile/run CLI with discoverable trace flags.
 - `dart/`
-  - Dart backend parity package.
+  - Native Dart backend package; `parseSpec(...)`, `compileSpec(...)`, and `LinkedSpecRuntimeEngine` are the
+    primary in-process surface.
   - Current state: scoped interpreter-first milestone complete: package metadata, public library entrypoint,
     Dart-specific CLI entrypoint, manifest/corpus
     IO validation/execution, source-level AST/data types, staged parse-job sidecars, core `.spec` rule parser,
@@ -84,7 +90,8 @@ Top-level directories and files:
     compiled-spec state, runtime regex/match state, rule-dispatch interpreter, staged user-function runtime
     execution, and 99-fixture corpus output parity under `DART-BACKEND-PARITY`.
 - `julia/`
-  - Julia backend parity package.
+  - Native Julia backend package; `parse_spec(...)`, `compile_spec(...)`, `runtime_parse(...)`, and
+    `runtime_execute(...)` are the primary in-process surface.
   - Current state: package/corpus scaffold, source frontend, typed ActionIR and contracts, user-function registry,
     compiled-spec state, and runtime seek/consume regex matching with capture/offset projection, cursor state,
     entry/local match registers, and zero-progress detection. First compiled-rule dispatch now executes rule modes,

@@ -42,7 +42,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 - A Julia corpus runner consumes `rust/linkedspec-runtime/tests/corpus/manifest.json`, rejects manifest drift, and
   passes all current fixtures against the Perl/Rust/Dart expected values.
 - Julia exposes native in-memory parse/compile/execute APIs suitable for embedding in a Julia process; the CLI and
-  corpus runner are thin adapters over that library surface, not the reason the backend exists.
+  corpus runner are thin adapters over that library surface, not the reason the backend exists (ADR `0022`).
 - Julia exposes its own distinct LinkedSpec CLI entrypoint; it must not rely on the Perl, Rust, or Dart CLI names as
   the only user-facing command.
 - mdBook, live docs, task-tree status, and Knowledge Map cards stay aligned with the implemented Julia surface after
@@ -2172,7 +2172,8 @@ Rule-interpreter evidence recorded on 2026-07-10:
 - `2026-07-10`: Director clarification: multi-backend LinkedSpec exists primarily so applications can use the
   engine in memory through each host language's native library API—Rust, Dart, Julia, Lua, and future backends.
   Variant-specific CLIs remain useful but secondary thin adapters. This Julia tree must preserve library-first
-  architecture; a clean-tree cross-backend owner will align the global architecture/docs after this in-flight leaf.
+  architecture. `FUTURE-PARITY-BACKLOG.1.4` has now ratified that contract in ADR `0022` and aligned the global
+  architecture/docs; Julia's exported parse/compile/runtime functions already satisfy the structural gate.
 - `2026-07-09`: The Rust corpus under `rust/linkedspec-runtime/tests/corpus/` remains the checked-in
   language-neutral corpus root until a separate backend-neutral corpus relocation is adopted.
 - `2026-07-10`: Julia `1.12.6` is both the locally installed Homebrew version and the current stable release listed

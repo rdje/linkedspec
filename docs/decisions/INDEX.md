@@ -32,6 +32,7 @@ changed* lives in git (layer D), not here.
 | [0019](0019-terse-colon-slot-removal-engine-first.md) | `:name` removal is engine-first: bare reads are incomplete at the audit commit (`switch(kind)` etc. + rule-name collisions), so complete bare-name value reads on Perl+Rust first, then remove `:name` entirely (no compat) | 2026-07-05 | accepted | dsl, spec-format-terse, colon-slot, sequencing, engine, cross-variant-parity |
 | [0020](0020-lifecycle-handler-drift-documentation-policy.md) | Lifecycle handler-shape drift remains a documented Perl-reference caveat until a separately-owned implementation/parity task authorizes engine changes | 2026-07-08 | accepted | lifecycle, perl-reference, generated-handlers, documentation, parity |
 | [0021](0021-future-backend-rollout-order.md) | Future backend rollout order: Dart first, then Julia, then Lua; all future backends must reach full parity with Perl5 and Rust under the universal `.spec` contract | 2026-07-09 | accepted | architecture, portability, backends, roadmap, cross-variant-parity |
+| [0022](0022-native-in-memory-backend-embedding.md) | Native in-memory embedding is the primary multi-backend product contract; CLIs are thin secondary adapters | 2026-07-10 | accepted | architecture, portability, backends, embedding, public-api, cross-variant-parity |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
