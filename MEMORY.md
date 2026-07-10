@@ -18,22 +18,26 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.2` — Julia backend parity is scoped into
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.1.1` — Julia toolchain/package-layout preflight is complete:
+  Homebrew Julia 1.12.6 matches the official current stable release, `Pkg`/`Test` work with a writable depot,
+  and the intended `julia/` package/test/CLI/corpus-runner layout is recorded.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.2` — Julia backend parity was scoped into
   `docs/tasks/JULIA-BACKEND-PARITY.md` with interpreter-first strategy and Julia-specific CLI ownership.
-- prior_leaf: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
+- recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.2 - scope Julia backend parity plan`; previous committed HEAD is
-  `150b9213 DART-BACKEND-PARITY.7.5 - close Dart parity milestone`.
+  `JULIA-BACKEND-PARITY.1.1 - verify Julia toolchain preflight`; previous committed HEAD is
+  `b0efe25e FUTURE-PARITY-BACKLOG.1.2 - scope Julia backend parity plan`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; current frontier after the current commit is `.1.1`.
-- next_action: resume PNT at `JULIA-BACKEND-PARITY.1.1` to verify local Julia toolchain availability and define
-  the repository-owned Julia package/test/corpus-runner/variant-specific CLI layout before source scaffold work.
+- active_work_unit: `JULIA-BACKEND-PARITY`; current frontier after the current commit is `.1.2`.
+- next_action: resume PNT at `JULIA-BACKEND-PARITY.1.2` to create the minimal repo-owned Julia package scaffold
+  from the `.1.1` layout: metadata, library/test entrypoints, no-op smoke test, documented commands, and no
+  parser semantics yet.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
-- latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, COMMIT, task-tree index,
+- latest_bootstrap_read: 2026-07-10 read README, memory architecture, session bootstrap, COMMIT, task-tree index,
   completed Dart task tree, active future-backlog/Julia task context, ROADMAP/ROADMAP_V2, mdBook
   trace/runtime/status/backend-handoff chapters, relevant ADR/KM facts, Dart runtime/package/corpus/CLI source
   owners through `.7.5`, Rust staged-registry/trace references, and the completed cursor-control split.
@@ -43,5 +47,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `FUTURE-PARITY-BACKLOG.1.2` commit; do not pivot unless the repo
+- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.1.1` commit; do not pivot unless the repo
   is handoff-ready.

@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.1.1 — Julia toolchain/package preflight):
+  The local Julia toolchain is usable for the Julia backend lane: `/opt/homebrew/bin/julia` is Homebrew-managed,
+  reports Julia 1.12.6, and matches the official current stable release. `Pkg` and `Test` import successfully when
+  Julia runs with a writable depot such as `/private/tmp/linkedspec-julia-depot`; plain imports can fail under the
+  managed harness if they try to precompile into `~/.julia`. The intended `julia/` layout is now recorded with
+  `Project.toml`, `src/LinkedSpecJulia.jl`, package subtrees for CLI/corpus/spec/action/compiler/runtime, distinct
+  `bin/linkedspec_julia.jl` and `bin/corpus_runner.jl` entrypoints, and `test/runtests.jl`. `JuliaFormatter` and
+  `JET` are not installed globally, so formatter/linter commands are optional until a scaffold or verification leaf
+  commits them as dev dependencies. Next leaf is `.1.2` for the minimal package scaffold; no parser semantics yet.
+
 - 2026-07-09 (FUTURE-PARITY-BACKLOG.1.2 — Julia backend plan):
   Julia parity is now a dedicated task tree at `docs/tasks/JULIA-BACKEND-PARITY.md`. The plan deliberately follows
   the Dart lessons: verify toolchain/package layout first, start interpreter-first over typed `.spec` and

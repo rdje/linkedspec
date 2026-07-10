@@ -4,12 +4,20 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-09`
+- Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.1.1` completes Julia toolchain/package-layout preflight.
+  The local backend toolchain is Homebrew-managed Julia 1.12.6 at `/opt/homebrew/bin/julia`, matching the official
+  current stable release. `Pkg` and `Test` are usable with a writable Julia depot; the managed harness should set
+  `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot` or equivalent when the default `~/.julia` depot is not
+  writable. The planned repo-owned scaffold is `julia/` with `Project.toml`, `src/LinkedSpecJulia.jl`, CLI/corpus/
+  spec/action/compiler/runtime subtrees, `bin/linkedspec_julia.jl`, `bin/corpus_runner.jl`, and `test/runtests.jl`.
+  `JuliaFormatter` and `JET` are absent global optional tools. The active frontier is
+  `JULIA-BACKEND-PARITY.1.2` for the minimal package scaffold; no Julia parser semantics exist yet.
 - `2026-07-09` refresh: `FUTURE-PARITY-BACKLOG.1.2` creates `docs/tasks/JULIA-BACKEND-PARITY.md` as the
   dedicated Julia backend plan. Julia follows Dart in the ADR `0021` rollout and starts interpreter-first:
   package/toolchain preflight, typed `.spec` frontend, typed helper/action AST, compiled state, runtime
   interpreter, staged user-function execution, diagnostics/trace, corpus parity, and mdBook/live-doc closeout.
-  Generated Julia source is a later proof decision, not the initial gate. The active frontier is
+  Generated Julia source is a later proof decision, not the initial gate. At creation time, the next frontier was
   `JULIA-BACKEND-PARITY.1.1` for toolchain/package-layout and variant-specific CLI preflight.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.7.5` closes the scoped Dart interpreter-first milestone.
   Dart now has a repo-owned package, typed frontend and ActionIR layers, compiled-spec state, runtime

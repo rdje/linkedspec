@@ -290,10 +290,48 @@ action-edge `push(child, index)` preserves indexed child payloads. The
 Dart-specific LinkedSpec CLI productization is now done, and
 `DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first milestone.
 `FUTURE-PARITY-BACKLOG.1.2` creates the dedicated `JULIA-BACKEND-PARITY`
-plan, whose first active leaf is `JULIA-BACKEND-PARITY.1.1` for Julia
-toolchain/package-layout preflight. Future Julia and Lua backend plans must own
-their own variant-specific CLIs rather than relying on one ambiguous shared
-command.
+plan. `JULIA-BACKEND-PARITY.1.1` has completed Julia toolchain/package-layout preflight, and the active Julia
+frontier is now `.1.2` for the minimal package scaffold. Future Julia and Lua backend plans must own their own
+variant-specific CLIs rather than relying on one ambiguous shared command.
+
+### Julia Backend Preflight
+
+`JULIA-BACKEND-PARITY.1.1` is complete. The local Julia toolchain is Homebrew-managed:
+`/opt/homebrew/bin/julia` reports Julia `1.12.6`, and the official Julia downloads page lists `v1.12.6` as the
+current stable release. `Pkg` and `Test` work when Julia has a writable depot; under the managed harness, commands
+can set `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot` to avoid writing precompile artifacts into
+`~/.julia`. Global `JuliaFormatter` and `JET` packages are not installed today, so formatter/linter commands are
+optional until a scaffold or verification leaf commits them as dev dependencies.
+
+The planned Julia package layout is:
+
+```text
+julia/
+  Project.toml
+  README.md
+  src/LinkedSpecJulia.jl
+  src/cli/LinkedSpecJuliaCli.jl
+  src/corpus/CorpusManifest.jl
+  src/spec/{Ast,Parser,Validation}.jl
+  src/action/{Ast,Parser,Contracts}.jl
+  src/compiler/CompiledSpec.jl
+  src/runtime/{Matching,Interpreter,Diagnostics,Trace}.jl
+  bin/linkedspec_julia.jl
+  bin/corpus_runner.jl
+  test/runtests.jl
+```
+
+The first command surface is:
+
+```bash
+julia --project=julia -e 'import Pkg; Pkg.instantiate()'
+julia --project=julia -e 'import Pkg; Pkg.test()'
+julia --project=julia julia/bin/linkedspec_julia.jl --help
+julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus
+```
+
+The next Julia frontier is `JULIA-BACKEND-PARITY.1.2`, which creates the minimal package scaffold. It should not
+start parser semantics yet.
 
 ### Dart Backend Commands
 

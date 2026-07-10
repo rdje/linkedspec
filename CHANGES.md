@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.1.1 — verify Julia toolchain preflight
+
+**Scope:** Julia backend toolchain/package-layout preflight, task-tree frontier update, roadmap/task-tree index
+alignment, mdBook status/handoff text, architecture snapshot, live docs, and resume pointer.
+
+**Change:** Verified that the local Julia backend toolchain is Homebrew-managed Julia `1.12.6`, which matches the
+official current stable release. Recorded the exact local command evidence, the writable-depot requirement for
+standard-library precompilation under the managed harness, the intended repo-owned `julia/` package layout,
+`Pkg.instantiate()` / `Pkg.test()` commands, optional `JuliaFormatter` / `JET` commands, and the Julia-specific
+`julia/bin/linkedspec_julia.jl` plus `julia/bin/corpus_runner.jl` entrypoints. The active Julia frontier advances
+to `JULIA-BACKEND-PARITY.1.2` for the minimal package scaffold.
+
+**Validation:** Julia version/Homebrew probes and `Pkg`/`Test` import with a writable depot pass. `JuliaFormatter`
+and `JET` are absent optional tools. Docs/governance validation covers mdBook, memory architecture, task-tree
+metadata, doctrine, and `git diff --check`. No Julia source scaffold or parser behavior changed.
+
 ## 2026-07-09 — FUTURE-PARITY-BACKLOG.1.2 — scope Julia backend parity plan
 
 **Scope:** Julia backend task-tree creation, future-backlog frontier update, roadmap/task-tree index alignment,

@@ -7,9 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.1.1 — verify Julia toolchain preflight**
+  (DONE — Julia toolchain/package-layout preflight is complete; next active leaf is
+  `JULIA-BACKEND-PARITY.1.2`).
+
+  **Change:** Verified local Homebrew Julia 1.12.6 and matched it to the official current stable release. Recorded
+  the intended `julia/` package layout, package/test commands, optional formatter/linter commands, Julia-specific
+  CLI entrypoint, corpus-runner entrypoint, and writable-depot note for this managed harness.
+
+  **Boundary:** Planning/toolchain only. No Julia package scaffold, source, tests, parser behavior, corpus IO, or
+  CLI files were created yet.
+
+  **Verification:** Julia version/Homebrew probes and `Pkg`/`Test` import with a writable depot pass.
+  `JuliaFormatter` and `JET` are absent optional tools. Commit-time docs/governance checks pass.
+
 - 2026-07-09: **FUTURE-PARITY-BACKLOG.1.2 — scope Julia backend parity plan**
-  (DONE — Julia backend parity now has a dedicated task tree; next active leaf is
-  `JULIA-BACKEND-PARITY.1.1`).
+  (DONE — Julia backend parity now has a dedicated task tree; `.1.1` preflight has since completed, and the next
+  active leaf is `JULIA-BACKEND-PARITY.1.2`).
 
   **Change:** Created `docs/tasks/JULIA-BACKEND-PARITY.md` with the full parity plan for the Julia backend:
   toolchain/package preflight, scaffold, corpus IO, `.spec` frontend, typed ActionIR, compiled state, runtime
@@ -24,7 +38,8 @@ Current execution status for interruption-safe batch workflow recovery.
 
 - 2026-07-09: **DART-BACKEND-PARITY.7.5 — close Dart parity milestone**
   (DONE — the scoped interpreter-first Dart milestone is complete; Julia planning has since completed in
-  `FUTURE-PARITY-BACKLOG.1.2`, and active executable Julia work starts at `JULIA-BACKEND-PARITY.1.1`).
+  `FUTURE-PARITY-BACKLOG.1.2`, and executable Julia work has advanced through `.1.1` to
+  `JULIA-BACKEND-PARITY.1.2`).
 
   **Change:** Closed the Dart task tree after aligning the roadmaps, task-tree index, future-backlog frontier,
   mdBook status/handoff text, architecture snapshot, live docs, resume pointer, and Knowledge Map around the
