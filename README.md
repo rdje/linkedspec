@@ -76,7 +76,8 @@ Top-level directories and files:
   - `bin/linkedspec`: Perl reference compile/run CLI with discoverable trace flags.
 - `dart/`
   - Dart backend parity package.
-  - Current state: package metadata, public library entrypoint, Dart-specific CLI entrypoint, manifest/corpus
+  - Current state: scoped interpreter-first milestone complete: package metadata, public library entrypoint,
+    Dart-specific CLI entrypoint, manifest/corpus
     IO validation/execution, source-level AST/data types, staged parse-job sidecars, core `.spec` rule parser,
     frontend validation, spec-returned function-definition projection, typed ActionIR/helper-action AST
     parsing, ActionIR contract resolution, user-function registry, staged function-body registry dispatch,

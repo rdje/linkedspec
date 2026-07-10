@@ -7,6 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **DART-BACKEND-PARITY.7.5 — close Dart parity milestone**
+  (DONE — the scoped interpreter-first Dart milestone is complete; next eligible backend leaf is
+  `FUTURE-PARITY-BACKLOG.1.2` for Julia planning).
+
+  **Change:** Closed the Dart task tree after aligning the roadmaps, task-tree index, future-backlog frontier,
+  mdBook status/handoff text, architecture snapshot, live docs, resume pointer, and Knowledge Map around the
+  accepted Dart boundary.
+
+  **Boundary:** No Dart runtime behavior changed. Generated Dart source remains deferred to a future split proof
+  lane; no Julia or Lua implementation starts in this closeout slice.
+
+  **Verification:** Focused Dart gate, mdBook build, memory architecture, Knowledge Map, task-tree metadata,
+  doctrine, default local CI, stale-status scans, and `git diff --check` pass. The focused Dart gate includes
+  140 Dart tests and 99/99 corpus execution; default local CI includes phase0 `1..1028`.
+
 - 2026-07-09: **DART-BACKEND-PARITY.7.4 — productize Dart-specific CLI**
   (DONE — Dart now has a productized variant-specific CLI; frontier advances to `.7.5`).
 

@@ -42,7 +42,8 @@ bash ../tools/run_dart_local.sh
 
 ## Status
 
-`DART-BACKEND-PARITY.7.4` is the current completed Dart CLI boundary:
+`DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first Dart milestone.
+`DART-BACKEND-PARITY.7.4` completed the Dart CLI boundary:
 `bin/linkedspec_dart.dart` is the Dart-specific LinkedSpec CLI, with help text and a `corpus` command that can
 validate or execute the manifest-backed corpus through the Dart parser, compiler, and runtime. The compatibility
 `bin/corpus_runner.dart` entrypoint remains available for existing corpus-focused diagnostics and delegates to the

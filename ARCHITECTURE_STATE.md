@@ -5,21 +5,28 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `DART-BACKEND-PARITY.7.5` closes the scoped Dart interpreter-first milestone.
+  Dart now has a repo-owned package, typed frontend and ActionIR layers, compiled-spec state, runtime
+  interpreter, staged user-function execution, diagnostics/trace controls, focused local verification,
+  variant-specific CLI productization, and 99/99 corpus execution. Generated Dart source remains deferred to a
+  future split source-emitter proof lane. No active Dart frontier remains; future backend rollout returns to
+  `FUTURE-PARITY-BACKLOG.1.2` for Julia planning.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.7.4` productizes the Dart-specific LinkedSpec CLI.
   `dart/bin/linkedspec_dart.dart` now owns help text plus a `corpus` command that validates or executes the
   manifest-backed corpus through the Dart parser, compiler, and runtime. `dart/bin/corpus_runner.dart` remains a
-  compatibility wrapper over the same command implementation. Current frontier advances to `.7.5` for final
-  Dart no-drift closeout.
+  compatibility wrapper over the same command implementation. `.7.5` has since closed the Dart scoped
+  interpreter-first milestone.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.7.1` closes Dart mdBook usage/status/handoff documentation.
   The book now names `bash tools/run_dart_local.sh`, opt-in `LINKEDSPEC_RUN_DART=1 bash tools/run_ci_local.sh`,
   direct `dart test`, and full corpus-runner execution as the Dart command surface. Current Dart parity is
   interpreter-first and 99/99 corpus-green; `.7.2` has since deferred generated Dart source to a future split
-  source-emitter lane, and Dart-specific CLI productization has since closed in `.7.4`.
+  source-emitter lane, Dart-specific CLI productization has since closed in `.7.4`, and `.7.5` has closed the
+  scoped milestone.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.7.2` deliberately defers generated Dart source implementation.
   A future Dart source-emitter proof must be split like the Rust source-emitter lane: scaffold/compile-run harness,
   generated family-plan metadata, direct structural-family execution, and curated manifest-backed corpus subset.
   The current Dart conformance gate remains the interpreter-first 99/99 corpus run; the frontier later advanced
-  through `.7.4` to `.7.5` for final no-drift closeout.
+  through `.7.4`, and `.7.5` closed the scoped milestone.
 - `2026-07-09` refresh: `BACKTRACK-SURFACE-RUST-ALIGNMENT` defines the current cross-variant cursor-control
   surface. Perl, Rust, and Dart expose `save_cursor()` / `restore_cursor()` for explicit cursor-stack semantics,
   `rewind_match_start()` / `rewind_entry_start()` for direct local-match or entry/initial-match anchor rewinds, and
@@ -51,7 +58,7 @@ This document is the current high-level technical reading of the project shape. 
   helper/value no-drift closeout, which has since landed.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.7.3` recorded the director directive that each LinkedSpec backend
   variant should have a distinct CLI. This is a planning/documentation slice only: Dart-specific CLI
-  productization is now closed by `DART-BACKEND-PARITY.7.4`, final Dart no-drift closeout shifts to `.7.5`, and Julia/Lua
+  productization is now closed by `DART-BACKEND-PARITY.7.4`, the scoped Dart milestone is closed by `.7.5`, and Julia/Lua
   planning under `FUTURE-PARITY-BACKLOG` must include equivalent variant-specific CLI ownership. The runtime
   implementation frontier later advanced through `.4.3.5`.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.4` extended Dart runtime hash helper execution in

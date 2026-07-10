@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-09` (`.9.0` captured the director's corrected AND/OR edge-default model as parked
-  future design work; no parser/runtime behavior changed).
+- Last updated: `2026-07-09` (`DART-BACKEND-PARITY.7.5` closed the scoped Dart interpreter-first milestone;
+  Julia planning is now the next eligible backend rollout leaf).
 - Owner: repo-local workflow
 
 ## Goal
@@ -80,7 +80,7 @@ before implementation.
 
 - ID: `FUTURE-PARITY-BACKLOG.1.2`
   Status: `pending`
-  Goal: Julia backend parity track - split/scaffold after Dart reaches its scoped parity milestone.
+  Goal: Julia backend parity track - split/scaffold now that Dart has reached its scoped parity milestone.
   Acceptance: Create or expand a dedicated Julia backend implementation plan with the same full-parity
     obligations as Dart, reusing lessons from Dart without changing `.spec` semantics.
   Verification: `pending`
@@ -209,7 +209,7 @@ before implementation.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `FUTURE-PARITY-BACKLOG.1.2` | `pending` | Julia follows Dart after `DART-BACKEND-PARITY` reaches its scoped milestone; PNT should select the active Dart tree first. |
+| 1 | `FUTURE-PARITY-BACKLOG.1.2` | `pending` | Dart reached its scoped milestone in `DART-BACKEND-PARITY.7.5`; Julia planning is now the next eligible backend rollout leaf. |
 | 2 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua is now adopted as a future backend by ADR `0021`, scheduled after Julia. |
 | 3 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
 | 4 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Rust generated-source breadth is independent follow-up after backend scheduling. |
@@ -233,6 +233,9 @@ before implementation.
 - `2026-07-09`: Director directive: each LinkedSpec backend variant should have a distinct CLI. Dart records
   this as `DART-BACKEND-PARITY.7.3` / `.7.4`; Julia and Lua planning leaves must include equivalent
   variant-specific CLI ownership when activated.
+- `2026-07-09`: `DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first Dart milestone. Future backend
+  rollout returns to this backlog tree; `FUTURE-PARITY-BACKLOG.1.2` is now eligible to split/scaffold Julia
+  planning. No Julia or Lua code changes were made in the Dart closeout.
 - `2026-07-09`: Director brainstorm captured: a future closed-loop validation arc should explore deriving both
   a parser for `foo` and a stimuli generator for that parser solely from `foo.spec`, making `.spec` the sole source
   of truth. This is parked under `.8.1` and is not a current pivot from Dart.
@@ -243,8 +246,8 @@ before implementation.
 
 ## Open Questions
 
-- None blocking the active Dart tree. Julia `.1.2` is intentionally gated until
-  `DART-BACKEND-PARITY` reaches its scoped milestone.
+- None blocking the next backend planning leaf. Dart's scoped milestone is closed; Julia `.1.2` is eligible for
+  the next PNT slice, while Lua remains scheduled after Julia.
 
 ## Blockers
 
@@ -279,3 +282,5 @@ before implementation.
 - `2026-07-09`: Captured the director's corrected AND/OR edge-default model as a future design lane: AND defaults
   to blind-call sequence entries, OR/default rules default to action-edge regex-dispatch entries, and top-rule
   marker reduction plus OR pipe sugar are parked as related design questions.
+- `2026-07-09`: Dart's scoped interpreter-first milestone closed in `DART-BACKEND-PARITY.7.5`; Julia planning
+  leaf `.1.2` is now eligible, with Lua still scheduled after Julia.

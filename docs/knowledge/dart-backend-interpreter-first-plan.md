@@ -11,7 +11,7 @@ date: 2026-07-09
 status: current
 tags: [dart, backends, parity, interpreter, generated-source]
 evidence: "docs/tasks/DART-BACKEND-PARITY.md decisions select the interpreter-first path; ADR 0011 requires typed helper/action AST for new backends; the mdBook backend handoff states Rust interpreter parity is the full 99-fixture gate while generated source is a curated-subset proof. DART-BACKEND-PARITY.7.2 explicitly defers generated Dart source to a future split source-emitter lane."
-reverify: "rg -n 'interpreter-first|Generated Dart|DART-BACKEND-PARITY|typed AST|99-fixture' docs/tasks/DART-BACKEND-PARITY.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/decisions/0011-text-to-ast-backend-doctrine.md"
+reverify: "rg -n 'interpreter-first|Generated Dart|DART-BACKEND-PARITY|typed AST|99-fixture|No active Dart frontier|FUTURE-PARITY-BACKLOG\\.1\\.2' docs/tasks/DART-BACKEND-PARITY.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/decisions/0011-text-to-ast-backend-doctrine.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 Dart backend parity starts with an interpreter over typed `.spec` and helper/action AST/IR,
@@ -21,7 +21,9 @@ compiled-spec state -> Dart runtime interpreter -> manifest-backed corpus runner
 Generated Dart source is deferred to a future split source-emitter lane after
 interpreter parity. This matches the current Rust status: the Rust interpreter is
 the full-corpus parity gate, while generated source is a structural and
-curated-subset proof. The task owner is `docs/tasks/DART-BACKEND-PARITY.md`.
+curated-subset proof. `DART-BACKEND-PARITY.7.5` closes the scoped
+interpreter-first milestone, so no active Dart frontier remains in that task
+tree.
 
 Related facts: [[language-agnostic-backend-vision]], [[text-to-ast-backend-doctrine]],
-[[rust-perl-output-oracle]], [[dart-generated-source-deferred]].
+[[rust-perl-output-oracle]], [[dart-generated-source-deferred]], [[dart-scoped-parity-milestone-complete]].

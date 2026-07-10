@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-BACKEND-PARITY`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Overall roadmap - future backend parity (Dart first)`
 - Created: `2026-07-09`
 - Last updated: `2026-07-09`
@@ -49,7 +49,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 ## Task Tree
 
 - ID: `DART-BACKEND-PARITY`
-  Status: `active`
+  Status: `done`
   Goal: Implement Dart as the first future full-parity LinkedSpec backend.
   Children: `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
 
@@ -258,7 +258,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.3.4 - add Dart compiled spec state`
 
 - ID: `DART-BACKEND-PARITY.4`
-  Status: `active`
+  Status: `done`
   Goal: Implement the Dart runtime interpreter.
   Children: `.4.1`, `.4.2`, `.4.3`, `.4.4`, `.4.5`
 
@@ -762,7 +762,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.5.3 - preserve Dart staged descriptor shapes`
 
 - ID: `DART-BACKEND-PARITY.6`
-  Status: `pending`
+  Status: `done`
   Goal: Prove Dart parity against the corpus and cross-backend gates.
   Children: `.6.1`, `.6.2`, `.6.3`, `.6.4`
 
@@ -782,7 +782,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.1 - add Dart controlled corpus execution`
 
 - ID: `DART-BACKEND-PARITY.6.2`
-  Status: `pending`
+  Status: `done`
   Goal: Expand to the current 99-fixture manifest in safe batches.
   Children: `.6.2.0`, `.6.2.1`, `.6.2.2`, `.6.2.3`, `.6.2.4`, `.6.2.5`
   Acceptance: Each batch either passes on Dart or records a narrowly owned root-cause leaf with Perl/Rust
@@ -967,7 +967,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     `ds_vhistory_version_entry` passes and the diagnostic window is 24/31 green. The only remaining shipped-smoke
     failures are the seven PCRE structural regex blockers owned by `.6.2.4.6`; `.6.2.4.5` owns final no-drift
     closeout for the completed non-PCRE residual group.
-  Commit: `pending`
+  Commit: `DART-BACKEND-PARITY.6.2.4.4.6 - mirror public parser leading trivia`
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.0`
   Status: `done`
@@ -1318,7 +1318,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.6.4 - wire Dart local verification`
 
 - ID: `DART-BACKEND-PARITY.7`
-  Status: `active`
+  Status: `done`
   Goal: Close documentation, generated-source follow-up, and handoff alignment.
   Children: `.7.1`, `.7.2`, `.7.3`, `.7.4`, `.7.5`
 
@@ -1374,12 +1374,16 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Commit: `DART-BACKEND-PARITY.7.4 - productize Dart-specific CLI`
 
 - ID: `DART-BACKEND-PARITY.7.5`
-  Status: `active`
+  Status: `done`
   Goal: Final no-drift closeout for Dart parity.
   Acceptance: Roadmaps, task-tree index, live docs, mdBook, Knowledge Map, architecture snapshot, and
     verification commands agree that Dart reaches the accepted scoped milestone.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Dart's scoped interpreter-first milestone is closed: the Dart package has a
+    variant-specific CLI, the focused Dart gate executes the 99-fixture corpus, generated Dart source is deferred
+    to a future split proof lane, and current-facing roadmap/book/live-doc/task-tree/Knowledge Map surfaces agree
+    that no active Dart frontier remains in this tree. Future backend rollout returns to
+    `FUTURE-PARITY-BACKLOG.1.2` for Julia planning; no Julia or Lua implementation begins in this closeout slice.
+  Commit: `DART-BACKEND-PARITY.7.5 - close Dart parity milestone`
 
 ## Current Frontier
 
@@ -1405,7 +1409,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
 | 18 | `DART-BACKEND-PARITY.7.1` | `done` | mdBook usage/status/handoff documentation now matches the green `.6` corpus and verification boundary. |
 | 19 | `DART-BACKEND-PARITY.7.2` | `done` | Generated Dart source is deferred to a future split source-emitter lane; the interpreter-first 99/99 corpus run remains the conformance gate. |
 | 20 | `DART-BACKEND-PARITY.7.4` | `done` | Dart-specific CLI productization is complete; the command routes corpus validation/execution through the existing Dart runtime harness. |
-| 21 | `DART-BACKEND-PARITY.7.5` | `active` | Current frontier: final Dart no-drift closeout. |
+| 21 | `DART-BACKEND-PARITY.7.5` | `done` | Final no-drift closeout confirms the Dart scoped interpreter-first milestone is complete; future generated-source proof and Julia/Lua rollout are separate backlog lanes. |
 
 ## Dart Toolchain And Package Layout
 
@@ -1667,12 +1671,12 @@ The `.4.1` runtime matching layer adds:
 
 ## Open Questions
 
-- None blocking `.7.5`. Dart interpreter corpus parity, mdBook usage/status documentation, generated-source
-  deferral decision, and Dart-specific CLI productization are closed; final no-drift closeout is next.
+- None. Dart interpreter corpus parity, mdBook usage/status documentation, generated-source deferral, and
+  Dart-specific CLI productization are closed; this tree has no remaining active frontier.
 
 ## Blockers
 
-- None known before `.7.5`.
+- None.
 
 ## Verification Log
 
@@ -1716,6 +1720,7 @@ The `.4.1` runtime matching layer adds:
 | `2026-07-09` | `DART-BACKEND-PARITY.7.1` | mdBook build; `bash tools/run_dart_local.sh`; default `bash tools/run_ci_local.sh`; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Dart usage/status/handoff docs now describe the focused gate, optional local-CI inclusion, direct Dart commands, the interpreter-first 99/99 corpus boundary, and generated-source / Dart-specific CLI follow-ups. |
 | `2026-07-09` | `DART-BACKEND-PARITY.7.2` | mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Generated Dart source is deferred to a future split source-emitter lane; the interpreter-first 99/99 corpus run remains the Dart conformance gate. |
 | `2026-07-09` | `DART-BACKEND-PARITY.7.4` | `bash tools/run_dart_local.sh`; `dart run bin/linkedspec_dart.dart --help`; `dart run bin/linkedspec_dart.dart corpus --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1`; mdBook build; memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Dart-specific CLI productization is complete: `bin/linkedspec_dart.dart` owns help text plus the corpus command, `bin/corpus_runner.dart` remains a compatibility wrapper, and the full focused Dart gate is green over 140 tests, bounded Dart-specific CLI corpus smoke, and the 99-fixture corpus. |
+| `2026-07-09` | `DART-BACKEND-PARITY.7.5` | `bash tools/run_dart_local.sh`; `mdbook build docs/linkedspec-book`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_task_tree_metadata.sh`; `bash scripts/check_doctrines.sh`; default `bash tools/run_ci_local.sh`; stale-status scans; `git diff --check`. | PASS. Final no-drift closeout marks the Dart scoped interpreter-first milestone complete, keeps generated Dart source deferred to a future proof lane, and returns future backend rollout to `FUTURE-PARITY-BACKLOG.1.2` for Julia planning. Focused Dart gate passes 140 Dart tests and 99/99 corpus execution; default local CI passes phase0 `1..1028`. |
 
 ## Commit Log
 
@@ -1764,11 +1769,15 @@ The `.4.1` runtime matching layer adds:
 | `DART-BACKEND-PARITY.7.1` | `DART-BACKEND-PARITY.7.1 - close Dart mdBook usage status` | mdBook command/status/handoff docs now match the 99/99 interpreter-first Dart parity boundary and follow-up lanes. |
 | `DART-BACKEND-PARITY.7.2` | `DART-BACKEND-PARITY.7.2 - defer Dart generated source proof` | Generated Dart source is deferred to a future split source-emitter lane with explicit proof prerequisites. |
 | `DART-BACKEND-PARITY.7.4` | `DART-BACKEND-PARITY.7.4 - productize Dart-specific CLI` | Dart-specific CLI help and corpus command route through the shared manifest-backed runtime command implementation; corpus runner remains a compatibility wrapper. |
+| `DART-BACKEND-PARITY.7.5` | `DART-BACKEND-PARITY.7.5 - close Dart parity milestone` | Final no-drift closeout marks the scoped interpreter-first Dart milestone complete and returns future backend rollout to the backlog tree. |
 
 ## Changelog
 
 - `2026-07-09`: Created the Dart backend parity task tree and selected an interpreter-first parity path.
-- `2026-07-09`: Productized the Dart-specific CLI under `.7.4`; frontier advances to `.7.5` final no-drift closeout.
+- `2026-07-09`: Closed the Dart scoped interpreter-first milestone under `.7.5`; no active Dart frontier remains,
+  generated Dart source stays deferred to a future split proof lane, and future backend rollout returns to
+  `FUTURE-PARITY-BACKLOG.1.2` for Julia planning.
+- `2026-07-09`: Productized the Dart-specific CLI under `.7.4`; frontier advanced to `.7.5` final no-drift closeout.
 - `2026-07-09`: Recorded Dart SDK `3.9.2`, CLI/library package layout, and planned commands; frontier advances
   to `.1.2` for scaffold creation.
 - `2026-07-09`: Created the `dart/` scaffold package and smoke test; frontier advances to `.1.3` for

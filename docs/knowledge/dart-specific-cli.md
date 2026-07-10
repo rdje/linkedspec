@@ -31,4 +31,5 @@ full manifest in order.
 compatibility wrapper, but it delegates to the same shared CLI implementation as
 `linkedspec_dart.dart`. Do not treat it as a separate contract owner.
 
-Related facts: [[variant-specific-cli-requirement]], [[dart-controlled-corpus-execution]].
+Related facts: [[variant-specific-cli-requirement]], [[dart-controlled-corpus-execution]],
+[[dart-scoped-parity-milestone-complete]].

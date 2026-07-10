@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — DART-BACKEND-PARITY.7.5 — close Dart parity milestone
+
+**Scope:** Dart task-tree closeout, future-backlog frontier unblocking, roadmaps, mdBook status/handoff text,
+architecture snapshot, live docs, resume pointer, and Knowledge Map.
+
+**Change:** Closed the Dart scoped interpreter-first milestone. The Dart tree now records no active frontier:
+parser/frontend, typed ActionIR, compiled state, runtime interpretation, staged user-function execution,
+diagnostics/trace, focused local verification, Dart-specific CLI productization, and 99/99 corpus execution are
+all complete for the accepted milestone. Generated Dart source remains deliberately deferred to a future split
+proof lane. Future backend rollout returns to `FUTURE-PARITY-BACKLOG.1.2` for Julia planning.
+
+**Validation:** Focused Dart gate, mdBook build, memory architecture, Knowledge Map generation/check,
+task-tree metadata, doctrine, default local CI, stale-status scans, and `git diff --check` pass. The focused Dart
+gate includes 140 Dart tests and 99/99 corpus execution; default local CI includes phase0 `1..1028`. No Dart
+runtime behavior changed.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.7.4 — productize Dart-specific CLI
 
 **Scope:** Dart-specific CLI entrypoint, shared corpus command runner, compatibility corpus-runner wrapper, CLI

@@ -237,8 +237,8 @@ boundary: interpreter parity is the 99-fixture corpus contract, while generated
 source currently proves direct structural-family execution plus the curated
 manifest subset.
 
-The active Dart plan follows the same parity ordering. `DART-BACKEND-PARITY`
-starts interpreter-first: `.spec` parser, typed helper/action AST, compiled-spec
+The completed scoped Dart milestone follows the same parity ordering. `DART-BACKEND-PARITY`
+landed interpreter-first: `.spec` parser, typed helper/action AST, compiled-spec
 state, Dart runtime interpreter, then the manifest-backed corpus runner.
 Generated Dart source is explicitly deferred to a future split source-emitter
 lane after interpreter/corpus parity, not the primary conformance gate. The repo now has a Dart backend package under
@@ -287,9 +287,11 @@ the current rule invocation. The structural regex leaf is now closed too:
 bounded Dart matchers handle the exact shipped Lispish `(?R)`, EBNF `\K` /
 `(?&name)` / `(?(DEFINE)...)`, and spec.spec recursive block forms, while
 action-edge `push(child, index)` preserves indexed child payloads. The
-Dart-specific LinkedSpec CLI productization is now done. Future Julia and Lua
-backend plans must own their own variant-specific CLIs rather than relying on
-one ambiguous shared command.
+Dart-specific LinkedSpec CLI productization is now done, and
+`DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first milestone. Future
+backend rollout returns to `FUTURE-PARITY-BACKLOG.1.2` for Julia planning.
+Future Julia and Lua backend plans must own their own variant-specific CLIs
+rather than relying on one ambiguous shared command.
 
 ### Dart Backend Commands
 
@@ -320,8 +322,9 @@ Current Dart parity is interpreter-first and corpus-green. `DART-BACKEND-PARITY.
 deliberately defers generated Dart source to a future source-emitter lane with its
 own scaffold, generated family plan, direct structural-family execution proof, and
 curated corpus subset. Dart-specific CLI productization is complete in
-`DART-BACKEND-PARITY.7.4`; generated source remains outside the current
-backend-neutral corpus conformance claim.
+`DART-BACKEND-PARITY.7.4`, and `DART-BACKEND-PARITY.7.5` closes the scoped
+Dart milestone; generated source remains outside the current backend-neutral
+corpus conformance claim.
 
 Dart
 also has source-level AST/data types and staged parse-job sidecars that round-trip
