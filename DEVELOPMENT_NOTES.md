@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.3.3 — Julia user-function registry):
+  Julia now has the data-layer user-function registry seam before compiled-state/runtime work.
+  `julia/src/action/FunctionRegistry.jl` builds ordered `UserFunctionRegistry` entries from `SpecFile.functions`
+  or direct `FunctionDefinition` records, exposes staged `body_parse_job` values, preserves `body_payload` and
+  optional `body_ast`, rejects duplicate names, and provides `stitch_function_body_ast(...)` for immutable staged
+  body-AST replacement. `resolve_action_*_contracts(...; function_registry=registry)` now classifies exact-arity
+  registered calls as `user_function` before helper fallback, while wrong-arity registered calls report
+  `user_function_arity_mismatch`. Function bodies are still not executed; `.3.4` owns compiled-state construction.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.3.2 — Julia ActionIR contract resolver):
   Julia now resolves typed ActionIR nodes against the current canonical helper/control contract table before
   compiled-state or runtime work. `julia/src/action/ActionContracts.jl` exposes

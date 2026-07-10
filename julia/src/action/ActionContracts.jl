@@ -104,20 +104,20 @@ function to_json(diagnostic::ActionContractDiagnostic)
     return result
 end
 
-function resolve_action_block_contracts(block::ActionBlock)
-    resolver = _ActionContractResolver()
+function resolve_action_block_contracts(block::ActionBlock; function_registry = nothing)
+    resolver = _ActionContractResolver(function_registry)
     _visit_block!(resolver, block)
     return _finish(resolver)
 end
 
-function resolve_action_statement_contracts(statement::ActionStatement)
-    resolver = _ActionContractResolver()
+function resolve_action_statement_contracts(statement::ActionStatement; function_registry = nothing)
+    resolver = _ActionContractResolver(function_registry)
     _visit_statement!(resolver, statement)
     return _finish(resolver)
 end
 
-function resolve_action_expression_contracts(expr::ActionExpr)
-    resolver = _ActionContractResolver()
+function resolve_action_expression_contracts(expr::ActionExpr; function_registry = nothing)
+    resolver = _ActionContractResolver(function_registry)
     _visit_expr!(resolver, expr)
     return _finish(resolver)
 end
@@ -624,9 +624,14 @@ const _OUTPUT_HELPERS = Set{String}(["print", "print_each", "say"])
 mutable struct _ActionContractResolver
     contracts::Vector{ActionResolvedContract}
     diagnostics::Vector{ActionContractDiagnostic}
+    function_registry::Union{Nothing,UserFunctionRegistry}
 end
 
-_ActionContractResolver() = _ActionContractResolver(ActionResolvedContract[], ActionContractDiagnostic[])
+_ActionContractResolver(function_registry = nothing) = _ActionContractResolver(
+    ActionResolvedContract[],
+    ActionContractDiagnostic[],
+    function_registry,
+)
 
 function _finish(resolver::_ActionContractResolver)
     return ActionContractResolution(contracts = resolver.contracts, diagnostics = resolver.diagnostics)
@@ -803,6 +808,39 @@ function _resolve_helper_call!(
 )
     positional_arg_count = _positional_arg_count(args)
     keyword_arg_count = _keyword_arg_count(args)
+    arg_count = positional_arg_count + keyword_arg_count
+    if surface == "function" && resolver.function_registry !== nothing
+        user_resolution = resolve_user_function_call(resolver.function_registry, name, arg_count)
+        if user_resolution.matched
+            push!(
+                resolver.contracts,
+                ActionResolvedContract(
+                    source_name = name,
+                    canonical_name = name,
+                    family = "user_function",
+                    surface = surface,
+                    source = source,
+                    source_span = source_span,
+                    positional_arg_count = positional_arg_count,
+                    keyword_arg_count = keyword_arg_count,
+                ),
+            )
+            return nothing
+        elseif user_resolution.arity_mismatch
+            expected = join(string.(user_resolution.expected_arities), " or ")
+            push!(
+                resolver.diagnostics,
+                ActionContractDiagnostic(
+                    code = "user_function_arity_mismatch",
+                    message = "user function '$name' expects arity $expected, got $arg_count",
+                    helper_name = name,
+                    source = source,
+                    source_span = source_span,
+                ),
+            )
+            return nothing
+        end
+    end
     if !is_known_action_ir_call_name(name)
         push!(
             resolver.diagnostics,

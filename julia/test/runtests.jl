@@ -107,6 +107,59 @@ function _function_definition(name, params; arity = length(params))
     )
 end
 
+function _function_with_body_sidecar(
+    name,
+    params;
+    body_source = "return(value)",
+    body_ast = nothing,
+    index = 0,
+)
+    path = ["functions", string(index), "body_source"]
+    span = StagedSourceSpan(0, 1, 1, 1)
+    span_json = to_json(span)
+    payload = Dict{String,Any}(
+        "kind" => "staged_payload",
+        "node_kind" => "function_definition",
+        "payload_kind" => "function_body",
+        "parent_ast_path" => path,
+        "function_name" => name,
+        "params" => params,
+        "arity" => length(params),
+        "text" => body_source,
+        "source_span" => span_json,
+    )
+    job = StagedParseJob(
+        version = 1,
+        job_id = "parse_job:function_body:functions.$index.body_source",
+        parent_ast_path = path,
+        node_kind = "function_definition",
+        payload_kind = "function_body",
+        function_name = name,
+        params = params,
+        arity = length(params),
+        text = body_source,
+        source_span = span,
+        parser_spec_id = "actionir-body.spec",
+        top_rule = "action_block",
+        result_policy = "replace_field",
+        result_field = "body_ast",
+        failure_policy = "fail",
+        diagnostic_owner = "function_body",
+    )
+    return FunctionDefinition(
+        name = name,
+        params = params,
+        arity = length(params),
+        body_source = body_source,
+        body_payload = payload,
+        body_parse_job = job,
+        body_ast = body_ast,
+        source = "fn $name($(join(params, ", "))) { $body_source }",
+        source_span = SourceSpan(1, 1),
+        body_span = SourceSpan(1, 1),
+    )
+end
+
 function _canonical_names(resolution::ActionContractResolution)
     return [contract.canonical_name for contract in resolution.contracts]
 end
@@ -230,7 +283,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "action-contracts"
+    @test status.parity == "function-registry"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -240,7 +293,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: action-contracts", String(take!(status_output)))
+    @test occursin("parity: function-registry", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -441,6 +494,85 @@ end
 
     collision = _spec_with_functions([_function_definition("cat", ["value"])])
     @test _throws_validation_message(() -> validate_spec(collision), "built-in helper/control name")
+end
+
+@testset "User function registry" begin
+    zero_ast = Dict{String,Any}("kind" => "action_block", "statements" => Any[])
+    zero = _function_with_body_sidecar(
+        "zero",
+        String[];
+        body_source = "return(\"zero\")",
+        body_ast = zero_ast,
+        index = 0,
+    )
+    normalize = _function_with_body_sidecar(
+        "normalize",
+        ["value"];
+        body_source = "return(value.trim())",
+        index = 1,
+    )
+    registry = user_function_registry_from_functions([zero, normalize])
+
+    @test user_function_names(registry) == ["zero", "normalize"]
+    @test [job.job_id for job in body_parse_jobs(registry)] == [
+        "parse_job:function_body:functions.0.body_source",
+        "parse_job:function_body:functions.1.body_source",
+    ]
+
+    zero_resolution = resolve_user_function_call(registry, "zero", 0)
+    @test zero_resolution.matched
+    @test zero_resolution.entry.index == 0
+    @test zero_resolution.entry.definition.params == String[]
+    @test zero_resolution.entry.definition.body_ast == zero_ast
+    @test zero_resolution.entry.definition.body_parse_job.parent_ast_path == [
+        "functions",
+        "0",
+        "body_source",
+    ]
+
+    mismatch = resolve_user_function_call(registry, "normalize", 2)
+    @test mismatch.name_known
+    @test mismatch.arity_mismatch
+    @test mismatch.expected_arities == [1]
+
+    missing = resolve_user_function_call(registry, "missing", 0)
+    @test !missing.name_known
+
+    encoded = to_json(registry)
+    @test encoded["functions"] isa Vector
+    @test encoded["body_parse_jobs"] isa Vector
+
+    spec = SpecFile(functions = [zero, normalize], rules = [
+        Rule(
+            header = RuleHeader("Top", true, default_rule_mode(), "", 1),
+            body = [BodyElement(RegexBodyElementKind("x"), "/x/", 2)],
+        ),
+    ])
+    stitched_ast = Dict{String,Any}("kind" => "action_block", "statements" => [Dict("kind" => "action_stmt")])
+    stitched = stitch_function_body_ast(
+        spec,
+        "parse_job:function_body:functions.1.body_source",
+        stitched_ast,
+    )
+    @test stitched.functions[1].body_ast == zero_ast
+    @test stitched.functions[2].body_ast == stitched_ast
+    @test spec.functions[2].body_ast === nothing
+
+    @test_throws UserFunctionRegistryException user_function_registry_from_functions([
+        _function_with_body_sidecar("dup", ["value"], index = 0),
+        _function_with_body_sidecar("dup", ["other"], index = 1),
+    ])
+
+    block = parse_action_block(
+        "return(normalize(\" x \")); normalize(\"x\", \"y\"); mystery(\"z\")",
+    )
+    resolution = resolve_action_block_contracts(block; function_registry = registry)
+    user_contract = _action_contract(resolution, "normalize")
+    @test user_contract.family == "user_function"
+    @test user_contract.canonical_name == "normalize"
+    @test user_contract.positional_arg_count == 1
+    @test _diagnostic_codes(resolution) == ["user_function_arity_mismatch", "unknown_helper"]
+    @test occursin("expects arity 1, got 2", resolution.diagnostics[1].message)
 end
 
 @testset "Spec parser" begin

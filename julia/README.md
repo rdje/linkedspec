@@ -2,17 +2,17 @@
 
 This directory is the repository-owned Julia backend scaffold. The current status is package and command
 surface, manifest-backed corpus validation, source AST/data types, core `.spec` source parsing, frontend source
-validation, spec-shaped user-function shell projection, typed helper/action AST parsing, and canonical ActionIR
-contract resolution: no user-function registry, runtime interpreter, or corpus execution semantics are implemented
-yet.
+validation, spec-shaped user-function shell projection, typed helper/action AST parsing, canonical ActionIR contract
+resolution, and a user-function registry seam: no compiled-spec state, runtime interpreter, or corpus execution
+semantics are implemented yet.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
 was added by `JULIA-BACKEND-PARITY.2.2`. Frontend validation and strict syntax behavior were added by
 `JULIA-BACKEND-PARITY.2.3`. Function-definition shell projection was added by `JULIA-BACKEND-PARITY.2.4`.
-Typed helper/action AST parsing was added by `JULIA-BACKEND-PARITY.3.1`, and ActionIR contract resolution was
-added by `JULIA-BACKEND-PARITY.3.2`. The active next boundary is `JULIA-BACKEND-PARITY.3.3` for the
-user-function registry and staged function-body parse-job records.
+Typed helper/action AST parsing was added by `JULIA-BACKEND-PARITY.3.1`, ActionIR contract resolution was added by
+`JULIA-BACKEND-PARITY.3.2`, and the user-function registry seam was added by `JULIA-BACKEND-PARITY.3.3`. The
+active next boundary is `JULIA-BACKEND-PARITY.3.4` for compiled-spec and interpreter-state construction.
 
 ## Commands
 
@@ -65,5 +65,9 @@ block values, structured controls, and raw fallback nodes with JSON projection. 
 exposes `resolve_action_block_contracts(...)`, `resolve_action_statement_contracts(...)`,
 `resolve_action_expression_contracts(...)`, `canonical_action_helper_name(...)`, and
 `is_known_action_ir_call_name(...)` for canonical helper/control contract records and generic
-unknown-helper/raw diagnostics over typed ActionIR nodes. Later leaves own the user-function registry, compiled
-state, runtime interpretation, staged functions, diagnostics, tracing, and corpus execution.
+unknown-helper/raw diagnostics over typed ActionIR nodes; optional `function_registry` input classifies exact-arity
+registered user calls before helper fallback and reports wrong-arity registered calls. `src/action/FunctionRegistry.jl`
+exposes `UserFunctionRegistry`, `user_function_registry_from_spec(...)`, `body_parse_jobs(...)`,
+`resolve_user_function_call(...)`, and `stitch_function_body_ast(...)` for ordered user-function records, staged body
+parse-job queues, exact-arity lookup, JSON projection, and immutable `body_ast` stitching. Later leaves own compiled
+state, runtime interpretation, staged parser execution, diagnostics, tracing, and corpus execution.

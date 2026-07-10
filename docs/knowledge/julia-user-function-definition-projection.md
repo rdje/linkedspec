@@ -32,5 +32,5 @@ Direct `parse_spec(...)` remains rule-only. Executing `specs/user_function_defin
 owned by later runtime/staged-registry work; `.2.4` only consumes the spec-returned AST shape.
 
 Related facts: [[spec-defined-user-function-definition-parser]], [[julia-core-spec-parser]],
-[[julia-frontend-ast-json-contract]], [[julia-frontend-validation]], [[dart-core-spec-parser]],
-[[rust-user-function-registry-parity]], [[text-to-ast-backend-doctrine]].
+[[julia-frontend-ast-json-contract]], [[julia-frontend-validation]], [[julia-user-function-registry]],
+[[dart-core-spec-parser]], [[rust-user-function-registry-parity]], [[text-to-ast-backend-doctrine]].

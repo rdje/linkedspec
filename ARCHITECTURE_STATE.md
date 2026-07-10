@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.3.3` adds the Julia user-function registry seam.
+  `julia/src/action/FunctionRegistry.jl` defines `UserFunctionRegistry`, `UserFunctionEntry`, and
+  `UserFunctionCallResolution`, builds ordered entries from `SpecFile.functions`, exposes staged
+  `body_parse_job` records, preserves `body_payload` and optional `body_ast`, rejects duplicate names, and provides
+  `stitch_function_body_ast(...)` for immutable staged body-AST replacement. `julia/src/action/ActionContracts.jl`
+  now accepts `function_registry=...` so exact-arity registered calls classify as `user_function` before helper
+  fallback, while wrong-arity registered calls diagnose as `user_function_arity_mismatch`. Function bodies are not
+  executed yet. The next frontier is `JULIA-BACKEND-PARITY.3.4` for compiled-spec/interpreter-state records.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.3.2` adds Julia ActionIR contract resolution.
   `julia/src/action/ActionContracts.jl` exposes `resolve_action_block_contracts(...)`,
   `resolve_action_statement_contracts(...)`, `resolve_action_expression_contracts(...)`,
@@ -14,7 +22,8 @@ This document is the current high-level technical reading of the project shape. 
   helper-looking calls diagnose generically as `unknown_helper`, and `raw_perl` fallback nodes remain explicit
   diagnostics. `julia/src/spec/Validator.jl` now shares the resolver's current helper/control name predicate for
   user-function collision checks. Function-registry-aware exact-arity user-call classification, compiled state,
-  and runtime execution remain later Julia leaves. The next frontier is `JULIA-BACKEND-PARITY.3.3`.
+  and runtime execution remain later Julia leaves. Function-registry-aware classification has since landed in
+  `JULIA-BACKEND-PARITY.3.3`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.3.1` adds Julia typed ActionIR parsing.
   `julia/src/action/ActionAst.jl` defines action blocks, value-drop statements, call/argument nodes, literals,
   variables, indexed/nested access, shape literals, assignments, receiver chains, trailing block payloads, block

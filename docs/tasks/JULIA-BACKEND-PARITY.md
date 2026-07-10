@@ -162,15 +162,18 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.3.2 - add Julia ActionIR contract resolver`
 
 - ID: `JULIA-BACKEND-PARITY.3.3`
-  Status: `active`
+  Status: `done`
   Goal: Build the function registry and staged function-body parse-job records.
   Acceptance: Function definitions preserve params, arity, source/body spans, `body_payload`, `body_parse_job`, and
     stitched `body_ast`, with exact-arity resolution before helper fallback.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `Pkg.test()` covers 23 user-function registry assertions over ordered entries, staged
+    body parse-job exposure, `body_payload` / `body_ast` preservation, immutable body-AST stitching, duplicate
+    rejection, exact match, wrong arity, missing names, and registry-aware ActionIR contract resolution; total Julia
+    tests pass with 415 assertions.
+  Commit: `JULIA-BACKEND-PARITY.3.3 - add Julia user-function registry`
 
 - ID: `JULIA-BACKEND-PARITY.3.4`
-  Status: `pending`
+  Status: `active`
   Goal: Compile parsed specs into a Julia compiled-spec/interpreter model.
   Acceptance: Compiled state has ordered rules, dependency-regex data, function registry, lifecycle/action AST
     payloads, mode metadata, and descriptor projection equivalent to the mdBook model.
@@ -323,7 +326,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.3.3` | `active` | Build the function registry and staged function-body parse-job records now that typed ActionIR nodes resolve to canonical helper/control contracts. |
+| 1 | `JULIA-BACKEND-PARITY.3.4` | `active` | Compile parsed specs into Julia compiled-state/interpreter records now that frontend, ActionIR contracts, and function registry seams are in place. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -356,6 +359,7 @@ julia/
   src/corpus/CorpusManifest.jl
   src/action/ActionAst.jl
   src/action/ActionParser.jl
+  src/action/FunctionRegistry.jl
   src/action/ActionContracts.jl
   bin/linkedspec_julia.jl
   bin/corpus_runner.jl
@@ -509,6 +513,46 @@ ActionIR contract resolver evidence recorded on 2026-07-10:
   classification, compiled state, runtime behavior, staged parser execution, diagnostics/trace, and corpus
   execution remain later leaves.
 
+## `JULIA-BACKEND-PARITY.3.3` User-Function Registry Result
+
+User-function registry evidence recorded on 2026-07-10:
+
+- `julia/src/action/FunctionRegistry.jl` adds `UserFunctionRegistry`, `UserFunctionEntry`,
+  `UserFunctionCallResolution`, and `UserFunctionRegistryException`.
+- `user_function_registry_from_spec(...)` and `user_function_registry_from_functions(...)` build ordered entries
+  from parsed `FunctionDefinition` records and reject duplicate user-function names before compiled-state work.
+- Registry entries preserve params, arity, source/body spans, `body_payload`, `body_parse_job`, and optional
+  `body_ast`; `body_parse_jobs(...)` exposes the stable staged function-body parse-job queue.
+- `stitch_function_body_ast(...)` returns an updated immutable `SpecFile` with a staged job result installed into
+  `body_ast` when the parse job's `replace_field` / `body_ast` policy matches.
+- `resolve_action_block_contracts(...)`, `resolve_action_statement_contracts(...)`, and
+  `resolve_action_expression_contracts(...)` now accept `function_registry=...`. Exact-arity registered user calls
+  classify as `family = user_function` before helper fallback; wrong-arity registered calls produce
+  `user_function_arity_mismatch`.
+- The package parity status is now `function-registry`. Compiled state, runtime behavior, staged parser execution,
+  diagnostics/trace, and corpus execution remain later leaves.
+
+## `JULIA-BACKEND-PARITY.3.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `JULIA-BACKEND-PARITY.3.3` acceptance required Julia function definitions to
+  preserve staged sidecars and optional stitched `body_ast`, and required exact-arity user-call resolution before
+  helper fallback; Dart parity target inspected in `dart/lib/src/action/function_registry.dart`,
+  `dart/test/function_registry_test.dart`, `dart/test/action_contracts_test.dart`, and
+  `docs/knowledge/dart-function-registry.md`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — After `.3.2`, Julia had typed ActionIR contract resolution but no ordered
+  `UserFunctionRegistry`, no registry-level body parse-job queue, no body-AST stitching helper, and no optional
+  registry input on `julia/src/action/ActionContracts.jl`.
+- [x] **FIX** — Added `julia/src/action/FunctionRegistry.jl`, exported registry APIs from
+  `julia/src/LinkedSpecJulia.jl`, advanced package status to `function-registry`, and threaded
+  `function_registry=...` through ActionIR contract resolution.
+- [x] **ADDRESSED (verified)** — `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia
+  --project=julia -e 'using Pkg; Pkg.test()'` passes with 23 user-function registry assertions.
+- [x] **NO REGRESSION** — The same `Pkg.test()` run passes the existing scaffold, Action AST parser, Action
+  contract resolver, source parser, validation, function-shell projection, corpus IO, and source AST JSON contract
+  tests for 415 total assertions.
+- [x] **LOCKSTEP** — README, task tree, live docs, roadmaps, mdBook handoff/status pages, Knowledge Map fact card,
+  architecture snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` updated for the `.3.3` boundary.
+
 ## `JULIA-BACKEND-PARITY.3.2` Acceptance Checklist
 
 - [x] **REPRODUCE / ISSUE** — `JULIA-BACKEND-PARITY.3.2` acceptance required Julia typed ActionIR nodes to map to
@@ -580,6 +624,9 @@ ActionIR contract resolver evidence recorded on 2026-07-10:
 - `2026-07-10`: `.3.2` follows the Dart ActionIR contract resolver boundary without importing Dart runtime
   behavior. Julia records current canonical helper/control contracts and generic diagnostics over typed ActionIR
   nodes, and function-registry-aware user-call classification remains deferred to `.3.3`.
+- `2026-07-10`: `.3.3` follows the Dart user-function registry boundary as a data/contract seam. Julia preserves
+  staged sidecars and optional stitched `body_ast`, and classifies exact-arity user calls before helper fallback;
+  execution of user-function bodies remains deferred to runtime leaves.
 
 ## Open Questions
 
@@ -590,8 +637,9 @@ ActionIR contract resolver evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.3.3`. Typed helper/action AST parsing and canonical helper/control contract resolution are in place;
-  the user-function registry and staged function-body parse-job records are the next owned boundary.
+- None for `.3.4`. Typed helper/action AST parsing, canonical helper/control contract resolution, and the
+  user-function registry seam are in place; compiled-spec/interpreter-state construction is the next owned
+  boundary.
 
 ## Verification Log
 
@@ -607,6 +655,7 @@ ActionIR contract resolver evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.2.4` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia function-shell projection tests cover spec-shaped nodes, staged sidecar validation, stripped source parsing, and output-shape normalization; total Julia tests pass. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.3.1` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia Action AST parser tests cover typed structural parsing for calls, literals, access, shapes, assignments, receiver chains, trailing blocks, block values, controls, value-drop statements, and raw fallback; total Julia tests pass with 353 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.3.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia Action contract resolver tests cover canonical helper/control contracts, aliases, structural assignment contracts, receiver methods, generic unknown-helper/raw diagnostics, and validation sharing of the current helper table; total Julia tests pass with 392 assertions. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.3.3` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia user-function registry tests cover ordered entries, staged body parse jobs, sidecar/body-AST preservation, immutable body-AST stitching, duplicate rejection, exact match, wrong arity, missing names, and registry-aware ActionIR contract resolution; total Julia tests pass with 415 assertions. |
 
 ## Commit Log
 
@@ -622,9 +671,14 @@ ActionIR contract resolver evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.2.4` | `JULIA-BACKEND-PARITY.2.4 - project Julia function-definition shells` | Spec-defined function-shell AST projection; frontend container closes and ActionIR parsing advances to `.3.1`. |
 | `JULIA-BACKEND-PARITY.3.1` | `JULIA-BACKEND-PARITY.3.1 - add Julia ActionIR AST parser` | Typed helper/action AST parser; contract resolution advances to `.3.2`. |
 | `JULIA-BACKEND-PARITY.3.2` | `JULIA-BACKEND-PARITY.3.2 - add Julia ActionIR contract resolver` | Current helper/control contract resolution; user-function registry advances to `.3.3`. |
+| `JULIA-BACKEND-PARITY.3.3` | `JULIA-BACKEND-PARITY.3.3 - add Julia user-function registry` | Ordered user-function registry, staged body parse-job queue, body-AST stitching helper, and registry-aware ActionIR contracts; compiled state advances to `.3.4`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.3.3` user-function registry. `julia/src/action/FunctionRegistry.jl` now builds
+  ordered user-function entries, exposes body parse jobs, preserves staged sidecars and optional `body_ast`, stitches
+  body ASTs immutably, rejects duplicates, and lets ActionIR contract resolution classify exact-arity user calls
+  before helper fallback. `Pkg.test()` passes with 415 total assertions; `.3.4` owns compiled-state construction.
 - `2026-07-10`: Completed `.3.2` ActionIR contract resolver. `julia/src/action/ActionContracts.jl` now resolves
   typed ActionIR calls, receiver methods, structural assignments, controls, nested arguments, block values, shapes,
   access expressions, and raw fallback nodes into canonical contract/diagnostic records. Validation shares the

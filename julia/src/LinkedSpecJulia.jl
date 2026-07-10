@@ -80,28 +80,44 @@ export backend_name,
     SplitMarkerBodyElementKind,
     StagedParseJob,
     StagedSourceSpan,
+    UserFunctionCallResolution,
     UserFunctionDefinitionException,
     UserFunctionDefinitionProjection,
+    UserFunctionEntry,
+    UserFunctionRegistry,
+    UserFunctionRegistryException,
     and_bounded_rule_mode,
+    body_parse_jobs,
     canonical_action_helper_name,
     canonicalized,
     default_rule_mode,
     definition_nodes_from_user_function_definition_output,
+    empty_user_function_registry,
+    expected_arities_for,
     find_rule,
+    function_definition_with_body_ast,
     from_json,
+    has_user_function_name,
     is_and,
     is_known_action_ir_call_name,
     is_repetition,
+    lookup_user_function,
     or_bounded_rule_mode,
     rep_max,
     rep_min,
+    resolve_exact_user_function,
     resolve_action_block_contracts,
     resolve_action_expression_contracts,
     resolve_action_statement_contracts,
+    resolve_user_function_call,
     run_cli,
     run_corpus_runner,
+    stitch_function_body_ast,
     top_rule,
     to_json,
+    user_function_names,
+    user_function_registry_from_functions,
+    user_function_registry_from_spec,
     validate_spec
 
 const BACKEND_NAME = "julia"
@@ -109,12 +125,13 @@ const PACKAGE_NAME = "LinkedSpecJulia"
 const PACKAGE_VERSION = v"0.1.0"
 const CLI_ENTRYPOINT = "julia/bin/linkedspec_julia.jl"
 const CORPUS_RUNNER_ENTRYPOINT = "julia/bin/corpus_runner.jl"
-const PARITY_STATUS = "action-contracts"
+const PARITY_STATUS = "function-registry"
 
 include("corpus/CorpusManifest.jl")
 include("spec/Ast.jl")
 include("action/ActionAst.jl")
 include("action/ActionParser.jl")
+include("action/FunctionRegistry.jl")
 include("action/ActionContracts.jl")
 include("spec/Parser.jl")
 include("spec/UserFunctionDefinitionShell.jl")

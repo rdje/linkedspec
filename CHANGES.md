@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.3.3 — add Julia user-function registry
+
+**Scope:** Julia user-function registry records, staged body parse-job queue exposure, body-AST stitching helper,
+registry-aware ActionIR contract resolution, package exports/status, focused registry tests, README, task-tree
+frontier update, roadmap/task-tree index alignment, mdBook status/handoff text, Knowledge Map, architecture
+snapshot, live docs, and resume pointer.
+
+**Change:** Added `julia/src/action/FunctionRegistry.jl` with `UserFunctionRegistry`, `UserFunctionEntry`,
+`UserFunctionCallResolution`, duplicate-name diagnostics, ordered registry construction from `SpecFile` or
+`FunctionDefinition` records, `body_parse_jobs(...)`, exact-arity lookup, JSON projection, and
+`stitch_function_body_ast(...)` for immutable replacement of staged `body_ast` payloads. The ActionIR contract
+resolver now accepts `function_registry=...`: exact-arity user calls classify as `family = user_function` before
+helper fallback, while wrong-arity registered calls diagnose as `user_function_arity_mismatch`. The Julia package
+status now reports `function-registry`.
+
+**Validation:** `Pkg.test()` passes with 415 tests, including 23 user-function registry assertions and the existing
+39 Action contract resolver assertions. Commit-time docs/governance validation covers mdBook, memory architecture,
+task-tree metadata, Knowledge Map, doctrine, and `git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.3.2 — add Julia ActionIR contract resolver
 
 **Scope:** Julia ActionIR contract-resolution records, canonical helper-name table, typed-node resolver traversal,
