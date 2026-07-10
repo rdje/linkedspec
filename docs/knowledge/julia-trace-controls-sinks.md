@@ -36,9 +36,10 @@ results equal untraced results.
 At `.4.5.2`, runtime tracing emitted the top-level parse scope only. `.4.5.3`
 now adds rule, regex, dispatch, lifecycle, recursion, cursor, and source-boundary
 instrumentation while retaining this control/sink surface. Final trace parity
-remains gated by `.4.5.4` no-drift.
+is not overclaimed; `.4.5.4` closes the scoped runtime no-drift proof.
 
 Related facts: [[julia-runtime-structured-diagnostics]],
 [[julia-runtime-diagnostics-trace-split]], [[julia-runtime-trace-events]],
+[[julia-diagnostics-trace-boundary]],
 [[dart-trace-controls-sinks]],
 [[trace-cross-variant-capability-contract]].

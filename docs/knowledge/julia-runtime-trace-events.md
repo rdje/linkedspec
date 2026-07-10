@@ -30,8 +30,10 @@ lifecycle source line, and boundary capture span. Disabled or absent emitters
 remain no-ops. Focused tests prove traced and untraced output identity across
 action, blind, and recursion paths.
 
-Final diagnostics/trace parity remains owned by the `.4.5.4` no-drift proof.
+The `.4.5.4` no-drift proof is now closed without changing this scoped runtime
+event boundary; staged registry work advances to `.5.1`.
 
 Related facts: [[julia-trace-controls-sinks]],
 [[julia-runtime-diagnostics-trace-split]],
+[[julia-diagnostics-trace-boundary]],
 [[trace-cross-variant-capability-contract]], [[dart-runtime-trace-events]].

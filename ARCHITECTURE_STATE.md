@@ -5,6 +5,10 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.5.4` closes the scoped Julia diagnostics/trace container with no
+  source correction. The 631-assertion suite, package/CLI `runtime-trace-events` status, book, KM, roadmap/task/live
+  docs, and architecture agree on structured runtime diagnostics plus control/sink/event/runtime-instrumentation
+  capabilities without overclaiming compile/parser tracing or staged/corpus parity. `.5.1` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.5.3` instruments the existing Julia runtime path with optional
   rule scopes, regex/action/blind/recursion decisions, lifecycle marks, cursor/stack transitions, and boundary
   events. Absent/disabled emitters remain no-ops; scope cleanup is exception-safe; traced and untraced action,

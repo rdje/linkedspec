@@ -314,13 +314,15 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.4.4 - add Julia runtime cursor controls`
 
 - ID: `JULIA-BACKEND-PARITY.4.5`
-  Status: `active`
+  Status: `done`
   Goal: Implement runtime diagnostics and trace controls.
   Children: `.4.5.0`, `.4.5.1`, `.4.5.2`, `.4.5.3`, `.4.5.4`
   Acceptance: Julia exposes default-quiet trace controls, event classes, sink behavior, branch/lifecycle trace
     points, and structured errors equivalent to the documented cross-variant trace contract.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` through `.4.5.4` - structured diagnostics, trace controls/events/sinks, and runtime
+    interpreter instrumentation pass 631 assertions; README/CLI status, mdBook, Knowledge Map, roadmap/task/live
+    docs, and architecture agree on the scoped `runtime-trace-events` boundary without claiming broader parity.
+  Commit: `JULIA-BACKEND-PARITY.4.5.4 - close Julia diagnostics trace no drift`
 
 - ID: `JULIA-BACKEND-PARITY.4.5.0`
   Status: `done`
@@ -366,20 +368,22 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.4.5.3 - add Julia runtime trace events`
 
 - ID: `JULIA-BACKEND-PARITY.4.5.4`
-  Status: `active`
+  Status: `done`
   Goal: Close Julia runtime diagnostics/trace no-drift.
   Acceptance: Julia README/CLI status, mdBook trace/runtime/handoff pages, live docs, task-tree index, and
     Knowledge Map agree on the implemented diagnostics/trace boundary before `.5` staged runtime work begins.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - full `Pkg.test()` remains green with 631 assertions; CLI/package status is
+    `runtime-trace-events`; Julia README, mdBook trace/status/handoff, Knowledge Map, task/index/roadmap/live docs,
+    and architecture all describe the same implemented runtime diagnostics/trace boundary. `.5.1` becomes active.
+  Commit: `JULIA-BACKEND-PARITY.4.5.4 - close Julia diagnostics trace no drift`
 
 - ID: `JULIA-BACKEND-PARITY.5`
-  Status: `pending`
+  Status: `active`
   Goal: Implement staged parser registry and user-function runtime parity.
   Children: `.5.1`, `.5.2`, `.5.3`
 
 - ID: `JULIA-BACKEND-PARITY.5.1`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the minimal staged registry provider for function-body parse jobs.
   Acceptance: `actionir-body.spec` resolves deterministically, compiles top rule `action_block`, executes queued
     jobs in stable order, and stitches `body_ast`.
@@ -473,7 +477,8 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `JULIA-BACKEND-PARITY.4.5.3` | `done` | Runtime mechanism instrumentation emits structured trace scopes, decisions, and marks. |
-| 2 | `JULIA-BACKEND-PARITY.4.5.4` | `active` | Close diagnostics/trace no-drift before staged runtime work. |
+| 2 | `JULIA-BACKEND-PARITY.4.5.4` | `done` | Diagnostics/trace status, tests, book, KM, and live docs are no-drift. |
+| 3 | `JULIA-BACKEND-PARITY.5.1` | `active` | Implement the minimal staged registry provider before user-function execution. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -1159,6 +1164,35 @@ Runtime trace evidence recorded on 2026-07-10:
 - [x] **LOCKSTEP** — Julia README, task tree/index, roadmaps, mdBook trace/status/handoff pages, Knowledge Map,
   architecture/live docs, and `MEMORY.md` advance to `.4.5.4` no-drift.
 
+## `JULIA-BACKEND-PARITY.4.5.4` Diagnostics/Trace No-Drift Result
+
+Closeout evidence recorded on 2026-07-10:
+
+- Full Julia `Pkg.test()` remains green with 631 assertions, including 43 trace assertions and seven structured
+  diagnostic assertions; CLI/package status remains `runtime-trace-events`.
+- README and Julia README, mdBook trace/status/handoff pages, task tree/index, roadmaps, live docs, architecture,
+  and Knowledge Map agree that structured runtime diagnostics, trace controls/events/sinks, and runtime mechanism
+  instrumentation are implemented.
+- The closeout deliberately keeps the scoped status name: this runtime milestone does not overclaim complete
+  compile/parser trace parity or later staged runtime/corpus parity.
+- No runtime/source correction was required. The `.4.5` container is closed and `.5.1` staged registry provider
+  execution becomes the sole active frontier.
+
+## `JULIA-BACKEND-PARITY.4.5.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.4.5.3` completed runtime instrumentation, but parent/status/book/KM/live surfaces
+  still intentionally described `.4.5.4` as pending.
+- [x] **ROOT CAUSE (WHY + WHERE)** — This was planned closeout state, not runtime drift; current-facing metadata
+  had not yet reconciled the completed diagnostics, controls, sinks, and event families into one boundary.
+- [x] **FIX** — Closed `.4.5`/`.4.5.4`, retained the accurate `runtime-trace-events` status, synchronized durable
+  and public documentation, and advanced the active frontier to `.5.1`.
+- [x] **ADDRESSED (verified)** — Status/help probes and stale-frontier scans agree with the task tree and mdBook;
+  the dedicated boundary fact records what is implemented and what remains outside the claim.
+- [x] **NO REGRESSION** — Full Julia `Pkg.test()` remains green with 631 assertions; CLI status, mdBook, memory,
+  Knowledge Map, task-tree, doctrine, and whitespace gates cover the closeout.
+- [x] **LOCKSTEP** — README, Julia README, task/index/roadmaps, mdBook, Knowledge Map, architecture/live docs, and
+  `MEMORY.md` advance together to `.5.1`.
+
 ## `JULIA-BACKEND-PARITY.4.2` Runtime Rule Interpreter Result
 
 Rule-interpreter evidence recorded on 2026-07-10:
@@ -1381,6 +1415,9 @@ Rule-interpreter evidence recorded on 2026-07-10:
 - `2026-07-10`: `.4.5.3` instruments the existing interpreter ownership boundaries instead of adding a parallel
   tracing execution path. High-level rule/lifecycle events remain readable at `high`; branch, dispatch, recursion,
   cursor, and boundary details are `debug`. Disabled or absent emitters remain no-ops and cannot affect results.
+- `2026-07-10`: `.4.5.4` retains package status `runtime-trace-events`. The scoped runtime diagnostics/trace
+  milestone is no-drift, but it does not claim later staged runtime/corpus parity or invent compile/parser events
+  beyond the implemented Julia surface. `.5.1` is the next executable boundary.
 
 ## Open Questions
 
@@ -1391,8 +1428,8 @@ Rule-interpreter evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.4.5.4`. Structured diagnostics, trace controls/sinks, and runtime mechanism events are implemented;
-  final status/book/live-doc no-drift is the next owned boundary.
+- None for `.5.1`. The compiled function registry and staged body-parse job records exist; the minimal provider
+  execution/stitching path is the next owned boundary.
 
 ## Verification Log
 
@@ -1424,6 +1461,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.5.1` | Full Julia `Pkg.test()`; Julia CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Seven focused assertions prove stable diagnostic fields/JSON, spec/top/rule/handler attribution, richer-payload preservation, successful-output compatibility, and unchanged textual errors; total Julia tests pass with 588 assertions and `.4.5.2` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.5.2` | Full Julia `Pkg.test()`; Julia CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Twenty-nine focused assertions prove trace levels/environment config, structured events/scopes/decisions/logs/dumps, stdout/route/mirror sinks, reset behavior, default quiet, parse-scope routing, and output preservation; total Julia tests pass with 617 assertions and `.4.5.3` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.5.3` | Full Julia `Pkg.test()`; Julia CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Fourteen added trace assertions prove rule scopes, regex decisions, action/blind dispatch, lifecycle marks, recursion cutoffs, cursor transitions, source boundaries, and traced/untraced identity; total Julia tests pass with 631 assertions and `.4.5.4` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.4.5.4` | Full Julia `Pkg.test()`; Julia CLI status/help; stale status/frontier scans; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Runtime diagnostics/trace tests and all public/durable status surfaces agree at 631 assertions and `runtime-trace-events`; `.4.5` closes and `.5.1` becomes active without a source correction. |
 
 ## Commit Log
 
@@ -1455,9 +1493,13 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.4.5.1` | `JULIA-BACKEND-PARITY.4.5.1 - add Julia runtime diagnostics` | Exported structured runtime diagnostic payloads on exceptions with spec/top/rule/handler attribution; trace controls advance to `.4.5.2`. |
 | `JULIA-BACKEND-PARITY.4.5.2` | `JULIA-BACKEND-PARITY.4.5.2 - add Julia trace controls` | Ordered levels, environment/config controls, event primitives, stdout/route/mirror sinks, and traced runtime entrypoints; instrumentation advances to `.4.5.3`. |
 | `JULIA-BACKEND-PARITY.4.5.3` | `JULIA-BACKEND-PARITY.4.5.3 - add Julia runtime trace events` | Rule/regex/dispatch/lifecycle/recursion/cursor/boundary instrumentation; no-drift advances to `.4.5.4`. |
+| `JULIA-BACKEND-PARITY.4.5.4` | `JULIA-BACKEND-PARITY.4.5.4 - close Julia diagnostics trace no drift` | Scoped runtime diagnostics/trace no-drift; `.4.5` closes and staged registry work advances to `.5.1`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.4.5.4` diagnostics/trace no-drift. Full tests remain green with 631 assertions and
+  package status `runtime-trace-events`; README/CLI, mdBook, KM, task/index/roadmaps, architecture, and live docs
+  agree on the scoped runtime boundary. `.4.5` closes without source correction and `.5.1` becomes active.
 - `2026-07-10`: Completed `.4.5.3` runtime trace instrumentation. Julia now emits rule scopes, regex decisions,
   action/blind child dispatch, lifecycle marks, recursion-cutoff decisions, cursor-control transitions, and
   source-boundary events through the optional emitter. `Pkg.test()` passes with 631 assertions; package status is

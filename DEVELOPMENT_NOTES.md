@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.4.5.4 — Julia diagnostics/trace no-drift):
+  The accurate closeout status is `runtime-trace-events`: Julia has structured runtime diagnostics, complete
+  control/sink/event primitives, and instrumented runtime ownership boundaries, while compile/parser tracing and
+  later staged/corpus execution are not silently claimed. No source correction was needed. Closing `.4.5` on this
+  scoped boundary keeps product status honest and makes `.5.1` staged registry execution the next mechanism.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.4.5.3 — Julia runtime trace instrumentation):
   Instrumentation follows existing mechanism owners rather than branching into a trace-specific interpreter.
   Rule and lifecycle events use `high` for readable execution structure; match/dispatch/recursion/cursor/boundary

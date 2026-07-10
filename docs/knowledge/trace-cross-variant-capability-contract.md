@@ -42,9 +42,10 @@ for the documented external contract. Future variants must pass the mdBook check
 the same claim. Julia split that proof through `JULIA-BACKEND-PARITY.4.5.0`; `.4.5.1` added structured runtime
 diagnostics and `.4.5.2` added controls/events/sinks plus traced entrypoints. `.4.5.3` / `.4.5.4` separately own
 runtime instrumentation and no-drift before any Julia trace parity claim; `.4.5.3` has now landed and `.4.5.4`
-remains the final proof.
+has closed the scoped runtime no-drift proof without claiming broader compile/parser trace parity.
 
 Related facts: [[julia-runtime-diagnostics-trace-split]], [[julia-runtime-structured-diagnostics]],
 [[julia-trace-controls-sinks]], [[julia-runtime-trace-events]],
+[[julia-diagnostics-trace-boundary]],
 [[trace-backend-parity-split]],
 [[dart-runtime-diagnostics-trace-split]].

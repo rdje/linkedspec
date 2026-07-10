@@ -99,7 +99,8 @@ Top-level directories and files:
     save/restore, entry/local rewinds, character-based cursor/input helpers, and non-consuming boundary capture
     are green. Runtime diagnostics plus ordered trace levels, environment/config controls, structured events,
     stdout/route/mirror sinks, and output-preserving traced entrypoints are green. Rule/regex/dispatch/lifecycle/
-    recursion/cursor/boundary instrumentation is green at 631 assertions; `.4.5.4` no-drift is active.
+    recursion/cursor/boundary instrumentation is green at 631 assertions; `.4.5.4` closes diagnostics/trace
+    no-drift, and `.5.1` staged registry execution is active.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

@@ -114,5 +114,6 @@ successful output unchanged. The full suite passes with 588 assertions and statu
 stdout/routed-file/mirror sinks with reset, and output-preserving traced runtime entrypoints. The full suite now
 passes with 617 assertions at that controls-only boundary. `.4.5.3` adds rule scopes, regex decisions,
 action/blind dispatch, lifecycle marks, recursion cutoffs, cursor transitions, and source-boundary events. The
-full suite now passes with 631 assertions and status `runtime-trace-events`; `.4.5.4` owns final no-drift. Staged
-parser and corpus execution remain later leaves.
+full suite now passes with 631 assertions and status `runtime-trace-events`; `.4.5.4` closes that no-drift boundary
+without changing source or overclaiming broader trace parity. `.5.1` now owns the minimal staged registry provider;
+later leaves own user-function runtime and corpus execution.

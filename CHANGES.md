@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.4.5.4 — close Julia diagnostics trace no drift
+
+**Scope:** Julia diagnostics/trace status and test audit, `.4.5` parent closeout, README/CLI status, mdBook
+trace/status/handoff, roadmap/task/live docs, Knowledge Map boundary fact, architecture, and resume pointer.
+
+**Change:** Confirmed the 631-assertion structured diagnostics, trace controls/sinks/events, and runtime
+instrumentation boundary is internally consistent. Retained precise package status `runtime-trace-events`, closed
+`.4.5` without source changes or broader parity overclaim, and advanced the active frontier to `.5.1`.
+
+**Validation:** Full `Pkg.test()`, Julia CLI status/help, stale-frontier scans, mdBook, memory architecture,
+task-tree metadata, Knowledge Map, doctrine, and whitespace checks pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.4.5.3 — add Julia runtime trace events
 
 **Scope:** Julia interpreter rule/regex/dispatch/lifecycle/recursion/cursor/boundary instrumentation, focused
