@@ -67,14 +67,21 @@ function _print_corpus_help(io)
     println(io, "LinkedSpec Julia corpus runner")
     println(io)
     println(io, "Usage:")
-    println(io, "  corpus_runner --corpus <path> [--execute]")
+    println(io, "  corpus_runner --corpus <path> [--execute] [--case <name> ...] [--offset <n>] [--limit <n>]")
+    println(io)
+    println(io, "Without --execute, validates the complete manifest-backed corpus.")
+    println(io, "During staged rollout, --execute requires --case or --limit; unbounded execution is disabled.")
 end
 
 function _parse_corpus_runner_args(args)
     corpus_path = nothing
     execute = false
     help = false
-    unknown = String[]
+    case_names = String[]
+    offset = 0
+    offset_supplied = false
+    limit = nothing
+    errors = String[]
 
     index = firstindex(args)
     while index <= lastindex(args)
@@ -88,19 +95,107 @@ function _parse_corpus_runner_args(args)
         elseif arg == "--corpus"
             next_index = index + 1
             if next_index > lastindex(args)
-                push!(unknown, "--corpus requires a path")
+                push!(errors, "--corpus requires a path")
                 index += 1
             else
                 corpus_path = args[next_index]
                 index += 2
             end
+        elseif startswith(arg, "--corpus=")
+            corpus_path = arg[length("--corpus=") + 1:end]
+            index += 1
+        elseif arg == "--case"
+            next_index = index + 1
+            if next_index > lastindex(args)
+                push!(errors, "--case requires a name")
+                index += 1
+            else
+                push!(case_names, args[next_index])
+                index += 2
+            end
+        elseif startswith(arg, "--case=")
+            push!(case_names, arg[length("--case=") + 1:end])
+            index += 1
+        elseif arg == "--offset"
+            offset_supplied = true
+            next_index = index + 1
+            if next_index > lastindex(args)
+                push!(errors, "--offset requires a non-negative integer")
+                index += 1
+            else
+                parsed_offset = _parse_corpus_runner_integer("--offset", args[next_index], errors)
+                if parsed_offset !== nothing
+                    offset = parsed_offset
+                end
+                index += 2
+            end
+        elseif startswith(arg, "--offset=")
+            offset_supplied = true
+            parsed_offset = _parse_corpus_runner_integer(
+                "--offset",
+                arg[length("--offset=") + 1:end],
+                errors,
+            )
+            if parsed_offset !== nothing
+                offset = parsed_offset
+            end
+            index += 1
+        elseif arg == "--limit"
+            next_index = index + 1
+            if next_index > lastindex(args)
+                push!(errors, "--limit requires a positive integer")
+                index += 1
+            else
+                limit = _parse_corpus_runner_integer(
+                    "--limit",
+                    args[next_index],
+                    errors;
+                    positive = true,
+                )
+                index += 2
+            end
+        elseif startswith(arg, "--limit=")
+            limit = _parse_corpus_runner_integer(
+                "--limit",
+                arg[length("--limit=") + 1:end],
+                errors;
+                positive = true,
+            )
+            index += 1
         else
-            push!(unknown, arg)
+            push!(errors, "unknown argument: $arg")
             index += 1
         end
     end
 
-    return (; corpus_path, execute, help, unknown)
+    selection_requested = !isempty(case_names) || offset_supplied || limit !== nothing
+    if !execute && selection_requested
+        push!(errors, "--case, --offset, and --limit require --execute")
+    end
+    if !isempty(case_names) && (offset_supplied || limit !== nothing)
+        push!(errors, "--case cannot be combined with --offset or --limit")
+    end
+
+    return (;
+        corpus_path,
+        execute,
+        help,
+        case_names,
+        offset,
+        limit,
+        errors,
+    )
+end
+
+function _parse_corpus_runner_integer(flag, value, errors; positive::Bool = false)
+    parsed = tryparse(Int, value)
+    valid = parsed !== nothing && (positive ? parsed > 0 : parsed >= 0)
+    if !valid
+        requirement = positive ? "a positive integer" : "a non-negative integer"
+        push!(errors, "$flag requires $requirement")
+        return nothing
+    end
+    return parsed
 end
 
 function run_corpus_runner(args = ARGS; io = stdout, err = stderr)
@@ -110,19 +205,56 @@ function run_corpus_runner(args = ARGS; io = stdout, err = stderr)
         return 0
     end
 
-    if !isempty(parsed.unknown)
-        println(err, "error: unknown corpus argument: ", join(parsed.unknown, ", "))
+    if !isempty(parsed.errors)
+        println(err, "error: ", join(parsed.errors, "; "))
         return 2
     end
 
-    if parsed.corpus_path === nothing
+    if parsed.corpus_path === nothing || isempty(parsed.corpus_path)
         println(err, "error: --corpus <path> is required")
         return 2
     end
 
     if parsed.execute
-        println(err, "error: corpus --execute CLI is not enabled in the Julia backend yet")
-        return 2
+        if isempty(parsed.case_names) && parsed.limit === nothing
+            println(err, "error: unbounded corpus execution is not enabled yet; use --case or --limit")
+            return 2
+        end
+        try
+            execution = execute_corpus_fixtures(
+                parsed.corpus_path;
+                case_names = parsed.case_names,
+                offset = parsed.offset,
+                limit = parsed.limit,
+            )
+            for result in execution.results
+                if corpus_fixture_passed(result)
+                    println(io, "PASS ", result.name)
+                else
+                    println(io, "FAIL ", result.name, ": ", result.failure)
+                end
+            end
+            failed_count = length(corpus_failures(execution))
+            println(
+                io,
+                "LinkedSpecJulia corpus execution ran ",
+                length(execution.results),
+                " fixture(s) from ",
+                execution.validation.root,
+                ": ",
+                corpus_passed_count(execution),
+                " passed, ",
+                failed_count,
+                " failed",
+            )
+            return failed_count == 0 ? 0 : 1
+        catch error
+            if error isa CorpusManifestException
+                println(err, "error: ", error.message)
+                return 2
+            end
+            rethrow()
+        end
     end
 
     try
@@ -130,7 +262,7 @@ function run_corpus_runner(args = ARGS; io = stdout, err = stderr)
         println(io, "corpus: ", validation.root)
         println(io, "format: ", validation.manifest.format)
         println(io, "fixtures: ", validation.manifest.case_count)
-        println(io, "status: manifest validated; library execution is available; CLI --execute is not enabled")
+        println(io, "status: manifest validated; bounded CLI execution is available; unbounded execution is disabled")
     catch error
         if error isa CorpusManifestException
             println(err, "error: ", error.message)
@@ -164,9 +296,18 @@ function execute_corpus_fixtures(
     parse_mode = nothing,
     spec_parser = nothing,
     trace_config = nothing,
+    case_names = String[],
+    offset = 0,
+    limit = nothing,
 )
     validation = load_corpus_fixtures(corpus_path)
     effective_parse_mode = parse_mode === nothing ? SeekParseMode : parse_mode
+    fixtures = _select_corpus_execution_fixtures(
+        validation.fixtures;
+        case_names = case_names,
+        offset = offset,
+        limit = limit,
+    )
     results = CorpusFixtureExecutionResult[
         _execute_corpus_fixture(
             validation,
@@ -175,9 +316,59 @@ function execute_corpus_fixtures(
             spec_parser = spec_parser,
             trace_config = trace_config,
         )
-        for fixture in validation.fixtures
+        for fixture in fixtures
     ]
     return CorpusExecutionResult(validation, results)
+end
+
+function _select_corpus_execution_fixtures(
+    fixtures::Vector{CorpusFixture};
+    case_names,
+    offset,
+    limit,
+)
+    if !(offset isa Integer) || offset isa Bool || offset < 0
+        throw(CorpusManifestException("corpus execution offset must be a non-negative integer"))
+    end
+    if limit !== nothing && (!(limit isa Integer) || limit isa Bool || limit <= 0)
+        throw(CorpusManifestException("corpus execution limit must be a positive integer"))
+    end
+
+    requested_names = String[String(name) for name in case_names]
+    if !isempty(requested_names)
+        if offset != 0 || limit !== nothing
+            throw(CorpusManifestException(
+                "corpus execution case selection cannot be combined with offset or limit",
+            ))
+        end
+        by_name = Dict(fixture.name => fixture for fixture in fixtures)
+        seen = Set{String}()
+        selected = CorpusFixture[]
+        for name in requested_names
+            if name in seen
+                throw(CorpusManifestException(
+                    "corpus execution selection contains duplicate case name: $name",
+                ))
+            end
+            if !haskey(by_name, name)
+                throw(CorpusManifestException("selected corpus case not found in manifest: $name"))
+            end
+            push!(seen, name)
+            push!(selected, by_name[name])
+        end
+        return selected
+    end
+
+    fixture_count = length(fixtures)
+    if offset >= fixture_count
+        throw(CorpusManifestException(
+            "corpus execution offset $offset is outside fixture count $fixture_count",
+        ))
+    end
+    selected_count = limit === nothing ? fixture_count - offset : min(limit, fixture_count - offset)
+    first_index = offset + 1
+    last_index = offset + selected_count
+    return CorpusFixture[fixtures[first_index:last_index]...]
 end
 
 function _execute_corpus_fixture(

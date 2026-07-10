@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.1 — Julia bounded corpus selection/reporting):
+  Selection happens after complete manifest validation, so a bounded execution cannot hide manifest drift. Named
+  selection preserves caller order and rejects duplicates/missing cases; offset/limit windows use zero-based
+  manifest positions and cap oversized limits at the end. The CLI deliberately requires `--case` or `--limit`
+  while parity is incomplete—offset alone is not a safe upper bound—while library callers may still execute a
+  complete controlled corpus. Per-fixture failures stay ordinary results, yielding runner exit `1`; malformed
+  selection is a usage/manifest error and yields `2`. This distinction keeps later diagnostic batches scriptable.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.0 — Julia corpus rollout split):
   The shipped manifest is divided by recoverable mechanism boundaries rather than treated as one 99-case fix
   batch. Bounded selection/reporting lands first so every later window is reproducible. The first 40 fixtures own

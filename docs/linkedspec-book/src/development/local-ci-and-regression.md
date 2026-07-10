@@ -62,11 +62,17 @@ projection, seek/consume runtime regex selection, capture/offset projection, cur
 zero-progress detection, first default/AND/OR/repetition dispatch, lifecycle and child-edge flow, narrow
 accumulators/returns, recursion/progress guards, registered user functions, diagnostics/tracing, boundary capture,
 manifest-backed corpus validation, and controlled library corpus execution. The full package suite currently passes
-with 715 assertions and status `runtime-controlled-corpus`.
+with 745 assertions and status `runtime-corpus-selection`.
 
-The library executor is available as `execute_corpus_fixtures(...)`, but Julia corpus CLI `--execute` remains
-unavailable until selection/reporting and shipped-manifest batches land. The validation-only command above is
-therefore still the correct CLI check; full 99-fixture Julia parity is not yet claimed.
+The library executor and corpus CLI support named or bounded subsets. For example:
+
+```bash
+JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot julia --project=julia julia/bin/corpus_runner.jl \
+  --corpus rust/linkedspec-runtime/tests/corpus --execute --case proof_edge_array_literal
+```
+
+Validation-only loading remains the default. Unbounded CLI execution remains unavailable until shipped-manifest
+batches are green, so full 99-fixture Julia parity is not yet claimed.
 
 ## Hosted GitHub Actions status
 

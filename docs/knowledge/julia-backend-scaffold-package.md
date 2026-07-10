@@ -26,6 +26,6 @@ an executable interpreter, staged and runtime user functions, structured diagnos
 library-level corpus execution. See the linked current Julia fact cards for each mechanism.
 `julia/bin/linkedspec_julia.jl` is the variant-specific CLI, and `julia/bin/corpus_runner.jl` is the corpus-runner
 entrypoint. The corpus runner accepts `--corpus <path>` for manifest validation and still deliberately rejects
-`--execute` until later corpus selection/reporting and full-manifest leaves productize the library executor.
+unbounded `--execute`; `.6.2.1` now permits named or limit-bounded execution while full parity is incomplete.
 
-Related fact: [[julia-controlled-corpus-execution]].
+Related facts: [[julia-controlled-corpus-execution]], [[julia-corpus-selection-reporting]].

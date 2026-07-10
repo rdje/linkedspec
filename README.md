@@ -108,7 +108,8 @@ Top-level directories and files:
     one-level wrapped structural comparison, optional trace capture, structured diagnostics, and all-fixture
     failure reporting. The full suite passes with 715 assertions and status `runtime-controlled-corpus`. `.6.2.0`
     splits the 99-fixture rollout into bounded selection/reporting plus starter, middle, shipped-spec, and
-    spec-defined function-shell batches; `.6.2.1` selection/reporting is active.
+    spec-defined function-shell batches. `.6.2.1` adds ordered named/offset/limit selection plus bounded runner
+    PASS/FAIL reporting and advances status to `runtime-corpus-selection`; `.6.2.2` starter fixtures 0–39 are active.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

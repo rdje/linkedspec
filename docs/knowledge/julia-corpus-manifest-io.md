@@ -22,7 +22,8 @@ directories, required `input.spec` / `input.txt` / `expected.json` files, and ex
 
 The checked-in corpus under `rust/linkedspec-runtime/tests/corpus` loads as 99 fixtures. The Julia CLI and
 corpus-runner non-execute commands report the validated fixture count. `JULIA-BACKEND-PARITY.6.1` now composes
-this loader into the library-level `execute_corpus_fixtures(...)` controlled executor. The CLI `--execute` path
-still deliberately returns an error until later selection/reporting and full-manifest leaves land.
+this loader into the library-level `execute_corpus_fixtures(...)` controlled executor. `.6.2.1` adds bounded CLI
+`--execute` selection/reporting, while unbounded execution still deliberately returns an error until the
+full-manifest leaf lands.
 
-Related fact: [[julia-controlled-corpus-execution]].
+Related facts: [[julia-controlled-corpus-execution]], [[julia-corpus-selection-reporting]].

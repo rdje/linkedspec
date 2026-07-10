@@ -327,7 +327,8 @@ records, manifest-to-runtime composition, one-level wrapped structural compariso
 structured diagnostic retention, and all-fixture reporting. Full tests pass with 715 assertions; status is
 `runtime-controlled-corpus`. `.6.2.0` splits the 99-fixture rollout into bounded selection/reporting, starter
 0–39, middle non-function 40–67, shipped-spec/parser-smoke 68–98, and spec-defined function-shell owners;
-`.6.2.1` is active.
+`.6.2.1` then adds bounded selection/reporting at 745 assertions and status `runtime-corpus-selection`.
+`.6.2.2` starter fixtures 0–39 are active.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -543,11 +544,54 @@ boundaries. `corpus_execution_passed(...)`, `corpus_passed_count(...)`, `corpus_
 
 The optional `spec_parser` keyword is a narrow controlled-test seam for source that already has neutral staged
 function-definition nodes available. Ordinary calls use direct rule-only `parse_spec(...)`. Source-driven
-top-level function-shell execution, fixture selection, CLI reporting, and the full checked-in 99-fixture gate are
-later `.6` work. Accordingly, `julia/bin/corpus_runner.jl --execute` still rejects the request rather than
-overclaiming corpus parity.
+top-level function-shell execution and the full checked-in 99-fixture gate remain later `.6` work.
 
-The rollout is explicitly recoverable. `.6.2.1` owns named and bounded selection/reporting; `.6.2.2` owns starter
+#### Selecting bounded Julia corpus runs
+
+Library callers can execute named fixtures in caller-supplied order:
+
+```julia
+execution = execute_corpus_fixtures(
+    "rust/linkedspec-runtime/tests/corpus";
+    case_names = ["proof_edge_array_literal", "proof_edge_hash_literal"],
+)
+```
+
+Or select a zero-based manifest window:
+
+```julia
+execution = execute_corpus_fixtures(
+    "rust/linkedspec-runtime/tests/corpus";
+    offset = 0,
+    limit = 10,
+)
+```
+
+Named selection rejects missing and duplicate names and cannot be mixed with a window. Windows reject negative or
+non-integer offsets, non-positive or non-integer limits, and offsets outside the manifest. A limit larger than the
+remaining fixture count stops at the manifest end.
+
+The corpus runner exposes the same bounded surface:
+
+```bash
+julia --project=julia julia/bin/corpus_runner.jl \
+  --corpus rust/linkedspec-runtime/tests/corpus \
+  --execute --case proof_edge_array_literal
+
+julia --project=julia julia/bin/corpus_runner.jl \
+  --corpus rust/linkedspec-runtime/tests/corpus \
+  --execute --offset 0 --limit 10
+```
+
+Each selected fixture prints `PASS <name>` or `FAIL <name>: <detail>`, followed by a summary. Exit status `0` means
+all selected fixtures passed, `1` means at least one selected fixture failed, and `2` means argument, manifest, or
+selection validation failed. Options also accept `--flag=value` form, and `--case` may be repeated.
+
+Until full 99-fixture parity is proven, CLI execution requires a named case or a positive limit. Unbounded and
+offset-only execution are rejected. Omitting `--execute` continues to validate the complete manifest; selecting a
+later subset never bypasses manifest drift checks.
+
+The rollout is explicitly recoverable. `.6.2.1` has landed named and bounded selection/reporting; `.6.2.2` owns starter
 fixtures 0–39; `.6.2.3` owns non-function helper/control fixtures 40–67; `.6.2.4` owns shipped-spec/parser-smoke
 fixtures 68–98; and `.6.2.5` owns spec-defined top-level function shells. Those are workload boundaries, not an
 assumption that Julia shares Dart's historical failure causes.

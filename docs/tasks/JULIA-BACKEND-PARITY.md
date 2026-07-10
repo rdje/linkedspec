@@ -456,16 +456,20 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.2.0 - split Julia corpus expansion batches`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.1`
-  Status: `active`
+  Status: `done`
   Goal: Add opt-in executable corpus selection and reporting.
   Acceptance: Julia can execute named or safely bounded fixture subsets through the library and corpus runner,
     report pass/fail details for every selected fixture, and keep default validation-only behavior while full
     manifest parity remains incomplete.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `execute_corpus_fixtures(...)` accepts ordered `case_names` or an `offset`/`limit`
+    window with strict selection diagnostics. The corpus runner exposes bounded `--execute` through repeated
+    `--case` or `--offset` plus `--limit`, reports every selected PASS/FAIL and summary, returns nonzero for fixture
+    failures, rejects selectors without `--execute`, and rejects unbounded CLI execution. Thirty added assertions
+    bring full `Pkg.test()` to 745 with status `runtime-corpus-selection`.
+  Commit: `JULIA-BACKEND-PARITY.6.2.1 - add Julia executable corpus selection`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Close the starter proof-edge, autoexist, and core terse runtime batch.
   Acceptance: Manifest fixtures `0..39` either pass unchanged on Julia or each mismatch is routed to a narrowly
     owned root-cause child with Perl/Rust/Dart oracle evidence.
@@ -555,7 +559,41 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 5 | `JULIA-BACKEND-PARITY.5.3` | `done` | Neutral function/parse-job/stitched-AST shapes are locked through runtime. |
 | 6 | `JULIA-BACKEND-PARITY.6.1` | `done` | Controlled fixtures prove value, dispatch, lifecycle, function, trace, diagnostic, and boundary behavior. |
 | 7 | `JULIA-BACKEND-PARITY.6.2.0` | `done` | Shipped-corpus rollout is split into recoverable execution and behavior batches before code. |
-| 8 | `JULIA-BACKEND-PARITY.6.2.1` | `active` | Add bounded library selection and opt-in corpus-runner reporting. |
+| 8 | `JULIA-BACKEND-PARITY.6.2.1` | `done` | Bounded library selection and opt-in corpus-runner reporting are green. |
+| 9 | `JULIA-BACKEND-PARITY.6.2.2` | `active` | Execute and close the starter manifest fixtures 0–39. |
+
+## `JULIA-BACKEND-PARITY.6.2.1` Executable Corpus Selection Result
+
+Selection/reporting evidence recorded on 2026-07-10:
+
+- `execute_corpus_fixtures(...)` now accepts ordered `case_names` or zero-based `offset` plus optional positive
+  `limit`. Named order is preserved; oversized limits cap at the manifest end.
+- Library selection rejects negative/non-integer offsets, non-positive/non-integer limits, out-of-range offsets,
+  missing names, duplicate names, and named-plus-window combinations with `CorpusManifestException`.
+- `run_corpus_runner(...)` and the Julia-specific `corpus` command accept separate or `--flag=value` forms for
+  `--corpus`, repeated `--case`, `--offset`, and `--limit`.
+- Bounded execute mode prints `PASS <name>` or `FAIL <name>: <detail>` for every selected fixture, prints a stable
+  passed/failed summary, returns `0` for all-pass, and returns `1` for fixture failures.
+- Selection flags without `--execute`, invalid numeric flags, and mixed named/window selectors return usage error
+  `2`. While full parity is incomplete, CLI execution must include `--case` or `--limit`; an unbounded request and
+  offset-only request are rejected before loading/executing fixtures.
+- Validation-only default behavior remains unchanged and still validates the complete 99-fixture manifest.
+
+## `JULIA-BACKEND-PARITY.6.2.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.6.1` could execute only the complete loaded fixture list from library code, while
+  the corpus runner rejected every `--execute` request and provided no recoverable shipped-batch command.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `julia/src/corpus/CorpusManifest.jl` had no fixture selector, selection
+  validation, execute-mode argument parser, per-fixture reporting loop, or incomplete-parity unbounded guard.
+- [x] **FIX** — Added library `case_names`/`offset`/`limit` selection, strict diagnostics, bounded runner execution,
+  stable PASS/FAIL summaries and exit codes, expanded Julia-specific CLI help, and status
+  `runtime-corpus-selection`.
+- [x] **ADDRESSED (verified)** — Thirty added assertions prove named order, bounded/capped windows, all selection
+  errors, named/bounded CLI success, mismatch reporting/exit, selector fences, unbounded rejection, and help/status.
+- [x] **NO REGRESSION** — Full Julia `Pkg.test()` passes with 745 assertions; validation-only 99-fixture loading is
+  unchanged and unbounded execution remains unavailable until the later full-gate leaf.
+- [x] **LOCKSTEP** — Julia README, task/index/roadmaps, mdBook command/API/status pages, Knowledge Map,
+  architecture/live docs, and `MEMORY.md` advance the frontier to starter fixtures 0–39 under `.6.2.2`.
 
 ## `JULIA-BACKEND-PARITY.6.2.0` Corpus Expansion Split Result
 
@@ -1713,6 +1751,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.5.3` | Full Julia `Pkg.test()`; Julia CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Twenty focused assertions prove neutral staged function fields through parsed source order, compiled jobs, descriptor payload/job/AST records, metadata order/count, and runtime output; total Julia tests pass with 691 assertions, `.5` closes, and `.6.1` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.1` | Full Julia `Pkg.test()`; Julia CLI status/help and manifest validation; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Twenty-four focused assertions prove controlled scalar/nested/dispatch/lifecycle/function/boundary execution, trace/diagnostic retention, wrapped output comparison, mismatch reporting, and continuation; total Julia tests pass with 715 assertions and `.6.2` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.0` | Planning-only task decomposition; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. The 99-fixture rollout is split into bounded execution/reporting, starter 0–39, middle non-function 40–67, shipped-spec 68–98, and spec-defined function-shell owners; source behavior remains unchanged and `.6.2.1` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.1` | Full Julia `Pkg.test()`; Julia CLI status/help, validation-only manifest load, named/bounded execute and unbounded rejection; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Thirty added assertions prove library/CLI selection, validation, reporting, exit codes, and rollout guards; total Julia tests pass with 745 assertions, status is `runtime-corpus-selection`, and `.6.2.2` becomes active. |
 
 ## Commit Log
 
@@ -1750,9 +1789,15 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.5.3` | `JULIA-BACKEND-PARITY.5.3 - preserve Julia staged descriptor shapes` | End-to-end neutral staged function descriptor/runtime proof; `.5` closes and corpus execution advances to `.6.1`. |
 | `JULIA-BACKEND-PARITY.6.1` | `JULIA-BACKEND-PARITY.6.1 - add Julia controlled corpus execution` | Library corpus composition, result/query records, wrapped comparison, trace/diagnostic retention, and all-fixture reporting; manifest batches advance to `.6.2`. |
 | `JULIA-BACKEND-PARITY.6.2.0` | `JULIA-BACKEND-PARITY.6.2.0 - split Julia corpus expansion batches` | Planning-only split into selection/reporting, starter, middle, shipped-spec, and function-shell owners; `.6.2.1` becomes active. |
+| `JULIA-BACKEND-PARITY.6.2.1` | `JULIA-BACKEND-PARITY.6.2.1 - add Julia executable corpus selection` | Named/bounded library selection plus opt-in runner PASS/FAIL reporting and unbounded guard; starter fixtures advance to `.6.2.2`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.2.1` executable corpus selection. Julia library execution accepts named or bounded
+  fixture subsets with strict selection diagnostics; the runner reports every selected PASS/FAIL and summary,
+  returns nonzero for mismatches, preserves validation-only default behavior, and rejects unbounded execution while
+  parity is incomplete. Thirty added assertions bring `Pkg.test()` to 745 and status `runtime-corpus-selection`;
+  starter fixtures 0–39 are active under `.6.2.2`.
 - `2026-07-10`: Completed `.6.2.0` corpus rollout decomposition. The 99-fixture manifest now has bounded
   selection/reporting, starter 0–39, middle non-function 40–67, shipped-spec/parser-smoke 68–98, and spec-defined
   top-level function-shell owners. No behavior changed; the executable boundary remains 715 assertions at

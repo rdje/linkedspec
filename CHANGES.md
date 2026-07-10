@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.1 — add Julia executable corpus selection
+
+**Scope:** Julia library corpus selection, bounded corpus-runner execution/reporting, CLI option parsing/help,
+selection and exit-code tests, package status, task/roadmap/live docs, mdBook, Knowledge Map, architecture, and
+resume pointer.
+
+**Change:** `execute_corpus_fixtures(...)` now accepts ordered named cases or an offset/limit window with strict
+missing/duplicate/mixed/invalid/out-of-range diagnostics. The runner accepts repeated `--case` plus `--offset` and
+`--limit` in separate or equals forms, prints every selected PASS/FAIL plus a summary, and returns `0`/`1` for
+all-pass/fixture-failure runs. Selection flags require `--execute`; unbounded and offset-only CLI execution remain
+rejected until full parity. Validation-only behavior stays the default. Status advances to
+`runtime-corpus-selection`.
+
+**Validation:** Thirty added assertions bring full `Pkg.test()` to 745. Julia status/help, validation-only 99-case
+load, bounded execute, unbounded rejection, mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates
+pass; `.6.2.2` starter fixtures 0–39 are next.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.0 — split Julia corpus expansion batches
 
 **Scope:** Planning-only decomposition of the Julia 99-fixture rollout, task/frontier metadata, roadmap/live docs,

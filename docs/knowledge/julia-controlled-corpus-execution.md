@@ -39,14 +39,16 @@ lifecycle return shape, exact-arity staged function calls, boundary capture plus
 diagnostics, output mismatch reporting, and continuation after failures. Multiline fixtures use newline statement
 separation with no trailing semicolons.
 
-This is a library execution surface, not full corpus parity. The Julia CLI and corpus-runner `--execute` command
-remain deliberately unavailable, and the checked-in 99-fixture manifest is owned by later `.6` batches.
+This is not full corpus parity. `.6.2.1` now allows bounded Julia CLI/corpus-runner execution with named cases or a
+positive limit, but unbounded execution remains deliberately unavailable. The checked-in 99-fixture manifest is
+owned by later `.6` batches.
 
 `JULIA-BACKEND-PARITY.6.2.0` splits that rollout before behavior changes: `.6.2.1` owns bounded selection/reporting,
 `.6.2.2` owns starter fixtures 0–39, `.6.2.3` owns non-function fixtures 40–67, `.6.2.4` owns shipped-spec/parser-
 smoke fixtures 68–98, and `.6.2.5` owns top-level function fixtures through the spec-defined shell. These mirror
 the stable Dart workload windows but do not assume Dart and Julia share failure mechanisms.
 
-Related facts: [[julia-corpus-manifest-io]], [[julia-core-spec-parser]], [[julia-compiled-spec-state]],
+Related facts: [[julia-corpus-selection-reporting]], [[julia-corpus-manifest-io]], [[julia-core-spec-parser]],
+[[julia-compiled-spec-state]],
 [[julia-diagnostics-trace-boundary]], [[julia-user-function-runtime-execution]],
 [[dart-controlled-corpus-execution]], [[statement-separator-semantics]].

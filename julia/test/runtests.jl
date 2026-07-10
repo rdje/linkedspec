@@ -78,6 +78,10 @@ function _write_fixture(
     end
 end
 
+function _returning_spec(value::AbstractString)
+    return "Top::\n /x/\n E { return($(JSON3.write(String(value)))) }\n"
+end
+
 function _regex_patterns_of(rule::Rule)
     return [
         element.kind.pattern for element in rule.body
@@ -342,17 +346,19 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-controlled-corpus"
+    @test status.parity == "runtime-corpus-selection"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
     @test run_cli(["--help"]; io = cli_output, err = cli_error) == 0
-    @test occursin("LinkedSpec Julia backend", String(take!(cli_output)))
+    cli_text = String(take!(cli_output))
+    @test occursin("LinkedSpec Julia backend", cli_text)
+    @test occursin("--case <name>", cli_text)
     @test isempty(String(take!(cli_error)))
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-controlled-corpus", String(take!(status_output)))
+    @test occursin("parity: runtime-corpus-selection", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -365,7 +371,7 @@ end
 
     execute_error = IOBuffer()
     @test run_corpus_runner(["--corpus", "fixtures", "--execute"]; io = IOBuffer(), err = execute_error) == 2
-    @test occursin("CLI is not enabled", String(take!(execute_error)))
+    @test occursin("unbounded corpus execution", String(take!(execute_error)))
 end
 
 @testset "Action AST parser" begin
@@ -3164,6 +3170,126 @@ Top::
         @test occursin("output mismatch", mismatch.failure)
         @test occursin("[\"expected\"]", mismatch.failure)
         @test corpus_fixture_passed(corpus_fixture_result(execution, "passing_after_failures"))
+    end
+
+    mktempdir() do root
+        _write_manifest(root, ["mismatched", "first", "second"])
+        _write_fixture(
+            root,
+            "mismatched";
+            spec_source = _returning_spec("actual"),
+            expected_json = "expected",
+        )
+        _write_fixture(
+            root,
+            "first";
+            spec_source = _returning_spec("first"),
+            expected_json = "first",
+        )
+        _write_fixture(
+            root,
+            "second";
+            spec_source = _returning_spec("second"),
+            expected_json = "second",
+        )
+
+        named = execute_corpus_fixtures(root; case_names = ["second", "first"])
+        @test corpus_execution_passed(named)
+        @test [result.name for result in named.results] == ["second", "first"]
+
+        bounded = execute_corpus_fixtures(root; offset = 1, limit = 1)
+        @test corpus_execution_passed(bounded)
+        @test [result.name for result in bounded.results] == ["first"]
+        capped = execute_corpus_fixtures(root; offset = 1, limit = 10)
+        @test [result.name for result in capped.results] == ["first", "second"]
+
+        @test _throws_corpus_message(
+            () -> execute_corpus_fixtures(root; case_names = ["missing"]),
+            "selected corpus case not found in manifest: missing",
+        )
+        @test _throws_corpus_message(
+            () -> execute_corpus_fixtures(root; case_names = ["first", "first"]),
+            "selection contains duplicate case name: first",
+        )
+        @test _throws_corpus_message(
+            () -> execute_corpus_fixtures(root; case_names = ["first"], limit = 1),
+            "case selection cannot be combined with offset or limit",
+        )
+        @test _throws_corpus_message(
+            () -> execute_corpus_fixtures(root; offset = -1),
+            "offset must be a non-negative integer",
+        )
+        @test _throws_corpus_message(
+            () -> execute_corpus_fixtures(root; limit = 0),
+            "limit must be a positive integer",
+        )
+        @test _throws_corpus_message(
+            () -> execute_corpus_fixtures(root; offset = 3),
+            "offset 3 is outside fixture count 3",
+        )
+
+        named_output = IOBuffer()
+        named_error = IOBuffer()
+        @test run_corpus_runner(
+            ["--corpus", root, "--execute", "--case", "second"];
+            io = named_output,
+            err = named_error,
+        ) == 0
+        named_text = String(take!(named_output))
+        @test occursin("PASS second", named_text)
+        @test occursin("1 passed, 0 failed", named_text)
+        @test !occursin("mismatched", named_text)
+        @test isempty(String(take!(named_error)))
+
+        bounded_output = IOBuffer()
+        @test run_corpus_runner(
+            ["--corpus=$root", "--execute", "--offset=1", "--limit=1"];
+            io = bounded_output,
+            err = IOBuffer(),
+        ) == 0
+        @test occursin("PASS first", String(take!(bounded_output)))
+
+        failure_output = IOBuffer()
+        @test run_corpus_runner(
+            ["--corpus", root, "--execute", "--case=mismatched"];
+            io = failure_output,
+            err = IOBuffer(),
+        ) == 1
+        failure_text = String(take!(failure_output))
+        @test occursin("FAIL mismatched: output mismatch", failure_text)
+        @test occursin("0 passed, 1 failed", failure_text)
+
+        unbounded_error = IOBuffer()
+        @test run_corpus_runner(
+            ["--corpus", root, "--execute"];
+            io = IOBuffer(),
+            err = unbounded_error,
+        ) == 2
+        @test occursin("unbounded corpus execution", String(take!(unbounded_error)))
+
+        validation_selector_error = IOBuffer()
+        @test run_corpus_runner(
+            ["--corpus", root, "--case", "first"];
+            io = IOBuffer(),
+            err = validation_selector_error,
+        ) == 2
+        @test occursin("require --execute", String(take!(validation_selector_error)))
+
+        invalid_limit_error = IOBuffer()
+        @test run_corpus_runner(
+            ["--corpus", root, "--execute", "--limit", "0"];
+            io = IOBuffer(),
+            err = invalid_limit_error,
+        ) == 2
+        @test occursin("--limit requires a positive integer", String(take!(invalid_limit_error)))
+
+        mixed_selector_error = IOBuffer()
+        @test run_corpus_runner(
+            ["--corpus", root, "--execute", "--case", "first", "--offset", "0"];
+            io = IOBuffer(),
+            err = mixed_selector_error,
+        ) == 2
+        @test occursin("cannot be combined", String(take!(mixed_selector_error)))
     end
 end
 

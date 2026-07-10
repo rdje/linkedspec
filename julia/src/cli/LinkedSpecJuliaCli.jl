@@ -4,7 +4,7 @@ function _print_main_help(io)
     println(io, "Usage:")
     println(io, "  linkedspec_julia --help")
     println(io, "  linkedspec_julia status")
-    println(io, "  linkedspec_julia corpus --corpus <path> [--execute]")
+    println(io, "  linkedspec_julia corpus --corpus <path> [--execute] [--case <name> ...] [--offset <n>] [--limit <n>]")
 end
 
 function _print_status(io)
