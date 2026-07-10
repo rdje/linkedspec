@@ -1,6 +1,6 @@
 ---
 id: terse-statement-separator-contract
-title: "SPEC-FORMAT-TERSE.1.5.4 — top-level DSL statements are separated by newlines or semicolons; same-line multiple statements require semicolons; nested semicolons stay protected."
+title: "SPEC-FORMAT-TERSE.1.5.4 — newlines separate top-level DSL statements; semicolons separate adjacent same-line statements; nested semicolons stay protected."
 answers:
   - "how are terse DSL statements separated"
   - "do newline separated helper statements work without semicolons"
@@ -21,10 +21,10 @@ reverify: "env PERL5LIB= prove -q -Iperl t/phase0_regression.t && cargo test --m
 Top-level helper statements in structured action/lifecycle blocks are separated by either:
 
 - a newline between statements, or
-- an explicit semicolon.
+- an explicit semicolon between adjacent statements on the same physical line.
 
-Multiple helper statements on one physical line still require semicolons. Plain spaces do not create a
-statement boundary.
+The semicolon is a separator, not a line terminator: `first(); second()` needs the middle semicolon, while the
+last statement does not need a trailing semicolon. Plain spaces do not create a statement boundary.
 
 ## Perl Lowering Detail
 

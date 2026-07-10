@@ -300,8 +300,10 @@ and match-state tracking. `.4.2` has added first compiled-rule dispatch, and `.4
 runtime mechanism. `.4.3.1` has added core scalar/array/hash stores, typed snapshots, assignments/access, checked
 nested writes, and capture maps/positions. `.4.3.2` has added string/scalar and numeric helpers, regex flags,
 aliases/symbol callees, invalid-input boundaries, and compatible receiver chains. `.4.3.3` has added copied array
-pipelines, split/flatten/reducer bridges, and statement-only end mutations. The active Julia frontier is `.4.3.4`
-for hash helper and mutation behavior. Future Julia and
+pipelines, split/flatten/reducer bridges, and statement-only end mutations. `.4.3.4` has added copied hash views
+and transformations, statement-only named set-key mutation, direct hash-index assignment, merge-slot resolution,
+and explicit flat-style splicing. The active Julia frontier is `.4.3.5` for value/control/block/callback execution.
+Future Julia and
 Lua backend plans must own their own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -398,7 +400,10 @@ no-autovivification nested writes, and entry/local capture maps/positions pass f
 implemented too: current string/scalar and numeric helpers share canonical function/receiver dispatch, retain
 regex flags, normalize JSON numbers, and return `nothing` for invalid arithmetic. `.4.3.3` is now implemented as
 well: copied array helper/receiver pipelines, regex and split bridges, explicit flatten splicing, numeric reducer
-terminals, typed split replacement, and statement-only end mutations pass focused tests. Later leaves own
+terminals, typed split replacement, and statement-only end mutations pass focused tests. `.4.3.4` is now
+implemented too: copied hash views and pure transformations, compatible receiver chains, statement-only named
+set-key mutation, direct hash-index assignment, merge-slot resolution, explicit flat-style splicing, and nested-map
+preservation pass focused tests. `.4.3.5` owns value/control/block/callback execution. Later leaves own
 cursor controls, staged parser execution, diagnostics/trace, and corpus execution.
 
 ### Dart Backend Commands

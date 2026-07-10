@@ -796,6 +796,16 @@ function _evaluate_runtime_call!(
     args = ActionExpr[getfield(arg, :value) for arg in call.args]
     helper_name = canonical_action_helper_name(call.name)
 
+    if statement_context && helper_name == "set_key" && _execute_runtime_set_key_statement!(
+            engine,
+            args,
+            context,
+            rule_label,
+            current_edge,
+        )
+        return nothing
+    end
+
     if helper_name == "return"
         value = isempty(args) ? nothing : _evaluate_runtime_action_expr!(
             engine,
@@ -935,7 +945,17 @@ function _evaluate_runtime_call!(
         return _runtime_copy(child.value)
     end
 
-    if helper_name in _RUNTIME_ARRAY_HELPER_NAMES
+    if helper_name in _RUNTIME_HASH_HELPER_NAMES
+        values = _evaluate_runtime_hash_helper_values(
+            engine,
+            helper_name,
+            args,
+            context,
+            rule_label,
+            current_edge,
+        )
+        return _call_runtime_hash_helper(helper_name, values)
+    elseif helper_name in _RUNTIME_ARRAY_HELPER_NAMES
         values = Any[
             _runtime_copy(_evaluate_runtime_action_expr!(
                 engine,
@@ -962,6 +982,34 @@ function _evaluate_runtime_call!(
     throw(RuntimeInterpreterException(
         "unsupported runtime helper '$(call.name)' in rule $rule_label",
     ))
+end
+
+function _evaluate_runtime_hash_helper_values(
+    engine,
+    helper_name,
+    args,
+    context,
+    rule_label,
+    current_edge,
+)
+    values = Any[]
+    for (index, arg) in enumerate(args)
+        if helper_name == "merge_hash" && index == 1
+            name = _runtime_variable_name(arg)
+            if name !== nothing
+                push!(values, _runtime_copy(get(context.variables, name, nothing)))
+                continue
+            end
+        end
+        push!(values, _runtime_copy(_evaluate_runtime_action_expr!(
+            engine,
+            arg,
+            context,
+            rule_label,
+            current_edge,
+        )))
+    end
+    return values
 end
 
 function _call_runtime_set!(engine, args, context, rule_label, current_edge)
@@ -1072,6 +1120,11 @@ function _call_runtime_array(engine, args, context, rule_label, current_edge)
         ))
         if _runtime_is_array_splice_argument(arg) && value isa AbstractVector
             append!(result, _runtime_as_array(value))
+        elseif _runtime_is_array_splice_argument(arg) && value isa AbstractDict
+            for (key, item) in pairs(value)
+                push!(result, _runtime_string(key))
+                push!(result, _runtime_copy(item))
+            end
         else
             push!(result, value)
         end
@@ -1091,24 +1144,27 @@ function _call_runtime_hash(engine, args, context, rule_label, current_edge)
         end
     end
 
+    values = Any[]
+    for arg in args
+        push!(values, _runtime_copy(_evaluate_runtime_action_expr!(
+            engine,
+            arg,
+            context,
+            rule_label,
+            current_edge,
+        )))
+    end
+
     result = Dict{String,Any}()
     index = 1
-    while index + 1 <= length(args)
-        key = _runtime_string(_evaluate_runtime_action_expr!(
-            engine,
-            args[index],
-            context,
-            rule_label,
-            current_edge,
-        ))
-        result[key] = _runtime_copy(_evaluate_runtime_action_expr!(
-            engine,
-            args[index + 1],
-            context,
-            rule_label,
-            current_edge,
-        ))
+    while index + 1 <= length(values)
+        result[_runtime_string(values[index])] = _runtime_copy(values[index + 1])
         index += 2
+    end
+    for (arg, value) in zip(args, values)
+        if _runtime_is_hash_splice_argument(arg) && value isa AbstractDict
+            merge!(result, _runtime_as_hash(value))
+        end
     end
     return result
 end
@@ -1189,6 +1245,19 @@ const _RUNTIME_ARRAY_HELPER_NAMES = Set{String}([
     "uppercase_each",
 ])
 
+const _RUNTIME_HASH_HELPER_NAMES = Set{String}([
+    "count_keys",
+    "drop_keys",
+    "flat_hash",
+    "has_key",
+    "merge_hash",
+    "pick_keys",
+    "rename_key",
+    "set_key",
+    "sorted_keys",
+    "sorted_values",
+])
+
 const _RUNTIME_ARRAY_END_MUTATION_NAMES = Set{String}([
     "pop_back",
     "pop_front",
@@ -1242,6 +1311,19 @@ function _evaluate_runtime_fluent_chain!(
                 current_edge;
                 require_nonempty = helper_name == "coalesce_nonempty",
             )
+            continue
+        elseif helper_name in _RUNTIME_HASH_HELPER_NAMES
+            values = Any[_runtime_copy(value)]
+            for arg in call.args
+                push!(values, _runtime_copy(_evaluate_runtime_action_expr!(
+                    engine,
+                    getfield(arg, :value),
+                    context,
+                    rule_label,
+                    current_edge,
+                )))
+            end
+            value = _call_runtime_hash_helper(helper_name, values)
             continue
         elseif helper_name in _RUNTIME_ARRAY_HELPER_NAMES
             values = Any[_runtime_copy(value)]
@@ -1361,6 +1443,49 @@ function _runtime_array_receiver_target_name(expr)
     return name === nothing ? _runtime_array_target_name(expr) : name
 end
 
+function _execute_runtime_set_key_statement!(
+    engine,
+    args,
+    context,
+    rule_label,
+    current_edge,
+)
+    effective_args = args
+    if length(effective_args) == 4 && _runtime_variable_name(first(effective_args)) !== nothing
+        effective_args = effective_args[2:end]
+    end
+    if length(effective_args) != 3
+        return false
+    end
+    target = _runtime_hash_receiver_target_name(first(effective_args))
+    if target === nothing || isempty(target)
+        return false
+    end
+    key = _runtime_string(_evaluate_runtime_action_expr!(
+        engine,
+        effective_args[2],
+        context,
+        rule_label,
+        current_edge,
+    ))
+    value = _runtime_copy(_evaluate_runtime_action_expr!(
+        engine,
+        effective_args[3],
+        context,
+        rule_label,
+        current_edge,
+    ))
+    delete!(context.variables, target)
+    delete!(context.arrays, target)
+    get!(context.hashes, target, Dict{String,Any}())[key] = value
+    return true
+end
+
+function _runtime_hash_receiver_target_name(expr)
+    name = _runtime_variable_name(expr)
+    return name === nothing ? _runtime_hash_target_name(expr) : name
+end
+
 function _mutate_runtime_array_storage!(mutator, context::_RuntimeExecutionContext, name::String)
     variable = get(context.variables, name, nothing)
     if variable isa AbstractVector
@@ -1415,9 +1540,18 @@ end
 
 function _runtime_is_array_splice_argument(expr)
     if expr isa ActionCallExpr
-        return canonical_action_helper_name(expr.name) in ("flat", "flat_array")
+        return canonical_action_helper_name(expr.name) in ("flat", "flat_array", "flat_hash")
     elseif expr isa ActionFluentChainExpr && !isempty(expr.calls)
-        return canonical_action_helper_name(last(expr.calls).method) in ("flat", "flat_array")
+        return canonical_action_helper_name(last(expr.calls).method) in ("flat", "flat_array", "flat_hash")
+    end
+    return false
+end
+
+function _runtime_is_hash_splice_argument(expr)
+    if expr isa ActionCallExpr
+        return canonical_action_helper_name(expr.name) in ("flat", "flat_hash")
+    elseif expr isa ActionFluentChainExpr && !isempty(expr.calls)
+        return canonical_action_helper_name(last(expr.calls).method) in ("flat", "flat_hash")
     end
     return false
 end
@@ -1506,6 +1640,8 @@ function _call_runtime_array_helper(helper_name::String, values::Vector{Any})
     elseif helper_name == "flat"
         if isempty(values)
             return Any[nothing]
+        elseif first(values) isa AbstractDict
+            return _runtime_as_hash(first(values))
         elseif first(values) isa AbstractVector
             return _runtime_as_array(first(values))
         end
@@ -1543,6 +1679,84 @@ function _call_runtime_array_helper(helper_name::String, values::Vector{Any})
         return _map_runtime_array_strings(values, uppercase)
     end
     throw(RuntimeInterpreterException("unsupported array runtime helper '$helper_name'"))
+end
+
+function _call_runtime_hash_helper(helper_name::String, values::Vector{Any})
+    if helper_name == "count_keys"
+        hash = _runtime_hash_items(values)
+        return hash === nothing ? 0 : length(hash)
+    elseif helper_name == "drop_keys"
+        hash = _runtime_hash_items(values)
+        if hash === nothing
+            return isempty(values) ? nothing : _runtime_copy(first(values))
+        end
+        dropped = Set(_runtime_string(value) for value in Iterators.drop(values, 1))
+        return Dict{String,Any}(
+            key => _runtime_copy(value) for (key, value) in pairs(hash) if !(key in dropped)
+        )
+    elseif helper_name == "flat_hash" || helper_name == "merge_hash"
+        merged = Dict{String,Any}()
+        for value in values
+            if value isa AbstractDict
+                merge!(merged, _runtime_as_hash(value))
+            end
+        end
+        return merged
+    elseif helper_name == "has_key"
+        hash = _runtime_hash_items(values)
+        return hash !== nothing && length(values) >= 2 && haskey(hash, _runtime_string(values[2]))
+    elseif helper_name == "pick_keys"
+        hash = _runtime_hash_items(values)
+        if hash === nothing
+            return nothing
+        end
+        picked = Set(_runtime_string(value) for value in Iterators.drop(values, 1))
+        return Dict{String,Any}(
+            key => _runtime_copy(value) for (key, value) in pairs(hash) if key in picked
+        )
+    elseif helper_name == "rename_key"
+        if length(values) < 3
+            return nothing
+        end
+        hash = _runtime_hash_items(values)
+        if hash === nothing
+            return _runtime_copy(first(values))
+        end
+        old_key = _runtime_string(values[2])
+        new_key = _runtime_string(values[3])
+        result = Dict{String,Any}()
+        for (key, value) in pairs(hash)
+            result[key == old_key ? new_key : key] = _runtime_copy(value)
+        end
+        return result
+    elseif helper_name == "set_key"
+        if length(values) < 3
+            return nothing
+        end
+        hash = _runtime_hash_items(values)
+        if hash === nothing
+            return _runtime_copy(first(values))
+        end
+        hash[_runtime_string(values[2])] = _runtime_copy(values[3])
+        return hash
+    elseif helper_name == "sorted_keys"
+        hash = _runtime_hash_items(values)
+        return hash === nothing ? Any[] : Any[sort!(collect(keys(hash)))...]
+    elseif helper_name == "sorted_values"
+        hash = _runtime_hash_items(values)
+        if hash === nothing
+            return Any[]
+        end
+        return Any[_runtime_copy(hash[key]) for key in sort!(collect(keys(hash)))]
+    end
+    throw(RuntimeInterpreterException("unsupported hash runtime helper '$helper_name'"))
+end
+
+function _runtime_hash_items(values)
+    if isempty(values) || !(first(values) isa AbstractDict)
+        return nothing
+    end
+    return _runtime_as_hash(first(values))
 end
 
 function _runtime_array_items(values)

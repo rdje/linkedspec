@@ -267,15 +267,18 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.4.3.3 - add Julia runtime array helpers`
 
 - ID: `JULIA-BACKEND-PARITY.4.3.4`
-  Status: `active`
+  Status: `done`
   Goal: Implement hash helper family and hash receiver/mutation behavior.
   Acceptance: Hash construction/flattening, copy, key/value views, merge/pick/drop/rename/set-key behavior, direct
     hash-index assignment values, and receiver chains match helper-catalog examples.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - one focused end-to-end runtime case covers copied key/value views, pure
+    merge/pick/drop/rename/set-key transformations, statement-only named hash mutation, direct hash-index
+    assignment values, explicit flat-style hash splicing, ordinary nested map preservation, merge-slot
+    resolution, and compatible hash/array receiver chains; full `Pkg.test()` passes with 559 assertions.
+  Commit: `JULIA-BACKEND-PARITY.4.3.4 - add Julia runtime hash helpers`
 
 - ID: `JULIA-BACKEND-PARITY.4.3.5`
-  Status: `pending`
+  Status: `active`
   Goal: Implement value blocks, structured action controls, trailing-block execution, and tree callbacks.
   Acceptance: Expression-valued blocks, attached/inline controls, helper/receiver `with`, and `walk_leaves` /
     `map_leaves` / `reduce_leaves` traversal callbacks match current Perl/Rust/Dart contracts.
@@ -406,7 +409,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.4.3.4` | `active` | Add hash-aware construction, views, pure transformations, statement mutation, flattening, and receiver chains over the stable value/helper model. |
+| 1 | `JULIA-BACKEND-PARITY.4.3.5` | `active` | Add expression-valued blocks, structured action controls, trailing-block execution, and tree callbacks over the stable helper/value model. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -807,6 +810,40 @@ Array helper evidence recorded on 2026-07-10:
   snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `MEMORY.md` advance the frontier
   to `.4.3.4`.
 
+## `JULIA-BACKEND-PARITY.4.3.4` Hash Helper Result
+
+Hash helper evidence recorded on 2026-07-10:
+
+- Function and receiver hash calls share a copied-value dispatcher for `count_keys`, sorted key/value views,
+  membership, merge, pick/drop, rename, pure `set_key`, and `flat_hash`.
+- A single statement-form `set_key(target, key, value)` mutates named typed hash storage. Function/receiver
+  value forms return changed copies and leave the source hash untouched.
+- `merge_hash` preserves the portable slot boundary: its base is an ordinary value expression, while later
+  overlay slots may resolve bare named hashes. Callers can make a typed base explicit with `copy(hash(name))`.
+- `hash(...)` splices maps only when an argument is explicitly marked by `flat(...)` or `flat_hash(...)`;
+  ordinary nested map values remain nested. Explicit map flattening into `array(...)` emits key/value pairs.
+- Direct `meta[key] = value` remains expression-valued and mutates the named hash through the `.4.3.1` checked
+  assignment path. Hash receiver chains can continue into compatible array helpers over copied views.
+- Package status advances to `runtime-hash-helpers`; value/control/block/callback execution advances to `.4.3.5`.
+
+## `JULIA-BACKEND-PARITY.4.3.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.4.3.3` supported array helper breadth, but hash helper names and hash receiver
+  methods still produced unsupported helper/method errors and statement-form `set_key` had no mutation path.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `julia/src/runtime/Interpreter.jl` had no hash helper dispatcher, hash
+  receiver routing, typed statement mutation gate, merge-slot argument policy, or explicit hash-splice handling.
+- [x] **FIX** — Added copied hash helper execution, compatible receiver chains, isolated statement-only named
+  mutation, base/overlay-aware merge evaluation, explicit flat/flat-hash constructor splicing, and map-to-array
+  flattening.
+- [x] **ADDRESSED (verified)** — One focused end-to-end case covers views, pure transforms, source immutability,
+  statement mutation, merge slot resolution, direct assignment, explicit splicing, and nested-map preservation.
+- [x] **NO REGRESSION** — Full Julia `Pkg.test()` passes with 559 assertions; CLI status reports
+  `runtime-hash-helpers`; commit-time docs/governance gates cover mdBook, memory, Knowledge Map, task metadata,
+  doctrine, and whitespace.
+- [x] **LOCKSTEP** — Julia README, task tree/index, roadmaps, mdBook status/handoff, Knowledge Map, architecture
+  snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `MEMORY.md` advance the frontier
+  to `.4.3.5`.
+
 ## `JULIA-BACKEND-PARITY.4.2` Runtime Rule Interpreter Result
 
 Rule-interpreter evidence recorded on 2026-07-10:
@@ -1006,6 +1043,9 @@ Rule-interpreter evidence recorded on 2026-07-10:
   owned by `.4.3.3`.
 - `2026-07-10`: `.4.3.3` preserves the statement/value boundary for destructive array end methods and uses
   explicit flat-result detection for constructor splicing; ordinary copied arrays remain nested values.
+- `2026-07-10`: `.4.3.4` preserves copied/pure hash helper semantics and isolates named typed mutation to
+  statement-form `set_key`. `merge_hash` resolves its base as an ordinary value expression and later overlays as
+  maybe-hash arguments; constructor splicing remains explicitly marked by `flat` / `flat_hash` syntax.
 
 ## Open Questions
 
@@ -1016,8 +1056,8 @@ Rule-interpreter evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.4.3.4`. Core values plus string/numeric/array helpers are green; hash-aware helper and receiver/
-  mutation behavior is the next owned implementation boundary.
+- None for `.4.3.5`. Core values plus string/numeric/array/hash helpers are green; value blocks, structured
+  controls, trailing blocks, and tree callbacks are the next owned implementation boundary.
 
 ## Verification Log
 
@@ -1041,6 +1081,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.1` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Four focused core-value cases prove typed stores and snapshots, variable-held aggregates, checked nested assignment, and capture maps/positions; total Julia tests pass with 554 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Two focused pure-helper cases prove string/scalar and numeric families, regex flags, aliases/symbol callees, failure-to-nothing, and receiver chains; total Julia tests pass with 556 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.3` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Two focused array cases prove pure pipelines, string/regex bridges, flatten/splice shape, numeric terminals, split replacement, statement-only mutations, and tagged records; total Julia tests pass with 558 assertions. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.4` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. One focused hash case proves copied views/transforms, pure and statement mutation boundaries, merge-slot resolution, direct assignment, explicit flatten splicing, and nested-map preservation; total Julia tests pass with 559 assertions. |
 
 ## Commit Log
 
@@ -1064,9 +1105,15 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.4.3.1` | `JULIA-BACKEND-PARITY.4.3.1 - add Julia runtime value capture helpers` | Core typed stores, structural assignment/access, snapshots, and entry/local capture helpers; string/numeric helpers advance to `.4.3.2`. |
 | `JULIA-BACKEND-PARITY.4.3.2` | `JULIA-BACKEND-PARITY.4.3.2 - add Julia runtime string numeric helpers` | Canonical string/scalar and numeric pure helpers plus compatible receiver chains; array-aware behavior advances to `.4.3.3`. |
 | `JULIA-BACKEND-PARITY.4.3.3` | `JULIA-BACKEND-PARITY.4.3.3 - add Julia runtime array helpers` | Pure array helper/receiver pipelines, flatten/splice and split bridges, reducer terminals, and statement-only end mutations; hashes advance to `.4.3.4`. |
+| `JULIA-BACKEND-PARITY.4.3.4` | `JULIA-BACKEND-PARITY.4.3.4 - add Julia runtime hash helpers` | Copied hash helper/receiver views and transformations, statement-only named set-key mutation, direct assignment integration, merge-slot resolution, and explicit hash splicing; controls/blocks/callbacks advance to `.4.3.5`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.4.3.4` hash helper execution. Julia now supports copied hash views and pure
+  merge/pick/drop/rename/set-key transformations, statement-form named typed set-key mutation, direct hash-index
+  assignment values, base/overlay-aware merge resolution, explicit flat-style hash splicing, ordinary nested-map
+  preservation, and compatible hash-to-array receiver chains. `Pkg.test()` passes with 559 assertions; `.4.3.5`
+  owns value/control/block/callback behavior.
 - `2026-07-10`: Completed `.4.3.3` array helper execution. Julia now supports copied array pipelines and receiver
   chains, string/regex/split bridges, flatten/concat and explicit constructor splicing, numeric reducer terminals,
   typed split replacement, and statement-only end mutations with value-position no-op behavior. `Pkg.test()`

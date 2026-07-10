@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.4.3.4 — Julia runtime hash helpers):
+  Hash calls now route through a copied-value dispatcher shared by function and receiver forms. Statement-form
+  `set_key` is the only new named-storage mutation path; value and receiver forms return changed copies. The
+  `merge_hash` base remains an ordinary expression slot, while later overlays use maybe-hash lookup, preserving
+  the established bare-aggregate boundary. `hash(...)` recognizes splicing from explicit `flat` / `flat_hash`
+  syntax rather than guessing from map-shaped values, so ordinary nested maps remain nested. The focused fixture
+  deliberately uses newline separators without redundant semicolons, matching the durable DSL separator contract.
+  `.4.3.5` can add blocks, controls, and callbacks over this stable copied/mutating boundary.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.4.3.3 — Julia runtime array helpers):
   Array calls now operate on copied snapshots through a dedicated dispatcher, with `join_values` explicitly
   rewriting receiver form to the delimiter-first canonical function contract. `array(...)` splices only values

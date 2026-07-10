@@ -38,7 +38,7 @@ The destructive end methods remain statement-only. A single statement
 method in a value position returns `nothing` without mutation, preserving the
 portable method-family boundary.
 
-Related facts: [[julia-runtime-string-numeric-helpers]],
+Related facts: [[julia-runtime-hash-helpers]], [[julia-runtime-string-numeric-helpers]],
 [[julia-runtime-core-value-capture-helpers]], [[dart-runtime-array-helpers]],
 [[terse-array-receiver-value-chains]], [[terse-array-end-mutation-methods]],
 [[array-helper-return-shape-caveats]].

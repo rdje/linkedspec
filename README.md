@@ -93,7 +93,9 @@ Top-level directories and files:
     entry/local capture maps/positions are implemented. Current string/scalar and numeric helpers, aliases/symbol
     callees, invalid-input boundaries, and compatible receiver chains are implemented too. Copied array pipelines,
     string/regex/split bridges, flattening, reducer terminals, and statement-only end mutations are now green.
-    Hash-aware helper and mutation behavior is the active `JULIA-BACKEND-PARITY.4.3.4` frontier.
+    Copied hash views/transforms, explicit hash splicing, direct assignment, and statement-only named set-key
+    mutation are now green. Value blocks, controls, trailing blocks, and tree callbacks are the active
+    `JULIA-BACKEND-PARITY.4.3.5` frontier.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

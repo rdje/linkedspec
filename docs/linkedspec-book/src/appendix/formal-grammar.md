@@ -326,9 +326,10 @@ Lifecycle markers are **semicolon-light structured authoring**: a marker followe
 attached-block `if` forms, attached `switch`, attached `while`, and inline-composite `if`/`switch` value
 expressions in supported value positions.
 Within structured blocks, newlines separate top-level helper statements implicitly.
-Semicolons remain accepted and are required when multiple top-level helper statements
-share one physical line. Plain same-line whitespace is not a statement separator, and
-semicolons inside nested expressions or literal payloads remain protected.
+A semicolon separates adjacent top-level helper statements that share one physical line;
+the final statement does not require a trailing semicolon. Plain same-line whitespace is
+not a statement separator, and semicolons inside nested expressions or literal payloads
+remain protected.
 Lifecycle blocks are not expression-valued blocks: ordinary final statement values are
 discarded, and only an explicit top-level `return(expr)` writes the rule return channel.
 
@@ -796,8 +797,8 @@ Top::
 Both forms lower to identical ActionIR and produce identical parser behavior.
 The choice is stylistic.
 In either form, structured block bodies use the same statement separator rule: newline
-between top-level helper statements is enough, while multiple helper statements on one
-physical line require semicolons.
+between top-level helper statements is enough, while adjacent helper statements on one
+physical line require a semicolon between them, not after the last statement.
 
 ## 9. Attached-Block Control Flow
 

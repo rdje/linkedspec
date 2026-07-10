@@ -116,10 +116,11 @@ source rule paragraph text
 
 `ActionIR::StatementSplit` splits action text into individual statements safe for independent lowering. This is important because a single action block can contain multiple helper calls (`set(...)`, `push(...)`, `return(...)`) that must be lowered separately.
 
-The separator contract is deliberately narrow: top-level semicolons split statements,
-and top-level newlines split helper statements when no semicolon is present. Multiple
-helper statements written on one physical line still need semicolons; plain spaces do not
-create a boundary. Nested semicolons inside expression payloads stay inside the payload.
+The separator contract is deliberately narrow: top-level newlines split helper statements,
+and a semicolon separates adjacent statements on one physical line. It is a separator, not
+a line terminator, so the last statement on that line needs no trailing semicolon. Plain
+spaces do not create a boundary. Nested semicolons inside expression payloads stay inside
+the payload.
 
 ### CanonicalEvents
 

@@ -185,7 +185,7 @@ const PACKAGE_NAME = "LinkedSpecJulia"
 const PACKAGE_VERSION = v"0.1.0"
 const CLI_ENTRYPOINT = "julia/bin/linkedspec_julia.jl"
 const CORPUS_RUNNER_ENTRYPOINT = "julia/bin/corpus_runner.jl"
-const PARITY_STATUS = "runtime-array-helpers"
+const PARITY_STATUS = "runtime-hash-helpers"
 
 include("corpus/CorpusManifest.jl")
 include("spec/Ast.jl")

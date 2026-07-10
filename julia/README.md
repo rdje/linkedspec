@@ -4,8 +4,8 @@ This directory is the repository-owned Julia backend scaffold. The current statu
 surface, manifest-backed corpus validation, source AST/data types, core `.spec` source parsing, frontend source
 validation, spec-shaped user-function shell projection, typed helper/action AST parsing, canonical ActionIR contract
 resolution, a user-function registry seam, compiled-spec state, runtime regex/match-state primitives, and first
-compiled-rule interpreter dispatch with core value/store/capture semantics: broader helper families and corpus
-execution are not implemented yet.
+compiled-rule interpreter dispatch with core value/store/capture semantics plus string/numeric, array, and hash
+helper families: value/control/block/callback breadth and corpus execution are not implemented yet.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -17,7 +17,8 @@ compiled-spec state was added by `JULIA-BACKEND-PARITY.3.4`. Runtime regex match
 added by `JULIA-BACKEND-PARITY.4.1`, and first executable rule dispatch was added by
 `JULIA-BACKEND-PARITY.4.2`. `JULIA-BACKEND-PARITY.4.3.0` split helper/value work by runtime mechanism. Core
 value/store/capture behavior landed in `.4.3.1`, and string/scalar plus numeric helpers landed in `.4.3.2`. The
-array helper and mutation boundary landed in `.4.3.3`; `.4.3.4` is active for hashes.
+array helper and mutation boundary landed in `.4.3.3`, and hash helper and mutation behavior landed in `.4.3.4`;
+`.4.3.5` is active for value/control/block/callback execution.
 
 ## Commands
 
@@ -97,6 +98,7 @@ predicates, lexical comparisons, aliases and symbol callees, reducers, invalid-i
 string/number receiver chains through one canonical dispatcher. `.4.3.3` through `.4.3.5` own array, hash, and
 control/block/callback breadth. `.4.3.3` now executes copied array pipelines, string/regex/split bridges,
 flatten/concat and explicit constructor splicing, numeric reducer terminals, typed split replacement, and
-statement-only named/scalar-held end mutations. `.4.3.4` and `.4.3.5` own hash and control/block/callback breadth,
-with `.4.3.6` owning no-drift closeout; cursor controls, staged parser
+statement-only named/scalar-held end mutations. `.4.3.4` now executes copied hash views and pure transformations,
+base/overlay-aware merge resolution, direct hash-index assignment, explicit flat-style splicing, and statement-only
+named set-key mutation. `.4.3.5` owns control/block/callback breadth, with `.4.3.6` owning no-drift closeout; cursor controls, staged parser
 execution, diagnostics, tracing, and corpus execution remain later leaves.

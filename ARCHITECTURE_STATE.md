@@ -5,11 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.3.4` adds copied Julia hash helper/receiver dispatch, pure
+  merge/pick/drop/rename/set-key transformations, statement-only named typed set-key mutation, direct hash-index
+  assignment integration, base/overlay-aware merge resolution, and explicit flat-style constructor splicing.
+  Ordinary map values stay nested. Package status is `runtime-hash-helpers`; `.4.3.5` owns value/control/block/
+  callback execution.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.3.3` adds a copied Julia array helper/receiver dispatcher,
   string/regex split and filter bridges, explicit flatten/constructor-splice semantics, numeric reducer terminals,
   typed split replacement, and isolated statement-only end mutation for named and scalar-held arrays.
-  Value-position end methods return `nothing` without mutation. Package status is `runtime-array-helpers`;
-  `.4.3.4` owns hashes.
+  Value-position end methods return `nothing` without mutation. At that leaf package status was
+  `runtime-array-helpers`; `.4.3.4` has since added hashes.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.3.2` adds a canonical Julia runtime pure-helper dispatcher.
   Current string/scalar transforms, predicates, regex operations, coalescing, definedness/emptiness, explicit
   lexical comparisons, numeric arithmetic/unary/reducers/comparisons, aliases and symbol callees, JSON-number

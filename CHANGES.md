@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.4.3.4 — add Julia runtime hash helpers
+
+**Scope:** Julia runtime hash helper/receiver dispatch, copied views and transformations, statement-only named
+mutation, direct hash-index assignment integration, merge-slot resolution, explicit flatten splicing, package
+status, focused runtime tests, README, task-tree frontier, roadmaps/index, mdBook status/handoff, Knowledge Map,
+architecture snapshot, live docs, and resume pointer.
+
+**Change:** Extended `julia/src/runtime/Interpreter.jl` with copied key/value views and pure
+merge/pick/drop/rename/set-key transformations, compatible hash-to-array receiver chains, statement-form named
+typed `set_key` mutation, base/overlay-aware `merge_hash` argument resolution, map-to-array flattening, and
+explicit `flat` / `flat_hash` splicing inside `hash(...)`. Ordinary nested maps remain nested, and the focused
+`.spec` proof uses canonical newline-separated statements without redundant semicolons. Package status now
+reports `runtime-hash-helpers`.
+
+**Validation:** `Pkg.test()` passes with 559 assertions, including one focused end-to-end hash case and all prior
+Julia coverage. Commit-time docs/governance validation covers mdBook, memory architecture, task-tree metadata,
+Knowledge Map, doctrine, and `git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.4.3.3 — add Julia runtime array helpers
 
 **Scope:** Julia runtime array helper/receiver dispatch, flatten/splice and split bridges, statement-only end

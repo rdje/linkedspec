@@ -107,16 +107,17 @@ top-level helper statements:
 }
 ```
 
-Semicolons remain valid, and they are required when multiple statements share one
-physical line:
+A semicolon separates adjacent statements when multiple statements share one physical
+line:
 
 ```text
 -> child { set(name, "field"); return(name) }
 ```
 
-Plain spaces between same-line helper calls are not statement separators. Semicolons
-inside nested expressions or literal payloads stay inside that expression and do not split
-the outer statement.
+The last statement on the line needs no trailing semicolon: `;` is a separator, not a
+terminator. Plain spaces between same-line helper calls are not statement separators.
+Semicolons inside nested expressions or literal payloads stay inside that expression and
+do not split the outer statement.
 
 ## Control-flow expression forms
 

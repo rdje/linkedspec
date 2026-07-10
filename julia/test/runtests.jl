@@ -292,7 +292,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-array-helpers"
+    @test status.parity == "runtime-hash-helpers"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -302,7 +302,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-array-helpers", String(take!(status_output)))
+    @test occursin("parity: runtime-hash-helpers", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1036,12 +1036,12 @@ end
 Top::
  /x/
  E {
-   set(value, "ok");
-   set(array(items), ["a"]);
-   items += value;
-   set(hash(meta), { "k" : "v" });
-   meta["n"] = 2;
-   payload = { "children" : [ { "name" : "zero" }, { "name" : value } ] };
+   set(value, "ok")
+   set(array(items), ["a"])
+   items += value
+   set(hash(meta), { "k" : "v" })
+   meta["n"] = 2
+   payload = { "children" : [ { "name" : "zero" }, { "name" : value } ] }
    return(hash(
      "scalar", value,
      "items", copy(array(items)),
@@ -1067,10 +1067,10 @@ Top::
 Top::
  /x/
  E {
-   value = "ok";
-   items = [value, "tail"];
-   meta = { "key" : value };
-   key = "key";
+   value = "ok"
+   items = [value, "tail"]
+   meta = { "key" : value }
+   key = "key"
    return(array(
      items[0],
      copy(items),
@@ -1094,8 +1094,8 @@ Top::
 Top::
  /x/
  E {
-   payload = { "items" : [{ "name" : "old" }] };
-   root_array = [{ "name" : "old" }];
+   payload = { "items" : [{ "name" : "old" }] }
+   root_array = [{ "name" : "old" }]
    return(array(
      payload["items"][0]["name"] = "new",
      payload["items"][1] = "tail",
@@ -1201,9 +1201,9 @@ end
 Top::
  /(.+)/
  E {
-   raw = entry_group(0);
-   set(array(tmp), ["x"]);
-   missing = tmp[5];
+   raw = entry_group(0)
+   set(array(tmp), ["x"])
+   missing = tmp[5]
    return(hash(
      "cat", cat("A", undef, "B"),
      "trim", trim(raw),
@@ -1263,10 +1263,10 @@ Top::
 Top::
  /x/
  E {
-   scores += 1;
-   scores += 5;
-   scores += 3;
-   scores += 5;
+   scores += 1
+   scores += 5
+   scores += 3
+   scores += 5
    return(hash(
      "symbol_add", +(2, *(3, 4)),
      "sub", sub(10, 3, 2),
@@ -1324,13 +1324,13 @@ end
 Top::
  /x/
  E {
-   items += "b";
-   items += "a";
-   items += "c";
-   items += "a";
-   phrases += "aa-b";
-   phrases += "cc-aa";
-   set(array(public), [" x ", "", "Y"]);
+   items += "b"
+   items += "a"
+   items += "c"
+   items += "a"
+   phrases += "aa-b"
+   phrases += "cc-aa"
+   set(array(public), [" x ", "", "Y"])
    return(hash(
      "sorted_drop_first", items.sorted().drop_front(2).first(),
      "reverse_take_last", array(items).reversed().take(2).last(),
@@ -1380,16 +1380,16 @@ Top::
 Top::
  /x/
  E {
-   raw = " left , right,,third ";
-   split(array(parts), raw, /\s*,\s*/);
-   items.push_back("a");
-   items.push_back("b");
-   items.push_front("z");
-   items.pop_back();
-   items.pop_front();
-   array(items).push_back("c");
-   scalar_items = ["s"];
-   scalar_items.push_back("t");
+   raw = " left , right,,third "
+   split(array(parts), raw, /\s*,\s*/)
+   items.push_back("a")
+   items.push_back("b")
+   items.push_front("z")
+   items.pop_back()
+   items.pop_front()
+   array(items).push_back("c")
+   scalar_items = ["s"]
+   scalar_items.push_back("t")
    return(hash(
      "parts", copy(array(parts)),
      "receiver_split", "a, b".split(/\s*,\s*/),
@@ -1409,6 +1409,76 @@ Top::
         "value_push" => nothing,
         "after_value_push" => Any["a", "c"],
         "tagged" => Any[Any["?tag:", "a", "field"], Any["?tag:", "b", "field"]],
+    )
+end
+
+@testset "Runtime hash helpers and mutations" begin
+    engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+Top::
+ /x/
+ E {
+   set_key(meta, "b", 2)
+   set_key(meta, "a", 1)
+   set_key(meta, "drop", 0)
+   set_key(hash(meta), "stmt_hash", 4)
+   set_key(overlay, "a", 10)
+   set_key(overlay, "c", 3)
+   value_set = set_key(meta, "value_only", 9)
+   receiver_set = meta.set_key("receiver_only", 5)
+   return(hash(
+     "keys", meta.sorted_keys().join_values(","),
+     "values", meta.sorted_values().join_values("|"),
+     "count", meta.count_keys(),
+     "has_a", meta.has_key("a"),
+     "drop_pick", meta.drop_keys("drop").pick_keys("a", "stmt_hash").sorted_values(),
+     "rename", hash(meta).rename_key("a", "aa").drop_keys("drop").set_key("z", 7).sorted_keys().join_values(","),
+     "merged", merge_hash(copy(hash(meta)), overlay).sorted_values(),
+     "bare_first_merge", merge_hash(meta, overlay).sorted_keys(),
+     "value_set_has", value_set.has_key("value_only"),
+     "receiver_set_has", receiver_set.has_key("receiver_only"),
+     "after_value_set", copy(hash(meta)).has_key("value_only"),
+     "after_receiver_set", copy(hash(meta)).has_key("receiver_only"),
+     "index_value", meta["expr"] = "E",
+     "after_index_value", copy(hash(meta)).has_key("expr"),
+     "flat_splice", hash("z", 0, flat(hash(meta))).sorted_keys().join_values(","),
+     "flat_hash_splice", hash("z", 0, meta.flat_hash()).sorted_keys().join_values(","),
+     "map_field", hash("nested", copy(hash(meta))).pick_keys("nested")
+   ))
+ }
+""")))
+
+    @test runtime_parse(engine, "x").value == Dict{String,Any}(
+        "keys" => "a,b,drop,stmt_hash",
+        "values" => "1|2|0|4",
+        "count" => 4,
+        "has_a" => true,
+        "drop_pick" => Any[1, 4],
+        "rename" => "aa,b,stmt_hash,z",
+        "merged" => Any[10, 2, 3, 0, 4],
+        "bare_first_merge" => Any["a", "c"],
+        "value_set_has" => true,
+        "receiver_set_has" => true,
+        "after_value_set" => false,
+        "after_receiver_set" => false,
+        "index_value" => Dict{String,Any}(
+            "b" => 2,
+            "a" => 1,
+            "drop" => 0,
+            "stmt_hash" => 4,
+            "expr" => "E",
+        ),
+        "after_index_value" => true,
+        "flat_splice" => "a,b,drop,expr,stmt_hash,z",
+        "flat_hash_splice" => "a,b,drop,expr,stmt_hash,z",
+        "map_field" => Dict{String,Any}(
+            "nested" => Dict{String,Any}(
+                "b" => 2,
+                "a" => 1,
+                "drop" => 0,
+                "stmt_hash" => 4,
+                "expr" => "E",
+            ),
+        ),
     )
 end
 
