@@ -210,8 +210,9 @@ result = runtime_execute(LinkedSpecRuntimeEngine(compiled), "x"; trace = trace)
 ```
 
 The focused proof adds 28 assertions for success/failure events, routed output,
-disabled quietness, and traced/untraced identity. The complete Julia package
-suite passes with 868 assertions and the focused corpus gate remains 99/99.
+disabled quietness, and traced/untraced identity. At that leaf the complete Julia
+package suite passed with 868 assertions and the focused corpus gate remained 99/99;
+later CLI-preparation tests bring the current total to 920 without trace or corpus drift.
 
 ## Future variant trace parity checklist
 

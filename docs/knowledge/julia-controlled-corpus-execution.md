@@ -15,7 +15,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, corpus, runtime, diagnostics, trace, user-functions, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.1 adds execution/result/query APIs, .6.2.5 adds spec-driven function shells, and .6.3 permanently runs the complete manifest at 99/99. JULIA-BACKEND-PARITY.7.3.2.1 re-proves 99/99 with the current 868-assertion suite and status runtime-corpus-full."
+evidence: "JULIA-BACKEND-PARITY.6.1 adds execution/result/query APIs, .6.2.5 adds function shells, and .6.3 permanently runs 99/99. JULIA-BACKEND-PARITY.7.3.2.2 re-proves 99/99 with the current 920-assertion suite and status runtime-corpus-full."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 

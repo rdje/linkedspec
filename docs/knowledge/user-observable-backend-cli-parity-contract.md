@@ -14,7 +14,7 @@ answers:
 date: 2026-07-10
 status: accepted
 tags: [cli, parity, public-api, backends, ADR-0023, FUTURE-PARITY-BACKLOG]
-evidence: "ADR 0023 defines the canonical primary CLI and complete capability parity. FUTURE-PARITY-BACKLOG.1.5 owns CLI repair, .1.6 capability census, and .3 generated-source parity. Julia .7.3.2.1 closes trace prerequisites; .7.3.2.2 is active for arguments/source/input."
+evidence: "ADR 0023 defines canonical CLI and complete capability parity. FUTURE-PARITY-BACKLOG.1.5/.1.6/.3 own global repair/census/codegen. Julia .7.3.2.1 closes trace and .7.3.2.2 closes exact arguments/resolution/loading; .7.3.2.3 is active for execution/JSON."
 reverify: "sed -n '1,260p' docs/decisions/0023-user-observable-backend-and-cli-parity.md; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5|FUTURE-PARITY-BACKLOG\.1\.6|FUTURE-PARITY-BACKLOG\.3|JULIA-BACKEND-PARITY\.7\.3\.2\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/tasks/JULIA-BACKEND-PARITY.md"
 ---
 
@@ -39,8 +39,10 @@ status across variants. Corpus runners and status tools remain separate develope
 capability census, and `.3` owns generated-source parity. Because Rust publicly exports `source_emitter`, generated
 source is required before another active backend can claim complete user-visible parity, even though interpreter
 corpus execution remains the primary correctness oracle. Julia `.7.3.2.1` closes the missing parser/compiler/
-function-shell/staged trace meaning required by the shared trace options; `.7.3.2.2` is active next.
+function-shell/staged trace meaning required by the shared trace options. `.7.3.2.2` closes exact options and
+loading; `.7.3.2.3` is active for execution/canonical JSON.
 
 Related facts: [[cross-backend-cli-contract-gap]], [[variant-specific-cli-requirement]],
 [[native-in-memory-backend-contract]], [[julia-generated-source-deferred]], [[rust-source-emitter-lane-split]].
 See also [[julia-primary-cli-mechanism-audit]].
+Julia preparation detail: [[julia-primary-cli-arguments-resolution-loading]].

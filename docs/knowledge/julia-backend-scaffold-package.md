@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: accepted
 tags: [julia, backend, scaffold, cli, corpus]
-evidence: "The repo-owned julia package exposes native parse/compile/runtime APIs, variant CLI and corpus runner. JULIA-BACKEND-PARITY.6.3 locks 99/99, .6.4 adds tools/run_julia_local.sh, .7.1 closes usage docs, and .7.3.2.1 extends native tracing. Current tests pass with 868 assertions and status runtime-corpus-full."
+evidence: "The repo-owned julia package exposes native APIs, primary CLI and separate corpus runner. .6.3 locks 99/99, .7.3.2.1 extends tracing, and .7.3.2.2 adds exact CLI preparation. Current tests pass with 920 assertions and status runtime-corpus-full."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
 ---
 

@@ -69,11 +69,11 @@ the same language-neutral fixtures for every backend.
 
 This is a contract and active convergence target, not a claim that every current executable
     already passes. The current gap census is: Perl is parser-oriented but still needs the neutral
-    fixture lock; Rust has no primary binary; Dart and Julia currently use corpus/status-oriented
-    primary commands. `FUTURE-PARITY-BACKLOG.1.5` owns convergence. Julia's repair is split under
+    fixture lock; Rust has no primary binary; Dart remains corpus/status-oriented; Julia now accepts and prepares
+    the exact parser options but does not yet execute them. `FUTURE-PARITY-BACKLOG.1.5` owns convergence. Julia's repair is split under
     `JULIA-BACKEND-PARITY.7.3.2`; `.7.3.2.1` now closes compile/parser/function-shell/staged trace coverage,
-    and `.7.3.2.2` is active for exact argument/source/input handling before execution/JSON,
-    failure/routing, and direct-command conformance leaves.
+    `.7.3.2.2` closes exact argument/source/input handling, and `.7.3.2.3` is active for execution/JSON before
+    failure/routing and direct-command conformance leaves.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics
@@ -422,15 +422,16 @@ implementing the same cross-variant command interface.
 ### Julia Backend Commands, Embedding, and Status
 
 Julia is green at the accepted interpreter-first boundary: the complete validated corpus executes 99/99 with
-exact checked-in output, full package tests pass with 868 assertions, and package/CLI status is
+exact checked-in output, full package tests pass with 920 assertions, and package/CLI status is
 `runtime-corpus-full`. The primary product surface is the native `LinkedSpecJulia` module; the Julia CLI and corpus
 runner are thin adapters over the same in-process parser/compiler/runtime path.
 
-The current Julia primary command exposes help/status/corpus operations, not the parser-oriented interface of
-Perl `bin/linkedspec`. `JULIA-BACKEND-PARITY.7.3.0` records that user-visible drift and also confirms that Dart is
-corpus-oriented and Rust currently has no binary target. `.7.3.1` ratifies ADR `0023` and routes repairs;
-`.7.3.2.0` splits Julia implementation by mechanism, `.7.3.2.1` closes tracing prerequisites, and `.7.3.2.2` is
-active for exact arguments and source/input loading. 99/99 corpus success does not erase the remaining interface gap.
+The Julia primary command now exposes ADR `0023`'s parser-oriented help and accepts only its exact source/input/
+parser/trace flags. It rejects `status`, `corpus`, and all positional arguments with usage exit `2`; corpus work
+remains in the separate runner. Named specs resolve through exact current path, current `NAME.spec`, repository
+`specs/NAME.spec`, then deterministic authored fallback. File and inline content is loaded exactly. Valid prepared
+requests currently stop with exit `1` at the owned execution boundary. `.7.3.2.1` closes tracing prerequisites,
+`.7.3.2.2` closes argument/loading preparation, and `.7.3.2.3` is active for native execution/canonical JSON.
 
 The boundary does not claim generated Julia source or the exact primary CLI yet. `.7.2` deliberately
 defers generated Julia source to the split future source-emitter lane under `FUTURE-PARITY-BACKLOG.3`; Julia
@@ -458,7 +459,8 @@ Run the complete focused Julia gate from the repository root:
 bash tools/run_julia_local.sh
 ```
 
-It covers package tests, Julia CLI help/status, corpus-runner help, and full 99/99 corpus execution. The shared
+It covers package tests, primary CLI help and retired-subcommand rejection, corpus-runner help, and full 99/99
+corpus execution. The shared
 core gate remains SDK-independent unless explicitly opted in:
 
 ```bash
@@ -502,11 +504,14 @@ The direct command surface is:
 julia --project=julia -e 'import Pkg; Pkg.instantiate()'
 julia --project=julia -e 'import Pkg; Pkg.test()'
 julia --project=julia julia/bin/linkedspec_julia.jl --help
-julia --project=julia julia/bin/linkedspec_julia.jl status
-julia --project=julia julia/bin/linkedspec_julia.jl corpus --corpus rust/linkedspec-runtime/tests/corpus
+julia --project=julia julia/bin/linkedspec_julia.jl --inline-spec 'Top:: /x/' --input x
 julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus
 julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute
 ```
+
+The shown primary parse invocation currently validates and prepares the request, then exits `1` at the active
+`.7.3.2.3` boundary; it will become executable in that leaf. This statement prevents the target help/output
+contract from being mistaken for already completed behavior.
 
 The corpus commands validate `manifest.json`, case-count/name shape, missing/stale fixture directories, required
 `input.spec` / `input.txt` / `expected.json` files, and expected JSON syntax over the checked-in 99-fixture corpus.

@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.2.2 — align Julia CLI arguments and loading**
+  (DONE — exact preparation is green; `.7.3.2.3` is active for execution/JSON).
+
+  **Change:** The primary module now accepts only ADR `0023` source/input/parser/trace/help flags, rejects old
+  subcommands and all positionals, resolves named specs through deterministic current/repository/fallback order,
+  and loads exact file/inline source and input. The corpus runner remains separate.
+
+  **Proof:** Fifty focused assertions, the full 920-assertion suite, direct help/subcommand-rejection checks, and
+  all 99 exact corpus outputs pass. Valid requests intentionally stop at the next owned execution boundary.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.7.3.2.1 — trace Julia frontend compiler and staged dispatch**
   (DONE — complete native trace propagation is green; `.7.3.2.2` is active).
 

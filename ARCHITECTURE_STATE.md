@@ -5,12 +5,18 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.2.2` replaces Julia's rollout-era primary `status`/`corpus`
+  dispatch with ADR `0023`'s exact option and preparation model. It rejects subcommands/positionals with usage `2`,
+  validates selector/mode/trace contracts, resolves named specs through current path/current `.spec`/repository
+  `specs`/sorted authored fallback precedence, and preserves exact file/inline source and input. Corpus tooling is
+  separate. Fifty focused assertions, the 920-assertion suite, direct CLI checks, and 99/99 pass. Prepared valid
+  requests stop at the owned execution boundary; `.7.3.2.3` is active for native execution/canonical JSON.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.2.1` closes the trace prerequisite for Julia's exact primary
   CLI. One optional caller-owned `LinkedSpecTraceEmitter` now propagates through source parsing, every validation
   pass, compiled-state construction, spec-driven function-shell parse/projection/runtime execution, and staged
   normalize/queue/resolve/load/compile/execute. Existing levels and stdout/route/mirror/reset sinks remain the sole
   mechanism; omitted/disabled emitters stay quiet. Twenty-eight focused assertions, the full 868-assertion suite,
-  CLI smokes, and 99/99 corpus gate pass. `.7.3.2.2` is active for exact arguments/source/input loading.
+  CLI smokes, and 99/99 corpus gate pass. `.7.3.2.2` has since closed exact arguments/source/input loading.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.2.0` splits Julia primary CLI repair after source audit. Native
   rule/staged parsing, compile/runtime, diagnostics, and runtime trace sinks exist; missing mechanisms are compile/
   parser/staged trace (`.1`, now done), exact arguments/resolution (`.2`, active), execution/canonical JSON (`.3`), normalized

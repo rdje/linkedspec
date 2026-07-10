@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.2.2 — align Julia CLI arguments and loading
+
+**Scope:** Exact Julia primary option model, selector/mode/trace validation, subcommand/positional rejection,
+named/current/repository spec resolution, file/inline loading, focused tests, focused-gate adaptation, and docs.
+
+**Implementation:** `LinkedSpecJuliaCli.jl` now prepares typed requests from only ADR `0023` flags. Named specs
+resolve exact current path, current `NAME.spec`, repository `specs/NAME.spec`, then deterministic authored fallback;
+explicit paths/names do not fall through. Source/input files preserve exact text. The old primary `status`/`corpus`
+commands are rejected with usage `2`, while `corpus_runner.jl` remains the developer adapter.
+
+**Verification:** Fifty focused assertions cover all flags, aliases/numerics, exclusivity/errors, resolution order,
+fallback pruning, exact contents, and load failures. `tools/run_julia_local.sh` passes 920 assertions, direct CLI
+help/subcommand rejection, and 99/99. Valid prepared requests intentionally defer execution/JSON to `.7.3.2.3`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.2.1 — trace Julia frontend compiler and staged dispatch
 
 **Scope:** Julia trace propagation through source parse, validation, compiled-state construction, spec-driven

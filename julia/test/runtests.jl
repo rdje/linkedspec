@@ -352,13 +352,16 @@ end
     cli_error = IOBuffer()
     @test run_cli(["--help"]; io = cli_output, err = cli_error) == 0
     cli_text = String(take!(cli_output))
-    @test occursin("LinkedSpec Julia backend", cli_text)
-    @test occursin("--case <name>", cli_text)
+    @test occursin("linkedspec_julia --spec NAME --input TEXT", cli_text)
+    @test occursin("--inline-spec TEXT", cli_text)
+    @test !occursin("--case <name>", cli_text)
     @test isempty(String(take!(cli_error)))
 
     status_output = IOBuffer()
-    @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-corpus-full", String(take!(status_output)))
+    status_error = IOBuffer()
+    @test run_cli(["status"]; io = status_output, err = status_error) == 2
+    @test isempty(String(take!(status_output)))
+    @test occursin("unexpected positional argument 'status'", String(take!(status_error)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -372,6 +375,237 @@ end
     help_output = IOBuffer()
     @test run_corpus_runner(["--help"]; io = help_output, err = IOBuffer()) == 0
     @test occursin("runs the complete corpus", String(take!(help_output)))
+end
+
+@testset "Primary CLI arguments resolution and loading" begin
+    function usage_failure(args, needle)
+        output = IOBuffer()
+        error_output = IOBuffer()
+        status = run_cli(args; io = output, err = error_output)
+        return status == 2 &&
+            isempty(String(take!(output))) &&
+            occursin(needle, String(take!(error_output)))
+    end
+
+    function preparation_error(options; cwd = pwd(), repo_root = REPO_ROOT)
+        try
+            LinkedSpecJulia._prepare_primary_cli_request(
+                options;
+                cwd = cwd,
+                repo_root = repo_root,
+            )
+        catch error
+            return error
+        end
+        return nothing
+    end
+
+    inline_options = LinkedSpecJulia._parse_primary_cli_args([
+        "--input=x",
+        "--inline-spec=Top:: /x/",
+        "--top-rule",
+        "Top",
+        "--parse-mode",
+        "consume",
+        "--trace",
+        "DEBUG",
+        "--trace-file",
+        "trace.log",
+        "--trace-mode",
+        "route",
+        "--trace-reset",
+        "--trace-emoji",
+    ])
+    @test inline_options.inline_spec == "Top:: /x/"
+    @test inline_options.input == "x"
+    @test inline_options.top_rule == "Top"
+    @test inline_options.parse_mode == "consume"
+    @test inline_options.trace_level == "DEBUG"
+    @test inline_options.trace_file == "trace.log"
+    @test inline_options.trace_mode == "route"
+    @test inline_options.trace_reset
+    @test inline_options.trace_emoji
+    @test all(
+        level -> LinkedSpecJulia._parse_primary_cli_args([
+            "--inline-spec",
+            "Top:: /x/",
+            "--input",
+            "x",
+            "--trace",
+            level,
+        ]).trace_level == level,
+        ("none", "quiet", "low", "medium", "med", "high", "full", "debug", "verbose", "350", "-1"),
+    )
+
+    repeated = LinkedSpecJulia._parse_primary_cli_args([
+        "--inline-spec",
+        "first",
+        "--inline-spec",
+        "second",
+        "--input",
+        "value",
+    ])
+    @test repeated.inline_spec == "second"
+
+    @test usage_failure(String[], "choose exactly one source option")
+    @test usage_failure(["status"], "unexpected positional argument 'status'")
+    @test usage_failure(["corpus"], "unexpected positional argument 'corpus'")
+    @test usage_failure(["--unknown"], "unknown option '--unknown'")
+    @test usage_failure(["--inline-spec", "Top:: /x/"], "choose exactly one input option")
+    @test usage_failure(
+        ["--inline-spec", "Top:: /x/", "--spec", "Lispish", "--input", "x"],
+        "choose exactly one source option",
+    )
+    @test usage_failure(
+        ["--inline-spec", "Top:: /x/", "--input", "x", "--input-file", "input.txt"],
+        "choose exactly one input option",
+    )
+    @test usage_failure(
+        ["--inline-spec", "Top:: /x/", "--input", "x", "--parse-mode", "scan"],
+        "--parse-mode must be 'seek' or 'consume'",
+    )
+    @test usage_failure(
+        ["--inline-spec", "Top:: /x/", "--input", "x", "--trace", "loud"],
+        "--trace has an unsupported level 'loud'",
+    )
+    @test usage_failure(
+        ["--inline-spec", "Top:: /x/", "--input", "x", "--trace", "off"],
+        "--trace has an unsupported level 'off'",
+    )
+    @test usage_failure(
+        ["--inline-spec", "Top:: /x/", "--input", "x", "--trace-mode", "both"],
+        "--trace-mode must be 'stdout', 'route', or 'mirror'",
+    )
+    @test usage_failure(["--spec"], "--spec requires a value")
+    @test usage_failure(["--help=1"], "--help does not accept a value")
+    @test usage_failure(["--trace-reset=yes"], "--trace-reset does not accept a value")
+
+    named_options = LinkedSpecJulia._parse_primary_cli_args([
+        "--spec",
+        "Lispish",
+        "--input",
+        "(hello world)",
+    ])
+    named_request = LinkedSpecJulia._prepare_primary_cli_request(named_options)
+    @test named_request.spec_path == joinpath(REPO_ROOT, "specs", "Lispish.spec")
+    @test named_request.spec_source == read(named_request.spec_path, String)
+    @test named_request.spec_name == "Lispish"
+    @test named_request.input == "(hello world)"
+    @test named_request.input_path === nothing
+
+    inline_request = LinkedSpecJulia._prepare_primary_cli_request(inline_options)
+    @test inline_request.spec_source == "Top:: /x/"
+    @test inline_request.spec_name == "<inline>"
+    @test inline_request.spec_path === nothing
+    @test inline_request.input == "x"
+
+    mktempdir() do directory
+        spec_source = "Top::\n /loaded/\n"
+        input_source = "loaded input\n"
+        write(joinpath(directory, "demo.spec"), spec_source)
+        write(joinpath(directory, "demo.txt"), input_source)
+
+        file_options = LinkedSpecJulia._parse_primary_cli_args([
+            "--spec-file",
+            "demo.spec",
+            "--input-file",
+            "demo.txt",
+        ])
+        file_request = LinkedSpecJulia._prepare_primary_cli_request(
+            file_options;
+            cwd = directory,
+            repo_root = REPO_ROOT,
+        )
+        @test file_request.spec_source == spec_source
+        @test file_request.spec_path == joinpath(directory, "demo.spec")
+        @test file_request.input == input_source
+        @test file_request.input_path == joinpath(directory, "demo.txt")
+
+        write(joinpath(directory, "choice"), "exact")
+        write(joinpath(directory, "choice.spec"), "with extension")
+        @test LinkedSpecJulia._resolve_named_spec_path(
+            "choice";
+            cwd = directory,
+            repo_root = REPO_ROOT,
+        ) == joinpath(directory, "choice")
+
+        directory_error = preparation_error(
+            LinkedSpecJulia._parse_primary_cli_args([
+                "--spec-file",
+                directory,
+                "--input",
+                "x",
+            ]),
+        )
+        @test directory_error isa LinkedSpecJulia._PrimaryCliLoadException
+        @test occursin("spec file is not a file", sprint(showerror, directory_error))
+    end
+
+    mktempdir() do repository
+        mkpath(joinpath(repository, "specs"))
+        mkpath(joinpath(repository, "authored", "nested"))
+        mkpath(joinpath(repository, "target", "generated"))
+        write(joinpath(repository, "specs", "Priority.spec"), "repo specs")
+        write(joinpath(repository, "authored", "Priority.spec"), "fallback")
+        write(joinpath(repository, "authored", "nested", "Fallback.spec"), "nested")
+        write(joinpath(repository, "target", "generated", "Pruned.spec"), "generated")
+
+        @test LinkedSpecJulia._resolve_named_spec_path(
+            "Priority";
+            cwd = repository,
+            repo_root = repository,
+        ) == joinpath(repository, "specs", "Priority.spec")
+        @test LinkedSpecJulia._resolve_named_spec_path(
+            "Fallback";
+            cwd = repository,
+            repo_root = repository,
+        ) == joinpath(repository, "authored", "nested", "Fallback.spec")
+        fallback_error = try
+            LinkedSpecJulia._resolve_named_spec_path(
+                "Pruned";
+                cwd = repository,
+                repo_root = repository,
+            )
+            nothing
+        catch error
+            error
+        end
+        @test fallback_error isa LinkedSpecJulia._PrimaryCliLoadException
+
+        explicit_error = try
+            LinkedSpecJulia._resolve_named_spec_path(
+                "Fallback.spec";
+                cwd = repository,
+                repo_root = repository,
+            )
+            nothing
+        catch error
+            error
+        end
+        @test explicit_error isa LinkedSpecJulia._PrimaryCliLoadException
+    end
+
+    missing_input = preparation_error(LinkedSpecJulia._parse_primary_cli_args([
+        "--inline-spec",
+        "Top:: /x/",
+        "--input-file",
+        "definitely-missing-input.txt",
+    ]))
+    @test missing_input isa LinkedSpecJulia._PrimaryCliLoadException
+    @test occursin("input file not found", sprint(showerror, missing_input))
+
+    prepared_output = IOBuffer()
+    prepared_error = IOBuffer()
+    @test run_cli(
+        ["--inline-spec", "Top:: /x/", "--input", "x"];
+        io = prepared_output,
+        err = prepared_error,
+    ) == 1
+    @test isempty(String(take!(prepared_output)))
+    @test occursin(
+        "parser execution is not connected in this active implementation slice",
+        String(take!(prepared_error)),
+    )
 end
 
 @testset "Action AST parser" begin

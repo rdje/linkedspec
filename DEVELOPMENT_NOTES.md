@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.7.3.2.2 — CLI preparation is a typed boundary, not execution glue):
+  Strict argument parsing and IO resolution are independently testable before parser execution. One preparation
+  record preserves the original controls plus exact source/input text and identities, so the next leaf can compose
+  the native pipeline without reparsing arguments. Named resolution must be deterministic: exact current path,
+  current extension, repository `specs`, then sorted authored fallback; explicit names never silently fall through.
+  Keeping corpus/status utilities outside the primary module prevents backend rollout tooling from becoming API.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.7.3.2.1 — propagate one trace emitter, do not build traced variants):
   Parser/compiler observability stays output-safe when normal APIs accept an optional caller-owned emitter and
   nested phases propagate it. A second traced parser/compiler would inevitably drift. Loading the existing trace

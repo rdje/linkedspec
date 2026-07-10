@@ -144,7 +144,8 @@ Top-level directories and files:
     `.7.3.1` ratifies ADR `0023`: complete user-observable capability identity plus one exact primary CLI contract.
     `.7.3.2.0` splits Julia alignment into trace, arguments/IO, execution/JSON, error/routing, and conformance;
     `.7.3.2.1` now propagates the existing emitter through compile/parser/function-shell/staged phases with 868
-    assertions and 99/99 green. `.7.3.2.2` is active for exact arguments and source/input loading. Global repair/
+    assertions and 99/99 green. `.7.3.2.2` now locks exact arguments, subcommand/positional rejection, deterministic
+    named resolution, and source/input loading at 920 assertions; `.7.3.2.3` is active for execution/JSON. Global repair/
     census/codegen remain `.1.5`/`.1.6`/`.3`.
 - `.github/workflows/`
   - GitHub Actions automation.

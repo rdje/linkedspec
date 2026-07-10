@@ -12,7 +12,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, trace, runtime, diagnostics, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.4.5.2 adds trace controls/sinks and runtime emitter plumbing. JULIA-BACKEND-PARITY.7.3.2.1 reuses that same emitter across frontend, compiler, function-shell, and staged entrypoints; 28 focused additions and the full 868-assertion/99-fixture gate prove routing, quietness, and result identity."
+evidence: "JULIA-BACKEND-PARITY.4.5.2 adds trace controls/sinks. JULIA-BACKEND-PARITY.7.3.2.1 reuses the emitter across frontend/compiler/function-shell/staged entrypoints; 28 focused additions and its 868-assertion/99-fixture gate prove routing, quietness, and result identity."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 

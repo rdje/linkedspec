@@ -10,7 +10,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, parser, user-functions, staged-parsing, backend]
-evidence: "JULIA-BACKEND-PARITY.2.4 adds neutral projection, .6.2.5 adds source-driven execution, and .6.3 includes it in 99/99. JULIA-BACKEND-PARITY.7.3.2.1 adds shared-emitter tracing and re-proves the path in the current 868-assertion/99-fixture gate."
+evidence: "JULIA-BACKEND-PARITY.2.4 adds neutral projection, .6.2.5 adds source-driven execution, and .6.3 includes it in 99/99. .7.3.2.1 adds tracing and .7.3.2.2 re-proves the path in the current 920-assertion/99-fixture gate."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
 ---
 

@@ -28,7 +28,11 @@ log "running Julia package tests"
 
 log "checking Julia CLIs"
 "$JULIA_CMD" --project=julia --startup-file=no --history-file=no julia/bin/linkedspec_julia.jl --help >/dev/null
-"$JULIA_CMD" --project=julia --startup-file=no --history-file=no julia/bin/linkedspec_julia.jl status >/dev/null
+set +e
+"$JULIA_CMD" --project=julia --startup-file=no --history-file=no julia/bin/linkedspec_julia.jl status >/dev/null 2>&1
+primary_status_code=$?
+set -e
+[[ "$primary_status_code" -eq 2 ]] || fail "primary Julia CLI accepted retired status subcommand"
 "$JULIA_CMD" --project=julia --startup-file=no --history-file=no julia/bin/corpus_runner.jl --help >/dev/null
 
 log "running full Julia corpus gate"

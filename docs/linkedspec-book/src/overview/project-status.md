@@ -55,7 +55,7 @@ Three backbone items tracked major structural modernization — all done:
 
 - **Documentation and book sync** — the book is kept aligned with the codebase as features land and surfaces evolve.
 - **Variant-agnostic documentation** — this book is being aligned so it describes the `.spec` contract, DSL, and helper semantics backend-neutrally, with the Perl implementation shown as the reference backend rather than as "the" implementation.
-- **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred parity work. Dart and Julia both have green 99/99 interpreter milestones. ADR `0023` owns the stricter completion boundary. Julia primary CLI repair is split into trace, arguments/IO, execution/JSON, failure/routing, and conformance leaves; `.7.3.2.1` closes compile/parser/function-shell/staged trace propagation, and `.7.3.2.2` is active for exact arguments plus source/input handling. Global `.1.5` owns Perl/Rust/Dart/four-backend CLI convergence, `.1.6` the full public capability census, and `.3` public generated-source parity. Lua follows after current-backend convergence and inherits both native embedding and exact interface gates.
+- **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred parity work. Dart and Julia both have green 99/99 interpreter milestones. ADR `0023` owns the stricter completion boundary. Julia `.7.3.2.1` closes native trace and `.7.3.2.2` closes exact arguments/resolution/loading; `.7.3.2.3` is active for execution/canonical JSON before failure/routing and conformance. Global `.1.5` owns Perl/Rust/Dart/four-backend CLI convergence, `.1.6` the full public capability census, and `.3` public generated-source parity. Lua follows after current-backend convergence and inherits both native embedding and exact interface gates.
 - **Dart backend parity** - `DART-BACKEND-PARITY` is complete only for the scoped interpreter-first Dart milestone. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
   deferred to a future split source-emitter lane rather than required for the current conformance claim. The repo now has a `dart/` backend package with a Dart-specific CLI,
@@ -218,9 +218,9 @@ Three backbone items tracked major structural modernization — all done:
   `.7.1` has closed public commands, native examples, status, and limitation alignment. `.7.2` has since deferred
   the separate generated-source proof to `FUTURE-PARITY-BACKLOG.3`. `.7.3.0` split strict user-facing parity after proving current CLI drift;
   `.7.3.1` ratifies ADR `0023` and cross-backend routing. `.7.3.2.0` has since split Julia CLI work and
-  `.7.3.2.1` now closes optional shared-emitter parse/validation/compile/function-shell/staged trace coverage with
-  28 focused assertions, 868 package assertions, and 99/99 still green. `.7.3.2.2` is active for exact primary
-  arguments and source/input loading. Public generated source remains deferred to `.3` and blocks a complete Julia
+  `.7.3.2.1` closes optional shared-emitter trace coverage. `.7.3.2.2` now closes exact options, subcommand/
+  positional rejection, named resolution, and source/input loading with 50 focused assertions; 920 package
+  assertions and 99/99 pass. `.7.3.2.3` is active for primary execution/canonical JSON. Public generated source remains deferred to `.3` and blocks a complete Julia
   capability-parity claim.
 - **Non-current helper code purge** - `NONCURRENT-HELPER-CODE-PURGE` is closed. Perl source cleanup, Rust source cleanup, active test/tool/generated fixture and checked-in `.spec` migration, and final no-drift scans are complete. Retired helper-looking calls use generic unknown-helper fallback behavior, active generic-unknown-helper tests use invented helper names, and active helper-call/label/tag scans are clean.
 - **Rust generated-source breadth** — the Rust interpreter oracle is the current cross-variant parity gate. Generated Rust source already covers the current structural families and a curated corpus subset; broadening generated-source proof to the full manifest remains a separately owned future follow-on.
