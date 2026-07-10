@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.2 — close Julia starter corpus batch
+
+**Scope:** Julia shipped-corpus fixtures 0–39, permanent bounded regression proof, package status, task/roadmap/live
+docs, mdBook, Knowledge Map, architecture, and resume pointer.
+
+**Change:** Executed the first 40 manifest fixtures through the bounded Julia runner: every fixture passed against
+the checked-in Perl/Rust expected JSON without a parser/runtime or fixture change. Added a six-assertion permanent
+`Starter corpus batch` test locking the 99-case manifest, exact window endpoints, 40 results, 40 passes, and empty
+failure ledger. Status advances to `runtime-corpus-starter`.
+
+**Validation:** Direct bounded execution reports 40 passed / 0 failed and exits `0`; full `Pkg.test()` passes with
+751 assertions. CLI status/help/default validation, mdBook, memory, Knowledge Map, task, doctrine, and whitespace
+gates pass; `.6.2.3` middle non-function fixtures 40–67 are next.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.1 — add Julia executable corpus selection
 
 **Scope:** Julia library corpus selection, bounded corpus-runner execution/reporting, CLI option parsing/help,

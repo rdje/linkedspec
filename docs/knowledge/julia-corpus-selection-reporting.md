@@ -32,6 +32,9 @@ Validation-only behavior remains the default. While full 99-fixture parity is in
 at least one named case or a positive limit. Unbounded and offset-only execution requests are rejected. Library
 callers may still execute a complete controlled corpus.
 
+`JULIA-BACKEND-PARITY.6.2.2` uses this bounded surface to prove manifest offsets 0–39 green at 40/40 without a
+production or fixture correction.
+
 Examples:
 
 ```bash
@@ -39,5 +42,5 @@ julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtim
 julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 0 --limit 10
 ```
 
-Related facts: [[julia-controlled-corpus-execution]], [[julia-corpus-manifest-io]],
+Related facts: [[julia-starter-corpus-batch]], [[julia-controlled-corpus-execution]], [[julia-corpus-manifest-io]],
 [[dart-controlled-corpus-execution]], [[variant-specific-cli-requirement]].

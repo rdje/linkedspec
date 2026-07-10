@@ -18,21 +18,21 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.6.2.1` — ordered named/offset/limit library selection and bounded
-  runner PASS/FAIL reporting landed with strict selector/unbounded guards; full tests pass with 745 assertions and
-  status `runtime-corpus-selection`.
-- prior_leaf: `JULIA-BACKEND-PARITY.6.2.0` — the 99-fixture rollout is split into selection/reporting, starter,
-  middle non-function, shipped-spec, and spec-defined function-shell owners.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.6.2.2` — shipped manifest fixtures 0–39 pass 40/40 unchanged; a
+  permanent endpoint/count/failure regression brings full tests to 751 assertions and status
+  `runtime-corpus-starter`.
+- prior_leaf: `JULIA-BACKEND-PARITY.6.2.1` — bounded named/offset/limit selection and runner reporting landed at
+  745 assertions with strict selector/unbounded guards.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.6.2.1 - add Julia executable corpus selection`; previous committed HEAD is
-  `ef59bd6b JULIA-BACKEND-PARITY.6.2.0 - split Julia corpus expansion batches`.
+  `JULIA-BACKEND-PARITY.6.2.2 - close Julia starter corpus batch`; previous committed HEAD is
+  `6c213909 JULIA-BACKEND-PARITY.6.2.1 - add Julia executable corpus selection`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; the frontier after the current commit is `.6.2.2`.
-- next_action: resume PNT at `JULIA-BACKEND-PARITY.6.2.2` by executing manifest fixtures 0–39 through the bounded
+- active_work_unit: `JULIA-BACKEND-PARITY`; the frontier after the current commit is `.6.2.3`.
+- next_action: resume PNT at `JULIA-BACKEND-PARITY.6.2.3` by executing non-function manifest fixtures 40–67 through the bounded
   runner, recording the exact Julia failure clusters, and fixing or splitting only reproduced mechanisms with
   Perl/Rust/Dart oracle evidence.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
@@ -51,5 +51,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.6.2.1` commit;
+- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.6.2.2` commit;
   do not pivot unless the repo is handoff-ready.

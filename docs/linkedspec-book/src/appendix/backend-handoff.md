@@ -328,7 +328,8 @@ structured diagnostic retention, and all-fixture reporting. Full tests pass with
 `runtime-controlled-corpus`. `.6.2.0` splits the 99-fixture rollout into bounded selection/reporting, starter
 0–39, middle non-function 40–67, shipped-spec/parser-smoke 68–98, and spec-defined function-shell owners;
 `.6.2.1` then adds bounded selection/reporting at 745 assertions and status `runtime-corpus-selection`.
-`.6.2.2` starter fixtures 0–39 are active.
+`.6.2.2` proves starter fixtures 0–39 green at 40/40 without a production correction; full tests pass with 751
+assertions and status `runtime-corpus-starter`. `.6.2.3` middle non-function fixtures 40–67 are active.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -591,10 +592,29 @@ Until full 99-fixture parity is proven, CLI execution requires a named case or a
 offset-only execution are rejected. Omitting `--execute` continues to validate the complete manifest; selecting a
 later subset never bypasses manifest drift checks.
 
-The rollout is explicitly recoverable. `.6.2.1` has landed named and bounded selection/reporting; `.6.2.2` owns starter
-fixtures 0–39; `.6.2.3` owns non-function helper/control fixtures 40–67; `.6.2.4` owns shipped-spec/parser-smoke
+The rollout is explicitly recoverable. `.6.2.1` has landed named and bounded selection/reporting; `.6.2.2` proves
+starter fixtures 0–39 green at 40/40; `.6.2.3` owns non-function helper/control fixtures 40–67; `.6.2.4` owns shipped-spec/parser-smoke
 fixtures 68–98; and `.6.2.5` owns spec-defined top-level function shells. Those are workload boundaries, not an
 assumption that Julia shares Dart's historical failure causes.
+
+#### Julia starter corpus proof
+
+The first shipped window is a permanent package regression:
+
+```bash
+julia --project=julia julia/bin/corpus_runner.jl \
+  --corpus rust/linkedspec-runtime/tests/corpus \
+  --execute --offset 0 --limit 40
+```
+
+It reports 40 passes and zero failures, from `proof_edge_array_literal` through
+`terse_2_2_5_2_attached_switch_blocks`. This proves the early proof-edge, autoexist, bare read/copy, assignment/
+mutation, primitive, shape, block, and attached-control families against the checked-in expected JSON. No Julia
+runtime correction and no fixture change was required. The package test locks the manifest count, both endpoints,
+selected count, passed count, and empty failure ledger so later changes cannot silently lose that coverage.
+
+The 40/40 result does not imply that later windows pass. The next active batch is offsets 40–67 excluding the
+top-level function fixtures routed to the spec-defined shell leaf.
 
 ### Dart Backend Commands
 

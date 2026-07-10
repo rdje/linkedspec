@@ -346,7 +346,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-corpus-selection"
+    @test status.parity == "runtime-corpus-starter"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -358,7 +358,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-corpus-selection", String(take!(status_output)))
+    @test occursin("parity: runtime-corpus-starter", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -3291,6 +3291,18 @@ Top::
         ) == 2
         @test occursin("cannot be combined", String(take!(mixed_selector_error)))
     end
+end
+
+@testset "Starter corpus batch" begin
+    execution = execute_corpus_fixtures(CORPUS_ROOT; offset = 0, limit = 40)
+    failures = ["$(result.name): $(result.failure)" for result in corpus_failures(execution)]
+
+    @test execution.validation.manifest.case_count == 99
+    @test length(execution.results) == 40
+    @test first(execution.results).name == "proof_edge_array_literal"
+    @test last(execution.results).name == "terse_2_2_5_2_attached_switch_blocks"
+    @test corpus_passed_count(execution) == 40
+    @test isempty(failures)
 end
 
 @testset "Spec AST JSON contract" begin

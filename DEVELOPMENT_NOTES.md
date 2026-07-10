@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.2 — Julia starter corpus 40/40):
+  The first shipped window needed no implementation correction: Julia's already-landed value/store/mutation,
+  blocks, and attached-control semantics match all expected JSON from `proof_edge_array_literal` through
+  `terse_2_2_5_2_attached_switch_blocks`. The durable change is therefore a bounded regression test, not speculative
+  runtime work. Its endpoint assertions make manifest reordering visible, while the failure ledger preserves names
+  and details if later changes regress any case.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.1 — Julia bounded corpus selection/reporting):
   Selection happens after complete manifest validation, so a bounded execution cannot hide manifest drift. Named
   selection preserves caller order and rejects duplicates/missing cases; offset/limit windows use zero-based
