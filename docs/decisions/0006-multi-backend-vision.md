@@ -11,6 +11,10 @@
 > Update 2026-07-10: ADR `0022` clarifies the primary product surface: every
 > backend is a native in-memory host-language library; CLIs are thin secondary
 > adapters. This record's reach matrix does not make CLI reach the completion gate.
+>
+> Update 2026-07-10: ADR `0023` makes “lockstep” user-observable and executable:
+> every active backend has the same public capabilities/behavior, and distinct
+> primary CLI names expose one identical command interface.
 
 ## Context
 

@@ -12,7 +12,7 @@ answers:
 date: 2026-07-09
 status: current
 tags: [cli, variants, dart, future-backends, DART-BACKEND-PARITY, FUTURE-PARITY-BACKLOG]
-evidence: "The 2026-07-09 directive gives each variant a distinct CLI entrypoint. The 2026-07-10 clarification requires those distinct executable names to expose the exact same user-facing API: commands, option list and meanings, positional arguments, outputs/errors, and exit semantics. JULIA-BACKEND-PARITY.7.3.0 proves current implementations do not yet meet that interface contract."
+evidence: "The 2026-07-09 directive gives each variant a distinct CLI entrypoint. ADR 0023 records the 2026-07-10 clarification: those distinct executable names expose the exact same user-facing API. JULIA-BACKEND-PARITY.7.3.0 proves current drift; FUTURE-PARITY-BACKLOG.1.5 owns repair."
 reverify: "rg -n 'identical.*CLI|same user-facing command|exact same.*CLI|JULIA-BACKEND-PARITY\\.7\\.3\\.0|distinct.*executable' docs/tasks/JULIA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/TASK_TREE.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/linkedspec-book/src/overview/project-status.md README.md"
 ---
 
@@ -33,5 +33,5 @@ same ownership when that lane activates. Do not treat a single ambiguous shared
 `linkedspec` command as the only user-facing entrypoint for every variant, and do not let distinct names drift into
 different products.
 
-Related facts: [[cross-backend-cli-contract-gap]], [[dart-runtime-hash-helpers]], [[trace-cross-variant-capability-contract]],
+Related facts: [[user-observable-backend-cli-parity-contract]], [[cross-backend-cli-contract-gap]], [[dart-runtime-hash-helpers]], [[trace-cross-variant-capability-contract]],
 [[rust-source-emitter-lane-split]], [[dart-specific-cli]], [[julia-backend-interpreter-first-plan]].

@@ -10,7 +10,7 @@ answers:
 date: 2026-07-09
 status: current
 tags: [julia, backend, parity, interpreter, FUTURE-PARITY-BACKLOG, JULIA-BACKEND-PARITY]
-evidence: "FUTURE-PARITY-BACKLOG.1.2 creates docs/tasks/JULIA-BACKEND-PARITY.md after DART-BACKEND-PARITY.7.5. Julia follows the Dart lesson: interpreter-first over typed AST/compiled state, native library plus variant CLI, and corpus parity before closeout. JULIA-BACKEND-PARITY.6.3 reaches 99/99; .7.2 defers generated Julia source to FUTURE-PARITY-BACKLOG.3."
+evidence: "FUTURE-PARITY-BACKLOG.1.2 creates the Julia interpreter-first plan; JULIA-BACKEND-PARITY.6.3 reaches 99/99 and .7.2 defers generated source. ADR 0023 later distinguishes that scoped milestone from complete parity and requires the exact primary CLI plus public capability convergence."
 reverify: "rg -n 'JULIA-BACKEND-PARITY|interpreter-first|Julia-specific CLI|generated Julia source|FUTURE-PARITY-BACKLOG\\.1\\.2' docs/tasks/JULIA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/TASK_TREE.md ROADMAP.md ROADMAP_V2.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/appendix/backend-handoff.md"
 ---
 
@@ -29,8 +29,10 @@ The plan starts interpreter-first, not generated-source-first:
 - prove the current manifest-backed corpus before milestone closeout.
 
 Generated Julia source is deferred after interpreter parity to `FUTURE-PARITY-BACKLOG.3`,
-mirroring the Dart closeout and Rust generated-source split.
+mirroring the Dart closeout and Rust generated-source split. ADR `0023` keeps that scheduling
+but makes the public capability mandatory before complete Julia parity; `.7.3.2` owns the
+exact primary CLI first.
 
-Related facts: [[julia-generated-source-deferred]], [[julia-runtime-rule-interpreter]], [[julia-runtime-matching-state]], [[julia-compiled-spec-state]],
+Related facts: [[user-observable-backend-cli-parity-contract]], [[julia-generated-source-deferred]], [[julia-runtime-rule-interpreter]], [[julia-runtime-matching-state]], [[julia-compiled-spec-state]],
 [[dart-scoped-parity-milestone-complete]],
 [[language-agnostic-backend-vision]], [[variant-specific-cli-requirement]], [[text-to-ast-backend-doctrine]].

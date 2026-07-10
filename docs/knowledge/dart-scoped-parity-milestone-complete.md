@@ -10,8 +10,8 @@ answers:
 date: 2026-07-09
 status: current
 tags: [dart, backend, parity, corpus, FUTURE-PARITY-BACKLOG, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.7.5 closes the Dart task tree after parser/frontend, typed ActionIR, compiled state, runtime interpretation, staged user-function execution, diagnostics/trace, focused local verification, Dart-specific CLI productization, and 99/99 corpus execution. Generated Dart source remains deferred to a future source-emitter proof lane. FUTURE-PARITY-BACKLOG.1.2 then created JULIA-BACKEND-PARITY, whose active frontier is JULIA-BACKEND-PARITY.1.1."
-reverify: "rg -n 'DART-BACKEND-PARITY\\.7\\.5|No active Dart frontier|99/99 corpus|FUTURE-PARITY-BACKLOG\\.1\\.2|JULIA-BACKEND-PARITY\\.1\\.1|Julia planning' docs/tasks/DART-BACKEND-PARITY.md docs/TASK_TREE.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/tasks/JULIA-BACKEND-PARITY.md ROADMAP.md ROADMAP_V2.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/appendix/backend-handoff.md"
+evidence: "DART-BACKEND-PARITY.7.5 closes the scoped Dart tree at 99/99 interpreter execution plus backend-local corpus CLI. ADR 0023 later distinguishes that milestone from complete public parity; FUTURE-PARITY-BACKLOG.1.5.3/.1.6/.3 own Dart's primary CLI, capability, and generated-source gaps."
+reverify: "rg -n 'DART-BACKEND-PARITY\\.7\\.5|99/99|FUTURE-PARITY-BACKLOG\\.1\\.5\\.3|FUTURE-PARITY-BACKLOG\\.1\\.6|FUTURE-PARITY-BACKLOG\\.3|scoped' docs/tasks/DART-BACKEND-PARITY.md docs/TASK_TREE.md docs/tasks/FUTURE-PARITY-BACKLOG.md ROADMAP.md ROADMAP_V2.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/appendix/backend-handoff.md"
 ---
 
 The Dart backend task tree is closed at the scoped interpreter-first milestone.
@@ -27,10 +27,9 @@ The accepted claim is:
 - The checked-in 99-fixture corpus passes through Dart execute mode.
 
 Generated Dart source is not part of this milestone. It remains a future split
-proof lane. After Dart closed, `FUTURE-PARITY-BACKLOG.1.2` created
-`JULIA-BACKEND-PARITY`; executable Julia work now starts at
-`JULIA-BACKEND-PARITY.1.1`. No Julia or Lua implementation happened in the Dart
-closeout or in the Julia planning slice.
+proof lane. ADR `0023` later makes the exact parser CLI, full public capability
+matrix, and generated source requirements for a complete Dart-parity claim; global
+`.1.5.3`, `.1.6`, and `.3` own them without reopening the historical scoped tree.
 
-Related facts: [[dart-backend-interpreter-first-plan]], [[dart-generated-source-deferred]],
+Related facts: [[user-observable-backend-cli-parity-contract]], [[dart-backend-interpreter-first-plan]], [[dart-generated-source-deferred]],
 [[dart-specific-cli]], [[language-agnostic-backend-vision]], [[julia-backend-interpreter-first-plan]].

@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.4` done; delegated Julia frontier is `.7.3.1`; generated Julia source is routed to `.3`).
+- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.5.0` done through delegated Julia `.7.3.1`; delegated Julia frontier is `.7.3.2`).
 - Owner: repo-local workflow
 
 ## Goal
@@ -63,10 +63,11 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.1`
   Status: `active`
   Goal: Add future backend implementations in full parity with Perl5 and Rust.
-  Children: `.1.1`, `.1.2`, `.1.3`, `.1.4`
+  Children: `.1.1`, `.1.2`, `.1.3`, `.1.4`, `.1.5`, `.1.6`
   Acceptance: Dart, Julia, and Lua each reach the same `.spec` language, helper/action AST,
     runtime semantics, staged parsing, diagnostics, and corpus parity contract as Perl5 and Rust; each exposes an
-    idiomatic native in-memory library API, with its CLI and corpus runner remaining secondary adapters.
+    idiomatic native in-memory library API, with its primary CLI exactly conforming to ADR `0023` and its corpus
+    runner remaining a separate secondary adapter.
 
 - ID: `FUTURE-PARITY-BACKLOG.1.1`
   Status: `done`
@@ -99,7 +100,7 @@ before implementation.
   Acceptance: Create or expand a dedicated Lua backend implementation plan with the same universal
     `.spec`, helper/action AST, runtime, staged parsing, diagnostics, and corpus parity obligations; define an
     idiomatic native Lua module that parses/compiles/executes in memory, direct library-level embedding tests,
-    and a distinct Lua-specific LinkedSpec CLI that remains a thin adapter.
+    and a distinct Lua-specific executable token that implements ADR `0023`'s exact primary CLI interface.
   Verification: `pending`
   Commit: `pending`
 
@@ -119,6 +120,61 @@ before implementation.
     task-tree, doctrine, and whitespace gates pass. No parser/compiler/runtime source changed.
   Commit: `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract`
 
+- ID: `FUTURE-PARITY-BACKLOG.1.5`
+  Status: `active`
+  Goal: Make every implemented backend's primary CLI conform to one byte-testable user interface.
+  Children: `.1.5.0`, `.1.5.1`, `.1.5.2`, `.1.5.3`, `.1.5.4`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.0`
+  Status: `done`
+  Goal: Ratify and route the exact cross-backend CLI contract before implementation.
+  Acceptance: ADR `0023` defines the canonical option/argument/output/error/exit contract, current gaps are
+    source-backed, and every implemented backend repair plus the language-neutral conformance gate has an owner.
+  Verification: `PASS` - delegated `JULIA-BACKEND-PARITY.7.3.1` records ADR `0023`, the Perl reference command
+    schema, zero positional arguments/subcommands, normalized output/error/exit rules, current gaps, and the
+    `.1.5.1` through `.1.5.4` repair sequence. No implementation behavior changed.
+  Commit: `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.1`
+  Status: `pending`
+  Goal: Lock the language-neutral CLI fixtures and normalize the Perl reference command to ADR `0023`.
+  Acceptance: Checked-in fixture cases define help, success, usage, compile/input/runtime failure, trace routing,
+    stdout/stderr, and exit behavior; Perl passes exactly and rejects undocumented primary-CLI surface.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.2`
+  Status: `pending`
+  Goal: Add the Rust primary CLI against the shared fixture contract.
+  Acceptance: A Rust binary delegates to native core/runtime APIs and passes the same CLI fixtures as Perl.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.3`
+  Status: `pending`
+  Goal: Replace Dart's primary corpus command with the shared parser CLI contract.
+  Acceptance: Dart's primary executable passes the same fixtures; corpus execution remains a separate developer
+    runner and owns no primary-CLI-only semantics.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.4`
+  Status: `pending`
+  Goal: Close current Perl/Rust/Dart/Julia CLI parity and make the conformance matrix a recurring gate.
+  Acceptance: One driver runs identical fixtures against all four implemented primary commands and proves
+    normalized stdout, stderr, and exit-code identity after substituting only the executable token.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6`
+  Status: `pending`
+  Goal: Prove complete user-observable feature/behavior parity beyond the 99-fixture interpreter corpus.
+  Acceptance: Build a machine-readable capability matrix from the mdBook, exported public APIs, Phase 0, and the
+    language-neutral corpus; classify Perl/Rust/Dart/Julia gaps before implementation; split every gap into an
+    owned parity leaf; do not call a backend full-parity while any user-visible capability differs.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `FUTURE-PARITY-BACKLOG.2`
   Status: `pending`
   Goal: Generalize staged linked parsing beyond the current function-body prototype.
@@ -130,11 +186,12 @@ before implementation.
 
 - ID: `FUTURE-PARITY-BACKLOG.3`
   Status: `pending`
-  Goal: Own generated-source breadth beyond the current interpreter-first backend gates.
+  Goal: Close generated-source capability parity beyond the current interpreter-first correctness gates.
   Acceptance: Split Rust full-manifest breadth and separate Dart/Julia source-emitter proofs before code. Each
     non-Rust emitter lane must own a minimal emitter scaffold plus compile/run harness, typed generated-family plan,
-    direct structural-family execution, and curated manifest-backed corpus subset; interpreter parity remains the
-    primary gate until a generated lane independently closes.
+    direct structural-family execution, and curated manifest-backed corpus subset. Rust exports source emission as
+    a public runtime-crate capability, so ADR `0023` makes equivalent capability mandatory before Dart/Julia/Lua can
+    claim complete user-visible parity; interpreter parity remains the primary correctness gate.
   Verification: `pending`
   Commit: `pending`
 
@@ -236,16 +293,22 @@ before implementation.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.7.3.1` | `active` | Ratify exact user-facing feature/CLI parity after `.7.3.0` proved current CLI drift. |
-| 2 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua is adopted by ADR `0021` and inherits ADR `0022`'s native-module gate after Julia reaches its scoped milestone. |
-| 3 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
-| 4 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Rust breadth plus split Dart/Julia generated-source proofs are independent follow-up after backend scheduling. |
-| 5 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
-| 6 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
-| 7 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
-| 8 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
-| 9 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser/stimuli roundtrip arc is parked for later design; not a current Julia pivot. |
-| 10 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design; not a current Julia pivot. |
+| 1 | `JULIA-BACKEND-PARITY.7.3.2` | `active` | Align Julia's primary CLI to ADR `0023` before its honest no-drift leaf. |
+| 2 | `JULIA-BACKEND-PARITY.7.3.3` | `pending` | Reconcile Julia's scoped milestone and remaining complete-parity obligations without false closure. |
+| 3 | `FUTURE-PARITY-BACKLOG.1.5.1` | `pending` | Lock neutral CLI fixtures and normalize the Perl reference after Julia's active leaf is clean. |
+| 4 | `FUTURE-PARITY-BACKLOG.1.5.2` | `pending` | Add the missing Rust primary CLI against the shared fixtures. |
+| 5 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
+| 6 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
+| 7 | `FUTURE-PARITY-BACKLOG.1.6` | `pending` | Census every documented/exported user capability and split all residual parity gaps. |
+| 8 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
+| 9 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 10 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
+| 11 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
+| 12 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
+| 13 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
+| 14 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
+| 15 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser/stimuli roundtrip arc is parked for later design. |
+| 16 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
 
 ## Decisions
 
@@ -285,15 +348,19 @@ before implementation.
   CLI API, including command structure, option names/meanings, positional arguments, outputs/errors, and exit
   semantics; every variant must have the same user-observable feature set and behavior. Julia `.7.3.0` proves the
   current surfaces drift and splits contract/routing, Julia repair, and honest no-drift work.
+- `2026-07-10`: ADR `0023` ratifies exact user-observable capability/behavior and primary-CLI identity. Delegated
+  `.1.5.0` closes through `JULIA-BACKEND-PARITY.7.3.1`; `.1.5.1`–`.1.5.4` own the current-backend CLI repairs,
+  `.1.6` owns the full public capability census, and `.3` is mandatory for complete parity because Rust exports
+  source emission publicly. Julia `.7.3.2` remains first to preserve the current task-tree sequence.
 
 ## Open Questions
 
-- None blocking the active Julia tree. Lua `.1.3` is intentionally gated until `JULIA-BACKEND-PARITY` reaches its
-  scoped milestone.
+- None blocking the active Julia tree. Lua `.1.3` is intentionally gated until current implemented backends close
+  ADR `0023` CLI/capability convergence, including any `.1.6`-split gaps and public generated source under `.3`.
 
 ## Blockers
 
-- None. Julia `.7.3.1` is the next active PNT leaf; Lua `.1.3` remains deliberately sequenced after Julia.
+- None. Julia `.7.3.2` is the next active PNT leaf; global CLI/capability convergence now precedes Lua `.1.3`.
 
 ## Verification Log
 
@@ -305,6 +372,7 @@ before implementation.
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.8.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning capture only; no implementation code changed. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.9.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning capture only; no implementation code changed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.4` | Perl direct `LinkedSpec::Get` coderef probe; focused Dart runtime tests (50); direct Julia parse/compile/execute probe; static Rust core/runtime API and Dart/Julia CLI-adapter audit; `mdbook build docs/linkedspec-book`; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check` | PASS. ADR `0022` makes native in-memory embedding primary and CLIs secondary; current/future backend acceptance and public docs agree; no parser/compiler/runtime source changed. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.0` | Delegated Julia `.7.3.1`: ADR `0023`; Perl CLI/trace contract and Rust public source-emitter audit; global task routing; mdBook build; Knowledge Map generation/check; memory/task/doctrine/whitespace gates. | PASS. Exact primary CLI and public-capability parity are durable; `.1.5.1`–`.1.5.4`, `.1.6`, and `.3` own convergence; no implementation behavior changed. |
 
 ## Commit Log
 
@@ -316,9 +384,12 @@ before implementation.
 | `FUTURE-PARITY-BACKLOG.8.0` | `FUTURE-PARITY-BACKLOG.8.0 - capture spec-derived roundtrip idea` | Captures future `foo.spec` parser/stimuli closed-loop validation arc; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.9.0` | `FUTURE-PARITY-BACKLOG.9.0 - capture AND OR edge default correction` | Captures future AND/OR mode-sensitive edge-default design arc; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
+| `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 
 ## Changelog
 
+- `2026-07-10`: Delegated `.1.5.0` closes through Julia `.7.3.1`. ADR `0023` defines one exact parser-oriented
+  primary CLI and complete public capability/behavior parity; `.1.5.1`–`.1.5.4`, `.1.6`, and `.3` own convergence.
 - `2026-07-09`: Created the future parity backlog tree with seven initial owned lanes and Dart -> Julia -> Lua
   backend rollout order.
 - `2026-07-09`: Scoped the Dart backend lane into `docs/tasks/DART-BACKEND-PARITY.md` and selected

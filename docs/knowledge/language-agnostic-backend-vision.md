@@ -14,8 +14,8 @@ answers:
 date: 2026-06-12
 status: accepted
 tags: [architecture, portability, backends, roadmap, vision]
-evidence: "User-specified vision during MEDIUM-IMPACT.1.3 HandlerIR work; ADR 0006 formalized the multi-backend vision. Phase 9 implemented Rust. ADR 0021 fixed the rollout order as Dart, Julia, then Lua. DART-BACKEND-PARITY.7.5 closed Dart's scoped interpreter-first milestone, JULIA-BACKEND-PARITY is active with native runtime/corpus APIs, and ADR 0022 now states that native in-memory host-language embedding is the primary backend product contract while CLIs remain thin adapters."
-reverify: "grep -n 'Rust\\|Julia\\|Dart\\|Lua\\|backend' ROADMAP_V2.md docs/decisions/0006-multi-backend-vision.md docs/decisions/0021-future-backend-rollout-order.md docs/decisions/0022-native-in-memory-backend-embedding.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/tasks/FUTURE-PARITY-BACKLOG.md | head -80"
+evidence: "ADR 0006 formalized lockstep backends, ADR 0021 fixed Dart/Julia/Lua order, and ADR 0022 made native embedding primary. ADR 0023 now makes complete parity exact user-observable capability/behavior identity plus one identical primary CLI; current Dart/Julia milestones remain scoped and global FUTURE-PARITY-BACKLOG.1.5/.1.6/.3 own convergence."
+reverify: "rg -n 'Rust|Julia|Dart|Lua|backend|primary CLI|complete parity' ROADMAP_V2.md docs/decisions/0006-multi-backend-vision.md docs/decisions/0021-future-backend-rollout-order.md docs/decisions/0022-native-in-memory-backend-embedding.md docs/decisions/0023-user-observable-backend-and-cli-parity.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/tasks/FUTURE-PARITY-BACKLOG.md | head -100"
 ---
 
 ## Context
@@ -28,6 +28,8 @@ third. All backends consume the exact same `.spec` files and produce identical p
 behavior. ADR 0022 additionally makes native in-memory host-language embedding the primary
 product surface; see [[native-in-memory-backend-contract]]. JS and Wasm targets are reached
 through adapters over Rust or Dart rather than separate `.spec` dialects.
+ADR `0023` makes “lockstep” user-observable: complete parity requires the same public
+capabilities/behavior and the same primary CLI interface.
 
 ## Decision
 
@@ -50,6 +52,8 @@ through adapters over Rust or Dart rather than separate `.spec` dialects.
 6. **Native in-memory embedding is primary** — every backend exposes host-process
    parse/compile/execute APIs. CLIs and corpus runners are thin adapters and may not own
    exclusive language or runtime semantics.
+7. **Primary CLI identity is exact** — distinct backend executable tokens expose the same
+   commands, options/meanings, positional arguments, outputs/errors, and exits.
 
 ## Consequences
 
@@ -62,13 +66,13 @@ through adapters over Rust or Dart rather than separate `.spec` dialects.
 
 ## Backend reach matrix
 
-| Backend | CLI | Web (JS) | Wasm | Mobile |
+| Backend | Current primary CLI status | Web (JS) | Wasm | Mobile |
 |---------|-----|----------|------|--------|
-| Perl    | ✅  | —        | —    | —      |
-| Rust    | ✅ adapter over native crates | ✅ (wasm-bindgen future target) | ✅ future target | — |
-| Dart    | ✅ adapter over native package | ✅ (dart2js future target) | ✅ (dart2wasm future target) | ✅ (Flutter future target) |
-| Julia   | ✅ adapter over active native module | —        | —    | —      |
-| Lua     | ✅ scheduled future target, third | —        | —    | —      |
+| Perl    | Parser command exists; neutral ADR 0023 fixture lock pending | — | — | — |
+| Rust    | Missing binary target | ✅ (wasm-bindgen future target) | ✅ future target | — |
+| Dart    | Corpus-oriented command; ADR 0023 parser interface pending | ✅ (dart2js future target) | ✅ (dart2wasm future target) | ✅ (Flutter future target) |
+| Julia   | Corpus/status command; ADR 0023 parser interface active | — | — | — |
+| Lua     | Scheduled; must implement ADR 0023 from its first CLI slice | — | — | — |
 
 ## Speculated VM consideration
 
@@ -81,5 +85,6 @@ a VM would need; the decision of emit-vs-interpret is per-backend.
 
 - [[handler-ir-design]] — formal HandlerIR specification (created 2026-06-14, PHASE8-MULTI-BACKEND-HANDOFF.3)
 - [[native-in-memory-backend-contract]] — primary host-process library surface (ADR 0022)
+- [[user-observable-backend-cli-parity-contract]] — complete public capability and exact CLI contract (ADR 0023)
 - [[specentry-backend-portability-ceiling]]
 - [[actionir-lowering-stack]]

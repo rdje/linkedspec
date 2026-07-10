@@ -29,8 +29,49 @@ exclusive `.spec` or runtime semantics. Named/file-oriented convenience APIs are
 but they cannot be the only complete data path. Interpreter versus generated-source
 execution remains a backend choice and does not change this embedding requirement.
 Distinct backend executable names must nevertheless expose one identical user-facing CLI
-contract: the same command structure, option names and meanings, positional arguments,
-outputs/errors, and exit semantics.
+contract under ADR 0023: the same command structure, option names and meanings, positional
+arguments, outputs/errors, and exit semantics.
+
+### Exact Cross-Backend CLI Contract
+
+The executable token identifies the backend. It is the only intended user-interface difference.
+Host-language launch syntax may also differ in a source checkout, but the argument vector after
+the executable is identical:
+
+```text
+<variant-command> --spec NAME --input TEXT [options]
+<variant-command> --spec-file PATH --input-file PATH [options]
+<variant-command> --inline-spec TEXT --input TEXT [options]
+```
+
+Source selection requires exactly one of `--spec`, `--spec-file`, or `--inline-spec`. Input
+selection requires exactly one of `--input` or `--input-file`. Every primary command exposes
+the same optional controls:
+
+- `--top-rule NAME`
+- `--parse-mode seek|consume`
+- `--trace LEVEL`
+- `--trace-file PATH`
+- `--trace-mode stdout|route|mirror`
+- `--trace-reset`
+- `--trace-emoji`
+- `--help` / `-h`
+
+There are no primary-CLI subcommands and no positional arguments. Corpus runners and backend
+status probes are separate developer commands. Trace levels accept numeric values plus the
+shared names/aliases `none`/`quiet`, `low`, `medium`/`med`, `high`, `full`, and
+`debug`/`verbose`.
+
+Help and successful parsing exit `0`; normalized spec/input/runtime failure exits `1`; usage
+failure exits `2`. Successful parsing writes one canonical JSON value plus one newline to
+stdout. CLI-controlled stdout, stderr, diagnostic structure, and trace routing are locked by
+the same language-neutral fixtures for every backend.
+
+This is a contract and active convergence target, not a claim that every current executable
+already passes. The current gap census is: Perl is parser-oriented but still needs the neutral
+fixture lock; Rust has no primary binary; Dart and Julia currently use corpus/status-oriented
+primary commands. `FUTURE-PARITY-BACKLOG.1.5` owns convergence, with Julia's immediate repair
+under `JULIA-BACKEND-PARITY.7.3.2`.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics
@@ -385,8 +426,8 @@ runner are thin adapters over the same in-process parser/compiler/runtime path.
 
 The current Julia primary command exposes help/status/corpus operations, not the parser-oriented interface of
 Perl `bin/linkedspec`. `JULIA-BACKEND-PARITY.7.3.0` records that user-visible drift and also confirms that Dart is
-corpus-oriented and Rust currently has no binary target. `.7.3.1` owns the exact shared CLI contract and repair
-routing before Julia CLI implementation changes; 99/99 corpus success does not erase this interface gap.
+corpus-oriented and Rust currently has no binary target. `.7.3.1` ratifies ADR `0023` and routes repairs;
+`.7.3.2` is active for Julia CLI implementation. 99/99 corpus success does not erase this interface gap.
 
 The boundary does not claim generated Julia source or broader compile/parser trace parity. `.7.2` deliberately
 defers generated Julia source to the split future source-emitter lane under `FUTURE-PARITY-BACKLOG.3`; Julia
@@ -394,6 +435,10 @@ currently guarantees the interpreter path. A credible later emitter must own its
 typed generated-family plan, direct structural-family execution, and curated corpus proof. Runtime diagnostics/
 tracing are implemented, while the trace chapter records the narrower trace scope. `JuliaFormatter` and `JET` are
 optional local tools rather than parity prerequisites.
+
+ADR `0023` sharpens that limitation: Rust exports `source_emitter` publicly, so equivalent source-emission
+capability is required before Julia can claim complete user-visible feature parity. Deferral remains valid
+scheduling and does not weaken the 99/99 interpreter correctness gate; it does keep the full-parity claim open.
 
 `JULIA-BACKEND-PARITY.1.1` through `.4.2` are complete. The local Julia toolchain is Homebrew-managed:
 `/opt/homebrew/bin/julia` reports Julia `1.12.6`, and the official Julia downloads page lists `v1.12.6` as the

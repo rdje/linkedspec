@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.1 — ratify exact backend interface parity
+
+**Scope:** ADR `0023`, canonical primary CLI schema, strict completion terminology, global repair/capability owners,
+generated-source public-capability classification, mdBook, Knowledge Map, roadmaps/tasks/live docs, and memory.
+
+**Decision:** Complete backend parity means identical user-observable capabilities and behavior. Distinct
+executable tokens expose one parser-oriented CLI: the same source/input/parser/trace/help options, no subcommands
+or positional arguments, canonical JSON, normalized stdout/stderr, and exit `0`/`1`/`2`. Host APIs may remain
+idiomatic only while capabilities and behavior match.
+
+**Routing:** Julia `.7.3.2` owns immediate CLI alignment. `FUTURE-PARITY-BACKLOG.1.5` owns neutral fixtures plus
+Perl/Rust/Dart/global CLI convergence, `.1.6` owns the complete public capability census, and `.3` owns generated-
+source parity. Rust publicly exports its emitter, so codegen deferral remains valid scheduling but blocks complete
+Dart/Julia/Lua parity. No implementation behavior changed; docs/governance checks pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.0 — split strict user-facing parity closeout
 
 **Scope:** Read-only current CLI census, task split, public status correction, Knowledge Map fact, and live resume

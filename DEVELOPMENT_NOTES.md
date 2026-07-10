@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.7.3.1 — parity claims need a capability matrix, not a corpus count):
+  The 99-fixture oracle is strong interpreter evidence, but it cannot prove an exported feature is present when no
+  fixture invokes that public API. Rust's `pub mod source_emitter` is the concrete counterexample. ADR `0023`
+  therefore keeps the corpus as the correctness oracle while requiring a separate public-capability matrix and
+  exact CLI fixture suite before “complete parity” is accurate.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.7.3.0 — a backend-local CLI is not CLI parity):
   “Each variant has a CLI” only proves entrypoint ownership. It does not prove that users see the same product.
   Without a shared interface contract, scaffolds diverged by purpose: Perl parses arbitrary specs/inputs, Dart and

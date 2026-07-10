@@ -140,8 +140,10 @@ Top-level directories and files:
     unbounded CLI execution. Full tests pass with 840 assertions and status is `runtime-corpus-full`. `.6.4` adds
     focused optional-SDK verification and `.7.1` closes public usage/status/limitation docs. `.7.2` defers
     generated Julia source to the future split source-emitter lane. `.7.3.0` then proves the implemented CLIs are
-    not interface-equivalent (Perl parser CLI, Dart/Julia corpus/status CLIs, no Rust binary) and splits repair;
-    `.7.3.1` is active for the exact user-facing feature/CLI contract and cross-backend routing.
+    not interface-equivalent (Perl parser CLI, Dart/Julia corpus/status CLIs, no Rust binary) and splits repair.
+    `.7.3.1` ratifies ADR `0023`: complete user-observable capability identity plus one exact primary CLI contract.
+    `.7.3.2` is active for Julia CLI alignment; neutral Perl/Rust/Dart/global repair, full capability census, and
+    public generated-source parity are owned in `FUTURE-PARITY-BACKLOG.1.5`, `.1.6`, and `.3`.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

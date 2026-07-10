@@ -2,7 +2,7 @@
 
 LinkedSpec is an actively evolving system. The current direction is not “freeze everything exactly as it once was.” The direction is to preserve the strengths that make LinkedSpec useful while modernizing the runtime, compiler, diagnostics, and documentation.
 
-LinkedSpec is also a multi-backend system. The `.spec` language is the one universal contract; each backend is an execution platform that runs the same `.spec` files with identical semantics. The Perl implementation is the **reference backend** (the canonical behavioral oracle), and a Rust backend is the second execution platform. ADR 0021 schedules future full-parity backend work as Dart first, Julia second, and Lua third. ADR 0022 makes native in-memory host-language embedding the primary backend product surface; variant CLIs are thin adapters. Distinct backend executable names must expose the same user-facing command interface. Status below is therefore stated at the `.spec`-contract level, with backend-specific notes called out where they apply.
+LinkedSpec is also a multi-backend system. The `.spec` language is the one universal contract; each backend is an execution platform that runs the same `.spec` files with identical semantics. The Perl implementation is the **reference backend** (the canonical behavioral oracle), and a Rust backend is the second execution platform. ADR 0021 schedules future full-parity backend work as Dart first, Julia second, and Lua third. ADR 0022 makes native in-memory host-language embedding the primary backend product surface; variant CLIs are thin adapters. ADR 0023 defines complete parity as identical user-observable capabilities/behavior and gives distinct backend executable names one exact primary CLI interface. Status below therefore distinguishes scoped milestones from complete parity.
 
 ## Completed phases
 
@@ -55,8 +55,8 @@ Three backbone items tracked major structural modernization — all done:
 
 - **Documentation and book sync** — the book is kept aligned with the codebase as features land and surfaces evolve.
 - **Variant-agnostic documentation** — this book is being aligned so it describes the `.spec` contract, DSL, and helper semantics backend-neutrally, with the Perl implementation shown as the reference backend rather than as "the" implementation.
-- **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred parity work. Dart's scoped interpreter-first milestone is closed. Julia now has its source/ActionIR frontend, compiled/runtime semantics, diagnostics/tracing, staged/runtime functions, one atomic complete-manifest regression plus direct unbounded corpus execution at 99/99 exact outputs, a focused repo-owned verification gate with optional shared-CI inclusion, and aligned public usage/status/limitation documentation. Full tests pass with 840 assertions and status `runtime-corpus-full`; generated Julia source is deferred to the future split source-emitter lane. The `.7.3.0` audit proves the existing variant CLIs are not interface-equivalent (Perl parser CLI, Dart/Julia corpus/status CLIs, no Rust binary), so `.7.3.1` is active for the exact user-facing contract and repair routing. Lua follows under ADR 0021 and must expose a native in-memory module under ADR 0022. The backlog also owns staged parsing generalization, generated-source breadth, function extensions, helper/plugin/oracle follow-ups, spec-derived parser/stimuli design, and corrected AND/OR edge-default design.
-- **Dart backend parity** - `DART-BACKEND-PARITY` is complete for the scoped interpreter-first Dart milestone. Its strategy is
+- **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred parity work. Dart and Julia both have green 99/99 interpreter milestones. ADR `0023` now owns the stricter completion boundary: Julia `.7.3.2` is active for its exact parser CLI; global `.1.5` owns Perl/Rust/Dart/four-backend CLI convergence, `.1.6` owns the full public capability census, and `.3` owns public generated-source parity. Lua follows after current-backend convergence and inherits both native embedding and exact interface gates. The backlog also owns staged parsing generalization, function extensions, helper/plugin/oracle follow-ups, spec-derived parser/stimuli design, and corrected AND/OR edge-default design.
+- **Dart backend parity** - `DART-BACKEND-PARITY` is complete only for the scoped interpreter-first Dart milestone. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
   deferred to a future split source-emitter lane rather than required for the current conformance claim. The repo now has a `dart/` backend package with a Dart-specific CLI,
   manifest/corpus IO validation, source-level AST/data types with JSON round-trip coverage, a core `.spec` rule
@@ -120,7 +120,7 @@ Three backbone items tracked major structural modernization — all done:
   `bin/linkedspec_dart.dart` owns help text plus a `corpus` command that validates or executes the manifest-backed
   corpus through Dart parse/compile/runtime, while `bin/corpus_runner.dart` remains a compatibility wrapper. The
   strict-interface audit has since shown this is not yet the shared parser CLI contract. No active Dart frontier
-  remains in its original scoped tree; cross-backend CLI repair requires new ownership.
+  remains in its original scoped tree; global `.1.5.3`, `.1.6`, and `.3` own complete CLI/capability/codegen parity.
 - **Julia backend parity** - `JULIA-BACKEND-PARITY` is the active second future-backend lane. It starts from the
   Dart lesson: interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated
   Julia source left as a later proof decision. `JULIA-BACKEND-PARITY.1.1` verified Homebrew Julia 1.12.6 against the
@@ -217,8 +217,9 @@ Three backbone items tracked major structural modernization — all done:
   840 assertions and status `runtime-corpus-full`. `.6.4` has since added focused optional-SDK verification, and
   `.7.1` has closed public commands, native examples, status, and limitation alignment. `.7.2` has since deferred
   the separate generated-source proof to `FUTURE-PARITY-BACKLOG.3`; current trace parity remains runtime-scoped
-  rather than compile/parser-wide. `.7.3.0` has since split strict user-facing parity after proving current CLI
-  drift; `.7.3.1` owns the exact command contract and cross-backend routing.
+  rather than compile/parser-wide. `.7.3.0` split strict user-facing parity after proving current CLI drift;
+  `.7.3.1` ratifies ADR `0023` and cross-backend routing; `.7.3.2` is active for Julia. Public generated source
+  remains deferred to `.3` and blocks a complete Julia capability-parity claim.
 - **Non-current helper code purge** - `NONCURRENT-HELPER-CODE-PURGE` is closed. Perl source cleanup, Rust source cleanup, active test/tool/generated fixture and checked-in `.spec` migration, and final no-drift scans are complete. Retired helper-looking calls use generic unknown-helper fallback behavior, active generic-unknown-helper tests use invented helper names, and active helper-call/label/tag scans are clean.
 - **Rust generated-source breadth** — the Rust interpreter oracle is the current cross-variant parity gate. Generated Rust source already covers the current structural families and a curated corpus subset; broadening generated-source proof to the full manifest remains a separately owned future follow-on.
 - **Lifecycle-family audit** — verified complete (2026-06-14). All 7 lifecycle markers (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`) have full semicolon-light structured authoring coverage. Newlines separate top-level helper statements; a semicolon separates adjacent statements on one physical line and is not required after the last statement. No lifecycle-specific semantic gaps found.

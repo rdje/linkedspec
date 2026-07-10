@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, parity, perl, rust, dart, julia, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.3.0 audits bin/linkedspec, Dart and Julia CLI modules, and every Rust Cargo target. Perl exposes parser/source/input/trace options and canonical JSON; Dart and Julia expose corpus/status interfaces; Rust has no binary target. The director requires distinct backend executable names to expose the exact same user-facing API."
+evidence: "JULIA-BACKEND-PARITY.7.3.0 audits bin/linkedspec, Dart and Julia CLI modules, and every Rust Cargo target. Perl exposes parser/source/input/trace options and canonical JSON; Dart and Julia expose corpus/status interfaces; Rust has no binary target. ADR 0023 now defines the exact interface and FUTURE-PARITY-BACKLOG.1.5 owns repairs."
 reverify: "sed -n '1,230p' bin/linkedspec; sed -n '1,330p' dart/lib/src/cli/linkedspec_dart_cli.dart; sed -n '1,220p' julia/src/cli/LinkedSpecJuliaCli.jl; rg -n '\[\[bin\]\]|^name =|^members =' rust/Cargo.toml rust/*/Cargo.toml; find rust -type f -path '*/src/bin/*' -print"
 ---
 
@@ -31,5 +31,8 @@ executable names must also expose the exact same command structure, option list 
 outputs/errors, and exit semantics. `JULIA-BACKEND-PARITY.7.3.0` therefore splits durable contract/routing, Julia
 repair, and honest no-drift work rather than treating 99/99 corpus execution as complete CLI parity.
 
-Related facts: [[variant-specific-cli-requirement]], [[native-in-memory-backend-contract]],
+ADR `0023` has since ratified the exact interface. `FUTURE-PARITY-BACKLOG.1.5` owns the neutral fixtures and
+Perl/Rust/Dart/global repairs; `JULIA-BACKEND-PARITY.7.3.2` owns Julia's repair.
+
+Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specific-cli-requirement]], [[native-in-memory-backend-contract]],
 [[language-agnostic-backend-vision]], [[dart-specific-cli]], [[julia-mdbook-usage-status]].

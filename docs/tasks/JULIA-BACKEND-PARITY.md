@@ -780,16 +780,20 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.7.3.0 - split strict user-facing parity closeout`
 
 - ID: `JULIA-BACKEND-PARITY.7.3.1`
-  Status: `active`
+  Status: `done`
   Goal: Ratify strict user-observable feature parity and one exact cross-variant CLI interface contract.
   Acceptance: A durable decision preserves distinct backend executable names while requiring identical commands,
     options and meanings, positional arguments, outputs/errors, and exit semantics; current Perl/Rust/Dart/Julia
     gaps are recorded and non-Julia repairs have explicit task ownership before Julia code changes.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - ADR `0023` makes user-observable capability/behavior identity and one exact primary CLI
+    interface mandatory. The only permitted CLI difference is the executable token/host launch wrapper; the
+    canonical contract has the Perl parser option set, no positional arguments or subcommands, canonical JSON,
+    normalized diagnostics, and 0/1/2 exits. `FUTURE-PARITY-BACKLOG.1.5` owns Perl/Rust/Dart/global CLI repairs,
+    `.1.6` owns complete capability census, and `.3` owns public generated-source parity. `.7.3.2` owns Julia.
+  Commit: `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity`
 
 - ID: `JULIA-BACKEND-PARITY.7.3.2`
-  Status: `pending`
+  Status: `active`
   Goal: Align Julia's primary CLI with the ratified cross-variant command contract.
   Acceptance: Julia exposes the canonical parser CLI through its native in-memory library, with exact argument,
     output/error, and exit behavior locked by focused tests; corpus tooling remains a separate developer adapter.
@@ -836,9 +840,43 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 25 | `JULIA-BACKEND-PARITY.7.1` | `done` | Public commands, embedding examples, 99/99 status, and limitations are explicit and aligned. |
 | 26 | `JULIA-BACKEND-PARITY.7.2` | `done` | Generated Julia source is deferred to the split future source-emitter lane; 99/99 interpreter parity remains primary. |
 | 27 | `JULIA-BACKEND-PARITY.7.3.0` | `done` | Source audit proves the existing backend CLIs are not user-interface equivalent and splits the closeout. |
-| 28 | `JULIA-BACKEND-PARITY.7.3.1` | `active` | Ratify the exact user-observable feature/CLI contract and route every non-Julia repair before code. |
-| 29 | `JULIA-BACKEND-PARITY.7.3.2` | `pending` | Align Julia's primary CLI to the ratified cross-variant command contract. |
+| 28 | `JULIA-BACKEND-PARITY.7.3.1` | `done` | ADR 0023 defines exact user-observable and primary-CLI parity; global repairs and feature census are owned. |
+| 29 | `JULIA-BACKEND-PARITY.7.3.2` | `active` | Align Julia's primary CLI to the ratified cross-variant command contract. |
 | 30 | `JULIA-BACKEND-PARITY.7.3.3` | `pending` | Close no-drift honestly or split any remaining user-observable parity residual. |
+
+## `JULIA-BACKEND-PARITY.7.3.1` Exact Interface-Parity Decision
+
+Decision evidence recorded on 2026-07-10:
+
+- ADR `0023` interprets backend parity from the user's point of view. Public capability and observable behavior
+  must match; idiomatic host-language API spelling/types and internal execution strategy may differ.
+- Distinct primary executable names remain required, but the executable token and host-language launch wrapper are
+  the only interface differences. After that token, commands, options/meanings, positional arguments, outputs,
+  errors, and exit behavior are identical.
+- The canonical primary CLI is the documented Perl parser command: exactly one of `--spec`, `--spec-file`, or
+  `--inline-spec`; exactly one of `--input` or `--input-file`; optional `--top-rule`, `--parse-mode`, `--trace`,
+  `--trace-file`, `--trace-mode`, `--trace-reset`, `--trace-emoji`, and `--help` / `-h`. There are no positional
+  arguments or subcommands. Corpus/status tools are separate developer commands.
+- Success/help exit `0`; normalized compile/input/runtime failure exits `1`; usage failure exits `2`. Success emits
+  canonical JSON plus one newline, and stdout/stderr/trace routing follows the same fixture-locked contract.
+- `FUTURE-PARITY-BACKLOG.1.5` owns neutral fixtures plus Perl normalization, the missing Rust binary, Dart
+  replacement, and four-backend conformance. Julia remains here under `.7.3.2`; Lua inherits ADR `0023`.
+- `FUTURE-PARITY-BACKLOG.1.6` owns the broader public capability census. Rust's exported `source_emitter` proves
+  generated source is user-visible; future `.3` deferral remains valid scheduling, but it blocks complete
+  Dart/Julia/Lua parity rather than being optional for that claim.
+
+## `JULIA-BACKEND-PARITY.7.3.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Reused `.7.3.0`'s four-backend source census and inspected the documented trace and
+  Rust `pub mod source_emitter` public surfaces.
+- [x] **ROOT CAUSE (WHY + WHERE)** — ADRs required semantic lockstep and native embedding but did not define a
+  machine-testable CLI schema or distinguish a scoped corpus milestone from complete public capability parity.
+- [x] **FIX / DECISION** — ADR `0023` defines exact user-observable and primary-CLI parity.
+- [x] **ADDRESSED (verified)** — Every current CLI gap, the global fixture gate, the broader capability census, and
+  public generated-source parity have explicit task owners before Julia implementation.
+- [x] **NO REGRESSION** — Decision/routing only; no parser/compiler/runtime/CLI source changed.
+- [x] **LOCKSTEP** — Roadmaps, tasks, mdBook, architecture, Knowledge Map, and memory use the same completion terms;
+  `.7.3.2` is the sole active Julia leaf.
 
 ## `JULIA-BACKEND-PARITY.7.3.0` Strict User-Facing Parity Audit
 
@@ -878,8 +916,9 @@ Decision evidence recorded on 2026-07-10:
 
 - Native in-memory embedding is the primary multi-backend product contract under ADR `0022`; Julia already
   exposes parse/stage/compile/runtime APIs without a CLI, subprocess, temporary file, or generated-source step.
-- The Julia interpreter path is the accepted conformance gate and passes all 99 checked-in fixtures with exact
-  outputs. No correctness gap requires generated source to close the scoped milestone.
+- The Julia interpreter path is the accepted correctness gate and passes all 99 checked-in fixtures with exact
+  outputs. No interpreter gap requires generated source for that scoped milestone; ADR `0023` has since clarified
+  that Rust's public source-emitter capability must be matched before Julia can claim complete user-visible parity.
 - Rust generated-source proof was not a single emitter function: it required a scaffold and compile/run harness,
   typed generated-family plan, direct structural-family execution, and a curated corpus subset. Julia must own the
   same proof classes in a separately split lane rather than land an unverified string emitter here.
@@ -2608,6 +2647,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.1` | Direct execution assertions for both mdBook native examples; mdBook Julia usage/status/limitation searches; focused Julia gate status retained from `.6.4`; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Native in-memory rule/function examples execute exact output; focused/direct/opt-in commands, 99/99 interpreter status, and generated-source/trace/tooling limitations are explicit; `.7.2` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.2` | Read-only Rust source-emitter/Dart deferral/ADR `0022` evidence; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Generated Julia source is deferred to expanded future owner `FUTURE-PARITY-BACKLOG.3` with scaffold/harness, family-plan, direct structural, and curated corpus prerequisites; `.7.3` becomes active without behavior change. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.0` | ADR/KM retrieval; source audit of Perl, Rust, Dart, and Julia CLI/package targets; Cargo binary-target census; task split; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Perl exposes a parser CLI, Dart/Julia expose corpus/status CLIs, and Rust has no binary target; `.7.3.1` becomes active before any repair. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.1` | Perl primary CLI and backend-neutral trace contract; Rust public source-emitter export; ADR `0023`; global task routing; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Exact capability/behavior and primary-CLI parity are durable; Julia `.7.3.2` and global `.1.5`/`.1.6`/`.3` own all known gaps; no implementation behavior changed. |
 
 ## Commit Log
 
@@ -2665,9 +2705,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.7.1` | `JULIA-BACKEND-PARITY.7.1 - document Julia usage and parity boundary` | Public commands, native examples, current 99/99 status, and precise limitations; generated-source decision advances to `.7.2`. |
 | `JULIA-BACKEND-PARITY.7.2` | `JULIA-BACKEND-PARITY.7.2 - defer Julia generated source proof` | Generated proof is routed to future `.3` with explicit split prerequisites; final no-drift advances to `.7.3`. |
 | `JULIA-BACKEND-PARITY.7.3.0` | `JULIA-BACKEND-PARITY.7.3.0 - split strict user-facing parity closeout` | Current CLI drift is source-proven and split into contract/routing, Julia repair, and honest no-drift leaves. |
+| `JULIA-BACKEND-PARITY.7.3.1` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | ADR `0023`, canonical CLI schema, strict completion terms, and global CLI/capability/codegen owners; `.7.3.2` becomes active. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.7.3.1` exact interface-parity decision. ADR `0023` defines complete parity as
+  user-observable capability/behavior identity and gives distinct executable names one exact primary CLI.
+  Julia `.7.3.2`, global `.1.5`, capability census `.1.6`, and public codegen `.3` own all known work; no behavior
+  changed.
 - `2026-07-10`: Completed `.7.3.0` read-only strict user-facing parity audit. ADR `0006` already requires the same
   features and semantics; the director clarified that distinct executable names must expose an identical CLI API.
   Source inspection found Perl parser options, Dart/Julia corpus/status interfaces, and no Rust binary target.

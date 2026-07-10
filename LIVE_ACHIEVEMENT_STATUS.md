@@ -7,14 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.1 — ratify exact backend interface parity**
+  (DONE — ADR `0023` and global repair owners are durable; `.7.3.2` is active).
+
+  **Contract:** Complete parity is identical user-observable capability/behavior. Distinct command names expose
+  one parser interface with the same options/meanings, no subcommands/positionals, canonical JSON, normalized
+  output/errors, and 0/1/2 exits.
+
+  **Routing:** Julia CLI repair stays in `.7.3.2`; global `.1.5`, `.1.6`, and `.3` own current-backend CLI identity,
+  full capability census, and public generated-source parity. No implementation behavior changed.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.7.3.0 — split strict user-facing parity closeout**
-  (DONE — current CLI drift is source-proven; `.7.3.1` is active).
+  (DONE — current CLI drift is source-proven; `.7.3.1` has since ratified the contract).
 
   **Finding:** Distinct executable names do not currently expose the same API. Perl has the parser CLI, Dart/Julia
   have corpus/status CLIs, and Rust declares no binary target. The 99/99 corpus gate is not CLI-parity proof.
 
-  **Routing:** `.7.3.1` owns the durable exact feature/CLI contract and cross-backend repair ownership; `.7.3.2`
-  owns Julia CLI alignment; `.7.3.3` owns honest no-drift. No behavior changed in this planning slice.
+  **Routing:** `.7.3.1` has since ratified the exact feature/CLI contract and cross-backend repair ownership;
+  `.7.3.2` owns Julia CLI alignment and `.7.3.3` honest no-drift. No behavior changed in this planning slice.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.7.2 — defer Julia generated source proof**
   (DONE — generated source is routed to future split ownership; `.7.3` has since been split).

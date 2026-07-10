@@ -7,6 +7,10 @@
 > Update 2026-07-10: ADR `0022` makes native in-memory host-language embedding
 > the primary completion gate for Lua and every future backend. The rollout order
 > in this record is unchanged; per-variant CLIs are secondary adapters.
+>
+> ADR `0023` additionally requires every distinct backend CLI name to expose the
+> identical user-facing interface and every backend to match the full public
+> capability matrix before claiming complete parity.
 
 ## Context
 

@@ -5,10 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: ADR `0023` closes `JULIA-BACKEND-PARITY.7.3.1`. Complete parity now means identical
+  user-observable capability/behavior; distinct executable tokens expose one parser-oriented interface with the
+  Perl source/input/parser/trace/help option set, no subcommands/positionals, canonical JSON, normalized errors,
+  and 0/1/2 exits. `.7.3.2` is active for Julia; global CLI repair is `.1.5`, capability census `.1.6`, and public
+  generated-source parity `.3`. Rust's exported emitter makes codegen mandatory for complete, not interpreter, parity.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.0` proves a cross-backend CLI architecture gap. ADR `0006`
   already requires the same user-visible features and semantics, and the director clarified that distinct backend
   executable names must expose an identical CLI contract. Perl currently has the parser CLI, Dart/Julia expose
-  corpus/status CLIs, and Rust declares no binary target. `.7.3.1` owns the durable contract and repair routing.
+  corpus/status CLIs, and Rust declares no binary target. `.7.3.1` has since ratified the durable contract/routing.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.2` deliberately defers generated Julia source. Native in-memory
   interpreter parity already passes 99/99; Rust evidence shows generated proof needs a separately split emitter/
   compile-run harness, typed family plan, direct structural-family execution, and curated corpus subset.

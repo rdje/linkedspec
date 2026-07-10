@@ -38,7 +38,7 @@ Every backend must let a host program:
 File resolution, distinct per-variant executable names, corpus runners, Wasm, web, mobile,
 FFI, and service wrappers remain useful. They are adapters over the native library and
 cannot own semantics unavailable to in-process callers. Distinct CLI names expose one
-identical user interface; backend identity is not permission to change its API.
+identical user interface under ADR `0023`; backend identity is not permission to change its API.
 
 ## Current structural evidence
 
@@ -63,3 +63,4 @@ language-neutral corpus gates.
 - [Backend handoff](../linkedspec-book/src/appendix/backend-handoff.md)
 - [[language-agnostic-backend-vision]]
 - [[cross-backend-cli-contract-gap]]
+- [[user-observable-backend-cli-parity-contract]]

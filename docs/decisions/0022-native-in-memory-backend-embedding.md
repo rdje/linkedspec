@@ -4,6 +4,10 @@
 - Status: accepted
 - Tags: architecture, portability, backends, embedding, public-api, cross-variant-parity
 
+> Update 2026-07-10: ADR `0023` preserves CLIs as secondary adapters while
+> requiring distinct backend executable names to expose one identical interface.
+> It also makes complete parity contingent on the full user-observable capability matrix.
+
 ## Context
 
 ADR `0006` established identical `.spec` files and lockstep semantics across backends, and
@@ -41,10 +45,10 @@ The implemented surfaces already demonstrate this model:
    do not weaken the in-memory capability contract.
 4. **File APIs are conveniences.** Named-spec resolution and filesystem-backed entrypoints
    may wrap the same library pipeline, but they cannot be the only complete public surface.
-5. **CLIs are secondary thin adapters.** Each variant may keep its distinct CLI, corpus
-   runner, and diagnostic tooling. They must delegate semantic work to the native library
-   and may not own parser, compiler, runtime, or language behavior unavailable to library
-   callers.
+5. **CLIs are secondary thin adapters.** Each variant may keep a distinct primary executable name plus separate
+   corpus runner and diagnostic tooling. Primary commands must share ADR `0023`'s exact interface, delegate
+   semantic work to the native library, and may not own parser, compiler, runtime, or language behavior unavailable
+   to library callers.
 6. **Library-level proof is mandatory.** Backend acceptance must include direct host-process
    tests of in-memory parse/compile/execute behavior. CLI and corpus tests supplement that
    proof; they do not replace it.
@@ -79,3 +83,4 @@ decisions.
 - Public API: `docs/linkedspec-book/src/public-api/get-and-get-parser.md`
 - Backend handoff: `docs/linkedspec-book/src/appendix/backend-handoff.md`
 - Knowledge Map card: `docs/knowledge/native-in-memory-backend-contract.md`
+- Exact interface parity: `docs/decisions/0023-user-observable-backend-and-cli-parity.md`

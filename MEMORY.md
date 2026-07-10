@@ -18,21 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.7.3.0` — source audit proves current backend CLIs are not
-  interface-equivalent and splits strict user-facing parity before repair.
-- prior_leaf: `JULIA-BACKEND-PARITY.7.2` — generated Julia source is deferred to the split future source-emitter
-  lane; native in-memory interpreter parity remains the 99/99 gate.
-- recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
-  99/99 corpus execution, focused Dart verification, backend-local corpus CLI implementation, mdBook/live-doc
-  alignment, and generated-source deferral are recorded; exact shared CLI parity is now a known gap.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.7.3.1` — ADR `0023` ratifies exact user-observable capability/
+  behavior and primary-CLI parity; global repair and census owners are durable.
+- prior_leaf: `JULIA-BACKEND-PARITY.7.3.0` — source audit proves current backend CLIs are not interface-equivalent.
+- recent_context: Dart/Julia are 99/99 interpreter-green scoped milestones, not complete public parity; global
+  `.1.5`, `.1.6`, and `.3` own current-backend CLI, capability, and generated-source convergence before Lua.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.7.3.0 - split strict user-facing parity closeout`; previous committed HEAD is
-  `7f812b0a JULIA-BACKEND-PARITY.7.2 - defer Julia generated source proof`.
+  `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity`; previous committed HEAD is
+  `214ad7b6 JULIA-BACKEND-PARITY.7.3.0 - split strict user-facing parity closeout`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; its frontier after this commit is `.7.3.1`.
-- next_action: ratify exact user-observable feature/CLI parity and route Perl/Rust/Dart/Julia repairs under
-  `.7.3.1`, then align Julia's primary CLI under `.7.3.2`.
+- active_work_unit: `JULIA-BACKEND-PARITY`; its frontier after this commit is `.7.3.2`.
+- next_action: align Julia's primary command to ADR `0023`'s parser CLI, splitting implementation mechanisms first
+  if source selection, trace routing, normalized diagnostics, and exact fixture proof exceed one safe slice.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
@@ -43,13 +41,13 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   `.4.1` through `.6.1`, Dart staged registry/runtime/descriptor/corpus reference facts, and the portable staged registry contract;
   Dart diagnostics/trace split and implementation facts, and the portable trace
   capability contract, canonical statement-separator fact, Julia depot-aware cleanup boundary, history public-
-  parser leading-trivia fact, the director's native in-memory multi-backend rationale, and the four-backend CLI
-  source/target audit.
+  parser leading-trivia fact, the director's native in-memory multi-backend rationale, four-backend CLI source/
+  target audit, public Rust source-emitter export, and ADR `0023` exact interface/capability contract.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1028`**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: `.7.3.0` is verified and ready for its prepared commit; none expected
-  afterward. Do not advance to `.7.3.1` until the tree is clean.
+- blockers: none. in_flight_uncommitted: `.7.3.1` is verified and ready for its prepared commit; none expected
+  afterward. Do not advance to `.7.3.2` until the tree is clean.
