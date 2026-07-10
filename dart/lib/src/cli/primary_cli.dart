@@ -4,6 +4,8 @@ import 'dart:typed_data';
 
 import '../compiler/compiled_spec.dart';
 import '../parser/user_function_definition_parser.dart';
+import '../runtime/interpreter.dart';
+import '../runtime/matching.dart';
 
 const linkedspecDartDisplayCommand = 'dart run bin/linkedspec_dart.dart';
 
@@ -130,13 +132,14 @@ PrimaryCliCommandOutput runLinkedSpecDartPrimaryCli(
     );
   }
 
+  final CompiledSpec compiled;
   try {
     // Dart's String.trim() treats U+FEFF as whitespace. The portable CLI does
     // not strip a source BOM, so reject it before the frontend can erase it.
     if (prepared.specSource.startsWith('\uFEFF')) {
       throw const FormatException('leading source BOM is preserved');
     }
-    compileSpec(
+    compiled = compileSpec(
       parseSpecWithStagedUserFunctionDefinitions(prepared.specSource),
     );
   } on Object {
@@ -145,13 +148,26 @@ PrimaryCliCommandOutput runLinkedSpecDartPrimaryCli(
     );
   }
 
-  if (_loadInput(prepared.input) == null) {
+  final input = _loadInput(prepared.input);
+  if (input == null) {
     return PrimaryCliCommandOutput.operationalFailure('input load failed');
   }
 
-  // Native execution/result projection is the next owned leaf. Reaching this
-  // boundary proves argument, source, compilation, and deferred input phases.
-  return PrimaryCliCommandOutput.operationalFailure('parser invocation failed');
+  try {
+    final parseMode = prepared.options.parseMode == 'consume'
+        ? LinkedSpecParseMode.consume
+        : LinkedSpecParseMode.seek;
+    final result = LinkedSpecRuntimeEngine(
+      compiled,
+      parseMode: parseMode,
+    ).execute(input, topRule: prepared.options.topRule);
+    final json = jsonEncode(_canonicalJson(result.value));
+    return PrimaryCliCommandOutput.success('$json\n');
+  } on Object {
+    return PrimaryCliCommandOutput.operationalFailure(
+      'parser invocation failed',
+    );
+  }
 }
 
 final class _PrimaryCliOptions {
@@ -476,4 +492,21 @@ Directory? _findRepositoryRoot() {
     }
   }
   return null;
+}
+
+Object? _canonicalJson(Object? value) {
+  if (value is List) {
+    return [for (final item in value) _canonicalJson(item)];
+  }
+  if (value is Map) {
+    final entries = value.entries.toList()
+      ..sort(
+        (left, right) => left.key.toString().compareTo(right.key.toString()),
+      );
+    return {
+      for (final entry in entries)
+        entry.key.toString(): _canonicalJson(entry.value),
+    };
+  }
+  return value;
 }

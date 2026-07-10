@@ -91,8 +91,9 @@ bash tools/run_dart_local.sh
 It runs Dart formatting, analyzer checks, the full Dart test suite, shared primary-CLI help,
 a bounded corpus-runner smoke, and the full 99-fixture corpus execution. The shared 61-case primary-command
 legs are scheduled in `FUTURE-PARITY-BACKLOG.1.5.3.4` after the split boundary/execution/trace work; the separate
-corpus runner remains the 99-fixture owner. The `.1` boundary currently passes its exact 29-case subset in both
-default and POSIX environments. The canonical local gate does not require a Dart SDK by default. When a checkout has
+corpus runner remains the 99-fixture owner. The `.1` boundary and `.2` native direct-result projection currently
+pass 41/61 unchanged primary cases; the only residuals are 20 canonical-trace cases under `.3`. The canonical local
+gate does not require a Dart SDK by default. When a checkout has
 Dart installed and you want one command to include both gates, run:
 
 ```bash

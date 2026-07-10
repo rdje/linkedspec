@@ -1045,6 +1045,7 @@ Direct Dart commands live under `dart/`:
 ```bash
 dart test
 dart run bin/linkedspec_dart.dart --help
+dart run bin/linkedspec_dart.dart --spec Lispish --input '(hello world)'
 dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute
 ```
 
@@ -1057,8 +1058,8 @@ Dart milestone. The later strict-interface audit recorded the old primary comman
 `FUTURE-PARITY-BACKLOG.1.5.3.1` now passes the exact 29-case argument/loading/failure subset in both
 default and POSIX environments while preserving `bin/corpus_runner.dart`. The new boundary is case-sensitive,
 non-abbreviating, positional-free, strict UTF-8, deterministic for named/file/inline source resolution, and
-compile-before-input phase ordered. `.2` composes the existing staged parser, validator/compiler,
-direct-value runtime, top-rule/global-mode controls, and recursively canonical JSON;
+compile-before-input phase ordered. `.1.5.3.2` now composes the existing staged parser, validator/compiler,
+direct-value runtime, top-rule/global-mode controls, and recursively canonical JSON, advancing Dart to 41/61;
 `.3` adds the portable CLI trace independently of rich Dart tracing; `.4` closes both
 default and POSIX environments plus recurring verification.
 

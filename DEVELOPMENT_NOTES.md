@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.3.2 — serialize the native direct value, not a compatibility shape):
+  Dart's runtime already exposes both `value` and legacy corpus `output == [value]`. The primary CLI must consume
+  `value` directly; unwrapping `output` would make a legitimate one-element array ambiguous. Apply global mode in
+  the engine constructor and entry rule per call, then recursively key-sort maps before compact UTF-8 JSON. This
+  keeps source/input/runtime semantics native and leaves only deterministic trace projection in the adapter.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.3.1 — extraction no-match can be a valid empty result):
   A staged extractor is not necessarily a whole-document recognizer. For the function-definition shell, no `fn`
   match means an empty definition list, after which the ordinary `.spec` parser still validates the full source.

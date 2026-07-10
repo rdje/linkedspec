@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.3.2 — add Dart primary execution
+
+**Native composition:** The primary adapter now retains `CompiledSpec`, loads input after compilation, creates
+`LinkedSpecRuntimeEngine` with the requested global mode, and passes the optional top rule to native execution. It
+serializes direct `RuntimeParseResult.value`, not the corpus-compatible `[value]` wrapper.
+
+**Canonical result:** Arrays preserve order; maps are recursively sorted by stringified key; compact JSON is
+encoded as UTF-8 with one trailing newline. Runtime and JSON failures remain behind the stable invocation heading.
+
+**Proof/frontier:** The focused nested/top/mode test and all 11 direct result cases pass in default and POSIX
+environments. Quiet trace also passes without records, advancing Dart 29 -> 41/61. Analyzer, full Dart tests, 99/99
+corpus, docs/KM/governance/book, and cleanup pass. Exactly 20 canonical-trace cases remain under active `.3`.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.3.1 — add Dart CLI boundary
 
 **Primary adapter:** Replaced `bin/linkedspec_dart.dart`'s corpus command with exact shared arguments/help, raw

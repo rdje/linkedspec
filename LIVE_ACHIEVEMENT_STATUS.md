@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.3.2 — add Dart primary execution**
+  (DONE — native direct results advance Dart to 41/61; `.1.5.3.3` active for 20 trace cases).
+
+  **Implementation:** Retained compiled state, composed native global mode/top rule execution, emitted direct
+  `RuntimeParseResult.value`, and recursively sorted compact UTF-8 JSON with one newline. Stable failure projection
+  remains at the adapter boundary.
+
+  **Proof:** Focused canonical nested/top/mode coverage, all 11 direct results, and quiet trace pass default/POSIX.
+  Analyzer, full Dart tests, 99/99 corpus, and docs/KM/governance/book/cleanup pass.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.3.1 — add Dart CLI boundary**
   (DONE — exact boundary/loading/failures are 29/29 default/POSIX; `.1.5.3.2` active for direct results).
 

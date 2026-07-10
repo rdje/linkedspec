@@ -150,4 +150,32 @@ void main() {
       root.deleteSync(recursive: true);
     }
   });
+
+  test('executes the selected rule and emits recursively canonical JSON', () {
+    const source = '''
+Top::
+ /a/ -> Done { return("top") }
+
+Alternate:
+ /x/ -> Done { return(hash("z", 0, "a", hash("d", 4, "b", 2))) }
+
+Done::
+ /[ax]/
+''';
+
+    final output = runLinkedSpecDartPrimaryCli(const [
+      '--inline-spec',
+      source,
+      '--input',
+      'x',
+      '--top-rule',
+      'Alternate',
+      '--parse-mode',
+      'consume',
+    ]);
+
+    expect(output.exitCode, 0);
+    expect(output.stderrBytes, isEmpty);
+    expect(output.stdoutBytes, utf8.encode('{"a":{"b":2,"d":4},"z":0}\n'));
+  });
 }
