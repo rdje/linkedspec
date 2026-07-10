@@ -1,6 +1,6 @@
 ---
 id: julia-shipped-corpus-smoke-split
-title: Julia shipped-spec parser-smoke window starts 10/31 and is split by failure family
+title: Julia shipped-spec parser-smoke window starts 10/31, closes 31/31, and has a permanent full-window regression
 answers:
   - what does JULIA-BACKEND-PARITY.6.2.4.0 prove
   - why is the Julia shipped corpus smoke batch split
@@ -8,10 +8,13 @@ answers:
   - which Julia shipped-spec corpus failures are known
   - what is the Julia corpus frontier after the middle batch
   - how many Julia shipped-spec parser-smoke fixtures pass initially
+  - how many Julia shipped-spec parser-smoke fixtures pass now
+  - what permanently locks the Julia 31 fixture shipped corpus window
+  - what does runtime-corpus-shipped mean
 date: 2026-07-10
 status: current
 tags: [julia, corpus, shipped-specs, parser-smoke, helpers, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.2.4.0 runs julia/bin/corpus_runner.jl with --offset 68 --limit 31 and records 10 passed / 21 failed. The task tree accounts for every failure under anonymous capture boundaries, logical helpers, diagnostic-output helpers, recursive top-rule outputs, EBNF/spec.spec structural outputs, or lib_reader quote normalization before Julia behavior changes."
+evidence: "JULIA-BACKEND-PARITY.6.2.4.0 runs julia/bin/corpus_runner.jl with --offset 68 --limit 31 and records 10 passed / 21 failed. The owned mechanism leaves close every residual. JULIA-BACKEND-PARITY.6.2.4.6 adds one permanent complete-window test locking manifest count 99, result count 31, stable tclite/lib_reader endpoints, 31 passes, zero failures, and exact outputs. Full Julia tests pass with 816 assertions and status runtime-corpus-shipped."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31"
 ---
 
@@ -40,14 +43,15 @@ Every failing fixture is routed exactly once before implementation:
   mutation residuals under `.6.2.4.5.2`.
 - `.6.2.4.5`: the remaining non-final mechanisms are split into `exit_now` control (`.5.1`), EBNF/lib_reader/
   simenv statement mutation (`.5.2`), and history public-parser leading trivia (`.5.3`).
-- `.6.2.4.6`: final 31/31 regression and no-drift closeout.
+- `.6.2.4.6`: final 31/31 regression and no-drift closeout, now complete.
 
 The checked-in expected JSON remains the Perl/Rust oracle. Completed Dart facts identify portable mechanism
 contracts, but the Julia leaves must establish their own root causes. After `.6.2.4.5.2`, statement regex mutation
 closes both EBNF, both lib_reader, and simenv fixtures without fixture-specific cleanup. `.6.2.4.5.3` then mirrors
 public-parser leading blank/comment skipping and closes history without weakening indexed reads. The complete
-window is 31/31. Full tests pass with 810 assertions, status is `runtime-corpus-leading-trivia`, and `.6.2.4.6` is
-active for final no-drift.
+window reached 31/31. `.6.2.4.6` now runs that entire window in one permanent test and locks manifest/result counts,
+stable endpoints, zero failures, and exact outputs. Full tests pass with 816 assertions, status is
+`runtime-corpus-shipped`, and `.6.2.5` is active for the three separately routed top-level function fixtures.
 
 Related facts: [[ds-vhistory-leading-newline-oracle-boundary]], [[julia-statement-regex-mutation]], [[julia-exit-now-control]], [[julia-action-edge-child-push]], [[julia-recursive-rule-local-reset-scope]], [[julia-diagnostic-output-helpers]], [[julia-helper-regex-flag-normalization]], [[julia-logical-helper-execution]], [[julia-anonymous-capture-boundary-helpers]], [[julia-middle-corpus-batch]], [[julia-controlled-corpus-execution]],
 [[dart-shipped-corpus-smoke-split]], [[dart-helper-action-surface-bridge]],

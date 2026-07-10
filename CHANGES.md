@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.6 — close Julia shipped corpus no drift
+
+**Scope:** Permanent complete shipped-spec corpus regression, honest Julia package/CLI status, task/roadmap/live
+docs, mdBook, Knowledge Map, and resume pointer.
+
+**Change:** Added one Julia test that executes the exact manifest offset-68/limit-31 window and locks manifest
+count `99`, result count `31`, stable `tclite_command_subst` / `lib_reader_cattribute` endpoints, pass count `31`,
+zero failures, and exact expected-output equality for every result. Package/CLI status advances from the last
+leading-trivia mechanism label to `runtime-corpus-shipped`. No parser, compiler, runtime, or fixture changed.
+
+**Validation:** Direct corpus-runner execution prints all 31 fixtures as `PASS` and finishes 31 passed / 0 failed.
+Full `Pkg.test()` passes with 816 assertions. The shipped batch and `.6.2.4` parent close; `.6.2.5` becomes active
+for the three separately routed top-level function fixtures.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.4 — ratify native in-memory backend contract
 
 **Scope:** Cross-backend product architecture, public API/handoff documentation, Perl/Rust/Dart/Julia surface

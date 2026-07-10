@@ -1,6 +1,6 @@
 # LinkedSpec Julia Backend
 
-This directory is the repository-owned Julia backend. Its current `runtime-corpus-leading-trivia` status covers the
+This directory is the repository-owned Julia backend. Its current `runtime-corpus-shipped` status covers the
 package/command surface, manifest validation, source and ActionIR frontends, staged user-function projection/body
 parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch, value/helper/control/callback
 families, cursor/boundary behavior, structured diagnostics/tracing, registered function execution, and controlled
@@ -18,8 +18,8 @@ added by `JULIA-BACKEND-PARITY.4.1`, and first executable rule dispatch was adde
 `JULIA-BACKEND-PARITY.4.2`. `JULIA-BACKEND-PARITY.4.3.0` split helper/value work by runtime mechanism. Core
 value/store/capture behavior landed in `.4.3.1`, and string/scalar plus numeric helpers landed in `.4.3.2`. The
 array helper and mutation boundary landed in `.4.3.3`, and hash helper and mutation behavior landed in `.4.3.4`;
-`.4.3.5` landed value/control/block/callback execution, and `.4.3.6` closed final helper/value no-drift. `.4.4` is
-active for explicit cursor controls and boundary capture.
+`.4.3.5` landed value/control/block/callback execution, and `.4.3.6` closed final helper/value no-drift. Cursor,
+diagnostic/trace, staged-function, and shipped-corpus work through `.6.2.4.6` has since landed; `.6.2.5` is active.
 
 ## Commands
 
@@ -158,8 +158,9 @@ scalar targets mutate through strict helper flags and `$n` replacement expansion
 `substr(...)` stays pure. Both EBNF, both lib_reader, and simenv fixtures now pass exact oracle output. Full tests
 pass with 808 assertions, status is `runtime-corpus-statement-mutation`, the shipped-smoke window is 30/31, and
 `.6.2.4.5.3` has since mirrored public-parser leading blank/comment skipping without weakening ordinary indexed
-reads. History passes, the shipped window is 31/31, full tests pass with 810 assertions, status is
-`runtime-corpus-leading-trivia`, and `.6.2.4.6` owns final no-drift.
+reads. History passes, and `.6.2.4.6` adds the complete offset-68/limit-31 regression with stable endpoints, exact
+outputs, and zero failures. The shipped window is permanently 31/31, full tests pass with 816 assertions, status
+is `runtime-corpus-shipped`, and `.6.2.5` owns the three routed top-level function fixtures.
 
 Library example:
 

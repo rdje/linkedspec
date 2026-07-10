@@ -131,9 +131,10 @@ Top-level directories and files:
     explicit numeric status, default status `1`, and structured runtime attribution. Full tests pass with 801
     assertions and status `runtime-corpus-exit-now` at that boundary. `.6.2.4.5.2` adds statement regex mutation,
     closes both EBNF, both lib_reader, and simenv fixtures, and preserves pure numeric slicing. Full tests pass with
-    808 assertions at that boundary. `.6.2.4.5.3` mirrors public-parser leading blank/comment skipping, closes
-    history without weakening indexed reads, and moves shipped smoke to 31/31. Full tests pass with 810 assertions,
-    status is `runtime-corpus-leading-trivia`, and `.6.2.4.6` is active for final no-drift.
+    808 assertions at that boundary. `.6.2.4.5.3` mirrors public-parser leading blank/comment skipping and closes
+    history without weakening indexed reads. `.6.2.4.6` now permanently locks the complete shipped window at
+    31/31 exact outputs. Full tests pass with 816 assertions, status is `runtime-corpus-shipped`, and `.6.2.5` is
+    active for the three routed top-level function fixtures.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

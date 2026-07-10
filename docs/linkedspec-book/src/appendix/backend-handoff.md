@@ -360,8 +360,10 @@ window remains 25/31 at that boundary. `.6.2.4.5.2` adds statement-context four-
 with strict flags and `$n` expansion while preserving pure numeric slicing. Both EBNF, both lib_reader, and simenv
 fixtures pass. Full tests pass with 808 assertions, status is `runtime-corpus-statement-mutation`, the window is
 30/31 at that boundary. `.6.2.4.5.3` mirrors the public parser's leading blank/comment-line skip through Julia's
-in-memory runtime cursor seam. History passes without weakening indexed reads; full tests pass with 810 assertions,
-status is `runtime-corpus-leading-trivia`, the window is 31/31, and `.6.2.4.6` owns final no-drift.
+in-memory runtime cursor seam. History passes without weakening indexed reads. `.6.2.4.6` now locks the complete
+offset-68/limit-31 window in one permanent test: stable endpoints, 31/31 exact outputs, and zero failures. Full
+tests pass with 816 assertions, status is `runtime-corpus-shipped`, and `.6.2.5` owns the three routed top-level
+function fixtures.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -690,7 +692,8 @@ source changes:
   helpers blocking simenv and history.
 - `.6.2.4.3` owns three already-executing recursive top-rule output mismatches.
 - `.6.2.4.4` owns EBNF/spec.spec structural outputs and must split again if independent mechanisms emerge.
-- `.6.2.4.5` owns two lib_reader quote-normalization mismatches; `.6.2.4.6` owns final 31/31 no-drift.
+- `.6.2.4.5` owns two lib_reader quote-normalization mismatches; `.6.2.4.6` later owns and closes final 31/31
+  no-drift.
 
 The checked-in expected JSON remains the Perl/Rust oracle. Dart's completed shipped-smoke facts are useful
 mechanism references, but Julia leaves establish their own root causes rather than copying Dart's historical path.
@@ -752,8 +755,9 @@ pass with 808 assertions, and status is `runtime-corpus-statement-mutation` at t
 
 Julia's public in-memory `runtime_parse(...)` entrypoint now begins after only leading blank lines and leading `#`
 comment lines, matching the Perl wrapper and Dart backend. A focused minimal proves the history boundary while an
-ordinary scalar-held `payload[1]` still returns its indexed item. `ds_vhistory_version_entry` passes, full tests
-pass with 810 assertions, status is `runtime-corpus-leading-trivia`, and the complete window is 31/31.
+ordinary scalar-held `payload[1]` still returns its indexed item. `ds_vhistory_version_entry` passes. The final
+no-drift leaf adds one permanent complete-window test; full tests pass with 816 assertions, status is
+`runtime-corpus-shipped`, and the complete shipped-spec window is 31/31.
 
 ### Dart Backend Commands
 

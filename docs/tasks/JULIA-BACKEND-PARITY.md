@@ -494,17 +494,18 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.2.3 - close Julia middle corpus batch`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4`
-  Status: `active`
+  Status: `done`
   Goal: Close the shipped-spec and parser-smoke corpus batch.
   Children: `.6.2.4.0`, `.6.2.4.1`, `.6.2.4.2`, `.6.2.4.2.1`, `.6.2.4.2.2`, `.6.2.4.3`, `.6.2.4.4`,
     `.6.2.4.5`, `.6.2.4.6`
   Acceptance: Manifest fixtures `68..98` covering tclite, lispish, recursive top rules, hlink, portmap, EBNF,
     spec.spec, regdef, tablegrep, simenv, VHDL/library, history, and plugin smokes pass unchanged or each failure
     cluster is split before implementation with Perl/Rust/Dart oracle evidence.
-  Verification: Initial bounded diagnostic reports 10 passed and 21 failed. `.6.2.4.0` records the exact boundary
-    and splits capture-boundary helpers, logical/diagnostic helpers, recursive top-rule outputs, EBNF/spec.spec
-    structural outputs, lib_reader quote normalization, and final no-drift before implementation.
-  Commit: `pending`
+  Verification: Initial bounded diagnostic reported 10 passed and 21 failed. The owned mechanism leaves close
+    every residual. `.6.2.4.6` adds one permanent complete-window regression over offsets 68–98; all 31 fixtures
+    pass exact checked-in output, full `Pkg.test()` passes with 816 assertions, and status is
+    `runtime-corpus-shipped`.
+  Commit: closed by `JULIA-BACKEND-PARITY.6.2.4.6 - close Julia shipped corpus no drift`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.0`
   Status: `done`
@@ -672,15 +673,20 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.2.4.5.3 - mirror Julia public parser leading trivia`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.6`
-  Status: `active`
+  Status: `done`
   Goal: Close final shipped-spec/parser-smoke no-drift.
   Acceptance: The complete offset-68/limit-31 window is 31/31 green, a permanent regression locks it, all residual
     mechanisms are explicitly owned, and package/docs/status surfaces agree before `.6.2.5` begins.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - a permanent test executes exactly offset `68`, limit `31`, and locks manifest count `99`,
+    result count `31`, stable endpoints `tclite_command_subst` / `lib_reader_cattribute`, pass count `31`, empty
+    failures, and exact expected-output equality for every result. Direct CLI execution reports 31 passed / 0
+    failed. Full `Pkg.test()` passes with 816 assertions; CLI status reports `runtime-corpus-shipped`. Package,
+    README, mdBook, roadmaps, Knowledge Map, task/index, architecture, live docs, and memory agree. No runtime
+    semantic or corpus-fixture change was required.
+  Commit: `JULIA-BACKEND-PARITY.6.2.4.6 - close Julia shipped corpus no drift`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.5`
-  Status: `pending`
+  Status: `active`
   Goal: Execute top-level user-function corpus fixtures through the spec-defined shell.
   Acceptance: Julia obtains neutral `function_definition` nodes from `specs/user_function_definition.spec`, feeds
     them through staged body projection, and passes the routed `fn` fixtures without introducing a Julia raw
@@ -757,7 +763,36 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 18 | `JULIA-BACKEND-PARITY.6.2.4.5.1` | `done` | Terminating explicit/default `exit_now(...)` control is diagnostic-attributed and immediate. |
 | 19 | `JULIA-BACKEND-PARITY.6.2.4.5.2` | `done` | Statement regex mutation closes both EBNF, both lib_reader, and simenv fixtures. |
 | 20 | `JULIA-BACKEND-PARITY.6.2.4.5.3` | `done` | Public-parser leading blank/comment skipping closes the sole history residual without weakening indexed reads. |
-| 21 | `JULIA-BACKEND-PARITY.6.2.4.6` | `active` | Lock the now-green 31/31 shipped window and close final no-drift before function-shell corpus work. |
+| 21 | `JULIA-BACKEND-PARITY.6.2.4.6` | `done` | Permanent full-window execution locks 31/31 exact output and closes shipped no-drift. |
+| 22 | `JULIA-BACKEND-PARITY.6.2.5` | `active` | Execute the three routed top-level function fixtures through the spec-defined shell. |
+
+## `JULIA-BACKEND-PARITY.6.2.4.6` Complete Shipped-Window Result
+
+No-drift evidence recorded on 2026-07-10:
+
+- The permanent Julia test runs the exact manifest window `offset = 68`, `limit = 31`; this is the same bounded
+  command used for the initial 10/31 diagnosis and every intervening mechanism check.
+- The regression locks manifest count `99`, result count `31`, first case `tclite_command_subst`, last case
+  `lib_reader_cattribute`, pass count `31`, zero failure records, and `actual_output == Any[expected_json]` for
+  every fixture.
+- Direct Julia corpus-runner execution reports all 31 fixture names as `PASS` and finishes `31 passed, 0 failed`.
+- Full `Pkg.test()` passes with 816 assertions. The package and CLI status is `runtime-corpus-shipped`.
+- No runtime, parser, compiler, spec, manifest, input, or expected-output behavior changed in this closeout. The
+  next active leaf is `.6.2.5` for the three deliberately routed top-level function fixtures.
+
+## `JULIA-BACKEND-PARITY.6.2.4.6` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The complete window already measured 31/31 after `.6.2.4.5.3`, but only smaller
+  mechanism-group regressions existed; no single permanent test owned the bounded window and its endpoints.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `julia/test/runtests.jl` had starter, middle, and mechanism-specific shipped
+  corpus testsets but no full `68/31` testset, leaving the final no-drift claim dependent on manual commands.
+- [x] **FIX** — Added one complete-window test with manifest/count/endpoint/pass/failure/exact-output locks and
+  advanced the package status from the last mechanism name to `runtime-corpus-shipped`.
+- [x] **ADDRESSED (verified)** — The permanent test and direct CLI command both execute 31 fixtures with 31 passes
+  and zero failures.
+- [x] **NO REGRESSION** — Full Julia `Pkg.test()` passes with 816 assertions; no runtime or fixture changed.
+- [x] **LOCKSTEP** — Julia README, public book, roadmaps, task/index, architecture, live docs, Knowledge Map,
+  package/CLI status, and `MEMORY.md` agree; `.6.2.5` is the sole active Julia frontier.
 
 ## `JULIA-BACKEND-PARITY.6.2.4.5.3` Public-Parser Leading Trivia Result
 
@@ -2316,6 +2351,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.5.1` | Focused explicit/default `exit_now(...)` runtime and structured-diagnostic proof; simenv/history boundary regression; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Immediate fatal control preserves explicit status, defaults to `1`, and retains structured attribution. Simenv advances from unsupported helper to `exit_now(1) in rule begin_end_blocks`, routing the earlier scalar-mutation prerequisite to `.6.2.4.5.2`; shipped smoke remains 25/31, full tests pass with 801 assertions, status is `runtime-corpus-exit-now`, and `.6.2.4.5.2` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.5.2` | Focused statement regex mutation/pure-slice proof using the single-quoted pattern; five-case EBNF/simenv/lib_reader corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; Perl `actionir_ast_parser.t`; Rust `parse_string_literal_single_quotes`; Dart `action_ast_parser_test.dart`; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Statement-context four-argument regex substitution mutates bare scalar targets with strict flags and `$n` expansion while numeric slicing stays pure. Exact parser locks preserve single-quoted action strings as the shared Perl/Rust/Dart/Julia language contract. Both EBNF, both lib_reader, and simenv pass; shipped smoke is 30/31, full tests pass with 808 assertions, status is `runtime-corpus-statement-mutation`, and `.6.2.4.5.3` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.5.3` | Knowledge Map public-parser fact; Perl `Runtime.pm` and Dart cursor seam; focused Julia leading-trivia/indexed-read proof; focused history corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Julia's public in-memory runtime entrypoint skips only leading blank/comment lines through the existing cursor/register seam. History passes without weakening indexed reads, shipped smoke is 31/31, full tests pass with 810 assertions, status is `runtime-corpus-leading-trivia`, `.5` closes, and `.6` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.6` | Permanent offset-68/limit-31 regression; direct 31-case corpus CLI; full Julia `Pkg.test()`; CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. The full shipped window is permanently locked at 31/31 with stable endpoints and exact outputs; full tests pass with 816 assertions, status is `runtime-corpus-shipped`, `.6.2.4` closes, and `.6.2.5` becomes active. |
 
 ## Commit Log
 
@@ -2366,9 +2402,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.6.2.4.5.1` | `JULIA-BACKEND-PARITY.6.2.4.5.1 - add Julia terminating exit control` | Immediate explicit/default fatal control advances simenv to its statement-mutation prerequisite; `.6.2.4.5.2` becomes active. |
 | `JULIA-BACKEND-PARITY.6.2.4.5.2` | `JULIA-BACKEND-PARITY.6.2.4.5.2 - add Julia statement regex mutation` | Portable scalar substitution closes both EBNF, both lib_reader, and simenv; history advances alone to `.6.2.4.5.3`. |
 | `JULIA-BACKEND-PARITY.6.2.4.5.3` | `JULIA-BACKEND-PARITY.6.2.4.5.3 - mirror Julia public parser leading trivia` | Public-entry cursor parity closes history and `.5`; final 31/31 no-drift advances to `.6`. |
+| `JULIA-BACKEND-PARITY.6.2.4.6` | `JULIA-BACKEND-PARITY.6.2.4.6 - close Julia shipped corpus no drift` | Permanent complete 31/31 shipped-window regression; `.6.2.4` closes and function-shell fixtures advance to `.6.2.5`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.2.4.6` shipped-window no-drift. One permanent regression now executes exact offset
+  68 / limit 31, locks manifest/result counts, endpoints, zero failures, and every exact output. Direct CLI is
+  31/31, full tests pass with 816 assertions, status is `runtime-corpus-shipped`, `.6.2.4` closes, and `.6.2.5`
+  becomes active for the three routed top-level function fixtures. No runtime or fixture changed.
 - `2026-07-10`: Completed `.6.2.4.5.3` public-parser leading trivia. Julia's in-memory `runtime_parse(...)`
   entrypoint now begins after leading blank and `#` comment lines through the existing cursor/register seam.
   Focused coverage preserves ordinary scalar-held indexed reads. History passes, full tests pass with 810

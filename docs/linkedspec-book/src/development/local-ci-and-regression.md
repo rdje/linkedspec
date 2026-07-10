@@ -62,7 +62,7 @@ projection, seek/consume runtime regex selection, capture/offset projection, cur
 zero-progress detection, first default/AND/OR/repetition dispatch, lifecycle and child-edge flow, narrow
 accumulators/returns, recursion/progress guards, registered user functions, diagnostics/tracing, boundary capture,
 manifest-backed corpus validation, controlled library corpus execution, and public-parser leading-trivia parity.
-The full package suite currently passes with 810 assertions and status `runtime-corpus-leading-trivia`.
+The full package suite currently passes with 816 assertions and status `runtime-corpus-shipped`.
 
 The library executor and corpus CLI support named or bounded subsets. For example:
 
@@ -98,8 +98,8 @@ blanket-delete `/private/tmp`; it may contain agent state, application IPC, or a
 
 The bounded command `--execute --offset 68 --limit 31` now passes 31/31. Anonymous capture, logical/output helper,
 recursive top-rule, structural child-push, statement mutation, and public-parser leading-trivia leaves closed each
-independent mechanism. `.6.2.4.6` owns the permanent full-window regression and no-drift closeout before Julia
-advances to routed top-level function fixtures.
+independent mechanism. `.6.2.4.6` now permanently runs that full window and locks its counts, endpoints, zero
+failures, and exact outputs. Julia next advances to routed top-level function fixtures under `.6.2.5`.
 
 ## Hosted GitHub Actions status
 

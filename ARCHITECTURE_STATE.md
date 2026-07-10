@@ -5,15 +5,19 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.4.6` closes shipped-corpus no-drift. One permanent test executes
+  offsets 68–98 together and locks manifest/result counts, tclite-to-lib_reader endpoints, 31/31 passes, zero
+  failures, and every exact output. Full Julia tests pass with 816 assertions; package/CLI status is
+  `runtime-corpus-shipped`; no runtime or fixture changed; `.6.2.5` is active for top-level function fixtures.
 - `2026-07-10` refresh: ADR `0022` ratifies native in-memory embedding as the reason for LinkedSpec's multiple
   backends. Perl `Get`, Rust core/runtime crates, Dart package APIs, and Julia module APIs already expose the
   structural host-process parse/compile/execute path. CLIs, corpus runners, and platform wrappers are secondary
   adapters with no exclusive semantics. Lua and future backends must meet the native library gate first. This
-  architecture leaf changes no parser/compiler/runtime behavior; Julia `.6.2.4.6` remains next.
+  architecture leaf changes no parser/compiler/runtime behavior; Julia `.6.2.4.6` has since closed no-drift.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.4.5.3` mirrors the public parser's leading blank/comment-line
   skip through Julia's existing in-memory cursor/register seam. History now matches the null-object public oracle
   without weakening scalar-held indexed reads. Full tests pass with 810 assertions, shipped smoke is 31/31,
-  status is `runtime-corpus-leading-trivia`, and `.6.2.4.6` is active for final no-drift.
+  status is `runtime-corpus-leading-trivia` at that boundary; `.6.2.4.6` has since closed final no-drift.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.4.5.2` distinguishes statement regex substitution from pure
   string slicing. In statement context, four-argument `substr(...)` / `regex_subst(...)` mutates a bare scalar
   target through strict helper flags and `$n` replacement; numeric slicing remains pure. Both EBNF, both lib_reader,

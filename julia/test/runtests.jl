@@ -346,7 +346,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-corpus-leading-trivia"
+    @test status.parity == "runtime-corpus-shipped"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -358,7 +358,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-corpus-leading-trivia", String(take!(status_output)))
+    @test occursin("parity: runtime-corpus-shipped", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -3741,6 +3741,22 @@ end
 
     @test [result.name for result in execution.results] == passing_names
     @test corpus_passed_count(execution) == 2
+    @test isempty(failures)
+    @test all(result -> result.actual_output == Any[result.expected_json], execution.results)
+end
+
+@testset "Complete shipped-spec corpus batch" begin
+    execution = execute_corpus_fixtures(CORPUS_ROOT; offset = 68, limit = 31)
+    failures = [
+        "$(result.name): $(result.failure)"
+        for result in execution.results if !corpus_fixture_passed(result)
+    ]
+
+    @test execution.validation.manifest.case_count == 99
+    @test length(execution.results) == 31
+    @test (first(execution.results).name, last(execution.results).name) ==
+          ("tclite_command_subst", "lib_reader_cattribute")
+    @test corpus_passed_count(execution) == 31
     @test isempty(failures)
     @test all(result -> result.actual_output == Any[result.expected_json], execution.results)
 end

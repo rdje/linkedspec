@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.6 — complete shipped-window no-drift):
+  Mechanism-specific regressions proved why individual failures closed, but they did not make the full 31-case
+  claim atomic. The final regression reuses the same offset/limit boundary as the initial diagnosis and locks both
+  manifest topology and output equality, so insertion/reordering or a cross-mechanism regression cannot silently
+  preserve scattered green subsets. `runtime-corpus-shipped` names the completed product boundary rather than the
+  last fix. The remaining three top-level function fixtures are deliberately outside this window and stay owned by
+  `.6.2.5`; no 99/99 full-manifest claim is made yet.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.4 — native in-memory backend contract):
   Backend plurality exists for native host-language embedding, not for duplicating command-line programs. The
   stable architecture is `.spec` source value → native parse/compile state → in-process execution → structured
