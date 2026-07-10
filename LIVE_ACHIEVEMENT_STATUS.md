@@ -7,15 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.2 — defer Julia generated source proof**
+  (DONE — generated source is routed to future split ownership; `.7.3` is active).
+
+  **Decision:** The native in-memory interpreter remains Julia's primary conformance surface at 99/99. A credible
+  generated path requires a separate scaffold/compile-run, family-plan, structural-family, and curated-corpus lane;
+  `FUTURE-PARITY-BACKLOG.3` now owns those future Dart/Julia splits alongside Rust breadth.
+
+  **Boundary:** No behavior changed. Full tests remain 840 and status remains `runtime-corpus-full`.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.7.1 — document Julia usage and parity boundary**
-  (DONE — public commands, native examples, status, and limitations are aligned; `.7.2` is active).
+  (DONE — public commands, native examples, status, and limitations are aligned; `.7.2` has since deferred codegen).
 
   **Change:** Reframed the mdBook Julia handoff from scaffold to mature native backend; added self-contained
   rule-only and top-level-function in-memory examples; corrected historical trace status; documented focused,
   direct, and opt-in commands plus generated-source/trace/tooling non-claims.
 
   **Boundary:** No behavior changed. The accepted interpreter gate remains 840 assertions and 99/99 exact outputs
-  at `runtime-corpus-full`; generated Julia source is a separate `.7.2` decision.
+  at `runtime-corpus-full`; generated Julia source was left to `.7.2` at this boundary and has since been deferred.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.6.4 — wire Julia local verification**
   (DONE — focused Julia gate and optional shared-CI inclusion are green; `.7.1` has since closed docs).

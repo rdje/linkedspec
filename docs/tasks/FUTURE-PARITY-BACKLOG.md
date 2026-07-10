@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.4` done; delegated Julia frontier is `.7.2`).
+- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.4` done; delegated Julia frontier is `.7.3`; generated Julia source is routed to `.3`).
 - Owner: repo-local workflow
 
 ## Goal
@@ -129,9 +129,11 @@ before implementation.
 
 - ID: `FUTURE-PARITY-BACKLOG.3`
   Status: `pending`
-  Goal: Broaden Rust generated-source proof from curated subset to full manifest parity.
-  Acceptance: The generated-source path either covers the full 99-fixture manifest or records
-    narrowly owned blockers; interpreter parity remains the primary gate until this leaf closes.
+  Goal: Own generated-source breadth beyond the current interpreter-first backend gates.
+  Acceptance: Split Rust full-manifest breadth and separate Dart/Julia source-emitter proofs before code. Each
+    non-Rust emitter lane must own a minimal emitter scaffold plus compile/run harness, typed generated-family plan,
+    direct structural-family execution, and curated manifest-backed corpus subset; interpreter parity remains the
+    primary gate until a generated lane independently closes.
   Verification: `pending`
   Commit: `pending`
 
@@ -233,10 +235,10 @@ before implementation.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.7.2` | `active` | Julia public docs are aligned; decide generated-source disposition next. |
+| 1 | `JULIA-BACKEND-PARITY.7.3` | `active` | Generated Julia source is routed to future `.3`; close the scoped Julia milestone next. |
 | 2 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua is adopted by ADR `0021` and inherits ADR `0022`'s native-module gate after Julia reaches its scoped milestone. |
 | 3 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
-| 4 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Rust generated-source breadth is independent follow-up after backend scheduling. |
+| 4 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Rust breadth plus split Dart/Julia generated-source proofs are independent follow-up after backend scheduling. |
 | 5 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
 | 6 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 7 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
@@ -273,6 +275,10 @@ before implementation.
 - `2026-07-10`: Director clarification: the reason for multiple LinkedSpec backends is native in-memory use from
   Rust, Dart, Julia, Lua, and later host languages. ADR `0022` makes host-process parse/compile/execute APIs the
   primary backend completion gate. Distinct CLIs remain useful thin adapters and may not own exclusive semantics.
+- `2026-07-10`: `JULIA-BACKEND-PARITY.7.2` defers generated Julia source to this tree's `.3` generated-source
+  breadth lane. `.3` now explicitly owns separate Rust breadth and Dart/Julia emitter splits with scaffold/harness,
+  family-plan, direct structural-family, and curated corpus proof prerequisites. Current Julia conformance remains
+  the native in-memory interpreter's 99/99 gate.
 
 ## Open Questions
 
@@ -281,7 +287,7 @@ before implementation.
 
 ## Blockers
 
-- None. Julia `.7.2` is the next active PNT leaf; Lua `.1.3` remains deliberately sequenced after Julia.
+- None. Julia `.7.3` is the next active PNT leaf; Lua `.1.3` remains deliberately sequenced after Julia.
 
 ## Verification Log
 

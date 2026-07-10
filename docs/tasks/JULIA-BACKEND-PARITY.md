@@ -748,15 +748,20 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.7.1 - document Julia usage and parity boundary`
 
 - ID: `JULIA-BACKEND-PARITY.7.2`
-  Status: `active`
+  Status: `done`
   Goal: Decide generated Julia source as a post-interpreter proof lane.
   Acceptance: Generated Julia source is either implemented against the already-green interpreter model or
     deliberately deferred with clear prerequisites; it is not the primary parity gate.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - generated Julia source is deliberately deferred rather than implemented as a one-slice
+    add-on. The native in-memory interpreter already satisfies ADR `0022` and passes 99/99. Rust's source-emitter
+    precedent proves a credible generated path needs a separately split scaffold/compile-run harness, generated
+    family-plan metadata, direct structural-family execution, and curated manifest-backed corpus proof. The
+    existing future generated-source lane `FUTURE-PARITY-BACKLOG.3` now owns Rust breadth plus separate Dart/Julia
+    emitter splits; interpreter parity remains Julia's accepted gate and no behavior changed.
+  Commit: `JULIA-BACKEND-PARITY.7.2 - defer Julia generated source proof`
 
 - ID: `JULIA-BACKEND-PARITY.7.3`
-  Status: `pending`
+  Status: `active`
   Goal: Final no-drift closeout for Julia parity.
   Acceptance: Roadmaps, task-tree index, live docs, mdBook, Knowledge Map, architecture snapshot, and verification
     commands agree that Julia reaches the accepted scoped milestone.
@@ -792,7 +797,35 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 23 | `JULIA-BACKEND-PARITY.6.3` | `done` | Full manifest order/output is locked at 99/99 and unbounded CLI execution is enabled. |
 | 24 | `JULIA-BACKEND-PARITY.6.4` | `done` | Focused Julia verification is repo-owned and optional shared-CI inclusion preserves SDK independence. |
 | 25 | `JULIA-BACKEND-PARITY.7.1` | `done` | Public commands, embedding examples, 99/99 status, and limitations are explicit and aligned. |
-| 26 | `JULIA-BACKEND-PARITY.7.2` | `active` | Decide generated Julia source as a separate post-interpreter proof lane. |
+| 26 | `JULIA-BACKEND-PARITY.7.2` | `done` | Generated Julia source is deferred to the split future source-emitter lane; 99/99 interpreter parity remains primary. |
+| 27 | `JULIA-BACKEND-PARITY.7.3` | `active` | Close final Julia no-drift alignment and scoped milestone handoff. |
+
+## `JULIA-BACKEND-PARITY.7.2` Generated-Source Decision
+
+Decision evidence recorded on 2026-07-10:
+
+- Native in-memory embedding is the primary multi-backend product contract under ADR `0022`; Julia already
+  exposes parse/stage/compile/runtime APIs without a CLI, subprocess, temporary file, or generated-source step.
+- The Julia interpreter path is the accepted conformance gate and passes all 99 checked-in fixtures with exact
+  outputs. No correctness gap requires generated source to close the scoped milestone.
+- Rust generated-source proof was not a single emitter function: it required a scaffold and compile/run harness,
+  typed generated-family plan, direct structural-family execution, and a curated corpus subset. Julia must own the
+  same proof classes in a separately split lane rather than land an unverified string emitter here.
+- `FUTURE-PARITY-BACKLOG.3` now owns generated-source breadth across Rust plus deferred Dart/Julia emitter lanes.
+
+## `JULIA-BACKEND-PARITY.7.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The only open question was whether to implement generated Julia source now; no
+  interpreter, embedding, corpus, or user-facing correctness failure exists.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `.7.2` intentionally deferred strategy until after parity; Rust evidence shows
+  generated-source proof is a multi-mechanism lane larger than this closeout slice.
+- [x] **FIX / DECISION** — Defer implementation and route explicit scaffold/harness/family/corpus prerequisites to
+  the existing future generated-source backlog owner.
+- [x] **ADDRESSED (verified)** — Task, roadmap, mdBook, and Knowledge Map name the owner and preserve 99/99 as the
+  current Julia conformance gate.
+- [x] **NO REGRESSION** — No Julia parser/compiler/runtime/test/fixture behavior changed; the focused gate remains
+  840 assertions plus 99/99.
+- [x] **LOCKSTEP** — Public/live docs and task trees agree; `.7.3` is the sole active Julia frontier.
 
 ## `JULIA-BACKEND-PARITY.7.1` Public Documentation Result
 
@@ -822,7 +855,7 @@ Documentation evidence recorded on 2026-07-10:
   remaining limitations are present and consistent.
 - [x] **NO REGRESSION** — No parser/compiler/runtime behavior changed; the focused Julia gate remains 840 + 99/99.
 - [x] **LOCKSTEP** — mdBook, Julia README, project status, roadmaps, task/index, Knowledge Map, live docs, and
-  `MEMORY.md` agree; `.7.2` is the sole active Julia frontier.
+  `MEMORY.md` agreed at the `.7.1` boundary; `.7.2` was then the sole active Julia frontier.
 
 ## `JULIA-BACKEND-PARITY.6.4` Local Verification Result
 
@@ -2501,6 +2534,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.3` | Existing focused manifest/drift/mismatch guards; permanent complete 99-fixture regression; full unbounded corpus CLI; offset-only CLI regression; full Julia tests; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. The atomic library gate and direct CLI both execute all 99 fixtures in order with exact outputs and zero failures; full tests pass with 840 assertions, status is `runtime-corpus-full`, and `.6.4` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.4` | `bash -n tools/run_julia_local.sh tools/run_ci_local.sh`; focused `tools/run_julia_local.sh` with explicit Julia/depot overrides; default `tools/run_ci_local.sh`; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. The focused gate passes 840 package assertions, Julia CLI checks, and 99/99 corpus execution; default shared CI remains core-only unless `LINKEDSPEC_RUN_JULIA=1`, and `.7.1` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.1` | Direct execution assertions for both mdBook native examples; mdBook Julia usage/status/limitation searches; focused Julia gate status retained from `.6.4`; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Native in-memory rule/function examples execute exact output; focused/direct/opt-in commands, 99/99 interpreter status, and generated-source/trace/tooling limitations are explicit; `.7.2` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.7.2` | Read-only Rust source-emitter/Dart deferral/ADR `0022` evidence; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Generated Julia source is deferred to expanded future owner `FUTURE-PARITY-BACKLOG.3` with scaffold/harness, family-plan, direct structural, and curated corpus prerequisites; `.7.3` becomes active without behavior change. |
 
 ## Commit Log
 
@@ -2556,9 +2590,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.6.3` | `JULIA-BACKEND-PARITY.6.3 - close full Julia corpus gate` | Full ordered library/CLI corpus execution is 99/99 green; verification wiring advances to `.6.4`. |
 | `JULIA-BACKEND-PARITY.6.4` | `JULIA-BACKEND-PARITY.6.4 - wire Julia local verification` | Focused package/CLI/99-fixture gate plus optional shared-CI integration; documentation advances to `.7.1`. |
 | `JULIA-BACKEND-PARITY.7.1` | `JULIA-BACKEND-PARITY.7.1 - document Julia usage and parity boundary` | Public commands, native examples, current 99/99 status, and precise limitations; generated-source decision advances to `.7.2`. |
+| `JULIA-BACKEND-PARITY.7.2` | `JULIA-BACKEND-PARITY.7.2 - defer Julia generated source proof` | Generated proof is routed to future `.3` with explicit split prerequisites; final no-drift advances to `.7.3`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.7.2` generated-source decision. Julia source generation is deferred to
+  `FUTURE-PARITY-BACKLOG.3`, which now owns separate Rust breadth and Dart/Julia emitter splits with compile-run,
+  family-plan, structural-family, and curated-corpus proof prerequisites. Native interpreter parity remains the
+  accepted 99/99 gate; no behavior changed; `.7.3` is active for final no-drift.
 - `2026-07-10`: Completed `.7.1` public Julia documentation. The mdBook now presents the mature native in-memory
   backend with self-contained rule-only/function examples, focused/direct/opt-in commands, full package layout,
   99/99 `runtime-corpus-full` status, and explicit generated-source/trace/tooling non-claims. No behavior changed;

@@ -5,10 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.2` deliberately defers generated Julia source. Native in-memory
+  interpreter parity already passes 99/99; Rust evidence shows generated proof needs a separately split emitter/
+  compile-run harness, typed family plan, direct structural-family execution, and curated corpus subset.
+  `FUTURE-PARITY-BACKLOG.3` now owns separate Rust breadth and Dart/Julia generated-source lanes; `.7.3` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.1` closes public usage/status/limitation documentation. The mdBook
   now presents Julia as a native in-memory 99/99 interpreter backend, includes self-contained rule/function
   examples, and distinguishes current runtime trace parity from compile/parser trace non-claims. Generated Julia
-  source remains a separate `.7.2` decision; no implementation behavior changed.
+  source was a separate `.7.2` decision and has since been deferred; no implementation behavior changed.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.4` adds `tools/run_julia_local.sh` as the repo-owned package/CLI/
   99-fixture gate. Julia executable and depot paths are configurable, with generated depot state outside the
   repository. Shared local CI includes the gate only under `LINKEDSPEC_RUN_JULIA=1`, so default core verification

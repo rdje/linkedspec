@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.7.2 — defer Julia generated source proof
+
+**Scope:** Post-interpreter generated-source decision, future owner/prerequisites, mdBook status, Knowledge Map,
+roadmaps/tasks/live docs, and resume pointer.
+
+**Decision:** Generated Julia source is deliberately deferred. Julia already satisfies ADR `0022` through native
+in-memory parse/stage/compile/runtime APIs and passes the full interpreter corpus at 99/99. Rust's source-emitter
+precedent shows a credible generated path requires its own emitter scaffold/compile-run harness, typed generated-
+family plan, direct structural-family execution, and curated manifest-backed corpus proof; it is not a one-slice
+closeout addition.
+
+**Ownership and validation:** `FUTURE-PARITY-BACKLOG.3` now owns Rust generated breadth plus separate Dart/Julia
+source-emitter splits with those prerequisites. No Julia behavior changed; the focused gate remains 840 assertions
+and 99/99 at `runtime-corpus-full`. mdBook, Knowledge Map, memory, task, doctrine, and whitespace checks pass;
+`.7.3` becomes active for final no-drift.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.7.1 — document Julia usage and parity boundary
 
 **Scope:** mdBook backend handoff, public native API, trace status, project status, local verification page, Julia

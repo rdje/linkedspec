@@ -137,8 +137,8 @@ Top-level directories and files:
     feeds its neutral nodes through the existing staged body parser, and closes all three routed fixtures without
     a raw Julia scanner. `.6.3` now locks the complete manifest as one ordered 99/99 exact-output gate and enables
     unbounded CLI execution. Full tests pass with 840 assertions and status is `runtime-corpus-full`. `.6.4` adds
-    focused optional-SDK verification, `.7.1` closes public usage/status/limitation docs, and `.7.2` is active for
-    the separate generated-source decision.
+    focused optional-SDK verification and `.7.1` closes public usage/status/limitation docs. `.7.2` defers
+    generated Julia source to the future split source-emitter lane; `.7.3` is active for final no-drift closeout.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

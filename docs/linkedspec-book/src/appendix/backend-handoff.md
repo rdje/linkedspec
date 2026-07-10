@@ -379,10 +379,12 @@ exact checked-in output, full package tests pass with 840 assertions, and packag
 `runtime-corpus-full`. The primary product surface is the native `LinkedSpecJulia` module; the Julia CLI and corpus
 runner are thin adapters over the same in-process parser/compiler/runtime path.
 
-The boundary does not claim generated Julia source or broader compile/parser trace parity. Generated-source proof
-is a separate post-interpreter decision under `JULIA-BACKEND-PARITY.7.2`; Julia currently guarantees the
-interpreter path. Runtime diagnostics/tracing are implemented, while the trace chapter records the narrower trace
-scope. `JuliaFormatter` and `JET` are optional local tools rather than parity prerequisites.
+The boundary does not claim generated Julia source or broader compile/parser trace parity. `.7.2` deliberately
+defers generated Julia source to the split future source-emitter lane under `FUTURE-PARITY-BACKLOG.3`; Julia
+currently guarantees the interpreter path. A credible later emitter must own its scaffold/compile-run harness,
+typed generated-family plan, direct structural-family execution, and curated corpus proof. Runtime diagnostics/
+tracing are implemented, while the trace chapter records the narrower trace scope. `JuliaFormatter` and `JET` are
+optional local tools rather than parity prerequisites.
 
 `JULIA-BACKEND-PARITY.1.1` through `.4.2` are complete. The local Julia toolchain is Homebrew-managed:
 `/opt/homebrew/bin/julia` reports Julia `1.12.6`, and the official Julia downloads page lists `v1.12.6` as the

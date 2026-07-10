@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.7.2 — generated source is an independent proof architecture):
+  Code generation does not become trustworthy merely because an interpreter is green. The Rust precedent needed
+  a compile/run harness, explicit generated-family plan, direct structural tests, and corpus evidence; omitting
+  those would create a second execution surface with a weaker contract. Julia has no correctness or embedding gap
+  that justifies that risk now. Deferral preserves the native 99/99 gate while routing a properly split future
+  proof alongside Dart and Rust generated-source breadth.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.7.1 — document product boundaries, not chronology):
   A backend handoff page should lead with what users can rely on now, not retain the lifecycle label from when the
   directory was first scaffolded. Julia's public story is native source → parse/stage → compile → runtime value,
