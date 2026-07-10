@@ -312,7 +312,9 @@ before code; `.4.5.1` now adds structured runtime diagnostics with spec/top/rule
 successful-output preservation. Full tests pass with 588 assertions, status is `runtime-diagnostics`, and
 `.4.5.2` now adds ordered levels, environment/config controls, structured events/scopes/decisions/logs/dumps,
 stdout/route/mirror sinks with reset, and output-preserving traced entrypoints. Full tests pass with 617
-assertions, status is `runtime-trace-controls`, and `.4.5.3` is active for runtime instrumentation.
+assertions at that controls boundary. `.4.5.3` now adds rule/regex/dispatch/lifecycle/recursion/cursor/boundary
+events with traced/untraced identity. Full tests pass with 631 assertions, status is `runtime-trace-events`, and
+`.4.5.4` is active for final diagnostics/trace no-drift.
 Future Julia and
 Lua backend plans must own their own
 variant-specific CLIs rather than relying on one
@@ -424,8 +426,9 @@ earliest usable non-consuming boundary capture. Full tests pass with 581 asserti
 controls/events/sinks, runtime instrumentation, and no-drift. `.4.5.1` implements exported neutral-field
 diagnostic payloads on runtime exceptions while preserving successful output and richer child attribution.
 `.4.5.2` implements trace levels/environment/config, event primitives, stdout/route/mirror sinks, parse-scope
-routing, and traced entrypoints with default-quiet output preservation. `.4.5.3` owns internal runtime events;
-later leaves own staged parser and corpus execution.
+routing, and traced entrypoints with default-quiet output preservation. `.4.5.3` implements internal rule, regex,
+dispatch, lifecycle, recursion, cursor, and boundary events; `.4.5.4` owns final no-drift, and later leaves own
+staged parser and corpus execution.
 
 ### Dart Backend Commands
 

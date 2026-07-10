@@ -98,8 +98,8 @@ Top-level directories and files:
     and scoped hash/array tree callbacks are now green too. Helper/value no-drift is closed. Explicit cursor
     save/restore, entry/local rewinds, character-based cursor/input helpers, and non-consuming boundary capture
     are green. Runtime diagnostics plus ordered trace levels, environment/config controls, structured events,
-    stdout/route/mirror sinks, and output-preserving traced entrypoints are green at 617 assertions; runtime
-    instrumentation is the active `.4.5.3` frontier.
+    stdout/route/mirror sinks, and output-preserving traced entrypoints are green. Rule/regex/dispatch/lifecycle/
+    recursion/cursor/boundary instrumentation is green at 631 assertions; `.4.5.4` no-drift is active.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

@@ -112,5 +112,7 @@ spec/top/rule/handler attribution to `RuntimeInterpreterException`, preserves ri
 successful output unchanged. The full suite passes with 588 assertions and status `runtime-diagnostics`;
 `.4.5.2` adds ordered trace levels, environment/config controls, structured events/scopes/decisions/logs/dumps,
 stdout/routed-file/mirror sinks with reset, and output-preserving traced runtime entrypoints. The full suite now
-passes with 617 assertions and status `runtime-trace-controls`; `.4.5.3` owns runtime instrumentation. Staged
+passes with 617 assertions at that controls-only boundary. `.4.5.3` adds rule scopes, regex decisions,
+action/blind dispatch, lifecycle marks, recursion cutoffs, cursor transitions, and source-boundary events. The
+full suite now passes with 631 assertions and status `runtime-trace-events`; `.4.5.4` owns final no-drift. Staged
 parser and corpus execution remain later leaves.

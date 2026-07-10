@@ -137,10 +137,10 @@ leaves.
 
 ## Julia variant trace status
 
-As of `JULIA-BACKEND-PARITY.4.5.2`, Julia has stable structured runtime
-diagnostics plus trace controls/events/sinks, but does not yet claim trace
-parity. `.4.5.3` still owns internal interpreter instrumentation, and `.4.5.4`
-owns final no-drift proof against this chapter.
+As of `JULIA-BACKEND-PARITY.4.5.3`, Julia has stable structured runtime
+diagnostics, trace controls/events/sinks, and internal interpreter
+instrumentation, but does not yet claim trace parity. `.4.5.4` owns the final
+no-drift proof against this chapter.
 
 The Julia control surface is:
 
@@ -161,9 +161,12 @@ The Julia control surface is:
 
 The `.4.5.2` proof covers default-quiet behavior, level/environment controls,
 routed-file reset, mirror output, event JSON/rendering, decisions/logs/dumps,
-parse-scope routing, and result preservation. Package status is
-`runtime-trace-controls`; rule/regex/dispatch/lifecycle/recursion/cursor/
-boundary events remain `.4.5.3`.
+parse-scope routing, and result preservation. `.4.5.3` adds `julia_runtime:rule`
+scopes; regex, child-dispatch, and recursion decisions; lifecycle marks; all
+four cursor-control transitions; and source-boundary marks/decisions. Traced
+and untraced action, blind, and recursion paths preserve identical results.
+Package status is `runtime-trace-events`; `.4.5.4` remains the parity/no-drift
+gate.
 
 ## Future variant trace parity checklist
 

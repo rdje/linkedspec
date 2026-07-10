@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.5.3` instruments the existing Julia runtime path with optional
+  rule scopes, regex/action/blind/recursion decisions, lifecycle marks, cursor/stack transitions, and boundary
+  events. Absent/disabled emitters remain no-ops; scope cleanup is exception-safe; traced and untraced action,
+  blind, and recursion results agree. Package status is `runtime-trace-events`, the full suite passes with 631
+  assertions, and final diagnostics/trace no-drift advances to `.4.5.4`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.5.2` adds Julia-native ordered trace levels,
   environment/config controls, structured event/scope/decision/log/dump primitives, stdout/route/mirror sinks
   with reset, optional runtime emitter injection, and output-preserving traced wrappers. Package status is

@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.4.5.3 — Julia runtime trace instrumentation):
+  Instrumentation follows existing mechanism owners rather than branching into a trace-specific interpreter.
+  Rule and lifecycle events use `high` for readable execution structure; match/dispatch/recursion/cursor/boundary
+  detail uses `debug`. Small no-op helpers centralize emitter absence, scope cleanup occurs in the rule `finally`
+  path, and tests compare complete traced/untraced results across action, blind, and recursive execution. This
+  keeps tracing observational while `.4.5.4` closes the public parity/no-drift claim.
+
 - 2026-07-10 (STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.1 — separator-only fixture style):
   The `.spec` semicolon is an infix separator, never a line terminator. Multiline fixtures should use the newline
   alone; compact same-line fixtures use `;` only between adjacent statements, including no semicolon after the

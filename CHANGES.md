@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.4.5.3 — add Julia runtime trace events
+
+**Scope:** Julia interpreter rule/regex/dispatch/lifecycle/recursion/cursor/boundary instrumentation, focused
+trace tests, package/CLI status, mdBook trace/status/handoff, task-tree/roadmaps/live docs, Knowledge Map,
+architecture, and resume pointer.
+
+**Change:** Added default-no-op trace helpers over the optional emitter and instrumented the existing runtime path
+with rule scopes; regex and child-dispatch decisions; lifecycle marks; recursion-cutoff decisions; cursor/stack
+transitions; and successful/unusable boundary events. Package status advances to `runtime-trace-events`.
+
+**Validation:** Fourteen added trace assertions prove every required mechanism and traced/untraced output identity;
+full `Pkg.test()` passes with 631 assertions. Julia CLI status, mdBook, memory architecture, task-tree metadata,
+Knowledge Map, doctrine, and whitespace checks pass.
+
 ## 2026-07-10 — STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.1 — align separator example style
 
 **Scope:** The director-identified Dart hash-helper executable fixture, statement-separator mdBook/KM wording,

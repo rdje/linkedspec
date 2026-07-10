@@ -142,6 +142,55 @@ struct _RuntimeRuleResult
     value::Any
 end
 
+function _enter_runtime_trace_scope!(
+    context::_RuntimeExecutionContext,
+    topic::AbstractString,
+    details::AbstractString,
+    level::LinkedSpecTraceLevel,
+)
+    if context.trace === nothing
+        return nothing
+    end
+    return enter_trace_scope!(context.trace, topic, details, level)
+end
+
+function _exit_runtime_trace_scope!(
+    context::_RuntimeExecutionContext,
+    scope,
+    details::AbstractString,
+)
+    if context.trace !== nothing && scope !== nothing
+        exit_trace_scope!(context.trace, scope, details)
+    end
+    return nothing
+end
+
+function _emit_runtime_trace_event!(
+    context::_RuntimeExecutionContext,
+    kind::LinkedSpecTraceEventKind,
+    topic::AbstractString,
+    details::AbstractString,
+    level::LinkedSpecTraceLevel,
+)
+    if context.trace !== nothing
+        emit_trace_event!(context.trace, kind, topic, details, level)
+    end
+    return nothing
+end
+
+function _trace_runtime_decision!(
+    context::_RuntimeExecutionContext,
+    topic::AbstractString,
+    taken::Bool,
+    reason::AbstractString,
+    level::LinkedSpecTraceLevel,
+)
+    if context.trace !== nothing
+        trace_decision!(context.trace, topic, taken, reason, level)
+    end
+    return taken
+end
+
 struct _RuntimeActionReturn <: Exception
     value::Any
 end
@@ -311,12 +360,25 @@ function _execute_runtime_rule!(
 
     recursion_key = (label, entry_regex_index, context.cursor_codeunit)
     if recursion_key in context.active_rule_entries
+        _trace_runtime_decision!(
+            context,
+            "julia_runtime:recursion_guard",
+            true,
+            "rule=$label entry_regex=$entry_regex_index cursor=$(context.cursor_codeunit)",
+            LinkedSpecTraceDebug,
+        )
         return _RuntimeRuleResult(false, nothing)
     end
 
     push!(context.active_rule_entries, recursion_key)
     saved_registers = context.registers
     context.registers = enter_child(saved_registers)
+    trace_scope = _enter_runtime_trace_scope!(
+        context,
+        "julia_runtime:rule",
+        "rule=$label entry_regex=$entry_regex_index mode=$(rule.mode_metadata.name) cursor=$(context.cursor_codeunit)",
+        LinkedSpecTraceHigh,
+    )
 
     try
         init_return = _execute_runtime_lifecycle!(engine, rule, "I", context)
@@ -351,6 +413,11 @@ function _execute_runtime_rule!(
         end
         rethrow()
     finally
+        _exit_runtime_trace_scope!(
+            context,
+            trace_scope,
+            "rule=$label cursor=$(context.cursor_codeunit)",
+        )
         context.registers = saved_registers
         delete!(context.active_rule_entries, recursion_key)
     end
@@ -470,12 +537,22 @@ function _execute_runtime_blind_once!(
     context::_RuntimeExecutionContext,
 )
     if rule.mode_metadata.is_and
-        for edge in rule.blind_edges
+        for (edge_index, edge) in enumerate(rule.blind_edges)
+            cursor_before = context.cursor_codeunit
             child = _execute_runtime_rule!(
                 engine,
                 edge.target.label,
                 edge.target.index,
                 context,
+            )
+            _trace_runtime_decision!(
+                context,
+                "julia_runtime:child_dispatch",
+                child.matched,
+                "edge_family=blind mode=AND rule=$(rule.label) index=$(edge_index - 1) " *
+                "target=$(edge.target.label)[$(edge.target.index)] cursor_before=$cursor_before " *
+                "cursor_after=$(context.cursor_codeunit)",
+                LinkedSpecTraceDebug,
             )
             context.retv = child.value
             edge_return = _execute_runtime_optional_payload!(
@@ -495,8 +572,18 @@ function _execute_runtime_blind_once!(
         return true
     end
 
-    for edge in rule.blind_edges
+    for (edge_index, edge) in enumerate(rule.blind_edges)
+        cursor_before = context.cursor_codeunit
         child = _execute_runtime_rule!(engine, edge.target.label, edge.target.index, context)
+        _trace_runtime_decision!(
+            context,
+            "julia_runtime:child_dispatch",
+            child.matched,
+            "edge_family=blind mode=OR rule=$(rule.label) index=$(edge_index - 1) " *
+            "target=$(edge.target.label)[$(edge.target.index)] cursor_before=$cursor_before " *
+            "cursor_after=$(context.cursor_codeunit)",
+            LinkedSpecTraceDebug,
+        )
         context.retv = child.value
         edge_return = _execute_runtime_optional_payload!(
             engine,
@@ -638,7 +725,15 @@ function _execute_runtime_regex_once!(
     entry_regex_index::Int = 0,
     and_sequence::Bool = false,
 )
+    cursor_before = context.cursor_codeunit
     if isempty(rule.regex_patterns)
+        _trace_runtime_regex_decision!(
+            context,
+            rule,
+            nothing,
+            cursor_before,
+            "patterns=0",
+        )
         return false
     end
 
@@ -650,6 +745,13 @@ function _execute_runtime_regex_once!(
                 rule.regex_patterns,
                 zero_based_index,
                 context,
+            )
+            _trace_runtime_regex_decision!(
+                context,
+                rule,
+                one_match,
+                context.cursor_codeunit,
+                "mode=AND expected_index=$zero_based_index",
             )
             if one_match === nothing
                 return false
@@ -673,6 +775,13 @@ function _execute_runtime_regex_once!(
             parse_mode = engine.parse_mode,
         )
     end
+    _trace_runtime_regex_decision!(
+        context,
+        rule,
+        one_match,
+        cursor_before,
+        "entry_regex=$entry_regex_index",
+    )
     if one_match === nothing
         return false
     end
@@ -683,6 +792,28 @@ function _execute_runtime_regex_once!(
         throw(loop_end)
     end
     return true
+end
+
+function _trace_runtime_regex_decision!(
+    context::_RuntimeExecutionContext,
+    rule::CompiledRule,
+    one_match,
+    cursor_before::Int,
+    reason::AbstractString,
+)
+    matched = one_match !== nothing
+    alternative = matched ? one_match.alternative_index : -1
+    match_start = matched ? one_match.codeunit_start : -1
+    match_end = matched ? one_match.codeunit_end : -1
+    _trace_runtime_decision!(
+        context,
+        "julia_runtime:regex_match",
+        matched,
+        "rule=$(rule.label) $reason alternative=$alternative match_start=$match_start " *
+        "match_end=$match_end cursor_before=$cursor_before",
+        LinkedSpecTraceDebug,
+    )
+    return nothing
 end
 
 function _match_runtime_specific(
@@ -751,6 +882,13 @@ function _execute_runtime_lifecycle!(
         push!(
             context.lifecycle_events,
             RuntimeLifecycleEvent(rule.label, lifecycle, payload.line),
+        )
+        _emit_runtime_trace_event!(
+            context,
+            LinkedSpecTraceMark,
+            "julia_runtime:lifecycle_block",
+            "rule=$(rule.label) lifecycle=$lifecycle line=$(payload.line) cursor=$(context.cursor_codeunit)",
+            LinkedSpecTraceHigh,
         )
         action_return = _execute_runtime_action_block!(
             engine,
@@ -1818,22 +1956,58 @@ function _evaluate_runtime_call!(
             current_edge,
         )
     elseif helper_name == "save_cursor"
+        cursor_before = context.cursor_codeunit
+        stack_before = length(context.cursor_stack)
         push!(context.cursor_stack, context.cursor_codeunit)
+        _trace_runtime_cursor_control!(
+            context,
+            rule_label,
+            helper_name,
+            cursor_before,
+            stack_before,
+        )
         return nothing
     elseif helper_name == "restore_cursor"
+        cursor_before = context.cursor_codeunit
+        stack_before = length(context.cursor_stack)
         if !isempty(context.cursor_stack)
             _set_runtime_cursor!(context, pop!(context.cursor_stack))
         end
+        _trace_runtime_cursor_control!(
+            context,
+            rule_label,
+            helper_name,
+            cursor_before,
+            stack_before,
+        )
         return nothing
     elseif helper_name == "rewind_match_start"
+        cursor_before = context.cursor_codeunit
+        stack_before = length(context.cursor_stack)
         if context.registers.local_match !== nothing
             _set_runtime_cursor!(context, context.registers.local_match.codeunit_start)
         end
+        _trace_runtime_cursor_control!(
+            context,
+            rule_label,
+            helper_name,
+            cursor_before,
+            stack_before,
+        )
         return nothing
     elseif helper_name == "rewind_entry_start"
+        cursor_before = context.cursor_codeunit
+        stack_before = length(context.cursor_stack)
         if context.registers.entry_match !== nothing
             _set_runtime_cursor!(context, context.registers.entry_match.codeunit_start)
         end
+        _trace_runtime_cursor_control!(
+            context,
+            rule_label,
+            helper_name,
+            cursor_before,
+            stack_before,
+        )
         return nothing
     elseif helper_name == "call"
         if isempty(args)
@@ -3753,6 +3927,7 @@ function _execute_runtime_action_edge_child!(
         return current_edge.child_result::_RuntimeRuleResult
     end
     current_edge.child_dispatched = true
+    cursor_before = context.cursor_codeunit
     child_rule = compiled_rule(engine.compiled_spec, current_edge.target.label)
     if child_rule === nothing
         throw(RuntimeInterpreterException(
@@ -3761,6 +3936,15 @@ function _execute_runtime_action_edge_child!(
     end
     if _runtime_passive_terminal_rule(child_rule)
         current_edge.child_result = _RuntimeRuleResult(false, nothing)
+        _trace_runtime_decision!(
+            context,
+            "julia_runtime:child_dispatch",
+            false,
+            "edge_family=action rule=$(current_edge.rule_label) " *
+            "target=$(current_edge.target.label)[$(current_edge.target.index)] passive=1 " *
+            "cursor_before=$cursor_before cursor_after=$(context.cursor_codeunit)",
+            LinkedSpecTraceDebug,
+        )
         return current_edge.child_result::_RuntimeRuleResult
     end
     current_edge.child_result = _execute_runtime_rule!(
@@ -3769,7 +3953,35 @@ function _execute_runtime_action_edge_child!(
         current_edge.target.index,
         context,
     )
+    _trace_runtime_decision!(
+        context,
+        "julia_runtime:child_dispatch",
+        current_edge.child_result.matched,
+        "edge_family=action rule=$(current_edge.rule_label) " *
+        "target=$(current_edge.target.label)[$(current_edge.target.index)] " *
+        "cursor_before=$cursor_before cursor_after=$(context.cursor_codeunit)",
+        LinkedSpecTraceDebug,
+    )
     return current_edge.child_result::_RuntimeRuleResult
+end
+
+function _trace_runtime_cursor_control!(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    helper_name::String,
+    cursor_before::Int,
+    stack_before::Int,
+)
+    _emit_runtime_trace_event!(
+        context,
+        LinkedSpecTraceMark,
+        "julia_runtime:cursor_control",
+        "helper=$helper_name rule=$rule_label before=$cursor_before " *
+        "after=$(context.cursor_codeunit) stack_before=$stack_before " *
+        "stack_after=$(length(context.cursor_stack))",
+        LinkedSpecTraceDebug,
+    )
+    return nothing
 end
 
 function _runtime_passive_terminal_rule(rule::CompiledRule)
@@ -3898,6 +4110,14 @@ end
 
 function _call_runtime_capture_until_boundary!(engine, args, context, rule_label, current_edge)
     if isempty(args)
+        _trace_runtime_decision!(
+            context,
+            "julia_runtime:source_boundary",
+            false,
+            "helper=capture_until_boundary rule=$rule_label reason=arguments_empty " *
+            "cursor=$(context.cursor_codeunit)",
+            LinkedSpecTraceDebug,
+        )
         return nothing
     end
     saw_usable_boundary = false
@@ -3926,12 +4146,29 @@ function _call_runtime_capture_until_boundary!(engine, args, context, rule_label
         end
     end
     if !saw_usable_boundary
+        _trace_runtime_decision!(
+            context,
+            "julia_runtime:source_boundary",
+            false,
+            "helper=capture_until_boundary rule=$rule_label reason=no_usable_boundary " *
+            "cursor=$(context.cursor_codeunit)",
+            LinkedSpecTraceDebug,
+        )
         return nothing
     end
     capture_start = context.cursor_codeunit
     capture_end = boundary_start === nothing ? ncodeunits(context.input) : boundary_start
     captured = _runtime_codeunit_slice(context.input, capture_start, capture_end)
     _set_runtime_cursor!(context, capture_end)
+    _emit_runtime_trace_event!(
+        context,
+        LinkedSpecTraceMark,
+        "julia_runtime:source_boundary",
+        "helper=capture_until_boundary rule=$rule_label capture_start=$capture_start " *
+        "boundary=$capture_end length=$(capture_end - capture_start) " *
+        "found=$(boundary_start === nothing ? 0 : 1)",
+        LinkedSpecTraceDebug,
+    )
     return captured
 end
 

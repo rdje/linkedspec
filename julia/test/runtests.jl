@@ -292,7 +292,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-trace-controls"
+    @test status.parity == "runtime-trace-events"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -302,7 +302,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-trace-controls", String(take!(status_output)))
+    @test occursin("parity: runtime-trace-events", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -2010,6 +2010,111 @@ Top::
         @test occursin("top_rule=Top", runtime_trace)
         @test occursin("matched=true cursor=1", runtime_trace)
     end
+
+    instrumented_engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+Top::
+ I { stage = "started" }
+ /BEGIN/ -> Child {
+   save_cursor()
+   body = capture_until_boundary(Boundary)
+   restore_cursor()
+   rewind_match_start()
+   rewind_entry_start()
+ }
+ E { return(hash("body", body, "stage", stage)) }
+
+Child:
+ /BEGIN/
+ E { return("child") }
+
+Boundary: /STOP/
+""")))
+    instrumented_untraced = runtime_parse(instrumented_engine, "BEGIN body STOP")
+    instrumented_stdout = IOBuffer()
+    instrumented_emitter = LinkedSpecTraceEmitter(
+        trace_config_enabled(LinkedSpecTraceDebug);
+        stdout_io = instrumented_stdout,
+    )
+    instrumented_traced = runtime_parse(
+        instrumented_engine,
+        "BEGIN body STOP";
+        trace = instrumented_emitter,
+    )
+    @test instrumented_untraced.value == Dict{String,Any}(
+        "body" => " body ",
+        "stage" => "started",
+    )
+    @test to_json(instrumented_traced) == to_json(instrumented_untraced)
+    instrumented_events = trace_events(instrumented_emitter)
+    instrumented_topics = [event.topic for event in instrumented_events]
+    @test "julia_runtime:rule" in instrumented_topics
+    @test "julia_runtime:regex_match" in instrumented_topics
+    @test "julia_runtime:lifecycle_block" in instrumented_topics
+    @test any(
+        event.topic == "julia_runtime:child_dispatch" &&
+        occursin("edge_family=action", event.details)
+        for event in instrumented_events
+    )
+    @test "julia_runtime:cursor_control" in instrumented_topics
+    @test "julia_runtime:source_boundary" in instrumented_topics
+    @test all(
+        any(
+            event.topic == "julia_runtime:cursor_control" &&
+            occursin("helper=$helper", event.details)
+            for event in instrumented_events
+        )
+        for helper in (
+            "save_cursor",
+            "restore_cursor",
+            "rewind_match_start",
+            "rewind_entry_start",
+        )
+    )
+    @test any(
+        event.topic == "julia_runtime:source_boundary" &&
+        occursin("capture_start=5 boundary=11 length=6 found=1", event.details)
+        for event in instrumented_events
+    )
+
+    blind_engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+BlindTop::AND
+ => First
+ => Second
+ E { return("blind") }
+
+First: /a/
+Second: /b/
+""")))
+    blind_untraced = runtime_parse(blind_engine, "ab")
+    blind_emitter = LinkedSpecTraceEmitter(
+        trace_config_enabled(LinkedSpecTraceDebug);
+        stdout_io = IOBuffer(),
+    )
+    blind_traced = runtime_parse(blind_engine, "ab"; trace = blind_emitter)
+    @test to_json(blind_traced) == to_json(blind_untraced)
+    @test any(
+        event.topic == "julia_runtime:child_dispatch" &&
+        occursin("edge_family=blind mode=AND", event.details)
+        for event in trace_events(blind_emitter)
+    )
+
+    recursion_engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+Loop::OR
+ /x*/
+ => Loop
+""")))
+    recursion_untraced = runtime_parse(recursion_engine, "x")
+    recursion_emitter = LinkedSpecTraceEmitter(
+        trace_config_enabled(LinkedSpecTraceDebug);
+        stdout_io = IOBuffer(),
+    )
+    recursion_traced = runtime_parse(recursion_engine, "x"; trace = recursion_emitter)
+    @test to_json(recursion_traced) == to_json(recursion_untraced)
+    @test any(
+        event.topic == "julia_runtime:recursion_guard" &&
+        occursin("taken=1", event.details)
+        for event in trace_events(recursion_emitter)
+    )
 end
 
 @testset "Spec parser" begin

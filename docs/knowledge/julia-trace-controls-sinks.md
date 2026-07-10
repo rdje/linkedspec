@@ -7,7 +7,7 @@ answers:
   - what is LinkedSpecTraceConfig in Julia
   - which Julia runtime entrypoints accept tracing
   - does Julia tracing preserve parse output
-  - what trace events does Julia emit before runtime instrumentation
+  - what trace controls does Julia expose beneath runtime instrumentation
 date: 2026-07-10
 status: current
 tags: [julia, trace, runtime, diagnostics, JULIA-BACKEND-PARITY]
@@ -33,10 +33,12 @@ routed files support reset/truncate at emitter creation.
 one from config. Disabled/default execution stays quiet, and traced parse
 results equal untraced results.
 
-At `.4.5.2`, runtime tracing emits the top-level parse scope only. Rule, regex,
-dispatch, lifecycle, recursion, cursor, and source-boundary instrumentation is
-owned by `.4.5.3`, so Julia does not yet claim full trace parity.
+At `.4.5.2`, runtime tracing emitted the top-level parse scope only. `.4.5.3`
+now adds rule, regex, dispatch, lifecycle, recursion, cursor, and source-boundary
+instrumentation while retaining this control/sink surface. Final trace parity
+remains gated by `.4.5.4` no-drift.
 
 Related facts: [[julia-runtime-structured-diagnostics]],
-[[julia-runtime-diagnostics-trace-split]], [[dart-trace-controls-sinks]],
+[[julia-runtime-diagnostics-trace-split]], [[julia-runtime-trace-events]],
+[[dart-trace-controls-sinks]],
 [[trace-cross-variant-capability-contract]].

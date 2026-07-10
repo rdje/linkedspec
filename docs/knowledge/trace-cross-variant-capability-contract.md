@@ -41,9 +41,10 @@ interpreted/generated-plan runtime branch/mark/capture events, and `.4.5` parity
 for the documented external contract. Future variants must pass the mdBook checklist and record proof before making
 the same claim. Julia split that proof through `JULIA-BACKEND-PARITY.4.5.0`; `.4.5.1` added structured runtime
 diagnostics and `.4.5.2` added controls/events/sinks plus traced entrypoints. `.4.5.3` / `.4.5.4` separately own
-runtime instrumentation and no-drift before any Julia trace parity claim.
+runtime instrumentation and no-drift before any Julia trace parity claim; `.4.5.3` has now landed and `.4.5.4`
+remains the final proof.
 
 Related facts: [[julia-runtime-diagnostics-trace-split]], [[julia-runtime-structured-diagnostics]],
-[[julia-trace-controls-sinks]],
+[[julia-trace-controls-sinks]], [[julia-runtime-trace-events]],
 [[trace-backend-parity-split]],
 [[dart-runtime-diagnostics-trace-split]].

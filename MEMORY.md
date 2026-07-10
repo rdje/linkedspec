@@ -18,31 +18,29 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.1` — the director-identified Dart hash-helper
-  fixture uses newlines between its eight multiline statements and no trailing semicolons; focused execution is
-  unchanged and the book/KM restate separator-only example style.
-- prior_leaf: `JULIA-BACKEND-PARITY.4.5.2` — Julia exports ordered trace levels, environment/config controls,
-  structured event primitives, stdout/route/mirror sinks with reset, optional emitter injection, and
-  output-preserving traced entrypoints; full tests pass with 617 assertions.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.4.5.3` — Julia emits rule scopes, regex decisions, action/blind
+  dispatch, lifecycle marks, recursion cutoffs, cursor transitions, and source-boundary events through the
+  optional emitter; full tests pass with 631 assertions and status `runtime-trace-events`.
+- prior_leaf: `STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.1` — the director-identified Dart hash-helper fixture now
+  uses newlines between its eight multiline statements and no trailing semicolons; focused execution is unchanged.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.1 - align separator example style`; previous committed HEAD is
-  `7ed9b939 JULIA-BACKEND-PARITY.4.5.2 - add Julia trace controls`.
+  `JULIA-BACKEND-PARITY.4.5.3 - add Julia runtime trace events`; previous committed HEAD is
+  `12e33853 STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.1 - align separator example style`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; the corrective separator tree is closed and the resumed frontier after
-  the current commit is `.4.5.3`.
-- next_action: resume PNT at `JULIA-BACKEND-PARITY.4.5.3` to instrument runtime rule/regex/dispatch/lifecycle/
-  recursion/cursor/source-boundary mechanisms through the optional emitter while preserving untraced output.
+- active_work_unit: `JULIA-BACKEND-PARITY`; the frontier after the current commit is `.4.5.4`.
+- next_action: resume PNT at `JULIA-BACKEND-PARITY.4.5.4` to close Julia diagnostics/trace no-drift across tests,
+  package/CLI status, mdBook, Knowledge Map, task/roadmap/live docs, and architecture before staged runtime work.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
 - latest_bootstrap_read: 2026-07-10 read the full roadmap and roadmap-v2, full codebase inventory and active Julia
   source/tests, full mdBook source, README/memory architecture/session bootstrap/COMMIT/task-tree doctrine, active
   Julia tree, relevant ADR/KM/toolbox facts, Dart matching/interpreter source/tests/task evidence, lifecycle/retv
   contract, Rust/Perl cursor/capture references, and final nested-value assignment contract before implementing
-  `.4.1` through `.4.5.2`, Dart diagnostics/trace split and implementation facts, and the portable trace
+  `.4.1` through `.4.5.3`, Dart diagnostics/trace split and implementation facts, and the portable trace
   capability contract; the canonical statement-separator fact was also applied so focused `.spec` fixtures
   use newlines between lines and semicolons only between adjacent statements on one physical line.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
@@ -51,5 +49,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.1` commit;
+- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.4.5.3` commit;
   do not pivot unless the repo is handoff-ready.

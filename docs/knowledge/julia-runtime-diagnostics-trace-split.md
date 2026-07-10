@@ -23,18 +23,18 @@ The split is:
 - `.4.5.1`: done — structured runtime diagnostics and diagnostic-carrying exceptions;
 - `.4.5.2`: done — ordered trace levels, configuration/environment controls,
   structured events, traced entrypoints, and stdout/routed-file/mirror sinks;
-- `.4.5.3`: runtime interpreter rule/regex/dispatch/lifecycle/recursion/cursor/
-  boundary trace instrumentation;
+- `.4.5.3`: done — runtime interpreter rule/regex/dispatch/lifecycle/recursion/
+  cursor/boundary trace instrumentation;
 - `.4.5.4`: no-drift closeout across Julia status, mdBook, live docs, task-tree
   index, and Knowledge Map.
 
-The active executable frontier after `.4.5.2` is
-`JULIA-BACKEND-PARITY.4.5.3`. Julia-native exception, configuration, and I/O
+The active frontier after `.4.5.3` is the `.4.5.4` no-drift closeout.
+Julia-native exception, configuration, and I/O
 types may differ from Dart and Rust, but each leaf maps to the same portable
 diagnostic/trace capability contract.
 
 Related facts: [[julia-runtime-cursor-boundary-helpers]],
 [[julia-runtime-structured-diagnostics]],
-[[julia-trace-controls-sinks]],
+[[julia-trace-controls-sinks]], [[julia-runtime-trace-events]],
 [[dart-runtime-diagnostics-trace-split]],
 [[trace-cross-variant-capability-contract]], [[trace-backend-parity-split]].
