@@ -333,8 +333,8 @@ windows 40–56, 58–59, and 62–67 green at 25/25 unchanged while routing thr
 pass with 757 assertions and status `runtime-corpus-middle` at that boundary. `.6.2.4.0` measures and splits the
 shipped-spec/parser-smoke window at 10/31. `.6.2.4.1` adds the complete direct anonymous capture family, closes
 three hlink delimiter cases, and routes EBNF logging to structural output. `.6.2.4.2.1` adds eager logical helpers,
-closes three portmap cases plus tablegrep, and routes portmap constant's helper-regex `o` flag residual. Full tests
-pass with 772 assertions and status `runtime-corpus-logical-helpers`; the window is 17/31 and `.6.2.4.2.3` is active.
+closes three portmap cases plus tablegrep. `.6.2.4.2.3` centralizes helper regex flags and closes portmap constant.
+Full tests remain 772, status is `runtime-corpus-helper-regex-flags`, the window is 18/31, and `.6.2.4.2.2` is active.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -602,7 +602,8 @@ starter fixtures 0–39 green at 40/40; `.6.2.3` proves the surrounding non-func
 green at 25/25 while routing three top-level function fixtures; `.6.2.4.0` measures shipped-spec/parser-smoke
 fixtures 68–98 at 10/31 and splits their mechanism owners; `.6.2.4.1` then closes anonymous capture execution and
 moves the window to 13/31. `.6.2.4.2.1` then adds eager logical helpers and moves it to 17/31 while routing one
-helper-regex flag residual. `.6.2.5` owns spec-defined top-level function shells.
+helper-regex flag residual; `.6.2.4.2.3` then closes it and moves the window to 18/31. `.6.2.5` owns spec-defined
+top-level function shells.
 Those are workload boundaries, not an assumption that Julia shares Dart's historical failure causes.
 
 #### Julia starter corpus proof
@@ -680,8 +681,12 @@ before truthiness composition. They are not lazy branch constructs; use `if`/`sw
 remain unevaluated. Julia now applies its existing scalar/number/string/aggregate truthiness and Rust-compatible
 empty arities (false/false/true). Three portmap cases plus tablegrep pass. `portmap_constant` reaches output
 comparison but remains `?bare:` because helper `matches(..., /^\d/io)` passes Perl's no-op `o` flag to Julia
-`Regex`; `.6.2.4.2.3` owns that precise compatibility bridge. The window is 17/31, full tests pass with 772
-assertions, status is `runtime-corpus-logical-helpers`, and `.6.2.4.2.3` is active.
+`Regex`; `.6.2.4.2.3` owns that precise compatibility bridge.
+
+Helper regex literals now spend one strict compiler seam: `i`, `m`, `s`, and `x` reach Julia `Regex`; execution-
+only `g` and Perl compile-once `o` are compile-time no-ops; unknown flags and invalid patterns still fail closed.
+Both `matches(...)` and regex-delimiter `split(...)` use the seam. Portmap constant passes exact checked-in output,
+the window is 18/31, full tests remain 772, status is `runtime-corpus-helper-regex-flags`, and `.6.2.4.2.2` is active.
 
 ### Dart Backend Commands
 

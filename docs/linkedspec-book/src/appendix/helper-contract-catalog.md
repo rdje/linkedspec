@@ -330,6 +330,8 @@ dispatch rule.
 - **Signature**: `matches(value: scalar, pattern: regex)`
 - **Returns**: boolean
 - **Behavior**: Returns true if the value matches the regex pattern. The pattern is a literal `/regex/` — no variable interpolation.
+- **Regex flags**: `i`, `m`, `s`, and `x` affect compilation. Operation-only `g` and Perl compile-once `o` are
+  accepted compile-time no-ops. Unknown flags or invalid patterns return false.
 - **Edge cases**: Returns false for undef input.
 - **Example**: over `/(\w+)/`, `matches(entry_group(0), /^\d+$/)` returns `[1]` on `123` and `[0]` on `abc`.
 
@@ -713,6 +715,8 @@ dispatch rule.
 - **Signature**: `split(value: scalar, delim: scalar)`
 - **Returns**: array
 - **Behavior**: Splits a string on the delimiter, returning an array of substrings.
+- **Regex flags**: Regex delimiters preserve `i`, `m`, `s`, and `x`; operation-only `g` and Perl compile-once `o`
+  are accepted compile-time no-ops. Unknown flags or invalid patterns return an empty array.
 - **Examples**: over `/(.+)/`, `entry_group(0).split(",")` on `a,b,c` → `[["a","b","c"]]`.
   `count(entry_group(0).split(","))` on the same input → `[3]`.
 - **Current Perl caveat**: use receiver form (`value.split(delim)`) or block form

@@ -3716,6 +3716,24 @@ function _runtime_string_predicate(values, predicate)
     return predicate(value, needle)
 end
 
+function _runtime_compile_helper_regex(pattern::String, flags::String)
+    compile_flags = Char[]
+    for flag in flags
+        if flag in ('i', 'm', 's', 'x')
+            push!(compile_flags, flag)
+        elseif flag == 'g' || flag == 'o'
+            continue
+        else
+            return nothing
+        end
+    end
+    return try
+        Regex(pattern, String(compile_flags))
+    catch
+        nothing
+    end
+end
+
 function _call_runtime_matches(values)
     if length(values) < 2
         return false
@@ -3730,9 +3748,8 @@ function _call_runtime_matches(values)
         return false
     end
     flags = regex_value isa _RuntimeRegexValue ? regex_value.flags : ""
-    regex = try
-        Regex(pattern, flags)
-    catch
+    regex = _runtime_compile_helper_regex(pattern, flags)
+    if regex === nothing
         return false
     end
     return match(regex, value) !== nothing
@@ -3798,9 +3815,8 @@ function _call_runtime_split(values)
     end
     delimiter = values[2]
     if delimiter isa _RuntimeRegexValue
-        regex = try
-            Regex(delimiter.pattern, delimiter.flags)
-        catch
+        regex = _runtime_compile_helper_regex(delimiter.pattern, delimiter.flags)
+        if regex === nothing
             return Any[]
         end
         return Any[String(item) for item in split(value, regex; keepempty = true)]

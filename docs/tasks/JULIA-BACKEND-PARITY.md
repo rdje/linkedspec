@@ -555,7 +555,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.2.4.2.1 - add Julia logical helpers`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Add diagnostic `print`/`print_each`/`say` helper execution.
   Acceptance: Diagnostic-output helpers preserve runtime output while matching the portable side-effect contract;
     `simenv_multiline_value` and `ds_vhistory_version_entry` advance past unsupported-helper failures.
@@ -563,12 +563,16 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `pending`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.2.3`
-  Status: `active`
+  Status: `done`
   Goal: Normalize portable no-op regex flags in Julia helper regex compilation.
   Acceptance: Julia helper regex paths preserve meaningful `i`/`m`/`s`/`x` behavior while treating Perl's
     compile-once `o` flag as a portable no-op; `portmap_constant` passes without weakening invalid-regex handling.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `_runtime_compile_helper_regex(...)` centralizes helper regex compilation, preserves
+    `i`/`m`/`s`/`x`, ignores execution-only `g` and Perl compile-once `o`, and returns failure for unknown flags or
+    invalid patterns. Both `matches(...)` and regex `split(...)` use the seam. Focused helper coverage locks `igo`,
+    regex split `go`, and unknown `q`; `portmap_constant` passes at exact expected output. Full tests remain 772,
+    shipped smoke moves from 17/31 to 18/31, status is `runtime-corpus-helper-regex-flags`, and `.6.2.4.2.2` is active.
+  Commit: `JULIA-BACKEND-PARITY.6.2.4.2.3 - normalize Julia helper regex flags`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.3`
   Status: `pending`
@@ -674,7 +678,33 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 11 | `JULIA-BACKEND-PARITY.6.2.4.0` | `done` | Initial shipped-spec/parser-smoke boundary is 10/31 and split into owned failure families. |
 | 12 | `JULIA-BACKEND-PARITY.6.2.4.1` | `done` | Anonymous capture boundaries close all three hlink delimiter cases; EBNF logging is structurally routed. |
 | 13 | `JULIA-BACKEND-PARITY.6.2.4.2.1` | `done` | Eager logical helpers close four cases and isolate one helper-regex flag residual. |
-| 14 | `JULIA-BACKEND-PARITY.6.2.4.2.3` | `active` | Normalize Perl's no-op `o` flag in helper regex compilation. |
+| 14 | `JULIA-BACKEND-PARITY.6.2.4.2.3` | `done` | Shared helper regex compilation closes portmap constant while preserving invalid-flag failure. |
+| 15 | `JULIA-BACKEND-PARITY.6.2.4.2.2` | `active` | Add diagnostic print/say helpers for simenv and history. |
+
+## `JULIA-BACKEND-PARITY.6.2.4.2.3` Helper Regex Flag Result
+
+Helper-regex evidence recorded on 2026-07-10:
+
+- Julia helper regex compilation now keeps meaningful `i`, `m`, `s`, and `x` flags, treats execution-only `g` and
+  Perl compile-once `o` as compile-time no-ops, and still rejects any unknown flag or invalid pattern.
+- `matches(...)` and regex-delimiter `split(...)` spend the same normalization seam; focused runtime coverage locks
+  case-insensitive `igo`, delimiter `go`, and invalid `q` behavior.
+- `portmap_constant` now returns the exact expected `[["?constant:",["0x1f"]]]`. The permanent logical corpus
+  regression advances from a routed residual to all five logical/portmap/tablegrep cases passing.
+- The complete shipped-spec/parser-smoke window moves from 17/31 to 18/31 with 13 remaining failures unchanged.
+  Full `Pkg.test()` remains green with 772 assertions and status `runtime-corpus-helper-regex-flags`.
+
+## `JULIA-BACKEND-PARITY.6.2.4.2.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `matches("0x1f", /^\d/io)` returned false because Julia rejected flag `o`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Both pure `matches` and regex `split` passed raw DSL flags directly to
+  `Regex`; helper execution flags and Perl compatibility flags were not separated from compile flags.
+- [x] **FIX** — Added one strict helper-regex compiler that keeps `imsx`, ignores `go`, and rejects everything else.
+- [x] **ADDRESSED (verified)** — Focused `igo`/`go`/invalid-`q` coverage passes and `portmap_constant` matches the
+  checked-in Perl/Rust expected JSON exactly.
+- [x] **NO REGRESSION** — Full `Pkg.test()` passes with 772 assertions; shipped smoke is 18/31 with no new failure.
+- [x] **LOCKSTEP** — Julia README, task/index/roadmaps, helper mdBook contract, Knowledge Map, architecture/live
+  docs, package status, and `MEMORY.md` advance to `.6.2.4.2.2`.
 
 ## `JULIA-BACKEND-PARITY.6.2.4.2.1` Logical Helper Result
 
@@ -2032,6 +2062,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.0` | Bounded runner offsets 68–98; planning-only task decomposition; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. The shipped-spec/parser-smoke window starts at 10 passed / 21 failed, every fixture is accounted for under a recoverable mechanism owner, runtime behavior remains unchanged at 757 assertions and `runtime-corpus-middle`, and `.6.2.4.1` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.1` | Focused anonymous capture runtime tests; hlink/EBNF focused corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. The complete direct anonymous capture family is Unicode/location/mutation safe; all three hlink delimiter fixtures pass, EBNF logging reaches its structural residual, the window improves to 13/31, full tests pass with 766 assertions, status is `runtime-corpus-capture-boundaries`, and `.6.2.4.2.1` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.2.1` | Focused eager logical-helper runtime proof; portmap/tablegrep focused corpus run; direct compiled-regex capture probe; traced portmap constant run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Eager `and`/`or`/`not` closes four corpus cases and advances portmap constant to a no-op helper-regex flag residual under `.6.2.4.2.3`; shipped smoke is 17/31, full tests pass with 772 assertions, status is `runtime-corpus-logical-helpers`. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.2.3` | Focused helper regex `igo`/split `go`/invalid `q` tests; focused portmap constant run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Strict shared helper-regex flag normalization closes portmap constant, shipped smoke is 18/31, full tests pass with 772 assertions, status is `runtime-corpus-helper-regex-flags`, and `.6.2.4.2.2` becomes active. |
 
 ## Commit Log
 
@@ -2075,9 +2106,13 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.6.2.4.0` | `JULIA-BACKEND-PARITY.6.2.4.0 - split Julia shipped corpus smoke batch` | Planning-only 10/31 shipped-smoke diagnostic split into capture, logical/output helper, recursion, structural-output, quote-normalization, and final no-drift owners. |
 | `JULIA-BACKEND-PARITY.6.2.4.1` | `JULIA-BACKEND-PARITY.6.2.4.1 - add Julia anonymous capture boundaries` | Full direct anonymous capture family closes three hlink cases and routes the EBNF structural residual; logical helpers advance to `.6.2.4.2.1`. |
 | `JULIA-BACKEND-PARITY.6.2.4.2.1` | `JULIA-BACKEND-PARITY.6.2.4.2.1 - add Julia logical helpers` | Eager boolean composition closes four corpus cases and splits portmap constant's helper-regex `o` flag residual to `.6.2.4.2.3`. |
+| `JULIA-BACKEND-PARITY.6.2.4.2.3` | `JULIA-BACKEND-PARITY.6.2.4.2.3 - normalize Julia helper regex flags` | Shared strict helper regex flag normalization closes portmap constant and advances diagnostic-output helpers to `.6.2.4.2.2`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.2.4.2.3` helper regex flags. Shared `matches`/regex-`split` compilation preserves
+  `imsx`, ignores runtime-only `g` and Perl no-op `o`, and rejects unknown flags. Portmap constant passes, full tests
+  remain 772, shipped smoke is 18/31, status is `runtime-corpus-helper-regex-flags`, and `.6.2.4.2.2` is active.
 - `2026-07-10`: Completed `.6.2.4.2.1` logical helpers. Eager `and`/`or`/`not` matches Perl/Rust truthiness and
   empty arities, closes three portmap cases plus tablegrep, and routes portmap constant's independently proven
   helper-regex `o` flag residual to `.6.2.4.2.3`. Full tests pass with 772 assertions, shipped smoke is 17/31, and

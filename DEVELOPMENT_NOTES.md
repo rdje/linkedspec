@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.2.3 — helper regex flag normalization):
+  Regex literals carry both compile flags and operation flags. Julia's helper regex seam now deliberately filters
+  them: `imsx` reach `Regex`, `g`/`o` remain accepted operation/compatibility no-ops at compile time, and unknown
+  flags still fail closed. Centralizing this for predicate and split paths prevents per-helper drift and preserves
+  the invalid-pattern false/empty contract.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.2.1 — eager logical helpers):
   `and`/`or`/`not` are value helpers, not lazy control-flow constructs: Perl call evaluation and Rust both evaluate
   every argument before boolean composition. Julia now does the same through `_runtime_truthy`; lazy branches

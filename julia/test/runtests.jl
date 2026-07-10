@@ -346,7 +346,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-corpus-logical-helpers"
+    @test status.parity == "runtime-corpus-helper-regex-flags"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -358,7 +358,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-corpus-logical-helpers", String(take!(status_output)))
+    @test occursin("parity: runtime-corpus-helper-regex-flags", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1486,7 +1486,10 @@ Top::
      "ends", ends_with(trim(raw), "END"),
      "matches", matches(trim(raw), /^A/),
      "flagged_match", matches("AbC", /^abc$/i),
+     "portable_noop_flags", matches("AbC", /^abc$/igo),
+     "invalid_flag", matches("abc", /^abc$/q),
      "split", raw.trim().split("-"),
+     "regex_split_noop_flags", split("a-b-c", /-/go),
      "coalesce", coalesce(missing, "fallback"),
      "coalesce_nonempty", coalesce_nonempty("", "filled"),
      "defined", is_defined(""),
@@ -1522,7 +1525,10 @@ Top::
         "ends" => true,
         "matches" => true,
         "flagged_match" => true,
+        "portable_noop_flags" => true,
+        "invalid_flag" => false,
         "split" => Any["A", "B", "END"],
+        "regex_split_noop_flags" => Any["a", "b", "c"],
         "coalesce" => "fallback",
         "coalesce_nonempty" => "filled",
         "defined" => true,
@@ -3460,6 +3466,7 @@ end
     passing_names = [
         "portmap_bare",
         "portmap_bit",
+        "portmap_constant",
         "portmap_concatenation",
         "tablegrep_simple_term",
     ]
@@ -3468,15 +3475,13 @@ end
         "$(result.name): $(result.failure)"
         for result in passing.results if !corpus_fixture_passed(result)
     ]
-    residual = execute_corpus_fixtures(CORPUS_ROOT; case_names = ["portmap_constant"])
-    residual_result = only(residual.results)
-
     @test [result.name for result in passing.results] == passing_names
-    @test corpus_passed_count(passing) == 4
+    @test corpus_passed_count(passing) == 5
     @test isempty(failures)
-    @test !corpus_fixture_passed(residual_result)
-    @test occursin("output mismatch", residual_result.failure)
-    @test !occursin("unsupported runtime helper 'or'", residual_result.failure)
+    constant_result = only(result for result in passing.results if result.name == "portmap_constant")
+    @test corpus_fixture_passed(constant_result)
+    @test constant_result.actual_output == Any[Any["?constant:", Any["0x1f"]]]
+    @test constant_result.failure === nothing
 end
 
 @testset "Spec AST JSON contract" begin

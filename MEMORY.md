@@ -18,22 +18,22 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.6.2.4.2.1` — eager logical helpers close three portmap cases plus
-  tablegrep, route portmap constant's helper-regex `o` flag residual, move shipped smoke to 17/31, and bring full
-  tests to 772 assertions with status `runtime-corpus-logical-helpers`.
-- prior_leaf: `JULIA-BACKEND-PARITY.6.2.4.1` — anonymous capture boundaries moved shipped smoke to 13/31.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.6.2.4.2.3` — strict shared helper-regex flag normalization closes
+  portmap constant, moves shipped smoke to 18/31, and keeps full tests green at 772 assertions with status
+  `runtime-corpus-helper-regex-flags`.
+- prior_leaf: `JULIA-BACKEND-PARITY.6.2.4.2.1` — eager logical helpers moved shipped smoke to 17/31.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.6.2.4.2.1 - add Julia logical helpers`; previous committed HEAD is
-  `fac1ba9f JULIA-BACKEND-PARITY.6.2.4.1 - add Julia anonymous capture boundaries`.
+  `JULIA-BACKEND-PARITY.6.2.4.2.3 - normalize Julia helper regex flags`; previous committed HEAD is
+  `720bfc89 JULIA-BACKEND-PARITY.6.2.4.2.1 - add Julia logical helpers`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; the frontier after the current commit is `.6.2.4.2.3`.
-- next_action: resume PNT at `JULIA-BACKEND-PARITY.6.2.4.2.3` by centralizing helper-regex flag normalization so
-  Perl's no-op `o` is ignored while `i`/`m`/`s`/`x` remain meaningful, then rerun `portmap_constant`, helper regex
-  tests, and the complete 31-fixture diagnostic window.
+- active_work_unit: `JULIA-BACKEND-PARITY`; the frontier after the current commit is `.6.2.4.2.2`.
+- next_action: resume PNT at `JULIA-BACKEND-PARITY.6.2.4.2.2` by implementing portable diagnostic
+  `print`/`print_each`/`say` behavior without polluting parse output, then rerun `simenv_multiline_value`,
+  `ds_vhistory_version_entry`, and the complete 31-fixture diagnostic window.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
 - latest_bootstrap_read: 2026-07-10 read the full roadmap and roadmap-v2, full codebase inventory and active Julia
@@ -50,5 +50,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.6.2.4.2.1` commit;
+- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.6.2.4.2.3` commit;
   do not pivot unless the repo is handoff-ready.

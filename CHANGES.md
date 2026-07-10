@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.2.3 — normalize Julia helper regex flags
+
+**Scope:** Shared Julia helper-regex flag compilation, focused matches/split/invalid-flag coverage, portmap constant
+corpus closeout, package status, lockstep docs, mdBook, Knowledge Map, and resume pointer.
+
+**Change:** Added a strict compiler seam that preserves `i`/`m`/`s`/`x`, ignores execution-only `g` and Perl's
+compile-once `o`, and rejects unknown flags or invalid patterns. Both `matches(...)` and regex `split(...)` use it.
+`portmap_constant` now passes exact checked-in output.
+
+**Validation:** Focused `igo`, regex split `go`, and invalid `q` behavior pass. The full window moves from 17/31 to
+18/31; full `Pkg.test()` remains green with 772 assertions and status `runtime-corpus-helper-regex-flags`. CLI,
+mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.2.1 — add Julia logical helpers
 
 **Scope:** Julia eager logical-helper execution, focused truthiness/eagerness and corpus routing tests, a narrow

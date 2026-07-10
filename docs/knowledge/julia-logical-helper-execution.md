@@ -30,10 +30,12 @@ Focused coverage locks eager scalar assignment in an `or(true, ...)` argument.
 no longer fails on unsupported `or`, but returns `?bare:` instead of `?constant:`. A direct compiled-rule probe
 shows the compacted capture is correctly `["0x1f"]`; a runtime trace shows the expected `bare_bit_slice` action
 executes. The residual comes from `matches(entry_group(0), /^\d/io)`: Julia passes `io` directly to `Regex`, where
-Perl's compile-once `o` flag is invalid, so the predicate returns false. `.6.2.4.2.3` owns that exact bridge.
+Perl's compile-once `o` flag is invalid, so the predicate returns false. `.6.2.4.2.3` has since closed that exact
+bridge and `portmap_constant` passes.
 
 The full shipped-smoke window is 17/31, full tests pass with 772 assertions, and status is
-`runtime-corpus-logical-helpers`.
+`runtime-corpus-logical-helpers` at that boundary. Helper regex flag normalization has since moved the window to
+18/31 with status `runtime-corpus-helper-regex-flags`.
 
-Related facts: [[julia-shipped-corpus-smoke-split]], [[julia-anonymous-capture-boundary-helpers]],
+Related facts: [[julia-helper-regex-flag-normalization]], [[julia-shipped-corpus-smoke-split]], [[julia-anonymous-capture-boundary-helpers]],
 [[dart-helper-action-surface-bridge]], [[rust-capture-group-helper-indexing]], [[rust-perl-output-oracle]].
