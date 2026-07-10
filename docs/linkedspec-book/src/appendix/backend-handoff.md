@@ -28,6 +28,9 @@ secondary thin adapter over the same parser/compiler/runtime library and may not
 exclusive `.spec` or runtime semantics. Named/file-oriented convenience APIs are welcome,
 but they cannot be the only complete data path. Interpreter versus generated-source
 execution remains a backend choice and does not change this embedding requirement.
+Distinct backend executable names must nevertheless expose one identical user-facing CLI
+contract: the same command structure, option names and meanings, positional arguments,
+outputs/errors, and exit semantics.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics
@@ -301,9 +304,11 @@ folded into the parent alternation, and explicit aggregate resets are scoped to
 the current rule invocation. The structural regex leaf is now closed too:
 bounded Dart matchers handle the exact shipped Lispish `(?R)`, EBNF `\K` /
 `(?&name)` / `(?(DEFINE)...)`, and spec.spec recursive block forms, while
-action-edge `push(child, index)` preserves indexed child payloads. The
-Dart-specific LinkedSpec CLI productization is now done, and
-`DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first milestone.
+action-edge `push(child, index)` preserves indexed child payloads. The Dart-specific
+corpus CLI implementation is done, and `DART-BACKEND-PARITY.7.5` closed the scoped
+interpreter-first milestone. A later strict-interface audit has shown that this
+corpus-oriented command is not yet equivalent to the Perl parser CLI; it is not the
+final cross-variant user CLI contract.
 `FUTURE-PARITY-BACKLOG.1.2` creates the dedicated `JULIA-BACKEND-PARITY`
 plan. `JULIA-BACKEND-PARITY.1.1` has completed Julia toolchain/package-layout preflight, `.1.2` has created the
 minimal Julia package scaffold, `.1.3` has added manifest-backed corpus IO and drift detection, `.2.1` has
@@ -368,9 +373,8 @@ tries rule-only parsing first and falls back only after a source parse error. Al
 `.6.3` then locks complete manifest validation plus ordered execution at 99/99 exact outputs and enables unbounded
 CLI execution. Full tests pass with 840 assertions and status `runtime-corpus-full`; `.6.4` has since added focused
 optional-SDK verification, and `.7.1` owns public documentation closeout.
-The future Lua backend plan must own its own
-variant-specific CLIs rather than relying on one
-ambiguous shared command.
+The future Lua backend plan must own its own variant-specific executable name while
+implementing the same cross-variant command interface.
 
 ### Julia Backend Commands, Embedding, and Status
 
@@ -378,6 +382,11 @@ Julia is green at the accepted interpreter-first boundary: the complete validate
 exact checked-in output, full package tests pass with 840 assertions, and package/CLI status is
 `runtime-corpus-full`. The primary product surface is the native `LinkedSpecJulia` module; the Julia CLI and corpus
 runner are thin adapters over the same in-process parser/compiler/runtime path.
+
+The current Julia primary command exposes help/status/corpus operations, not the parser-oriented interface of
+Perl `bin/linkedspec`. `JULIA-BACKEND-PARITY.7.3.0` records that user-visible drift and also confirms that Dart is
+corpus-oriented and Rust currently has no binary target. `.7.3.1` owns the exact shared CLI contract and repair
+routing before Julia CLI implementation changes; 99/99 corpus success does not erase this interface gap.
 
 The boundary does not claim generated Julia source or broader compile/parser trace parity. `.7.2` deliberately
 defers generated Julia source to the split future source-emitter lane under `FUTURE-PARITY-BACKLOG.3`; Julia
@@ -856,10 +865,10 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 Current Dart parity is interpreter-first and corpus-green. `DART-BACKEND-PARITY.7.2`
 deliberately defers generated Dart source to a future source-emitter lane with its
 own scaffold, generated family plan, direct structural-family execution proof, and
-curated corpus subset. Dart-specific CLI productization is complete in
-`DART-BACKEND-PARITY.7.4`, and `DART-BACKEND-PARITY.7.5` closes the scoped
-Dart milestone; generated source remains outside the current backend-neutral
-corpus conformance claim.
+curated corpus subset. Dart's backend-local corpus CLI implementation closed in
+`DART-BACKEND-PARITY.7.4`, and `DART-BACKEND-PARITY.7.5` closed the scoped
+Dart milestone. The later strict-interface audit records that this is not yet the
+shared parser CLI contract; generated source remains outside the current corpus claim.
 
 Dart
 also has source-level AST/data types and staged parse-job sidecars that round-trip

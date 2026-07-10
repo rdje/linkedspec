@@ -5,10 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.0` proves a cross-backend CLI architecture gap. ADR `0006`
+  already requires the same user-visible features and semantics, and the director clarified that distinct backend
+  executable names must expose an identical CLI contract. Perl currently has the parser CLI, Dart/Julia expose
+  corpus/status CLIs, and Rust declares no binary target. `.7.3.1` owns the durable contract and repair routing.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.2` deliberately defers generated Julia source. Native in-memory
   interpreter parity already passes 99/99; Rust evidence shows generated proof needs a separately split emitter/
   compile-run harness, typed family plan, direct structural-family execution, and curated corpus subset.
-  `FUTURE-PARITY-BACKLOG.3` now owns separate Rust breadth and Dart/Julia generated-source lanes; `.7.3` is active.
+  `FUTURE-PARITY-BACKLOG.3` now owns separate Rust breadth and Dart/Julia generated-source lanes; `.7.3` has since
+  been split by the strict user-facing CLI audit.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.1` closes public usage/status/limitation documentation. The mdBook
   now presents Julia as a native in-memory 99/99 interpreter backend, includes self-contained rule/function
   examples, and distinguishes current runtime trace parity from compile/parser trace non-claims. Generated Julia
@@ -344,10 +349,9 @@ This document is the current high-level technical reading of the project shape. 
   hash traversal is sorted-key depth-first and array traversal is zero-based depth-first. This fed the `.4.3.6`
   helper/value no-drift closeout, which has since landed.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.7.3` recorded the director directive that each LinkedSpec backend
-  variant should have a distinct CLI. This is a planning/documentation slice only: Dart-specific CLI
-  productization is now closed by `DART-BACKEND-PARITY.7.4`, the scoped Dart milestone is closed by `.7.5`, and Julia/Lua
-  planning under `FUTURE-PARITY-BACKLOG` must include equivalent variant-specific CLI ownership. The runtime
-  implementation frontier later advanced through `.4.3.5`.
+  variant should have a distinct CLI. This was a planning/documentation slice: Dart's backend-local corpus CLI
+  was closed by `DART-BACKEND-PARITY.7.4`, and the scoped Dart milestone by `.7.5`. The later Julia `.7.3.0` audit
+  proves this interface is not yet equivalent to Perl's parser CLI; exact cross-variant CLI repair is now active.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.4.3.4` extended Dart runtime hash helper execution in
   `dart/lib/src/runtime/interpreter.dart`. The evaluator now has hash-aware helper argument evaluation, bare hash
   working-variable receiver reads, pure hash receiver chains, key/value views, sorted key/value arrays, key

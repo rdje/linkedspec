@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.4` done; delegated Julia frontier is `.7.3`; generated Julia source is routed to `.3`).
+- Last updated: `2026-07-10` (`FUTURE-PARITY-BACKLOG.1.4` done; delegated Julia frontier is `.7.3.1`; generated Julia source is routed to `.3`).
 - Owner: repo-local workflow
 
 ## Goal
@@ -30,8 +30,9 @@ before implementation.
 - The backend lane schedules Dart, Julia, and Lua in that order, all with full parity goals.
 - Every backend is primarily a native in-memory library for its host language. Variant CLIs are secondary thin
   adapters and may not become the only complete product surface or own CLI-only semantics.
-- Each backend implementation track owns a distinct LinkedSpec CLI entrypoint for that variant; no future
-  variant should rely on a single ambiguous shared CLI name as its only user-facing command.
+- Each backend implementation track owns a distinct LinkedSpec executable name for that variant; every such
+  executable exposes the identical command structure, options/meanings, positional arguments, outputs/errors, and
+  exit semantics. No variant may substitute a backend-specific product interface.
 - The spec-derived parser/stimuli roundtrip idea is recorded as future design work, with `.spec` kept as the
   sole semantic source of truth for both parser construction and generated stimuli.
 - The director's AND/OR edge-default correction is recorded as future design work: AND rules should default bare
@@ -235,7 +236,7 @@ before implementation.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.7.3` | `active` | Generated Julia source is routed to future `.3`; close the scoped Julia milestone next. |
+| 1 | `JULIA-BACKEND-PARITY.7.3.1` | `active` | Ratify exact user-facing feature/CLI parity after `.7.3.0` proved current CLI drift. |
 | 2 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua is adopted by ADR `0021` and inherits ADR `0022`'s native-module gate after Julia reaches its scoped milestone. |
 | 3 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
 | 4 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Rust breadth plus split Dart/Julia generated-source proofs are independent follow-up after backend scheduling. |
@@ -258,7 +259,8 @@ before implementation.
   interpreter/corpus parity, not the primary gate.
 - `2026-07-09`: Director directive: each LinkedSpec backend variant should have a distinct CLI. Dart records
   this as `DART-BACKEND-PARITY.7.3` / `.7.4`; Julia and Lua planning leaves must include equivalent
-  variant-specific CLI ownership when activated.
+  variant-specific CLI ownership when activated. The 2026-07-10 clarification preserves distinct executable names
+  but requires their complete user-facing interfaces to be identical.
 - `2026-07-09`: `DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first Dart milestone. Future backend
   rollout returned to this backlog tree; `FUTURE-PARITY-BACKLOG.1.2` then split/scaffolded Julia planning.
   No Julia or Lua code changes were made in the Dart closeout.
@@ -279,6 +281,10 @@ before implementation.
   breadth lane. `.3` now explicitly owns separate Rust breadth and Dart/Julia emitter splits with scaffold/harness,
   family-plan, direct structural-family, and curated corpus proof prerequisites. Current Julia conformance remains
   the native in-memory interpreter's 99/99 gate.
+- `2026-07-10`: Director clarification: distinct backend executable names must expose the exact same user-facing
+  CLI API, including command structure, option names/meanings, positional arguments, outputs/errors, and exit
+  semantics; every variant must have the same user-observable feature set and behavior. Julia `.7.3.0` proves the
+  current surfaces drift and splits contract/routing, Julia repair, and honest no-drift work.
 
 ## Open Questions
 
@@ -287,7 +293,7 @@ before implementation.
 
 ## Blockers
 
-- None. Julia `.7.3` is the next active PNT leaf; Lua `.1.3` remains deliberately sequenced after Julia.
+- None. Julia `.7.3.1` is the next active PNT leaf; Lua `.1.3` remains deliberately sequenced after Julia.
 
 ## Verification Log
 

@@ -35,9 +35,10 @@ Every backend must let a host program:
 5. do all of the above without a required subprocess, CLI, temporary file, or serialized
    inter-process handoff.
 
-File resolution, distinct per-variant CLIs, corpus runners, Wasm, web, mobile, FFI, and
-service wrappers remain useful. They are adapters over the native library and cannot own
-semantics unavailable to in-process callers.
+File resolution, distinct per-variant executable names, corpus runners, Wasm, web, mobile,
+FFI, and service wrappers remain useful. They are adapters over the native library and
+cannot own semantics unavailable to in-process callers. Distinct CLI names expose one
+identical user interface; backend identity is not permission to change its API.
 
 ## Current structural evidence
 
@@ -61,3 +62,4 @@ language-neutral corpus gates.
 - [Backend rollout order](../decisions/0021-future-backend-rollout-order.md)
 - [Backend handoff](../linkedspec-book/src/appendix/backend-handoff.md)
 - [[language-agnostic-backend-vision]]
+- [[cross-backend-cli-contract-gap]]

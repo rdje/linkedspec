@@ -25,7 +25,8 @@ This `README.md` is the **single entry point** to the project.
 - Preserve LinkedSpec strengths (recursive parsing + multi-pass extraction workflows).
 - Evolve `.spec` toward language-agnostic action semantics over time.
 - Provide native in-memory LinkedSpec libraries for Perl, Rust, Dart, Julia, Lua, and later host languages. Applications
-  must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters.
+  must be able to parse, compile, and execute without a required CLI or subprocess; variant CLIs are thin adapters
+  whose distinct executable names expose one identical user-facing command contract.
 
 ## Fast Ramp-Up Documentation Map
 Read these in order for fastest onboarding:
@@ -138,7 +139,9 @@ Top-level directories and files:
     a raw Julia scanner. `.6.3` now locks the complete manifest as one ordered 99/99 exact-output gate and enables
     unbounded CLI execution. Full tests pass with 840 assertions and status is `runtime-corpus-full`. `.6.4` adds
     focused optional-SDK verification and `.7.1` closes public usage/status/limitation docs. `.7.2` defers
-    generated Julia source to the future split source-emitter lane; `.7.3` is active for final no-drift closeout.
+    generated Julia source to the future split source-emitter lane. `.7.3.0` then proves the implemented CLIs are
+    not interface-equivalent (Perl parser CLI, Dart/Julia corpus/status CLIs, no Rust binary) and splits repair;
+    `.7.3.1` is active for the exact user-facing feature/CLI contract and cross-backend routing.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

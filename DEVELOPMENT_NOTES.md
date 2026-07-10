@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.7.3.0 — a backend-local CLI is not CLI parity):
+  “Each variant has a CLI” only proves entrypoint ownership. It does not prove that users see the same product.
+  Without a shared interface contract, scaffolds diverged by purpose: Perl parses arbitrary specs/inputs, Dart and
+  Julia manage the regression corpus, and Rust has no command. Cross-variant CLI proof must compare commands,
+  options/meanings, positional arguments, serialized output/errors, and exit semantics—not merely `--help` success.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.7.2 — generated source is an independent proof architecture):
   Code generation does not become trustworthy merely because an interpreter is green. The Rust precedent needed
   a compile/run harness, explicit generated-family plan, direct structural tests, and corpus evidence; omitting

@@ -7,8 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.0 — split strict user-facing parity closeout**
+  (DONE — current CLI drift is source-proven; `.7.3.1` is active).
+
+  **Finding:** Distinct executable names do not currently expose the same API. Perl has the parser CLI, Dart/Julia
+  have corpus/status CLIs, and Rust declares no binary target. The 99/99 corpus gate is not CLI-parity proof.
+
+  **Routing:** `.7.3.1` owns the durable exact feature/CLI contract and cross-backend repair ownership; `.7.3.2`
+  owns Julia CLI alignment; `.7.3.3` owns honest no-drift. No behavior changed in this planning slice.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.7.2 — defer Julia generated source proof**
-  (DONE — generated source is routed to future split ownership; `.7.3` is active).
+  (DONE — generated source is routed to future split ownership; `.7.3` has since been split).
 
   **Decision:** The native in-memory interpreter remains Julia's primary conformance surface at 99/99. A credible
   generated path requires a separate scaffold/compile-run, family-plan, structural-family, and curated-corpus lane;

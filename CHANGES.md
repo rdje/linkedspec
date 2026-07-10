@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.0 — split strict user-facing parity closeout
+
+**Scope:** Read-only current CLI census, task split, public status correction, Knowledge Map fact, and live resume
+alignment; no parser/compiler/runtime/CLI behavior change.
+
+**Finding:** ADR `0006` already requires the same features and runtime semantics, and the director clarified that
+distinct variant executables must expose the exact same CLI API. Source audit proves the current commands differ:
+Perl is a parser CLI with source/input/parser/trace options and JSON output; Dart/Julia expose corpus/status flows;
+Rust declares no binary target.
+
+**Routing:** `.7.3` is split into `.7.3.1` for the durable exact contract and cross-backend repair ownership,
+`.7.3.2` for Julia CLI alignment, and `.7.3.3` for honest no-drift. The 99/99 interpreter gate remains valid but
+is not represented as proof of CLI or complete user-observable parity. Docs/governance checks pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.7.2 — defer Julia generated source proof
 
 **Scope:** Post-interpreter generated-source decision, future owner/prerequisites, mdBook status, Knowledge Map,

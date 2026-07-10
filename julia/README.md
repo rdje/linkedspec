@@ -22,7 +22,8 @@ array helper and mutation boundary landed in `.4.3.3`, and hash helper and mutat
 `.4.3.5` landed value/control/block/callback execution, and `.4.3.6` closed final helper/value no-drift. Cursor,
 diagnostic/trace, staged-function, shipped-corpus, function-shell, and full-corpus work through `.6.3` has since
 landed; `.6.4` owns the focused optional-SDK verification gate, `.7.1` closes public documentation, and `.7.2` is
-complete with generated source deferred to the future split proof lane. `.7.3` is active for final no-drift.
+complete with generated source deferred to the future split proof lane. `.7.3.0` found that this corpus/status CLI
+does not yet match the required cross-variant parser CLI contract; `.7.3.1` is active before implementation repair.
 
 ## Commands
 
@@ -189,7 +190,8 @@ executes the checked-in definition spec over source, normalizes neutral nodes, a
 three routed top-level function fixtures pass. `.6.3` adds one atomic complete-corpus regression and enables
 unbounded CLI execution: the manifest runs 99/99 green in exact order. Full tests pass with 840 assertions, status
 is `runtime-corpus-full`, `.6.4` owns the focused optional-SDK gate, and `.7.1` closes public documentation. `.7.2`
-defers generated source to `FUTURE-PARITY-BACKLOG.3`; `.7.3` owns final no-drift closeout.
+defers generated source to `FUTURE-PARITY-BACKLOG.3`. `.7.3.0` splits the newly clarified exact user-facing CLI
+parity gap; `.7.3.1` owns its durable contract and cross-backend routing before Julia CLI repair.
 
 Library example:
 
