@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.4.0 — local process proof is not global byte identity):
+  Julia's nine-family checker proves useful local behavior but permits a shorter help template, detailed backend
+  stderr, and rich trace. Always run the unchanged shared manifest before declaring cross-variant identity. Julia
+  `String` can contain invalid UTF-8, so `read(path, String)` needs explicit `isvalid` enforcement at a strict text
+  boundary. Warm the Julia project before process-byte comparison to separate toolchain precompile chatter from
+  application output, while keeping native rich diagnostics/trace available below the portable adapter.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.3.4 — backend completion needs a recurring exact gate):
   A manual 61/61 result is not the closeout boundary. The focused backend gate must own both option environments,
   native package tests, and its independent corpus runner so future Dart changes cannot silently regress either

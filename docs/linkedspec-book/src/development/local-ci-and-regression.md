@@ -131,7 +131,8 @@ accumulators/returns, recursion/progress guards, registered user functions, diag
 manifest-backed corpus validation, controlled and full library corpus execution, public-parser leading-trivia
 parity, spec-driven top-level user-function source composition, native primary request execution/canonical JSON,
 stable primary failure/trace routing, and unbounded full-manifest CLI execution. The full package suite currently
-passes with 1,017 assertions and status `runtime-corpus-primary-cli`.
+passes with 1,017 assertions and status `runtime-corpus-primary-cli`. That local checker is intentionally narrower
+than the global 61-case contract; `.1.5.4.0` records a warmed 13/61 baseline and the ordered repair split.
 
 The library executor and corpus CLI support named or bounded subsets. For example:
 

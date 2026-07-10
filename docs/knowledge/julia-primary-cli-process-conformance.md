@@ -43,7 +43,15 @@ does not claim current Perl/Rust/Dart CLI fixture identity, complete public
 capability parity, or generated-source parity; those remain global `.1.5`,
 `.1.6`, and `.3` work.
 
+`.1.5.4.0` quantifies that distinction: after the same explicit project warmup,
+the unchanged global contract passes 13/61 cases. The nine-family local checker
+accepts Julia's shorter help, detailed failure suffixes, and rich native trace;
+the global contract requires shared help, phase-only primary stderr, strict
+UTF-8, and the canonical trace protocol. `.1.5.4.1` through `.3` own those
+repairs and the recurring four-backend matrix.
+
 Related facts: [[julia-primary-cli-failure-trace-routing]],
 [[julia-primary-cli-native-execution-canonical-json]],
 [[julia-local-verification-gate]], [[user-observable-backend-cli-parity-contract]],
-[[cross-backend-cli-contract-gap]], [[julia-scoped-parity-no-drift]].
+[[cross-backend-cli-contract-gap]], [[julia-scoped-parity-no-drift]],
+[[julia-global-cli-61-audit]].

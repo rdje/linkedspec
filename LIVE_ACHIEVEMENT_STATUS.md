@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.4.0 — split Julia global CLI repair**
+  (DONE — warmed Julia is 13/61; `.1.5.4.1` active for help/UTF-8/errors).
+
+  **Audit:** All 11 ordinary results plus silent trace pass. Forty-eight failures partition into shared help bytes,
+  strict invalid-UTF-8 plus phase-only stderr, and canonical trace; cold precompile output requires driver warmup.
+
+  **Ownership:** `.1` repairs boundary/errors, `.2` canonical trace, `.3` the recurring four-backend driver. No
+  Julia behavior changed in this audit/split; docs/KM/governance/book/cleanup pass.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.3.4 — close Dart primary CLI**
   (DONE — Dart parent closed; global four-backend identity `.1.5.4` active).
 

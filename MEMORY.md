@@ -18,18 +18,18 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.3.4` — Dart primary CLI closed with recurring 61x2 gate.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.3.3` — Dart canonical trace reaches 61/61 default/POSIX.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.4.0` — Julia global 13/61 gap audited and split.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.3.4` — Dart primary CLI closed with recurring 61x2 gate.
 - recent_context: Dart/Julia are 99/99 interpreter-green scoped milestones, not complete public parity; global
   `.1.5`, `.1.6`, and `.3` own current-backend CLI, capability, and generated-source convergence before Lua.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.5.3.4 - close Dart primary CLI`; previous committed HEAD is
-  `bd644dd4 FUTURE-PARITY-BACKLOG.1.5.3.3 - add canonical Dart CLI trace`.
+  `FUTURE-PARITY-BACKLOG.1.5.4.0 - split Julia global CLI repair`; previous committed HEAD is
+  `48ef873d FUTURE-PARITY-BACKLOG.1.5.3.4 - close Dart primary CLI`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.4` is the sole active PNT leaf.
-- next_action: audit the current Julia command against the unchanged 61-case contract and split/repair any exact
-  gap before adding one recurring Perl/Rust/Dart/Julia identity driver.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.4.1` is the sole active PNT leaf.
+- next_action: replace Julia's local help with the shared template, strictly reject malformed UTF-8 source/input,
+  and suppress backend detail from primary phase stderr while retaining native diagnostics below the adapter.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
@@ -53,4 +53,4 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: `.1.5.3.4` recurring gate/closeout docs are being verified before commit.
+- blockers: none. in_flight_uncommitted: `.1.5.4.0` Julia audit/split docs are being verified before commit.

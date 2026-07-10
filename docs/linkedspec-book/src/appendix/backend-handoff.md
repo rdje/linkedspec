@@ -530,6 +530,13 @@ quiet, and level-specific emoji behavior with canonical output. `.7.3.2.5` locks
 exact stdout/stderr/newline/file bytes and exit 0/1/2. `.7.3.3` closes honest local no-drift; global cross-backend
 fixture identity remains owned by `FUTURE-PARITY-BACKLOG.1.5`.
 
+The global unchanged-suite audit in `FUTURE-PARITY-BACKLOG.1.5.4.0` measures warmed Julia at 13/61. All 11
+ordinary execution/result cases plus silent trace pass. The 48 failures are not runtime-result gaps: Julia still
+uses a shorter local help template, accepts malformed UTF-8 strings from files, appends backend diagnostic detail
+after stable phase headings, and sends rich native trace events through the primary command. `.1.5.4.1` owns shared
+help/strict UTF-8/phase-only stderr, `.2` owns the independent canonical trace, and `.3` owns project warmup plus
+one recurring four-backend matrix. The native rich diagnostics/trace APIs remain available.
+
 The boundary claims the exact Julia-local primary CLI, but not four-backend fixture identity, complete public
 capability parity, or generated Julia source. `.7.2` deliberately defers generated Julia source to the split
 future source-emitter lane under `FUTURE-PARITY-BACKLOG.3`; Julia currently guarantees the interpreter and local

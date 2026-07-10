@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, parity, perl, rust, dart, julia, JULIA-BACKEND-PARITY]
-evidence: "ADR 0023 defines the target. Perl, Rust .1.5.2.4, and Dart .1.5.3.4 close 61/61 default/POSIX with recurring gates; Julia global fixture identity remains under active .1.5.4."
+evidence: "Perl/Rust/Dart close 61/61 default/POSIX. FUTURE-PARITY-BACKLOG.1.5.4.0 measures warmed Julia at 13/61 and splits help/UTF-8/errors, canonical trace, and the final matrix."
 reverify: "bash tools/run_dart_local.sh; sed -n '1,220p' julia/src/cli/LinkedSpecJuliaCli.jl; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.4|61/61' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/TASK_TREE.md ROADMAP_V2.md"
 ---
 
@@ -38,7 +38,8 @@ repair, and honest no-drift work rather than treating 99/99 corpus execution as 
 
 ADR `0023` has since ratified the exact interface. `FUTURE-PARITY-BACKLOG.1.5` owns the neutral fixtures and
 Perl/Rust/Dart repairs are closed; `JULIA-BACKEND-PARITY.7.3.2` owns Julia's local repair, complete through exact
-local process conformance. Global `.1.5.4` now owns unchanged fixture identity and one recurring four-command gate.
+local process conformance. Global `.1.5.4` now owns unchanged fixture identity and one recurring four-command gate;
+`.1.5.4.0` records Julia's 13/61 baseline and splits exact repair/driver leaves.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specific-cli-requirement]], [[native-in-memory-backend-contract]],
 [[language-agnostic-backend-vision]], [[dart-specific-cli]], [[julia-mdbook-usage-status]],
@@ -49,5 +50,5 @@ Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specif
 [[neutral-cli-fixture-runner]], [[perl-primary-cli-strict-arguments]],
 [[perl-primary-cli-success-conformance]], [[perl-primary-cli-operational-failures]],
 [[primary-cli-utf8-process-boundary-gap]], [[rust-canonical-primary-cli-trace]],
-[[rust-local-verification-gate]], [[dart-primary-cli-closeout]].
+[[rust-local-verification-gate]], [[dart-primary-cli-closeout]], [[julia-global-cli-61-audit]].
 Canonical trace: [[canonical-primary-cli-trace-protocol]].

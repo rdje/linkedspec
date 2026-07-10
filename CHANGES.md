@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.4.0 — split Julia global CLI repair
+
+**Global audit:** After Julia project/depot warmup, the unchanged process suite passes 13/61: all 11 ordinary
+native execution/direct-result cases plus `none`/`quiet` trace. A cold first process can emit Julia precompile
+progress before application code; the existing local checker already warms explicitly.
+
+**Classification:** The 48 failures partition into the shorter Julia-local help/usage template; malformed-UTF-8
+file acceptance plus backend-detail stderr suffixes; and rich native trace output instead of ADR `0024` records.
+Native source/input selection, top rule, mode, execution, valid Unicode, and canonical JSON already pass unchanged.
+
+**Split/frontier:** `.1` owns shared help/strict UTF-8/phase-only errors; `.2` owns canonical trace; `.3` owns warmup
+and one recurring four-backend matrix. No Julia/fixture/help behavior changed. `.1.5.4.1` is active.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.3.4 — close Dart primary CLI
 
 **Recurring gate:** `tools/run_dart_local.sh` now executes the unchanged 61-case primary suite with
