@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.10.0 — capture semantic introspection MCP direction
+
+**Scope:** Durable planning capture across task tree, roadmaps/live docs, mdBook, resume pointer, and Knowledge Map;
+no implementation or active-frontier change.
+
+**Direction:** Each backend should expose one equivalent, versioned, deterministic semantic introspection API from
+its native in-memory library. The public model should answer rule/edge/call graph, source/provenance, inferred
+shape, resolution, generated-source relationship, diagnostic, and explain-why questions without exposing backend
+AST/IR layouts. MCP should be a thin, bounded, privacy-aware transport over that API and own no semantic behavior.
+
+**Next owner:** Parked `.10.1` designs schema evolution, stable ids/order, query breadth, pagination/cost controls,
+cross-backend exact fixtures, idiomatic host APIs, and MCP projection before code. `.1.5.1.6` remains active.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.5 — close Perl CLI trace conformance
 
 **Scope:** ADR `0024`, canonical primary trace projection, 20 exact trace cases, UTF-8 sink handling, updated

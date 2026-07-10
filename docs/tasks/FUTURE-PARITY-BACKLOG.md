@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`.1.5.1.5` closes canonical trace at 53/53; `.1.5.1.6` active for the surfaced UTF-8 process boundary).
+- Last updated: `2026-07-10` (`.10.0` captures semantic introspection/MCP as a parked direction; `.1.5.1.6` remains active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -26,7 +26,7 @@ before implementation.
 
 ## Acceptance Criteria
 
-- The nine backlog directions are represented as owned task-tree lanes.
+- The ten backlog directions are represented as owned task-tree lanes.
 - The backend lane schedules Dart, Julia, and Lua in that order, all with full parity goals.
 - Every backend is primarily a native in-memory library for its host language. Variant CLIs are secondary thin
   adapters and may not become the only complete product surface or own CLI-only semantics.
@@ -38,6 +38,8 @@ before implementation.
 - The director's AND/OR edge-default correction is recorded as future design work: AND rules should default bare
   entries to blind-call sequence semantics, while OR rules should default bare entries to action-edge regex
   dispatch semantics.
+- Deep semantic introspection is recorded as a first-class, backend-neutral in-memory API direction with a thin
+  MCP projection; backend IR must not leak into or fragment the public semantic model.
 - The central task-tree index points at the current frontier.
 - ADR, roadmap, mdBook, Knowledge Map, and live docs no longer contradict the backend order or
   Lua adoption decision.
@@ -48,7 +50,7 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG`
   Status: `active`
   Goal: Own the future parity backlog after the closed language-reference/terse-format trees.
-  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`
+  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`, `.10`
 
 - ID: `FUTURE-PARITY-BACKLOG.0`
   Status: `done`
@@ -385,6 +387,36 @@ before implementation.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `FUTURE-PARITY-BACKLOG.10`
+  Status: `active`
+  Goal: Expose deep semantic introspection through one clean backend-neutral API and thin MCP projection.
+  Children: `.10.0`, `.10.1`
+  Acceptance: The direction is durable before design/code; native in-memory APIs own semantics; MCP is transport;
+    every variant exposes equivalent versioned queries/results; stable ids/order/source provenance and exact
+    conformance prevent backend IR or transport details from becoming the public contract.
+
+- ID: `FUTURE-PARITY-BACKLOG.10.0`
+  Status: `done`
+  Goal: Capture the director's semantic-introspection API plus MCP direction without changing the active frontier.
+  Acceptance: Task tree, roadmaps/live docs, mdBook, resume pointer, and Knowledge Map record the direction and its
+    architectural boundary; no parser/compiler/runtime/MCP implementation changes; `.1.5.1.6` remains active.
+  Verification: **PASS 2026-07-10.** Knowledge Map generation/check, memory architecture, task-tree metadata,
+    doctrine, whitespace, and mdBook build pass. No implementation code or active frontier changed.
+  Commit: `FUTURE-PARITY-BACKLOG.10.0 - capture semantic introspection MCP direction`
+
+- ID: `FUTURE-PARITY-BACKLOG.10.1`
+  Status: `pending`
+  Goal: Design the semantic introspection schema, native query API, parity gate, and MCP projection before code.
+  Acceptance: Inventory reusable semantic state and user questions; define versioned, deterministic read-only
+    queries/results for rule/symbol/edge/call graphs, regex and lifecycle semantics, source spans/provenance,
+    inferred value/target shapes, helper/function resolution, generated-source relationships, diagnostics, and
+    explain-why paths; specify stable ids, ordering, pagination/cost limits, source/privacy controls, schema
+    evolution, exact cross-backend fixtures, idiomatic host APIs, CLI relationship, and a thin MCP server that owns
+    no semantic behavior. Explicitly prevent backend AST/IR layouts from becoming the public contract. Split later
+    implementation by semantic model, per-backend adapters, conformance, and MCP transport before code.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -410,6 +442,7 @@ before implementation.
 | 19 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
 | 20 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
 | 21 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
+| 22 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.5` Canonical Trace Protocol and Final Perl Gate
 
@@ -735,6 +768,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.1.2` | `git diff --check`; stale handoff/frontier `rg` scan; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_task_tree_metadata.sh`; `bash scripts/check_doctrines.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning only; created `JULIA-BACKEND-PARITY` and no Julia package or implementation code. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.8.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning capture only; no implementation code changed. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.9.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning capture only; no implementation code changed. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.10.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; Knowledge Map generation/check; doctrine; task-tree metadata; `mdbook build docs/linkedspec-book`; cleanup | PASS. Semantic introspection/MCP is durably parked with native-API ownership and transport separation; no implementation or active-frontier change. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.4` | Perl direct `LinkedSpec::Get` coderef probe; focused Dart runtime tests (50); direct Julia parse/compile/execute probe; static Rust core/runtime API and Dart/Julia CLI-adapter audit; `mdbook build docs/linkedspec-book`; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check` | PASS. ADR `0022` makes native in-memory embedding primary and CLIs secondary; current/future backend acceptance and public docs agree; no parser/compiler/runtime source changed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.0` | Delegated Julia `.7.3.1`: ADR `0023`; Perl CLI/trace contract and Rust public source-emitter audit; global task routing; mdBook build; Knowledge Map generation/check; memory/task/doctrine/whitespace gates. | PASS. Exact primary CLI and public-capability parity are durable; `.1.5.1`–`.1.5.4`, `.1.6`, and `.3` own convergence; no implementation behavior changed. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.3` | Delegated current-surface audit; stale mdBook provenance/correction; exact owner routing; prior `431f0472` Julia proof; docs/KM/governance/whitespace and mdBook. | PASS. Julia's local audit is done while its root remains active/delegated; `.1.5.1` became next and `.1.5.1.0` has since split it. |
@@ -754,6 +788,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.2` | `FUTURE-PARITY-BACKLOG.1.2 - scope Julia backend parity plan` | Creates `JULIA-BACKEND-PARITY`; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.8.0` | `FUTURE-PARITY-BACKLOG.8.0 - capture spec-derived roundtrip idea` | Captures future `foo.spec` parser/stimuli closed-loop validation arc; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.9.0` | `FUTURE-PARITY-BACKLOG.9.0 - capture AND OR edge default correction` | Captures future AND/OR mode-sensitive edge-default design arc; no implementation code. |
+| `FUTURE-PARITY-BACKLOG.10.0` | `FUTURE-PARITY-BACKLOG.10.0 - capture semantic introspection MCP direction` | Captures a backend-neutral native semantic API plus thin MCP projection; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |
@@ -766,6 +801,10 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-07-10`: `.10.0` captures the director's deep semantic-introspection/API/MCP direction without pivoting
+  from `.1.5.1.6`. The parked design requires a versioned backend-neutral semantic model, deterministic stable ids
+  and provenance, exact cross-variant query fixtures, idiomatic in-memory APIs, and MCP as a thin transport with no
+  semantic ownership. `.10.1` owns design before any implementation.
 - `2026-07-10`: `.1.5.1.5` closes canonical primary trace at 20 trace / 53 total exact cases. ADR `0024` separates
   the concise deterministic CLI phase protocol from rich native embedding trace. The matrix locks levels/aliases,
   thresholds, sinks/reset/append, emoji, byte counts, field escaping, and all failure phases; the local gate runs

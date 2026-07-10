@@ -126,6 +126,13 @@ This is a contract and active convergence target, not a claim that every current
     20 trace families in default/POSIX environments. A signoff probe then exposed UTF-8 argv/JSON mojibake; active
     `.1.5.1.6` owns that reference boundary before pending Rust `.1.5.2`.
 
+A separate parked direction, `FUTURE-PARITY-BACKLOG.10.1`, will design deep semantic introspection. The intended
+contract is one versioned, deterministic semantic query model exposed idiomatically from every native backend:
+rules, edges, calls, regex/lifecycle meaning, source spans and provenance, inferred value/target shapes, helper and
+function resolution, generated-source relationships, diagnostics, and explain-why paths. Stable ids and ordering,
+bounded query costs, source/privacy controls, and exact cross-backend fixtures are mandatory. MCP is a thin
+transport over that model; it must not own semantics or expose backend AST/IR layouts as the public contract.
+
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics
 apply whether the implementation is Perl5, Raku, Rust, Julia, Lua, Dart, Zig, Go, or a

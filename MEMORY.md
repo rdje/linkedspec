@@ -18,14 +18,14 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.1.5` — canonical Perl CLI trace is closed within 53 exact
-  current cases with ADR `0024` and local-gate integration; the parent remains active for UTF-8 correctness.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.1.4` — phase-ordered operational failures are exact and stdout-pure.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.0` — deep semantic introspection is parked as a versioned
+  backend-neutral in-memory API with MCP as thin transport; no implementation or active-frontier change.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.1.5` — canonical trace is closed at 53/53 current Perl cases.
 - recent_context: Dart/Julia are 99/99 interpreter-green scoped milestones, not complete public parity; global
   `.1.5`, `.1.6`, and `.3` own current-backend CLI, capability, and generated-source convergence before Lua.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.5.1.5 - close canonical CLI trace`; previous committed HEAD is
-  `9b38fad3 FUTURE-PARITY-BACKLOG.1.5.1.4 - normalize Perl CLI failures`.
+  `FUTURE-PARITY-BACKLOG.10.0 - capture semantic introspection MCP direction`; previous committed HEAD is
+  `47d30171 FUTURE-PARITY-BACKLOG.1.5.1.5 - close canonical CLI trace`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
 - active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.1.6` is the sole active PNT leaf.
@@ -33,7 +33,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   by `input_text()` (`xé` currently serializes as `xÃ©`); Rust `.1.5.2` stays pending behind the exact reference.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
-  the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
+  the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
+  none is the next backend rollout leaf.
 - latest_bootstrap_read: 2026-07-10 read the full roadmap and roadmap-v2, full codebase inventory and active Julia
   source/tests, full mdBook source, README/memory architecture/session bootstrap/COMMIT/task-tree doctrine, active
   Julia tree, relevant ADR/KM/toolbox facts, Dart matching/interpreter source/tests/task evidence, lifecycle/retv

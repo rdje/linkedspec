@@ -56,6 +56,10 @@ Three backbone items tracked major structural modernization — all done:
 - **Documentation and book sync** — the book is kept aligned with the codebase as features land and surfaces evolve.
 - **Variant-agnostic documentation** — this book is being aligned so it describes the `.spec` contract, DSL, and helper semantics backend-neutrally, with the Perl implementation shown as the reference backend rather than as "the" implementation.
 - **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred parity work. ADR `0023` owns the strict completion boundary and ADR `0024` the canonical primary trace. `.1.5.1.5` closes canonical trace within 53 exact Perl cases and the local gate; signoff exposed a UTF-8 argv/JSON boundary now owned by active `.1.5.1.6` before pending Rust `.1.5.2`. Dart and Julia remain scoped 99/99 milestones, not complete parity. Global `.1.6` owns the full capability census and `.3` generated-source parity. Lua follows current-backend convergence and inherits both native embedding and exact interface gates.
+- **Semantic introspection / MCP direction** - parked `.10.1` will design one versioned, deterministic semantic
+  query model exposed from every native backend. It covers rules/edges/calls, spans/provenance, inferred shapes,
+  resolution, generated-source relationships, diagnostics, and explanations. MCP is a thin transport over that
+  model; backend AST/IR layouts and transport-specific behavior are explicitly outside the public contract.
 - **Dart backend parity** - `DART-BACKEND-PARITY` is complete only for the scoped interpreter-first Dart milestone. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
   deferred to a future split source-emitter lane rather than required for the current conformance claim. The repo now has a `dart/` backend package with a Dart-specific CLI,

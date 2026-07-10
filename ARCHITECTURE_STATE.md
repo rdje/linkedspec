@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.10.0` durably captures deep semantic introspection as a future
+  first-class surface. One versioned, deterministic semantic model belongs to idiomatic in-memory APIs across all
+  backends; MCP is a thin projection and owns no semantics. Stable ids/order, source spans/provenance, exact parity
+  fixtures, cost/privacy controls, and an explicit anti-backend-IR boundary are mandatory design inputs in `.10.1`.
+  Active execution remains `.1.5.1.6`; no implementation changed.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.5` closes canonical primary trace at 53 cases and adopts
   ADR `0024`. The primary command emits a concise deterministic UTF-8 phase protocol across stdout/route/mirror,
   reset/persistence/append, every named level and alias, numeric thresholds, emoji, and all three failure phases;

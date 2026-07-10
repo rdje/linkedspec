@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.10.0 — capture semantic introspection MCP direction**
+  (DONE — future direction parked; active frontier remains `.1.5.1.6`).
+
+  **Change:** Added `.10` with a completed capture leaf and pending design leaf `.10.1`. The intended product
+  surface is a versioned backend-neutral semantic query API in every native variant, with deterministic results,
+  stable provenance, exact parity fixtures, and MCP as a thin transport rather than the semantic owner.
+
+  **Proof:** Task/roadmap/live/book/KM/memory alignment, Knowledge Map, doctrine, metadata, whitespace, mdBook, and
+  cleanup pass; no parser/compiler/runtime/MCP implementation or active-frontier change.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.5 — close Perl CLI conformance**
   (DONE — canonical trace is 53/53 exact; `.1.5.1.6` active for UTF-8 boundary before Rust).
 

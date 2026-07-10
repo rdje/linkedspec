@@ -187,9 +187,11 @@ Top-level project docs:
 - Run `bash tools/run_ci_local.sh` from the repo root to execute the canonical regression gate.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
-  {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven success, four failure, and seven
+  {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven success, four failure, and 20
   trace cases. Perl passes all 53 current cases; active `.1.5.1.6` now locks UTF-8 process semantics before the
   pending Rust primary command consumes the same manifest.
+- Deep semantic introspection plus MCP is parked under `FUTURE-PARITY-BACKLOG.10.1`: native backend APIs own one
+  versioned semantic model, while MCP remains a thin transport rather than a backend-specific source of truth.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 99-fixture corpus execution.
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI

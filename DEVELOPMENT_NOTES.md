@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.10.0 — semantic introspection belongs below MCP):
+  Deep introspection is strategically aligned with a parser/compiler/runtime system, but transport must not define
+  meaning. Design a versioned semantic projection over deliberate concepts—rules, edges, calls, spans, provenance,
+  inferred shapes, resolution and explanations—then expose it idiomatically from every in-memory backend. MCP,
+  CLIs, IDEs, and agents should consume that same projection. Stable ids/order, bounded query cost, privacy/source
+  controls, and exact cross-backend fixtures prevent internal AST/IR layouts from becoming accidental public APIs.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.5 — portable CLI trace is an adapter protocol, not an internal dump):
   A backend-native trace can be correct yet unsuitable for an identical CLI when it exposes timestamps, source
   locations, recursive compiler internals, megabytes per token, or host encoding warnings. Preserve that richness
