@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.2.0 — split Rust primary CLI work
+
+**Audit:** The Rust workspace has native full-spec parsing, validation, compilation, structured execution, and rich
+trace, but no binary. `Engine::execute` selects only the compiled `Top` rule and matching consumes per-rule compiled
+mode; exact primary entry/global-mode controls are not reusable library options yet.
+
+**Split:** `.1.5.2.1` owns binary arguments/help/strict-UTF-8 loading and named resolution; `.2` owns native
+entry/mode controls plus execution/JSON/failures; `.3` owns canonical CLI trace; `.4` owns unchanged 61-case and
+gate/no-drift closeout. No Rust implementation or fixture bytes changed.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.6.3 — close Perl CLI reference
 
 **Closeout:** Reconciled parent task status, roadmaps, live docs, mdBook, help/fixture counts, and Knowledge Map.

@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.2.0 — CLI controls must expose reusable native capability):
+  A thin CLI may own portable option grammar, loading policy, stable diagnostics, and trace projection, but it
+  must not gain exclusive semantic controls. Rust already owns parsing/compilation/execution in libraries, yet its
+  engine selects only compiled `Top` and per-rule parse modes. Add reusable entry/global-mode execution controls
+  before projecting them through the binary; keep canonical trace separate from rich native trace.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.6.3 — close reference status before backend consumption):
   A reference adapter is not ready merely when its code passes. The exact manifest count, help contract, task
   parents, public book, roadmap, and retrieval facts must all stop describing the repaired boundary as active.

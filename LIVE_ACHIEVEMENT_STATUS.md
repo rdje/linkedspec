@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.2.0 — split Rust primary CLI work**
+  (DONE — `.1.5.2.1` is active for the exact binary/argument/loading boundary).
+
+  **Audit/split:** Rust already has native full-spec parsing, validation, compilation, structured execution, and
+  rich trace, but no binary. Reusable entry-rule/global parse-mode controls are absent. Separate leaves now own
+  boundary/loading, native execution/results/failures, canonical trace, and unchanged 61-case closeout.
+
+  **Proof:** Source/API/manifest audit, memory architecture, task metadata, doctrine, Knowledge Map, mdBook, and
+  whitespace checks pass. No Rust source or fixture bytes changed; generated book output was removed.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.6.3 — close Perl CLI reference**
   (DONE — Perl is the exact 61-case reference; Rust `.1.5.2` is active).
 

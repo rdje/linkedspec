@@ -300,7 +300,63 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.1.5.2`
   Status: `active`
   Goal: Add the Rust primary CLI against the shared fixture contract.
-  Acceptance: A Rust binary delegates to native core/runtime APIs and passes the same CLI fixtures as Perl.
+  Children: `.1.5.2.0`, `.1.5.2.1`, `.1.5.2.2`, `.1.5.2.3`, `.1.5.2.4`
+  Acceptance: A Rust binary delegates to native core/runtime APIs and passes the same CLI fixtures as Perl. The
+    binary may project portable argument/loading/diagnostic/trace policy, but it may not duplicate `.spec` parsing,
+    compilation, matching, lifecycle, helper, or result semantics owned by the Rust libraries.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.2.0`
+  Status: `done`
+  Goal: Audit and split the Rust primary-command work by observable mechanism before implementation.
+  Acceptance: Inspect the Rust workspace, parser/compiler/validation/runtime/trace APIs, named-spec and fixture
+    resolution, ADRs `0023`-`0025`, and the unchanged 61-case manifest; record exact reusable seams and gaps; split
+    recoverable implementation leaves before adding a binary or changing runtime behavior.
+  Verification: **PASS 2026-07-10.** Source audit confirms a two-library workspace with no binary target; native
+    full-spec parsing, validation, compilation, execution, structured JSON values, and rich trace already exist.
+    The runtime currently enters only the compiled `Top` rule and consumes each compiled rule's own parse mode, so
+    reusable entry-rule/global-mode controls need a native execution seam rather than CLI-only semantics. Rust
+    strict UTF-8 file reads, named resolution, exact option/help handling, canonical JSON bytes, stable phase
+    failures, and canonical CLI trace projection remain adapter work. Governance, book, and Knowledge Map checks
+    pass; no Rust source or fixture behavior changed.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.2.0 - split Rust primary CLI work`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.2.1`
+  Status: `active`
+  Goal: Add the Rust binary boundary with exact arguments, help, strict UTF-8 loading, and deterministic resolution.
+  Acceptance: A `linkedspec-rust` binary exposes only ADR `0023`'s case-sensitive, non-abbreviating options; exact
+    help/usage and exit `2` match shared bytes; named/file/inline source plus literal/file input preparation obeys
+    compile-before-input ordering, repository fallback rules, and ADR `0025` strict preserved UTF-8 without owning
+    parser/runtime semantics.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.2.2`
+  Status: `pending`
+  Goal: Expose native Rust entry-rule/parse-mode controls and complete primary execution/result/failure projection.
+  Acceptance: The native runtime provides idiomatic reusable controls for optional entry rule and global parse
+    mode; the CLI composes full-spec parse, validation, compile, and `Engine` execution through public APIs; nested
+    values emit recursively canonical compact UTF-8 JSON plus one newline; compile/input/invoke failures and exits
+    match the shared phase contract without backend exception leakage.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.2.3`
+  Status: `pending`
+  Goal: Implement the canonical primary CLI trace projection and exact sink behavior in Rust.
+  Acceptance: Rust emits ADR `0024`'s deterministic phase records, thresholds/aliases, percent escaping, UTF-8
+    byte counts, emoji, stdout/route/mirror defaults, reset/append/persistence, and failure events while keeping the
+    rich native trace API independent and suppressing ambient backend-specific trace configuration.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.2.4`
+  Status: `pending`
+  Goal: Close Rust primary-command conformance and recurring focused verification.
+  Acceptance: The built Rust command passes all 61 unchanged neutral cases in default and POSIX environments;
+    focused Rust tests and the broader local gate pass; the Rust primary command is wired into relevant local
+    checks; task/roadmap/live docs, mdBook, Knowledge Map, help, and artifact cleanup agree before Dart `.1.5.3`.
   Verification: `pending`
   Commit: `pending`
 
@@ -524,21 +580,25 @@ before implementation.
 | 9 | `FUTURE-PARITY-BACKLOG.1.5.1.6.1` | `done` | Exact hex-byte inputs and validation are reusable in the neutral runner. |
 | 10 | `FUTURE-PARITY-BACKLOG.1.5.1.6.2` | `done` | Strict Perl argv/files/JSON and eight Unicode/invalid cases bring the shared suite to 61. |
 | 11 | `FUTURE-PARITY-BACKLOG.1.5.1.6.3` | `done` | Perl task/book/KM/help/fixtures agree on the 61-case strict UTF-8 reference. |
-| 12 | `FUTURE-PARITY-BACKLOG.1.5.2` | `active` | Add the missing Rust primary CLI against the completed Perl/shared fixtures. |
-| 13 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
-| 14 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
-| 15 | `FUTURE-PARITY-BACKLOG.1.6` | `pending` | Census every documented/exported user capability and split all residual parity gaps. |
-| 16 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
-| 17 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
-| 18 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
-| 19 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
-| 20 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
-| 21 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
-| 22 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
-| 23 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
-| 24 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
-| 25 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
-| 26 | `FUTURE-PARITY-BACKLOG.11.1` | `pending` | Director's generic final-codeblock argument correction is parked behind the active UTF-8/CLI frontier. |
+| 12 | `FUTURE-PARITY-BACKLOG.1.5.2.0` | `done` | Rust native/adapter seams are audited and implementation is split before code. |
+| 13 | `FUTURE-PARITY-BACKLOG.1.5.2.1` | `active` | Add exact Rust binary arguments/help/UTF-8 loading and named resolution. |
+| 14 | `FUTURE-PARITY-BACKLOG.1.5.2.2` | `pending` | Add reusable native entry/mode controls plus execution/result/failure projection. |
+| 15 | `FUTURE-PARITY-BACKLOG.1.5.2.3` | `pending` | Add canonical Rust primary trace projection and sinks. |
+| 16 | `FUTURE-PARITY-BACKLOG.1.5.2.4` | `pending` | Prove all 61 cases, gate Rust, and close no-drift. |
+| 17 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
+| 18 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
+| 19 | `FUTURE-PARITY-BACKLOG.1.6` | `pending` | Census every documented/exported user capability and split all residual parity gaps. |
+| 20 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
+| 21 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 22 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
+| 23 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
+| 24 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
+| 25 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
+| 26 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
+| 27 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
+| 28 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
+| 29 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
+| 30 | `FUTURE-PARITY-BACKLOG.11.1` | `pending` | Director's generic final-codeblock argument correction is parked behind the active UTF-8/CLI frontier. |
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.6.1` Neutral Hex-Byte Fixture Materialization
 
@@ -961,7 +1021,7 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Perl `.1.5.1` is closed at 61 cases; Rust `.1.5.2` is active.
+- None. Perl `.1.5.1` is closed at 61 cases; Rust `.1.5.2.0` is done and `.1.5.2.1` is active.
   Global CLI/capability convergence precedes Lua `.1.3`.
 
 ## Verification Log
