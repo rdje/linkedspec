@@ -41,6 +41,15 @@ function _throws_user_function_message(call, needle)
     return false
 end
 
+function _throws_compiled_spec_message(call, needle)
+    try
+        call()
+    catch error
+        return error isa CompiledSpecException && occursin(needle, sprint(showerror, error))
+    end
+    return false
+end
+
 function _write_manifest(root, cases; case_count = length(cases), format = 1)
     manifest = Dict(
         "format" => format,
@@ -283,7 +292,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "function-registry"
+    @test status.parity == "compiled-state"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -293,7 +302,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: function-registry", String(take!(status_output)))
+    @test occursin("parity: compiled-state", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -573,6 +582,120 @@ end
     @test user_contract.positional_arg_count == 1
     @test _diagnostic_codes(resolution) == ["user_function_arity_mismatch", "unknown_helper"]
     @test occursin("expects arity 1, got 2", resolution.diagnostics[1].message)
+end
+
+@testset "Compiled spec state" begin
+    parsed = parse_spec(raw"""
+Top::
+ /x/ -> Child { return(normalize(entry_text())) }
+ I { set(out, "start") }
+ E.return(out)
+
+Child:
+ /[a-z]+/
+""")
+    normalize = _function_with_body_sidecar(
+        "normalize",
+        ["value"];
+        body_source = "return(value)",
+        body_ast = to_json(parse_action_block("return(value)")),
+        index = 0,
+    )
+    spec = SpecFile(functions = [normalize], rules = parsed.rules)
+    compiled = compile_spec(spec)
+
+    @test compiled.definition_order == ["Top", "Child"]
+    @test compiled.compiled_rule_order == ["Top", "Child"]
+    @test isempty(compiled.redefined_rule_labels)
+    @test user_function_names(compiled.function_registry) == ["normalize"]
+    @test compiled_functions(compiled)[1].definition.name == "normalize"
+
+    top = compiled_rule(compiled, "Top")
+    @test top !== nothing
+    @test top.regex_patterns == ["x"]
+    @test top.mode_metadata.name == "Default"
+    @test top.mode_metadata.is_top
+    @test !top.mode_metadata.is_and
+    @test top.dependency_refs[1].label == "Child"
+    @test top.dependency_refs[1].index == 0
+    @test [payload.lifecycle for payload in top.lifecycle_action_payloads] == ["I", "E"]
+    @test length(action_payloads(top)) == 3
+
+    edge_payload = top.action_edges[1].action_payload
+    @test edge_payload !== nothing
+    @test length(edge_payload.action_ast.statements) == 1
+    @test any(
+        contract -> contract.family == "user_function" && contract.canonical_name == "normalize",
+        edge_payload.contracts.contracts,
+    )
+
+    dependency_entry = compiled.dependency_regex_state.dependency_regex_map["Top"]
+    @test dependency_entry.patterns == ["[a-z]+"]
+    @test combined_pattern(dependency_entry) == "(?:[a-z]+)"
+
+    encoded = to_json(compiled)
+    @test encoded["kind"] == "compiled_spec_state"
+    @test encoded["function_order"] == ["normalize"]
+    @test haskey(encoded["rules_by_label"], "Top")
+
+    descriptor = to_descriptor_json(compiled)
+    @test sort(collect(keys(descriptor))) == ["dependency_regex_map", "functions", "meta", "spec"]
+    descriptor_top = descriptor["spec"]["Top"]
+    @test descriptor_top["handler"]["kind"] == "julia_interpreter_rule"
+    @test descriptor_top["handler"]["status"] == "compiled_state_only"
+    @test descriptor_top["dependency_refs"] == [Dict{String,Any}("label" => "Child", "idx" => 0)]
+    @test descriptor["meta"]["descriptor_model"] == "compiled_descriptor_state"
+    @test descriptor["meta"]["compiled_rule_order"] == ["Top", "Child"]
+    @test descriptor["meta"]["function_order"] == ["normalize"]
+    @test descriptor["meta"]["function_count"] == 1
+    @test descriptor["functions"]["normalize"]["body_ast"]["kind"] == "action_block"
+    @test descriptor["dependency_regex_map"]["Top"]["patterns"] == ["[a-z]+"]
+
+    edge_compiled = compile_spec(parse_spec(raw"""
+Top::
+ /z/ -> Anchored { return(match_text()) }
+ -> Child .push
+
+Anchored: /z/
+Child: /c/
+Pair: /\[/ /\]/
+ -> Other .push
+ -> Pair[1] .return(array("pair"))
+
+Other: /x/
+"""))
+    top_edges = compiled_rule(edge_compiled, "Top").action_edges
+    @test [
+        (edge.targets[1].label, edge.regex_index, edge.child_regex_index, edge.has_parent_regex)
+        for edge in top_edges
+    ] == [("Anchored", 0, 0, true), ("Child", 1, 0, false)]
+    pair_edges = compiled_rule(edge_compiled, "Pair").action_edges
+    @test compiled_rule(edge_compiled, "Pair").regex_patterns == ["\\[", "\\]", "x"]
+    @test [
+        (edge.targets[1].label, edge.regex_index, edge.child_regex_index, edge.has_parent_regex)
+        for edge in pair_edges
+    ] == [("Other", 2, 0, false), ("Pair", 1, 1, false)]
+
+    first = Rule(
+        header = RuleHeader("Top", true, default_rule_mode(), "", 1),
+        body = [BodyElement(RegexBodyElementKind("first"), "/first/", 2)],
+    )
+    second = Rule(
+        header = RuleHeader("Top", true, default_rule_mode(), "", 4),
+        body = [BodyElement(RegexBodyElementKind("second"), "/second/", 5)],
+    )
+    duplicate = compile_spec(SpecFile(rules = [first, second]); validate_source = false)
+    @test duplicate.definition_order == ["Top", "Top"]
+    @test duplicate.compiled_rule_order == ["Top"]
+    @test duplicate.redefined_rule_labels == ["Top"]
+    @test compiled_rule(duplicate, "Top").regex_patterns == ["second"]
+
+    missing = parse_spec("Top::\n -> Ghost")
+    @test _throws_validation_message(() -> compile_spec(missing), "undefined rule")
+    @test _throws_compiled_spec_message(
+        () -> compile_spec(missing; validate_source = false),
+        "undefined rule 'Ghost'",
+    )
 end
 
 @testset "Spec parser" begin

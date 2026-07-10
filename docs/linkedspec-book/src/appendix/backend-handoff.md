@@ -365,8 +365,12 @@ values, structured controls, and raw fallback nodes. `julia/src/action/ActionCon
 unknown-helper/raw diagnostics over those typed nodes. `julia/src/action/FunctionRegistry.jl` exposes ordered
 `UserFunctionRegistry` entries, staged function-body parse-job queues, exact-arity user-call resolution, duplicate
 name diagnostics, JSON projection, and immutable `body_ast` stitching; `ActionContracts.jl` can use that registry to
-classify exact-arity user calls before helper fallback and diagnose wrong registered arities. Future leaves own
-compiled state, runtime interpretation, staged parser execution, diagnostics/trace, and corpus execution.
+classify exact-arity user calls before helper fallback and diagnose wrong registered arities.
+`julia/src/compiler/CompiledSpec.jl` exposes `compile_spec(...)`, `CompiledSpec`, `CompiledRule`,
+`CompiledDependencyRegexState`, and `CompiledDescriptorState` for ordered compiled-rule state, dependency refs,
+dependency-regex rows, mode metadata, lifecycle/action payload ASTs with registry-aware contracts, function registry
+projection, and descriptor-shaped JSON with `julia_interpreter_rule` handlers marked `compiled_state_only`. Future
+leaves own runtime interpretation, staged parser execution, diagnostics/trace, and corpus execution.
 
 ### Dart Backend Commands
 

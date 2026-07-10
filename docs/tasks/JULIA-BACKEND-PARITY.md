@@ -173,12 +173,15 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.3.3 - add Julia user-function registry`
 
 - ID: `JULIA-BACKEND-PARITY.3.4`
-  Status: `active`
+  Status: `done`
   Goal: Compile parsed specs into a Julia compiled-spec/interpreter model.
   Acceptance: Compiled state has ordered rules, dependency-regex data, function registry, lifecycle/action AST
     payloads, mode metadata, and descriptor projection equivalent to the mdBook model.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `Pkg.test()` covers 41 compiled-state assertions over rule order, mode metadata,
+    dependency refs, dependency-regex derivation, descriptor projection, lifecycle/action payload ASTs,
+    registry-aware contracts, last-definition-wins metadata when validation is skipped, validation reuse, and
+    compiled-state diagnostics; total Julia tests pass with 456 assertions.
+  Commit: `JULIA-BACKEND-PARITY.3.4 - add Julia compiled-spec state`
 
 - ID: `JULIA-BACKEND-PARITY.4`
   Status: `pending`
@@ -186,7 +189,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Children: `.4.1`, `.4.2`, `.4.3`, `.4.4`, `.4.5`
 
 - ID: `JULIA-BACKEND-PARITY.4.1`
-  Status: `pending`
+  Status: `active`
   Goal: Implement regex matching and match-state tracking.
   Acceptance: Seek/consume modes, alternative identity, capture groups, named captures, char offsets, cursor
     position, entry/local match separation, and zero-progress detection match the contract.
@@ -326,7 +329,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.3.4` | `active` | Compile parsed specs into Julia compiled-state/interpreter records now that frontend, ActionIR contracts, and function registry seams are in place. |
+| 1 | `JULIA-BACKEND-PARITY.4.1` | `active` | Add Julia regex matching and match-state tracking now that compiled-state records carry ordered rules, dependency refs, action payloads, and descriptor metadata. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -361,13 +364,14 @@ julia/
   src/action/ActionParser.jl
   src/action/FunctionRegistry.jl
   src/action/ActionContracts.jl
+  src/compiler/CompiledSpec.jl
   bin/linkedspec_julia.jl
   bin/corpus_runner.jl
   test/runtests.jl
 ```
 
-Implemented frontend/action subtrees are `src/spec/` and `src/action/`. Planned future implementation subtrees
-remain deferred to later leaves: `src/compiler/` and `src/runtime/`.
+Implemented frontend/action/compiler subtrees are `src/spec/`, `src/action/`, and `src/compiler/`. Planned future
+implementation subtree remains deferred to later leaves: `src/runtime/`.
 
 Current command surface:
 
@@ -532,6 +536,49 @@ User-function registry evidence recorded on 2026-07-10:
 - The package parity status is now `function-registry`. Compiled state, runtime behavior, staged parser execution,
   diagnostics/trace, and corpus execution remain later leaves.
 
+## `JULIA-BACKEND-PARITY.3.4` Compiled-Spec State Result
+
+Compiled-state evidence recorded on 2026-07-10:
+
+- `julia/src/compiler/CompiledSpec.jl` adds `CompiledSpecException`, `CompiledSpec`, `CompiledRule`,
+  `CompiledRuleModeMetadata`, `DependencyRef`, `CompiledActionEdge`, `CompiledBlindEdge`,
+  `CompiledActionPayload`, `CompiledDependencyRegexState`, `CompiledDependencyRegexEntry`, and
+  `CompiledDescriptorState`.
+- `compile_spec(spec; validate_source=true, strict_syntax=false)` reuses `validate_spec(...)` by default, builds the
+  ordered `UserFunctionRegistry`, records `definition_order`, `compiled_rule_order`, `rules_by_label`, and
+  `redefined_rule_labels`, and keeps last-definition-wins metadata available only when validation is deliberately
+  skipped.
+- Each compiled rule preserves source header/mode metadata, regex slots, dependency refs, action/blind edges,
+  lifecycle/plain action payloads, and original body elements. Action payloads parse through `parse_action_block(...)`
+  and resolve contracts with the compiled function registry, so exact-arity user calls remain classified before
+  helper fallback inside compiled state.
+- Dependency-regex state derives child-rule regex patterns into `CompiledDependencyRegexEntry` rows with dependency
+  refs, pattern lists, and combined pattern strings while keeping executable regex matching deferred to `.4.1`.
+- `to_json(compiled)` exposes the internal compiled-spec model; `to_descriptor_json(compiled)` projects the public
+  descriptor-shaped `spec`, `functions`, `dependency_regex_map`, and `meta` shape with
+  `julia_interpreter_rule` handlers marked `compiled_state_only`.
+- The package parity status is now `compiled-state`. Runtime matching, executable rule dispatch, staged parser
+  execution, diagnostics/trace, and corpus execution remain later leaves.
+
+## `JULIA-BACKEND-PARITY.3.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `JULIA-BACKEND-PARITY.3.4` acceptance required Julia to compile parsed specs into
+  descriptor-shaped state equivalent to the mdBook/Dart model; Dart parity target inspected in
+  `dart/lib/src/compiler/compiled_spec.dart`, `dart/test/compiled_spec_test.dart`, and
+  `docs/knowledge/dart-compiled-spec-state.md`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — After `.3.3`, Julia had parsed source, typed ActionIR contracts, and a
+  function registry, but no `src/compiler/` model for ordered rules, dependency refs, dependency-regex state,
+  action payload ASTs, mode metadata, or descriptor projection.
+- [x] **FIX** — Added `julia/src/compiler/CompiledSpec.jl`, exported compiled-state APIs from
+  `julia/src/LinkedSpecJulia.jl`, advanced package status to `compiled-state`, and added focused compiled-state tests.
+- [x] **ADDRESSED (verified)** — `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia
+  --project=julia -e 'using Pkg; Pkg.test()'` passes with 41 compiled-state assertions.
+- [x] **NO REGRESSION** — The same `Pkg.test()` run passes the scaffold, Action AST parser, Action contract resolver,
+  user-function registry, source parser, validation, function-shell projection, corpus IO, and source AST JSON
+  contract tests for 456 total assertions.
+- [x] **LOCKSTEP** — README, task tree, live docs, roadmaps, mdBook handoff/status pages, Knowledge Map fact card,
+  architecture snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` updated for the `.3.4` boundary.
+
 ## `JULIA-BACKEND-PARITY.3.3` Acceptance Checklist
 
 - [x] **REPRODUCE / ISSUE** — `JULIA-BACKEND-PARITY.3.3` acceptance required Julia function definitions to
@@ -627,6 +674,9 @@ User-function registry evidence recorded on 2026-07-10:
 - `2026-07-10`: `.3.3` follows the Dart user-function registry boundary as a data/contract seam. Julia preserves
   staged sidecars and optional stitched `body_ast`, and classifies exact-arity user calls before helper fallback;
   execution of user-function bodies remains deferred to runtime leaves.
+- `2026-07-10`: `.3.4` follows the Dart compiled-spec state boundary without importing runtime execution. Julia now
+  records compiled rules, dependency refs, dependency-regex rows, action payload ASTs/contracts, function registry
+  data, and descriptor metadata; executable regex matching starts in `.4.1`.
 
 ## Open Questions
 
@@ -637,9 +687,8 @@ User-function registry evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.3.4`. Typed helper/action AST parsing, canonical helper/control contract resolution, and the
-  user-function registry seam are in place; compiled-spec/interpreter-state construction is the next owned
-  boundary.
+- None for `.4.1`. Compiled-state records are in place; regex matching and match-state tracking are the next owned
+  runtime boundary.
 
 ## Verification Log
 
@@ -656,6 +705,7 @@ User-function registry evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.3.1` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia Action AST parser tests cover typed structural parsing for calls, literals, access, shapes, assignments, receiver chains, trailing blocks, block values, controls, value-drop statements, and raw fallback; total Julia tests pass with 353 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.3.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia Action contract resolver tests cover canonical helper/control contracts, aliases, structural assignment contracts, receiver methods, generic unknown-helper/raw diagnostics, and validation sharing of the current helper table; total Julia tests pass with 392 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.3.3` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia user-function registry tests cover ordered entries, staged body parse jobs, sidecar/body-AST preservation, immutable body-AST stitching, duplicate rejection, exact match, wrong arity, missing names, and registry-aware ActionIR contract resolution; total Julia tests pass with 415 assertions. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.3.4` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia compiled-state tests cover ordered rules, dependency refs, dependency-regex rows, descriptor projection, lifecycle/action payload ASTs, registry-aware contracts, last-definition-wins metadata when validation is skipped, validation reuse, and compiled-state diagnostics; total Julia tests pass with 456 assertions. |
 
 ## Commit Log
 
@@ -672,9 +722,14 @@ User-function registry evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.3.1` | `JULIA-BACKEND-PARITY.3.1 - add Julia ActionIR AST parser` | Typed helper/action AST parser; contract resolution advances to `.3.2`. |
 | `JULIA-BACKEND-PARITY.3.2` | `JULIA-BACKEND-PARITY.3.2 - add Julia ActionIR contract resolver` | Current helper/control contract resolution; user-function registry advances to `.3.3`. |
 | `JULIA-BACKEND-PARITY.3.3` | `JULIA-BACKEND-PARITY.3.3 - add Julia user-function registry` | Ordered user-function registry, staged body parse-job queue, body-AST stitching helper, and registry-aware ActionIR contracts; compiled state advances to `.3.4`. |
+| `JULIA-BACKEND-PARITY.3.4` | `JULIA-BACKEND-PARITY.3.4 - add Julia compiled-spec state` | Compiled-spec/interpreter-state records, dependency-regex state, action payload contracts, and descriptor projection; runtime matching advances to `.4.1`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.3.4` compiled-spec state. `julia/src/compiler/CompiledSpec.jl` now builds ordered
+  compiled rule records, dependency refs, dependency-regex rows, lifecycle/action payload ASTs with registry-aware
+  contracts, mode metadata, function-registry descriptor records, and descriptor-shaped JSON. `Pkg.test()` passes
+  with 456 total assertions; `.4.1` owns regex matching and match-state tracking.
 - `2026-07-10`: Completed `.3.3` user-function registry. `julia/src/action/FunctionRegistry.jl` now builds
   ordered user-function entries, exposes body parse jobs, preserves staged sidecars and optional `body_ast`, stitches
   body ASTs immutably, rejects duplicates, and lets ActionIR contract resolution classify exact-arity user calls

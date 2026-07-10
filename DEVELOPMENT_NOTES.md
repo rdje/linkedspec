@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.3.4 — Julia compiled-spec state):
+  Julia now has a compiled-state model before runtime matching. `julia/src/compiler/CompiledSpec.jl` exposes
+  `compile_spec(...)`, `CompiledSpec`, `CompiledRule`, `CompiledDependencyRegexState`, `CompiledDescriptorState`,
+  `compiled_rule(...)`, `action_payloads(...)`, and `to_descriptor_json(...)`. The compiler reuses
+  `validate_spec(...)` by default, carries ordered rule state and function registry projection, derives
+  dependency-regex rows, parses lifecycle/action payloads into `ActionBlock` ASTs, resolves those payload contracts
+  with the function registry, and projects descriptor-shaped JSON with `julia_interpreter_rule` handlers marked
+  `compiled_state_only`. Runtime regex matching and match registers start in `.4.1`.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.3.3 — Julia user-function registry):
   Julia now has the data-layer user-function registry seam before compiled-state/runtime work.
   `julia/src/action/FunctionRegistry.jl` builds ordered `UserFunctionRegistry` entries from `SpecFile.functions`

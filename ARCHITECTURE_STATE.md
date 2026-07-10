@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.3.4` adds Julia compiled-spec state.
+  `julia/src/compiler/CompiledSpec.jl` defines `compile_spec(...)`, `CompiledSpec`, `CompiledRule`,
+  `CompiledRuleModeMetadata`, `DependencyRef`, action/blind edge records, `CompiledActionPayload`,
+  `CompiledDependencyRegexState`, `CompiledDependencyRegexEntry`, and `CompiledDescriptorState`. The compiler reuses
+  `validate_spec(...)` by default, records ordered rule/last-definition metadata, derives dependency-regex rows,
+  parses lifecycle/action payloads into `ActionBlock` ASTs, resolves payload contracts with the user-function
+  registry, carries function registry projection, and emits descriptor-shaped JSON with `julia_interpreter_rule`
+  handlers marked `compiled_state_only`. Runtime regex matching starts in `JULIA-BACKEND-PARITY.4.1`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.3.3` adds the Julia user-function registry seam.
   `julia/src/action/FunctionRegistry.jl` defines `UserFunctionRegistry`, `UserFunctionEntry`, and
   `UserFunctionCallResolution`, builds ordered entries from `SpecFile.functions`, exposes staged
@@ -12,7 +20,7 @@ This document is the current high-level technical reading of the project shape. 
   `stitch_function_body_ast(...)` for immutable staged body-AST replacement. `julia/src/action/ActionContracts.jl`
   now accepts `function_registry=...` so exact-arity registered calls classify as `user_function` before helper
   fallback, while wrong-arity registered calls diagnose as `user_function_arity_mismatch`. Function bodies are not
-  executed yet. The next frontier is `JULIA-BACKEND-PARITY.3.4` for compiled-spec/interpreter-state records.
+  executed yet. Compiled-spec state has since landed in `JULIA-BACKEND-PARITY.3.4`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.3.2` adds Julia ActionIR contract resolution.
   `julia/src/action/ActionContracts.jl` exposes `resolve_action_block_contracts(...)`,
   `resolve_action_statement_contracts(...)`, `resolve_action_expression_contracts(...)`,
@@ -227,7 +235,7 @@ This document is the current high-level technical reading of the project shape. 
   shapes, and access expressions, then record current canonical helper/control contracts or generic
   diagnostics. `dart/lib/src/validation/spec_validator.dart` now shares the current helper/control name
   table through `isKnownActionIrCallName(...)` for function-name collision checks. Function registry
-  construction later landed in `.3.3`; compiled-spec state remains `.3.4`.
+  construction later landed in `.3.3`, and compiled-spec state landed in `.3.4`.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.3.1` added the Dart ActionIR AST parser.
   `dart/lib/src/action/action_ast.dart` defines typed action blocks, statements, expressions, arguments,
   access segments, literals, assignments, receiver chains, block values, and structured-control nodes.

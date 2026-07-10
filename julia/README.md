@@ -3,7 +3,7 @@
 This directory is the repository-owned Julia backend scaffold. The current status is package and command
 surface, manifest-backed corpus validation, source AST/data types, core `.spec` source parsing, frontend source
 validation, spec-shaped user-function shell projection, typed helper/action AST parsing, canonical ActionIR contract
-resolution, and a user-function registry seam: no compiled-spec state, runtime interpreter, or corpus execution
+resolution, a user-function registry seam, and compiled-spec state: no runtime interpreter or corpus execution
 semantics are implemented yet.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
@@ -11,8 +11,9 @@ This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was add
 was added by `JULIA-BACKEND-PARITY.2.2`. Frontend validation and strict syntax behavior were added by
 `JULIA-BACKEND-PARITY.2.3`. Function-definition shell projection was added by `JULIA-BACKEND-PARITY.2.4`.
 Typed helper/action AST parsing was added by `JULIA-BACKEND-PARITY.3.1`, ActionIR contract resolution was added by
-`JULIA-BACKEND-PARITY.3.2`, and the user-function registry seam was added by `JULIA-BACKEND-PARITY.3.3`. The
-active next boundary is `JULIA-BACKEND-PARITY.3.4` for compiled-spec and interpreter-state construction.
+`JULIA-BACKEND-PARITY.3.2`, the user-function registry seam was added by `JULIA-BACKEND-PARITY.3.3`, and
+compiled-spec state was added by `JULIA-BACKEND-PARITY.3.4`. The active next boundary is
+`JULIA-BACKEND-PARITY.4.1` for regex matching and match-state tracking.
 
 ## Commands
 
@@ -69,5 +70,9 @@ unknown-helper/raw diagnostics over typed ActionIR nodes; optional `function_reg
 registered user calls before helper fallback and reports wrong-arity registered calls. `src/action/FunctionRegistry.jl`
 exposes `UserFunctionRegistry`, `user_function_registry_from_spec(...)`, `body_parse_jobs(...)`,
 `resolve_user_function_call(...)`, and `stitch_function_body_ast(...)` for ordered user-function records, staged body
-parse-job queues, exact-arity lookup, JSON projection, and immutable `body_ast` stitching. Later leaves own compiled
-state, runtime interpretation, staged parser execution, diagnostics, tracing, and corpus execution.
+parse-job queues, exact-arity lookup, JSON projection, and immutable `body_ast` stitching.
+`src/compiler/CompiledSpec.jl` exposes `compile_spec(...)`, `CompiledSpec`, `CompiledRule`,
+`CompiledDependencyRegexState`, `CompiledDescriptorState`, `compiled_rule(...)`, `action_payloads(...)`, and
+`to_descriptor_json(...)` for ordered compiled rules, dependency refs, dependency-regex rows, mode metadata,
+lifecycle/action payload ASTs with registry-aware contracts, function registry projection, and descriptor-shaped JSON.
+Later leaves own runtime interpretation, staged parser execution, diagnostics, tracing, and corpus execution.

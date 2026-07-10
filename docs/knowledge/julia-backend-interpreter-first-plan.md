@@ -31,5 +31,5 @@ The plan starts interpreter-first, not generated-source-first:
 Generated Julia source remains a later proof decision after interpreter parity,
 mirroring the Dart closeout and Rust generated-source split.
 
-Related facts: [[dart-scoped-parity-milestone-complete]], [[language-agnostic-backend-vision]],
-[[variant-specific-cli-requirement]], [[text-to-ast-backend-doctrine]].
+Related facts: [[julia-compiled-spec-state]], [[dart-scoped-parity-milestone-complete]],
+[[language-agnostic-backend-vision]], [[variant-specific-cli-requirement]], [[text-to-ast-backend-doctrine]].

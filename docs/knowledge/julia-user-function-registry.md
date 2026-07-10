@@ -29,8 +29,10 @@ running function bodies. The ActionIR contract resolver accepts optional `functi
 exact-arity calls classify as `family = "user_function"` before helper fallback, while wrong-arity registered calls
 emit `user_function_arity_mismatch`.
 
-This is a registry and contract-classification seam only. Compiled-spec state, staged parser execution, runtime
-interpretation, diagnostics/trace breadth, and corpus execution remain later Julia leaves.
+This is a registry and contract-classification seam only. Compiled-spec state has since landed in
+`JULIA-BACKEND-PARITY.3.4`; staged parser execution, runtime interpretation, diagnostics/trace breadth, and corpus
+execution remain later Julia leaves.
 
 Related facts: [[julia-actionir-contract-resolver]], [[julia-user-function-definition-projection]],
-[[dart-function-registry]], [[function-body-parse-job-sidecar]], [[text-to-ast-backend-doctrine]].
+[[julia-compiled-spec-state]], [[dart-function-registry]], [[function-body-parse-job-sidecar]],
+[[text-to-ast-backend-doctrine]].

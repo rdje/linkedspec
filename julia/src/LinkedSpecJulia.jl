@@ -52,6 +52,16 @@ export backend_name,
     ActionVariableExpr,
     BlindEdgeBodyElementKind,
     BodyElement,
+    CompiledActionEdge,
+    CompiledActionPayload,
+    CompiledBlindEdge,
+    CompiledDependencyRegexEntry,
+    CompiledDependencyRegexState,
+    CompiledDescriptorState,
+    CompiledRule,
+    CompiledRuleModeMetadata,
+    CompiledSpec,
+    CompiledSpecException,
     CodeBlockBodyElementKind,
     ConditionalBodyElementKind,
     EdgeTarget,
@@ -87,11 +97,18 @@ export backend_name,
     UserFunctionRegistry,
     UserFunctionRegistryException,
     and_bounded_rule_mode,
+    action_payloads,
     body_parse_jobs,
     canonical_action_helper_name,
     canonicalized,
+    combined_pattern,
+    compile_spec,
+    compiled_functions,
+    compiled_rule,
     default_rule_mode,
     definition_nodes_from_user_function_definition_output,
+    DependencyRef,
+    descriptor_state,
     empty_user_function_registry,
     expected_arities_for,
     find_rule,
@@ -113,6 +130,7 @@ export backend_name,
     run_cli,
     run_corpus_runner,
     stitch_function_body_ast,
+    to_descriptor_json,
     top_rule,
     to_json,
     user_function_names,
@@ -125,7 +143,7 @@ const PACKAGE_NAME = "LinkedSpecJulia"
 const PACKAGE_VERSION = v"0.1.0"
 const CLI_ENTRYPOINT = "julia/bin/linkedspec_julia.jl"
 const CORPUS_RUNNER_ENTRYPOINT = "julia/bin/corpus_runner.jl"
-const PARITY_STATUS = "function-registry"
+const PARITY_STATUS = "compiled-state"
 
 include("corpus/CorpusManifest.jl")
 include("spec/Ast.jl")
@@ -136,6 +154,7 @@ include("action/ActionContracts.jl")
 include("spec/Parser.jl")
 include("spec/UserFunctionDefinitionShell.jl")
 include("spec/Validator.jl")
+include("compiler/CompiledSpec.jl")
 include("cli/LinkedSpecJuliaCli.jl")
 
 backend_name() = BACKEND_NAME

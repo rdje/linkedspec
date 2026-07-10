@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.3.4 — add Julia compiled-spec state
+
+**Scope:** Julia compiled-spec/interpreter-state records, dependency-regex state, descriptor projection, package
+exports/status, focused compiled-state tests, README, task-tree frontier update, roadmap/task-tree index alignment,
+mdBook status/handoff text, Knowledge Map, architecture snapshot, live docs, and resume pointer.
+
+**Change:** Added `julia/src/compiler/CompiledSpec.jl` with `compile_spec(...)`, `CompiledSpec`,
+`CompiledRule`, `CompiledRuleModeMetadata`, `DependencyRef`, action/blind edge records, action payload records,
+`CompiledDependencyRegexState`, `CompiledDependencyRegexEntry`, `CompiledDescriptorState`, and JSON/descriptor
+projection helpers. Julia compiled state now records ordered rule metadata, last-definition-wins metadata when
+validation is deliberately skipped, dependency refs, derived dependency-regex rows, lifecycle/plain/action-edge
+payload ASTs with registry-aware contracts, function registry projection, and descriptor-shaped `spec` /
+`functions` / `dependency_regex_map` / `meta` JSON. The Julia package status now reports `compiled-state`.
+
+**Validation:** `Pkg.test()` passes with 456 tests, including 41 compiled-state assertions and the existing
+registry/ActionIR/frontend/corpus coverage. Commit-time docs/governance validation covers mdBook, memory
+architecture, task-tree metadata, Knowledge Map, doctrine, and `git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.3.3 — add Julia user-function registry
 
 **Scope:** Julia user-function registry records, staged body parse-job queue exposure, body-AST stitching helper,
