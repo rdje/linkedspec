@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.5.1 — add Julia terminating exit control
+
+**Scope:** Julia `exit_now(...)` runtime execution, explicit/default status and diagnostic tests, simenv boundary
+routing, package status, lockstep docs, mdBook, Knowledge Map, and resume pointer.
+
+**Change:** Added immediate `exit_now(...)` dispatch. Julia evaluates the optional status expression, defaults to
+status `1`, and throws `RuntimeInterpreterException` with rule attribution; the existing runtime wrapper retains
+structured top/rule/spec diagnostic fields. Statements after the helper are unreachable.
+
+**Validation:** Focused assertions lock `exit_now(7)`, default `exit_now(1)`, termination before a following
+return, and structured attribution. Simenv advances from an unsupported-helper failure to the deliberate
+`exit_now(1) in rule begin_end_blocks` control boundary, routing its unmet statement-form mutation prerequisite to
+`.6.2.4.5.2`. The shipped window remains 25/31 without regression; full `Pkg.test()` passes with 801 assertions and
+status `runtime-corpus-exit-now`. CLI, mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.4 — add Julia action-edge child push
 
 **Scope:** Julia action-edge child-result append overloads, focused whole/indexed tests, spec.spec closeout, EBNF

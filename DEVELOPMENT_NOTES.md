@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.5.1 — terminating exit control):
+  `exit_now(...)` is fatal parser flow, not a value-returning helper. Julia evaluates its optional first argument,
+  uses Rust-compatible numeric status `1` when absent or nonnumeric, and throws immediately through the established
+  structured runtime-diagnostic path. The simenv result is intentionally still a failure: its earlier statement-
+  form `substr(...)` has not mutated the block name, so the now-supported fatal mismatch branch executes. That
+  causally separate mutation belongs to `.6.2.4.5.2`; this leaf locks control semantics without masking it.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.4 — action-edge child push):
   Parent action-edge regex matching already consumes the token and establishes a scoped child result. All-bare
   `push(child, target)` and literal `push(child, index)` therefore need child-call precedence and must reuse that

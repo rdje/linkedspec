@@ -624,15 +624,22 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `pending`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.5.1`
-  Status: `active`
+  Status: `done`
   Goal: Add terminating `exit_now(...)` runtime control.
   Acceptance: `simenv_multiline_value` advances past unsupported `exit_now` with the fatal-control contract locked
     independently from later statement mutation.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - Julia evaluates the optional first status expression, defaults absent/nonnumeric status
+    to Rust-compatible `1`, and immediately throws `RuntimeInterpreterException` with rule attribution; the
+    established wrapper retains structured top/rule/spec diagnostic fields. Focused coverage locks explicit
+    `exit_now(7)`, default `exit_now(1)`, and an unreachable following return. Simenv advances from unsupported
+    `exit_now` to deliberate `exit_now(1) in rule begin_end_blocks`, proving the helper while exposing its earlier
+    statement-form `substr(...)` prerequisite under `.6.2.4.5.2`. Eight permanent boundary assertions and seven
+    focused runtime assertions bring full `Pkg.test()` to 801; the shipped window remains 25/31 without regression,
+    status is `runtime-corpus-exit-now`, and `.6.2.4.5.2` becomes active.
+  Commit: `JULIA-BACKEND-PARITY.6.2.4.5.1 - add Julia terminating exit control`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.5.2`
-  Status: `pending`
+  Status: `active`
   Goal: Close statement-form scalar mutation and quote normalization.
   Acceptance: Both EBNF cases, both lib_reader cases, and the post-`exit_now` simenv boundary apply portable
     statement mutation without fixture-specific cleanup and match checked-in outputs or split a narrower residual.
@@ -730,7 +737,25 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 15 | `JULIA-BACKEND-PARITY.6.2.4.2.2` | `done` | Diagnostic output is trace-routed and parse-result neutral; both corpus cases advance to successor-owned mechanisms. |
 | 16 | `JULIA-BACKEND-PARITY.6.2.4.3` | `done` | Rule-local aggregate reset snapshots close all three recursive top-rule fixtures. |
 | 17 | `JULIA-BACKEND-PARITY.6.2.4.4` | `done` | Action-edge child-push forms close all four spec.spec smokes and route EBNF quote mutation. |
-| 18 | `JULIA-BACKEND-PARITY.6.2.4.5.1` | `active` | Add terminating `exit_now(...)` control before simenv mutation work. |
+| 18 | `JULIA-BACKEND-PARITY.6.2.4.5.1` | `done` | Terminating explicit/default `exit_now(...)` control is diagnostic-attributed and immediate. |
+| 19 | `JULIA-BACKEND-PARITY.6.2.4.5.2` | `active` | Close statement-form scalar mutation and quote normalization across EBNF, lib_reader, and simenv. |
+
+## `JULIA-BACKEND-PARITY.6.2.4.5.1` Terminating Exit Control Result
+
+Runtime-control evidence recorded on 2026-07-10:
+
+- Julia now recognizes `exit_now(...)` before generic helper fallback, evaluates the optional first status
+  expression, and throws immediately. Explicit numeric status is preserved; absent or nonnumeric status uses the
+  Rust-compatible default `1`.
+- The exception message includes the current rule, and the existing rule/runtime wrappers attach structured
+  `runtime_execution` diagnostics with top-rule, rule, spec-name, and spec-path attribution where available.
+- Focused runtime coverage proves `exit_now(7)`, default `exit_now(1)`, and that a following return is unreachable.
+- `simenv_multiline_value` no longer reports unsupported `exit_now`; it deliberately terminates as
+  `exit_now(1) in rule begin_end_blocks`. The fatal branch is reached because the preceding statement-form
+  `substr(...)` has not yet mutated the block-name scalar, so `.6.2.4.5.2` owns that independent prerequisite.
+- The complete shipped window remains 25/31: two EBNF quote residuals, simenv mutation, history leading trivia,
+  and two lib_reader quote residuals. Full `Pkg.test()` passes with 801 assertions and status
+  `runtime-corpus-exit-now`.
 
 ## `JULIA-BACKEND-PARITY.6.2.4.4` Action-Edge Child Push Result
 
@@ -2207,6 +2232,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.2.2` | Focused diagnostic-output runtime proof; focused simenv/history corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Trace-routed `print`/`print_each`/`say` preserve parser output and advance both corpus cases past unsupported `print`; exact successor failures are locked, shipped smoke remains 18/31, full tests pass with 780 assertions, status is `runtime-corpus-diagnostic-output`, and `.6.2.4.3` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.3` | Julia debug trace on recursive nested fixture; focused rule-local array/hash reset and shared-mutation tests; three-case recursive corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. First-reset rule-local snapshots preserve caller stores while ordinary child mutations remain visible; all three recursive fixtures pass, shipped smoke is 21/31, full tests pass with 785 assertions, status is `runtime-corpus-recursive-rule-scope`, and `.6.2.4.4` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.4` | Julia debug traces on EBNF logging and spec.spec minimal fixtures; focused four-form action-edge child-push test; six-case structural corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS/SPLIT. All four spec.spec smokes pass; both EBNF cases retain complete structures and route quote-only statement mutation to `.6.2.4.5.2`; shipped smoke is 25/31, full tests pass with 793 assertions, status is `runtime-corpus-action-edge-child-push`, and `.6.2.4.5.1` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.5.1` | Focused explicit/default `exit_now(...)` runtime and structured-diagnostic proof; simenv/history boundary regression; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Immediate fatal control preserves explicit status, defaults to `1`, and retains structured attribution. Simenv advances from unsupported helper to `exit_now(1) in rule begin_end_blocks`, routing the earlier scalar-mutation prerequisite to `.6.2.4.5.2`; shipped smoke remains 25/31, full tests pass with 801 assertions, status is `runtime-corpus-exit-now`, and `.6.2.4.5.2` becomes active. |
 
 ## Commit Log
 
@@ -2254,9 +2280,15 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.6.2.4.2.2` | `JULIA-BACKEND-PARITY.6.2.4.2.2 - add Julia diagnostic output helpers` | Trace-routed, parse-result-neutral diagnostic output advances both routed fixtures to successor-owned mechanisms; recursive top-rule parity advances to `.6.2.4.3`. |
 | `JULIA-BACKEND-PARITY.6.2.4.3` | `JULIA-BACKEND-PARITY.6.2.4.3 - scope Julia recursive rule resets` | Rule-local explicit aggregate reset snapshots close all three recursive top-rule fixtures; structural outputs advance to `.6.2.4.4`. |
 | `JULIA-BACKEND-PARITY.6.2.4.4` | `JULIA-BACKEND-PARITY.6.2.4.4 - add Julia action-edge child push` | Four child-push forms close all four spec.spec smokes and route EBNF quote mutation to `.6.2.4.5.2`. |
+| `JULIA-BACKEND-PARITY.6.2.4.5.1` | `JULIA-BACKEND-PARITY.6.2.4.5.1 - add Julia terminating exit control` | Immediate explicit/default fatal control advances simenv to its statement-mutation prerequisite; `.6.2.4.5.2` becomes active. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.2.4.5.1` terminating exit control. Julia evaluates the optional status expression,
+  defaults absent/nonnumeric status to `1`, throws immediately with rule attribution, and retains the existing
+  structured runtime diagnostic. Simenv advances from unsupported `exit_now` to deliberate `exit_now(1) in rule
+  begin_end_blocks`, exposing the earlier statement-form scalar mutation under `.6.2.4.5.2`. Full tests pass with
+  801 assertions, shipped smoke remains 25/31, status is `runtime-corpus-exit-now`, and `.6.2.4.5.2` is active.
 - `2026-07-10`: Completed `.6.2.4.4` action-edge child push. Julia now reuses edge-scoped child results for
   implicit/explicit whole and indexed append forms. All four spec.spec smokes pass; both EBNF cases preserve full
   structures and route quote-only statement mutation to `.6.2.4.5.2`. Full tests pass with 793 assertions, shipped

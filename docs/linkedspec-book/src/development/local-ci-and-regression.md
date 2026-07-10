@@ -62,7 +62,7 @@ projection, seek/consume runtime regex selection, capture/offset projection, cur
 zero-progress detection, first default/AND/OR/repetition dispatch, lifecycle and child-edge flow, narrow
 accumulators/returns, recursion/progress guards, registered user functions, diagnostics/tracing, boundary capture,
 manifest-backed corpus validation, and controlled library corpus execution. The full package suite currently passes
-with 793 assertions and status `runtime-corpus-action-edge-child-push`.
+with 801 assertions and status `runtime-corpus-exit-now`.
 
 The library executor and corpus CLI support named or bounded subsets. For example:
 

@@ -25,11 +25,13 @@ The helpers return `nothing` and never append to the parser accumulator. Julia r
 through the configured low-level trace sink, so traced callers can capture or route the diagnostics while ordinary
 and corpus execution remains quiet.
 
-This leaf deliberately advances rather than closes its two shipped fixtures. `simenv_multiline_value` now reaches
-unsupported `exit_now`, whose terminating-control contract belongs to later helper/parity work.
+This leaf deliberately advances rather than closes its two shipped fixtures. At the `.6.2.4.2.2` boundary,
+`simenv_multiline_value` reached unsupported `exit_now`. `.6.2.4.5.1` has since implemented that terminating
+control; the current simenv failure is deliberate `exit_now(1)` execution caused by its earlier statement-form
+mutation gap.
 `ds_vhistory_version_entry` executes to output comparison and returns `/proj/foo` where the checked oracle expects
 `null`; the existing cross-backend evidence attributes that boundary to public-parser leading-trivia handling, not
 diagnostic output or indexed access.
 
-Related facts: [[julia-shipped-corpus-smoke-split]], [[dart-helper-action-surface-bridge]],
+Related facts: [[julia-exit-now-control]], [[julia-shipped-corpus-smoke-split]], [[dart-helper-action-surface-bridge]],
 [[ds-vhistory-leading-newline-oracle-boundary]], [[julia-controlled-corpus-execution]].

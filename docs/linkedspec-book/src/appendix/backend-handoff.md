@@ -337,8 +337,11 @@ closes three portmap cases plus tablegrep. `.6.2.4.2.3` centralizes helper regex
 `.6.2.4.2.2` adds trace-routed, parse-result-neutral diagnostic output and advances simenv/history beyond
 unsupported `print`. `.6.2.4.3` scopes explicit aggregate resets per recursive rule invocation and closes all
 three recursive top-rule cases. `.6.2.4.4` adds action-edge child-push result reuse/indexing, closes all four
-spec.spec smokes, and routes EBNF quote-only statement mutation. Full tests pass with 793 assertions, status is
-`runtime-corpus-action-edge-child-push`, the window is 25/31, and `.6.2.4.5.1` is active.
+spec.spec smokes, and routes EBNF quote-only statement mutation. `.6.2.4.5.1` adds immediate `exit_now(...)`
+termination with explicit numeric status, default status `1`, and structured runtime attribution. Simenv now
+executes its fatal branch instead of reporting an unsupported helper, exposing the earlier scalar-mutation
+prerequisite under `.6.2.4.5.2`. Full tests pass with 801 assertions, status is `runtime-corpus-exit-now`, the
+window remains 25/31, and `.6.2.4.5.2` is active.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -695,10 +698,10 @@ and the window is 18/31 at that boundary.
 Diagnostic `print(...)` and `say(...)` concatenate evaluated values, with `say(...)` adding a newline;
 `print_each(...)` walks an array with optional prefix and suffix text. Julia emits these messages through a
 configured low-level trace sink, returns no parse value, and remains quiet when tracing is absent or disabled.
-`simenv_multiline_value` now reaches unsupported `exit_now`, and `ds_vhistory_version_entry` reaches the known
-leading-trivia output mismatch. The permanent regression rejects renewed unsupported-`print` failures. The full
-window remains 18/31, full tests pass with 780 assertions, status is `runtime-corpus-diagnostic-output`, and
-`.6.2.4.3` is next.
+At the `.6.2.4.2.2` boundary, `simenv_multiline_value` reached unsupported `exit_now`, and
+`ds_vhistory_version_entry` reached the known leading-trivia output mismatch. The permanent regression rejects
+renewed unsupported-`print` failures. The full window remained 18/31, full tests passed with 780 assertions, and
+status was `runtime-corpus-diagnostic-output`; later leaves own both residuals.
 
 Recursive rule calls now carry a first-reset binding snapshot for explicit `set(array(...), ...)`,
 `set(hash(...), ...)`, and explicit split-target replacement. Child exit restores the caller's prior typed binding,
@@ -712,7 +715,14 @@ edge's cached child result. `push(Child)`, `push(Child, target)`, `push(Child, i
 `push(Child, target, index)` append whole or zero-based indexed values without re-searching the consumed token.
 All four spec.spec smokes pass. Both EBNF cases now retain complete structures and are locked at quote-only
 statement-mutation residuals under `.6.2.4.5.2`. The full window is 25/31, full tests pass with 793 assertions,
-status is `runtime-corpus-action-edge-child-push`, and `.6.2.4.5.1` is active.
+status is `runtime-corpus-action-edge-child-push` at that boundary.
+
+`exit_now(...)` now terminates Julia parser flow immediately. Its optional first argument is evaluated as a
+numeric status, with absent or nonnumeric status defaulting to `1`; the thrown runtime exception includes the
+current rule and retains the established structured top/rule/spec diagnostic attribution. Simenv now executes
+`exit_now(1)` in `begin_end_blocks`, proving the control helper while exposing its earlier statement-form
+`substr(...)` mutation prerequisite. The full window remains 25/31, full tests pass with 801 assertions, status is
+`runtime-corpus-exit-now`, and `.6.2.4.5.2` owns that mutation.
 
 ### Dart Backend Commands
 

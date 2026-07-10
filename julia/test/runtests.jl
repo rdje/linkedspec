@@ -346,7 +346,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-corpus-action-edge-child-push"
+    @test status.parity == "runtime-corpus-exit-now"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -358,7 +358,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-corpus-action-edge-child-push", String(take!(status_output)))
+    @test occursin("parity: runtime-corpus-exit-now", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1648,6 +1648,40 @@ Top::
         occursin(" line", diagnostic_text) &&
         occursin("item:a!", diagnostic_text) &&
         occursin("item:b!", diagnostic_text)
+
+    explicit_exit = runtime_engine(raw"""
+Top::
+ /x/
+ E {
+   exit_now(7)
+   return("never")
+ }
+""")
+    explicit_exit_error = try
+        runtime_parse(explicit_exit, "x")
+        nothing
+    catch error
+        error
+    end
+    @test explicit_exit_error isa RuntimeInterpreterException
+    @test explicit_exit_error.message == "exit_now(7) in rule Top"
+    @test explicit_exit_error.diagnostic.stage == "runtime_execution"
+    @test explicit_exit_error.diagnostic.top_rule == "Top"
+    @test explicit_exit_error.diagnostic.rule_label == "Top"
+
+    default_exit = runtime_engine(raw"""
+Top::
+ /x/
+ E { exit_now() }
+""")
+    default_exit_error = try
+        runtime_parse(default_exit, "x")
+        nothing
+    catch error
+        error
+    end
+    @test default_exit_error isa RuntimeInterpreterException
+    @test default_exit_error.message == "exit_now(1) in rule Top"
 
     numeric_helpers = runtime_engine(raw"""
 Top::
@@ -3592,8 +3626,9 @@ end
         "ds_vhistory_version_entry",
     ]
     @test !corpus_fixture_passed(simenv)
-    @test occursin("unsupported runtime helper 'exit_now'", simenv.failure)
+    @test occursin("execute failed: exit_now(1) in rule begin_end_blocks", simenv.failure)
     @test !occursin("unsupported runtime helper 'print'", simenv.failure)
+    @test !occursin("unsupported runtime helper 'exit_now'", simenv.failure)
     @test !corpus_fixture_passed(history)
     @test occursin("output mismatch", history.failure)
     @test !occursin("unsupported runtime helper 'print'", history.failure)

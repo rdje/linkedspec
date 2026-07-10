@@ -2007,6 +2007,8 @@ function _evaluate_runtime_call!(
             )) for arg in args
         ]
         return _call_runtime_diagnostic_output_helper!(helper_name, values, context, rule_label)
+    elseif helper_name == "exit_now"
+        return _call_runtime_exit_now!(engine, args, context, rule_label, current_edge)
     elseif helper_name == "save_cursor"
         cursor_before = context.cursor_codeunit
         stack_before = length(context.cursor_stack)
@@ -4458,6 +4460,22 @@ function _call_runtime_diagnostic_output_helper!(helper_name, values, context, r
     end
     _emit_runtime_diagnostic_output!(context, helper_name, rule_label, message)
     return nothing
+end
+
+function _call_runtime_exit_now!(engine, args, context, rule_label, current_edge)
+    status = if isempty(args)
+        1
+    else
+        value = _evaluate_runtime_action_expr!(
+            engine,
+            first(args),
+            context,
+            rule_label,
+            current_edge,
+        )
+        something(_runtime_int(value), 1)
+    end
+    throw(RuntimeInterpreterException("exit_now($status) in rule $rule_label"))
 end
 
 function _runtime_codeunit_slice(input::String, start_codeunit::Int, end_codeunit::Int)

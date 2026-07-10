@@ -120,7 +120,9 @@ Top-level directories and files:
     three recursive top-rule cases. Full tests pass with 785 assertions, status is
     `runtime-corpus-recursive-rule-scope` at that boundary. `.6.2.4.4` adds all four action-edge child-push forms,
     closes the four spec.spec smokes, and routes EBNF quote mutation. Full tests pass with 793 assertions, status is
-    `runtime-corpus-action-edge-child-push`, shipped smoke is 25/31, and `.6.2.4.5.1` is active.
+    `runtime-corpus-action-edge-child-push` at that boundary. `.6.2.4.5.1` adds terminating `exit_now(...)` with
+    explicit numeric status, default status `1`, and structured runtime attribution. Full tests pass with 801
+    assertions, status is `runtime-corpus-exit-now`, shipped smoke remains 25/31, and `.6.2.4.5.2` is active.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

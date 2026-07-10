@@ -18,22 +18,22 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.6.2.4.4` — cached action-edge child-push forms close all four
-  spec.spec smokes and route EBNF quote mutation; full tests pass with 793 assertions, shipped smoke is 25/31, and
-  status is `runtime-corpus-action-edge-child-push`.
-- prior_leaf: `JULIA-BACKEND-PARITY.6.2.4.3` — rule-local reset scope closed all three recursive fixtures.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.6.2.4.5.1` — explicit/default terminating `exit_now(...)` retains
+  structured attribution and advances simenv to statement mutation; full tests pass with 801 assertions, shipped
+  smoke remains 25/31, and status is `runtime-corpus-exit-now`.
+- prior_leaf: `JULIA-BACKEND-PARITY.6.2.4.4` — action-edge child push closed all four spec.spec smokes.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.6.2.4.4 - add Julia action-edge child push`; previous committed HEAD is
-  `4fe39b5b JULIA-BACKEND-PARITY.6.2.4.3 - scope Julia recursive rule resets`.
+  `JULIA-BACKEND-PARITY.6.2.4.5.1 - add Julia terminating exit control`; previous committed HEAD is
+  `9a6e7ed9 JULIA-BACKEND-PARITY.6.2.4.4 - add Julia action-edge child push`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; the frontier after the current commit is `.6.2.4.5.1`.
-- next_action: resume PNT at `JULIA-BACKEND-PARITY.6.2.4.5.1` by implementing and locking terminating
-  `exit_now(...)`, then rerun `simenv_multiline_value` to expose its statement-mutation boundary without changing
-  EBNF/lib_reader/history mechanisms owned by `.5.2` and `.5.3`.
+- active_work_unit: `JULIA-BACKEND-PARITY`; the frontier after the current commit is `.6.2.4.5.2`.
+- next_action: resume PNT at `JULIA-BACKEND-PARITY.6.2.4.5.2` by implementing portable statement-form scalar
+  mutation and quote normalization for EBNF, lib_reader, and the pre-exit simenv path without changing history's
+  leading-trivia mechanism owned by `.5.3`.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
 - latest_bootstrap_read: 2026-07-10 read the full roadmap and roadmap-v2, full codebase inventory and active Julia
@@ -50,5 +50,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.6.2.4.4` commit;
+- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.6.2.4.5.1` commit;
   do not pivot unless the repo is handoff-ready.

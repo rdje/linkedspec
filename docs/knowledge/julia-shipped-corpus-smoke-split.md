@@ -31,8 +31,8 @@ Every failing fixture is routed exactly once before implementation:
   helpers. That leaf now closes three portmap cases plus tablegrep; `.6.2.4.2.3` owns portmap constant's proven
   helper-regex `o` flag residual. `.6.2.4.2.3` has since closed that residual and all five cases pass.
   - `.6.2.4.2.2`: `simenv_multiline_value` and `ds_vhistory_version_entry`, initially blocked by unsupported
-    `print`. That leaf now advances simenv to unsupported `exit_now` and history to its leading-trivia output
-    mismatch; later mechanism leaves own those residuals.
+    `print`. That leaf advanced simenv to unsupported `exit_now` and history to its leading-trivia output mismatch.
+    `.6.2.4.5.1` now executes the fatal helper and exposes simenv's earlier statement-mutation prerequisite.
 - `.6.2.4.3`: three recursive top-rule fixtures that initially returned incorrect nested/caller values. That leaf
   now scopes explicit aggregate resets per rule invocation and all three cases pass.
 - `.6.2.4.4`: `ebnf_expression_rules` plus four spec.spec smokes initially lost structural records. Action-edge
@@ -43,10 +43,11 @@ Every failing fixture is routed exactly once before implementation:
 - `.6.2.4.6`: final 31/31 regression and no-drift closeout.
 
 The checked-in expected JSON remains the Perl/Rust oracle. Completed Dart facts identify portable mechanism
-contracts, but the Julia leaves must establish their own root causes. After `.6.2.4.4`, the complete window is
-25/31. Full tests pass with 793 assertions, status is `runtime-corpus-action-edge-child-push`, and `.6.2.4.5.1` is
-active.
+contracts, but the Julia leaves must establish their own root causes. After `.6.2.4.5.1`, terminating
+`exit_now(...)` supports explicit status and defaults to `1`; simenv now executes its fatal branch because the
+earlier statement-form scalar mutation remains open under `.6.2.4.5.2`. The complete window remains 25/31. Full
+tests pass with 801 assertions, status is `runtime-corpus-exit-now`, and `.6.2.4.5.2` is active.
 
-Related facts: [[julia-action-edge-child-push]], [[julia-recursive-rule-local-reset-scope]], [[julia-diagnostic-output-helpers]], [[julia-helper-regex-flag-normalization]], [[julia-logical-helper-execution]], [[julia-anonymous-capture-boundary-helpers]], [[julia-middle-corpus-batch]], [[julia-controlled-corpus-execution]],
+Related facts: [[julia-exit-now-control]], [[julia-action-edge-child-push]], [[julia-recursive-rule-local-reset-scope]], [[julia-diagnostic-output-helpers]], [[julia-helper-regex-flag-normalization]], [[julia-logical-helper-execution]], [[julia-anonymous-capture-boundary-helpers]], [[julia-middle-corpus-batch]], [[julia-controlled-corpus-execution]],
 [[dart-shipped-corpus-smoke-split]], [[dart-helper-action-surface-bridge]],
 [[rust-anonymous-capture-slice-family]], [[rust-perl-output-oracle]].

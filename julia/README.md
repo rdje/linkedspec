@@ -1,6 +1,6 @@
 # LinkedSpec Julia Backend
 
-This directory is the repository-owned Julia backend. Its current `runtime-corpus-action-edge-child-push` status covers the
+This directory is the repository-owned Julia backend. Its current `runtime-corpus-exit-now` status covers the
 package/command surface, manifest validation, source and ActionIR frontends, staged user-function projection/body
 parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch, value/helper/control/callback
 families, cursor/boundary behavior, structured diagnostics/tracing, registered function execution, and controlled
@@ -148,7 +148,11 @@ Full tests pass with 785 assertions, status is `runtime-corpus-recursive-rule-sc
 21/31 at that boundary. `.6.2.4.4` adds implicit/explicit whole and indexed action-edge child-push forms. All four
 spec.spec smokes pass; both EBNF cases retain full structures and route quote-only statement mutation to `.5.2`.
 Full tests pass with 793 assertions, status is `runtime-corpus-action-edge-child-push`, the shipped-smoke window is
-25/31, and `.6.2.4.5.1` is active.
+25/31 at that boundary. `.6.2.4.5.1` adds immediate `exit_now(...)` termination with explicit numeric status,
+default status `1`, and the existing structured rule/top/spec diagnostic attribution. Simenv now executes its
+fatal branch as `exit_now(1) in rule begin_end_blocks`, proving the helper is supported while exposing the
+statement-form mutation prerequisite owned by `.6.2.4.5.2`. Full tests pass with 801 assertions, status is
+`runtime-corpus-exit-now`, the shipped-smoke window remains 25/31, and `.6.2.4.5.2` is active.
 
 Library example:
 
