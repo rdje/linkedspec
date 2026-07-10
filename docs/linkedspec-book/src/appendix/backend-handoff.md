@@ -81,6 +81,15 @@ an invalid spec wins over a simultaneously missing input. Backend owner names, h
 OS error wording, exception source locations, and ambient backend-specific trace environment
 variables are not part of the shared primary-command output.
 
+ADR `0024` separates portable primary trace from rich native trace. Primary records
+are deterministic UTF-8 lines shaped as `[linkedspec][LEVEL] EVENT`: low records
+compile/input/invoke start and outcome, medium adds request controls, high adds byte
+counts, full adds JSON byte length, and debug adds protocol version. `none`/`quiet`
+are silent. Stdout/route/mirror, selected-file defaults, reset/persistence, emoji,
+UTF-8 byte counts, percent-escaped user fields, and traced failures are exact shared
+behavior. Native in-memory APIs retain their
+backend-internal scope/decision/mark/dump streams.
+
 For example, this portable action-edge grammar deliberately constructs object keys out of
 order:
 
@@ -113,8 +122,9 @@ This is a contract and active convergence target, not a claim that every current
     function-shell/staged trace coverage, `.7.3.2.2` closes exact argument/source/input handling, `.7.3.2.3`
     closes execution/direct canonical JSON, `.7.3.2.4` closes errors/exits/trace routing, and `.7.3.2.5` closes
     nine-family direct-command conformance. `.7.3.3` closes the local audit without claiming global identity.
-    Global `.1.5.1.4` now locks 33 exact Perl cases: two help, 20 usage, seven success, and four operational
-    failure families in default/POSIX environments. `.1.5.1.5` is active for trace and the final Perl gate.
+    Global `.1.5.1.5` closes 53 exact Perl cases: two help, 20 usage, seven success, four operational failure, and
+    20 trace families in default/POSIX environments. A signoff probe then exposed UTF-8 argv/JSON mojibake; active
+    `.1.5.1.6` owns that reference boundary before pending Rust `.1.5.2`.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics

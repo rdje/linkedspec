@@ -41,7 +41,7 @@ check_no_untracked_ci_inputs() {
   [[ "$status_line" == '?? '* ]] || continue
   printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
   found=1
- done < <(git status --short --untracked-files=all -- .github/workflows tools/run_ci_local.sh specs conf tablescript ebnf perl t)
+ done < <(git status --short --untracked-files=all -- .github/workflows bin/linkedspec cli_conformance tools/run_ci_local.sh tools/run_cli_conformance.pl specs conf tablescript ebnf perl t)
 
  (( found == 0 )) || exit 1
 }
@@ -58,7 +58,7 @@ audit_no_machine_specific_absolute_paths() {
    printf '[ci] ERROR: machine-specific absolute path(s) in %s:\n%s\n' "$path" "$matches" >&2
    found=1
   fi
- done < <(git ls-files -- .github/workflows/ci.yml tools/run_ci_local.sh t/phase0_regression.t perl/LinkedSpec.pm perl/LinkedSpec)
+ done < <(git ls-files -- .github/workflows/ci.yml bin/linkedspec cli_conformance tools/run_ci_local.sh tools/run_cli_conformance.pl t/phase0_regression.t t/trace_cli.t t/cli_conformance_runner.t perl/LinkedSpec.pm perl/LinkedSpec)
 
  (( found == 0 )) || exit 1
 }
@@ -75,6 +75,11 @@ bash "$REPO_ROOT/scripts/check_doctrines.sh"
 log "auditing git-tracked CI inputs"
 require_tracked_file .github/workflows/ci.yml
 require_tracked_file tools/run_ci_local.sh
+require_tracked_file tools/run_cli_conformance.pl
+require_tracked_file bin/linkedspec
+require_tracked_file cli_conformance/manifest.json
+require_tracked_file t/cli_conformance_runner.t
+require_tracked_file t/trace_cli.t
 require_tracked_file perl/LinkedSpec.pm
 require_tracked_file t/phase0_regression.t
 require_tracked_file scripts/check_memory_architecture.sh
@@ -89,7 +94,7 @@ require_tracked_file knowledge-map/scripts/check_knowledge_map.sh
 # NOTE: 'plugin' is intentionally NOT required here — NONCORE-QUARANTINE.3 git mv'd the 13 .plg to
 # noncore/plugin/ and removed the top-level plugin/ dir. The core gate stays core-only and does not reach
 # into noncore/ (same core-only precedent as PHASE0-BACKHALF-TRIAGE.5.1/.5.4). (PHASE0-BACKHALF-TRIAGE.5.3.1)
-for path in specs conf tablescript ebnf perl t; do
+for path in cli_conformance specs conf tablescript ebnf perl t; do
  require_tracked_tree "$path"
 done
 check_no_untracked_ci_inputs
@@ -99,11 +104,28 @@ audit_no_machine_specific_absolute_paths
 
 log "running syntax checks"
 perl -c perl/LinkedSpec.pm
+perl -c bin/linkedspec
+perl -c tools/run_cli_conformance.pl
 perl -c -Iperl t/actionir_ast_parser.t
+perl -c -Iperl t/cli_conformance_runner.t
+perl -c -Iperl t/trace_cli.t
 perl -c -Iperl t/phase0_regression.t
 
 log "running ActionIR AST parser focused suite"
 prove -Iperl t/actionir_ast_parser.t
+
+log "running primary CLI runner and focused trace suites"
+PERL5LIB= prove -Iperl t/cli_conformance_runner.t t/trace_cli.t
+
+log "running primary CLI conformance (default option environment)"
+PERL5LIB= perl tools/run_cli_conformance.pl \
+ --display-command 'perl bin/linkedspec' \
+ -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec
+
+log "running primary CLI conformance (POSIX option environment)"
+POSIXLY_CORRECT=1 PERL5LIB= perl tools/run_cli_conformance.pl \
+ --display-command 'perl bin/linkedspec' \
+ -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec
 
 # Memory guard — bail if system RAM is critically low before running the heavy suite
 _ram_used_pct() {

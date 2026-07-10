@@ -156,8 +156,8 @@ Top-level directories and files:
     capability census, and generated-source owners `.1.5`/`.1.6`/`.3`. `.1.5.1.0` now splits the neutral fixture/
     Perl reference work after direct probes found implicit option aliases, ignored positionals, environment-driven
     parsing, and failure trace on stdout. `.1.5.1.1` now adds the reusable byte-exact harness/help baseline;
-    `.1.5.1.4` now extends the suite to 33/33 with four exact phase-ordered operational failures; `.1.5.1.5` is
-    active for deterministic trace behavior and the final Perl gate.
+    `.1.5.1.5` now closes canonical trace at 53/53 exact cases with local-gate integration. Its signoff exposed a
+    pre-existing UTF-8 argv/JSON mojibake boundary; `.1.5.1.6` owns that repair before the pending Rust command.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.
@@ -187,8 +187,9 @@ Top-level project docs:
 - Run `bash tools/run_ci_local.sh` from the repo root to execute the canonical regression gate.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
-  {{REPO_ROOT}}/bin/linkedspec`. The manifest currently locks two help, 20 usage, seven success, and four failure
-  cases; active `.1.5.1.5` adds deterministic trace cases and closes the Perl reference gate.
+  {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven success, four failure, and seven
+  trace cases. Perl passes all 53 current cases; active `.1.5.1.6` now locks UTF-8 process semantics before the
+  pending Rust primary command consumes the same manifest.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 99-fixture corpus execution.
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI

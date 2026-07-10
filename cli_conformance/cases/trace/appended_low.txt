@@ -1,0 +1,7 @@
+stale trace
+[linkedspec][low] compile:start
+[linkedspec][low] compile:ok
+[linkedspec][low] input:start
+[linkedspec][low] input:ok
+[linkedspec][low] invoke:start
+[linkedspec][low] invoke:ok

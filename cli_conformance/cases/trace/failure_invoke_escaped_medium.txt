@@ -1,0 +1,7 @@
+[linkedspec][low] compile:start
+[linkedspec][medium] request source=inline input=literal top_rule=Top%0AInjected parse_mode=seek
+[linkedspec][low] compile:ok
+[linkedspec][low] input:start
+[linkedspec][low] input:ok
+[linkedspec][low] invoke:start
+[linkedspec][low] invoke:error

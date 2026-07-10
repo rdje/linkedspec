@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`.1.5.1.4` Perl operational failures done; `.1.5.1.5` active).
+- Last updated: `2026-07-10` (`.1.5.1.5` closes canonical trace at 53/53; `.1.5.1.6` active for the surfaced UTF-8 process boundary).
 - Owner: repo-local workflow
 
 ## Goal
@@ -138,10 +138,13 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.1.5.1`
   Status: `active`
   Goal: Lock the language-neutral CLI fixtures and normalize the Perl reference command to ADR `0023`.
-  Children: `.1.5.1.0`, `.1.5.1.1`, `.1.5.1.2`, `.1.5.1.3`, `.1.5.1.4`, `.1.5.1.5`
+  Children: `.1.5.1.0`, `.1.5.1.1`, `.1.5.1.2`, `.1.5.1.3`, `.1.5.1.4`, `.1.5.1.5`, `.1.5.1.6`
   Acceptance: Checked-in fixture cases define help, success, usage, compile/input/runtime failure, trace routing,
     stdout/stderr, and exit behavior; Perl passes exactly and rejects undocumented primary-CLI surface.
-  Verification: `pending`
+  Verification: `pending` - six completed leaves establish the strict runner/help, arguments, success, failures,
+    and canonical trace protocol at 53/53. Trace signoff exposed a pre-existing Unicode process-boundary mismatch:
+    raw UTF-8 argv `xé` returned through `input_text()` serializes as the mojibake bytes for `xÃ©`. `.1.5.1.6`
+    must define and lock the shared UTF-8 boundary before this parent or the Perl reference can close.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.1.0`
@@ -212,12 +215,28 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.5.1.4 - normalize Perl CLI failures`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.1.5`
-  Status: `active`
-  Goal: Lock Perl trace routing and close the neutral fixture/reference gate no-drift.
+  Status: `done`
+  Goal: Lock Perl canonical trace routing and integrate the reusable fixture runner into the local gate.
   Acceptance: Stdout/route/mirror, file/reset, quiet/none, and emoji behavior are represented deterministically in
     the neutral suite; Perl passes every help/success/usage/failure/trace fixture; focused/local gates and public
     docs invoke the reusable runner; later Rust/Dart/Julia leaves consume the same manifest without forked cases.
-  Verification: `pending`
+  Verification: `PASS` - ADR `0024` replaces the nondeterministic multi-megabyte Perl CLI projection with one
+    concise canonical phase protocol while preserving native embedding trace. Twenty exact cases lock stdout,
+    route, mirror, file reset/persistence/append, all levels/aliases, numeric thresholds, UTF-8 emoji, success,
+    and every failure phase. All 53 cases pass twice;
+    four runner plus three trace subtests and `tools/run_ci_local.sh` pass. The local gate now invokes the same
+    manifest/runner in default and POSIX environments.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.1.5 - close canonical CLI trace`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.1.6`
+  Status: `active`
+  Goal: Define and fixture-lock the primary CLI UTF-8 process boundary before declaring Perl the reusable reference.
+  Acceptance: Audit argv and file decoding for inline/file/named source and literal/file input, canonical JSON
+    encoding, invalid UTF-8 handling, error phase/status, and trace byte counts; ratify one backend-neutral policy;
+    split implementation if needed; add exact neutral fixtures that prevent mojibake or host-specific decoding.
+  Verification: `pending` - the initiating separated-byte probe passed UTF-8 argv `xé` through `input_text()` and
+    observed stdout `22 78 c3 83 c2 a9 22 0a` instead of UTF-8 JSON `22 78 c3 a9 22 0a`. This is a real Perl-versus-
+    Unicode-host divergence risk, not a trace-only issue. No `.1.5.1.6` repair has started while `.1.5.1.5` is dirty.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.2`
@@ -376,20 +395,67 @@ before implementation.
 | 4 | `FUTURE-PARITY-BACKLOG.1.5.1.2` | `done` | Twenty-two cases lock exact case-sensitive arguments and usage bytes in both POSIX environments. |
 | 5 | `FUTURE-PARITY-BACKLOG.1.5.1.3` | `done` | Seven success cases lock source/input/parser controls and canonical bytes. |
 | 6 | `FUTURE-PARITY-BACKLOG.1.5.1.4` | `done` | Four cases lock phase-ordered operational failures and stdout purity. |
-| 7 | `FUTURE-PARITY-BACKLOG.1.5.1.5` | `active` | Lock deterministic trace behavior and close the Perl neutral-fixture gate. |
-| 8 | `FUTURE-PARITY-BACKLOG.1.5.2` | `pending` | Add the missing Rust primary CLI against the shared fixtures. |
-| 9 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
-| 10 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
-| 11 | `FUTURE-PARITY-BACKLOG.1.6` | `pending` | Census every documented/exported user capability and split all residual parity gaps. |
-| 12 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
-| 13 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
-| 14 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
-| 15 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
-| 16 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
-| 17 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
-| 18 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
-| 19 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser/stimuli roundtrip arc is parked for later design. |
-| 20 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
+| 7 | `FUTURE-PARITY-BACKLOG.1.5.1.5` | `done` | Twenty trace cases and the local gate close canonical trace at 53/53. |
+| 8 | `FUTURE-PARITY-BACKLOG.1.5.1.6` | `active` | Define/lock UTF-8 argv/file/JSON behavior before Perl becomes the reusable reference. |
+| 9 | `FUTURE-PARITY-BACKLOG.1.5.2` | `pending` | Add the missing Rust primary CLI against the completed Perl/shared fixtures. |
+| 10 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
+| 11 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
+| 12 | `FUTURE-PARITY-BACKLOG.1.6` | `pending` | Census every documented/exported user capability and split all residual parity gaps. |
+| 13 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
+| 14 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 15 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
+| 16 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
+| 17 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
+| 18 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
+| 19 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
+| 20 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
+| 21 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
+
+## `FUTURE-PARITY-BACKLOG.1.5.1.5` Canonical Trace Protocol and Final Perl Gate
+
+Implementation evidence recorded on 2026-07-10:
+
+- Exact pre-change probes showed that one-token parsing emitted about 1.7 MB at `low` and 6.8 MB at `high`, with
+  timestamps, Perl module/function/line locations, and backend-internal compiler events. Emoji file routing also
+  leaked host `Wide character in print` warnings to stderr. Those bytes could not be deterministic or portable.
+- ADR `0024` defines the primary-command/native-embedding boundary. The CLI now emits exact UTF-8
+  `[linkedspec][LEVEL] EVENT` records for portable compile/input/invoke phases. Low owns phase start/outcome,
+  medium request controls, high byte counts, full JSON length, and debug protocol version. Native `LinkedSpec::Trace`
+  remains unchanged and richer for in-memory users; the primary adapter suppresses its backend-specific stream.
+- The initial seven-case matrix covered stdout low, routed reset+emoji, mirrored reset, stdout with a selected file
+  left unchanged, none+reset, quiet stdout, and routed compilation failure. Signoff review then found the manifest
+  did not yet byte-lock the ADR's medium/high/full/debug records, aliases/numeric thresholds, default route, append,
+  or input/invocation error outcomes. Eleven additional cases close that latent cross-backend divergence risk.
+  A final byte-representation probe then found raw UTF-8 arguments were double-counted and arbitrary top-rule
+  control bytes could forge extra records. Two more fixtures lock process-boundary byte counts and percent-escaped
+  field data. The resulting 20 neutral trace cases extend the manifest from 33 to 53 and exact raw channels/files
+  prove every declared threshold/event, route/mirror identity, persistence/truncation/append, UTF-8 emoji and byte
+  counts, single-line field safety, JSON suffix, and all three failure-phase stderr/exit contracts.
+- `tools/run_ci_local.sh` now requires and syntax-checks the primary command, neutral runner/manifest, runner tests,
+  and trace tests. It runs the focused runner/trace suites and all 53 cases under both default and POSIX option
+  environments before the heavy Phase 0 gate. Untracked CLI fixture inputs are rejected.
+- Exact help and usage output identify the portable phase protocol and direct users to native embedding for richer
+  backend-internal trace events.
+
+## `FUTURE-PARITY-BACKLOG.1.5.1.5` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Direct stdout/route/mirror/none/emoji probes measured multi-megabyte nondeterministic
+  native output and captured emoji encoding warnings before the adapter change.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `bin/linkedspec` passed primary trace flags directly into the native Perl
+  compiler/runtime stream, whose timestamps, source locations, recursive bootstrap events, and host IO encoding are
+  correct backend diagnostics but cannot be an identical multi-backend CLI protocol.
+- [x] **FIX** — Add ADR `0024`, canonical phase tracing with raw UTF-8 sink handling, 20 exact fixtures, updated
+  focused assertions/help/docs, and one reusable-runner integration in the canonical local gate.
+- [x] **ADDRESSED (verified)** — Stdout/route/mirror, default file routing, reset/no-reset/append, every named level
+  and alias, numeric threshold projection, emoji at all event levels, exact UTF-8 byte counts, percent-escaped
+  user fields, all failure phases, JSON/channel separation, deterministic records, and native-versus-CLI ownership
+  are locked.
+- [x] **NO REGRESSION** — All 53 cases pass in default/POSIX environments; four runner and three trace subtests,
+  full `tools/run_ci_local.sh` including Phase 0 `1..1028`, Knowledge Map, governance, mdBook, whitespace, and
+  cleanup pass.
+- [x] **LOCKSTEP** — The trace leaf is done and runner/local gate/docs/KM/ADR surfaces use one 53-case trace-aware
+  contract. Signoff's pre-existing Unicode finding is owned by active `.1.5.1.6`; Rust `.1.5.2` remains pending
+  so it cannot consume a mojibake-prone reference boundary.
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.4` Perl Operational Failures and Stdout Purity
 
@@ -419,13 +485,14 @@ Implementation evidence recorded on 2026-07-10:
   at default verbosity, while `bin/linkedspec::_runtime_error` projected runtime context and raw host errors. The
   general library is correct for embedding/debugging; the primary adapter lacked a deterministic untraced boundary.
 - [x] **FIX** — Add four exact failure fixtures, make untraced CLI calls use a below-`none` discard configuration,
-  and reduce operational stderr to one shared phase heading while preserving explicit trace as the detail channel.
+  and reduce operational stderr to one shared phase heading. The following `.1.5.1.5` slice then projected explicit
+  primary-CLI tracing onto the canonical portable phase protocol while preserving the rich native embedding trace.
 - [x] **ADDRESSED (verified)** — Compile/source-load, input-load, invocation, phase precedence, paths, host wording,
   ambient trace state, stdout/stderr, exit `1`, and generated-file absence are byte-locked.
 - [x] **NO REGRESSION** — All 33 cases pass twice; CLI/test syntax, four runner subtests, all three trace CLI
   subtests, Knowledge Map, governance, mdBook, whitespace, and cleanup gates pass.
 - [x] **LOCKSTEP** — Manifest/docs/book/task/KM surfaces report 2 help + 20 usage + 7 success + 4 failure cases;
-  `.1.5.1.5` is active for explicit trace combinations and the final Perl reusable-runner gate.
+  `.1.5.1.5` became active there and has since closed explicit trace plus reusable-runner local-gate integration.
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.3` Perl Source, Input, Parser Controls, and Success Bytes
 
@@ -641,16 +708,22 @@ Read-only evidence recorded on 2026-07-10:
   stderr, exit `0`, and one record newline are locked. `.1.5.1.4` has since closed operational failures/stdout purity.
 - `2026-07-10`: `.1.5.1.4` adds four exact phase-ordered failures and normalizes the untraced adapter boundary.
   Compilation precedes input; compile/input/invocation emit one shared heading, empty stdout, exit `1`, and no
-  files. Ambient backend trace state cannot opt the primary command in; `.1.5.1.5` is active for explicit trace.
+  files. Ambient backend trace state cannot opt the primary command in; `.1.5.1.5` has since closed explicit trace.
+- `2026-07-10`: `.1.5.1.5` adopts ADR `0024` and closes canonical trace at 20 exact trace / 53 total cases. The
+  timestamped multi-megabyte backend stream becomes a concise portable phase protocol while native tracing remains
+  rich. Signoff also exposes a pre-existing UTF-8 argv-to-JSON mojibake boundary, now owned by active `.1.5.1.6`;
+  Rust `.1.5.2` stays pending until the Perl/shared reference boundary is exact.
 
 ## Open Questions
 
-- None blocking the global CLI frontier. Lua `.1.3` is intentionally gated until current implemented backends close
-  ADR `0023` CLI/capability convergence, including any `.1.6`-split gaps and public generated source under `.3`.
+- `.1.5.1.6` must decide and lock the backend-neutral UTF-8 argv/file/JSON and invalid-input policy. The observed
+  Perl mojibake mechanism is known; source/file breadth and the exact rejection phase still require the owned audit.
+  Lua `.1.3` remains gated until current implemented backends close ADR `0023` CLI/capability convergence,
+  including any `.1.6`-split gaps and public generated source under `.3`.
 
 ## Blockers
 
-- None. `.1.5.1.4` is done and `.1.5.1.5` is active for explicit trace behavior and the final Perl gate.
+- None. `.1.5.1.6` is the active, source-backed UTF-8 reference-boundary leaf; `.1.5.2` is deliberately pending.
   Global CLI/capability convergence precedes Lua `.1.3`.
 
 ## Verification Log
@@ -669,7 +742,8 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.1` | CLI/runner/test syntax; 4 runner subtests/13 assertions; 2 trace CLI subtests; direct neutral help execution; docs/KM/governance/whitespace/mdBook and cleanup. | PASS. Schema/runner/workspace/channels/generated files and exact help are locked; `.1.5.1.2` became active and has since closed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.2` | CLI/runner/test syntax; 22/22 exact cases under default and `POSIXLY_CORRECT=1`; 4 runner subtests; 2 trace CLI subtests; docs/KM/governance/whitespace/mdBook and cleanup. | PASS. Exact arguments/usage are environment-independent; `.1.5.1.3` became active and has since closed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.3` | Toolbox Get/get_parser/generated-source/trace probes; 29/29 exact cases under default and `POSIXLY_CORRECT=1`; runner/trace tests; docs/KM/governance/whitespace/mdBook and cleanup. | PASS. Seven success cases lock exact source/input/parser/JSON behavior; `.1.5.1.4` became active and has since closed. |
-| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.4` | Direct separated failure probes; 33/33 exact cases under default and `POSIXLY_CORRECT=1`; ambient trace isolation; 4 runner + 3 trace subtests; docs/KM/governance/whitespace/mdBook and cleanup. | PASS. Operational phases/channels/exit are stable; `.1.5.1.5` is active. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.4` | Direct separated failure probes; 33/33 exact cases under default and `POSIXLY_CORRECT=1`; ambient trace isolation; 4 runner + 3 trace subtests; docs/KM/governance/whitespace/mdBook and cleanup. | PASS. Operational phases/channels/exit are stable; `.1.5.1.5` became active and has since closed. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.5` | Raw old-trace size/byte probes; signoff coverage/UTF-8/control-field audit; 53/53 exact cases under default and POSIX; 4 runner + 3 trace subtests; full local gate/Phase 0; docs/KM/ADR/governance/whitespace/mdBook and cleanup. | PASS. Canonical primary trace is closed; the surfaced pre-existing argv/JSON mojibake is owned by active `.1.5.1.6` before Rust. |
 
 ## Commit Log
 
@@ -688,9 +762,14 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.5.1.2` | `FUTURE-PARITY-BACKLOG.1.5.1.2 - normalize Perl CLI arguments` | Explicit parser plus 20 exact usage cases; 22/22 green in default/POSIX environments. |
 | `FUTURE-PARITY-BACKLOG.1.5.1.3` | `FUTURE-PARITY-BACKLOG.1.5.1.3 - lock Perl CLI success behavior` | Seven exact success cases; source/input/parser controls and canonical JSON locked. |
 | `FUTURE-PARITY-BACKLOG.1.5.1.4` | `FUTURE-PARITY-BACKLOG.1.5.1.4 - normalize Perl CLI failures` | Four failures; phase order, stable stderr, stdout purity, and exit `1` locked. |
+| `FUTURE-PARITY-BACKLOG.1.5.1.5` | `FUTURE-PARITY-BACKLOG.1.5.1.5 - close canonical CLI trace` | ADR 0024, 20 trace cases, 53-case suite, and canonical local gate. |
 
 ## Changelog
 
+- `2026-07-10`: `.1.5.1.5` closes canonical primary trace at 20 trace / 53 total exact cases. ADR `0024` separates
+  the concise deterministic CLI phase protocol from rich native embedding trace. The matrix locks levels/aliases,
+  thresholds, sinks/reset/append, emoji, byte counts, field escaping, and all failure phases; the local gate runs
+  the suite twice. A signoff probe exposed raw UTF-8 argv mojibake in successful JSON, now owned by `.1.5.1.6`.
 - `2026-07-10`: `.1.5.1.4` extends the suite to 33 exact cases with invalid/missing source compilation,
   compilation-before-input, missing input, and missing-top-rule invocation. Untraced failures now emit empty
   stdout, one backend-neutral stderr heading, exit `1`, and no files. The adapter ignores ambient backend trace

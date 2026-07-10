@@ -90,9 +90,10 @@ SPEC
  is($stdout, qq{["alpha","beta"]\n}, 'stdout remains canonical parser JSON');
  ok(-s $trace_path, 'trace file is created and non-empty');
  my $trace = _slurp($trace_path);
- like($trace, qr/ENTER LinkedSpec::Get/, 'trace file includes compile entry scope');
- like($trace, qr/ENTER LinkedSpec::parser_invoke:top/, 'trace file includes parser invocation scope');
- unlike($stdout, qr/ENTER LinkedSpec::Get/, 'routed trace does not pollute stdout');
+ like($trace, qr/^\[linkedspec\]\[low\] compile:start$/m, 'trace file includes canonical compile start');
+ like($trace, qr/^\[linkedspec\]\[low\] invoke:start$/m, 'trace file includes canonical invocation start');
+ unlike($trace, qr/\[20\d\d-\d\d-\d\d|\.pm\]\[/, 'canonical CLI trace has no timestamp or host source location');
+ unlike($stdout, qr/^\[linkedspec\]/m, 'routed trace does not pollute stdout');
 };
 
 subtest 'unselected ambient trace cannot pollute operational failure channels' => sub {

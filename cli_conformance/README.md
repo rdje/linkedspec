@@ -16,13 +16,16 @@ Use `--case ID` before the separator to select one or more manifest cases. Every
 after `--` is an arbitrary command array, so later Rust, Dart, Julia, Lua, and other
 backends consume this same manifest without backend-specific fixture copies.
 
-The current manifest contains 33 cases: exact long/short help, 20 strict usage
+The current manifest contains 53 cases: exact long/short help, 20 strict usage
 families, seven successful source/input/parser-control families, and four
-operational-failure families. Success cases
+operational-failure plus 20 canonical trace families. Success cases
 lock named/file/inline source, literal/file input, explicit top rule, seek/consume,
 nested canonical JSON, exact input bytes, empty stderr, exit `0`, and one record
 newline. Failure cases lock compile-before-input order, stable one-line stderr,
-empty stdout, exit `1`, and no output files. Trace families land in the final Perl leaf.
+empty stdout, exit `1`, and no output files. Trace cases lock deterministic UTF-8
+phase records, stdout/route/mirror, reset/persistence/append, every named level and alias,
+a numeric threshold, default file routing, emoji, UTF-8 byte counts, percent-escaped
+user fields, and compile/input/invocation failures.
 
 ## Schema version 1
 

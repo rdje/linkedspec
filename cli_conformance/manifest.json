@@ -449,6 +449,482 @@
         "stderr": {"file": "cases/failure/stderr.txt", "variables": {"ERROR": "parser invocation failed"}},
         "files": []
       }
+    },
+    {
+      "id": "trace_stdout_low",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--trace",
+        "low"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"file": "cases/trace/low_stdout.txt"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "trace_route_low_reset_emoji",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--trace",
+        "low",
+        "--trace-file",
+        "trace.log",
+        "--trace-mode",
+        "route",
+        "--trace-reset",
+        "--trace-emoji"
+      ],
+      "files": [
+        {"source": "cases/trace/stale.txt", "path": "trace.log"}
+      ],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "\"trace\"\n"},
+        "stderr": {"text": ""},
+        "files": [
+          {"path": "trace.log", "content": {"file": "cases/trace/low_emoji.txt"}}
+        ]
+      }
+    },
+    {
+      "id": "trace_mirror_low_reset",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--trace",
+        "low",
+        "--trace-file",
+        "trace.log",
+        "--trace-mode",
+        "mirror",
+        "--trace-reset"
+      ],
+      "files": [
+        {"source": "cases/trace/stale.txt", "path": "trace.log"}
+      ],
+      "expect": {
+        "exit": 0,
+        "stdout": {"file": "cases/trace/low_stdout.txt"},
+        "stderr": {"text": ""},
+        "files": [
+          {"path": "trace.log", "content": {"file": "cases/trace/low.txt"}}
+        ]
+      }
+    },
+    {
+      "id": "trace_stdout_file_without_reset",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--trace",
+        "low",
+        "--trace-file",
+        "trace.log",
+        "--trace-mode",
+        "stdout"
+      ],
+      "files": [
+        {"source": "cases/trace/stale.txt", "path": "trace.log"}
+      ],
+      "expect": {
+        "exit": 0,
+        "stdout": {"file": "cases/trace/low_stdout.txt"},
+        "stderr": {"text": ""},
+        "files": [
+          {"path": "trace.log", "content": {"file": "cases/trace/stale.txt"}}
+        ]
+      }
+    },
+    {
+      "id": "trace_none_resets_file",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--trace",
+        "none",
+        "--trace-file",
+        "trace.log",
+        "--trace-mode",
+        "route",
+        "--trace-reset"
+      ],
+      "files": [
+        {"source": "cases/trace/stale.txt", "path": "trace.log"}
+      ],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "\"trace\"\n"},
+        "stderr": {"text": ""},
+        "files": [
+          {"path": "trace.log", "content": {"text": ""}}
+        ]
+      }
+    },
+    {
+      "id": "trace_quiet_stdout_is_silent",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--trace",
+        "quiet",
+        "--trace-mode",
+        "stdout",
+        "--trace-emoji"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "\"trace\"\n"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "trace_failure_route_low",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "not a spec",
+        "--input",
+        "x",
+        "--trace",
+        "low",
+        "--trace-file",
+        "trace.log",
+        "--trace-mode",
+        "route",
+        "--trace-reset"
+      ],
+      "files": [
+        {"source": "cases/trace/stale.txt", "path": "trace.log"}
+      ],
+      "expect": {
+        "exit": 1,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/failure/stderr.txt", "variables": {"ERROR": "parser compilation failed"}},
+        "files": [
+          {"path": "trace.log", "content": {"file": "cases/trace/failure_low.txt"}}
+        ]
+      }
+    },
+    {
+      "id": "trace_stdout_medium",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--trace",
+        "medium"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"file": "cases/trace/medium_stdout.txt"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "trace_stdout_med_alias",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--trace",
+        "med"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"file": "cases/trace/medium_stdout.txt"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "trace_stdout_high",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--trace",
+        "high"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"file": "cases/trace/high_stdout.txt"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "trace_stdout_numeric_250",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--trace",
+        "250"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"file": "cases/trace/medium_stdout.txt"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "trace_stdout_full",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--trace",
+        "full"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"file": "cases/trace/full_stdout.txt"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "trace_default_route_full_reset",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--trace",
+        "full",
+        "--trace-file",
+        "trace.log",
+        "--trace-reset"
+      ],
+      "files": [
+        {"source": "cases/trace/stale.txt", "path": "trace.log"}
+      ],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "\"trace\"\n"},
+        "stderr": {"text": ""},
+        "files": [
+          {"path": "trace.log", "content": {"file": "cases/trace/full.txt"}}
+        ]
+      }
+    },
+    {
+      "id": "trace_stdout_debug_emoji",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--trace",
+        "debug",
+        "--trace-emoji"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"file": "cases/trace/debug_emoji_stdout.txt"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "trace_stdout_verbose_alias_emoji",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--trace",
+        "verbose",
+        "--trace-emoji"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"file": "cases/trace/debug_emoji_stdout.txt"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "trace_route_low_append",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--trace",
+        "low",
+        "--trace-file",
+        "trace.log",
+        "--trace-mode",
+        "route"
+      ],
+      "files": [
+        {"source": "cases/trace/stale.txt", "path": "trace.log"}
+      ],
+      "expect": {
+        "exit": 0,
+        "stdout": {"text": "\"trace\"\n"},
+        "stderr": {"text": ""},
+        "files": [
+          {"path": "trace.log", "content": {"file": "cases/trace/appended_low.txt"}}
+        ]
+      }
+    },
+    {
+      "id": "trace_failure_input_route_low",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input-file",
+        "missing-input.txt",
+        "--trace",
+        "low",
+        "--trace-file",
+        "trace.log",
+        "--trace-mode",
+        "route",
+        "--trace-reset"
+      ],
+      "files": [
+        {"source": "cases/trace/stale.txt", "path": "trace.log"}
+      ],
+      "expect": {
+        "exit": 1,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/failure/stderr.txt", "variables": {"ERROR": "input load failed"}},
+        "files": [
+          {"path": "trace.log", "content": {"file": "cases/trace/failure_input_low.txt"}}
+        ]
+      }
+    },
+    {
+      "id": "trace_failure_invoke_route_low",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--top-rule",
+        "Missing",
+        "--trace",
+        "low",
+        "--trace-file",
+        "trace.log",
+        "--trace-mode",
+        "route",
+        "--trace-reset"
+      ],
+      "files": [
+        {"source": "cases/trace/stale.txt", "path": "trace.log"}
+      ],
+      "expect": {
+        "exit": 1,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/failure/stderr.txt", "variables": {"ERROR": "parser invocation failed"}},
+        "files": [
+          {"path": "trace.log", "content": {"file": "cases/trace/failure_invoke_low.txt"}}
+        ]
+      }
+    },
+    {
+      "id": "trace_stdout_high_utf8_bytes",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "xé",
+        "--trace",
+        "high"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"file": "cases/trace/high_utf8_stdout.txt"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "trace_failure_invoke_escaped_field",
+      "family": "trace",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"trace\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--top-rule",
+        "Top\nInjected",
+        "--trace",
+        "medium",
+        "--trace-file",
+        "trace.log",
+        "--trace-mode",
+        "route",
+        "--trace-reset"
+      ],
+      "files": [
+        {"source": "cases/trace/stale.txt", "path": "trace.log"}
+      ],
+      "expect": {
+        "exit": 1,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/failure/stderr.txt", "variables": {"ERROR": "parser invocation failed"}},
+        "files": [
+          {"path": "trace.log", "content": {"file": "cases/trace/failure_invoke_escaped_medium.txt"}}
+        ]
+      }
     }
   ]
 }

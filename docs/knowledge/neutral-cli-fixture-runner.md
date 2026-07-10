@@ -12,7 +12,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, conformance, fixtures, runner, exact-bytes, backends, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.1.1 adds cli_conformance/manifest.json, tools/run_cli_conformance.pl, exact help bytes, output-file support, and t/cli_conformance_runner.t; .1.5.1.2-.4 expand to 33 help/usage/success/failure cases."
+evidence: "FUTURE-PARITY-BACKLOG.1.5.1.1 adds cli_conformance/manifest.json, tools/run_cli_conformance.pl, exact help bytes, output-file support, and t/cli_conformance_runner.t; .1.5.1.2-.5 expand to 53 help/usage/success/failure/trace cases."
 reverify: "perl -c tools/run_cli_conformance.pl && PERL5LIB= prove -v -Iperl t/cli_conformance_runner.t t/trace_cli.t && PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec"
 ---
 
@@ -45,12 +45,13 @@ The first checked-in case locks complete backend-neutral help stdout, empty
 stderr, and exit `0` on Perl. `.1.5.1.2` adds short help and 20 strict usage cases;
 `.1.5.1.3` adds seven named/file/inline source, literal/file input, parser-control,
 and canonical success cases. `.1.5.1.4` adds four exact phase-ordered operational
-failures. The final Perl leaf adds deterministic trace cases to this same manifest;
-generated-file expectations already support
+failures. `.1.5.1.5` adds 20 deterministic trace cases to this same manifest;
+generated-file expectations support
 routed trace bytes without a schema or runner fork.
 
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[perl-primary-cli-conformance-audit]], [[cross-backend-cli-contract-gap]],
 [[trace-cli-control]], [[julia-primary-cli-process-conformance]],
 [[perl-primary-cli-strict-arguments]], [[perl-primary-cli-success-conformance]],
-[[perl-primary-cli-operational-failures]].
+[[perl-primary-cli-operational-failures]], [[canonical-primary-cli-trace-protocol]],
+[[primary-cli-utf8-process-boundary-gap]].

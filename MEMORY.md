@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.1.4` — 33 exact cases now lock Perl help, usage, success, and
-  phase-ordered operational failures with pure stdout and stable stderr/exit `1`.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.1.3` — seven exact source/input/parser success families are locked.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.1.5` — canonical Perl CLI trace is closed within 53 exact
+  current cases with ADR `0024` and local-gate integration; the parent remains active for UTF-8 correctness.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.1.4` — phase-ordered operational failures are exact and stdout-pure.
 - recent_context: Dart/Julia are 99/99 interpreter-green scoped milestones, not complete public parity; global
   `.1.5`, `.1.6`, and `.3` own current-backend CLI, capability, and generated-source convergence before Lua.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.5.1.4 - normalize Perl CLI failures`; previous committed HEAD is
-  `e0c7e7d9 FUTURE-PARITY-BACKLOG.1.5.1.3 - lock Perl CLI success behavior`.
+  `FUTURE-PARITY-BACKLOG.1.5.1.5 - close canonical CLI trace`; previous committed HEAD is
+  `9b38fad3 FUTURE-PARITY-BACKLOG.1.5.1.4 - normalize Perl CLI failures`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.1.5` is the sole active PNT leaf.
-- next_action: after this commit is clean, fixture-lock stdout/route/mirror, file/reset, quiet/none, and emoji trace
-  behavior, integrate the reusable runner into the focused/local gate, and close the Perl reference lane.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.1.6` is the sole active PNT leaf.
+- next_action: after this commit is clean, audit/split and repair the UTF-8 argv/file/JSON process boundary exposed
+  by `input_text()` (`xé` currently serializes as `xÃ©`); Rust `.1.5.2` stays pending behind the exact reference.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
@@ -51,5 +51,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: `.1.5.1.4` failure normalization/fixtures/docs are being verified for
-  their prepared commit; none expected afterward. Do not implement `.1.5.1.5` until the tree is clean.
+- blockers: none. in_flight_uncommitted: `.1.5.1.5` canonical trace/fixtures/local-gate/docs are being verified for
+  their prepared commit; none expected afterward. Do not implement `.1.5.2` until the tree is clean.

@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.5 — close Perl CLI trace conformance
+
+**Scope:** ADR `0024`, canonical primary trace projection, 20 exact trace cases, UTF-8 sink handling, updated
+focused locks/help, canonical local-gate integration, UTF-8 boundary risk capture, and synchronized docs/book/KM.
+
+**Implementation:** The primary CLI now emits concise `[linkedspec][LEVEL] EVENT` phase records with deterministic
+level thresholds and no timestamps/source locations/backend names. Stdout/route/mirror, file defaults/reset,
+none/quiet, emoji, success/failure, and JSON separation are exact. Native in-memory tracing remains unchanged.
+
+**Verification:** Pre-change low/high probes measured roughly 1.7/6.8 MB and emoji wide-character stderr warnings.
+Twenty trace cases bring both default/POSIX suites to 53/53. They include the signoff-added exact locks for all
+levels/aliases, a numeric threshold, default routing, append, input/invocation failure phases, process-boundary
+UTF-8 byte counts, and percent-escaped user fields. Four runner and three trace subtests pass; the local gate runs
+both 53-case environments before Phase 0 and passes through `1..1028`.
+
+**Surfaced next owner:** A separated `input_text()` probe proves raw UTF-8 argv `xé` currently serializes as
+`xÃ©` bytes through Perl `JSON::PP`. Active `.1.5.1.6` owns the backend-neutral UTF-8 argv/file/JSON policy and
+repair before Rust `.1.5.2`; this trace leaf does not hide or misclassify the pre-existing success-boundary gap.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.4 — normalize Perl CLI failures
 
 **Scope:** Four exact operational-failure fixtures, adapter-owned untraced stdout purity, stable cross-backend
@@ -71,7 +90,8 @@ stdout; input failure text includes host `$!`.
 
 **Split:** `.1.5.1.1` owns a reusable neutral manifest/runner and help baseline; `.2` strict deterministic
 arguments; `.3` source/input/parser success and canonical bytes; `.4` operational failures/stdout purity; `.5`
-deterministic trace plus final Perl gate. Existing trace tests remain green and no CLI/parser/runtime source changed.
+deterministic trace plus reusable-runner local-gate integration. Existing trace tests remain green and no
+CLI/parser/runtime source changed.
 
 ## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.3 — reconcile Julia scoped parity status
 

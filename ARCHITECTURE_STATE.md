@@ -5,11 +5,17 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.5` closes canonical primary trace at 53 cases and adopts
+  ADR `0024`. The primary command emits a concise deterministic UTF-8 phase protocol across stdout/route/mirror,
+  reset/persistence/append, every named level and alias, numeric thresholds, emoji, and all three failure phases;
+  native embedding keeps rich backend trace. The local gate invokes the same manifest under default/POSIX
+  environments. Signoff exposed raw UTF-8 argv mojibake in successful JSON; active `.1.5.1.6` owns that shared
+  process boundary before pending Rust `.1.5.2`.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.4` extends the neutral Perl baseline to 33 cases. Four
   operational families lock compile-before-input order, missing source/input, missing top rule, empty stdout,
   exact one-line backend-neutral stderr, exit `1`, and no files. When no CLI trace option is present, the adapter
   clears backend trace environment inputs and uses a below-`none` discard configuration; the general trace owner
-  is unchanged. `.1.5.1.5` is active for explicit trace combinations and the final Perl gate.
+  is unchanged. `.1.5.1.5` has since closed explicit trace combinations and reusable-runner local-gate integration.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.3` extends the neutral Perl baseline to 29 cases. Seven new
   success families lock named/file/inline source, literal/file input, explicit top rule, seek/consume, nested
   canonical JSON, exact input-newline preservation, empty stderr, exit `0`, and one JSON-record newline. Toolbox

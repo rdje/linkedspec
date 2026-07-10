@@ -1,0 +1,10 @@
+[linkedspec][low] compile:start
+[linkedspec][medium] request source=inline input=literal top_rule=<default> parse_mode=seek
+[linkedspec][high] arguments source_bytes=52 input_bytes=1
+[linkedspec][low] compile:ok
+[linkedspec][low] input:start
+[linkedspec][high] input bytes=1
+[linkedspec][low] input:ok
+[linkedspec][low] invoke:start
+[linkedspec][low] invoke:ok
+[linkedspec][full] result json_bytes=7

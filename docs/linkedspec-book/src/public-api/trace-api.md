@@ -235,8 +235,9 @@ Any future LinkedSpec variant must satisfy this checklist before it claims trace
 ## Command-line trace control
 
 The Perl reference backend ships `bin/linkedspec`, and the Julia variant ships
-`julia/bin/linkedspec_julia.jl`. Both expose the same trace controls without a
-custom driver script.
+`julia/bin/linkedspec_julia.jl`. ADR `0024` requires every primary command to
+project these controls through one canonical phase protocol; Perl is the current
+53-case reference, while Rust/Dart/Julia convergence remains under the global CLI lane.
 
 ```sh
 perl bin/linkedspec --spec-file demo.spec --input-file demo.txt \
@@ -253,13 +254,24 @@ julia --project=julia julia/bin/linkedspec_julia.jl \
   --trace-reset
 ```
 
-The trace flags map directly to the public API options:
+The trace flags have the same sink/level meanings as the public APIs, but primary
+commands do not expose backend-internal event text:
 
 - `--trace LEVEL` -> `trace_level => LEVEL`
 - `--trace-file PATH` -> `trace_log_file => PATH`
 - `--trace-mode stdout|route|mirror` -> `trace_log_mode => ...`
 - `--trace-reset` -> `trace_reset_log => 1`
 - `--trace-emoji` -> `trace_emoji => 1`
+
+Primary records are exact UTF-8 lines shaped as `[linkedspec][LEVEL] EVENT`. `low`
+records compile/input/invoke start and outcome; `medium` adds request controls;
+`high` adds byte counts; `full` adds JSON byte length; `debug`/`verbose` adds the
+protocol version. `none`/`quiet` and numeric levels at or below zero are silent.
+Byte counts measure process/file UTF-8 bytes without re-encoding byte-oriented
+host values. User fields stay on one record: bytes outside `[A-Za-z0-9_.:-]`
+are uppercase `%HH`, and `<default>` marks an absent top-rule selection.
+The native API entry points below retain richer backend-internal scopes, decisions,
+marks, source locations, and dumps.
 
 The runner prints the parser result as canonical JSON on stdout. If trace output is routed to stdout, trace text
 is intentionally interleaved with that JSON. Use `--trace-file ... --trace-mode route` when stdout must remain

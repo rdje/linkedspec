@@ -42,14 +42,15 @@ primary command has no trace option, the adapter clears backend-specific trace
 environment inputs and configures an internal level below `none` with an empty
 route sink. A focused regression wraps the compilation failure in ambient
 debug/file/reset/emoji state and proves exact stderr, empty stdout, and no trace
-file. Explicit CLI trace remains the diagnostic-detail channel and is owned by
-`.1.5.1.5`.
+file. `.1.5.1.5` later makes explicit primary trace a canonical portable phase
+channel under ADR `0024`; rich backend diagnostics remain in native embedding.
 
-The complete current Perl suite is 33 cases: two help, 20 usage, seven success,
-and four operational failures. All pass with `POSIXLY_CORRECT` unset and set.
+At the `.1.5.1.4` boundary, the complete Perl suite was 33 cases: two help, 20 usage,
+seven success, and four operational failures. All passed with `POSIXLY_CORRECT` unset and set.
+The following explicit-trace slice extends the current suite to 53 cases.
 
 Related facts: [[perl-primary-cli-conformance-audit]],
 [[neutral-cli-fixture-runner]], [[trace-cli-control]],
 [[trace-verbosity-and-formatting]],
 [[user-observable-backend-cli-parity-contract]],
-[[cross-backend-cli-contract-gap]].
+[[cross-backend-cli-contract-gap]], [[canonical-primary-cli-trace-protocol]].

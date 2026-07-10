@@ -83,4 +83,5 @@ user-observable capability, even though the interpreter remains the primary corr
 - Original backend vision: `docs/decisions/0006-multi-backend-vision.md`
 - Backend rollout order: `docs/decisions/0021-future-backend-rollout-order.md`
 - Native in-memory contract: `docs/decisions/0022-native-in-memory-backend-embedding.md`
+- Canonical primary trace: `docs/decisions/0024-canonical-primary-cli-trace-protocol.md`
 - Backend handoff: `docs/linkedspec-book/src/appendix/backend-handoff.md`

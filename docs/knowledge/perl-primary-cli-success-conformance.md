@@ -40,11 +40,14 @@ by the cross-variant corpus. This is fixture selection, not a waiver of future
 lifecycle parity; the complete capability census remains responsible for that gap.
 
 At the `.1.5.1.3` boundary, the complete suite was 29 cases: two help, 20 usage,
-and seven success. `.1.5.1.4` later added four operational failures, so the
-current 33-case suite passes with `POSIXLY_CORRECT` both unset and set.
+and seven success. `.1.5.1.4` later added four operational failures and `.1.5.1.5`
+added 20 trace cases, producing 53 passing current cases with `POSIXLY_CORRECT`
+both unset and set. Those seven ASCII/newline success cases did not cover Unicode:
+signoff later exposed raw UTF-8 argv mojibake, now owned by `.1.5.1.6`.
 
 Related facts: [[neutral-cli-fixture-runner]],
 [[perl-primary-cli-strict-arguments]],
 [[user-observable-backend-cli-parity-contract]],
 [[perl-lifecycle-final-value-e-drift]],
-[[cross-backend-cli-contract-gap]], [[perl-primary-cli-operational-failures]].
+[[cross-backend-cli-contract-gap]], [[perl-primary-cli-operational-failures]],
+[[primary-cli-utf8-process-boundary-gap]].

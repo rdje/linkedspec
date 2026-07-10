@@ -1,0 +1,2 @@
+[linkedspec][low] compile:start
+[linkedspec][low] compile:error

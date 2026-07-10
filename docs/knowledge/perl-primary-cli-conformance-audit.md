@@ -49,7 +49,8 @@ deterministic explicit trace remains owned by `.5`.
 
 `FUTURE-PARITY-BACKLOG.1.5.1` is split into neutral harness/help (`.1`, now done), strict
 arguments (`.2`, now done), success/source/input/parser controls (`.3`, now done),
-operational failure normalization (`.4`, now done), and trace/final Perl gate (`.5`). Rust, Dart, and
+operational failure normalization (`.4`, now done), canonical trace/local-gate integration (`.5`), and the
+signoff-surfaced UTF-8 process boundary (`.6`). Rust, Dart, and
 Julia will later consume the same manifest; they do not get backend-specific
 fixture forks.
 

@@ -27,6 +27,10 @@ Trace options:
 Help:
   --help, -h           Show this help
 
+Trace output:
+  Emits deterministic compile/input/invoke phase records shared by every primary
+  backend command. Native embedding APIs retain richer backend-internal events.
+
 Output:
   Prints the parser result as canonical JSON on stdout. When trace output is sent
   to stdout it is intentionally interleaved with that JSON; use --trace-file with

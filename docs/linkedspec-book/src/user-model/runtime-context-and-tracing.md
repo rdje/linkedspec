@@ -441,6 +441,27 @@ perl bin/linkedspec --spec-file demo.spec --input-file demo.txt \
 
 Use `--spec NAME` for shipped specs resolved by `get_parser(...)`, `--spec-file PATH` for a `.spec` file on disk, or `--inline-spec TEXT` for a literal source string. Use either `--input TEXT` or `--input-file PATH` for parser input. `--top-rule` selects a non-default entry; `--parse-mode seek` scans forward while `consume` matches at the current cursor. File input is loaded byte-for-byte, without trimming. The runner writes recursively key-sorted canonical JSON followed by exactly one newline on stdout, so routed trace files are the cleanest mode for repeatable command-line debugging.
 
+Primary trace is the portable ADR `0024` phase protocol, not a dump of backend
+implementation internals. For example, `--trace low` emits deterministic records
+such as:
+
+```text
+[linkedspec][low] compile:start
+[linkedspec][low] compile:ok
+[linkedspec][low] input:start
+[linkedspec][low] input:ok
+[linkedspec][low] invoke:start
+[linkedspec][low] invoke:ok
+```
+
+`medium`, `high`, `full`, and `debug` add portable request, byte-count, JSON-size,
+and protocol-version fields respectively. Byte counts measure the process/file
+UTF-8 bytes once; user-controlled field bytes outside `[A-Za-z0-9_.:-]` are
+uppercase `%HH`, so a newline in a top-rule name cannot forge another trace record.
+`<default>` is the reserved absent-top-rule marker. Use the in-memory trace APIs below when
+you need the richer backend-specific scopes, decisions, marks, and generated-handler
+events.
+
 ## Trace scopes and decisions
 
 Internally, LinkedSpec traces named scopes such as:

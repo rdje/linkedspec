@@ -14,8 +14,9 @@ evidence: "bin/linkedspec; t/trace_cli.t; docs/linkedspec-book/src/public-api/tr
 reverify: "perl -c bin/linkedspec && perl -c -Iperl t/trace_cli.t && prove -v -Iperl t/trace_cli.t && rg -n 'bin/linkedspec|--trace|TRACE-OBSERVABILITY.4.5|trace_generated_handler_branch|rust_runtime:engine' docs/tasks/TRACE-OBSERVABILITY.md docs/TASK_TREE.md docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md TOOLBOX.md perl/LinkedSpec/Trace.pm rust/linkedspec-runtime/src"
 ---
 
-`TRACE-OBSERVABILITY.2` adds `bin/linkedspec`, a Perl reference compile/run CLI that exposes the existing
-`LinkedSpec::Trace` controls without a custom driver script.
+`TRACE-OBSERVABILITY.2` added `bin/linkedspec`, a Perl reference compile/run CLI
+with discoverable trace controls. `FUTURE-PARITY-BACKLOG.1.5.1.5` later made
+its output cross-backend exact under ADR `0024`.
 
 The primary routed-trace form is:
 
@@ -24,10 +25,11 @@ perl bin/linkedspec --spec-file demo.spec --input-file demo.txt \
   --trace high --trace-file trace.log --trace-mode route --trace-reset
 ```
 
-The CLI maps flags directly onto existing trace options: `--trace` to `trace_level`, `--trace-file` to
-`trace_log_file`, `--trace-mode` to `trace_log_mode`, `--trace-reset` to `trace_reset_log`, and `--trace-emoji` to
-`trace_emoji`. It supports `--spec NAME`, `--spec-file PATH`, or `--inline-spec TEXT`, and `--input TEXT` or
-`--input-file PATH`. Parser output is canonical JSON on stdout; `--trace-mode route` keeps trace text in the file.
+The same flags select canonical level, file, stdout/route/mirror, reset, and emoji
+behavior. Primary records describe portable compile/input/invoke phases and omit
+timestamps/source locations/backend names. It supports `--spec NAME`,
+`--spec-file PATH`, or `--inline-spec TEXT`, and `--input TEXT` or
+`--input-file PATH`. Parser output is canonical JSON on stdout; route keeps it clean.
 
 `TRACE-OBSERVABILITY.3` has since split and closed the Perl reference trace coverage/no-drift sequence through
 `.3.5`. The CLI remains the Perl reference discoverability surface. Rust and future-variant trace parity is owned by
@@ -36,11 +38,13 @@ events, and runtime branch/mark/capture events. `.4.5` has since closed cross-va
 claim parity for the documented external trace capability contract.
 
 The later `FUTURE-PARITY-BACKLOG.1.5.1.0` process audit distinguished this
-discoverability proof from exact primary-CLI conformance. `.1.5.1.4` has now
-closed untraced failure stdout purity with an adapter-owned below-`none` discard
-configuration, without weakening the general trace contract. Explicit CLI trace
-routing and the final Perl gate remain `.1.5.1.5`.
+discoverability proof from exact primary-CLI conformance. `.1.5.1.4` closed
+untraced failure purity; `.1.5.1.5` and ADR `0024` close canonical trace without
+weakening rich native in-memory tracing. Perl passes all 53 current cases; the
+separate successful-JSON Unicode boundary remains owned by `.1.5.1.6`.
 
 Related fact: [[perl-primary-cli-conformance-audit]].
 Shared process fixture architecture: [[neutral-cli-fixture-runner]].
 Operational failure proof: [[perl-primary-cli-operational-failures]].
+Canonical primary trace: [[canonical-primary-cli-trace-protocol]].
+UTF-8 process boundary: [[primary-cli-utf8-process-boundary-gap]].

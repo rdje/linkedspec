@@ -40,4 +40,8 @@ The facade's package-variable aliases are compatibility state, not the reliable 
 The module lazily loads `Data::Dumper` only when needed for structured dumps, keeping the
 common no-dump path fast.
 
-Related: [[runtimecontext-boundary]], [[ownerdispatch-shared-seam]].
+This is the rich backend-native embedding surface. The primary `linkedspec` CLI deliberately does not forward this
+host-specific stream: ADR 0024 defines a concise, deterministic phase protocol whose exact bytes all backend CLIs
+must reproduce.
+
+Related: [[runtimecontext-boundary]], [[ownerdispatch-shared-seam]], [[canonical-primary-cli-trace-protocol]].

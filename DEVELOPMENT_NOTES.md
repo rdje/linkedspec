@@ -1,8 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.5 — portable CLI trace is an adapter protocol, not an internal dump):
+  A backend-native trace can be correct yet unsuitable for an identical CLI when it exposes timestamps, source
+  locations, recursive compiler internals, megabytes per token, or host encoding warnings. Preserve that richness
+  in native embedding, but project the CLI onto deterministic portable phases with raw UTF-8 sink semantics. Test
+  routing by exact stdout/file bytes, persistence/reset, silent levels, mirror identity, and traced failures; run
+  the one shared manifest from the canonical local gate rather than duplicating assertions. A signoff matrix must
+  cover every declared level/alias, numeric thresholds, append/default routing, every error phase, non-ASCII byte
+  counts, and control-byte field escaping; ASCII-only trace success can conceal both underlocked protocol behavior
+  and a separate argv-to-JSON mojibake boundary, now owned by `.1.5.1.6` before Rust consumes the reference.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.4 — the CLI adapter owns stable failure projection):
-  Keep rich backend diagnostics in the native runtime context and explicit trace channel; do not serialize host
+  Keep rich backend diagnostics in the native runtime context and native in-memory trace channel; do not serialize host
   paths, `$!`, exception source lines, or owner-stage names into an identical cross-backend CLI. A below-`none`
   discard configuration preserves `LinkedSpec::Trace`'s embedding contract while making untraced stdout pure.
   Clear backend-specific trace environment inputs when no primary CLI trace option exists, and regression-lock

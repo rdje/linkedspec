@@ -7,8 +7,20 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.5 — close Perl CLI conformance**
+  (DONE — canonical trace is 53/53 exact; `.1.5.1.6` active for UTF-8 boundary before Rust).
+
+  **Change:** ADR `0024` separates canonical primary phase trace from rich native trace. Twenty exact trace cases
+  lock stdout/route/mirror, reset/persistence/append, levels/aliases/numeric thresholds, UTF-8 emoji, and every
+  failure phase, UTF-8 byte counts, and escaped user fields; the local gate now runs the same 53-case runner under
+  default/POSIX environments.
+
+  **Proof:** Pre-change traces measured 1.7/6.8 MB and emoji stderr warnings. Canonical cases pass 53/53 twice;
+  four runner and three trace subtests pass; the full local gate, Phase 0, docs/KM/governance/book pass. Signoff's
+  separate `input_text()` probe exposed raw UTF-8 argv `xé` serializing as `xÃ©`; `.1.5.1.6` durably owns it.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.4 — normalize Perl CLI failures**
-  (DONE — 33/33 exact cases; `.1.5.1.5` active for trace/final gate).
+  (DONE — 33/33 exact cases; `.1.5.1.5` subsequently closed trace/final gate).
 
   **Change:** Added four exact compile/input/invocation failures. Untraced operations now emit empty stdout, one
   stable phase heading on stderr, exit `1`, and no files; compilation wins before input loading. Ambient backend

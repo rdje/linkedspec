@@ -273,10 +273,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
     -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec
   ```
   Use `--case ID` before `--` for focused execution. The current baseline contains two exact help, 20 strict
-  usage, seven success, and four phase-ordered operational failure cases; active `.1.5.1.5` adds trace/final gate.
+  usage, seven success, four operational failure, and 20 canonical trace cases. Perl passes 53/53; `.1.5.1.6`
+  is active for the surfaced UTF-8 process boundary before pending Rust `.1.5.2` consumes this manifest.
 
 ### 4.4 `tools/run_ci_local.sh` / `tools/ram_guard.sh`
-- **WHAT:** `run_ci_local.sh` = the canonical local CI gate (regression + doctrine checks, E4);
+- **WHAT:** `run_ci_local.sh` = the canonical local CI gate (doctrines + primary CLI conformance in default/POSIX
+  environments + regression, E4);
   `ram_guard.sh` = a memory guard for heavy runs. **HOW:** `bash tools/run_ci_local.sh`.
 
 ---

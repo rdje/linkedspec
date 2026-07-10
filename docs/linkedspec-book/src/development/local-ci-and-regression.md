@@ -45,12 +45,12 @@ compares exact channel bytes, exit status, and expected generated files. `{{COMM
 help/diagnostic difference: the backend executable token or unavoidable host launch wrapper. `{{REPO_ROOT}}`,
 `{{WORKSPACE}}`, and `{{CASE_ID}}` represent exact runner inputs rather than backend-specific expected results.
 
-The suite now locks both help forms, 20 strict usage cases, seven success cases, and four operational failures on
-Perl. All 33 pass with `POSIXLY_CORRECT` unset or set. Success covers source/input/parser controls and exact JSON;
-failure covers compilation-before-input order, stable one-line stderr, empty stdout, exit `1`, and no files. An
-ambient debug/file/reset trace configuration also cannot opt in a primary command with no CLI trace option. Active
-`.1.5.1.5` adds explicit trace routing and the final Perl gate before Rust, Dart, and Julia consume this manifest.
-Until those later backends pass, a green Perl suite is not a complete four-backend CLI-parity claim.
+The suite locks both help forms, 20 strict usage cases, seven success cases, four operational failures, and 20
+canonical trace cases on Perl. All 53 pass with `POSIXLY_CORRECT` unset or set. ADR `0024` trace cases cover exact
+UTF-8 phase records, stdout/route/mirror, reset/persistence/append, levels/aliases, emoji, byte counts, field
+escaping, and all failure phases. The canonical local gate invokes this same runner in both environments.
+`.1.5.1.6` is active for the surfaced UTF-8 process boundary; Rust `.1.5.2` follows against the completed manifest.
+Until later backends pass, a green Perl suite is not a complete four-backend CLI-parity claim.
 
 ## Optional Dart Gate
 
@@ -154,11 +154,13 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
 `tools/run_ci_local.sh` currently does the following:
 
 - verifies required commands are available: `git`, `perl`, and `prove`,
-- verifies required tracked files exist, including `.github/workflows/ci.yml`, `tools/run_ci_local.sh`, `perl/LinkedSpec.pm`, and `t/phase0_regression.t`,
+- verifies required tracked files exist, including the primary CLI, neutral manifest/runner/tests, local gate,
+  `perl/LinkedSpec.pm`, and `t/phase0_regression.t`,
 - verifies key tracked input directories are present and non-empty,
 - rejects untracked files inside CI input areas,
 - audits selected core paths for machine-specific absolute paths,
-- runs Perl syntax checks,
+- runs Perl syntax checks for the library, primary CLI, neutral runner, and focused tests,
+- runs the focused runner/trace suites and all 53 primary CLI cases under default and POSIX option environments,
 - runs the main phase0 regression suite,
 - runs `scripts/check_memory_architecture.sh` to verify memory architecture invariants (layer integrity, pointer freshness, bounded-layer consistency),
 - runs `knowledge-map/scripts/check_knowledge_map.sh` to verify Knowledge Map integrity (derived map matches source cards, no stale entries),
@@ -173,6 +175,11 @@ The command sequence includes:
 
 ```bash
 perl -c perl/LinkedSpec.pm
+perl -c bin/linkedspec
+perl -c tools/run_cli_conformance.pl
+PERL5LIB= prove -Iperl t/cli_conformance_runner.t t/trace_cli.t
+PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- \
+  perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec
 perl -c -Iperl t/phase0_regression.t
 prove -v -Iperl t/phase0_regression.t
 ```
