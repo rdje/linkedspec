@@ -18,18 +18,18 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.2.3` — canonical Rust CLI trace reaches 61/61 shared cases.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.2.2` — reusable direct execution established the 41/61 baseline.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.2.4` — Rust primary CLI closes at 61/61 default/POSIX.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.2.3` — canonical Rust CLI trace reached the 61-case baseline.
 - recent_context: Dart/Julia are 99/99 interpreter-green scoped milestones, not complete public parity; global
   `.1.5`, `.1.6`, and `.3` own current-backend CLI, capability, and generated-source convergence before Lua.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.5.2.3 - add canonical Rust CLI trace`; previous committed HEAD is
-  `ad46756c FUTURE-PARITY-BACKLOG.1.5.2.2 - add Rust direct execution API`.
+  `FUTURE-PARITY-BACKLOG.1.5.2.4 - close Rust primary CLI`; previous committed HEAD is
+  `d19dcafa FUTURE-PARITY-BACKLOG.1.5.2.3 - add canonical Rust CLI trace`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.2.4` is the sole active PNT leaf.
-- next_action: run default/POSIX 61-case Rust proof and the broader local gate, wire recurring Rust CLI
-  verification where appropriate, reconcile no-drift surfaces, and close `.1.5.2` before Dart `.1.5.3`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.3` is the sole active PNT leaf.
+- next_action: audit/split the Dart corpus-oriented command against the closed 61-case Perl/Rust primary contract,
+  then implement only the first recoverable Dart adapter slice.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
@@ -53,4 +53,4 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: `.1.5.2.3` canonical Rust CLI trace source/tests/docs are being verified.
+- blockers: none. in_flight_uncommitted: `.1.5.2.4` recurring Rust gate/no-drift docs are being verified.

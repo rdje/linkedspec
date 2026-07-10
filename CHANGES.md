@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.2.4 — close Rust primary CLI
+
+**Recurring gate:** Added `tools/run_rust_local.sh`, which checks formatting, runs the full Rust runtime package,
+builds `linkedspec-rust`, and executes all 61 unchanged primary-command fixtures in default and POSIX option
+environments. `tools/run_ci_local.sh` can include it explicitly with `LINKEDSPEC_RUN_RUST=1` while retaining a
+toolchain-independent default.
+
+**Closeout proof:** The focused Rust gate passes 137 unit, 99 oracle, 190 integration, three source-emitter, 10
+native trace-control, and both 61-case process legs. The broader local gate passes doctrines, syntax, 22 ActionIR
+checks, nine runner/trace checks, both Perl 61-case legs, and Phase 0 `1..1028`. Fixtures/help are unchanged;
+docs/KM/governance/book/whitespace and safe cache cleanup pass. Rust `.1.5.2` is closed and Dart `.1.5.3` is active.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.2.3 — add canonical Rust CLI trace
 
 **Adapter trace:** Added the ADR `0024` canonical phase projection to `linkedspec_runtime::primary_cli`, separate

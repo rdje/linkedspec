@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.2.4 — close Rust primary CLI**
+  (DONE — Rust `.1.5.2` closed at 61/61 default/POSIX; Dart `.1.5.3` active).
+
+  **Gate:** Added `tools/run_rust_local.sh` for formatting, the full Rust runtime package, binary build, and both
+  unchanged 61-case environments. `LINKEDSPEC_RUN_RUST=1 bash tools/run_ci_local.sh` composes it explicitly.
+
+  **Proof:** Rust passes 137 unit, 99 oracle, 190 integration, three emitter, 10 native trace-control, and both
+  61-case legs. Broader local CI passes doctrines/syntax, focused suites, both Perl legs, and Phase 0 `1..1028`;
+  docs/KM/governance/book and safe cache cleanup pass.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.2.3 — add canonical Rust CLI trace**
   (DONE — 61/61 exact; `.1.5.2.4` active for recurring-gate/default-POSIX no-drift closeout).
 

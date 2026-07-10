@@ -12,8 +12,8 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, conformance, fixtures, runner, exact-bytes, backends, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.1.1 adds cli_conformance/manifest.json, tools/run_cli_conformance.pl, exact help bytes, output-file support, and t/cli_conformance_runner.t; .1.5.1.2-.5 expand to 53 cases; .1.5.1.6.1 adds validated bytes_hex workspace inputs; .1.5.1.6.2 adds eight strict UTF-8 cases for 61 total."
-reverify: "perl -c tools/run_cli_conformance.pl && PERL5LIB= prove -v -Iperl t/cli_conformance_runner.t t/trace_cli.t && PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec"
+evidence: "FUTURE-PARITY-BACKLOG.1.5.1.1 adds the arbitrary-command runner; Perl .1.5.1 closes 61 default/POSIX cases, and Rust .1.5.2.4 closes the same unchanged 61 cases through its recurring gate."
+reverify: "perl -c tools/run_cli_conformance.pl && PERL5LIB= prove -v -Iperl t/cli_conformance_runner.t t/trace_cli.t && PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec && bash tools/run_rust_local.sh"
 ---
 
 `cli_conformance/manifest.json` is the single backend-neutral primary-command
@@ -27,6 +27,9 @@ PERL5LIB= perl tools/run_cli_conformance.pl \
   --display-command 'perl bin/linkedspec' \
   -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec
 ```
+
+For Rust, `tools/run_rust_local.sh` builds the command and invokes this same runner in default and POSIX option
+environments. Both backends pass all 61 unchanged cases; Dart/Julia global fixture identity remains open.
 
 Schema version 1 validates unique safe ids/paths, known keys, checked-in input
 and expected files, argument arrays, channel definitions, generated-file
@@ -60,4 +63,5 @@ Related facts: [[user-observable-backend-cli-parity-contract]],
 [[trace-cli-control]], [[julia-primary-cli-process-conformance]],
 [[perl-primary-cli-strict-arguments]], [[perl-primary-cli-success-conformance]],
 [[perl-primary-cli-operational-failures]], [[canonical-primary-cli-trace-protocol]],
-[[primary-cli-utf8-process-boundary-gap]], [[primary-cli-strict-utf8-text-contract]].
+[[primary-cli-utf8-process-boundary-gap]], [[primary-cli-strict-utf8-text-contract]],
+[[rust-local-verification-gate]].

@@ -106,7 +106,8 @@ the Rust runner compares `engine.execute(input) == json!([expected])`. Proven on
 The first Rust primary-CLI process baseline under `FUTURE-PARITY-BACKLOG.1.5.2.1` re-exposed this known library
 shape at the correct product boundary: all 11 direct-result success cases returned `[reference]` while arguments,
 loading, and operational failures passed. `.1.5.2.2` now supplies a reusable native direct-top-value execution
-operation; the CLI consumes that operation rather than locally unwrapping arbitrary JSON arrays.
+operation; the CLI consumes that operation rather than locally unwrapping arbitrary JSON arrays. `.1.5.2.4` has
+since closed the primary command at 61/61 in default/POSIX environments.
 
 ## What the oracle caught (root causes located → tclite and Lispish minimal fixtures landed)
 

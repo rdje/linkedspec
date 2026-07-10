@@ -7,11 +7,11 @@ answers:
   - "why is .github/workflows/ci.yml guarded off (workflow_dispatch / if false)"
   - "what does green CI mean here"
   - "where does the memory-arch and knowledge-map check run"
-date: 2026-06-05
+date: 2026-07-10
 status: current
 tags: [ci, environment]
-evidence: ".github/workflows/ci.yml uses workflow_dispatch + job if: false; docs/decisions/0004-hosted-ci-disabled-local-gate.md"
-reverify: "grep -n 'workflow_dispatch' .github/workflows/ci.yml"
+evidence: ".github/workflows/ci.yml remains workflow_dispatch + if false; tools/run_ci_local.sh is the canonical core gate and composes Rust/Dart/Julia gates only through explicit opt-ins."
+reverify: "grep -n 'workflow_dispatch' .github/workflows/ci.yml && rg -n 'LINKEDSPEC_RUN_(RUST|DART|JULIA)' tools/run_ci_local.sh"
 ---
 
 Hosted GitHub Actions CI is intentionally **off** (to preserve account Actions minutes):
@@ -20,4 +20,6 @@ The canonical gate is `bash tools/run_ci_local.sh`, which runs (in order) the
 memory-architecture self-check, the Knowledge Map check, `perl -c`, and the phase-0
 regression suite. "Green CI" = that script exits 0 locally — not a hosted run. Do not
 re-enable the hosted workflow without an explicit decision superseding the record.
+Rust, Dart, and Julia toolchains remain explicit opt-ins through `LINKEDSPEC_RUN_RUST`,
+`LINKEDSPEC_RUN_DART`, and `LINKEDSPEC_RUN_JULIA`.
 Canonical home: `docs/decisions/0004-hosted-ci-disabled-local-gate.md`, `README.md` (Local CI).

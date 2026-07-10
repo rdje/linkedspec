@@ -53,14 +53,32 @@ escaping, and all failure phases. The canonical local gate invokes this same run
 ADR `0025` defines Unicode scalar text encoded as strict preserved UTF-8 at process/file boundaries. `.6.2`
 now decodes Perl argv/files, emits recursive UTF-8 JSON once, and locks inline/file Unicode, normalization
 preservation, input BOM/newlines, non-stripped source BOM, invalid phases, and trace byte counts. `.6.3` closes
-the reference. Rust `.1.5.2.3` adds reusable direct execution plus the exact canonical trace projection and passes
-all 61 unchanged cases; `.1.5.2.4` owns recurring-gate/default-POSIX no-drift closeout. UTF-16/UTF-32 are not
-implicit inputs.
+the reference. Rust `.1.5.2.4` closes reusable direct execution plus the exact canonical trace projection at all
+61 unchanged cases in both option environments. UTF-16/UTF-32 are not implicit inputs.
 
 Schema version 1 workspace inputs use `path` plus exactly one checked-in `source`
 or explicit `bytes_hex`. Hex data is non-empty, lowercase, and even-length, and is
 materialized raw; this makes invalid UTF-8 cases reviewable without binary blobs.
 Until later backends pass, a green Perl suite is not a complete four-backend CLI-parity claim.
+
+## Focused Rust Gate
+
+Run the repo-owned Rust gate from the repository root:
+
+```bash
+bash tools/run_rust_local.sh
+```
+
+It checks formatting, runs the complete `linkedspec-runtime` package (including the 99-fixture interpreter oracle,
+generated-source subset, and native trace controls), builds `linkedspec-rust`, then runs all 61 primary-command
+fixtures with `POSIXLY_CORRECT` unset and set. Override Cargo or its target directory with
+`LINKEDSPEC_CARGO_CMD` or `CARGO_TARGET_DIR` when needed.
+
+The canonical shared gate does not require a Rust toolchain by default. Opt in on a Rust-capable checkout:
+
+```bash
+LINKEDSPEC_RUN_RUST=1 bash tools/run_ci_local.sh
+```
 
 ## Optional Dart Gate
 

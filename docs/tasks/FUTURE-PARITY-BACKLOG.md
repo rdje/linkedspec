@@ -298,14 +298,17 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.5.1.6.3 - close Perl CLI reference`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.2`
-  Status: `active`
+  Status: `done`
   Goal: Add the Rust primary CLI against the shared fixture contract.
   Children: `.1.5.2.0`, `.1.5.2.1`, `.1.5.2.2`, `.1.5.2.3`, `.1.5.2.4`
   Acceptance: A Rust binary delegates to native core/runtime APIs and passes the same CLI fixtures as Perl. The
     binary may project portable argument/loading/diagnostic/trace policy, but it may not duplicate `.spec` parsing,
     compilation, matching, lifecycle, helper, or result semantics owned by the Rust libraries.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-10.** Children `.0`-`.4` add the exact Rust process boundary, reusable native
+    entry/mode/direct-value execution, strict preserved UTF-8 loading, canonical JSON/failures, ADR `0024` trace,
+    and recurring local verification. The built command passes all 61 unchanged fixtures in default and POSIX
+    environments without duplicating runtime language semantics.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.2.4 - close Rust primary CLI`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.2.0`
   Status: `done`
@@ -379,16 +382,23 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.5.2.3 - add canonical Rust CLI trace`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.2.4`
-  Status: `active`
+  Status: `done`
   Goal: Close Rust primary-command conformance and recurring focused verification.
   Acceptance: The built Rust command passes all 61 unchanged neutral cases in default and POSIX environments;
     focused Rust tests and the broader local gate pass; the Rust primary command is wired into relevant local
     checks; task/roadmap/live docs, mdBook, Knowledge Map, help, and artifact cleanup agree before Dart `.1.5.3`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-10.** Added `tools/run_rust_local.sh`: it checks formatting, runs the full Rust
+    runtime package (137 unit, 99-fixture oracle, 190 integration, three source-emitter, and 10 native trace-
+    control tests), builds `linkedspec-rust`, then runs all 61 unchanged primary-command cases with
+    `POSIXLY_CORRECT` unset and set. `tools/run_ci_local.sh` exposes this gate through explicit
+    `LINKEDSPEC_RUN_RUST=1`, preserving a toolchain-independent default like Dart/Julia. The focused Rust gate
+    passes end to end. The broader default local gate passes all doctrines/syntax, 22 ActionIR checks, nine
+    runner/trace checks, both Perl 61-case environments, and Phase 0 `1..1028`. Help/fixtures are unchanged;
+    task/roadmap/live docs, mdBook, Knowledge Map, whitespace, and safe generated-cache cleanup pass.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.2.4 - close Rust primary CLI`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.3`
-  Status: `pending`
+  Status: `active`
   Goal: Replace Dart's primary corpus command with the shared parser CLI contract.
   Acceptance: Dart's primary executable passes the same fixtures; corpus execution remains a separate developer
     runner and owns no primary-CLI-only semantics.
@@ -611,8 +621,8 @@ before implementation.
 | 13 | `FUTURE-PARITY-BACKLOG.1.5.2.1` | `done` | Exact Rust binary arguments/help/UTF-8 loading and named resolution pass their shared cases. |
 | 14 | `FUTURE-PARITY-BACKLOG.1.5.2.2` | `done` | Native direct-result/entry/mode execution closes all 11 result cases; Rust is 41/61. |
 | 15 | `FUTURE-PARITY-BACKLOG.1.5.2.3` | `done` | Canonical levels/events/sinks/failures close the unchanged Rust suite at 61/61. |
-| 16 | `FUTURE-PARITY-BACKLOG.1.5.2.4` | `active` | Prove default/POSIX identity, gate Rust, and close no-drift. |
-| 17 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
+| 16 | `FUTURE-PARITY-BACKLOG.1.5.2.4` | `done` | Default/POSIX plus recurring Rust and broader local gates close the Rust primary command. |
+| 17 | `FUTURE-PARITY-BACKLOG.1.5.3` | `active` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
 | 18 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
 | 19 | `FUTURE-PARITY-BACKLOG.1.6` | `pending` | Census every documented/exported user capability and split all residual parity gaps. |
 | 20 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
@@ -1048,8 +1058,8 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Perl `.1.5.1` is closed at 61 cases; Rust `.1.5.2.3` is done at 61/61 and `.1.5.2.4` is active for
-  recurring-gate and no-drift closeout.
+- None. Perl `.1.5.1` and Rust `.1.5.2` are closed at 61 cases in default/POSIX environments; Dart `.1.5.3` is
+  active for the next primary-command convergence lane.
   Global CLI/capability convergence precedes Lua `.1.3`.
 
 ## Verification Log
@@ -1076,6 +1086,11 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.6.1` | Runner/test syntax; 6 runner subtests including exact `00c328ff0a` materialization and six invalid schema forms; checked-in help case; full local gate/Phase 0; docs/KM/governance/whitespace/mdBook/cleanup | PASS. Reusable hex bytes are locked; `.6.2` active. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.6.2` | Adapter/runner syntax; LinkedSpec before/after process probe; 8 selected UTF-8 cases; 9 runner/trace subtests; 61/61 default/POSIX; full local gate/Phase 0; docs/KM/governance/whitespace/mdBook/cleanup | PASS. Perl strictly enforces preserved UTF-8 text; `.6.3` active. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.6.3` | Current-state gap/count/frontier scans; focused runner/trace suites; 61/61 default/POSIX; full local gate/Phase 0; docs/KM/governance/whitespace/mdBook/cleanup | PASS. Perl reference closed; Rust `.1.5.2` active; no behavior change. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.2.0` | Rust workspace/native seam audit; unchanged 61-case classification; docs/KM/governance/whitespace/mdBook/cleanup. | PASS. Exact adapter/runtime work split before code. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.2.1` | Four focused tests; full runtime package; 22 help/usage plus UTF-8/failure cases; 29/61 baseline; format/build/Clippy classification; docs/KM/governance/mdBook/cleanup. | PASS. Exact binary/loading boundary landed. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.2.2` | Direct execution/hash tests; 11 result cases; full runtime package; 41/61 baseline; format/build/Clippy classification; docs/KM/governance/mdBook/cleanup. | PASS. Reusable direct result/entry/mode execution landed. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.2.3` | Six focused adapter tests; full runtime package; 61/61 unchanged suite; formatting/touched-file Clippy; docs/KM/governance/mdBook/cleanup. | PASS. Canonical Rust CLI trace landed. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.2.4` | `tools/run_rust_local.sh`; 137 unit/99 oracle/190 integration/3 emitter/10 native trace; 61/61 default/POSIX; full local gate through Phase 0 `1..1028`; docs/KM/governance/mdBook/cleanup. | PASS. Rust primary CLI closed; Dart `.1.5.3` active. |
 
 ## Commit Log
 
@@ -1101,9 +1116,25 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.5.1.6.1` | `FUTURE-PARITY-BACKLOG.1.5.1.6.1 - add neutral hex byte fixtures` | Schema-v1 exact non-text input materialization with focused validation/proof. |
 | `FUTURE-PARITY-BACKLOG.1.5.1.6.2` | `FUTURE-PARITY-BACKLOG.1.5.1.6.2 - enforce Perl CLI UTF-8 text` | Strict argv/file decoding, recursive UTF-8 JSON, and eight exact behavior families for 61 cases. |
 | `FUTURE-PARITY-BACKLOG.1.5.1.6.3` | `FUTURE-PARITY-BACKLOG.1.5.1.6.3 - close Perl CLI reference` | No-drift closeout; closes parents and activates Rust without behavior change. |
+| `FUTURE-PARITY-BACKLOG.1.5.2.0` | `FUTURE-PARITY-BACKLOG.1.5.2.0 - split Rust primary CLI work` | Audits native/adapter seams and splits implementation before code. |
+| `FUTURE-PARITY-BACKLOG.1.5.2.1` | `FUTURE-PARITY-BACKLOG.1.5.2.1 - add Rust CLI boundary` | Exact arguments/help/loading, strict UTF-8, named resolution, stable failures, and binary. |
+| `FUTURE-PARITY-BACKLOG.1.5.2.2` | `FUTURE-PARITY-BACKLOG.1.5.2.2 - add Rust direct execution API` | Reusable entry/mode/direct result plus nested-hash preservation. |
+| `FUTURE-PARITY-BACKLOG.1.5.2.3` | `FUTURE-PARITY-BACKLOG.1.5.2.3 - add canonical Rust CLI trace` | Exact portable trace events/levels/sinks/failures; 61/61 baseline. |
+| `FUTURE-PARITY-BACKLOG.1.5.2.4` | `FUTURE-PARITY-BACKLOG.1.5.2.4 - close Rust primary CLI` | Recurring Rust gate, default/POSIX proof, full local gate, parent closeout. |
 
 ## Changelog
 
+- `2026-07-10`: `.1.5.2.4` adds the recurring Rust gate, proves 61/61 in default/POSIX environments plus the full
+  runtime package and broader local gate through Phase 0 `1..1028`, closes parent `.1.5.2`, and activates Dart
+  `.1.5.3`. Help and fixture bytes remain unchanged.
+- `2026-07-10`: `.1.5.2.3` adds ADR `0024`'s canonical trace projection independently of native Rust trace and
+  advances the unchanged suite from 41/61 to 61/61.
+- `2026-07-10`: `.1.5.2.2` adds reusable per-invocation entry/mode/direct-value execution and corrects ordinary
+  nested-hash preservation versus explicit flat splicing, advancing the suite from 29/61 to 41/61.
+- `2026-07-10`: `.1.5.2.1` adds `linkedspec-rust` with exact arguments/help, deterministic loading, strict UTF-8,
+  and stable phase failures, establishing a 29/61 boundary baseline.
+- `2026-07-10`: `.1.5.2.0` audits the Rust native/adapter seams and splits binary/loading, direct execution,
+  canonical trace, and closeout before implementation.
 - `2026-07-10`: `.1.5.1.6.3` closes the Perl CLI reference after current-state scans find no unresolved encoding,
   count, or frontier drift. Parent `.1.5.1`/`.6` are done at 61 cases; Rust `.1.5.2` is active. Historical 53-case
   and initiating mojibake records remain explicitly dated; no behavior or fixture bytes change.

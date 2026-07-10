@@ -13,7 +13,7 @@ date: 2026-07-10
 status: current
 tags: [rust, cli, trace, utf8, parity, ADR-0024, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.5.2.3 adds CanonicalTrace in primary_cli.rs and passes all 61 unchanged CLI fixtures."
-reverify: "cargo build --manifest-path rust/Cargo.toml -p linkedspec-runtime --bin linkedspec-rust && PERL5LIB= perl tools/run_cli_conformance.pl --display-command linkedspec-rust -- {{REPO_ROOT}}/rust/target/debug/linkedspec-rust"
+reverify: "bash tools/run_rust_local.sh"
 ---
 
 `linkedspec_runtime::primary_cli` owns a small `CanonicalTrace` adapter implementing ADR `0024`. It emits only
@@ -28,9 +28,9 @@ none/quiet; otherwise files persist or append. Trace setup/write failures map to
 and compile/input/invoke failures emit only their portable phase outcome.
 
 With `.1.5.2.2`'s direct execution layer beneath it, the built `linkedspec-rust` command passes all 61 unchanged
-neutral fixtures. `.1.5.2.4` owns recurring-gate/default-POSIX no-drift closeout before the Rust primary-command
-milestone is declared closed.
+neutral fixtures. `.1.5.2.4` closes the milestone in default/POSIX environments and adds recurring
+`tools/run_rust_local.sh` verification.
 
 Related facts: [[canonical-primary-cli-trace-protocol]], [[rust-primary-cli-mechanism-audit]],
 [[rust-native-direct-value-execution]], [[rust-trace-controls-sinks]],
-[[user-observable-backend-cli-parity-contract]].
+[[user-observable-backend-cli-parity-contract]], [[rust-local-verification-gate]].

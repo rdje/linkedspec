@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.2.4 — backend gates should be explicit and composable):
+  Give each non-reference backend one repo-owned end-to-end gate, then make the canonical Perl/core gate opt into
+  it via an explicit environment flag. This preserves reproducible full backend proof without making a Rust,
+  Dart, or Julia toolchain an implicit prerequisite for routine core work. A primary-command gate must run the
+  same unchanged manifest under both default and POSIX option environments, not a backend-local approximation.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.2.3 — portable CLI trace is an adapter protocol):
   Keep rich native trace scopes/events for embedding, but make each primary command project the same small,
   deterministic phase protocol. The adapter owns thresholds, UTF-8 byte accounting, one-line field escaping,

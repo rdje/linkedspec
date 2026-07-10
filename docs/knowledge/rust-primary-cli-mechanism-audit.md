@@ -10,7 +10,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [rust, cli, parser, runtime, utf8, trace, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.2.0 audits/splits the workspace; .1 lands 29/61; .2 lands native direct execution at 41/61; .3 lands canonical trace at 61/61; .4 owns closeout."
+evidence: "FUTURE-PARITY-BACKLOG.1.5.2.0 audits/splits the workspace; .1 lands 29/61; .2 lands native direct execution at 41/61; .3 lands canonical trace at 61/61; .4 closes default/POSIX and recurring verification."
 reverify: "sed -n '1,120p' rust/Cargo.toml; find rust -type f -path '*/src/bin/*' -print; rg -n 'parse_spec_with_user_functions|pub fn compile|pub fn validate|pub fn execute|top_rule\\(|parse_mode' rust/linkedspec-core/src rust/linkedspec-runtime/src"
 ---
 
@@ -35,10 +35,10 @@ file decoding pass all 22 help/usage cases, all three invalid-UTF-8 phase cases,
 29/61 total. The 32 residuals are mechanically isolated: 11 successful direct-value cases expose the already
 documented `Engine::execute == [reference]` accumulator wrapper, and 21 cases require ADR `0024` canonical trace.
 `.1.5.2.2` closes the native direct-result/entry/mode seam at 41/61; `.3` adds the independent canonical adapter
-trace and closes the unchanged suite at 61/61. `.4` owns recurring-gate/default-POSIX no-drift closeout. This was
-not a parser-language gap.
+trace and closes the unchanged suite at 61/61. `.4` closes both option environments and adds the recurring Rust
+gate. This was not a parser-language gap.
 
 Related facts: [[cross-backend-cli-contract-gap]], [[neutral-cli-fixture-runner]],
 [[user-observable-backend-cli-parity-contract]], [[primary-cli-strict-utf8-text-contract]],
 [[canonical-primary-cli-trace-protocol]], [[rust-canonical-primary-cli-trace]],
-[[native-in-memory-backend-contract]].
+[[native-in-memory-backend-contract]], [[rust-local-verification-gate]].

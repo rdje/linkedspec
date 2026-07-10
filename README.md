@@ -199,17 +199,19 @@ Top-level project docs:
   now decodes Perl argv/files strictly, preserves BOM/code points/newlines, rejects invalid files by phase, and
   emits recursive canonical JSON once; `.6.3` closes Perl as the 61-case reference. Rust `.1.5.2.1` adds
   `linkedspec-rust`, `.1.5.2.2` adds reusable entry/mode/direct-result execution, and `.1.5.2.3` adds the exact
-  canonical trace projection, bringing Rust to 61/61. `.1.5.2.4` is active for default/POSIX recurring-gate and
-  no-drift closeout.
+  canonical trace projection. `.1.5.2.4` closes Rust at 61/61 in default/POSIX environments and adds
+  `tools/run_rust_local.sh`; Dart `.1.5.3` is the active primary-command lane.
 - Deep semantic introspection plus MCP is parked under `FUTURE-PARITY-BACKLOG.10.1`: native backend APIs own one
   versioned semantic model, while MCP remains a thin transport rather than a backend-specific source of truth.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 99-fixture corpus execution.
+- Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, the full runtime package, and both
+  61-case primary-command environments.
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI
   checks, and the 99-fixture corpus execution. Override the executable/depot with `LINKEDSPEC_JULIA_CMD` and
   `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.
-- The canonical local gate stays core-only by default so it does not depend on Dart or Julia being installed. To
-  opt into backend checks, set `LINKEDSPEC_RUN_DART=1` and/or `LINKEDSPEC_RUN_JULIA=1` before
+- The canonical local gate stays core-only by default so it does not depend on Rust, Dart, or Julia toolchains. To
+  opt into backend checks, set `LINKEDSPEC_RUN_RUST=1`, `LINKEDSPEC_RUN_DART=1`, and/or `LINKEDSPEC_RUN_JULIA=1` before
   `bash tools/run_ci_local.sh`.
 - `.github/workflows/ci.yml` remains tracked and delegates to that shared script, but hosted automatic GitHub Actions runs are disabled until intentionally re-enabled.
 
