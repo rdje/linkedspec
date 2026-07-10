@@ -178,4 +178,100 @@ Done::
     expect(output.stderrBytes, isEmpty);
     expect(output.stdoutBytes, utf8.encode('{"a":{"b":2,"d":4},"z":0}\n'));
   });
+
+  test('emits the exact low canonical trace before JSON', () {
+    final output = runLinkedSpecDartPrimaryCli(const [
+      '--inline-spec',
+      _traceSpec,
+      '--input',
+      'x',
+      '--trace',
+      'low',
+    ]);
+
+    expect(output.exitCode, 0);
+    expect(output.stderrBytes, isEmpty);
+    expect(
+      utf8.decode(output.stdoutBytes),
+      '[linkedspec][low] compile:start\n'
+      '[linkedspec][low] compile:ok\n'
+      '[linkedspec][low] input:start\n'
+      '[linkedspec][low] input:ok\n'
+      '[linkedspec][low] invoke:start\n'
+      '[linkedspec][low] invoke:ok\n'
+      '"trace"\n',
+    );
+  });
+
+  test('routes emoji trace with reset while keeping JSON on stdout', () {
+    final root = Directory.systemTemp.createTempSync(
+      'linkedspec-dart-primary-trace-',
+    );
+    try {
+      final traceFile = File('${root.path}/trace.log')
+        ..writeAsStringSync('stale trace\n');
+      final output = runLinkedSpecDartPrimaryCli(
+        const [
+          '--inline-spec',
+          _traceSpec,
+          '--input',
+          'x',
+          '--trace',
+          'low',
+          '--trace-file',
+          'trace.log',
+          '--trace-mode',
+          'route',
+          '--trace-reset',
+          '--trace-emoji',
+        ],
+        workingDirectory: root,
+        repositoryRoot: Directory('..'),
+      );
+
+      expect(output.exitCode, 0);
+      expect(utf8.decode(output.stdoutBytes), '"trace"\n');
+      expect(output.stderrBytes, isEmpty);
+      expect(
+        traceFile.readAsStringSync(),
+        '[linkedspec][low] ℹ️ compile:start\n'
+        '[linkedspec][low] ℹ️ compile:ok\n'
+        '[linkedspec][low] ℹ️ input:start\n'
+        '[linkedspec][low] ℹ️ input:ok\n'
+        '[linkedspec][low] ℹ️ invoke:start\n'
+        '[linkedspec][low] ℹ️ invoke:ok\n',
+      );
+    } finally {
+      root.deleteSync(recursive: true);
+    }
+  });
+
+  test('maps trace setup failure to stable compilation failure', () {
+    final output = runLinkedSpecDartPrimaryCli(const [
+      '--inline-spec',
+      _traceSpec,
+      '--input',
+      'x',
+      '--trace',
+      'low',
+      '--trace-file',
+      '.',
+      '--trace-reset',
+    ]);
+
+    expect(output.exitCode, 1);
+    expect(output.stdoutBytes, isEmpty);
+    expect(
+      output.stderrBytes,
+      utf8.encode('linkedspec: parser compilation failed\n'),
+    );
+  });
 }
+
+const _traceSpec = '''
+Top::
+ /x/ -> Done { return("trace") }
+
+Done::
+ /x/
+''';

@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.3.3 — add canonical Dart CLI trace
+
+**Adapter trace:** Added ADR `0024`'s canonical compile/input/invoke projection independently of Dart's rich native
+trace emitter. It implements exact named/numeric levels, UTF-8 byte counts, uppercase percent escaping, emoji,
+stdout/route/mirror defaults, reset/append/persistence, and result framing.
+
+**Failures:** Compile/input/invoke failures emit stable phase records; trace setup/write failures remain stable
+compilation failures without backend exception leakage or loss of already-emitted stdout trace bytes.
+
+**Proof/frontier:** Three focused trace tests, analyzer, full Dart tests, 99/99 corpus, and all 61 unchanged shared
+cases pass in default and POSIX environments. Docs/KM/governance/book and cleanup pass. `.1.5.3.4` is active for
+recurring-gate integration and final Dart no-drift.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.3.2 — add Dart primary execution
 
 **Native composition:** The primary adapter now retains `CompiledSpec`, loads input after compilation, creates

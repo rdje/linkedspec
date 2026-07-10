@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [dart, cli, utf8, parser, loading, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.3.1 replaces the corpus primary boundary, corrects no-function staged parsing, and passes the exact 29-case boundary/loading/failure subset in default and POSIX environments; .2 has since added direct results at 41/61."
+evidence: "FUTURE-PARITY-BACKLOG.1.5.3.1 replaces the corpus primary boundary and reaches 29/61; .2 direct results reach 41/61 and .3 canonical trace reaches 61/61."
 reverify: "cd dart && dart analyze --fatal-infos --fatal-warnings && dart test test/primary_cli_test.dart test/user_function_definition_parser_test.dart && cd .. && bash tools/run_dart_local.sh && rg -n '29/29|FUTURE-PARITY-BACKLOG.1.5.3.1' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -35,8 +35,8 @@ sources retain the existing staged path. A native regression locks both cases.
 
 The exact boundary/loading/failure subset is 29/29 under default and `POSIXLY_CORRECT=1`. The remaining 32 shared
 cases were 11 successful direct result cases plus 21 trace-tagged cases. `.1.5.3.2` now closes all direct results
-and the silent quiet-trace case at 41/61; `.1.5.3.3` owns the remaining 20 trace cases.
+and the silent quiet-trace case at 41/61; `.1.5.3.3` has since closed the remaining 20 trace cases at 61/61.
 
 Related facts: [[dart-primary-cli-mechanism-audit]], [[primary-cli-strict-utf8-text-contract]],
 [[user-observable-backend-cli-parity-contract]], [[dart-local-verification-gate]], [[dart-specific-cli]],
-[[dart-primary-cli-native-execution-canonical-json]].
+[[dart-primary-cli-native-execution-canonical-json]], [[dart-canonical-primary-cli-trace]].

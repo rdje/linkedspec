@@ -82,6 +82,13 @@ final class PrimaryCliCommandOutput {
         exitCode: 0,
       );
 
+  factory PrimaryCliCommandOutput.successBytes(List<int> stdoutBytes) =>
+      PrimaryCliCommandOutput(
+        stdoutBytes: stdoutBytes,
+        stderrBytes: const [],
+        exitCode: 0,
+      );
+
   factory PrimaryCliCommandOutput.usageFailure(String message) =>
       PrimaryCliCommandOutput(
         stdoutBytes: const [],
@@ -91,12 +98,14 @@ final class PrimaryCliCommandOutput {
         exitCode: 2,
       );
 
-  factory PrimaryCliCommandOutput.operationalFailure(String message) =>
-      PrimaryCliCommandOutput(
-        stdoutBytes: const [],
-        stderrBytes: utf8.encode('linkedspec: $message\n'),
-        exitCode: 1,
-      );
+  factory PrimaryCliCommandOutput.operationalFailure(
+    String message, {
+    List<int> stdoutBytes = const [],
+  }) => PrimaryCliCommandOutput(
+    stdoutBytes: stdoutBytes,
+    stderrBytes: utf8.encode('linkedspec: $message\n'),
+    exitCode: 1,
+  );
 
   final Uint8List stdoutBytes;
   final Uint8List stderrBytes;
@@ -125,11 +134,70 @@ PrimaryCliCommandOutput runLinkedSpecDartPrimaryCli(
 
   final cwd = workingDirectory?.absolute ?? Directory.current.absolute;
   final repoRoot = repositoryRoot?.absolute ?? _findRepositoryRoot();
-  final prepared = _prepareRequest(parseResult.options!, cwd, repoRoot);
-  if (prepared == null) {
+  final trace = _CanonicalTrace.create(parseResult.options!, cwd);
+  if (trace == null) {
     return PrimaryCliCommandOutput.operationalFailure(
       'parser compilation failed',
     );
+  }
+  final sourceKind = parseResult.options!.spec != null
+      ? 'named'
+      : parseResult.options!.specFile != null
+      ? 'file'
+      : 'inline';
+  final inputKind = parseResult.options!.inputFile != null ? 'file' : 'literal';
+  final sourceArgument =
+      parseResult.options!.spec ??
+      parseResult.options!.specFile ??
+      parseResult.options!.inlineSpec ??
+      '';
+  final inputArgument =
+      parseResult.options!.inputFile ?? parseResult.options!.input ?? '';
+  final topRule = parseResult.options!.topRule == null
+      ? '<default>'
+      : _traceField(parseResult.options!.topRule!);
+  final parseMode = parseResult.options!.parseMode ?? 'seek';
+
+  PrimaryCliCommandOutput? emit(int threshold, String level, String event) {
+    if (trace.emit(threshold, level, event)) {
+      return null;
+    }
+    return PrimaryCliCommandOutput.operationalFailure(
+      'parser compilation failed',
+      stdoutBytes: trace.takeStdout(),
+    );
+  }
+
+  PrimaryCliCommandOutput phaseFailure(String event, String message) {
+    final emitted = trace.emit(100, 'low', event);
+    return PrimaryCliCommandOutput.operationalFailure(
+      emitted ? message : 'parser compilation failed',
+      stdoutBytes: trace.takeStdout(),
+    );
+  }
+
+  final traceFailure =
+      emit(100, 'low', 'compile:start') ??
+      emit(
+        200,
+        'medium',
+        'request source=$sourceKind input=$inputKind '
+            'top_rule=$topRule parse_mode=$parseMode',
+      ) ??
+      emit(
+        300,
+        'high',
+        'arguments source_bytes=${utf8.encode(sourceArgument).length} '
+            'input_bytes=${utf8.encode(inputArgument).length}',
+      ) ??
+      emit(500, 'debug', 'protocol version=1');
+  if (traceFailure != null) {
+    return traceFailure;
+  }
+
+  final prepared = _prepareRequest(parseResult.options!, cwd, repoRoot);
+  if (prepared == null) {
+    return phaseFailure('compile:error', 'parser compilation failed');
   }
 
   final CompiledSpec compiled;
@@ -143,14 +211,27 @@ PrimaryCliCommandOutput runLinkedSpecDartPrimaryCli(
       parseSpecWithStagedUserFunctionDefinitions(prepared.specSource),
     );
   } on Object {
-    return PrimaryCliCommandOutput.operationalFailure(
-      'parser compilation failed',
-    );
+    return phaseFailure('compile:error', 'parser compilation failed');
+  }
+  final compileTraceFailure = emit(100, 'low', 'compile:ok');
+  if (compileTraceFailure != null) {
+    return compileTraceFailure;
   }
 
+  final inputStartFailure = emit(100, 'low', 'input:start');
+  if (inputStartFailure != null) {
+    return inputStartFailure;
+  }
   final input = _loadInput(prepared.input);
   if (input == null) {
-    return PrimaryCliCommandOutput.operationalFailure('input load failed');
+    return phaseFailure('input:error', 'input load failed');
+  }
+  final inputTraceFailure =
+      emit(300, 'high', 'input bytes=${utf8.encode(input).length}') ??
+      emit(100, 'low', 'input:ok') ??
+      emit(100, 'low', 'invoke:start');
+  if (inputTraceFailure != null) {
+    return inputTraceFailure;
   }
 
   try {
@@ -162,11 +243,26 @@ PrimaryCliCommandOutput runLinkedSpecDartPrimaryCli(
       parseMode: parseMode,
     ).execute(input, topRule: prepared.options.topRule);
     final json = jsonEncode(_canonicalJson(result.value));
-    return PrimaryCliCommandOutput.success('$json\n');
-  } on Object {
-    return PrimaryCliCommandOutput.operationalFailure(
-      'parser invocation failed',
+    final invokeTraceFailure = emit(100, 'low', 'invoke:ok');
+    if (invokeTraceFailure != null) {
+      return invokeTraceFailure;
+    }
+    final jsonBytes = utf8.encode(json);
+    final resultTraceFailure = emit(
+      400,
+      'full',
+      'result json_bytes=${jsonBytes.length}',
     );
+    if (resultTraceFailure != null) {
+      return resultTraceFailure;
+    }
+    return PrimaryCliCommandOutput.successBytes([
+      ...trace.takeStdout(),
+      ...jsonBytes,
+      0x0A,
+    ]);
+  } on Object {
+    return phaseFailure('invoke:error', 'parser invocation failed');
   }
 }
 
@@ -357,6 +453,124 @@ bool _validTraceLevel(String level) {
     'debug',
     'verbose',
   }.contains(level.toLowerCase());
+}
+
+int _traceLevelNumber(String? level) {
+  if (level == null) {
+    return 0;
+  }
+  final numeric = int.tryParse(level);
+  if (numeric != null) {
+    return numeric;
+  }
+  return switch (level.toLowerCase()) {
+    'none' || 'quiet' => 0,
+    'low' => 100,
+    'medium' || 'med' => 200,
+    'high' => 300,
+    'full' => 400,
+    'debug' || 'verbose' => 500,
+    _ => throw StateError('trace level was validated by the argument parser'),
+  };
+}
+
+enum _CanonicalTraceMode { stdout, route, mirror }
+
+final class _CanonicalTrace {
+  _CanonicalTrace({
+    required this.level,
+    required this.file,
+    required this.mode,
+    required this.emoji,
+  });
+
+  static _CanonicalTrace? create(_PrimaryCliOptions options, Directory cwd) {
+    final file = options.traceFile == null || options.traceFile!.isEmpty
+        ? null
+        : _explicitFile(options.traceFile!, cwd);
+    final mode = switch (options.traceMode) {
+      'route' => _CanonicalTraceMode.route,
+      'mirror' => _CanonicalTraceMode.mirror,
+      'stdout' => _CanonicalTraceMode.stdout,
+      null when file != null => _CanonicalTraceMode.route,
+      null => _CanonicalTraceMode.stdout,
+      _ => throw StateError('trace mode was validated by the argument parser'),
+    };
+    try {
+      if (options.traceReset && file != null) {
+        file.writeAsBytesSync(const [], flush: true);
+      }
+    } on FileSystemException {
+      return null;
+    }
+    return _CanonicalTrace(
+      level: _traceLevelNumber(options.traceLevel),
+      file: file,
+      mode: mode,
+      emoji: options.traceEmoji,
+    );
+  }
+
+  final int level;
+  final File? file;
+  final _CanonicalTraceMode mode;
+  final bool emoji;
+  final BytesBuilder _stdout = BytesBuilder(copy: false);
+
+  bool emit(int threshold, String levelName, String event) {
+    if (level < threshold) {
+      return true;
+    }
+    final emojiPrefix = emoji ? '${_traceEmojiPrefix(threshold)} ' : '';
+    final bytes = utf8.encode('[linkedspec][$levelName] $emojiPrefix$event\n');
+    if (mode == _CanonicalTraceMode.stdout ||
+        mode == _CanonicalTraceMode.mirror) {
+      _stdout.add(bytes);
+    }
+    if ((mode == _CanonicalTraceMode.route ||
+            mode == _CanonicalTraceMode.mirror) &&
+        file != null) {
+      try {
+        file!.writeAsBytesSync(bytes, mode: FileMode.append, flush: true);
+      } on FileSystemException {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  Uint8List takeStdout() {
+    final bytes = _stdout.takeBytes();
+    return bytes;
+  }
+}
+
+String _traceEmojiPrefix(int level) => switch (level) {
+  100 => 'ℹ️',
+  200 => '🔎',
+  300 => '🧭',
+  400 => '🐞',
+  _ => '🔥',
+};
+
+String _traceField(String value) {
+  final escaped = StringBuffer();
+  for (final byte in utf8.encode(value)) {
+    final allowed =
+        (byte >= 0x30 && byte <= 0x39) ||
+        (byte >= 0x41 && byte <= 0x5A) ||
+        (byte >= 0x61 && byte <= 0x7A) ||
+        byte == 0x5F ||
+        byte == 0x2E ||
+        byte == 0x3A ||
+        byte == 0x2D;
+    if (allowed) {
+      escaped.writeCharCode(byte);
+    } else {
+      escaped.write('%${byte.toRadixString(16).toUpperCase().padLeft(2, '0')}');
+    }
+  }
+  return escaped.toString();
 }
 
 final class _PreparedRequest {

@@ -49,7 +49,9 @@ execution/results and canonical trace remain the immediately following `.2` and 
 `bin/corpus_runner.dart` retains all corpus validation/execution and selector behavior. `.1.5.3.2` composes that
 boundary through the native staged parser, validator/compiler, and `LinkedSpecRuntimeEngine`, selects top rule and
 global parse mode through native controls, and emits the direct result as recursively key-sorted compact UTF-8
-JSON. Dart is now 41/61; the only remaining cases are canonical trace under `.3`. The earlier
+JSON. `.1.5.3.3` adds the independent canonical phase trace with exact levels, byte counts, escaping, emoji,
+stdout/route/mirror, reset/append, and failures. Dart now passes all 61 unchanged primary cases in default/POSIX;
+`.4` owns recurring-gate/no-drift closeout. The earlier
 `DART-BACKEND-PARITY.6.3` corpus-parity boundary remains green: the full
 checked-in 99-fixture manifest passes through Dart execute mode after the shipped-spec/parser-smoke window reached
 31/31 green and the routed top-level `fn` fixtures passed through the spec-defined shell. The package

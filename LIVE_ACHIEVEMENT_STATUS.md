@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.3.3 — add canonical Dart CLI trace**
+  (DONE — Dart reaches 61/61 default/POSIX; `.1.5.3.4` active for recurring gate/no-drift).
+
+  **Implementation:** Added the independent ADR `0024` compile/input/invoke trace with exact levels, UTF-8 counts,
+  escaping, emoji, stdout/route/mirror, reset/append, persistence, and stable traced failures.
+
+  **Proof:** Three focused trace tests, analyzer/full Dart suite, 99/99 corpus, and both complete 61-case legs pass;
+  rich native Dart trace remains separate. Docs/KM/governance/book/cleanup pass.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.3.2 — add Dart primary execution**
   (DONE — native direct results advance Dart to 41/61; `.1.5.3.3` active for 20 trace cases).
 

@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.3.3 — portable trace remains an adapter protocol in Dart too):
+  Do not route rich `LinkedSpecTraceEmitter` events through the byte-identical primary command. Project only the
+  deterministic compile/input/invoke protocol, count UTF-8 bytes after encoding, escape fields bytewise, and keep
+  file mode/reset/error handling in the adapter. Reset must run even for silent levels; route/mirror must append
+  identically; trace IO failure is a compilation-boundary failure because the requested diagnostic channel failed.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.3.2 — serialize the native direct value, not a compatibility shape):
   Dart's runtime already exposes both `value` and legacy corpus `output == [value]`. The primary CLI must consume
   `value` directly; unwrapping `output` would make a legitimate one-element array ambiguous. Apply global mode in
