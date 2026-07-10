@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.2.2 — direct result is an execution operation, not JSON postprocessing):
+  Preserve legacy accumulator-returning APIs, but expose the backend-neutral top-rule value as a first-class native
+  operation with per-invocation entry/mode options. This keeps engines reusable and avoids compiled-state mutation
+  or unsafe one-element-array unwrapping. Exact nested JSON also tests helper semantics: hash constructors preserve
+  ordinary nested hashes and splice only explicit `flat`/`flat_hash` values.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.2.1 — a shared process suite cleanly partitions backend work):
   An exact CLI boundary can land before result/trace completion without obscuring scope. Rust's 29/61 baseline
   proves argument grammar, help bytes, source/input phase order, strict UTF-8 failures, and operational headings.

@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.2.2 — add Rust direct execution API
+
+**Native API:** Added owned `ExecutionOptions` plus `Engine::execute_value` and native traced variants. Each call
+can select an entry rule and global seek/consume override without mutating `CompiledSpec`; it returns the rule value
+directly. Legacy `execute` retains its accumulator result. The CLI now consumes the reusable API.
+
+**Parity correction:** The nested-object fixture exposed implicit Rust splicing of every hash-valued constructor
+argument. Ordinary hash values now remain nested; only explicit `flat`/`flat_hash` splices, matching the existing
+book and Perl/Dart/Julia behavior.
+
+**Proof/frontier:** Three focused native/hash tests and all 11 direct result cases pass. Full manifest status is
+41/61; only 20 non-quiet canonical trace cases remain under `.1.5.2.3`. Full runtime package, formatting/build,
+docs/KM/governance/book/whitespace, and safe cache cleanup pass; strict Clippy finds only the pre-existing backlog.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.2.1 — add Rust CLI boundary
 
 **Implementation:** Added `linkedspec_runtime::primary_cli` plus `linkedspec-rust`. The adapter uses one exact

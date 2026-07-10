@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.2.2 — add Rust direct execution API**
+  (DONE — 41/61 exact; `.1.5.2.3` active for 20 non-quiet trace cases).
+
+  **Native API:** `ExecutionOptions` and `Engine::execute_value` plus traced variants select entry/global mode per
+  invocation and return the direct rule value without compiled mutation. Legacy accumulator execution remains.
+
+  **Parity:** Ordinary nested hashes no longer splice implicitly; only explicit `flat`/`flat_hash` does. Three
+  focused tests and all 11 result cases pass. Full runtime, 41/61 process baseline, formatting/build, docs/KM/
+  governance/book, and cache cleanup pass; strict Clippy is unchanged at the pre-existing lint backlog.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.2.1 — add Rust CLI boundary**
   (DONE — 29/61 exact; `.1.5.2.2` active for reusable direct-result/entry/mode execution).
 

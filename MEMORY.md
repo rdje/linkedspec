@@ -18,18 +18,18 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.2.1` — Rust exact boundary/loading is 29/61 shared cases.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.2.0` — audits/splits Rust primary-command mechanisms before code.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.2.2` — Rust native direct execution reaches 41/61 shared cases.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.2.1` — Rust exact boundary/loading established the 29/61 baseline.
 - recent_context: Dart/Julia are 99/99 interpreter-green scoped milestones, not complete public parity; global
   `.1.5`, `.1.6`, and `.3` own current-backend CLI, capability, and generated-source convergence before Lua.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.5.2.1 - add Rust CLI boundary`; previous committed HEAD is
-  `7158bf49 FUTURE-PARITY-BACKLOG.1.5.2.0 - split Rust primary CLI work`.
+  `FUTURE-PARITY-BACKLOG.1.5.2.2 - add Rust direct execution API`; previous committed HEAD is
+  `1d16b7f4 FUTURE-PARITY-BACKLOG.1.5.2.1 - add Rust CLI boundary`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.2.2` is the sole active PNT leaf.
-- next_action: add reusable native Rust entry-rule/global-mode/direct-top-value execution, migrate the CLI off
-  compiled-state mutation, and close all 11 result cases before canonical trace under `.1.5.2.3`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.2.3` is the sole active PNT leaf.
+- next_action: implement ADR `0024` canonical Rust CLI trace levels/events/sinks/reset/emoji, then close all 20
+  remaining cases before `.1.5.2.4` gate/no-drift.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
@@ -53,4 +53,4 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: `.1.5.2.1` Rust CLI boundary/source/tests/docs are being verified.
+- blockers: none. in_flight_uncommitted: `.1.5.2.2` native execution/hash parity source/tests/docs are being verified.

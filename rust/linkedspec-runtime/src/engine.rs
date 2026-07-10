@@ -45,6 +45,47 @@ use serde_json::Value;
 
 const LINKEDSPEC_WHILE_ITERATION_LIMIT: usize = 10_000;
 
+/// Per-invocation controls for direct top-rule value execution.
+///
+/// These options do not mutate the compiled specification. They select an
+/// optional entry rule and optionally override every rule's compiled parse mode
+/// for this execution only.
+#[derive(Debug, Clone, Default, PartialEq, Eq)]
+pub struct ExecutionOptions {
+    entry_rule: Option<String>,
+    parse_mode: Option<ParseMode>,
+}
+
+impl ExecutionOptions {
+    /// Create default options: enter the compiled top rule and retain each
+    /// rule's compiled parse mode.
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    /// Select the rule entered first for this execution.
+    pub fn with_entry_rule(mut self, label: impl Into<String>) -> Self {
+        self.entry_rule = Some(label.into());
+        self
+    }
+
+    /// Override every rule's compiled parse mode for this execution.
+    pub fn with_parse_mode(mut self, mode: ParseMode) -> Self {
+        self.parse_mode = Some(mode);
+        self
+    }
+
+    /// Return the selected entry rule, if any.
+    pub fn entry_rule(&self) -> Option<&str> {
+        self.entry_rule.as_deref()
+    }
+
+    /// Return the global parse-mode override, if any.
+    pub fn parse_mode(&self) -> Option<ParseMode> {
+        self.parse_mode
+    }
+}
+
 #[derive(Debug, Clone)]
 enum EvaluatedAccessSegment {
     Key(String),
@@ -707,10 +748,11 @@ impl GeneratedPlanExecutor<'_> {
                 return_if_rule_returned!();
             }
 
+            let parse_mode = ctx.effective_parse_mode(rule.parse_mode);
             let match_result = if has_entry_idx && matches == 0 {
                 let entry_pat = &rule.regex_patterns[entry_regex_idx];
                 let entry_alt = CompiledAlternation::compile(std::slice::from_ref(entry_pat))?;
-                match rule.parse_mode {
+                match parse_mode {
                     ParseMode::Consume => entry_alt.consume_match(&ctx.input, ctx.pos),
                     ParseMode::Seek => entry_alt.seek_match(&ctx.input, ctx.pos),
                 }
@@ -719,7 +761,7 @@ impl GeneratedPlanExecutor<'_> {
                     m
                 })
             } else {
-                match rule.parse_mode {
+                match parse_mode {
                     ParseMode::Consume => alt.consume_match(&ctx.input, ctx.pos),
                     ParseMode::Seek => alt.seek_match(&ctx.input, ctx.pos),
                 }
@@ -732,7 +774,7 @@ impl GeneratedPlanExecutor<'_> {
                         true,
                         format!(
                             "rule={label} regex_idx={} start={} end={} pos_before={pos_before} parse_mode={:?} entry_regex_idx={entry_regex_idx}",
-                            m.index, m.start, m.end, rule.parse_mode
+                            m.index, m.start, m.end, parse_mode
                         ),
                         TraceLevel::MEDIUM,
                     );
@@ -743,7 +785,7 @@ impl GeneratedPlanExecutor<'_> {
                         false,
                         format!(
                             "rule={label} pos_before={pos_before} parse_mode={:?} entry_regex_idx={entry_regex_idx}",
-                            rule.parse_mode
+                            parse_mode
                         ),
                         TraceLevel::MEDIUM,
                     );
@@ -1245,6 +1287,69 @@ impl Engine {
         self.execute_with_context(&mut ctx)
     }
 
+    /// Execute an optionally selected entry rule and return that rule's value
+    /// directly as JSON.
+    ///
+    /// Unlike the legacy [`execute`](Self::execute) API, this does not wrap the
+    /// result in the engine accumulator. It matches LinkedSpec's public parser
+    /// contract and is suitable for native embedding and primary CLI adapters.
+    pub fn execute_value(&self, input: &str, options: &ExecutionOptions) -> Result<Value, String> {
+        let mut ctx = RuntimeContext::with_parse_mode(input, options.parse_mode());
+        self.execute_value_with_context(&mut ctx, options)
+    }
+
+    /// Execute a direct rule value with explicit native trace configuration.
+    pub fn execute_value_with_trace(
+        &self,
+        input: &str,
+        options: &ExecutionOptions,
+        trace_config: TraceConfig,
+    ) -> Result<Value, String> {
+        let mut trace =
+            TraceEmitter::new(trace_config).map_err(|err| format!("trace setup failed: {err}"))?;
+        self.execute_value_with_trace_emitter(input, options, &mut trace)
+    }
+
+    /// Execute a direct rule value with a caller-owned native trace emitter.
+    pub fn execute_value_with_trace_emitter(
+        &self,
+        input: &str,
+        options: &ExecutionOptions,
+        trace: &mut TraceEmitter,
+    ) -> Result<Value, String> {
+        let scope = trace
+            .enter_scope(
+                "rust_runtime:engine:execute_value",
+                format!(
+                    "input_bytes={} input_chars={} entry_rule={} parse_mode={}",
+                    input.len(),
+                    input.chars().count(),
+                    options.entry_rule().unwrap_or("<default>"),
+                    match options.parse_mode() {
+                        Some(ParseMode::Seek) => "seek",
+                        Some(ParseMode::Consume) => "consume",
+                        None => "<compiled>",
+                    }
+                ),
+                TraceLevel::LOW,
+            )
+            .map_err(trace_write_failed)?;
+        let mut ctx = RuntimeContext::with_parse_mode(input, options.parse_mode());
+        if trace.should_emit(TraceLevel::LOW) {
+            ctx.enable_trace_events();
+        }
+        let result = self.execute_value_with_context(&mut ctx, options);
+        ctx.replay_trace_events(trace).map_err(trace_write_failed)?;
+        let exit_details = match &result {
+            Ok(value) => format!("status=ok output={value}"),
+            Err(err) => format!("status=error error={err}"),
+        };
+        trace
+            .exit_scope(scope, exit_details)
+            .map_err(trace_write_failed)?;
+        result
+    }
+
     /// Execute the top rule with explicit trace configuration.
     pub fn execute_with_trace(
         &self,
@@ -1364,6 +1469,41 @@ impl Engine {
         );
         self.execute_rule(&label, 0, ctx)?;
         Ok(RuntimeValue::Array(ctx.accumulator.clone()).to_json())
+    }
+
+    fn execute_value_with_context(
+        &self,
+        ctx: &mut RuntimeContext,
+        options: &ExecutionOptions,
+    ) -> Result<Value, String> {
+        let label = if let Some(label) = options.entry_rule() {
+            self.spec
+                .find(label)
+                .ok_or_else(|| format!("entry rule '{label}' is not defined"))?;
+            label.to_string()
+        } else {
+            self.spec
+                .top_rule()
+                .ok_or("no top rule in compiled spec")?
+                .label
+                .clone()
+        };
+        ctx.trace_decision(
+            "rust_runtime:engine:entry_rule",
+            true,
+            format!(
+                "label={label} input_bytes={} parse_mode={}",
+                ctx.input.len(),
+                match options.parse_mode() {
+                    Some(ParseMode::Seek) => "seek",
+                    Some(ParseMode::Consume) => "consume",
+                    None => "compiled",
+                }
+            ),
+            TraceLevel::LOW,
+        );
+        self.execute_rule(&label, 0, ctx)
+            .map(|value| value.to_json())
     }
 
     fn execute_generated_with_plan_context(
@@ -1845,12 +1985,13 @@ impl Engine {
             }
 
             // ── Match ──
+            let parse_mode = ctx.effective_parse_mode(rule.parse_mode);
             let match_result = if has_entry_idx && matches == 0 {
                 // Self-recursive entry: only try the specified regex slot.
                 // Build a single-pattern alternation for this slot.
                 let entry_pat = &rule.regex_patterns[entry_regex_idx];
                 let entry_alt = CompiledAlternation::compile(std::slice::from_ref(entry_pat))?;
-                match rule.parse_mode {
+                match parse_mode {
                     ParseMode::Consume => entry_alt.consume_match(&ctx.input, ctx.pos),
                     ParseMode::Seek => entry_alt.seek_match(&ctx.input, ctx.pos),
                 }
@@ -1860,7 +2001,7 @@ impl Engine {
                     m
                 })
             } else {
-                match rule.parse_mode {
+                match parse_mode {
                     ParseMode::Consume => alt.consume_match(&ctx.input, ctx.pos),
                     ParseMode::Seek => alt.seek_match(&ctx.input, ctx.pos),
                 }
@@ -1873,7 +2014,7 @@ impl Engine {
                         true,
                         format!(
                             "rule={label} regex_idx={} start={} end={} pos_before={pos_before} parse_mode={:?} entry_regex_idx={entry_regex_idx}",
-                            m.index, m.start, m.end, rule.parse_mode
+                            m.index, m.start, m.end, parse_mode
                         ),
                         TraceLevel::MEDIUM,
                     );
@@ -1884,7 +2025,7 @@ impl Engine {
                         false,
                         format!(
                             "rule={label} pos_before={pos_before} parse_mode={:?} entry_regex_idx={entry_regex_idx}",
-                            rule.parse_mode
+                            parse_mode
                         ),
                         TraceLevel::MEDIUM,
                     );
@@ -5187,6 +5328,16 @@ impl Engine {
         )
     }
 
+    fn is_hash_context_splice_arg(raw_arg: &linkedspec_core::expr::Arg) -> bool {
+        use linkedspec_core::expr::{Arg, Expr};
+
+        matches!(
+            raw_arg,
+            Arg::Positional(Expr::Call { name, .. })
+                if matches!(name.as_str(), "flat" | "flat_hash")
+        )
+    }
+
     fn push_list_context_values(target: &mut Vec<RuntimeValue>, value: &RuntimeValue) {
         match value {
             RuntimeValue::Array(items) => target.extend(items.iter().cloned()),
@@ -6704,9 +6855,12 @@ impl Engine {
                     entries.push((key, val));
                     i += 2;
                 }
-                // Also merge in any Hash args
-                for arg in args {
-                    if let RuntimeValue::Hash(h_entries) = arg {
+                // Only explicit flat/flat_hash arguments splice entries. An
+                // ordinary hash in a value slot remains one nested value.
+                for (raw_arg, arg) in raw_args.iter().zip(args.iter()) {
+                    if Self::is_hash_context_splice_arg(raw_arg)
+                        && let RuntimeValue::Hash(h_entries) = arg
+                    {
                         for (k, v) in h_entries {
                             entries.push((k.clone(), v.clone()));
                         }
@@ -7083,6 +7237,60 @@ Child::
         let result = engine.execute("pattern1 hello world").unwrap();
         let json_str = serde_json::to_string(&result).unwrap();
         let _parsed: Value = serde_json::from_str(&json_str).unwrap();
+    }
+
+    #[test]
+    fn execute_value_returns_direct_rule_value_without_legacy_wrapper() {
+        let grammar = r#"Top::
+ /x/
+ E { return("direct") }
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let engine = Engine::new(compile(&spec).unwrap());
+        assert_eq!(engine.execute("x").unwrap(), serde_json::json!(["direct"]));
+        assert_eq!(
+            engine.execute_value("x", &ExecutionOptions::new()).unwrap(),
+            serde_json::json!("direct")
+        );
+    }
+
+    #[test]
+    fn execute_value_applies_entry_rule_and_parse_mode_per_invocation() {
+        let grammar = r#"Top::
+ /x/ -> Done { return("top") }
+
+Alternate:
+ /x/ -> Done { return("alternate") }
+
+Done::
+ /x/
+"#;
+        let spec = parse_spec(grammar).unwrap();
+        validate(&spec).unwrap();
+        let engine = Engine::new(compile(&spec).unwrap());
+        let alternate_seek = ExecutionOptions::new()
+            .with_entry_rule("Alternate")
+            .with_parse_mode(ParseMode::Seek);
+        let alternate_consume = ExecutionOptions::new()
+            .with_entry_rule("Alternate")
+            .with_parse_mode(ParseMode::Consume);
+        assert_eq!(
+            engine.execute_value("prefix x", &alternate_seek).unwrap(),
+            serde_json::json!("alternate")
+        );
+        assert_eq!(
+            engine
+                .execute_value("prefix x", &alternate_consume)
+                .unwrap(),
+            Value::Null
+        );
+        assert!(
+            engine
+                .execute_value("x", &ExecutionOptions::new().with_entry_rule("Missing"))
+                .unwrap_err()
+                .contains("entry rule 'Missing' is not defined")
+        );
     }
 
     // ── Lifecycle order tests ──
@@ -8269,21 +8477,19 @@ ChildB:
     }
 
     #[test]
-    fn hash_5_4_better_hash_arm_merges_hash_args() {
-        // Distinguishing behavior of the surviving `hash` arm: it merges
-        // Hash-valued args, which the removed shadowing duplicate dropped.
-        // hash("b","2", hash("a","1")) must yield BOTH keys.
+    fn hash_constructor_only_splices_explicit_flat_hash_args() {
+        // Ordinary hash-valued pair values stay nested. Explicit flat_hash is
+        // the list-context splice operation.
         let grammar = r#"Top:: /(\w+)/
- E { return(hash("b", "2", hash("a", "1"))) }
+ E { return(array(hash("nested", hash("a", "1")), hash("b", "2", flat_hash(hash("a", "1"))))) }
 "#;
         let acc = run_5_3(grammar, "x");
-        let obj = acc.last().unwrap().as_object().cloned().unwrap_or_default();
-        assert_eq!(obj.get("b").and_then(|v| v.as_str()), Some("2"));
         assert_eq!(
-            obj.get("a").and_then(|v| v.as_str()),
-            Some("1"),
-            "the merged Hash arg must survive — proves the better hash arm won, got {:?}",
-            acc.last()
+            acc.last(),
+            Some(&serde_json::json!([
+                {"nested": {"a": "1"}},
+                {"a": "1", "b": "2"}
+            ]))
         );
     }
 

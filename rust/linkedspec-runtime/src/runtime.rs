@@ -4,7 +4,7 @@
 //! Declared variables are scoped to the rule. Accumulators hold child results.
 
 use linkedspec_core::trace::{TraceEmitter, TraceEventKind, TraceLevel, TraceResult, TraceScope};
-use linkedspec_core::types::RuntimeValue;
+use linkedspec_core::types::{ParseMode, RuntimeValue};
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq)]
 pub enum RuntimeVarKind {
@@ -20,6 +20,8 @@ pub struct RuntimeContext {
     pub input: String,
     /// Current match position in the input.
     pub pos: usize,
+    /// Optional per-execution override for every rule's compiled parse mode.
+    parse_mode_override: Option<ParseMode>,
     /// Declared scalar variables.
     scalars: std::collections::HashMap<String, RuntimeValue>,
     /// Declared array variables (accumulators).
@@ -142,6 +144,7 @@ impl RuntimeContext {
         Self {
             input: input.to_string(),
             pos: 0,
+            parse_mode_override: None,
             scalars: std::collections::HashMap::new(),
             arrays: std::collections::HashMap::new(),
             hashes: std::collections::HashMap::new(),
@@ -169,6 +172,18 @@ impl RuntimeContext {
             trace_events_enabled: false,
             trace_events: Vec::new(),
         }
+    }
+
+    /// Create a runtime context with an optional global parse-mode override.
+    pub fn with_parse_mode(input: &str, parse_mode: Option<ParseMode>) -> Self {
+        let mut context = Self::new(input);
+        context.parse_mode_override = parse_mode;
+        context
+    }
+
+    /// Return the per-execution override or the rule's compiled fallback mode.
+    pub fn effective_parse_mode(&self, fallback: ParseMode) -> ParseMode {
+        self.parse_mode_override.unwrap_or(fallback)
     }
 
     // ── Runtime trace recording ──

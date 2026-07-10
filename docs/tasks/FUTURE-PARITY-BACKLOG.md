@@ -343,17 +343,26 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.5.2.1 - add Rust CLI boundary`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.2.2`
-  Status: `active`
+  Status: `done`
   Goal: Expose native Rust entry-rule/parse-mode controls and complete primary execution/result/failure projection.
   Acceptance: The native runtime provides idiomatic reusable controls for optional entry rule and global parse
     mode; the CLI composes full-spec parse, validation, compile, and `Engine` execution through public APIs; nested
     values emit recursively canonical compact UTF-8 JSON plus one newline; compile/input/invoke failures and exits
     match the shared phase contract without backend exception leakage.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-10.** `ExecutionOptions` plus `Engine::execute_value` and traced variants expose
+    per-invocation entry-rule/global-mode selection and the direct rule value without mutating compiled state;
+    legacy `Engine::execute` retains its accumulator wrapper. Runtime matching consumes the effective override in
+    interpreted and generated-plan paths. The CLI now uses this API instead of compiled-field mutation. A nested
+    shared object exposed Rust `hash(...)` implicitly splicing every hash argument; Rust now matches the existing
+    cross-backend/book contract by preserving ordinary hash values and splicing only explicit `flat`/`flat_hash`.
+    Three focused native/hash tests and all 11 direct result cases pass; the unchanged suite advances 29 -> 41/61,
+    leaving only 20 non-quiet trace cases under `.3`. Full runtime package, formatting/build, governance, mdBook,
+    Knowledge Map, whitespace, and regenerated-cache cleanup pass. Strict Clippy remains blocked only by the same
+    pre-existing runtime/core lint backlog; no new touched-code diagnostic remains.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.2.2 - add Rust direct execution API`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.2.3`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the canonical primary CLI trace projection and exact sink behavior in Rust.
   Acceptance: Rust emits ADR `0024`'s deterministic phase records, thresholds/aliases, percent escaping, UTF-8
     byte counts, emoji, stdout/route/mirror defaults, reset/append/persistence, and failure events while keeping the
@@ -592,8 +601,8 @@ before implementation.
 | 11 | `FUTURE-PARITY-BACKLOG.1.5.1.6.3` | `done` | Perl task/book/KM/help/fixtures agree on the 61-case strict UTF-8 reference. |
 | 12 | `FUTURE-PARITY-BACKLOG.1.5.2.0` | `done` | Rust native/adapter seams are audited and implementation is split before code. |
 | 13 | `FUTURE-PARITY-BACKLOG.1.5.2.1` | `done` | Exact Rust binary arguments/help/UTF-8 loading and named resolution pass their shared cases. |
-| 14 | `FUTURE-PARITY-BACKLOG.1.5.2.2` | `active` | Add reusable native entry/mode/direct-result controls and close execution projection. |
-| 15 | `FUTURE-PARITY-BACKLOG.1.5.2.3` | `pending` | Add canonical Rust primary trace projection and sinks. |
+| 14 | `FUTURE-PARITY-BACKLOG.1.5.2.2` | `done` | Native direct-result/entry/mode execution closes all 11 result cases; Rust is 41/61. |
+| 15 | `FUTURE-PARITY-BACKLOG.1.5.2.3` | `active` | Add the remaining 20 canonical Rust primary trace cases and sinks. |
 | 16 | `FUTURE-PARITY-BACKLOG.1.5.2.4` | `pending` | Prove all 61 cases, gate Rust, and close no-drift. |
 | 17 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
 | 18 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
@@ -1031,7 +1040,7 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Perl `.1.5.1` is closed at 61 cases; Rust `.1.5.2.1` is done at 29/61 and `.1.5.2.2` is active.
+- None. Perl `.1.5.1` is closed at 61 cases; Rust `.1.5.2.2` is done at 41/61 and `.1.5.2.3` is active.
   Global CLI/capability convergence precedes Lua `.1.3`.
 
 ## Verification Log

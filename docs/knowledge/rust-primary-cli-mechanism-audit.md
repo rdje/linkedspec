@@ -10,7 +10,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [rust, cli, parser, runtime, utf8, trace, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.2.0 audits/splits the workspace. .1 lands the command boundary at 29/61; .2 is active for native controls/direct result."
+evidence: "FUTURE-PARITY-BACKLOG.1.5.2.0 audits/splits the workspace; .1 lands 29/61; .2 lands native direct execution at 41/61; .3 is active for trace."
 reverify: "sed -n '1,120p' rust/Cargo.toml; find rust -type f -path '*/src/bin/*' -print; rg -n 'parse_spec_with_user_functions|pub fn compile|pub fn validate|pub fn execute|top_rule\\(|parse_mode' rust/linkedspec-core/src rust/linkedspec-runtime/src"
 ---
 
@@ -19,10 +19,9 @@ target. The libraries already owned the substantive language pipeline: full-sour
 compilation, interpreted execution, structured `serde_json::Value` results, generated-plan execution, and rich
 backend-native trace controls/events.
 
-Two primary-command controls remain unavailable as reusable runtime options. `Engine::execute` always selects
-the first compiled rule whose `is_top` flag is true, and matching reads each `CompiledRule.parse_mode`; there is no
-optional entry-rule selection or global parse-mode override. Those controls belong in an idiomatic native execution
-seam so the CLI remains a thin adapter and host applications can request the same capability without a subprocess.
+At audit time, optional entry-rule selection and global parse-mode override were not reusable runtime options.
+`.1.5.2.2` has since added `ExecutionOptions` and `Engine::execute_value`; the CLI remains a thin adapter and host
+applications can request the same direct result and controls without a subprocess or compiled-state mutation.
 
 The initially remaining work was adapter policy, not language semantics: exact manual option parsing/help, deterministic
 named/file/inline source and input loading, strict preserved UTF-8, canonical JSON byte rendering, stable phase
@@ -35,7 +34,8 @@ help template, current-directory plus repository `specs/` resolution, deferred i
 file decoding pass all 22 help/usage cases, all three invalid-UTF-8 phase cases, and all four operational failures:
 29/61 total. The 32 residuals are mechanically isolated: 11 successful direct-value cases expose the already
 documented `Engine::execute == [reference]` accumulator wrapper, and 21 cases require ADR `0024` canonical trace.
-`.1.5.2.2` owns a reusable native direct-result/entry/mode seam; `.3` owns trace. This is not a parser-language gap.
+`.1.5.2.2` now closes the native direct-result/entry/mode seam at 41/61; `.3` owns the remaining trace. This is not
+a parser-language gap.
 
 Related facts: [[cross-backend-cli-contract-gap]], [[neutral-cli-fixture-runner]],
 [[user-observable-backend-cli-parity-contract]], [[primary-cli-strict-utf8-text-contract]],

@@ -5,7 +5,7 @@
 //! result framing. `.spec` parsing, validation, compilation, and execution stay
 //! in `linkedspec-core` and `linkedspec-runtime`.
 
-use crate::engine::Engine;
+use crate::engine::{Engine, ExecutionOptions};
 use crate::spec_parser::parse_spec_with_user_functions;
 use linkedspec_core::compiler::compile;
 use linkedspec_core::types::ParseMode;
@@ -121,17 +121,14 @@ pub fn run_with_context(arguments: Vec<OsString>, cwd: &Path, repo_root: &Path) 
     if validate(&spec).is_err() {
         return CommandOutput::operational_failure("parser compilation failed");
     }
-    let mut compiled = match compile(&spec) {
+    let compiled = match compile(&spec) {
         Ok(compiled) => compiled,
         Err(_) => return CommandOutput::operational_failure("parser compilation failed"),
     };
 
-    // This uses the public compiled model during the boundary slice. The next
-    // owned leaf replaces it with an idiomatic reusable Engine option seam.
-    if let Some(ref top_rule) = request.options.top_rule {
-        for rule in &mut compiled.rules {
-            rule.is_top = rule.label == *top_rule;
-        }
+    let mut execution_options = ExecutionOptions::new();
+    if let Some(top_rule) = request.options.top_rule.clone() {
+        execution_options = execution_options.with_entry_rule(top_rule);
     }
     if let Some(ref parse_mode) = request.options.parse_mode {
         let mode = if parse_mode == "consume" {
@@ -139,16 +136,14 @@ pub fn run_with_context(arguments: Vec<OsString>, cwd: &Path, repo_root: &Path) 
         } else {
             ParseMode::Seek
         };
-        for rule in &mut compiled.rules {
-            rule.parse_mode = mode;
-        }
+        execution_options = execution_options.with_parse_mode(mode);
     }
 
     let input = match load_input(&request.input) {
         Ok(input) => input,
         Err(()) => return CommandOutput::operational_failure("input load failed"),
     };
-    let result = match Engine::new(compiled).execute(&input) {
+    let result = match Engine::new(compiled).execute_value(&input, &execution_options) {
         Ok(result) => result,
         Err(_) => return CommandOutput::operational_failure("parser invocation failed"),
     };
