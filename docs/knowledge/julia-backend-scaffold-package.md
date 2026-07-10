@@ -17,10 +17,11 @@ reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bi
 
 ## Fact
 
-The Julia backend scaffold lives under `julia/` as package `LinkedSpecJulia`. It has package metadata, a committed
-manifest, module status helpers, CLI and corpus-runner entrypoints, README commands, and smoke tests.
+The Julia backend lives under `julia/` as package `LinkedSpecJulia`. It has package metadata, a committed manifest,
+module status helpers, CLI and corpus-runner entrypoints, README commands, smoke tests, and JSON3-backed corpus
+manifest validation.
 
-The scaffold implements no `.spec` parser, manifest IO/drift detection, runtime interpreter, or corpus execution
-yet. `julia/bin/linkedspec_julia.jl` is the variant-specific CLI, and `julia/bin/corpus_runner.jl` is the
-corpus-runner entrypoint. The corpus runner accepts `--corpus <path>` for scaffold validation and deliberately
-rejects `--execute` until a later task-tree leaf implements execution.
+The scaffold implements no `.spec` parser, runtime interpreter, or corpus execution yet.
+`julia/bin/linkedspec_julia.jl` is the variant-specific CLI, and `julia/bin/corpus_runner.jl` is the corpus-runner
+entrypoint. The corpus runner accepts `--corpus <path>` for manifest validation and deliberately rejects
+`--execute` until a later task-tree leaf implements execution.

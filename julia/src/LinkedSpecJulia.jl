@@ -4,6 +4,11 @@ export backend_name,
     backend_status,
     cli_entrypoint,
     corpus_runner_entrypoint,
+    CorpusFixture,
+    CorpusManifest,
+    CorpusManifestException,
+    CorpusValidationResult,
+    load_corpus_fixtures,
     run_cli,
     run_corpus_runner
 

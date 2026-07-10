@@ -291,18 +291,20 @@ Dart-specific LinkedSpec CLI productization is now done, and
 `DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first milestone.
 `FUTURE-PARITY-BACKLOG.1.2` creates the dedicated `JULIA-BACKEND-PARITY`
 plan. `JULIA-BACKEND-PARITY.1.1` has completed Julia toolchain/package-layout preflight, `.1.2` has created the
-minimal Julia package scaffold, and the active Julia frontier is now `.1.3` for manifest-backed corpus IO and drift
-detection. Future Julia and Lua backend plans must own their own variant-specific CLIs rather than relying on one
+minimal Julia package scaffold, and `.1.3` has added manifest-backed corpus IO and drift detection. The active Julia
+frontier is now `.2.1` for source AST/data types. Future Julia and Lua backend plans must own their own
+variant-specific CLIs rather than relying on one
 ambiguous shared command.
 
 ### Julia Backend Scaffold
 
-`JULIA-BACKEND-PARITY.1.1` and `.1.2` are complete. The local Julia toolchain is Homebrew-managed:
+`JULIA-BACKEND-PARITY.1.1` through `.1.3` are complete. The local Julia toolchain is Homebrew-managed:
 `/opt/homebrew/bin/julia` reports Julia `1.12.6`, and the official Julia downloads page lists `v1.12.6` as the
 current stable release. `Pkg` and `Test` work when Julia has a writable depot; under the managed harness, commands
 can set `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot` to avoid writing precompile artifacts into
-`~/.julia`. Global `JuliaFormatter` and `JET` packages are not installed today, so formatter/linter commands are
-optional until a scaffold or verification leaf commits them as dev dependencies.
+`~/.julia`. The Julia package now depends on `JSON3` for manifest and expected-JSON parsing. Global
+`JuliaFormatter` and `JET` packages are not installed today, so formatter/linter commands are optional until a
+scaffold or verification leaf commits them as dev dependencies.
 
 The current Julia package scaffold is:
 
@@ -330,10 +332,11 @@ julia --project=julia julia/bin/linkedspec_julia.jl corpus --corpus rust/linkeds
 julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus
 ```
 
-The `.1.2` scaffold deliberately implements only package loading, status/help output, command routing, and a
-scaffold-only corpus runner. `--execute` still reports not implemented. The next Julia frontier is
-`JULIA-BACKEND-PARITY.1.3`, which adds manifest-backed corpus IO and drift detection before parser/runtime
-semantics. Future leaves own `src/spec/`, `src/action/`, `src/compiler/`, and `src/runtime/`.
+The corpus commands validate `manifest.json`, case-count/name shape, missing/stale fixture directories, required
+`input.spec` / `input.txt` / `expected.json` files, and expected JSON syntax over the checked-in 99-fixture corpus.
+`--execute` still reports not implemented. The next Julia frontier is `JULIA-BACKEND-PARITY.2.1`, which defines
+source AST/data types before parsing `.spec` text. Future leaves own `src/spec/`, `src/action/`, `src/compiler/`,
+and `src/runtime/`.
 
 ### Dart Backend Commands
 

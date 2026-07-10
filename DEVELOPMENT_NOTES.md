@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.1.3 — Julia corpus manifest IO):
+  Julia now has manifest-backed corpus IO before parser/runtime semantics. `load_corpus_fixtures(path)` validates
+  manifest format/count/names, duplicate names, missing/stale fixture directories, required fixture files, and
+  expected JSON syntax over the checked-in 99-fixture corpus. The package now has a committed `JSON3` dependency for
+  manifest/expected JSON parsing. `julia/bin/linkedspec_julia.jl corpus` and `julia/bin/corpus_runner.jl --corpus`
+  report the validated fixture count; `--execute` remains rejected. Next leaf is `.2.1` for source AST/data types.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.1.2 — Julia package scaffold):
   The `julia/` backend scaffold now exists as package `LinkedSpecJulia` with `Project.toml`, committed
   `Manifest.toml`, module status helpers, CLI/corpus modules, `bin/linkedspec_julia.jl`, `bin/corpus_runner.jl`,

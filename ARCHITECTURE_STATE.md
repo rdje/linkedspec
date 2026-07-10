@@ -5,13 +5,18 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.1.3` adds Julia corpus manifest IO.
+  `julia/src/corpus/CorpusManifest.jl` now uses JSON3 to parse `manifest.json` and expected JSON, validates format
+  `1`, case count, case names, duplicates, missing/stale fixture directories, required fixture files, and expected
+  JSON syntax over the checked-in 99-fixture corpus. The Julia CLI/corpus runner report the validated fixture count
+  in non-execute mode, and `--execute` still returns not implemented. The `.1` foundation container is closed; the
+  active frontier is `JULIA-BACKEND-PARITY.2.1` for source AST/data types.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.1.2` creates the minimal Julia backend package scaffold.
   `julia/` now contains `Project.toml`, committed `Manifest.toml`, `src/LinkedSpecJulia.jl`, CLI/corpus modules,
   `bin/linkedspec_julia.jl`, `bin/corpus_runner.jl`, README commands, and a Julia `Test` smoke suite.
   `Pkg.instantiate()`, `Pkg.test()`, Julia CLI help/status, and corpus-runner scaffold commands pass with
-  `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot`. The scaffold intentionally has no `.spec` parser,
-  manifest IO, runtime interpreter, or corpus execution semantics yet; the active frontier is
-  `JULIA-BACKEND-PARITY.1.3` for manifest-backed corpus IO and drift detection.
+  `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot`. At that leaf the scaffold intentionally had no `.spec`
+  parser, manifest IO, runtime interpreter, or corpus execution semantics; manifest IO has since landed in `.1.3`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.1.1` completes Julia toolchain/package-layout preflight.
   The local backend toolchain is Homebrew-managed Julia 1.12.6 at `/opt/homebrew/bin/julia`, matching the official
   current stable release. `Pkg` and `Test` are usable with a writable Julia depot; the managed harness should set

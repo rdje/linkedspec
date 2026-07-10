@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.1.3 — add Julia corpus manifest IO
+
+**Scope:** Julia corpus manifest IO, JSON dependency lock, corpus-runner validation behavior, tests, README,
+task-tree frontier update, roadmap/task-tree index alignment, mdBook status/handoff text, Knowledge Map,
+architecture snapshot, live docs, and resume pointer.
+
+**Change:** Added JSON3-backed corpus manifest loading in `julia/src/corpus/CorpusManifest.jl`. Julia now validates
+the checked-in corpus directory, manifest format/count/names, duplicate names, missing/stale fixture directories,
+required `input.spec` / `input.txt` / `expected.json` files, and expected JSON syntax. Non-execute corpus commands
+report format `1` and 99 fixtures. `--execute` remains deliberately unavailable until parser/runtime semantics
+exist.
+
+**Validation:** `Pkg.instantiate()`, `Pkg.test()` (36 tests), Julia-specific corpus validation commands, and
+`--execute` rejection pass with `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot`. Docs/governance validation
+covers mdBook, memory architecture, task-tree metadata, Knowledge Map, doctrine, and `git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.1.2 — scaffold Julia package
 
 **Scope:** Minimal Julia backend package scaffold, CLI/corpus-runner stubs, smoke tests, README, task-tree frontier

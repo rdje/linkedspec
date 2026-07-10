@@ -18,22 +18,22 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.1.2` — `julia/` now has the minimal `LinkedSpecJulia` package
-  scaffold: `Project.toml`, committed `Manifest.toml`, module status helpers, CLI/corpus stubs, README commands,
-  and smoke tests. No parser/runtime/corpus execution semantics yet.
-- prior_leaf: `JULIA-BACKEND-PARITY.1.1` — Homebrew Julia 1.12.6 matches the official current stable release, and
-  `Pkg`/`Test` work with a writable depot.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.1.3` — Julia corpus IO validates the 99-fixture manifest, fixture
+  drift, required files, and expected JSON through JSON3. `--execute` remains rejected; no parser/runtime semantics
+  yet.
+- prior_leaf: `JULIA-BACKEND-PARITY.1.2` — created the minimal `LinkedSpecJulia` package scaffold, CLI/corpus
+  stubs, committed manifest, README commands, and smoke tests.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.1.2 - scaffold Julia package`; previous committed HEAD is
-  `0a780be3 JULIA-BACKEND-PARITY.1.1 - verify Julia toolchain preflight`.
+  `JULIA-BACKEND-PARITY.1.3 - add Julia corpus manifest IO`; previous committed HEAD is
+  `095437f4 JULIA-BACKEND-PARITY.1.2 - scaffold Julia package`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; current frontier after the current commit is `.1.3`.
-- next_action: resume PNT at `JULIA-BACKEND-PARITY.1.3` to add manifest-backed corpus directory IO and drift
-  detection in Julia before any `.spec` parser/runtime semantics.
+- active_work_unit: `JULIA-BACKEND-PARITY`; current frontier after the current commit is `.2.1`.
+- next_action: resume PNT at `JULIA-BACKEND-PARITY.2.1` to define Julia AST/data types for `.spec` files before
+  parsing text or executing corpus fixtures.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
 - latest_bootstrap_read: 2026-07-10 read README, memory architecture, session bootstrap, COMMIT, task-tree index,
@@ -46,5 +46,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.1.2` commit; do not pivot unless the repo
+- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.1.3` commit; do not pivot unless the repo
   is handoff-ready.
