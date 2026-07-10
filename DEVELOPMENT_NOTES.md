@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.3.2 — Julia ActionIR contract resolver):
+  Julia now resolves typed ActionIR nodes against the current canonical helper/control contract table before
+  compiled-state or runtime work. `julia/src/action/ActionContracts.jl` exposes
+  `resolve_action_block_contracts(...)`, `resolve_action_statement_contracts(...)`,
+  `resolve_action_expression_contracts(...)`, `canonical_action_helper_name(...)`, and
+  `is_known_action_ir_call_name(...)`. The resolver walks calls, receiver methods, structural assignments,
+  structured controls, nested arguments, block values, shape literals, and access expressions, recording
+  JSON-shaped contract/diagnostic records. Unknown helper-looking calls produce generic `unknown_helper`
+  diagnostics, and `raw_perl` fallback nodes remain explicit diagnostics. The validator now shares the resolver's
+  current helper-name predicate for user-function collisions. Function-registry-aware exact-arity user-call
+  classification is still owned by `.3.3`.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.3.1 — Julia ActionIR AST parser):
   Julia now parses helper/action source into typed ActionIR nodes before helper-contract resolution or runtime
   execution. `julia/src/action/ActionAst.jl` defines the neutral JSON-shaped node model for action blocks,

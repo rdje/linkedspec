@@ -2,15 +2,17 @@
 
 This directory is the repository-owned Julia backend scaffold. The current status is package and command
 surface, manifest-backed corpus validation, source AST/data types, core `.spec` source parsing, frontend source
-validation, spec-shaped user-function shell projection, and typed helper/action AST parsing: no ActionIR contract
-resolver, runtime interpreter, or corpus execution semantics are implemented yet.
+validation, spec-shaped user-function shell projection, typed helper/action AST parsing, and canonical ActionIR
+contract resolution: no user-function registry, runtime interpreter, or corpus execution semantics are implemented
+yet.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
 was added by `JULIA-BACKEND-PARITY.2.2`. Frontend validation and strict syntax behavior were added by
 `JULIA-BACKEND-PARITY.2.3`. Function-definition shell projection was added by `JULIA-BACKEND-PARITY.2.4`.
-Typed helper/action AST parsing was added by `JULIA-BACKEND-PARITY.3.1`. The active next boundary is
-`JULIA-BACKEND-PARITY.3.2` for canonical helper-contract resolution and diagnostics.
+Typed helper/action AST parsing was added by `JULIA-BACKEND-PARITY.3.1`, and ActionIR contract resolution was
+added by `JULIA-BACKEND-PARITY.3.2`. The active next boundary is `JULIA-BACKEND-PARITY.3.3` for the
+user-function registry and staged function-body parse-job records.
 
 ## Commands
 
@@ -59,5 +61,9 @@ exposes `project_user_function_definition_asts(...)` and
 rule-only and does not raw-scan `fn` shells. `src/action/ActionAst.jl` and `src/action/ActionParser.jl` expose
 `parse_action_block(...)`, `parse_action_statement(...)`, and `parse_action_expression(...)` for typed ActionIR
 blocks, statements, calls, literals, access paths, shape literals, assignments, receiver chains, trailing blocks,
-block values, structured controls, and raw fallback nodes with JSON projection. Later leaves own helper-contract
-resolution, compiled state, runtime interpretation, staged functions, diagnostics, tracing, and corpus execution.
+block values, structured controls, and raw fallback nodes with JSON projection. `src/action/ActionContracts.jl`
+exposes `resolve_action_block_contracts(...)`, `resolve_action_statement_contracts(...)`,
+`resolve_action_expression_contracts(...)`, `canonical_action_helper_name(...)`, and
+`is_known_action_ir_call_name(...)` for canonical helper/control contract records and generic
+unknown-helper/raw diagnostics over typed ActionIR nodes. Later leaves own the user-function registry, compiled
+state, runtime interpretation, staged functions, diagnostics, tracing, and corpus execution.

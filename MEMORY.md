@@ -18,23 +18,23 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.3.1` — Julia now parses helper/action source into typed ActionIR
-  blocks, value-drop statements, calls, literals, variables/access, shape literals, assignments, receiver chains,
-  trailing blocks, block values, structured controls, and raw fallback nodes.
-- prior_leaf: `JULIA-BACKEND-PARITY.2.4` — Julia consumes spec-shaped `function_definition` /
-  `function_definition_error` nodes, validates staged sidecars, strips function spans, and parses the remaining
-  rule source without a raw Julia `fn` scanner.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.3.2` — Julia resolves typed ActionIR nodes to canonical
+  helper/control contracts and diagnostics, shares the current helper-name table with validation, and keeps unknown
+  helper-looking calls on the generic `unknown_helper` path.
+- prior_leaf: `JULIA-BACKEND-PARITY.3.1` — Julia parses helper/action source into typed ActionIR blocks,
+  value-drop statements, calls, literals, variables/access, shape literals, assignments, receiver chains, trailing
+  blocks, block values, structured controls, and raw fallback nodes.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.3.1 - add Julia ActionIR AST parser`; previous committed HEAD is
-  `77e59050 JULIA-BACKEND-PARITY.2.4 - project Julia function-definition shells`.
+  `JULIA-BACKEND-PARITY.3.2 - add Julia ActionIR contract resolver`; previous committed HEAD is
+  `a21fab6c JULIA-BACKEND-PARITY.3.1 - add Julia ActionIR AST parser`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; current frontier after the current commit is `.3.2`.
-- next_action: resume PNT at `JULIA-BACKEND-PARITY.3.2` to map typed helper/action AST nodes to canonical helper
-  contracts and diagnostics before user-function registry, compilation, or runtime behavior.
+- active_work_unit: `JULIA-BACKEND-PARITY`; current frontier after the current commit is `.3.3`.
+- next_action: resume PNT at `JULIA-BACKEND-PARITY.3.3` to build the Julia user-function registry and staged
+  function-body parse-job records, then thread exact-arity user-call resolution before helper fallback.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
 - latest_bootstrap_read: 2026-07-10 read README, memory architecture, session bootstrap, COMMIT, task-tree index,
@@ -47,5 +47,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.3.1` commit; do not pivot unless the repo
+- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.3.2` commit; do not pivot unless the repo
   is handoff-ready.

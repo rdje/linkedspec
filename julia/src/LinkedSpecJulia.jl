@@ -15,6 +15,8 @@ export backend_name,
     ActionBlockValueExpr,
     ActionBooleanLiteralExpr,
     ActionCallExpr,
+    ActionContractDiagnostic,
+    ActionContractResolution,
     ActionControlCaseExpr,
     ActionControlDefaultExpr,
     ActionControlElseExpr,
@@ -42,6 +44,7 @@ export backend_name,
     ActionPositionalArgument,
     ActionRawExpr,
     ActionRegexLiteralExpr,
+    ActionResolvedContract,
     ActionSourceSpan,
     ActionStatement,
     ActionStringLiteralExpr,
@@ -80,15 +83,21 @@ export backend_name,
     UserFunctionDefinitionException,
     UserFunctionDefinitionProjection,
     and_bounded_rule_mode,
+    canonical_action_helper_name,
+    canonicalized,
     default_rule_mode,
     definition_nodes_from_user_function_definition_output,
     find_rule,
     from_json,
     is_and,
+    is_known_action_ir_call_name,
     is_repetition,
     or_bounded_rule_mode,
     rep_max,
     rep_min,
+    resolve_action_block_contracts,
+    resolve_action_expression_contracts,
+    resolve_action_statement_contracts,
     run_cli,
     run_corpus_runner,
     top_rule,
@@ -100,12 +109,13 @@ const PACKAGE_NAME = "LinkedSpecJulia"
 const PACKAGE_VERSION = v"0.1.0"
 const CLI_ENTRYPOINT = "julia/bin/linkedspec_julia.jl"
 const CORPUS_RUNNER_ENTRYPOINT = "julia/bin/corpus_runner.jl"
-const PARITY_STATUS = "action-ast-parser"
+const PARITY_STATUS = "action-contracts"
 
 include("corpus/CorpusManifest.jl")
 include("spec/Ast.jl")
 include("action/ActionAst.jl")
 include("action/ActionParser.jl")
+include("action/ActionContracts.jl")
 include("spec/Parser.jl")
 include("spec/UserFunctionDefinitionShell.jl")
 include("spec/Validator.jl")

@@ -5,14 +5,24 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.3.2` adds Julia ActionIR contract resolution.
+  `julia/src/action/ActionContracts.jl` exposes `resolve_action_block_contracts(...)`,
+  `resolve_action_statement_contracts(...)`, `resolve_action_expression_contracts(...)`,
+  `canonical_action_helper_name(...)`, and `is_known_action_ir_call_name(...)`. The resolver walks typed
+  ActionIR calls, receiver methods, structural assignments, structured controls, nested arguments, block values,
+  shape literals, and access expressions, recording JSON-shaped contract and diagnostic records. Unknown
+  helper-looking calls diagnose generically as `unknown_helper`, and `raw_perl` fallback nodes remain explicit
+  diagnostics. `julia/src/spec/Validator.jl` now shares the resolver's current helper/control name predicate for
+  user-function collision checks. Function-registry-aware exact-arity user-call classification, compiled state,
+  and runtime execution remain later Julia leaves. The next frontier is `JULIA-BACKEND-PARITY.3.3`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.3.1` adds Julia typed ActionIR parsing.
   `julia/src/action/ActionAst.jl` defines action blocks, value-drop statements, call/argument nodes, literals,
   variables, indexed/nested access, shape literals, assignments, receiver chains, trailing block payloads, block
   values, structured controls, and raw fallback nodes with JSON projection. `julia/src/action/ActionParser.jl`
   exposes `parse_action_block(...)`, `parse_action_statement(...)`, and `parse_action_expression(...)`. The parser
-  is structural only; canonical helper-contract resolution, compilation, runtime execution, staged body dispatch,
-  diagnostics/trace, and corpus execution remain later Julia leaves. The next frontier is
-  `JULIA-BACKEND-PARITY.3.2`.
+  is structural only; canonical helper-contract resolution has since landed in `JULIA-BACKEND-PARITY.3.2`, while
+  compilation, runtime execution, staged body dispatch, diagnostics/trace, and corpus execution remain later Julia
+  leaves.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.2.4` adds Julia function-definition shell projection.
   `julia/src/spec/UserFunctionDefinitionShell.jl` consumes `function_definition` / `function_definition_error`
   nodes shaped by `specs/user_function_definition.spec`, validates source/body spans and staged sidecars,

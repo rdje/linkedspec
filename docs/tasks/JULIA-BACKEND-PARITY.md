@@ -151,15 +151,18 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.3.1 - add Julia ActionIR AST parser`
 
 - ID: `JULIA-BACKEND-PARITY.3.2`
-  Status: `pending`
+  Status: `done`
   Goal: Map helper/action AST to canonical helper contracts and diagnostics.
   Acceptance: Current helper/control families resolve through typed nodes; non-current helper-looking calls
     diagnose generically instead of falling back to host-language calls or Julia spellings.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `Pkg.test()` covers 39 Action contract resolver assertions over nested typed helper
+    calls, receiver methods, structural assignment contracts, generic unknown-helper/raw diagnostics, canonical
+    aliasing, and validator sharing of the current helper/control name table; total Julia tests pass with 392
+    assertions.
+  Commit: `JULIA-BACKEND-PARITY.3.2 - add Julia ActionIR contract resolver`
 
 - ID: `JULIA-BACKEND-PARITY.3.3`
-  Status: `pending`
+  Status: `active`
   Goal: Build the function registry and staged function-body parse-job records.
   Acceptance: Function definitions preserve params, arity, source/body spans, `body_payload`, `body_parse_job`, and
     stitched `body_ast`, with exact-arity resolution before helper fallback.
@@ -320,7 +323,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.3.2` | `pending` | Resolve typed helper/action AST nodes to canonical helper contracts and diagnostics before registry/compiled-state work. |
+| 1 | `JULIA-BACKEND-PARITY.3.3` | `active` | Build the function registry and staged function-body parse-job records now that typed ActionIR nodes resolve to canonical helper/control contracts. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -353,6 +356,7 @@ julia/
   src/corpus/CorpusManifest.jl
   src/action/ActionAst.jl
   src/action/ActionParser.jl
+  src/action/ActionContracts.jl
   bin/linkedspec_julia.jl
   bin/corpus_runner.jl
   test/runtests.jl
@@ -482,7 +486,49 @@ ActionIR parser evidence recorded on 2026-07-10:
   compilation, runtime behavior, staged parser execution, diagnostics/trace, and corpus execution remain later
   leaves.
 
-## Acceptance Checklist
+## `JULIA-BACKEND-PARITY.3.2` ActionIR Contract Resolver Result
+
+ActionIR contract resolver evidence recorded on 2026-07-10:
+
+- `julia/src/action/ActionContracts.jl` adds JSON-shaped `ActionResolvedContract`,
+  `ActionContractDiagnostic`, and `ActionContractResolution` records plus public
+  `resolve_action_block_contracts(...)`, `resolve_action_statement_contracts(...)`,
+  `resolve_action_expression_contracts(...)`, `canonical_action_helper_name(...)`, and
+  `is_known_action_ir_call_name(...)`.
+- The resolver walks typed calls, receiver methods, structural assignment nodes, structured controls, nested
+  arguments, block values, shape literals, indexed/nested access expressions, and raw fallback expressions.
+- Current aliases canonicalize through the same contract table as Dart: numeric aliases and symbols resolve to
+  `num_*`; `when`/`i` resolve to `if`; `elif` resolves to `elseif`; `otherwise` resolves to `else`; `=` resolves
+  to `set`.
+- Helper-looking calls outside the current canonical contract table produce generic `unknown_helper` diagnostics,
+  and `raw_perl` fallback nodes produce explicit `raw_perl` diagnostics. Julia does not carry a non-current helper
+  spelling table or a host-language fallback call path.
+- `julia/src/spec/Validator.jl` now shares `is_known_action_ir_call_name(...)` for user-function collision checks
+  instead of maintaining a second helper/control name list.
+- The package parity status is now `action-contracts`. Function-registry-aware exact-arity user-call
+  classification, compiled state, runtime behavior, staged parser execution, diagnostics/trace, and corpus
+  execution remain later leaves.
+
+## `JULIA-BACKEND-PARITY.3.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `JULIA-BACKEND-PARITY.3.2` acceptance required Julia typed ActionIR nodes to map to
+  canonical helper/control contracts and diagnostics before registry/compiled-state work; Dart parity target
+  inspected in `dart/lib/src/action/action_contracts.dart`, `dart/test/action_contracts_test.dart`, and
+  `docs/knowledge/dart-actionir-contract-resolver.md`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — After `.3.1`, Julia could parse ActionIR structurally but had no
+  contract-resolution layer, no JSON-shaped contract/diagnostic records, and a duplicated validator helper-name
+  table in `julia/src/spec/Validator.jl`.
+- [x] **FIX** — Added `julia/src/action/ActionContracts.jl`, exported resolver APIs from
+  `julia/src/LinkedSpecJulia.jl`, advanced package status to `action-contracts`, and changed
+  `julia/src/spec/Validator.jl` to share `is_known_action_ir_call_name(...)`.
+- [x] **ADDRESSED (verified)** — `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia
+  --project=julia -e 'using Pkg; Pkg.test()'` passes with 39 Action contract resolver assertions.
+- [x] **NO REGRESSION** — The same `Pkg.test()` run passes the existing scaffold, Action AST parser, source parser,
+  validation, function-shell projection, corpus IO, and source AST JSON contract tests for 392 total assertions.
+- [x] **LOCKSTEP** — README, task tree, live docs, roadmaps, mdBook handoff/status pages, Knowledge Map fact card,
+  architecture snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` updated for the `.3.2` boundary.
+
+## `JULIA-BACKEND-PARITY.3.1` Acceptance Checklist
 
 - [x] **REPRODUCE / ISSUE** — `JULIA-BACKEND-PARITY.3.1` acceptance required Julia helper/action source to become
   typed AST nodes before contract resolution; Dart parity target inspected in `dart/lib/src/action/action_ast.dart`,
@@ -531,6 +577,9 @@ ActionIR parser evidence recorded on 2026-07-10:
 - `2026-07-10`: `.3.1` follows the Dart ActionIR parser boundary. Julia parses helper/action text into typed
   structural nodes and preserves unsupported expressions as `raw_perl`; helper-contract resolution, registry
   resolution, compilation, and execution are deliberately deferred to later leaves.
+- `2026-07-10`: `.3.2` follows the Dart ActionIR contract resolver boundary without importing Dart runtime
+  behavior. Julia records current canonical helper/control contracts and generic diagnostics over typed ActionIR
+  nodes, and function-registry-aware user-call classification remains deferred to `.3.3`.
 
 ## Open Questions
 
@@ -541,8 +590,8 @@ ActionIR parser evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.3.2`. Typed helper/action AST parsing is in place; canonical helper-contract resolution and
-  diagnostics are the next owned boundary.
+- None for `.3.3`. Typed helper/action AST parsing and canonical helper/control contract resolution are in place;
+  the user-function registry and staged function-body parse-job records are the next owned boundary.
 
 ## Verification Log
 
@@ -557,6 +606,7 @@ ActionIR parser evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.2.3` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia source validation tests cover Dart parity validator cases, all 21 checked-in specs, and rule-only corpus specs; total Julia tests pass. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.2.4` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia function-shell projection tests cover spec-shaped nodes, staged sidecar validation, stripped source parsing, and output-shape normalization; total Julia tests pass. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.3.1` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia Action AST parser tests cover typed structural parsing for calls, literals, access, shapes, assignments, receiver chains, trailing blocks, block values, controls, value-drop statements, and raw fallback; total Julia tests pass with 353 assertions. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.3.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia Action contract resolver tests cover canonical helper/control contracts, aliases, structural assignment contracts, receiver methods, generic unknown-helper/raw diagnostics, and validation sharing of the current helper table; total Julia tests pass with 392 assertions. |
 
 ## Commit Log
 
@@ -571,9 +621,15 @@ ActionIR parser evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.2.3` | `JULIA-BACKEND-PARITY.2.3 - add Julia frontend validation` | Source AST validation and strict-syntax checks; function-shell projection advances to `.2.4`. |
 | `JULIA-BACKEND-PARITY.2.4` | `JULIA-BACKEND-PARITY.2.4 - project Julia function-definition shells` | Spec-defined function-shell AST projection; frontend container closes and ActionIR parsing advances to `.3.1`. |
 | `JULIA-BACKEND-PARITY.3.1` | `JULIA-BACKEND-PARITY.3.1 - add Julia ActionIR AST parser` | Typed helper/action AST parser; contract resolution advances to `.3.2`. |
+| `JULIA-BACKEND-PARITY.3.2` | `JULIA-BACKEND-PARITY.3.2 - add Julia ActionIR contract resolver` | Current helper/control contract resolution; user-function registry advances to `.3.3`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.3.2` ActionIR contract resolver. `julia/src/action/ActionContracts.jl` now resolves
+  typed ActionIR calls, receiver methods, structural assignments, controls, nested arguments, block values, shapes,
+  access expressions, and raw fallback nodes into canonical contract/diagnostic records. Validation shares the
+  current helper/control name predicate. `Pkg.test()` passes with 392 total assertions; `.3.3` owns the
+  user-function registry and staged function-body parse-job records.
 - `2026-07-10`: Completed `.3.1` ActionIR AST parser. `julia/src/action/ActionAst.jl` and
   `julia/src/action/ActionParser.jl` now parse helper/action source into typed blocks, statements, calls, literals,
   access paths, shape literals, assignments, receiver chains, trailing blocks, block values, structured controls,

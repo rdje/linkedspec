@@ -25,9 +25,10 @@ positional/keyword arguments, literals, variables, indexed/nested access, array/
 scalar/array/hash/nested assignments, receiver fluent chains, helper/receiver trailing block arguments, attached
 control forms, switch/case/default branches, and unsupported `raw_perl` fallback expressions.
 
-This is a structural parsing boundary only. Julia does not yet resolve helper contracts, build the user-function
-registry over these nodes, compile parsed specs, execute helper semantics, or run corpus fixtures in `--execute`
-mode. Those concerns are owned by later `JULIA-BACKEND-PARITY.3.x` / `.4.x` leaves.
+This was a structural parsing boundary only at `.3.1`. Julia helper-contract resolution has since landed in
+`JULIA-BACKEND-PARITY.3.2`; the user-function registry over these nodes, parsed-spec compilation, helper runtime
+semantics, and corpus fixture execution remain later `JULIA-BACKEND-PARITY.3.x` / `.4.x` leaves.
 
 Related facts: [[julia-user-function-definition-projection]], [[julia-frontend-validation]],
-[[julia-core-spec-parser]], [[dart-actionir-ast-parser]], [[text-to-ast-backend-doctrine]].
+[[julia-core-spec-parser]], [[julia-actionir-contract-resolver]], [[dart-actionir-ast-parser]],
+[[text-to-ast-backend-doctrine]].

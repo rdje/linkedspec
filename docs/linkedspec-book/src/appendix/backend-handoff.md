@@ -358,8 +358,12 @@ normalizes `functions.<index>.body_source` parse-job paths, and strips function 
 `julia/src/action/ActionParser.jl` expose `parse_action_block(...)`, `parse_action_statement(...)`, and
 `parse_action_expression(...)` for typed helper/action structures: blocks, value-drop statements, calls, literals,
 variables, direct/nested access, shape literals, assignments, receiver chains, trailing block arguments, block
-values, structured controls, and raw fallback nodes. Future leaves own helper-contract resolution, compiled state,
-runtime interpretation, staged parser execution, diagnostics/trace, and corpus execution.
+values, structured controls, and raw fallback nodes. `julia/src/action/ActionContracts.jl` exposes
+`resolve_action_block_contracts(...)`, `resolve_action_statement_contracts(...)`,
+`resolve_action_expression_contracts(...)`, `canonical_action_helper_name(...)`, and
+`is_known_action_ir_call_name(...)` for canonical helper/control contract records and generic
+unknown-helper/raw diagnostics over those typed nodes. Future leaves own the user-function registry, compiled
+state, runtime interpretation, staged parser execution, diagnostics/trace, and corpus execution.
 
 ### Dart Backend Commands
 

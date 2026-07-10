@@ -1,6 +1,27 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.3.2 — add Julia ActionIR contract resolver
+
+**Scope:** Julia ActionIR contract-resolution records, canonical helper-name table, typed-node resolver traversal,
+validator helper-name sharing, package exports/status, focused resolver tests, README, task-tree frontier update,
+roadmap/task-tree index alignment, mdBook status/handoff text, Knowledge Map, architecture snapshot, live docs,
+and resume pointer.
+
+**Change:** Added `julia/src/action/ActionContracts.jl` with `resolve_action_block_contracts(...)`,
+`resolve_action_statement_contracts(...)`, `resolve_action_expression_contracts(...)`,
+`canonical_action_helper_name(...)`, and `is_known_action_ir_call_name(...)`. The resolver records current
+canonical helper/control contracts through typed ActionIR calls, receiver methods, structural assignments,
+structured controls, nested arguments, block values, shape literals, and access expressions. Unknown
+helper-looking calls diagnose as generic `unknown_helper`, and raw fallback nodes diagnose as `raw_perl`; there is
+no table of non-current helper spellings or Julia-host fallback call path. `validate_spec(...)` now shares the
+same current helper/control name predicate for user-function collision checks. The Julia package status now reports
+`action-contracts`.
+
+**Validation:** `Pkg.test()` passes with 392 tests, including 39 Action contract resolver assertions. Commit-time
+docs/governance validation covers mdBook, memory architecture, task-tree metadata, Knowledge Map, doctrine, and
+`git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.3.1 — add Julia ActionIR AST parser
 
 **Scope:** Julia helper/action AST data types, typed action parser, package exports/status, focused parser tests,

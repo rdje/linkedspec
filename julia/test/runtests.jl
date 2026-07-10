@@ -107,6 +107,20 @@ function _function_definition(name, params; arity = length(params))
     )
 end
 
+function _canonical_names(resolution::ActionContractResolution)
+    return [contract.canonical_name for contract in resolution.contracts]
+end
+
+function _action_contract(resolution::ActionContractResolution, source_name::AbstractString)
+    matches = [contract for contract in resolution.contracts if contract.source_name == source_name]
+    @test length(matches) == 1
+    return only(matches)
+end
+
+function _diagnostic_codes(resolution::ActionContractResolution)
+    return [diagnostic.code for diagnostic in resolution.diagnostics]
+end
+
 function _definition_node(source, name, params, body_source)
     source_start = _find_offset(source, "fn $name")
     body_start = _find_offset(source, body_source; start = source_start)
@@ -216,7 +230,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "action-ast-parser"
+    @test status.parity == "action-contracts"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -226,7 +240,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: action-ast-parser", String(take!(status_output)))
+    @test occursin("parity: action-contracts", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -370,6 +384,63 @@ end
     @test raw isa ActionRawExpr
     @test raw.reason == "unsupported_expression"
     @test to_json(raw)["kind"] == "raw_perl"
+end
+
+@testset "Action contract resolver" begin
+    block = parse_action_block(
+        "set(out, +(1, 2));\n" *
+        "if(gt(out, 0)) { return(cat(\"ok\", out)) }\n" *
+        "\" x \".trim().with() { return(value) }",
+    )
+    resolution = resolve_action_block_contracts(block)
+
+    @test resolution.ok
+    @test all(name -> name in _canonical_names(resolution), ["set", "num_add", "if", "num_gt"])
+    @test all(name -> name in _canonical_names(resolution), ["return", "cat", "trim", "with"])
+
+    add_contract = _action_contract(resolution, "+")
+    @test add_contract.canonical_name == "num_add"
+    @test add_contract.family == "numeric"
+    @test canonicalized(add_contract)
+
+    gt_contract = _action_contract(resolution, "gt")
+    @test gt_contract.canonical_name == "num_gt"
+    @test gt_contract.positional_arg_count == 2
+
+    assignments = resolve_action_block_contracts(parse_action_block(
+        "name = \"ok\"; items += name; meta[name] = [name]; " *
+        "payload[\"children\"][0][\"name\"] = name",
+    ))
+    @test assignments.ok
+    @test _action_contract(assignments, "=").canonical_name == "set"
+    @test _action_contract(assignments, "+=").canonical_name == "push"
+    @test _action_contract(assignments, "[]=").canonical_name == "set_key"
+    @test _action_contract(assignments, "nested_access=").canonical_name == "nested_access_assignment"
+
+    unknown = resolve_action_block_contracts(parse_action_block("unknown_helper(value); @invalid"))
+    @test !unknown.ok
+    @test _diagnostic_codes(unknown) == ["unknown_helper", "raw_perl"]
+    @test unknown.diagnostics[1].helper_name == "unknown_helper"
+    @test occursin("canonical ActionIR helper contract", unknown.diagnostics[1].message)
+
+    @test is_known_action_ir_call_name("cat")
+    @test is_known_action_ir_call_name("gt")
+    @test is_known_action_ir_call_name("push_back")
+    @test is_known_action_ir_call_name("sorted_keys")
+    @test is_known_action_ir_call_name("save_cursor")
+    @test is_known_action_ir_call_name("restore_cursor")
+    @test is_known_action_ir_call_name("rewind_match_start")
+    @test is_known_action_ir_call_name("rewind_entry_start")
+    @test is_known_action_ir_call_name("entry_end_line")
+    @test is_known_action_ir_call_name("match_end_line")
+    @test is_known_action_ir_call_name("capture_until_boundary")
+    @test !is_known_action_ir_call_name("BACKTRACK")
+    @test !is_known_action_ir_call_name("IBACKTRACK")
+    @test !is_known_action_ir_call_name("mystery_helper")
+    @test canonical_action_helper_name(">=") == "num_ge"
+
+    collision = _spec_with_functions([_function_definition("cat", ["value"])])
+    @test _throws_validation_message(() -> validate_spec(collision), "built-in helper/control name")
 end
 
 @testset "Spec parser" begin
