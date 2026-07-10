@@ -100,6 +100,8 @@ mutable struct _RuntimeExecutionContext
     hashes::Dict{String,Dict{String,Any}}
     cursor_stack::Vector{Int}
     active_rule_entries::Set{Tuple{String,Int,Int}}
+    active_user_functions::Vector{String}
+    user_function_body_cache::Dict{Int,ActionBlock}
     lifecycle_events::Vector{RuntimeLifecycleEvent}
     top_rule::String
     trace::Union{Nothing,LinkedSpecTraceEmitter}
@@ -121,6 +123,8 @@ function _RuntimeExecutionContext(
         Dict{String,Dict{String,Any}}(),
         Int[],
         Set{Tuple{String,Int,Int}}(),
+        String[],
+        Dict{Int,ActionBlock}(),
         RuntimeLifecycleEvent[],
         String(top_rule),
         trace,
@@ -1784,6 +1788,28 @@ function _evaluate_runtime_call!(
         )
     end
 
+    function_resolution = resolve_user_function_call(
+        engine.compiled_spec.function_registry,
+        call.name,
+        length(args),
+    )
+    if function_resolution.matched
+        return _execute_runtime_user_function!(
+            engine,
+            function_resolution.entry,
+            args,
+            context,
+            rule_label,
+            current_edge,
+        )
+    elseif function_resolution.arity_mismatch
+        expected = join(function_resolution.expected_arities, " or ")
+        throw(RuntimeInterpreterException(
+            "user function '$(call.name)' expects $expected argument(s), " *
+            "got $(length(args)) in rule $rule_label",
+        ))
+    end
+
     if statement_context && helper_name == "set_key" && _execute_runtime_set_key_statement!(
             engine,
             args,
@@ -2066,6 +2092,118 @@ function _evaluate_runtime_call!(
     throw(RuntimeInterpreterException(
         "unsupported runtime helper '$(call.name)' in rule $rule_label",
     ))
+end
+
+function _execute_runtime_user_function!(
+    engine::LinkedSpecRuntimeEngine,
+    entry::UserFunctionEntry,
+    arg_exprs::Vector{ActionExpr},
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    current_edge,
+)
+    values = Any[
+        _runtime_copy(_evaluate_runtime_action_expr!(
+            engine,
+            arg,
+            context,
+            rule_label,
+            current_edge,
+        )) for arg in arg_exprs
+    ]
+    definition = entry.definition
+    if length(values) != definition.arity
+        throw(RuntimeInterpreterException(
+            "user function '$(definition.name)' expects $(definition.arity) argument(s), " *
+            "got $(length(values)) in rule $rule_label",
+        ))
+    end
+
+    active_index = findfirst(==(definition.name), context.active_user_functions)
+    if active_index !== nothing
+        cycle = join(Any[context.active_user_functions[active_index:end]..., definition.name], " -> ")
+        detail = "user function recursion is not supported: $cycle in rule $rule_label"
+        throw(RuntimeInterpreterException(
+            detail;
+            diagnostic = _runtime_context_diagnostic(
+                engine,
+                context;
+                stage = "user_function_call",
+                summary = "Julia user function recursion failed",
+                detail = detail,
+                rule_label = rule_label,
+                handler_source_label = "julia_runtime:function:$(definition.name)",
+            ),
+        ))
+    end
+
+    block = _runtime_user_function_body!(engine, entry, context, rule_label)
+    saved_variables = context.variables
+    saved_arrays = context.arrays
+    saved_hashes = context.hashes
+    context.variables = Dict{String,Any}()
+    context.arrays = Dict{String,Vector{Any}}()
+    context.hashes = Dict{String,Dict{String,Any}}()
+    push!(context.active_user_functions, definition.name)
+
+    try
+        for (name, value) in zip(definition.params, values)
+            context.variables[name] = _runtime_copy(value)
+            if value isa AbstractVector
+                context.arrays[name] = _runtime_as_array(value)
+            elseif value isa AbstractDict
+                context.hashes[name] = _runtime_as_hash(value)
+            end
+        end
+        flow = _execute_runtime_value_statements!(
+            engine,
+            block.statements,
+            1,
+            length(block.statements) + 1,
+            context,
+            rule_label,
+            current_edge;
+            final_expression_yields = true,
+        )
+        return flow.returned ? _runtime_copy(flow.value) : nothing
+    finally
+        context.variables = saved_variables
+        context.arrays = saved_arrays
+        context.hashes = saved_hashes
+        pop!(context.active_user_functions)
+    end
+end
+
+function _runtime_user_function_body!(
+    engine::LinkedSpecRuntimeEngine,
+    entry::UserFunctionEntry,
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+)
+    cached = get(context.user_function_body_cache, entry.index, nothing)
+    if cached !== nothing
+        return cached
+    end
+    try
+        block = parse_action_block(entry.definition.body_source)
+        context.user_function_body_cache[entry.index] = block
+        return block
+    catch error
+        detail = "user function '$(entry.definition.name)' body parse failed in rule " *
+            "$rule_label: $(sprint(showerror, error))"
+        throw(RuntimeInterpreterException(
+            detail;
+            diagnostic = _runtime_context_diagnostic(
+                engine,
+                context;
+                stage = "user_function_body_parse",
+                summary = "Julia user function body parse failed",
+                detail = detail,
+                rule_label = rule_label,
+                handler_source_label = "julia_runtime:function:$(entry.definition.name)",
+            ),
+        ))
+    end
 end
 
 function _evaluate_runtime_hash_helper_values(

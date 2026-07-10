@@ -169,6 +169,15 @@ function _function_with_body_sidecar(
     )
 end
 
+function _runtime_engine_with_functions(source, functions; kwargs...)
+    parsed = parse_spec(source)
+    staged = stitch_function_body_parse_jobs(SpecFile(
+        functions = functions,
+        rules = parsed.rules,
+    ))
+    return LinkedSpecRuntimeEngine(compile_spec(staged); kwargs...)
+end
+
 function _staged_job_with(
     job::StagedParseJob;
     parser_spec_id = job.parser_spec_id,
@@ -333,7 +342,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-staged-registry"
+    @test status.parity == "runtime-user-functions"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -343,7 +352,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-staged-registry", String(take!(status_output)))
+    @test occursin("parity: runtime-user-functions", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1716,6 +1725,160 @@ Top::
  E { return("x".with("bad") { return(value) }) }
 """)))
     @test_throws RuntimeInterpreterException runtime_parse(receiver_arity_engine, "x")
+end
+
+@testset "Runtime registered user functions" begin
+    functions = [
+        _function_with_body_sidecar(
+            "normalize",
+            ["value"];
+            body_source = "trim(value)",
+            index = 0,
+        ),
+        _function_with_body_sidecar(
+            "echo",
+            ["value"];
+            body_source = "return(value)",
+            index = 1,
+        ),
+        _function_with_body_sidecar(
+            "discard",
+            ["value"];
+            body_source = raw"""
+marker = "inner"
+return(value)
+""",
+            index = 2,
+        ),
+        _function_with_body_sidecar(
+            "use_shapes",
+            ["items", "meta"];
+            body_source = raw"""
+set(array(items), items.sorted())
+set_key(hash(meta), "extra", "ok")
+return(hash("first", items.first(), "meta", copy(hash(meta))))
+""",
+            index = 3,
+        ),
+        _function_with_body_sidecar(
+            "read_missing",
+            String[];
+            body_source = "return(marker)",
+            index = 4,
+        ),
+    ]
+    engine = _runtime_engine_with_functions(raw"""
+Top::
+ /x/
+ E {
+   value = "caller"
+   marker = "caller"
+   set(array(items), ["caller"])
+   discard(value = "discard-arg")
+   after_discard = value
+   eager = echo(value = "arg")
+   captured = read_missing()
+   shaped = use_shapes(["b", "a"], { "key" : "Value" })
+   return(hash(
+     "value", value,
+     "marker", marker,
+     "after_discard", after_discard,
+     "eager", eager,
+     "normal", normalize(" A-B ").lowercase().replace_substr("-", "_"),
+     "captured", captured,
+     "shaped", shaped,
+     "items", copy(array(items))
+   ))
+ }
+""", functions)
+
+    @test runtime_parse(engine, "x").value == Dict{String,Any}(
+        "value" => "arg",
+        "marker" => "caller",
+        "after_discard" => "discard-arg",
+        "eager" => "arg",
+        "normal" => "a_b",
+        "captured" => nothing,
+        "shaped" => Dict{String,Any}(
+            "first" => "a",
+            "meta" => Dict{String,Any}(
+                "key" => "Value",
+                "extra" => "ok",
+            ),
+        ),
+        "items" => Any["caller"],
+    )
+
+    direct_engine = _runtime_engine_with_functions(raw"""
+Top::
+ /x/
+ E { return(loop("x")) }
+""", [
+        _function_with_body_sidecar(
+            "loop",
+            ["value"];
+            body_source = "return(loop(value))",
+            index = 0,
+        ),
+    ])
+    direct_error = try
+        runtime_parse(direct_engine, "x")
+        nothing
+    catch error
+        error
+    end
+    @test direct_error isa RuntimeInterpreterException
+    @test occursin("loop -> loop", direct_error.message)
+    @test direct_error.diagnostic.stage == "user_function_call"
+    @test direct_error.diagnostic.handler_source_label == "julia_runtime:function:loop"
+
+    mutual_engine = _runtime_engine_with_functions(raw"""
+Top::
+ /x/
+ E { return(alpha("x")) }
+""", [
+        _function_with_body_sidecar(
+            "alpha",
+            ["value"];
+            body_source = "return(beta(value))",
+            index = 0,
+        ),
+        _function_with_body_sidecar(
+            "beta",
+            ["value"];
+            body_source = "return(alpha(value))",
+            index = 1,
+        ),
+    ])
+    mutual_error = try
+        runtime_parse(mutual_engine, "x")
+        nothing
+    catch error
+        error
+    end
+    @test mutual_error isa RuntimeInterpreterException
+    @test occursin("alpha -> beta -> alpha", mutual_error.message)
+
+    arity_engine = _runtime_engine_with_functions(raw"""
+Top::
+ /x/
+ E { return(echo()) }
+""", [
+        _function_with_body_sidecar(
+            "echo",
+            ["value"];
+            body_source = "return(value)",
+            index = 0,
+        ),
+    ])
+    arity_error = try
+        runtime_parse(arity_engine, "x")
+        nothing
+    catch error
+        error
+    end
+    @test arity_error isa RuntimeInterpreterException
+    @test occursin("expects 1 argument(s), got 0", arity_error.message)
 end
 
 @testset "Runtime hash and array tree traversal callbacks" begin

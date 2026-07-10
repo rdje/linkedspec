@@ -317,9 +317,10 @@ events with traced/untraced identity. Full tests pass with 631 assertions, statu
 `.4.5.4` closes final diagnostics/trace no-drift without a source correction. `.5.1` then
 resolves/compiles/executes the built-in ActionIR body adapter in stable queue
 order, stitches neutral JSON `body_ast`, and passes 662 assertions with status `runtime-staged-registry`; `.5.2`
-is active for registered user-function runtime execution.
-Future Julia and
-Lua backend plans must own their own
+then resolves registered exact-arity calls before helper fallback with eager caller arguments, fresh typed local
+stores, final/local returns, receiver continuation, standalone result drop, and structured recursion cycles. Full
+tests pass with 671 assertions and status `runtime-user-functions`; `.5.3` descriptor-shape parity is active.
+The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
 
@@ -431,8 +432,12 @@ diagnostic payloads on runtime exceptions while preserving successful output and
 `.4.5.2` implements trace levels/environment/config, event primitives, stdout/route/mirror sinks, parse-scope
 routing, and traced entrypoints with default-quiet output preservation. `.4.5.3` implements internal rule, regex,
 dispatch, lifecycle, recursion, cursor, and boundary events; `.4.5.4` closes final no-drift without a source
-correction. `.5.1` is implemented through `julia/src/parser/StagedParserRegistry.jl`; `.5.2` is active, and later
-leaves own descriptor/corpus execution.
+correction. `.5.1` is implemented through `julia/src/parser/StagedParserRegistry.jl`; `.5.2` now executes
+registered user functions through `julia/src/runtime/Interpreter.jl`. It evaluates args before entering a fresh
+scalar/array/hash store set, restores caller stores in `finally`, returns the final expression or first local
+`return(...)`, composes compatible receiver chains, drops standalone results, and diagnoses exact-arity and
+direct/mutual recursion failures. Package status is `runtime-user-functions`; `.5.3` is active for descriptor
+shape parity, and later leaves own corpus execution.
 
 ### Dart Backend Commands
 

@@ -5,15 +5,21 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.5.2` adds registered exact-arity runtime calls before helper
+  fallback. Arguments evaluate eagerly in caller scope; cached ActionIR bodies execute with fresh scalar/array/hash
+  stores; caller stores restore exception-safely; final expressions/local returns feed value and receiver positions;
+  standalone results drop; and direct/mutual recursion emits structured cycle diagnostics. Package status is
+  `runtime-user-functions`, the full suite passes with 671 assertions, and `.5.3` descriptor parity is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.5.1` adds Julia's narrow staged function-body registry. It resolves
   the fixed built-in ActionIR adapter, orders jobs structurally, records portable cache/compiled/result metadata,
   parses typed ActionIR into neutral JSON, validates sidecars, and immutably stitches `body_ast`. Package status is
-  `runtime-staged-registry`, the full suite passes with 662 assertions, and `.5.2` runtime execution is active.
+  `runtime-staged-registry` at that boundary, and the full suite passes with 662 assertions. `.5.2` has since landed
+  and `.5.3` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.5.4` closes the scoped Julia diagnostics/trace container with no
   source correction. The 631-assertion suite, package/CLI `runtime-trace-events` status, book, KM, roadmap/task/live
   docs, and architecture agree on structured runtime diagnostics plus control/sink/event/runtime-instrumentation
-  capabilities without overclaiming compile/parser tracing or staged/corpus parity. `.5.1` has since landed and
-  `.5.2` is active.
+  capabilities without overclaiming compile/parser tracing or staged/corpus parity. `.5.1` and `.5.2` have since
+  landed, and `.5.3` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.5.3` instruments the existing Julia runtime path with optional
   rule scopes, regex/action/blind/recursion decisions, lifecycle marks, cursor/stack transitions, and boundary
   events. Absent/disabled emitters remain no-ops; scope cleanup is exception-safe; traced and untraced action,

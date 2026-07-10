@@ -10,7 +10,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, actionir, functions, staged-parsing, registry, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.3.3 adds julia/src/action/FunctionRegistry.jl and registry-aware ActionIR contracts. JULIA-BACKEND-PARITY.5.1 adds deterministic staged function-body dispatch and immutable body_ast stitching through julia/src/parser/StagedParserRegistry.jl. Runtime user-function execution remains .5.2."
+evidence: "JULIA-BACKEND-PARITY.3.3 adds julia/src/action/FunctionRegistry.jl and registry-aware ActionIR contracts. JULIA-BACKEND-PARITY.5.1 adds deterministic staged function-body dispatch and immutable body_ast stitching through julia/src/parser/StagedParserRegistry.jl. JULIA-BACKEND-PARITY.5.2 executes exact-arity registry matches before helper fallback."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
@@ -29,9 +29,11 @@ running function bodies. The ActionIR contract resolver accepts optional `functi
 exact-arity calls classify as `family = "user_function"` before helper fallback, while wrong-arity registered calls
 emit `user_function_arity_mismatch`.
 
-Compiled-spec state landed in `.3.4`, and `.5.1` now consumes the exposed job queue through the built-in staged
-provider and returns a new spec with neutral JSON `body_ast` values. User-function runtime execution remains `.5.2`.
+Compiled-spec state landed in `.3.4`, `.5.1` consumes the exposed job queue through the built-in staged provider
+and returns a new spec with neutral JSON `body_ast` values, and `.5.2` executes exact-arity registry matches before
+ordinary helper fallback.
 
 Related facts: [[julia-actionir-contract-resolver]], [[julia-user-function-definition-projection]],
 [[julia-compiled-spec-state]], [[dart-function-registry]], [[function-body-parse-job-sidecar]],
-[[julia-staged-function-body-registry]], [[text-to-ast-backend-doctrine]].
+[[julia-staged-function-body-registry]], [[julia-user-function-runtime-execution]],
+[[text-to-ast-backend-doctrine]].

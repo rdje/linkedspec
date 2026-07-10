@@ -118,5 +118,7 @@ full suite now passes with 631 assertions and status `runtime-trace-events`; `.4
 without changing source or overclaiming broader trace parity. `.5.1` adds the minimal staged registry provider:
 `actionir-body.spec` resolves to the fixed built-in adapter, jobs execute in stable path/span/id order, portable
 cache/compiled/result records are exposed, and neutral `action_block` JSON is immutably stitched into `body_ast`.
-The full suite now passes with 662 assertions and status `runtime-staged-registry`; `.5.2` owns registered
-user-function runtime execution, and later leaves own descriptor/corpus parity.
+The full suite now passes with 671 assertions and status `runtime-user-functions`. Registered exact-arity calls
+execute before helper fallback with eager caller arguments, fresh function-local scalar/array/hash stores,
+final-expression or local-return results, compatible receiver continuation, standalone result discard, and
+direct/mutual recursion diagnostics. `.5.3` owns descriptor-shape parity, and later leaves own corpus parity.

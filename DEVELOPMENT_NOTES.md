@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.5.2 — Julia user-function runtime execution):
+  Registered calls resolve before helper fallback and evaluate arguments before replacing any store, preserving
+  caller-side assignment effects while preventing caller-variable capture inside the function. Function params
+  bind into a fresh scalar store and, for aggregate values, matching fresh typed array/hash stores. Body parsing is
+  cached per runtime execution context; value-block flow supplies final-expression/local-return semantics. A
+  `finally` boundary restores caller stores and active-call state across success or failure. Standalone calls reuse
+  the existing dropped-value statement path, and active-name cycles produce structured recursion diagnostics.
+  Multiline `.spec` fixtures use newlines alone; no line-ending semicolons were introduced.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.5.1 — Julia staged function-body registry):
   Julia keeps the staged boundary neutral by parsing function text through its typed ActionIR parser and stitching
   JSON, not Julia objects, into `body_ast`. Stable ordering is structural (parent path, span, job id), and provider

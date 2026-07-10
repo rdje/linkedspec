@@ -394,15 +394,19 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.5.1 - add Julia staged function-body registry`
 
 - ID: `JULIA-BACKEND-PARITY.5.2`
-  Status: `active`
+  Status: `done`
   Goal: Execute registered user functions in value positions, receiver chains, and standalone discard.
   Acceptance: Exact-arity functions use fresh function-local stores, eager argument evaluation, compatible receiver
     continuation, standalone `VALUE_DROP`, and recursion diagnostics.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - Julia resolves registered calls before ordinary helper fallback, evaluates arguments in
+    caller scope, executes cached ActionIR bodies with fresh scalar/array/hash stores, restores caller stores, and
+    returns final expressions or local `return(...)` payloads. Nine focused assertions cover value/receiver/drop,
+    eager arguments, local isolation, typed params, exact arity, and direct/mutual recursion diagnostics; full
+    `Pkg.test()` passes with 671 assertions and package status `runtime-user-functions`.
+  Commit: `JULIA-BACKEND-PARITY.5.2 - execute Julia user functions`
 
 - ID: `JULIA-BACKEND-PARITY.5.3`
-  Status: `pending`
+  Status: `active`
   Goal: Preserve staged parse-job and function-registry descriptor shapes.
   Acceptance: Descriptor/corpus fixtures can assert the neutral function-definition payload, parse-job, and
     stitched AST fields without Julia-specific field drift.
@@ -482,7 +486,8 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 1 | `JULIA-BACKEND-PARITY.4.5.3` | `done` | Runtime mechanism instrumentation emits structured trace scopes, decisions, and marks. |
 | 2 | `JULIA-BACKEND-PARITY.4.5.4` | `done` | Diagnostics/trace status, tests, book, KM, and live docs are no-drift. |
 | 3 | `JULIA-BACKEND-PARITY.5.1` | `done` | Minimal staged registry dispatches function-body jobs and stitches `body_ast`. |
-| 4 | `JULIA-BACKEND-PARITY.5.2` | `active` | Execute registered exact-arity user functions through the runtime. |
+| 4 | `JULIA-BACKEND-PARITY.5.2` | `done` | Registered exact-arity functions execute through isolated runtime scopes. |
+| 5 | `JULIA-BACKEND-PARITY.5.3` | `active` | Preserve neutral function/parse-job/stitched-AST descriptor shapes. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -1231,6 +1236,38 @@ Staged registry evidence recorded on 2026-07-10:
 - [x] **LOCKSTEP** — Public exports, Julia README, task/index/roadmaps, mdBook staged/status/handoff pages,
   Knowledge Map, architecture/live docs, and `MEMORY.md` advance to `.5.2` user-function runtime execution.
 
+## `JULIA-BACKEND-PARITY.5.2` User-Function Runtime Result
+
+Runtime evidence recorded on 2026-07-10:
+
+- `julia/src/runtime/Interpreter.jl` resolves registered exact-arity calls before ordinary helper fallback and
+  evaluates every argument eagerly against the caller stores.
+- Each invocation replaces scalar/array/hash stores with fresh function-local stores, binds aggregate params into
+  both scalar and typed local views, executes the cached ActionIR body as a value block, copies the final expression
+  or first local `return(...)` payload, and restores caller stores in `finally`.
+- Function results compose as ordinary values, including compatible receiver chains. Standalone calls run through
+  the existing dropped-value statement path, so their result is discarded without skipping eager argument effects.
+- Active-call tracking rejects direct and mutual recursion with a structured `user_function_call` diagnostic and
+  a deterministic cycle path. Registered wrong arities diagnose before unknown-helper fallback.
+- Nine focused assertions cover caller/local isolation, eager arguments, final-expression and local-return results,
+  array/hash param bindings, receiver continuation, standalone discard, exact arity, and recursion cycles. Full
+  tests pass with 671 assertions and package status `runtime-user-functions`.
+
+## `JULIA-BACKEND-PARITY.5.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.5.1` populated staged function bodies and the registry already resolved exact calls,
+  but the runtime still fell through registered calls to unsupported-helper behavior.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `Interpreter.jl` had no registered-call branch, function-local store boundary,
+  body cache, or active-function recursion tracker.
+- [x] **FIX** — Added eager call execution, cached body parsing, isolated typed stores, value-block return flow,
+  caller restoration, receiver/drop compatibility, exact-arity handling, and structured cycle diagnostics.
+- [x] **ADDRESSED (verified)** — Focused tests exercise value, receiver, and standalone positions plus eager args,
+  no caller capture, local mutation isolation, aggregate params, direct/mutual recursion, and wrong arity.
+- [x] **NO REGRESSION** — Full Julia `Pkg.test()` passes with 671 assertions; CLI status reports
+  `runtime-user-functions`; mdBook, memory, Knowledge Map, task-tree, doctrine, and whitespace gates cover the slice.
+- [x] **LOCKSTEP** — Julia README/status, task/index/roadmaps, mdBook compiled-state/status/handoff pages,
+  Knowledge Map, architecture/live docs, and `MEMORY.md` advance to `.5.3` descriptor-shape parity.
+
 ## `JULIA-BACKEND-PARITY.4.2` Runtime Rule Interpreter Result
 
 Rule-interpreter evidence recorded on 2026-07-10:
@@ -1469,8 +1506,8 @@ Rule-interpreter evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.5.2`. Staged function bodies are now populated as neutral ActionIR JSON; registered exact-arity
-  runtime execution is the next owned boundary.
+- None for `.5.3`. Registered function execution is green; neutral descriptor shape preservation is the next
+  owned boundary.
 
 ## Verification Log
 
@@ -1504,6 +1541,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.5.3` | Full Julia `Pkg.test()`; Julia CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Fourteen added trace assertions prove rule scopes, regex decisions, action/blind dispatch, lifecycle marks, recursion cutoffs, cursor transitions, source boundaries, and traced/untraced identity; total Julia tests pass with 631 assertions and `.4.5.4` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.5.4` | Full Julia `Pkg.test()`; Julia CLI status/help; stale status/frontier scans; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Runtime diagnostics/trace tests and all public/durable status surfaces agree at 631 assertions and `runtime-trace-events`; `.4.5` closes and `.5.1` becomes active without a source correction. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.5.1` | Full Julia `Pkg.test()`; Julia CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Thirty-one focused assertions prove stable staged queue order, provider/digest/cache/compiled/result shape, immutable `body_ast` stitching, wrapper composition, resolve/compile diagnostics, and policy fences; total Julia tests pass with 662 assertions and `.5.2` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.5.2` | Full Julia `Pkg.test()`; Julia CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Nine focused assertions prove eager args, fresh typed stores, final/local returns, value/receiver/drop positions, exact arity, and direct/mutual recursion diagnostics; total Julia tests pass with 671 assertions and `.5.3` becomes active. |
 
 ## Commit Log
 
@@ -1537,13 +1575,20 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.4.5.3` | `JULIA-BACKEND-PARITY.4.5.3 - add Julia runtime trace events` | Rule/regex/dispatch/lifecycle/recursion/cursor/boundary instrumentation; no-drift advances to `.4.5.4`. |
 | `JULIA-BACKEND-PARITY.4.5.4` | `JULIA-BACKEND-PARITY.4.5.4 - close Julia diagnostics trace no drift` | Scoped runtime diagnostics/trace no-drift; `.4.5` closes and staged registry work advances to `.5.1`. |
 | `JULIA-BACKEND-PARITY.5.1` | `JULIA-BACKEND-PARITY.5.1 - add Julia staged function-body registry` | Minimal staged provider dispatch, stable queue, and immutable `body_ast` stitching; runtime calls advance to `.5.2`. |
+| `JULIA-BACKEND-PARITY.5.2` | `JULIA-BACKEND-PARITY.5.2 - execute Julia user functions` | Exact-arity registered value/receiver/drop execution with isolated typed stores and recursion diagnostics; descriptor parity advances to `.5.3`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.5.2` user-function runtime execution. Julia resolves registered exact-arity calls
+  before helper fallback, evaluates args eagerly, runs cached ActionIR bodies with fresh scalar/array/hash stores,
+  restores caller state, composes returned values into receiver chains, discards standalone results, and diagnoses
+  direct/mutual recursion. `Pkg.test()` passes with 671 assertions; package status is `runtime-user-functions`, and
+  `.5.3` descriptor-shape parity is active.
 - `2026-07-10`: Completed `.5.1` staged function-body registry. Julia now resolves the built-in ActionIR body
   provider, records portable cache/compiled/result metadata, executes jobs in stable order, stitches neutral
   `action_block` JSON into `body_ast`, and diagnoses resolution/compile/policy drift. `Pkg.test()` passes with 662
-  assertions; package status is `runtime-staged-registry`, and `.5.2` user-function execution is active.
+  assertions; package status was `runtime-staged-registry` at that boundary. `.5.2` has since completed and `.5.3`
+  descriptor-shape parity is active.
 - `2026-07-10`: Completed `.4.5.4` diagnostics/trace no-drift. Full tests remain green with 631 assertions and
   package status `runtime-trace-events`; README/CLI, mdBook, KM, task/index/roadmaps, architecture, and live docs
   agree on the scoped runtime boundary. `.4.5` closes without source correction and `.5.1` becomes active.

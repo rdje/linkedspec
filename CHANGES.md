@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.5.2 — execute Julia user functions
+
+**Scope:** Julia registered-call runtime resolution, eager arguments, isolated typed local stores, cached ActionIR
+function bodies, return/drop/receiver behavior, arity/recursion diagnostics, focused tests, package/CLI status,
+mdBook, task/roadmap/live docs, Knowledge Map, architecture, and resume pointer.
+
+**Change:** `LinkedSpecRuntimeEngine` now resolves exact-arity registered functions before ordinary helper fallback,
+evaluates arguments in caller scope, runs each body with fresh scalar/array/hash stores, restores caller stores,
+returns the final expression or local `return(...)` payload, composes values into receiver chains, and executes
+standalone calls while discarding their results. Direct and mutual recursion report structured cycle diagnostics.
+Package status advances to `runtime-user-functions`.
+
+**Validation:** Nine focused assertions cover eager evaluation, local isolation, aggregate params, final/local
+returns, value/receiver/drop positions, wrong arity, and direct/mutual recursion. Full `Pkg.test()` passes with 671
+assertions. CLI status, mdBook, memory, KM, task, doctrine, and whitespace gates pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.5.1 — add Julia staged function-body registry
 
 **Scope:** Julia staged parser registry/provider, stable function-body job queue, portable dispatch records,

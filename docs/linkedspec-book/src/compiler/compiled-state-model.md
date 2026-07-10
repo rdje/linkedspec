@@ -113,6 +113,30 @@ JSON `action_block` values in `body_ast`. The original spec and its `body_parse_
 `parse_spec_with_staged_user_function_definition_asts(...)` is the composed projection-plus-dispatch convenience
 API. General provider search and recursive staged queues remain future work.
 
+Julia's runtime now consumes the same compiled registry. Registered calls resolve before ordinary helper fallback;
+arguments evaluate eagerly in caller scope; params bind into fresh scalar, array, and hash stores; and the body runs
+as a cached ActionIR value block. The returned value is the final expression or first local `return(...)` payload.
+Caller stores restore after every call, so function work variables do not capture or overwrite caller locals.
+Returned values can continue through compatible receiver chains, while a standalone call executes and drops its
+result. Direct or mutual recursion is rejected with a structured `user_function_call` diagnostic.
+
+```text
+fn normalize(value) {
+  trim(value)
+}
+
+Top::
+ /x/
+ E {
+   normalized = normalize(" A-B ").lowercase().replace_substr("-", "_")
+   normalize(" discarded ")
+   return(normalized)
+ }
+```
+
+Here the first call yields `"a_b"`; the second call still executes, but its value is discarded. Newlines separate
+the statements, so no line-ending semicolons are used.
+
 This registry is intentionally flat for the MVP. It is not an overload table, namespace/module model, closure
 environment, lambda catalog, or currying/partial-application representation. Those extensions require their own
 future contract before the internal state model grows fields for them.
