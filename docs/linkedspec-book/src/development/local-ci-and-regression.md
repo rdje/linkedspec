@@ -45,6 +45,21 @@ Dart installed and you want one command to include both gates, run:
 LINKEDSPEC_RUN_DART=1 bash tools/run_ci_local.sh
 ```
 
+## Focused Julia Checks
+
+The Julia backend currently has a package-level gate rather than a shared local-CI integration. From the repository
+root, run:
+
+```bash
+JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot julia --project=julia -e 'import Pkg; Pkg.test()'
+JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot julia --project=julia julia/bin/linkedspec_julia.jl status
+JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus
+```
+
+These checks currently cover package loading, source parsing/validation, function-shell projection, typed ActionIR
+parsing, and manifest-backed corpus validation. Julia corpus `--execute` remains unavailable until later runtime
+leaves land.
+
 ## Hosted GitHub Actions status
 
 Hosted GitHub Actions CI is currently disabled for cost-control reasons.

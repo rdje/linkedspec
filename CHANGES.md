@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.3.1 — add Julia ActionIR AST parser
+
+**Scope:** Julia helper/action AST data types, typed action parser, package exports/status, focused parser tests,
+README, task-tree frontier update, roadmap/task-tree index alignment, mdBook status/handoff text, Knowledge Map,
+architecture snapshot, live docs, and resume pointer.
+
+**Change:** Added `julia/src/action/ActionAst.jl` and `julia/src/action/ActionParser.jl`. Julia now exposes
+`parse_action_block(...)`, `parse_action_statement(...)`, and `parse_action_expression(...)` for typed ActionIR
+blocks and value-drop statements. The parser projects calls, literals, variables, indexed/nested access, array and
+hash literals, block values, scalar/array/hash/nested assignments, receiver fluent chains, helper/receiver trailing
+blocks, structured if/elseif/else/while/switch/case/default controls, and unsupported expressions as structural
+`raw_perl` nodes. The Julia package status now reports `action-ast-parser`.
+
+**Validation:** `Pkg.test()` passes with 353 tests, including 74 Action AST parser assertions. Commit-time
+docs/governance validation covers mdBook, memory architecture, task-tree metadata, Knowledge Map, doctrine, and
+`git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.2.4 — project Julia function-definition shells
 
 **Scope:** Julia spec-defined user-function shell projection, package exports/status, focused projection tests,

@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.3.1 — Julia ActionIR AST parser):
+  Julia now parses helper/action source into typed ActionIR nodes before helper-contract resolution or runtime
+  execution. `julia/src/action/ActionAst.jl` defines the neutral JSON-shaped node model for action blocks,
+  value-drop statements, calls, arguments, literals, variables, direct/nested access, shape literals, assignments,
+  receiver chains, trailing block arguments, block values, structured controls, and raw fallback expressions.
+  `julia/src/action/ActionParser.jl` exposes `parse_action_block(...)`, `parse_action_statement(...)`, and
+  `parse_action_expression(...)`. The parser intentionally mirrors the Dart `.3.1` boundary: it is structural only,
+  keeps unsupported expressions as `raw_perl`, and leaves canonical helper contracts, user-function registry
+  resolution, compilation, and execution to later leaves.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.2.4 — Julia function-definition shell projection):
   Julia now consumes the spec-defined top-level user-function shell node shape without adding a Julia raw scanner.
   `julia/src/spec/UserFunctionDefinitionShell.jl` projects `function_definition` nodes returned by

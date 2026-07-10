@@ -216,7 +216,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "function-shell-projection"
+    @test status.parity == "action-ast-parser"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -226,7 +226,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: function-shell-projection", String(take!(status_output)))
+    @test occursin("parity: action-ast-parser", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -240,6 +240,136 @@ end
     execute_error = IOBuffer()
     @test run_corpus_runner(["--corpus", "fixtures", "--execute"]; io = IOBuffer(), err = execute_error) == 2
     @test occursin("not implemented", String(take!(execute_error)))
+end
+
+@testset "Action AST parser" begin
+    block = parse_action_block(
+        "set(array(results), []); push(array(results), retv)\n" *
+        "return(copy(array(results)))",
+    )
+    @test block.kind == "action_block"
+    @test length(block.statements) == 3
+    @test all(statement -> statement.drops_value, block.statements)
+    @test block.statements[1].expr isa ActionCallExpr
+    @test block.statements[1].expr.name == "set"
+    @test block.statements[1].expr.args[1].value isa ActionCallExpr
+    @test block.statements[1].expr.args[2].value isa ActionArrayLiteralExpr
+    @test block.statements[2].expr.name == "push"
+    @test block.statements[2].expr.args[2].value isa ActionVariableExpr
+
+    @test parse_action_expression("42") isa ActionNumberLiteralExpr
+    @test parse_action_expression("true") isa ActionBooleanLiteralExpr
+    @test parse_action_expression("undef") isa ActionUndefExpr
+    @test parse_action_expression("/a\\\\sb/i") isa ActionRegexLiteralExpr
+
+    nested = parse_action_expression("foo[\"a\"][i][0]")
+    @test nested isa ActionNestedAccessExpr
+    @test nested.base == "foo"
+    @test [segment.kind for segment in nested.segments] == ["key", "index", "index"]
+
+    array = parse_action_expression("[value, true, []]")
+    @test array isa ActionArrayLiteralExpr
+    @test [item.kind for item in array.items] == ["variable", "boolean", "array_literal"]
+
+    hash = parse_action_expression("{ key : value, \"fixed\" : [value] }")
+    @test hash isa ActionHashLiteralExpr
+    @test hash.entries[1].key isa ActionVariableExpr
+    @test hash.entries[2].key isa ActionStringLiteralExpr
+    @test hash.entries[2].value isa ActionArrayLiteralExpr
+    @test parse_action_expression("{ key => value }") isa ActionRawExpr
+    @test parse_action_expression("{ key => value }").reason == "hash_literal_use_colon"
+
+    assignment = parse_action_expression("items = [value]")
+    @test assignment isa ActionAssignScalarExpr
+    @test assignment.name == "items"
+    @test assignment.value isa ActionArrayLiteralExpr
+
+    append = parse_action_expression("items += value")
+    @test append isa ActionAssignArrayAppendExpr
+    @test append.name == "items"
+    @test append.value isa ActionVariableExpr
+
+    hash_assignment = parse_action_expression("meta[key] = { stage : value }")
+    @test hash_assignment isa ActionAssignHashIndexExpr
+    @test hash_assignment.key isa ActionVariableExpr
+    @test hash_assignment.value isa ActionHashLiteralExpr
+
+    nested_assignment = parse_action_expression("payload[\"children\"][0][\"name\"] = value")
+    @test nested_assignment isa ActionAssignNestedAccessExpr
+    @test length(nested_assignment.segments) == 3
+
+    assignment_chain = parse_action_expression("(items += value).count()")
+    @test assignment_chain isa ActionFluentChainExpr
+    @test assignment_chain.receiver isa ActionAssignArrayAppendExpr
+    @test only(assignment_chain.calls).method == "count"
+
+    call_with_assignment = parse_action_expression("array(items = [value], copy(array(items)))")
+    @test call_with_assignment isa ActionCallExpr
+    @test call_with_assignment.args[1] isa ActionPositionalArgument
+    @test call_with_assignment.args[1].value isa ActionAssignScalarExpr
+
+    chain = parse_action_expression("\" raw \".trim().split(\"-\").count()")
+    @test chain isa ActionFluentChainExpr
+    @test chain.receiver isa ActionStringLiteralExpr
+    @test [call.method for call in chain.calls] == ["trim", "split", "count"]
+
+    with_call = parse_action_expression("with(\"x\") { return(value) }")
+    @test with_call isa ActionCallExpr
+    @test with_call.trailing_block_arg
+    @test with_call.args[end].value isa ActionBlockValueExpr
+
+    receiver_with = parse_action_expression("\"x\".with() { return(value) }")
+    @test receiver_with isa ActionFluentChainExpr
+    @test only(receiver_with.calls).method == "with"
+    @test only(receiver_with.calls).receiver_trailing_block_arg
+    @test only(receiver_with.calls).args[1].value isa ActionBlockValueExpr
+
+    print_call = parse_action_expression("print(\"begin_end_blocks: BEGIN   (\", entry_text(), \"\\n\")")
+    @test print_call isa ActionCallExpr
+    @test print_call.name == "print"
+    @test length(print_call.args) == 3
+    @test print_call.args[1].value isa ActionStringLiteralExpr
+
+    block_value = parse_action_expression("{ set(x, \"a\"); x }")
+    @test block_value isa ActionBlockValueExpr
+    @test length(block_value.block.statements) == 2
+    @test block_value.block.statements[end].expr isa ActionVariableExpr
+
+    if_node = parse_action_expression("if(flag) { set(out, \"yes\") }")
+    @test if_node isa ActionControlIfExpr
+    @test if_node.keyword == "if"
+    @test if_node.condition isa ActionVariableExpr
+    @test only(if_node.body.statements).expr isa ActionCallExpr
+
+    branch_block = parse_action_block(
+        "if(false) { set(out, \"bad\") } " *
+        "elseif(true) { set(out, \"yes\") } " *
+        "else { set(out, \"no\") }",
+    )
+    @test [statement.expr.kind for statement in branch_block.statements] == [
+        "control_if",
+        "control_if",
+        "control_else",
+    ]
+    @test branch_block.statements[2].expr.branch_role == "elseif"
+
+    while_node = parse_action_expression("while(flag) { next() }")
+    @test while_node isa ActionControlWhileExpr
+    @test while_node.condition isa ActionVariableExpr
+    @test only(while_node.body.statements).expr isa ActionCallExpr
+
+    switch_node = parse_action_expression(
+        "switch(kind) { case(\"a\") { return(\"hit\") } default { return(\"miss\") } }",
+    )
+    @test switch_node isa ActionControlSwitchExpr
+    @test switch_node.source_expr isa ActionVariableExpr
+    @test length(switch_node.cases) == 1
+    @test switch_node.default_case !== nothing
+
+    raw = parse_action_expression("@invalid")
+    @test raw isa ActionRawExpr
+    @test raw.reason == "unsupported_expression"
+    @test to_json(raw)["kind"] == "raw_perl"
 end
 
 @testset "Spec parser" begin

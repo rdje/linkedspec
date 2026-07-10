@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **295** facts · **2040** question keys.
+> **296** facts · **2045** question keys.
 
 ## Questions → fact
 
@@ -366,11 +366,13 @@
 - "does Julia have strict syntax validation" -> [julia-frontend-validation](docs/knowledge/julia-frontend-validation.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
 - "does Julia load the 99 fixture corpus" -> [julia-corpus-manifest-io](docs/knowledge/julia-corpus-manifest-io.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
 - "does Julia need its own LinkedSpec CLI" -> [julia-backend-interpreter-first-plan](docs/knowledge/julia-backend-interpreter-first-plan.md) · 2026-07-09 · reverify: `rg -n 'JULIA-BACKEND-PARITY|interpreter-first|Julia-specific CLI|generated Julia source|FUTURE-PARITY-BACKLOG\\.1\\.2' docs/tasks/JULIA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/TASK_TREE.md ROADMAP.md ROADMAP_V2.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/appendix/backend-handoff.md`
+- "does Julia parse ActionIR" -> [julia-action-ast-parser](docs/knowledge/julia-action-ast-parser.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - "does Julia parse corpus input specs" -> [julia-core-spec-parser](docs/knowledge/julia-core-spec-parser.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
 - "does Julia parse expected.json yet" -> [julia-corpus-manifest-io](docs/knowledge/julia-corpus-manifest-io.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
 - "does Julia parse spec files yet" -> [julia-core-spec-parser](docs/knowledge/julia-core-spec-parser.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
 - "does Julia parse top-level user functions" -> [julia-user-function-definition-projection](docs/knowledge/julia-user-function-definition-projection.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
 - "does Julia raw scan fn definitions" -> [julia-user-function-definition-projection](docs/knowledge/julia-user-function-definition-projection.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
+- "does Julia rewrite helper text directly" -> [julia-action-ast-parser](docs/knowledge/julia-action-ast-parser.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - "does Julia validate spec files yet" -> [julia-frontend-validation](docs/knowledge/julia-frontend-validation.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
 - "does LinkedSpec descriptor include user functions" -> [terse-user-function-registry-seam](docs/knowledge/terse-user-function-registry-seam.md) · 2026-07-01 · reverify: `rg -n 'function_definition:|-> function_definition' specs/spec.spec && rg -n 'function_order|functions_by_name|compiled_spec_state_to_legacy_functions|functions =>' perl/LinkedSpec/CompilerState.pm docs/linkedspec-book/src/public-api/descriptor-introspection.md && prove -Iperl t/phase0_regression.t`
 - "does LinkedSpec execute user-defined functions" -> [terse-user-function-value-call-execution](docs/knowledge/terse-user-function-value-call-execution.md) · 2026-07-01 · reverify: `prove -Iperl t/phase0_regression.t && rg -n 'function_registry|user_function_registry|_lower_ast_user_function_call_node|user_function_value_call_execution' perl/LinkedSpec/Compiler.pm perl/LinkedSpec/SpecEntry.pm perl/LinkedSpec/RuleIR/EmitContext.pm perl/LinkedSpec/ActionIR/MethodLowering.pm t/phase0_regression.t`
@@ -1273,6 +1275,8 @@
 - "what does input_end_line and input_end_col compute in the Rust engine" -> [rust-retired-array-aliases-not-added](docs/knowledge/rust-retired-array-aliases-not-added.md) · 2026-06-16 · reverify: `grep -c '\"flat\" =>' rust/linkedspec-runtime/src/engine.rs; grep -cE '\"tail\"|\"drop_last\"|\"flatten\"|\"array_values\"' rust/linkedspec-runtime/src/engine.rs`
 - "what does mark_input_start / mark_input_end store in the Rust engine" -> [rust-mark-based-capture-family](docs/knowledge/rust-mark-based-capture-family.md) · 2026-06-16 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n '\"capture_from\"\\|\"capture_len_from\"\\|\"capture_between\"\\|\"mark_copy\"\\|fn span_text' linkedspec-runtime/src/engine.rs | head`
 - "what does parseSpec support" -> [dart-core-spec-parser](docs/knowledge/dart-core-spec-parser.md) · 2026-07-09 · reverify: `cd dart && dart test test/spec_parser_test.dart test/spec_validator_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "what does parse_action_block return in Julia" -> [julia-action-ast-parser](docs/knowledge/julia-action-ast-parser.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
+- "what does parse_action_expression do" -> [julia-action-ast-parser](docs/knowledge/julia-action-ast-parser.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - "what does parse_spec_with_user_function_definition_asts do" -> [julia-user-function-definition-projection](docs/knowledge/julia-user-function-definition-projection.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
 - "what does phase0_regression.t cover" -> [phase0-regression-structure](docs/knowledge/phase0-regression-structure.md) · 2026-06-12 · reverify: `wc -l t/phase0_regression.t`
 - "what does push(child,index) mean in Dart action-edge blocks" -> [dart-structural-pcre-parser-smoke-parity](docs/knowledge/dart-structural-pcre-parser-smoke-parity.md) · 2026-07-09 · reverify: `cd dart && dart test test/runtime_matching_test.dart test/runtime_interpreter_test.dart test/corpus_manifest_test.dart && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31`
@@ -1724,6 +1728,7 @@
 - "where is the Dart staged parser registry" -> [dart-staged-function-body-registry](docs/knowledge/dart-staged-function-body-registry.md) · 2026-07-09 · reverify: `cd dart && dart test test/staged_parser_registry_test.dart && dart analyze --fatal-infos --fatal-warnings`
 - "where is the Dart user function registry" -> [dart-backend-scaffold-package](docs/knowledge/dart-backend-scaffold-package.md) · 2026-07-09 · reverify: `git ls-files dart && (cd dart && dart format --set-exit-if-changed . && dart analyze --fatal-infos --fatal-warnings && dart test && dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute)`
 - "where is the Dart user function registry" -> [dart-function-registry](docs/knowledge/dart-function-registry.md) · 2026-07-09 · reverify: `cd dart && dart test test/function_registry_test.dart test/action_contracts_test.dart test/staged_parser_registry_test.dart && dart analyze --fatal-infos --fatal-warnings`
+- "where is the Julia action AST parser" -> [julia-action-ast-parser](docs/knowledge/julia-action-ast-parser.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - "where is the Julia backend package" -> [julia-backend-scaffold-package](docs/knowledge/julia-backend-scaffold-package.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
 - "where is the Julia spec parser" -> [julia-core-spec-parser](docs/knowledge/julia-core-spec-parser.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
 - "where is the Julia spec validator" -> [julia-frontend-validation](docs/knowledge/julia-frontend-validation.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
@@ -2742,6 +2747,15 @@ _Hosted GitHub Actions CI is disabled; run the local gate tools/run_ci_local.sh_
 - **evidence:** `.github/workflows/ci.yml uses workflow_dispatch + job if: false; docs/decisions/0004-hosted-ci-disabled-local-gate.md`
 - **reverify:** `grep -n 'workflow_dispatch' .github/workflows/ci.yml`
 - **source:** [`docs/knowledge/hosted-ci-disabled-run-local-gate.md`](docs/knowledge/hosted-ci-disabled-run-local-gate.md)
+
+### julia-action-ast-parser
+_Julia parses helper/action source into typed ActionIR AST nodes_
+
+- **answers:** does Julia parse ActionIR | where is the Julia action AST parser | what does parse_action_expression do | what does parse_action_block return in Julia | does Julia rewrite helper text directly
+- **date:** 2026-07-10 · **status:** current
+- **evidence:** `julia/src/action/ActionAst.jl; julia/src/action/ActionParser.jl; julia/test/runtests.jl; docs/tasks/JULIA-BACKEND-PARITY.md`
+- **reverify:** `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
+- **source:** [`docs/knowledge/julia-action-ast-parser.md`](docs/knowledge/julia-action-ast-parser.md)
 
 ### julia-backend-interpreter-first-plan
 _Julia backend parity starts interpreter-first after the Dart milestone_

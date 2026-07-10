@@ -293,14 +293,15 @@ Dart-specific LinkedSpec CLI productization is now done, and
 plan. `JULIA-BACKEND-PARITY.1.1` has completed Julia toolchain/package-layout preflight, `.1.2` has created the
 minimal Julia package scaffold, `.1.3` has added manifest-backed corpus IO and drift detection, `.2.1` has
 added source AST/data types with neutral JSON projection, `.2.2` has added the source parser, `.2.3` has added
-frontend validation and strict syntax behavior, and `.2.4` has added spec-shaped top-level `fn` shell projection.
-The active Julia frontier is now `.3.1` for typed helper/action AST parsing. Future Julia and Lua backend plans must own their own
+frontend validation and strict syntax behavior, `.2.4` has added spec-shaped top-level `fn` shell projection, and
+`.3.1` has added typed helper/action AST parsing. The active Julia frontier is now `.3.2` for helper-contract
+resolution and diagnostics. Future Julia and Lua backend plans must own their own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
 
 ### Julia Backend Scaffold
 
-`JULIA-BACKEND-PARITY.1.1` through `.2.2` are complete. The local Julia toolchain is Homebrew-managed:
+`JULIA-BACKEND-PARITY.1.1` through `.3.1` are complete. The local Julia toolchain is Homebrew-managed:
 `/opt/homebrew/bin/julia` reports Julia `1.12.6`, and the official Julia downloads page lists `v1.12.6` as the
 current stable release. `Pkg` and `Test` work when Julia has a writable depot; under the managed harness, commands
 can set `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot` to avoid writing precompile artifacts into
@@ -322,6 +323,8 @@ julia/
   src/spec/Parser.jl
   src/spec/UserFunctionDefinitionShell.jl
   src/spec/Validator.jl
+  src/action/ActionAst.jl
+  src/action/ActionParser.jl
   bin/linkedspec_julia.jl
   bin/corpus_runner.jl
   test/runtests.jl
@@ -351,9 +354,12 @@ undefined references, regex-slot bounds, regex structure, and strict unused-rule
 `julia/src/spec/UserFunctionDefinitionShell.jl` consumes the `function_definition` / `function_definition_error`
 node shape produced by `specs/user_function_definition.spec`, validates source/body spans and staged sidecars,
 normalizes `functions.<index>.body_source` parse-job paths, and strips function spans before rule parsing. Direct
-`parse_spec(...)` remains rule-only rather than a Julia raw scanner. The next Julia frontier is
-`JULIA-BACKEND-PARITY.3.1`, which parses helper/action source into typed AST nodes. Future leaves own
-`src/action/`, `src/compiler/`, and `src/runtime/`.
+`parse_spec(...)` remains rule-only rather than a Julia raw scanner. `julia/src/action/ActionAst.jl` and
+`julia/src/action/ActionParser.jl` expose `parse_action_block(...)`, `parse_action_statement(...)`, and
+`parse_action_expression(...)` for typed helper/action structures: blocks, value-drop statements, calls, literals,
+variables, direct/nested access, shape literals, assignments, receiver chains, trailing block arguments, block
+values, structured controls, and raw fallback nodes. Future leaves own helper-contract resolution, compiled state,
+runtime interpretation, staged parser execution, diagnostics/trace, and corpus execution.
 
 ### Dart Backend Commands
 

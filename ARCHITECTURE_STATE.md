@@ -5,11 +5,19 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.3.1` adds Julia typed ActionIR parsing.
+  `julia/src/action/ActionAst.jl` defines action blocks, value-drop statements, call/argument nodes, literals,
+  variables, indexed/nested access, shape literals, assignments, receiver chains, trailing block payloads, block
+  values, structured controls, and raw fallback nodes with JSON projection. `julia/src/action/ActionParser.jl`
+  exposes `parse_action_block(...)`, `parse_action_statement(...)`, and `parse_action_expression(...)`. The parser
+  is structural only; canonical helper-contract resolution, compilation, runtime execution, staged body dispatch,
+  diagnostics/trace, and corpus execution remain later Julia leaves. The next frontier is
+  `JULIA-BACKEND-PARITY.3.2`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.2.4` adds Julia function-definition shell projection.
   `julia/src/spec/UserFunctionDefinitionShell.jl` consumes `function_definition` / `function_definition_error`
   nodes shaped by `specs/user_function_definition.spec`, validates source/body spans and staged sidecars,
   normalizes `functions.<index>.body_source` parse-job paths, strips function-definition spans before rule parsing,
-  and keeps direct `parse_spec(...)` rule-only. The next frontier is typed helper/action AST parsing in
+  and keeps direct `parse_spec(...)` rule-only. Typed helper/action AST parsing has since landed in
   `JULIA-BACKEND-PARITY.3.1`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.2.3` adds Julia frontend validation.
   `julia/src/spec/Validator.jl` exposes `validate_spec(spec; strict_syntax=false)` and

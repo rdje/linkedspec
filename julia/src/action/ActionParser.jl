@@ -1,0 +1,1279 @@
+struct _ActionTextSpan
+    text::String
+    start::Int
+    stop::Int
+end
+
+struct _ActionAttachedBlock
+    head::String
+    body::String
+    open_index::Int
+    close_index::Int
+end
+
+struct _ActionParsedCallee
+    name::String
+    source_method::String
+    payload::String
+    payload_start::Int
+end
+
+struct _ActionControlHead
+    head::String
+    keyword::String
+end
+
+struct _ActionSwitchBranches
+    cases::Vector{ActionExpr}
+    default_case::Union{Nothing,ActionExpr}
+end
+
+_ActionSwitchBranches() = _ActionSwitchBranches(ActionExpr[], nothing)
+
+struct _ActionSeparator
+    index::Int
+    length::Int
+    token::String
+end
+
+mutable struct _ActionScanState
+    quote_char::Union{Nothing,Char}
+    escaped::Bool
+    in_regex::Bool
+    paren_depth::Int
+    bracket_depth::Int
+    brace_depth::Int
+end
+
+_ActionScanState() = _ActionScanState(nothing, false, false, 0, 0, 0)
+_action_is_top_level(state::_ActionScanState) = state.paren_depth == 0 && state.bracket_depth == 0 && state.brace_depth == 0
+
+function parse_action_block(source::AbstractString)
+    text = String(source)
+    pieces = _action_split_top_level_statements(text, 0)
+    return ActionBlock(
+        source = text,
+        source_span = ActionSourceSpan(0, _action_len(text)),
+        statements = [
+            parse_action_statement(piece.text, piece.start) for piece in pieces
+        ],
+    )
+end
+
+function parse_action_statement(source::AbstractString, base_start::Int = 0)
+    text = String(source)
+    trimmed = _action_trim_with_offsets(text, base_start)
+    expr = parse_action_expression(trimmed.text, trimmed.start)
+    return ActionStatement(
+        source = trimmed.text,
+        source_span = ActionSourceSpan(trimmed.start, trimmed.stop),
+        expr = expr,
+    )
+end
+
+function parse_action_expression(source::AbstractString, base_start::Int = 0)
+    text = String(source)
+    trimmed = _action_trim_with_offsets(text, base_start)
+    if isempty(trimmed.text)
+        return ActionRawExpr(
+            source = trimmed.text,
+            source_span = ActionSourceSpan(trimmed.start, trimmed.stop),
+            reason = "empty_expression",
+        )
+    end
+    return _action_parse_expr(trimmed.text, trimmed.start)
+end
+
+function _action_parse_expr(text::String, start::Int)
+    assignment = _action_parse_assignment(text, start)
+    if assignment !== nothing
+        return assignment
+    end
+
+    chain = _action_parse_fluent_chain(text, start)
+    if chain !== nothing
+        return chain
+    end
+
+    return _action_parse_expr_without_chain(text, start)
+end
+
+function _action_parse_expr_without_chain(text::String, start::Int)
+    grouped = _action_parse_grouped(text, start)
+    if grouped !== nothing
+        return grouped
+    end
+
+    literal = _action_parse_literal(text, start)
+    if literal !== nothing
+        return literal
+    end
+
+    shape = _action_parse_shape_or_block(text, start)
+    if shape !== nothing
+        return shape
+    end
+
+    control = _action_parse_control_flow(text, start)
+    if control !== nothing
+        return control
+    end
+
+    call = _action_parse_call(text, start)
+    if call !== nothing
+        return call
+    end
+
+    access = _action_parse_variable_or_access(text, start)
+    if access !== nothing
+        return access
+    end
+
+    return ActionRawExpr(
+        source = text,
+        source_span = ActionSourceSpan(start, start + _action_len(text)),
+        reason = "unsupported_expression",
+    )
+end
+
+function _action_parse_grouped(text::String, start::Int)
+    if !startswith(text, "(") || !endswith(text, ")")
+        return nothing
+    end
+    close = _action_find_matching_delimiter(text, 0, '(', ')')
+    if close != _action_len(text) - 1
+        return nothing
+    end
+    inner = _action_slice(text, 1, _action_len(text) - 1)
+    trimmed = _action_trim_with_offsets(inner, start + 1)
+    return parse_action_expression(trimmed.text, trimmed.start)
+end
+
+function _action_parse_literal(text::String, start::Int)
+    stop = start + _action_len(text)
+    if occursin(r"^-?\d+(?:\.\d+)?$", text)
+        value = occursin('.', text) ? parse(Float64, text) : parse(Int, text)
+        return ActionNumberLiteralExpr(
+            source = text,
+            source_span = ActionSourceSpan(start, stop),
+            value = value,
+        )
+    end
+    if text == "undef"
+        return ActionUndefExpr(source = text, source_span = ActionSourceSpan(start, stop))
+    end
+    if text == "true" || text == "false"
+        return ActionBooleanLiteralExpr(
+            source = text,
+            source_span = ActionSourceSpan(start, stop),
+            value = text == "true",
+        )
+    end
+    if _action_len(text) >= 2
+        chars = collect(text)
+        first_char = chars[1]
+        last_char = chars[end]
+        if (first_char == '"' || first_char == '\'') && last_char == first_char
+            payload = _action_slice(text, 1, _action_len(text) - 1)
+            return ActionStringLiteralExpr(
+                source = text,
+                source_span = ActionSourceSpan(start, stop),
+                value = _action_unescape_string(payload),
+                quote_char = string(first_char),
+            )
+        end
+    end
+    regex = match(r"^/((?:\\.|[^/])*)/([A-Za-z]*)$", text)
+    if regex !== nothing
+        return ActionRegexLiteralExpr(
+            source = text,
+            source_span = ActionSourceSpan(start, stop),
+            pattern = regex.captures[1],
+            flags = regex.captures[2],
+        )
+    end
+    return nothing
+end
+
+function _action_parse_shape_or_block(text::String, start::Int)
+    if startswith(text, "[")
+        return _action_parse_array_literal(text, start)
+    end
+    if startswith(text, "{")
+        return _action_parse_brace_expr(text, start)
+    end
+    return nothing
+end
+
+function _action_parse_array_literal(text::String, start::Int)
+    if !_action_outer_delimiter_is_balanced(text, '[', ']')
+        return nothing
+    end
+    payload = _action_slice(text, 1, _action_len(text) - 1)
+    return ActionArrayLiteralExpr(
+        source = text,
+        source_span = ActionSourceSpan(start, start + _action_len(text)),
+        items = [
+            parse_action_expression(part.text, part.start) for part in _action_split_top_level_csv(payload, start + 1)
+        ],
+    )
+end
+
+function _action_parse_brace_expr(text::String, start::Int)
+    if !_action_outer_delimiter_is_balanced(text, '{', '}')
+        return nothing
+    end
+    payload = _action_slice(text, 1, _action_len(text) - 1)
+    if isempty(strip(payload)) || _action_has_top_level_hash_pair_separator(payload)
+        return _action_parse_hash_literal(text, payload, start)
+    end
+    return ActionBlockValueExpr(
+        source = text,
+        source_span = ActionSourceSpan(start, start + _action_len(text)),
+        block = _action_parse_block(payload, start + 1),
+    )
+end
+
+function _action_parse_hash_literal(text::String, payload::String, start::Int)
+    entries = ActionHashLiteralEntry[]
+    for part in _action_split_top_level_csv(payload, start + 1)
+        if isempty(strip(part.text))
+            continue
+        end
+        separator = _action_find_top_level_hash_pair_separator(part.text)
+        if separator === nothing
+            return ActionRawExpr(
+                source = text,
+                source_span = ActionSourceSpan(start, start + _action_len(text)),
+                reason = "invalid_hash_literal",
+            )
+        end
+        if separator.token == "=>"
+            return ActionRawExpr(
+                source = text,
+                source_span = ActionSourceSpan(start, start + _action_len(text)),
+                reason = "hash_literal_use_colon",
+            )
+        end
+        key_text = _action_slice(part.text, 0, separator.index)
+        value_text = _action_slice(part.text, separator.index + separator.length, _action_len(part.text))
+        key = _action_trim_with_offsets(key_text, part.start)
+        value = _action_trim_with_offsets(value_text, part.start + separator.index + separator.length)
+        push!(
+            entries,
+            ActionHashLiteralEntry(
+                key = parse_action_expression(key.text, key.start),
+                value = parse_action_expression(value.text, value.start),
+            ),
+        )
+    end
+    return ActionHashLiteralExpr(
+        source = text,
+        source_span = ActionSourceSpan(start, start + _action_len(text)),
+        entries = entries,
+    )
+end
+
+function _action_parse_control_flow(text::String, start::Int)
+    attached = _action_split_attached_block(text)
+    if attached !== nothing
+        head = _action_trim_with_offsets(attached.head, start)
+        if !isempty(head.text)
+            return _action_parse_control_head(
+                head.text,
+                head.start,
+                text,
+                start,
+                start + _action_len(text),
+                attached,
+            )
+        end
+    end
+    return _action_parse_control_head(text, start, text, start, start + _action_len(text), nothing)
+end
+
+function _action_parse_control_head(
+    head::String,
+    head_start::Int,
+    full_source::String,
+    full_start::Int,
+    full_stop::Int,
+    attached,
+)
+    normalized = _action_normalize_control_head(head)
+    if normalized === nothing
+        return nothing
+    end
+    parsed = _action_parse_callee(normalized.head)
+    if parsed === nothing
+        return nothing
+    end
+    canonical = _action_canonical_control_keyword(parsed.name)
+    if canonical === nothing
+        return nothing
+    end
+    args = _action_parse_arguments(parsed.payload, head_start + parsed.payload_start)
+    body = attached === nothing ? nothing : _action_parse_block(attached.body, full_start + attached.open_index + 1)
+    body_span = attached === nothing ? nothing : ActionSourceSpan(
+        full_start + attached.open_index,
+        full_start + attached.close_index + 1,
+    )
+    first_arg = length(args) == 1 ? args[1].value : nothing
+
+    if parsed.name in ("if", "i", "when", "elseif", "elif")
+        if first_arg === nothing
+            return nothing
+        end
+        return ActionControlIfExpr(
+            source = full_source,
+            source_span = ActionSourceSpan(full_start, full_stop),
+            keyword = normalized.keyword,
+            canonical_keyword = canonical,
+            branch_role = parsed.name in ("elseif", "elif") ? "elseif" : "if",
+            condition = first_arg,
+            args = args,
+            body = body,
+            body_source_span = body_span,
+        )
+    elseif parsed.name in ("else", "otherwise")
+        if !isempty(args)
+            return nothing
+        end
+        return ActionControlElseExpr(
+            source = full_source,
+            source_span = ActionSourceSpan(full_start, full_stop),
+            keyword = normalized.keyword,
+            canonical_keyword = canonical,
+            args = args,
+            body = body,
+            body_source_span = body_span,
+        )
+    elseif parsed.name == "endif"
+        if !isempty(args) || attached !== nothing
+            return nothing
+        end
+        return ActionControlMarkerExpr(
+            kind = "control_endif",
+            source = full_source,
+            source_span = ActionSourceSpan(full_start, full_stop),
+            keyword = normalized.keyword,
+            canonical_keyword = canonical,
+            args = args,
+        )
+    elseif parsed.name == "while"
+        if first_arg === nothing
+            return nothing
+        end
+        return ActionControlWhileExpr(
+            source = full_source,
+            source_span = ActionSourceSpan(full_start, full_stop),
+            keyword = normalized.keyword,
+            canonical_keyword = canonical,
+            condition = first_arg,
+            args = args,
+            body = body,
+            body_source_span = body_span,
+        )
+    elseif parsed.name == "switch"
+        if first_arg === nothing
+            return nothing
+        end
+        branches = attached === nothing ? _ActionSwitchBranches() : _action_parse_switch_branches(
+            _action_slice(full_source, attached.open_index, attached.close_index + 1),
+            full_start + attached.open_index,
+        )
+        return ActionControlSwitchExpr(
+            source = full_source,
+            source_span = ActionSourceSpan(full_start, full_stop),
+            keyword = normalized.keyword,
+            canonical_keyword = canonical,
+            source_expr = first_arg,
+            args = args,
+            body = body,
+            body_source_span = body_span,
+            cases = branches.cases,
+            default_case = branches.default_case,
+        )
+    elseif parsed.name == "case"
+        if first_arg === nothing
+            return nothing
+        end
+        return ActionControlCaseExpr(
+            source = full_source,
+            source_span = ActionSourceSpan(full_start, full_stop),
+            keyword = normalized.keyword,
+            canonical_keyword = canonical,
+            match = first_arg,
+            args = args,
+            body = body,
+            body_source_span = body_span,
+        )
+    elseif parsed.name == "default"
+        if !isempty(args)
+            return nothing
+        end
+        return ActionControlDefaultExpr(
+            source = full_source,
+            source_span = ActionSourceSpan(full_start, full_stop),
+            keyword = normalized.keyword,
+            canonical_keyword = canonical,
+            args = args,
+            body = body,
+            body_source_span = body_span,
+        )
+    elseif parsed.name in ("endcase", "endswitch")
+        if !isempty(args) || attached !== nothing
+            return nothing
+        end
+        return ActionControlMarkerExpr(
+            kind = parsed.name == "endcase" ? "control_endcase" : "control_endswitch",
+            source = full_source,
+            source_span = ActionSourceSpan(full_start, full_stop),
+            keyword = normalized.keyword,
+            canonical_keyword = canonical,
+            args = args,
+        )
+    end
+
+    return nothing
+end
+
+function _action_parse_switch_branches(source::String, start::Int)
+    if !_action_outer_delimiter_is_balanced(source, '{', '}')
+        return _ActionSwitchBranches()
+    end
+    payload = _action_slice(source, 1, _action_len(source) - 1)
+    payload_start = start + 1
+    cases = ActionExpr[]
+    default_case = nothing
+    index = 0
+    while index < _action_len(payload)
+        chars = collect(payload)
+        while index < length(chars) && (isspace(chars[index + 1]) || chars[index + 1] == ';')
+            index += 1
+        end
+        if index >= _action_len(payload)
+            break
+        end
+        open = _action_find_top_level_open_brace(payload, index)
+        if open === nothing
+            break
+        end
+        close = _action_find_matching_delimiter(payload, open, '{', '}')
+        if close === nothing
+            break
+        end
+        expr_text = _action_slice(payload, index, close + 1)
+        expr = parse_action_expression(expr_text, payload_start + index)
+        if expr isa ActionControlCaseExpr
+            push!(cases, expr)
+        elseif expr isa ActionControlDefaultExpr
+            default_case = expr
+        end
+        index = close + 1
+    end
+    return _ActionSwitchBranches(cases, default_case)
+end
+
+function _action_parse_call(text::String, start::Int)
+    attached = _action_split_attached_block(text)
+    if attached !== nothing
+        head = _action_trim_with_offsets(attached.head, start)
+        parsed = _action_parse_callee(head.text)
+        if parsed === nothing
+            return nothing
+        end
+        args = _action_parse_arguments(parsed.payload, head.start + parsed.payload_start)
+        block_source = _action_slice(text, attached.open_index, attached.close_index + 1)
+        block_span = ActionSourceSpan(start + attached.open_index, start + attached.close_index + 1)
+        push!(
+            args,
+            ActionPositionalArgument(
+                ActionBlockValueExpr(
+                    source = block_source,
+                    source_span = block_span,
+                    block = _action_parse_block(attached.body, start + attached.open_index + 1),
+                ),
+            ),
+        )
+        return ActionCallExpr(
+            source = text,
+            source_span = ActionSourceSpan(start, start + _action_len(text)),
+            name = parsed.name,
+            source_method = parsed.source_method,
+            args = args,
+            trailing_block_arg = true,
+            trailing_block_source_span = block_span,
+        )
+    end
+
+    parsed = _action_parse_callee(text)
+    if parsed === nothing
+        return nothing
+    end
+    return ActionCallExpr(
+        source = text,
+        source_span = ActionSourceSpan(start, start + _action_len(text)),
+        name = parsed.name,
+        source_method = parsed.source_method,
+        args = _action_parse_arguments(parsed.payload, start + parsed.payload_start),
+    )
+end
+
+function _action_parse_variable_or_access(text::String, start::Int)
+    match_result = match(r"^\$?([A-Za-z_]\w*)", text)
+    if match_result === nothing
+        return nothing
+    end
+    name = match_result.captures[1]
+    pos = _action_len(match_result.match)
+    chars = collect(text)
+    while pos < length(chars) && isspace(chars[pos + 1])
+        pos += 1
+    end
+    if pos == length(chars)
+        return ActionVariableExpr(
+            source = text,
+            source_span = ActionSourceSpan(start, start + _action_len(text)),
+            name = name,
+        )
+    end
+    if chars[pos + 1] != '['
+        return nothing
+    end
+    segments = _action_parse_access_segments(text, pos, start)
+    if segments === nothing || isempty(segments)
+        return nothing
+    end
+    if length(segments) == 1 && segments[1] isa ActionIndexAccessSegment
+        return ActionIndexedVarExpr(
+            source = text,
+            source_span = ActionSourceSpan(start, start + _action_len(text)),
+            name = name,
+            index = segments[1].expr,
+        )
+    end
+    return ActionNestedAccessExpr(
+        source = text,
+        source_span = ActionSourceSpan(start, start + _action_len(text)),
+        base = name,
+        segments = segments,
+    )
+end
+
+function _action_parse_access_segments(text::String, pos::Int, start::Int)
+    segments = ActionAccessSegment[]
+    chars = collect(text)
+    while pos < length(chars)
+        while pos < length(chars) && isspace(chars[pos + 1])
+            pos += 1
+        end
+        if pos == length(chars)
+            return segments
+        end
+        if chars[pos + 1] != '['
+            return nothing
+        end
+        close = _action_find_matching_delimiter(text, pos, '[', ']')
+        if close === nothing
+            return nothing
+        end
+        payload = _action_slice(text, pos + 1, close)
+        trimmed = _action_trim_with_offsets(payload, start + pos + 1)
+        expr = parse_action_expression(trimmed.text, trimmed.start)
+        segment_source = _action_slice(text, pos, close + 1)
+        segment_span = ActionSourceSpan(start + pos, start + close + 1)
+        if expr isa ActionStringLiteralExpr
+            push!(
+                segments,
+                ActionKeyAccessSegment(
+                    value = expr.value,
+                    source = segment_source,
+                    source_span = segment_span,
+                ),
+            )
+        else
+            push!(
+                segments,
+                ActionIndexAccessSegment(
+                    expr = expr,
+                    source = segment_source,
+                    source_span = segment_span,
+                ),
+            )
+        end
+        pos = close + 1
+    end
+    return segments
+end
+
+function _action_parse_assignment(text::String, start::Int)
+    append_index = _action_find_top_level_token(text, "+=")
+    if append_index !== nothing
+        left = strip(_action_slice(text, 0, append_index))
+        if !_action_is_identifier(left)
+            return nothing
+        end
+        value = _action_trim_with_offsets(
+            _action_slice(text, append_index + 2, _action_len(text)),
+            start + append_index + 2,
+        )
+        return ActionAssignArrayAppendExpr(
+            source = text,
+            source_span = ActionSourceSpan(start, start + _action_len(text)),
+            name = left,
+            value = parse_action_expression(value.text, value.start),
+        )
+    end
+
+    eq_index = _action_find_top_level_assignment_equals(text)
+    if eq_index === nothing
+        return nothing
+    end
+    left = _action_trim_with_offsets(_action_slice(text, 0, eq_index), start)
+    if isempty(left.text)
+        return nothing
+    end
+    right = _action_trim_with_offsets(
+        _action_slice(text, eq_index + 1, _action_len(text)),
+        start + eq_index + 1,
+    )
+    value = parse_action_expression(right.text, right.start)
+    if _action_is_identifier(left.text)
+        return ActionAssignScalarExpr(
+            source = text,
+            source_span = ActionSourceSpan(start, start + _action_len(text)),
+            name = left.text,
+            value = value,
+        )
+    end
+
+    target = _action_parse_variable_or_access(left.text, left.start)
+    if target isa ActionIndexedVarExpr
+        return ActionAssignHashIndexExpr(
+            source = text,
+            source_span = ActionSourceSpan(start, start + _action_len(text)),
+            name = target.name,
+            key = target.index,
+            value = value,
+        )
+    elseif target isa ActionNestedAccessExpr
+        if length(target.segments) == 1
+            segment = target.segments[1]
+            key = if segment isa ActionKeyAccessSegment
+                ActionStringLiteralExpr(
+                    source = segment.source,
+                    source_span = segment.source_span,
+                    value = segment.value,
+                    quote_char = "\"",
+                )
+            else
+                segment.expr
+            end
+            return ActionAssignHashIndexExpr(
+                source = text,
+                source_span = ActionSourceSpan(start, start + _action_len(text)),
+                name = target.base,
+                key = key,
+                value = value,
+            )
+        end
+        return ActionAssignNestedAccessExpr(
+            source = text,
+            source_span = ActionSourceSpan(start, start + _action_len(text)),
+            base = target.base,
+            segments = target.segments,
+            value = value,
+        )
+    end
+    return nothing
+end
+
+function _action_parse_fluent_chain(text::String, start::Int)
+    segments = _action_split_top_level_fluent_segments(text)
+    if length(segments) <= 1
+        return nothing
+    end
+    receiver_segment = first(segments)
+    receiver = _action_parse_expr_without_chain(receiver_segment.text, start + receiver_segment.start)
+    calls = ActionFluentCall[]
+    for segment in segments[2:end]
+        call = _action_parse_fluent_call_segment(segment.text, start + segment.start, start + segment.stop)
+        if call === nothing
+            return ActionRawExpr(
+                source = text,
+                source_span = ActionSourceSpan(start, start + _action_len(text)),
+                reason = "invalid_fluent_chain",
+            )
+        end
+        push!(calls, call)
+    end
+    return ActionFluentChainExpr(
+        source = text,
+        source_span = ActionSourceSpan(start, start + _action_len(text)),
+        receiver = receiver,
+        calls = calls,
+    )
+end
+
+function _action_parse_fluent_call_segment(text::String, start::Int, stop::Int)
+    parsed = _action_parse_callee(text)
+    if parsed !== nothing
+        return ActionFluentCall(
+            method = parsed.name,
+            source_method = parsed.source_method,
+            args = _action_parse_arguments(parsed.payload, start + parsed.payload_start),
+            source = text,
+            source_span = ActionSourceSpan(start, stop),
+        )
+    end
+    attached = _action_split_attached_block(text)
+    if attached === nothing
+        return nothing
+    end
+    head = _action_trim_with_offsets(attached.head, start)
+    head_call = _action_parse_callee(head.text)
+    if head_call === nothing || !(head_call.name in ("with", "walk_leaves", "map_leaves", "reduce_leaves"))
+        return nothing
+    end
+    args = _action_parse_arguments(head_call.payload, head.start + head_call.payload_start)
+    block_source = _action_slice(text, attached.open_index, attached.close_index + 1)
+    block_span = ActionSourceSpan(start + attached.open_index, start + attached.close_index + 1)
+    push!(
+        args,
+        ActionPositionalArgument(
+            ActionBlockValueExpr(
+                source = block_source,
+                source_span = block_span,
+                block = _action_parse_block(attached.body, start + attached.open_index + 1),
+            ),
+        ),
+    )
+    return ActionFluentCall(
+        method = head_call.name,
+        source_method = head_call.source_method,
+        args = args,
+        source = text,
+        source_span = ActionSourceSpan(start, stop),
+        trailing_block_arg = true,
+        receiver_trailing_block_arg = true,
+        trailing_block_source_span = block_span,
+    )
+end
+
+function _action_parse_arguments(payload::String, start::Int)
+    args = ActionArgument[]
+    for part in _action_split_top_level_csv(payload, start)
+        if isempty(strip(part.text))
+            continue
+        end
+        expression = parse_action_expression(part.text, part.start)
+        keyword_index = _action_find_top_level_assignment_equals(part.text)
+        if keyword_index !== nothing && !(expression isa ActionAssignScalarExpr)
+            name = strip(_action_slice(part.text, 0, keyword_index))
+            if _action_is_identifier(name)
+                value = _action_trim_with_offsets(
+                    _action_slice(part.text, keyword_index + 1, _action_len(part.text)),
+                    part.start + keyword_index + 1,
+                )
+                push!(
+                    args,
+                    ActionKeywordArgument(
+                        name = name,
+                        value = parse_action_expression(value.text, value.start),
+                    ),
+                )
+                continue
+            end
+        end
+        push!(args, ActionPositionalArgument(expression))
+    end
+    return args
+end
+
+function _action_parse_block(source::AbstractString, base_start::Int)
+    text = String(source)
+    pieces = _action_split_top_level_statements(text, base_start)
+    return ActionBlock(
+        source = text,
+        source_span = ActionSourceSpan(base_start, base_start + _action_len(text)),
+        statements = [
+            parse_action_statement(piece.text, piece.start) for piece in pieces
+        ],
+    )
+end
+
+function _action_split_top_level_statements(text::String, base_start::Int)
+    pieces = _ActionTextSpan[]
+    state = _ActionScanState()
+    segment_start = 0
+    chars = collect(text)
+    index = 0
+    while index < length(chars)
+        ch = chars[index + 1]
+        if _action_consume_scan_char!(state, text, index, ch)
+            index += 1
+            continue
+        end
+        if ch == '}' && _action_is_top_level(state)
+            next = _action_next_non_whitespace_index(text, index + 1)
+            if next !== nothing && _action_starts_attached_branch_continuation(text, next)
+                piece = _action_trim_with_offsets(_action_slice(text, segment_start, index + 1), base_start + segment_start)
+                if !isempty(piece.text)
+                    push!(pieces, piece)
+                end
+                segment_start = next
+                index = next
+                continue
+            end
+        end
+        separator = _action_is_top_level(state) && (ch == ';' || ch == '\n' || ch == '\r')
+        if separator
+            piece = _action_trim_with_offsets(_action_slice(text, segment_start, index), base_start + segment_start)
+            if !isempty(piece.text)
+                push!(pieces, piece)
+            end
+            segment_start = index + 1
+        end
+        index += 1
+    end
+    final_piece = _action_trim_with_offsets(_action_slice(text, segment_start, length(chars)), base_start + segment_start)
+    if !isempty(final_piece.text)
+        push!(pieces, final_piece)
+    end
+    return pieces
+end
+
+function _action_next_non_whitespace_index(text::String, start::Int)
+    chars = collect(text)
+    for index in start:(length(chars) - 1)
+        if !isspace(chars[index + 1])
+            return index
+        end
+    end
+    return nothing
+end
+
+function _action_starts_attached_branch_continuation(text::String, index::Int)
+    for keyword in ("elseif", "elif", "else", "otherwise")
+        if !_action_startswith_at(text, keyword, index)
+            continue
+        end
+        stop = index + _action_len(keyword)
+        chars = collect(text)
+        if stop >= length(chars)
+            return true
+        end
+        next = chars[stop + 1]
+        if isspace(next) || next == '(' || next == '{'
+            return true
+        end
+    end
+    return false
+end
+
+_action_split_top_level_csv(text::String, base_start::Int) = _action_split_top_level_on(text, base_start, ',')
+
+function _action_split_top_level_on(text::String, base_start::Int, separator::Char)
+    pieces = _ActionTextSpan[]
+    state = _ActionScanState()
+    segment_start = 0
+    chars = collect(text)
+    for index in 0:(length(chars) - 1)
+        ch = chars[index + 1]
+        if _action_consume_scan_char!(state, text, index, ch)
+            continue
+        end
+        if _action_is_top_level(state) && ch == separator
+            piece = _action_trim_with_offsets(_action_slice(text, segment_start, index), base_start + segment_start)
+            if !isempty(piece.text)
+                push!(pieces, piece)
+            end
+            segment_start = index + 1
+        end
+    end
+    final_piece = _action_trim_with_offsets(_action_slice(text, segment_start, length(chars)), base_start + segment_start)
+    if !isempty(final_piece.text)
+        push!(pieces, final_piece)
+    end
+    return pieces
+end
+
+_action_has_top_level_hash_pair_separator(text::String) = _action_find_top_level_hash_pair_separator(text) !== nothing
+
+function _action_find_top_level_hash_pair_separator(text::String)
+    state = _ActionScanState()
+    chars = collect(text)
+    for index in 0:(length(chars) - 1)
+        ch = chars[index + 1]
+        if _action_consume_scan_char!(state, text, index, ch)
+            continue
+        end
+        if !_action_is_top_level(state)
+            continue
+        end
+        if ch == '=' && index + 1 < length(chars) && chars[index + 2] == '>'
+            return _ActionSeparator(index, 2, "=>")
+        end
+        if ch == ':'
+            prev = index > 0 ? chars[index] : '\0'
+            next = index + 1 < length(chars) ? chars[index + 2] : '\0'
+            if prev != ':' && next != ':'
+                return _ActionSeparator(index, 1, ":")
+            end
+        end
+    end
+    return nothing
+end
+
+function _action_find_top_level_token(text::String, token::String)
+    state = _ActionScanState()
+    chars = collect(text)
+    token_len = _action_len(token)
+    if token_len == 0 || token_len > length(chars)
+        return nothing
+    end
+    for index in 0:(length(chars) - token_len)
+        ch = chars[index + 1]
+        if _action_consume_scan_char!(state, text, index, ch)
+            continue
+        end
+        if _action_is_top_level(state) && _action_startswith_at(text, token, index)
+            return index
+        end
+    end
+    return nothing
+end
+
+function _action_find_top_level_assignment_equals(text::String)
+    state = _ActionScanState()
+    chars = collect(text)
+    for index in 0:(length(chars) - 1)
+        ch = chars[index + 1]
+        if _action_consume_scan_char!(state, text, index, ch)
+            continue
+        end
+        if !_action_is_top_level(state) || ch != '='
+            continue
+        end
+        prev = index > 0 ? chars[index] : '\0'
+        next = index + 1 < length(chars) ? chars[index + 2] : '\0'
+        if prev in ('!', '<', '>', '=') || next == '=' || next == '>'
+            continue
+        end
+        return index
+    end
+    return nothing
+end
+
+function _action_split_attached_block(text::String)
+    open = _action_find_top_level_open_brace(text, 0)
+    if open === nothing
+        return nothing
+    end
+    close = _action_find_matching_delimiter(text, open, '{', '}')
+    if close === nothing || !isempty(strip(_action_slice(text, close + 1, _action_len(text))))
+        return nothing
+    end
+    return _ActionAttachedBlock(
+        _action_slice(text, 0, open),
+        _action_slice(text, open + 1, close),
+        open,
+        close,
+    )
+end
+
+function _action_find_top_level_open_brace(text::String, start::Int)
+    state = _ActionScanState()
+    chars = collect(text)
+    for index in start:(length(chars) - 1)
+        ch = chars[index + 1]
+        if state.quote_char === nothing && !state.in_regex && _action_is_top_level(state) && ch == '{'
+            return index
+        end
+        if _action_consume_scan_char!(state, text, index, ch)
+            continue
+        end
+    end
+    return nothing
+end
+
+function _action_parse_callee(text::String)
+    trimmed = String(strip(text))
+    open = _action_find_top_level_open_paren(trimmed)
+    if open === nothing
+        return nothing
+    end
+    close = _action_find_matching_delimiter(trimmed, open, '(', ')')
+    if close != _action_len(trimmed) - 1
+        return nothing
+    end
+    raw_name = strip(_action_slice(trimmed, 0, open))
+    if !_action_is_identifier(raw_name) && !_action_is_symbol_callee(raw_name)
+        return nothing
+    end
+    return _ActionParsedCallee(
+        raw_name,
+        raw_name,
+        _action_slice(trimmed, open + 1, close),
+        open + 1,
+    )
+end
+
+function _action_find_top_level_open_paren(text::String)
+    state = _ActionScanState()
+    chars = collect(text)
+    for index in 0:(length(chars) - 1)
+        ch = chars[index + 1]
+        if state.quote_char === nothing && !state.in_regex && _action_is_top_level(state) && ch == '('
+            return index
+        end
+        if _action_consume_scan_char!(state, text, index, ch)
+            continue
+        end
+    end
+    return nothing
+end
+
+function _action_normalize_control_head(head::String)
+    trimmed = strip(head)
+    if isempty(trimmed)
+        return nothing
+    end
+    if trimmed == "otherwise"
+        return _ActionControlHead("else()", "otherwise")
+    end
+    if trimmed in ("else", "endif", "default", "endcase", "endswitch")
+        return _ActionControlHead("$trimmed()", trimmed)
+    end
+    match_result = match(r"^([A-Za-z_]\w*)", trimmed)
+    if match_result === nothing || _action_canonical_control_keyword(match_result.captures[1]) === nothing
+        return nothing
+    end
+    return _ActionControlHead(trimmed, match_result.captures[1])
+end
+
+function _action_canonical_control_keyword(method::AbstractString)
+    method = String(method)
+    if method in ("i", "when")
+        return "if"
+    elseif method == "elif"
+        return "elseif"
+    elseif method == "otherwise"
+        return "else"
+    elseif method in ("if", "elseif", "else", "endif", "while", "switch", "case", "default", "endcase", "endswitch")
+        return method
+    end
+    return nothing
+end
+
+function _action_split_top_level_fluent_segments(text::String)
+    segments = _ActionTextSpan[]
+    state = _ActionScanState()
+    segment_start = 0
+    chars = collect(text)
+    for index in 0:(length(chars) - 1)
+        ch = chars[index + 1]
+        if _action_consume_scan_char!(state, text, index, ch)
+            continue
+        end
+        if !_action_is_top_level(state) || ch != '.'
+            continue
+        end
+        prev = index > 0 ? chars[index] : '\0'
+        next = index + 1 < length(chars) ? chars[index + 2] : '\0'
+        if _action_is_digit(prev) && _action_is_digit(next)
+            continue
+        end
+        push!(segments, _action_trim_with_offsets(_action_slice(text, segment_start, index), segment_start))
+        segment_start = index + 1
+    end
+    if isempty(segments)
+        return _ActionTextSpan[]
+    end
+    push!(segments, _action_trim_with_offsets(_action_slice(text, segment_start, length(chars)), segment_start))
+    return segments
+end
+
+function _action_is_identifier(value::AbstractString)
+    return occursin(r"^[A-Za-z_]\w*$", String(value))
+end
+
+function _action_is_symbol_callee(value::AbstractString)
+    return String(value) in ("+", "-", "*", "/", "%", "=", "==", "!=", ">", ">=", "<", "<=")
+end
+
+_action_is_digit(ch::Char) = '0' <= ch <= '9'
+
+function _action_find_matching_delimiter(text::String, open_index::Int, open::Char, close::Char)
+    depth = 0
+    state = _ActionScanState()
+    chars = collect(text)
+    for index in open_index:(length(chars) - 1)
+        ch = chars[index + 1]
+        if _action_consume_quoted_or_regex!(state, text, index, ch)
+            continue
+        end
+        if ch == '"' || ch == '\''
+            state.quote_char = ch
+            continue
+        end
+        if ch == '/' && _action_looks_like_regex_start(text, index)
+            state.in_regex = true
+            continue
+        end
+        if ch == open
+            depth += 1
+        elseif ch == close
+            depth -= 1
+            if depth == 0
+                return index
+            end
+        end
+    end
+    return nothing
+end
+
+function _action_consume_scan_char!(state::_ActionScanState, text::String, index::Int, ch::Char)
+    if _action_consume_quoted_or_regex!(state, text, index, ch)
+        return true
+    end
+    if ch == '"' || ch == '\''
+        state.quote_char = ch
+        return true
+    end
+    if ch == '/' && _action_looks_like_regex_start(text, index)
+        state.in_regex = true
+        return true
+    end
+    if ch == '('
+        state.paren_depth += 1
+    elseif ch == ')'
+        if state.paren_depth > 0
+            state.paren_depth -= 1
+        end
+    elseif ch == '['
+        state.bracket_depth += 1
+    elseif ch == ']'
+        if state.bracket_depth > 0
+            state.bracket_depth -= 1
+        end
+    elseif ch == '{'
+        state.brace_depth += 1
+    elseif ch == '}'
+        if state.brace_depth > 0
+            state.brace_depth -= 1
+        end
+    end
+    return false
+end
+
+function _action_consume_quoted_or_regex!(state::_ActionScanState, text::String, index::Int, ch::Char)
+    if state.quote_char !== nothing
+        if state.escaped
+            state.escaped = false
+            return true
+        end
+        if ch == '\\'
+            state.escaped = true
+            return true
+        end
+        if ch == state.quote_char
+            state.quote_char = nothing
+        end
+        return true
+    end
+    if state.in_regex
+        if state.escaped
+            state.escaped = false
+            return true
+        end
+        if ch == '\\'
+            state.escaped = true
+            return true
+        end
+        if ch == '/'
+            state.in_regex = false
+        end
+        return true
+    end
+    return false
+end
+
+function _action_looks_like_regex_start(text::String, index::Int)
+    chars = collect(text)
+    next = index + 1 < length(chars) ? chars[index + 2] : '\0'
+    if next == '(' || next == '\0' || isspace(next)
+        return false
+    end
+    prev_index = index - 1
+    while prev_index >= 0 && isspace(chars[prev_index + 1])
+        prev_index -= 1
+    end
+    if prev_index < 0
+        return true
+    end
+    return chars[prev_index + 1] in "([{,=:"
+end
+
+function _action_outer_delimiter_is_balanced(text::String, open::Char, close::Char)
+    chars = collect(text)
+    if isempty(chars) || chars[1] != open || chars[end] != close
+        return false
+    end
+    return _action_find_matching_delimiter(text, 0, open, close) == length(chars) - 1
+end
+
+function _action_trim_with_offsets(text::AbstractString, base_start::Int)
+    chars = collect(String(text))
+    leading = 0
+    while leading < length(chars) && isspace(chars[leading + 1])
+        leading += 1
+    end
+    trailing = length(chars)
+    while trailing > leading && isspace(chars[trailing])
+        trailing -= 1
+    end
+    return _ActionTextSpan(
+        _action_slice(String(text), leading, trailing),
+        base_start + leading,
+        base_start + trailing,
+    )
+end
+
+function _action_unescape_string(payload::String)
+    result = IOBuffer()
+    chars = collect(payload)
+    index = 1
+    while index <= length(chars)
+        ch = chars[index]
+        if ch == '\\' && index < length(chars) && chars[index + 1] in ('\\', '\'', '"')
+            print(result, chars[index + 1])
+            index += 2
+        else
+            print(result, ch)
+            index += 1
+        end
+    end
+    return String(take!(result))
+end
+
+_action_len(text::AbstractString) = length(collect(String(text)))
+
+function _action_slice(text::AbstractString, start::Int, stop::Int)
+    chars = collect(String(text))
+    safe_start = max(0, start)
+    safe_stop = min(stop, length(chars))
+    if safe_stop <= safe_start
+        return ""
+    end
+    return String(chars[(safe_start + 1):safe_stop])
+end
+
+function _action_startswith_at(text::String, token::String, index::Int)
+    token_len = _action_len(token)
+    if index < 0 || index + token_len > _action_len(text)
+        return false
+    end
+    return _action_slice(text, index, index + token_len) == token
+end

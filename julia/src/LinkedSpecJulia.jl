@@ -4,11 +4,49 @@ export backend_name,
     backend_status,
     cli_entrypoint,
     corpus_runner_entrypoint,
+    ActionAccessSegment,
+    ActionArgument,
+    ActionArrayLiteralExpr,
+    ActionAssignArrayAppendExpr,
+    ActionAssignHashIndexExpr,
+    ActionAssignNestedAccessExpr,
+    ActionAssignScalarExpr,
+    ActionBlock,
+    ActionBlockValueExpr,
+    ActionBooleanLiteralExpr,
+    ActionCallExpr,
+    ActionControlCaseExpr,
+    ActionControlDefaultExpr,
+    ActionControlElseExpr,
+    ActionControlIfExpr,
+    ActionControlMarkerExpr,
+    ActionControlSwitchExpr,
+    ActionControlWhileExpr,
     CorpusFixture,
     CorpusManifest,
     CorpusManifestException,
     CorpusValidationResult,
     ActionEdgeBodyElementKind,
+    ActionExpr,
+    ActionFluentCall,
+    ActionFluentChainExpr,
+    ActionHashLiteralEntry,
+    ActionHashLiteralExpr,
+    ActionIndexedVarExpr,
+    ActionIndexAccessSegment,
+    ActionKeyAccessSegment,
+    ActionKeywordArgument,
+    ActionNestedAccessExpr,
+    ActionNode,
+    ActionNumberLiteralExpr,
+    ActionPositionalArgument,
+    ActionRawExpr,
+    ActionRegexLiteralExpr,
+    ActionSourceSpan,
+    ActionStatement,
+    ActionStringLiteralExpr,
+    ActionUndefExpr,
+    ActionVariableExpr,
     BlindEdgeBodyElementKind,
     BodyElement,
     CodeBlockBodyElementKind,
@@ -21,6 +59,9 @@ export backend_name,
     load_corpus_fixtures,
     parse_spec,
     parse_spec_with_user_function_definition_asts,
+    parse_action_block,
+    parse_action_expression,
+    parse_action_statement,
     PlainBlockBodyElementKind,
     project_user_function_definition_asts,
     RawBodyElementKind,
@@ -59,10 +100,12 @@ const PACKAGE_NAME = "LinkedSpecJulia"
 const PACKAGE_VERSION = v"0.1.0"
 const CLI_ENTRYPOINT = "julia/bin/linkedspec_julia.jl"
 const CORPUS_RUNNER_ENTRYPOINT = "julia/bin/corpus_runner.jl"
-const PARITY_STATUS = "function-shell-projection"
+const PARITY_STATUS = "action-ast-parser"
 
 include("corpus/CorpusManifest.jl")
 include("spec/Ast.jl")
+include("action/ActionAst.jl")
+include("action/ActionParser.jl")
 include("spec/Parser.jl")
 include("spec/UserFunctionDefinitionShell.jl")
 include("spec/Validator.jl")

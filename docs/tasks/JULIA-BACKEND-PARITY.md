@@ -140,13 +140,15 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Children: `.3.1`, `.3.2`, `.3.3`, `.3.4`
 
 - ID: `JULIA-BACKEND-PARITY.3.1`
-  Status: `pending`
+  Status: `done`
   Goal: Parse helper/action source into typed expression and statement AST nodes.
   Acceptance: Calls, literals, variables, direct/nested access, shape literals, assignments, block values,
     structured controls, receiver chains, trailing blocks, and standalone value-drop statements are structural AST
     nodes, not text rewrites.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `Pkg.test()` covers 74 Action AST parser assertions over calls, literals, variables,
+    direct/nested access, shape literals, assignments, block values, structured controls, receiver chains, trailing
+    blocks, standalone value-drop statements, and raw fallback nodes; total Julia tests pass with 353 assertions.
+  Commit: `JULIA-BACKEND-PARITY.3.1 - add Julia ActionIR AST parser`
 
 - ID: `JULIA-BACKEND-PARITY.3.2`
   Status: `pending`
@@ -318,7 +320,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.3.1` | `pending` | Parse helper/action source into typed AST nodes before contract resolution or compilation. |
+| 1 | `JULIA-BACKEND-PARITY.3.2` | `pending` | Resolve typed helper/action AST nodes to canonical helper contracts and diagnostics before registry/compiled-state work. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -349,13 +351,15 @@ julia/
   src/LinkedSpecJulia.jl
   src/cli/LinkedSpecJuliaCli.jl
   src/corpus/CorpusManifest.jl
+  src/action/ActionAst.jl
+  src/action/ActionParser.jl
   bin/linkedspec_julia.jl
   bin/corpus_runner.jl
   test/runtests.jl
 ```
 
-Planned future implementation subtrees remain deferred to later leaves: `src/spec/`, `src/action/`, `src/compiler/`,
-and `src/runtime/`.
+Implemented frontend/action subtrees are `src/spec/` and `src/action/`. Planned future implementation subtrees
+remain deferred to later leaves: `src/compiler/` and `src/runtime/`.
 
 Current command surface:
 
@@ -458,6 +462,42 @@ Function-shell projection evidence recorded on 2026-07-10:
 - Focused tests cover successful projection, malformed error nodes, sidecar drift rejection, output wrapper
   normalization, stripped rule parsing, and validation of the resulting `SpecFile`.
 
+## `JULIA-BACKEND-PARITY.3.1` ActionIR AST Parser Result
+
+ActionIR parser evidence recorded on 2026-07-10:
+
+- `julia/src/action/ActionAst.jl` adds typed Julia records and JSON projection for `action_block`,
+  `action_stmt`, call/argument nodes, variables, indexed/nested access segments, array/hash literals, block values,
+  string/number/boolean/regex/undef literals, scalar/array/hash/nested assignment nodes, receiver fluent chains,
+  structured control nodes, and `raw_perl` fallback nodes.
+- `julia/src/action/ActionParser.jl` exposes `parse_action_block(...)`, `parse_action_statement(...)`, and
+  `parse_action_expression(...)`.
+- The parser splits top-level value-drop statements, protects delimiters inside strings/regex literals and nested
+  delimiters, parses helper and receiver trailing-block arguments, preserves receiver chains as `fluent_chain`
+  nodes, and keeps unsupported expressions structural as `raw_perl` rather than rewriting text.
+- Focused tests mirror the Dart ActionIR parser contract for calls, literals, nested access, shape literals,
+  assignments, assignment receiver chains, receiver chains, trailing blocks, quoted delimiter arguments, block
+  values, attached if/elseif/else/while/switch controls, and unsupported raw fallback expressions.
+- The package parity status is now `action-ast-parser`. Contract resolution, user-function resolution,
+  compilation, runtime behavior, staged parser execution, diagnostics/trace, and corpus execution remain later
+  leaves.
+
+## Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `JULIA-BACKEND-PARITY.3.1` acceptance required Julia helper/action source to become
+  typed AST nodes before contract resolution; Dart parity target inspected in `dart/lib/src/action/action_ast.dart`,
+  `dart/lib/src/action/action_parser.dart`, and `dart/test/action_ast_parser_test.dart`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Julia had no `src/action/` typed AST/parser surface after `.2.4`; helper/action
+  text could only remain raw source until `.3.1` added structural parsing.
+- [x] **FIX** — Added `julia/src/action/ActionAst.jl` and `julia/src/action/ActionParser.jl`, exported the typed
+  ActionIR API from `julia/src/LinkedSpecJulia.jl`, and advanced package status to `action-ast-parser`.
+- [x] **ADDRESSED (verified)** — `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia
+  --project=julia -e 'using Pkg; Pkg.test()'` passes with 74 Action AST parser assertions.
+- [x] **NO REGRESSION** — The same `Pkg.test()` run passes the existing scaffold, source parser, validation,
+  function-shell projection, corpus IO, and source AST JSON contract tests for 353 total assertions.
+- [x] **LOCKSTEP** — README, task tree, live docs, roadmaps, mdBook handoff/status pages, Knowledge Map fact card,
+  architecture snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` updated for the `.3.1` boundary.
+
 ## Decisions
 
 - `2026-07-09`: Julia follows Dart in the ADR `0021` backend rollout order. `FUTURE-PARITY-BACKLOG.1.2`
@@ -488,6 +528,9 @@ Function-shell projection evidence recorded on 2026-07-10:
 - `2026-07-10`: `.2.4` follows the spec-defined top-level user-function shell boundary. Julia consumes
   `function_definition` nodes produced by `specs/user_function_definition.spec` and keeps `parse_spec(...)`
   rule-only; executing that shell spec in Julia remains a later runtime/staged-registry concern.
+- `2026-07-10`: `.3.1` follows the Dart ActionIR parser boundary. Julia parses helper/action text into typed
+  structural nodes and preserves unsupported expressions as `raw_perl`; helper-contract resolution, registry
+  resolution, compilation, and execution are deliberately deferred to later leaves.
 
 ## Open Questions
 
@@ -498,8 +541,8 @@ Function-shell projection evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.3.1`. Julia frontend parsing, validation, and function-shell projection are in place; typed
-  helper/action AST parsing is the next owned boundary.
+- None for `.3.2`. Typed helper/action AST parsing is in place; canonical helper-contract resolution and
+  diagnostics are the next owned boundary.
 
 ## Verification Log
 
@@ -513,6 +556,7 @@ Function-shell projection evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.2.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia source parser tests cover focused syntax fixtures, all 21 checked-in specs, and rule-only corpus specs; total Julia tests pass. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.2.3` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia source validation tests cover Dart parity validator cases, all 21 checked-in specs, and rule-only corpus specs; total Julia tests pass. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.2.4` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia function-shell projection tests cover spec-shaped nodes, staged sidecar validation, stripped source parsing, and output-shape normalization; total Julia tests pass. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.3.1` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia Action AST parser tests cover typed structural parsing for calls, literals, access, shapes, assignments, receiver chains, trailing blocks, block values, controls, value-drop statements, and raw fallback; total Julia tests pass with 353 assertions. |
 
 ## Commit Log
 
@@ -526,9 +570,14 @@ Function-shell projection evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.2.2` | `JULIA-BACKEND-PARITY.2.2 - add Julia source spec parser` | Source parser for rule paragraphs and shipped-spec/corpus parser smoke; validation advances to `.2.3`. |
 | `JULIA-BACKEND-PARITY.2.3` | `JULIA-BACKEND-PARITY.2.3 - add Julia frontend validation` | Source AST validation and strict-syntax checks; function-shell projection advances to `.2.4`. |
 | `JULIA-BACKEND-PARITY.2.4` | `JULIA-BACKEND-PARITY.2.4 - project Julia function-definition shells` | Spec-defined function-shell AST projection; frontend container closes and ActionIR parsing advances to `.3.1`. |
+| `JULIA-BACKEND-PARITY.3.1` | `JULIA-BACKEND-PARITY.3.1 - add Julia ActionIR AST parser` | Typed helper/action AST parser; contract resolution advances to `.3.2`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.3.1` ActionIR AST parser. `julia/src/action/ActionAst.jl` and
+  `julia/src/action/ActionParser.jl` now parse helper/action source into typed blocks, statements, calls, literals,
+  access paths, shape literals, assignments, receiver chains, trailing blocks, block values, structured controls,
+  and raw fallback nodes. `Pkg.test()` passes with 353 total assertions; `.3.2` owns helper-contract resolution.
 - `2026-07-10`: Completed `.2.4` function-definition shell projection. Julia now consumes the spec-defined
   `function_definition` / `function_definition_error` node shape, validates source/body spans and staged sidecars,
   normalizes function body parse-job paths, strips function spans before rule parsing, and keeps direct
