@@ -298,8 +298,9 @@ frontend validation and strict syntax behavior, `.2.4` has added spec-shaped top
 the user-function registry seam, `.3.4` has added compiled-spec state, and `.4.1` has added runtime regex matching
 and match-state tracking. `.4.2` has added first compiled-rule dispatch, and `.4.3.0` has split helper/value work by
 runtime mechanism. `.4.3.1` has added core scalar/array/hash stores, typed snapshots, assignments/access, checked
-nested writes, and capture maps/positions. The active Julia frontier is `.4.3.2` for string/scalar and numeric
-helpers. Future Julia and
+nested writes, and capture maps/positions. `.4.3.2` has added string/scalar and numeric helpers, regex flags,
+aliases/symbol callees, invalid-input boundaries, and compatible receiver chains. The active Julia frontier is
+`.4.3.3` for array helper and mutation behavior. Future Julia and
 Lua backend plans must own their own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -392,7 +393,9 @@ recursion guards in seek or consume mode. `.4.3.0` splits the broader evaluator 
 stores/captures, `.4.3.2` string/numeric,
 `.4.3.3` array, `.4.3.4` hash, `.4.3.5` value/control/block/callback, and `.4.3.6` no-drift leaves. `.4.3.1` is now
 implemented: scalar/array/hash stores, bare and typed snapshots, structural assignments/access, checked
-no-autovivification nested writes, and entry/local capture maps/positions pass focused tests. Later leaves own
+no-autovivification nested writes, and entry/local capture maps/positions pass focused tests. `.4.3.2` is now
+implemented too: current string/scalar and numeric helpers share canonical function/receiver dispatch, retain
+regex flags, normalize JSON numbers, and return `nothing` for invalid arithmetic. Later leaves own
 cursor controls, staged parser execution, diagnostics/trace, and corpus execution.
 
 ### Dart Backend Commands

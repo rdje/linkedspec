@@ -13,7 +13,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, runtime, interpreter, dispatch, lifecycle, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.4.2 adds julia/src/runtime/Interpreter.jl and exports LinkedSpecRuntimeEngine, runtime_parse(...), runtime_execute(...), RuntimeParseResult, RuntimeLifecycleEvent, and RuntimeInterpreterException. julia/test/runtests.jl verifies default repetition, action-edge and blind-call child dispatch, explicit call/returns, passive terminals, AND/OR modes, bounded repetition, zero-progress cutoff, lifecycle order/events, retv, accumulators, consume mode, nested output shapes, recursion cutoff, and runtime error boundaries. JULIA-BACKEND-PARITY.4.3.0 subsequently splits helper/value families, and .4.3.1 adds the core scalar/array/hash store model, assignments/access, snapshots, and capture maps/positions over the same interpreter."
+evidence: "JULIA-BACKEND-PARITY.4.2 adds julia/src/runtime/Interpreter.jl and exports LinkedSpecRuntimeEngine, runtime_parse(...), runtime_execute(...), RuntimeParseResult, RuntimeLifecycleEvent, and RuntimeInterpreterException. julia/test/runtests.jl verifies default repetition, action-edge and blind-call child dispatch, explicit call/returns, passive terminals, AND/OR modes, bounded repetition, zero-progress cutoff, lifecycle order/events, retv, accumulators, consume mode, nested output shapes, recursion cutoff, and runtime error boundaries. JULIA-BACKEND-PARITY.4.3.0 subsequently splits helper/value families, .4.3.1 adds the core scalar/array/hash store model plus captures, and .4.3.2 adds canonical string/scalar/numeric function and receiver dispatch over the same interpreter."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
@@ -36,6 +36,11 @@ owner with the portable core scalar/array/hash store model, structural assignmen
 entry/local capture maps and positions. String/numeric/array/hash helper breadth plus control/block/callback
 families remain split across `.4.3.2` through `.4.3.6`.
 
+`.4.3.2` has since implemented the string/scalar and numeric portion, including aliases, symbol callees, regex
+flags, numeric failure boundaries, and compatible fluent chains. Array/hash/control/block/callback breadth remains
+owned by `.4.3.3` through `.4.3.6`.
+
 Related facts: [[julia-runtime-matching-state]], [[julia-compiled-spec-state]],
-[[julia-runtime-core-value-capture-helpers]], [[dart-runtime-rule-interpreter]],
+[[julia-runtime-core-value-capture-helpers]], [[julia-runtime-string-numeric-helpers]],
+[[dart-runtime-rule-interpreter]],
 [[spec-lifecycle-retv-order]], [[julia-backend-interpreter-first-plan]].

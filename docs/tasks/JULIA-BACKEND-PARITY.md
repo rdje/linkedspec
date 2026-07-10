@@ -245,15 +245,18 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.4.3.1 - add Julia runtime value capture helpers`
 
 - ID: `JULIA-BACKEND-PARITY.4.3.2`
-  Status: `active`
+  Status: `done`
   Goal: Implement string/scalar and numeric helper families, including compatible receiver chains.
   Acceptance: Current scalar/string helpers, explicit lexical comparisons, numeric arithmetic/reducers/comparisons,
     word/symbol aliases, and compatible receiver chains match helper-catalog examples.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - two focused end-to-end runtime cases cover current string/scalar transforms,
+    predicates, regex flags, split/coalesce/definedness/emptiness, explicit lexical comparisons, numeric
+    arithmetic/unary/reducer/comparison helpers, aliases and symbol callees, invalid-input `nothing`, and
+    compatible string/number receiver chains; full `Pkg.test()` passes with 556 assertions.
+  Commit: `JULIA-BACKEND-PARITY.4.3.2 - add Julia runtime string numeric helpers`
 
 - ID: `JULIA-BACKEND-PARITY.4.3.3`
-  Status: `pending`
+  Status: `active`
   Goal: Implement array helper family and array receiver/mutation behavior.
   Acceptance: Array construction/flattening, copy, count/select/order/membership/join/split bridges, append/end
     mutation forms, and receiver chains match helper-catalog examples without mutating snapshots unexpectedly.
@@ -400,7 +403,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.4.3.2` | `active` | Build string/scalar and numeric pure helpers plus compatible receiver chains over the stable `.4.3.1` value model. |
+| 1 | `JULIA-BACKEND-PARITY.4.3.3` | `active` | Add array-aware construction, transformation, selection, reducer, receiver, and mutation behavior over the stable pure-helper dispatcher. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -726,6 +729,44 @@ Core runtime value evidence recorded on 2026-07-10:
   snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `MEMORY.md` advance the frontier
   to `.4.3.2`.
 
+## `JULIA-BACKEND-PARITY.4.3.2` String/Scalar/Numeric Helper Result
+
+Pure helper evidence recorded on 2026-07-10:
+
+- The Julia interpreter canonicalizes word and symbol aliases through `canonical_action_helper_name(...)` before
+  dispatching one pure-helper table. Function-form and receiver-form calls therefore share the same value rules.
+- String/scalar execution covers `cat`, trimming/case/length, literal prefix/suffix/substring predicates and
+  transforms, character-based `substr`, literal/regex `split`, regex-aware `matches`, lazy `coalesce` variants,
+  definedness/emptiness predicates, and explicit `str_*` lexical comparisons.
+- Regex ActionIR values retain pattern flags internally, so `/.../i` helper arguments compile through Julia's
+  native PCRE engine without leaking a host regex wrapper into JSON results.
+- Numeric execution covers arithmetic folds, integer modulo, absolute/floor/ceil/half-away-from-zero round,
+  min/max/clamp, sum/average/median/range reducers, comparisons, terse word aliases, and arithmetic/comparison
+  symbol callees. Non-numeric, non-finite, invalid-bound, non-integer modulo, and zero-divisor cases return
+  `nothing`.
+- Fluent chains prepend the current receiver to the same helper call and support lazy receiver coalescing;
+  string/number chains compose while unsupported later-family methods remain explicit runtime errors.
+- Package status advances to `runtime-string-numeric`; array-aware helper breadth advances to `.4.3.3`.
+
+## `JULIA-BACKEND-PARITY.4.3.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.4.3.1` established portable values/stores but ordinary string/numeric helpers and
+  all non-empty fluent chains still fell through `unsupported runtime helper/method` errors.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `julia/src/runtime/Interpreter.jl` had no canonical pure-helper dispatcher,
+  regex-value flag carrier, numeric conversion/normalization path, lazy coalesce evaluator, or fluent-call loop,
+  even though ActionIR contracts already recognized current aliases and symbol callees.
+- [x] **FIX** — Added the shared string/numeric dispatcher, lazy coalescing, regex-aware operations, JSON-number
+  normalization/failure boundaries, and compatible receiver-chain evaluation.
+- [x] **ADDRESSED (verified)** — Two focused end-to-end cases exercise string transforms/predicates/comparisons,
+  Unicode length/substr behavior, regex flags, coalescing, numeric arithmetic/reducers/comparisons, word and symbol
+  aliases, string/number receivers, and invalid-input `nothing` behavior.
+- [x] **NO REGRESSION** — Full Julia `Pkg.test()` passes with 556 assertions; CLI status reports
+  `runtime-string-numeric`; commit-time docs/governance gates cover mdBook, memory, Knowledge Map, task metadata,
+  doctrine, and whitespace.
+- [x] **LOCKSTEP** — Julia README, task tree/index, roadmaps, mdBook status/handoff, Knowledge Map, architecture
+  snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `MEMORY.md` advance the frontier
+  to `.4.3.3`.
+
 ## `JULIA-BACKEND-PARITY.4.2` Runtime Rule Interpreter Result
 
 Rule-interpreter evidence recorded on 2026-07-10:
@@ -919,7 +960,10 @@ Rule-interpreter evidence recorded on 2026-07-10:
   final no-drift.
 - `2026-07-10`: `.4.3.1` implements the final cross-backend core value contract directly, including checked
   no-autovivification nested writes, rather than reproducing the transient Dart behavior later corrected by its
-  no-drift leaf. `.4.3.2` is the active string/numeric helper boundary.
+  no-drift leaf.
+- `2026-07-10`: `.4.3.2` routes function and receiver string/numeric calls through one canonical helper dispatcher;
+  regex values retain flags internally, numeric failures return `nothing`, and array-aware continuation remains
+  owned by `.4.3.3`.
 
 ## Open Questions
 
@@ -930,8 +974,8 @@ Rule-interpreter evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.4.3.2`. Core value/store/capture semantics are green; string/scalar and numeric helper families are
-  the next owned implementation boundary.
+- None for `.4.3.3`. Core values plus string/scalar/numeric helpers are green; array-aware helper and receiver/
+  mutation behavior is the next owned implementation boundary.
 
 ## Verification Log
 
@@ -953,6 +997,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Julia rule-interpreter tests cover default repetition, action/blind children, explicit call/returns, passive terminals, current-edge `retv`, AND/OR modes, bounded and zero-progress repetition, lifecycle order/events, accumulators, consume mode, nested output shapes, recursion cutoff, and runtime errors; total Julia tests pass with 550 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.0` | No implementation behavior change; mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, stale-frontier scans, and `git diff --check`. | PASS. Julia helper/value work is split into six mechanism-sized implementation/closeout leaves; `.4.3.1` is the next executable frontier. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.1` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Four focused core-value cases prove typed stores and snapshots, variable-held aggregates, checked nested assignment, and capture maps/positions; total Julia tests pass with 554 assertions. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Two focused pure-helper cases prove string/scalar and numeric families, regex flags, aliases/symbol callees, failure-to-nothing, and receiver chains; total Julia tests pass with 556 assertions. |
 
 ## Commit Log
 
@@ -974,9 +1019,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.4.2` | `JULIA-BACKEND-PARITY.4.2 - add Julia runtime rule interpreter` | First compiled-rule interpreter, lifecycle/edge dispatch, narrow accumulator actions, and recursion/progress guards; broader helper/value semantics advance to `.4.3`. |
 | `JULIA-BACKEND-PARITY.4.3.0` | `JULIA-BACKEND-PARITY.4.3.0 - split Julia runtime helper families` | Planning-only split into core stores/captures, string/numeric, array, hash, value/control/block/callback, and no-drift leaves; `.4.3.1` becomes active. |
 | `JULIA-BACKEND-PARITY.4.3.1` | `JULIA-BACKEND-PARITY.4.3.1 - add Julia runtime value capture helpers` | Core typed stores, structural assignment/access, snapshots, and entry/local capture helpers; string/numeric helpers advance to `.4.3.2`. |
+| `JULIA-BACKEND-PARITY.4.3.2` | `JULIA-BACKEND-PARITY.4.3.2 - add Julia runtime string numeric helpers` | Canonical string/scalar and numeric pure helpers plus compatible receiver chains; array-aware behavior advances to `.4.3.3`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.4.3.2` string/scalar and numeric helper execution. Julia now canonicalizes aliases and
+  symbol callees through one pure-helper path, preserves regex flags, returns `nothing` for invalid numeric work,
+  and composes compatible string/number receiver chains. `Pkg.test()` passes with 556 assertions; `.4.3.3` owns
+  array-aware helper and mutation behavior.
 - `2026-07-10`: Completed `.4.3.1` core runtime values/stores/captures. Julia now preserves scalar and aggregate
   JSON shapes, executes typed wrappers/snapshots plus direct/nested reads and assignments, applies final checked
   no-autovivification nested writes, and exposes entry/local named maps and position helpers. `Pkg.test()` passes

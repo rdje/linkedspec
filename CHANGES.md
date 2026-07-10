@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.4.3.2 — add Julia runtime string numeric helpers
+
+**Scope:** Julia runtime string/scalar and numeric pure helpers, regex value flags, fluent-chain execution, package
+status, focused runtime tests, README, task-tree frontier, roadmaps/index, mdBook status/handoff, Knowledge Map,
+architecture snapshot, live docs, and resume pointer.
+
+**Change:** Extended `julia/src/runtime/Interpreter.jl` with one canonical function/receiver pure-helper
+dispatcher. Julia now executes current string transforms/predicates/splitting/coalescing/definedness/emptiness and
+explicit `str_*` comparisons; preserves regex pattern flags internally; executes numeric arithmetic, unary,
+reducer, clamp, and comparison helpers through word and symbol aliases; normalizes finite JSON numbers; returns
+`nothing` for invalid numeric operations; and composes compatible string/number fluent chains. Package status now
+reports `runtime-string-numeric`.
+
+**Validation:** `Pkg.test()` passes with 556 assertions, including two focused end-to-end string/scalar/numeric
+cases and all prior Julia coverage. Commit-time docs/governance validation covers mdBook, memory architecture,
+task-tree metadata, Knowledge Map, doctrine, and `git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.4.3.1 — add Julia runtime value capture helpers
 
 **Scope:** Julia runtime scalar/array/hash stores, typed snapshots, structural assignments/access, capture helper

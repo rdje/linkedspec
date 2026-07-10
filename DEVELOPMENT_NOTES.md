@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.4.3.2 — Julia runtime string/scalar/numeric helpers):
+  Julia now canonicalizes helper function names and fluent methods through the same pure-helper dispatcher, so
+  word aliases, symbol callees, and receiver chains cannot acquire separate arithmetic/string semantics. Regex
+  ActionIR values retain pattern flags only as an internal runtime carrier; string helpers compile them through
+  native PCRE and JSON output never depends on a host regex object. Numeric conversion admits finite numbers and
+  numeric-looking strings, rejects booleans/aggregates, normalizes integral results to `Int`, and returns `nothing`
+  at invalid arithmetic or conversion boundaries. Lazy `coalesce` evaluation remains outside eager pure-argument
+  evaluation so skipped branches keep the portable side-effect contract. Array-aware receiver and mutation
+  behavior remains isolated in `.4.3.3`.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.4.3.1 — Julia runtime core values/stores/captures):
   `julia/src/runtime/Interpreter.jl` now has one portable core value model shared by later helper families: scalar,
   array, and hash stores; copied bare/typed snapshots; structural literal/assignment/access execution; and capture

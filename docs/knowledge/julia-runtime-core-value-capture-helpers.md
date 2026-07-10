@@ -40,5 +40,6 @@ remain character-based even though internal cursor state uses Julia code-unit
 offsets.
 
 Related facts: [[julia-runtime-rule-interpreter]], [[julia-runtime-matching-state]],
+[[julia-runtime-string-numeric-helpers]],
 [[dart-runtime-core-value-capture-helpers]], [[terse-nested-value-path-assignment]],
 [[terse-direct-access-explicit-segments]].

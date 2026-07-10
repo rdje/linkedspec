@@ -15,9 +15,9 @@ Typed helper/action AST parsing was added by `JULIA-BACKEND-PARITY.3.1`, ActionI
 `JULIA-BACKEND-PARITY.3.2`, the user-function registry seam was added by `JULIA-BACKEND-PARITY.3.3`, and
 compiled-spec state was added by `JULIA-BACKEND-PARITY.3.4`. Runtime regex matching and match-state tracking were
 added by `JULIA-BACKEND-PARITY.4.1`, and first executable rule dispatch was added by
-`JULIA-BACKEND-PARITY.4.2`. `JULIA-BACKEND-PARITY.4.3.0` split helper/value work by runtime mechanism. The active
-core value/store/capture boundary landed in `JULIA-BACKEND-PARITY.4.3.1`; the active next boundary is `.4.3.2`
-for string/scalar and numeric helper families.
+`JULIA-BACKEND-PARITY.4.2`. `JULIA-BACKEND-PARITY.4.3.0` split helper/value work by runtime mechanism. Core
+value/store/capture behavior landed in `.4.3.1`, and string/scalar plus numeric helpers landed in `.4.3.2`. The
+active next boundary is `.4.3.3` for array helper and mutation behavior.
 
 ## Commands
 
@@ -92,5 +92,8 @@ mode. The embedded ActionIR evaluator now preserves scalar/array/hash/null/boole
 stores, bare reads, typed `array(name)` / `hash(name)` snapshots, `copy(...)`, literals, assignments, indexed and
 nested reads, and checked no-autovivification nested writes. It also exposes entry/local capture text, groups,
 named maps/existence, character spans, and line-column helpers. `.4.3.2` through `.4.3.5` own string/number, array,
-hash, and control/block/callback breadth, with `.4.3.6` owning no-drift closeout; cursor controls, staged parser
+hash, and control/block/callback breadth. `.4.3.2` now executes current string/scalar and numeric transforms,
+predicates, lexical comparisons, aliases and symbol callees, reducers, invalid-input boundaries, and compatible
+string/number receiver chains through one canonical dispatcher. `.4.3.3` through `.4.3.5` own array, hash, and
+control/block/callback breadth, with `.4.3.6` owning no-drift closeout; cursor controls, staged parser
 execution, diagnostics, tracing, and corpus execution remain later leaves.

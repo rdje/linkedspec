@@ -5,12 +5,17 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.3.2` adds a canonical Julia runtime pure-helper dispatcher.
+  Current string/scalar transforms, predicates, regex operations, coalescing, definedness/emptiness, explicit
+  lexical comparisons, numeric arithmetic/unary/reducers/comparisons, aliases and symbol callees, JSON-number
+  normalization, and compatible fluent chains now share one execution path. Package status is
+  `runtime-string-numeric`; `.4.3.3` owns array-aware helper and mutation behavior.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.3.1` extends the Julia interpreter with its portable core value
   model. `_RuntimeExecutionContext` now owns scalar, array, and hash stores; the evaluator preserves JSON-safe
   shapes through typed/bare snapshots, literals, assignment, append, hash-index mutation, indexed/nested reads,
   and final checked no-autovivification nested writes. Entry/local capture helpers now expose names, maps,
-  character spans, and line-column positions. Package status is `runtime-core-values`; `.4.3.2` owns
-  string/scalar and numeric helpers.
+  character spans, and line-column positions. At that leaf package status was `runtime-core-values`; `.4.3.2` has
+  since advanced it to `runtime-string-numeric`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.3.0` splits the Julia helper/value runtime container before
   broader evaluator code. `.4.3.1` owns core JSON-shaped values, stores, assignments/access, snapshots, and
   `entry_*` / `match_*` capture helpers; `.4.3.2` owns string/numeric helpers; `.4.3.3` arrays; `.4.3.4` hashes;

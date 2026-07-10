@@ -292,7 +292,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-core-values"
+    @test status.parity == "runtime-string-numeric"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -302,7 +302,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-core-values", String(take!(status_output)))
+    @test occursin("parity: runtime-string-numeric", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1191,6 +1191,129 @@ Top::
         "match_col" => 2,
         "match_end_line" => 2,
         "match_end_col" => 8,
+    )
+end
+
+@testset "Runtime string scalar and numeric helpers" begin
+    runtime_engine(source) = LinkedSpecRuntimeEngine(compile_spec(parse_spec(source)))
+
+    string_helpers = runtime_engine(raw"""
+Top::
+ /(.+)/
+ E {
+   raw = entry_group(0);
+   set(array(tmp), ["x"]);
+   missing = tmp[5];
+   return(hash(
+     "cat", cat("A", undef, "B"),
+     "trim", trim(raw),
+     "chain", raw.trim().lowercase().replace_substr("-", "_").rm_suffix("_end"),
+     "substr", substr(trim(raw), 1, 3),
+     "contains", contains_substr(raw, "-B-"),
+     "starts", starts_with(trim(raw), "A"),
+     "ends", ends_with(trim(raw), "END"),
+     "matches", matches(trim(raw), /^A/),
+     "flagged_match", matches("AbC", /^abc$/i),
+     "split", raw.trim().split("-"),
+     "coalesce", coalesce(missing, "fallback"),
+     "coalesce_nonempty", coalesce_nonempty("", "filled"),
+     "defined", is_defined(""),
+     "undefined", is_undefined(missing),
+     "empty", is_empty(""),
+     "nonempty", is_nonempty("x"),
+     "empty_array", is_empty(array()),
+     "nonempty_hash", is_nonempty(hash("k", "v")),
+     "unicode_length", length("🙂a"),
+     "unicode_substr", substr("🙂ab", 1, 2),
+     "str_eq", str_eq("a", "a"),
+     "str_ne", str_ne("a", "b"),
+     "str_lt", str_lt("a", "b"),
+     "str_ge", str_ge("b", "b")
+   ))
+ }
+""")
+    @test runtime_parse(string_helpers, " A-B-END ").value == Dict{String,Any}(
+        "cat" => "AB",
+        "trim" => "A-B-END",
+        "chain" => "a_b",
+        "substr" => "-B-",
+        "contains" => true,
+        "starts" => true,
+        "ends" => true,
+        "matches" => true,
+        "flagged_match" => true,
+        "split" => Any["A", "B", "END"],
+        "coalesce" => "fallback",
+        "coalesce_nonempty" => "filled",
+        "defined" => true,
+        "undefined" => true,
+        "empty" => true,
+        "nonempty" => true,
+        "empty_array" => true,
+        "nonempty_hash" => true,
+        "unicode_length" => 2,
+        "unicode_substr" => "ab",
+        "str_eq" => true,
+        "str_ne" => true,
+        "str_lt" => true,
+        "str_ge" => true,
+    )
+
+    numeric_helpers = runtime_engine(raw"""
+Top::
+ /x/
+ E {
+   scores += 1;
+   scores += 5;
+   scores += 3;
+   scores += 5;
+   return(hash(
+     "symbol_add", +(2, *(3, 4)),
+     "sub", sub(10, 3, 2),
+     "div", num_div(7, 2),
+     "mod", 17.mod(5),
+     "abs_floor", -3.2.abs().floor(),
+     "ceil", ceil(3.2),
+     "clamp", num_clamp(42, 0, 10),
+     "gt", gt(10, 2),
+     "le", <=(2, 2),
+     "round", 3.5.round(),
+     "half_round", round(2.5),
+     "sum", sum(array(2, 4, 6)),
+     "range", num_range(array(3, 9, 1, 7)),
+     "avg", avg(array(2, 4, 6)),
+     "median", median(array(5, 1, 4, 2)),
+     "minimum", min(array(8, 3, 5, 1)),
+     "bare_min", min(scores),
+     "bare_max", max(scores),
+     "bad_div", num_div(5, 0),
+     "bad_mod", num_mod(5.5, 2),
+     "bad_number", num_add("x", 1)
+   ))
+ }
+""")
+    @test runtime_parse(numeric_helpers, "x").value == Dict{String,Any}(
+        "symbol_add" => 14,
+        "sub" => 5,
+        "div" => 3.5,
+        "mod" => 2,
+        "abs_floor" => 3,
+        "ceil" => 4,
+        "clamp" => 10,
+        "gt" => true,
+        "le" => true,
+        "round" => 4,
+        "half_round" => 3,
+        "sum" => 12,
+        "range" => 8,
+        "avg" => 4,
+        "median" => 3,
+        "minimum" => 1,
+        "bare_min" => 1,
+        "bare_max" => 5,
+        "bad_div" => nothing,
+        "bad_mod" => nothing,
+        "bad_number" => nothing,
     )
 end
 

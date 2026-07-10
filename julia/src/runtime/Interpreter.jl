@@ -72,6 +72,11 @@ struct _RuntimeEvaluatedAccessSegment
     value::Any
 end
 
+struct _RuntimeRegexValue
+    pattern::String
+    flags::String
+end
+
 struct _RuntimeRuleResult
     matched::Bool
     value::Any
@@ -645,7 +650,7 @@ function _evaluate_runtime_action_expr!(
     if expr isa ActionStringLiteralExpr || expr isa ActionNumberLiteralExpr || expr isa ActionBooleanLiteralExpr
         return expr.value
     elseif expr isa ActionRegexLiteralExpr
-        return expr.pattern
+        return _RuntimeRegexValue(expr.pattern, expr.flags)
     elseif expr isa ActionUndefExpr
         return nothing
     elseif expr isa ActionVariableExpr
@@ -762,9 +767,13 @@ function _evaluate_runtime_action_expr!(
                 current_edge,
             )
         end
-        throw(RuntimeInterpreterException(
-            "unsupported runtime fluent chain in rule $rule_label: $(expr.source)",
-        ))
+        return _evaluate_runtime_fluent_chain!(
+            engine,
+            expr,
+            context,
+            rule_label,
+            current_edge,
+        )
     elseif expr isa ActionRawExpr
         throw(RuntimeInterpreterException(
             "unsupported raw action expression in rule $rule_label: $(expr.source)",
@@ -817,6 +826,15 @@ function _evaluate_runtime_call!(
             context,
             rule_label,
             current_edge,
+        )
+    elseif helper_name == "coalesce" || helper_name == "coalesce_nonempty"
+        return _call_runtime_coalesce(
+            engine,
+            args,
+            context,
+            rule_label,
+            current_edge;
+            require_nonempty = helper_name == "coalesce_nonempty",
         )
     elseif helper_name == "entry_text"
         return context.registers.entry_match === nothing ? nothing : match_text(context.registers.entry_match)
@@ -906,6 +924,19 @@ function _evaluate_runtime_call!(
             _execute_runtime_rule!(engine, target_label, target_index, context)
         context.retv = child.value
         return _runtime_copy(child.value)
+    end
+
+    if helper_name in _RUNTIME_PURE_HELPER_NAMES
+        values = Any[
+            _runtime_copy(_evaluate_runtime_action_expr!(
+                engine,
+                arg,
+                context,
+                rule_label,
+                current_edge,
+            )) for arg in args
+        ]
+        return _call_runtime_pure_helper(helper_name, values)
     end
 
     throw(RuntimeInterpreterException(
@@ -1053,6 +1084,565 @@ function _call_runtime_hash(engine, args, context, rule_label, current_edge)
         index += 2
     end
     return result
+end
+
+const _RUNTIME_PURE_HELPER_NAMES = Set{String}([
+    "cat",
+    "contains_substr",
+    "ends_with",
+    "is_defined",
+    "is_empty",
+    "is_nonempty",
+    "is_undefined",
+    "length",
+    "lowercase",
+    "matches",
+    "num_abs",
+    "num_add",
+    "num_avg",
+    "num_ceil",
+    "num_clamp",
+    "num_div",
+    "num_eq",
+    "num_floor",
+    "num_ge",
+    "num_gt",
+    "num_le",
+    "num_lt",
+    "num_max",
+    "num_median",
+    "num_min",
+    "num_mod",
+    "num_mul",
+    "num_ne",
+    "num_range",
+    "num_round",
+    "num_sub",
+    "num_sum",
+    "replace_substr",
+    "rm_prefix",
+    "rm_suffix",
+    "split",
+    "starts_with",
+    "str_eq",
+    "str_ge",
+    "str_gt",
+    "str_le",
+    "str_lt",
+    "str_ne",
+    "substr",
+    "trim",
+    "uppercase",
+])
+
+function _evaluate_runtime_fluent_chain!(engine, chain, context, rule_label, current_edge)
+    value = _evaluate_runtime_action_expr!(
+        engine,
+        chain.receiver,
+        context,
+        rule_label,
+        current_edge,
+    )
+    for call in chain.calls
+        helper_name = canonical_action_helper_name(call.method)
+        if helper_name == "copy"
+            value = _runtime_copy(value)
+            continue
+        elseif helper_name == "coalesce" || helper_name == "coalesce_nonempty"
+            if _runtime_coalesce_accepts(value, helper_name == "coalesce_nonempty")
+                value = _runtime_copy(value)
+                continue
+            end
+            args = ActionExpr[getfield(arg, :value) for arg in call.args]
+            value = _call_runtime_coalesce(
+                engine,
+                args,
+                context,
+                rule_label,
+                current_edge;
+                require_nonempty = helper_name == "coalesce_nonempty",
+            )
+            continue
+        elseif !(helper_name in _RUNTIME_PURE_HELPER_NAMES)
+            throw(RuntimeInterpreterException(
+                "unsupported runtime fluent method '.$(call.method)' in rule $rule_label",
+            ))
+        end
+
+        values = Any[_runtime_copy(value)]
+        for arg in call.args
+            push!(values, _runtime_copy(_evaluate_runtime_action_expr!(
+                engine,
+                getfield(arg, :value),
+                context,
+                rule_label,
+                current_edge,
+            )))
+        end
+        value = _call_runtime_pure_helper(helper_name, values)
+    end
+    return value
+end
+
+function _call_runtime_coalesce(
+    engine,
+    args,
+    context,
+    rule_label,
+    current_edge;
+    require_nonempty::Bool,
+)
+    for arg in args
+        value = _evaluate_runtime_action_expr!(
+            engine,
+            arg,
+            context,
+            rule_label,
+            current_edge,
+        )
+        if _runtime_coalesce_accepts(value, require_nonempty)
+            return _runtime_copy(value)
+        end
+    end
+    return nothing
+end
+
+function _runtime_coalesce_accepts(value, require_nonempty::Bool)
+    if value === nothing
+        return false
+    end
+    return !require_nonempty || !(value isa AbstractString) || !isempty(value)
+end
+
+function _call_runtime_pure_helper(helper_name::String, values::Vector{Any})
+    if startswith(helper_name, "num_")
+        return _call_runtime_numeric_helper(helper_name, values)
+    elseif startswith(helper_name, "str_")
+        return _call_runtime_string_comparison(helper_name, values)
+    elseif helper_name == "cat"
+        parts = String[]
+        for value in values
+            part = _runtime_scalar_string(value; null_as_empty = true)
+            if part === nothing
+                return nothing
+            end
+            push!(parts, part)
+        end
+        return join(parts)
+    elseif helper_name == "contains_substr"
+        return _runtime_string_predicate(values, (value, needle) -> occursin(needle, value))
+    elseif helper_name == "ends_with"
+        return _runtime_string_predicate(values, endswith)
+    elseif helper_name == "is_defined"
+        return !isempty(values) && first(values) !== nothing
+    elseif helper_name == "is_empty"
+        return _runtime_is_empty(isempty(values) ? nothing : first(values))
+    elseif helper_name == "is_nonempty"
+        return !_runtime_is_empty(isempty(values) ? nothing : first(values))
+    elseif helper_name == "is_undefined"
+        return isempty(values) || first(values) === nothing
+    elseif helper_name == "length"
+        return _runtime_value_length(isempty(values) ? nothing : first(values))
+    elseif helper_name == "lowercase"
+        return _runtime_string_transform(values, lowercase)
+    elseif helper_name == "matches"
+        return _call_runtime_matches(values)
+    elseif helper_name == "replace_substr"
+        return _call_runtime_replace_substr(values)
+    elseif helper_name == "rm_prefix"
+        return _call_runtime_remove_edge(values, true)
+    elseif helper_name == "rm_suffix"
+        return _call_runtime_remove_edge(values, false)
+    elseif helper_name == "split"
+        return _call_runtime_split(values)
+    elseif helper_name == "starts_with"
+        return _runtime_string_predicate(values, startswith)
+    elseif helper_name == "substr"
+        return _call_runtime_substr(values)
+    elseif helper_name == "trim"
+        return _runtime_string_transform(values, strip)
+    elseif helper_name == "uppercase"
+        return _runtime_string_transform(values, uppercase)
+    end
+    throw(RuntimeInterpreterException("unsupported pure runtime helper '$helper_name'"))
+end
+
+function _runtime_scalar_string(value; null_as_empty::Bool = false)
+    if value === nothing
+        return null_as_empty ? "" : nothing
+    elseif value isa AbstractVector || value isa AbstractDict
+        return null_as_empty ? "" : nothing
+    elseif value isa _RuntimeRegexValue
+        return value.pattern
+    end
+    return string(value)
+end
+
+function _runtime_string_transform(values, transform)
+    value = isempty(values) ? nothing : _runtime_scalar_string(first(values))
+    return value === nothing ? nothing : transform(value)
+end
+
+function _runtime_string_predicate(values, predicate)
+    if length(values) < 2
+        return false
+    end
+    value = _runtime_scalar_string(values[1])
+    needle = _runtime_scalar_string(values[2]; null_as_empty = true)
+    if value === nothing || needle === nothing
+        return false
+    end
+    return predicate(value, needle)
+end
+
+function _call_runtime_matches(values)
+    if length(values) < 2
+        return false
+    end
+    value = _runtime_scalar_string(values[1])
+    if value === nothing
+        return false
+    end
+    regex_value = values[2]
+    pattern = regex_value isa _RuntimeRegexValue ? regex_value.pattern : _runtime_scalar_string(regex_value)
+    if pattern === nothing
+        return false
+    end
+    flags = regex_value isa _RuntimeRegexValue ? regex_value.flags : ""
+    regex = try
+        Regex(pattern, flags)
+    catch
+        return false
+    end
+    return match(regex, value) !== nothing
+end
+
+function _call_runtime_replace_substr(values)
+    if length(values) < 3
+        return nothing
+    end
+    value = _runtime_scalar_string(values[1])
+    old_value = _runtime_scalar_string(values[2]; null_as_empty = true)
+    new_value = _runtime_scalar_string(values[3]; null_as_empty = true)
+    if value === nothing || old_value === nothing || new_value === nothing
+        return nothing
+    elseif isempty(old_value)
+        return value
+    end
+    return replace(value, old_value => new_value)
+end
+
+function _call_runtime_remove_edge(values, prefix::Bool)
+    if length(values) < 2
+        return nothing
+    end
+    value = _runtime_scalar_string(values[1])
+    edge = _runtime_scalar_string(values[2]; null_as_empty = true)
+    if value === nothing || edge === nothing
+        return nothing
+    elseif prefix && startswith(value, edge)
+        return chop(value; head = length(edge), tail = 0)
+    elseif !prefix && endswith(value, edge)
+        return chop(value; head = 0, tail = length(edge))
+    end
+    return value
+end
+
+function _call_runtime_substr(values)
+    if length(values) < 2 || values[1] === nothing || values[2] === nothing
+        return nothing
+    end
+    value = _runtime_scalar_string(values[1])
+    if value === nothing
+        return nothing
+    end
+    start = max(0, something(_runtime_int(values[2]), 0))
+    width = length(values) >= 3 && values[3] !== nothing ?
+        max(0, something(_runtime_int(values[3]), 0)) : nothing
+    chars = collect(value)
+    if start >= length(chars)
+        return ""
+    end
+    stop = width === nothing ? length(chars) : min(length(chars), start + width)
+    return String(chars[start + 1:stop])
+end
+
+function _call_runtime_split(values)
+    if length(values) < 2
+        return nothing
+    end
+    value = _runtime_scalar_string(values[1])
+    if value === nothing
+        return Any[]
+    end
+    delimiter = values[2]
+    if delimiter isa _RuntimeRegexValue
+        regex = try
+            Regex(delimiter.pattern, delimiter.flags)
+        catch
+            return Any[]
+        end
+        return Any[String(item) for item in split(value, regex; keepempty = true)]
+    end
+    literal = _runtime_scalar_string(delimiter; null_as_empty = true)
+    if literal === nothing
+        return Any[]
+    elseif isempty(literal)
+        return Any[string(char) for char in value]
+    end
+    return Any[String(item) for item in split(value, literal; keepempty = true)]
+end
+
+function _runtime_value_length(value)
+    if value === nothing
+        return nothing
+    elseif value isa AbstractString || value isa AbstractVector || value isa AbstractDict
+        return length(value)
+    end
+    text = _runtime_scalar_string(value)
+    return text === nothing ? nothing : length(text)
+end
+
+function _runtime_is_empty(value)
+    return value === nothing ||
+        ((value isa AbstractString || value isa AbstractVector || value isa AbstractDict) && isempty(value))
+end
+
+function _call_runtime_string_comparison(helper_name, values)
+    if length(values) < 2
+        return nothing
+    end
+    left = _runtime_scalar_string(values[1])
+    right = _runtime_scalar_string(values[2])
+    if left === nothing || right === nothing
+        return nothing
+    elseif helper_name == "str_eq"
+        return left == right
+    elseif helper_name == "str_ne"
+        return left != right
+    elseif helper_name == "str_gt"
+        return left > right
+    elseif helper_name == "str_ge"
+        return left >= right
+    elseif helper_name == "str_lt"
+        return left < right
+    elseif helper_name == "str_le"
+        return left <= right
+    end
+    throw(RuntimeInterpreterException("unsupported string comparison helper '$helper_name'"))
+end
+
+function _call_runtime_numeric_helper(helper_name, values)
+    if helper_name == "num_add"
+        return _runtime_numeric_fold(values, +)
+    elseif helper_name == "num_sub"
+        return _runtime_numeric_fold(values, -)
+    elseif helper_name == "num_mul"
+        return _runtime_numeric_fold(values, *)
+    elseif helper_name == "num_div"
+        return _runtime_numeric_fold(values, (left, right) -> right == 0 ? nothing : left / right)
+    elseif helper_name == "num_mod"
+        if length(values) < 2
+            return nothing
+        end
+        left = _runtime_number(values[1])
+        right = _runtime_number(values[2])
+        if left === nothing || right === nothing || right == 0 || !isinteger(left) || !isinteger(right)
+            return nothing
+        end
+        return try
+            rem(Int(left), Int(right))
+        catch
+            nothing
+        end
+    elseif helper_name == "num_abs"
+        return _runtime_unary_number(values, abs)
+    elseif helper_name == "num_floor"
+        return _runtime_unary_number(values, value -> floor(Int, value))
+    elseif helper_name == "num_ceil"
+        return _runtime_unary_number(values, value -> ceil(Int, value))
+    elseif helper_name == "num_round"
+        return _runtime_unary_number(
+            values,
+            value -> value >= 0 ? floor(Int, value + 0.5) : ceil(Int, value - 0.5),
+        )
+    elseif helper_name == "num_min"
+        return _runtime_min_max(values, min)
+    elseif helper_name == "num_max"
+        return _runtime_min_max(values, max)
+    elseif helper_name == "num_clamp"
+        if length(values) < 3
+            return nothing
+        end
+        value = _runtime_number(values[1])
+        lower = _runtime_number(values[2])
+        upper = _runtime_number(values[3])
+        if value === nothing || lower === nothing || upper === nothing || lower > upper
+            return nothing
+        end
+        return _runtime_json_number(clamp(value, lower, upper))
+    elseif helper_name == "num_sum"
+        numbers = _runtime_numeric_list(isempty(values) ? nothing : first(values))
+        return numbers === nothing ? nothing : _runtime_json_number(sum(numbers; init = 0))
+    elseif helper_name == "num_avg"
+        numbers = _runtime_numeric_list(isempty(values) ? nothing : first(values))
+        return numbers === nothing || isempty(numbers) ? nothing :
+            _runtime_json_number(sum(numbers) / length(numbers))
+    elseif helper_name == "num_median"
+        numbers = _runtime_numeric_list(isempty(values) ? nothing : first(values))
+        if numbers === nothing || isempty(numbers)
+            return nothing
+        end
+        sort!(numbers)
+        middle = length(numbers) ÷ 2
+        value = isodd(length(numbers)) ? numbers[middle + 1] :
+            (numbers[middle] + numbers[middle + 1]) / 2
+        return _runtime_json_number(value)
+    elseif helper_name == "num_range"
+        numbers = _runtime_numeric_list(isempty(values) ? nothing : first(values))
+        return numbers === nothing || isempty(numbers) ? nothing :
+            _runtime_json_number(maximum(numbers) - minimum(numbers))
+    elseif helper_name in ("num_eq", "num_ne", "num_gt", "num_ge", "num_lt", "num_le")
+        return _runtime_numeric_comparison(helper_name, values)
+    end
+    throw(RuntimeInterpreterException("unsupported numeric helper '$helper_name'"))
+end
+
+function _runtime_numeric_fold(values, combine)
+    if isempty(values)
+        return nothing
+    end
+    current = _runtime_number(first(values))
+    if current === nothing
+        return nothing
+    end
+    for value in Iterators.drop(values, 1)
+        next = _runtime_number(value)
+        if next === nothing
+            return nothing
+        end
+        current = try
+            combine(current, next)
+        catch
+            return nothing
+        end
+        if current === nothing || !(current isa Real) || !isfinite(current)
+            return nothing
+        end
+    end
+    return _runtime_json_number(current)
+end
+
+function _runtime_unary_number(values, transform)
+    if isempty(values)
+        return nothing
+    end
+    value = _runtime_number(first(values))
+    if value === nothing
+        return nothing
+    end
+    return try
+        _runtime_json_number(transform(value))
+    catch
+        nothing
+    end
+end
+
+function _runtime_min_max(values, select)
+    numbers = if length(values) == 1 && first(values) isa AbstractVector
+        _runtime_numeric_list(first(values))
+    else
+        parsed = Real[]
+        for value in values
+            number = _runtime_number(value)
+            if number === nothing
+                return nothing
+            end
+            push!(parsed, number)
+        end
+        parsed
+    end
+    if numbers === nothing || isempty(numbers)
+        return nothing
+    end
+    current = first(numbers)
+    for number in Iterators.drop(numbers, 1)
+        current = select(current, number)
+    end
+    return _runtime_json_number(current)
+end
+
+function _runtime_numeric_comparison(helper_name, values)
+    if length(values) < 2
+        return nothing
+    end
+    left = _runtime_number(values[1])
+    right = _runtime_number(values[2])
+    if left === nothing || right === nothing
+        return nothing
+    elseif helper_name == "num_eq"
+        return left == right
+    elseif helper_name == "num_ne"
+        return left != right
+    elseif helper_name == "num_gt"
+        return left > right
+    elseif helper_name == "num_ge"
+        return left >= right
+    elseif helper_name == "num_lt"
+        return left < right
+    else
+        return left <= right
+    end
+end
+
+function _runtime_numeric_list(value)
+    if !(value isa AbstractVector)
+        return nothing
+    end
+    result = Real[]
+    for item in value
+        number = _runtime_number(item)
+        if number === nothing
+            return nothing
+        end
+        push!(result, number)
+    end
+    return result
+end
+
+function _runtime_number(value)
+    if value === nothing || value isa Bool || value isa AbstractVector || value isa AbstractDict
+        return nothing
+    elseif value isa Integer
+        return value
+    elseif value isa AbstractFloat
+        return isfinite(value) ? value : nothing
+    elseif value isa AbstractString
+        text = strip(value)
+        if isempty(text)
+            return nothing
+        end
+        integer = tryparse(Int, text)
+        if integer !== nothing
+            return integer
+        end
+        number = tryparse(Float64, text)
+        return number !== nothing && isfinite(number) ? number : nothing
+    end
+    return nothing
+end
+
+function _runtime_json_number(value::Real)
+    if !isfinite(value)
+        return nothing
+    elseif isinteger(value)
+        return try
+            Int(value)
+        catch
+            nothing
+        end
+    end
+    return Float64(value)
 end
 
 function _read_runtime_retv!(engine, context, current_edge)
