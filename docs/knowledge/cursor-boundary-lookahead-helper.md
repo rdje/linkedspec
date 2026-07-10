@@ -10,9 +10,9 @@ answers:
   - "should EBNF semantic_annotation use rewind_match_start"
 date: 2026-07-09
 status: current
-tags: [helpers, cursor, boundary-lookahead, perl, rust, dart, BACKTRACK-SURFACE-RUST-ALIGNMENT]
-evidence: "BACKTRACK-SURFACE-RUST-ALIGNMENT.2 adds capture_until_boundary(rule[, ...]) to Perl ActionIR lowering/scanning, Rust runtime helper execution/validation, and Dart ActionIR/runtime execution. The active specs/ebnf.spec and Rust corpus copies use capture_until_boundary(semantic_annotation, grammar_rule) so semantic annotations stop before the next semantic annotation or grammar rule without consuming that boundary."
-reverify: "PERL5LIB= perl -Iperl t/phase0_regression.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime helpers_capture_until_boundary_captures_without_consuming_boundary && cd dart && dart test test/runtime_interpreter_test.dart -n 'captures until named boundary without consuming the boundary'"
+tags: [helpers, cursor, boundary-lookahead, perl, rust, dart, julia, BACKTRACK-SURFACE-RUST-ALIGNMENT]
+evidence: "BACKTRACK-SURFACE-RUST-ALIGNMENT.2 adds capture_until_boundary(rule[, ...]) to Perl ActionIR lowering/scanning, Rust runtime helper execution/validation, and Dart ActionIR/runtime execution. JULIA-BACKEND-PARITY.4.4 adds the same earliest-boundary, EOF-fallback, and unresolved-rule semantics to Julia. The active specs/ebnf.spec and Rust corpus copies use capture_until_boundary(semantic_annotation, grammar_rule) so semantic annotations stop before the next semantic annotation or grammar rule without consuming that boundary."
+reverify: "PERL5LIB= perl -Iperl t/phase0_regression.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime helpers_capture_until_boundary_captures_without_consuming_boundary && cd dart && dart test test/runtime_interpreter_test.dart -n 'captures until named boundary without consuming the boundary' && cd .. && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 # Non-Consuming Structural Boundary Capture
@@ -48,4 +48,5 @@ requested boundary rule can be resolved to a usable pattern, it returns
 `undef`/`null` and leaves the cursor unchanged.
 
 Related facts: [[spec-capture-mark-family-taxonomy]],
-[[dart-runtime-backtrack-cursor-helpers]], [[rust-anonymous-capture-slice-family]].
+[[dart-runtime-backtrack-cursor-helpers]], [[julia-runtime-cursor-boundary-helpers]],
+[[rust-anonymous-capture-slice-family]].

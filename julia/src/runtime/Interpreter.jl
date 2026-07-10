@@ -48,6 +48,7 @@ mutable struct _RuntimeExecutionContext
     variables::Dict{String,Any}
     arrays::Dict{String,Vector{Any}}
     hashes::Dict{String,Dict{String,Any}}
+    cursor_stack::Vector{Int}
     active_rule_entries::Set{Tuple{String,Int,Int}}
     lifecycle_events::Vector{RuntimeLifecycleEvent}
 end
@@ -62,6 +63,7 @@ function _RuntimeExecutionContext(input::AbstractString)
         Dict{String,Any}(),
         Dict{String,Vector{Any}}(),
         Dict{String,Dict{String,Any}}(),
+        Int[],
         Set{Tuple{String,Int,Int}}(),
         RuntimeLifecycleEvent[],
     )
@@ -1613,6 +1615,66 @@ function _evaluate_runtime_call!(
         return context.registers.local_match === nothing ? nothing : char_start(context.registers.local_match)
     elseif helper_name == "match_end_pos"
         return context.registers.local_match === nothing ? nothing : char_end(context.registers.local_match)
+    elseif helper_name == "cursor_pos"
+        return codeunit_offset_to_char_offset(context.input, context.cursor_codeunit)
+    elseif helper_name == "cursor_line"
+        return line_column_at_codeunit_offset(context.input, context.cursor_codeunit).line
+    elseif helper_name == "cursor_col"
+        return line_column_at_codeunit_offset(context.input, context.cursor_codeunit).column
+    elseif helper_name == "cursor_rest"
+        return _runtime_codeunit_slice(
+            context.input,
+            context.cursor_codeunit,
+            ncodeunits(context.input),
+        )
+    elseif helper_name == "cursor_rest_len"
+        return length(_runtime_codeunit_slice(
+            context.input,
+            context.cursor_codeunit,
+            ncodeunits(context.input),
+        ))
+    elseif helper_name == "input_text"
+        return context.input
+    elseif helper_name == "input_len" || helper_name == "input_end_pos"
+        return length(context.input)
+    elseif helper_name == "input_slice"
+        return _call_runtime_input_slice!(
+            engine,
+            args,
+            context,
+            rule_label,
+            current_edge,
+        )
+    elseif helper_name == "input_end_line"
+        return line_column_at_codeunit_offset(context.input, ncodeunits(context.input)).line
+    elseif helper_name == "input_end_col"
+        return line_column_at_codeunit_offset(context.input, ncodeunits(context.input)).column
+    elseif helper_name == "capture_until_boundary"
+        return _call_runtime_capture_until_boundary!(
+            engine,
+            args,
+            context,
+            rule_label,
+            current_edge,
+        )
+    elseif helper_name == "save_cursor"
+        push!(context.cursor_stack, context.cursor_codeunit)
+        return nothing
+    elseif helper_name == "restore_cursor"
+        if !isempty(context.cursor_stack)
+            _set_runtime_cursor!(context, pop!(context.cursor_stack))
+        end
+        return nothing
+    elseif helper_name == "rewind_match_start"
+        if context.registers.local_match !== nothing
+            _set_runtime_cursor!(context, context.registers.local_match.codeunit_start)
+        end
+        return nothing
+    elseif helper_name == "rewind_entry_start"
+        if context.registers.entry_match !== nothing
+            _set_runtime_cursor!(context, context.registers.entry_match.codeunit_start)
+        end
+        return nothing
     elseif helper_name == "call"
         if isempty(args)
             return nothing
@@ -3621,6 +3683,96 @@ function _runtime_match_column(one_match, at_end::Bool)
     end
     offset = at_end ? one_match.codeunit_end : one_match.codeunit_start
     return line_column_at_codeunit_offset(one_match.input, offset).column
+end
+
+function _set_runtime_cursor!(context::_RuntimeExecutionContext, codeunit_cursor::Int)
+    cursor = clamp(codeunit_cursor, 0, ncodeunits(context.input))
+    context.registers = with_cursor_codeunit(context.registers, cursor)
+    context.cursor_codeunit = cursor
+    return nothing
+end
+
+function _runtime_codeunit_slice(input::String, start_codeunit::Int, end_codeunit::Int)
+    start_char = codeunit_offset_to_char_offset(input, start_codeunit)
+    end_char = codeunit_offset_to_char_offset(input, end_codeunit)
+    if end_char <= start_char
+        return ""
+    end
+    chars = collect(input)
+    return String(chars[start_char + 1:end_char])
+end
+
+function _call_runtime_input_slice!(engine, args, context, rule_label, current_edge)
+    if isempty(args)
+        return context.input
+    end
+    start_value = _evaluate_runtime_action_expr!(
+        engine,
+        args[1],
+        context,
+        rule_label,
+        current_edge,
+    )
+    start_char = something(_runtime_nonnegative_int(start_value), 0)
+    input_length = length(context.input)
+    width = if length(args) >= 2
+        width_value = _evaluate_runtime_action_expr!(
+            engine,
+            args[2],
+            context,
+            rule_label,
+            current_edge,
+        )
+        something(_runtime_nonnegative_int(width_value), input_length)
+    else
+        input_length - start_char
+    end
+    bounded_start = min(start_char, input_length)
+    if bounded_start == input_length || width == 0
+        return ""
+    end
+    bounded_end = bounded_start + min(width, input_length - bounded_start)
+    chars = collect(context.input)
+    return String(chars[bounded_start + 1:bounded_end])
+end
+
+function _call_runtime_capture_until_boundary!(engine, args, context, rule_label, current_edge)
+    if isempty(args)
+        return nothing
+    end
+    saw_usable_boundary = false
+    boundary_start = nothing
+    for arg in args
+        target_label = _runtime_rule_name_from_expr(
+            engine,
+            arg,
+            context,
+            rule_label,
+            current_edge,
+        )
+        target_rule = compiled_rule(engine.compiled_spec, target_label)
+        if target_rule === nothing || isempty(target_rule.regex_patterns)
+            continue
+        end
+        saw_usable_boundary = true
+        boundary_match = seek_match(
+            RuntimeRegexAlternation(target_rule),
+            context.input,
+            context.cursor_codeunit,
+        )
+        if boundary_match !== nothing &&
+                (boundary_start === nothing || boundary_match.codeunit_start < boundary_start)
+            boundary_start = boundary_match.codeunit_start
+        end
+    end
+    if !saw_usable_boundary
+        return nothing
+    end
+    capture_start = context.cursor_codeunit
+    capture_end = boundary_start === nothing ? ncodeunits(context.input) : boundary_start
+    captured = _runtime_codeunit_slice(context.input, capture_start, capture_end)
+    _set_runtime_cursor!(context, capture_end)
+    return captured
 end
 
 function _runtime_rule_name_from_expr(engine, expr, context, rule_label, current_edge)

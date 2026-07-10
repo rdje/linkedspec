@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.4.4 — add Julia runtime cursor controls
+
+**Scope:** Julia explicit cursor stack and anchor rewinds, cursor/input helper reads, non-consuming named-rule
+boundary capture, parse-mode continuation, package/CLI status, focused runtime tests, mdBook status/handoff,
+task-tree/live docs, Knowledge Map, architecture snapshot, and resume pointer.
+
+**Change:** Added `save_cursor()` / `restore_cursor()`, `rewind_match_start()` / `rewind_entry_start()`, and a
+single synchronized cursor/register update path to the Julia runtime. Added character-based cursor/input helper
+projection over the internal UTF-8 code-unit cursor, overflow-safe `input_slice`, and
+`capture_until_boundary(rule[, ...])` with earliest-boundary, EOF fallback, and unresolved-rule no-op semantics.
+Cursor movement preserves match records and semantic stores. Package status now reports `runtime-cursor-boundary`.
+
+**Validation:** `Pkg.test()` passes with 581 assertions, including 14 focused cursor/boundary assertions; Julia
+CLI status, mdBook build, memory architecture, task-tree metadata, Knowledge Map, doctrine, and `git diff --check`
+pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.4.3.6 — close Julia helper value no drift
 
 **Scope:** Final Julia helper/value runtime no-drift across focused tests, package/CLI status, mdBook helper

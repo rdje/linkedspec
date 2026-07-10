@@ -34,5 +34,6 @@ Julia 1.12's native PCRE integration directly accepts the currently required Pyt
 classes, inline/scoped flags, possessive quantifiers, and recursive `(?R)`. Unlike Dart, this boundary does not need
 a regex dialect-normalization or bounded structural-regex adapter.
 
-Related facts: [[julia-runtime-rule-interpreter]], [[julia-compiled-spec-state]], [[dart-runtime-matching-state]],
+Related facts: [[julia-runtime-cursor-boundary-helpers]], [[julia-runtime-rule-interpreter]],
+[[julia-compiled-spec-state]], [[dart-runtime-matching-state]],
 [[rust-entry-match-separation]], [[rust-char-based-offsets]], [[julia-backend-interpreter-first-plan]].

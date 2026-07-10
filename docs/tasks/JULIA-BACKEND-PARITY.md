@@ -302,16 +302,19 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.4.3.6 - close Julia helper value no drift`
 
 - ID: `JULIA-BACKEND-PARITY.4.4`
-  Status: `active`
+  Status: `done`
   Goal: Implement explicit cursor controls, boundary capture, parse-mode cursor behavior, and deterministic safety
     limits.
   Acceptance: `save_cursor()` / `restore_cursor()`, `rewind_match_start()` / `rewind_entry_start()`, and
     `capture_until_boundary(rule[, ...])` behave like Perl/Rust/Dart and affect only documented cursor state.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - Julia now keeps an explicit LIFO cursor stack, synchronizes the live cursor and immutable
+    match-register cursor on restores/rewinds/boundary captures, exposes character-based cursor/input helpers,
+    preserves entry/local matches and semantic stores across cursor movement, and selects the earliest usable
+    named boundary without consuming it. Full `Pkg.test()` passes with 581 assertions.
+  Commit: `JULIA-BACKEND-PARITY.4.4 - add Julia runtime cursor controls`
 
 - ID: `JULIA-BACKEND-PARITY.4.5`
-  Status: `pending`
+  Status: `active`
   Goal: Implement runtime diagnostics and trace controls.
   Acceptance: Julia exposes default-quiet trace controls, event classes, sink behavior, branch/lifecycle trace
     points, and structured errors equivalent to the documented cross-variant trace contract.
@@ -417,7 +420,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.4.4` | `active` | Add explicit cursor save/restore, match/entry rewinds, and non-consuming boundary capture over the closed helper/value model. |
+| 1 | `JULIA-BACKEND-PARITY.4.5` | `active` | Add structured runtime diagnostics and default-quiet trace controls over the now-complete cursor-aware interpreter. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -930,6 +933,47 @@ No-drift evidence recorded on 2026-07-10:
   architecture snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `MEMORY.md`
   advance the frontier to `.4.4`.
 
+## `JULIA-BACKEND-PARITY.4.4` Cursor Controls and Boundary Capture Result
+
+Cursor/boundary evidence recorded on 2026-07-10:
+
+- `save_cursor()` pushes the live internal code-unit cursor onto an explicit LIFO stack. `restore_cursor()` pops
+  and restores it; an empty stack is a no-op.
+- `rewind_match_start()` moves to the current local-match start, while `rewind_entry_start()` moves to the
+  initial/entry-match start for the current context. Both leave the match records themselves intact.
+- Every explicit cursor move updates both `_RuntimeExecutionContext.cursor_codeunit` and the immutable
+  `RuntimeMatchRegisters.cursor_codeunit`; variables, arrays, hashes, lifecycle effects, and branch history are
+  not rolled back.
+- The next regex attempt still uses the engine's configured seek/consume mode. Focused consume-mode coverage
+  proves a rewound match is consumed contiguously from its restored position.
+- `cursor_pos/line/col/rest/rest_len` and `input_text/len/slice/end_pos/end_line/end_col` expose public
+  character-based positions, lengths, and slices over Julia's internal UTF-8 code-unit cursor.
+- `capture_until_boundary(rule[, ...])` seeks every usable named rule from the live cursor, selects the earliest
+  match without consuming it, captures to EOF when valid rules have no later match, and returns `nothing` without
+  cursor movement when no requested rule resolves to usable regex patterns.
+- Package/CLI status advances to `runtime-cursor-boundary`; runtime diagnostics and trace controls advance to `.4.5`.
+
+## `JULIA-BACKEND-PARITY.4.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.4.3.6` closed helper/value execution, but known cursor/input/control calls still
+  fell through to unsupported-helper diagnostics and Julia could not express portable non-consuming structural
+  boundary capture.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `_RuntimeExecutionContext` had one live cursor and immutable match registers,
+  but no explicit cursor stack, centralized cursor/register update path, cursor/input helper dispatch, or compiled
+  boundary-rule lookup in `julia/src/runtime/Interpreter.jl`.
+- [x] **FIX** — Added the cursor stack and synchronized update helper; explicit save/restore and anchor rewinds;
+  character-based cursor/input reads and overflow-safe slicing; and earliest usable boundary capture with EOF and
+  unresolved-rule behavior matching Perl/Rust/Dart.
+- [x] **ADDRESSED (verified)** — Fourteen focused assertions cover LIFO restoration, empty restore, persistent
+  semantic state, entry/local anchor preservation, consume mode after rewind, multibyte public offsets/slices,
+  earliest-of-multiple boundaries, non-consumption, EOF fallback, and unresolved-boundary no-op behavior.
+- [x] **NO REGRESSION** — Full Julia `Pkg.test()` passes with 581 assertions; CLI status reports
+  `runtime-cursor-boundary`; commit-time docs/governance gates cover mdBook, memory, Knowledge Map, task metadata,
+  doctrine, and whitespace.
+- [x] **LOCKSTEP** — Julia README, task tree/index, roadmaps, mdBook status/handoff, Knowledge Map, architecture
+  snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `MEMORY.md` advance the frontier
+  to `.4.5`.
+
 ## `JULIA-BACKEND-PARITY.4.2` Runtime Rule Interpreter Result
 
 Rule-interpreter evidence recorded on 2026-07-10:
@@ -1138,6 +1182,9 @@ Rule-interpreter evidence recorded on 2026-07-10:
 - `2026-07-10`: `.4.3.6` confirms the Julia helper/value runtime already follows the final nested-write contract
   and retains `runtime-value-control-tree` as an intentionally scoped status; the closeout corrects metadata and
   mdBook example style without changing runtime behavior.
+- `2026-07-10`: `.4.4` centralizes live/register cursor updates while keeping match anchors and semantic stores
+  intact, exposes character-based cursor/input helpers over the UTF-8 code-unit cursor, and seeks named structural
+  boundaries without consuming them. The cursor stack remains separate from direct match/entry anchor rewinds.
 
 ## Open Questions
 
@@ -1148,8 +1195,8 @@ Rule-interpreter evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.4.4`. The `.4.3` helper/value container is closed; explicit cursor controls and non-consuming
-  boundary capture are the next owned implementation boundary.
+- None for `.4.5`. Cursor controls and non-consuming boundary capture are closed; structured runtime diagnostics
+  and default-quiet trace controls are the next owned implementation boundary.
 
 ## Verification Log
 
@@ -1176,6 +1223,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.4` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. One focused hash case proves copied views/transforms, pure and statement mutation boundaries, merge-slot resolution, direct assignment, explicit flatten splicing, and nested-map preservation; total Julia tests pass with 559 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.5` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Eight focused assertions prove expression-valued blocks, local/rule return boundaries, attached/marker/inline controls, while limits, helper/receiver with-blocks and arity fences, hash/array traversal callbacks, lazy non-aggregate failure, and scoped restoration; total Julia tests pass with 567 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.6` | No runtime behavior change; full Julia `Pkg.test()`; Julia CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Helper/value tests, status, mdBook contracts, live docs, and fact cards agree at 567 assertions; `.3`/`.4.3` metadata and helper-catalog separator style are reconciled, and `.4.4` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.4.4` | Full Julia `Pkg.test()`; Julia CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Fourteen focused assertions prove explicit save/restore, entry/local rewinds, consume continuation, character-based cursor/input helpers, earliest non-consuming boundary selection, EOF fallback, and unresolved-rule no-op behavior; total Julia tests pass with 581 assertions and `.4.5` becomes active. |
 
 ## Commit Log
 
@@ -1202,9 +1250,15 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.4.3.4` | `JULIA-BACKEND-PARITY.4.3.4 - add Julia runtime hash helpers` | Copied hash helper/receiver views and transformations, statement-only named set-key mutation, direct assignment integration, merge-slot resolution, and explicit hash splicing; controls/blocks/callbacks advance to `.4.3.5`. |
 | `JULIA-BACKEND-PARITY.4.3.5` | `JULIA-BACKEND-PARITY.4.3.5 - add Julia runtime controls and tree callbacks` | Expression-valued blocks, attached/marker/inline controls, helper/receiver with-blocks, and scoped hash/array tree traversal callbacks; no-drift advances to `.4.3.6`. |
 | `JULIA-BACKEND-PARITY.4.3.6` | `JULIA-BACKEND-PARITY.4.3.6 - close Julia helper value no drift` | Runtime/status/docs/KM no-drift closeout, parent metadata reconciliation, and helper-catalog separator alignment; cursor controls advance to `.4.4`. |
+| `JULIA-BACKEND-PARITY.4.4` | `JULIA-BACKEND-PARITY.4.4 - add Julia runtime cursor controls` | Explicit cursor stack and anchor rewinds, character-based cursor/input helpers, and non-consuming earliest-boundary capture; diagnostics/trace advances to `.4.5`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.4.4` cursor controls and boundary capture. Julia now supports explicit LIFO
+  save/restore, entry/local anchor rewinds, character-based cursor/input helpers, consume-mode continuation from
+  rewound positions, and earliest usable non-consuming boundary capture with EOF/unresolved-rule behavior.
+  `Pkg.test()` passes with 581 assertions; package status is `runtime-cursor-boundary`, and `.4.5` owns runtime
+  diagnostics and trace controls.
 - `2026-07-10`: Completed `.4.3.6` helper/value no-drift. Julia's 567-assertion suite already proves the final
   checked nested-write contract and scoped helper/control/callback behavior; package status remains
   `runtime-value-control-tree`. The closeout reconciles stale `.3`/`.4.3` metadata and central helper-catalog

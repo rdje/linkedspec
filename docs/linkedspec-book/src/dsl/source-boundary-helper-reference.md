@@ -490,6 +490,11 @@ valid but no later boundary is found, it captures through end-of-input and moves
 the cursor to end-of-input. If none of the requested boundary rules can be
 resolved, it returns `undef` and leaves the cursor unchanged.
 
+The Julia interpreter implements this full cursor-control and structural-boundary
+contract as of `JULIA-BACKEND-PARITY.4.4`, including character-based public
+offsets over its internal UTF-8 code-unit cursor and consume-mode continuation
+from explicitly restored or rewound positions.
+
 ## Choosing the smallest helper
 
 Use this rule of thumb:

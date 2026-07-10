@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.4` adds Julia's explicit LIFO cursor stack, synchronized
+  live/register cursor updates, entry/local anchor rewinds, character-based cursor/input helper projection, and
+  earliest usable non-consuming named-rule boundary capture. Cursor moves preserve match records and semantic
+  stores; normal follow-on matching retains the configured seek/consume mode. Package status is
+  `runtime-cursor-boundary`, the full suite passes with 581 assertions, and diagnostics/trace advances to `.4.5`.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.3.6` closes Julia helper/value no-drift. The 567-assertion suite,
   `runtime-value-control-tree` package status, mdBook contracts, live docs, and Knowledge Map agree; `.4.3.1`
   already supplied the final checked no-autovivification nested-write contract, so no runtime correction was

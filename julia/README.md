@@ -103,5 +103,8 @@ and pure transformations, base/overlay-aware merge resolution, direct hash-index
 splicing, and statement-only named set-key mutation. `.4.3.5` executes expression-valued blocks with local returns,
 attached/marker/inline controls, deterministic while guards, immediate helper/receiver with-blocks, and scoped
 hash/array tree traversal callbacks. `.4.3.6` confirms the complete helper/value boundary is no-drift at 567
-assertions while retaining package status `runtime-value-control-tree`. `.4.4` owns cursor controls and boundary
-capture; staged parser execution, diagnostics, tracing, and corpus execution remain later leaves.
+assertions. `.4.4` adds explicit LIFO cursor save/restore, entry/local anchor rewinds, character-based
+cursor/input helpers, and earliest named-rule boundary capture without consuming the boundary. Valid boundary
+rules with no later match capture to EOF; wholly unresolved boundary sets return `nothing` without moving the
+cursor. The full suite passes with 581 assertions and package status `runtime-cursor-boundary`. `.4.5` owns
+diagnostics and tracing; staged parser execution and corpus execution remain later leaves.

@@ -304,8 +304,11 @@ pipelines, split/flatten/reducer bridges, and statement-only end mutations. `.4.
 and transformations, statement-only named set-key mutation, direct hash-index assignment, merge-slot resolution,
 and explicit flat-style splicing. `.4.3.5` has added expression-valued blocks, attached/marker/inline controls,
 deterministic while guards, immediate helper/receiver with-blocks, and scoped hash/array tree callbacks. The
-`.4.3.6` closeout confirms helper/value no-drift at 567 assertions without a runtime correction. The active Julia
-frontier is `.4.4` for cursor controls and boundary capture.
+`.4.3.6` closeout confirms helper/value no-drift at 567 assertions without a runtime correction. `.4.4` adds an
+explicit LIFO cursor stack, entry/local anchor rewinds, synchronized live/register cursor updates,
+character-based cursor/input helpers, and earliest usable non-consuming named-rule boundary capture. Full Julia
+tests pass with 581 assertions and package status `runtime-cursor-boundary`; `.4.5` is active for runtime
+diagnostics and trace controls.
 Future Julia and
 Lua backend plans must own their own
 variant-specific CLIs rather than relying on one
@@ -411,8 +414,9 @@ attached/marker/inline controls, deterministic while guards, immediate helper/re
 restoration, and hash/array walk/map/reduce callbacks pass focused tests. `.4.3.6` owns final helper/value no-drift.
 The closeout confirms runtime tests/status, mdBook contracts, live docs, and fact cards agree at 567
 assertions; package status remains `runtime-value-control-tree`, and no runtime correction was required. `.4.4`
-owns cursor controls and boundary capture. Later leaves own staged parser execution, diagnostics/trace, and corpus
-execution.
+adds explicit LIFO cursor save/restore, entry/local anchor rewinds, character-based cursor/input helpers, and
+earliest usable non-consuming boundary capture. Full tests pass with 581 assertions and status
+`runtime-cursor-boundary`. `.4.5` owns diagnostics/trace; later leaves own staged parser and corpus execution.
 
 ### Dart Backend Commands
 

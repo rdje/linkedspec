@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.4.4 — Julia runtime cursor controls and boundary capture):
+  Julia keeps its efficient internal cursor as a zero-based UTF-8 code-unit offset, but every public cursor/input
+  position, length, and slice is character-based. One `_set_runtime_cursor!` path updates the mutable execution
+  cursor and immutable match-register cursor together while deliberately preserving entry/local match objects and
+  all semantic stores. The explicit save stack is independent from direct match/entry anchor rewinds.
+  `capture_until_boundary(...)` always seeks structural boundaries regardless of the surrounding parse mode,
+  then leaves the winning boundary unconsumed; normal matching after any cursor move still uses the engine's
+  configured seek/consume mode. `.4.5` can layer diagnostics and trace events over this centralized cursor path.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.4.3.6 — Julia helper/value no-drift):
   The final `.4.3` audit found no runtime semantic correction: Julia `.4.3.1` already implemented the
   no-autovivification updated-root/failed-`nothing` assignment contract that Dart needed to repair during its own

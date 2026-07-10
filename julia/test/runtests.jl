@@ -292,7 +292,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-value-control-tree"
+    @test status.parity == "runtime-cursor-boundary"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -302,7 +302,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-value-control-tree", String(take!(status_output)))
+    @test occursin("parity: runtime-cursor-boundary", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1646,6 +1646,175 @@ Top::
  }
 """)))
     @test_throws RuntimeInterpreterException runtime_parse(malformed_engine, "x")
+end
+
+@testset "Runtime cursor controls and boundary capture" begin
+    runtime_engine(source; parse_mode = SeekParseMode) =
+        LinkedSpecRuntimeEngine(compile_spec(parse_spec(source)); parse_mode = parse_mode)
+
+    saved_cursor = runtime_engine(
+        raw"""
+Top::AND
+ /ab/ -> Top[0] { save_cursor() }
+ /cd/ -> Top[1] { save_cursor() }
+ E {
+   marker = "retained"
+   restore_cursor()
+   first_restore = cursor_pos()
+   restore_cursor()
+   return(hash(
+     "first_restore", first_restore,
+     "cursor", cursor_pos(),
+     "rest", cursor_rest(),
+     "marker", marker
+   ))
+ }
+""";
+        parse_mode = ConsumeParseMode,
+    )
+    saved_result = runtime_parse(saved_cursor, "abcd")
+    @test saved_result.value == Dict{String,Any}(
+        "first_restore" => 4,
+        "cursor" => 2,
+        "rest" => "cd",
+        "marker" => "retained",
+    )
+    @test saved_result.cursor_codeunit == 2
+
+    empty_restore = runtime_engine(raw"""
+Top::
+ /x/
+ E {
+   restore_cursor()
+   return(cursor_pos())
+ }
+""")
+    @test runtime_parse(empty_restore, "x").value == 1
+
+    entry_rewind = runtime_engine(raw"""
+Top::AND
+ /ab/
+ /cd/ -> Top[1] {
+   before = cursor_pos()
+   rewind_entry_start()
+   return(hash(
+     "before", before,
+     "after", cursor_pos(),
+     "entry_start", entry_start_pos(),
+     "match_start", match_start_pos(),
+     "rest", cursor_rest()
+   ))
+ }
+""")
+    entry_rewind_result = runtime_parse(entry_rewind, "abcd")
+    @test entry_rewind_result.value == Dict{String,Any}(
+        "before" => 4,
+        "after" => 0,
+        "entry_start" => 0,
+        "match_start" => 2,
+        "rest" => "abcd",
+    )
+    @test entry_rewind_result.cursor_codeunit == 0
+
+    consume_rewind = runtime_engine(
+        raw"""
+Top::AND
+ /ab/ -> Top[0] { rewind_match_start() }
+ /ab/
+ E { return(hash("cursor", cursor_pos(), "rest", cursor_rest())) }
+""";
+        parse_mode = ConsumeParseMode,
+    )
+    consume_rewind_result = runtime_parse(consume_rewind, "ab")
+    @test consume_rewind_result.value == Dict{String,Any}(
+        "cursor" => 2,
+        "rest" => "",
+    )
+    @test consume_rewind_result.cursor_codeunit == 2
+
+    char_helpers = runtime_engine(
+        raw"""
+Top::AND
+ /é/
+ /x/
+ E {
+   return(hash(
+     "cursor", cursor_pos(),
+     "cursor_line", cursor_line(),
+     "cursor_col", cursor_col(),
+     "rest", cursor_rest(),
+     "rest_len", cursor_rest_len(),
+     "input", input_text(),
+     "input_len", input_len(),
+     "slice", input_slice(1, 1),
+     "end_pos", input_end_pos(),
+     "end_line", input_end_line(),
+     "end_col", input_end_col()
+   ))
+ }
+""";
+        parse_mode = ConsumeParseMode,
+    )
+    @test runtime_parse(char_helpers, "éx").value == Dict{String,Any}(
+        "cursor" => 2,
+        "cursor_line" => 1,
+        "cursor_col" => 3,
+        "rest" => "",
+        "rest_len" => 0,
+        "input" => "éx",
+        "input_len" => 2,
+        "slice" => "x",
+        "end_pos" => 2,
+        "end_line" => 1,
+        "end_col" => 3,
+    )
+
+    boundary_capture = runtime_engine(raw"""
+Top::
+ /BEGIN/
+ E {
+   body = capture_until_boundary(Boundary, EarlierBoundary)
+   return(hash("body", body, "cursor", cursor_pos(), "rest", cursor_rest()))
+ }
+
+Boundary: /END/
+EarlierBoundary: /STOP/
+""")
+    boundary_result = runtime_parse(boundary_capture, "BEGIN body STOP later END")
+    @test boundary_result.value == Dict{String,Any}(
+        "body" => " body ",
+        "cursor" => 11,
+        "rest" => "STOP later END",
+    )
+    @test boundary_result.cursor_codeunit == 11
+
+    eof_capture = runtime_engine(raw"""
+Top::
+ /x/
+ E { return(capture_until_boundary(Boundary)) }
+
+Boundary: /END/
+""")
+    eof_result = runtime_parse(eof_capture, "x tail")
+    @test eof_result.value == " tail"
+    @test eof_result.cursor_codeunit == ncodeunits("x tail")
+
+    unresolved_boundary = runtime_engine(raw"""
+Top::
+ /x/
+ E {
+   before = cursor_pos()
+   captured = capture_until_boundary(Missing)
+   return(hash("captured", captured, "before", before, "after", cursor_pos()))
+ }
+""")
+    unresolved_result = runtime_parse(unresolved_boundary, "x tail")
+    @test unresolved_result.value == Dict{String,Any}(
+        "captured" => nothing,
+        "before" => 1,
+        "after" => 1,
+    )
+    @test unresolved_result.cursor_codeunit == 1
 end
 
 @testset "Spec parser" begin

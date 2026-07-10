@@ -95,8 +95,9 @@ Top-level directories and files:
     string/regex/split bridges, flattening, reducer terminals, and statement-only end mutations are now green.
     Copied hash views/transforms, explicit hash splicing, direct assignment, and statement-only named set-key
     mutation are now green. Expression-valued blocks, attached/marker/inline controls, helper/receiver with-blocks,
-    and scoped hash/array tree callbacks are now green too. Helper/value no-drift is closed at 567 assertions;
-    explicit cursor controls and boundary capture are the active `JULIA-BACKEND-PARITY.4.4` frontier.
+    and scoped hash/array tree callbacks are now green too. Helper/value no-drift is closed. Explicit cursor
+    save/restore, entry/local rewinds, character-based cursor/input helpers, and non-consuming boundary capture
+    are green at 581 assertions; runtime diagnostics and trace controls are the active `.4.5` frontier.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.
