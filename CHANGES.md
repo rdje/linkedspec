@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.3 — close Julia middle corpus batch
+
+**Scope:** Julia non-function manifest fixtures 40–67, permanent three-window regression proof, explicit function
+routes, package status, task/roadmap/live docs, mdBook, Knowledge Map, architecture, and resume pointer.
+
+**Change:** Executed windows 40–56, 58–59, and 62–67: all 25 non-function fixtures pass unchanged across helper,
+control, receiver, assignment, with-block, and tree traversal behavior. Added six permanent assertions for exact
+window sizes/endpoints, 25 results/passes, empty failures, and the three top-level function offsets routed to
+`.6.2.5`. Status advances to `runtime-corpus-middle`; no production or fixture change was required.
+
+**Validation:** Direct windows report 17/17, 2/2, and 6/6; full `Pkg.test()` passes with 757 assertions. CLI,
+mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates pass; `.6.2.4` shipped-spec/parser-smoke is next.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.2 — close Julia starter corpus batch
 
 **Scope:** Julia shipped-corpus fixtures 0–39, permanent bounded regression proof, package status, task/roadmap/live

@@ -1,6 +1,6 @@
 # LinkedSpec Julia Backend
 
-This directory is the repository-owned Julia backend. Its current `runtime-corpus-starter` status covers the
+This directory is the repository-owned Julia backend. Its current `runtime-corpus-middle` status covers the
 package/command surface, manifest validation, source and ActionIR frontends, staged user-function projection/body
 parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch, value/helper/control/callback
 families, cursor/boundary behavior, structured diagnostics/tracing, registered function execution, and controlled
@@ -132,8 +132,10 @@ is direct rule-only `parse_spec(...)`. The full suite passes with 715 assertions
 `runtime-controlled-corpus` at that boundary. `.6.2.0` splits the 99-fixture rollout into bounded
 selection/reporting, starter 0–39, middle non-function 40–67, shipped-spec/parser-smoke 68–98, and spec-defined
 function-shell owners. `.6.2.1` adds ordered named/offset/limit library selection plus bounded runner PASS/FAIL
-reporting. `.6.2.2` proves starter fixtures 0–39 green at 40/40 without a production correction; full tests pass
-with 751 assertions, status is `runtime-corpus-starter`, and `.6.2.3` is active.
+reporting. `.6.2.2` proves starter fixtures 0–39 green at 40/40 without a production correction. `.6.2.3` proves
+non-function windows 40–56, 58–59, and 62–67 green at 25/25 unchanged and explicitly routes offsets 57, 60, and
+61 to the function-shell leaf. Full tests pass with 757 assertions, status is `runtime-corpus-middle`, and `.6.2.4`
+is active.
 
 Library example:
 

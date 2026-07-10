@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.3 — Julia middle corpus 25/25):
+  The non-function middle window also required no implementation correction. Three disjoint bounded runs keep the
+  known top-level function offsets out of the claim while proving every surrounding helper/control/receiver/tree
+  fixture. The permanent regression locks both the passing windows and the exact routed names, so later manifest
+  edits cannot accidentally make the 25/25 claim absorb or lose a function-shell case.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.2 — Julia starter corpus 40/40):
   The first shipped window needed no implementation correction: Julia's already-landed value/store/mutation,
   blocks, and attached-control semantics match all expected JSON from `proof_edge_array_literal` through

@@ -28,8 +28,9 @@ No parser/runtime correction and no corpus fixture change was required. A perman
 locks the 99-case manifest count, exact endpoints, 40 selected results, 40 passes, and empty failure ledger. Full
 Julia tests pass with 751 assertions and status `runtime-corpus-starter`.
 
-This is not a full corpus claim. `.6.2.3` owns non-function middle fixtures 40–67, `.6.2.4` owns shipped-spec/
-parser-smoke fixtures 68–98, and `.6.2.5` owns top-level function fixtures through the spec-defined shell.
+This is not a full corpus claim. `.6.2.3` has since proven the surrounding non-function middle windows green at
+25/25 while routing three top-level function fixtures; `.6.2.4` owns shipped-spec/parser-smoke fixtures 68–98,
+and `.6.2.5` owns top-level function fixtures through the spec-defined shell.
 
-Related facts: [[julia-corpus-selection-reporting]], [[julia-controlled-corpus-execution]],
+Related facts: [[julia-middle-corpus-batch]], [[julia-corpus-selection-reporting]], [[julia-controlled-corpus-execution]],
 [[dart-starter-corpus-batch]], [[rust-perl-output-oracle]], [[statement-separator-semantics]].

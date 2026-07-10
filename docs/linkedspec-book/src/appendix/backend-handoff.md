@@ -328,8 +328,9 @@ structured diagnostic retention, and all-fixture reporting. Full tests pass with
 `runtime-controlled-corpus`. `.6.2.0` splits the 99-fixture rollout into bounded selection/reporting, starter
 0–39, middle non-function 40–67, shipped-spec/parser-smoke 68–98, and spec-defined function-shell owners;
 `.6.2.1` then adds bounded selection/reporting at 745 assertions and status `runtime-corpus-selection`.
-`.6.2.2` proves starter fixtures 0–39 green at 40/40 without a production correction; full tests pass with 751
-assertions and status `runtime-corpus-starter`. `.6.2.3` middle non-function fixtures 40–67 are active.
+`.6.2.2` proves starter fixtures 0–39 green at 40/40 without a production correction. `.6.2.3` proves non-function
+windows 40–56, 58–59, and 62–67 green at 25/25 unchanged while routing three top-level function cases. Full tests
+pass with 757 assertions and status `runtime-corpus-middle`; `.6.2.4` shipped-spec/parser-smoke fixtures are active.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -593,9 +594,10 @@ offset-only execution are rejected. Omitting `--execute` continues to validate t
 later subset never bypasses manifest drift checks.
 
 The rollout is explicitly recoverable. `.6.2.1` has landed named and bounded selection/reporting; `.6.2.2` proves
-starter fixtures 0–39 green at 40/40; `.6.2.3` owns non-function helper/control fixtures 40–67; `.6.2.4` owns shipped-spec/parser-smoke
-fixtures 68–98; and `.6.2.5` owns spec-defined top-level function shells. Those are workload boundaries, not an
-assumption that Julia shares Dart's historical failure causes.
+starter fixtures 0–39 green at 40/40; `.6.2.3` proves the surrounding non-function helper/control fixtures 40–67
+green at 25/25 while routing three top-level function fixtures; `.6.2.4` owns shipped-spec/parser-smoke fixtures
+68–98; and `.6.2.5` owns spec-defined top-level function shells. Those are workload boundaries, not an assumption
+that Julia shares Dart's historical failure causes.
 
 #### Julia starter corpus proof
 
@@ -613,8 +615,28 @@ mutation, primitive, shape, block, and attached-control families against the che
 runtime correction and no fixture change was required. The package test locks the manifest count, both endpoints,
 selected count, passed count, and empty failure ledger so later changes cannot silently lose that coverage.
 
-The 40/40 result does not imply that later windows pass. The next active batch is offsets 40–67 excluding the
-top-level function fixtures routed to the spec-defined shell leaf.
+The 40/40 result does not imply that later windows pass. The next proof closes the surrounding middle window.
+
+#### Julia middle corpus proof
+
+The middle non-function fixtures are permanent package regressions across three disjoint windows:
+
+```bash
+julia --project=julia julia/bin/corpus_runner.jl \
+  --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 40 --limit 17
+julia --project=julia julia/bin/corpus_runner.jl \
+  --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 58 --limit 2
+julia --project=julia julia/bin/corpus_runner.jl \
+  --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 62 --limit 6
+```
+
+The windows report 17/17, 2/2, and 6/6, for 25 passes and zero failures across helper, control, receiver,
+assignment, with-block, and tree traversal behavior. No Julia runtime correction and no fixture change was
+required. Manifest offsets 57, 60, and 61 are explicitly routed as
+`terse_3_3_1_scalar_assignment_expressions`, `terse_3_3_4_assignment_expression_closure`, and
+`terse_4_3_2_user_function_runtime`; their top-level `fn` source remains owned by `.6.2.5`. The package regression
+locks all three windows, their endpoints and counts, the empty failure ledger, and those exact routes. The next
+active batch is shipped-spec/parser-smoke offsets 68–98 under `.6.2.4`.
 
 ### Dart Backend Commands
 

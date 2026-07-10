@@ -346,7 +346,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-corpus-starter"
+    @test status.parity == "runtime-corpus-middle"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -358,7 +358,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-corpus-starter", String(take!(status_output)))
+    @test occursin("parity: runtime-corpus-middle", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -3303,6 +3303,31 @@ end
     @test last(execution.results).name == "terse_2_2_5_2_attached_switch_blocks"
     @test corpus_passed_count(execution) == 40
     @test isempty(failures)
+end
+
+@testset "Middle non-function corpus batch" begin
+    windows = [(40, 17), (58, 2), (62, 6)]
+    executions = [
+        execute_corpus_fixtures(CORPUS_ROOT; offset = offset, limit = limit)
+        for (offset, limit) in windows
+    ]
+    results = reduce(vcat, [execution.results for execution in executions])
+    failures = ["$(result.name): $(result.failure)" for result in results if !corpus_fixture_passed(result)]
+
+    @test [length(execution.results) for execution in executions] == [17, 2, 6]
+    @test [(first(execution.results).name, last(execution.results).name) for execution in executions] == [
+        ("terse_2_2_6_2_attached_while_blocks", "terse_3_2_3_4_numeric_comparison_symbol_callees"),
+        ("terse_3_3_2_aggregate_assignment_expressions", "terse_3_3_3_mutation_assignment_expressions"),
+        ("terse_2_3_5_5_block_valued_receiver_chains", "terse_2_3_5_6_typed_wrapper_quoted_names"),
+    ]
+    @test length(results) == 25
+    @test sum(corpus_passed_count, executions) == 25
+    @test isempty(failures)
+    @test executions[1].validation.manifest.cases[[58, 61, 62]] == [
+        "terse_3_3_1_scalar_assignment_expressions",
+        "terse_3_3_4_assignment_expression_closure",
+        "terse_4_3_2_user_function_runtime",
+    ]
 end
 
 @testset "Spec AST JSON contract" begin

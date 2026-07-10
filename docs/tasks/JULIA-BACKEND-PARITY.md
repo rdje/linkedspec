@@ -480,16 +480,19 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.2.2 - close Julia starter corpus batch`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.3`
-  Status: `active`
+  Status: `done`
   Goal: Close the middle helper, control, receiver-chain, and tree traversal batch.
   Acceptance: Non-function manifest fixtures `40..67` covering value blocks, controls, helper composition,
     receivers, numeric/string/array/hash helpers, with-blocks, and tree traversal pass unchanged or are routed with
     oracle evidence; top-level `fn` fixtures remain owned by `.6.2.5`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - bounded windows `40..56`, `58..59`, and `62..67` report 25 passed and 0 failed without
+    parser/runtime or fixture changes. Six permanent assertions lock window sizes/endpoints, 25 results/passes,
+    empty failures, and routed top-level `fn` offsets `57`, `60`, `61`; full `Pkg.test()` passes with 757 assertions
+    and status `runtime-corpus-middle`.
+  Commit: `JULIA-BACKEND-PARITY.6.2.3 - close Julia middle corpus batch`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4`
-  Status: `pending`
+  Status: `active`
   Goal: Close the shipped-spec and parser-smoke corpus batch.
   Acceptance: Manifest fixtures `68..98` covering tclite, lispish, recursive top rules, hlink, portmap, EBNF,
     spec.spec, regdef, tablegrep, simenv, VHDL/library, history, and plugin smokes pass unchanged or each failure
@@ -564,7 +567,41 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 7 | `JULIA-BACKEND-PARITY.6.2.0` | `done` | Shipped-corpus rollout is split into recoverable execution and behavior batches before code. |
 | 8 | `JULIA-BACKEND-PARITY.6.2.1` | `done` | Bounded library selection and opt-in corpus-runner reporting are green. |
 | 9 | `JULIA-BACKEND-PARITY.6.2.2` | `done` | Starter manifest fixtures 0–39 pass unchanged at 40/40. |
-| 10 | `JULIA-BACKEND-PARITY.6.2.3` | `active` | Execute and close non-function middle fixtures 40–67. |
+| 10 | `JULIA-BACKEND-PARITY.6.2.3` | `done` | Non-function middle fixtures pass unchanged at 25/25; three `fn` cases remain routed. |
+| 11 | `JULIA-BACKEND-PARITY.6.2.4` | `active` | Diagnose and close shipped-spec/parser-smoke fixtures 68–98. |
+
+## `JULIA-BACKEND-PARITY.6.2.3` Middle Corpus Batch Result
+
+Middle-batch evidence recorded on 2026-07-10:
+
+- Bounded runner windows `--offset 40 --limit 17`, `--offset 58 --limit 2`, and `--offset 62 --limit 6` report
+  17/17, 2/2, and 6/6 passing respectively, for 25 non-function fixtures and zero failures.
+- The windows cover attached while, deep helper composition, bare aggregate args, inline if/switch values, bare
+  values/case labels, array/hash/string/number receiver chains, numeric reducers, word/symbol arithmetic and
+  comparison aliases, aggregate and mutation assignment expressions, block-valued receiver chains, helper and
+  receiver `with` blocks, hash/array tree traversal, and quoted typed-wrapper names.
+- No Julia parser/runtime correction and no fixture change was required; existing helper/control/callback semantics
+  already match all checked-in expected JSON in these windows.
+- Manifest offsets `57`, `60`, and `61` are explicitly excluded and locked as
+  `terse_3_3_1_scalar_assignment_expressions`, `terse_3_3_4_assignment_expression_closure`, and
+  `terse_4_3_2_user_function_runtime`. They contain top-level `fn` source and remain owned by `.6.2.5`.
+- `julia/test/runtests.jl` permanently executes all three non-function windows and asserts sizes, endpoints,
+  25 results/passes, empty failures, and exact routed function cases.
+
+## `JULIA-BACKEND-PARITY.6.2.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.6.2.3` required all non-function middle fixtures 40–67 to pass unchanged or route
+  each Julia mismatch with shared oracle evidence, while preserving the separate function-shell owner.
+- [x] **ROOT CAUSE (WHY + WHERE)** — No non-function mismatch exists: all three bounded windows were green before
+  source edits. The only omitted offsets are the three pre-owned top-level function fixtures.
+- [x] **FIX** — Added only a permanent three-window regression test and advanced status to
+  `runtime-corpus-middle`; production parser/runtime and fixtures remain unchanged.
+- [x] **ADDRESSED (verified)** — Direct bounded runs total 25 passed / 0 failed, and six focused assertions lock the
+  windows, endpoints, counts, empty failure ledger, and exact `.6.2.5` routes.
+- [x] **NO REGRESSION** — Full Julia `Pkg.test()` passes with 757 assertions; starter 40/40, selection/reporting,
+  controlled execution, and all earlier frontend/runtime tests remain green.
+- [x] **LOCKSTEP** — Julia README, task/index/roadmaps, mdBook corpus/status/check pages, Knowledge Map,
+  architecture/live docs, and `MEMORY.md` record 25/25 and advance to shipped-spec fixtures 68–98.
 
 ## `JULIA-BACKEND-PARITY.6.2.2` Starter Corpus Batch Result
 
@@ -1790,6 +1827,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.0` | Planning-only task decomposition; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. The 99-fixture rollout is split into bounded execution/reporting, starter 0–39, middle non-function 40–67, shipped-spec 68–98, and spec-defined function-shell owners; source behavior remains unchanged and `.6.2.1` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.1` | Full Julia `Pkg.test()`; Julia CLI status/help, validation-only manifest load, named/bounded execute and unbounded rejection; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Thirty added assertions prove library/CLI selection, validation, reporting, exit codes, and rollout guards; total Julia tests pass with 745 assertions, status is `runtime-corpus-selection`, and `.6.2.2` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.2` | Bounded runner offsets 0–39; full Julia `Pkg.test()`; Julia CLI status/help and validation-only load; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. The starter window is 40/40 green without parser/runtime or fixture changes; six permanent assertions bring total Julia tests to 751, status is `runtime-corpus-starter`, and `.6.2.3` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.3` | Bounded runner windows 40–56, 58–59, and 62–67; full Julia `Pkg.test()`; Julia CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. The 25 non-function middle fixtures pass unchanged, six permanent assertions lock the windows and routed `fn` offsets, total Julia tests pass with 757 assertions, status is `runtime-corpus-middle`, and `.6.2.4` becomes active. |
 
 ## Commit Log
 
@@ -1829,9 +1867,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.6.2.0` | `JULIA-BACKEND-PARITY.6.2.0 - split Julia corpus expansion batches` | Planning-only split into selection/reporting, starter, middle, shipped-spec, and function-shell owners; `.6.2.1` becomes active. |
 | `JULIA-BACKEND-PARITY.6.2.1` | `JULIA-BACKEND-PARITY.6.2.1 - add Julia executable corpus selection` | Named/bounded library selection plus opt-in runner PASS/FAIL reporting and unbounded guard; starter fixtures advance to `.6.2.2`. |
 | `JULIA-BACKEND-PARITY.6.2.2` | `JULIA-BACKEND-PARITY.6.2.2 - close Julia starter corpus batch` | Permanent 40/40 starter-window regression proof with no production correction; middle fixtures advance to `.6.2.3`. |
+| `JULIA-BACKEND-PARITY.6.2.3` | `JULIA-BACKEND-PARITY.6.2.3 - close Julia middle corpus batch` | Permanent 25/25 non-function middle-window proof with exact `fn` routes; shipped-spec fixtures advance to `.6.2.4`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.2.3` middle corpus batch. Non-function windows 40–56, 58–59, and 62–67 pass 25/25
+  unchanged across helper/control/receiver/assignment/with/tree behavior. Six permanent assertions bring
+  `Pkg.test()` to 757 and status `runtime-corpus-middle`; the three top-level `fn` offsets remain routed to `.6.2.5`,
+  and `.6.2.4` shipped-spec/parser-smoke fixtures 68–98 are active.
 - `2026-07-10`: Completed `.6.2.2` starter corpus batch. The bounded 0–39 runner window passes 40/40 unchanged,
   covering proof-edge, autoexist, core value/store/mutation, primitive, block, and attached-control fixtures. Six
   permanent assertions bring `Pkg.test()` to 751 and status `runtime-corpus-starter`; `.6.2.3` middle non-function
