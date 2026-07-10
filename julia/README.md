@@ -14,8 +14,8 @@ Typed helper/action AST parsing was added by `JULIA-BACKEND-PARITY.3.1`, ActionI
 `JULIA-BACKEND-PARITY.3.2`, the user-function registry seam was added by `JULIA-BACKEND-PARITY.3.3`, and
 compiled-spec state was added by `JULIA-BACKEND-PARITY.3.4`. Runtime regex matching and match-state tracking were
 added by `JULIA-BACKEND-PARITY.4.1`, and first executable rule dispatch was added by
-`JULIA-BACKEND-PARITY.4.2`. The active next boundary is `JULIA-BACKEND-PARITY.4.3` for split helper/value runtime
-families.
+`JULIA-BACKEND-PARITY.4.2`. `JULIA-BACKEND-PARITY.4.3.0` split helper/value work by runtime mechanism. The active
+next boundary is `JULIA-BACKEND-PARITY.4.3.1` for core value/store/capture semantics.
 
 ## Commands
 
@@ -86,6 +86,7 @@ quantifiers, and recursive patterns directly.
 `RuntimeParseResult`, `RuntimeLifecycleEvent`, and `RuntimeInterpreterException`. It executes compiled default,
 AND, OR, and bounded/unbounded repetition families; action/blind child edges; lifecycle order; `retv`; explicit
 returns; narrow array accumulators/capture reads; recursion guards; and zero-progress cutoffs in seek or consume
-mode. The embedded ActionIR evaluator is intentionally dispatch-facing. General stores and the documented
-string/number/array/hash/control/block/callback families remain `.4.3`; cursor controls, staged parser execution,
-diagnostics, tracing, and corpus execution remain later leaves.
+mode. The embedded ActionIR evaluator is intentionally dispatch-facing. `.4.3.0` splits general stores/captures,
+string/number, array, hash, and control/block/callback families into `.4.3.1` through `.4.3.5`, with `.4.3.6`
+owning no-drift closeout; cursor controls, staged parser execution, diagnostics, tracing, and corpus execution remain
+later leaves.

@@ -7,8 +7,22 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.4.3.0 — split Julia runtime helper families**
+  (DONE — helper/value work is decomposed before code; next active leaf is `JULIA-BACKEND-PARITY.4.3.1`).
+
+  **Change:** Converted `.4.3` into an active container with six implementation/closeout leaves: core
+  values/stores/captures, string/numeric helpers, arrays, hashes, value/control/block/callback execution, and final
+  no-drift. The completed Dart rollout supplies the sequencing evidence.
+
+  **Boundary:** Planning and lockstep status only. No Julia source or runtime behavior changed; `.4.3.1` is the
+  first implementation leaf.
+
+  **Verification:** The `.4.2` baseline remains 550 Julia assertions. mdBook, memory architecture, Knowledge Map,
+  task-tree metadata, doctrine, stale-frontier scans, and whitespace checks pass.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.4.2 — add Julia runtime rule interpreter**
-  (DONE — first compiled-rule dispatch is in place; next active leaf is `JULIA-BACKEND-PARITY.4.3`).
+  (DONE — first compiled-rule dispatch is in place; `.4.3.0` has since split helper/value work and next active leaf
+  is `JULIA-BACKEND-PARITY.4.3.1`).
 
   **Change:** Added `julia/src/runtime/Interpreter.jl`, wired its public API into `LinkedSpecJulia`, and updated
   package status to `runtime-dispatch`. Julia now executes default/AND/OR/repetition modes, lifecycle flow/events,
@@ -16,9 +30,9 @@ Current execution status for interruption-safe batch workflow recovery.
   reads, seek/consume matching, one-element output projection, repetition bounds, zero-progress cutoffs, and
   recursion guards.
 
-  **Boundary:** Dispatch-facing interpreter only. General stores and the broader string/number/array/hash,
-  expression-block, structured-control, trailing-block, and tree-callback families remain `.4.3`, which must split
-  them into safe owned batches before implementation.
+  **Boundary:** Dispatch-facing interpreter only. `.4.3.0` has since split general stores/captures and the broader
+  string/number/array/hash, expression-block, structured-control, trailing-block, and tree-callback families into
+  `.4.3.1` through `.4.3.6`.
 
   **Verification:** `Pkg.test()` passes with 550 assertions, including 34 runtime-interpreter assertions and the
   existing runtime-matching/compiled-state/registry/ActionIR/frontend/corpus coverage. Commit-time
@@ -26,7 +40,7 @@ Current execution status for interruption-safe batch workflow recovery.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.4.1 — add Julia runtime matching state**
   (DONE — Julia seek/consume matching and interpreter match registers are in place; `.4.2` has since added rule
-  dispatch and next active leaf is `JULIA-BACKEND-PARITY.4.3`).
+  dispatch, `.4.3.0` has split helpers, and next active leaf is `JULIA-BACKEND-PARITY.4.3.1`).
 
   **Change:** Added `julia/src/runtime/Matching.jl`, wired its public API into `LinkedSpecJulia`, and updated package
   status to `runtime-matching`. Julia now preserves stable regex alternative identity, full/compact/named captures,
@@ -41,7 +55,8 @@ Current execution status for interruption-safe batch workflow recovery.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.3.4 — add Julia compiled-spec state**
   (DONE — the Julia compiled-spec/interpreter-state records and descriptor projection are in place; `.4.1` has
-  since closed, `.4.2` has since added rule dispatch, and next active leaf is `JULIA-BACKEND-PARITY.4.3`).
+  since closed, `.4.2` has since added rule dispatch, `.4.3.0` has split helpers, and next active leaf is
+  `JULIA-BACKEND-PARITY.4.3.1`).
 
   **Change:** Added `julia/src/compiler/CompiledSpec.jl`, wired compiler exports into `LinkedSpecJulia`, and
   updated package status to `compiled-state`. Julia now builds ordered `CompiledSpec` / `CompiledRule` state,
@@ -74,7 +89,8 @@ Current execution status for interruption-safe batch workflow recovery.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.3.2 — add Julia ActionIR contract resolver**
   (DONE — the Julia typed ActionIR contract-resolution layer is in place; `.3.3` and `.3.4` have since closed, and
-  `.4.1` and `.4.2` have since added matching/dispatch; next active leaf is `JULIA-BACKEND-PARITY.4.3`).
+  `.4.1` / `.4.2` added matching/dispatch and `.4.3.0` split helpers; next active leaf is
+  `JULIA-BACKEND-PARITY.4.3.1`).
 
   **Change:** Added `julia/src/action/ActionContracts.jl`, wired resolver exports into `LinkedSpecJulia`, and
   updated package status to `action-contracts`. Julia now records canonical helper/control contracts and
@@ -90,8 +106,8 @@ Current execution status for interruption-safe batch workflow recovery.
   Commit-time docs/governance checks pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.3.1 — add Julia ActionIR AST parser**
-  (DONE — the Julia helper/action text-to-AST layer is in place; `.3.2` through `.4.2` have since closed, and next
-  active leaf is `JULIA-BACKEND-PARITY.4.3`).
+  (DONE — the Julia helper/action text-to-AST layer is in place; `.3.2` through `.4.3.0` have since closed, and next
+  active leaf is `JULIA-BACKEND-PARITY.4.3.1`).
 
   **Change:** Added `julia/src/action/ActionAst.jl` and `julia/src/action/ActionParser.jl`, wired their public
   exports into `LinkedSpecJulia`, and updated package status to `action-ast-parser`. Julia now parses action
@@ -107,8 +123,8 @@ Current execution status for interruption-safe batch workflow recovery.
   docs/governance checks pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.2.4 — project Julia function-definition shells**
-  (DONE — the Julia frontend container is closed; `.3.1` through `.4.2` have since closed, and next active leaf is
-  `JULIA-BACKEND-PARITY.4.3`).
+  (DONE — the Julia frontend container is closed; `.3.1` through `.4.3.0` have since closed, and next active leaf is
+  `JULIA-BACKEND-PARITY.4.3.1`).
 
   **Change:** Added `project_user_function_definition_asts(...)`,
   `parse_spec_with_user_function_definition_asts(...)`, and wrapper-output normalization in
@@ -125,8 +141,8 @@ Current execution status for interruption-safe batch workflow recovery.
   docs/governance checks pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.2.3 — add Julia frontend validation**
-  (DONE — the Julia frontend now validates parsed source ASTs; `.2.4` through `.4.2` have since closed, and
-  current active leaf is `JULIA-BACKEND-PARITY.4.3`).
+  (DONE — the Julia frontend now validates parsed source ASTs; `.2.4` through `.4.3.0` have since closed, and
+  current active leaf is `JULIA-BACKEND-PARITY.4.3.1`).
 
   **Change:** Added `validate_spec(spec; strict_syntax=false)` and `SpecValidationException` in
   `julia/src/spec/Validator.jl`, wired validation into the public module, and updated package status to
@@ -139,8 +155,8 @@ Current execution status for interruption-safe batch workflow recovery.
   all checked-in specs, and rule-only corpus specs. Commit-time docs/governance checks pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.2.2 — add Julia source spec parser**
-  (DONE — the Julia frontend now parses rule paragraphs into source ASTs; `.2.3` through `.4.2` have since closed,
-  and current active leaf is `JULIA-BACKEND-PARITY.4.3`).
+  (DONE — the Julia frontend now parses rule paragraphs into source ASTs; `.2.3` through `.4.3.0` have since closed,
+  and current active leaf is `JULIA-BACKEND-PARITY.4.3.1`).
 
   **Change:** Added `parse_spec(source)` and `SpecParseException` in `julia/src/spec/Parser.jl`, wired the parser
   into the public module, and updated package status to `source-parser`.
@@ -152,8 +168,8 @@ Current execution status for interruption-safe batch workflow recovery.
   rule-only corpus specs. Commit-time docs/governance checks pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.2.1 — define Julia frontend AST data types**
-  (DONE — the Julia frontend now has data records and JSON projection; `.2.2` through `.4.2` have since closed,
-  and current active leaf is `JULIA-BACKEND-PARITY.4.3`).
+  (DONE — the Julia frontend now has data records and JSON projection; `.2.2` through `.4.3.0` have since closed,
+  and current active leaf is `JULIA-BACKEND-PARITY.4.3.1`).
 
   **Change:** Added Julia source AST/data types for spec files, function definitions, source spans, staged parse
   jobs, rule headers/modes, body element variants, edge targets, and fluent calls.
@@ -165,8 +181,8 @@ Current execution status for interruption-safe batch workflow recovery.
   docs/governance checks pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.1.3 — add Julia corpus manifest IO**
-  (DONE — the Julia foundation container is closed; `.2.1` through `.4.2` have since closed, and current active
-  leaf is `JULIA-BACKEND-PARITY.4.3`).
+  (DONE — the Julia foundation container is closed; `.2.1` through `.4.3.0` have since closed, and current active
+  leaf is `JULIA-BACKEND-PARITY.4.3.1`).
 
   **Change:** Added JSON3-backed corpus manifest loading, fixture drift/file guards, expected JSON parsing, and
   corpus CLI validation output over the checked-in 99-fixture corpus.
@@ -178,8 +194,8 @@ Current execution status for interruption-safe batch workflow recovery.
   rejection pass with a writable Julia depot. Commit-time docs/governance checks pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.1.2 — scaffold Julia package**
-  (DONE — the minimal Julia package scaffold is in place; `.1.3` through `.4.2` have since closed, and current
-  active leaf is `JULIA-BACKEND-PARITY.4.3`).
+  (DONE — the minimal Julia package scaffold is in place; `.1.3` through `.4.3.0` have since closed, and current
+  active leaf is `JULIA-BACKEND-PARITY.4.3.1`).
 
   **Change:** Added `julia/` as the repo-owned `LinkedSpecJulia` package with package metadata, committed
   `Manifest.toml`, status helpers, CLI/corpus modules, `bin/linkedspec_julia.jl`, `bin/corpus_runner.jl`, README
@@ -193,7 +209,7 @@ Current execution status for interruption-safe batch workflow recovery.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.1.1 — verify Julia toolchain preflight**
   (DONE — Julia toolchain/package-layout preflight is complete; `.1.2` has since created the scaffold, and the
-  current active leaf is `JULIA-BACKEND-PARITY.4.3`).
+  current active leaf is `JULIA-BACKEND-PARITY.4.3.1`).
 
   **Change:** Verified local Homebrew Julia 1.12.6 and matched it to the official current stable release. Recorded
   the intended `julia/` package layout, package/test commands, optional formatter/linter commands, Julia-specific
@@ -206,8 +222,8 @@ Current execution status for interruption-safe batch workflow recovery.
   `JuliaFormatter` and `JET` are absent optional tools. Commit-time docs/governance checks pass.
 
 - 2026-07-09: **FUTURE-PARITY-BACKLOG.1.2 — scope Julia backend parity plan**
-  (DONE — Julia backend parity now has a dedicated task tree; `.1` through `.4.2` have since closed, and the current
-  active leaf is `JULIA-BACKEND-PARITY.4.3`).
+  (DONE — Julia backend parity now has a dedicated task tree; `.1` through `.4.3.0` have since closed, and the
+  current active leaf is `JULIA-BACKEND-PARITY.4.3.1`).
 
   **Change:** Created `docs/tasks/JULIA-BACKEND-PARITY.md` with the full parity plan for the Julia backend:
   toolchain/package preflight, scaffold, corpus IO, `.spec` frontend, typed ActionIR, compiled state, runtime

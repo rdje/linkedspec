@@ -215,9 +215,69 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 - ID: `JULIA-BACKEND-PARITY.4.3`
   Status: `active`
   Goal: Implement helper/value runtime families in safe batches.
+  Children: `.4.3.0`, `.4.3.1`, `.4.3.2`, `.4.3.3`, `.4.3.4`, `.4.3.5`, `.4.3.6`
   Acceptance: Core value/store/capture helpers, string/number helpers, array helpers, hash helpers,
     expression-valued blocks, structured controls, `with` trailing blocks, and tree traversal callbacks either pass
     focused tests or are split into narrower leaves before code.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.4.3.0`
+  Status: `done`
+  Goal: Split the broad runtime value/helper-family leaf into signoff-sized implementation leaves before code.
+  Acceptance: Helper/value work is divided by runtime surface area; the next executable frontier is explicit and
+    can land without bundling the complete helper catalog in one commit.
+  Verification: `PASS` - the helper/value surface is split into `.4.3.1` core values/stores/captures, `.4.3.2`
+    string/numeric helpers, `.4.3.3` array helpers, `.4.3.4` hash helpers, `.4.3.5` value/control/block/callback
+    execution, and `.4.3.6` no-drift closeout; memory, task-tree, doctrine, Knowledge Map, mdBook, and whitespace
+    gates pass.
+  Commit: `JULIA-BACKEND-PARITY.4.3.0 - split Julia runtime helper families`
+
+- ID: `JULIA-BACKEND-PARITY.4.3.1`
+  Status: `active`
+  Goal: Centralize Julia runtime value/store behavior and capture helper reads.
+  Acceptance: Runtime values preserve scalar/array/hash/null/boolean/number JSON shapes; typed wrappers, bare reads,
+    assignments, nested access, `copy`, `array`, `hash`, and `entry_*` / `match_*` capture helpers have focused tests.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.4.3.2`
+  Status: `pending`
+  Goal: Implement string/scalar and numeric helper families, including compatible receiver chains.
+  Acceptance: Current scalar/string helpers, explicit lexical comparisons, numeric arithmetic/reducers/comparisons,
+    word/symbol aliases, and compatible receiver chains match helper-catalog examples.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.4.3.3`
+  Status: `pending`
+  Goal: Implement array helper family and array receiver/mutation behavior.
+  Acceptance: Array construction/flattening, copy, count/select/order/membership/join/split bridges, append/end
+    mutation forms, and receiver chains match helper-catalog examples without mutating snapshots unexpectedly.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.4.3.4`
+  Status: `pending`
+  Goal: Implement hash helper family and hash receiver/mutation behavior.
+  Acceptance: Hash construction/flattening, copy, key/value views, merge/pick/drop/rename/set-key behavior, direct
+    hash-index assignment values, and receiver chains match helper-catalog examples.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.4.3.5`
+  Status: `pending`
+  Goal: Implement value blocks, structured action controls, trailing-block execution, and tree callbacks.
+  Acceptance: Expression-valued blocks, attached/inline controls, helper/receiver `with`, and `walk_leaves` /
+    `map_leaves` / `reduce_leaves` traversal callbacks match current Perl/Rust/Dart contracts.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-BACKEND-PARITY.4.3.6`
+  Status: `pending`
+  Goal: Close helper/value no-drift for the Julia runtime slice.
+  Acceptance: mdBook helper examples, Julia focused runtime tests/status, live docs, and Knowledge Map facts agree
+    on the helper/value boundary before `.4.4` cursor-control work starts.
   Verification: `pending`
   Commit: `pending`
 
@@ -337,7 +397,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.4.3` | `active` | Split and implement broader helper/value families now that compiled rule dispatch, lifecycle flow, and narrow accumulator actions execute. |
+| 1 | `JULIA-BACKEND-PARITY.4.3.1` | `active` | Add core value/store/capture semantics first, giving later pure-helper and aggregate families one stable runtime value model. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -589,6 +649,42 @@ Runtime matching evidence recorded on 2026-07-10:
   `runtime-dispatch`. Broader helper/value semantics, staged parser execution, diagnostics/trace, and corpus
   execution remain later leaves.
 
+## `JULIA-BACKEND-PARITY.4.3.0` Helper/Value Split Result
+
+Helper/value planning evidence recorded on 2026-07-10:
+
+- The completed Dart helper rollout in `docs/tasks/DART-BACKEND-PARITY.md` was reused as sequencing evidence rather
+  than rediscovering or bundling the complete helper catalog.
+- `.4.3.1` owns scalar/array/hash/null/boolean/number value shape, store mutation/read semantics, direct/nested
+  access, snapshots, and the `entry_*` / `match_*` capture families.
+- `.4.3.2` owns current string/scalar and numeric pure helpers, lexical comparisons, numeric aliases/symbols, and
+  compatible receiver chains.
+- `.4.3.3` owns array-aware construction/flattening, snapshots, selection/order/membership/join/split bridges,
+  end mutations, reducers, and receiver chains.
+- `.4.3.4` owns hash-aware construction/flattening, snapshots, key/value views, merge/pick/drop/rename/set-key
+  behavior, direct hash-index assignment, and receiver chains.
+- `.4.3.5` owns expression-valued blocks, structured controls, helper/receiver trailing blocks, and hash/array tree
+  traversal callbacks with scoped bindings.
+- `.4.3.6` owns final helper/value no-drift against mdBook examples, focused Julia runtime coverage/status, live
+  docs, and Knowledge Map facts before `.4.4` cursor-control work.
+
+## `JULIA-BACKEND-PARITY.4.3.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.4.3` named every runtime helper/value family in one broad leaf and explicitly
+  required safe splitting before code if the surface could not land as one signoff-sized unit.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `julia/src/runtime/Interpreter.jl` now has a deliberately narrow
+  dispatch-facing evaluator, while `docs/tasks/DART-BACKEND-PARITY.md` proves that core stores/captures,
+  string/numeric helpers, arrays, hashes, controls/blocks/callbacks, and no-drift each have distinct mechanisms and
+  regression surfaces.
+- [x] **FIX** — Converted `.4.3` into an active container with children `.4.3.0` through `.4.3.6`, matching those
+  mechanism boundaries and making `.4.3.1` the single executable frontier.
+- [x] **ADDRESSED (verified)** — Task-tree and roadmap state now identify one next code slice rather than a broad
+  helper catalog; no Julia implementation behavior changed in this planning leaf.
+- [x] **NO REGRESSION** — The committed `.4.2` `Pkg.test()` result remains 550 assertions; planning verification
+  runs mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and whitespace gates.
+- [x] **LOCKSTEP** — Task tree/index, roadmaps, README, mdBook status/handoff, Knowledge Map pointer, architecture
+  snapshot, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, and `MEMORY.md` updated for the split.
+
 ## `JULIA-BACKEND-PARITY.4.2` Runtime Rule Interpreter Result
 
 Rule-interpreter evidence recorded on 2026-07-10:
@@ -776,6 +872,9 @@ Rule-interpreter evidence recorded on 2026-07-10:
   Julia executes compiled rule families, lifecycle order, action/blind children, `retv`, explicit returns,
   accumulators, repetition bounds, and recursion/progress guards while leaving broader helper/value semantics to
   `.4.3`.
+- `2026-07-10`: `.4.3.0` splits helper/value work by runtime mechanism before code, mirroring the proven Dart
+  rollout: core stores/captures, string/numeric helpers, arrays, hashes, value/control/block/callback execution, and
+  final no-drift. `.4.3.1` is the only active implementation leaf.
 
 ## Open Questions
 
@@ -786,8 +885,8 @@ Rule-interpreter evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.4.3`. Compiled rule dispatch is in place; the helper/value container must be split into safe owned
-  batches before broader evaluator code.
+- None for `.4.3.1`. The helper/value container is split; core value/store/capture semantics are the next owned
+  implementation boundary.
 
 ## Verification Log
 
@@ -807,6 +906,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.3.4` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia compiled-state tests cover ordered rules, dependency refs, dependency-regex rows, descriptor projection, lifecycle/action payload ASTs, registry-aware contracts, last-definition-wins metadata when validation is skipped, validation reuse, and compiled-state diagnostics; total Julia tests pass with 456 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.1` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Julia runtime-matching tests cover seek/consume modes, stable alternative identity, compiled-rule pattern input, full/compact/named captures, multibyte character offsets, line/column projection, entry/local registers, cursor state, immutable updates, native PCRE dialect forms, zero-width/progress detection, and boundary/input guards; total Julia tests pass with 516 assertions. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.4.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`; Julia CLI status; docs/governance checks at commit time. | PASS. Julia rule-interpreter tests cover default repetition, action/blind children, explicit call/returns, passive terminals, current-edge `retv`, AND/OR modes, bounded and zero-progress repetition, lifecycle order/events, accumulators, consume mode, nested output shapes, recursion cutoff, and runtime errors; total Julia tests pass with 550 assertions. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.4.3.0` | No implementation behavior change; mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, stale-frontier scans, and `git diff --check`. | PASS. Julia helper/value work is split into six mechanism-sized implementation/closeout leaves; `.4.3.1` is the next executable frontier. |
 
 ## Commit Log
 
@@ -826,14 +926,18 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.3.4` | `JULIA-BACKEND-PARITY.3.4 - add Julia compiled-spec state` | Compiled-spec/interpreter-state records, dependency-regex state, action payload contracts, and descriptor projection; runtime matching advances to `.4.1`. |
 | `JULIA-BACKEND-PARITY.4.1` | `JULIA-BACKEND-PARITY.4.1 - add Julia runtime matching state` | Seek/consume regex alternatives, capture/offset projection, cursor and entry/local match registers, and zero-progress detection; executable rule dispatch advances to `.4.2`. |
 | `JULIA-BACKEND-PARITY.4.2` | `JULIA-BACKEND-PARITY.4.2 - add Julia runtime rule interpreter` | First compiled-rule interpreter, lifecycle/edge dispatch, narrow accumulator actions, and recursion/progress guards; broader helper/value semantics advance to `.4.3`. |
+| `JULIA-BACKEND-PARITY.4.3.0` | `JULIA-BACKEND-PARITY.4.3.0 - split Julia runtime helper families` | Planning-only split into core stores/captures, string/numeric, array, hash, value/control/block/callback, and no-drift leaves; `.4.3.1` becomes active. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.4.3.0` helper/value decomposition before broader evaluator code. `.4.3` is now an
+  active container with six implementation/closeout children; `.4.3.1` owns core value/store/capture semantics as
+  the single next frontier. No Julia runtime behavior changed; the `.4.2` 550-assertion result remains the baseline.
 - `2026-07-10`: Completed `.4.2` first executable rule dispatch. `julia/src/runtime/Interpreter.jl` now executes
   compiled default/AND/OR/repetition families with lifecycle events, action/blind children, `retv`, explicit
   returns, narrow accumulators/capture reads, bounded and zero-progress termination, recursion cutoffs, seek/consume
-  modes, and one-element output projection. `Pkg.test()` passes with 550 total assertions; `.4.3` owns broader
-  helper/value semantics and must split them into safe batches before code.
+  modes, and one-element output projection. `Pkg.test()` passes with 550 total assertions; `.4.3.0` has since split
+  broader helper/value semantics into safe batches beginning at `.4.3.1`.
 - `2026-07-10`: Completed `.4.1` runtime regex matching and match-state tracking.
   `julia/src/runtime/Matching.jl` now compiles stable indexed alternatives, selects seek/consume matches, records
   full/compact/named capture state, projects code-unit spans to character and line/column positions, keeps cursor

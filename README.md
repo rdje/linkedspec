@@ -89,7 +89,8 @@ Top-level directories and files:
     compiled-spec state, and runtime seek/consume regex matching with capture/offset projection, cursor state,
     entry/local match registers, and zero-progress detection. First compiled-rule dispatch now executes rule modes,
     lifecycle flow, action/blind children, `retv`, explicit returns, narrow accumulators, and recursion/progress
-    guards. Split helper/value families are the active `JULIA-BACKEND-PARITY.4.3` frontier.
+    guards. Helper/value families are split by mechanism; core value/store/capture semantics are the active
+    `JULIA-BACKEND-PARITY.4.3.1` frontier.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

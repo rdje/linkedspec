@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.4.3.0 — split Julia runtime helper families
+
+**Scope:** Planning-only decomposition of the broad Julia helper/value runtime container, task-tree frontier,
+roadmap/task-tree index, README/mdBook status and handoff text, Knowledge Map pointer, architecture snapshot, live
+docs, and resume pointer.
+
+**Change:** Converted `JULIA-BACKEND-PARITY.4.3` into an active container with signoff-sized children: `.4.3.1`
+core value/store/capture semantics, `.4.3.2` string/scalar and numeric helpers, `.4.3.3` array helpers, `.4.3.4`
+hash helpers, `.4.3.5` value/control/block/callback execution, and `.4.3.6` final helper/value no-drift. The split
+reuses the completed Dart rollout as sequencing evidence and makes `.4.3.1` the only executable frontier.
+
+**Validation:** No Julia behavior changed; the `.4.2` 550-assertion result remains the baseline. Commit-time
+validation covers mdBook, memory architecture, task-tree metadata, Knowledge Map, doctrine, stale-frontier scans,
+and `git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.4.2 — add Julia runtime rule interpreter
 
 **Scope:** Julia compiled-rule execution engine, parse result/lifecycle event records, dispatch-facing ActionIR

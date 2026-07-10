@@ -1,14 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.4.3.0 — split Julia runtime helper families):
+  The Julia helper/value rollout now mirrors the proven Dart mechanism order instead of treating the complete
+  helper catalog as one implementation unit. Core JSON-shaped stores/captures land first, then string/numeric
+  helpers, array-aware behavior, hash-aware behavior, value/control/block/callback execution, and final no-drift.
+  This planning slice changes no runtime code and makes `.4.3.1` the single active code boundary.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.4.2 — Julia runtime rule interpreter):
   Julia now consumes `CompiledSpec` through its first executable rule-dispatch layer.
   `julia/src/runtime/Interpreter.jl` owns default/AND/OR/repetition mode execution, action and blind-call child
   dispatch, entry/local register handoff, `retv`, lifecycle order/events, explicit return flow, narrow array/rule
   accumulators and capture reads, output projection, bounds, zero-progress termination, and recursion cutoff state.
   The embedded evaluator deliberately rejects general variable/store/helper/control/block/callback behavior so the
-  broad `.4.3` helper/value container can be split and landed in reviewable batches rather than being hidden inside
-  this dispatch slice.
+  broad `.4.3` helper/value container has since been split by `.4.3.0`; `.4.3.1` owns the first core
+  value/store/capture batch.
 
 - 2026-07-10 (JULIA-BACKEND-PARITY.4.1 — Julia runtime matching state):
   Julia now has the regex/match-state foundation required by executable rule dispatch.

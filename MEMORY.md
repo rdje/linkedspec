@@ -18,24 +18,24 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.4.2` — Julia executes compiled default/AND/OR/repetition families,
-  lifecycle flow/events, action/blind children, `retv`, explicit returns, narrow accumulators/capture reads,
-  seek/consume output projection, repetition bounds, zero-progress termination, and recursion cutoffs.
-- prior_leaf: `JULIA-BACKEND-PARITY.4.1` — Julia has seek/consume regex alternatives, stable capture identity,
-  public character and line/column projection, cursor/capture anchors, entry/local registers, and zero-progress
-  detection.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.4.3.0` — the broad helper/value runtime container is split by
+  mechanism into core stores/captures, string/numeric, array, hash, value/control/block/callback, and no-drift
+  leaves; no runtime behavior changed.
+- prior_leaf: `JULIA-BACKEND-PARITY.4.2` — Julia executes compiled rule families, lifecycle flow, action/blind
+  children, `retv`, explicit returns, narrow accumulators/capture reads, output projection, and recursion/progress
+  guards.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.4.2 - add Julia runtime rule interpreter`; previous committed HEAD is
-  `6c409d58 JULIA-BACKEND-PARITY.4.1 - add Julia runtime matching state`.
+  `JULIA-BACKEND-PARITY.4.3.0 - split Julia runtime helper families`; previous committed HEAD is
+  `bbc952fb JULIA-BACKEND-PARITY.4.2 - add Julia runtime rule interpreter`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; current frontier after the current commit is `.4.3`.
-- next_action: resume PNT at `JULIA-BACKEND-PARITY.4.3` by splitting the broad helper/value container into safe
-  owned child leaves before code, following the Dart `.4.3.0` through `.4.3.6` evidence: core stores/captures,
-  string/number, array, hash, value/control/block/callback families, then no-drift closeout.
+- active_work_unit: `JULIA-BACKEND-PARITY`; current frontier after the current commit is `.4.3.1`.
+- next_action: resume PNT at `JULIA-BACKEND-PARITY.4.3.1` to add core JSON-shaped value/store behavior,
+  assignments and direct/nested reads, typed array/hash snapshots, `copy(...)`, and the complete `entry_*` /
+  `match_*` capture helper family over the `.4.2` interpreter.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
 - latest_bootstrap_read: 2026-07-10 read the full roadmap and roadmap-v2, full codebase inventory and active Julia
@@ -48,5 +48,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.4.2` commit; do not pivot
+- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.4.3.0` commit; do not pivot
   unless the repo is handoff-ready.
