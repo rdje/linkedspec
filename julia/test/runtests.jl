@@ -42,6 +42,24 @@ function _write_fixture(
     end
 end
 
+function _regex_patterns_of(rule::Rule)
+    return [
+        element.kind.pattern for element in rule.body
+        if element.kind isa RegexBodyElementKind
+    ]
+end
+
+function _starts_with_top_level_function(source::AbstractString)
+    for line in split(source, '\n'; keepempty = true)
+        trimmed = strip(line)
+        if isempty(trimmed) || startswith(trimmed, "#")
+            continue
+        end
+        return startswith(trimmed, "fn ")
+    end
+    return false
+end
+
 @testset "LinkedSpecJulia scaffold" begin
     @test backend_name() == "julia"
     @test cli_entrypoint() == "julia/bin/linkedspec_julia.jl"
@@ -50,7 +68,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "frontend-ast-data"
+    @test status.parity == "source-parser"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -60,7 +78,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: frontend-ast-data", String(take!(status_output)))
+    @test occursin("parity: source-parser", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -74,6 +92,182 @@ end
     execute_error = IOBuffer()
     @test run_corpus_runner(["--corpus", "fixtures", "--execute"]; io = IOBuffer(), err = execute_error) == 2
     @test occursin("not implemented", String(take!(execute_error)))
+end
+
+@testset "Spec parser" begin
+    modes = Dict(
+        "R1:AND" => RuleMode("And"),
+        "R2:OR+" => RuleMode("OrPlus"),
+        "R3::*" => RuleMode("Star"),
+        "R4:?" => RuleMode("Optional"),
+        "R5:AND{2,4}" => and_bounded_rule_mode(min = 2, max = 4),
+        "R6:OR{3}" => or_bounded_rule_mode(min = 3, max = 3),
+        "R7:&" => RuleMode("Single"),
+        "R8:|" => RuleMode("Pipe"),
+    )
+
+    for (header, mode) in modes
+        spec = parse_spec("$header\n /x/")
+        @test spec.rules[1].header.mode == mode
+        @test spec.rules[1].body[1].kind isa RegexBodyElementKind
+    end
+
+    inline = parse_spec("Top:: /x/ I { return(entry_text()) } E.return(\"done\")")
+    @test inline.rules[1].header.rest == "/x/ I { return(entry_text()) } E.return(\"done\")"
+    @test inline.rules[1].body[1].kind isa RegexBodyElementKind
+    @test inline.rules[1].body[2].kind isa CodeBlockBodyElementKind
+    @test inline.rules[1].body[3].kind isa CodeBlockBodyElementKind
+
+    single = parse_spec("Top::\n -> semi\n\nsemi : /;/")
+    @test _regex_patterns_of(find_rule(single, "semi")) == [";"]
+
+    pair = parse_spec("Top::\n -> bracket\n\nbracket : /\\(/ /\\)/")
+    @test _regex_patterns_of(find_rule(pair, "bracket")) == ["\\(", "\\)"]
+
+    edges = parse_spec(raw"""
+Top::->Child.push
+ -> Child[1] .return(array("?child:", copy(array(Child))))
+ -> A | B { return(entry_text()) }
+ =>Helper.trim()
+
+Child: /x/ /y/
+Helper: /h/
+""")
+    top = top_rule(edges)
+    @test length(top.body) == 4
+    compact = top.body[1].kind
+    @test compact isa ActionEdgeBodyElementKind
+    @test compact.targets[1].label == "Child"
+    @test compact.targets[1].index == 0
+    @test compact.fluent_chain[1].method == "push"
+
+    indexed = top.body[2].kind
+    @test indexed isa ActionEdgeBodyElementKind
+    @test indexed.targets[1].index == 1
+    @test indexed.fluent_chain[1].method == "return"
+    @test indexed.fluent_chain[1].args == "array(\"?child:\", copy(array(Child)))"
+
+    grouped = top.body[3].kind
+    @test grouped isa ActionEdgeBodyElementKind
+    @test [target.label for target in grouped.targets] == ["A", "B"]
+    @test grouped.code == "return(entry_text())"
+
+    blind = top.body[4].kind
+    @test blind isa BlindEdgeBodyElementKind
+    @test blind.target == "Helper"
+    @test blind.fluent_chain[1].method == "trim"
+
+    continuation = parse_spec(raw"""
+Top::
+ -> item
+  .if(on)
+    .push(item, out)
+  .else()
+    .return_undef()
+  .endif()
+
+item: /x/
+""")
+    edge = top_rule(continuation).body[1].kind
+    @test [(call.method, call.args) for call in edge.fluent_chain] == [
+        ("if", "on"),
+        ("push", "item, out"),
+        ("else", ""),
+        ("return_undef", ""),
+        ("endif", ""),
+    ]
+
+    attached = parse_spec(raw"""
+Top::
+ -> Done.when(false) {
+    return("bad")
+ }.otherwise {
+    return("fallback")
+ }
+ I.when(false) { set(out, "bad") } otherwise { set(out, "fallback") }
+
+Done:
+ /x/
+""")
+    action = top_rule(attached).body[1].kind
+    @test action isa ActionEdgeBodyElementKind
+    @test isempty(action.fluent_chain)
+    @test occursin("when(false)", action.code)
+    @test occursin("return(\"fallback\")", action.code)
+    lifecycle = top_rule(attached).body[2].kind
+    @test lifecycle isa CodeBlockBodyElementKind
+    @test lifecycle.lifecycle == "I"
+    @test occursin("otherwise", lifecycle.code)
+
+    compact_lifecycle = parse_spec(raw"""
+Top::
+ I.set(out, undef).set(out, "ok").return(out)
+ /x/
+""")
+    block = top_rule(compact_lifecycle).body[1].kind
+    @test block isa CodeBlockBodyElementKind
+    @test block.code == "set(out, undef); set(out, \"ok\"); return(out)"
+
+    multiline_args = parse_spec(raw"""
+Top::
+ I.return({
+  "type" => "function_definition_error",
+  "source_text" => entry_text()
+ })
+ /x/
+""")
+    multiline_block = top_rule(multiline_args).body[1].kind
+    @test multiline_block isa CodeBlockBodyElementKind
+    @test startswith(multiline_block.code, "return({")
+    @test occursin("\"source_text\" => entry_text()", multiline_block.code)
+    @test top_rule(multiline_args).body[2].kind isa RegexBodyElementKind
+
+    quoted_braces = parse_spec(raw"""
+Top::
+ /a/ I { print("literal { brace"); print('literal } brace') }
+ /b/ E { return("ok") }
+""")
+    quoted_block = top_rule(quoted_braces).body[2].kind
+    @test quoted_block isa CodeBlockBodyElementKind
+    @test occursin("print(\"literal { brace\")", quoted_block.code)
+    @test occursin("print('literal } brace')", quoted_block.code)
+    @test top_rule(quoted_braces).body[3].kind isa RegexBodyElementKind
+
+    raw_fallback = parse_spec("Top::\n raw compatibility line")
+    @test top_rule(raw_fallback).body[1].kind isa RawBodyElementKind
+    @test_throws SpecParseException parse_spec("fn normalize(value) { return(trim(value)) }\n\nTop::\n /x/")
+
+    spec_files = sort(filter(path -> endswith(path, ".spec"), readdir(joinpath(REPO_ROOT, "specs"); join = true)))
+    @test !isempty(spec_files)
+    for file in spec_files
+        parsed = parse_spec(read(file, String))
+        @test !isempty(parsed.rules)
+    end
+
+    corpus_specs = String[]
+    for (root, _, files) in walkdir(CORPUS_ROOT)
+        for file in files
+            if file == "input.spec"
+                push!(corpus_specs, joinpath(root, file))
+            end
+        end
+    end
+    sort!(corpus_specs)
+
+    parsed_count = 0
+    skipped_function_shells = 0
+    for file in corpus_specs
+        source = read(file, String)
+        if _starts_with_top_level_function(source)
+            skipped_function_shells += 1
+            continue
+        end
+        parsed = parse_spec(source)
+        @test !isempty(parsed.rules)
+        parsed_count += 1
+    end
+    @test parsed_count > 80
+    @test skipped_function_shells > 0
 end
 
 @testset "Corpus manifest IO" begin

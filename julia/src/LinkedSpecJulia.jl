@@ -19,6 +19,7 @@ export backend_name,
     FunctionDefinition,
     LifecycleMarkerBodyElementKind,
     load_corpus_fixtures,
+    parse_spec,
     PlainBlockBodyElementKind,
     RawBodyElementKind,
     RegexBodyElementKind,
@@ -27,6 +28,7 @@ export backend_name,
     RuleMode,
     SourceSpan,
     SpecAstException,
+    SpecParseException,
     SpecFile,
     SplitMarkerBodyElementKind,
     StagedParseJob,
@@ -50,10 +52,11 @@ const PACKAGE_NAME = "LinkedSpecJulia"
 const PACKAGE_VERSION = v"0.1.0"
 const CLI_ENTRYPOINT = "julia/bin/linkedspec_julia.jl"
 const CORPUS_RUNNER_ENTRYPOINT = "julia/bin/corpus_runner.jl"
-const PARITY_STATUS = "frontend-ast-data"
+const PARITY_STATUS = "source-parser"
 
 include("corpus/CorpusManifest.jl")
 include("spec/Ast.jl")
+include("spec/Parser.jl")
 include("cli/LinkedSpecJuliaCli.jl")
 
 backend_name() = BACKEND_NAME

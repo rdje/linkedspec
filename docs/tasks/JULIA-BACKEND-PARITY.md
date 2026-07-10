@@ -105,12 +105,13 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.2.1 - define Julia frontend AST data types`
 
 - ID: `JULIA-BACKEND-PARITY.2.2`
-  Status: `pending`
+  Status: `done`
   Goal: Parse `.spec` rule paragraphs, headers, regex slots, lifecycle blocks, action/blind-call edges, fluent
     continuations, markers, comments, and block boundaries.
   Acceptance: Parser fixtures cover the formal grammar and the shipped-spec shapes used by the corpus.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - `Pkg.test()` covers focused parser fixtures, all 21 checked-in `specs/*.spec` files, and
+    rule-only corpus `input.spec` files while skipping top-level function shells for `.2.4`.
+  Commit: `JULIA-BACKEND-PARITY.2.2 - add Julia source spec parser`
 
 - ID: `JULIA-BACKEND-PARITY.2.3`
   Status: `pending`
@@ -312,7 +313,7 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-BACKEND-PARITY.2.2` | `pending` | Parse `.spec` rule paragraphs into the source AST types defined by `.2.1`. |
+| 1 | `JULIA-BACKEND-PARITY.2.3` | `pending` | Validate parsed source ASTs before helper/action lowering or runtime behavior. |
 
 ## `JULIA-BACKEND-PARITY.1.1` Preflight Result
 
@@ -402,6 +403,22 @@ Source AST evidence recorded on 2026-07-10:
   leaves.
 - Parser behavior is still deliberately absent. `.2.2` owns parsing `.spec` rule paragraphs into these types.
 
+## `JULIA-BACKEND-PARITY.2.2` Source Parser Result
+
+Source parser evidence recorded on 2026-07-10:
+
+- `julia/src/spec/Parser.jl` adds `parse_spec(source)` and `SpecParseException`.
+- The parser produces the `.2.1` source AST types for rule headers/modes, inline and body regex slots, lifecycle
+  blocks, action edges, blind-call edges, fluent chains, split markers, conditional markers, plain blocks, raw
+  fallback lines, and nested block boundaries.
+- Action-edge fluent continuation lines are attached to the preceding action edge, matching the Dart parser
+  boundary.
+- Focused tests cover mode suffixes, bounded modes, inline body elements, regex literals, action/blind edges,
+  grouped/indexed targets, attached `when`/`otherwise` blocks, compact lifecycle fluent chains, multiline fluent
+  arguments, quoted braces inside code blocks, raw fallback lines, and pre-rule function definition rejection.
+- Parser smoke tests cover all 21 checked-in `specs/*.spec` files plus rule-only corpus `input.spec` files. Top-level
+  `fn` corpus shells remain intentionally skipped until `.2.4` consumes `specs/user_function_definition.spec`.
+
 ## Decisions
 
 - `2026-07-09`: Julia follows Dart in the ADR `0021` backend rollout order. `FUTURE-PARITY-BACKLOG.1.2`
@@ -423,6 +440,9 @@ Source AST evidence recorded on 2026-07-10:
 - `2026-07-10`: `.2.1` mirrors the Rust/Dart/mdBook parsed-source contract in Julia data types and JSON field
   names before implementing any text parser. The parser leaf `.2.2` must produce this data model rather than
   introducing a competing Julia-only AST shape.
+- `2026-07-10`: `.2.2` follows the Dart source-parser boundary for core rule parsing. It deliberately does not add
+  frontend validation, function-shell projection, helper/action parsing, compilation, runtime execution, or corpus
+  `--execute`.
 
 ## Open Questions
 
@@ -433,7 +453,7 @@ Source AST evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None for `.2.2`. Julia now has the source AST data model; parser implementation is the next owned boundary.
+- None for `.2.3`. Julia now parses source into the AST model; frontend validation is the next owned boundary.
 
 ## Verification Log
 
@@ -444,6 +464,7 @@ Source AST evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.1.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.instantiate()'`; `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; `julia --project=julia julia/bin/linkedspec_julia.jl --help`; `julia --project=julia julia/bin/linkedspec_julia.jl status`; `julia --project=julia julia/bin/linkedspec_julia.jl corpus --corpus rust/linkedspec-runtime/tests/corpus`; `julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus`; `git diff --check`; memory architecture, task-tree metadata, Knowledge Map, doctrine, and mdBook checks. | PASS. Initial fresh-depot registry access needed approved network once; the committed manifest records only the local package, and the scaffold still deliberately rejects `--execute`. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.1.3` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.instantiate()'`; `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; `julia --project=julia julia/bin/linkedspec_julia.jl corpus --corpus rust/linkedspec-runtime/tests/corpus`; `julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus`; `julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute` returns code `2`; `git diff --check`; memory architecture, task-tree metadata, Knowledge Map, doctrine, and mdBook checks. | PASS. Julia validates the 99-fixture manifest and drift/file/JSON guards without parser/runtime execution; `--execute` remains unavailable. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.2.1` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia source AST/data types round-trip through JSON over spec files, function definitions, staged parse jobs, rule modes, body elements, edges, and fluent calls. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.2.2` | `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`; docs/governance checks at commit time. | PASS. Julia source parser tests cover focused syntax fixtures, all 21 checked-in specs, and rule-only corpus specs; total Julia tests pass. |
 
 ## Commit Log
 
@@ -454,9 +475,14 @@ Source AST evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.1.2` | `JULIA-BACKEND-PARITY.1.2 - scaffold Julia package` | Minimal Julia package, command stubs, scaffold tests, and docs; no parser/runtime semantics yet. |
 | `JULIA-BACKEND-PARITY.1.3` | `JULIA-BACKEND-PARITY.1.3 - add Julia corpus manifest IO` | Manifest IO/drift guard scaffold; `.1` foundation container closes. |
 | `JULIA-BACKEND-PARITY.2.1` | `JULIA-BACKEND-PARITY.2.1 - define Julia frontend AST data types` | Source AST/data model and JSON projection; parser implementation advances to `.2.2`. |
+| `JULIA-BACKEND-PARITY.2.2` | `JULIA-BACKEND-PARITY.2.2 - add Julia source spec parser` | Source parser for rule paragraphs and shipped-spec/corpus parser smoke; validation advances to `.2.3`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.2.2` source parser. `julia/src/spec/Parser.jl` now parses core `.spec` rule
+  paragraphs into the `.2.1` AST types, including headers/modes, regex slots, lifecycle blocks, action/blind-call
+  edges, fluent continuations, markers, comments, and block boundaries. `Pkg.test()` covers focused parser fixtures,
+  all checked-in specs, and rule-only corpus specs. `.2.3` owns validation and strict syntax behavior.
 - `2026-07-10`: Completed `.2.1` source AST/data types. `julia/src/spec/Ast.jl` now defines Julia data records
   and JSON projection for spec files, functions, source spans, staged parse jobs, rule headers/modes, body element
   variants, edge targets, and fluent calls. `Pkg.test()` covers the JSON round-trip; `.2.2` owns parsing `.spec`

@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.2.2 — Julia source parser):
+  Julia now parses core `.spec` rule paragraphs into the `.2.1` source AST types. `parse_spec(source)` lives in
+  `julia/src/spec/Parser.jl` and covers headers/modes, regex slots, lifecycle blocks, action/blind-call edges,
+  fluent continuations, markers, comments, and block boundaries. The focused parser tests also parse all 21
+  checked-in `specs/*.spec` files plus rule-only corpus specs, while top-level `fn` shells stay deferred to `.2.4`.
+  Next leaf is `.2.3` for frontend validation and strict syntax behavior.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.2.1 — Julia source AST data types):
   Julia now has the data-only source AST contract before parser behavior. `julia/src/spec/Ast.jl` defines
   `SpecFile`, `FunctionDefinition`, source spans, staged parse jobs, rule headers/modes, body element variants,

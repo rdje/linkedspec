@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.2.2 — add Julia source spec parser
+
+**Scope:** Julia source `.spec` parser, package exports/status, focused parser tests, README, task-tree frontier
+update, roadmap/task-tree index alignment, mdBook status/handoff text, Knowledge Map, architecture snapshot, live
+docs, and resume pointer.
+
+**Change:** Added `julia/src/spec/Parser.jl` with `parse_spec(source)` and `SpecParseException`. The parser turns
+core `.spec` rule paragraphs into the `.2.1` source AST types: headers/modes, inline/body regex slots, lifecycle
+blocks, action edges, blind-call edges, fluent chains and continuation lines, split/conditional markers, plain
+blocks, raw fallback lines, comments, and nested block boundaries. The Julia package status now reports
+`source-parser`. Validation, top-level function-shell projection, ActionIR, compilation, runtime execution, and
+corpus `--execute` remain later leaves.
+
+**Validation:** `Pkg.test()` passes with 229 tests, including 177 source-parser tests over focused constructs, all
+21 checked-in `specs/*.spec` files, and rule-only corpus `input.spec` files. Commit-time docs/governance validation
+covers mdBook, memory architecture, task-tree metadata, Knowledge Map, doctrine, and `git diff --check`.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.2.1 — define Julia frontend AST data types
 
 **Scope:** Julia source AST/data records, JSON projection, package exports, focused tests, README, task-tree

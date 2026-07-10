@@ -10,7 +10,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, ast, parser, json, staged-parsing]
-evidence: "julia/src/spec/Ast.jl; julia/test/runtests.jl; docs/tasks/JULIA-BACKEND-PARITY.md"
+evidence: "julia/src/spec/Ast.jl; julia/src/spec/Parser.jl; julia/test/runtests.jl; docs/tasks/JULIA-BACKEND-PARITY.md"
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
 ---
 
@@ -26,8 +26,8 @@ The JSON projection intentionally follows the Rust/Dart/mdBook contract, includi
 
 `julia/test/runtests.jl` round-trips a representative `SpecFile` through JSON, including a function definition,
 staged function-body parse job, bounded AND rule mode, regex/action/code body elements, edge targets, and fluent
-calls. Parser behavior is not implemented yet; `JULIA-BACKEND-PARITY.2.2` owns producing these types from `.spec`
-text.
+calls. `JULIA-BACKEND-PARITY.2.2` has since added `parse_spec(source)` as the first producer of these rule AST
+types from `.spec` text; frontend validation remains a later leaf.
 
-Related facts: [[julia-corpus-manifest-io]], [[dart-frontend-ast-json-contract]],
+Related facts: [[julia-core-spec-parser]], [[julia-corpus-manifest-io]], [[dart-frontend-ast-json-contract]],
 [[dart-core-spec-parser]], [[text-to-ast-backend-doctrine]].
