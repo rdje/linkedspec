@@ -21,7 +21,8 @@ nonnumeric argument uses status `1`, matching the Rust backend contract. The thr
 `exit_now(<status>) in rule <rule>`. Existing interpreter wrappers attach the structured diagnostic rather than
 creating a second fatal-error path.
 
-The current simenv failure is proof that the helper executes, not an `exit_now(...)` defect. The fixture's earlier
-statement-form `substr(...)` call has not mutated `block_namei`, so the later BEGIN/END comparison takes the fatal
-branch and terminates in `begin_end_blocks`. Scalar statement mutation and the resulting quote normalization are
-owned by `JULIA-BACKEND-PARITY.6.2.4.5.2`.
+At the `.6.2.4.5.1` boundary, simenv's fatal failure proved that the helper executed rather than exposing an
+`exit_now(...)` defect. `.6.2.4.5.2` has since implemented the earlier statement-form `substr(...)` mutation, so
+the BEGIN/END block names normalize before comparison and simenv passes.
+
+Related fact: [[julia-statement-regex-mutation]].

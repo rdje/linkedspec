@@ -31,9 +31,9 @@ nonnegative integer. The current action edge caches and reuses its child result;
 normally. Explicit value append such as `push(array(items), value)` keeps its existing meaning.
 
 This makes all four `spec.spec` smokes pass. EBNF now retains rule headers, rule references, groups, strings,
-operators, and logging annotations. Its remaining mismatch is narrower: quoted-string rules use statement-form
-regex `substr(...)`, which Julia does not yet apply as target mutation. That quote-only residual belongs to
-`JULIA-BACKEND-PARITY.6.2.4.5.2` with the existing lib_reader normalization cases.
+operators, and logging annotations. Its mismatch at this boundary was statement-form regex `substr(...)` target
+mutation. That successor mechanism has since landed under `JULIA-BACKEND-PARITY.6.2.4.5.2`, and both EBNF
+fixtures pass exact oracle output.
 
-Related facts: [[rust-action-edge-child-return-dispatch]], [[dart-structural-pcre-parser-smoke-parity]],
+Related facts: [[julia-statement-regex-mutation]], [[rust-action-edge-child-return-dispatch]], [[dart-structural-pcre-parser-smoke-parity]],
 [[julia-shipped-corpus-smoke-split]], [[julia-recursive-rule-local-reset-scope]].

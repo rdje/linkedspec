@@ -390,7 +390,8 @@ dispatch rule.
   capture references such as `$1`.
 - **Boundary**: This is the legacy statement-style mutation form used by shipped specs. It is intentionally
   separate from pure `substr(value, start, length?)` character slicing and from literal `replace_substr(...)`.
-- **Example**: `substr(value, "\"|\\s", "", go)` removes quotes and whitespace from `value` in place.
+- **Example**: `substr(value, '"|\s', "", go)` removes quotes and whitespace from `value` in place. Single quotes
+  keep the embedded double quote readable; the equivalent double-quoted pattern remains valid.
 
 ### String receiver-dot value chains
 - **Signature**: `string_expr.method(args...).next(args...)`

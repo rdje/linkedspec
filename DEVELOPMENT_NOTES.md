@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.5.2 — statement regex mutation):
+  The overload boundary is statement context plus a bare scalar target and four arguments. That discriminator
+  keeps numeric `substr(value, start, width)` pure—even when its result is discarded—while enabling the historical
+  regex-substitution spelling without a fixture shortcut. Julia reuses one strict regex flag compiler, expands
+  `$n` per match, and keeps explicit split-target replacement separate. This composition closes EBNF quote text,
+  lib_reader quote/list cleanup, and simenv's pre-exit block-name cleanup with one portable mechanism. The clearer
+  single-quoted pattern is not a Julia convenience: Perl, Rust, Dart, and Julia already recognize both string
+  delimiters, so equivalent single/double-quoted action strings are a required contract for every backend.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.5.1 — terminating exit control):
   `exit_now(...)` is fatal parser flow, not a value-returning helper. Julia evaluates its optional first argument,
   uses Rust-compatible numeric status `1` when absent or nonnumeric, and throws immediately through the established

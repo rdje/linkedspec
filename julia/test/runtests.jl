@@ -346,7 +346,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-corpus-exit-now"
+    @test status.parity == "runtime-corpus-statement-mutation"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -358,7 +358,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-corpus-exit-now", String(take!(status_output)))
+    @test occursin("parity: runtime-corpus-statement-mutation", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1682,6 +1682,38 @@ Top::
     end
     @test default_exit_error isa RuntimeInterpreterException
     @test default_exit_error.message == "exit_now(1) in rule Top"
+
+    substitution_helpers = runtime_engine(raw"""
+Top::
+ /x/
+ E {
+   value = "\"bar,baz\""
+   numbered = "a12b34"
+   first_only = "a1b2"
+   letters = "AbA"
+   untouched = "abcdef"
+   substr(value, '"|\s', "", go)
+   regex_subst(numbered, /(\d+)/, "[$1]", g)
+   substr(first_only, /(\d+)/, "[$1]", o)
+   substr(letters, /a/, "x", ig)
+   substr(untouched, 1, 3)
+   return(hash(
+     "value", value,
+     "numbered", numbered,
+     "first_only", first_only,
+     "letters", letters,
+     "untouched", untouched,
+     "slice", substr(untouched, 1, 3)
+   ))
+ }
+""")
+    substitution_result = runtime_parse(substitution_helpers, "x").value
+    @test substitution_result["value"] == "bar,baz"
+    @test substitution_result["numbered"] == "a[12]b[34]"
+    @test substitution_result["first_only"] == "a[1]b2"
+    @test substitution_result["letters"] == "xbx"
+    @test substitution_result["untouched"] == "abcdef"
+    @test substitution_result["slice"] == "bcd"
 
     numeric_helpers = runtime_engine(raw"""
 Top::
@@ -3587,9 +3619,9 @@ end
     @test [result.name for result in passing.results] == passing_names
     @test corpus_passed_count(passing) == 3
     @test isempty(failures)
-    @test !corpus_fixture_passed(residual_result)
-    @test occursin("output mismatch", residual_result.failure)
-    @test !occursin("unsupported runtime helper", residual_result.failure)
+    @test corpus_fixture_passed(residual_result)
+    @test residual_result.failure === nothing
+    @test !occursin("unsupported runtime helper", something(residual_result.failure, ""))
 end
 
 @testset "Shipped logical-helper corpus batch" begin
@@ -3614,7 +3646,7 @@ end
     @test constant_result.failure === nothing
 end
 
-@testset "Shipped diagnostic-output corpus boundary" begin
+@testset "Shipped mutation and leading-trivia corpus boundary" begin
     execution = execute_corpus_fixtures(
         CORPUS_ROOT;
         case_names = ["simenv_multiline_value", "ds_vhistory_version_entry"],
@@ -3625,10 +3657,9 @@ end
         "simenv_multiline_value",
         "ds_vhistory_version_entry",
     ]
-    @test !corpus_fixture_passed(simenv)
-    @test occursin("execute failed: exit_now(1) in rule begin_end_blocks", simenv.failure)
-    @test !occursin("unsupported runtime helper 'print'", simenv.failure)
-    @test !occursin("unsupported runtime helper 'exit_now'", simenv.failure)
+    @test corpus_fixture_passed(simenv)
+    @test simenv.actual_output == Any[simenv.expected_json]
+    @test simenv.failure === nothing
     @test !corpus_fixture_passed(history)
     @test occursin("output mismatch", history.failure)
     @test !occursin("unsupported runtime helper 'print'", history.failure)
@@ -3651,39 +3682,38 @@ end
     @test isempty(failures)
 end
 
-@testset "Shipped structural child-push corpus boundary" begin
+@testset "Shipped structural and quote-normalization corpus batch" begin
     passing_names = [
         "spec_spec_minimal_rule",
         "spec_spec_action_edge",
         "spec_spec_user_function_definition",
         "spec_spec_comment_skip",
+        "ebnf_expression_rules",
+        "ebnf_logging_annotation",
     ]
     passing = execute_corpus_fixtures(CORPUS_ROOT; case_names = passing_names)
     failures = [
         "$(result.name): $(result.failure)"
         for result in passing.results if !corpus_fixture_passed(result)
     ]
-    ebnf = execute_corpus_fixtures(
-        CORPUS_ROOT;
-        case_names = ["ebnf_expression_rules", "ebnf_logging_annotation"],
-    )
-
     @test [result.name for result in passing.results] == passing_names
-    @test corpus_passed_count(passing) == 4
+    @test corpus_passed_count(passing) == 6
     @test isempty(failures)
-    @test all(result -> !corpus_fixture_passed(result), ebnf.results)
-    @test all(result -> occursin("output mismatch", result.failure), ebnf.results)
-    @test ebnf.results[1].actual_output == Any[Any[
-        Any[Any["rule", "Expr"], Any["rule_reference", "Term"], Any["group_open", "("],
-            Any["quoted_string", "\"+\""], Any["rule_reference", "Term"],
-            Any["group_close", ")"], Any["operator", "*"]],
-        Any[Any["rule", "Term"], Any["rule_reference", "Factor"]],
-    ]]
-    @test ebnf.results[2].actual_output == Any[Any[Any[
-        Any["rule", "Expr"],
-        Any["rule_reference", "Term"],
-        Any["logging_annotation", Any["log_rule", Any["\"expr\"", "\"term\""]]],
-    ]]]
+    @test all(result -> result.actual_output == Any[result.expected_json], passing.results[5:6])
+end
+
+@testset "Shipped lib_reader quote-normalization corpus batch" begin
+    passing_names = ["lib_reader_sattribute", "lib_reader_cattribute"]
+    execution = execute_corpus_fixtures(CORPUS_ROOT; case_names = passing_names)
+    failures = [
+        "$(result.name): $(result.failure)"
+        for result in execution.results if !corpus_fixture_passed(result)
+    ]
+
+    @test [result.name for result in execution.results] == passing_names
+    @test corpus_passed_count(execution) == 2
+    @test isempty(failures)
+    @test all(result -> result.actual_output == Any[result.expected_json], execution.results)
 end
 
 @testset "Spec AST JSON contract" begin

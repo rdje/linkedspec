@@ -341,7 +341,10 @@ spec.spec smokes, and routes EBNF quote-only statement mutation. `.6.2.4.5.1` ad
 termination with explicit numeric status, default status `1`, and structured runtime attribution. Simenv now
 executes its fatal branch instead of reporting an unsupported helper, exposing the earlier scalar-mutation
 prerequisite under `.6.2.4.5.2`. Full tests pass with 801 assertions, status is `runtime-corpus-exit-now`, the
-window remains 25/31, and `.6.2.4.5.2` is active.
+window remains 25/31 at that boundary. `.6.2.4.5.2` adds statement-context four-argument scalar regex mutation
+with strict flags and `$n` expansion while preserving pure numeric slicing. Both EBNF, both lib_reader, and simenv
+fixtures pass. Full tests pass with 808 assertions, status is `runtime-corpus-statement-mutation`, the window is
+30/31, and `.6.2.4.5.3` is active for history leading trivia.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -722,7 +725,14 @@ numeric status, with absent or nonnumeric status defaulting to `1`; the thrown r
 current rule and retains the established structured top/rule/spec diagnostic attribution. Simenv now executes
 `exit_now(1)` in `begin_end_blocks`, proving the control helper while exposing its earlier statement-form
 `substr(...)` mutation prerequisite. The full window remains 25/31, full tests pass with 801 assertions, status is
-`runtime-corpus-exit-now`, and `.6.2.4.5.2` owns that mutation.
+`runtime-corpus-exit-now` at that boundary.
+
+Statement-context four-argument `substr(...)` / `regex_subst(...)` now mutates a bare Julia scalar target before
+pure helper fallback. The strict helper compiler preserves `i`/`m`/`s`/`x`, applies global `g`, accepts no-op `o`,
+and replacement text expands `$n` captures. Numeric `substr(value, start, width)` remains pure even when discarded.
+Both EBNF, both lib_reader, and simenv fixtures now pass exact oracle output. The full window is 30/31, full tests
+pass with 808 assertions, status is `runtime-corpus-statement-mutation`, and `.6.2.4.5.3` owns the sole history
+leading-trivia residual.
 
 ### Dart Backend Commands
 

@@ -27,11 +27,11 @@ and corpus execution remains quiet.
 
 This leaf deliberately advances rather than closes its two shipped fixtures. At the `.6.2.4.2.2` boundary,
 `simenv_multiline_value` reached unsupported `exit_now`. `.6.2.4.5.1` has since implemented that terminating
-control; the current simenv failure is deliberate `exit_now(1)` execution caused by its earlier statement-form
-mutation gap.
+control, and `.6.2.4.5.2` has since implemented its earlier statement-form mutation. Simenv now passes exact
+oracle output.
 `ds_vhistory_version_entry` executes to output comparison and returns `/proj/foo` where the checked oracle expects
 `null`; the existing cross-backend evidence attributes that boundary to public-parser leading-trivia handling, not
 diagnostic output or indexed access.
 
-Related facts: [[julia-exit-now-control]], [[julia-shipped-corpus-smoke-split]], [[dart-helper-action-surface-bridge]],
+Related facts: [[julia-statement-regex-mutation]], [[julia-exit-now-control]], [[julia-shipped-corpus-smoke-split]], [[dart-helper-action-surface-bridge]],
 [[ds-vhistory-leading-newline-oracle-boundary]], [[julia-controlled-corpus-execution]].

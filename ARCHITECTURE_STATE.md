@@ -5,17 +5,22 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.4.5.2` distinguishes statement regex substitution from pure
+  string slicing. In statement context, four-argument `substr(...)` / `regex_subst(...)` mutates a bare scalar
+  target through strict helper flags and `$n` replacement; numeric slicing remains pure. Both EBNF, both lib_reader,
+  and simenv fixtures pass. Full tests pass with 808 assertions, shipped smoke is 30/31, status is
+  `runtime-corpus-statement-mutation`, and `.6.2.4.5.3` is active for history leading trivia.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.4.5.1` executes `exit_now(...)` as immediate fatal parser
   control. The optional first argument is evaluated as a numeric status, absent/nonnumeric status defaults to `1`,
   and `RuntimeInterpreterException` retains structured rule/top/spec attribution. Simenv now reaches
   `exit_now(1) in rule begin_end_blocks`, exposing the earlier statement-form scalar mutation prerequisite under
   `.6.2.4.5.2`. Full tests pass with 801 assertions, shipped smoke remains 25/31, status is
-  `runtime-corpus-exit-now`, and `.6.2.4.5.2` is active.
+  `runtime-corpus-exit-now`, and `.6.2.4.5.3` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.4.4` gives compiled-rule first arguments child-call precedence
   in action-edge `push(...)`, reuses cached edge child results, and supports implicit/explicit whole and indexed
   appends. All four spec.spec smokes pass. Both EBNF cases retain complete structures and route quote-only
   statement mutation to `.6.2.4.5.2`. Full tests pass with 793 assertions, shipped smoke is 25/31, status is
-  `runtime-corpus-action-edge-child-push`, and `.6.2.4.5.2` is active.
+  `runtime-corpus-action-edge-child-push`, and `.6.2.4.5.3` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.4.3` scopes explicit aggregate resets per rule invocation.
   First-reset snapshots restore prior scalar/array/hash bindings at rule exit; ordinary undeclared child mutations
   remain caller-visible, and registered user functions retain their independent whole-store isolation. All three
@@ -36,37 +41,37 @@ This document is the current high-level technical reading of the project shape. 
   direct compacted-capture and trace probes route `portmap_constant` to `.6.2.4.2.3` because Perl's no-op `o` flag
   currently invalidates Julia helper regex compilation. Full tests pass with 772, shipped smoke is 17/31, status is
   `runtime-corpus-logical-helpers` at that boundary; `.6.2.4.2.3` has since closed portmap constant and
-  `.6.2.4.5.2` is active.
+  `.6.2.4.5.3` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.4.1` executes the complete direct anonymous capture-boundary
   family over the existing rule-local register: start; match-start/cursor/input-end text and character lengths;
   origin position/line/column; and destructive take variants. Focused Unicode/location/mutation and corpus proofs
   bring full tests to 766, all three hlink delimiter fixtures pass, the shipped-smoke window is 13/31, and EBNF
   logging routes to structural output. Status is `runtime-corpus-capture-boundaries` at that boundary;
-  `.6.2.4.2.1` has since moved the window to 17/31 and `.6.2.4.5.2` is active.
+  `.6.2.4.2.1` has since moved the window to 17/31 and `.6.2.4.5.3` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.4.0` measures the complete shipped-spec/parser-smoke window at
   10 passed / 21 failed and decomposes it before behavior changes. Owned groups are anonymous capture boundaries,
   logical helpers, diagnostic-output helpers, recursive top-rule outputs, EBNF/spec.spec structural outputs,
   lib_reader quote normalization, and final 31/31 no-drift. Runtime status remains `runtime-corpus-middle` at 757
-  assertions at that boundary; `.6.2.4.1` has since moved the window to 13/31 and `.6.2.4.5.2` is active.
+  assertions at that boundary; `.6.2.4.1` has since moved the window to 13/31 and `.6.2.4.5.3` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.3` proves the 25 non-function middle fixtures through bounded
   windows 40–56, 58–59, and 62–67 with no production or fixture correction. A permanent window/endpoint/count/
   failure regression also locks the exact top-level function offsets routed to `.6.2.5`. Full tests pass with 757
   assertions, status advances to `runtime-corpus-middle`, and shipped-spec/parser-smoke fixtures 68–98 are active
-  under `.6.2.4`; `.6.2.4.0` has since split the 10/31 diagnostic boundary and `.6.2.4.5.2` is active.
+  under `.6.2.4`; `.6.2.4.0` has since split the 10/31 diagnostic boundary and `.6.2.4.5.3` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.2` proves manifest fixtures 0–39 green through bounded
   parse/compile/runtime execution with no production or fixture correction. A permanent endpoint/count/failure
   regression test brings the suite to 751 assertions and status `runtime-corpus-starter` at that boundary;
-  `.6.2.3` has since closed 25/25 and `.6.2.4.5.2` is active.
+  `.6.2.3` has since closed 25/25 and `.6.2.4.5.3` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.1` adds ordered named and zero-based bounded corpus selection
   after complete manifest validation, plus opt-in runner PASS/FAIL reporting and stable exit codes. Validation-only
   default behavior remains; CLI execution requires a named case or positive limit until full parity. Thirty added
   assertions bring the suite to 745 and status `runtime-corpus-selection` at that boundary. `.6.2.2` and `.6.2.3`
-  have since closed 40/40 and 25/25; `.6.2.4.5.2` is active.
+  have since closed 40/40 and 25/25; `.6.2.4.5.3` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.0` decomposes the 99-fixture Julia rollout before behavior
   changes into bounded selection/reporting, starter 0–39, middle non-function 40–67, shipped-spec/parser-smoke
   68–98, and spec-defined function-shell owners. The executable architecture remains the 715-assertion
   `runtime-controlled-corpus` `.6.1` boundary at that planning point; `.6.2.1` through `.6.2.4.2.3` have since landed
-  and `.6.2.4.5.2` is active.
+  and `.6.2.4.5.3` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.1` adds Julia's controlled corpus composition layer.
   `execute_corpus_fixtures(...)` reuses manifest validation, parses/compiles/executes every fixture, structurally
   compares one-level wrapped output, captures optional trace lines and structured runtime diagnostics, and reports
@@ -77,23 +82,23 @@ This document is the current high-level technical reading of the project shape. 
   executable fixture. Spec-returned definition order, payload provenance, normalized job ids/paths/policies,
   stitched ActionIR bodies, compiled registry order, public descriptor function metadata, and runtime output agree.
   No projection correction was required; status remains `runtime-user-functions` at that boundary and full tests
-  pass with 691 assertions. `.6.1` through `.6.2.4.2.3` have since landed; `.6.2.4.5.2` is active.
+  pass with 691 assertions. `.6.1` through `.6.2.4.2.3` have since landed; `.6.2.4.5.3` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.5.2` adds registered exact-arity runtime calls before helper
   fallback. Arguments evaluate eagerly in caller scope; cached ActionIR bodies execute with fresh scalar/array/hash
   stores; caller stores restore exception-safely; final expressions/local returns feed value and receiver positions;
   standalone results drop; and direct/mutual recursion emits structured cycle diagnostics. Package status is
   `runtime-user-functions`, and the full suite passes with 671 assertions. `.5.3` has since closed `.5`, `.6.1`
-  has since landed, `.6.2.0` has split the rollout, `.6.2.1` through `.6.2.4.2.3` have landed, and `.6.2.4.5.2` is active.
+  has since landed, `.6.2.0` has split the rollout, `.6.2.1` through `.6.2.4.2.3` have landed, and `.6.2.4.5.3` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.5.1` adds Julia's narrow staged function-body registry. It resolves
   the fixed built-in ActionIR adapter, orders jobs structurally, records portable cache/compiled/result metadata,
   parses typed ActionIR into neutral JSON, validates sidecars, and immutably stitches `body_ast`. Package status is
   `runtime-staged-registry` at that boundary, and the full suite passes with 662 assertions. `.5.2` and `.5.3` have
-  since landed, `.5` is closed, `.6.1` through `.6.2.4.2.3` have since landed, and `.6.2.4.5.2` is active.
+  since landed, `.5` is closed, `.6.1` through `.6.2.4.2.3` have since landed, and `.6.2.4.5.3` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.5.4` closes the scoped Julia diagnostics/trace container with no
   source correction. The 631-assertion suite, package/CLI `runtime-trace-events` status, book, KM, roadmap/task/live
   docs, and architecture agree on structured runtime diagnostics plus control/sink/event/runtime-instrumentation
   capabilities without overclaiming compile/parser tracing or staged/corpus parity. `.5.1` through `.5.3` have
-  since landed, `.5` is closed, `.6.1` through `.6.2.4.2.3` have since landed, and `.6.2.4.5.2` is active.
+  since landed, `.5` is closed, `.6.1` through `.6.2.4.2.3` have since landed, and `.6.2.4.5.3` is active.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.4.5.3` instruments the existing Julia runtime path with optional
   rule scopes, regex/action/blind/recursion decisions, lifecycle marks, cursor/stack transitions, and boundary
   events. Absent/disabled emitters remain no-ops; scope cleanup is exception-safe; traced and untraced action,

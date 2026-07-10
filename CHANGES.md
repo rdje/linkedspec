@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.5.2 — add Julia statement regex mutation
+
+**Scope:** Julia statement-form `substr(...)` / `regex_subst(...)` scalar mutation, replacement capture/flag
+coverage, five shipped-smoke closeouts, package status, lockstep docs, mdBook, Knowledge Map, and resume pointer.
+
+**Change:** Statement-context four-argument regex substitution now mutates a bare scalar target before pure helper
+fallback. Regex/string patterns use strict helper flags, `g` replaces globally, `o` is a no-op, `$n` expands
+captures, and invalid patterns/flags retain rule-attributed failure. Numeric value-form slicing remains pure.
+
+**Validation:** Six focused assertions lock global/single/case-insensitive replacement and unchanged pure slicing.
+Both EBNF, both lib_reader, and simenv fixtures pass exact oracle output. The shipped window moves from 25/31 to
+30/31; full `Pkg.test()` passes with 808 assertions and status `runtime-corpus-statement-mutation`. CLI, mdBook,
+memory, Knowledge Map, task, doctrine, and whitespace gates pass. Julia executes the exact single-quoted pattern;
+narrow Perl and Dart locks plus the focused Rust single-quote parser unit prove the same spelling. This is recorded
+as a language-wide contract for every current and future backend. The touched mutation example uses newline
+separators and no trailing semicolons;
+broader historical example cleanup remains separately routed.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.5.1 — add Julia terminating exit control
 
 **Scope:** Julia `exit_now(...)` runtime execution, explicit/default status and diagnostic tests, simenv boundary

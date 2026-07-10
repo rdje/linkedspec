@@ -1832,6 +1832,16 @@ function _evaluate_runtime_call!(
         )
         return nothing
     end
+    if statement_context && helper_name in ("substr", "regex_subst") &&
+            _execute_runtime_regex_substitution_statement!(
+                engine,
+                args,
+                context,
+                rule_label,
+                current_edge,
+            )
+        return nothing
+    end
 
     if helper_name == "return"
         value = isempty(args) ? nothing : _evaluate_runtime_action_expr!(
@@ -3914,6 +3924,126 @@ function _call_runtime_substr(values)
     end
     stop = width === nothing ? length(chars) : min(length(chars), start + width)
     return String(chars[start + 1:stop])
+end
+
+function _execute_runtime_regex_substitution_statement!(
+    engine,
+    args,
+    context,
+    rule_label,
+    current_edge,
+)
+    if length(args) < 4
+        return false
+    end
+    target = _runtime_variable_name(args[1])
+    if target === nothing
+        return false
+    end
+
+    pattern_value = _evaluate_runtime_action_expr!(
+        engine,
+        args[2],
+        context,
+        rule_label,
+        current_edge,
+    )
+    pattern = pattern_value isa _RuntimeRegexValue ?
+        pattern_value.pattern : _runtime_scalar_string(pattern_value)
+    if pattern === nothing
+        return false
+    end
+    pattern_flags = pattern_value isa _RuntimeRegexValue ? pattern_value.flags : ""
+    explicit_flags = _runtime_regex_substitution_flags!(
+        engine,
+        args[4],
+        context,
+        rule_label,
+        current_edge,
+    )
+    flags = join(unique(collect(pattern_flags * explicit_flags)))
+    regex = _runtime_compile_helper_regex(pattern, flags)
+    if regex === nothing
+        throw(RuntimeInterpreterException(
+            "regex substitution for '$target' in rule $rule_label has invalid pattern or flags",
+        ))
+    end
+
+    replacement_value = _evaluate_runtime_action_expr!(
+        engine,
+        args[3],
+        context,
+        rule_label,
+        current_edge,
+    )
+    replacement = something(_runtime_scalar_string(replacement_value; null_as_empty = true), "")
+    source = something(
+        _runtime_scalar_string(get(context.variables, target, nothing); null_as_empty = true),
+        "",
+    )
+    updated = _runtime_replace_regex(
+        source,
+        regex,
+        replacement;
+        replace_all = 'g' in flags,
+    )
+    delete!(context.arrays, target)
+    delete!(context.hashes, target)
+    context.variables[target] = updated
+    return true
+end
+
+function _runtime_regex_substitution_flags!(engine, expr, context, rule_label, current_edge)
+    if expr isa ActionVariableExpr
+        return expr.name
+    end
+    value = _evaluate_runtime_action_expr!(
+        engine,
+        expr,
+        context,
+        rule_label,
+        current_edge,
+    )
+    if value isa _RuntimeRegexValue
+        return value.pattern
+    end
+    return something(_runtime_scalar_string(value; null_as_empty = true), "")
+end
+
+function _runtime_replace_regex(source::String, regex::Regex, replacement::String; replace_all::Bool)
+    output = IOBuffer()
+    cursor = firstindex(source)
+    replaced = false
+    for matched in eachmatch(regex, source)
+        if cursor < matched.offset
+            print(output, SubString(source, cursor, prevind(source, matched.offset)))
+        end
+        print(output, _runtime_expand_regex_replacement(replacement, matched))
+        cursor = matched.offset + ncodeunits(matched.match)
+        replaced = true
+        if !replace_all
+            break
+        end
+    end
+    if !replaced
+        return source
+    elseif cursor <= lastindex(source)
+        print(output, SubString(source, cursor, lastindex(source)))
+    end
+    return String(take!(output))
+end
+
+function _runtime_expand_regex_replacement(replacement::String, matched::RegexMatch)
+    return replace(replacement, r"\$(\d+)" => placeholder -> begin
+        text = String(placeholder)
+        index = something(tryparse(Int, text[2:end]), -1)
+        if index == 0
+            return matched.match
+        elseif 1 <= index <= length(matched.captures)
+            return something(matched.captures[index], "")
+        end
+        return ""
+    end)
 end
 
 function _call_runtime_split(values)

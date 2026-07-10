@@ -25,6 +25,9 @@ subtest 'calls literals variables and value-drop statements' => sub {
     is($block->{statements}[0]{expr}{args}[0]{kind}, 'variable', 'bare call argument parses as a variable');
     is($block->{statements}[0]{expr}{args}[1]{kind}, 'string', 'quoted call argument parses as a string');
     is($block->{statements}[0]{expr}{args}[1]{value}, 'a', 'string payload is captured without delimiters');
+    my $single_quoted = parse_expr(q{'"|\s'});
+    is($single_quoted->{kind}, 'string', 'single-quoted action argument parses as a string');
+    is($single_quoted->{value}, q{"|\s}, 'single-quoted action argument preserves regex escapes');
     ok($block->{statements}[1]{drops_value}, 'standalone expression statements silently drop their value');
 
     my $chain = $block->{statements}[1]{expr};

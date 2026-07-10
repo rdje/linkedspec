@@ -2709,14 +2709,18 @@ mod tests {
 
     #[test]
     fn parse_string_literal_single_quotes() {
-        let code = "return('hello world')";
-        let block = CodeBlock::parse(code).unwrap();
-        match &block.statements[0].expr {
-            Expr::Call { name: _, args } => match args[0].value() {
-                Expr::StringLiteral { value } => assert_eq!(value, "hello world"),
-                _ => panic!("expected StringLiteral"),
-            },
-            _ => panic!("expected Call"),
+        for (code, expected) in [
+            ("return('hello world')", "hello world"),
+            (r#"return('"|\s')"#, r#""|\s"#),
+        ] {
+            let block = CodeBlock::parse(code).unwrap();
+            match &block.statements[0].expr {
+                Expr::Call { name: _, args } => match args[0].value() {
+                    Expr::StringLiteral { value } => assert_eq!(value, expected),
+                    _ => panic!("expected StringLiteral"),
+                },
+                _ => panic!("expected Call"),
+            }
         }
     }
 

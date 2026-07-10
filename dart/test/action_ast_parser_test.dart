@@ -27,6 +27,9 @@ void main() {
     expect(parseActionExpression('true'), isA<ActionBooleanLiteralExpr>());
     expect(parseActionExpression('undef'), isA<ActionUndefExpr>());
     expect(parseActionExpression('/a\\\\sb/i'), isA<ActionRegexLiteralExpr>());
+    final singleQuoted =
+        parseActionExpression("'\"|\\s'") as ActionStringLiteralExpr;
+    expect(singleQuoted.value, r'"|\s');
 
     final nested =
         parseActionExpression(r'foo["a"][i][0]') as ActionNestedAccessExpr;

@@ -566,13 +566,14 @@ Rationale:
 Statement-style regex substitution is a separate mutation form used by some shipped specs:
 
 ```text
-substr(value, "\"|\\s", "", go);
-regex_subst(value, /^\[(\d+)\]$/, "$1", o);
+substr(value, '"|\s', "", go)
+regex_subst(value, /^\[(\d+)\]$/, "$1", o)
 ```
 
 Those forms mutate the named scalar target. `g` applies the replacement globally; `i`, `m`, `s`, and `x` are regex
 flags; `o` is accepted as a compatibility no-op. Keep this form out of receiver-dot value chains, where
-`substr(value, start, length?)` means character slicing.
+`substr(value, start, length?)` means character slicing. Single-quoted and double-quoted scalar literals are the
+same variant-agnostic `.spec` surface on every backend; prefer the delimiter that keeps the pattern readable.
 
 Example:
 

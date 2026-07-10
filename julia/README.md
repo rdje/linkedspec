@@ -1,6 +1,6 @@
 # LinkedSpec Julia Backend
 
-This directory is the repository-owned Julia backend. Its current `runtime-corpus-exit-now` status covers the
+This directory is the repository-owned Julia backend. Its current `runtime-corpus-statement-mutation` status covers the
 package/command surface, manifest validation, source and ActionIR frontends, staged user-function projection/body
 parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch, value/helper/control/callback
 families, cursor/boundary behavior, structured diagnostics/tracing, registered function execution, and controlled
@@ -152,7 +152,12 @@ Full tests pass with 793 assertions, status is `runtime-corpus-action-edge-child
 default status `1`, and the existing structured rule/top/spec diagnostic attribution. Simenv now executes its
 fatal branch as `exit_now(1) in rule begin_end_blocks`, proving the helper is supported while exposing the
 statement-form mutation prerequisite owned by `.6.2.4.5.2`. Full tests pass with 801 assertions, status is
-`runtime-corpus-exit-now`, the shipped-smoke window remains 25/31, and `.6.2.4.5.2` is active.
+`runtime-corpus-exit-now`, with the shipped-smoke window at 25/31 at that boundary.
+`.6.2.4.5.2` distinguishes statement-context four-argument regex substitution from pure numeric slicing. Bare
+scalar targets mutate through strict helper flags and `$n` replacement expansion; standalone/value-form numeric
+`substr(...)` stays pure. Both EBNF, both lib_reader, and simenv fixtures now pass exact oracle output. Full tests
+pass with 808 assertions, status is `runtime-corpus-statement-mutation`, the shipped-smoke window is 30/31, and
+`.6.2.4.5.3` is active.
 
 Library example:
 

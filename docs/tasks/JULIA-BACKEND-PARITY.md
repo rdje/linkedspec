@@ -639,15 +639,23 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.2.4.5.1 - add Julia terminating exit control`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.5.2`
-  Status: `active`
+  Status: `done`
   Goal: Close statement-form scalar mutation and quote normalization.
   Acceptance: Both EBNF cases, both lib_reader cases, and the post-`exit_now` simenv boundary apply portable
-    statement mutation without fixture-specific cleanup and match checked-in outputs or split a narrower residual.
-  Verification: `pending`
-  Commit: `pending`
+    statement mutation without fixture-specific cleanup and match checked-in outputs or split a narrower residual;
+    the exact single-quoted pattern spelling is locked across every current backend parser.
+  Verification: `PASS` - In statement context only, four-argument `substr(...)` / `regex_subst(...)` with a bare
+    scalar target now perform regex replacement before pure helper fallback. Julia preserves `i`/`m`/`s`/`x`,
+    applies global `g`, accepts compatibility no-op `o`, expands `$n` captures, and fails invalid patterns/flags
+    with rule attribution. Numeric value-form `substr(value, start, width)` stays pure, including a standalone
+    discarded call. Six focused assertions lock mutation/global/single/case-insensitive/pure behavior. Both EBNF,
+    both lib_reader, and simenv fixtures pass exact checked-in output; permanent corpus coverage brings full
+    `Pkg.test()` to 808. The complete window moves from 25/31 to 30/31, status is
+    `runtime-corpus-statement-mutation`, and `.6.2.4.5.3` becomes active for the sole history residual.
+  Commit: `JULIA-BACKEND-PARITY.6.2.4.5.2 - add Julia statement regex mutation`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.5.3`
-  Status: `pending`
+  Status: `active`
   Goal: Mirror public-parser leading trivia for the history smoke.
   Acceptance: `ds_vhistory_version_entry` matches the checked-in public Perl/Rust output without weakening ordinary
     indexed variable reads or direct descriptor semantics.
@@ -738,7 +746,33 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 16 | `JULIA-BACKEND-PARITY.6.2.4.3` | `done` | Rule-local aggregate reset snapshots close all three recursive top-rule fixtures. |
 | 17 | `JULIA-BACKEND-PARITY.6.2.4.4` | `done` | Action-edge child-push forms close all four spec.spec smokes and route EBNF quote mutation. |
 | 18 | `JULIA-BACKEND-PARITY.6.2.4.5.1` | `done` | Terminating explicit/default `exit_now(...)` control is diagnostic-attributed and immediate. |
-| 19 | `JULIA-BACKEND-PARITY.6.2.4.5.2` | `active` | Close statement-form scalar mutation and quote normalization across EBNF, lib_reader, and simenv. |
+| 19 | `JULIA-BACKEND-PARITY.6.2.4.5.2` | `done` | Statement regex mutation closes both EBNF, both lib_reader, and simenv fixtures. |
+| 20 | `JULIA-BACKEND-PARITY.6.2.4.5.3` | `active` | Mirror public-parser leading trivia for the sole history residual. |
+
+## `JULIA-BACKEND-PARITY.6.2.4.5.2` Statement Regex Mutation Result
+
+Mutation evidence recorded on 2026-07-10:
+
+- Julia now distinguishes statement regex substitution from pure string slicing before pure-helper evaluation.
+  A dropped four-argument `substr(...)` / `regex_subst(...)` call with a bare scalar first argument mutates that
+  scalar; shorter/numeric `substr(value, start, width)` calls keep their existing pure value behavior.
+- Regex literals and string patterns reuse the strict helper compiler. `i`/`m`/`s`/`x` compile, `g` replaces all
+  matches, `o` is an accepted compatibility no-op, unknown flags/patterns fail with rule attribution, and `$n`
+  replacement placeholders expand from the current match.
+- Focused coverage locks global quote removal, global and first-only capture substitution, case-insensitive global
+  replacement, unchanged standalone numeric slicing, and unchanged value-form slicing. The quote-removal pattern
+  uses the variant-agnostic single-quoted string form shared by Perl, Rust, Dart, and Julia; exact parser locks in
+  all four current backends preserve the embedded double quote and `\s` regex escape. All authored multiline
+  statements use newline separators without trailing semicolons.
+- `ebnf_expression_rules`, `ebnf_logging_annotation`, `simenv_multiline_value`, `lib_reader_sattribute`, and
+  `lib_reader_cattribute` now pass their checked-in Perl/Rust oracle output. The existing explicit split-target
+  mutation composes with scalar cleanup for lib_reader and simenv.
+- Full `Pkg.test()` passes with 808 assertions. The shipped window is 30/31; only
+  `ds_vhistory_version_entry` remains, already owned by `.6.2.4.5.3`. Status is
+  `runtime-corpus-statement-mutation`.
+- The touched mdBook mutation example now uses newline separators without trailing semicolons. A focused scan also
+  found broader historical line-ending semicolons elsewhere on that page; a clean-tree reactivation of
+  `STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT` must own that separate sweep rather than expanding this runtime leaf.
 
 ## `JULIA-BACKEND-PARITY.6.2.4.5.1` Terminating Exit Control Result
 
@@ -2233,6 +2267,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.3` | Julia debug trace on recursive nested fixture; focused rule-local array/hash reset and shared-mutation tests; three-case recursive corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. First-reset rule-local snapshots preserve caller stores while ordinary child mutations remain visible; all three recursive fixtures pass, shipped smoke is 21/31, full tests pass with 785 assertions, status is `runtime-corpus-recursive-rule-scope`, and `.6.2.4.4` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.4` | Julia debug traces on EBNF logging and spec.spec minimal fixtures; focused four-form action-edge child-push test; six-case structural corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS/SPLIT. All four spec.spec smokes pass; both EBNF cases retain complete structures and route quote-only statement mutation to `.6.2.4.5.2`; shipped smoke is 25/31, full tests pass with 793 assertions, status is `runtime-corpus-action-edge-child-push`, and `.6.2.4.5.1` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.5.1` | Focused explicit/default `exit_now(...)` runtime and structured-diagnostic proof; simenv/history boundary regression; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Immediate fatal control preserves explicit status, defaults to `1`, and retains structured attribution. Simenv advances from unsupported helper to `exit_now(1) in rule begin_end_blocks`, routing the earlier scalar-mutation prerequisite to `.6.2.4.5.2`; shipped smoke remains 25/31, full tests pass with 801 assertions, status is `runtime-corpus-exit-now`, and `.6.2.4.5.2` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.5.2` | Focused statement regex mutation/pure-slice proof using the single-quoted pattern; five-case EBNF/simenv/lib_reader corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; Perl `actionir_ast_parser.t`; Rust `parse_string_literal_single_quotes`; Dart `action_ast_parser_test.dart`; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Statement-context four-argument regex substitution mutates bare scalar targets with strict flags and `$n` expansion while numeric slicing stays pure. Exact parser locks preserve single-quoted action strings as the shared Perl/Rust/Dart/Julia language contract. Both EBNF, both lib_reader, and simenv pass; shipped smoke is 30/31, full tests pass with 808 assertions, status is `runtime-corpus-statement-mutation`, and `.6.2.4.5.3` becomes active. |
 
 ## Commit Log
 
@@ -2281,9 +2316,15 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.6.2.4.3` | `JULIA-BACKEND-PARITY.6.2.4.3 - scope Julia recursive rule resets` | Rule-local explicit aggregate reset snapshots close all three recursive top-rule fixtures; structural outputs advance to `.6.2.4.4`. |
 | `JULIA-BACKEND-PARITY.6.2.4.4` | `JULIA-BACKEND-PARITY.6.2.4.4 - add Julia action-edge child push` | Four child-push forms close all four spec.spec smokes and route EBNF quote mutation to `.6.2.4.5.2`. |
 | `JULIA-BACKEND-PARITY.6.2.4.5.1` | `JULIA-BACKEND-PARITY.6.2.4.5.1 - add Julia terminating exit control` | Immediate explicit/default fatal control advances simenv to its statement-mutation prerequisite; `.6.2.4.5.2` becomes active. |
+| `JULIA-BACKEND-PARITY.6.2.4.5.2` | `JULIA-BACKEND-PARITY.6.2.4.5.2 - add Julia statement regex mutation` | Portable scalar substitution closes both EBNF, both lib_reader, and simenv; history advances alone to `.6.2.4.5.3`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.2.4.5.2` statement regex mutation. Dropped four-argument `substr(...)` and
+  `regex_subst(...)` calls now mutate bare scalar targets with strict helper flags, global/first-only behavior, and
+  `$n` expansion; numeric slicing remains pure. Both EBNF, both lib_reader, and simenv pass exact oracle output.
+  Full tests pass with 808 assertions, shipped smoke is 30/31, status is
+  `runtime-corpus-statement-mutation`, and `.6.2.4.5.3` is active for history leading trivia.
 - `2026-07-10`: Completed `.6.2.4.5.1` terminating exit control. Julia evaluates the optional status expression,
   defaults absent/nonnumeric status to `1`, throws immediately with rule attribution, and retains the existing
   structured runtime diagnostic. Simenv advances from unsupported `exit_now` to deliberate `exit_now(1) in rule
