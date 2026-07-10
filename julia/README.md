@@ -121,4 +121,6 @@ cache/compiled/result records are exposed, and neutral `action_block` JSON is im
 The full suite now passes with 671 assertions and status `runtime-user-functions`. Registered exact-arity calls
 execute before helper fallback with eager caller arguments, fresh function-local scalar/array/hash stores,
 final-expression or local-return results, compatible receiver continuation, standalone result discard, and
-direct/mutual recursion diagnostics. `.5.3` owns descriptor-shape parity, and later leaves own corpus parity.
+direct/mutual recursion diagnostics. `.5.3` now proves source-ordered definitions, normalized staged payload/jobs, stitched `body_ast`, descriptor
+function metadata, and runtime output through one executable compiled state. The full suite passes with 691
+assertions; status remains `runtime-user-functions`, `.5` is closed, and `.6.1` owns controlled corpus fixtures.

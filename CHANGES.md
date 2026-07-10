@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.5.3 — preserve Julia staged descriptor shapes
+
+**Scope:** Julia neutral staged user-function shape proof across spec-returned definitions, staged dispatch,
+compiled registry, public descriptor JSON, runtime output, task/roadmap/live docs, mdBook, Knowledge Map,
+architecture, and resume pointer.
+
+**Change:** Added one end-to-end 20-assertion fixture over two source-ordered functions. It locks neutral
+`body_payload` provenance, normalized `body_parse_job` ids/paths/policies, stitched ActionIR `body_ast`, compiled
+registry job order, descriptor function order/count, and runtime output from the same compiled state. No production
+projection correction was required; package status remains `runtime-user-functions`.
+
+**Validation:** Full `Pkg.test()` passes with 691 assertions. Julia CLI status/help, mdBook, memory, Knowledge Map,
+task metadata, doctrine, and whitespace gates pass. `.5` closes and `.6.1` controlled corpus execution is active.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.5.2 — execute Julia user functions
 
 **Scope:** Julia registered-call runtime resolution, eager arguments, isolated typed local stores, cached ActionIR

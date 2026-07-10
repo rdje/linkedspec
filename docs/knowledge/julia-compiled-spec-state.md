@@ -7,10 +7,11 @@ answers:
   - how does Julia project descriptor JSON
   - where does Julia build dependency regex data
   - does Julia compiled state carry action payload ASTs
+  - does Julia descriptor preserve staged function payload jobs and body AST
 date: 2026-07-10
 status: current
 tags: [julia, compiler, compiled-state, descriptor, dependency-regex, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.3.4 adds julia/src/compiler/CompiledSpec.jl and exports compile_spec plus CompiledSpec, CompiledRule, CompiledRuleModeMetadata, CompiledDependencyRegexState, CompiledDependencyRegexEntry, CompiledDescriptorState, compiled_rule(...), action_payloads(...), and to_descriptor_json(...). julia/test/runtests.jl verifies ordered rule state, redefinition metadata when validation is deliberately skipped, dependency-ref and dependency-regex derivation, lifecycle/action ActionBlock payloads, registry-aware contracts, source validation reuse, compiled-state diagnostics, function registry projection, and descriptor-shaped JSON. Runtime matching subsequently landed in JULIA-BACKEND-PARITY.4.1."
+evidence: "JULIA-BACKEND-PARITY.3.4 adds julia/src/compiler/CompiledSpec.jl and exports compile_spec plus CompiledSpec, CompiledRule, CompiledRuleModeMetadata, CompiledDependencyRegexState, CompiledDependencyRegexEntry, CompiledDescriptorState, compiled_rule(...), action_payloads(...), and to_descriptor_json(...). JULIA-BACKEND-PARITY.5.3 adds an executable 20-assertion proof that spec-returned function order, normalized staged payload/jobs, stitched body_ast, descriptor function metadata, and runtime output survive through the compiled state. Existing tests cover ordered rule state, dependency-regex derivation, lifecycle/action payloads, registry-aware contracts, validation reuse, and diagnostics."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
@@ -31,5 +32,9 @@ dependency refs plus pattern strings; runtime matching now compiles those patter
 `CompiledDescriptorState` projects the public descriptor shape: `spec`, `functions`, `dependency_regex_map`, and
 `meta`, with rule handlers marked as `julia_interpreter_rule` / `compiled_state_only`.
 
-Related facts: [[julia-runtime-matching-state]], [[julia-user-function-registry]], [[julia-actionir-contract-resolver]],
+`.5.3` proves the `functions` projection against executable staged state: `body_payload` source provenance,
+normalized `body_parse_job`, stitched `body_ast`, and `meta.function_order` / `meta.function_count` survive from
+spec-returned definition nodes through compile and runtime without Julia-specific fields.
+
+Related facts: [[julia-staged-function-descriptor-shape]], [[julia-runtime-matching-state]], [[julia-user-function-registry]], [[julia-actionir-contract-resolver]],
 [[dart-compiled-spec-state]], [[julia-backend-interpreter-first-plan]], [[compilerstate-internal-model]].

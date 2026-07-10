@@ -852,6 +852,116 @@ Other: /x/
     )
 end
 
+@testset "Staged function descriptor shape through runtime" begin
+    normalize_body = "return(trim(value))"
+    pair_body = "return(hash(\"left\", left, \"right\", right))"
+    source = join([
+        "fn normalize(value) {$normalize_body}",
+        "fn pair(left, right) {$pair_body}",
+        "Top::",
+        " /x/",
+        " E { return(hash(\"name\", normalize(\" x \"), \"pair\", pair(\"a\", \"b\"))) }",
+    ], "\n")
+    nodes = [
+        _definition_node(source, "normalize", ["value"], normalize_body),
+        _definition_node(source, "pair", ["left", "right"], pair_body),
+    ]
+    spec = parse_spec_with_staged_user_function_definition_asts(source, nodes)
+    compiled = compile_spec(spec)
+    descriptor = to_descriptor_json(compiled)
+    jobs = body_parse_jobs(compiled.function_registry)
+
+    @test [definition.name for definition in spec.functions] == ["normalize", "pair"]
+    @test [job.job_id for job in jobs] == [
+        "parse_job:function_body:$(join(job.parent_ast_path, ".")):$(job.parser_spec_id):" *
+        "$(job.top_rule):$(job.source_span.start)-$(job.source_span.stop)"
+        for job in jobs
+    ]
+    @test [job.parent_ast_path for job in jobs] == [
+        ["functions", "0", "body_source"],
+        ["functions", "1", "body_source"],
+    ]
+    @test to_json(compiled.function_registry)["body_parse_jobs"] == [to_json(job) for job in jobs]
+    @test sort(collect(keys(descriptor))) == ["dependency_regex_map", "functions", "meta", "spec"]
+    @test sort(collect(keys(descriptor["functions"]))) == ["normalize", "pair"]
+    @test (
+        descriptor["meta"]["function_order"],
+        descriptor["meta"]["function_count"],
+    ) == (["normalize", "pair"], 2)
+
+    for (index, definition) in enumerate(spec.functions)
+        function_json = descriptor["functions"][definition.name]
+        payload = function_json["body_payload"]
+        job = definition.body_parse_job
+        job_json = function_json["body_parse_job"]
+        body_ast = function_json["body_ast"]
+
+        @test (
+            function_json["index"],
+            function_json["name"],
+            function_json["params"],
+            function_json["arity"],
+            function_json["body_source"],
+        ) == (index - 1, definition.name, definition.params, definition.arity, definition.body_source)
+        @test (
+            payload["kind"],
+            payload["node_kind"],
+            payload["payload_kind"],
+            payload["parent_ast_path"],
+            payload["function_name"],
+            payload["params"],
+            payload["arity"],
+            payload["text"],
+            payload["source_span"],
+        ) == (
+            "staged_payload",
+            "function_definition",
+            "function_body",
+            ["functions", string(index - 1), "body_source"],
+            definition.name,
+            definition.params,
+            definition.arity,
+            definition.body_source,
+            to_json(job.source_span),
+        )
+        @test payload["provenance"] == Any[
+            Dict("kind" => "source_slice", "source_span" => to_json(job.source_span)),
+        ]
+        @test job_json == to_json(job)
+        @test (
+            job_json["kind"],
+            job_json["node_kind"],
+            job_json["payload_kind"],
+            job_json["parser_spec_id"],
+            job_json["top_rule"],
+            job_json["result_policy"],
+            job_json["result_field"],
+            job_json["failure_policy"],
+            job_json["diagnostic_owner"],
+        ) == (
+            "parse_job",
+            "function_definition",
+            "function_body",
+            ACTION_IR_BODY_SPEC_ID,
+            ACTION_IR_BODY_TOP_RULE,
+            "replace_field",
+            "body_ast",
+            "fail",
+            "function_body",
+        )
+        @test (
+            body_ast,
+            body_ast["kind"],
+            body_ast["statements"][1]["expr"]["name"],
+        ) == (definition.body_ast, "action_block", "return")
+    end
+
+    @test runtime_parse(LinkedSpecRuntimeEngine(compiled), "x").value == Dict{String,Any}(
+        "name" => "x",
+        "pair" => Dict{String,Any}("left" => "a", "right" => "b"),
+    )
+end
+
 @testset "Runtime regex matching state" begin
     @test parse_mode_from_name("seek") == SeekParseMode
     @test parse_mode_from_name("consume") == ConsumeParseMode

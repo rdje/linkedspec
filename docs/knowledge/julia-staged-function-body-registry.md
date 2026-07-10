@@ -33,8 +33,10 @@ existing spec-returned function-shell projection with staged body dispatch.
 The implementation is intentionally narrow. Public `parse_job(...)`
 authoring, filesystem/provider search roots, multiple parser families,
 recursive staged queues, and cycle diagnostics remain future work. Registered
-function runtime execution advances separately to `.5.2`.
+function runtime execution has since landed in `.5.2`, and `.5.3` locks the
+neutral descriptor shape through runtime.
 
 Related facts: [[function-body-staged-registry-dispatch]],
-[[julia-user-function-registry]], [[dart-staged-function-body-registry]],
+[[julia-user-function-registry]], [[julia-staged-function-descriptor-shape]],
+[[dart-staged-function-body-registry]],
 [[staged-parser-registry-dispatch-contract]].

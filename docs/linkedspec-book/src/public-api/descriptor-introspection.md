@@ -175,6 +175,17 @@ Julia exposes the same staged function-body shape through `execute_staged_parse_
 four registry phases, resolved built-in identity, cache key, compiled-parser record, source/job policies, and
 neutral `action_block` result. The stitched `FunctionDefinition` retains the original `body_payload` and
 `body_parse_job`; only `body_ast` is added on a new immutable `SpecFile` value.
+
+Julia also has an executable descriptor-shape lock over two source-ordered definitions. The proof starts from the
+neutral spec-returned `function_definition` nodes, dispatches and stitches their jobs, compiles that same spec, and
+asserts the public `functions` records plus runtime output. It verifies:
+
+- `body_payload` kind/name/params/text/span and source-slice provenance
+- normalized `body_parse_job` id, zero-based parent path, parser/top rule, result/failure policies, and owner
+- stitched ActionIR `body_ast`
+- descriptor entry indices and `meta.function_order` / `meta.function_count`
+
+No Julia-specific descriptor fields are introduced, and no separate serialization-only fixture is used.
 Function definitions are validated before runtime: duplicate names, invalid or duplicate parameters, reserved
 runtime/lifecycle/function symbols, built-in helper/control-name collisions including numeric word aliases, and
 rule-label collisions are rejected.

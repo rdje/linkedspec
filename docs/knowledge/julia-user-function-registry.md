@@ -35,5 +35,6 @@ ordinary helper fallback.
 
 Related facts: [[julia-actionir-contract-resolver]], [[julia-user-function-definition-projection]],
 [[julia-compiled-spec-state]], [[dart-function-registry]], [[function-body-parse-job-sidecar]],
-[[julia-staged-function-body-registry]], [[julia-user-function-runtime-execution]],
+[[julia-staged-function-body-registry]], [[julia-staged-function-descriptor-shape]],
+[[julia-user-function-runtime-execution]],
 [[text-to-ast-backend-doctrine]].

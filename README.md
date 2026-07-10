@@ -102,8 +102,10 @@ Top-level directories and files:
     recursion/cursor/boundary instrumentation is green, and `.4.5.4` closes diagnostics/trace no-drift. The minimal
     staged function-body registry resolves the built-in ActionIR-body provider, executes jobs in stable order, and
     stitches `body_ast`. Registered exact-arity functions now execute before helper fallback with eager caller
-    arguments, fresh typed local stores, receiver continuation, standalone result drop, and recursion diagnostics;
-    the full suite passes with 671 assertions, status is `runtime-user-functions`, and `.5.3` is active.
+    arguments, fresh typed local stores, receiver continuation, standalone result drop, and recursion diagnostics.
+    Neutral staged function payload/job/AST and descriptor metadata shapes are locked through the same executable
+    compiled state; the full suite passes with 691 assertions, status remains `runtime-user-functions`, `.5` is
+    closed, and `.6.1` controlled corpus execution is active.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

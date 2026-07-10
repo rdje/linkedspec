@@ -319,7 +319,10 @@ resolves/compiles/executes the built-in ActionIR body adapter in stable queue
 order, stitches neutral JSON `body_ast`, and passes 662 assertions with status `runtime-staged-registry`; `.5.2`
 then resolves registered exact-arity calls before helper fallback with eager caller arguments, fresh typed local
 stores, final/local returns, receiver continuation, standalone result drop, and structured recursion cycles. Full
-tests pass with 671 assertions and status `runtime-user-functions`; `.5.3` descriptor-shape parity is active.
+tests pass with 671 assertions and status `runtime-user-functions`. `.5.3` preserves two spec-returned functions
+through normalized payload/jobs, stitched bodies, compiled
+registry order, public descriptor metadata, and runtime output. Full tests pass with 691 assertions; status remains
+`runtime-user-functions`, `.5` is closed, and `.6.1` controlled corpus execution is active.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -436,8 +439,9 @@ correction. `.5.1` is implemented through `julia/src/parser/StagedParserRegistry
 registered user functions through `julia/src/runtime/Interpreter.jl`. It evaluates args before entering a fresh
 scalar/array/hash store set, restores caller stores in `finally`, returns the final expression or first local
 `return(...)`, composes compatible receiver chains, drops standalone results, and diagnoses exact-arity and
-direct/mutual recursion failures. Package status is `runtime-user-functions`; `.5.3` is active for descriptor
-shape parity, and later leaves own corpus execution.
+direct/mutual recursion failures. Package status is `runtime-user-functions`; `.5.3` locks the neutral descriptor
+shape through runtime without a production projection correction; `.5`
+is closed and `.6.1` owns controlled corpus execution.
 
 ### Dart Backend Commands
 

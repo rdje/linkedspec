@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.5.3 — Julia staged function descriptor shapes):
+  The existing Julia projection was already neutral; the missing piece was a single proof spanning every layer.
+  The focused fixture therefore starts at spec-returned definition nodes rather than handcrafted
+  `FunctionDefinition` values, dispatches the staged jobs, compiles the stitched spec, inspects the public
+  descriptor, and executes that exact compiled state. This catches loss or renaming of payload provenance, job
+  normalization/policies, AST stitching, or function metadata without introducing a second descriptor code path.
+  Status remains `runtime-user-functions` because this is a no-drift proof, not a new runtime capability.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.5.2 — Julia user-function runtime execution):
   Registered calls resolve before helper fallback and evaluate arguments before replacing any store, preserving
   caller-side assignment effects while preventing caller-variable capture inside the function. Function params
