@@ -7,8 +7,21 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.2.1 — add Julia logical helpers**
+  (DONE — four routed cases pass; `.6.2.4.2.3` helper-regex flag normalization is active).
+
+  **Change:** Added eager boolean `and`/`or`/`not` through the established truthiness contract. Status advances to
+  `runtime-corpus-logical-helpers`.
+
+  **Boundary:** `portmap_constant` no longer fails on unsupported `or`; direct captures are correct, but Perl's
+  no-op `o` flag invalidates Julia helper regex compilation. That independent residual is split to `.6.2.4.2.3`.
+
+  **Verification:** Three portmap cases and tablegrep pass, shipped smoke improves from 13/31 to 17/31, and full
+  Julia tests pass with 772 assertions. CLI, mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates pass.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.1 — add Julia anonymous capture boundaries**
-  (DONE — all three hlink delimiter fixtures pass; `.6.2.4.2.1` logical helpers are active).
+  (DONE — all three hlink delimiter fixtures pass; `.6.2.4.2.1` has since moved shipped smoke to 17/31 and
+  `.6.2.4.2.3` is active).
 
   **Change:** Added start/read/location/take execution for the complete direct anonymous capture family across
   match-start, live-cursor, and input-end endpoints. Status advances to `runtime-corpus-capture-boundaries`.
@@ -20,7 +33,7 @@ Current execution status for interruption-safe batch workflow recovery.
   tests pass with 766 assertions. CLI, mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.0 — split Julia shipped corpus smoke batch**
-  (DONE — the initial boundary was 10/31; `.6.2.4.1` has since moved it to 13/31 and `.6.2.4.2.1` is active).
+  (DONE — the initial boundary was 10/31; `.6.2.4.1` has since moved it to 13/31 and `.6.2.4.2.3` is active).
 
   **Change:** Executed all manifest fixtures 68–98 and split 21 failures into capture boundaries, logical helpers,
   diagnostic-output helpers, recursive top-rule outputs, EBNF/spec.spec structural outputs, lib_reader quote
@@ -34,7 +47,7 @@ Current execution status for interruption-safe batch workflow recovery.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.6.2.3 — close Julia middle corpus batch**
   (DONE — non-function middle fixtures are 25/25 green; `.6.2.4.0` has since split the 10/31 shipped-smoke
-  boundary and `.6.2.4.2.1` is active).
+  boundary and `.6.2.4.2.3` is active).
 
   **Change:** Three bounded windows pass 17/17, 2/2, and 6/6 unchanged. Added a six-assertion package regression
   locking window endpoints/counts, 25 passes, zero failures, and exact top-level function routes. Status is
@@ -47,7 +60,7 @@ Current execution status for interruption-safe batch workflow recovery.
   mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.6.2.2 — close Julia starter corpus batch**
-  (DONE — starter fixtures are 40/40 green; `.6.2.3` has since closed 25/25 and `.6.2.4.2.1` is active).
+  (DONE — starter fixtures are 40/40 green; `.6.2.3` has since closed 25/25 and `.6.2.4.2.3` is active).
 
   **Change:** The real bounded manifest window 0–39 passes unchanged. Added a permanent six-assertion package test
   for manifest count, exact endpoints, 40 results/passes, and zero failures. Status is `runtime-corpus-starter`.
@@ -61,7 +74,7 @@ Current execution status for interruption-safe batch workflow recovery.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.6.2.1 — add Julia executable corpus selection**
   (DONE — bounded selection/reporting is green; `.6.2.2` and `.6.2.3` have since closed 40/40 and 25/25, and
-  `.6.2.4.2.1` is active).
+  `.6.2.4.2.3` is active).
 
   **Change:** Added ordered named and offset/limit library selection with strict diagnostics. The runner now accepts
   bounded opt-in execution, reports every PASS/FAIL plus summary, returns `0`/`1` for pass/fixture failure, and
@@ -75,7 +88,7 @@ Current execution status for interruption-safe batch workflow recovery.
   bounded execution, unbounded rejection, mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.6.2.0 — split Julia corpus expansion batches**
-  (DONE — the rollout is recoverably decomposed; `.6.2.1` through `.6.2.4.1` have since landed and `.6.2.4.2.1` is active).
+  (DONE — the rollout is recoverably decomposed; `.6.2.1` through `.6.2.4.2.1` have since landed and `.6.2.4.2.3` is active).
 
   **Change:** Split `.6.2` into bounded execution/reporting, starter 0–39, middle non-function 40–67,
   shipped-spec/parser-smoke 68–98, and spec-defined top-level function-shell owners before diagnostic or behavior
@@ -88,7 +101,7 @@ Current execution status for interruption-safe batch workflow recovery.
   **Verification:** mdBook, memory, Knowledge Map, task metadata, doctrine, and whitespace gates pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.6.1 — add Julia controlled corpus execution**
-  (DONE — controlled execution is green; `.6.2.0` through `.6.2.4.1` have since landed and `.6.2.4.2.1` is active).
+  (DONE — controlled execution is green; `.6.2.0` through `.6.2.4.2.1` have since landed and `.6.2.4.2.3` is active).
 
   **Change:** Added public corpus execution/result/query APIs that compose manifest validation with
   parse/compile/runtime, compare the expected value after one backend-neutral output wrap, retain optional trace
@@ -104,7 +117,7 @@ Current execution status for interruption-safe batch workflow recovery.
   manifest validation, mdBook, memory, Knowledge Map, task metadata, doctrine, and whitespace gates pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.5.3 — preserve Julia staged descriptor shapes**
-  (DONE — neutral staged function shape is locked; `.5` is closed, `.6.1` through `.6.2.4.1` have since landed, and `.6.2.4.2.1` is active).
+  (DONE — neutral staged function shape is locked; `.5` is closed, `.6.1` through `.6.2.4.2.1` have since landed, and `.6.2.4.2.3` is active).
 
   **Change:** Added a 20-assertion end-to-end fixture that preserves two spec-returned functions through source
   order, normalized staged payload/jobs, stitched `body_ast`, compiled registry, public descriptor metadata, and
@@ -117,7 +130,7 @@ Current execution status for interruption-safe batch workflow recovery.
   task metadata, doctrine, and whitespace gates pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.5.2 — execute Julia user functions**
-  (DONE — registered-call runtime execution is green; `.5.3` closed `.5`, `.6.1` through `.6.2.4.1` have since landed, and `.6.2.4.2.1` is active).
+  (DONE — registered-call runtime execution is green; `.5.3` closed `.5`, `.6.1` through `.6.2.4.2.1` have since landed, and `.6.2.4.2.3` is active).
 
   **Change:** Julia now resolves registered exact-arity functions before helper fallback, evaluates arguments in
   caller scope, executes cached ActionIR bodies with fresh scalar/array/hash stores, restores caller state, returns
@@ -131,7 +144,7 @@ Current execution status for interruption-safe batch workflow recovery.
   CLI status, mdBook, memory, KM, task, doctrine, and whitespace gates pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.5.1 — add Julia staged function-body registry**
-  (DONE — staged dispatch/stitching is green; `.5.2` through `.6.2.4.1` have since landed and `.6.2.4.2.1` is active).
+  (DONE — staged dispatch/stitching is green; `.5.2` through `.6.2.4.2.1` have since landed and `.6.2.4.2.3` is active).
 
   **Change:** Added the fixed built-in ActionIR-body provider, stable path/span/id job queue, portable
   cache/compiled/result records, contextual diagnostics, immutable `body_ast` stitching, and composed shell API.
@@ -144,7 +157,7 @@ Current execution status for interruption-safe batch workflow recovery.
   mdBook, memory, KM, task, doctrine, and whitespace gates pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.4.5.4 — close Julia diagnostics trace no drift**
-  (DONE — `.4.5` and `.5` are closed; `.5.1` through `.6.2.4.1` have since landed and `.6.2.4.2.1` is active).
+  (DONE — `.4.5` and `.5` are closed; `.5.1` through `.6.2.4.2.1` have since landed and `.6.2.4.2.3` is active).
 
   **Change:** Audited and aligned the 631-assertion diagnostics/trace boundary across package/CLI status, README,
   mdBook, KM, roadmap/task/live docs, and architecture. Status remains the precise `runtime-trace-events`.
@@ -155,7 +168,7 @@ Current execution status for interruption-safe batch workflow recovery.
   whitespace gates pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.4.5.3 — add Julia runtime trace events**
-  (DONE — runtime instrumentation is green; `.4.5` and `.5` have since closed, `.6.1` through `.6.2.4.1` have landed, and `.6.2.4.2.1` is active).
+  (DONE — runtime instrumentation is green; `.4.5` and `.5` have since closed, `.6.1` through `.6.2.4.2.1` have landed, and `.6.2.4.2.3` is active).
 
   **Change:** Added rule scopes, regex decisions, action/blind dispatch decisions, lifecycle marks, recursion
   cutoffs, cursor/stack transitions, and source-boundary events through the optional Julia trace emitter. Package
@@ -167,7 +180,7 @@ Current execution status for interruption-safe batch workflow recovery.
   action, blind, and recursion results agree. CLI status and commit-time docs/governance gates pass.
 
 - 2026-07-10: **STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.1 — align separator example style**
-  (DONE — the director-identified fixture is canonical; Julia `.5` has since closed, `.6.1` through `.6.2.4.1` have landed, and `.6.2.4.2.1` is active).
+  (DONE — the director-identified fixture is canonical; Julia `.5` has since closed, `.6.1` through `.6.2.4.2.1` have landed, and `.6.2.4.2.3` is active).
 
   **Change:** Removed redundant trailing semicolons from eight newline-separated statements in the Dart
   hash-helper runtime fixture. mdBook and Knowledge Map wording explicitly preserve separator-only style.
@@ -177,7 +190,7 @@ Current execution status for interruption-safe batch workflow recovery.
   **Verification:** Focused Dart execution passes unchanged; commit-time documentation/governance gates pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.4.5.2 — add Julia trace controls**
-  (DONE — trace controls/events/sinks are green; `.5` has since closed, `.6.1` through `.6.2.4.1` have landed, and `.6.2.4.2.1` is active).
+  (DONE — trace controls/events/sinks are green; `.5` has since closed, `.6.1` through `.6.2.4.2.1` have landed, and `.6.2.4.2.3` is active).
 
   **Change:** Added ordered trace levels, environment/config controls, structured events/scopes/decisions/logs/
   dumps, stdout/route/mirror sinks with reset, optional runtime emitter injection, and traced wrappers with
@@ -190,7 +203,7 @@ Current execution status for interruption-safe batch workflow recovery.
   mdBook, memory, Knowledge Map, task-tree, doctrine, and whitespace checks pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.4.5.1 — add Julia runtime diagnostics**
-  (DONE — structured diagnostics are green; `.5` has since closed, `.6.1` through `.6.2.4.1` have landed, and `.6.2.4.2.1` is active).
+  (DONE — structured diagnostics are green; `.5` has since closed, `.6.1` through `.6.2.4.2.1` have landed, and `.6.2.4.2.3` is active).
 
   **Change:** Exported neutral-field `RuntimeDiagnostic` payloads on `RuntimeInterpreterException`, added optional
   engine spec identity, preserved top/child-rule/Julia-handler attribution through unwind, retained richer inner
@@ -204,7 +217,7 @@ Current execution status for interruption-safe batch workflow recovery.
   status, mdBook, memory, Knowledge Map, task-tree, doctrine, and whitespace checks pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.4.5.0 — split Julia diagnostics trace controls**
-  (DONE — diagnostics/trace is decomposed before code; `.5` has since closed, `.6.1` through `.6.2.4.1` have landed, and `.6.2.4.2.1` is active).
+  (DONE — diagnostics/trace is decomposed before code; `.5` has since closed, `.6.1` through `.6.2.4.2.1` have landed, and `.6.2.4.2.3` is active).
 
   **Change:** Split `.4.5` into `.4.5.1` structured runtime diagnostics, `.4.5.2` trace
   levels/config/events/sinks, `.4.5.3` runtime branch/lifecycle/cursor/boundary instrumentation, and `.4.5.4`
@@ -216,7 +229,7 @@ Current execution status for interruption-safe batch workflow recovery.
   **Verification:** mdBook, memory, Knowledge Map, task-tree, doctrine, and whitespace checks pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.4.4 — add Julia runtime cursor controls**
-  (DONE — cursor controls and boundary capture are green; `.5` has since closed, `.6.1` through `.6.2.4.1` have landed, and `.6.2.4.2.1` is active).
+  (DONE — cursor controls and boundary capture are green; `.5` has since closed, `.6.1` through `.6.2.4.2.1` have landed, and `.6.2.4.2.3` is active).
 
   **Change:** Added explicit LIFO cursor save/restore, entry/local anchor rewinds, synchronized live/register
   cursor updates, character-based cursor/input helpers, and earliest usable non-consuming boundary capture with
@@ -229,7 +242,7 @@ Current execution status for interruption-safe batch workflow recovery.
   status, mdBook, memory, Knowledge Map, task-tree, doctrine, and whitespace checks pass.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.4.3.6 — close Julia helper value no drift**
-  (DONE — the `.4.3` helper/value container is closed; `.5` has since closed, `.6.1` through `.6.2.4.1` have landed, and `.6.2.4.2.1` is active).
+  (DONE — the `.4.3` helper/value container is closed; `.5` has since closed, `.6.1` through `.6.2.4.2.1` have landed, and `.6.2.4.2.3` is active).
 
   **Change:** Audited focused runtime tests, `runtime-value-control-tree` package/CLI status, mdBook helper
   contracts and backend status/handoff, live docs, and Knowledge Map facts. Julia already had the final checked
@@ -244,7 +257,7 @@ Current execution status for interruption-safe batch workflow recovery.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.4.3.5 — add Julia runtime controls and tree callbacks**
   (DONE — value/control/block/callback execution is green; `.4.3.6` and `.4.4` have since landed, `.4.5.0`
-  split diagnostics/trace, and `.4.5.1` through `.6.2.4.1` have since landed and `.6.2.4.2.1` is active).
+  split diagnostics/trace, and `.4.5.1` through `.6.2.4.2.1` have since landed and `.6.2.4.2.3` is active).
 
   **Change:** Added expression-valued blocks with final yields and local returns, attached and marker statement
   controls, lazy inline branches, deterministic while guards, immediate helper/receiver with-blocks, full
@@ -259,7 +272,7 @@ Current execution status for interruption-safe batch workflow recovery.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.4.3.4 — add Julia runtime hash helpers**
   (DONE — hash helper/receiver/mutation behavior is green; `.4.3.5` through `.4.4` have since landed, `.4.5.0`
-  split diagnostics/trace, and `.4.5.1` through `.6.2.4.1` have since landed and `.6.2.4.2.1` is active).
+  split diagnostics/trace, and `.4.5.1` through `.6.2.4.2.1` have since landed and `.6.2.4.2.3` is active).
 
   **Change:** Added copied hash views and pure merge/pick/drop/rename/set-key transformations, compatible
   hash-to-array receiver chains, statement-only named typed set-key mutation, direct hash-index assignment,
@@ -275,7 +288,7 @@ Current execution status for interruption-safe batch workflow recovery.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.4.3.3 — add Julia runtime array helpers**
   (DONE — array helper/receiver/mutation behavior is green; `.4.3.4` through `.4.4` have since landed, `.4.5.0`
-  split diagnostics/trace, and `.4.5.1` through `.6.2.4.1` have since landed and `.6.2.4.2.1` is active).
+  split diagnostics/trace, and `.4.5.1` through `.6.2.4.2.1` have since landed and `.6.2.4.2.3` is active).
 
   **Change:** Added copied array pipelines, delimiter-first receiver joins, string/regex/split bridges,
   flatten/concat and explicit constructor splicing, numeric reducer terminals, typed split replacement, tagged
@@ -290,7 +303,7 @@ Current execution status for interruption-safe batch workflow recovery.
 
 - 2026-07-10: **JULIA-BACKEND-PARITY.4.3.2 — add Julia runtime string numeric helpers**
   (DONE — pure string/scalar/numeric helpers are green; `.4.3.3` through `.4.4` have since landed, `.4.5.0`
-  split diagnostics/trace, and `.4.5.1` through `.6.2.4.1` have since landed and `.6.2.4.2.1` is active).
+  split diagnostics/trace, and `.4.5.1` through `.6.2.4.2.1` have since landed and `.6.2.4.2.3` is active).
 
   **Change:** Added canonical function/receiver dispatch for current string/scalar and numeric helpers, internal
   regex flag retention, lazy coalescing, explicit lexical comparisons, numeric aliases and symbol callees,

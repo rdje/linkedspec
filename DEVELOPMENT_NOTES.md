@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.2.1 — eager logical helpers):
+  `and`/`or`/`not` are value helpers, not lazy control-flow constructs: Perl call evaluation and Rust both evaluate
+  every argument before boolean composition. Julia now does the same through `_runtime_truthy`; lazy branches
+  remain the responsibility of `if`/`switch`. The portmap constant residual exposed a separate compatibility seam:
+  helper regex compilers must ignore Perl's compile-once `o` flag while retaining meaningful portable flags.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.1 — anonymous capture boundaries):
   Julia already carried the correct rule-local capture origin in `RuntimeMatchRegisters`; the gap was execution
   dispatch, not state architecture. One family dispatcher now derives all endpoints from that register and keeps

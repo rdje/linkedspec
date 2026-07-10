@@ -332,8 +332,9 @@ structured diagnostic retention, and all-fixture reporting. Full tests pass with
 windows 40–56, 58–59, and 62–67 green at 25/25 unchanged while routing three top-level function cases. Full tests
 pass with 757 assertions and status `runtime-corpus-middle` at that boundary. `.6.2.4.0` measures and splits the
 shipped-spec/parser-smoke window at 10/31. `.6.2.4.1` adds the complete direct anonymous capture family, closes
-three hlink delimiter cases, and routes EBNF logging to structural output. Full tests pass with 766 assertions and
-status `runtime-corpus-capture-boundaries`; the window is 13/31 and `.6.2.4.2.1` is active.
+three hlink delimiter cases, and routes EBNF logging to structural output. `.6.2.4.2.1` adds eager logical helpers,
+closes three portmap cases plus tablegrep, and routes portmap constant's helper-regex `o` flag residual. Full tests
+pass with 772 assertions and status `runtime-corpus-logical-helpers`; the window is 17/31 and `.6.2.4.2.3` is active.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -600,7 +601,8 @@ The rollout is explicitly recoverable. `.6.2.1` has landed named and bounded sel
 starter fixtures 0–39 green at 40/40; `.6.2.3` proves the surrounding non-function helper/control fixtures 40–67
 green at 25/25 while routing three top-level function fixtures; `.6.2.4.0` measures shipped-spec/parser-smoke
 fixtures 68–98 at 10/31 and splits their mechanism owners; `.6.2.4.1` then closes anonymous capture execution and
-moves the window to 13/31. `.6.2.5` owns spec-defined top-level function shells.
+moves the window to 13/31. `.6.2.4.2.1` then adds eager logical helpers and moves it to 17/31 while routing one
+helper-regex flag residual. `.6.2.5` owns spec-defined top-level function shells.
 Those are workload boundaries, not an assumption that Julia shares Dart's historical failure causes.
 
 #### Julia starter corpus proof
@@ -670,8 +672,16 @@ sets the origin; `capture_slice*` reads to the current match start, `*_until_cur
 `*_rest*` reads to input end. Location readers are character-based, and `capture_take*` advances the origin only
 after a valid read. Focused Unicode/newline tests lock endpoint, length, position, line/column, and destructive
 behavior. All three hlink delimiter fixtures pass; a permanent corpus regression preserves them and ensures EBNF
-logging is routed as an output mismatch rather than an unsupported helper. The window is 13/31, package status is
-`runtime-corpus-capture-boundaries`, full tests pass with 766 assertions, and `.6.2.4.2.1` is active.
+logging is routed as an output mismatch rather than an unsupported helper. At that boundary, the window is 13/31
+and package status is `runtime-corpus-capture-boundaries`.
+
+Logical `and`/`or`/`not` are eager value helpers, matching Perl call evaluation and Rust: all arguments evaluate
+before truthiness composition. They are not lazy branch constructs; use `if`/`switch` when skipped branches must
+remain unevaluated. Julia now applies its existing scalar/number/string/aggregate truthiness and Rust-compatible
+empty arities (false/false/true). Three portmap cases plus tablegrep pass. `portmap_constant` reaches output
+comparison but remains `?bare:` because helper `matches(..., /^\d/io)` passes Perl's no-op `o` flag to Julia
+`Regex`; `.6.2.4.2.3` owns that precise compatibility bridge. The window is 17/31, full tests pass with 772
+assertions, status is `runtime-corpus-logical-helpers`, and `.6.2.4.2.3` is active.
 
 ### Dart Backend Commands
 

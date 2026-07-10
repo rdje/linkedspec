@@ -346,7 +346,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-corpus-capture-boundaries"
+    @test status.parity == "runtime-corpus-logical-helpers"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -358,7 +358,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-corpus-capture-boundaries", String(take!(status_output)))
+    @test occursin("parity: runtime-corpus-logical-helpers", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1474,6 +1474,8 @@ Top::
    raw = entry_group(0)
    set(array(tmp), ["x"])
    missing = tmp[5]
+   eager = "before"
+   eager_or = or(true, eager = "after")
    return(hash(
      "cat", cat("A", undef, "B"),
      "trim", trim(raw),
@@ -1493,6 +1495,14 @@ Top::
      "nonempty", is_nonempty("x"),
      "empty_array", is_empty(array()),
      "nonempty_hash", is_nonempty(hash("k", "v")),
+     "and", and(true, 1, "x"),
+     "and_empty", and(),
+     "or", or(0, "yes"),
+     "or_empty", or(),
+     "not", not(0),
+     "not_empty", not(),
+     "eager_or", eager_or,
+     "eager", eager,
      "unicode_length", length("🙂a"),
      "unicode_substr", substr("🙂ab", 1, 2),
      "str_eq", str_eq("a", "a"),
@@ -1521,6 +1531,14 @@ Top::
         "nonempty" => true,
         "empty_array" => true,
         "nonempty_hash" => true,
+        "and" => true,
+        "and_empty" => false,
+        "or" => true,
+        "or_empty" => false,
+        "not" => true,
+        "not_empty" => true,
+        "eager_or" => true,
+        "eager" => "after",
         "unicode_length" => 2,
         "unicode_substr" => "ab",
         "str_eq" => true,
@@ -3436,6 +3454,29 @@ end
     @test !corpus_fixture_passed(residual_result)
     @test occursin("output mismatch", residual_result.failure)
     @test !occursin("unsupported runtime helper", residual_result.failure)
+end
+
+@testset "Shipped logical-helper corpus batch" begin
+    passing_names = [
+        "portmap_bare",
+        "portmap_bit",
+        "portmap_concatenation",
+        "tablegrep_simple_term",
+    ]
+    passing = execute_corpus_fixtures(CORPUS_ROOT; case_names = passing_names)
+    failures = [
+        "$(result.name): $(result.failure)"
+        for result in passing.results if !corpus_fixture_passed(result)
+    ]
+    residual = execute_corpus_fixtures(CORPUS_ROOT; case_names = ["portmap_constant"])
+    residual_result = only(residual.results)
+
+    @test [result.name for result in passing.results] == passing_names
+    @test corpus_passed_count(passing) == 4
+    @test isempty(failures)
+    @test !corpus_fixture_passed(residual_result)
+    @test occursin("output mismatch", residual_result.failure)
+    @test !occursin("unsupported runtime helper 'or'", residual_result.failure)
 end
 
 @testset "Spec AST JSON contract" begin

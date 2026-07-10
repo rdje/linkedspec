@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.2.1 — add Julia logical helpers
+
+**Scope:** Julia eager logical-helper execution, focused truthiness/eagerness and corpus routing tests, a narrow
+helper-regex flag follow-up split, package status, lockstep docs, mdBook, Knowledge Map, and resume pointer.
+
+**Change:** Added boolean `and`/`or`/`not` to the pure helper runtime using existing truthiness and normal eager
+argument evaluation. Three portmap cases and tablegrep pass. Direct capture and trace probes route
+`portmap_constant` to `.6.2.4.2.3`: Perl's no-op `o` flag currently makes Julia helper regex compilation fail.
+
+**Validation:** Focused logical corpus is 4 passed plus one explicitly routed regex-flag residual; the full window
+moves from 13/31 to 17/31. Full `Pkg.test()` passes with 772 assertions and status
+`runtime-corpus-logical-helpers`; CLI, mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.1 — add Julia anonymous capture boundaries
 
 **Scope:** Julia anonymous capture-boundary runtime execution, Unicode/location/mutation tests, permanent hlink/

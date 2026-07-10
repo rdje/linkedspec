@@ -1084,6 +1084,9 @@ Boolean helpers make branch conditions portable and analyzable.
 | `or(condition, condition, ...)` | any condition may pass. |
 | `not(condition)` | invert one condition. |
 
+These are eager value helpers: every argument is evaluated before truthiness is composed. They do not short-
+circuit side effects. Use structured or inline `if`/`switch` when an unselected expression must remain unevaluated.
+
 Examples:
 
 ```text
@@ -1091,7 +1094,7 @@ if(and(
   has_key(hash(meta), "kind"),
   str_eq(lowercase(trim(hash(meta).pick_keys("kind").sorted_values().first())), "node")
 ))
-  return(hash("kind", "node"));
+  return(hash("kind", "node"))
 endif()
 
 if(or(
@@ -1099,11 +1102,11 @@ if(or(
   str_eq(kind, "identifier"),
   matches(kind, /^name_/)
 ))
-  return(hash("kind", "named"));
+  return(hash("kind", "named"))
 endif()
 
 if(not(is_empty(array(items))))
-  return(hash("kind", "items", "items", copy(array(items))));
+  return(hash("kind", "items", "items", copy(array(items))))
 endif()
 ```
 
@@ -1126,11 +1129,11 @@ Example:
 
 ```text
 if(is_undefined(hash(meta).pick_keys("kind").sorted_values().first()))
-  set(hash(meta), set_key(hash(meta), "kind", "unknown"));
+  set(hash(meta), set_key(hash(meta), "kind", "unknown"))
 elseif(str_eq(lowercase(trim(hash(meta).pick_keys("kind").sorted_values().first())), "word"))
-  set(hash(meta), set_key(hash(meta), "normalized_kind", "word"));
+  set(hash(meta), set_key(hash(meta), "normalized_kind", "word"))
 else()
-  set(hash(meta), set_key(hash(meta), "normalized_kind", "other"));
+  set(hash(meta), set_key(hash(meta), "normalized_kind", "other"))
 endif()
 
 return(copy(hash(meta)));

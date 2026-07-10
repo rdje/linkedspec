@@ -2581,6 +2581,7 @@ function _call_runtime_hash(engine, args, context, rule_label, current_edge)
 end
 
 const _RUNTIME_PURE_HELPER_NAMES = Set{String}([
+    "and",
     "cat",
     "contains_substr",
     "ends_with",
@@ -2613,6 +2614,8 @@ const _RUNTIME_PURE_HELPER_NAMES = Set{String}([
     "num_round",
     "num_sub",
     "num_sum",
+    "not",
+    "or",
     "replace_substr",
     "rm_prefix",
     "rm_suffix",
@@ -3337,7 +3340,13 @@ function _runtime_coalesce_accepts(value, require_nonempty::Bool)
 end
 
 function _call_runtime_pure_helper(helper_name::String, values::Vector{Any})
-    if startswith(helper_name, "num_")
+    if helper_name == "and"
+        return !isempty(values) && all(_runtime_truthy, values)
+    elseif helper_name == "or"
+        return any(_runtime_truthy, values)
+    elseif helper_name == "not"
+        return isempty(values) || !_runtime_truthy(first(values))
+    elseif startswith(helper_name, "num_")
         return _call_runtime_numeric_helper(helper_name, values)
     elseif startswith(helper_name, "str_")
         return _call_runtime_string_comparison(helper_name, values)

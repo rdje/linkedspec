@@ -62,7 +62,7 @@ projection, seek/consume runtime regex selection, capture/offset projection, cur
 zero-progress detection, first default/AND/OR/repetition dispatch, lifecycle and child-edge flow, narrow
 accumulators/returns, recursion/progress guards, registered user functions, diagnostics/tracing, boundary capture,
 manifest-backed corpus validation, and controlled library corpus execution. The full package suite currently passes
-with 766 assertions and status `runtime-corpus-capture-boundaries`.
+with 772 assertions and status `runtime-corpus-logical-helpers`.
 
 The library executor and corpus CLI support named or bounded subsets. For example:
 
@@ -79,7 +79,8 @@ locking the three intervening top-level function routes. Full 99-fixture Julia p
 The next bounded command, `--execute --offset 68 --limit 31`, started at 10 passed and 21 failed. Anonymous
 capture-boundary execution now closes all three hlink delimiter fixtures, moving the window to 13/31; EBNF logging
 is explicitly routed to the structural-output owner. Logical/output helper, recursive top-rule, structural-output,
-and quote-normalization groups remain separately owned.
+and quote-normalization groups remain separately owned. Eager logical helpers then close three portmap cases plus
+tablegrep and move the window to 17/31. Portmap constant's no-op helper-regex `o` flag residual has its own leaf.
 
 ## Hosted GitHub Actions status
 

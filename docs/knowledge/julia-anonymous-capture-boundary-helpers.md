@@ -34,6 +34,8 @@ that 3/3 result. `ebnf_logging_annotation` no longer fails on unsupported `start
 same structural items as `ebnf_expression_rules`, so `.6.2.4.4` owns that residual. The complete shipped-smoke
 window is 13/31, full tests pass with 766 assertions, and status is `runtime-corpus-capture-boundaries`.
 
-Related facts: [[julia-shipped-corpus-smoke-split]], [[rust-anonymous-capture-slice-family]],
+`.6.2.4.2.1` has since added eager logical helpers and moved shipped smoke to 17/31.
+
+Related facts: [[julia-logical-helper-execution]], [[julia-shipped-corpus-smoke-split]], [[rust-anonymous-capture-slice-family]],
 [[spec-capture-mark-family-taxonomy]], [[perl-capture-slice-delimiter-seek-boundary]],
 [[dart-helper-action-surface-bridge]], [[rust-perl-output-oracle]].
