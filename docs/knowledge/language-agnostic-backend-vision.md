@@ -1,6 +1,6 @@
 ---
 id: language-agnostic-backend-vision
-title: LinkedSpec language-agnostic backend vision — Perl reference plus Rust and scoped Dart today; Julia and Lua future backends consume same .spec files in lockstep
+title: LinkedSpec language-agnostic backend vision — Perl reference plus Rust and scoped Dart today; Julia active planning and Lua future backend consume same .spec files in lockstep
 answers:
   - what backends will LinkedSpec support
   - what is the language-agnostic architecture vision
@@ -14,7 +14,7 @@ answers:
 date: 2026-06-12
 status: accepted
 tags: [architecture, portability, backends, roadmap, vision]
-evidence: "User-specified vision during MEDIUM-IMPACT.1.3 HandlerIR work; ADR 0006 formalized the multi-backend vision and accepted Julia/Dart as future targets. Phase 9 implemented the Rust interpreter under rust/. SPEC-FORMAT-TERSE.5.0 reverified the then-current backend inventory. ADR 0021 later accepted Lua and fixed the future rollout order as Dart, then Julia, then Lua, all to full parity with Perl5 and Rust. DART-BACKEND-PARITY.7.5 closes Dart's scoped interpreter-first milestone and returns rollout to Julia planning."
+evidence: "User-specified vision during MEDIUM-IMPACT.1.3 HandlerIR work; ADR 0006 formalized the multi-backend vision and accepted Julia/Dart as future targets. Phase 9 implemented the Rust interpreter under rust/. SPEC-FORMAT-TERSE.5.0 reverified the then-current backend inventory. ADR 0021 later accepted Lua and fixed the future rollout order as Dart, then Julia, then Lua, all to full parity with Perl5 and Rust. DART-BACKEND-PARITY.7.5 closes Dart's scoped interpreter-first milestone, and FUTURE-PARITY-BACKLOG.1.2 creates JULIA-BACKEND-PARITY for active Julia planning."
 reverify: "grep -n 'Rust\\|Julia\\|Dart\\|Lua\\|backend' ROADMAP_V2.md docs/decisions/0006-multi-backend-vision.md docs/decisions/0021-future-backend-rollout-order.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/tasks/FUTURE-PARITY-BACKLOG.md | head -60"
 ---
 
@@ -24,10 +24,10 @@ LinkedSpec currently has the Perl reference implementation, the Rust interpreter
 under `rust/`, and a scoped interpreter-first Dart milestone under `dart/`. The accepted
 future backend vision is to add Julia and Lua as separate implementation tracks — not
 replacing Perl, but alongside it. ADR 0021 fixes the rollout order as Dart first, Julia
-second, and Lua third; Dart's scoped milestone is now closed and rollout returns to Julia
-planning. All backends consume the exact same `.spec` files and produce identical parser
-behavior. JS and Wasm targets are reached via Rust (wasm-bindgen/wasm-pack) or Dart
-(dart2js/dart2wasm).
+second, and Lua third; Dart's scoped milestone is now closed and Julia planning is active
+under `JULIA-BACKEND-PARITY`. All backends consume the exact same `.spec` files and produce
+identical parser behavior. JS and Wasm targets are reached via Rust (wasm-bindgen/wasm-pack)
+or Dart (dart2js/dart2wasm).
 
 ## Decision
 
@@ -64,7 +64,7 @@ behavior. JS and Wasm targets are reached via Rust (wasm-bindgen/wasm-pack) or D
 | Perl    | ✅  | —        | —    | —      |
 | Rust    | ✅ implemented | ✅ (wasm-bindgen future target) | ✅ future target | — |
 | Dart    | ✅ scoped interpreter-first milestone complete | ✅ (dart2js future target) | ✅ (dart2wasm future target) | ✅ (Flutter future target) |
-| Julia   | ✅ scheduled future target, second | —        | —    | —      |
+| Julia   | ✅ active planning target, second | —        | —    | —      |
 | Lua     | ✅ scheduled future target, third | —        | —    | —      |
 
 ## Speculated VM consideration

@@ -288,10 +288,12 @@ bounded Dart matchers handle the exact shipped Lispish `(?R)`, EBNF `\K` /
 `(?&name)` / `(?(DEFINE)...)`, and spec.spec recursive block forms, while
 action-edge `push(child, index)` preserves indexed child payloads. The
 Dart-specific LinkedSpec CLI productization is now done, and
-`DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first milestone. Future
-backend rollout returns to `FUTURE-PARITY-BACKLOG.1.2` for Julia planning.
-Future Julia and Lua backend plans must own their own variant-specific CLIs
-rather than relying on one ambiguous shared command.
+`DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first milestone.
+`FUTURE-PARITY-BACKLOG.1.2` creates the dedicated `JULIA-BACKEND-PARITY`
+plan, whose first active leaf is `JULIA-BACKEND-PARITY.1.1` for Julia
+toolchain/package-layout preflight. Future Julia and Lua backend plans must own
+their own variant-specific CLIs rather than relying on one ambiguous shared
+command.
 
 ### Dart Backend Commands
 

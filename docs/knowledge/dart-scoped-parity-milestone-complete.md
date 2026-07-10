@@ -10,8 +10,8 @@ answers:
 date: 2026-07-09
 status: current
 tags: [dart, backend, parity, corpus, FUTURE-PARITY-BACKLOG, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.7.5 closes the Dart task tree after parser/frontend, typed ActionIR, compiled state, runtime interpretation, staged user-function execution, diagnostics/trace, focused local verification, Dart-specific CLI productization, and 99/99 corpus execution. Generated Dart source remains deferred to a future source-emitter proof lane. FUTURE-PARITY-BACKLOG.1.2 becomes the next eligible backend planning leaf for Julia."
-reverify: "rg -n 'DART-BACKEND-PARITY\\.7\\.5|No active Dart frontier|99/99 corpus|FUTURE-PARITY-BACKLOG\\.1\\.2|Julia planning' docs/tasks/DART-BACKEND-PARITY.md docs/TASK_TREE.md docs/tasks/FUTURE-PARITY-BACKLOG.md ROADMAP.md ROADMAP_V2.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/appendix/backend-handoff.md"
+evidence: "DART-BACKEND-PARITY.7.5 closes the Dart task tree after parser/frontend, typed ActionIR, compiled state, runtime interpretation, staged user-function execution, diagnostics/trace, focused local verification, Dart-specific CLI productization, and 99/99 corpus execution. Generated Dart source remains deferred to a future source-emitter proof lane. FUTURE-PARITY-BACKLOG.1.2 then created JULIA-BACKEND-PARITY, whose active frontier is JULIA-BACKEND-PARITY.1.1."
+reverify: "rg -n 'DART-BACKEND-PARITY\\.7\\.5|No active Dart frontier|99/99 corpus|FUTURE-PARITY-BACKLOG\\.1\\.2|JULIA-BACKEND-PARITY\\.1\\.1|Julia planning' docs/tasks/DART-BACKEND-PARITY.md docs/TASK_TREE.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/tasks/JULIA-BACKEND-PARITY.md ROADMAP.md ROADMAP_V2.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/appendix/backend-handoff.md"
 ---
 
 The Dart backend task tree is closed at the scoped interpreter-first milestone.
@@ -27,9 +27,10 @@ The accepted claim is:
 - The checked-in 99-fixture corpus passes through Dart execute mode.
 
 Generated Dart source is not part of this milestone. It remains a future split
-proof lane. With Dart closed, PNT returns to `FUTURE-PARITY-BACKLOG.1.2` for
-Julia backend planning; no Julia or Lua implementation happened in the Dart
-closeout.
+proof lane. After Dart closed, `FUTURE-PARITY-BACKLOG.1.2` created
+`JULIA-BACKEND-PARITY`; executable Julia work now starts at
+`JULIA-BACKEND-PARITY.1.1`. No Julia or Lua implementation happened in the Dart
+closeout or in the Julia planning slice.
 
 Related facts: [[dart-backend-interpreter-first-plan]], [[dart-generated-source-deferred]],
-[[dart-specific-cli]], [[language-agnostic-backend-vision]].
+[[dart-specific-cli]], [[language-agnostic-backend-vision]], [[julia-backend-interpreter-first-plan]].

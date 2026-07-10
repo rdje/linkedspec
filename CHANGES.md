@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-09 — FUTURE-PARITY-BACKLOG.1.2 — scope Julia backend parity plan
+
+**Scope:** Julia backend task-tree creation, future-backlog frontier update, roadmap/task-tree index alignment,
+mdBook status/handoff text, Knowledge Map, architecture snapshot, and live docs.
+
+**Change:** Created `docs/tasks/JULIA-BACKEND-PARITY.md` as the dedicated Julia backend parity plan after the Dart
+scoped milestone closed. The Julia lane starts interpreter-first, requires typed `.spec` and helper/action AST
+ownership, schedules compiled state/runtime/staged registry/diagnostics/trace/corpus parity work, requires a
+Julia-specific CLI during toolchain/package planning, and leaves generated Julia source as a later proof decision.
+The next active leaf is `JULIA-BACKEND-PARITY.1.1` for toolchain/package-layout preflight.
+
+**Validation:** Docs/governance validation covers mdBook, memory architecture, Knowledge Map generation/check,
+task-tree metadata, doctrine, stale-status scans, and `git diff --check`. No Julia package or implementation code
+was created.
+
 ## 2026-07-09 — DART-BACKEND-PARITY.7.5 — close Dart parity milestone
 
 **Scope:** Dart task-tree closeout, future-backlog frontier unblocking, roadmaps, mdBook status/handoff text,
@@ -10,7 +25,8 @@ architecture snapshot, live docs, resume pointer, and Knowledge Map.
 parser/frontend, typed ActionIR, compiled state, runtime interpretation, staged user-function execution,
 diagnostics/trace, focused local verification, Dart-specific CLI productization, and 99/99 corpus execution are
 all complete for the accepted milestone. Generated Dart source remains deliberately deferred to a future split
-proof lane. Future backend rollout returns to `FUTURE-PARITY-BACKLOG.1.2` for Julia planning.
+proof lane. Future backend rollout then completed `FUTURE-PARITY-BACKLOG.1.2` for Julia planning and delegated
+executable Julia work to `JULIA-BACKEND-PARITY.1.1`.
 
 **Validation:** Focused Dart gate, mdBook build, memory architecture, Knowledge Map generation/check,
 task-tree metadata, doctrine, default local CI, stale-status scans, and `git diff --check` pass. The focused Dart

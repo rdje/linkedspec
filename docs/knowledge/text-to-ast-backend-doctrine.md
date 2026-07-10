@@ -11,7 +11,7 @@ answers:
 date: 2026-07-01
 status: current
 tags: [architecture, actionir, ast, cross-variant-parity, perl-reference]
-evidence: "User directive on 2026-07-01 adopted Rust-style text-to-AST as the cross-variant doctrine and required the Perl variant to move away from text-to-text lowering. ADR 0011 and task tree PERL-ACTIONIR-AST-MIGRATION own the migration."
+evidence: "User directive on 2026-07-01 adopted Rust-style text-to-AST as the cross-variant doctrine and required the Perl variant to move away from text-to-text lowering. ADR 0011 and task tree PERL-ACTIONIR-AST-MIGRATION own the migration. Dart implemented its scoped interpreter-first milestone with typed frontend/ActionIR layers; Julia planning inherits the same rule."
 reverify: "rg -n 'text-to-AST|text-to-text|PERL-ACTIONIR-AST-MIGRATION|0011' docs/decisions docs/tasks docs/linkedspec-book/src"
 ---
 
@@ -25,5 +25,5 @@ value/receiver and statement/control lowering families under regression locks.
 New supported surfaces, including user-defined functions, must consume AST/IR call nodes.
 They must not be implemented as broad textual macros or by relying on generated
 host-language fallback. Rust already follows this direction with typed `Expr` and `Stmt`
-nodes. Future Dart, Julia, and Lua backends inherit the same text-to-AST requirement under
-ADR 0021.
+nodes, and Dart follows it through typed frontend and ActionIR layers. Julia and Lua
+inherit the same text-to-AST requirement under ADR 0021.

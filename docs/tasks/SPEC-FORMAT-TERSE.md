@@ -2830,24 +2830,28 @@ Each change leaf follows the extension-surface order (`PHASE7-SELF-HOSTED-SPEC.5
   Commit: `SPEC-FORMAT-TERSE.5.0 - own future variant parity inventory`
 
 - ID: `SPEC-FORMAT-TERSE.5.1`
-  Status: `deferred`
+  Status: `superseded` (2026-07-09 by `FUTURE-PARITY-BACKLOG.1.2` and `JULIA-BACKEND-PARITY`)
   Goal: Julia backend parity task-tree adoption
   Acceptance: When the roadmap selects Julia backend implementation, create or activate a dedicated backend
     task tree with concrete parser/compiler/runtime/helper/corpus leaves. The acceptance contract must require
     identical `.spec` input files, mdBook-neutral behavior, and language-neutral corpus parity before any
     feature is called complete.
-  Verification: `deferred — no Julia backend implementation exists in the tracked source tree today`
-  Commit: `SPEC-FORMAT-TERSE.6.2.4 - verify shipped-spec terse surface`
+  Verification: Superseded — `FUTURE-PARITY-BACKLOG.1.2` creates `docs/tasks/JULIA-BACKEND-PARITY.md` as the
+    dedicated Julia backend parity plan after the Dart scoped milestone closes. Executable Julia work starts at
+    `JULIA-BACKEND-PARITY.1.1`; no Julia backend code exists in this closed terse-format tree.
+  Commit: `FUTURE-PARITY-BACKLOG.1.2 - scope Julia backend parity plan`
 
 - ID: `SPEC-FORMAT-TERSE.5.2`
-  Status: `deferred`
+  Status: `superseded` (2026-07-09 by `FUTURE-PARITY-BACKLOG.1.1` and `DART-BACKEND-PARITY`)
   Goal: Dart backend parity task-tree adoption
   Acceptance: When the roadmap selects Dart backend implementation, create or activate a dedicated backend
     task tree with concrete parser/compiler/runtime/helper/corpus leaves. The acceptance contract must require
     identical `.spec` input files, mdBook-neutral behavior, and language-neutral corpus parity before any
     feature is called complete.
-  Verification: `deferred — no Dart backend implementation exists in the tracked source tree today`
-  Commit: `pending`
+  Verification: Superseded — `FUTURE-PARITY-BACKLOG.1.1` created `docs/tasks/DART-BACKEND-PARITY.md`, and
+    `DART-BACKEND-PARITY.7.5` later closed the scoped interpreter-first Dart milestone. No Dart code belongs to
+    this closed terse-format tree.
+  Commit: `DART-BACKEND-PARITY.7.5 - close Dart parity milestone`
 
 - ID: `SPEC-FORMAT-TERSE.5.3`
   Status: `superseded` (2026-07-09 by ADR `0021` and `FUTURE-PARITY-BACKLOG.1.3`)

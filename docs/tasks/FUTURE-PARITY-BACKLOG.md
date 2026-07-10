@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-09` (`DART-BACKEND-PARITY.7.5` closed the scoped Dart interpreter-first milestone;
-  Julia planning is now the next eligible backend rollout leaf).
+- Last updated: `2026-07-09` (`FUTURE-PARITY-BACKLOG.1.2` created the dedicated Julia backend parity plan and
+  delegated executable Julia work to `JULIA-BACKEND-PARITY.1.1`).
 - Owner: repo-local workflow
 
 ## Goal
@@ -79,12 +79,16 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.1 - scope Dart backend parity plan`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.2`
-  Status: `pending`
+  Status: `done`
   Goal: Julia backend parity track - split/scaffold now that Dart has reached its scoped parity milestone.
   Acceptance: Create or expand a dedicated Julia backend implementation plan with the same full-parity
     obligations as Dart, reusing lessons from Dart without changing `.spec` semantics.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-09.** Created `docs/tasks/JULIA-BACKEND-PARITY.md` as the dedicated Julia backend
+    plan. The plan schedules interpreter-first parity, Julia-specific CLI ownership, typed `.spec` frontend,
+    typed helper/action AST, compiled state, runtime interpreter, regex/match state, staged parser registry,
+    user-function runtime, diagnostics/trace, corpus runner, local verification, mdBook alignment, and generated
+    Julia source as a later proof decision. No Julia package or implementation code changed.
+  Commit: `FUTURE-PARITY-BACKLOG.1.2 - scope Julia backend parity plan`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.3`
   Status: `pending`
@@ -209,16 +213,16 @@ before implementation.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `FUTURE-PARITY-BACKLOG.1.2` | `pending` | Dart reached its scoped milestone in `DART-BACKEND-PARITY.7.5`; Julia planning is now the next eligible backend rollout leaf. |
-| 2 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua is now adopted as a future backend by ADR `0021`, scheduled after Julia. |
+| 1 | `JULIA-BACKEND-PARITY.1.1` | `pending` | Julia executable work is delegated to the dedicated Julia tree; PNT should select that active tree before returning to backlog lanes. |
+| 2 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua is now adopted as a future backend by ADR `0021`, scheduled after Julia reaches its scoped milestone. |
 | 3 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
 | 4 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Rust generated-source breadth is independent follow-up after backend scheduling. |
 | 5 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
 | 6 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
 | 7 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
 | 8 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
-| 9 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser/stimuli roundtrip arc is parked for later design; not a current Dart pivot. |
-| 10 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design; not a current Dart pivot. |
+| 9 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser/stimuli roundtrip arc is parked for later design; not a current Julia pivot. |
+| 10 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design; not a current Julia pivot. |
 
 ## Decisions
 
@@ -234,24 +238,27 @@ before implementation.
   this as `DART-BACKEND-PARITY.7.3` / `.7.4`; Julia and Lua planning leaves must include equivalent
   variant-specific CLI ownership when activated.
 - `2026-07-09`: `DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first Dart milestone. Future backend
-  rollout returns to this backlog tree; `FUTURE-PARITY-BACKLOG.1.2` is now eligible to split/scaffold Julia
-  planning. No Julia or Lua code changes were made in the Dart closeout.
+  rollout returned to this backlog tree; `FUTURE-PARITY-BACKLOG.1.2` then split/scaffolded Julia planning.
+  No Julia or Lua code changes were made in the Dart closeout.
+- `2026-07-09`: `.1.2` creates `docs/tasks/JULIA-BACKEND-PARITY.md` and selects an interpreter-first Julia
+  parity strategy. Generated Julia source is a later proof decision, not the primary gate. Executable Julia work
+  starts with `JULIA-BACKEND-PARITY.1.1` toolchain/package-layout preflight.
 - `2026-07-09`: Director brainstorm captured: a future closed-loop validation arc should explore deriving both
   a parser for `foo` and a stimuli generator for that parser solely from `foo.spec`, making `.spec` the sole source
-  of truth. This is parked under `.8.1` and is not a current pivot from Dart.
+  of truth. This is parked under `.8.1` and is not the current Julia rollout pivot.
 - `2026-07-09`: Director correction captured: future `.spec` design should swap the earlier optional-marker idea.
   AND rules should default bare entries to blind-call sequence semantics, while OR/default rules should default
-  bare entries to action-edge regex dispatch semantics. This is parked under `.9.1` and is not a current pivot from
-  Dart.
+  bare entries to action-edge regex dispatch semantics. This is parked under `.9.1` and is not the current Julia
+  rollout pivot.
 
 ## Open Questions
 
-- None blocking the next backend planning leaf. Dart's scoped milestone is closed; Julia `.1.2` is eligible for
-  the next PNT slice, while Lua remains scheduled after Julia.
+- None blocking the active Julia tree. Lua `.1.3` is intentionally gated until `JULIA-BACKEND-PARITY` reaches its
+  scoped milestone.
 
 ## Blockers
 
-- None for `.1.1`.
+- None for `.1.2`. Julia toolchain availability is intentionally deferred to `JULIA-BACKEND-PARITY.1.1`.
 
 ## Verification Log
 
@@ -259,6 +266,7 @@ before implementation.
 | --- | --- | --- | --- |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book`; `bash tools/run_ci_local.sh` | PASS. Local CI includes phase0 `1..1028`; no implementation code changed. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.1.1` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book`; `bash tools/run_ci_local.sh` | PASS. Local CI includes phase0 `1..1028`; no implementation code changed. |
+| `2026-07-09` | `FUTURE-PARITY-BACKLOG.1.2` | `git diff --check`; stale handoff/frontier `rg` scan; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_task_tree_metadata.sh`; `bash scripts/check_doctrines.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning only; created `JULIA-BACKEND-PARITY` and no Julia package or implementation code. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.8.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning capture only; no implementation code changed. |
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.9.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning capture only; no implementation code changed. |
 
@@ -268,6 +276,7 @@ before implementation.
 | --- | --- | --- |
 | `FUTURE-PARITY-BACKLOG.0` | `FUTURE-PARITY-BACKLOG.0 - create future parity backlog` | Tracking/decision/doc sync; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.1` | `FUTURE-PARITY-BACKLOG.1.1 - scope Dart backend parity plan` | Creates `DART-BACKEND-PARITY`; no implementation code. |
+| `FUTURE-PARITY-BACKLOG.1.2` | `FUTURE-PARITY-BACKLOG.1.2 - scope Julia backend parity plan` | Creates `JULIA-BACKEND-PARITY`; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.8.0` | `FUTURE-PARITY-BACKLOG.8.0 - capture spec-derived roundtrip idea` | Captures future `foo.spec` parser/stimuli closed-loop validation arc; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.9.0` | `FUTURE-PARITY-BACKLOG.9.0 - capture AND OR edge default correction` | Captures future AND/OR mode-sensitive edge-default design arc; no implementation code. |
 
@@ -277,10 +286,14 @@ before implementation.
   backend rollout order.
 - `2026-07-09`: Scoped the Dart backend lane into `docs/tasks/DART-BACKEND-PARITY.md` and selected
   interpreter-first parity before generated Dart source.
+- `2026-07-09`: Scoped the Julia backend lane into `docs/tasks/JULIA-BACKEND-PARITY.md`, selected
+  interpreter-first parity, required Julia-specific CLI ownership, and delegated the next active leaf to
+  `JULIA-BACKEND-PARITY.1.1`.
 - `2026-07-09`: Captured the director's single-source `foo.spec` parser/stimuli generator roundtrip idea as a
   low-priority future design lane.
 - `2026-07-09`: Captured the director's corrected AND/OR edge-default model as a future design lane: AND defaults
   to blind-call sequence entries, OR/default rules default to action-edge regex-dispatch entries, and top-rule
   marker reduction plus OR pipe sugar are parked as related design questions.
 - `2026-07-09`: Dart's scoped interpreter-first milestone closed in `DART-BACKEND-PARITY.7.5`; Julia planning
-  leaf `.1.2` is now eligible, with Lua still scheduled after Julia.
+  completed in `.1.2`, with active executable Julia work delegated to `JULIA-BACKEND-PARITY.1.1`. Lua remains
+  scheduled after Julia.

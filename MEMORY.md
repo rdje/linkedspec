@@ -18,30 +18,30 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.2` — Julia backend parity is scoped into
+  `docs/tasks/JULIA-BACKEND-PARITY.md` with interpreter-first strategy and Julia-specific CLI ownership.
+- prior_leaf: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
-- prior_leaf: `DART-BACKEND-PARITY.7.4` — Dart-specific CLI productization is complete:
-  `dart/bin/linkedspec_dart.dart` owns help text plus the manifest-backed corpus/runtime command path.
 - latest_commit: this resume block is prepared for commit
-  `DART-BACKEND-PARITY.7.5 - close Dart parity milestone`; previous committed HEAD is
-  `89027711 DART-BACKEND-PARITY.7.4 - productize Dart-specific CLI`.
+  `FUTURE-PARITY-BACKLOG.1.2 - scope Julia backend parity plan`; previous committed HEAD is
+  `150b9213 DART-BACKEND-PARITY.7.5 - close Dart parity milestone`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; current eligible frontier after the current commit is `.1.2`.
-- next_action: resume PNT at `FUTURE-PARITY-BACKLOG.1.2` to split/scaffold Julia backend parity planning now that
-  `DART-BACKEND-PARITY.7.5` closes the Dart scoped milestone. The director's single-source `foo.spec`
-  parser+stimuli roundtrip idea is parked in `.8.1`; the corrected AND/OR edge-default model is parked in `.9.1`;
-  neither is the next backend rollout leaf.
+- active_work_unit: `JULIA-BACKEND-PARITY`; current frontier after the current commit is `.1.1`.
+- next_action: resume PNT at `JULIA-BACKEND-PARITY.1.1` to verify local Julia toolchain availability and define
+  the repository-owned Julia package/test/corpus-runner/variant-specific CLI layout before source scaffold work.
+  The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
+  the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
 - latest_bootstrap_read: 2026-07-09 read README, memory architecture, session bootstrap, COMMIT, task-tree index,
-  active Dart task tree, ROADMAP/ROADMAP_V2, mdBook trace/runtime/status/backend-handoff chapters, relevant ADR/KM
-  facts, Dart runtime/package/corpus/CLI source owners through `.7.4`, Rust staged-registry/trace references, and the
-  completed cursor-control split.
+  completed Dart task tree, active future-backlog/Julia task context, ROADMAP/ROADMAP_V2, mdBook
+  trace/runtime/status/backend-handoff chapters, relevant ADR/KM facts, Dart runtime/package/corpus/CLI source
+  owners through `.7.5`, Rust staged-registry/trace references, and the completed cursor-control split.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
 - ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1028`**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `DART-BACKEND-PARITY.7.5` commit; do not pivot unless the repo
+- blockers: none. in_flight_uncommitted: none expected after the `FUTURE-PARITY-BACKLOG.1.2` commit; do not pivot unless the repo
   is handoff-ready.

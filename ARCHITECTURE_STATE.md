@@ -5,6 +5,12 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-09`
+- `2026-07-09` refresh: `FUTURE-PARITY-BACKLOG.1.2` creates `docs/tasks/JULIA-BACKEND-PARITY.md` as the
+  dedicated Julia backend plan. Julia follows Dart in the ADR `0021` rollout and starts interpreter-first:
+  package/toolchain preflight, typed `.spec` frontend, typed helper/action AST, compiled state, runtime
+  interpreter, staged user-function execution, diagnostics/trace, corpus parity, and mdBook/live-doc closeout.
+  Generated Julia source is a later proof decision, not the initial gate. The active frontier is
+  `JULIA-BACKEND-PARITY.1.1` for toolchain/package-layout and variant-specific CLI preflight.
 - `2026-07-09` refresh: `DART-BACKEND-PARITY.7.5` closes the scoped Dart interpreter-first milestone.
   Dart now has a repo-owned package, typed frontend and ActionIR layers, compiled-spec state, runtime
   interpreter, staged user-function execution, diagnostics/trace controls, focused local verification,

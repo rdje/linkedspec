@@ -7,9 +7,24 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-09: **FUTURE-PARITY-BACKLOG.1.2 — scope Julia backend parity plan**
+  (DONE — Julia backend parity now has a dedicated task tree; next active leaf is
+  `JULIA-BACKEND-PARITY.1.1`).
+
+  **Change:** Created `docs/tasks/JULIA-BACKEND-PARITY.md` with the full parity plan for the Julia backend:
+  toolchain/package preflight, scaffold, corpus IO, `.spec` frontend, typed ActionIR, compiled state, runtime
+  interpreter, staged user functions, diagnostics/trace, corpus parity, local verification, mdBook closeout, and
+  generated-source follow-up decision.
+
+  **Boundary:** Planning only. No Julia package, source, tests, or CLI files were created; toolchain availability
+  is intentionally left to `.1.1`.
+
+  **Verification:** mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, stale-status scans,
+  and `git diff --check` pass.
+
 - 2026-07-09: **DART-BACKEND-PARITY.7.5 — close Dart parity milestone**
-  (DONE — the scoped interpreter-first Dart milestone is complete; next eligible backend leaf is
-  `FUTURE-PARITY-BACKLOG.1.2` for Julia planning).
+  (DONE — the scoped interpreter-first Dart milestone is complete; Julia planning has since completed in
+  `FUTURE-PARITY-BACKLOG.1.2`, and active executable Julia work starts at `JULIA-BACKEND-PARITY.1.1`).
 
   **Change:** Closed the Dart task tree after aligning the roadmaps, task-tree index, future-backlog frontier,
   mdBook status/handoff text, architecture snapshot, live docs, resume pointer, and Knowledge Map around the

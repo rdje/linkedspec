@@ -30,8 +30,8 @@ Adopt text-to-AST as a cross-variant doctrine:
    careful, regression-locked slices.
 4. New features, including user-defined functions, must consume AST/IR call nodes and
    must not add broad textual macro expansion or host-language fallback.
-5. Future Julia and Dart backends must be text-to-AST from the start. Lua remains outside
-   the adopted backend set unless a later decision record accepts it, but if accepted it
+5. Future Julia and Dart backends must be text-to-AST from the start. ADR `0021`
+   later accepted Lua as a scheduled backend target after Dart and Julia; Lua
    inherits the same doctrine.
 
 ## Consequences

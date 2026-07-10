@@ -1,13 +1,20 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-09 (FUTURE-PARITY-BACKLOG.1.2 — Julia backend plan):
+  Julia parity is now a dedicated task tree at `docs/tasks/JULIA-BACKEND-PARITY.md`. The plan deliberately follows
+  the Dart lessons: verify toolchain/package layout first, start interpreter-first over typed `.spec` and
+  helper/action AST, require a Julia-specific LinkedSpec CLI from the package-planning leaf, and defer generated
+  Julia source to a later proof decision. The next PNT leaf is `JULIA-BACKEND-PARITY.1.1`; it should record real
+  local Julia toolchain availability and intended `julia/` layout before any source scaffold is created.
+
 - 2026-07-09 (DART-BACKEND-PARITY.7.5 — Dart scoped milestone closeout):
   The Dart backend parity task tree is closed at the interpreter-first milestone. The durable claim is intentionally
   scoped: Dart executes the current 99-fixture manifest through parser/compiler/runtime, has focused local
   verification, exposes a variant-specific CLI, and has mdBook/live-doc/Knowledge Map alignment. Generated Dart
-  source is still future proof work, not part of this conformance claim. With the Dart tree closed, PNT returns to
-  `FUTURE-PARITY-BACKLOG.1.2` for Julia planning; that next slice should split/scaffold Julia before any Julia
-  implementation code and should include a Julia-specific CLI obligation from the start.
+  source is still future proof work, not part of this conformance claim. That handoff has since completed:
+  `FUTURE-PARITY-BACKLOG.1.2` split/scaffolded Julia planning without implementation code, and active executable
+  Julia work now starts at `JULIA-BACKEND-PARITY.1.1`.
 
 - 2026-07-09 (DART-BACKEND-PARITY.7.4 — Dart-specific CLI productization):
   `dart/bin/linkedspec_dart.dart` is now the Dart-specific LinkedSpec CLI rather than a scaffold status printer.
