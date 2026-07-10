@@ -116,8 +116,9 @@ Top-level directories and files:
     capture-boundary execution and closes three hlink cases. `.6.2.4.2.1` adds eager logical helpers, closes three
     portmap cases plus tablegrep. `.6.2.4.2.3` normalizes helper regex flags and closes portmap constant.
     `.6.2.4.2.2` adds trace-routed, parse-result-neutral diagnostic output and advances simenv/history past
-    unsupported `print`. Full tests pass with 780 assertions, status is `runtime-corpus-diagnostic-output`, shipped
-    smoke remains 18/31, and `.6.2.4.3` is active.
+    unsupported `print`. `.6.2.4.3` scopes explicit aggregate resets per recursive rule invocation and closes all
+    three recursive top-rule cases. Full tests pass with 785 assertions, status is
+    `runtime-corpus-recursive-rule-scope`, shipped smoke is 21/31, and `.6.2.4.4` is active.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

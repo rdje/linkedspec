@@ -18,22 +18,22 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.6.2.4.2.2` — trace-routed `print`/`print_each`/`say` preserve parse
-  output and advance simenv/history to successor-owned mechanisms; full tests pass with 780 assertions and status
-  `runtime-corpus-diagnostic-output`, while shipped smoke remains 18/31.
-- prior_leaf: `JULIA-BACKEND-PARITY.6.2.4.2.3` — strict helper regex flags closed portmap constant at 18/31.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.6.2.4.3` — first-reset rule-local snapshots close all three
+  recursive top-rule fixtures while preserving ordinary caller-visible child mutation; full tests pass with 785
+  assertions, shipped smoke is 21/31, and status is `runtime-corpus-recursive-rule-scope`.
+- prior_leaf: `JULIA-BACKEND-PARITY.6.2.4.2.2` — diagnostic output advanced simenv/history past unsupported print.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.6.2.4.2.2 - add Julia diagnostic output helpers`; previous committed HEAD is
-  `e0ec8a7e JULIA-BACKEND-PARITY.6.2.4.2.3 - normalize Julia helper regex flags`.
+  `JULIA-BACKEND-PARITY.6.2.4.3 - scope Julia recursive rule resets`; previous committed HEAD is
+  `3a11d35c JULIA-BACKEND-PARITY.6.2.4.2.2 - add Julia diagnostic output helpers`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; the frontier after the current commit is `.6.2.4.3`.
-- next_action: resume PNT at `JULIA-BACKEND-PARITY.6.2.4.3` by using trace/toolbox probes to isolate recursive
-  top-rule caller/child local-state and LX result-composition behavior, then implement only that mechanism and
-  rerun the three routed recursive fixtures plus the complete 31-fixture diagnostic window.
+- active_work_unit: `JULIA-BACKEND-PARITY`; the frontier after the current commit is `.6.2.4.4`.
+- next_action: resume PNT at `JULIA-BACKEND-PARITY.6.2.4.4` by using toolbox/trace probes to split the two EBNF
+  and four spec.spec structural output mismatches if they do not share one runtime mechanism, then implement only
+  the first proven mechanism and rerun the focused cases plus the complete 31-fixture diagnostic window.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
 - latest_bootstrap_read: 2026-07-10 read the full roadmap and roadmap-v2, full codebase inventory and active Julia
@@ -50,5 +50,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.6.2.4.2.2` commit;
+- blockers: none. in_flight_uncommitted: none expected after the `JULIA-BACKEND-PARITY.6.2.4.3` commit;
   do not pivot unless the repo is handoff-ready.

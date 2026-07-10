@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.3 — recursive rule-local reset scope):
+  Rule calls must not isolate every working variable: ordinary child mutations are intentionally caller-visible.
+  The portable boundary is the first explicit aggregate reset in a rule invocation. Julia now snapshots all typed
+  representations of that name, restores them on exit, and applies the seam to array/hash `set(...)` plus explicit
+  split replacement. User functions skip tracking because their established path already swaps whole stores. This
+  narrow model fixes nested and top-LX recursion without weakening shared working-state semantics.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.2.2 — diagnostic output helpers):
   Diagnostic helpers are side-effect statements, not parser values. Julia evaluates arguments normally, then
   routes human-facing output through its existing low-level trace sink and returns `nothing`; default untraced

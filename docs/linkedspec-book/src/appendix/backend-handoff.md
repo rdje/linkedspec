@@ -335,8 +335,9 @@ shipped-spec/parser-smoke window at 10/31. `.6.2.4.1` adds the complete direct a
 three hlink delimiter cases, and routes EBNF logging to structural output. `.6.2.4.2.1` adds eager logical helpers,
 closes three portmap cases plus tablegrep. `.6.2.4.2.3` centralizes helper regex flags and closes portmap constant.
 `.6.2.4.2.2` adds trace-routed, parse-result-neutral diagnostic output and advances simenv/history beyond
-unsupported `print`. Full tests pass with 780 assertions, status is `runtime-corpus-diagnostic-output`, the window
-remains 18/31, and `.6.2.4.3` is active.
+unsupported `print`. `.6.2.4.3` scopes explicit aggregate resets per recursive rule invocation and closes all
+three recursive top-rule cases. Full tests pass with 785 assertions, status is
+`runtime-corpus-recursive-rule-scope`, the window is 21/31, and `.6.2.4.4` is active.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -696,7 +697,14 @@ configured low-level trace sink, returns no parse value, and remains quiet when 
 `simenv_multiline_value` now reaches unsupported `exit_now`, and `ds_vhistory_version_entry` reaches the known
 leading-trivia output mismatch. The permanent regression rejects renewed unsupported-`print` failures. The full
 window remains 18/31, full tests pass with 780 assertions, status is `runtime-corpus-diagnostic-output`, and
-`.6.2.4.3` is active.
+`.6.2.4.3` is next.
+
+Recursive rule calls now carry a first-reset binding snapshot for explicit `set(array(...), ...)`,
+`set(hash(...), ...)`, and explicit split-target replacement. Child exit restores the caller's prior typed binding,
+while ordinary undeclared `push(...)`/append mutations remain caller-visible; registered user functions retain
+their separate whole-store isolation. This closes the body-recursive, nested top-LX, and top-LX sequence fixtures.
+The full window is 21/31, full tests pass with 785 assertions, status is
+`runtime-corpus-recursive-rule-scope`, and `.6.2.4.4` is active.
 
 ### Dart Backend Commands
 

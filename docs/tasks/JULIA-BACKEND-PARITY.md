@@ -584,15 +584,21 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.2.4.2.3 - normalize Julia helper regex flags`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.3`
-  Status: `active`
+  Status: `done`
   Goal: Close recursive top-rule lifecycle and accumulator outputs.
   Acceptance: All three recursive top-rule fixtures match checked-in Perl/Rust outputs, with caller/child local
     state and LX result composition proven by focused Julia tests.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - Each rule invocation now owns a first-write snapshot map for explicit aggregate resets.
+    `set(array(name), ...)`, `set(hash(name), ...)`, and explicit split-target replacement restore the caller's
+    prior scalar/array/hash binding on rule exit, while ordinary undeclared child mutations remain caller-visible;
+    user functions stay outside this tracker because they already swap complete stores. Focused array/hash reset
+    and shared-mutation assertions plus three permanent recursive corpus assertions bring full `Pkg.test()` to
+    785. All three recursive fixtures pass, the complete shipped window moves from 18/31 to 21/31, status is
+    `runtime-corpus-recursive-rule-scope`, and `.6.2.4.4` becomes active.
+  Commit: `JULIA-BACKEND-PARITY.6.2.4.3 - scope Julia recursive rule resets`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.4`
-  Status: `pending`
+  Status: `active`
   Goal: Close EBNF and spec.spec structural output mismatches.
   Acceptance: Both EBNF fixtures and the four spec.spec smoke fixtures preserve their expected structural records,
     or independent parser/runtime mechanisms are split again before implementation. `ebnf_logging_annotation`
@@ -689,7 +695,38 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 13 | `JULIA-BACKEND-PARITY.6.2.4.2.1` | `done` | Eager logical helpers close four cases and isolate one helper-regex flag residual. |
 | 14 | `JULIA-BACKEND-PARITY.6.2.4.2.3` | `done` | Shared helper regex compilation closes portmap constant while preserving invalid-flag failure. |
 | 15 | `JULIA-BACKEND-PARITY.6.2.4.2.2` | `done` | Diagnostic output is trace-routed and parse-result neutral; both corpus cases advance to successor-owned mechanisms. |
-| 16 | `JULIA-BACKEND-PARITY.6.2.4.3` | `active` | Close recursive top-rule lifecycle and accumulator outputs. |
+| 16 | `JULIA-BACKEND-PARITY.6.2.4.3` | `done` | Rule-local aggregate reset snapshots close all three recursive top-rule fixtures. |
+| 17 | `JULIA-BACKEND-PARITY.6.2.4.4` | `active` | Close EBNF and spec.spec structural output mismatches. |
+
+## `JULIA-BACKEND-PARITY.6.2.4.3` Recursive Rule Scope Result
+
+Recursive-rule evidence recorded on 2026-07-10:
+
+- Julia trace showed every recursive `sexpr` frame executing its `I` reset against one shared `items` store. The
+  deepest frame therefore overwrote the parent's accumulator, producing `b`-rooted and duplicated LX outputs.
+- Each rule invocation now pushes an empty binding-snapshot map. The first explicit array/hash reset captures all
+  existing scalar/array/hash representations for that name; rule exit removes the local value and restores the
+  captured caller binding. Explicit split-target replacement spends the same reset seam.
+- Ordinary `push(...)`/append mutation without an explicit reset does not create a snapshot and remains
+  caller-visible. Registered user functions suppress rule-local tracking because their established execution path
+  swaps and restores the complete typed stores independently.
+- Focused runtime tests lock nested array/hash reset restoration and undeclared child mutation visibility. The
+  three recursive top-rule corpus fixtures pass unchanged, the full window moves from 18/31 to 21/31, full
+  `Pkg.test()` passes with 785 assertions, and status is `runtime-corpus-recursive-rule-scope`.
+
+## `JULIA-BACKEND-PARITY.6.2.4.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — All three recursive fixtures executed but leaked the deepest `items` accumulator
+  into caller frames, corrupting body-recursive and top-LX values.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Julia scoped match registers per `_execute_runtime_rule!` call but shared
+  typed stores globally; `_call_runtime_set!` overwrote array/hash bindings without a per-rule snapshot.
+- [x] **FIX** — Added first-reset rule-local binding snapshots/restoration for explicit array/hash replacement,
+  with ordinary mutations shared and user-function store isolation preserved.
+- [x] **ADDRESSED (verified)** — Focused trace/mechanism tests pass and all three checked-in recursive fixtures are
+  exact oracle matches.
+- [x] **NO REGRESSION** — Full `Pkg.test()` passes with 785 assertions; shipped smoke is 21/31 with no new failure.
+- [x] **LOCKSTEP** — Julia README, task/index/roadmaps, runtime-scope mdBook handoff, Knowledge Map,
+  architecture/live docs, package status, and `MEMORY.md` advance to `.6.2.4.4`.
 
 ## `JULIA-BACKEND-PARITY.6.2.4.2.2` Diagnostic Output Result
 
@@ -2103,6 +2140,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.2.1` | Focused eager logical-helper runtime proof; portmap/tablegrep focused corpus run; direct compiled-regex capture probe; traced portmap constant run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Eager `and`/`or`/`not` closes four corpus cases and advances portmap constant to a no-op helper-regex flag residual under `.6.2.4.2.3`; shipped smoke is 17/31, full tests pass with 772 assertions, status is `runtime-corpus-logical-helpers`. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.2.3` | Focused helper regex `igo`/split `go`/invalid `q` tests; focused portmap constant run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Strict shared helper-regex flag normalization closes portmap constant, shipped smoke is 18/31, full tests pass with 772 assertions, status is `runtime-corpus-helper-regex-flags`, and `.6.2.4.2.2` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.2.2` | Focused diagnostic-output runtime proof; focused simenv/history corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Trace-routed `print`/`print_each`/`say` preserve parser output and advance both corpus cases past unsupported `print`; exact successor failures are locked, shipped smoke remains 18/31, full tests pass with 780 assertions, status is `runtime-corpus-diagnostic-output`, and `.6.2.4.3` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.3` | Julia debug trace on recursive nested fixture; focused rule-local array/hash reset and shared-mutation tests; three-case recursive corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. First-reset rule-local snapshots preserve caller stores while ordinary child mutations remain visible; all three recursive fixtures pass, shipped smoke is 21/31, full tests pass with 785 assertions, status is `runtime-corpus-recursive-rule-scope`, and `.6.2.4.4` becomes active. |
 
 ## Commit Log
 
@@ -2148,13 +2186,18 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.6.2.4.2.1` | `JULIA-BACKEND-PARITY.6.2.4.2.1 - add Julia logical helpers` | Eager boolean composition closes four corpus cases and splits portmap constant's helper-regex `o` flag residual to `.6.2.4.2.3`. |
 | `JULIA-BACKEND-PARITY.6.2.4.2.3` | `JULIA-BACKEND-PARITY.6.2.4.2.3 - normalize Julia helper regex flags` | Shared strict helper regex flag normalization closes portmap constant and advances diagnostic-output helpers to `.6.2.4.2.2`. |
 | `JULIA-BACKEND-PARITY.6.2.4.2.2` | `JULIA-BACKEND-PARITY.6.2.4.2.2 - add Julia diagnostic output helpers` | Trace-routed, parse-result-neutral diagnostic output advances both routed fixtures to successor-owned mechanisms; recursive top-rule parity advances to `.6.2.4.3`. |
+| `JULIA-BACKEND-PARITY.6.2.4.3` | `JULIA-BACKEND-PARITY.6.2.4.3 - scope Julia recursive rule resets` | Rule-local explicit aggregate reset snapshots close all three recursive top-rule fixtures; structural outputs advance to `.6.2.4.4`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.2.4.3` recursive rule scope. Explicit array/hash resets now snapshot and restore the
+  caller binding per rule invocation, while ordinary undeclared child mutations remain visible and user functions
+  retain independent whole-store isolation. All three recursive fixtures pass; full tests pass with 785 assertions,
+  shipped smoke moves to 21/31, status is `runtime-corpus-recursive-rule-scope`, and `.6.2.4.4` is active.
 - `2026-07-10`: Completed `.6.2.4.2.2` diagnostic output. Eager `print`/`say` concatenation and `print_each` array
   walking emit through Julia's low-level trace sink and remain parse-result neutral. Simenv advances to unsupported
   `exit_now`; history advances to its leading-trivia output mismatch. Full tests pass with 780 assertions, shipped
-  smoke remains 18/31, status is `runtime-corpus-diagnostic-output`, `.6.2.4.2` closes, and `.6.2.4.3` is active.
+  smoke remains 18/31, status is `runtime-corpus-diagnostic-output`, `.6.2.4.2` closes, and `.6.2.4.3` is next.
 - `2026-07-10`: Completed `.6.2.4.2.3` helper regex flags. Shared `matches`/regex-`split` compilation preserves
   `imsx`, ignores runtime-only `g` and Perl no-op `o`, and rejects unknown flags. Portmap constant passes, full tests
   remain 772, shipped smoke is 18/31, status is `runtime-corpus-helper-regex-flags`, and `.6.2.4.2.2` is next.

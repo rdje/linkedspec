@@ -90,6 +90,15 @@ function LinkedSpecRuntimeEngine(
     )
 end
 
+struct _RuntimeRuleLocalBinding
+    variable_present::Bool
+    variable::Any
+    array_present::Bool
+    array::Any
+    hash_present::Bool
+    hash::Any
+end
+
 mutable struct _RuntimeExecutionContext
     input::String
     cursor_codeunit::Int
@@ -100,6 +109,7 @@ mutable struct _RuntimeExecutionContext
     hashes::Dict{String,Dict{String,Any}}
     cursor_stack::Vector{Int}
     active_rule_entries::Set{Tuple{String,Int,Int}}
+    rule_local_binding_scopes::Vector{Dict{String,_RuntimeRuleLocalBinding}}
     active_user_functions::Vector{String}
     user_function_body_cache::Dict{Int,ActionBlock}
     lifecycle_events::Vector{RuntimeLifecycleEvent}
@@ -123,6 +133,7 @@ function _RuntimeExecutionContext(
         Dict{String,Dict{String,Any}}(),
         Int[],
         Set{Tuple{String,Int,Int}}(),
+        Dict{String,_RuntimeRuleLocalBinding}[],
         String[],
         Dict{Int,ActionBlock}(),
         RuntimeLifecycleEvent[],
@@ -375,6 +386,7 @@ function _execute_runtime_rule!(
     end
 
     push!(context.active_rule_entries, recursion_key)
+    push!(context.rule_local_binding_scopes, Dict{String,_RuntimeRuleLocalBinding}())
     saved_registers = context.registers
     context.registers = enter_child(saved_registers)
     trace_scope = _enter_runtime_trace_scope!(
@@ -422,6 +434,7 @@ function _execute_runtime_rule!(
             trace_scope,
             "rule=$label cursor=$(context.cursor_codeunit)",
         )
+        _restore_runtime_rule_local_bindings!(context)
         context.registers = saved_registers
         delete!(context.active_rule_entries, recursion_key)
     end
@@ -2434,6 +2447,47 @@ function _exit_runtime_scoped_binding!(context, binding::_RuntimeScopedBinding)
     return nothing
 end
 
+function _record_runtime_rule_local_binding!(context, name::String)
+    if !isempty(context.active_user_functions) || isempty(context.rule_local_binding_scopes)
+        return nothing
+    end
+    scope = last(context.rule_local_binding_scopes)
+    if haskey(scope, name)
+        return nothing
+    end
+    scope[name] = _RuntimeRuleLocalBinding(
+        haskey(context.variables, name),
+        _runtime_copy(get(context.variables, name, nothing)),
+        haskey(context.arrays, name),
+        _runtime_copy(get(context.arrays, name, nothing)),
+        haskey(context.hashes, name),
+        _runtime_copy(get(context.hashes, name, nothing)),
+    )
+    return nothing
+end
+
+function _restore_runtime_rule_local_bindings!(context)
+    if isempty(context.rule_local_binding_scopes)
+        return nothing
+    end
+    scope = pop!(context.rule_local_binding_scopes)
+    for (name, binding) in scope
+        delete!(context.variables, name)
+        delete!(context.arrays, name)
+        delete!(context.hashes, name)
+        if binding.variable_present
+            context.variables[name] = _runtime_copy(binding.variable)
+        end
+        if binding.array_present
+            context.arrays[name] = _runtime_as_array(binding.array)
+        end
+        if binding.hash_present
+            context.hashes[name] = _runtime_as_hash(binding.hash)
+        end
+    end
+    return nothing
+end
+
 function _call_runtime_set!(engine, args, context, rule_label, current_edge)
     if length(args) < 2
         return nothing
@@ -2447,6 +2501,7 @@ function _call_runtime_set!(engine, args, context, rule_label, current_edge)
     ))
     array_target = _runtime_array_target_name(args[1])
     if array_target !== nothing
+        _record_runtime_rule_local_binding!(context, array_target)
         delete!(context.variables, array_target)
         delete!(context.hashes, array_target)
         context.arrays[array_target] = _runtime_as_array(value)
@@ -2454,6 +2509,7 @@ function _call_runtime_set!(engine, args, context, rule_label, current_edge)
     end
     hash_target = _runtime_hash_target_name(args[1])
     if hash_target !== nothing
+        _record_runtime_rule_local_binding!(context, hash_target)
         delete!(context.variables, hash_target)
         delete!(context.arrays, hash_target)
         context.hashes[hash_target] = _runtime_as_hash(value)
@@ -3313,6 +3369,7 @@ function _call_runtime_split_from_expressions!(engine, args, context, rule_label
             current_edge,
         ) : ""
         parts = _call_runtime_split(Any[source, delimiter])
+        _record_runtime_rule_local_binding!(context, target)
         delete!(context.variables, target)
         delete!(context.hashes, target)
         context.arrays[target] = _runtime_as_array(parts)

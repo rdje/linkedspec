@@ -346,7 +346,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-corpus-diagnostic-output"
+    @test status.parity == "runtime-corpus-recursive-rule-scope"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -358,7 +358,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-corpus-diagnostic-output", String(take!(status_output)))
+    @test occursin("parity: runtime-corpus-recursive-rule-scope", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -1281,6 +1281,55 @@ Loop::OR
     @test !recursion_result.matched
     @test recursion_result.value === nothing
     @test recursion_result.cursor_codeunit == 0
+
+    rule_local_resets = runtime_engine(raw"""
+Top::
+ I {
+   set(array(items), ["outer"])
+   set(hash(meta), { "scope" : "outer" })
+ }
+ -> Child {
+   inner = call(Child)
+   return(hash(
+     "inner", inner,
+     "outer_items", copy(array(items)),
+     "outer_meta", copy(hash(meta))
+   ))
+ }
+
+Child:
+ /x/
+ I {
+   set(array(items), ["inner"])
+   set(hash(meta), { "scope" : "inner" })
+   return(hash("items", copy(array(items)), "meta", copy(hash(meta))))
+ }
+""")
+    @test runtime_parse(rule_local_resets, "x").value == Dict{String,Any}(
+        "inner" => Dict{String,Any}(
+            "items" => Any["inner"],
+            "meta" => Dict{String,Any}("scope" => "inner"),
+        ),
+        "outer_items" => Any["outer"],
+        "outer_meta" => Dict{String,Any}("scope" => "outer"),
+    )
+
+    shared_mutation = runtime_engine(raw"""
+Top::
+ I { set(array(items), []) }
+ -> Child {
+   call(Child)
+   return(copy(array(items)))
+ }
+
+Child:
+ /x/
+ I {
+   push(array(items), "child")
+   return("done")
+ }
+""")
+    @test runtime_parse(shared_mutation, "x").value == Any["child"]
 
     below_minimum = runtime_engine(raw"""
 Top::OR{2}
@@ -3525,6 +3574,23 @@ end
     @test !corpus_fixture_passed(history)
     @test occursin("output mismatch", history.failure)
     @test !occursin("unsupported runtime helper 'print'", history.failure)
+end
+
+@testset "Shipped recursive top-rule corpus batch" begin
+    passing_names = [
+        "top_rule_body_recursion_sexpr",
+        "top_rule_lx_recursion_nested",
+        "top_rule_lx_recursion_sequence",
+    ]
+    execution = execute_corpus_fixtures(CORPUS_ROOT; case_names = passing_names)
+    failures = [
+        "$(result.name): $(result.failure)"
+        for result in execution.results if !corpus_fixture_passed(result)
+    ]
+
+    @test [result.name for result in execution.results] == passing_names
+    @test corpus_passed_count(execution) == 3
+    @test isempty(failures)
 end
 
 @testset "Spec AST JSON contract" begin

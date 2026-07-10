@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.3 — scope Julia recursive rule resets
+
+**Scope:** Julia per-rule aggregate reset scoping, focused caller/child store tests, recursive top-rule corpus
+closeout, package status, lockstep docs, mdBook, Knowledge Map, and resume pointer.
+
+**Change:** Added a first-reset binding-snapshot map to each runtime rule invocation. Explicit array/hash `set(...)`
+and explicit split-target replacement now restore the caller's prior scalar/array/hash binding on rule exit.
+Ordinary undeclared child mutations remain caller-visible, and registered user functions retain independent
+whole-store isolation.
+
+**Validation:** Focused Julia trace showed the shared `items` overwrite before the fix. Array/hash restoration and
+shared-mutation tests pass; all three recursive top-rule corpus fixtures pass unchanged. The full shipped window
+moves from 18/31 to 21/31; full `Pkg.test()` passes with 785 assertions and status
+`runtime-corpus-recursive-rule-scope`. CLI, mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates
+pass.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.2.2 — add Julia diagnostic output helpers
 
 **Scope:** Julia `print`/`print_each`/`say` runtime execution, focused diagnostic-sink coverage, permanent shipped-
