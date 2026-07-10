@@ -23,8 +23,8 @@ option names and meanings, positional arguments, output/error behavior, and exit
 For the original Dart lane, the directive is recorded as
 `DART-BACKEND-PARITY.7.3`, and its backend-local implementation was closed by
 `DART-BACKEND-PARITY.7.4`. `dart/bin/linkedspec_dart.dart` owns the
-Dart-specific executable name, help text, corpus invocation path, docs, and smoke tests. A later audit shows that
-this corpus-oriented interface is not yet the required cross-variant parser interface.
+Dart-specific executable name; global `.1.5.3.4` has since replaced the historical corpus interface and closed
+the exact shared parser command at recurring 61/61 default/POSIX. Corpus work remains in `bin/corpus_runner.dart`.
 
 The future-backlog tree carries the cross-variant rule. `JULIA-BACKEND-PARITY`
 now includes the requirement directly: `.1.1` must define the Julia-specific CLI
@@ -34,4 +34,5 @@ same ownership when that lane activates. Do not treat a single ambiguous shared
 different products.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[cross-backend-cli-contract-gap]], [[dart-runtime-hash-helpers]], [[trace-cross-variant-capability-contract]],
-[[rust-source-emitter-lane-split]], [[dart-specific-cli]], [[julia-backend-interpreter-first-plan]].
+[[rust-source-emitter-lane-split]], [[dart-specific-cli]], [[dart-primary-cli-closeout]],
+[[julia-backend-interpreter-first-plan]].

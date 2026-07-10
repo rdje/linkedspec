@@ -22,8 +22,8 @@ dart run bin/linkedspec_dart.dart --help
 ```
 
 It exposes the exact shared parser-oriented options and rejects corpus subcommands.
-`.1.5.3.3` now composes native direct execution/canonical JSON plus the independent
-canonical trace protocol and passes all 61 unchanged cases in default/POSIX environments.
+`.1.5.3.4` closes native direct execution/canonical JSON plus the independent
+canonical trace protocol at recurring 61/61 default/POSIX.
 
 `dart/bin/corpus_runner.dart` is the separate corpus-focused command. It retains
 `--corpus`, `--execute`, `--case`, `--offset`, and `--limit`; without a selector,
@@ -35,4 +35,4 @@ The earlier `DART-BACKEND-PARITY.7.4` corpus-primary arrangement is historical;
 Related facts: [[variant-specific-cli-requirement]], [[dart-controlled-corpus-execution]],
 [[dart-scoped-parity-milestone-complete]], [[dart-primary-cli-mechanism-audit]],
 [[dart-primary-cli-boundary]], [[dart-primary-cli-native-execution-canonical-json]],
-[[dart-canonical-primary-cli-trace]].
+[[dart-canonical-primary-cli-trace]], [[dart-primary-cli-closeout]].

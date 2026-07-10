@@ -1032,8 +1032,9 @@ Run the focused Dart gate from the repository root:
 bash tools/run_dart_local.sh
 ```
 
-That command runs Dart formatting, analyzer checks, the full Dart test suite,
-shared Dart primary-CLI help checks, a bounded corpus-runner smoke, and full 99-fixture corpus execution. To include Dart in
+That command runs Dart formatting, analyzer checks, all 151 Dart tests,
+shared Dart primary-CLI help, a bounded corpus-runner smoke, 61/61 default, 61/61 POSIX, and full 99-fixture corpus
+execution. To include Dart in
 the canonical local gate on a machine with a Dart SDK, opt in explicitly:
 
 ```bash
@@ -1060,8 +1061,8 @@ default and POSIX environments while preserving `bin/corpus_runner.dart`. The ne
 non-abbreviating, positional-free, strict UTF-8, deterministic for named/file/inline source resolution, and
 compile-before-input phase ordered. `.1.5.3.2` now composes the existing staged parser, validator/compiler,
 direct-value runtime, top-rule/global-mode controls, and recursively canonical JSON. `.1.5.3.3` adds the portable
-CLI trace independently of rich Dart tracing and reaches 61/61 in both environments; `.4` closes recurring
-verification and final no-drift.
+CLI trace independently of rich Dart tracing and reaches 61/61 in both environments; `.1.5.3.4` makes both legs
+recurring, proves the broader gate, and closes the Dart primary-command parent.
 
 Dart
 also has source-level AST/data types and staged parse-job sidecars that round-trip

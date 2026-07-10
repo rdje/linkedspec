@@ -26,7 +26,9 @@ failure maps to the stable compilation failure without exposing Dart exceptions;
 stdout remain available exactly as in the shared contract.
 
 Ambient/native Dart trace configuration cannot enable this protocol, and primary CLI options do not configure the
-native trace emitter. The unchanged suite passes 61/61 under default and `POSIXLY_CORRECT=1` environments.
+native trace emitter. The unchanged suite passes 61/61 under default and `POSIXLY_CORRECT=1` environments;
+`.1.5.3.4` makes both legs recurring in the focused Dart gate.
 
 Related facts: [[canonical-primary-cli-trace-protocol]], [[dart-trace-controls-sinks]],
-[[dart-primary-cli-native-execution-canonical-json]], [[user-observable-backend-cli-parity-contract]].
+[[dart-primary-cli-native-execution-canonical-json]], [[user-observable-backend-cli-parity-contract]],
+[[dart-primary-cli-closeout]].

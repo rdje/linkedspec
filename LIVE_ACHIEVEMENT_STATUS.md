@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.3.4 — close Dart primary CLI**
+  (DONE — Dart parent closed; global four-backend identity `.1.5.4` active).
+
+  **Recurring gate:** `tools/run_dart_local.sh` passes format/analyzer, 151 tests, 61/61 default, 61/61 POSIX, and
+  99/99 corpus. The broader gate passes doctrines/focused suites, both Perl legs, and Phase 0 `1..1028` in 527s.
+
+  **Closeout:** Help/fixtures are unchanged; task/roadmap/live docs, README, mdBook, Knowledge Map, whitespace, and
+  generated-artifact cleanup agree. Dart exact CLI is closed without claiming full capability/codegen parity.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.3.3 — add canonical Dart CLI trace**
   (DONE — Dart reaches 61/61 default/POSIX; `.1.5.3.4` active for recurring gate/no-drift).
 

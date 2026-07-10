@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.3.4 — backend completion needs a recurring exact gate):
+  A manual 61/61 result is not the closeout boundary. The focused backend gate must own both option environments,
+  native package tests, and its independent corpus runner so future Dart changes cannot silently regress either
+  interface. Keep this gate optional in the toolchain-independent core CI, but make its opt-in path one command.
+  Close the backend parent only after public/task/live/KM surfaces and the broader core gate agree.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.3.3 — portable trace remains an adapter protocol in Dart too):
   Do not route rich `LinkedSpecTraceEmitter` events through the byte-identical primary command. Project only the
   deterministic compile/input/invoke protocol, count UTF-8 bytes after encoding, escape fields bytewise, and keep

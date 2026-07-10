@@ -32,9 +32,9 @@ interpreter path. Generated Dart source is not required for that scoped corpus
 claim; `DART-BACKEND-PARITY.7.2` defers it to a future split source-emitter lane.
 The backend-local corpus CLI closed under `.7.4`, and `.7.5` closed the scoped Dart
 tree. ADR `0023` made the exact parser CLI and public codegen/capability surface
-global completion obligations under `.1.5`, `.1.6`, and `.3`; `.1.5.3.3` now
-passes all 61 primary cases while recurring-gate/no-drift `.4` remains.
+global completion obligations under `.1.5`, `.1.6`, and `.3`; `.1.5.3.4` now
+closes recurring 61/61 primary verification while global identity/capability/codegen remain.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[dart-local-verification-gate]], [[dart-controlled-corpus-execution]],
 [[dart-backend-interpreter-first-plan]], [[dart-generated-source-deferred]], [[dart-specific-cli]],
-[[dart-scoped-parity-milestone-complete]], [[dart-primary-cli-boundary]].
+[[dart-scoped-parity-milestone-complete]], [[dart-primary-cli-boundary]], [[dart-primary-cli-closeout]].

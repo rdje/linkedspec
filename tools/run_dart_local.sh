@@ -32,6 +32,24 @@ log "checking Dart CLIs"
 "$DART_CMD" run bin/corpus_runner.dart --help >/dev/null
 "$DART_CMD" run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 1 >/dev/null
 
+log "running shared primary CLI contract (default environment)"
+(
+ cd "$REPO_ROOT"
+ env -u POSIXLY_CORRECT PERL5LIB= perl tools/run_cli_conformance.pl \
+  --display-command 'dart run bin/linkedspec_dart.dart' -- \
+  "$DART_CMD" --packages={{REPO_ROOT}}/dart/.dart_tool/package_config.json \
+  '{{REPO_ROOT}}/dart/bin/linkedspec_dart.dart'
+)
+
+log "running shared primary CLI contract (POSIX environment)"
+(
+ cd "$REPO_ROOT"
+ env POSIXLY_CORRECT=1 PERL5LIB= perl tools/run_cli_conformance.pl \
+  --display-command 'dart run bin/linkedspec_dart.dart' -- \
+  "$DART_CMD" --packages={{REPO_ROOT}}/dart/.dart_tool/package_config.json \
+  '{{REPO_ROOT}}/dart/bin/linkedspec_dart.dart'
+)
+
 log "running full Dart corpus gate"
 "$DART_CMD" run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute
 

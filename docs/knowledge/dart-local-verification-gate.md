@@ -10,7 +10,7 @@ answers:
 date: 2026-07-09
 status: current
 tags: [dart, ci, verification, corpus, DART-BACKEND-PARITY]
-evidence: "tools/run_dart_local.sh runs Dart format, analyzer, 147 tests, shared primary help, a bounded separate corpus-runner smoke, and full 99/99 corpus execution. tools/run_ci_local.sh remains core-only by default and opts into Dart with LINKEDSPEC_RUN_DART=1."
+evidence: "FUTURE-PARITY-BACKLOG.1.5.3.4 makes tools/run_dart_local.sh run format, analyzer, 151 tests, primary help, bounded corpus smoke, 61/61 default, 61/61 POSIX, and 99/99 corpus."
 reverify: "rg -n 'LINKEDSPEC_RUN_DART|run_dart_local' tools/run_ci_local.sh tools/run_dart_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md && bash tools/run_dart_local.sh"
 ---
 
@@ -22,8 +22,8 @@ bash tools/run_dart_local.sh
 
 The script runs `dart format --set-exit-if-changed .`, `dart analyze
 --fatal-infos --fatal-warnings`, `dart test`, shared primary-CLI help, a bounded
-`bin/corpus_runner.dart` smoke, and the full checked-in 99-fixture corpus
-execution.
+`bin/corpus_runner.dart` smoke, both 61-case primary environments, and the full
+checked-in 99-fixture corpus execution.
 
 The canonical local CI gate remains Perl/core-only unless explicitly opted in:
 
@@ -36,4 +36,4 @@ on machines without Dart installed, while Dart-capable checkouts have a single
 opt-in command that includes the green Dart corpus gate.
 
 Related facts: [[dart-controlled-corpus-execution]], [[dart-primary-cli-boundary]],
-[[dart-backend-scaffold-package]], [[phase0-regression-structure]].
+[[dart-backend-scaffold-package]], [[phase0-regression-structure]], [[dart-primary-cli-closeout]].

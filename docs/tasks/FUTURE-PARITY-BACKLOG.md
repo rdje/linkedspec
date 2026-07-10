@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`.1.5.3.3` closes Dart trace at 61/61; `.1.5.3.4` active; `.11.1` parked).
+- Last updated: `2026-07-10` (`.1.5.3` closes Dart at 61/61 recurring; `.1.5.4` active; `.11.1` parked).
 - Owner: repo-local workflow
 
 ## Goal
@@ -398,13 +398,16 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.5.2.4 - close Rust primary CLI`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.3`
-  Status: `active`
+  Status: `done`
   Goal: Replace Dart's primary corpus command with the shared parser CLI contract.
   Children: `.1.5.3.0`, `.1.5.3.1`, `.1.5.3.2`, `.1.5.3.3`, `.1.5.3.4`
   Acceptance: Dart's primary executable passes the same fixtures; corpus execution remains a separate developer
     runner and owns no primary-CLI-only semantics.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-10.** Children `.0`-`.4` replace only the primary process boundary, correct the
+    reusable no-function staged seam, compose native direct execution/canonical JSON, add independent canonical
+    trace, and wire recurring verification. Dart passes all 61 unchanged cases default/POSIX while the separate
+    corpus runner remains 99/99 green.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.3.4 - close Dart primary CLI`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.3.0`
   Status: `done`
@@ -464,16 +467,20 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.5.3.3 - add canonical Dart CLI trace`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.3.4`
-  Status: `active`
+  Status: `done`
   Goal: Close Dart primary-command conformance and recurring focused verification.
   Acceptance: Dart passes all 61 unchanged cases in default and POSIX environments; the Dart local gate preserves
     the separate full 99-fixture corpus runner; focused/full checks pass; task/roadmap/live docs, mdBook, Knowledge
     Map, help, and artifact cleanup agree before global CLI identity `.1.5.4`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-10.** `tools/run_dart_local.sh` now runs format, analyzer, all 151 Dart tests,
+    primary help, bounded corpus smoke, all 61 unchanged cases in default and POSIX environments, and the full
+    99/99 corpus. The focused gate passes end to end. The broader core gate passes doctrines/syntax, 22 ActionIR,
+    nine runner/trace checks, both Perl 61-case legs, and Phase 0 `1..1028` in 527 seconds. Task/roadmap/live docs,
+    README, mdBook, Knowledge Map, help, whitespace, and generated-artifact cleanup agree.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.3.4 - close Dart primary CLI`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.4`
-  Status: `pending`
+  Status: `active`
   Goal: Close current Perl/Rust/Dart/Julia CLI parity and make the conformance matrix a recurring gate.
   Acceptance: One driver runs identical fixtures against all four implemented primary commands and proves
     normalized stdout, stderr, and exit-code identity after substituting only the executable token.
@@ -693,8 +700,8 @@ before implementation.
 | 18 | `FUTURE-PARITY-BACKLOG.1.5.3.1` | `done` | Exact arguments/help/loading plus staged no-function repair pass the 29-case boundary subset. |
 | 19 | `FUTURE-PARITY-BACKLOG.1.5.3.2` | `done` | Native direct execution/canonical JSON close all results at 41/61. |
 | 20 | `FUTURE-PARITY-BACKLOG.1.5.3.3` | `done` | Independent canonical trace closes all 20 residuals at 61/61. |
-| 21 | `FUTURE-PARITY-BACKLOG.1.5.3.4` | `active` | Close recurring verification and final no-drift. |
-| 22 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
+| 21 | `FUTURE-PARITY-BACKLOG.1.5.3.4` | `done` | Recurring 151-test/61x2/99 gate and broader no-drift close Dart. |
+| 22 | `FUTURE-PARITY-BACKLOG.1.5.4` | `active` | Make four-backend CLI identity a recurring gate. |
 | 23 | `FUTURE-PARITY-BACKLOG.1.6` | `pending` | Census every documented/exported user capability and split all residual parity gaps. |
 | 24 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
 | 25 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
@@ -1072,6 +1079,21 @@ Read-only evidence recorded on 2026-07-10:
 - [x] **LOCKSTEP** — README, mdBook, Knowledge Map, task/roadmap/live docs identify Dart at 61/61 and advance only
   to recurring-gate/no-drift `.1.5.3.4`.
 
+## `FUTURE-PARITY-BACKLOG.1.5.3.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Dart passes 61/61 manually, but `tools/run_dart_local.sh` did not yet make either
+  default/POSIX shared leg recurring and the parent status still advertised active rollout work.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The focused gate retained only primary help plus corpus checks from the old
+  scoped milestone; global task/roadmap/book/KM/live status had not consumed `.1`-`.3` completion.
+- [x] **FIX** — Added both exact shared legs to the focused Dart gate and reconciled every live/public continuity
+  surface; closed `.1.5.3` without changing fixtures/help/runtime behavior.
+- [x] **ADDRESSED (verified)** — The focused gate passes 151 tests, 61/61 default, 61/61 POSIX, and 99/99 corpus;
+  shared help/manifest bytes remain unchanged.
+- [x] **NO REGRESSION** — The broader local gate passes doctrines/syntax, 22 ActionIR, nine runner/trace, both Perl
+  61-case legs, and Phase 0 `1..1028` in 527 seconds.
+- [x] **LOCKSTEP** — Task parents, task index, roadmaps, README, mdBook, Knowledge Map, and live docs close Dart and
+  advance only to global four-backend identity `.1.5.4`.
+
 ## Decisions
 
 - `2026-07-09`: Director directive schedules future backend parity as Dart first, then Julia,
@@ -1143,6 +1165,9 @@ Read-only evidence recorded on 2026-07-10:
 - `2026-07-10`: `.1.5.3.3` adds the ADR `0024` adapter trace independently of rich native Dart trace. Exact levels,
   records, UTF-8 counts, escaping, emoji, sinks, reset/append, persistence, and failure projection close all 20
   residuals; Dart reaches 61/61 default/POSIX and `.4` owns recurring verification/no-drift only.
+- `2026-07-10`: `.1.5.3.4` makes both 61-case environments part of the focused Dart gate alongside 151 tests and
+  99/99 corpus. The broader gate passes through Phase 0 `1..1028`; parent `.1.5.3` closes and global four-backend
+  identity `.1.5.4` becomes active without changing help, fixture, or runtime semantics.
 - `2026-07-10`: `.1.5.1.0` proves Perl's primary adapter is parser-oriented but not strict/deterministic enough to
   be the neutral executable reference. Fixture infrastructure, arguments, success/IO, failures, and trace/gate are
   separate leaves; `.1.5.1.1` became active there and has since closed the runner/help baseline. No behavior changed
@@ -1225,6 +1250,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.3.1` | Six boundary tests; staged ordinary-spec regression; analyzer; 147 Dart tests; 99/99 corpus; 29/29 selected shared cases default/POSIX; docs/KM/governance/mdBook/cleanup. | PASS. Exact Dart process/loading boundary landed; `.1.5.3.2` active. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.3.2` | Focused native result test; analyzer/full Dart suite; 99/99 corpus; 12/12 result/quiet cases default/POSIX; full 41/61 classification; docs/KM/governance/mdBook/cleanup. | PASS. Direct canonical results landed; exactly 20 trace residuals remain under `.1.5.3.3`. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.3.3` | Three focused trace tests; analyzer/full Dart suite; 99/99 corpus; 61/61 default/POSIX; docs/KM/governance/mdBook/cleanup. | PASS. Canonical Dart trace closes all residuals; `.1.5.3.4` active for recurring gate/no-drift. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.3.4` | `tools/run_dart_local.sh`: 151 tests, 61/61 default/POSIX, 99/99 corpus; broader local gate through Phase 0 `1..1028` in 527s; docs/KM/governance/mdBook/cleanup. | PASS. Dart parent closed; global `.1.5.4` active. |
 
 ## Commit Log
 
@@ -1259,6 +1285,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.5.3.1` | `FUTURE-PARITY-BACKLOG.1.5.3.1 - add Dart CLI boundary` | Exact arguments/help/resolution/UTF-8/phase bytes plus staged no-function correction; 29/61. |
 | `FUTURE-PARITY-BACKLOG.1.5.3.2` | `FUTURE-PARITY-BACKLOG.1.5.3.2 - add Dart primary execution` | Native entry/mode/direct value plus recursive canonical JSON; 41/61. |
 | `FUTURE-PARITY-BACKLOG.1.5.3.3` | `FUTURE-PARITY-BACKLOG.1.5.3.3 - add canonical Dart CLI trace` | Independent ADR 0024 levels/events/sinks/failures; 61/61. |
+| `FUTURE-PARITY-BACKLOG.1.5.3.4` | `FUTURE-PARITY-BACKLOG.1.5.3.4 - close Dart primary CLI` | Recurring 151-test/61x2/99 gate, broader no-drift, parent closeout. |
 
 ## Changelog
 
@@ -1274,6 +1301,8 @@ Read-only evidence recorded on 2026-07-10:
 - `2026-07-10`: `.1.5.3.3` implements the independent canonical phase trace and closes all 20 residuals. Focused
   sink/setup tests, full Dart/corpus gates, and the unchanged 61-case suite pass default/POSIX; `.4` is active for
   recurring integration and no-drift closeout.
+- `2026-07-10`: `.1.5.3.4` adds both shared environments to `tools/run_dart_local.sh`, proves the focused and
+  broader gates, closes parent `.1.5.3`, and activates four-backend identity `.1.5.4`. No behavior/fixture changes.
 - `2026-07-10`: `.1.5.2.4` adds the recurring Rust gate, proves 61/61 in default/POSIX environments plus the full
   runtime package and broader local gate through Phase 0 `1..1028`, closes parent `.1.5.2`, and activates Dart
   `.1.5.3`. Help and fixture bytes remain unchanged.

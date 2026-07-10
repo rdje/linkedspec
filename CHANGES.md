@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.3.4 — close Dart primary CLI
+
+**Recurring gate:** `tools/run_dart_local.sh` now executes the unchanged 61-case primary suite with
+`POSIXLY_CORRECT` unset and set, in addition to formatting, fatal analyzer checks, all 151 Dart tests, primary/corpus
+smokes, and the independent 99/99 corpus runner.
+
+**Closeout proof:** The focused Dart gate passes end to end. The broader local gate passes doctrines, syntax, 22
+ActionIR checks, nine runner/trace checks, both Perl 61-case legs, and Phase 0 `1..1028` in 527 seconds. Help and
+fixtures are unchanged; docs/KM/governance/book/whitespace and generated-artifact cleanup pass.
+
+**Frontier:** Parent `.1.5.3` closes. Global four-backend CLI identity `.1.5.4` is active; capability and generated-
+source convergence remain separate `.1.6`/`.3` obligations before Lua.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.3.3 — add canonical Dart CLI trace
 
 **Adapter trace:** Added ADR `0024`'s canonical compile/input/invoke projection independently of Dart's rich native

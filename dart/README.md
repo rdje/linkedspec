@@ -51,7 +51,8 @@ boundary through the native staged parser, validator/compiler, and `LinkedSpecRu
 global parse mode through native controls, and emits the direct result as recursively key-sorted compact UTF-8
 JSON. `.1.5.3.3` adds the independent canonical phase trace with exact levels, byte counts, escaping, emoji,
 stdout/route/mirror, reset/append, and failures. Dart now passes all 61 unchanged primary cases in default/POSIX;
-`.4` owns recurring-gate/no-drift closeout. The earlier
+`.1.5.3.4` makes both legs recurring in the focused gate alongside 151 tests and 99/99 corpus, and closes the Dart
+primary-command parent. The earlier
 `DART-BACKEND-PARITY.6.3` corpus-parity boundary remains green: the full
 checked-in 99-fixture manifest passes through Dart execute mode after the shipped-spec/parser-smoke window reached
 31/31 green and the routed top-level `fn` fixtures passed through the spec-defined shell. The package

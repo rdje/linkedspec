@@ -11,8 +11,8 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, parity, perl, rust, dart, julia, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.3.0 found no Rust binary. ADR 0023 defines the target. Perl is the 61-case reference; Rust .1.5.2.4 closes 61/61 default/POSIX; Dart .1.5.3 is active; Julia global fixture identity remains."
-reverify: "sed -n '1,230p' bin/linkedspec; sed -n '1,330p' dart/lib/src/cli/linkedspec_dart_cli.dart; sed -n '1,220p' julia/src/cli/LinkedSpecJuliaCli.jl; rg -n '\[\[bin\]\]|^name =|^members =' rust/Cargo.toml rust/*/Cargo.toml; find rust -type f -path '*/src/bin/*' -print"
+evidence: "ADR 0023 defines the target. Perl, Rust .1.5.2.4, and Dart .1.5.3.4 close 61/61 default/POSIX with recurring gates; Julia global fixture identity remains under active .1.5.4."
+reverify: "bash tools/run_dart_local.sh; sed -n '1,220p' julia/src/cli/LinkedSpecJuliaCli.jl; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.4|61/61' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/TASK_TREE.md ROADMAP_V2.md"
 ---
 
 The implemented backend CLI surfaces are not currently interface-equivalent:
@@ -22,8 +22,8 @@ The implemented backend CLI surfaces are not currently interface-equivalent:
   failure (`1`) from usage failure (`2`). `.1.5.1.5` closes canonical trace, and `.1.5.1.6` resolves the surfaced
   UTF-8 argv/JSON gap. Perl passes the complete 61-case default/POSIX reference; Rust `.1.5.2.4` closes the
   unchanged suite in both environments with exact direct execution, canonical trace, and recurring verification.
-- Dart `bin/linkedspec_dart.dart` is a manifest corpus validator/executor. Its options select corpus cases/windows,
-  and it reports usage failure as `64`.
+- Dart `bin/linkedspec_dart.dart` now passes the same 61 cases in both environments with native direct execution,
+  canonical JSON/trace, strict UTF-8, and a recurring gate. `bin/corpus_runner.dart` remains separate at 99/99.
 - Julia `bin/linkedspec_julia.jl` now accepts only the exact parser option contract, rejects subcommands/
   positionals as usage `2`, prepares deterministic named/file/inline source plus literal/file input, executes it
   through the native pipeline, emits recursively key-sorted direct JSON, and has stable local failure/trace
@@ -37,8 +37,8 @@ outputs/errors, and exit semantics. `JULIA-BACKEND-PARITY.7.3.0` therefore split
 repair, and honest no-drift work rather than treating 99/99 corpus execution as complete CLI parity.
 
 ADR `0023` has since ratified the exact interface. `FUTURE-PARITY-BACKLOG.1.5` owns the neutral fixtures and
-Perl/Rust/Dart/global repairs; `JULIA-BACKEND-PARITY.7.3.2` owns Julia's repair, now complete through exact local
-process conformance. `.7.3.3` closes the local audit without claiming global fixture identity.
+Perl/Rust/Dart repairs are closed; `JULIA-BACKEND-PARITY.7.3.2` owns Julia's local repair, complete through exact
+local process conformance. Global `.1.5.4` now owns unchanged fixture identity and one recurring four-command gate.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specific-cli-requirement]], [[native-in-memory-backend-contract]],
 [[language-agnostic-backend-vision]], [[dart-specific-cli]], [[julia-mdbook-usage-status]],
@@ -49,5 +49,5 @@ Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specif
 [[neutral-cli-fixture-runner]], [[perl-primary-cli-strict-arguments]],
 [[perl-primary-cli-success-conformance]], [[perl-primary-cli-operational-failures]],
 [[primary-cli-utf8-process-boundary-gap]], [[rust-canonical-primary-cli-trace]],
-[[rust-local-verification-gate]].
+[[rust-local-verification-gate]], [[dart-primary-cli-closeout]].
 Canonical trace: [[canonical-primary-cli-trace-protocol]].
