@@ -52,3 +52,4 @@ Julia execution/JSON detail: [[julia-primary-cli-native-execution-canonical-json
 Julia failure/trace detail: [[julia-primary-cli-failure-trace-routing]].
 Julia process proof: [[julia-primary-cli-process-conformance]].
 Julia local/root status: [[julia-scoped-parity-no-drift]].
+Perl reference audit: [[perl-primary-cli-conformance-audit]].

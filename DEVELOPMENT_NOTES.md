@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.0 — CLI exactness starts by pinning option-parser policy and channels):
+  A parser-oriented command is not a byte-testable reference merely because its happy path works. Ambient
+  `Getopt::Long` defaults can create undocumented case/abbreviation/negation aliases and make behavior depend on
+  `POSIXLY_CORRECT`; residual positionals need an explicit rejection, and library-generated option warnings need
+  one owned formatter. Likewise, a library's visible level-zero diagnostic events cannot leak onto primary-CLI
+  stdout during failure. Separate harness, argument, success, failure, and trace leaves so each observable channel
+  becomes deterministic before other backends consume the fixture contract.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.7.3.3 — close a local milestone without erasing global obligations):
   A no-drift closeout must audit adjacent limitation prose, not only status tables: the Julia handoff simultaneously
   claimed and denied the exact primary CLI because a `.7.3.2.1` sentence survived later implementation leaves.

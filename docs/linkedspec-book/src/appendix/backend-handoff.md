@@ -68,7 +68,8 @@ stdout. CLI-controlled stdout, stderr, diagnostic structure, and trace routing a
 the same language-neutral fixtures for every backend.
 
 This is a contract and active convergence target, not a claim that every current executable
-    already passes. The current gap census is: Perl is parser-oriented but still needs the neutral
+    already passes. The current gap census is: Perl is parser-oriented but direct audit found implicit option
+    aliases, ignored positionals, environment-dependent parsing, and failure trace on stdout before the neutral
     fixture lock; Rust has no primary binary; Dart remains corpus/status-oriented; Julia now accepts and executes
     the exact parser request shape with stable local failures, trace routing, and nine-family process proof, but
     still needs the global neutral fixture comparison. `FUTURE-PARITY-BACKLOG.1.5`
@@ -76,6 +77,8 @@ This is a contract and active convergence target, not a claim that every current
     function-shell/staged trace coverage, `.7.3.2.2` closes exact argument/source/input handling, `.7.3.2.3`
     closes execution/direct canonical JSON, `.7.3.2.4` closes errors/exits/trace routing, and `.7.3.2.5` closes
     nine-family direct-command conformance. `.7.3.3` closes the local audit without claiming global identity.
+    Global `.1.5.1.0` splits Perl normalization into harness/help, arguments, success/IO, failures, and trace/gate;
+    `.1.5.1.1` is the active neutral-fixture frontier.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics

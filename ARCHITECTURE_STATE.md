@@ -5,11 +5,17 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.0` audits and splits the neutral CLI/Perl reference lane.
+  The existing trace smoke passes, but direct processes prove ignored positionals, case/abbreviation/negated option
+  aliases, `POSIXLY_CORRECT`-dependent parsing, uncontrolled `Getopt::Long` warnings, and timestamped `DUMP_NONE`
+  failure records on stdout. Five ordered leaves own harness/help, arguments, success/IO, failures, and trace/gate;
+  `.1.5.1.1` is active and no behavior source changed.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.3` closes the local outer no-drift audit without closing the
   Julia parity tree. One mdBook limitation sentence inherited from `.7.3.2.1` incorrectly denied the exact primary
   CLI after later leaves implemented it; current surfaces now agree on `runtime-corpus-primary-cli`, 1,017 package
   assertions, nine process families, and 99/99. The Julia root remains active/delegated to global `.1.5` CLI
-  identity, `.1.6` capability census, and `.3` generated-source equivalence; `.1.5.1` is next PNT.
+  identity, `.1.6` capability census, and `.3` generated-source equivalence; `.1.5.1.0` has since split the next
+  neutral-fixture/Perl work.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.7.3.2.5` closes Julia-local primary CLI conformance. A standalone
   checker owns nine real-process help/success/usage/operational/route/mirror families with exact stdout/stderr/
   newline/file bytes and exit 0/1/2; the focused gate delegates to it, 1,017 package assertions, and 99/99 corpus.

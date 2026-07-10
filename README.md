@@ -150,7 +150,9 @@ Top-level directories and files:
     exit 1/2, and stdout/route/mirror/file/reset/emoji behavior. `.7.3.2.5` adds nine direct process families and
     advances the precise local status to `runtime-corpus-primary-cli` at 1,017 assertions plus 99/99. `.7.3.3`
     closes outer no-drift, but the Julia tree remains active/delegated—not complete—through global CLI identity,
-    capability census, and generated-source owners `.1.5`/`.1.6`/`.3`; `.1.5.1` is the next PNT leaf.
+    capability census, and generated-source owners `.1.5`/`.1.6`/`.3`. `.1.5.1.0` now splits the neutral fixture/
+    Perl reference work after direct probes found implicit option aliases, ignored positionals, environment-driven
+    parsing, and failure trace on stdout; `.1.5.1.1` is active for the reusable harness and help baseline.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.

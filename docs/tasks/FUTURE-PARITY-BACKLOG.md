@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (delegated Julia `.7.3.3` no-drift done; next PNT leaf is `.1.5.1`).
+- Last updated: `2026-07-10` (`.1.5.1.0` Perl/neutral-CLI audit split done; `.1.5.1.1` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -136,10 +136,69 @@ before implementation.
   Commit: `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.1`
-  Status: `pending`
+  Status: `active`
   Goal: Lock the language-neutral CLI fixtures and normalize the Perl reference command to ADR `0023`.
+  Children: `.1.5.1.0`, `.1.5.1.1`, `.1.5.1.2`, `.1.5.1.3`, `.1.5.1.4`, `.1.5.1.5`
   Acceptance: Checked-in fixture cases define help, success, usage, compile/input/runtime failure, trace routing,
     stdout/stderr, and exit behavior; Perl passes exactly and rejects undocumented primary-CLI surface.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.1.0`
+  Status: `done`
+  Goal: Audit and split the neutral fixture plus Perl-normalization work by observable mechanism before code.
+  Acceptance: Inspect ADR `0023`, the Perl primary source/tests, relevant Knowledge Map/toolbox facts, and direct
+    process behavior; record every observed contract gap; split a recoverable sequence before implementation.
+  Verification: `PASS` - `bin/linkedspec`, `t/trace_cli.t`, ADR `0023`, the trace owner, and direct process probes
+    show that the current trace smoke passes but the full contract does not. Perl accepts an ignored positional,
+    uppercase long options, unique abbreviations, and undocumented `--no-trace-*` forms. `POSIXLY_CORRECT` changes
+    abbreviation and argument-order behavior because `Getopt::Long` policy is implicit. Unknown options prepend an
+    uncontrolled library warning. Compile and invocation failure correctly exit `1` but emit timestamped/source-
+    located `DUMP_NONE` records to stdout before the normalized stderr. The work is split into harness/help,
+    arguments, success/IO, operational failures, and trace/gate leaves; no implementation source changed.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.1.0 - split neutral CLI fixture work`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.1.1`
+  Status: `active`
+  Goal: Establish the language-neutral fixture schema/runner and exact help baseline.
+  Acceptance: A checked-in manifest and backend-independent process runner validate schema, command arrays,
+    executable-display substitution, isolated fixture workspaces, exact stdout/stderr bytes, and exit status; the
+    first help fixture passes on Perl without weakening later four-backend reuse.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.1.2`
+  Status: `pending`
+  Goal: Normalize and fixture-lock Perl's exact argument and usage-error surface.
+  Acceptance: Only ADR `0023` options/spellings are accepted; case aliases, abbreviations, negated aliases,
+    subcommands, positionals, missing values, invalid modes/levels, and selector conflicts produce deterministic
+    fixture-owned stderr and exit `2`, independent of environment defaults.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.1.3`
+  Status: `pending`
+  Goal: Lock Perl source/input/parser controls and canonical successful output through neutral fixtures.
+  Acceptance: Named/file/inline source, literal/file input, top-rule, seek/consume, nested canonical JSON, and one
+    trailing newline are exact; source/input bytes and documented resolution have no backend-local side channel.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.1.4`
+  Status: `pending`
+  Goal: Normalize and fixture-lock Perl compilation, input-load, and invocation failures.
+  Acceptance: Phase order is compilation then input then invocation; each failure has backend-neutral stable stderr,
+    empty stdout unless trace is explicitly selected, and exit `1`; paths and host exception text do not make the
+    shared contract platform- or backend-specific.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.5.1.5`
+  Status: `pending`
+  Goal: Lock Perl trace routing and close the neutral fixture/reference gate no-drift.
+  Acceptance: Stdout/route/mirror, file/reset, quiet/none, and emoji behavior are represented deterministically in
+    the neutral suite; Perl passes every help/success/usage/failure/trace fixture; focused/local gates and public
+    docs invoke the reusable runner; later Rust/Dart/Julia leaves consume the same manifest without forked cases.
   Verification: `pending`
   Commit: `pending`
 
@@ -294,20 +353,61 @@ before implementation.
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `JULIA-BACKEND-PARITY.7.3.3` | `done` | Julia-local status is reconciled; its root remains active/delegated rather than falsely complete. |
-| 2 | `FUTURE-PARITY-BACKLOG.1.5.1` | `pending` | Next PNT: lock neutral CLI fixtures and normalize the Perl reference. |
-| 3 | `FUTURE-PARITY-BACKLOG.1.5.2` | `pending` | Add the missing Rust primary CLI against the shared fixtures. |
-| 4 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
-| 5 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
-| 6 | `FUTURE-PARITY-BACKLOG.1.6` | `pending` | Census every documented/exported user capability and split all residual parity gaps. |
-| 7 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
-| 8 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
-| 9 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
-| 10 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
-| 11 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
-| 12 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
-| 13 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
-| 14 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser/stimuli roundtrip arc is parked for later design. |
-| 15 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
+| 2 | `FUTURE-PARITY-BACKLOG.1.5.1.0` | `done` | Perl/fixture source and process audit is split before implementation. |
+| 3 | `FUTURE-PARITY-BACKLOG.1.5.1.1` | `active` | Establish the neutral manifest/runner and exact Perl help baseline. |
+| 4 | `FUTURE-PARITY-BACKLOG.1.5.1.2` | `pending` | Reject every undocumented/implicit Perl argument surface deterministically. |
+| 5 | `FUTURE-PARITY-BACKLOG.1.5.1.3` | `pending` | Lock source/input/parser controls and canonical success bytes. |
+| 6 | `FUTURE-PARITY-BACKLOG.1.5.1.4` | `pending` | Normalize compile/input/invocation failures and stdout purity. |
+| 7 | `FUTURE-PARITY-BACKLOG.1.5.1.5` | `pending` | Lock deterministic trace behavior and close the Perl neutral-fixture gate. |
+| 8 | `FUTURE-PARITY-BACKLOG.1.5.2` | `pending` | Add the missing Rust primary CLI against the shared fixtures. |
+| 9 | `FUTURE-PARITY-BACKLOG.1.5.3` | `pending` | Replace Dart's corpus-oriented primary command with the shared parser interface. |
+| 10 | `FUTURE-PARITY-BACKLOG.1.5.4` | `pending` | Make four-backend CLI identity a recurring gate. |
+| 11 | `FUTURE-PARITY-BACKLOG.1.6` | `pending` | Census every documented/exported user capability and split all residual parity gaps. |
+| 12 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
+| 13 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 14 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
+| 15 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
+| 16 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
+| 17 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
+| 18 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
+| 19 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser/stimuli roundtrip arc is parked for later design. |
+| 20 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
+
+## `FUTURE-PARITY-BACKLOG.1.5.1.0` Neutral CLI / Perl Audit and Split
+
+Read-only evidence recorded on 2026-07-10:
+
+- ADR `0023` requires exact option spellings/meanings, no positionals/subcommands, canonical success bytes, stable
+  errors and 0/1/2 exits, deterministic trace routing, and one language-neutral fixture suite reused by every
+  backend. `bin/linkedspec` is the current parser-oriented reference; `t/trace_cli.t` covers only help flag presence
+  plus one routed-trace success.
+- Direct process probes prove undocumented surface. An extra positional is ignored and the command exits `0`;
+  uppercase long options, unique abbreviations such as `--inl`, and `--no-trace-reset` / `--no-trace-emoji` are
+  accepted. `POSIXLY_CORRECT=1` changes abbreviation and option-order behavior, so the public API depends on ambient
+  process state. Unknown options also prepend `Getopt::Long`'s uncontrolled warning before the owned usage text.
+- Compilation-before-input ordering already holds, and usage/operational statuses are correctly `2`/`1`. However,
+  compilation and missing-top-rule probes capture timestamped/source-located `DUMP_NONE` trace records on stdout
+  while normalized diagnostics go to stderr. This violates machine-readable failure stdout and cannot be an exact
+  cross-backend fixture. Input failures also expose host `$!` text unless normalized.
+- The existing trace owner deliberately treats `DUMP_NONE` events as visible at verbosity zero; the CLI adapter,
+  not the trace library's general diagnostics contract, must own primary-command stdout purity and deterministic
+  projection. Trace fixtures therefore remain a separate final mechanism rather than being folded into argument
+  parsing.
+
+## `FUTURE-PARITY-BACKLOG.1.5.1.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Run the existing trace CLI test plus direct help/positional/case/abbreviation/
+  negation/environment/unknown/compile/input/invocation process probes with stdout and stderr captured separately.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `bin/linkedspec` inherits `Getopt::Long` defaults, never rejects residual
+  `@ARGV`, declares boolean flags with `!`, lets `GetOptions` print its own warning, and invokes a library whose
+  level-zero diagnostic trace is intentionally visible on stdout.
+- [x] **FIX / SPLIT** — Split neutral harness/help (`.1`), strict arguments (`.2`), successful source/input/parser
+  behavior (`.3`), operational errors/stdout purity (`.4`), and deterministic trace plus final gate (`.5`).
+- [x] **ADDRESSED (verified)** — Every observed gap and every ADR `0023` required fixture family has one ordered
+  leaf before code changes.
+- [x] **NO REGRESSION** — `prove -v -Iperl t/trace_cli.t` passes; this slice changes no CLI/parser/runtime source.
+- [x] **LOCKSTEP** — Task index, roadmap/live/book status, Knowledge Map, and resume pointer advance only to
+  `.1.5.1.1`; Rust/Dart/Julia remain later consumers of the same not-yet-created fixture manifest.
 
 ## Decisions
 
@@ -366,6 +466,9 @@ before implementation.
 - `2026-07-10`: Delegated Julia `.7.3.3` corrects a stale mdBook limitation sentence and proves current surfaces
   agree on the exact local milestone and remaining global obligations. PNT now advances to `.1.5.1`; Lua remains
   gated behind current-backend CLI/capability/generated-source convergence.
+- `2026-07-10`: `.1.5.1.0` proves Perl's primary adapter is parser-oriented but not strict/deterministic enough to
+  be the neutral executable reference. Fixture infrastructure, arguments, success/IO, failures, and trace/gate are
+  separate leaves; `.1.5.1.1` is active and no behavior changed in the split.
 
 ## Open Questions
 
@@ -374,8 +477,8 @@ before implementation.
 
 ## Blockers
 
-- None. Delegated Julia `.7.3.3` is done; `.1.5.1` is the next PNT leaf. Global CLI/capability convergence precedes
-  Lua `.1.3`.
+- None. `.1.5.1.0` is done and `.1.5.1.1` is active for the neutral fixture harness/help baseline. Global CLI/
+  capability convergence precedes Lua `.1.3`.
 
 ## Verification Log
 
@@ -388,7 +491,8 @@ before implementation.
 | `2026-07-09` | `FUTURE-PARITY-BACKLOG.9.0` | `git diff --check`; `bash scripts/check_memory_architecture.sh`; `bash knowledge-map/scripts/gen_knowledge_map.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_doctrines.sh`; `bash scripts/check_task_tree_metadata.sh`; `mdbook build docs/linkedspec-book` | PASS. Planning capture only; no implementation code changed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.4` | Perl direct `LinkedSpec::Get` coderef probe; focused Dart runtime tests (50); direct Julia parse/compile/execute probe; static Rust core/runtime API and Dart/Julia CLI-adapter audit; `mdbook build docs/linkedspec-book`; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check` | PASS. ADR `0022` makes native in-memory embedding primary and CLIs secondary; current/future backend acceptance and public docs agree; no parser/compiler/runtime source changed. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.0` | Delegated Julia `.7.3.1`: ADR `0023`; Perl CLI/trace contract and Rust public source-emitter audit; global task routing; mdBook build; Knowledge Map generation/check; memory/task/doctrine/whitespace gates. | PASS. Exact primary CLI and public-capability parity are durable; `.1.5.1`–`.1.5.4`, `.1.6`, and `.3` own convergence; no implementation behavior changed. |
-| `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.3` | Delegated current-surface audit; stale mdBook provenance/correction; exact owner routing; prior `431f0472` Julia proof; docs/KM/governance/whitespace and mdBook. | PASS. Julia's local audit is done while its root remains active/delegated; `.1.5.1` is next. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.3` | Delegated current-surface audit; stale mdBook provenance/correction; exact owner routing; prior `431f0472` Julia proof; docs/KM/governance/whitespace and mdBook. | PASS. Julia's local audit is done while its root remains active/delegated; `.1.5.1` became next and `.1.5.1.0` has since split it. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.1.0` | ADR/KM/toolbox and Perl source/test audit; existing trace test; direct argument/environment/failure probes with separated stdout/stderr; docs/KM/governance/whitespace/mdBook. | PASS. Five implementation mechanisms are split; no behavior source changed; `.1.5.1.1` is active. |
 
 ## Commit Log
 
@@ -402,9 +506,14 @@ before implementation.
 | `FUTURE-PARITY-BACKLOG.1.4` | `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract` | ADR `0022` and public/backend planning surfaces make native host-process embedding primary; no implementation code. |
 | `FUTURE-PARITY-BACKLOG.1.5.0` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | Delegated ADR `0023` contract/routing; global implementation follows after Julia's active repair leaf. |
 | `JULIA-BACKEND-PARITY.7.3.3` | `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status` | Delegated local audit done; Julia root remains active through global `.1.5`, `.1.6`, and `.3`. |
+| `FUTURE-PARITY-BACKLOG.1.5.1.0` | `FUTURE-PARITY-BACKLOG.1.5.1.0 - split neutral CLI fixture work` | Read-only Perl/process audit and five-leaf implementation split. |
 
 ## Changelog
 
+- `2026-07-10`: `.1.5.1.0` audits the Perl reference adapter and splits neutral CLI work. Direct probes find
+  ignored positionals, case/abbreviation/negated aliases, environment-dependent `Getopt::Long` behavior,
+  uncontrolled option warnings, and level-zero timestamped failure trace on stdout. Harness/help, arguments,
+  success/IO, failures, and trace/gate now have ordered owners; `.1.5.1.1` is active.
 - `2026-07-10`: Delegated Julia `.7.3.3` closes the local no-drift audit at
   `runtime-corpus-primary-cli` while preserving the active/delegated full-parity boundary. `.1.5.1` becomes the
   next PNT leaf; `.1.6`, `.3`, and then Lua remain ordered behind it.

@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.7.3.3` — outer no-drift is aligned at the precise
-  `runtime-corpus-primary-cli` milestone without a complete-parity claim.
-- prior_leaf: `JULIA-BACKEND-PARITY.7.3.2.5` — 1,017 assertions, nine direct processes, and 99/99 are locked.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.1.0` — neutral CLI/Perl work is split from direct process
+  evidence into harness/help, arguments, success/IO, failures, and trace/gate mechanisms.
+- prior_leaf: `JULIA-BACKEND-PARITY.7.3.3` — Julia local no-drift is closed without a complete-parity claim.
 - recent_context: Dart/Julia are 99/99 interpreter-green scoped milestones, not complete public parity; global
   `.1.5`, `.1.6`, and `.3` own current-backend CLI, capability, and generated-source convergence before Lua.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status`; previous committed HEAD is
-  `431f0472 JULIA-BACKEND-PARITY.7.3.2.5 - close Julia primary CLI conformance`.
+  `FUTURE-PARITY-BACKLOG.1.5.1.0 - split neutral CLI fixture work`; previous committed HEAD is
+  `a6700656 JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; the Julia tree remains active/delegated with no local executable leaf.
-- next_action: after this commit is clean, select `.1.5.1` to lock language-neutral CLI fixtures and normalize the
-  Perl reference before Rust, Dart, the four-backend recurring gate, capability census, codegen, and Lua.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.1.1` is the sole active PNT leaf.
+- next_action: after this split commit is clean, create the backend-neutral CLI manifest/runner and exact Perl help
+  baseline with command-display substitution, isolated workspaces, exact stdout/stderr bytes, and exit status.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
@@ -51,5 +51,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: `.7.3.3` docs/KM no-drift is being verified for its prepared commit;
-  none expected afterward. Do not start `.1.5.1` until the tree is clean.
+- blockers: none. in_flight_uncommitted: `.1.5.1.0` read-only audit/split is being verified for its prepared
+  commit; none expected afterward. Do not implement `.1.5.1.1` until the tree is clean.

@@ -34,3 +34,10 @@ The CLI maps flags directly onto existing trace options: `--trace` to `trace_lev
 `TRACE-OBSERVABILITY.4.*`; `.4.2` through `.4.4` have added Rust controls, compile/spec-parser/staged-dispatch
 events, and runtime branch/mark/capture events. `.4.5` has since closed cross-variant parity proof, so Rust can
 claim parity for the documented external trace capability contract.
+
+The later `FUTURE-PARITY-BACKLOG.1.5.1.0` process audit distinguishes this
+discoverability proof from exact primary-CLI conformance: failures currently
+allow visible `DUMP_NONE` records onto stdout, and the neutral fixture lane owns
+adapter-level output normalization without weakening the general trace contract.
+
+Related fact: [[perl-primary-cli-conformance-audit]].

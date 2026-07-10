@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.0 — split neutral CLI fixture work
+
+**Scope:** Read-only Perl primary-CLI/source/test/toolbox audit, direct process probes, durable gap record, and
+five-leaf neutral fixture/reference split; no implementation behavior change.
+
+**Findings:** `t/trace_cli.t` passes its help/routed-success smokes, but `bin/linkedspec` ignores residual
+positionals; accepts uppercase, unique-abbreviation, and undocumented negated boolean aliases; and changes option
+behavior under `POSIXLY_CORRECT`. `GetOptions` emits an uncontrolled warning for unknown options. Compile and
+invocation failures exit `1` with structured stderr but also leak timestamped/source-located `DUMP_NONE` trace to
+stdout; input failure text includes host `$!`.
+
+**Split:** `.1.5.1.1` owns a reusable neutral manifest/runner and help baseline; `.2` strict deterministic
+arguments; `.3` source/input/parser success and canonical bytes; `.4` operational failures/stdout purity; `.5`
+deterministic trace plus final Perl gate. Existing trace tests remain green and no CLI/parser/runtime source changed.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.3 — reconcile Julia scoped parity status
 
 **Scope:** Outer current-surface audit, stale mdBook correction, exact global-owner routing, and handoff to the

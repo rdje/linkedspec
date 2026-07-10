@@ -7,8 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.0 — split neutral CLI fixture work**
+  (DONE — read-only audit/split; `.1.5.1.1` active for harness/help).
+
+  **Finding:** Perl's parser CLI passes its two existing trace smokes but accepts ignored positionals, uppercase/
+  abbreviated/negated option aliases, and environment-dependent `Getopt::Long` behavior. Unknown options prepend
+  an uncontrolled warning, while compilation/invocation failures leak timestamped level-zero trace to stdout.
+
+  **Routing:** Neutral manifest/runner plus help, strict arguments, successful source/input/parser controls,
+  operational failures/stdout purity, and deterministic trace/final gate are five ordered leaves. No implementation
+  source changed; `t/trace_cli.t` remains green.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.7.3.3 — reconcile Julia scoped parity status**
-  (DONE — local audit closed; Julia root remains active/delegated; `.1.5.1` is next PNT).
+  (DONE — local audit closed; Julia root remains active/delegated; `.1.5.1.0` subsequently split the next work).
 
   **Change:** Corrected one stale mdBook sentence that denied the exact Julia primary CLI after it had been
   process-locked. Current task, roadmap, live, book, architecture, and Knowledge Map surfaces now distinguish the
