@@ -67,6 +67,20 @@ failure exits `2`. Successful parsing writes one canonical JSON value plus one n
 stdout. CLI-controlled stdout, stderr, diagnostic structure, and trace routing are locked by
 the same language-neutral fixtures for every backend.
 
+Without an explicit CLI trace option, operational failures have empty stdout and exactly one
+of these stderr records, each ending in one newline:
+
+```text
+linkedspec: parser compilation failed
+linkedspec: input load failed
+linkedspec: parser invocation failed
+```
+
+Each exits `1`. Compilation and source loading happen before deferred input-file loading, so
+an invalid spec wins over a simultaneously missing input. Backend owner names, host paths,
+OS error wording, exception source locations, and ambient backend-specific trace environment
+variables are not part of the shared primary-command output.
+
 For example, this portable action-edge grammar deliberately constructs object keys out of
 order:
 
@@ -99,8 +113,8 @@ This is a contract and active convergence target, not a claim that every current
     function-shell/staged trace coverage, `.7.3.2.2` closes exact argument/source/input handling, `.7.3.2.3`
     closes execution/direct canonical JSON, `.7.3.2.4` closes errors/exits/trace routing, and `.7.3.2.5` closes
     nine-family direct-command conformance. `.7.3.3` closes the local audit without claiming global identity.
-    Global `.1.5.1.3` now locks 29 exact Perl cases: two help, 20 usage, and seven source/input/parser success
-    families in default/POSIX environments. `.1.5.1.4` is active for operational failures and stdout purity.
+    Global `.1.5.1.4` now locks 33 exact Perl cases: two help, 20 usage, seven success, and four operational
+    failure families in default/POSIX environments. `.1.5.1.5` is active for trace and the final Perl gate.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics

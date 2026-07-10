@@ -56,3 +56,4 @@ Perl reference audit: [[perl-primary-cli-conformance-audit]].
 Neutral fixture runner: [[neutral-cli-fixture-runner]].
 Perl exact argument proof: [[perl-primary-cli-strict-arguments]].
 Perl exact success proof: [[perl-primary-cli-success-conformance]].
+Perl exact operational-failure proof: [[perl-primary-cli-operational-failures]].

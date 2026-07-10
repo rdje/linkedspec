@@ -5,11 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.4` extends the neutral Perl baseline to 33 cases. Four
+  operational families lock compile-before-input order, missing source/input, missing top rule, empty stdout,
+  exact one-line backend-neutral stderr, exit `1`, and no files. When no CLI trace option is present, the adapter
+  clears backend trace environment inputs and uses a below-`none` discard configuration; the general trace owner
+  is unchanged. `.1.5.1.5` is active for explicit trace combinations and the final Perl gate.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.3` extends the neutral Perl baseline to 29 cases. Seven new
   success families lock named/file/inline source, literal/file input, explicit top rule, seek/consume, nested
   canonical JSON, exact input-newline preservation, empty stderr, exit `0`, and one JSON-record newline. Toolbox
   probes reverified ADR `0020`'s known direct-default-rule `E` caveat, so portable action-edge returns own the
-  fixtures. `.1.5.1.4` is active for operational failures and stdout purity.
+  fixtures. `.1.5.1.4` has since closed operational failures and stdout purity.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.2` makes Perl primary argument parsing explicit and exact.
   Ambient `Getopt::Long` policy is gone; only case-sensitive ADR `0023` spellings and `-h` exist. A shared usage
   template plus channel variables yields 20 exact usage cases without duplicated help snapshots. With both help

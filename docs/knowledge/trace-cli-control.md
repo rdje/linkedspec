@@ -35,10 +35,12 @@ The CLI maps flags directly onto existing trace options: `--trace` to `trace_lev
 events, and runtime branch/mark/capture events. `.4.5` has since closed cross-variant parity proof, so Rust can
 claim parity for the documented external trace capability contract.
 
-The later `FUTURE-PARITY-BACKLOG.1.5.1.0` process audit distinguishes this
-discoverability proof from exact primary-CLI conformance: failures currently
-allow visible `DUMP_NONE` records onto stdout, and the neutral fixture lane owns
-adapter-level output normalization without weakening the general trace contract.
+The later `FUTURE-PARITY-BACKLOG.1.5.1.0` process audit distinguished this
+discoverability proof from exact primary-CLI conformance. `.1.5.1.4` has now
+closed untraced failure stdout purity with an adapter-owned below-`none` discard
+configuration, without weakening the general trace contract. Explicit CLI trace
+routing and the final Perl gate remain `.1.5.1.5`.
 
 Related fact: [[perl-primary-cli-conformance-audit]].
 Shared process fixture architecture: [[neutral-cli-fixture-runner]].
+Operational failure proof: [[perl-primary-cli-operational-failures]].

@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.4 — the CLI adapter owns stable failure projection):
+  Keep rich backend diagnostics in the native runtime context and explicit trace channel; do not serialize host
+  paths, `$!`, exception source lines, or owner-stage names into an identical cross-backend CLI. A below-`none`
+  discard configuration preserves `LinkedSpec::Trace`'s embedding contract while making untraced stdout pure.
+  Clear backend-specific trace environment inputs when no primary CLI trace option exists, and regression-lock
+  that this neither creates nor resets an ambient trace file.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.3 — success fixtures must expose bytes, not merely accept options):
   Pair each selector/control with an observable invariant: run named resolution from an isolated cwd, return a
   deliberately unsorted nested hash for recursive canonicalization, and return `input_text()` from a newline-ended

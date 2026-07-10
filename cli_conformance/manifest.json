@@ -389,6 +389,66 @@
         "stderr": {"text": ""},
         "files": []
       }
+    },
+    {
+      "id": "failure_compile_precedes_input_load",
+      "family": "failure",
+      "args": ["--inline-spec", "not a spec", "--input-file", "missing-input.txt"],
+      "files": [],
+      "expect": {
+        "exit": 1,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/failure/stderr.txt", "variables": {"ERROR": "parser compilation failed"}},
+        "files": []
+      }
+    },
+    {
+      "id": "failure_missing_spec_file",
+      "family": "failure",
+      "args": ["--spec-file", "missing.spec", "--input", "x"],
+      "files": [],
+      "expect": {
+        "exit": 1,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/failure/stderr.txt", "variables": {"ERROR": "parser compilation failed"}},
+        "files": []
+      }
+    },
+    {
+      "id": "failure_input_load",
+      "family": "failure",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"ok\") }\n\nDone::\n /x/\n",
+        "--input-file",
+        "missing-input.txt"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 1,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/failure/stderr.txt", "variables": {"ERROR": "input load failed"}},
+        "files": []
+      }
+    },
+    {
+      "id": "failure_invocation_missing_top_rule",
+      "family": "failure",
+      "args": [
+        "--inline-spec",
+        "Top::\n /x/ -> Done { return(\"ok\") }\n\nDone::\n /x/\n",
+        "--input",
+        "x",
+        "--top-rule",
+        "Missing"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 1,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/failure/stderr.txt", "variables": {"ERROR": "parser invocation failed"}},
+        "files": []
+      }
     }
   ]
 }

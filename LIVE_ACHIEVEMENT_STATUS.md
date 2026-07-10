@@ -7,8 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.4 — normalize Perl CLI failures**
+  (DONE — 33/33 exact cases; `.1.5.1.5` active for trace/final gate).
+
+  **Change:** Added four exact compile/input/invocation failures. Untraced operations now emit empty stdout, one
+  stable phase heading on stderr, exit `1`, and no files; compilation wins before input loading. Ambient backend
+  trace state cannot opt in a primary command that has no CLI trace option.
+
+  **Proof:** Baseline probes captured timestamp/path/host drift before repair. All 33 cases pass in default/POSIX
+  environments; four runner and three trace CLI subtests pass, including ambient debug/file/reset isolation.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.3 — lock Perl CLI success behavior**
-  (DONE — 29/29 exact cases; `.1.5.1.4` active for operational failures).
+  (DONE — 29/29 exact cases; `.1.5.1.4` subsequently closed operational failures).
 
   **Change:** Added seven neutral success cases for named/file/inline source, literal/file input, explicit top
   rule, seek/consume, nested canonical JSON, exact input-newline bytes, empty stderr, exit `0`, and one record

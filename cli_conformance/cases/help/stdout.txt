@@ -32,6 +32,10 @@ Output:
   to stdout it is intentionally interleaved with that JSON; use --trace-file with
   --trace-mode route for machine-readable stdout plus routed trace.
 
+Failures:
+  Compilation, input-load, and parser-invocation failures write one stable phase
+  heading to stderr and exit 1. Usage errors write this help and exit 2.
+
 Examples:
   {{COMMAND}} --spec Lispish --input '(hello world)'
   {{COMMAND}} --spec-file demo.spec --input-file demo.txt \

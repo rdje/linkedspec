@@ -45,6 +45,10 @@ Output:
   to stdout it is intentionally interleaved with that JSON; use --trace-file with
   --trace-mode route for machine-readable stdout plus routed trace.
 
+Failures:
+  Compilation, input-load, and parser-invocation failures write one stable phase
+  heading to stderr and exit 1. Usage errors write this help and exit 2.
+
 Examples:
   perl bin/linkedspec --spec Lispish --input '(hello world)'
   perl bin/linkedspec --spec-file demo.spec --input-file demo.txt \
@@ -156,22 +160,6 @@ sub _parse_args {
  return (\%opt, 0);
 }
 
-sub _last_error_text {
- my ($ctx) = @_;
- return '' unless ref($ctx) eq 'HASH' && ref($ctx->{last_error}) eq 'HASH';
- my $err = $ctx->{last_error};
- my @lines;
- push @lines, "owner_stage: $err->{owner_stage}" if defined($err->{owner_stage});
- push @lines, "summary: $err->{summary}" if defined($err->{summary});
- push @lines, "detail: $err->{detail}" if defined($err->{detail});
- push @lines, "spec_name: $err->{spec_name}" if defined($err->{spec_name});
- push @lines, "spec_path: $err->{spec_path}" if defined($err->{spec_path});
- push @lines, "top_rule: $err->{top_rule}" if defined($err->{top_rule});
- push @lines, "rule_label: $err->{rule_label}" if defined($err->{rule_label});
- return '' unless @lines;
- return join('', map { "  $_\n" } @lines);
-}
-
 sub _usage_error {
  my ($message) = @_;
  print STDERR "linkedspec: $message\n\n";
@@ -180,11 +168,8 @@ sub _usage_error {
 }
 
 sub _runtime_error {
- my ($message, $ctx, $raw_error) = @_;
+ my ($message) = @_;
  print STDERR "linkedspec: $message\n";
- my $ctx_text = _last_error_text($ctx);
- print STDERR $ctx_text if length $ctx_text;
- print STDERR "  error: $raw_error\n" if defined($raw_error) && length($raw_error);
  exit 1;
 }
 
@@ -201,11 +186,31 @@ my %runtime_ctx;
 $compile_opts{runtime_ctx_ref} = \%runtime_ctx;
 $compile_opts{top_rule} = $opt{top_rule} if defined $opt{top_rule};
 $compile_opts{parse_mode} = $opt{parse_mode} if defined $opt{parse_mode};
-$compile_opts{trace_level} = $opt{trace_level} if defined $opt{trace_level};
-$compile_opts{trace_log_file} = $opt{trace_file} if defined $opt{trace_file};
-$compile_opts{trace_log_mode} = $opt{trace_mode} if defined $opt{trace_mode};
-$compile_opts{trace_reset_log} = 1 if $opt{trace_reset};
-$compile_opts{trace_emoji} = 1 if $opt{trace_emoji};
+my $trace_selected = defined($opt{trace_level})
+ || defined($opt{trace_file})
+ || defined($opt{trace_mode})
+ || $opt{trace_reset}
+ || $opt{trace_emoji};
+if ($trace_selected) {
+ $compile_opts{trace_level} = $opt{trace_level} if defined $opt{trace_level};
+ $compile_opts{trace_log_file} = $opt{trace_file} if defined $opt{trace_file};
+ $compile_opts{trace_log_mode} = $opt{trace_mode} if defined $opt{trace_mode};
+ $compile_opts{trace_reset_log} = 1 if $opt{trace_reset};
+ $compile_opts{trace_emoji} = 1 if $opt{trace_emoji};
+} else {
+ delete @ENV{qw(
+  LINKEDSPEC_TRACE_LEVEL
+  LINKEDSPEC_DUMP_VERBOSITY
+  LINKEDSPEC_TRACE_FILE
+  LINKEDSPEC_TRACE_MIRROR_STDOUT
+  LINKEDSPEC_TRACE_RESET_FILE
+  LINKEDSPEC_TRACE_EMOJI
+ )};
+ $compile_opts{trace_level} = -1;
+ $compile_opts{trace_log_file} = '';
+ $compile_opts{trace_log_mode} = 'route';
+ $compile_opts{trace_emoji} = 0;
+}
 
 my $parser;
 my $compile_error;
@@ -223,17 +228,17 @@ if (defined $opt{spec}) {
  }
 }
 
-_runtime_error('parser compilation failed', \%runtime_ctx, $compile_error)
+_runtime_error('parser compilation failed')
  if $compile_error || ref($parser) ne 'CODE';
 
 my $input = defined($opt{input_file})
  ? eval { _slurp($opt{input_file}, 'input file') }
  : $opt{input};
-_runtime_error('input load failed', \%runtime_ctx, $@) if $@;
+_runtime_error('input load failed') if $@;
 
 my $result = eval { $parser->(\$input) };
 my $parse_error = $@;
-_runtime_error('parser invocation failed', \%runtime_ctx, $parse_error) if $parse_error;
+_runtime_error('parser invocation failed') if $parse_error;
 
 my $json = JSON::PP->new->canonical(1)->allow_nonref(1);
 print $json->encode($result), "\n";

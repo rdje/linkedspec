@@ -418,7 +418,7 @@ Supported trace environment variables include:
 - `LINKEDSPEC_TRACE_MIRROR_STDOUT`
 - `LINKEDSPEC_TRACE_RESET_FILE`
 
-Environment configuration is useful when you cannot easily change the caller code.
+Environment configuration is useful when you cannot easily change embedding caller code.
 
 Prefer environment variables, per-call trace options, or `configure_trace(...)` for control. Direct package-variable
 mutation is compatibility state; assigning `$LinkedSpec::DUMP_VERBOSITY` before the lazy trace owner is loaded is
@@ -426,7 +426,10 @@ not a reliable substitute for configuring trace.
 
 ## Command-line trace runner
 
-For quick investigations, the Perl reference backend also exposes the same controls through `bin/linkedspec`:
+For quick investigations, the Perl reference backend also exposes the same controls through `bin/linkedspec`.
+The primary CLI activates trace only from its documented trace options; backend-specific ambient trace environment
+variables do not opt in an otherwise untraced primary command. This keeps every backend's stdout/error contract
+identical while native embedding callers retain the environment controls above.
 
 ```sh
 perl bin/linkedspec --spec-file demo.spec --input-file demo.txt \

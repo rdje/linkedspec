@@ -45,12 +45,12 @@ compares exact channel bytes, exit status, and expected generated files. `{{COMM
 help/diagnostic difference: the backend executable token or unavoidable host launch wrapper. `{{REPO_ROOT}}`,
 `{{WORKSPACE}}`, and `{{CASE_ID}}` represent exact runner inputs rather than backend-specific expected results.
 
-The suite now locks both help forms, 20 strict usage cases, and seven success cases on Perl. All 29 pass with
-`POSIXLY_CORRECT` unset or set. The success cases cover named/file/inline source, literal/file input, explicit top
-rule, seek/consume, recursively canonical nested JSON, exact input-newline preservation, empty stderr, exit `0`,
-and one output-record newline. Active `.1.5.1.4` adds operational failures, followed by trace routing in this same
-manifest before Rust, Dart, and Julia consume it. Until those later cases land, a green Perl suite is not a complete
-four-backend CLI-parity claim.
+The suite now locks both help forms, 20 strict usage cases, seven success cases, and four operational failures on
+Perl. All 33 pass with `POSIXLY_CORRECT` unset or set. Success covers source/input/parser controls and exact JSON;
+failure covers compilation-before-input order, stable one-line stderr, empty stdout, exit `1`, and no files. An
+ambient debug/file/reset trace configuration also cannot opt in a primary command with no CLI trace option. Active
+`.1.5.1.5` adds explicit trace routing and the final Perl gate before Rust, Dart, and Julia consume this manifest.
+Until those later backends pass, a green Perl suite is not a complete four-backend CLI-parity claim.
 
 ## Optional Dart Gate
 

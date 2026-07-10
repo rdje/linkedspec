@@ -95,4 +95,26 @@ SPEC
  unlike($stdout, qr/ENTER LinkedSpec::Get/, 'routed trace does not pollute stdout');
 };
 
+subtest 'unselected ambient trace cannot pollute operational failure channels' => sub {
+ my $tmp = tempdir(CLEANUP => 1);
+ my $trace_path = File::Spec->catfile($tmp, 'ambient.trace.log');
+ my $missing_input = File::Spec->catfile($tmp, 'missing-input.txt');
+
+ local $ENV{LINKEDSPEC_TRACE_LEVEL} = 'debug';
+ local $ENV{LINKEDSPEC_TRACE_FILE} = $trace_path;
+ local $ENV{LINKEDSPEC_TRACE_RESET_FILE} = 1;
+ local $ENV{LINKEDSPEC_TRACE_EMOJI} = 1;
+
+ my ($exit, $stdout, $stderr) = _run_cmd(
+  @cli,
+  '--inline-spec', 'not a spec',
+  '--input-file', $missing_input,
+ );
+
+ is($exit, 1, 'compilation failure exits one before missing input is loaded');
+ is($stdout, '', 'unselected ambient trace does not pollute failure stdout');
+ is($stderr, "linkedspec: parser compilation failed\n", 'failure stderr is the exact stable heading');
+ ok(!-e $trace_path, 'unselected ambient trace does not create or reset a trace file');
+};
+
 done_testing();

@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.4 — normalize Perl CLI failures
+
+**Scope:** Four exact operational-failure fixtures, adapter-owned untraced stdout purity, stable cross-backend
+stderr, phase-order proof, ambient trace isolation, focused regression, and synchronized durable documentation.
+
+**Implementation:** With no CLI trace option, `bin/linkedspec` clears backend trace environment inputs and passes
+an internal below-`none` level plus empty route sink. Compilation/input/invocation failures now print only their
+stable shared heading and exit `1`; paths, `$!`, raw exceptions, owner fields, and timestamps stay out of stderr.
+The exact help/usage snapshots now document operational exit `1` and usage exit `2`.
+
+**Verification:** Invalid and missing source, compilation-before-missing-input, missing input, and missing top rule
+are exact. All 33 cases pass in default/POSIX environments. Four runner subtests and three trace CLI subtests pass,
+including proof that ambient debug/file/reset state produces neither stdout nor a trace file.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.3 — lock Perl CLI success behavior
 
 **Scope:** Seven backend-neutral success cases for exact source/input loading, parser controls, canonical JSON,
@@ -12,7 +26,7 @@ explicit top rule, seek/consume, recursively sorted nested objects, and an input
 
 **Evidence:** `LinkedSpec::Get`, `get_parser`, generated-source, and debug-trace probes reverified both the selected
 portable action-edge return shape and ADR `0020`'s existing direct-default-rule `E` caveat. Perl needed no runtime
-change. All 29 cases pass with `POSIXLY_CORRECT` unset and set; `.1.5.1.4` owns operational failures next.
+change. All 29 cases pass with `POSIXLY_CORRECT` unset and set; `.1.5.1.4` has since closed operational failures.
 
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.2 — normalize Perl CLI arguments
 
