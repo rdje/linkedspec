@@ -2839,6 +2839,114 @@ Loop::OR
     )
 end
 
+@testset "Frontend compiler and staged trace coverage" begin
+    source = raw"""
+Top::
+ /x/ -> Child { return(entry_text()) }
+
+Child: /x/
+"""
+    untraced_spec = parse_spec(source)
+    untraced_compiled = compile_spec(untraced_spec)
+    frontend_output = IOBuffer()
+    frontend_trace = LinkedSpecTraceEmitter(
+        trace_config_enabled(LinkedSpecTraceDebug);
+        stdout_io = frontend_output,
+    )
+    traced_spec = parse_spec(source; trace = frontend_trace)
+    traced_compiled = compile_spec(traced_spec; trace = frontend_trace)
+
+    @test to_json(traced_spec) == to_json(untraced_spec)
+    @test to_descriptor_json(traced_compiled) == to_descriptor_json(untraced_compiled)
+    frontend_events = trace_events(frontend_trace)
+    frontend_topics = [event.topic for event in frontend_events]
+    @test "julia_frontend:parse_spec" in frontend_topics
+    @test "julia_frontend:parse_spec:result" in frontend_topics
+    @test "julia_frontend:validate_spec" in frontend_topics
+    @test "julia_frontend:validate_spec:edge_targets" in frontend_topics
+    @test "julia_compiler:compile_spec" in frontend_topics
+    @test "julia_compiler:compile_spec:rule" in frontend_topics
+    @test "julia_compiler:compile_spec:dependency_regex_map" in frontend_topics
+    @test count(
+        event -> event.topic == "julia_frontend:parse_spec" &&
+            event.kind == LinkedSpecTraceEnter,
+        frontend_events,
+    ) == 1
+    @test count(
+        event -> event.topic == "julia_frontend:parse_spec" &&
+            event.kind == LinkedSpecTraceExit,
+        frontend_events,
+    ) == 1
+    @test occursin("status=ok", String(take!(frontend_output)))
+
+    invalid_spec = parse_spec("Top::\n -> Missing")
+    invalid_trace = LinkedSpecTraceEmitter(
+        trace_config_enabled(LinkedSpecTraceDebug);
+        stdout_io = IOBuffer(),
+    )
+    @test_throws SpecValidationException compile_spec(invalid_spec; trace = invalid_trace)
+    @test any(
+        event.topic == "julia_frontend:validate_spec:edge_targets" &&
+        event.kind == LinkedSpecTraceDecision &&
+        occursin("taken=0", event.details)
+        for event in trace_events(invalid_trace)
+    )
+    @test any(
+        event.topic == "julia_compiler:compile_spec" &&
+        event.kind == LinkedSpecTraceExit &&
+        occursin("status=error", event.details)
+        for event in trace_events(invalid_trace)
+    )
+
+    function_source = read(
+        joinpath(CORPUS_ROOT, "terse_4_3_2_user_function_runtime", "input.spec"),
+        String,
+    )
+    staged_output = IOBuffer()
+    staged_trace = LinkedSpecTraceEmitter(
+        trace_config_enabled(LinkedSpecTraceDebug);
+        stdout_io = staged_output,
+    )
+    traced_staged = parse_spec_with_staged_user_function_definitions(
+        function_source;
+        trace = staged_trace,
+    )
+    untraced_staged = parse_spec_with_staged_user_function_definitions(function_source)
+    @test to_json(traced_staged) == to_json(untraced_staged)
+    staged_events = trace_events(staged_trace)
+    staged_topics = [event.topic for event in staged_events]
+    @test "julia_frontend:function_shell:parse_definitions" in staged_topics
+    @test "julia_frontend:function_shell:parse_definitions:result" in staged_topics
+    @test "julia_frontend:function_shell:project" in staged_topics
+    @test "julia_frontend:function_shell:parse_spec" in staged_topics
+    @test "julia_staged:dispatch_function_body_parse_jobs" in staged_topics
+    @test "julia_staged:execute_parse_jobs" in staged_topics
+    @test all(
+        "julia_staged:execute_parse_jobs:$phase" in staged_topics
+        for phase in ("normalize_job", "queue_sorted", "resolve", "load", "compile", "execute")
+    )
+    @test occursin("julia_staged:execute_parse_jobs:execute", String(take!(staged_output)))
+
+    quiet_output = IOBuffer()
+    quiet_trace = LinkedSpecTraceEmitter(trace_config_disabled(); stdout_io = quiet_output)
+    quiet_spec = parse_spec(source; trace = quiet_trace)
+    quiet_compiled = compile_spec(quiet_spec; trace = quiet_trace)
+    @test to_descriptor_json(quiet_compiled) == to_descriptor_json(untraced_compiled)
+    @test isempty(trace_events(quiet_trace))
+    @test isempty(String(take!(quiet_output)))
+
+    mktempdir() do directory
+        trace_path = joinpath(directory, "frontend.log")
+        route_config = with_trace_reset_file(with_trace_file(
+            trace_config_enabled(LinkedSpecTraceDebug),
+            trace_path,
+        ))
+        route_trace = LinkedSpecTraceEmitter(route_config; stdout_io = IOBuffer())
+        parse_spec(source; trace = route_trace)
+        @test occursin("julia_frontend:parse_spec", read(trace_path, String))
+    end
+end
+
 @testset "Spec parser" begin
     modes = Dict(
         "R1:AND" => RuleMode("And"),

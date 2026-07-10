@@ -137,10 +137,11 @@ leaves.
 
 ## Julia variant trace status
 
-As of `JULIA-BACKEND-PARITY.4.5.4`, Julia has stable structured runtime
-diagnostics, trace controls/events/sinks, and internal interpreter
-instrumentation, but does not claim broader compile/parser trace parity. The
-no-drift proof against this chapter is closed.
+As of `JULIA-BACKEND-PARITY.7.3.2.1`, Julia has stable structured runtime
+diagnostics, trace controls/events/sinks, interpreter instrumentation, and
+opt-in source-parser, validation, compiler, function-shell, and staged-dispatch
+events. This closes the trace prerequisite for Julia's future exact primary CLI;
+it does not by itself claim complete backend or CLI parity.
 
 The Julia control surface is:
 
@@ -155,6 +156,10 @@ The Julia control surface is:
 - `LinkedSpecTraceEmitter`, structured event/scope records, and
   `emit_trace_event!`, `enter_trace_scope!`, `exit_trace_scope!`,
   `trace_decision!`, `log_trace_output!`, and `log_trace_dump!` primitives;
+- optional `trace=...` emitter injection on `parse_spec(...)`,
+  `validate_spec(...)`, `compile_spec(...)`, function-definition projection/
+  parsing entrypoints, `execute_staged_parse_job(s)(...)`,
+  `dispatch_function_body_parse_jobs(...)`, and stitching/composition APIs;
 - optional `trace=...` emitter injection on `runtime_parse(...)` /
   `runtime_execute(...)`, plus `runtime_parse_with_trace(...)` and
   `runtime_execute_with_trace(...)` config wrappers.
@@ -165,11 +170,48 @@ parse-scope routing, and result preservation. `.4.5.3` adds `julia_runtime:rule`
 scopes; regex, child-dispatch, and recursion decisions; lifecycle marks; all
 four cursor-control transitions; and source-boundary marks/decisions. Traced
 and untraced action, blind, and recursion paths preserve identical results.
-Package status was `runtime-trace-events` at the `.4.5.4` trace boundary; that
+Package status was `runtime-trace-events` at the `.4.5.4` runtime-trace boundary; that
 mechanism label is historical, not the current overall backend status. The
 current Julia package/CLI status is `runtime-corpus-full` after the 99/99
-interpreter gate. Later staged, corpus, and verification leaves do not broaden
-the narrower runtime-trace claim described here.
+interpreter gate.
+
+`.7.3.2.1` propagates one caller-owned emitter through the native pipeline. At
+low level, `julia_frontend:parse_spec`, `julia_frontend:validate_spec`,
+`julia_compiler:compile_spec`, function-shell operations, staged queue dispatch,
+and runtime execution emit balanced scopes. At medium level, decisions report
+parse results, individual validation passes/skips, function-registry and rule
+compilation, dependency-regex construction, function-shell parser cache/source/
+projection results, staged normalization/sorting, and staged
+resolve/load/compile/execute phases. Error paths retain paired error-bearing exit
+events. Omitting `trace` retains the direct quiet path; a disabled emitter writes
+and records nothing.
+
+Example Julia pipeline trace:
+
+```julia
+using LinkedSpecJulia
+
+source = """
+Top::
+ /x/
+ E { return(match_text()) }
+"""
+
+config = with_trace_reset_file(with_trace_file(
+    trace_config_enabled(LinkedSpecTraceDebug),
+    "linkedspec.trace.log",
+))
+trace = LinkedSpecTraceEmitter(config)
+
+spec = parse_spec(source; trace = trace)
+compiled = compile_spec(spec; trace = trace)
+result = runtime_execute(LinkedSpecRuntimeEngine(compiled), "x"; trace = trace)
+@assert result.value == "x"
+```
+
+The focused proof adds 28 assertions for success/failure events, routed output,
+disabled quietness, and traced/untraced identity. The complete Julia package
+suite passes with 868 assertions and the focused corpus gate remains 99/99.
 
 ## Future variant trace parity checklist
 

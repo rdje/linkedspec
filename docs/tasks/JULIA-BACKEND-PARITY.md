@@ -810,15 +810,19 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.7.3.2.0 - split Julia primary CLI alignment`
 
 - ID: `JULIA-BACKEND-PARITY.7.3.2.1`
-  Status: `active`
+  Status: `done`
   Goal: Close Julia compile/spec-parser/staged trace coverage required by the primary trace options.
   Acceptance: Opt-in structured trace events cover source parse/validation/compile, function-shell parsing, and
     staged dispatch through existing levels/config/sinks; default APIs remain quiet and output-compatible.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - one optional caller-owned `LinkedSpecTraceEmitter` now propagates through rule parsing,
+    validation passes, compiled-state construction, spec-driven function-shell parsing/projection, runtime shell
+    execution, and staged normalize/queue/resolve/load/compile/execute phases. Twenty-eight focused assertions prove
+    scopes, decisions, failure exits, routed output, disabled quietness, and traced/untraced identity; the complete
+    868-assertion package suite and 99/99 focused corpus gate pass.
+  Commit: `JULIA-BACKEND-PARITY.7.3.2.1 - trace Julia frontend compiler and staged dispatch`
 
 - ID: `JULIA-BACKEND-PARITY.7.3.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the exact primary-CLI argument model plus source/input loading and named-spec resolution.
   Acceptance: Julia accepts only ADR `0023`'s source/input/parser/trace/help options, rejects subcommands and
     positionals with usage exit `2`, resolves named/current/repo specs consistently, and loads files without
@@ -893,12 +897,47 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 27 | `JULIA-BACKEND-PARITY.7.3.0` | `done` | Source audit proves the existing backend CLIs are not user-interface equivalent and splits the closeout. |
 | 28 | `JULIA-BACKEND-PARITY.7.3.1` | `done` | ADR 0023 defines exact user-observable and primary-CLI parity; global repairs and feature census are owned. |
 | 29 | `JULIA-BACKEND-PARITY.7.3.2.0` | `done` | Native seam audit splits primary CLI repair into trace, argument/IO, execution/JSON, error/routing, and conformance mechanisms. |
-| 30 | `JULIA-BACKEND-PARITY.7.3.2.1` | `active` | Close compile/spec-parser/staged trace coverage before exposing the shared primary trace options. |
-| 31 | `JULIA-BACKEND-PARITY.7.3.2.2` | `pending` | Implement exact arguments plus named/file/inline source and literal/file input loading. |
+| 30 | `JULIA-BACKEND-PARITY.7.3.2.1` | `done` | Optional shared-emitter tracing covers frontend, compiler, function shell, and staged phases without output drift. |
+| 31 | `JULIA-BACKEND-PARITY.7.3.2.2` | `active` | Implement exact arguments plus named/file/inline source and literal/file input loading. |
 | 32 | `JULIA-BACKEND-PARITY.7.3.2.3` | `pending` | Execute the native parser pipeline and emit direct canonical JSON. |
 | 33 | `JULIA-BACKEND-PARITY.7.3.2.4` | `pending` | Normalize failures/exits and complete trace routing. |
 | 34 | `JULIA-BACKEND-PARITY.7.3.2.5` | `pending` | Prove unit/direct-process conformance and align focused verification/docs. |
 | 35 | `JULIA-BACKEND-PARITY.7.3.3` | `pending` | Close no-drift honestly or split any remaining user-observable parity residual. |
+
+## `JULIA-BACKEND-PARITY.7.3.2.1` Frontend/Compiler/Staged Trace Proof
+
+Implementation evidence recorded on 2026-07-10:
+
+- `julia/src/trace/Trace.jl` now loads before trace-aware frontend owners. Existing trace levels, configs, emitter,
+  stdout/route/mirror sinks, reset behavior, and event rendering remain the single trace mechanism.
+- `parse_spec(...)`, `validate_spec(...)`, and `compile_spec(...)` accept optional caller-owned `trace` emitters.
+  Low-level scopes enclose each operation; medium decisions report parse outcomes, every validation pass/skip,
+  function-registry construction, compiled rules, and dependency-regex construction. Failure paths pair every
+  emitted enter with an error-bearing exit.
+- Spec-driven function parsing propagates the same emitter through parser-spec parse/compile, cache selection,
+  runtime execution of `specs/user_function_definition.spec`, neutral-node projection, stripped rule parsing, and
+  staged body stitching. No raw Julia function scanner or alternate traced path was introduced.
+- Staged jobs emit a low-level queue scope, medium normalization/sort/job scopes, and resolve/load/compile/execute
+  decisions. `dispatch_function_body_parse_jobs(...)` and every public stitching/parse composition accept and
+  propagate the same optional emitter.
+- Omitting `trace` retains the direct quiet implementations. A disabled emitter records/writes nothing. Focused
+  descriptor/spec comparisons prove traced and untraced results are identical; routed-file output uses the existing
+  sink rather than a frontend-specific writer.
+
+## `JULIA-BACKEND-PARITY.7.3.2.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.7.3.2.0` proved runtime-only tracing left primary trace options semantically
+  incomplete for source parsing, validation, compilation, function-shell parsing, and staged dispatch.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Trace types loaded after frontend owners and only runtime entrypoints accepted
+  emitters; parser/compiler/staged APIs therefore had no shared propagation path.
+- [x] **FIX** — Load the existing trace owner before frontend definitions and add one optional emitter through every
+  native parse/validate/compile/function-shell/staged composition, with balanced scopes and phase decisions.
+- [x] **ADDRESSED (verified)** — Twenty-eight focused assertions cover success/failure events, route sinks,
+  default-disabled quietness, and result identity; the complete Julia suite passes with 868 assertions.
+- [x] **NO REGRESSION** — `tools/run_julia_local.sh` passes CLI smokes and all 99 corpus fixtures exactly; generated
+  depot compilation artifacts were removed afterward.
+- [x] **LOCKSTEP** — mdBook, Julia README, roadmap/task/live docs, architecture, and Knowledge Map describe the new
+  trace boundary; `.7.3.2.2` is the sole active Julia frontier.
 
 ## `JULIA-BACKEND-PARITY.7.3.2.0` Primary-CLI Mechanism Audit
 
@@ -2735,6 +2774,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.0` | ADR/KM retrieval; source audit of Perl, Rust, Dart, and Julia CLI/package targets; Cargo binary-target census; task split; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Perl exposes a parser CLI, Dart/Julia expose corpus/status CLIs, and Rust has no binary target; `.7.3.1` becomes active before any repair. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.1` | Perl primary CLI and backend-neutral trace contract; Rust public source-emitter export; ADR `0023`; global task routing; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Exact capability/behavior and primary-CLI parity are durable; Julia `.7.3.2` and global `.1.5`/`.1.6`/`.3` own all known gaps; no implementation behavior changed. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.2.0` | Julia primary CLI, exports, parser/compiler/runtime, function-shell/corpus composition, diagnostics, trace config/sinks, JSON use, and tests audited from source; task split; mdBook/KM/memory/task/doctrine/whitespace gates. | PASS. Five independent mechanisms are owned by `.7.3.2.1`–`.7.3.2.5`; no implementation behavior changed. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.2.1` | Optional shared-emitter frontend/compiler/function-shell/staged instrumentation; 28 focused assertions; 868-assertion package suite; CLI smokes; 99/99 corpus gate; mdBook/KM/memory/task/doctrine/whitespace gates; generated cache cleanup. | PASS. Julia's existing trace controls/sinks now cover every native phase needed by the future primary trace options without output drift; `.7.3.2.2` becomes active. |
 
 ## Commit Log
 
@@ -2794,9 +2834,14 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.7.3.0` | `JULIA-BACKEND-PARITY.7.3.0 - split strict user-facing parity closeout` | Current CLI drift is source-proven and split into contract/routing, Julia repair, and honest no-drift leaves. |
 | `JULIA-BACKEND-PARITY.7.3.1` | `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity` | ADR `0023`, canonical CLI schema, strict completion terms, and global CLI/capability/codegen owners; `.7.3.2` becomes active. |
 | `JULIA-BACKEND-PARITY.7.3.2.0` | `JULIA-BACKEND-PARITY.7.3.2.0 - split Julia primary CLI alignment` | Read-only native seam/gap audit; five ordered implementation/conformance leaves; `.7.3.2.1` becomes active. |
+| `JULIA-BACKEND-PARITY.7.3.2.1` | `JULIA-BACKEND-PARITY.7.3.2.1 - trace Julia frontend compiler and staged dispatch` | One optional existing emitter now spans parse/validate/compile/function-shell/staged phases; 868 assertions and 99/99 pass; `.7.3.2.2` becomes active. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.7.3.2.1` Julia frontend/compiler/staged tracing. Optional caller-owned emitters now
+  propagate through parse, validation, compile, function-shell, and staged phases with balanced scopes and stable
+  decisions; default/disabled paths remain quiet and result-identical. Twenty-eight focused assertions, the full
+  868-assertion package suite, CLI smokes, and 99/99 corpus gate pass. `.7.3.2.2` is active.
 - `2026-07-10`: Completed `.7.3.2.0` Julia primary-CLI mechanism audit/split. Existing native parser/compiler/
   runtime, diagnostics, and runtime trace seams are reusable, while compile/parser trace, arguments/resolution,
   execution/canonical JSON, error/routing, and direct conformance need separate leaves. `.7.3.2.1` is active; no

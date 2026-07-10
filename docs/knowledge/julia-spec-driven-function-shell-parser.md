@@ -13,7 +13,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, parser, corpus, user-functions, staged-parsing, in-memory, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.2.5 adds julia/src/parser/UserFunctionDefinitionParser.jl, seven focused source-driven parser assertions, and a permanent three-fixture corpus regression. JULIA-BACKEND-PARITY.6.3 includes these paths in the complete 99/99 gate; full Julia tests pass with 840 assertions and status runtime-corpus-full."
+evidence: "JULIA-BACKEND-PARITY.6.2.5 adds source-driven parser execution and a permanent three-fixture regression; .6.3 includes it in 99/99. JULIA-BACKEND-PARITY.7.3.2.1 traces this path and re-proves it in the current 868-assertion/99-fixture gate at status runtime-corpus-full."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
 ---
 

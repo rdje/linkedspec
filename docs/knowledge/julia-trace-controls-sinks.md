@@ -1,6 +1,6 @@
 ---
 id: julia-trace-controls-sinks
-title: Julia runtime exposes trace controls, structured events, sinks, and traced entrypoints
+title: Julia exposes shared trace controls sinks and traced native pipeline entrypoints
 answers:
   - does Julia have trace controls
   - how does Julia configure trace sinks
@@ -8,10 +8,11 @@ answers:
   - which Julia runtime entrypoints accept tracing
   - does Julia tracing preserve parse output
   - what trace controls does Julia expose beneath runtime instrumentation
+  - which Julia frontend compiler and staged APIs accept tracing
 date: 2026-07-10
 status: current
 tags: [julia, trace, runtime, diagnostics, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.4.5.2 adds julia/src/trace/Trace.jl, public trace exports, optional runtime emitter plumbing, runtime_parse_with_trace/runtime_execute_with_trace, and 29 focused assertions in julia/test/runtests.jl. The full 617-assertion suite proves levels/environment config, event primitives, stdout/route/mirror sinks, reset, default quiet, parse-scope routing, and result preservation."
+evidence: "JULIA-BACKEND-PARITY.4.5.2 adds trace controls/sinks and runtime emitter plumbing. JULIA-BACKEND-PARITY.7.3.2.1 reuses that same emitter across frontend, compiler, function-shell, and staged entrypoints; 28 focused additions and the full 868-assertion/99-fixture gate prove routing, quietness, and result identity."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
@@ -33,13 +34,19 @@ routed files support reset/truncate at emitter creation.
 one from config. Disabled/default execution stays quiet, and traced parse
 results equal untraced results.
 
+`parse_spec(...)`, `validate_spec(...)`, `compile_spec(...)`, function-shell
+projection/parsing, and staged job dispatch/stitching now accept and propagate
+the same optional emitter. They do not maintain a separate frontend trace sink
+or traced implementation.
+
 At `.4.5.2`, runtime tracing emitted the top-level parse scope only. `.4.5.3`
 now adds rule, regex, dispatch, lifecycle, recursion, cursor, and source-boundary
-instrumentation while retaining this control/sink surface. Final trace parity
-is not overclaimed; `.4.5.4` closes the scoped runtime no-drift proof.
+instrumentation while retaining this control/sink surface. `.4.5.4` closes the
+scoped runtime no-drift proof, and `.7.3.2.1` later closes the frontend/compiler/
+function-shell/staged coverage required by primary CLI trace options.
 
 Related facts: [[julia-runtime-structured-diagnostics]],
 [[julia-runtime-diagnostics-trace-split]], [[julia-runtime-trace-events]],
 [[julia-diagnostics-trace-boundary]],
 [[dart-trace-controls-sinks]],
-[[trace-cross-variant-capability-contract]].
+[[trace-cross-variant-capability-contract]], [[julia-frontend-compiler-staged-trace-events]].

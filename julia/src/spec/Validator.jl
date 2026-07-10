@@ -4,7 +4,74 @@ end
 
 Base.showerror(io::IO, error::SpecValidationException) = print(io, error.message)
 
-function validate_spec(spec::SpecFile; strict_syntax::Bool = false)
+function validate_spec(
+    spec::SpecFile;
+    strict_syntax::Bool = false,
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+)
+    if trace === nothing
+        return _validate_spec(spec, strict_syntax)
+    end
+
+    scope = enter_trace_scope!(
+        trace,
+        "julia_frontend:validate_spec",
+        "rules=$(length(spec.rules)) functions=$(length(spec.functions)) strict_syntax=$(strict_syntax ? 1 : 0)",
+        LinkedSpecTraceLow,
+    )
+    exit_details = "status=error error=unknown"
+    try
+        _trace_validation_check!(trace, "top_rule_exists") do
+            _check_top_rule_exists(spec)
+        end
+        _trace_validation_check!(trace, "duplicate_rule_labels") do
+            _check_duplicate_rule_labels(spec)
+        end
+        _trace_validation_check!(trace, "duplicate_function_names") do
+            _check_duplicate_function_names(spec)
+        end
+        _trace_validation_check!(trace, "function_registry") do
+            _check_function_registry(spec)
+        end
+        _trace_validation_check!(trace, "malformed_raw_body_lines") do
+            _check_malformed_raw_body_lines(spec)
+        end
+        _trace_validation_check!(trace, "mixed_edges") do
+            _check_mixed_edges(spec)
+        end
+        _trace_validation_check!(trace, "grouped_action_edges") do
+            _check_grouped_action_edges(spec)
+        end
+        _trace_validation_check!(trace, "edge_targets") do
+            _check_edge_targets(spec)
+        end
+        _trace_validation_check!(trace, "regex_syntax") do
+            _check_regex_syntax(spec)
+        end
+        if strict_syntax
+            _trace_validation_check!(trace, "unused_rules") do
+                _check_unused_rules(spec)
+            end
+        else
+            trace_decision!(
+                trace,
+                "julia_frontend:validate_spec:unused_rules",
+                false,
+                "strict_syntax=0 skipped",
+                LinkedSpecTraceMedium,
+            )
+        end
+        exit_details = "status=ok"
+        return nothing
+    catch error
+        exit_details = "status=error error=$(sprint(showerror, error))"
+        rethrow()
+    finally
+        exit_trace_scope!(trace, scope, exit_details)
+    end
+end
+
+function _validate_spec(spec::SpecFile, strict_syntax::Bool)
     _check_top_rule_exists(spec)
     _check_duplicate_rule_labels(spec)
     _check_duplicate_function_names(spec)
@@ -18,6 +85,29 @@ function validate_spec(spec::SpecFile; strict_syntax::Bool = false)
         _check_unused_rules(spec)
     end
     return nothing
+end
+
+function _trace_validation_check!(operation::Function, trace::LinkedSpecTraceEmitter, name::String)
+    try
+        operation()
+        trace_decision!(
+            trace,
+            "julia_frontend:validate_spec:$name",
+            true,
+            "pass",
+            LinkedSpecTraceMedium,
+        )
+        return nothing
+    catch error
+        trace_decision!(
+            trace,
+            "julia_frontend:validate_spec:$name",
+            false,
+            "error=$(sprint(showerror, error))",
+            LinkedSpecTraceMedium,
+        )
+        rethrow()
+    end
 end
 
 function _check_top_rule_exists(spec::SpecFile)

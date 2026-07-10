@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.2.1 — trace Julia frontend compiler and staged dispatch**
+  (DONE — complete native trace propagation is green; `.7.3.2.2` is active).
+
+  **Change:** One optional existing emitter now spans parse/validation/compile, function-shell parse/projection/
+  runtime execution, and staged normalize/queue/resolve/load/compile/execute. Balanced scopes and decisions report
+  both success and failure; omitted or disabled tracing stays quiet and result-identical.
+
+  **Proof:** Twenty-eight focused assertions, the full 868-assertion Julia suite, CLI smokes, and all 99 exact
+  corpus outputs pass. Routed output uses the existing sink, and generated depot compilation state was removed.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.7.3.2.0 — split Julia primary CLI alignment**
   (DONE — five mechanisms are owned; `.7.3.2.1` is active).
 

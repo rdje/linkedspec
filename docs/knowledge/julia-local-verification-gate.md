@@ -12,7 +12,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, ci, verification, corpus, depot, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.4 adds tools/run_julia_local.sh over Pkg.test(), CLI checks, and full 99-fixture execution. tools/run_ci_local.sh invokes it only under LINKEDSPEC_RUN_JULIA=1. The focused gate passes 840 assertions and 99/99 corpus execution."
+evidence: "JULIA-BACKEND-PARITY.6.4 adds tools/run_julia_local.sh over Pkg.test(), CLI checks, and full 99-fixture execution. tools/run_ci_local.sh invokes it only under LINKEDSPEC_RUN_JULIA=1. JULIA-BACKEND-PARITY.7.3.2.1 proves the focused gate at 868 assertions and 99/99 corpus execution."
 reverify: "LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n 'LINKEDSPEC_RUN_JULIA|run_julia_local' tools/run_ci_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md"
 ---
 

@@ -242,36 +242,157 @@ struct CompiledDescriptorState
     dependency_regex_state::CompiledDependencyRegexState
 end
 
-function compile_spec(spec::SpecFile; validate_source::Bool = true, strict_syntax::Bool = false)
-    if validate_source
-        validate_spec(spec; strict_syntax = strict_syntax)
+function compile_spec(
+    spec::SpecFile;
+    validate_source::Bool = true,
+    strict_syntax::Bool = false,
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+)
+    if trace === nothing
+        return _compile_spec(
+            spec;
+            validate_source = validate_source,
+            strict_syntax = strict_syntax,
+        )
     end
 
-    function_registry = user_function_registry_from_spec(spec)
+    scope = enter_trace_scope!(
+        trace,
+        "julia_compiler:compile_spec",
+        "rules=$(length(spec.rules)) functions=$(length(spec.functions)) validate_source=$(validate_source ? 1 : 0) strict_syntax=$(strict_syntax ? 1 : 0)",
+        LinkedSpecTraceLow,
+    )
+    exit_details = "status=error error=unknown"
+    try
+        compiled = _compile_spec(
+            spec;
+            validate_source = validate_source,
+            strict_syntax = strict_syntax,
+            trace = trace,
+        )
+        exit_details =
+            "status=ok rules=$(length(compiled.compiled_rule_order)) functions=$(length(compiled.function_registry.entries))"
+        return compiled
+    catch error
+        exit_details = "status=error error=$(sprint(showerror, error))"
+        rethrow()
+    finally
+        exit_trace_scope!(trace, scope, exit_details)
+    end
+end
+
+function _compile_spec(
+    spec::SpecFile;
+    validate_source::Bool,
+    strict_syntax::Bool,
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+)
+    if validate_source
+        validate_spec(spec; strict_syntax = strict_syntax, trace = trace)
+    elseif trace !== nothing
+        trace_decision!(
+            trace,
+            "julia_compiler:compile_spec:validate_source",
+            false,
+            "validate_source=0 skipped",
+            LinkedSpecTraceMedium,
+        )
+    end
+
+    function_registry = try
+        registry = user_function_registry_from_spec(spec)
+        if trace !== nothing
+            trace_decision!(
+                trace,
+                "julia_compiler:compile_spec:function_registry",
+                true,
+                "functions=$(length(registry.entries))",
+                LinkedSpecTraceMedium,
+            )
+        end
+        registry
+    catch error
+        if trace !== nothing
+            trace_decision!(
+                trace,
+                "julia_compiler:compile_spec:function_registry",
+                false,
+                "error=$(sprint(showerror, error))",
+                LinkedSpecTraceMedium,
+            )
+        end
+        rethrow()
+    end
     definition_order = String[]
     rules_by_label = Dict{String,CompiledRule}()
     redefined_rule_labels = String[]
     redefined_seen = Set{String}()
 
-    for rule in spec.rules
+    for (index, rule) in enumerate(spec.rules)
         label = rule.header.label
         push!(definition_order, label)
         if haskey(rules_by_label, label) && !(label in redefined_seen)
             push!(redefined_rule_labels, label)
             push!(redefined_seen, label)
         end
-        rules_by_label[label] = _compile_rule(rule, function_registry)
+        try
+            compiled_rule_value = _compile_rule(rule, function_registry)
+            rules_by_label[label] = compiled_rule_value
+            if trace !== nothing
+                trace_decision!(
+                    trace,
+                    "julia_compiler:compile_spec:rule",
+                    true,
+                    "index=$(index - 1) label=$label mode=$(rule.header.mode.name) regexes=$(length(compiled_rule_value.regex_patterns)) action_edges=$(length(compiled_rule_value.action_edges)) blind_edges=$(length(compiled_rule_value.blind_edges))",
+                    LinkedSpecTraceMedium,
+                )
+            end
+        catch error
+            if trace !== nothing
+                trace_decision!(
+                    trace,
+                    "julia_compiler:compile_spec:rule",
+                    false,
+                    "index=$(index - 1) label=$label mode=$(rule.header.mode.name) error=$(sprint(showerror, error))",
+                    LinkedSpecTraceMedium,
+                )
+            end
+            rethrow()
+        end
     end
 
     compiled_rule_order = _last_definition_order(definition_order)
-    resolved_rules = _resolve_action_edge_dependency_regexes(
-        compiled_rule_order = compiled_rule_order,
-        rules_by_label = rules_by_label,
-    )
-    dependency_regex_state = _build_dependency_regex_state(
-        compiled_rule_order = compiled_rule_order,
-        rules_by_label = resolved_rules,
-    )
+    resolved_rules, dependency_regex_state = try
+        resolved_rules = _resolve_action_edge_dependency_regexes(
+            compiled_rule_order = compiled_rule_order,
+            rules_by_label = rules_by_label,
+        )
+        dependency_regex_state = _build_dependency_regex_state(
+            compiled_rule_order = compiled_rule_order,
+            rules_by_label = resolved_rules,
+        )
+        if trace !== nothing
+            trace_decision!(
+                trace,
+                "julia_compiler:compile_spec:dependency_regex_map",
+                true,
+                "rules=$(length(compiled_rule_order)) entries=$(length(dependency_regex_state.dependency_regex_map))",
+                LinkedSpecTraceMedium,
+            )
+        end
+        (resolved_rules, dependency_regex_state)
+    catch error
+        if trace !== nothing
+            trace_decision!(
+                trace,
+                "julia_compiler:compile_spec:dependency_regex_map",
+                false,
+                "rules=$(length(compiled_rule_order)) error=$(sprint(showerror, error))",
+                LinkedSpecTraceMedium,
+            )
+        end
+        rethrow()
+    end
 
     return CompiledSpec(
         definition_order = definition_order,

@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.7.3.2.1 — propagate one trace emitter, do not build traced variants):
+  Parser/compiler observability stays output-safe when normal APIs accept an optional caller-owned emitter and
+  nested phases propagate it. A second traced parser/compiler would inevitably drift. Loading the existing trace
+  owner before frontend definitions lets Julia type those keywords directly; balanced scopes plus medium phase
+  decisions then compose through the already-tested sink routing. The same pattern carries from rule parsing into
+  spec-driven function-shell runtime execution and staged body jobs without introducing a CLI-only mechanism.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.7.3.2.0 — CLI adapters reveal missing library-observable mechanisms):
   Argument parsing is the small part of the Julia CLI gap. Correct `--trace` meaning first requires compile/parser/
   staged instrumentation; correct `--spec` needs stable resolver ownership; canonical JSON needs deterministic key

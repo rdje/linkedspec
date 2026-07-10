@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.2.1 — trace Julia frontend compiler and staged dispatch
+
+**Scope:** Julia trace propagation through source parse, validation, compiled-state construction, spec-driven
+function-shell parsing/projection/runtime execution, and staged parse-job dispatch; focused tests and public/live
+documentation.
+
+**Implementation:** Frontend owners now accept one optional caller-owned `LinkedSpecTraceEmitter`. Low-level
+operation scopes and medium result/pass/phase decisions reuse the existing levels, stdout/route/mirror sinks,
+reset behavior, and rendering. Omitted tracing retains the direct quiet path; disabled tracing records and writes
+nothing. All emitted error paths pair scopes with failure exits.
+
+**Verification:** Twenty-eight focused assertions prove success/failure events, routed output, quiet disabled
+behavior, and traced/untraced spec/descriptor identity. `tools/run_julia_local.sh` passes the complete 868-assertion
+suite, CLI smokes, and 99/99 exact corpus execution. Regenerable Julia compiled cache output was removed;
+`.7.3.2.2` is active for exact primary arguments and source/input loading.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.2.0 — split Julia primary CLI alignment
 
 **Scope:** Read-only Julia native/CLI seam audit, mechanism task split, public/live status, Knowledge Map, and

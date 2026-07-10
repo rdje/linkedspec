@@ -5,8 +5,8 @@ package/command surface, manifest validation, source and ActionIR frontends, sta
 parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch, value/helper/control/callback
 families, cursor/boundary behavior, structured diagnostics/tracing, registered function execution, and controlled
 library-level corpus execution, bounded CLI selection/reporting, and spec-driven top-level user-function source
-composition plus full ordered 99-fixture library and CLI execution. Local-gate integration and final parity
-closeout remain later leaves.
+composition plus full ordered 99-fixture library and CLI execution. Local-gate integration is complete; exact
+primary CLI alignment, capability census, generated source, and final complete-parity closeout remain open.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -24,7 +24,8 @@ diagnostic/trace, staged-function, shipped-corpus, function-shell, and full-corp
 landed; `.6.4` owns the focused optional-SDK verification gate, `.7.1` closes public documentation, and `.7.2` is
 complete with generated source deferred to the future split proof lane. `.7.3.0` found that this corpus/status CLI
 does not yet match the required cross-variant parser CLI contract. ADR `0023` defines that exact interface;
-`.7.3.2.0` splits repair and `.7.3.2.1` is active for compile/parser/staged trace coverage.
+`.7.3.2.0` splits repair, `.7.3.2.1` closes compile/parser/function-shell/staged trace coverage, and `.7.3.2.2`
+is active for exact arguments plus source/input resolution and loading.
 
 ## Commands
 
@@ -77,6 +78,59 @@ julia --project=julia -e 'using JuliaFormatter; format("julia")'
 julia --project=julia -e 'using JET; JET.test_package("LinkedSpecJulia")'
 ```
 
+## Native Trace Propagation
+
+Julia uses one caller-owned `LinkedSpecTraceEmitter` across frontend, compiler, staged, and runtime phases. Pass it
+with the optional `trace` keyword; omitting the keyword is the normal quiet path:
+
+```julia
+using LinkedSpecJulia
+
+source = """
+Top::
+ /x/
+ E { return(match_text()) }
+"""
+
+config = trace_config_enabled(LinkedSpecTraceDebug)
+trace = LinkedSpecTraceEmitter(config)
+
+spec = parse_spec(source; trace = trace)
+validate_spec(spec; trace = trace)
+compiled = compile_spec(spec; trace = trace)
+result = runtime_execute(LinkedSpecRuntimeEngine(compiled), "x"; trace = trace)
+@assert result.value == "x"
+```
+
+The same emitter can cover spec-driven top-level functions and staged body jobs:
+
+```julia
+function_source = """
+fn echo(value) { return(value) }
+Top::
+ /x/
+ E { return(echo(match_text())) }
+"""
+
+spec = parse_spec_with_staged_user_function_definitions(function_source; trace = trace)
+```
+
+Use the existing routed-file helpers when stdout must stay machine-readable:
+
+```julia
+config = with_trace_reset_file(with_trace_file(
+    trace_config_enabled(LinkedSpecTraceDebug),
+    "linkedspec.trace.log",
+))
+trace = LinkedSpecTraceEmitter(config)
+spec = parse_spec(source; trace = trace)
+compiled = compile_spec(spec; trace = trace)
+```
+
+Frontend topics use `julia_frontend:*`, compiler topics use `julia_compiler:*`, staged phases use
+`julia_staged:*`, and runtime topics remain `julia_runtime:*`. A disabled emitter and an omitted emitter both
+preserve results and produce no trace output.
+
 ## Current Boundary
 
 The backend proves that Julia package metadata, library loading, CLI routing, manifest-backed corpus validation,
@@ -102,7 +156,8 @@ registered user calls before helper fallback and reports wrong-arity registered 
 exposes `UserFunctionRegistry`, `user_function_registry_from_spec(...)`, `body_parse_jobs(...)`,
 `resolve_user_function_call(...)`, and `stitch_function_body_ast(...)` for ordered user-function records, staged body
 parse-job queues, exact-arity lookup, JSON projection, and immutable `body_ast` stitching.
-`src/compiler/CompiledSpec.jl` exposes `compile_spec(...)`, `CompiledSpec`, `CompiledRule`,
+These parse/projection/validation APIs accept an optional caller-owned trace emitter and propagate it through
+their nested operations. `src/compiler/CompiledSpec.jl` exposes `compile_spec(...)`, `CompiledSpec`, `CompiledRule`,
 `CompiledDependencyRegexState`, `CompiledDescriptorState`, `compiled_rule(...)`, `action_payloads(...)`, and
 `to_descriptor_json(...)` for ordered compiled rules, dependency refs, dependency-regex rows, mode metadata,
 lifecycle/action payload ASTs with registry-aware contracts, function registry projection, and descriptor-shaped JSON.
@@ -192,8 +247,11 @@ three routed top-level function fixtures pass. `.6.3` adds one atomic complete-c
 unbounded CLI execution: the manifest runs 99/99 green in exact order. Full tests pass with 840 assertions, status
 is `runtime-corpus-full`, `.6.4` owns the focused optional-SDK gate, and `.7.1` closes public documentation. `.7.2`
 defers generated source to `FUTURE-PARITY-BACKLOG.3`. `.7.3.0` splits the newly clarified exact user-facing CLI
-parity gap. `.7.3.1` ratifies ADR `0023`; `.7.3.2.0` splits Julia CLI alignment into five mechanisms and `.1` is
-active for trace prerequisites. Generated source remains deferred but blocks complete parity because Rust exports it.
+parity gap. `.7.3.1` ratifies ADR `0023`; `.7.3.2.0` splits Julia CLI alignment into five mechanisms. `.7.3.2.1`
+now closes parse/validation/compile/function-shell/staged trace propagation through the existing emitter and sinks;
+the full suite passes with 868 assertions and the focused gate remains 99/99. `.7.3.2.2` is active for exact
+arguments plus source/input resolution and loading. Generated source remains deferred but blocks complete parity
+because Rust exports it.
 
 Library example:
 

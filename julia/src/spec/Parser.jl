@@ -73,8 +73,51 @@ const _CONDITIONAL_PATTERN = r"^-\?[ \t]+\w+"
 const _FLUENT_PATTERN = r"^\.[ \t]*\w+"
 const _BOUNDED_MODE_PATTERN = r"^(AND|OR)\{(\d*)(?:,(\d*))?\}$"
 
-function parse_spec(source::AbstractString)
-    lines = split(String(source), '\n'; keepempty = true)
+function parse_spec(
+    source::AbstractString;
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+)
+    source_text = String(source)
+    if trace === nothing
+        return _parse_spec(source_text)
+    end
+
+    scope = enter_trace_scope!(
+        trace,
+        "julia_frontend:parse_spec",
+        "bytes=$(ncodeunits(source_text)) lines=$(length(split(source_text, '\n'; keepempty = true)))",
+        LinkedSpecTraceLow,
+    )
+    exit_details = "status=error error=unknown"
+    try
+        spec = _parse_spec(source_text)
+        trace_decision!(
+            trace,
+            "julia_frontend:parse_spec:result",
+            true,
+            "rules=$(length(spec.rules)) functions=$(length(spec.functions))",
+            LinkedSpecTraceMedium,
+        )
+        exit_details = "status=ok rules=$(length(spec.rules))"
+        return spec
+    catch error
+        message = sprint(showerror, error)
+        trace_decision!(
+            trace,
+            "julia_frontend:parse_spec:result",
+            false,
+            "error=$message",
+            LinkedSpecTraceMedium,
+        )
+        exit_details = "status=error error=$message"
+        rethrow()
+    finally
+        exit_trace_scope!(trace, scope, exit_details)
+    end
+end
+
+function _parse_spec(source::String)
+    lines = split(source, '\n'; keepempty = true)
     rules = Rule[]
     index = _skip_blanks_and_comments(lines, 1)
 

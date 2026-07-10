@@ -68,11 +68,12 @@ stdout. CLI-controlled stdout, stderr, diagnostic structure, and trace routing a
 the same language-neutral fixtures for every backend.
 
 This is a contract and active convergence target, not a claim that every current executable
-already passes. The current gap census is: Perl is parser-oriented but still needs the neutral
-fixture lock; Rust has no primary binary; Dart and Julia currently use corpus/status-oriented
-primary commands. `FUTURE-PARITY-BACKLOG.1.5` owns convergence. Julia's repair is split under
-`JULIA-BACKEND-PARITY.7.3.2`; `.7.3.2.1` is active for compile/parser/staged trace coverage before
-argument/IO, execution/JSON, failure/routing, and direct-command conformance leaves.
+    already passes. The current gap census is: Perl is parser-oriented but still needs the neutral
+    fixture lock; Rust has no primary binary; Dart and Julia currently use corpus/status-oriented
+    primary commands. `FUTURE-PARITY-BACKLOG.1.5` owns convergence. Julia's repair is split under
+    `JULIA-BACKEND-PARITY.7.3.2`; `.7.3.2.1` now closes compile/parser/function-shell/staged trace coverage,
+    and `.7.3.2.2` is active for exact argument/source/input handling before execution/JSON,
+    failure/routing, and direct-command conformance leaves.
 
 The backend contract is implementation-language neutral. The same `.spec` source,
 AST payloads, parse-job metadata, descriptors, diagnostics, and parser entry semantics
@@ -421,21 +422,22 @@ implementing the same cross-variant command interface.
 ### Julia Backend Commands, Embedding, and Status
 
 Julia is green at the accepted interpreter-first boundary: the complete validated corpus executes 99/99 with
-exact checked-in output, full package tests pass with 840 assertions, and package/CLI status is
+exact checked-in output, full package tests pass with 868 assertions, and package/CLI status is
 `runtime-corpus-full`. The primary product surface is the native `LinkedSpecJulia` module; the Julia CLI and corpus
 runner are thin adapters over the same in-process parser/compiler/runtime path.
 
 The current Julia primary command exposes help/status/corpus operations, not the parser-oriented interface of
 Perl `bin/linkedspec`. `JULIA-BACKEND-PARITY.7.3.0` records that user-visible drift and also confirms that Dart is
 corpus-oriented and Rust currently has no binary target. `.7.3.1` ratifies ADR `0023` and routes repairs;
-`.7.3.2.0` splits Julia implementation by mechanism and `.7.3.2.1` is active for tracing prerequisites. 99/99
-corpus success does not erase this interface gap.
+`.7.3.2.0` splits Julia implementation by mechanism, `.7.3.2.1` closes tracing prerequisites, and `.7.3.2.2` is
+active for exact arguments and source/input loading. 99/99 corpus success does not erase the remaining interface gap.
 
-The boundary does not claim generated Julia source or broader compile/parser trace parity. `.7.2` deliberately
+The boundary does not claim generated Julia source or the exact primary CLI yet. `.7.2` deliberately
 defers generated Julia source to the split future source-emitter lane under `FUTURE-PARITY-BACKLOG.3`; Julia
 currently guarantees the interpreter path. A credible later emitter must own its scaffold/compile-run harness,
 typed generated-family plan, direct structural-family execution, and curated corpus proof. Runtime diagnostics/
-tracing are implemented, while the trace chapter records the narrower trace scope. `JuliaFormatter` and `JET` are
+tracing now span frontend, compiler, function-shell, staged, and interpreter phases through one optional emitter;
+the trace chapter documents the event families and examples. `JuliaFormatter` and `JET` are
 optional local tools rather than parity prerequisites.
 
 ADR `0023` sharpens that limitation: Rust exports `source_emitter` publicly, so equivalent source-emission
@@ -539,6 +541,10 @@ classify exact-arity user calls before helper fallback and diagnose wrong regist
 `CompiledDependencyRegexState`, and `CompiledDescriptorState` for ordered compiled-rule state, dependency refs,
 dependency-regex rows, mode metadata, lifecycle/action payload ASTs with registry-aware contracts, function registry
 projection, and descriptor-shaped JSON with `julia_interpreter_rule` handlers marked `compiled_state_only`.
+`parse_spec(...)`, `validate_spec(...)`, `compile_spec(...)`, function-shell projection/parsing, staged job
+execution/stitching, and runtime execution accept the same optional caller-owned `LinkedSpecTraceEmitter`. Omitted
+or disabled tracing is quiet; enabled low/medium events report balanced operation scopes and phase decisions through
+the existing stdout/route/mirror/reset sink controls without changing spec, descriptor, or parse results.
 `julia/src/runtime/Matching.jl` compiles stable zero-based regex alternatives and supports seek/consume selection,
 full and compact capture vectors, named captures, zero-based code-unit spans, public character offsets,
 line/column projection, cursor/capture anchors, separate entry/local match registers, and zero-progress detection.

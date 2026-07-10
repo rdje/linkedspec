@@ -11,7 +11,7 @@ answers:
 date: 2026-07-04
 status: current
 tags: [trace, parity, variants, mdbook, external-contract, rust, perl]
-evidence: "User directive 2026-07-04; docs/linkedspec-book/src/public-api/trace-api.md; docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md; docs/tasks/TRACE-OBSERVABILITY.md .4.5"
+evidence: "User directive 2026-07-04; docs/linkedspec-book/src/public-api/trace-api.md; TRACE-OBSERVABILITY.4.5; JULIA-BACKEND-PARITY.7.3.2.1"
 reverify: "rg -n 'variant-neutral trace contract|Future variant trace parity checklist|trace parity|variant-agnostic|claim trace parity|external contract|backend-specific internals|Perl reference vocabulary|TRACE-OBSERVABILITY\\.4\\.5|rust_runtime:engine|rust_runtime:generated_plan' docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md docs/tasks/TRACE-OBSERVABILITY.md TOOLBOX.md docs/knowledge/trace-cross-variant-capability-contract.md rust/linkedspec-runtime/src"
 ---
 
@@ -41,11 +41,13 @@ interpreted/generated-plan runtime branch/mark/capture events, and `.4.5` parity
 for the documented external contract. Future variants must pass the mdBook checklist and record proof before making
 the same claim. Julia split that proof through `JULIA-BACKEND-PARITY.4.5.0`; `.4.5.1` added structured runtime
 diagnostics and `.4.5.2` added controls/events/sinks plus traced entrypoints. `.4.5.3` / `.4.5.4` separately own
-runtime instrumentation and no-drift before any Julia trace parity claim; `.4.5.3` has now landed and `.4.5.4`
-has closed the scoped runtime no-drift proof without claiming broader compile/parser trace parity.
+runtime instrumentation and no-drift. `.7.3.2.1` later closes Julia source parser, validation, compiler,
+function-shell, and staged-dispatch propagation through the same controls/sinks, with default-quiet and
+traced/untraced identity proof.
 
 Related facts: [[julia-runtime-diagnostics-trace-split]], [[julia-runtime-structured-diagnostics]],
 [[julia-trace-controls-sinks]], [[julia-runtime-trace-events]],
 [[julia-diagnostics-trace-boundary]],
+[[julia-frontend-compiler-staged-trace-events]],
 [[trace-backend-parity-split]],
 [[dart-runtime-diagnostics-trace-split]].

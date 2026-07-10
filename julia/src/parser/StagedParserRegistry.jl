@@ -88,38 +88,200 @@ function to_json(dispatch::StagedFunctionBodyDispatchResult)
     )
 end
 
-function execute_staged_parse_job(job::StagedParseJob)
-    results = execute_staged_parse_jobs([job])
+function execute_staged_parse_job(
+    job::StagedParseJob;
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+)
+    results = execute_staged_parse_jobs([job]; trace = trace)
     if isempty(results)
         throw(StagedParserRegistryException("staged parse dispatch produced no result"))
     end
     return only(results).result
 end
 
-function execute_staged_parse_jobs(jobs)
-    queue = StagedParseJob[_normalize_staged_parse_job(job) for job in jobs]
+function execute_staged_parse_jobs(
+    jobs;
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+)
+    input_jobs = collect(jobs)
+    if trace === nothing
+        return _execute_staged_parse_jobs(input_jobs, nothing)
+    end
+
+    scope = enter_trace_scope!(
+        trace,
+        "julia_staged:execute_parse_jobs",
+        "jobs=$(length(input_jobs))",
+        LinkedSpecTraceLow,
+    )
+    exit_details = "status=error error=unknown"
+    try
+        results = _execute_staged_parse_jobs(input_jobs, trace)
+        exit_details = "status=ok results=$(length(results))"
+        return results
+    catch error
+        exit_details = "status=error error=$(sprint(showerror, error))"
+        rethrow()
+    finally
+        exit_trace_scope!(trace, scope, exit_details)
+    end
+end
+
+function _execute_staged_parse_jobs(
+    jobs,
+    trace::Union{Nothing,LinkedSpecTraceEmitter},
+)
+    queue = StagedParseJob[]
+    for (input_index, job) in enumerate(jobs)
+        try
+            normalized = _normalize_staged_parse_job(job)
+            push!(queue, normalized)
+            if trace !== nothing
+                trace_decision!(
+                    trace,
+                    "julia_staged:execute_parse_jobs:normalize_job",
+                    true,
+                    "input_index=$(input_index - 1) job_id=$(normalized.job_id) parser_spec_id=$(normalized.parser_spec_id) top_rule=$(normalized.top_rule) payload_kind=$(normalized.payload_kind)",
+                    LinkedSpecTraceMedium,
+                )
+            end
+        catch error
+            if trace !== nothing
+                trace_decision!(
+                    trace,
+                    "julia_staged:execute_parse_jobs:normalize_job",
+                    false,
+                    "input_index=$(input_index - 1) error=$(sprint(showerror, error))",
+                    LinkedSpecTraceMedium,
+                )
+            end
+            rethrow()
+        end
+    end
     sort!(queue; lt = _staged_parse_job_lt)
+    if trace !== nothing
+        trace_decision!(
+            trace,
+            "julia_staged:execute_parse_jobs:queue_sorted",
+            true,
+            "jobs=$(length(queue))",
+            LinkedSpecTraceMedium,
+        )
+    end
 
     results = StagedParseResult[]
     for (index, job) in enumerate(queue)
-        resolved = _resolve_staged_parser(job)
-        loaded = _load_staged_parser(resolved)
-        compiled = _compile_staged_parser(loaded, job)
-        result = _execute_staged_parser(compiled, job)
-        push!(results, StagedParseResult(
-            index - 1,
+        push!(results, _execute_one_staged_parse_job(index - 1, job, trace))
+    end
+    return results
+end
+
+function _execute_one_staged_parse_job(
+    queue_index::Int,
+    job::StagedParseJob,
+    trace::Union{Nothing,LinkedSpecTraceEmitter},
+)
+    scope = trace === nothing ? nothing : enter_trace_scope!(
+        trace,
+        "julia_staged:execute_parse_jobs:job",
+        "queue_index=$queue_index job_id=$(job.job_id) parent_ast_path=$(join(job.parent_ast_path, '.')) parser_spec_id=$(job.parser_spec_id) top_rule=$(job.top_rule)",
+        LinkedSpecTraceMedium,
+    )
+    exit_details = "status=error job_id=$(job.job_id) error=unknown"
+    try
+        resolved = _trace_staged_phase!(trace, "resolve", job) do
+            _resolve_staged_parser(job)
+        end
+        loaded = _trace_staged_phase!(trace, "load", job) do
+            _load_staged_parser(resolved)
+        end
+        compiled = _trace_staged_phase!(trace, "compile", job) do
+            _compile_staged_parser(loaded, job)
+        end
+        result = _trace_staged_phase!(trace, "execute", job) do
+            _execute_staged_parser(compiled, job)
+        end
+        record = StagedParseResult(
+            queue_index,
             job,
             resolved.resolved_spec_id,
             resolved.provider,
             compiled.cache_key,
             _compiled_staged_parser_json(compiled),
             result,
-        ))
+        )
+        exit_details = "status=ok job_id=$(job.job_id)"
+        return record
+    catch error
+        exit_details = "status=error job_id=$(job.job_id) error=$(sprint(showerror, error))"
+        rethrow()
+    finally
+        if trace !== nothing && scope !== nothing
+            exit_trace_scope!(trace, scope, exit_details)
+        end
     end
-    return results
 end
 
-function dispatch_function_body_parse_jobs(spec::SpecFile)
+function _trace_staged_phase!(
+    operation::Function,
+    trace::Union{Nothing,LinkedSpecTraceEmitter},
+    phase::String,
+    job::StagedParseJob,
+)
+    if trace === nothing
+        return operation()
+    end
+    try
+        result = operation()
+        trace_decision!(
+            trace,
+            "julia_staged:execute_parse_jobs:$phase",
+            true,
+            "job_id=$(job.job_id) parser_spec_id=$(job.parser_spec_id) top_rule=$(job.top_rule)",
+            LinkedSpecTraceMedium,
+        )
+        return result
+    catch error
+        trace_decision!(
+            trace,
+            "julia_staged:execute_parse_jobs:$phase",
+            false,
+            "job_id=$(job.job_id) error=$(sprint(showerror, error))",
+            LinkedSpecTraceMedium,
+        )
+        rethrow()
+    end
+end
+
+function dispatch_function_body_parse_jobs(
+    spec::SpecFile;
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+)
+    scope = trace === nothing ? nothing : enter_trace_scope!(
+        trace,
+        "julia_staged:dispatch_function_body_parse_jobs",
+        "functions=$(length(spec.functions))",
+        LinkedSpecTraceLow,
+    )
+    exit_details = "status=error error=unknown"
+    try
+        dispatch = _dispatch_function_body_parse_jobs(spec, trace)
+        exit_details = "status=ok jobs=$(length(dispatch.results))"
+        return dispatch
+    catch error
+        exit_details = "status=error error=$(sprint(showerror, error))"
+        rethrow()
+    finally
+        if trace !== nothing && scope !== nothing
+            exit_trace_scope!(trace, scope, exit_details)
+        end
+    end
+end
+
+function _dispatch_function_body_parse_jobs(
+    spec::SpecFile,
+    trace::Union{Nothing,LinkedSpecTraceEmitter},
+)
     jobs = StagedParseJob[]
     for (index, definition) in enumerate(spec.functions)
         job = definition.body_parse_job
@@ -130,7 +292,7 @@ function dispatch_function_body_parse_jobs(spec::SpecFile)
         push!(jobs, job)
     end
 
-    results = execute_staged_parse_jobs(jobs)
+    results = execute_staged_parse_jobs(jobs; trace = trace)
     body_ast_by_index = Dict{Int,Any}()
     for result in results
         index = _staged_function_index(result.job)
@@ -160,11 +322,20 @@ function dispatch_function_body_parse_jobs(spec::SpecFile)
     )
 end
 
-stitch_function_body_parse_jobs(spec::SpecFile) = dispatch_function_body_parse_jobs(spec).spec
+function stitch_function_body_parse_jobs(
+    spec::SpecFile;
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+)
+    return dispatch_function_body_parse_jobs(spec; trace = trace).spec
+end
 
-function parse_spec_with_staged_user_function_definition_asts(source::AbstractString, definition_nodes)
-    spec = parse_spec_with_user_function_definition_asts(source, definition_nodes)
-    return stitch_function_body_parse_jobs(spec)
+function parse_spec_with_staged_user_function_definition_asts(
+    source::AbstractString,
+    definition_nodes;
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+)
+    spec = parse_spec_with_user_function_definition_asts(source, definition_nodes; trace = trace)
+    return stitch_function_body_parse_jobs(spec; trace = trace)
 end
 
 function _normalize_staged_parse_job(job::StagedParseJob)

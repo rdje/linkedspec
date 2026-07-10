@@ -28,12 +28,33 @@ struct _ProjectedUserFunction
     source_span::_UserFunctionAstSpan
 end
 
-function parse_spec_with_user_function_definition_asts(source::AbstractString, definition_nodes)
-    projection = project_user_function_definition_asts(source, definition_nodes)
+function parse_spec_with_user_function_definition_asts(
+    source::AbstractString,
+    definition_nodes;
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+)
+    source_text = String(source)
+    nodes = collect(definition_nodes)
+    scope = trace === nothing ? nothing : enter_trace_scope!(
+        trace,
+        "julia_frontend:function_shell:parse_spec",
+        "bytes=$(ncodeunits(source_text)) definition_nodes=$(length(nodes))",
+        LinkedSpecTraceLow,
+    )
+    exit_details = "status=error error=unknown"
     try
-        rule_spec = parse_spec(projection.stripped_source)
-        return SpecFile(functions = projection.functions, rules = rule_spec.rules)
+        projection = project_user_function_definition_asts(
+            source_text,
+            nodes;
+            trace = trace,
+        )
+        rule_spec = parse_spec(projection.stripped_source; trace = trace)
+        spec = SpecFile(functions = projection.functions, rules = rule_spec.rules)
+        exit_details =
+            "status=ok functions=$(length(spec.functions)) rules=$(length(spec.rules))"
+        return spec
     catch error
+        exit_details = "status=error error=$(sprint(showerror, error))"
         if error isa SpecParseException
             throw(SpecParseException(
                 error.line,
@@ -41,32 +62,80 @@ function parse_spec_with_user_function_definition_asts(source::AbstractString, d
             ))
         end
         rethrow()
+    finally
+        if trace !== nothing && scope !== nothing
+            exit_trace_scope!(trace, scope, exit_details)
+        end
     end
 end
 
-function project_user_function_definition_asts(source::AbstractString, definition_nodes)
+function project_user_function_definition_asts(
+    source::AbstractString,
+    definition_nodes;
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+)
     source_text = String(source)
+    nodes = collect(definition_nodes)
+    scope = trace === nothing ? nothing : enter_trace_scope!(
+        trace,
+        "julia_frontend:function_shell:project",
+        "bytes=$(ncodeunits(source_text)) definition_nodes=$(length(nodes))",
+        LinkedSpecTraceMedium,
+    )
+    exit_details = "status=error error=unknown"
     functions = FunctionDefinition[]
     spans = _UserFunctionAstSpan[]
 
-    for (index, node) in enumerate(definition_nodes)
-        zero_index = index - 1
-        object = _ufd_object(node, "definition node $zero_index")
-        node_type = _ufd_string_field(object, "type", "definition node")
-        if node_type == "function_definition"
-            projected = _function_from_definition_ast(object, source_text, zero_index)
-            push!(functions, projected.function_definition)
-            push!(spans, projected.source_span)
-        elseif node_type == "function_definition_error"
-            throw(_function_definition_error(object, zero_index))
-        else
-            throw(UserFunctionDefinitionException(
-                "user_function_definition.spec returned unsupported node type '$node_type' at index $zero_index",
-            ))
+    try
+        for (index, node) in enumerate(nodes)
+            zero_index = index - 1
+            object = _ufd_object(node, "definition node $zero_index")
+            node_type = _ufd_string_field(object, "type", "definition node")
+            if node_type == "function_definition"
+                projected = _function_from_definition_ast(object, source_text, zero_index)
+                push!(functions, projected.function_definition)
+                push!(spans, projected.source_span)
+                if trace !== nothing
+                    trace_decision!(
+                        trace,
+                        "julia_frontend:function_shell:project:definition",
+                        true,
+                        "index=$zero_index name=$(projected.function_definition.name) arity=$(projected.function_definition.arity)",
+                        LinkedSpecTraceMedium,
+                    )
+                end
+            elseif node_type == "function_definition_error"
+                throw(_function_definition_error(object, zero_index))
+            else
+                throw(UserFunctionDefinitionException(
+                    "user_function_definition.spec returned unsupported node type '$node_type' at index $zero_index",
+                ))
+            end
+        end
+
+        projection = UserFunctionDefinitionProjection(
+            functions,
+            _strip_function_definition_spans(source_text, spans),
+        )
+        exit_details = "status=ok functions=$(length(functions))"
+        return projection
+    catch error
+        if trace !== nothing
+            trace_decision!(
+                trace,
+                "julia_frontend:function_shell:project:definition",
+                false,
+                "error=$(sprint(showerror, error))",
+                LinkedSpecTraceMedium,
+            )
+        end
+        exit_details = "status=error error=$(sprint(showerror, error))"
+        rethrow()
+    finally
+        if trace !== nothing && scope !== nothing
+            exit_trace_scope!(trace, scope, exit_details)
         end
     end
-
-    return UserFunctionDefinitionProjection(functions, _strip_function_definition_spans(source_text, spans))
 end
 
 function definition_nodes_from_user_function_definition_output(output)

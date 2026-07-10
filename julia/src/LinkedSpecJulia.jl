@@ -260,6 +260,7 @@ const CLI_ENTRYPOINT = "julia/bin/linkedspec_julia.jl"
 const CORPUS_RUNNER_ENTRYPOINT = "julia/bin/corpus_runner.jl"
 const PARITY_STATUS = "runtime-corpus-full"
 
+include("trace/Trace.jl")
 include("corpus/CorpusManifest.jl")
 include("spec/Ast.jl")
 include("action/ActionAst.jl")
@@ -272,7 +273,6 @@ include("parser/StagedParserRegistry.jl")
 include("spec/Validator.jl")
 include("compiler/CompiledSpec.jl")
 include("runtime/Matching.jl")
-include("trace/Trace.jl")
 include("runtime/Interpreter.jl")
 include("parser/UserFunctionDefinitionParser.jl")
 include("cli/LinkedSpecJuliaCli.jl")
