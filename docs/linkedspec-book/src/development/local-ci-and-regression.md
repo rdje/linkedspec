@@ -52,8 +52,8 @@ UTF-8 phase records, stdout/route/mirror, reset/persistence/append, levels/alias
 escaping, and all failure phases. The canonical local gate invokes this same runner in both environments.
 ADR `0025` defines Unicode scalar text encoded as strict preserved UTF-8 at process/file boundaries. `.6.2`
 now decodes Perl argv/files, emits recursive UTF-8 JSON once, and locks inline/file Unicode, normalization
-preservation, input BOM/newlines, non-stripped source BOM, invalid phases, and trace byte counts. Active `.6.3`
-closes the reference before Rust `.1.5.2` consumes the completed manifest. UTF-16/UTF-32 are not implicit inputs.
+preservation, input BOM/newlines, non-stripped source BOM, invalid phases, and trace byte counts. `.6.3` closes
+the reference; active Rust `.1.5.2` now consumes the completed manifest. UTF-16/UTF-32 are not implicit inputs.
 
 Schema version 1 workspace inputs use `path` plus exactly one checked-in `source`
 or explicit `bytes_hex`. Hex data is non-empty, lowercase, and even-length, and is
@@ -168,7 +168,7 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
 - rejects untracked files inside CI input areas,
 - audits selected core paths for machine-specific absolute paths,
 - runs Perl syntax checks for the library, primary CLI, neutral runner, and focused tests,
-- runs the focused runner/trace suites and all 53 primary CLI cases under default and POSIX option environments,
+- runs the focused runner/trace suites and all 61 primary CLI cases under default and POSIX option environments,
 - runs the main phase0 regression suite,
 - runs `scripts/check_memory_architecture.sh` to verify memory architecture invariants (layer integrity, pointer freshness, bounded-layer consistency),
 - runs `knowledge-map/scripts/check_knowledge_map.sh` to verify Knowledge Map integrity (derived map matches source cards, no stale entries),

@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.6.3 — close reference status before backend consumption):
+  A reference adapter is not ready merely when its code passes. The exact manifest count, help contract, task
+  parents, public book, roadmap, and retrieval facts must all stop describing the repaired boundary as active.
+  Preserve dated failure evidence for causality, but distinguish it from live status. Only then activate the next
+  backend against an unchanged contract; otherwise the candidate can accidentally implement a moving reference.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.6.2 — Unicode text needs one explicit wire encoding):
   Unicode defines characters/code points; UTF-8, UTF-16, and UTF-32 are encodings. A portable CLI must choose one
   boundary encoding rather than treating raw bytes as characters or guessing from BOMs. Decode argv and file bytes

@@ -98,8 +98,8 @@ input-file bytes produce the stable input-load failure. Invalid-byte OS argv is
 outside the portable text interface, and arbitrary binary parsing would require a
 future explicit byte-stream contract. Perl implementation is exact through `.1.5.1.6.2`: strict argv/file
 decoding, preserved BOM/code points/newlines, recursive canonical JSON, stable invalid-file phases, and exact
-trace byte counts pass 61 shared cases. `.6.3` owns final reference no-drift before Rust; this does not claim that
-other backends already pass the manifest.
+trace byte counts pass 61 shared cases. `.6.3` closes final reference no-drift and activates Rust `.1.5.2`; this
+does not claim that other backends already pass the manifest.
 
 For example, this portable action-edge grammar deliberately constructs object keys out of
 order:
@@ -135,8 +135,8 @@ This is a contract and active convergence target, not a claim that every current
     nine-family direct-command conformance. `.7.3.3` closes the local audit without claiming global identity.
     Global `.1.5.1.5` closed 53 exact Perl cases: two help, 20 usage, seven success, four operational failure, and
     20 trace families in default/POSIX environments. A signoff probe then exposed UTF-8 argv/JSON mojibake;
-    `.1.5.1.6.2` fixes the adapter and adds eight exact Unicode/invalid families, bringing Perl to 61/61. Active
-    `.6.3` owns final reference no-drift before pending Rust `.1.5.2`.
+    `.1.5.1.6.2` fixes the adapter and adds eight exact Unicode/invalid families, bringing Perl to 61/61. `.6.3`
+    closes final reference no-drift; active Rust `.1.5.2` now owns the missing primary binary against that manifest.
 
 A separate parked direction, `FUTURE-PARITY-BACKLOG.10.1`, will design deep semantic introspection. The intended
 contract is one versioned, deterministic semantic query model exposed idiomatically from every native backend:

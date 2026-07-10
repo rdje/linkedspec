@@ -50,7 +50,8 @@ The `.1.5.1.6.0` audit proved decoded Perl native input and a Unicode regex both
 execute and serialize with exact `c3 a9` bytes. `.6.1` added neutral hex-byte
 materialization. `.6.2` now strictly decodes valid argv/source/input, emits recursive
 UTF-8 JSON once, and passes 61 shared cases including preservation, invalid-file,
-and byte-count boundaries. `.6.3` remains active for final reference no-drift.
+and byte-count boundaries. `.6.3` closes final reference no-drift and activates
+Rust `.1.5.2` against the unchanged 61-case manifest.
 
 Unicode is the logical character/code-point standard; UTF-8 is the portable
 process/file encoding selected by ADR `0025`. UTF-16 and UTF-32 are valid Unicode

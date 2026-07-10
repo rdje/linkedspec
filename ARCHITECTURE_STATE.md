@@ -5,20 +5,25 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.3` closes the Perl primary-command reference.
+  Help, manifest, task/roadmap/live docs, mdBook, and Knowledge Map agree on the strict preserved UTF-8 contract
+  and 61 exact cases. Dated 53-case and pre-fix mojibake records remain historical evidence, not live defects.
+  Focused suites, 61/61 default/POSIX, and full local CI through Phase 0 pass. Parent `.1.5.1`/`.1.5.1.6` are done;
+  Rust `.1.5.2` is active to add a thin native-library CLI against the unchanged shared manifest.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.2` closes the Perl primary UTF-8 adapter gap.
   `bin/linkedspec` strictly decodes valid argv and raw source/input files, preserves normalization/BOM/newlines,
   keeps invalid files in stable compilation/input-load phases, and emits recursively canonical UTF-8 JSON once.
   Eight exact cases cover inline/file/nested Unicode, composed/decomposed text, input U+FEFF/CRLF/LF, source BOM
   non-stripping, invalid bytes, and trace input/result byte counts; the current shared suite is 61/61 under default
   and POSIX environments. Unicode is the logical text model; UTF-8 is the selected wire encoding, not a synonym.
-  `.6.3` is active for final reference no-drift before Rust `.1.5.2`.
+  `.6.3` has since closed final reference no-drift and activated Rust `.1.5.2`.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.11.0` captures a correction to the closed trailing-block MVP.
   Current Perl/Rust/Dart/Julia runtimes support named `with` and tree-traversal block surfaces; Lua is absent, and
   generic attached/parenthesized equivalence is not implemented. The intended model has four object/value kinds—
   scalar, array, harray/hash, and codeblock—and lets a callable signature accept a final codeblock so
   `call(args) { block }` and `call(args, { block })` normalize identically. Parked `.11.1` owns canonical AST/IR,
   evaluation/diagnostics/parity, terminology, and whether `with` remains an ordinary helper or is removed.
-  Active implementation remains `.1.5.1.6.2`; this capture changes no runtime behavior.
+  That capture left `.1.5.1.6.2` active at the time; `.6.3` has since closed Perl and activated Rust `.1.5.2`.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.1` extends neutral manifest schema version 1 with exact
   `bytes_hex` input-file materialization. Exactly one checked-in source or non-empty lowercase even hex is allowed;
   raw workspace bytes and malformed/ambiguous pre-launch rejection are focused-locked. The then-existing 53 cases

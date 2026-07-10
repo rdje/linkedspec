@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, parity, perl, rust, dart, julia, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.3.0 finds Perl parser CLI, Dart/Julia corpus CLIs, and no Rust binary. ADR 0023 defines the target. Julia now has local exact-process proof and .7.3.3 no-drift; global .1.5 remains."
+evidence: "JULIA-BACKEND-PARITY.7.3.0 finds Perl parser CLI, Dart/Julia corpus CLIs, and no Rust binary. ADR 0023 defines the target. Perl is now the exact 61-case reference; Rust .1.5.2 is active; Julia has local exact-process proof but global fixture identity remains."
 reverify: "sed -n '1,230p' bin/linkedspec; sed -n '1,330p' dart/lib/src/cli/linkedspec_dart_cli.dart; sed -n '1,220p' julia/src/cli/LinkedSpecJuliaCli.jl; rg -n '\[\[bin\]\]|^name =|^members =' rust/Cargo.toml rust/*/Cargo.toml; find rust -type f -path '*/src/bin/*' -print"
 ---
 
@@ -19,8 +19,8 @@ The implemented backend CLI surfaces are not currently interface-equivalent:
 
 - Perl `bin/linkedspec` parses an arbitrary named, file-backed, or inline spec against literal or file-backed
   input. It exposes top-rule, parse-mode, and trace controls, prints canonical JSON, and distinguishes runtime
-  failure (`1`) from usage failure (`2`). `.1.5.1.5` closes canonical trace within 53 exact current cases, but a
-  signoff probe exposed Perl UTF-8 argv/JSON mojibake. `.1.5.1.6` owns that boundary before pending Rust `.1.5.2`.
+  failure (`1`) from usage failure (`2`). `.1.5.1.5` closes canonical trace, and `.1.5.1.6` resolves the surfaced
+  UTF-8 argv/JSON gap. Perl passes the complete 61-case default/POSIX reference; Rust `.1.5.2` is now active.
 - Dart `bin/linkedspec_dart.dart` is a manifest corpus validator/executor. Its options select corpus cases/windows,
   and it reports usage failure as `64`.
 - Julia `bin/linkedspec_julia.jl` now accepts only the exact parser option contract, rejects subcommands/

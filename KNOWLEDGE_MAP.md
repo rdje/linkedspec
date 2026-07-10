@@ -2630,7 +2630,7 @@ _Implemented backend CLIs do not yet expose one identical user-facing interface_
 
 - **answers:** do all LinkedSpec backend CLIs have the same options | are the Perl Rust Dart and Julia CLIs equivalent | does Rust have a LinkedSpec CLI binary | what does the current Perl CLI do | what do the current Dart and Julia CLIs do | why was JULIA-BACKEND-PARITY.7.3 split
 - **date:** 2026-07-10 · **status:** current
-- **evidence:** `JULIA-BACKEND-PARITY.7.3.0 finds Perl parser CLI, Dart/Julia corpus CLIs, and no Rust binary. ADR 0023 defines the target. Julia now has local exact-process proof and .7.3.3 no-drift; global .1.5 remains.`
+- **evidence:** `JULIA-BACKEND-PARITY.7.3.0 finds Perl parser CLI, Dart/Julia corpus CLIs, and no Rust binary. ADR 0023 defines the target. Perl is now the exact 61-case reference; Rust .1.5.2 is active; Julia has local exact-process proof but global fixture identity remains.`
 - **reverify:** `sed -n '1,230p' bin/linkedspec; sed -n '1,330p' dart/lib/src/cli/linkedspec_dart_cli.dart; sed -n '1,220p' julia/src/cli/LinkedSpecJuliaCli.jl; rg -n '\[\[bin\]\]|^name =|^members =' rust/Cargo.toml rust/*/Cargo.toml; find rust -type f -path '*/src/bin/*' -print`
 - **source:** [`docs/knowledge/cross-backend-cli-contract-gap.md`](docs/knowledge/cross-backend-cli-contract-gap.md)
 
@@ -3980,7 +3980,7 @@ _Perl primary CLI audit split strict arguments and output-channel normalization_
 
 - **answers:** does the Perl primary CLI reject positional arguments | does the Perl primary CLI accept abbreviated options | are Perl CLI long options case sensitive | does the Perl CLI accept no trace reset and no trace emoji | does POSIXLY_CORRECT change the Perl CLI | why does a Perl CLI failure write trace to stdout | what did FUTURE-PARITY-BACKLOG.1.5.1.0 find | how is neutral CLI fixture work split
 - **date:** 2026-07-10 · **status:** current
-- **evidence:** `FUTURE-PARITY-BACKLOG.1.5.1.0 audited positionals, case/abbreviation/negation aliases, POSIXLY_CORRECT drift, GetOptions warnings, and DUMP_NONE failure trace; .1-.4 now close runner/help/arguments/success/failure while .5 retains trace.`
+- **evidence:** `FUTURE-PARITY-BACKLOG.1.5.1.0 audited positionals, case/abbreviation/negation aliases, POSIXLY_CORRECT drift, GetOptions warnings, and DUMP_NONE failure trace; .1-.6.3 close the exact 61-case Perl reference.`
 - **reverify:** `PERL5LIB= prove -v -Iperl t/trace_cli.t; sed -n '1,260p' bin/linkedspec; rg -n 'DUMP_NONE|sub log_output|sub trace_decision' perl/LinkedSpec/Trace.pm perl/LinkedSpec/Validation.pm perl/LinkedSpec/Compiler.pm; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md`
 - **source:** [`docs/knowledge/perl-primary-cli-conformance-audit.md`](docs/knowledge/perl-primary-cli-conformance-audit.md)
 

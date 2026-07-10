@@ -13,7 +13,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [perl, cli, conformance, getopt-long, trace, stdout, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.1.0 audited positionals, case/abbreviation/negation aliases, POSIXLY_CORRECT drift, GetOptions warnings, and DUMP_NONE failure trace; .1-.4 now close runner/help/arguments/success/failure while .5 retains trace."
+evidence: "FUTURE-PARITY-BACKLOG.1.5.1.0 audited positionals, case/abbreviation/negation aliases, POSIXLY_CORRECT drift, GetOptions warnings, and DUMP_NONE failure trace; .1-.6.3 close the exact 61-case Perl reference."
 reverify: "PERL5LIB= prove -v -Iperl t/trace_cli.t; sed -n '1,260p' bin/linkedspec; rg -n 'DUMP_NONE|sub log_output|sub trace_decision' perl/LinkedSpec/Trace.pm perl/LinkedSpec/Validation.pm perl/LinkedSpec/Compiler.pm; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -49,8 +49,8 @@ deterministic explicit trace remains owned by `.5`.
 
 `FUTURE-PARITY-BACKLOG.1.5.1` is split into neutral harness/help (`.1`, now done), strict
 arguments (`.2`, now done), success/source/input/parser controls (`.3`, now done),
-operational failure normalization (`.4`, now done), canonical trace/local-gate integration (`.5`), and the
-signoff-surfaced UTF-8 process boundary (`.6`). Rust, Dart, and
+operational failure normalization (`.4`, done), canonical trace/local-gate integration (`.5`, done), and the
+signoff-surfaced UTF-8 process boundary (`.6`, done through `.6.3`). Rust, Dart, and
 Julia will later consume the same manifest; they do not get backend-specific
 fixture forks.
 

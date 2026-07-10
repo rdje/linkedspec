@@ -7,8 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.6.3 — close Perl CLI reference**
+  (DONE — Perl is the exact 61-case reference; Rust `.1.5.2` is active).
+
+  **No-drift:** Current task/roadmap/live/book/help/KM/fixture surfaces agree on strict preserved UTF-8, resolved
+  mojibake, recursive JSON, stable invalid phases, and 61 cases. Historical 53-case/pre-fix records remain dated.
+
+  **Proof:** Focused runner/trace suites, 61/61 default and POSIX, full local CI through Phase 0, mdBook,
+  Knowledge Map, governance, whitespace, and generated-book cleanup pass; no behavior or fixture bytes changed.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.6.2 — enforce Perl CLI UTF-8 text**
-  (DONE — Perl passes 61/61 strict shared cases; `.1.5.1.6.3` active for reference closeout).
+  (DONE — Perl passes 61/61 strict shared cases; `.1.5.1.6.3` later closed reference no-drift).
 
   **Implementation:** Valid argv and raw source/input files decode strictly as UTF-8; code points, normalization,
   BOM, and newlines are preserved; canonical nested JSON and stable help/errors encode once; invalid files retain
@@ -19,7 +28,7 @@ Current execution status for interruption-safe batch workflow recovery.
   default/POSIX environments, full local CI/Phase 0, docs/KM/governance/book/cleanup pass.
 
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.11.0 — capture generic trailing codeblocks**
-  (DONE — corrective direction parked; `.1.5.1.6.2` later closed and `.6.3` is active).
+  (DONE — corrective direction parked; `.1.5.1.6.2` and `.6.3` later closed, with Rust `.1.5.2` active).
 
   **Finding/direction:** Perl/Rust/Dart/Julia all implement the narrow named `with` surface, selected traversal
   methods also take blocks, and Lua is not implemented. The closed `.14` contract explicitly excluded
@@ -31,7 +40,7 @@ Current execution status for interruption-safe batch workflow recovery.
   decision to retain `with` as an ordinary block-taking helper or remove it. No parser/runtime behavior changed.
 
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.6.1 — add neutral hex byte fixtures**
-  (DONE — reusable non-text inputs locked; `.1.5.1.6.2` active for Perl UTF-8 behavior).
+  (DONE — reusable non-text inputs locked; `.1.5.1.6.2` and final `.6.3` later closed).
 
   **Change:** Schema version 1 file inputs accept exactly one checked-in `source` or explicit `bytes_hex`; the
   latter is non-empty lowercase even hex and materializes through the existing raw workspace writer.

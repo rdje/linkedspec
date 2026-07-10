@@ -43,7 +43,7 @@ bytes in compilation/input-load phases. The exact literal-input case now emits
 
 ADR `0025` ratifies strict preserved UTF-8 text. `.6.1` added neutral hex-byte
 materialization, `.6.2` closes Perl decoding with 61/61 default/POSIX cases, and
-active `.6.3` owns final reference no-drift before Rust.
+`.6.3` closes final no-drift before activating Rust `.1.5.2`.
 
 Related facts: [[cross-backend-cli-contract-gap]],
 [[canonical-primary-cli-trace-protocol]], [[neutral-cli-fixture-runner]],

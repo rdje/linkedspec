@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.6.3 — close Perl CLI reference
+
+**Closeout:** Reconciled parent task status, roadmaps, live docs, mdBook, help/fixture counts, and Knowledge Map.
+Live surfaces now consistently identify Perl as the strict 61-case primary-command reference and the prior
+mojibake as resolved; dated 53-case and pre-fix evidence remains historical.
+
+**Frontier:** `FUTURE-PARITY-BACKLOG.1.5.1` and `.1.5.1.6` are done. Rust `.1.5.2` is active to add its missing
+thin primary command against the unchanged neutral manifest. No implementation or expected-byte behavior changed.
+
+**Verification:** Current-state drift scans, focused suites, 61/61 default/POSIX, full local CI/Phase 0, docs/KM/
+governance/mdBook/whitespace, and generated-artifact cleanup pass.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.6.2 — enforce Perl CLI UTF-8 text
 
 **Implementation:** `bin/linkedspec` strictly decodes valid argv before option parsing and raw source/input files
