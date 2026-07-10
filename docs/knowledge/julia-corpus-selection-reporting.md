@@ -7,12 +7,12 @@ answers:
   - does Julia corpus execution support offset and limit
   - how does the Julia corpus runner report fixture results
   - what exit codes does the Julia corpus runner use
-  - does Julia allow unbounded corpus execution yet
+  - does Julia allow unbounded corpus execution
   - what is JULIA-BACKEND-PARITY.6.2.1
 date: 2026-07-10
 status: current
 tags: [julia, corpus, cli, selection, reporting, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.2.1 extends julia/src/corpus/CorpusManifest.jl and julia/src/cli/LinkedSpecJuliaCli.jl with named/bounded selection and runner reporting. Thirty added assertions bring full Pkg.test() to 745 with package status runtime-corpus-selection."
+evidence: "JULIA-BACKEND-PARITY.6.2.1 adds named/bounded selection and reporting. JULIA-BACKEND-PARITY.6.3 enables full and offset-only CLI execution, adds the complete 99-fixture gate, and brings full Julia tests to 840 assertions with status runtime-corpus-full."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
@@ -28,9 +28,9 @@ separate or `--flag=value` form. Bounded execute mode prints one `PASS <name>` o
 selected fixture followed by a passed/failed summary. Exit `0` means all selected fixtures passed, exit `1` means
 one or more selected fixtures failed, and exit `2` means invalid arguments or corpus/selection validation failed.
 
-Validation-only behavior remains the default. While full 99-fixture parity is incomplete, CLI execution requires
-at least one named case or a positive limit. Unbounded and offset-only execution requests are rejected. Library
-callers may still execute a complete controlled corpus.
+Validation-only behavior remains the default. Bare `--execute` now runs the complete 99-fixture corpus. Offset-only
+execution runs from the selected zero-based offset to the manifest end. Named and bounded forms remain available
+for diagnostics, and complete manifest validation always happens before selection.
 
 `JULIA-BACKEND-PARITY.6.2.2` uses this bounded surface to prove manifest offsets 0–39 green at 40/40, and `.6.2.3`
 uses three disjoint windows to prove the surrounding 25 non-function middle fixtures green, all without a
@@ -41,7 +41,8 @@ Examples:
 ```bash
 julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --case proof_edge_array_literal
 julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 0 --limit 10
+julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute
 ```
 
-Related facts: [[julia-starter-corpus-batch]], [[julia-middle-corpus-batch]], [[julia-controlled-corpus-execution]], [[julia-corpus-manifest-io]],
+Related facts: [[julia-full-corpus-gate]], [[julia-starter-corpus-batch]], [[julia-middle-corpus-batch]], [[julia-controlled-corpus-execution]], [[julia-corpus-manifest-io]],
 [[dart-controlled-corpus-execution]], [[variant-specific-cli-requirement]].

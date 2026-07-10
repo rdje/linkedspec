@@ -1,12 +1,12 @@
 # LinkedSpec Julia Backend
 
-This directory is the repository-owned Julia backend. Its current `runtime-corpus-function-shells` status covers the
+This directory is the repository-owned Julia backend. Its current `runtime-corpus-full` status covers the
 package/command surface, manifest validation, source and ActionIR frontends, staged user-function projection/body
 parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch, value/helper/control/callback
 families, cursor/boundary behavior, structured diagnostics/tracing, registered function execution, and controlled
 library-level corpus execution, bounded CLI selection/reporting, and spec-driven top-level user-function source
-composition. The independent full 99-fixture manifest gate, unbounded corpus CLI, local-gate integration, and final
-parity closeout remain later leaves.
+composition plus full ordered 99-fixture library and CLI execution. Local-gate integration and final parity
+closeout remain later leaves.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -20,8 +20,8 @@ added by `JULIA-BACKEND-PARITY.4.1`, and first executable rule dispatch was adde
 value/store/capture behavior landed in `.4.3.1`, and string/scalar plus numeric helpers landed in `.4.3.2`. The
 array helper and mutation boundary landed in `.4.3.3`, and hash helper and mutation behavior landed in `.4.3.4`;
 `.4.3.5` landed value/control/block/callback execution, and `.4.3.6` closed final helper/value no-drift. Cursor,
-diagnostic/trace, staged-function, shipped-corpus, and function-shell work through `.6.2.5` has since landed; `.6.3`
-is active.
+diagnostic/trace, staged-function, shipped-corpus, function-shell, and full-corpus work through `.6.3` has since
+landed; `.6.4` is active.
 
 ## Commands
 
@@ -165,8 +165,9 @@ reads. History passes, and `.6.2.4.6` adds the complete offset-68/limit-31 regre
 outputs, and zero failures. The shipped window is permanently 31/31. `.6.2.5` adds
 `parse_user_function_definition_asts(...)` and `parse_spec_with_staged_user_function_definitions(...)`: Julia
 executes the checked-in definition spec over source, normalizes neutral nodes, and reuses staged body parsing. All
-three routed top-level function fixtures pass, full tests pass with 827 assertions, status is
-`runtime-corpus-function-shells`, and `.6.3` owns the independent full-manifest gate.
+three routed top-level function fixtures pass. `.6.3` adds one atomic complete-corpus regression and enables
+unbounded CLI execution: the manifest runs 99/99 green in exact order. Full tests pass with 840 assertions, status
+is `runtime-corpus-full`, and `.6.4` owns local verification wiring.
 
 Library example:
 
@@ -181,13 +182,14 @@ if !corpus_execution_passed(result)
 end
 ```
 
-The CLI and `bin/corpus_runner.jl` now allow bounded execution. Named selection may repeat `--case`; window
-selection uses a zero-based `--offset` and positive `--limit`:
+The CLI and `bin/corpus_runner.jl` run the complete corpus with bare `--execute`. Named selection may repeat
+`--case`; window selection uses a zero-based `--offset` and optional positive `--limit`:
 
 ```bash
+julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute
 julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --case proof_edge_array_literal
 julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 0 --limit 10
 ```
 
-Validation-only behavior remains the default. Until the current 99-fixture corpus is green, CLI execution requires
-`--case` or `--limit`; unbounded and offset-only requests are rejected.
+Validation-only behavior remains the default. Offset-only execution runs from that zero-based offset through the
+manifest end. Every execution mode validates the complete manifest before selecting fixtures.

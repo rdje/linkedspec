@@ -6,11 +6,11 @@ answers:
   - does Julia load the 99 fixture corpus
   - does Julia detect missing stale fixture directories
   - does Julia parse expected.json yet
-  - does Julia corpus execute fixtures yet
+  - does Julia corpus execute all fixtures
 date: 2026-07-10
 status: accepted
 tags: [julia, corpus, manifest, json, backend]
-evidence: "julia/src/corpus/CorpusManifest.jl; julia/test/runtests.jl; docs/tasks/JULIA-BACKEND-PARITY.md"
+evidence: "JULIA-BACKEND-PARITY.1.3 adds strict manifest IO. JULIA-BACKEND-PARITY.6.3 permanently executes the complete validated manifest at 99/99, enables unbounded CLI execution, and brings full Julia tests to 840 assertions with status runtime-corpus-full."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
 ---
 
@@ -22,8 +22,8 @@ directories, required `input.spec` / `input.txt` / `expected.json` files, and ex
 
 The checked-in corpus under `rust/linkedspec-runtime/tests/corpus` loads as 99 fixtures. The Julia CLI and
 corpus-runner non-execute commands report the validated fixture count. `JULIA-BACKEND-PARITY.6.1` now composes
-this loader into the library-level `execute_corpus_fixtures(...)` controlled executor. `.6.2.1` adds bounded CLI
-`--execute` selection/reporting, while unbounded execution still deliberately returns an error until the
-full-manifest leaf lands.
+this loader into the library-level `execute_corpus_fixtures(...)` controlled executor. `.6.2.1` adds selected CLI
+execution/reporting. `.6.3` now locks the complete validated manifest at 99/99 exact outputs and enables bare
+`--execute` as the full run.
 
-Related facts: [[julia-controlled-corpus-execution]], [[julia-corpus-selection-reporting]].
+Related facts: [[julia-full-corpus-gate]], [[julia-controlled-corpus-execution]], [[julia-corpus-selection-reporting]].

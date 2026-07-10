@@ -704,15 +704,21 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.2.5 - execute Julia function shell corpus`
 
 - ID: `JULIA-BACKEND-PARITY.6.3`
-  Status: `active`
+  Status: `done`
   Goal: Finalize manifest drift guard and full Julia corpus gate.
   Acceptance: Julia runner rejects unsupported manifest format, mismatched counts, invalid/duplicate names, missing
     fixture dirs, stale extra dirs, and output mismatches; all current fixtures pass.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - the existing loader regressions reject unsupported format, count mismatch, invalid and
+    duplicate names, missing and stale fixture directories, missing required files, malformed expected JSON, and
+    output mismatch. One permanent complete-corpus regression now locks format `1`, manifest/result count `99`,
+    exact manifest order and endpoints, 99 passes, zero failures, and exact expected output for every fixture.
+    Unbounded CLI `--execute` runs the complete manifest; named, bounded, and offset-only diagnostics remain
+    available. Direct full CLI execution is 99 passed / 0 failed; full tests pass with 840 assertions and status
+    `runtime-corpus-full`.
+  Commit: `JULIA-BACKEND-PARITY.6.3 - close full Julia corpus gate`
 
 - ID: `JULIA-BACKEND-PARITY.6.4`
-  Status: `pending`
+  Status: `active`
   Goal: Wire Julia parity into the local verification story.
   Acceptance: Focused Julia test commands are documented; broader local gate integration is added only when
     reliable and not dependent on absent local SDK state.
@@ -774,7 +780,37 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 20 | `JULIA-BACKEND-PARITY.6.2.4.5.3` | `done` | Public-parser leading blank/comment skipping closes the sole history residual without weakening indexed reads. |
 | 21 | `JULIA-BACKEND-PARITY.6.2.4.6` | `done` | Permanent full-window execution locks 31/31 exact output and closes shipped no-drift. |
 | 22 | `JULIA-BACKEND-PARITY.6.2.5` | `done` | Spec-driven source parsing executes all three routed top-level function fixtures without a raw scanner. |
-| 23 | `JULIA-BACKEND-PARITY.6.3` | `active` | Run the independent full-manifest drift and 99-fixture parity gate. |
+| 23 | `JULIA-BACKEND-PARITY.6.3` | `done` | Full manifest order/output is locked at 99/99 and unbounded CLI execution is enabled. |
+| 24 | `JULIA-BACKEND-PARITY.6.4` | `active` | Wire the proven Julia gate into the documented local verification story. |
+
+## `JULIA-BACKEND-PARITY.6.3` Full Corpus Result
+
+Aggregate evidence recorded on 2026-07-10:
+
+- `load_corpus_fixtures(...)` validates the complete manifest before selection or execution. Existing focused
+  tests reject unsupported format, count mismatch, invalid/duplicate names, missing/stale directories, missing
+  files, malformed JSON, and output mismatches.
+- One permanent complete-corpus test executes all 99 fixtures in manifest order and locks format `1`, manifest and
+  result count `99`, first/last endpoints, pass count `99`, an empty failure ledger, and exact expected output for
+  every result.
+- Julia CLI `--execute` without selectors now runs the complete validated manifest. Named, offset, and limit
+  selectors remain available for diagnostics; offset-only execution runs from that offset through the manifest end.
+- Direct CLI execution prints every fixture as `PASS` and finishes `99 passed, 0 failed`. Full Julia tests pass
+  with 840 assertions and package/CLI status `runtime-corpus-full`.
+
+## `JULIA-BACKEND-PARITY.6.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — All bounded batches were green, but the CLI still rejected unbounded execution and
+  no permanent regression executed the 99-fixture manifest as one atomic ordered gate.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `julia/src/corpus/CorpusManifest.jl` retained the temporary `.6.2.1` rollout
+  fence, while `julia/test/runtests.jl` proved only disjoint windows and routed groups.
+- [x] **FIX** — Removed only the rollout fence, updated help/status text, and added full/offset-only CLI coverage
+  plus one complete-corpus regression. Manifest validation and per-fixture result handling remain unchanged.
+- [x] **ADDRESSED (verified)** — The permanent library gate and direct unbounded CLI both execute 99/99 green.
+- [x] **NO REGRESSION** — Full Julia tests pass with 840 assertions; mismatch execution still exits `1`, invalid
+  arguments/manifest state still exit `2`, and named/bounded selection remains green.
+- [x] **LOCKSTEP** — Package/CLI status, Julia README, public book, roadmaps, task/index, architecture, live docs,
+  Knowledge Map, and `MEMORY.md` agree; `.6.4` is the sole active Julia frontier.
 
 ## `JULIA-BACKEND-PARITY.6.2.5` Function-Shell Corpus Result
 
@@ -2392,6 +2428,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.5.3` | Knowledge Map public-parser fact; Perl `Runtime.pm` and Dart cursor seam; focused Julia leading-trivia/indexed-read proof; focused history corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Julia's public in-memory runtime entrypoint skips only leading blank/comment lines through the existing cursor/register seam. History passes without weakening indexed reads, shipped smoke is 31/31, full tests pass with 810 assertions, status is `runtime-corpus-leading-trivia`, `.5` closes, and `.6` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.6` | Permanent offset-68/limit-31 regression; direct 31-case corpus CLI; full Julia `Pkg.test()`; CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. The full shipped window is permanently locked at 31/31 with stable endpoints and exact outputs; full tests pass with 816 assertions, status is `runtime-corpus-shipped`, `.6.2.4` closes, and `.6.2.5` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.5` | Rule-only failure reproduction; direct `user_function_definition.spec` execution; seven source-driven parser assertions; permanent three-case corpus regression; direct three-case corpus CLI; full Julia tests; CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Spec-driven source parsing returns neutral function nodes and composes existing staging/runtime paths; all three routed fixtures pass exact output, full tests pass with 827 assertions, status is `runtime-corpus-function-shells`, and `.6.3` becomes active without a raw Julia scanner. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.3` | Existing focused manifest/drift/mismatch guards; permanent complete 99-fixture regression; full unbounded corpus CLI; offset-only CLI regression; full Julia tests; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. The atomic library gate and direct CLI both execute all 99 fixtures in order with exact outputs and zero failures; full tests pass with 840 assertions, status is `runtime-corpus-full`, and `.6.4` becomes active. |
 
 ## Commit Log
 
@@ -2444,9 +2481,15 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.6.2.4.5.3` | `JULIA-BACKEND-PARITY.6.2.4.5.3 - mirror Julia public parser leading trivia` | Public-entry cursor parity closes history and `.5`; final 31/31 no-drift advances to `.6`. |
 | `JULIA-BACKEND-PARITY.6.2.4.6` | `JULIA-BACKEND-PARITY.6.2.4.6 - close Julia shipped corpus no drift` | Permanent complete 31/31 shipped-window regression; `.6.2.4` closes and function-shell fixtures advance to `.6.2.5`. |
 | `JULIA-BACKEND-PARITY.6.2.5` | `JULIA-BACKEND-PARITY.6.2.5 - execute Julia function shell corpus` | Spec-driven function-definition parsing closes all three routed top-level `fn` fixtures; full-manifest gate advances to `.6.3`. |
+| `JULIA-BACKEND-PARITY.6.3` | `JULIA-BACKEND-PARITY.6.3 - close full Julia corpus gate` | Full ordered library/CLI corpus execution is 99/99 green; verification wiring advances to `.6.4`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.3` full Julia corpus gate. The temporary unbounded CLI rollout fence is removed;
+  bare `--execute` runs the complete validated manifest, while named, bounded, and offset-only diagnostics remain.
+  A permanent regression locks manifest/result count `99`, exact order/endpoints, 99 passes, zero failures, and
+  exact output for every fixture. Direct CLI execution is 99/99, full tests pass with 840 assertions, status is
+  `runtime-corpus-full`, and `.6.4` is active for local verification wiring.
 - `2026-07-10`: Completed `.6.2.5` function-shell corpus execution. Julia compiles and caches
   `specs/user_function_definition.spec`, executes it over top-level `fn` source, normalizes neutral definition
   nodes, and reuses existing staged body parsing, registry compilation, and runtime execution. The rule-only parser

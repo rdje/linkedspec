@@ -10,7 +10,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, parser, user-functions, staged-parsing, backend]
-evidence: "JULIA-BACKEND-PARITY.2.4 adds neutral projection in julia/src/spec/UserFunctionDefinitionShell.jl. JULIA-BACKEND-PARITY.6.2.5 adds source-driven execution in julia/src/parser/UserFunctionDefinitionParser.jl; all three routed function fixtures pass and full Julia tests pass with 827 assertions."
+evidence: "JULIA-BACKEND-PARITY.2.4 adds neutral projection in julia/src/spec/UserFunctionDefinitionShell.jl. JULIA-BACKEND-PARITY.6.2.5 adds source-driven execution in julia/src/parser/UserFunctionDefinitionParser.jl. JULIA-BACKEND-PARITY.6.3 includes that path in the complete 99/99 gate; full Julia tests pass with 840 assertions."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
 ---
 
@@ -33,6 +33,6 @@ Direct `parse_spec(...)` remains rule-only. `JULIA-BACKEND-PARITY.6.2.5` now exe
 through this projection and the existing staged body registry. The corpus default invokes that path only after
 rule-only parsing reports a source parse error. No raw function scanner is present.
 
-Related facts: [[julia-spec-driven-function-shell-parser]], [[spec-defined-user-function-definition-parser]], [[julia-core-spec-parser]],
+Related facts: [[julia-full-corpus-gate]], [[julia-spec-driven-function-shell-parser]], [[spec-defined-user-function-definition-parser]], [[julia-core-spec-parser]],
 [[julia-frontend-ast-json-contract]], [[julia-frontend-validation]], [[julia-user-function-registry]],
 [[dart-core-spec-parser]], [[rust-user-function-registry-parity]], [[text-to-ast-backend-doctrine]].

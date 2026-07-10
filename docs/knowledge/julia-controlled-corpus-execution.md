@@ -15,7 +15,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, corpus, runtime, diagnostics, trace, user-functions, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.1 adds execution/result/query APIs in julia/src/corpus/CorpusManifest.jl and 24 focused assertions. JULIA-BACKEND-PARITY.6.2.5 adds the default spec-driven function-shell fallback plus a three-case regression. Full Julia tests pass with 827 assertions and package status runtime-corpus-function-shells."
+evidence: "JULIA-BACKEND-PARITY.6.1 adds execution/result/query APIs. JULIA-BACKEND-PARITY.6.2.5 adds spec-driven function shells. JULIA-BACKEND-PARITY.6.3 permanently runs the complete validated manifest at 99/99; full Julia tests pass with 840 assertions and status runtime-corpus-full."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
@@ -40,18 +40,17 @@ lifecycle return shape, exact-arity staged function calls, boundary capture plus
 diagnostics, output mismatch reporting, and continuation after failures. Multiline fixtures use newline statement
 separation with no trailing semicolons.
 
-This is not yet full corpus parity. Bounded Julia CLI/corpus-runner execution accepts named cases or a positive
-limit, and all three routed top-level function fixtures now pass through the spec-defined shell. Unbounded
-execution and the aggregate 99/99 claim remain deliberately unavailable until `.6.3` closes the full-manifest gate.
+This composition now underpins full corpus parity. All three routed top-level function fixtures pass through the
+spec-defined shell, and `.6.3` permanently executes the complete validated manifest at 99/99 exact outputs.
 
 `JULIA-BACKEND-PARITY.6.2.0` splits that rollout before behavior changes: `.6.2.1` owns bounded selection/reporting,
 `.6.2.2` owns starter fixtures 0–39, `.6.2.3` owns non-function fixtures 40–67, and `.6.2.4.0` has split the
 measured shipped-spec/parser-smoke boundary for fixtures 68–98; later mechanism leaves close that window at 31/31.
-`.6.2.5` now closes all three top-level function fixtures through the spec-defined shell. `.6.3` owns the separate
-complete-manifest gate. These mirror the stable Dart workload windows but do not assume Dart and Julia share
-failure mechanisms.
+`.6.2.5` closes all three top-level function fixtures through the spec-defined shell. `.6.3` closes the separate
+complete-manifest gate at 99/99. These mirror the stable Dart workload windows but do not assume Dart and Julia
+share failure mechanisms.
 
-Related facts: [[julia-spec-driven-function-shell-parser]], [[julia-helper-regex-flag-normalization]], [[julia-logical-helper-execution]], [[julia-anonymous-capture-boundary-helpers]], [[julia-shipped-corpus-smoke-split]], [[julia-corpus-selection-reporting]], [[julia-corpus-manifest-io]], [[julia-core-spec-parser]],
+Related facts: [[julia-full-corpus-gate]], [[julia-spec-driven-function-shell-parser]], [[julia-helper-regex-flag-normalization]], [[julia-logical-helper-execution]], [[julia-anonymous-capture-boundary-helpers]], [[julia-shipped-corpus-smoke-split]], [[julia-corpus-selection-reporting]], [[julia-corpus-manifest-io]], [[julia-core-spec-parser]],
 [[julia-compiled-spec-state]],
 [[julia-diagnostics-trace-boundary]], [[julia-user-function-runtime-execution]],
 [[dart-controlled-corpus-execution]], [[statement-separator-semantics]].

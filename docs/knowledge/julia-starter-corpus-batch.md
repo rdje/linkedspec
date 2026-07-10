@@ -30,7 +30,7 @@ Julia tests pass with 751 assertions and status `runtime-corpus-starter`.
 
 This is not a full corpus claim. `.6.2.3` has since proven the surrounding non-function middle windows green at
 25/25, `.6.2.4` has closed shipped-spec/parser-smoke fixtures 68–98 at 31/31, and `.6.2.5` has closed all three
-top-level function fixtures through the spec-defined shell. `.6.3` owns the aggregate 99-fixture gate.
+top-level function fixtures through the spec-defined shell. `.6.3` has since closed the aggregate gate at 99/99.
 
 Related facts: [[julia-spec-driven-function-shell-parser]], [[julia-middle-corpus-batch]], [[julia-corpus-selection-reporting]], [[julia-controlled-corpus-execution]],
 [[dart-starter-corpus-batch]], [[rust-perl-output-oracle]], [[statement-separator-semantics]].

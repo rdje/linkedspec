@@ -346,7 +346,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-corpus-function-shells"
+    @test status.parity == "runtime-corpus-full"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -358,7 +358,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-corpus-function-shells", String(take!(status_output)))
+    @test occursin("parity: runtime-corpus-full", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -369,9 +369,9 @@ end
     @test occursin("manifest validated", String(take!(corpus_output)))
     @test isempty(String(take!(corpus_error)))
 
-    execute_error = IOBuffer()
-    @test run_corpus_runner(["--corpus", "fixtures", "--execute"]; io = IOBuffer(), err = execute_error) == 2
-    @test occursin("unbounded corpus execution", String(take!(execute_error)))
+    help_output = IOBuffer()
+    @test run_corpus_runner(["--help"]; io = help_output, err = IOBuffer()) == 0
+    @test occursin("runs the complete corpus", String(take!(help_output)))
 end
 
 @testset "Action AST parser" begin
@@ -3578,13 +3578,25 @@ Top::
         @test occursin("FAIL mismatched: output mismatch", failure_text)
         @test occursin("0 passed, 1 failed", failure_text)
 
-        unbounded_error = IOBuffer()
+        full_output = IOBuffer()
         @test run_corpus_runner(
             ["--corpus", root, "--execute"];
-            io = IOBuffer(),
-            err = unbounded_error,
-        ) == 2
-        @test occursin("unbounded corpus execution", String(take!(unbounded_error)))
+            io = full_output,
+            err = IOBuffer(),
+        ) == 1
+        full_text = String(take!(full_output))
+        @test occursin("FAIL mismatched: output mismatch", full_text)
+        @test occursin("PASS first", full_text)
+        @test occursin("PASS second", full_text)
+        @test occursin("2 passed, 1 failed", full_text)
+
+        offset_output = IOBuffer()
+        @test run_corpus_runner(
+            ["--corpus", root, "--execute", "--offset", "1"];
+            io = offset_output,
+            err = IOBuffer(),
+        ) == 0
+        @test occursin("2 passed, 0 failed", String(take!(offset_output)))
 
         validation_selector_error = IOBuffer()
         @test run_corpus_runner(
@@ -3796,6 +3808,24 @@ end
 
     @test [result.name for result in execution.results] == case_names
     @test corpus_passed_count(execution) == 3
+    @test isempty(failures)
+    @test all(result -> result.actual_output == Any[result.expected_json], execution.results)
+end
+
+@testset "Complete corpus gate" begin
+    execution = execute_corpus_fixtures(CORPUS_ROOT)
+    failures = [
+        "$(result.name): $(result.failure)"
+        for result in execution.results if !corpus_fixture_passed(result)
+    ]
+
+    @test execution.validation.manifest.format == 1
+    @test execution.validation.manifest.case_count == 99
+    @test length(execution.results) == 99
+    @test [result.name for result in execution.results] == execution.validation.manifest.cases
+    @test (first(execution.results).name, last(execution.results).name) ==
+          ("proof_edge_array_literal", "lib_reader_cattribute")
+    @test corpus_passed_count(execution) == 99
     @test isempty(failures)
     @test all(result -> result.actual_output == Any[result.expected_json], execution.results)
 end

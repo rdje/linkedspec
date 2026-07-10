@@ -13,7 +13,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, parser, corpus, user-functions, staged-parsing, in-memory, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.2.5 adds julia/src/parser/UserFunctionDefinitionParser.jl, seven focused source-driven parser assertions, and a permanent three-fixture corpus regression. Direct CLI execution is 3 passed / 0 failed; full Julia tests pass with 827 assertions and status runtime-corpus-function-shells."
+evidence: "JULIA-BACKEND-PARITY.6.2.5 adds julia/src/parser/UserFunctionDefinitionParser.jl, seven focused source-driven parser assertions, and a permanent three-fixture corpus regression. JULIA-BACKEND-PARITY.6.3 includes these paths in the complete 99/99 gate; full Julia tests pass with 840 assertions and status runtime-corpus-full."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
 ---
 
@@ -38,9 +38,9 @@ All three routed fixtures pass exact checked-in output:
 - `terse_3_3_4_assignment_expression_closure`
 - `terse_4_3_2_user_function_runtime`
 
-This closes the function-shell batch, not the aggregate parity claim. `JULIA-BACKEND-PARITY.6.3` independently owns
-the complete 99-fixture manifest drift and execution gate.
+This closes the function-shell batch. `JULIA-BACKEND-PARITY.6.3` has since independently closed the complete
+99-fixture manifest drift and execution gate.
 
-Related facts: [[julia-user-function-definition-projection]], [[julia-controlled-corpus-execution]],
+Related facts: [[julia-full-corpus-gate]], [[julia-user-function-definition-projection]], [[julia-controlled-corpus-execution]],
 [[julia-staged-function-body-registry]], [[julia-user-function-runtime-execution]],
 [[spec-defined-user-function-definition-parser]], [[native-in-memory-backend-contract]].

@@ -70,7 +70,7 @@ function _print_corpus_help(io)
     println(io, "  corpus_runner --corpus <path> [--execute] [--case <name> ...] [--offset <n>] [--limit <n>]")
     println(io)
     println(io, "Without --execute, validates the complete manifest-backed corpus.")
-    println(io, "During staged rollout, --execute requires --case or --limit; unbounded execution is disabled.")
+    println(io, "With --execute, runs the complete corpus unless a case or offset/limit selection is supplied.")
 end
 
 function _parse_corpus_runner_args(args)
@@ -216,10 +216,6 @@ function run_corpus_runner(args = ARGS; io = stdout, err = stderr)
     end
 
     if parsed.execute
-        if isempty(parsed.case_names) && parsed.limit === nothing
-            println(err, "error: unbounded corpus execution is not enabled yet; use --case or --limit")
-            return 2
-        end
         try
             execution = execute_corpus_fixtures(
                 parsed.corpus_path;
@@ -262,7 +258,7 @@ function run_corpus_runner(args = ARGS; io = stdout, err = stderr)
         println(io, "corpus: ", validation.root)
         println(io, "format: ", validation.manifest.format)
         println(io, "fixtures: ", validation.manifest.case_count)
-        println(io, "status: manifest validated; bounded CLI execution is available; unbounded execution is disabled")
+        println(io, "status: manifest validated; full and selected CLI execution are available")
     catch error
         if error isa CorpusManifestException
             println(err, "error: ", error.message)

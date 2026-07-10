@@ -364,9 +364,9 @@ in-memory runtime cursor seam. History passes without weakening indexed reads. `
 offset-68/limit-31 window in one permanent test: stable endpoints, 31/31 exact outputs, and zero failures.
 `.6.2.5` then compiles and caches `specs/user_function_definition.spec`, executes it over caller-provided source,
 normalizes its neutral nodes, and composes the existing staged body parser and runtime registry. The corpus path
-tries rule-only parsing first and falls back only after a source parse error. All three routed fixtures pass; full
-tests pass with 827 assertions and status `runtime-corpus-function-shells`. `.6.3` owns the independent full
-99-fixture gate.
+tries rule-only parsing first and falls back only after a source parse error. All three routed fixtures pass.
+`.6.3` then locks complete manifest validation plus ordered execution at 99/99 exact outputs and enables unbounded
+CLI execution. Full tests pass with 840 assertions and status `runtime-corpus-full`; `.6.4` owns verification wiring.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -416,12 +416,13 @@ julia --project=julia julia/bin/linkedspec_julia.jl --help
 julia --project=julia julia/bin/linkedspec_julia.jl status
 julia --project=julia julia/bin/linkedspec_julia.jl corpus --corpus rust/linkedspec-runtime/tests/corpus
 julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus
+julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute
 ```
 
 The corpus commands validate `manifest.json`, case-count/name shape, missing/stale fixture directories, required
 `input.spec` / `input.txt` / `expected.json` files, and expected JSON syntax over the checked-in 99-fixture corpus.
-Named and bounded `--execute` runs are available; unbounded execution remains gated until `.6.3` closes the full
-manifest proof. `julia/src/spec/Ast.jl` defines data records and JSON projection for
+Bare `--execute` runs the complete manifest; named, offset, and limit selections remain available for diagnostics.
+`julia/src/spec/Ast.jl` defines data records and JSON projection for
 spec files, function definitions, source spans, staged parse jobs, rule headers/modes, body element variants, edge
 targets, and fluent calls. `julia/src/spec/Parser.jl` exposes `parse_spec(...)`, which parses core `.spec` rule
 paragraphs into those source AST types: headers/modes, regex slots, lifecycle blocks, action/blind-call edges,
@@ -586,8 +587,8 @@ boundaries. `corpus_execution_passed(...)`, `corpus_passed_count(...)`, `corpus_
 
 The optional `spec_parser` keyword remains a controlled parser-override seam. Ordinary calls try direct rule-only
 `parse_spec(...)` first. If source parsing fails, the default path executes the checked-in user-function definition
-spec and feeds its neutral nodes through staged body parsing. The three routed top-level function fixtures pass;
-the full checked-in 99-fixture gate remains separate under `.6.3`.
+spec and feeds its neutral nodes through staged body parsing. The three routed top-level function fixtures pass,
+and the complete checked-in corpus is permanently 99/99 green under `.6.3`.
 
 Native callers can use the source-driven composition directly:
 
@@ -644,9 +645,8 @@ Each selected fixture prints `PASS <name>` or `FAIL <name>: <detail>`, followed 
 all selected fixtures passed, `1` means at least one selected fixture failed, and `2` means argument, manifest, or
 selection validation failed. Options also accept `--flag=value` form, and `--case` may be repeated.
 
-Until full 99-fixture parity is proven, CLI execution requires a named case or a positive limit. Unbounded and
-offset-only execution are rejected. Omitting `--execute` continues to validate the complete manifest; selecting a
-later subset never bypasses manifest drift checks.
+Omitting `--execute` validates the complete manifest. Bare `--execute` runs all 99 fixtures; offset-only execution
+runs from that offset through the manifest end. Selecting a subset never bypasses complete manifest drift checks.
 
 The rollout is explicitly recoverable. `.6.2.1` has landed named and bounded selection/reporting; `.6.2.2` proves
 starter fixtures 0–39 green at 40/40; `.6.2.3` proves the surrounding non-function helper/control fixtures 40–67
@@ -654,7 +654,7 @@ green at 25/25 while routing three top-level function fixtures; `.6.2.4.0` measu
 fixtures 68–98 at 10/31 and splits their mechanism owners; `.6.2.4.1` then closes anonymous capture execution and
 moves the window to 13/31. `.6.2.4.2.1` then adds eager logical helpers and moves it to 17/31 while routing one
 helper-regex flag residual; `.6.2.4.2.3` then closes it and moves the window to 18/31. `.6.2.5` has since closed
-the spec-defined top-level function shells, and `.6.3` owns the full-manifest gate.
+the spec-defined top-level function shells, and `.6.3` has closed the full-manifest gate at 99/99.
 Those are workload boundaries, not an assumption that Julia shares Dart's historical failure causes.
 
 #### Julia starter corpus proof
@@ -782,8 +782,8 @@ comment lines, matching the Perl wrapper and Dart backend. A focused minimal pro
 ordinary scalar-held `payload[1]` still returns its indexed item. `ds_vhistory_version_entry` passes. The final
 no-drift leaf adds one permanent complete-window test; the complete shipped-spec window is 31/31. Spec-driven
 function-definition parsing then closes the three routed top-level function fixtures without a raw Julia scanner.
-Full tests pass with 827 assertions and status is `runtime-corpus-function-shells`; the full-manifest gate remains
-separate under `.6.3`.
+The full-manifest gate now executes all 99 fixtures in order with exact output and zero failures. Full tests pass
+with 840 assertions and status is `runtime-corpus-full`.
 
 ### Dart Backend Commands
 

@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.3 — close full Julia corpus gate
+
+**Scope:** Complete manifest execution, unbounded/offset-only CLI behavior, permanent 99-fixture regression,
+package status, live docs, mdBook, Knowledge Map, task/index/roadmap alignment, and resume pointer.
+
+**Change:** Removed the temporary staged-rollout rejection for CLI `--execute` without selectors. Bare execute now
+runs the complete validated manifest; repeated `--case`, `--offset`, and `--limit` remain diagnostic selectors,
+including offset-only execution through the manifest end. Added one atomic full-corpus test that locks format,
+counts, order, endpoints, pass/failure totals, and exact expected output for every fixture. Manifest validation and
+per-fixture failure behavior are unchanged.
+
+**Validation:** Direct unbounded CLI execution prints 99 `PASS` results and finishes 99 passed / 0 failed. Full
+Julia tests pass with 840 assertions; mismatch execution still returns `1`, invalid arguments/manifest state return
+`2`, and status is `runtime-corpus-full`. `.6.4` now owns local verification wiring.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.5 — execute Julia function shell corpus
 
 **Scope:** Spec-driven top-level user-function source parsing, corpus composition, three routed fixture regressions,

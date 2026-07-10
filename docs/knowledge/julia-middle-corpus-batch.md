@@ -35,7 +35,7 @@ Manifest offsets 57, 60, and 61 are intentionally excluded:
 
 They contain top-level `fn` source and were routed to `.6.2.5`; that leaf now executes all three through
 `specs/user_function_definition.spec` and passes exact output. This middle-window fact remains 25/25. It is not a
-full corpus claim: `.6.3` separately owns the complete 99-fixture manifest gate.
+full corpus claim by itself; `.6.3` has since separately closed the complete manifest gate at 99/99.
 
 Related facts: [[julia-spec-driven-function-shell-parser]], [[julia-shipped-corpus-smoke-split]], [[julia-starter-corpus-batch]], [[julia-corpus-selection-reporting]],
 [[julia-controlled-corpus-execution]], [[dart-middle-corpus-batch]], [[rust-perl-output-oracle]],

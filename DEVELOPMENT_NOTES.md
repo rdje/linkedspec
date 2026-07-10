@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.3 — atomic full-corpus gate):
+  Green disjoint windows are necessary diagnostics but not an aggregate parity proof: manifest insertion, ordering,
+  or cross-window composition could drift while each historical subset still passes. The permanent 99-result test
+  therefore locks the validation boundary, complete order, endpoints, empty failure ledger, and every exact output
+  in one execution. CLI unbounded mode is enabled only after that atomic gate is green. Selection remains a
+  debugging facility, while validation always covers the entire manifest before a subset runs.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.5 — spec-driven function-shell composition):
   The failure was an entrypoint composition gap, not missing grammar or runtime semantics. Rule-only
   `parse_spec(...)` correctly rejected the first `fn`, while direct execution of
