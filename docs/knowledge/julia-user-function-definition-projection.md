@@ -10,7 +10,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, parser, user-functions, staged-parsing, backend]
-evidence: "julia/src/spec/UserFunctionDefinitionShell.jl; julia/test/runtests.jl; docs/tasks/JULIA-BACKEND-PARITY.md"
+evidence: "JULIA-BACKEND-PARITY.2.4 adds neutral projection in julia/src/spec/UserFunctionDefinitionShell.jl. JULIA-BACKEND-PARITY.6.2.5 adds source-driven execution in julia/src/parser/UserFunctionDefinitionParser.jl; all three routed function fixtures pass and full Julia tests pass with 827 assertions."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
 ---
 
@@ -28,9 +28,11 @@ identity, result/failure policies, and diagnostic owner. It then normalizes `par
 `functions.<index>.body_source`, strips function-definition spans while preserving newlines, and parses the
 remaining rule source through `parse_spec(...)`.
 
-Direct `parse_spec(...)` remains rule-only. Executing `specs/user_function_definition.spec` inside Julia is still
-owned by later runtime/staged-registry work; `.2.4` only consumes the spec-returned AST shape.
+Direct `parse_spec(...)` remains rule-only. `JULIA-BACKEND-PARITY.6.2.5` now executes
+`specs/user_function_definition.spec` inside Julia through `UserFunctionDefinitionAstParser`, then feeds its output
+through this projection and the existing staged body registry. The corpus default invokes that path only after
+rule-only parsing reports a source parse error. No raw function scanner is present.
 
-Related facts: [[spec-defined-user-function-definition-parser]], [[julia-core-spec-parser]],
+Related facts: [[julia-spec-driven-function-shell-parser]], [[spec-defined-user-function-definition-parser]], [[julia-core-spec-parser]],
 [[julia-frontend-ast-json-contract]], [[julia-frontend-validation]], [[julia-user-function-registry]],
 [[dart-core-spec-parser]], [[rust-user-function-registry-parity]], [[text-to-ast-backend-doctrine]].

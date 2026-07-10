@@ -437,13 +437,15 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.1 - add Julia controlled corpus execution`
 
 - ID: `JULIA-BACKEND-PARITY.6.2`
-  Status: `active`
+  Status: `done`
   Goal: Expand to the current manifest in recoverable corpus batches.
   Children: `.6.2.0`, `.6.2.1`, `.6.2.2`, `.6.2.3`, `.6.2.4`, `.6.2.5`
   Acceptance: Each batch either passes on Julia or records a narrowly owned root-cause leaf with Perl/Rust/Dart
     oracle evidence; no fixture is weakened to fit Julia.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - bounded selection/reporting, starter 40/40, middle non-function 25/25, shipped-spec
+    31/31, and the three spec-driven top-level function fixtures are permanently covered without weakening any
+    fixture. Full tests pass with 827 assertions and status is `runtime-corpus-function-shells`.
+  Commit: closed by `JULIA-BACKEND-PARITY.6.2.5 - execute Julia function shell corpus`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.0`
   Status: `done`
@@ -686,16 +688,23 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.6.2.4.6 - close Julia shipped corpus no drift`
 
 - ID: `JULIA-BACKEND-PARITY.6.2.5`
-  Status: `active`
+  Status: `done`
   Goal: Execute top-level user-function corpus fixtures through the spec-defined shell.
   Acceptance: Julia obtains neutral `function_definition` nodes from `specs/user_function_definition.spec`, feeds
     them through staged body projection, and passes the routed `fn` fixtures without introducing a Julia raw
     function scanner or a fixture-only semantic shortcut.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - Julia now compiles and caches `specs/user_function_definition.spec`, executes it over
+    top-level `fn` source, normalizes its neutral function-definition nodes, projects and strips exact source
+    spans, dispatches body parse jobs through the existing ActionIR registry, and compiles the resulting rules and
+    function registry. The default corpus path falls back to this staged parser only after rule-only
+    `parse_spec(...)` reports a source parse error. Seven focused source-driven parser assertions and four
+    permanent three-case corpus assertions pass. Direct CLI execution is 3 passed / 0 failed; full tests pass with
+    827 assertions and status is `runtime-corpus-function-shells`. No Julia raw function scanner or fixture-only
+    semantic branch was added.
+  Commit: `JULIA-BACKEND-PARITY.6.2.5 - execute Julia function shell corpus`
 
 - ID: `JULIA-BACKEND-PARITY.6.3`
-  Status: `pending`
+  Status: `active`
   Goal: Finalize manifest drift guard and full Julia corpus gate.
   Acceptance: Julia runner rejects unsupported manifest format, mismatched counts, invalid/duplicate names, missing
     fixture dirs, stale extra dirs, and output mismatches; all current fixtures pass.
@@ -764,7 +773,37 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 19 | `JULIA-BACKEND-PARITY.6.2.4.5.2` | `done` | Statement regex mutation closes both EBNF, both lib_reader, and simenv fixtures. |
 | 20 | `JULIA-BACKEND-PARITY.6.2.4.5.3` | `done` | Public-parser leading blank/comment skipping closes the sole history residual without weakening indexed reads. |
 | 21 | `JULIA-BACKEND-PARITY.6.2.4.6` | `done` | Permanent full-window execution locks 31/31 exact output and closes shipped no-drift. |
-| 22 | `JULIA-BACKEND-PARITY.6.2.5` | `active` | Execute the three routed top-level function fixtures through the spec-defined shell. |
+| 22 | `JULIA-BACKEND-PARITY.6.2.5` | `done` | Spec-driven source parsing executes all three routed top-level function fixtures without a raw scanner. |
+| 23 | `JULIA-BACKEND-PARITY.6.3` | `active` | Run the independent full-manifest drift and 99-fixture parity gate. |
+
+## `JULIA-BACKEND-PARITY.6.2.5` Function-Shell Corpus Result
+
+Source-driven evidence recorded on 2026-07-10:
+
+- The original default corpus path reproduced a `SpecParseException` at the first top-level `fn` because it sent
+  the complete source directly to the deliberately rule-only `parse_spec(...)` entrypoint.
+- Julia now compiles and caches `specs/user_function_definition.spec`, executes that spec over the source in
+  memory, normalizes the returned neutral function-definition nodes, and composes them with the existing staged
+  body parser and user-function registry. No raw Julia source scanner or fixture-name branch was added.
+- The ordinary rule-only parser remains first choice. Corpus execution uses the staged function-shell path only
+  after `parse_spec(...)` reports a source parse error, preserving the direct path for rule-only specs.
+- Direct CLI execution reports the three routed fixtures as `PASS` and finishes 3 passed / 0 failed. Full Julia
+  tests pass with 827 assertions and status `runtime-corpus-function-shells`.
+- Full 99/99 manifest parity is not claimed by this leaf; the independent complete-manifest drift/execution gate
+  is active under `.6.3`.
+
+## `JULIA-BACKEND-PARITY.6.2.5` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Rule-only `parse_spec(...)` fails at the first top-level `fn` in each routed source.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Julia already had neutral function projection, staged body parsing, and
+  runtime registry execution, but `julia/src/corpus/CorpusManifest.jl` had no source-driven composition step.
+- [x] **FIX** — Added a cached spec-driven function-definition parser and used it as the corpus fallback after a
+  rule-only source parse error; the existing projection/staging/compiler/runtime path does the remaining work.
+- [x] **ADDRESSED (verified)** — The three exact routed fixtures pass checked-in expected output through both the
+  permanent package regression and direct corpus CLI execution.
+- [x] **NO REGRESSION** — Full Julia tests pass with 827 assertions; rule-only parsing remains the primary path.
+- [x] **LOCKSTEP** — Package/CLI status, Julia README, public book, roadmaps, task/index, architecture, live docs,
+  Knowledge Map, and `MEMORY.md` agree; `.6.3` is the sole active Julia frontier.
 
 ## `JULIA-BACKEND-PARITY.6.2.4.6` Complete Shipped-Window Result
 
@@ -2352,6 +2391,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.5.2` | Focused statement regex mutation/pure-slice proof using the single-quoted pattern; five-case EBNF/simenv/lib_reader corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; Perl `actionir_ast_parser.t`; Rust `parse_string_literal_single_quotes`; Dart `action_ast_parser_test.dart`; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Statement-context four-argument regex substitution mutates bare scalar targets with strict flags and `$n` expansion while numeric slicing stays pure. Exact parser locks preserve single-quoted action strings as the shared Perl/Rust/Dart/Julia language contract. Both EBNF, both lib_reader, and simenv pass; shipped smoke is 30/31, full tests pass with 808 assertions, status is `runtime-corpus-statement-mutation`, and `.6.2.4.5.3` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.5.3` | Knowledge Map public-parser fact; Perl `Runtime.pm` and Dart cursor seam; focused Julia leading-trivia/indexed-read proof; focused history corpus run; bounded offsets 68–98; full Julia `Pkg.test()`; CLI status/help; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; `git diff --check`. | PASS. Julia's public in-memory runtime entrypoint skips only leading blank/comment lines through the existing cursor/register seam. History passes without weakening indexed reads, shipped smoke is 31/31, full tests pass with 810 assertions, status is `runtime-corpus-leading-trivia`, `.5` closes, and `.6` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.4.6` | Permanent offset-68/limit-31 regression; direct 31-case corpus CLI; full Julia `Pkg.test()`; CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. The full shipped window is permanently locked at 31/31 with stable endpoints and exact outputs; full tests pass with 816 assertions, status is `runtime-corpus-shipped`, `.6.2.4` closes, and `.6.2.5` becomes active. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.6.2.5` | Rule-only failure reproduction; direct `user_function_definition.spec` execution; seven source-driven parser assertions; permanent three-case corpus regression; direct three-case corpus CLI; full Julia tests; CLI status; mdBook build; Knowledge Map generation/check; memory architecture; task-tree metadata; doctrine; stale-status scans; `git diff --check`. | PASS. Spec-driven source parsing returns neutral function nodes and composes existing staging/runtime paths; all three routed fixtures pass exact output, full tests pass with 827 assertions, status is `runtime-corpus-function-shells`, and `.6.3` becomes active without a raw Julia scanner. |
 
 ## Commit Log
 
@@ -2403,9 +2443,16 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.6.2.4.5.2` | `JULIA-BACKEND-PARITY.6.2.4.5.2 - add Julia statement regex mutation` | Portable scalar substitution closes both EBNF, both lib_reader, and simenv; history advances alone to `.6.2.4.5.3`. |
 | `JULIA-BACKEND-PARITY.6.2.4.5.3` | `JULIA-BACKEND-PARITY.6.2.4.5.3 - mirror Julia public parser leading trivia` | Public-entry cursor parity closes history and `.5`; final 31/31 no-drift advances to `.6`. |
 | `JULIA-BACKEND-PARITY.6.2.4.6` | `JULIA-BACKEND-PARITY.6.2.4.6 - close Julia shipped corpus no drift` | Permanent complete 31/31 shipped-window regression; `.6.2.4` closes and function-shell fixtures advance to `.6.2.5`. |
+| `JULIA-BACKEND-PARITY.6.2.5` | `JULIA-BACKEND-PARITY.6.2.5 - execute Julia function shell corpus` | Spec-driven function-definition parsing closes all three routed top-level `fn` fixtures; full-manifest gate advances to `.6.3`. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.6.2.5` function-shell corpus execution. Julia compiles and caches
+  `specs/user_function_definition.spec`, executes it over top-level `fn` source, normalizes neutral definition
+  nodes, and reuses existing staged body parsing, registry compilation, and runtime execution. The rule-only parser
+  remains the primary corpus path and falls back only on a source parse error. All three routed fixtures pass exact
+  output, full tests pass with 827 assertions, status is `runtime-corpus-function-shells`, and `.6.3` is active for
+  the independent full 99-fixture gate. No raw Julia scanner or fixture shortcut was added.
 - `2026-07-10`: Completed `.6.2.4.6` shipped-window no-drift. One permanent regression now executes exact offset
   68 / limit 31, locks manifest/result counts, endpoints, zero failures, and every exact output. Direct CLI is
   31/31, full tests pass with 816 assertions, status is `runtime-corpus-shipped`, `.6.2.4` closes, and `.6.2.5`

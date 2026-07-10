@@ -346,7 +346,7 @@ end
     status = backend_status()
     @test status.backend == "julia"
     @test status.package == "LinkedSpecJulia"
-    @test status.parity == "runtime-corpus-shipped"
+    @test status.parity == "runtime-corpus-function-shells"
 
     cli_output = IOBuffer()
     cli_error = IOBuffer()
@@ -358,7 +358,7 @@ end
 
     status_output = IOBuffer()
     @test run_cli(["status"]; io = status_output, err = IOBuffer()) == 0
-    @test occursin("parity: runtime-corpus-shipped", String(take!(status_output)))
+    @test occursin("parity: runtime-corpus-function-shells", String(take!(status_output)))
 
     corpus_output = IOBuffer()
     corpus_error = IOBuffer()
@@ -3190,6 +3190,27 @@ end
     @test definition_nodes_from_user_function_definition_output(Any[Any[node], Any[]]) == Any[node]
 end
 
+@testset "Spec-driven user function definition parser" begin
+    source = read(
+        joinpath(CORPUS_ROOT, "terse_4_3_2_user_function_runtime", "input.spec"),
+        String,
+    )
+    nodes = parse_user_function_definition_asts(source)
+
+    @test length(nodes) == 2
+    @test [node["name"] for node in nodes] == ["normalize", "words"]
+    @test [node["body_source"] for node in nodes] == [
+        " return(trim(value)) ",
+        " set(scratch, trim(value)); return([scratch, uppercase(scratch)]) ",
+    ]
+
+    spec = parse_spec_with_staged_user_function_definitions(source)
+    @test [definition.name for definition in spec.functions] == ["normalize", "words"]
+    @test all(definition -> definition.body_ast !== nothing, spec.functions)
+    @test [rule.header.label for rule in spec.rules] == ["Top", "Done"]
+    @test validate_spec(spec) === nothing
+end
+
 @testset "Corpus manifest IO" begin
     validation = load_corpus_fixtures(CORPUS_ROOT)
 
@@ -3757,6 +3778,24 @@ end
     @test (first(execution.results).name, last(execution.results).name) ==
           ("tclite_command_subst", "lib_reader_cattribute")
     @test corpus_passed_count(execution) == 31
+    @test isempty(failures)
+    @test all(result -> result.actual_output == Any[result.expected_json], execution.results)
+end
+
+@testset "Top-level user-function corpus batch" begin
+    case_names = [
+        "terse_3_3_1_scalar_assignment_expressions",
+        "terse_3_3_4_assignment_expression_closure",
+        "terse_4_3_2_user_function_runtime",
+    ]
+    execution = execute_corpus_fixtures(CORPUS_ROOT; case_names = case_names)
+    failures = [
+        "$(result.name): $(result.failure)"
+        for result in execution.results if !corpus_fixture_passed(result)
+    ]
+
+    @test [result.name for result in execution.results] == case_names
+    @test corpus_passed_count(execution) == 3
     @test isempty(failures)
     @test all(result -> result.actual_output == Any[result.expected_json], execution.results)
 end

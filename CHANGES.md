@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.5 — execute Julia function shell corpus
+
+**Scope:** Spec-driven top-level user-function source parsing, corpus composition, three routed fixture regressions,
+package status, live docs, mdBook, Knowledge Map, task/index/roadmap alignment, and resume pointer.
+
+**Change:** Added a cached `UserFunctionDefinitionAstParser` that compiles
+`specs/user_function_definition.spec`, executes it over caller-provided source in memory, and normalizes its neutral
+definition nodes before the existing staged body parser and registry compiler run. The default corpus path still
+tries rule-only `parse_spec(...)` first and uses this composition only after a source parse error. No raw Julia
+function scanner, fixture-name branch, temporary file, or subprocess path was added.
+
+**Validation:** Seven focused source-driven parser assertions and four permanent three-fixture corpus assertions
+pass. Direct corpus CLI execution is 3 passed / 0 failed; full Julia tests pass with 827 assertions; status is
+`runtime-corpus-function-shells`. `.6.3` now owns the independent full 99-fixture manifest gate.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.6.2.4.6 — close Julia shipped corpus no drift
 
 **Scope:** Permanent complete shipped-spec corpus regression, honest Julia package/CLI status, task/roadmap/live

@@ -50,8 +50,9 @@ contracts, but the Julia leaves must establish their own root causes. After `.6.
 closes both EBNF, both lib_reader, and simenv fixtures without fixture-specific cleanup. `.6.2.4.5.3` then mirrors
 public-parser leading blank/comment skipping and closes history without weakening indexed reads. The complete
 window reached 31/31. `.6.2.4.6` now runs that entire window in one permanent test and locks manifest/result counts,
-stable endpoints, zero failures, and exact outputs. Full tests pass with 816 assertions, status is
-`runtime-corpus-shipped`, and `.6.2.5` is active for the three separately routed top-level function fixtures.
+stable endpoints, zero failures, and exact outputs. Full tests pass with 816 assertions and status is
+`runtime-corpus-shipped` at that boundary. `.6.2.5` has since closed the three separately routed top-level function
+fixtures; `.6.3` is active for the complete-manifest gate.
 
 Related facts: [[ds-vhistory-leading-newline-oracle-boundary]], [[julia-statement-regex-mutation]], [[julia-exit-now-control]], [[julia-action-edge-child-push]], [[julia-recursive-rule-local-reset-scope]], [[julia-diagnostic-output-helpers]], [[julia-helper-regex-flag-normalization]], [[julia-logical-helper-execution]], [[julia-anonymous-capture-boundary-helpers]], [[julia-middle-corpus-batch]], [[julia-controlled-corpus-execution]],
 [[dart-shipped-corpus-smoke-split]], [[dart-helper-action-surface-bridge]],

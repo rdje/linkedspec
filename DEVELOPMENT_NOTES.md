@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.6.2.5 — spec-driven function-shell composition):
+  The failure was an entrypoint composition gap, not missing grammar or runtime semantics. Rule-only
+  `parse_spec(...)` correctly rejected the first `fn`, while direct execution of
+  `specs/user_function_definition.spec` already consumed the source and returned the expected neutral nodes. A
+  cached source-driven parser now joins that spec output to the existing projection, staged ActionIR body parser,
+  function registry, compiler, and runtime. Keeping direct parsing first avoids burdening ordinary specs; falling
+  back only on `SpecParseException` makes the broadened path precise. The three routed fixtures pass with no raw
+  Julia scanner, and the separate `.6.3` gate remains responsible for the aggregate 99/99 claim.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.6.2.4.6 — complete shipped-window no-drift):
   Mechanism-specific regressions proved why individual failures closed, but they did not make the full 31-case
   claim atomic. The final regression reuses the same offset/limit boundary as the initial diagnosis and locks both

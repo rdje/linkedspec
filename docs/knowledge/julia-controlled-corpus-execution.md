@@ -15,14 +15,15 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, corpus, runtime, diagnostics, trace, user-functions, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.1 adds execution/result/query APIs in julia/src/corpus/CorpusManifest.jl and 24 focused assertions in julia/test/runtests.jl. Full Pkg.test() passes with 715 assertions and package status runtime-controlled-corpus."
+evidence: "JULIA-BACKEND-PARITY.6.1 adds execution/result/query APIs in julia/src/corpus/CorpusManifest.jl and 24 focused assertions. JULIA-BACKEND-PARITY.6.2.5 adds the default spec-driven function-shell fallback plus a three-case regression. Full Julia tests pass with 827 assertions and package status runtime-corpus-function-shells."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
 `execute_corpus_fixtures(path; parse_mode, spec_parser, trace_config)` first calls
 `load_corpus_fixtures(path)`, then processes every manifest fixture in order through spec parsing,
-`compile_spec(...)`, and `LinkedSpecRuntimeEngine` execution. The default parser is rule-only
-`parse_spec(...)`; controlled tests may provide `spec_parser` for an already-projected staged function shell.
+`compile_spec(...)`, and `LinkedSpecRuntimeEngine` execution. The default path first tries rule-only
+`parse_spec(...)`; after a source parse error it executes `specs/user_function_definition.spec` and composes its
+neutral nodes with the existing staged body parser. Callers may still provide `spec_parser` to control parsing.
 
 Each runtime output is compared structurally to `Any[fixture.expected_json]`. That single wrapper is the accepted
 backend-neutral top-rule output shape. A fixture succeeds only when it matches and the complete wrapped output is
@@ -39,19 +40,18 @@ lifecycle return shape, exact-arity staged function calls, boundary capture plus
 diagnostics, output mismatch reporting, and continuation after failures. Multiline fixtures use newline statement
 separation with no trailing semicolons.
 
-This is not full corpus parity. `.6.2.1` now allows bounded Julia CLI/corpus-runner execution with named cases or a
-positive limit, but unbounded execution remains deliberately unavailable. The checked-in 99-fixture manifest is
-owned by later `.6` batches.
+This is not yet full corpus parity. Bounded Julia CLI/corpus-runner execution accepts named cases or a positive
+limit, and all three routed top-level function fixtures now pass through the spec-defined shell. Unbounded
+execution and the aggregate 99/99 claim remain deliberately unavailable until `.6.3` closes the full-manifest gate.
 
 `JULIA-BACKEND-PARITY.6.2.0` splits that rollout before behavior changes: `.6.2.1` owns bounded selection/reporting,
 `.6.2.2` owns starter fixtures 0–39, `.6.2.3` owns non-function fixtures 40–67, and `.6.2.4.0` has split the
-measured 10/31 shipped-spec/parser-smoke boundary for fixtures 68–98. `.6.2.5` owns top-level function fixtures
-through the spec-defined shell. `.6.2.4.1` has since added direct anonymous capture-boundary execution and moved
-the shipped-smoke window to 13/31; `.6.2.4.2.1` added eager logical helpers and moved it to 17/31; `.6.2.4.2.3`
-normalized helper regex flags and moved it to 18/31. These mirror
-the stable Dart workload windows but do not assume Dart and Julia share failure mechanisms.
+measured shipped-spec/parser-smoke boundary for fixtures 68–98; later mechanism leaves close that window at 31/31.
+`.6.2.5` now closes all three top-level function fixtures through the spec-defined shell. `.6.3` owns the separate
+complete-manifest gate. These mirror the stable Dart workload windows but do not assume Dart and Julia share
+failure mechanisms.
 
-Related facts: [[julia-helper-regex-flag-normalization]], [[julia-logical-helper-execution]], [[julia-anonymous-capture-boundary-helpers]], [[julia-shipped-corpus-smoke-split]], [[julia-corpus-selection-reporting]], [[julia-corpus-manifest-io]], [[julia-core-spec-parser]],
+Related facts: [[julia-spec-driven-function-shell-parser]], [[julia-helper-regex-flag-normalization]], [[julia-logical-helper-execution]], [[julia-anonymous-capture-boundary-helpers]], [[julia-shipped-corpus-smoke-split]], [[julia-corpus-selection-reporting]], [[julia-corpus-manifest-io]], [[julia-core-spec-parser]],
 [[julia-compiled-spec-state]],
 [[julia-diagnostics-trace-boundary]], [[julia-user-function-runtime-execution]],
 [[dart-controlled-corpus-execution]], [[statement-separator-semantics]].

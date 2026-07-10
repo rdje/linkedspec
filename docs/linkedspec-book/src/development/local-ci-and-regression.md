@@ -61,8 +61,9 @@ parsing, ActionIR contract resolution, user-function registry projection/stitchi
 projection, seek/consume runtime regex selection, capture/offset projection, cursor and entry/local match registers,
 zero-progress detection, first default/AND/OR/repetition dispatch, lifecycle and child-edge flow, narrow
 accumulators/returns, recursion/progress guards, registered user functions, diagnostics/tracing, boundary capture,
-manifest-backed corpus validation, controlled library corpus execution, and public-parser leading-trivia parity.
-The full package suite currently passes with 816 assertions and status `runtime-corpus-shipped`.
+manifest-backed corpus validation, controlled library corpus execution, public-parser leading-trivia parity, and
+spec-driven top-level user-function source composition. The full package suite currently passes with 827 assertions
+and status `runtime-corpus-function-shells`.
 
 The library executor and corpus CLI support named or bounded subsets. For example:
 
@@ -71,10 +72,11 @@ JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot julia --project=julia julia
   --corpus rust/linkedspec-runtime/tests/corpus --execute --case proof_edge_array_literal
 ```
 
-Validation-only loading remains the default. Unbounded CLI execution remains unavailable until shipped-manifest
-batches are green. The permanent starter batch can be rerun with `--execute --offset 0 --limit 40` and passes
-40/40. The middle non-function regression runs offsets/limits `40/17`, `58/2`, and `62/6` for another 25/25 while
-locking the three intervening top-level function routes. Full 99-fixture Julia parity is not yet claimed.
+Validation-only loading remains the default. Unbounded CLI execution remains unavailable until the independent
+full-manifest gate is green. The permanent starter batch can be rerun with `--execute --offset 0 --limit 40` and passes
+40/40. The middle non-function regression runs offsets/limits `40/17`, `58/2`, and `62/6` for another 25/25. The
+three intervening top-level function fixtures now pass through the checked-in spec-defined shell. Full 99-fixture
+Julia parity is not yet claimed until `.6.3` runs the complete manifest together.
 
 ### Cleaning generated build caches
 
@@ -99,7 +101,8 @@ blanket-delete `/private/tmp`; it may contain agent state, application IPC, or a
 The bounded command `--execute --offset 68 --limit 31` now passes 31/31. Anonymous capture, logical/output helper,
 recursive top-rule, structural child-push, statement mutation, and public-parser leading-trivia leaves closed each
 independent mechanism. `.6.2.4.6` now permanently runs that full window and locks its counts, endpoints, zero
-failures, and exact outputs. Julia next advances to routed top-level function fixtures under `.6.2.5`.
+failures, and exact outputs. Julia has since closed the routed top-level function fixtures under `.6.2.5`; `.6.3`
+owns the independent complete-manifest gate.
 
 ## Hosted GitHub Actions status
 

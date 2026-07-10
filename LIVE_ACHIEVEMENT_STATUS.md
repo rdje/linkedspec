@@ -7,8 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.5 — execute Julia function shell corpus**
+  (DONE — all three routed top-level function fixtures pass; `.6.3` is active).
+
+  **Change:** Julia now executes the checked-in user-function definition spec over source in memory, normalizes
+  its neutral nodes, and reuses the existing staged body parser, compiled registry, and runtime path. Rule-only
+  parsing remains primary and falls back only after a source parse error; no raw scanner or fixture shortcut exists.
+
+  **Verification:** Direct CLI execution is 3 passed / 0 failed. Full Julia tests pass with 827 assertions; status
+  is `runtime-corpus-function-shells`. Full 99/99 parity remains owned by `.6.3`.
+
 - 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.6 — close Julia shipped corpus no drift**
-  (DONE — complete shipped window is permanently 31/31; `.6.2.5` is active).
+  (DONE — complete shipped window is permanently 31/31; `.6.2.5` has since closed).
 
   **Change:** Added one full offset-68/limit-31 regression that locks manifest/result counts, stable first/last
   fixtures, 31 passes, zero failures, and exact expected output for every case. Status advances to

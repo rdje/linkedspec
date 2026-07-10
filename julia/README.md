@@ -1,11 +1,12 @@
 # LinkedSpec Julia Backend
 
-This directory is the repository-owned Julia backend. Its current `runtime-corpus-shipped` status covers the
+This directory is the repository-owned Julia backend. Its current `runtime-corpus-function-shells` status covers the
 package/command surface, manifest validation, source and ActionIR frontends, staged user-function projection/body
 parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch, value/helper/control/callback
 families, cursor/boundary behavior, structured diagnostics/tracing, registered function execution, and controlled
-library-level corpus execution plus bounded CLI selection/reporting. The current 99-fixture manifest, unbounded
-corpus CLI, local-gate integration, and final parity closeout remain later leaves.
+library-level corpus execution, bounded CLI selection/reporting, and spec-driven top-level user-function source
+composition. The independent full 99-fixture manifest gate, unbounded corpus CLI, local-gate integration, and final
+parity closeout remain later leaves.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -19,7 +20,8 @@ added by `JULIA-BACKEND-PARITY.4.1`, and first executable rule dispatch was adde
 value/store/capture behavior landed in `.4.3.1`, and string/scalar plus numeric helpers landed in `.4.3.2`. The
 array helper and mutation boundary landed in `.4.3.3`, and hash helper and mutation behavior landed in `.4.3.4`;
 `.4.3.5` landed value/control/block/callback execution, and `.4.3.6` closed final helper/value no-drift. Cursor,
-diagnostic/trace, staged-function, and shipped-corpus work through `.6.2.4.6` has since landed; `.6.2.5` is active.
+diagnostic/trace, staged-function, shipped-corpus, and function-shell work through `.6.2.5` has since landed; `.6.3`
+is active.
 
 ## Commands
 
@@ -127,9 +129,10 @@ stitched `body_ast`, descriptor function metadata, and runtime output through on
 `CorpusFixtureExecutionResult`, and result-query helpers. The library executor validates the manifest, runs every
 fixture through parse/compile/runtime, compares runtime output to the expected JSON wrapped exactly once, retains
 optional trace lines and structured runtime diagnostics, and records every failure without aborting later fixtures.
-The optional `spec_parser` callback is a controlled seam for already-projected staged function shells; the default
-is direct rule-only `parse_spec(...)`. The full suite passes with 715 assertions and status
-`runtime-controlled-corpus` at that boundary. `.6.2.0` splits the 99-fixture rollout into bounded
+The optional `spec_parser` callback is a controlled parser-override seam. At the `.6.1` boundary the default was
+direct rule-only `parse_spec(...)`; `.6.2.5` now keeps that primary path and falls back after a source parse error
+to spec-driven top-level function projection. The full suite passed with 715 assertions and status
+`runtime-controlled-corpus` at the `.6.1` boundary. `.6.2.0` splits the 99-fixture rollout into bounded
 selection/reporting, starter 0–39, middle non-function 40–67, shipped-spec/parser-smoke 68–98, and spec-defined
 function-shell owners. `.6.2.1` adds ordered named/offset/limit library selection plus bounded runner PASS/FAIL
 reporting. `.6.2.2` proves starter fixtures 0–39 green at 40/40 without a production correction. `.6.2.3` proves
@@ -159,8 +162,11 @@ scalar targets mutate through strict helper flags and `$n` replacement expansion
 pass with 808 assertions, status is `runtime-corpus-statement-mutation`, the shipped-smoke window is 30/31, and
 `.6.2.4.5.3` has since mirrored public-parser leading blank/comment skipping without weakening ordinary indexed
 reads. History passes, and `.6.2.4.6` adds the complete offset-68/limit-31 regression with stable endpoints, exact
-outputs, and zero failures. The shipped window is permanently 31/31, full tests pass with 816 assertions, status
-is `runtime-corpus-shipped`, and `.6.2.5` owns the three routed top-level function fixtures.
+outputs, and zero failures. The shipped window is permanently 31/31. `.6.2.5` adds
+`parse_user_function_definition_asts(...)` and `parse_spec_with_staged_user_function_definitions(...)`: Julia
+executes the checked-in definition spec over source, normalizes neutral nodes, and reuses staged body parsing. All
+three routed top-level function fixtures pass, full tests pass with 827 assertions, status is
+`runtime-corpus-function-shells`, and `.6.3` owns the independent full-manifest gate.
 
 Library example:
 

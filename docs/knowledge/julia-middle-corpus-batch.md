@@ -33,9 +33,10 @@ Manifest offsets 57, 60, and 61 are intentionally excluded:
 - `terse_3_3_4_assignment_expression_closure`
 - `terse_4_3_2_user_function_runtime`
 
-They contain top-level `fn` source and remain owned by `.6.2.5`. This is not a full corpus claim: `.6.2.4.0` has
-since measured shipped-spec/parser-smoke fixtures 68–98 at 10/31 and split their failure families.
+They contain top-level `fn` source and were routed to `.6.2.5`; that leaf now executes all three through
+`specs/user_function_definition.spec` and passes exact output. This middle-window fact remains 25/25. It is not a
+full corpus claim: `.6.3` separately owns the complete 99-fixture manifest gate.
 
-Related facts: [[julia-shipped-corpus-smoke-split]], [[julia-starter-corpus-batch]], [[julia-corpus-selection-reporting]],
+Related facts: [[julia-spec-driven-function-shell-parser]], [[julia-shipped-corpus-smoke-split]], [[julia-starter-corpus-batch]], [[julia-corpus-selection-reporting]],
 [[julia-controlled-corpus-execution]], [[dart-middle-corpus-batch]], [[rust-perl-output-oracle]],
 [[statement-separator-semantics]].

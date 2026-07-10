@@ -18,22 +18,21 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `JULIA-BACKEND-PARITY.6.2.4.6` — permanent full-window regression locks shipped corpus
-  at 31/31; full tests pass with 816 assertions and status is `runtime-corpus-shipped`.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.4` — ADR `0022` ratifies native in-memory host-language embedding as the
-  primary backend product contract; CLIs and corpus runners are thin secondary adapters.
+- latest_completed_leaf: `JULIA-BACKEND-PARITY.6.2.5` — spec-driven source parsing closes all three routed
+  top-level function fixtures; full tests pass with 827 assertions and status is `runtime-corpus-function-shells`.
+- prior_leaf: `JULIA-BACKEND-PARITY.6.2.4.6` — permanent full-window regression locks shipped corpus at 31/31.
 - recent_context: `DART-BACKEND-PARITY.7.5` — Dart's scoped interpreter-first milestone is complete:
   99/99 corpus execution, focused Dart verification, Dart-specific CLI productization, mdBook/live-doc alignment,
   and generated-source deferral are all recorded.
 - latest_commit: this resume block is prepared for commit
-  `JULIA-BACKEND-PARITY.6.2.4.6 - close Julia shipped corpus no drift`; previous committed HEAD is
-  `f863c61d FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract`.
+  `JULIA-BACKEND-PARITY.6.2.5 - execute Julia function shell corpus`; previous committed HEAD is
+  `ff608f10 JULIA-BACKEND-PARITY.6.2.4.6 - close Julia shipped corpus no drift`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `JULIA-BACKEND-PARITY`; its frontier after this commit is `.6.2.5`.
-- next_action: execute the three routed top-level function corpus fixtures through the spec-defined shell under
-  `JULIA-BACKEND-PARITY.6.2.5`, without a Julia raw scanner or fixture shortcut. The director's single-source `foo.spec`
-  parser+stimuli roundtrip idea is parked in `FUTURE-PARITY-BACKLOG.8.1`;
+- active_work_unit: `JULIA-BACKEND-PARITY`; its frontier after this commit is `.6.3`.
+- next_action: run and permanently lock the independent full 99-fixture manifest drift/execution gate under
+  `JULIA-BACKEND-PARITY.6.3`. The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
+  `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; neither is the next backend rollout leaf.
 - latest_bootstrap_read: 2026-07-10 read the full roadmap and roadmap-v2, full codebase inventory and active Julia
   source/tests, full mdBook source, README/memory architecture/session bootstrap/COMMIT/task-tree doctrine, active
@@ -49,5 +48,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: `.6.2.4.6` is verified and ready for its prepared commit; none expected
-  afterward. Do not advance to `.6.2.5` until the tree is clean.
+- blockers: none. in_flight_uncommitted: `.6.2.5` is verified and ready for its prepared commit; none expected
+  afterward. Do not advance to `.6.3` until the tree is clean.

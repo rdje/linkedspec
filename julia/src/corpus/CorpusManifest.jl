@@ -381,7 +381,7 @@ function _execute_corpus_fixture(
     parse_result = nothing
     trace = nothing
     try
-        spec = spec_parser === nothing ? parse_spec(fixture.spec_source) : spec_parser(fixture.spec_source)
+        spec = spec_parser === nothing ? _parse_corpus_spec(fixture.spec_source) : spec_parser(fixture.spec_source)
         compiled = compile_spec(spec)
         engine = LinkedSpecRuntimeEngine(
             compiled;
@@ -459,6 +459,7 @@ _corpus_trace_lines(trace) = trace === nothing ? String[] : String[trace_lines(t
 function _corpus_failure_stage(error)
     if error isa SpecParseException ||
             error isa UserFunctionDefinitionException ||
+            error isa UserFunctionDefinitionParserException ||
             error isa StagedParserRegistryException
         return "parse"
     elseif error isa SpecValidationException
@@ -469,6 +470,17 @@ function _corpus_failure_stage(error)
         return "execute"
     end
     return "unexpected"
+end
+
+function _parse_corpus_spec(source::AbstractString)
+    try
+        return parse_spec(source)
+    catch error
+        if error isa SpecParseException
+            return parse_spec_with_staged_user_function_definitions(source)
+        end
+        rethrow()
+    end
 end
 
 _format_corpus_json(value) = String(JSON3.write(value))

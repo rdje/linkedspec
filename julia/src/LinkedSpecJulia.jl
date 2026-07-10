@@ -113,6 +113,8 @@ export backend_name,
     parse_trace_sink_mode,
     parse_spec_with_user_function_definition_asts,
     parse_spec_with_staged_user_function_definition_asts,
+    parse_spec_with_staged_user_function_definitions,
+    parse_user_function_definition_asts,
     parse_action_block,
     parse_action_expression,
     parse_action_statement,
@@ -147,6 +149,8 @@ export backend_name,
     StagedSourceSpan,
     UserFunctionCallResolution,
     UserFunctionDefinitionException,
+    UserFunctionDefinitionParserException,
+    UserFunctionDefinitionAstParser,
     UserFunctionDefinitionProjection,
     UserFunctionEntry,
     UserFunctionRegistry,
@@ -254,7 +258,7 @@ const PACKAGE_NAME = "LinkedSpecJulia"
 const PACKAGE_VERSION = v"0.1.0"
 const CLI_ENTRYPOINT = "julia/bin/linkedspec_julia.jl"
 const CORPUS_RUNNER_ENTRYPOINT = "julia/bin/corpus_runner.jl"
-const PARITY_STATUS = "runtime-corpus-shipped"
+const PARITY_STATUS = "runtime-corpus-function-shells"
 
 include("corpus/CorpusManifest.jl")
 include("spec/Ast.jl")
@@ -270,6 +274,7 @@ include("compiler/CompiledSpec.jl")
 include("runtime/Matching.jl")
 include("trace/Trace.jl")
 include("runtime/Interpreter.jl")
+include("parser/UserFunctionDefinitionParser.jl")
 include("cli/LinkedSpecJuliaCli.jl")
 
 backend_name() = BACKEND_NAME

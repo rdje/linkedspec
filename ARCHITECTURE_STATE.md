@@ -5,10 +5,15 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.5` closes the three routed top-level function fixtures. Julia
+  compiles and caches `specs/user_function_definition.spec`, executes it over source in memory, normalizes neutral
+  function nodes, and composes existing staged body parsing/registry/runtime paths. Corpus parsing falls back to
+  this path only after rule-only source parsing fails. Full tests pass with 827 assertions; package/CLI status is
+  `runtime-corpus-function-shells`; no raw scanner or fixture shortcut was added; `.6.3` is the full-manifest gate.
 - `2026-07-10` refresh: `JULIA-BACKEND-PARITY.6.2.4.6` closes shipped-corpus no-drift. One permanent test executes
   offsets 68–98 together and locks manifest/result counts, tclite-to-lib_reader endpoints, 31/31 passes, zero
   failures, and every exact output. Full Julia tests pass with 816 assertions; package/CLI status is
-  `runtime-corpus-shipped`; no runtime or fixture changed; `.6.2.5` is active for top-level function fixtures.
+  `runtime-corpus-shipped` at that boundary; `.6.2.5` has since closed the top-level function fixtures.
 - `2026-07-10` refresh: ADR `0022` ratifies native in-memory embedding as the reason for LinkedSpec's multiple
   backends. Perl `Get`, Rust core/runtime crates, Dart package APIs, and Julia module APIs already expose the
   structural host-process parse/compile/execute path. CLIs, corpus runners, and platform wrappers are secondary

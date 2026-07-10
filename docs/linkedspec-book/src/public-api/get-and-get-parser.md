@@ -17,7 +17,7 @@ in-process data path, not identical spelling:
 | Perl | `LinkedSpec::Get(...)` → parser coderef; `get_parser(...)` adds named/file resolution. |
 | Rust | `linkedspec_core::parser::parse_spec(...)` → core compilation → `linkedspec_runtime::engine::Engine::new(...).execute(...)`. |
 | Dart | `parseSpec(...)` → `compileSpec(...)` → `LinkedSpecRuntimeEngine(...).parse(...)`. |
-| Julia | `parse_spec(...)` → `compile_spec(...)` → `LinkedSpecRuntimeEngine(...)` → `runtime_parse(...)` / `runtime_execute(...)`. |
+| Julia | Rule-only: `parse_spec(...)`; source with top-level functions: `parse_spec_with_staged_user_function_definitions(...)`; then `compile_spec(...)` → `LinkedSpecRuntimeEngine(...)` → `runtime_parse(...)` / `runtime_execute(...)`. |
 | Lua and later backends | An idiomatic native module must expose equivalent in-memory parse/compile/execute capability before its CLI can count as a complete backend. |
 
 File-oriented helpers, per-variant CLIs, corpus runners, Wasm/web/mobile wrappers, and

@@ -361,9 +361,12 @@ with strict flags and `$n` expansion while preserving pure numeric slicing. Both
 fixtures pass. Full tests pass with 808 assertions, status is `runtime-corpus-statement-mutation`, the window is
 30/31 at that boundary. `.6.2.4.5.3` mirrors the public parser's leading blank/comment-line skip through Julia's
 in-memory runtime cursor seam. History passes without weakening indexed reads. `.6.2.4.6` now locks the complete
-offset-68/limit-31 window in one permanent test: stable endpoints, 31/31 exact outputs, and zero failures. Full
-tests pass with 816 assertions, status is `runtime-corpus-shipped`, and `.6.2.5` owns the three routed top-level
-function fixtures.
+offset-68/limit-31 window in one permanent test: stable endpoints, 31/31 exact outputs, and zero failures.
+`.6.2.5` then compiles and caches `specs/user_function_definition.spec`, executes it over caller-provided source,
+normalizes its neutral nodes, and composes the existing staged body parser and runtime registry. The corpus path
+tries rule-only parsing first and falls back only after a source parse error. All three routed fixtures pass; full
+tests pass with 827 assertions and status `runtime-corpus-function-shells`. `.6.3` owns the independent full
+99-fixture gate.
 The future Lua backend plan must own its own
 variant-specific CLIs rather than relying on one
 ambiguous shared command.
@@ -417,7 +420,8 @@ julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtim
 
 The corpus commands validate `manifest.json`, case-count/name shape, missing/stale fixture directories, required
 `input.spec` / `input.txt` / `expected.json` files, and expected JSON syntax over the checked-in 99-fixture corpus.
-`--execute` still reports not implemented. `julia/src/spec/Ast.jl` defines data records and JSON projection for
+Named and bounded `--execute` runs are available; unbounded execution remains gated until `.6.3` closes the full
+manifest proof. `julia/src/spec/Ast.jl` defines data records and JSON projection for
 spec files, function definitions, source spans, staged parse jobs, rule headers/modes, body element variants, edge
 targets, and fluent calls. `julia/src/spec/Parser.jl` exposes `parse_spec(...)`, which parses core `.spec` rule
 paragraphs into those source AST types: headers/modes, regex slots, lifecycle blocks, action/blind-call edges,
@@ -427,8 +431,11 @@ function registry collisions and reserved params, raw fallback lines, mixed edge
 undefined references, regex-slot bounds, regex structure, and strict unused-rule behavior.
 `julia/src/spec/UserFunctionDefinitionShell.jl` consumes the `function_definition` / `function_definition_error`
 node shape produced by `specs/user_function_definition.spec`, validates source/body spans and staged sidecars,
-normalizes `functions.<index>.body_source` parse-job paths, and strips function spans before rule parsing. Direct
-`parse_spec(...)` remains rule-only rather than a Julia raw scanner. `julia/src/action/ActionAst.jl` and
+normalizes `functions.<index>.body_source` parse-job paths, and strips function spans before rule parsing.
+`julia/src/parser/UserFunctionDefinitionParser.jl` now exposes `parse_user_function_definition_asts(...)` and
+`parse_spec_with_staged_user_function_definitions(...)`; these execute the checked-in definition spec over source
+in memory, then reuse that projection. Direct `parse_spec(...)` remains rule-only rather than a Julia raw scanner.
+`julia/src/action/ActionAst.jl` and
 `julia/src/action/ActionParser.jl` expose `parse_action_block(...)`, `parse_action_statement(...)`, and
 `parse_action_expression(...)` for typed helper/action structures: blocks, value-drop statements, calls, literals,
 variables, direct/nested access, shape literals, assignments, receiver chains, trailing block arguments, block
@@ -577,9 +584,24 @@ Failure records distinguish parse, validation, compile, execute, no-match, outpu
 boundaries. `corpus_execution_passed(...)`, `corpus_passed_count(...)`, `corpus_failures(...)`,
 `corpus_fixture_passed(...)`, and `corpus_fixture_result(...)` provide the common queries.
 
-The optional `spec_parser` keyword is a narrow controlled-test seam for source that already has neutral staged
-function-definition nodes available. Ordinary calls use direct rule-only `parse_spec(...)`. Source-driven
-top-level function-shell execution and the full checked-in 99-fixture gate remain later `.6` work.
+The optional `spec_parser` keyword remains a controlled parser-override seam. Ordinary calls try direct rule-only
+`parse_spec(...)` first. If source parsing fails, the default path executes the checked-in user-function definition
+spec and feeds its neutral nodes through staged body parsing. The three routed top-level function fixtures pass;
+the full checked-in 99-fixture gate remains separate under `.6.3`.
+
+Native callers can use the source-driven composition directly:
+
+```julia
+using LinkedSpecJulia
+
+spec = parse_spec_with_staged_user_function_definitions(spec_source)
+compiled = compile_spec(spec)
+result = runtime_execute(LinkedSpecRuntimeEngine(compiled), input_source)
+```
+
+`parser_spec_source = ...` may be supplied when an embedding application keeps an alternate compatible definition
+spec in memory. The default resolves the repository-owned `specs/user_function_definition.spec`; neither path
+requires a subprocess or a raw Julia function scanner.
 
 #### Selecting bounded Julia corpus runs
 
@@ -631,8 +653,8 @@ starter fixtures 0–39 green at 40/40; `.6.2.3` proves the surrounding non-func
 green at 25/25 while routing three top-level function fixtures; `.6.2.4.0` measures shipped-spec/parser-smoke
 fixtures 68–98 at 10/31 and splits their mechanism owners; `.6.2.4.1` then closes anonymous capture execution and
 moves the window to 13/31. `.6.2.4.2.1` then adds eager logical helpers and moves it to 17/31 while routing one
-helper-regex flag residual; `.6.2.4.2.3` then closes it and moves the window to 18/31. `.6.2.5` owns spec-defined
-top-level function shells.
+helper-regex flag residual; `.6.2.4.2.3` then closes it and moves the window to 18/31. `.6.2.5` has since closed
+the spec-defined top-level function shells, and `.6.3` owns the full-manifest gate.
 Those are workload boundaries, not an assumption that Julia shares Dart's historical failure causes.
 
 #### Julia starter corpus proof
@@ -670,8 +692,10 @@ The windows report 17/17, 2/2, and 6/6, for 25 passes and zero failures across h
 assignment, with-block, and tree traversal behavior. No Julia runtime correction and no fixture change was
 required. Manifest offsets 57, 60, and 61 are explicitly routed as
 `terse_3_3_1_scalar_assignment_expressions`, `terse_3_3_4_assignment_expression_closure`, and
-`terse_4_3_2_user_function_runtime`; their top-level `fn` source remains owned by `.6.2.5`. The package regression
-locks all three windows, their endpoints and counts, the empty failure ledger, and those exact routes.
+`terse_4_3_2_user_function_runtime`; their top-level `fn` source is now executed by `.6.2.5` through
+`specs/user_function_definition.spec` and the existing staged body parser. The package regression locks all three
+windows, their endpoints and counts, the empty failure ledger, and those exact routes; a separate three-case
+regression now locks their exact outputs too.
 
 #### Julia shipped-spec/parser-smoke split
 
@@ -756,8 +780,10 @@ pass with 808 assertions, and status is `runtime-corpus-statement-mutation` at t
 Julia's public in-memory `runtime_parse(...)` entrypoint now begins after only leading blank lines and leading `#`
 comment lines, matching the Perl wrapper and Dart backend. A focused minimal proves the history boundary while an
 ordinary scalar-held `payload[1]` still returns its indexed item. `ds_vhistory_version_entry` passes. The final
-no-drift leaf adds one permanent complete-window test; full tests pass with 816 assertions, status is
-`runtime-corpus-shipped`, and the complete shipped-spec window is 31/31.
+no-drift leaf adds one permanent complete-window test; the complete shipped-spec window is 31/31. Spec-driven
+function-definition parsing then closes the three routed top-level function fixtures without a raw Julia scanner.
+Full tests pass with 827 assertions and status is `runtime-corpus-function-shells`; the full-manifest gate remains
+separate under `.6.3`.
 
 ### Dart Backend Commands
 

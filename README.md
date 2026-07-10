@@ -133,8 +133,10 @@ Top-level directories and files:
     closes both EBNF, both lib_reader, and simenv fixtures, and preserves pure numeric slicing. Full tests pass with
     808 assertions at that boundary. `.6.2.4.5.3` mirrors public-parser leading blank/comment skipping and closes
     history without weakening indexed reads. `.6.2.4.6` now permanently locks the complete shipped window at
-    31/31 exact outputs. Full tests pass with 816 assertions, status is `runtime-corpus-shipped`, and `.6.2.5` is
-    active for the three routed top-level function fixtures.
+    31/31 exact outputs. `.6.2.5` then executes `specs/user_function_definition.spec` over top-level `fn` source,
+    feeds its neutral nodes through the existing staged body parser, and closes all three routed fixtures without
+    a raw Julia scanner. Full tests pass with 827 assertions, status is `runtime-corpus-function-shells`, and
+    `.6.3` is active for the independent full-manifest gate; 99/99 is not yet claimed.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.
