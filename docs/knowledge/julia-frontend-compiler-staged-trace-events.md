@@ -42,7 +42,7 @@ Omitting `trace` retains the direct quiet path. A disabled emitter records and
 writes nothing. Focused tests compare traced/untraced `SpecFile` and compiled
 descriptor JSON, verify route-file output, and exercise validation failure events.
 At this leaf the full package suite passed with 868 assertions and all 99 corpus
-outputs remained exact; later CLI-preparation tests bring the current total to 920
+outputs remained exact; later CLI preparation/execution tests bring the current total to 942
 without trace or corpus drift.
 
 Related facts: [[julia-trace-controls-sinks]], [[julia-runtime-trace-events]],

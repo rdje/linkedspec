@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, cli, trace, parser, compiler, parity, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.3.2.0 splits five mechanisms. .7.3.2.1 closes trace; .7.3.2.2 closes exact arguments/resolution/loading with 920 assertions and 99/99 green; .7.3.2.3 is active for execution and canonical JSON."
+evidence: "JULIA-BACKEND-PARITY.7.3.2.0 splits five mechanisms. .7.3.2.1 closes trace, .7.3.2.2 arguments/loading, and .7.3.2.3 native execution/direct canonical JSON with 942 assertions and 99/99 green; .7.3.2.4 is active."
 reverify: "rg -n 'JULIA-BACKEND-PARITY\\.7\\.3\\.2|status|corpus|parse_spec|parse_spec_with_staged|compile_spec|LinkedSpecRuntimeEngine|runtime_execute|LinkedSpecTraceConfig|JSON3\\.write' docs/tasks/JULIA-BACKEND-PARITY.md julia/src julia/test"
 ---
 
@@ -21,11 +21,11 @@ runtime diagnostics, and trace configuration/sinks. These library seams can supp
 the ADR `0023` primary parser CLI without routing through a subprocess or temporary
 file.
 
-The existing primary CLI is still the rollout-era status/corpus dispatcher. It has no
-ADR `0023` parser-option model, named/current/repository spec resolution, input loader,
-native parser execution, canonical nested key-sorted JSON writer, or normalized
-diagnostic/exit boundary. Corpus `JSON3.write(...)` usage does not prove the canonical
-ordering required for primary CLI output.
+The audit found a rollout-era status/corpus dispatcher with none of the required
+parser-option, resolution, execution, canonical JSON, or normalized diagnostic
+mechanisms. `.7.3.2.1` through `.7.3.2.3` have since closed trace propagation,
+argument/loading preparation, and native execution/direct canonical JSON. The
+normalized diagnostic/exit and complete trace-routing boundary remains active.
 
 Runtime trace instrumentation already existed. `.7.3.2.1` now propagates that same
 emitter through source parsing, validation, compilation, function-shell parsing,
@@ -36,11 +36,12 @@ native-pipeline meaning required by ADR `0023`.
 
 1. `.7.3.2.1` — compile/parser/function-shell/staged trace coverage (done);
 2. `.7.3.2.2` — exact arguments plus source/input loading and named resolution (done);
-3. `.7.3.2.3` — native execution and canonical direct-value JSON (active);
-4. `.7.3.2.4` — normalized failures, exits, and trace routing;
+3. `.7.3.2.3` — native execution and canonical direct-value JSON (done);
+4. `.7.3.2.4` — normalized failures, exits, and trace routing (active);
 5. `.7.3.2.5` — unit/direct-process conformance and public no-drift.
 
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[julia-diagnostics-trace-boundary]], [[julia-mdbook-usage-status]],
 [[native-in-memory-backend-contract]], [[julia-frontend-compiler-staged-trace-events]],
-[[julia-primary-cli-arguments-resolution-loading]].
+[[julia-primary-cli-arguments-resolution-loading]],
+[[julia-primary-cli-native-execution-canonical-json]].

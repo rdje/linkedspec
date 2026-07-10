@@ -13,7 +13,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, cli, arguments, resolution, io, parity, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.3.2.2 replaces status/corpus primary dispatch with ADR 0023's exact option/preparation model, deterministic named resolution, and exact file/inline loading. Fifty focused assertions, the 920-assertion suite, direct CLI checks, and 99/99 corpus gate pass."
+evidence: "JULIA-BACKEND-PARITY.7.3.2.2 replaces status/corpus primary dispatch with ADR 0023's exact option/preparation model, deterministic named resolution, and exact file/inline loading. .7.3.2.3 subsequently connects prepared requests to native execution and canonical JSON."
 reverify: "LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n '_parse_primary_cli_args|_prepare_primary_cli_request|_resolve_named_spec_path|unexpected positional|primary_status_code' julia/src/cli/LinkedSpecJuliaCli.jl julia/test/runtests.jl tools/run_julia_local.sh"
 ---
 
@@ -37,10 +37,11 @@ cannot unexpectedly win named resolution. `--spec-file` and `--input-file` load
 exact string contents; inline source and literal input remain unchanged.
 
 The typed preparation record retains the validated controls, source identity/path
-and text, and input path/text for native execution. Valid requests currently stop
-with exit `1` at the owned `.7.3.2.3` boundary; execution and canonical JSON are
-not claimed by this leaf.
+and text, and input path/text for native execution. `.7.3.2.3` now consumes that
+record through the native pipeline and emits canonical direct-value JSON; this
+card remains the canonical home for the argument/loading half of that composition.
 
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[julia-primary-cli-mechanism-audit]], [[cross-backend-cli-contract-gap]],
-[[native-in-memory-backend-contract]].
+[[native-in-memory-backend-contract]],
+[[julia-primary-cli-native-execution-canonical-json]].

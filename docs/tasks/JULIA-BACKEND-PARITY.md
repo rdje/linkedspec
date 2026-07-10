@@ -836,15 +836,19 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Commit: `JULIA-BACKEND-PARITY.7.3.2.2 - align Julia CLI arguments and loading`
 
 - ID: `JULIA-BACKEND-PARITY.7.3.2.3`
-  Status: `active`
+  Status: `done`
   Goal: Connect primary CLI execution to the shared Julia library pipeline and canonical JSON output.
   Acceptance: Rule-only and top-level-function source flow through spec-defined parsing, compilation, engine
     parse-mode/top-rule execution, and key-sorted canonical JSON of the direct top-rule value plus one newline.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `PASS` - prepared requests now compose rule-first/spec-driven-function fallback parsing, traced
+    compilation, runtime construction with source identity and parse controls, and direct top-rule execution. A
+    recursive serializer emits compact JSON with every nested object key sorted lexicographically and one newline.
+    Twenty-two focused assertions, the complete 942-assertion package suite, direct canonical-output smoke, and
+    99/99 corpus gate pass.
+  Commit: `JULIA-BACKEND-PARITY.7.3.2.3 - execute Julia primary parser requests`
 
 - ID: `JULIA-BACKEND-PARITY.7.3.2.4`
-  Status: `pending`
+  Status: `active`
   Goal: Normalize Julia primary-CLI failures, exit status, and trace routing.
   Acceptance: Compile/input/runtime failures emit ADR `0023`'s stable stderr shape and exit `1`; usage exits `2`;
     stdout/route/mirror, reset, emoji, and trace-file behavior compose with machine-readable JSON exactly.
@@ -904,10 +908,46 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
 | 29 | `JULIA-BACKEND-PARITY.7.3.2.0` | `done` | Native seam audit splits primary CLI repair into trace, argument/IO, execution/JSON, error/routing, and conformance mechanisms. |
 | 30 | `JULIA-BACKEND-PARITY.7.3.2.1` | `done` | Optional shared-emitter tracing covers frontend, compiler, function shell, and staged phases without output drift. |
 | 31 | `JULIA-BACKEND-PARITY.7.3.2.2` | `done` | Exact options, exclusivity, positional rejection, named resolution, and source/input loading are locked. |
-| 32 | `JULIA-BACKEND-PARITY.7.3.2.3` | `active` | Execute the native parser pipeline and emit direct canonical JSON. |
-| 33 | `JULIA-BACKEND-PARITY.7.3.2.4` | `pending` | Normalize failures/exits and complete trace routing. |
+| 32 | `JULIA-BACKEND-PARITY.7.3.2.3` | `done` | Native rule/function parsing, compile/runtime controls, and direct recursive canonical JSON are locked. |
+| 33 | `JULIA-BACKEND-PARITY.7.3.2.4` | `active` | Normalize failures/exits and complete trace routing. |
 | 34 | `JULIA-BACKEND-PARITY.7.3.2.5` | `pending` | Prove unit/direct-process conformance and align focused verification/docs. |
 | 35 | `JULIA-BACKEND-PARITY.7.3.3` | `pending` | Close no-drift honestly or split any remaining user-observable parity residual. |
+
+## `JULIA-BACKEND-PARITY.7.3.2.3` Primary CLI Execution and Canonical JSON Proof
+
+Implementation evidence recorded on 2026-07-10:
+
+- The prepared request now flows through the same native library path used by corpus execution. Rule-only
+  `parse_spec(...)` runs first; only `SpecParseException` selects the spec-driven top-level-function parser. The
+  same optional emitter propagates through parse, validation, compilation, staged function bodies, and runtime.
+- `LinkedSpecRuntimeEngine` receives the selected seek/consume mode plus exact spec name/path identity;
+  `runtime_execute(...)` receives the optional top-rule and literal/file-loaded input. The CLI serializes
+  `RuntimeParseResult.value`, the direct backend-neutral top-rule value, rather than the corpus-only wrapped
+  `output` field.
+- `_write_primary_cli_canonical_json(...)` recursively handles null, booleans, strings, numbers, arrays/tuples,
+  and string-keyed objects. Every object level is lexicographically sorted before compact encoding, so host `Dict`
+  insertion order cannot affect stdout. Success adds exactly one newline.
+- Rule-only and top-level-function sources, explicit top rule, consume mode, inline/file source and input, routed
+  trace reset, scalars, nulls, arrays, escaped strings, and nested unsorted maps are covered by 22 focused
+  assertions. The focused gate now executes a real primary process and requires `{"a":1,"b":2}`.
+- Failure text and the complete stdout/route/mirror/reset/emoji matrix remain deliberately owned by `.7.3.2.4`;
+  this leaf does not treat its temporary generic execution-error boundary as final normalization.
+
+## `JULIA-BACKEND-PARITY.7.3.2.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Valid canonical requests loaded exact source/input but always returned the temporary
+  “parser execution is not connected” failure.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The primary adapter had no composition from its typed request into the
+  already-shipped rule/staged parser, compiler, engine, runtime, and direct result shape.
+- [x] **FIX** — Compose the native phases with one emitter and add a recursive key-sorted canonical JSON writer
+  over the direct top-rule value.
+- [x] **ADDRESSED (verified)** — Twenty-two focused assertions cover both source paths, runtime controls, direct
+  shape, nested canonicalization, file loading, and routed tracing.
+- [x] **NO REGRESSION** — `tools/run_julia_local.sh` passes 942 assertions, a direct canonical primary parse,
+  retired-subcommand rejection, and all 99 exact corpus outputs; generated depot compilation artifacts were
+  removed afterward.
+- [x] **LOCKSTEP** — mdBook, task/live docs, Knowledge Map, and resume memory describe executable primary requests;
+  `.7.3.2.4` is the sole active Julia frontier for final errors/exits/trace routing.
 
 ## `JULIA-BACKEND-PARITY.7.3.2.2` Primary CLI Arguments and Loading Proof
 
@@ -924,8 +964,8 @@ Implementation evidence recorded on 2026-07-10:
   Explicit paths and explicit `.spec` names never fall through; generated/metadata trees are pruned from fallback.
 - The primary help surface now advertises the canonical parser interface. `status`/`corpus` are rejected by the
   primary command; `julia/bin/corpus_runner.jl` remains the separate developer corpus adapter.
-- Valid prepared requests deliberately stop at the `.7.3.2.3` boundary with runtime exit `1`; parser execution and
-  canonical JSON are not falsely claimed in this slice.
+- At this leaf boundary, valid prepared requests deliberately stopped before execution; `.7.3.2.3` has since
+  connected those requests to native execution and canonical JSON.
 
 ## `JULIA-BACKEND-PARITY.7.3.2.2` Acceptance Checklist
 
@@ -939,8 +979,8 @@ Implementation evidence recorded on 2026-07-10:
   selector errors, retired subcommands, resolution precedence/fallback pruning, exact contents, and load failures.
 - [x] **NO REGRESSION** — `tools/run_julia_local.sh` passes 920 assertions, direct CLI help/rejection checks, and
   all 99 exact corpus outputs; generated depot compilation artifacts were removed afterward.
-- [x] **LOCKSTEP** — mdBook, Julia README, roadmap/task/live docs, architecture, and Knowledge Map describe the
-  preparation-only current boundary; `.7.3.2.3` is the sole active Julia frontier.
+- [x] **LOCKSTEP** — At this leaf boundary, mdBook, Julia README, roadmap/task/live docs, architecture, and
+  Knowledge Map described preparation only and advanced the sole frontier to `.7.3.2.3`.
 
 ## `JULIA-BACKEND-PARITY.7.3.2.1` Frontend/Compiler/Staged Trace Proof
 
@@ -2814,6 +2854,7 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.2.0` | Julia primary CLI, exports, parser/compiler/runtime, function-shell/corpus composition, diagnostics, trace config/sinks, JSON use, and tests audited from source; task split; mdBook/KM/memory/task/doctrine/whitespace gates. | PASS. Five independent mechanisms are owned by `.7.3.2.1`–`.7.3.2.5`; no implementation behavior changed. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.2.1` | Optional shared-emitter frontend/compiler/function-shell/staged instrumentation; 28 focused assertions; 868-assertion package suite; CLI smokes; 99/99 corpus gate; mdBook/KM/memory/task/doctrine/whitespace gates; generated cache cleanup. | PASS. Julia's existing trace controls/sinks now cover every native phase needed by the future primary trace options without output drift; `.7.3.2.2` becomes active. |
 | `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.2.2` | Exact primary option/preparation model; current/repository/fallback resolution; file/inline loading; 50 focused assertions; 920-assertion suite; direct help/subcommand-rejection checks; 99/99 corpus; docs/KM/governance/whitespace; cache cleanup. | PASS. Julia now accepts only ADR `0023` arguments and prepares exact native inputs without backend-only primary commands; `.7.3.2.3` becomes active for execution/JSON. |
+| `2026-07-10` | `JULIA-BACKEND-PARITY.7.3.2.3` | Native rule/function parse fallback, traced compile/runtime composition, top-rule/parse-mode controls, recursive canonical JSON, 22 focused assertions, 942-assertion suite, direct canonical primary smoke, 99/99 corpus, docs/KM/governance/whitespace, and cache cleanup. | PASS. Valid Julia primary requests now execute in-process and print the direct top-rule value with recursively sorted object keys plus one newline; `.7.3.2.4` becomes active for normalized errors/exits/trace routing. |
 
 ## Commit Log
 
@@ -2875,13 +2916,20 @@ Rule-interpreter evidence recorded on 2026-07-10:
 | `JULIA-BACKEND-PARITY.7.3.2.0` | `JULIA-BACKEND-PARITY.7.3.2.0 - split Julia primary CLI alignment` | Read-only native seam/gap audit; five ordered implementation/conformance leaves; `.7.3.2.1` becomes active. |
 | `JULIA-BACKEND-PARITY.7.3.2.1` | `JULIA-BACKEND-PARITY.7.3.2.1 - trace Julia frontend compiler and staged dispatch` | One optional existing emitter now spans parse/validate/compile/function-shell/staged phases; 868 assertions and 99/99 pass; `.7.3.2.2` becomes active. |
 | `JULIA-BACKEND-PARITY.7.3.2.2` | `JULIA-BACKEND-PARITY.7.3.2.2 - align Julia CLI arguments and loading` | Strict canonical options, deterministic named resolution, exact source/input loading, separate corpus runner, 920 assertions/99-fixture proof; `.7.3.2.3` becomes active. |
+| `JULIA-BACKEND-PARITY.7.3.2.3` | `JULIA-BACKEND-PARITY.7.3.2.3 - execute Julia primary parser requests` | Native rule/function parsing, compiler/runtime controls, and direct recursively key-sorted canonical JSON; 942 assertions/99-fixture proof; `.7.3.2.4` becomes active. |
 
 ## Changelog
 
+- `2026-07-10`: Completed `.7.3.2.3` Julia primary execution/canonical JSON. Prepared rule-only and top-level-
+  function source now flows through one traced native parse/compile/runtime pipeline with exact top-rule and
+  parse-mode controls. A recursive writer emits the direct top-rule value with lexicographically sorted nested
+  keys plus one newline. Twenty-two focused assertions, the 942-assertion suite, direct canonical primary smoke,
+  and 99/99 pass. `.7.3.2.4` is active for normalized failures/exits/trace routing.
 - `2026-07-10`: Completed `.7.3.2.2` Julia primary arguments/resolution/loading. The primary module accepts only
   ADR `0023` options, rejects subcommands/positionals with exit `2`, resolves named specs through current/repository/
   deterministic fallback precedence, and loads exact file/inline content. Fifty focused assertions, the 920-
-  assertion package suite, direct CLI checks, and 99/99 pass. `.7.3.2.3` is active for native execution/JSON.
+  assertion package suite, direct CLI checks, and 99/99 pass. `.7.3.2.3` became active there and has since closed
+  native execution/JSON.
 - `2026-07-10`: Completed `.7.3.2.1` Julia frontend/compiler/staged tracing. Optional caller-owned emitters now
   propagate through parse, validation, compile, function-shell, and staged phases with balanced scopes and stable
   decisions; default/disabled paths remain quiet and result-identical. Twenty-eight focused assertions, the full

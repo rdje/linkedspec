@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, parity, perl, rust, dart, julia, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.3.0 finds Perl parser CLI, Dart/Julia corpus CLIs, and no Rust binary. ADR 0023 defines the target. Julia .7.3.2.2 now accepts/prepares exact options but .7.3.2.3 still owns execution/JSON; Dart/Rust/Perl normalization remains globally owned."
+evidence: "JULIA-BACKEND-PARITY.7.3.0 finds Perl parser CLI, Dart/Julia corpus CLIs, and no Rust binary. ADR 0023 defines the target. Julia now accepts and executes exact requests with canonical JSON; .7.3.2.4 still owns its final error/trace normalization."
 reverify: "sed -n '1,230p' bin/linkedspec; sed -n '1,330p' dart/lib/src/cli/linkedspec_dart_cli.dart; sed -n '1,220p' julia/src/cli/LinkedSpecJuliaCli.jl; rg -n '\[\[bin\]\]|^name =|^members =' rust/Cargo.toml rust/*/Cargo.toml; find rust -type f -path '*/src/bin/*' -print"
 ---
 
@@ -23,8 +23,9 @@ The implemented backend CLI surfaces are not currently interface-equivalent:
 - Dart `bin/linkedspec_dart.dart` is a manifest corpus validator/executor. Its options select corpus cases/windows,
   and it reports usage failure as `64`.
 - Julia `bin/linkedspec_julia.jl` now accepts only the exact parser option contract, rejects subcommands/
-  positionals as usage `2`, and prepares deterministic named/file/inline source plus literal/file input. Native
-  execution and canonical JSON remain active `.7.3.2.3` work.
+  positionals as usage `2`, prepares deterministic named/file/inline source plus literal/file input, executes it
+  through the native pipeline, and emits recursively key-sorted direct JSON. Final error/trace normalization
+  remains active `.7.3.2.4` work.
 - The Rust workspace contains library crates and no binary target or `src/bin` entrypoint.
 
 ADR `0006` already requires the same backend features and semantics. The director clarified that distinct backend
@@ -33,8 +34,10 @@ outputs/errors, and exit semantics. `JULIA-BACKEND-PARITY.7.3.0` therefore split
 repair, and honest no-drift work rather than treating 99/99 corpus execution as complete CLI parity.
 
 ADR `0023` has since ratified the exact interface. `FUTURE-PARITY-BACKLOG.1.5` owns the neutral fixtures and
-Perl/Rust/Dart/global repairs; `JULIA-BACKEND-PARITY.7.3.2` owns Julia's repair, now complete through preparation.
+Perl/Rust/Dart/global repairs; `JULIA-BACKEND-PARITY.7.3.2` owns Julia's repair, now complete through execution/
+canonical JSON.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specific-cli-requirement]], [[native-in-memory-backend-contract]],
 [[language-agnostic-backend-vision]], [[dart-specific-cli]], [[julia-mdbook-usage-status]],
-[[julia-primary-cli-arguments-resolution-loading]].
+[[julia-primary-cli-arguments-resolution-loading]],
+[[julia-primary-cli-native-execution-canonical-json]].

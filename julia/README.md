@@ -5,9 +5,9 @@ package/command surface, manifest validation, source and ActionIR frontends, sta
 parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch, value/helper/control/callback
 families, cursor/boundary behavior, structured diagnostics/tracing, registered function execution, and controlled
 library-level corpus execution, bounded CLI selection/reporting, and spec-driven top-level user-function source
-composition plus full ordered 99-fixture library and CLI execution. Local-gate integration is complete; exact
-primary execution/JSON/error conformance, capability census, generated source, and final complete-parity closeout
-remain open.
+composition plus full ordered 99-fixture library and CLI execution. Local-gate integration and native primary
+rule/function execution with direct canonical JSON are complete; normalized error/trace conformance, capability
+census, generated source, and final complete-parity closeout remain open.
 
 This scaffold was created by `JULIA-BACKEND-PARITY.1.2`, and manifest IO was added by
 `JULIA-BACKEND-PARITY.1.3`. Source AST/data types were added by `JULIA-BACKEND-PARITY.2.1`, and source parsing
@@ -25,9 +25,9 @@ diagnostic/trace, staged-function, shipped-corpus, function-shell, and full-corp
 landed; `.6.4` owns the focused optional-SDK verification gate, `.7.1` closes public documentation, and `.7.2` is
 complete with generated source deferred to the future split proof lane. `.7.3.0` found that this corpus/status CLI
 does not yet match the required cross-variant parser CLI contract. ADR `0023` defines that exact interface;
-`.7.3.2.0` splits repair, `.7.3.2.1` closes compile/parser/function-shell/staged trace coverage, and `.7.3.2.2`
-closes exact arguments plus source/input resolution/loading. `.7.3.2.3` is active for native execution and
-canonical JSON.
+`.7.3.2.0` splits repair, `.7.3.2.1` closes compile/parser/function-shell/staged trace coverage, `.7.3.2.2`
+closes exact arguments plus source/input resolution/loading, and `.7.3.2.3` closes native rule/function execution
+plus recursively key-sorted direct JSON. `.7.3.2.4` is active for normalized failures/exits/trace routing.
 
 ## Commands
 
@@ -37,8 +37,8 @@ Run the complete repo-owned Julia gate from the repository root:
 bash tools/run_julia_local.sh
 ```
 
-It runs package tests, primary CLI help plus retired-subcommand rejection, corpus-runner help, and the full
-99-fixture corpus. The shared
+It runs package tests, primary CLI help, a direct canonical-output parse, retired-subcommand rejection,
+corpus-runner help, and the full 99-fixture corpus. The shared
 core gate includes it only when explicitly requested:
 
 ```bash
@@ -58,13 +58,16 @@ Direct commands from the repository root:
 julia --project=julia -e 'import Pkg; Pkg.instantiate()'
 julia --project=julia -e 'import Pkg; Pkg.test()'
 julia --project=julia julia/bin/linkedspec_julia.jl --help
-julia --project=julia julia/bin/linkedspec_julia.jl --inline-spec 'Top:: /x/' --input x
+julia --project=julia julia/bin/linkedspec_julia.jl \
+  --inline-spec $'Top::\n /x/\n E { return(hash("b", 2, "a", 1)) }\n' \
+  --input x
 julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute
 ```
 
-The primary command already validates the exact cross-backend options and prepares named/file/inline source plus
-literal/file input, but valid prepared requests currently stop with exit `1` at the active `.7.3.2.3` execution
-boundary. `status` and `corpus` are rejected as primary subcommands. The separate corpus runner validates
+The primary command validates the exact cross-backend options, prepares named/file/inline source plus literal/file
+input, executes rule-only or spec-driven top-level-function source through the native library, and prints the
+direct top-rule value as compact JSON with every nested object key sorted plus one newline. The example prints
+`{"a":1,"b":2}`. `status` and `corpus` are rejected as primary subcommands. The separate corpus runner validates
 `manifest.json`, fixture directory drift, required `input.spec` / `input.txt` /
 `expected.json` files, and expected JSON syntax. Bare `--execute` runs all 99 fixtures; selectors narrow a run
 without bypassing complete manifest validation.
@@ -254,11 +257,11 @@ is `runtime-corpus-full`, `.6.4` owns the focused optional-SDK gate, and `.7.1` 
 defers generated source to `FUTURE-PARITY-BACKLOG.3`. `.7.3.0` splits the newly clarified exact user-facing CLI
 parity gap. `.7.3.1` ratifies ADR `0023`; `.7.3.2.0` splits Julia CLI alignment into five mechanisms. `.7.3.2.1`
 now closes parse/validation/compile/function-shell/staged trace propagation through the existing emitter and sinks;
-the full suite passed with 868 assertions and the focused gate remained 99/99. `.7.3.2.2` now closes exact options,
-resolution, and loading with
-50 focused assertions; the full suite passes with 920 assertions and 99/99 remains green. `.7.3.2.3` is active for
-native execution and canonical JSON. Generated source remains deferred but blocks complete parity because Rust
-exports it.
+the full suite passed with 868 assertions and the focused gate remained 99/99. `.7.3.2.2` closes exact options,
+resolution, and loading with 50 focused assertions. `.7.3.2.3` closes native primary execution and recursively
+key-sorted direct JSON with 22 focused assertions; the full suite passes with 942 assertions and 99/99 remains
+green. `.7.3.2.4` is active for normalized failures/exits/trace routing. Generated source remains deferred but
+blocks complete parity because Rust exports it.
 
 Library example:
 

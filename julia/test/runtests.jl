@@ -597,15 +597,134 @@ end
     prepared_output = IOBuffer()
     prepared_error = IOBuffer()
     @test run_cli(
-        ["--inline-spec", "Top:: /x/", "--input", "x"];
+        ["--inline-spec", _returning_spec("prepared"), "--input", "x"];
         io = prepared_output,
         err = prepared_error,
-    ) == 1
-    @test isempty(String(take!(prepared_output)))
-    @test occursin(
-        "parser execution is not connected in this active implementation slice",
-        String(take!(prepared_error)),
-    )
+    ) == 0
+    @test String(take!(prepared_output)) == "\"prepared\"\n"
+    @test isempty(String(take!(prepared_error)))
+end
+
+@testset "Primary CLI execution and canonical JSON" begin
+    function cli_run(args)
+        output = IOBuffer()
+        error_output = IOBuffer()
+        status = run_cli(args; io = output, err = error_output)
+        return status, String(take!(output)), String(take!(error_output))
+    end
+
+    canonical_value = Dict{String,Any}()
+    canonical_value["z"] = Any[nothing, true, "line\n\"quoted\""]
+    canonical_value["a"] = Dict{String,Any}("delta" => 4, "beta" => 2)
+    @test LinkedSpecJulia._primary_cli_canonical_json(canonical_value) ==
+        "{\"a\":{\"beta\":2,\"delta\":4},\"z\":[null,true,\"line\\n\\\"quoted\\\"\"]}"
+    @test LinkedSpecJulia._primary_cli_canonical_json((1, false, nothing)) ==
+        "[1,false,null]"
+    @test_throws ArgumentError LinkedSpecJulia._primary_cli_canonical_json(Dict(1 => "x"))
+
+    hash_spec = raw"""
+Top::
+ /x/
+ E { return(hash("z", 0, "a", hash("d", 4, "b", 2))) }
+"""
+    status, output, error_output = cli_run([
+        "--inline-spec",
+        hash_spec,
+        "--input",
+        "x",
+    ])
+    @test status == 0
+    @test output == "{\"a\":{\"b\":2,\"d\":4},\"z\":0}\n"
+    @test isempty(error_output)
+
+    top_rule_spec = raw"""
+Top::
+ /x/
+ E { return("top") }
+
+Alternate:
+ /x/
+ E { return("alternate") }
+"""
+    status, output, error_output = cli_run([
+        "--inline-spec",
+        top_rule_spec,
+        "--input",
+        "x",
+        "--top-rule",
+        "Alternate",
+        "--parse-mode",
+        "consume",
+    ])
+    @test status == 0
+    @test output == "\"alternate\"\n"
+    @test isempty(error_output)
+
+    consume_spec = raw"""
+Top::AND
+ /ab/
+ /cd/
+ E { return(match_text()) }
+"""
+    consume_args = [
+        "--inline-spec",
+        consume_spec,
+        "--input",
+        "prefix abcd",
+        "--parse-mode",
+        "consume",
+    ]
+    status, output, error_output = cli_run(consume_args)
+    @test status == 0
+    @test output == "null\n"
+    @test isempty(error_output)
+
+    function_spec = raw"""
+fn wrap(value) { return(hash("wrapped", value)) }
+Top::
+ /x/
+ E { return(wrap(match_text())) }
+"""
+    status, output, error_output = cli_run([
+        "--inline-spec",
+        function_spec,
+        "--input",
+        "x",
+    ])
+    @test status == 0
+    @test output == "{\"wrapped\":\"x\"}\n"
+    @test isempty(error_output)
+
+    mktempdir() do directory
+        spec_path = joinpath(directory, "file.spec")
+        input_path = joinpath(directory, "input.txt")
+        trace_path = joinpath(directory, "trace.log")
+        write(spec_path, _returning_spec("file"))
+        write(input_path, "x")
+        write(trace_path, "stale trace\n")
+
+        status, output, error_output = cli_run([
+            "--spec-file",
+            spec_path,
+            "--input-file",
+            input_path,
+            "--trace",
+            "high",
+            "--trace-file",
+            trace_path,
+            "--trace-mode",
+            "route",
+            "--trace-reset",
+        ])
+        @test status == 0
+        @test output == "\"file\"\n"
+        @test isempty(error_output)
+        trace_text = read(trace_path, String)
+        @test !occursin("stale trace", trace_text)
+        @test occursin("julia_frontend:parse_spec", trace_text)
+        @test occursin("julia_compiler:compile_spec", trace_text)
+        @test occursin("julia_runtime:parse", trace_text)
+    end
 end
 
 @testset "Action AST parser" begin

@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.2.3 — execute Julia primary parser requests
+
+**Scope:** Native primary request execution, rule/function source composition, top-rule/parse-mode/trace controls,
+recursive canonical direct-value JSON, focused/process regression proof, gate adaptation, and docs.
+
+**Implementation:** Prepared requests now reuse the native rule-first/spec-driven-function fallback, compiler, and
+runtime pipeline with one emitter and exact source identity. Success serializes `RuntimeParseResult.value` rather
+than the corpus wrapper. The compact writer recursively sorts every string-keyed object while preserving arrays,
+scalars, nulls, and JSON escaping, then the CLI adds exactly one newline.
+
+**Verification:** Twenty-two focused assertions cover rule-only/function source, explicit top rule, consume mode,
+file IO, routed trace reset, direct shape, and nested canonicalization. The complete 942-assertion suite, direct
+canonical primary smoke, and 99/99 corpus gate pass. `.7.3.2.4` owns final errors/exits/trace routing.
+
 ## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.2.2 — align Julia CLI arguments and loading
 
 **Scope:** Exact Julia primary option model, selector/mode/trace validation, subcommand/positional rejection,
@@ -13,7 +27,7 @@ commands are rejected with usage `2`, while `corpus_runner.jl` remains the devel
 
 **Verification:** Fifty focused assertions cover all flags, aliases/numerics, exclusivity/errors, resolution order,
 fallback pruning, exact contents, and load failures. `tools/run_julia_local.sh` passes 920 assertions, direct CLI
-help/subcommand rejection, and 99/99. Valid prepared requests intentionally defer execution/JSON to `.7.3.2.3`.
+help/subcommand rejection, and 99/99. `.7.3.2.3` has since connected the prepared requests to execution/JSON.
 
 ## 2026-07-10 — JULIA-BACKEND-PARITY.7.3.2.1 — trace Julia frontend compiler and staged dispatch
 

@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (JULIA-BACKEND-PARITY.7.3.2.3 — serialize the public value, not the corpus adapter shape):
+  A primary CLI should be a thin native-library composition. Julia can reuse rule-first parsing with precise
+  spec-driven function fallback, compile once, construct the runtime with source identity and parser controls, and
+  pass one trace emitter through every phase. The user-visible value is `RuntimeParseResult.value`; its `output`
+  field is intentionally wrapped for corpus comparison and would add a false array layer. Canonical JSON requires
+  recursive object sorting—host dictionary iteration and a plain JSON encoder are insufficient for nested maps.
+
 - 2026-07-10 (JULIA-BACKEND-PARITY.7.3.2.2 — CLI preparation is a typed boundary, not execution glue):
   Strict argument parsing and IO resolution are independently testable before parser execution. One preparation
   record preserves the original controls plus exact source/input text and identities, so the next leaf can compose

@@ -140,8 +140,9 @@ leaves.
 As of `JULIA-BACKEND-PARITY.7.3.2.1`, Julia has stable structured runtime
 diagnostics, trace controls/events/sinks, interpreter instrumentation, and
 opt-in source-parser, validation, compiler, function-shell, and staged-dispatch
-events. This closes the trace prerequisite for Julia's future exact primary CLI;
-it does not by itself claim complete backend or CLI parity.
+events. `.7.3.2.3` now composes that emitter through native primary execution;
+final failure and trace-routing conformance remains `.7.3.2.4`, so this does not
+claim complete backend or CLI parity.
 
 The Julia control surface is:
 
@@ -212,7 +213,7 @@ result = runtime_execute(LinkedSpecRuntimeEngine(compiled), "x"; trace = trace)
 The focused proof adds 28 assertions for success/failure events, routed output,
 disabled quietness, and traced/untraced identity. At that leaf the complete Julia
 package suite passed with 868 assertions and the focused corpus gate remained 99/99;
-later CLI-preparation tests bring the current total to 920 without trace or corpus drift.
+later CLI preparation/execution tests bring the current total to 942 without trace or corpus drift.
 
 ## Future variant trace parity checklist
 

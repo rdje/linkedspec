@@ -360,6 +360,126 @@ end
 
 _primary_cli_repo_root() = normpath(joinpath(@__DIR__, "..", "..", ".."))
 
+function _primary_cli_trace_emitter(options::_PrimaryCliOptions; stdout_io::IO = stdout)
+    trace_requested = options.trace_level !== nothing ||
+        options.trace_file !== nothing ||
+        options.trace_mode !== nothing ||
+        options.trace_reset ||
+        options.trace_emoji
+    if !trace_requested
+        return nothing
+    end
+
+    config = trace_config_disabled()
+    if options.trace_level !== nothing
+        config = with_trace_level(config, options.trace_level)
+    end
+    if options.trace_file !== nothing
+        config = with_trace_file(config, options.trace_file)
+    end
+    if options.trace_mode !== nothing
+        config = with_trace_sink_mode(config, options.trace_mode)
+    end
+    if options.trace_reset
+        config = with_trace_reset_file(config)
+    end
+    if options.trace_emoji
+        config = with_trace_emoji(config)
+    end
+    return LinkedSpecTraceEmitter(config; stdout_io = stdout_io)
+end
+
+function _parse_primary_cli_spec(
+    source::AbstractString;
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+)
+    try
+        return parse_spec(source; trace = trace)
+    catch error
+        if error isa SpecParseException
+            return parse_spec_with_staged_user_function_definitions(source; trace = trace)
+        end
+        rethrow()
+    end
+end
+
+function _execute_primary_cli_request(request::_PrimaryCliRequest; stdout_io::IO = stdout)
+    trace = _primary_cli_trace_emitter(request.options; stdout_io = stdout_io)
+    spec = _parse_primary_cli_spec(request.spec_source; trace = trace)
+    compiled = compile_spec(spec; trace = trace)
+    engine = LinkedSpecRuntimeEngine(
+        compiled;
+        parse_mode = something(request.options.parse_mode, "seek"),
+        spec_name = request.spec_name,
+        spec_path = request.spec_path,
+    )
+    return runtime_execute(
+        engine,
+        request.input;
+        top_rule = request.options.top_rule,
+        trace = trace,
+    )
+end
+
+function _primary_cli_canonical_json(value)
+    output = IOBuffer()
+    _write_primary_cli_canonical_json(output, value)
+    return String(take!(output))
+end
+
+function _write_primary_cli_canonical_json(io::IO, value)
+    if value === nothing
+        print(io, "null")
+    elseif value isa Bool
+        print(io, value ? "true" : "false")
+    elseif value isa AbstractString
+        print(io, String(JSON3.write(String(value))))
+    elseif value isa Number
+        print(io, String(JSON3.write(value)))
+    elseif value isa AbstractDict
+        entries = Pair{String,Any}[]
+        seen_keys = Set{String}()
+        for (key, entry_value) in pairs(value)
+            if !(key isa AbstractString)
+                throw(ArgumentError(
+                    "canonical JSON object keys must be strings, got $(typeof(key))",
+                ))
+            end
+            text_key = String(key)
+            if text_key in seen_keys
+                throw(ArgumentError("canonical JSON object contains duplicate key '$text_key'"))
+            end
+            push!(seen_keys, text_key)
+            push!(entries, text_key => entry_value)
+        end
+        sort!(entries; by = first)
+
+        print(io, '{')
+        for (index, entry) in enumerate(entries)
+            if index > 1
+                print(io, ',')
+            end
+            print(io, String(JSON3.write(first(entry))), ':')
+            _write_primary_cli_canonical_json(io, last(entry))
+        end
+        print(io, '}')
+    elseif value isa AbstractVector || value isa Tuple
+        print(io, '[')
+        for (index, item) in enumerate(value)
+            if index > 1
+                print(io, ',')
+            end
+            _write_primary_cli_canonical_json(io, item)
+        end
+        print(io, ']')
+    else
+        throw(ArgumentError(
+            "canonical JSON does not support values of type $(typeof(value))",
+        ))
+    end
+    return nothing
+end
+
 function _print_primary_cli_usage_error(err, message)
     println(err, "linkedspec: ", message)
     println(err)
@@ -382,7 +502,7 @@ function run_cli(args = ARGS; io = stdout, err = stderr)
         return 0
     end
 
-    try
+    request = try
         _prepare_primary_cli_request(options)
     catch error
         if error isa _PrimaryCliLoadException
@@ -393,6 +513,14 @@ function run_cli(args = ARGS; io = stdout, err = stderr)
         rethrow()
     end
 
-    println(err, "linkedspec: parser execution is not connected in this active implementation slice")
-    return 1
+    result = try
+        _execute_primary_cli_request(request; stdout_io = io)
+    catch error
+        println(err, "linkedspec: parser execution failed")
+        println(err, "  error: ", sprint(showerror, error))
+        return 1
+    end
+
+    println(io, _primary_cli_canonical_json(result.value))
+    return 0
 end
