@@ -16,6 +16,11 @@ Use `--case ID` before the separator to select one or more manifest cases. Every
 after `--` is an arbitrary command array, so later Rust, Dart, Julia, Lua, and other
 backends consume this same manifest without backend-specific fixture copies.
 
+The current manifest contains 22 cases: exact long/short help plus 20 strict usage
+families. The usage cases require empty stdout, exact shared error-plus-help stderr,
+and exit `2`; they pass identically with `POSIXLY_CORRECT` unset or set. Success,
+operational-failure, and trace families land in their ordered task-tree leaves.
+
 ## Schema version 1
 
 `manifest.json` contains an ordered `cases` array. Each case has:
@@ -28,6 +33,11 @@ backends consume this same manifest without backend-specific fixture copies.
 - an `expect` object with an integer `exit`, `stdout` and `stderr` objects, plus
   an expected workspace `files` array;
 - exactly one `file` or inline `text` source for each expected channel.
+
+An expected channel may also define a `variables` object. Its uppercase keys
+fill placeholders in that channel's shared template without changing behavior
+per backend. Custom variables may use the reserved runner placeholders in their
+values, but may not override `COMMAND`, `REPO_ROOT`, `WORKSPACE`, or `CASE_ID`.
 
 Each expected workspace-file record has a relative `path` and a `content` object
 using the same exact `file`/`text` form. This is how later routed/mirrored trace

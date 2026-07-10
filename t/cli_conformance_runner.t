@@ -89,6 +89,8 @@ subtest 'checked-in help fixture passes the Perl reference command exactly' => s
   $runner,
   '--manifest',
   $manifest,
+  '--case',
+  'help',
   '--display-command',
   'perl bin/linkedspec',
   '--',
@@ -140,13 +142,14 @@ subtest 'command display and isolated workspace placeholders are exact' => sub {
    ."cwd={{WORKSPACE}}\n"
    ."workspace-arg={{WORKSPACE}}\n"
    ."case={{CASE_ID}}\n"
+   ."label={{LABEL}}\n"
    ."payload=fixture bytes\n",
  );
  my $path = File::Spec->catfile($root, 'manifest.json');
  _write_manifest($path, _one_case_manifest(
   args => ['{{COMMAND}}', '{{WORKSPACE}}', '{{CASE_ID}}'],
   files => [{source => 'payload.txt', path => 'nested/payload.txt'}],
-  stdout => {file => 'expected.txt'},
+  stdout => {file => 'expected.txt', variables => {LABEL => 'shared template'}},
   stderr => {text => ''},
   expected_files => [{path => 'artifact.txt', content => {text => "artifact\n"}}],
   exit => 0,
@@ -164,6 +167,7 @@ print "command=$command\n";
 print "cwd=", getcwd(), "\n";
 print "workspace-arg=$workspace\n";
 print "case=$case\n";
+print "label=shared template\n";
 print "payload=$payload\n";
 open(my $artifact, '>:raw', 'artifact.txt') or die $!;
 print {$artifact} "artifact\n";

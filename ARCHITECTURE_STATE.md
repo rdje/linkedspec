@@ -5,11 +5,16 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-10`
+- `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.2` makes Perl primary argument parsing explicit and exact.
+  Ambient `Getopt::Long` policy is gone; only case-sensitive ADR `0023` spellings and `-h` exist. A shared usage
+  template plus channel variables yields 20 exact usage cases without duplicated help snapshots. With both help
+  forms, 22/22 pass with `POSIXLY_CORRECT` unset and set; stdout is empty and exit is `2` for every usage failure.
+  `.1.5.1.3` is active for source/input/parser controls and canonical success bytes.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.1` establishes the neutral primary-CLI fixture architecture.
   A strict JSON manifest and arbitrary command-array runner own canonical private workspaces, safe checked-in file
   materialization, explicit command/repo/workspace/case placeholders, raw stdout/stderr, exit status, generated
   files, and byte-offset mismatch diagnostics. Perl passes the exact backend-neutral help case; four runner
-  subtests (13 assertions) and two trace subtests pass. `.1.5.1.2` is active for strict argument/usage fixtures.
+  subtests (13 assertions) and two trace subtests pass. `.1.5.1.2` has since closed strict argument/usage fixtures.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.0` audits and splits the neutral CLI/Perl reference lane.
   The existing trace smoke passes, but direct processes prove ignored positionals, case/abbreviation/negated option
   aliases, `POSIXLY_CORRECT`-dependent parsing, uncontrolled `Getopt::Long` warnings, and timestamped `DUMP_NONE`

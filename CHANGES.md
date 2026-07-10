@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.2 — normalize Perl CLI arguments
+
+**Scope:** Explicit Perl primary option parser, reusable expected-channel template variables, 20 exact usage cases,
+environment-independence proof, and synchronized docs/task/Knowledge Map status.
+
+**Implementation:** `bin/linkedspec` now recognizes only exact case-sensitive ADR `0023` options and `-h`, with
+separate/equals value forms and ordered lexical errors. It rejects all positionals/subcommands, literal `--`,
+uppercase/abbreviated/negated aliases, missing or flag values, selector conflicts, and invalid parser/trace values.
+Manifest channel variables deduplicate one exact usage template but cannot override runner placeholders.
+
+**Verification:** Two help plus 20 usage cases pass byte-for-byte with `POSIXLY_CORRECT` unset and `1`; every usage
+failure has empty stdout, exact stderr, no output files, and exit `2`. CLI/runner/test syntax, four runner subtests,
+and two existing trace CLI subtests pass. `.1.5.1.3` owns successful source/input/parser behavior.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.1.1 — add neutral CLI fixture runner
 
 **Scope:** Backend-neutral fixture schema, arbitrary command runner, exact help case, runner regressions, neutral

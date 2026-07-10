@@ -119,10 +119,27 @@ sub _expand_placeholders {
 sub _expected_channel_bytes {
  my ($channel, $manifest_root, $vars, $label) = @_;
  _require_object($channel, $label);
- _reject_unknown_keys($channel, $label, qw(file text));
+ _reject_unknown_keys($channel, $label, qw(file text variables));
  my $has_file = exists($channel->{file});
  my $has_text = exists($channel->{text});
  die "$label must define exactly one of file or text" if $has_file == $has_text;
+
+ my %channel_vars = %$vars;
+ if (exists $channel->{variables}) {
+  my $variables = _require_object($channel->{variables}, "$label.variables");
+  for my $name (sort keys %$variables) {
+   die "$label.variables key '$name' must match [A-Z][A-Z0-9_]*"
+    unless $name =~ /\A[A-Z][A-Z0-9_]*\z/;
+   die "$label.variables may not override reserved placeholder {{$name}}"
+    if exists $channel_vars{$name};
+   my $value = _require_string(
+    $variables->{$name}, "$label.variables.$name", allow_empty => 1,
+   );
+   $channel_vars{$name} = _expand_placeholders(
+    $value, $vars, "$label.variables.$name",
+   );
+  }
+ }
 
  my $content;
  if ($has_file) {
@@ -133,7 +150,7 @@ sub _expected_channel_bytes {
   my $text = _require_string($channel->{text}, "$label.text", allow_empty => 1);
   $content = encode('UTF-8', $text);
  }
- return _expand_placeholders($content, $vars, $label);
+ return _expand_placeholders($content, \%channel_vars, $label);
 }
 
 sub _validate_manifest {

@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.2 — public argument syntax must not inherit a host option library):
+  Exact cross-backend syntax is clearest as one small explicit parser: case-sensitive option table, deterministic
+  equals/separate value handling, ordered lexical errors, then selector/value validation. This removes ambient
+  `POSIXLY_CORRECT`, auto-abbreviation, case-folding, negatable aliases, residual-positionals, and library warning
+  text as observable inputs. Deduplicate large exact usage snapshots with manifest-owned channel variables, but
+  prohibit overriding reserved runner placeholders so template reuse cannot become backend-specific normalization.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.1.1 — neutral fixture data must outlive every backend adapter):
   Keep the cross-backend contract in a strict manifest, not in one backend's test code. An arbitrary launch array
   plus explicit `COMMAND`/runner-input placeholders preserves the permitted executable-wrapper difference without

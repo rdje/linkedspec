@@ -1,6 +1,6 @@
 ---
 id: perl-primary-cli-conformance-audit
-title: Perl primary CLI needs strict option and output-channel normalization
+title: Perl primary CLI audit split strict arguments and output-channel normalization
 answers:
   - does the Perl primary CLI reject positional arguments
   - does the Perl primary CLI accept abbreviated options
@@ -13,16 +13,16 @@ answers:
 date: 2026-07-10
 status: current
 tags: [perl, cli, conformance, getopt-long, trace, stdout, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.1.0 audits bin/linkedspec/t/trace_cli.t and direct processes: positionals, case/abbreviation/negation aliases, POSIXLY_CORRECT drift, GetOptions warnings, and DUMP_NONE failure trace on stdout are current gaps; .1 now owns the runner/help and .2-.5 own repair."
+evidence: "FUTURE-PARITY-BACKLOG.1.5.1.0 audited positionals, case/abbreviation/negation aliases, POSIXLY_CORRECT drift, GetOptions warnings, and DUMP_NONE failure trace; .1/.2 now close runner/help/arguments while .3-.5 retain success/failure/trace."
 reverify: "PERL5LIB= prove -v -Iperl t/trace_cli.t; sed -n '1,260p' bin/linkedspec; rg -n 'DUMP_NONE|sub log_output|sub trace_decision' perl/LinkedSpec/Trace.pm perl/LinkedSpec/Validation.pm perl/LinkedSpec/Compiler.pm; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 `bin/linkedspec` is parser-oriented and already exposes ADR `0023`'s intended
 option names, canonical JSON success output, and 0/1/2 status classes. Its two
-existing `t/trace_cli.t` subtests pass. It is not yet a strict, deterministic
-cross-backend reference.
+existing `t/trace_cli.t` subtests pass. At the `.1.5.1.0` audit boundary it was
+not yet a strict, deterministic cross-backend reference.
 
-Direct process probes establish these current facts:
+Direct process probes established these facts at the `.1.5.1.0` audit boundary:
 
 - residual positional arguments are ignored and a valid command still exits `0`;
 - long options are case-insensitive and unique abbreviations such as `--inl`
@@ -41,8 +41,14 @@ The level-zero events are intentional in the general trace owner, so the primary
 CLI adapter must own stdout purity and a deterministic cross-backend projection
 without silently changing the library-wide diagnostic contract.
 
+`.1.5.1.1` and `.1.5.1.2` have since added the neutral runner/help baseline and
+replaced the argument boundary with an explicit exact parser. The historical
+positionals/aliases/environment/warning defects above are now closed; successful
+IO/control, operational failure stdout purity, and deterministic trace remain
+owned by `.3`, `.4`, and `.5`.
+
 `FUTURE-PARITY-BACKLOG.1.5.1` is split into neutral harness/help (`.1`, now done), strict
-arguments (`.2`), success/source/input/parser controls (`.3`), operational
+arguments (`.2`, now done), success/source/input/parser controls (`.3`), operational
 failure normalization (`.4`), and trace/final Perl gate (`.5`). Rust, Dart, and
 Julia will later consume the same manifest; they do not get backend-specific
 fixture forks.
@@ -50,4 +56,4 @@ fixture forks.
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[cross-backend-cli-contract-gap]], [[trace-cli-control]],
 [[trace-verbosity-and-formatting]], [[julia-primary-cli-process-conformance]],
-[[neutral-cli-fixture-runner]].
+[[neutral-cli-fixture-runner]], [[perl-primary-cli-strict-arguments]].

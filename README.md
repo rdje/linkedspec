@@ -156,7 +156,8 @@ Top-level directories and files:
     capability census, and generated-source owners `.1.5`/`.1.6`/`.3`. `.1.5.1.0` now splits the neutral fixture/
     Perl reference work after direct probes found implicit option aliases, ignored positionals, environment-driven
     parsing, and failure trace on stdout. `.1.5.1.1` now adds the reusable byte-exact harness/help baseline;
-    `.1.5.1.2` is active for strict argument/usage cases.
+    `.1.5.1.2` now locks 22/22 exact help/usage cases in default and POSIX environments; `.1.5.1.3` is active for
+    source/input/parser controls and canonical success bytes.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.
@@ -186,8 +187,8 @@ Top-level project docs:
 - Run `bash tools/run_ci_local.sh` from the repo root to execute the canonical regression gate.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
-  {{REPO_ROOT}}/bin/linkedspec`. The manifest currently locks exact help bytes; `.1.5.1.2` next adds strict usage,
-  followed by success/IO, operational-failure, and trace cases in the same suite.
+  {{REPO_ROOT}}/bin/linkedspec`. The manifest currently locks both help forms plus 20 exact usage cases; active
+  `.1.5.1.3` next adds success/IO, followed by operational-failure and trace cases in the same suite.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
   Dart tests, CLI help, and the 99-fixture corpus execution.
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI

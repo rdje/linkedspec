@@ -12,7 +12,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, conformance, fixtures, runner, exact-bytes, backends, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.1.1 adds cli_conformance/manifest.json, tools/run_cli_conformance.pl, exact help bytes, output-file support, and t/cli_conformance_runner.t; Perl help passes and .1.5.1.2 is active."
+evidence: "FUTURE-PARITY-BACKLOG.1.5.1.1 adds cli_conformance/manifest.json, tools/run_cli_conformance.pl, exact help bytes, output-file support, and t/cli_conformance_runner.t; .1.5.1.2 expands the suite to 22 exact help/usage cases."
 reverify: "perl -c tools/run_cli_conformance.pl && PERL5LIB= prove -v -Iperl t/cli_conformance_runner.t t/trace_cli.t && PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec"
 ---
 
@@ -42,11 +42,12 @@ the backend executable token or unavoidable host wrapper. Other placeholders
 represent exact runner inputs and do not permit backend-specific expected output.
 
 The first checked-in case locks complete backend-neutral help stdout, empty
-stderr, and exit `0` on Perl. Later `.1.5.1` leaves add strict usage, success/IO,
-operational failure, and deterministic trace cases to this same manifest;
+stderr, and exit `0` on Perl. `.1.5.1.2` adds short help and 20 strict usage cases;
+later `.1.5.1` leaves add success/IO, operational failure, and deterministic trace cases to this same manifest;
 generated-file expectations already support routed trace bytes without a schema
 or runner fork.
 
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[perl-primary-cli-conformance-audit]], [[cross-backend-cli-contract-gap]],
-[[trace-cli-control]], [[julia-primary-cli-process-conformance]].
+[[trace-cli-control]], [[julia-primary-cli-process-conformance]],
+[[perl-primary-cli-strict-arguments]].

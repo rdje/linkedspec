@@ -17,6 +17,258 @@
         },
         "files": []
       }
+    },
+    {
+      "id": "help_short",
+      "family": "help",
+      "args": ["-h"],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {"file": "cases/help/stdout.txt"},
+        "stderr": {"text": ""},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_no_arguments",
+      "family": "usage",
+      "args": [],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "choose exactly one source option: --spec, --spec-file, or --inline-spec"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_status_subcommand",
+      "family": "usage",
+      "args": ["status"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "unexpected positional argument 'status'"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_corpus_subcommand",
+      "family": "usage",
+      "args": ["corpus"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "unexpected positional argument 'corpus'"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_trailing_positional",
+      "family": "usage",
+      "args": ["--inline-spec", "Top:: /x/", "--input", "x", "extra"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "unexpected positional argument 'extra'"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_double_dash",
+      "family": "usage",
+      "args": ["--inline-spec", "Top:: /x/", "--input", "x", "--"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "unknown option '--'"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_unknown_option",
+      "family": "usage",
+      "args": ["--unknown"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "unknown option '--unknown'"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_uppercase_option",
+      "family": "usage",
+      "args": ["--INLINE-SPEC=Top:: /x/", "--input", "x"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "unknown option '--INLINE-SPEC'"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_abbreviated_option",
+      "family": "usage",
+      "args": ["--inl=Top:: /x/", "--input", "x"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "unknown option '--inl'"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_negated_trace_reset",
+      "family": "usage",
+      "args": ["--inline-spec", "Top:: /x/", "--input", "x", "--no-trace-reset"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "unknown option '--no-trace-reset'"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_negated_trace_emoji",
+      "family": "usage",
+      "args": ["--inline-spec", "Top:: /x/", "--input", "x", "--no-trace-emoji"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "unknown option '--no-trace-emoji'"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_missing_value",
+      "family": "usage",
+      "args": ["--spec"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "--spec requires a value"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_help_value",
+      "family": "usage",
+      "args": ["--help=1"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "--help does not accept a value"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_flag_value",
+      "family": "usage",
+      "args": ["--inline-spec", "Top:: /x/", "--input", "x", "--trace-reset=yes"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "--trace-reset does not accept a value"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_missing_input_selector",
+      "family": "usage",
+      "args": ["--inline-spec", "Top:: /x/"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "choose exactly one input option: --input or --input-file"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_source_selector_conflict",
+      "family": "usage",
+      "args": ["--inline-spec", "Top:: /x/", "--spec", "Lispish", "--input", "x"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "choose exactly one source option: --spec, --spec-file, or --inline-spec"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_input_selector_conflict",
+      "family": "usage",
+      "args": ["--inline-spec", "Top:: /x/", "--input", "x", "--input-file", "input.txt"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "choose exactly one input option: --input or --input-file"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_invalid_parse_mode",
+      "family": "usage",
+      "args": ["--inline-spec", "Top:: /x/", "--input", "x", "--parse-mode", "scan"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "--parse-mode must be 'seek' or 'consume'"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_invalid_trace_level",
+      "family": "usage",
+      "args": ["--inline-spec", "Top:: /x/", "--input", "x", "--trace", "loud"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "--trace has an unsupported level 'loud'"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_invalid_trace_mode",
+      "family": "usage",
+      "args": ["--inline-spec", "Top:: /x/", "--input", "x", "--trace-mode", "both"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "--trace-mode must be 'stdout', 'route', or 'mirror'"}},
+        "files": []
+      }
+    },
+    {
+      "id": "usage_multiple_errors",
+      "family": "usage",
+      "args": ["one", "--UNKNOWN", "two"],
+      "files": [],
+      "expect": {
+        "exit": 2,
+        "stdout": {"text": ""},
+        "stderr": {"file": "cases/usage/stderr.txt", "variables": {"ERROR": "unexpected positional argument 'one'; unknown option '--UNKNOWN'; unexpected positional argument 'two'"}},
+        "files": []
+      }
     }
   ]
 }

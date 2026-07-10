@@ -4,7 +4,6 @@ use warnings;
 use 5.010;
 
 use FindBin;
-use Getopt::Long qw(GetOptions);
 use JSON::PP;
 use lib "$FindBin::Bin/../perl";
 
@@ -77,6 +76,86 @@ sub _valid_trace_level {
  return $level =~ /\A(?:none|quiet|low|medium|med|high|full|debug|verbose)\z/i ? 1 : 0;
 }
 
+sub _split_option {
+ my ($argument) = @_;
+ if (defined($argument) && $argument =~ /\A(--[^=]+)=(.*)\z/s) {
+  return ($1, $2);
+ }
+ return ($argument, undef);
+}
+
+sub _parse_args {
+ my (@arguments) = @_;
+ my %value_option = (
+  '--spec'        => 'spec',
+  '--spec-file'   => 'spec_file',
+  '--inline-spec' => 'inline_spec',
+  '--input'       => 'input',
+  '--input-file'  => 'input_file',
+  '--top-rule'    => 'top_rule',
+  '--parse-mode'  => 'parse_mode',
+  '--trace'       => 'trace_level',
+  '--trace-file'  => 'trace_file',
+  '--trace-mode'  => 'trace_mode',
+ );
+ my %opt;
+ my $help = 0;
+ my @errors;
+
+ for (my $index = 0; $index < @arguments; ++$index) {
+  my $argument = $arguments[$index];
+  my ($option, $inline_value) = _split_option($argument);
+  if ($option eq '--help' || $option eq '-h') {
+   if (defined $inline_value) {
+    push @errors, "$option does not accept a value";
+   } else {
+    $help = 1;
+   }
+  } elsif ($option eq '--trace-reset' || $option eq '--trace-emoji') {
+   if (defined $inline_value) {
+    push @errors, "$option does not accept a value";
+   } else {
+    my $key = $option eq '--trace-reset' ? 'trace_reset' : 'trace_emoji';
+    $opt{$key} = 1;
+   }
+  } elsif (exists $value_option{$option}) {
+   my $value;
+   if (defined $inline_value) {
+    $value = $inline_value;
+   } elsif ($index == $#arguments) {
+    push @errors, "$option requires a value";
+    next;
+   } else {
+    ++$index;
+    $value = $arguments[$index];
+   }
+   $opt{$value_option{$option}} = $value;
+  } elsif (defined($option) && $option =~ /\A-/) {
+   push @errors, "unknown option '$option'";
+  } else {
+   push @errors, "unexpected positional argument '$argument'";
+  }
+ }
+
+ _usage_error(join('; ', @errors)) if @errors;
+ return (\%opt, $help) if $help;
+
+ _usage_error('choose exactly one source option: --spec, --spec-file, or --inline-spec')
+  unless _defined_count(@opt{qw/spec spec_file inline_spec/}) == 1;
+ _usage_error('choose exactly one input option: --input or --input-file')
+  unless _defined_count(@opt{qw/input input_file/}) == 1;
+ if (defined($opt{parse_mode}) && $opt{parse_mode} !~ /\A(?:seek|consume)\z/) {
+  _usage_error("--parse-mode must be 'seek' or 'consume'");
+ }
+ if (!_valid_trace_level($opt{trace_level})) {
+  _usage_error("--trace has an unsupported level '$opt{trace_level}'");
+ }
+ if (defined($opt{trace_mode}) && $opt{trace_mode} !~ /\A(?:stdout|route|mirror)\z/) {
+  _usage_error("--trace-mode must be 'stdout', 'route', or 'mirror'");
+ }
+ return (\%opt, 0);
+}
+
 sub _last_error_text {
  my ($ctx) = @_;
  return '' unless ref($ctx) eq 'HASH' && ref($ctx->{last_error}) eq 'HASH';
@@ -109,45 +188,12 @@ sub _runtime_error {
  exit 1;
 }
 
-my %opt;
-my $help = 0;
-
-GetOptions(
- 'spec=s'        => \$opt{spec},
- 'spec-file=s'   => \$opt{spec_file},
- 'inline-spec=s' => \$opt{inline_spec},
- 'input=s'       => \$opt{input},
- 'input-file=s'  => \$opt{input_file},
- 'top-rule=s'    => \$opt{top_rule},
- 'parse-mode=s'  => \$opt{parse_mode},
- 'trace=s'       => \$opt{trace_level},
- 'trace-file=s'  => \$opt{trace_file},
- 'trace-mode=s'  => \$opt{trace_mode},
- 'trace-reset!'  => \$opt{trace_reset},
- 'trace-emoji!'  => \$opt{trace_emoji},
- 'help|h'        => \$help,
-) or _usage_error('invalid option');
+my ($opt_ref, $help) = _parse_args(@ARGV);
+my %opt = %$opt_ref;
 
 if ($help) {
  print _usage();
  exit 0;
-}
-
-_usage_error('choose exactly one source option: --spec, --spec-file, or --inline-spec')
- unless _defined_count(@opt{qw/spec spec_file inline_spec/}) == 1;
-_usage_error('choose exactly one input option: --input or --input-file')
- unless _defined_count(@opt{qw/input input_file/}) == 1;
-
-if (defined($opt{parse_mode}) && $opt{parse_mode} !~ /\A(?:seek|consume)\z/) {
- _usage_error("--parse-mode must be 'seek' or 'consume'");
-}
-
-if (!_valid_trace_level($opt{trace_level})) {
- _usage_error("--trace has an unsupported level '$opt{trace_level}'");
-}
-
-if (defined($opt{trace_mode}) && $opt{trace_mode} !~ /\A(?:stdout|route|mirror)\z/) {
- _usage_error("--trace-mode must be 'stdout', 'route', or 'mirror'");
 }
 
 my %compile_opts;
