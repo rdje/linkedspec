@@ -45829,6 +45829,132 @@ subtest 'spec_format_terse_1_5_4_statement_separator_contract' => sub {
         'semicolon-separated statement spec still runs');
 };
 
+subtest 'future_parity_backlog_1_6_1_1_universal_newline_statement_separation' => sub {
+    plan tests => 17;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $trim = sub {
+        my ($value) = @_;
+        return undef unless defined $value;
+        $value =~ s/^\s+//;
+        $value =~ s/\s+$//;
+        return $value;
+    };
+    my $split = sub {
+        return LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements($_[0], $trim);
+    };
+    my $run_fixture = sub {
+        my ($name, $input) = @_;
+        my $path = File::Spec->catfile(
+            $Bin, '..', 'capability_conformance', 'fixtures', "$name.spec",
+        );
+        my $source = slurp($path);
+        my $parser = eval { LinkedSpec::Get(\$source) };
+        return (undef, normalize_error($@)) unless ref($parser) eq 'CODE';
+        my $value = eval { $parser->(\$input) };
+        return (undef, normalize_error($@)) if $@;
+        return ($value, '');
+    };
+
+    is_deeply(
+        $split->("slice = capture_slice()\nslice_len = capture_slice_len()"),
+        ['slice = capture_slice()', 'slice_len = capture_slice_len()'],
+        'top-level newline separates consecutive assignment-form helper statements',
+    );
+    is_deeply(
+        $split->("save_cursor()\nrewind_match_start()\nrestore_cursor()"),
+        ['save_cursor()', 'rewind_match_start()', 'restore_cursor()'],
+        'top-level newline separates consecutive cursor-control calls',
+    );
+    is_deeply(
+        $split->("if(false)\nbranch = \"bad\"\nelseif(true)\nbranch = \"ok\"\nendif()"),
+        ['if(false)', 'branch = "bad"', 'elseif(true)', 'branch = "ok"', 'endif()'],
+        'top-level newline separates marker controls and intervening assignments',
+    );
+    my $switch_source = "switch(\"b\")\ncase(\"a\")\nselected = \"bad-a\"\nendcase()\n"
+        . "case(\"b\")\nselected = \"case-b\"\nendcase()\ndefault()\n"
+        . "selected = \"bad-default\"\nendswitch()";
+    is_deeply(
+        $split->($switch_source),
+        [
+            'switch("b")', 'case("a")', 'selected = "bad-a"', 'endcase()',
+            'case("b")', 'selected = "case-b"', 'endcase()', 'default()',
+            'selected = "bad-default"', 'endswitch()',
+        ],
+        'top-level newline separates switch markers and intervening assignments',
+    );
+    is_deeply(
+        $split->("one = 1\r\ntwo = 2\rthree = 3"),
+        ['one = 1', 'two = 2', 'three = 3'],
+        'CRLF and bare CR are physical-line separators without producing empty statements',
+    );
+    is_deeply(
+        $split->("return(hash(\n \"a\", 1,\n \"b\", 2\n))\nreturn(3)"),
+        ["return(hash(\n \"a\", 1,\n \"b\", 2\n))", 'return(3)'],
+        'newlines nested in call parentheses remain inside the statement payload',
+    );
+    is_deeply(
+        $split->("return({\n value = \"x\"\n value\n})\nreturn(3)"),
+        ["return({\n value = \"x\"\n value\n})", 'return(3)'],
+        'newlines nested in expression-valued blocks remain inside the statement payload',
+    );
+    is_deeply(
+        $split->("return(\"a\nb\")\nreturn('c\nd')"),
+        ["return(\"a\nb\")", "return('c\nd')"],
+        'newlines nested in double- and single-quoted strings remain protected',
+    );
+    is_deeply(
+        $split->("value = s/foo\nbar/baz/\nreturn(value)"),
+        ["value = s/foo\nbar/baz/", 'return(value)'],
+        'newlines nested in slash-delimited substitution payloads remain protected',
+    );
+    is_deeply(
+        $split->("# keep; one\nreturn(1)"),
+        ['# keep; one', 'return(1)'],
+        'a line-comment newline still terminates the comment statement',
+    );
+
+    my $capture_lowered = LinkedSpec::call_spec_handler_subst(
+        'Top', "slice = capture_slice()\nslice_len = capture_slice_len()",
+    );
+    like($capture_lowered, qr/^\$slice = do \{.*\};\n\$slice_len = do \{/s,
+        'capture assignments lower independently with a generated Perl terminator');
+
+    my $cursor_lowered = LinkedSpec::call_spec_handler_subst(
+        'Top', "after = cursor_pos()\nsave_cursor()\nrewind_match_start()\nstart = cursor_pos()",
+    );
+    like($cursor_lowered, qr/^\$after = do \{.*\};\ndo \{.*\};\npos\(\$\$STRING\)\s+=.*;\n\$start = do \{/s,
+        'cursor reads and controls lower independently with generated Perl terminators');
+
+    my $marker_lowered = LinkedSpec::call_spec_handler_subst(
+        'Top', "if(false)\nbranch = \"bad\"\nelseif(true)\nbranch = \"ok\"\nendif()",
+    );
+    is($marker_lowered, "if (0) {\n\$branch = \"bad\";\n} elsif (1) {\n\$branch = \"ok\";\n}",
+        'newline marker chain lowers completely without raw branch assignments');
+
+    my $switch_lowered = LinkedSpec::call_spec_handler_subst('Top', $switch_source);
+    is(
+        $switch_lowered,
+        "do { my \$__ls_switch_value_1 = \"b\"; my \$__ls_switch_hit_1 = 0;\n"
+            . "if (!\$__ls_switch_hit_1 && \$__ls_switch_value_1 eq \"a\") { \$__ls_switch_hit_1 = 1;\n"
+            . "\$selected = \"bad-a\";\n}\n"
+            . "if (!\$__ls_switch_hit_1 && \$__ls_switch_value_1 eq \"b\") { \$__ls_switch_hit_1 = 1;\n"
+            . "\$selected = \"case-b\";\n}\n"
+            . "if (!\$__ls_switch_hit_1) { \$__ls_switch_hit_1 = 1;\n"
+            . "\$selected = \"bad-default\";\n} }",
+        'newline switch marker chain lowers completely without raw assignments',
+    );
+
+    my ($cursor, $cursor_err) = $run_fixture->('capability_cursor_control_surface', 'ab');
+    is($cursor_err, '', 'cursor-control capability fixture compiles and executes');
+    is($J->encode($cursor),
+        '{"after_match":2,"entry_start":0,"match_start":0,"restored_entry":2,"restored_match":2}',
+        'cursor-control helpers preserve exact save/rewind/restore positions after newline repair');
+
+    my ($control, $control_err) = $run_fixture->('capability_control_marker_surface', 'x');
+    is($control_err, '', 'explicit same-line separator control fixture remains executable');
+};
+
 subtest 'spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments' => sub {
     # SPEC-FORMAT-TERSE.1.5.5.1: direct nested access lowers for explicit
     # path segments. Non-reserved bare path atoms are handled by the later

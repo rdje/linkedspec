@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.1 — statement boundaries belong to lexical depth, not statement shape):
+  When the language says every physical top-level newline separates statements, do not gate the split on whether
+  the accumulated source already parses as one particular call form. Quote/nesting/comment modes determine whether
+  a newline is top-level; the next lowering owner determines statement meaning. This removes cross-family blind
+  spots while preserving multiline payloads and narrow same-line continuation rules. Treat manifest-guard failures
+  from empty generated directories as artifact drift, remove them safely, and rerun the unchanged backend proof.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.0 — a green representative separator test is not universal proof):
   Derive capability inventories from independent backend contract tables, then audit documentation and executable
   corpus coverage separately. The existing `set(...)`/`return(...)` newline lock proved its path but not every

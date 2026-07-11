@@ -26,7 +26,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   is core-only apart from the legacy compatibility adapter `PPlugin.pm`.
 - Specs baseline:
   - All 21 shipped files in `specs/*.spec` compile in the phase0 baseline.
-  - Current phase0 reaches `PASS 1..1028` when run with `PERL5LIB=` cleared.
+  - Current phase0 reaches `PASS 1..1029` when run with `PERL5LIB=` cleared.
   - The Rust interpreter oracle is manifest-backed at 99 fixtures.
   - The former `specs/tclite.spec` literal `[` regex blocker is fixed.
 
@@ -75,7 +75,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
   reintroduced under a new owner.
 - Freeze baseline AST shapes for representative inputs.
 - Exit criteria:
-  - Green baseline suite (`PERL5LIB= prove -Iperl t/phase0_regression.t`, currently `PASS 1..1028`).
+  - Green baseline suite (`PERL5LIB= prove -Iperl t/phase0_regression.t`, currently `PASS 1..1029`).
   - Known failures documented; no shipped-spec compile blocker is currently deferred.
 
 ## Phase 1: Parser-Core Isolation
@@ -868,11 +868,11 @@ remain secondary thin adapters and may not own exclusive parser/compiler/runtime
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |
 | Overall roadmap | `done` | Whole-project delivery across parser core, semantics, runtime, docs, self-hosting, multi-backend handoff, and the Rust variant. | All numbered phases (0-9) done. All Backbone items done. Plugin modernization done. Method-like DSL migration done. Phase 7 self-hosting complete. Phase 8 multi-backend handoff surface specified; Phase 9 Rust variant operational (Cargo workspace at `rust/`, interpreted mode, v0.1). mdBook reframed variant-agnostic (`.spec` = universal contract; Perl = reference backend; Rust = implemented lockstep variant; Dart/Julia/Lua = scheduled future full-parity variants). Remaining: ongoing documentation/book sync and explicitly owned deferred feature lanes. |
-| Future parity backlog | `in progress` | Deferred/future parity lanes after the closed language-reference and terse-format trees: backend parity, staged parsing, generated-source breadth, function extensions, helper caveats, plugin fate, richer oracle candidates, spec-derived parser/stimuli validation, AND/OR edge-default design, deep semantic introspection with MCP projection, and generic final-codeblock arguments. | Exact primary CLI parity `.1.5` and capability audit `.1.6.0` are closed. `.1.6.1.0` audits the exhaustive current-call surface and splits the discovered Perl newline-separator gap to `.1.6.1.1`; `.1.6.1.2` completes unchanged four-backend proof afterward. `.2`–`.5` own Rust descriptor/diagnostics, native named/file resolution, and Dart full-pipeline trace; `.6` closes non-codegen parity. Generated-source `.3` remains separate before Lua. |
+| Future parity backlog | `in progress` | Deferred/future parity lanes after the closed language-reference and terse-format trees: backend parity, staged parsing, generated-source breadth, function extensions, helper caveats, plugin fate, richer oracle candidates, spec-derived parser/stimuli validation, AND/OR edge-default design, deep semantic introspection with MCP projection, and generic final-codeblock arguments. | Exact primary CLI parity `.1.5`, capability audit `.1.6.0`, current-call audit `.1.6.1.0`, and universal Perl newline repair `.1.6.1.1` are closed. Active `.1.6.1.2` completes strict current-call fixture coverage and unchanged four-backend proof. `.2`–`.5` own Rust descriptor/diagnostics, native named/file resolution, and Dart full-pipeline trace; `.6` closes non-codegen parity. Generated-source `.3` remains separate before Lua. |
 | Dart backend parity | `scoped done / full parity in progress` | First future full-parity backend lane after Perl5 and Rust. | Global `.1.5.3.4` closes Dart at recurring 61/61 default/POSIX plus 151 tests and 99/99 corpus; global `.1.5.4.3` closes four-backend CLI identity. `.1.6` and generated-source `.3` still own capability/codegen gaps. |
 | Julia backend parity | `in progress` (local milestone closed; global obligations delegated) | Second future full-parity backend lane after Dart under ADR `0021`; native in-memory Julia library first under ADR `0022`. | Local proof is 99/99, 1,019 package assertions, and nine process families. Julia passes 61/61 shared CLI cases default/POSIX and the recurring four-backend matrix is closed. Capability census `.1.6` and generated source `.3` remain mandatory before full parity. |
 | Non-current helper code purge | `done` | Remove retired helper spellings from Perl/Rust code surfaces, active tests/tools/spec fixtures, and durable docs so deleted names are not preserved as name-specific recognition or diagnostics. | Task tree `docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md` complete through `.5`: Perl source cleanup, Rust source cleanup, active fixture/spec migration, and final no-drift closeout are done. Active retired-helper call-shape, label/tag, and `?concat:` scans are clean; generic unknown-helper tests use invented helper names. |
-| Phase 0 | `done` | Regression safety net, baseline compilation coverage, and corpus-level guardrails. | Keep the regression baseline green; all 21 shipped `specs/*.spec` files now participate in the baseline compile pass, and the current gate reaches `PASS 1..1028` with `PERL5LIB=` cleared. |
+| Phase 0 | `done` | Regression safety net, baseline compilation coverage, and corpus-level guardrails. | Keep the regression baseline green; all 21 shipped `specs/*.spec` files now participate in the baseline compile pass, and the current gate reaches `PASS 1..1029` with `PERL5LIB=` cleared. |
 | Phase 1 | `done` | Parser-core isolation and dependency-surface reduction for the active compile/runtime path. | Task tree `docs/tasks/PHASE1-PARSER-CORE-ISOLATION.md` completed 2026-05-18 (3 leaves: inventory, ActionRewriter.pm removal, rewrite_action_code_for_compat evaluation). ActionRewriter.pm deleted (118 lines, 59 forwarders). |
 | Phase 1A | `done` | Thin-façade modularization of `LinkedSpec.pm` into focused owner modules with stable public APIs. | Task tree `docs/tasks/PHASE1A-CLOSE-OUT.md` completed 2026-05-16. `LinkedSpec.pm` is a thin façade; the lazy owner-dispatch / callback-value lookup / `$@` preservation plumbing is centralized in `LinkedSpec::OwnerDispatch` and shared across the owner modules. The then-present thin shim `ActionRewriter.pm` was later deleted in Phase 1; the focused helper-rewrite entrypoint now lives in `LinkedSpec::RuleIR::EmitContext::rewrite_action_code_for_compat(...)`. |
 | Phase 2 | `done` | DSL frontend hardening, stricter validation, and clearer token/error handling. | Task tree `docs/tasks/PHASE2-DSL-FRONTEND.md` completed 2026-05-16 (6 leaves). Syntax-aware validation hardened across rule-paragraph, token, and error surfaces; further hardening is incidental follow-up. |
@@ -920,7 +920,7 @@ These are tracked implementation concerns, not immediate blockers.
   - but continue prioritizing missing user-facing DSL features first unless one of these seams becomes a concrete bug or blocks a planned feature.
 
 ### Detailed Status Notes
-- Phase 0: `done` (Test::More baseline under `t/phase0_regression.t` for all 21 shipped specs; current gate `PASS 1..1028` with `PERL5LIB=` cleared).
+- Phase 0: `done` (Test::More baseline under `t/phase0_regression.t` for all 21 shipped specs; current gate `PASS 1..1029` with `PERL5LIB=` cleared).
 - Phase 0 enhancement: corpus-level regression includes active core project directories such as `conf/`, `tablescript/`, and `ebnf/`; the former root `plugin/` corpus is retired from the core gate after `NONCORE-QUARANTINE`.
 - Phase 1: `mostly done`.
 - Phase 1A (LinkedSpec.pm modularization): `mostly done`.

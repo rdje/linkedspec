@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.1 — enforce universal newline separators
+
+**Common repair:** `StatementSplit::Core` now consumes every unquoted depth-zero LF, CRLF, or CR as a statement
+boundary, including the line break that closes a line comment. Newline separation no longer depends on the prior
+statement parsing as a complete function call, so assignment, capture, cursor, and marker-control sequences lower
+independently and receive the required generated Perl terminators.
+
+**Protection/no-drift:** A 17-assertion Phase 0 subtest locks assignment/cursor/if/switch-marker splitting, exact lowered
+capture/cursor/control source, cursor/control execution, CR variants, and preservation of multiline parentheses,
+blocks, single/double quotes, slash substitutions, and comments. Same-line whitespace remains non-separating and
+same-line multiple statements still require only the separator between them.
+
+**Proof/cleanup:** Phase 0 passes `1..1029` in 490 wall-clock seconds. Perl regenerates the unchanged 99-case oracle; Rust,
+Dart, and Julia each pass 99/99. Four stale empty corpus artifact directories found by the manifest guard were
+removed. After consuming every result, cleanup removes 1.4 GB Rust, 86 MB Julia, and 20 KB Dart caches. `.1.6.1.2`
+is active for strict fixture/inventory closure.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.0 — audit neutral language coverage
 
 **Exhaustive call audit:** Added a reusable auditor that derives the current ActionIR call-name sets directly from

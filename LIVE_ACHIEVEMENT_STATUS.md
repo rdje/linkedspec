@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.1 — enforce universal newline separators**
+  (DONE — common Perl repair closed; strict current-call coverage `.1.6.1.2` active).
+
+  **Implementation:** Every unquoted depth-zero LF/CRLF/CR now separates statements regardless of call versus
+  assignment shape; quote, regex, nesting, comment, attached-continuation, and same-line rules remain protected.
+
+  **Proof/cleanup:** New 17-assertion focused lock, Phase 0 `1..1029`, unchanged Perl regeneration, and Rust/Dart/
+  Julia 99/99 pass. Stale empty corpus dirs and 1.4 GB Rust/86 MB Julia/20 KB Dart caches were safely removed.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.0 — audit neutral language coverage**
   (DONE — exhaustive audit/split closed; newline separator repair `.1.6.1.1` active).
 

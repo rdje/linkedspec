@@ -18,18 +18,18 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.0` — exhaustive current-call audit/split is closed.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.0` — validated 15x4 capability census/split is closed.
-- recent_context: Dart/Julia have 237 identical current ActionIR call names; all are documented and 98 are not yet
-  in the 99-case corpus. Six canonical fixtures expose a shared Perl newline boundary/raw-target lowering gap.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.1` — universal Perl newline separation is repaired.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.0` — exhaustive current-call audit/split is closed.
+- recent_context: Every unquoted depth-zero LF/CRLF/CR now splits statements; Phase 0 is `1..1029`, and unchanged
+  Perl/Rust/Dart/Julia corpus proof is 99/99 each. Strict coverage still lacks 98 of 237 names.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.1.0 - audit neutral language coverage`; previous committed HEAD is
-  `67077069 FUTURE-PARITY-BACKLOG.1.6.0 - audit backend capability parity`.
+  `FUTURE-PARITY-BACKLOG.1.6.1.1 - enforce universal newline separators`; previous committed HEAD is
+  `2e11d3ca FUTURE-PARITY-BACKLOG.1.6.1.0 - audit neutral language coverage`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.1` universal newline statement separation repair is active.
-- next_action: toolbox-first inspect StatementSplit/RewritePipeline/MethodLowering boundaries, repair physical
-  newline separation for capture/cursor/assignment/marker families, add focused locks, then run neutral proof.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2` strict current-call neutral coverage is active.
+- next_action: correct bounded fixture timing, admit complete semantic families to the oracle, drive the 98 missing
+  call names to zero, and run the expanded fixtures unchanged on Perl/Rust/Dart/Julia before closing `.1.6.1`.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
@@ -49,9 +49,9 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   implementations versus the director's four-kind generic final-codeblock model.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
-- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1028`**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
+- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1029`**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
 - blockers: none. in_flight_uncommitted: none after this commit; strict language coverage remains intentionally
-  red until `.1.6.1.2`, and no incomplete fixture has entered the generated corpus.
+  red until `.1.6.1.2`; Rust/Dart/Julia caches and stale empty corpus artifact dirs are absent after cleanup.

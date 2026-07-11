@@ -123,13 +123,11 @@ spaces do not create a boundary. Nested semicolons inside expression payloads st
 the payload. Executable examples therefore omit line-ending semicolons whenever a newline
 already separates the statements.
 
-> **Current Perl reference limitation:** the contract above is broader than the coverage of
-> the current text-lowering implementation. Consecutive capture assignments, cursor-control
-> calls, and marker-style control statements can still miss the generated Perl separator or
-> leave the following assignment target raw. This is tracked by
-> `FUTURE-PARITY-BACKLOG.1.6.1.1`; authors should not reinterpret the limitation as a requirement
-> for line-ending semicolons. The repair must make these newline forms equivalent to their
-> same-line semicolon-separated forms.
+The Perl reference applies this rule at every unquoted top-level physical line break, not
+only after function-shaped statements. Assignment, capture, cursor, and marker-control
+sequences therefore lower the same way as equivalent same-line statements separated by
+semicolons. Newlines inside parentheses, brackets, blocks, quoted strings, regex payloads,
+and comments remain protected by the scanner state appropriate to that construct.
 
 ### CanonicalEvents
 

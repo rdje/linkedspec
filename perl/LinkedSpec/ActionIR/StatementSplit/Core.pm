@@ -309,6 +309,15 @@ sub _push_trimmed_statement {
  return
 }
 
+sub _consume_top_level_line_break {
+ my ($state, $char, $statements, $trim_action_ir_value) = @_;
+ return 0 unless $char eq "\n" || $char eq "\r";
+ return 0 if $state->{paren_depth} || $state->{brace_depth} || $state->{bracket_depth};
+ _push_trimmed_statement($statements, $trim_action_ir_value, $state->{statement});
+ $state->{statement} = '';
+ return 1
+}
+
 sub _consume_nesting_or_terminator {
  my ($state, $char, $statements, $trim_action_ir_value) = @_;
  if ($char eq '(') {
@@ -370,7 +379,11 @@ sub split_action_ir_statements {
 
  for (my $idx = 0; $idx < @chars; ++$idx) {
   my $char = $chars[$idx];
-  if (LinkedSpec::ActionIR::StatementSplit::Mode::consume_line_comment($state, $char)) { next; }
+  if (LinkedSpec::ActionIR::StatementSplit::Mode::consume_line_comment($state, $char)) {
+   _consume_top_level_line_break($state, $char, \@statements, $trim_action_ir_value)
+    unless $state->{in_line_comment};
+   next;
+  }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::consume_single_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::consume_double_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::consume_slash_quote($state, $char)) { next; }
@@ -384,6 +397,7 @@ sub split_action_ir_statements {
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_slash_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_angle_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_pipe_quote($state, $char)) { next; }
+  if (_consume_top_level_line_break($state, $char, \@statements, $trim_action_ir_value)) { next; }
   if (_consume_nesting_or_terminator($state, $char, \@statements, $trim_action_ir_value)) {
    if (_should_split_on_method_boundary($state, \@chars, $idx, $trim_action_ir_value)) {
     _push_trimmed_statement(\@statements, $trim_action_ir_value, $state->{statement});

@@ -609,19 +609,34 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.0 - audit neutral language coverage`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.1`
-  Status: `active`
+  Status: `done`
   Goal: Make physical newlines universally separate ActionIR statements without requiring trailing semicolons.
   Acceptance: Root-cause and repair Perl reference splitting/lowering so consecutive ordinary helpers, assignments,
     cursor/capture calls, and `if/i`/`elseif/elif`/`else`/`endif` plus switch markers separated by physical newlines
     lower equivalently to same-line semicolon-separated statements; preserve nested strings/regexes/blocks; add
     focused source/runtime locks and unchanged Rust/Dart/Julia neutral proof before resuming coverage closeout.
-  Verification: `pending` — toolbox `call_spec_handler_subst` lowers only the first newline-separated capture/cursor
-    assignment and leaves following source raw; marker chains similarly leave inner branches raw, while one physical
-    line with semicolon separators lowers correctly.
-  Commit: `pending`
+  Acceptance Checklist:
+    - REPRODUCE: use `call_spec_handler_subst` to lock the capture/cursor raw-target and marker-chain failures.
+    - ROOT CAUSE: prove the depth-zero splitter recognizes only complete call statements, so assignment lines absorb
+      their successors even though nesting/quote state already protects payload newlines.
+    - FIX: consume every unquoted depth-zero LF/CRLF/CR as a boundary, including a completed line comment, without
+      weakening same-line adjacency or attached-continuation rules.
+    - ADDRESSED: lock assignment/cursor/marker splits and exact lowering plus cursor/control runtime execution.
+    - NO REGRESSION: protect multiline parentheses, blocks, quotes, regex substitutions, comments, CRLF, and the
+      unchanged 99-fixture Perl/Rust/Dart/Julia corpus.
+    - LOCKSTEP: remove the mdBook limitation, resolve the Knowledge Map gap, update live docs/frontier, and clean
+      every generated backend cache after verification.
+  Verification: toolbox lowering now emits independent `$` targets and generated Perl terminators for capture and
+    cursor sequences, and fully lowers newline if/switch marker chains. The new 17-assertion Phase 0 subtest covers universal
+    LF/CRLF/CR boundaries, nesting/quote/regex/comment protection, exact lowering, and cursor/control runtime;
+    `PERL5LIB= prove -v -Iperl t/phase0_regression.t` passes `1..1029` in 490 wall-clock seconds. Perl regeneration produces
+    the unchanged 99 fixtures; Rust, Dart, and Julia each pass 99/99. Four stale empty corpus artifact directories
+    were removed after their manifest-guard failure; 1.4 GB Rust, 86 MB Julia, and 20 KB Dart caches were removed
+    after all results were consumed.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.1 - enforce universal newline separators`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Complete and run exhaustive current-call neutral coverage after newline separator repair.
   Acceptance: Finish bounded pure/position/capture/mark/cursor/control fixtures, make the coverage checker require
     every current Dart/Julia ActionIR name in the mdBook and generated neutral corpus, regenerate Perl oracle bytes,
@@ -886,8 +901,8 @@ before implementation.
 | 25 | `FUTURE-PARITY-BACKLOG.1.5.4.3` | `done` | Recurring 4x2x61 driver and all focused/broader gates close exact CLI parity. |
 | 26 | `FUTURE-PARITY-BACKLOG.1.6.0` | `done` | Validated 15-capability census classifies and owns all current gaps before behavior changes. |
 | 27 | `FUTURE-PARITY-BACKLOG.1.6.1.0` | `done` | 237 names documented; 98 corpus gaps audited; canonical fixture families and shared separator blocker split. |
-| 28 | `FUTURE-PARITY-BACKLOG.1.6.1.1` | `active` | Repair universal newline statement separation exposed by capture/cursor/control fixtures. |
-| 29 | `FUTURE-PARITY-BACKLOG.1.6.1.2` | `pending` | Finish exhaustive neutral current-call proof after the separator repair. |
+| 28 | `FUTURE-PARITY-BACKLOG.1.6.1.1` | `done` | Universal top-level newline separation repaired; Phase 0 1029 and four-backend 99/99 pass. |
+| 29 | `FUTURE-PARITY-BACKLOG.1.6.1.2` | `active` | Finish exhaustive neutral current-call proof after the separator repair. |
 | 30 | `FUTURE-PARITY-BACKLOG.1.6.2` | `pending` | Add Rust's missing outward compiled-descriptor projection. |
 | 31 | `FUTURE-PARITY-BACKLOG.1.6.3` | `pending` | Add structured Rust native runtime diagnostics. |
 | 32 | `FUTURE-PARITY-BACKLOG.1.6.4` | `pending` | Add native named/file resolution to Rust, Dart, and Julia. |

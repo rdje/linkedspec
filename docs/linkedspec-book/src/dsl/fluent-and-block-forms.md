@@ -119,10 +119,9 @@ terminator. Plain spaces between same-line helper calls are not statement separa
 Semicolons inside nested expressions or literal payloads stay inside that expression and
 do not split the outer statement.
 
-The Perl reference currently has an implementation coverage gap for some consecutive
-capture assignments, cursor controls, and marker-style control statements written on
-separate lines. `FUTURE-PARITY-BACKLOG.1.6.1.1` owns the repair. The language contract does
-not change: do not add line-ending semicolons as a portable requirement.
+This applies equally to function-style helpers, assignment statements, cursor/capture
+operations, and marker-style control statements. Newlines nested inside parentheses,
+brackets, blocks, quoted strings, or regex payloads remain part of the surrounding statement.
 
 ## Control-flow expression forms
 
