@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.4.5 — admit native spec resolution parity**
+  (DONE — exact native resolution `.1.6.4` closed; Dart trace `.1.6.5` active).
+
+  **Implementation:** Separate public Perl portable loader with typed name/path intent, ordered roots, strict UTF-8,
+  identity, progressive results, structured errors, `Get` composition, and unchanged legacy `PathSearch`.
+
+  **Proof:** Required direct 14/9/4 plus pipeline fixture passes. Canonical core gate passes 239-name coverage,
+  focused suites, exact 61x2 CLI, and Phase 0 `1..1030` in 556 seconds. Adjacent Rust/Dart/Julia full gates complete
+  four-backend admission; census remains 56/1/3.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.4.4 — add Julia native spec resolution**
   (DONE — Julia file-oriented native role passes; final admission `.1.6.4.5` active).
 

@@ -100,7 +100,9 @@ perl tools/check_native_spec_resolution_contract.pl
 ```
 
 It validates the versioned schema plus 14 portable name cases, nine deterministic path-precedence/file-kind cases,
-and four strict UTF-8 preservation/rejection cases before backend-specific consumers run.
+and four strict UTF-8 preservation/rejection cases before backend-specific consumers run. The canonical core gate
+also requires `prove -Iperl t/native_spec_resolution.t`, which consumes the same fixture through Perl's public
+portable facade; Rust, Dart, and Julia consume it in their focused package gates.
 
 The same gate also enforces exhaustive current ActionIR coverage:
 

@@ -14,16 +14,17 @@ in-process data path, not identical spelling:
 
 | Backend | Native in-memory composition |
 | --- | --- |
-| Perl | `LinkedSpec::Get(...)` → parser coderef; `get_parser(...)` adds named/file resolution. |
+| Perl | Inline: `LinkedSpec::Get(...)` → parser coderef. Portable file-oriented: `LinkedSpec::SpecLoader::load_and_compile_spec(...)`; legacy `get_parser(...)` retains compatibility discovery. |
 | Rust | Inline: `parse_spec(...)` → core compilation → `Engine::new(...)`. File-oriented: `spec_loader::load_and_compile_spec(...)` → `LoadedCompiledSpec::into_engine()`. |
 | Dart | Inline: `parseSpec(...)` → `compileSpec(...)` → `LinkedSpecRuntimeEngine(...).parse(...)`. File-oriented: `loadAndCompileSpec(...)` → `LoadedCompiledSpec.createEngine()`. |
 | Julia | Inline: staged `parse_spec_with_staged_user_function_definitions(...)` → `compile_spec(...)` → `LinkedSpecRuntimeEngine(...)`. File-oriented: `load_and_compile_spec(...)` → `create_engine(...)`. |
 | Lua and later backends | An idiomatic native module must expose equivalent in-memory parse/compile/execute capability before its CLI can count as a complete backend. |
 
-The inline and file-oriented roles are implemented on all four current backends: Perl through `Get(...)` and
-`get_parser(...)`, Rust through core composition and `linkedspec_runtime::spec_loader`, Dart through its public
-parser/compiler plus `spec_loader.dart`, and Julia through its staged parser/compiler plus `SpecLoader.jl`. Final
-shared admission remains under `FUTURE-PARITY-BACKLOG.1.6.4.5`.
+The inline and file-oriented roles are implemented on all four current backends: Perl through `Get(...)`, portable
+`LinkedSpec::SpecLoader`, and legacy `get_parser(...)`; Rust through core composition and
+`linkedspec_runtime::spec_loader`; Dart through its public parser/compiler plus `spec_loader.dart`; and Julia
+through its staged parser/compiler plus `SpecLoader.jl`. Final shared admission is closed under
+`FUTURE-PARITY-BACKLOG.1.6.4`.
 
 The implementation audit found that the former adapters did not share one fallback policy. Rust and Dart stopped
 after three local candidates, Julia added a sorted recursive repository search, and Perl delegated a bare miss to
@@ -35,8 +36,8 @@ variants reproduce.
 
 ### Portable file-oriented contract
 
-The contract is ratified and executable in `capability_conformance/native_spec_resolution_contract.json`; Rust,
-Dart, and Julia pass it directly. It separates two caller intents:
+The contract is ratified and executable in `capability_conformance/native_spec_resolution_contract.json`; Perl,
+Rust, Dart, and Julia pass it directly. It separates two caller intents:
 
 | Request | Resolution |
 | --- | --- |
@@ -75,6 +76,33 @@ Unicode and UTF-8 are different layers here. The logical source is Unicode scala
 encoding. UTF-16 and UTF-32 are valid Unicode encodings generally, but this API does not guess or transcode them.
 Callers must transcode such files explicitly or pass already-decoded text to the inline API. Valid UTF-8 preserves
 BOM as U+FEFF, normalization form, code points, newlines, and surrounding text exactly.
+
+### Perl portable named/file example
+
+The portable Perl facade is separate from `get_parser(...)` so existing implicit `PathSearch` callers keep their
+compatibility behavior while new applications can make discovery explicit:
+
+```perl
+use LinkedSpec::SpecLoader ();
+
+my $request = LinkedSpec::SpecLoader::name_request('grammars/Expression');
+my $options = LinkedSpec::SpecLoader::load_options(
+  cwd => '/work/project',
+  search_roots => ['/app/specs', '/team/specs'],
+);
+
+my $loaded = LinkedSpec::SpecLoader::load_and_compile_spec($request, $options);
+print "resolved: ", $loaded->loaded->resolved->path, "\n";
+print "source characters: ", length($loaded->loaded->source_text), "\n";
+
+my $input = 'input';
+my $value = $loaded->compiled->(\$input);
+```
+
+Use `path_request('relative/or/absolute.spec')` for one exact host path. `resolve_spec(...)` selects only,
+`load_spec(...)` also reads and strictly decodes, and `load_and_compile_spec(...)` continues through the reference
+compiler. Failures throw a blessed `LinkedSpec::SpecLoader::Error`; `to_hash()` returns the neutral structured
+record. The complete result retains a runtime context carrying the requested name and resolved path.
 
 ### Rust named/file example
 

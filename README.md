@@ -205,7 +205,8 @@ Top-level project docs:
   `.1.6.4` through `.1.6.6` own the remaining non-codegen work, while generated source remains top-level `.3`.
 - Run `perl tools/check_native_spec_resolution_contract.pl` to validate the versioned file-oriented native API
   schema: portable names, exact paths, declared-order roots, regular-file selection, strict UTF-8, pipeline stages,
-  and structured errors. Backend direct-library tests consume the same fixture as `.1.6.4` rolls out.
+  and structured errors. `prove -Iperl t/native_spec_resolution.t` consumes the same fixture through Perl's public
+  portable facade; Rust, Dart, and Julia package tests do likewise. Exact `.1.6.4` admission is closed.
 - Run `perl tools/check_language_capability_coverage.pl --report` for the current Dart/Julia ActionIR call-name
   inventory against the mdBook and neutral corpus. The strict form intentionally remains red until `.1.6.1.2`;
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator
@@ -217,7 +218,8 @@ Top-level project docs:
   outer function-record contract are closed under `.1.6.2`. Typed Rust diagnostic errors, source/top/child
   attribution, compatibility adapters, and final recurring admission are closed under `.1.6.3`. Native named/file
   resolution `.1.6.4` is audited and split; `.1.6.4.1` fixes its deterministic ordered-root contract, while Rust,
-  Dart, and Julia native APIs `.1.6.4.2-.4` pass. Final four-backend admission `.1.6.4.5` is active.
+  Dart, and Julia native APIs `.1.6.4.2-.4` pass; Perl direct proof and final admission `.1.6.4.5` close the parent.
+  Dart full-pipeline trace `.1.6.5` is active.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
   {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven baseline success, four baseline
@@ -231,8 +233,7 @@ Top-level project docs:
   `bash tools/run_primary_cli_matrix.sh` for one command that builds/prepares/warms all four backends and proves
   the unchanged 61-case suite under both environments. Exact CLI lane `.1.5` and exhaustive current-surface
   `.1.6.1`, exact outward descriptors `.1.6.2`, and structured diagnostics `.1.6.3` are closed; native resolution
-  audit `.1.6.4.0`, neutral contract `.1`, and Rust/Dart/Julia native APIs `.2-.4` are closed; final admission
-  `.1.6.4.5` is active.
+  native resolution `.1.6.4` is closed on all four backends; Dart full-pipeline trace `.1.6.5` is active.
 - Deep semantic introspection plus MCP is parked under `FUTURE-PARITY-BACKLOG.10.1`: native backend APIs own one
   versioned semantic model, while MCP remains a thin transport rather than a backend-specific source of truth.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full

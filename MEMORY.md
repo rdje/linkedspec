@@ -18,20 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.4.4` — added Julia native named/file resolution.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.4.3` — added Dart native named/file resolution.
-- recent_context: Public Julia progressive resolver/loader/compiler consumes 14/9/4 exact cases, preserves strict
-  UTF-8/source identity, returns typed structured exceptions, builds an attributed engine, and owns CLI name/file
-  work without recursive fallback. Package 1,110 assertions, 61x2 CLI, and 105 corpus pass; census 56/1/3.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.4.5` — admitted exact four-backend native resolution.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.4.4` — added Julia native named/file resolution.
+- recent_context: Public Perl `SpecLoader` now joins Rust/Dart/Julia direct 14/9/4 consumers without changing legacy
+  `get_parser`/`PathSearch`. It retains strict source identity, composes through `Get`, and throws structured errors.
+  Canonical gate passes loader proof, 239 names, 61x2 CLI, and Phase 0 1..1030 in 556s; census remains 56/1/3.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.4.4 - add Julia native spec resolution`; previous committed HEAD is
-  `a529e5bd FUTURE-PARITY-BACKLOG.1.6.4.3 - add Dart native spec resolution`.
+  `FUTURE-PARITY-BACKLOG.1.6.4.5 - admit native spec resolution parity`; previous committed HEAD is
+  `4beea0d7 FUTURE-PARITY-BACKLOG.1.6.4.4 - add Julia native spec resolution`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.4.5` exact native-resolution admission is active.
-- next_action: audit Perl direct-library coverage against the shared fixture, add only the missing exact proof or
-  compatibility adapter required for all four backends, run recurring native/CLI gates, close `.1.6.4`, and advance
-  to Dart full-pipeline trace `.1.6.5`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.5` Dart full-pipeline trace is active.
+- next_action: audit the current Dart emitter propagation against Perl/Rust/Julia and split frontend/compiler/
+  function-shell/staged trace implementation into bounded owned leaves before changing trace behavior.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

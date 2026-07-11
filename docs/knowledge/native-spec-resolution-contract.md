@@ -17,6 +17,7 @@ status: current
 tags: [resolution, files, utf8, unicode, diagnostics, parity, ADR-0026, FUTURE-PARITY-BACKLOG]
 evidence: "ADR 0026 plus capability_conformance/native_spec_resolution_contract.json define portable forward-slash names, separate exact paths, cwd/suffix/declared-root precedence, direct non-recursive roots, first-regular-file selection, strict preserved UTF-8, source identity, pipeline stages/codes, and 14 validation + 9 resolution + 4 text cases; tools/check_native_spec_resolution_contract.pl validates them."
 evidence_update_2026_07_11_rust: "FUTURE-PARITY-BACKLOG.1.6.4.2 consumes every case through public rust/linkedspec-runtime/src/spec_loader.rs, adds the Windows-drive absolute-name lock, composes staged parse/validate/compile, and keeps 61x2 CLI exact."
+evidence_update_2026_07_11_admission: "FUTURE-PARITY-BACKLOG.1.6.4.5 adds direct Perl 14/9/4 consumption and canonical-gate proof; Rust, Dart, and Julia direct consumers plus recurring/CLI gates landed in .2-.4. Exact four-backend admission is closed."
 reverify: "perl tools/check_native_spec_resolution_contract.pl && sed -n '1,260p' docs/decisions/0026-native-spec-resolution-and-loading-contract.md"
 ---
 

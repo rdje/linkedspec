@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-11` (Julia native resolution `.1.6.4.4` closed; final admission `.1.6.4.5` active).
+- Last updated: `2026-07-11` (exact native resolution `.1.6.4` closed; Dart full-pipeline trace `.1.6.5` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -1074,14 +1074,22 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.3.2 - admit Rust runtime diagnostics`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.4`
-  Status: `active`
-  Goal: Add idiomatic native named/file spec resolution to Rust, Dart, and Julia.
+  Status: `done`
+  Goal: Add and exactly admit idiomatic native named/file spec resolution across all four current backends.
   Children: `.1.6.4.0`, `.1.6.4.1`, `.1.6.4.2`, `.1.6.4.3`, `.1.6.4.4`, `.1.6.4.5`
-  Acceptance: Each non-Perl library exposes the book's file-oriented role with deterministic explicit-path and
+  Acceptance: Each library exposes the book's portable file-oriented role with deterministic explicit-path and
     named-spec resolution/search precedence, strict text loading, parse/compile composition, and structured errors;
-    shared path fixtures prove equivalent behavior without requiring the primary CLI or a subprocess.
-  Verification: `pending`
-  Commit: `pending`
+    shared path fixtures prove equivalent behavior without requiring the primary CLI or a subprocess. Perl's
+    legacy `get_parser` compatibility discovery remains separately available.
+  Verification: ADR `0026` and its 14/9/4 fixture are consumed directly by Perl, Rust, Dart, and Julia native
+    libraries. Each exposes separate portable name/exact-path intent, ordered direct roots, first-regular-file
+    resolution, strict preserved UTF-8, retained source identity, progressive composition, structured stages/codes,
+    and a backend-native compiled value. The final Perl facade leaves legacy `get_parser`/`PathSearch` untouched.
+    Prior committed Rust/Dart/Julia complete recurring and 61x2 CLI gates remain green; final admission adds Perl
+    direct proof to the canonical gate, which passes 239-name coverage, focused suites, 61x2 Perl CLI, and Phase 0
+    `1..1030` in 556 seconds. Capability state remains 56/1/3 because this row was already promoted backend by
+    backend; the parent is now exactly admitted.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.4.5 - admit native spec resolution parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.4.0`
   Status: `done`
@@ -1174,16 +1182,46 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.4.4 - add Julia native spec resolution`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.4.5`
-  Status: `active`
+  Status: `done`
   Goal: Admit and close exact native named/file resolution parity.
   Acceptance: All four variants pass the shared direct-library fixture and their complete recurring/CLI gates;
     public docs and the capability census promote the role only after adapter no-drift; `.1.6.4` closes and the
     frontier advances to Dart full-pipeline trace `.1.6.5`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Added public `LinkedSpec::SpecLoader` with blessed name/path request, options, resolved/loaded/
+    compiled result, and structured error types. It accepts cwd plus ordered direct roots, distinguishes exact
+    paths, chooses regular files, decodes raw bytes with strict UTF-8, retains source/request/path identity, composes
+    through `LinkedSpec::Get`, and projects the reference compiler's raw validation-before-bootstrap seam into the
+    neutral parse/validate/compile error stages. `t/native_spec_resolution.t` directly consumes every 14/9/4 case
+    and proves staged user-function execution plus exact errors. The test is a required canonical CI input. Focused
+    proof and the complete core gate pass, including 61x2 CLI and Phase 0 `1..1030` in 556 seconds. Prior adjacent
+    Rust, Dart, and Julia direct-library/full-gate commits supply the other three exact admission legs. Generated
+    LinkedSpec artifacts are absent; active external mutation-test temp trees were identified and left untouched.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.4.5 - admit native spec resolution parity`
+
+## `FUTURE-PARITY-BACKLOG.1.6.4.5` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Knowledge Map/source audit plus `rg -n 'get_parser|PathSearch|SpecLoader' perl t`
+  proved Rust/Dart/Julia consumed the 14/9/4 fixture directly while Perl exposed only legacy `get_parser` resolution;
+  the first `prove -v -Iperl t/native_spec_resolution.t` run reproduced the missing portable facade and exposed the
+  correct top-rule action-edge execution shape before passing.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `perl/LinkedSpec/Resolver.pm:63` owns legacy local plus `PathSearch` discovery,
+  while `perl/LinkedSpec/ParserFactory.pm:89` owns compatibility compilation. Neither accepts separate name/path
+  request types or caller-ordered roots; raw `LinkedSpec::Get` validation also reports “must start with a rule” at
+  `last_error.stage=validate_spec_content`, requiring neutral parse-stage projection in the portable facade.
+- [x] **FIX** — Added `LinkedSpec::SpecLoader` as a separate typed portable request/options/result/error facade over
+  ordered direct resolution, strict raw-byte UTF-8 decoding, retained identity, and `LinkedSpec::Get` composition;
+  legacy `get_parser` and `PathSearch` remain untouched. Added direct fixture/pipeline proof and canonical-gate wiring.
+- [x] **ADDRESSED (verified)** — `PERL5LIB= prove -v -Iperl t/native_spec_resolution.t` passes all five subtests:
+  every 14/9/4 contract family, staged user-function compilation/execution, name/path identity, parse/validation
+  separation, and exact missing-name error hash.
+- [x] **NO REGRESSION** — `bash tools/run_ci_local.sh` passes the required Perl loader test, 239-name coverage,
+  focused suites, 61x2 CLI, and Phase 0 `1..1030` in 556 seconds; prior committed Rust, Dart, and Julia loader plus
+  complete recurring/61x2 CLI gates remain green.
+- [x] **LOCKSTEP** — The same JSON contract remains the single fixture; this leaf synchronizes capability evidence,
+  `tools/run_ci_local.sh`, mdBook/API examples, task/live/roadmap docs, and Knowledge Map before parent admission.
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.5`
-  Status: `pending`
+  Status: `active`
   Goal: Complete Dart native trace coverage across frontend, compiler, function-shell, and staged dispatch.
   Acceptance: One caller-owned Dart emitter propagates through parse, validation, compile, function-definition,
     staged-job, and runtime entrypoints with balanced scopes, decisions, failures, sinks, default quietness, and
@@ -1435,8 +1473,8 @@ before implementation.
 | 49 | `FUTURE-PARITY-BACKLOG.1.6.3.0` | `done` | Audit found raw runtime `Result<_, String>` APIs and split typed implementation from admission. |
 | 50 | `FUTURE-PARITY-BACKLOG.1.6.3.1` | `done` | Typed/JSON errors, source/top/child attribution, five focused tests, and full runtime package pass. |
 | 51 | `FUTURE-PARITY-BACKLOG.1.6.3.2` | `done` | Full Rust/CLI gate passes; diagnostics promote to pass at census 53/1/6; `.1.6.3` closes. |
-| 52 | `FUTURE-PARITY-BACKLOG.1.6.4` | `active` | Audit, neutral contract, and Rust/Dart/Julia APIs are closed; exact four-backend admission `.5` is active. |
-| 53 | `FUTURE-PARITY-BACKLOG.1.6.5` | `pending` | Extend Dart native trace through frontend/compiler/function-shell/staged phases. |
+| 52 | `FUTURE-PARITY-BACKLOG.1.6.4` | `done` | All four native libraries consume exact portable resolution/loading semantics; parent admitted and closed. |
+| 53 | `FUTURE-PARITY-BACKLOG.1.6.5` | `active` | Extend Dart native trace through frontend/compiler/function-shell/staged phases. |
 | 54 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
 | 55 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
 | 56 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
@@ -2090,6 +2128,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.4.2` | Expanded 14/9/4 contract; five direct Rust loader tests; full Rust gate 137/105/196/5/3/5/10 plus 61x2 CLI; strict Clippy classification; capability/KM/memory/doctrine/whitespace/mdBook; 2.0 GB cleanup. | PASS. Rust native file role and CLI delegation pass; census 54/1/5; Dart `.3` active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.4.3` | Public progressive Dart loader; five direct 14/9/4 plus pipeline tests; format/analyze; full Dart gate 165 tests, 61x2 CLI, and 105 corpus; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Dart native file role and CLI delegation pass; census 55/1/4; Julia `.4` active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.4.4` | Public progressive Julia loader; 82 direct 14/9/4 plus pipeline assertions; complete 1,110-assertion package; focused process check; 61x2 CLI; 105 corpus; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Julia native file role and CLI delegation pass; recursive fallback removed; census 56/1/3; admission `.5` active. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.4.5` | Public Perl portable loader; direct 14/9/4 plus pipeline proof; canonical-gate wiring; 239-name coverage; focused suites; 61x2 CLI; Phase 0 `1..1030` in 556s; prior adjacent backend gates; capability/KM/memory/doctrine/whitespace/mdBook. | PASS. Exact four-backend native resolution admitted; `.1.6.4` closes and Dart trace `.1.6.5` is active. |
 
 ## Commit Log
 
@@ -2139,9 +2178,14 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.6.4.2` | `FUTURE-PARITY-BACKLOG.1.6.4.2 - add Rust native spec resolution` | Public progressive loader/compiler, typed errors/identity, direct fixture proof, and CLI delegation. |
 | `FUTURE-PARITY-BACKLOG.1.6.4.3` | `FUTURE-PARITY-BACKLOG.1.6.4.3 - add Dart native spec resolution` | Public progressive loader/compiler, structured exceptions/identity, direct 14/9/4 proof, and CLI delegation. |
 | `FUTURE-PARITY-BACKLOG.1.6.4.4` | `FUTURE-PARITY-BACKLOG.1.6.4.4 - add Julia native spec resolution` | Public progressive loader/compiler, typed exceptions/identity, direct 14/9/4 proof, CLI delegation, and recursive-fallback removal. |
+| `FUTURE-PARITY-BACKLOG.1.6.4.5` | `FUTURE-PARITY-BACKLOG.1.6.4.5 - admit native spec resolution parity` | Perl portable facade/direct fixture, canonical-gate wiring, exact four-backend admission, and parent closeout. |
 
 ## Changelog
 
+- `2026-07-11`: `.1.6.4.5` adds Perl's separate portable `SpecLoader` facade and direct 14/9/4 plus pipeline proof
+  without changing legacy `get_parser`/`PathSearch`. The canonical core gate passes the required new test, 239-name
+  coverage, focused suites, 61x2 CLI, and Phase 0 `1..1030` in 556 seconds. Combined with immediately prior full
+  Rust/Dart/Julia proof, exact native resolution is admitted, `.1.6.4` closes, and Dart trace `.1.6.5` is active.
 - `2026-07-11`: `.1.6.4.4` adds Julia's public progressive resolver/loader/compiler, 82-assertion direct 14/9/4
   fixture proof, exact source identity, structured typed exceptions, attributed-engine construction, and primary
   CLI delegation while removing recursive fallback. The full Julia gate passes 1,110 assertions, 61x2 CLI, and 105

@@ -23,7 +23,7 @@
       "contract": "The native library provides the documented file-oriented role with deterministic named and explicit-path spec resolution.",
       "sources": ["docs/decisions/0026-native-spec-resolution-and-loading-contract.md", "docs/linkedspec-book/src/public-api/get-and-get-parser.md", "capability_conformance/native_spec_resolution_contract.json"],
       "backends": {
-        "perl": {"status": "pass", "references": ["perl/LinkedSpec.pm", "perl/LinkedSpec/ParserFactory.pm"]},
+        "perl": {"status": "pass", "references": ["perl/LinkedSpec/SpecLoader.pm", "t/native_spec_resolution.t"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/spec_loader.rs", "rust/linkedspec-runtime/tests/spec_loader.rs"]},
         "dart": {"status": "pass", "references": ["dart/lib/src/io/spec_loader.dart", "dart/test/spec_loader_test.dart"]},
         "julia": {"status": "pass", "references": ["julia/src/io/SpecLoader.jl", "julia/test/spec_loader_test.jl"]}

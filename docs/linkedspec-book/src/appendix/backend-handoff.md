@@ -574,12 +574,12 @@ broader current census lives in `capability_conformance/manifest.json` and is ch
 perl tools/check_capability_conformance.pl
 ```
 
-The current audit contains 15 capabilities x four implemented backends. After Julia native resolution admission,
+The current audit contains 15 capabilities x four implemented backends. After exact native resolution admission,
 its 60 states are 56 pass, one partial state, and three gaps. Each non-pass state has one durable owner:
 
 | Residual mechanism | Current classification | Owner |
 | --- | --- | --- |
-| Native named/file resolution | ADR `0026` and the 14/9/4 fixture fix portable names, exact paths, ordered roots, strict UTF-8, and typed stages. Perl, Rust, Dart, and Julia expose the role; final exact admission is active. | `.1.6.4.5` |
+| Native named/file resolution | ADR `0026` and the 14/9/4 fixture fix portable names, exact paths, ordered roots, strict UTF-8, and typed stages. Perl, Rust, Dart, and Julia consume the contract directly; exact admission is closed. | closed `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, and Julia propagate a caller-owned emitter through frontend/compiler/staged/runtime phases; Dart begins at the interpreter. | `.1.6.5` |
 | Generated parser source | Perl passes; Rust proof is a curated subset; Dart and Julia have no emitter. | `FUTURE-PARITY-BACKLOG.3` |
 

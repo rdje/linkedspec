@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.4.5 — admit native spec resolution parity
+
+Added public `LinkedSpec::SpecLoader` as Perl's portable counterpart to the Rust, Dart, and Julia loaders. Blessed
+name/path requests, options, resolved/loaded/compiled results, and structured errors implement caller-ordered
+direct roots, first-regular-file selection, exact paths, strict raw-byte UTF-8 decoding, retained source identity,
+and composition through `LinkedSpec::Get`. Legacy `get_parser` and its `PathSearch` compatibility extension are
+unchanged. The facade projects the reference compiler's raw validation-before-bootstrap diagnostics into neutral
+parse/validate/compile stages without changing compiler behavior.
+
+Added `t/native_spec_resolution.t`, which directly consumes all 14 name, nine resolution/file-kind, and four text
+cases, then proves staged user-function compilation/execution, runtime name/path identity, parse versus validation
+errors, and exact missing-name JSON shape. Made the module/test required canonical CI inputs and run the test before
+the heavy suite.
+
+The complete core gate passes doctrine, syntax, the new direct fixture, 239-name coverage, focused suites, 61/61
+Perl CLI under default and POSIX environments, and Phase 0 `1..1030` in 556 seconds. Combined with adjacent full
+Rust/Dart/Julia loader and CLI gates, exact native resolution `.1.6.4` closes. Census remains 56/1/3; Dart full-
+pipeline trace `.1.6.5` is next. Generated LinkedSpec book/backend artifacts are absent. A disk audit found the
+multi-gigabyte temp growth belongs to active external `cargo-mutants`/`rustc` processes, so it was not deleted.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.4.4 — add Julia native spec resolution
 
 Added public Julia `SpecLoader.jl` with typed name/path requests, cwd and ordered roots, deterministic resolved

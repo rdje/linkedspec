@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.4.5 — separate portable policy from reference compatibility):
+  Do not retrofit explicit request kinds and roots into `get_parser`, because its implicit `PathSearch` fallback is
+  an accepted legacy extension. A separate `LinkedSpec::SpecLoader` makes the portable contract reviewable while
+  reusing `Get` for compilation. Perl's compiler validates raw source before bootstrap parsing, so the facade owns
+  a narrow public-stage projection: the “must start with a rule” guard maps to parse failure, other validation
+  guards map to validation, and later failures map to compile. This preserves the neutral API without reordering
+  mature compiler internals. Direct shared-fixture proof belongs in canonical CI, not only the schema checker.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.4.4 — remove discovery that the contract cannot explain):
   Julia's sorted recursive fallback was deterministic but still backend-only implicit discovery. Delegating both
   the public API and primary adapter to cwd/suffix/declared direct roots removes that semantic fork. The CLI keeps
