@@ -26,6 +26,14 @@ inside their thin primary process adapters. `FUTURE-PARITY-BACKLOG.1.6.4` owns i
 shared path/search fixtures; until it closes, callers on those backends should load source explicitly and pass it
 to the in-memory parser.
 
+The implementation audit found that the adapters do not yet share one fallback policy. Rust and Dart stop after
+the exact working-directory path, working-directory `<name>.spec`, and repository `specs/<name>.spec`; Julia adds
+a sorted recursive repository search. Perl checks the same three local forms but then delegates a bare miss to the
+legacy `PathSearch`, whose recursively cached directory set and hash-key selection do not define portable
+duplicate-name precedence. The backend-neutral API will therefore make additional search roots explicit and
+ordered. Perl's implicit recursive fallback remains a compatibility extension, not the semantic model that new
+variants reproduce.
+
 File-oriented helpers, per-variant CLIs, corpus runners, Wasm/web/mobile wrappers, and
 service adapters may wrap these APIs. They are secondary surfaces and must not contain
 parser, compiler, runtime, or `.spec` semantics unavailable to native library callers.

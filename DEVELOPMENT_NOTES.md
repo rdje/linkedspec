@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.4.0 — make discovery policy caller-visible):
+  A shared local-candidate prefix does not make resolvers equivalent when their fallback policy differs. Perl's
+  `PathSearch` recursively caches process/repository directories and then destroys precedence through hash-key
+  iteration; Julia has a deterministic but backend-only recursive fallback; Rust/Dart stop. Do not clone any of
+  those accidents into new native APIs. The portable contract will accept explicit ordered search roots and test
+  precedence directly, while Perl's implicit recursive search remains a clearly bounded compatibility extension.
+  File-kind and strict-decoding errors must also belong to the native load pipeline rather than a CLI adapter.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.3.2 — admit a capability only after adapter no-drift):
   Typed native proof alone did not promote the census row. The recurring gate also re-proved generated source,
   tracing, and both exact CLI environments, confirming that richer library errors do not leak into the canonical

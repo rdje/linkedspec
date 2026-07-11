@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.4.0 — split native spec resolution**
+  (DONE — source-backed fallback drift recorded; neutral contract `.1.6.4.1` active).
+
+  **Finding:** Perl `PathSearch` fallback has unordered hash-key precedence; Rust/Dart stop after three candidates;
+  Julia alone recursively scans the repository. Non-Perl resolution is still process-adapter-only.
+
+  **Split:** `.1` owns explicit ordered roots and the neutral fixture; `.2`/`.3`/`.4` own Rust/Dart/Julia native
+  APIs; `.5` owns exact direct-library plus CLI admission. No behavior changed; census remains 53/1/6.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.3.2 — admit Rust runtime diagnostics**
   (DONE — structured diagnostic parent `.1.6.3` closed; native resolution `.1.6.4` active).
 

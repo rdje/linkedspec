@@ -23,6 +23,7 @@ evidence_update_2026_07_11_descriptor_admission: "FUTURE-PARITY-BACKLOG.1.6.2.3 
 evidence_update_2026_07_11_rust_diagnostic_audit: "FUTURE-PARITY-BACKLOG.1.6.3.0 corrects the prior boundary description: Rust Engine public methods and internal runtime frames return Result<_, String>; core LinkedSpecError::Runtime is unused by linkedspec-runtime. Typed implementation .1 and admission .2 now own the gap. Census remains 52 pass, one partial, seven gap."
 evidence_update_2026_07_11_rust_diagnostic_implementation: "FUTURE-PARITY-BACKLOG.1.6.3.1 adds typed/JSON RuntimeDiagnostic and RuntimeExecutionError, optional Engine source identity, diagnostic-aware accumulator/direct methods, deepest-child attribution, and string compatibility. Five focused and the complete runtime package pass; .1.6.3.2 owns final recurring-gate admission, so census remains 52/1/7 until closeout."
 evidence_update_2026_07_11_rust_diagnostic_admission: "FUTURE-PARITY-BACKLOG.1.6.3.2 passes the complete Rust gate including five diagnostics and 61x2 CLI, promotes structured runtime diagnostics to pass, and closes .1.6.3. The census is now 53 pass, one partial, six gap."
+evidence_update_2026_07_11_native_resolution_audit: "FUTURE-PARITY-BACKLOG.1.6.4.0 finds that non-Perl named resolution remains process-adapter-only and fallback semantics drift: Rust/Dart stop after three local candidates, Julia adds sorted recursive repository discovery, and Perl PathSearch fallback selects through hash-key order. Neutral contract .1 now owns explicit ordered roots before backend implementation. Census remains 53/1/6."
 reverify: "perl tools/check_capability_conformance.pl && rg -n 'FUTURE-PARITY-BACKLOG.1.6.[0-6]' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -39,7 +40,8 @@ The audit distinguishes implementation gaps from proof gaps:
 - all four expose structured runtime diagnostic attribution; Rust's full recurring/CLI gate and final admission
   are closed;
 - the native file-oriented named-spec role exists only as Perl `get_parser(...)`; Rust/Dart/Julia process adapters
-  resolve names but their public libraries do not; `.1.6.4` owns idiomatic native equivalents;
+  resolve names but their public libraries do not; their fallback behavior also differs, so `.1.6.4.1` owns an
+  explicit ordered-root contract before `.1.6.4` adds idiomatic native equivalents;
 - Perl/Rust/Julia propagate a native emitter through frontend/compiler/function-shell/staged/runtime phases, while
   Dart native trace begins at the interpreter; `.1.6.5` owns the missing pipeline coverage;
 - generated source remains top-level `.3`: Perl passes, Rust has all structural families but only a curated corpus

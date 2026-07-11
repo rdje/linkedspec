@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-11` (structured Rust diagnostics `.1.6.3` closed; native named/file resolution `.1.6.4` active).
+- Last updated: `2026-07-11` (native named/file resolution `.1.6.4` audited and split; neutral contract `.1.6.4.1` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -1076,9 +1076,73 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.1.6.4`
   Status: `active`
   Goal: Add idiomatic native named/file spec resolution to Rust, Dart, and Julia.
+  Children: `.1.6.4.0`, `.1.6.4.1`, `.1.6.4.2`, `.1.6.4.3`, `.1.6.4.4`, `.1.6.4.5`
   Acceptance: Each non-Perl library exposes the book's file-oriented role with deterministic explicit-path and
     named-spec resolution/search precedence, strict text loading, parse/compile composition, and structured errors;
     shared path fixtures prove equivalent behavior without requiring the primary CLI or a subprocess.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.4.0`
+  Status: `done`
+  Goal: Audit the real four-backend resolution mechanisms and split implementation before behavior code.
+  Acceptance: Source/tests establish validation, candidate precedence, fallback discovery, file-kind checks,
+    strict-decoding ownership, parse/compile composition, and error seams; any process/native or cross-variant
+    drift is durable; bounded neutral-contract, backend, and admission owners exist before implementation.
+  Verification: Perl `LinkedSpec::Resolver` checks exact cwd, cwd `<name>.spec`, and module-root `specs/` before
+    delegating a bare miss to `PathSearch`; that legacy fallback recursively caches cwd plus the repository tree,
+    deduplicates through a hash, and selects the first hash-key match, so duplicate-name precedence is not
+    deterministic or portable. Rust and Dart primary adapters stop after the first three candidates; Julia alone
+    adds a sorted/pruned recursive repository fallback. All three non-Perl mechanisms are process-adapter-only.
+    Rust/Julia require regular files and all three adapters decode strictly as UTF-8; Dart resolution currently
+    tests existence before its later file read. `.1` owns one explicit ordered-root contract and fixture; `.2`,
+    `.3`, and `.4` own Rust, Dart, and Julia native APIs; `.5` owns exact four-backend admission and CLI no-drift.
+    No parser/compiler/runtime behavior changed.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.4.0 - split native spec resolution`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.4.1`
+  Status: `pending`
+  Goal: Define the executable backend-neutral named/file resolution contract.
+  Acceptance: A checked-in schema/fixture defines name validation, explicit-path handling, deterministic candidate
+    order over explicit ordered search roots, regular-file requirements, strict preserved UTF-8, source identity,
+    parse/compile phase order, and structured failure stages; Perl's implicit recursive `PathSearch` remains a
+    compatibility extension outside this portable API rather than silently defining duplicate-name precedence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.4.2`
+  Status: `pending`
+  Goal: Add Rust native named/file resolution and compilation.
+  Acceptance: Public typed Rust APIs consume the neutral fixture without CLI/subprocess ownership, compose strict
+    loading through parse/validate/compile, retain requested/resolved source identity, return structured errors,
+    and let the primary CLI delegate without changing its exact contract.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.4.3`
+  Status: `pending`
+  Goal: Add Dart native named/file resolution and compilation.
+  Acceptance: Public typed Dart APIs consume the neutral fixture without CLI/subprocess ownership, require regular
+    files, compose strict loading through parse/compile, retain source identity, return structured exceptions, and
+    let the primary CLI delegate without changing its exact contract.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.4.4`
+  Status: `pending`
+  Goal: Add Julia native named/file resolution and compilation.
+  Acceptance: Public Julia APIs consume the neutral fixture without CLI/subprocess ownership, replace the CLI-only
+    recursive fallback with the portable ordered-root policy, compose strict loading through staged parse/compile,
+    retain source identity, return structured exceptions, and preserve exact primary CLI behavior.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.4.5`
+  Status: `pending`
+  Goal: Admit and close exact native named/file resolution parity.
+  Acceptance: All four variants pass the shared direct-library fixture and their complete recurring/CLI gates;
+    public docs and the capability census promote the role only after adapter no-drift; `.1.6.4` closes and the
+    frontier advances to Dart full-pipeline trace `.1.6.5`.
   Verification: `pending`
   Commit: `pending`
 

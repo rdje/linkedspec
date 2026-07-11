@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.4.0 — split native spec resolution
+
+Audited the actual named/file resolution seams before backend implementation. Perl checks exact cwd, cwd suffix,
+and module-root `specs/` candidates, then sends a bare miss through legacy `PathSearch`; that fallback recursively
+caches cwd plus the repository tree, hash-deduplicates directories, and takes the first hash-key match. Rust and
+Dart primary adapters stop after the common three candidates, while Julia alone adds a sorted/pruned recursive
+repository fallback. All three non-Perl implementations remain process-adapter-only; Dart also tests existence at
+resolution while Rust/Julia require a regular file.
+
+Split `.1.6.4` into an executable neutral contract with explicit ordered roots, then Rust, Dart, and Julia native
+API leaves, followed by exact four-backend/CLI admission. Added a durable Knowledge Map fact and aligned the
+roadmap, task index, README, mdBook, census evidence, and live docs. No parser/compiler/runtime behavior changed;
+the census remains 53 pass / one partial / six gap.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.3.2 — admit Rust runtime diagnostics
 
 Reran the complete Rust recurring gate over the committed typed diagnostic implementation. Formatting; 137 unit,
