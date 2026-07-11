@@ -30,6 +30,7 @@ evidence_update_2026_07_11_dart_native_resolution: "FUTURE-PARITY-BACKLOG.1.6.4.
 evidence_update_2026_07_11_julia_native_resolution: "FUTURE-PARITY-BACKLOG.1.6.4.4 adds public Julia name/path resolution, strict loading, staged parse/validate/compile composition, source identity, typed structured exceptions, direct 14/9/4 fixture proof, CLI delegation, and recursive-fallback removal. Full Julia proof passes 1,110 assertions, 61x2 CLI, and 105 corpus fixtures; Julia promotes to pass and census is 56/1/3."
 evidence_update_2026_07_11_native_resolution_admission: "FUTURE-PARITY-BACKLOG.1.6.4.5 adds a separate public Perl portable facade and direct 14/9/4 fixture/pipeline test to canonical CI without changing legacy PathSearch. Core CI passes 61x2 CLI and Phase 0 1..1030; combined adjacent backend proof admits all four and closes .1.6.4. Census remains 56/1/3."
 evidence_update_2026_07_11_dart_full_pipeline_trace: "FUTURE-PARITY-BACKLOG.1.6.5.1-.3 propagate one caller-owned Dart emitter through frontend/compiler, function shell/staged dispatch, public native loading, and runtime. Direct routed/quiet/failure identity plus 175 tests, 61x2 CLI, 105 corpus, and core CI pass; Dart promotes and census is 57/1/2."
+evidence_update_2026_07_11_non_codegen_closeout: "FUTURE-PARITY-BACKLOG.1.6.6 directly enumerates the only non-pass states: generated parser source is Rust partial and Dart/Julia gap, all owned by .3. Every non-codegen state passes; .1.6 closes without changing the 57/1/2 census."
 reverify: "perl tools/check_capability_conformance.pl && rg -n 'FUTURE-PARITY-BACKLOG.1.6.[0-6]' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -52,9 +53,10 @@ The audit distinguishes implementation gaps from proof gaps:
 - generated source remains top-level `.3`: Perl passes, Rust has all structural families but only a curated corpus
   proof, and Dart/Julia have no emitter.
 
-`.1.6.6` closes non-codegen capability parity only after the matrix has no unowned partial/gap state. Deprecated
-Perl plugins and not-yet-current general parse jobs, semantic introspection/MCP, generic final-codeblock behavior,
-and Lua are explicit exclusions/future owners, not omitted rows.
+`.1.6.6` closes non-codegen capability parity after proving the matrix has no unowned partial/gap state. Active
+`.3` owns every remaining generated-source state. Deprecated Perl plugins and not-yet-current general parse jobs,
+semantic introspection/MCP, generic final-codeblock behavior, and Lua are explicit exclusions/future owners, not
+omitted rows.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[native-in-memory-backend-contract]],
 [[perl-native-spec-resolution]], [[dart-native-spec-resolution]], [[julia-native-spec-resolution]],

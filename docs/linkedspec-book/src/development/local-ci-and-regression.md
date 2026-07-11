@@ -92,6 +92,8 @@ perl tools/check_capability_conformance.pl
 `capability_conformance/manifest.json` currently contains 15 capabilities and 60 backend states: 57 pass, one
 partial-proof, and two gaps. Every partial/gap state names a task-tree owner, every evidence path must exist, and
 legacy/future exclusions are explicit. The canonical local gate runs this check before focused suites.
+`FUTURE-PARITY-BACKLOG.1.6.6` confirms all three non-pass states belong only to generated parser source and active
+`.3`; every non-codegen capability passes across the four implemented variants.
 
 The file-oriented native API has a separate executable resolution/loading contract:
 

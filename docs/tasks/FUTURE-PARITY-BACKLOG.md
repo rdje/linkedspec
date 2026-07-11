@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-11` (Dart full-pipeline trace `.1.6.5` closed; non-codegen closeout `.1.6.6` active).
+- Last updated: `2026-07-11` (non-codegen capability `.1.6` closed; generated-source `.3` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -552,14 +552,19 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.5.4.3 - close exact primary CLI parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6`
-  Status: `active`
+  Status: `done`
   Goal: Prove complete user-observable feature/behavior parity beyond the 99-fixture interpreter corpus.
   Children: `.1.6.0`, `.1.6.1`, `.1.6.2`, `.1.6.3`, `.1.6.4`, `.1.6.5`, `.1.6.6`
   Acceptance: Build a machine-readable capability matrix from the mdBook, exported public APIs, Phase 0, and the
     language-neutral corpus; classify Perl/Rust/Dart/Julia gaps before implementation; split every gap into an
     owned parity leaf; do not call a backend full-parity while any user-visible capability differs.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `.0`–`.6` establish a validated 15x4 census, exhaustive 239-name/105-fixture current-language proof,
+    exact outward descriptors, four-backend structured diagnostics, exact native named/file resolution, complete
+    Dart full-pipeline trace, and final owner/no-drift closeout. The final matrix is 57 pass, one partial, two gaps;
+    its only non-pass capability is generated parser source (Rust partial; Dart/Julia gaps), all owned by `.3`.
+    Canonical core CI immediately prior passes 61x2 CLI and Phase 0 `1..1030`; recent complete backend gates remain
+    adjacent and green. Non-codegen capability parity is closed without claiming complete generated-source parity.
+  Commit: closed by `FUTURE-PARITY-BACKLOG.1.6.6 - close non-codegen capability parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.0`
   Status: `done`
@@ -1365,13 +1370,34 @@ before implementation.
   together to 57/1/2; `.1.6.5` closes and non-codegen closeout `.1.6.6` is active.
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.6`
-  Status: `active`
+  Status: `done`
   Goal: Close the non-codegen capability census and hand generated-source residuals to `.3` without overclaiming.
   Acceptance: The validated matrix contains no unowned gap/partial state; all `.1.6` implementation/proof leaves
     pass recurring checks; task/roadmap/live docs, mdBook, Knowledge Map, public APIs, and exact CLI agree; parent
     `.1.6` closes while complete backend parity remains blocked only by generated-source `.3` and later Lua.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: A direct manifest projection enumerates exactly three non-pass states: Rust `partial`, Dart `gap`,
+    and Julia `gap`, all under `codegen.generated_parser_source` and all owned by `FUTURE-PARITY-BACKLOG.3`. The
+    strict checker passes 57/1/2, proving no missing evidence path, invalid state, or unowned residual. Immediately
+    prior `.1.6.5.3` passes 175 Dart tests, 61x2 Dart CLI, 105 corpus, canonical 61x2 Perl CLI, and Phase 0 `1..1030`
+    in 514 seconds; adjacent Rust/Julia/full-matrix proofs remain the durable other legs. Public/task/live/roadmap/
+    Knowledge Map surfaces now state that all non-codegen rows pass and complete parity is blocked only by `.3` plus
+    the later Lua implementation. No parser/compiler/runtime behavior or manifest status changed in this closeout.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.6 - close non-codegen capability parity`
+
+## `FUTURE-PARITY-BACKLOG.1.6.6` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Direct machine-readable enumeration proves the 57/1/2 census contains exactly three
+  non-pass states rather than treating a green interpreter/CLI subset as complete backend parity.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Every residual is confined to `codegen.generated_parser_source`: Rust proof is
+  curated (`partial`), while Dart and Julia emit no parser source (`gap`); top-level `.3` owns all three.
+- [x] **FIX** — Closed the non-codegen `.1.6` parent, activated `.3`, and synchronized task/roadmap/live/public/KM
+  wording without changing capability data or backend behavior.
+- [x] **ADDRESSED (verified)** — `perl tools/check_capability_conformance.pl` passes at 57/1/2; direct projection
+  prints only the three generated-source states with the same `.3` owner.
+- [x] **NO REGRESSION** — Immediately prior complete Dart and canonical core gates pass, including 175 tests,
+  61x2 Dart, 105 corpus, 61x2 Perl, and Phase 0 `1..1030`; docs/KM/governance/whitespace/mdBook pass here.
+- [x] **LOCKSTEP** — All codebase/book/continuity status surfaces distinguish closed non-codegen capability parity
+  from still-open generated-source parity and later Lua; no complete-parity claim is made early.
 
 - ID: `FUTURE-PARITY-BACKLOG.2`
   Status: `pending`
@@ -1383,7 +1409,7 @@ before implementation.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.3`
-  Status: `pending`
+  Status: `active`
   Goal: Close generated-source capability parity beyond the current interpreter-first correctness gates.
   Acceptance: Split Rust full-manifest breadth and separate Dart/Julia source-emitter proofs before code. Each
     non-Rust emitter lane must own a minimal emitter scaffold plus compile/run harness, typed generated-family plan,
@@ -1613,7 +1639,8 @@ before implementation.
 | 54 | `FUTURE-PARITY-BACKLOG.1.6.5.1` | `done` | Optional emitter, balanced scopes/failures, exact identity, 168 tests, 61x2 CLI, and 105 corpus pass. |
 | 55 | `FUTURE-PARITY-BACKLOG.1.6.5.2` | `done` | Function parser/shell and staged queue/job/phase/stitch trace pass 172 tests, 61x2 CLI, and 105 corpus. |
 | 56 | `FUTURE-PARITY-BACKLOG.1.6.5.3` | `done` | Native IO-through-runtime routed proof passes; Dart trace promotes to pass at census 57/1/2; parent closes. |
-| 57 | `FUTURE-PARITY-BACKLOG.1.6.6` | `active` | Close non-codegen capability parity and hand only generated-source residuals to `.3`. |
+| 57 | `FUTURE-PARITY-BACKLOG.1.6.6` | `done` | Exactly three generated-source states remain at 57/1/2; non-codegen `.1.6` closes and `.3` activates. |
+| 58 | `FUTURE-PARITY-BACKLOG.3` | `active` | Split Rust breadth and Dart/Julia generated-source implementation before emitter code. |
 | 55 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
 | 55 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
 | 56 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
@@ -2272,6 +2299,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.5.1` | Three focused identity/order/failure tests; six affected suites/38 tests; format; strict analysis; complete Dart gate with 168 tests, 61x2 CLI, and 105 corpus; docs/KM/governance/whitespace/mdBook/cleanup. | PASS. Core frontend/compiler trace lands without behavior drift; `.2` active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.5.2` | Four focused full-topic/balance/identity/quiet/failure tests; strict analysis; complete Dart gate with 172 tests, 61x2 CLI, and 105 corpus; docs/KM/governance/whitespace/mdBook/cleanup. | PASS. Function/staged trace lands without diagnostic drift; admission `.3` active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.5.3` | Three direct routed/quiet/failure native tests; 22 affected tests; format; strict analysis; complete Dart gate with 175 tests, 61x2 CLI, and 105 corpus; canonical core 61x2 CLI plus Phase 0 `1..1030` in 514s; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Dart full-pipeline trace promotes to pass at 57/1/2; parent closes; `.1.6.6` active. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.6` | Direct non-pass projection; 57/1/2 checker; immediately prior complete Dart/core gates; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Only Rust/Dart/Julia generated-source states remain, all owned by `.3`; non-codegen `.1.6` closes and `.3` activates. |
 
 ## Commit Log
 
@@ -2326,6 +2354,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.6.5.1` | `FUTURE-PARITY-BACKLOG.1.6.5.1 - trace Dart frontend and compiler` | Optional caller emitter, balanced parse/validate/compile/registry events, failures, identity, and full Dart proof. |
 | `FUTURE-PARITY-BACKLOG.1.6.5.2` | `FUTURE-PARITY-BACKLOG.1.6.5.2 - trace Dart function staging` | Caller emitter through parser shell/runtime, projection, staged queue/jobs/phases/stitching, failures, and full proof. |
 | `FUTURE-PARITY-BACKLOG.1.6.5.3` | `FUTURE-PARITY-BACKLOG.1.6.5.3 - admit Dart full-pipeline trace` | Native IO-to-runtime routed/quiet/failure identity, full gates, capability promotion, and parent closeout. |
+| `FUTURE-PARITY-BACKLOG.1.6.6` | `FUTURE-PARITY-BACKLOG.1.6.6 - close non-codegen capability parity` | Exact residual projection, generated-source-only handoff, parent closeout, no behavior change. |
 
 ## Changelog
 
@@ -2341,6 +2370,9 @@ Read-only evidence recorded on 2026-07-10:
 - `2026-07-11`: `.1.6.5.3` composes one routed caller emitter from native loading through every compiled phase and
   final runtime without retaining it in results. Three direct tests plus 22 affected and full 175-test/61x2/105
   gates pass; Dart trace promotes to pass at 57/1/2, `.1.6.5` closes, and `.1.6.6` is active.
+- `2026-07-11`: `.1.6.6` projects exactly three non-pass states, all generated source and all owned by `.3`. The
+  strict 57/1/2 checker and adjacent full gates pass; no behavior/status value changes. Non-codegen `.1.6` closes
+  without overclaiming complete parity, and generated-source `.3` becomes active.
 - `2026-07-11`: `.1.6.4.5` adds Perl's separate portable `SpecLoader` facade and direct 14/9/4 plus pipeline proof
   without changing legacy `get_parser`/`PathSearch`. The canonical core gate passes the required new test, 239-name
   coverage, focused suites, 61x2 CLI, and Phase 0 `1..1030` in 556 seconds. Combined with immediately prior full

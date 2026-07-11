@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.6 — close non-codegen capability parity
+
+Projected every non-pass state from the validated 15x4 capability manifest. Exactly three remain, all under
+`codegen.generated_parser_source`: Rust is partial because manifest-backed generated proof is curated, while Dart
+and Julia have no source emitter. All three are already owned by top-level `.3`; no non-codegen or unowned residual
+remains.
+
+Closed `.1.6`, activated `.3`, and synchronized task, roadmap, live, public-book, and Knowledge Map status without
+changing code or census values. The checker remains green at 57/1/2. Immediately prior full Dart and canonical core
+gates supply the no-drift proof, including 175 tests, 61x2 Dart, 105 corpus, 61x2 Perl, and Phase 0 `1..1030`.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.5.3 — admit Dart full-pipeline trace
 
 Added optional `trace:` to Dart `loadAndCompileSpec(...)`, with a balanced IO scope and loaded-source decision that

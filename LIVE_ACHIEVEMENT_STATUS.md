@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.6 — close non-codegen capability parity**
+  (DONE — `.1.6` closed; generated-source `.3` active).
+
+  **Finding:** The only non-pass states at 57/1/2 are Rust partial and Dart/Julia gaps for generated parser source;
+  all three are owned by `.3`. Every non-codegen state passes.
+
+  **Proof:** Strict census checker and direct projection pass; adjacent full Dart/core gates remain green. No code
+  or capability value changed. Public/task/live/roadmap/KM status now avoids a premature complete-parity claim.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.5.3 — admit Dart full-pipeline trace**
   (DONE — Dart trace parent `.1.6.5` closed; non-codegen closeout `.1.6.6` active).
 

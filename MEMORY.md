@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.5.3` — admitted Dart full-pipeline native trace.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.5.2` — traced Dart function extraction and staged dispatch.
-- recent_context: One caller emitter now spans Dart IO, frontend/compiler, function parser/runtime/projection,
-  staged jobs/stitching, and final runtime without retained mutable state. Routed/quiet/failure identity and full
-  175-test/61x2/105 plus core 61x2/Phase 0 `1..1030` gates pass. Census 57/1/2; `.1.6.5` closed; `.1.6.6` active.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.6` — closed all non-codegen capability parity.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.5.3` — admitted Dart full-pipeline native trace.
+- recent_context: Census remains 57/1/2. Its only non-pass states are generated parser source: Rust partial and
+  Dart/Julia gaps, all owned by `.3`. All language/runtime/API/CLI/non-codegen rows pass across four implemented
+  variants. `.1.6` is closed; generated-source `.3` is active; complete backend parity is not yet claimed.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.5.3 - admit Dart full-pipeline trace`; previous committed HEAD is
-  `dd07ded6 FUTURE-PARITY-BACKLOG.1.6.5.2 - trace Dart function staging`.
+  `FUTURE-PARITY-BACKLOG.1.6.6 - close non-codegen capability parity`; previous committed HEAD is
+  `8db00d6d FUTURE-PARITY-BACKLOG.1.6.5.3 - admit Dart full-pipeline trace`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.6` non-codegen capability closeout is active.
-- next_action: audit the 57/1/2 matrix for owner/evidence completeness, prove only generated-source residuals remain,
-  run recurring no-drift gates, close `.1.6`, and activate generated-source parity `.3` without overclaiming.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.3` generated-source capability parity is active.
+- next_action: audit current Perl/Rust emitter and generated execution evidence, then split Rust full-manifest proof,
+  Dart emitter/compile-run, Julia emitter/compile-run, shared contract, and final admission before behavior code.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

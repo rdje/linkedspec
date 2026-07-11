@@ -587,6 +587,10 @@ Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic int
 codeblock equivalence, and the not-yet-implemented Lua backend are explicit exclusions/future owners rather than
 silent gaps. No backend is called complete while a current matrix state remains partial or gap.
 
+`FUTURE-PARITY-BACKLOG.1.6.6` closes the non-codegen census without claiming complete backend parity. At 57/1/2,
+the only non-pass capability is generated parser source: Rust has structural-family execution with curated rather
+than full-manifest proof, and Dart/Julia have no source emitter. Active `.3` owns all three states.
+
 Outward compiled descriptors are closed: all four variants expose the exact `spec` / `functions` /
 `dependency_regex_map` / `meta` projection, aligned model identities, and the canonical outer function record
 defined by `capability_conformance/outward_descriptor_contract.json`.

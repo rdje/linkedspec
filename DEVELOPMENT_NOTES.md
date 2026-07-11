@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.6 — close a capability class, not complete parity):
+  A 57/1/2 census can close non-codegen work only after direct enumeration proves every non-pass state belongs to
+  generated source and carries the same durable owner. Keep the distinction explicit: current interpreter/runtime/
+  API/CLI parity across four implemented variants is complete, but generated source remains user-observable and
+  blocks the complete-backend claim. Activate `.3` without mutating status values in a documentation-only closeout;
+  its first action must split Rust proof breadth from Dart/Julia emitter implementation before code.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.5.3 — caller owns emitter lifecycle across compilation and runtime):
   The native loader should accept and forward the emitter, but the compiled result should not retain it. Explicitly
   passing the same object to final engine execution preserves one ordering/sink/indent stream without coupling an
