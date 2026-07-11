@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.3.5 — close generated-source parity**
+  (DONE — exact four-backend contract is 60/0/0; generated-source `.3` closes; Lua plan `.1.3` next).
+
+  **Signoff:** Focused Perl 69, Rust 5/5, Dart 6/6, and Julia 58/58 pass beside their adjacent complete backend
+  admission gates. Contract/capability, governance, mdBook, and whitespace checks pass. No behavior changed.
+
+  **Cleanup/handoff:** Removed more than 1.23 GB of reproducible Rust/Dart/Julia caches. All four implemented
+  variants pass generated-source v1. Lua planning now inherits the complete parity and exact CLI contract.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.4.3 — admit generated Julia source**
   (DONE — exact accepted-subset proof promotes Julia; census 60/0/0; final `.3.5` next).
 

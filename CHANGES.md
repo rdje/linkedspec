@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.5 — close generated-source parity
+
+Closed the generated-source lane without behavior changes. Executable contract and capability checkers agree that
+all 15 capabilities across four implemented backends are pass: 60/0/0. Re-ran the focused generated-source proofs:
+Perl passes 69 assertions, Rust 5/5, Dart 6/6, and Julia 58/58. These sit beside the immediately adjacent complete
+admission gates: Perl Phase 0 `1..1030` plus 61x2 CLI, strict Rust all-105 generated breadth and complete runtime/CLI
+proof, Dart 181/61x2/105, and Julia 1,168/61x2/105.
+
+Aligned task, roadmap, mdBook, Knowledge Map, capability, memory, and live status to the closed boundary. Generated
+source contract v1 remains semantic/variant-agnostic while host source syntax and bytes stay native. Activated Lua
+parity planning only after closeout, so Lua inherits the complete in-memory API, exact CLI, full capability,
+staged/runtime/corpus, and generated-source obligations.
+
+Under the disk-pressure directive, removed 769 MB of Rust debug dependencies, 400 MB of incremental state, 30 MB
+of Dart tool state, and 35 MB of Julia depot state. All are reproducible generated artifacts. Governance,
+capability/contract, whitespace, mdBook, and cleanup checks pass.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.4.3 — admit generated Julia source
 
 Added a recurring Julia admission test that reads the exact eight-case accepted subset from executable

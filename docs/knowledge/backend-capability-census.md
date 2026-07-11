@@ -59,7 +59,7 @@ The audit distinguishes implementation gaps from proof gaps:
   105/105, while Dart and Julia each prove the exact accepted 8/105 subset plus all ten families.
 
 `.1.6.6` closes non-codegen capability parity after proving the matrix has no unowned partial/gap state. Active
-`.3.5` owns exact final generated-source closeout. Deprecated Perl plugins and not-yet-current general parse jobs,
+Generated-source `.3.5` is closed at 60/0/0. Deprecated Perl plugins and not-yet-current general parse jobs,
 semantic introspection/MCP, generic final-codeblock behavior, and Lua are explicit exclusions/future owners, not
 omitted rows.
 

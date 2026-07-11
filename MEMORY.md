@@ -18,19 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.4.3` — admitted generated Julia source and closed `.3.4`.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.3.4.2` — added exact Julia generated family execution.
-- recent_context: Generated-source census is 60/0/0; Perl/Rust/Dart/Julia pass. Julia consumes the contract's exact
-  eight-case subset, proves interpreter expected values before emission, then loads eight namespaced modules in one
-  isolated host with exact values/metadata/plans/trace identity. Focused 13+27+18 and 1,168/61x2/105 pass.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.5` — closed exact four-backend generated-source parity.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.3.4.3` — admitted generated Julia source and closed `.3.4`.
+- recent_context: Generated-source `.3` is closed at census 60/0/0. Focused Perl 69, Rust 5/5, Dart 6/6, and
+  Julia 58/58 pass beside adjacent complete gates. Over 1.23 GB reproducible caches were removed. Lua planning
+  `.1.3` is active and inherits complete native API, exact CLI, capability, runtime/corpus, and codegen obligations.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.3.4.3 - admit generated Julia source`; previous committed HEAD is
-  `0081047c FUTURE-PARITY-BACKLOG.3.4.2 - add Julia generated family execution`.
+  `FUTURE-PARITY-BACKLOG.3.5 - close generated-source parity`; previous committed HEAD is
+  `5214109b FUTURE-PARITY-BACKLOG.3.4.3 - admit generated Julia source`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.3.5`; exact four-backend generated-source closeout is active.
-- next_action: Reverify contract/capability 60/0/0, focused backend proofs and adjacent complete gates, reconcile
-  all public/KM/task status without behavior changes, close `.3`, then activate Lua planning `.1.3` after commit.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.1.3`; Lua backend parity planning is active.
+- next_action: Knowledge-Map-first audit installed Lua toolchain/package/testing choices and split a dedicated
+  Lua backend parity task tree covering native in-memory API, exact primary CLI, frontend/ActionIR/compiler/runtime,
+  staged functions, diagnostics/trace, 105-case corpus, generated-source v1, docs, and local gates before code.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

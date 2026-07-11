@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.5 — close capabilities from executable evidence, then activate successors):
+  Final admission should not invent another implementation layer. Recheck the executable 60/0/0 contract/census,
+  every backend's focused proof, and the immediately adjacent complete gates; then align public/durable status in
+  one no-behavior commit. Only after `.3` is closed may Lua planning activate, inheriting the complete contract
+  instead of an obsolete interpreter-only milestone. Expensive cross-language proof regenerates large caches, so
+  record sizes and delete only known reproducible target/depot/tool directories after results are consumed.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.4.3 — generated admission must remain interpreter-first and contract-owned):
   Read the eight names from contract v1 instead of duplicating a Julia list, retain exact manifest membership, and
   compare checked-in expected values through the ordinary/staged native frontend before emitting anything. Julia's

@@ -100,7 +100,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.2 - scope Julia backend parity plan`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Lua backend parity track - split/scaffold after Julia reaches its scoped parity milestone.
   Acceptance: Create or expand a dedicated Lua backend implementation plan with the same universal
     `.spec`, helper/action AST, runtime, staged parsing, diagnostics, and corpus parity obligations; define an
@@ -1409,7 +1409,7 @@ before implementation.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.3`
-  Status: `active`
+  Status: `done`
   Goal: Close generated-source capability parity beyond the current interpreter-first correctness gates.
   Children: `.3.0`, `.3.1`, `.3.2`, `.3.3`, `.3.4`, `.3.5`
   Acceptance: Split Rust full-manifest breadth and separate Dart/Julia source-emitter proofs before code. Each
@@ -1417,8 +1417,11 @@ before implementation.
     direct structural-family execution, and curated manifest-backed corpus subset. Rust exports source emission as
     a public runtime-crate capability, so ADR `0023` makes equivalent capability mandatory before Dart/Julia/Lua can
     claim complete user-visible parity; interpreter parity remains the primary correctness gate.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Contract-first Perl repair/admission, strict Rust 105/105 breadth, and
+    deterministic Dart/Julia scaffold, exact ten-family direct execution, and accepted 8/105 admission all pass.
+    Contract/capability census is 60/0/0 and final `.3.5` reverified every focused backend proof plus adjacent
+    complete backend gates, governance, public docs, and cleanup. Lua `.1.3` activates only after this closeout.
+  Commit: `FUTURE-PARITY-BACKLOG.3.5 - close generated-source parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.3.0`
   Status: `done`
@@ -1884,14 +1887,19 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.3.4.3 - admit generated Julia source`
 
 - ID: `FUTURE-PARITY-BACKLOG.3.5`
-  Status: `active`
+  Status: `done`
   Goal: Admit exact generated-source parity across all four implemented backends.
   Acceptance: Perl, Rust, Dart, and Julia satisfy the same versioned neutral contract; Rust proves all 105 manifest
     fixtures and Dart/Julia prove the accepted manifest subset plus all structural families; full backend gates,
     capability checker, docs/book/KM/roadmap, and artifact cleanup pass; promote the census to 60/0/0, close `.3`,
     and only then activate Lua `.1.3`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Executable contract/capability checkers report 60/0/0. Focused generated-
+    source proof passes Perl 69 assertions, Rust 5/5, Dart 6/6, and Julia 58/58. The immediately adjacent complete
+    gates pass Perl Phase 0 `1..1030` plus 61x2 CLI, strict recurring Rust 105/105 generated breadth plus complete
+    runtime/CLI suites, Dart 181/61x2/105, and Julia 1,168/61x2/105. Roadmaps, mdBook, KM, task/live docs, memory,
+    doctrines, whitespace, and artifact cleanup pass. Removed 1.17 GB Rust debug deps/incremental plus Dart/Julia
+    caches. No behavior code changed. `.3` closes and Lua parity plan `.1.3` becomes active after this commit.
+  Commit: `FUTURE-PARITY-BACKLOG.3.5 - close generated-source parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.4`
   Status: `pending`
@@ -2135,8 +2143,8 @@ before implementation.
 | 76 | `FUTURE-PARITY-BACKLOG.3.4.1` | `done` | Deterministic v1 emission and isolated 18-assertion include/run/failure proof pass. |
 | 77 | `FUTURE-PARITY-BACKLOG.3.4.2` | `done` | Exact ten-family direct plan, four rejections, trace, and isolated matrix pass. |
 | 78 | `FUTURE-PARITY-BACKLOG.3.4.3` | `done` | Exact 8/105 interpreter-first host proof promotes Julia at census 60/0/0. |
-| 79 | `FUTURE-PARITY-BACKLOG.3.5` | `active` | Reverify exact four-backend admission and close generated-source parity. |
-| 80 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 79 | `FUTURE-PARITY-BACKLOG.3.5` | `done` | Four focused/complete backend proofs and 60/0/0 close generated-source parity. |
+| 80 | `FUTURE-PARITY-BACKLOG.1.3` | `active` | Scope Lua against the complete capability and identical CLI gates. |
 | 65 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
 | 66 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
 | 67 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
@@ -2810,6 +2818,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.4.1` | Public compatibility/v1 Julia emitters; canonical effective-AST serialization; strict-UTF-8/ASCII-hex payload and identity; typed metadata/errors; valid/corrupt caller-owned isolated host proof; focused 18/18; package 1,128; complete Julia gate; docs/KM/governance/mdBook/cleanup. | PASS. Julia scaffold is green without census promotion; exact family-plan/direct execution `.3.4.2` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.4.2` | Exact ten typed families/ordered plan/four rejections; family-authoritative per-rule direct dispatch; portable enter/decision/exit trace; one isolated all-family module; focused 27+18; package 1,155; complete Julia gate; docs/KM/governance/mdBook/cleanup. | PASS. Julia implementation roles are green without promotion; exact contract-sourced manifest admission `.3.4.3` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.4.3` | Exact contract-sourced eight-case interpreter-first subset; eight namespaces in one offline host; exact values/metadata/plans/trace identity; checker path/order/no-skip/cleanup; focused 13+27+18; package 1,168 + 61x2 + 105; capability 60/0/0; docs/KM/governance/mdBook/cleanup. | PASS. Julia promotes gap→pass; `.3.4` closes and exact four-backend admission `.3.5` is active. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.5` | Contract/capability 60/0/0; focused Perl 69, Rust 5/5, Dart 6/6, Julia 58/58; adjacent complete backend gates; docs/KM/governance/mdBook; 1.23+ GB cache cleanup. | PASS. Exact four-backend generated-source parity closes without behavior change; `.3` is done and Lua plan `.1.3` activates. |
 
 ## Commit Log
 
@@ -2882,6 +2891,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.3.4.1` | `FUTURE-PARITY-BACKLOG.3.4.1 - add Julia generated-source scaffold` | Deterministic v1 emitter, Unicode-safe hex payload, typed errors, isolated include/run, and `.3.4.2` handoff. |
 | `FUTURE-PARITY-BACKLOG.3.4.2` | `FUTURE-PARITY-BACKLOG.3.4.2 - add Julia generated family execution` | Exact ten-family routing, four rejections, portable trace, isolated matrix, and `.3.4.3` handoff. |
 | `FUTURE-PARITY-BACKLOG.3.4.3` | `FUTURE-PARITY-BACKLOG.3.4.3 - admit generated Julia source` | Exact accepted-subset admission, complete Julia gate, 60/0/0 promotion, and `.3.5` handoff. |
+| `FUTURE-PARITY-BACKLOG.3.5` | `FUTURE-PARITY-BACKLOG.3.5 - close generated-source parity` | Exact 60/0/0 four-backend signoff, `.3` closeout, and Lua activation. |
 
 ## Changelog
 
