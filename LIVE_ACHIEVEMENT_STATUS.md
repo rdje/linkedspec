@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.3.1 — add Rust runtime diagnostics**
+  (DONE — typed native implementation closed; final admission `.1.6.3.2` active).
+
+  **Implementation:** Serializable neutral diagnostic/error records, optional engine source identity, typed
+  accumulator/direct-value methods, deepest-rule capture before unwind, and unchanged string adapters.
+
+  **Proof:** Five focused tests and the full runtime package pass (137 unit, 105 oracle, 196 integration, five
+  diagnostic, three generated-source, ten trace). Strict Clippy has no new findings; 14 pre-existing failures remain
+  in untouched files.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.3.0 — split Rust runtime diagnostics**
   (DONE — actual failure boundary established; typed implementation `.1.6.3.1` active).
 

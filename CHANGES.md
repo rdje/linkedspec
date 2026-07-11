@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.3.1 — add Rust runtime diagnostics
+
+Added exported serializable `RuntimeDiagnostic` and compact `RuntimeExecutionError` records plus
+`Engine::execute_with_diagnostics(...)` / `execute_value_with_diagnostics(...)`. Optional
+`with_spec_name(...)` / `with_spec_path(...)` builders attach source identity. `RuntimeContext` retains the first
+failure, so the deepest child rule is recorded in `execute_rule(...)` before its local and recursion frames unwind;
+missing entry and missing top selection have separate stable stages.
+
+Existing `execute(...)` / `execute_value(...)` delegate through the typed path and return the original string,
+while successful values, trace APIs, generated-plan APIs, and primary CLI behavior remain unchanged. Five focused
+tests prove exact JSON, source identity, deepest child attribution, missing-entry/top-selection context, omitted
+optional fields, and compatibility. The full runtime package passes 137 unit, 105 oracle, 196 integration, five
+diagnostic, three generated-source, and ten trace tests. Boxing the nested diagnostic removes both new strict
+Clippy findings; exactly 14 pre-existing errors remain in untouched runtime/core code. Final admission `.1.6.3.2`
+is active; the census remains 52 pass / one partial / seven gap until that closeout.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.3.0 — split Rust runtime diagnostics
 
 Corrected the structured-diagnostic gap at its real API boundary. Rust runtime `Engine` methods and internal frames

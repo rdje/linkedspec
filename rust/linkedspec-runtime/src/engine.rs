@@ -35,6 +35,7 @@
 use crate::helpers::regex_engine::CompiledAlternation;
 use crate::runtime::{RuntimeContext, RuntimeVarKind};
 use crate::source_emitter::{GeneratedRuleFamily, GeneratedRuleSpec};
+use crate::{RuntimeDiagnostic, RuntimeExecutionError};
 use linkedspec_core::ast::RuleMode;
 use linkedspec_core::expr::{AccessSegment, Arg, CodeBlock, Expr};
 use linkedspec_core::trace::{TraceConfig, TraceEmitter, TraceLevel};
@@ -96,6 +97,8 @@ enum EvaluatedAccessSegment {
 pub struct Engine {
     /// The compiled spec being executed (needed for child rule lookup).
     spec: CompiledSpec,
+    spec_name: Option<String>,
+    spec_path: Option<String>,
 }
 
 /// Saved per-invocation entry/local match state.
@@ -1300,14 +1303,47 @@ impl GeneratedPlanExecutor<'_> {
 impl Engine {
     /// Create a new engine from a compiled spec.
     pub fn new(spec: CompiledSpec) -> Self {
-        Self { spec }
+        Self {
+            spec,
+            spec_name: None,
+            spec_path: None,
+        }
+    }
+
+    /// Attach a logical spec name to future structured diagnostics.
+    pub fn with_spec_name(mut self, name: impl Into<String>) -> Self {
+        self.spec_name = Some(name.into());
+        self
+    }
+
+    /// Attach a resolved spec path to future structured diagnostics.
+    pub fn with_spec_path(mut self, path: impl Into<String>) -> Self {
+        self.spec_path = Some(path.into());
+        self
+    }
+
+    /// Return the logical spec name used for diagnostic attribution.
+    pub fn spec_name(&self) -> Option<&str> {
+        self.spec_name.as_deref()
+    }
+
+    /// Return the resolved spec path used for diagnostic attribution.
+    pub fn spec_path(&self) -> Option<&str> {
+        self.spec_path.as_deref()
     }
 
     /// Execute the top rule against the given input.
     /// Returns the accumulator as a JSON array.
     pub fn execute(&self, input: &str) -> Result<Value, String> {
+        self.execute_with_diagnostics(input)
+            .map_err(RuntimeExecutionError::into_message)
+    }
+
+    /// Execute the top rule and return a structured native runtime failure.
+    pub fn execute_with_diagnostics(&self, input: &str) -> Result<Value, RuntimeExecutionError> {
         let mut ctx = RuntimeContext::new(input);
         self.execute_with_context(&mut ctx)
+            .map_err(|message| self.structured_runtime_error(&ctx, message))
     }
 
     /// Execute an optionally selected entry rule and return that rule's value
@@ -1317,8 +1353,19 @@ impl Engine {
     /// result in the engine accumulator. It matches LinkedSpec's public parser
     /// contract and is suitable for native embedding and primary CLI adapters.
     pub fn execute_value(&self, input: &str, options: &ExecutionOptions) -> Result<Value, String> {
+        self.execute_value_with_diagnostics(input, options)
+            .map_err(RuntimeExecutionError::into_message)
+    }
+
+    /// Execute a direct rule value and return a structured native runtime failure.
+    pub fn execute_value_with_diagnostics(
+        &self,
+        input: &str,
+        options: &ExecutionOptions,
+    ) -> Result<Value, RuntimeExecutionError> {
         let mut ctx = RuntimeContext::with_parse_mode(input, options.parse_mode());
         self.execute_value_with_context(&mut ctx, options)
+            .map_err(|message| self.structured_runtime_error(&ctx, message))
     }
 
     /// Execute a direct rule value with explicit native trace configuration.
@@ -1481,9 +1528,52 @@ impl Engine {
         result
     }
 
+    fn structured_runtime_error(
+        &self,
+        ctx: &RuntimeContext,
+        message: String,
+    ) -> RuntimeExecutionError {
+        let failure = ctx.diagnostic_failure();
+        let stage = failure
+            .map(|context| context.stage)
+            .unwrap_or("runtime_execution");
+        let summary = failure
+            .map(|context| context.summary)
+            .unwrap_or("Rust runtime interpreter failed");
+        let rule_label = failure.and_then(|context| context.rule_label.clone());
+        let effective_rule = rule_label.as_deref().or_else(|| ctx.diagnostic_top_rule());
+        let handler_source_label = Some(match effective_rule {
+            Some(label) => format!("rust_runtime:rule:{label}"),
+            None => "rust_runtime".to_string(),
+        });
+        RuntimeExecutionError::new(
+            message.clone(),
+            RuntimeDiagnostic {
+                diagnostic_type: "runtime_parser".to_string(),
+                stage: stage.to_string(),
+                owner_stage: Some("rust_runtime".to_string()),
+                summary: summary.to_string(),
+                detail: message,
+                spec_name: self.spec_name.clone(),
+                spec_path: self.spec_path.clone(),
+                top_rule: ctx.diagnostic_top_rule().map(str::to_string),
+                rule_label,
+                handler_source_label,
+            },
+        )
+    }
+
     fn execute_with_context(&self, ctx: &mut RuntimeContext) -> Result<Value, String> {
-        let top = self.spec.top_rule().ok_or("no top rule in compiled spec")?;
+        let Some(top) = self.spec.top_rule() else {
+            ctx.capture_diagnostic_failure(
+                "top_rule_selection",
+                "Rust runtime top-rule selection failed",
+                None,
+            );
+            return Err("no top rule in compiled spec".to_string());
+        };
         let label = top.label.clone();
+        ctx.set_diagnostic_top_rule(label.clone());
         ctx.trace_decision(
             "rust_runtime:engine:top_rule",
             true,
@@ -1500,16 +1590,28 @@ impl Engine {
         options: &ExecutionOptions,
     ) -> Result<Value, String> {
         let label = if let Some(label) = options.entry_rule() {
-            self.spec
-                .find(label)
-                .ok_or_else(|| format!("entry rule '{label}' is not defined"))?;
+            ctx.set_diagnostic_top_rule(label);
+            if self.spec.find(label).is_none() {
+                ctx.capture_diagnostic_failure(
+                    "rule_lookup",
+                    "Rust runtime rule lookup failed",
+                    Some(label),
+                );
+                return Err(format!("entry rule '{label}' is not defined"));
+            }
             label.to_string()
         } else {
-            self.spec
-                .top_rule()
-                .ok_or("no top rule in compiled spec")?
-                .label
-                .clone()
+            let Some(top) = self.spec.top_rule() else {
+                ctx.capture_diagnostic_failure(
+                    "top_rule_selection",
+                    "Rust runtime top-rule selection failed",
+                    None,
+                );
+                return Err("no top rule in compiled spec".to_string());
+            };
+            let label = top.label.clone();
+            ctx.set_diagnostic_top_rule(label.clone());
+            label
         };
         ctx.trace_decision(
             "rust_runtime:engine:entry_rule",
@@ -1600,6 +1702,13 @@ impl Engine {
         // active set stays balanced (empty between top-level parses).
         ctx.enter_rule_variable_scope();
         let result = self.execute_rule_inner(label, entry_regex_idx, ctx);
+        if result.is_err() {
+            ctx.capture_diagnostic_failure(
+                "runtime_execution",
+                "Rust runtime interpreter failed",
+                Some(label),
+            );
+        }
         ctx.exit_rule_variable_scope();
         ctx.exit_recursion(label, entry_pos);
         let status = match &result {
@@ -1727,12 +1836,17 @@ impl Engine {
         entry_regex_idx: usize,
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
-        let rule = self.spec.find(label).ok_or_else(|| {
-            format!(
+        let Some(rule) = self.spec.find(label) else {
+            ctx.capture_diagnostic_failure(
+                "rule_lookup",
+                "Rust runtime rule lookup failed",
+                Some(label),
+            );
+            return Err(format!(
                 "rule '{}' (entry idx {}) not found in compiled spec",
                 label, entry_regex_idx
-            )
-        })?;
+            ));
+        };
 
         // Each rule invocation reports its own return value (the value of the
         // last `return(...)` in its blocks — Runtime Semantics §5.4). Save the

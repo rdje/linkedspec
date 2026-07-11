@@ -15,7 +15,7 @@ in-process data path, not identical spelling:
 | Backend | Native in-memory composition |
 | --- | --- |
 | Perl | `LinkedSpec::Get(...)` → parser coderef; `get_parser(...)` adds named/file resolution. |
-| Rust | `linkedspec_core::parser::parse_spec(...)` → core compilation → `linkedspec_runtime::engine::Engine::new(...).execute(...)`. |
+| Rust | `linkedspec_core::parser::parse_spec(...)` → core compilation → `linkedspec_runtime::engine::Engine::new(...)` → `execute(...)` or structured `execute_with_diagnostics(...)`. |
 | Dart | `parseSpec(...)` → `compileSpec(...)` → `LinkedSpecRuntimeEngine(...).parse(...)`. |
 | Julia | Rule-only: `parse_spec(...)`; source with top-level functions: `parse_spec_with_staged_user_function_definitions(...)`; then `compile_spec(...)` → `LinkedSpecRuntimeEngine(...)` → `runtime_parse(...)` / `runtime_execute(...)`. |
 | Lua and later backends | An idiomatic native module must expose equivalent in-memory parse/compile/execute capability before its CLI can count as a complete backend. |

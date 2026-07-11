@@ -9,6 +9,7 @@
 //! The Perl reference implementation lives at `perl/LinkedSpec.pm`.
 //! The Rust implementation is idiomatic Rust — no code generation, no eval.
 
+pub mod diagnostic;
 pub mod engine;
 pub mod helpers;
 pub mod primary_cli;
@@ -17,6 +18,7 @@ pub mod source_emitter;
 pub mod spec_parser;
 pub mod staged_parser_registry;
 
+pub use diagnostic::{RuntimeDiagnostic, RuntimeExecutionError};
 pub use linkedspec_core::trace;
 
 /// Crate version, matching the workspace version.

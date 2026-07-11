@@ -100,6 +100,10 @@ pub struct RuntimeContext {
     /// caller-owned trace sink after the parse result is known.
     trace_events_enabled: bool,
     trace_events: Vec<RuntimeTraceEvent>,
+    /// Selected top/entry rule for diagnostic attribution.
+    diagnostic_top_rule: Option<String>,
+    /// Deepest failure context captured before its rule frame unwinds.
+    diagnostic_failure: Option<RuntimeFailureContext>,
 }
 
 type RuntimeDeclarationScope = std::collections::HashMap<String, RuntimeVariableSnapshot>;
@@ -119,6 +123,13 @@ struct RuntimeTraceEvent {
     topic: String,
     details: String,
     level: TraceLevel,
+}
+
+#[derive(Debug, Clone)]
+pub(crate) struct RuntimeFailureContext {
+    pub(crate) stage: &'static str,
+    pub(crate) summary: &'static str,
+    pub(crate) rule_label: Option<String>,
 }
 
 #[derive(Debug, Clone)]
@@ -177,6 +188,8 @@ impl RuntimeContext {
             declaration_scope_suppression_depth: 0,
             trace_events_enabled: false,
             trace_events: Vec::new(),
+            diagnostic_top_rule: None,
+            diagnostic_failure: None,
         }
     }
 
@@ -190,6 +203,33 @@ impl RuntimeContext {
     /// Return the per-execution override or the rule's compiled fallback mode.
     pub fn effective_parse_mode(&self, fallback: ParseMode) -> ParseMode {
         self.parse_mode_override.unwrap_or(fallback)
+    }
+
+    pub(crate) fn set_diagnostic_top_rule(&mut self, label: impl Into<String>) {
+        self.diagnostic_top_rule = Some(label.into());
+    }
+
+    pub(crate) fn diagnostic_top_rule(&self) -> Option<&str> {
+        self.diagnostic_top_rule.as_deref()
+    }
+
+    pub(crate) fn capture_diagnostic_failure(
+        &mut self,
+        stage: &'static str,
+        summary: &'static str,
+        rule_label: Option<&str>,
+    ) {
+        if self.diagnostic_failure.is_none() {
+            self.diagnostic_failure = Some(RuntimeFailureContext {
+                stage,
+                summary,
+                rule_label: rule_label.map(str::to_string),
+            });
+        }
+    }
+
+    pub(crate) fn diagnostic_failure(&self) -> Option<&RuntimeFailureContext> {
+        self.diagnostic_failure.as_ref()
     }
 
     // ── Runtime trace recording ──

@@ -50,7 +50,7 @@
       "gap_owner": "FUTURE-PARITY-BACKLOG.1.6.3",
       "backends": {
         "perl": {"status": "pass", "references": ["perl/LinkedSpec/RuntimeContext.pm"]},
-        "rust": {"status": "gap", "references": ["rust/linkedspec-core/src/error.rs", "rust/linkedspec-runtime/src/engine.rs", "rust/linkedspec-runtime/src/runtime.rs"], "note": "Public Engine execution and internal runtime frames return Result<_, String>; the core LinkedSpecError::Runtime variant is unused by the runtime crate. No structured diagnostic record or source/rule attribution API exists yet."},
+        "rust": {"status": "gap", "references": ["rust/linkedspec-runtime/src/diagnostic.rs", "rust/linkedspec-runtime/src/engine.rs", "rust/linkedspec-runtime/src/runtime.rs", "rust/linkedspec-runtime/tests/runtime_diagnostics.rs"], "note": "Typed diagnostic-aware accumulator/direct execution, source/top/deepest-rule attribution, string adapters, five focused tests, and the full runtime package pass. FUTURE-PARITY-BACKLOG.1.6.3.2 owns final recurring-gate admission."},
         "dart": {"status": "pass", "references": ["dart/lib/src/runtime/interpreter.dart"]},
         "julia": {"status": "pass", "references": ["julia/src/runtime/Interpreter.jl"]}
       }

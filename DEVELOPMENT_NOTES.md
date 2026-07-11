@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.3.1 — enrich errors once, adapt outward for compatibility):
+  Existing string methods now call the typed diagnostic path and consume only `RuntimeExecutionError.message`, so
+  success/error semantics cannot drift between two implementations. The context records first failure rather than
+  last: child wrappers run first during unwinding, preserving deepest attribution automatically. Source name/path
+  stays caller-owned engine metadata. Boxing the nested diagnostic keeps the typed `Result` error compact without
+  changing its JSON object or accessor API.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.3.0 — repair the type users receive, not a similarly named enum):
   `linkedspec-runtime` does not use `linkedspec-core::LinkedSpecError::Runtime`; all active engine failures are raw
   strings. The singular interpreted attribution seam is `Engine::execute_rule`, where a child error is visible

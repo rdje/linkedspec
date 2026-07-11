@@ -579,7 +579,7 @@ its 60 states are 52 pass, one partial state, and seven gaps. Each non-pass stat
 
 | Residual mechanism | Current classification | Owner |
 | --- | --- | --- |
-| Structured native runtime diagnostics | Perl, Dart, and Julia expose structured attribution; Rust `Engine` methods return raw string errors. | `.1.6.3.1` / `.1.6.3.2` |
+| Structured native runtime diagnostics | All four expose structured native attribution; Rust final recurring-gate/census admission remains. | `.1.6.3.2` |
 | Native named/file resolution | Perl `get_parser(...)` owns the book's file-oriented role; Rust, Dart, and Julia currently keep named resolution in process adapters. | `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, and Julia propagate a caller-owned emitter through frontend/compiler/staged/runtime phases; Dart begins at the interpreter. | `.1.6.5` |
 | Generated parser source | Perl passes; Rust proof is a curated subset; Dart and Julia have no emitter. | `FUTURE-PARITY-BACKLOG.3` |

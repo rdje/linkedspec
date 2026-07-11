@@ -53,6 +53,34 @@ assert!(json.get("dependency_regex_map").is_some());
 as JSON. Neither API depends on `linkedspec-runtime` or launches a subprocess. Runtime execution continues to use
 `CompiledSpec` directly.
 
+### Structured runtime diagnostics
+
+Native Rust callers can opt into the backend-neutral diagnostic record without changing existing string-returning
+code:
+
+```rust
+use linkedspec_runtime::engine::Engine;
+
+let engine = Engine::new(compiled)
+    .with_spec_name("Example")
+    .with_spec_path("/specs/Example.spec");
+
+match engine.execute_with_diagnostics("input") {
+    Ok(value) => println!("{value}"),
+    Err(error) => {
+        eprintln!("{}", error.message());
+        eprintln!("failing rule: {:?}", error.diagnostic().rule_label);
+        eprintln!("{}", error.to_json()?);
+    }
+}
+# Ok::<(), Box<dyn std::error::Error>>(())
+```
+
+`RuntimeExecutionError` keeps the original message and a serializable `RuntimeDiagnostic` with `type`, `stage`,
+`owner_stage`, `summary`, `detail`, and available spec/top/rule/handler identity. Use
+`execute_value_with_diagnostics(...)` for direct entry-rule values. Existing `execute(...)` / `execute_value(...)`
+remain compatible `Result<_, String>` adapters over the same path; successful JSON values are identical.
+
 ## Architecture
 
 ```

@@ -60,11 +60,29 @@ on `LinkedSpecRuntimeEngine`, and preserves the failing child rule and
 Successful Julia `RuntimeParseResult` JSON and textual exception display remain
 unchanged.
 
-Rust does not yet expose the equivalent runtime record. Its actual public `Engine` execution methods and internal
-runtime frames return `Result<_, String>`. `linkedspec-core` separately defines
-`LinkedSpecError::Runtime(String)`, but the runtime crate does not use that variant; it is not the active public
-failure boundary. `FUTURE-PARITY-BACKLOG.1.6.3.1` owns typed structured native execution methods plus compatibility
-adapters while preserving ordinary Rust `Result` ergonomics and the canonical primary CLI failure projection.
+For Rust, `RuntimeExecutionError` carries the equivalent serializable `RuntimeDiagnostic`. Native callers opt into
+it through `Engine::execute_with_diagnostics(...)` or `execute_value_with_diagnostics(...)`:
+
+```rust
+let engine = Engine::new(compiled)
+    .with_spec_name("Example")
+    .with_spec_path("/specs/Example.spec");
+
+match engine.execute_with_diagnostics("input") {
+    Ok(value) => use_value(value),
+    Err(error) => {
+        eprintln!("{}", error.message());
+        eprintln!("{:?}", error.diagnostic().rule_label);
+    }
+}
+```
+
+The JSON record uses the same neutral names: `type`, `stage`, `owner_stage`, `summary`, `detail`, `spec_name`,
+`spec_path`, `top_rule`, `rule_label`, and `handler_source_label`. Optional fields are omitted when unavailable.
+Rule failures capture the deepest child before its frame unwinds; missing entry rules use `rule_lookup`, and an
+empty compiled state uses `top_rule_selection`. Existing `execute(...)` / `execute_value(...)` methods remain
+`Result<_, String>` compatibility adapters with identical messages and successful values. Trace methods and the
+canonical primary CLI projection are unchanged. Final recurring-gate admission remains `.1.6.3.2`.
 
 ## Typical payload shape
 
