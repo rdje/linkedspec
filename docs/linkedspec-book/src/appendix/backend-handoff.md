@@ -604,6 +604,11 @@ emitters in scaffold, direct-family, and corpus-proof slices. `.3.5` alone may p
 the artifacts are host-language source, byte identity is not required; ADR `0023` requires equivalent operations
 and observable behavior through idiomatic host APIs.
 
+Contract v1 is checked by `perl tools/check_generated_source_contract.pl` and the canonical local gate. It names
+ten family roles, four pre-execution plan-rejection cases, stable generated-source errors, one direct result/trace/
+identity fixture, the accepted eight-case subset, and the 105-case primary oracle. Backend-native APIs and source
+syntax are expected; semantic roles and observations are not allowed to drift.
+
 Outward compiled descriptors are closed: all four variants expose the exact `spec` / `functions` /
 `dependency_regex_map` / `meta` projection, aligned model identities, and the canonical outer function record
 defined by `capability_conformance/outward_descriptor_contract.json`.

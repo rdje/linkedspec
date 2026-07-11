@@ -177,7 +177,7 @@
       "id": "codegen.generated_parser_source",
       "category": "generated-source",
       "contract": "Every backend can emit host-language parser source with structural-family direct execution and manifest-backed compile/run proof.",
-      "sources": ["docs/decisions/0023-user-observable-backend-and-cli-parity.md", "docs/linkedspec-book/src/compiler/generated-handlers-and-dispatch.md", "docs/linkedspec-book/src/appendix/backend-handoff.md"],
+      "sources": ["capability_conformance/generated_source_contract.json", "docs/decisions/0023-user-observable-backend-and-cli-parity.md", "docs/linkedspec-book/src/compiler/generated-handlers-and-dispatch.md", "docs/linkedspec-book/src/appendix/backend-handoff.md"],
       "gap_owner": "FUTURE-PARITY-BACKLOG.3",
       "backends": {
         "perl": {"status": "partial", "references": ["perl/LinkedSpec/Compiler.pm", "perl/LinkedSpec/HandlerVariantEmitter.pm", "docs/knowledge/perl-generated-source-capture-not-standalone.md"], "note": "Handler generation drives the normal parser, but independently recompiling captured source loses dependency-regex alternative indexes; neutral contract and repair are owned by FUTURE-PARITY-BACKLOG.3.1."},

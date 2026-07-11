@@ -25,6 +25,16 @@ ids, absolute paths, and future/excluded surfaces without an owner. Current lang
 Perl, Rust, Dart, and Julia descriptor tests consume the same exact top-level, metadata, and function-record field
 sets so a backend-specific serialization convention cannot silently become public API.
 
+`generated_source_contract.json` is the versioned semantic contract for host-language source emission. It fixes
+compiled-spec-plus-identity input, deterministic source markers, independent compile/load, execute and traced-
+execute roles, the ten structural families, plan rejection, stable generated-source errors, one direct behavior
+fixture, the accepted eight-case generated subset, and the 105-case interpreter oracle. It explicitly does not
+require identical host API names, source syntax, or bytes. Run:
+
+```bash
+perl tools/check_generated_source_contract.pl
+```
+
 The census intentionally records proof quality separately from implementation belief. Passing the 105-case corpus
 does not by itself prove every helper and API described by the mdBook; `FUTURE-PARITY-BACKLOG.1.6.1` owns that
 coverage mapping. Generated source remains separately owned by `FUTURE-PARITY-BACKLOG.3`. `.3.1.0` demonstrates

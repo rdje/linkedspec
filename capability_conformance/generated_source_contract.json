@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "contract_id": "linkedspec-generated-source-v1",
+  "task_owner": "FUTURE-PARITY-BACKLOG.3.1",
+  "parity_semantics": {
+    "host_api_names": "idiomatic_capability_equivalent",
+    "host_source_syntax": "backend_native",
+    "host_source_bytes_identical": false,
+    "observable_behavior_identical": true,
+    "primary_correctness_oracle": "interpreter_manifest"
+  },
+  "source_contract": {
+    "input_model": "compiled_spec_plus_source_identity",
+    "output_model": "host_language_source_text",
+    "format_version": 1,
+    "text_model": "unicode_scalar_text",
+    "persisted_encoding": "strict_utf8",
+    "deterministic_for_same_input": true,
+    "required_markers": [
+      "contract_id",
+      "format_version",
+      "source_identity"
+    ],
+    "entrypoint_roles": [
+      "execute",
+      "execute_with_trace"
+    ]
+  },
+  "execution_pipeline": [
+    "parse_spec",
+    "validate_spec",
+    "compile_spec",
+    "emit_source",
+    "compile_or_load_generated_source",
+    "validate_generated_plan",
+    "execute_generated"
+  ],
+  "generated_plan": {
+    "row_fields": [
+      "label",
+      "family"
+    ],
+    "families": [
+      "default",
+      "or_acode",
+      "and_single_acode",
+      "and_acode_seq",
+      "and_bcode",
+      "or_bcode",
+      "rep_acode",
+      "rep_bcode",
+      "rep_and_acode",
+      "rep_and_bcode"
+    ],
+    "validation_rules": [
+      "exact_rule_count",
+      "source_rule_order",
+      "exact_rule_labels",
+      "exact_rule_families",
+      "reject_unknown_family_before_execution"
+    ],
+    "rejection_cases": [
+      {
+        "id": "row_count_mismatch",
+        "code": "generated_plan_row_count_mismatch"
+      },
+      {
+        "id": "label_mismatch",
+        "code": "generated_plan_label_mismatch"
+      },
+      {
+        "id": "family_mismatch",
+        "code": "generated_plan_family_mismatch"
+      },
+      {
+        "id": "unknown_family",
+        "code": "generated_plan_unknown_family"
+      }
+    ]
+  },
+  "error_contract": {
+    "type": "generated_source_error",
+    "required_fields": [
+      "type",
+      "stage",
+      "code",
+      "summary",
+      "source_identity"
+    ],
+    "optional_fields": [
+      "rule_label",
+      "handler_family",
+      "detail"
+    ],
+    "stages": [
+      "emit_source",
+      "compile_or_load_generated_source",
+      "validate_generated_plan",
+      "execute_generated"
+    ],
+    "codes": [
+      "generated_source_emit_failed",
+      "generated_source_compile_failed",
+      "generated_plan_row_count_mismatch",
+      "generated_plan_label_mismatch",
+      "generated_plan_family_mismatch",
+      "generated_plan_unknown_family",
+      "generated_execution_failed"
+    ]
+  },
+  "behavior_cases": [
+    {
+      "id": "default_action_result_trace_identity",
+      "fixture_dir": "capability_conformance/generated_source/fixtures/default_action_result_trace_identity",
+      "parse_mode": "consume",
+      "top_rule": "Top",
+      "source_identity": "generated-source/default-action-result.spec",
+      "expect": {
+        "status": "ok",
+        "result_file": "expected.json",
+        "trace_event_roles": [
+          "generated_rule_enter",
+          "generated_family_decision",
+          "generated_rule_exit"
+        ]
+      }
+    }
+  ],
+  "corpus_proof": {
+    "interpreter_manifest": "rust/linkedspec-runtime/tests/corpus/manifest.json",
+    "interpreter_case_count": 105,
+    "proof_order": [
+      "interpreter_exact_result",
+      "emit_source",
+      "independent_compile_or_load",
+      "generated_exact_result"
+    ],
+    "accepted_subset": [
+      "proof_edge_array_literal",
+      "proof_edge_scalar_literal",
+      "autoexist_array_bare_arg",
+      "terse_1_5_2_primitive_literals",
+      "terse_2_2_3_attached_if_blocks",
+      "terse_4_3_2_user_function_runtime",
+      "tclite_command_subst",
+      "portmap_bare"
+    ],
+    "rust_breadth_target": "full_interpreter_manifest",
+    "new_backend_admission_target": "accepted_subset_plus_all_generated_families"
+  },
+  "current_backend_states": {
+    "perl": "partial",
+    "rust": "partial",
+    "dart": "gap",
+    "julia": "gap"
+  }
+}

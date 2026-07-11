@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.1.1 — define generated-source contract
+
+Added versioned generated-source contract v1, a neutral direct result/trace/identity fixture, and a strict checker.
+The contract distinguishes idiomatic host APIs and backend-native source syntax from identical user-observable
+roles: compiled-spec-plus-identity emission, independent compile/load, generated execution and trace, deterministic
+format markers, ten structural families, four plan-rejection mechanisms, and stable attributed errors.
+
+The checker validates the live 105-case interpreter manifest, exact accepted eight-case generated subset, fixture
+UTF-8/JSON, task owner, and current Perl/Rust partial plus Dart/Julia gap states. Wired it into canonical local CI,
+capability evidence, README, mdBook, Knowledge Map, roadmap/task/live status, and artifact cleanup. No backend
+generation behavior changed; census remains 56/2/2 and Perl repair `.3.1.2` is active.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.1.0 — correct Perl generated-source status
 
 Added the independent execution probe missing from the initial generated-source audit. A minimal Perl action-edge

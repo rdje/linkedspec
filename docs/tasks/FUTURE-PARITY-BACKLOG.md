@@ -1462,17 +1462,20 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.3.1.0 - correct Perl generated-source status`
 
 - ID: `FUTURE-PARITY-BACKLOG.3.1.1`
-  Status: `active`
+  Status: `done`
   Goal: Define the versioned executable neutral generated-source contract and fixtures.
   Acceptance: Add a strictly checked schema/fixture set for host-source emission, independent compile/load, direct
     result, trace, diagnostic/source identity, exact family-plan validation/rejection, and the accepted manifest
     subset. Define semantic entrypoint roles rather than identical host-language names or source bytes. Wire the
     checker into canonical local CI before changing Perl generation.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Strict checker validates v1 schema, ownership, semantic/API boundary,
+    deterministic markers, pipeline, ten families, plan rejection, errors, direct fixture, exact eight-case subset,
+    live 105-case manifest, and current 56/2/2 states. Checker syntax/focused execution, capability, Knowledge Map,
+    canonical local CI through Phase 0 `1..1030`, docs/governance/whitespace/mdBook, and cleanup pass.
+  Commit: `FUTURE-PARITY-BACKLOG.3.1.1 - define generated-source contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.3.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Make Perl's public captured/generated source independently compile and execute equivalently.
   Acceptance: Preserve normal parser behavior while emitting dependency-regex reconstruction that retains exact
     alternative indexes after independent compilation; add direct result/trace/source-identity and malformed-plan
@@ -1829,8 +1832,8 @@ before implementation.
 | 57 | `FUTURE-PARITY-BACKLOG.1.6.6` | `done` | Exactly three generated-source states remain at 57/1/2; non-codegen `.1.6` closes and `.3` activates. |
 | 58 | `FUTURE-PARITY-BACKLOG.3.0` | `done` | Perl/Rust/Dart/Julia source evidence is audited and five implementation/admission lanes are split. |
 | 59 | `FUTURE-PARITY-BACKLOG.3.1.0` | `done` | Standalone Perl source recompiles but loses dependency alternative indexes; census corrects to 56/2/2. |
-| 60 | `FUTURE-PARITY-BACKLOG.3.1.1` | `active` | Fix one executable neutral generated-source contract before backend behavior code. |
-| 61 | `FUTURE-PARITY-BACKLOG.3.1.2` | `pending` | Repair Perl dependency-regex source reconstruction and prove independent execution. |
+| 60 | `FUTURE-PARITY-BACKLOG.3.1.1` | `done` | Contract v1 fixes semantic roles, ten families, rejections, errors, direct fixture, and 8/105 proof. |
+| 61 | `FUTURE-PARITY-BACKLOG.3.1.2` | `active` | Repair Perl dependency-regex source reconstruction and prove independent execution. |
 | 62 | `FUTURE-PARITY-BACKLOG.3.1.3` | `pending` | Admit Perl/Rust contract baseline and return Perl to pass before Rust breadth. |
 | 63 | `FUTURE-PARITY-BACKLOG.3.2` | `pending` | Rust must expand from eight generated fixtures to the full 105-case manifest. |
 | 64 | `FUTURE-PARITY-BACKLOG.3.3` | `pending` | Dart needs emitter scaffold, family plan/direct execution, and manifest proof. |
@@ -2495,6 +2498,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.6` | Direct non-pass projection; 57/1/2 checker; immediately prior complete Dart/core gates; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Only Rust/Dart/Julia generated-source states remain, all owned by `.3`; non-codegen `.1.6` closes and `.3` activates. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.0` | Knowledge Map-first source audit of Perl reference emission, public Rust emitter/family plan/isolated crate/eight-case subset, Dart/Julia source absence, 105-case manifest boundary; docs/KM/governance/whitespace/mdBook/cleanup. | PASS. Neutral contract, Rust breadth, Dart, Julia, and admission lanes are split before behavior code; census remains 57/1/2 and `.3.1` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.0` | Toolbox `LinkedSpec::Get` normal/captured-source comparison; isolated eval/load; debug generated-branch trace; reduced `LinkedRE::oredRE` serialization/package-binding probes; source audit; 56/2/2 capability/KM/governance/whitespace/mdBook/cleanup. | PASS. Captured Perl source is not standalone-equivalent; contract, repair, and admission are split before code and `.3.1.1` is active. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.1` | Strict v1 schema/fixture checker; 10 families/4 rejections/error contract/direct trace+identity fixture/8-of-105 subset/live-state cross-check; canonical CI through Phase 0 `1..1030`; docs/KM/governance/whitespace/mdBook/cleanup. | PASS. Contract is canonically gated without backend behavior changes; Perl repair `.3.1.2` is active at 56/2/2. |
 
 ## Commit Log
 
@@ -2552,6 +2556,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.6.6` | `FUTURE-PARITY-BACKLOG.1.6.6 - close non-codegen capability parity` | Exact residual projection, generated-source-only handoff, parent closeout, no behavior change. |
 | `FUTURE-PARITY-BACKLOG.3.0` | `FUTURE-PARITY-BACKLOG.3.0 - split generated-source parity` | Source-backed current boundary and contract/Rust/Dart/Julia/admission split; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.3.1.0` | `FUTURE-PARITY-BACKLOG.3.1.0 - correct Perl generated-source status` | Root-cause of dependency-regex index loss, corrected census, and contract/repair/admission split; no behavior code. |
+| `FUTURE-PARITY-BACKLOG.3.1.1` | `FUTURE-PARITY-BACKLOG.3.1.1 - define generated-source contract` | Strict semantic schema/checker, neutral direct fixture, canonical CI integration, and public docs; no backend behavior change. |
 
 ## Changelog
 
@@ -2578,6 +2583,10 @@ Read-only evidence recorded on 2026-07-10:
   assumption. Normal generated execution returns `"ok"`, but captured source recompiles and returns `undef` because
   stringified `LinkedRE::oredRE` alternative markers no longer update `LinkedRE::or`'s lexical index. Census is
   corrected to 56/2/2; `.3.1.1` contract, `.3.1.2` repair, and `.3.1.3` admission are split before behavior code.
+- `2026-07-11`: `.3.1.1` defines generated-source contract v1 and a strict canonical checker. Semantic roles fix
+  compiled-spec-plus-identity emission, independent load, direct/traced execution, ten families, four plan
+  rejections, stable errors, one direct fixture, and interpreter-first 8/105 proof while host APIs/source remain
+  idiomatic. No backend behavior changes; census remains 56/2/2 and Perl repair `.3.1.2` is active.
 - `2026-07-11`: `.1.6.4.5` adds Perl's separate portable `SpecLoader` facade and direct 14/9/4 plus pipeline proof
   without changing legacy `get_parser`/`PathSearch`. The canonical core gate passes the required new test, 239-name
   coverage, focused suites, 61x2 CLI, and Phase 0 `1..1030` in 556 seconds. Combined with immediately prior full

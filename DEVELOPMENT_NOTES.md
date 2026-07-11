@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.1.1 — specify roles, not host spelling):
+  A multi-backend source-emitter contract must not compare Perl/Rust/Dart/Julia source bytes or force one host's
+  API names. Fix the semantic pipeline and observations instead: compiled state plus identity in, deterministic
+  native source out, independent load, direct/traced execution, validated ordered family rows, stable attributed
+  failures, and interpreter-first exact results. Keep structural coverage and corpus breadth separate. The strict
+  checker cross-validates the accepted subset against the live manifest and current capability states, so fixture,
+  census, and task drift fail the canonical gate before backend implementation begins.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.1.0 — generated text must be independently executed):
   A compiler that generates source internally does not necessarily expose a standalone source-emitter capability.
   Always compile/load captured text in isolation and compare it with the normal parser. Perl's dump preserved

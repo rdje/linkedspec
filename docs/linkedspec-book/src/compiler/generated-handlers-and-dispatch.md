@@ -11,6 +11,36 @@ The dispatch **model** in this chapter is backend-neutral: a compiled dependency
 - dispatch uses compiled dependency regexes explicitly
 - runtime failures are normalized into structured error channels
 
+## Backend-neutral generated-source contract
+
+Generated source is a public capability, not merely an internal implementation
+detail. Contract v1 is executable at
+`capability_conformance/generated_source_contract.json` and deliberately fixes
+semantic roles rather than host-language spelling.
+
+Every backend must accept a compiled specification plus stable source identity,
+emit deterministic host-language source, independently compile or load it, and
+offer ordinary and traced execution. Persisted source is strict UTF-8 Unicode
+text and carries contract, format-version, and source-identity markers. Perl,
+Rust, Dart, and Julia source bytes are not expected to match: their host APIs
+remain idiomatic and their source syntax remains native. Results, diagnostics,
+trace roles, identity, and plan validation must match.
+
+The generated family plan contains ordered `label` / `family` rows and covers
+default and OR acode; AND single-acode and ordered acode sequence; AND and OR
+bcode; repetition acode and bcode; and repetition-AND acode and bcode.
+
+Before execution, the backend rejects row-count, label, family, and unknown-
+family mismatches. Generated-source failures use stable emission, compile/load,
+plan-validation, and execution stages with source identity and available rule/
+family attribution.
+
+Conformance remains interpreter-first. The neutral direct fixture proves result,
+trace roles, and identity. The initial generated corpus subset contains eight
+named fixtures; Rust must broaden to the complete 105-case manifest, while new
+emitters prove the accepted subset plus every structural family. The interpreter
+manifest stays the primary correctness oracle.
+
 ## Why this matters
 
 Dynamic generation is powerful, but without structure it becomes hard to trust.

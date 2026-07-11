@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.3.1.1 — define generated-source contract**
+  (DONE — contract/checker canonically gated; Perl repair `.3.1.2` active).
+
+  **Contract:** Semantic emission/load/execute/trace/error/identity roles; ten families; four plan rejections; one
+  direct fixture; accepted eight-case subset; 105-case primary interpreter oracle. Host names/source bytes differ.
+
+  **Proof:** Strict checker, capability, canonical local CI, docs/KM/governance/mdBook/cleanup pass. No backend
+  behavior changed; census remains 56/2/2.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.1.0 — correct Perl generated-source status**
   (DONE — root cause and repair split recorded; neutral contract `.3.1.1` active).
 
