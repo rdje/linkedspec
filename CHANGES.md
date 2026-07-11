@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.1.3.0 — split Rust generated-source v1 alignment
+
+Audited the existing public Rust source emitter against every generated-source contract-v1 role before baseline
+admission. Its real pre-contract capability remains green: deterministic native source, isolated temporary-crate
+compile/run, all ten structural families, legacy repetition compatibility, native traced execution, and the exact
+accepted eight-case corpus subset pass the focused 3-test suite in 35.69 seconds.
+
+The audit also found four admission blockers independent of 8/105 breadth: no caller source identity or contract-id
+marker, raw `String` errors rather than `generated_source_error`, no representable unknown-family plan rejection,
+and only rich native `rust_runtime:generated_plan:*` trace topics rather than the three neutral roles. Split typed
+metadata/errors `.3.1.3.1`, exact plan/trace `.2`, and final admission `.3` before behavior code. Census stays
+56/2/2; roadmaps, task/live state, capability evidence, mdBook, and Knowledge Map now describe the exact boundary.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.1.2 — repair Perl generated source
 
 Added public `LinkedSpec::emit_generated_source(...)` and shared `LinkedSpec::GeneratedSource` support. Emitted Perl

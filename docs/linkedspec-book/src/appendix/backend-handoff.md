@@ -581,7 +581,7 @@ its 60 states are 57 pass, one partial state, and two gaps. Each non-pass state 
 | --- | --- | --- |
 | Native named/file resolution | ADR `0026` and the 14/9/4 fixture fix portable names, exact paths, ordered roots, strict UTF-8, and typed stages. Perl, Rust, Dart, and Julia consume the contract directly; exact admission is closed. | closed `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, Dart, and Julia propagate a caller-owned emitter through frontend/compiler/function/staged/runtime phases. Dart's direct routed/quiet/failure proof and recurring gates are admitted. | closed `.1.6.5` |
-| Generated parser source | Perl contract-v1 reconstruction/API proof is green pending admission; Rust has direct all-family execution but only eight of 105 manifest fixtures; Dart and Julia have no emitter. | active `.3.1.3` Perl admission; `.3.2` Rust; `.3.3` Dart; `.3.4` Julia; `.3.5` admission |
+| Generated parser source | Perl contract-v1 reconstruction/API proof is green. Rust has direct all-family/eight-case execution, but its older scaffold lacks v1 identity/errors/exact unknown-family rejection/neutral trace roles; Dart and Julia have no emitter. | `.3.1.3.1-.3` Rust baseline alignment/admission; `.3.2` Rust breadth; `.3.3` Dart; `.3.4` Julia; `.3.5` admission |
 
 Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, generic final-
 codeblock equivalence, and the not-yet-implemented Lua backend are explicit exclusions/future owners rather than
@@ -595,11 +595,15 @@ That 57/1/2 statement was the source-audit boundary. `.3.1.0` added the missing 
 the captured text compiles, but stringifying/recompiling `LinkedRE::oredRE` detaches its `(?{$pos=N})` alternative
 markers from `LinkedRE::or`'s lexical index. A match can consume input while generated action selection is skipped.
 Perl was therefore corrected to partial. `.3.1.2` now reconstructs those alternations from canonical refs and passes
-independent result/trace/identity/plan/error proof; the census remains 56/2/2 only until `.3.1.3` admission.
+independent result/trace/identity/plan/error proof. `.3.1.3.0` then audited Rust against the now-concrete v1 roles:
+its pre-contract scaffold is green for all families and eight fixtures, but lacks identity/contract markers,
+structured errors, exact unknown-family rejection, and the three neutral generated trace roles. `.3.1.3.1-.3` own
+that alignment and admission; census remains 56/2/2 until they close.
 
 `FUTURE-PARITY-BACKLOG.3.0` turns that broad owner into an executable order. `.3.1.1` first fixes a versioned neutral
 contract for emission, host compile/load, direct generated execution, exact result/error/source identity, trace,
-family-plan validation, and manifest proof; `.3.1.2-.3` repair/admit Perl. `.3.2` then classifies and expands Rust from the named eight-case subset
+family-plan validation, and manifest proof; `.3.1.2` repairs Perl and `.3.1.3.1-.3` align/admit the Perl/Rust
+baseline. `.3.2` then classifies and expands Rust from the named eight-case subset
 to all 105 fixtures, splitting any failures before repair. `.3.3` and `.3.4` add equivalent Dart and Julia source
 emitters in scaffold, direct-family, and corpus-proof slices. `.3.5` alone may promote all 60 states to pass. Because
 the artifacts are host-language source, byte identity is not required; ADR `0023` requires equivalent operations

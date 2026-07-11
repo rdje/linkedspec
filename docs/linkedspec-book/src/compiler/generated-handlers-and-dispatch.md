@@ -41,6 +41,13 @@ named fixtures; Rust must broaden to the complete 105-case manifest, while new
 emitters prove the accepted subset plus every structural family. The interpreter
 manifest stays the primary correctness oracle.
 
+Rust's existing source-emitter scaffold predates this contract. Its all-family
+and accepted-subset compile/run proof is green, but contract-v1 source identity,
+structured errors, exact unknown-family rejection, and the three neutral trace
+roles are being aligned under `FUTURE-PARITY-BACKLOG.3.1.3.1-.2` before baseline
+admission. Native `rust_runtime:generated_plan:*` trace detail remains valuable;
+the neutral roles are an additional portable projection, not a replacement.
+
 ## Why this matters
 
 Dynamic generation is powerful, but without structure it becomes hard to trust.

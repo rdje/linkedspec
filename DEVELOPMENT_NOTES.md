@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.1.3.0 — align a pre-contract implementation before admitting it):
+  A green source-emitter test does not prove a later neutral contract unless every role is projected explicitly.
+  Rust's scaffold correctly proves independent native compilation, all-family execution, and the accepted subset,
+  but its original type boundary made identity absent, errors raw, unknown family unrepresentable, and trace names
+  backend-native. Preserve that working compatibility API and rich trace; add a typed v1 request/error surface and
+  neutral projections beside them. Keep metadata/errors separate from plan/trace because compile/load attribution
+  and mutable malformed-plan testing have different ownership and failure modes. Capability promotion belongs only
+  after both mechanisms and complete Perl/Rust gates pass; do not confuse the later 105-case breadth leaf with this
+  baseline contract alignment.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.1.2 — reconstruct, do not stringify compiled regex state):
   `Regexp` stringification is not a serialization format when embedded code depends on dynamic lexical composition.
   Emit reconstruction from canonical dependency refs: quote each referenced compiled regex as data, compile it at

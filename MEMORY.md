@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.1.2` — repaired independently loadable Perl generated source.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.3.1.1` — defined and canonically gated generated-source v1.
-- recent_context: Census remains 56/2/2 until admission. Perl public/legacy deterministic v1 source, canonical
-  dependency reconstruction, arbitrary-package exact execution, identity/plan/trace/errors, indexes 0/1, and slash
-  regex pass; Phase 0 `1..1030` passes. `.3.1.3` owns explicit Perl/Rust baseline admission and parent closeout.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.1.3.0` — audited/split Rust contract-v1 baseline alignment.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.3.1.2` — repaired independently loadable Perl generated source.
+- recent_context: Census remains 56/2/2. Rust's existing all-family/eight-case source proof passes 3/3, but the
+  pre-v1 API lacks source identity/contract marker, typed generated-source errors, exact unknown-family rejection,
+  and neutral generated-rule enter/family/exit trace roles. `.3.1.3.1-.3` own alignment and admission before breadth.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.3.1.2 - repair Perl generated source`; previous committed HEAD is
-  `c40f53ee FUTURE-PARITY-BACKLOG.3.1.1 - define generated-source contract`.
+  `FUTURE-PARITY-BACKLOG.3.1.3.0 - split Rust generated-source v1 alignment`; previous committed HEAD is
+  `7a0ee383 FUTURE-PARITY-BACKLOG.3.1.2 - repair Perl generated source`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.3.1.3`; generated-source contract baseline admission is active.
-- next_action: audit existing Rust source against all v1 semantic roles, add any bounded baseline adaptation owner
-  before code if required, run complete Perl/Rust gates, promote Perl to pass, close `.3.1`, and activate Rust
-  full-manifest classifier `.3.2.0` without overclaiming Rust breadth.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.3.1.3.1`; Rust generated-source v1 identity/metadata/errors are active.
+- next_action: preserve `emit_rust_source(&CompiledSpec)` compatibility while adding an idiomatic typed v1 request/
+  error surface, deterministic identity/contract metadata, exact stage/code attribution, focused tests, and full
+  Rust gate; then commit clean before plan/trace `.3.1.3.2`.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

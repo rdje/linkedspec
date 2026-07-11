@@ -181,7 +181,7 @@
       "gap_owner": "FUTURE-PARITY-BACKLOG.3",
       "backends": {
         "perl": {"status": "partial", "references": ["perl/LinkedSpec/Compiler.pm", "perl/LinkedSpec/GeneratedSource.pm", "perl/LinkedSpec/HandlerVariantEmitter.pm", "t/generated_source_contract.t"], "note": "Standalone contract-v1 source emission and focused independent compile/run proof are implemented under FUTURE-PARITY-BACKLOG.3.1.2; explicit baseline admission remains owned by .3.1.3."},
-        "rust": {"status": "partial", "references": ["rust/linkedspec-runtime/src/source_emitter.rs", "rust/linkedspec-runtime/tests/source_emitter.rs"], "note": "All structural families run directly, but manifest-backed generated-source proof remains a curated subset."},
+        "rust": {"status": "partial", "references": ["rust/linkedspec-runtime/src/source_emitter.rs", "rust/linkedspec-runtime/tests/source_emitter.rs", "docs/knowledge/rust-generated-source-contract-v1-gap.md"], "note": "All structural families and the accepted eight-case subset run independently, but the pre-v1 API still lacks source identity, structured errors, exact unknown-family rejection, and neutral generated trace roles; contract alignment is owned by FUTURE-PARITY-BACKLOG.3.1.3 before full-manifest breadth."},
         "dart": {"status": "gap", "references": ["docs/knowledge/dart-generated-source-deferred.md"]},
         "julia": {"status": "gap", "references": ["docs/knowledge/julia-generated-source-deferred.md"]}
       }

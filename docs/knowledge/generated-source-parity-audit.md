@@ -13,6 +13,7 @@ status: current
 tags: [codegen, generated-source, rust, dart, julia, parity, task-tree]
 evidence: "FUTURE-PARITY-BACKLOG.3.0 audited capability_conformance/manifest.json, Perl/Rust emitter source and Rust compile/run tests. It initially inherited the census's Perl pass classification. FUTURE-PARITY-BACKLOG.3.1.0 then added the missing independent Perl source execution probe and proved captured source loses LinkedRE dependency alternative indexes, correcting Perl to partial. Rust publicly exports emit_rust_source, emits source format v1 with a serialized CompiledSpec and typed GeneratedRuleFamily plan, validates that plan, directly executes all current structural families, and compiles/runs emitted modules in isolated temporary crates. Its manifest-backed generated-source proof names exactly eight fixtures while the interpreter manifest contains 105. Dart and Julia have no source emitter. ADR 0023 permits idiomatic host APIs, so the neutral contract requires capability/result/diagnostic/source-identity equivalence rather than byte-identical host-language source. FUTURE-PARITY-BACKLOG.3 is split into .3.1 contract/Perl correction, .3.2 Rust full-manifest breadth, .3.3 Dart, .3.4 Julia, and .3.5 final admission."
 evidence_update_2026_07_11_perl_repair: "FUTURE-PARITY-BACKLOG.3.1.2 adds public and legacy-identical contract-v1 emission, canonical LinkedRE::oredRE reconstruction, independent exact execution, metadata/identity/trace/errors, and plan validation. Perl remains partial only until .3.1.3 admission; the dependency-index defect is fixed."
+evidence_update_2026_07_11_rust_contract_audit: "FUTURE-PARITY-BACKLOG.3.1.3.0 preserves Rust's green all-family/eight-case baseline but finds its pre-v1 API lacks identity/contract markers, structured generated-source errors, unknown-family rejection, and neutral generated trace roles. Bounded .3.1.3.1-.3 alignment/admission leaves now precede .3.2 breadth."
 reverify: "rg -n 'emit_rust_source|GENERATED_SOURCE_FORMAT|GeneratedRuleFamily|GENERATED_SOURCE_CORPUS_SUBSET|generated_rust_source_matches_manifest_backed_corpus_subset' rust/linkedspec-runtime/src/source_emitter.rs rust/linkedspec-runtime/tests/source_emitter.rs && rg -n -i 'emit_.*source|source_emitter|generated.*source' dart/lib dart/test julia/src julia/test || true && perl tools/check_capability_conformance.pl"
 ---
 
@@ -26,6 +27,9 @@ features: generated host-language parser source. Its backend states differ:
 - Rust has a public versioned emitter, a validated typed family plan, direct
   execution for all current structural families, and an isolated compile/run
   harness.
+- That Rust scaffold predates neutral contract v1: source identity, structured
+  errors, exact unknown-family rejection, and neutral generated trace roles are
+  now explicitly owned before baseline admission.
 - Rust's manifest proof still names only eight fixtures, while the interpreter
   corpus now contains 105.
 - Dart and Julia have no source-emitter implementation.

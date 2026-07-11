@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.3.1.3.0 — split Rust generated-source v1 alignment**
+  (DONE — source-backed contract gaps split; typed metadata/error `.3.1.3.1` active).
+
+  **Finding:** Rust's pre-v1 emitter is green for all ten families and the accepted eight-case subset, but lacks
+  source identity/contract markers, structured generated-source errors, exact unknown-family rejection, and the
+  three neutral generated trace roles. Native `rust_runtime:generated_plan:*` trace remains valid richer detail.
+
+  **Proof/split:** Existing isolated `source_emitter` suite passes 3/3 in 35.69 seconds. `.1` owns typed identity/
+  metadata/errors, `.2` exact plan/trace roles, and `.3` final gates/admission. No behavior code/status changed;
+  census remains 56/2/2.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.1.2 — repair Perl generated source**
   (DONE — implementation/gates green; explicit admission `.3.1.3` active).
 

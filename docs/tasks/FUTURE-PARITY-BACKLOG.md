@@ -1508,9 +1508,67 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.3.1.3`
   Status: `active`
   Goal: Admit the neutral contract baseline and corrected Perl generated-source pass.
+  Children: `.3.1.3.0`, `.3.1.3.1`, `.3.1.3.2`, `.3.1.3.3`
   Acceptance: Perl and existing Rust source emission consume the same contract roles; focused and full Perl/Rust
     gates pass; capability checker returns Perl to pass with only Rust breadth partial plus Dart/Julia gaps; docs,
     book, Knowledge Map, roadmap, artifact cleanup, and parent `.3.1` closeout agree before `.3.2` starts.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.1.3.0`
+  Status: `done`
+  Goal: Audit Rust against every generated-source v1 role and split admission before behavior code.
+  Acceptance: Inspect the public emitter, emitted markers/entrypoints, plan representation and rejection surface,
+    trace events, error types, isolated compile/run harness, and neutral fixture; record every exact v1 mismatch;
+    create bounded metadata/error, plan/trace, and final-admission leaves without changing runtime behavior or
+    capability status.
+  Verification: **PASS 2026-07-11.** Knowledge Map and source audit proves the compatibility emitter accepts only
+    `CompiledSpec`, emits only a format marker, returns raw strings, validates a private typed-enum plan without an
+    unknown-family value, and exposes rich native `rust_runtime:generated_plan:*` trace topics rather than the
+    three neutral roles. Its existing isolated proof remains green: all ten families, legacy repetition, and the
+    eight-case subset pass three focused tests in 35.69 seconds. Metadata/error `.1`, plan/trace `.2`, and admission
+    `.3` are split before behavior code; census remains 56/2/2. Docs/KM/governance/mdBook/cleanup pass.
+  Commit: `FUTURE-PARITY-BACKLOG.3.1.3.0 - split Rust generated-source v1 alignment`
+
+## `FUTURE-PARITY-BACKLOG.3.1.3.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — direct source/API scans show no contract-id/source-identity marker, no typed
+  `generated_source_error`, no unknown-family rejection code, and no neutral generated trace-role names.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `source_emitter.rs` predates contract v1: its compatibility API was designed
+  around `CompiledSpec`, a Rust enum family table, native `String` errors, and native generated-plan trace topics.
+- [x] **FIX** — no behavior fix belongs in this audit leaf; `.1` owns typed identity/metadata/errors, `.2` owns the
+  exact neutral plan/trace roles, and `.3` owns gates/status admission.
+- [x] **ADDRESSED (verified)** — the exact gaps and still-green all-family/legacy/eight-case baseline are durable in
+  the task tree, capability evidence, public book/status, and Knowledge Map.
+- [x] **NO REGRESSION** — existing `source_emitter` integration test passes 3/3, including independently compiled
+  temporary crates; no parser/compiler/runtime behavior source changed.
+- [x] **LOCKSTEP** — task/roadmap/live/book/capability/KM state remains at 56/2/2 and activates `.3.1.3.1`.
+
+- ID: `FUTURE-PARITY-BACKLOG.3.1.3.1`
+  Status: `active`
+  Goal: Align Rust emission metadata, source identity, and generated-source errors with contract v1.
+  Acceptance: Add an idiomatic typed public request/error surface while preserving the compatibility emitter;
+    emit deterministic contract/version/source-identity metadata; map emission, generated load/compile harness,
+    plan validation, and execution failures to the stable contract fields/stages/codes with exact focused tests.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.1.3.2`
+  Status: `pending`
+  Goal: Align Rust generated-plan rejection and neutral trace roles with contract v1.
+  Acceptance: Validate exact ordered label/family rows using the ten neutral family names; reject row count, label,
+    family mismatch, and unknown family before execution with exact codes; expose generated-rule enter, family
+    decision, and exit roles while retaining richer native trace; pass the neutral result/trace/identity fixture and
+    existing all-family isolated compile/run matrix.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.1.3.3`
+  Status: `pending`
+  Goal: Admit the corrected Perl/Rust generated-source v1 baseline.
+  Acceptance: Run focused and complete Perl/Rust gates, promote Perl generated source to pass while Rust remains
+    partial only for 8/105 breadth, close `.3.1`, synchronize all public/continuity/capability records, clean safe
+    generated artifacts, and activate `.3.2`.
   Verification: `pending`
   Commit: `pending`
 
@@ -1857,11 +1915,15 @@ before implementation.
 | 60 | `FUTURE-PARITY-BACKLOG.3.1.1` | `done` | Contract v1 fixes semantic roles, ten families, rejections, errors, direct fixture, and 8/105 proof. |
 | 61 | `FUTURE-PARITY-BACKLOG.3.1.2` | `done` | Perl public/legacy emission, reconstruction, plan/trace/errors, and exact independent execution pass. |
 | 62 | `FUTURE-PARITY-BACKLOG.3.1.3` | `active` | Admit Perl/Rust contract baseline and return Perl to pass before Rust breadth. |
-| 63 | `FUTURE-PARITY-BACKLOG.3.2` | `pending` | Rust must expand from eight generated fixtures to the full 105-case manifest. |
-| 64 | `FUTURE-PARITY-BACKLOG.3.3` | `pending` | Dart needs emitter scaffold, family plan/direct execution, and manifest proof. |
-| 65 | `FUTURE-PARITY-BACKLOG.3.4` | `pending` | Julia needs emitter scaffold, family plan/direct execution, and manifest proof. |
-| 66 | `FUTURE-PARITY-BACKLOG.3.5` | `pending` | Exact four-backend admission promotes all states only after every generated-source proof passes. |
-| 67 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 63 | `FUTURE-PARITY-BACKLOG.3.1.3.0` | `done` | Rust's green pre-v1 scaffold gaps are exact and three bounded alignment/admission leaves exist. |
+| 64 | `FUTURE-PARITY-BACKLOG.3.1.3.1` | `active` | Add typed Rust generated-source identity, metadata, and error roles. |
+| 65 | `FUTURE-PARITY-BACKLOG.3.1.3.2` | `pending` | Add exact neutral Rust plan rejection and generated trace roles. |
+| 66 | `FUTURE-PARITY-BACKLOG.3.1.3.3` | `pending` | Run full gates, admit Perl/Rust v1 baseline, and close `.3.1`. |
+| 67 | `FUTURE-PARITY-BACKLOG.3.2` | `pending` | Rust must expand from eight generated fixtures to the full 105-case manifest. |
+| 68 | `FUTURE-PARITY-BACKLOG.3.3` | `pending` | Dart needs emitter scaffold, family plan/direct execution, and manifest proof. |
+| 69 | `FUTURE-PARITY-BACKLOG.3.4` | `pending` | Julia needs emitter scaffold, family plan/direct execution, and manifest proof. |
+| 70 | `FUTURE-PARITY-BACKLOG.3.5` | `pending` | Exact four-backend admission promotes all states only after every generated-source proof passes. |
+| 71 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
 | 65 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
 | 66 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
 | 67 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
@@ -2522,6 +2584,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.0` | Toolbox `LinkedSpec::Get` normal/captured-source comparison; isolated eval/load; debug generated-branch trace; reduced `LinkedRE::oredRE` serialization/package-binding probes; source audit; 56/2/2 capability/KM/governance/whitespace/mdBook/cleanup. | PASS. Captured Perl source is not standalone-equivalent; contract, repair, and admission are split before code and `.3.1.1` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.1` | Strict v1 schema/fixture checker; 10 families/4 rejections/error contract/direct trace+identity fixture/8-of-105 subset/live-state cross-check; canonical CI through Phase 0 `1..1030`; docs/KM/governance/whitespace/mdBook/cleanup. | PASS. Contract is canonically gated without backend behavior changes; Perl repair `.3.1.2` is active at 56/2/2. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.2` | Public/legacy deterministic source; isolated result/trace/identity/plan/error fixture; index 0/1 plus slash regex; four existing generated trace suites; measured Phase 0 FAIL 2/1030 stale locks -> PASS `1..1030` in 546s; canonical CI/docs/KM/governance/mdBook/cleanup. | PASS. Perl behavior repair is complete; capability stays partial until explicit `.3.1.3` admission. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.3.0` | Knowledge Map/source audit of Rust emitter API, markers, plan/error/trace roles, isolated harness, and exact subset; focused `source_emitter` 3/3 in 35.69s; capability/KM/governance/whitespace/mdBook/cleanup. | PASS. Four pre-v1 contract gaps are split into metadata/error `.1`, plan/trace `.2`, and admission `.3`; no behavior/status change. |
 
 ## Commit Log
 
@@ -2581,6 +2644,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.3.1.0` | `FUTURE-PARITY-BACKLOG.3.1.0 - correct Perl generated-source status` | Root-cause of dependency-regex index loss, corrected census, and contract/repair/admission split; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.3.1.1` | `FUTURE-PARITY-BACKLOG.3.1.1 - define generated-source contract` | Strict semantic schema/checker, neutral direct fixture, canonical CI integration, and public docs; no backend behavior change. |
 | `FUTURE-PARITY-BACKLOG.3.1.2` | `FUTURE-PARITY-BACKLOG.3.1.2 - repair Perl generated source` | Public emitter, dependency reconstruction, metadata/plan/trace/errors, independent exact execution, and gates. |
+| `FUTURE-PARITY-BACKLOG.3.1.3.0` | `FUTURE-PARITY-BACKLOG.3.1.3.0 - split Rust generated-source v1 alignment` | Preserves the green pre-v1 baseline while splitting identity/errors, exact plan/trace, and admission. |
 
 ## Changelog
 
@@ -2615,6 +2679,10 @@ Read-only evidence recorded on 2026-07-10:
   refs, and emits deterministic v1 identity/plan/Execute/trace/error roles. Independent packages return exact
   results for indexes zero/one and slash regexes; all four plan rejections pass. Phase 0 moves from exactly two
   stale wrapper locks to `1..1030` green. Census stays 56/2/2 until admission `.3.1.3`.
+- `2026-07-11`: `.3.1.3.0` audits Rust against the concrete v1 contract before admission. The existing all-family,
+  legacy-repetition, isolated-crate, and eight-case proof stays green, but the pre-contract API has no source
+  identity/contract marker, structured error, unknown-family rejection, or neutral generated trace roles.
+  `.3.1.3.1-.3` own those mechanisms and admission; census remains 56/2/2 and `.1` becomes active.
 - `2026-07-11`: `.1.6.4.5` adds Perl's separate portable `SpecLoader` facade and direct 14/9/4 plus pipeline proof
   without changing legacy `get_parser`/`PathSearch`. The canonical core gate passes the required new test, 239-name
   coverage, focused suites, 61x2 CLI, and Phase 0 `1..1030` in 556 seconds. Combined with immediately prior full
