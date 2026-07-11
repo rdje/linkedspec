@@ -404,6 +404,11 @@ Match helpers read the current local match being processed. Use them when the ac
 
 Prefer the explicit `match_start_*` names when the surrounding code also talks about `match_end_*`. The shorter `match_line()` and `match_col()` names are still valid and mean the left edge.
 
+An absent local match is not a zero-width match. Without a local match, `match_text()`, `match_group(...)`,
+`match_named(...)`, `match_len()`, `match_start_pos()`, and `match_end_pos()` return `undef`; groups and maps are
+empty, `match_has(...)` returns `0`, and line/column readers use the 1-based default `1`. By contrast, a real
+zero-width match has length `0` and concrete start/end positions, even when both positions are `0`.
+
 ## Entry versus match example
 
 ```text

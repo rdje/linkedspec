@@ -39,10 +39,14 @@ pub struct RuntimeContext {
     pub entry_groups: Vec<String>,
     /// Named entry match groups.
     pub entry_named: std::collections::HashMap<String, String>,
+    /// Whether an entry match exists, distinct from a present zero-width match.
+    pub entry_match_present: bool,
     /// Local capture groups (group 0 = first participating capture).
     pub match_groups: Vec<String>,
     /// Named local match groups.
     pub match_named: std::collections::HashMap<String, String>,
+    /// Whether a local match exists, distinct from a present zero-width match.
+    pub match_present: bool,
     /// Entry match span as **byte** offsets into `input` (`[start, end)`).
     /// Exposed to the DSL as char offsets by `entry_start_pos`/`entry_end_pos`.
     pub entry_start_byte: usize,
@@ -153,8 +157,10 @@ impl RuntimeContext {
             accumulator: Vec::new(),
             entry_groups: Vec::new(),
             entry_named: std::collections::HashMap::new(),
+            entry_match_present: false,
             match_groups: Vec::new(),
             match_named: std::collections::HashMap::new(),
+            match_present: false,
             entry_start_byte: 0,
             entry_end_byte: 0,
             match_start_byte: 0,

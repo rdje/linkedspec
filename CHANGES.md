@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1 — align Rust empty-match positions
+
+**Presence model:** Rust match state now carries explicit entry/local presence bits through every saved rule frame
+and direct/general execution path. Initialized offsets no longer masquerade as a match, while a real zero-width
+match at offset zero remains present. Top-rule entry seeding now uses presence rather than empty captures/span as
+its discriminator.
+
+**Exact projection:** Without a local match, match text/group/length/start/end helpers return `undef`; group/map
+collections stay empty; `match_has` returns numeric `0`; and line/column defaults remain 1. Entry/local named-
+presence helpers now serialize numeric `1`/`0`. Added the governed full-value position fixture lock plus an
+independent zero-width-at-zero lock; six older named-presence unit expectations were reconciled.
+
+**Proof/frontier:** Formatting, 137 library tests, 193 integration tests, and the unchanged 99-case oracle with
+three harness tests pass. Strict no-dependency clippy remains red on 12 pre-existing unrelated lints and reported
+none in changed lines. The durable match-presence fact, task/live/book/capability surfaces are aligned; Dart
+position `.1.6.1.2.2.2.2` is active.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3 — align Julia pure helper values
 
 **Exact values:** Julia string/array/hash/numeric predicates exercised by the governed pure fixture now return

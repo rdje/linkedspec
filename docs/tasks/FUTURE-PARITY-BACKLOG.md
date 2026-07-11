@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (all exact pure values closed; Rust position `.1.6.1.2.2.2.1` active).
+- Last updated: `2026-07-10` (Rust exact empty-local-match positions closed; Dart `.1.6.1.2.2.2.2` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -773,14 +773,20 @@ before implementation.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1`
-  Status: `active`
+  Status: `done`
   Goal: Align Rust empty local-match position projection.
   Acceptance: Exact position fixture value and existing corpus pass.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Explicit entry/local presence bits now travel with every saved rule match frame, so initialized
+    zero offsets no longer invent a local match and a real zero-width match at offset zero remains present. With no
+    local match, text/group/length/start/end positions are `undef`; group/map containers are empty; `match_has` is
+    numeric `0`; line/column defaults remain 1. Entry/local named-presence helpers return numeric `1`/`0`. The
+    exact governed fixture and an independent zero-width regression pass. `cargo fmt --all -- --check`, 137
+    library tests, 193 integration tests, and the unchanged 99-case oracle (three harness tests) pass. Strict
+    no-dependency clippy was attempted but remains red on 12 pre-existing unrelated lints; none names changed lines.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1 - align Rust empty-match positions`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Align Dart empty local-match position projection.
   Acceptance: Exact position fixture value and existing corpus pass.
   Verification: `pending`
@@ -1125,8 +1131,8 @@ before implementation.
 | 32 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1` | `done` | Rust exact pure fixture, 191 integration, and 99 oracle pass. |
 | 33 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2` | `done` | Dart exact pure fixture, 152 tests, 61x2 CLI, and 99 corpus pass. |
 | 34 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3` | `done` | Julia exact pure fixture, 1,020 assertions, 61x2 CLI, and 99 corpus pass; pure parent closes. |
-| 35 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1` | `active` | Align Rust empty local-match projection. |
-| 36 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2` | `pending` | Align Dart empty local-match projection. |
+| 35 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1` | `done` | Rust exact position fixture, zero-width distinction, 137 library, 193 integration, and 99 oracle pass. |
+| 36 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2` | `active` | Align Dart empty local-match projection. |
 | 37 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3` | `pending` | Align Julia empty local-match projection. |
 | 38 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1` | `pending` | Align Rust marker aliases/control. |
 | 39 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2` | `pending` | Align Dart marker switch selection. |

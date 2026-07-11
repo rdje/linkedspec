@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1 — absence is state, not a sentinel value):
+  A `[0,0)` span is both a valid zero-width match and a tempting initialization sentinel. Inferring presence from
+  offsets or empty capture collections necessarily collapses those states. Carry explicit presence through the
+  same saved frame as groups/named captures/spans, and let each helper decide how absence projects: nullable
+  capture/length/position values, empty containers, numeric presence, and stable 1-based diagnostic defaults.
+  Always lock the opposite case—a real zero-width match at zero—when repairing an absence bug.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3 — share splice classification, not fixture branches):
   Julia's `array(...)` evaluator already distinguished explicit splice expressions, while literal evaluation used
   a comprehension that necessarily nested every result. Route both through one append helper so AST identity—not

@@ -611,6 +611,10 @@ Index note 2026-07-10: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3` is done. Julia now 
 1,020 assertions, both 61-case CLI environments, and the unchanged 99-case corpus pass. The pure parent closes and
 active `.2.2.2.1` aligns Rust empty-local-match projection.
 
+Index note 2026-07-10: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1` is done. Rust now distinguishes an absent local match
+from a real zero-width match and matches the exact position fixture. All 137 library and 193 integration tests plus
+the unchanged 99-case oracle pass; active `.2.2.2.2` aligns Dart.
+
 Index note 2026-07-10: `FUTURE-PARITY-BACKLOG.10.0` captures the director's deep semantic-introspection API/MCP
 direction without changing the active frontier. Pending `.10.1` must design one versioned, deterministic semantic
 model exposed by every native backend, exact parity fixtures, stable provenance, bounded/privacy-aware queries,

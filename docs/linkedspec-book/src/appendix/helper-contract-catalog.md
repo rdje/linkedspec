@@ -1566,8 +1566,8 @@ These helpers read from the **current match** — the regex capture that trigger
 
 ### `entry_has(name)`
 - **Signature**: `entry_has(name: string)`
-- **Returns**: boolean
-- **Behavior**: Returns true if the named capture group exists in the current match.
+- **Returns**: integer `1` or `0`
+- **Behavior**: Returns `1` if the named capture group exists in the entry match, else `0`.
 
 ### `entry_map()`
 - **Signature**: `entry_map()`
@@ -1592,6 +1592,10 @@ These helpers read from the **current match** — the regex capture that trigger
 
 ### `match_text()`, `match_group(index)`, `match_groups()`, `match_named(name)`, `match_has(name)`, `match_map()`, `match_len()`, `match_start_pos()`, `match_end_pos()`
 - Same semantics as their `entry_*` counterparts but for the **local match** (the immediate regex match inside a code block, which may differ from the rule's entry match in nested contexts).
+- If no local match exists, text/group/named/length/start/end values are `undef`, `match_groups()` is `[]`,
+  `match_map()` is `{}`, and `match_has(name)` is `0`. Line and column readers retain their 1-based default of `1`.
+  A real zero-width local match is different: its text/capture may be empty, but its length is `0`, its positions
+  are the actual (possibly zero) offsets, and a present named empty capture makes `match_has(name)` return `1`.
 
 ## 9. Input Helpers
 

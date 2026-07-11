@@ -208,7 +208,7 @@ Top-level project docs:
   after newline `endswitch()`. A diagnostic 105-case run then passed 100/105 on each non-reference backend and
   split pure, position, marker-control, and capture/mark repairs under active `.1.6.1.2.2`; the mandatory corpus
   remains at its green 99-case boundary until final admission. Rust, Dart, and Julia pure-value children
-  `.2.2.1.1` through `.3` are closed; active `.2.2.2.1` aligns Rust's empty-local-match projection.
+  `.2.2.1.1` through `.3` are closed; Rust empty-local-match `.2.2.2.1` is closed and active `.2.2.2.2` aligns Dart.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
   {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven baseline success, four baseline

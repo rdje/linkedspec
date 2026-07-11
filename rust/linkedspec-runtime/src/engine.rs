@@ -109,8 +109,10 @@ pub struct Engine {
 struct SavedMatchState {
     entry_groups: Vec<String>,
     entry_named: std::collections::HashMap<String, String>,
+    entry_match_present: bool,
     match_groups: Vec<String>,
     match_named: std::collections::HashMap<String, String>,
+    match_present: bool,
     entry_start_byte: usize,
     entry_end_byte: usize,
     match_start_byte: usize,
@@ -168,8 +170,10 @@ impl SavedMatchState {
     fn restore(self, ctx: &mut RuntimeContext) {
         ctx.entry_groups = self.entry_groups;
         ctx.entry_named = self.entry_named;
+        ctx.entry_match_present = self.entry_match_present;
         ctx.match_groups = self.match_groups;
         ctx.match_named = self.match_named;
+        ctx.match_present = self.match_present;
         ctx.entry_start_byte = self.entry_start_byte;
         ctx.entry_end_byte = self.entry_end_byte;
         ctx.match_start_byte = self.match_start_byte;
@@ -660,8 +664,10 @@ impl GeneratedPlanExecutor<'_> {
         let saved_match = SavedMatchState {
             entry_groups: std::mem::take(&mut ctx.entry_groups),
             entry_named: std::mem::take(&mut ctx.entry_named),
+            entry_match_present: ctx.entry_match_present,
             match_groups: std::mem::take(&mut ctx.match_groups),
             match_named: std::mem::take(&mut ctx.match_named),
+            match_present: ctx.match_present,
             entry_start_byte: ctx.entry_start_byte,
             entry_end_byte: ctx.entry_end_byte,
             match_start_byte: ctx.match_start_byte,
@@ -670,10 +676,12 @@ impl GeneratedPlanExecutor<'_> {
         };
         ctx.entry_groups = saved_match.match_groups.clone();
         ctx.entry_named = saved_match.match_named.clone();
+        ctx.entry_match_present = saved_match.match_present;
         ctx.entry_start_byte = saved_match.match_start_byte;
         ctx.entry_end_byte = saved_match.match_end_byte;
         ctx.match_start_byte = 0;
         ctx.match_end_byte = 0;
+        ctx.match_present = false;
         ctx.capture_start = Some(ctx.entry_end_byte);
 
         macro_rules! return_if_rule_returned {
@@ -816,19 +824,19 @@ impl GeneratedPlanExecutor<'_> {
                     break;
                 }
 
-                let entry_was_empty = ctx.entry_groups.is_empty()
-                    && ctx.entry_named.is_empty()
-                    && ctx.entry_start_byte == ctx.entry_end_byte;
+                let entry_was_empty = !ctx.entry_match_present;
                 ctx.set_pos(m.end);
                 ctx.match_groups = m.captures.clone();
                 ctx.match_named = m.named.clone();
                 ctx.match_start_byte = m.start;
                 ctx.match_end_byte = m.end;
+                ctx.match_present = true;
                 if entry_was_empty {
                     ctx.entry_groups = m.captures.clone();
                     ctx.entry_named = m.named.clone();
                     ctx.entry_start_byte = m.start;
                     ctx.entry_end_byte = m.end;
+                    ctx.entry_match_present = true;
                 }
 
                 let mut dispatched_acode = false;
@@ -1045,8 +1053,10 @@ impl GeneratedPlanExecutor<'_> {
         let saved_match = SavedMatchState {
             entry_groups: std::mem::take(&mut ctx.entry_groups),
             entry_named: std::mem::take(&mut ctx.entry_named),
+            entry_match_present: ctx.entry_match_present,
             match_groups: std::mem::take(&mut ctx.match_groups),
             match_named: std::mem::take(&mut ctx.match_named),
+            match_present: ctx.match_present,
             entry_start_byte: ctx.entry_start_byte,
             entry_end_byte: ctx.entry_end_byte,
             match_start_byte: ctx.match_start_byte,
@@ -1055,10 +1065,12 @@ impl GeneratedPlanExecutor<'_> {
         };
         ctx.entry_groups = saved_match.match_groups.clone();
         ctx.entry_named = saved_match.match_named.clone();
+        ctx.entry_match_present = saved_match.match_present;
         ctx.entry_start_byte = saved_match.match_start_byte;
         ctx.entry_end_byte = saved_match.match_end_byte;
         ctx.match_start_byte = 0;
         ctx.match_end_byte = 0;
+        ctx.match_present = false;
         ctx.capture_start = Some(ctx.entry_end_byte);
 
         macro_rules! return_if_rule_returned {
@@ -1730,8 +1742,10 @@ impl Engine {
         let saved_match = SavedMatchState {
             entry_groups: std::mem::take(&mut ctx.entry_groups),
             entry_named: std::mem::take(&mut ctx.entry_named),
+            entry_match_present: ctx.entry_match_present,
             match_groups: std::mem::take(&mut ctx.match_groups),
             match_named: std::mem::take(&mut ctx.match_named),
+            match_present: ctx.match_present,
             entry_start_byte: ctx.entry_start_byte,
             entry_end_byte: ctx.entry_end_byte,
             match_start_byte: ctx.match_start_byte,
@@ -1744,11 +1758,13 @@ impl Engine {
         // framework passing the top rule's own match as `$info`).
         ctx.entry_groups = saved_match.match_groups.clone();
         ctx.entry_named = saved_match.match_named.clone();
+        ctx.entry_match_present = saved_match.match_present;
         ctx.entry_start_byte = saved_match.match_start_byte;
         ctx.entry_end_byte = saved_match.match_end_byte;
         // LOCAL match (`LMATCH`) starts empty until this rule matches its regex.
         ctx.match_start_byte = 0;
         ctx.match_end_byte = 0;
+        ctx.match_present = false;
         ctx.capture_start = Some(ctx.entry_end_byte);
 
         macro_rules! return_if_rule_returned {
@@ -2055,9 +2071,7 @@ impl Engine {
                     break;
                 }
 
-                let entry_was_empty = ctx.entry_groups.is_empty()
-                    && ctx.entry_named.is_empty()
-                    && ctx.entry_start_byte == ctx.entry_end_byte;
+                let entry_was_empty = !ctx.entry_match_present;
                 ctx.set_pos(m.end);
                 // LOCAL match (`LMATCH`) — the rule's own regex match. This is
                 // what `match_*` helpers read; it must NOT touch the entry match
@@ -2068,6 +2082,7 @@ impl Engine {
                 ctx.match_named = m.named.clone();
                 ctx.match_start_byte = m.start;
                 ctx.match_end_byte = m.end;
+                ctx.match_present = true;
                 // Top-rule / dispatcher-less entry: the rule's own first match
                 // is also its entry match (the framework passes the top rule's
                 // own match as `$info`). A dispatched child already carries a
@@ -2079,6 +2094,7 @@ impl Engine {
                     ctx.entry_named = m.named.clone();
                     ctx.entry_start_byte = m.start;
                     ctx.entry_end_byte = m.end;
+                    ctx.entry_match_present = true;
                 }
 
                 // ── Action-edge dispatch ──
@@ -5716,15 +5732,25 @@ impl Engine {
                     .unwrap_or(RuntimeValue::Undef),
                 None => RuntimeValue::Undef,
             }),
-            "entry_has" => Ok(RuntimeValue::Bool(
-                Self::resolve_named_capture_key(raw_args, args)
+            "entry_has" => Ok(RuntimeValue::Number(
+                if Self::resolve_named_capture_key(raw_args, args)
                     .map(|name| ctx.entry_named.contains_key(&name))
-                    .unwrap_or(false),
+                    .unwrap_or(false)
+                {
+                    1.0
+                } else {
+                    0.0
+                },
             )),
             "entry_map" | "entry_named_map" => Ok(named_map_to_hash(&ctx.entry_named)),
-            "match_text" => Ok(RuntimeValue::Scalar(
-                span_text(&ctx.input, ctx.match_start_byte, ctx.match_end_byte).unwrap_or_default(),
-            )),
+            "match_text" => Ok(if ctx.match_present {
+                RuntimeValue::Scalar(
+                    span_text(&ctx.input, ctx.match_start_byte, ctx.match_end_byte)
+                        .unwrap_or_default(),
+                )
+            } else {
+                RuntimeValue::Undef
+            }),
             "exit_now" => {
                 let status = args.first().and_then(|a| a.as_number()).unwrap_or(1.0) as i32;
                 ctx.exit_status = Some(status);
@@ -6401,24 +6427,34 @@ impl Engine {
                     line_col_from_optional_char_arg(&ctx.input, args, ctx.match_end_byte);
                 Ok(RuntimeValue::Number(col as f64))
             }
-            "match_len" => Ok(RuntimeValue::Number(
-                span_char_len(&ctx.input, ctx.match_start_byte, ctx.match_end_byte).unwrap_or(0)
-                    as f64,
-            )),
-            "match_start_pos" => Ok(RuntimeValue::Number(byte_to_char_offset(
-                &ctx.input,
-                ctx.match_start_byte,
-            ) as f64)),
-            "match_end_pos" => Ok(RuntimeValue::Number(byte_to_char_offset(
-                &ctx.input,
-                ctx.match_end_byte,
-            ) as f64)),
+            "match_len" => Ok(if ctx.match_present {
+                span_char_len(&ctx.input, ctx.match_start_byte, ctx.match_end_byte)
+                    .map(|length| RuntimeValue::Number(length as f64))
+                    .unwrap_or(RuntimeValue::Undef)
+            } else {
+                RuntimeValue::Undef
+            }),
+            "match_start_pos" => Ok(if ctx.match_present {
+                RuntimeValue::Number(byte_to_char_offset(&ctx.input, ctx.match_start_byte) as f64)
+            } else {
+                RuntimeValue::Undef
+            }),
+            "match_end_pos" => Ok(if ctx.match_present {
+                RuntimeValue::Number(byte_to_char_offset(&ctx.input, ctx.match_end_byte) as f64)
+            } else {
+                RuntimeValue::Undef
+            }),
             "match_group" => {
-                if let Some(arg) = args.first() {
+                if !ctx.match_present {
+                    Ok(RuntimeValue::Undef)
+                } else if let Some(arg) = args.first() {
                     let idx = arg.as_number().unwrap_or(0.0) as usize;
-                    Ok(RuntimeValue::Scalar(
-                        ctx.match_groups.get(idx).cloned().unwrap_or_default(),
-                    ))
+                    Ok(ctx
+                        .match_groups
+                        .get(idx)
+                        .cloned()
+                        .map(RuntimeValue::Scalar)
+                        .unwrap_or(RuntimeValue::Undef))
                 } else {
                     Ok(RuntimeValue::Undef)
                 }
@@ -6442,10 +6478,15 @@ impl Engine {
                     .unwrap_or(RuntimeValue::Undef),
                 None => RuntimeValue::Undef,
             }),
-            "match_has" => Ok(RuntimeValue::Bool(
-                Self::resolve_named_capture_key(raw_args, args)
+            "match_has" => Ok(RuntimeValue::Number(
+                if Self::resolve_named_capture_key(raw_args, args)
                     .map(|name| ctx.match_named.contains_key(&name))
-                    .unwrap_or(false),
+                    .unwrap_or(false)
+                {
+                    1.0
+                } else {
+                    0.0
+                },
             )),
             "match_map" | "match_named_map" => Ok(named_map_to_hash(&ctx.match_named)),
             // ── Scalar transforms ──
@@ -8629,36 +8670,33 @@ ChildB:
 
     #[test]
     fn helpers_5_5_1_entry_has_presence() {
-        // entry_has(name) is true for a present named group, false otherwise.
+        // entry_has(name) returns Perl-compatible numeric 1/0 presence.
         let g_present = r#"Top::
  /(?P<word>\w+)/
  E { return(entry_has("word")) }
 "#;
-        assert!(
-            run_5_5_1(g_present, "hi")
-                .last()
-                .unwrap()
-                .as_bool()
-                .unwrap()
+        assert_eq!(
+            run_5_5_1(g_present, "hi").last().unwrap().as_f64(),
+            Some(1.0)
         );
 
         let g_present_bare = r#"Top::
  /(?P<word>\w+)/
  E { return(entry_has(word)) }
 "#;
-        assert!(
-            run_5_5_1(g_present_bare, "hi")
-                .last()
-                .unwrap()
-                .as_bool()
-                .unwrap()
+        assert_eq!(
+            run_5_5_1(g_present_bare, "hi").last().unwrap().as_f64(),
+            Some(1.0)
         );
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
  E { return(entry_has("missing")) }
 "#;
-        assert!(!run_5_5_1(g_absent, "hi").last().unwrap().as_bool().unwrap());
+        assert_eq!(
+            run_5_5_1(g_absent, "hi").last().unwrap().as_f64(),
+            Some(0.0)
+        );
     }
 
     #[test]
@@ -8716,31 +8754,28 @@ ChildB:
  /(?P<word>\w+)/
  E { return(match_has("word")) }
 "#;
-        assert!(
-            run_5_5_1(g_present, "hi")
-                .last()
-                .unwrap()
-                .as_bool()
-                .unwrap()
+        assert_eq!(
+            run_5_5_1(g_present, "hi").last().unwrap().as_f64(),
+            Some(1.0)
         );
 
         let g_present_bare = r#"Top::
  /(?P<word>\w+)/
  E { return(match_has(word)) }
 "#;
-        assert!(
-            run_5_5_1(g_present_bare, "hi")
-                .last()
-                .unwrap()
-                .as_bool()
-                .unwrap()
+        assert_eq!(
+            run_5_5_1(g_present_bare, "hi").last().unwrap().as_f64(),
+            Some(1.0)
         );
 
         let g_absent = r#"Top::
  /(?P<word>\w+)/
  E { return(match_has("missing")) }
 "#;
-        assert!(!run_5_5_1(g_absent, "hi").last().unwrap().as_bool().unwrap());
+        assert_eq!(
+            run_5_5_1(g_absent, "hi").last().unwrap().as_f64(),
+            Some(0.0)
+        );
     }
 
     #[test]

@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1 — align Rust empty-match positions**
+  (DONE — Rust exact position values closed; Dart `.2.2.2.2` active).
+
+  **Implementation:** Explicit entry/local match-presence bits replace zero-offset inference across saved rule
+  frames. Absent local capture/length/position values are null, containers are empty, named presence is numeric,
+  and 1-based line/column defaults remain stable; real zero-width matches remain present.
+
+  **Proof:** Governed exact position source, independent zero-width lock, 137/137 library, 193/193 integration,
+  unchanged 99-case oracle (three harness tests), and formatting pass. Strict clippy exposed only 12 pre-existing
+  unrelated lints and no changed-line issue.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3 — align Julia pure helper values**
   (DONE — all exact pure values closed; Rust position `.2.2.2.1` active).
 

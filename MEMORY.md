@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3` — Julia pure helper values match the exact fixture.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2` — Dart pure helper values match the exact fixture.
-- recent_context: Rust, Dart, and Julia pure predicates return numeric 1/0, direct literals splice explicit `flat`,
-  and explicit working-array string transforms mutate only in statement context. The pure parent is closed; all
-  position/control/capture children remain before final 105 admission.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1` — Rust empty-local-match positions match exactly.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3` — Julia closes exact pure helper values on all backends.
+- recent_context: Rust match presence is explicit, so absent local match values are null/empty/default without
+  conflating a zero-width match at offset zero. Rust passes 137 library, 193 integration, and 99 oracle; Dart/Julia
+  position plus all control/capture children remain before final 105 admission.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3 - align Julia pure helper values`; previous committed HEAD is
-  `8cefc54e FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2 - align Dart pure helper values`.
+  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1 - align Rust empty-match positions`; previous committed HEAD is
+  `28cc8616 FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3 - align Julia pure helper values`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2.2.1` Rust empty-local-match projection is active.
-- next_action: align Rust's exact empty local-match capture/length/position/map/has and 1-based line/column values
-  after an entry match without inventing a local match; preserve the unchanged 99-case corpus.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2.2.2` Dart empty-local-match projection is active.
+- next_action: align Dart's exact empty local-match capture/length/position/map/has and 1-based line/column values
+  after an entry match without conflating a real zero-width match; preserve the unchanged 99-case corpus.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
