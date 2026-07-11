@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.1.3 — add strict Lua corpus IO
+
+Added a zero-dependency pure-Lua JSON codec shared by PUC Lua and LuaJIT. It implements strict UTF-8 and JSON
+grammar, Unicode escapes/surrogate pairs, explicit null/array/harray identities, canonical recursive object-key
+ordering, and rejection of duplicate keys, non-finite numbers, cycles, and ambiguous plain Lua tables.
+
+Added native corpus loading for the exact 105-case manifest. It validates format/count/names/duplicates, exact
+missing/stale fixture directory membership, all required strict-UTF-8 source/input/expected files, and typed
+expected JSON. The developer corpus command reports the validated manifest but rejects execution; `parse_spec` and
+the primary parser CLI remain unavailable until their owners land.
+
+The local gate passes syntax, 10/10 PUC Lua tests, exact parser-stub and 105-fixture command checks, and 10/10
+LuaJIT tests. Temporary corruption fixtures are recursively removed. Artifact cleanup also removed 81 MB of
+reproducible `rust/target/debug` state. Roadmap/book/KM/task/live docs advance to typed source AST `.2.1`; the docs
+explicitly distinguish Unicode from the strict UTF-8 boundary encoding.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.1.2 — scaffold native Lua backend
 
 Added the first repository-owned Lua backend files without claiming parser behavior. `lua/src/linkedspec/init.lua`

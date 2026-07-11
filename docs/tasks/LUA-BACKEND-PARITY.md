@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-11` (zero-dependency native scaffold `.1.2` closed; corpus IO `.1.3` active)
+- Last updated: `2026-07-11` (strict typed JSON/corpus IO `.1.3` closed; source AST `.2.1` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -62,7 +62,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Children: `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`
 
 - ID: `LUA-BACKEND-PARITY.1`
-  Status: `active`
+  Status: `done`
   Goal: Establish toolchain, package layout, test harness, and corpus IO before parser behavior.
   Children: `.1.1`, `.1.2`, `.1.3`
 
@@ -112,20 +112,46 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   memory all name the verified scaffold boundary and active strict corpus-IO successor `.1.3`.
 
 - ID: `LUA-BACKEND-PARITY.1.3`
-  Status: `active`
+  Status: `done`
   Goal: Add strict manifest/fixture IO without parser execution.
   Acceptance: Validate the 105-case manifest, exact directory membership, required UTF-8 files, expected JSON, and
     stale/missing fixtures; keep execution disabled until runtime ownership exists.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Added the zero-dependency `linkedspec.json` codec with strict UTF-8
+    validation, strict JSON grammar/Unicode escapes, explicit null/array/harray identity, duplicate-key rejection,
+    ambiguous-plain-table rejection, finite numbers, cycles, and recursively canonical object ordering. Added
+    `linkedspec.corpus` to validate format/count/names/duplicates, exact missing/stale directory membership, all
+    required strict-UTF-8 files, and typed expected JSON for the exact 105-case checked-in manifest. The developer
+    corpus command validates and reports 105 fixtures while explicitly refusing execution; the primary CLI remains
+    an exit-2 parser stub. `tools/run_lua_local.sh` passes syntax, 10/10 PUC Lua tests, exact process checks, 105
+    command validation, and 10/10 LuaJIT compatibility tests with no leftover temp directories.
+  Commit: `LUA-BACKEND-PARITY.1.3 - add strict Lua corpus IO`
+
+### `LUA-BACKEND-PARITY.1.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Knowledge Map/toolbox audit plus direct manifest inspection confirmed the exact
+  105-case corpus and showed the Lua scaffold had no JSON decoder, typed JSON identities, UTF-8 validator, fixture
+  loader, or drift guard.
+- [x] **ROOT CAUSE (WHY + WHERE)** — No installed Lua JSON package can preserve the required null/array/harray
+  distinction portably across PUC Lua and LuaJIT; Lua's standard library also has no directory iterator, so `.1.3`
+  owned a repository codec and a safely quoted, NUL-delimited read-only fixture inventory adapter.
+- [x] **FIX** — Added strict `linkedspec.json`, `linkedspec.corpus`, validation-only corpus runner behavior, public
+  in-memory loading, focused malformed/drift/UTF-8 proofs, and exact command-gate accounting.
+- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 10/10 on PUC Lua and 10/10 on LuaJIT, loads
+  all 105 fixtures, validates exact process output, and rejects unsupported format, unsafe/duplicate names,
+  count/directory drift, missing files, malformed JSON, invalid UTF-8, duplicate JSON keys, and ambiguous tables.
+- [x] **NO REGRESSION** — Parser execution and `parse_spec` remain absent, the primary CLI retains its exact
+  scaffold failure, the corpus runner rejects `--execute`, and capability/generated-source states stay 60/0/0.
+- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook, Knowledge Map, README, changes/development/live status, and
+  bounded memory all describe strict UTF-8 as this text boundary encoding—not as a synonym for Unicode—and point
+  to source AST `.2.1` next.
 
 - ID: `LUA-BACKEND-PARITY.2`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the universal `.spec` frontend.
   Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`
 
 - ID: `LUA-BACKEND-PARITY.2.1`
-  Status: `pending`
+  Status: `active`
   Goal: Define typed source AST and lossless JSON/provenance projection.
   Acceptance: Spec/rule/mode/body/edge/lifecycle/function/parse-job/source-span types match the neutral schema;
     explicit tagged representations preserve scalar/array/harray/codeblock identity.
@@ -363,7 +389,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | ---: | --- | --- | --- |
 | 1 | `LUA-BACKEND-PARITY.1.1` | `done` | PUC/LuaJIT, layout, zero-dependency tests, JSON, regex, and cache policy locked. |
 | 2 | `LUA-BACKEND-PARITY.1.2` | `done` | Native module/test/bin/local-gate scaffold passes PUC Lua and LuaJIT. |
-| 3 | `LUA-BACKEND-PARITY.1.3` | `active` | Add strict 105-case corpus IO and typed JSON. |
+| 3 | `LUA-BACKEND-PARITY.1.3` | `done` | Strict typed JSON and exact 105-case manifest/fixture IO pass both runtimes. |
+| 4 | `LUA-BACKEND-PARITY.2.1` | `active` | Define the typed universal source AST and lossless JSON/provenance projection. |
 
 ## Initial toolchain evidence (read-only planning audit)
 
@@ -405,3 +432,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Creates this full-parity plan; no Lua implementation code. |
 | `LUA-BACKEND-PARITY.1.1` | `LUA-BACKEND-PARITY.1.1 - lock Lua toolchain and package policy` | Locks runtimes, layout, zero-dependency harness, JSON/regex ownership, and cache boundaries; no code. |
 | `LUA-BACKEND-PARITY.1.2` | `LUA-BACKEND-PARITY.1.2 - scaffold native Lua backend` | Native module identity, dependency-free dual-runtime tests, explicit command stubs, and `.1.3` handoff. |
+| `LUA-BACKEND-PARITY.1.3` | `LUA-BACKEND-PARITY.1.3 - add strict Lua corpus IO` | Pure-Lua typed JSON, strict UTF-8, exact 105-fixture drift validation, and source-AST handoff. |

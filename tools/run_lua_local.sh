@@ -29,19 +29,21 @@ find lua -type f \( -name '*.lua' -o -name 'linkedspec-lua' \) -print0 |
 log "running primary PUC Lua tests"
 "$LUA_CMD" lua/test/run.lua
 
-log "checking explicit scaffold command failures"
+log "checking explicit parser CLI scaffold failure"
 set +e
 cli_stderr=$("$LUA_CMD" lua/bin/linkedspec-lua 2>&1 >/dev/null)
 cli_status=$?
-corpus_stderr=$("$LUA_CMD" lua/bin/corpus_runner.lua 2>&1 >/dev/null)
-corpus_status=$?
 set -e
 [ "$cli_status" -eq 2 ] || fail "CLI scaffold exit was $cli_status, expected 2"
 [ "$cli_stderr" = 'linkedspec-lua: backend scaffold; parser CLI is not implemented' ] ||
  fail "CLI scaffold stderr drifted"
-[ "$corpus_status" -eq 2 ] || fail "corpus scaffold exit was $corpus_status, expected 2"
-[ "$corpus_stderr" = 'linkedspec-lua corpus runner: backend scaffold; corpus IO is not implemented' ] ||
- fail "corpus scaffold stderr drifted"
+
+log "validating the exact checked-in corpus through the developer command"
+corpus_output=$("$LUA_CMD" lua/bin/corpus_runner.lua --corpus rust/linkedspec-runtime/tests/corpus)
+printf '%s\n' "$corpus_output" | grep -F 'fixtures: 105' >/dev/null ||
+ fail "corpus runner fixture count drifted"
+printf '%s\n' "$corpus_output" | grep -F 'status: manifest validated; parser execution is not implemented' >/dev/null ||
+ fail "corpus runner execution boundary drifted"
 
 if command -v "$LUAJIT_CMD" >/dev/null 2>&1; then
  log "running secondary LuaJIT compatibility tests"

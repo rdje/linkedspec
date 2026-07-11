@@ -11,7 +11,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, backend, scaffold, embedding, tests, PUC-Lua, LuaJIT]
-evidence: "LUA-BACKEND-PARITY.1.2 adds lua/src/linkedspec/init.lua, lua/test/run.lua, lua/bin/linkedspec-lua, lua/bin/corpus_runner.lua, lua/README.md, and tools/run_lua_local.sh. Exact repo-LUA_PATH syntax/module tests pass 4/4 on PUC Lua and 4/4 on LuaJIT; command stubs produce exact stderr and exit 2. No parser/corpus/JSON/LPeg API is claimed."
+evidence: "LUA-BACKEND-PARITY.1.2 adds the native scaffold; .1.3 adds typed JSON and corpus IO. The current local gate passes 10/10 on PUC Lua and 10/10 on LuaJIT plus exact parser-stub and 105-fixture corpus command checks. No parser or LPeg API is claimed."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -20,13 +20,12 @@ The repository now owns a native Lua module at `lua/src/linkedspec/init.lua`. Wi
 `backend_status()` call returns a fresh table, so caller mutation cannot alter later status.
 
 `lua/test/run.lua` is a dependency-free assertion driver. `tools/run_lua_local.sh` syntax-checks every Lua source,
-runs four module/status/unavailable-boundary tests on PUC Lua and the same four on LuaJIT, and byte-checks the two
-process stubs. It writes no cache or global module state.
+runs ten current module/JSON/corpus/boundary tests on PUC Lua and the same ten on LuaJIT, byte-checks the parser
+stub, and validates the exact 105-fixture corpus command. It writes no cache or global module state.
 
-`lua/bin/linkedspec-lua` and `lua/bin/corpus_runner.lua` are executable developer stubs. Both resolve the native
-module relative to their own location and exit `2` with explicit scaffold messages. They do not expose fake help,
-parser, corpus, or status commands. The module deliberately has no `parse_spec` function yet. Typed JSON and strict
-manifest IO are owned by active `.1.3`; source parsing follows later.
+`lua/bin/linkedspec-lua` remains an executable developer stub and exits `2` with an explicit parser message. The
+corpus runner now performs strict validation and explicitly declines execution. Neither exposes a fake parser; the
+module deliberately has no `parse_spec` function yet. Typed source AST `.2.1` follows corpus IO.
 
 Related facts: [[lua-toolchain-package-policy]], [[lua-backend-full-parity-plan]],
 [[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]].

@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.1.3 — add strict Lua corpus IO**
+  (DONE — typed JSON and exact 105-case IO pass both runtimes; source AST `.2.1` next).
+
+  **Implementation:** Pure-Lua strict JSON preserves null/array/harray identity and canonical object ordering.
+  Corpus loading validates format/count/names, exact directory membership, required strict-UTF-8 files, and
+  expected JSON. The developer command validates but cannot execute; the primary parser CLI remains a stub.
+
+  **Proof:** Syntax, PUC Lua 10/10, exact process checks, 105 fixtures, and LuaJIT 10/10 pass. Malformed/drift/UTF-8
+  cases are locked, temporary fixtures are deleted, and capability state remains 60/0/0 for admitted backends.
+  Cleanup removed 81 MB of reproducible Rust debug artifacts under the disk-pressure directive.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.1.2 — scaffold native Lua backend**
   (DONE — native module/test/bin/local-gate scaffold passes; corpus IO `.1.3` next).
 

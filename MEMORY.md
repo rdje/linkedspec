@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.1.2` — native Lua scaffold and dual-runtime local gate pass.
-- prior_leaf: `LUA-BACKEND-PARITY.1.1` — locked Lua toolchain/package/test/cache policy.
-- recent_context: `lua/src/linkedspec/init.lua`, dependency-free tests, CLI/corpus exit-2 stubs, README, and
-  `tools/run_lua_local.sh` exist. Syntax plus 4/4 PUC Lua and 4/4 LuaJIT tests pass. No parser/corpus behavior is
-  faked; pure-Lua typed JSON and strict 105-case manifest IO are owned by active `.1.3`.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.1.3` — strict typed JSON and exact 105-case corpus IO pass.
+- prior_leaf: `LUA-BACKEND-PARITY.1.2` — native Lua scaffold and dual-runtime local gate pass.
+- recent_context: `linkedspec.json` preserves null/array/harray identity and canonical keys with strict UTF-8;
+  `linkedspec.corpus` validates exact manifest/directory/file/expected JSON state. Syntax, PUC Lua 10/10,
+  105-fixture command validation, and LuaJIT 10/10 pass. Parser execution and `parse_spec` remain absent.
 - latest_commit: this resume block is prepared for commit
-  `LUA-BACKEND-PARITY.1.2 - scaffold native Lua backend`; previous committed HEAD is
-  `4761c77e LUA-BACKEND-PARITY.1.1 - lock Lua toolchain and package policy`.
+  `LUA-BACKEND-PARITY.1.3 - add strict Lua corpus IO`; previous committed HEAD is
+  `e27b05ce LUA-BACKEND-PARITY.1.2 - scaffold native Lua backend`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `LUA-BACKEND-PARITY.1.3`; strict typed JSON and corpus manifest IO are active.
-- next_action: Implement the task-owned pure-Lua typed JSON codec, validate strict UTF-8 and the exact 105-case
-  manifest/fixture membership and expected JSON without parser execution, extend both runtime gates, and replace
-  only the corpus-IO scaffold surface owned by `.1.3`.
+- active_work_unit: `LUA-BACKEND-PARITY.2.1`; typed universal source AST/provenance projection is active.
+- next_action: Define task-owned Lua source AST constructors and lossless typed JSON/provenance projection for
+  spec/rule/mode/body/edge/lifecycle/function/parse-job/source-span nodes, preserving scalar/array/harray/codeblock
+  identity without parsing source; prove PUC Lua and scoped LuaJIT round trips before `.2.2` parsing.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

@@ -13,7 +13,5 @@ local function prepend_repo_module_path()
 end
 
 prepend_repo_module_path()
-local linkedspec = require("linkedspec")
-local result = linkedspec.corpus_runner_scaffold_result(arg)
-io.stderr:write(result.stderr)
-os.exit(result.exit_code)
+local corpus_runner = require("linkedspec.corpus_runner")
+os.exit(corpus_runner.run(arg, io.stdout, io.stderr))

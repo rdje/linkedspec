@@ -55,7 +55,7 @@ Three backbone items tracked major structural modernization — all done:
 
 - **Documentation and book sync** — the book is kept aligned with the codebase as features land and surfaces evolve.
 - **Variant-agnostic documentation** — this book is being aligned so it describes the `.spec` contract, DSL, and helper semantics backend-neutrally, with the Perl implementation shown as the reference backend rather than as "the" implementation.
-- **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred parity work. Exact CLI `.1.5`, all non-codegen capability work `.1.6`, and Rust generated breadth `.3.2` are closed. The validated 15-capability census classifies its 60 states as 58 pass, zero partial, and two gaps. Both gaps belong only to Dart/Julia generated parser source and are owned by active `.3` before Lua.
+- **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred parity work. Exact CLI `.1.5`, all non-codegen capability work `.1.6`, and generated-source `.3` are closed at 60 pass / zero partial / zero gap for Perl, Rust, Dart, and Julia. Lua now has a dependency-free native scaffold plus strict typed JSON and exact 105-case manifest/fixture validation on PUC Lua and LuaJIT; parser execution remains absent, and typed source AST `.2.1` is active.
 - **Semantic introspection / MCP direction** - parked `.10.1` will design one versioned, deterministic semantic
   query model exposed from every native backend. It covers rules/edges/calls, spans/provenance, inferred shapes,
   resolution, generated-source relationships, diagnostics, and explanations. MCP is a thin transport over that

@@ -1,9 +1,12 @@
+local corpus = require("linkedspec.corpus")
+local json = require("linkedspec.json")
+
 local M = {}
 
 M.PACKAGE_NAME = "linkedspec"
 M.PACKAGE_VERSION = "0.1.0"
 M.BACKEND_NAME = "lua"
-M.PARITY_STATUS = "scaffold"
+M.PARITY_STATUS = "corpus_io"
 M.CLI_ENTRYPOINT = "lua/bin/linkedspec-lua"
 M.CORPUS_RUNNER_ENTRYPOINT = "lua/bin/corpus_runner.lua"
 
@@ -53,11 +56,7 @@ function M.cli_scaffold_result()
   }
 end
 
-function M.corpus_runner_scaffold_result()
-  return {
-    exit_code = 2,
-    stderr = "linkedspec-lua corpus runner: backend scaffold; corpus IO is not implemented\n",
-  }
-end
+M.json = json
+M.load_corpus_fixtures = corpus.load_corpus_fixtures
 
 return M

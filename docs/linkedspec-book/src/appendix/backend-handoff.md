@@ -542,16 +542,19 @@ The foundation policy uses `lua/src/linkedspec/`, a dependency-free
 `lua/test/run.lua`, `lua/bin/linkedspec-lua`, and
 `lua/bin/corpus_runner.lua`. Local commands prepend those source paths through
 `LUA_PATH` and never write global package locations. No JSON package is
-installed, so corpus IO will add a small pure-Lua codec with explicit null,
+required: corpus IO now uses a small pure-Lua codec with explicit null,
 array, and harray identity plus canonical object ordering. LPeg remains outside
 the scaffold dependency set. Any future LuaRocks tree must be caller-owned
 under temporary storage and recursively removed. The native scaffold is now
 implemented: `require("linkedspec")` returns exact backend/status/entrypoint
-identity, a dependency-free test driver passes on PUC Lua and LuaJIT, and the
-two command files fail explicitly with exit `2` rather than pretending parser
-or corpus behavior exists. `tools/run_lua_local.sh` owns syntax, module, process,
-and secondary-runtime checks. Typed JSON and strict 105-case manifest IO are the
-active next leaf.
+identity, and the primary command fails explicitly with exit `2` rather than
+pretending parser behavior exists. The developer corpus command validates all
+105 manifest fixtures—the exact directory set, required source/input/expected
+files, strict UTF-8, and typed expected JSON—while explicitly declining parser
+execution. Unicode is the character/code-point model; strict UTF-8 is the
+selected byte encoding at this persisted boundary, and UTF-16/UTF-32 are not
+auto-detected. `tools/run_lua_local.sh` passes 10/10 tests on PUC Lua and 10/10
+on LuaJIT. Typed universal source AST/provenance `.2.1` is the active next leaf.
 
 ### Julia Backend Commands, Embedding, and Status
 

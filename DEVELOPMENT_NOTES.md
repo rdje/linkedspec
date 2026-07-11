@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.1.3 — type JSON tables and declare byte boundaries):
+  Lua tables cannot reveal whether `{}` means an array or harray, and `nil` cannot occupy an array slot, so decoded
+  JSON needs private metatable tags plus a non-nil null sentinel. Reject plain tables on encoding instead of
+  guessing from keys. Validate strict UTF-8 before JSON scanning, decode surrogate pairs deliberately, reject
+  duplicate object keys, and recursively sort object keys for canonical output. Unicode remains the character
+  model; UTF-8 is only the selected corpus byte encoding. Since standard Lua lacks directory iteration, isolate a
+  read-only adapter using safely shell-quoted paths and NUL-delimited `find` output, then prove exact stale/missing
+  membership and leave parser execution unavailable.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.1.2 — make unavailable behavior explicit at a new backend boundary):
   A useful native scaffold proves module discovery, runtime compatibility, command identity, and deterministic
   process failure without pretending that parsing exists. Return fresh status tables so caller mutation cannot
