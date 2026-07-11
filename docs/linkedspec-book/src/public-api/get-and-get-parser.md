@@ -20,6 +20,12 @@ in-process data path, not identical spelling:
 | Julia | Rule-only: `parse_spec(...)`; source with top-level functions: `parse_spec_with_staged_user_function_definitions(...)`; then `compile_spec(...)` → `LinkedSpecRuntimeEngine(...)` → `runtime_parse(...)` / `runtime_execute(...)`. |
 | Lua and later backends | An idiomatic native module must expose equivalent in-memory parse/compile/execute capability before its CLI can count as a complete backend. |
 
+The in-memory role is implemented on all four current backends. The file-oriented named-resolution role is not yet
+library-equivalent: Perl exposes `get_parser(...)`, while Rust, Dart, and Julia currently resolve named specs only
+inside their thin primary process adapters. `FUTURE-PARITY-BACKLOG.1.6.4` owns idiomatic native equivalents and
+shared path/search fixtures; until it closes, callers on those backends should load source explicitly and pass it
+to the in-memory parser.
+
 File-oriented helpers, per-variant CLIs, corpus runners, Wasm/web/mobile wrappers, and
 service adapters may wrap these APIs. They are secondary surfaces and must not contain
 parser, compiler, runtime, or `.spec` semantics unavailable to native library callers.

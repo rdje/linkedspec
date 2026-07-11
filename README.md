@@ -86,6 +86,10 @@ Top-level directories and files:
 - `cli_conformance/`
   - Backend-neutral primary CLI manifest, fixture inputs, and exact expected bytes. The reusable runner accepts
     arbitrary backend command arrays and executes every case in an isolated workspace.
+- `capability_conformance/`
+  - Machine-readable current-capability census across Perl, Rust, Dart, and Julia. It distinguishes implementation
+    gaps from proof gaps, points every non-pass state at a task-tree owner, and excludes only explicitly legacy or
+    future surfaces.
 - `bin/`
   - Utility/command scripts.
   - `bin/linkedspec`: Perl reference compile/run CLI with discoverable trace flags.
@@ -195,6 +199,9 @@ Top-level project docs:
 
 ## Local CI
 - Run `bash tools/run_ci_local.sh` from the repo root to execute the canonical regression gate.
+- Run `perl tools/check_capability_conformance.pl` to validate the current 15-capability backend census, evidence
+  paths, and gap ownership. The current audit records 47 pass, five partial-proof, and eight gap backend states;
+  `.1.6.1` through `.1.6.5` own non-codegen work, while generated source remains top-level `.3`.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
   {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven baseline success, four baseline

@@ -80,6 +80,19 @@ matrix explicitly:
 LINKEDSPEC_RUN_CLI_MATRIX=1 bash tools/run_ci_local.sh
 ```
 
+## Capability Census Gate
+
+The exact CLI and interpreter corpus are necessary but do not enumerate every public API and mdBook contract.
+Validate the machine-readable broader census with:
+
+```bash
+perl tools/check_capability_conformance.pl
+```
+
+`capability_conformance/manifest.json` currently contains 15 capabilities and 60 backend states: 47 pass, five
+partial-proof, and eight gap. Every partial/gap state names a task-tree owner, every evidence path must exist, and
+legacy/future exclusions are explicit. The canonical local gate runs this check before focused suites.
+
 ## Focused Rust Gate
 
 Run the repo-owned Rust gate from the repository root:
@@ -212,6 +225,7 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
 - rejects untracked files inside CI input areas,
 - audits selected core paths for machine-specific absolute paths,
 - runs Perl syntax checks for the library, primary CLI, neutral runner, and focused tests,
+- validates the machine-readable capability census, backend evidence paths, and task ownership,
 - runs the focused runner/trace suites and all 61 primary CLI cases under default and POSIX option environments,
 - runs the main phase0 regression suite,
 - runs `scripts/check_memory_architecture.sh` to verify memory architecture invariants (layer integrity, pointer freshness, bounded-layer consistency),

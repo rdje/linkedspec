@@ -18,18 +18,18 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.4.3` — recurring warmed 4x2x61 matrix closes exact CLI `.1.5`.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.4.2` — independent Julia canonical trace closed 61/61.
-- recent_context: Perl/Rust/Dart/Julia exact primary CLI identity is closed; Dart/Julia remain scoped interpreter
-  milestones rather than complete public parity because `.1.6` capability census and `.3` generated source remain.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.0` — validated 15x4 capability census/split is closed.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.4.3` — recurring warmed 4x2x61 matrix closed exact CLI `.1.5`.
+- recent_context: Capability matrix has 47 pass/five partial/eight gap backend states; `.1.6.1`–`.1.6.6` own
+  non-codegen proof/repairs, while generated-source breadth remains top-level `.3` before Lua.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.5.4.3 - close exact primary CLI parity`; previous committed HEAD is
-  `3e47fbe9 FUTURE-PARITY-BACKLOG.1.5.4.2 - add canonical Julia CLI trace`.
+  `FUTURE-PARITY-BACKLOG.1.6.0 - audit backend capability parity`; previous committed HEAD is
+  `5e8351c6 FUTURE-PARITY-BACKLOG.1.5.4.3 - close exact primary CLI parity`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6` capability census/split is the sole active PNT leaf.
-- next_action: inventory the mdBook, exported APIs, Phase 0, and neutral corpus into a machine-readable capability
-  matrix; classify Perl/Rust/Dart/Julia gaps and split every residual into owned leaves before behavior changes.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1` neutral language/helper capability proof is active.
+- next_action: map every current non-legacy mdBook language/helper/API contract to an existing neutral fixture or
+  add one; run unchanged on all four backends and split any real mismatch before behavior repair.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

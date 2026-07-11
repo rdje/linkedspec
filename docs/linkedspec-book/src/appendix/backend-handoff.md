@@ -547,6 +547,31 @@ tracing now span frontend, compiler, function-shell, staged, and interpreter pha
 the trace chapter documents the event families and examples. `JuliaFormatter` and `JET` are
 optional local tools rather than parity prerequisites.
 
+## Machine-readable capability census
+
+Exact CLI identity and 99/99 interpreter output do not alone prove every public API and mdBook capability. The
+broader current census lives in `capability_conformance/manifest.json` and is checked by:
+
+```bash
+perl tools/check_capability_conformance.pl
+```
+
+The first complete audit contains 15 capabilities x four implemented backends. Its 60 states are 47 pass, five
+partial-proof, and eight gap. Each non-pass state has one durable owner:
+
+| Residual mechanism | Current classification | Owner |
+| --- | --- | --- |
+| Complete mdBook language/helper executable coverage | The 99-case corpus is green but not indexed exhaustively against every current contract on any backend. | `FUTURE-PARITY-BACKLOG.1.6.1` |
+| Outward compiled descriptor | Perl, Dart, and Julia expose the documented projection; Rust exposes `CompiledSpec` but not `spec`/`functions`/`dependency_regex_map`/`meta`. | `.1.6.2` |
+| Structured native runtime diagnostics | Perl, Dart, and Julia expose structured attribution; Rust runtime errors remain string payloads. | `.1.6.3` |
+| Native named/file resolution | Perl `get_parser(...)` owns the book's file-oriented role; Rust, Dart, and Julia currently keep named resolution in process adapters. | `.1.6.4` |
+| Full native pipeline trace | Perl, Rust, and Julia propagate a caller-owned emitter through frontend/compiler/staged/runtime phases; Dart begins at the interpreter. | `.1.6.5` |
+| Generated parser source | Perl passes; Rust proof is a curated subset; Dart and Julia have no emitter. | `FUTURE-PARITY-BACKLOG.3` |
+
+Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, generic final-
+codeblock equivalence, and the not-yet-implemented Lua backend are explicit exclusions/future owners rather than
+silent gaps. No backend is called complete while a current matrix state remains partial or gap.
+
 ADR `0023` sharpens that limitation: Rust exports `source_emitter` publicly, so equivalent source-emission
 capability is required before Julia can claim complete user-visible feature parity. Deferral remains valid
 scheduling and does not weaken the 99/99 interpreter correctness gate; it does keep the full-parity claim open.

@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.0 — audit backend capability parity
+
+**Validated census:** Added `capability_conformance/manifest.json` plus a strict checker. Fifteen current
+capabilities x four implemented backends classify 47 pass, five partial-proof, and eight gap states. The checker
+rejects schema/backend/status drift, duplicate ids, missing or absolute evidence paths, and any unowned partial,
+gap, legacy, or future surface. The canonical core gate now protects and runs it.
+
+**Findings/split:** `.1.6.1` owns exhaustive neutral mdBook language/helper proof; `.2` Rust outward descriptor;
+`.3` Rust structured runtime diagnostics; `.4` native named/file resolution for Rust/Dart/Julia; `.5` Dart native
+frontend/compiler/function-shell/staged trace; `.6` non-codegen closeout. Existing top-level `.3` retains generated
+source. Deprecated plugins and future general parse jobs, semantic introspection/MCP, generic codeblocks, and Lua
+are explicit exclusions/owners rather than accidental current gaps.
+
+**Proof/frontier:** Checker syntax and self-validation pass. The full core gate passes doctrines, the new census,
+22 ActionIR, nine runner/trace, Perl 61x2, and Phase 0 `1..1028` in 496 seconds. mdBook, Knowledge Map, governance,
+whitespace, and cleanup pass. No parser/compiler/runtime behavior changed; `.1.6.1` is active.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.4.3 — close exact primary CLI parity
 
 **Recurring identity gate:** Added `tools/run_primary_cli_matrix.sh`. It validates toolchains, builds the Rust

@@ -236,3 +236,7 @@ Internally, the compiler prefers explicit state models:
 The outward descriptor is a projection of those models for public/tooling consumption.
 
 That distinction is important. The public descriptor is useful, but it is not the same thing as saying the compiler should reason from loose historical parallel hashes internally.
+
+Current backend status is exact on Perl, Dart, and Julia. Rust publicly exposes serializable `CompiledSpec`, but it
+does not yet project the documented outward `spec` / `functions` / `dependency_regex_map` / `meta` shape.
+`FUTURE-PARITY-BACKLOG.1.6.2` owns that remaining tooling/API parity gap.

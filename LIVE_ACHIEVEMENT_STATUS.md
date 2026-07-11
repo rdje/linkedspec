@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.0 — audit backend capability parity**
+  (DONE — validated 15x4 census/split closed; neutral proof `.1.6.1` active).
+
+  **Inventory:** Added a strict machine-readable matrix with 47 pass, five partial-proof, and eight gap backend
+  states. Every evidence path and non-pass/future/legacy owner is validated; core CI now runs the checker.
+
+  **Findings:** Ordered leaves own exhaustive language/helper proof, Rust descriptor projection, Rust structured
+  runtime diagnostics, native named/file resolution, and Dart full-pipeline trace. Generated source remains `.3`.
+
+  **Proof:** Checker syntax/self-validation, full core gate through Phase 0 `1..1028` in 496s, mdBook, Knowledge
+  Map, governance, whitespace, and cleanup pass. No parser/compiler/runtime behavior changed.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.4.3 — close exact primary CLI parity**
   (DONE — exact CLI parent `.1.5` is closed; capability census `.1.6` is active).
 

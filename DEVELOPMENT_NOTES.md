@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.0 — green subsets are not a complete capability proof):
+  Keep CLI identity, interpreter corpus identity, and public capability identity as separate evidence layers. A
+  machine-readable census must point each backend state to canonical docs/source/tests and require a task owner for
+  both known behavior gaps and missing proof. Treat idiomatic host APIs as equivalent only when they preserve the
+  documented role: separate parse/compile functions satisfy parse-only composition, but process-only named
+  resolution, an internal compiled type without the outward descriptor, string-only runtime errors, or
+  interpreter-only trace coverage do not satisfy the corresponding public contract.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.4.3 — one matrix must own cross-backend identity):
   Individual backend gates prove necessary native/package behavior, but exact interface parity needs one driver
   that substitutes only each command token into the unchanged fixture suite. Build/prepare toolchains and warm

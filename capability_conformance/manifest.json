@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "contract": "docs/decisions/0023-user-observable-backend-and-cli-parity.md",
+  "task_owner": "FUTURE-PARITY-BACKLOG.1.6",
+  "backends": ["perl", "rust", "dart", "julia"],
+  "status_values": ["pass", "partial", "gap"],
+  "capabilities": [
+    {
+      "id": "embedding.inline_parse_compile_execute",
+      "category": "native-api",
+      "contract": "In-memory spec source can be parsed, compiled, and executed without a subprocess or file handoff.",
+      "sources": ["docs/decisions/0022-native-in-memory-backend-embedding.md", "docs/linkedspec-book/src/public-api/get-and-get-parser.md"],
+      "backends": {
+        "perl": {"status": "pass", "references": ["perl/LinkedSpec.pm"]},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-core/src/parser.rs", "rust/linkedspec-core/src/compiler.rs", "rust/linkedspec-runtime/src/engine.rs"]},
+        "dart": {"status": "pass", "references": ["dart/lib/linkedspec_dart.dart"]},
+        "julia": {"status": "pass", "references": ["julia/src/LinkedSpecJulia.jl"]}
+      }
+    },
+    {
+      "id": "embedding.named_file_resolution",
+      "category": "native-api",
+      "contract": "The native library provides the documented file-oriented role with deterministic named and explicit-path spec resolution.",
+      "sources": ["docs/linkedspec-book/src/public-api/get-and-get-parser.md"],
+      "gap_owner": "FUTURE-PARITY-BACKLOG.1.6.4",
+      "backends": {
+        "perl": {"status": "pass", "references": ["perl/LinkedSpec.pm", "perl/LinkedSpec/ParserFactory.pm"]},
+        "rust": {"status": "gap", "references": ["rust/linkedspec-core/src/lib.rs"], "note": "No exported named/file resolver composes parse and compile."},
+        "dart": {"status": "gap", "references": ["dart/lib/linkedspec_dart.dart"], "note": "Named resolution exists only in process-adapter code, not the public package API."},
+        "julia": {"status": "gap", "references": ["julia/src/LinkedSpecJulia.jl"], "note": "Named resolution exists only in process-adapter code, not the exported module API."}
+      }
+    },
+    {
+      "id": "embedding.compiled_descriptor_projection",
+      "category": "native-api",
+      "contract": "Tooling can inspect the backend-neutral spec/functions/dependency_regex_map/meta compiled descriptor shape.",
+      "sources": ["docs/linkedspec-book/src/public-api/descriptor-introspection.md"],
+      "gap_owner": "FUTURE-PARITY-BACKLOG.1.6.2",
+      "backends": {
+        "perl": {"status": "pass", "references": ["perl/LinkedSpec.pm", "perl/LinkedSpec/Compiler.pm"]},
+        "rust": {"status": "gap", "references": ["rust/linkedspec-core/src/types.rs"], "note": "CompiledSpec is public and serializable but has no documented outward descriptor projection."},
+        "dart": {"status": "pass", "references": ["dart/lib/src/compiler/compiled_spec.dart"]},
+        "julia": {"status": "pass", "references": ["julia/src/compiler/CompiledSpec.jl"]}
+      }
+    },
+    {
+      "id": "embedding.structured_runtime_diagnostics",
+      "category": "native-api",
+      "contract": "Native runtime failures expose stable structured stage and available spec/top/rule attribution without string scraping.",
+      "sources": ["docs/decisions/0022-native-in-memory-backend-embedding.md", "docs/linkedspec-book/src/public-api/get-and-get-parser.md", "docs/linkedspec-book/src/compiler/diagnostics.md"],
+      "gap_owner": "FUTURE-PARITY-BACKLOG.1.6.3",
+      "backends": {
+        "perl": {"status": "pass", "references": ["perl/LinkedSpec/RuntimeContext.pm"]},
+        "rust": {"status": "gap", "references": ["rust/linkedspec-core/src/error.rs", "rust/linkedspec-runtime/src/engine.rs"], "note": "Runtime errors are string payloads in LinkedSpecError::Runtime rather than a structured diagnostic record."},
+        "dart": {"status": "pass", "references": ["dart/lib/src/runtime/interpreter.dart"]},
+        "julia": {"status": "pass", "references": ["julia/src/runtime/Interpreter.jl"]}
+      }
+    },
+    {
+      "id": "language.current_mdbook_surface",
+      "category": "language-proof",
+      "contract": "Every current non-legacy language, ActionIR, helper, method, value-kind, control, and mutation contract has neutral executable proof on every backend.",
+      "sources": ["docs/linkedspec-book/src/appendix/formal-grammar.md", "docs/linkedspec-book/src/appendix/helper-contract-catalog.md", "docs/linkedspec-book/src/appendix/runtime-semantics.md"],
+      "gap_owner": "FUTURE-PARITY-BACKLOG.1.6.1",
+      "backends": {
+        "perl": {"status": "partial", "references": ["t/phase0_regression.t", "rust/linkedspec-runtime/tests/corpus/manifest.json"], "note": "Phase 0 is broad but Perl-only; the neutral 99-case corpus is not indexed against every current mdBook contract."},
+        "rust": {"status": "partial", "references": ["rust/linkedspec-runtime/tests/corpus/manifest.json", "rust/linkedspec-runtime/tests/integration_test.rs"]},
+        "dart": {"status": "partial", "references": ["rust/linkedspec-runtime/tests/corpus/manifest.json", "dart/test/runtime_interpreter_test.dart"]},
+        "julia": {"status": "partial", "references": ["rust/linkedspec-runtime/tests/corpus/manifest.json", "julia/test/runtests.jl"]}
+      }
+    },
+    {
+      "id": "language.user_functions_staged_bodies",
+      "category": "language-runtime",
+      "contract": "Top-level exact-arity functions use the neutral definition shell, staged body job, ActionIR body AST, and runtime registry behavior.",
+      "sources": ["docs/linkedspec-book/src/public-api/descriptor-introspection.md"],
+      "backends": {
+        "perl": {"status": "pass", "references": ["specs/user_function_definition.spec", "perl/LinkedSpec/Compiler.pm"]},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/spec_parser.rs", "rust/linkedspec-runtime/src/staged_parser_registry.rs"]},
+        "dart": {"status": "pass", "references": ["dart/lib/src/parser/staged_parser_registry.dart", "dart/lib/src/action/function_registry.dart"]},
+        "julia": {"status": "pass", "references": ["julia/src/parser/StagedParserRegistry.jl", "julia/src/action/FunctionRegistry.jl"]}
+      }
+    },
+    {
+      "id": "runtime.rule_modes_lifecycle_edges",
+      "category": "language-runtime",
+      "contract": "Default/OR/AND/repetition modes, action/blind edges, recursion guards, and all lifecycle phases preserve the reference behavior.",
+      "sources": ["docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md", "docs/linkedspec-book/src/user-model/blind-calls-and-parser-orchestration.md", "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md"],
+      "backends": {
+        "perl": {"status": "pass", "references": ["t/phase0_regression.t"]},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/tests/corpus/manifest.json"]},
+        "dart": {"status": "pass", "references": ["dart/lib/src/runtime/interpreter.dart", "rust/linkedspec-runtime/tests/corpus/manifest.json"]},
+        "julia": {"status": "pass", "references": ["julia/src/runtime/Interpreter.jl", "rust/linkedspec-runtime/tests/corpus/manifest.json"]}
+      }
+    },
+    {
+      "id": "runtime.cursor_capture_boundaries",
+      "category": "language-runtime",
+      "contract": "Seek/consume modes, marks, rewinds, match registers, source locations, and non-consuming boundary capture are equivalent.",
+      "sources": ["docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md", "docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md"],
+      "backends": {
+        "perl": {"status": "pass", "references": ["perl/LinkedSpec/RuntimeContext.pm"]},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/runtime.rs"]},
+        "dart": {"status": "pass", "references": ["dart/lib/src/runtime/matching.dart", "dart/lib/src/runtime/interpreter.dart"]},
+        "julia": {"status": "pass", "references": ["julia/src/runtime/Matching.jl", "julia/src/runtime/Interpreter.jl"]}
+      }
+    },
+    {
+      "id": "trace.native_runtime_controls_events_sinks",
+      "category": "native-trace",
+      "contract": "Native tracing has ordered levels, default quietness, structured runtime events, dump/log primitives, and stdout/route/mirror/reset sinks.",
+      "sources": ["docs/linkedspec-book/src/public-api/trace-api.md", "docs/decisions/0024-canonical-primary-cli-trace-protocol.md"],
+      "backends": {
+        "perl": {"status": "pass", "references": ["perl/LinkedSpec/Trace.pm"]},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-core/src/trace.rs", "rust/linkedspec-runtime/tests/trace_controls.rs"]},
+        "dart": {"status": "pass", "references": ["dart/lib/src/trace/trace.dart", "dart/test/trace_test.dart"]},
+        "julia": {"status": "pass", "references": ["julia/src/trace/Trace.jl", "julia/test/runtests.jl"]}
+      }
+    },
+    {
+      "id": "trace.frontend_compiler_function_staged",
+      "category": "native-trace",
+      "contract": "One caller-owned native emitter covers source parsing, validation, compilation, function-shell, staged dispatch, and runtime phases.",
+      "sources": ["docs/linkedspec-book/src/public-api/trace-api.md"],
+      "gap_owner": "FUTURE-PARITY-BACKLOG.1.6.5",
+      "backends": {
+        "perl": {"status": "pass", "references": ["perl/LinkedSpec/Compiler.pm", "perl/LinkedSpec/SpecEntry.pm"]},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-core/src/parser.rs", "rust/linkedspec-core/src/compiler.rs", "rust/linkedspec-runtime/src/staged_parser_registry.rs"]},
+        "dart": {"status": "gap", "references": ["dart/lib/src/parser/spec_parser.dart", "dart/lib/src/compiler/compiled_spec.dart", "dart/lib/src/parser/staged_parser_registry.dart"], "note": "Public trace injection and events currently begin at LinkedSpecRuntimeEngine."},
+        "julia": {"status": "pass", "references": ["julia/src/trace/Trace.jl", "julia/src/parser/StagedParserRegistry.jl"]}
+      }
+    },
+    {
+      "id": "runtime.top_rule_and_parse_mode_controls",
+      "category": "native-api",
+      "contract": "Native execution accepts equivalent top-rule selection and seek/consume parse-mode controls.",
+      "sources": ["docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md", "docs/linkedspec-book/src/public-api/get-and-get-parser.md"],
+      "backends": {
+        "perl": {"status": "pass", "references": ["perl/LinkedSpec.pm"]},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/engine.rs"]},
+        "dart": {"status": "pass", "references": ["dart/lib/src/runtime/interpreter.dart"]},
+        "julia": {"status": "pass", "references": ["julia/src/runtime/Interpreter.jl"]}
+      }
+    },
+    {
+      "id": "cli.exact_primary_interface",
+      "category": "primary-cli",
+      "contract": "Distinct executable names expose identical options, positionals, loading, JSON, diagnostics, exits, and canonical trace bytes.",
+      "sources": ["docs/decisions/0023-user-observable-backend-and-cli-parity.md", "cli_conformance/manifest.json"],
+      "backends": {
+        "perl": {"status": "pass", "references": ["bin/linkedspec"]},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/bin/linkedspec-rust.rs"]},
+        "dart": {"status": "pass", "references": ["dart/bin/linkedspec_dart.dart"]},
+        "julia": {"status": "pass", "references": ["julia/bin/linkedspec_julia.jl"]}
+      }
+    },
+    {
+      "id": "cli.strict_preserved_utf8_text",
+      "category": "primary-cli",
+      "contract": "Arguments, source, input, JSON, errors, and trace use strict preserved UTF-8 with no implicit UTF-16/UTF-32 detection.",
+      "sources": ["docs/decisions/0025-primary-cli-strict-utf8-text-boundary.md", "cli_conformance/manifest.json"],
+      "backends": {
+        "perl": {"status": "pass", "references": ["bin/linkedspec"]},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/primary_cli.rs"]},
+        "dart": {"status": "pass", "references": ["dart/lib/src/cli/primary_cli.dart"]},
+        "julia": {"status": "pass", "references": ["julia/src/cli/LinkedSpecJuliaCli.jl"]}
+      }
+    },
+    {
+      "id": "corpus.interpreter_99_exact_outputs",
+      "category": "regression-proof",
+      "contract": "Every backend executes the unchanged language-neutral 99-fixture interpreter corpus with exact outputs.",
+      "sources": ["rust/linkedspec-runtime/tests/corpus/manifest.json", "docs/linkedspec-book/src/specs-and-corpora/shipped-specs-and-corpora.md"],
+      "backends": {
+        "perl": {"status": "pass", "references": ["tools/gen_oracle_corpus.pl"]},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/tests/corpus_oracle.rs"]},
+        "dart": {"status": "pass", "references": ["dart/lib/src/corpus/manifest_runner.dart"]},
+        "julia": {"status": "pass", "references": ["julia/src/corpus/CorpusManifest.jl"]}
+      }
+    },
+    {
+      "id": "codegen.generated_parser_source",
+      "category": "generated-source",
+      "contract": "Every backend can emit host-language parser source with structural-family direct execution and manifest-backed compile/run proof.",
+      "sources": ["docs/decisions/0023-user-observable-backend-and-cli-parity.md", "docs/linkedspec-book/src/compiler/generated-handlers-and-dispatch.md", "docs/linkedspec-book/src/appendix/backend-handoff.md"],
+      "gap_owner": "FUTURE-PARITY-BACKLOG.3",
+      "backends": {
+        "perl": {"status": "pass", "references": ["perl/LinkedSpec/Compiler.pm", "perl/LinkedSpec/HandlerVariantEmitter.pm"]},
+        "rust": {"status": "partial", "references": ["rust/linkedspec-runtime/src/source_emitter.rs", "rust/linkedspec-runtime/tests/source_emitter.rs"], "note": "All structural families run directly, but manifest-backed generated-source proof remains a curated subset."},
+        "dart": {"status": "gap", "references": ["docs/knowledge/dart-generated-source-deferred.md"]},
+        "julia": {"status": "gap", "references": ["docs/knowledge/julia-generated-source-deferred.md"]}
+      }
+    }
+  ],
+  "excluded_or_future": [
+    {"id": "legacy.perl_plugin_registry", "reason": "Deprecated Perl-only compatibility surface, explicitly outside the backend-neutral product contract.", "owner": "FUTURE-PARITY-BACKLOG.6"},
+    {"id": "future.general_parse_job_authoring", "reason": "General provider search and recursive staged queues are a future language/API extension.", "owner": "FUTURE-PARITY-BACKLOG.2"},
+    {"id": "future.semantic_introspection_mcp", "reason": "Versioned deep semantic API and thin MCP projection are parked design work.", "owner": "FUTURE-PARITY-BACKLOG.10.1"},
+    {"id": "future.generic_final_codeblock", "reason": "Generic final-codeblock equivalence and with disposition are not yet current language behavior.", "owner": "FUTURE-PARITY-BACKLOG.11.1"},
+    {"id": "future.lua_backend", "reason": "Lua follows convergence of the four implemented backends.", "owner": "FUTURE-PARITY-BACKLOG.1.3"}
+  ]
+}

@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`.1.5` exact four-backend CLI parity closed; capability census `.1.6` active).
+- Last updated: `2026-07-10` (`.1.6.0` validated capability census/split closed; neutral proof `.1.6.1` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -554,9 +554,77 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.1.6`
   Status: `active`
   Goal: Prove complete user-observable feature/behavior parity beyond the 99-fixture interpreter corpus.
+  Children: `.1.6.0`, `.1.6.1`, `.1.6.2`, `.1.6.3`, `.1.6.4`, `.1.6.5`, `.1.6.6`
   Acceptance: Build a machine-readable capability matrix from the mdBook, exported public APIs, Phase 0, and the
     language-neutral corpus; classify Perl/Rust/Dart/Julia gaps before implementation; split every gap into an
     owned parity leaf; do not call a backend full-parity while any user-visible capability differs.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.0`
+  Status: `done`
+  Goal: Audit and classify the complete user-observable capability surface before parity implementation.
+  Acceptance: Define a machine-readable capability schema; inventory canonical mdBook behavior, exported native
+    APIs, Phase 0, the 99-case interpreter corpus, exact primary CLI, trace, and generated-source boundaries;
+    record evidence and current Perl/Rust/Dart/Julia status without re-deriving logged facts; validate the inventory;
+    split every concrete residual mechanism into ordered owned leaves before changing backend behavior.
+  Verification: **PASS 2026-07-10.** A strict checker validates 15 capability rows x four exact backends, 47 pass/
+    five partial/eight gap states, every evidence path, and every residual/exclusion owner. The core gate runs the
+    checker and passes 22 ActionIR, nine runner/trace, Perl 61x2, and Phase 0 `1..1028` in 496 seconds. mdBook,
+    Knowledge Map, governance, whitespace, and cleanup pass; no parser/compiler/runtime behavior changed.
+  Commit: `FUTURE-PARITY-BACKLOG.1.6.0 - audit backend capability parity`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1`
+  Status: `active`
+  Goal: Turn the complete current mdBook language/helper surface into neutral executable capability proof.
+  Acceptance: Map every current non-legacy language, rule, lifecycle, ActionIR, helper, method, value-kind, cursor,
+    capture, function, and staged-body contract to an existing neutral fixture or add a backend-neutral fixture;
+    run unchanged on Perl/Rust/Dart/Julia; split any behavioral mismatch by mechanism before repair.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.2`
+  Status: `pending`
+  Goal: Add Rust's backend-neutral outward compiled-descriptor projection.
+  Acceptance: Rust exposes the documented `spec`, `functions`, `dependency_regex_map`, and `meta` projection with
+    stable field meanings/order and staged function metadata equivalent to Perl/Dart/Julia; focused neutral shape
+    fixtures prove idiomatic Rust types/JSON without coupling callers to engine internals.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.3`
+  Status: `pending`
+  Goal: Add structured Rust runtime diagnostic context equivalent to the other native backends.
+  Acceptance: Native Rust runtime failures expose stable type/stage/summary/detail plus available spec/top/rule/
+    handler attribution as structured data rather than requiring string scraping; ordinary `Result` ergonomics,
+    CLI phase projection, trace behavior, and successful results remain compatible.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.4`
+  Status: `pending`
+  Goal: Add idiomatic native named/file spec resolution to Rust, Dart, and Julia.
+  Acceptance: Each non-Perl library exposes the book's file-oriented role with deterministic explicit-path and
+    named-spec resolution/search precedence, strict text loading, parse/compile composition, and structured errors;
+    shared path fixtures prove equivalent behavior without requiring the primary CLI or a subprocess.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.5`
+  Status: `pending`
+  Goal: Complete Dart native trace coverage across frontend, compiler, function-shell, and staged dispatch.
+  Acceptance: One caller-owned Dart emitter propagates through parse, validation, compile, function-definition,
+    staged-job, and runtime entrypoints with balanced scopes, decisions, failures, sinks, default quietness, and
+    traced/untraced identity equivalent to Perl/Rust/Julia; focused and 99-corpus gates pass.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.6`
+  Status: `pending`
+  Goal: Close the non-codegen capability census and hand generated-source residuals to `.3` without overclaiming.
+  Acceptance: The validated matrix contains no unowned gap/partial state; all `.1.6` implementation/proof leaves
+    pass recurring checks; task/roadmap/live docs, mdBook, Knowledge Map, public APIs, and exact CLI agree; parent
+    `.1.6` closes while complete backend parity remains blocked only by generated-source `.3` and later Lua.
   Verification: `pending`
   Commit: `pending`
 
@@ -769,18 +837,24 @@ before implementation.
 | 23 | `FUTURE-PARITY-BACKLOG.1.5.4.1` | `done` | Shared help, strict UTF-8, and phase-only errors advance Julia to 42/61. |
 | 24 | `FUTURE-PARITY-BACKLOG.1.5.4.2` | `done` | Independent canonical trace closes Julia at 61/61 default/POSIX. |
 | 25 | `FUTURE-PARITY-BACKLOG.1.5.4.3` | `done` | Recurring 4x2x61 driver and all focused/broader gates close exact CLI parity. |
-| 26 | `FUTURE-PARITY-BACKLOG.1.6` | `active` | Census every documented/exported user capability and split all residual parity gaps. |
-| 27 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
-| 28 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
-| 29 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
-| 30 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
-| 31 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
-| 32 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
-| 33 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
-| 34 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
-| 35 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
-| 36 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
-| 37 | `FUTURE-PARITY-BACKLOG.11.1` | `pending` | Director's generic final-codeblock argument correction is parked behind the active UTF-8/CLI frontier. |
+| 26 | `FUTURE-PARITY-BACKLOG.1.6.0` | `done` | Validated 15-capability census classifies and owns all current gaps before behavior changes. |
+| 27 | `FUTURE-PARITY-BACKLOG.1.6.1` | `active` | Convert the complete current mdBook language/helper surface into neutral executable proof. |
+| 28 | `FUTURE-PARITY-BACKLOG.1.6.2` | `pending` | Add Rust's missing outward compiled-descriptor projection. |
+| 29 | `FUTURE-PARITY-BACKLOG.1.6.3` | `pending` | Add structured Rust native runtime diagnostics. |
+| 30 | `FUTURE-PARITY-BACKLOG.1.6.4` | `pending` | Add native named/file resolution to Rust, Dart, and Julia. |
+| 31 | `FUTURE-PARITY-BACKLOG.1.6.5` | `pending` | Extend Dart native trace through frontend/compiler/function-shell/staged phases. |
+| 32 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
+| 33 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
+| 34 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 35 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
+| 36 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
+| 37 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
+| 38 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
+| 39 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
+| 40 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
+| 41 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
+| 42 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
+| 43 | `FUTURE-PARITY-BACKLOG.11.1` | `pending` | Director's generic final-codeblock argument correction is parked behind the active UTF-8/CLI frontier. |
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.6.1` Neutral Hex-Byte Fixture Materialization
 
@@ -1221,6 +1295,22 @@ Read-only evidence recorded on 2026-07-10:
 - [x] **LOCKSTEP** — Task/roadmap/live/book/KM surfaces close `.1.5` and activate only capability census `.1.6`;
   safe post-verification cleanup removes reproducible Rust, Julia, and Dart caches without retaining in-flight work.
 
+## `FUTURE-PARITY-BACKLOG.1.6.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The 99-case corpus and 61-case CLI suite are green on all four backends, but neither
+  is an exhaustive machine-readable inventory of current mdBook and exported native API capabilities.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Capability claims were distributed across the mdBook, public exports, Phase 0,
+  backend tests, corpus, trace facts, and codegen facts; no validated row mapped every backend state to evidence and
+  a residual owner.
+- [x] **FIX** — Add `capability_conformance/manifest.json`, a strict repo-path/owner/schema checker, core-gate
+  integration, public documentation, a retrieval fact, and exact `.1.6.1`–`.1.6.6` mechanism leaves.
+- [x] **ADDRESSED (verified)** — Fifteen capabilities x four backends classify 47 pass, five partial-proof, and
+  eight gap states; every non-pass state and every explicit future/legacy exclusion has a tracked owner.
+- [x] **NO REGRESSION** — Checker syntax/self-validation, core gate through Phase 0, docs/KM/governance, mdBook,
+  whitespace, and generated-artifact cleanup pass; no parser/compiler/runtime behavior changes.
+- [x] **LOCKSTEP** — Matrix/task/roadmaps/README/live docs/book/KM agree; `.1.6.1` becomes the sole active next leaf
+  while codegen remains top-level `.3` and no backend is called complete.
+
 ## Decisions
 
 - `2026-07-09`: Director directive schedules future backend parity as Dart first, then Julia,
@@ -1307,6 +1397,10 @@ Read-only evidence recorded on 2026-07-10:
 - `2026-07-10`: `.1.5.4.3` installs `tools/run_primary_cli_matrix.sh` as the single recurring 4x2x61 proof, including
   Rust build, Dart preparation/warmup, and Julia project warmup. Focused Rust/Dart/Julia gates and the broader
   Phase 0 gate pass; exact CLI parent `.1.5` closes and capability census `.1.6` becomes active.
+- `2026-07-10`: `.1.6.0` separates complete capability parity from green CLI/corpus subsets. A validated
+  15-capability/60-state matrix owns language-proof coverage, Rust descriptor/diagnostics, native named/file
+  resolution, Dart full-pipeline trace, and generated-source residuals without treating future/legacy surfaces as
+  accidental current requirements.
 - `2026-07-10`: `.1.5.1.0` proves Perl's primary adapter is parser-oriented but not strict/deterministic enough to
   be the neutral executable reference. Fixture infrastructure, arguments, success/IO, failures, and trace/gate are
   separate leaves; `.1.5.1.1` became active there and has since closed the runner/help baseline. No behavior changed
@@ -1344,7 +1438,7 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None blocking `.1.6`: exact four-backend CLI parity is closed. Lua `.1.3` remains gated until implemented
+- None blocking `.1.6.1`: exact four-backend CLI parity is closed. Lua `.1.3` remains gated until implemented
   backends close capability convergence, including `.1.6`-split gaps and generated source under `.3`.
 - Parked `.11.1` must decide public `harray` versus current `hash` terminology and retain/migrate/remove `with`;
   neither question blocks `.1.5.1.6.3` and neither is silently decided by capture leaf `.11.0`.
@@ -1352,7 +1446,7 @@ Read-only evidence recorded on 2026-07-10:
 ## Blockers
 
 - None. Perl, Rust, Dart, and Julia are closed at the same 61 primary CLI cases in default/POSIX environments.
-  Capability census `.1.6` is active; its residual splits and generated-source `.3` precede Lua `.1.3`.
+  Neutral mdBook capability proof `.1.6.1` is active; later residual repairs and generated-source `.3` precede Lua.
 
 ## Verification Log
 
@@ -1392,6 +1486,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.4.1` | Exact-help and malformed-file tests; complete Julia local gate: 1,019 assertions/nine process families/99 corpus; unchanged suite 42/61 default/POSIX; docs/KM/governance/mdBook/cleanup. | PASS. All 19 residuals are canonical trace; `.1.5.4.2` active. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.4.2` | Canonical trace unit/process proof; complete Julia local gate: 1,019 assertions/nine process families/99 corpus; unchanged suite 61/61 default/POSIX; docs/KM/governance/mdBook/cleanup. | PASS. Julia exact CLI is implemented; recurring four-command gate `.1.5.4.3` active. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.4.3` | `tools/run_primary_cli_matrix.sh`: four backends x two environments x 61 cases; complete Rust/Dart/Julia focused gates; broader local gate through Phase 0 `1..1028`; docs/KM/governance/mdBook/cleanup. | PASS. Exact primary CLI parent `.1.5` closes; capability census `.1.6` is active. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.6.0` | Capability checker syntax/self-validation; 15x4 evidence/owner census; local gate through Phase 0 `1..1028` in 496s; docs/KM/governance/mdBook/cleanup. | PASS. Five exact residual mechanisms plus generated-source `.3` are owned; neutral language proof `.1.6.1` is active. |
 
 ## Commit Log
 
@@ -1431,9 +1526,14 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.5.4.1` | `FUTURE-PARITY-BACKLOG.1.5.4.1 - align Julia CLI boundary` | Exact shared help, strict UTF-8 file decoding, and phase-only primary stderr; 42/61. |
 | `FUTURE-PARITY-BACKLOG.1.5.4.2` | `FUTURE-PARITY-BACKLOG.1.5.4.2 - add canonical Julia CLI trace` | Independent ADR 0024 levels/events/sinks/failures; 61/61 default/POSIX. |
 | `FUTURE-PARITY-BACKLOG.1.5.4.3` | `FUTURE-PARITY-BACKLOG.1.5.4.3 - close exact primary CLI parity` | Recurring warmed 4x2x61 matrix, focused backend gates, broader Phase 0 gate, and exact CLI parent closeout. |
+| `FUTURE-PARITY-BACKLOG.1.6.0` | `FUTURE-PARITY-BACKLOG.1.6.0 - audit backend capability parity` | Validated 15x4 census, strict evidence/owner gate, exact residual split, and no-behavior-change closeout. |
 
 ## Changelog
 
+- `2026-07-10`: `.1.6.0` adds a strict machine-readable capability census beyond the green CLI/corpus subsets.
+  Fifteen rows classify 47 pass, five partial-proof, and eight gap backend states; all non-pass states and explicit
+  future/legacy exclusions have task owners. The checker joins core CI, Phase 0 `1..1028` passes, and `.1.6.1`
+  becomes active for exhaustive neutral mdBook language/helper proof before implementation repairs.
 - `2026-07-10`: `.1.5.4.3` adds one executable matrix that prepares all four implemented commands and runs the
   unchanged 61-case manifest under default and POSIX option environments. All 488 command cases, focused backend
   gates, and broader Phase 0 pass. Exact CLI parent `.1.5` closes; capability census `.1.6` becomes active. Safe

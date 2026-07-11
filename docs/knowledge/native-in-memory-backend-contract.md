@@ -53,7 +53,8 @@ identical user interface under ADR `0023`; backend identity is not permission to
 
 This structural audit does not claim that every active backend has completed every
 behavioral parity milestone. Those claims remain owned by the backend task trees and
-language-neutral corpus gates.
+language-neutral corpus gates. The broader current matrix and its named-resolution/descriptor/diagnostic/trace
+residuals are recorded by [[backend-capability-census]].
 
 ## Links
 

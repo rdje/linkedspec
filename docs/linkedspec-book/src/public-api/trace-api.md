@@ -135,6 +135,10 @@ productizes the Dart-specific CLI around the existing corpus/runtime command pat
 Dart milestone. Trace parity is unchanged by these staged/user-function/corpus/generated-source/CLI/closeout
 leaves.
 
+The complete capability census therefore records Dart runtime trace controls/events/sinks as passing, but native
+frontend/compiler/function-shell/staged propagation as a separate gap. `FUTURE-PARITY-BACKLOG.1.6.5` owns one
+caller-emitter path through those phases; canonical primary CLI trace remains independently closed.
+
 ## Julia variant trace status
 
 As of `JULIA-BACKEND-PARITY.7.3.2.1`, Julia has stable structured runtime
