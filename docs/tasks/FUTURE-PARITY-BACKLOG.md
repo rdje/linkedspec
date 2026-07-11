@@ -665,17 +665,22 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.0 - split control-close terminator residual`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.1`
-  Status: `active`
+  Status: `done`
   Goal: Insert the implicit newline terminator after switch-control closure without weakening block continuations.
   Acceptance: Make newline-separated `endswitch()` followed by any ordinary statement lower equivalently to the
     semicolon-separated same-line form; key the terminator decision to the actual control contract/lowered shape so
     `if`/`elseif`/`else`, `while`, attached continuations, and nested block payloads remain valid; add focused source
     and runtime locks plus Phase 0 before returning to coverage.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `RewritePipeline` now records `contract_id` with each pending lowered statement and requires a
+    generated terminator specifically for newline-separated `endswitch_flow` before generic leading-`}` block
+    suppression. Five focused assertions lock exact `};\nreturn`, absence of the invalid adjacency, unchanged
+    `endif` closure output, successful multiline compilation, and runtime `["elif","case-b"]`.
+    `perl -c perl/LinkedSpec.pm` and `perl -c -Iperl t/phase0_regression.t` pass;
+    `PERL5LIB= prove -v -Iperl t/phase0_regression.t` passes `1..1030` in 491 wall-clock seconds.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.1 - terminate newline switch closure`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Correct fixture timing, admit exhaustive current-call families, and close strict four-backend proof.
   Acceptance: Apply the proven three-slot capture/mark timing, use newline-only control source, register all six
     source fixtures in oracle generation, regenerate exact Perl values, make strict 237-name coverage pass, run the
@@ -941,8 +946,8 @@ before implementation.
 | 27 | `FUTURE-PARITY-BACKLOG.1.6.1.0` | `done` | 237 names documented; 98 corpus gaps audited; canonical fixture families and shared separator blocker split. |
 | 28 | `FUTURE-PARITY-BACKLOG.1.6.1.1` | `done` | Universal top-level newline separation repaired; Phase 0 1029 and four-backend 99/99 pass. |
 | 29 | `FUTURE-PARITY-BACKLOG.1.6.1.2.0` | `done` | Capture timing proven; residual newline `endswitch` terminator seam split before code. |
-| 30 | `FUTURE-PARITY-BACKLOG.1.6.1.2.1` | `active` | Repair generated terminator after newline-separated switch closure. |
-| 31 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2` | `pending` | Finish exhaustive fixture admission and strict four-backend proof. |
+| 30 | `FUTURE-PARITY-BACKLOG.1.6.1.2.1` | `done` | Contract-aware generated terminator repaired; Phase 0 passes 1030. |
+| 31 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2` | `active` | Finish exhaustive fixture admission and strict four-backend proof. |
 | 32 | `FUTURE-PARITY-BACKLOG.1.6.2` | `pending` | Add Rust's missing outward compiled-descriptor projection. |
 | 33 | `FUTURE-PARITY-BACKLOG.1.6.3` | `pending` | Add structured Rust native runtime diagnostics. |
 | 34 | `FUTURE-PARITY-BACKLOG.1.6.4` | `pending` | Add native named/file resolution to Rust, Dart, and Julia. |

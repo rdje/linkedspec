@@ -4148,10 +4148,10 @@ _Resolved: Perl newline statement separation is universal across assignment, cur
 - **source:** [`docs/knowledge/perl-newline-statement-separator-coverage-gap.md`](docs/knowledge/perl-newline-statement-separator-coverage-gap.md)
 
 ### perl-newline-switch-close-terminator-gap
-_Perl newline-separated statement after endswitch lacks the required generated do-block terminator_
+_Resolved: Perl newline-separated statement after endswitch receives the required generated do-block terminator_
 
 - **answers:** why does a statement after newline endswitch fail to compile in Perl | does newline endswitch followed by return work in Perl | what does FUTURE-PARITY-BACKLOG.1.6.1.2.1 own | why is newline if followed by assignment valid but switch followed by return invalid
-- **date:** 2026-07-10 · **status:** confirmed-gap
+- **date:** 2026-07-10 · **status:** resolved
 - **evidence:** `FUTURE-PARITY-BACKLOG.1.6.1.2.0 toolbox audit. After universal splitting landed, `call_spec_handler_subst` on a newline-only if chain, assignment, switch chain, and return emits valid `if (...) { ... }` followed by `$selected = ...`, but emits the switch close as `} }\nreturn [...]`. Perl requires a separator after the expression-style `do { ... }` switch wrapper. `RewritePipeline::_lowered_statement_needs_terminator` currently suppresses a pending terminator for every lowered statement beginning with `}`, which is correct for if/while block closures but too broad for `endswitch_flow`. FUTURE-PARITY-BACKLOG.1.6.1.2.1 owns the contract-aware repair.`
 - **reverify:** `perl -Iperl -MLinkedSpec -e 'print LinkedSpec::call_spec_handler_subst(\"Top\", \"switch(\\\"b\\\")\\ncase(\\\"b\\\")\\nvalue = 1\\nendcase()\\nendswitch()\\nreturn(value)\"), \"\\n\"'`
 - **source:** [`docs/knowledge/perl-newline-switch-close-terminator-gap.md`](docs/knowledge/perl-newline-switch-close-terminator-gap.md)

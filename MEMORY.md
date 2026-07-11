@@ -18,22 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.0` — control-close terminator residual is audited and split.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.1` — universal Perl newline separation is repaired.
-- recent_context: Corrected three-slot capture/mark timing returns exact in-memory hashes. Newline-only combined
-  control lowers `endswitch()` to closing `} }` without the Perl terminator required before a following statement;
-  the generic leading-`}` suppression in `RewritePipeline` is the isolated cause. Phase 0 remains `1..1029`, the
-  committed corpus remains 99 cases, and strict coverage still lacks 98 of 237 names.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.1` — newline switch-close termination is repaired.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.0` — the residual was audited and split before code.
+- recent_context: Pending lowered statements now carry canonical contract identity; `endswitch_flow` emits the
+  required Perl `};` before a newline-following statement while ordinary block closures remain unchanged. The
+  five-assertion control lock and full Phase 0 pass `1..1030`; corpus remains 99 and strict coverage lacks 98/237.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.1.2.0 - split control-close terminator residual`; previous committed HEAD is
-  `a40311cb FUTURE-PARITY-BACKLOG.1.6.1.1 - enforce universal newline separators`.
+  `FUTURE-PARITY-BACKLOG.1.6.1.2.1 - terminate newline switch closure`; previous committed HEAD is
+  `a8cfebda FUTURE-PARITY-BACKLOG.1.6.1.2.0 - split control-close terminator residual`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.1` switch-close terminator repair is active.
-- next_action: pass the canonical control contract into the pending newline-terminator decision, require termination
-  for `endswitch_flow` without weakening block continuations, and lock exact source/runtime behavior in Phase 0.
-  Then `.1.6.1.2.2` admits corrected fixtures, drives the 98 missing call names to zero, and runs them unchanged on
-  Perl/Rust/Dart/Julia before closing `.1.6.1`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2` final current-call proof is active.
+- next_action: admit the corrected capture/mark/control and bounded pure/position/cursor fixtures, regenerate exact
+  Perl oracle values, drive 98 missing names to zero, and run the expanded corpus unchanged on Perl/Rust/Dart/Julia.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
@@ -53,8 +50,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   implementations versus the director's four-kind generic final-codeblock model.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
-- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1029`**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
+- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1030`**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none after this commit; strict coverage remains red until `.1.6.1.2.2`; caches and stale empty corpus artifact dirs are absent.
+- blockers: none. in_flight_uncommitted: none after this commit; strict coverage remains red until `.1.6.1.2.2`; generated backend caches are absent.

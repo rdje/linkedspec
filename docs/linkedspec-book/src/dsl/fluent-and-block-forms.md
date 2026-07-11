@@ -123,10 +123,10 @@ This applies equally to function-style helpers, assignment statements, cursor/ca
 operations, and marker-style control statements. Newlines nested inside parentheses,
 brackets, blocks, quoted strings, or regex payloads remain part of the surrounding statement.
 
-The Perl reference currently has one narrower emission gap: a marker-style `endswitch()`
-followed by another statement on the next line can omit the required host-language terminator
-after the lowered `do { ... }` wrapper. `FUTURE-PARITY-BACKLOG.1.6.1.2.1` owns the repair;
-the newline remains the LinkedSpec statement separator.
+Marker-style `endswitch()` follows the same rule. When another statement starts on the next
+line, the compiler preserves the newline as the LinkedSpec separator and emits whatever
+host-language boundary its switch representation requires. Authors do not add a trailing
+semicolon merely because the statement is `endswitch()`.
 
 ## Control-flow expression forms
 

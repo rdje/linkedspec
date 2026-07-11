@@ -98,7 +98,7 @@ sub _separator_was_implicit_newline {
 }
 
 sub _lowered_statement_needs_terminator {
- my ($lowered_stmt) = @_;
+ my ($lowered_stmt, $contract_id) = @_;
  return 0 unless defined($lowered_stmt) && length($lowered_stmt);
  my $trimmed = $lowered_stmt;
  $trimmed =~ s/^\s+//o;
@@ -106,6 +106,7 @@ sub _lowered_statement_needs_terminator {
  return 0 unless length($trimmed);
  return 0 if $trimmed =~ /;\z/o;
  return 0 if $trimmed =~ /\{\z/o;
+ return 1 if defined($contract_id) && $contract_id eq 'endswitch_flow';
  return 0 if $trimmed =~ /^\}\s*(?:elsif\b|else\b)?/o;
  return 1
 }
@@ -114,7 +115,10 @@ sub _insert_pending_newline_terminator {
  my ($rewritten_ref, $previous_lowered) = @_;
  return unless ref($previous_lowered) eq 'HASH';
  return unless $previous_lowered->{implicit_newline_separator};
- return unless _lowered_statement_needs_terminator($previous_lowered->{lowered_stmt});
+ return unless _lowered_statement_needs_terminator(
+  $previous_lowered->{lowered_stmt},
+  $previous_lowered->{contract_id},
+ );
  my $insert_pos = $previous_lowered->{rewritten_end};
  return unless defined($insert_pos) && $insert_pos >= 0 && $insert_pos <= length($$rewritten_ref);
  substr($$rewritten_ref, $insert_pos, 0, ';');
@@ -422,6 +426,7 @@ sub _lower_action_code_from_canonical_ir {
   if (!$is_unmatched_helper_scan_event) {
    $previous_lowered = {
     lowered_stmt => $lowered_stmt,
+    contract_id => $contract_id,
     rewritten_end => $pos + length($lowered_stmt),
     source_end => ($source_pos >= 0) ? $source_pos + $source_len : undef,
     implicit_newline_separator => 0,

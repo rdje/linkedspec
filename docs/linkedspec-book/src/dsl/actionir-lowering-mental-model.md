@@ -129,12 +129,11 @@ sequences therefore lower the same way as equivalent same-line statements separa
 semicolons. Newlines inside parentheses, brackets, blocks, quoted strings, regex payloads,
 and comments remain protected by the scanner state appropriate to that construct.
 
-> **Current Perl reference limitation:** marker-style `endswitch()` followed by another
-> statement on the next line is split correctly, but the emitted `do { ... }` switch wrapper
-> currently misses its generated Perl terminator. This is tracked by
-> `FUTURE-PARITY-BACKLOG.1.6.1.2.1`. The language contract is unchanged; a temporary conforming
-> workaround is to put `endswitch(); next_statement(...)` on one physical line, where the
-> semicolon is the normal between-statement separator.
+The lowering pipeline retains the canonical contract ID while deciding whether a newline
+boundary needs host syntax. This matters for marker-style `switch`: its Perl representation is
+an expression-shaped `do { ... }`, so `endswitch()` needs a generated host terminator before a
+following newline-separated statement. Ordinary `if` block closure remains statement-shaped
+and receives no such terminator. Neither detail changes the source-level separator rule.
 
 ### CanonicalEvents
 

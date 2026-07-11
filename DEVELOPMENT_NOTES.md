@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.1 — use canonical identity at ambiguous host boundaries):
+  A lowered string beginning with `}` does not reveal whether it is a statement block closure or the end of an
+  expression-shaped host wrapper. Preserve the canonical contract ID alongside pending source spans and lowered
+  bytes, then make the narrow semantic exception before generic shape rules. This fixes `endswitch_flow` without
+  broad semicolon insertion or changes to `if`/`while` continuations.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.0 — statement splitting and host termination are separate seams):
   Once a source newline produces independent canonical events, still inspect the emitted host boundary. Marker
   `switch` is expression-shaped Perl (`do { ... }`), unlike ordinary statement block closures, so a following

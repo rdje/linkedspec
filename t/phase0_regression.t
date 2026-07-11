@@ -45955,6 +45955,51 @@ subtest 'future_parity_backlog_1_6_1_1_universal_newline_statement_separation' =
     is($control_err, '', 'explicit same-line separator control fixture remains executable');
 };
 
+subtest 'future_parity_backlog_1_6_1_2_1_newline_switch_close_terminator' => sub {
+    plan tests => 5;
+    require JSON::PP;
+    my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
+    my $run = sub {
+        my ($p, $in) = @_;
+        my $out = eval {
+            local $SIG{ALRM} = sub { die "hang\n" };
+            alarm(8);
+            my $r = $p->(\$in);
+            alarm(0);
+            $J->encode($r);
+        };
+        return defined($out) ? $out : ('ERR:' . normalize_error($@));
+    };
+
+    my $switch_then_return = "switch(\"b\")\ncase(\"b\")\nvalue = 1\nendcase()\nendswitch()\nreturn(value)";
+    my $switch_lowered = LinkedSpec::call_spec_handler_subst('Top', $switch_then_return);
+    like($switch_lowered, qr/\n\}\n\};\nreturn \$value\z/,
+        'newline after endswitch inserts the terminator required by the Perl do-block expression');
+    unlike($switch_lowered, qr/\n\}\n\}\nreturn \$value\z/,
+        'newline endswitch no longer leaves the following statement adjacent to an unterminated do block');
+
+    is(
+        LinkedSpec::call_spec_handler_subst(
+            'Top', "if(true)\nbranch = \"ok\"\nendif()\nreturn(branch)",
+        ),
+        "if (1) {\n\$branch = \"ok\";\n}\nreturn \$branch",
+        'ordinary if block closure remains unterminated before a newline-separated statement',
+    );
+
+    my $spec = "Top::\n"
+             . " /x/ -> Done { branch = \"\"\n"
+             . " if(false)\n branch = \"bad\"\n elseif(true)\n branch = \"elif\"\n endif()\n"
+             . " selected = \"\"\n switch(\"b\")\n case(\"a\")\n selected = \"bad-a\"\n endcase()\n"
+             . " case(\"b\")\n selected = \"case-b\"\n endcase()\n default()\n selected = \"bad-default\"\n"
+             . " endswitch()\n return([branch, selected]) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $parser = eval { LinkedSpec::Get(\$spec) };
+    ok(ref($parser) eq 'CODE', 'newline-only combined if/switch fixture compiles')
+        or diag(normalize_error($@));
+    is($run->($parser, 'xhello'), '["elif","case-b"]',
+        'newline-only combined control fixture executes the selected branches and following return');
+};
+
 subtest 'spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments' => sub {
     # SPEC-FORMAT-TERSE.1.5.5.1: direct nested access lowers for explicit
     # path segments. Non-reserved bare path atoms are handled by the later

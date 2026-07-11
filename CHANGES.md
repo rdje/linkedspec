@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.1 — terminate newline switch closure
+
+**Precise repair:** `RewritePipeline` now retains each pending lowered statement's canonical contract ID.
+`_lowered_statement_needs_terminator` requires the generated host terminator for `endswitch_flow` before applying
+the generic leading-`}` block-closure suppression. Thus marker switch emits `};\nreturn` while ordinary `if`
+closure remains `}\nreturn`; the LinkedSpec source contract remains newline separation with no trailing semicolon.
+
+**Locks/proof:** A five-assertion Phase 0 subtest checks exact valid switch output, absence of the old adjacency,
+unchanged `endif` output, compilation of a newline-only combined control fixture, and runtime
+`["elif","case-b"]`. Both Perl syntax checks pass. Full Phase 0 passes `1..1030` in 491 wall-clock seconds.
+
+**Frontier:** The temporary mdBook limitation is removed and the fact card is resolved. `.1.6.1.2.2` is active
+for corrected fixture admission, strict 237-name coverage, and unchanged Perl/Rust/Dart/Julia execution.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.0 — split control-close terminator residual
 
 **Fixture correction:** In-memory toolbox probes establish the correct capture/mark timing: a three-slot `AND`

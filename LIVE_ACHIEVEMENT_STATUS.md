@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.1 — terminate newline switch closure**
+  (DONE — narrow Perl repair closed; final fixture/oracle proof `.1.6.1.2.2` active).
+
+  **Implementation:** Pending lowered statements retain their canonical contract ID. `endswitch_flow` now emits
+  the host `;` needed after its Perl `do { ... }` wrapper; ordinary leading-`}` block closures remain unchanged.
+
+  **Proof:** Five focused source/runtime assertions pass, including newline-only combined control returning
+  `["elif","case-b"]`. Perl syntax checks and full Phase 0 `1..1030` pass in 491 seconds. The mdBook limitation
+  and Knowledge Map gap are resolved.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.0 — split control-close terminator residual**
   (DONE — audit/split closed; contract-aware repair `.1.6.1.2.1` active).
 
