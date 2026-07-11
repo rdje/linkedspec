@@ -7,6 +7,14 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.1.1 — lock Lua toolchain and package policy**
+  (DONE — reproducible zero-dependency foundation policy fixed; native scaffold `.1.2` next).
+
+  **Policy:** PUC 5.4 primary, LuaJIT secondary; repo `LUA_PATH`; `lua/src`, `lua/test`, `lua/bin`; no global writes
+  or scaffold dependencies. Pure-Lua typed JSON is owned by `.1.3`; LPeg/regex choice by `.4.1`.
+
+  **Boundaries:** Future rock/cache state must be temporary and caller-owned. No backend code changed.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.1.3 — scope Lua backend parity plan**
   (DONE — complete Lua parity tree exists; delegated toolchain/layout `.1.1` next).
 

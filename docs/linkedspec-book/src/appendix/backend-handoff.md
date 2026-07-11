@@ -538,6 +538,16 @@ equivalence, regex/match-state proof, staged functions, diagnostics/trace,
 is evidence, not automatic proof that Lua regex behavior satisfies the neutral
 contract.
 
+The foundation policy uses `lua/src/linkedspec/`, a dependency-free
+`lua/test/run.lua`, `lua/bin/linkedspec-lua`, and
+`lua/bin/corpus_runner.lua`. Local commands prepend those source paths through
+`LUA_PATH` and never write global package locations. No JSON package is
+installed, so corpus IO will add a small pure-Lua codec with explicit null,
+array, and harray identity plus canonical object ordering. LPeg remains outside
+the scaffold dependency set. Any future LuaRocks tree must be caller-owned
+under temporary storage and recursively removed. The native scaffold is now
+the active leaf.
+
 ### Julia Backend Commands, Embedding, and Status
 
 Julia is green at the accepted interpreter-first boundary: the complete validated corpus executes 105/105 with

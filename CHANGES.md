@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.1.1 — lock Lua toolchain and package policy
+
+Locked PUC Lua 5.4.8 as the primary conformance runtime and LuaJIT 2.1/Lua 5.1 as a secondary compatibility leg.
+Production modules prefer their shared syntax; runtime-specific adapters must stay isolated. Confirmed LPeg C
+modules exist separately for both runtimes, while LuaRocks, Busted, Luacheck, StyLua, cjson, dkjson, and lunajson
+are absent. LPeg remains candidate evidence owned by the later matching leaf, not a scaffold dependency.
+
+Fixed the repository layout and commands before code: modules under `lua/src/linkedspec/`, dependency-free tests
+under `lua/test/`, distinct `lua/bin/linkedspec-lua`, separate `lua/bin/corpus_runner.lua`, and local gate
+`tools/run_lua_local.sh`. Commands prepend exact repository paths to `LUA_PATH` and retain defaults with `;;`; they
+never write global module directories. The scaffold has zero external dependencies.
+
+Assigned a pure-Lua typed JSON codec to corpus IO `.1.3`, including explicit null/array/harray identity, canonical
+object ordering, and strict UTF-8 checks. Any future LuaRocks/cache tree must be caller-owned under temporary
+storage and recursively removed. Roadmap/book/KM/task/live docs advance to scaffold `.1.2`. No backend code changed.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.3 — scope Lua backend parity plan
 
 Created `docs/tasks/LUA-BACKEND-PARITY.md` as the complete third-backend rollout plan before implementation code.

@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-11` (initial full-parity split under `FUTURE-PARITY-BACKLOG.1.3`)
+- Last updated: `2026-07-11` (toolchain/package policy `.1.1` closed; scaffold `.1.2` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -67,16 +67,24 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Children: `.1.1`, `.1.2`, `.1.3`
 
 - ID: `LUA-BACKEND-PARITY.1.1`
-  Status: `active`
+  Status: `done`
   Goal: Lock Lua runtime/tooling and repository layout choices.
   Acceptance: Reverify PUC Lua/LuaJIT/LPeg availability; record the absence or adoption of LuaRocks, Busted,
     Luacheck, and StyLua; choose dependency/test strategy, module search paths, `lua/` layout, `linkedspec-lua`,
     corpus runner, writable cache boundaries, and primary-versus-secondary runtime gates before source code.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** PUC Lua 5.4.8 is the primary runtime; LuaJIT 2.1/5.1 is secondary. Core
+    modules use their shared language subset, with runtime-specific code isolated. Repository layout is
+    `lua/src/linkedspec/`, `lua/test/`, and `lua/bin/`; the distinct executable is `lua/bin/linkedspec-lua`, the
+    corpus adapter is `lua/bin/corpus_runner.lua`, and `tools/run_lua_local.sh` owns gates. Commands prepend exact
+    repo paths to `LUA_PATH` and retain `;;`; they never write global module paths. Initial scaffold/test driver has
+    zero external dependencies. No JSON module is installed, so `.1.3` owns a pure-Lua typed JSON codec with an
+    explicit null sentinel and array/harray tags. LPeg exists as separate Homebrew C modules for 5.4/5.1 but is not
+    a foundation dependency or regex decision. Future optional LuaRocks state, if adopted, must live under a
+    caller-owned `/private/tmp/linkedspec-lua-rocks*` tree and be deleted; current gates use no cache. No code changed.
+  Commit: `LUA-BACKEND-PARITY.1.1 - lock Lua toolchain and package policy`
 
 - ID: `LUA-BACKEND-PARITY.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Add the minimal native Lua module, CLI/corpus-runner stubs, and repo-owned test driver.
   Acceptance: In-memory module load, backend status, exact entrypoint identities, primary PUC Lua smoke, optional
     LuaJIT compatibility smoke, and cleanup work without network/global package installation.
@@ -333,8 +341,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
-| 1 | `LUA-BACKEND-PARITY.1.1` | `active` | Lock runtime/tooling/package/test/cache choices before code. |
-| 2 | `LUA-BACKEND-PARITY.1.2` | `pending` | Add the native module/test/CLI scaffold. |
+| 1 | `LUA-BACKEND-PARITY.1.1` | `done` | PUC/LuaJIT, layout, zero-dependency tests, JSON, regex, and cache policy locked. |
+| 2 | `LUA-BACKEND-PARITY.1.2` | `active` | Add the native module/test/CLI scaffold. |
 | 3 | `LUA-BACKEND-PARITY.1.3` | `pending` | Add strict 105-case corpus IO. |
 
 ## Initial toolchain evidence (read-only planning audit)
@@ -346,11 +354,33 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - No repository-owned `lua/` backend or `.lua` implementation files exist; `rgx/rgx-core/src/lua.rs` is Rust-side
   Lua integration evidence, not a LinkedSpec Lua backend.
 
-These observations guide `.1.1` but do not pre-decide the regex provider, external dependency policy, or whether
-LuaJIT can pass the complete secondary compatibility gate.
+These observations guided `.1.1`. The locked policy below deliberately leaves the regex provider to `.4.1` and
+does not claim that LuaJIT already passes the later complete secondary compatibility gate.
+
+## Locked foundation policy
+
+- Module tree: `lua/src/linkedspec/init.lua` plus mechanism modules below `lua/src/linkedspec/`.
+- Test tree: `lua/test/run.lua` is a dependency-free repository-owned TAP-like assertion driver; focused test files
+  are required explicitly and cannot depend on Busted/global modules.
+- Module command: `LUA_PATH="$REPO/lua/src/?.lua;$REPO/lua/src/?/init.lua;;" lua ...`; the same path is used with
+  `luajit` for secondary compatibility. `;;` retains standard paths without making them semantic dependencies.
+- Public commands: `lua/bin/linkedspec-lua` and `lua/bin/corpus_runner.lua`; both load the native module. The first
+  eventually joins the exact primary CLI matrix, while the corpus runner remains a developer adapter.
+- Local gate: `tools/run_lua_local.sh` runs primary module/tests/CLI/corpus legs and the explicitly scoped LuaJIT
+  compatibility leg. It must reject missing PUC Lua; LuaJIT handling follows the recorded secondary policy.
+- Dependency/cache policy: no LuaRocks/global write and no network for the scaffold. Any future rock tree is
+  caller-owned under `/private/tmp/linkedspec-lua-rocks*`, never under the repository or home directory, and is
+  recursively removed after proof.
+- JSON policy: installed `cjson`, `dkjson`, and `lunajson` are absent. `.1.3` owns a small pure-Lua strict JSON codec
+  with explicit null, array, and harray identity, recursive canonical object-key ordering, and strict UTF-8 checks.
+- Regex policy: installed LPeg is candidate evidence only. `.4.1` owns comparison/adoption and any native extension;
+  foundation/frontend/compiler code may not depend on it.
+- Compatibility syntax: shared production modules prefer the Lua 5.1/5.4 intersection. Version adapters are
+  isolated and tested; LuaJIT compatibility cannot change `.spec`, API, result, diagnostic, or CLI behavior.
 
 ## Commit log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Creates this full-parity plan; no Lua implementation code. |
+| `LUA-BACKEND-PARITY.1.1` | `LUA-BACKEND-PARITY.1.1 - lock Lua toolchain and package policy` | Locks runtimes, layout, zero-dependency harness, JSON/regex ownership, and cache boundaries; no code. |

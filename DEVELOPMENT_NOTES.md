@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.1.1 — lock reproducibility before scaffolding):
+  Separate runtime availability from dependency policy. PUC 5.4 and LuaJIT can share most source but have different
+  language baselines, so make 5.4 normative and isolate compatibility adapters. Global LPeg modules prove only that
+  a candidate exists; foundation code must remain independent until regex fixtures choose a mechanism. With no
+  installed JSON/test/package tools, a repo-owned assertion driver and later pure-Lua typed JSON codec are safer
+  than accidental home/global state. Always inject exact `LUA_PATH`; reserve temporary caller-owned trees for any
+  future rock/cache proof and clean them recursively.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.3 — a new backend inherits the completed contract, not an old milestone):
   Lua planning starts after the four-backend census reaches 60/0/0, so its task tree must include every admitted
   native API, exact CLI, capability, staged/runtime/corpus, value-kind/block-syntax, and generated-source role from
