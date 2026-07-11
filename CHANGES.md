@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.2.0 — split outward descriptor parity
+
+**Toolbox audit:** The Perl reference probe confirms the outward top-level keys are `spec`, `functions`,
+`dependency_regex_map`, and `meta`. It also exposes a real metadata drift: Perl returns
+`descriptor_model = compiled_spec_state_v1`, while its final internal owner, the mdBook, Dart, and Julia identify
+the composing state as `compiled_descriptor_state`. Two Phase 0 assertions explicitly lock the stale Perl value.
+
+**Rust seam:** Rust exposes serializable `CompiledSpec` with functions and a rule vector, but no outward projection,
+descriptor-state API, explicit dependency-ref projection, or focused descriptor tests. The active parent is split
+into canonical identity reconciliation `.1`, idiomatic Rust projection `.2`, and four-backend admission `.3`.
+
+**Durable status:** The descriptor capability row honestly classifies Perl partial and Rust gap, moving the census
+to 50 pass / two partial / eight gap. The mdBook, roadmap, task index, and Knowledge Map record the finding before
+production changes.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 — admit exhaustive capability corpus
 
 **Exhaustive current surface:** The aligned Dart/Julia ActionIR inventories now contain the two governed Perl

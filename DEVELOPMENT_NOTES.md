@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.2.0 — probe the reference, but canonicalize by field meaning):
+  A reference backend can preserve an obsolete metadata label even when its internal architecture has moved on.
+  `descriptor_model` describes the public object being projected, so the composing `compiled_descriptor_state`
+  owner is the canonical identity; `compiled_spec_state_v1` names only one nested component. Before implementing a
+  missing backend API, compare the executable reference, current book, and already-implemented variants. Otherwise
+  a new backend can faithfully reproduce drift instead of the agreed contract.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 — prove coverage bidirectionally):
   Comparing backend-derived inventories proves agreement, not completeness: two backends can omit the same
   reference contract and still match exactly. A durable capability gate must check inventory → documentation and

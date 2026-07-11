@@ -18,20 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5` — exhaustive current capability admission.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3` — Julia closed governed capture/mark semantics.
-- recent_context: the final current ActionIR inventory is 239 names. Strict coverage checks inventory → mdBook/
-  neutral source and neutral current Perl-contract calls → Dart/Julia inventories. Six governed semantic families
-  are now mandatory, raising the exact cross-backend corpus to 105. Rust, Dart, Julia, and full Perl/local gates
-  pass; the census is 51 pass / one partial / eight gap.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.2.0` — outward descriptor audit/split.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5` — exhaustive 239-name/105-case capability admission.
+- recent_context: `return_descriptor` exposes the expected four top-level keys but Perl stamps the stale nested
+  `compiled_spec_state_v1` model tag; its actual composing owner, the mdBook, Dart, and Julia use
+  `compiled_descriptor_state`. Rust has no outward projection. Census is 50 pass / two partial / eight gap.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 - admit exhaustive capability corpus`; previous committed HEAD is
-  `0fe63298 FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3 - complete Julia capture marks`.
+  `FUTURE-PARITY-BACKLOG.1.6.2.0 - split outward descriptor parity`; previous committed HEAD is
+  `8de25a42 FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 - admit exhaustive capability corpus`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.2` outward Rust descriptor parity is active.
-- next_action: audit the canonical outward compiled-descriptor contract and Rust's public/internal `CompiledSpec`
-  seam, then split/implement the smallest roadmap-aligned descriptor projection leaf.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.2.1` canonical descriptor identity is active.
+- next_action: change Perl outward descriptor metadata to the composing `compiled_descriptor_state` identity plus
+  explicit nested model identities, update focused Phase 0 locks, and prove parser/output no-drift.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

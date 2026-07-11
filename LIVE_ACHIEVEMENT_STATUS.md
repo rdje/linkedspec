@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.2.0 — split outward descriptor parity**
+  (DONE — canonical descriptor identity `.1.6.2.1` active before Rust projection).
+
+  **Audit:** `return_descriptor` confirms the four public top-level keys but finds Perl's stale
+  `compiled_spec_state_v1` model tag. Source proves the final owner is actually `compiled_descriptor_state`, which
+  already matches the mdBook, Dart, and Julia. Rust has no public projection or descriptor-focused proof.
+
+  **Split/status:** `.1` reconciles the public model identity, `.2` adds Rust's idiomatic projection, and `.3`
+  closes four-backend admission. The capability census is honestly 50 pass / two partial / eight gap while repair
+  is active.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 — admit exhaustive capability corpus**
   (DONE — exhaustive current-surface `.1.6.1` closed; outward Rust descriptor `.1.6.2` active).
 

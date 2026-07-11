@@ -16,20 +16,21 @@ status: current
 tags: [parity, capability, matrix, public-api, rust, dart, julia, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.0 adds capability_conformance/manifest.json and tools/check_capability_conformance.pl: 15 capabilities x four backends classify 47 pass, five partial-proof, and eight gap states, each non-pass state with an explicit owner."
 evidence_update_2026_07_10: "FUTURE-PARITY-BACKLOG.1.6.1 closes exhaustive current-language proof at 239 bidirectionally checked ActionIR names and 105 exact fixtures on Perl, Rust, Dart, and Julia. The 60-state census is now 51 pass, one partial, and eight gap."
+evidence_update_2026_07_11: "FUTURE-PARITY-BACKLOG.1.6.2.0 uses return_descriptor to prove Perl's projection has the stale descriptor_model value compiled_spec_state_v1 while its composing owner, mdBook, Dart, and Julia use compiled_descriptor_state. The census is now 50 pass, two partial, and eight gap until .1.6.2.1 reconciles the public tag."
 reverify: "perl tools/check_capability_conformance.pl && rg -n 'FUTURE-PARITY-BACKLOG.1.6.[0-6]' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 `capability_conformance/manifest.json` is the current user-observable capability census. The checker validates the
 schema, exact backend set, evidence paths, status vocabulary, unique ids, gap ownership, and explicit legacy/future
-exclusions. After exhaustive language admission, its 15 rows and 60 backend states classify 51 pass, one partial,
+exclusions. After the outward-descriptor audit, its 15 rows and 60 backend states classify 50 pass, two partial,
 and eight gap.
 
 The audit distinguishes implementation gaps from proof gaps:
 
 - the 105-fixture interpreter corpus passes all four backends and is indexed against the 239-name current
   non-legacy ActionIR surface; `.1.6.1` closed that neutral proof;
-- Perl/Dart/Julia expose the documented outward compiled descriptor, while Rust exposes only its internal/public
-  `CompiledSpec` shape; `.1.6.2` owns the projection;
+- Perl/Dart/Julia expose the outward descriptor, but Perl's model identity names its nested spec state while the
+  composing owner/book/Dart/Julia name the descriptor state; `.1.6.2.1` reconciles it before Rust `.2`;
 - Perl/Dart/Julia expose structured runtime diagnostic attribution, while Rust uses a string payload in
   `LinkedSpecError::Runtime`; `.1.6.3` owns the structured record;
 - the native file-oriented named-spec role exists only as Perl `get_parser(...)`; Rust/Dart/Julia process adapters

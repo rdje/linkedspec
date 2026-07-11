@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (strict 239-name/105-case current-surface proof closed; `.1.6.2` active).
+- Last updated: `2026-07-11` (descriptor audit `.1.6.2.0` split stale Perl identity from Rust projection; `.1.6.2.1` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -943,9 +943,51 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.1.6.2`
   Status: `active`
   Goal: Add Rust's backend-neutral outward compiled-descriptor projection.
+  Children: `.1.6.2.0`, `.1.6.2.1`, `.1.6.2.2`, `.1.6.2.3`
   Acceptance: Rust exposes the documented `spec`, `functions`, `dependency_regex_map`, and `meta` projection with
     stable field meanings/order and staged function metadata equivalent to Perl/Dart/Julia; focused neutral shape
     fixtures prove idiomatic Rust types/JSON without coupling callers to engine internals.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.2.0`
+  Status: `done`
+  Goal: Audit the outward descriptor contract and split implementation without copying an existing drift.
+  Acceptance: Use the Perl `return_descriptor` toolbox probe plus Rust/Dart/Julia source and focused tests to
+    identify the canonical public shape, record any cross-variant mismatch durably, and split bounded repair,
+    Rust-projection, and final-admission leaves before production changes.
+  Verification: The reference probe returns exactly `spec`, `functions`, `dependency_regex_map`, and `meta`, but
+    exposes `meta.descriptor_model = compiled_spec_state_v1`; `CompilerState.pm` proves the actual composing owner
+    is `kind = compiled_descriptor_state`. The mdBook plus Dart and Julia instead expose the semantically correct
+    wrapper identity `compiled_descriptor_state`; Phase 0 contains two explicit locks for the stale Perl tag. Rust
+    has no descriptor projection, explicit dependency-ref state, or descriptor-focused tests. The implementation
+    is split into public metadata reconciliation `.1`, Rust projection `.2`, and four-backend admission `.3`.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.2.0 - split outward descriptor parity`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.2.1`
+  Status: `active`
+  Goal: Reconcile the canonical outward descriptor-model identity before adding Rust.
+  Acceptance: Perl reports the documented composing descriptor-state identity and explicit nested model identities
+    without changing rule/function/dependency payloads, parser behavior, or Dart/Julia values; focused descriptor
+    locks, Phase 0, mdBook, census, and Knowledge Map agree.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.2.2`
+  Status: `pending`
+  Goal: Add an idiomatic Rust outward descriptor projection over existing compiled state.
+  Acceptance: Public Rust APIs project deterministic `spec`, `functions`, `dependency_regex_map`, and `meta`
+    values, including rule dependency refs and preserved staged function metadata, without coupling callers to the
+    runtime engine or changing execution/serialization compatibility; focused shape/round-trip tests pass.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.2.3`
+  Status: `pending`
+  Goal: Admit and close four-backend outward descriptor parity.
+  Acceptance: Focused neutral shape evidence proves the documented top-level keys, metadata identities/order,
+    rule/dependency semantics, and staged function fields across Perl/Rust/Dart/Julia; update the census from
+    partial/gap to pass, synchronize public/live docs, run recurring gates, and advance to `.1.6.3`.
   Verification: `pending`
   Commit: `pending`
 
@@ -1213,21 +1255,24 @@ before implementation.
 | 42 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2` | `done` | Exact Dart anonymous/named capture values, rule-local code-unit marks with character projections, implicit AND result, 160 tests, 61x2 CLI, and 99 corpus pass. |
 | 43 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3` | `done` | Exact Julia anonymous/named capture values, rule-local code-unit marks with character projections, implicit AND result, 1,028 assertions, primary CLI, and 99 corpus pass; capture parent closes. |
 | 44 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5` | `done` | Corrected 239-name inventory, Perl-contract reverse check, six governed admissions, and exact 105/105 four-backend proof; `.1.6.1` closes. |
-| 45 | `FUTURE-PARITY-BACKLOG.1.6.2` | `active` | Add Rust's missing outward compiled-descriptor projection. |
-| 46 | `FUTURE-PARITY-BACKLOG.1.6.3` | `pending` | Add structured Rust native runtime diagnostics. |
-| 47 | `FUTURE-PARITY-BACKLOG.1.6.4` | `pending` | Add native named/file resolution to Rust, Dart, and Julia. |
-| 48 | `FUTURE-PARITY-BACKLOG.1.6.5` | `pending` | Extend Dart native trace through frontend/compiler/function-shell/staged phases. |
-| 49 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
-| 50 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
-| 51 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
-| 52 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
-| 53 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
-| 54 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
-| 55 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
-| 56 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
-| 57 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
-| 58 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
-| 59 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
+| 45 | `FUTURE-PARITY-BACKLOG.1.6.2.0` | `done` | Toolbox/source audit found stale Perl descriptor-model identity and split reconciliation, Rust projection, and final admission. |
+| 46 | `FUTURE-PARITY-BACKLOG.1.6.2.1` | `active` | Reconcile the canonical outward descriptor-model identity before adding Rust. |
+| 47 | `FUTURE-PARITY-BACKLOG.1.6.2.2` | `pending` | Add Rust's idiomatic outward descriptor projection. |
+| 48 | `FUTURE-PARITY-BACKLOG.1.6.2.3` | `pending` | Prove/admit four-backend descriptor parity and close `.1.6.2`. |
+| 49 | `FUTURE-PARITY-BACKLOG.1.6.3` | `pending` | Add structured Rust native runtime diagnostics. |
+| 50 | `FUTURE-PARITY-BACKLOG.1.6.4` | `pending` | Add native named/file resolution to Rust, Dart, and Julia. |
+| 51 | `FUTURE-PARITY-BACKLOG.1.6.5` | `pending` | Extend Dart native trace through frontend/compiler/function-shell/staged phases. |
+| 52 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
+| 53 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
+| 54 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 55 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
+| 56 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
+| 57 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
+| 58 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
+| 59 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
+| 60 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
+| 61 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
+| 62 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
 | 60 | `FUTURE-PARITY-BACKLOG.11.1` | `pending` | Director's generic final-codeblock argument correction is parked behind the active UTF-8/CLI frontier. |
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.6.1` Neutral Hex-Byte Fixture Materialization
