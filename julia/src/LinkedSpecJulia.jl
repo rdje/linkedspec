@@ -75,6 +75,12 @@ export backend_name,
     FluentCall,
     FluentChainBodyElementKind,
     FunctionDefinition,
+    GENERATED_SOURCE_CONTRACT,
+    GENERATED_SOURCE_FORMAT,
+    GeneratedSourceCode,
+    GeneratedSourceException,
+    GeneratedSourceMetadata,
+    GeneratedSourceStage,
     LifecycleMarkerBodyElementKind,
     LinkedSpecRuntimeEngine,
     LinkedSpecTraceConfig,
@@ -207,6 +213,8 @@ export backend_name,
     create_engine,
     compiled_functions,
     compiled_rule,
+    emit_julia_source,
+    emit_julia_source_v1,
     default_rule_mode,
     definition_nodes_from_user_function_definition_output,
     DependencyRef,
@@ -220,6 +228,10 @@ export backend_name,
     find_rule,
     function_definition_with_body_ast,
     from_json,
+    generated_source_code_name,
+    generated_source_compile_failed,
+    generated_source_execution_failed,
+    generated_source_stage_name,
     has_user_function_name,
     is_and,
     is_known_action_ir_call_name,
@@ -312,6 +324,7 @@ include("spec/Validator.jl")
 include("compiler/CompiledSpec.jl")
 include("runtime/Matching.jl")
 include("runtime/Interpreter.jl")
+include("source/SourceEmitter.jl")
 include("parser/UserFunctionDefinitionParser.jl")
 include("io/SpecLoader.jl")
 include("cli/LinkedSpecJuliaCli.jl")

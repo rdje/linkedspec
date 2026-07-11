@@ -29,5 +29,5 @@ variants. Complete backend parity is not yet claimed because generated source re
 user-observable capability, and Lua is a later backend implementation.
 
 Related facts: [[backend-capability-census]], [[dart-native-full-pipeline-trace]],
-[[dart-generated-source-deferred]], [[julia-generated-source-deferred]],
+[[dart-generated-source-deferred]], [[julia-generated-source-scaffold]],
 [[rust-parity-followon-closed]].

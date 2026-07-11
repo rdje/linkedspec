@@ -40,4 +40,4 @@ global obligations close.
 
 Related facts: [[julia-primary-cli-process-conformance]],
 [[user-observable-backend-cli-parity-contract]], [[cross-backend-cli-contract-gap]],
-[[julia-generated-source-deferred]], [[julia-mdbook-usage-status]].
+[[julia-generated-source-scaffold]], [[julia-mdbook-usage-status]].

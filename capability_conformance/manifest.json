@@ -183,7 +183,7 @@
         "perl": {"status": "pass", "references": ["perl/LinkedSpec/Compiler.pm", "perl/LinkedSpec/GeneratedSource.pm", "perl/LinkedSpec/HandlerVariantEmitter.pm", "t/generated_source_contract.t"], "note": "Standalone contract-v1 source emission, exact direct/trace/error/plan behavior, arbitrary-package load, dependency-index reconstruction, and complete canonical admission gates pass under FUTURE-PARITY-BACKLOG.3.1."},
         "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/source_emitter.rs", "rust/linkedspec-runtime/tests/source_emitter.rs", "rust/linkedspec-runtime/tests/generated_source_full_manifest_classifier.rs", "docs/knowledge/rust-generated-source-full-manifest-classification.md"], "note": "Contract-v1 baseline, all structural families, strict all-105 generated compile/run classification, complete Rust package gate, and 61x2 primary CLI admission pass under FUTURE-PARITY-BACKLOG.3.2."},
         "dart": {"status": "pass", "references": ["dart/lib/src/source_emitter.dart", "dart/lib/src/runtime/generated_plan.dart", "dart/lib/src/runtime/interpreter.dart", "dart/test/source_emitter_test.dart", "docs/knowledge/dart-generated-source-deferred.md"], "note": "Contract-v1 deterministic emission, exact ten-family direct structural execution, four plan rejections, portable trace roles, isolated host compilation, exact accepted eight-case manifest proof, and complete Dart package/CLI/corpus admission pass under FUTURE-PARITY-BACKLOG.3.3."},
-        "julia": {"status": "gap", "references": ["docs/knowledge/julia-generated-source-deferred.md"]}
+        "julia": {"status": "gap", "references": ["docs/knowledge/julia-generated-source-scaffold.md"]}
       }
     }
   ],

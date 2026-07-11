@@ -10,6 +10,7 @@ const DESCRIPTOR_CONTRACT = JSON3.read(
 )
 
 include("spec_loader_test.jl")
+include("source_emitter_test.jl")
 
 function _throws_corpus_message(call, needle)
     try

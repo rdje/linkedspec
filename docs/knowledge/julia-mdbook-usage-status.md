@@ -44,7 +44,7 @@ canonical trace at 61/61; `.1.5.4.3` now closes recurring matrix integration. Th
 remaining global `.1.6` outward-capability leaves and `.3` rather than being presented as complete parity. `JuliaFormatter`
 and `JET` remain optional local tooling rather than behavior prerequisites.
 
-Related facts: [[user-observable-backend-cli-parity-contract]], [[julia-generated-source-deferred]], [[julia-local-verification-gate]], [[julia-full-corpus-gate]],
+Related facts: [[user-observable-backend-cli-parity-contract]], [[julia-generated-source-scaffold]], [[julia-local-verification-gate]], [[julia-full-corpus-gate]],
 [[julia-spec-driven-function-shell-parser]], [[native-in-memory-backend-contract]],
 [[dart-mdbook-usage-status]], [[julia-primary-cli-mechanism-audit]],
 [[julia-frontend-compiler-staged-trace-events]], [[julia-primary-cli-arguments-resolution-loading]],

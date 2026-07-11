@@ -1,6 +1,26 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.4.1 — add Julia generated-source scaffold
+
+Added public `emit_julia_source(...)` and `emit_julia_source_v1(...)` APIs. They reconstruct effective function
+and last-definition rule order from `CompiledSpec`, serialize a normalized AST as recursively key-sorted JSON, and
+emit deterministic native Julia source. The generated module exposes contract/format/source-identity metadata,
+ordinary and traced direct-value entrypoints, and typed portable emission, compile/load, and execution failures.
+Native interpreter and primary CLI paths are unchanged.
+
+Kept the Unicode and encoding layers explicit. Generated Julia is Unicode source; canonical JSON and identity are
+encoded as strict UTF-8 bytes and represented by ASCII hexadecimal so arbitrary Unicode and Julia `$`
+interpolation characters cannot alter the data. Unicode defines characters/code points, while UTF-8, UTF-16, and
+UTF-32 are encodings; strict UTF-8 is the selected LinkedSpec persistence boundary, not a synonym for Unicode.
+
+Added an 18-assertion scaffold proof. Fresh offline Julia processes load valid and deliberately corrupted generated
+modules from a caller-owned temporary project with compiled modules disabled and a private writable depot layer.
+The proof locks deterministic source, exact Unicode result/metadata, stable execution and compile/load failures,
+and recursive owned cleanup. Focused 18/18 and complete package 1,128 assertions pass; the canonical Julia gate
+also passes package, 61x2 CLI, and 105/105 corpus checks. Julia remains a generated-source gap until family/direct
+execution `.3.4.2` and manifest admission `.3.4.3` pass.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.3.3 — admit generated Dart source
 
 Added a recurring Dart admission test that reads the exact eight-case accepted subset from the executable

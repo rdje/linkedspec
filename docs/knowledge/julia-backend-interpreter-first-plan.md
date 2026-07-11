@@ -33,6 +33,6 @@ mirroring the Dart closeout and Rust generated-source split. ADR `0023` keeps th
 but makes the public capability mandatory before complete Julia parity; `.7.3.2` owns the
 exact primary CLI first.
 
-Related facts: [[user-observable-backend-cli-parity-contract]], [[julia-generated-source-deferred]], [[julia-runtime-rule-interpreter]], [[julia-runtime-matching-state]], [[julia-compiled-spec-state]],
+Related facts: [[user-observable-backend-cli-parity-contract]], [[julia-generated-source-scaffold]], [[julia-runtime-rule-interpreter]], [[julia-runtime-matching-state]], [[julia-compiled-spec-state]],
 [[dart-scoped-parity-milestone-complete]],
 [[language-agnostic-backend-vision]], [[variant-specific-cli-requirement]], [[text-to-ast-backend-doctrine]].

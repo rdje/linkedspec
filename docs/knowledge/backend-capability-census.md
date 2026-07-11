@@ -66,4 +66,4 @@ omitted rows.
 Related facts: [[user-observable-backend-cli-parity-contract]], [[native-in-memory-backend-contract]],
 [[perl-native-spec-resolution]], [[dart-native-spec-resolution]], [[julia-native-spec-resolution]],
 [[trace-cross-variant-capability-contract]], [[dart-generated-source-deferred]],
-[[julia-generated-source-deferred]], [[rust-parity-followon-closed]], [[primary-cli-four-backend-matrix]].
+[[julia-generated-source-scaffold]], [[rust-parity-followon-closed]], [[primary-cli-four-backend-matrix]].

@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.4.1 — separate Unicode semantics from boundary encoding):
+  Reconstruct a normalized effective AST from compiled order instead of serializing host caches or inventing a
+  second compiler. Canonically sort JSON object keys, encode the Unicode payload and identity to strict UTF-8, then
+  render those bytes as ASCII hex; this makes emitted Julia deterministic and immune to host interpolation while
+  retaining the explicit fact that UTF-8/UTF-16/UTF-32 are encodings, not definitions of Unicode. A credible
+  isolation proof needs a caller-owned project and writable depot, fresh processes, compiled modules disabled,
+  offline resolution from an already-instantiated read layer, valid and corrupt module loads, and owned recursive
+  cleanup. Keep family-plan/direct routing in the next leaf so a green scaffold does not prematurely promote the
+  generated-source capability.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.3.3 — admission must consume the contract list, not copy it):
   Make the executable contract the only accepted-subset owner and have the backend test read it directly; then
   checker-lock the test path, exact count, contract access, interpreter-before-emission comparison, independent

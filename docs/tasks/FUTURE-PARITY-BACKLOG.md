@@ -1838,16 +1838,22 @@ before implementation.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.3.4.1`
-  Status: `active`
+  Status: `done`
   Goal: Add the public Julia emitter scaffold and isolated include/compile-run harness.
   Acceptance: Emit deterministic Julia source from compiled state, include/load it in caller-owned isolation,
     execute a minimal parser entrypoint, prove stable format/version and failures, respect depot/artifact boundaries,
     and clean only generated task-owned files.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Public compatibility/v1 Julia emitters reconstruct deterministic effective
+    AST state, serialize canonical JSON, and embed strict-UTF-8 payload/identity bytes as ASCII hex. Generated
+    modules expose exact contract/version/identity metadata plus direct/traced execution and typed emission,
+    compile/load, and execution failures. An 18-assertion proof runs valid and corrupt modules in fresh offline
+    Julia processes from a caller-owned temporary project with compiled modules disabled and a private writable
+    depot layer; Unicode/`$` result and cleanup are exact. Focused 18/18 and package 1,128 assertions pass without
+    native interpreter or CLI changes. Complete Julia gate result is recorded in the verification log below.
+  Commit: `FUTURE-PARITY-BACKLOG.3.4.1 - add Julia generated-source scaffold`
 
 - ID: `FUTURE-PARITY-BACKLOG.3.4.2`
-  Status: `pending`
+  Status: `active`
   Goal: Add Julia typed family-plan metadata and direct generated structural execution.
   Acceptance: Cover every current default/OR/AND/repetition acode/bcode family, validate label/family plans before
     execution, retain trace and diagnostic/source identity, and run a synthetic all-family matrix directly.
@@ -2112,9 +2118,10 @@ before implementation.
 | 73 | `FUTURE-PARITY-BACKLOG.3.3.2` | `done` | Exact ten-family plan/direct dispatch/four rejections/trace pass in isolated host package. |
 | 74 | `FUTURE-PARITY-BACKLOG.3.3.3` | `done` | Exact 8/105 generated proof and complete gates promote Dart at census 59/0/1. |
 | 75 | `FUTURE-PARITY-BACKLOG.3.4` | `active` | Julia needs emitter scaffold, family plan/direct execution, and manifest proof. |
-| 76 | `FUTURE-PARITY-BACKLOG.3.4.1` | `active` | Add Julia deterministic emitter scaffold and isolated include/run harness. |
-| 77 | `FUTURE-PARITY-BACKLOG.3.5` | `pending` | Exact four-backend admission promotes all states only after every generated-source proof passes. |
-| 78 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 76 | `FUTURE-PARITY-BACKLOG.3.4.1` | `done` | Deterministic v1 emission and isolated 18-assertion include/run/failure proof pass. |
+| 77 | `FUTURE-PARITY-BACKLOG.3.4.2` | `active` | Add exact Julia family plan, rejection codes, direct structural execution, and trace. |
+| 78 | `FUTURE-PARITY-BACKLOG.3.5` | `pending` | Exact four-backend admission promotes all states only after every generated-source proof passes. |
+| 79 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
 | 65 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
 | 66 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
 | 67 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
@@ -2785,6 +2792,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.3.1` | Public compatibility/v1 Dart emitters; exact metadata/errors/determinism; isolated private-cache offline pub/analyze/run/cleanup; focused 3/3; complete Dart 178 tests + 61x2 + 105 corpus; docs/KM/governance/mdBook/cleanup. | PASS. Dart scaffold is green without census promotion; exact family-plan/direct execution `.3.3.2` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.3.2` | Exact ten-family plan/four rejections/direct per-rule family dispatch/three trace roles; isolated all-family package; focused 5/5; complete Dart 180 tests + 61x2 + 105 corpus; docs/KM/governance/mdBook/cleanup. | PASS. Dart implementation roles are green; curated manifest admission `.3.3.3` is active without premature census promotion. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.3.3` | Contract-sourced exact eight-case interpreter-first subset; isolated offline host analyze/run; exact values/metadata/plans/trace; checker path/order/no-skip/cleanup enforcement; complete Dart 181 + 61x2 + 105; 59/0/1; docs/KM/governance/mdBook/cleanup. | PASS. Dart promotes gap→pass; `.3.3` closes and Julia scaffold `.3.4.1` is next. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.4.1` | Public compatibility/v1 Julia emitters; canonical effective-AST serialization; strict-UTF-8/ASCII-hex payload and identity; typed metadata/errors; valid/corrupt caller-owned isolated host proof; focused 18/18; package 1,128; complete Julia gate; docs/KM/governance/mdBook/cleanup. | PASS. Julia scaffold is green without census promotion; exact family-plan/direct execution `.3.4.2` is active. |
 
 ## Commit Log
 
@@ -2854,6 +2862,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.3.3.1` | `FUTURE-PARITY-BACKLOG.3.3.1 - add Dart generated-source scaffold` | Deterministic v1 emitter, typed scaffold errors, isolated caller-package compile/run, and `.3.3.2` handoff. |
 | `FUTURE-PARITY-BACKLOG.3.3.2` | `FUTURE-PARITY-BACKLOG.3.3.2 - add Dart generated family execution` | Exact ten-family direct routing, four plan rejections, portable trace, isolated matrix, and `.3.3.3` handoff. |
 | `FUTURE-PARITY-BACKLOG.3.3.3` | `FUTURE-PARITY-BACKLOG.3.3.3 - admit generated Dart source` | Exact accepted-subset admission, complete Dart gate, 59/0/1 promotion, and Julia handoff. |
+| `FUTURE-PARITY-BACKLOG.3.4.1` | `FUTURE-PARITY-BACKLOG.3.4.1 - add Julia generated-source scaffold` | Deterministic v1 emitter, Unicode-safe hex payload, typed errors, isolated include/run, and `.3.4.2` handoff. |
 
 ## Changelog
 

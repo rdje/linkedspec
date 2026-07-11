@@ -46,7 +46,7 @@ now composes into the closed global cross-backend fixture comparison. The broade
 from `capability_conformance/manifest.json`; current residual mechanisms remain owned by `.1.6.1`–`.1.6.5` and `.3`.
 
 Related facts: [[cross-backend-cli-contract-gap]], [[variant-specific-cli-requirement]],
-[[native-in-memory-backend-contract]], [[julia-generated-source-deferred]], [[rust-source-emitter-lane-split]].
+[[native-in-memory-backend-contract]], [[julia-generated-source-scaffold]], [[rust-source-emitter-lane-split]].
 See also [[julia-primary-cli-mechanism-audit]].
 Julia preparation detail: [[julia-primary-cli-arguments-resolution-loading]].
 Julia execution/JSON detail: [[julia-primary-cli-native-execution-canonical-json]].

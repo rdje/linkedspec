@@ -56,5 +56,5 @@ results, diagnostics, tracing, and source identity through idiomatic host APIs.
 The 105-case interpreter corpus remains the primary correctness oracle.
 
 Related facts: [[rust-generated-source-corpus-subset]], [[rust-source-emitter-lane-split]],
-[[dart-generated-source-deferred]], [[julia-generated-source-deferred]],
+[[dart-generated-source-deferred]], [[julia-generated-source-scaffold]],
 [[user-observable-backend-cli-parity-contract]], [[perl-generated-source-capture-not-standalone]].

@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.3.4.1 — add Julia generated-source scaffold**
+  (DONE — deterministic v1 emission and isolated include/run pass; Julia family/direct `.3.4.2` next).
+
+  **Implementation:** Public compatibility/v1 emitters reconstruct canonical effective AST state and generate a
+  native Julia module with contract/version/identity metadata, direct/traced entrypoints, and typed portable
+  errors. Unicode payload/identity text uses strict-UTF-8 bytes represented as ASCII hex at this boundary.
+
+  **Isolation/proof:** Fresh offline processes load valid and corrupt modules in a caller-owned temporary project
+  with compiled modules disabled and a private writable depot layer, then delete all owned state. Focused 18/18,
+  package 1,128 assertions, 61x2 CLI, and 105/105 corpus pass. Census remains 59/0/1 until `.3.4.3` admission.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.3.3 — admit generated Dart source**
   (DONE — exact accepted-subset proof promotes Dart; census 59/0/1; Julia `.3.4.1` next).
 

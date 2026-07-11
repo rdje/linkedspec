@@ -139,7 +139,39 @@ execution—must first equal its checked-in interpreter result. One isolated
 offline host package then analyzes and runs the eight emitted libraries with
 exact values, metadata, plans, portable trace roles, and source identity. The
 contract checker locks that test path and proof shape. Dart generated source is
-therefore admitted pass; Julia remains the only generated-source gap.
+therefore admitted pass.
+
+Julia now exposes the first contract-v1 scaffold through
+`emit_julia_source_v1(compiled, "specs/example.spec")` and the `<inline>`
+compatibility adapter `emit_julia_source(compiled)`. The generated native
+module exposes contract/version/identity metadata plus direct-value `execute`
+and `execute_with_trace` entrypoints. Emission reconstructs the effective
+ordered specification from compiled state and recompiles it through Julia's
+ordinary public AST/compiler pipeline; native interpreter and CLI behavior do
+not change.
+
+```julia
+compiled = compile_spec(parse_spec(source))
+generated = emit_julia_source_v1(compiled, "specs/example.spec")
+
+# Persist `generated` as UTF-8 in caller-owned storage, then load it.
+include("generated_parser.jl")
+value = LinkedSpecGeneratedParser.execute(input)
+```
+
+Generated Julia source is Unicode text. Canonical normalized-spec JSON and the
+source identity are encoded as strict UTF-8 bytes and rendered as ASCII
+hexadecimal, protecting arbitrary Unicode and Julia interpolation characters.
+Unicode defines characters/code points; UTF-8, UTF-16, and UTF-32 are encoding
+forms. LinkedSpec selects strict UTF-8 for this persisted boundary without
+equating Unicode with UTF-8.
+
+The scaffold proof runs valid and deliberately corrupted generated modules in
+fresh processes from a caller-owned temporary project. Compiled modules are
+disabled, the writable depot layer is private to the test, execution and typed
+failures are exact, and the owned project/depot are deleted afterward. Julia
+remains the only generated-source capability gap until its ten-family direct
+plan and manifest-backed admission land.
 
 ## Why this matters
 
