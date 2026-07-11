@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1 — preserve symbolic slots and parent result ownership):
+  A bare mark argument such as `mark_here(origin)` is a symbolic identifier, not a scalar read; evaluating it first
+  aliases every undefined name to the same empty key and lets later marks overwrite earlier anchors. Resolve these
+  slots from the raw typed argument while retaining evaluated quoted/dynamic forms. Also test governed fixtures
+  through their real wrapper: exact leaf helpers can be correct while a blind-call parent silently discards the
+  child value. Interpreted and generated execution must share the same implicit `AND` collection contract.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3 — share the sibling-chain semantic model):
   Julia confirmed the Dart lesson: typed marker nodes require a range owner. Select across siblings with nesting
   depth, evaluate the switch subject once, and execute one bounded branch. Keep attached and lazy inline switch

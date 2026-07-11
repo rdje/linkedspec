@@ -1104,6 +1104,7 @@ impl GeneratedPlanExecutor<'_> {
             ));
         }
 
+        let mut implicit_and_result = Vec::new();
         match family {
             GeneratedRuleFamily::RepBcode | GeneratedRuleFamily::RepAndBcode => {
                 let rep_min = rule.rep_min.unwrap_or(0);
@@ -1229,6 +1230,7 @@ impl GeneratedPlanExecutor<'_> {
                         ),
                         TraceLevel::MEDIUM,
                     );
+                    implicit_and_result.push(child_retv.clone());
                     ctx.set_retv(child_retv);
                     self.engine.execute_bcode_entry_tail(entry, ctx, label)?;
                     return_if_rule_returned!();
@@ -1279,7 +1281,16 @@ impl GeneratedPlanExecutor<'_> {
             return_if_rule_returned!();
         }
 
-        let my_return = ctx.take_return_value().unwrap_or(RuntimeValue::Undef);
+        let my_return = ctx.take_return_value().unwrap_or_else(|| {
+            if matches!(family, GeneratedRuleFamily::AndBcode) {
+                RuntimeValue::Array(implicit_and_result)
+            } else {
+                RuntimeValue::Undef
+            }
+        });
+        if rule.is_top && !matches!(my_return, RuntimeValue::Undef) {
+            ctx.push_accumulator(my_return.clone());
+        }
         ctx.restore_return_value(caller_return);
         saved_match.restore(ctx);
         Ok(my_return)
@@ -1796,6 +1807,7 @@ impl Engine {
 
         // ── Blind-call dispatch ──
         if !rule.bcode_dispatch.is_empty() {
+            let mut implicit_and_result = Vec::new();
             if is_rep {
                 let mut matches = 0usize;
                 for _iter in 0..LINKEDSPEC_WHILE_ITERATION_LIMIT {
@@ -1914,6 +1926,7 @@ impl Engine {
                         ),
                         TraceLevel::MEDIUM,
                     );
+                    implicit_and_result.push(child_retv.clone());
                     ctx.set_retv(child_retv);
                     self.execute_bcode_entry_tail(entry, ctx, label)?;
                     return_if_rule_returned!();
@@ -1951,7 +1964,16 @@ impl Engine {
                 self.execute_lifecycle_block("E", ecode, ctx, label)?;
                 return_if_rule_returned!();
             }
-            let my_return = ctx.take_return_value().unwrap_or(RuntimeValue::Undef);
+            let my_return = ctx.take_return_value().unwrap_or_else(|| {
+                if !is_rep && !matches!(rule.mode, RuleMode::Or) {
+                    RuntimeValue::Array(implicit_and_result)
+                } else {
+                    RuntimeValue::Undef
+                }
+            });
+            if rule.is_top && !matches!(my_return, RuntimeValue::Undef) {
+                ctx.push_accumulator(my_return.clone());
+            }
             ctx.restore_return_value(caller_return);
             saved_match.restore(ctx);
             return Ok(my_return);
@@ -3948,10 +3970,12 @@ impl Engine {
         matches!(
             name,
             "start_capture_slice"
+                | "start_capture_slice_from"
                 | "capture_slice"
                 | "capture_slice_len"
                 | "capture_slice_line"
                 | "capture_slice_pos"
+                | "capture_slice_col"
                 | "capture_slice_until_cursor"
                 | "capture_slice_until_cursor_len"
                 | "capture_until_boundary"
@@ -3969,6 +3993,7 @@ impl Engine {
                 | "mark_input_start"
                 | "mark_input_end"
                 | "mark_copy"
+                | "mark_capture_slice"
                 | "capture_from"
                 | "capture_len_from"
                 | "capture_until_cursor_from"
@@ -3982,6 +4007,8 @@ impl Engine {
                 | "capture_take_rest_len_from"
                 | "capture_between"
                 | "capture_len_between"
+                | "capture_take_between"
+                | "capture_take_between_len"
         )
     }
 
@@ -5445,10 +5472,15 @@ impl Engine {
         raw_args: &[linkedspec_core::expr::Arg],
         val: Option<&RuntimeValue>,
     ) -> String {
-        self.resolve_rule_name_at(raw_args, val, 0)
+        self.resolve_bare_identifier_at(raw_args, val, 0)
     }
 
-    fn resolve_rule_name_at(
+    /// Preserve a bare identifier used as a symbolic helper argument.
+    ///
+    /// Rule labels, capture boundaries, and named marks are identifiers rather
+    /// than scalar-variable reads. Quoted/dynamic forms still use the evaluated
+    /// argument value.
+    fn resolve_bare_identifier_at(
         &self,
         raw_args: &[linkedspec_core::expr::Arg],
         val: Option<&RuntimeValue>,
@@ -5984,6 +6016,13 @@ impl Engine {
                 ctx.capture_start = Some(ctx.pos);
                 Ok(RuntimeValue::Undef)
             }
+            "start_capture_slice_from" => {
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                if let Some(mark) = ctx.marks.get(&name).copied() {
+                    ctx.capture_start = Some(mark);
+                }
+                Ok(RuntimeValue::Undef)
+            }
             "capture_slice" => {
                 // RUST-PARITY.5.5.4: ends at the START of the current local match
                 // (`ctx.match_start_byte`, Perl `$LSPOS - length $LMATCH`), not the
@@ -6010,6 +6049,11 @@ impl Engine {
                 &ctx.input,
                 ctx.capture_start.unwrap_or(0),
             ) as f64)),
+            "capture_slice_col" => {
+                let start = ctx.capture_start.unwrap_or(0);
+                let (_, col) = line_col_at_byte_offset(&ctx.input, start);
+                Ok(RuntimeValue::Number(col as f64))
+            }
             // ── RUST-PARITY.5.5.4: anonymous capture-slice family ──
             // These read the anonymous capture start `ctx.capture_start` (Perl
             // `$IPOS`, set by `start_capture_slice()`), not a named mark — the
@@ -6043,7 +6087,7 @@ impl Engine {
                 let mut saw_valid_boundary = false;
                 let mut boundary_start: Option<usize> = None;
                 for index in 0..raw_args.len() {
-                    let target = self.resolve_rule_name_at(raw_args, args.get(index), index);
+                    let target = self.resolve_bare_identifier_at(raw_args, args.get(index), index);
                     if target.is_empty() {
                         continue;
                     }
@@ -6156,21 +6200,25 @@ impl Engine {
             }
             "mark_here" => {
                 if !args.is_empty() {
-                    let name = args[0].to_str();
+                    let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                     ctx.marks.insert(name, ctx.pos);
                 }
                 Ok(RuntimeValue::Undef)
             }
             "mark_pos" => {
-                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let byte = ctx.marks.get(&name).copied().unwrap_or(0);
                 Ok(RuntimeValue::Number(
                     byte_to_char_offset(&ctx.input, byte) as f64
                 ))
             }
             "mark_exists" => {
-                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
-                Ok(RuntimeValue::Bool(ctx.marks.contains_key(&name)))
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                Ok(RuntimeValue::Number(if ctx.marks.contains_key(&name) {
+                    1.0
+                } else {
+                    0.0
+                }))
             }
             // ── RUST-PARITY.5.5.3: mark-based capture family ──
             // Authoritative contract: `perl/LinkedSpec/ActionIR/Contracts.pm`
@@ -6187,16 +6235,18 @@ impl Engine {
             // is valid.
             "mark_input_start" => {
                 // Store the absolute start-of-input position (0) under the mark.
-                if let Some(a) = args.first() {
-                    ctx.marks.insert(a.to_str(), 0);
+                if !args.is_empty() {
+                    let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    ctx.marks.insert(name, 0);
                 }
                 Ok(RuntimeValue::Undef)
             }
             "mark_input_end" => {
                 // Store the absolute end-of-input position (byte length) under the mark.
-                if let Some(a) = args.first() {
+                if !args.is_empty() {
+                    let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                     let end = ctx.input.len();
-                    ctx.marks.insert(a.to_str(), end);
+                    ctx.marks.insert(name, end);
                 }
                 Ok(RuntimeValue::Undef)
             }
@@ -6205,8 +6255,8 @@ impl Engine {
                 // target when source is present, else delete target (Contracts.pm
                 // MARK_COPY). The book catalog's 1-arg form was an imprecision,
                 // corrected in .5.5.3.
-                let target = args.first().map(|a| a.to_str()).unwrap_or_default();
-                let source = args.get(1).map(|a| a.to_str()).unwrap_or_default();
+                let target = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                let source = self.resolve_bare_identifier_at(raw_args, args.get(1), 1);
                 match ctx.marks.get(&source).copied() {
                     Some(pos) => {
                         ctx.marks.insert(target, pos);
@@ -6217,10 +6267,17 @@ impl Engine {
                 }
                 Ok(RuntimeValue::Undef)
             }
+            "mark_capture_slice" => {
+                if !args.is_empty() {
+                    let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    ctx.marks.insert(name, ctx.capture_start.unwrap_or(0));
+                }
+                Ok(RuntimeValue::Undef)
+            }
             "capture_from" => {
                 // mark → match-START (was match-END before .5.5.3; fixed for Perl
                 // parity — `capture_from` is a non-cursor reader).
-                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 Ok(match ctx.marks.get(&name).copied() {
                     Some(mark) => span_text(&ctx.input, mark, ctx.match_start_byte)
                         .map(RuntimeValue::Scalar)
@@ -6229,7 +6286,7 @@ impl Engine {
                 })
             }
             "capture_len_from" => {
-                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 Ok(match ctx.marks.get(&name).copied() {
                     Some(mark) => span_char_len(&ctx.input, mark, ctx.match_start_byte)
                         .map(|n| RuntimeValue::Number(n as f64))
@@ -6238,7 +6295,7 @@ impl Engine {
                 })
             }
             "capture_until_cursor_from" => {
-                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let cursor = ctx.pos;
                 Ok(match ctx.marks.get(&name).copied() {
                     Some(mark) => span_text(&ctx.input, mark, cursor)
@@ -6248,7 +6305,7 @@ impl Engine {
                 })
             }
             "capture_until_cursor_len_from" => {
-                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let cursor = ctx.pos;
                 Ok(match ctx.marks.get(&name).copied() {
                     Some(mark) => span_char_len(&ctx.input, mark, cursor)
@@ -6258,7 +6315,7 @@ impl Engine {
                 })
             }
             "capture_take_until_cursor_from" => {
-                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let cursor = ctx.pos;
                 match ctx.marks.get(&name).copied() {
                     Some(mark) => match span_text(&ctx.input, mark, cursor) {
@@ -6272,7 +6329,7 @@ impl Engine {
                 }
             }
             "capture_take_until_cursor_len_from" => {
-                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let cursor = ctx.pos;
                 match ctx.marks.get(&name).copied() {
                     Some(mark) => match span_char_len(&ctx.input, mark, cursor) {
@@ -6288,7 +6345,7 @@ impl Engine {
             "capture_take_len_from" => {
                 // length mark→match-START; advances the mark to the cursor
                 // (Contracts.pm CAPTURE_TAKE_LEN_FROM_MARK).
-                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let cursor = ctx.pos;
                 let end = ctx.match_start_byte;
                 match ctx.marks.get(&name).copied() {
@@ -6303,7 +6360,7 @@ impl Engine {
                 }
             }
             "capture_rest_from" => {
-                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let end = ctx.input.len();
                 Ok(match ctx.marks.get(&name).copied() {
                     Some(mark) => span_text(&ctx.input, mark, end)
@@ -6313,7 +6370,7 @@ impl Engine {
                 })
             }
             "capture_rest_len_from" => {
-                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let end = ctx.input.len();
                 Ok(match ctx.marks.get(&name).copied() {
                     Some(mark) => span_char_len(&ctx.input, mark, end)
@@ -6323,7 +6380,7 @@ impl Engine {
                 })
             }
             "capture_take_rest_from" => {
-                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let end = ctx.input.len();
                 match ctx.marks.get(&name).copied() {
                     Some(mark) => match span_text(&ctx.input, mark, end) {
@@ -6337,7 +6394,7 @@ impl Engine {
                 }
             }
             "capture_take_rest_len_from" => {
-                let name = args.first().map(|a| a.to_str()).unwrap_or_default();
+                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let end = ctx.input.len();
                 match ctx.marks.get(&name).copied() {
                     Some(mark) => match span_char_len(&ctx.input, mark, end) {
@@ -6351,8 +6408,8 @@ impl Engine {
                 }
             }
             "capture_between" => {
-                let a = args.first().map(|v| v.to_str()).unwrap_or_default();
-                let b = args.get(1).map(|v| v.to_str()).unwrap_or_default();
+                let a = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                let b = self.resolve_bare_identifier_at(raw_args, args.get(1), 1);
                 let start = ctx.marks.get(&a).copied();
                 let end = ctx.marks.get(&b).copied();
                 Ok(match (start, end) {
@@ -6363,8 +6420,8 @@ impl Engine {
                 })
             }
             "capture_len_between" => {
-                let a = args.first().map(|v| v.to_str()).unwrap_or_default();
-                let b = args.get(1).map(|v| v.to_str()).unwrap_or_default();
+                let a = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                let b = self.resolve_bare_identifier_at(raw_args, args.get(1), 1);
                 let start = ctx.marks.get(&a).copied();
                 let end = ctx.marks.get(&b).copied();
                 Ok(match (start, end) {
@@ -6373,6 +6430,38 @@ impl Engine {
                         .unwrap_or(RuntimeValue::Undef),
                     _ => RuntimeValue::Undef,
                 })
+            }
+            "capture_take_between" => {
+                let a = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                let b = self.resolve_bare_identifier_at(raw_args, args.get(1), 1);
+                let start = ctx.marks.get(&a).copied();
+                let end = ctx.marks.get(&b).copied();
+                match (start, end) {
+                    (Some(s), Some(e)) => match span_text(&ctx.input, s, e) {
+                        Some(text) => {
+                            ctx.marks.insert(a, e);
+                            Ok(RuntimeValue::Scalar(text))
+                        }
+                        None => Ok(RuntimeValue::Undef),
+                    },
+                    _ => Ok(RuntimeValue::Undef),
+                }
+            }
+            "capture_take_between_len" => {
+                let a = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                let b = self.resolve_bare_identifier_at(raw_args, args.get(1), 1);
+                let start = ctx.marks.get(&a).copied();
+                let end = ctx.marks.get(&b).copied();
+                match (start, end) {
+                    (Some(s), Some(e)) => match span_char_len(&ctx.input, s, e) {
+                        Some(n) => {
+                            ctx.marks.insert(a, e);
+                            Ok(RuntimeValue::Number(n as f64))
+                        }
+                        None => Ok(RuntimeValue::Undef),
+                    },
+                    _ => Ok(RuntimeValue::Undef),
+                }
             }
             // ── Entry/match detail ──
             "entry_line" | "entry_start_line" => {

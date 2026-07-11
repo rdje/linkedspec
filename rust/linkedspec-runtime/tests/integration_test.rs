@@ -3837,3 +3837,40 @@ fn future_parity_backlog_1_6_1_2_2_3_1_rust_marker_control_values() {
         "Rust executes i/elif aliases and excludes default after a matching case"
     );
 }
+
+#[test]
+fn future_parity_backlog_1_6_1_2_2_4_1_rust_anonymous_capture_values() {
+    let grammar = include_str!(
+        "../../../capability_conformance/fixtures/capability_capture_anonymous_surface.spec"
+    );
+    assert_eq!(
+        build_and_run(grammar, "AxxBC"),
+        serde_json::json!([[{
+            "rest": "xxBC", "rest_len": 4, "slice": "xxB", "slice_col": 2,
+            "slice_len": 3, "slice_line": 1, "slice_pos": 1, "take": "xxB",
+            "take_len": 3, "take_rest": "xxBC", "take_rest_len": 4,
+            "take_until_cursor": "xxBC", "take_until_cursor_len": 4,
+            "until_cursor": "xxBC", "until_cursor_len": 4
+        }]])
+    );
+}
+
+#[test]
+fn future_parity_backlog_1_6_1_2_2_4_1_rust_named_capture_values() {
+    let grammar = include_str!(
+        "../../../capability_conformance/fixtures/capability_capture_named_surface.spec"
+    );
+    assert_eq!(
+        build_and_run(grammar, "AxxBC"),
+        serde_json::json!([[{
+            "between": "xxBC", "between_len": 4, "copied_pos": 1,
+            "from": "xxB", "from_len": 3, "origin_exists": 1,
+            "origin_pos": 1, "rest": "xxBC", "rest_len": 4,
+            "take_between": "xxBC", "take_between_len": 4, "take_len": 3,
+            "take_rest": "xxBC", "take_rest_len": 4,
+            "take_until_cursor": "xxBC", "take_until_cursor_len": 4,
+            "until_cursor": "xxBC", "until_cursor_len": 4,
+            "whole_input": "AxxBC"
+        }]])
+    );
+}

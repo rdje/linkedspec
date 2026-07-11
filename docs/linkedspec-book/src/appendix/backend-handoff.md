@@ -137,7 +137,9 @@ sources stay governed under `capability_conformance/fixtures/`, and final `.5` a
 237-name coverage and unchanged 105/105 execution pass on Perl, Rust, Dart, and Julia. Recognition alone never
 counts as user-visible feature parity. Rust, Dart, and Julia now pass the exhaustive pure-value source directly.
 Rust, Dart, and Julia also pass the empty-local-match position and marker-control sources, including short
-`i`/`elif` aliases and matched-case/default exclusion. Capture/mark is next.
+`i`/`elif` aliases and matched-case/default exclusion. Rust additionally passes both exact anonymous and named
+capture/mark sources, including stable/advancing reads, anonymous-to-named bridging, input-boundary/copy marks,
+and two-mark advancing reads. Dart capture/mark parity is the active next repair, followed by Julia.
 All three runtimes preserve the crucial distinction between no local match and a present zero-width match at
 offset zero.
 

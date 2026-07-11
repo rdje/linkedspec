@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1 — complete Rust capture marks
+
+**Exact capture families:** Rust now executes both governed anonymous and named capture/mark sources with the
+same hashes as Perl. Added the missing anonymous reset-from-mark and column helpers, anonymous-to-named bridge,
+and two-mark advancing text/length helpers. `mark_exists` projects numeric `1`/`0`, and every mark-taking helper
+preserves a bare identifier as the mark name instead of evaluating it as an unrelated scalar variable.
+
+**Wrapper result parity:** The governed sources use `Top::AND => Value`. They exposed a separate Rust runtime gap:
+without an explicit parent `return`, interpreted and generated-plan non-repeated `AND` blind-call rules discarded
+the ordered child returns. Both paths now surface the child-return array, matching the established cross-backend
+blind-call collection contract. Generated-source coverage locks the implicit result independently.
+
+**Proof/frontier:** `tools/run_rust_local.sh` passes formatting, 137 library tests, the unchanged 99-case oracle,
+196 integration tests, three source-emitter tests, ten trace tests, and 61/61 primary CLI cases in both default and
+POSIX environments. Dart capture/mark `.1.6.1.2.2.4.2` is active.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3 — align Julia marker control
 
 **Marker switch execution:** Julia now groups marker-form switch siblings into one nesting-aware chain in action

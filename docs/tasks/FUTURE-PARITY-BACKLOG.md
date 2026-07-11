@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (all marker-control children closed; Rust capture/mark `.1.6.1.2.2.4.1` active).
+- Last updated: `2026-07-10` (Rust capture/mark closed; Dart `.1.6.1.2.2.4.2` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -866,14 +866,20 @@ before implementation.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1`
-  Status: `active`
+  Status: `done`
   Goal: Complete Rust capture/mark fixture semantics.
   Acceptance: Both exact fixture hashes pass with no unknown-helper warning and existing corpus remains green.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Rust now preserves bare mark identifiers symbolically, implements the missing anonymous/named
+    bridge, column, copied-slice, and two-mark advancing helpers, and projects `mark_exists` as numeric `1`/`0`.
+    The governed anonymous and named hashes match Perl exactly. The capture sources also exposed and closed Rust's
+    non-repeated `AND` blind-call default-result gap in both interpreted and generated-plan execution: absent an
+    explicit parent return, the parent surfaces the ordered child-return array. `tools/run_rust_local.sh` passes
+    formatting, 137 library tests, the unchanged 99-case oracle, 196 integration tests, three source-emitter
+    tests, ten trace tests, and both 61-case CLI environments.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1 - complete Rust capture marks`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2`
-  Status: `pending`
+  Status: `active`
   Goal: Complete Dart capture/mark fixture semantics.
   Acceptance: Both exact fixture hashes pass with no unsupported-helper failure and existing corpus remains green.
   Verification: `pending`
@@ -1164,8 +1170,8 @@ before implementation.
 | 38 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1` | `done` | Rust short aliases and existing switch exclusion return exact `["elif","case-b"]`; 137 library, 194 integration, 99 oracle, and 61x2 CLI pass. |
 | 39 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2` | `done` | Dart marker switch grouping returns exact `["elif","case-b"]`; 155 tests, 61x2 CLI, and 99 corpus pass. |
 | 40 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3` | `done` | Julia marker switch grouping returns exact `["elif","case-b"]`; 1,023 assertions, 61x2 CLI, and 99 corpus pass; control parent closes. |
-| 41 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1` | `active` | Complete Rust capture/mark semantics. |
-| 42 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2` | `pending` | Complete Dart capture/mark semantics. |
+| 41 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1` | `done` | Exact Rust anonymous/named capture values, symbolic marks, implicit AND blind-call result, 196 integration, and full recurring gate pass. |
+| 42 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2` | `active` | Complete Dart capture/mark semantics. |
 | 43 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3` | `pending` | Complete Julia capture/mark semantics. |
 | 44 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5` | `pending` | Admit six fixtures and close strict 105-case proof. |
 | 45 | `FUTURE-PARITY-BACKLOG.1.6.2` | `pending` | Add Rust's missing outward compiled-descriptor projection. |

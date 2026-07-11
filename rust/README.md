@@ -78,7 +78,10 @@ The engine implements 80+ helpers covering:
 - **Hashes**: `hash`, `copy`, `merge_hash`, `set_key`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `count_keys`, `has_key`, `flat_hash`; direct nested access reads fields from scalar-held hash/array payloads
 - **Arithmetic**: `num_add`, `num_sub`, `num_mul`, `num_div`, `num_mod`, `num_abs`, `num_floor`, `num_ceil`, `num_round`, `num_min`, `num_max`, `num_clamp`, `num_sum`, `num_avg`, `num_median`, `num_range`
 - **Cursor/position**: `cursor_pos`, `cursor_line`, `cursor_col`, `cursor_rest`, `cursor_rest_len`, `input_text`, `input_len`, `input_slice`
-- **Marks/capture**: `start_capture_slice`, `capture_slice`, `capture_slice_len`, `capture_slice_line`, `capture_slice_pos`, `mark_here`, `mark_pos`, `mark_exists`, `capture_from`
+- **Marks/capture**: anonymous start/bridge, slice/line/column/position, stable and advancing cursor/rest reads;
+  named mark creation, input boundaries, copy/existence/position, stable and advancing from/between reads, and
+  anonymous-to-named capture bridging. Bare mark arguments remain symbolic identifiers; quoted names are also
+  accepted.
 - **Debug**: `print`, `say`, `print_each`
 - **Dispatch**: `call`
 

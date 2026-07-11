@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1 — complete Rust capture marks**
+  (DONE — Rust exact anonymous/named capture values closed; Dart `.2.2.4.2` active).
+
+  **Implementation:** Bare mark arguments retain symbolic identity; missing bridge/column/two-mark advancing
+  helpers and numeric mark presence now match Perl. Interpreted and generated non-repeated `AND` blind-call
+  wrappers surface their ordered child-return array when no explicit parent return overrides it.
+
+  **Proof:** Both governed exact hashes, 137 library, 196 integration, 99 oracle, three emitter, ten trace, and
+  61/61 CLI cases in both environments pass.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3 — align Julia marker control**
   (DONE — all exact control values closed; Rust capture/mark `.2.2.4.1` active).
 

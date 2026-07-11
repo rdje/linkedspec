@@ -66,6 +66,19 @@ ChildB:
  E { return("B") }
 "#;
 
+const AND_BCODE_IMPLICIT_RESULT_SOURCE_EMITTER_SPEC: &str = r#"Top::AND
+ => ChildA
+ => ChildB
+
+ChildA:
+ /a/
+ E { return("A") }
+
+ChildB:
+ /[ \t]+b/
+ E { return("B") }
+"#;
+
 const OR_BCODE_SOURCE_EMITTER_SPEC: &str = r#"Top::OR
  => ChildA
  => ChildB
@@ -340,6 +353,14 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         Case {
             module: "and_bcode_case",
             spec: AND_BCODE_SOURCE_EMITTER_SPEC,
+            input: "a b",
+            expected: json!([["A", "B"]]),
+            expected_family: "GeneratedRuleFamily::AndBcode",
+            expected_mode: RuleMode::And,
+        },
+        Case {
+            module: "and_bcode_implicit_result_case",
+            spec: AND_BCODE_IMPLICIT_RESULT_SOURCE_EMITTER_SPEC,
             input: "a b",
             expected: json!([["A", "B"]]),
             expected_family: "GeneratedRuleFamily::AndBcode",

@@ -18,18 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3` — Julia closes exact marker-control values.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2` — Dart exact marker-control value matches Perl.
-- recent_context: Rust, Dart, and Julia now return exact `["elif","case-b"]`; Julia uses a nesting-aware marker
-  switch chain and passes 1,023 assertions, 61x2 CLI, and 99 corpus. All capture children remain before final 105
-  admission.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1` — Rust closes exact anonymous/named capture marks.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3` — Julia closed all marker-control children.
+- recent_context: Rust now preserves symbolic bare mark arguments, implements every helper required by the two
+  governed capture sources, and matches Perl's exact hashes. The real wrapper also closed implicit non-repeated
+  AND blind-call child-return collection in interpreted and generated execution. Full Rust proof is 137 library,
+  196 integration, 99 oracle, 3 emitter, 10 trace, and 61x2 CLI.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3 - align Julia marker control`; previous committed HEAD is
-  `77d670b8 FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2 - align Dart marker control`.
+  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1 - complete Rust capture marks`; previous committed HEAD is
+  `6a0fba16 FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3 - align Julia marker control`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2.4.1` Rust capture/mark semantics is active.
-- next_action: complete Rust anonymous/named capture-mark semantics under the exact governed fixtures while
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2.4.2` Dart capture/mark semantics is active.
+- next_action: complete Dart anonymous/named capture-mark semantics under the exact governed fixtures while
   preserving the unchanged 99-case corpus.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
