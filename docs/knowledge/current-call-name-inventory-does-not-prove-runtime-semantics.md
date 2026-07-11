@@ -11,7 +11,7 @@ status: confirmed-gap
 tags: [actionir, capability, corpus, rust, dart, julia, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.1.2.2.0 diagnostic run. The strict source checker reaches 237/237 after six governed fixtures are provisionally materialized, and Perl generates all 105 oracle values. Rust, Dart, and Julia each pass the original 99 fixtures plus cursor control but fail pure, position, marker-control, anonymous-capture, and named-capture families (100/105). Common pure mismatches include host booleans versus Perl numeric 1/0, non-splicing direct-literal flat, and non-mutating statement uppercase_each. Position, marker control, and missing capture/mark subsets differ by backend. Name recognition therefore proves only parser/contract-table breadth, not runtime semantics. The mandatory manifest remains at its green 99-case boundary until children of .1.6.1.2.2 repair all failures."
 evidence_update_2026_07_10: "FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1 through `.1.3` repair pure fixtures; position `.2.1` through `.3` align absent-local-match values; marker-control `.3.1` through `.3` aligns short aliases and nesting-aware first-match/default chains on Rust, Dart, and Julia. Rust passes 137 library tests, 194 integration tests, and unchanged 99-case oracle; Dart passes 155 package tests, 61 shared CLI cases in both environments, and unchanged 99-case corpus; Julia passes 1,023 assertions, 61 shared CLI cases in both environments, and unchanged 99-case corpus. Rust capture/mark `.4.1` is next; the overall card remains a confirmed gap until every mechanism/backend and final 105-case admission close."
-evidence_update_2026_07_10_capture: "Rust `.4.1` and Dart `.4.2` now pass both exact capture/mark fixtures; Julia `.4.3` is active. Dart passes 160 tests, 61x2 CLI, and 99 corpus. The capture audit also proves that matching Dart/Julia inventories are insufficient: current Perl contracts start_capture_slice_from and mark_capture_slice are used by governed sources but omitted by both provisional 237-name sets, so final `.5` must reconcile the reference registry before strict admission."
+evidence_update_2026_07_10_capture: "Rust `.4.1`, Dart `.4.2`, and Julia `.4.3` now pass both exact capture/mark fixtures. Julia passes 1,028 assertions, primary CLI conformance, and 99 corpus. The capture audit also proves that matching Dart/Julia inventories are insufficient: current Perl contracts start_capture_slice_from and mark_capture_slice are used by governed sources but omitted by both provisional 237-name sets, so active final `.5` must reconcile the reference registry before strict admission."
 reverify: "perl tools/check_language_capability_coverage.pl --report && perl -c tools/gen_oracle_corpus.pl"
 ---
 
@@ -24,7 +24,7 @@ different empty match, or fail to implement the runtime operation.
 
 The final proof must therefore compose two gates:
 
-1. strict 237-name documentation/source coverage; and
+1. strict reconciled-name documentation/source coverage (the earlier 237 count is provisional); and
 2. unchanged execution of every admitted exact-value fixture on every backend.
 
 The diagnostic 105-case manifest was deliberately not retained as the mandatory boundary because that would make

@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (Rust/Dart capture marks closed; Julia `.1.6.1.2.2.4.3` active).
+- Last updated: `2026-07-10` (all capture-mark repairs closed; final admission `.1.6.1.2.2.5` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -685,7 +685,8 @@ before implementation.
   Children: `.1.6.1.2.2.0`, `.1.6.1.2.2.1`, `.1.6.1.2.2.2`, `.1.6.1.2.2.3`,
     `.1.6.1.2.2.4`, `.1.6.1.2.2.5`
   Acceptance: Apply the proven three-slot capture/mark timing, use newline-only control source, register all six
-    source fixtures in oracle generation, regenerate exact Perl values, make strict 237-name coverage pass, run the
+    source fixtures in oracle generation, regenerate exact Perl values, reconcile the provisional 237-name inventory
+    against the current Perl registry and make strict corrected-name coverage pass, run the
     expanded corpus unchanged on Perl/Rust/Dart/Julia, update `language.current_mdbook_surface`, and close `.1.6.1`.
   Verification: `pending`
   Commit: `pending`
@@ -857,13 +858,17 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3 - align Julia marker control`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4`
-  Status: `active`
+  Status: `done`
   Goal: Complete anonymous/named capture-mark executable semantics.
   Children: `.1.6.1.2.2.4.1`, `.1.6.1.2.2.4.2`, `.1.6.1.2.2.4.3`
   Acceptance: Exact anonymous and named hashes pass, including stable/advancing reads, bridge/reset, mark metadata,
     input boundary marks, copied marks, and two-mark advancing reads; close one backend per committed child.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Rust, Dart, and Julia now return both exact governed capture hashes. Each preserves symbolic bare
+    mark names, rule-local named anchors, character-based public positions/lengths over host-safe internal
+    offsets, stable and advancing anonymous/named reads, bridge/reset helpers, input-boundary/copy marks, and
+    two-mark reads. Non-repeated `AND` blind-call wrappers retain ordered child values unless explicitly
+    overridden. Each backend's recurring package, CLI, and unchanged 99-case corpus gate passes.
+  Commit: completed by children `.4.1` through `.4.3`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1`
   Status: `done`
@@ -893,14 +898,20 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2 - complete Dart capture marks`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3`
-  Status: `active`
+  Status: `done`
   Goal: Complete Julia capture/mark fixture semantics and close `.4`.
   Acceptance: Both exact fixture hashes pass with no unsupported-helper failure and existing corpus remains green.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Julia now stores named marks as rule-local input code-unit offsets and exposes character-based
+    positions and captured lengths. It executes the full governed stable/advancing anonymous and named families,
+    anonymous/named bridge operations, current/input-boundary/copied marks, and two-mark reads while preserving
+    bare symbolic mark names. Non-repeated `AND` blind-call parents surface ordered child returns unless an
+    explicit return overrides them. Both exact governed hashes plus independent implicit-result, rule-local-mark,
+    and multibyte locks pass. `tools/run_julia_local.sh` passes 1,028 package assertions, primary CLI conformance,
+    and the unchanged 99/99 corpus. The disposable 70 MB depot was removed after verification; `.4` closes.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3 - complete Julia capture marks`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5`
-  Status: `pending`
+  Status: `active`
   Goal: Admit all six fixtures and close strict current-call proof.
   Acceptance: Register governed `source_file` cases, regenerate 105 exact values, pass strict reconciled-name
     coverage (the earlier 237-name count is provisional),
@@ -1183,8 +1194,8 @@ before implementation.
 | 40 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3` | `done` | Julia marker switch grouping returns exact `["elif","case-b"]`; 1,023 assertions, 61x2 CLI, and 99 corpus pass; control parent closes. |
 | 41 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1` | `done` | Exact Rust anonymous/named capture values, symbolic marks, implicit AND blind-call result, 196 integration, and full recurring gate pass. |
 | 42 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2` | `done` | Exact Dart anonymous/named capture values, rule-local code-unit marks with character projections, implicit AND result, 160 tests, 61x2 CLI, and 99 corpus pass. |
-| 43 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3` | `active` | Complete Julia capture/mark semantics. |
-| 44 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5` | `pending` | Admit six fixtures and close strict 105-case proof. |
+| 43 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3` | `done` | Exact Julia anonymous/named capture values, rule-local code-unit marks with character projections, implicit AND result, 1,028 assertions, primary CLI, and 99 corpus pass; capture parent closes. |
+| 44 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5` | `active` | Reconcile the provisional call inventory, admit six fixtures, and close strict 105-case proof. |
 | 45 | `FUTURE-PARITY-BACKLOG.1.6.2` | `pending` | Add Rust's missing outward compiled-descriptor projection. |
 | 46 | `FUTURE-PARITY-BACKLOG.1.6.3` | `pending` | Add structured Rust native runtime diagnostics. |
 | 47 | `FUTURE-PARITY-BACKLOG.1.6.4` | `pending` | Add native named/file resolution to Rust, Dart, and Julia. |

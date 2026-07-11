@@ -125,8 +125,11 @@ four-command integration and now closes the exact CLI lane with one 4x2x61 drive
 
 ### Call-name coverage versus executable parity
 
-The capability audit derives the same 237 current ActionIR call names from Dart and Julia and requires every name
-in this book and in neutral fixture source. That is a vocabulary gate, not a semantic completion claim. A
+The capability audit provisionally derived the same 237 current ActionIR call names from Dart and Julia and
+required every name in this book and in neutral fixture source. The governed capture sources have since exposed
+two current Perl contracts omitted by both backend-derived lists, so final admission reconciles the inventory
+against the reference registry before claiming a corrected strict count. Even a complete vocabulary gate is not
+a semantic completion claim. A
 diagnostic expansion from 99 to 105 corpus cases proved the distinction: Perl generated all six new exact values,
 while Rust, Dart, and Julia each passed 100/105. Cursor control passed everywhere; exhaustive pure values,
 empty-local-match positions, marker control, and anonymous/named capture marks exposed backend residuals.
@@ -137,9 +140,12 @@ sources stay governed under `capability_conformance/fixtures/`, and final `.5` a
 reconciled-name coverage and unchanged 105/105 execution pass on Perl, Rust, Dart, and Julia. Recognition alone never
 counts as user-visible feature parity. Rust, Dart, and Julia now pass the exhaustive pure-value source directly.
 Rust, Dart, and Julia also pass the empty-local-match position and marker-control sources, including short
-`i`/`elif` aliases and matched-case/default exclusion. Rust and Dart additionally pass both exact anonymous and named
+`i`/`elif` aliases and matched-case/default exclusion. All three additionally pass both exact anonymous and named
 capture/mark sources, including stable/advancing reads, anonymous-to-named bridging, input-boundary/copy marks,
-and two-mark advancing reads. Julia capture/mark parity is the active next repair. Final admission also reconciles
+and two-mark advancing reads. Their named marks are rule-local; internal offsets remain safe for each host's string
+slicing model while public positions and captured lengths count Unicode characters. A non-repeated `AND`
+blind-call wrapper also preserves ordered child-return values when no explicit parent return overrides them.
+Final admission is now active and also reconciles
 the two governed bridge helper names omitted by the provisional shared 237-name inventory before strict coverage
 is claimed.
 All three runtimes preserve the crucial distinction between no local match and a present zero-width match at

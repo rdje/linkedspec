@@ -276,8 +276,11 @@ The global pure-helper parity leaf now locks the governed exhaustive source dire
 return `1`/`0`, direct literals splice explicit `flat(...)`, and standalone explicit working-array string
 transforms mutate while value/receiver forms remain pure. Exact empty-local-match projection also preserves null
 capture/position values, empty containers, numeric presence, 1-based diagnostic defaults, and real zero-width
-matches. Marker-form switch siblings also execute as one nesting-aware first-match/default chain. The current
-package suite passes 1,023 assertions;
+matches. Marker-form switch siblings also execute as one nesting-aware first-match/default chain. The governed
+anonymous/named capture family now uses rule-local code-unit marks with character-based public positions and
+lengths. It covers stable/advancing slice, cursor, rest, from, and between reads; current/input-boundary, copied,
+and anonymous-bridge marks; and symbolic bare mark arguments. Non-repeated `AND` blind-call rules surface ordered
+child returns when no explicit parent return overrides them. The current package suite passes 1,028 assertions;
 61/61 shared CLI cases in both environments and the 99/99 corpus remain green.
 
 Library example:

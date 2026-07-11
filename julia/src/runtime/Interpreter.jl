@@ -107,6 +107,7 @@ mutable struct _RuntimeExecutionContext
     variables::Dict{String,Any}
     arrays::Dict{String,Vector{Any}}
     hashes::Dict{String,Dict{String,Any}}
+    mark_buckets::Dict{String,Dict{String,Int}}
     cursor_stack::Vector{Int}
     active_rule_entries::Set{Tuple{String,Int,Int}}
     rule_local_binding_scopes::Vector{Dict{String,_RuntimeRuleLocalBinding}}
@@ -131,6 +132,7 @@ function _RuntimeExecutionContext(
         Dict{String,Any}(),
         Dict{String,Vector{Any}}(),
         Dict{String,Dict{String,Any}}(),
+        Dict{String,Dict{String,Int}}(),
         Int[],
         Set{Tuple{String,Int,Int}}(),
         Dict{String,_RuntimeRuleLocalBinding}[],
@@ -472,10 +474,16 @@ function _execute_runtime_blind_rule!(
 )
     minimum = rule.mode_metadata.rep_min
     if minimum === nothing
+        implicit_and_result = Any[]
         matched_any = false
         for _ in 1:engine.max_iterations
             before = context.cursor_codeunit
-            matched = _runtime_nextable_bool(() -> _execute_runtime_blind_once!(engine, rule, context))
+            matched = _runtime_nextable_bool(() -> _execute_runtime_blind_once!(
+                engine,
+                rule,
+                context;
+                implicit_and_result = implicit_and_result,
+            ))
             if matched.nexted
                 matched_any = true
                 if context.cursor_codeunit == before
@@ -493,7 +501,9 @@ function _execute_runtime_blind_rule!(
             if exit_return !== nothing
                 return _runtime_returned(exit_return.value)
             end
-            return _RuntimeRuleResult(matched.value || matched_any, nothing)
+            value = rule.mode_metadata.is_and && !isempty(implicit_and_result) ?
+                Any[implicit_and_result...] : nothing
+            return _RuntimeRuleResult(matched.value || matched_any, value)
         end
         loop_exit = _execute_runtime_lifecycle!(engine, rule, "LX", context)
         if loop_exit !== nothing
@@ -503,7 +513,9 @@ function _execute_runtime_blind_rule!(
         if exit_return !== nothing
             return _runtime_returned(exit_return.value)
         end
-        return _RuntimeRuleResult(matched_any, nothing)
+        value = rule.mode_metadata.is_and && !isempty(implicit_and_result) ?
+            Any[implicit_and_result...] : nothing
+        return _RuntimeRuleResult(matched_any, value)
     end
 
     matches = 0
@@ -576,7 +588,8 @@ end
 function _execute_runtime_blind_once!(
     engine::LinkedSpecRuntimeEngine,
     rule::CompiledRule,
-    context::_RuntimeExecutionContext,
+    context::_RuntimeExecutionContext;
+    implicit_and_result = nothing,
 )
     if rule.mode_metadata.is_and
         for (edge_index, edge) in enumerate(rule.blind_edges)
@@ -597,6 +610,9 @@ function _execute_runtime_blind_once!(
                 LinkedSpecTraceDebug,
             )
             context.retv = child.value
+            if child.matched && implicit_and_result !== nothing
+                push!(implicit_and_result, _runtime_copy(child.value))
+            end
             edge_return = _execute_runtime_optional_payload!(
                 engine,
                 edge.action_payload,
@@ -2182,6 +2198,15 @@ function _evaluate_runtime_call!(
         return line_column_at_codeunit_offset(context.input, ncodeunits(context.input)).column
     elseif helper_name in _RUNTIME_ANONYMOUS_CAPTURE_HELPER_NAMES
         return _call_runtime_anonymous_capture_helper!(helper_name, context)
+    elseif helper_name in _RUNTIME_NAMED_CAPTURE_HELPER_NAMES
+        return _call_runtime_named_capture_helper!(
+            engine,
+            helper_name,
+            args,
+            context,
+            rule_label,
+            current_edge,
+        )
     elseif helper_name == "capture_until_boundary"
         return _call_runtime_capture_until_boundary!(
             engine,
@@ -2992,6 +3017,32 @@ const _RUNTIME_ANONYMOUS_CAPTURE_HELPER_NAMES = Set{String}([
     "capture_take_until_cursor",
     "capture_take_until_cursor_len",
     "start_capture_slice",
+])
+
+const _RUNTIME_NAMED_CAPTURE_HELPER_NAMES = Set{String}([
+    "capture_between",
+    "capture_from",
+    "capture_len_between",
+    "capture_len_from",
+    "capture_rest_from",
+    "capture_rest_len_from",
+    "capture_take_between",
+    "capture_take_between_len",
+    "capture_take_len_from",
+    "capture_take_rest_from",
+    "capture_take_rest_len_from",
+    "capture_take_until_cursor_from",
+    "capture_take_until_cursor_len_from",
+    "capture_until_cursor_from",
+    "capture_until_cursor_len_from",
+    "mark_capture_slice",
+    "mark_copy",
+    "mark_exists",
+    "mark_here",
+    "mark_input_end",
+    "mark_input_start",
+    "mark_pos",
+    "start_capture_slice_from",
 ])
 
 const _RUNTIME_DIAGNOSTIC_OUTPUT_HELPER_NAMES = Set{String}([
@@ -4775,6 +4826,148 @@ function _call_runtime_anonymous_capture_helper!(
         _set_runtime_capture_start!(context, ncodeunits(context.input))
     end
     return result
+end
+
+function _call_runtime_named_capture_helper!(
+    engine::LinkedSpecRuntimeEngine,
+    helper_name::String,
+    args,
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    current_edge,
+)
+    mark_name(index) = index <= length(args) ?
+        _runtime_capture_name(engine, args[index], context, rule_label, current_edge) : nothing
+    span_text(start, endpoint) =
+        start < 0 || endpoint < start || endpoint > ncodeunits(context.input) ? nothing :
+        _runtime_codeunit_slice(context.input, start, endpoint)
+    span_length(start, endpoint) = begin
+        text = span_text(start, endpoint)
+        text === nothing ? nothing : length(text)
+    end
+
+    marks = get!(context.mark_buckets, rule_label, Dict{String,Int}())
+    capture_start = context.registers.capture_start_codeunit
+    match_start = context.registers.local_match === nothing ? nothing :
+        context.registers.local_match.codeunit_start
+    cursor = context.cursor_codeunit
+    input_end = ncodeunits(context.input)
+
+    if helper_name == "start_capture_slice_from"
+        name = mark_name(1)
+        offset = name === nothing ? nothing : get(marks, name, nothing)
+        if offset !== nothing
+            _set_runtime_capture_start!(context, offset)
+        end
+        return nothing
+    elseif helper_name == "mark_here"
+        name = mark_name(1)
+        if name !== nothing
+            marks[name] = cursor
+        end
+        return nothing
+    elseif helper_name == "mark_input_start"
+        name = mark_name(1)
+        if name !== nothing
+            marks[name] = 0
+        end
+        return nothing
+    elseif helper_name == "mark_input_end"
+        name = mark_name(1)
+        if name !== nothing
+            marks[name] = input_end
+        end
+        return nothing
+    elseif helper_name == "mark_copy"
+        target = mark_name(1)
+        source = mark_name(2)
+        if target !== nothing
+            offset = source === nothing ? nothing : get(marks, source, nothing)
+            if offset === nothing
+                delete!(marks, target)
+            else
+                marks[target] = offset
+            end
+        end
+        return nothing
+    elseif helper_name == "mark_capture_slice"
+        name = mark_name(1)
+        if name !== nothing && capture_start !== nothing
+            marks[name] = capture_start
+        end
+        return nothing
+    elseif helper_name == "mark_exists"
+        name = mark_name(1)
+        return name !== nothing && haskey(marks, name) ? 1 : 0
+    elseif helper_name == "mark_pos"
+        name = mark_name(1)
+        offset = name === nothing ? nothing : get(marks, name, nothing)
+        return offset === nothing ? nothing :
+            codeunit_offset_to_char_offset(context.input, offset)
+    elseif helper_name in (
+            "capture_from",
+            "capture_len_from",
+            "capture_until_cursor_from",
+            "capture_until_cursor_len_from",
+            "capture_rest_from",
+            "capture_rest_len_from",
+            "capture_take_len_from",
+            "capture_take_until_cursor_from",
+            "capture_take_until_cursor_len_from",
+            "capture_take_rest_from",
+            "capture_take_rest_len_from",
+        )
+        name = mark_name(1)
+        start = name === nothing ? nothing : get(marks, name, nothing)
+        if name === nothing || start === nothing
+            return nothing
+        end
+        endpoint = if helper_name in (
+                "capture_from",
+                "capture_len_from",
+                "capture_take_len_from",
+            )
+            match_start
+        elseif helper_name in (
+                "capture_until_cursor_from",
+                "capture_until_cursor_len_from",
+                "capture_take_until_cursor_from",
+                "capture_take_until_cursor_len_from",
+            )
+            cursor
+        else
+            input_end
+        end
+        if endpoint === nothing
+            return nothing
+        end
+        length_result = occursin("_len_", helper_name) || helper_name == "capture_len_from"
+        result = length_result ? span_length(start, endpoint) : span_text(start, endpoint)
+        if result !== nothing && startswith(helper_name, "capture_take_")
+            marks[name] = occursin("_rest_", helper_name) ? input_end : cursor
+        end
+        return result
+    elseif helper_name in (
+            "capture_between",
+            "capture_len_between",
+            "capture_take_between",
+            "capture_take_between_len",
+        )
+        start_name = mark_name(1)
+        end_name = mark_name(2)
+        start = start_name === nothing ? nothing : get(marks, start_name, nothing)
+        endpoint = end_name === nothing ? nothing : get(marks, end_name, nothing)
+        if start_name === nothing || start === nothing || endpoint === nothing
+            return nothing
+        end
+        result = occursin("len", helper_name) ?
+            span_length(start, endpoint) : span_text(start, endpoint)
+        if result !== nothing && startswith(helper_name, "capture_take_")
+            marks[start_name] = endpoint
+        end
+        return result
+    end
+    return nothing
 end
 
 function _runtime_diagnostic_string(value)

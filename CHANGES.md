@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3 — complete Julia capture marks
+
+**Exact capture families:** Julia now stores named marks as rule-local input code-unit offsets while projecting
+character-based positions and lengths. It executes stable and advancing anonymous/named capture reads,
+anonymous reset/bridge, current/input-boundary/copied marks, and two-mark reads. Bare mark arguments retain
+symbolic identity. Both governed capture sources return the exact Perl/Rust/Dart values.
+
+**Wrapper result parity:** Non-repeated `AND` blind-call rules now retain ordered successful child returns as their
+implicit value when no lifecycle/action return overrides it. Independent locks prove the wrapper result, same-name
+mark isolation between rules, and multibyte character projections.
+
+**Proof/frontier:** `tools/run_julia_local.sh` passes 1,028 package assertions, primary CLI conformance, and the
+unchanged 99/99 corpus. The reproducible 70 MB depot was removed. The capture parent closes and final admission
+`.1.6.1.2.2.5` becomes active with its already-recorded two-helper inventory reconciliation prerequisite.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2 — complete Dart capture marks
 
 **Exact capture families:** Dart now stores rule-local named marks as input code-unit offsets while projecting character-based

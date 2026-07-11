@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3 — complete Julia capture marks**
+  (DONE — all backend capture repairs closed; final admission `.2.2.5` active).
+
+  **Implementation:** Julia now executes the complete stable/advancing anonymous and named capture family over
+  rule-local code-unit marks with character-based public projections. Bare mark names remain symbolic; implicit
+  non-repeated `AND` blind-call results retain ordered child values.
+
+  **Proof:** Both governed hashes, implicit-result/rule-local/multibyte locks, 1,028 package assertions, primary
+  CLI conformance, and 99/99 corpus pass. The disposable 70 MB depot was removed. Final admission owns the
+  provisional two-helper inventory reconciliation and six-fixture promotion.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2 — complete Dart capture marks**
   (DONE — Dart exact anonymous/named capture values closed; Julia `.2.2.4.3` active).
 

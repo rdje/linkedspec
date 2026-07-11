@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3 — make semantic units explicit at API boundaries):
+  Julia, like Dart, cannot safely slice multibyte input using public character offsets as raw host indices. Store
+  marks in the host slicing unit, validate spans before extraction or advancement, and convert only public
+  positions/lengths to characters. Keep named marks under the rule label rather than in one global name table;
+  otherwise two independent rules using the same readable mark name silently share state. Finally, exercise the
+  real blind-call wrapper as well as leaf helpers, because exact child values can still disappear at parent result
+  composition.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2 — separate host offsets from public units):
   Dart strings require code-unit indices for safe `substring`, while LinkedSpec positions and lengths count
   characters. Store marks in the host's slicing unit, centralize span validation, and convert only at public

@@ -18,20 +18,21 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2` — Dart closes exact anonymous/named capture marks.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1` — Rust closed the same governed capture values.
-- recent_context: Dart now stores rule-local named marks as code-unit offsets with character projections, executes every
-  stable/advancing/bridge/boundary/copy/two-mark operation in the governed sources, and surfaces implicit ordered
-  non-repeated AND blind-call results. Full Dart proof is 160 package tests, 61x2 CLI, and 99 corpus. Final `.5`
-  must reconcile `start_capture_slice_from`/`mark_capture_slice`, omitted by the provisional shared 237 inventory.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3` — Julia closes exact anonymous/named capture marks.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2` — Dart closed the same governed capture values.
+- recent_context: Julia now stores rule-local named marks as code-unit offsets with character projections, executes
+  every stable/advancing/bridge/boundary/copy/two-mark operation in the governed sources, and surfaces implicit
+  ordered non-repeated AND blind-call results. Full Julia proof is 1,028 package assertions, primary CLI, and 99
+  corpus. Final `.5` must reconcile `start_capture_slice_from`/`mark_capture_slice`, omitted by the provisional
+  shared 237 inventory, before admitting all six fixtures.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2 - complete Dart capture marks`; previous committed HEAD is
-  `4006d9d8 FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1 - complete Rust capture marks`.
+  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3 - complete Julia capture marks`; previous committed HEAD is
+  `004ed0a5 FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2 - complete Dart capture marks`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2.4.3` Julia capture/mark semantics is active.
-- next_action: complete Julia anonymous/named capture-mark semantics under the exact governed fixtures while
-  preserving the unchanged 99-case corpus.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2.5` final capability admission is active.
+- next_action: reconcile the two missing governed capture helper names in the shared current-call inventories,
+  admit all six governed fixtures, and prove unchanged 105/105 execution on Perl, Rust, Dart, and Julia.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

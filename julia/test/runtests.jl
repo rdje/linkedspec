@@ -2720,6 +2720,117 @@ end
     @test runtime_parse(engine, "xx").value == Any["elif", "case-b"]
 end
 
+@testset "Governed anonymous and named capture fixtures" begin
+    anonymous_source = read(
+        joinpath(
+            REPO_ROOT,
+            "capability_conformance",
+            "fixtures",
+            "capability_capture_anonymous_surface.spec",
+        ),
+        String,
+    )
+    anonymous_engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(anonymous_source)))
+    @test runtime_parse(anonymous_engine, "AxxBC").value == Any[
+        Dict{String,Any}(
+            "rest" => "xxBC",
+            "rest_len" => 4,
+            "slice" => "xxB",
+            "slice_col" => 2,
+            "slice_len" => 3,
+            "slice_line" => 1,
+            "slice_pos" => 1,
+            "take" => "xxB",
+            "take_len" => 3,
+            "take_rest" => "xxBC",
+            "take_rest_len" => 4,
+            "take_until_cursor" => "xxBC",
+            "take_until_cursor_len" => 4,
+            "until_cursor" => "xxBC",
+            "until_cursor_len" => 4,
+        ),
+    ]
+
+    named_source = read(
+        joinpath(
+            REPO_ROOT,
+            "capability_conformance",
+            "fixtures",
+            "capability_capture_named_surface.spec",
+        ),
+        String,
+    )
+    named_engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(named_source)))
+    @test runtime_parse(named_engine, "AxxBC").value == Any[
+        Dict{String,Any}(
+            "between" => "xxBC",
+            "between_len" => 4,
+            "copied_pos" => 1,
+            "from" => "xxB",
+            "from_len" => 3,
+            "origin_exists" => 1,
+            "origin_pos" => 1,
+            "rest" => "xxBC",
+            "rest_len" => 4,
+            "take_between" => "xxBC",
+            "take_between_len" => 4,
+            "take_len" => 3,
+            "take_rest" => "xxBC",
+            "take_rest_len" => 4,
+            "take_until_cursor" => "xxBC",
+            "take_until_cursor_len" => 4,
+            "until_cursor" => "xxBC",
+            "until_cursor_len" => 4,
+            "whole_input" => "AxxBC",
+        ),
+    ]
+end
+
+@testset "Named capture mark scope and character projection" begin
+    implicit_and = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+Top::AND
+ => ChildA
+ => ChildB
+
+ChildA: /a/ E { return("A") }
+ChildB: /[ \t]+b/ E { return("B") }
+""")))
+    @test runtime_parse(implicit_and, "a b").value == Any["A", "B"]
+
+    rule_local = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+Top::AND
+ => First
+ => Second
+
+First:AND
+ /A/
+ /x/
+ -> First[0] { mark_here(shared) }
+ -> First[1] { return(mark_pos(shared)) }
+
+Second:AND
+ /B/
+ /C/
+ -> Second[1] { return(mark_exists(shared)) }
+""")))
+    @test runtime_parse(rule_local, "AxBC").value == Any[1, 0]
+
+    multibyte = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
+Top::AND
+ => Value
+
+Value:AND
+ /A/
+ /éB/
+ /C/
+ -> Value[0] { mark_here(origin) }
+ -> Value[2] { return(hash("len", capture_len_from(origin), "pos", mark_pos(origin), "text", capture_from(origin))) }
+""")))
+    @test runtime_parse(multibyte, "AéBC").value == Any[
+        Dict{String,Any}("len" => 2, "pos" => 1, "text" => "éB"),
+    ]
+end
+
 @testset "Runtime value blocks controls and trailing blocks" begin
     engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
 Top::

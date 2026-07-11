@@ -184,7 +184,7 @@ and untraced action, blind, and recursion paths preserve identical results.
 Package status was `runtime-trace-events` at the `.4.5.4` runtime-trace boundary; that
 mechanism label is historical, not the current overall backend status. The
 current Julia package/CLI status is `runtime-corpus-primary-cli` after the
-99/99 interpreter, 1,023 package assertions, and nine-family direct-process gates.
+99/99 interpreter, 1,028 package assertions, and nine-family direct-process gates.
 
 `.7.3.2.1` propagates one caller-owned emitter through the native pipeline. At
 low level, `julia_frontend:parse_spec`, `julia_frontend:validate_spec`,
@@ -224,7 +224,8 @@ The focused proof adds 28 assertions for success/failure events, routed output,
 disabled quietness, and traced/untraced identity. At that leaf the complete Julia
 package suite passed with 868 assertions and the focused corpus gate remained 99/99;
 later CLI preparation/execution/failure-routing, strict-boundary tests, exhaustive pure-helper lock, and exact
-empty-local-match position and marker-control locks bring the current total to 1,023 without trace or corpus drift.
+empty-local-match position, marker-control, and anonymous/named capture locks bring the current total to 1,028
+without trace or corpus drift.
 
 ## Future variant trace parity checklist
 
