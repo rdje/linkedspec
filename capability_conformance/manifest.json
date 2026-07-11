@@ -34,13 +34,12 @@
       "id": "embedding.compiled_descriptor_projection",
       "category": "native-api",
       "contract": "Tooling can inspect the backend-neutral spec/functions/dependency_regex_map/meta compiled descriptor shape.",
-      "sources": ["docs/linkedspec-book/src/public-api/descriptor-introspection.md"],
-      "gap_owner": "FUTURE-PARITY-BACKLOG.1.6.2",
+      "sources": ["docs/linkedspec-book/src/public-api/descriptor-introspection.md", "capability_conformance/outward_descriptor_contract.json"],
       "backends": {
         "perl": {"status": "pass", "references": ["perl/LinkedSpec.pm", "perl/LinkedSpec/CompilerState.pm", "t/phase0_regression.t"]},
-        "rust": {"status": "partial", "references": ["rust/linkedspec-core/src/descriptor.rs", "rust/linkedspec-core/tests/descriptor_test.rs"], "note": "Typed descriptor_state/to_descriptor_json projection and focused/full Rust gates pass; .1.6.2.3 owns exact four-backend outer function-record normalization and final admission."},
-        "dart": {"status": "pass", "references": ["dart/lib/src/compiler/compiled_spec.dart"]},
-        "julia": {"status": "pass", "references": ["julia/src/compiler/CompiledSpec.jl"]}
+        "rust": {"status": "pass", "references": ["rust/linkedspec-core/src/descriptor.rs", "rust/linkedspec-core/tests/descriptor_test.rs", "capability_conformance/outward_descriptor_contract.json"]},
+        "dart": {"status": "pass", "references": ["dart/lib/src/compiler/compiled_spec.dart", "dart/test/compiled_spec_test.dart"]},
+        "julia": {"status": "pass", "references": ["julia/src/compiler/CompiledSpec.jl", "julia/test/runtests.jl"]}
       }
     },
     {

@@ -433,7 +433,7 @@ final class CompiledDescriptorState {
       },
       'functions': {
         for (final function in compiledSpecState.functions)
-          function.name: function.toJson(),
+          function.name: function.toDescriptorJson(),
       },
       'dependency_regex_map': dependencyRegexState.toDescriptorJson(),
       'meta': {

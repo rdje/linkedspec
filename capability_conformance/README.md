@@ -21,6 +21,10 @@ fields/statuses/backends, duplicate ids, missing evidence paths, unowned partial
 ids, absolute paths, and future/excluded surfaces without an owner. Current language behavior belongs in
 `capabilities`; deprecated or genuinely not-yet-adopted directions belong in `excluded_or_future`.
 
+`outward_descriptor_contract.json` is the executable shared schema for the public compiled-descriptor projection.
+Perl, Rust, Dart, and Julia descriptor tests consume the same exact top-level, metadata, and function-record field
+sets so a backend-specific serialization convention cannot silently become public API.
+
 The census intentionally records proof quality separately from implementation belief. Passing the 105-case corpus
 does not by itself prove every helper and API described by the mdBook; `FUTURE-PARITY-BACKLOG.1.6.1` owns that
 coverage mapping. Generated source remains separately owned by `FUTURE-PARITY-BACKLOG.3`.

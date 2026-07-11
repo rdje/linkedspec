@@ -44329,7 +44329,7 @@ SPEC
 };
 
 subtest 'user_function_registry_descriptor_seam' => sub {
-    plan tests => 57;
+    plan tests => 62;
 
     my $spec = <<'SPEC';
 fn normalize(value) {
@@ -44359,6 +44359,23 @@ SPEC
     is_deeply([sort keys %$functions], ['join_pair', 'normalize'], 'descriptor exposes functions by name');
     is_deeply($descriptor->{meta}{function_order}, ['normalize', 'join_pair'], 'descriptor meta preserves function order');
     is($descriptor->{meta}{function_count}, 2, 'descriptor meta records function count');
+
+    require JSON::PP;
+    my $contract_path = File::Spec->catfile($Bin, '..', 'capability_conformance', 'outward_descriptor_contract.json');
+    my $contract = JSON::PP->new->decode(slurp($contract_path));
+    is_deeply([sort keys %$descriptor], [sort @{$contract->{top_level_keys}}],
+        'descriptor top-level keys match the neutral contract exactly');
+    ok(!(grep { !exists $descriptor->{meta}{$_} } @{$contract->{required_meta_keys}}),
+        'descriptor metadata contains every neutral required key');
+    is_deeply(
+        [map { $descriptor->{meta}{$_} } sort keys %{$contract->{model_values}}],
+        [map { $contract->{model_values}{$_} } sort keys %{$contract->{model_values}}],
+        'descriptor model identities match the neutral contract',
+    );
+    is_deeply([sort keys %{$functions->{normalize}}], [sort @{$contract->{function_record_keys}}],
+        'function record keys match the neutral contract exactly');
+    is_deeply([$functions->{normalize}{index}, $functions->{join_pair}{index}], [0, 1],
+        'function record indices preserve source order');
 
     is_deeply($functions->{normalize}{params}, ['value'], 'normalize params are recorded');
     is($functions->{normalize}{arity}, 1, 'normalize arity is recorded');

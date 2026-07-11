@@ -4,6 +4,10 @@ using Test
 
 const REPO_ROOT = normpath(joinpath(@__DIR__, "..", ".."))
 const CORPUS_ROOT = joinpath(REPO_ROOT, "rust", "linkedspec-runtime", "tests", "corpus")
+const DESCRIPTOR_CONTRACT = JSON3.read(
+    read(joinpath(REPO_ROOT, "capability_conformance", "outward_descriptor_contract.json"), String),
+    Dict{String,Any},
+)
 
 function _throws_corpus_message(call, needle)
     try
@@ -1429,7 +1433,7 @@ Child:
     @test haskey(encoded["rules_by_label"], "Top")
 
     descriptor = to_descriptor_json(compiled)
-    @test sort(collect(keys(descriptor))) == ["dependency_regex_map", "functions", "meta", "spec"]
+    @test Set(keys(descriptor)) == Set(DESCRIPTOR_CONTRACT["top_level_keys"])
     descriptor_top = descriptor["spec"]["Top"]
     @test descriptor_top["handler"]["kind"] == "julia_interpreter_rule"
     @test descriptor_top["handler"]["status"] == "compiled_state_only"
@@ -1531,6 +1535,11 @@ end
         job = definition.body_parse_job
         job_json = function_json["body_parse_job"]
         body_ast = function_json["body_ast"]
+
+        @test Set(keys(function_json)) == Set(DESCRIPTOR_CONTRACT["function_record_keys"])
+        @test function_json["kind"] == DESCRIPTOR_CONTRACT["function_kind"]
+        @test function_json["version"] == DESCRIPTOR_CONTRACT["function_version"]
+        @test function_json["source_text"] == definition.source
 
         @test (
             function_json["index"],

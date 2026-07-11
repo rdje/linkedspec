@@ -145,10 +145,11 @@ sub compiled_spec_state_to_legacy_functions {
  return {} unless is_compiled_spec_state($state);
  my %functions;
  my $functions_by_name = compiled_spec_state_functions_by_name($state);
+ my $index = 0;
  foreach my $name (@{compiled_spec_state_function_order($state)}) {
   my $definition = $functions_by_name->{$name};
   next unless ref($definition) eq 'HASH';
-  $functions{$name} = { %$definition };
+  $functions{$name} = { %$definition, index => $index++ };
  }
  return \%functions
 }

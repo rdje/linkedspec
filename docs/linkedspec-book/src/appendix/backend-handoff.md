@@ -532,7 +532,7 @@ implementing the same cross-variant command interface.
 ### Julia Backend Commands, Embedding, and Status
 
 Julia is green at the accepted interpreter-first boundary: the complete validated corpus executes 105/105 with
-exact checked-in output, full package tests pass with 1,036 assertions, and package/CLI status is
+exact checked-in output, full package tests pass with 1,040 assertions, and package/CLI status is
 `runtime-corpus-primary-cli`. The primary product surface is the native `LinkedSpecJulia` module; the Julia CLI and corpus
 runner are thin adapters over the same in-process parser/compiler/runtime path.
 
@@ -574,12 +574,11 @@ broader current census lives in `capability_conformance/manifest.json` and is ch
 perl tools/check_capability_conformance.pl
 ```
 
-The current audit contains 15 capabilities x four implemented backends. After Rust descriptor projection,
-its 60 states are 51 pass, two partial states, and seven gaps. Each non-pass state has one durable owner:
+The current audit contains 15 capabilities x four implemented backends. After exact descriptor admission,
+its 60 states are 52 pass, one partial state, and seven gaps. Each non-pass state has one durable owner:
 
 | Residual mechanism | Current classification | Owner |
 | --- | --- | --- |
-| Outward compiled descriptor | All four expose the projection and aligned model identities; final outer function-record normalization/admission remains. | `.1.6.2.3` |
 | Structured native runtime diagnostics | Perl, Dart, and Julia expose structured attribution; Rust runtime errors remain string payloads. | `.1.6.3` |
 | Native named/file resolution | Perl `get_parser(...)` owns the book's file-oriented role; Rust, Dart, and Julia currently keep named resolution in process adapters. | `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, and Julia propagate a caller-owned emitter through frontend/compiler/staged/runtime phases; Dart begins at the interpreter. | `.1.6.5` |
@@ -588,6 +587,10 @@ its 60 states are 51 pass, two partial states, and seven gaps. Each non-pass sta
 Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, generic final-
 codeblock equivalence, and the not-yet-implemented Lua backend are explicit exclusions/future owners rather than
 silent gaps. No backend is called complete while a current matrix state remains partial or gap.
+
+Outward compiled descriptors are closed: all four variants expose the exact `spec` / `functions` /
+`dependency_regex_map` / `meta` projection, aligned model identities, and the canonical outer function record
+defined by `capability_conformance/outward_descriptor_contract.json`.
 
 ADR `0023` sharpens that limitation: Rust exports `source_emitter` publicly, so equivalent source-emission
 capability is required before Julia can claim complete user-visible feature parity. Deferral remains valid
@@ -1072,7 +1075,7 @@ ordinary scalar-held `payload[1]` still returns its indexed item. `ds_vhistory_v
 no-drift leaf adds one permanent complete-window test; the complete shipped-spec window is 31/31. Spec-driven
 function-definition parsing then closes the three routed top-level function fixtures without a raw Julia scanner.
 The full-manifest gate now executes all 105 fixtures in order with exact output and zero failures. Full tests pass
-with 1,036 assertions and status is `runtime-corpus-primary-cli`.
+with 1,040 assertions and status is `runtime-corpus-primary-cli`.
 
 ### Dart Backend Commands
 

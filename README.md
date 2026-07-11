@@ -169,9 +169,9 @@ Top-level directories and files:
     `.1.5.1.5` now closes canonical trace at 53/53 exact cases with local-gate integration. Its signoff exposed a
     pre-existing UTF-8 argv/JSON mojibake boundary; `.1.5.1.6` closes that repair. Perl/Rust/Dart now pass 61/61.
     Julia `.1.5.4.1` renders exact help, validates strict UTF-8 file bytes, and emits phase-only primary errors.
-    `.1.5.4.2` adds the independent canonical trace while preserving native rich trace. Current proof is 1,036
+    `.1.5.4.2` adds the independent canonical trace while preserving native rich trace. Current proof is 1,040
     assertions plus 105/105 and 61/61 default/POSIX. `.1.5.4.3` closes exact four-backend CLI identity with one
-    recurring warmed 4x2x61 driver; exhaustive current-surface `.1.6.1` is closed, `.1.6.2` is active, and
+    recurring warmed 4x2x61 driver; exhaustive current-surface `.1.6.1` and exact descriptors `.1.6.2` are closed, and
     generated-source parity remains `.3`.
 - `.github/workflows/`
   - GitHub Actions automation.
@@ -210,8 +210,8 @@ Top-level project docs:
   split pure, position, marker-control, and capture/mark repairs under `.1.6.1.2.2`. Those repairs and final
   admission are closed: the corrected shared inventory contains 239 current names, every name is present in the
   mdBook and neutral source, current Perl contract calls are reverse-checked, and all four backends pass the
-  expanded 105-case corpus exactly. Descriptor identity `.1.6.2.1` and typed Rust projection `.1.6.2.2` are
-  closed; active `.1.6.2.3` normalizes outer function records and admits exact four-backend parity.
+  expanded 105-case corpus exactly. Exact descriptor identity, typed Rust projection, and one shared canonical
+  outer function-record contract are closed under `.1.6.2`; active `.1.6.3` adds structured Rust diagnostics.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
   {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven baseline success, four baseline
@@ -224,7 +224,7 @@ Top-level project docs:
   `tools/run_rust_local.sh`; Dart and Julia are also 61/61 default/POSIX. Run
   `bash tools/run_primary_cli_matrix.sh` for one command that builds/prepares/warms all four backends and proves
   the unchanged 61-case suite under both environments. Exact CLI lane `.1.5` and exhaustive current-surface
-  `.1.6.1` are closed; `.1.6.2` is active.
+  `.1.6.1` and exact outward descriptors `.1.6.2` are closed; `.1.6.3` is active.
 - Deep semantic introspection plus MCP is parked under `FUTURE-PARITY-BACKLOG.10.1`: native backend APIs own one
   versioned semantic model, while MCP remains a thin transport rather than a backend-specific source of truth.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full

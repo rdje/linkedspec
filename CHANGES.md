@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.2.3 — admit exact descriptor parity
+
+Added `capability_conformance/outward_descriptor_contract.json` as the singular executable schema for outward
+compiled descriptors. Perl, Rust, Dart, and Julia focused tests now consume its exact top-level, metadata, and
+function-record field sets. Perl adds zero-based source-order `index`; Dart and Julia use descriptor-only
+projections with neutral `kind` / `version` / `source_text`, leaving their internal AST JSON unchanged; Rust's
+typed projection already matches. The exact function record is `index`, `kind`, `version`, `name`, `params`,
+`arity`, `source_text`, `source_span`, `body_span`, `body_source`, `body_payload`, `body_parse_job`, and `body_ast`.
+
+Focused tests pass on all variants. Complete Dart passes formatting, analysis, 160 tests, 61x2 CLI, and 105 corpus
+cases; Julia passes 1,040 assertions, primary CLI process conformance, and 105 corpus cases; the prior full Rust
+gate plus the updated three focused descriptor tests pass; complete Perl Phase 0 passes `1..1030` in 775 seconds.
+The capability census advances to 52 pass / one partial / seven gap, `.1.6.2` closes, and structured Rust diagnostics `.1.6.3`
+becomes active. After consuming verification, generated Rust, Dart, Julia, and mdBook artifacts totaling about
+1.16 GB are removed; tracked `rgx` fixtures are retained.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.2.2 — expose Rust compiled descriptors
 
 **Typed public API:** `linkedspec_core::descriptor` now exports serializable descriptor, rule, handler, mode,

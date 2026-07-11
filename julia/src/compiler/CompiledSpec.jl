@@ -546,7 +546,7 @@ function to_json(state::CompiledDescriptorState)
             label => to_descriptor_json(compiled.rules_by_label[label]) for label in compiled.compiled_rule_order
         ),
         "functions" => Dict{String,Any}(
-            entry.definition.name => to_json(entry) for entry in compiled.function_registry.entries
+            entry.definition.name => to_descriptor_json(entry) for entry in compiled.function_registry.entries
         ),
         "dependency_regex_map" => to_descriptor_json(state.dependency_regex_state),
         "meta" => Dict{String,Any}(

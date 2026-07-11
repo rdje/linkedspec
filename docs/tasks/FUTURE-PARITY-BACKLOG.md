@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-11` (Rust outward descriptor projection `.1.6.2.2` closed; four-backend admission `.1.6.2.3` active).
+- Last updated: `2026-07-11` (exact four-backend descriptor parity `.1.6.2` closed; Rust diagnostics `.1.6.3` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -941,14 +941,16 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 - admit exhaustive capability corpus`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.2`
-  Status: `active`
+  Status: `done`
   Goal: Add Rust's backend-neutral outward compiled-descriptor projection.
   Children: `.1.6.2.0`, `.1.6.2.1`, `.1.6.2.2`, `.1.6.2.3`
   Acceptance: Rust exposes the documented `spec`, `functions`, `dependency_regex_map`, and `meta` projection with
     stable field meanings/order and staged function metadata equivalent to Perl/Dart/Julia; focused neutral shape
     fixtures prove idiomatic Rust types/JSON without coupling callers to engine internals.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: The canonical descriptor contract is consumed by focused tests in all four variants. Exact outer
+    function fields, metadata identities/order, rule/dependency semantics, and staged function values pass; the
+    complete relevant backend gates pass and the capability state is promoted to pass.
+  Commit: closed by `FUTURE-PARITY-BACKLOG.1.6.2.3 - admit exact descriptor parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.2.0`
   Status: `done`
@@ -995,7 +997,7 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.2.2 - expose Rust compiled descriptors`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.2.3`
-  Status: `active`
+  Status: `done`
   Goal: Admit and close four-backend outward descriptor parity.
   Acceptance: Focused neutral shape evidence proves the documented top-level keys, metadata identities/order,
     rule/dependency semantics, and staged function fields across Perl/Rust/Dart/Julia; update the census from
@@ -1004,11 +1006,19 @@ before implementation.
     `kind`/`version`/`source_text` without `index`, Dart/Julia use `index`/`source` without `kind`/`version`, and
     Rust currently publishes the neutral-definition identity plus `index`. Nested `body_payload`,
     `body_parse_job`, and `body_ast` semantics are already aligned.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `capability_conformance/outward_descriptor_contract.json` defines the exact four top-level keys,
+    required model/order metadata, and canonical outer function record: `index`, `kind`, `version`, `name`,
+    `params`, `arity`, `source_text`, source/body spans and source, plus `body_payload`, `body_parse_job`, and
+    `body_ast`. Perl adds the source-order index; Dart and Julia use descriptor-specific projections that add the
+    neutral identity/source fields without changing their internal AST serialization; Rust already matches the
+    convention. Focused contract tests pass on all four variants. Complete Dart passes formatting, analysis, 160
+    tests, 61x2 CLI, and 105 corpus cases; Julia passes 1,040 assertions, its primary CLI process suite, and 105
+    corpus cases; Rust's focused three tests pass after the prior full Rust gate; complete Perl Phase 0 passes
+    `1..1030` in 775 wallclock seconds. The capability census is 52 pass / one partial / seven gap.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.2.3 - admit exact descriptor parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.3`
-  Status: `pending`
+  Status: `active`
   Goal: Add structured Rust runtime diagnostic context equivalent to the other native backends.
   Acceptance: Native Rust runtime failures expose stable type/stage/summary/detail plus available spec/top/rule/
     handler attribution as structured data rather than requiring string scraping; ordinary `Result` ergonomics,
@@ -1274,8 +1284,8 @@ before implementation.
 | 45 | `FUTURE-PARITY-BACKLOG.1.6.2.0` | `done` | Toolbox/source audit found stale Perl descriptor-model identity and split reconciliation, Rust projection, and final admission. |
 | 46 | `FUTURE-PARITY-BACKLOG.1.6.2.1` | `done` | Perl now reports the composing descriptor state plus explicit nested model identities; Phase 0 `1..1030` passes. |
 | 47 | `FUTURE-PARITY-BACKLOG.1.6.2.2` | `done` | Typed Rust descriptor state/JSON, ordered dependency refs, staged metadata, round trips, and full Rust gate pass. |
-| 48 | `FUTURE-PARITY-BACKLOG.1.6.2.3` | `active` | Normalize outer function records, prove/admit four-backend descriptor parity, and close `.1.6.2`. |
-| 49 | `FUTURE-PARITY-BACKLOG.1.6.3` | `pending` | Add structured Rust native runtime diagnostics. |
+| 48 | `FUTURE-PARITY-BACKLOG.1.6.2.3` | `done` | Exact shared descriptor/function-record contract passes all four variants; `.1.6.2` closes. |
+| 49 | `FUTURE-PARITY-BACKLOG.1.6.3` | `active` | Add structured Rust native runtime diagnostics. |
 | 50 | `FUTURE-PARITY-BACKLOG.1.6.4` | `pending` | Add native named/file resolution to Rust, Dart, and Julia. |
 | 51 | `FUTURE-PARITY-BACKLOG.1.6.5` | `pending` | Extend Dart native trace through frontend/compiler/function-shell/staged phases. |
 | 52 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
@@ -1922,6 +1932,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.4.2` | Canonical trace unit/process proof; complete Julia local gate: 1,019 assertions/nine process families/99 corpus; unchanged suite 61/61 default/POSIX; docs/KM/governance/mdBook/cleanup. | PASS. Julia exact CLI is implemented; recurring four-command gate `.1.5.4.3` active. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.4.3` | `tools/run_primary_cli_matrix.sh`: four backends x two environments x 61 cases; complete Rust/Dart/Julia focused gates; broader local gate through Phase 0 `1..1028`; docs/KM/governance/mdBook/cleanup. | PASS. Exact primary CLI parent `.1.5` closes; capability census `.1.6` is active. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.6.0` | Capability checker syntax/self-validation; 15x4 evidence/owner census; local gate through Phase 0 `1..1028` in 496s; docs/KM/governance/mdBook/cleanup. | PASS. Five exact residual mechanisms plus generated-source `.3` are owned; neutral language proof `.1.6.1` is active. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.2.3` | Shared schema; focused four-backend descriptor tests; complete Dart/Julia gates; complete Perl Phase 0; prior full Rust gate; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Exact outward descriptor parity closes at 52 pass / one partial / seven gap; Rust diagnostics `.1.6.3` is active. |
 
 ## Commit Log
 
@@ -1962,6 +1973,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.5.4.2` | `FUTURE-PARITY-BACKLOG.1.5.4.2 - add canonical Julia CLI trace` | Independent ADR 0024 levels/events/sinks/failures; 61/61 default/POSIX. |
 | `FUTURE-PARITY-BACKLOG.1.5.4.3` | `FUTURE-PARITY-BACKLOG.1.5.4.3 - close exact primary CLI parity` | Recurring warmed 4x2x61 matrix, focused backend gates, broader Phase 0 gate, and exact CLI parent closeout. |
 | `FUTURE-PARITY-BACKLOG.1.6.0` | `FUTURE-PARITY-BACKLOG.1.6.0 - audit backend capability parity` | Validated 15x4 census, strict evidence/owner gate, exact residual split, and no-behavior-change closeout. |
+| `FUTURE-PARITY-BACKLOG.1.6.2.3` | `FUTURE-PARITY-BACKLOG.1.6.2.3 - admit exact descriptor parity` | Shared schema, canonical outer function records, exact four-backend tests, capability pass, parent closeout. |
 
 ## Changelog
 

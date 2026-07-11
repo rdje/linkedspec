@@ -1,0 +1,42 @@
+{
+  "format": 1,
+  "top_level_keys": [
+    "spec",
+    "functions",
+    "dependency_regex_map",
+    "meta"
+  ],
+  "required_meta_keys": [
+    "descriptor_model",
+    "compiled_spec_model",
+    "compiled_dependency_regex_model",
+    "parse_mode",
+    "definition_order",
+    "compiled_rule_order",
+    "redefined_rule_labels",
+    "function_order",
+    "function_count"
+  ],
+  "function_record_keys": [
+    "index",
+    "kind",
+    "version",
+    "name",
+    "params",
+    "arity",
+    "source_text",
+    "source_span",
+    "body_span",
+    "body_source",
+    "body_payload",
+    "body_parse_job",
+    "body_ast"
+  ],
+  "model_values": {
+    "descriptor_model": "compiled_descriptor_state",
+    "compiled_spec_model": "compiled_spec_state",
+    "compiled_dependency_regex_model": "compiled_dependency_regex_state"
+  },
+  "function_kind": "user_function_definition",
+  "function_version": 1
+}

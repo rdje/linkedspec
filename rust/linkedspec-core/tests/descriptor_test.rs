@@ -3,6 +3,17 @@ use linkedspec_core::compiler::compile;
 use linkedspec_core::parser::parse_spec;
 use linkedspec_core::types::CompiledSpec;
 use serde_json::json;
+use std::collections::BTreeSet;
+use std::path::PathBuf;
+
+fn descriptor_contract() -> serde_json::Value {
+    let path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("..")
+        .join("..")
+        .join("capability_conformance")
+        .join("outward_descriptor_contract.json");
+    serde_json::from_str(&std::fs::read_to_string(path).unwrap()).unwrap()
+}
 
 #[test]
 fn projects_backend_neutral_descriptor_shape_and_staged_function_metadata() {
@@ -35,6 +46,7 @@ fn projects_backend_neutral_descriptor_shape_and_staged_function_metadata() {
 
     let compiled = compile(&parsed).unwrap();
     let descriptor = compiled.descriptor_state();
+    let contract = descriptor_contract();
     assert_eq!(
         descriptor.meta.descriptor_model,
         "compiled_descriptor_state"
@@ -76,9 +88,34 @@ fn projects_backend_neutral_descriptor_shape_and_staged_function_metadata() {
     assert_eq!(function.body_ast.as_ref().unwrap()["kind"], "action_block");
 
     let json = compiled.to_descriptor_json().unwrap();
+    let expected_top_keys = contract["top_level_keys"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|key| key.as_str().unwrap().to_string())
+        .collect::<BTreeSet<_>>();
     assert_eq!(
-        json.as_object().unwrap().keys().collect::<Vec<_>>(),
-        ["dependency_regex_map", "functions", "meta", "spec"]
+        json.as_object()
+            .unwrap()
+            .keys()
+            .cloned()
+            .collect::<BTreeSet<_>>(),
+        expected_top_keys
+    );
+    let expected_function_keys = contract["function_record_keys"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|key| key.as_str().unwrap().to_string())
+        .collect::<BTreeSet<_>>();
+    assert_eq!(
+        json["functions"]["normalize"]
+            .as_object()
+            .unwrap()
+            .keys()
+            .cloned()
+            .collect::<BTreeSet<_>>(),
+        expected_function_keys
     );
     assert_eq!(json["spec"]["Top"]["dependency_refs"][0]["idx"], 0);
 }

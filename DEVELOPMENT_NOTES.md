@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.2.3 — project public records separately from internal AST JSON):
+  Descriptor parity is an exact user-facing schema, not permission to force every backend's internal AST
+  serialization into one shape. `outward_descriptor_contract.json` is the singular neutral contract; Perl adds
+  source-order `index`, while Dart/Julia use descriptor-specific projections to add `kind`, `version`, and
+  `source_text` without changing their internal `toJson`/`to_json` consumers. All four focused tests read the same
+  schema, so extra as well as missing public fields fail. The census is 52 pass / one partial / seven gap and Rust
+  structured diagnostics `.1.6.3` is next.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.2.2 — project public state without making it runtime state):
   Keep the engine's `CompiledSpec` as execution truth and implement introspection as an owned typed projection.
   Preserve only information that cannot be reconstructed reliably—dependency refs in source order—on compiled

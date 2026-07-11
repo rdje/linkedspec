@@ -149,6 +149,24 @@ final class UserFunctionEntry {
   JsonObject toJson() {
     return {'index': index, ...definition.toJson()};
   }
+
+  JsonObject toDescriptorJson() {
+    return {
+      'index': index,
+      'kind': 'user_function_definition',
+      'version': 1,
+      'name': name,
+      'params': params,
+      'arity': arity,
+      'source_text': definition.source,
+      'source_span': sourceSpan.toJson(),
+      'body_span': bodySpan.toJson(),
+      'body_source': bodySource,
+      if (bodyPayload != null) 'body_payload': bodyPayload,
+      if (bodyParseJob != null) 'body_parse_job': bodyParseJob!.toJson(),
+      if (bodyAst != null) 'body_ast': bodyAst,
+    };
+  }
 }
 
 final class UserFunctionCallResolution {

@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.2.2` — typed Rust outward descriptor projection.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.2.1` — canonical descriptor identities.
-- recent_context: Rust `descriptor_state()` / `to_descriptor_json()` expose the four public keys with ordered refs,
-  deterministic metadata, dependency patterns, and staged functions. Full Rust gate passes. Outer function records
-  still differ across variants; census is 51 pass / two partial / seven gap pending `.1.6.2.3`.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.2.3` — exact four-backend descriptor admission.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.2.2` — typed Rust outward descriptor projection.
+- recent_context: One shared JSON contract fixes exact descriptor top-level/meta/function fields. Perl adds the
+  source index; Dart/Julia use descriptor-specific projections; Rust already matches. Focused four-backend and
+  complete relevant gates pass. Census is 52 pass / one partial / seven gap; `.1.6.2` is closed.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.2.2 - expose Rust compiled descriptors`; previous committed HEAD is
-  `f1d82ddc FUTURE-PARITY-BACKLOG.1.6.2.1 - reconcile descriptor model identity`.
+  `FUTURE-PARITY-BACKLOG.1.6.2.3 - admit exact descriptor parity`; previous committed HEAD is
+  `21d97a4b FUTURE-PARITY-BACKLOG.1.6.2.2 - expose Rust compiled descriptors`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.2.3` four-backend descriptor admission is active.
-- next_action: choose and enforce one outer function-record convention across Perl/Rust/Dart/Julia, add a neutral
-  four-backend descriptor shape gate, promote the capability row to pass, and advance to `.1.6.3`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.3` structured Rust runtime diagnostics is active.
+- next_action: audit the current Rust error/runtime/CLI seams with the Knowledge Map and toolbox, split a safe
+  implementation leaf if required, then add stable structured runtime context without changing successful output.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.2.3 — admit exact descriptor parity**
+  (DONE — compiled-descriptor parent `.1.6.2` closed; structured Rust diagnostics `.1.6.3` active).
+
+  **Implementation:** One shared JSON contract fixes exact top-level, metadata, and canonical function-record
+  fields. Perl adds the source-order index; Dart/Julia use descriptor-only projections; Rust's typed projection
+  already matches. Internal backend AST serialization remains private.
+
+  **Proof:** Focused shared-contract tests pass on all four variants. Dart passes 160 tests, 61x2 CLI, and 105
+  corpus cases; Julia passes 1,040 assertions, primary CLI processes, and 105 corpus cases; Rust's three focused
+  tests plus its prior full gate pass; Perl Phase 0 passes `1..1030` in 775 seconds. Census: 52 pass / one partial /
+  seven gap.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.2.2 — expose Rust compiled descriptors**
   (DONE — typed Rust projection closed; four-backend admission `.1.6.2.3` active).
 

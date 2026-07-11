@@ -173,6 +173,28 @@ function to_json(entry::UserFunctionEntry)
     return result
 end
 
+function to_descriptor_json(entry::UserFunctionEntry)
+    definition = entry.definition
+    result = Dict{String,Any}(
+        "index" => entry.index,
+        "kind" => "user_function_definition",
+        "version" => 1,
+        "name" => definition.name,
+        "params" => definition.params,
+        "arity" => definition.arity,
+        "source_text" => definition.source,
+        "source_span" => to_json(definition.source_span),
+        "body_span" => to_json(definition.body_span),
+        "body_source" => definition.body_source,
+    )
+    _put_if_present!(result, "body_payload", definition.body_payload)
+    if definition.body_parse_job !== nothing
+        result["body_parse_job"] = to_json(definition.body_parse_job)
+    end
+    _put_if_present!(result, "body_ast", definition.body_ast)
+    return result
+end
+
 function to_json(resolution::UserFunctionCallResolution)
     result = Dict{String,Any}(
         "name" => resolution.name,

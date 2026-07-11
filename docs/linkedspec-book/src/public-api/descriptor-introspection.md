@@ -67,11 +67,13 @@ In rough form:
   },
   functions => {
     normalize => {
+      index => 0,
       kind => 'user_function_definition',
       version => 1,
       name => 'normalize',
       params => ['value'],
       arity => 1,
+      source_text => "fn normalize(value) {\n return(trim(value))\n}",
       source_span => { line_start => 1, line_end => 3, ... },
       body_span => { ... },
       body_source => "\n return(trim(value))\n",
@@ -155,8 +157,15 @@ fn normalize(value) {
 }
 ```
 
-The Perl reference descriptor records the definition by name, including ordered parameter names, exact arity,
-source/body spans, original body source, a neutral staged `body_payload`, a neutral `body_parse_job`, and the
+Every variant records the definition by name with the same exact outer fields: `index`, `kind`, `version`, `name`,
+`params`, `arity`, `source_text`, `source_span`, `body_span`, `body_source`, `body_payload`, `body_parse_job`, and
+`body_ast`. `index` is zero-based source order; `kind` is `user_function_definition`; `version` is `1`.
+`source_text` is the complete original definition while `body_source` is the exact text inside its braces. The
+shared executable schema is `capability_conformance/outward_descriptor_contract.json`; focused Perl, Rust, Dart,
+and Julia tests consume that file and reject missing or backend-specific extra fields.
+
+The descriptor therefore includes ordered parameter names, exact arity, source/body spans, original body source,
+a neutral staged `body_payload`, a neutral `body_parse_job`, and the
 stitched ActionIR `action_block` body AST. The definition shell is parsed by
 `specs/user_function_definition.spec`; active backends consume that returned AST rather than raw-scanning the
 `fn` syntax. The `body_payload` is the implementation-language-neutral text island for staged dispatch:
@@ -264,6 +273,6 @@ launches a subprocess or requires `linkedspec-runtime`. Ordered `dependency_refs
 `body_payload` / `body_parse_job` / `body_ast`, definition order, last-definition compile order, and model
 identities survive compiled-state serialization round trips.
 
-All four implemented variants now expose the top-level projection and composing/nested model identities. Rust's
-typed/API implementation is complete under `.1.6.2.2`. Final admission `.1.6.2.3` still owns one outer
-user-function-record convention mismatch; the nested staged payload, job, and AST semantics already align.
+All four implemented variants expose the exact top-level projection, composing/nested model identities, and
+canonical outer function records. Rust's typed/API implementation landed under `.1.6.2.2`; the shared executable
+contract and final four-backend admission closed under `.1.6.2.3`.

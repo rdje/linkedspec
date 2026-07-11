@@ -1,5 +1,16 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:linkedspec_dart/linkedspec_dart.dart';
 import 'package:test/test.dart';
+
+final Map<String, Object?> _descriptorContract =
+    jsonDecode(
+          File(
+            '../capability_conformance/outward_descriptor_contract.json',
+          ).readAsStringSync(),
+        )
+        as Map<String, Object?>;
 
 void main() {
   test('compiles parsed rules into descriptor-shaped state', () {
@@ -59,12 +70,7 @@ Child:
     expect(dependencyEntry.combinedPattern, '(?:[a-z]+)');
 
     final descriptor = compiled.toDescriptorJson();
-    expect(descriptor.keys, [
-      'spec',
-      'functions',
-      'dependency_regex_map',
-      'meta',
-    ]);
+    expect(descriptor.keys, _descriptorContract['top_level_keys']);
 
     final descriptorSpec = descriptor['spec']! as Map<String, Object?>;
     final descriptorTop = descriptorSpec['Top']! as Map<String, Object?>;
@@ -268,9 +274,17 @@ void _expectFunctionDescriptor(
   required String bodySource,
   required StagedParseJob job,
 }) {
+  expect(
+    function.keys.toSet(),
+    (_descriptorContract['function_record_keys']! as List<Object?>).toSet(),
+  );
+  expect(function['index'], index);
+  expect(function['kind'], _descriptorContract['function_kind']);
+  expect(function['version'], _descriptorContract['function_version']);
   expect(function['name'], name);
   expect(function['params'], params);
   expect(function['arity'], params.length);
+  expect(function['source_text'], isA<String>());
   expect(function['body_source'], bodySource);
 
   final payload = function['body_payload']! as Map<String, Object?>;
