@@ -1746,13 +1746,14 @@ before implementation.
 - [x] **CLOSEOUT** — `.3.2` closes; task/roadmap/live/book/capability/KM/cleanup agree; Dart `.3.3.1` becomes active.
 
 - ID: `FUTURE-PARITY-BACKLOG.3.3`
-  Status: `active`
+  Status: `done`
   Goal: Add public generated Dart source with direct structural execution and proof.
   Children: `.3.3.1`, `.3.3.2`, `.3.3.3`
   Acceptance: Implement only after `.3.1`; preserve native interpreter behavior and exact CLI parity while exposing
     an idiomatic Dart API equivalent to the neutral generated-source contract.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `.3.3.1-.3` complete; deterministic emitter, ten-family direct matrix, exact accepted subset,
+    complete 181-test/61x2/105 Dart gate, contract/capability 59/0/1, docs/KM/no-drift/cleanup.
+  Commit: closed by `FUTURE-PARITY-BACKLOG.3.3.3 - admit generated Dart source`
 
 - ID: `FUTURE-PARITY-BACKLOG.3.3.1`
   Status: `done`
@@ -1804,16 +1805,31 @@ before implementation.
 - [x] **HONEST STATUS** — census stays 58/0/2; curated interpreter-first generated admission remains `.3.3.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.3.3.3`
-  Status: `active`
+  Status: `done`
   Goal: Admit generated Dart source against manifest-backed oracle fixtures.
   Acceptance: Run the neutral curated subset through interpreter-first exact comparison, emitted-source
     compile/run, complete Dart gates, docs/KM/no-drift, and cleanup; promote Dart's generated-source gap only after
     all contract families pass.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: exact contract-sourced 8/105 interpreter-first subset; one isolated offline host analyze/run;
+    direct result/metadata/plan/trace identity; complete Dart 181 tests, 61x2 CLI, 105 corpus; checkers 59/0/1.
+  Commit: `FUTURE-PARITY-BACKLOG.3.3.3 - admit generated Dart source`
+
+### `FUTURE-PARITY-BACKLOG.3.3.3` outcome
+
+- [x] **EXECUTABLE SOURCE LIST** — the test reads `corpus_proof.accepted_subset` directly from contract v1 and
+  locks its exact eight-case count and membership in the 105-case interpreter manifest.
+- [x] **INTERPRETER FIRST** — every fixture parses through ordinary or staged-function frontend, compiles, and
+  equals checked-in `expected.json` through native direct execution before source emission.
+- [x] **INDEPENDENT GENERATED PROOF** — eight emitted libraries analyze and run in one caller-owned offline package;
+  values, contract/version/identity metadata, ordered plans, and portable trace identity are exact.
+- [x] **RECURRING ENFORCEMENT** — contract names the Dart test path; checker locks count, contract consumption,
+  interpreter-first order, v1 emission, host analyze/run, trace roles/identity, cleanup, and no skip.
+- [x] **COMPLETE DART** — canonical gate passes 181 tests, 61x2 CLI, and 105/105 interpreter corpus.
+- [x] **PROMOTION** — Dart generated source moves gap→pass; census is exactly 59/0/1 with Julia the sole gap.
+- [x] **CLOSEOUT** — `.3.3` closes; Julia scaffold `.3.4.1` becomes active after clean commit.
 
 - ID: `FUTURE-PARITY-BACKLOG.3.4`
-  Status: `pending`
+  Status: `active`
   Goal: Add public generated Julia source with direct structural execution and proof.
   Children: `.3.4.1`, `.3.4.2`, `.3.4.3`
   Acceptance: Implement only after `.3.1`; preserve native interpreter behavior and exact CLI parity while exposing
@@ -1822,7 +1838,7 @@ before implementation.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.3.4.1`
-  Status: `pending`
+  Status: `active`
   Goal: Add the public Julia emitter scaffold and isolated include/compile-run harness.
   Acceptance: Emit deterministic Julia source from compiled state, include/load it in caller-owned isolation,
     execute a minimal parser entrypoint, prove stable format/version and failures, respect depot/artifact boundaries,
@@ -2091,13 +2107,14 @@ before implementation.
 | 68 | `FUTURE-PARITY-BACKLOG.3.2.0` | `done` | Scalable staged classifier passes all 105 generated fixtures in one isolated crate. |
 | 69 | `FUTURE-PARITY-BACKLOG.3.2.1` | `done` | All five failure-mechanism inventories are empty; no repair child or behavior change exists. |
 | 70 | `FUTURE-PARITY-BACKLOG.3.2.2` | `done` | Unconditional recurring 105/105 plus full Rust gate admit generated-source breadth. |
-| 71 | `FUTURE-PARITY-BACKLOG.3.3` | `active` | Dart needs emitter scaffold, family plan/direct execution, and manifest proof. |
+| 71 | `FUTURE-PARITY-BACKLOG.3.3` | `done` | Dart passes deterministic emission, ten-family direct execution, and eight-case admission. |
 | 72 | `FUTURE-PARITY-BACKLOG.3.3.1` | `done` | Dart emits deterministic v1 source and passes isolated compile/run plus complete Dart gates. |
 | 73 | `FUTURE-PARITY-BACKLOG.3.3.2` | `done` | Exact ten-family plan/direct dispatch/four rejections/trace pass in isolated host package. |
-| 74 | `FUTURE-PARITY-BACKLOG.3.3.3` | `active` | Admit Dart against interpreter-first accepted manifest subset and complete gates. |
-| 75 | `FUTURE-PARITY-BACKLOG.3.4` | `pending` | Julia needs emitter scaffold, family plan/direct execution, and manifest proof. |
-| 76 | `FUTURE-PARITY-BACKLOG.3.5` | `pending` | Exact four-backend admission promotes all states only after every generated-source proof passes. |
-| 77 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 74 | `FUTURE-PARITY-BACKLOG.3.3.3` | `done` | Exact 8/105 generated proof and complete gates promote Dart at census 59/0/1. |
+| 75 | `FUTURE-PARITY-BACKLOG.3.4` | `active` | Julia needs emitter scaffold, family plan/direct execution, and manifest proof. |
+| 76 | `FUTURE-PARITY-BACKLOG.3.4.1` | `active` | Add Julia deterministic emitter scaffold and isolated include/run harness. |
+| 77 | `FUTURE-PARITY-BACKLOG.3.5` | `pending` | Exact four-backend admission promotes all states only after every generated-source proof passes. |
+| 78 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
 | 65 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
 | 66 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
 | 67 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
@@ -2767,6 +2784,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.2.2` | Unconditional ordinary classifier; contract/checker path/count/no-ignore/strict enforcement; independent 105/105/186.42s; complete Rust 137/105/105-generated/196/5/5/5/10 + 61x2; strict-Clippy classification/changed-test pass; 58/0/2 capability; docs/KM/governance/mdBook/cleanup. | PASS. Rust generated source promotes to pass; `.3.2` closes and Dart scaffold `.3.3.1` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.3.1` | Public compatibility/v1 Dart emitters; exact metadata/errors/determinism; isolated private-cache offline pub/analyze/run/cleanup; focused 3/3; complete Dart 178 tests + 61x2 + 105 corpus; docs/KM/governance/mdBook/cleanup. | PASS. Dart scaffold is green without census promotion; exact family-plan/direct execution `.3.3.2` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.3.2` | Exact ten-family plan/four rejections/direct per-rule family dispatch/three trace roles; isolated all-family package; focused 5/5; complete Dart 180 tests + 61x2 + 105 corpus; docs/KM/governance/mdBook/cleanup. | PASS. Dart implementation roles are green; curated manifest admission `.3.3.3` is active without premature census promotion. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.3.3` | Contract-sourced exact eight-case interpreter-first subset; isolated offline host analyze/run; exact values/metadata/plans/trace; checker path/order/no-skip/cleanup enforcement; complete Dart 181 + 61x2 + 105; 59/0/1; docs/KM/governance/mdBook/cleanup. | PASS. Dart promotes gap→pass; `.3.3` closes and Julia scaffold `.3.4.1` is next. |
 
 ## Commit Log
 
@@ -2835,6 +2853,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.3.2.2` | `FUTURE-PARITY-BACKLOG.3.2.2 - admit Rust generated-source breadth` | Unconditional recurring all-105 proof, complete Rust gates, 58/0/2 promotion, and Dart handoff. |
 | `FUTURE-PARITY-BACKLOG.3.3.1` | `FUTURE-PARITY-BACKLOG.3.3.1 - add Dart generated-source scaffold` | Deterministic v1 emitter, typed scaffold errors, isolated caller-package compile/run, and `.3.3.2` handoff. |
 | `FUTURE-PARITY-BACKLOG.3.3.2` | `FUTURE-PARITY-BACKLOG.3.3.2 - add Dart generated family execution` | Exact ten-family direct routing, four plan rejections, portable trace, isolated matrix, and `.3.3.3` handoff. |
+| `FUTURE-PARITY-BACKLOG.3.3.3` | `FUTURE-PARITY-BACKLOG.3.3.3 - admit generated Dart source` | Exact accepted-subset admission, complete Dart gate, 59/0/1 promotion, and Julia handoff. |
 
 ## Changelog
 
@@ -2913,6 +2932,11 @@ Read-only evidence recorded on 2026-07-10:
   trace roles retain source/rule/family identity. One isolated package analyzes/runs all ten generated libraries
   against interpreter values. Focused 5/5 and complete Dart 180/61x2/105 pass; census remains 58/0/2 and curated
   interpreter-first admission `.3.3.3` becomes active.
+- `2026-07-11`: `.3.3.3` reads the exact eight accepted names from contract v1, proves each checked-in expected
+  result through the interpreter first, then analyzes/runs all eight emitted libraries in one isolated offline
+  package with exact values, metadata, plans, and portable trace identity. The checker locks this path/count/order/
+  host proof/cleanup/no-skip contract. Focused 6/6 and complete Dart 181/61x2/105 pass. Dart promotes gap→pass at
+  census 59/0/1, `.3.3` closes, and Julia scaffold `.3.4.1` becomes next after the clean commit.
 - `2026-07-11`: `.1.6.4.5` adds Perl's separate portable `SpecLoader` facade and direct 14/9/4 plus pipeline proof
   without changing legacy `get_parser`/`PathSearch`. The canonical core gate passes the required new test, 239-name
   coverage, focused suites, 61x2 CLI, and Phase 0 `1..1030` in 556 seconds. Combined with immediately prior full

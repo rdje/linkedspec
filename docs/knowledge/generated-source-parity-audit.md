@@ -20,6 +20,7 @@ evidence_update_2026_07_11_baseline_admission: "FUTURE-PARITY-BACKLOG.3.1.3.3 ad
 evidence_update_2026_07_11_full_manifest_classification: "FUTURE-PARITY-BACKLOG.3.2.0 replaces a measured slow per-case prototype with one isolated 105-module crate and exact staged accounting. The explicit run passes all 105 fixtures in 184.46 seconds with zero failures. No repair mechanism exists; .3.2.1-.2 own zero-failure closeout and recurring admission."
 evidence_update_2026_07_11_zero_failure_closeout: "FUTURE-PARITY-BACKLOG.3.2.1 records every requested failure category as empty and closes without speculative repairs. Strict recurring admission .3.2.2 is the only remaining Rust breadth step."
 evidence_update_2026_07_11_rust_admission: "FUTURE-PARITY-BACKLOG.3.2.2 removes ignore/conditional bypasses, extends contract checking to enforce the exact all-105 test, passes independent and complete Rust/61x2 CLI gates, promotes Rust to pass, and closes .3.2 at census 58/0/2."
+evidence_update_2026_07_11_dart_admission: "FUTURE-PARITY-BACKLOG.3.3.1-.3 add deterministic Dart v1 emission, exact ten-family direct execution/four rejections/trace roles, and contract-sourced interpreter-first 8/105 isolated host proof. Complete 181/61x2/105 gates pass; Dart promotes and .3.3 closes at census 59/0/1."
 reverify: "rg -n 'emit_rust_source|GENERATED_SOURCE_FORMAT|GeneratedRuleFamily|GENERATED_SOURCE_CORPUS_SUBSET|generated_rust_source_matches_manifest_backed_corpus_subset' rust/linkedspec-runtime/src/source_emitter.rs rust/linkedspec-runtime/tests/source_emitter.rs && rg -n -i 'emit_.*source|source_emitter|generated.*source' dart/lib dart/test julia/src julia/test || true && perl tools/check_capability_conformance.pl"
 ---
 
@@ -36,7 +37,7 @@ features: generated host-language parser source. Its backend states differ:
   direct result, portable trace roles, and compatibility adapters are admitted.
 - Rust's focused subset still names eight fixtures, while its strict recurring
   full-manifest classifier passes 105/105 and is admitted.
-- Dart and Julia have no source-emitter implementation.
+- Dart has an admitted emitter/direct executor; Julia has no source-emitter implementation.
 
 The implementation order is deliberately contract-first:
 
@@ -44,8 +45,8 @@ The implementation order is deliberately contract-first:
    and aligned Rust baselines (complete);
 2. classify Rust over the full manifest, close the empty repair inventory, and
    admit a strict recurring 105/105 gate (complete);
-3. add Dart's scaffold, direct family execution, and corpus proof (active);
-4. add Julia's equivalent capability and proof;
+3. add and admit Dart's scaffold, direct family execution, and corpus proof (complete);
+4. add Julia's equivalent capability and proof (active);
 5. admit all four implemented backends together.
 
 The generated source is necessarily host-language source, so Rust, Dart,

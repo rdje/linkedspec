@@ -35,13 +35,14 @@ evidence_update_2026_07_11_generated_baseline_admission: "FUTURE-PARITY-BACKLOG.
 evidence_update_2026_07_11_rust_full_manifest_classification: "FUTURE-PARITY-BACKLOG.3.2.0 adds a scalable staged classifier and passes all 105 generated Rust fixtures through interpreter-first emission, one isolated host compile, and 105 named tests in 184.46 seconds with zero failures. Census remains 57/1/2 until .3.2.1 zero-failure closeout and .3.2.2 recurring admission."
 evidence_update_2026_07_11_rust_zero_failure_closeout: "FUTURE-PARITY-BACKLOG.3.2.1 closes all five empty repair-mechanism inventories without behavior code. Census remains 57/1/2 and only strict recurring Rust admission .3.2.2 remains before promotion."
 evidence_update_2026_07_11_rust_generated_admission: "FUTURE-PARITY-BACKLOG.3.2.2 makes the all-105 classifier unconditional and contract-gated, passes it independently and inside the complete Rust package/61x2 CLI gate, and promotes Rust generated source to pass. The census is now 58 pass, zero partial, and two gaps; only Dart/Julia generated source remains."
+evidence_update_2026_07_11_dart_generated_admission: "FUTURE-PARITY-BACKLOG.3.3.3 consumes the contract's exact eight-case subset, proves interpreter values before v1 emission, independently analyzes/runs all generated libraries with exact metadata/plans/trace identity, passes complete 181/61x2/105 gates, and promotes Dart. Census is 59 pass, zero partial, one gap; only Julia generated source remains."
 reverify: "perl tools/check_capability_conformance.pl && rg -n 'FUTURE-PARITY-BACKLOG.1.6.[0-6]' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 `capability_conformance/manifest.json` is the current user-observable capability census. The checker validates the
 schema, exact backend set, evidence paths, status vocabulary, unique ids, gap ownership, and explicit legacy/future
-exclusions. After strict recurring Rust generated-source admission, its 15 rows and 60 backend states classify
-58 pass, zero partial, and two gaps.
+exclusions. After Dart generated-source admission, its 15 rows and 60 backend states classify
+59 pass, zero partial, and one gap.
 
 The audit distinguishes implementation gaps from proof gaps:
 
@@ -54,8 +55,8 @@ The audit distinguishes implementation gaps from proof gaps:
   root contract directly; exact admission is closed under `.1.6.4`;
 - Perl, Rust, Dart, and Julia propagate a native emitter through frontend/compiler/function-shell/staged/runtime
   phases; Dart's direct routed/quiet/failure proof closes `.1.6.5`;
-- generated source remains top-level `.3`: Perl and Rust pass; Rust's strict recurring full-manifest gate is
-  105/105 and contract-protected against ignore/conditional drift; Dart/Julia have no emitter.
+- generated source remains top-level `.3`: Perl, Rust, and Dart pass; Rust's strict full-manifest gate is 105/105,
+  Dart's exact accepted subset is 8/105 plus all ten families, and Julia remains the sole gap.
 
 `.1.6.6` closes non-codegen capability parity after proving the matrix has no unowned partial/gap state. Active
 `.3` owns every remaining generated-source state. Deprecated Perl plugins and not-yet-current general parse jobs,

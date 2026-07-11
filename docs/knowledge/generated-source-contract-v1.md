@@ -20,6 +20,7 @@ evidence_update_2026_07_11_admission: "FUTURE-PARITY-BACKLOG.3.1.3.3 passes the 
 evidence_update_2026_07_11_rust_breadth_admission: "FUTURE-PARITY-BACKLOG.3.2.2 adds the exact Rust full-manifest test path to corpus_proof and makes the checker enforce file existence, 105 count, no ignore attribute, and unconditional failure rejection. Independent and complete Rust gates pass; Rust promotes at census 58/0/2."
 evidence_update_2026_07_11_dart_scaffold: "FUTURE-PARITY-BACKLOG.3.3.1 adds public Dart compatibility/v1 emission, exact metadata and portable emit/compile-load/execution errors, deterministic effective-compiled-state normalization, strict-UTF-8/Base64 payload embedding, ordinary/traced direct-value entrypoints, and a caller-owned isolated offline analyze/run harness. Focused 3/3 and complete Dart 178/61x2/105 pass; Dart remains gap pending family-plan .3.3.2 and corpus admission .3.3.3."
 evidence_update_2026_07_11_dart_family_execution: "FUTURE-PARITY-BACKLOG.3.3.2 adds exact ten-family ordered rows, distinct count/label/family/unknown rejections, validated typed per-rule acode/bcode structural dispatch, portable enter/decision/exit trace roles, attributed failures, and one isolated offline all-family package compared with interpreter values. Focused 5/5 and complete Dart 180/61x2/105 pass; admission remains .3.3.3."
+evidence_update_2026_07_11_dart_admission: "FUTURE-PARITY-BACKLOG.3.3.3 adds the exact Dart accepted-subset test path to the contract, consumes its eight names directly, proves interpreter expected values before emission, runs all emitted libraries in one isolated offline package with exact metadata/plans/trace identity, and passes complete 181/61x2/105 gates. Dart promotes at census 59/0/1."
 reverify: "perl -c tools/check_generated_source_contract.pl && perl tools/check_generated_source_contract.pl && perl tools/check_capability_conformance.pl && rg -n 'check_generated_source_contract|generated_source_contract' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -52,8 +53,9 @@ contract-checked 105/105 recurring test. Both backends now pass.
 
 Dart's `.3.3.1` scaffold implements emission, metadata, stable failures, and
 isolated compile/run. `.3.3.2` adds exact family-plan validation, direct
-structural-family routing, and portable generated trace roles. Dart remains a
-gap solely because manifest-backed admission deliberately remains `.3.3.3`.
+structural-family routing, and portable generated trace roles. `.3.3.3`
+completes manifest-backed admission: the contract checker locks its path/count/
+order/host proof/trace/cleanup/no-skip properties, and Dart passes.
 
 Related facts: [[generated-source-parity-audit]],
 [[perl-generated-source-capture-not-standalone]],

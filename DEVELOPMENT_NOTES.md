@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.3.3 — admission must consume the contract list, not copy it):
+  Make the executable contract the only accepted-subset owner and have the backend test read it directly; then
+  checker-lock the test path, exact count, contract access, interpreter-before-emission comparison, independent
+  host compile/run, trace/source identity, cleanup, and no-skip property. This prevents a green backend-local list
+  from drifting away from neutral admission. Include the staged user-function case so normalized compiled-state
+  emission is exercised, not just rule-only fixtures. Promotion is an explicit final act after the focused host
+  proof and complete backend gates pass together; update both contract state and capability census atomically.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.3.2 — a generated plan must control execution, not annotate it):
   Dart compiled state already carries the Rust-equivalent classifier inputs: exact mode, regex/action-edge counts,
   and blind edges. Derive the same ten neutral families from those fields and validate arbitrary string rows before

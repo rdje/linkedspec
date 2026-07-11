@@ -219,8 +219,8 @@ for my $index (0 .. $#{$contract->{behavior_cases}}) {
 
 require_keys(
  'corpus_proof', $contract->{corpus_proof},
- [qw(interpreter_manifest interpreter_case_count proof_order accepted_subset rust_breadth_target
-     rust_full_manifest_test new_backend_admission_target)], []
+ [qw(interpreter_manifest interpreter_case_count proof_order accepted_subset dart_accepted_subset_test
+     rust_breadth_target rust_full_manifest_test new_backend_admission_target)], []
 );
 my $manifest_path = repo_path('corpus_proof.interpreter_manifest', $contract->{corpus_proof}{interpreter_manifest});
 my $manifest = read_json('interpreter manifest', $manifest_path);
@@ -241,6 +241,32 @@ my @subset = qw(proof_edge_array_literal proof_edge_scalar_literal autoexist_arr
 require_exact_array('corpus_proof.accepted_subset', $contract->{corpus_proof}{accepted_subset}, @subset);
 my %manifest_case = map { $_ => 1 } @{$manifest->{cases}};
 fail("accepted subset case '$_' is absent from the interpreter manifest") for grep { !$manifest_case{$_} } @subset;
+my $dart_accepted_subset_test = repo_path(
+ 'corpus_proof.dart_accepted_subset_test', $contract->{corpus_proof}{dart_accepted_subset_test}
+);
+fail('corpus_proof.dart_accepted_subset_test must be a regular file') unless -f $dart_accepted_subset_test;
+my $dart_accepted_subset_text = decode('UTF-8', read_bytes($dart_accepted_subset_test), FB_CROAK | LEAVE_SRC);
+fail('Dart accepted-subset test must lock the eight-case count')
+ unless $dart_accepted_subset_text =~ /dartGeneratedSourceAcceptedSubsetCount\s*=\s*8\s*;/;
+fail('Dart accepted-subset test must consume the executable contract list')
+ unless $dart_accepted_subset_text =~ /generated_source_contract\.json/ &&
+        $dart_accepted_subset_text =~ /\['accepted_subset'\]/;
+fail('Dart accepted-subset test must compare the interpreter before emission')
+ unless $dart_accepted_subset_text =~ /expect\(interpreterValue, expected, reason: caseName\)/;
+fail('Dart accepted-subset test must emit contract-v1 source')
+ unless $dart_accepted_subset_text =~ /emitDartSourceV1\(compiled, identity\)/;
+fail('Dart accepted-subset test must independently analyze and run the generated package')
+ unless $dart_accepted_subset_text =~ /'analyze'/ &&
+        $dart_accepted_subset_text =~ /'run'/ &&
+        $dart_accepted_subset_text =~ /'bin\/main\.dart'/;
+fail('Dart accepted-subset test must prove portable trace roles and source identity')
+ unless $dart_accepted_subset_text =~ /generated_rule_enter/ &&
+        $dart_accepted_subset_text =~ /generated_family_decision/ &&
+        $dart_accepted_subset_text =~ /generated_rule_exit/ &&
+        $dart_accepted_subset_text =~ /generated-source\/dart-subset/;
+fail('Dart accepted-subset test must clean its caller-owned package recursively')
+ unless $dart_accepted_subset_text =~ /scratch\.deleteSync\(recursive:\s*true\)/;
+fail('Dart accepted-subset test must not be skipped') if $dart_accepted_subset_text =~ /skip\s*:/;
 my $rust_full_manifest_test = repo_path(
  'corpus_proof.rust_full_manifest_test', $contract->{corpus_proof}{rust_full_manifest_test}
 );
@@ -257,7 +283,7 @@ fail('corpus_proof.new_backend_admission_target has an unexpected value')
  unless $contract->{corpus_proof}{new_backend_admission_target} eq 'accepted_subset_plus_all_generated_families';
 
 require_keys('current_backend_states', $contract->{current_backend_states}, [qw(perl rust dart julia)], []);
-my %expected_state = (perl => 'pass', rust => 'pass', dart => 'gap', julia => 'gap');
+my %expected_state = (perl => 'pass', rust => 'pass', dart => 'pass', julia => 'gap');
 fail("current_backend_states.$_ must be $expected_state{$_}")
  for grep { $contract->{current_backend_states}{$_} ne $expected_state{$_} } keys %expected_state;
 my $capability_manifest = read_json(
@@ -272,5 +298,5 @@ for my $backend (sort keys %expected_state) {
   unless defined($actual) && $actual eq $expected_state{$backend};
 }
 
-printf "generated-source-contract: OK (v1; %d families; %d behavior case; %d/105 subset + strict Rust 105/105; states 58/0/2)\n",
+printf "generated-source-contract: OK (v1; %d families; %d behavior case; Dart %d/105 + strict Rust 105/105; states 59/0/1)\n",
  scalar(@families), scalar(@{$contract->{behavior_cases}}), scalar(@subset);

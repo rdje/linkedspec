@@ -145,6 +145,7 @@
       "tclite_command_subst",
       "portmap_bare"
     ],
+    "dart_accepted_subset_test": "dart/test/source_emitter_test.dart",
     "rust_full_manifest_test": "rust/linkedspec-runtime/tests/generated_source_full_manifest_classifier.rs",
     "rust_breadth_target": "full_interpreter_manifest",
     "new_backend_admission_target": "accepted_subset_plus_all_generated_families"
@@ -152,7 +153,7 @@
   "current_backend_states": {
     "perl": "pass",
     "rust": "pass",
-    "dart": "gap",
+    "dart": "pass",
     "julia": "gap"
   }
 }

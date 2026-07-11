@@ -17,7 +17,8 @@ registered user-function runtime execution. Its corpus layer now has a
 manifest-backed executable harness whose checked-in 105-fixture corpus gate is
 green. The public package also exports deterministic generated-source v1
 emission, typed metadata/errors, the exact ten-family plan/direct executor, and
-isolated caller-package compile/run proof; manifest admission remains active.
+isolated caller-package compile/run proof. Contract-sourced manifest admission
+now passes too.
 
 ## Commands
 
@@ -58,15 +59,16 @@ it. Structured failures use `GeneratedSourceException.toJson()`.
 
 Generated libraries expose `plan()` and `validatePlan(...)`. All ten neutral
 families route directly through validated per-rule structural dispatch, and
-count/label/family/unknown-family drift fails before execution. This is not yet
-a complete parity claim: manifest-backed admission remains `.3.3.3`.
+count/label/family/unknown-family drift fails before execution. The recurring
+admission test also reads and passes the contract's exact eight-case subset.
 
 ## Status
 
 `FUTURE-PARITY-BACKLOG.3.3.1` closes the generated-source scaffold; `.3.3.2`
-closes exact ten-family plan/direct execution and four plan rejections. Focused
-5/5 and complete format/analyze/180 tests/61x2 CLI/105 corpus pass. Dart remains
-a generated-source capability gap until `.3.3.3` admission closes.
+closes exact ten-family plan/direct execution and four plan rejections;
+`.3.3.3` admits the exact interpreter-first eight-case generated proof. Focused
+6/6 and complete format/analyze/181 tests/61x2 CLI/105 corpus pass. Dart now
+passes the complete current capability census.
 
 `DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first Dart milestone.
 `FUTURE-PARITY-BACKLOG.1.5.3.1` replaces the old corpus-oriented primary boundary:

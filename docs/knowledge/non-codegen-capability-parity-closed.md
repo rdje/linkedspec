@@ -16,14 +16,12 @@ reverify: "perl tools/check_capability_conformance.pl"
 ---
 
 `FUTURE-PARITY-BACKLOG.1.6.6` closes current non-codegen capability parity across
-Perl, Rust, Dart, and Julia. The strict 15-capability/60-state census remains 57 pass,
-one partial, and two gaps, with no missing evidence path or unowned residual.
+Perl, Rust, Dart, and Julia. That historical closeout boundary was 57/1/2; later
+generated-source admission has advanced the same census to 59/0/1.
 
-Direct projection shows that all three non-pass states belong to exactly one capability:
-`codegen.generated_parser_source`. Rust is `partial` because all structural families run
-directly but manifest-backed generated-source proof is curated. Dart and Julia are `gap`
-because they do not yet emit parser source. All three states are owned by active
-`FUTURE-PARITY-BACKLOG.3`.
+The only current non-pass state still belongs to `codegen.generated_parser_source`:
+Julia is a gap owned by active `FUTURE-PARITY-BACKLOG.3.4`. Rust and Dart have
+since passed their respective recurring breadth/admission proofs.
 
 Therefore the current language/helper/runtime, descriptors, diagnostics, native resolution,
 trace, execution controls, CLI, and corpus capabilities pass across all four implemented

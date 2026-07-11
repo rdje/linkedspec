@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:linkedspec_dart/linkedspec_dart.dart';
 import 'package:test/test.dart';
 
+const dartGeneratedSourceAcceptedSubsetCount = 8;
+
 void main() {
   test('v1 metadata and structured emission failure are exact', () {
     const identity = 'generated-source/dart-unicode-λ.spec';
@@ -343,6 +345,180 @@ dependencies:
     },
     timeout: const Timeout(Duration(minutes: 3)),
   );
+
+  test(
+    'generated source matches the contract accepted manifest subset',
+    () async {
+      final contract =
+          jsonDecode(
+                File(
+                  '../capability_conformance/generated_source_contract.json',
+                ).readAsStringSync(),
+              )
+              as Map<String, Object?>;
+      final corpusProof = contract['corpus_proof']! as Map<String, Object?>;
+      final acceptedSubset = (corpusProof['accepted_subset']! as List)
+          .cast<String>();
+      expect(acceptedSubset, hasLength(dartGeneratedSourceAcceptedSubsetCount));
+
+      final corpusRoot = Directory('../rust/linkedspec-runtime/tests/corpus');
+      final manifest =
+          jsonDecode(
+                File('${corpusRoot.path}/manifest.json').readAsStringSync(),
+              )
+              as Map<String, Object?>;
+      final manifestCases = (manifest['cases']! as List).cast<String>().toSet();
+      expect(manifestCases.containsAll(acceptedSubset), isTrue);
+
+      final scratch = Directory.systemTemp.createTempSync(
+        'linkedspec-dart-generated-subset-',
+      );
+      final pubCache = Directory('${scratch.path}/pub-cache')..createSync();
+      final packageRoot = Directory.current.absolute;
+      final expectedValues = <String, Object?>{};
+      final expectedMetadata = <String, Object?>{};
+      final expectedPlans = <String, Object?>{};
+      final imports = StringBuffer('''
+import 'dart:convert';
+
+import 'package:linkedspec_dart/linkedspec_dart.dart';
+''');
+      final body = StringBuffer('''
+void main() {
+  final values = <String, Object?>{};
+  final metadata = <String, Object?>{};
+  final plans = <String, Object?>{};
+''');
+
+      try {
+        Directory('${scratch.path}/lib').createSync();
+        Directory('${scratch.path}/bin').createSync();
+        File('${scratch.path}/pubspec.yaml').writeAsStringSync('''
+name: linkedspec_generated_subset
+publish_to: none
+environment:
+  sdk: ">=3.9.0 <4.0.0"
+dependencies:
+  linkedspec_dart:
+    path: ${jsonEncode(packageRoot.path)}
+''');
+
+        for (var index = 0; index < acceptedSubset.length; index += 1) {
+          final caseName = acceptedSubset[index];
+          final caseRoot = Directory('${corpusRoot.path}/$caseName');
+          final source = File('${caseRoot.path}/input.spec').readAsStringSync();
+          final input = File('${caseRoot.path}/input.txt').readAsStringSync();
+          final expected = jsonDecode(
+            File('${caseRoot.path}/expected.json').readAsStringSync(),
+          );
+          final spec = _parseCorpusSpec(source);
+          final compiled = compileSpec(spec);
+          final interpreterValue = LinkedSpecRuntimeEngine(
+            compiled,
+          ).execute(input).value;
+          expect(interpreterValue, expected, reason: caseName);
+
+          final identity = 'generated-source/dart-subset/$caseName.spec';
+          final plan = buildGeneratedRulePlan(compiled);
+          expectedValues[caseName] = expected;
+          expectedMetadata[caseName] = {
+            'contract_id': 'linkedspec-generated-source-v1',
+            'format_version': 1,
+            'source_identity': identity,
+          };
+          expectedPlans[caseName] = [for (final row in plan) row.toJson()];
+
+          File(
+            '${scratch.path}/lib/case_$index.dart',
+          ).writeAsStringSync(emitDartSourceV1(compiled, identity));
+          imports.writeln(
+            "import 'package:linkedspec_generated_subset/case_$index.dart' "
+            'as case$index;',
+          );
+          body
+            ..writeln('  final plan$index = case$index.plan();')
+            ..writeln('  case$index.validatePlan(plan$index);')
+            ..writeln(
+              "  values[${jsonEncode(caseName)}] = case$index.execute("
+              '${jsonEncode(input)});',
+            )
+            ..writeln(
+              "  metadata[${jsonEncode(caseName)}] = "
+              'case$index.metadata().toJson();',
+            )
+            ..writeln(
+              "  plans[${jsonEncode(caseName)}] = "
+              '[for (final row in plan$index) row.toJson()];',
+            );
+          if (index == 0) {
+            body.writeln('''
+  case0.executeWithTrace(
+    ${jsonEncode(input)},
+    const LinkedSpecTraceConfig(
+      level: LinkedSpecTraceLevel.low,
+      traceFile: 'subset.trace',
+      sinkMode: LinkedSpecTraceSinkMode.route,
+      resetFile: true,
+    ),
+  );
+''');
+          }
+        }
+        body.writeln(
+          "  print(jsonEncode({'values': values, 'metadata': metadata, "
+          "'plans': plans}));\n}",
+        );
+        File(
+          '${scratch.path}/bin/main.dart',
+        ).writeAsStringSync('$imports\n$body');
+
+        final environment = {
+          ...Platform.environment,
+          'PUB_CACHE': pubCache.path,
+        };
+        await _expectProcessSuccess(scratch, environment, const [
+          'pub',
+          'get',
+          '--offline',
+        ]);
+        await _expectProcessSuccess(scratch, environment, const [
+          'analyze',
+          '--fatal-infos',
+          '--fatal-warnings',
+        ]);
+        final run = await _expectProcessSuccess(scratch, environment, const [
+          'run',
+          'bin/main.dart',
+        ]);
+        expect(jsonDecode((run.stdout as String).trim()), {
+          'values': expectedValues,
+          'metadata': expectedMetadata,
+          'plans': expectedPlans,
+        });
+        final trace = File('${scratch.path}/subset.trace').readAsStringSync();
+        expect(trace, contains('generated_rule_enter'));
+        expect(trace, contains('generated_family_decision'));
+        expect(trace, contains('generated_rule_exit'));
+        expect(
+          trace,
+          contains('generated-source/dart-subset/${acceptedSubset.first}.spec'),
+        );
+      } finally {
+        scratch.deleteSync(recursive: true);
+      }
+
+      expect(scratch.existsSync(), isFalse);
+    },
+    timeout: const Timeout(Duration(minutes: 3)),
+  );
+}
+
+SpecFile _parseCorpusSpec(String source) {
+  try {
+    return parseSpec(source);
+  } on SpecParseException {
+    return parseSpecWithStagedUserFunctionDefinitions(source);
+  }
 }
 
 void _expectPlanFailure(

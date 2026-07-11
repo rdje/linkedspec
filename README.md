@@ -173,8 +173,8 @@ Top-level directories and files:
     assertions plus 105/105 and 61/61 default/POSIX. `.1.5.4.3` closes exact four-backend CLI identity with one
     recurring warmed 4x2x61 driver; exhaustive current-surface `.1.6.1` and exact descriptors `.1.6.2` are closed, and
     generated-source `.3.0` is audited/split; neutral contract and strict all-105 Rust admission are closed.
-    Dart's deterministic isolated emitter scaffold `.3.3.1` and exact ten-family/direct execution `.3.3.2` are
-    green; manifest admission `.3.3.3` is active before Julia and final exact admission.
+    Dart's deterministic emitter, exact ten-family direct execution, and contract-sourced eight-case admission are
+    green; Dart passes at census 59/0/1. Julia scaffold `.3.4.1` is active before final exact admission.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.
@@ -203,13 +203,12 @@ Top-level project docs:
 ## Local CI
 - Run `bash tools/run_ci_local.sh` from the repo root to execute the canonical regression gate.
 - Run `perl tools/check_capability_conformance.pl` to validate the current 15-capability backend census, evidence
-  paths, and gap ownership. The current audit records 58 pass, zero partial-proof, and two gap backend states;
+  paths, and gap ownership. The current audit records 59 pass, zero partial-proof, and one gap backend state;
   non-codegen `.1.6` is closed. Contract v1 `.3.1.1` is gated and Perl reconstruction/API proof `.3.1.2` is green.
   Perl/Rust v1 baseline admission is closed. Rust's all-105 classifier is unconditional and recurring; complete
-  Rust gates pass and generated source promotes. Census is 58/0/2: Perl/Rust pass. Dart now exports a deterministic
-  v1 scaffold and exact ten-family direct executor that pass caller-owned offline analyze/run plus the complete
-  180-test/61x2/105 gate; it remains a gap while manifest admission `.3.3.3` proceeds. Julia `.3.4` and final `.3.5`
-  follow.
+  Rust gates pass and generated source promotes. Dart now exports a deterministic
+  v1 emitter/executor plus exact eight-case interpreter-first host proof; complete 181-test/61x2/105 gates pass.
+  Dart promotes to pass at 59/0/1. Julia `.3.4.1` and final `.3.5` follow.
 - Run `perl tools/check_generated_source_contract.pl` to validate generated-source contract v1: idiomatic host APIs
   and backend-native source text behind identical emission/load/execution/trace/error/identity roles, ten generated
   families, four plan-rejection cases, one direct neutral fixture, an eight-case generated subset, and the 105-case
@@ -233,8 +232,8 @@ Top-level project docs:
   Dart full-pipeline trace `.1.6.5` and non-codegen closeout `.1.6.6` are closed; generated-source `.3.0` has
   audited/split the boundary; `.3.1.0` then corrected the Perl source-capture assumption and neutral executable
   contract `.3.1` and Rust breadth `.3.2` are closed: strict recurring generated proof passes 105/105 and Rust
-  promotes at census 58/0/2. Dart emitter scaffold `.3.3.1` and exact family-plan/direct execution `.3.3.2` are
-  green; interpreter-first generated manifest admission `.3.3.3` is active.
+  promoted at census 58/0/2. Dart `.3.3.1-.3` now pass deterministic emission, exact family execution, and the
+  accepted eight-case proof; Dart promotes and the live census is 59/0/1. Julia `.3.4.1` is active.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
   {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven baseline success, four baseline

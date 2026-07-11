@@ -5,19 +5,24 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-11`
+- `2026-07-11` refresh: `FUTURE-PARITY-BACKLOG.3.3.3` admits generated Dart source. Its recurring test consumes
+  the contract's exact eight-case list, proves checked-in values through the interpreter before emission, then
+  analyzes/runs all emitted libraries in one isolated offline package with exact metadata/plan/trace identity.
+  The contract checker locks test path/count/order/host proof/cleanup/no-skip. Complete Dart gates pass 181 tests,
+  61x2 CLI, and 105 corpus. Dart promotes gap→pass; census is 59/0/1 and Julia `.3.4.1` is active.
 - `2026-07-11` refresh: `FUTURE-PARITY-BACKLOG.3.3.2` adds Dart's exact contract-v1 generated plan and direct
   structural executor. Compiled mode/regex/action/blind metadata classifies all ten neutral families. Four mutable
   plan defects reject before execution with distinct codes; validated typed families select acode/regex or
   bcode/blind dispatch on every rule entry and emit three portable trace roles. One isolated offline package runs
-  all ten generated families against interpreter values. Complete gates pass 180 tests, 61x2 CLI, and 105 corpus.
-  Census remains 58/0/2; accepted-subset admission `.3.3.3` is active.
+  all ten generated families against interpreter values. At that leaf, complete gates passed 180 tests, 61x2 CLI,
+  and 105 corpus; `.3.3.3` has since admitted Dart at 59/0/1.
 - `2026-07-11` refresh: `FUTURE-PARITY-BACKLOG.3.3.1` adds Dart's public deterministic generated-source scaffold.
   `emitDartSourceV1(...)` consumes effective ordered compiled state and emits a native library with stable v1
   metadata, source identity, ordinary/traced direct-value entrypoints, and portable emission/compile-load/execution
   failures. Normalized spec JSON is encoded as strict UTF-8 then Base64 inside Unicode Dart source. An isolated
   caller-owned package/private cache resolves offline, analyzes, runs, attributes failure, and deletes itself.
   At that leaf, complete Dart gates passed 178 tests, 61x2 CLI, and 105/105 corpus. Census remained 58/0/2;
-  `.3.3.2` has since closed exact family/direct execution and `.3.3.3` is active for manifest admission.
+  `.3.3.2` and `.3.3.3` have since closed exact family/direct execution and manifest admission.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.3` closes the Perl primary-command reference.
   Help, manifest, task/roadmap/live docs, mdBook, and Knowledge Map agree on the strict preserved UTF-8 contract
   and 61 exact cases. Dated 53-case and pre-fix mojibake records remain historical evidence, not live defects.

@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.3.2` — added exact Dart ten-family generated plan/direct execution.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.3.3.1` — added deterministic Dart v1 emitter scaffold and isolation proof.
-- recent_context: Census remains 58/0/2. Perl/Rust pass; Dart/Julia remain gaps. Dart now exports compatibility/v1
-  emitters plus exact ten-family ordered plan, four pre-execution rejections, per-rule direct structural routing,
-  portable trace roles, and isolated all-family host proof. Focused 5/5 and complete 180/61x2/105 pass. `.3.3.3` active.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.3.3` — admitted generated Dart source and closed `.3.3`.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.3.3.2` — added exact Dart ten-family generated plan/direct execution.
+- recent_context: Census is 59/0/1. Perl/Rust/Dart generated source pass; Julia is the sole gap. Dart's exact
+  contract-sourced eight-case proof is interpreter-first and runs in one isolated offline host package with exact
+  result/metadata/plan/trace identity. Focused 6/6 and complete 181/61x2/105 pass. Julia `.3.4.1` is active.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.3.3.2 - add Dart generated family execution`; previous committed HEAD is
-  `1bfdb18e FUTURE-PARITY-BACKLOG.3.3.1 - add Dart generated-source scaffold`.
+  `FUTURE-PARITY-BACKLOG.3.3.3 - admit generated Dart source`; previous committed HEAD is
+  `a8d3bd8a FUTURE-PARITY-BACKLOG.3.3.2 - add Dart generated family execution`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.3.3.3`; Dart generated manifest admission is active.
-- next_action: Drive the contract's exact eight-case accepted subset interpreter-first through Dart emission, one
-  isolated host package compile/run, exact direct-result/plan/trace/identity checks, complete admission gates, then
-  promote Dart only if contract/capability/checker/book/task evidence all agree.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.3.4.1`; Julia generated-source emitter scaffold is active.
+- next_action: Knowledge-Map-first audit Julia compiled-state/public module boundaries and depot/artifact rules,
+  then add deterministic v1 Julia emission, stable metadata/errors, and caller-owned isolated include/run proof
+  without changing native interpreter or CLI behavior.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

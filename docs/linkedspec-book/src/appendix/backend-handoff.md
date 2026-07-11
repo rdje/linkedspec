@@ -414,7 +414,8 @@ landed interpreter-first: `.spec` parser, typed helper/action AST, compiled-spec
 state, Dart runtime interpreter, then the manifest-backed corpus runner.
 Generated Dart source was originally deferred until after interpreter/corpus parity. The split future lane is now
 active: `.3.3.1` landed deterministic v1 emission/isolation and `.3.3.2` landed exact ten-family plan/direct
-execution, four rejection codes, and portable trace roles. Manifest admission remains `.3.3.3`. The repo has a Dart backend package under
+execution, four rejection codes, and portable trace roles. `.3.3.3` now admits the contract-sourced eight-case
+interpreter-first host proof. The repo has a Dart backend package under
 `dart/`, including package metadata, committed lockfile, public library entrypoint,
 Dart-specific CLI entrypoint, compatibility corpus-runner entrypoint, and smoke tests. Its corpus layer loads the
 manifest-backed corpus, rejects manifest drift, checks required fixture files and
@@ -582,15 +583,15 @@ source admission, its 60 states are 58 pass, zero partial states, and two gaps. 
 | --- | --- | --- |
 | Native named/file resolution | ADR `0026` and the 14/9/4 fixture fix portable names, exact paths, ordered roots, strict UTF-8, and typed stages. Perl, Rust, Dart, and Julia consume the contract directly; exact admission is closed. | closed `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, Dart, and Julia propagate a caller-owned emitter through frontend/compiler/function/staged/runtime phases. Dart's direct routed/quiet/failure proof and recurring gates are admitted. | closed `.1.6.5` |
-| Generated parser source | Perl and Rust pass contract v1. Rust's recurring gate compiles/runs 105/105. Dart has deterministic v1 emission, exact ten-family direct dispatch, four rejections, trace roles, and isolated host proof, but awaits accepted-subset admission. Julia has no emitter. | `.3.3.3` Dart; `.3.4` Julia; `.3.5` admission |
+| Generated parser source | Perl and Rust pass contract v1; Rust compiles/runs 105/105. Dart also passes deterministic v1 emission, ten-family direct dispatch/four rejections/trace roles, and exact contract-sourced 8/105 host admission. Julia has no emitter. | `.3.4` Julia; `.3.5` admission |
 
 Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, generic final-
 codeblock equivalence, and the not-yet-implemented Lua backend are explicit exclusions/future owners rather than
 silent gaps. No backend is called complete while a current matrix state remains partial or gap.
 
 `FUTURE-PARITY-BACKLOG.1.6.6` closed the non-codegen census without claiming complete backend parity. Its 57/1/2
-boundary was later advanced by strict recurring Rust generated-source admission. At 58/0/2, Dart and Julia source
-emitters are the only remaining gaps; active `.3` owns both.
+boundary first advanced to 58/0/2 through strict recurring Rust generated-source admission, when Dart and Julia
+were the two gaps. Dart admission has since advanced the live census to 59/0/1.
 
 That 57/1/2 statement was the source-audit boundary. `.3.1.0` added the missing independent Perl compile/run probe:
 the captured text compiles, but stringifying/recompiling `LinkedRE::oredRE` detaches its `(?{$pos=N})` alternative
@@ -608,14 +609,15 @@ generated modules/tests into one isolated Cargo crate, and passes host compile/r
 the complete Rust package and CLI gates, and promotes Rust generated source at census 58/0/2. Dart `.3.3.1` then
 adds public compatibility/v1 emitters, stable metadata/errors, strict-UTF-8/Base64 payload embedding, and an
 isolated temporary-package analyze/run proof. `.3.3.2` adds exact ten-family direct dispatch, four plan rejections,
-portable trace roles, and an isolated all-family matrix. The census remains 58/0/2 until Dart corpus admission.
+portable trace roles, and an isolated all-family matrix. `.3.3.3` adds exact accepted-subset admission and promotes
+Dart; the census is 59/0/1 with Julia the sole gap.
 
 `FUTURE-PARITY-BACKLOG.3.0` turns that broad owner into an executable order. `.3.1.1` first fixes a versioned neutral
 contract for emission, host compile/load, direct generated execution, exact result/error/source identity, trace,
 family-plan validation, and manifest proof; `.3.1.2` repairs Perl and `.3.1.3.3` admits the aligned Perl/Rust
 baseline. `.3.2.0` classifies Rust's full manifest 105/105 green, `.3.2.1` closes the empty repair inventory, and
 `.3.2.2` completes strict recurring admission. Dart scaffold `.3.3.1` and exact family/direct execution `.3.3.2`
-are closed; active `.3.3.3` owns corpus admission. Later `.3.4` adds Julia source emission in the same
+are closed; `.3.3.3` admits Dart and closes `.3.3`. Active `.3.4.1` begins Julia source emission in the same
 scaffold, direct-family, and corpus-proof slices. `.3.5` alone may promote all 60 states to pass. Because
 the artifacts are host-language source, byte identity is not required; ADR `0023` requires equivalent operations
 and observable behavior through idiomatic host APIs.

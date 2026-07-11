@@ -7,8 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.3.3.3 — admit generated Dart source**
+  (DONE — exact accepted-subset proof promotes Dart; census 59/0/1; Julia `.3.4.1` next).
+
+  **Admission:** The recurring test consumes the contract's exact eight names, proves checked-in expected values
+  through the native interpreter first, then analyzes/runs eight emitted libraries in one isolated offline package
+  with exact result/metadata/plan/trace identity. Contract checking locks the proof and no-skip/cleanup properties.
+
+  **Complete proof:** Focused 6/6; Dart format/analyze/181 tests; 61x2 CLI; 105/105 corpus; contract/capability
+  checkers 59/0/1. Dart moves gap→pass and `.3.3` closes. Julia generated scaffold `.3.4.1` follows after commit.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.3.2 — add Dart generated family execution**
-  (DONE — exact ten-family direct dispatch passes; Dart manifest admission `.3.3.3` active).
+  (DONE — exact ten-family direct dispatch passes; Dart manifest admission `.3.3.3` followed and is now done).
 
   **Implementation:** Emitted ordered label/family rows use all ten contract names. Four distinct plan failures are
   rejected before execution. Validated typed families select regex/acode versus blind/bcode dispatch on every rule
@@ -16,7 +26,7 @@ Current execution status for interruption-safe batch workflow recovery.
 
   **Proof:** One caller-owned offline package analyzes/runs all ten generated family libraries against interpreter
   values, then deletes itself/cache. Focused 5/5 and complete Dart 180 tests/61x2 CLI/105 corpus pass. Census remains
-  58/0/2 until interpreter-first accepted-subset admission `.3.3.3`.
+  58/0/2 at that leaf; `.3.3.3` has since admitted Dart at 59/0/1.
 
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.3.1 — add Dart generated-source scaffold**
   (DONE — deterministic v1 emission and isolated compile/run pass; Dart family-plan `.3.3.2` followed).

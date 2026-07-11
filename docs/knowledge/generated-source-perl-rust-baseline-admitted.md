@@ -14,6 +14,7 @@ evidence: "FUTURE-PARITY-BACKLOG.3.1.3.3 passes the focused 69-assertion Perl co
 evidence_update_2026_07_11_full_manifest: "FUTURE-PARITY-BACKLOG.3.2.0 completes the scalable classifier 105/105 with zero failures. Rust remains partial pending .3.2.1 zero-failure closeout and .3.2.2 strict recurring admission, not semantic repair."
 evidence_update_2026_07_11_zero_failure_closeout: "FUTURE-PARITY-BACKLOG.3.2.1 closes the empty repair inventory without behavior code. Rust remains partial only for strict recurring admission .3.2.2."
 evidence_update_2026_07_11_rust_admission: "FUTURE-PARITY-BACKLOG.3.2.2 completes strict recurring all-105 admission and promotes Rust to pass at census 58/0/2."
+evidence_update_2026_07_11_dart_admission: "FUTURE-PARITY-BACKLOG.3.3.3 admits Dart's exact contract-sourced eight-case proof and promotes it to pass at census 59/0/1; Julia is the sole remaining gap."
 reverify: "perl tools/check_generated_source_contract.pl && perl tools/check_capability_conformance.pl && PERL5LIB= prove -Iperl t/generated_source_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture"
 ---
 
@@ -25,7 +26,8 @@ metadata, validation, result, trace, diagnostic, and structural-family roles.
 
 Perl passes the capability row. Rust's explicit staged classifier now proves
 all 105 fixtures, zero-failure closeout is complete, and strict recurring
-admission passes. Perl and Rust both pass; Dart/Julia remain the two gaps.
+admission passes. Perl and Rust both pass; later `.3.3.3` also admits Dart, so
+Julia is the sole remaining gap.
 
 `FUTURE-PARITY-BACKLOG.3.2.0` completes all-105 classification, `.3.2.1`
 closes the empty repair inventory, and `.3.2.2` completes recurring admission.

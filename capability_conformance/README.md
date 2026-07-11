@@ -41,5 +41,7 @@ coverage mapping. Generated source remains separately owned by `FUTURE-PARITY-BA
 why execution proof matters by exposing Perl's lost dependency indexes; `.3.1.2` repairs that mechanism and passes
 focused contract proof. Rust v1 identity/metadata/errors plus exact neutral plan/direct result/trace roles align.
 Admission `.3.1.3.3` promotes Perl to pass. Rust's staged full-manifest classifier is now an unconditional recurring
-105/105 gate, and `.3.2.2` admits it. Rust generated source passes. The current census is therefore 58 pass /
-zero partial / two gaps; Dart and Julia remain owned.
+105/105 gate, and `.3.2.2` admits it. Rust generated source passes. Dart `.3.3.1`/`.3.3.2` add deterministic
+emission and exact ten-family direct execution; `.3.3.3` binds the exact accepted eight-case list to recurring
+interpreter-first isolated host proof and admits Dart. The current census is therefore 59 pass / zero partial /
+one gap; Julia remains owned by `.3.4`.

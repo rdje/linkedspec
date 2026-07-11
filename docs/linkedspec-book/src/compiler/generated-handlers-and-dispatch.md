@@ -131,8 +131,15 @@ or bcode/blind structural executor; the plan is not merely descriptive.
 Generated traced execution adds `generated_rule_enter`,
 `generated_family_decision`, and `generated_rule_exit` beside Dart's richer
 native trace. One isolated host package compiles and runs all ten families
-against native interpreter values. Dart is still not admitted pass: the exact
-eight-case manifest subset remains the final interpreter-first admission slice.
+against native interpreter values.
+
+Dart admission now consumes the contract's exact eight-case list rather than
+copying a backend-local list. Every fixture—including staged user-function
+execution—must first equal its checked-in interpreter result. One isolated
+offline host package then analyzes and runs the eight emitted libraries with
+exact values, metadata, plans, portable trace roles, and source identity. The
+contract checker locks that test path and proof shape. Dart generated source is
+therefore admitted pass; Julia remains the only generated-source gap.
 
 ## Why this matters
 

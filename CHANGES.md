@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.3.3 — admit generated Dart source
+
+Added a recurring Dart admission test that reads the exact eight-case accepted subset from the executable
+generated-source contract and verifies every name remains in the 105-case manifest. Each fixture first parses
+through the ordinary or staged-function frontend, compiles, and returns its checked-in exact expected value through
+the native interpreter. Only then is contract-v1 Dart source emitted.
+
+The eight generated libraries are independently analyzed and run in one caller-owned offline package/private
+cache. The proof compares exact direct values, contract/version/source-identity metadata, and ordered plans, and
+locks the three portable trace roles plus fixture identity. The package and cache are recursively deleted. The
+contract now names this exact test path, and its checker locks count, contract-list consumption, interpreter-first
+comparison, v1 emission, host analyze/run, trace/identity, cleanup, and absence of a skip marker.
+
+Focused source-emitter proof passes 6/6. The complete Dart gate passes 181 tests, 61/61 default, 61/61 POSIX, and
+105/105 interpreter corpus. Promoted Dart generated source from gap to pass in both machine-readable sources;
+contract/capability census is now 59 pass / zero partial / one gap. Closed `.3.3`; Julia `.3.4.1` follows.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.3.2 — add Dart generated family execution
 
 Added Dart's exact contract-v1 generated plan: ordered public label/family rows, the ten neutral family names, and
