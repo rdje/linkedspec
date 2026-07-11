@@ -37,7 +37,7 @@
       "sources": ["docs/linkedspec-book/src/public-api/descriptor-introspection.md"],
       "gap_owner": "FUTURE-PARITY-BACKLOG.1.6.2",
       "backends": {
-        "perl": {"status": "partial", "references": ["perl/LinkedSpec.pm", "perl/LinkedSpec/CompilerState.pm", "t/phase0_regression.t"], "note": "The projection exists, but descriptor_model is the stale nested-state tag compiled_spec_state_v1 rather than the documented composing compiled_descriptor_state identity; .1.6.2.1 owns reconciliation."},
+        "perl": {"status": "pass", "references": ["perl/LinkedSpec.pm", "perl/LinkedSpec/CompilerState.pm", "t/phase0_regression.t"]},
         "rust": {"status": "gap", "references": ["rust/linkedspec-core/src/types.rs"], "note": "CompiledSpec is public and serializable but has no documented outward descriptor projection."},
         "dart": {"status": "pass", "references": ["dart/lib/src/compiler/compiled_spec.dart"]},
         "julia": {"status": "pass", "references": ["julia/src/compiler/CompiledSpec.jl"]}

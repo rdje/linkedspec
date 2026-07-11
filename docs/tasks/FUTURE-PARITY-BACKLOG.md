@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-11` (descriptor audit `.1.6.2.0` split stale Perl identity from Rust projection; `.1.6.2.1` active).
+- Last updated: `2026-07-11` (canonical descriptor identity `.1.6.2.1` closed; Rust projection `.1.6.2.2` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -965,16 +965,21 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.2.0 - split outward descriptor parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.2.1`
-  Status: `active`
+  Status: `done`
   Goal: Reconcile the canonical outward descriptor-model identity before adding Rust.
   Acceptance: Perl reports the documented composing descriptor-state identity and explicit nested model identities
     without changing rule/function/dependency payloads, parser behavior, or Dart/Julia values; focused descriptor
     locks, Phase 0, mdBook, census, and Knowledge Map agree.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `compiled_spec_state_meta(...)` now reports `descriptor_model = compiled_descriptor_state` and
+    explicit `compiled_spec_model = compiled_spec_state` / `compiled_dependency_regex_model =
+    compiled_dependency_regex_state`. The focused `return_descriptor` probe preserves exactly the four top-level
+    keys and verifies all three identities. Both former Phase 0 stale-tag locks now assert the composing identity
+    plus nested models; the complete Phase 0 suite passes `1..1030` in 509 seconds. Dart/Julia already expose the
+    same three values and were not changed.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.2.1 - reconcile descriptor model identity`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Add an idiomatic Rust outward descriptor projection over existing compiled state.
   Acceptance: Public Rust APIs project deterministic `spec`, `functions`, `dependency_regex_map`, and `meta`
     values, including rule dependency refs and preserved staged function metadata, without coupling callers to the
@@ -1256,8 +1261,8 @@ before implementation.
 | 43 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3` | `done` | Exact Julia anonymous/named capture values, rule-local code-unit marks with character projections, implicit AND result, 1,028 assertions, primary CLI, and 99 corpus pass; capture parent closes. |
 | 44 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5` | `done` | Corrected 239-name inventory, Perl-contract reverse check, six governed admissions, and exact 105/105 four-backend proof; `.1.6.1` closes. |
 | 45 | `FUTURE-PARITY-BACKLOG.1.6.2.0` | `done` | Toolbox/source audit found stale Perl descriptor-model identity and split reconciliation, Rust projection, and final admission. |
-| 46 | `FUTURE-PARITY-BACKLOG.1.6.2.1` | `active` | Reconcile the canonical outward descriptor-model identity before adding Rust. |
-| 47 | `FUTURE-PARITY-BACKLOG.1.6.2.2` | `pending` | Add Rust's idiomatic outward descriptor projection. |
+| 46 | `FUTURE-PARITY-BACKLOG.1.6.2.1` | `done` | Perl now reports the composing descriptor state plus explicit nested model identities; Phase 0 `1..1030` passes. |
+| 47 | `FUTURE-PARITY-BACKLOG.1.6.2.2` | `active` | Add Rust's idiomatic outward descriptor projection. |
 | 48 | `FUTURE-PARITY-BACKLOG.1.6.2.3` | `pending` | Prove/admit four-backend descriptor parity and close `.1.6.2`. |
 | 49 | `FUTURE-PARITY-BACKLOG.1.6.3` | `pending` | Add structured Rust native runtime diagnostics. |
 | 50 | `FUTURE-PARITY-BACKLOG.1.6.4` | `pending` | Add native named/file resolution to Rust, Dart, and Julia. |

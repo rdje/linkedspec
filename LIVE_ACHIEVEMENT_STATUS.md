@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.2.1 — reconcile descriptor model identity**
+  (DONE — Perl/Dart/Julia identity aligned; Rust projection `.1.6.2.2` active).
+
+  **Implementation:** Perl now reports `compiled_descriptor_state` as the outward model and explicitly names its
+  `compiled_spec_state` / `compiled_dependency_regex_state` components. No descriptor payload or parser behavior
+  changed.
+
+  **Proof:** Exact four-key/model probe, syntax, and full Phase 0 `1..1030` pass in 509 seconds. The census returns
+  to 51 pass / one partial / eight gap.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.2.0 — split outward descriptor parity**
   (DONE — canonical descriptor identity `.1.6.2.1` active before Rust projection).
 

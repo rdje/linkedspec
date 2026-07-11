@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.2.1 — name composed and nested models independently):
+  One metadata field cannot accurately identify both an outward composed object and one of its components. Keep
+  `descriptor_model` for the public composition, then expose `compiled_spec_model` and
+  `compiled_dependency_regex_model` for nested identities. This removes ambiguity without renaming internal data
+  structures or forcing tools to infer ownership from implementation history.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.2.0 — probe the reference, but canonicalize by field meaning):
   A reference backend can preserve an obsolete metadata label even when its internal architecture has moved on.
   `descriptor_model` describes the public object being projected, so the composing `compiled_descriptor_state`

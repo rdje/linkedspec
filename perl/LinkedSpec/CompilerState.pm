@@ -157,7 +157,9 @@ sub compiled_spec_state_meta {
  my ($state) = @_;
  return {} unless is_compiled_spec_state($state);
  return {
-  descriptor_model => 'compiled_spec_state_v1',
+  descriptor_model => 'compiled_descriptor_state',
+  compiled_spec_model => 'compiled_spec_state',
+  compiled_dependency_regex_model => 'compiled_dependency_regex_state',
   definition_order => [map { $_->{label} } @{compiled_spec_state_definition_order($state)}],
   compiled_rule_order => [@{$state->{compiled_rule_order}}],
   redefined_rule_labels => [@{$state->{redefined_rule_labels}}],

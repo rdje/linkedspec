@@ -237,8 +237,7 @@ The outward descriptor is a projection of those models for public/tooling consum
 
 That distinction is important. The public descriptor is useful, but it is not the same thing as saying the compiler should reason from loose historical parallel hashes internally.
 
-Perl, Dart, and Julia expose the top-level projection, but the `.1.6.2.0` executable audit found one metadata drift:
-Perl currently returns the older nested-state tag `compiled_spec_state_v1` in `meta.descriptor_model`, whereas the
-documented composing owner and Dart/Julia value are `compiled_descriptor_state`. `.1.6.2.1` owns that reconciliation.
-Rust publicly exposes serializable `CompiledSpec` but not the outward projection; `.1.6.2.2` owns it, and `.1.6.2.3`
-owns final four-backend admission.
+Perl, Dart, and Julia expose the top-level projection with the same model identities: `descriptor_model` names the
+composing `compiled_descriptor_state`, while `compiled_spec_model` and `compiled_dependency_regex_model` name its
+two nested states. Rust publicly exposes serializable `CompiledSpec` but not the outward projection;
+`.1.6.2.2` owns it, and `.1.6.2.3` owns final four-backend admission.

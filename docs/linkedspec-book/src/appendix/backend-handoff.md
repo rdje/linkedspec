@@ -574,13 +574,12 @@ broader current census lives in `capability_conformance/manifest.json` and is ch
 perl tools/check_capability_conformance.pl
 ```
 
-The current audit contains 15 capabilities x four implemented backends. After the descriptor-model probe exposed
-one stale Perl metadata value, its 60 states are 50 pass, two partial states, and eight gaps. Each non-pass state
-has one durable owner:
+The current audit contains 15 capabilities x four implemented backends. After descriptor-model reconciliation,
+its 60 states are 51 pass, one partial state, and eight gaps. Each non-pass state has one durable owner:
 
 | Residual mechanism | Current classification | Owner |
 | --- | --- | --- |
-| Outward compiled descriptor | Perl, Dart, and Julia expose the projection, but Perl's outward model tag names the nested compiled-spec state; Rust exposes `CompiledSpec` without the projection. | `.1.6.2.1`–`.1.6.2.3` |
+| Outward compiled descriptor | Perl, Dart, and Julia expose the documented projection and aligned model identities; Rust exposes `CompiledSpec` without the projection. | `.1.6.2.2`–`.1.6.2.3` |
 | Structured native runtime diagnostics | Perl, Dart, and Julia expose structured attribution; Rust runtime errors remain string payloads. | `.1.6.3` |
 | Native named/file resolution | Perl `get_parser(...)` owns the book's file-oriented role; Rust, Dart, and Julia currently keep named resolution in process adapters. | `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, and Julia propagate a caller-owned emitter through frontend/compiler/staged/runtime phases; Dart begins at the interpreter. | `.1.6.5` |

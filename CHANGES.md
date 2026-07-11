@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.2.1 — reconcile descriptor model identity
+
+**Canonical metadata:** Perl outward descriptors now identify the composing `compiled_descriptor_state` and name
+their nested `compiled_spec_state` and `compiled_dependency_regex_state` models explicitly. This matches the
+mdBook plus Dart/Julia without changing the four top-level keys or any rule, function, dependency, parser, trace,
+or generated-source payload.
+
+**Proof/frontier:** The focused `return_descriptor` probe verifies the exact four-key surface and all three model
+identities. Both former stale-tag Phase 0 locks now assert the composing and nested identities; the complete suite
+passes `1..1030` in 509 seconds. The census returns to 51 pass / one partial / eight gap, the drift card is resolved,
+and Rust projection `.1.6.2.2` becomes active.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.2.0 — split outward descriptor parity
 
 **Toolbox audit:** The Perl reference probe confirms the outward top-level keys are `spec`, `functions`,

@@ -12047,7 +12047,7 @@ SPEC
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'descriptor returned without the legacy compiler bootstrap helper still preserves compiled handler coderef');
 };
 subtest 'run_get_pipeline_defers_default_build_dependency_regex_map_callback_to_final_descr_owner' => sub {
-    plan tests => 8;
+    plan tests => 10;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -12102,7 +12102,9 @@ SPEC
     ok($saw_compiled_rule_order, 'compiled-spec state forwarded into final descriptor state assembly preserves deterministic compiled rule order');
     ok(defined($descr) && ref($descr) eq 'HASH', 'compiler pipeline still returns descriptor hash when final descriptor state owner supplies build_dependency_regex_map');
     ok(ref($descr->{spec}{Top}{handler}) eq 'CODE', 'final descriptor state assembly still preserves compiled handler coderef');
-    is($descr->{meta}{descriptor_model}, 'compiled_spec_state_v1', 'final descriptor metadata records the compiled-spec state model');
+    is($descr->{meta}{descriptor_model}, 'compiled_descriptor_state', 'final descriptor metadata records the composing descriptor-state model');
+    is($descr->{meta}{compiled_spec_model}, 'compiled_spec_state', 'final descriptor metadata names the nested compiled-spec state model explicitly');
+    is($descr->{meta}{compiled_dependency_regex_model}, 'compiled_dependency_regex_state', 'final descriptor metadata names the nested dependency-regex state model explicitly');
 };
 subtest 'run_get_pipeline_validates_compiled_descriptor_state_directly' => sub {
     plan tests => 7;
@@ -43782,7 +43784,7 @@ PERL
 };
 
 subtest 'return_descriptor_exposes_parse_mode_metadata_and_consume_parser_source' => sub {
-    plan tests => 10;
+    plan tests => 12;
 
     my $spec_content = <<'SPEC';
 Top::
@@ -43792,7 +43794,9 @@ SPEC
     my $default_descr = LinkedSpec::Get(\$spec_content, return_descriptor => 1);
     ok(defined($default_descr) && ref($default_descr) eq 'HASH', 'default parse mode return_descriptor still builds descriptor hash');
     is($default_descr->{meta}{parse_mode}, 'seek', 'default parse mode is recorded as seek in descriptor metadata');
-    is($default_descr->{meta}{descriptor_model}, 'compiled_spec_state_v1', 'default parse mode descriptor records the compiled-spec state model');
+    is($default_descr->{meta}{descriptor_model}, 'compiled_descriptor_state', 'default parse mode descriptor records the composing descriptor-state model');
+    is($default_descr->{meta}{compiled_spec_model}, 'compiled_spec_state', 'default descriptor identifies its nested compiled-spec model');
+    is($default_descr->{meta}{compiled_dependency_regex_model}, 'compiled_dependency_regex_state', 'default descriptor identifies its nested dependency-regex model');
     is_deeply($default_descr->{meta}{definition_order}, ['Top'], 'default parse mode descriptor preserves definition-order metadata');
     is_deeply($default_descr->{meta}{compiled_rule_order}, ['Top'], 'default parse mode descriptor preserves deterministic compiled-rule-order metadata');
     is_deeply($default_descr->{meta}{redefined_rule_labels}, [], 'default parse mode descriptor preserves redefined-rule metadata');

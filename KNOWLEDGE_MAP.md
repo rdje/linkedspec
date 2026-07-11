@@ -4301,7 +4301,7 @@ _Resolved: Perl newline-separated statement after endswitch receives the require
 _Perl outward descriptor metadata names the nested spec state instead of its composing descriptor state_
 
 - **answers:** why does Perl descriptor_model differ from Dart and Julia | what does Perl return_descriptor report for descriptor_model | is Perl's internal descriptor owner actually compiled_descriptor_state | which leaf reconciles outward descriptor model identity | why is Rust descriptor projection split before implementation
-- **date:** 2026-07-11 · **status:** tracked-gap
+- **date:** 2026-07-11 · **status:** resolved
 - **evidence:** `FUTURE-PARITY-BACKLOG.1.6.2.0. A LinkedSpec::Get(..., return_descriptor=>1) toolbox probe returns top-level spec/functions/dependency_regex_map/meta and meta.descriptor_model=compiled_spec_state_v1. perl/LinkedSpec/CompilerState.pm build_compiled_descriptor_meta delegates to compiled_spec_state_meta, which stamps that value, even though new_compiled_descriptor_state constructs kind=compiled_descriptor_state and owns final projection. The mdBook, Dart, and Julia expose compiled_descriptor_state. Phase 0 lines 12105 and 43795 explicitly lock the stale Perl value.`
 - **reverify:** `perl -Iperl -MLinkedSpec -e 'my $s=qq{Top::\\n /x/\\n}; my $d=LinkedSpec::Get(\\$s, return_descriptor=>1); print $d->{meta}{descriptor_model}, qq{\\n}' && rg -n 'descriptor_model|new_compiled_descriptor_state' perl/LinkedSpec/CompilerState.pm dart/lib/src/compiler/compiled_spec.dart julia/src/compiler/CompiledSpec.jl t/phase0_regression.t docs/linkedspec-book/src/public-api/descriptor-introspection.md`
 - **source:** [`docs/knowledge/perl-outward-descriptor-model-tag-drift.md`](docs/knowledge/perl-outward-descriptor-model-tag-drift.md)
