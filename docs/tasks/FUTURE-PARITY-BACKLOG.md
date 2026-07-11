@@ -1411,11 +1411,153 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.3`
   Status: `active`
   Goal: Close generated-source capability parity beyond the current interpreter-first correctness gates.
+  Children: `.3.0`, `.3.1`, `.3.2`, `.3.3`, `.3.4`, `.3.5`
   Acceptance: Split Rust full-manifest breadth and separate Dart/Julia source-emitter proofs before code. Each
     non-Rust emitter lane must own a minimal emitter scaffold plus compile/run harness, typed generated-family plan,
     direct structural-family execution, and curated manifest-backed corpus subset. Rust exports source emission as
     a public runtime-crate capability, so ADR `0023` makes equivalent capability mandatory before Dart/Julia/Lua can
     claim complete user-visible parity; interpreter parity remains the primary correctness gate.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.0`
+  Status: `done`
+  Goal: Audit and split generated-source parity before implementation.
+  Acceptance: Read the canonical Knowledge Map facts first; inspect Perl reference generation, the public Rust
+    emitter/export, its isolated compile/run harness and exact manifest subset, and Dart/Julia source trees; record
+    the current 105-fixture boundary; create separate neutral-contract, Rust-breadth, Dart-emitter, Julia-emitter,
+    and final-admission owners without changing parser/compiler/runtime behavior or capability status.
+  Verification: **PASS 2026-07-11.** Source-backed audit proves Perl passes; Rust publicly emits a standalone module,
+    validates a typed family plan, directly runs all current structural families, and compile/runs only eight named
+    manifest fixtures; Dart and Julia expose no source emitter. Knowledge Map, task/live/roadmap/book, governance,
+    whitespace, and mdBook checks pass; generated artifacts are removed. Census remains 57/1/2.
+  Commit: `FUTURE-PARITY-BACKLOG.3.0 - split generated-source parity`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.1`
+  Status: `active`
+  Goal: Define the executable backend-neutral generated-source contract before backend code.
+  Acceptance: Ratify a versioned contract and neutral fixtures for source emission from a compiled `.spec`,
+    host-language compile/load, direct generated execution, exact canonical result and diagnostic/source identity,
+    trace entry, structural-family metadata, malformed-plan rejection, and manifest-backed proof. Host APIs and
+    emitted bytes may remain idiomatic/backend-native under ADR `0023`; observable capability and behavior may not
+    differ. Keep the 105-case interpreter corpus as the primary oracle and prove Perl's current pass baseline.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.2`
+  Status: `pending`
+  Goal: Expand Rust generated-source proof from eight curated fixtures to the complete 105-case manifest.
+  Children: `.3.2.0`, `.3.2.1`, `.3.2.2`
+  Acceptance: Reuse the neutral contract and existing public emitter/family-plan path; do not weaken or replace the
+    interpreter oracle. Classify the full manifest first, recursively split every discovered failure by mechanism
+    before repair code, then compile/run generated Rust source for all 105 fixtures with exact expected values.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.2.0`
+  Status: `pending`
+  Goal: Add a scalable full-manifest Rust generated-source classifier.
+  Acceptance: Drive all 105 checked-in fixtures through parse/validate/compile/interpreter-oracle/emit/isolated
+    compile/run; report deterministic per-case stages without silently skipping failures; retain the existing
+    synthetic all-family matrix and eight-case proof while classification is active.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.2.1`
+  Status: `pending`
+  Goal: Own classification and recursive repair splitting, not unsplit fixes.
+  Acceptance: Classify every `.3.2.0` failure by exact source-emitter, generated-plan, generated-executor,
+    dependency/build, or fixture-contract mechanism. Add bounded child leaves before changing behavior; if no
+    failures exist, record that result and close without behavior code.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.2.2`
+  Status: `pending`
+  Goal: Admit complete Rust generated-source manifest breadth.
+  Acceptance: Every recursively split repair is closed; all 105 fixtures compile and run generated Rust source with
+    exact oracle values; the synthetic family matrix, full interpreter gate, trace/source identity, complete Rust
+    local gate, docs, Knowledge Map, and artifact cleanup pass before Rust promotes from partial to pass.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.3`
+  Status: `pending`
+  Goal: Add public generated Dart source with direct structural execution and proof.
+  Children: `.3.3.1`, `.3.3.2`, `.3.3.3`
+  Acceptance: Implement only after `.3.1`; preserve native interpreter behavior and exact CLI parity while exposing
+    an idiomatic Dart API equivalent to the neutral generated-source contract.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.3.1`
+  Status: `pending`
+  Goal: Add the public Dart emitter scaffold and isolated compile/run harness.
+  Acceptance: Emit deterministic Dart source from compiled state, load/compile it in a caller-owned temporary
+    package without repository build leakage, execute a minimal parser entrypoint, prove stable format/version and
+    failures, and clean generated packages/caches.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.3.2`
+  Status: `pending`
+  Goal: Add Dart typed family-plan metadata and direct generated structural execution.
+  Acceptance: Cover every current default/OR/AND/repetition acode/bcode family, validate label/family plans before
+    execution, retain trace and diagnostic/source identity, and compile/run a synthetic all-family matrix.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.3.3`
+  Status: `pending`
+  Goal: Admit generated Dart source against manifest-backed oracle fixtures.
+  Acceptance: Run the neutral curated subset through interpreter-first exact comparison, emitted-source
+    compile/run, complete Dart gates, docs/KM/no-drift, and cleanup; promote Dart's generated-source gap only after
+    all contract families pass.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.4`
+  Status: `pending`
+  Goal: Add public generated Julia source with direct structural execution and proof.
+  Children: `.3.4.1`, `.3.4.2`, `.3.4.3`
+  Acceptance: Implement only after `.3.1`; preserve native interpreter behavior and exact CLI parity while exposing
+    an idiomatic Julia API equivalent to the neutral generated-source contract.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.4.1`
+  Status: `pending`
+  Goal: Add the public Julia emitter scaffold and isolated include/compile-run harness.
+  Acceptance: Emit deterministic Julia source from compiled state, include/load it in caller-owned isolation,
+    execute a minimal parser entrypoint, prove stable format/version and failures, respect depot/artifact boundaries,
+    and clean only generated task-owned files.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.4.2`
+  Status: `pending`
+  Goal: Add Julia typed family-plan metadata and direct generated structural execution.
+  Acceptance: Cover every current default/OR/AND/repetition acode/bcode family, validate label/family plans before
+    execution, retain trace and diagnostic/source identity, and run a synthetic all-family matrix directly.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.4.3`
+  Status: `pending`
+  Goal: Admit generated Julia source against manifest-backed oracle fixtures.
+  Acceptance: Run the neutral curated subset through interpreter-first exact comparison, emitted-source
+    include/compile-run, complete Julia gates, docs/KM/no-drift, and cleanup; promote Julia's generated-source gap
+    only after all contract families pass.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.3.5`
+  Status: `pending`
+  Goal: Admit exact generated-source parity across all four implemented backends.
+  Acceptance: Perl, Rust, Dart, and Julia satisfy the same versioned neutral contract; Rust proves all 105 manifest
+    fixtures and Dart/Julia prove the accepted manifest subset plus all structural families; full backend gates,
+    capability checker, docs/book/KM/roadmap, and artifact cleanup pass; promote the census to 60/0/0, close `.3`,
+    and only then activate Lua `.1.3`.
   Verification: `pending`
   Commit: `pending`
 
@@ -1640,19 +1782,22 @@ before implementation.
 | 55 | `FUTURE-PARITY-BACKLOG.1.6.5.2` | `done` | Function parser/shell and staged queue/job/phase/stitch trace pass 172 tests, 61x2 CLI, and 105 corpus. |
 | 56 | `FUTURE-PARITY-BACKLOG.1.6.5.3` | `done` | Native IO-through-runtime routed proof passes; Dart trace promotes to pass at census 57/1/2; parent closes. |
 | 57 | `FUTURE-PARITY-BACKLOG.1.6.6` | `done` | Exactly three generated-source states remain at 57/1/2; non-codegen `.1.6` closes and `.3` activates. |
-| 58 | `FUTURE-PARITY-BACKLOG.3` | `active` | Split Rust breadth and Dart/Julia generated-source implementation before emitter code. |
-| 55 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
-| 55 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
-| 56 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
-| 57 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
-| 58 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
-| 57 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
-| 58 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
-| 59 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
-| 60 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
-| 61 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
-| 62 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
-| 60 | `FUTURE-PARITY-BACKLOG.11.1` | `pending` | Director's generic final-codeblock argument correction is parked behind the active UTF-8/CLI frontier. |
+| 58 | `FUTURE-PARITY-BACKLOG.3.0` | `done` | Perl/Rust/Dart/Julia source evidence is audited and five implementation/admission lanes are split. |
+| 59 | `FUTURE-PARITY-BACKLOG.3.1` | `active` | Fix one executable neutral generated-source contract before backend behavior code. |
+| 60 | `FUTURE-PARITY-BACKLOG.3.2` | `pending` | Rust must expand from eight generated fixtures to the full 105-case manifest. |
+| 61 | `FUTURE-PARITY-BACKLOG.3.3` | `pending` | Dart needs emitter scaffold, family plan/direct execution, and manifest proof. |
+| 62 | `FUTURE-PARITY-BACKLOG.3.4` | `pending` | Julia needs emitter scaffold, family plan/direct execution, and manifest proof. |
+| 63 | `FUTURE-PARITY-BACKLOG.3.5` | `pending` | Exact four-backend admission promotes 57/1/2 only after every generated-source proof passes. |
+| 64 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 65 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
+| 66 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
+| 67 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
+| 68 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
+| 69 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
+| 70 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
+| 71 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
+| 72 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
+| 73 | `FUTURE-PARITY-BACKLOG.11.1` | `pending` | Director's generic final-codeblock argument correction is parked behind generated-source convergence. |
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.6.1` Neutral Hex-Byte Fixture Materialization
 
@@ -2236,15 +2381,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None blocking `.1.6.1`: exact four-backend CLI parity is closed. Lua `.1.3` remains gated until implemented
-  backends close capability convergence, including `.1.6`-split gaps and generated source under `.3`.
+- None blocking `.3.1`: exact CLI and non-codegen parity are closed. Lua `.1.3` remains gated until the neutral
+  generated-source contract, Rust full-manifest breadth, Dart/Julia emitters, and exact `.3.5` admission close.
 - Parked `.11.1` must decide public `harray` versus current `hash` terminology and retain/migrate/remove `with`;
   neither question blocks `.1.5.1.6.3` and neither is silently decided by capture leaf `.11.0`.
 
 ## Blockers
 
-- None. Perl, Rust, Dart, and Julia are closed at the same 61 primary CLI cases in default/POSIX environments.
-  Neutral mdBook capability proof `.1.6.1` is active; later residual repairs and generated-source `.3` precede Lua.
+- None. Perl, Rust, Dart, and Julia are closed at the same 61 primary CLI cases in default/POSIX environments and
+  105 interpreter fixtures. Executable neutral generated-source contract `.3.1` is active before backend code.
 
 ## Verification Log
 
@@ -2300,6 +2445,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.5.2` | Four focused full-topic/balance/identity/quiet/failure tests; strict analysis; complete Dart gate with 172 tests, 61x2 CLI, and 105 corpus; docs/KM/governance/whitespace/mdBook/cleanup. | PASS. Function/staged trace lands without diagnostic drift; admission `.3` active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.5.3` | Three direct routed/quiet/failure native tests; 22 affected tests; format; strict analysis; complete Dart gate with 175 tests, 61x2 CLI, and 105 corpus; canonical core 61x2 CLI plus Phase 0 `1..1030` in 514s; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Dart full-pipeline trace promotes to pass at 57/1/2; parent closes; `.1.6.6` active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.6` | Direct non-pass projection; 57/1/2 checker; immediately prior complete Dart/core gates; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Only Rust/Dart/Julia generated-source states remain, all owned by `.3`; non-codegen `.1.6` closes and `.3` activates. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.0` | Knowledge Map-first source audit of Perl reference emission, public Rust emitter/family plan/isolated crate/eight-case subset, Dart/Julia source absence, 105-case manifest boundary; docs/KM/governance/whitespace/mdBook/cleanup. | PASS. Neutral contract, Rust breadth, Dart, Julia, and admission lanes are split before behavior code; census remains 57/1/2 and `.3.1` is active. |
 
 ## Commit Log
 
@@ -2355,6 +2501,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.6.5.2` | `FUTURE-PARITY-BACKLOG.1.6.5.2 - trace Dart function staging` | Caller emitter through parser shell/runtime, projection, staged queue/jobs/phases/stitching, failures, and full proof. |
 | `FUTURE-PARITY-BACKLOG.1.6.5.3` | `FUTURE-PARITY-BACKLOG.1.6.5.3 - admit Dart full-pipeline trace` | Native IO-to-runtime routed/quiet/failure identity, full gates, capability promotion, and parent closeout. |
 | `FUTURE-PARITY-BACKLOG.1.6.6` | `FUTURE-PARITY-BACKLOG.1.6.6 - close non-codegen capability parity` | Exact residual projection, generated-source-only handoff, parent closeout, no behavior change. |
+| `FUTURE-PARITY-BACKLOG.3.0` | `FUTURE-PARITY-BACKLOG.3.0 - split generated-source parity` | Source-backed current boundary and contract/Rust/Dart/Julia/admission split; no behavior code. |
 
 ## Changelog
 
@@ -2373,6 +2520,11 @@ Read-only evidence recorded on 2026-07-10:
 - `2026-07-11`: `.1.6.6` projects exactly three non-pass states, all generated source and all owned by `.3`. The
   strict 57/1/2 checker and adjacent full gates pass; no behavior/status value changes. Non-codegen `.1.6` closes
   without overclaiming complete parity, and generated-source `.3` becomes active.
+- `2026-07-11`: `.3.0` proves the exact generated-source boundary: Perl passes; Rust exposes a versioned standalone
+  module emitter, validated family plan, direct all-family execution, and isolated compile/run, but its manifest
+  proof names only eight of 105 cases; Dart and Julia contain no emitter. The task is split into neutral contract,
+  Rust breadth/classification, Dart, Julia, and final admission lanes. No behavior/status value changes; `.3.1` is
+  active at census 57/1/2.
 - `2026-07-11`: `.1.6.4.5` adds Perl's separate portable `SpecLoader` facade and direct 14/9/4 plus pipeline proof
   without changing legacy `get_parser`/`PathSearch`. The canonical core gate passes the required new test, 239-name
   coverage, focused suites, 61x2 CLI, and Phase 0 `1..1030` in 556 seconds. Combined with immediately prior full

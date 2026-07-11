@@ -172,7 +172,8 @@ Top-level directories and files:
     `.1.5.4.2` adds the independent canonical trace while preserving native rich trace. Current proof is 1,040
     assertions plus 105/105 and 61/61 default/POSIX. `.1.5.4.3` closes exact four-backend CLI identity with one
     recurring warmed 4x2x61 driver; exhaustive current-surface `.1.6.1` and exact descriptors `.1.6.2` are closed, and
-    generated-source parity remains `.3`.
+    generated-source `.3.0` is now audited/split; neutral contract `.3.1` is active before Rust full-manifest,
+    Dart, Julia, and exact-admission implementation.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.
@@ -202,7 +203,8 @@ Top-level project docs:
 - Run `bash tools/run_ci_local.sh` from the repo root to execute the canonical regression gate.
 - Run `perl tools/check_capability_conformance.pl` to validate the current 15-capability backend census, evidence
   paths, and gap ownership. The current audit records 57 pass, one partial-proof, and two gap backend states;
-  non-codegen `.1.6` is closed; the one partial and two gaps are generated-source states owned by active `.3`.
+  non-codegen `.1.6` is closed; the one partial and two gaps are generated-source states split into active neutral
+  contract `.3.1`, Rust 105-case breadth `.3.2`, Dart `.3.3`, Julia `.3.4`, and final admission `.3.5`.
 - Run `perl tools/check_native_spec_resolution_contract.pl` to validate the versioned file-oriented native API
   schema: portable names, exact paths, declared-order roots, regular-file selection, strict UTF-8, pipeline stages,
   and structured errors. `prove -Iperl t/native_spec_resolution.t` consumes the same fixture through Perl's public
@@ -219,7 +221,8 @@ Top-level project docs:
   attribution, compatibility adapters, and final recurring admission are closed under `.1.6.3`. Native named/file
   resolution `.1.6.4` is audited and split; `.1.6.4.1` fixes its deterministic ordered-root contract, while Rust,
   Dart, and Julia native APIs `.1.6.4.2-.4` pass; Perl direct proof and final admission `.1.6.4.5` close the parent.
-  Dart full-pipeline trace `.1.6.5` and non-codegen closeout `.1.6.6` are closed; generated-source `.3` is active.
+  Dart full-pipeline trace `.1.6.5` and non-codegen closeout `.1.6.6` are closed; generated-source `.3.0` has
+  audited/split the exact boundary and neutral executable contract `.3.1` is active.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
   {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven baseline success, four baseline
@@ -234,7 +237,8 @@ Top-level project docs:
   the unchanged 61-case suite under both environments. Exact CLI lane `.1.5` and exhaustive current-surface
   `.1.6.1`, exact outward descriptors `.1.6.2`, and structured diagnostics `.1.6.3` are closed; native resolution
   native resolution `.1.6.4`, Dart full-pipeline trace `.1.6.5`, and non-codegen `.1.6.6` are closed; only
-  generated-source `.3` remains in the current capability census.
+  generated-source `.3` remains in the current capability census; `.3.1` fixes the shared executable contract
+  before Rust `.3.2`, Dart `.3.3`, Julia `.3.4`, and exact admission `.3.5`.
 - Deep semantic introspection plus MCP is parked under `FUTURE-PARITY-BACKLOG.10.1`: native backend APIs own one
   versioned semantic model, while MCP remains a thin transport rather than a backend-specific source of truth.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full

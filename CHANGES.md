@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.0 — split generated-source parity
+
+Audited the only remaining capability mechanism from its canonical facts and source. Perl is the passing reference.
+Rust publicly emits versioned standalone modules with serialized compiled state, a validated typed rule-family
+plan, direct execution for all current structural families, and isolated temporary-crate compile/run proof. Its
+manifest-backed test still names exactly eight fixtures while the interpreter corpus contains 105. Dart and Julia
+library/test trees contain no source emitter.
+
+Split implementation into a neutral executable contract, Rust full-manifest classification/recursive repair/
+admission, three-stage Dart and Julia emitter lanes, and final four-backend admission. Updated stale 99-case fact
+text to 105 and synchronized task, roadmap, live, README, public book, and Knowledge Map state. No behavior or
+capability value changed; census remains 57/1/2 and `.3.1` is active.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.6 — close non-codegen capability parity
 
 Projected every non-pass state from the validated 15x4 capability manifest. Exactly three remain, all under

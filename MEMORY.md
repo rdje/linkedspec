@@ -18,19 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.6` — closed all non-codegen capability parity.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.5.3` — admitted Dart full-pipeline native trace.
-- recent_context: Census remains 57/1/2. Its only non-pass states are generated parser source: Rust partial and
-  Dart/Julia gaps, all owned by `.3`. All language/runtime/API/CLI/non-codegen rows pass across four implemented
-  variants. `.1.6` is closed; generated-source `.3` is active; complete backend parity is not yet claimed.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.0` — audited and split generated-source parity.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.6` — closed all non-codegen capability parity.
+- recent_context: Census remains 57/1/2. Perl generated source passes; Rust has public versioned emission, validated
+  typed family plans, direct all-family execution, and isolated compile/run but only eight of 105 manifest cases;
+  Dart/Julia have no emitter. `.3.0` split neutral `.3.1`, Rust `.3.2`, Dart `.3.3`, Julia `.3.4`, admission `.3.5`.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.6 - close non-codegen capability parity`; previous committed HEAD is
-  `8db00d6d FUTURE-PARITY-BACKLOG.1.6.5.3 - admit Dart full-pipeline trace`.
+  `FUTURE-PARITY-BACKLOG.3.0 - split generated-source parity`; previous committed HEAD is
+  `72530b78 FUTURE-PARITY-BACKLOG.1.6.6 - close non-codegen capability parity`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.3` generated-source capability parity is active.
-- next_action: audit current Perl/Rust emitter and generated execution evidence, then split Rust full-manifest proof,
-  Dart emitter/compile-run, Julia emitter/compile-run, shared contract, and final admission before behavior code.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.3.1`; executable neutral generated-source contract is active.
+- next_action: define the versioned language-neutral generated-source fixture/schema and executable Perl/Rust
+  baseline for emission, host compile/load, direct result/diagnostic/source identity, trace, family-plan validation,
+  and manifest proof without requiring byte-identical host source or weakening the 105-case interpreter oracle.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

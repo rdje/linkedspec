@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.3.0 — split generated-source parity**
+  (DONE — exact boundary recorded; neutral contract `.3.1` active).
+
+  **Finding:** Perl passes. Rust has a public versioned emitter, validated typed family plan, direct all-family
+  execution, and isolated compile/run, but its manifest test covers only eight of 105 fixtures. Dart and Julia
+  have no source emitter.
+
+  **Split/proof:** `.3.1` owns the executable neutral contract; `.3.2` Rust full-manifest classification/repair/
+  admission; `.3.3` Dart; `.3.4` Julia; `.3.5` exact admission. Source/KM/task/book/governance checks pass; no
+  behavior/status value changed and census remains 57/1/2.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.6 — close non-codegen capability parity**
   (DONE — `.1.6` closed; generated-source `.3` active).
 

@@ -581,7 +581,7 @@ its 60 states are 57 pass, one partial state, and two gaps. Each non-pass state 
 | --- | --- | --- |
 | Native named/file resolution | ADR `0026` and the 14/9/4 fixture fix portable names, exact paths, ordered roots, strict UTF-8, and typed stages. Perl, Rust, Dart, and Julia consume the contract directly; exact admission is closed. | closed `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, Dart, and Julia propagate a caller-owned emitter through frontend/compiler/function/staged/runtime phases. Dart's direct routed/quiet/failure proof and recurring gates are admitted. | closed `.1.6.5` |
-| Generated parser source | Perl passes; Rust proof is a curated subset; Dart and Julia have no emitter. | `FUTURE-PARITY-BACKLOG.3` |
+| Generated parser source | Perl passes; Rust has direct all-family execution but only eight of 105 manifest fixtures; Dart and Julia have no emitter. | `.3.1` neutral contract; `.3.2` Rust; `.3.3` Dart; `.3.4` Julia; `.3.5` admission |
 
 Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, generic final-
 codeblock equivalence, and the not-yet-implemented Lua backend are explicit exclusions/future owners rather than
@@ -590,6 +590,14 @@ silent gaps. No backend is called complete while a current matrix state remains 
 `FUTURE-PARITY-BACKLOG.1.6.6` closes the non-codegen census without claiming complete backend parity. At 57/1/2,
 the only non-pass capability is generated parser source: Rust has structural-family execution with curated rather
 than full-manifest proof, and Dart/Julia have no source emitter. Active `.3` owns all three states.
+
+`FUTURE-PARITY-BACKLOG.3.0` turns that broad owner into an executable order. `.3.1` first fixes a versioned neutral
+contract for emission, host compile/load, direct generated execution, exact result/error/source identity, trace,
+family-plan validation, and manifest proof. `.3.2` then classifies and expands Rust from the named eight-case subset
+to all 105 fixtures, splitting any failures before repair. `.3.3` and `.3.4` add equivalent Dart and Julia source
+emitters in scaffold, direct-family, and corpus-proof slices. `.3.5` alone may promote 57/1/2 to 60/0/0. Because
+the artifacts are host-language source, byte identity is not required; ADR `0023` requires equivalent operations
+and observable behavior through idiomatic host APIs.
 
 Outward compiled descriptors are closed: all four variants expose the exact `spec` / `functions` /
 `dependency_regex_map` / `meta` projection, aligned model identities, and the canonical outer function record

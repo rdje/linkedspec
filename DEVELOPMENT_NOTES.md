@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.0 — contract first, then classify breadth):
+  Generated source is one user capability implemented in different host languages, so parity cannot mean
+  byte-identical source. Under ADR `0023`, fix equivalent emission, compile/load, direct execution, results,
+  diagnostics, trace, identity, family-plan validation, and manifest proof while letting APIs/source syntax remain
+  idiomatic. Keep structural-family proof distinct from corpus breadth: Rust's synthetic matrix covers all current
+  families, yet only eight named fixtures compile/run through generated source versus 105 on the interpreter path.
+  Add a scalable full-manifest classifier before fixes, recursively split any failure mechanisms, and never replace
+  or weaken the interpreter oracle. Dart and Julia each need scaffold/harness, family-plan execution, and corpus
+  admission as separate commits; final capability promotion belongs to one later four-backend closeout.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.6 — close a capability class, not complete parity):
   A 57/1/2 census can close non-codegen work only after direct enumeration proves every non-pass state belongs to
   generated source and carries the same durable owner. Keep the distinction explicit: current interpreter/runtime/
