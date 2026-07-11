@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1 — preserve value kind and call context separately):
+  A typed source boolean and a predicate's historical Perl truth value are both truthy but serialize differently;
+  keep literals as booleans and return numeric `1`/`0` from the exact predicate family. Likewise, an array helper
+  can be pure in value/receiver context yet mutate an explicit `array(name)` when used as a standalone statement.
+  Detect that statement shape before generic expression evaluation, and make direct literals honor explicit flat
+  splice nodes instead of nesting their returned array.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.0 — vocabulary identity is not semantic parity):
   A current-call inventory proves discovery/contract-table breadth only. Pair it with exact-value execution or a
   backend can recognize a helper while returning the wrong value kind, treating a mutation as pure, selecting the

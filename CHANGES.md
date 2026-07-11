@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1 — align Rust pure helper values
+
+**Exact values:** Rust string/array/hash/numeric predicates exercised by the governed pure fixture now return
+numeric `1`/`0`, distinct from typed literal booleans. Explicit `flat(...)` calls splice inside direct array
+literals. Standalone `trim_each`/`lowercase_each`/`uppercase_each(array(name))` transform the named working array;
+value and receiver forms remain copied transformations.
+
+**Regression reconciliation:** Added a focused integration test that loads the governed fixture and compares its
+complete Perl-reference hash. Nine older Rust expectations that encoded numeric helper results as JSON booleans
+were corrected; string-comparison booleans, logical/definedness helpers outside this fixture, and literal booleans
+remain unchanged and green.
+
+**Proof/frontier:** Rust formatting passes. The focused fixture, all 191 integration tests, and the unchanged
+99-case oracle with three harness tests pass. mdBook semantics now distinguish statement mutation from pure value
+forms. `.1.6.1.2.2.1.2` is active for Dart exact-value alignment.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.0 — split executable capability residuals
 
 **Corrected sources/generator seam:** Anonymous and named capture fixtures now use three `AND` slots so marks are

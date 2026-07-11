@@ -301,7 +301,7 @@ The most important collection distinction is snapshot versus flatten.
 | `copy(hash(meta))` | produce one nested hash payload containing the fields. |
 | `flat_array(array(items))` | splice array items into the surrounding constructor. |
 | `flat_hash(hash(meta))` | splice hash key/value pairs into the surrounding constructor. |
-| `flat(expr)` | generic flatten/splice helper for array or hash expressions. |
+| `flat(expr)` | generic flatten/splice helper for array or hash expressions, including inside direct `[...]` literals. |
 
 Snapshot example:
 
@@ -1050,6 +1050,12 @@ Nested composition is useful when the transformation reads naturally as one expr
 set(array(public_fields), filter_match(uniq(uppercase_each(array(fields))), /^[A-Z_]+$/));
 lowercase_each(array(public_fields));
 ```
+
+When `trim_each(array(name))`, `lowercase_each(array(name))`, or
+`uppercase_each(array(name))` appears as a standalone statement, it writes the transformed
+items back to that explicit working array. In a value expression or receiver chain, the same
+helper returns a transformed array value and does not mutate its input. This statement/value
+distinction is part of the portable contract.
 
 Receiver-dot form is equivalent when the source is a named array working variable or array-valued expression:
 

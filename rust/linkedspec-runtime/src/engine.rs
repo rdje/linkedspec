@@ -2688,8 +2688,66 @@ impl Engine {
         if self.execute_push_child_call_statement(expr, ctx, rule_label)? {
             return Ok(());
         }
+        if self.execute_array_string_transform_statement(expr, ctx, rule_label)? {
+            return Ok(());
+        }
         self.eval_expr(expr, ctx, rule_label)?;
         Ok(())
+    }
+
+    fn execute_array_string_transform_statement(
+        &self,
+        expr: &linkedspec_core::expr::Expr,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<bool, String> {
+        use linkedspec_core::expr::{Arg, Expr};
+
+        let Expr::Call { name, args } = expr else {
+            return Ok(false);
+        };
+        if !matches!(
+            name.as_str(),
+            "trim_each" | "lowercase_each" | "uppercase_each"
+        ) || args.len() != 1
+        {
+            return Ok(false);
+        }
+        let Some(Arg::Positional(Expr::Call {
+            name: wrapper,
+            args: wrapper_args,
+        })) = args.first()
+        else {
+            return Ok(false);
+        };
+        let [Arg::Positional(Expr::Variable { name: target })] = wrapper_args.as_slice() else {
+            return Ok(false);
+        };
+        if wrapper != "array" {
+            return Ok(false);
+        }
+
+        let transformed = ctx
+            .get_array(target)
+            .iter()
+            .map(|value| {
+                let value = value.to_str();
+                RuntimeValue::Scalar(match name.as_str() {
+                    "trim_each" => value.trim().to_string(),
+                    "lowercase_each" => value.to_lowercase(),
+                    "uppercase_each" => value.to_uppercase(),
+                    _ => unreachable!(),
+                })
+            })
+            .collect();
+        ctx.set_array(target, transformed);
+        ctx.trace_decision(
+            "rust_runtime:engine:array_string_transform_statement",
+            true,
+            format!("rule={rule_label} helper={name} target={target}"),
+            TraceLevel::FULL,
+        );
+        Ok(true)
     }
 
     fn execute_statement_while_loop(
@@ -3529,10 +3587,19 @@ impl Engine {
                 Ok(current)
             }
             Expr::ArrayLiteral { items } => {
-                let values = items
-                    .iter()
-                    .map(|item| self.eval_expr(item, ctx, rule_label))
-                    .collect::<Result<Vec<_>, _>>()?;
+                let mut values = Vec::new();
+                for item in items {
+                    let value = self.eval_expr(item, ctx, rule_label)?;
+                    if matches!(
+                        item,
+                        Expr::Call { name, .. }
+                            if matches!(name.as_str(), "flat" | "flat_array" | "flat_hash")
+                    ) {
+                        Self::push_list_context_values(&mut values, &value);
+                    } else {
+                        values.push(value);
+                    }
+                }
                 Ok(RuntimeValue::Array(values))
             }
             Expr::HashLiteral { entries } => {
@@ -6441,27 +6508,39 @@ impl Engine {
                 if args.len() >= 2 {
                     let s = args[0].to_str();
                     let prefix = args[1].to_str();
-                    Ok(RuntimeValue::Bool(s.starts_with(&prefix)))
+                    Ok(RuntimeValue::Number(if s.starts_with(&prefix) {
+                        1.0
+                    } else {
+                        0.0
+                    }))
                 } else {
-                    Ok(RuntimeValue::Bool(false))
+                    Ok(RuntimeValue::Number(0.0))
                 }
             }
             "ends_with" => {
                 if args.len() >= 2 {
                     let s = args[0].to_str();
                     let suffix = args[1].to_str();
-                    Ok(RuntimeValue::Bool(s.ends_with(&suffix)))
+                    Ok(RuntimeValue::Number(if s.ends_with(&suffix) {
+                        1.0
+                    } else {
+                        0.0
+                    }))
                 } else {
-                    Ok(RuntimeValue::Bool(false))
+                    Ok(RuntimeValue::Number(0.0))
                 }
             }
             "contains_substr" => {
                 if args.len() >= 2 {
                     let s = args[0].to_str();
                     let sub = args[1].to_str();
-                    Ok(RuntimeValue::Bool(s.contains(&sub)))
+                    Ok(RuntimeValue::Number(if s.contains(&sub) {
+                        1.0
+                    } else {
+                        0.0
+                    }))
                 } else {
-                    Ok(RuntimeValue::Bool(false))
+                    Ok(RuntimeValue::Number(0.0))
                 }
             }
             "str_eq" | "str_ne" | "str_gt" | "str_ge" | "str_lt" | "str_le" => {
@@ -6566,12 +6645,12 @@ impl Engine {
                                 "num_le" => a <= b,
                                 _ => false,
                             };
-                            Ok(RuntimeValue::Bool(result))
+                            Ok(RuntimeValue::Number(if result { 1.0 } else { 0.0 }))
                         }
-                        _ => Ok(RuntimeValue::Bool(false)),
+                        _ => Ok(RuntimeValue::Number(0.0)),
                     }
                 } else {
-                    Ok(RuntimeValue::Bool(false))
+                    Ok(RuntimeValue::Number(0.0))
                 }
             }
             "num_abs" => Ok(RuntimeValue::Number(
@@ -6764,11 +6843,15 @@ impl Engine {
                 if let RuntimeValue::Array(items) = self.array_consuming_arg(raw_args, args, 0, ctx)
                 {
                     let needle = args.get(1).map(|a| a.to_str()).unwrap_or_default();
-                    Ok(RuntimeValue::Bool(
-                        items.iter().any(|v| v.to_str() == needle),
+                    Ok(RuntimeValue::Number(
+                        if items.iter().any(|v| v.to_str() == needle) {
+                            1.0
+                        } else {
+                            0.0
+                        },
                     ))
                 } else {
-                    Ok(RuntimeValue::Bool(false))
+                    Ok(RuntimeValue::Number(0.0))
                 }
             }
             "index_of" => {
@@ -6999,9 +7082,15 @@ impl Engine {
                 if let RuntimeValue::Hash(entries) = self.hash_consuming_arg(raw_args, args, 0, ctx)
                 {
                     let key = args.get(1).map(|a| a.to_str()).unwrap_or_default();
-                    Ok(RuntimeValue::Bool(entries.iter().any(|(k, _)| k == &key)))
+                    Ok(RuntimeValue::Number(
+                        if entries.iter().any(|(k, _)| k == &key) {
+                            1.0
+                        } else {
+                            0.0
+                        },
+                    ))
                 } else {
-                    Ok(RuntimeValue::Bool(false))
+                    Ok(RuntimeValue::Number(0.0))
                 }
             }
             "flat_hash" => {

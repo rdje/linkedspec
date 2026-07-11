@@ -3184,7 +3184,7 @@ Done::
 "#;
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([[["a", "b", "c"], ["aa", "b"], ["a"], ["a"], true, 2, 3]]),
+        serde_json::json!([[["a", "b", "c"], ["aa", "b"], ["a"], ["a"], 1, 2, 3]]),
         "hash-consuming helper slots read bare hash working variables as snapshots"
     );
 }
@@ -3284,7 +3284,7 @@ fn terse_2_3_4_1_array_consumers_accept_bare_array_arg() {
             ["a"],
             ["b"],
             ["a"],
-            true,
+            1,
             1,
             3,
             "b",
@@ -3302,7 +3302,7 @@ fn terse_2_3_5_1_array_receiver_value_chains_run() {
     let grammar = "Top::\n /x/ -> Done { items += \"b\"; items += \"a\"; items += \"c\"; items += \"a\"; phrases += \"aa-b\"; phrases += \"c-aa\"; return(array(items.sorted().drop_front(2).first(), array(items).reversed().take(2).last(), items.sorted().contains(\"c\"), items.sorted().index_of(\"c\"), items.drop_back().join_values(\"|\"), items.uniq().join_values(\",\"), items.filter_match(/^a$/).count(), phrases.split_each(\"-\").filter_match(/^aa$/).count(), items.sorted().is_nonempty(), missing.sorted().is_empty())) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([["b", "c", true, 3, "b|a|c", "b,a,c", 2, 2, true, true]]),
+        serde_json::json!([["b", "c", 1, 3, "b|a|c", "b,a,c", 2, 2, true, true]]),
         "array receiver-dot value chains feed each returned value into the next array helper"
     );
 }
@@ -3330,7 +3330,7 @@ Done::
 "#;
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([["a,b,c", 9, 2, true, 0, 2, 2, 0]]),
+        serde_json::json!([["a,b,c", 9, 2, 1, 0, 2, 2, 0]]),
         "hash receiver-dot value chains feed hash and array-returning helper results into compatible next helpers"
     );
 }
@@ -3355,10 +3355,10 @@ fn terse_2_3_5_3_string_receiver_value_chains_run() {
         serde_json::json!([[
             "name!",
             13,
+            1,
             true,
-            true,
-            true,
-            true,
+            1,
+            1,
             "node|name_end",
             2,
             "BCD",
@@ -3385,7 +3385,7 @@ fn terse_2_3_5_4_number_receiver_value_chains_run() {
     let grammar = "Top::\n /x/ -> Done { set(score, -3.7); return(array(score.abs().ceil().add(2, 3).mul(2).sub(1).div(2).clamp(0, 20).max(5).min(12), 5.mod(2), 3.5.floor().add(1), 3.5.round(), score.abs().gt(3), score.abs().le(4))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([[8.5, 1, 4, 4, true, true]]),
+        serde_json::json!([[8.5, 1, 4, 4, 1, 1]]),
         "number receiver-dot value chains compose numeric helpers and comparisons"
     );
 }
@@ -3453,7 +3453,7 @@ fn terse_3_2_3_2_string_comparison_helpers_run() {
     let grammar = "Top::\n /x/ -> Done { return(array(str_eq(\"a\",\"a\"), str_ne(\"a\",\"b\"), str_gt(\"2\",\"10\"), str_ge(\"2\",\"2\"), str_lt(\"10\",\"2\"), str_le(\"10\",\"10\"), str_gt(\"10\",\"2\"), num_gt(\"10\",\"2\"))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([[true, true, true, true, true, true, false, true]]),
+        serde_json::json!([[true, true, true, true, true, true, false, 1]]),
         "str_* helpers preserve lexical string semantics while num_gt remains numeric"
     );
 }
@@ -3465,7 +3465,7 @@ fn terse_3_2_3_3_numeric_comparison_word_aliases_run() {
     let grammar = "Top::\n /x/ -> Done { return(array(eq(\"2\",\"2\"), ne(\"2\",\"3\"), gt(\"10\",\"2\"), ge(\"2\",\"2\"), lt(\"2\",\"10\"), le(\"2\",\"2\"), gt(\"2\",\"10\"), str_gt(\"2\",\"10\"))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([[true, true, true, true, true, true, false, true]]),
+        serde_json::json!([[1, 1, 1, 1, 1, 1, 0, true]]),
         "bare comparison word calls dispatch numerically while str_gt remains lexical"
     );
 }
@@ -3477,7 +3477,7 @@ fn terse_3_2_3_4_numeric_comparison_symbol_callees_run() {
     let grammar = "Top::\n /x/ -> Done { return(array(==(\"2\",\"2\"), !=(\"2\",\"3\"), >(\"10\",\"2\"), >=(\"2\",\"2\"), <(\"2\",\"10\"), <=(\"2\",\"2\"), >(\"2\",\"10\"), str_gt(\"2\",\"10\"))) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([[true, true, true, true, true, true, false, true]]),
+        serde_json::json!([[1, 1, 1, 1, 1, 1, 0, true]]),
         "comparison symbol calls dispatch numerically while str_gt remains lexical"
     );
 }
@@ -3721,5 +3721,44 @@ fn terse_2_3_5_6_quoted_names_are_not_runtime_indirect_lookups() {
         build_and_run(grammar, "xhello"),
         serde_json::json!([[1, 0, 1, 1, 0, 1]]),
         "quoted wrapper arguments are literal constructor payloads, not scalar-indirect aggregate names"
+    );
+}
+
+#[test]
+fn future_parity_backlog_1_6_1_2_2_1_1_rust_pure_capability_values() {
+    let grammar = include_str!(
+        "../../../capability_conformance/fixtures/capability_pure_helper_surface.spec"
+    );
+    assert_eq!(
+        build_and_run(grammar, "x"),
+        serde_json::json!([[{
+            "coalesce": "fallback",
+            "concat_arrays": [1, 2, 3],
+            "contains": 1,
+            "contains_substr": 1,
+            "ends_with": 1,
+            "flat": ["x", "y", "z"],
+            "has_key": 1,
+            "num_abs": 3,
+            "num_avg": 4,
+            "num_ceil": 3,
+            "num_clamp": 10,
+            "num_div": 3,
+            "num_floor": 2,
+            "num_ge": 1,
+            "num_le": 1,
+            "num_median": 3,
+            "num_mod": 2,
+            "num_mul": 12,
+            "num_ne": 1,
+            "num_range": 8,
+            "num_round": 3,
+            "num_sum": 6,
+            "slice": ["b", "c"],
+            "starts_with": 1,
+            "take_last": ["b", "c"],
+            "uppercase_each": ["A", "BC"]
+        }]]),
+        "Rust matches the exact Perl pure/aggregate capability value"
     );
 }
