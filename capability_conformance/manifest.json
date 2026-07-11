@@ -26,7 +26,7 @@
       "backends": {
         "perl": {"status": "pass", "references": ["perl/LinkedSpec.pm", "perl/LinkedSpec/ParserFactory.pm"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/spec_loader.rs", "rust/linkedspec-runtime/tests/spec_loader.rs"]},
-        "dart": {"status": "gap", "references": ["dart/lib/linkedspec_dart.dart"], "note": "Named resolution exists only in process-adapter code, not the public package API."},
+        "dart": {"status": "pass", "references": ["dart/lib/src/io/spec_loader.dart", "dart/test/spec_loader_test.dart"]},
         "julia": {"status": "gap", "references": ["julia/src/LinkedSpecJulia.jl"], "note": "Named resolution exists only in process-adapter code, not the exported module API."}
       }
     },

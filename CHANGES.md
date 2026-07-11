@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.4.3 — add Dart native spec resolution
+
+Added public Dart `spec_loader.dart` with typed `SpecRequest` name/path intent, `SpecLoadOptions` cwd and ordered
+roots, deterministic `ResolvedSpec` origins, strict `LoadedSpec`, backend-native `LoadedCompiledSpec`, and
+`SpecPipelineException` stage/code records. `loadAndCompileSpec(...)` resolves a regular file, reads bytes,
+strictly preserves UTF-8 text, runs the full staged user-function parser, validates, compiles, and can build a
+`LinkedSpecRuntimeEngine` carrying requested name/resolved path identity.
+
+Five Dart tests consume all 14 name, nine resolution/file-kind, and four text cases directly, then prove function
+compilation/execution, engine identity, parse versus validation stages, and exact missing-name JSON. The Dart
+primary CLI delegates named and explicit-file source selection to the same native API; inline source stays on its
+existing in-memory path. The compatibility resolver wrapper now delegates too.
+
+Formatting and strict analysis pass. The complete Dart gate passes 165 tests, 61/61 CLI cases under default and
+POSIX environments, and all 105 corpus fixtures. Dart promotes to pass at census 55/1/4. Julia `.1.6.4.4` is next.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.4.2 — add Rust native spec resolution
 
 Added public `linkedspec_runtime::spec_loader` with typed `SpecRequest` name/path intent, `SpecLoadOptions` cwd and

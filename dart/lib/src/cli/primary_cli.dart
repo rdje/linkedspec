@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import '../compiler/compiled_spec.dart';
+import '../io/spec_loader.dart';
 import '../parser/user_function_definition_parser.dart';
 import '../runtime/interpreter.dart';
 import '../runtime/matching.dart';
@@ -202,14 +203,19 @@ PrimaryCliCommandOutput runLinkedSpecDartPrimaryCli(
 
   final CompiledSpec compiled;
   try {
-    // Dart's String.trim() treats U+FEFF as whitespace. The portable CLI does
-    // not strip a source BOM, so reject it before the frontend can erase it.
-    if (prepared.specSource.startsWith('\uFEFF')) {
-      throw const FormatException('leading source BOM is preserved');
+    switch (prepared.spec) {
+      case _NativePreparedSpec(:final loaded):
+        compiled = loaded.compiled;
+      case _InlinePreparedSpec(:final source):
+        // Dart's String.trim() treats U+FEFF as whitespace. The portable CLI
+        // does not strip a source BOM, so reject it before the frontend can.
+        if (source.startsWith('\uFEFF')) {
+          throw const FormatException('leading source BOM is preserved');
+        }
+        compiled = compileSpec(
+          parseSpecWithStagedUserFunctionDefinitions(source),
+        );
     }
-    compiled = compileSpec(
-      parseSpecWithStagedUserFunctionDefinitions(prepared.specSource),
-    );
   } on Object {
     return phaseFailure('compile:error', 'parser compilation failed');
   }
@@ -238,10 +244,16 @@ PrimaryCliCommandOutput runLinkedSpecDartPrimaryCli(
     final parseMode = prepared.options.parseMode == 'consume'
         ? LinkedSpecParseMode.consume
         : LinkedSpecParseMode.seek;
-    final result = LinkedSpecRuntimeEngine(
-      compiled,
-      parseMode: parseMode,
-    ).execute(input, topRule: prepared.options.topRule);
+    final engine = switch (prepared.spec) {
+      _NativePreparedSpec(:final loaded) => loaded.createEngine(
+        parseMode: parseMode,
+      ),
+      _InlinePreparedSpec() => LinkedSpecRuntimeEngine(
+        compiled,
+        parseMode: parseMode,
+      ),
+    };
+    final result = engine.execute(input, topRule: prepared.options.topRule);
     final json = jsonEncode(_canonicalJson(result.value));
     final invokeTraceFailure = emit(100, 'low', 'invoke:ok');
     if (invokeTraceFailure != null) {
@@ -576,13 +588,29 @@ String _traceField(String value) {
 final class _PreparedRequest {
   const _PreparedRequest({
     required this.options,
-    required this.specSource,
+    required this.spec,
     required this.input,
   });
 
   final _PrimaryCliOptions options;
-  final String specSource;
+  final _PreparedSpec spec;
   final _InputSelection input;
+}
+
+sealed class _PreparedSpec {
+  const _PreparedSpec();
+}
+
+final class _NativePreparedSpec extends _PreparedSpec {
+  const _NativePreparedSpec(this.loaded);
+
+  final LoadedCompiledSpec loaded;
+}
+
+final class _InlinePreparedSpec extends _PreparedSpec {
+  const _InlinePreparedSpec(this.source);
+
+  final String source;
 }
 
 sealed class _InputSelection {
@@ -606,25 +634,40 @@ _PreparedRequest? _prepareRequest(
   Directory cwd,
   Directory? repoRoot,
 ) {
-  final String? source;
+  final _PreparedSpec spec;
   if (options.spec != null) {
-    final file = resolvePrimaryCliNamedSpec(options.spec!, cwd, repoRoot);
-    source = file == null ? null : readPrimaryCliStrictUtf8File(file);
+    try {
+      spec = _NativePreparedSpec(
+        loadAndCompileSpec(
+          SpecRequest.named(options.spec!),
+          SpecLoadOptions(
+            cwd: cwd,
+            searchRoots: _primaryCliSpecSearchRoots(repoRoot),
+          ),
+        ),
+      );
+    } on SpecPipelineException {
+      return null;
+    }
   } else if (options.specFile != null) {
-    source = readPrimaryCliStrictUtf8File(
-      _explicitFile(options.specFile!, cwd),
-    );
+    try {
+      spec = _NativePreparedSpec(
+        loadAndCompileSpec(
+          SpecRequest.path(options.specFile!),
+          SpecLoadOptions(cwd: cwd),
+        ),
+      );
+    } on SpecPipelineException {
+      return null;
+    }
   } else {
-    source = options.inlineSpec!;
-  }
-  if (source == null) {
-    return null;
+    spec = _InlinePreparedSpec(options.inlineSpec!);
   }
 
   final input = options.inputFile == null
       ? _LiteralInput(options.input!)
       : _FileInput(_explicitFile(options.inputFile!, cwd));
-  return _PreparedRequest(options: options, specSource: source, input: input);
+  return _PreparedRequest(options: options, spec: spec, input: input);
 }
 
 File _explicitFile(String path, Directory cwd) {
@@ -639,23 +682,23 @@ File? resolvePrimaryCliNamedSpec(
   Directory cwd,
   Directory? repositoryRoot,
 ) {
-  final filename = name.endsWith('.spec') ? name : '$name.spec';
-  final candidates = <File>[
-    _explicitFile(name, cwd),
-    _explicitFile(filename, cwd),
-    if (repositoryRoot != null)
-      File(
-        '${repositoryRoot.path}${Platform.pathSeparator}specs'
-        '${Platform.pathSeparator}$filename',
+  try {
+    return resolveSpec(
+      SpecRequest.named(name),
+      SpecLoadOptions(
+        cwd: cwd,
+        searchRoots: _primaryCliSpecSearchRoots(repositoryRoot),
       ),
-  ];
-  for (final candidate in candidates) {
-    if (candidate.existsSync()) {
-      return candidate;
-    }
+    ).file;
+  } on SpecPipelineException {
+    return null;
   }
-  return null;
 }
+
+List<Directory> _primaryCliSpecSearchRoots(Directory? repositoryRoot) =>
+    repositoryRoot == null
+    ? const []
+    : [Directory('${repositoryRoot.path}${Platform.pathSeparator}specs')];
 
 String? _loadInput(_InputSelection input) => switch (input) {
   _LiteralInput(:final value) => value,

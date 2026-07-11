@@ -16,15 +16,15 @@ in-process data path, not identical spelling:
 | --- | --- |
 | Perl | `LinkedSpec::Get(...)` → parser coderef; `get_parser(...)` adds named/file resolution. |
 | Rust | Inline: `parse_spec(...)` → core compilation → `Engine::new(...)`. File-oriented: `spec_loader::load_and_compile_spec(...)` → `LoadedCompiledSpec::into_engine()`. |
-| Dart | `parseSpec(...)` → `compileSpec(...)` → `LinkedSpecRuntimeEngine(...).parse(...)`. |
+| Dart | Inline: `parseSpec(...)` → `compileSpec(...)` → `LinkedSpecRuntimeEngine(...).parse(...)`. File-oriented: `loadAndCompileSpec(...)` → `LoadedCompiledSpec.createEngine()`. |
 | Julia | Rule-only: `parse_spec(...)`; source with top-level functions: `parse_spec_with_staged_user_function_definitions(...)`; then `compile_spec(...)` → `LinkedSpecRuntimeEngine(...)` → `runtime_parse(...)` / `runtime_execute(...)`. |
 | Lua and later backends | An idiomatic native module must expose equivalent in-memory parse/compile/execute capability before its CLI can count as a complete backend. |
 
-The inline in-memory role is implemented on all four current backends. Perl and Rust now also expose the native
-file-oriented role: Perl through `get_parser(...)`, Rust through `linkedspec_runtime::spec_loader`. Dart and Julia
-still resolve named specs only inside thin primary process adapters. `FUTURE-PARITY-BACKLOG.1.6.4` owns their
-idiomatic native equivalents and final shared admission; until those leaves close, Dart/Julia callers should load
-source explicitly and pass it to the in-memory parser.
+The inline in-memory role is implemented on all four current backends. Perl, Rust, and Dart also expose the native
+file-oriented role: Perl through `get_parser(...)`, Rust through `linkedspec_runtime::spec_loader`, and Dart
+through the public `spec_loader.dart` export. Julia still resolves named specs only inside its thin primary process
+adapter. `FUTURE-PARITY-BACKLOG.1.6.4.4-.5` owns Julia's idiomatic native equivalent and final shared admission;
+until those leaves close, Julia callers should load source explicitly and pass it to the in-memory parser.
 
 The implementation audit found that the adapters do not yet share one fallback policy. Rust and Dart stop after
 the exact working-directory path, working-directory `<name>.spec`, and repository `specs/<name>.spec`; Julia adds
@@ -36,7 +36,7 @@ implicit recursive fallback remains a compatibility extension, not the semantic 
 ### Portable file-oriented contract
 
 The contract is ratified and executable in `capability_conformance/native_spec_resolution_contract.json`; Rust
-passes it directly, while Dart and Julia rollout remains in progress. It separates two caller intents:
+and Dart pass it directly, while Julia rollout remains in progress. It separates two caller intents:
 
 | Request | Resolution |
 | --- | --- |
@@ -116,6 +116,35 @@ Errors serialize without string scraping. For example, a pure named miss project
   "requested": "Missing"
 }
 ```
+
+### Dart named/file example
+
+Dart exposes the same progressive stages and complete composition from its top-level package:
+
+```dart
+import 'dart:io';
+
+import 'package:linkedspec_dart/linkedspec_dart.dart';
+
+final loaded = loadAndCompileSpec(
+  const SpecRequest.named('grammars/Expression'),
+  SpecLoadOptions(
+    cwd: Directory('/work/project'),
+    searchRoots: [Directory('/app/specs'), Directory('/team/specs')],
+  ),
+);
+
+print('resolved: ${loaded.loaded.resolved.file.path}');
+print('source characters: ${loaded.loaded.sourceText.length}');
+
+final engine = loaded.createEngine();
+final value = engine.execute('input').value;
+```
+
+Use `SpecRequest.path('relative/or/absolute.spec')` for one exact host path. `resolveSpec(...)` selects only,
+`loadSpec(...)` also reads and strictly decodes, and `loadAndCompileSpec(...)` continues through the full staged
+function-aware parser, validation, and compiler. `SpecPipelineException.toJson()` exposes the neutral structured
+error shape. `createEngine()` attaches the requested name and resolved file path to later runtime diagnostics.
 
 File-oriented helpers, per-variant CLIs, corpus runners, Wasm/web/mobile wrappers, and
 service adapters may wrap these APIs. They are secondary surfaces and must not contain

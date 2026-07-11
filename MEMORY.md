@@ -18,19 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.4.2` — added Rust native named/file resolution.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.4.1` — fixed the neutral resolution/loading contract.
-- recent_context: Public Rust progressive resolver/loader/compiler consumes 14/9/4 exact cases, preserves strict
-  UTF-8/source identity, returns typed errors, builds an attributed engine, and owns CLI named/file work. Full gate
-  passes 137/105/196/5/3/5/10 plus 61x2 CLI; census 54/1/5. No new Clippy; 2.0 GB target removed.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.4.3` — added Dart native named/file resolution.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.4.2` — added Rust native named/file resolution.
+- recent_context: Public Dart progressive resolver/loader/compiler consumes 14/9/4 exact cases, preserves strict
+  UTF-8/source identity, returns structured exceptions, builds an attributed engine, and owns CLI named/file work.
+  Format/analyze plus 165 tests, 61x2 CLI, and 105 corpus pass; census 55/1/4.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.4.2 - add Rust native spec resolution`; previous committed HEAD is
-  `971e44c0 FUTURE-PARITY-BACKLOG.1.6.4.1 - define native spec resolution contract`.
+  `FUTURE-PARITY-BACKLOG.1.6.4.3 - add Dart native spec resolution`; previous committed HEAD is
+  `d49cd5bf FUTURE-PARITY-BACKLOG.1.6.4.2 - add Rust native spec resolution`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.4.3` Dart native resolution API is active.
-- next_action: add Dart name/path requests, ordered roots, regular-file selection, strict loading plus parse/compile
-  composition and structured exceptions; consume 14/9/4 directly and delegate the CLI without byte drift.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.4.4` Julia native resolution API is active.
+- next_action: add Julia name/path requests, ordered roots, regular-file selection, strict loading plus staged
+  parse/compile composition and structured exceptions; consume 14/9/4 directly, replace recursive adapter-only
+  fallback, and preserve exact primary CLI behavior.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

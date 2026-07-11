@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.4.3 — add Dart native spec resolution**
+  (DONE — Dart file-oriented native role passes; Julia `.1.6.4.4` active).
+
+  **Implementation:** Public progressive resolve/load/compile API, exact name/path intent, ordered roots, strict
+  UTF-8, source identity, structured exceptions, staged-function composition, attributed engine, and CLI delegation.
+
+  **Proof:** Direct 14/9/4 fixture plus pipeline tests pass; format/analyze and the complete Dart gate pass 165
+  tests, exact 61x2 CLI, and 105 corpus fixtures. Census 55/1/4.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.4.2 — add Rust native spec resolution**
   (DONE — Rust file-oriented native role passes; Dart `.1.6.4.3` active).
 

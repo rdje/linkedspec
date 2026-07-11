@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.4.3 — keep CLI phase projection outside the native loader):
+  The Dart native API owns precise resolution/read/decode/parse/validate/compile exceptions and retained source
+  identity. The primary CLI deliberately catches those exceptions at its existing compile boundary and continues
+  emitting the canonical one-line phase failure, so richer embedding semantics do not alter process bytes. Native
+  named/file requests use the complete result directly; inline text stays on the prior in-memory route. Candidate
+  construction splits portable named components on `/`, while explicit paths retain host syntax. A compatibility
+  `resolvePrimaryCliNamedSpec` wrapper delegates to the native resolver, preventing a second policy from regrowing.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.4.2 — make the complete native result carry provenance):
   Resolution, loading, and compilation are useful independently, so expose progressive typed stages rather than
   one opaque convenience function. The complete result keeps the request, winning origin/path, exact decoded text,

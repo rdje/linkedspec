@@ -26,13 +26,14 @@ evidence_update_2026_07_11_rust_diagnostic_admission: "FUTURE-PARITY-BACKLOG.1.6
 evidence_update_2026_07_11_native_resolution_audit: "FUTURE-PARITY-BACKLOG.1.6.4.0 finds that non-Perl named resolution remains process-adapter-only and fallback semantics drift: Rust/Dart stop after three local candidates, Julia adds sorted recursive repository discovery, and Perl PathSearch fallback selects through hash-key order. Neutral contract .1 now owns explicit ordered roots before backend implementation. Census remains 53/1/6."
 evidence_update_2026_07_11_native_resolution_contract: "FUTURE-PARITY-BACKLOG.1.6.4.1 adds ADR 0026, a 13/9/4 executable contract, standalone checker, and canonical-gate wiring for portable names/exact paths, ordered roots, first regular file, strict UTF-8, identity, and typed stages/codes. No backend row promotes; census remains 53/1/6 until implementations and admission."
 evidence_update_2026_07_11_rust_native_resolution: "FUTURE-PARITY-BACKLOG.1.6.4.2 adds public Rust name/path resolution, strict loading, staged parse/validate/compile composition, source identity, structured errors, direct 14/9/4 fixture proof, and CLI delegation. Full Rust gate including five loader and 61x2 CLI passes; Rust promotes to pass and census is 54/1/5."
+evidence_update_2026_07_11_dart_native_resolution: "FUTURE-PARITY-BACKLOG.1.6.4.3 adds public Dart name/path resolution, strict loading, staged parse/validate/compile composition, source identity, structured exceptions, direct 14/9/4 fixture proof, and CLI delegation. Full Dart gate passes 165 tests, 61x2 CLI, and 105 corpus fixtures; Dart promotes to pass and census is 55/1/4."
 reverify: "perl tools/check_capability_conformance.pl && rg -n 'FUTURE-PARITY-BACKLOG.1.6.[0-6]' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 `capability_conformance/manifest.json` is the current user-observable capability census. The checker validates the
 schema, exact backend set, evidence paths, status vocabulary, unique ids, gap ownership, and explicit legacy/future
-exclusions. After Rust native resolution admission, its 15 rows and 60 backend states classify 54 pass, one partial,
-and five gap.
+exclusions. After Dart native resolution admission, its 15 rows and 60 backend states classify 55 pass, one partial,
+and four gap.
 
 The audit distinguishes implementation gaps from proof gaps:
 
@@ -41,8 +42,8 @@ The audit distinguishes implementation gaps from proof gaps:
 - all four expose exact outward descriptors, aligned model identities, and one canonical function-record schema;
 - all four expose structured runtime diagnostic attribution; Rust's full recurring/CLI gate and final admission
   are closed;
-- Perl and Rust expose the native file-oriented named-spec role and Rust consumes the exact 14/9/4 ordered-root
-  contract directly; Dart/Julia remain process-adapter-only under `.1.6.4.3-.4`;
+- Perl, Rust, and Dart expose the native file-oriented named-spec role; Rust and Dart consume the exact 14/9/4
+  ordered-root contract directly, while Julia remains process-adapter-only under `.1.6.4.4`;
 - Perl/Rust/Julia propagate a native emitter through frontend/compiler/function-shell/staged/runtime phases, while
   Dart native trace begins at the interpreter; `.1.6.5` owns the missing pipeline coverage;
 - generated source remains top-level `.3`: Perl passes, Rust has all structural families but only a curated corpus
@@ -53,5 +54,6 @@ Perl plugins and not-yet-current general parse jobs, semantic introspection/MCP,
 and Lua are explicit exclusions/future owners, not omitted rows.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[native-in-memory-backend-contract]],
+[[dart-native-spec-resolution]],
 [[trace-cross-variant-capability-contract]], [[dart-generated-source-deferred]],
 [[julia-generated-source-deferred]], [[rust-parity-followon-closed]], [[primary-cli-four-backend-matrix]].

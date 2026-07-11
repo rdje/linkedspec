@@ -106,6 +106,22 @@ export 'src/corpus/manifest_runner.dart'
         CorpusValidationResult,
         executeCorpusFixtures,
         loadCorpusFixtures;
+export 'src/io/spec_loader.dart'
+    show
+        LoadedCompiledSpec,
+        LoadedSpec,
+        ResolvedSpec,
+        SpecCandidateOrigin,
+        SpecLoadOptions,
+        SpecPipelineCode,
+        SpecPipelineException,
+        SpecPipelineStage,
+        SpecRequest,
+        SpecRequestKind,
+        loadAndCompileSpec,
+        loadSpec,
+        resolveSpec,
+        validateSpecRequest;
 export 'src/parser/spec_parser.dart' show SpecParseException, parseSpec;
 export 'src/parser/staged_parser_registry.dart'
     show
