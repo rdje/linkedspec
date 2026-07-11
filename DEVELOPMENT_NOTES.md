@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.2.1 — give Lua AST records identities before parsing):
+  Do not let Lua table shape stand in for a semantic type. Use private metatables for source node variants and the
+  typed JSON layer for scalar/array/harray payloads; represent codeblocks as an explicit body-kind node with exact
+  lifecycle/code text. Validate dense one-based constructor lists and child node types, defensively clone arbitrary
+  JSON sidecars, and project only through neutral field names. This gives the parser a typed target while keeping
+  source recognition, validation, ActionIR, and runtime ownership separate. Round-trip optional staged provenance
+  and every body variant on both the Lua 5.4 and Lua 5.1 language baselines before parser work begins.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.1.3 — type JSON tables and declare byte boundaries):
   Lua tables cannot reveal whether `{}` means an array or harray, and `nil` cannot occupy an array slot, so decoded
   JSON needs private metatable tags plus a non-nil null sentinel. Reject plain tables on encoding instead of

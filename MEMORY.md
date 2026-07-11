@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.1.3` — strict typed JSON and exact 105-case corpus IO pass.
-- prior_leaf: `LUA-BACKEND-PARITY.1.2` — native Lua scaffold and dual-runtime local gate pass.
-- recent_context: `linkedspec.json` preserves null/array/harray identity and canonical keys with strict UTF-8;
-  `linkedspec.corpus` validates exact manifest/directory/file/expected JSON state. Syntax, PUC Lua 10/10,
-  105-fixture command validation, and LuaJIT 10/10 pass. Parser execution and `parse_spec` remain absent.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.2.1` — typed neutral source/provenance AST passes both runtimes.
+- prior_leaf: `LUA-BACKEND-PARITY.1.3` — strict typed JSON and exact 105-case corpus IO pass.
+- recent_context: `linkedspec.spec_ast` covers specs/functions/spans/jobs/rules/modes/ten body variants/targets/calls
+  with validated node identities and lossless typed JSON. Syntax, PUC Lua 13/13, 105-fixture/process checks, and
+  LuaJIT 13/13 pass. `parse_spec` remains absent; `.2.2` owns universal source recognition.
 - latest_commit: this resume block is prepared for commit
-  `LUA-BACKEND-PARITY.1.3 - add strict Lua corpus IO`; previous committed HEAD is
-  `e27b05ce LUA-BACKEND-PARITY.1.2 - scaffold native Lua backend`.
+  `LUA-BACKEND-PARITY.2.1 - add typed Lua source AST`; previous committed HEAD is
+  `f403ad55 LUA-BACKEND-PARITY.1.3 - add strict Lua corpus IO`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `LUA-BACKEND-PARITY.2.1`; typed universal source AST/provenance projection is active.
-- next_action: Define task-owned Lua source AST constructors and lossless typed JSON/provenance projection for
-  spec/rule/mode/body/edge/lifecycle/function/parse-job/source-span nodes, preserving scalar/array/harray/codeblock
-  identity without parsing source; prove PUC Lua and scoped LuaJIT round trips before `.2.2` parsing.
+- active_work_unit: `LUA-BACKEND-PARITY.2.2`; universal rule-paragraph source parsing is active.
+- next_action: Implement the task-owned parser from strict Unicode source text into `linkedspec.spec_ast` for
+  headers/modes, regex slots, action/blind edges, lifecycle/plain blocks, markers, fluent continuations, comments,
+  nested blocks, quote forms, and newline/semicolon statement boundaries; prove focused plus shipped-source cases.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

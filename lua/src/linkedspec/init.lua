@@ -1,5 +1,6 @@
 local corpus = require("linkedspec.corpus")
 local json = require("linkedspec.json")
+local spec_ast = require("linkedspec.spec_ast")
 
 local M = {}
 
@@ -58,5 +59,6 @@ end
 
 M.json = json
 M.load_corpus_fixtures = corpus.load_corpus_fixtures
+M.spec_ast = spec_ast
 
 return M

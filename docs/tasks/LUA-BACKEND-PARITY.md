@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-11` (strict typed JSON/corpus IO `.1.3` closed; source AST `.2.1` active)
+- Last updated: `2026-07-11` (typed source AST `.2.1` closed; core source parser `.2.2` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -151,15 +151,40 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`
 
 - ID: `LUA-BACKEND-PARITY.2.1`
-  Status: `active`
+  Status: `done`
   Goal: Define typed source AST and lossless JSON/provenance projection.
   Acceptance: Spec/rule/mode/body/edge/lifecycle/function/parse-job/source-span types match the neutral schema;
     explicit tagged representations preserve scalar/array/harray/codeblock identity.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Added `linkedspec.spec_ast` with private metatable identities and validated
+    constructors for `SpecFile`, `FunctionDefinition`, ordinary/staged source spans, `StagedParseJob`, rules,
+    headers, every simple/bounded mode, ten body-element variants, edge targets, and fluent calls. Neutral field
+    projection/from-JSON follows the Rust/Dart/Julia contract, preserves typed JSON array/harray/scalars and explicit
+    codeblock AST identity, clones optional function payload/AST values defensively, and rejects unknown variants,
+    ambiguous payload tables, wrong node lists, and sparse arrays. The public module exposes the data API, top-rule
+    and label lookup, and repetition/AND mode queries without exposing `parse_spec`. The local gate passes syntax,
+    exact corpus/process legs, 13/13 PUC Lua tests, and 13/13 LuaJIT compatibility tests.
+  Commit: `LUA-BACKEND-PARITY.2.1 - add typed Lua source AST`
+
+### `LUA-BACKEND-PARITY.2.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Knowledge Map and canonical Dart/Julia/Rust AST inspection established the neutral
+  node/field contract; direct Lua module inspection showed no typed source/provenance representation before this
+  leaf.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Parser work cannot be safe over untyped Lua tables: array/harray layout and
+  codeblock/body variant identity would otherwise be guessed, while staged function payload provenance could drift
+  from existing `source_span`/`body_parse_job` fields.
+- [x] **FIX** — Added validated metatable-typed AST nodes, complete neutral projection/reconstruction, defensive
+  typed-JSON payload cloning, mode helpers, lookups, all ten body variants, and public in-memory exposure.
+- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 13/13 on PUC Lua and 13/13 on LuaJIT; one
+  representative function/staged-job/bounded-rule AST round-trips byte-canonical JSON, all body variants round-trip,
+  and malformed modes/kinds/nodes/payloads/sparse lists are rejected.
+- [x] **NO REGRESSION** — Exact 105-case corpus validation and process checks remain green; `parse_spec` remains
+  absent and no source syntax, runtime, CLI, capability, or generated-source behavior is claimed early.
+- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook with Lua construction example, README, Knowledge Map, and
+  live continuity identify the completed data-only boundary and activate parser `.2.2`.
 
 - ID: `LUA-BACKEND-PARITY.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Parse rule paragraphs and universal source syntax.
   Acceptance: Headers/modes, regex slots, action/blind edges, lifecycle/plain blocks, markers, fluent continuations,
     comments, nested blocks, quote forms, and newline/semicolon statement boundaries have focused fixtures.
@@ -390,7 +415,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 1 | `LUA-BACKEND-PARITY.1.1` | `done` | PUC/LuaJIT, layout, zero-dependency tests, JSON, regex, and cache policy locked. |
 | 2 | `LUA-BACKEND-PARITY.1.2` | `done` | Native module/test/bin/local-gate scaffold passes PUC Lua and LuaJIT. |
 | 3 | `LUA-BACKEND-PARITY.1.3` | `done` | Strict typed JSON and exact 105-case manifest/fixture IO pass both runtimes. |
-| 4 | `LUA-BACKEND-PARITY.2.1` | `active` | Define the typed universal source AST and lossless JSON/provenance projection. |
+| 4 | `LUA-BACKEND-PARITY.2.1` | `done` | Typed neutral source/provenance AST round-trips all node/body variants. |
+| 5 | `LUA-BACKEND-PARITY.2.2` | `active` | Parse universal rule paragraphs and source syntax into the typed AST. |
 
 ## Initial toolchain evidence (read-only planning audit)
 
@@ -433,3 +459,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.1.1` | `LUA-BACKEND-PARITY.1.1 - lock Lua toolchain and package policy` | Locks runtimes, layout, zero-dependency harness, JSON/regex ownership, and cache boundaries; no code. |
 | `LUA-BACKEND-PARITY.1.2` | `LUA-BACKEND-PARITY.1.2 - scaffold native Lua backend` | Native module identity, dependency-free dual-runtime tests, explicit command stubs, and `.1.3` handoff. |
 | `LUA-BACKEND-PARITY.1.3` | `LUA-BACKEND-PARITY.1.3 - add strict Lua corpus IO` | Pure-Lua typed JSON, strict UTF-8, exact 105-fixture drift validation, and source-AST handoff. |
+| `LUA-BACKEND-PARITY.2.1` | `LUA-BACKEND-PARITY.2.1 - add typed Lua source AST` | Neutral nodes/provenance, complete body variants, lossless JSON, and parser handoff. |

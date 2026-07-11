@@ -554,7 +554,51 @@ files, strict UTF-8, and typed expected JSON—while explicitly declining parser
 execution. Unicode is the character/code-point model; strict UTF-8 is the
 selected byte encoding at this persisted boundary, and UTF-16/UTF-32 are not
 auto-detected. `tools/run_lua_local.sh` passes 10/10 tests on PUC Lua and 10/10
-on LuaJIT. Typed universal source AST/provenance `.2.1` is the active next leaf.
+on LuaJIT at the corpus boundary. The next completed layer adds data-only source
+ASTs for specs, functions, ordinary/staged spans, staged parse jobs, rules,
+simple/bounded modes, all ten body variants, targets, and fluent calls. Private
+node identities and typed JSON projection prevent arrays, harrays, and
+codeblocks from being inferred from incidental table layout. Representative
+provenance and every body variant round-trip on both runtimes; `parse_spec`
+remains absent. The universal rule parser `.2.2` is active.
+
+Lua embedding code can construct the neutral data model directly:
+
+```lua
+local linkedspec = require("linkedspec")
+local ast = linkedspec.spec_ast
+
+local spec = ast.spec_file({
+  rules = {
+    ast.rule({
+      header = ast.rule_header({
+        label = "Top",
+        is_top = true,
+        mode = ast.default_rule_mode(),
+        rest = "/x/",
+        line = 1,
+      }),
+      body = {
+        ast.body_element({
+          kind = ast.regex_body_kind({ pattern = "x" }),
+          source = "/x/",
+          line = 1,
+        }),
+      },
+    }),
+  },
+})
+
+local encoded = linkedspec.json.encode(ast.to_json(spec))
+local restored = ast.from_json("SpecFile", linkedspec.json.decode(encoded))
+assert(ast.top_rule(restored).header.label == "Top")
+```
+
+The projection uses the same field names as the other variants, including
+`functions`, `source_span`, `body_span`, `body_parse_job`, `parent_ast_path`,
+`result_policy`, and `failure_policy`. Constructor lists must be dense and
+one-based. Optional function payloads must already be typed JSON values; plain
+Lua tables are rejected rather than guessed.
 
 ### Julia Backend Commands, Embedding, and Status
 

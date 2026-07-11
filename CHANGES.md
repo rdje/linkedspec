@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.2.1 — add typed Lua source AST
+
+Added a data-only native Lua source AST with validated private node identities for specs, functions, ordinary and
+staged spans, staged parse jobs, rules/headers, simple and bounded modes, all ten body-element variants, edge
+targets, and fluent calls. Top-rule/rule lookup and Rust-equivalent AND/repetition queries are public in memory.
+
+Added lossless projection to and reconstruction from the existing typed JSON layer using the exact neutral
+Rust/Dart/Julia field names. Function payload/AST JSON is defensively copied; codeblocks remain explicit source AST
+variants; dense lists, correct node types, supported modes/body kinds, and typed payload values are enforced.
+`parse_spec` remains absent, so no source syntax or parser capability is claimed by this leaf.
+
+The local gate passes syntax and existing process/corpus checks plus 13/13 PUC Lua and 13/13 LuaJIT tests. A
+representative function/staged-provenance/bounded-rule tree round-trips byte-canonical JSON, all ten body variants
+round-trip, and malformed/sparse/ambiguous input fails. Roadmap/book/KM/task/live docs advance to parser `.2.2`.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.1.3 — add strict Lua corpus IO
 
 Added a zero-dependency pure-Lua JSON codec shared by PUC Lua and LuaJIT. It implements strict UTF-8 and JSON

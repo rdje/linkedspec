@@ -3,9 +3,9 @@
 This directory contains the native Lua backend. PUC Lua 5.4 is the primary
 conformance runtime; LuaJIT is a secondary compatibility leg.
 
-Current status: repository-owned module/test/command scaffold plus strict corpus
-manifest/fixture IO. Parsing, corpus execution, the primary CLI contract, and
-generated source are deliberately not implemented yet.
+Current status: repository-owned module/test/command scaffold, strict corpus IO,
+and typed source/provenance AST data. Source parsing, corpus execution, the
+primary CLI contract, and generated source are deliberately not implemented yet.
 
 Run the local gate from the repository root:
 
@@ -30,3 +30,25 @@ lua lua/bin/corpus_runner.lua --corpus rust/linkedspec-runtime/tests/corpus
 The primary CLI remains a developer stub and exits `2`. The corpus runner loads
 strict UTF-8 source/input/JSON and explicitly reports that execution is not yet
 implemented.
+
+Construct and project a typed source node in memory:
+
+```lua
+local linkedspec = require("linkedspec")
+local ast = linkedspec.spec_ast
+
+local span = ast.source_span({ line_start = 1, line_end = 1 })
+local mode = ast.and_bounded_rule_mode({ min = 1, max = 2 })
+local header = ast.rule_header({
+  label = "Top",
+  is_top = true,
+  mode = mode,
+  rest = "/x/",
+  line = 1,
+})
+```
+
+`ast.to_json(node)` returns explicitly typed JSON tables suitable for
+`linkedspec.json.encode(...)`; `ast.from_json("SpecFile", value)` reconstructs
+the typed tree. Codeblocks are explicit AST variants, never inferred from Lua
+table layout. These are data APIs only—there is no `parse_spec` function yet.

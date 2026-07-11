@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.2.1 — add typed Lua source AST**
+  (DONE — neutral data/provenance round-trips both runtimes; parser `.2.2` next).
+
+  **Implementation:** Typed specs/functions/spans/jobs/rules/modes/ten body variants/targets/calls project through
+  exact neutral JSON fields. JSON sidecars are copied, codeblocks are explicit nodes, and lists/types are validated.
+
+  **Proof:** PUC Lua 13/13 and LuaJIT 13/13 plus syntax/process/105-corpus legs pass. Representative provenance,
+  bounded modes, all variants, canonical round-trip, malformed input, and sparse/ambiguous tables are locked.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.1.3 — add strict Lua corpus IO**
   (DONE — typed JSON and exact 105-case IO pass both runtimes; source AST `.2.1` next).
 

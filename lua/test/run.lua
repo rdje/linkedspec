@@ -40,6 +40,7 @@ end
 local linkedspec = require("linkedspec")
 local corpus_runner = require("linkedspec.corpus_runner")
 local json = linkedspec.json
+local ast = linkedspec.spec_ast
 
 local function shell_quote(value)
   return "'" .. value:gsub("'", "'\\''") .. "'"
@@ -269,6 +270,146 @@ test("corpus fixture files require strict UTF-8 and valid expected JSON", functi
       linkedspec.load_corpus_fixtures(root)
     end, "input.txt is not valid UTF-8 at byte 1", "invalid fixture UTF-8")
   end)
+end)
+
+test("source AST round-trips with neutral fields and provenance", function()
+  local payload = json.harray({ kind = "action_block" })
+  local job = ast.staged_parse_job({
+    job_id = "parse_job:function_body:functions.0.body_source",
+    parent_ast_path = { "functions", "0", "body_source" },
+    node_kind = "function_definition",
+    payload_kind = "action_block",
+    text = "return(trim(value))",
+    source_span = ast.staged_source_span({ start = 10, ["end"] = 28, line_start = 1, line_end = 1 }),
+    parser_spec_id = "actionir-body.spec",
+    top_rule = "action_block",
+    result_policy = "replace_field",
+    result_field = "body_ast",
+    failure_policy = "diagnostic",
+  })
+  local function_definition = ast.function_definition({
+    name = "normalize",
+    params = { "value" },
+    arity = 1,
+    body_source = "return(trim(value))",
+    body_payload = payload,
+    body_parse_job = job,
+    body_ast = json.harray({ kind = "code_block", statements = json.array() }),
+    source = "fn normalize(value) { return(trim(value)) }",
+    source_span = ast.source_span({ line_start = 1, line_end = 1 }),
+    body_span = ast.source_span({ line_start = 1, line_end = 1 }),
+  })
+  local minimal_function = ast.function_definition({
+    name = "noop",
+    params = {},
+    arity = 0,
+    body_source = "return()",
+    source = "fn noop() { return() }",
+    source_span = ast.source_span({ line_start = 2, line_end = 2 }),
+    body_span = ast.source_span({ line_start = 2, line_end = 2 }),
+  })
+  payload.kind = "mutated"
+  local mode = ast.and_bounded_rule_mode({ min = 1, max = 2 })
+  local spec = ast.spec_file({
+    functions = { function_definition, minimal_function },
+    rules = {
+      ast.rule({
+        header = ast.rule_header({
+          label = "Top",
+          is_top = true,
+          mode = mode,
+          rest = "/x/ -> Child[0] { return(normalize(retv)) }",
+          line = 2,
+        }),
+        body = {
+          ast.body_element({
+            kind = ast.regex_body_kind({ pattern = "x" }),
+            source = "/x/",
+            line = 2,
+          }),
+          ast.body_element({
+            kind = ast.action_edge_body_kind({
+              targets = { ast.edge_target({ label = "Child" }) },
+              code = "return(normalize(retv))",
+              fluent_chain = { ast.fluent_call({ method = "push", args = "" }) },
+            }),
+            source = "-> Child[0] { return(normalize(retv)) }.push",
+            line = 2,
+          }),
+          ast.body_element({
+            kind = ast.code_block_body_kind({ lifecycle = "I", code = "set(count, 0)" }),
+            source = "I { set(count, 0) }",
+            line = 3,
+          }),
+        },
+      }),
+    },
+  })
+
+  local projected = ast.to_json(spec)
+  local encoded = json.encode(projected)
+  local decoded = ast.from_json("SpecFile", json.decode(encoded))
+  assert_equal(ast.node_type(decoded), "SpecFile", "spec node type")
+  assert_equal(decoded.functions[1].body_payload.kind, "action_block", "payload defensive copy")
+  assert_equal(decoded.functions[1].body_parse_job.job_id, job.job_id, "parse-job provenance")
+  assert_equal(decoded.functions[2].body_parse_job, nil, "optional parse job")
+  assert_equal(decoded.functions[2].body_payload, nil, "optional body payload")
+  assert_equal(ast.top_rule(decoded).header.label, "Top", "top rule")
+  assert_equal(ast.find_rule(decoded, "Top").header.mode.name, "AndBounded", "find rule")
+  assert_equal(ast.rule_mode_is_and(ast.top_rule(decoded).header.mode), true, "AND mode")
+  assert_equal(ast.rule_mode_rep_min(ast.top_rule(decoded).header.mode), 1, "mode minimum")
+  assert_equal(ast.rule_mode_rep_max(ast.top_rule(decoded).header.mode), 2, "mode maximum")
+  assert_equal(ast.node_type(decoded.rules[1].body[3].kind), "CodeBlockBodyElementKind", "codeblock identity")
+  assert_equal(json.encode(ast.to_json(decoded)), encoded, "lossless AST JSON")
+end)
+
+test("source AST covers every body element variant", function()
+  local call = ast.fluent_call({ method = "push", args = "value" })
+  local target = ast.edge_target({ label = "Child", index = 2 })
+  local kinds = {
+    ast.regex_body_kind({ pattern = "x" }),
+    ast.action_edge_body_kind({ targets = { target }, fluent_chain = { call } }),
+    ast.blind_edge_body_kind({ target = "Child", fluent_chain = { call } }),
+    ast.code_block_body_kind({ lifecycle = "E", code = "return(retv)" }),
+    ast.plain_block_body_kind({ code = "return(retv)" }),
+    ast.split_marker_body_kind({ marker = "---" }),
+    ast.lifecycle_marker_body_kind({ marker = "I" }),
+    ast.fluent_chain_body_kind({ calls = { call } }),
+    ast.conditional_body_kind({ word = "if" }),
+    ast.raw_body_kind({ text = "legacy" }),
+  }
+  for index, kind in ipairs(kinds) do
+    local element = ast.body_element({ kind = kind, source = "source", line = index })
+    local decoded = ast.from_json("BodyElement", json.decode(json.encode(ast.to_json(element))))
+    assert_equal(ast.node_type(decoded.kind), ast.node_type(kind), "body kind " .. index)
+  end
+end)
+
+test("source AST rejects malformed types and unsupported variants", function()
+  assert_error_contains(function()
+    ast.rule_mode("Unknown")
+  end, "unsupported rule mode Unknown", "unknown rule mode")
+  assert_error_contains(function()
+    ast.from_json("BodyElementKind", json.harray({ kind = "unknown" }))
+  end, "unsupported body element kind unknown", "unknown body kind")
+  assert_error_contains(function()
+    ast.spec_file({ rules = { "not a rule" } })
+  end, "must contain only Rule nodes", "typed rule list")
+  assert_error_contains(function()
+    ast.spec_file({ rules = { [2] = "sparse" } })
+  end, "contiguous one-based integer indexes", "dense rule list")
+  assert_error_contains(function()
+    ast.function_definition({
+      name = "bad",
+      params = {},
+      arity = 0,
+      body_source = "",
+      body_payload = {},
+      source = "fn bad() {}",
+      source_span = ast.source_span({ line_start = 1, line_end = 1 }),
+      body_span = ast.source_span({ line_start = 1, line_end = 1 }),
+    })
+  end, "must be a typed JSON value", "ambiguous payload")
 end)
 
 io.stdout:write("1..", total, "\n")
