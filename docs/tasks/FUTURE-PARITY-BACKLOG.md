@@ -1545,16 +1545,39 @@ before implementation.
 - [x] **LOCKSTEP** — task/roadmap/live/book/capability/KM state remains at 56/2/2 and activates `.3.1.3.1`.
 
 - ID: `FUTURE-PARITY-BACKLOG.3.1.3.1`
-  Status: `active`
+  Status: `done`
   Goal: Align Rust emission metadata, source identity, and generated-source errors with contract v1.
   Acceptance: Add an idiomatic typed public request/error surface while preserving the compatibility emitter;
     emit deterministic contract/version/source-identity metadata; map emission, generated load/compile harness,
     plan validation, and execution failures to the stable contract fields/stages/codes with exact focused tests.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Rust now exposes `emit_rust_source_v1(compiled, source_identity)` with
+    deterministic contract/version/identity metadata and typed `GeneratedSourceError` stages/codes while the
+    original `emit_rust_source(compiled) -> Result<String, String>` and emitted `parse` adapters retain their exact
+    compatibility behavior. Focused source-emitter proof passes 4/4, including exact metadata JSON, empty-identity
+    emission failure, caller projection of compile/load failure, malformed embedded-spec validation, row-count
+    plan validation, attributed execution failure, deterministic identity behavior, and independently compiled
+    generated modules. The complete Rust gate passes 137 unit, 105 corpus, 196 integration, 5 diagnostics,
+    4 source-emitter, 5 spec-loader, 10 trace tests, doc/build checks, and 61/61 CLI cases in default and POSIX
+    environments. Strict Clippy reports only 14 pre-existing findings in untouched owners. Docs/KM/governance/
+    mdBook/cleanup pass; census remains 56/2/2 pending exact plan/trace `.2` and admission `.3`.
+  Commit: `FUTURE-PARITY-BACKLOG.3.1.3.1 - add Rust generated-source v1 metadata`
+
+## `FUTURE-PARITY-BACKLOG.3.1.3.1` Acceptance Checklist
+
+- [x] **PUBLIC TYPED SURFACE** — callers can supply source identity and receive structured emission errors through
+  `emit_rust_source_v1`; `GeneratedSourceError::compile_failed` projects the host compile/load boundary.
+- [x] **DETERMINISTIC METADATA** — emitted modules expose exact contract id, format version, source identity, and
+  `metadata()`; identical compiled input/identity emits identical source and changing identity changes source.
+- [x] **STABLE ERRORS** — emission, compile/load, plan-validation, and execution failure paths carry the contract
+  type, stage, code, summary, source identity, and available rule/family/detail attribution.
+- [x] **COMPATIBILITY** — the original string-returning emitter delegates with `<inline>` identity, while generated
+  `parse` and `parse_with_trace` continue to return the original raw string diagnostics and exact results.
+- [x] **NO REGRESSION** — focused 4/4 plus the complete 137/105/196/5/4/5/10 and 61x2 Rust gate pass.
+- [x] **LOCKSTEP** — Rust API/docs/book/task/live/capability/KM state records metadata/error completion without
+  claiming exact neutral plan/trace roles or capability admission; `.3.1.3.2` becomes active.
 
 - ID: `FUTURE-PARITY-BACKLOG.3.1.3.2`
-  Status: `pending`
+  Status: `active`
   Goal: Align Rust generated-plan rejection and neutral trace roles with contract v1.
   Acceptance: Validate exact ordered label/family rows using the ten neutral family names; reject row count, label,
     family mismatch, and unknown family before execution with exact codes; expose generated-rule enter, family
@@ -1916,8 +1939,8 @@ before implementation.
 | 61 | `FUTURE-PARITY-BACKLOG.3.1.2` | `done` | Perl public/legacy emission, reconstruction, plan/trace/errors, and exact independent execution pass. |
 | 62 | `FUTURE-PARITY-BACKLOG.3.1.3` | `active` | Admit Perl/Rust contract baseline and return Perl to pass before Rust breadth. |
 | 63 | `FUTURE-PARITY-BACKLOG.3.1.3.0` | `done` | Rust's green pre-v1 scaffold gaps are exact and three bounded alignment/admission leaves exist. |
-| 64 | `FUTURE-PARITY-BACKLOG.3.1.3.1` | `active` | Add typed Rust generated-source identity, metadata, and error roles. |
-| 65 | `FUTURE-PARITY-BACKLOG.3.1.3.2` | `pending` | Add exact neutral Rust plan rejection and generated trace roles. |
+| 64 | `FUTURE-PARITY-BACKLOG.3.1.3.1` | `done` | Typed v1 identity/metadata/errors, compatibility adapters, focused 4/4, and full Rust gate pass. |
+| 65 | `FUTURE-PARITY-BACKLOG.3.1.3.2` | `active` | Add exact neutral Rust plan rejection and generated trace roles. |
 | 66 | `FUTURE-PARITY-BACKLOG.3.1.3.3` | `pending` | Run full gates, admit Perl/Rust v1 baseline, and close `.3.1`. |
 | 67 | `FUTURE-PARITY-BACKLOG.3.2` | `pending` | Rust must expand from eight generated fixtures to the full 105-case manifest. |
 | 68 | `FUTURE-PARITY-BACKLOG.3.3` | `pending` | Dart needs emitter scaffold, family plan/direct execution, and manifest proof. |
@@ -2585,6 +2608,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.1` | Strict v1 schema/fixture checker; 10 families/4 rejections/error contract/direct trace+identity fixture/8-of-105 subset/live-state cross-check; canonical CI through Phase 0 `1..1030`; docs/KM/governance/whitespace/mdBook/cleanup. | PASS. Contract is canonically gated without backend behavior changes; Perl repair `.3.1.2` is active at 56/2/2. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.2` | Public/legacy deterministic source; isolated result/trace/identity/plan/error fixture; index 0/1 plus slash regex; four existing generated trace suites; measured Phase 0 FAIL 2/1030 stale locks -> PASS `1..1030` in 546s; canonical CI/docs/KM/governance/mdBook/cleanup. | PASS. Perl behavior repair is complete; capability stays partial until explicit `.3.1.3` admission. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.3.0` | Knowledge Map/source audit of Rust emitter API, markers, plan/error/trace roles, isolated harness, and exact subset; focused `source_emitter` 3/3 in 35.69s; capability/KM/governance/whitespace/mdBook/cleanup. | PASS. Four pre-v1 contract gaps are split into metadata/error `.1`, plan/trace `.2`, and admission `.3`; no behavior/status change. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.3.1` | Typed v1 emitter/metadata/errors and compatibility adapters; focused `source_emitter` 4/4; complete Rust gate 137/105/196/5/4/5/10 plus 61x2 CLI; strict-Clippy classification; docs/KM/governance/mdBook/cleanup. | PASS. Rust identity/metadata/error roles align without compatibility drift; census stays 56/2/2 and exact plan/trace `.2` is active. |
 
 ## Commit Log
 
@@ -2645,6 +2669,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.3.1.1` | `FUTURE-PARITY-BACKLOG.3.1.1 - define generated-source contract` | Strict semantic schema/checker, neutral direct fixture, canonical CI integration, and public docs; no backend behavior change. |
 | `FUTURE-PARITY-BACKLOG.3.1.2` | `FUTURE-PARITY-BACKLOG.3.1.2 - repair Perl generated source` | Public emitter, dependency reconstruction, metadata/plan/trace/errors, independent exact execution, and gates. |
 | `FUTURE-PARITY-BACKLOG.3.1.3.0` | `FUTURE-PARITY-BACKLOG.3.1.3.0 - split Rust generated-source v1 alignment` | Preserves the green pre-v1 baseline while splitting identity/errors, exact plan/trace, and admission. |
+| `FUTURE-PARITY-BACKLOG.3.1.3.1` | `FUTURE-PARITY-BACKLOG.3.1.3.1 - add Rust generated-source v1 metadata` | Typed identity/metadata/errors and host compile/load projection beside exact compatibility adapters. |
 
 ## Changelog
 
@@ -2683,6 +2708,10 @@ Read-only evidence recorded on 2026-07-10:
   legacy-repetition, isolated-crate, and eight-case proof stays green, but the pre-contract API has no source
   identity/contract marker, structured error, unknown-family rejection, or neutral generated trace roles.
   `.3.1.3.1-.3` own those mechanisms and admission; census remains 56/2/2 and `.1` becomes active.
+- `2026-07-11`: `.3.1.3.1` adds Rust's typed `emit_rust_source_v1` identity/error surface, deterministic contract/
+  version/identity metadata, typed emitted execution entrypoints, and caller projection for host compile/load
+  failures. The original string emitter and generated `parse` adapters preserve exact compatibility. Focused 4/4
+  and the complete 137/105/196/5/4/5/10 plus 61x2 gate pass; census remains 56/2/2 and exact plan/trace `.2` is active.
 - `2026-07-11`: `.1.6.4.5` adds Perl's separate portable `SpecLoader` facade and direct 14/9/4 plus pipeline proof
   without changing legacy `get_parser`/`PathSearch`. The canonical core gate passes the required new test, 239-name
   coverage, focused suites, 61x2 CLI, and Phase 0 `1..1030` in 556 seconds. Combined with immediately prior full

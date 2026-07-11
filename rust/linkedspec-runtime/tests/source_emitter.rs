@@ -6,8 +6,9 @@ use linkedspec_core::parser::parse_spec;
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::Engine;
 use linkedspec_runtime::source_emitter::{
-    GeneratedRuleFamily, GeneratedRuleSpec, classify_generated_rule_family, emit_rust_source,
-    execute_generated_parser,
+    GeneratedRuleFamily, GeneratedRuleSpec, GeneratedSourceCode, GeneratedSourceError,
+    GeneratedSourceMetadata, GeneratedSourceStage, classify_generated_rule_family,
+    emit_rust_source, emit_rust_source_v1, execute_generated_parser, execute_generated_parser_v1,
 };
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use serde::Deserialize;
@@ -176,6 +177,11 @@ const REP_RECURSION_GUARD_SOURCE_EMITTER_SPEC: &str = r#"Top::OR+
  /x*/ -> Top { return(cat("guard:", call(Top))) }
 "#;
 
+const EXECUTION_FAILURE_SOURCE_EMITTER_SPEC: &str = r#"Top::
+ /bye/
+ I { exit_now(7) }
+"#;
+
 const GENERATED_SOURCE_CORPUS_SUBSET: &[&str] = &[
     "proof_edge_array_literal",
     "proof_edge_scalar_literal",
@@ -304,6 +310,129 @@ serde_json = "1"
 
 fn rust_module_name_for_case(case_name: &str) -> String {
     format!("corpus_{case_name}")
+}
+
+#[test]
+fn generated_source_v1_metadata_and_structured_errors_are_exact() {
+    let parsed = parse_spec(SIMPLE_SOURCE_EMITTER_SPEC).expect("parse v1 metadata spec");
+    validate(&parsed).expect("validate v1 metadata spec");
+    let compiled = compile(&parsed).expect("compile v1 metadata spec");
+    let identity = "generated-source/rüst-'identity.spec";
+
+    let generated = emit_rust_source_v1(&compiled, identity).expect("emit v1 Rust source");
+    assert_eq!(
+        generated,
+        emit_rust_source_v1(&compiled, identity).expect("repeat deterministic v1 emission")
+    );
+    assert_ne!(
+        generated,
+        emit_rust_source_v1(&compiled, "generated-source/other.spec")
+            .expect("emit alternate identity")
+    );
+    assert_eq!(
+        emit_rust_source(&compiled).expect("emit compatibility source"),
+        emit_rust_source_v1(&compiled, "<inline>").expect("emit inline v1 source"),
+        "compatibility emitter must delegate to the typed v1 path"
+    );
+    assert!(generated.contains("linkedspec-generated-source-v1"));
+    assert!(generated.contains("LINKEDSPEC_GENERATED_SOURCE_CONTRACT"));
+    assert!(generated.contains("LINKEDSPEC_GENERATED_SOURCE_IDENTITY"));
+    assert!(generated.contains("generated-source/rüst-'identity.spec"));
+    assert!(generated.contains("pub fn metadata()"));
+    assert!(generated.contains("pub fn execute(input:"));
+    assert!(generated.contains("pub fn execute_with_trace(input:"));
+    assert!(generated.contains("pub fn parse(input:"));
+
+    let metadata = GeneratedSourceMetadata::new(identity);
+    assert_eq!(
+        serde_json::to_value(&metadata).expect("serialize generated metadata"),
+        json!({
+            "contract_id": "linkedspec-generated-source-v1",
+            "format_version": 1,
+            "source_identity": identity,
+        })
+    );
+
+    let emission_error =
+        emit_rust_source_v1(&compiled, "").expect_err("empty generated source identity must fail");
+    assert_eq!(emission_error.error_type, "generated_source_error");
+    assert_eq!(emission_error.stage, GeneratedSourceStage::EmitSource);
+    assert_eq!(
+        emission_error.code,
+        GeneratedSourceCode::GeneratedSourceEmitFailed
+    );
+    assert_eq!(emission_error.source_identity, "");
+    assert_eq!(
+        emission_error.to_json().expect("serialize emission error"),
+        json!({
+            "type": "generated_source_error",
+            "stage": "emit_source",
+            "code": "generated_source_emit_failed",
+            "summary": "Generated Rust source identity must not be empty",
+            "source_identity": "",
+            "detail": "source_identity is required",
+        })
+    );
+
+    let compile_error = GeneratedSourceError::compile_failed(identity, "rustc failed");
+    assert_eq!(
+        compile_error.stage,
+        GeneratedSourceStage::CompileOrLoadGeneratedSource
+    );
+    assert_eq!(
+        compile_error.code,
+        GeneratedSourceCode::GeneratedSourceCompileFailed
+    );
+    assert_eq!(compile_error.source_identity, identity);
+
+    let invalid_json_error = execute_generated_parser_v1("not json", &[], "", identity)
+        .expect_err("invalid embedded compiled spec must fail as generated load");
+    assert_eq!(
+        invalid_json_error.stage,
+        GeneratedSourceStage::CompileOrLoadGeneratedSource
+    );
+    assert_eq!(
+        invalid_json_error.code,
+        GeneratedSourceCode::GeneratedSourceCompileFailed
+    );
+
+    let compiled_json = serde_json::to_string(&compiled).expect("serialize compiled v1 fixture");
+    let plan_error = execute_generated_parser_v1(&compiled_json, &[], "hello one", identity)
+        .expect_err("missing generated plan rows must fail before execution");
+    assert_eq!(
+        plan_error.stage,
+        GeneratedSourceStage::ValidateGeneratedPlan
+    );
+    assert_eq!(
+        plan_error.code,
+        GeneratedSourceCode::GeneratedPlanRowCountMismatch
+    );
+    assert_eq!(plan_error.source_identity, identity);
+
+    let parsed_failure =
+        parse_spec(EXECUTION_FAILURE_SOURCE_EMITTER_SPEC).expect("parse execution failure spec");
+    validate(&parsed_failure).expect("validate execution failure spec");
+    let compiled_failure = compile(&parsed_failure).expect("compile execution failure spec");
+    let compiled_failure_json =
+        serde_json::to_string(&compiled_failure).expect("serialize execution failure spec");
+    let failure_plan = [GeneratedRuleSpec {
+        label: "Top",
+        family: GeneratedRuleFamily::Default,
+    }];
+    let execution_error =
+        execute_generated_parser_v1(&compiled_failure_json, &failure_plan, "bye", identity)
+            .expect_err("exit_now must become a typed generated execution failure");
+    assert_eq!(
+        execution_error.stage,
+        GeneratedSourceStage::ExecuteGenerated
+    );
+    assert_eq!(
+        execution_error.code,
+        GeneratedSourceCode::GeneratedExecutionFailed
+    );
+    assert_eq!(execution_error.rule_label.as_deref(), Some("Top"));
+    assert_eq!(execution_error.handler_family.as_deref(), Some("Default"));
+    assert_eq!(execution_error.detail.as_deref(), Some("exit_now(7)"));
 }
 
 #[test]
@@ -510,13 +639,17 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         generated_tests.push_str(case.module);
         generated_tests.push_str("_runs() {\n        let actual = crate::");
         generated_tests.push_str(case.module);
-        generated_tests.push_str("::parse(");
+        generated_tests.push_str("::execute(");
         generated_tests.push_str(&input_literal);
         generated_tests.push_str(").expect(\"generated parser should run\");\n        let expected: serde_json::Value = serde_json::from_str(");
         generated_tests.push_str(
             &serde_json::to_string(&expected_literal).expect("encode expected JSON literal"),
         );
-        generated_tests.push_str(").expect(\"expected JSON should parse\");\n        assert_eq!(actual, expected);\n    }\n");
+        generated_tests.push_str(").expect(\"expected JSON should parse\");\n        assert_eq!(actual, expected);\n        let compatibility = crate::");
+        generated_tests.push_str(case.module);
+        generated_tests.push_str("::parse(");
+        generated_tests.push_str(&input_literal);
+        generated_tests.push_str(").expect(\"compatibility parser should run\");\n        assert_eq!(compatibility, expected);\n    }\n");
     }
     assert_eq!(
         covered_non_rep_families, expected_non_rep_families,
@@ -658,13 +791,17 @@ fn generated_rust_source_matches_manifest_backed_corpus_subset() {
         generated_tests.push_str(&module);
         generated_tests.push_str("_matches_oracle() {\n        let actual = crate::");
         generated_tests.push_str(&module);
-        generated_tests.push_str("::parse(");
+        generated_tests.push_str("::execute(");
         generated_tests.push_str(&input_literal);
         generated_tests.push_str(").expect(\"generated corpus parser should run\");\n        let expected: serde_json::Value = serde_json::from_str(");
         generated_tests.push_str(
             &serde_json::to_string(&expected_literal).expect("encode expected JSON literal"),
         );
-        generated_tests.push_str(").expect(\"expected JSON should parse\");\n        assert_eq!(actual, expected);\n    }\n");
+        generated_tests.push_str(").expect(\"expected JSON should parse\");\n        assert_eq!(actual, expected);\n        let compatibility = crate::");
+        generated_tests.push_str(&module);
+        generated_tests.push_str("::parse(");
+        generated_tests.push_str(&input_literal);
+        generated_tests.push_str(").expect(\"compatibility corpus parser should run\");\n        assert_eq!(compatibility, expected);\n    }\n");
     }
 
     generated_tests.push_str("}\n");

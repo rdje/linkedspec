@@ -14,10 +14,38 @@ The `rust/` directory contains a Cargo workspace with two crates:
 The Rust variant primarily interprets its compiled structural contract at runtime: the engine walks compiled rule
 specifications and executes regex matching, child rule dispatch, and lifecycle code as direct Rust function calls.
 It also exposes a generated-source path (`linkedspec_runtime::source_emitter`) that emits a Rust module embedding a
-`CompiledSpec`, a validated rule-family plan, and a `parse(input)` entry point. Generated parsers now route through a
+`CompiledSpec`, source identity, contract metadata, a validated rule-family plan, and typed `execute(input)` plus
+compatible string-returning `parse(input)` entry points. Generated parsers now route through a
 plan-aware executor: default, OR acode, AND acode, AND bcode, OR bcode, REP acode, REP bcode, REP-AND acode, and
 REP-AND bcode families run directly. The generated-source test harness validates every supported structural family
 and a manifest-backed corpus subset; the full 105-fixture corpus remains the interpreter oracle gate.
+
+### Generated Rust source
+
+New native callers should use the typed v1 API and supply the identity that owns the compiled input:
+
+```rust
+use linkedspec_runtime::source_emitter::{
+    GeneratedSourceError, emit_rust_source_v1,
+};
+
+let source = emit_rust_source_v1(&compiled, "specs/example.spec")?;
+
+// If a caller's Rust compiler rejects the emitted module, project that host
+// boundary into the same portable generated-source error contract.
+let compile_error = GeneratedSourceError::compile_failed(
+    "specs/example.spec",
+    "rustc exited with status 1",
+);
+assert_eq!(compile_error.source_identity, "specs/example.spec");
+# Ok::<(), Box<dyn std::error::Error>>(())
+```
+
+The generated module exports exact contract id, format version, source identity, and `metadata()`. Its typed
+`execute`/`execute_with_trace` entrypoints return `GeneratedSourceError`; legacy `parse`/`parse_with_trace` retain
+their original `String` error API. `emit_rust_source(&compiled)` remains a compatibility adapter using `<inline>`
+identity. Exact neutral plan-family spellings and generated trace roles remain an explicit convergence step before
+the Rust baseline is admitted; the richer native trace remains available.
 
 ## Quick Start
 

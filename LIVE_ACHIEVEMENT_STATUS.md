@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.3.1.3.1 — add Rust generated-source v1 metadata**
+  (DONE — typed identity/metadata/errors and compatibility adapters green; exact plan/trace `.2` active).
+
+  **Implementation:** `emit_rust_source_v1` accepts source identity and returns typed portable failures; emitted
+  modules expose contract/version/identity metadata plus typed execution. The old emitter and generated parse APIs
+  preserve their string signatures and exact result/error behavior.
+
+  **Proof:** Focused source-emitter 4/4 and complete Rust 137/105/196/5/4/5/10 plus 61x2 CLI pass. Strict Clippy
+  names only 14 pre-existing findings in untouched owners. Census stays 56/2/2 pending plan/trace and admission.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.1.3.0 — split Rust generated-source v1 alignment**
   (DONE — source-backed contract gaps split; typed metadata/error `.3.1.3.1` active).
 

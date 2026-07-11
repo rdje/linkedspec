@@ -20,8 +20,9 @@ semantic roles rather than host-language spelling.
 
 Every backend must accept a compiled specification plus stable source identity,
 emit deterministic host-language source, independently compile or load it, and
-offer ordinary and traced execution. Persisted source is strict UTF-8 Unicode
-text and carries contract, format-version, and source-identity markers. Perl,
+offer ordinary and traced execution. The source model is Unicode scalar text;
+when persisted by the current contract, its byte encoding is strict UTF-8. It
+carries contract, format-version, and source-identity markers. Perl,
 Rust, Dart, and Julia source bytes are not expected to match: their host APIs
 remain idiomatic and their source syntax remains native. Results, diagnostics,
 trace roles, identity, and plan validation must match.
@@ -41,12 +42,39 @@ named fixtures; Rust must broaden to the complete 105-case manifest, while new
 emitters prove the accepted subset plus every structural family. The interpreter
 manifest stays the primary correctness oracle.
 
-Rust's existing source-emitter scaffold predates this contract. Its all-family
-and accepted-subset compile/run proof is green, but contract-v1 source identity,
-structured errors, exact unknown-family rejection, and the three neutral trace
-roles are being aligned under `FUTURE-PARITY-BACKLOG.3.1.3.1-.2` before baseline
-admission. Native `rust_runtime:generated_plan:*` trace detail remains valuable;
-the neutral roles are an additional portable projection, not a replacement.
+Rust's source-emitter now implements contract-v1 identity, metadata, and typed
+errors. Native callers use
+`emit_rust_source_v1(&compiled, "path/to/input.spec")`; the generated module
+exports contract/version/identity constants, `metadata()`, and typed `execute`
+and `execute_with_trace` roles. `GeneratedSourceError` records the portable
+stage, code, summary, identity, and available rule/family/detail attribution;
+`GeneratedSourceError::compile_failed(...)` projects the caller-owned Rust
+compiler/load boundary into that same record.
+
+The original `emit_rust_source(&compiled) -> Result<String, String>` remains a
+compatibility adapter with `<inline>` identity. Generated `parse` and
+`parse_with_trace` likewise retain raw-string diagnostics, so adopting v1 does
+not silently alter existing Rust callers.
+
+Exact neutral family spellings, independently testable unknown-family
+rejection, and the three neutral trace roles remain under
+`FUTURE-PARITY-BACKLOG.3.1.3.2` before baseline admission. Native
+`rust_runtime:generated_plan:*` trace detail remains valuable; the neutral
+roles are an additional portable projection, not a replacement.
+
+```rust
+use linkedspec_runtime::source_emitter::{
+    GeneratedSourceError, emit_rust_source_v1,
+};
+
+let generated = emit_rust_source_v1(&compiled, "specs/example.spec")?;
+let host_failure = GeneratedSourceError::compile_failed(
+    "specs/example.spec",
+    "rustc rejected generated.rs",
+);
+assert_eq!(host_failure.source_identity, "specs/example.spec");
+# Ok::<(), Box<dyn std::error::Error>>(())
+```
 
 ## Why this matters
 

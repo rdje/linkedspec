@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.1.3.1 — add a contract surface beside compatibility):
+  A typed public API can be added without silently changing an established string API. Make the legacy emitter a
+  thin adapter with a stable default identity, but keep generated legacy entrypoints routed through their original
+  raw-string execution functions so exact diagnostic text remains compatible. New generated entrypoints may expose
+  typed stage/code/source/rule/family attribution. The host compiler lives outside the emitted module, so publish a
+  constructor that lets the caller project compile/load detail into the same error contract. Box optional strings
+  in a broad error record to keep `Result<_, Error>` below Clippy's large-error threshold without suppressing it.
+  Metadata/error alignment does not imply plan/trace alignment: retain that explicit next-leaf boundary.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.1.3.0 — align a pre-contract implementation before admitting it):
   A green source-emitter test does not prove a later neutral contract unless every role is projected explicitly.
   Rust's scaffold correctly proves independent native compilation, all-family execution, and the accepted subset,

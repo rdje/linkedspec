@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.1.3.1 — add Rust generated-source v1 metadata
+
+Added Rust's typed `emit_rust_source_v1(compiled, source_identity)` API, deterministic generated-module contract/
+format/identity constants and `metadata()`, and serializable `GeneratedSourceError` stage/code/source-attribution
+records. Callers can project host compiler or loader failures through `GeneratedSourceError::compile_failed`;
+typed execution covers malformed embedded state, plan validation, and attributed runtime failures.
+
+Preserved both compatibility layers: `emit_rust_source(compiled)` still returns `Result<String, String>` using the
+stable `<inline>` identity, and emitted `parse`/`parse_with_trace` retain original raw-string error behavior while
+new `execute`/`execute_with_trace` expose typed failures. Focused proof is 4/4; the full Rust gate passes 137 unit,
+105 corpus, 196 integration, 5 diagnostics, 4 source-emitter, 5 loader, 10 trace, build/doc checks, and 61x2 CLI.
+Capability census remains 56/2/2 until exact neutral plan/trace alignment `.3.1.3.2` and admission `.3.1.3.3`.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.1.3.0 — split Rust generated-source v1 alignment
 
 Audited the existing public Rust source emitter against every generated-source contract-v1 role before baseline
