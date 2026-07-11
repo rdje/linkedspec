@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.0 — audit neutral language coverage
+
+**Exhaustive call audit:** Added a reusable auditor that derives the current ActionIR call-name sets directly from
+Dart and Julia and requires exact identity. Report mode finds 237 shared names, all documented in the mdBook; 98
+are not yet present as call shapes in the 99-fixture neutral corpus. Strict mode remains intentionally red until
+the post-repair `.1.6.1.2` closeout.
+
+**Fixture/toolbox split:** Seeded six canonical backend-neutral fixture sources across pure, position, control,
+anonymous capture, named capture/mark, and cursor-control families. The first three execute on Perl. Toolbox
+lowering probes show that capture assignments, cursor controls, and marker chains separated by physical newlines
+can miss generated Perl terminators or leave following targets raw; explicit same-line semicolon separation works.
+The contract is unchanged, and `.1.6.1.1` owns the common repair.
+
+**Proof/frontier:** Auditor syntax/report, exact direct fixture results, and Phase 0 `1..1028` pass. The mdBook,
+roadmap, task index, and Knowledge Map record the current implementation qualification. No runtime behavior or
+generated oracle manifest changed; `.1.6.1.1` is active.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.0 — audit backend capability parity
 
 **Validated census:** Added `capability_conformance/manifest.json` plus a strict checker. Fifteen current

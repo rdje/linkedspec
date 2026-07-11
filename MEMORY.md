@@ -18,18 +18,18 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.0` — validated 15x4 capability census/split is closed.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.4.3` — recurring warmed 4x2x61 matrix closed exact CLI `.1.5`.
-- recent_context: Capability matrix has 47 pass/five partial/eight gap backend states; `.1.6.1`–`.1.6.6` own
-  non-codegen proof/repairs, while generated-source breadth remains top-level `.3` before Lua.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.0` — exhaustive current-call audit/split is closed.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.0` — validated 15x4 capability census/split is closed.
+- recent_context: Dart/Julia have 237 identical current ActionIR call names; all are documented and 98 are not yet
+  in the 99-case corpus. Six canonical fixtures expose a shared Perl newline boundary/raw-target lowering gap.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.0 - audit backend capability parity`; previous committed HEAD is
-  `5e8351c6 FUTURE-PARITY-BACKLOG.1.5.4.3 - close exact primary CLI parity`.
+  `FUTURE-PARITY-BACKLOG.1.6.1.0 - audit neutral language coverage`; previous committed HEAD is
+  `67077069 FUTURE-PARITY-BACKLOG.1.6.0 - audit backend capability parity`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1` neutral language/helper capability proof is active.
-- next_action: map every current non-legacy mdBook language/helper/API contract to an existing neutral fixture or
-  add one; run unchanged on all four backends and split any real mismatch before behavior repair.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.1` universal newline statement separation repair is active.
+- next_action: toolbox-first inspect StatementSplit/RewritePipeline/MethodLowering boundaries, repair physical
+  newline separation for capture/cursor/assignment/marker families, add focused locks, then run neutral proof.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
@@ -53,5 +53,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none after this commit; Rust target, Julia depot, and Dart tool cache were
-  safely removed after all verification results were consumed.
+- blockers: none. in_flight_uncommitted: none after this commit; strict language coverage remains intentionally
+  red until `.1.6.1.2`, and no incomplete fixture has entered the generated corpus.

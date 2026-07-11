@@ -54,9 +54,18 @@ Bootstrap normalizes the captured `elseif`/`else` tail into newline-separated he
 splitting. That keeps attached-control syntax supported without treating arbitrary same-line helper adjacency
 as canonical.
 
+## Current Coverage Qualification
+
+The focused `.1.5.4` lock established the separator contract and the ordinary `set(...)` then `return(...)`
+lowering path. A later exhaustive helper audit found that the Perl reference does not yet apply the contract
+universally to consecutive capture assignments, cursor controls, and marker-style control sequences. See
+[[perl-newline-statement-separator-coverage-gap]] and its repair owner
+`FUTURE-PARITY-BACKLOG.1.6.1.1`. This is an implementation gap; the contract above is unchanged.
+
 ## Links
 
 - Tree: [[SPEC-FORMAT-TERSE]] leaf `.1.5.4`.
 - Example-alignment follow-up: [[STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT]] leaf `.1`.
+- Current implementation gap: [[perl-newline-statement-separator-coverage-gap]].
 - Supersedes the separator portion of [[terse-literals-calls-separators-access-ground-truth]].
 - Call-spacing boundary: [[terse-call-spacing-contract]].

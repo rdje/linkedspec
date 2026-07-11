@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.0 — audit neutral language coverage**
+  (DONE — exhaustive audit/split closed; newline separator repair `.1.6.1.1` active).
+
+  **Audit:** Dart and Julia expose the same 237 current ActionIR names. All are in the mdBook; 98 are absent from
+  the 99-case neutral source corpus. Six canonical fixture families make the residual surface concrete.
+
+  **Finding/proof:** Pure, position, and explicit-separator control fixtures execute on Perl. Toolbox probes isolate
+  missing generated boundaries/raw targets in newline capture, cursor, and marker sequences. Phase 0 `1..1028`
+  passes; no runtime behavior or generated corpus changed.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.0 — audit backend capability parity**
   (DONE — validated 15x4 census/split closed; neutral proof `.1.6.1` active).
 

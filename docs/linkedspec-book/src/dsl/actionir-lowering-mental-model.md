@@ -123,6 +123,14 @@ spaces do not create a boundary. Nested semicolons inside expression payloads st
 the payload. Executable examples therefore omit line-ending semicolons whenever a newline
 already separates the statements.
 
+> **Current Perl reference limitation:** the contract above is broader than the coverage of
+> the current text-lowering implementation. Consecutive capture assignments, cursor-control
+> calls, and marker-style control statements can still miss the generated Perl separator or
+> leave the following assignment target raw. This is tracked by
+> `FUTURE-PARITY-BACKLOG.1.6.1.1`; authors should not reinterpret the limitation as a requirement
+> for line-ending semicolons. The repair must make these newline forms equivalent to their
+> same-line semicolon-separated forms.
+
 ### CanonicalEvents
 
 `ActionIR::CanonicalEvents` records recognized current helper calls as ActionIR event records. Each event carries a contract ID, resolved arguments, and metadata needed by the later lowering stages. Deleted helper names are not canonicalized into replacement events. Raw-Perl compatibility passthroughs may still be classified for migration reporting, but their descriptor-facing diagnostic labels stay neutral instead of reusing retired helper names.

@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.0 — a green representative separator test is not universal proof):
+  Derive capability inventories from independent backend contract tables, then audit documentation and executable
+  corpus coverage separately. The existing `set(...)`/`return(...)` newline lock proved its path but not every
+  lowering owner. Bounded capture, cursor, and marker fixtures exposed missing generated terminators and raw next
+  targets at cross-owner boundaries. Keep the language contract authoritative, document the temporary reference
+  limitation, split the common mechanism before repair, and do not admit incomplete fixtures into the frozen
+  cross-backend corpus merely to improve a coverage count.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.0 — green subsets are not a complete capability proof):
   Keep CLI identity, interpreter corpus identity, and public capability identity as separate evidence layers. A
   machine-readable census must point each backend state to canonical docs/source/tests and require a task owner for

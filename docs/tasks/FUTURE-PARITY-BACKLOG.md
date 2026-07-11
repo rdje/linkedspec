@@ -577,9 +577,56 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1`
   Status: `active`
   Goal: Turn the complete current mdBook language/helper surface into neutral executable capability proof.
+  Children: `.1.6.1.0`, `.1.6.1.1`, `.1.6.1.2`
   Acceptance: Map every current non-legacy language, rule, lifecycle, ActionIR, helper, method, value-kind, cursor,
     capture, function, and staged-body contract to an existing neutral fixture or add a backend-neutral fixture;
     run unchanged on Perl/Rust/Dart/Julia; split any behavioral mismatch by mechanism before repair.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.0`
+  Status: `done`
+  Goal: Audit exhaustive current-call documentation/corpus coverage and split every observed mismatch before code.
+  Acceptance: Derive the shared Dart/Julia current ActionIR call-name inventory, require exact set identity, audit
+    every name against the mdBook and neutral corpus source (including canonical parser-produced markers), seed
+    bounded Perl-oracle fixtures by semantic family, capture toolbox source/runtime evidence for each blocker, and
+    split rather than repair every mismatch found; do not require the incomplete fixtures to join the manifest yet.
+  Acceptance Checklist:
+    - REPRODUCE: run the inventory auditor in report mode and execute the bounded fixture families against Perl.
+    - ROOT CAUSE: use `TOOLBOX.md` probes to identify whether failures are inventory, documentation, parser,
+      statement-splitting, lowering, or runtime seams rather than classifying them from fixture output alone.
+    - FIX: install the reusable strict/report auditor, canonical neutral fixture sources, and exact repair/closeout
+      child leaves; do not change runtime behavior in this audit slice.
+    - ADDRESSED: record every discovered mismatch in a durable fact card and an owning child acceptance contract.
+    - NO REGRESSION: syntax-check the auditor and run the existing focused separator locks plus governance gates.
+    - LOCKSTEP: update the roadmap/task frontier, live docs, MEMORY resume pointer, mdBook limitation note, and
+      generated Knowledge Map in the same commit.
+  Verification: `perl -c tools/check_language_capability_coverage.pl` passes; report mode derives 237 identical
+    Dart/Julia current call names, zero missing mdBook names, and 98 names absent from the 99-fixture corpus.
+    Direct Perl execution passes pure-helper, position-helper, and one-line separator-explicit control fixtures;
+    toolbox probes reproduce missing generated boundaries/raw targets for capture, cursor, and newline marker
+    families. `PERL5LIB= prove -v -Iperl t/phase0_regression.t` passes `1..1028` in 501 seconds.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.0 - audit neutral language coverage`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.1`
+  Status: `active`
+  Goal: Make physical newlines universally separate ActionIR statements without requiring trailing semicolons.
+  Acceptance: Root-cause and repair Perl reference splitting/lowering so consecutive ordinary helpers, assignments,
+    cursor/capture calls, and `if/i`/`elseif/elif`/`else`/`endif` plus switch markers separated by physical newlines
+    lower equivalently to same-line semicolon-separated statements; preserve nested strings/regexes/blocks; add
+    focused source/runtime locks and unchanged Rust/Dart/Julia neutral proof before resuming coverage closeout.
+  Verification: `pending` — toolbox `call_spec_handler_subst` lowers only the first newline-separated capture/cursor
+    assignment and leaves following source raw; marker chains similarly leave inner branches raw, while one physical
+    line with semicolon separators lowers correctly.
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.1.6.1.2`
+  Status: `pending`
+  Goal: Complete and run exhaustive current-call neutral coverage after newline separator repair.
+  Acceptance: Finish bounded pure/position/capture/mark/cursor/control fixtures, make the coverage checker require
+    every current Dart/Julia ActionIR name in the mdBook and generated neutral corpus, regenerate Perl oracle bytes,
+    run the unchanged corpus on Perl/Rust/Dart/Julia, split any residual behavioral mismatch, and close parent
+    `.1.6.1` only when `language.current_mdbook_surface` can move from partial to pass.
   Verification: `pending`
   Commit: `pending`
 
@@ -838,23 +885,25 @@ before implementation.
 | 24 | `FUTURE-PARITY-BACKLOG.1.5.4.2` | `done` | Independent canonical trace closes Julia at 61/61 default/POSIX. |
 | 25 | `FUTURE-PARITY-BACKLOG.1.5.4.3` | `done` | Recurring 4x2x61 driver and all focused/broader gates close exact CLI parity. |
 | 26 | `FUTURE-PARITY-BACKLOG.1.6.0` | `done` | Validated 15-capability census classifies and owns all current gaps before behavior changes. |
-| 27 | `FUTURE-PARITY-BACKLOG.1.6.1` | `active` | Convert the complete current mdBook language/helper surface into neutral executable proof. |
-| 28 | `FUTURE-PARITY-BACKLOG.1.6.2` | `pending` | Add Rust's missing outward compiled-descriptor projection. |
-| 29 | `FUTURE-PARITY-BACKLOG.1.6.3` | `pending` | Add structured Rust native runtime diagnostics. |
-| 30 | `FUTURE-PARITY-BACKLOG.1.6.4` | `pending` | Add native named/file resolution to Rust, Dart, and Julia. |
-| 31 | `FUTURE-PARITY-BACKLOG.1.6.5` | `pending` | Extend Dart native trace through frontend/compiler/function-shell/staged phases. |
-| 32 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
-| 33 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
-| 34 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
-| 35 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
-| 36 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
-| 37 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
-| 38 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
-| 39 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
-| 40 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
-| 41 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
-| 42 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
-| 43 | `FUTURE-PARITY-BACKLOG.11.1` | `pending` | Director's generic final-codeblock argument correction is parked behind the active UTF-8/CLI frontier. |
+| 27 | `FUTURE-PARITY-BACKLOG.1.6.1.0` | `done` | 237 names documented; 98 corpus gaps audited; canonical fixture families and shared separator blocker split. |
+| 28 | `FUTURE-PARITY-BACKLOG.1.6.1.1` | `active` | Repair universal newline statement separation exposed by capture/cursor/control fixtures. |
+| 29 | `FUTURE-PARITY-BACKLOG.1.6.1.2` | `pending` | Finish exhaustive neutral current-call proof after the separator repair. |
+| 30 | `FUTURE-PARITY-BACKLOG.1.6.2` | `pending` | Add Rust's missing outward compiled-descriptor projection. |
+| 31 | `FUTURE-PARITY-BACKLOG.1.6.3` | `pending` | Add structured Rust native runtime diagnostics. |
+| 32 | `FUTURE-PARITY-BACKLOG.1.6.4` | `pending` | Add native named/file resolution to Rust, Dart, and Julia. |
+| 33 | `FUTURE-PARITY-BACKLOG.1.6.5` | `pending` | Extend Dart native trace through frontend/compiler/function-shell/staged phases. |
+| 34 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
+| 35 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
+| 36 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 37 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
+| 38 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
+| 39 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
+| 40 | `FUTURE-PARITY-BACKLOG.6` | `pending` | Plugin machinery fate is a Perl-reference facade decision. |
+| 41 | `FUTURE-PARITY-BACKLOG.7` | `pending` | Richer oracle candidates need safe fixture triage. |
+| 42 | `FUTURE-PARITY-BACKLOG.8.1` | `pending` | Director's single-source parser+stimuli roundtrip arc is parked for later design. |
+| 43 | `FUTURE-PARITY-BACKLOG.9.1` | `pending` | Director's corrected AND/OR edge-default arc is parked for later design. |
+| 44 | `FUTURE-PARITY-BACKLOG.10.1` | `pending` | Director's semantic-introspection API/MCP arc is parked behind the active backend frontier. |
+| 45 | `FUTURE-PARITY-BACKLOG.11.1` | `pending` | Director's generic final-codeblock argument correction is parked behind the active UTF-8/CLI frontier. |
 
 ## `FUTURE-PARITY-BACKLOG.1.5.1.6.1` Neutral Hex-Byte Fixture Materialization
 
