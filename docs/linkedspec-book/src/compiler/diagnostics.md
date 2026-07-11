@@ -82,7 +82,8 @@ The JSON record uses the same neutral names: `type`, `stage`, `owner_stage`, `su
 Rule failures capture the deepest child before its frame unwinds; missing entry rules use `rule_lookup`, and an
 empty compiled state uses `top_rule_selection`. Existing `execute(...)` / `execute_value(...)` methods remain
 `Result<_, String>` compatibility adapters with identical messages and successful values. Trace methods and the
-canonical primary CLI projection are unchanged. Final recurring-gate admission remains `.1.6.3.2`.
+canonical primary CLI projection are unchanged. The complete Rust/CLI recurring gate passes, and `.1.6.3.2`
+admits this capability for all four variants.
 
 ## Typical payload shape
 

@@ -1,6 +1,16 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.3.2 — admit Rust runtime diagnostics
+
+Reran the complete Rust recurring gate over the committed typed diagnostic implementation. Formatting; 137 unit,
+105 oracle, 196 integration, five diagnostic, three generated-source, and ten trace tests pass. Exact primary CLI
+conformance remains 61/61 under both default and POSIX option environments.
+
+Promoted `embedding.structured_runtime_diagnostics` to pass for Rust and removed its gap owner. The capability
+census is now 53 pass / one partial / six gap, structured diagnostic parent `.1.6.3` closes, and native named/file
+resolution `.1.6.4` becomes active. Removed the consumed 2.0 GB Rust target cache after verification.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.3.1 — add Rust runtime diagnostics
 
 Added exported serializable `RuntimeDiagnostic` and compact `RuntimeExecutionError` records plus

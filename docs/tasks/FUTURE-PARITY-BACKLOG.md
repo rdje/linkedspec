@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-11` (typed Rust diagnostics `.1.6.3.1` closed; final admission `.1.6.3.2` active).
+- Last updated: `2026-07-11` (structured Rust diagnostics `.1.6.3` closed; native named/file resolution `.1.6.4` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -1018,14 +1018,16 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.2.3 - admit exact descriptor parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.3`
-  Status: `active`
+  Status: `done`
   Goal: Add structured Rust runtime diagnostic context equivalent to the other native backends.
   Children: `.1.6.3.0`, `.1.6.3.1`, `.1.6.3.2`
   Acceptance: Native Rust runtime failures expose stable type/stage/summary/detail plus available spec/top/rule/
     handler attribution as structured data rather than requiring string scraping; ordinary `Result` ergonomics,
     CLI phase projection, trace behavior, and successful results remain compatible.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Typed/JSON diagnostic implementation, exact focused evidence, complete runtime package, complete
+    recurring Rust gate, and both CLI environments pass. Existing success/string/trace/CLI behavior stays exact;
+    the capability row is pass for all four variants.
+  Commit: closed by `FUTURE-PARITY-BACKLOG.1.6.3.2 - admit Rust runtime diagnostics`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.3.0`
   Status: `done`
@@ -1061,15 +1063,18 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.3.1 - add Rust runtime diagnostics`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.3.2`
-  Status: `active`
+  Status: `done`
   Goal: Admit and close structured Rust runtime diagnostic parity.
   Acceptance: Focused error-shape/source/top/child-rule/success/string-compatibility tests and complete Rust/CLI
     gates pass; mdBook/live docs/capability census agree; promote the Rust state to pass and advance to `.1.6.4`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `tools/run_rust_local.sh` passes formatting, 137 unit, 105 oracle, 196 integration, five focused
+    diagnostic, three generated-source, and ten trace tests, then exact 61/61 primary CLI conformance under both
+    default and POSIX option environments. The capability checker promotes structured runtime diagnostics to pass
+    and reports 53 pass / one partial / six gap. Generated Rust artifacts (2.0 GB) are removed after verification.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.3.2 - admit Rust runtime diagnostics`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.4`
-  Status: `pending`
+  Status: `active`
   Goal: Add idiomatic native named/file spec resolution to Rust, Dart, and Julia.
   Acceptance: Each non-Perl library exposes the book's file-oriented role with deterministic explicit-path and
     named-spec resolution/search precedence, strict text loading, parse/compile composition, and structured errors;
@@ -1329,8 +1334,8 @@ before implementation.
 | 48 | `FUTURE-PARITY-BACKLOG.1.6.2.3` | `done` | Exact shared descriptor/function-record contract passes all four variants; `.1.6.2` closes. |
 | 49 | `FUTURE-PARITY-BACKLOG.1.6.3.0` | `done` | Audit found raw runtime `Result<_, String>` APIs and split typed implementation from admission. |
 | 50 | `FUTURE-PARITY-BACKLOG.1.6.3.1` | `done` | Typed/JSON errors, source/top/child attribution, five focused tests, and full runtime package pass. |
-| 51 | `FUTURE-PARITY-BACKLOG.1.6.3.2` | `active` | Prove/admit structured Rust diagnostics and close `.1.6.3`. |
-| 52 | `FUTURE-PARITY-BACKLOG.1.6.4` | `pending` | Add native named/file resolution to Rust, Dart, and Julia. |
+| 51 | `FUTURE-PARITY-BACKLOG.1.6.3.2` | `done` | Full Rust/CLI gate passes; diagnostics promote to pass at census 53/1/6; `.1.6.3` closes. |
+| 52 | `FUTURE-PARITY-BACKLOG.1.6.4` | `active` | Add native named/file resolution to Rust, Dart, and Julia. |
 | 53 | `FUTURE-PARITY-BACKLOG.1.6.5` | `pending` | Extend Dart native trace through frontend/compiler/function-shell/staged phases. |
 | 54 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
 | 55 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
@@ -1979,6 +1984,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.2.3` | Shared schema; focused four-backend descriptor tests; complete Dart/Julia gates; complete Perl Phase 0; prior full Rust gate; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Exact outward descriptor parity closes at 52 pass / one partial / seven gap; Rust diagnostics `.1.6.3` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.3.0` | Knowledge Map/toolbox/source audit of Rust error types, Engine methods, rule unwind, context, CLI, tests, and parity references; docs/KM/governance/whitespace/mdBook. | PASS. Corrected the actual raw-string boundary and split typed implementation `.1` from admission `.2`; no runtime code changed. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.3.1` | Format/check; five focused diagnostic tests; complete runtime package (137/105/196/5/3/10); strict Clippy classification; docs/KM/governance/whitespace/mdBook. | PASS. Typed/source/top/deepest-rule diagnostics and string/success compatibility land; `.1.6.3.2` active. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.3.2` | Complete `tools/run_rust_local.sh` (format, 137/105/196/5/3/10, 61x2 CLI); capability/KM/memory/doctrine/whitespace/mdBook; 2.0 GB cleanup. | PASS. Structured diagnostics promote to pass at census 53/1/6; `.1.6.3` closes and native resolution `.1.6.4` is active. |
 
 ## Commit Log
 
@@ -2022,6 +2028,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.6.2.3` | `FUTURE-PARITY-BACKLOG.1.6.2.3 - admit exact descriptor parity` | Shared schema, canonical outer function records, exact four-backend tests, capability pass, parent closeout. |
 | `FUTURE-PARITY-BACKLOG.1.6.3.0` | `FUTURE-PARITY-BACKLOG.1.6.3.0 - split Rust runtime diagnostics` | Corrects the real error boundary and creates typed implementation/admission owners; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.1.6.3.1` | `FUTURE-PARITY-BACKLOG.1.6.3.1 - add Rust runtime diagnostics` | Typed/JSON errors, source/top/deepest-rule attribution, compatibility adapters, and full runtime proof. |
+| `FUTURE-PARITY-BACKLOG.1.6.3.2` | `FUTURE-PARITY-BACKLOG.1.6.3.2 - admit Rust runtime diagnostics` | Full recurring Rust/CLI proof, capability pass, parent closeout, and cache cleanup. |
 
 ## Changelog
 

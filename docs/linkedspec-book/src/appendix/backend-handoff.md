@@ -574,12 +574,11 @@ broader current census lives in `capability_conformance/manifest.json` and is ch
 perl tools/check_capability_conformance.pl
 ```
 
-The current audit contains 15 capabilities x four implemented backends. After exact descriptor admission,
-its 60 states are 52 pass, one partial state, and seven gaps. Each non-pass state has one durable owner:
+The current audit contains 15 capabilities x four implemented backends. After structured diagnostic admission,
+its 60 states are 53 pass, one partial state, and six gaps. Each non-pass state has one durable owner:
 
 | Residual mechanism | Current classification | Owner |
 | --- | --- | --- |
-| Structured native runtime diagnostics | All four expose structured native attribution; Rust final recurring-gate/census admission remains. | `.1.6.3.2` |
 | Native named/file resolution | Perl `get_parser(...)` owns the book's file-oriented role; Rust, Dart, and Julia currently keep named resolution in process adapters. | `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, and Julia propagate a caller-owned emitter through frontend/compiler/staged/runtime phases; Dart begins at the interpreter. | `.1.6.5` |
 | Generated parser source | Perl passes; Rust proof is a curated subset; Dart and Julia have no emitter. | `FUTURE-PARITY-BACKLOG.3` |
@@ -591,6 +590,9 @@ silent gaps. No backend is called complete while a current matrix state remains 
 Outward compiled descriptors are closed: all four variants expose the exact `spec` / `functions` /
 `dependency_regex_map` / `meta` projection, aligned model identities, and the canonical outer function record
 defined by `capability_conformance/outward_descriptor_contract.json`.
+
+Structured runtime diagnostics are also closed: every native variant exposes stable stage/detail plus available
+spec/top/rule/handler attribution without string scraping; Rust retains its original string methods as adapters.
 
 ADR `0023` sharpens that limitation: Rust exports `source_emitter` publicly, so equivalent source-emission
 capability is required before Julia can claim complete user-visible feature parity. Deferral remains valid

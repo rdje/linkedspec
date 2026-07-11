@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.3.1` — typed Rust structured runtime diagnostics.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.3.0` — audited/split actual Rust error boundary.
-- recent_context: Rust exports typed/JSON runtime diagnostics, optional source identity, and accumulator/direct
-  diagnostic methods. First failure preserves deepest child before unwind; string methods/results, trace, generated
-  plans, and CLI stay compatible. Five focused/full runtime gates pass; census awaits `.2` admission at 52/1/7.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.3.2` — admitted Rust structured runtime diagnostics.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.3.1` — typed Rust diagnostic implementation.
+- recent_context: Rust typed/JSON diagnostics preserve source/top/deepest-rule context while string/success/trace/
+  CLI behavior remains exact. Full Rust gate passes 137/105/196/5/3/10 plus 61x2 CLI. Capability is pass on all
+  four variants; census 53 pass / one partial / six gap. Consumed 2.0 GB target removed; `.1.6.3` closed.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.3.1 - add Rust runtime diagnostics`; previous committed HEAD is
-  `dc0383f1 FUTURE-PARITY-BACKLOG.1.6.3.0 - split Rust runtime diagnostics`.
+  `FUTURE-PARITY-BACKLOG.1.6.3.2 - admit Rust runtime diagnostics`; previous committed HEAD is
+  `510fea99 FUTURE-PARITY-BACKLOG.1.6.3.1 - add Rust runtime diagnostics`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.3.2` Rust diagnostic admission is active.
-- next_action: run the complete Rust/CLI recurring gate, synchronize final public/capability evidence, promote the
-  diagnostic state to pass, close `.1.6.3`, clean generated caches, and advance to native resolution `.1.6.4`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.4` native named/file resolution is active.
+- next_action: audit Perl's documented resolver contract and the Rust/Dart/Julia process-adapter mechanisms, then
+  split idiomatic native library implementation/proof leaves before changing backend behavior.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

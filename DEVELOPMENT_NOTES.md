@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.3.2 — admit a capability only after adapter no-drift):
+  Typed native proof alone did not promote the census row. The recurring gate also re-proved generated source,
+  tracing, and both exact CLI environments, confirming that richer library errors do not leak into the canonical
+  process projection. Structured diagnostics now pass on all four variants; the census is 53/1/6 and native
+  named/file resolution is next.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.3.1 — enrich errors once, adapt outward for compatibility):
   Existing string methods now call the typed diagnostic path and consume only `RuntimeExecutionError.message`, so
   success/error semantics cannot drift between two implementations. The context records first failure rather than

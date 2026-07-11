@@ -12,6 +12,7 @@ date: 2026-07-11
 status: current
 tags: [rust, runtime, diagnostics, public-api, embedding, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.3.1 adds RuntimeDiagnostic, RuntimeExecutionError, Engine::execute_with_diagnostics, Engine::execute_value_with_diagnostics, optional with_spec_name/with_spec_path identity, and first/deepest failure capture in RuntimeContext before execute_rule unwind. Five focused tests and the full runtime package pass: 137 unit, 105 oracle, 196 integration, five diagnostic, three generated-source, and ten trace tests."
+evidence_update_2026_07_11: "FUTURE-PARITY-BACKLOG.1.6.3.2 reruns the complete Rust gate, passes 61/61 primary CLI cases in default and POSIX environments, promotes the capability to pass, and closes structured diagnostic parity across all four variants."
 reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test runtime_diagnostics && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
 ---
 
@@ -32,4 +33,4 @@ state uses `top_rule_selection`.
 
 Existing `execute(...)` and `execute_value(...)` delegate through the typed path and return the unchanged message
 as `String`. Successful values, trace APIs, generated-plan APIs, and the canonical primary CLI projection are
-unchanged. Final capability admission remains `.1.6.3.2`.
+unchanged. Final capability admission closed under `.1.6.3.2`.

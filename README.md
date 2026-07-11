@@ -212,7 +212,8 @@ Top-level project docs:
   mdBook and neutral source, current Perl contract calls are reverse-checked, and all four backends pass the
   expanded 105-case corpus exactly. Exact descriptor identity, typed Rust projection, and one shared canonical
   outer function-record contract are closed under `.1.6.2`. Typed Rust diagnostic errors, source/top/child
-  attribution, and compatibility adapters are closed under `.1.6.3.1`; final admission `.1.6.3.2` is active.
+  attribution, compatibility adapters, and final recurring admission are closed under `.1.6.3`; native named/file
+  resolution `.1.6.4` is active.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
   {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven baseline success, four baseline
@@ -225,8 +226,8 @@ Top-level project docs:
   `tools/run_rust_local.sh`; Dart and Julia are also 61/61 default/POSIX. Run
   `bash tools/run_primary_cli_matrix.sh` for one command that builds/prepares/warms all four backends and proves
   the unchanged 61-case suite under both environments. Exact CLI lane `.1.5` and exhaustive current-surface
-  `.1.6.1`, exact outward descriptors `.1.6.2`, and typed Rust diagnostics `.1.6.3.1` are closed; final diagnostic
-  admission `.1.6.3.2` is active.
+  `.1.6.1`, exact outward descriptors `.1.6.2`, and structured diagnostics `.1.6.3` are closed; native resolution
+  `.1.6.4` is active.
 - Deep semantic introspection plus MCP is parked under `FUTURE-PARITY-BACKLOG.10.1`: native backend APIs own one
   versioned semantic model, while MCP remains a thin transport rather than a backend-specific source of truth.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full

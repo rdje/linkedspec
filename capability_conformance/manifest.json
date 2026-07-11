@@ -47,10 +47,9 @@
       "category": "native-api",
       "contract": "Native runtime failures expose stable structured stage and available spec/top/rule attribution without string scraping.",
       "sources": ["docs/decisions/0022-native-in-memory-backend-embedding.md", "docs/linkedspec-book/src/public-api/get-and-get-parser.md", "docs/linkedspec-book/src/compiler/diagnostics.md"],
-      "gap_owner": "FUTURE-PARITY-BACKLOG.1.6.3",
       "backends": {
         "perl": {"status": "pass", "references": ["perl/LinkedSpec/RuntimeContext.pm"]},
-        "rust": {"status": "gap", "references": ["rust/linkedspec-runtime/src/diagnostic.rs", "rust/linkedspec-runtime/src/engine.rs", "rust/linkedspec-runtime/src/runtime.rs", "rust/linkedspec-runtime/tests/runtime_diagnostics.rs"], "note": "Typed diagnostic-aware accumulator/direct execution, source/top/deepest-rule attribution, string adapters, five focused tests, and the full runtime package pass. FUTURE-PARITY-BACKLOG.1.6.3.2 owns final recurring-gate admission."},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/diagnostic.rs", "rust/linkedspec-runtime/src/engine.rs", "rust/linkedspec-runtime/src/runtime.rs", "rust/linkedspec-runtime/tests/runtime_diagnostics.rs"]},
         "dart": {"status": "pass", "references": ["dart/lib/src/runtime/interpreter.dart"]},
         "julia": {"status": "pass", "references": ["julia/src/runtime/Interpreter.jl"]}
       }

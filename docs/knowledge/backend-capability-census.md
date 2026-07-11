@@ -22,21 +22,22 @@ evidence_update_2026_07_11_rust_descriptor: "FUTURE-PARITY-BACKLOG.1.6.2.2 adds 
 evidence_update_2026_07_11_descriptor_admission: "FUTURE-PARITY-BACKLOG.1.6.2.3 adds one exact descriptor contract consumed by all four variants, normalizes outer function records, and promotes compiled-descriptor projection to pass. The census is now 52 pass, one partial, and seven gap."
 evidence_update_2026_07_11_rust_diagnostic_audit: "FUTURE-PARITY-BACKLOG.1.6.3.0 corrects the prior boundary description: Rust Engine public methods and internal runtime frames return Result<_, String>; core LinkedSpecError::Runtime is unused by linkedspec-runtime. Typed implementation .1 and admission .2 now own the gap. Census remains 52 pass, one partial, seven gap."
 evidence_update_2026_07_11_rust_diagnostic_implementation: "FUTURE-PARITY-BACKLOG.1.6.3.1 adds typed/JSON RuntimeDiagnostic and RuntimeExecutionError, optional Engine source identity, diagnostic-aware accumulator/direct methods, deepest-child attribution, and string compatibility. Five focused and the complete runtime package pass; .1.6.3.2 owns final recurring-gate admission, so census remains 52/1/7 until closeout."
+evidence_update_2026_07_11_rust_diagnostic_admission: "FUTURE-PARITY-BACKLOG.1.6.3.2 passes the complete Rust gate including five diagnostics and 61x2 CLI, promotes structured runtime diagnostics to pass, and closes .1.6.3. The census is now 53 pass, one partial, six gap."
 reverify: "perl tools/check_capability_conformance.pl && rg -n 'FUTURE-PARITY-BACKLOG.1.6.[0-6]' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 `capability_conformance/manifest.json` is the current user-observable capability census. The checker validates the
 schema, exact backend set, evidence paths, status vocabulary, unique ids, gap ownership, and explicit legacy/future
-exclusions. After exact descriptor admission, its 15 rows and 60 backend states classify 52 pass, one partial, and
-seven gap.
+exclusions. After structured diagnostic admission, its 15 rows and 60 backend states classify 53 pass, one partial,
+and six gap.
 
 The audit distinguishes implementation gaps from proof gaps:
 
 - the 105-fixture interpreter corpus passes all four backends and is indexed against the 239-name current
   non-legacy ActionIR surface; `.1.6.1` closed that neutral proof;
 - all four expose exact outward descriptors, aligned model identities, and one canonical function-record schema;
-- all four expose structured runtime diagnostic attribution; Rust typed implementation is green and `.1.6.3.2`
-  owns final recurring-gate/census admission;
+- all four expose structured runtime diagnostic attribution; Rust's full recurring/CLI gate and final admission
+  are closed;
 - the native file-oriented named-spec role exists only as Perl `get_parser(...)`; Rust/Dart/Julia process adapters
   resolve names but their public libraries do not; `.1.6.4` owns idiomatic native equivalents;
 - Perl/Rust/Julia propagate a native emitter through frontend/compiler/function-shell/staged/runtime phases, while

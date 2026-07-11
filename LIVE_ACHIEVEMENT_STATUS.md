@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.3.2 — admit Rust runtime diagnostics**
+  (DONE — structured diagnostic parent `.1.6.3` closed; native resolution `.1.6.4` active).
+
+  **Proof:** Complete Rust gate passes format, 137 unit, 105 oracle, 196 integration, five diagnostic, three
+  generated-source, ten trace, and 61x2 CLI cases.
+
+  **Admission/cleanup:** Structured diagnostics promote to pass at census 53/1/6. The consumed 2.0 GB Rust target
+  cache is removed.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.3.1 — add Rust runtime diagnostics**
   (DONE — typed native implementation closed; final admission `.1.6.3.2` active).
 
