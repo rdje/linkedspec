@@ -90,6 +90,40 @@ assert_eq!(host_failure.source_identity, "specs/example.spec");
 # Ok::<(), Box<dyn std::error::Error>>(())
 ```
 
+Dart now has the contract-v1 scaffold too. Native callers pass the compiled
+state and identity to `emitDartSourceV1(...)`; `emitDartSource(...)` is the
+`<inline>` compatibility adapter. The emitter uses the effective compiled
+function/rule order to build a normalized specification, then emits a Dart
+library with metadata plus `execute(...)` and `executeWithTrace(...)` direct-
+value roles. Generated execution failures retain the source identity and the
+requested rule when available.
+
+```dart
+final compiled = compileSpec(parseSpec(source));
+final generated = emitDartSourceV1(
+  compiled,
+  'specs/example.spec',
+);
+
+try {
+  // Persist `generated` as UTF-8 in a caller-owned Dart package, then import it.
+} on GeneratedSourceException catch (error) {
+  print(error.toJson());
+}
+```
+
+The generated file is Unicode Dart source. Its normalized specification
+payload is serialized to strict UTF-8 and embedded as Base64, which preserves
+arbitrary Unicode and prevents Dart `$` interpolation from changing the data.
+This is an encoding choice at the generated-file boundary: Unicode itself is
+not synonymous with UTF-8, and UTF-16/UTF-32 are other Unicode encodings.
+
+The scaffold proof creates a caller-owned temporary package and private package
+cache, resolves offline, analyzes the emitted library, runs its direct result,
+checks structured execution failure, and deletes the package/cache. Exact
+family-plan validation, direct family dispatch, and portable generated trace
+roles remain the next Dart slice; the backend is not admitted pass yet.
+
 ## Why this matters
 
 Dynamic generation is powerful, but without structure it becomes hard to trust.

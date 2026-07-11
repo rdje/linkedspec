@@ -168,6 +168,16 @@ export 'src/runtime/interpreter.dart'
         RuntimeInterpreterException,
         RuntimeLifecycleEvent,
         RuntimeParseResult;
+export 'src/source_emitter.dart'
+    show
+        GeneratedSourceCode,
+        GeneratedSourceException,
+        GeneratedSourceMetadata,
+        GeneratedSourceStage,
+        emitDartSource,
+        emitDartSourceV1,
+        linkedSpecGeneratedSourceContract,
+        linkedSpecGeneratedSourceFormatVersion;
 export 'src/scaffold.dart'
     show
         describeLinkedSpecDartScaffold,

@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.3.1 — serialize effective semantics, not host build state):
+  A first source-emitter scaffold can remain deterministic and caller-owned without inventing a second Dart
+  compiled-state decoder. Reconstruct a normalized `SpecFile` from the effective ordered `CompiledSpec` functions
+  and last-definition rules, serialize that neutral structure, and let the generated library compile it through the
+  ordinary native compiler. Encode the payload as strict UTF-8 plus Base64: Unicode is the character model, while
+  UTF-8/UTF-16/UTF-32 are encodings, and this contract deliberately selects strict UTF-8 at persistence boundaries.
+  Base64 also prevents `$` interpolation from corrupting an embedded Dart literal. Prove independence with a
+  caller-owned temporary package and private `PUB_CACHE`, offline resolution, analysis, direct execution, typed
+  failure projection, and recursive cleanup. Do not promote Dart from gap until the separate family-plan/direct
+  execution and manifest-admission leaves pass.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.2.2 — make breadth proof mechanically recurring before promotion):
   A green diagnostic does not become a capability guarantee merely by documentation. Remove ignore and opt-in
   strictness, let the normal backend package gate execute it, and have the neutral contract checker lock the exact

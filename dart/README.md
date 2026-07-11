@@ -15,7 +15,9 @@ cursor-control behavior, structured runtime diagnostics, and trace
 controls/sinks plus runtime trace events, staged function-body dispatch, and
 registered user-function runtime execution. Its corpus layer now has a
 manifest-backed executable harness whose checked-in 105-fixture corpus gate is
-green.
+green. The public package also exports a deterministic generated-source v1
+scaffold with typed metadata/errors and isolated caller-package compile/run
+proof; exact family-plan/direct execution and manifest admission remain active.
 
 ## Commands
 
@@ -38,7 +40,31 @@ dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus
 bash ../tools/run_dart_local.sh
 ```
 
+## Generated source
+
+`emitDartSourceV1(compiled, sourceIdentity)` emits a deterministic Dart library
+with contract/format/identity metadata plus ordinary and traced direct-value
+entrypoints. `emitDartSource(compiled)` is the `<inline>` compatibility adapter.
+
+```dart
+final compiled = compileSpec(parseSpec(source));
+final generated = emitDartSourceV1(compiled, 'specs/example.spec');
+```
+
+Write `generated` as UTF-8 into a caller-owned Dart package that depends on
+`linkedspec_dart`, then import the generated library. The emitted file is
+Unicode Dart source; normalized spec state is strict-UTF-8/Base64 data inside
+it. Structured failures use `GeneratedSourceException.toJson()`.
+
+The current scaffold is not a complete generated-source parity claim. Exact
+ten-family plan validation/direct structural execution is `.3.3.2`, and
+manifest-backed admission is `.3.3.3`.
+
 ## Status
+
+`FUTURE-PARITY-BACKLOG.3.3.1` closes the generated-source scaffold: focused 3/3
+and complete format/analyze/178 tests/61x2 CLI/105 corpus pass. Dart remains a
+generated-source capability gap until `.3.3.2` and `.3.3.3` close.
 
 `DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first Dart milestone.
 `FUTURE-PARITY-BACKLOG.1.5.3.1` replaces the old corpus-oriented primary boundary:

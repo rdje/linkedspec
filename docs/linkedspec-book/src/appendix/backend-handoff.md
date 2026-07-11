@@ -412,8 +412,9 @@ manifest subset.
 The completed scoped Dart milestone follows the same parity ordering. `DART-BACKEND-PARITY`
 landed interpreter-first: `.spec` parser, typed helper/action AST, compiled-spec
 state, Dart runtime interpreter, then the manifest-backed corpus runner.
-Generated Dart source is explicitly deferred to a future split source-emitter
-lane after interpreter/corpus parity, not the primary conformance gate. The repo now has a Dart backend package under
+Generated Dart source was originally deferred until after interpreter/corpus parity. The split future lane is now
+active, and `.3.3.1` has landed a deterministic contract-v1 scaffold plus isolated caller-package compile/run proof;
+family-plan/direct execution and manifest admission remain `.3.3.2`/`.3.3.3`. The repo has a Dart backend package under
 `dart/`, including package metadata, committed lockfile, public library entrypoint,
 Dart-specific CLI entrypoint, compatibility corpus-runner entrypoint, and smoke tests. Its corpus layer loads the
 manifest-backed corpus, rejects manifest drift, checks required fixture files and
@@ -581,7 +582,7 @@ source admission, its 60 states are 58 pass, zero partial states, and two gaps. 
 | --- | --- | --- |
 | Native named/file resolution | ADR `0026` and the 14/9/4 fixture fix portable names, exact paths, ordered roots, strict UTF-8, and typed stages. Perl, Rust, Dart, and Julia consume the contract directly; exact admission is closed. | closed `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, Dart, and Julia propagate a caller-owned emitter through frontend/compiler/function/staged/runtime phases. Dart's direct routed/quiet/failure proof and recurring gates are admitted. | closed `.1.6.5` |
-| Generated parser source | Perl and Rust pass contract v1. Rust's unconditional recurring full-manifest gate compiles/runs 105/105 generated fixtures; contract checking prevents ignore/conditional drift. Dart and Julia have no emitter. | `.3.3` Dart; `.3.4` Julia; `.3.5` admission |
+| Generated parser source | Perl and Rust pass contract v1. Rust's unconditional recurring full-manifest gate compiles/runs 105/105. Dart has a deterministic v1 scaffold with isolated offline compile/run but is not admitted until family-plan and manifest proof; Julia has no emitter. | `.3.3.2`/`.3.3.3` Dart; `.3.4` Julia; `.3.5` admission |
 
 Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, generic final-
 codeblock equivalence, and the not-yet-implemented Lua backend are explicit exclusions/future owners rather than
@@ -604,14 +605,17 @@ Perl/Rust gates and admits that baseline: census is 57/1/2, with Perl pass. `.3.
 full-manifest classifier that prepares every fixture through interpreter-first emission, writes 105 separate
 generated modules/tests into one isolated Cargo crate, and passes host compile/run 105/105. Zero-failure closeout
 `.3.2.1` finds no repair mechanism. `.3.2.2` makes the proof a strict recurring gate, passes
-the complete Rust package and CLI gates, and promotes Rust generated source at census 58/0/2.
+the complete Rust package and CLI gates, and promotes Rust generated source at census 58/0/2. Dart `.3.3.1` then
+adds public compatibility/v1 emitters, stable metadata/errors, strict-UTF-8/Base64 payload embedding, and an
+isolated temporary-package analyze/run proof. The census remains 58/0/2 until Dart's plan and corpus admission.
 
 `FUTURE-PARITY-BACKLOG.3.0` turns that broad owner into an executable order. `.3.1.1` first fixes a versioned neutral
 contract for emission, host compile/load, direct generated execution, exact result/error/source identity, trace,
 family-plan validation, and manifest proof; `.3.1.2` repairs Perl and `.3.1.3.3` admits the aligned Perl/Rust
 baseline. `.3.2.0` classifies Rust's full manifest 105/105 green, `.3.2.1` closes the empty repair inventory, and
-`.3.2.2` completes strict recurring admission. Active `.3.3` and later `.3.4` add equivalent Dart and Julia source
-emitters in scaffold, direct-family, and corpus-proof slices. `.3.5` alone may promote all 60 states to pass. Because
+`.3.2.2` completes strict recurring admission. Dart scaffold `.3.3.1` is closed; active `.3.3.2` adds its exact
+family plan/direct execution before `.3.3.3` corpus admission. Later `.3.4` adds Julia source emission in the same
+scaffold, direct-family, and corpus-proof slices. `.3.5` alone may promote all 60 states to pass. Because
 the artifacts are host-language source, byte identity is not required; ADR `0023` requires equivalent operations
 and observable behavior through idiomatic host APIs.
 

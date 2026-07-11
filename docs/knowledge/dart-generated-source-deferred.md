@@ -1,35 +1,46 @@
 ---
 id: dart-generated-source-deferred
-title: Generated Dart source is deferred to a future split source-emitter lane
+title: Dart now has a deterministic generated-source scaffold; family-plan and admission remain split
 answers:
   - "does Dart generated source exist now"
   - "what did DART-BACKEND-PARITY.7.2 decide"
   - "why was generated Dart source deferred"
-  - "what must a future Dart source emitter prove"
+  - "what must the Dart source emitter still prove"
   - "is generated Dart source required for Dart parity"
-date: 2026-07-09
+  - "how does Dart embed Unicode generated spec state"
+  - "where is the Dart generated-source compile run harness"
+date: 2026-07-11
 status: current
 tags: [dart, codegen, source-emitter, corpus, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.7.2 compares the Dart lane to the Rust source-emitter precedent and defers codegen after the then-current 99/99 interpreter milestone. ADR 0023 later classifies Rust's exported source_emitter as a public capability. FUTURE-PARITY-BACKLOG.3.0 reverified no emitter in dart/lib or dart/test after the corpus reached 105 and split Dart implementation into .3.3.1 scaffold/harness, .3.3.2 family plan/direct execution, and .3.3.3 manifest admission."
-reverify: "rg -n 'DART-BACKEND-PARITY\\.7\\.2|FUTURE-PARITY-BACKLOG\\.3|99/99|generated.*source|complete.*parity' docs/tasks/DART-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/decisions/0023-user-observable-backend-and-cli-parity.md docs/linkedspec-book/src/appendix/backend-handoff.md ROADMAP.md ROADMAP_V2.md"
+evidence: "DART-BACKEND-PARITY.7.2 deferred codegen after the interpreter milestone; ADR 0023 later made it required public parity. FUTURE-PARITY-BACKLOG.3.3.1 now adds dart/lib/src/source_emitter.dart, public exports, and dart/test/source_emitter_test.dart. Focused 3/3 proves exact metadata/errors, deterministic Unicode/$ emission, and a caller-owned private-PUB_CACHE package that resolves offline, analyzes, runs direct output/failure attribution, and deletes itself. The complete Dart gate passes 178 tests, 61x2 CLI, and 105/105 corpus. .3.3.2 family plan/direct execution and .3.3.3 manifest admission remain."
+reverify: "cd dart && dart test test/source_emitter_test.dart && dart analyze --fatal-infos --fatal-warnings && rg -n 'FUTURE-PARITY-BACKLOG\\.3\\.3|emitDartSourceV1|_compiledSpecJsonBase64|PUB_CACHE' ../docs/tasks/FUTURE-PARITY-BACKLOG.md lib/src/source_emitter.dart test/source_emitter_test.dart"
 ---
 
-Generated Dart source does not exist as a current implementation surface. It was
-not required for the scoped interpreter-corpus claim, now green at 105/105. ADR `0023` makes it
-required for complete public capability parity because Rust exports source emission.
+Generated Dart source now exists as a public scaffold. It was not required for
+the scoped interpreter-corpus claim, green at 105/105, but ADR `0023` requires
+it for complete public capability parity because Rust exports source emission.
 
-`DART-BACKEND-PARITY.7.2` deliberately deferred generated Dart source. The active
-implementation is now split under `FUTURE-PARITY-BACKLOG.3.3` into:
+`DART-BACKEND-PARITY.7.2` deliberately deferred generated Dart source. The later
+implementation split under `FUTURE-PARITY-BACKLOG.3.3` now has:
 
-- a minimal Dart emitter scaffold plus compile/run harness;
-- generated family-plan metadata equivalent to the Rust source-emitter proof;
-- direct execution coverage for the current structural families;
-- a curated manifest-backed corpus subset proof that first passes the interpreter oracle.
+- `.3.3.1` done: compatibility/v1 emitters, metadata/errors, deterministic
+  effective-state emission, and isolated caller-package compile/run;
+- `.3.3.2` active: generated family-plan metadata, validation, portable trace
+  roles, and direct execution for every current structural family;
+- `.3.3.3` pending: curated manifest-backed admission after interpreter-first
+  exact comparison.
+
+The scaffold reconstructs a normalized `SpecFile` from effective ordered
+`CompiledSpec` functions/rules. The generated Dart library is Unicode source;
+its embedded normalized JSON is encoded as strict UTF-8 then Base64. Unicode is
+the character model, while UTF-8 is the selected byte encoding at this
+boundary; UTF-16 and UTF-32 are other Unicode encodings, not invalid Unicode.
 
 `DART-BACKEND-PARITY.7.5` closed the scoped interpreter-first Dart milestone
-without changing this deferral. There is no active Dart frontier in the closed
-task tree; generated-source proof remains future work under `FUTURE-PARITY-BACKLOG.3`
-and blocks a complete Dart-parity claim.
+without claiming generated-source parity. The closed Dart tree has no active
+frontier; remaining source-generation proof is owned by active global
+`FUTURE-PARITY-BACKLOG.3.3`. Capability status remains gap until admission.
 
-Related facts: [[user-observable-backend-cli-parity-contract]], [[dart-backend-interpreter-first-plan]], [[rust-source-emitter-lane-split]],
+Related facts: [[user-observable-backend-cli-parity-contract]],
+[[dart-backend-interpreter-first-plan]], [[rust-source-emitter-lane-split]],
 [[rust-generated-source-corpus-subset]], [[dart-mdbook-usage-status]].

@@ -4,7 +4,14 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-10`
+- Last refreshed: `2026-07-11`
+- `2026-07-11` refresh: `FUTURE-PARITY-BACKLOG.3.3.1` adds Dart's public deterministic generated-source scaffold.
+  `emitDartSourceV1(...)` consumes effective ordered compiled state and emits a native library with stable v1
+  metadata, source identity, ordinary/traced direct-value entrypoints, and portable emission/compile-load/execution
+  failures. Normalized spec JSON is encoded as strict UTF-8 then Base64 inside Unicode Dart source. An isolated
+  caller-owned package/private cache resolves offline, analyzes, runs, attributes failure, and deletes itself.
+  Complete Dart gates pass 178 tests, 61x2 CLI, and 105/105 corpus. Census remains 58/0/2 while exact family-plan
+  and direct structural execution `.3.3.2` is active before manifest admission `.3.3.3`.
 - `2026-07-10` refresh: `FUTURE-PARITY-BACKLOG.1.5.1.6.3` closes the Perl primary-command reference.
   Help, manifest, task/roadmap/live docs, mdBook, and Knowledge Map agree on the strict preserved UTF-8 contract
   and 61 exact cases. Dated 53-case and pre-fix mojibake records remain historical evidence, not live defects.

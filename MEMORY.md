@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.2.2` — admitted strict recurring all-105 Rust generated breadth.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.3.2.1` — closed the empty Rust generated repair inventory.
-- recent_context: Census is 58/0/2. Perl and Rust generated source pass. Rust's classifier is unconditional and
-  contract-gated; independent 105/105 and complete 137/105-interpreter/105-generated/196/5/5/5/10 + 61x2 pass.
-  `.3.2` is closed. Dart/Julia remain gaps; Dart scaffold `.3.3.1` is active.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.3.1` — added deterministic Dart v1 emitter scaffold and isolation proof.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.3.2.2` — admitted strict recurring all-105 Rust generated breadth.
+- recent_context: Census remains 58/0/2. Perl/Rust pass; Dart/Julia remain gaps. Dart now exports compatibility/v1
+  emitters with stable metadata/errors, effective-state normalization, Unicode source plus strict-UTF-8/Base64
+  payload, and caller-owned offline analyze/run/cleanup. Focused 3/3 and complete 178/61x2/105 pass. `.3.3.2` is active.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.3.2.2 - admit Rust generated-source breadth`; previous committed HEAD is
-  `dbe6bd2b FUTURE-PARITY-BACKLOG.3.2.1 - close zero-failure Rust classification`.
+  `FUTURE-PARITY-BACKLOG.3.3.1 - add Dart generated-source scaffold`; previous committed HEAD is
+  `919b0f10 FUTURE-PARITY-BACKLOG.3.2.2 - admit Rust generated-source breadth`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.3.3.1`; Dart generated-source emitter scaffold is active.
-- next_action: Knowledge-Map-first audit Dart compiled-state/public package boundaries, then add deterministic v1
-  source emission, stable metadata/errors, and a caller-owned isolated Dart package compile/run harness for a
-  minimal neutral fixture without changing native interpreter or CLI behavior.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.3.3.2`; Dart generated family-plan/direct structural execution is active.
+- next_action: Knowledge-Map-first compare Dart `CompiledRule` structure and runtime dispatch against the ten neutral
+  family roles, then add typed ordered plan rows, exact four-way pre-execution validation, direct family routing,
+  source/rule/family diagnostics, portable generated trace roles, and an isolated synthetic all-family matrix.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
@@ -55,4 +55,4 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none after this commit; generated Rust/Dart/Julia caches are absent after cleanup.
+- blockers: none. in_flight_uncommitted: none after this commit; generated caller packages/caches are absent after cleanup.

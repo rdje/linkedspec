@@ -1755,16 +1755,32 @@ before implementation.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.3.3.1`
-  Status: `active`
+  Status: `done`
   Goal: Add the public Dart emitter scaffold and isolated compile/run harness.
   Acceptance: Emit deterministic Dart source from compiled state, load/compile it in a caller-owned temporary
     package without repository build leakage, execute a minimal parser entrypoint, prove stable format/version and
     failures, and clean generated packages/caches.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: focused format/analyze/source-emitter 3/3; isolated offline pub/analyze/run; complete Dart gate
+    178 tests, 61/61 default, 61/61 POSIX, and 105/105 corpus.
+  Commit: `FUTURE-PARITY-BACKLOG.3.3.1 - add Dart generated-source scaffold`
+
+### `FUTURE-PARITY-BACKLOG.3.3.1` outcome
+
+- [x] **PUBLIC SCAFFOLD** — Dart exports deterministic compatibility and contract-v1 emitters plus typed metadata
+  and portable stage/code/source-attribution failures.
+- [x] **COMPILED INPUT** — emission consumes effective ordered `CompiledSpec` functions/rules and reconstructs a
+  normalized specification inside the generated library without retaining repository build state.
+- [x] **TEXT BOUNDARY** — generated Dart is Unicode source; its embedded normalized payload is strict UTF-8 encoded
+  as deterministic Base64, keeping Unicode distinct from the selected persisted encoding and avoiding interpolation.
+- [x] **ISOLATED HOST PROOF** — a caller-owned temporary package and private `PUB_CACHE` resolve offline, analyze,
+  execute the direct value, project attributed runtime failure, and are deleted recursively in `finally`.
+- [x] **EXACT SCAFFOLD CONTRACT** — contract id, format 1, source identity, deterministic bytes, emit/compile-load/
+  execution failures, and ordinary/traced entrypoint roles are locked; family-plan semantics remain `.3.3.2`.
+- [x] **COMPLETE DART** — canonical gate passes 178 package tests, 61x2 CLI, and 105/105 interpreter corpus.
+- [x] **HONEST STATUS** — capability census stays 58/0/2; Dart remains gap until `.3.3.2` and `.3.3.3` admission.
 
 - ID: `FUTURE-PARITY-BACKLOG.3.3.2`
-  Status: `pending`
+  Status: `active`
   Goal: Add Dart typed family-plan metadata and direct generated structural execution.
   Acceptance: Cover every current default/OR/AND/repetition acode/bcode family, validate label/family plans before
     execution, retain trace and diagnostic/source identity, and compile/run a synthetic all-family matrix.
@@ -2060,10 +2076,11 @@ before implementation.
 | 69 | `FUTURE-PARITY-BACKLOG.3.2.1` | `done` | All five failure-mechanism inventories are empty; no repair child or behavior change exists. |
 | 70 | `FUTURE-PARITY-BACKLOG.3.2.2` | `done` | Unconditional recurring 105/105 plus full Rust gate admit generated-source breadth. |
 | 71 | `FUTURE-PARITY-BACKLOG.3.3` | `active` | Dart needs emitter scaffold, family plan/direct execution, and manifest proof. |
-| 72 | `FUTURE-PARITY-BACKLOG.3.3.1` | `active` | Add Dart emitter scaffold and isolated compile/run harness. |
-| 73 | `FUTURE-PARITY-BACKLOG.3.4` | `pending` | Julia needs emitter scaffold, family plan/direct execution, and manifest proof. |
-| 74 | `FUTURE-PARITY-BACKLOG.3.5` | `pending` | Exact four-backend admission promotes all states only after every generated-source proof passes. |
-| 75 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 72 | `FUTURE-PARITY-BACKLOG.3.3.1` | `done` | Dart emits deterministic v1 source and passes isolated compile/run plus complete Dart gates. |
+| 73 | `FUTURE-PARITY-BACKLOG.3.3.2` | `active` | Add exact Dart family plan, validation, direct structural execution, and trace roles. |
+| 74 | `FUTURE-PARITY-BACKLOG.3.4` | `pending` | Julia needs emitter scaffold, family plan/direct execution, and manifest proof. |
+| 75 | `FUTURE-PARITY-BACKLOG.3.5` | `pending` | Exact four-backend admission promotes all states only after every generated-source proof passes. |
+| 76 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
 | 65 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
 | 66 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
 | 67 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
@@ -2731,6 +2748,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.2.0` | New complete-manifest staged classifier; measured/stopped eight-case per-crate prototype; one-crate 105-module replacement; format/compile; explicit isolated run 105/105 in 184.46s; existing source-emitter 5/5 in 36.66s; strict-Clippy classification/new-test pass; docs/KM/governance/mdBook/cleanup. | PASS. No emitter/runtime failure mechanism exists in the current 105-case corpus; `.3.2.1` owns zero-failure closeout before strict admission. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.2.1` | Exact `.3.2.0` terminal report and five requested mechanism inventories; capability/public/task/KM continuity review; governance/whitespace/mdBook/cleanup. | PASS. All failure inventories are empty; no repair child or behavior code is justified; strict recurring admission `.3.2.2` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.2.2` | Unconditional ordinary classifier; contract/checker path/count/no-ignore/strict enforcement; independent 105/105/186.42s; complete Rust 137/105/105-generated/196/5/5/5/10 + 61x2; strict-Clippy classification/changed-test pass; 58/0/2 capability; docs/KM/governance/mdBook/cleanup. | PASS. Rust generated source promotes to pass; `.3.2` closes and Dart scaffold `.3.3.1` is active. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.3.1` | Public compatibility/v1 Dart emitters; exact metadata/errors/determinism; isolated private-cache offline pub/analyze/run/cleanup; focused 3/3; complete Dart 178 tests + 61x2 + 105 corpus; docs/KM/governance/mdBook/cleanup. | PASS. Dart scaffold is green without census promotion; exact family-plan/direct execution `.3.3.2` is active. |
 
 ## Commit Log
 
@@ -2797,6 +2815,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.3.2.0` | `FUTURE-PARITY-BACKLOG.3.2.0 - classify all Rust generated fixtures` | Scalable per-stage all-105 classifier, exact accounting, isolated shared host crate, and zero failures. |
 | `FUTURE-PARITY-BACKLOG.3.2.1` | `FUTURE-PARITY-BACKLOG.3.2.1 - close zero-failure Rust classification` | Empty five-mechanism repair inventory and strict-admission handoff; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.3.2.2` | `FUTURE-PARITY-BACKLOG.3.2.2 - admit Rust generated-source breadth` | Unconditional recurring all-105 proof, complete Rust gates, 58/0/2 promotion, and Dart handoff. |
+| `FUTURE-PARITY-BACKLOG.3.3.1` | `FUTURE-PARITY-BACKLOG.3.3.1 - add Dart generated-source scaffold` | Deterministic v1 emitter, typed scaffold errors, isolated caller-package compile/run, and `.3.3.2` handoff. |
 
 ## Changelog
 
@@ -2863,6 +2882,12 @@ Read-only evidence recorded on 2026-07-10:
   passes 105/105 in 186.42 seconds; the complete Rust gate repeats it in 189.42 seconds alongside
   137/105-interpreter/196/5/5/5/10 and 61x2 CLI. Rust promotes to pass at census 58/0/2, `.3.2` closes, and Dart
   emitter scaffold `.3.3.1` becomes active.
+- `2026-07-11`: `.3.3.1` adds Dart compatibility/v1 generated-source emission from effective ordered compiled
+  state, stable contract/format/identity metadata, portable emit/compile-load/execution errors, and ordinary/traced
+  direct-value entrypoints. Unicode native source embeds normalized spec JSON as strict UTF-8 then Base64. A
+  caller-owned temporary package/private cache resolves offline, analyzes, runs Unicode/`$` output, attributes a
+  missing-rule failure, and deletes itself. Focused 3/3 and complete Dart 178/61x2/105 pass. Census remains 58/0/2;
+  exact family-plan/direct structural execution `.3.3.2` becomes active before manifest admission `.3.3.3`.
 - `2026-07-11`: `.1.6.4.5` adds Perl's separate portable `SpecLoader` facade and direct 14/9/4 plus pipeline proof
   without changing legacy `get_parser`/`PathSearch`. The canonical core gate passes the required new test, 239-name
   coverage, focused suites, 61x2 CLI, and Phase 0 `1..1030` in 556 seconds. Combined with immediately prior full

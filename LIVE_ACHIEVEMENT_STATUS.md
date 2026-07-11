@@ -7,15 +7,26 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.3.3.1 — add Dart generated-source scaffold**
+  (DONE — deterministic v1 emission and isolated compile/run pass; Dart family-plan `.3.3.2` active).
+
+  **Implementation:** Public compatibility/v1 emitters consume effective compiled state and emit a native Dart
+  library with contract/format/identity metadata, ordinary/traced direct-value roles, and typed portable emission,
+  compile/load, and execution failures. Unicode generated source embeds normalized spec JSON as strict-UTF-8/Base64.
+
+  **Isolation/proof:** A caller-owned temporary package and private `PUB_CACHE` resolve offline, analyze, execute
+  direct Unicode/`$` output, attribute a missing-rule failure, and are recursively deleted. Focused 3/3 and complete
+  Dart format/analyze/178 tests/61x2 CLI/105 corpus pass. Census stays 58/0/2 until `.3.3.2`/`.3.3.3` admission.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.2.2 — admit Rust generated-source breadth**
-  (DONE — strict recurring 105/105 admitted; Rust pass; census 58/0/2; Dart `.3.3.1` active).
+  (DONE — strict recurring 105/105 admitted; Rust pass; census 58/0/2; Dart `.3.3.1` followed).
 
   **Recurring enforcement:** The classifier has no ignore or conditional bypass. Contract v1 names its exact path;
   the checker locks 105 cases, ordinary execution, unconditional failure rejection, and Rust pass state.
 
   **Proof/admission:** Independent strict classification passes 105/105 in 186.42s. The complete Rust gate repeats
   it in 189.42s and passes 137 unit, 105 interpreter, 196 integration, 5 diagnostics, 5 emitter, 5 loader, 10 trace,
-  docs/build, and 61x2 CLI. `.3.2` closes; Dart generated-source scaffold `.3.3.1` is active.
+  docs/build, and 61x2 CLI. `.3.2` closes; Dart generated-source scaffold `.3.3.1` followed and is now green.
 
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.2.1 — close zero-failure Rust classification**
   (DONE — every requested repair inventory is empty; strict admission `.3.2.2` active).

@@ -18,6 +18,7 @@ evidence_update_2026_07_11_rust_metadata_errors: "FUTURE-PARITY-BACKLOG.3.1.3.1 
 evidence_update_2026_07_11_rust_plan_trace: "FUTURE-PARITY-BACKLOG.3.1.3.2 implements exact neutral plan rows/ten families/four rejections, direct v1 top-rule result, and three portable trace roles beside native detail. It preserves the legacy accumulator envelope and trace. Focused 5/5 + 10/10 and clean full Rust 137/105/196/5/5/5/10 plus 61x2 pass; admission remains .3.1.3.3."
 evidence_update_2026_07_11_admission: "FUTURE-PARITY-BACKLOG.3.1.3.3 passes the focused 69-assertion Perl contract, focused Rust 5/5 source-emitter test, canonical Perl gate including Phase 0 1..1030 and 61x2 CLI, and complete Rust 137/105/196/5/5/5/10 plus 61x2 CLI gate. The baseline contract is admitted: Perl passes, Rust remains partial only for 8/105 generated compile/run breadth, and .3.1 closes."
 evidence_update_2026_07_11_rust_breadth_admission: "FUTURE-PARITY-BACKLOG.3.2.2 adds the exact Rust full-manifest test path to corpus_proof and makes the checker enforce file existence, 105 count, no ignore attribute, and unconditional failure rejection. Independent and complete Rust gates pass; Rust promotes at census 58/0/2."
+evidence_update_2026_07_11_dart_scaffold: "FUTURE-PARITY-BACKLOG.3.3.1 adds public Dart compatibility/v1 emission, exact metadata and portable emit/compile-load/execution errors, deterministic effective-compiled-state normalization, strict-UTF-8/Base64 payload embedding, ordinary/traced direct-value entrypoints, and a caller-owned isolated offline analyze/run harness. Focused 3/3 and complete Dart 178/61x2/105 pass; Dart remains gap pending family-plan .3.3.2 and corpus admission .3.3.3."
 reverify: "perl -c tools/check_generated_source_contract.pl && perl tools/check_generated_source_contract.pl && perl tools/check_capability_conformance.pl && rg -n 'check_generated_source_contract|generated_source_contract' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -48,10 +49,16 @@ The Perl/Rust v1 baseline is admitted under `.3.1.3.3`. Rust's separate
 full-manifest claim is admitted under `.3.2.2` through an unconditional,
 contract-checked 105/105 recurring test. Both backends now pass.
 
+Dart's `.3.3.1` scaffold implements emission, metadata, stable failures, and
+isolated compile/run. It remains a gap because exact family-plan validation,
+direct structural-family routing, portable generated trace roles, and the
+manifest-backed admission proof deliberately remain `.3.3.2`/`.3.3.3`.
+
 Related facts: [[generated-source-parity-audit]],
 [[perl-generated-source-capture-not-standalone]],
 [[rust-generated-source-contract-v1-gap]],
 [[rust-generated-source-v1-metadata-errors]],
 [[rust-generated-source-v1-result-projection]],
 [[rust-generated-source-corpus-subset]],
+[[dart-generated-source-deferred]],
 [[user-observable-backend-cli-parity-contract]].
