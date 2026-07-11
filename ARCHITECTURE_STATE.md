@@ -5,6 +5,10 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-11`
+- `2026-07-11` refresh: `LUA-BACKEND-PARITY.4.3.0` splits Lua's admitted 239-name runtime breadth by mechanism:
+  core four-kind values/stores/access and entry/match reads, scalar/string, numeric, arrays, harrays,
+  codeblocks/controls/callbacks, stateful capture/mark/input/cursor, diagnostic output, and exhaustive no-drift.
+  `.4.3.1` is the only executable frontier; no helper capability was promoted by this planning leaf.
 - `2026-07-11` refresh: `LUA-BACKEND-PARITY.4.2` adds the first executable Lua compiled-rule owner.
   `lua/src/linkedspec/interpreter.lua` composes compiled state with native PCRE2 matching and executes default/
   AND/OR/repetition modes, action/blind children, lifecycle flow, local stores, `retv`, narrow accumulators,

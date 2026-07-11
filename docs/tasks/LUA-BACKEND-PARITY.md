@@ -537,7 +537,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 - ID: `LUA-BACKEND-PARITY.4.3`
   Status: `active`
   Goal: Implement the complete helper/value/control/method surface in recursively split batches.
-  Children: `.4.3.0`
+  Children: `.4.3.0`, `.4.3.1`, `.4.3.2`, `.4.3.3`, `.4.3.4`, `.4.3.5`, `.4.3.6`, `.4.3.7`, `.4.3.8`,
+    `.4.3.9`
   Acceptance: Every current governed helper and method is behavior-tested, including scalar/string/number,
     array/harray mutation and pure operations, captures/positions/cursor/marks, controls, assignments, tree walks,
     diagnostic calls, and final-codeblock equivalence; split by mechanism before broad implementation.
@@ -545,10 +546,121 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `pending`
 
 - ID: `LUA-BACKEND-PARITY.4.3.0`
-  Status: `active`
+  Status: `done`
   Goal: Split the complete Lua helper/value/control/method surface into mechanism-sized executable leaves.
   Acceptance: Every current family has one ordered owner with explicit dependencies, scope, verification, and
     no-drift closeout; no broad helper implementation starts before the split is durable.
+  Verification: **PASS 2026-07-11.** The 239-name runtime surface and mdBook helper catalog are divided into nine
+    ordered implementation/closeout leaves: core four-kind stores/access/entry-match; scalar/string; numeric;
+    arrays; harrays; value/control/block/callbacks; capture/mark/input/cursor state; diagnostic output; and final
+    exhaustive no-drift. Each leaf names its dependency and focused acceptance, may split again before code, and
+    leaves `.4.3.1` as the sole executable frontier. No runtime behavior changed; committed `.4.2` remains 66/66
+    on both runtimes and its full local CI proof remains authoritative. mdBook, memory architecture, Knowledge Map,
+    task-tree metadata, doctrine, and whitespace gates pass.
+  Commit: `LUA-BACKEND-PARITY.4.3.0 - split Lua runtime helper families`
+
+### `LUA-BACKEND-PARITY.4.3.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.4.3` named four value kinds, every governed helper/method, controls, callbacks,
+  captures, cursor/marks, and diagnostic calls in one leaf; that is not a safe signoff-sized implementation unit.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The mdBook catalog and completed Dart/Julia rollouts show distinct store,
+  scalar/string, numeric, array, harray, control/block, stateful cursor/capture, and diagnostic mechanisms. Lua also
+  needs an explicit exhaustive closeout so recognizing 239 names cannot be mistaken for executing them.
+- [x] **FIX** — Converted `.4.3` into a ten-child container (`.0` planning plus `.1`-`.9` execution/closeout),
+  ordered by dependency and leaving recursively smaller splits available before any broad code leaf starts.
+- [x] **ADDRESSED (verified)** — Every current helper/catalog family has one owner and `.4.3.1` is the only active
+  code frontier; no implementation behavior or capability claim changed.
+- [x] **NO REGRESSION** — The committed `.4.2` 66x2/full-CI proof remains green and unchanged. Planning checks
+  cover mdBook, memory architecture, Knowledge Map, task metadata, doctrine, and whitespace.
+- [x] **LOCKSTEP** — Task tree/index, roadmaps, Lua README, mdBook handoff/status, Knowledge Map, architecture/live
+  docs, changes/development notes, and bounded memory record the same ordered split.
+
+- ID: `LUA-BACKEND-PARITY.4.3.1`
+  Status: `active`
+  Goal: Centralize Lua's four-kind runtime stores, structural access/assignment, snapshots, and entry/match reads.
+  Dependencies: `.4.2`
+  Acceptance: Scalar/array/harray/codeblock/null/boolean/number values retain typed identity; named and bare store
+    reads/writes, append/hash-index/nested assignment without autovivification, copy/array/hash snapshots, and all
+    `entry_*` / `match_*` text/group/map/position helpers pass focused cross-backend examples.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.2`
+  Status: `pending`
+  Goal: Implement scalar/string helpers and compatible receiver chains.
+  Dependencies: `.4.3.1`
+  Acceptance: Definedness/emptiness/coalesce, concat, trim/case/length, substring/prefix/suffix/contains/replace,
+    regex match/substitution flags, split bridges, lexical comparisons, scalar statement mutation, and receiver
+    forms match catalog examples; split again if mutation and pure transforms do not remain signoff-sized.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.3`
+  Status: `pending`
+  Goal: Implement numeric helpers, aliases, symbol callees, reducers, and number receiver chains.
+  Dependencies: `.4.3.1`
+  Acceptance: Arithmetic/unary/clamp/comparison/range and aggregate min/max/sum/avg/median behavior, invalid-input
+    null propagation, division/modulo fences, word aliases, symbol callees, and receiver forms match the oracle.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.4`
+  Status: `pending`
+  Goal: Implement array construction, pure helpers, mutation, bridges, reducers, and receiver chains.
+  Dependencies: `.4.3.1`, `.4.3.2`, `.4.3.3`
+  Acceptance: Typed construction/copy/flatten/concat, selection/order/membership/join/split/filter/map-style
+    transforms, append/end mutations, child push/index reuse, numeric terminals, and snapshot isolation match the
+    catalog without false/null or empty-array drift.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.5`
+  Status: `pending`
+  Goal: Implement harray construction, pure helpers, mutation, views, and receiver chains.
+  Dependencies: `.4.3.1`, `.4.3.4`
+  Acceptance: Typed hash/harray construction/copy/flatten, key/value views, merge/pick/drop/rename/set-key,
+    hash-index assignment, scalar-held maps, deterministic ordering, receiver forms, and nested-map preservation
+    match the catalog.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.6`
+  Status: `pending`
+  Goal: Execute codeblock values, structured controls, generic trailing blocks, and tree callbacks.
+  Dependencies: `.4.3.1`-`.4.3.5`
+  Acceptance: Codeblock last values and local return, attached/marker/inline if/switch/while, helper/function/method
+    final-codeblock equivalence, scoped `with`, and deterministic array/harray walk/map/reduce callbacks match the
+    governed surface; unsupported block arities fail generically.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.7`
+  Status: `pending`
+  Goal: Implement capture-slice, named-mark, input, and explicit cursor-state helper families.
+  Dependencies: `.4.3.1`, `.4.3.6`
+  Acceptance: Capture anchors/slices/boundaries, rule-local named marks, Unicode character positions/lengths,
+    input views, save/restore and entry/local rewinds, consume continuation, earliest boundary selection, and
+    unresolved-rule behavior match the runtime contract.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.8`
+  Status: `pending`
+  Goal: Implement runtime diagnostic output helpers over a caller-owned event boundary.
+  Dependencies: `.4.3.2`, `.4.3.4`, `.4.3.7`
+  Acceptance: `print`, `say`, and `print_each` evaluate eagerly, stay out of parse-result values, are quiet without
+    a sink, preserve message ordering/Unicode, and expose an event seam that `.4.4` can instrument without changing
+    helper semantics; `exit_now` remains immediate typed control.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.9`
+  Status: `pending`
+  Goal: Close exhaustive Lua helper/value/control/method no-drift.
+  Dependencies: `.4.3.1`-`.4.3.8`
+  Acceptance: Every governed current name is execution-covered or has a later explicit non-helper owner; exact
+    239-name admission, mdBook examples, both runtime gates, statuses, API docs, task trees, Knowledge Map, and
+    capability claims agree with zero hidden partial surface before `.4.4`.
   Verification: `pending`
   Commit: `pending`
 
@@ -702,7 +814,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 11 | `LUA-BACKEND-PARITY.3.4` | `done` | Typed effective rules/dependencies/payloads and exact outward descriptors pass both runtimes. |
 | 12 | `LUA-BACKEND-PARITY.4.1` | `done` | Dual-ABI PCRE2 matching and neutral registers pass 60/60 on both runtimes. |
 | 13 | `LUA-BACKEND-PARITY.4.2` | `done` | First compiled-rule interpreter passes 66/66 on both runtimes. |
-| 14 | `LUA-BACKEND-PARITY.4.3.0` | `active` | Split helper/value/control/method breadth before implementation. |
+| 14 | `LUA-BACKEND-PARITY.4.3.0` | `done` | Nine implementation/closeout owners cover the full helper surface. |
+| 15 | `LUA-BACKEND-PARITY.4.3.1` | `active` | Implement four-kind stores, access, snapshots, and entry/match reads. |
 
 ## Initial toolchain evidence (read-only planning audit)
 
@@ -755,3 +868,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.3.4` | `LUA-BACKEND-PARITY.3.4 - compile Lua spec state` | Ordered effective state, dependency regexes, ActionIR payloads, exact descriptor, and matching handoff. |
 | `LUA-BACKEND-PARITY.4.1` | `LUA-BACKEND-PARITY.4.1 - add Lua runtime matching` | Disposable dual-ABI PCRE2 adapter, neutral matches/registers, and rule-runtime handoff. |
 | `LUA-BACKEND-PARITY.4.2` | `LUA-BACKEND-PARITY.4.2 - add Lua runtime rule interpreter` | First compiled-rule interpreter, lifecycle/edge dispatch, local results/control, and helper-family split handoff. |
+| `LUA-BACKEND-PARITY.4.3.0` | `LUA-BACKEND-PARITY.4.3.0 - split Lua runtime helper families` | Planning-only ordered split into core values, scalar/string, numeric, array, harray, controls/blocks, stateful capture/cursor, diagnostics, and no-drift. |

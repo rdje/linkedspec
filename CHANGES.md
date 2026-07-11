@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.4.3.0 — split Lua runtime helper families
+
+Split the governed Lua runtime surface before broad implementation. Nine ordered leaves now own core four-kind
+stores/access/entry-match reads; scalar/string helpers; numeric helpers; arrays; harrays; codeblock/control/generic
+trailing-block/tree callbacks; capture/mark/input/cursor state; diagnostic output; and exhaustive 239-name/API/docs
+no-drift. Each leaf records dependencies, focused acceptance, and permission to split again before code.
+
+No runtime behavior or capability claim changed. The committed `.4.2` 66x2/full-CI proof remains authoritative;
+mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and whitespace gates validate the planning
+slice. `.4.3.1` is the sole next executable frontier.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.4.2 — add Lua runtime rule interpreter
 
 Added typed `LinkedSpecRuntimeEngine`, `RuntimeParseResult`, lifecycle-event, and interpreter-error boundaries over

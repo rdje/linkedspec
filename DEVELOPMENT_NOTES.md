@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.4.3.0 — split by runtime mechanism, not catalog page count):
+  A 239-name recognized surface is not an executable surface. Sequence Lua helper work from value/store identity
+  into pure scalar and numeric evaluation, then aggregate mechanisms, then codeblock/control callbacks, then
+  stateful cursor/capture behavior and diagnostic events. Keep diagnostic output separate because eager evaluation,
+  parse-result neutrality, and sink routing are different from pure values. End with an exhaustive reverse check
+  so every admitted current name has executable evidence or a deliberate later owner. Preserve recursive splitting
+  as a requirement whenever a leaf grows beyond a signoff-sized mechanism.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.4.2 — catch control at the iteration boundary):
   `next()` is not a rule return. Catch it around one regex/blind attempt, count the consumed iteration, preserve
   cursor progress, and continue without running the skipped remainder. Keep fatal `exit_now(...)` as an immediate

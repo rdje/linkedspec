@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.4.3.0 — split Lua runtime helper families**
+  (DONE — nine implementation/closeout owners are durable; core four-kind runtime `.4.3.1` next).
+
+  **Plan:** Core stores/access/entry-match, scalar/string, numeric, array, harray, codeblock/control/callback,
+  capture/mark/input/cursor, diagnostic output, and exhaustive no-drift are separate ordered leaves. Each may split
+  again before implementation; recognizing 239 names is never treated as executable parity.
+
+  **Proof:** No code changed. The committed `.4.2` 66x2/full-CI result remains authoritative; mdBook, memory,
+  Knowledge Map, task-tree, doctrine, and whitespace checks pass for the split.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.4.2 — add Lua runtime rule interpreter**
   (DONE — compiled dispatch passes both runtimes; helper-family split `.4.3.0` next).
 

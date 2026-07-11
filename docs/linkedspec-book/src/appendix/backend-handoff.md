@@ -588,6 +588,15 @@ dispatch-facing boundary; broad helper/value behavior, staged function
 execution, corpus execution, the primary CLI, and generated source remain
 later owned work.
 
+Helper/value breadth is deliberately ordered into separate Lua leaves before
+implementation: four-kind stores/access plus entry/match reads; scalar/string;
+numeric; arrays; harrays; codeblocks/controls/generic trailing blocks/tree
+callbacks; capture/mark/input/cursor state; diagnostic output; then exhaustive
+239-name and documentation no-drift. Each leaf depends only on earlier value
+mechanisms and may split again before code. This keeps recognition of a helper
+name distinct from executable parity and makes `.4.3.1` the single current
+runtime frontier.
+
 ```lua
 local source = [[
 Top::
