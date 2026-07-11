@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.4.2 — add Julia generated family execution
+
+Added Julia's exact contract-v1 generated plan surface: public typed ten-family values, ordered label/family rows,
+compiled-state classification, and four stable validation failures for row count, label, known-family mismatch,
+and unknown family. Emitted modules expose `plan()` and `validate_plan(...)` and carry the plan as native Julia
+source, with Unicode labels represented safely as strict-UTF-8/ASCII-hex literals.
+
+Made the validated plan authoritative for generated execution. The runtime context carries the per-label family
+map and source identity through every root and nested rule. Each entry selects regex/acode or blind/bcode dispatch
+from its family; native interpreter calls carry no plan and retain their previous structure-derived behavior.
+Generated trace adds portable enter, family-decision, and exit roles beside existing Julia trace, and typed
+execution failures retain available rule/family attribution.
+
+Added a 27-assertion all-family proof beside the 18 scaffold assertions. It classifies all ten families, compares
+direct generated values with the native interpreter, exercises all four rejections, and loads one emitted
+all-family module in a fresh caller-owned offline project for exact plan/result/trace/source-identity checks. Package
+tests pass 1,155 assertions; the canonical Julia gate passes 61x2 CLI and 105/105 corpus. Census remains 59/0/1
+until contract-sourced manifest admission `.3.4.3`.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.4.1 — add Julia generated-source scaffold
 
 Added public `emit_julia_source(...)` and `emit_julia_source_v1(...)` APIs. They reconstruct effective function

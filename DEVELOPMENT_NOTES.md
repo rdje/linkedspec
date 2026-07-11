@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.4.2 — generated plans must be executable control state):
+  Julia's compiled rule carries the same neutral classifier inputs as Dart/Rust: mode, repetition/AND flags,
+  regex/action-edge counts, and blind edges. Validate arbitrary string rows before converting them into a trusted
+  map so unknown-family and known-but-wrong-family errors stay distinct. Carry that map through the existing single
+  recursive rule-entry seam and choose acode/regex versus bcode/blind dispatch there; nested calls then cannot evade
+  the plan. Native calls omit the map and remain unchanged. A single combined emitted module is a compact isolated
+  proof: ten selectable roots cover all families while child rows verify nested-plan propagation, and one host
+  process can compare all results and portable trace identity without multiplying depot/package artifacts.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.4.1 — separate Unicode semantics from boundary encoding):
   Reconstruct a normalized effective AST from compiled order instead of serializing host caches or inventing a
   second compiler. Canonically sort JSON object keys, encode the Unicode payload and identity to strict UTF-8, then

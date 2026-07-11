@@ -173,6 +173,23 @@ failures are exact, and the owned project/depot are deleted afterward. Julia
 remains the only generated-source capability gap until its ten-family direct
 plan and manifest-backed admission land.
 
+Julia's plan/direct layer is now implemented. `GeneratedRuleFamily` names the
+same ten families as the neutral contract, while `GeneratedPlanRow` carries
+ordered label/family pairs. `build_generated_rule_plan(...)` classifies
+effective compiled rules; `validate_generated_rule_plan_v1(...)` rejects row-
+count, label, known-family mismatch, and unknown-family mutations before any
+parser action runs.
+
+Validated families are not decorative. Every generated root and nested rule
+entry reads the typed plan and selects regex/acode or blind/bcode structural
+dispatch from that family; native interpreter calls still derive the same
+choice from compiled structure. Generated traced execution adds
+`generated_rule_enter`, `generated_family_decision`, and
+`generated_rule_exit` with source/rule/family identity beside the native Julia
+trace. One emitted module independently executes all ten families against
+native interpreter values in a caller-owned offline host. Julia remains a gap
+only because the contract-sourced manifest admission is still active work.
+
 ## Why this matters
 
 Dynamic generation is powerful, but without structure it becomes hard to trust.

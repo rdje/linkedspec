@@ -116,12 +116,17 @@ mutable struct _RuntimeExecutionContext
     lifecycle_events::Vector{RuntimeLifecycleEvent}
     top_rule::String
     trace::Union{Nothing,LinkedSpecTraceEmitter}
+    generated_families::Union{Nothing,Dict{String,String}}
+    generated_source_identity::Union{Nothing,String}
 end
 
 function _RuntimeExecutionContext(
     input::AbstractString,
     top_rule::AbstractString,
     trace::Union{Nothing,LinkedSpecTraceEmitter},
+    ;
+    generated_families = nothing,
+    generated_source_identity = nothing,
 )
     input_text = String(input)
     return _RuntimeExecutionContext(
@@ -141,6 +146,10 @@ function _RuntimeExecutionContext(
         RuntimeLifecycleEvent[],
         String(top_rule),
         trace,
+        generated_families === nothing ?
+            nothing : Dict{String,String}(generated_families),
+        generated_source_identity === nothing ?
+            nothing : String(generated_source_identity),
     )
 end
 
@@ -271,9 +280,17 @@ function runtime_parse(
     input::AbstractString;
     top_rule = nothing,
     trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+    _generated_families = nothing,
+    _generated_source_identity = nothing,
 )
     label = top_rule === nothing ? _default_runtime_top_rule(engine) : String(top_rule)
-    context = _RuntimeExecutionContext(input, label, trace)
+    context = _RuntimeExecutionContext(
+        input,
+        label,
+        trace;
+        generated_families = _generated_families,
+        generated_source_identity = _generated_source_identity,
+    )
     _set_runtime_cursor!(context, _runtime_public_parser_start_codeunit(context.input))
     trace_scope = trace === nothing ? nothing : enter_trace_scope!(
         trace,
@@ -400,6 +417,14 @@ function _execute_runtime_rule!(
         ))
     end
 
+    generated_family = context.generated_families === nothing ?
+        nothing : get(context.generated_families, label, nothing)
+    if context.generated_families !== nothing && generated_family === nothing
+        throw(RuntimeInterpreterException(
+            "generated rule plan does not contain '$label'",
+        ))
+    end
+
     recursion_key = (label, entry_regex_index, context.cursor_codeunit)
     if recursion_key in context.active_rule_entries
         _trace_runtime_decision!(
@@ -422,6 +447,23 @@ function _execute_runtime_rule!(
         "rule=$label entry_regex=$entry_regex_index mode=$(rule.mode_metadata.name) cursor=$(context.cursor_codeunit)",
         LinkedSpecTraceHigh,
     )
+    if generated_family !== nothing && context.generated_source_identity !== nothing
+        identity = context.generated_source_identity
+        _emit_runtime_trace_event!(
+            context,
+            LinkedSpecTraceMark,
+            "generated_rule_enter",
+            "source_identity=$identity rule=$label entry_regex_idx=$entry_regex_index cursor=$(context.cursor_codeunit)",
+            LinkedSpecTraceLow,
+        )
+        _emit_runtime_trace_event!(
+            context,
+            LinkedSpecTraceMark,
+            "generated_family_decision",
+            "source_identity=$identity rule=$label family=$generated_family",
+            LinkedSpecTraceLow,
+        )
+    end
 
     try
         init_return = _execute_runtime_lifecycle!(engine, rule, "I", context)
@@ -430,7 +472,9 @@ function _execute_runtime_rule!(
         end
 
         try
-            if !isempty(rule.blind_edges)
+            uses_blind_dispatch = generated_family === nothing ?
+                !isempty(rule.blind_edges) : _generated_family_uses_blind_dispatch(generated_family)
+            if uses_blind_dispatch
                 return _execute_runtime_blind_rule!(engine, rule, context)
             end
             return _execute_runtime_regex_rule!(engine, rule, entry_regex_index, context)
@@ -456,6 +500,15 @@ function _execute_runtime_rule!(
         end
         rethrow()
     finally
+        if generated_family !== nothing && context.generated_source_identity !== nothing
+            _emit_runtime_trace_event!(
+                context,
+                LinkedSpecTraceMark,
+                "generated_rule_exit",
+                "source_identity=$(context.generated_source_identity) rule=$label family=$generated_family cursor=$(context.cursor_codeunit)",
+                LinkedSpecTraceLow,
+            )
+        end
         _exit_runtime_trace_scope!(
             context,
             trace_scope,

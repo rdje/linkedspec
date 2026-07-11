@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.4.1` — added Julia deterministic generated-source scaffold.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.3.3.3` — admitted generated Dart source and closed `.3.3`.
-- recent_context: Census remains 59/0/1. Julia now has public compatibility/v1 emitters, canonical effective-AST
-  serialization, strict-UTF-8/ASCII-hex payload/identity, typed metadata/errors, direct/traced entrypoints, and an
-  isolated 18-assertion valid/corrupt include/run proof. Complete 1,128/61x2/105 pass. Family/direct `.3.4.2` is active.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.4.2` — added exact Julia generated family execution.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.3.4.1` — added Julia deterministic generated-source scaffold.
+- recent_context: Census remains 59/0/1. Julia has deterministic Unicode-safe v1 emission, exact ten-family ordered
+  plans, four pre-execution rejections, family-authoritative root/nested dispatch, portable trace identity, and one
+  isolated all-family module. Focused 27+18 and complete 1,155/61x2/105 pass. Manifest admission `.3.4.3` is active.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.3.4.1 - add Julia generated-source scaffold`; previous committed HEAD is
-  `5f74f318 FUTURE-PARITY-BACKLOG.3.3.3 - admit generated Dart source`.
+  `FUTURE-PARITY-BACKLOG.3.4.2 - add Julia generated family execution`; previous committed HEAD is
+  `7a1761bd FUTURE-PARITY-BACKLOG.3.4.1 - add Julia generated-source scaffold`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.3.4.2`; Julia generated family-plan/direct execution is active.
-- next_action: Knowledge-Map-first compare Julia compiled/runtime rule structure against the neutral ten-family
-  contract and Dart/Rust classifiers, then add ordered plan metadata, four exact pre-execution rejections, typed
-  family-controlled direct execution, portable trace roles, and one isolated all-family matrix.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.3.4.3`; Julia generated manifest admission is active.
+- next_action: Read the exact accepted subset directly from contract v1, run each case through the ordinary/staged
+  Julia frontend and native interpreter oracle first, then independently include/run emitted modules with exact
+  value/metadata/plan/trace identity; checker-lock the recurring proof before capability promotion.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

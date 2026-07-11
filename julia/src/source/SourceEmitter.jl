@@ -18,6 +18,215 @@ end
 const GENERATED_SOURCE_CONTRACT = "linkedspec-generated-source-v1"
 const GENERATED_SOURCE_FORMAT = 1
 
+@enum GeneratedRuleFamily begin
+    DefaultGeneratedFamily
+    OrAcodeGeneratedFamily
+    AndSingleAcodeGeneratedFamily
+    AndAcodeSeqGeneratedFamily
+    AndBcodeGeneratedFamily
+    OrBcodeGeneratedFamily
+    RepAcodeGeneratedFamily
+    RepBcodeGeneratedFamily
+    RepAndAcodeGeneratedFamily
+    RepAndBcodeGeneratedFamily
+end
+
+struct GeneratedPlanRow
+    label::String
+    family::String
+end
+
+GeneratedPlanRow(label::AbstractString, family::AbstractString) =
+    GeneratedPlanRow(String(label), String(family))
+
+to_json(row::GeneratedPlanRow) = Dict("label" => row.label, "family" => row.family)
+
+function generated_rule_family_name(family::GeneratedRuleFamily)
+    names = (
+        "default",
+        "or_acode",
+        "and_single_acode",
+        "and_acode_seq",
+        "and_bcode",
+        "or_bcode",
+        "rep_acode",
+        "rep_bcode",
+        "rep_and_acode",
+        "rep_and_bcode",
+    )
+    return names[Int(family) + 1]
+end
+
+function generated_rule_family_from_name(name::AbstractString)
+    text = String(name)
+    for family in instances(GeneratedRuleFamily)
+        if generated_rule_family_name(family) == text
+            return family
+        end
+    end
+    return nothing
+end
+
+_generated_family_uses_blind_dispatch(family::AbstractString) = String(family) in (
+    "and_bcode",
+    "or_bcode",
+    "rep_bcode",
+    "rep_and_bcode",
+)
+
+function classify_generated_rule_family(rule::CompiledRule)
+    mode = rule.mode_metadata.name
+    repetition = mode in (
+        "Plus",
+        "Star",
+        "Optional",
+        "OrPlus",
+        "AndPlus",
+        "OrBounded",
+        "AndBounded",
+    )
+    if repetition
+        if !isempty(rule.blind_edges)
+            return rule.mode_metadata.is_and ?
+                RepAndBcodeGeneratedFamily : RepBcodeGeneratedFamily
+        end
+        return rule.mode_metadata.is_and ?
+            RepAndAcodeGeneratedFamily : RepAcodeGeneratedFamily
+    elseif !isempty(rule.blind_edges)
+        return mode == "Or" ? OrBcodeGeneratedFamily : AndBcodeGeneratedFamily
+    elseif mode == "Default"
+        return DefaultGeneratedFamily
+    elseif mode == "Or"
+        return OrAcodeGeneratedFamily
+    elseif mode == "Single"
+        return AndSingleAcodeGeneratedFamily
+    elseif mode in ("And", "Pipe")
+        return length(rule.regex_patterns) <= 1 && length(rule.action_edges) <= 1 ?
+            AndSingleAcodeGeneratedFamily : AndAcodeSeqGeneratedFamily
+    end
+    throw(ArgumentError("unsupported generated rule mode $mode"))
+end
+
+function build_generated_rule_plan(compiled::CompiledSpec)
+    return GeneratedPlanRow[
+        GeneratedPlanRow(
+            label,
+            generated_rule_family_name(classify_generated_rule_family(compiled.rules_by_label[label])),
+        )
+        for label in compiled.compiled_rule_order
+    ]
+end
+
+function validate_generated_rule_plan_v1(
+    compiled::CompiledSpec,
+    plan::AbstractVector{GeneratedPlanRow},
+    source_identity::AbstractString,
+)
+    identity = String(source_identity)
+    if length(plan) != length(compiled.compiled_rule_order)
+        throw(GeneratedSourceException(
+            ValidateGeneratedPlanStage,
+            GeneratedPlanRowCountMismatchCode,
+            "Generated rule plan row count does not match compiled rules",
+            identity;
+            detail = "expected=$(length(compiled.compiled_rule_order)) actual=$(length(plan))",
+        ))
+    end
+
+    validated = Dict{String,String}()
+    for (index, row) in enumerate(plan)
+        expected_label = compiled.compiled_rule_order[index]
+        if row.label != expected_label
+            throw(GeneratedSourceException(
+                ValidateGeneratedPlanStage,
+                GeneratedPlanLabelMismatchCode,
+                "Generated rule plan label does not match compiled rule",
+                identity;
+                rule_label = expected_label,
+                detail = "row=$(index - 1) expected=$expected_label actual=$(row.label)",
+            ))
+        end
+        actual_family = generated_rule_family_from_name(row.family)
+        if actual_family === nothing
+            throw(GeneratedSourceException(
+                ValidateGeneratedPlanStage,
+                GeneratedPlanUnknownFamilyCode,
+                "Generated rule plan contains an unknown family",
+                identity;
+                rule_label = expected_label,
+                handler_family = row.family,
+                detail = "row=$(index - 1) family=$(row.family)",
+            ))
+        end
+        expected_family = classify_generated_rule_family(compiled.rules_by_label[expected_label])
+        if actual_family != expected_family
+            expected_name = generated_rule_family_name(expected_family)
+            throw(GeneratedSourceException(
+                ValidateGeneratedPlanStage,
+                GeneratedPlanFamilyMismatchCode,
+                "Generated rule plan family does not match compiled rule",
+                identity;
+                rule_label = expected_label,
+                handler_family = row.family,
+                detail = "row=$(index - 1) expected=$expected_name actual=$(row.family)",
+            ))
+        end
+        validated[expected_label] = row.family
+    end
+    return validated
+end
+
+function execute_generated_parser_v1(
+    compiled::CompiledSpec,
+    plan::AbstractVector{GeneratedPlanRow},
+    input::AbstractString,
+    source_identity::AbstractString;
+    top_rule = nothing,
+    trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
+)
+    families = validate_generated_rule_plan_v1(compiled, plan, source_identity)
+    try
+        return runtime_parse(
+            LinkedSpecRuntimeEngine(compiled),
+            input;
+            top_rule = top_rule,
+            trace = trace,
+            _generated_families = families,
+            _generated_source_identity = source_identity,
+        ).value
+    catch error
+        error isa GeneratedSourceException && rethrow()
+        rule_label = error isa RuntimeInterpreterException && error.diagnostic !== nothing ?
+            error.diagnostic.rule_label : nothing
+        family = rule_label === nothing ? nothing : get(families, rule_label, nothing)
+        throw(generated_source_execution_failed(
+            source_identity,
+            error;
+            rule_label = rule_label,
+            handler_family = family,
+        ))
+    end
+end
+
+function execute_generated_parser_with_trace_v1(
+    compiled::CompiledSpec,
+    plan::AbstractVector{GeneratedPlanRow},
+    input::AbstractString,
+    config::LinkedSpecTraceConfig,
+    source_identity::AbstractString;
+    top_rule = nothing,
+    stdout_io::IO = stdout,
+)
+    return execute_generated_parser_v1(
+        compiled,
+        plan,
+        input,
+        source_identity;
+        top_rule = top_rule,
+        trace = LinkedSpecTraceEmitter(config; stdout_io = stdout_io),
+    )
+end
+
 function generated_source_stage_name(stage::GeneratedSourceStage)
     if stage == EmitSourceStage
         return "emit_source"
@@ -183,6 +392,7 @@ function emit_julia_source_v1(compiled::CompiledSpec, source_identity::AbstractS
         spec_json = _generated_canonical_json(to_json(normalized_spec))
         identity_hex = bytes2hex(codeunits(identity))
         spec_json_hex = bytes2hex(codeunits(spec_json))
+        plan = build_generated_rule_plan(compiled)
 
         output = IOBuffer()
         print(output, """# Generated LinkedSpec parser module.
@@ -205,6 +415,18 @@ const LINKEDSPEC_GENERATED_SOURCE_FORMAT = 1
             "\"))",
         )
         println(output, "const _COMPILED_SPEC_JSON_HEX = \"", spec_json_hex, "\"")
+        println(output, "const _GENERATED_PLAN = LinkedSpecJulia.GeneratedPlanRow[")
+        for row in plan
+            println(
+                output,
+                "    LinkedSpecJulia.GeneratedPlanRow(String(hex2bytes(\"",
+                bytes2hex(codeunits(row.label)),
+                "\")), \"",
+                row.family,
+                "\"),",
+            )
+        end
+        println(output, "]")
         print(output, """
 
 metadata() = LinkedSpecJulia.GeneratedSourceMetadata(
@@ -228,27 +450,25 @@ function _load_compiled_spec()
 end
 
 const _COMPILED_SPEC = _load_compiled_spec()
-const _ENGINE = LinkedSpecJulia.LinkedSpecRuntimeEngine(_COMPILED_SPEC)
+plan() = copy(_GENERATED_PLAN)
+
+function validate_plan(actual::AbstractVector{LinkedSpecJulia.GeneratedPlanRow})
+    LinkedSpecJulia.validate_generated_rule_plan_v1(
+        _COMPILED_SPEC,
+        actual,
+        LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+    )
+    return nothing
+end
 
 function execute(input::AbstractString; top_rule = nothing)
-    try
-        return LinkedSpecJulia.runtime_execute(
-            _ENGINE,
-            input;
-            top_rule = top_rule,
-        ).value
-    catch error
-        if error isa LinkedSpecJulia.GeneratedSourceException
-            rethrow()
-        end
-        rule_label = error isa LinkedSpecJulia.RuntimeInterpreterException &&
-            error.diagnostic !== nothing ? error.diagnostic.rule_label : nothing
-        throw(LinkedSpecJulia.generated_source_execution_failed(
-            LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
-            error;
-            rule_label = rule_label,
-        ))
-    end
+    return LinkedSpecJulia.execute_generated_parser_v1(
+        _COMPILED_SPEC,
+        _GENERATED_PLAN,
+        input,
+        LINKEDSPEC_GENERATED_SOURCE_IDENTITY;
+        top_rule = top_rule,
+    )
 end
 
 function execute_with_trace(
@@ -257,26 +477,15 @@ function execute_with_trace(
     top_rule = nothing,
     stdout_io::IO = stdout,
 )
-    try
-        return LinkedSpecJulia.runtime_execute_with_trace(
-            _ENGINE,
-            input,
-            trace_config;
-            top_rule = top_rule,
-            stdout_io = stdout_io,
-        ).value
-    catch error
-        if error isa LinkedSpecJulia.GeneratedSourceException
-            rethrow()
-        end
-        rule_label = error isa LinkedSpecJulia.RuntimeInterpreterException &&
-            error.diagnostic !== nothing ? error.diagnostic.rule_label : nothing
-        throw(LinkedSpecJulia.generated_source_execution_failed(
-            LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
-            error;
-            rule_label = rule_label,
-        ))
-    end
+    return LinkedSpecJulia.execute_generated_parser_with_trace_v1(
+        _COMPILED_SPEC,
+        _GENERATED_PLAN,
+        input,
+        trace_config,
+        LINKEDSPEC_GENERATED_SOURCE_IDENTITY;
+        top_rule = top_rule,
+        stdout_io = stdout_io,
+    )
 end
 
 end # module LinkedSpecGeneratedParser

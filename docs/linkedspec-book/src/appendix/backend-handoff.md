@@ -583,7 +583,7 @@ source admission, its 60 states are 58 pass, zero partial states, and two gaps. 
 | --- | --- | --- |
 | Native named/file resolution | ADR `0026` and the 14/9/4 fixture fix portable names, exact paths, ordered roots, strict UTF-8, and typed stages. Perl, Rust, Dart, and Julia consume the contract directly; exact admission is closed. | closed `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, Dart, and Julia propagate a caller-owned emitter through frontend/compiler/function/staged/runtime phases. Dart's direct routed/quiet/failure proof and recurring gates are admitted. | closed `.1.6.5` |
-| Generated parser source | Perl and Rust pass contract v1; Rust compiles/runs 105/105. Dart also passes deterministic v1 emission, ten-family direct dispatch/four rejections/trace roles, and exact contract-sourced 8/105 host admission. Julia has deterministic v1 emission, typed metadata/errors, Unicode-safe strict-UTF-8/hex payloads, direct/traced entrypoints, and isolated include/run/failure proof; family/direct and manifest admission remain. | active `.3.4.2` Julia; `.3.5` admission |
+| Generated parser source | Perl and Rust pass contract v1; Rust compiles/runs 105/105. Dart also passes deterministic v1 emission, ten-family direct dispatch/four rejections/trace roles, and exact contract-sourced 8/105 host admission. Julia has deterministic v1 emission, typed metadata/errors, Unicode-safe strict-UTF-8/hex payloads, exact ten-family authoritative dispatch/four rejections/trace, and isolated scaffold/all-family proof; manifest admission remains. | active `.3.4.3` Julia; `.3.5` admission |
 
 Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, generic final-
 codeblock equivalence, and the not-yet-implemented Lua backend are explicit exclusions/future owners rather than
@@ -613,15 +613,17 @@ portable trace roles, and an isolated all-family matrix. `.3.3.3` adds exact acc
 Dart; the census is 59/0/1 with Julia the sole gap. `.3.4.1` then adds Julia's public compatibility/v1 emitters,
 canonical effective-AST serialization, strict-UTF-8/ASCII-hex payload and identity embedding, typed portable
 metadata/errors, direct/traced generated entrypoints, and an 18-assertion isolated include/run/corrupt-load proof.
-The gap remains until family execution and manifest admission.
+`.3.4.2` then adds exact typed ten-family classification, four plan rejections, family-authoritative per-rule
+dispatch, portable trace roles, and one isolated emitted all-family module. The gap remains only until manifest
+admission.
 
 `FUTURE-PARITY-BACKLOG.3.0` turns that broad owner into an executable order. `.3.1.1` first fixes a versioned neutral
 contract for emission, host compile/load, direct generated execution, exact result/error/source identity, trace,
 family-plan validation, and manifest proof; `.3.1.2` repairs Perl and `.3.1.3.3` admits the aligned Perl/Rust
 baseline. `.3.2.0` classifies Rust's full manifest 105/105 green, `.3.2.1` closes the empty repair inventory, and
 `.3.2.2` completes strict recurring admission. Dart scaffold `.3.3.1` and exact family/direct execution `.3.3.2`
-are closed; `.3.3.3` admits Dart and closes `.3.3`. Julia scaffold `.3.4.1` is closed; active `.3.4.2` adds exact
-family-plan/direct execution before `.3.4.3` corpus proof. `.3.5` alone may promote all 60 states to pass. Because
+are closed; `.3.3.3` admits Dart and closes `.3.3`. Julia scaffold `.3.4.1` and family/direct `.3.4.2` are closed;
+active `.3.4.3` owns contract-sourced corpus proof. `.3.5` alone may promote all 60 states to pass. Because
 the artifacts are host-language source, byte identity is not required; ADR `0023` requires equivalent operations
 and observable behavior through idiomatic host APIs.
 

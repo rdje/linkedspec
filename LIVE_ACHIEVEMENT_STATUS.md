@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.3.4.2 — add Julia generated family execution**
+  (DONE — exact ten-family direct plan/trace passes; Julia manifest admission `.3.4.3` next).
+
+  **Implementation:** Public typed families and ordered rows classify compiled state; four exact mutations fail
+  before execution. Validated families authoritatively select acode/regex or bcode/blind dispatch on every generated
+  root/nested entry, while native execution is unchanged. Portable enter/decision/exit trace retains identity.
+
+  **Proof:** One caller-owned offline host loads one emitted all-family module and equals ten interpreter values.
+  Focused 27+18 and package 1,155 assertions pass; 61x2 CLI and 105/105 corpus pass. Census remains 59/0/1 until
+  contract-sourced `.3.4.3` admission.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.4.1 — add Julia generated-source scaffold**
   (DONE — deterministic v1 emission and isolated include/run pass; Julia family/direct `.3.4.2` next).
 

@@ -25,6 +25,213 @@ function _generated_source_host_process(scratch, runner, generated, private_depo
     return success(process), String(take!(output))
 end
 
+const _GENERATED_FAMILY_MATRIX_SOURCE = raw"""
+DefaultRoot::
+ I { set(array(words), []) }
+ /hello[ \t]+(\w+)/
+ LE { push(array(words), match_group(0)) }
+ E { return(copy(array(words))) }
+
+OrAcode:OR
+ /go/ -> OrDone { return("or-acode") }
+OrDone: /go/
+
+AndSingle:AND
+ /one/ -> AndSingleDone { return("and-single") }
+AndSingleDone: /one/
+
+AndSeq:AND
+ /a/ -> AndSeqFirst
+ /[ \t]+b/ -> AndSeqSecond { return("and-seq") }
+AndSeqFirst: /a/
+AndSeqSecond: /[ \t]+b/
+
+AndBcode:AND
+ => AndBlindA
+ => AndBlindB
+ E { return("and-bcode") }
+AndBlindA: /a/
+AndBlindB: /[ \t]+b/
+
+OrBcode:OR
+ => OrBlindA
+ => OrBlindB
+ E { return(cat("or-bcode:", retv)) }
+OrBlindA: /a/ E { return("A") }
+OrBlindB: /b/ E { return("B") }
+
+RepAcode:OR{2,3}
+ I { set(array(rep_acode), []) }
+ /a/ -> RepA { push(array(rep_acode), match_text()) }
+ /b/ -> RepB { push(array(rep_acode), match_text()) }
+ E { return(copy(array(rep_acode))) }
+RepA: /a/
+RepB: /b/
+
+RepBcode:OR{2,3}
+ I { set(array(rep_bcode), []) }
+ => RepBlindA
+ => RepBlindB
+ LE { push(array(rep_bcode), retv) }
+ E { return(copy(array(rep_bcode))) }
+RepBlindA:& /a/ LE { return("A") }
+RepBlindB:& /b/ LE { return("B") }
+
+RepAndAcode:AND{2}
+ I { set(array(rep_and_acode), []); set(array(rep_and_acode_pair), []) }
+ /a/ -> RepAndA { push(array(rep_and_acode_pair), match_text()) }
+ /b/ -> RepAndB { push(array(rep_and_acode_pair), match_text()) }
+ IT { push(array(rep_and_acode), copy(array(rep_and_acode_pair))); set(array(rep_and_acode_pair), []) }
+ E { return(copy(array(rep_and_acode))) }
+RepAndA: /a/
+RepAndB: /b/
+
+RepAndBcode:AND{2}
+ I { set(array(rep_and_bcode), []); set(array(rep_and_bcode_group), []) }
+ => RepAndBlindA { push(array(rep_and_bcode_group), retv) }
+ => RepAndBlindB { push(array(rep_and_bcode_group), retv) }
+ IT { push(array(rep_and_bcode), copy(array(rep_and_bcode_group))); set(array(rep_and_bcode_group), []) }
+ E { return(copy(array(rep_and_bcode))) }
+RepAndBlindA:& /a/ LE { return("A") }
+RepAndBlindB:& /b/ LE { return("B") }
+"""
+
+const _GENERATED_FAMILY_CASES = [
+    (label = "DefaultRoot", family = "default", input = "hello one hello two"),
+    (label = "OrAcode", family = "or_acode", input = "go"),
+    (label = "AndSingle", family = "and_single_acode", input = "one"),
+    (label = "AndSeq", family = "and_acode_seq", input = "a b"),
+    (label = "AndBcode", family = "and_bcode", input = "a b"),
+    (label = "OrBcode", family = "or_bcode", input = "a"),
+    (label = "RepAcode", family = "rep_acode", input = "abab"),
+    (label = "RepBcode", family = "rep_bcode", input = "abab"),
+    (label = "RepAndAcode", family = "rep_and_acode", input = "abab"),
+    (label = "RepAndBcode", family = "rep_and_bcode", input = "abab"),
+]
+
+function _generated_plan_failure(call)
+    try
+        call()
+    catch error
+        return error
+    end
+    return nothing
+end
+
+@testset "Generated Julia family plan and direct execution" begin
+    compiled = compile_spec(parse_spec(_GENERATED_FAMILY_MATRIX_SOURCE))
+    identity = "generated-source/julia-family-matrix.spec"
+    plan = build_generated_rule_plan(compiled)
+    plan_by_label = Dict(row.label => row.family for row in plan)
+
+    @test [plan_by_label[case.label] for case in _GENERATED_FAMILY_CASES] ==
+          [case.family for case in _GENERATED_FAMILY_CASES]
+    @test Set(case.family for case in _GENERATED_FAMILY_CASES) ==
+          Set(generated_rule_family_name(family) for family in instances(GeneratedRuleFamily))
+    @test validate_generated_rule_plan_v1(compiled, plan, identity) == plan_by_label
+
+    native_results = Dict{String,Any}()
+    for case in _GENERATED_FAMILY_CASES
+        native = runtime_execute(
+            LinkedSpecRuntimeEngine(compiled),
+            case.input;
+            top_rule = case.label,
+        ).value
+        native_results[case.label] = native
+        @test execute_generated_parser_v1(
+            compiled,
+            plan,
+            case.input,
+            identity;
+            top_rule = case.label,
+        ) == native
+    end
+
+    mutations = [
+        (plan[1:(end - 1)], GeneratedPlanRowCountMismatchCode),
+        ([GeneratedPlanRow("Wrong", plan[1].family); plan[2:end]], GeneratedPlanLabelMismatchCode),
+        ([GeneratedPlanRow(plan[1].label, "or_acode"); plan[2:end]], GeneratedPlanFamilyMismatchCode),
+        ([GeneratedPlanRow(plan[1].label, "invented"); plan[2:end]], GeneratedPlanUnknownFamilyCode),
+    ]
+    for (mutated, expected_code) in mutations
+        failure = _generated_plan_failure(
+            () -> validate_generated_rule_plan_v1(compiled, mutated, identity),
+        )
+        @test failure isa GeneratedSourceException
+        @test failure.stage == ValidateGeneratedPlanStage
+        @test failure.code == expected_code
+    end
+
+    generated = emit_julia_source_v1(compiled, identity)
+    mktempdir() do scratch
+        private_depot = joinpath(scratch, "depot")
+        mkpath(private_depot)
+        write(
+            joinpath(scratch, "Project.toml"),
+            "name = \"GeneratedFamilyHost\"\n" *
+            "uuid = \"bbd21f80-f220-41f6-ab13-8beabf6a251f\"\n" *
+            "version = \"0.1.0\"\n",
+        )
+        generated_path = joinpath(scratch, "generated_parser.jl")
+        runner_path = joinpath(scratch, "runner.jl")
+        manifest_path = joinpath(scratch, "matrix.json")
+        write(generated_path, generated)
+        write(
+            manifest_path,
+            JSON3.write(Dict(
+                "cases" => [
+                    Dict(
+                        "label" => case.label,
+                        "family" => case.family,
+                        "input" => case.input,
+                        "expected" => native_results[case.label],
+                    )
+                    for case in _GENERATED_FAMILY_CASES
+                ],
+            )),
+        )
+        write(
+            runner_path,
+            """
+import JSON3
+import LinkedSpecJulia
+include(ARGS[1])
+const Parser = LinkedSpecGeneratedParser
+matrix = JSON3.read(read(joinpath(dirname(ARGS[1]), "matrix.json"), String))
+plan = Dict(row.label => row.family for row in Parser.plan())
+Parser.validate_plan(Parser.plan())
+for case in matrix["cases"]
+    label = String(case["label"])
+    @assert plan[label] == String(case["family"])
+    @assert Parser.execute(String(case["input"]); top_rule = label) == case["expected"]
+end
+trace_io = IOBuffer()
+first_case = first(matrix["cases"])
+Parser.execute_with_trace(
+    String(first_case["input"]),
+    LinkedSpecJulia.trace_config_enabled("low");
+    top_rule = String(first_case["label"]),
+    stdout_io = trace_io,
+)
+trace = String(take!(trace_io))
+@assert occursin("generated_rule_enter", trace)
+@assert occursin("generated_family_decision", trace)
+@assert occursin("generated_rule_exit", trace)
+@assert occursin("generated-source/julia-family-matrix.spec", trace)
+print("generated-family-host-ok")
+""",
+        )
+        passed, output = _generated_source_host_process(
+            scratch,
+            runner_path,
+            generated_path,
+            private_depot,
+        )
+        @test passed
+        @test output == "generated-family-host-ok"
+    end
+end
+
 @testset "Generated Julia source scaffold" begin
     compiled, expected_value = _generated_source_test_spec()
     identity = string("generated/λ", Char(0x24), ".spec")
