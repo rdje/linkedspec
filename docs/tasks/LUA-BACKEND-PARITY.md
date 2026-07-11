@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-11` (function registry `.3.3` closed; compiled state `.3.4` active)
+- Last updated: `2026-07-11` (compiled state `.3.4` closed; regex/match-state adapter `.4.1` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -290,7 +290,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   source frontend `.2` and activate typed ActionIR parsing `.3.1`.
 
 - ID: `LUA-BACKEND-PARITY.3`
-  Status: `active`
+  Status: `done`
   Goal: Implement typed ActionIR, contracts, function registry, and compiled state.
   Children: `.3.1`, `.3.2`, `.3.3`, `.3.4`
 
@@ -416,20 +416,51 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   and bounded memory close registry ownership and activate typed compiled state `.3.4`.
 
 - ID: `LUA-BACKEND-PARITY.3.4`
-  Status: `active`
+  Status: `done`
   Goal: Compile source AST into typed effective state and descriptors.
   Acceptance: Ordered effective rules/functions, modes, regex/dependency state, action/blind/lifecycle payloads,
     source identities, and outward descriptor JSON match the exact shared contract.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Added typed compiled-spec/rule/mode/dependency/action-edge/blind-edge/action-
+    payload/dependency-regex/descriptor state and exception records. Public `compile_spec(...)` snapshots and
+    validates typed source by default, carries the ordered function registry, records source definition order,
+    derives deterministic last-definition rule order/redefinition metadata when validation is explicitly skipped,
+    and compiles rule modes, regex slots, dependency refs, action/blind edges, lifecycle/plain blocks, source
+    identity, parsed ActionIR, and registry-aware contracts. Child dependency slots resolve to copied parent regex
+    rows with stable zero-based indexes; invalid slots/labels are typed. `to_descriptor_json(...)` matches the
+    executable shared schema exactly: four top-level keys, three model identities, order/count metadata, canonical
+    function records, Lua interpreter handler identity, and structured dependency-regex rows. The focused gate
+    passes syntax/process/manifest checks and 55/55 tests on PUC Lua and LuaJIT; exact 239-name/105-fixture coverage
+    remains green. Full local CI passes phase0 `1..1030`, CLI 61x2, census 60/0/0, and doctrines.
+  Commit: `LUA-BACKEND-PARITY.3.4 - compile Lua spec state`
+
+### `LUA-BACKEND-PARITY.3.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua had typed source, ActionIR/contracts, and registry records but no effective rule
+  model, dependency-regex derivation, or outward descriptor for compiler/runtime/tooling consumers.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Runtime ownership cannot safely infer rule modes, regex indexes, body roles,
+  or public descriptor fields from mutable source tables. The same typed compiler boundary used by Dart/Julia had
+  to land before matching.
+- [x] **FIX** — Added defensive source snapshots, ordered/last-definition compiled rule state, complete mode/edge/
+  payload metadata, child-regex slot resolution, dependency-regex state, registry-aware ActionIR contracts, typed
+  failures, neutral JSON, and the exact executable outward descriptor projection.
+- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 55/55 on PUC Lua and 55/55 on LuaJIT. Tests lock
+  public parsed-source compilation, source isolation, modes, regex/dependencies, action/blind/lifecycle/plain
+  payload structure, registry contracts, redefinitions, typed failures, exact schema keys/models/functions, and
+  canonical JSON round-trip.
+- [x] **NO REGRESSION** — Source/function/ActionIR/registry/process/corpus-manifest/239-name proofs remain green;
+  no regex engine, match execution, staged dispatch, primary CLI, corpus execution, capability, or generated-source
+  claim is introduced. Full local CI passes phase0 `1..1030`, CLI 61x2, capability/generated-source/native-
+  resolution, and doctrine checks.
+- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook/README API, Knowledge Map, changes/development/live status,
+  and bounded memory close compiler layer `.3` and activate regex/match-state adapter `.4.1`.
 
 - ID: `LUA-BACKEND-PARITY.4`
-  Status: `pending`
+  Status: `active`
   Goal: Implement matching and runtime execution.
   Children: `.4.1`, `.4.2`, `.4.3`, `.4.4`
 
 - ID: `LUA-BACKEND-PARITY.4.1`
-  Status: `pending`
+  Status: `active`
   Goal: Select and prove the regex/match-state adapter.
   Acceptance: Compare available Lua/LPeg/native-extension options against neutral regex fixtures; implement
     seek/consume, alternatives, captures/named captures, entry/local state, UTF-8 character offsets, line/column,
@@ -601,7 +632,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 8 | `LUA-BACKEND-PARITY.3.1` | `done` | Typed ActionIR parsing passes 41/41 on PUC Lua and LuaJIT. |
 | 9 | `LUA-BACKEND-PARITY.3.2` | `done` | Typed current-name contracts and generic diagnostics pass both runtimes. |
 | 10 | `LUA-BACKEND-PARITY.3.3` | `done` | Ordered registry/jobs, exact calls, immutable stitching, and isolated frames pass both runtimes. |
-| 11 | `LUA-BACKEND-PARITY.3.4` | `active` | Compile source AST into typed effective state and descriptors. |
+| 11 | `LUA-BACKEND-PARITY.3.4` | `done` | Typed effective rules/dependencies/payloads and exact outward descriptors pass both runtimes. |
+| 12 | `LUA-BACKEND-PARITY.4.1` | `active` | Select and prove the regex/match-state adapter against neutral behavior. |
 
 ## Initial toolchain evidence (read-only planning audit)
 
@@ -651,3 +683,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.3.1` | `LUA-BACKEND-PARITY.3.1 - parse typed Lua ActionIR` | Structural actions, four values, access/assign/control/chains, generic final blocks, and contract-resolution handoff. |
 | `LUA-BACKEND-PARITY.3.2` | `LUA-BACKEND-PARITY.3.2 - resolve Lua ActionIR contracts` | Exact current-name contracts, aliases/families, generic diagnostics, registry-first seam, and registry handoff. |
 | `LUA-BACKEND-PARITY.3.3` | `LUA-BACKEND-PARITY.3.3 - add Lua function registry` | Ordered definitions/jobs, exact resolution, immutable stitching, isolated frames, and compiled-state handoff. |
+| `LUA-BACKEND-PARITY.3.4` | `LUA-BACKEND-PARITY.3.4 - compile Lua spec state` | Ordered effective state, dependency regexes, ActionIR payloads, exact descriptor, and matching handoff. |

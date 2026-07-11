@@ -11,7 +11,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, backend, scaffold, embedding, tests, PUC-Lua, LuaJIT]
-evidence: "LUA-BACKEND-PARITY.1.2 adds the native scaffold; .1.3 adds typed JSON/corpus IO; .2.1-.2.4 add frontend/function projection; .3.1-.3.3 add typed ActionIR/contracts/registry. The current local gate passes 50/50 on PUC Lua and LuaJIT plus exact process checks. No runtime/LPeg API is claimed."
+evidence: "LUA-BACKEND-PARITY.1.2 adds the native scaffold; .1.3 adds typed JSON/corpus IO; .2.1-.2.4 add frontend/function projection; .3.1-.3.4 add typed ActionIR/contracts/registry/compiled state. The current local gate passes 55/55 on PUC Lua and LuaJIT plus exact process checks. No runtime/LPeg API is claimed."
 reverify: "bash tools/run_lua_local.sh"
 ---
 

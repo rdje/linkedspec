@@ -771,6 +771,38 @@ recursion are typed failures; recursion reports stable rule and handler-source
 identity. Function-body execution and staged dispatch remain later layers. The
 dual-runtime gate now passes 50/50 on PUC Lua and 50/50 on LuaJIT.
 
+Lua's compiler layer is now data-complete before matching. `compile_spec(spec)`
+validates and snapshots the typed source by default, then produces ordered
+effective rule/function state:
+
+```lua
+local compiled = linkedspec.compile_spec(spec)
+local top = compiled:rule("Top")
+local descriptor = compiled:to_descriptor_json()
+
+assert(top.mode_metadata.is_repetition)
+assert(descriptor.meta.descriptor_model == "compiled_descriptor_state")
+assert(descriptor.spec.Top.handler.kind == "lua_interpreter_rule")
+```
+
+Each `CompiledRule` carries its source header, neutral mode metadata, regex
+patterns, dependency refs, action/blind edges, lifecycle/plain payloads,
+original body elements, parsed ActionIR, and registry-aware contract results.
+Child regex slots are validated and resolved into structured
+`CompiledDependencyRegexState` rows with zero-based indexes and combined-pattern
+metadata. The compiler does not execute or host-compile those patterns yet.
+
+`compiled:to_json()` exposes the typed internal effective state.
+`compiled:to_descriptor_json()` exposes exactly the shared outward contract's
+four keys: `spec`, `functions`, `dependency_regex_map`, and `meta`. Its model
+identities are `compiled_descriptor_state`, `compiled_spec_state`, and
+`compiled_dependency_regex_state`; ordered function records retain staged
+payload/job/body-AST fields. Lua rule handlers are explicitly
+`lua_interpreter_rule` / `compiled_state_only`, making the non-runtime boundary
+visible rather than fabricating callable handlers. Source mutations after
+compilation cannot alter the compiled snapshot. The dual-runtime gate passes
+55/55 on PUC Lua and 55/55 on LuaJIT; regex/match-state work begins in `.4.1`.
+
 ### Julia Backend Commands, Embedding, and Status
 
 Julia is green at the accepted interpreter-first boundary: the complete validated corpus executes 105/105 with

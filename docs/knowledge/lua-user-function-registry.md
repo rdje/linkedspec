@@ -12,7 +12,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, actionir, functions, staged-parsing, registry, runtime-boundary]
-evidence: "LUA-BACKEND-PARITY.3.3 adds lua/src/linkedspec/user_function_registry.lua and 4 focused tests. The full Lua gate passes 50/50 on PUC Lua and LuaJIT; exact 239-name and 105-fixture coverage remains green."
+evidence: "LUA-BACKEND-PARITY.3.3 adds lua/src/linkedspec/user_function_registry.lua and 4 focused tests; .3.4 carries it into compiled state/descriptors. The full Lua gate passes 55/55 on PUC Lua and LuaJIT; exact 239-name and 105-fixture coverage remains green."
 reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl"
 ---
 

@@ -13,7 +13,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, parser, AST, source, semicolon, quotes, PUC-Lua, LuaJIT]
-evidence: "LUA-BACKEND-PARITY.2.2 adds lua/src/linkedspec/spec_parser.lua; .2.3 adds validation; .2.4 adds spec-owned function projection; .3.1-.3.3 add typed action parsing/contracts/registry. The current local gate passes 50/50 on both runtimes, all 21 shipped specs, and 102 rule-only corpus specs."
+evidence: "LUA-BACKEND-PARITY.2.2 adds lua/src/linkedspec/spec_parser.lua; .2.3 adds validation; .2.4 adds spec-owned function projection; .3.1-.3.4 add typed action parsing/contracts/registry/compiled state. The current local gate passes 55/55 on both runtimes, all 21 shipped specs, and 102 rule-only corpus specs."
 reverify: "bash tools/run_lua_local.sh"
 ---
 

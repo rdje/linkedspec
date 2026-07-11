@@ -6,7 +6,9 @@ conformance runtime; LuaJIT is a secondary compatibility leg.
 Current status: repository-owned module/test/command scaffold, strict corpus IO,
 typed source/provenance AST data, permissive rule-level source parsing, a typed
 structural ActionIR parser, current-name ActionIR contract resolution, and an
-ordered user-function/body-job registry with fresh invocation frames.
+ordered user-function/body-job registry with fresh invocation frames. Typed
+compiled rule/dependency/payload state and exact outward descriptors are also
+available in memory.
 Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
 be projected and composed with rule parsing. Staged body dispatch, corpus
@@ -190,3 +192,30 @@ arguments, and never captures caller stores or Lua closures. Exact arity is
 mandatory; unknown names, arity drift, ambiguous/cyclic values, and recursion
 are typed registry errors. Staged body-job dispatch, body execution, and primary
 CLI promotion remain later owned layers.
+
+Compile a typed spec and inspect either effective state or the exact shared
+outward descriptor without invoking a runtime:
+
+```lua
+local compiled = linkedspec.compile_spec(parsed)
+local top = compiled:rule("Top")
+local descriptor = compiled:to_descriptor_json()
+
+assert(top.mode_metadata.is_repetition)
+assert(descriptor.meta.descriptor_model == "compiled_descriptor_state")
+assert(descriptor.spec.Top.handler.kind == "lua_interpreter_rule")
+```
+
+`compile_spec(spec[, options])` validates by default, snapshots caller-owned
+source, preserves source definition order, and derives deterministic effective
+rule order. Each compiled rule carries mode metadata, regex patterns,
+dependency refs, action/blind edges, lifecycle/plain payloads, parsed ActionIR,
+and registry-aware contracts. Child regex slots are resolved into structured
+`CompiledDependencyRegexState`; no regex is executed at this boundary.
+
+`compiled:to_json()` projects the internal effective state.
+`compiled:to_descriptor_json()` and `linkedspec.to_descriptor_json(compiled)`
+project the executable shared contract with exactly `spec`, `functions`,
+`dependency_regex_map`, and `meta`. The compiler marks handlers as
+`lua_interpreter_rule` / `compiled_state_only`; matching and rule execution
+remain owned by runtime layer `.4`.

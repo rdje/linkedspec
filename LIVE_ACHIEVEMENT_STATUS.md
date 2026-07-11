@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.3.4 — compile Lua spec state**
+  (DONE — compiler layer `.3` passes both runtimes; regex/match-state `.4.1` next).
+
+  **Implementation:** Public typed compilation snapshots source, builds ordered effective rule/function state,
+  resolves mode/regex/dependency/edge/payload metadata, parses registry-aware ActionIR, and projects the exact
+  shared outward descriptor with an explicit compiled-state-only Lua handler identity. No regex executes yet.
+
+  **Proof:** PUC Lua 55/55 and LuaJIT 55/55 plus syntax/process/105-manifest and exact 239-name coverage pass.
+  Parsed source, redefinitions, source isolation, modes, dependency slots, all action-bearing roles, typed failures,
+  exact descriptor contract, and JSON round-trip are locked. Full CI passes phase0 `1..1030`, CLI 61x2, census
+  60/0/0, and doctrines.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.3.3 — add Lua function registry**
   (DONE — ordered registry and isolated frames pass both runtimes; compiled state `.3.4` next).
 

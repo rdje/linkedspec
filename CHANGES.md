@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.3.4 — compile Lua spec state
+
+Added typed compiled spec/rule/mode/dependency/action-edge/blind-edge/action-payload/dependency-regex/descriptor
+state. `compile_spec(...)` validates and snapshots typed source by default, carries the ordered function registry,
+preserves definition order, derives last-definition effective order, and compiles source identities, modes, regex
+slots, dependency refs, edges, lifecycle/plain payloads, ActionIR ASTs, and registry-aware contracts.
+
+Child regex slots now resolve into effective parent rows and structured dependency-regex metadata without claiming
+runtime matching. Invalid dependencies become typed compilation errors. Internal `to_json` and public
+`to_descriptor_json` projections preserve typed arrays/harrays; the outward projection matches the executable
+shared contract's exact four keys, model identities, canonical staged function records, order/count metadata, and
+explicit `lua_interpreter_rule` / `compiled_state_only` handler boundary.
+
+Syntax/process/manifest checks and 55/55 tests pass on both PUC Lua and LuaJIT; exact 239-name/105-fixture coverage
+remains green. Status advances to `compiled_spec`, compiler layer `.3` closes, and regex/match-state `.4.1` is next.
+Full local CI passes phase0 `1..1030`, CLI 61x2, capability state 60/0/0, generated-source/native-resolution, and
+doctrines.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.3.3 — add Lua function registry
 
 Added typed ordered user-function registry, entry, call-resolution, invocation-frame, and registry-error records.

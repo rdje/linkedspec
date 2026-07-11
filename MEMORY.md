@@ -18,19 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.3.3` — ordered function/body-job registry and isolated frames pass.
-- prior_leaf: `LUA-BACKEND-PARITY.3.2` — typed current-name ActionIR contract resolution passes.
-- recent_context: typed registry snapshots preserve ordered definitions/staged jobs, exact calls feed `.3.2`, body
-  AST stitching is immutable, and already-evaluated four-kind values copy into fresh frames without caller stores
-  or Lua closures. Lua 50x2 and full CI (phase0 1030, CLI 61x2, census 60/0/0) pass; no body execution/runtime.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.3.4` — typed effective state and exact descriptors pass both runtimes.
+- prior_leaf: `LUA-BACKEND-PARITY.3.3` — ordered function/body-job registry and isolated frames pass.
+- recent_context: compile_spec snapshots source; preserves source/effective rule and function order; records modes,
+  regex/dependency/edge/payload state; parses registry-aware ActionIR; and projects the exact outward schema with
+  compiled-state-only Lua handlers. Lua 55x2 and full CI (phase0 1030, CLI 61x2, census 60/0/0) pass; no matching.
 - latest_commit: this resume block is prepared for commit
-  `LUA-BACKEND-PARITY.3.3 - add Lua function registry`; previous committed HEAD is
-  `6004a591 LUA-BACKEND-PARITY.3.2 - resolve Lua ActionIR contracts`.
+  `LUA-BACKEND-PARITY.3.4 - compile Lua spec state`; previous committed HEAD is
+  `ac548454 LUA-BACKEND-PARITY.3.3 - add Lua function registry`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `LUA-BACKEND-PARITY.3.4`; typed compiled state and descriptors are active.
-- next_action: Compile typed source AST into ordered effective rules/functions, modes, regex/dependency state,
-  action/blind/lifecycle payloads, registry-aware contracts, source identities, and neutral descriptor JSON.
+- active_work_unit: `LUA-BACKEND-PARITY.4.1`; regex/match-state adapter selection and proof are active.
+- next_action: Compare installed PUC/LuaJIT LPeg/native options against neutral match behavior, then implement
+  seek/consume, alternatives, captures/named captures, entry/local registers, Unicode positions, progress guards,
+  and typed invalid-pattern diagnostics without introducing backend-specific regex semantics.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

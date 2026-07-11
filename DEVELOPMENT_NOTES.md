@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.3.4 — compile to data before matching):
+  Snapshot the typed source tree at the compiler boundary so effective state cannot drift under caller mutation.
+  Preserve source definition order separately from deterministic last-definition order; even when normal validation
+  rejects duplicates, the diagnostic/compiler model should remain explicit when validation is deliberately skipped.
+  Resolve child regex slots into indexed pattern rows and retain structured refs/combined metadata without compiling
+  a host regex prematurely. Parse every action-bearing role through the same ActionIR parser and concrete function
+  registry so lifecycle, plain, action, and blind payloads cannot fork. Keep internal effective-state JSON separate
+  from the exact outward descriptor schema, and mark future handlers as compiled-state-only until runtime exists.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.3.3 — preserve functions as data before execution):
   Snapshot typed definitions when building a registry so later caller mutation cannot silently rewrite compiled
   identity or staged work. Keep body jobs ordered and immutable stitching explicit; never let `body_ast` insertion

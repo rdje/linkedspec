@@ -126,7 +126,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "user_function_registry", "status parity")
+  assert_equal(first.parity, "compiled_spec", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -1443,6 +1443,207 @@ test("user function invocation frames diagnose arity unknown calls and recursion
   assert_equal(recursion.summary, "Lua user function recursion failed", "recursion summary")
   assert_equal(recursion.rule_label, "Top", "recursion rule")
   assert_equal(recursion.handler_source_label, "lua_runtime:function:first", "recursion handler source")
+end)
+
+local function compiled_test_rule(label, is_top, mode, body)
+  return ast.rule({
+    header = ast.rule_header({
+      label = label,
+      is_top = is_top,
+      mode = mode or ast.default_rule_mode(),
+      rest = "",
+      line = 1,
+    }),
+    body = body,
+  })
+end
+
+local function sorted_keys(value)
+  local keys = {}
+  for key in pairs(value) do keys[#keys + 1] = key end
+  table.sort(keys)
+  return keys
+end
+
+local function sorted_values(value)
+  local values = {}
+  for index, item in ipairs(value) do values[index] = item end
+  table.sort(values)
+  return values
+end
+
+local function assert_compiled_error(operation, expected, label)
+  local ok, compiled_error = pcall(operation)
+  if ok then fail((label or "compiled spec") .. ": expected an error") end
+  assert_equal(linkedspec.is_compiled_spec_error(compiled_error), true, (label or "compiled spec") .. " type")
+  assert_contains(compiled_error.message, expected, label)
+  return compiled_error
+end
+
+test("compiled spec preserves ordered rules modes dependencies and ActionIR payloads", function()
+  local normalize = registry_function(
+    "normalize",
+    { "value" },
+    0,
+    json.harray({ kind = "action_block", statements = json.array() })
+  )
+  local top = compiled_test_rule("Top", true, ast.and_bounded_rule_mode({ min = 1, max = 2 }), {
+    ast.body_element({ kind = ast.regex_body_kind({ pattern = "a" }), source = "/a/", line = 1 }),
+    ast.body_element({
+      kind = ast.action_edge_body_kind({
+        targets = { ast.edge_target({ label = "Child", index = 0 }) },
+        code = 'return(normalize(" x "))',
+      }),
+      source = '/a/ -> Child { return(normalize(" x ")) }',
+      line = 1,
+    }),
+    ast.body_element({
+      kind = ast.code_block_body_kind({ lifecycle = "I", code = "set(meta, { ok : true })" }),
+      source = "I { set(meta, { ok : true }) }",
+      line = 2,
+    }),
+    ast.body_element({
+      kind = ast.plain_block_body_kind({ code = 'return("plain")' }),
+      source = '{ return("plain") }',
+      line = 3,
+    }),
+  })
+  local child = compiled_test_rule("Child", false, nil, {
+    ast.body_element({ kind = ast.regex_body_kind({ pattern = "x" }), source = "/x/", line = 4 }),
+  })
+  local source = ast.spec_file({ functions = { normalize }, rules = { top, child } })
+  local compiled = linkedspec.compile_spec(source)
+
+  assert_equal(linkedspec.compiled_spec.node_type(compiled), "CompiledSpec", "compiled type")
+  assert_equal(table.concat(compiled.definition_order, ","), "Top,Child", "definition order")
+  assert_equal(table.concat(compiled.compiled_rule_order, ","), "Top,Child", "compiled order")
+  assert_equal(compiled:rule("Top").mode_metadata.name, "AndBounded", "mode name")
+  assert_equal(compiled:rule("Top").mode_metadata.is_and, true, "mode and")
+  assert_equal(compiled:rule("Top").mode_metadata.rep_min, 1, "mode minimum")
+  assert_equal(compiled:rule("Top").mode_metadata.rep_max, 2, "mode maximum")
+  assert_equal(compiled:rule("Top").action_edges[1].regex_index, 0, "same-line parent regex")
+  assert_equal(compiled.dependency_regex_state.dependency_regex_map.Top.patterns[1], "x", "dependency pattern")
+
+  local payloads = linkedspec.compiled_spec.action_payloads(compiled:rule("Top"))
+  assert_equal(#payloads, 3, "action payload count")
+  assert_equal(payloads[1].action_ast.kind, "action_block", "action AST")
+  assert_equal(payloads[1].contracts.ok, true, "registry-aware contracts")
+  assert_equal(payloads[1].contracts.contracts[2].family, "user_function", "registered contract")
+  assert_equal(payloads[2].lifecycle, "I", "lifecycle identity")
+  assert_equal(payloads[3].role, "plain_block", "plain payload role")
+
+  top.header.label = "Mutated"
+  top.body[1].kind.pattern = "mutated"
+  assert_equal(compiled:rule("Top").label, "Top", "source rule snapshot")
+  assert_equal(compiled:rule("Top").regex_patterns[1], "a", "source regex snapshot")
+end)
+
+test("compiled spec resolves child regex slots and keeps last definition order", function()
+  local first_a = compiled_test_rule("A", true, nil, {
+    ast.body_element({ kind = ast.regex_body_kind({ pattern = "old" }), source = "/old/", line = 1 }),
+  })
+  local b = compiled_test_rule("B", false, nil, {
+    ast.body_element({
+      kind = ast.action_edge_body_kind({ targets = { ast.edge_target({ label = "A", index = 0 }) } }),
+      source = "-> A",
+      line = 2,
+    }),
+  })
+  local last_a = compiled_test_rule("A", false, nil, {
+    ast.body_element({ kind = ast.regex_body_kind({ pattern = "new" }), source = "/new/", line = 3 }),
+  })
+  local compiled = linkedspec.compile_spec(
+    ast.spec_file({ rules = { first_a, b, last_a } }),
+    { validate_source = false }
+  )
+
+  assert_equal(table.concat(compiled.definition_order, ","), "A,B,A", "source definition order")
+  assert_equal(table.concat(compiled.compiled_rule_order, ","), "B,A", "last definition order")
+  assert_equal(compiled.redefined_rule_labels[1], "A", "redefined label")
+  assert_equal(compiled:rule("A").regex_patterns[1], "new", "last definition wins")
+  assert_equal(compiled:rule("B").regex_patterns[1], "new", "child pattern appended")
+  assert_equal(compiled:rule("B").action_edges[1].regex_index, 0, "appended regex index")
+  assert_equal(
+    linkedspec.compiled_spec.to_json(compiled.dependency_regex_state).kind,
+    "compiled_dependency_regex_state",
+    "dependency state kind"
+  )
+end)
+
+test("compiled descriptor matches the exact outward contract", function()
+  local body_ast = json.harray({ kind = "action_block", statements = json.array() })
+  local normalize = registry_function("normalize", { "value" }, 0, body_ast)
+  local compiled = linkedspec.compile_spec(spec_with_functions({ normalize }))
+  local descriptor = linkedspec.to_descriptor_json(compiled)
+  local contract = json.decode(read_file("capability_conformance/outward_descriptor_contract.json"))
+
+  assert_equal(
+    table.concat(sorted_keys(descriptor), ","),
+    table.concat(sorted_values(contract.top_level_keys), ","),
+    "descriptor top-level keys"
+  )
+  for _, key in ipairs(contract.required_meta_keys) do
+    if descriptor.meta[key] == nil then fail("descriptor missing meta key " .. key) end
+  end
+  for key, expected in pairs(contract.model_values) do
+    assert_equal(descriptor.meta[key], expected, "descriptor model " .. key)
+  end
+  assert_equal(descriptor.spec.Top.handler.kind, "lua_interpreter_rule", "Lua handler identity")
+  assert_equal(descriptor.spec.Top.handler.status, "compiled_state_only", "handler boundary")
+  assert_equal(descriptor.meta.function_order[1], "normalize", "function order")
+  assert_equal(descriptor.meta.function_count, 1, "function count")
+  assert_equal(
+    table.concat(sorted_keys(descriptor.functions.normalize), ","),
+    table.concat(sorted_values(contract.function_record_keys), ","),
+    "function record keys"
+  )
+  assert_equal(descriptor.functions.normalize.body_ast.kind, "action_block", "function body AST")
+  assert_equal(json.decode(json.encode(descriptor)).meta.parse_mode, "seek", "descriptor JSON round-trip")
+end)
+
+test("compiled spec reports typed dependency failures after optional validation", function()
+  local bad_slot = compiled_test_rule("Top", true, nil, {
+    ast.body_element({
+      kind = ast.action_edge_body_kind({ targets = { ast.edge_target({ label = "Child", index = 1 }) } }),
+      source = "-> Child[1]",
+      line = 1,
+    }),
+  })
+  local child = compiled_test_rule("Child", false, nil, {
+    ast.body_element({ kind = ast.regex_body_kind({ pattern = "x" }), source = "/x/", line = 2 }),
+  })
+  local slot_error = assert_compiled_error(function()
+    linkedspec.compile_spec(ast.spec_file({ rules = { bad_slot, child } }), { validate_source = false })
+  end, "regex slot 1", "compiled slot")
+  assert_equal(slot_error.rule_label, "Top", "slot rule identity")
+  assert_equal(slot_error.target_label, "Child", "slot target identity")
+
+  local missing = compiled_test_rule("Top", true, nil, {
+    ast.body_element({
+      kind = ast.action_edge_body_kind({ targets = { ast.edge_target({ label = "Ghost", index = 0 }) } }),
+      source = "-> Ghost",
+      line = 1,
+    }),
+  })
+  assert_compiled_error(function()
+    linkedspec.compile_spec(ast.spec_file({ rules = { missing } }), { validate_source = false })
+  end, "undefined rule 'Ghost'", "compiled missing")
+end)
+
+test("compile_spec consumes the public parsed source AST", function()
+  local parsed = linkedspec.parse_spec([[
+Top::
+ /x/ -> Top {
+   set_key(meta, 'kind', "parsed")
+   return(meta)
+ }
+]])
+  local compiled = linkedspec.compile_spec(parsed)
+  local top = compiled:rule("Top")
+  assert_equal(top.regex_patterns[1], "x", "parsed regex")
+  assert_equal(top.action_edges[1].has_parent_regex, true, "parsed edge parent regex")
+  assert_equal(top.action_edges[1].action_payload.action_ast.statements[1].expr.kind, "call", "parsed action AST")
+  assert_equal(top.action_edges[1].action_payload.contracts.ok, true, "parsed action contracts")
 end)
 
 io.stdout:write("1..", total, "\n")
