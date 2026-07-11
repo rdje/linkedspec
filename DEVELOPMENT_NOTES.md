@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.4.1 — bind the dialect, not merely a pattern library):
+  Engine presence is not semantic compatibility. LPeg cannot serve as an arbitrary PCRE parser; shelling out would
+  break native in-memory embedding, and a single C module cannot safely cross PUC Lua/LuaJIT ABIs. Keep the binding
+  minimal—compile/match/captures only—then own neutral alternative selection, Unicode projection, entry/local
+  registers, presence, and progress in shared Lua. Build each ABI into a unique workflow-owned temp directory,
+  inject only its `LUA_CPATH`, and remove the root on every exit. Preserve byte/code-unit offsets internally because
+  PCRE2 consumes UTF-8 bytes, but explicitly project Unicode character positions and reject mid-character cursors.
+  Match presence must be an object/nil distinction: `[0, 0)` is a valid present zero-width match, never an absence
+  sentinel.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.3.4 — compile to data before matching):
   Snapshot the typed source tree at the compiler boundary so effective state cannot drift under caller mutation.
   Preserve source definition order separately from deterministic last-definition order; even when normal validation

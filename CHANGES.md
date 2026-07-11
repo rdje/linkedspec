@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.4.1 — add Lua runtime matching
+
+Selected native PCRE2 after direct provider audit. LPeg exists on both runtimes but constructs PEGs rather than
+parsing the governed PCRE dialect; no `rex_*` binding is installed. Added a minimal repository C binding and build
+script that compile separately against PUC Lua and LuaJIT into one disposable caller-owned temp tree. The local
+gate selects each ABI through `LUA_CPATH`, removes its tree on every exit, and performs no network, LuaRocks,
+subprocess matching, global install, or checked-binary write.
+
+Added typed alternatives, matches, line/column records, immutable entry/local registers, runtime errors, and JSON.
+Seek chooses earliest start then source alternative; consume anchors at the cursor. Matches preserve full group
+slots, compact participating captures, named captures, UTF-8 byte/code-unit and Unicode character positions,
+zero-width presence, and progress state. Typed failures cover invalid PCRE, UTF-8, offsets, modes, and foreign
+register matches. Governed syntax proof includes inline flags, POSIX classes, possessive quantifiers, Python named
+captures, recursion, and `\K`.
+
+Syntax/native-build/process/manifest checks and 60/60 tests pass on both PUC Lua and LuaJIT; no native artifact
+remains. Exact 239-name/105-fixture coverage stays green. Status advances to `runtime_matching`, and compiled rule
+interpreter `.4.2` is next. Full local CI passes phase0 `1..1030`, CLI 61x2, census 60/0/0, and doctrines.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.3.4 — compile Lua spec state
 
 Added typed compiled spec/rule/mode/dependency/action-edge/blind-edge/action-payload/dependency-regex/descriptor

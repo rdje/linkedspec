@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.4.1 — add Lua runtime matching**
+  (DONE — dual-ABI native PCRE2 matching passes; compiled rule interpreter `.4.2` next).
+
+  **Implementation:** A minimal PCRE2 binding builds independently for PUC Lua/LuaJIT into disposable owned temp
+  storage. Shared Lua owns stable seek/consume, captures, Unicode positions, entry/local immutable registers,
+  explicit zero-width presence/progress, typed errors, and JSON. LPeg is not used as an incompatible PCRE parser.
+
+  **Proof:** PUC Lua 60/60 and LuaJIT 60/60 plus native build, syntax/process/105-manifest, exact 239-name coverage,
+  governed advanced PCRE syntax, compiled-rule input, Unicode/capture/register/error tests pass. No native temp
+  artifact remains. Full CI passes phase0 `1..1030`, CLI 61x2, census 60/0/0, and doctrines.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.3.4 — compile Lua spec state**
   (DONE — compiler layer `.3` passes both runtimes; regex/match-state `.4.1` next).
 

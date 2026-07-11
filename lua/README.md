@@ -8,7 +8,8 @@ typed source/provenance AST data, permissive rule-level source parsing, a typed
 structural ActionIR parser, current-name ActionIR contract resolution, and an
 ordered user-function/body-job registry with fresh invocation frames. Typed
 compiled rule/dependency/payload state and exact outward descriptors are also
-available in memory.
+available in memory. Native PCRE2 matching now supplies stable seek/consume,
+captures, Unicode positions, and entry/local match registers.
 Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
 be projected and composed with rule parsing. Staged body dispatch, corpus
@@ -21,15 +22,24 @@ Run the local gate from the repository root:
 bash tools/run_lua_local.sh
 ```
 
-Load the native module directly:
+The gate builds separate PUC Lua and LuaJIT PCRE2 modules into one disposable
+`/private/tmp/linkedspec-lua-native.*` directory and removes it on exit. To load
+the native module manually for PUC Lua, build into caller-owned storage and
+provide both module paths:
 
 ```bash
+native_dir=$(mktemp -d /private/tmp/linkedspec-lua-native.XXXXXX)
+bash tools/build_lua_native.sh puc "$native_dir"
 LUA_PATH="$PWD/lua/src/?.lua;$PWD/lua/src/?/init.lua;;" \
+LUA_CPATH="$native_dir/?.so;;" \
   lua -e 'local linkedspec = require("linkedspec"); print(linkedspec.backend_name())'
+rm -rf "$native_dir"
 ```
 
-The backend has no LuaRocks or global package dependency. Validate the checked-in
-corpus without executing it:
+The backend has no LuaRocks or global Lua package dependency. Runtime matching
+requires a C compiler, `pkg-config`, PCRE2 headers/library, and Lua development
+headers for the selected ABI. Validate the checked-in corpus without executing
+it:
 
 ```bash
 lua lua/bin/corpus_runner.lua --corpus rust/linkedspec-runtime/tests/corpus
@@ -219,3 +229,30 @@ project the executable shared contract with exactly `spec`, `functions`,
 `dependency_regex_map`, and `meta`. The compiler marks handlers as
 `lua_interpreter_rule` / `compiled_state_only`; matching and rule execution
 remain owned by runtime layer `.4`.
+
+Compile ordered rule patterns and match directly in memory:
+
+```lua
+local alternatives = linkedspec.compile_runtime_regex_alternation(top)
+local match = alternatives:match("prefix évalue", 0, "seek")
+
+if match then
+  print(match.alternative_index, match:text(), match:char_start())
+end
+```
+
+The adapter is a narrow repository-owned PCRE2 binding, built separately for
+PUC Lua and LuaJIT. LPeg is deliberately not used: it constructs PEG patterns
+but does not parse the governed PCRE dialect. The matcher accepts inline/scoped
+flags, POSIX classes, named captures, possessive quantifiers, recursion, and
+other PCRE2 syntax without a Lua-specific rewrite.
+
+`seek` selects the earliest match at or after the UTF-8 byte cursor, breaking
+same-position ties by the lower source alternative. `consume` anchors at the
+cursor. Match records retain full group slots, compact participating captures,
+named captures, byte/code-unit and Unicode-character spans, 1-based line/
+column, and explicit zero-width state. `runtime_match_registers(input)` creates
+immutable cursor/capture state; `with_local_match(...)` and `enter_child()` keep
+entry and local matches separate. Invalid patterns, input bytes, offsets, and
+modes are typed runtime-regex failures. Rule dispatch and helper execution begin
+in `.4.2` and `.4.3`.

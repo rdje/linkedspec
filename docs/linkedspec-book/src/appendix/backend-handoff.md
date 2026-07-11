@@ -803,6 +803,44 @@ visible rather than fabricating callable handlers. Source mutations after
 compilation cannot alter the compiled snapshot. The dual-runtime gate passes
 55/55 on PUC Lua and 55/55 on LuaJIT; regex/match-state work begins in `.4.1`.
 
+Lua runtime matching now uses a narrow repository-owned PCRE2 C binding. LPeg
+was evaluated and rejected for this role: it constructs PEG patterns but does
+not parse LinkedSpec's governed PCRE syntax. No `rex_*` module is installed.
+`tools/build_lua_native.sh` compiles the binding separately against the PUC Lua
+and LuaJIT ABIs. `tools/run_lua_local.sh` places both builds under one unique
+caller-owned `/private/tmp/linkedspec-lua-native.*` tree and removes the tree on
+every exit, so no binary/cache enters the repository or global Lua paths.
+Matching remains in-process; it never shells out to `pcre2grep` or Perl.
+
+Given a compiled rule, matching is direct:
+
+```lua
+local alternatives = linkedspec.compile_runtime_regex_alternation(
+  compiled:rule("Top")
+)
+local match = alternatives:match("prefix évalue", 0, "seek")
+
+if match then
+  print(match.alternative_index, match:text(), match:char_start())
+end
+```
+
+`seek` selects the earliest candidate at or after the strict-UTF-8 byte cursor
+and breaks equal-position ties by source alternative index. `consume` anchors
+the attempt at that cursor. PCRE2 consumes inline/scoped flags, POSIX classes,
+Python/angle named captures, possessive quantifiers, recursion, and `\K`
+directly; there is no Lua dialect normalization.
+
+Typed match records preserve the stable zero-based alternative, full group
+slots, compact participating captures, named captures, byte/code-unit spans,
+Unicode character spans, 1-based line/column, and explicit zero-width state.
+Typed immutable registers keep entry and local matches separate, seed a child's
+entry from the caller's local match, track cursor/capture anchors, and detect
+zero progress without confusing an absent match with `[0, 0)`. Invalid PCRE,
+UTF-8 input, non-boundary offsets, and parse modes are typed failures. The gate
+passes 60/60 on PUC Lua and 60/60 on LuaJIT and leaves no native artifact;
+compiled rule dispatch remains `.4.2`.
+
 ### Julia Backend Commands, Embedding, and Status
 
 Julia is green at the accepted interpreter-first boundary: the complete validated corpus executes 105/105 with

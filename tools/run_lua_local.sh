@@ -18,6 +18,15 @@ fail() {
 
 command -v "$LUA_CMD" >/dev/null 2>&1 || fail "required primary runtime not found: $LUA_CMD"
 
+native_root=$(mktemp -d /private/tmp/linkedspec-lua-native.XXXXXX)
+trap 'rm -rf "$native_root"' EXIT
+primary_native="$native_root/puc"
+secondary_native="$native_root/luajit"
+
+log "building disposable PUC Lua PCRE2 adapter"
+bash "$REPO_ROOT/tools/build_lua_native.sh" puc "$primary_native"
+export LUA_CPATH="$primary_native/?.so;;"
+
 cd "$REPO_ROOT"
 log "syntax-checking Lua source"
 find lua -type f \( -name '*.lua' -o -name 'linkedspec-lua' \) -print0 |
@@ -46,8 +55,10 @@ printf '%s\n' "$corpus_output" | grep -F 'status: manifest validated; parser exe
  fail "corpus runner execution boundary drifted"
 
 if command -v "$LUAJIT_CMD" >/dev/null 2>&1; then
+ log "building disposable LuaJIT PCRE2 adapter"
+ bash "$REPO_ROOT/tools/build_lua_native.sh" luajit "$secondary_native"
  log "running secondary LuaJIT compatibility tests"
- "$LUAJIT_CMD" lua/test/run.lua
+ LUA_CPATH="$secondary_native/?.so;;" "$LUAJIT_CMD" lua/test/run.lua
 else
  log "LuaJIT compatibility runtime not installed; secondary leg skipped"
 fi

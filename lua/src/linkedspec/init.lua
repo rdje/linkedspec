@@ -9,13 +9,14 @@ local action_parser = require("linkedspec.action_parser")
 local action_contracts = require("linkedspec.action_contracts")
 local user_function_registry = require("linkedspec.user_function_registry")
 local compiled_spec = require("linkedspec.compiled_spec")
+local matching = require("linkedspec.matching")
 
 local M = {}
 
 M.PACKAGE_NAME = "linkedspec"
 M.PACKAGE_VERSION = "0.1.0"
 M.BACKEND_NAME = "lua"
-M.PARITY_STATUS = "compiled_spec"
+M.PARITY_STATUS = "runtime_matching"
 M.CLI_ENTRYPOINT = "lua/bin/linkedspec-lua"
 M.CORPUS_RUNNER_ENTRYPOINT = "lua/bin/corpus_runner.lua"
 
@@ -97,5 +98,14 @@ M.compile_spec = compiled_spec.compile_spec
 M.is_compiled_spec_error = compiled_spec.is_compiled_spec_error
 M.compiled_spec_to_json = compiled_spec.to_json
 M.to_descriptor_json = compiled_spec.to_descriptor_json
+M.matching = matching
+M.compile_runtime_regex_alternation = matching.compile_runtime_regex_alternation
+M.runtime_match = matching.runtime_match
+M.seek_match = matching.seek_match
+M.consume_match = matching.consume_match
+M.runtime_match_registers = matching.runtime_match_registers
+M.runtime_regex_engine = matching.runtime_regex_engine
+M.runtime_regex_engine_version = matching.runtime_regex_engine_version
+M.is_runtime_regex_error = matching.is_runtime_regex_error
 
 return M

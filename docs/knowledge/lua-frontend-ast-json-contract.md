@@ -12,7 +12,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, AST, parser, JSON, staged-parsing, provenance, codeblock]
-evidence: "LUA-BACKEND-PARITY.2.1 adds lua/src/linkedspec/spec_ast.lua; .2.2 adds its first source producer; .2.3 adds validation; .2.4 adds function projection; .3.1-.3.4 add typed ActionIR/contracts/registry/compiled state. The current full local gate passes 55/55 on PUC Lua and 55/55 on LuaJIT."
+evidence: "LUA-BACKEND-PARITY.2.1 adds lua/src/linkedspec/spec_ast.lua; .2.2 adds its first source producer; .2.3 adds validation; .2.4 adds function projection; .3.1-.4.1 add typed ActionIR/contracts/registry/compiled/matching state. The current full local gate passes 60/60 on PUC Lua and 60/60 on LuaJIT."
 reverify: "bash tools/run_lua_local.sh"
 ---
 

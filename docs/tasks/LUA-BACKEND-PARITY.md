@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-11` (compiled state `.3.4` closed; regex/match-state adapter `.4.1` active)
+- Last updated: `2026-07-11` (regex/match-state `.4.1` closed; rule interpreter `.4.2` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -460,16 +460,46 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Children: `.4.1`, `.4.2`, `.4.3`, `.4.4`
 
 - ID: `LUA-BACKEND-PARITY.4.1`
-  Status: `active`
+  Status: `done`
   Goal: Select and prove the regex/match-state adapter.
   Acceptance: Compare available Lua/LPeg/native-extension options against neutral regex fixtures; implement
     seek/consume, alternatives, captures/named captures, entry/local state, UTF-8 character offsets, line/column,
     zero progress, and invalid-pattern diagnostics without backend-specific regex semantics.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Direct probes confirmed LPeg on both runtimes but rejected it as the provider:
+    LPeg constructs PEGs and does not parse the governed PCRE dialect. No `rex_*` binding is installed; system
+    PCRE2 10.47, headers, `pkg-config`, and both Lua ABIs are available. Added a minimal repository-owned PCRE2 C
+    binding plus a build script that compiles separate PUC/LuaJIT modules into one disposable caller-owned
+    `/private/tmp/linkedspec-lua-native.*` tree; the local gate removes it on every exit, writes no repo/global
+    binary/cache, and uses no LuaRocks/network/subprocess matching. Added typed alternatives, matches, line/column,
+    immutable entry/local registers, errors, and JSON. Ordered seek chooses earliest start then source alternative;
+    consume anchors at the byte cursor. Full/compacted/named captures, explicit zero-width presence, child-entry
+    seeding, progress guards, strict-UTF-8 boundary validation, byte/code-unit and Unicode character positions, and
+    compiled-rule inputs match the neutral model. Focused dialect proof covers inline flags, POSIX classes,
+    possessive quantifiers, Python named captures, recursion, and `\K`. The gate passes 60/60 tests on both runtimes,
+    exact 239-name/105-fixture coverage, and leaves no native artifact. Full local CI passes phase0 `1..1030`, CLI
+    61x2, census 60/0/0, and doctrines.
+  Commit: `LUA-BACKEND-PARITY.4.1 - add Lua runtime matching`
+
+### `LUA-BACKEND-PARITY.4.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Compiled regex rows existed only as strings; Lua had no conforming regex provider,
+  stable alternative selection, match records, character positions, or entry/local register state.
+- [x] **ROOT CAUSE (WHY + WHERE)** — LPeg is not a PCRE parser and pure Lua patterns omit required syntax. Shelling
+  out would violate native in-memory embedding, while one ABI-specific binary would violate PUC/LuaJIT parity.
+- [x] **FIX** — Added a narrow PCRE2 binding built per runtime ABI into disposable owned storage, typed neutral
+  matching/position/register/error records, seek/consume selection, capture projection, and compiled-rule input.
+- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 60/60 on PUC Lua and 60/60 on LuaJIT. Tests lock
+  advanced governed syntax, stable alternative identity, consume anchoring, compact/named captures, Unicode byte/
+  character/line/column positions, entry/local separation, zero-width presence/progress, JSON, and typed failures.
+- [x] **NO REGRESSION** — Frontend/ActionIR/registry/compiler/process/manifest/239-name proofs remain green. The gate
+  creates and removes only its own native temp tree; no rule dispatch, helpers, staged execution, primary CLI,
+  corpus execution, capability, or generated-source claim is introduced. Full local CI passes phase0 `1..1030`,
+  CLI 61x2, capability/generated-source/native-resolution, and doctrine checks.
+- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook/README build and API docs, Knowledge Map, changes/development/
+  live status, and bounded memory close matching `.4.1` and activate compiled rule interpreter `.4.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.2`
-  Status: `pending`
+  Status: `active`
   Goal: Execute rule modes, dispatch, lifecycles, recursion, and result channels.
   Acceptance: Default/OR/AND/repetition acode/bcode paths, bounds, cursor state, explicit return/next/exit, retv,
     local stores, lifecycle order, recursion/safety cutoffs, and direct output shape match the oracle.
@@ -633,7 +663,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 9 | `LUA-BACKEND-PARITY.3.2` | `done` | Typed current-name contracts and generic diagnostics pass both runtimes. |
 | 10 | `LUA-BACKEND-PARITY.3.3` | `done` | Ordered registry/jobs, exact calls, immutable stitching, and isolated frames pass both runtimes. |
 | 11 | `LUA-BACKEND-PARITY.3.4` | `done` | Typed effective rules/dependencies/payloads and exact outward descriptors pass both runtimes. |
-| 12 | `LUA-BACKEND-PARITY.4.1` | `active` | Select and prove the regex/match-state adapter against neutral behavior. |
+| 12 | `LUA-BACKEND-PARITY.4.1` | `done` | Dual-ABI PCRE2 matching and neutral registers pass 60/60 on both runtimes. |
+| 13 | `LUA-BACKEND-PARITY.4.2` | `active` | Execute compiled rule modes, dispatch, lifecycles, and result channels. |
 
 ## Initial toolchain evidence (read-only planning audit)
 
@@ -684,3 +715,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.3.2` | `LUA-BACKEND-PARITY.3.2 - resolve Lua ActionIR contracts` | Exact current-name contracts, aliases/families, generic diagnostics, registry-first seam, and registry handoff. |
 | `LUA-BACKEND-PARITY.3.3` | `LUA-BACKEND-PARITY.3.3 - add Lua function registry` | Ordered definitions/jobs, exact resolution, immutable stitching, isolated frames, and compiled-state handoff. |
 | `LUA-BACKEND-PARITY.3.4` | `LUA-BACKEND-PARITY.3.4 - compile Lua spec state` | Ordered effective state, dependency regexes, ActionIR payloads, exact descriptor, and matching handoff. |
+| `LUA-BACKEND-PARITY.4.1` | `LUA-BACKEND-PARITY.4.1 - add Lua runtime matching` | Disposable dual-ABI PCRE2 adapter, neutral matches/registers, and rule-runtime handoff. |

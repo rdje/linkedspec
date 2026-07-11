@@ -12,7 +12,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, compiler, compiled-state, descriptor, dependency-regex, LUA-BACKEND-PARITY]
-evidence: "LUA-BACKEND-PARITY.3.4 adds lua/src/linkedspec/compiled_spec.lua and exports compile_spec plus typed compiled rule/mode/edge/payload/dependency/descriptor state. Five focused tests prove public parsed-source consumption, ordered and last-definition state, source isolation, mode/dependency/payload contracts, exact outward schema, JSON round-trip, and typed failures. The Lua gate passes 55/55 on PUC Lua and LuaJIT."
+evidence: "LUA-BACKEND-PARITY.3.4 adds lua/src/linkedspec/compiled_spec.lua and exports compile_spec plus typed compiled rule/mode/edge/payload/dependency/descriptor state; .4.1 consumes compiled rules in matching. Five focused compiler tests plus five matching tests pass in the 60/60 PUC Lua and LuaJIT gate."
 reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl"
 ---
 

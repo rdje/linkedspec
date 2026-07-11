@@ -12,7 +12,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, actionir, contracts, diagnostics, helpers, functions]
-evidence: "LUA-BACKEND-PARITY.3.2 adds lua/src/linkedspec/action_contracts.lua, restores the governed equals symbol callee, and exposes recursive resolvers. LUA-BACKEND-PARITY.3.3-.3.4 supply the concrete registry and compiled payload consumer. The local gate passes 55/55 on PUC Lua and LuaJIT; the cross-language checker proves the shared 239-name set and 105-fixture coverage."
+evidence: "LUA-BACKEND-PARITY.3.2 adds lua/src/linkedspec/action_contracts.lua, restores the governed equals symbol callee, and exposes recursive resolvers. LUA-BACKEND-PARITY.3.3-.4.1 supply registry, compiled payload, and matching consumers. The local gate passes 60/60 on PUC Lua and LuaJIT; the cross-language checker proves the shared 239-name set and 105-fixture coverage."
 reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl"
 ---
 

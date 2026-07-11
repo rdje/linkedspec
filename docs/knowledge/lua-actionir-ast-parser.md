@@ -12,7 +12,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, actionir, parser, AST, Unicode, semicolon, codeblock]
-evidence: "LUA-BACKEND-PARITY.3.1 adds lua/src/linkedspec/action_ast.lua and action_parser.lua; .3.2 adds contracts and restores the equals symbol alias; .3.3-.3.4 add registry and compiled payload boundaries. The current local gate passes 55/55 on PUC Lua and LuaJIT."
+evidence: "LUA-BACKEND-PARITY.3.1 adds lua/src/linkedspec/action_ast.lua and action_parser.lua; .3.2 adds contracts and restores the equals symbol alias; .3.3-.4.1 add registry, compiled payload, and matching boundaries. The current local gate passes 60/60 on PUC Lua and LuaJIT."
 reverify: "bash tools/run_lua_local.sh"
 ---
 

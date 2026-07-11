@@ -12,7 +12,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, parser, functions, staged-parsing, provenance, Unicode]
-evidence: "LUA-BACKEND-PARITY.2.4 adds user_function_definition_shell.lua; .3.1-.3.4 add typed ActionIR/contracts/registry/compiled state. The local gate passes 55/55 on PUC Lua and LuaJIT, including Unicode spans, staged sidecars, composition, no raw scanner, action parsing, contracts, registry, and descriptor preservation."
+evidence: "LUA-BACKEND-PARITY.2.4 adds user_function_definition_shell.lua; .3.1-.4.1 add typed ActionIR/contracts/registry/compiled/matching state. The local gate passes 60/60 on PUC Lua and LuaJIT, including Unicode spans, staged sidecars, composition, no raw scanner, action parsing, contracts, registry, descriptor, and matching preservation."
 reverify: "bash tools/run_lua_local.sh"
 ---
 

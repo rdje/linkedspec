@@ -12,7 +12,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, validation, parser, AST, strict-syntax, ActionIR, functions]
-evidence: "LUA-BACKEND-PARITY.2.3 adds spec_validator.lua and action_call_names.lua; .2.4 composes function projection; .3.1-.3.4 add typed ActionIR/contracts/registry/compiled state. The current local gate passes 55/55 on both runtimes, 21 shipped and 102 rule-only corpus validations; the cross-language checker proves exactly 239 names."
+evidence: "LUA-BACKEND-PARITY.2.3 adds spec_validator.lua and action_call_names.lua; .2.4 composes function projection; .3.1-.4.1 add typed ActionIR/contracts/registry/compiled/matching state. The current local gate passes 60/60 on both runtimes, 21 shipped and 102 rule-only corpus validations; the cross-language checker proves exactly 239 names."
 reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl"
 ---
 
