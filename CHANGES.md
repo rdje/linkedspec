@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.2.0 — classify all Rust generated fixtures
+
+Added an explicit full-manifest Rust generated-source classifier with deterministic terminal stages and exact
+105-case accounting. Each fixture passes strict-UTF-8 read, parse, validation, compilation, legacy/direct
+interpreter-oracle comparison, and v1 source emission before host validation. The scalable harness writes separate
+generated modules and named tests into one isolated temporary Cargo crate, performs one host compile and one serial
+host run, reports every case, and removes all caller-owned build output on drop. Existing all-family and admitted
+eight-case tests remain unchanged.
+
+The initial exact per-case Cargo prototype passed eight fixtures but measured roughly ten seconds per case, so it
+was stopped and replaced before becoming permanent. The one-crate classifier completes in 184.46 seconds with
+105 pass and zero failures across all eight stages. This establishes that no Rust emitter/runtime repair mechanism
+is needed for the current corpus. Rust remains partial until `.3.2.1` records zero-failure closeout and `.3.2.2`
+turns the diagnostic into a strict recurring admission gate; census stays 57/1/2.
+
+The ordinary focused command keeps the classifier ignored and passes the unchanged source-emitter suite 5/5 in
+36.66 seconds. Strict Clippy stops on exactly 14 pre-existing runtime findings; exempting only their six known lint
+classes makes `-D warnings` pass for the new classifier, so the slice introduces no new Clippy finding.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.1.3.3 — admit Perl/Rust generated baseline
 
 Admitted the aligned generated-source contract-v1 baseline without behavior code. Updated the executable contract

@@ -67,10 +67,12 @@ The neutral fixture also locks result projection. Typed v1 `execute` and
 native/CLI value contract. Legacy `parse` and `parse_with_trace` retain Rust's
 historical accumulator envelope. The three portable generated-rule enter,
 family-decision, and exit roles carry source/rule/family context beside native
-`rust_runtime:generated_plan:*` detail. The Perl/Rust baseline is admitted:
-Perl is pass, while Rust is partial solely because generated compile/run proof
-covers eight of the 105 interpreter fixtures. Full Rust breadth is active under
-`FUTURE-PARITY-BACKLOG.3.2`.
+`rust_runtime:generated_plan:*` detail. The Perl/Rust baseline is admitted.
+Perl is pass. Rust's staged classifier now proves all 105 interpreter fixtures
+through v1 emission, one isolated host compile, and separate generated tests
+with exact direct/compatibility results. That diagnostic is 105/105 green;
+Rust remains partial only until zero-failure closeout and strict recurring-gate
+admission under `FUTURE-PARITY-BACKLOG.3.2`.
 
 ```rust
 use linkedspec_runtime::source_emitter::{

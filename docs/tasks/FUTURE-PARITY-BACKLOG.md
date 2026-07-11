@@ -1655,16 +1655,39 @@ before implementation.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.3.2.0`
-  Status: `active`
+  Status: `done`
   Goal: Add a scalable full-manifest Rust generated-source classifier.
   Acceptance: Drive all 105 checked-in fixtures through parse/validate/compile/interpreter-oracle/emit/isolated
     compile/run; report deterministic per-case stages without silently skipping failures; retain the existing
     synthetic all-family matrix and eight-case proof while classification is active.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Added an explicitly invoked full-manifest classifier that validates exact
+    105-case manifest accounting, prepares every fixture through strict-UTF-8 read, parse, validate, compile,
+    legacy/direct interpreter oracle, and v1 emission, then writes separate generated modules into one isolated
+    temporary Cargo crate for one host compile and 105 named host tests. The first per-case prototype proved exact
+    staging but measured roughly ten seconds per fixture; it was stopped after eight green cases and replaced by
+    the shared-crate design. The scalable run classifies all 105 fixtures PASS across all eight stages in 184.46
+    seconds with zero skips/failures and removes its temporary crate on drop. Existing all-family and eight-case
+    tests pass 5/5 in 36.66 seconds. Strict Clippy reports the same 14 pre-existing runtime findings; rerunning with
+    only their six known lint classes exempted passes the new test cleanly under `-D warnings`. No emitter/runtime
+    behavior changed. `.3.2.1` is active to close the zero-failure classification before strict recurring admission.
+  Commit: `FUTURE-PARITY-BACKLOG.3.2.0 - classify all Rust generated fixtures`
+
+## `FUTURE-PARITY-BACKLOG.3.2.0` Acceptance Checklist
+
+- [x] **COMPLETE INPUT** — manifest format/count/uniqueness are checked and exactly 105 ordered fixture names are
+  processed; terminal pass/failure accounting must total 105.
+- [x] **EXACT STAGES** — every case reaches or is attributed to read, parse, validate, compile, interpreter oracle,
+  emit source, isolated host compile, or host run; failures do not silently disappear.
+- [x] **SCALABLE HOST** — one temporary crate contains separate per-case modules/tests, one host compile, and one
+  serial host run; all dependency/build output is caller-owned and removed on drop.
+- [x] **CLASSIFICATION** — explicit run passes 105/105 in 184.46 seconds with zero failure mechanisms to split.
+- [x] **NO REGRESSION** — the existing synthetic ten-family matrix and admitted eight-case test remain untouched;
+  the classifier is explicit/ignored until `.3.2.2` recurring-gate admission.
+- [x] **LOCKSTEP** — task/public/live/KM state records green classification without prematurely promoting Rust;
+  zero-failure closeout `.3.2.1` becomes active.
 
 - ID: `FUTURE-PARITY-BACKLOG.3.2.1`
-  Status: `pending`
+  Status: `active`
   Goal: Own classification and recursive repair splitting, not unsplit fixes.
   Acceptance: Classify every `.3.2.0` failure by exact source-emitter, generated-plan, generated-executor,
     dependency/build, or fixture-contract mechanism. Add bounded child leaves before changing behavior; if no
@@ -1991,11 +2014,13 @@ before implementation.
 | 64 | `FUTURE-PARITY-BACKLOG.3.1.3.1` | `done` | Typed v1 identity/metadata/errors, compatibility adapters, focused 4/4, and full Rust gate pass. |
 | 65 | `FUTURE-PARITY-BACKLOG.3.1.3.2` | `done` | Exact ten-family plan/four rejections/direct v1 result/three trace roles and full Rust gate pass. |
 | 66 | `FUTURE-PARITY-BACKLOG.3.1.3.3` | `done` | Focused/full Perl/Rust gates pass; census 57/1/2; `.3.1` closes. |
-| 67 | `FUTURE-PARITY-BACKLOG.3.2` | `active` | Rust must expand from eight generated fixtures to the full 105-case manifest. |
-| 68 | `FUTURE-PARITY-BACKLOG.3.3` | `pending` | Dart needs emitter scaffold, family plan/direct execution, and manifest proof. |
-| 69 | `FUTURE-PARITY-BACKLOG.3.4` | `pending` | Julia needs emitter scaffold, family plan/direct execution, and manifest proof. |
-| 70 | `FUTURE-PARITY-BACKLOG.3.5` | `pending` | Exact four-backend admission promotes all states only after every generated-source proof passes. |
-| 71 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 67 | `FUTURE-PARITY-BACKLOG.3.2` | `active` | Rust full-manifest classifier is 105/105 green; zero-failure closeout and recurring admission remain. |
+| 68 | `FUTURE-PARITY-BACKLOG.3.2.0` | `done` | Scalable staged classifier passes all 105 generated fixtures in one isolated crate. |
+| 69 | `FUTURE-PARITY-BACKLOG.3.2.1` | `active` | Record zero classified repair mechanisms before strict recurring admission. |
+| 70 | `FUTURE-PARITY-BACKLOG.3.3` | `pending` | Dart needs emitter scaffold, family plan/direct execution, and manifest proof. |
+| 71 | `FUTURE-PARITY-BACKLOG.3.4` | `pending` | Julia needs emitter scaffold, family plan/direct execution, and manifest proof. |
+| 72 | `FUTURE-PARITY-BACKLOG.3.5` | `pending` | Exact four-backend admission promotes all states only after every generated-source proof passes. |
+| 73 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
 | 65 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
 | 66 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
 | 67 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
@@ -2660,6 +2685,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.3.1` | Typed v1 emitter/metadata/errors and compatibility adapters; focused `source_emitter` 4/4; complete Rust gate 137/105/196/5/4/5/10 plus 61x2 CLI; strict-Clippy classification; docs/KM/governance/mdBook/cleanup. | PASS. Rust identity/metadata/error roles align without compatibility drift; census stays 56/2/2 and exact plan/trace `.2` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.3.2` | Exact ten-family plan/four rejections; neutral fixture exposed and fixed direct-result projection; three portable trace roles; focused 5/5 + 10/10; clean full Rust 137/105/196/5/5/5/10 plus 61x2; strict-Clippy classification; docs/KM/governance/mdBook/cleanup. | PASS. Rust v1 baseline roles are green with legacy result/trace adapters preserved; census stays 56/2/2 and admission `.3` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.3.3` | Contract checker; focused Perl 69 assertions and Rust 5/5; complete Perl 61x2 + Phase 0 `1..1030`/652s; fresh Rust 137/105/196/5/5/5/10 + 61x2; 57/1/2 capability/contract state; docs/KM/governance/mdBook/cleanup. | PASS. Perl promotes to pass; Rust remains partial solely for 8/105 breadth; `.3.1` closes and `.3.2.0` is active. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.2.0` | New complete-manifest staged classifier; measured/stopped eight-case per-crate prototype; one-crate 105-module replacement; format/compile; explicit isolated run 105/105 in 184.46s; existing source-emitter 5/5 in 36.66s; strict-Clippy classification/new-test pass; docs/KM/governance/mdBook/cleanup. | PASS. No emitter/runtime failure mechanism exists in the current 105-case corpus; `.3.2.1` owns zero-failure closeout before strict admission. |
 
 ## Commit Log
 
@@ -2723,6 +2749,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.3.1.3.1` | `FUTURE-PARITY-BACKLOG.3.1.3.1 - add Rust generated-source v1 metadata` | Typed identity/metadata/errors and host compile/load projection beside exact compatibility adapters. |
 | `FUTURE-PARITY-BACKLOG.3.1.3.2` | `FUTURE-PARITY-BACKLOG.3.1.3.2 - align Rust generated plans and trace` | Exact neutral plan/rejections, direct v1 result, portable trace roles, and preserved legacy envelope/trace. |
 | `FUTURE-PARITY-BACKLOG.3.1.3.3` | `FUTURE-PARITY-BACKLOG.3.1.3.3 - admit Perl Rust generated baseline` | Full Perl/Rust signoff, 57/1/2 promotion, `.3.1` closeout, and Rust breadth activation. |
+| `FUTURE-PARITY-BACKLOG.3.2.0` | `FUTURE-PARITY-BACKLOG.3.2.0 - classify all Rust generated fixtures` | Scalable per-stage all-105 classifier, exact accounting, isolated shared host crate, and zero failures. |
 
 ## Changelog
 
@@ -2774,6 +2801,12 @@ Read-only evidence recorded on 2026-07-10:
   Phase 0 `1..1030` in 652 seconds, and a fresh complete Rust 137/105/196/5/5/5/10 plus 61x2 gate. Contract/census
   advance to 57/1/2: Perl passes; Rust is partial solely for the named eight of 105 generated fixtures; Dart/Julia
   remain gaps. `.3.1.3` and `.3.1` close; scalable Rust full-manifest classifier `.3.2.0` becomes active.
+- `2026-07-11`: `.3.2.0` adds a complete-manifest staged Rust generated-source classifier. A first exact per-case
+  Cargo design measured about ten seconds per fixture and was stopped after eight passes; the final scalable design
+  prepares all cases independently, writes 105 separate generated modules/tests into one isolated crate, then runs
+  one host compile and one serial host test pass. Every case passes read/parse/validate/compile/interpreter-oracle/
+  emission/host-compile/host-run in 184.46 seconds; no repair mechanism exists. Rust stays partial until `.3.2.1`
+  records the zero-failure closeout and `.3.2.2` makes breadth a strict recurring admission gate.
 - `2026-07-11`: `.1.6.4.5` adds Perl's separate portable `SpecLoader` facade and direct 14/9/4 plus pipeline proof
   without changing legacy `get_parser`/`PathSearch`. The canonical core gate passes the required new test, 239-name
   coverage, focused suites, 61x2 CLI, and Phase 0 `1..1030` in 556 seconds. Combined with immediately prior full

@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.2.0 — classify breadth without multiplying dependency builds):
+  A per-case isolated Cargo project gives perfect attribution but scales poorly even when dependencies share a
+  target: the measured prototype took about ten seconds per fixture. Preserve per-case source/test identity while
+  batching host work: prepare every case independently through interpreter-first emission, write each generated
+  module to its own file in one temporary crate, compile once, then run named serial tests once. Emit a success
+  marker only after direct result, plan validation, and compatibility result all pass; terminal accounting must
+  equal the manifest count. Keep the classifier explicit until recurring admission. The 105/105 result means the
+  existing 8-case limitation was proof breadth, not an emitter semantic defect; do not invent repair work.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.1.3.3 — make capability promotion an explicit verified act):
   Green implementation tests do not silently change census status. Admission must rerun the contract fixture and
   complete backend gates, then update the executable contract, capability manifest, checker expectations, public

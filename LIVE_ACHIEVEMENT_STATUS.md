@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.3.2.0 — classify all Rust generated fixtures**
+  (DONE — explicit full-manifest generated proof is 105/105; zero-failure closeout `.3.2.1` active).
+
+  **Classifier:** Every ordered manifest case is attributed across read/parse/validate/compile/interpreter oracle/
+  v1 emission/host compile/host run. One isolated crate holds separate generated modules and named tests, so one
+  compile/run covers the full manifest without skipping failures; temporary output is removed on drop.
+
+  **Finding/proof:** The first per-case Cargo prototype was stopped after eight passes when it measured ~10s/case.
+  The scalable replacement compiles/runs all 105 in 184.46s: 105 pass, zero failure mechanisms. Rust remains
+  partial until `.3.2.1` records the zero-failure closeout and `.3.2.2` makes breadth a strict recurring gate.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.1.3.3 — admit Perl/Rust generated baseline**
   (DONE — census 57/1/2; `.3.1` closed; Rust 105-case generated classifier `.3.2.0` active).
 

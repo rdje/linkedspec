@@ -12,6 +12,7 @@ date: 2026-07-08
 status: accepted
 tags: [rust, codegen, source-emitter, oracle, corpus, RUST-PARITY, task-tree]
 evidence: "RUST-PARITY.8.5 extends rust/linkedspec-runtime/tests/source_emitter.rs with generated_rust_source_matches_manifest_backed_corpus_subset. The test loads rust/linkedspec-runtime/tests/corpus/manifest.json, asserts selected fixture names are present, parses each fixture with parse_spec_with_user_functions, validates and compiles it, checks Engine::execute(input) equals [expected.json], emits generated Rust source from that CompiledSpec, then builds and runs generated modules in an isolated temporary crate. The selected subset is proof_edge_array_literal, proof_edge_scalar_literal, autoexist_array_bare_arg, terse_1_5_2_primitive_literals, terse_2_2_3_attached_if_blocks, terse_4_3_2_user_function_runtime, tclite_command_subst, and portmap_bare. The separate source-emitter matrix still covers every supported generated structural family. FUTURE-PARITY-BACKLOG.3.0 reverified that the subset remains exactly eight while the current interpreter manifest contains 105; full breadth is owned by .3.2."
+evidence_update_2026_07_11_full_classifier: "FUTURE-PARITY-BACKLOG.3.2.0 preserves the recurring eight-case subset and all-family matrix while adding an explicit staged all-105 classifier. One isolated crate compiles/runs 105 separate generated modules/tests in 184.46 seconds with 105 pass and zero failures. `.3.2.1-.2` own zero-failure closeout and recurring admission."
 reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture && rg -n 'GENERATED_SOURCE_CORPUS_SUBSET|generated_rust_source_matches_manifest_backed_corpus_subset|RUST-PARITY\\.8\\.5' rust/linkedspec-runtime/tests/source_emitter.rs docs/tasks/RUST-PARITY.md"
 ---
 
@@ -35,8 +36,7 @@ The generated-source corpus subset is:
 - `tclite_command_subst`
 - `portmap_bare`
 
-This does **not** mean generated source is currently validated over every one of
-the 105 oracle fixtures. The full 105-fixture gate remains
-`rust/linkedspec-runtime/tests/corpus_oracle.rs` on the interpreter path unless a
-later leaf explicitly broadens generated-source corpus coverage. That expansion
-is now owned by `FUTURE-PARITY-BACKLOG.3.2`.
+The recurring source-emitter gate still retains this compact subset. An
+explicit staged classifier now validates generated source over all 105 oracle
+fixtures with zero failures; `.3.2.1-.2` own its closeout and promotion into a
+strict recurring admission gate.

@@ -32,6 +32,7 @@ evidence_update_2026_07_11_native_resolution_admission: "FUTURE-PARITY-BACKLOG.1
 evidence_update_2026_07_11_dart_full_pipeline_trace: "FUTURE-PARITY-BACKLOG.1.6.5.1-.3 propagate one caller-owned Dart emitter through frontend/compiler, function shell/staged dispatch, public native loading, and runtime. Direct routed/quiet/failure identity plus 175 tests, 61x2 CLI, 105 corpus, and core CI pass; Dart promotes and census is 57/1/2."
 evidence_update_2026_07_11_non_codegen_closeout: "FUTURE-PARITY-BACKLOG.1.6.6 directly enumerates the only non-pass states: generated parser source is Rust partial and Dart/Julia gap, all owned by .3. Every non-codegen state passes; .1.6 closes without changing the 57/1/2 census."
 evidence_update_2026_07_11_generated_baseline_admission: "FUTURE-PARITY-BACKLOG.3.1.3.3 admits the contract-v1 Perl and Rust generated-source baseline after focused proof and complete recurring Perl/Rust gates. Perl promotes to pass; Rust remains the sole partial solely because isolated generated compile/run proof covers eight of 105 manifest fixtures. The census remains 57 pass, one partial, and two gaps; .3.2.0 owns scalable Rust full-manifest classification."
+evidence_update_2026_07_11_rust_full_manifest_classification: "FUTURE-PARITY-BACKLOG.3.2.0 adds a scalable staged classifier and passes all 105 generated Rust fixtures through interpreter-first emission, one isolated host compile, and 105 named tests in 184.46 seconds with zero failures. Census remains 57/1/2 until .3.2.1 zero-failure closeout and .3.2.2 recurring admission."
 reverify: "perl tools/check_capability_conformance.pl && rg -n 'FUTURE-PARITY-BACKLOG.1.6.[0-6]' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -51,8 +52,8 @@ The audit distinguishes implementation gaps from proof gaps:
   root contract directly; exact admission is closed under `.1.6.4`;
 - Perl, Rust, Dart, and Julia propagate a native emitter through frontend/compiler/function-shell/staged/runtime
   phases; Dart's direct routed/quiet/failure proof closes `.1.6.5`;
-- generated source remains top-level `.3`: Perl's baseline is admitted and passes, Rust's baseline is admitted but
-  its isolated generated compile/run proof covers only eight of 105 fixtures, and Dart/Julia have no emitter.
+- generated source remains top-level `.3`: Perl's baseline is admitted and passes; Rust's explicit full-manifest
+  classification is 105/105 green but not yet a strict recurring admission gate; Dart/Julia have no emitter.
 
 `.1.6.6` closes non-codegen capability parity after proving the matrix has no unowned partial/gap state. Active
 `.3` owns every remaining generated-source state. Deprecated Perl plugins and not-yet-current general parse jobs,
