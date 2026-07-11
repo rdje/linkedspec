@@ -1263,16 +1263,39 @@ before implementation.
   `gap` until `.3` proves the complete caller-owned path and promotes all synchronized docs/metadata.
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.5.1`
-  Status: `active`
+  Status: `done`
   Goal: Propagate one optional Dart trace emitter through source parsing, validation, and compilation.
   Acceptance: Existing public entrypoints remain source-compatible while emitting balanced `dart_frontend:*` and
     `dart_compiler:*` scopes, stable decisions, and failure exits through the caller's emitter; disabled/omitted
     tracing is quiet and parsed/compiled JSON is identical.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `parseSpec`, `validateSpec`, `compileSpec`, and both `UserFunctionRegistry` factories now accept
+    the same optional `LinkedSpecTraceEmitter` without changing existing calls. High-level balanced scopes cover
+    parse, validation, compilation, and registry construction; medium decisions cover parsed rule counts,
+    validation completion/skips, function definitions, compiled rules, and dependency-regex construction. All
+    failure paths exit emitted scopes and rethrow the original object. Three focused tests prove exact event order,
+    disabled quietness, parsed/compiled JSON identity, parse failure, and nested validation/compile failure. The six
+    affected suites pass 38 tests; sequential strict analysis is clean. The complete Dart gate passes formatting,
+    analysis, 168 tests, exact 61/61 CLI in default/POSIX environments, and all 105 corpus fixtures. Census remains
+    56/1/3 until full function/staged/native admission.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.5.1 - trace Dart frontend and compiler`
+
+## `FUTURE-PARITY-BACKLOG.1.6.5.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Audit `.0` proved core public frontend/compiler entrypoints could not receive the
+  already-public emitter; focused tests now directly exercise those previously missing injection seams.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Parser, validator, compiler, and function-registry APIs had no optional trace
+  dependency, so compilation could not preserve one caller-owned event order/sink/indent state.
+- [x] **FIX** — Added source-compatible optional named emitter parameters, nested balanced scopes, medium decisions,
+  validation propagation, and unchanged exception rethrows to the four owning modules.
+- [x] **ADDRESSED (verified)** — Three focused tests compare traced/untraced `SpecFile` and `CompiledSpec` JSON,
+  assert exact structured event order, prove disabled quietness, and lock parse plus validation failure exits.
+- [x] **NO REGRESSION** — Format and strict analysis pass; six affected suites pass 38 tests; complete Dart gate
+  passes 168 tests, 61x2 CLI, and 105/105 corpus.
+- [x] **LOCKSTEP** — Public trace docs and durable facts describe the new partial boundary while the capability row
+  remains `gap`; `.2` is active for function/staged propagation and `.3` alone owns promotion.
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.5.2`
-  Status: `pending`
+  Status: `active`
   Goal: Propagate the caller-owned Dart emitter through function-definition shell and staged parse dispatch.
   Acceptance: Parser-spec construction/execution, AST projection, job normalization/order, resolve/load/compile/
     execute, body stitching, and failures emit balanced function/staged events without changing ASTs or job results.
@@ -1534,7 +1557,8 @@ before implementation.
 | 51 | `FUTURE-PARITY-BACKLOG.1.6.3.2` | `done` | Full Rust/CLI gate passes; diagnostics promote to pass at census 53/1/6; `.1.6.3` closes. |
 | 52 | `FUTURE-PARITY-BACKLOG.1.6.4` | `done` | All four native libraries consume exact portable resolution/loading semantics; parent admitted and closed. |
 | 53 | `FUTURE-PARITY-BACKLOG.1.6.5.0` | `done` | Audit proves injection begins at runtime and splits three bounded implementation/admission leaves. |
-| 54 | `FUTURE-PARITY-BACKLOG.1.6.5.1` | `active` | Propagate one optional emitter through Dart parse, validation, compile, and function registry. |
+| 54 | `FUTURE-PARITY-BACKLOG.1.6.5.1` | `done` | Optional emitter, balanced scopes/failures, exact identity, 168 tests, 61x2 CLI, and 105 corpus pass. |
+| 55 | `FUTURE-PARITY-BACKLOG.1.6.5.2` | `active` | Propagate the same emitter through Dart function shell and staged parse jobs. |
 | 55 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
 | 55 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
 | 56 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
@@ -2190,6 +2214,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.4.4` | Public progressive Julia loader; 82 direct 14/9/4 plus pipeline assertions; complete 1,110-assertion package; focused process check; 61x2 CLI; 105 corpus; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Julia native file role and CLI delegation pass; recursive fallback removed; census 56/1/3; admission `.5` active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.4.5` | Public Perl portable loader; direct 14/9/4 plus pipeline proof; canonical-gate wiring; 239-name coverage; focused suites; 61x2 CLI; Phase 0 `1..1030` in 556s; prior adjacent backend gates; capability/KM/memory/doctrine/whitespace/mdBook. | PASS. Exact four-backend native resolution admitted; `.1.6.4` closes and Dart trace `.1.6.5` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.5.0` | Knowledge Map/source audit across Dart emitter/runtime/parser/validator/compiler/function/staged/loader owners; Julia/Rust contract comparison; capability/KM/memory/doctrine/whitespace/mdBook. | PASS. Runtime-only boundary is exact; three bounded leaves exist before trace behavior changes; `.1` active. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.5.1` | Three focused identity/order/failure tests; six affected suites/38 tests; format; strict analysis; complete Dart gate with 168 tests, 61x2 CLI, and 105 corpus; docs/KM/governance/whitespace/mdBook/cleanup. | PASS. Core frontend/compiler trace lands without behavior drift; `.2` active. |
 
 ## Commit Log
 
@@ -2241,12 +2266,16 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.6.4.4` | `FUTURE-PARITY-BACKLOG.1.6.4.4 - add Julia native spec resolution` | Public progressive loader/compiler, typed exceptions/identity, direct 14/9/4 proof, CLI delegation, and recursive-fallback removal. |
 | `FUTURE-PARITY-BACKLOG.1.6.4.5` | `FUTURE-PARITY-BACKLOG.1.6.4.5 - admit native spec resolution parity` | Perl portable facade/direct fixture, canonical-gate wiring, exact four-backend admission, and parent closeout. |
 | `FUTURE-PARITY-BACKLOG.1.6.5.0` | `FUTURE-PARITY-BACKLOG.1.6.5.0 - split Dart full-pipeline trace` | Exact runtime-only boundary, portable comparison, three-leaf implementation/admission split, no behavior code. |
+| `FUTURE-PARITY-BACKLOG.1.6.5.1` | `FUTURE-PARITY-BACKLOG.1.6.5.1 - trace Dart frontend and compiler` | Optional caller emitter, balanced parse/validate/compile/registry events, failures, identity, and full Dart proof. |
 
 ## Changelog
 
 - `2026-07-11`: `.1.6.5.0` confirms Dart's public emitter/levels/events/sinks and runtime injection pass while
   parser, validator, compiler, function shell, staged registry, and native loader lack propagation. It splits
   frontend/compiler `.1`, function/staged `.2`, and composed admission `.3`; no behavior or census state changes.
+- `2026-07-11`: `.1.6.5.1` adds source-compatible optional emitter injection to Dart parsing, validation,
+  compilation, and function-registry construction. Balanced success/failure scopes and stable decisions preserve
+  exact JSON and default quietness; 168 tests, 61x2 CLI, and 105 corpus pass. `.2` is active; census stays 56/1/3.
 - `2026-07-11`: `.1.6.4.5` adds Perl's separate portable `SpecLoader` facade and direct 14/9/4 plus pipeline proof
   without changing legacy `get_parser`/`PathSearch`. The canonical core gate passes the required new test, 239-name
   coverage, focused suites, 61x2 CLI, and Phase 0 `1..1030` in 556 seconds. Combined with immediately prior full

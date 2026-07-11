@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import '../ast/spec_ast.dart';
+import '../trace/trace.dart';
 
 final class SpecParseException implements Exception {
   const SpecParseException({required this.line, required this.message});
@@ -14,61 +15,82 @@ final class SpecParseException implements Exception {
   }
 }
 
-SpecFile parseSpec(String source) {
-  final lines = const LineSplitter().convert(source);
-  final rules = <Rule>[];
-  var index = _skipBlanksAndComments(lines, 0);
+SpecFile parseSpec(String source, {LinkedSpecTraceEmitter? trace}) {
+  final traceScope = trace?.enterScope(
+    'dart_frontend:parse_spec',
+    'source_code_units=${source.length}',
+    LinkedSpecTraceLevel.high,
+  );
+  try {
+    final lines = const LineSplitter().convert(source);
+    final rules = <Rule>[];
+    var index = _skipBlanksAndComments(lines, 0);
 
-  while (index < lines.length) {
-    final parsedHeader = _parseRuleHeader(lines, index);
-    if (parsedHeader != null) {
-      final header = parsedHeader.header;
-      final rest = header.rest.trim();
-      var bodyStartIndex = parsedHeader.nextIndex;
-      var inlineElements = <BodyElement>[];
+    while (index < lines.length) {
+      final parsedHeader = _parseRuleHeader(lines, index);
+      if (parsedHeader != null) {
+        final header = parsedHeader.header;
+        final rest = header.rest.trim();
+        var bodyStartIndex = parsedHeader.nextIndex;
+        var inlineElements = <BodyElement>[];
 
-      if (rest.isNotEmpty) {
-        final inlineCursor = _LineCursor(header.line - 1);
-        final parsedInline = _parseInlineBody(
-          rest,
-          header.line,
-          lines,
-          inlineCursor,
-        );
-        if (parsedInline != null) {
-          inlineElements = parsedInline;
-          if (inlineCursor.index > bodyStartIndex) {
-            bodyStartIndex = inlineCursor.index;
+        if (rest.isNotEmpty) {
+          final inlineCursor = _LineCursor(header.line - 1);
+          final parsedInline = _parseInlineBody(
+            rest,
+            header.line,
+            lines,
+            inlineCursor,
+          );
+          if (parsedInline != null) {
+            inlineElements = parsedInline;
+            if (inlineCursor.index > bodyStartIndex) {
+              bodyStartIndex = inlineCursor.index;
+            }
           }
         }
+
+        final collected = _collectBody(lines, bodyStartIndex);
+        final body = <BodyElement>[...inlineElements, ...collected.body];
+        rules.add(Rule(header: header, body: body));
+        index = collected.nextIndex;
+        continue;
       }
 
-      final collected = _collectBody(lines, bodyStartIndex);
-      final body = <BodyElement>[...inlineElements, ...collected.body];
-      rules.add(Rule(header: header, body: body));
-      index = collected.nextIndex;
-      continue;
+      if (rules.isEmpty) {
+        throw SpecParseException(
+          line: index + 1,
+          message:
+              'expected rule definition to start with a rule label '
+              '(Word: or Word::), got: ${lines[index].trim()}',
+        );
+      }
+      index += 1;
     }
 
     if (rules.isEmpty) {
-      throw SpecParseException(
-        line: index + 1,
-        message:
-            'expected rule definition to start with a rule label '
-            '(Word: or Word::), got: ${lines[index].trim()}',
+      throw const SpecParseException(
+        line: 1,
+        message: 'no rule definitions found in spec',
       );
     }
-    index += 1;
-  }
 
-  if (rules.isEmpty) {
-    throw const SpecParseException(
-      line: 1,
-      message: 'no rule definitions found in spec',
+    trace?.traceDecision(
+      'dart_frontend:parse_spec:rules',
+      true,
+      'rule_count=${rules.length}',
+      LinkedSpecTraceLevel.medium,
     );
+    if (traceScope != null) {
+      trace?.exitScope(traceScope, 'ok rule_count=${rules.length}');
+    }
+    return SpecFile(rules: rules);
+  } on Object catch (error) {
+    if (traceScope != null) {
+      trace?.exitScope(traceScope, 'error=$error');
+    }
+    rethrow;
   }
-
-  return SpecFile(rules: rules);
 }
 
 final class _LineCursor {

@@ -1,5 +1,6 @@
 import '../ast/spec_ast.dart';
 import '../action/action_contracts.dart';
+import '../trace/trace.dart';
 
 final class SpecValidationException implements Exception {
   const SpecValidationException(this.message);
@@ -10,18 +11,44 @@ final class SpecValidationException implements Exception {
   String toString() => 'SpecValidationException: $message';
 }
 
-void validateSpec(SpecFile spec, {bool strictSyntax = false}) {
-  _checkTopRuleExists(spec);
-  _checkDuplicateRuleLabels(spec);
-  _checkDuplicateFunctionNames(spec);
-  _checkFunctionRegistry(spec);
-  _checkMalformedRawBodyLines(spec);
-  _checkMixedEdges(spec);
-  _checkGroupedActionEdges(spec);
-  _checkEdgeTargets(spec);
-  _checkRegexSyntax(spec);
-  if (strictSyntax) {
-    _checkUnusedRules(spec);
+void validateSpec(
+  SpecFile spec, {
+  bool strictSyntax = false,
+  LinkedSpecTraceEmitter? trace,
+}) {
+  final traceScope = trace?.enterScope(
+    'dart_frontend:validate_spec',
+    'rules=${spec.rules.length} functions=${spec.functions.length} '
+        'strict=${strictSyntax ? 1 : 0}',
+    LinkedSpecTraceLevel.high,
+  );
+  try {
+    _checkTopRuleExists(spec);
+    _checkDuplicateRuleLabels(spec);
+    _checkDuplicateFunctionNames(spec);
+    _checkFunctionRegistry(spec);
+    _checkMalformedRawBodyLines(spec);
+    _checkMixedEdges(spec);
+    _checkGroupedActionEdges(spec);
+    _checkEdgeTargets(spec);
+    _checkRegexSyntax(spec);
+    if (strictSyntax) {
+      _checkUnusedRules(spec);
+    }
+    trace?.traceDecision(
+      'dart_frontend:validate_spec:checks',
+      true,
+      'strict=${strictSyntax ? 1 : 0}',
+      LinkedSpecTraceLevel.medium,
+    );
+    if (traceScope != null) {
+      trace?.exitScope(traceScope, 'ok');
+    }
+  } on Object catch (error) {
+    if (traceScope != null) {
+      trace?.exitScope(traceScope, 'error=$error');
+    }
+    rethrow;
   }
 }
 

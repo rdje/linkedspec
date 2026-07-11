@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.5.1 — preserve source compatibility and exception identity):
+  Optional named `trace:` parameters let the existing Dart operations participate in one pipeline without creating
+  a parallel API family. Enter the owner scope once, nest downstream owners with the same object, and exit on every
+  success/failure path before `rethrow`; callers therefore retain the original exception type/object semantics.
+  Compiler validation must receive the emitter rather than merely logging around `validateSpec`, and registry
+  construction belongs inside compilation so event indentation mirrors ownership. Do not promote a partial core-
+  compiler path while function extraction, staged dispatch, and native loader composition remain untraced.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.5.0 — propagate one object, do not create traced variants):
   Dart already has the correct emitter abstraction and traced runtime entrypoint. Full-pipeline parity should add
   optional named emitter parameters to the existing parser, validator, compiler, function shell, staged registry,

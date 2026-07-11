@@ -1,6 +1,6 @@
 ---
 id: dart-full-pipeline-trace-gap
-title: "Dart native tracing currently begins at the runtime interpreter"
+title: "Dart native tracing reaches core frontend/compiler but not function/staged composition"
 answers:
   - "where does Dart native trace injection currently begin"
   - "does Dart trace parsing validation and compilation"
@@ -14,20 +14,22 @@ evidence: "dart/lib/src/runtime/interpreter.dart; dart/lib/src/parser/spec_parse
 reverify: "rg -n 'LinkedSpecTraceEmitter|trace:' dart/lib/src/{runtime,parser,validation,compiler,action,io} capability_conformance/manifest.json"
 ---
 
-Dart's public `LinkedSpecTraceEmitter` already provides ordered levels, structured events,
-default quietness, and stdout/route/mirror sinks. `LinkedSpecRuntimeEngine.parse(...)` and
+Dart's public `LinkedSpecTraceEmitter` provides ordered levels, structured events, default
+quietness, and stdout/route/mirror sinks. `LinkedSpecRuntimeEngine.parse(...)` and
 `execute(...)` accept an optional caller-owned emitter and produce interpreter events.
 
-The emitter does not yet cross the rest of the native pipeline. `parseSpec(...)`,
-`validateSpec(...)`, `compileSpec(...)`, `UserFunctionRegistry`, the function-definition
-parser and projection shell, staged job dispatch, and `loadAndCompileSpec(...)` expose no
-optional emitter. Consequently, the capability census correctly distinguishes Dart's
-passing runtime-controls/events/sinks row from its full-pipeline trace gap.
+`FUTURE-PARITY-BACKLOG.1.6.5.1` now carries that same optional emitter through
+`parseSpec(...)`, `validateSpec(...)`, `compileSpec(...)`, and `UserFunctionRegistry`.
+The function-definition parser/projection shell, staged job dispatch, and
+`loadAndCompileSpec(...)` do not yet expose the complete propagation path. Consequently,
+the capability census correctly distinguishes Dart's passing controls/runtime/core-
+compiler work from its still-open full-pipeline row.
 
-`FUTURE-PARITY-BACKLOG.1.6.5` is split by mechanism: `.1` instruments frontend,
-validation, and compiler owners; `.2` propagates through function extraction and staged
-dispatch; `.3` composes the public loader/runtime path, proves traced/untraced identity,
-quietness, sinks, balanced failures, and full recurring no-drift before promotion.
+`FUTURE-PARITY-BACKLOG.1.6.5` is split by mechanism: completed `.1` instruments
+frontend, validation, and compiler owners; active `.2` propagates through function
+extraction and staged dispatch; `.3` composes the public loader/runtime path, proves
+traced/untraced identity, quietness, sinks, balanced failures, and full recurring no-drift
+before promotion.
 
 Related facts: [[dart-runtime-trace-events]], [[dart-trace-controls-sinks]],
 [[trace-cross-variant-capability-contract]], [[julia-frontend-compiler-staged-trace-events]].

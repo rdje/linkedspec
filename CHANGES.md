@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.5.1 — trace Dart frontend and compiler
+
+Added one optional caller-owned `LinkedSpecTraceEmitter` parameter to Dart source parsing, validation, compilation,
+and function-registry construction. Existing calls stay source-compatible. Balanced `dart_frontend:*` and
+`dart_compiler:*` scopes cover success and original-exception failure paths; medium decisions expose rule counts,
+validation completion/skips, function definitions, compiled rules, and dependency-regex construction.
+
+Added three focused tests for exact event ordering, disabled quietness, traced/untraced parsed and compiled JSON
+identity, parse failure, and nested validation/compiler failure. Six affected suites pass 38 tests. The complete
+Dart gate passes format, strict analysis, 168 tests, 61/61 CLI in both environments, and 105/105 corpus. Public and
+continuity docs now describe the partial boundary; capability remains 56/1/3 until `.2` and `.3` close composition.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.5.0 — split Dart full-pipeline trace
 
 Audited Dart's public native trace and every non-runtime pipeline owner. Levels, structured events, quietness,

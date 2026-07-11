@@ -3,6 +3,7 @@ import '../action/action_contracts.dart';
 import '../action/action_parser.dart';
 import '../action/function_registry.dart';
 import '../ast/spec_ast.dart';
+import '../trace/trace.dart';
 import '../validation/spec_validator.dart';
 
 final class CompiledSpecException implements Exception {
@@ -18,44 +19,85 @@ CompiledSpec compileSpec(
   SpecFile spec, {
   bool validateSource = true,
   bool strictSyntax = false,
+  LinkedSpecTraceEmitter? trace,
 }) {
-  if (validateSource) {
-    validateSpec(spec, strictSyntax: strictSyntax);
-  }
-
-  final functionRegistry = UserFunctionRegistry.fromSpec(spec);
-  final definitionOrder = <String>[];
-  final rulesByLabel = <String, CompiledRule>{};
-  final redefinedRuleLabels = <String>[];
-  final redefinedSeen = <String>{};
-
-  for (final rule in spec.rules) {
-    final label = rule.header.label;
-    definitionOrder.add(label);
-    if (rulesByLabel.containsKey(label) && redefinedSeen.add(label)) {
-      redefinedRuleLabels.add(label);
+  final traceScope = trace?.enterScope(
+    'dart_compiler:compile_spec',
+    'rules=${spec.rules.length} functions=${spec.functions.length} '
+        'validate=${validateSource ? 1 : 0} strict=${strictSyntax ? 1 : 0}',
+    LinkedSpecTraceLevel.high,
+  );
+  try {
+    if (validateSource) {
+      validateSpec(spec, strictSyntax: strictSyntax, trace: trace);
+    } else {
+      trace?.traceDecision(
+        'dart_compiler:compile_spec:validation',
+        false,
+        'validate_source=0',
+        LinkedSpecTraceLevel.medium,
+      );
     }
-    rulesByLabel[label] = _compileRule(rule, functionRegistry);
+
+    final functionRegistry = UserFunctionRegistry.fromSpec(spec, trace: trace);
+    final definitionOrder = <String>[];
+    final rulesByLabel = <String, CompiledRule>{};
+    final redefinedRuleLabels = <String>[];
+    final redefinedSeen = <String>{};
+
+    for (final rule in spec.rules) {
+      final label = rule.header.label;
+      definitionOrder.add(label);
+      if (rulesByLabel.containsKey(label) && redefinedSeen.add(label)) {
+        redefinedRuleLabels.add(label);
+      }
+      rulesByLabel[label] = _compileRule(rule, functionRegistry);
+      trace?.traceDecision(
+        'dart_compiler:compile_spec:rule',
+        true,
+        'label=$label definition_index=${definitionOrder.length - 1}',
+        LinkedSpecTraceLevel.medium,
+      );
+    }
+
+    final compiledRuleOrder = _lastDefinitionOrder(definitionOrder);
+    final resolvedRulesByLabel = _resolveActionEdgeDependencyRegexes(
+      compiledRuleOrder: compiledRuleOrder,
+      rulesByLabel: rulesByLabel,
+    );
+    final dependencyRegexState = _buildDependencyRegexState(
+      compiledRuleOrder: compiledRuleOrder,
+      rulesByLabel: resolvedRulesByLabel,
+    );
+    trace?.traceDecision(
+      'dart_compiler:compile_spec:dependency_regex',
+      true,
+      'rule_count=${compiledRuleOrder.length}',
+      LinkedSpecTraceLevel.medium,
+    );
+
+    final compiled = CompiledSpec(
+      definitionOrder: List.unmodifiable(definitionOrder),
+      compiledRuleOrder: List.unmodifiable(compiledRuleOrder),
+      rulesByLabel: Map.unmodifiable(resolvedRulesByLabel),
+      redefinedRuleLabels: List.unmodifiable(redefinedRuleLabels),
+      functionRegistry: functionRegistry,
+      dependencyRegexState: dependencyRegexState,
+    );
+    if (traceScope != null) {
+      trace?.exitScope(
+        traceScope,
+        'ok rules=${compiledRuleOrder.length} '
+        'functions=${functionRegistry.entries.length}',
+      );
+    }
+    return compiled;
+  } on Object catch (error) {
+    if (traceScope != null) {
+      trace?.exitScope(traceScope, 'error=$error');
+    }
+    rethrow;
   }
-
-  final compiledRuleOrder = _lastDefinitionOrder(definitionOrder);
-  final resolvedRulesByLabel = _resolveActionEdgeDependencyRegexes(
-    compiledRuleOrder: compiledRuleOrder,
-    rulesByLabel: rulesByLabel,
-  );
-  final dependencyRegexState = _buildDependencyRegexState(
-    compiledRuleOrder: compiledRuleOrder,
-    rulesByLabel: resolvedRulesByLabel,
-  );
-
-  return CompiledSpec(
-    definitionOrder: List.unmodifiable(definitionOrder),
-    compiledRuleOrder: List.unmodifiable(compiledRuleOrder),
-    rulesByLabel: Map.unmodifiable(resolvedRulesByLabel),
-    redefinedRuleLabels: List.unmodifiable(redefinedRuleLabels),
-    functionRegistry: functionRegistry,
-    dependencyRegexState: dependencyRegexState,
-  );
 }
 
 final class CompiledSpec {

@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.5.0` — audited and split Dart full-pipeline trace.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.4.5` — admitted exact four-backend native resolution.
-- recent_context: Dart's emitter/levels/events/sinks and runtime injection already pass, but parse, validation,
-  compile, function-shell, staged dispatch, and native loader APIs expose no emitter. `.1` owns frontend/compiler,
-  `.2` function/staged propagation, and `.3` composed proof/admission; census remains 56/1/3.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.5.1` — traced Dart frontend and compiler owners.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.5.0` — audited and split Dart full-pipeline trace.
+- recent_context: One optional Dart emitter now spans parse, validation, compile, and function registry with balanced
+  scopes/failures and exact JSON identity. Complete Dart gate passes 168 tests, 61x2 CLI, and 105 corpus. Function-
+  shell/staged `.2` is active; loader/admission `.3` follows; census remains 56/1/3.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.5.0 - split Dart full-pipeline trace`; previous committed HEAD is
-  `fe5d12bc FUTURE-PARITY-BACKLOG.1.6.4.5 - admit native spec resolution parity`.
+  `FUTURE-PARITY-BACKLOG.1.6.5.1 - trace Dart frontend and compiler`; previous committed HEAD is
+  `05473675 FUTURE-PARITY-BACKLOG.1.6.5.0 - split Dart full-pipeline trace`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.5.1` Dart frontend/compiler trace is active.
-- next_action: add optional caller-owned emitter propagation and balanced events to `parseSpec`, `validateSpec`,
-  `compileSpec`, and function-registry construction, then prove quiet/traced result identity and failure exits.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.5.2` Dart function/staged trace is active.
+- next_action: thread the same optional emitter through function-definition parser/projection and staged job
+  normalize/resolve/load/compile/execute/stitch operations with balanced failure and exact AST/result proof.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

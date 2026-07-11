@@ -1,4 +1,5 @@
 import '../ast/spec_ast.dart';
+import '../trace/trace.dart';
 
 final class UserFunctionRegistryException implements Exception {
   const UserFunctionRegistryException(this.message);
@@ -15,37 +16,64 @@ final class UserFunctionRegistry {
     required Map<String, List<UserFunctionEntry>> byName,
   }) : _byName = byName;
 
-  factory UserFunctionRegistry.fromSpec(SpecFile spec) {
-    return UserFunctionRegistry.fromFunctions(spec.functions);
+  factory UserFunctionRegistry.fromSpec(
+    SpecFile spec, {
+    LinkedSpecTraceEmitter? trace,
+  }) {
+    return UserFunctionRegistry.fromFunctions(spec.functions, trace: trace);
   }
 
   factory UserFunctionRegistry.fromFunctions(
-    Iterable<FunctionDefinition> functions,
-  ) {
-    final entries = <UserFunctionEntry>[];
-    final byName = <String, List<UserFunctionEntry>>{};
-
-    var index = 0;
-    for (final function in functions) {
-      final existing = byName[function.name];
-      if (existing != null) {
-        throw UserFunctionRegistryException(
-          "duplicate user function '${function.name}'",
-        );
-      }
-      final entry = UserFunctionEntry(index: index, definition: function);
-      entries.add(entry);
-      byName[function.name] = [entry];
-      index += 1;
-    }
-
-    return UserFunctionRegistry._(
-      entries: List.unmodifiable(entries),
-      byName: Map<String, List<UserFunctionEntry>>.unmodifiable({
-        for (final item in byName.entries)
-          item.key: List<UserFunctionEntry>.unmodifiable(item.value),
-      }),
+    Iterable<FunctionDefinition> functions, {
+    LinkedSpecTraceEmitter? trace,
+  }) {
+    final functionList = functions.toList(growable: false);
+    final traceScope = trace?.enterScope(
+      'dart_compiler:function_registry',
+      'function_count=${functionList.length}',
+      LinkedSpecTraceLevel.high,
     );
+    try {
+      final entries = <UserFunctionEntry>[];
+      final byName = <String, List<UserFunctionEntry>>{};
+
+      var index = 0;
+      for (final function in functionList) {
+        final existing = byName[function.name];
+        if (existing != null) {
+          throw UserFunctionRegistryException(
+            "duplicate user function '${function.name}'",
+          );
+        }
+        final entry = UserFunctionEntry(index: index, definition: function);
+        entries.add(entry);
+        byName[function.name] = [entry];
+        trace?.traceDecision(
+          'dart_compiler:function_registry:definition',
+          true,
+          'index=$index name=${function.name} arity=${function.arity}',
+          LinkedSpecTraceLevel.medium,
+        );
+        index += 1;
+      }
+
+      final registry = UserFunctionRegistry._(
+        entries: List.unmodifiable(entries),
+        byName: Map<String, List<UserFunctionEntry>>.unmodifiable({
+          for (final item in byName.entries)
+            item.key: List<UserFunctionEntry>.unmodifiable(item.value),
+        }),
+      );
+      if (traceScope != null) {
+        trace?.exitScope(traceScope, 'ok function_count=${entries.length}');
+      }
+      return registry;
+    } on Object catch (error) {
+      if (traceScope != null) {
+        trace?.exitScope(traceScope, 'error=$error');
+      }
+      rethrow;
+    }
   }
 
   static const empty = UserFunctionRegistry._(

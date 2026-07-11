@@ -26,6 +26,32 @@ Perl reference event names such as `rule_ir:...`, `emit_context:...`, `actionir:
 user reading this book must be able to ask the same trace questions and observe equivalent externally documented
 behavior.
 
+## Dart variant trace status
+
+Dart exposes `LinkedSpecTraceEmitter` with the same ordered levels, structured event kinds, default quietness, and
+stdout/route/mirror sink model used by its native runtime. Core frontend/compiler entrypoints accept one optional
+caller-owned emitter without replacing their existing quiet API:
+
+```dart
+final trace = LinkedSpecTraceEmitter(
+  LinkedSpecTraceConfig.enabled(LinkedSpecTraceLevel.debug),
+);
+
+final spec = parseSpec(source, trace: trace);
+final compiled = compileSpec(spec, trace: trace);
+final result = LinkedSpecRuntimeEngine(compiled).execute(input, trace: trace);
+```
+
+`parseSpec(...)`, `validateSpec(...)`, `compileSpec(...)`, and `UserFunctionRegistry.fromSpec(...)` /
+`fromFunctions(...)` now accept `trace:`. Their `dart_frontend:*` and `dart_compiler:*` events cover balanced parse,
+validation, compilation, and registry scopes; rule/function/dependency decisions; and balanced failure exits.
+Omitting the parameter preserves the original direct path. A disabled emitter records and writes nothing, and
+focused tests compare parsed and compiled JSON exactly between traced and untraced execution.
+
+This is a deliberately partial status, not yet a full-pipeline parity claim. Function-definition extraction and
+staged parse-job dispatch still need to propagate the same emitter under `.1.6.5.2`; native loader composition and
+final recurring admission remain under `.1.6.5.3`.
+
 ## Rust variant trace status
 
 As of `TRACE-OBSERVABILITY.4.5`, the Rust variant claims trace parity for the mdBook-documented external capability
