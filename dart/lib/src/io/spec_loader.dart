@@ -7,6 +7,7 @@ import '../compiler/compiled_spec.dart';
 import '../parser/user_function_definition_parser.dart';
 import '../runtime/interpreter.dart';
 import '../runtime/matching.dart';
+import '../trace/trace.dart';
 import '../validation/spec_validator.dart';
 
 enum SpecRequestKind { name, path }
@@ -243,9 +244,45 @@ LoadedSpec loadSpec(SpecRequest request, SpecLoadOptions options) {
 
 LoadedCompiledSpec loadAndCompileSpec(
   SpecRequest request,
+  SpecLoadOptions options, {
+  LinkedSpecTraceEmitter? trace,
+}) {
+  final traceScope = trace?.enterScope(
+    'dart_io:load_and_compile_spec',
+    'request_kind=${request.kind.name} requested=${request.requested}',
+    LinkedSpecTraceLevel.high,
+  );
+  try {
+    final result = _loadAndCompileSpec(request, options, trace);
+    if (traceScope != null) {
+      trace?.exitScope(
+        traceScope,
+        'ok path=${result.loaded.resolved.file.path}',
+      );
+    }
+    return result;
+  } on Object catch (error) {
+    if (traceScope != null) {
+      trace?.exitScope(traceScope, 'error=$error');
+    }
+    rethrow;
+  }
+}
+
+LoadedCompiledSpec _loadAndCompileSpec(
+  SpecRequest request,
   SpecLoadOptions options,
+  LinkedSpecTraceEmitter? trace,
 ) {
   final loaded = loadSpec(request, options);
+  trace?.traceDecision(
+    'dart_io:load_and_compile_spec:loaded',
+    true,
+    'origin=${loaded.resolved.origin.contractName} '
+        'path=${loaded.resolved.file.path} '
+        'source_code_units=${loaded.sourceText.length}',
+    LinkedSpecTraceLevel.medium,
+  );
   if (loaded.sourceText.startsWith('\uFEFF')) {
     throw _error(
       request,
@@ -257,9 +294,9 @@ LoadedCompiledSpec loadAndCompileSpec(
     );
   }
 
-  final spec = _parseLoadedSpec(request, loaded);
+  final spec = _parseLoadedSpec(request, loaded, trace);
   try {
-    validateSpec(spec);
+    validateSpec(spec, trace: trace);
   } on SpecValidationException catch (error) {
     throw _error(
       request,
@@ -273,7 +310,7 @@ LoadedCompiledSpec loadAndCompileSpec(
 
   final CompiledSpec compiled;
   try {
-    compiled = compileSpec(spec, validateSource: false);
+    compiled = compileSpec(spec, validateSource: false, trace: trace);
   } on Object catch (error) {
     throw _error(
       request,
@@ -287,9 +324,16 @@ LoadedCompiledSpec loadAndCompileSpec(
   return LoadedCompiledSpec(loaded: loaded, compiled: compiled);
 }
 
-SpecFile _parseLoadedSpec(SpecRequest request, LoadedSpec loaded) {
+SpecFile _parseLoadedSpec(
+  SpecRequest request,
+  LoadedSpec loaded,
+  LinkedSpecTraceEmitter? trace,
+) {
   try {
-    return parseSpecWithStagedUserFunctionDefinitions(loaded.sourceText);
+    return parseSpecWithStagedUserFunctionDefinitions(
+      loaded.sourceText,
+      trace: trace,
+    );
   } on Object catch (error) {
     throw _error(
       request,

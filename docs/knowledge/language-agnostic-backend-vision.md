@@ -15,7 +15,7 @@ date: 2026-06-12
 status: accepted
 tags: [architecture, portability, backends, roadmap, vision]
 evidence: "ADR 0006 formalized lockstep backends, ADR 0021 fixed Dart/Julia/Lua order, and ADR 0022 made native embedding primary. ADR 0023 now makes complete parity exact user-observable capability/behavior identity plus one identical primary CLI; current Dart/Julia milestones remain scoped and global FUTURE-PARITY-BACKLOG.1.5/.1.6/.3 own convergence."
-evidence_update_2026_07_11: "Exact primary CLI parity is closed at 61x2 on Perl/Rust/Dart/Julia, and all four expose native inline plus named/file roles; generated source and Dart full-pipeline trace still prevent complete parity."
+evidence_update_2026_07_11: "Exact primary CLI parity is closed at 61x2 on Perl/Rust/Dart/Julia, all four expose native inline plus named/file roles, and Dart full-pipeline trace is admitted. Generated-source breadth remains the only current capability family preventing complete parity."
 reverify: "rg -n 'Rust|Julia|Dart|Lua|backend|primary CLI|complete parity' ROADMAP_V2.md docs/decisions/0006-multi-backend-vision.md docs/decisions/0021-future-backend-rollout-order.md docs/decisions/0022-native-in-memory-backend-embedding.md docs/decisions/0023-user-observable-backend-and-cli-parity.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/tasks/FUTURE-PARITY-BACKLOG.md | head -100"
 ---
 

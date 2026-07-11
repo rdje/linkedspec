@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-11` (exact native resolution `.1.6.4` closed; Dart full-pipeline trace `.1.6.5` active).
+- Last updated: `2026-07-11` (Dart full-pipeline trace `.1.6.5` closed; non-codegen closeout `.1.6.6` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -1221,14 +1221,19 @@ before implementation.
   `tools/run_ci_local.sh`, mdBook/API examples, task/live/roadmap docs, and Knowledge Map before parent admission.
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.5`
-  Status: `active`
+  Status: `done`
   Goal: Complete Dart native trace coverage across frontend, compiler, function-shell, and staged dispatch.
   Children: `.1.6.5.0`, `.1.6.5.1`, `.1.6.5.2`, `.1.6.5.3`
   Acceptance: One caller-owned Dart emitter propagates through parse, validation, compile, function-definition,
     staged-job, and runtime entrypoints with balanced scopes, decisions, failures, sinks, default quietness, and
     traced/untraced identity equivalent to Perl/Rust/Julia; focused and 99-corpus gates pass.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Closed by `.0`–`.3`: exact audit/split, core frontend/compiler propagation, function/staged
+    propagation, and public native composition/admission. One caller-owned emitter now spans file loading,
+    parser-spec construction/runtime, AST projection, staged jobs, validation, compilation, registry construction,
+    and final runtime execution with balanced scopes/failures, complete sinks, default quietness, and exact result/
+    diagnostic identity. Full Dart gate passes 175 tests, 61x2 CLI, and 105 corpus; capability promotes to pass at
+    census 57/1/2.
+  Commit: closed by `FUTURE-PARITY-BACKLOG.1.6.5.3 - admit Dart full-pipeline trace`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.5.0`
   Status: `done`
@@ -1327,16 +1332,40 @@ before implementation.
   coverage while leaving capability `gap`; `.3` alone owns loader composition, sink/failure admission, and promotion.
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.5.3`
-  Status: `active`
+  Status: `done`
   Goal: Admit and close Dart full-pipeline native trace parity.
   Acceptance: `loadAndCompileSpec` accepts one caller-owned emitter and composes it through every frontend/function/
     staged/compiler phase into an engine using the same emitter at execution; focused failure/sink/identity proof,
     complete Dart/105-corpus/61x2 CLI gates, docs, and census all pass before parent closeout.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `loadAndCompileSpec(..., trace:)` adds a balanced `dart_io:load_and_compile_spec` scope and loaded-
+    source decision, then forwards the caller's emitter through staged function parsing, explicit validation, and
+    compilation. The ordinary result does not retain mutable trace state; the caller passes the same emitter to
+    `createEngine().execute(...)`. Three direct native tests prove one routed file contains IO/frontend/function/
+    staged/compiler/runtime topics in balanced order with exact compiled/result identity, disabled tracing is empty,
+    and validation failure JSON is unchanged with balanced failure exits. The initial focused compile caught and
+    corrected `SpecCandidateOrigin.name` to its portable `contractName`. Format, strict analysis, 22 affected tests,
+    and the full Dart gate pass 175 tests, 61x2 CLI, and 105 corpus. Canonical core CI passes 61x2 Perl CLI and
+    Phase 0 `1..1030` in 514 seconds. The capability row promotes to pass, census is 57/1/2, `.1.6.5` closes, and
+    `.1.6.6` becomes active.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.5.3 - admit Dart full-pipeline trace`
+
+## `FUTURE-PARITY-BACKLOG.1.6.5.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.1`/`.2` proved every inner phase but `loadAndCompileSpec` still created the staged
+  parser/validator/compiler path without accepting the caller's emitter, preventing one native composition proof.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `dart/lib/src/io/spec_loader.dart` called `_parseLoadedSpec`, `validateSpec`,
+  and `compileSpec` without trace forwarding; final runtime already accepted the emitter separately.
+- [x] **FIX** — Added source-compatible optional loader injection, balanced IO scope/loaded decision, forwarding
+  through every compiled phase, and caller-explicit reuse at runtime without retaining mutable emitter state.
+- [x] **ADDRESSED (verified)** — Three direct tests prove routed all-phase events and balance, compiled/result/source
+  identity, disabled quietness, and exact structured validation failures.
+- [x] **NO REGRESSION** — Format, strict analysis, 22 affected tests, complete 175-test Dart suite, exact 61x2 CLI,
+  105/105 corpus, and the canonical core gate pass.
+- [x] **LOCKSTEP** — Capability manifest, public trace API/book, roadmaps, task/live docs, and Knowledge Map promote
+  together to 57/1/2; `.1.6.5` closes and non-codegen closeout `.1.6.6` is active.
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.6`
-  Status: `pending`
+  Status: `active`
   Goal: Close the non-codegen capability census and hand generated-source residuals to `.3` without overclaiming.
   Acceptance: The validated matrix contains no unowned gap/partial state; all `.1.6` implementation/proof leaves
     pass recurring checks; task/roadmap/live docs, mdBook, Knowledge Map, public APIs, and exact CLI agree; parent
@@ -1583,7 +1612,8 @@ before implementation.
 | 53 | `FUTURE-PARITY-BACKLOG.1.6.5.0` | `done` | Audit proves injection begins at runtime and splits three bounded implementation/admission leaves. |
 | 54 | `FUTURE-PARITY-BACKLOG.1.6.5.1` | `done` | Optional emitter, balanced scopes/failures, exact identity, 168 tests, 61x2 CLI, and 105 corpus pass. |
 | 55 | `FUTURE-PARITY-BACKLOG.1.6.5.2` | `done` | Function parser/shell and staged queue/job/phase/stitch trace pass 172 tests, 61x2 CLI, and 105 corpus. |
-| 56 | `FUTURE-PARITY-BACKLOG.1.6.5.3` | `active` | Compose the native loader/runtime path, prove sinks/failures/identity, and admit full Dart pipeline trace. |
+| 56 | `FUTURE-PARITY-BACKLOG.1.6.5.3` | `done` | Native IO-through-runtime routed proof passes; Dart trace promotes to pass at census 57/1/2; parent closes. |
+| 57 | `FUTURE-PARITY-BACKLOG.1.6.6` | `active` | Close non-codegen capability parity and hand only generated-source residuals to `.3`. |
 | 55 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
 | 55 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
 | 56 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
@@ -2241,6 +2271,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.5.0` | Knowledge Map/source audit across Dart emitter/runtime/parser/validator/compiler/function/staged/loader owners; Julia/Rust contract comparison; capability/KM/memory/doctrine/whitespace/mdBook. | PASS. Runtime-only boundary is exact; three bounded leaves exist before trace behavior changes; `.1` active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.5.1` | Three focused identity/order/failure tests; six affected suites/38 tests; format; strict analysis; complete Dart gate with 168 tests, 61x2 CLI, and 105 corpus; docs/KM/governance/whitespace/mdBook/cleanup. | PASS. Core frontend/compiler trace lands without behavior drift; `.2` active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.5.2` | Four focused full-topic/balance/identity/quiet/failure tests; strict analysis; complete Dart gate with 172 tests, 61x2 CLI, and 105 corpus; docs/KM/governance/whitespace/mdBook/cleanup. | PASS. Function/staged trace lands without diagnostic drift; admission `.3` active. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.5.3` | Three direct routed/quiet/failure native tests; 22 affected tests; format; strict analysis; complete Dart gate with 175 tests, 61x2 CLI, and 105 corpus; canonical core 61x2 CLI plus Phase 0 `1..1030` in 514s; capability/KM/memory/doctrine/whitespace/mdBook/cleanup. | PASS. Dart full-pipeline trace promotes to pass at 57/1/2; parent closes; `.1.6.6` active. |
 
 ## Commit Log
 
@@ -2294,6 +2325,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.6.5.0` | `FUTURE-PARITY-BACKLOG.1.6.5.0 - split Dart full-pipeline trace` | Exact runtime-only boundary, portable comparison, three-leaf implementation/admission split, no behavior code. |
 | `FUTURE-PARITY-BACKLOG.1.6.5.1` | `FUTURE-PARITY-BACKLOG.1.6.5.1 - trace Dart frontend and compiler` | Optional caller emitter, balanced parse/validate/compile/registry events, failures, identity, and full Dart proof. |
 | `FUTURE-PARITY-BACKLOG.1.6.5.2` | `FUTURE-PARITY-BACKLOG.1.6.5.2 - trace Dart function staging` | Caller emitter through parser shell/runtime, projection, staged queue/jobs/phases/stitching, failures, and full proof. |
+| `FUTURE-PARITY-BACKLOG.1.6.5.3` | `FUTURE-PARITY-BACKLOG.1.6.5.3 - admit Dart full-pipeline trace` | Native IO-to-runtime routed/quiet/failure identity, full gates, capability promotion, and parent closeout. |
 
 ## Changelog
 
@@ -2306,6 +2338,9 @@ Read-only evidence recorded on 2026-07-10:
 - `2026-07-11`: `.1.6.5.2` carries that emitter through function parser construction/execution, projection, stripped
   parsing, staged queue ordering, resolve/load/compile/execute, and body stitching. Four focused tests plus the full
   172-test/61x2/105 gate pass; `.3` is active for native composition/admission and census remains 56/1/3.
+- `2026-07-11`: `.1.6.5.3` composes one routed caller emitter from native loading through every compiled phase and
+  final runtime without retaining it in results. Three direct tests plus 22 affected and full 175-test/61x2/105
+  gates pass; Dart trace promotes to pass at 57/1/2, `.1.6.5` closes, and `.1.6.6` is active.
 - `2026-07-11`: `.1.6.4.5` adds Perl's separate portable `SpecLoader` facade and direct 14/9/4 plus pipeline proof
   without changing legacy `get_parser`/`PathSearch`. The canonical core gate passes the required new test, 239-name
   coverage, focused suites, 61x2 CLI, and Phase 0 `1..1030` in 556 seconds. Combined with immediately prior full

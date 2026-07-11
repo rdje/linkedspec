@@ -37,9 +37,8 @@ final trace = LinkedSpecTraceEmitter(
   LinkedSpecTraceConfig.enabled(LinkedSpecTraceLevel.debug),
 );
 
-final spec = parseSpec(source, trace: trace);
-final compiled = compileSpec(spec, trace: trace);
-final result = LinkedSpecRuntimeEngine(compiled).execute(input, trace: trace);
+final loaded = loadAndCompileSpec(request, options, trace: trace);
+final result = loaded.createEngine().execute(input, trace: trace);
 ```
 
 `parseSpec(...)`, `validateSpec(...)`, `compileSpec(...)`, and `UserFunctionRegistry.fromSpec(...)` /
@@ -58,9 +57,14 @@ Function-definition and staged APIs now accept the same optional emitter too:
 
 Their `dart_frontend:function_*` and `dart_staged:*` events cover parser-spec cache/construction and runtime
 execution, projected definitions, normalized/sorted queues, per-job resolve/load/compile/execute phases, and body
-stitching. Failure exits preserve the original diagnostic classification. This is still a deliberately partial
-status rather than an admitted full-pipeline claim: public native loader composition, routed-sink/failure proof,
-and recurring promotion remain under `.1.6.5.3`.
+stitching. Failure exits preserve the original diagnostic classification. `loadAndCompileSpec(..., trace:)` now
+composes the same caller emitter through IO, function/staged parsing, validation, and compilation, and the caller
+explicitly reuses it at runtime. The compiled result deliberately does not retain mutable emitter/sink state.
+
+`FUTURE-PARITY-BACKLOG.1.6.5.3` admits this full native path. Direct tests prove one routed file receives balanced
+`dart_io:*`, `dart_frontend:*`, `dart_staged:*`, `dart_compiler:*`, and `dart_runtime:*` events; disabled tracing is
+empty; traced/untraced compiled and runtime JSON are identical; and structured validation failures are unchanged.
+The complete 175-test, 61x2 CLI, and 105-corpus Dart gate passes.
 
 ## Rust variant trace status
 

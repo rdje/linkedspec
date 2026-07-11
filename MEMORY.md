@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.5.2` — traced Dart function extraction and staged dispatch.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.5.1` — traced Dart frontend and compiler owners.
-- recent_context: One optional Dart emitter now spans core frontend/compiler, function parser/runtime/projection,
-  staged queue/job phases/stitching, and runtime with balanced unchanged failures. Complete Dart gate passes 172
-  tests, 61x2 CLI, and 105 corpus. Native composition/admission `.3` is active; census remains 56/1/3.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.5.3` — admitted Dart full-pipeline native trace.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.5.2` — traced Dart function extraction and staged dispatch.
+- recent_context: One caller emitter now spans Dart IO, frontend/compiler, function parser/runtime/projection,
+  staged jobs/stitching, and final runtime without retained mutable state. Routed/quiet/failure identity and full
+  175-test/61x2/105 plus core 61x2/Phase 0 `1..1030` gates pass. Census 57/1/2; `.1.6.5` closed; `.1.6.6` active.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.5.2 - trace Dart function staging`; previous committed HEAD is
-  `62584544 FUTURE-PARITY-BACKLOG.1.6.5.1 - trace Dart frontend and compiler`.
+  `FUTURE-PARITY-BACKLOG.1.6.5.3 - admit Dart full-pipeline trace`; previous committed HEAD is
+  `dd07ded6 FUTURE-PARITY-BACKLOG.1.6.5.2 - trace Dart function staging`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.5.3` Dart full-pipeline trace admission is active.
-- next_action: add optional emitter composition to `loadAndCompileSpec`, prove one emitter across loading through
-  runtime with routed sinks/failures/identity, run full admission gates, promote the census, and close `.1.6.5`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.6` non-codegen capability closeout is active.
+- next_action: audit the 57/1/2 matrix for owner/evidence completeness, prove only generated-source residuals remain,
+  run recurring no-drift gates, close `.1.6`, and activate generated-source parity `.3` without overclaiming.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

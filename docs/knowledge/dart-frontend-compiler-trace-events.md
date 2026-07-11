@@ -32,8 +32,8 @@ Failure exits rethrow the original exception object.
 Focused tests prove exact traced/untraced `SpecFile` and `CompiledSpec` JSON identity,
 disabled-emitter quietness, exact nested event order, and balanced parse/validation
 failure exits. The complete Dart gate passes 168 tests, 61 CLI cases in both supported
-option environments, and all 105 corpus fixtures. Function-definition/staged propagation
-and composed native admission remain separately owned, so the census is not promoted yet.
+option environments, and all 105 corpus fixtures. Later `.2` and `.3` complete function/
+staged/native composition and admit the full pipeline at census 57/1/2.
 
 Related facts: [[dart-full-pipeline-trace-gap]], [[dart-runtime-trace-events]],
 [[dart-trace-controls-sinks]], [[trace-cross-variant-capability-contract]].

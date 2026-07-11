@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.5.3 — admit Dart full-pipeline trace
+
+Added optional `trace:` to Dart `loadAndCompileSpec(...)`, with a balanced IO scope and loaded-source decision that
+forward the caller-owned emitter through staged function parsing, validation, and compilation. The ordinary
+`LoadedCompiledSpec` deliberately does not retain mutable trace state; callers explicitly reuse the same emitter
+with `createEngine().execute(...)`.
+
+Three direct tests prove one routed sink receives balanced IO/frontend/function/staged/compiler/runtime events,
+disabled tracing is empty, compiled/runtime JSON and source identity are unchanged, and structured validation
+failure JSON remains exact. The initial focused compile exposed and corrected the origin detail to use portable
+`contractName`. Format, strict analysis, 22 affected tests, and the full 175-test/61x2/105 Dart gate pass. Canonical
+core CI passes 61x2 Perl CLI and Phase 0 `1..1030` in 514 seconds. Dart full-pipeline trace promotes to pass at
+census 57/1/2; `.1.6.5` closes and `.1.6.6` starts.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.5.2 — trace Dart function staging
 
 Propagated the existing optional caller-owned emitter through Dart parser-spec construction/cache selection,

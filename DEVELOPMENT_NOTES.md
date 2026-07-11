@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.5.3 — caller owns emitter lifecycle across compilation and runtime):
+  The native loader should accept and forward the emitter, but the compiled result should not retain it. Explicitly
+  passing the same object to final engine execution preserves one ordering/sink/indent stream without coupling an
+  immutable compiled artifact to mutable IO state. Wrap the loader once outside its existing stage-specific error
+  projections, then rethrow unchanged so rich trace cannot alter structured API errors. Admission requires a routed
+  all-phase test, a disabled identity test, a failure identity test, the complete backend gate, and census promotion
+  together—not merely presence of optional parameters in inner owners.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.5.2 — nested trace must not broaden diagnostic catches):
   Thread the same emitter through parser-spec compilation, its runtime execution, projection, and staged jobs so
   event ordering and sink state remain genuinely caller-owned. Cache hits need decisions because a warmed default

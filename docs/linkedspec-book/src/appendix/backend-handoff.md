@@ -575,12 +575,12 @@ perl tools/check_capability_conformance.pl
 ```
 
 The current audit contains 15 capabilities x four implemented backends. After exact native resolution admission,
-its 60 states are 56 pass, one partial state, and three gaps. Each non-pass state has one durable owner:
+its 60 states are 57 pass, one partial state, and two gaps. Each non-pass state has one durable owner:
 
 | Residual mechanism | Current classification | Owner |
 | --- | --- | --- |
 | Native named/file resolution | ADR `0026` and the 14/9/4 fixture fix portable names, exact paths, ordered roots, strict UTF-8, and typed stages. Perl, Rust, Dart, and Julia consume the contract directly; exact admission is closed. | closed `.1.6.4` |
-| Full native pipeline trace | Perl, Rust, and Julia propagate a caller-owned emitter through frontend/compiler/staged/runtime phases. Dart now covers frontend/compiler/function/staged/runtime; public native loader composition and final admission remain. | `.1.6.5.3` active |
+| Full native pipeline trace | Perl, Rust, Dart, and Julia propagate a caller-owned emitter through frontend/compiler/function/staged/runtime phases. Dart's direct routed/quiet/failure proof and recurring gates are admitted. | closed `.1.6.5` |
 | Generated parser source | Perl passes; Rust proof is a curated subset; Dart and Julia have no emitter. | `FUTURE-PARITY-BACKLOG.3` |
 
 Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, generic final-

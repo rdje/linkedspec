@@ -118,11 +118,10 @@
       "category": "native-trace",
       "contract": "One caller-owned native emitter covers source parsing, validation, compilation, function-shell, staged dispatch, and runtime phases.",
       "sources": ["docs/linkedspec-book/src/public-api/trace-api.md"],
-      "gap_owner": "FUTURE-PARITY-BACKLOG.1.6.5",
       "backends": {
         "perl": {"status": "pass", "references": ["perl/LinkedSpec/Compiler.pm", "perl/LinkedSpec/SpecEntry.pm"]},
         "rust": {"status": "pass", "references": ["rust/linkedspec-core/src/parser.rs", "rust/linkedspec-core/src/compiler.rs", "rust/linkedspec-runtime/src/staged_parser_registry.rs"]},
-        "dart": {"status": "gap", "references": ["dart/lib/src/parser/spec_parser.dart", "dart/lib/src/compiler/compiled_spec.dart", "dart/lib/src/parser/staged_parser_registry.dart"], "note": "Public trace injection and events currently begin at LinkedSpecRuntimeEngine."},
+        "dart": {"status": "pass", "references": ["dart/lib/src/io/spec_loader.dart", "dart/lib/src/parser/spec_parser.dart", "dart/lib/src/validation/spec_validator.dart", "dart/lib/src/compiler/compiled_spec.dart", "dart/lib/src/parser/user_function_definition_parser.dart", "dart/lib/src/parser/staged_parser_registry.dart", "dart/test/native_pipeline_trace_test.dart"]},
         "julia": {"status": "pass", "references": ["julia/src/trace/Trace.jl", "julia/src/parser/StagedParserRegistry.jl"]}
       }
     },

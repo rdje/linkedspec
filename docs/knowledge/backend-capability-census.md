@@ -29,13 +29,14 @@ evidence_update_2026_07_11_rust_native_resolution: "FUTURE-PARITY-BACKLOG.1.6.4.
 evidence_update_2026_07_11_dart_native_resolution: "FUTURE-PARITY-BACKLOG.1.6.4.3 adds public Dart name/path resolution, strict loading, staged parse/validate/compile composition, source identity, structured exceptions, direct 14/9/4 fixture proof, and CLI delegation. Full Dart gate passes 165 tests, 61x2 CLI, and 105 corpus fixtures; Dart promotes to pass and census is 55/1/4."
 evidence_update_2026_07_11_julia_native_resolution: "FUTURE-PARITY-BACKLOG.1.6.4.4 adds public Julia name/path resolution, strict loading, staged parse/validate/compile composition, source identity, typed structured exceptions, direct 14/9/4 fixture proof, CLI delegation, and recursive-fallback removal. Full Julia proof passes 1,110 assertions, 61x2 CLI, and 105 corpus fixtures; Julia promotes to pass and census is 56/1/3."
 evidence_update_2026_07_11_native_resolution_admission: "FUTURE-PARITY-BACKLOG.1.6.4.5 adds a separate public Perl portable facade and direct 14/9/4 fixture/pipeline test to canonical CI without changing legacy PathSearch. Core CI passes 61x2 CLI and Phase 0 1..1030; combined adjacent backend proof admits all four and closes .1.6.4. Census remains 56/1/3."
+evidence_update_2026_07_11_dart_full_pipeline_trace: "FUTURE-PARITY-BACKLOG.1.6.5.1-.3 propagate one caller-owned Dart emitter through frontend/compiler, function shell/staged dispatch, public native loading, and runtime. Direct routed/quiet/failure identity plus 175 tests, 61x2 CLI, 105 corpus, and core CI pass; Dart promotes and census is 57/1/2."
 reverify: "perl tools/check_capability_conformance.pl && rg -n 'FUTURE-PARITY-BACKLOG.1.6.[0-6]' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 `capability_conformance/manifest.json` is the current user-observable capability census. The checker validates the
 schema, exact backend set, evidence paths, status vocabulary, unique ids, gap ownership, and explicit legacy/future
-exclusions. After exact native resolution admission, its 15 rows and 60 backend states classify 56 pass, one
-partial, and three gap.
+exclusions. After Dart full-pipeline trace admission, its 15 rows and 60 backend states classify 57 pass, one
+partial, and two gaps.
 
 The audit distinguishes implementation gaps from proof gaps:
 
@@ -46,8 +47,8 @@ The audit distinguishes implementation gaps from proof gaps:
   are closed;
 - Perl, Rust, Dart, and Julia expose the native file-oriented named-spec role and consume the exact 14/9/4 ordered-
   root contract directly; exact admission is closed under `.1.6.4`;
-- Perl/Rust/Julia propagate a native emitter through frontend/compiler/function-shell/staged/runtime phases, while
-  Dart native trace begins at the interpreter; `.1.6.5` owns the missing pipeline coverage;
+- Perl, Rust, Dart, and Julia propagate a native emitter through frontend/compiler/function-shell/staged/runtime
+  phases; Dart's direct routed/quiet/failure proof closes `.1.6.5`;
 - generated source remains top-level `.3`: Perl passes, Rust has all structural families but only a curated corpus
   proof, and Dart/Julia have no emitter.
 

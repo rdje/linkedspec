@@ -1,6 +1,6 @@
 ---
 id: dart-full-pipeline-trace-gap
-title: "Dart native tracing reaches frontend compiler function staged and runtime phases pending loader admission"
+title: "Dart full-pipeline native trace gap is closed"
 answers:
   - "where does Dart native trace injection currently begin"
   - "does Dart trace parsing validation and compilation"
@@ -21,16 +21,16 @@ quietness, and stdout/route/mirror sinks. `LinkedSpecRuntimeEngine.parse(...)` a
 `FUTURE-PARITY-BACKLOG.1.6.5.1` carries that same optional emitter through
 `parseSpec(...)`, `validateSpec(...)`, `compileSpec(...)`, and `UserFunctionRegistry`.
 `.1.6.5.2` extends it through function-parser construction/runtime execution, projection,
-stripped-source parsing, staged queue/job phases, and body stitching. Public
-`loadAndCompileSpec(...)` does not yet compose the complete path, and final routed-sink/
-failure/no-drift admission is not complete. Consequently, the census correctly keeps the
-full-pipeline row open.
+stripped-source parsing, staged queue/job phases, and body stitching. `.1.6.5.3` adds
+`loadAndCompileSpec(..., trace:)`, proves explicit reuse of that same caller-owned emitter
+at runtime, and admits routed/quiet/failure/identity plus complete recurring coverage. The
+full-pipeline row now passes for Dart.
 
-`FUTURE-PARITY-BACKLOG.1.6.5` is split by mechanism: completed `.1` instruments
+`FUTURE-PARITY-BACKLOG.1.6.5` closed by mechanism: completed `.1` instruments
 frontend, validation, and compiler owners; completed `.2` propagates through function
-extraction and staged dispatch; active `.3` composes the public loader/runtime path, proves
+extraction and staged dispatch; completed `.3` composes the public loader/runtime path, proves
 traced/untraced identity, quietness, sinks, balanced failures, and full recurring no-drift
-before promotion.
+before promotion to census 57/1/2.
 
 Related facts: [[dart-runtime-trace-events]], [[dart-trace-controls-sinks]],
 [[trace-cross-variant-capability-contract]], [[julia-frontend-compiler-staged-trace-events]].
