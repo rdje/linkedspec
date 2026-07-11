@@ -1,6 +1,28 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.3.1 — parse typed Lua ActionIR
+
+Added metatable-typed ActionIR blocks, value-drop statements, expressions, positional/keyword arguments, access
+segments, hash entries, fluent calls, and zero-based Unicode character spans, with projection through explicit
+typed JSON arrays/harrays. Public `parse_action_block`, `parse_action_statement`, and `parse_action_expression`
+entrypoints operate on strict-UTF-8 host strings without rewriting source to Lua.
+
+The recursive scanner/parser covers LF/CRLF/CR physical-newline and same-line-semicolon separation, nested calls and
+assignment-valued arguments, single/double strings, primitive/regex literals, scalar/array/harray/codeblock
+values, direct/nested access, scalar/append/hash/nested assignments, attached if/while/switch controls, receiver
+chains, and structural `raw_perl` fallback. Decimal dots remain literals rather than fluent separators, and branch
+keywords are recognized without unsupported Lua-pattern alternation.
+
+Final codeblock parsing is callable-name agnostic: arbitrary helper/user-function-shaped calls and receiver methods
+accept `call(args) { ... }`, whose final positional `block_value` has the same semantic shape as
+`call(args, { ... })`. Focused proof includes `substr(value, '"|\\s', "", go)`, the director-corrected examples
+without trailing semicolons, all four value kinds, generic attached blocks, controls, assignments, typed JSON, Unicode
+spans, and invalid UTF-8. Syntax/process/manifest checks and 41/41 tests pass on both PUC Lua and LuaJIT. Lua
+status advances to `actionir_ast`; contract resolution `.3.2` is next. Full local CI passes phase0 `1..1030`,
+both 61-case primary CLI environments, capability state 60/0/0, generated-source/native-resolution checks, and
+all doctrine gates.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.2.4 — project Lua function shells
 
 Added native consumption of explicitly typed definition/error nodes returned by `specs/user_function_definition.spec`.

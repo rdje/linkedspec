@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.3.1 — parse typed Lua ActionIR**
+  (DONE — structural parser passes both runtimes; current contract resolution `.3.2` next).
+
+  **Implementation:** Typed blocks/statements/expressions cover exact separators, both quotes, four values,
+  calls/access/assignments/controls/chains, generic final block arguments, Unicode spans, JSON, and raw fallback.
+
+  **Proof:** PUC Lua 41/41 and LuaJIT 41/41 plus syntax/process/105-manifest checks pass. Single-quoted `substr`,
+  no-trailing-semicolon blocks, explicit/attached block equivalence, arbitrary receiver methods, and UTF-8 errors
+  are locked. Full local CI passes phase0 `1..1030`, both 61-case CLI environments, 60/0/0 census, and doctrines.
+  No contract resolution, runtime, primary CLI, capability, or codegen behavior is claimed.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.2.4 — project Lua function shells**
   (DONE — spec-owned projection closes frontend `.2`; typed ActionIR `.3.1` next).
 

@@ -652,8 +652,69 @@ to `functions.<index>.body_source`, derives deterministic body-job IDs, replaces
 function-span characters with spaces while preserving CR/LF, then parses the
 remaining rules. `body_ast` remains absent because staged dispatch belongs to a
 later registry leaf. Empty node input never falls back to a raw function
-scanner. This closes the Lua source frontend; typed ActionIR parsing `.3.1` is
-next.
+scanner. This closes the Lua source frontend.
+
+Lua now also exposes the typed ActionIR parser seam:
+
+```lua
+local block = linkedspec.parse_action_block([[
+set_key(meta, "b", 2)
+set_key(meta, "a", 1)
+set_key(meta, "drop", 0)
+set_key(hash(meta), "stmt_hash", 4)
+set_key(overlay, "a", 10)
+set_key(overlay, "c", 3)
+value_set = set_key(meta, "value_only", 9)
+receiver_set = meta.set_key("receiver_only", 5)
+]])
+
+assert(block.kind == "action_block")
+assert(#block.statements == 8)
+assert(block.statements[7].expr.kind == "assign_scalar")
+```
+
+No semicolon is needed there because every statement occupies its own physical
+line. Semicolons only separate multiple statements on one physical line, and
+the last statement on that line has no following semicolon:
+
+```text
+set_key(meta, "b", 2); set_key(meta, "a", 1); return(meta)
+```
+
+`parse_action_block(source)`, `parse_action_statement(source)`, and
+`parse_action_expression(source)` return structural records for value-drop
+statements, calls and arguments, scalar/array/harray/codeblock values, regexes,
+direct and nested access, scalar/append/hash/nested assignments, attached
+controls, switch branches, and receiver chains. The nodes retain source text
+and zero-based Unicode character spans; strict UTF-8 is only the Lua host
+encoding at this boundary. `linkedspec.action_ast.to_json(node)` projects them
+through typed JSON values. Unsupported expressions stay explicit `raw_perl`
+nodes so the diagnostic layer can reject them without arbitrary Lua-global or
+host-code fallback.
+
+Single-quoted strings have the same universal DSL status as double-quoted
+strings. For example, the second argument below is the literal `"|\\s`:
+
+```text
+substr(value, '"|\s', "", go)
+```
+
+Final codeblocks are parsed generically for helper calls, user-function-shaped
+calls, and receiver methods. The attached form is the same call shape as an
+explicit last `block_value` argument:
+
+```text
+func_helper_method(value) { return(value) }
+func_helper_method(value, { return(value) })
+
+value.func_helper_method() { return(value) }
+value.func_helper_method({ return(value) })
+```
+
+This `.3.1` boundary parses structure only. Current-name contract resolution,
+generic unknown-call diagnostics, registered-function precedence, staged body
+dispatch, and runtime behavior remain owned by `.3.2` and later leaves. The
+dual-runtime gate passes 41/41 on PUC Lua and 41/41 on LuaJIT.
 
 ### Julia Backend Commands, Embedding, and Status
 

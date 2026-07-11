@@ -1,6 +1,18 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.3.1 — parse structure before resolving behavior):
+  Keep universal action text as typed AST, never Lua source. A shared byte scanner is safe only after strict UTF-8
+  validation and must project every stored span through byte-boundary-to-Unicode-character indexes. Track quote,
+  regex, parenthesis, bracket, and brace state together so physical newlines and semicolons split only at depth
+  zero; recognize LF, CRLF, and bare CR, and keep semicolons as separators between same-line statements rather than
+  terminators that examples append mechanically.
+  Treat decimal dots separately from receiver-chain dots. Lua patterns have neither regex alternation nor
+  non-capturing groups, so use explicit keyword sets and literal scanners. Preserve unsupported expressions as
+  nodes for `.3.2` diagnostics. Parse generic trailing blocks as the final positional `block_value` independently
+  of a callable name; contract resolution later decides whether that callable accepts the argument. This keeps
+  `call(args) { ... }` structurally equivalent to `call(args, { ... })` across helper, function, and method forms.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.2.4 — consume spec-owned shells using character spans):
   Preserve the semantic owner boundary: a backend projector validates nodes returned by the definition spec; it
   must not recreate `fn` syntax with a raw scanner. Lua needs an explicit UTF-8 byte-boundary map because neutral

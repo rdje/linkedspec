@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.2.4` — spec-owned function projection closes source frontend `.2`.
-- prior_leaf: `LUA-BACKEND-PARITY.2.3` — source validation/strict mode and 239-name set pass.
-- recent_context: typed definition/error nodes validate Unicode character spans and staged sidecars, normalize
-  paths/job IDs, strip functions without moving lines, and compose rule parsing/validation with no raw scanner.
-  Syntax/process/manifest/coverage, PUC Lua 35/35, and LuaJIT 35/35 pass; body jobs remain undispatched.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.3.1` — typed structural ActionIR parsing passes both Lua runtimes.
+- prior_leaf: `LUA-BACKEND-PARITY.2.4` — spec-owned function projection closes source frontend `.2`.
+- recent_context: typed blocks/statements/expressions cover exact newline/same-line-semicolon separation, both quote
+  forms, four values, calls/access/assignments/controls/chains, generic final codeblocks, Unicode spans, typed JSON,
+  and raw fallback. PUC Lua/LuaJIT 41/41 and full CI (phase0 1030, CLI 61x2, census 60/0/0) pass; no runtime claimed.
 - latest_commit: this resume block is prepared for commit
-  `LUA-BACKEND-PARITY.2.4 - project Lua function shells`; previous committed HEAD is
-  `e7419d4e LUA-BACKEND-PARITY.2.3 - validate Lua source AST`.
+  `LUA-BACKEND-PARITY.3.1 - parse typed Lua ActionIR`; previous committed HEAD is
+  `ae709cde LUA-BACKEND-PARITY.2.4 - project Lua function shells`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `LUA-BACKEND-PARITY.3.1`; typed ActionIR parsing is active.
-- next_action: Define and parse task-owned action blocks/statements/expressions for calls/args, four value kinds,
-  direct access, assignments, controls, codeblock values, receiver chains, generic final-codeblock syntax, and
-  value-drop statements; preserve source spans and both quote forms without lowering to Lua code.
+- active_work_unit: `LUA-BACKEND-PARITY.3.2`; current ActionIR contract resolution is active.
+- next_action: Reuse the governed 239-name inventory to resolve typed calls, controls, methods, assignments,
+  nested values, and generic final-block call shapes; canonicalize aliases, reserve registered-function precedence,
+  and emit stable generic diagnostics without arbitrary Lua-global fallback.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

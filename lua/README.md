@@ -4,8 +4,9 @@ This directory contains the native Lua backend. PUC Lua 5.4 is the primary
 conformance runtime; LuaJIT is a secondary compatibility leg.
 
 Current status: repository-owned module/test/command scaffold, strict corpus IO,
-typed source/provenance AST data, and permissive rule-level source parsing.
-Source validation and optional strict-unused checks are also available.
+typed source/provenance AST data, permissive rule-level source parsing, and a
+typed structural ActionIR parser. Source validation and optional strict-unused
+checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
 be projected and composed with rule parsing. Staged body dispatch, corpus
 execution, the primary CLI
@@ -100,3 +101,49 @@ and `definition_nodes_from_user_function_definition_output(...)` normalizes the
 owning spec's nested output shapes. Character-index spans, source/body text,
 staged payloads, and body parse jobs are checked and normalized. The jobs remain
 undispatched and `body_ast` remains absent at this boundary.
+
+Parse helper/action source without rewriting it to Lua:
+
+```lua
+local action = linkedspec.parse_action_block([[
+set_key(meta, "b", 2)
+set_key(meta, "a", 1)
+set_key(hash(meta), "stmt_hash", 4)
+value_set = set_key(meta, "value_only", 9)
+receiver_set = meta.set_key("receiver_only", 5)
+]])
+
+assert(action.kind == "action_block")
+assert(#action.statements == 5)
+assert(action.statements[4].expr.kind == "assign_scalar")
+```
+
+`parse_action_block`, `parse_action_statement`, and
+`parse_action_expression` return metatable-typed structural records. Their
+typed JSON form is available through
+`linkedspec.action_ast.to_json(node)`. Calls, literals, regexes, arrays,
+harrays, codeblocks, access, assignments, attached controls, and receiver
+chains remain language-neutral AST nodes; unsupported expressions remain
+explicit `raw_perl` nodes for the next diagnostic layer.
+
+Single quotes are universal DSL syntax, so this form is accepted directly:
+
+```lua
+local call = linkedspec.parse_action_expression([[substr(value, '"|\s', "", go)]])
+assert(call.args[2].value.value == '"|\\s')
+```
+
+For every callable that accepts a final codeblock, the attached and explicit
+forms have the same final `block_value` argument:
+
+```text
+func_helper_method(value) { return(value) }
+func_helper_method(value, { return(value) })
+
+value.func_helper_method() { return(value) }
+value.func_helper_method({ return(value) })
+```
+
+This parser is structural only. Current helper/method contract resolution,
+staged body-job dispatch, execution, and primary CLI promotion remain later
+owned layers.

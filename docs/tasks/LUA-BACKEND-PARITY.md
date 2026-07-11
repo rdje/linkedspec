@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-11` (frontend `.2` closed through function projection; ActionIR AST `.3.1` active)
+- Last updated: `2026-07-11` (typed ActionIR AST `.3.1` closed; contract resolution `.3.2` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -295,15 +295,44 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Children: `.3.1`, `.3.2`, `.3.3`, `.3.4`
 
 - ID: `LUA-BACKEND-PARITY.3.1`
-  Status: `active`
+  Status: `done`
   Goal: Parse action/helper text into typed AST nodes.
   Acceptance: Calls/args, four value kinds, access, assignments, controls, block values, receiver chains, generic
     final-codeblock syntax, and value-drop statements are structural nodes rather than Lua code rewrites.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Added private-metatable typed `ActionBlock`, `ActionStatement`, `ActionExpr`,
+    `ActionArgument`, access-segment, hash-entry, fluent-call, and Unicode character-span records plus typed JSON
+    projection. Public block/statement/expression parsing covers value-drop statements, physical-newline and
+    same-line-semicolon separation, calls/nested args, assignment-valued args, both quote forms, primitive/regex
+    literals, all four value kinds, direct/nested access, scalar/append/hash/nested assignments, attached controls,
+    switch branches, receiver chains, generic final codeblocks, and structural `raw_perl` fallback. Arbitrary
+    helper and receiver-method names accept `call(args) { ... }`; its final block-value argument matches explicit
+    `call(args, { ... })`. Spans count Unicode characters over strict-UTF-8 host strings. The local gate passes
+    syntax/process/manifest checks and 41/41 tests on both PUC Lua and LuaJIT. The complete local CI gate also
+    passes phase0 `1..1030`, both 61-case Perl CLI environments, and the 60/0/0 admitted-backend census.
+  Commit: `LUA-BACKEND-PARITY.3.1 - parse typed Lua ActionIR`
+
+### `LUA-BACKEND-PARITY.3.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The function-shell frontend preserved action/body text and staged parse jobs but had
+  no typed action block, statement, expression, argument, access, control, or receiver-chain parser to consume it.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Lua cannot safely execute or text-rewrite universal helper source: table
+  shape cannot identify values, byte indexes are not Unicode character spans, and host globals cannot define the
+  portable call surface. A typed structural seam had to precede contract resolution and runtime dispatch.
+- [x] **FIX** — Added typed ActionIR data/projection and public recursive parsing with quote/regex/delimiter-aware
+  scanners, exact statement separators, all four value forms, assignments/controls/access/chains, generic final
+  codeblock arguments, and explicit unsupported-expression nodes.
+- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 41/41 on PUC Lua and 41/41 on LuaJIT. Focused
+  checks lock the single-quoted `substr(value, '"|\\s', "", go)` form, Unicode spans, compact/newline statements,
+  generic helper/receiver final blocks, explicit-block equivalence, attached controls, typed JSON, and invalid UTF-8.
+- [x] **NO REGRESSION** — Exact primary-command stub, validation-only 105-fixture command, source frontend,
+  function projection, and 239-name inventory remain green; no contract resolution, Lua-global fallback, staged
+  dispatch, runtime execution, CLI promotion, capability claim, or generated source is introduced. Full local CI
+  passes phase0 `1..1030`, both 61-case CLI environments, capability/generated-source, and doctrine gates.
+- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook/README examples, Knowledge Map, changes/development/live
+  status, and bounded memory close typed parsing and activate current ActionIR contract resolution `.3.2`.
 
 - ID: `LUA-BACKEND-PARITY.3.2`
-  Status: `pending`
+  Status: `active`
   Goal: Resolve current ActionIR contracts and generic diagnostics.
   Acceptance: The governed current-name inventory drives helpers/controls/methods; aliases canonicalize; registered
     functions resolve first; unknown/non-current calls never fall through to arbitrary Lua globals.
@@ -501,7 +530,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 5 | `LUA-BACKEND-PARITY.2.2` | `done` | Core source parser accepts 21 shipped and 102 rule-only corpus specs. |
 | 6 | `LUA-BACKEND-PARITY.2.3` | `done` | Validator/strict syntax and exact 239-name collision inventory pass. |
 | 7 | `LUA-BACKEND-PARITY.2.4` | `done` | Spec-produced function nodes/projected provenance compose without a raw scanner. |
-| 8 | `LUA-BACKEND-PARITY.3.1` | `active` | Parse action/helper text into typed ActionIR nodes. |
+| 8 | `LUA-BACKEND-PARITY.3.1` | `done` | Typed ActionIR parsing passes 41/41 on PUC Lua and LuaJIT. |
+| 9 | `LUA-BACKEND-PARITY.3.2` | `active` | Resolve current helper/control/method contracts and generic diagnostics. |
 
 ## Initial toolchain evidence (read-only planning audit)
 
@@ -548,3 +578,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.2.2` | `LUA-BACKEND-PARITY.2.2 - parse Lua rule source` | Public typed rule parser, quote/nesting/separator proofs, and validator handoff. |
 | `LUA-BACKEND-PARITY.2.3` | `LUA-BACKEND-PARITY.2.3 - validate Lua source AST` | Stable source/registry/edge/regex/strict checks, exact call-name inventory, and function projection handoff. |
 | `LUA-BACKEND-PARITY.2.4` | `LUA-BACKEND-PARITY.2.4 - project Lua function shells` | Spec-owned nodes, Unicode spans, staged sidecars, no raw scanner, and ActionIR handoff. |
+| `LUA-BACKEND-PARITY.3.1` | `LUA-BACKEND-PARITY.3.1 - parse typed Lua ActionIR` | Structural actions, four values, access/assign/control/chains, generic final blocks, and contract-resolution handoff. |

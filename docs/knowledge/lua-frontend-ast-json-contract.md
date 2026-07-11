@@ -12,7 +12,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, AST, parser, JSON, staged-parsing, provenance, codeblock]
-evidence: "LUA-BACKEND-PARITY.2.1 adds lua/src/linkedspec/spec_ast.lua; .2.2 adds its first source producer; .2.3 adds validation; .2.4 adds function projection. The current full local gate passes 35/35 on PUC Lua and 35/35 on LuaJIT."
+evidence: "LUA-BACKEND-PARITY.2.1 adds lua/src/linkedspec/spec_ast.lua; .2.2 adds its first source producer; .2.3 adds validation; .2.4 adds function projection; .3.1 adds typed ActionIR. The current full local gate passes 41/41 on PUC Lua and 41/41 on LuaJIT."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -31,6 +31,6 @@ Arrays and harrays retain the JSON module's explicit identities. A source codebl
 plain tables cannot masquerade as it. Constructor list inputs must have contiguous one-based integer indexes.
 Unknown modes/body kinds, wrong node collections, ambiguous payload tables, and sparse lists fail explicitly.
 
-Related facts: [[lua-corpus-manifest-io]], [[dart-frontend-ast-json-contract]],
+Related facts: [[lua-corpus-manifest-io]], [[lua-actionir-ast-parser]], [[dart-frontend-ast-json-contract]],
 [[julia-frontend-ast-json-contract]], [[staged-parse-job-annotation-contract]],
 [[text-to-ast-backend-doctrine]].

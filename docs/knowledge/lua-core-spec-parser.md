@@ -13,7 +13,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, parser, AST, source, semicolon, quotes, PUC-Lua, LuaJIT]
-evidence: "LUA-BACKEND-PARITY.2.2 adds lua/src/linkedspec/spec_parser.lua; .2.3 adds validation; .2.4 adds spec-owned function projection. The current local gate passes 35/35 on both runtimes, all 21 shipped specs, and 102 rule-only corpus specs."
+evidence: "LUA-BACKEND-PARITY.2.2 adds lua/src/linkedspec/spec_parser.lua; .2.3 adds validation; .2.4 adds spec-owned function projection; .3.1 adds typed action parsing. The current local gate passes 41/41 on both runtimes, all 21 shipped specs, and 102 rule-only corpus specs."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -34,8 +34,9 @@ line, and the last statement on that line needs no trailing semicolon. The parse
 text. When compact lifecycle fluent calls are normalized into same-line statement code, it inserts `; ` only
 between calls and never after the final call.
 
-Parsing remains separate from validation. `.2.3` now adds public validation/strict syntax; later leaves own
-ActionIR, compilation, runtime, corpus execution, and the exact primary CLI.
+Parsing remains separate from validation. `.2.3` adds public validation/strict syntax, and `.3.1` adds the separate
+typed ActionIR parser seam; later leaves own contract resolution, compilation, runtime, corpus execution, and the
+exact primary CLI.
 
-Related facts: [[lua-frontend-ast-json-contract]], [[canonical-statement-separator-syntax]],
+Related facts: [[lua-frontend-ast-json-contract]], [[lua-actionir-ast-parser]], [[canonical-statement-separator-syntax]],
 [[dart-core-spec-parser]], [[julia-core-spec-parser]], [[text-to-ast-backend-doctrine]].

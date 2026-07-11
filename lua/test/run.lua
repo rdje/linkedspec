@@ -126,7 +126,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "function_projection", "status parity")
+  assert_equal(first.parity, "actionir_ast", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -981,6 +981,155 @@ test("function shell rejects overlapping source spans", function()
   assert_error_contains(function()
     linkedspec.project_user_function_definition_asts(source, json.array({ node, node }))
   end, "function definition spans overlap", "overlapping functions")
+end)
+
+test("ActionIR blocks use newline and same-line semicolon separators", function()
+  local block = linkedspec.parse_action_block(
+    'set(array(results), []); push(array(results), retv)\nreturn(copy(array(results)))'
+  )
+  assert_equal(linkedspec.action_ast.node_type(block), "ActionBlock", "block type")
+  assert_equal(#block.statements, 3, "statement count")
+  assert_equal(block.statements[1].expr.name, "set", "first helper")
+  assert_equal(block.statements[2].expr.name, "push", "same-line second helper")
+  assert_equal(block.statements[3].expr.name, "return", "newline helper")
+  for _, statement in ipairs(block.statements) do
+    assert_equal(statement.drops_value, true, "statement value drop")
+  end
+
+  local newline_only = linkedspec.parse_action_block("first()\nsecond()\nthird()")
+  assert_equal(#newline_only.statements, 3, "newline-only statements")
+  assert_equal(newline_only.statements[3].source, "third()", "no trailing separator")
+
+  local portable_newlines = linkedspec.parse_action_block("first()\r\nsecond()\rthird()")
+  assert_equal(#portable_newlines.statements, 3, "CRLF and CR statements")
+  assert_equal(portable_newlines.statements[2].source, "second()", "CR-delimited statement")
+end)
+
+test("ActionIR parses literals and all four LinkedSpec value kinds", function()
+  local scalar = linkedspec.parse_action_expression("42.5")
+  assert_equal(scalar.kind, "number", "scalar kind")
+  assert_equal(scalar.value, 42.5, "decimal value")
+  assert_equal(linkedspec.parse_action_expression("true").kind, "boolean", "boolean kind")
+  assert_equal(linkedspec.parse_action_expression("undef").kind, "undef", "undef kind")
+
+  local regex = linkedspec.parse_action_expression("/a\\\\sb/i")
+  assert_equal(regex.kind, "regex", "regex kind")
+  assert_equal(regex.pattern, "a\\\\sb", "regex payload")
+  assert_equal(regex.flags, "i", "regex flags")
+
+  local single_quoted = linkedspec.parse_action_expression([['"|\s']])
+  assert_equal(single_quoted.kind, "string", "single-quoted kind")
+  assert_equal(single_quoted.value, '"|\\s', "single-quoted value")
+  assert_equal(single_quoted.quote, "'", "single-quote provenance")
+  local substr_call = linkedspec.parse_action_expression([[substr(value, '"|\s', "", go)]])
+  assert_equal(substr_call.kind, "call", "single-quoted helper call")
+  assert_equal(substr_call.args[2].value.value, '"|\\s', "single-quoted helper argument")
+
+  local array = linkedspec.parse_action_expression("[value, true, []]")
+  assert_equal(array.kind, "array_literal", "array kind")
+  assert_equal(#array.items, 3, "array item count")
+  local harray = linkedspec.parse_action_expression('{ key : value, "fixed" : [value] }')
+  assert_equal(harray.kind, "hash_literal", "harray kind")
+  assert_equal(#harray.entries, 2, "harray entry count")
+  local codeblock = linkedspec.parse_action_expression('{ set(x, "a"); x }')
+  assert_equal(codeblock.kind, "block_value", "codeblock kind")
+  assert_equal(#codeblock.block.statements, 2, "codeblock statement count")
+end)
+
+test("ActionIR parses access assignments nested calls and keyword arguments", function()
+  local access = linkedspec.parse_action_expression('foo["a"][i][0]')
+  assert_equal(access.kind, "nested_access", "nested access kind")
+  assert_equal(access.base, "foo", "nested access base")
+  assert_equal(#access.segments, 3, "nested access depth")
+  assert_equal(access.segments[1].kind, "key", "key segment")
+  assert_equal(access.segments[2].kind, "index", "index segment")
+
+  assert_equal(linkedspec.parse_action_expression("items = [value]").kind, "assign_scalar", "scalar assignment")
+  assert_equal(linkedspec.parse_action_expression("items += value").kind, "assign_array_append", "append assignment")
+  assert_equal(linkedspec.parse_action_expression("meta[key] = { stage : value }").kind, "assign_hash_index", "hash assignment")
+  assert_equal(
+    linkedspec.parse_action_expression('payload["children"][0]["name"] = value').kind,
+    "assign_nested_access",
+    "nested assignment"
+  )
+
+  local nested_call = linkedspec.parse_action_expression("array(items = [value], copy(array(items)))")
+  assert_equal(nested_call.kind, "call", "nested call kind")
+  assert_equal(nested_call.args[1].value.kind, "assign_scalar", "assignment argument")
+  assert_equal(nested_call.args[2].value.kind, "call", "nested call argument")
+  local assignment_arg = linkedspec.parse_action_expression("helper(value, option=true)")
+  assert_equal(assignment_arg.args[2].argument_kind, "positional", "assignment argument role")
+  assert_equal(assignment_arg.args[2].value.kind, "assign_scalar", "assignment argument value")
+  local keyword = linkedspec.action_ast.keyword_argument("option", assignment_arg.args[1].value)
+  assert_equal(linkedspec.action_ast.node_type(keyword), "ActionArgument", "typed keyword argument")
+  assert_equal(keyword.argument_kind, "keyword", "keyword constructor role")
+  assert_equal(keyword.name, "option", "keyword constructor name")
+end)
+
+test("ActionIR final codeblock syntax is generic and structurally equivalent", function()
+  local trailing = linkedspec.parse_action_expression("func_helper_method(value) { return(value) }")
+  local explicit = linkedspec.parse_action_expression("func_helper_method(value, { return(value) })")
+  assert_equal(trailing.kind, "call", "trailing helper kind")
+  assert_equal(trailing.trailing_block_arg, true, "trailing helper marker")
+  assert_equal(#trailing.args, #explicit.args, "equivalent argument count")
+  assert_equal(trailing.args[#trailing.args].value.kind, "block_value", "trailing final argument")
+  assert_equal(explicit.args[#explicit.args].value.kind, "block_value", "explicit final argument")
+  assert_equal(
+    trailing.args[#trailing.args].value.block.statements[1].expr.name,
+    explicit.args[#explicit.args].value.block.statements[1].expr.name,
+    "equivalent codeblock body"
+  )
+
+  local receiver = linkedspec.parse_action_expression('"x".func_helper_method() { return(value) }')
+  local explicit_receiver = linkedspec.parse_action_expression('"x".func_helper_method({ return(value) })')
+  assert_equal(receiver.kind, "fluent_chain", "receiver chain kind")
+  assert_equal(receiver.calls[1].method, "func_helper_method", "generic receiver method")
+  assert_equal(receiver.calls[1].receiver_trailing_block_arg, true, "receiver trailing marker")
+  assert_equal(receiver.calls[1].args[1].value.kind, "block_value", "receiver final argument")
+  assert_equal(#receiver.calls[1].args, #explicit_receiver.calls[1].args, "receiver equivalent argument count")
+  assert_equal(explicit_receiver.calls[1].args[1].value.kind, "block_value", "explicit receiver final argument")
+
+  local chain = linkedspec.parse_action_expression('(items += value).count()')
+  assert_equal(chain.receiver.kind, "assign_array_append", "assignment receiver")
+  assert_equal(chain.calls[1].method, "count", "receiver method")
+end)
+
+test("ActionIR parses attached controls and preserves unsupported structure", function()
+  local branches = linkedspec.parse_action_block(
+    'if(false) { set(out, "bad") } elseif(true) { set(out, "yes") } else { set(out, "no") }'
+  )
+  assert_equal(#branches.statements, 3, "branch count")
+  assert_equal(branches.statements[1].expr.kind, "control_if", "if kind")
+  assert_equal(branches.statements[2].expr.branch_role, "elseif", "elseif role")
+  assert_equal(branches.statements[3].expr.kind, "control_else", "else kind")
+
+  local while_node = linkedspec.parse_action_expression("while(flag) { next() }")
+  assert_equal(while_node.kind, "control_while", "while kind")
+  local switch_node = linkedspec.parse_action_expression(
+    'switch(kind) { case("a") { return("hit") } default { return("miss") } }'
+  )
+  assert_equal(switch_node.kind, "control_switch", "switch kind")
+  assert_equal(#switch_node.cases, 1, "case count")
+  assert_equal(switch_node.default.kind, "control_default", "default kind")
+
+  local raw = linkedspec.parse_action_expression("@invalid")
+  assert_equal(raw.kind, "raw_perl", "raw structural kind")
+  assert_equal(raw.reason, "unsupported_expression", "raw reason")
+end)
+
+test("ActionIR uses Unicode character spans and typed JSON projection", function()
+  local chain = linkedspec.parse_action_expression('"é".trim()')
+  assert_equal(chain.source_span.start, 0, "Unicode chain start")
+  assert_equal(chain.source_span["end"], 10, "Unicode chain end")
+  assert_equal(chain.receiver.source_span["end"], 3, "Unicode receiver end")
+  local projected = linkedspec.action_ast.to_json(chain)
+  assert_equal(json.kind(projected), "harray", "projected node kind")
+  assert_equal(json.kind(projected.calls), "array", "projected list kind")
+  assert_equal(json.decode(json.encode(projected)).kind, "fluent_chain", "projected JSON round-trip")
+
+  assert_error_contains(function()
+    linkedspec.parse_action_expression(string.char(0xC3))
+  end, "not valid UTF-8", "invalid ActionIR UTF-8")
 end)
 
 io.stdout:write("1..", total, "\n")
