@@ -12,7 +12,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [julia, codegen, source-emitter, unicode, utf8, embedding, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.3.4.1 adds julia/src/source/SourceEmitter.jl and julia/test/source_emitter_test.jl. Public compatibility/v1 emitters reconstruct effective ordered AST state, encode canonical JSON as strict UTF-8 bytes represented by ASCII hex, and emit a native module with metadata, direct execution, traced execution, and typed errors. An 18-assertion test loads valid/corrupt modules in caller-owned temporary projects with private writable depots and compiled modules disabled. .3.4.2 subsequently adds exact family-plan/direct execution; only .3.4.3 manifest admission remains before promotion."
+evidence: "FUTURE-PARITY-BACKLOG.3.4.1 adds julia/src/source/SourceEmitter.jl and julia/test/source_emitter_test.jl. Public compatibility/v1 emitters reconstruct effective ordered AST state, encode canonical JSON as strict UTF-8 bytes represented by ASCII hex, and emit a native module with metadata, direct execution, traced execution, and typed errors. An 18-assertion test loads valid/corrupt modules in caller-owned temporary projects with private writable depots and compiled modules disabled. .3.4.2 adds exact family-plan/direct execution and .3.4.3 adds exact accepted-subset admission; Julia passes at census 60/0/0."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia julia --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/source_emitter_test.jl\")'"
 ---
 
@@ -37,9 +37,8 @@ project, launches fresh Julia processes offline with compiled modules disabled, 
 layer over the already-instantiated read layer, verifies Unicode result/metadata and stable failures, and deletes
 the entire project/depot with the owning temporary directory. Native interpreter and CLI behavior are unchanged.
 
-Julia remains the sole generated-source capability gap. Exact ten-family plan/direct execution is now implemented
-under `FUTURE-PARITY-BACKLOG.3.4.2`; `.3.4.3` must add interpreter-first manifest-backed admission before Julia can
-move from gap to pass.
+Exact ten-family plan/direct execution and interpreter-first manifest-backed admission are implemented under
+`FUTURE-PARITY-BACKLOG.3.4.2` and `.3.4.3`. Julia generated source is pass at census 60/0/0.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[julia-backend-interpreter-first-plan]],
 [[julia-compiled-spec-state]], [[julia-full-corpus-gate]], [[native-in-memory-backend-contract]],

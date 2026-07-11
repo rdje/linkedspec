@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.4.3 — generated admission must remain interpreter-first and contract-owned):
+  Read the eight names from contract v1 instead of duplicating a Julia list, retain exact manifest membership, and
+  compare checked-in expected values through the ordinary/staged native frontend before emitting anything. Julia's
+  fixed generated module name can still share one host process by including each source under a separate parent
+  module; Julia 1.12 world-age rules require fetching/calling those freshly defined bindings through
+  `invokelatest`. Checker-lock count, contract access, comparison order, v1 emission, independent namespaced load,
+  trace/source identity, recursive cleanup, and no skip before promoting. Promotion is an explicit manifest and
+  contract state change only after focused and complete package/CLI/corpus gates pass.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.4.2 — generated plans must be executable control state):
   Julia's compiled rule carries the same neutral classifier inputs as Dart/Rust: mode, repetition/AND flags,
   regex/action-edge counts, and blind edges. Validate arbitrary string rows before converting them into a trusted

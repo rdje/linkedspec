@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.4.3 — admit generated Julia source
+
+Added a recurring Julia admission test that reads the exact eight-case accepted subset from executable
+generated-source contract v1 and verifies every name remains in the 105-case manifest. Each fixture parses through
+the ordinary or staged-function frontend, compiles, and equals its checked-in expected value through the native
+interpreter before contract-v1 source emission.
+
+One caller-owned offline project loads the eight emitted modules in separate Julia namespaces and compares exact
+direct values, contract/version/source-identity metadata, and ordered plans. It also locks the three portable trace
+roles and source identity, then recursively deletes the project/private depot. Contract checking now owns the Julia
+test path and enforces the eight count, contract-list consumption, interpreter-first comparison, v1 emission,
+independent include, trace/identity, cleanup, and absence of a skip marker.
+
+Focused admission/family/scaffold proof passes 13+27+18. The complete package gate passes 1,168 assertions, exact
+61x2 CLI conformance, and 105/105 corpus. Promoted Julia generated source from gap to pass in the contract and
+capability manifest; census is now 60 pass / zero partial / zero gap. Closed `.3.4`; exact four-backend closeout
+`.3.5` follows.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.4.2 — add Julia generated family execution
 
 Added Julia's exact contract-v1 generated plan surface: public typed ten-family values, ordered label/family rows,

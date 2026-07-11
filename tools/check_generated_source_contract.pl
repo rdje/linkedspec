@@ -219,7 +219,7 @@ for my $index (0 .. $#{$contract->{behavior_cases}}) {
 
 require_keys(
  'corpus_proof', $contract->{corpus_proof},
- [qw(interpreter_manifest interpreter_case_count proof_order accepted_subset dart_accepted_subset_test
+ [qw(interpreter_manifest interpreter_case_count proof_order accepted_subset dart_accepted_subset_test julia_accepted_subset_test
      rust_breadth_target rust_full_manifest_test new_backend_admission_target)], []
 );
 my $manifest_path = repo_path('corpus_proof.interpreter_manifest', $contract->{corpus_proof}{interpreter_manifest});
@@ -267,6 +267,30 @@ fail('Dart accepted-subset test must prove portable trace roles and source ident
 fail('Dart accepted-subset test must clean its caller-owned package recursively')
  unless $dart_accepted_subset_text =~ /scratch\.deleteSync\(recursive:\s*true\)/;
 fail('Dart accepted-subset test must not be skipped') if $dart_accepted_subset_text =~ /skip\s*:/;
+my $julia_accepted_subset_test = repo_path(
+ 'corpus_proof.julia_accepted_subset_test', $contract->{corpus_proof}{julia_accepted_subset_test}
+);
+fail('corpus_proof.julia_accepted_subset_test must be a regular file') unless -f $julia_accepted_subset_test;
+my $julia_accepted_subset_text = decode('UTF-8', read_bytes($julia_accepted_subset_test), FB_CROAK | LEAVE_SRC);
+fail('Julia accepted-subset test must lock the eight-case count')
+ unless $julia_accepted_subset_text =~ /JULIA_GENERATED_SOURCE_ACCEPTED_SUBSET_COUNT\s*=\s*8/;
+fail('Julia accepted-subset test must consume the executable contract list')
+ unless $julia_accepted_subset_text =~ /generated_source_contract\.json/ &&
+        $julia_accepted_subset_text =~ /\["accepted_subset"\]/;
+fail('Julia accepted-subset test must compare the interpreter before emission')
+ unless $julia_accepted_subset_text =~ /\@test\s+interpreter_value\s*==\s*fixture\.expected_json/;
+fail('Julia accepted-subset test must emit contract-v1 source')
+ unless $julia_accepted_subset_text =~ /emit_julia_source_v1\(compiled, identity\)/;
+fail('Julia accepted-subset test must independently include generated modules')
+ unless $julia_accepted_subset_text =~ /Base\.include\(host, String\(case\["path"\]\)\)/;
+fail('Julia accepted-subset test must prove portable trace roles and source identity')
+ unless $julia_accepted_subset_text =~ /generated_rule_enter/ &&
+        $julia_accepted_subset_text =~ /generated_family_decision/ &&
+        $julia_accepted_subset_text =~ /generated_rule_exit/ &&
+        $julia_accepted_subset_text =~ m{generated-source/julia-subset};
+fail('Julia accepted-subset test must clean its caller-owned project recursively')
+ unless $julia_accepted_subset_text =~ /rm\(scratch;\s*recursive\s*=\s*true,\s*force\s*=\s*true\)/;
+fail('Julia accepted-subset test must not be skipped') if $julia_accepted_subset_text =~ /skip\s*=/;
 my $rust_full_manifest_test = repo_path(
  'corpus_proof.rust_full_manifest_test', $contract->{corpus_proof}{rust_full_manifest_test}
 );
@@ -283,7 +307,7 @@ fail('corpus_proof.new_backend_admission_target has an unexpected value')
  unless $contract->{corpus_proof}{new_backend_admission_target} eq 'accepted_subset_plus_all_generated_families';
 
 require_keys('current_backend_states', $contract->{current_backend_states}, [qw(perl rust dart julia)], []);
-my %expected_state = (perl => 'pass', rust => 'pass', dart => 'pass', julia => 'gap');
+my %expected_state = (perl => 'pass', rust => 'pass', dart => 'pass', julia => 'pass');
 fail("current_backend_states.$_ must be $expected_state{$_}")
  for grep { $contract->{current_backend_states}{$_} ne $expected_state{$_} } keys %expected_state;
 my $capability_manifest = read_json(
@@ -298,5 +322,5 @@ for my $backend (sort keys %expected_state) {
   unless defined($actual) && $actual eq $expected_state{$backend};
 }
 
-printf "generated-source-contract: OK (v1; %d families; %d behavior case; Dart %d/105 + strict Rust 105/105; states 59/0/1)\n",
+printf "generated-source-contract: OK (v1; %d families; %d behavior case; Dart/Julia %d/105 + strict Rust 105/105; states 60/0/0)\n",
  scalar(@families), scalar(@{$contract->{behavior_cases}}), scalar(@subset);

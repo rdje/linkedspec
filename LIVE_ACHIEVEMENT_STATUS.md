@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.3.4.3 — admit generated Julia source**
+  (DONE — exact accepted-subset proof promotes Julia; census 60/0/0; final `.3.5` next).
+
+  **Admission:** The recurring test consumes the contract's exact eight names, proves native interpreter expected
+  values first, then loads eight emitted modules in separate namespaces in one isolated offline host with exact
+  result/metadata/plan/trace identity. Contract checking locks proof order, no-skip, and recursive cleanup.
+
+  **Complete proof:** Focused 13+27+18; Julia package 1,168 assertions; 61x2 CLI; 105/105 corpus; contract/capability
+  checkers 60/0/0. Julia moves gap→pass and `.3.4` closes. Exact four-backend closeout `.3.5` follows.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.4.2 — add Julia generated family execution**
   (DONE — exact ten-family direct plan/trace passes; Julia manifest admission `.3.4.3` next).
 

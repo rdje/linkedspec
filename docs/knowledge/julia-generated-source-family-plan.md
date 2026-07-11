@@ -12,6 +12,7 @@ date: 2026-07-11
 status: current
 tags: [julia, generated-source, family-plan, direct-execution, trace, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.3.4.2 adds GeneratedRuleFamily/GeneratedPlanRow, compiled-state classification, exact validation, generated runtime context, and portable trace in julia/src/source/SourceEmitter.jl and julia/src/runtime/Interpreter.jl. The 27-assertion family proof in julia/test/source_emitter_test.jl compares all ten roots with the native interpreter, rejects four plan mutations, and independently loads one all-family generated module. Package proof is 1,155 assertions."
+evidence_update_2026_07_11_admission: "FUTURE-PARITY-BACKLOG.3.4.3 reads the exact eight-case contract subset, proves checked-in values through ordinary/staged native interpretation before emission, independently loads eight modules in separate namespaces with exact metadata/plans/trace identity, and passes complete 1,168/61x2/105 gates. Julia promotes to pass at census 60/0/0."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot:$HOME/.julia julia --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/source_emitter_test.jl\")'"
 ---
 
@@ -31,7 +32,8 @@ all ten root families plus their children. The focused test first compares ten g
 native interpreter results, then loads one emitted module in a fresh caller-owned offline project and repeats all
 ten executions with exact plan and trace checks. Caller project/depot state is recursively deleted.
 
-Julia remains classified gap only because contract-sourced manifest admission is owned by active `.3.4.3`.
+Julia's contract-sourced manifest admission is complete; generated Julia source is classified pass at census
+60/0/0. Final cross-backend closeout is owned by `.3.5`.
 
 Related facts: [[julia-generated-source-scaffold]], [[rust-generated-source-family-plan]],
 [[dart-generated-source-deferred]], [[generated-source-parity-audit]], [[julia-compiled-spec-state]],

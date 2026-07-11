@@ -170,8 +170,8 @@ The scaffold proof runs valid and deliberately corrupted generated modules in
 fresh processes from a caller-owned temporary project. Compiled modules are
 disabled, the writable depot layer is private to the test, execution and typed
 failures are exact, and the owned project/depot are deleted afterward. Julia
-remains the only generated-source capability gap until its ten-family direct
-plan and manifest-backed admission land.
+was the only generated-source capability gap before its family and manifest
+proofs landed.
 
 Julia's plan/direct layer is now implemented. `GeneratedRuleFamily` names the
 same ten families as the neutral contract, while `GeneratedPlanRow` carries
@@ -187,8 +187,16 @@ choice from compiled structure. Generated traced execution adds
 `generated_rule_enter`, `generated_family_decision`, and
 `generated_rule_exit` with source/rule/family identity beside the native Julia
 trace. One emitted module independently executes all ten families against
-native interpreter values in a caller-owned offline host. Julia remains a gap
-only because the contract-sourced manifest admission is still active work.
+native interpreter values in a caller-owned offline host.
+
+Julia admission consumes the contract's exact eight-case list. Every ordinary
+or staged-function fixture equals its checked-in interpreter value before
+emission. One fresh offline host loads the eight modules in separate namespaces
+and checks exact values, metadata, ordered plans, trace roles, and source
+identity before recursive cleanup. Contract checking locks the proof path,
+count, ordering, independent load, tracing, cleanup, and absence of skips.
+Julia generated source is admitted pass; all four implemented backends now pass
+at census 60/0/0.
 
 ## Why this matters
 

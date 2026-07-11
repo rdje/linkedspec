@@ -42,7 +42,7 @@ reverify: "perl tools/check_capability_conformance.pl && rg -n 'FUTURE-PARITY-BA
 `capability_conformance/manifest.json` is the current user-observable capability census. The checker validates the
 schema, exact backend set, evidence paths, status vocabulary, unique ids, gap ownership, and explicit legacy/future
 exclusions. After Dart generated-source admission, its 15 rows and 60 backend states classify
-59 pass, zero partial, and one gap.
+60 pass, zero partial, and zero gaps.
 
 The audit distinguishes implementation gaps from proof gaps:
 
@@ -55,11 +55,11 @@ The audit distinguishes implementation gaps from proof gaps:
   root contract directly; exact admission is closed under `.1.6.4`;
 - Perl, Rust, Dart, and Julia propagate a native emitter through frontend/compiler/function-shell/staged/runtime
   phases; Dart's direct routed/quiet/failure proof closes `.1.6.5`;
-- generated source remains top-level `.3`: Perl, Rust, and Dart pass; Rust's strict full-manifest gate is 105/105,
-  Dart's exact accepted subset is 8/105 plus all ten families, and Julia remains the sole gap.
+- generated source remains top-level `.3`: Perl, Rust, Dart, and Julia pass; Rust's strict full-manifest gate is
+  105/105, while Dart and Julia each prove the exact accepted 8/105 subset plus all ten families.
 
 `.1.6.6` closes non-codegen capability parity after proving the matrix has no unowned partial/gap state. Active
-`.3` owns every remaining generated-source state. Deprecated Perl plugins and not-yet-current general parse jobs,
+`.3.5` owns exact final generated-source closeout. Deprecated Perl plugins and not-yet-current general parse jobs,
 semantic introspection/MCP, generic final-codeblock behavior, and Lua are explicit exclusions/future owners, not
 omitted rows.
 
