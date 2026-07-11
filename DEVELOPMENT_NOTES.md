@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.3 — a new backend inherits the completed contract, not an old milestone):
+  Lua planning starts after the four-backend census reaches 60/0/0, so its task tree must include every admitted
+  native API, exact CLI, capability, staged/runtime/corpus, value-kind/block-syntax, and generated-source role from
+  the beginning. Treat PUC Lua 5.4 as primary and LuaJIT as compatibility because their language semantics differ.
+  Installed LPeg is only a candidate mechanism; prove regex behavior against neutral match fixtures. With no
+  LuaRocks/Busted/lint/formatter installed, lock repository-owned package/test/cache policy before writing code.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.5 — close capabilities from executable evidence, then activate successors):
   Final admission should not invent another implementation layer. Recheck the executable 60/0/0 contract/census,
   every backend's focused proof, and the immediately adjacent complete gates; then align public/durable status in

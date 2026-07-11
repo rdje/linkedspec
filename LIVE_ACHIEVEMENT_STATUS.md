@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.3 — scope Lua backend parity plan**
+  (DONE — complete Lua parity tree exists; delegated toolchain/layout `.1.1` next).
+
+  **Preflight:** PUC Lua 5.4.8, LuaJIT 2.1, and LPeg on both are installed. LuaRocks, Busted, Luacheck, and StyLua
+  are absent. Lua 5.4 is primary; LuaJIT is secondary; regex provider remains evidence-driven.
+
+  **Plan:** Native in-memory API, exact CLI, four values/generic final blocks, frontend/ActionIR/compiler/runtime,
+  staged/loading/capabilities, 105 corpus, generated-source v1, docs/gates, and cleanup are split before code.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.5 — close generated-source parity**
   (DONE — exact four-backend contract is 60/0/0; generated-source `.3` closes; Lua plan `.1.3` next).
 

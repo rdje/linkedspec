@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.5` — closed exact four-backend generated-source parity.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.3.4.3` — admitted generated Julia source and closed `.3.4`.
-- recent_context: Generated-source `.3` is closed at census 60/0/0. Focused Perl 69, Rust 5/5, Dart 6/6, and
-  Julia 58/58 pass beside adjacent complete gates. Over 1.23 GB reproducible caches were removed. Lua planning
-  `.1.3` is active and inherits complete native API, exact CLI, capability, runtime/corpus, and codegen obligations.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.3` — created the dedicated complete Lua parity plan.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.3.5` — closed exact four-backend generated-source parity at 60/0/0.
+- recent_context: PUC Lua 5.4.8 primary, LuaJIT 2.1 secondary, and LPeg are installed; LuaRocks/Busted/Luacheck/
+  StyLua are absent. `LUA-BACKEND-PARITY.md` splits native API, exact CLI, four values/generic blocks, frontend/
+  ActionIR/runtime/staging, 105 corpus, capabilities, and codegen. No Lua code exists; delegated `.1.1` is active.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.3.5 - close generated-source parity`; previous committed HEAD is
-  `5214109b FUTURE-PARITY-BACKLOG.3.4.3 - admit generated Julia source`.
+  `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan`; previous committed HEAD is
+  `f6b04abf FUTURE-PARITY-BACKLOG.3.5 - close generated-source parity`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.1.3`; Lua backend parity planning is active.
-- next_action: Knowledge-Map-first audit installed Lua toolchain/package/testing choices and split a dedicated
-  Lua backend parity task tree covering native in-memory API, exact primary CLI, frontend/ActionIR/compiler/runtime,
-  staged functions, diagnostics/trace, 105-case corpus, generated-source v1, docs, and local gates before code.
+- active_work_unit: `LUA-BACKEND-PARITY.1.1`; Lua toolchain/package-layout policy is active.
+- next_action: Reverify exact runtime/tool versions and decide repository-owned dependency/test/module-path/cache
+  policy, executable/corpus-runner paths, PUC Lua primary versus LuaJIT secondary gates, and regex-provider decision
+  ownership; update the plan/KM/docs without adding backend source code.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

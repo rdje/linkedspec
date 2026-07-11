@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.3 — scope Lua backend parity plan
+
+Created `docs/tasks/LUA-BACKEND-PARITY.md` as the complete third-backend rollout plan before implementation code.
+Read-only preflight records PUC Lua 5.4.8 and LuaJIT 2.1, with LPeg loadable on both; LuaRocks, Busted, Luacheck,
+and StyLua are absent. PUC Lua 5.4 is the primary conformance runtime and LuaJIT is a secondary compatibility leg.
+LPeg availability is not treated as proof of neutral regex semantics.
+
+Split the Lua work into foundation/harness/corpus IO, source frontend, typed ActionIR/contracts/compiled state,
+matching/runtime/helper/diagnostic/trace, staged functions/native loading/capabilities, 105-case corpus, exact primary
+CLI, and generated-source v1/admission. The plan explicitly inherits native in-memory embedding, `linkedspec-lua`
+with the identical 61-case interface, scalar/array/harray/codeblock values, generic final-codeblock equivalence,
+newline/semicolon and quote semantics, strict UTF-8 boundaries, full capability expansion, exact ten-family
+generated execution, and contract-sourced 8/105 proof. No Lua implementation code changed.
+
+Roadmap, mdBook, Knowledge Map, task index, and live continuity now point to `LUA-BACKEND-PARITY.1.1` for exact
+runtime/tooling/package/test/cache policy before the scaffold.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.5 — close generated-source parity
 
 Closed the generated-source lane without behavior changes. Executable contract and capability checkers agree that

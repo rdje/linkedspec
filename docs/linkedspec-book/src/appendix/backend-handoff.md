@@ -528,8 +528,15 @@ tries rule-only parsing first and falls back only after a source parse error. Al
 `.6.3` then locks complete manifest validation plus ordered execution at 99/99 exact outputs and enables unbounded
 CLI execution. Full tests pass with 840 assertions and status `runtime-corpus-full`; `.6.4` has since added focused
 optional-SDK verification, and `.7.1` owns public documentation closeout.
-The future Lua backend plan must own its own variant-specific executable name while
-implementing the same cross-variant command interface.
+The Lua backend now has a dedicated full-parity plan. PUC Lua 5.4 is the primary
+conformance runtime; LuaJIT is a secondary compatibility leg. The first active
+leaf locks package/test/cache policy before code. The plan owns a native
+in-process module, `linkedspec-lua` with the exact shared command interface,
+typed source/ActionIR/compiled state, four value kinds, generic final-codeblock
+equivalence, regex/match-state proof, staged functions, diagnostics/trace,
+105/105 corpus, capability expansion, and generated-source v1. Installed LPeg
+is evidence, not automatic proof that Lua regex behavior satisfies the neutral
+contract.
 
 ### Julia Backend Commands, Embedding, and Status
 

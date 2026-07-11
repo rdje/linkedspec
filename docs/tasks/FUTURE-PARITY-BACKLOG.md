@@ -100,14 +100,19 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.2 - scope Julia backend parity plan`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.3`
-  Status: `active`
+  Status: `done`
   Goal: Lua backend parity track - split/scaffold after Julia reaches its scoped parity milestone.
   Acceptance: Create or expand a dedicated Lua backend implementation plan with the same universal
     `.spec`, helper/action AST, runtime, staged parsing, diagnostics, and corpus parity obligations; define an
     idiomatic native Lua module that parses/compiles/executes in memory, direct library-level embedding tests,
     and a distinct Lua-specific executable token that implements ADR `0023`'s exact primary CLI interface.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Created `docs/tasks/LUA-BACKEND-PARITY.md` as the dedicated full-parity Lua
+    plan. It fixes PUC Lua 5.4 primary/LuaJIT secondary roles, records installed Lua/LPeg and absent LuaRocks/test/
+    lint/format tools, and splits module/harness, frontend, ActionIR/compiler, matching/runtime, staged/loading/
+    capabilities, 105-case corpus, exact CLI, generated source, docs/gates, and final admission. Native in-memory
+    APIs, exact 61x2 CLI, four value kinds, generic final-codeblock syntax, newline/semicolon and quote semantics,
+    strict UTF-8 boundaries, 15-capability expansion, and generated-source v1 are explicit. No Lua code changed.
+  Commit: `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.4`
   Status: `done`
@@ -2144,7 +2149,8 @@ before implementation.
 | 77 | `FUTURE-PARITY-BACKLOG.3.4.2` | `done` | Exact ten-family direct plan, four rejections, trace, and isolated matrix pass. |
 | 78 | `FUTURE-PARITY-BACKLOG.3.4.3` | `done` | Exact 8/105 interpreter-first host proof promotes Julia at census 60/0/0. |
 | 79 | `FUTURE-PARITY-BACKLOG.3.5` | `done` | Four focused/complete backend proofs and 60/0/0 close generated-source parity. |
-| 80 | `FUTURE-PARITY-BACKLOG.1.3` | `active` | Scope Lua against the complete capability and identical CLI gates. |
+| 80 | `FUTURE-PARITY-BACKLOG.1.3` | `done` | Dedicated complete Lua parity plan exists; no implementation code changed. |
+| 81 | `LUA-BACKEND-PARITY.1.1` | `active` | Lock Lua runtime/tooling/package/test/cache choices before code. |
 | 65 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
 | 66 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
 | 67 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
@@ -2819,6 +2825,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.4.2` | Exact ten typed families/ordered plan/four rejections; family-authoritative per-rule direct dispatch; portable enter/decision/exit trace; one isolated all-family module; focused 27+18; package 1,155; complete Julia gate; docs/KM/governance/mdBook/cleanup. | PASS. Julia implementation roles are green without promotion; exact contract-sourced manifest admission `.3.4.3` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.4.3` | Exact contract-sourced eight-case interpreter-first subset; eight namespaces in one offline host; exact values/metadata/plans/trace identity; checker path/order/no-skip/cleanup; focused 13+27+18; package 1,168 + 61x2 + 105; capability 60/0/0; docs/KM/governance/mdBook/cleanup. | PASS. Julia promotes gap→pass; `.3.4` closes and exact four-backend admission `.3.5` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.5` | Contract/capability 60/0/0; focused Perl 69, Rust 5/5, Dart 6/6, Julia 58/58; adjacent complete backend gates; docs/KM/governance/mdBook; 1.23+ GB cache cleanup. | PASS. Exact four-backend generated-source parity closes without behavior change; `.3` is done and Lua plan `.1.3` activates. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.3` | Lua/LuaJIT/LPeg/tooling source audit; complete eight-lane Lua task split; native API/exact CLI/four values/generic blocks/105 corpus/capability/codegen obligations; docs/KM/governance/mdBook/cleanup. | PASS. Lua parity is fully planned before code; delegated `LUA-BACKEND-PARITY.1.1` is active. |
 
 ## Commit Log
 
@@ -2892,6 +2899,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.3.4.2` | `FUTURE-PARITY-BACKLOG.3.4.2 - add Julia generated family execution` | Exact ten-family routing, four rejections, portable trace, isolated matrix, and `.3.4.3` handoff. |
 | `FUTURE-PARITY-BACKLOG.3.4.3` | `FUTURE-PARITY-BACKLOG.3.4.3 - admit generated Julia source` | Exact accepted-subset admission, complete Julia gate, 60/0/0 promotion, and `.3.5` handoff. |
 | `FUTURE-PARITY-BACKLOG.3.5` | `FUTURE-PARITY-BACKLOG.3.5 - close generated-source parity` | Exact 60/0/0 four-backend signoff, `.3` closeout, and Lua activation. |
+| `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Complete Lua parity task tree and `.1.1` handoff; no implementation code. |
 
 ## Changelog
 
