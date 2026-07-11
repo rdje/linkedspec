@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2 — typed nodes still need chain ownership):
+  Parsing each marker control into the right AST type is insufficient when semantics span several sibling
+  statements. Marker switch must claim the whole range, evaluate its subject once, track first-match state, and
+  execute one bounded branch; otherwise typed case/default markers are skipped while their ordinary body
+  statements all run. Use nesting depth while selecting ranges so an inner switch cannot terminate or select an
+  outer chain.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1 — close aliases at discovery and execution):
   A statement-control alias needs two aligned seams: known-call validation prevents false unknown-helper
   diagnostics, and the statement-control matcher must canonicalize its behavior before generic helper dispatch.

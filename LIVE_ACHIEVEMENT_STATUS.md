@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2 — align Dart marker control**
+  (DONE — Dart exact control value closed; Julia `.2.2.3.3` active).
+
+  **Implementation:** Marker switch siblings now execute as one nested-depth-aware selectable chain in action and
+  value blocks. The first matching case excludes later cases/default; existing `i`/`elif` aliases stay intact.
+
+  **Proof:** Governed `["elif","case-b"]`, formatting, fatal analyzer, 155/155 package tests, 61/61 shared CLI
+  cases in both environments, and unchanged 99/99 corpus pass.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1 — align Rust marker control**
   (DONE — Rust exact control value closed; Dart `.2.2.3.2` active).
 

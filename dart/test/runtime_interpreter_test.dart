@@ -1634,6 +1634,14 @@ Top::
       'start': 0,
     });
   });
+
+  test('matches the governed marker-control fixture exactly', () {
+    final source = File(
+      '../capability_conformance/fixtures/capability_control_marker_surface.spec',
+    ).readAsStringSync();
+
+    expect(_engine(source).parse('xx').value, ['elif', 'case-b']);
+  });
 }
 
 LinkedSpecRuntimeEngine _engine(

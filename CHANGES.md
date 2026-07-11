@@ -1,6 +1,18 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2 — align Dart marker control
+
+**Marker switch execution:** Dart now groups marker-form `switch`/`case`/`default`/`endcase`/`endswitch` nodes in
+action and value blocks. The subject evaluates once; only the first matching case executes, otherwise default;
+nested marker switches are skipped and executed at their own depth.
+
+**Alias preservation:** Existing typed parser/contract normalization for `i` and `elif` remains unchanged. The
+governed combined fixture now returns exact `["elif","case-b"]` rather than running every branch assignment.
+
+**Proof/frontier:** Formatting, fatal analysis, all 155 package tests, both 61-case CLI environments, and the
+unchanged 99-case corpus pass. Julia marker control `.1.6.1.2.2.3.3` is active.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1 — align Rust marker control
 
 **Alias closure:** Rust validation now recognizes short marker calls `i` and `elif`, and the statement-control gate

@@ -18,18 +18,18 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1` — Rust exact marker-control value matches Perl.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3` — Julia closes exact empty-local-match positions.
-- recent_context: Rust recognizes `i`/`elif` at validation and statement execution; existing switch frames already
-  exclude default after a matched case. Rust passes 137 library, 194 integration, 99 oracle, and 61x2 CLI; Dart/
-  Julia control and all capture children remain before final 105 admission.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2` — Dart exact marker-control value matches Perl.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1` — Rust exact marker-control value matches Perl.
+- recent_context: Dart groups typed marker-switch siblings into a nesting-aware first-match chain while preserving
+  existing `i`/`elif` aliases. Dart passes 155 tests, 61x2 CLI, and 99 corpus; Julia control and all capture
+  children remain before final 105 admission.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1 - align Rust marker control`; previous committed HEAD is
-  `629f2705 FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3 - align Julia empty-match positions`.
+  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2 - align Dart marker control`; previous committed HEAD is
+  `8369e549 FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1 - align Rust marker control`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2.3.2` Dart marker switch selection is active.
-- next_action: align Dart matched-case/default exclusion under the exact governed control fixture while preserving
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2.3.3` Julia marker switch selection is active.
+- next_action: align Julia matched-case/default exclusion under the exact governed control fixture while preserving
   working short aliases and the unchanged 99-case corpus.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;

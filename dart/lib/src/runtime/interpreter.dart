@@ -984,6 +984,15 @@ final class LinkedSpecRuntimeEngine {
       _executeAttachedWhileStatement(expr, context, ruleLabel, currentEdge);
       return _StatementStep(index);
     }
+    if (_isMarkerSwitchStart(expr)) {
+      return _executeMarkerSwitchChainStatement(
+        statements,
+        index,
+        context,
+        ruleLabel,
+        currentEdge,
+      );
+    }
     if (expr is ActionControlSwitchExpr &&
         (expr.cases.isNotEmpty || expr.defaultCase != null)) {
       _executeAttachedSwitchStatement(expr, context, ruleLabel, currentEdge);
@@ -1111,6 +1120,33 @@ final class LinkedSpecRuntimeEngine {
       );
       cursor = step.nextIndex;
     }
+  }
+
+  _StatementStep _executeMarkerSwitchChainStatement(
+    List<ActionStatement> statements,
+    int index,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final selection = _selectMarkerSwitchChain(
+      statements,
+      index,
+      context,
+      ruleLabel,
+      currentEdge,
+    );
+    if (selection.start != null && selection.end != null) {
+      _executeActionStatementRange(
+        statements,
+        selection.start!,
+        selection.end!,
+        context,
+        ruleLabel,
+        currentEdge,
+      );
+    }
+    return _StatementStep(selection.nextIndex);
   }
 
   void _executeAttachedWhileStatement(
@@ -1250,6 +1286,24 @@ final class LinkedSpecRuntimeEngine {
         if (isLast && finalExpressionYields) {
           return const _ValueBlockFlow.returned(null);
         }
+        continue;
+      }
+
+      if (_isMarkerSwitchStart(expr)) {
+        final step = _executeValueMarkerSwitchChainStatement(
+          statements,
+          index,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+        if (step.flow.returned) {
+          return step.flow;
+        }
+        if (isLast && finalExpressionYields) {
+          return const _ValueBlockFlow.returned(null);
+        }
+        index = step.nextIndex;
         continue;
       }
 
@@ -1413,6 +1467,39 @@ final class LinkedSpecRuntimeEngine {
     );
   }
 
+  _ValueStatementStep _executeValueMarkerSwitchChainStatement(
+    List<ActionStatement> statements,
+    int index,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final selection = _selectMarkerSwitchChain(
+      statements,
+      index,
+      context,
+      ruleLabel,
+      currentEdge,
+    );
+    if (selection.start == null || selection.end == null) {
+      return _ValueStatementStep(
+        selection.nextIndex,
+        const _ValueBlockFlow.continued(),
+      );
+    }
+    return _ValueStatementStep(
+      selection.nextIndex,
+      _executeValueStatementRange(
+        statements,
+        selection.start!,
+        selection.end!,
+        context,
+        ruleLabel,
+        currentEdge,
+      ),
+    );
+  }
+
   _ValueBlockFlow _executeValueStatementRange(
     List<ActionStatement> statements,
     int start,
@@ -1429,6 +1516,21 @@ final class LinkedSpecRuntimeEngine {
           expr.branchRole == 'if' &&
           expr.body == null) {
         final step = _executeValueMarkerIfChainStatement(
+          statements,
+          cursor,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+        if (step.flow.returned) {
+          return step.flow;
+        }
+        cursor = step.nextIndex;
+        continue;
+      }
+
+      if (_isMarkerSwitchStart(expr)) {
+        final step = _executeValueMarkerSwitchChainStatement(
           statements,
           cursor,
           context,
@@ -1564,6 +1666,114 @@ final class LinkedSpecRuntimeEngine {
 
   bool _isMarkerIfEnd(ActionExpr expr) {
     return expr is ActionControlMarkerExpr && expr.canonicalKeyword == 'endif';
+  }
+
+  _MarkerSwitchSelection _selectMarkerSwitchChain(
+    List<ActionStatement> statements,
+    int index,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final first = statements[index].expr as ActionControlSwitchExpr;
+    final selector = _evaluateExpression(
+      first.sourceExpr,
+      context,
+      ruleLabel,
+      currentEdge: currentEdge,
+    );
+    int? selectedStart;
+    int? selectedEnd;
+    var selected = false;
+    var branchMatched = false;
+    var depth = 0;
+    var nextIndex = statements.length - 1;
+
+    for (var cursor = index + 1; cursor < statements.length; cursor += 1) {
+      final expr = statements[cursor].expr;
+      if (_isMarkerSwitchStart(expr)) {
+        depth += 1;
+        continue;
+      }
+      if (_isMarkerSwitchEnd(expr)) {
+        if (depth > 0) {
+          depth -= 1;
+          continue;
+        }
+        if (selected && selectedEnd == null) {
+          selectedEnd = cursor;
+        }
+        nextIndex = cursor;
+        break;
+      }
+      if (depth != 0) {
+        continue;
+      }
+      if (expr is ActionControlCaseExpr && expr.body == null) {
+        if (selected && selectedEnd == null) {
+          selectedEnd = cursor;
+        }
+        selected = false;
+        if (!branchMatched) {
+          final candidate = _evaluateSwitchCaseMatch(
+            expr.match,
+            context,
+            ruleLabel,
+            currentEdge,
+          );
+          if (_stringValue(candidate) == _stringValue(selector)) {
+            selectedStart = cursor + 1;
+            selected = true;
+            branchMatched = true;
+          }
+        }
+        continue;
+      }
+      if (expr is ActionControlDefaultExpr && expr.body == null) {
+        if (selected && selectedEnd == null) {
+          selectedEnd = cursor;
+        }
+        selected = false;
+        if (!branchMatched) {
+          selectedStart = cursor + 1;
+          selected = true;
+          branchMatched = true;
+        }
+        continue;
+      }
+      if (_isMarkerCaseEnd(expr)) {
+        if (selected && selectedEnd == null) {
+          selectedEnd = cursor;
+        }
+        selected = false;
+      }
+    }
+
+    if (selected && selectedEnd == null) {
+      selectedEnd = statements.length;
+    }
+    return _MarkerSwitchSelection(
+      start: selectedStart,
+      end: selectedEnd,
+      nextIndex: nextIndex,
+    );
+  }
+
+  bool _isMarkerSwitchStart(ActionExpr expr) {
+    return expr is ActionControlSwitchExpr &&
+        expr.body == null &&
+        expr.cases.isEmpty &&
+        expr.defaultCase == null;
+  }
+
+  bool _isMarkerSwitchEnd(ActionExpr expr) {
+    return expr is ActionControlMarkerExpr &&
+        expr.canonicalKeyword == 'endswitch';
+  }
+
+  bool _isMarkerCaseEnd(ActionExpr expr) {
+    return expr is ActionControlMarkerExpr &&
+        expr.canonicalKeyword == 'endcase';
   }
 
   _ValueBlockFlow _executeValueWhileStatement(
@@ -5603,6 +5813,18 @@ final class _ValueStatementStep {
 
 final class _MarkerIfSelection {
   const _MarkerIfSelection({
+    required this.start,
+    required this.end,
+    required this.nextIndex,
+  });
+
+  final int? start;
+  final int? end;
+  final int nextIndex;
+}
+
+final class _MarkerSwitchSelection {
+  const _MarkerSwitchSelection({
     required this.start,
     required this.end,
     required this.nextIndex,

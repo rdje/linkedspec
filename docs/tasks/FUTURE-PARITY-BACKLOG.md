@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (Rust marker-control closed; Dart `.1.6.1.2.2.3.2` active).
+- Last updated: `2026-07-10` (Dart marker-control closed; Julia `.1.6.1.2.2.3.3` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -833,14 +833,18 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1 - align Rust marker control`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2`
-  Status: `active`
+  Status: `done`
   Goal: Align Dart marker switch selection.
   Acceptance: Preserve alias behavior and exclude default after matching case; exact control fixture passes.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Dart now groups marker-form `switch`/`case`/`default`/`endcase`/`endswitch` statements into one
+    selectable chain in both action and value blocks. It evaluates the subject once, executes only the first
+    matching case or otherwise default, and handles nested marker switches. Existing typed `i`/`elif` alias
+    normalization is unchanged. The governed fixture returns `["elif","case-b"]`; formatting, fatal analysis,
+    all 155 package tests, both 61-case CLI environments, and the unchanged 99-case corpus pass.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2 - align Dart marker control`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3`
-  Status: `pending`
+  Status: `active`
   Goal: Align Julia marker switch selection and close `.3`.
   Acceptance: Preserve alias behavior and exclude default after matching case; exact control fixture passes.
   Verification: `pending`
@@ -1152,8 +1156,8 @@ before implementation.
 | 36 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2` | `done` | Dart exact position fixture, nullable absence, zero-width distinction, 154 tests, 61x2 CLI, and 99 corpus pass. |
 | 37 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3` | `done` | Julia exact position fixture, nullable absence, zero-width distinction, 1,022 assertions, 61x2 CLI, and 99 corpus pass; position parent closes. |
 | 38 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1` | `done` | Rust short aliases and existing switch exclusion return exact `["elif","case-b"]`; 137 library, 194 integration, 99 oracle, and 61x2 CLI pass. |
-| 39 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2` | `active` | Align Dart marker switch selection. |
-| 40 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3` | `pending` | Align Julia marker switch selection. |
+| 39 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2` | `done` | Dart marker switch grouping returns exact `["elif","case-b"]`; 155 tests, 61x2 CLI, and 99 corpus pass. |
+| 40 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3` | `active` | Align Julia marker switch selection. |
 | 41 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1` | `pending` | Complete Rust capture/mark semantics. |
 | 42 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2` | `pending` | Complete Dart capture/mark semantics. |
 | 43 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3` | `pending` | Complete Julia capture/mark semantics. |

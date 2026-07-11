@@ -136,8 +136,9 @@ The mandatory corpus therefore remains at its last green 99-case boundary while
 sources stay governed under `capability_conformance/fixtures/`, and final `.5` admits them only after both strict
 237-name coverage and unchanged 105/105 execution pass on Perl, Rust, Dart, and Julia. Recognition alone never
 counts as user-visible feature parity. Rust, Dart, and Julia now pass the exhaustive pure-value source directly.
-Rust, Dart, and Julia also pass the empty-local-match position source; Rust now passes marker-control as well,
-including short `i`/`elif` aliases and matched-case/default exclusion. Dart/Julia marker-control and capture/mark are next.
+Rust, Dart, and Julia also pass the empty-local-match position source; Rust and Dart now pass marker-control as
+well, including short `i`/`elif` aliases and matched-case/default exclusion. Julia marker-control and capture/mark
+are next.
 All three runtimes preserve the crucial distinction between no local match and a present zero-width match at
 offset zero.
 
