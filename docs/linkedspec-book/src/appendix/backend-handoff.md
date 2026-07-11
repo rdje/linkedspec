@@ -136,8 +136,9 @@ The mandatory corpus therefore remains at its last green 99-case boundary while
 sources stay governed under `capability_conformance/fixtures/`, and final `.5` admits them only after both strict
 237-name coverage and unchanged 105/105 execution pass on Perl, Rust, Dart, and Julia. Recognition alone never
 counts as user-visible feature parity. Rust, Dart, and Julia now pass the exhaustive pure-value source directly.
-Rust also passes the empty-local-match position source; Dart and Julia position alignment is next, followed by
-marker-control and capture/mark.
+Rust and Dart also pass the empty-local-match position source; Julia position alignment is next, followed by
+marker-control and capture/mark. Both repaired runtimes preserve the crucial distinction between no local match
+and a present zero-width match at offset zero.
 
 For example, this portable action-edge grammar deliberately constructs object keys out of
 order:

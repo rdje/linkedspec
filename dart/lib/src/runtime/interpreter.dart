@@ -5335,34 +5335,34 @@ String _expandRegexReplacement(String replacement, Match match) {
   });
 }
 
-int? _matchStartLine(String input, RuntimeRegexMatch? match) {
+int _matchStartLine(String input, RuntimeRegexMatch? match) {
   final codeUnitStart = match?.codeUnitStart;
   if (codeUnitStart == null) {
-    return null;
+    return 1;
   }
   return lineColumnAtCodeUnitOffset(input, codeUnitStart).line;
 }
 
-int? _matchStartColumn(String input, RuntimeRegexMatch? match) {
+int _matchStartColumn(String input, RuntimeRegexMatch? match) {
   final codeUnitStart = match?.codeUnitStart;
   if (codeUnitStart == null) {
-    return null;
+    return 1;
   }
   return lineColumnAtCodeUnitOffset(input, codeUnitStart).column;
 }
 
-int? _matchEndLine(String input, RuntimeRegexMatch? match) {
+int _matchEndLine(String input, RuntimeRegexMatch? match) {
   final codeUnitEnd = match?.codeUnitEnd;
   if (codeUnitEnd == null) {
-    return null;
+    return 1;
   }
   return lineColumnAtCodeUnitOffset(input, codeUnitEnd).line;
 }
 
-int? _matchEndColumn(String input, RuntimeRegexMatch? match) {
+int _matchEndColumn(String input, RuntimeRegexMatch? match) {
   final codeUnitEnd = match?.codeUnitEnd;
   if (codeUnitEnd == null) {
-    return null;
+    return 1;
   }
   return lineColumnAtCodeUnitOffset(input, codeUnitEnd).column;
 }
@@ -6371,7 +6371,7 @@ Object? _namedCapture(
   return match.namedCapture(name);
 }
 
-bool _hasNamedCapture(
+int _hasNamedCapture(
   RuntimeRegexMatch? match,
   List<ActionExpr> args,
   _RuntimeExecutionContext context,
@@ -6379,10 +6379,10 @@ bool _hasNamedCapture(
   _CurrentActionEdge? currentEdge,
 ) {
   if (match == null || args.isEmpty) {
-    return false;
+    return 0;
   }
   final name = _captureName(args.first, context, ruleLabel, currentEdge);
-  return match.named.containsKey(name);
+  return match.named.containsKey(name) ? 1 : 0;
 }
 
 String _captureName(

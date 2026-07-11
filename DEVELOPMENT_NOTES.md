@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2 — project absence at the helper boundary):
+  Dart's nullable match object already preserves the semantic distinction that Rust needed explicit state to add.
+  The defect was projection: diagnostic line/column helpers leaked null and named-presence helpers leaked host
+  booleans. Keep absence in the runtime state model, then map each helper according to the language contract—null
+  values, empty collections, numeric presence, or 1-based diagnostic defaults. Lock a real zero-width match at
+  offset zero so future cleanup cannot replace the nullable state with offset inference.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1 — absence is state, not a sentinel value):
   A `[0,0)` span is both a valid zero-width match and a tempting initialization sentinel. Inferring presence from
   offsets or empty capture collections necessarily collapses those states. Carry explicit presence through the

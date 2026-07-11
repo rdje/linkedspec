@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2 — align Dart empty-match positions
+
+**Exact projection:** Dart already carries local-match absence as a nullable `RuntimeRegexMatch`; helper projection
+now uses that state consistently. Without a local match, capture/length/start/end values are null, group/map
+containers are empty, `match_has` is numeric `0`, and line/column diagnostics default to 1. Entry/local named-
+presence helpers serialize numeric `1`/`0`.
+
+**No sentinel regression:** Added the governed full-value position fixture and an independent zero-width-at-zero
+lock. A real zero-width match remains present with empty capture text, zero length/start/end, and `match_has = 1`.
+
+**Proof/frontier:** The recurring Dart gate passes formatting, fatal analysis, all 154 package tests, both 61-case
+CLI environments, and the unchanged 99-case corpus. Capability/task/live/book/Knowledge Map surfaces advance the
+position lane to Julia `.1.6.1.2.2.2.3`.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1 — align Rust empty-match positions
 
 **Presence model:** Rust match state now carries explicit entry/local presence bits through every saved rule frame

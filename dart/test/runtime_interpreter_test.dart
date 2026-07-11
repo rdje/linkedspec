@@ -770,8 +770,8 @@ Top::
       'match_group_1': '42',
       'entry_named': 'key',
       'match_named': 'key',
-      'entry_has': true,
-      'match_has': true,
+      'entry_has': 1,
+      'match_has': 1,
       'entry_map': {'name': 'key'},
       'match_map': {'name': 'key'},
       'entry_len': 6,
@@ -1574,6 +1574,65 @@ Child:
         'uppercase_each': ['A', 'BC'],
       },
     ]);
+  });
+
+  test('matches the governed exhaustive position helper fixture exactly', () {
+    final source = File(
+      '../capability_conformance/fixtures/capability_position_helper_surface.spec',
+    ).readAsStringSync();
+    final result = _engine(source).parse('ab');
+
+    expect(result.value, [
+      {
+        'cursor_col': 3,
+        'cursor_rest': '',
+        'cursor_rest_len': 0,
+        'entry_col': 1,
+        'entry_end_col': 3,
+        'entry_end_line': 1,
+        'entry_end_pos': 2,
+        'entry_has': 1,
+        'entry_len': 2,
+        'entry_line': 1,
+        'entry_map': {'word': 'ab'},
+        'entry_start_col': 1,
+        'entry_start_line': 1,
+        'entry_start_pos': 0,
+        'input_end_col': 3,
+        'input_end_line': 1,
+        'input_end_pos': 2,
+        'input_len': 2,
+        'input_text': 'ab',
+        'match_col': 1,
+        'match_end_col': 1,
+        'match_end_line': 1,
+        'match_end_pos': null,
+        'match_group': null,
+        'match_groups': <Object?>[],
+        'match_has': 0,
+        'match_len': null,
+        'match_map': <String, Object?>{},
+        'match_named': null,
+        'match_start_col': 1,
+        'match_start_line': 1,
+      },
+    ]);
+  });
+
+  test('keeps a real zero-width local match present at offset zero', () {
+    final engine = _engine(r'''
+Top::
+ /(?<empty>)/
+ E { return(hash("group", match_group(0), "has", match_has(empty), "len", match_len(), "start", match_start_pos(), "end", match_end_pos())) }
+''');
+
+    expect(engine.parse('x').value, {
+      'end': 0,
+      'group': '',
+      'has': 1,
+      'len': 0,
+      'start': 0,
+    });
   });
 }
 
