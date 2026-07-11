@@ -35,9 +35,13 @@ semicolon separator between them.
 The audit fixture sources live under `capability_conformance/fixtures/`. `.1.6.1.2` owns their final timing design,
 oracle admission, strict inventory closure, and unchanged execution on every backend.
 
+This card concerns statement segmentation. A later fixture audit found a distinct emitted-Perl terminator gap after
+newline `endswitch()`; see [[perl-newline-switch-close-terminator-gap]].
+
 ## Links
 
 - Contract: [[terse-statement-separator-contract]].
 - Historical narrow repair: [[terse-literals-calls-separators-access-ground-truth]].
 - Attached-control seam: [[terse-perl-attached-if-statement-split-seam]].
+- Residual emitted-control seam: [[perl-newline-switch-close-terminator-gap]].
 - Owner: [[FUTURE-PARITY-BACKLOG]] `.1.6.1.1`.

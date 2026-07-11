@@ -129,6 +129,13 @@ sequences therefore lower the same way as equivalent same-line statements separa
 semicolons. Newlines inside parentheses, brackets, blocks, quoted strings, regex payloads,
 and comments remain protected by the scanner state appropriate to that construct.
 
+> **Current Perl reference limitation:** marker-style `endswitch()` followed by another
+> statement on the next line is split correctly, but the emitted `do { ... }` switch wrapper
+> currently misses its generated Perl terminator. This is tracked by
+> `FUTURE-PARITY-BACKLOG.1.6.1.2.1`. The language contract is unchanged; a temporary conforming
+> workaround is to put `endswitch(); next_statement(...)` on one physical line, where the
+> semicolon is the normal between-statement separator.
+
 ### CanonicalEvents
 
 `ActionIR::CanonicalEvents` records recognized current helper calls as ActionIR event records. Each event carries a contract ID, resolved arguments, and metadata needed by the later lowering stages. Deleted helper names are not canonicalized into replacement events. Raw-Perl compatibility passthroughs may still be classified for migration reporting, but their descriptor-facing diagnostic labels stay neutral instead of reusing retired helper names.

@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.0 — split control-close terminator residual
+
+**Fixture correction:** In-memory toolbox probes establish the correct capture/mark timing: a three-slot `AND`
+fixture saves the origin after slot zero and reads the completed slice after slot two. The corrected anonymous and
+named families return exact hashes, so their earlier failures were fixture timing rather than backend semantics.
+
+**Residual root cause:** The newline-only combined control fixture now splits correctly, but generated Perl closes
+marker-style `switch` as `} }` and places the following `return` directly after it. The switch wrapper is an
+expression-style `do { ... }` and requires a separator. `RewritePipeline::_lowered_statement_needs_terminator`
+suppresses termination for every lowered statement beginning with `}`, a rule needed by ordinary block closures
+but too broad for `endswitch_flow`.
+
+**Ownership/no-drift:** `.1.6.1.2.1` owns a contract-aware terminator repair and focused Phase 0 locks; `.1.6.1.2.2`
+retains corrected fixture admission and strict four-backend proof. The mdBook records the temporary conforming
+same-line workaround. No parser/compiler/runtime or committed 99-case corpus behavior changes in this audit slice.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.1 — enforce universal newline separators
 
 **Common repair:** `StatementSplit::Core` now consumes every unquoted depth-zero LF, CRLF, or CR as a statement

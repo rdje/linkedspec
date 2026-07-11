@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.0 — split control-close terminator residual**
+  (DONE — audit/split closed; contract-aware repair `.1.6.1.2.1` active).
+
+  **Audit:** Corrected three-slot capture/mark timing returns the exact anonymous and named hashes in memory.
+  Newline-only combined control splits into independent events but emits `} }` directly before `return`.
+
+  **Root cause/ownership:** Marker switch is a Perl `do { ... }` expression requiring termination; generic
+  leading-`}` suppression is too broad. `.2.1` owns precise repair and Phase 0; `.2.2` owns final fixtures and
+  four-backend proof. No runtime or committed 99-case corpus behavior changed in this slice.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.1 — enforce universal newline separators**
   (DONE — common Perl repair closed; strict current-call coverage `.1.6.1.2` active).
 

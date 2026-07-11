@@ -123,6 +123,11 @@ This applies equally to function-style helpers, assignment statements, cursor/ca
 operations, and marker-style control statements. Newlines nested inside parentheses,
 brackets, blocks, quoted strings, or regex payloads remain part of the surrounding statement.
 
+The Perl reference currently has one narrower emission gap: a marker-style `endswitch()`
+followed by another statement on the next line can omit the required host-language terminator
+after the lowered `do { ... }` wrapper. `FUTURE-PARITY-BACKLOG.1.6.1.2.1` owns the repair;
+the newline remains the LinkedSpec statement separator.
+
 ## Control-flow expression forms
 
 LinkedSpec currently supports four portable control-flow families:

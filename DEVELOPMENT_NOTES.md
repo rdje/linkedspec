@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.0 — statement splitting and host termination are separate seams):
+  Once a source newline produces independent canonical events, still inspect the emitted host boundary. Marker
+  `switch` is expression-shaped Perl (`do { ... }`), unlike ordinary statement block closures, so a following
+  statement needs an implicit terminator even though the lowered close begins with `}`. Carry the canonical
+  contract into the decision instead of inferring all semantics from one leading character. Validate capture
+  helpers only at action slots where the intended start and end cursors have actually been reached.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.1 — statement boundaries belong to lexical depth, not statement shape):
   When the language says every physical top-level newline separates statements, do not gate the split on whether
   the accumulated source already parses as one particular call form. Quote/nesting/comment modes determine whether
