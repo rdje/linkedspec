@@ -272,6 +272,11 @@ assertions and 99/99 remains green. `.7.3.2.5` now closes nine direct process fa
 deferred and blocks complete parity because Rust exports it; neutral CLI fixtures and capability census remain
 global `.1.5` and `.1.6` work.
 
+The global pure-helper parity leaf now locks the governed exhaustive source directly. Numeric predicate helpers
+return `1`/`0`, direct literals splice explicit `flat(...)`, and standalone explicit working-array string
+transforms mutate while value/receiver forms remain pure. The current package suite passes 1,020 assertions;
+61/61 shared CLI cases in both environments and the 99/99 corpus remain green.
+
 Library example:
 
 ```julia

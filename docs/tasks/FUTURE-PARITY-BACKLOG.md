@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (Rust/Dart exact pure values closed; Julia `.1.6.1.2.2.1.3` active).
+- Last updated: `2026-07-10` (all exact pure values closed; Rust position `.1.6.1.2.2.2.1` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -712,13 +712,16 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.0 - split executable capability residuals`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1`
-  Status: `active`
+  Status: `done`
   Goal: Align exhaustive pure/aggregate helper values with the Perl reference.
   Children: `.1.6.1.2.2.1.1`, `.1.6.1.2.2.1.2`, `.1.6.1.2.2.1.3`
   Acceptance: Close exact predicate/comparison `1`/`0`, direct-literal `flat` splicing, and statement-form
     `uppercase_each` mutation without weakening typed literal booleans or value-form array transformations.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Perl, Rust, Dart, and Julia now return the same governed exact hash. Each non-reference backend
+    preserves typed booleans and pure value/receiver transforms while projecting the historical predicate family
+    as numeric `1`/`0`, splicing explicit direct-literal `flat`, and mutating explicit working-array transforms
+    only in statement context. Recorded backend-focused suites and unchanged 99-case corpora pass.
+  Commit: closed by `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3 - align Julia pure helper values`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1`
   Status: `done`
@@ -748,14 +751,20 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2 - align Dart pure helper values`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3`
-  Status: `active`
+  Status: `done`
   Goal: Align Julia pure/aggregate helper value semantics under the same exact fixture.
   Acceptance: Match the repaired Rust/Perl/Dart value without backend-specific source or CLI behavior and close `.1`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Julia now returns numeric `1`/`0` for the fixture's string/array/hash/numeric predicates while
+    preserving typed literal booleans; direct array literals reuse explicit array-splice classification; standalone
+    `trim_each`/`lowercase_each`/`uppercase_each(array(name))` mutate the named working array while value/receiver
+    forms remain pure. The governed exact source lock passes. Twelve stale serialized fields across four existing
+    helper tests were aligned without changing regex-match, string-comparison, definedness, logical, or literal
+    boolean results. The offline package entrypoint passes 1,020 assertions, both shared 61-case CLI environments
+    pass, and the unchanged corpus passes 99/99.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3 - align Julia pure helper values`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Align empty local-match position projection on Rust, Dart, and Julia.
   Children: `.1.6.1.2.2.2.1`, `.1.6.1.2.2.2.2`, `.1.6.1.2.2.2.3`
   Acceptance: Match Perl's exact null capture/length/position plus empty-map/list/has and 1-based line/column defaults
@@ -764,7 +773,7 @@ before implementation.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1`
-  Status: `pending`
+  Status: `active`
   Goal: Align Rust empty local-match position projection.
   Acceptance: Exact position fixture value and existing corpus pass.
   Verification: `pending`
@@ -1115,8 +1124,8 @@ before implementation.
 | 31 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.0` | `done` | Corrected fixtures expose 100/105 on every non-reference backend; repair is split. |
 | 32 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1` | `done` | Rust exact pure fixture, 191 integration, and 99 oracle pass. |
 | 33 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2` | `done` | Dart exact pure fixture, 152 tests, 61x2 CLI, and 99 corpus pass. |
-| 34 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3` | `active` | Align Julia pure/aggregate exact values. |
-| 35 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1` | `pending` | Align Rust empty local-match projection. |
+| 34 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3` | `done` | Julia exact pure fixture, 1,020 assertions, 61x2 CLI, and 99 corpus pass; pure parent closes. |
+| 35 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1` | `active` | Align Rust empty local-match projection. |
 | 36 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2` | `pending` | Align Dart empty local-match projection. |
 | 37 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3` | `pending` | Align Julia empty local-match projection. |
 | 38 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1` | `pending` | Align Rust marker aliases/control. |

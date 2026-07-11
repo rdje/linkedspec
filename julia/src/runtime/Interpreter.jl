@@ -1598,15 +1598,18 @@ function _evaluate_runtime_action_expr!(
         end
         return _runtime_copy(_read_runtime_store(context, expr.name))
     elseif expr isa ActionArrayLiteralExpr
-        return Any[
-            _runtime_copy(_evaluate_runtime_action_expr!(
+        result = Any[]
+        for item in expr.items
+            value = _runtime_copy(_evaluate_runtime_action_expr!(
                 engine,
                 item,
                 context,
                 rule_label,
                 current_edge,
-            )) for item in expr.items
-        ]
+            ))
+            _append_runtime_array_argument!(result, item, value)
+        end
+        return result
     elseif expr isa ActionHashLiteralExpr
         result = Dict{String,Any}()
         for entry in expr.entries
@@ -1865,6 +1868,16 @@ function _evaluate_runtime_call!(
                 rule_label,
                 current_edge,
             )
+        return nothing
+    end
+    if statement_context && _execute_runtime_array_string_transform_statement!(
+            engine,
+            helper_name,
+            args,
+            context,
+            rule_label,
+            current_edge,
+        )
         return nothing
     end
 
@@ -2668,18 +2681,23 @@ function _call_runtime_array(engine, args, context, rule_label, current_edge)
             rule_label,
             current_edge,
         ))
-        if _runtime_is_array_splice_argument(arg) && value isa AbstractVector
-            append!(result, _runtime_as_array(value))
-        elseif _runtime_is_array_splice_argument(arg) && value isa AbstractDict
-            for (key, item) in pairs(value)
-                push!(result, _runtime_string(key))
-                push!(result, _runtime_copy(item))
-            end
-        else
-            push!(result, value)
-        end
+        _append_runtime_array_argument!(result, arg, value)
     end
     return result
+end
+
+function _append_runtime_array_argument!(result, expr, value)
+    if _runtime_is_array_splice_argument(expr) && value isa AbstractVector
+        append!(result, _runtime_as_array(value))
+    elseif _runtime_is_array_splice_argument(expr) && value isa AbstractDict
+        for (key, item) in pairs(value)
+            push!(result, _runtime_string(key))
+            push!(result, _runtime_copy(item))
+        end
+    else
+        push!(result, value)
+    end
+    return nothing
 end
 
 function _call_runtime_hash(engine, args, context, rule_label, current_edge)
@@ -3460,6 +3478,37 @@ function _call_runtime_split_from_expressions!(engine, args, context, rule_label
     return _call_runtime_split(values)
 end
 
+function _execute_runtime_array_string_transform_statement!(
+    engine,
+    helper_name,
+    args,
+    context,
+    rule_label,
+    current_edge,
+)
+    if !(helper_name in ("trim_each", "lowercase_each", "uppercase_each")) ||
+            length(args) != 1
+        return false
+    end
+    target = _runtime_array_target_name(only(args))
+    if target === nothing
+        return false
+    end
+    value = _runtime_copy(_evaluate_runtime_action_expr!(
+        engine,
+        only(args),
+        context,
+        rule_label,
+        current_edge,
+    ))
+    transformed = _call_runtime_array_helper(helper_name, Any[value])
+    _record_runtime_rule_local_binding!(context, target)
+    delete!(context.variables, target)
+    delete!(context.hashes, target)
+    context.arrays[target] = _runtime_as_array(transformed)
+    return true
+end
+
 function _runtime_is_array_splice_argument(expr)
     if expr isa ActionCallExpr
         return canonical_action_helper_name(expr.name) in ("flat", "flat_array", "flat_hash")
@@ -3632,7 +3681,10 @@ function _call_runtime_hash_helper(helper_name::String, values::Vector{Any})
         return merged
     elseif helper_name == "has_key"
         hash = _runtime_hash_items(values)
-        return hash !== nothing && length(values) >= 2 && haskey(hash, _runtime_string(values[2]))
+        present = hash !== nothing &&
+            length(values) >= 2 &&
+            haskey(hash, _runtime_string(values[2]))
+        return present ? 1 : 0
     elseif helper_name == "pick_keys"
         hash = _runtime_hash_items(values)
         if hash === nothing
@@ -3732,13 +3784,14 @@ end
 
 function _call_runtime_array_contains(values)
     if length(values) < 2
-        return false
+        return 0
     end
     needle = _runtime_scalar_string(values[2]; null_as_empty = true)
-    return any(
+    present = any(
         item -> _runtime_scalar_string(item; null_as_empty = true) == needle,
         _runtime_array_items(values),
     )
+    return present ? 1 : 0
 end
 
 function _call_runtime_array_index_of(values)
@@ -3852,14 +3905,14 @@ end
 
 function _runtime_string_predicate(values, predicate)
     if length(values) < 2
-        return false
+        return 0
     end
     value = _runtime_scalar_string(values[1])
     needle = _runtime_scalar_string(values[2]; null_as_empty = true)
     if value === nothing || needle === nothing
-        return false
+        return 0
     end
-    return predicate(value, needle)
+    return predicate(value, needle) ? 1 : 0
 end
 
 function _runtime_compile_helper_regex(pattern::String, flags::String)
@@ -4283,19 +4336,21 @@ function _runtime_numeric_comparison(helper_name, values)
     right = _runtime_number(values[2])
     if left === nothing || right === nothing
         return nothing
-    elseif helper_name == "num_eq"
-        return left == right
-    elseif helper_name == "num_ne"
-        return left != right
-    elseif helper_name == "num_gt"
-        return left > right
-    elseif helper_name == "num_ge"
-        return left >= right
-    elseif helper_name == "num_lt"
-        return left < right
-    else
-        return left <= right
     end
+    result = if helper_name == "num_eq"
+        left == right
+    elseif helper_name == "num_ne"
+        left != right
+    elseif helper_name == "num_gt"
+        left > right
+    elseif helper_name == "num_ge"
+        left >= right
+    elseif helper_name == "num_lt"
+        left < right
+    else
+        left <= right
+    end
+    return result ? 1 : 0
 end
 
 function _runtime_numeric_list(value)

@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3 — share splice classification, not fixture branches):
+  Julia's `array(...)` evaluator already distinguished explicit splice expressions, while literal evaluation used
+  a comprehension that necessarily nested every result. Route both through one append helper so AST identity—not
+  returned host shape—controls splicing. Likewise, route only dropped-value calls with an explicit `array(name)`
+  through the statement transform seam. This preserves typed source booleans and receiver/value purity while
+  matching the reference's numeric predicate serialization and mutation boundary.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2 — reuse typed splice and target seams across backends):
   Dart already had explicit array-splice recognition and named-array target extraction, but direct literal and
   statement dispatch did not route through them. Reuse those semantic seams instead of special-casing the fixture:

@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3 — align Julia pure helper values**
+  (DONE — all exact pure values closed; Rust position `.2.2.2.1` active).
+
+  **Implementation:** Numeric `1`/`0` predicate results, shared direct-literal explicit-splice evaluation, and
+  standalone explicit working-array string transforms now match Perl, Rust, and Dart. Typed literal booleans and
+  pure value/receiver forms remain distinct and unchanged.
+
+  **Proof:** The governed exact source, 1,020 package assertions, 61/61 shared CLI cases in default and POSIX
+  environments, and the unchanged 99-case corpus pass. The pure mechanism parent is closed.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2 — align Dart pure helper values**
   (DONE — Dart exact pure values closed; Julia `.2.2.1.3` active).
 

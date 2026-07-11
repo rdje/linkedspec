@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2` — Dart pure helper values match the exact fixture.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1` — Rust pure helper values match the exact fixture.
-- recent_context: Rust and Dart pure predicates now return numeric 1/0, direct literals splice explicit `flat`, and
-  explicit working-array string transforms mutate only in statement context. Dart passes 152 tests, 61x2 CLI, and
-  99 corpus; Julia pure plus all position/control/capture children remain before final 105 admission.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3` — Julia pure helper values match the exact fixture.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2` — Dart pure helper values match the exact fixture.
+- recent_context: Rust, Dart, and Julia pure predicates return numeric 1/0, direct literals splice explicit `flat`,
+  and explicit working-array string transforms mutate only in statement context. The pure parent is closed; all
+  position/control/capture children remain before final 105 admission.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2 - align Dart pure helper values`; previous committed HEAD is
-  `fa1906fa FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1 - align Rust pure helper values`.
+  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3 - align Julia pure helper values`; previous committed HEAD is
+  `8cefc54e FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2 - align Dart pure helper values`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2.1.3` Julia pure-value alignment is active.
-- next_action: align Julia numeric predicate values, direct-literal `flat` splicing, and explicit working-array
-  statement transforms to the same governed fixture without changing typed literals or receiver/value purity.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2.2.1` Rust empty-local-match projection is active.
+- next_action: align Rust's exact empty local-match capture/length/position/map/has and 1-based line/column values
+  after an entry match without inventing a local match; preserve the unchanged 99-case corpus.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
@@ -46,7 +46,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   parser leading-trivia fact, the director's native in-memory multi-backend rationale, four-backend CLI source/
   target audit, public Rust source-emitter export, ADR `0023` exact interface/capability contract, and Julia
   primary CLI argument/loading/execution/canonical JSON/failures/trace, nine direct process families, the precise
-  `runtime-corpus-primary-cli` status, the 1,019/99 proof, and the current Perl/Rust/Dart/Julia narrow trailing-block
+  `runtime-corpus-primary-cli` status, the 1,020/99 proof, and the current Perl/Rust/Dart/Julia narrow trailing-block
   implementations versus the director's four-kind generic final-codeblock model.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
