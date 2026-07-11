@@ -11,7 +11,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, backend, scaffold, embedding, tests, PUC-Lua, LuaJIT]
-evidence: "LUA-BACKEND-PARITY.1.2 adds the native scaffold; .1.3 adds typed JSON/corpus IO; .2.1 adds typed source AST data; .2.2 adds the native rule parser; .2.3 adds validation. The current local gate passes 31/31 on PUC Lua and 31/31 on LuaJIT plus exact primary-command stub and corpus command checks. No runtime/LPeg API is claimed."
+evidence: "LUA-BACKEND-PARITY.1.2 adds the native scaffold; .1.3 adds typed JSON/corpus IO; .2.1-.2.4 add AST, parsing, validation, and function projection. The current local gate passes 35/35 on PUC Lua and 35/35 on LuaJIT plus exact primary-command stub and corpus command checks. No runtime/LPeg API is claimed."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -20,14 +20,14 @@ The repository now owns a native Lua module at `lua/src/linkedspec/init.lua`. Wi
 `backend_status()` call returns a fresh table, so caller mutation cannot alter later status.
 
 `lua/test/run.lua` is a dependency-free assertion driver. `tools/run_lua_local.sh` syntax-checks every Lua source,
-runs thirty-one current module/JSON/corpus/AST/parser/validator/boundary tests on PUC Lua and the same thirty-one on
+runs thirty-five current module/JSON/corpus/AST/frontend/boundary tests on PUC Lua and the same thirty-five on
 LuaJIT, byte-checks the primary command stub, and validates the exact 105-fixture corpus command. It writes no
 cache or global module state.
 
 `lua/bin/linkedspec-lua` remains an executable developer stub and exits `2` with an explicit parser message. The
 corpus runner now performs strict validation and explicitly declines execution. The module exposes native
-rule-level `parse_spec` and `validate_spec`, but the primary command remains unavailable until its later CLI leaf.
-Top-level function projection follows the permissive parser/validator boundary.
+rule-level `parse_spec` / `validate_spec` and spec-owned function-node projection, but the primary command remains
+unavailable until its later CLI leaf.
 
 Related facts: [[lua-toolchain-package-policy]], [[lua-backend-full-parity-plan]],
 [[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]].

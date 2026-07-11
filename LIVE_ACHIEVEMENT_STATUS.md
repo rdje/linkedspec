@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.2.4 — project Lua function shells**
+  (DONE — spec-owned projection closes frontend `.2`; typed ActionIR `.3.1` next).
+
+  **Implementation:** Typed definition/error nodes validate Unicode spans and staged sidecars, normalize paths/job
+  IDs, strip source without moving lines, and compose rule parsing. Body jobs remain undispatched; no raw scanner.
+
+  **Proof:** PUC Lua 35/35 and LuaJIT 35/35 plus process/manifest/239-name checks pass. Unicode, two ordered
+  functions, composition/validation, error/drift/wrapper/overlap, and empty-node no-fallback behavior are locked.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.2.3 — validate Lua source AST**
   (DONE — ordinary/strict validation and exact 239 names pass; function projection `.2.4` next).
 

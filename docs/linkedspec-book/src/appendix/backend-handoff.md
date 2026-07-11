@@ -569,7 +569,9 @@ raw syntax, edge families/targets/slots, and regex structure;
 `validate_spec(spec, { strict_syntax = true })` adds unused-rule rejection. All
 21 shipped and 102 rule-only corpus sources validate on both runtimes. The
 helper/control reservation inventory is exactly the current 239 names and is
-checked equal to Dart/Julia. Function-shell projection `.2.4` is active.
+checked equal to Dart/Julia. Function-shell projection now consumes explicitly
+typed `function_definition` / `function_definition_error` nodes returned by
+`specs/user_function_definition.spec`; Lua does not raw-scan `fn` source.
 
 Lua embedding code can construct the neutral data model directly:
 
@@ -634,6 +636,24 @@ multiple statements on one line; its last statement has no trailing semicolon.
 Parsing remains permissive; callers opt into the separate validator. Validation
 still does not imply compilation, runtime, corpus execution, or primary CLI
 readiness.
+
+The function-shell APIs are:
+
+```lua
+local nodes = linkedspec.definition_nodes_from_user_function_definition_output(output)
+local projection = linkedspec.project_user_function_definition_asts(source, nodes)
+local parsed = linkedspec.parse_spec_with_user_function_definition_asts(source, nodes)
+```
+
+Projection validates identifiers, params/arity, Unicode character-index spans,
+exact source/body slices, staged payload and parse-job metadata, parser/top-rule
+identity, result/failure policy, and diagnostic ownership. It normalizes paths
+to `functions.<index>.body_source`, derives deterministic body-job IDs, replaces
+function-span characters with spaces while preserving CR/LF, then parses the
+remaining rules. `body_ast` remains absent because staged dispatch belongs to a
+later registry leaf. Empty node input never falls back to a raw function
+scanner. This closes the Lua source frontend; typed ActionIR parsing `.3.1` is
+next.
 
 ### Julia Backend Commands, Embedding, and Status
 

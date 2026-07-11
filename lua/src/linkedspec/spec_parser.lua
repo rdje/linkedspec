@@ -10,11 +10,15 @@ local PARSE_ERROR_MT = {
 }
 
 local function parse_fail(line, message)
-  error(setmetatable({ line = line, message = message }, PARSE_ERROR_MT), 0)
+  error(M.new_parse_error(line, message), 0)
 end
 
 function M.is_parse_error(value)
   return getmetatable(value) == PARSE_ERROR_MT
+end
+
+function M.new_parse_error(line, message)
+  return setmetatable({ line = line, message = message }, PARSE_ERROR_MT)
 end
 
 local function trim(value)

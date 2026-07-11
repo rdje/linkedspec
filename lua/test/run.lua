@@ -126,7 +126,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "source_validation", "status parity")
+  assert_equal(first.parity, "function_projection", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -782,6 +782,205 @@ test("source validator accepts every rule-only corpus spec", function()
     end
   end
   assert_equal(validated_count, 102, "validated rule-only corpus count")
+end)
+
+local function utf8_character_count(value)
+  local count = 0
+  local position = 1
+  while position <= #value do
+    local first = value:byte(position)
+    if first <= 0x7F then
+      position = position + 1
+    elseif first <= 0xDF then
+      position = position + 2
+    elseif first <= 0xEF then
+      position = position + 3
+    else
+      position = position + 4
+    end
+    count = count + 1
+  end
+  return count
+end
+
+local function line_at_character_offset(source, offset)
+  local line = 1
+  local character_index = 0
+  local position = 1
+  while position <= #source and character_index < offset do
+    local first = source:byte(position)
+    local width = first <= 0x7F and 1 or (first <= 0xDF and 2 or (first <= 0xEF and 3 or 4))
+    if source:sub(position, position + width - 1) == "\n" then
+      line = line + 1
+    end
+    position = position + width
+    character_index = character_index + 1
+  end
+  return line
+end
+
+local function definition_span(source, start_offset, end_offset)
+  return json.harray({
+    start = start_offset,
+    ["end"] = end_offset,
+    line_start = line_at_character_offset(source, start_offset),
+    line_end = line_at_character_offset(source, end_offset),
+  })
+end
+
+local function definition_node(source, name, params, body_source)
+  local source_byte_start = assert(source:find("fn " .. name, 1, true))
+  local body_byte_start = assert(source:find(body_source, source_byte_start, true))
+  local body_byte_end = body_byte_start + #body_source
+  local source_byte_end = assert(source:find("}", body_byte_end, true)) + 1
+  local source_start = utf8_character_count(source:sub(1, source_byte_start - 1))
+  local source_end = utf8_character_count(source:sub(1, source_byte_end - 1))
+  local body_start = utf8_character_count(source:sub(1, body_byte_start - 1))
+  local body_end = utf8_character_count(source:sub(1, body_byte_end - 1))
+  local source_text = source:sub(source_byte_start, source_byte_end - 1)
+  local source_span = definition_span(source, source_start, source_end)
+  local body_span = definition_span(source, body_start, body_end)
+  local typed_params = json.array(params)
+  local pending_path = json.array({ "functions", "__pending_source_order__", "body_source" })
+  return json.harray({
+    type = "function_definition",
+    kind = "user_function_definition",
+    version = 1,
+    name = name,
+    params = typed_params,
+    arity = #params,
+    source_text = source_text,
+    source_span = source_span,
+    body_source = body_source,
+    body_span = body_span,
+    body_payload = json.harray({
+      kind = "staged_payload",
+      version = 1,
+      node_kind = "function_definition",
+      payload_kind = "function_body",
+      parent_ast_path = pending_path,
+      function_name = name,
+      params = typed_params,
+      arity = #params,
+      text = body_source,
+      source_span = body_span,
+      provenance = json.array({ json.harray({ kind = "source_slice", source_span = body_span }) }),
+    }),
+    body_parse_job = json.harray({
+      kind = "parse_job",
+      version = 1,
+      job_id = "parse_job:function_body:" .. name .. ":actionir-body.spec:action_block",
+      parent_ast_path = pending_path,
+      node_kind = "function_definition",
+      payload_kind = "function_body",
+      function_name = name,
+      params = typed_params,
+      arity = #params,
+      text = body_source,
+      source_span = body_span,
+      parser_spec_id = "actionir-body.spec",
+      top_rule = "action_block",
+      result_policy = "replace_field",
+      result_field = "body_ast",
+      failure_policy = "fail",
+      diagnostic_owner = "function_body",
+    }),
+  })
+end
+
+test("function shell projects spec-owned nodes with Unicode character spans", function()
+  local source = table.concat({
+    "# préface",
+    'fn zero() {return("zero")}',
+    "Top::",
+    " /x/ -> Done { return(zero()) }",
+    "",
+    "Done:",
+    " /[a-z]+/",
+    "",
+    "fn after(value) { return(value) }",
+    "",
+  }, "\n")
+  local nodes = json.array({
+    definition_node(source, "zero", {}, 'return("zero")'),
+    definition_node(source, "after", { "value" }, " return(value) "),
+  })
+
+  local no_scan_ok, no_scan_error = pcall(
+    linkedspec.parse_spec_with_user_function_definition_asts,
+    source,
+    json.array()
+  )
+  assert_equal(no_scan_ok, false, "no raw function scanner")
+  assert_equal(linkedspec.is_spec_parse_error(no_scan_error), true, "no-scan parse error")
+
+  local projection = linkedspec.project_user_function_definition_asts(source, nodes)
+  assert_equal(#projection.functions, 2, "projected function count")
+  assert_equal(projection.functions[1].name, "zero", "first function")
+  assert_equal(projection.functions[2].name, "after", "second function")
+  assert_contains(projection.stripped_source, "# préface", "Unicode source preservation")
+  assert_contains(projection.stripped_source, "Top::", "rule source preservation")
+  assert_equal(projection.stripped_source:find("fn zero", 1, true), nil, "function source stripped")
+  local zero = projection.functions[1]
+  assert_equal(zero.body_parse_job.parent_ast_path[2], "0", "normalized job path")
+  assert_equal(zero.body_payload.parent_ast_path[2], "0", "normalized payload path")
+  assert_contains(zero.body_parse_job.job_id, "functions.0.body_source", "normalized job id")
+  assert_equal(zero.body_parse_job.version, 1, "job version")
+  assert_equal(zero.body_ast, nil, "body AST stays undispatched")
+
+  local parsed = linkedspec.parse_spec_with_user_function_definition_asts(source, nodes)
+  assert_equal(#parsed.functions, 2, "composed functions")
+  assert_equal(#parsed.rules, 2, "composed rules")
+  assert_equal(linkedspec.validate_spec(parsed), nil, "composed validation")
+end)
+
+test("function shell rejects spec-produced error and drifting sidecars", function()
+  local bad_source = "fn bad(value\nTop::\n /x/\n"
+  local error_node = json.harray({
+    type = "function_definition_error",
+    kind = "user_function_definition_error",
+    message = "invalid user function definition",
+    source_text = "fn bad(value",
+    source_span = definition_span(bad_source, 0, 12),
+  })
+  local error_ok, parse_error = pcall(
+    linkedspec.project_user_function_definition_asts,
+    bad_source,
+    json.array({ error_node })
+  )
+  assert_equal(error_ok, false, "function error node rejection")
+  assert_equal(linkedspec.is_spec_parse_error(parse_error), true, "function error parse type")
+  assert_contains(parse_error.message, "parse error at line 1", "function error message")
+
+  local source = 'fn zero() {return("zero")}\nTop::\n /x/\n'
+  local node = definition_node(source, "zero", {}, 'return("zero")')
+  node.body_parse_job.text = 'return("drift")'
+  assert_error_contains(function()
+    linkedspec.project_user_function_definition_asts(source, json.array({ node }))
+  end, "body_parse_job text does not match body_source", "sidecar drift")
+end)
+
+test("function shell normalizes nested spec output shapes", function()
+  local source = 'fn zero() {return("zero")}\nTop::\n /x/\n'
+  local node = definition_node(source, "zero", {}, 'return("zero")')
+  local direct = linkedspec.definition_nodes_from_user_function_definition_output(node)
+  assert_equal(#direct, 1, "direct output shape")
+  local wrapped = linkedspec.definition_nodes_from_user_function_definition_output(
+    json.array({ json.array({ node }) })
+  )
+  assert_equal(#wrapped, 1, "nested output shape")
+  assert_equal(wrapped[1].name, "zero", "nested output node")
+  assert_error_contains(function()
+    linkedspec.definition_nodes_from_user_function_definition_output("invalid")
+  end, "unsupported output shape", "unsupported output")
+end)
+
+test("function shell rejects overlapping source spans", function()
+  local source = 'fn zero() {return("zero")}\nTop::\n /x/\n'
+  local node = definition_node(source, "zero", {}, 'return("zero")')
+  assert_error_contains(function()
+    linkedspec.project_user_function_definition_asts(source, json.array({ node, node }))
+  end, "function definition spans overlap", "overlapping functions")
 end)
 
 io.stdout:write("1..", total, "\n")

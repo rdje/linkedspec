@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.2.3` — source validation/strict mode and 239-name set pass.
-- prior_leaf: `LUA-BACKEND-PARITY.2.2` — typed rule parser passes shipped/rule-only sources.
-- recent_context: `validate_spec` checks tops/duplicates/functions/raw/edges/targets/slots/regex/unused; Lua's 239
-  helper names are checker-equal to Dart/Julia. Syntax, PUC Lua 31/31, 21 shipped + 102 rule-only corpus validations,
-  process/manifest/coverage checks, and LuaJIT 31/31 pass. Empty `Child:` headers now classify correctly.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.2.4` — spec-owned function projection closes source frontend `.2`.
+- prior_leaf: `LUA-BACKEND-PARITY.2.3` — source validation/strict mode and 239-name set pass.
+- recent_context: typed definition/error nodes validate Unicode character spans and staged sidecars, normalize
+  paths/job IDs, strip functions without moving lines, and compose rule parsing/validation with no raw scanner.
+  Syntax/process/manifest/coverage, PUC Lua 35/35, and LuaJIT 35/35 pass; body jobs remain undispatched.
 - latest_commit: this resume block is prepared for commit
-  `LUA-BACKEND-PARITY.2.3 - validate Lua source AST`; previous committed HEAD is
-  `bc29d4b7 LUA-BACKEND-PARITY.2.2 - parse Lua rule source`.
+  `LUA-BACKEND-PARITY.2.4 - project Lua function shells`; previous committed HEAD is
+  `e7419d4e LUA-BACKEND-PARITY.2.3 - validate Lua source AST`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `LUA-BACKEND-PARITY.2.4`; spec-produced top-level function-shell projection is active.
-- next_action: Implement task-owned projection from `specs/user_function_definition.spec` result nodes into typed
-  `FunctionDefinition` records with exact spans/body payload/staged parse job provenance, compose rule parsing,
-  reject malformed/error nodes without raw scanning, and validate the three function-shell corpus sources.
+- active_work_unit: `LUA-BACKEND-PARITY.3.1`; typed ActionIR parsing is active.
+- next_action: Define and parse task-owned action blocks/statements/expressions for calls/args, four value kinds,
+  direct access, assignments, controls, codeblock values, receiver chains, generic final-codeblock syntax, and
+  value-drop statements; preserve source spans and both quote forms without lowering to Lua code.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

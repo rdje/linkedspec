@@ -6,7 +6,9 @@ conformance runtime; LuaJIT is a secondary compatibility leg.
 Current status: repository-owned module/test/command scaffold, strict corpus IO,
 typed source/provenance AST data, and permissive rule-level source parsing.
 Source validation and optional strict-unused checks are also available.
-Top-level function projection, corpus execution, the primary CLI
+Top-level function nodes returned by `specs/user_function_definition.spec` can
+be projected and composed with rule parsing. Staged body dispatch, corpus
+execution, the primary CLI
 contract, and generated source are deliberately not implemented yet.
 
 Run the local gate from the repository root:
@@ -81,4 +83,20 @@ only; spec-returned top-level function projection follows separately.
 `validate_spec(parsed, { strict_syntax = true })` adds the
 portable strict unused-rule check; ordinary validation already checks tops,
 duplicates, function/helper collisions, raw syntax, edge families/targets/
-slots, and regex structure. Function-shell production still follows separately.
+slots, and regex structure.
+
+Function-shell semantics are not raw-scanned by Lua. Given the explicitly typed
+node array returned by the owning definition spec, use:
+
+```lua
+local parsed = linkedspec.parse_spec_with_user_function_definition_asts(
+  source,
+  definition_nodes
+)
+```
+
+`project_user_function_definition_asts(...)` exposes the pre-parse projection,
+and `definition_nodes_from_user_function_definition_output(...)` normalizes the
+owning spec's nested output shapes. Character-index spans, source/body text,
+staged payloads, and body parse jobs are checked and normalized. The jobs remain
+undispatched and `body_ast` remains absent at this boundary.

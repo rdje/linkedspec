@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-11` (source validation `.2.3` closed; function-shell projection `.2.4` active)
+- Last updated: `2026-07-11` (frontend `.2` closed through function projection; ActionIR AST `.3.1` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -146,7 +146,7 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   to source AST `.2.1` next.
 
 - ID: `LUA-BACKEND-PARITY.2`
-  Status: `active`
+  Status: `done`
   Goal: Implement the universal `.spec` frontend.
   Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`
 
@@ -255,20 +255,47 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   document the validator/strict boundary and activate spec-produced function-shell projection `.2.4`.
 
 - ID: `LUA-BACKEND-PARITY.2.4`
-  Status: `active`
+  Status: `done`
   Goal: Consume spec-driven top-level user-function shells.
   Acceptance: `specs/user_function_definition.spec` owns shell parsing/projection; Lua has no competing raw scanner;
     body payload/jobs/AST and provenance remain ordered and exact.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Added `user_function_definition_shell.lua` and public normalization,
+    projection, and composed-parse APIs over explicitly typed JSON nodes returned by
+    `specs/user_function_definition.spec`. The projector validates definition/error node types, identifiers,
+    params/arity, exact Unicode character-index source/body spans, body containment, staged payload/job identity,
+    parser/top/result/failure/diagnostic fields, and parent paths. It defensively copies sidecars, normalizes
+    `functions.<index>.body_source` and deterministic job IDs, strips spans with spaces while retaining CR/LF and
+    all non-function Unicode text, then composes the ordinary rule parser. `body_ast` remains undispatched. Empty
+    node input over leading `fn` source yields a typed rule parse error, proving no raw scanner. Focused output-shape,
+    error-node, drift, overlap, Unicode, composition, and validation proofs pass. The local gate passes
+    syntax/process/manifest/coverage, 35/35 PUC Lua, and 35/35 LuaJIT. Source frontend `.2` closes; `.3.1` follows.
+  Commit: `LUA-BACKEND-PARITY.2.4 - project Lua function shells`
+
+### `LUA-BACKEND-PARITY.2.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Direct rule parsing rejects leading top-level `fn` source, while Knowledge Map and
+  Dart/Julia reference inspection show the owning spec returns typed definition/error nodes plus staged sidecars;
+  Lua had no consumer for those nodes.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Function-shell syntax belongs to `specs/user_function_definition.spec`, not a
+  backend raw scanner. Lua needed a neutral projection boundary capable of interpreting Unicode character spans and
+  preserving staged parse intent before the registry exists.
+- [x] **FIX** — Added typed output normalization, exact node/span/sidecar validation, defensive copying,
+  path/job normalization, line-preserving stripping, composed rule parsing, and typed error/no-scanner behavior.
+- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 35/35 on PUC Lua and 35/35 on LuaJIT, including
+  Unicode offsets, two ordered functions, staged provenance, composed validation, spec errors, drift, wrappers,
+  overlap rejection, and explicit empty-node no-raw-scan proof.
+- [x] **NO REGRESSION** — All parser/validator/105-manifest/process/239-name proofs remain green; body staged jobs
+  are preserved but not dispatched, and no ActionIR, runtime, corpus execute, primary CLI, or codegen is claimed.
+- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook/README API examples, Knowledge Map, and live continuity close
+  source frontend `.2` and activate typed ActionIR parsing `.3.1`.
 
 - ID: `LUA-BACKEND-PARITY.3`
-  Status: `pending`
+  Status: `active`
   Goal: Implement typed ActionIR, contracts, function registry, and compiled state.
   Children: `.3.1`, `.3.2`, `.3.3`, `.3.4`
 
 - ID: `LUA-BACKEND-PARITY.3.1`
-  Status: `pending`
+  Status: `active`
   Goal: Parse action/helper text into typed AST nodes.
   Acceptance: Calls/args, four value kinds, access, assignments, controls, block values, receiver chains, generic
     final-codeblock syntax, and value-drop statements are structural nodes rather than Lua code rewrites.
@@ -473,7 +500,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 4 | `LUA-BACKEND-PARITY.2.1` | `done` | Typed neutral source/provenance AST round-trips all node/body variants. |
 | 5 | `LUA-BACKEND-PARITY.2.2` | `done` | Core source parser accepts 21 shipped and 102 rule-only corpus specs. |
 | 6 | `LUA-BACKEND-PARITY.2.3` | `done` | Validator/strict syntax and exact 239-name collision inventory pass. |
-| 7 | `LUA-BACKEND-PARITY.2.4` | `active` | Project spec-produced top-level function shells and staged provenance. |
+| 7 | `LUA-BACKEND-PARITY.2.4` | `done` | Spec-produced function nodes/projected provenance compose without a raw scanner. |
+| 8 | `LUA-BACKEND-PARITY.3.1` | `active` | Parse action/helper text into typed ActionIR nodes. |
 
 ## Initial toolchain evidence (read-only planning audit)
 
@@ -519,3 +547,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.2.1` | `LUA-BACKEND-PARITY.2.1 - add typed Lua source AST` | Neutral nodes/provenance, complete body variants, lossless JSON, and parser handoff. |
 | `LUA-BACKEND-PARITY.2.2` | `LUA-BACKEND-PARITY.2.2 - parse Lua rule source` | Public typed rule parser, quote/nesting/separator proofs, and validator handoff. |
 | `LUA-BACKEND-PARITY.2.3` | `LUA-BACKEND-PARITY.2.3 - validate Lua source AST` | Stable source/registry/edge/regex/strict checks, exact call-name inventory, and function projection handoff. |
+| `LUA-BACKEND-PARITY.2.4` | `LUA-BACKEND-PARITY.2.4 - project Lua function shells` | Spec-owned nodes, Unicode spans, staged sidecars, no raw scanner, and ActionIR handoff. |

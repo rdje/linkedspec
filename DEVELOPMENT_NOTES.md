@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.2.4 — consume spec-owned shells using character spans):
+  Preserve the semantic owner boundary: a backend projector validates nodes returned by the definition spec; it
+  must not recreate `fn` syntax with a raw scanner. Lua needs an explicit UTF-8 byte-boundary map because neutral
+  spans count Unicode characters while Lua strings index bytes. Validate exact source/body slices before copying
+  sidecars, normalize paths and deterministic IDs only after drift checks, and replace each stripped non-newline
+  character with one space so line and character coordinates stay stable. Keep `body_parse_job` intact and
+  `body_ast` absent until staged dispatch. Empty owning-node input is a valuable no-fallback proof.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.2.3 — make permissive parsing feed explicit acceptance):
   Keep parser recovery/raw nodes inspectable, then reject them in a separate validator. Validation order should
   stabilize the first actionable diagnostic: top/duplicates/function registry before raw/edge/regex/strict checks.

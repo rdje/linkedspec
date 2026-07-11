@@ -3,13 +3,14 @@ local json = require("linkedspec.json")
 local spec_ast = require("linkedspec.spec_ast")
 local spec_parser = require("linkedspec.spec_parser")
 local spec_validator = require("linkedspec.spec_validator")
+local function_shell = require("linkedspec.user_function_definition_shell")
 
 local M = {}
 
 M.PACKAGE_NAME = "linkedspec"
 M.PACKAGE_VERSION = "0.1.0"
 M.BACKEND_NAME = "lua"
-M.PARITY_STATUS = "source_validation"
+M.PARITY_STATUS = "function_projection"
 M.CLI_ENTRYPOINT = "lua/bin/linkedspec-lua"
 M.CORPUS_RUNNER_ENTRYPOINT = "lua/bin/corpus_runner.lua"
 
@@ -66,5 +67,9 @@ M.parse_spec = spec_parser.parse_spec
 M.is_spec_parse_error = spec_parser.is_parse_error
 M.validate_spec = spec_validator.validate_spec
 M.is_spec_validation_error = spec_validator.is_validation_error
+M.project_user_function_definition_asts = function_shell.project
+M.parse_spec_with_user_function_definition_asts = function_shell.parse_spec_with_asts
+M.definition_nodes_from_user_function_definition_output = function_shell.definition_nodes_from_output
+M.is_user_function_projection_error = function_shell.is_projection_error
 
 return M

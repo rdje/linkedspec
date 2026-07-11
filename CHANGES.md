@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.2.4 — project Lua function shells
+
+Added native consumption of explicitly typed definition/error nodes returned by `specs/user_function_definition.spec`.
+Projection validates identifiers/arity, zero-based Unicode character spans and exact slices, staged payload/job
+metadata, parser/top/result/failure/diagnostic identity, containment, and parent paths. It copies and normalizes
+sidecars, derives deterministic body-job IDs, preserves body jobs without dispatch, and leaves `body_ast` absent.
+
+Added line-preserving function-span stripping and composition with ordinary rule parsing. Strict UTF-8 is only the
+Lua host representation; offsets are Unicode character indexes and multibyte source is proven. Direct, singleton,
+and nested owning-spec output shapes normalize. Error nodes, drift, overlaps, and empty-node leading-`fn` source
+fail explicitly; the last case proves there is no raw function scanner.
+
+The local gate passes syntax/process/manifest/239-name checks plus 35/35 PUC Lua and 35/35 LuaJIT tests. The
+representative two-function projection composes and validates with ordered rules. Frontend `.2` closes and roadmap,
+mdBook/README, KM, task, and live state advance to ActionIR AST `.3.1`.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.2.3 — validate Lua source AST
 
 Added public typed source validation with ordinary and strict-unused modes. Checks cover top-rule presence,

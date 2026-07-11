@@ -13,7 +13,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, parser, AST, source, semicolon, quotes, PUC-Lua, LuaJIT]
-evidence: "LUA-BACKEND-PARITY.2.2 adds lua/src/linkedspec/spec_parser.lua; .2.3 adds validation. The current local gate passes 31/31 on both runtimes, all 21 shipped specs, and 102 rule-only corpus specs; three top-level function shells are intentionally excluded."
+evidence: "LUA-BACKEND-PARITY.2.2 adds lua/src/linkedspec/spec_parser.lua; .2.3 adds validation; .2.4 adds spec-owned function projection. The current local gate passes 35/35 on both runtimes, all 21 shipped specs, and 102 rule-only corpus specs."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -26,8 +26,8 @@ without treating braces inside either single- or double-quoted strings as struct
 source seam first requires strict UTF-8 as its representation of logical Unicode text.
 
 The parser passes all 21 checked-in `specs/*.spec` files and 102 of the 105 corpus source files on both PUC Lua and
-LuaJIT. The other three start with `fn` shells; direct parsing rejects them intentionally because `.2.4` owns
-projection from the AST returned by `specs/user_function_definition.spec`.
+LuaJIT. The other three start with `fn` shells; direct parsing rejects them intentionally. `.2.4` now projects
+explicitly supplied AST nodes returned by `specs/user_function_definition.spec`, without a raw scanner.
 
 Physical newlines separate statements. Semicolons are only separators between multiple statements on one physical
 line, and the last statement on that line needs no trailing semicolon. The parser preserves newline-delimited block
