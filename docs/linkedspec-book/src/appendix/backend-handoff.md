@@ -546,7 +546,12 @@ installed, so corpus IO will add a small pure-Lua codec with explicit null,
 array, and harray identity plus canonical object ordering. LPeg remains outside
 the scaffold dependency set. Any future LuaRocks tree must be caller-owned
 under temporary storage and recursively removed. The native scaffold is now
-the active leaf.
+implemented: `require("linkedspec")` returns exact backend/status/entrypoint
+identity, a dependency-free test driver passes on PUC Lua and LuaJIT, and the
+two command files fail explicitly with exit `2` rather than pretending parser
+or corpus behavior exists. `tools/run_lua_local.sh` owns syntax, module, process,
+and secondary-runtime checks. Typed JSON and strict 105-case manifest IO are the
+active next leaf.
 
 ### Julia Backend Commands, Embedding, and Status
 

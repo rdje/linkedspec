@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.1.2 — scaffold native Lua backend
+
+Added the first repository-owned Lua backend files without claiming parser behavior. `lua/src/linkedspec/init.lua`
+exposes stable backend, package, runtime, CLI, and corpus-runner identities plus fresh structured status values.
+The CLI and corpus commands remain explicit exit-2 scaffold failures, and no `parse_spec` API is fabricated.
+
+Added dependency-free Lua tests, executable command stubs, a backend README, and `tools/run_lua_local.sh`. The gate
+injects exact repository module paths, syntax-checks all Lua source, passes 4/4 module tests on PUC Lua 5.4 and 4/4
+on LuaJIT, and byte-checks both command failures. It writes no global package/cache state and leaves no artifacts.
+
+Aligned roadmap, task index/tree, mdBook, Knowledge Map, and live continuity to corpus IO `.1.3`, which owns the
+strict pure-Lua typed JSON codec and 105-case manifest validation.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.1.1 — lock Lua toolchain and package policy
 
 Locked PUC Lua 5.4.8 as the primary conformance runtime and LuaJIT 2.1/Lua 5.1 as a secondary compatibility leg.

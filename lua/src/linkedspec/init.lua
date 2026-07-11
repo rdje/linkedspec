@@ -1,0 +1,63 @@
+local M = {}
+
+M.PACKAGE_NAME = "linkedspec"
+M.PACKAGE_VERSION = "0.1.0"
+M.BACKEND_NAME = "lua"
+M.PARITY_STATUS = "scaffold"
+M.CLI_ENTRYPOINT = "lua/bin/linkedspec-lua"
+M.CORPUS_RUNNER_ENTRYPOINT = "lua/bin/corpus_runner.lua"
+
+local function copy_table(value)
+  local result = {}
+  for key, item in pairs(value) do
+    result[key] = item
+  end
+  return result
+end
+
+function M.backend_name()
+  return M.BACKEND_NAME
+end
+
+function M.cli_entrypoint()
+  return M.CLI_ENTRYPOINT
+end
+
+function M.corpus_runner_entrypoint()
+  return M.CORPUS_RUNNER_ENTRYPOINT
+end
+
+function M.runtime_implementation()
+  if type(jit) == "table" and type(jit.version) == "string" then
+    return "luajit"
+  end
+  return "puc-lua"
+end
+
+function M.backend_status()
+  return copy_table({
+    backend = M.BACKEND_NAME,
+    package = M.PACKAGE_NAME,
+    version = M.PACKAGE_VERSION,
+    parity = M.PARITY_STATUS,
+    runtime = M.runtime_implementation(),
+    cli = M.CLI_ENTRYPOINT,
+    corpus_runner = M.CORPUS_RUNNER_ENTRYPOINT,
+  })
+end
+
+function M.cli_scaffold_result()
+  return {
+    exit_code = 2,
+    stderr = "linkedspec-lua: backend scaffold; parser CLI is not implemented\n",
+  }
+end
+
+function M.corpus_runner_scaffold_result()
+  return {
+    exit_code = 2,
+    stderr = "linkedspec-lua corpus runner: backend scaffold; corpus IO is not implemented\n",
+  }
+end
+
+return M

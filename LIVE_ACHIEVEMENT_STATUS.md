@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.1.2 — scaffold native Lua backend**
+  (DONE — native module/test/bin/local-gate scaffold passes; corpus IO `.1.3` next).
+
+  **Implementation:** Stable module/status/entrypoint identity, dependency-free tests, executable CLI/corpus stubs,
+  README, and local gate now exist. Parser/corpus behavior remains explicitly unavailable with exact exit 2.
+
+  **Proof:** Syntax checks pass; PUC Lua 5.4 passes 4/4; LuaJIT passes 4/4; both process failure bytes pass. The
+  gate uses repository `LUA_PATH`, writes no package/cache state, and leaves no artifacts.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.1.1 — lock Lua toolchain and package policy**
   (DONE — reproducible zero-dependency foundation policy fixed; native scaffold `.1.2` next).
 

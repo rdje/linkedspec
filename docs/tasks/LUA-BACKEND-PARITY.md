@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-11` (toolchain/package policy `.1.1` closed; scaffold `.1.2` active)
+- Last updated: `2026-07-11` (zero-dependency native scaffold `.1.2` closed; corpus IO `.1.3` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -84,15 +84,35 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Commit: `LUA-BACKEND-PARITY.1.1 - lock Lua toolchain and package policy`
 
 - ID: `LUA-BACKEND-PARITY.1.2`
-  Status: `active`
+  Status: `done`
   Goal: Add the minimal native Lua module, CLI/corpus-runner stubs, and repo-owned test driver.
   Acceptance: In-memory module load, backend status, exact entrypoint identities, primary PUC Lua smoke, optional
     LuaJIT compatibility smoke, and cleanup work without network/global package installation.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Added `lua/src/linkedspec/init.lua` with immutable-call status copies and
+    exact backend/CLI/corpus entrypoint identities; dependency-free TAP-like `lua/test/run.lua`; executable
+    developer stubs `lua/bin/linkedspec-lua` and `lua/bin/corpus_runner.lua`; README; and
+    `tools/run_lua_local.sh`. The gate injects repo `LUA_PATH`, syntax-checks every source, passes 4/4 native module
+    tests on PUC Lua and 4/4 on LuaJIT, and byte-checks both explicit exit-2 stub failures. No parser/corpus API,
+    JSON/LPeg dependency, package/cache write, or public CLI behavior is faked. Corpus IO `.1.3` is next.
+  Commit: `LUA-BACKEND-PARITY.1.2 - scaffold native Lua backend`
+
+### `LUA-BACKEND-PARITY.1.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Repository/toolbox inventory (`rg --files`, runtime probes, and the `.1.1` policy)
+  established that no task-owned native Lua module, test driver, command path, or local gate existed.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Lua was only a future backend intention; the complete parity plan deliberately
+  assigned the first implementation boundary to `.1.2`, so no earlier source path could truthfully expose it.
+- [x] **FIX** — Added the dependency-free module/test/bin/README layout and `tools/run_lua_local.sh`, while keeping
+  parser and corpus behavior explicit exit-2 unavailable boundaries.
+- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` syntax-checks every Lua source, passes PUC Lua 4/4,
+  passes LuaJIT 4/4, and verifies exact process stderr/status for both command stubs.
+- [x] **NO REGRESSION** — Capability, generated-source, language-coverage, doctrine, Knowledge Map, memory, and
+  mdBook gates pass; the four admitted backends remain 60/0/0 and the scaffold claims no new capability.
+- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook, Knowledge Map, changes/development/live status, and bounded
+  memory all name the verified scaffold boundary and active strict corpus-IO successor `.1.3`.
 
 - ID: `LUA-BACKEND-PARITY.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Add strict manifest/fixture IO without parser execution.
   Acceptance: Validate the 105-case manifest, exact directory membership, required UTF-8 files, expected JSON, and
     stale/missing fixtures; keep execution disabled until runtime ownership exists.
@@ -342,8 +362,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | Order | Leaf | Status | Next action |
 | ---: | --- | --- | --- |
 | 1 | `LUA-BACKEND-PARITY.1.1` | `done` | PUC/LuaJIT, layout, zero-dependency tests, JSON, regex, and cache policy locked. |
-| 2 | `LUA-BACKEND-PARITY.1.2` | `active` | Add the native module/test/CLI scaffold. |
-| 3 | `LUA-BACKEND-PARITY.1.3` | `pending` | Add strict 105-case corpus IO. |
+| 2 | `LUA-BACKEND-PARITY.1.2` | `done` | Native module/test/bin/local-gate scaffold passes PUC Lua and LuaJIT. |
+| 3 | `LUA-BACKEND-PARITY.1.3` | `active` | Add strict 105-case corpus IO and typed JSON. |
 
 ## Initial toolchain evidence (read-only planning audit)
 
@@ -384,3 +404,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | --- | --- | --- |
 | `FUTURE-PARITY-BACKLOG.1.3` | `FUTURE-PARITY-BACKLOG.1.3 - scope Lua backend parity plan` | Creates this full-parity plan; no Lua implementation code. |
 | `LUA-BACKEND-PARITY.1.1` | `LUA-BACKEND-PARITY.1.1 - lock Lua toolchain and package policy` | Locks runtimes, layout, zero-dependency harness, JSON/regex ownership, and cache boundaries; no code. |
+| `LUA-BACKEND-PARITY.1.2` | `LUA-BACKEND-PARITY.1.2 - scaffold native Lua backend` | Native module identity, dependency-free dual-runtime tests, explicit command stubs, and `.1.3` handoff. |

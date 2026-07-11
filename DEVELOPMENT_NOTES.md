@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.1.2 — make unavailable behavior explicit at a new backend boundary):
+  A useful native scaffold proves module discovery, runtime compatibility, command identity, and deterministic
+  process failure without pretending that parsing exists. Return fresh status tables so caller mutation cannot
+  alter later observations; keep command-stub messages in the module so tests and executables share one source.
+  A repo-owned shell gate can syntax-check the shared Lua 5.1/5.4 subset and exercise PUC Lua plus LuaJIT without
+  LuaRocks or global paths. Add typed JSON and manifest IO only in their owning leaf, then replace the corpus stub.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.1.1 — lock reproducibility before scaffolding):
   Separate runtime availability from dependency policy. PUC 5.4 and LuaJIT can share most source but have different
   language baselines, so make 5.4 normative and isolate compatibility adapters. Global LPeg modules prove only that
