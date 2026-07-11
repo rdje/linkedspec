@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2 — complete Dart capture marks**
+  (DONE — Dart exact anonymous/named capture values closed; Julia `.2.2.4.3` active).
+
+  **Implementation:** Rule-local code-unit marks with character projections execute all stable/advancing, bridge,
+  boundary/copy, and two-mark operations. Bare mark names remain symbolic; implicit non-repeated `AND` blind-call
+  results retain ordered child values.
+
+  **Proof:** Both governed hashes, implicit-result/rule-local/multibyte locks, formatting, fatal analysis, 160 package
+  tests, 61/61 CLI cases in both environments, and 99/99 corpus pass. The 30 MB cache was removed. Final admission
+  owns the newly exposed provisional-inventory omission for two governed bridge helpers.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1 — complete Rust capture marks**
   (DONE — Rust exact anonymous/named capture values closed; Dart `.2.2.4.2` active).
 

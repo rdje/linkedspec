@@ -381,6 +381,7 @@ final class LinkedSpecRuntimeEngine {
   ) {
     final min = rule.modeMetadata.repMin;
     if (min == null) {
+      final implicitAndResult = <Object?>[];
       var matchedAny = false;
       for (
         var iteration = 0;
@@ -388,7 +389,13 @@ final class LinkedSpecRuntimeEngine {
         iteration += 1
       ) {
         final before = context.cursorCodeUnit;
-        final matched = _nextableBool(() => _executeBlindOnce(rule, context));
+        final matched = _nextableBool(
+          () => _executeBlindOnce(
+            rule,
+            context,
+            implicitAndResult: implicitAndResult,
+          ),
+        );
         if (matched.nexted) {
           matchedAny = true;
           if (context.cursorCodeUnit == before) {
@@ -406,7 +413,12 @@ final class LinkedSpecRuntimeEngine {
         if (exitReturn != null) {
           return _returned(exitReturn.value);
         }
-        return _RuleResult(matched: matched.value || matchedAny, value: null);
+        return _RuleResult(
+          matched: matched.value || matchedAny,
+          value: rule.modeMetadata.isAnd && implicitAndResult.isNotEmpty
+              ? List<Object?>.unmodifiable(implicitAndResult)
+              : null,
+        );
       }
       final loopExit = _executeLifecycle(rule, 'LX', context);
       if (loopExit != null) {
@@ -416,7 +428,12 @@ final class LinkedSpecRuntimeEngine {
       if (exitReturn != null) {
         return _returned(exitReturn.value);
       }
-      return _RuleResult(matched: matchedAny, value: null);
+      return _RuleResult(
+        matched: matchedAny,
+        value: rule.modeMetadata.isAnd && implicitAndResult.isNotEmpty
+            ? List<Object?>.unmodifiable(implicitAndResult)
+            : null,
+      );
     }
 
     var matches = 0;
@@ -486,7 +503,11 @@ final class LinkedSpecRuntimeEngine {
     return _RuleResult(matched: matches > 0, value: null);
   }
 
-  bool _executeBlindOnce(CompiledRule rule, _RuntimeExecutionContext context) {
+  bool _executeBlindOnce(
+    CompiledRule rule,
+    _RuntimeExecutionContext context, {
+    List<Object?>? implicitAndResult,
+  }) {
     if (rule.modeMetadata.isAnd) {
       var matchedAll = true;
       for (
@@ -511,6 +532,9 @@ final class LinkedSpecRuntimeEngine {
           LinkedSpecTraceLevel.debug,
         );
         context.retv = child.value;
+        if (childMatched) {
+          implicitAndResult?.add(_copyValue(child.value));
+        }
         final edgeReturn = _executeOptionalPayload(
           edge.actionPayload,
           context,
@@ -2995,6 +3019,44 @@ final class LinkedSpecRuntimeEngine {
           context.input,
           _captureStartCodeUnit(context),
         ).column;
+      case 'start_capture_slice_from':
+      case 'capture_rest':
+      case 'capture_rest_len':
+      case 'capture_take':
+      case 'capture_take_len':
+      case 'capture_take_until_cursor':
+      case 'capture_take_until_cursor_len':
+      case 'capture_take_rest':
+      case 'capture_take_rest_len':
+      case 'mark_here':
+      case 'mark_input_start':
+      case 'mark_input_end':
+      case 'mark_copy':
+      case 'mark_capture_slice':
+      case 'mark_exists':
+      case 'mark_pos':
+      case 'capture_from':
+      case 'capture_len_from':
+      case 'capture_until_cursor_from':
+      case 'capture_until_cursor_len_from':
+      case 'capture_rest_from':
+      case 'capture_rest_len_from':
+      case 'capture_take_len_from':
+      case 'capture_take_until_cursor_from':
+      case 'capture_take_until_cursor_len_from':
+      case 'capture_take_rest_from':
+      case 'capture_take_rest_len_from':
+      case 'capture_between':
+      case 'capture_len_between':
+      case 'capture_take_between':
+      case 'capture_take_between_len':
+        return _callCaptureMarkHelper(
+          helperName,
+          positionalArgs,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
       case 'capture_until_boundary':
         return _callCaptureUntilBoundary(
           positionalArgs,
@@ -4235,6 +4297,184 @@ final class LinkedSpecRuntimeEngine {
         ? context.cursorCodeUnit
         : context.registers.localMatch?.codeUnitStart ?? context.cursorCodeUnit;
     return end.clamp(0, context.input.length);
+  }
+
+  Object? _callCaptureMarkHelper(
+    String helperName,
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    String? markName(int index) {
+      if (index >= args.length) {
+        return null;
+      }
+      return _captureName(args[index], context, ruleLabel, currentEdge);
+    }
+
+    String? spanText(int start, int end) {
+      if (start < 0 || end < start || end > context.input.length) {
+        return null;
+      }
+      return context.input.substring(start, end);
+    }
+
+    int? spanLength(int start, int end) => spanText(start, end)?.runes.length;
+
+    final captureStart = _captureStartCodeUnit(context);
+    final matchStart = _captureEndCodeUnit(context, untilCursor: false);
+    final cursor = context.cursorCodeUnit;
+    final inputEnd = context.input.length;
+    final marks = context.marksFor(ruleLabel);
+
+    switch (helperName) {
+      case 'start_capture_slice_from':
+        final name = markName(0);
+        final offset = name == null ? null : marks[name];
+        if (offset != null) {
+          context.startCaptureSliceAt(offset);
+        }
+        return null;
+      case 'capture_rest':
+        return spanText(captureStart, inputEnd);
+      case 'capture_rest_len':
+        return spanLength(captureStart, inputEnd);
+      case 'capture_take':
+        final value = spanText(captureStart, matchStart);
+        if (value != null) {
+          context.startCaptureSliceAt(cursor);
+        }
+        return value;
+      case 'capture_take_len':
+        final value = spanLength(captureStart, matchStart);
+        if (value != null) {
+          context.startCaptureSliceAt(cursor);
+        }
+        return value;
+      case 'capture_take_until_cursor':
+        final value = spanText(captureStart, cursor);
+        if (value != null) {
+          context.startCaptureSliceAt(cursor);
+        }
+        return value;
+      case 'capture_take_until_cursor_len':
+        final value = spanLength(captureStart, cursor);
+        if (value != null) {
+          context.startCaptureSliceAt(cursor);
+        }
+        return value;
+      case 'capture_take_rest':
+        final value = spanText(captureStart, inputEnd);
+        if (value != null) {
+          context.startCaptureSliceAt(inputEnd);
+        }
+        return value;
+      case 'capture_take_rest_len':
+        final value = spanLength(captureStart, inputEnd);
+        if (value != null) {
+          context.startCaptureSliceAt(inputEnd);
+        }
+        return value;
+      case 'mark_here':
+        final name = markName(0);
+        if (name != null) {
+          marks[name] = cursor;
+        }
+        return null;
+      case 'mark_input_start':
+        final name = markName(0);
+        if (name != null) {
+          marks[name] = 0;
+        }
+        return null;
+      case 'mark_input_end':
+        final name = markName(0);
+        if (name != null) {
+          marks[name] = inputEnd;
+        }
+        return null;
+      case 'mark_copy':
+        final target = markName(0);
+        final source = markName(1);
+        if (target != null) {
+          final offset = source == null ? null : marks[source];
+          if (offset == null) {
+            marks.remove(target);
+          } else {
+            marks[target] = offset;
+          }
+        }
+        return null;
+      case 'mark_capture_slice':
+        final name = markName(0);
+        if (name != null) {
+          marks[name] = captureStart;
+        }
+        return null;
+      case 'mark_exists':
+        final name = markName(0);
+        return name != null && marks.containsKey(name) ? 1 : 0;
+      case 'mark_pos':
+        final name = markName(0);
+        final offset = name == null ? null : marks[name];
+        return codeUnitOffsetToCharOffset(context.input, offset ?? 0);
+      case 'capture_from':
+      case 'capture_len_from':
+      case 'capture_until_cursor_from':
+      case 'capture_until_cursor_len_from':
+      case 'capture_rest_from':
+      case 'capture_rest_len_from':
+      case 'capture_take_len_from':
+      case 'capture_take_until_cursor_from':
+      case 'capture_take_until_cursor_len_from':
+      case 'capture_take_rest_from':
+      case 'capture_take_rest_len_from':
+        final name = markName(0);
+        final start = name == null ? null : marks[name];
+        if (name == null || start == null) {
+          return null;
+        }
+        final end = switch (helperName) {
+          'capture_from' ||
+          'capture_len_from' ||
+          'capture_take_len_from' => matchStart,
+          'capture_until_cursor_from' ||
+          'capture_until_cursor_len_from' ||
+          'capture_take_until_cursor_from' ||
+          'capture_take_until_cursor_len_from' => cursor,
+          _ => inputEnd,
+        };
+        final lengthResult =
+            helperName.contains('_len_') || helperName == 'capture_len_from';
+        final value = lengthResult
+            ? spanLength(start, end)
+            : spanText(start, end);
+        if (value != null && helperName.startsWith('capture_take_')) {
+          marks[name] = helperName.contains('_rest_') ? inputEnd : cursor;
+        }
+        return value;
+      case 'capture_between':
+      case 'capture_len_between':
+      case 'capture_take_between':
+      case 'capture_take_between_len':
+        final startName = markName(0);
+        final endName = markName(1);
+        final start = startName == null ? null : marks[startName];
+        final end = endName == null ? null : marks[endName];
+        if (startName == null || start == null || end == null) {
+          return null;
+        }
+        final value = helperName.contains('len')
+            ? spanLength(start, end)
+            : spanText(start, end);
+        if (value != null && helperName.startsWith('capture_take_')) {
+          marks[startName] = end;
+        }
+        return value;
+      default:
+        return null;
+    }
   }
 
   Object? _callCaptureUntilBoundary(
@@ -5631,6 +5871,8 @@ final class _RuntimeExecutionContext {
   final Map<String, List<Object?>> arrays = <String, List<Object?>>{};
   final Map<String, Map<String, Object?>> hashes =
       <String, Map<String, Object?>>{};
+  final Map<String, Map<String, int>> markBuckets =
+      <String, Map<String, int>>{};
   final Set<String> activeRuleEntries = <String>{};
   final List<String> activeUserFunctions = <String>[];
   final List<RuntimeLifecycleEvent> lifecycleEvents = <RuntimeLifecycleEvent>[];
@@ -5662,6 +5904,10 @@ final class _RuntimeExecutionContext {
 
   Map<String, Object?> hashFor(String name) {
     return hashes.putIfAbsent(name, () => <String, Object?>{});
+  }
+
+  Map<String, int> marksFor(String ruleLabel) {
+    return markBuckets.putIfAbsent(ruleLabel, () => <String, int>{});
   }
 
   void clearStores() {
@@ -5795,6 +6041,10 @@ final class _RuntimeExecutionContext {
 
   void startCaptureSlice() {
     registers = registers.withCaptureStartCodeUnit(cursorCodeUnit);
+  }
+
+  void startCaptureSliceAt(int codeUnitOffset) {
+    registers = registers.withCaptureStartCodeUnit(codeUnitOffset);
   }
 }
 

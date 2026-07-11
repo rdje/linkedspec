@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2 — separate host offsets from public units):
+  Dart strings require code-unit indices for safe `substring`, while LinkedSpec positions and lengths count
+  characters. Store marks in the host's slicing unit, centralize span validation, and convert only at public
+  position/length boundaries. Keep advancing operations transactional: mutate an anchor only after its span is
+  valid. The governed source audit also caught a proof-system blind spot: a backend-derived call-name inventory can
+  omit current reference contracts used by its own neutral fixtures. Final admission must compare inventories to
+  the reference contract registry and fixture calls, not merely compare Dart and Julia to each other.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1 — preserve symbolic slots and parent result ownership):
   A bare mark argument such as `mark_here(origin)` is a symbolic identifier, not a scalar read; evaluating it first
   aliases every undefined name to the same empty key and lets later marks overwrite earlier anchors. Resolve these

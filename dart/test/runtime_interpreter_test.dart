@@ -267,6 +267,63 @@ ChildB:
     expect(result.cursorCodeUnit, 3);
   });
 
+  test('surfaces implicit AND blind-call child returns in order', () {
+    final engine = _engine(r'''
+Top::AND
+ => ChildA
+ => ChildB
+
+ChildA:
+ /a/
+ E { return("A") }
+
+ChildB:
+ /[ \t]+b/
+ E { return("B") }
+''');
+
+    expect(engine.parse('a b').value, ['A', 'B']);
+  });
+
+  test('keeps named marks rule-local', () {
+    final engine = _engine(r'''
+Top::AND
+ => First
+ => Second
+
+First:AND
+ /A/
+ /x/
+ -> First[0] { mark_here(shared) }
+ -> First[1] { return(mark_pos(shared)) }
+
+Second:AND
+ /B/
+ /C/
+ -> Second[1] { return(mark_exists(shared)) }
+''');
+
+    expect(engine.parse('AxBC').value, [1, 0]);
+  });
+
+  test('projects multibyte mark positions and lengths in characters', () {
+    final engine = _engine(r'''
+Top::AND
+ => Value
+
+Value:AND
+ /A/
+ /éB/
+ /C/
+ -> Value[0] { mark_here(origin) }
+ -> Value[2] { return(hash("len", capture_len_from(origin), "pos", mark_pos(origin), "text", capture_from(origin))) }
+''');
+
+    expect(engine.parse('AéBC').value, [
+      {'len': 2, 'pos': 1, 'text': 'éB'},
+    ]);
+  });
+
   test('executes OR blind-call miss through LX return', () {
     final engine = _engine(r'''
 Top::OR
@@ -1641,6 +1698,62 @@ Top::
     ).readAsStringSync();
 
     expect(_engine(source).parse('xx').value, ['elif', 'case-b']);
+  });
+
+  test('matches the governed anonymous capture fixture exactly', () {
+    final source = File(
+      '../capability_conformance/fixtures/capability_capture_anonymous_surface.spec',
+    ).readAsStringSync();
+
+    expect(_engine(source).parse('AxxBC').value, [
+      {
+        'rest': 'xxBC',
+        'rest_len': 4,
+        'slice': 'xxB',
+        'slice_col': 2,
+        'slice_len': 3,
+        'slice_line': 1,
+        'slice_pos': 1,
+        'take': 'xxB',
+        'take_len': 3,
+        'take_rest': 'xxBC',
+        'take_rest_len': 4,
+        'take_until_cursor': 'xxBC',
+        'take_until_cursor_len': 4,
+        'until_cursor': 'xxBC',
+        'until_cursor_len': 4,
+      },
+    ]);
+  });
+
+  test('matches the governed named capture fixture exactly', () {
+    final source = File(
+      '../capability_conformance/fixtures/capability_capture_named_surface.spec',
+    ).readAsStringSync();
+
+    expect(_engine(source).parse('AxxBC').value, [
+      {
+        'between': 'xxBC',
+        'between_len': 4,
+        'copied_pos': 1,
+        'from': 'xxB',
+        'from_len': 3,
+        'origin_exists': 1,
+        'origin_pos': 1,
+        'rest': 'xxBC',
+        'rest_len': 4,
+        'take_between': 'xxBC',
+        'take_between_len': 4,
+        'take_len': 3,
+        'take_rest': 'xxBC',
+        'take_rest_len': 4,
+        'take_until_cursor': 'xxBC',
+        'take_until_cursor_len': 4,
+        'until_cursor': 'xxBC',
+        'until_cursor_len': 4,
+        'whole_input': 'AxxBC',
+      },
+    ]);
   });
 }
 

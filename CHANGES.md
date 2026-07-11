@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2 — complete Dart capture marks
+
+**Exact capture families:** Dart now stores rule-local named marks as input code-unit offsets while projecting character-based
+positions and lengths. It executes stable and advancing anonymous/named capture reads, anonymous reset/bridge,
+current/input-boundary/copied marks, and two-mark reads. Bare mark arguments retain symbolic identity. Both
+governed capture sources return the exact Perl/Rust values.
+
+**Wrapper result parity:** Non-repeated `AND` blind-call rules now retain ordered successful child returns as their
+implicit value when no lifecycle/action return overrides it. A separate two-child regression locks this contract
+independently of capture helpers. Additional locks prove same-named marks remain rule-local and multibyte mark
+positions/lengths project Unicode characters rather than Dart code units.
+
+**Proof/frontier:** `tools/run_dart_local.sh` passes formatting, fatal analysis, all 160 package tests, both 61-case
+CLI environments, and the unchanged 99/99 corpus. The reproducible 30 MB Dart cache was removed. Julia capture
+`.1.6.1.2.2.4.3` is active. Final admission now explicitly owns a discovered inventory omission: the governed
+`start_capture_slice_from` and `mark_capture_slice` Perl contracts are absent from the provisional aligned 237-name
+Dart/Julia sets and must be reconciled before strict coverage is claimed.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1 — complete Rust capture marks
 
 **Exact capture families:** Rust now executes both governed anonymous and named capture/mark sources with the

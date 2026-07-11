@@ -208,8 +208,9 @@ Top-level project docs:
   after newline `endswitch()`. A diagnostic 105-case run then passed 100/105 on each non-reference backend and
   split pure, position, marker-control, and capture/mark repairs under active `.1.6.1.2.2`; the mandatory corpus
   remains at its green 99-case boundary until final admission. Rust, Dart, and Julia pure-value and
-  empty-local-match and marker-control children are closed. Rust now also passes both exact capture/mark sources;
-  active `.2.2.4.2` completes Dart capture/mark semantics.
+  empty-local-match and marker-control children are closed. Rust and Dart now also pass both exact capture/mark
+  sources; active `.2.2.4.3` completes Julia capture/mark semantics. Final admission will reconcile two governed
+  capture helpers omitted by the provisional shared 237-name inventory before claiming strict coverage.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
   {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven baseline success, four baseline

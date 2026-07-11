@@ -134,12 +134,14 @@ empty-local-match positions, marker control, and anonymous/named capture marks e
 The mandatory corpus therefore remains at its last green 99-case boundary while
 `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1` through `.4` repair those mechanisms one backend at a time. The six canonical
 sources stay governed under `capability_conformance/fixtures/`, and final `.5` admits them only after both strict
-237-name coverage and unchanged 105/105 execution pass on Perl, Rust, Dart, and Julia. Recognition alone never
+reconciled-name coverage and unchanged 105/105 execution pass on Perl, Rust, Dart, and Julia. Recognition alone never
 counts as user-visible feature parity. Rust, Dart, and Julia now pass the exhaustive pure-value source directly.
 Rust, Dart, and Julia also pass the empty-local-match position and marker-control sources, including short
-`i`/`elif` aliases and matched-case/default exclusion. Rust additionally passes both exact anonymous and named
+`i`/`elif` aliases and matched-case/default exclusion. Rust and Dart additionally pass both exact anonymous and named
 capture/mark sources, including stable/advancing reads, anonymous-to-named bridging, input-boundary/copy marks,
-and two-mark advancing reads. Dart capture/mark parity is the active next repair, followed by Julia.
+and two-mark advancing reads. Julia capture/mark parity is the active next repair. Final admission also reconciles
+the two governed bridge helper names omitted by the provisional shared 237-name inventory before strict coverage
+is claimed.
 All three runtimes preserve the crucial distinction between no local match and a present zero-width match at
 offset zero.
 

@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (Rust capture/mark closed; Dart `.1.6.1.2.2.4.2` active).
+- Last updated: `2026-07-10` (Rust/Dart capture marks closed; Julia `.1.6.1.2.2.4.3` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -879,14 +879,21 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1 - complete Rust capture marks`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2`
-  Status: `active`
+  Status: `done`
   Goal: Complete Dart capture/mark fixture semantics.
   Acceptance: Both exact fixture hashes pass with no unsupported-helper failure and existing corpus remains green.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Dart now owns a rule-local code-unit named-mark store with character-based public positions and lengths,
+    executes all stable/advancing anonymous and named reads, preserves bare symbolic mark names, bridges the
+    anonymous start to/from named marks, and implements input-boundary/copy/two-mark operations. Non-repeated
+    `AND` blind-call parents surface ordered child returns unless explicitly overridden. Both governed hashes plus
+    independent implicit-result and rule-local-mark locks pass. `tools/run_dart_local.sh` passes formatting, fatal
+    analysis, all 160
+    package tests, both 61-case CLI environments, and the unchanged 99-case corpus. The reproducible 30 MB Dart
+    cache was removed after verification.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2 - complete Dart capture marks`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3`
-  Status: `pending`
+  Status: `active`
   Goal: Complete Julia capture/mark fixture semantics and close `.4`.
   Acceptance: Both exact fixture hashes pass with no unsupported-helper failure and existing corpus remains green.
   Verification: `pending`
@@ -895,9 +902,13 @@ before implementation.
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5`
   Status: `pending`
   Goal: Admit all six fixtures and close strict current-call proof.
-  Acceptance: Register governed `source_file` cases, regenerate 105 exact values, pass strict 237-name coverage,
+  Acceptance: Register governed `source_file` cases, regenerate 105 exact values, pass strict reconciled-name
+    coverage (the earlier 237-name count is provisional),
     run 105/105 unchanged on Perl/Rust/Dart/Julia, promote all four `language.current_mdbook_surface` states to
-    pass, close `.1.6.1.2`/`.1.6.1`, and advance to `.1.6.2`.
+    pass, close `.1.6.1.2`/`.1.6.1`, and advance to `.1.6.2`. Before claiming the strict count, reconcile the
+    governed capture sources against the shared current-call inventories: `start_capture_slice_from` and
+    `mark_capture_slice` are current Perl contracts used by those sources but are absent from the aligned
+    Dart/Julia 237-name sets, so the final count is provisional until that omission is corrected atomically.
   Verification: `pending`
   Commit: `pending`
 
@@ -1171,8 +1182,8 @@ before implementation.
 | 39 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2` | `done` | Dart marker switch grouping returns exact `["elif","case-b"]`; 155 tests, 61x2 CLI, and 99 corpus pass. |
 | 40 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3` | `done` | Julia marker switch grouping returns exact `["elif","case-b"]`; 1,023 assertions, 61x2 CLI, and 99 corpus pass; control parent closes. |
 | 41 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1` | `done` | Exact Rust anonymous/named capture values, symbolic marks, implicit AND blind-call result, 196 integration, and full recurring gate pass. |
-| 42 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2` | `active` | Complete Dart capture/mark semantics. |
-| 43 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3` | `pending` | Complete Julia capture/mark semantics. |
+| 42 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2` | `done` | Exact Dart anonymous/named capture values, rule-local code-unit marks with character projections, implicit AND result, 160 tests, 61x2 CLI, and 99 corpus pass. |
+| 43 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3` | `active` | Complete Julia capture/mark semantics. |
 | 44 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5` | `pending` | Admit six fixtures and close strict 105-case proof. |
 | 45 | `FUTURE-PARITY-BACKLOG.1.6.2` | `pending` | Add Rust's missing outward compiled-descriptor projection. |
 | 46 | `FUTURE-PARITY-BACKLOG.1.6.3` | `pending` | Add structured Rust native runtime diagnostics. |

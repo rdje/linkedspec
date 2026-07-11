@@ -51,7 +51,7 @@ boundary through the native staged parser, validator/compiler, and `LinkedSpecRu
 global parse mode through native controls, and emits the direct result as recursively key-sorted compact UTF-8
 JSON. `.1.5.3.3` adds the independent canonical phase trace with exact levels, byte counts, escaping, emoji,
 stdout/route/mirror, reset/append, and failures. Dart now passes all 61 unchanged primary cases in default/POSIX;
-`.1.5.3.4` makes both legs recurring in the focused gate alongside the package suite (now 155 tests) and 99/99 corpus, and closes the Dart
+`.1.5.3.4` makes both legs recurring in the focused gate alongside the package suite (now 160 tests) and 99/99 corpus, and closes the Dart
 primary-command parent. The earlier
 `DART-BACKEND-PARITY.6.3` corpus-parity boundary remains green: the full
 checked-in 99-fixture manifest passes through Dart execute mode after the shipped-spec/parser-smoke window reached
@@ -128,6 +128,10 @@ POSIX character classes, inline `i`/`m`/`s` flags, scoped flag groups by lifting
 their options to the compiled Dart `RegExp`, possessive quantifier
 markers, lower-bound `{,n}` quantifiers, and Python-style named captures before
 using Dart `RegExp`.
+The complete governed anonymous/named capture family now uses code-unit anchors internally with character-based
+public lengths/positions. It includes stable/advancing slice, cursor, rest, from, and between reads; rule-local named current,
+input-boundary, copied, and anonymous-bridge marks; and symbolic bare mark arguments. Non-repeated `AND`
+blind-call rules surface ordered child returns when no explicit parent return overrides them.
 Direct capture-slice helpers, diagnostic `print`/`print_each`/`say`, logical
 `and`/`or`/`not`, and terminating `exit_now(...)` are available in the runtime,
 and helper-call parsing preserves literal delimiters inside quoted arguments.
