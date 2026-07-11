@@ -1,6 +1,21 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.2.3 — validate Lua source AST
+
+Added public typed source validation with ordinary and strict-unused modes. Checks cover top-rule presence,
+duplicate rules/functions, function identity/params/arity and collisions, raw fallback, mixed edge families,
+grouped edges without shared code, undefined targets, regex-slot bounds, and lightweight regex structure.
+
+Added the exact 239 current helper/control/alias names as private reusable Lua reservation data. Extended the
+cross-language coverage checker so Lua must equal Dart/Julia before its existing Perl-contract, mdBook, and
+105-fixture coverage checks. Validation found and fixed empty-body headers such as `Child:` being collected as raw
+text. No arbitrary Lua-global fallback or ActionIR/runtime behavior was introduced.
+
+The local gate passes syntax/process/manifest checks plus 31/31 PUC Lua and 31/31 LuaJIT tests, all 21 shipped and
+102 rule-only corpus validations, focused failures, strict recursion/unused behavior, and exact name count. Docs,
+KM, task, roadmap, and live state advance to function-shell projection `.2.4`.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.2.2 — parse Lua rule source
 
 Added public native `parse_spec(source)` and typed line/message parse errors. The shared Lua 5.1/5.4 scanner emits

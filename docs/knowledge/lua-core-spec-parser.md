@@ -13,7 +13,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, parser, AST, source, semicolon, quotes, PUC-Lua, LuaJIT]
-evidence: "LUA-BACKEND-PARITY.2.2 adds lua/src/linkedspec/spec_parser.lua. The local gate passes 23/23 on both runtimes, all 21 shipped specs, and 102 rule-only corpus specs; three top-level function shells are intentionally excluded."
+evidence: "LUA-BACKEND-PARITY.2.2 adds lua/src/linkedspec/spec_parser.lua; .2.3 adds validation. The current local gate passes 31/31 on both runtimes, all 21 shipped specs, and 102 rule-only corpus specs; three top-level function shells are intentionally excluded."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
@@ -34,8 +34,8 @@ line, and the last statement on that line needs no trailing semicolon. The parse
 text. When compact lifecycle fluent calls are normalized into same-line statement code, it inserts `; ` only
 between calls and never after the final call.
 
-This is parsing, not validation or execution. `.2.3` owns validation/strict syntax; later leaves own ActionIR,
-compilation, runtime, corpus execution, and the exact primary CLI.
+Parsing remains separate from validation. `.2.3` now adds public validation/strict syntax; later leaves own
+ActionIR, compilation, runtime, corpus execution, and the exact primary CLI.
 
 Related facts: [[lua-frontend-ast-json-contract]], [[canonical-statement-separator-syntax]],
 [[dart-core-spec-parser]], [[julia-core-spec-parser]], [[text-to-ast-backend-doctrine]].

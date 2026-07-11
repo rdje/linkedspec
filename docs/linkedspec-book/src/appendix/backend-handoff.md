@@ -563,7 +563,13 @@ provenance and every body variant round-trip on both runtimes. The public
 `parse_spec(source)` producer now parses rule paragraphs into those nodes: all
 21 shipped specs and 102 rule-only corpus sources pass on PUC Lua and LuaJIT.
 The other three corpus sources begin with top-level functions and remain owned
-by spec-returned projection `.2.4`. Source validation `.2.3` is active.
+by spec-returned projection `.2.4`. Source validation is now also public:
+`validate_spec(spec)` checks tops, duplicates, function registry collisions,
+raw syntax, edge families/targets/slots, and regex structure;
+`validate_spec(spec, { strict_syntax = true })` adds unused-rule rejection. All
+21 shipped and 102 rule-only corpus sources validate on both runtimes. The
+helper/control reservation inventory is exactly the current 239 names and is
+checked equal to Dart/Julia. Function-shell projection `.2.4` is active.
 
 Lua embedding code can construct the neutral data model directly:
 
@@ -595,6 +601,7 @@ local spec = ast.spec_file({
 local encoded = linkedspec.json.encode(ast.to_json(spec))
 local restored = ast.from_json("SpecFile", linkedspec.json.decode(encoded))
 assert(ast.top_rule(restored).header.label == "Top")
+assert(linkedspec.validate_spec(restored) == nil)
 ```
 
 The projection uses the same field names as the other variants, including
@@ -624,8 +631,9 @@ E { set_key(meta, "a", 1); set_key(meta, 'b', 2); return(meta) }
 
 The first block uses physical newlines. The second uses semicolons only between
 multiple statements on one line; its last statement has no trailing semicolon.
-Parsing remains permissive and does not imply validation, compilation, runtime,
-corpus execution, or primary CLI readiness.
+Parsing remains permissive; callers opt into the separate validator. Validation
+still does not imply compilation, runtime, corpus execution, or primary CLI
+readiness.
 
 ### Julia Backend Commands, Embedding, and Status
 

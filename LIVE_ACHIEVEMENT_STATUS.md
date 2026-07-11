@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.2.3 — validate Lua source AST**
+  (DONE — ordinary/strict validation and exact 239 names pass; function projection `.2.4` next).
+
+  **Implementation:** Typed checks cover tops/duplicates/functions/raw/edges/targets/slots/regex/strict-unused.
+  Lua's 239-name set is checker-equal to Dart/Julia. Empty-body header classification was corrected.
+
+  **Proof:** PUC Lua 31/31, LuaJIT 31/31, 21 shipped, 102 rule-only corpus, process/manifest, and neutral call-name
+  coverage pass. No ActionIR/runtime/CLI execution or arbitrary Lua-global fallback exists.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.2.2 — parse Lua rule source**
   (DONE — all shipped/rule-only corpus sources parse both runtimes; validation `.2.3` next).
 

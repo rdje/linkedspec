@@ -126,7 +126,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "source_parser", "status parity")
+  assert_equal(first.parity, "source_validation", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -632,6 +632,156 @@ test("source parser accepts every rule-only corpus spec", function()
   if skipped_function_shells == 0 then
     fail("expected at least one staged function-shell corpus spec")
   end
+end)
+
+local function assert_validation_error(operation, expected, label)
+  local ok, validation_error = pcall(operation)
+  if ok then
+    fail((label or "validation") .. ": expected an error")
+  end
+  assert_equal(linkedspec.is_spec_validation_error(validation_error), true, (label or "validation") .. " type")
+  assert_contains(validation_error.message, expected, label)
+end
+
+local function validation_function(name, params, arity)
+  return ast.function_definition({
+    name = name,
+    params = params,
+    arity = arity == nil and #params or arity,
+    body_source = "return(value)",
+    source = "fn " .. name .. "(" .. table.concat(params, ", ") .. ") { return(value) }",
+    source_span = ast.source_span({ line_start = 1, line_end = 1 }),
+    body_span = ast.source_span({ line_start = 1, line_end = 1 }),
+  })
+end
+
+local function spec_with_functions(functions)
+  return ast.spec_file({
+    functions = functions,
+    rules = {
+      ast.rule({
+        header = ast.rule_header({
+          label = "Top",
+          is_top = true,
+          mode = ast.default_rule_mode(),
+          rest = "",
+          line = 1,
+        }),
+        body = {
+          ast.body_element({
+            kind = ast.regex_body_kind({ pattern = "x" }),
+            source = "/x/",
+            line = 2,
+          }),
+        },
+      }),
+    },
+  })
+end
+
+test("source validator checks top and duplicate rule labels", function()
+  assert_validation_error(function()
+    linkedspec.validate_spec(linkedspec.parse_spec("Top:\n /a/"))
+  end, "no top rule", "missing top")
+  assert_validation_error(function()
+    linkedspec.validate_spec(linkedspec.parse_spec("Top::\n /a/\n\nTop:\n /b/"))
+  end, "duplicate rule label", "duplicate rule")
+end)
+
+test("source validator checks edge families targets and slots", function()
+  assert_validation_error(function()
+    linkedspec.validate_spec(linkedspec.parse_spec([[
+Top::
+ /a/ -> A
+ /b/ => B
+A: /a/
+B: /b/
+]]))
+  end, "mixes action", "mixed edges")
+  assert_validation_error(function()
+    linkedspec.validate_spec(linkedspec.parse_spec("Top::\n /a/ -> Ghost"))
+  end, "undefined rule", "missing target")
+  assert_validation_error(function()
+    linkedspec.validate_spec(linkedspec.parse_spec("Top::\n /a/ -> Child[1]\n\nChild:\n /b/"))
+  end, "regex slot 1", "bad target slot")
+  assert_validation_error(function()
+    linkedspec.validate_spec(linkedspec.parse_spec("Top::\n -> A | B\n\nA: /a/\nB: /b/"))
+  end, "grouped action-edge targets", "grouped target block")
+end)
+
+test("source validator checks raw syntax and regex structure", function()
+  assert_validation_error(function()
+    linkedspec.validate_spec(linkedspec.parse_spec("Top::\n unsupported helper line"))
+  end, "unrecognized body syntax", "raw syntax")
+  assert_validation_error(function()
+    linkedspec.validate_spec(linkedspec.parse_spec("Top::\n /[invalid/"))
+  end, "invalid regex pattern", "regex structure")
+end)
+
+test("source validator supports strict unused-rule behavior", function()
+  local parsed = linkedspec.parse_spec("Top::\n /a/ -> Child\n\nChild:\n /b/")
+  assert_equal(linkedspec.validate_spec(parsed), nil, "non-strict validation")
+  assert_validation_error(function()
+    linkedspec.validate_spec(parsed, { strict_syntax = true })
+  end, "unused rule(s) in strict mode: Top", "strict unused top")
+  assert_equal(
+    linkedspec.validate_spec(linkedspec.parse_spec("Top::\n /a/ -> Top"), { strict_syntax = true }),
+    nil,
+    "strict recursive top"
+  )
+end)
+
+test("source validator locks all 239 helper and control names", function()
+  local action_names = require("linkedspec.action_call_names")
+  assert_equal(action_names.count(), 239, "current call-name count")
+  assert_equal(action_names.is_known("trim"), true, "trim reservation")
+  assert_equal(action_names.is_known("with"), true, "with reservation")
+  assert_equal(action_names.is_known("otherwise"), true, "alias reservation")
+  assert_equal(action_names.is_known("not_a_helper"), false, "unknown name")
+end)
+
+test("source validator checks function registry records", function()
+  assert_equal(linkedspec.validate_spec(spec_with_functions({ validation_function("normalize", { "value" }) })), nil)
+  assert_validation_error(function()
+    linkedspec.validate_spec(spec_with_functions({
+      validation_function("normalize", { "value" }),
+      validation_function("normalize", { "other" }),
+    }))
+  end, "duplicate user function", "duplicate function")
+  assert_validation_error(function()
+    linkedspec.validate_spec(spec_with_functions({ validation_function("Top", { "value" }) }))
+  end, "collides with rule label", "function rule collision")
+  assert_validation_error(function()
+    linkedspec.validate_spec(spec_with_functions({ validation_function("trim", { "value" }) }))
+  end, "built-in helper", "function helper collision")
+  assert_validation_error(function()
+    linkedspec.validate_spec(spec_with_functions({ validation_function("normalize", { "value", "value" }) }))
+  end, "duplicate parameter", "duplicate function param")
+  assert_validation_error(function()
+    linkedspec.validate_spec(spec_with_functions({ validation_function("normalize", { "ctx" }) }))
+  end, "parameter 'ctx' is reserved", "reserved function param")
+  assert_validation_error(function()
+    linkedspec.validate_spec(spec_with_functions({ validation_function("normalize", { "value" }, 2) }))
+  end, "does not match parameter count", "function arity")
+end)
+
+test("source validator accepts every shipped spec", function()
+  local paths = nul_delimited_paths("find specs -maxdepth 1 -type f -name '*.spec' -print0")
+  for _, path in ipairs(paths) do
+    linkedspec.validate_spec(linkedspec.parse_spec(read_file(path)))
+  end
+end)
+
+test("source validator accepts every rule-only corpus spec", function()
+  local validation = linkedspec.load_corpus_fixtures("rust/linkedspec-runtime/tests/corpus")
+  local validated_count = 0
+  for _, fixture in ipairs(validation.fixtures) do
+    if not starts_with_top_level_function(fixture.spec_source) then
+      linkedspec.validate_spec(linkedspec.parse_spec(fixture.spec_source))
+      validated_count = validated_count + 1
+    end
+  end
+  assert_equal(validated_count, 102, "validated rule-only corpus count")
 end)
 
 io.stdout:write("1..", total, "\n")

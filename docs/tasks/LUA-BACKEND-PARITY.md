@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-11` (core source parser `.2.2` closed; source validation `.2.3` active)
+- Last updated: `2026-07-11` (source validation `.2.3` closed; function-shell projection `.2.4` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -221,15 +221,41 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   the native parser, both quote forms, exact newline/semicolon rule, rule-only boundary, and active validation `.2.3`.
 
 - ID: `LUA-BACKEND-PARITY.2.3`
-  Status: `active`
+  Status: `done`
   Goal: Add exact source validation and strict-syntax behavior.
   Acceptance: Top rule, duplicates, edge families/targets/indexes, raw fallback, helper/function collisions, regex
     structure, and strict unused rules match the admitted variants with typed diagnostics.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Added public `validate_spec(spec, {strict_syntax=...})` and typed validation
+    exceptions. Checks cover a top rule, duplicate rules/functions, exact 239-name helper/control and runtime/
+    lifecycle/function collisions, identifier/parameter shape, duplicate params, arity, raw fallback, mixed edge
+    families, grouped action targets without shared code, undefined targets, regex-slot bounds, regex structure,
+    and strict unused rules. Added a private current-call inventory module and extended
+    `tools/check_language_capability_coverage.pl` so Lua must exactly equal Dart/Julia and the neutral Perl/corpus/
+    mdBook surface; count is 239. Focused validation exposed and fixed empty-body headers (`Child:`) being collected
+    as raw text. The local gate passes syntax/process/manifest, 31/31 PUC Lua, all 21 shipped specs, 102 rule-only
+    corpus sources, exact call-name coverage, and 31/31 LuaJIT. No ActionIR/runtime/CLI execution is claimed.
+  Commit: `LUA-BACKEND-PARITY.2.3 - validate Lua source AST`
+
+### `LUA-BACKEND-PARITY.2.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Direct permissive-parser probes accepted missing tops, duplicates, raw lines, bad
+  targets/slots, mixed edges, malformed regex structure, and unused rules; no Lua validator or complete helper-name
+  collision inventory existed.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `.2.2` deliberately separates recognition from acceptance, while `.3.2` had
+  not yet materialized Lua contracts. Validation therefore needed its own reusable exact 239-name reservation data
+  and stable AST checks before compiler/runtime work.
+- [x] **FIX** — Added typed validation, complete registry/edge/regex/strict checks, the reusable call-name module,
+  cross-language checker equality, focused failures, and the empty-body header parser correction found by validation.
+- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 31/31 on PUC Lua and 31/31 on LuaJIT, all 21
+  shipped specs and 102 rule-only corpus specs; `perl tools/check_language_capability_coverage.pl` proves exact 239.
+- [x] **NO REGRESSION** — Parser/corpus/process proofs remain green; permissive parsing is still distinct from
+  validation; no ActionIR lowering, arbitrary Lua global fallback, runtime, corpus execute, primary CLI, or codegen
+  is exposed.
+- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook/README, Knowledge Map, call-name checker, and live continuity
+  document the validator/strict boundary and activate spec-produced function-shell projection `.2.4`.
 
 - ID: `LUA-BACKEND-PARITY.2.4`
-  Status: `pending`
+  Status: `active`
   Goal: Consume spec-driven top-level user-function shells.
   Acceptance: `specs/user_function_definition.spec` owns shell parsing/projection; Lua has no competing raw scanner;
     body payload/jobs/AST and provenance remain ordered and exact.
@@ -446,7 +472,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 3 | `LUA-BACKEND-PARITY.1.3` | `done` | Strict typed JSON and exact 105-case manifest/fixture IO pass both runtimes. |
 | 4 | `LUA-BACKEND-PARITY.2.1` | `done` | Typed neutral source/provenance AST round-trips all node/body variants. |
 | 5 | `LUA-BACKEND-PARITY.2.2` | `done` | Core source parser accepts 21 shipped and 102 rule-only corpus specs. |
-| 6 | `LUA-BACKEND-PARITY.2.3` | `active` | Validate parsed source and strict-syntax behavior before compilation. |
+| 6 | `LUA-BACKEND-PARITY.2.3` | `done` | Validator/strict syntax and exact 239-name collision inventory pass. |
+| 7 | `LUA-BACKEND-PARITY.2.4` | `active` | Project spec-produced top-level function shells and staged provenance. |
 
 ## Initial toolchain evidence (read-only planning audit)
 
@@ -491,3 +518,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.1.3` | `LUA-BACKEND-PARITY.1.3 - add strict Lua corpus IO` | Pure-Lua typed JSON, strict UTF-8, exact 105-fixture drift validation, and source-AST handoff. |
 | `LUA-BACKEND-PARITY.2.1` | `LUA-BACKEND-PARITY.2.1 - add typed Lua source AST` | Neutral nodes/provenance, complete body variants, lossless JSON, and parser handoff. |
 | `LUA-BACKEND-PARITY.2.2` | `LUA-BACKEND-PARITY.2.2 - parse Lua rule source` | Public typed rule parser, quote/nesting/separator proofs, and validator handoff. |
+| `LUA-BACKEND-PARITY.2.3` | `LUA-BACKEND-PARITY.2.3 - validate Lua source AST` | Stable source/registry/edge/regex/strict checks, exact call-name inventory, and function projection handoff. |

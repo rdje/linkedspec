@@ -181,7 +181,7 @@ local function parse_header(lines, index)
 end
 
 local function looks_like_header(text)
-  return trim(text):match("^[%w_]+[ \t]*::?[ \t]*%S") ~= nil
+  return trim(text):match("^[%w_]+[ \t]*::?") ~= nil
 end
 
 local function scan_quoted(text, position, quote)

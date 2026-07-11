@@ -58,10 +58,20 @@ sub julia_names {
  return sort @names;
 }
 
+sub lua_names {
+ my $text = read_text('lua/src/linkedspec/action_call_names.lua');
+ $text =~ /local CURRENT_CALL_NAMES = \{(.*?)\n\}/s
+  or fail('cannot locate Lua CURRENT_CALL_NAMES');
+ return sort $1 =~ /\["([^"]+)"\]\s*=\s*true/g;
+}
+
 my @dart = dart_names();
 my @julia = julia_names();
+my @lua = lua_names();
 fail('Dart and Julia current ActionIR call-name inventories differ')
  unless join("\0", @dart) eq join("\0", @julia);
+fail('Dart and Lua current ActionIR call-name inventories differ')
+ unless join("\0", @dart) eq join("\0", @lua);
 
 my %seen;
 for my $name (@dart) {

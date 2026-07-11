@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.2.3 — make permissive parsing feed explicit acceptance):
+  Keep parser recovery/raw nodes inspectable, then reject them in a separate validator. Validation order should
+  stabilize the first actionable diagnostic: top/duplicates/function registry before raw/edge/regex/strict checks.
+  A user-function collision check needs the complete current call surface, not a convenient subset; store one
+  private Lua set and extend the existing cross-language checker so it cannot drift before later ActionIR reuses
+  it. Exercise validation across all broad source inventories because it reveals parser classification errors that
+  permissive parse-only tests miss—here, an empty `Child:` header exposed exactly that defect.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.2.2 — scan structure, preserve action text):
   Use byte positions for ASCII `.spec` delimiters over already-valid UTF-8 strings; substrings then preserve
   Unicode bytes without conflating Unicode with an encoding. Quote-aware brace/parenthesis scanners must treat both

@@ -5,7 +5,8 @@ conformance runtime; LuaJIT is a secondary compatibility leg.
 
 Current status: repository-owned module/test/command scaffold, strict corpus IO,
 typed source/provenance AST data, and permissive rule-level source parsing.
-Validation, top-level function projection, corpus execution, the primary CLI
+Source validation and optional strict-unused checks are also available.
+Top-level function projection, corpus execution, the primary CLI
 contract, and generated source are deliberately not implemented yet.
 
 Run the local gate from the repository root:
@@ -67,6 +68,7 @@ Top::
 ]])
 
 assert(ast.top_rule(parsed).header.label == "Top")
+assert(linkedspec.validate_spec(parsed) == nil)
 ```
 
 Physical newlines separate statements. A semicolon separates multiple
@@ -75,5 +77,8 @@ trailing semicolon. Both single- and double-quoted strings are preserved while
 the parser scans nested blocks. Lua strings may contain arbitrary bytes, so
 `parse_spec` requires strict UTF-8 as the host representation of Unicode source
 text. `parse_spec` currently parses rule paragraphs
-only; validation and spec-returned top-level function projection follow in
-their own leaves.
+only; spec-returned top-level function projection follows separately.
+`validate_spec(parsed, { strict_syntax = true })` adds the
+portable strict unused-rule check; ordinary validation already checks tops,
+duplicates, function/helper collisions, raw syntax, edge families/targets/
+slots, and regex structure. Function-shell production still follows separately.
