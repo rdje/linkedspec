@@ -1,6 +1,11 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3 — share the sibling-chain semantic model):
+  Julia confirmed the Dart lesson: typed marker nodes require a range owner. Select across siblings with nesting
+  depth, evaluate the switch subject once, and execute one bounded branch. Keep attached and lazy inline switch
+  paths separate; they already own structured bodies and must not be routed through marker scanning.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2 — typed nodes still need chain ownership):
   Parsing each marker control into the right AST type is insufficient when semantics span several sibling
   statements. Marker switch must claim the whole range, evaluate its subject once, track first-match state, and

@@ -276,7 +276,8 @@ The global pure-helper parity leaf now locks the governed exhaustive source dire
 return `1`/`0`, direct literals splice explicit `flat(...)`, and standalone explicit working-array string
 transforms mutate while value/receiver forms remain pure. Exact empty-local-match projection also preserves null
 capture/position values, empty containers, numeric presence, 1-based diagnostic defaults, and real zero-width
-matches. The current package suite passes 1,022 assertions;
+matches. Marker-form switch siblings also execute as one nesting-aware first-match/default chain. The current
+package suite passes 1,023 assertions;
 61/61 shared CLI cases in both environments and the 99/99 corpus remain green.
 
 Library example:

@@ -2705,6 +2705,21 @@ Top::
     )
 end
 
+@testset "Governed marker-control fixture" begin
+    source = read(
+        joinpath(
+            REPO_ROOT,
+            "capability_conformance",
+            "fixtures",
+            "capability_control_marker_surface.spec",
+        ),
+        String,
+    )
+    engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(source)))
+
+    @test runtime_parse(engine, "xx").value == Any["elif", "case-b"]
+end
+
 @testset "Runtime value blocks controls and trailing blocks" begin
     engine = LinkedSpecRuntimeEngine(compile_spec(parse_spec(raw"""
 Top::

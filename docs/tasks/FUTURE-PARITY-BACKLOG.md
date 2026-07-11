@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (Dart marker-control closed; Julia `.1.6.1.2.2.3.3` active).
+- Last updated: `2026-07-10` (all marker-control children closed; Rust capture/mark `.1.6.1.2.2.4.1` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -813,13 +813,15 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3 - align Julia empty-match positions`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3`
-  Status: `active`
+  Status: `done`
   Goal: Align marker aliases and matched-case/default control semantics.
   Children: `.1.6.1.2.2.3.1`, `.1.6.1.2.2.3.2`, `.1.6.1.2.2.3.3`
   Acceptance: Newline `i`/`elif` executes like `if`/`elseif`; a matching case excludes default; end markers preserve
     exact control boundaries; close one backend per committed child.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Rust, Dart, and Julia return exact `["elif","case-b"]`: short aliases execute as canonical
+    if/elseif controls and a matched switch case excludes default. The unchanged 99-case corpus remains green on
+    every backend.
+  Commit: closed by `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3 - align Julia marker control`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1`
   Status: `done`
@@ -844,14 +846,18 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2 - align Dart marker control`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3`
-  Status: `active`
+  Status: `done`
   Goal: Align Julia marker switch selection and close `.3`.
   Acceptance: Preserve alias behavior and exclude default after matching case; exact control fixture passes.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Julia groups marker-form switch siblings into one nesting-aware selectable chain in action and
+    value blocks, evaluates the subject once, and executes only the first matching case or otherwise default.
+    Existing typed `i`/`elif` normalization remains unchanged. The governed fixture returns `["elif","case-b"]`;
+    the offline package suite passes 1,023 assertions, both shared 61-case CLI environments pass, and the unchanged
+    corpus passes 99/99. The disposable 122 MB depot was removed after verification.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3 - align Julia marker control`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4`
-  Status: `pending`
+  Status: `active`
   Goal: Complete anonymous/named capture-mark executable semantics.
   Children: `.1.6.1.2.2.4.1`, `.1.6.1.2.2.4.2`, `.1.6.1.2.2.4.3`
   Acceptance: Exact anonymous and named hashes pass, including stable/advancing reads, bridge/reset, mark metadata,
@@ -860,7 +866,7 @@ before implementation.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1`
-  Status: `pending`
+  Status: `active`
   Goal: Complete Rust capture/mark fixture semantics.
   Acceptance: Both exact fixture hashes pass with no unknown-helper warning and existing corpus remains green.
   Verification: `pending`
@@ -1157,8 +1163,8 @@ before implementation.
 | 37 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3` | `done` | Julia exact position fixture, nullable absence, zero-width distinction, 1,022 assertions, 61x2 CLI, and 99 corpus pass; position parent closes. |
 | 38 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1` | `done` | Rust short aliases and existing switch exclusion return exact `["elif","case-b"]`; 137 library, 194 integration, 99 oracle, and 61x2 CLI pass. |
 | 39 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2` | `done` | Dart marker switch grouping returns exact `["elif","case-b"]`; 155 tests, 61x2 CLI, and 99 corpus pass. |
-| 40 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3` | `active` | Align Julia marker switch selection. |
-| 41 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1` | `pending` | Complete Rust capture/mark semantics. |
+| 40 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3` | `done` | Julia marker switch grouping returns exact `["elif","case-b"]`; 1,023 assertions, 61x2 CLI, and 99 corpus pass; control parent closes. |
+| 41 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1` | `active` | Complete Rust capture/mark semantics. |
 | 42 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2` | `pending` | Complete Dart capture/mark semantics. |
 | 43 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3` | `pending` | Complete Julia capture/mark semantics. |
 | 44 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5` | `pending` | Admit six fixtures and close strict 105-case proof. |

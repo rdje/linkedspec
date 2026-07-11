@@ -1051,6 +1051,28 @@ function _execute_runtime_action_statement_at!(
             current_edge,
         )
         return index
+    elseif _runtime_is_marker_switch_start(expr)
+        selection = _select_runtime_marker_switch_chain(
+            engine,
+            statements,
+            index,
+            stop,
+            context,
+            rule_label,
+            current_edge,
+        )
+        if selection.start !== nothing && selection.stop !== nothing
+            _execute_runtime_action_statement_range!(
+                engine,
+                statements,
+                selection.start,
+                selection.stop,
+                context,
+                rule_label,
+                current_edge,
+            )
+        end
+        return selection.next_index
     elseif expr isa ActionControlSwitchExpr && (!isempty(expr.cases) || expr.default_case !== nothing)
         body = _select_runtime_switch_body(
             engine,
@@ -1309,6 +1331,100 @@ _runtime_is_marker_if_start(expr) = expr isa ActionControlIfExpr &&
 _runtime_is_marker_if_end(expr) = expr isa ActionControlMarkerExpr &&
     expr.canonical_keyword == "endif"
 
+function _select_runtime_marker_switch_chain(
+    engine,
+    statements,
+    index,
+    stop,
+    context,
+    rule_label,
+    current_edge,
+)
+    first_expr = statements[index].expr
+    selector = _evaluate_runtime_action_expr!(
+        engine,
+        first_expr.source_expr,
+        context,
+        rule_label,
+        current_edge,
+    )
+    selected_start = nothing
+    selected_stop = nothing
+    selected = false
+    branch_matched = false
+    depth = 0
+    next_index = stop - 1
+    cursor = index + 1
+    while cursor < stop
+        expr = statements[cursor].expr
+        if _runtime_is_marker_switch_start(expr)
+            depth += 1
+            cursor += 1
+            continue
+        elseif _runtime_is_marker_switch_end(expr)
+            if depth > 0
+                depth -= 1
+                cursor += 1
+                continue
+            end
+            if selected && selected_stop === nothing
+                selected_stop = cursor
+            end
+            next_index = cursor
+            break
+        elseif depth == 0 && expr isa ActionControlCaseExpr && expr.body === nothing
+            if selected && selected_stop === nothing
+                selected_stop = cursor
+            end
+            selected = false
+            if !branch_matched
+                candidate = expr.match isa ActionVariableExpr ? expr.match.name :
+                    _evaluate_runtime_action_expr!(
+                        engine,
+                        expr.match,
+                        context,
+                        rule_label,
+                        current_edge,
+                    )
+                if _runtime_string(candidate) == _runtime_string(selector)
+                    selected_start = cursor + 1
+                    selected = true
+                    branch_matched = true
+                end
+            end
+        elseif depth == 0 && expr isa ActionControlDefaultExpr && expr.body === nothing
+            if selected && selected_stop === nothing
+                selected_stop = cursor
+            end
+            selected = false
+            if !branch_matched
+                selected_start = cursor + 1
+                selected = true
+                branch_matched = true
+            end
+        elseif depth == 0 && _runtime_is_marker_case_end(expr)
+            if selected && selected_stop === nothing
+                selected_stop = cursor
+            end
+            selected = false
+        end
+        cursor += 1
+    end
+    if selected && selected_stop === nothing
+        selected_stop = stop
+    end
+    return (start = selected_start, stop = selected_stop, next_index = next_index)
+end
+
+_runtime_is_marker_switch_start(expr) = expr isa ActionControlSwitchExpr &&
+    expr.body === nothing && isempty(expr.cases) && expr.default_case === nothing
+
+_runtime_is_marker_switch_end(expr) = expr isa ActionControlMarkerExpr &&
+    expr.canonical_keyword == "endswitch"
+
+_runtime_is_marker_case_end(expr) = expr isa ActionControlMarkerExpr &&
+    expr.canonical_keyword == "endcase"
+
 function _evaluate_runtime_block_value!(engine, block, context, rule_label, current_edge)
     flow = _execute_runtime_value_statements!(
         engine,
@@ -1400,6 +1516,36 @@ function _execute_runtime_value_statements!(
                 return _RuntimeValueBlockFlow(true, nothing)
             end
             index += 1
+            continue
+        elseif _runtime_is_marker_switch_start(expr)
+            selection = _select_runtime_marker_switch_chain(
+                engine,
+                statements,
+                index,
+                stop,
+                context,
+                rule_label,
+                current_edge,
+            )
+            if selection.start !== nothing && selection.stop !== nothing
+                flow = _execute_runtime_value_statements!(
+                    engine,
+                    statements,
+                    selection.start,
+                    selection.stop,
+                    context,
+                    rule_label,
+                    current_edge;
+                    final_expression_yields = false,
+                )
+                if flow.returned
+                    return flow
+                end
+            end
+            if is_last && final_expression_yields
+                return _RuntimeValueBlockFlow(true, nothing)
+            end
+            index = selection.next_index + 1
             continue
         elseif expr isa ActionControlSwitchExpr && (!isempty(expr.cases) || expr.default_case !== nothing)
             body = _select_runtime_switch_body(

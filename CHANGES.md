@@ -1,6 +1,15 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3 — align Julia marker control
+
+**Marker switch execution:** Julia now groups marker-form switch siblings into one nesting-aware chain in action
+and value blocks. The subject evaluates once; only the first matching case executes, otherwise default.
+
+**Proof/frontier:** Existing `i`/`elif` aliases remain intact and the governed fixture returns exact
+`["elif","case-b"]`. The offline suite passes 1,023 assertions, both 61-case CLI environments, and 99/99 corpus.
+The 122 MB depot was removed; marker-control closes and Rust capture/mark `.1.6.1.2.2.4.1` is active.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2 — align Dart marker control
 
 **Marker switch execution:** Dart now groups marker-form `switch`/`case`/`default`/`endcase`/`endswitch` nodes in

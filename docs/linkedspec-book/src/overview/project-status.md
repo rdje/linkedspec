@@ -231,7 +231,7 @@ Three backbone items tracked major structural modernization — all done:
   `.7.3.2.1` closes optional shared-emitter trace coverage, and `.7.3.2.2` closes exact options, subcommand/
   positional rejection, named resolution, and source/input loading. `.7.3.2.3` now closes native rule/function
   primary execution and recursively key-sorted direct JSON. `.7.3.2.4` now closes phase-ordered failures, stable
-  stderr/exit, and stdout/route/mirror/file/reset/emoji behavior with 75 focused assertions; 1,022 package
+  stderr/exit, and stdout/route/mirror/file/reset/emoji behavior with 75 focused assertions; 1,023 package
   assertions and 99/99 pass. `.7.3.2.5` now adds nine direct process families and focused-gate delegation; status
   is `runtime-corpus-primary-cli`, and `.7.3.3` closes honest local no-drift. Public generated source remains
   deferred to `.3`; global CLI identity `.1.5` is now closed, while active capability census `.1.6` still blocks
