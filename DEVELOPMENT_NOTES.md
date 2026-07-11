@@ -1,6 +1,17 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.3.3 — preserve functions as data before execution):
+  Snapshot typed definitions when building a registry so later caller mutation cannot silently rewrite compiled
+  identity or staged work. Keep body jobs ordered and immutable stitching explicit; never let `body_ast` insertion
+  mutate the source spec. Let ActionIR resolution depend on the tiny exact-call interface rather than registry
+  internals. Invocation preparation should receive already-evaluated values, copy all mutable four-kind values into
+  fresh stores, and accept neither caller state nor host functions. That boundary makes evaluation order a later
+  runtime responsibility while structurally preventing implicit mutation and Lua closure capture. Recursion is an
+  expected semantic rejection, so preserve rule, function, handler-source, stage, and cycle identity in its typed
+  diagnostic. Under disk pressure, cleanup remains limited to unused artifacts owned by this repository/workflow;
+  active or external project trees are observed but not deleted.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.3.2 — share admission, classify before execution):
   Action parsing and behavior admission are separate seams. Make the resolver consume typed nodes recursively and
   reuse validation's single current-name inventory; a second copied allow-list will drift. Keep alias canonical

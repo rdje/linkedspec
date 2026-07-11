@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.3.3 — add Lua function registry
+
+Added typed ordered user-function registry, entry, call-resolution, invocation-frame, and registry-error records.
+Registry construction defensively snapshots typed definitions, rejects duplicates, preserves body source/payload/
+parse-job/optional AST, exposes staged jobs in source order, and projects neutral JSON/descriptors. The concrete
+registry now supplies `.3.2`'s exact-arity user-function-before-helper seam.
+
+Added immutable `body_ast` stitching through validated staged job policy. Added a data-only invocation boundary
+that accepts already-evaluated scalar/array/harray/codeblock values, copies mutable aggregates and codeblock ASTs
+into fresh stores, rejects ambiguous/cyclic values and Lua functions, and accepts no caller-store object. Typed
+unknown/arity/recursion failures retain stable source identity; function execution remains unimplemented.
+
+Syntax/process/manifest checks and 50/50 tests pass on both PUC Lua and LuaJIT; exact 239-name/105-fixture coverage
+remains green. Status advances to `user_function_registry`, and typed compiled state `.3.4` is next. Full local CI
+passes phase0 `1..1030`, both 61-case CLI environments, capability state 60/0/0, generated-source/native-resolution,
+and doctrines. Disk inspection removed no external data: LinkedSpec-owned artifacts were clean, while active
+external project producers owned the observed pressure.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.3.2 — resolve Lua ActionIR contracts
 
 Added typed `ActionContractResolution`, `ActionResolvedContract`, and `ActionContractDiagnostic` records with

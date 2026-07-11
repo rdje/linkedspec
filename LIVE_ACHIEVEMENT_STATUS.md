@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.3.3 — add Lua function registry**
+  (DONE — ordered registry and isolated frames pass both runtimes; compiled state `.3.4` next).
+
+  **Implementation:** Typed snapshots preserve function/body-job provenance and exact-arity resolver precedence;
+  immutable body-AST stitching and fresh four-kind frames prevent caller mutation and Lua closure capture. Typed
+  recursion errors retain rule, helper, handler-source, and cycle identity. Function bodies still do not execute.
+
+  **Proof:** PUC Lua 50/50 and LuaJIT 50/50 plus syntax/process/105-manifest and exact 239-name coverage pass.
+  Full CI passes phase0 `1..1030`, CLI 61x2, census 60/0/0, and doctrines. LinkedSpec-owned artifacts are clean;
+  no active or externally owned artifacts were removed under the disk-pressure directive.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.3.2 — resolve Lua ActionIR contracts**
   (DONE — exact current-name contracts pass both runtimes; ordered registry `.3.3` next).
 

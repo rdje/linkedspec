@@ -18,20 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.3.2` — typed current-name ActionIR contract resolution passes.
-- prior_leaf: `LUA-BACKEND-PARITY.3.1` — typed structural ActionIR parsing passes both Lua runtimes.
-- recent_context: recursive contracts share exact 239 validation names, canonicalize aliases/families, record
-  controls/assignments/methods/nested values, emit generic unknown/raw diagnostics, and expose registry-first
-  resolution; `=(...)` is repaired. Lua 46x2 and full CI (phase0 1030, CLI 61x2, census 60/0/0) pass; no runtime.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.3.3` — ordered function/body-job registry and isolated frames pass.
+- prior_leaf: `LUA-BACKEND-PARITY.3.2` — typed current-name ActionIR contract resolution passes.
+- recent_context: typed registry snapshots preserve ordered definitions/staged jobs, exact calls feed `.3.2`, body
+  AST stitching is immutable, and already-evaluated four-kind values copy into fresh frames without caller stores
+  or Lua closures. Lua 50x2 and full CI (phase0 1030, CLI 61x2, census 60/0/0) pass; no body execution/runtime.
 - latest_commit: this resume block is prepared for commit
-  `LUA-BACKEND-PARITY.3.2 - resolve Lua ActionIR contracts`; previous committed HEAD is
-  `5e4be42c LUA-BACKEND-PARITY.3.1 - parse typed Lua ActionIR`.
+  `LUA-BACKEND-PARITY.3.3 - add Lua function registry`; previous committed HEAD is
+  `6004a591 LUA-BACKEND-PARITY.3.2 - resolve Lua ActionIR contracts`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `LUA-BACKEND-PARITY.3.3`; ordered user-function/body-job registry is active.
-- next_action: Build the concrete ordered registry from typed function definitions, preserve body source/payload/
-  parse-job/AST, resolve exact arity through the `.3.2` seam, and lock eager arguments, fresh frames, recursion
-  diagnostics, and no implicit caller mutation or Lua closure leakage.
+- active_work_unit: `LUA-BACKEND-PARITY.3.4`; typed compiled state and descriptors are active.
+- next_action: Compile typed source AST into ordered effective rules/functions, modes, regex/dependency state,
+  action/blind/lifecycle payloads, registry-aware contracts, source identities, and neutral descriptor JSON.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
@@ -56,4 +55,4 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none after this commit; generated caller packages/caches are absent after cleanup.
+- blockers: none. in_flight_uncommitted: none after this commit; LinkedSpec-owned generated artifacts are clean.

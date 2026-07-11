@@ -5,7 +5,8 @@ conformance runtime; LuaJIT is a secondary compatibility leg.
 
 Current status: repository-owned module/test/command scaffold, strict corpus IO,
 typed source/provenance AST data, permissive rule-level source parsing, a typed
-structural ActionIR parser, and current-name ActionIR contract resolution.
+structural ActionIR parser, current-name ActionIR contract resolution, and an
+ordered user-function/body-job registry with fresh invocation frames.
 Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
 be projected and composed with rule parsing. Staged body dispatch, corpus
@@ -166,8 +167,26 @@ nested arguments, shapes, blocks, access indexes, controls, assignments, and
 receiver methods. Unknown calls produce `unknown_helper`; structural parser
 fallback produces `raw_perl`. Neither path invokes a Lua global.
 
-An optional `{ function_registry = registry }` accepts the concrete `.3.3`
-registry interface (`registry:resolve_call(name, arity)`) so exact-arity user
-functions resolve before helper fallback. The resolver seam is implemented;
-the ordered production registry, staged body-job dispatch, execution, and
-primary CLI promotion remain later owned layers.
+Build the concrete registry directly from a typed spec or function list:
+
+```lua
+local registry = linkedspec.user_function_registry_from_spec(parsed)
+local resolution = registry:resolve_call("normalize", 1)
+
+assert(resolution.matched)
+assert(registry:body_parse_jobs()[1].function_name == "normalize")
+```
+
+The registry snapshots ordered definitions and preserves body source, payload,
+parse job, and optional stitched ActionIR AST. Pass it as
+`{ function_registry = registry }` so exact-arity user functions resolve before
+helper fallback. `stitch_function_body_ast(spec, job_id, body_ast)` returns a
+new typed spec and never mutates the source tree.
+
+`prepare_user_function_invocation(registry, name, evaluated_values, active_names,
+options)` accepts already-evaluated scalar, array, harray, or codeblock values.
+It creates a fresh data-only frame, defensively copies aggregate/codeblock
+arguments, and never captures caller stores or Lua closures. Exact arity is
+mandatory; unknown names, arity drift, ambiguous/cyclic values, and recursion
+are typed registry errors. Staged body-job dispatch, body execution, and primary
+CLI promotion remain later owned layers.

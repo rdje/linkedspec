@@ -743,9 +743,33 @@ The optional `{ function_registry = registry }` resolver input checks
 `registry:resolve_call(name, arity)` before helper fallback for ordinary
 function-call surfaces. Exact matches become `family = "user_function"`;
 registered wrong-arity calls produce `user_function_arity_mismatch`. This is
-the stable `.3.3` integration seam, not a hidden Lua closure registry. The
-concrete ordered registry and body jobs remain next. The dual-runtime gate now
-passes 46/46 on PUC Lua and 46/46 on LuaJIT.
+the stable `.3.3` integration seam, not a hidden Lua closure registry.
+
+The concrete registry is now available:
+
+```lua
+local registry = linkedspec.user_function_registry_from_spec(spec)
+local call = registry:resolve_call("normalize", 1)
+
+assert(call.matched)
+assert(registry:body_parse_jobs()[1].function_name == "normalize")
+```
+
+Registry construction snapshots ordered typed definitions, rejects duplicate
+names, and preserves body source, payload, parse job, and optional ActionIR AST.
+`stitch_function_body_ast(spec, job_id, body_ast)` validates the staged
+`replace_field` / `body_ast` insertion contract and returns a new typed spec;
+neither the source spec nor caller-owned AST is mutated.
+
+Invocation preparation is intentionally data-only. Callers first evaluate each
+argument, then pass the resulting scalar, array, harray, or codeblock values to
+`prepare_user_function_invocation(...)`. It creates fresh local stores and
+defensively copies aggregates and codeblock ASTs. It accepts neither a caller
+store nor a Lua function, so host closures and implicit caller mutation cannot
+cross this boundary. Unknown names, arity drift, ambiguous/cyclic values, and
+recursion are typed failures; recursion reports stable rule and handler-source
+identity. Function-body execution and staged dispatch remain later layers. The
+dual-runtime gate now passes 50/50 on PUC Lua and 50/50 on LuaJIT.
 
 ### Julia Backend Commands, Embedding, and Status
 

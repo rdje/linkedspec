@@ -126,7 +126,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "actionir_contracts", "status parity")
+  assert_equal(first.parity, "user_function_registry", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -1046,7 +1046,11 @@ test("ActionIR parses access assignments nested calls and keyword arguments", fu
 
   assert_equal(linkedspec.parse_action_expression("items = [value]").kind, "assign_scalar", "scalar assignment")
   assert_equal(linkedspec.parse_action_expression("items += value").kind, "assign_array_append", "append assignment")
-  assert_equal(linkedspec.parse_action_expression("meta[key] = { stage : value }").kind, "assign_hash_index", "hash assignment")
+  assert_equal(
+    linkedspec.parse_action_expression("meta[key] = { stage : value }").kind,
+    "assign_hash_index",
+    "hash assignment"
+  )
   assert_equal(
     linkedspec.parse_action_expression('payload["children"][0]["name"] = value').kind,
     "assign_nested_access",
@@ -1254,6 +1258,191 @@ test("ActionIR contracts resolve registered functions before helper fallback", f
       { function_registry = {} }
     )
   end, "must expose resolve_call", "registry interface")
+end)
+
+local function registry_function(name, params, index, body_ast)
+  local body_source = "return(value)"
+  local path = { "functions", tostring(index), "body_source" }
+  return ast.function_definition({
+    name = name,
+    params = params,
+    arity = #params,
+    body_source = body_source,
+    body_payload = json.harray({
+      kind = "staged_payload",
+      node_kind = "function_definition",
+      payload_kind = "function_body",
+      parent_ast_path = json.array(path),
+      function_name = name,
+      params = json.array(params),
+      arity = #params,
+      text = body_source,
+    }),
+    body_parse_job = ast.staged_parse_job({
+      version = 1,
+      job_id = "parse_job:function_body:functions." .. index .. ".body_source",
+      parent_ast_path = path,
+      node_kind = "function_definition",
+      payload_kind = "function_body",
+      function_name = name,
+      params = params,
+      arity = #params,
+      text = body_source,
+      source_span = ast.staged_source_span({ start = 0, ["end"] = #body_source, line_start = 1, line_end = 1 }),
+      parser_spec_id = "actionir-body.spec",
+      top_rule = "action_block",
+      result_policy = "replace_field",
+      result_field = "body_ast",
+      failure_policy = "fail",
+      diagnostic_owner = "function_body",
+    }),
+    body_ast = body_ast,
+    source = "fn " .. name .. "(" .. table.concat(params, ", ") .. ") { " .. body_source .. " }",
+    source_span = ast.source_span({ line_start = 1, line_end = 1 }),
+    body_span = ast.source_span({ line_start = 1, line_end = 1 }),
+  })
+end
+
+local function assert_registry_error(operation, expected, code, label)
+  local ok, registry_error = pcall(operation)
+  if ok then fail((label or "registry") .. ": expected an error") end
+  assert_equal(
+    linkedspec.user_function_registry.is_registry_error(registry_error),
+    true,
+    (label or "registry") .. " type"
+  )
+  assert_contains(registry_error.message, expected, label)
+  if code then assert_equal(registry_error.code, code, (label or "registry") .. " code") end
+  return registry_error
+end
+
+test("user function registry preserves order jobs definitions and exact arity", function()
+  local body_ast = json.harray({ kind = "action_block", statements = json.array() })
+  local zero = registry_function("zero", {}, 0, body_ast)
+  local normalize = registry_function("normalize", { "value" }, 1)
+  local registry = linkedspec.user_function_registry_from_functions({ zero, normalize })
+  zero.body_source = "mutated_after_registry"
+
+  assert_equal(linkedspec.user_function_registry.node_type(registry), "UserFunctionRegistry", "registry type")
+  assert_equal(table.concat(registry:names(), ","), "zero,normalize", "registry order")
+  assert_equal(#registry:body_parse_jobs(), 2, "body job count")
+  assert_equal(registry:body_parse_jobs()[2].function_name, "normalize", "body job order")
+  assert_equal(registry:has_name("zero"), true, "known function")
+  assert_equal(registry:has_name("missing"), false, "missing function")
+
+  local exact = registry:resolve_call("zero", 0)
+  assert_equal(exact.matched, true, "exact match")
+  assert_equal(exact.entry.index, 0, "zero-based entry index")
+  assert_equal(exact.entry.definition.body_ast.kind, "action_block", "body AST preservation")
+  assert_equal(exact.entry.definition.body_source, "return(value)", "definition snapshot")
+  local mismatch = registry:resolve_call("normalize", 2)
+  assert_equal(mismatch.name_known, true, "known mismatch")
+  assert_equal(mismatch.arity_mismatch, true, "arity mismatch")
+  assert_equal(mismatch.expected_arities[1], 1, "expected arity")
+  assert_equal(registry:resolve_call("missing", 0).name_known, false, "missing resolution")
+
+  local projected = linkedspec.user_function_registry.to_json(registry)
+  assert_equal(json.kind(projected.functions), "array", "registry JSON functions")
+  assert_equal(projected.functions[1].index, 0, "registry JSON index")
+  assert_equal(json.kind(projected.body_parse_jobs), "array", "registry JSON jobs")
+  local descriptor = linkedspec.user_function_registry.to_descriptor_json(exact.entry)
+  assert_equal(descriptor.kind, "user_function_definition", "descriptor kind")
+  assert_equal(descriptor.source_text, zero.source, "descriptor source")
+
+  assert_registry_error(function()
+    linkedspec.user_function_registry_from_functions({ zero, zero })
+  end, "duplicate user function 'zero'", nil, "duplicate registry")
+end)
+
+test("user function registry stitches body AST without mutating the source spec", function()
+  local definition = registry_function("normalize", { "value" }, 0)
+  local spec = spec_with_functions({ definition })
+  local body_ast = json.harray({
+    kind = "action_block",
+    statements = json.array({ json.harray({ kind = "action_stmt" }) }),
+  })
+  local stitched = linkedspec.stitch_function_body_ast(
+    spec,
+    "parse_job:function_body:functions.0.body_source",
+    body_ast
+  )
+  assert_equal(spec.functions[1].body_ast, nil, "source spec unchanged")
+  assert_equal(stitched.functions[1].body_ast.kind, "action_block", "stitched body AST")
+  body_ast.kind = "mutated"
+  assert_equal(stitched.functions[1].body_ast.kind, "action_block", "stitched defensive copy")
+  assert_equal(stitched.rules[1].header.label, "Top", "rules preserved")
+
+  local registry = linkedspec.user_function_registry_from_spec(stitched)
+  local resolution = linkedspec.resolve_action_expression_contracts(
+    linkedspec.parse_action_expression("normalize(value)"),
+    { function_registry = registry }
+  )
+  assert_equal(resolution.ok, true, "concrete registry contract result")
+  assert_equal(resolution.contracts[1].family, "user_function", "concrete registry precedence")
+
+  assert_registry_error(function()
+    linkedspec.stitch_function_body_ast(spec, "missing-job", json.harray({ kind = "action_block" }))
+  end, "not found", nil, "missing stitch job")
+end)
+
+test("user function invocation frames copy eager four-kind values into fresh stores", function()
+  local definition = registry_function("bind_all", { "scalar", "items", "meta", "callback" }, 0)
+  local registry = linkedspec.user_function_registry_from_functions({ definition })
+  local source_items = json.array({ "a", json.harray({ nested = true }) })
+  local source_meta = json.harray({ key = json.array({ 1, 2 }) })
+  local source_block = linkedspec.parse_action_expression("{ return(value) }")
+  local frame = linkedspec.prepare_user_function_invocation(
+    registry,
+    "bind_all",
+    { "ready", source_items, source_meta, source_block }
+  )
+
+  assert_equal(linkedspec.user_function_registry.node_type(frame), "UserFunctionInvocationFrame", "frame type")
+  assert_equal(frame.variables.scalar, "ready", "scalar binding")
+  assert_equal(json.kind(frame.variables.items), "array", "array scalar binding")
+  assert_equal(json.kind(frame.arrays.items), "array", "typed array store")
+  assert_equal(json.kind(frame.harrays.meta), "harray", "typed harray store")
+  assert_equal(frame.variables.callback.kind, "block_value", "codeblock binding")
+  assert_equal(frame.variables.outside, nil, "no caller capture")
+  assert_equal(frame.active_path[1], "bind_all", "active path")
+
+  frame.arrays.items[1] = "changed"
+  frame.harrays.meta.key[1] = 99
+  frame.variables.callback.kind = "mutated"
+  assert_equal(source_items[1], "a", "caller array isolated")
+  assert_equal(source_meta.key[1], 1, "caller harray isolated")
+  assert_equal(source_block.kind, "block_value", "caller codeblock isolated")
+  local second = linkedspec.prepare_user_function_invocation(
+    registry,
+    "bind_all",
+    { "ready", source_items, source_meta, source_block }
+  )
+  assert_equal(second.arrays.items[1], "a", "fresh array store")
+  assert_equal(second.harrays.meta.key[1], 1, "fresh harray store")
+end)
+
+test("user function invocation frames diagnose arity unknown calls and recursion", function()
+  local first = registry_function("first", { "value" }, 0)
+  local registry = linkedspec.user_function_registry_from_functions({ first })
+  assert_registry_error(function()
+    linkedspec.prepare_user_function_invocation(registry, "first", {})
+  end, "expects arity 1, got 0", "user_function_arity_mismatch", "frame arity")
+  assert_registry_error(function()
+    linkedspec.prepare_user_function_invocation(registry, "missing", {})
+  end, "unknown user function", "unknown_user_function", "frame unknown")
+  local recursion = assert_registry_error(function()
+    linkedspec.prepare_user_function_invocation(
+      registry,
+      "first",
+      { "value" },
+      { "first", "second" },
+      { rule_label = "Top" }
+    )
+  end, "first -> second -> first in rule Top", "user_function_recursion", "frame recursion")
+  assert_equal(recursion.stage, "user_function_call", "recursion stage")
+  assert_equal(recursion.summary, "Lua user function recursion failed", "recursion summary")
+  assert_equal(recursion.rule_label, "Top", "recursion rule")
+  assert_equal(recursion.handler_source_label, "lua_runtime:function:first", "recursion handler source")
 end)
 
 io.stdout:write("1..", total, "\n")

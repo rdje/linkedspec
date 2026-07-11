@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Lua third)`
 - Created: `2026-07-11`
-- Last updated: `2026-07-11` (ActionIR contracts `.3.2` closed; function registry `.3.3` active)
+- Last updated: `2026-07-11` (function registry `.3.3` closed; compiled state `.3.4` active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -370,15 +370,53 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   and bounded memory close contract resolution and activate concrete ordered function registry `.3.3`.
 
 - ID: `LUA-BACKEND-PARITY.3.3`
-  Status: `active`
+  Status: `done`
   Goal: Add ordered user-function and staged body-job registries.
   Acceptance: Exact arity, eager values, fresh frames, body source/payload/job/AST, and recursion diagnostics match
     neutral semantics; no implicit caller mutation or Lua closure leakage.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Added typed registry, entry, call-resolution, invocation-frame, and registry-
+    exception records. Registry construction snapshots ordered `FunctionDefinition` values, rejects duplicate
+    names, preserves body source/payload/parse-job/optional AST, exposes the staged job queue and neutral descriptor/
+    JSON projections, and supplies the concrete exact-arity interface consumed by `.3.2`. Body-AST stitching
+    returns a new typed `SpecFile` and validates the job's `replace_field` / `body_ast` policy. Invocation framing
+    accepts already-evaluated scalar/array/harray/codeblock values, copies mutable values into fresh data-only
+    variable/array/harray stores, reparses copied codeblock source, never accepts caller stores or Lua functions,
+    and rejects ambiguous tables and cycles. Unknown/arity/recursion failures are typed; recursion carries stable
+    stage, rule, helper, handler-source, and cycle identity. The focused gate passes syntax/process/manifest checks
+    and 50/50 tests on both PUC Lua and LuaJIT; exact 239-name/105-fixture coverage remains green. Full local CI
+    passes phase0 `1..1030`, both 61-case CLI environments, the 60/0/0 admitted-backend census, and doctrines.
+  Commit: `LUA-BACKEND-PARITY.3.3 - add Lua function registry`
+
+  Artifact observation 2026-07-11: disk free space fell from about 51 GB to 42 GB while LinkedSpec gates ran, but
+    `du` showed the LinkedSpec Claude scratch subtree at 0 bytes and repository build output at 8 KB. The pressure
+    is external: active Nexsim `cargo-mutants` scratch is about 8.2 GB and Pgen Claude scratch is about 16 GB,
+    including old multi-gigabyte logs while a current release/PGO build is also running. Live PIDs confirmed both
+    projects have active producers, so deleting either tree is not 100% safe. No external artifact was removed;
+    the director clarified that this workflow sweeps only unused artifacts it owns. External cleanup remains with
+    those projects/agents; LinkedSpec-owned scratch/build output is clean at this observation boundary.
+
+### `LUA-BACKEND-PARITY.3.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `.3.2` could query only an abstract registry interface; there was no ordered concrete
+  owner for definitions, body jobs, body-AST stitching, exact function identity, or isolated invocation input.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Letting compiler/runtime tables or Lua closures stand in for the registry would
+  lose neutral staged provenance and leak host state. The typed function shell needed a dedicated immutable bridge
+  before compiled state and execution.
+- [x] **FIX** — Added defensive registry snapshots, stable entries/resolutions/descriptors, exact-arity lookup,
+  staged job enumeration, immutable body-AST stitching, four-kind deep copies into fresh frames, and source-labeled
+  typed recursion diagnostics.
+- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 50/50 on PUC Lua and 50/50 on LuaJIT. Tests lock
+  ordering, definition snapshot isolation, staged jobs, duplicate/unknown/arity outcomes, concrete resolver
+  precedence, immutable AST stitching, eager input framing, caller isolation, fresh stores, and recursion identity.
+- [x] **NO REGRESSION** — Exact 239-name and 105-fixture coverage, parser/validator/function-shell/ActionIR/process
+  proofs remain green. No function body executes, no staged job dispatches, and no caller store, Lua closure,
+  primary CLI, corpus execution, capability, or generated-source claim is introduced. Full local CI passes phase0
+  `1..1030`, CLI 61x2, capability/generated-source/native-resolution, and doctrine checks.
+- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook/README API, Knowledge Map, changes/development/live status,
+  and bounded memory close registry ownership and activate typed compiled state `.3.4`.
 
 - ID: `LUA-BACKEND-PARITY.3.4`
-  Status: `pending`
+  Status: `active`
   Goal: Compile source AST into typed effective state and descriptors.
   Acceptance: Ordered effective rules/functions, modes, regex/dependency state, action/blind/lifecycle payloads,
     source identities, and outward descriptor JSON match the exact shared contract.
@@ -562,7 +600,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 7 | `LUA-BACKEND-PARITY.2.4` | `done` | Spec-produced function nodes/projected provenance compose without a raw scanner. |
 | 8 | `LUA-BACKEND-PARITY.3.1` | `done` | Typed ActionIR parsing passes 41/41 on PUC Lua and LuaJIT. |
 | 9 | `LUA-BACKEND-PARITY.3.2` | `done` | Typed current-name contracts and generic diagnostics pass both runtimes. |
-| 10 | `LUA-BACKEND-PARITY.3.3` | `active` | Add ordered user-function and staged body-job registries. |
+| 10 | `LUA-BACKEND-PARITY.3.3` | `done` | Ordered registry/jobs, exact calls, immutable stitching, and isolated frames pass both runtimes. |
+| 11 | `LUA-BACKEND-PARITY.3.4` | `active` | Compile source AST into typed effective state and descriptors. |
 
 ## Initial toolchain evidence (read-only planning audit)
 
@@ -611,3 +650,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.2.4` | `LUA-BACKEND-PARITY.2.4 - project Lua function shells` | Spec-owned nodes, Unicode spans, staged sidecars, no raw scanner, and ActionIR handoff. |
 | `LUA-BACKEND-PARITY.3.1` | `LUA-BACKEND-PARITY.3.1 - parse typed Lua ActionIR` | Structural actions, four values, access/assign/control/chains, generic final blocks, and contract-resolution handoff. |
 | `LUA-BACKEND-PARITY.3.2` | `LUA-BACKEND-PARITY.3.2 - resolve Lua ActionIR contracts` | Exact current-name contracts, aliases/families, generic diagnostics, registry-first seam, and registry handoff. |
+| `LUA-BACKEND-PARITY.3.3` | `LUA-BACKEND-PARITY.3.3 - add Lua function registry` | Ordered definitions/jobs, exact resolution, immutable stitching, isolated frames, and compiled-state handoff. |

@@ -12,7 +12,7 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, actionir, contracts, diagnostics, helpers, functions]
-evidence: "LUA-BACKEND-PARITY.3.2 adds lua/src/linkedspec/action_contracts.lua, restores the governed equals symbol callee, and exposes recursive resolvers. The local gate passes 46/46 on PUC Lua and LuaJIT; the cross-language checker proves the shared 239-name set and 105-fixture coverage."
+evidence: "LUA-BACKEND-PARITY.3.2 adds lua/src/linkedspec/action_contracts.lua, restores the governed equals symbol callee, and exposes recursive resolvers. LUA-BACKEND-PARITY.3.3 supplies the concrete registry. The local gate passes 50/50 on PUC Lua and LuaJIT; the cross-language checker proves the shared 239-name set and 105-fixture coverage."
 reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl"
 ---
 
@@ -38,9 +38,9 @@ controls, assignments, and receiver methods are recursively visited.
 The optional `{ function_registry = registry }` seam calls
 `registry:resolve_call(name, arity)` before helper fallback on ordinary
 function-call surfaces. Exact matches use `family = "user_function"`; a known
-name with wrong arity produces `user_function_arity_mismatch`. `.3.3` owns the
-concrete ordered registry behind this interface.
+name with wrong arity produces `user_function_arity_mismatch`. The concrete
+`.3.3` ordered registry implements this interface without changing traversal.
 
 Related facts: [[lua-actionir-ast-parser]], [[lua-frontend-validation]],
 [[dart-actionir-contract-resolver]], [[julia-actionir-contract-resolver]],
-[[text-to-ast-backend-doctrine]].
+[[lua-user-function-registry]], [[text-to-ast-backend-doctrine]].

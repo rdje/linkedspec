@@ -7,13 +7,14 @@ local function_shell = require("linkedspec.user_function_definition_shell")
 local action_ast = require("linkedspec.action_ast")
 local action_parser = require("linkedspec.action_parser")
 local action_contracts = require("linkedspec.action_contracts")
+local user_function_registry = require("linkedspec.user_function_registry")
 
 local M = {}
 
 M.PACKAGE_NAME = "linkedspec"
 M.PACKAGE_VERSION = "0.1.0"
 M.BACKEND_NAME = "lua"
-M.PARITY_STATUS = "actionir_contracts"
+M.PARITY_STATUS = "user_function_registry"
 M.CLI_ENTRYPOINT = "lua/bin/linkedspec-lua"
 M.CORPUS_RUNNER_ENTRYPOINT = "lua/bin/corpus_runner.lua"
 
@@ -84,5 +85,11 @@ M.resolve_action_statement_contracts = action_contracts.resolve_action_statement
 M.resolve_action_expression_contracts = action_contracts.resolve_action_expression_contracts
 M.canonical_action_helper_name = action_contracts.canonical_action_helper_name
 M.is_known_action_ir_call_name = action_contracts.is_known_action_ir_call_name
+M.user_function_registry = user_function_registry
+M.user_function_registry_from_spec = user_function_registry.from_spec
+M.user_function_registry_from_functions = user_function_registry.from_functions
+M.empty_user_function_registry = user_function_registry.empty
+M.stitch_function_body_ast = user_function_registry.stitch_function_body_ast
+M.prepare_user_function_invocation = user_function_registry.prepare_invocation
 
 return M
