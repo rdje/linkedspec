@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.4.1 — align Julia CLI boundary
+
+**Portable boundary:** Julia now renders the exact shared help/usage bytes for `linkedspec_julia`, reads file
+inputs as raw bytes and rejects invalid UTF-8 explicitly, and prints only the stable compile/input/invoke phase
+heading on primary stderr. Valid BOM, newline, normalization, Unicode, execution, and JSON behavior are unchanged.
+
+**Native separation:** Rich structured runtime exceptions and Julia's existing rich trace emitter remain available
+to embedding/native APIs; only the backend-neutral primary process projection is narrowed. The Julia-local process
+checker now locks exact shared help and phase-only failure bytes.
+
+**Proof/frontier:** Exact-help and invalid-file tests bring the package suite to 1,019 passing assertions. The nine
+real-process families and 99/99 corpus pass, and the unchanged global suite advances 13 -> 42/61 in default and
+POSIX environments. All 19 residuals are canonical trace, now active under `.1.5.4.2`.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.4.0 — split Julia global CLI repair
 
 **Global audit:** After Julia project/depot warmup, the unchanged process suite passes 13/61: all 11 ordinary

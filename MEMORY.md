@@ -18,18 +18,18 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.4.0` — Julia global 13/61 gap audited and split.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.3.4` — Dart primary CLI closed with recurring 61x2 gate.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.4.1` — Julia exact help/UTF-8/errors advance to 42/61.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.4.0` — Julia global 13/61 gap audited and split.
 - recent_context: Dart/Julia are 99/99 interpreter-green scoped milestones, not complete public parity; global
   `.1.5`, `.1.6`, and `.3` own current-backend CLI, capability, and generated-source convergence before Lua.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.5.4.0 - split Julia global CLI repair`; previous committed HEAD is
-  `48ef873d FUTURE-PARITY-BACKLOG.1.5.3.4 - close Dart primary CLI`.
+  `FUTURE-PARITY-BACKLOG.1.5.4.1 - align Julia CLI boundary`; previous committed HEAD is
+  `55b21335 FUTURE-PARITY-BACKLOG.1.5.4.0 - split Julia global CLI repair`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.4.1` is the sole active PNT leaf.
-- next_action: replace Julia's local help with the shared template, strictly reject malformed UTF-8 source/input,
-  and suppress backend detail from primary phase stderr while retaining native diagnostics below the adapter.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.4.2` is the sole active PNT leaf.
+- next_action: implement Julia's independent ADR `0024` canonical primary trace projection, retaining rich native
+  trace below the adapter, and close the 19 trace-only residuals at 61/61 default/POSIX.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
@@ -45,7 +45,7 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   parser leading-trivia fact, the director's native in-memory multi-backend rationale, four-backend CLI source/
   target audit, public Rust source-emitter export, ADR `0023` exact interface/capability contract, and Julia
   primary CLI argument/loading/execution/canonical JSON/failures/trace, nine direct process families, the precise
-  `runtime-corpus-primary-cli` status, the 1,017/99 proof, and the current Perl/Rust/Dart/Julia narrow trailing-block
+  `runtime-corpus-primary-cli` status, the 1,019/99 proof, and the current Perl/Rust/Dart/Julia narrow trailing-block
   implementations versus the director's four-kind generic final-codeblock model.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
@@ -53,4 +53,4 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: `.1.5.4.0` Julia audit/split docs are being verified before commit.
+- blockers: none. in_flight_uncommitted: `.1.5.4.1` Julia boundary implementation/docs are being verified before commit.

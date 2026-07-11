@@ -30,7 +30,7 @@ reserved for argument, selection, or manifest validation errors. Existing regres
 format, count mismatch, invalid/duplicate names, missing/stale fixture directories, missing files, malformed JSON,
 and output mismatches.
 
-The direct complete corpus-runner CLI reports 99 passed and 0 failed. Full Julia tests now pass with 1,017
+The direct complete corpus-runner CLI reports 99 passed and 0 failed. Full Julia tests now pass with 1,019
 assertions. `runtime-corpus-full` names the historical interpreter-only boundary; current package/CLI status is
 `runtime-corpus-primary-cli` after the separate direct-process gate.
 

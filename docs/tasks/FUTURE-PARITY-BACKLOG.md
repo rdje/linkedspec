@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`.1.5.4.0` splits Julia's 13/61 global gap; `.1.5.4.1` active; `.11.1` parked).
+- Last updated: `2026-07-10` (`.1.5.4.1` advances Julia to 42/61; canonical trace `.1.5.4.2` active; `.11.1` parked).
 - Owner: repo-local workflow
 
 ## Goal
@@ -503,17 +503,22 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.5.4.0 - split Julia global CLI repair`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.4.1`
-  Status: `active`
+  Status: `done`
   Goal: Align Julia shared help, strict UTF-8 file loading, and stable phase-only failures.
   Acceptance: Julia renders the exact shared help/usage template for its executable token, rejects malformed UTF-8
     source/input while preserving valid text/BOM/newlines, and emits only the stable compile/input/invoke heading
     on primary stderr; rich diagnostics remain available through native APIs and native trace. Ordinary success
     behavior stays native and unchanged.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-10.** `_primary_cli_usage()` is byte-identical to the shared template for
+    `linkedspec_julia`; `_read_primary_cli_file(...)` validates raw file bytes as UTF-8 without normalization,
+    BOM, or newline conversion; primary operational stderr contains exactly one phase heading. The package passes
+    1,019 assertions, the updated nine-family process checker, and 99/99 corpus fixtures. The unchanged suite
+    advances 13 -> 42/61 in both default and `POSIXLY_CORRECT=1` environments; all 19 residuals are canonical-trace
+    cases owned by `.2`.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.4.1 - align Julia CLI boundary`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.4.2`
-  Status: `pending`
+  Status: `active`
   Goal: Replace Julia primary rich trace output with the independent canonical CLI trace projection.
   Acceptance: Julia emits ADR `0024`'s exact levels/events, UTF-8 byte counts, escaping, emoji, stdout/route/mirror,
     reset/append/persistence, and traced failures while keeping its rich native trace emitter independent; all 61
@@ -745,8 +750,8 @@ before implementation.
 | 20 | `FUTURE-PARITY-BACKLOG.1.5.3.3` | `done` | Independent canonical trace closes all 20 residuals at 61/61. |
 | 21 | `FUTURE-PARITY-BACKLOG.1.5.3.4` | `done` | Recurring 151-test/61x2/99 gate and broader no-drift close Dart. |
 | 22 | `FUTURE-PARITY-BACKLOG.1.5.4.0` | `done` | Julia's 13/61 baseline is classified and split before repair. |
-| 23 | `FUTURE-PARITY-BACKLOG.1.5.4.1` | `active` | Align shared help, strict UTF-8, and stable phase-only errors. |
-| 24 | `FUTURE-PARITY-BACKLOG.1.5.4.2` | `pending` | Project canonical trace independently of rich Julia trace. |
+| 23 | `FUTURE-PARITY-BACKLOG.1.5.4.1` | `done` | Shared help, strict UTF-8, and phase-only errors advance Julia to 42/61. |
+| 24 | `FUTURE-PARITY-BACKLOG.1.5.4.2` | `active` | Project canonical trace independently of rich Julia trace. |
 | 25 | `FUTURE-PARITY-BACKLOG.1.5.4.3` | `pending` | Add one recurring four-backend identity driver and close CLI parity. |
 | 26 | `FUTURE-PARITY-BACKLOG.1.6` | `pending` | Census every documented/exported user capability and split all residual parity gaps. |
 | 27 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
@@ -1154,6 +1159,22 @@ Read-only evidence recorded on 2026-07-10:
 - [x] **NO REGRESSION** — This slice changes no Julia, fixture, help, or driver behavior.
 - [x] **LOCKSTEP** — Task/roadmap/live/book/KM surfaces advance only to `.1.5.4.1`; `.1.6` remains behind exact CLI.
 
+## `FUTURE-PARITY-BACKLOG.1.5.4.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The warmed 13/61 audit identifies shorter help, malformed-file acceptance, and
+  backend-detail stderr independently of canonical trace.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `_primary_cli_usage()` was Julia-local; `read(path, String)` creates an
+  invalid Julia string without rejecting malformed bytes; `_print_primary_cli_runtime_error(...)` projected rich
+  native diagnostics onto the portable process surface.
+- [x] **FIX** — Render the exact shared command help, read raw bytes and require `isvalid`, and keep primary stderr
+  to its one phase heading. Native structured exceptions and rich trace APIs remain below the adapter.
+- [x] **ADDRESSED (verified)** — Focused tests lock exact help, malformed spec/input rejection, and exact errors;
+  the package passes 1,019 assertions, the updated nine-family real-process checker passes, and corpus is 99/99.
+- [x] **NO REGRESSION** — All non-trace shared cases pass in default and POSIX environments. Julia advances to
+  42/61; the 19 failures are exactly the canonical-trace inventory already owned by `.1.5.4.2`.
+- [x] **LOCKSTEP** — Task/roadmap/live/book/KM surfaces advance only to `.1.5.4.2`; fixtures and native rich
+  diagnostics/trace remain unchanged.
+
 ## Decisions
 
 - `2026-07-09`: Director directive schedules future backend parity as Dart first, then Julia,
@@ -1231,6 +1252,9 @@ Read-only evidence recorded on 2026-07-10:
 - `2026-07-10`: `.1.5.4.0` measures warmed Julia at 13/61: all ordinary results plus silent trace pass. The 48
   residuals are shared help, strict invalid UTF-8 plus phase-only stderr, and canonical trace. Cold precompile
   progress is toolchain ambient and must be handled by driver warmup. `.1`/`.2` repair Julia; `.3` owns one matrix.
+- `2026-07-10`: `.1.5.4.1` makes the Julia primary boundary exact without changing native semantics: shared help,
+  raw-byte strict UTF-8 file validation, and phase-only stderr advance both option environments from 13 to 42/61.
+  The remaining 19 cases are exclusively canonical trace under active `.1.5.4.2`.
 - `2026-07-10`: `.1.5.1.0` proves Perl's primary adapter is parser-oriented but not strict/deterministic enough to
   be the neutral executable reference. Fixture infrastructure, arguments, success/IO, failures, and trace/gate are
   separate leaves; `.1.5.1.1` became active there and has since closed the runner/help baseline. No behavior changed
@@ -1315,6 +1339,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.3.3` | Three focused trace tests; analyzer/full Dart suite; 99/99 corpus; 61/61 default/POSIX; docs/KM/governance/mdBook/cleanup. | PASS. Canonical Dart trace closes all residuals; `.1.5.3.4` active for recurring gate/no-drift. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.3.4` | `tools/run_dart_local.sh`: 151 tests, 61/61 default/POSIX, 99/99 corpus; broader local gate through Phase 0 `1..1028` in 527s; docs/KM/governance/mdBook/cleanup. | PASS. Dart parent closed; global `.1.5.4` active. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.4.0` | Julia source/local-checker audit; warmed unchanged 13/61 baseline; docs/KM/governance/mdBook/cleanup. | PASS. Help/UTF-8/errors, canonical trace, and final matrix are separately owned; `.1.5.4.1` active. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.4.1` | Exact-help and malformed-file tests; complete Julia local gate: 1,019 assertions/nine process families/99 corpus; unchanged suite 42/61 default/POSIX; docs/KM/governance/mdBook/cleanup. | PASS. All 19 residuals are canonical trace; `.1.5.4.2` active. |
 
 ## Commit Log
 
@@ -1351,6 +1376,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.5.3.3` | `FUTURE-PARITY-BACKLOG.1.5.3.3 - add canonical Dart CLI trace` | Independent ADR 0024 levels/events/sinks/failures; 61/61. |
 | `FUTURE-PARITY-BACKLOG.1.5.3.4` | `FUTURE-PARITY-BACKLOG.1.5.3.4 - close Dart primary CLI` | Recurring 151-test/61x2/99 gate, broader no-drift, parent closeout. |
 | `FUTURE-PARITY-BACKLOG.1.5.4.0` | `FUTURE-PARITY-BACKLOG.1.5.4.0 - split Julia global CLI repair` | Audits 13/61 Julia baseline and splits three exact repair/driver mechanisms. |
+| `FUTURE-PARITY-BACKLOG.1.5.4.1` | `FUTURE-PARITY-BACKLOG.1.5.4.1 - align Julia CLI boundary` | Exact shared help, strict UTF-8 file decoding, and phase-only primary stderr; 42/61. |
 
 ## Changelog
 
@@ -1370,6 +1396,9 @@ Read-only evidence recorded on 2026-07-10:
   broader gates, closes parent `.1.5.3`, and activates four-backend identity `.1.5.4`. No behavior/fixture changes.
 - `2026-07-10`: `.1.5.4.0` classifies Julia's 13/61 warmed baseline. Shared help/strict UTF-8/stable errors,
   canonical trace, and the final four-backend driver become `.1`-`.3`; no Julia behavior changes in the split.
+- `2026-07-10`: `.1.5.4.1` aligns exact help/usage, validates raw file bytes as strict UTF-8, and removes native
+  diagnostic detail from primary stderr while preserving native exceptions. Package/process checks pass and the
+  unchanged suite reaches 42/61 default/POSIX; `.2` owns the 19 trace-only residuals.
 - `2026-07-10`: `.1.5.2.4` adds the recurring Rust gate, proves 61/61 in default/POSIX environments plus the full
   runtime package and broader local gate through Phase 0 `1..1028`, closes parent `.1.5.2`, and activates Dart
   `.1.5.3`. Help and fixture bytes remain unchanged.

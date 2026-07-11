@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: accepted
 tags: [julia, backend, scaffold, cli, corpus]
-evidence: "The repo-owned julia package exposes native APIs, primary CLI and separate corpus runner. .6.3 locks 99/99; .7.3.2.5 locks nine primary process families. Current tests pass with 1,017 assertions at runtime-corpus-primary-cli."
+evidence: "The repo-owned julia package exposes native APIs, primary CLI and separate corpus runner. .6.3 locks 99/99; .7.3.2.5 locks nine primary process families. Current tests pass with 1,019 assertions at runtime-corpus-primary-cli."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'"
 ---
 

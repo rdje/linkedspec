@@ -67,7 +67,7 @@ function _primary_cli_usage()
   linkedspec_julia --inline-spec TEXT --input TEXT [options]
 
 Source selection (choose exactly one):
-  --spec NAME          Resolve and compile a named .spec through the native library
+  --spec NAME          Resolve and compile a named .spec
   --spec-file PATH     Compile .spec source read from PATH
   --inline-spec TEXT   Compile the literal .spec source TEXT
 
@@ -75,25 +75,42 @@ Input selection (choose exactly one):
   --input TEXT         Parse TEXT
   --input-file PATH    Parse file contents read from PATH
 
+Text encoding:
+  Arguments, source, input, JSON, help/errors, and trace use strict UTF-8.
+  Text is not normalized, trimmed, or newline/BOM converted. UTF-16/UTF-32
+  files are not detected implicitly.
+
 Parser options:
   --top-rule NAME      Select the entry rule
   --parse-mode MODE    MODE is seek or consume
 
 Trace options:
-  --trace LEVEL        Enable trace level: none, low, medium, high, full, debug
+  --trace LEVEL        LEVEL is none/quiet, low, medium/med, high, full,
+                       debug/verbose, or an integer
   --trace-file PATH    Write trace output to PATH
   --trace-mode MODE    MODE is stdout, route, or mirror
   --trace-reset        Truncate --trace-file before writing
   --trace-emoji        Enable emoji trace prefixes
+
+Help:
+  --help, -h           Show this help
+
+Trace output:
+  Emits deterministic compile/input/invoke phase records shared by every primary
+  backend command. Native embedding APIs retain richer backend-internal events.
 
 Output:
   Prints the parser result as canonical JSON on stdout. When trace output is sent
   to stdout it is intentionally interleaved with that JSON; use --trace-file with
   --trace-mode route for machine-readable stdout plus routed trace.
 
+Failures:
+  Compilation, input-load, and parser-invocation failures write one stable phase
+  heading to stderr and exit 1. Usage errors write this help and exit 2.
+
 Examples:
   linkedspec_julia --spec Lispish --input '(hello world)'
-  linkedspec_julia --spec-file demo.spec --input-file demo.txt \
+  linkedspec_julia --spec-file demo.spec --input-file demo.txt \\
     --trace high --trace-file linkedspec.trace.log --trace-mode route --trace-reset
 """
 end
@@ -348,8 +365,18 @@ function _read_primary_cli_file(path::String, label::String)
         throw(_PrimaryCliLoadException(label, "$label not found: '$path'"))
     end
     try
-        return read(path, String)
+        text = String(read(path))
+        if !isvalid(text)
+            throw(_PrimaryCliLoadException(
+                label,
+                "$label is not valid UTF-8: '$path'",
+            ))
+        end
+        return text
     catch error
+        if error isa _PrimaryCliLoadException
+            rethrow()
+        end
         throw(_PrimaryCliLoadException(
             label,
             "cannot read $label '$path': $(sprint(showerror, error))",
@@ -507,29 +534,8 @@ function _print_primary_cli_usage_error(err, message)
     print(err, _primary_cli_usage())
 end
 
-function _print_primary_cli_runtime_error(err::IO, message::String, error)
+function _print_primary_cli_runtime_error(err::IO, message::String, _error)
     println(err, "linkedspec: ", message)
-    diagnostic = error isa RuntimeInterpreterException ? error.diagnostic : nothing
-    if diagnostic !== nothing
-        fields = (
-            "owner_stage" => diagnostic.owner_stage,
-            "summary" => diagnostic.summary,
-            "detail" => diagnostic.detail,
-            "spec_name" => diagnostic.spec_name,
-            "spec_path" => diagnostic.spec_path,
-            "top_rule" => diagnostic.top_rule,
-            "rule_label" => diagnostic.rule_label,
-        )
-        for (name, value) in fields
-            if value !== nothing
-                println(err, "  ", name, ": ", value)
-            end
-        end
-    end
-    raw_error = sprint(showerror, error)
-    if !isempty(raw_error)
-        println(err, "  error: ", raw_error)
-    end
     return nothing
 end
 

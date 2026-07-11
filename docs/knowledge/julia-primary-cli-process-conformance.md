@@ -13,7 +13,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, cli, process, conformance, verification, status, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.3.2.5 adds tools/check_julia_primary_cli.sh, delegates the focused gate to nine real-process families, retains 1,017 package assertions and 99/99, and advances status to runtime-corpus-primary-cli."
+evidence: "JULIA-BACKEND-PARITY.7.3.2.5 adds nine real-process families; FUTURE-PARITY-BACKLOG.1.5.4.1 updates exact shared help and phase-only failures while 1,019 package assertions pass."
 reverify: "LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/check_julia_primary_cli.sh && LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh"
 ---
 
@@ -31,24 +31,23 @@ Its nine process families cover:
 4. retired `status` as usage exit `2`;
 5. compilation-before-input operational failure;
 6. input-load failure;
-7. invocation failure with ordered runtime context;
+7. invocation failure with exact phase-only primary stderr;
 8. routed emoji trace with exact clean JSON stdout;
 9. mirrored trace whose stdout prefix is byte-identical to the file and whose
    remaining suffix is exact JSON including its one newline.
 
 `tools/run_julia_local.sh` delegates primary checking to this script, then runs
-the 1,017-assertion package suite, separate corpus-runner checks, and all 99
+the current 1,019-assertion package suite, separate corpus-runner checks, and all 99
 corpus fixtures. `runtime-corpus-primary-cli` names that Julia-local surface. It
 does not claim current Perl/Rust/Dart CLI fixture identity, complete public
 capability parity, or generated-source parity; those remain global `.1.5`,
 `.1.6`, and `.3` work.
 
-`.1.5.4.0` quantifies that distinction: after the same explicit project warmup,
-the unchanged global contract passes 13/61 cases. The nine-family local checker
-accepts Julia's shorter help, detailed failure suffixes, and rich native trace;
-the global contract requires shared help, phase-only primary stderr, strict
-UTF-8, and the canonical trace protocol. `.1.5.4.1` through `.3` own those
-repairs and the recurring four-backend matrix.
+`.1.5.4.0` quantified that distinction at 13/61. `.1.5.4.1` updates this checker
+to require shared help and phase-only primary stderr, adds strict UTF-8 package
+coverage, and advances the unchanged global contract to 42/61 in both option
+environments. The checker still exercises Julia's rich trace pending the
+independent canonical projection under active `.1.5.4.2`.
 
 Related facts: [[julia-primary-cli-failure-trace-routing]],
 [[julia-primary-cli-native-execution-canonical-json]],

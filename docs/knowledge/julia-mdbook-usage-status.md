@@ -13,7 +13,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, mdbook, documentation, parity, embedding, limitations, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.1 documents native usage and 99/99; .7.3.2.5 documents nine-family process conformance and runtime-corpus-primary-cli. Current suite is 1,017; .7.3.3 closes outer no-drift while the root stays active/delegated."
+evidence: "JULIA-BACKEND-PARITY.7.1 documents native usage and 99/99; .7.3.2.5 documents nine-family process conformance. FUTURE-PARITY-BACKLOG.1.5.4.1 raises the current suite to 1,019 and global CLI identity to 42/61."
 reverify: "rg -n 'Julia Backend Commands, Embedding, and Status|Julia in-memory example|runtime-corpus-primary-cli|check_julia_primary_cli|run_julia_local|LINKEDSPEC_RUN_JULIA|generated Julia source' docs/linkedspec-book/src/appendix/backend-handoff.md docs/linkedspec-book/src/public-api/get-and-get-parser.md docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/development/local-ci-and-regression.md docs/tasks/JULIA-BACKEND-PARITY.md && mdbook build docs/linkedspec-book"
 ---
 
@@ -30,7 +30,7 @@ bash tools/run_julia_local.sh
 ```
 
 Direct package/full-corpus commands and opt-in shared CI through `LINKEDSPEC_RUN_JULIA=1` are also documented.
-The current local boundary is 99/99 exact corpus outputs, 1,017 package assertions, nine direct process families,
+The current local boundary is 99/99 exact corpus outputs, 1,019 package assertions, nine direct process families,
 and package/CLI status `runtime-corpus-primary-cli`.
 
 The limitations are explicit. Generated Julia source is not part of the current interpreter gate; `.7.2` defers

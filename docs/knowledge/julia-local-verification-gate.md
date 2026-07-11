@@ -12,7 +12,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, ci, verification, corpus, depot, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.6.4 adds tools/run_julia_local.sh; .7.3.2.5 delegates primary checks to the nine-family real-process checker. The gate passes 1,017 assertions and 99/99; shared CI remains opt-in."
+evidence: "JULIA-BACKEND-PARITY.6.4 adds tools/run_julia_local.sh; .7.3.2.5 delegates primary checks to nine real-process families. FUTURE-PARITY-BACKLOG.1.5.4.1 raises the package gate to 1,019 assertions; 99/99 remains exact."
 reverify: "LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n 'LINKEDSPEC_RUN_JULIA|run_julia_local' tools/run_ci_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md"
 ---
 

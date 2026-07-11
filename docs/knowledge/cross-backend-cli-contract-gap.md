@@ -11,7 +11,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, parity, perl, rust, dart, julia, JULIA-BACKEND-PARITY]
-evidence: "Perl/Rust/Dart close 61/61 default/POSIX. FUTURE-PARITY-BACKLOG.1.5.4.0 measures warmed Julia at 13/61 and splits help/UTF-8/errors, canonical trace, and the final matrix."
+evidence: "Perl/Rust/Dart close 61/61 default/POSIX. FUTURE-PARITY-BACKLOG.1.5.4.1 advances Julia to 42/61 with only 19 canonical-trace residuals before the final matrix."
 reverify: "bash tools/run_dart_local.sh; sed -n '1,220p' julia/src/cli/LinkedSpecJuliaCli.jl; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.4|61/61' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/TASK_TREE.md ROADMAP_V2.md"
 ---
 
@@ -26,8 +26,9 @@ The implemented backend CLI surfaces are not currently interface-equivalent:
   canonical JSON/trace, strict UTF-8, and a recurring gate. `bin/corpus_runner.dart` remains separate at 99/99.
 - Julia `bin/linkedspec_julia.jl` now accepts only the exact parser option contract, rejects subcommands/
   positionals as usage `2`, prepares deterministic named/file/inline source plus literal/file input, executes it
-  through the native pipeline, emits recursively key-sorted direct JSON, and has stable local failure/trace
-  routing and nine-family local process conformance. Global neutral fixture identity remains open.
+  through the native pipeline, emits recursively key-sorted direct JSON, renders exact shared help, rejects
+  malformed UTF-8 files, and emits phase-only primary errors. It passes 42/61 default/POSIX; the 19 remaining
+  differences are canonical trace, while native rich diagnostics/trace remain independent.
 - The Rust workspace now contains `linkedspec-rust`. Exact arguments/loading, reusable direct-result/entry/mode
   execution, and canonical CLI trace pass all 61 shared cases in both environments; its primary lane is closed.
 
@@ -39,7 +40,8 @@ repair, and honest no-drift work rather than treating 99/99 corpus execution as 
 ADR `0023` has since ratified the exact interface. `FUTURE-PARITY-BACKLOG.1.5` owns the neutral fixtures and
 Perl/Rust/Dart repairs are closed; `JULIA-BACKEND-PARITY.7.3.2` owns Julia's local repair, complete through exact
 local process conformance. Global `.1.5.4` now owns unchanged fixture identity and one recurring four-command gate;
-`.1.5.4.0` records Julia's 13/61 baseline and splits exact repair/driver leaves.
+`.1.5.4.0` records Julia's 13/61 baseline; `.1.5.4.1` advances it to 42/61. Active `.2` owns canonical trace and
+`.3` the warmed recurring four-command gate.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specific-cli-requirement]], [[native-in-memory-backend-contract]],
 [[language-agnostic-backend-vision]], [[dart-specific-cli]], [[julia-mdbook-usage-status]],

@@ -400,6 +400,16 @@ end
         return nothing
     end
 
+    shared_help = replace(
+        read(joinpath(REPO_ROOT, "cli_conformance", "cases", "help", "stdout.txt"), String),
+        "{{COMMAND}}" => "linkedspec_julia",
+    )
+    help_output = IOBuffer()
+    help_error = IOBuffer()
+    @test run_cli(["--help"]; io = help_output, err = help_error) == 0
+    @test String(take!(help_output)) == shared_help
+    @test isempty(String(take!(help_error)))
+
     inline_options = LinkedSpecJulia._parse_primary_cli_args([
         "--input=x",
         "--inline-spec=Top:: /x/",
@@ -539,6 +549,32 @@ end
         )
         @test directory_error isa LinkedSpecJulia._PrimaryCliLoadException
         @test occursin("spec file is not a file", sprint(showerror, directory_error))
+
+        invalid_spec_path = joinpath(directory, "invalid.spec")
+        invalid_input_path = joinpath(directory, "invalid.txt")
+        write(invalid_spec_path, UInt8[0x54, 0x6f, 0x70, 0x3a, 0x3a, 0xff])
+        write(invalid_input_path, UInt8[0x78, 0xff])
+        invalid_spec_error = preparation_error(
+            LinkedSpecJulia._parse_primary_cli_args([
+                "--spec-file",
+                invalid_spec_path,
+                "--input",
+                "x",
+            ]),
+        )
+        @test invalid_spec_error isa LinkedSpecJulia._PrimaryCliLoadException
+        @test occursin("spec file is not valid UTF-8", sprint(showerror, invalid_spec_error))
+
+        invalid_input_error = preparation_error(
+            LinkedSpecJulia._parse_primary_cli_args([
+                "--inline-spec",
+                "Top:: /x/",
+                "--input-file",
+                invalid_input_path,
+            ]),
+        )
+        @test invalid_input_error isa LinkedSpecJulia._PrimaryCliLoadException
+        @test occursin("input file is not valid UTF-8", sprint(showerror, invalid_input_error))
     end
 
     mktempdir() do repository
@@ -747,8 +783,7 @@ end
     ])
     @test status == 1
     @test isempty(output)
-    @test startswith(error_output, "linkedspec: parser compilation failed\n")
-    @test occursin("  error: ", error_output)
+    @test error_output == "linkedspec: parser compilation failed\n"
     @test !occursin("input load failed", error_output)
 
     status, output, error_output = cli_run([
@@ -759,8 +794,7 @@ end
     ])
     @test status == 1
     @test isempty(output)
-    @test startswith(error_output, "linkedspec: parser compilation failed\n")
-    @test occursin("spec file not found", error_output)
+    @test error_output == "linkedspec: parser compilation failed\n"
 
     status, output, error_output = cli_run([
         "--inline-spec",
@@ -770,8 +804,7 @@ end
     ])
     @test status == 1
     @test isempty(output)
-    @test startswith(error_output, "linkedspec: input load failed\n")
-    @test occursin("input file not found", error_output)
+    @test error_output == "linkedspec: input load failed\n"
 
     status, output, error_output = cli_run([
         "--inline-spec",
@@ -783,15 +816,7 @@ end
     ])
     @test status == 1
     @test isempty(output)
-    @test error_output ==
-        "linkedspec: parser invocation failed\n" *
-        "  owner_stage: julia_runtime\n" *
-        "  summary: Julia runtime rule lookup failed\n" *
-        "  detail: rule 'Missing' is not compiled\n" *
-        "  spec_name: <inline>\n" *
-        "  top_rule: Missing\n" *
-        "  rule_label: Missing\n" *
-        "  error: rule 'Missing' is not compiled\n"
+    @test error_output == "linkedspec: parser invocation failed\n"
     @test LinkedSpecJulia._primary_cli_fatal_error(InterruptException())
     @test LinkedSpecJulia._primary_cli_fatal_error(OutOfMemoryError())
     @test LinkedSpecJulia._primary_cli_fatal_error(StackOverflowError())
@@ -815,11 +840,7 @@ end
         ])
         @test status == 1
         @test isempty(output)
-        @test occursin("  spec_name: identified.spec\n", error_output)
-        @test occursin("  spec_path: $identified_spec_path\n", error_output)
-        @test first(findfirst("  spec_name:", error_output)) <
-            first(findfirst("  spec_path:", error_output)) <
-            first(findfirst("  top_rule:", error_output))
+        @test error_output == "linkedspec: parser invocation failed\n"
 
         status, output, error_output = cli_run([base_args..., "--trace-mode", "stdout"])
         @test status == 0
@@ -952,8 +973,7 @@ end
         ])
         @test status == 1
         @test isempty(output)
-        @test startswith(error_output, "linkedspec: parser compilation failed\n")
-        @test occursin("  error: ", error_output)
+        @test error_output == "linkedspec: parser compilation failed\n"
     end
 end
 

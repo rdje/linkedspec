@@ -26,6 +26,10 @@ is accepted; `_print_primary_cli_runtime_error(...)` appends backend diagnostics
 `_primary_cli_trace_emitter(...)` routes rich Julia frontend/compiler/runtime events, not ADR `0024`'s canonical
 phase protocol. `.1.5.4.1` owns help/strict UTF-8/phase-only errors, `.2` canonical trace, and `.3` the final matrix.
 
+Current progression: `.1.5.4.1` is complete. Exact shared help, raw-byte `isvalid` UTF-8 validation, and phase-only
+primary stderr pass in default and POSIX environments, advancing Julia from 13 to 42/61. The 19 remaining failures
+are exclusively canonical rich-versus-portable trace differences under active `.1.5.4.2`.
+
 A cold first `using LinkedSpecJulia` may print Julia precompile progress to process stderr before application code
 runs. The existing `tools/check_julia_primary_cli.sh` already warms the project explicitly. The final global driver
 must do the same, while the application continues to own its bytes after warmup; the ambient toolchain message is

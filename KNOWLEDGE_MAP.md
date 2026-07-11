@@ -2689,7 +2689,7 @@ _Implemented backend CLIs do not yet expose one identical user-facing interface_
 
 - **answers:** do all LinkedSpec backend CLIs have the same options | are the Perl Rust Dart and Julia CLIs equivalent | does Rust have a LinkedSpec CLI binary | what does the current Perl CLI do | what do the current Dart and Julia CLIs do | why was JULIA-BACKEND-PARITY.7.3 split
 - **date:** 2026-07-10 · **status:** current
-- **evidence:** `Perl/Rust/Dart close 61/61 default/POSIX. FUTURE-PARITY-BACKLOG.1.5.4.0 measures warmed Julia at 13/61 and splits help/UTF-8/errors, canonical trace, and the final matrix.`
+- **evidence:** `Perl/Rust/Dart close 61/61 default/POSIX. FUTURE-PARITY-BACKLOG.1.5.4.1 advances Julia to 42/61 with only 19 canonical-trace residuals before the final matrix.`
 - **reverify:** `bash tools/run_dart_local.sh; sed -n '1,220p' julia/src/cli/LinkedSpecJuliaCli.jl; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.4|61/61' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/TASK_TREE.md ROADMAP_V2.md`
 - **source:** [`docs/knowledge/cross-backend-cli-contract-gap.md`](docs/knowledge/cross-backend-cli-contract-gap.md)
 
@@ -3364,7 +3364,7 @@ _Julia backend package and command surface_
 
 - **answers:** where is the Julia backend package | how do I run Julia backend tests | what is the Julia backend CLI | what is the Julia corpus runner command | what does the Julia backend package implement | does Julia corpus execution exist yet
 - **date:** 2026-07-10 · **status:** accepted
-- **evidence:** `The repo-owned julia package exposes native APIs, primary CLI and separate corpus runner. .6.3 locks 99/99; .7.3.2.5 locks nine primary process families. Current tests pass with 1,017 assertions at runtime-corpus-primary-cli.`
+- **evidence:** `The repo-owned julia package exposes native APIs, primary CLI and separate corpus runner. .6.3 locks 99/99; .7.3.2.5 locks nine primary process families. Current tests pass with 1,019 assertions at runtime-corpus-primary-cli.`
 - **reverify:** `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
 - **source:** [`docs/knowledge/julia-backend-scaffold-package.md`](docs/knowledge/julia-backend-scaffold-package.md)
 
@@ -3508,7 +3508,7 @@ _Julia parity has a focused local gate and optional local-CI integration_
 
 - **answers:** how do I run Julia parity checks | how do I run the Julia local gate | does run_ci_local include Julia checks | does Julia local CI require a Julia SDK by default | how do I select the Julia executable for LinkedSpec checks | how do I select the Julia depot for LinkedSpec checks | what does JULIA-BACKEND-PARITY.6.4 prove
 - **date:** 2026-07-10 · **status:** current
-- **evidence:** `JULIA-BACKEND-PARITY.6.4 adds tools/run_julia_local.sh; .7.3.2.5 delegates primary checks to the nine-family real-process checker. The gate passes 1,017 assertions and 99/99; shared CI remains opt-in.`
+- **evidence:** `JULIA-BACKEND-PARITY.6.4 adds tools/run_julia_local.sh; .7.3.2.5 delegates primary checks to nine real-process families. FUTURE-PARITY-BACKLOG.1.5.4.1 raises the package gate to 1,019 assertions; 99/99 remains exact.`
 - **reverify:** `LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n 'LINKEDSPEC_RUN_JULIA|run_julia_local' tools/run_ci_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md`
 - **source:** [`docs/knowledge/julia-local-verification-gate.md`](docs/knowledge/julia-local-verification-gate.md)
 
@@ -3526,7 +3526,7 @@ _Julia mdBook usage and status describe the native 99 of 99 interpreter boundary
 
 - **answers:** where does the mdBook document Julia usage | what Julia commands should the book show | how does the mdBook explain Julia parity status | does the mdBook include a Julia in-memory example | what limitations remain after Julia reaches 99 of 99 | is generated Julia source part of current parity | does Julia claim compile and parser trace parity | what does JULIA-BACKEND-PARITY.7.1 prove
 - **date:** 2026-07-10 · **status:** current
-- **evidence:** `JULIA-BACKEND-PARITY.7.1 documents native usage and 99/99; .7.3.2.5 documents nine-family process conformance and runtime-corpus-primary-cli. Current suite is 1,017; .7.3.3 closes outer no-drift while the root stays active/delegated.`
+- **evidence:** `JULIA-BACKEND-PARITY.7.1 documents native usage and 99/99; .7.3.2.5 documents nine-family process conformance. FUTURE-PARITY-BACKLOG.1.5.4.1 raises the current suite to 1,019 and global CLI identity to 42/61.`
 - **reverify:** `rg -n 'Julia Backend Commands, Embedding, and Status|Julia in-memory example|runtime-corpus-primary-cli|check_julia_primary_cli|run_julia_local|LINKEDSPEC_RUN_JULIA|generated Julia source' docs/linkedspec-book/src/appendix/backend-handoff.md docs/linkedspec-book/src/public-api/get-and-get-parser.md docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/development/local-ci-and-regression.md docs/tasks/JULIA-BACKEND-PARITY.md && mdbook build docs/linkedspec-book`
 - **source:** [`docs/knowledge/julia-mdbook-usage-status.md`](docs/knowledge/julia-mdbook-usage-status.md)
 
@@ -3544,7 +3544,7 @@ _Julia primary CLI has exact arguments deterministic named resolution and exact 
 
 - **answers:** what options does the Julia primary CLI accept | does the Julia primary CLI accept status or corpus subcommands | does the Julia primary CLI accept positional arguments | how does Julia resolve --spec NAME | what is the Julia named spec resolution order | do Julia spec and input files preserve exact contents | can the Julia primary CLI execute a prepared request yet | what did JULIA-BACKEND-PARITY.7.3.2.2 implement
 - **date:** 2026-07-10 · **status:** current
-- **evidence:** `JULIA-BACKEND-PARITY.7.3.2.2 adds the local option/preparation model; FUTURE-PARITY-BACKLOG.1.5.4.0 later proves read(path, String) accepts malformed UTF-8 and routes strict repair to active .1.5.4.1.`
+- **evidence:** `JULIA-BACKEND-PARITY.7.3.2.2 adds the local option/preparation model; FUTURE-PARITY-BACKLOG.1.5.4.1 reads raw bytes, requires isvalid UTF-8, and proves exact shared help/loading behavior.`
 - **reverify:** `LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n '_parse_primary_cli_args|_prepare_primary_cli_request|_resolve_named_spec_path|unexpected positional|primary_status_code' julia/src/cli/LinkedSpecJuliaCli.jl julia/test/runtests.jl tools/run_julia_local.sh`
 - **source:** [`docs/knowledge/julia-primary-cli-arguments-resolution-loading.md`](docs/knowledge/julia-primary-cli-arguments-resolution-loading.md)
 
@@ -3553,7 +3553,7 @@ _Julia primary CLI has stable operational failures and complete trace routing co
 
 - **answers:** what stderr headings does the Julia primary CLI use | what exit code does Julia CLI use for compilation input and invocation failures | does Julia compile before loading an input file | what runtime diagnostic fields does the Julia CLI print | how do stdout route and mirror work in the Julia CLI | does Julia trace reset work with stdout mode or quiet tracing | what emoji does Julia trace use for each level | does Julia swallow interrupt out of memory or stack overflow errors | what did JULIA-BACKEND-PARITY.7.3.2.4 implement
 - **date:** 2026-07-10 · **status:** current
-- **evidence:** `JULIA-BACKEND-PARITY.7.3.2.4 adds phase-ordered failure normalization and complete sink/file/reset/emoji behavior. Seventy-five focused assertions, the 1,017-assertion suite, and 99/99 corpus gate pass.`
+- **evidence:** `JULIA-BACKEND-PARITY.7.3.2.4 adds native phase/trace controls; FUTURE-PARITY-BACKLOG.1.5.4.1 narrows primary stderr to one phase heading while native structured exceptions remain available.`
 - **reverify:** `LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n '_print_primary_cli_runtime_error|_load_primary_cli_request_input|_primary_cli_fatal_error|_trace_emoji_prefix|Primary CLI failures and trace routing' julia/src julia/test/runtests.jl`
 - **source:** [`docs/knowledge/julia-primary-cli-failure-trace-routing.md`](docs/knowledge/julia-primary-cli-failure-trace-routing.md)
 
@@ -3580,7 +3580,7 @@ _Julia primary CLI is locked by nine real process families_
 
 - **answers:** how is the Julia primary CLI tested as a real process | what does check_julia_primary_cli.sh test | does the Julia gate verify exact stdout stderr and trailing newline | does the Julia gate verify exit zero one and two | does the Julia gate verify routed and mirrored trace bytes | what does runtime-corpus-primary-cli mean | is runtime-corpus-primary-cli a complete backend parity claim | what did JULIA-BACKEND-PARITY.7.3.2.5 implement
 - **date:** 2026-07-10 · **status:** current
-- **evidence:** `JULIA-BACKEND-PARITY.7.3.2.5 adds tools/check_julia_primary_cli.sh, delegates the focused gate to nine real-process families, retains 1,017 package assertions and 99/99, and advances status to runtime-corpus-primary-cli.`
+- **evidence:** `JULIA-BACKEND-PARITY.7.3.2.5 adds nine real-process families; FUTURE-PARITY-BACKLOG.1.5.4.1 updates exact shared help and phase-only failures while 1,019 package assertions pass.`
 - **reverify:** `LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/check_julia_primary_cli.sh && LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh`
 - **source:** [`docs/knowledge/julia-primary-cli-process-conformance.md`](docs/knowledge/julia-primary-cli-process-conformance.md)
 
@@ -3769,7 +3769,7 @@ _Julia exposes shared trace controls sinks and traced native pipeline entrypoint
 
 - **answers:** does Julia have trace controls | how does Julia configure trace sinks | what is LinkedSpecTraceConfig in Julia | which Julia runtime entrypoints accept tracing | does Julia tracing preserve parse output | what trace controls does Julia expose beneath runtime instrumentation | which Julia frontend compiler and staged APIs accept tracing
 - **date:** 2026-07-10 · **status:** current
-- **evidence:** `JULIA-BACKEND-PARITY.4.5.2 adds trace controls/sinks; .7.3.2.1 spans the native pipeline; .7.3.2.4 completes CLI stdout/route/mirror/file/reset/emoji behavior. The current suite is 1,017 and corpus 99/99.`
+- **evidence:** `JULIA-BACKEND-PARITY.4.5.2 adds trace controls/sinks; .7.3.2.1 spans the native pipeline; .7.3.2.4 completes native CLI sink behavior. The current suite is 1,019 and corpus 99/99; canonical primary trace is active .1.5.4.2.`
 - **reverify:** `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - **source:** [`docs/knowledge/julia-trace-controls-sinks.md`](docs/knowledge/julia-trace-controls-sinks.md)
 

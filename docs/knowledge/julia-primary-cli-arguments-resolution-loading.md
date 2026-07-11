@@ -13,7 +13,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, cli, arguments, resolution, io, parity, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.7.3.2.2 adds the local option/preparation model; FUTURE-PARITY-BACKLOG.1.5.4.0 later proves read(path, String) accepts malformed UTF-8 and routes strict repair to active .1.5.4.1."
+evidence: "JULIA-BACKEND-PARITY.7.3.2.2 adds the local option/preparation model; FUTURE-PARITY-BACKLOG.1.5.4.1 reads raw bytes, requires isvalid UTF-8, and proves exact shared help/loading behavior."
 reverify: "LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia LINKEDSPEC_JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot bash tools/run_julia_local.sh && rg -n '_parse_primary_cli_args|_prepare_primary_cli_request|_resolve_named_spec_path|unexpected positional|primary_status_code' julia/src/cli/LinkedSpecJuliaCli.jl julia/test/runtests.jl tools/run_julia_local.sh"
 ---
 
@@ -38,9 +38,10 @@ exact string contents; inline source and literal input remain unchanged. The
 public CLI defers input-file loading until source compilation succeeds, preserving
 the reference failure order.
 
-Global audit correction: Julia `String` can carry invalid UTF-8, so `read(path, String)` preserves bytes but does
-not enforce ADR `0025` strict text. `.1.5.4.0` proves malformed source/input are currently accepted; active
-`.1.5.4.1` must add `isvalid` rejection while preserving valid BOM/newline/normalization data.
+Global correction: Julia `String` can carry invalid UTF-8, so the primary loader now reads raw bytes, constructs
+the preserved string, and requires `isvalid` before returning it. `.1.5.4.1` proves malformed source/input fail in
+their stable phases while valid BOM/newline/normalization and Unicode bytes remain unchanged. Its exact shared help
+and loading/error repair advances the unchanged suite from 13 to 42/61 in default and POSIX environments.
 
 The typed request retains the validated controls, source identity/path and text,
 plus literal input or a deferred input path for native execution. `.7.3.2.3`

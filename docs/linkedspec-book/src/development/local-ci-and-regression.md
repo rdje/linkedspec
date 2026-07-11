@@ -131,8 +131,9 @@ accumulators/returns, recursion/progress guards, registered user functions, diag
 manifest-backed corpus validation, controlled and full library corpus execution, public-parser leading-trivia
 parity, spec-driven top-level user-function source composition, native primary request execution/canonical JSON,
 stable primary failure/trace routing, and unbounded full-manifest CLI execution. The full package suite currently
-passes with 1,017 assertions and status `runtime-corpus-primary-cli`. That local checker is intentionally narrower
-than the global 61-case contract; `.1.5.4.0` records a warmed 13/61 baseline and the ordered repair split.
+passes with 1,019 assertions and status `runtime-corpus-primary-cli`. `.1.5.4.1` updates its exact help/error checks,
+adds strict UTF-8 package coverage, and advances the warmed global contract to 42/61 default/POSIX. Its 19
+remaining failures are canonical trace under `.1.5.4.2`; the checker still exercises rich native trace meanwhile.
 
 The library executor and corpus CLI support named or bounded subsets. For example:
 

@@ -12,7 +12,7 @@ answers:
 date: 2026-07-10
 status: current
 tags: [julia, trace, runtime, diagnostics, JULIA-BACKEND-PARITY]
-evidence: "JULIA-BACKEND-PARITY.4.5.2 adds trace controls/sinks; .7.3.2.1 spans the native pipeline; .7.3.2.4 completes CLI stdout/route/mirror/file/reset/emoji behavior. The current suite is 1,017 and corpus 99/99."
+evidence: "JULIA-BACKEND-PARITY.4.5.2 adds trace controls/sinks; .7.3.2.1 spans the native pipeline; .7.3.2.4 completes native CLI sink behavior. The current suite is 1,019 and corpus 99/99; canonical primary trace is active .1.5.4.2."
 reverify: "JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 

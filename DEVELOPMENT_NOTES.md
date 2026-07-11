@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.4.1 — validate bytes before trusting a host string):
+  Julia `String(read(path))` preserves file bytes but can represent invalid UTF-8, so strict text boundaries must
+  call `isvalid` before parsing or execution. This preserves valid BOM/newline/normalization data without guessing
+  UTF-16/UTF-32. Keep portable process errors phase-only and retain causal detail in native structured exceptions;
+  exact shared help plus this boundary split advances Julia from 13 to 42/61 with only trace projection left.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.4.0 — local process proof is not global byte identity):
   Julia's nine-family checker proves useful local behavior but permits a shorter help template, detailed backend
   stderr, and rich trace. Always run the unchanged shared manifest before declaring cross-variant identity. Julia

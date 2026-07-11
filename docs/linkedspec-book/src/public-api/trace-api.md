@@ -145,6 +145,12 @@ events. `.7.3.2.3` composes that emitter through native primary execution, and
 routed/mirrored behavior across real processes; this still does not claim
 complete backend or CLI parity.
 
+`FUTURE-PARITY-BACKLOG.1.5.4.1` now separates the portable process boundary
+from those native diagnostics: exact help, strict UTF-8 files, and phase-only
+stderr pass 42/61 shared cases in both option environments. The 19 remaining
+cases are precisely the canonical trace projection owned by active `.1.5.4.2`;
+the native emitter and APIs below remain unchanged.
+
 The Julia control surface is:
 
 - `LinkedSpecTraceLevel` plus exported `LinkedSpecTraceNone`,
@@ -175,7 +181,7 @@ and untraced action, blind, and recursion paths preserve identical results.
 Package status was `runtime-trace-events` at the `.4.5.4` runtime-trace boundary; that
 mechanism label is historical, not the current overall backend status. The
 current Julia package/CLI status is `runtime-corpus-primary-cli` after the
-99/99 interpreter and nine-family direct-process gates.
+99/99 interpreter, 1,019 package assertions, and nine-family direct-process gates.
 
 `.7.3.2.1` propagates one caller-owned emitter through the native pipeline. At
 low level, `julia_frontend:parse_spec`, `julia_frontend:validate_spec`,
@@ -214,7 +220,8 @@ result = runtime_execute(LinkedSpecRuntimeEngine(compiled), "x"; trace = trace)
 The focused proof adds 28 assertions for success/failure events, routed output,
 disabled quietness, and traced/untraced identity. At that leaf the complete Julia
 package suite passed with 868 assertions and the focused corpus gate remained 99/99;
-later CLI preparation/execution/failure-routing tests bring the current total to 1,017 without trace or corpus drift.
+later CLI preparation/execution/failure-routing and strict-boundary tests bring the current total to 1,019 without
+trace or corpus drift.
 
 ## Future variant trace parity checklist
 
@@ -239,7 +246,8 @@ The Perl reference backend ships `bin/linkedspec`, and the Julia variant ships
 project these controls through one canonical phase protocol; Perl is the current
 61-case reference after strict UTF-8 expansion. `linkedspec-rust` projects the same protocol independently of its
 richer native trace API and `.1.5.2.4` closes all 61 unchanged cases in both option environments plus recurring
-`tools/run_rust_local.sh` verification. Dart/Julia convergence remains under the global CLI lane.
+`tools/run_rust_local.sh` verification. Dart is also 61/61. Julia is 42/61 after exact boundary/error repair;
+active `.1.5.4.2` owns its 19 canonical-trace residuals under the global CLI lane.
 
 ```sh
 perl bin/linkedspec --spec-file demo.spec --input-file demo.txt \

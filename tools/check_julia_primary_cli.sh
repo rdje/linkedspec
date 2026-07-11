@@ -83,8 +83,9 @@ expect_first_line() {
 run_primary help --help
 expect_status 0
 expect_empty "$STDERR_FILE"
-expect_contains 'linkedspec_julia --spec NAME --input TEXT' "$STDOUT_FILE"
-expect_contains '--trace-mode MODE' "$STDOUT_FILE"
+sed 's/{{COMMAND}}/linkedspec_julia/g' \
+ "$REPO_ROOT/cli_conformance/cases/help/stdout.txt" >"$EXPECTED_FILE"
+expect_exact "$EXPECTED_FILE" "$STDOUT_FILE"
 
 RULE_SPEC="$TEMP_ROOT/rule.spec"
 INPUT_FILE="$TEMP_ROOT/input.txt"
@@ -114,21 +115,22 @@ run_primary compilation-failure \
  --inline-spec 'not a spec' --input-file "$TEMP_ROOT/missing-input.txt"
 expect_status 1
 expect_empty "$STDOUT_FILE"
-expect_first_line 'linkedspec: parser compilation failed' "$STDERR_FILE"
+printf '%s\n' 'linkedspec: parser compilation failed' >"$EXPECTED_FILE"
+expect_exact "$EXPECTED_FILE" "$STDERR_FILE"
 
 run_primary input-failure \
  --inline-spec $'Top::\n /x/\n' --input-file "$TEMP_ROOT/missing-input.txt"
 expect_status 1
 expect_empty "$STDOUT_FILE"
-expect_first_line 'linkedspec: input load failed' "$STDERR_FILE"
+printf '%s\n' 'linkedspec: input load failed' >"$EXPECTED_FILE"
+expect_exact "$EXPECTED_FILE" "$STDERR_FILE"
 
 run_primary invocation-failure \
  --inline-spec $'Top::\n /x/\n' --input x --top-rule Missing
 expect_status 1
 expect_empty "$STDOUT_FILE"
-expect_first_line 'linkedspec: parser invocation failed' "$STDERR_FILE"
-expect_contains '  owner_stage: julia_runtime' "$STDERR_FILE"
-expect_contains '  top_rule: Missing' "$STDERR_FILE"
+printf '%s\n' 'linkedspec: parser invocation failed' >"$EXPECTED_FILE"
+expect_exact "$EXPECTED_FILE" "$STDERR_FILE"
 
 printf '%s\n' '"trace"' >"$EXPECTED_FILE"
 run_primary routed-trace \

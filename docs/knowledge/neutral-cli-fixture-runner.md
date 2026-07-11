@@ -29,8 +29,8 @@ PERL5LIB= perl tools/run_cli_conformance.pl \
 ```
 
 For Rust, `tools/run_rust_local.sh` builds the command and invokes this same runner in default and POSIX option
-environments. Perl, Rust, and Dart pass all 61 unchanged cases. Julia's warmed `.1.5.4.0` audit passes 13/61 and
-splits the remaining help/UTF-8/error, trace, and recurring-driver work under `.1.5.4.1` through `.3`.
+environments. Perl, Rust, and Dart pass all 61 unchanged cases. Julia's `.1.5.4.1` repair passes 42/61 in both
+environments; all 19 residuals are canonical trace under `.1.5.4.2`, followed by the recurring driver in `.3`.
 
 Schema version 1 validates unique safe ids/paths, known keys, checked-in input
 and expected files, argument arrays, channel definitions, generated-file

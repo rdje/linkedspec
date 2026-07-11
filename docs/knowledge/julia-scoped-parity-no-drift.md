@@ -16,7 +16,7 @@ reverify: "rg -n 'runtime-corpus-primary-cli|JULIA-BACKEND-PARITY\.7\.3\.3|FUTUR
 ---
 
 `JULIA-BACKEND-PARITY.7.3.3` closes Julia's local no-drift audit at the precise
-`runtime-corpus-primary-cli` milestone: 1,017 package assertions, nine direct
+`runtime-corpus-primary-cli` milestone: currently 1,019 package assertions, nine direct
 primary-process families, and all 99 interpreter corpus fixtures. It changes no
 parser, compiler, runtime, or CLI behavior.
 
