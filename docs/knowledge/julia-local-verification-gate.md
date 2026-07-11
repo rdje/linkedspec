@@ -46,8 +46,11 @@ LINKEDSPEC_RUN_JULIA=1 bash tools/run_ci_local.sh
 That boundary keeps ordinary core verification available on machines without Julia. A Julia-capable checkout has
 one explicit opt-in that composes the focused gate without duplicating its commands.
 
+For exact cross-backend command identity, `tools/run_primary_cli_matrix.sh` explicitly warms the Julia project and
+combines it with Perl, Rust, and Dart in both environments. `.1.5.4.3` closes that recurring 4x2x61 proof.
+
 Related facts: [[julia-mdbook-usage-status]], [[julia-full-corpus-gate]], [[julia-backend-scaffold-package]],
 [[dart-local-verification-gate]], [[native-in-memory-backend-contract]], [[phase0-regression-structure]],
 [[julia-primary-cli-native-execution-canonical-json]],
 [[julia-primary-cli-failure-trace-routing]], [[julia-primary-cli-process-conformance]],
-[[julia-canonical-primary-cli-trace]].
+[[julia-canonical-primary-cli-trace]], [[primary-cli-four-backend-matrix]].

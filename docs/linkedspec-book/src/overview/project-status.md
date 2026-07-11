@@ -55,7 +55,7 @@ Three backbone items tracked major structural modernization — all done:
 
 - **Documentation and book sync** — the book is kept aligned with the codebase as features land and surfaces evolve.
 - **Variant-agnostic documentation** — this book is being aligned so it describes the `.spec` contract, DSL, and helper semantics backend-neutrally, with the Perl implementation shown as the reference backend rather than as "the" implementation.
-- **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred parity work. ADR `0023` owns exact user behavior/CLI, ADR `0024` canonical trace, and ADR `0025` Unicode scalar text encoded as strict preserved UTF-8. Perl, Rust, Dart, and Julia now pass the same 61 CLI cases in default/POSIX environments; `.1.5.4.3` owns the recurring warmed four-command gate. Global `.1.6` owns capability census and `.3` generated-source parity, so scoped 99/99 interpreter milestones are not complete backend parity. Lua follows convergence.
+- **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred parity work. ADR `0023` owns exact user behavior/CLI, ADR `0024` canonical trace, and ADR `0025` Unicode scalar text encoded as strict preserved UTF-8. Exact CLI parent `.1.5` is closed: one recurring warmed driver proves Perl, Rust, Dart, and Julia over 4 backends x 2 environments x 61 cases. Active `.1.6` owns capability census and `.3` generated-source parity, so scoped 99/99 interpreter milestones are not complete backend parity. Lua follows convergence.
 - **Semantic introspection / MCP direction** - parked `.10.1` will design one versioned, deterministic semantic
   query model exposed from every native backend. It covers rules/edges/calls, spans/provenance, inferred shapes,
   resolution, generated-source relationships, diagnostics, and explanations. MCP is a thin transport over that
@@ -234,8 +234,8 @@ Three backbone items tracked major structural modernization — all done:
   stderr/exit, and stdout/route/mirror/file/reset/emoji behavior with 75 focused assertions; 1,019 package
   assertions and 99/99 pass. `.7.3.2.5` now adds nine direct process families and focused-gate delegation; status
   is `runtime-corpus-primary-cli`, and `.7.3.3` closes honest local no-drift. Public generated source remains
-  deferred to `.3`; global CLI identity `.1.5` and capability census `.1.6` also block a complete Julia
-  capability-parity claim.
+  deferred to `.3`; global CLI identity `.1.5` is now closed, while active capability census `.1.6` still blocks
+  a complete Julia capability-parity claim.
 - **Non-current helper code purge** - `NONCURRENT-HELPER-CODE-PURGE` is closed. Perl source cleanup, Rust source cleanup, active test/tool/generated fixture and checked-in `.spec` migration, and final no-drift scans are complete. Retired helper-looking calls use generic unknown-helper fallback behavior, active generic-unknown-helper tests use invented helper names, and active helper-call/label/tag scans are clean.
 - **Rust generated-source breadth** — the Rust interpreter oracle is the current cross-variant parity gate. Generated Rust source already covers the current structural families and a curated corpus subset; broadening generated-source proof to the full manifest remains a separately owned future follow-on.
 - **Lifecycle-family audit** — verified complete (2026-06-14). All 7 lifecycle markers (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`) have full semicolon-light structured authoring coverage. Newlines separate top-level helper statements; a semicolon separates adjacent statements on one physical line and is not required after the last statement. No lifecycle-specific semantic gaps found.

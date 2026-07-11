@@ -24,9 +24,9 @@ corpus execution. `LINKEDSPEC_RUN_DART=1 bash tools/run_ci_local.sh` remains the
 machines with the Dart SDK. The core gate independently passes doctrines, focused suites, both Perl 61-case legs,
 and Phase 0 `1..1028`.
 
-This closes Dart's exact CLI obligation, not complete public backend parity. Global `.1.5.4` next proves one
-four-backend conformance driver; `.1.6` and generated-source `.3` still own capability/codegen gaps before Lua.
+This closes Dart's exact CLI obligation, not complete public backend parity. Global `.1.5.4.3` now also closes one
+recurring four-backend conformance driver; `.1.6` and generated-source `.3` still own capability/codegen gaps.
 
 Related facts: [[dart-primary-cli-boundary]], [[dart-primary-cli-native-execution-canonical-json]],
 [[dart-canonical-primary-cli-trace]], [[dart-local-verification-gate]],
-[[user-observable-backend-cli-parity-contract]].
+[[user-observable-backend-cli-parity-contract]], [[primary-cli-four-backend-matrix]].

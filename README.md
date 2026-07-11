@@ -166,7 +166,8 @@ Top-level directories and files:
     pre-existing UTF-8 argv/JSON mojibake boundary; `.1.5.1.6` closes that repair. Perl/Rust/Dart now pass 61/61.
     Julia `.1.5.4.1` renders exact help, validates strict UTF-8 file bytes, and emits phase-only primary errors.
     `.1.5.4.2` adds the independent canonical trace while preserving native rich trace. Current proof is 1,019
-    assertions plus 99/99 and 61/61 default/POSIX; `.3` owns the recurring warmed four-command driver.
+    assertions plus 99/99 and 61/61 default/POSIX. `.1.5.4.3` closes exact four-backend CLI identity with one
+    recurring warmed 4x2x61 driver; capability census `.1.6` is active and generated-source parity remains `.3`.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.
@@ -203,8 +204,10 @@ Top-level project docs:
   emits recursive canonical JSON once; `.6.3` closes Perl as the 61-case reference. Rust `.1.5.2.1` adds
   `linkedspec-rust`, `.1.5.2.2` adds reusable entry/mode/direct-result execution, and `.1.5.2.3` adds the exact
   canonical trace projection. `.1.5.2.4` closes Rust at 61/61 in default/POSIX environments and adds
-  `tools/run_rust_local.sh`; Dart and Julia are also 61/61 default/POSIX. Active
-  `FUTURE-PARITY-BACKLOG.1.5.4.3` owns one recurring warmed four-command identity gate.
+  `tools/run_rust_local.sh`; Dart and Julia are also 61/61 default/POSIX. Run
+  `bash tools/run_primary_cli_matrix.sh` for one command that builds/prepares/warms all four backends and proves
+  the unchanged 61-case suite under both environments. Exact CLI lane `.1.5` is closed; capability census `.1.6`
+  is active.
 - Deep semantic introspection plus MCP is parked under `FUTURE-PARITY-BACKLOG.10.1`: native backend APIs own one
   versioned semantic model, while MCP remains a thin transport rather than a backend-specific source of truth.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
@@ -216,7 +219,8 @@ Top-level project docs:
   `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.
 - The canonical local gate stays core-only by default so it does not depend on Rust, Dart, or Julia toolchains. To
   opt into backend checks, set `LINKEDSPEC_RUN_RUST=1`, `LINKEDSPEC_RUN_DART=1`, and/or `LINKEDSPEC_RUN_JULIA=1` before
-  `bash tools/run_ci_local.sh`.
+  `bash tools/run_ci_local.sh`. Set `LINKEDSPEC_RUN_CLI_MATRIX=1` to run the complete warmed four-backend primary
+  CLI matrix from that gate.
 - `.github/workflows/ci.yml` remains tracked and delegates to that shared script, but hosted automatic GitHub Actions runs are disabled until intentionally re-enabled.
 
 ## Maintenance Policy for README

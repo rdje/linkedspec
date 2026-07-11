@@ -12,8 +12,8 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, conformance, fixtures, runner, exact-bytes, backends, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.1.1 adds the arbitrary-command runner; Perl .1.5.1 closes 61 default/POSIX cases, and Rust .1.5.2.4 closes the same unchanged 61 cases through its recurring gate."
-reverify: "perl -c tools/run_cli_conformance.pl && PERL5LIB= prove -v -Iperl t/cli_conformance_runner.t t/trace_cli.t && PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec && bash tools/run_rust_local.sh"
+evidence: "FUTURE-PARITY-BACKLOG.1.5.1.1 adds the arbitrary-command runner; .1.5.4.3 runs it unchanged across Perl/Rust/Dart/Julia at 4x2x61."
+reverify: "perl -c tools/run_cli_conformance.pl && PERL5LIB= prove -v -Iperl t/cli_conformance_runner.t t/trace_cli.t && bash tools/run_primary_cli_matrix.sh"
 ---
 
 `cli_conformance/manifest.json` is the single backend-neutral primary-command
@@ -30,7 +30,7 @@ PERL5LIB= perl tools/run_cli_conformance.pl \
 
 For Rust, `tools/run_rust_local.sh` builds the command and invokes this same runner in default and POSIX option
 environments. Perl, Rust, Dart, and Julia pass all 61 unchanged cases in both environments. `.1.5.4.3` now owns
-one warmed recurring four-command invocation of this unchanged contract.
+one warmed recurring four-command invocation of this unchanged contract; that matrix now closes exact CLI `.1.5`.
 
 Schema version 1 validates unique safe ids/paths, known keys, checked-in input
 and expected files, argument arrays, channel definitions, generated-file
@@ -66,4 +66,4 @@ Related facts: [[user-observable-backend-cli-parity-contract]],
 [[perl-primary-cli-operational-failures]], [[canonical-primary-cli-trace-protocol]],
 [[primary-cli-utf8-process-boundary-gap]], [[primary-cli-strict-utf8-text-contract]],
 [[rust-local-verification-gate]], [[dart-primary-cli-closeout]], [[julia-global-cli-61-audit]],
-[[julia-canonical-primary-cli-trace]].
+[[julia-canonical-primary-cli-trace]], [[primary-cli-four-backend-matrix]].

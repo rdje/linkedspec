@@ -18,18 +18,18 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.4.2` — independent Julia canonical trace closes 61/61.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.4.1` — Julia exact help/UTF-8/errors advanced to 42/61.
-- recent_context: Dart/Julia are 99/99 interpreter-green scoped milestones, not complete public parity; global
-  `.1.5`, `.1.6`, and `.3` own current-backend CLI, capability, and generated-source convergence before Lua.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.5.4.3` — recurring warmed 4x2x61 matrix closes exact CLI `.1.5`.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.5.4.2` — independent Julia canonical trace closed 61/61.
+- recent_context: Perl/Rust/Dart/Julia exact primary CLI identity is closed; Dart/Julia remain scoped interpreter
+  milestones rather than complete public parity because `.1.6` capability census and `.3` generated source remain.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.5.4.2 - add canonical Julia CLI trace`; previous committed HEAD is
-  `137a39eb FUTURE-PARITY-BACKLOG.1.5.4.1 - align Julia CLI boundary`.
+  `FUTURE-PARITY-BACKLOG.1.5.4.3 - close exact primary CLI parity`; previous committed HEAD is
+  `3e47fbe9 FUTURE-PARITY-BACKLOG.1.5.4.2 - add canonical Julia CLI trace`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.5.4.3` is the sole active PNT leaf.
-- next_action: add one repo-owned warmed recurring driver for Perl, built Rust, Dart, and Julia across default/POSIX,
-  run focused/broader gates, close exact CLI parity, and clean the active Julia depot after final use.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6` capability census/split is the sole active PNT leaf.
+- next_action: inventory the mdBook, exported APIs, Phase 0, and neutral corpus into a machine-readable capability
+  matrix; classify Perl/Rust/Dart/Julia gaps and split every residual into owned leaves before behavior changes.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
@@ -53,4 +53,5 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: `.1.5.4.2` Julia canonical trace implementation/docs are being verified before commit.
+- blockers: none. in_flight_uncommitted: none after this commit; Rust target, Julia depot, and Dart tool cache were
+  safely removed after all verification results were consumed.

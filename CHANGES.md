@@ -1,6 +1,20 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.4.3 — close exact primary CLI parity
+
+**Recurring identity gate:** Added `tools/run_primary_cli_matrix.sh`. It validates toolchains, builds the Rust
+primary binary, prepares and warms Dart, warms the normal Julia project, and runs the unchanged neutral manifest
+against Perl, Rust, Dart, and Julia under default and `POSIXLY_CORRECT=1` environments. The core gate exposes it
+through opt-in `LINKEDSPEC_RUN_CLI_MATRIX=1` and protects/syntax-checks all backend gate scripts as CI inputs.
+
+**Proof:** All 4 x 2 x 61 command cases pass. Rust passes 137 unit, 99 oracle, 190 integration, three emitter,
+ten trace, and both CLI legs; Dart passes format/analyzer, 151 tests, both CLI legs, and 99/99 corpus; Julia passes
+1,019 assertions, nine process families, and 99/99 corpus. The broader gate passes through Phase 0 `1..1028`.
+
+**Frontier/cleanup:** Exact CLI parent `.1.5` closes and capability census `.1.6` becomes active. After consuming
+all results, safe reproducible-cache cleanup removes 1.6 GB Rust target, 143 MB Julia depot, and 30 MB Dart cache.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.5.4.2 — add canonical Julia CLI trace
 
 **Adapter trace:** Julia's primary command now owns ADR `0024`'s deterministic compile/input/invoke phase

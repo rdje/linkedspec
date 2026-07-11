@@ -41,7 +41,7 @@ check_no_untracked_ci_inputs() {
   [[ "$status_line" == '?? '* ]] || continue
   printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
   found=1
- done < <(git status --short --untracked-files=all -- .github/workflows bin/linkedspec cli_conformance tools/run_ci_local.sh tools/run_rust_local.sh tools/run_cli_conformance.pl specs conf tablescript ebnf perl t)
+ done < <(git status --short --untracked-files=all -- .github/workflows bin/linkedspec cli_conformance tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl specs conf tablescript ebnf perl t)
 
  (( found == 0 )) || exit 1
 }
@@ -58,7 +58,7 @@ audit_no_machine_specific_absolute_paths() {
    printf '[ci] ERROR: machine-specific absolute path(s) in %s:\n%s\n' "$path" "$matches" >&2
    found=1
   fi
- done < <(git ls-files -- .github/workflows/ci.yml bin/linkedspec cli_conformance tools/run_ci_local.sh tools/run_rust_local.sh tools/run_cli_conformance.pl t/phase0_regression.t t/trace_cli.t t/cli_conformance_runner.t perl/LinkedSpec.pm perl/LinkedSpec)
+ done < <(git ls-files -- .github/workflows/ci.yml bin/linkedspec cli_conformance tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl t/phase0_regression.t t/trace_cli.t t/cli_conformance_runner.t perl/LinkedSpec.pm perl/LinkedSpec)
 
  (( found == 0 )) || exit 1
 }
@@ -76,6 +76,9 @@ log "auditing git-tracked CI inputs"
 require_tracked_file .github/workflows/ci.yml
 require_tracked_file tools/run_ci_local.sh
 require_tracked_file tools/run_rust_local.sh
+require_tracked_file tools/run_dart_local.sh
+require_tracked_file tools/run_julia_local.sh
+require_tracked_file tools/run_primary_cli_matrix.sh
 require_tracked_file tools/run_cli_conformance.pl
 require_tracked_file bin/linkedspec
 require_tracked_file cli_conformance/manifest.json
@@ -104,6 +107,8 @@ log "auditing CI-local path usage"
 audit_no_machine_specific_absolute_paths
 
 log "running syntax checks"
+bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
+ tools/run_julia_local.sh tools/run_primary_cli_matrix.sh
 perl -c perl/LinkedSpec.pm
 perl -c bin/linkedspec
 perl -c tools/run_cli_conformance.pl
@@ -175,6 +180,14 @@ if [[ "${LINKEDSPEC_RUN_JULIA:-0}" == "1" ]]; then
  bash "$REPO_ROOT/tools/run_julia_local.sh"
 else
  log "skipping optional Julia local gate (set LINKEDSPEC_RUN_JULIA=1 to include it when a Julia SDK is available)"
+fi
+
+if [[ "${LINKEDSPEC_RUN_CLI_MATRIX:-0}" == "1" ]]; then
+ log "running optional four-backend primary CLI matrix (LINKEDSPEC_RUN_CLI_MATRIX=1)"
+ require_tracked_file tools/run_primary_cli_matrix.sh
+ bash "$REPO_ROOT/tools/run_primary_cli_matrix.sh"
+else
+ log "skipping optional four-backend primary CLI matrix (set LINKEDSPEC_RUN_CLI_MATRIX=1 when all backend toolchains are available)"
 fi
 
 log "local CI gate passed"

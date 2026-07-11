@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.4.3 — one matrix must own cross-backend identity):
+  Individual backend gates prove necessary native/package behavior, but exact interface parity needs one driver
+  that substitutes only each command token into the unchanged fixture suite. Build/prepare toolchains and warm
+  Dart/Julia before byte comparison so compiler/precompile chatter is not mistaken for application output. Keep
+  the matrix opt-in from the core gate because external toolchains remain optional, while tracking and
+  syntax-checking the driver and every focused backend script as governed CI inputs.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.5.4.2 — canonical trace wraps native phases, not native events):
   Keep the primary recorder entirely in the adapter and call native parse/compile/execute without its rich emitter.
   Count Julia UTF-8 text with `ncodeunits`, escape field `codeunits` bytewise, and model numeric thresholds from

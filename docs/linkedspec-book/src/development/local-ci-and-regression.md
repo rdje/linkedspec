@@ -59,7 +59,26 @@ the reference. Rust `.1.5.2.4` closes reusable direct execution plus the exact c
 Schema version 1 workspace inputs use `path` plus exactly one checked-in `source`
 or explicit `bytes_hex`. Hex data is non-empty, lowercase, and even-length, and is
 materialized raw; this makes invalid UTF-8 cases reviewable without binary blobs.
-Until later backends pass, a green Perl suite is not a complete four-backend CLI-parity claim.
+
+## Four-Backend Primary CLI Matrix
+
+Run the complete exact-interface proof from the repository root:
+
+```bash
+bash tools/run_primary_cli_matrix.sh
+```
+
+The driver checks all toolchains, builds Rust, prepares and warms Dart, warms the normal Julia project, and runs
+the same unchanged 61-case manifest against Perl, Rust, Dart, and Julia with `POSIXLY_CORRECT` unset and set. A
+green run is therefore 4 backends x 2 environments x 61 cases; only the executable command token changes. This
+recurring proof closes `FUTURE-PARITY-BACKLOG.1.5` exact primary CLI parity.
+
+The core gate remains toolchain-independent by default. On a machine with all backends installed, include the
+matrix explicitly:
+
+```bash
+LINKEDSPEC_RUN_CLI_MATRIX=1 bash tools/run_ci_local.sh
+```
 
 ## Focused Rust Gate
 
@@ -202,7 +221,8 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
   signatures,
 - enforces a RAM usage guard that refuses to run the test suite when system memory utilization exceeds 88%, preventing resource-exhaustion failures from masking real test results,
 - optionally runs `tools/run_dart_local.sh` when `LINKEDSPEC_RUN_DART=1` is set,
-- optionally runs `tools/run_julia_local.sh` when `LINKEDSPEC_RUN_JULIA=1` is set.
+- optionally runs `tools/run_julia_local.sh` when `LINKEDSPEC_RUN_JULIA=1` is set,
+- optionally runs the complete warmed four-backend primary CLI matrix when `LINKEDSPEC_RUN_CLI_MATRIX=1` is set.
 
 The command sequence includes:
 

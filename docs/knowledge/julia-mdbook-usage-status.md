@@ -39,7 +39,7 @@ complete public parity. `.7.3.2.0` splits the exact primary CLI into five mechan
 emitter parse/validation/compile/function-shell/staged trace coverage. `.7.3.2.2` closes exact options/resolution/
 loading, `.7.3.2.3` closes native execution/direct canonical JSON, `.7.3.2.4` closes normalized errors/exits/trace
 routing, and `.7.3.2.5` closes direct-process no-drift. Global `.1.5.4.1`/`.2` then close exact boundary and
-canonical trace at 61/61; `.1.5.4.3` owns recurring matrix integration. The Julia root remains delegated to
+canonical trace at 61/61; `.1.5.4.3` now closes recurring matrix integration. The Julia root remains delegated to
 global `.1.6` and `.3` rather than being presented as complete parity. `JuliaFormatter`
 and `JET` remain optional local tooling rather than behavior prerequisites.
 

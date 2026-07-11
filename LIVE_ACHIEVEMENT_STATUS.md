@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.4.3 — close exact primary CLI parity**
+  (DONE — exact CLI parent `.1.5` is closed; capability census `.1.6` is active).
+
+  **Implementation:** Added one recurring driver that builds/prepares/warms Perl, Rust, Dart, and Julia, then runs
+  the unchanged 61-case suite under default and POSIX option environments. The core gate exposes the matrix via
+  `LINKEDSPEC_RUN_CLI_MATRIX=1` and governs every backend script as a tracked, syntax-checked CI input.
+
+  **Proof/cleanup:** All 4x2x61 legs, complete Rust/Dart/Julia focused gates, and the broader Phase 0 `1..1028`
+  gate pass. Safe cleanup removes 1.6 GB Rust target, 143 MB Julia depot, and 30 MB Dart cache after use.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.4.2 — add canonical Julia CLI trace**
   (DONE — Julia is 61/61 default/POSIX; recurring four-command gate `.1.5.4.3` active).
 

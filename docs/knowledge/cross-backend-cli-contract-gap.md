@@ -1,6 +1,6 @@
 ---
 id: cross-backend-cli-contract-gap
-title: Implemented backend CLIs pass one exact interface; recurring four-command proof remains
+title: Implemented backend CLIs pass one exact interface through a recurring four-command proof
 answers:
   - do all LinkedSpec backend CLIs have the same options
   - are the Perl Rust Dart and Julia CLIs equivalent
@@ -11,8 +11,8 @@ answers:
 date: 2026-07-10
 status: current
 tags: [cli, parity, perl, rust, dart, julia, JULIA-BACKEND-PARITY]
-evidence: "Perl/Rust/Dart/Julia pass 61/61 default/POSIX after FUTURE-PARITY-BACKLOG.1.5.4.2; active .1.5.4.3 owns one warmed recurring four-command driver and lane closeout."
-reverify: "bash tools/run_dart_local.sh; sed -n '1,220p' julia/src/cli/LinkedSpecJuliaCli.jl; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.4|61/61' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/TASK_TREE.md ROADMAP_V2.md"
+evidence: "FUTURE-PARITY-BACKLOG.1.5.4.3 closes exact CLI parent .1.5 after one warmed recurring driver passes Perl/Rust/Dart/Julia at 4 backends x 2 environments x 61 cases."
+reverify: "bash tools/run_primary_cli_matrix.sh && rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.4\.3|4x2x61|4 backends' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/TASK_TREE.md ROADMAP_V2.md"
 ---
 
 The four implemented backend CLI surfaces now pass the same exact 61-case interface:
@@ -39,9 +39,10 @@ repair, and honest no-drift work rather than treating 99/99 corpus execution as 
 
 ADR `0023` has since ratified the exact interface. `FUTURE-PARITY-BACKLOG.1.5` owns the neutral fixtures and
 Perl/Rust/Dart repairs are closed; `JULIA-BACKEND-PARITY.7.3.2` owns Julia's local repair, complete through exact
-local process conformance. Global `.1.5.4` now owns unchanged fixture identity and one recurring four-command gate;
-`.1.5.4.0` records Julia's 13/61 baseline, `.1` advances it to 42/61, and `.2` closes 61/61. Active `.3` owns the
-warmed recurring four-command gate and exact CLI-lane closeout; broader capability/codegen parity remains `.1.6`/`.3`.
+local process conformance. Global `.1.5.4` owns unchanged fixture identity and one recurring four-command gate;
+`.1.5.4.0` records Julia's 13/61 baseline, `.1` advances it to 42/61, `.2` closes 61/61, and `.3` closes the warmed
+four-command matrix plus exact CLI parent `.1.5`. Broader capability/codegen parity remains active `.1.6` and
+pending top-level `.3`.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specific-cli-requirement]], [[native-in-memory-backend-contract]],
 [[language-agnostic-backend-vision]], [[dart-specific-cli]], [[julia-mdbook-usage-status]],
@@ -53,5 +54,5 @@ Related facts: [[user-observable-backend-cli-parity-contract]], [[variant-specif
 [[perl-primary-cli-success-conformance]], [[perl-primary-cli-operational-failures]],
 [[primary-cli-utf8-process-boundary-gap]], [[rust-canonical-primary-cli-trace]],
 [[rust-local-verification-gate]], [[dart-primary-cli-closeout]], [[julia-global-cli-61-audit]],
-[[julia-canonical-primary-cli-trace]].
+[[julia-canonical-primary-cli-trace]], [[primary-cli-four-backend-matrix]].
 Canonical trace: [[canonical-primary-cli-trace-protocol]].

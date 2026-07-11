@@ -28,8 +28,8 @@ failures. Trace setup/write failure becomes the stable compilation failure witho
 
 After `.1.5.4.2`, Julia passes all 61 unchanged primary-command fixtures under default and
 `POSIXLY_CORRECT=1` environments. The local gate also passes 1,019 assertions, nine direct process families, and
-99/99 corpus. `.1.5.4.3` owns recurring warmed four-command integration, not further Julia trace semantics.
+99/99 corpus. `.1.5.4.3` closes recurring warmed four-command integration, not further Julia trace semantics.
 
 Related facts: [[canonical-primary-cli-trace-protocol]], [[julia-primary-cli-failure-trace-routing]],
 [[julia-trace-controls-sinks]], [[julia-global-cli-61-audit]], [[cross-backend-cli-contract-gap]],
-[[native-in-memory-backend-contract]].
+[[native-in-memory-backend-contract]], [[primary-cli-four-backend-matrix]].

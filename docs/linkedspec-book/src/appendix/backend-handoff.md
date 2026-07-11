@@ -121,7 +121,7 @@ trace byte counts pass 61 shared cases. `.6.3` closes final reference no-drift; 
 exact boundary, reusable entry/mode/direct-result execution, and canonical trace projection to pass all 61
 unchanged cases in default/POSIX environments and adds recurring local verification. The Rust primary-command
 milestone is closed; Dart and Julia now also pass all 61 default/POSIX cases. `.1.5.4.3` owns recurring warmed
-four-command integration before the exact CLI lane closes.
+four-command integration and now closes the exact CLI lane with one 4x2x61 driver.
 
 For example, this portable action-edge grammar deliberately constructs object keys out of
 order:
@@ -145,14 +145,11 @@ The neutral suite also returns an input file ending in `x` plus a newline throug
 `input_text()`. Its JSON bytes are `"x\n"` followed by the one record newline, which proves
 file loading does not trim content and output framing does not add a second newline.
 
-This is a contract and active convergence target, not a claim that every current executable
-    already passes. The current gap census is: Perl is parser-oriented but direct audit found implicit option
-    aliases, ignored positionals, environment-dependent parsing, and failure trace on stdout before the neutral
-    fixture lock; Rust now closes the unchanged suite in both environments with a recurring gate; Dart remains
-    corpus/status-oriented; Julia now accepts and executes
-    the exact parser request shape with stable local failures, trace routing, and nine-family process proof, but
-    still needs the global neutral fixture comparison. `FUTURE-PARITY-BACKLOG.1.5`
-    owns convergence. Julia's repair is split under `JULIA-BACKEND-PARITY.7.3.2`; `.7.3.2.1` closes compile/parser/
+This contract now passes on every implemented executable through the recurring 4x2x61 matrix. The historical
+gap census found implicit Perl option aliases and trace leakage, no Rust primary binary, a corpus-oriented Dart
+primary, and Julia-local help/error/trace differences; the `.1.5.1` through `.1.5.4` repair lanes closed those
+gaps without backend-specific fixture expectations. Julia's repair was split under
+`JULIA-BACKEND-PARITY.7.3.2`; `.7.3.2.1` closes compile/parser/
     function-shell/staged trace coverage, `.7.3.2.2` closes exact argument/source/input handling, `.7.3.2.3`
     closes execution/direct canonical JSON, `.7.3.2.4` closes errors/exits/trace routing, and `.7.3.2.5` closes
     nine-family direct-command conformance. `.7.3.3` closes the local audit without claiming global identity.
@@ -160,7 +157,9 @@ This is a contract and active convergence target, not a claim that every current
     20 trace families in default/POSIX environments. A signoff probe then exposed UTF-8 argv/JSON mojibake;
     `.1.5.1.6.2` fixes the adapter and adds eight exact Unicode/invalid families, bringing Perl to 61/61. `.6.3`
     closes final reference no-drift; Rust `.1.5.2.4` combines reusable direct-result/entry/mode execution with
-    canonical trace, passes 61/61 in both environments, and adds `tools/run_rust_local.sh`.
+canonical trace, passes 61/61 in both environments, and adds `tools/run_rust_local.sh`.
+    Dart and Julia close their corresponding focused legs, and `tools/run_primary_cli_matrix.sh` is the global
+    recurring identity owner. Complete capability census `.1.6` and generated-source `.3` remain separate.
 
 A separate parked direction, `FUTURE-PARITY-BACKLOG.10.1`, will design deep semantic introspection. The intended
 contract is one versioned, deterministic semantic query model exposed idiomatically from every native backend:
@@ -529,17 +528,18 @@ Source compilation precedes input-file loading. Compilation, input-load, and inv
 headings and exit `1`; usage errors exit `2`. Native trace retains stdout/route/mirror, reset, quiet, and emoji
 controls; the primary command now uses a separate canonical phase recorder. `.7.3.2.5` locks nine process families with
 exact stdout/stderr/newline/file bytes and exit 0/1/2. `.7.3.3` closes honest local no-drift; global cross-backend
-fixture identity remains owned by `FUTURE-PARITY-BACKLOG.1.5`.
+fixture identity has since closed under `FUTURE-PARITY-BACKLOG.1.5.4.3`.
 
 The global unchanged-suite audit in `FUTURE-PARITY-BACKLOG.1.5.4.0` measured warmed Julia at 13/61. `.1.5.4.1`
 now renders exact shared help, rejects malformed source/input bytes as UTF-8 without converting valid text, and
 emits only the stable phase heading on primary stderr. Native structured exceptions retain diagnostic detail.
 That boundary reached 42/61. `.1.5.4.2` now projects exact levels, UTF-8 counts, escaping, emoji, sinks, file
-lifecycle, failures, and result framing independently of rich native trace, closing 61/61 default/POSIX. `.3` owns
-project warmup plus one recurring four-backend matrix. The native rich diagnostics/trace APIs remain available.
+lifecycle, failures, and result framing independently of rich native trace, closing 61/61 default/POSIX.
+`.1.5.4.3` now owns project warmup and closes the recurring four-backend matrix. The native rich diagnostics/trace
+APIs remain available.
 
-The boundary claims the exact Julia-local primary CLI, but not four-backend fixture identity, complete public
-capability parity, or generated Julia source. `.7.2` deliberately defers generated Julia source to the split
+The boundary plus global matrix claim exact four-backend fixture identity, but not complete public capability
+parity or generated Julia source. `.7.2` deliberately defers generated Julia source to the split
 future source-emitter lane under `FUTURE-PARITY-BACKLOG.3`; Julia currently guarantees the interpreter and local
 primary-command paths. A credible later emitter must own its scaffold/compile-run harness,
 typed generated-family plan, direct structural-family execution, and curated corpus proof. Runtime diagnostics/

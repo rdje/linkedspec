@@ -30,6 +30,9 @@ only when `LINKEDSPEC_RUN_RUST=1` is set, matching the explicit Dart/Julia opt-i
 broader default local gate through Phase 0 `1..1028`, closes the Rust primary-command lane, and advances PNT to
 Dart `.1.5.3`.
 
+For exact cross-backend command identity, `tools/run_primary_cli_matrix.sh` builds Rust and combines this command
+with Perl, Dart, and Julia across both environments. That recurring 4x2x61 proof is separately owned by `.1.5.4.3`.
+
 Related facts: [[neutral-cli-fixture-runner]], [[rust-canonical-primary-cli-trace]],
 [[hosted-ci-disabled-run-local-gate]], [[dart-local-verification-gate]],
-[[julia-local-verification-gate]].
+[[julia-local-verification-gate]], [[primary-cli-four-backend-matrix]].

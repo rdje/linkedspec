@@ -246,7 +246,7 @@ project these controls through one canonical phase protocol; Perl is the current
 61-case reference after strict UTF-8 expansion. `linkedspec-rust` projects the same protocol independently of its
 richer native trace API and `.1.5.2.4` closes all 61 unchanged cases in both option environments plus recurring
 `tools/run_rust_local.sh` verification. Dart and Julia also independently project this protocol and pass 61/61
-default/POSIX. Active `.1.5.4.3` owns recurring four-command integration, not more trace semantics.
+default/POSIX. `.1.5.4.3` now closes recurring four-command integration, not more trace semantics.
 
 ```sh
 perl bin/linkedspec --spec-file demo.spec --input-file demo.txt \

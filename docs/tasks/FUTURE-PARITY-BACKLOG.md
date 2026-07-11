@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`.1.5.4.2` closes Julia at 61/61; recurring four-command gate `.1.5.4.3` active).
+- Last updated: `2026-07-10` (`.1.5` exact four-backend CLI parity closed; capability census `.1.6` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -126,9 +126,13 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.4 - ratify native in-memory backend contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5`
-  Status: `active`
+  Status: `done`
   Goal: Make every implemented backend's primary CLI conform to one byte-testable user interface.
   Children: `.1.5.0`, `.1.5.1`, `.1.5.2`, `.1.5.3`, `.1.5.4`
+  Verification: **PASS 2026-07-10.** Perl, Rust, Dart, and Julia expose the same strict 61-case primary CLI under
+    default and POSIX option environments. One recurring driver owns all eight legs, backend-focused gates pass,
+    and the broader core gate passes through Phase 0 `1..1028`.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.4.3 - close exact primary CLI parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.0`
   Status: `done`
@@ -480,13 +484,15 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.5.3.4 - close Dart primary CLI`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.4`
-  Status: `active`
+  Status: `done`
   Goal: Close current Perl/Rust/Dart/Julia CLI parity and make the conformance matrix a recurring gate.
   Children: `.1.5.4.0`, `.1.5.4.1`, `.1.5.4.2`, `.1.5.4.3`
   Acceptance: One driver runs identical fixtures against all four implemented primary commands and proves
     normalized stdout, stderr, and exit-code identity after substituting only the executable token.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-10.** Julia progresses 13 -> 42 -> 61/61 through exact boundary and independent
+    trace leaves. `tools/run_primary_cli_matrix.sh` then proves all four commands under both option environments
+    with unchanged fixtures and explicit Julia warmup; the recurring opt-in CI hook is installed.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.4.3 - close exact primary CLI parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.4.0`
   Status: `done`
@@ -531,16 +537,22 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.5.4.2 - add canonical Julia CLI trace`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.5.4.3`
-  Status: `active`
+  Status: `done`
   Goal: Add one recurring four-backend identity driver and close the exact CLI parity lane.
   Acceptance: One repo-owned command warms toolchains where required and runs the same unchanged manifest against
     Perl, built Rust, Dart, and Julia in default/POSIX environments; each focused backend gate and the broader core
     gate pass; task/roadmap/live docs, mdBook, Knowledge Map, help, fixtures, and cleanup agree before `.1.6`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-10.** `tools/run_primary_cli_matrix.sh` builds Rust, prepares/warmups Dart, warms
+    Julia, and passes 4 backends x 2 environments x 61 unchanged cases. It is available to the core gate through
+    `LINKEDSPEC_RUN_CLI_MATRIX=1`; all backend scripts are tracked/syntax-checked CI inputs. Rust focused proof
+    passes 137 unit/99 oracle/190 integration/3 emitter/10 trace plus 61x2; Dart passes format/analyzer/151 tests/
+    61x2/99 corpus; Julia passes 1,019 assertions/nine process families/99 corpus. The broader gate passes
+    doctrines, syntax, 22 ActionIR, nine runner/trace, Perl 61x2, and Phase 0 `1..1028` in 499 seconds. Safe cleanup
+    removes 1.6 GB Rust target, 143 MB Julia depot, and 30 MB Dart cache after their results are consumed.
+  Commit: `FUTURE-PARITY-BACKLOG.1.5.4.3 - close exact primary CLI parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6`
-  Status: `pending`
+  Status: `active`
   Goal: Prove complete user-observable feature/behavior parity beyond the 99-fixture interpreter corpus.
   Acceptance: Build a machine-readable capability matrix from the mdBook, exported public APIs, Phase 0, and the
     language-neutral corpus; classify Perl/Rust/Dart/Julia gaps before implementation; split every gap into an
@@ -756,8 +768,8 @@ before implementation.
 | 22 | `FUTURE-PARITY-BACKLOG.1.5.4.0` | `done` | Julia's 13/61 baseline is classified and split before repair. |
 | 23 | `FUTURE-PARITY-BACKLOG.1.5.4.1` | `done` | Shared help, strict UTF-8, and phase-only errors advance Julia to 42/61. |
 | 24 | `FUTURE-PARITY-BACKLOG.1.5.4.2` | `done` | Independent canonical trace closes Julia at 61/61 default/POSIX. |
-| 25 | `FUTURE-PARITY-BACKLOG.1.5.4.3` | `active` | Add one recurring four-backend identity driver and close CLI parity. |
-| 26 | `FUTURE-PARITY-BACKLOG.1.6` | `pending` | Census every documented/exported user capability and split all residual parity gaps. |
+| 25 | `FUTURE-PARITY-BACKLOG.1.5.4.3` | `done` | Recurring 4x2x61 driver and all focused/broader gates close exact CLI parity. |
+| 26 | `FUTURE-PARITY-BACKLOG.1.6` | `active` | Census every documented/exported user capability and split all residual parity gaps. |
 | 27 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
 | 28 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
 | 29 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
@@ -1194,6 +1206,21 @@ Read-only evidence recorded on 2026-07-10:
 - [x] **LOCKSTEP** — Task/roadmap/README/live/book/KM surfaces report Julia 61/61 and activate only the recurring
   four-command driver `.1.5.4.3`; shared fixtures and native trace APIs are unchanged.
 
+## `FUTURE-PARITY-BACKLOG.1.5.4.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Four commands individually pass the shared suite, but no single recurring owner
+  builds/prepares/warms and invokes all four under both option environments.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Backend-focused scripts duplicate single-backend invocations; Julia requires
+  explicit normal-project warmup, and the core gate intentionally avoids mandatory non-Perl toolchains.
+- [x] **FIX** — Add `tools/run_primary_cli_matrix.sh` and an opt-in `LINKEDSPEC_RUN_CLI_MATRIX=1` core-gate hook;
+  track every backend script as a protected CI input and syntax-check them together.
+- [x] **ADDRESSED (verified)** — The new driver passes 4 backends x 2 environments x 61 unchanged cases after
+  building Rust, preparing Dart, and explicitly warming Dart/Julia.
+- [x] **NO REGRESSION** — Rust, Dart, and Julia focused gates pass completely after the 4x2x61 matrix; the broader
+  core gate also passes doctrines/syntax, 22 ActionIR, nine runner/trace checks, Perl 61x2, and Phase 0 `1..1028`.
+- [x] **LOCKSTEP** — Task/roadmap/live/book/KM surfaces close `.1.5` and activate only capability census `.1.6`;
+  safe post-verification cleanup removes reproducible Rust, Julia, and Dart caches without retaining in-flight work.
+
 ## Decisions
 
 - `2026-07-09`: Director directive schedules future backend parity as Dart first, then Julia,
@@ -1277,6 +1304,9 @@ Read-only evidence recorded on 2026-07-10:
 - `2026-07-10`: `.1.5.4.2` replaces only Julia primary trace projection with ADR `0024`'s deterministic phases.
   Native rich trace remains intact. Julia reaches 61/61 default/POSIX, and `.1.5.4.3` becomes the sole active leaf
   for warmup plus a recurring four-command identity gate.
+- `2026-07-10`: `.1.5.4.3` installs `tools/run_primary_cli_matrix.sh` as the single recurring 4x2x61 proof, including
+  Rust build, Dart preparation/warmup, and Julia project warmup. Focused Rust/Dart/Julia gates and the broader
+  Phase 0 gate pass; exact CLI parent `.1.5` closes and capability census `.1.6` becomes active.
 - `2026-07-10`: `.1.5.1.0` proves Perl's primary adapter is parser-oriented but not strict/deterministic enough to
   be the neutral executable reference. Fixture infrastructure, arguments, success/IO, failures, and trace/gate are
   separate leaves; `.1.5.1.1` became active there and has since closed the runner/help baseline. No behavior changed
@@ -1314,17 +1344,15 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Open Questions
 
-- None blocking `.1.5.1.6.2`: ADR `0025` fixes the text policy and `.6.1` now supplies exact invalid bytes. Lua
-  `.1.3` remains gated until implemented
-  backends close CLI/capability convergence, including `.1.6`-split gaps and generated source under `.3`.
+- None blocking `.1.6`: exact four-backend CLI parity is closed. Lua `.1.3` remains gated until implemented
+  backends close capability convergence, including `.1.6`-split gaps and generated source under `.3`.
 - Parked `.11.1` must decide public `harray` versus current `hash` terminology and retain/migrate/remove `with`;
   neither question blocks `.1.5.1.6.3` and neither is silently decided by capture leaf `.11.0`.
 
 ## Blockers
 
-- None. Perl `.1.5.1` and Rust `.1.5.2` are closed at 61 cases in default/POSIX environments; Dart `.1.5.3` is
-  active for the next primary-command convergence lane.
-  Global CLI/capability convergence precedes Lua `.1.3`.
+- None. Perl, Rust, Dart, and Julia are closed at the same 61 primary CLI cases in default/POSIX environments.
+  Capability census `.1.6` is active; its residual splits and generated-source `.3` precede Lua `.1.3`.
 
 ## Verification Log
 
@@ -1363,6 +1391,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.4.0` | Julia source/local-checker audit; warmed unchanged 13/61 baseline; docs/KM/governance/mdBook/cleanup. | PASS. Help/UTF-8/errors, canonical trace, and final matrix are separately owned; `.1.5.4.1` active. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.4.1` | Exact-help and malformed-file tests; complete Julia local gate: 1,019 assertions/nine process families/99 corpus; unchanged suite 42/61 default/POSIX; docs/KM/governance/mdBook/cleanup. | PASS. All 19 residuals are canonical trace; `.1.5.4.2` active. |
 | `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.4.2` | Canonical trace unit/process proof; complete Julia local gate: 1,019 assertions/nine process families/99 corpus; unchanged suite 61/61 default/POSIX; docs/KM/governance/mdBook/cleanup. | PASS. Julia exact CLI is implemented; recurring four-command gate `.1.5.4.3` active. |
+| `2026-07-10` | `FUTURE-PARITY-BACKLOG.1.5.4.3` | `tools/run_primary_cli_matrix.sh`: four backends x two environments x 61 cases; complete Rust/Dart/Julia focused gates; broader local gate through Phase 0 `1..1028`; docs/KM/governance/mdBook/cleanup. | PASS. Exact primary CLI parent `.1.5` closes; capability census `.1.6` is active. |
 
 ## Commit Log
 
@@ -1401,9 +1430,14 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.5.4.0` | `FUTURE-PARITY-BACKLOG.1.5.4.0 - split Julia global CLI repair` | Audits 13/61 Julia baseline and splits three exact repair/driver mechanisms. |
 | `FUTURE-PARITY-BACKLOG.1.5.4.1` | `FUTURE-PARITY-BACKLOG.1.5.4.1 - align Julia CLI boundary` | Exact shared help, strict UTF-8 file decoding, and phase-only primary stderr; 42/61. |
 | `FUTURE-PARITY-BACKLOG.1.5.4.2` | `FUTURE-PARITY-BACKLOG.1.5.4.2 - add canonical Julia CLI trace` | Independent ADR 0024 levels/events/sinks/failures; 61/61 default/POSIX. |
+| `FUTURE-PARITY-BACKLOG.1.5.4.3` | `FUTURE-PARITY-BACKLOG.1.5.4.3 - close exact primary CLI parity` | Recurring warmed 4x2x61 matrix, focused backend gates, broader Phase 0 gate, and exact CLI parent closeout. |
 
 ## Changelog
 
+- `2026-07-10`: `.1.5.4.3` adds one executable matrix that prepares all four implemented commands and runs the
+  unchanged 61-case manifest under default and POSIX option environments. All 488 command cases, focused backend
+  gates, and broader Phase 0 pass. Exact CLI parent `.1.5` closes; capability census `.1.6` becomes active. Safe
+  cleanup removes 1.6 GB Rust target, 143 MB Julia depot, and 30 MB Dart cache after verification is consumed.
 - `2026-07-10`: `.1.5.3.0` measures Dart's corpus-oriented primary executable at 0/61, confirms reusable staged
   parse/compile/direct-execute/mode/top-rule/trace/JSON seams, and splits exact boundary, execution, trace, and
   closeout. The corpus runner remains separate; no Dart behavior or shared fixture bytes change.

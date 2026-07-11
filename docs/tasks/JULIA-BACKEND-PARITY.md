@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future backend parity (Julia second)`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`.7.3.3` outer no-drift audit done; tree remains active through delegated global
-  `.1.5`, `.1.6`, and `.3` obligations).
+- Last updated: `2026-07-10` (delegated global exact CLI `.1.5` is now closed at recurring 4x2x61; tree remains
+  active through capability census `.1.6` and generated-source `.3`).
 - Owner: repo-local workflow
 
 ## Goal
@@ -883,8 +883,9 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
     99/99 interpreter execution plus 1,017 package assertions and nine direct primary-process families. The audit
     found and corrected one stale mdBook sentence inherited from `.7.3.2.1` that still denied the now-implemented
     exact primary CLI. No implementation source changed. Julia's tree deliberately remains active/delegated rather
-    than complete: `.1.5` owns language-neutral/four-backend CLI identity, `.1.6` owns the public capability census
-    and residual splits, and `.3` owns generated-source equivalence. Static current-status scans, Knowledge Map,
+    than complete: `.1.5` owns language-neutral/four-backend CLI identity and has since closed at recurring 4x2x61;
+    `.1.6` owns the public capability census and residual splits, and `.3` owns generated-source equivalence.
+    Static current-status scans, Knowledge Map,
     memory/task/doctrine gates, mdBook build, and whitespace checks pass; commit `431f0472` is the immediately prior
     full Julia proof (1,017 assertions, nine process families, and 99/99 corpus).
   Commit: `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status`

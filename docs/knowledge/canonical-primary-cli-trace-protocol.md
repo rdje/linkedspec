@@ -16,7 +16,7 @@ date: 2026-07-10
 status: accepted
 tags: [cli, trace, protocol, deterministic, utf8, backends, ADR-0024, FUTURE-PARITY-BACKLOG]
 evidence: "ADR 0024 defines canonical primary phase trace; Perl, Rust, Dart, and Julia now pass the same 61/61 default/POSIX cases through independent adapter projections."
-reverify: "PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec && bash tools/run_rust_local.sh"
+reverify: "bash tools/run_primary_cli_matrix.sh"
 ---
 
 ADR `0024` separates two valid trace surfaces:
@@ -65,10 +65,11 @@ three routed failure phases. Together with help/usage/success/failure, Perl pass
 in both option environments.
 `tools/run_ci_local.sh` executes this same manifest twice for the Perl reference before Phase 0. Rust, Dart, and
 Julia now independently close the same 61 unchanged cases in both environments while retaining native rich trace.
+`tools/run_primary_cli_matrix.sh` makes all eight backend/environment legs one recurring identity proof.
 
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[neutral-cli-fixture-runner]], [[trace-cli-control]],
 [[trace-verbosity-and-formatting]], [[perl-primary-cli-operational-failures]],
 [[cross-backend-cli-contract-gap]], [[primary-cli-utf8-process-boundary-gap]],
 [[rust-canonical-primary-cli-trace]], [[rust-local-verification-gate]],
-[[julia-canonical-primary-cli-trace]].
+[[julia-canonical-primary-cli-trace]], [[primary-cli-four-backend-matrix]].
