@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-11` (native resolution contract `.1.6.4.1` fixed; Rust native API `.1.6.4.2` active).
+- Last updated: `2026-07-11` (Rust native resolution `.1.6.4.2` closed; Dart native API `.1.6.4.3` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -1109,25 +1109,35 @@ before implementation.
     compatibility extension outside this portable API rather than silently defining duplicate-name precedence.
   Verification: ADR `0026` fixes separate named/path requests, portable traversal-safe names, cwd/suffix/declared-
     root candidate order, direct non-recursive roots, first-regular-file selection, strict preserved UTF-8, exact
-    source identity, pipeline order, and neutral typed error stages/codes. The checked-in JSON contains 13 name,
+    source identity, pipeline order, and neutral typed error stages/codes. The original JSON contained 13 name,
     nine resolution/file-kind, and four text cases. Its independent Perl checker validates schema, task ownership,
     declared semantics, every expected outcome, Unicode/BOM/normalization preservation, malformed UTF-8, and no
     UTF-16 autodetection. The checker is wired into the canonical local gate. The complete gate passes the checker,
     239-name coverage, focused suites, exact Perl CLI 61/61 under default and POSIX environments, and Phase 0
     `1..1030` in 502 wallclock seconds. No backend behavior changed.
+    Rust implementation `.2` subsequently adds the missing Windows-drive absolute-name rejection case, bringing
+    the same versioned fixture to 14 name cases without changing the ratified policy.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.4.1 - define native spec resolution contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.4.2`
-  Status: `pending`
+  Status: `done`
   Goal: Add Rust native named/file resolution and compilation.
   Acceptance: Public typed Rust APIs consume the neutral fixture without CLI/subprocess ownership, compose strict
     loading through parse/validate/compile, retain requested/resolved source identity, return structured errors,
     and let the primary CLI delegate without changing its exact contract.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Public `spec_loader` exports typed name/path requests, cwd plus ordered direct roots, deterministic
+    resolution origins, regular-file selection, strict byte read/UTF-8 decode, loaded/compiled source identity,
+    serializable stage/code errors, and `LoadedCompiledSpec::into_engine()` attribution. It composes the full staged
+    user-function parser, core validation, and compiler. Rust consumes all 14 name, nine resolution/file-kind, and
+    four text cases directly; five focused tests also prove full function execution, parse/validation failures, and
+    exact error JSON. The primary CLI delegates named/file requests to the native API while inline behavior stays
+    unchanged. Full Rust gate passes 137 unit, 105 oracle, 196 integration, five runtime diagnostic, three generated-
+    source, five loader, ten trace, and 61x2 CLI cases. Strict Clippy finds no new loader/CLI issue and stops on the
+    same 14 pre-existing untouched runtime findings. The Rust capability state is pass; census is 54/1/5.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.4.2 - add Rust native spec resolution`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.4.3`
-  Status: `pending`
+  Status: `active`
   Goal: Add Dart native named/file resolution and compilation.
   Acceptance: Public typed Dart APIs consume the neutral fixture without CLI/subprocess ownership, require regular
     files, compose strict loading through parse/compile, retain source identity, return structured exceptions, and
@@ -1406,7 +1416,7 @@ before implementation.
 | 49 | `FUTURE-PARITY-BACKLOG.1.6.3.0` | `done` | Audit found raw runtime `Result<_, String>` APIs and split typed implementation from admission. |
 | 50 | `FUTURE-PARITY-BACKLOG.1.6.3.1` | `done` | Typed/JSON errors, source/top/child attribution, five focused tests, and full runtime package pass. |
 | 51 | `FUTURE-PARITY-BACKLOG.1.6.3.2` | `done` | Full Rust/CLI gate passes; diagnostics promote to pass at census 53/1/6; `.1.6.3` closes. |
-| 52 | `FUTURE-PARITY-BACKLOG.1.6.4` | `active` | Add native named/file resolution to Rust, Dart, and Julia. |
+| 52 | `FUTURE-PARITY-BACKLOG.1.6.4` | `active` | Audit, neutral contract, and Rust API are closed; Dart native resolution `.3` is active before Julia/admission. |
 | 53 | `FUTURE-PARITY-BACKLOG.1.6.5` | `pending` | Extend Dart native trace through frontend/compiler/function-shell/staged phases. |
 | 54 | `FUTURE-PARITY-BACKLOG.1.6.6` | `pending` | Close non-codegen capability parity and hand only source generation to `.3`. |
 | 55 | `FUTURE-PARITY-BACKLOG.3` | `pending` | Public generated-source capability must converge after the capability census/split. |
@@ -2056,6 +2066,9 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.3.0` | Knowledge Map/toolbox/source audit of Rust error types, Engine methods, rule unwind, context, CLI, tests, and parity references; docs/KM/governance/whitespace/mdBook. | PASS. Corrected the actual raw-string boundary and split typed implementation `.1` from admission `.2`; no runtime code changed. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.3.1` | Format/check; five focused diagnostic tests; complete runtime package (137/105/196/5/3/10); strict Clippy classification; docs/KM/governance/whitespace/mdBook. | PASS. Typed/source/top/deepest-rule diagnostics and string/success compatibility land; `.1.6.3.2` active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.3.2` | Complete `tools/run_rust_local.sh` (format, 137/105/196/5/3/10, 61x2 CLI); capability/KM/memory/doctrine/whitespace/mdBook; 2.0 GB cleanup. | PASS. Structured diagnostics promote to pass at census 53/1/6; `.1.6.3` closes and native resolution `.1.6.4` is active. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.4.0` | Resolver/PathSearch/adapter source and test audit; capability/KM/memory/doctrine/whitespace/mdBook; generated-book cleanup. | PASS. Nondeterministic Perl and divergent Julia fallback are durable; six bounded leaves exist before behavior code. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.4.1` | ADR 0026; executable 13/9/4 contract/checker; complete local gate with 61x2 Perl CLI and Phase 0 `1..1030`; capability/KM/memory/doctrine/mdBook/cleanup. | PASS. Portable resolution/loading semantics are fixed before backend implementation. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.1.6.4.2` | Expanded 14/9/4 contract; five direct Rust loader tests; full Rust gate 137/105/196/5/3/5/10 plus 61x2 CLI; strict Clippy classification; capability/KM/memory/doctrine/whitespace/mdBook; 2.0 GB cleanup. | PASS. Rust native file role and CLI delegation pass; census 54/1/5; Dart `.3` active. |
 
 ## Commit Log
 
@@ -2100,6 +2113,9 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.1.6.3.0` | `FUTURE-PARITY-BACKLOG.1.6.3.0 - split Rust runtime diagnostics` | Corrects the real error boundary and creates typed implementation/admission owners; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.1.6.3.1` | `FUTURE-PARITY-BACKLOG.1.6.3.1 - add Rust runtime diagnostics` | Typed/JSON errors, source/top/deepest-rule attribution, compatibility adapters, and full runtime proof. |
 | `FUTURE-PARITY-BACKLOG.1.6.3.2` | `FUTURE-PARITY-BACKLOG.1.6.3.2 - admit Rust runtime diagnostics` | Full recurring Rust/CLI proof, capability pass, parent closeout, and cache cleanup. |
+| `FUTURE-PARITY-BACKLOG.1.6.4.0` | `FUTURE-PARITY-BACKLOG.1.6.4.0 - split native spec resolution` | Source-backed fallback drift, durable fact, and six-leaf split; no behavior code. |
+| `FUTURE-PARITY-BACKLOG.1.6.4.1` | `FUTURE-PARITY-BACKLOG.1.6.4.1 - define native spec resolution contract` | ADR 0026, executable fixture/checker, canonical-gate integration, and public docs. |
+| `FUTURE-PARITY-BACKLOG.1.6.4.2` | `FUTURE-PARITY-BACKLOG.1.6.4.2 - add Rust native spec resolution` | Public progressive loader/compiler, typed errors/identity, direct fixture proof, and CLI delegation. |
 
 ## Changelog
 

@@ -7,6 +7,7 @@
 //! `linkedspec-core` and `linkedspec-runtime`.
 
 use crate::engine::{Engine, ExecutionOptions};
+use crate::spec_loader::{LoadedCompiledSpec, SpecLoadOptions, SpecRequest, load_and_compile_spec};
 use crate::spec_parser::parse_spec_with_user_functions;
 use linkedspec_core::compiler::compile;
 use linkedspec_core::types::ParseMode;
@@ -170,11 +171,17 @@ impl CanonicalTrace {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone)]
 struct PreparedRequest {
     options: PrimaryCliOptions,
-    spec_source: String,
+    spec: PreparedSpec,
     input: InputSelection,
+}
+
+#[derive(Debug, Clone)]
+enum PreparedSpec {
+    Compiled(LoadedCompiledSpec),
+    Inline(String),
 }
 
 /// Render exact shared help bytes for the Rust executable token.
@@ -270,16 +277,26 @@ fn run_prepared_options(options: PrimaryCliOptions, cwd: &Path, repo_root: &Path
         Err(()) => return phase_failure(&mut trace, "compile:error", "parser compilation failed"),
     };
 
-    let spec = match parse_spec_with_user_functions(&request.spec_source) {
-        Ok(spec) => spec,
-        Err(_) => return phase_failure(&mut trace, "compile:error", "parser compilation failed"),
-    };
-    if validate(&spec).is_err() {
-        return phase_failure(&mut trace, "compile:error", "parser compilation failed");
-    }
-    let compiled = match compile(&spec) {
-        Ok(compiled) => compiled,
-        Err(_) => return phase_failure(&mut trace, "compile:error", "parser compilation failed"),
+    let engine = match &request.spec {
+        PreparedSpec::Compiled(loaded) => loaded.clone().into_engine(),
+        PreparedSpec::Inline(source) => {
+            let spec = match parse_spec_with_user_functions(source) {
+                Ok(spec) => spec,
+                Err(_) => {
+                    return phase_failure(&mut trace, "compile:error", "parser compilation failed");
+                }
+            };
+            if validate(&spec).is_err() {
+                return phase_failure(&mut trace, "compile:error", "parser compilation failed");
+            }
+            let compiled = match compile(&spec) {
+                Ok(compiled) => compiled,
+                Err(_) => {
+                    return phase_failure(&mut trace, "compile:error", "parser compilation failed");
+                }
+            };
+            Engine::new(compiled)
+        }
     };
     if let Err(output) = emit_trace(&mut trace, 100, "low", "compile:ok") {
         return output;
@@ -319,7 +336,7 @@ fn run_prepared_options(options: PrimaryCliOptions, cwd: &Path, repo_root: &Path
     if let Err(output) = emit_trace(&mut trace, 100, "low", "invoke:start") {
         return output;
     }
-    let result = match Engine::new(compiled).execute_value(&input, &execution_options) {
+    let result = match engine.execute_value(&input, &execution_options) {
         Ok(result) => result,
         Err(_) => return phase_failure(&mut trace, "invoke:error", "parser invocation failed"),
     };
@@ -569,13 +586,18 @@ fn prepare_request(
     cwd: &Path,
     repo_root: &Path,
 ) -> Result<PreparedRequest, ()> {
-    let spec_source = if let Some(ref name) = options.spec {
-        let path = resolve_named_spec(name, cwd, repo_root).ok_or(())?;
-        read_utf8_file(&path)?
+    let spec = if let Some(ref name) = options.spec {
+        let load_options = SpecLoadOptions::new(cwd).with_search_root(repo_root.join("specs"));
+        PreparedSpec::Compiled(
+            load_and_compile_spec(&SpecRequest::named(name), &load_options).map_err(|_| ())?,
+        )
     } else if let Some(ref path) = options.spec_file {
-        read_utf8_file(&explicit_path(path, cwd))?
+        PreparedSpec::Compiled(
+            load_and_compile_spec(&SpecRequest::path(path), &SpecLoadOptions::new(cwd))
+                .map_err(|_| ())?,
+        )
     } else {
-        options.inline_spec.clone().unwrap_or_default()
+        PreparedSpec::Inline(options.inline_spec.clone().unwrap_or_default())
     };
     let input = if let Some(ref path) = options.input_file {
         InputSelection::File(explicit_path(path, cwd))
@@ -584,7 +606,7 @@ fn prepare_request(
     };
     Ok(PreparedRequest {
         options,
-        spec_source,
+        spec,
         input,
     })
 }
@@ -596,20 +618,6 @@ fn explicit_path(path: &str, cwd: &Path) -> PathBuf {
     } else {
         cwd.join(path)
     }
-}
-
-fn resolve_named_spec(name: &str, cwd: &Path, repo_root: &Path) -> Option<PathBuf> {
-    let filename = if name.ends_with(".spec") {
-        name.to_string()
-    } else {
-        format!("{name}.spec")
-    };
-    let candidates = [
-        explicit_path(name, cwd),
-        explicit_path(&filename, cwd),
-        repo_root.join("specs").join(filename),
-    ];
-    candidates.into_iter().find(|candidate| candidate.is_file())
 }
 
 fn read_utf8_file(path: &Path) -> Result<String, ()> {

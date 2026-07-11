@@ -25,7 +25,7 @@
       "gap_owner": "FUTURE-PARITY-BACKLOG.1.6.4",
       "backends": {
         "perl": {"status": "pass", "references": ["perl/LinkedSpec.pm", "perl/LinkedSpec/ParserFactory.pm"]},
-        "rust": {"status": "gap", "references": ["rust/linkedspec-core/src/lib.rs"], "note": "No exported named/file resolver composes parse and compile."},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/spec_loader.rs", "rust/linkedspec-runtime/tests/spec_loader.rs"]},
         "dart": {"status": "gap", "references": ["dart/lib/linkedspec_dart.dart"], "note": "Named resolution exists only in process-adapter code, not the public package API."},
         "julia": {"status": "gap", "references": ["julia/src/LinkedSpecJulia.jl"], "note": "Named resolution exists only in process-adapter code, not the exported module API."}
       }

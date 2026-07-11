@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.4.2 — add Rust native spec resolution
+
+Added public `linkedspec_runtime::spec_loader` with typed `SpecRequest` name/path intent, `SpecLoadOptions` cwd and
+ordered roots, deterministic `ResolvedSpec` origins, strict `LoadedSpec`, backend-native `LoadedCompiledSpec`, and
+serializable `SpecPipelineError` stage/code records. `load_and_compile_spec(...)` resolves a regular file, reads
+bytes, strictly preserves UTF-8 text, runs the full staged user-function parser, validates, compiles, and can build
+an `Engine` carrying requested name/resolved path identity.
+
+Expanded the shared name fixture from 13 to 14 cases to enforce ADR `0026`'s existing rejection of Windows-drive
+absolute forms. Five Rust tests consume all 14 name, nine resolution/file-kind, and four text cases directly, then
+prove function compilation/execution, engine identity, parse versus validation stages, and exact missing-name JSON.
+The Rust primary CLI delegates named and explicit-file source selection to the same native API; inline source stays
+on its existing in-memory path.
+
+The complete Rust gate passes formatting; 137 unit, 105 oracle, 196 integration, five runtime diagnostic, three
+generated-source, five loader, and ten trace tests; plus 61/61 CLI cases under default and POSIX environments.
+Strict Clippy finds no new loader/CLI issue and stops on the same 14 untouched runtime findings. Rust promotes to
+pass at census 54/1/5. Removed the consumed 2.0 GB `rust/target`; Dart `.1.6.4.3` is next.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.4.1 — define native spec resolution contract
 
 Added ADR `0026` and `capability_conformance/native_spec_resolution_contract.json` as the versioned public

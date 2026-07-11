@@ -7,13 +7,23 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.4.2 — add Rust native spec resolution**
+  (DONE — Rust file-oriented native role passes; Dart `.1.6.4.3` active).
+
+  **Implementation:** Public progressive resolve/load/compile API, exact name/path intent, ordered roots, strict
+  UTF-8, source identity, typed JSON errors, full staged-function composition, attributed engine, and CLI delegation.
+
+  **Proof/cleanup:** Direct 14/9/4 fixture plus pipeline tests pass; complete Rust gate passes
+  137/105/196/5-diagnostic/3-generated/5-loader/10-trace and 61x2 CLI. No new Clippy findings. Census 54/1/5; 2.0 GB
+  target removed.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.4.1 — define native spec resolution contract**
   (DONE — executable policy fixed; Rust native API `.1.6.4.2` active).
 
   **Contract:** Separate portable names/exact paths, cwd→suffix→ordered roots, no recursion/traversal, first regular
   file, exact identity, stable pipeline errors, and strict preserved UTF-8 without UTF-16/32 autodetection.
 
-  **Proof:** The standalone checker passes 13 name, nine resolution/file-kind, and four text cases and is wired
+  **Proof:** The standalone checker originally passed 13 name, nine resolution/file-kind, and four text cases and is wired
   into the canonical local gate. That complete gate passes 239-name coverage, focused suites, 61x2 Perl CLI, and
   Phase 0 `1..1030` in 502 seconds. No backend behavior changed; census remains 53/1/6.
 

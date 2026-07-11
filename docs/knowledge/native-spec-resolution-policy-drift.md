@@ -12,6 +12,7 @@ status: current
 tags: [resolution, pathsearch, parity, rust, dart, julia, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.4.0 source/test audit: Perl Resolver checks exact cwd, cwd name.spec, and module-root specs/name.spec before bare-name PathSearch fallback. PathSearch recursively caches cwd plus the repository tree, hash-deduplicates directories, and returns the first matching hash-key iteration result. Rust and Dart primary adapters stop after the three local candidates; Julia adds a sorted/pruned recursive repository fallback. All three non-Perl mechanisms are process-adapter-only."
 evidence_update_2026_07_11_contract: "FUTURE-PARITY-BACKLOG.1.6.4.1 adopts ADR 0026 and a checked executable contract: portable named identities, separate exact paths, explicit roots in declared order, no recursion, first regular file, strict preserved UTF-8, structured pipeline stages/codes, and 13/9/4 neutral cases."
+evidence_update_2026_07_11_rust: "FUTURE-PARITY-BACKLOG.1.6.4.2 expands the name proof to 14 cases for Windows-drive absolutes and makes Rust native/CLI resolution delegate to the portable policy; Dart and Julia remain active gaps."
 reverify: "sed -n '1,180p' perl/PathSearch.pm && rg -n '_resolve_local_spec_path|PathSearch::go|resolve_named_spec|resolvePrimaryCliNamedSpec|_resolve_named_spec_path|_find_primary_cli_repository_spec' perl/LinkedSpec/Resolver.pm rust/linkedspec-runtime/src/primary_cli.rs dart/lib/src/cli/primary_cli.dart julia/src/cli/LinkedSpecJuliaCli.jl"
 ---
 

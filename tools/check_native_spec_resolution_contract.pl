@@ -79,7 +79,7 @@ sub name_is_valid {
  my ($value) = @_;
  return 0 unless length($value) && $value =~ /\S/u;
  return 0 if $value =~ /^\s|\s$/u || $value =~ /\p{Cc}/u;
- return 0 if $value =~ m{^/|\\|//};
+ return 0 if $value =~ m{^/|^[A-Za-z]:/|\\|//};
  return 0 if grep { $_ eq '.' || $_ eq '..' } split m{/}, $value, -1;
  return 1;
 }

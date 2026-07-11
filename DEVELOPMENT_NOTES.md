@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.4.2 — make the complete native result carry provenance):
+  Resolution, loading, and compilation are useful independently, so expose progressive typed stages rather than
+  one opaque convenience function. The complete result keeps the request, winning origin/path, exact decoded text,
+  and compiled state; consuming it into an `Engine` is the single point that attaches diagnostic identity. The CLI
+  can therefore delegate file work without owning richer semantics or changing its canonical failure projection.
+  Candidate metadata errors remain resolution-stage structured detail, malformed bytes are decode-stage errors,
+  and parser/validation/compiler failures keep distinct stages. A portable name also has to reject `C:/...` even
+  on Unix—the neutral validator cannot depend on the current host's definition of absolute. Strict Clippy confirms
+  no new findings; the known 14 are all outside the new loader/adapter code.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.4.1 — separate logical identity from host path):
   One overloaded string cannot safely mean both a portable named spec and an arbitrary filesystem path. Named
   identities use forward-slash components and reject absolute/traversal/host-separator forms; exact paths retain

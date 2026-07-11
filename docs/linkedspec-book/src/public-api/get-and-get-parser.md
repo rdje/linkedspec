@@ -15,16 +15,16 @@ in-process data path, not identical spelling:
 | Backend | Native in-memory composition |
 | --- | --- |
 | Perl | `LinkedSpec::Get(...)` → parser coderef; `get_parser(...)` adds named/file resolution. |
-| Rust | `linkedspec_core::parser::parse_spec(...)` → core compilation → `linkedspec_runtime::engine::Engine::new(...)` → `execute(...)` or structured `execute_with_diagnostics(...)`. |
+| Rust | Inline: `parse_spec(...)` → core compilation → `Engine::new(...)`. File-oriented: `spec_loader::load_and_compile_spec(...)` → `LoadedCompiledSpec::into_engine()`. |
 | Dart | `parseSpec(...)` → `compileSpec(...)` → `LinkedSpecRuntimeEngine(...).parse(...)`. |
 | Julia | Rule-only: `parse_spec(...)`; source with top-level functions: `parse_spec_with_staged_user_function_definitions(...)`; then `compile_spec(...)` → `LinkedSpecRuntimeEngine(...)` → `runtime_parse(...)` / `runtime_execute(...)`. |
 | Lua and later backends | An idiomatic native module must expose equivalent in-memory parse/compile/execute capability before its CLI can count as a complete backend. |
 
-The in-memory role is implemented on all four current backends. The file-oriented named-resolution role is not yet
-library-equivalent: Perl exposes `get_parser(...)`, while Rust, Dart, and Julia currently resolve named specs only
-inside their thin primary process adapters. `FUTURE-PARITY-BACKLOG.1.6.4` owns idiomatic native equivalents and
-shared path/search fixtures; until it closes, callers on those backends should load source explicitly and pass it
-to the in-memory parser.
+The inline in-memory role is implemented on all four current backends. Perl and Rust now also expose the native
+file-oriented role: Perl through `get_parser(...)`, Rust through `linkedspec_runtime::spec_loader`. Dart and Julia
+still resolve named specs only inside thin primary process adapters. `FUTURE-PARITY-BACKLOG.1.6.4` owns their
+idiomatic native equivalents and final shared admission; until those leaves close, Dart/Julia callers should load
+source explicitly and pass it to the in-memory parser.
 
 The implementation audit found that the adapters do not yet share one fallback policy. Rust and Dart stop after
 the exact working-directory path, working-directory `<name>.spec`, and repository `specs/<name>.spec`; Julia adds
@@ -35,8 +35,8 @@ implicit recursive fallback remains a compatibility extension, not the semantic 
 
 ### Portable file-oriented contract
 
-The contract is ratified and executable in `capability_conformance/native_spec_resolution_contract.json`; the
-Rust, Dart, and Julia public API rollout remains in progress. It separates two caller intents:
+The contract is ratified and executable in `capability_conformance/native_spec_resolution_contract.json`; Rust
+passes it directly, while Dart and Julia rollout remains in progress. It separates two caller intents:
 
 | Request | Resolution |
 | --- | --- |
@@ -75,6 +75,47 @@ Unicode and UTF-8 are different layers here. The logical source is Unicode scala
 encoding. UTF-16 and UTF-32 are valid Unicode encodings generally, but this API does not guess or transcode them.
 Callers must transcode such files explicitly or pass already-decoded text to the inline API. Valid UTF-8 preserves
 BOM as U+FEFF, normalization form, code points, newlines, and surrounding text exactly.
+
+### Rust named/file example
+
+Rust exposes each stage for tooling and the complete composition for ordinary embedding:
+
+```rust
+use linkedspec_runtime::engine::ExecutionOptions;
+use linkedspec_runtime::spec_loader::{
+    SpecLoadOptions, SpecRequest, load_and_compile_spec,
+};
+
+let request = SpecRequest::named("grammars/Expression");
+let options = SpecLoadOptions::new("/work/project")
+    .with_search_root("/app/specs")
+    .with_search_root("/team/specs");
+
+let loaded = load_and_compile_spec(&request, &options)?;
+println!("resolved: {}", loaded.loaded().resolved().path().display());
+println!("source bytes: {}", loaded.loaded().source_text().len());
+
+let engine = loaded.into_engine();
+let value = engine.execute_value("input", &ExecutionOptions::new())?;
+```
+
+Use `SpecRequest::path("relative/or/absolute.spec")` for one exact host path. `resolve_spec(...)` stops after
+selection, `load_spec(...)` also reads/decodes, and `load_and_compile_spec(...)` continues through the full staged
+function-aware parser, validation, and compiler. `LoadedCompiledSpec::into_engine()` attaches the requested name
+and resolved path to later structured runtime diagnostics.
+
+Errors serialize without string scraping. For example, a pure named miss projects:
+
+```json
+{
+  "type": "spec_pipeline_error",
+  "stage": "resolve_spec_path",
+  "code": "spec_path_not_found",
+  "summary": "Spec path not found",
+  "request_kind": "name",
+  "requested": "Missing"
+}
+```
 
 File-oriented helpers, per-variant CLIs, corpus runners, Wasm/web/mobile wrappers, and
 service adapters may wrap these APIs. They are secondary surfaces and must not contain

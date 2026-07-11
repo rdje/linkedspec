@@ -147,6 +147,11 @@
       "expect": {"status": "error", "stage": "validate_spec_name", "code": "invalid_spec_name"}
     },
     {
+      "id": "windows_absolute_name",
+      "value": "C:/Demo",
+      "expect": {"status": "error", "stage": "validate_spec_name", "code": "invalid_spec_name"}
+    },
+    {
       "id": "backslash_name",
       "value": "nested\\Demo",
       "expect": {"status": "error", "stage": "validate_spec_name", "code": "invalid_spec_name"}

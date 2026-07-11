@@ -25,13 +25,14 @@ evidence_update_2026_07_11_rust_diagnostic_implementation: "FUTURE-PARITY-BACKLO
 evidence_update_2026_07_11_rust_diagnostic_admission: "FUTURE-PARITY-BACKLOG.1.6.3.2 passes the complete Rust gate including five diagnostics and 61x2 CLI, promotes structured runtime diagnostics to pass, and closes .1.6.3. The census is now 53 pass, one partial, six gap."
 evidence_update_2026_07_11_native_resolution_audit: "FUTURE-PARITY-BACKLOG.1.6.4.0 finds that non-Perl named resolution remains process-adapter-only and fallback semantics drift: Rust/Dart stop after three local candidates, Julia adds sorted recursive repository discovery, and Perl PathSearch fallback selects through hash-key order. Neutral contract .1 now owns explicit ordered roots before backend implementation. Census remains 53/1/6."
 evidence_update_2026_07_11_native_resolution_contract: "FUTURE-PARITY-BACKLOG.1.6.4.1 adds ADR 0026, a 13/9/4 executable contract, standalone checker, and canonical-gate wiring for portable names/exact paths, ordered roots, first regular file, strict UTF-8, identity, and typed stages/codes. No backend row promotes; census remains 53/1/6 until implementations and admission."
+evidence_update_2026_07_11_rust_native_resolution: "FUTURE-PARITY-BACKLOG.1.6.4.2 adds public Rust name/path resolution, strict loading, staged parse/validate/compile composition, source identity, structured errors, direct 14/9/4 fixture proof, and CLI delegation. Full Rust gate including five loader and 61x2 CLI passes; Rust promotes to pass and census is 54/1/5."
 reverify: "perl tools/check_capability_conformance.pl && rg -n 'FUTURE-PARITY-BACKLOG.1.6.[0-6]' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 `capability_conformance/manifest.json` is the current user-observable capability census. The checker validates the
 schema, exact backend set, evidence paths, status vocabulary, unique ids, gap ownership, and explicit legacy/future
-exclusions. After structured diagnostic admission, its 15 rows and 60 backend states classify 53 pass, one partial,
-and six gap.
+exclusions. After Rust native resolution admission, its 15 rows and 60 backend states classify 54 pass, one partial,
+and five gap.
 
 The audit distinguishes implementation gaps from proof gaps:
 
@@ -40,9 +41,8 @@ The audit distinguishes implementation gaps from proof gaps:
 - all four expose exact outward descriptors, aligned model identities, and one canonical function-record schema;
 - all four expose structured runtime diagnostic attribution; Rust's full recurring/CLI gate and final admission
   are closed;
-- the native file-oriented named-spec role exists only as Perl `get_parser(...)`; Rust/Dart/Julia process adapters
-  resolve names but their public libraries do not; their fallback behavior also differs, so `.1.6.4.1` owns an
-  explicit ordered-root contract before `.1.6.4` adds idiomatic native equivalents;
+- Perl and Rust expose the native file-oriented named-spec role and Rust consumes the exact 14/9/4 ordered-root
+  contract directly; Dart/Julia remain process-adapter-only under `.1.6.4.3-.4`;
 - Perl/Rust/Julia propagate a native emitter through frontend/compiler/function-shell/staged/runtime phases, while
   Dart native trace begins at the interpreter; `.1.6.5` owns the missing pipeline coverage;
 - generated source remains top-level `.3`: Perl passes, Rust has all structural families but only a curated corpus
