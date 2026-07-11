@@ -50,7 +50,7 @@
       "gap_owner": "FUTURE-PARITY-BACKLOG.1.6.3",
       "backends": {
         "perl": {"status": "pass", "references": ["perl/LinkedSpec/RuntimeContext.pm"]},
-        "rust": {"status": "gap", "references": ["rust/linkedspec-core/src/error.rs", "rust/linkedspec-runtime/src/engine.rs"], "note": "Runtime errors are string payloads in LinkedSpecError::Runtime rather than a structured diagnostic record."},
+        "rust": {"status": "gap", "references": ["rust/linkedspec-core/src/error.rs", "rust/linkedspec-runtime/src/engine.rs", "rust/linkedspec-runtime/src/runtime.rs"], "note": "Public Engine execution and internal runtime frames return Result<_, String>; the core LinkedSpecError::Runtime variant is unused by the runtime crate. No structured diagnostic record or source/rule attribution API exists yet."},
         "dart": {"status": "pass", "references": ["dart/lib/src/runtime/interpreter.dart"]},
         "julia": {"status": "pass", "references": ["julia/src/runtime/Interpreter.jl"]}
       }

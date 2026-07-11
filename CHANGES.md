@@ -1,6 +1,17 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.3.0 — split Rust runtime diagnostics
+
+Corrected the structured-diagnostic gap at its real API boundary. Rust runtime `Engine` methods and internal frames
+return `Result<_, String>`; the similarly named `linkedspec-core::LinkedSpecError::Runtime(String)` variant is not
+used by `linkedspec-runtime`. `execute_rule(...)` can preserve the deepest failing child before its frame unwinds,
+but `RuntimeContext` currently stores no top/rule/diagnostic state and `Engine` carries no spec source identity.
+
+Split `.1.6.3` into typed native execution `.1`, followed by full no-drift/capability admission `.2`. Updated the
+mdBook, capability evidence, roadmap, task indexes, and Knowledge Map before runtime code. The census remains 52
+pass / one partial / seven gap.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.2.3 — admit exact descriptor parity
 
 Added `capability_conformance/outward_descriptor_contract.json` as the singular executable schema for outward

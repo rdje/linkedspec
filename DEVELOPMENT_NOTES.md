@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.3.0 — repair the type users receive, not a similarly named enum):
+  `linkedspec-runtime` does not use `linkedspec-core::LinkedSpecError::Runtime`; all active engine failures are raw
+  strings. The singular interpreted attribution seam is `Engine::execute_rule`, where a child error is visible
+  before rule-local/recursion unwind. Typed methods can therefore capture the deepest diagnostic there, retain it
+  through parents, and leave current string methods as compatibility adapters. Optional spec identity belongs on
+  the engine because compiled state does not retain filesystem provenance.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.2.3 — project public records separately from internal AST JSON):
   Descriptor parity is an exact user-facing schema, not permission to force every backend's internal AST
   serialization into one shape. `outward_descriptor_contract.json` is the singular neutral contract; Perl adds

@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.3.0 — split Rust runtime diagnostics**
+  (DONE — actual failure boundary established; typed implementation `.1.6.3.1` active).
+
+  **Finding:** Runtime `Engine` APIs and frames return raw strings; core `LinkedSpecError::Runtime` is unused.
+  `execute_rule` sees the deepest child error before unwind, while current context/engine state lacks diagnostic
+  and source identity.
+
+  **Split:** `.1` adds typed diagnostic-aware native execution with compatibility adapters; `.2` runs complete
+  no-drift proof, promotes the capability, and closes the parent. No runtime behavior changed in this audit leaf.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.2.3 — admit exact descriptor parity**
   (DONE — compiled-descriptor parent `.1.6.2` closed; structured Rust diagnostics `.1.6.3` active).
 

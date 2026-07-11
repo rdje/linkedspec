@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.2.3` — exact four-backend descriptor admission.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.2.2` — typed Rust outward descriptor projection.
-- recent_context: One shared JSON contract fixes exact descriptor top-level/meta/function fields. Perl adds the
-  source index; Dart/Julia use descriptor-specific projections; Rust already matches. Focused four-backend and
-  complete relevant gates pass. Census is 52 pass / one partial / seven gap; `.1.6.2` is closed.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.3.0` — audited/split Rust structured runtime diagnostics.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.2.3` — exact four-backend descriptor admission.
+- recent_context: Rust Engine execution methods/frames actually return raw strings; core LinkedSpecError::Runtime
+  is unused. execute_rule sees child failure before unwind; context has no diagnostic/top state and Engine no source
+  identity. `.1` owns typed APIs/adapters and `.2` admission. Census remains 52 pass / one partial / seven gap.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.2.3 - admit exact descriptor parity`; previous committed HEAD is
-  `21d97a4b FUTURE-PARITY-BACKLOG.1.6.2.2 - expose Rust compiled descriptors`.
+  `FUTURE-PARITY-BACKLOG.1.6.3.0 - split Rust runtime diagnostics`; previous committed HEAD is
+  `0d1cb770 FUTURE-PARITY-BACKLOG.1.6.2.3 - admit exact descriptor parity`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.3` structured Rust runtime diagnostics is active.
-- next_action: audit the current Rust error/runtime/CLI seams with the Knowledge Map and toolbox, split a safe
-  implementation leaf if required, then add stable structured runtime context without changing successful output.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.3.1` typed Rust runtime diagnostics is active.
+- next_action: add serializable RuntimeDiagnostic/RuntimeExecutionError records, optional Engine source identity,
+  diagnostic-aware accumulator/direct execution, deepest-rule capture, and string/success compatibility tests.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

@@ -60,10 +60,11 @@ on `LinkedSpecRuntimeEngine`, and preserves the failing child rule and
 Successful Julia `RuntimeParseResult` JSON and textual exception display remain
 unchanged.
 
-Rust does not yet expose the equivalent runtime record. `LinkedSpecError` distinguishes parse, validation,
-compile, runtime, trace, IO, and JSON categories, but its runtime variant currently carries an unstructured string.
-`FUTURE-PARITY-BACKLOG.1.6.3` owns a stable structured runtime diagnostic while preserving ordinary Rust `Result`
-ergonomics and the already-canonical primary CLI failure projection.
+Rust does not yet expose the equivalent runtime record. Its actual public `Engine` execution methods and internal
+runtime frames return `Result<_, String>`. `linkedspec-core` separately defines
+`LinkedSpecError::Runtime(String)`, but the runtime crate does not use that variant; it is not the active public
+failure boundary. `FUTURE-PARITY-BACKLOG.1.6.3.1` owns typed structured native execution methods plus compatibility
+adapters while preserving ordinary Rust `Result` ergonomics and the canonical primary CLI failure projection.
 
 ## Typical payload shape
 
