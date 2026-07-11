@@ -181,7 +181,7 @@
       "gap_owner": "FUTURE-PARITY-BACKLOG.3",
       "backends": {
         "perl": {"status": "partial", "references": ["perl/LinkedSpec/Compiler.pm", "perl/LinkedSpec/GeneratedSource.pm", "perl/LinkedSpec/HandlerVariantEmitter.pm", "t/generated_source_contract.t"], "note": "Standalone contract-v1 source emission and focused independent compile/run proof are implemented under FUTURE-PARITY-BACKLOG.3.1.2; explicit baseline admission remains owned by .3.1.3."},
-        "rust": {"status": "partial", "references": ["rust/linkedspec-runtime/src/source_emitter.rs", "rust/linkedspec-runtime/tests/source_emitter.rs", "docs/knowledge/rust-generated-source-contract-v1-gap.md"], "note": "All structural families and the accepted eight-case subset run independently, and typed source identity/metadata/errors now align under FUTURE-PARITY-BACKLOG.3.1.3.1; exact neutral family-plan rejection and generated trace roles remain under .3.1.3.2 before admission and full-manifest breadth."},
+        "rust": {"status": "partial", "references": ["rust/linkedspec-runtime/src/source_emitter.rs", "rust/linkedspec-runtime/tests/source_emitter.rs", "docs/knowledge/rust-generated-source-contract-v1-gap.md"], "note": "Contract-v1 identity/metadata/errors, exact ten-family plan/four rejections, direct result, three portable trace roles, all structural families, and the accepted eight-case subset run independently; explicit baseline admission remains FUTURE-PARITY-BACKLOG.3.1.3.3, followed by full-manifest breadth .3.2."},
         "dart": {"status": "gap", "references": ["docs/knowledge/dart-generated-source-deferred.md"]},
         "julia": {"status": "gap", "references": ["docs/knowledge/julia-generated-source-deferred.md"]}
       }

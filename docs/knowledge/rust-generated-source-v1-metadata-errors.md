@@ -30,8 +30,9 @@ projection seam.
 
 Compatibility is deliberate: `emit_rust_source(&compiled)` still returns raw
 string errors with `<inline>` identity, and generated `parse`/`parse_with_trace`
-retain their original string-returning execution path. Exact neutral plan and
-trace roles remain a later leaf, so this fact does not claim baseline admission.
+retain their original string-returning execution path. Exact neutral plan,
+result, and trace roles landed separately under `.3.1.3.2`; this card remains
+the narrower metadata/error fact and does not itself claim admission.
 
 Related facts: [[generated-source-contract-v1]],
 [[rust-generated-source-contract-v1-gap]], [[generated-source-parity-audit]].

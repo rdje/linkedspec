@@ -56,11 +56,19 @@ compatibility adapter with `<inline>` identity. Generated `parse` and
 `parse_with_trace` likewise retain raw-string diagnostics, so adopting v1 does
 not silently alter existing Rust callers.
 
-Exact neutral family spellings, independently testable unknown-family
-rejection, and the three neutral trace roles remain under
-`FUTURE-PARITY-BACKLOG.3.1.3.2` before baseline admission. Native
-`rust_runtime:generated_plan:*` trace detail remains valuable; the neutral
-roles are an additional portable projection, not a replacement.
+Rust now emits a separate `GeneratedPlanRow` table with exact neutral family
+strings, plus `plan()` and `validate_plan(...)`. Count, label, known-family
+mismatch, and arbitrary unknown-family mutations have distinct pre-execution
+codes. The legacy typed enum table remains private to compatibility adapters;
+its historical `Repetition` marker is not a v1 family.
+
+The neutral fixture also locks result projection. Typed v1 `execute` and
+`execute_with_trace` return the direct top-rule value, matching the public
+native/CLI value contract. Legacy `parse` and `parse_with_trace` retain Rust's
+historical accumulator envelope. The three portable generated-rule enter,
+family-decision, and exit roles carry source/rule/family context beside native
+`rust_runtime:generated_plan:*` detail. Explicit baseline admission remains
+`FUTURE-PARITY-BACKLOG.3.1.3.3`; full 105-case generated breadth remains `.3.2`.
 
 ```rust
 use linkedspec_runtime::source_emitter::{

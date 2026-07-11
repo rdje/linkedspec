@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.1.3.2 — make result projection part of generated-source parity):
+  Structural execution equality can still hide an API result-shape mismatch. Rust already separates legacy
+  accumulator-returning `Engine::execute` from portable direct-value `Engine::execute_value`; source generation
+  must mirror that split rather than invent a third convention. Keep two generated tables: the legacy typed enum
+  table for exact adapters and a neutral string table for mutable contract validation. Validate unknown names before
+  expected-family comparison so unknown and known-but-wrong families remain distinct. Add portable trace role marks
+  within rule recursion while retaining native scopes/decisions. When one shared traced helper serves both APIs,
+  select result projection explicitly; identity presence is the v1 route, not permission to alter legacy output.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.1.3.1 — add a contract surface beside compatibility):
   A typed public API can be added without silently changing an established string API. Make the legacy emitter a
   thin adapter with a stable default identity, but keep generated legacy entrypoints routed through their original

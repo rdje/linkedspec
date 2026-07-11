@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.1.3.1` — added Rust v1 identity/metadata/error roles.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.3.1.3.0` — audited/split Rust contract-v1 baseline alignment.
-- recent_context: Census remains 56/2/2. Rust now has typed source identity, deterministic contract/version/identity
-  metadata, generated-source stage/code errors, compile/load projection, and compatibility-preserving string APIs.
-  Exact neutral family strings/unknown-family rejection and trace roles remain owned by `.3.1.3.2`; `.3` admits.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.1.3.2` — aligned Rust neutral plan/result/trace v1 roles.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.3.1.3.1` — added Rust v1 identity/metadata/error roles.
+- recent_context: Census remains 56/2/2 until explicit admission. Rust now passes exact ten-family plan/four
+  rejections/direct neutral result/three trace roles while legacy generated parse/trace retains the accumulator
+  envelope. Perl and Rust v1 baselines are green; `.3.1.3.3` owns full gates/status promotion and `.3.1` closeout.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.3.1.3.1 - add Rust generated-source v1 metadata`; previous committed HEAD is
-  `223bf739 FUTURE-PARITY-BACKLOG.3.1.3.0 - split Rust generated-source v1 alignment`.
+  `FUTURE-PARITY-BACKLOG.3.1.3.2 - align Rust generated plans and trace`; previous committed HEAD is
+  `47524860 FUTURE-PARITY-BACKLOG.3.1.3.1 - add Rust generated-source v1 metadata`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.3.1.3.2`; exact Rust generated plan/trace roles are active.
-- next_action: replace the generated module's private enum-only plan boundary with exact ordered neutral family
-  strings so row count, label, family mismatch, and unknown family are independently testable before execution;
-  add the three neutral generated-rule trace roles beside rich native trace, then run focused/full Rust gates.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.3.1.3.3`; Perl/Rust v1 baseline admission is active.
+- next_action: run the required focused and complete Perl/Rust admission gates, promote Perl generated source to
+  pass while Rust remains partial solely for 8/105 breadth, close `.3.1`, sync all capability/public/continuity
+  records, clean safe artifacts, and commit before activating Rust breadth `.3.2`.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

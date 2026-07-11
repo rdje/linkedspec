@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.1.3.2 — align Rust generated plans and trace
+
+Added Rust's exact contract-v1 `GeneratedPlanRow` projection, emitted `plan()`/`validate_plan(...)`, ten neutral
+family strings, and distinct pre-execution rejection of row count, label, known-family mismatch, and arbitrary
+unknown-family input. The legacy `GeneratedRuleFamily::Repetition` marker remains supported only by the legacy
+enum plan and deliberately has no contract-family name.
+
+The neutral fixture exposed that typed generated execution returned Rust's historical accumulator envelope
+`["ok"]` rather than the portable direct value `"ok"`. Added a generated-plan-aware direct-result seam mirroring
+native `Engine::execute_value`; typed v1 `execute` uses it, while legacy generated `parse` and legacy traced calls
+retain exact accumulator behavior. Typed trace now emits `generated_rule_enter`, `generated_family_decision`, and
+`generated_rule_exit` with source/rule/family context beside all richer native generated-plan events.
+
+A first full gate caught accidental legacy traced projection drift; focused 10/10 trace proof passed after the
+narrow correction. Source-emitter passes 5/5. The clean complete gate passes 137 unit, 105 corpus, 196 integration,
+5 diagnostics, 5 source-emitter, 5 loader, 10 trace, docs/build, and 61x2 CLI. Census remains 56/2/2 until explicit
+Perl/Rust baseline admission `.3.1.3.3`.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.1.3.1 — add Rust generated-source v1 metadata
 
 Added Rust's typed `emit_rust_source_v1(compiled, source_identity)` API, deterministic generated-module contract/

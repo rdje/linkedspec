@@ -1577,17 +1577,43 @@ before implementation.
   claiming exact neutral plan/trace roles or capability admission; `.3.1.3.2` becomes active.
 
 - ID: `FUTURE-PARITY-BACKLOG.3.1.3.2`
-  Status: `active`
+  Status: `done`
   Goal: Align Rust generated-plan rejection and neutral trace roles with contract v1.
   Acceptance: Validate exact ordered label/family rows using the ten neutral family names; reject row count, label,
     family mismatch, and unknown family before execution with exact codes; expose generated-rule enter, family
     decision, and exit roles while retaining richer native trace; pass the neutral result/trace/identity fixture and
     existing all-family isolated compile/run matrix.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Emitted Rust modules now expose an exact neutral `GeneratedPlanRow` table,
+    `plan()`, and `validate_plan(...)`; typed execution rejects row count, label, known-family mismatch, and arbitrary
+    unknown-family values before runtime with the four stable codes. The exact neutral fixture initially exposed
+    Rust's historical generated accumulator envelope (`["ok"]`) versus v1 direct result (`"ok"`): root cause was
+    that generated execution had not mirrored the already-adopted `Engine::execute_value`/legacy `execute` split.
+    Typed v1 `execute` now uses a generated-plan-aware direct-value seam; compatibility `parse` keeps the envelope.
+    Traced v1 execution emits `generated_rule_enter`, `generated_family_decision`, and `generated_rule_exit` with
+    identity/rule/family beside rich native topics. A first full gate correctly caught and repaired accidental
+    legacy traced projection drift; focused trace 10/10 and source-emitter 5/5 then pass. The clean rerun passes
+    137 unit, 105 corpus, 196 integration, 5 diagnostics, 5 source-emitter, 5 loader, 10 trace, docs/build, and
+    61/61 CLI in default and POSIX environments. Strict Clippy retains exactly 14 pre-existing untouched findings.
+    Docs/KM/governance/mdBook/cleanup pass; census remains 56/2/2 for explicit admission `.3`.
+  Commit: `FUTURE-PARITY-BACKLOG.3.1.3.2 - align Rust generated plans and trace`
+
+## `FUTURE-PARITY-BACKLOG.3.1.3.2` Acceptance Checklist
+
+- [x] **EXACT PLAN** — emitted `GeneratedPlanRow` values use exactly the ten neutral family names in source rule
+  order; `Repetition` remains only a legacy enum marker and has no contract name.
+- [x] **FOUR REJECTIONS** — count, label, known-family mismatch, and arbitrary unknown-family mutations fail before
+  execution with exact v1 stages/codes/source identity and available label/family attribution.
+- [x] **DIRECT RESULT** — typed v1 generated `execute` returns the portable top-rule value while legacy `parse`
+  retains its historical accumulator envelope; interpreter-first direct and compatibility projections are proven.
+- [x] **PORTABLE TRACE** — traced v1 execution carries the three neutral role names plus identity/rule/family while
+  retaining all richer `rust_runtime:generated_plan:*` events and exact legacy traced results.
+- [x] **NO REGRESSION** — focused 5/5 source-emitter and 10/10 trace-control proof plus the complete
+  137/105/196/5/5/5/10 and 61x2 Rust gate pass after the compatibility correction.
+- [x] **LOCKSTEP** — API/book/task/live/capability/KM state records a green Perl/Rust v1 baseline without promotion;
+  explicit admission `.3.1.3.3` becomes active.
 
 - ID: `FUTURE-PARITY-BACKLOG.3.1.3.3`
-  Status: `pending`
+  Status: `active`
   Goal: Admit the corrected Perl/Rust generated-source v1 baseline.
   Acceptance: Run focused and complete Perl/Rust gates, promote Perl generated source to pass while Rust remains
     partial only for 8/105 breadth, close `.3.1`, synchronize all public/continuity/capability records, clean safe
@@ -1940,8 +1966,8 @@ before implementation.
 | 62 | `FUTURE-PARITY-BACKLOG.3.1.3` | `active` | Admit Perl/Rust contract baseline and return Perl to pass before Rust breadth. |
 | 63 | `FUTURE-PARITY-BACKLOG.3.1.3.0` | `done` | Rust's green pre-v1 scaffold gaps are exact and three bounded alignment/admission leaves exist. |
 | 64 | `FUTURE-PARITY-BACKLOG.3.1.3.1` | `done` | Typed v1 identity/metadata/errors, compatibility adapters, focused 4/4, and full Rust gate pass. |
-| 65 | `FUTURE-PARITY-BACKLOG.3.1.3.2` | `active` | Add exact neutral Rust plan rejection and generated trace roles. |
-| 66 | `FUTURE-PARITY-BACKLOG.3.1.3.3` | `pending` | Run full gates, admit Perl/Rust v1 baseline, and close `.3.1`. |
+| 65 | `FUTURE-PARITY-BACKLOG.3.1.3.2` | `done` | Exact ten-family plan/four rejections/direct v1 result/three trace roles and full Rust gate pass. |
+| 66 | `FUTURE-PARITY-BACKLOG.3.1.3.3` | `active` | Run full gates, admit Perl/Rust v1 baseline, and close `.3.1`. |
 | 67 | `FUTURE-PARITY-BACKLOG.3.2` | `pending` | Rust must expand from eight generated fixtures to the full 105-case manifest. |
 | 68 | `FUTURE-PARITY-BACKLOG.3.3` | `pending` | Dart needs emitter scaffold, family plan/direct execution, and manifest proof. |
 | 69 | `FUTURE-PARITY-BACKLOG.3.4` | `pending` | Julia needs emitter scaffold, family plan/direct execution, and manifest proof. |
@@ -2609,6 +2635,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.2` | Public/legacy deterministic source; isolated result/trace/identity/plan/error fixture; index 0/1 plus slash regex; four existing generated trace suites; measured Phase 0 FAIL 2/1030 stale locks -> PASS `1..1030` in 546s; canonical CI/docs/KM/governance/mdBook/cleanup. | PASS. Perl behavior repair is complete; capability stays partial until explicit `.3.1.3` admission. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.3.0` | Knowledge Map/source audit of Rust emitter API, markers, plan/error/trace roles, isolated harness, and exact subset; focused `source_emitter` 3/3 in 35.69s; capability/KM/governance/whitespace/mdBook/cleanup. | PASS. Four pre-v1 contract gaps are split into metadata/error `.1`, plan/trace `.2`, and admission `.3`; no behavior/status change. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.3.1` | Typed v1 emitter/metadata/errors and compatibility adapters; focused `source_emitter` 4/4; complete Rust gate 137/105/196/5/4/5/10 plus 61x2 CLI; strict-Clippy classification; docs/KM/governance/mdBook/cleanup. | PASS. Rust identity/metadata/error roles align without compatibility drift; census stays 56/2/2 and exact plan/trace `.2` is active. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.1.3.2` | Exact ten-family plan/four rejections; neutral fixture exposed and fixed direct-result projection; three portable trace roles; focused 5/5 + 10/10; clean full Rust 137/105/196/5/5/5/10 plus 61x2; strict-Clippy classification; docs/KM/governance/mdBook/cleanup. | PASS. Rust v1 baseline roles are green with legacy result/trace adapters preserved; census stays 56/2/2 and admission `.3` is active. |
 
 ## Commit Log
 
@@ -2670,6 +2697,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.3.1.2` | `FUTURE-PARITY-BACKLOG.3.1.2 - repair Perl generated source` | Public emitter, dependency reconstruction, metadata/plan/trace/errors, independent exact execution, and gates. |
 | `FUTURE-PARITY-BACKLOG.3.1.3.0` | `FUTURE-PARITY-BACKLOG.3.1.3.0 - split Rust generated-source v1 alignment` | Preserves the green pre-v1 baseline while splitting identity/errors, exact plan/trace, and admission. |
 | `FUTURE-PARITY-BACKLOG.3.1.3.1` | `FUTURE-PARITY-BACKLOG.3.1.3.1 - add Rust generated-source v1 metadata` | Typed identity/metadata/errors and host compile/load projection beside exact compatibility adapters. |
+| `FUTURE-PARITY-BACKLOG.3.1.3.2` | `FUTURE-PARITY-BACKLOG.3.1.3.2 - align Rust generated plans and trace` | Exact neutral plan/rejections, direct v1 result, portable trace roles, and preserved legacy envelope/trace. |
 
 ## Changelog
 
@@ -2712,6 +2740,11 @@ Read-only evidence recorded on 2026-07-10:
   version/identity metadata, typed emitted execution entrypoints, and caller projection for host compile/load
   failures. The original string emitter and generated `parse` adapters preserve exact compatibility. Focused 4/4
   and the complete 137/105/196/5/4/5/10 plus 61x2 gate pass; census remains 56/2/2 and exact plan/trace `.2` is active.
+- `2026-07-11`: `.3.1.3.2` emits the exact ten neutral plan strings and independently rejects count, label, known-
+  family mismatch, and unknown family. The neutral fixture found typed generated execution still returned Rust's
+  legacy accumulator envelope; a generated-plan-aware direct-result seam now mirrors native `execute_value`, while
+  legacy `parse`/traced paths retain their envelope. The three portable trace roles appear beside native detail.
+  Focused 5/5 + 10/10 and the clean 137/105/196/5/5/5/10 plus 61x2 gate pass; admission `.3` is active at 56/2/2.
 - `2026-07-11`: `.1.6.4.5` adds Perl's separate portable `SpecLoader` facade and direct 14/9/4 plus pipeline proof
   without changing legacy `get_parser`/`PathSearch`. The canonical core gate passes the required new test, 239-name
   coverage, focused suites, 61x2 CLI, and Phase 0 `1..1030` in 556 seconds. Combined with immediately prior full

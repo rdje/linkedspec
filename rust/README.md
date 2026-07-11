@@ -42,10 +42,11 @@ assert_eq!(compile_error.source_identity, "specs/example.spec");
 ```
 
 The generated module exports exact contract id, format version, source identity, and `metadata()`. Its typed
-`execute`/`execute_with_trace` entrypoints return `GeneratedSourceError`; legacy `parse`/`parse_with_trace` retain
-their original `String` error API. `emit_rust_source(&compiled)` remains a compatibility adapter using `<inline>`
-identity. Exact neutral plan-family spellings and generated trace roles remain an explicit convergence step before
-the Rust baseline is admitted; the richer native trace remains available.
+`execute`/`execute_with_trace` entrypoints return the direct top-rule value or `GeneratedSourceError`; legacy
+`parse`/`parse_with_trace` retain their original accumulator result and `String` error API. `plan()` exposes exact
+ordered `label`/neutral-family rows, and `validate_plan(...)` distinguishes count, label, known-family mismatch,
+and unknown-family failures before execution. Portable generated-rule enter/family/exit trace roles appear beside
+the richer native trace. `emit_rust_source(&compiled)` remains a compatibility adapter using `<inline>` identity.
 
 ## Quick Start
 

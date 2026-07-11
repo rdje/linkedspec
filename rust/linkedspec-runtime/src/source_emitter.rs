@@ -173,6 +173,39 @@ impl GeneratedRuleFamily {
             Self::RepAndBcode => "RepAndBcode",
         }
     }
+
+    /// Return the exact backend-neutral family name, or `None` for the legacy marker.
+    pub fn contract_name(self) -> Option<&'static str> {
+        match self {
+            Self::Default => Some("default"),
+            Self::OrAcode => Some("or_acode"),
+            Self::AndSingleAcode => Some("and_single_acode"),
+            Self::AndAcodeSeq => Some("and_acode_seq"),
+            Self::AndBcode => Some("and_bcode"),
+            Self::OrBcode => Some("or_bcode"),
+            Self::RepAcode => Some("rep_acode"),
+            Self::RepBcode => Some("rep_bcode"),
+            Self::RepAndAcode => Some("rep_and_acode"),
+            Self::RepAndBcode => Some("rep_and_bcode"),
+            Self::Repetition => None,
+        }
+    }
+
+    fn from_contract_name(name: &str) -> Option<Self> {
+        match name {
+            "default" => Some(Self::Default),
+            "or_acode" => Some(Self::OrAcode),
+            "and_single_acode" => Some(Self::AndSingleAcode),
+            "and_acode_seq" => Some(Self::AndAcodeSeq),
+            "and_bcode" => Some(Self::AndBcode),
+            "or_bcode" => Some(Self::OrBcode),
+            "rep_acode" => Some(Self::RepAcode),
+            "rep_bcode" => Some(Self::RepBcode),
+            "rep_and_acode" => Some(Self::RepAndAcode),
+            "rep_and_bcode" => Some(Self::RepAndBcode),
+            _ => None,
+        }
+    }
 }
 
 /// One generated rule-family table row.
@@ -180,6 +213,13 @@ impl GeneratedRuleFamily {
 pub struct GeneratedRuleSpec {
     pub label: &'static str,
     pub family: GeneratedRuleFamily,
+}
+
+/// One backend-neutral generated-plan row exposed by contract-v1 modules.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+pub struct GeneratedPlanRow {
+    pub label: &'static str,
+    pub family: &'static str,
 }
 
 /// Emit a standalone Rust module for `compiled`.
@@ -240,7 +280,7 @@ pub fn emit_rust_source_v1(
     source.push_str("//! Source format: linkedspec-runtime source_emitter v1.\n");
     source.push_str("//! Source identity: LINKEDSPEC_GENERATED_SOURCE_IDENTITY.\n\n");
     source.push_str(
-        "use linkedspec_runtime::source_emitter::{execute_generated_parser, execute_generated_parser_v1, execute_generated_parser_with_trace, execute_generated_parser_with_trace_v1, GeneratedRuleFamily, GeneratedRuleSpec, GeneratedSourceError, GeneratedSourceMetadata};\n",
+        "use linkedspec_runtime::source_emitter::{execute_generated_parser, execute_generated_parser_v1, execute_generated_parser_with_trace, execute_generated_parser_with_trace_v1, validate_generated_parser_plan_v1, GeneratedPlanRow, GeneratedRuleFamily, GeneratedRuleSpec, GeneratedSourceError, GeneratedSourceMetadata};\n",
     );
     source.push_str("use linkedspec_runtime::trace::TraceConfig;\n\n");
     source.push_str(&format!(
@@ -257,6 +297,7 @@ pub fn emit_rust_source_v1(
     source.push_str(&spec_literal);
     source.push_str(";\n\n");
     source.push_str("const GENERATED_RULES: &[GeneratedRuleSpec] = &[\n");
+    let mut neutral_plan_rows = String::new();
     for rule in &compiled.rules {
         let label_literal = rust_string_literal(&rule.label).map_err(|error| {
             GeneratedSourceError::new(
@@ -273,17 +314,41 @@ pub fn emit_rust_source_v1(
         source.push_str(", family: GeneratedRuleFamily::");
         source.push_str(classify_generated_rule_family(rule).variant_name());
         source.push_str(" },\n");
+        neutral_plan_rows.push_str("    GeneratedPlanRow { label: ");
+        neutral_plan_rows.push_str(&label_literal);
+        neutral_plan_rows.push_str(", family: \"");
+        neutral_plan_rows.push_str(
+            classify_generated_rule_family(rule)
+                .contract_name()
+                .expect("classified generated rule must have a contract-v1 family"),
+        );
+        neutral_plan_rows.push_str("\" },\n");
     }
+    source.push_str("];\n\n");
+    source.push_str("const GENERATED_PLAN: &[GeneratedPlanRow] = &[\n");
+    source.push_str(&neutral_plan_rows);
     source.push_str("];\n\n");
     source.push_str(
         r#"pub fn metadata() -> GeneratedSourceMetadata {
     GeneratedSourceMetadata::new(LINKEDSPEC_GENERATED_SOURCE_IDENTITY)
 }
 
+pub fn plan() -> &'static [GeneratedPlanRow] {
+    GENERATED_PLAN
+}
+
+pub fn validate_plan(actual: &[GeneratedPlanRow]) -> Result<(), GeneratedSourceError> {
+    validate_generated_parser_plan_v1(
+        COMPILED_SPEC_JSON,
+        actual,
+        LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+    )
+}
+
 pub fn execute(input: &str) -> Result<serde_json::Value, GeneratedSourceError> {
     execute_generated_parser_v1(
         COMPILED_SPEC_JSON,
-        GENERATED_RULES,
+        GENERATED_PLAN,
         input,
         LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
     )
@@ -292,7 +357,7 @@ pub fn execute(input: &str) -> Result<serde_json::Value, GeneratedSourceError> {
 pub fn execute_with_trace(input: &str, trace_config: TraceConfig) -> Result<serde_json::Value, GeneratedSourceError> {
     execute_generated_parser_with_trace_v1(
         COMPILED_SPEC_JSON,
-        GENERATED_RULES,
+        GENERATED_PLAN,
         input,
         trace_config,
         LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
@@ -311,52 +376,73 @@ pub fn parse_with_trace(input: &str, trace_config: TraceConfig) -> Result<serde_
     Ok(source)
 }
 
-/// Execute generated Rust source with contract-v1 structured failures.
+/// Execute generated Rust source with the direct top-rule value and v1 failures.
 pub fn execute_generated_parser_v1(
     compiled_spec_json: &str,
-    generated_rules: &[GeneratedRuleSpec],
+    generated_plan: &[GeneratedPlanRow],
     input: &str,
     source_identity: &str,
 ) -> Result<serde_json::Value, GeneratedSourceError> {
-    let compiled: CompiledSpec = serde_json::from_str(compiled_spec_json).map_err(|error| {
-        GeneratedSourceError::compile_failed(
-            source_identity,
-            format!("generated CompiledSpec JSON is invalid: {error}"),
-        )
-    })?;
-    validate_generated_rule_plan_v1(&compiled, generated_rules, source_identity)?;
+    let compiled = decode_generated_compiled_spec_v1(compiled_spec_json, source_identity)?;
+    let generated_rules =
+        validate_generated_rule_plan_v1(&compiled, generated_plan, source_identity)?;
     let top_context = generated_top_context(&compiled);
     Engine::new(compiled)
-        .execute_generated_with_plan(generated_rules, input)
+        .execute_generated_value_with_plan(&generated_rules, input)
         .map_err(|detail| generated_execution_error(source_identity, top_context, detail))
 }
 
-/// Execute generated Rust source with trace and contract-v1 structured failures.
+/// Execute generated Rust source with direct value, portable trace roles, and v1 failures.
 pub fn execute_generated_parser_with_trace_v1(
     compiled_spec_json: &str,
-    generated_rules: &[GeneratedRuleSpec],
+    generated_plan: &[GeneratedPlanRow],
     input: &str,
     trace_config: TraceConfig,
     source_identity: &str,
 ) -> Result<serde_json::Value, GeneratedSourceError> {
-    let compiled: CompiledSpec = serde_json::from_str(compiled_spec_json).map_err(|error| {
+    let compiled = decode_generated_compiled_spec_v1(compiled_spec_json, source_identity)?;
+    let generated_rules =
+        validate_generated_rule_plan_v1(&compiled, generated_plan, source_identity)?;
+    let top_context = generated_top_context(&compiled);
+    Engine::new(compiled)
+        .execute_generated_with_plan_with_trace_roles(
+            &generated_rules,
+            input,
+            trace_config,
+            source_identity,
+        )
+        .map_err(|detail| generated_execution_error(source_identity, top_context, detail))
+}
+
+/// Validate an exposed contract-v1 plan against its embedded compiled specification.
+pub fn validate_generated_parser_plan_v1(
+    compiled_spec_json: &str,
+    generated_plan: &[GeneratedPlanRow],
+    source_identity: &str,
+) -> Result<(), GeneratedSourceError> {
+    let compiled = decode_generated_compiled_spec_v1(compiled_spec_json, source_identity)?;
+    validate_generated_rule_plan_v1(&compiled, generated_plan, source_identity).map(|_| ())
+}
+
+fn decode_generated_compiled_spec_v1(
+    compiled_spec_json: &str,
+    source_identity: &str,
+) -> Result<CompiledSpec, GeneratedSourceError> {
+    serde_json::from_str(compiled_spec_json).map_err(|error| {
         GeneratedSourceError::compile_failed(
             source_identity,
             format!("generated CompiledSpec JSON is invalid: {error}"),
         )
-    })?;
-    validate_generated_rule_plan_v1(&compiled, generated_rules, source_identity)?;
-    let top_context = generated_top_context(&compiled);
-    Engine::new(compiled)
-        .execute_generated_with_plan_with_trace(generated_rules, input, trace_config)
-        .map_err(|detail| generated_execution_error(source_identity, top_context, detail))
+    })
 }
 
 fn generated_top_context(compiled: &CompiledSpec) -> Option<(String, &'static str)> {
     compiled.top_rule().map(|rule| {
         (
             rule.label.clone(),
-            classify_generated_rule_family(rule).variant_name(),
+            classify_generated_rule_family(rule)
+                .contract_name()
+                .expect("classified generated rule must have a contract-v1 family"),
         )
     })
 }
@@ -503,10 +589,10 @@ fn validate_generated_rule_plan(
 
 fn validate_generated_rule_plan_v1(
     compiled: &CompiledSpec,
-    generated_rules: &[GeneratedRuleSpec],
+    generated_plan: &[GeneratedPlanRow],
     source_identity: &str,
-) -> Result<(), GeneratedSourceError> {
-    if compiled.rules.len() != generated_rules.len() {
+) -> Result<Vec<GeneratedRuleSpec>, GeneratedSourceError> {
+    if compiled.rules.len() != generated_plan.len() {
         return Err(GeneratedSourceError::new(
             GeneratedSourceStage::ValidateGeneratedPlan,
             GeneratedSourceCode::GeneratedPlanRowCountMismatch,
@@ -516,12 +602,15 @@ fn validate_generated_rule_plan_v1(
         .with_detail(format!(
             "expected={} actual={}",
             compiled.rules.len(),
-            generated_rules.len()
+            generated_plan.len()
         )));
     }
 
-    for (compiled_rule, generated_rule) in compiled.rules.iter().zip(generated_rules.iter()) {
-        if compiled_rule.label != generated_rule.label {
+    let mut typed_plan = Vec::with_capacity(generated_plan.len());
+    for (row_index, (compiled_rule, generated_row)) in
+        compiled.rules.iter().zip(generated_plan.iter()).enumerate()
+    {
+        if compiled_rule.label != generated_row.label {
             return Err(GeneratedSourceError::new(
                 GeneratedSourceStage::ValidateGeneratedPlan,
                 GeneratedSourceCode::GeneratedPlanLabelMismatch,
@@ -530,12 +619,26 @@ fn validate_generated_rule_plan_v1(
             )
             .with_rule_label(&compiled_rule.label)
             .with_detail(format!(
-                "expected={} actual={}",
-                compiled_rule.label, generated_rule.label
+                "row={row_index} expected={} actual={}",
+                compiled_rule.label, generated_row.label
             )));
         }
+
+        let Some(actual_family) = GeneratedRuleFamily::from_contract_name(generated_row.family)
+        else {
+            return Err(GeneratedSourceError::new(
+                GeneratedSourceStage::ValidateGeneratedPlan,
+                GeneratedSourceCode::GeneratedPlanUnknownFamily,
+                "Generated rule plan contains an unknown family",
+                source_identity,
+            )
+            .with_rule_label(&compiled_rule.label)
+            .with_handler_family(generated_row.family)
+            .with_detail(format!("row={row_index}")));
+        };
+
         let expected = classify_generated_rule_family(compiled_rule);
-        if !generated_rule_family_matches(expected, generated_rule.family) {
+        if expected != actual_family {
             return Err(GeneratedSourceError::new(
                 GeneratedSourceStage::ValidateGeneratedPlan,
                 GeneratedSourceCode::GeneratedPlanFamilyMismatch,
@@ -543,15 +646,22 @@ fn validate_generated_rule_plan_v1(
                 source_identity,
             )
             .with_rule_label(&compiled_rule.label)
-            .with_handler_family(generated_rule.family.variant_name())
+            .with_handler_family(generated_row.family)
             .with_detail(format!(
-                "expected={expected:?} actual={:?}",
-                generated_rule.family
+                "row={row_index} expected={} actual={}",
+                expected
+                    .contract_name()
+                    .expect("classified generated rule must have a contract-v1 family"),
+                generated_row.family
             )));
         }
+        typed_plan.push(GeneratedRuleSpec {
+            label: generated_row.label,
+            family: actual_family,
+        });
     }
 
-    Ok(())
+    Ok(typed_plan)
 }
 
 fn generated_rule_family_matches(

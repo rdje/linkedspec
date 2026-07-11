@@ -15,6 +15,7 @@ evidence: "FUTURE-PARITY-BACKLOG.3.1.1 adds capability_conformance/generated_sou
 evidence_update_2026_07_11_perl: "FUTURE-PARITY-BACKLOG.3.1.2 implements the v1 roles on Perl through LinkedSpec::emit_generated_source, LinkedSpec::GeneratedSource, Compiler reconstruction, and t/generated_source_contract.t; explicit capability promotion remains .3.1.3."
 evidence_update_2026_07_11_rust_audit: "FUTURE-PARITY-BACKLOG.3.1.3.0 proves the existing Rust scaffold predates v1 identity, structured error, exact unknown-family rejection, and neutral generated trace-role requirements; .3.1.3.1-.3 now own alignment and admission."
 evidence_update_2026_07_11_rust_metadata_errors: "FUTURE-PARITY-BACKLOG.3.1.3.1 implements Rust caller identity, deterministic contract/version/identity metadata, typed generated_source_error stages/codes/attribution, host compile/load projection, typed generated execution, and exact compatibility adapters. Focused 4/4 and complete Rust 137/105/196/5/4/5/10 plus 61x2 pass; exact neutral plan/trace remains .3.1.3.2."
+evidence_update_2026_07_11_rust_plan_trace: "FUTURE-PARITY-BACKLOG.3.1.3.2 implements exact neutral plan rows/ten families/four rejections, direct v1 top-rule result, and three portable trace roles beside native detail. It preserves the legacy accumulator envelope and trace. Focused 5/5 + 10/10 and clean full Rust 137/105/196/5/5/5/10 plus 61x2 pass; admission remains .3.1.3.3."
 reverify: "perl -c tools/check_generated_source_contract.pl && perl tools/check_generated_source_contract.pl && perl tools/check_capability_conformance.pl && rg -n 'check_generated_source_contract|generated_source_contract' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -45,5 +46,6 @@ Related facts: [[generated-source-parity-audit]],
 [[perl-generated-source-capture-not-standalone]],
 [[rust-generated-source-contract-v1-gap]],
 [[rust-generated-source-v1-metadata-errors]],
+[[rust-generated-source-v1-result-projection]],
 [[rust-generated-source-corpus-subset]],
 [[user-observable-backend-cli-parity-contract]].

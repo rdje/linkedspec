@@ -7,6 +7,16 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.3.1.3.2 — align Rust generated plans and trace**
+  (DONE — exact plan/rejections/direct result/portable trace green; baseline admission `.3` active).
+
+  **Implementation/finding:** Exact ten-family `GeneratedPlanRow` plus four rejection codes and three portable
+  trace roles. The neutral fixture found typed generated output still used the legacy accumulator envelope; typed
+  v1 now returns the direct top-rule value while legacy parse/traced APIs retain the envelope and native trace.
+
+  **Proof:** First full gate caught and drove the legacy-trace compatibility correction. Focused source-emitter 5/5,
+  trace 10/10, and clean complete 137/105/196/5/5/5/10 plus 61x2 pass. Census stays 56/2/2 until admission.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.1.3.1 — add Rust generated-source v1 metadata**
   (DONE — typed identity/metadata/errors and compatibility adapters green; exact plan/trace `.2` active).
 

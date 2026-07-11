@@ -3,12 +3,15 @@
 use linkedspec_core::ast::RuleMode;
 use linkedspec_core::compiler::compile;
 use linkedspec_core::parser::parse_spec;
+use linkedspec_core::trace::{TraceConfig, TraceLevel};
 use linkedspec_core::validation::validate;
-use linkedspec_runtime::engine::Engine;
+use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 use linkedspec_runtime::source_emitter::{
-    GeneratedRuleFamily, GeneratedRuleSpec, GeneratedSourceCode, GeneratedSourceError,
-    GeneratedSourceMetadata, GeneratedSourceStage, classify_generated_rule_family,
-    emit_rust_source, emit_rust_source_v1, execute_generated_parser, execute_generated_parser_v1,
+    GeneratedPlanRow, GeneratedRuleFamily, GeneratedRuleSpec, GeneratedSourceCode,
+    GeneratedSourceError, GeneratedSourceMetadata, GeneratedSourceStage,
+    classify_generated_rule_family, emit_rust_source, emit_rust_source_v1,
+    execute_generated_parser, execute_generated_parser_v1, execute_generated_parser_with_trace_v1,
+    validate_generated_parser_plan_v1,
 };
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use serde::Deserialize;
@@ -339,6 +342,8 @@ fn generated_source_v1_metadata_and_structured_errors_are_exact() {
     assert!(generated.contains("LINKEDSPEC_GENERATED_SOURCE_IDENTITY"));
     assert!(generated.contains("generated-source/rüst-'identity.spec"));
     assert!(generated.contains("pub fn metadata()"));
+    assert!(generated.contains("pub fn plan()"));
+    assert!(generated.contains("pub fn validate_plan(actual:"));
     assert!(generated.contains("pub fn execute(input:"));
     assert!(generated.contains("pub fn execute_with_trace(input:"));
     assert!(generated.contains("pub fn parse(input:"));
@@ -415,9 +420,9 @@ fn generated_source_v1_metadata_and_structured_errors_are_exact() {
     let compiled_failure = compile(&parsed_failure).expect("compile execution failure spec");
     let compiled_failure_json =
         serde_json::to_string(&compiled_failure).expect("serialize execution failure spec");
-    let failure_plan = [GeneratedRuleSpec {
+    let failure_plan = [GeneratedPlanRow {
         label: "Top",
-        family: GeneratedRuleFamily::Default,
+        family: "default",
     }];
     let execution_error =
         execute_generated_parser_v1(&compiled_failure_json, &failure_plan, "bye", identity)
@@ -431,8 +436,122 @@ fn generated_source_v1_metadata_and_structured_errors_are_exact() {
         GeneratedSourceCode::GeneratedExecutionFailed
     );
     assert_eq!(execution_error.rule_label.as_deref(), Some("Top"));
-    assert_eq!(execution_error.handler_family.as_deref(), Some("Default"));
+    assert_eq!(execution_error.handler_family.as_deref(), Some("default"));
     assert_eq!(execution_error.detail.as_deref(), Some("exit_now(7)"));
+}
+
+#[test]
+fn generated_source_v1_neutral_plan_and_trace_roles_are_exact() {
+    let fixture_dir = Path::new(env!("CARGO_MANIFEST_DIR")).join(
+        "../../capability_conformance/generated_source/fixtures/default_action_result_trace_identity",
+    );
+    let source = fs::read_to_string(fixture_dir.join("input.spec"))
+        .expect("read neutral generated-source fixture spec");
+    let input = fs::read_to_string(fixture_dir.join("input.txt"))
+        .expect("read neutral generated-source fixture input");
+    let expected: Value = serde_json::from_str(
+        &fs::read_to_string(fixture_dir.join("expected.json"))
+            .expect("read neutral generated-source expected JSON"),
+    )
+    .expect("parse neutral generated-source expected JSON");
+    let parsed = parse_spec(&source).expect("parse neutral generated-source fixture");
+    validate(&parsed).expect("validate neutral generated-source fixture");
+    let compiled = compile(&parsed).expect("compile neutral generated-source fixture");
+    let compiled_json =
+        serde_json::to_string(&compiled).expect("serialize neutral generated-source fixture");
+    let identity = "generated-source/default-action-result.spec";
+    let plan = [
+        GeneratedPlanRow {
+            label: "Top",
+            family: "default",
+        },
+        GeneratedPlanRow {
+            label: "Done",
+            family: "default",
+        },
+    ];
+
+    validate_generated_parser_plan_v1(&compiled_json, &plan, identity)
+        .expect("exact neutral plan must validate");
+    assert_eq!(
+        execute_generated_parser_v1(&compiled_json, &plan, &input, identity)
+            .expect("neutral generated fixture must execute"),
+        expected
+    );
+
+    let rejection = |actual: &[GeneratedPlanRow], expected_code: GeneratedSourceCode| {
+        let error = validate_generated_parser_plan_v1(&compiled_json, actual, identity)
+            .expect_err("mutated generated plan must be rejected");
+        assert_eq!(error.error_type, "generated_source_error");
+        assert_eq!(error.stage, GeneratedSourceStage::ValidateGeneratedPlan);
+        assert_eq!(error.code, expected_code);
+        assert_eq!(error.source_identity, identity);
+    };
+    rejection(&[], GeneratedSourceCode::GeneratedPlanRowCountMismatch);
+    let wrong_label = [
+        GeneratedPlanRow {
+            label: "Wrong",
+            family: "default",
+        },
+        plan[1],
+    ];
+    rejection(
+        &wrong_label,
+        GeneratedSourceCode::GeneratedPlanLabelMismatch,
+    );
+    let wrong_family = [
+        GeneratedPlanRow {
+            label: "Top",
+            family: "or_acode",
+        },
+        plan[1],
+    ];
+    rejection(
+        &wrong_family,
+        GeneratedSourceCode::GeneratedPlanFamilyMismatch,
+    );
+    let unknown_family = [
+        GeneratedPlanRow {
+            label: "Top",
+            family: "unknown",
+        },
+        plan[1],
+    ];
+    rejection(
+        &unknown_family,
+        GeneratedSourceCode::GeneratedPlanUnknownFamily,
+    );
+
+    let trace_project = TempProject::new("linkedspec-generated-neutral-trace");
+    let trace_path = trace_project.path().join("generated.trace");
+    let trace_config = TraceConfig::enabled(TraceLevel::DEBUG)
+        .with_trace_file(trace_path.clone())
+        .with_reset_file(true);
+    assert_eq!(
+        execute_generated_parser_with_trace_v1(
+            &compiled_json,
+            &plan,
+            &input,
+            trace_config,
+            identity,
+        )
+        .expect("neutral traced generated fixture must execute"),
+        expected
+    );
+    let trace = fs::read_to_string(&trace_path).expect("read neutral generated trace");
+    for role in [
+        "generated_rule_enter",
+        "generated_family_decision",
+        "generated_rule_exit",
+    ] {
+        assert!(
+            trace.contains(role),
+            "missing portable role {role}:\n{trace}"
+        );
+    }
+    assert!(trace.contains(identity));
+    assert!(trace.contains("family=default"));
+    assert!(trace.contains("rust_runtime:generated_plan:family_dispatch"));
 }
 
 #[test]
@@ -589,6 +708,19 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         "GeneratedRuleFamily::RepAndBcode",
     ]);
     let mut covered_rep_families = BTreeSet::new();
+    let expected_contract_families = BTreeSet::from([
+        "default",
+        "or_acode",
+        "and_single_acode",
+        "and_acode_seq",
+        "and_bcode",
+        "or_bcode",
+        "rep_acode",
+        "rep_bcode",
+        "rep_and_acode",
+        "rep_and_bcode",
+    ]);
+    let mut covered_contract_families = BTreeSet::new();
     let mut generated_modules = String::new();
     let mut generated_tests = String::from("#[cfg(test)]\nmod generated_source_tests {\n");
 
@@ -601,6 +733,17 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
             .execute(case.input)
             .expect("interpreted smoke parser should execute");
         assert_eq!(interpreted, case.expected);
+        let direct_expected = case
+            .expected
+            .as_array()
+            .and_then(|values| values.first())
+            .expect("legacy source-emitter expectation has one top-level result");
+        assert_eq!(
+            Engine::new(compiled.clone())
+                .execute_value(case.input, &ExecutionOptions::new())
+                .expect("direct interpreted smoke parser should execute"),
+            direct_expected.clone()
+        );
 
         let top = compiled
             .top_rule()
@@ -608,6 +751,11 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         assert_eq!(top.mode, case.expected_mode);
 
         let generated = emit_rust_source(&compiled).expect("emit generated Rust source");
+        covered_contract_families.insert(
+            classify_generated_rule_family(top)
+                .contract_name()
+                .expect("classified matrix rule has a contract family"),
+        );
         if expected_non_rep_families.contains(case.expected_family) {
             covered_non_rep_families.insert(case.expected_family);
         }
@@ -633,8 +781,10 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         generated_modules.push_str("}\n\n");
 
         let input_literal = serde_json::to_string(case.input).expect("encode generated test input");
-        let expected_literal =
-            serde_json::to_string(&case.expected).expect("encode generated test expectation");
+        let direct_expected_literal =
+            serde_json::to_string(direct_expected).expect("encode generated direct expectation");
+        let compatibility_expected_literal = serde_json::to_string(&case.expected)
+            .expect("encode generated compatibility expectation");
         generated_tests.push_str("    #[test]\n    fn ");
         generated_tests.push_str(case.module);
         generated_tests.push_str("_runs() {\n        let actual = crate::");
@@ -643,13 +793,23 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
         generated_tests.push_str(&input_literal);
         generated_tests.push_str(").expect(\"generated parser should run\");\n        let expected: serde_json::Value = serde_json::from_str(");
         generated_tests.push_str(
-            &serde_json::to_string(&expected_literal).expect("encode expected JSON literal"),
+            &serde_json::to_string(&direct_expected_literal)
+                .expect("encode direct expected JSON literal"),
         );
-        generated_tests.push_str(").expect(\"expected JSON should parse\");\n        assert_eq!(actual, expected);\n        let compatibility = crate::");
+        generated_tests.push_str(").expect(\"expected JSON should parse\");\n        assert_eq!(actual, expected);\n        let plan = crate::");
+        generated_tests.push_str(case.module);
+        generated_tests.push_str("::plan();\n        crate::");
+        generated_tests.push_str(case.module);
+        generated_tests.push_str("::validate_plan(plan).expect(\"embedded neutral plan should validate\");\n        let compatibility = crate::");
         generated_tests.push_str(case.module);
         generated_tests.push_str("::parse(");
         generated_tests.push_str(&input_literal);
-        generated_tests.push_str(").expect(\"compatibility parser should run\");\n        assert_eq!(compatibility, expected);\n    }\n");
+        generated_tests.push_str(").expect(\"compatibility parser should run\");\n        let compatibility_expected: serde_json::Value = serde_json::from_str(");
+        generated_tests.push_str(
+            &serde_json::to_string(&compatibility_expected_literal)
+                .expect("encode compatibility expected JSON literal"),
+        );
+        generated_tests.push_str(").expect(\"compatibility expected JSON should parse\");\n        assert_eq!(compatibility, compatibility_expected);\n    }\n");
     }
     assert_eq!(
         covered_non_rep_families, expected_non_rep_families,
@@ -658,6 +818,10 @@ fn emitted_rust_source_compiles_and_runs_family_plan_matrix() {
     assert_eq!(
         covered_rep_families, expected_rep_families,
         "source-emitter matrix must cover every REP generated family before corpus integration"
+    );
+    assert_eq!(
+        covered_contract_families, expected_contract_families,
+        "source-emitter matrix must expose exactly the ten neutral generated families"
     );
     generated_tests.push_str("}\n");
 
@@ -770,6 +934,17 @@ fn generated_rust_source_matches_manifest_backed_corpus_subset() {
             interpreted, expected_engine_output,
             "generated-source corpus subset case {case_name} must first satisfy the interpreter oracle"
         );
+        assert_eq!(
+            Engine::new(compiled.clone())
+                .execute_value(&input, &ExecutionOptions::new())
+                .unwrap_or_else(|e| {
+                    panic!(
+                        "direct interpreted execution failed for generated-source corpus subset case {case_name}: {e}"
+                    )
+                }),
+            expected_reference,
+            "generated-source corpus subset case {case_name} must satisfy the direct interpreter oracle"
+        );
 
         let generated = emit_rust_source(&compiled).unwrap_or_else(|e| {
             panic!("emit failed for generated-source corpus subset case {case_name}: {e}")
@@ -785,8 +960,10 @@ fn generated_rust_source_matches_manifest_backed_corpus_subset() {
 
         let input_literal =
             serde_json::to_string(&input).expect("encode generated corpus test input");
-        let expected_literal = serde_json::to_string(&expected_engine_output)
-            .expect("encode generated corpus expectation");
+        let direct_expected_literal = serde_json::to_string(&expected_reference)
+            .expect("encode generated corpus direct expectation");
+        let compatibility_expected_literal = serde_json::to_string(&expected_engine_output)
+            .expect("encode generated corpus compatibility expectation");
         generated_tests.push_str("    #[test]\n    fn ");
         generated_tests.push_str(&module);
         generated_tests.push_str("_matches_oracle() {\n        let actual = crate::");
@@ -795,13 +972,23 @@ fn generated_rust_source_matches_manifest_backed_corpus_subset() {
         generated_tests.push_str(&input_literal);
         generated_tests.push_str(").expect(\"generated corpus parser should run\");\n        let expected: serde_json::Value = serde_json::from_str(");
         generated_tests.push_str(
-            &serde_json::to_string(&expected_literal).expect("encode expected JSON literal"),
+            &serde_json::to_string(&direct_expected_literal)
+                .expect("encode direct expected JSON literal"),
         );
-        generated_tests.push_str(").expect(\"expected JSON should parse\");\n        assert_eq!(actual, expected);\n        let compatibility = crate::");
+        generated_tests.push_str(").expect(\"expected JSON should parse\");\n        assert_eq!(actual, expected);\n        let plan = crate::");
+        generated_tests.push_str(&module);
+        generated_tests.push_str("::plan();\n        crate::");
+        generated_tests.push_str(&module);
+        generated_tests.push_str("::validate_plan(plan).expect(\"embedded neutral corpus plan should validate\");\n        let compatibility = crate::");
         generated_tests.push_str(&module);
         generated_tests.push_str("::parse(");
         generated_tests.push_str(&input_literal);
-        generated_tests.push_str(").expect(\"compatibility corpus parser should run\");\n        assert_eq!(compatibility, expected);\n    }\n");
+        generated_tests.push_str(").expect(\"compatibility corpus parser should run\");\n        let compatibility_expected: serde_json::Value = serde_json::from_str(");
+        generated_tests.push_str(
+            &serde_json::to_string(&compatibility_expected_literal)
+                .expect("encode compatibility expected JSON literal"),
+        );
+        generated_tests.push_str(").expect(\"compatibility expected JSON should parse\");\n        assert_eq!(compatibility, compatibility_expected);\n    }\n");
     }
 
     generated_tests.push_str("}\n");

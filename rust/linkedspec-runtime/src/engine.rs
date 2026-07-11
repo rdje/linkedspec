@@ -446,6 +446,7 @@ fn runtime_value_trace_kind(value: &RuntimeValue) -> &'static str {
 struct GeneratedPlanExecutor<'a> {
     engine: &'a Engine,
     generated_rules: &'a [GeneratedRuleSpec],
+    source_identity: Option<&'a str>,
 }
 
 impl GeneratedPlanExecutor<'_> {
@@ -456,6 +457,15 @@ impl GeneratedPlanExecutor<'_> {
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
         let entry_pos = ctx.pos;
+        if let Some(source_identity) = self.source_identity {
+            ctx.trace_mark(
+                "generated_rule_enter",
+                format!(
+                    "source_identity={source_identity:?} rule={label} entry_regex_idx={entry_regex_idx} pos={entry_pos}"
+                ),
+                TraceLevel::LOW,
+            );
+        }
         ctx.trace_enter(
             "rust_runtime:generated_plan:rule",
             format!("label={label} entry_regex_idx={entry_regex_idx} pos={entry_pos}"),
@@ -463,6 +473,18 @@ impl GeneratedPlanExecutor<'_> {
         );
         let result = (|| {
             let family = self.generated_rule_family(label)?;
+            if let Some(source_identity) = self.source_identity {
+                ctx.trace_mark(
+                    "generated_family_decision",
+                    format!(
+                        "source_identity={source_identity:?} rule={label} family={}",
+                        family
+                            .contract_name()
+                            .expect("validated v1 plan must use a contract family")
+                    ),
+                    TraceLevel::LOW,
+                );
+            }
             ctx.trace_decision(
                 "rust_runtime:generated_plan:family_dispatch",
                 true,
@@ -506,6 +528,13 @@ impl GeneratedPlanExecutor<'_> {
             format!("{status} label={label} pos={}", ctx.pos),
             TraceLevel::LOW,
         );
+        if let Some(source_identity) = self.source_identity {
+            ctx.trace_mark(
+                "generated_rule_exit",
+                format!("source_identity={source_identity:?} rule={label} {status}"),
+                TraceLevel::LOW,
+            );
+        }
         result
     }
 
@@ -1477,7 +1506,17 @@ impl Engine {
         input: &str,
     ) -> Result<Value, String> {
         let mut ctx = RuntimeContext::new(input);
-        self.execute_generated_with_plan_context(generated_rules, &mut ctx)
+        self.execute_generated_with_plan_context(generated_rules, &mut ctx, None)
+    }
+
+    /// Execute generated source and return the top rule's value directly.
+    pub fn execute_generated_value_with_plan(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+    ) -> Result<Value, String> {
+        let mut ctx = RuntimeContext::new(input);
+        self.execute_generated_value_with_plan_context(generated_rules, &mut ctx, None)
     }
 
     /// Execute generated source through a validated rule-family plan with
@@ -1500,6 +1539,39 @@ impl Engine {
         input: &str,
         trace: &mut TraceEmitter,
     ) -> Result<Value, String> {
+        self.execute_generated_with_plan_with_trace_emitter_and_roles(
+            generated_rules,
+            input,
+            trace,
+            None,
+        )
+    }
+
+    /// Execute generated source with portable generated-rule trace roles.
+    pub fn execute_generated_with_plan_with_trace_roles(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        trace_config: TraceConfig,
+        source_identity: &str,
+    ) -> Result<Value, String> {
+        let mut trace =
+            TraceEmitter::new(trace_config).map_err(|err| format!("trace setup failed: {err}"))?;
+        self.execute_generated_with_plan_with_trace_emitter_and_roles(
+            generated_rules,
+            input,
+            &mut trace,
+            Some(source_identity),
+        )
+    }
+
+    fn execute_generated_with_plan_with_trace_emitter_and_roles(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        input: &str,
+        trace: &mut TraceEmitter,
+        source_identity: Option<&str>,
+    ) -> Result<Value, String> {
         let scope = trace
             .enter_scope(
                 "rust_runtime:generated_plan:execute",
@@ -1516,7 +1588,15 @@ impl Engine {
         if trace.should_emit(TraceLevel::LOW) {
             ctx.enable_trace_events();
         }
-        let result = self.execute_generated_with_plan_context(generated_rules, &mut ctx);
+        let result = if source_identity.is_some() {
+            self.execute_generated_value_with_plan_context(
+                generated_rules,
+                &mut ctx,
+                source_identity,
+            )
+        } else {
+            self.execute_generated_with_plan_context(generated_rules, &mut ctx, None)
+        };
         ctx.replay_trace_events(trace).map_err(trace_write_failed)?;
         let exit_details = match &result {
             Ok(value) => format!("status=ok output={}", value),
@@ -1635,6 +1715,7 @@ impl Engine {
         &self,
         generated_rules: &[GeneratedRuleSpec],
         ctx: &mut RuntimeContext,
+        source_identity: Option<&str>,
     ) -> Result<Value, String> {
         let top = self.spec.top_rule().ok_or("no top rule in compiled spec")?;
         let label = top.label.clone();
@@ -1651,9 +1732,38 @@ impl Engine {
         let generated = GeneratedPlanExecutor {
             engine: self,
             generated_rules,
+            source_identity,
         };
         generated.execute_rule(&label, 0, ctx)?;
         Ok(RuntimeValue::Array(ctx.accumulator.clone()).to_json())
+    }
+
+    fn execute_generated_value_with_plan_context(
+        &self,
+        generated_rules: &[GeneratedRuleSpec],
+        ctx: &mut RuntimeContext,
+        source_identity: Option<&str>,
+    ) -> Result<Value, String> {
+        let top = self.spec.top_rule().ok_or("no top rule in compiled spec")?;
+        let label = top.label.clone();
+        ctx.trace_decision(
+            "rust_runtime:generated_plan:top_rule",
+            true,
+            format!(
+                "label={label} input_bytes={} plan_rules={} result_projection=direct",
+                ctx.input.len(),
+                generated_rules.len()
+            ),
+            TraceLevel::LOW,
+        );
+        let generated = GeneratedPlanExecutor {
+            engine: self,
+            generated_rules,
+            source_identity,
+        };
+        generated
+            .execute_rule(&label, 0, ctx)
+            .map(|value| value.to_json())
     }
 
     /// Execute a specific rule by label, entering at the given regex index
