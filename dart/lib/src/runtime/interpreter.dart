@@ -2323,17 +2323,21 @@ final class LinkedSpecRuntimeEngine {
         }
         return context.variables[name];
       case ActionArrayLiteralExpr(:final items):
-        return [
-          for (final item in items)
-            _copyValue(
-              _evaluateExpression(
-                item,
-                context,
-                ruleLabel,
-                currentEdge: currentEdge,
-              ),
-            ),
-        ];
+        final values = <Object?>[];
+        for (final item in items) {
+          final value = _evaluateExpression(
+            item,
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          );
+          if (_isArraySpliceArgument(item)) {
+            _appendArraySpliceValue(values, value);
+          } else {
+            values.add(_copyValue(value));
+          }
+        }
+        return values;
       case ActionHashLiteralExpr(:final entries):
         return {
           for (final entry in entries)
@@ -2511,6 +2515,16 @@ final class LinkedSpecRuntimeEngine {
         (helperName == 'substr' || helperName == 'regex_subst') &&
         _executeRegexSubstitutionStatement(
           call,
+          context,
+          ruleLabel,
+          currentEdge,
+        )) {
+      return null;
+    }
+    if (statementContext &&
+        _executeArrayStringTransformStatement(
+          helperName,
+          positionalArgs,
           context,
           ruleLabel,
           currentEdge,
@@ -3162,6 +3176,39 @@ final class LinkedSpecRuntimeEngine {
     }
     context.variables[variableTarget] = value;
     return _copyValue(value);
+  }
+
+  bool _executeArrayStringTransformStatement(
+    String helperName,
+    List<ActionExpr> args,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    if (!const {
+          'trim_each',
+          'lowercase_each',
+          'uppercase_each',
+        }.contains(helperName) ||
+        args.length != 1) {
+      return false;
+    }
+    final target = _arrayTargetName(args.single);
+    if (target == null) {
+      return false;
+    }
+    final transformed = _callArrayHelperFromExpressions(
+      helperName,
+      args,
+      context,
+      ruleLabel,
+      currentEdge,
+    );
+    context.recordRuleLocalBinding(target);
+    context.variables.remove(target);
+    context.hashes.remove(target);
+    context.arrays[target] = _asArray(transformed);
+    return true;
   }
 
   Object? _callPush(
@@ -4537,10 +4584,12 @@ Object? _callSlice(List<Object?> values) {
 Object? _callArrayContains(List<Object?> values) {
   final items = _arrayItems(values.isEmpty ? null : values.first);
   if (items == null || values.length < 2) {
-    return false;
+    return 0;
   }
   final needle = _scalarString(values[1], nullAsEmpty: true);
-  return items.any((item) => _scalarString(item, nullAsEmpty: true) == needle);
+  return items.any((item) => _scalarString(item, nullAsEmpty: true) == needle)
+      ? 1
+      : 0;
 }
 
 Object? _callIndexOf(List<Object?> values) {
@@ -4764,9 +4813,9 @@ Object? _callSortedValues(List<Object?> values) {
 Object? _callHasKey(List<Object?> values) {
   final hash = _hashItems(values.isEmpty ? null : values.first);
   if (hash == null || values.length < 2) {
-    return false;
+    return 0;
   }
-  return hash.containsKey(_stringValue(values[1]));
+  return hash.containsKey(_stringValue(values[1])) ? 1 : 0;
 }
 
 Object? _callFlatHash(List<Object?> values) {
@@ -4818,14 +4867,14 @@ Object? _callStringPredicate(
   bool Function(String value, String needle) test,
 ) {
   if (values.length < 2) {
-    return false;
+    return 0;
   }
   final value = _scalarString(values[0]);
   final needle = _scalarString(values[1], nullAsEmpty: true);
   if (value == null || needle == null) {
-    return false;
+    return 0;
   }
-  return test(value, needle);
+  return test(value, needle) ? 1 : 0;
 }
 
 Object? _callMatches(List<Object?> values) {
@@ -5108,7 +5157,7 @@ Object? _numericCompare(String helperName, List<Object?> values) {
   if (left == null || right == null) {
     return null;
   }
-  return switch (helperName) {
+  final result = switch (helperName) {
     'num_eq' => left == right,
     'num_ne' => left != right,
     'num_gt' => left > right,
@@ -5119,6 +5168,7 @@ Object? _numericCompare(String helperName, List<Object?> values) {
       "unsupported numeric comparison helper '$helperName'",
     ),
   };
+  return result ? 1 : 0;
 }
 
 List<num>? _numericList(Object? value) {

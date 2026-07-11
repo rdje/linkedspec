@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2 — align Dart pure helper values
+
+**Exact values:** Dart string/array/hash/numeric predicates exercised by the governed pure fixture now return
+numeric `1`/`0`, distinct from typed literal booleans. Explicit `flat(...)` calls splice inside direct array
+literals. Standalone `trim_each`/`lowercase_each`/`uppercase_each(array(name))` transform the named working array;
+value and receiver forms remain copied transformations.
+
+**Regression reconciliation:** Added a focused runtime test that reads the governed source and compares its full
+Perl-reference hash. Twelve serialized fields across four older Dart tests that encoded numeric helper results as
+booleans were corrected; regex matching, string comparisons, definedness/emptiness helpers, logical results, and
+literal booleans remain unchanged and green.
+
+**Proof/frontier:** The recurring Dart gate passes formatting, fatal analysis, all 152 package tests, 61/61 shared
+CLI cases in default and POSIX environments, and the unchanged 99-case corpus. Capability/task/live/book/Knowledge
+surfaces now record Rust+Dart pure closure. `.1.6.1.2.2.1.3` is active for Julia exact-value alignment.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1 — align Rust pure helper values
 
 **Exact values:** Rust string/array/hash/numeric predicates exercised by the governed pure fixture now return

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:linkedspec_dart/linkedspec_dart.dart';
 import 'package:test/test.dart';
 
@@ -818,9 +820,9 @@ Top::
       'trim': 'A-B-END',
       'chain': 'a_b',
       'substr': '-B-',
-      'contains': true,
-      'starts': true,
-      'ends': true,
+      'contains': 1,
+      'starts': 1,
+      'ends': 1,
       'matches': true,
       'split': ['A', 'B', 'END'],
       'coalesce': 'fallback',
@@ -892,8 +894,8 @@ Top::
       'div': 3.5,
       'mod': 2,
       'clamp': 10,
-      'gt': true,
-      'le': true,
+      'gt': 1,
+      'le': 1,
       'round': 4,
       'range': 8,
       'avg': 4,
@@ -949,7 +951,7 @@ Top::
       expect(result.value, {
         'sorted_drop_first': 'b',
         'reverse_take_last': 'c',
-        'contains': true,
+        'contains': 1,
         'index': 3,
         'drop_join': 'b|a|c',
         'uniq_join': 'b,a,c',
@@ -1077,17 +1079,17 @@ Top::
       'keys': 'a,b,drop,stmt_hash',
       'values': '1|2|0|4',
       'count': 4,
-      'has_a': true,
+      'has_a': 1,
       'drop_pick': [1, 4],
       'rename': 'aa,b,stmt_hash,z',
       'merged': [10, 2, 3, 0, 4],
       'bare_first_merge': ['a', 'c'],
-      'value_set_has': true,
-      'receiver_set_has': true,
-      'after_value_set': false,
-      'after_receiver_set': false,
+      'value_set_has': 1,
+      'receiver_set_has': 1,
+      'after_value_set': 0,
+      'after_receiver_set': 0,
       'index_value': {'b': 2, 'a': 1, 'drop': 0, 'stmt_hash': 4, 'expr': 'E'},
-      'after_index_value': true,
+      'after_index_value': 1,
       'flat_splice': 'a,b,drop,expr,stmt_hash,z',
       'flat_hash_splice': 'a,b,drop,expr,stmt_hash,z',
       'map_field': {
@@ -1534,6 +1536,44 @@ Child:
         containsPair('handler_source_label', 'dart_runtime:rule:Child'),
       );
     }
+  });
+
+  test('matches the governed exhaustive pure helper fixture exactly', () {
+    final source = File(
+      '../capability_conformance/fixtures/capability_pure_helper_surface.spec',
+    ).readAsStringSync();
+    final result = _engine(source).parse('x');
+
+    expect(result.value, [
+      {
+        'coalesce': 'fallback',
+        'concat_arrays': [1, 2, 3],
+        'contains': 1,
+        'contains_substr': 1,
+        'ends_with': 1,
+        'flat': ['x', 'y', 'z'],
+        'has_key': 1,
+        'num_abs': 3,
+        'num_avg': 4,
+        'num_ceil': 3,
+        'num_clamp': 10,
+        'num_div': 3,
+        'num_floor': 2,
+        'num_ge': 1,
+        'num_le': 1,
+        'num_median': 3,
+        'num_mod': 2,
+        'num_mul': 12,
+        'num_ne': 1,
+        'num_range': 8,
+        'num_round': 3,
+        'num_sum': 6,
+        'slice': ['b', 'c'],
+        'starts_with': 1,
+        'take_last': ['b', 'c'],
+        'uppercase_each': ['A', 'BC'],
+      },
+    ]);
   });
 }
 

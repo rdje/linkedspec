@@ -18,18 +18,18 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1` — Rust pure helper values match the exact fixture.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.0` — executable capability residuals are audited/split.
-- recent_context: Rust pure predicates now return numeric 1/0, direct literals splice explicit `flat`, and explicit
-  working-array string transforms mutate only in statement context. Exact fixture, 191 integration, and 99 oracle
-  pass; Dart/Julia pure plus all position/control/capture children remain before final 105 admission.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2` — Dart pure helper values match the exact fixture.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1` — Rust pure helper values match the exact fixture.
+- recent_context: Rust and Dart pure predicates now return numeric 1/0, direct literals splice explicit `flat`, and
+  explicit working-array string transforms mutate only in statement context. Dart passes 152 tests, 61x2 CLI, and
+  99 corpus; Julia pure plus all position/control/capture children remain before final 105 admission.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1 - align Rust pure helper values`; previous committed HEAD is
-  `761919da FUTURE-PARITY-BACKLOG.1.6.1.2.2.0 - split executable capability residuals`.
+  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2 - align Dart pure helper values`; previous committed HEAD is
+  `fa1906fa FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1 - align Rust pure helper values`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2.1.2` Dart pure-value alignment is active.
-- next_action: align Dart numeric predicate values, direct-literal `flat` splicing, and explicit working-array
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2.1.3` Julia pure-value alignment is active.
+- next_action: align Julia numeric predicate values, direct-literal `flat` splicing, and explicit working-array
   statement transforms to the same governed fixture without changing typed literals or receiver/value purity.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;

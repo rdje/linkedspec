@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2 — reuse typed splice and target seams across backends):
+  Dart already had explicit array-splice recognition and named-array target extraction, but direct literal and
+  statement dispatch did not route through them. Reuse those semantic seams instead of special-casing the fixture:
+  literal evaluation splices only explicit `flat` calls, and statement dispatch mutates only an explicit
+  `array(name)` target. Numeric predicate projection belongs at the helper boundary, leaving source booleans and
+  other boolean-valued families unchanged.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1 — preserve value kind and call context separately):
   A typed source boolean and a predicate's historical Perl truth value are both truthy but serialize differently;
   keep literals as booleans and return numeric `1`/`0` from the exact predicate family. Likewise, an array helper

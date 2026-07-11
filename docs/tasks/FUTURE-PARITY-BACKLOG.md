@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (`.1.6.0` validated capability census/split closed; neutral proof `.1.6.1` active).
+- Last updated: `2026-07-10` (Rust/Dart exact pure values closed; Julia `.1.6.1.2.2.1.3` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -734,14 +734,21 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1 - align Rust pure helper values`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2`
-  Status: `active`
+  Status: `done`
   Goal: Align Dart pure/aggregate helper value semantics under the same exact fixture.
   Acceptance: Match the repaired Rust/Perl value without backend-specific source or CLI behavior.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Dart now returns numeric `1`/`0` for the fixture's string/array/hash/numeric predicates while
+    preserving typed literal booleans; direct array literals splice explicit `flat` calls; standalone
+    `trim_each`/`lowercase_each`/`uppercase_each(array(name))` mutate the named working array while value/receiver
+    forms remain pure. The governed exact-value runtime lock passes. Twelve stale serialized fields across four
+    existing helper tests were aligned without changing regex-match, string-comparison, definedness, or
+    literal-boolean results.
+    `dart format`, fatal analyzer, all 152 package tests, both 61-case CLI environments, and the unchanged 99-case
+    corpus pass through `tools/run_dart_local.sh`.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2 - align Dart pure helper values`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Align Julia pure/aggregate helper value semantics under the same exact fixture.
   Acceptance: Match the repaired Rust/Perl/Dart value without backend-specific source or CLI behavior and close `.1`.
   Verification: `pending`
@@ -1107,8 +1114,8 @@ before implementation.
 | 30 | `FUTURE-PARITY-BACKLOG.1.6.1.2.1` | `done` | Contract-aware generated terminator repaired; Phase 0 passes 1030. |
 | 31 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.0` | `done` | Corrected fixtures expose 100/105 on every non-reference backend; repair is split. |
 | 32 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1` | `done` | Rust exact pure fixture, 191 integration, and 99 oracle pass. |
-| 33 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2` | `active` | Align Dart pure/aggregate exact values. |
-| 34 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3` | `pending` | Align Julia pure/aggregate exact values. |
+| 33 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2` | `done` | Dart exact pure fixture, 152 tests, 61x2 CLI, and 99 corpus pass. |
+| 34 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3` | `active` | Align Julia pure/aggregate exact values. |
 | 35 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1` | `pending` | Align Rust empty local-match projection. |
 | 36 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2` | `pending` | Align Dart empty local-match projection. |
 | 37 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3` | `pending` | Align Julia empty local-match projection. |

@@ -135,7 +135,8 @@ The mandatory corpus therefore remains at its last green 99-case boundary while
 `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1` through `.4` repair those mechanisms one backend at a time. The six canonical
 sources stay governed under `capability_conformance/fixtures/`, and final `.5` admits them only after both strict
 237-name coverage and unchanged 105/105 execution pass on Perl, Rust, Dart, and Julia. Recognition alone never
-counts as user-visible feature parity.
+counts as user-visible feature parity. Rust and Dart now pass the exhaustive pure-value source directly; Julia is
+the remaining pure-value backend before the position, marker-control, and capture/mark families advance.
 
 For example, this portable action-edge grammar deliberately constructs object keys out of
 order:
