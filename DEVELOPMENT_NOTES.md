@@ -1,6 +1,12 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1 — close aliases at discovery and execution):
+  A statement-control alias needs two aligned seams: known-call validation prevents false unknown-helper
+  diagnostics, and the statement-control matcher must canonicalize its behavior before generic helper dispatch.
+  Rust's switch frame already had correct first-match/default exclusion, so the exact combined fixture required no
+  speculative switch change. Verify each failed mechanism independently before editing adjacent green behavior.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3 — align semantics, not host value types):
   Julia and Dart both already modeled local-match absence with a nullable match object, but both leaked host
   booleans and null diagnostic locations through helper projection. Backend parity belongs at the helper contract:

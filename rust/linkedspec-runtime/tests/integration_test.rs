@@ -3825,3 +3825,15 @@ fn future_parity_backlog_1_6_1_2_2_2_1_zero_width_match_is_present() {
         "a real zero-width local match remains distinct from an absent local match"
     );
 }
+
+#[test]
+fn future_parity_backlog_1_6_1_2_2_3_1_rust_marker_control_values() {
+    let grammar = include_str!(
+        "../../../capability_conformance/fixtures/capability_control_marker_surface.spec"
+    );
+    assert_eq!(
+        build_and_run(grammar, "xx"),
+        serde_json::json!([["elif", "case-b"]]),
+        "Rust executes i/elif aliases and excludes default after a matching case"
+    );
+}

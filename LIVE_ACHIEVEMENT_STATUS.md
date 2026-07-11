@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1 — align Rust marker control**
+  (DONE — Rust exact control value closed; Dart `.2.2.3.2` active).
+
+  **Implementation:** Rust known-call validation and statement-if gating now treat `i`/`elif` as exact short
+  aliases for `if`/`elseif`. Existing switch match tracking already excludes default after a matched case.
+
+  **Proof:** Governed `["elif","case-b"]`, formatting, 137 library, 194 integration, 99 oracle, three emitter,
+  ten trace, and 61/61 CLI cases in both environments pass. The 1.6 GB target cache was removed.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3 — align Julia empty-match positions**
   (DONE — all exact position values closed; Rust marker-control `.2.2.3.1` active).
 

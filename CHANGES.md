@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1 — align Rust marker control
+
+**Alias closure:** Rust validation now recognizes short marker calls `i` and `elif`, and the statement-control gate
+executes them as exact aliases of `if` and `elseif`. Existing full spellings, attached blocks, and lazy value-form
+control remain unchanged.
+
+**Switch confirmation:** The existing statement-switch frame already records a matched case and suppresses the
+later default branch. The governed combined fixture now returns exact `["elif","case-b"]` without a switch rewrite.
+
+**Proof/frontier:** Formatting, 137 library tests, the unchanged 99-case oracle, 194 integration tests, three
+source-emitter tests, ten trace tests, and both 61-case CLI environments pass. The 1.6 GB target cache was removed;
+Dart marker switch selection `.1.6.1.2.2.3.2` is active.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3 — align Julia empty-match positions
 
 **Exact projection:** Julia already carries entry/local matches as nullable `RuntimeRegexMatch` values. Named-

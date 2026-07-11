@@ -2820,7 +2820,7 @@ impl Engine {
         };
 
         match name.as_str() {
-            "if" if args.len() == 1 => {
+            "if" | "i" if args.len() == 1 => {
                 let cond = if parent_active {
                     self.eval_expr(args[0].value(), ctx, rule_label)?.as_bool()
                 } else {
@@ -2839,7 +2839,7 @@ impl Engine {
                 });
                 Ok(true)
             }
-            "elseif" if args.len() == 1 => {
+            "elseif" | "elif" if args.len() == 1 => {
                 let Some(frame) = if_stack.last_mut() else {
                     return Ok(true);
                 };
