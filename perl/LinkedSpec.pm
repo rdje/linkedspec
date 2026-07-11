@@ -162,6 +162,24 @@ sub Get {
 }
 
 #------------------------------------------------------------------------------
+# Function: emit_generated_source
+# Purpose : Compile a .spec source and return independently loadable Perl source
+#           conforming to linkedspec-generated-source-v1.
+# Args    : ($spec_scalar_ref, %options), including source_identity
+# Returns : generated Perl source string; dies with generated_source_error on failure
+#------------------------------------------------------------------------------
+sub emit_generated_source {
+ my $spec_content_ref = shift @_;
+ my %option = _normalize_flat_option_pairs(@_);
+ return _dispatch_owner_call(
+  'LinkedSpec::GeneratedSource',
+  'emit_source',
+  $spec_content_ref,
+  \%option,
+ )
+}
+
+#------------------------------------------------------------------------------
 # Function: build_compiled_rule_table
 # Purpose : Convert parsed bootstrap entries into the compiled rule-table
 #           surface used by later descriptor assembly. Default return is the

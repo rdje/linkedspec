@@ -1298,6 +1298,25 @@ Interactive prompt helpers follow the same rule, but with the extra cleanup step
 If `top_rule` is omitted, LinkedSpec now uses the first parsed rule paragraph as the default top-level entry.
 `parse_only` and `generate_only` are successful introspection modes, not failure signals. They intentionally return `undef` on success, and when `runtime_ctx_ref` is present they should leave `$ctx->{last_error}` clear unless some earlier compile stage actually failed.
 
+For independently loadable generated Perl, prefer the dedicated public method:
+
+```perl
+my $source = LinkedSpec::emit_generated_source(
+  \$spec,
+  source_identity => 'examples/parser.spec',
+  parse_mode => 'consume',
+);
+
+eval "package Example::Generated;\n$source\n1;" or die $@;
+my $input = 'text';
+my $result = Example::Generated::Execute(\$input);
+```
+
+The source carries generated-source contract/version/identity markers and an ordered structural-family plan.
+`ExecuteWithTrace(...)`, `LinkedSpecGeneratedMetadata()`, `LinkedSpecGeneratedPlan()`, and
+`ValidateGeneratedPlan(...)` expose the remaining semantic roles. The historical `generate_only` plus
+`dump_parser_source`/`parser_source_ref` path emits identical source and remains supported for diagnostics.
+
 `parse_mode` now controls the runtime matching discipline for generated handlers:
 - `seek`
   - the historical default

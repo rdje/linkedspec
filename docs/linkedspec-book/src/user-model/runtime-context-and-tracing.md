@@ -276,7 +276,10 @@ If `parser_source_ref` is a scalar ref, the generated source is written into tha
 
 If `parser_source_ref` is not provided, the generated source is printed.
 
-This is primarily an inspection and debugging tool. Most user code should not depend on generated parser source as a stable API.
+This low-level capture remains useful for inspection and debugging. Generated source itself is now a governed
+public capability: application code should prefer `LinkedSpec::emit_generated_source(...)`, which returns the same
+source directly, carries contract/version/source-identity metadata, reconstructs dependency alternations safely for
+independent loading, validates its family plan, and exposes ordinary/traced execution roles.
 
 ## Tracing
 

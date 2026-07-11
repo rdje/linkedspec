@@ -8285,8 +8285,8 @@ SPEC
     is($bootstrap_parse_count, 1, 'compiler pipeline invokes injected bootstrap_parse callback exactly once');
     is($runtime_ctx->{top_rule}, 'Top', 'compiler pipeline records top rule in injected runtime context');
     ok(@parser_source_chunks > 0, 'compiler pipeline records parser-source chunks in injected runtime context');
-    like(join('', @parser_source_chunks), qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'compiler pipeline emits final Get wrapper through injected runtime context');
-    like($parser_source, qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'compiler pipeline writes parser source through injected runtime context-backed capture');
+    like(join('', @parser_source_chunks), qr/sub Get \{ return Execute\(\@_\) \}/s, 'compiler pipeline emits validated generated-source Get wrapper through injected runtime context');
+    like($parser_source, qr/sub Get \{ return Execute\(\@_\) \}/s, 'compiler pipeline writes validated generated source through injected runtime context-backed capture');
 };
 subtest 'compiler_run_get_pipeline_emits_nested_repeat_helpers_without_eval_wrappers' => sub {
     plan tests => 13;
@@ -10278,7 +10278,7 @@ SPEC
     is($runtime_ctx->{top_rule}, 'Top', 'captured runtime context records top rule on success');
     ok(!exists $runtime_ctx->{last_error}, 'captured runtime context exposes no stale last_error on success');
     ok(ref($runtime_ctx->{parser_source_chunks_ref}) eq 'ARRAY' && @{$runtime_ctx->{parser_source_chunks_ref}} > 0, 'captured runtime context preserves parser-source chunk capture');
-    like($parser_source, qr/sub Get \{&\{\$descr->\{spec\}\{Top\}\}\(\$descr, \$_\[0\]\)\}/s, 'Runtime::run_get still emits parser source while exposing runtime_ctx_ref');
+    like($parser_source, qr/sub Get \{ return Execute\(\@_\) \}/s, 'Runtime::run_get emits validated generated source while exposing runtime_ctx_ref');
 };
 subtest 'runtime_run_get_accepts_direct_hashref_runtime_ctx_ref_on_success' => sub {
     plan tests => 7;

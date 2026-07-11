@@ -92,8 +92,10 @@ require_tracked_file cli_conformance/manifest.json
 require_tracked_file t/cli_conformance_runner.t
 require_tracked_file t/trace_cli.t
 require_tracked_file t/native_spec_resolution.t
+require_tracked_file t/generated_source_contract.t
 require_tracked_file perl/LinkedSpec.pm
 require_tracked_file perl/LinkedSpec/SpecLoader.pm
+require_tracked_file perl/LinkedSpec/GeneratedSource.pm
 require_tracked_file t/phase0_regression.t
 require_tracked_file scripts/check_memory_architecture.sh
 require_tracked_file scripts/check_doctrines.sh
@@ -129,6 +131,7 @@ perl -c -Iperl t/actionir_ast_parser.t
 perl -c -Iperl t/cli_conformance_runner.t
 perl -c -Iperl t/trace_cli.t
 perl -c -Iperl t/native_spec_resolution.t
+perl -c -Iperl t/generated_source_contract.t
 perl -c -Iperl t/phase0_regression.t
 
 log "checking machine-readable backend capability census"
@@ -136,6 +139,9 @@ perl tools/check_capability_conformance.pl
 
 log "checking generated-source capability contract"
 perl tools/check_generated_source_contract.pl
+
+log "running Perl generated-source contract fixture"
+PERL5LIB= prove -Iperl t/generated_source_contract.t
 
 log "checking native named/file resolution contract"
 perl tools/check_native_spec_resolution_contract.pl

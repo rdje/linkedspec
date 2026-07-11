@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.1.2 — repair Perl generated source
+
+Added public `LinkedSpec::emit_generated_source(...)` and shared `LinkedSpec::GeneratedSource` support. Emitted Perl
+now carries deterministic contract/version/source-identity markers, ordered family metadata, validated plan roles,
+ordinary/traced execution, and structured emission/validation/execution errors. Legacy generate/dump/capture emits
+byte-identical source for compatibility.
+
+Replaced stringified compiled dependency alternations with generated `LinkedRE::oredRE(...)` reconstruction from
+canonical compiled dependency refs and referenced-rule regexes. Independent compilation therefore retains dynamic
+alternative indexes without host-package binding, including index zero/one and slash-bearing regexes. Generated
+source explicitly preserves the reference handlers' non-strict lexical compilation environment.
+
+Added `t/generated_source_contract.t` and canonical-gate integration. Its 69 assertions cover deterministic public/
+legacy output, arbitrary-package loading, exact result, metadata/identity, trace roles, all four plan rejections,
+and structured errors. Existing generated trace suites pass. Full Phase 0 first measured exactly two stale direct-
+Get shape locks, then passes `1..1030` in 546 seconds after migration. Census remains 56/2/2 until `.3.1.3` admission.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.1.1 — define generated-source contract
 
 Added versioned generated-source contract v1, a neutral direct result/trace/identity fixture, and a strict checker.

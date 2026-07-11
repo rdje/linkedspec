@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.1.2 — reconstruct, do not stringify compiled regex state):
+  `Regexp` stringification is not a serialization format when embedded code depends on dynamic lexical composition.
+  Emit reconstruction from canonical dependency refs: quote each referenced compiled regex as data, compile it at
+  generated-module load, and call `LinkedRE::oredRE(...)` so its alternative markers regain the relationship with
+  `LinkedRE::or`. Prove indexes beyond zero and delimiter-bearing patterns. Keep public application emission separate
+  from low-level debug flags, but require byte identity so two source paths cannot drift. Generated packages should
+  validate immutable expected plan semantics before dispatch, wrap execution errors with source/rule/family identity,
+  and emit trace roles outside handler-specific branch spellings. Source-shape locks must follow the public wrapper,
+  not freeze a bypass around validation.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.1.1 — specify roles, not host spelling):
   A multi-backend source-emitter contract must not compare Perl/Rust/Dart/Julia source bytes or force one host's
   API names. Fix the semantic pipeline and observations instead: compiled state plus identity in, deterministic

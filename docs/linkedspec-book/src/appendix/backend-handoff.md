@@ -581,7 +581,7 @@ its 60 states are 57 pass, one partial state, and two gaps. Each non-pass state 
 | --- | --- | --- |
 | Native named/file resolution | ADR `0026` and the 14/9/4 fixture fix portable names, exact paths, ordered roots, strict UTF-8, and typed stages. Perl, Rust, Dart, and Julia consume the contract directly; exact admission is closed. | closed `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, Dart, and Julia propagate a caller-owned emitter through frontend/compiler/function/staged/runtime phases. Dart's direct routed/quiet/failure proof and recurring gates are admitted. | closed `.1.6.5` |
-| Generated parser source | Perl's captured source loses dependency-regex indexes after independent compilation; Rust has direct all-family execution but only eight of 105 manifest fixtures; Dart and Julia have no emitter. | `.3.1.1` contract; `.3.1.2-.3` Perl; `.3.2` Rust; `.3.3` Dart; `.3.4` Julia; `.3.5` admission |
+| Generated parser source | Perl contract-v1 reconstruction/API proof is green pending admission; Rust has direct all-family execution but only eight of 105 manifest fixtures; Dart and Julia have no emitter. | active `.3.1.3` Perl admission; `.3.2` Rust; `.3.3` Dart; `.3.4` Julia; `.3.5` admission |
 
 Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, generic final-
 codeblock equivalence, and the not-yet-implemented Lua backend are explicit exclusions/future owners rather than
@@ -594,7 +594,8 @@ than full-manifest proof, and Dart/Julia have no source emitter. Active `.3` own
 That 57/1/2 statement was the source-audit boundary. `.3.1.0` added the missing independent Perl compile/run probe:
 the captured text compiles, but stringifying/recompiling `LinkedRE::oredRE` detaches its `(?{$pos=N})` alternative
 markers from `LinkedRE::or`'s lexical index. A match can consume input while generated action selection is skipped.
-Perl is therefore partial too, and the corrected census is 56/2/2 until `.3.1.2-.3` repair and admit it.
+Perl was therefore corrected to partial. `.3.1.2` now reconstructs those alternations from canonical refs and passes
+independent result/trace/identity/plan/error proof; the census remains 56/2/2 only until `.3.1.3` admission.
 
 `FUTURE-PARITY-BACKLOG.3.0` turns that broad owner into an executable order. `.3.1.1` first fixes a versioned neutral
 contract for emission, host compile/load, direct generated execution, exact result/error/source identity, trace,

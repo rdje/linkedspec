@@ -203,8 +203,8 @@ Top-level project docs:
 - Run `bash tools/run_ci_local.sh` from the repo root to execute the canonical regression gate.
 - Run `perl tools/check_capability_conformance.pl` to validate the current 15-capability backend census, evidence
   paths, and gap ownership. The current audit records 56 pass, two partial-proof, and two gap backend states;
-  non-codegen `.1.6` is closed. `.3.1.0` proved Perl captured source is not independently equivalent; contract v1
-  `.3.1.1` is now gated and active repair `.3.1.2` precedes admission, Rust `.3.2`, Dart `.3.3`, Julia `.3.4`, `.3.5`.
+  non-codegen `.1.6` is closed. Contract v1 `.3.1.1` is gated and Perl reconstruction/API proof `.3.1.2` is green;
+  the census stays 56/2/2 until active admission `.3.1.3`, then Rust `.3.2`, Dart `.3.3`, Julia `.3.4`, and `.3.5`.
 - Run `perl tools/check_generated_source_contract.pl` to validate generated-source contract v1: idiomatic host APIs
   and backend-native source text behind identical emission/load/execution/trace/error/identity roles, ten generated
   families, four plan-rejection cases, one direct neutral fixture, an eight-case generated subset, and the 105-case

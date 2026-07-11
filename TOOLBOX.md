@@ -62,6 +62,7 @@ check, not proof that the cited commands were run.
 | "What does this `return(...)` / helper lower to?" | [§1.3 `call_spec_handler_subst`](#13-linkedspeccall_spec_handler_subst--action-lowering-probe) |
 | "What metadata / contracts / ActionIR nodes does a rule produce?" | [§2.1 `return_descriptor`](#21-return_descriptor--descriptormetadata-introspection) |
 | "The generated handler is broken (undef / `[]`) — show me the emitted Perl" | [§2.2 `dump_parser_source`](#22-dump_parser_source--parser_source_ref--generated-source-dump) |
+| "Does emitted Perl independently load and run with the same result?" | [§1.5 `emit_generated_source`](#15-linkedspecemit_generated_source--standalone-source-proof) |
 | "Stop the pipeline at parse / at codegen" | [§2.3 `parse_only` / `generate_only`](#23-parse_only--generate_only--stop-the-pipeline-at-a-phase) |
 | "Inspect the compiler's internal compiled-spec state" | [§2.4 `return_state`](#24-return_state--internal-compiled-spec-state) |
 | "Capture the engine's error / last_error / top_rule" | [§2.5 `runtime_ctx_ref`](#25-runtime_ctx_ref--capture-runtime-context--errors) |
@@ -116,6 +117,24 @@ check, not proof that the cited commands were run.
   `return_state` (§2.4) and `runtime_ctx_ref` (§2.5).
 - **WHEN:** isolating a compile-stage problem below the parser-build surface.
 
+### 1.5 `LinkedSpec::emit_generated_source` — standalone source proof
+- **WHAT:** compile inline `.spec` text into deterministic, independently loadable Perl source conforming to
+  generated-source contract v1.
+- **WHEN:** distinguish “the live compiler-generated parser works” from “captured source is genuinely standalone,”
+  or reproduce generated plan, identity, trace, and execution errors.
+- **HOW:**
+  ```bash
+  perl -Iperl -MLinkedSpec -e '
+    my $s = qq{Top::\n /x/ -> Done { return("ok") }\n\nDone::\n /[a-z]+/\n};
+    my $src = LinkedSpec::emit_generated_source(\$s,
+      source_identity => "probe.spec", parse_mode => "consume");
+    eval "package Probe::Generated; $src; 1" or die $@;
+    my $input = "xhello";
+    print Probe::Generated::Execute(\$input), "\n";'
+  ```
+- **OUTPUT:** `ok`. Inspect `Probe::Generated::LinkedSpecGeneratedMetadata()` for contract/version/identity/plan,
+  and call `ValidateGeneratedPlan(...)` to probe pre-execution rejection.
+
 ---
 
 ## 2. LinkedSpec's introspection / debug OPTIONS (knobs to `Get`/`get_parser`)
@@ -152,6 +171,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   ```
 - **READING:** a `SCALAR(0x…)Label = …`, or a `return \@Label_collect` nothing pushes to ⇒ emitter bug;
   valid Perl returning the wrong shape ⇒ a lowering/shape bug.
+- **STANDALONE CHECK:** the captured text is now independently loadable and is byte-identical to
+  `emit_generated_source(...)` for the same spec/options/identity. Always execute the loaded source when the claim
+  under review is generated-source capability rather than diagnostic text shape.
 
 ### 2.3 `parse_only` / `generate_only` — stop the pipeline at a phase
 - **WHAT:** `parse_only => 1` stops after the bootstrap-parse stage (inspect the parsed entries, no

@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.3.1.2 — repair Perl generated source**
+  (DONE — implementation/gates green; explicit admission `.3.1.3` active).
+
+  **Implementation:** Public and legacy deterministic v1 emission; canonical `LinkedRE::oredRE` reconstruction;
+  metadata/identity/plan, Execute/traced Execute, four rejection codes, structured errors, arbitrary-package load.
+
+  **Proof:** 69 contract assertions plus existing generated trace suites pass. Phase 0 measured exactly two stale
+  direct-Get locks, then passes `1..1030` in 546 seconds. Census remains 56/2/2 until admission.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.1.1 — define generated-source contract**
   (DONE — contract/checker canonically gated; Perl repair `.3.1.2` active).
 

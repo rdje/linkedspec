@@ -39,6 +39,194 @@ sub _ored_re {
  })
 }
 
+sub _quote_generated_source_string {
+ my ($value) = @_;
+ $value = '' unless defined $value;
+ $value =~ s/\\/\\\\/g;
+ $value =~ s/'/\\'/g;
+ return "'$value'"
+}
+
+sub _generated_source_identity {
+ my ($option, $runtime_ctx) = @_;
+ my $identity = (ref($option) eq 'HASH') ? $option->{generated_source_identity} : undef;
+ $identity = _call_runtime_ctx('get_runtime_ctx_spec_path', $runtime_ctx)
+  unless defined($identity) && length($identity);
+ $identity = _call_runtime_ctx('get_runtime_ctx_spec_name', $runtime_ctx)
+  unless defined($identity) && length($identity);
+ return (defined($identity) && length($identity)) ? $identity : '<inline>'
+}
+
+sub _generated_source_family_for_variant {
+ my ($variant) = @_;
+ my %family = (
+  _default => 'default',
+  '<none>' => 'default',
+  OR_ACODE => 'or_acode',
+  AND_SINGLE_ACODE => 'and_single_acode',
+  AND_ACODE => 'and_acode_seq',
+  AND_BCODE => 'and_bcode',
+  OR_BCODE => 'or_bcode',
+  REP_ACODE => 'rep_acode',
+  REP_BCODE => 'rep_bcode',
+  REP_AND_ACODE => 'rep_and_acode',
+  REP_AND_BCODE => 'rep_and_bcode',
+ );
+ return $family{defined($variant) ? $variant : ''} // 'default'
+}
+
+sub _generated_source_plan_rows {
+ my ($compiled_spec_state) = @_;
+ my @rows;
+ foreach my $row (@{_call_compiler_state('compiled_spec_state_rule_rows', $compiled_spec_state)}) {
+  my ($label, $info) = @$row;
+  my $variant = (ref($info) eq 'HASH' && ref($info->{meta}) eq 'HASH')
+   ? $info->{meta}{selected_handler_variant}
+   : undef;
+  push @rows, {
+   label => $label,
+   family => _generated_source_family_for_variant($variant),
+  };
+ }
+ return \@rows
+}
+
+sub _generated_source_plan_literal {
+ my ($plan) = @_;
+ return "[\n" . join('', map {
+  ' { label => ' . _quote_generated_source_string($_->{label})
+   . ', family => ' . _quote_generated_source_string($_->{family}) . " },\n"
+ } @$plan) . ']'
+}
+
+sub _generated_source_preamble {
+ my ($source_identity) = @_;
+ my $identity_literal = _quote_generated_source_string($source_identity);
+ return "# LinkedSpec generated parser source.\n"
+  . "# contract_id: linkedspec-generated-source-v1\n"
+  . "# format_version: 1\n"
+  . "# source_identity: LINKEDSPEC_GENERATED_SOURCE_IDENTITY\n"
+  . "no strict;\n"
+  . "use re 'eval';\n"
+  . "use LinkedSpec::GeneratedSource ();\n"
+  . "our \$LINKEDSPEC_GENERATED_SOURCE_CONTRACT = 'linkedspec-generated-source-v1';\n"
+  . "our \$LINKEDSPEC_GENERATED_SOURCE_FORMAT = 1;\n"
+  . "our \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY = $identity_literal;\n\n"
+}
+
+sub _dependency_regex_source_expression {
+ my ($compiled_spec_state, $owner_label) = @_;
+ my $owner_info = _call_compiler_state('compiled_spec_state_rule_info', $compiled_spec_state, $owner_label);
+ return undef unless ref($owner_info) eq 'HASH' && ref($owner_info->{dependency_refs}) eq 'ARRAY';
+ my @regex_exprs;
+ foreach my $dependency_ref (@{$owner_info->{dependency_refs}}) {
+  next unless ref($dependency_ref) eq 'HASH';
+  my $dependency_label = $dependency_ref->{label};
+  my $dependency_index = $dependency_ref->{idx};
+  my $dependency_info = _call_compiler_state(
+   'compiled_spec_state_rule_info', $compiled_spec_state, $dependency_label,
+  );
+  next unless ref($dependency_info) eq 'HASH' && ref($dependency_info->{re}) eq 'ARRAY';
+  next unless defined($dependency_index) && exists $dependency_info->{re}[$dependency_index];
+  my $pattern_literal = _quote_generated_source_string('' . $dependency_info->{re}[$dependency_index]);
+  push @regex_exprs,
+   'do { my $linkedspec_pattern = ' . $pattern_literal . '; qr/$linkedspec_pattern/ }';
+ }
+ return undef unless @regex_exprs;
+ return 'LinkedRE::oredRE(' . join(', ', @regex_exprs) . ')'
+}
+
+sub _generated_source_postamble {
+ my (%args) = @_;
+ my $plan_literal = _generated_source_plan_literal($args{plan});
+ my $top_rule_literal = _quote_generated_source_string($args{top_rule});
+ my $top_family = 'default';
+ foreach my $row (@{$args{plan}}) {
+  if ($row->{label} eq $args{top_rule}) {
+   $top_family = $row->{family};
+   last;
+  }
+ }
+ my $top_family_literal = _quote_generated_source_string($top_family);
+ return <<"GENERATED_SOURCE_POSTAMBLE";
+
+my \$LINKEDSPEC_GENERATED_EXPECTED_PLAN = $plan_literal;
+my \$LINKEDSPEC_GENERATED_ACTIVE_PLAN = LinkedSpec::GeneratedSource::clone_plan(\$LINKEDSPEC_GENERATED_EXPECTED_PLAN);
+
+sub LinkedSpecGeneratedMetadata {
+ return {
+  contract_id => \$LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
+  format_version => \$LINKEDSPEC_GENERATED_SOURCE_FORMAT,
+  source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+  plan => LinkedSpec::GeneratedSource::clone_plan(\$LINKEDSPEC_GENERATED_EXPECTED_PLAN),
+ }
+}
+
+sub LinkedSpecGeneratedPlan {
+ return LinkedSpec::GeneratedSource::clone_plan(\$LINKEDSPEC_GENERATED_EXPECTED_PLAN)
+}
+
+sub ValidateGeneratedPlan {
+ my (\$plan) = \@_;
+ \$plan = \$LINKEDSPEC_GENERATED_ACTIVE_PLAN unless defined \$plan;
+ return LinkedSpec::GeneratedSource::validate_plan(
+  expected => \$LINKEDSPEC_GENERATED_EXPECTED_PLAN,
+  actual => \$plan,
+  source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+ )
+}
+
+sub Execute {
+ my (\$input_ref) = \@_;
+ ValidateGeneratedPlan();
+ LinkedSpec::GeneratedSource::trace_role(
+  role => 'generated_rule_enter',
+  source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+  rule_label => $top_rule_literal,
+  handler_family => $top_family_literal,
+ );
+ LinkedSpec::GeneratedSource::trace_role(
+  role => 'generated_family_decision',
+  source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+  rule_label => $top_rule_literal,
+  handler_family => $top_family_literal,
+ );
+ my (\$result, \$execution_error);
+ my \$ok = eval {
+  \$result = &{\$descr->{spec}{$top_rule_literal}}(\$descr, \$input_ref);
+  1
+ };
+ \$execution_error = \$@;
+ LinkedSpec::GeneratedSource::trace_role(
+  role => 'generated_rule_exit',
+  source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+  rule_label => $top_rule_literal,
+  handler_family => $top_family_literal,
+  status => \$ok ? 'ok' : 'error',
+ );
+ die LinkedSpec::GeneratedSource::new_error(
+  stage => 'execute_generated',
+  code => 'generated_execution_failed',
+  summary => 'Generated parser execution failed',
+  source_identity => \$LINKEDSPEC_GENERATED_SOURCE_IDENTITY,
+  rule_label => $top_rule_literal,
+  handler_family => $top_family_literal,
+  detail => \$execution_error,
+ ) unless \$ok;
+ return \$result
+}
+
+sub ExecuteWithTrace {
+ my (\$input_ref, \$trace_config) = \@_;
+ require LinkedSpec::Trace;
+ LinkedSpec::Trace::configure_trace(%\$trace_config) if ref(\$trace_config) eq 'HASH';
+ return Execute(\$input_ref)
+}
+
+sub Get { return Execute(\@_) }
+GENERATED_SOURCE_POSTAMBLE
+}
+
 my $ACTIVE_DEPENDENCY_REGEX_RULE_LABEL;
 my $LAST_BUILD_COMPILED_RULE_TABLE_FAILURE_DETAIL = '';
 
@@ -880,6 +1068,8 @@ sub run_get_pipeline {
 
  _trace_log_output(DUMP_LOW, "Starting parser generation", "Converting parsed spec data into executable parser");
  if ($dump_parser_source) {
+  my $source_identity = _generated_source_identity($option, $runtime_ctx);
+  _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, _generated_source_preamble($source_identity));
   _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, "my \$descr = {\n spec => {\n");
  }
 
@@ -1066,12 +1256,30 @@ if ($validate_dependency_regex_references_error) {
   my @glabels = sort keys %{$final_descriptor->{dependency_regex_map} || {}};
   for (my $i = 0; $i < @glabels; ++$i) {
    my $label = $glabels[$i];
-   my $gregex = $final_descriptor->{dependency_regex_map}{$label};
+   my $gregex = _dependency_regex_source_expression($compiled_spec_state, $label);
+   unless (defined $gregex) {
+    my $pattern_literal = _quote_generated_source_string(
+     '' . $final_descriptor->{dependency_regex_map}{$label},
+    );
+    $gregex = 'do { my $linkedspec_pattern = ' . $pattern_literal
+     . '; qr/$linkedspec_pattern/ }';
+   }
    my $prefix = $i ? ",\n" : '';
-   _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, $prefix . " $label\t=> qr/$gregex/o");
+   _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, $prefix . " $label\t=> $gregex");
   }
   my $top_rule = _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx);
-  _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, "\n }\n};\n\nsub Get {&{\$descr->{spec}{$top_rule}}(\$descr, \$_[0])}\n");
+  my $source_identity = _generated_source_identity($option, $runtime_ctx);
+  my $plan = _generated_source_plan_rows($compiled_spec_state);
+  _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, "\n }\n};\n");
+  _call_runtime_ctx(
+   'emit_runtime_ctx_parser_source_line',
+   $runtime_ctx,
+   _generated_source_postamble(
+    source_identity => $source_identity,
+    top_rule => $top_rule,
+    plan => $plan,
+   ),
+  );
   _call_runtime_ctx('flush_runtime_ctx_parser_source', $runtime_ctx, $parser_source_ref);
  }
 

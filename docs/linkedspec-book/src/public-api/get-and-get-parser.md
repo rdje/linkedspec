@@ -1,11 +1,14 @@
-# `Get(...)` and `get_parser(...)`
+# `Get(...)`, `get_parser(...)`, and `emit_generated_source(...)`
 
-These are the two Perl reference entry points most readers should know first. They
+These are the Perl reference entry points most readers should know first. They
 demonstrate LinkedSpec's primary multi-backend product role: an application embeds the
 backend as a native library and keeps `.spec` source, parser input, and results in memory.
 No backend requires a CLI or subprocess for complete parser use.
 
-LinkedSpec's public API has two entry points serving two backend-neutral roles: an **inline compile path** (compile in-memory `.spec` text into a runnable parser) and a **file-oriented path** (resolve a named spec, then compile it). Those roles — and all the options below (`top_rule`, `parse_mode`, `return_descriptor`, `runtime_ctx_ref`, `parse_only`, `generate_only`) — are backend-neutral. The concrete names and signatures on this page (`LinkedSpec::Get(...)`, `LinkedSpec::get_parser(...)`, and the returned parser coderef) are the **Perl reference backend's** surface; another backend exposes the same two entry points and the same options in its own language.
+LinkedSpec's public API has three relevant backend-neutral roles: an **inline compile path** (compile in-memory
+`.spec` text into a runnable parser), a **file-oriented path** (resolve a named spec, then compile it), and a
+**generated-source path** (emit independently loadable host source). The concrete Perl names and signatures on this
+page are the reference surface; another backend exposes equivalent operations through idiomatic host APIs.
 
 ## Backend-native library surfaces
 
@@ -14,7 +17,7 @@ in-process data path, not identical spelling:
 
 | Backend | Native in-memory composition |
 | --- | --- |
-| Perl | Inline: `LinkedSpec::Get(...)` → parser coderef. Portable file-oriented: `LinkedSpec::SpecLoader::load_and_compile_spec(...)`; legacy `get_parser(...)` retains compatibility discovery. |
+| Perl | Inline: `LinkedSpec::Get(...)` → parser coderef. Portable file-oriented: `LinkedSpec::SpecLoader::load_and_compile_spec(...)`; legacy `get_parser(...)` retains compatibility discovery. Generated source: `LinkedSpec::emit_generated_source(...)`. |
 | Rust | Inline: `parse_spec(...)` → core compilation → `Engine::new(...)`. File-oriented: `spec_loader::load_and_compile_spec(...)` → `LoadedCompiledSpec::into_engine()`. |
 | Dart | Inline: `parseSpec(...)` → `compileSpec(...)` → `LinkedSpecRuntimeEngine(...).parse(...)`. File-oriented: `loadAndCompileSpec(...)` → `LoadedCompiledSpec.createEngine()`. |
 | Julia | Inline: staged `parse_spec_with_staged_user_function_definitions(...)` → `compile_spec(...)` → `LinkedSpecRuntimeEngine(...)`. File-oriented: `load_and_compile_spec(...)` → `create_engine(...)`. |
@@ -293,6 +296,43 @@ They serve different usage patterns:
 - `get_parser(...)` is great for repo/spec-name based workflows
 
 Internally, both flow into the same broader runtime/compiler story, but they carry different setup responsibilities and diagnostics seams. The file-oriented path is a convenience over that library story, not a requirement to serialize an in-memory spec.
+
+## `LinkedSpec::emit_generated_source(...)`
+
+`emit_generated_source(...)` compiles in-memory `.spec` text and returns deterministic, independently loadable
+Perl source conforming to `linkedspec-generated-source-v1`:
+
+```perl
+use LinkedSpec;
+
+my $source = LinkedSpec::emit_generated_source(
+  \$spec,
+  source_identity => 'examples/words.spec',
+  parse_mode => 'consume',
+);
+
+my $loaded = eval "package My::GeneratedWords;\n$source\n1;";
+die $@ unless $loaded;
+
+my $input = 'foo';
+my $result = My::GeneratedWords::Execute(\$input);
+my $metadata = My::GeneratedWords::LinkedSpecGeneratedMetadata();
+```
+
+The generated package exposes semantic roles:
+
+- `Execute($input_ref)`;
+- `ExecuteWithTrace($input_ref, \%trace_config)`;
+- `LinkedSpecGeneratedMetadata()` and `LinkedSpecGeneratedPlan()`;
+- `ValidateGeneratedPlan($plan)`.
+
+Metadata contains the contract id, format version, source identity, and ordered `label` / `family` rows. Plan
+validation rejects count, label, family, and unknown-family drift before execution. Emission, validation, and
+execution failures are thrown as `generated_source_error` hashrefs with stable stage/code/identity fields.
+
+The older `Get(... generate_only => 1, dump_parser_source => 1, parser_source_ref => \$source)` path remains
+compatible and emits the same text. The dedicated method is preferred for application code because it returns the
+source directly and normalizes emission failures.
 
 ## Shared options
 
