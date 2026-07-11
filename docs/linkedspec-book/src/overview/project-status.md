@@ -18,11 +18,11 @@ Phases 0–9 of the modernization roadmap are done:
 - **Phase 6**: Documentation and adoption — the book you are reading. All identified documentation gaps closed (LinkedRE, Validation, public API, cross-linking, overviews, ActionIR lowering, per-spec walkthroughs).
 - **Phase 7**: Self-hosted `spec.spec` grammar — LinkedSpec parses its own `.spec` language through the DSL itself. `spec.spec` compiles at `language_agnostic_ready_ratio == 1.0000` with regression coverage; it is the required change surface for `.spec` language evolution.
 - **Phase 8**: Multi-backend specification and handoff — the `.spec` language, runtime semantics, helper contracts, and HandlerIR are specified backend-neutrally, so a backend can be built in any language without reading the reference source. The multi-backend vision — the same `.spec` files, the same semantics, and the same test corpus across all backends — is recorded in ADR 0006. This phase was specification-only (no behavioral code change).
-- **Phase 9**: Rust variant — a second execution backend. The Rust workspace (`rust/`: `linkedspec-core` + `linkedspec-runtime`) carries its own `.spec` parser, compiler, runtime engine, and helper surface, and runs `.spec` files compiled from the same universal contract. It is operational in interpreted mode, and the current manifest-backed Rust oracle is green over 99 fixtures plus manifest drift guards. The generated-source path proves direct execution for the current structural families plus a curated manifest-backed corpus subset.
+- **Phase 9**: Rust variant — a second execution backend. The Rust workspace (`rust/`: `linkedspec-core` + `linkedspec-runtime`) carries its own `.spec` parser, compiler, runtime engine, and helper surface, and runs `.spec` files compiled from the same universal contract. It is operational in interpreted mode, and the current manifest-backed Rust oracle is green over 105 fixtures plus manifest drift guards. The generated-source path proves direct execution for the current structural families plus a curated manifest-backed corpus subset.
 
 The active Dart backend follows the same interpreter-first path. It now has source parsing, validation,
 compiled-spec state, runtime interpretation, staged user-function body parsing, exact-arity user-function runtime
-execution, and a controlled executable corpus harness whose full checked-in 99-fixture manifest passes through Dart
+execution, and a controlled executable corpus harness whose full checked-in 105-fixture manifest passes through Dart
 execute mode. The final shipped-spec/parser-smoke
 window is now 31/31 green after the structural regex closeout following the regex-dialect, helper/action,
 recursion/default-mode, portmap result-shape, hlink delimiter/capture, helper mutation/text-normalization, and
@@ -38,7 +38,7 @@ invocation, refreshes `retv` from `call(...)`, and appends into scalar-held list
 Perl public parser's leading blank/comment-line skip before the top rule. The tclite, recursive top-rule, hlink,
 tablegrep, simenv, `lib_reader`, `regdef`, `ds_vhistory`, Lispish, EBNF, and spec.spec parser-smoke fixtures now
 pass. Bounded structural matchers handle the exact shipped recursive/DEFINE/`\K` PCRE forms, and action-edge
-`push(child, index)` preserves EBNF logging payloads. Dart full-corpus parity is now 99/99 green, and the focused
+`push(child, index)` preserves EBNF logging payloads. Dart full-corpus parity is now 105/105 green, and the focused
 Dart local gate is available through `tools/run_dart_local.sh` or opt-in `LINKEDSPEC_RUN_DART=1` local CI.
 
 The Method-like DSL migration track is also complete: all 21 shipped specs are at zero compatibility-surface rules, 100+ helpers across 10 families are regression-locked, current helper names are the only documented helper surface, and fluent/block equivalence is verified. Current setup and read forms use direct assignments, `set(...)`, bare scalar reads, `array(...)`, `hash(...)`, `push(...)`, `copy(...)`, and `return(...)`. Unknown typed calls in return/value positions diagnose through the generic unknown-helper path instead of emitting generated host-language calls, while unregistered standalone function-shaped statements remain explicit raw compatibility debt. Top-level `fn name(args) { ... }` definition shells are parsed by `specs/user_function_definition.spec` and projected through the active user-function registry, with params, arity, source/body spans, body source, neutral `body_payload`, neutral `body_parse_job`, and body AST recorded. The parse-job sidecar now dispatches through the minimal staged registry provider for `actionir-body.spec` / `action_block`, and the returned `action_block` AST is stitched into `body_ast`; general public `parse_job(...)` authoring remains future work. On Perl, Rust, and Dart, registered exact-arity user-function calls now execute in value positions, compatible receiver chains, and standalone discard statements: arguments evaluate eagerly in the caller, params bind in a fresh function-local scope, and the result is the final expression or `return(expr)` payload. Recursive and unsupported function-body forms are fenced as diagnostics with zero raw fallback on the Perl reference; Rust and Dart directly diagnose recursive calls in their runtime resolvers. The accepted MVP surface is closed at explicit-paren, braced `fn` definitions; alternate spellings, omitted zero-arg parentheses, brace-less bodies, caller-state-mutating functions, recursion support, closures/lambdas/currying, and function namespaces remain deferred extension topics.
@@ -116,7 +116,7 @@ Three backbone items tracked major structural modernization — all done:
   also preserves assignment expressions inside helper arguments, supports plain fallback values in inline
   `if(...)`, evaluates numeric aggregate reducers over bare arrays, and follows scalar-held list/map readback for
   `array(name)`, `hash(name)`, and `copy(name)`. Append-style mutations now update scalar-held lists before
-  aggregate fallback, and `call(...)` refreshes the runtime `retv` channel. The full checked-in 99-fixture corpus
+  aggregate fallback, and `call(...)` refreshes the runtime `retv` channel. The full checked-in 105-fixture corpus
   passes through Dart execute mode. The top-level `fn` corpus
   function fixtures obtain `function_definition` nodes from `specs/user_function_definition.spec` and staged body
   projection rather than a Dart raw scanner. The final shipped-spec/parser-smoke window is split after a 2/31
@@ -233,9 +233,10 @@ Three backbone items tracked major structural modernization — all done:
   primary execution and recursively key-sorted direct JSON. `.7.3.2.4` now closes phase-ordered failures, stable
   stderr/exit, and stdout/route/mirror/file/reset/emoji behavior with 75 focused assertions; 1,023 package
   assertions and 99/99 pass. `.7.3.2.5` now adds nine direct process families and focused-gate delegation; status
-  is `runtime-corpus-primary-cli`, and `.7.3.3` closes honest local no-drift. Public generated source remains
-  deferred to `.3`; global CLI identity `.1.5` is now closed, while active capability census `.1.6` still blocks
-  a complete Julia capability-parity claim.
+  is `runtime-corpus-primary-cli`, and `.7.3.3` closes honest local no-drift. The later exhaustive current-surface
+  gate is now 239 names and 105/105 exact fixtures across all four variants. Public generated source remains
+  deferred to `.3`; global CLI identity `.1.5` and language-surface `.1.6.1` are closed, while remaining outward
+  API capability leaves under `.1.6` still block a complete Julia capability-parity claim.
 - **Non-current helper code purge** - `NONCURRENT-HELPER-CODE-PURGE` is closed. Perl source cleanup, Rust source cleanup, active test/tool/generated fixture and checked-in `.spec` migration, and final no-drift scans are complete. Retired helper-looking calls use generic unknown-helper fallback behavior, active generic-unknown-helper tests use invented helper names, and active helper-call/label/tag scans are clean.
 - **Rust generated-source breadth** — the Rust interpreter oracle is the current cross-variant parity gate. Generated Rust source already covers the current structural families and a curated corpus subset; broadening generated-source proof to the full manifest remains a separately owned future follow-on.
 - **Lifecycle-family audit** — verified complete (2026-06-14). All 7 lifecycle markers (`I`, `LS`, `LE`, `E`, `EX`, `IT`, `LX`) have full semicolon-light structured authoring coverage. Newlines separate top-level helper statements; a semicolon separates adjacent statements on one physical line and is not required after the last statement. No lifecycle-specific semantic gaps found.

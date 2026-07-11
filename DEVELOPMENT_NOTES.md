@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 — prove coverage bidirectionally):
+  Comparing backend-derived inventories proves agreement, not completeness: two backends can omit the same
+  reference contract and still match exactly. A durable capability gate must check inventory → documentation and
+  neutral source, then independently check current reference-contract calls in that source → every backend
+  inventory. Pair that structural proof with exact execution; recognizing all 239 names still does not establish
+  their value, mutation, control, or capture semantics. Admit governed fixtures only after all variants pass the
+  same generated values, so the mandatory corpus stays green at every commit.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3 — make semantic units explicit at API boundaries):
   Julia, like Dart, cannot safely slice multibyte input using public character offsets as raw host indices. Store
   marks in the host slicing unit, validate spans before extraction or advancement, and convert only public

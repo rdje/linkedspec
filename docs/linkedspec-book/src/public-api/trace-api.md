@@ -128,8 +128,8 @@ recursion-cutoff decisions, and `capture_until_boundary(...)` source-boundary ma
 Dart diagnostics/trace no-drift sweep across Dart status text, mdBook pages, live docs, task-tree index, and
 Knowledge Map. `DART-BACKEND-PARITY.5.1` then adds the minimal staged registry provider, `.5.2` adds registered
 exact-arity user-function runtime execution, and `.5.3` preserves staged parse-job/function-registry descriptor
-shapes. `DART-BACKEND-PARITY.6.1` adds the controlled executable corpus harness, `.6.3` closes full 99-fixture
-Dart corpus execution, `.6.4` wires the focused Dart local verification gate, `.7.1` closes Dart mdBook
+shapes. `DART-BACKEND-PARITY.6.1` adds the controlled executable corpus harness, and final capability admission
+expands it to full 105-fixture Dart corpus execution. `.6.4` wires the focused Dart local verification gate, `.7.1` closes Dart mdBook
 usage/status/handoff documentation, `.7.2` defers generated Dart source to a future source-emitter lane, `.7.4`
 productizes the Dart-specific CLI around the existing corpus/runtime command path, and `.7.5` closes the scoped
 Dart milestone. Trace parity is unchanged by these staged/user-function/corpus/generated-source/CLI/closeout
@@ -184,7 +184,7 @@ and untraced action, blind, and recursion paths preserve identical results.
 Package status was `runtime-trace-events` at the `.4.5.4` runtime-trace boundary; that
 mechanism label is historical, not the current overall backend status. The
 current Julia package/CLI status is `runtime-corpus-primary-cli` after the
-99/99 interpreter, 1,028 package assertions, and nine-family direct-process gates.
+105/105 interpreter, 1,036 package assertions, and nine-family direct-process gates.
 
 `.7.3.2.1` propagates one caller-owned emitter through the native pipeline. At
 low level, `julia_frontend:parse_spec`, `julia_frontend:validate_spec`,

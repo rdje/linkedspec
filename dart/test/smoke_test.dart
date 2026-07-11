@@ -6,11 +6,11 @@ void main() {
     expect(linkedSpecDartPackageName, 'linkedspec_dart');
     expect(
       linkedSpecDartScaffoldStatus,
-      'runtime interpreter with 99-fixture corpus parity and Dart CLI ready',
+      'runtime interpreter with 105-fixture corpus parity and Dart CLI ready',
     );
     expect(
       describeLinkedSpecDartScaffold(),
-      'linkedspec_dart runtime interpreter with 99-fixture corpus parity and Dart CLI ready',
+      'linkedspec_dart runtime interpreter with 105-fixture corpus parity and Dart CLI ready',
     );
   });
 }

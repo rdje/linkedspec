@@ -125,29 +125,19 @@ four-command integration and now closes the exact CLI lane with one 4x2x61 drive
 
 ### Call-name coverage versus executable parity
 
-The capability audit provisionally derived the same 237 current ActionIR call names from Dart and Julia and
-required every name in this book and in neutral fixture source. The governed capture sources have since exposed
-two current Perl contracts omitted by both backend-derived lists, so final admission reconciles the inventory
-against the reference registry before claiming a corrected strict count. Even a complete vocabulary gate is not
-a semantic completion claim. A
-diagnostic expansion from 99 to 105 corpus cases proved the distinction: Perl generated all six new exact values,
-while Rust, Dart, and Julia each passed 100/105. Cursor control passed everywhere; exhaustive pure values,
-empty-local-match positions, marker control, and anonymous/named capture marks exposed backend residuals.
+The capability audit now derives the same corrected 239 current ActionIR call names from Dart and Julia. Every
+name appears in this book and in the checked-in neutral corpus. The strict checker also derives current
+non-compatibility calls from the Perl ActionIR contract registry and rejects any such call used by the neutral
+corpus but omitted from the backend inventories. This reverse check closes the blind spot that let both backend
+lists omit `mark_capture_slice(...)` and `start_capture_slice_from(...)` while still agreeing at 237 names.
 
-The mandatory corpus therefore remains at its last green 99-case boundary while
-`FUTURE-PARITY-BACKLOG.1.6.1.2.2.1` through `.4` repair those mechanisms one backend at a time. The six canonical
-sources stay governed under `capability_conformance/fixtures/`, and final `.5` admits them only after both strict
-reconciled-name coverage and unchanged 105/105 execution pass on Perl, Rust, Dart, and Julia. Recognition alone never
-counts as user-visible feature parity. Rust, Dart, and Julia now pass the exhaustive pure-value source directly.
-Rust, Dart, and Julia also pass the empty-local-match position and marker-control sources, including short
-`i`/`elif` aliases and matched-case/default exclusion. All three additionally pass both exact anonymous and named
-capture/mark sources, including stable/advancing reads, anonymous-to-named bridging, input-boundary/copy marks,
-and two-mark advancing reads. Their named marks are rule-local; internal offsets remain safe for each host's string
-slicing model while public positions and captured lengths count Unicode characters. A non-repeated `AND`
-blind-call wrapper also preserves ordered child-return values when no explicit parent return overrides them.
-Final admission is now active and also reconciles
-the two governed bridge helper names omitted by the provisional shared 237-name inventory before strict coverage
-is claimed.
+Vocabulary identity remains necessary but insufficient. A diagnostic 105-case run originally found Rust, Dart,
+and Julia at 100/105 despite recognizing the provisional vocabulary. The backend repair leaves aligned exhaustive
+pure values, empty-local-match positions, marker control, and anonymous/named capture marks. Final admission now
+checks in all six governed sources from `capability_conformance/fixtures/`; Perl regenerates their exact values,
+and Perl, Rust, Dart, and Julia all pass the complete 105/105 manifest unchanged. The named marks are rule-local,
+host-safe internal offsets project public Unicode-character positions/lengths, and non-repeated `AND` blind-call
+wrappers preserve ordered child-return values unless an explicit parent return overrides them.
 All three runtimes preserve the crucial distinction between no local match and a present zero-width match at
 offset zero.
 
@@ -412,10 +402,10 @@ it now also compiles/runs a curated subset selected from the checked-in
 `rust/linkedspec-runtime/tests/corpus/manifest.json`. That generated-source corpus subset includes
 authored proof fixtures, terse helper/control/user-function fixtures, and
 shipped `tclite`/`portmap` smokes. This is deliberately a subset proof; the
-full 99-fixture corpus remains the Rust interpreter oracle gate unless a later
+full 105-fixture corpus remains the Rust interpreter oracle gate unless a later
 leaf explicitly broadens generated-source corpus coverage.
 `RUST-PARITY.9` closed the Rust follow-on documentation state around that
-boundary: interpreter parity is the 99-fixture corpus contract, while generated
+boundary: interpreter parity is the 105-fixture corpus contract, while generated
 source currently proves direct structural-family execution plus the curated
 manifest subset.
 
@@ -435,7 +425,7 @@ It supports named and bounded fixture selection through the library and opt-in
 CLI `--execute` mode; without a selector, the corpus runner executes the full manifest in
 order. `bin/corpus_runner.dart` is now the sole corpus-focused command; the primary
 `bin/linkedspec_dart.dart` rejects corpus subcommands/options and follows the shared parser interface.
-The checked-in 99-fixture manifest passes through Dart execute mode,
+The checked-in 105-fixture manifest passes through Dart execute mode,
 covering the starter proof-edge, autoexist, mutation, core terse runtime,
 middle helper/control/receiver, shipped-spec/parser-smoke, and top-level
 function groups. The top-level `fn` corpus fixtures route through the spec-defined function shell: Dart obtains
@@ -541,8 +531,8 @@ implementing the same cross-variant command interface.
 
 ### Julia Backend Commands, Embedding, and Status
 
-Julia is green at the accepted interpreter-first boundary: the complete validated corpus executes 99/99 with
-exact checked-in output, full package tests pass with 1,023 assertions, and package/CLI status is
+Julia is green at the accepted interpreter-first boundary: the complete validated corpus executes 105/105 with
+exact checked-in output, full package tests pass with 1,036 assertions, and package/CLI status is
 `runtime-corpus-primary-cli`. The primary product surface is the native `LinkedSpecJulia` module; the Julia CLI and corpus
 runner are thin adapters over the same in-process parser/compiler/runtime path.
 
@@ -577,19 +567,18 @@ optional local tools rather than parity prerequisites.
 
 ## Machine-readable capability census
 
-Exact CLI identity and 99/99 interpreter output do not alone prove every public API and mdBook capability. The
+Exact CLI identity and 105/105 interpreter output do not alone prove every public API and mdBook capability. The
 broader current census lives in `capability_conformance/manifest.json` and is checked by:
 
 ```bash
 perl tools/check_capability_conformance.pl
 ```
 
-The first complete audit contains 15 capabilities x four implemented backends. Its 60 states are 47 pass, five
+The current audit contains 15 capabilities x four implemented backends. Its 60 states are 51 pass, one
 partial-proof, and eight gap. Each non-pass state has one durable owner:
 
 | Residual mechanism | Current classification | Owner |
 | --- | --- | --- |
-| Complete mdBook language/helper executable coverage | The 99-case corpus is green but not indexed exhaustively against every current contract on any backend. | `FUTURE-PARITY-BACKLOG.1.6.1` |
 | Outward compiled descriptor | Perl, Dart, and Julia expose the documented projection; Rust exposes `CompiledSpec` but not `spec`/`functions`/`dependency_regex_map`/`meta`. | `.1.6.2` |
 | Structured native runtime diagnostics | Perl, Dart, and Julia expose structured attribution; Rust runtime errors remain string payloads. | `.1.6.3` |
 | Native named/file resolution | Perl `get_parser(...)` owns the book's file-oriented role; Rust, Dart, and Julia currently keep named resolution in process adapters. | `.1.6.4` |
@@ -602,7 +591,7 @@ silent gaps. No backend is called complete while a current matrix state remains 
 
 ADR `0023` sharpens that limitation: Rust exports `source_emitter` publicly, so equivalent source-emission
 capability is required before Julia can claim complete user-visible feature parity. Deferral remains valid
-scheduling and does not weaken the 99/99 interpreter correctness gate; it does keep the full-parity claim open.
+scheduling and does not weaken the 105/105 interpreter correctness gate; it does keep the full-parity claim open.
 
 `JULIA-BACKEND-PARITY.1.1` through `.4.2` are complete. The local Julia toolchain is Homebrew-managed:
 `/opt/homebrew/bin/julia` reports Julia `1.12.6`, and the official Julia downloads page lists `v1.12.6` as the
@@ -618,7 +607,7 @@ Run the complete focused Julia gate from the repository root:
 bash tools/run_julia_local.sh
 ```
 
-It covers package tests, primary CLI help and retired-subcommand rejection, corpus-runner help, and full 99/99
+It covers package tests, primary CLI help and retired-subcommand rejection, corpus-runner help, and full 105/105
 corpus execution. The shared
 core gate remains SDK-independent unless explicitly opted in:
 
@@ -704,7 +693,7 @@ level is `none`. `--trace-emoji` adds level-specific `🛑` / `ℹ️` / `🔎` 
 events; it does not cause a quiet trace level to emit.
 
 The corpus commands validate `manifest.json`, case-count/name shape, missing/stale fixture directories, required
-`input.spec` / `input.txt` / `expected.json` files, and expected JSON syntax over the checked-in 99-fixture corpus.
+`input.spec` / `input.txt` / `expected.json` files, and expected JSON syntax over the checked-in 105-fixture corpus.
 Bare `--execute` runs the complete manifest; named, offset, and limit selections remain available for diagnostics.
 `julia/src/spec/Ast.jl` defines data records and JSON projection for
 spec files, function definitions, source spans, staged parse jobs, rule headers/modes, body element variants, edge
@@ -876,7 +865,7 @@ boundaries. `corpus_execution_passed(...)`, `corpus_passed_count(...)`, `corpus_
 The optional `spec_parser` keyword remains a controlled parser-override seam. Ordinary calls try direct rule-only
 `parse_spec(...)` first. If source parsing fails, the default path executes the checked-in user-function definition
 spec and feeds its neutral nodes through staged body parsing. The three routed top-level function fixtures pass,
-and the complete checked-in corpus is permanently 99/99 green under `.6.3`.
+and the complete checked-in corpus is now 105/105 green after final exhaustive capability admission.
 
 Native callers can use the source-driven composition directly:
 
@@ -945,7 +934,7 @@ Each selected fixture prints `PASS <name>` or `FAIL <name>: <detail>`, followed 
 all selected fixtures passed, `1` means at least one selected fixture failed, and `2` means argument, manifest, or
 selection validation failed. Options also accept `--flag=value` form, and `--case` may be repeated.
 
-Omitting `--execute` validates the complete manifest. Bare `--execute` runs all 99 fixtures; offset-only execution
+Omitting `--execute` validates the complete manifest. Bare `--execute` runs all 105 fixtures; offset-only execution
 runs from that offset through the manifest end. Selecting a subset never bypasses complete manifest drift checks.
 
 The rollout is explicitly recoverable. `.6.2.1` has landed named and bounded selection/reporting; `.6.2.2` proves
@@ -954,7 +943,7 @@ green at 25/25 while routing three top-level function fixtures; `.6.2.4.0` measu
 fixtures 68–98 at 10/31 and splits their mechanism owners; `.6.2.4.1` then closes anonymous capture execution and
 moves the window to 13/31. `.6.2.4.2.1` then adds eager logical helpers and moves it to 17/31 while routing one
 helper-regex flag residual; `.6.2.4.2.3` then closes it and moves the window to 18/31. `.6.2.5` has since closed
-the spec-defined top-level function shells, and `.6.3` has closed the full-manifest gate at 99/99.
+the spec-defined top-level function shells, and final capability admission has expanded the full-manifest gate to 105/105.
 Those are workload boundaries, not an assumption that Julia shares Dart's historical failure causes.
 
 #### Julia starter corpus proof
@@ -1082,8 +1071,8 @@ comment lines, matching the Perl wrapper and Dart backend. A focused minimal pro
 ordinary scalar-held `payload[1]` still returns its indexed item. `ds_vhistory_version_entry` passes. The final
 no-drift leaf adds one permanent complete-window test; the complete shipped-spec window is 31/31. Spec-driven
 function-definition parsing then closes the three routed top-level function fixtures without a raw Julia scanner.
-The full-manifest gate now executes all 99 fixtures in order with exact output and zero failures. Full tests pass
-with 840 assertions and status is `runtime-corpus-full`.
+The full-manifest gate now executes all 105 fixtures in order with exact output and zero failures. Full tests pass
+with 1,036 assertions and status is `runtime-corpus-primary-cli`.
 
 ### Dart Backend Commands
 
@@ -1093,8 +1082,8 @@ Run the focused Dart gate from the repository root:
 bash tools/run_dart_local.sh
 ```
 
-That command runs Dart formatting, analyzer checks, all 151 Dart tests,
-shared Dart primary-CLI help, a bounded corpus-runner smoke, 61/61 default, 61/61 POSIX, and full 99-fixture corpus
+That command runs Dart formatting, analyzer checks, all 160 Dart tests,
+shared Dart primary-CLI help, a bounded corpus-runner smoke, 61/61 default, 61/61 POSIX, and full 105-fixture corpus
 execution. To include Dart in
 the canonical local gate on a machine with a Dart SDK, opt in explicitly:
 
@@ -1262,7 +1251,7 @@ recursive/default-mode parser-smoke bridge, portmap result-shape bridge, and
 hlink delimiter/capture bridge are done; the helper mutation/text-normalization
 bridge is also done, the legacy accumulator bridge closes `regdef_nested_register_fields`, and the public-parser
 leading-trivia bridge closes `ds_vhistory_version_entry`. Final parser-smoke no-drift closeout, bounded
-structural regex work, routed top-level `fn` corpus-shell execution, and the full shipped 99-fixture Dart corpus
+structural regex work, routed top-level `fn` corpus-shell execution, and the full shipped 105-fixture Dart corpus
 gate are done; the next Dart leaf wires that green gate into the local verification story.
 
 ### Step 6: Validate Against the Test Corpus
@@ -1284,7 +1273,7 @@ The core local CI gate remains independent of Dart SDK availability by default; 
 `LINKEDSPEC_RUN_DART=1` when invoking `tools/run_ci_local.sh` to include the Dart gate.
 
 The checked-in Rust corpus is kept green while parity work lands incrementally. It now has
-99 fixtures, including the `with(...) { ... }` helper, `.with() { ... }` receiver trailing block case, hash-tree traversal receiver block case, and array-tree traversal receiver block case; the two minimal shipped `tclite.spec` cases restored by the
+105 fixtures, including the `with(...) { ... }` helper, `.with() { ... }` receiver trailing block case, hash-tree traversal receiver block case, array-tree traversal receiver block case, and six exhaustive capability cases; the two minimal shipped `tclite.spec` cases restored by the
 default-mode repetition parity work; the shipped `Lispish.spec` `lispish_x_y` case now
 migrated to direct nested access; the first `hlink_substitution` raw-string cases plus the
 JSON-safe `{abc}` curly-brace delimiter case and the neutral bracket/mixed delimiter cases;

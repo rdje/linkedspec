@@ -14,7 +14,7 @@ execution, plus value-block/control/tree helper execution, explicit
 cursor-control behavior, structured runtime diagnostics, and trace
 controls/sinks plus runtime trace events, staged function-body dispatch, and
 registered user-function runtime execution. Its corpus layer now has a
-manifest-backed executable harness whose checked-in 99-fixture corpus gate is
+manifest-backed executable harness whose checked-in 105-fixture corpus gate is
 green.
 
 ## Commands
@@ -51,10 +51,10 @@ boundary through the native staged parser, validator/compiler, and `LinkedSpecRu
 global parse mode through native controls, and emits the direct result as recursively key-sorted compact UTF-8
 JSON. `.1.5.3.3` adds the independent canonical phase trace with exact levels, byte counts, escaping, emoji,
 stdout/route/mirror, reset/append, and failures. Dart now passes all 61 unchanged primary cases in default/POSIX;
-`.1.5.3.4` makes both legs recurring in the focused gate alongside the package suite (now 160 tests) and 99/99 corpus, and closes the Dart
+`.1.5.3.4` makes both legs recurring in the focused gate alongside the package suite (now 160 tests) and 105/105 corpus, and closes the Dart
 primary-command parent. The earlier
 `DART-BACKEND-PARITY.6.3` corpus-parity boundary remains green: the full
-checked-in 99-fixture manifest passes through Dart execute mode after the shipped-spec/parser-smoke window reached
+checked-in 105-fixture manifest passes through Dart execute mode after the shipped-spec/parser-smoke window reached
 31/31 green and the routed top-level `fn` fixtures passed through the spec-defined shell. The package
 can round-trip
 parsed `.spec` structures and staged parse-job sidecars through JSON, parse rule
@@ -156,7 +156,7 @@ fixtures through parse/compile/runtime, compares the engine output against
 It accepts named or bounded fixture selection through `caseNames`, `offset`, and
 `limit`. The corpus-runner CLI exposes those developer options through
 `bin/corpus_runner.dart`; they are deliberately absent from the shared primary parser command. Without a selector, `--execute`
-runs the full checked-in manifest in order. The full 99-fixture corpus now passes
+runs the full checked-in manifest in order. The full 105-fixture corpus now passes
 through execute mode, including the first 40 shipped manifest fixtures, the
 non-`fn` middle helper/control/receiver fixtures, the shipped-spec/parser-smoke window, and the three routed
 top-level `fn` fixtures. The top-level function fixtures obtain

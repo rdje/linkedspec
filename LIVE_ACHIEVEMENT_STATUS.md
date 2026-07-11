@@ -7,6 +7,18 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 — admit exhaustive capability corpus**
+  (DONE — exhaustive current-surface `.1.6.1` closed; outward Rust descriptor `.1.6.2` active).
+
+  **Implementation:** Reconciled the two shared inventory omissions, strengthened strict coverage with a reverse
+  neutral-source-to-Perl-contract check, and atomically admitted six governed semantic families. The aligned
+  surface is 239 current calls and the mandatory neutral corpus is 105 exact fixtures.
+
+  **Proof:** Perl regeneration and the full local gate pass Phase 0 `1..1030`; Rust passes its full gate over 105
+  fixtures, Dart passes 160 tests plus 105/105 and both CLI environments, and Julia passes 1,036 assertions plus
+  105/105 and primary CLI conformance. Strict coverage reports zero omissions. About 1.75 GB of reproducible
+  Rust, Dart, and Julia artifacts were removed.
+
 - 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3 — complete Julia capture marks**
   (DONE — all backend capture repairs closed; final admission `.2.2.5` active).
 

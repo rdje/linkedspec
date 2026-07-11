@@ -71,6 +71,8 @@ void main() {
     expect(isKnownActionIrCallName('entry_end_line'), isTrue);
     expect(isKnownActionIrCallName('match_end_line'), isTrue);
     expect(isKnownActionIrCallName('capture_until_boundary'), isTrue);
+    expect(isKnownActionIrCallName('mark_capture_slice'), isTrue);
+    expect(isKnownActionIrCallName('start_capture_slice_from'), isTrue);
     expect(isKnownActionIrCallName('BACKTRACK'), isFalse);
     expect(isKnownActionIrCallName('IBACKTRACK'), isFalse);
     expect(isKnownActionIrCallName('mystery_helper'), isFalse);

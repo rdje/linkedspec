@@ -106,6 +106,6 @@ wrapper-body recursive `sexpr` idiom, a recursive top rule with `LX`, and a
 top-rule `LX` sequence parse.
 
 Later terse-language leaves added helper/receiver trailing-block, hash-tree traversal,
-array-tree traversal, and typed-wrapper quoted-name fixtures. The checked-in corpus
-now has 99 fixtures after `SPEC-SOURCE-TERSE-CLOSEOUT.1` added the two neutral hlink
-bracket/mixed delimiter cases.
+array-tree traversal, and typed-wrapper quoted-name fixtures. `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5`
+then admitted six governed exhaustive capability sources after all four backends matched their exact Perl values.
+The checked-in corpus now has 105 fixtures, ending with the anonymous/named capture families.

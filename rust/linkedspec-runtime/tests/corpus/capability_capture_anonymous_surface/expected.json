@@ -1,0 +1,19 @@
+[
+   {
+      "rest" : "xxBC",
+      "rest_len" : 4,
+      "slice" : "xxB",
+      "slice_col" : 2,
+      "slice_len" : 3,
+      "slice_line" : 1,
+      "slice_pos" : 1,
+      "take" : "xxB",
+      "take_len" : 3,
+      "take_rest" : "xxBC",
+      "take_rest_len" : 4,
+      "take_until_cursor" : "xxBC",
+      "take_until_cursor_len" : 4,
+      "until_cursor" : "xxBC",
+      "until_cursor_len" : 4
+   }
+]

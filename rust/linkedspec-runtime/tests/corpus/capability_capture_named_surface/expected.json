@@ -1,0 +1,23 @@
+[
+   {
+      "between" : "xxBC",
+      "between_len" : 4,
+      "copied_pos" : 1,
+      "from" : "xxB",
+      "from_len" : 3,
+      "origin_exists" : 1,
+      "origin_pos" : 1,
+      "rest" : "xxBC",
+      "rest_len" : 4,
+      "take_between" : "xxBC",
+      "take_between_len" : 4,
+      "take_len" : 3,
+      "take_rest" : "xxBC",
+      "take_rest_len" : 4,
+      "take_until_cursor" : "xxBC",
+      "take_until_cursor_len" : 4,
+      "until_cursor" : "xxBC",
+      "until_cursor_len" : 4,
+      "whole_input" : "AxxBC"
+   }
+]

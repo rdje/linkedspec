@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 — admit exhaustive capability corpus
+
+**Exhaustive current surface:** The aligned Dart/Julia ActionIR inventories now contain the two governed Perl
+contracts that the provisional 237-name comparison missed: `start_capture_slice_from` and
+`mark_capture_slice`. The strict checker now proves both directions—every one of the 239 inventory names is
+documented and appears in neutral source, and every current Perl contract call used by that source is present in
+the backend inventories—so identical backend omissions can no longer pass unnoticed.
+
+**Atomic corpus admission:** Six governed cursor, pure-helper, position, marker-control, anonymous-capture, and
+named-capture fixtures join the mandatory oracle, raising it from 99 to 105 exact cases. Perl regeneration, Rust,
+Dart, and Julia all pass the unchanged generated values; the capability census promotes the complete current
+mdBook surface to pass.
+
+**Proof/frontier:** Rust passes 137 library, 196 integration, 105 oracle, three emitter, ten trace, and 61/61 CLI
+cases in both environments. Dart passes formatting, fatal analysis, 160 package tests, 105/105 corpus, and both
+CLI environments. Julia passes 1,036 assertions, 105/105 corpus, and primary CLI conformance. The full Perl/local
+gate passes Phase 0 `1..1030`; strict coverage reports 239 names in 105 fixtures with zero omissions. Generated
+caches totaling about 1.75 GB were removed. `.1.6.1` closes and `.1.6.2` becomes active.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3 — complete Julia capture marks
 
 **Exact capture families:** Julia now stores named marks as rule-local input code-unit offsets while projecting

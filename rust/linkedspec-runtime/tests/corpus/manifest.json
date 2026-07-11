@@ -1,5 +1,5 @@
 {
-   "case_count" : 99,
+   "case_count" : 105,
    "cases" : [
       "proof_edge_array_literal",
       "proof_edge_scalar_literal",
@@ -99,7 +99,13 @@
       "pplugin_empty",
       "tkgui_empty",
       "lib_reader_sattribute",
-      "lib_reader_cattribute"
+      "lib_reader_cattribute",
+      "capability_cursor_control_surface",
+      "capability_pure_helper_surface",
+      "capability_position_helper_surface",
+      "capability_control_marker_surface",
+      "capability_capture_anonymous_surface",
+      "capability_capture_named_surface"
    ],
    "format" : 1,
    "generated_by" : "tools/gen_oracle_corpus.pl"

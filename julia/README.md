@@ -5,7 +5,7 @@ package/command surface, manifest validation, source and ActionIR frontends, sta
 parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch, value/helper/control/callback
 families, cursor/boundary behavior, structured diagnostics/tracing, registered function execution, and controlled
 library-level corpus execution, bounded CLI selection/reporting, and spec-driven top-level user-function source
-composition plus full ordered 99-fixture library and CLI execution. Local-gate integration and native primary
+composition plus full ordered 105-fixture library and CLI execution. Local-gate integration and native primary
 rule/function execution with direct canonical JSON, stable failure/trace routing, and nine-family direct-process
 conformance are complete. Cross-backend neutral fixtures, capability census, generated source, and final complete-
 parity closeout remain open; this status is a Julia-local milestone, not a complete backend-parity claim.
@@ -41,7 +41,7 @@ bash tools/run_julia_local.sh
 ```
 
 It runs package tests, the nine-family primary process checker in `tools/check_julia_primary_cli.sh`, corpus-
-runner help, and the full 99-fixture corpus. The shared
+runner help, and the full 105-fixture corpus. The shared
 core gate includes it only when explicitly requested:
 
 ```bash
@@ -75,7 +75,7 @@ usage failures exit `2`. Trace defaults to stdout without a file and route with 
 reset, and emoji compose without changing routed canonical stdout. `status` and `corpus` are rejected as primary
 subcommands. The separate corpus runner validates
 `manifest.json`, fixture directory drift, required `input.spec` / `input.txt` /
-`expected.json` files, and expected JSON syntax. Bare `--execute` runs all 99 fixtures; selectors narrow a run
+`expected.json` files, and expected JSON syntax. Bare `--execute` runs all 105 fixtures; selectors narrow a run
 without bypassing complete manifest validation.
 
 Under managed harnesses where the default Julia depot is not writable, prefix commands with a writable depot:
@@ -281,7 +281,7 @@ anonymous/named capture family now uses rule-local code-unit marks with characte
 lengths. It covers stable/advancing slice, cursor, rest, from, and between reads; current/input-boundary, copied,
 and anonymous-bridge marks; and symbolic bare mark arguments. Non-repeated `AND` blind-call rules surface ordered
 child returns when no explicit parent return overrides them. The current package suite passes 1,028 assertions;
-61/61 shared CLI cases in both environments and the 99/99 corpus remain green.
+61/61 shared CLI cases in both environments and the 105/105 corpus remain green.
 
 Library example:
 

@@ -102,7 +102,7 @@ Top-level directories and files:
     frontend validation, spec-returned function-definition projection, typed ActionIR/helper-action AST
     parsing, ActionIR contract resolution, user-function registry, staged function-body registry dispatch,
     compiled-spec state, runtime regex/match state, rule-dispatch interpreter, staged user-function runtime
-    execution, and 99-fixture corpus output parity under `DART-BACKEND-PARITY`.
+    execution, and 105-fixture corpus output parity under `DART-BACKEND-PARITY` plus the global capability gate.
 - `julia/`
   - Native Julia backend package; `parse_spec(...)`, `compile_spec(...)`, `runtime_parse(...)`, and
     `runtime_execute(...)` are the primary in-process surface.
@@ -169,9 +169,10 @@ Top-level directories and files:
     `.1.5.1.5` now closes canonical trace at 53/53 exact cases with local-gate integration. Its signoff exposed a
     pre-existing UTF-8 argv/JSON mojibake boundary; `.1.5.1.6` closes that repair. Perl/Rust/Dart now pass 61/61.
     Julia `.1.5.4.1` renders exact help, validates strict UTF-8 file bytes, and emits phase-only primary errors.
-    `.1.5.4.2` adds the independent canonical trace while preserving native rich trace. Current proof is 1,028
-    assertions plus 99/99 and 61/61 default/POSIX. `.1.5.4.3` closes exact four-backend CLI identity with one
-    recurring warmed 4x2x61 driver; capability census `.1.6` is active and generated-source parity remains `.3`.
+    `.1.5.4.2` adds the independent canonical trace while preserving native rich trace. Current proof is 1,036
+    assertions plus 105/105 and 61/61 default/POSIX. `.1.5.4.3` closes exact four-backend CLI identity with one
+    recurring warmed 4x2x61 driver; exhaustive current-surface `.1.6.1` is closed, `.1.6.2` is active, and
+    generated-source parity remains `.3`.
 - `.github/workflows/`
   - GitHub Actions automation.
   - Primary CI workflow: `.github/workflows/ci.yml`.
@@ -206,11 +207,10 @@ Top-level project docs:
   inventory against the mdBook and neutral corpus. The strict form intentionally remains red until `.1.6.1.2`;
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator
   after newline `endswitch()`. A diagnostic 105-case run then passed 100/105 on each non-reference backend and
-  split pure, position, marker-control, and capture/mark repairs under active `.1.6.1.2.2`; the mandatory corpus
-  remains at its green 99-case boundary until final admission. Rust, Dart, and Julia pure-value and
-  empty-local-match, marker-control, and capture/mark children are closed on Rust, Dart, and Julia. Active
-  `.2.2.5` performs final admission and will reconcile two governed
-  capture helpers omitted by the provisional shared 237-name inventory before claiming strict coverage.
+  split pure, position, marker-control, and capture/mark repairs under `.1.6.1.2.2`. Those repairs and final
+  admission are closed: the corrected shared inventory contains 239 current names, every name is present in the
+  mdBook and neutral source, current Perl contract calls are reverse-checked, and all four backends pass the
+  expanded 105-case corpus exactly. Active `.1.6.2` adds Rust's outward compiled-descriptor projection.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
   {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven baseline success, four baseline
@@ -222,16 +222,16 @@ Top-level project docs:
   canonical trace projection. `.1.5.2.4` closes Rust at 61/61 in default/POSIX environments and adds
   `tools/run_rust_local.sh`; Dart and Julia are also 61/61 default/POSIX. Run
   `bash tools/run_primary_cli_matrix.sh` for one command that builds/prepares/warms all four backends and proves
-  the unchanged 61-case suite under both environments. Exact CLI lane `.1.5` is closed; capability census `.1.6`
-  is active.
+  the unchanged 61-case suite under both environments. Exact CLI lane `.1.5` and exhaustive current-surface
+  `.1.6.1` are closed; `.1.6.2` is active.
 - Deep semantic introspection plus MCP is parked under `FUTURE-PARITY-BACKLOG.10.1`: native backend APIs own one
   versioned semantic model, while MCP remains a thin transport rather than a backend-specific source of truth.
 - Run `bash tools/run_dart_local.sh` from the repo root for the focused Dart backend gate: format, analyze, full
-  Dart tests, CLI help, and the 99-fixture corpus execution.
+  Dart tests, CLI help, and the 105-fixture corpus execution.
 - Run `bash tools/run_rust_local.sh` from the repo root for Rust formatting, the full runtime package, and both
   61-case primary-command environments.
 - Run `bash tools/run_julia_local.sh` from the repo root for the focused Julia backend gate: package tests, CLI
-  checks, and the 99-fixture corpus execution. Override the executable/depot with `LINKEDSPEC_JULIA_CMD` and
+  checks, and the 105-fixture corpus execution. Override the executable/depot with `LINKEDSPEC_JULIA_CMD` and
   `LINKEDSPEC_JULIA_DEPOT_PATH` when needed.
 - The canonical local gate stays core-only by default so it does not depend on Rust, Dart, or Julia toolchains. To
   opt into backend checks, set `LINKEDSPEC_RUN_RUST=1`, `LINKEDSPEC_RUN_DART=1`, and/or `LINKEDSPEC_RUN_JULIA=1` before

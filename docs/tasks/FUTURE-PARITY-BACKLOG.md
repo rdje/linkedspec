@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (all capture-mark repairs closed; final admission `.1.6.1.2.2.5` active).
+- Last updated: `2026-07-10` (strict 239-name/105-case current-surface proof closed; `.1.6.2` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -575,14 +575,18 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.1.6.0 - audit backend capability parity`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1`
-  Status: `active`
+  Status: `done`
   Goal: Turn the complete current mdBook language/helper surface into neutral executable capability proof.
   Children: `.1.6.1.0`, `.1.6.1.1`, `.1.6.1.2`
   Acceptance: Map every current non-legacy language, rule, lifecycle, ActionIR, helper, method, value-kind, cursor,
     capture, function, and staged-body contract to an existing neutral fixture or add a backend-neutral fixture;
     run unchanged on Perl/Rust/Dart/Julia; split any behavioral mismatch by mechanism before repair.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: The corrected Dart/Julia inventories contain 239 current call names and match exactly. The strict
+    checker proves every name appears in the mdBook and 105-case neutral corpus, and reverse-checks every current
+    Perl contract call used by that corpus against both inventories. Perl generates all 105 exact values; Rust,
+    Dart, and Julia execute the unchanged manifest 105/105. `language.current_mdbook_surface` is pass on all four
+    backends, and the strict checker is part of the recurring local CI gate.
+  Commit: closed by `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 - admit exhaustive capability corpus`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.0`
   Status: `done`
@@ -636,15 +640,16 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.1 - enforce universal newline separators`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2`
-  Status: `active`
+  Status: `done`
   Goal: Complete and run exhaustive current-call neutral coverage after newline separator repair.
   Children: `.1.6.1.2.0`, `.1.6.1.2.1`, `.1.6.1.2.2`
   Acceptance: Finish bounded pure/position/capture/mark/cursor/control fixtures, make the coverage checker require
     every current Dart/Julia ActionIR name in the mdBook and generated neutral corpus, regenerate Perl oracle bytes,
     run the unchanged corpus on Perl/Rust/Dart/Julia, split any residual behavioral mismatch, and close parent
     `.1.6.1` only when `language.current_mdbook_surface` can move from partial to pass.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Universal newline separation, contract-aware switch closure, all exact-value repair children,
+    reconciled call inventories, and final 105-case admission are complete on all four implemented backends.
+  Commit: closed by `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 - admit exhaustive capability corpus`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.0`
   Status: `done`
@@ -680,7 +685,7 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.1 - terminate newline switch closure`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2`
-  Status: `active`
+  Status: `done`
   Goal: Correct fixture timing, admit exhaustive current-call families, and close strict four-backend proof.
   Children: `.1.6.1.2.2.0`, `.1.6.1.2.2.1`, `.1.6.1.2.2.2`, `.1.6.1.2.2.3`,
     `.1.6.1.2.2.4`, `.1.6.1.2.2.5`
@@ -688,8 +693,10 @@ before implementation.
     source fixtures in oracle generation, regenerate exact Perl values, reconcile the provisional 237-name inventory
     against the current Perl registry and make strict corrected-name coverage pass, run the
     expanded corpus unchanged on Perl/Rust/Dart/Julia, update `language.current_mdbook_surface`, and close `.1.6.1`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Corrected pure, position, marker-control, and capture/mark fixtures match exactly on every
+    backend. Final admission reconciles the two omitted bridge helpers, generates all 105 reference values, passes
+    strict 239-name coverage, and runs 105/105 on Perl, Rust, Dart, and Julia.
+  Commit: closed by `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 - admit exhaustive capability corpus`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.0`
   Status: `done`
@@ -911,7 +918,7 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3 - complete Julia capture marks`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5`
-  Status: `active`
+  Status: `done`
   Goal: Admit all six fixtures and close strict current-call proof.
   Acceptance: Register governed `source_file` cases, regenerate 105 exact values, pass strict reconciled-name
     coverage (the earlier 237-name count is provisional),
@@ -920,11 +927,21 @@ before implementation.
     governed capture sources against the shared current-call inventories: `start_capture_slice_from` and
     `mark_capture_slice` are current Perl contracts used by those sources but are absent from the aligned
     Dart/Julia 237-name sets, so the final count is provisional until that omission is corrected atomically.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `mark_capture_slice` and `start_capture_slice_from` now belong to both Dart and Julia known-call
+    and capture-family tables, raising the exact shared inventory from provisional 237 to corrected 239. The
+    coverage checker now also derives current non-compatibility Perl contract names and rejects any such neutral
+    corpus call absent from both backend inventories. All six governed `source_file` cases are byte-identical in
+    the generated corpus; Perl regenerates 105 exact values and strict coverage reports 239 names/105 fixtures,
+    zero book gaps, zero corpus gaps, and zero missing Perl contract calls. Recurring gates pass: Rust 137 library,
+    105 oracle, 196 integration, three emitter, ten trace, and 61x2 CLI; Dart formatting/analyzer, 160 tests,
+    61x2 CLI, and 105 corpus; Julia 1,036 assertions, primary CLI, and 105 corpus. The strengthened core gate passes
+    22 ActionIR tests, nine CLI/trace tests, Perl 61x2, and Phase 0 `1..1030` in 490 seconds. The local gate now
+    runs strict language coverage permanently. Generated 1.6 GB Rust, 30 MB Dart, and 122 MB Julia caches were
+    removed after verification.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 - admit exhaustive capability corpus`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.2`
-  Status: `pending`
+  Status: `active`
   Goal: Add Rust's backend-neutral outward compiled-descriptor projection.
   Acceptance: Rust exposes the documented `spec`, `functions`, `dependency_regex_map`, and `meta` projection with
     stable field meanings/order and staged function metadata equivalent to Perl/Dart/Julia; focused neutral shape
@@ -1195,8 +1212,8 @@ before implementation.
 | 41 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1` | `done` | Exact Rust anonymous/named capture values, symbolic marks, implicit AND blind-call result, 196 integration, and full recurring gate pass. |
 | 42 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2` | `done` | Exact Dart anonymous/named capture values, rule-local code-unit marks with character projections, implicit AND result, 160 tests, 61x2 CLI, and 99 corpus pass. |
 | 43 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3` | `done` | Exact Julia anonymous/named capture values, rule-local code-unit marks with character projections, implicit AND result, 1,028 assertions, primary CLI, and 99 corpus pass; capture parent closes. |
-| 44 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5` | `active` | Reconcile the provisional call inventory, admit six fixtures, and close strict 105-case proof. |
-| 45 | `FUTURE-PARITY-BACKLOG.1.6.2` | `pending` | Add Rust's missing outward compiled-descriptor projection. |
+| 44 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5` | `done` | Corrected 239-name inventory, Perl-contract reverse check, six governed admissions, and exact 105/105 four-backend proof; `.1.6.1` closes. |
+| 45 | `FUTURE-PARITY-BACKLOG.1.6.2` | `active` | Add Rust's missing outward compiled-descriptor projection. |
 | 46 | `FUTURE-PARITY-BACKLOG.1.6.3` | `pending` | Add structured Rust native runtime diagnostics. |
 | 47 | `FUTURE-PARITY-BACKLOG.1.6.4` | `pending` | Add native named/file resolution to Rust, Dart, and Julia. |
 | 48 | `FUTURE-PARITY-BACKLOG.1.6.5` | `pending` | Extend Dart native trace through frontend/compiler/function-shell/staged phases. |

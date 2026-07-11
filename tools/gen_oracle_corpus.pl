@@ -1205,6 +1205,40 @@ SPEC
         input => 'cell("foo"){ attr("bar,baz"); }',
     },
 
+    # FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 — exhaustive current-call admission.
+    # These sources remain governed outside the generated corpus; source_file
+    # copies their exact bytes so regeneration cannot drift from capability proof.
+    {
+        case        => 'capability_cursor_control_surface',
+        source_file => 'capability_conformance/fixtures/capability_cursor_control_surface.spec',
+        input       => 'ab',
+    },
+    {
+        case        => 'capability_pure_helper_surface',
+        source_file => 'capability_conformance/fixtures/capability_pure_helper_surface.spec',
+        input       => 'x',
+    },
+    {
+        case        => 'capability_position_helper_surface',
+        source_file => 'capability_conformance/fixtures/capability_position_helper_surface.spec',
+        input       => 'ab',
+    },
+    {
+        case        => 'capability_control_marker_surface',
+        source_file => 'capability_conformance/fixtures/capability_control_marker_surface.spec',
+        input       => 'x',
+    },
+    {
+        case        => 'capability_capture_anonymous_surface',
+        source_file => 'capability_conformance/fixtures/capability_capture_anonymous_surface.spec',
+        input       => 'AxxBC',
+    },
+    {
+        case        => 'capability_capture_named_surface',
+        source_file => 'capability_conformance/fixtures/capability_capture_named_surface.spec',
+        input       => 'AxxBC',
+    },
+
 );
 
 my $json = JSON::PP->new->canonical(1)->pretty(1);

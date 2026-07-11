@@ -61,12 +61,11 @@
       "category": "language-proof",
       "contract": "Every current non-legacy language, ActionIR, helper, method, value-kind, control, and mutation contract has neutral executable proof on every backend.",
       "sources": ["docs/linkedspec-book/src/appendix/formal-grammar.md", "docs/linkedspec-book/src/appendix/helper-contract-catalog.md", "docs/linkedspec-book/src/appendix/runtime-semantics.md"],
-      "gap_owner": "FUTURE-PARITY-BACKLOG.1.6.1",
       "backends": {
-        "perl": {"status": "partial", "references": ["t/phase0_regression.t", "capability_conformance/fixtures/capability_pure_helper_surface.spec", "rust/linkedspec-runtime/tests/corpus/manifest.json"], "note": "Perl produces exact values for all six exhaustive fixtures, but they remain outside the mandatory 99-case corpus until every backend repair child closes."},
-        "rust": {"status": "partial", "references": ["capability_conformance/fixtures/capability_pure_helper_surface.spec", "capability_conformance/fixtures/capability_position_helper_surface.spec", "capability_conformance/fixtures/capability_control_marker_surface.spec", "capability_conformance/fixtures/capability_capture_anonymous_surface.spec", "capability_conformance/fixtures/capability_capture_named_surface.spec", "rust/linkedspec-runtime/tests/corpus/manifest.json", "rust/linkedspec-runtime/tests/integration_test.rs"], "note": "The exact pure-value, empty-local-match position, marker-control, and both capture/mark fixtures are repaired and locked; final six-fixture admission remains pending."},
-        "dart": {"status": "partial", "references": ["capability_conformance/fixtures/capability_pure_helper_surface.spec", "capability_conformance/fixtures/capability_position_helper_surface.spec", "capability_conformance/fixtures/capability_control_marker_surface.spec", "capability_conformance/fixtures/capability_capture_anonymous_surface.spec", "capability_conformance/fixtures/capability_capture_named_surface.spec", "rust/linkedspec-runtime/tests/corpus/manifest.json", "dart/test/runtime_interpreter_test.dart"], "note": "The exact pure-value, empty-local-match position, marker-control, and both capture/mark fixtures are repaired and locked; final six-fixture admission remains pending."},
-        "julia": {"status": "partial", "references": ["capability_conformance/fixtures/capability_pure_helper_surface.spec", "capability_conformance/fixtures/capability_position_helper_surface.spec", "capability_conformance/fixtures/capability_control_marker_surface.spec", "capability_conformance/fixtures/capability_capture_anonymous_surface.spec", "capability_conformance/fixtures/capability_capture_named_surface.spec", "rust/linkedspec-runtime/tests/corpus/manifest.json", "julia/test/runtests.jl"], "note": "The exact pure-value, empty-local-match position, marker-control, and both capture/mark fixtures are repaired and locked; final six-fixture admission remains pending."}
+        "perl": {"status": "pass", "references": ["tools/gen_oracle_corpus.pl", "rust/linkedspec-runtime/tests/corpus/manifest.json", "capability_conformance/fixtures"]},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/tests/corpus/manifest.json", "rust/linkedspec-runtime/tests/corpus_oracle.rs", "rust/linkedspec-runtime/tests/integration_test.rs"]},
+        "dart": {"status": "pass", "references": ["rust/linkedspec-runtime/tests/corpus/manifest.json", "dart/test/action_contracts_test.dart", "dart/test/corpus_manifest_test.dart", "dart/test/runtime_interpreter_test.dart"]},
+        "julia": {"status": "pass", "references": ["rust/linkedspec-runtime/tests/corpus/manifest.json", "julia/src/action/ActionContracts.jl", "julia/test/runtests.jl"]}
       }
     },
     {
@@ -167,9 +166,9 @@
       }
     },
     {
-      "id": "corpus.interpreter_99_exact_outputs",
+      "id": "corpus.interpreter_105_exact_outputs",
       "category": "regression-proof",
-      "contract": "Every backend executes the unchanged language-neutral 99-fixture interpreter corpus with exact outputs.",
+      "contract": "Every backend executes the unchanged language-neutral 105-fixture interpreter corpus with exact outputs.",
       "sources": ["rust/linkedspec-runtime/tests/corpus/manifest.json", "docs/linkedspec-book/src/specs-and-corpora/shipped-specs-and-corpora.md"],
       "backends": {
         "perl": {"status": "pass", "references": ["tools/gen_oracle_corpus.pl"]},

@@ -89,9 +89,18 @@ Validate the machine-readable broader census with:
 perl tools/check_capability_conformance.pl
 ```
 
-`capability_conformance/manifest.json` currently contains 15 capabilities and 60 backend states: 47 pass, five
+`capability_conformance/manifest.json` currently contains 15 capabilities and 60 backend states: 51 pass, one
 partial-proof, and eight gap. Every partial/gap state names a task-tree owner, every evidence path must exist, and
 legacy/future exclusions are explicit. The canonical local gate runs this check before focused suites.
+
+The same gate also enforces exhaustive current ActionIR coverage:
+
+```bash
+perl tools/check_language_capability_coverage.pl
+```
+
+That checker requires exact Dart/Julia inventory identity, all 239 current names in the mdBook and 105-case
+neutral corpus, and every current Perl contract call used by the corpus in both backend inventories.
 
 ## Focused Rust Gate
 
@@ -101,7 +110,7 @@ Run the repo-owned Rust gate from the repository root:
 bash tools/run_rust_local.sh
 ```
 
-It checks formatting, runs the complete `linkedspec-runtime` package (including the 99-fixture interpreter oracle,
+It checks formatting, runs the complete `linkedspec-runtime` package (including the 105-fixture interpreter oracle,
 generated-source subset, and native trace controls), builds `linkedspec-rust`, then runs all 61 primary-command
 fixtures with `POSIXLY_CORRECT` unset and set. Override Cargo or its target directory with
 `LINKEDSPEC_CARGO_CMD` or `CARGO_TARGET_DIR` when needed.
@@ -121,8 +130,8 @@ bash tools/run_dart_local.sh
 ```
 
 It runs Dart formatting, analyzer checks, all 151 Dart tests, shared primary-CLI help,
-a bounded corpus-runner smoke, all 61 primary cases in default and POSIX environments, and the full 99-fixture
-corpus execution. The separate corpus runner remains the 99-fixture owner. `FUTURE-PARITY-BACKLOG.1.5.3.4`
+a bounded corpus-runner smoke, all 61 primary cases in default and POSIX environments, and the full 105-fixture
+corpus execution. The separate corpus runner remains the 105-fixture owner. `FUTURE-PARITY-BACKLOG.1.5.3.4`
 closes this recurring gate and Dart primary-command no-drift. The canonical local
 gate does not require a Dart SDK by default. When a checkout has
 Dart installed and you want one command to include both gates, run:
@@ -140,7 +149,7 @@ bash tools/run_julia_local.sh
 ```
 
 It runs `Pkg.test()`, the nine-family `tools/check_julia_primary_cli.sh` real-process checker, corpus-runner help,
-and the complete 99-fixture corpus. The Julia
+and the complete 105-fixture corpus. The Julia
 executable and depot are configurable:
 
 ```bash
@@ -175,7 +184,7 @@ JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot julia --project=julia julia
 ```
 
 Validation-only loading remains the default. Adding `--execute` without selectors runs the complete validated
-manifest and passes 99/99; `--case`, `--offset`, and `--limit` remain available for diagnostics. The permanent
+manifest and passes 105/105; `--case`, `--offset`, and `--limit` remain available for diagnostics. The permanent
 aggregate regression locks manifest order, endpoints, 99 passes, zero failures, and exact output for every fixture.
 
 ### Cleaning generated build caches

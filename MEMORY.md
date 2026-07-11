@@ -18,21 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3` — Julia closes exact anonymous/named capture marks.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2` — Dart closed the same governed capture values.
-- recent_context: Julia now stores rule-local named marks as code-unit offsets with character projections, executes
-  every stable/advancing/bridge/boundary/copy/two-mark operation in the governed sources, and surfaces implicit
-  ordered non-repeated AND blind-call results. Full Julia proof is 1,028 package assertions, primary CLI, and 99
-  corpus. Final `.5` must reconcile `start_capture_slice_from`/`mark_capture_slice`, omitted by the provisional
-  shared 237 inventory, before admitting all six fixtures.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5` — exhaustive current capability admission.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3` — Julia closed governed capture/mark semantics.
+- recent_context: the final current ActionIR inventory is 239 names. Strict coverage checks inventory → mdBook/
+  neutral source and neutral current Perl-contract calls → Dart/Julia inventories. Six governed semantic families
+  are now mandatory, raising the exact cross-backend corpus to 105. Rust, Dart, Julia, and full Perl/local gates
+  pass; the census is 51 pass / one partial / eight gap.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3 - complete Julia capture marks`; previous committed HEAD is
-  `004ed0a5 FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2 - complete Dart capture marks`.
+  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 - admit exhaustive capability corpus`; previous committed HEAD is
+  `0fe63298 FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3 - complete Julia capture marks`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2.5` final capability admission is active.
-- next_action: reconcile the two missing governed capture helper names in the shared current-call inventories,
-  admit all six governed fixtures, and prove unchanged 105/105 execution on Perl, Rust, Dart, and Julia.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.2` outward Rust descriptor parity is active.
+- next_action: audit the canonical outward compiled-descriptor contract and Rust's public/internal `CompiledSpec`
+  seam, then split/implement the smallest roadmap-aligned descriptor projection leaf.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
@@ -52,8 +51,8 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   implementations versus the director's four-kind generic final-codeblock model.
 - pivot_guard: User directive 2026-07-06 — never pivot to another task-tree or new task-tree while the repo is dirty
   or not handoff-ready. Even if the user asks, finish/commit/clean the current owned leaf first.
-- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1030`**. Rust oracle = **99** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
+- ENV HAZARD: stale `PERL5LIB=…/pgen/fx/perl` → always `perl -Iperl`; **run phase0 with `PERL5LIB=` cleared** or subprocess tests fail on the stale checkout. Full phase0 needs the **10-min timeout**. Current phase0 reaches **PASS `1..1030`**. Rust oracle = **105** fixtures. `LinkedSpec::Get` takes **flat** option pairs; lowering probe = `call_spec_handler_subst`.
 - noise / deferred: `.claude/projects/` is intentionally ignored; `rgx` remains a tracked submodule with dirty
   worktree ignored by submodule policy. Richer pplugin runtime parity remains a Rust follow-up, but `pplugin.spec`
   source format is closed.
-- blockers: none. in_flight_uncommitted: none after this commit; strict mandatory coverage remains red until `.2.2.5`; generated backend caches are absent after cleanup.
+- blockers: none. in_flight_uncommitted: none after this commit; generated Rust/Dart/Julia caches are absent after cleanup.

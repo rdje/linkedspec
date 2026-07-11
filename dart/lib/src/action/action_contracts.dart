@@ -232,6 +232,7 @@ const supportedActionIrCallNames = <String>{
   'lowercase',
   'lowercase_each',
   'map_leaves',
+  'mark_capture_slice',
   'mark_copy',
   'mark_exists',
   'mark_here',
@@ -311,6 +312,7 @@ const supportedActionIrCallNames = <String>{
   'split_each',
   'split_tagged_records',
   'start_capture_slice',
+  'start_capture_slice_from',
   'starts_with',
   'str_eq',
   'str_ge',
@@ -551,6 +553,7 @@ const _captureMarkHelpers = <String>{
   'capture_take_until_cursor_len_from',
   'capture_until_cursor_from',
   'capture_until_cursor_len_from',
+  'mark_capture_slice',
   'mark_copy',
   'mark_exists',
   'mark_here',
@@ -558,6 +561,7 @@ const _captureMarkHelpers = <String>{
   'mark_input_start',
   'mark_pos',
   'start_capture_slice',
+  'start_capture_slice_from',
 };
 
 const _entryMatchHelpers = <String>{

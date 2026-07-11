@@ -1,11 +1,11 @@
 ---
 id: backend-capability-census
-title: A validated 15-capability census owns every current four-backend parity residual
+title: A validated 15-capability census owns every remaining four-backend parity residual
 answers:
   - where is the LinkedSpec backend capability matrix
   - how many backend capabilities are in the parity census
   - which current capabilities are not yet equal across Perl Rust Dart and Julia
-  - does the 99 fixture corpus prove every LinkedSpec feature
+  - does the 105 fixture corpus prove every current LinkedSpec language feature
   - does Rust expose the backend neutral compiled descriptor
   - does Rust expose structured runtime diagnostics
   - do Rust Dart and Julia have native named spec resolution
@@ -15,17 +15,19 @@ date: 2026-07-10
 status: current
 tags: [parity, capability, matrix, public-api, rust, dart, julia, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.0 adds capability_conformance/manifest.json and tools/check_capability_conformance.pl: 15 capabilities x four backends classify 47 pass, five partial-proof, and eight gap states, each non-pass state with an explicit owner."
+evidence_update_2026_07_10: "FUTURE-PARITY-BACKLOG.1.6.1 closes exhaustive current-language proof at 239 bidirectionally checked ActionIR names and 105 exact fixtures on Perl, Rust, Dart, and Julia. The 60-state census is now 51 pass, one partial, and eight gap."
 reverify: "perl tools/check_capability_conformance.pl && rg -n 'FUTURE-PARITY-BACKLOG.1.6.[0-6]' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 `capability_conformance/manifest.json` is the current user-observable capability census. The checker validates the
 schema, exact backend set, evidence paths, status vocabulary, unique ids, gap ownership, and explicit legacy/future
-exclusions. The initial audit has 15 capability rows and 60 backend states: 47 pass, five partial, and eight gap.
+exclusions. After exhaustive language admission, its 15 rows and 60 backend states classify 51 pass, one partial,
+and eight gap.
 
 The audit distinguishes implementation gaps from proof gaps:
 
-- the unchanged 99-fixture interpreter corpus passes all four backends, but is not yet indexed exhaustively against
-  every current non-legacy mdBook language/helper/API contract; `.1.6.1` owns that neutral proof;
+- the 105-fixture interpreter corpus passes all four backends and is indexed against the 239-name current
+  non-legacy ActionIR surface; `.1.6.1` closed that neutral proof;
 - Perl/Dart/Julia expose the documented outward compiled descriptor, while Rust exposes only its internal/public
   `CompiledSpec` shape; `.1.6.2` owns the projection;
 - Perl/Dart/Julia expose structured runtime diagnostic attribution, while Rust uses a string payload in

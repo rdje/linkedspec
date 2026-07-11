@@ -65,13 +65,14 @@ evidence_update_2026_07_07_14_4: "SPEC-FORMAT-TERSE.14.4 added `terse_14_4_recei
 evidence_update_2026_07_08_12_3: "SPEC-FORMAT-TERSE.12.3 added `terse_12_3_hash_tree_traversal_receiver_blocks` after Rust parser/runtime support for hash-tree receiver blocks `walk_leaves`, `map_leaves`, and `reduce_leaves` landed. `perl -Iperl tools/gen_oracle_corpus.pl` now emits 96 fixtures, and `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference -- --nocapture` passes over all 96 fixtures."
 evidence_update_2026_07_08_13_3: "SPEC-FORMAT-TERSE.13.3 added `terse_13_3_array_tree_traversal_receiver_blocks` after Rust parser/runtime support for array-tree receiver blocks `walk_leaves`, `map_leaves`, and `reduce_leaves` landed. `perl -Iperl tools/gen_oracle_corpus.pl` now emits 97 fixtures, and `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference` passes over all 97 fixtures."
 evidence_update_2026_07_08_spec_source_closeout: "SPEC-SOURCE-TERSE-CLOSEOUT.1 migrated `specs/hlink_substitution.spec` bracket payloads from the historical Perl scalar-reference shape to neutral `capture_slice()` strings, added `hlink_bracket_body` and `hlink_mixed_bracket_brace` to tools/gen_oracle_corpus.pl, regenerated the checked-in corpus to 99 fixtures, and `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference -- --nocapture` passes over all 99 fixtures."
-reverify: "perl -c -Iperl tools/gen_oracle_corpus.pl; ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl 2>&1 | grep 'hard kill during parser build/parse'; perl -Iperl tools/gen_oracle_corpus.pl; rg -n '\"case_count\" : 99|hlink_bracket_body|hlink_mixed_bracket_brace' rust/linkedspec-runtime/tests/corpus/manifest.json; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference"
+evidence_update_2026_07_10_capability_admission: "FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 adds six governed current-surface fixtures for cursor control, pure helpers, positions, marker control, anonymous captures, and named captures. Perl regeneration emits 105 exact fixtures; Rust, Dart, and Julia execute all 105 unchanged outputs."
+reverify: "perl -c -Iperl tools/gen_oracle_corpus.pl; ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl 2>&1 | grep 'hard kill during parser build/parse'; perl -Iperl tools/gen_oracle_corpus.pl; rg -n '\"case_count\" : 105|capability_capture_named_surface' rust/linkedspec-runtime/tests/corpus/manifest.json; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference"
 ---
 
 # Perl↔Rust Output Oracle (RUST-PARITY.7)
 
-**Confirmed 2026-06-17 (RUST-PARITY.7.1); updated 2026-07-08
-(SPEC-SOURCE-TERSE-CLOSEOUT.1).** A language-neutral cross-variant parity gate
+**Confirmed 2026-06-17 (RUST-PARITY.7.1); updated 2026-07-10
+(FUTURE-PARITY-BACKLOG.1.6.1.2.2.5).** A language-neutral cross-variant parity gate
 (ADR 0006 §Phase 8.6). The Perl reference is the behavioral oracle; the corpus is its
 frozen output; `cargo test` validates the Rust backend against it with no Perl in the loop.
 

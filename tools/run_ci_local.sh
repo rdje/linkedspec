@@ -41,7 +41,7 @@ check_no_untracked_ci_inputs() {
   [[ "$status_line" == '?? '* ]] || continue
   printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
   found=1
- done < <(git status --short --untracked-files=all -- .github/workflows bin/linkedspec capability_conformance cli_conformance tools/check_capability_conformance.pl tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl specs conf tablescript ebnf perl t)
+ done < <(git status --short --untracked-files=all -- .github/workflows bin/linkedspec capability_conformance cli_conformance tools/check_capability_conformance.pl tools/check_language_capability_coverage.pl tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl specs conf tablescript ebnf perl t)
 
  (( found == 0 )) || exit 1
 }
@@ -58,7 +58,7 @@ audit_no_machine_specific_absolute_paths() {
    printf '[ci] ERROR: machine-specific absolute path(s) in %s:\n%s\n' "$path" "$matches" >&2
    found=1
   fi
- done < <(git ls-files -- .github/workflows/ci.yml bin/linkedspec capability_conformance cli_conformance tools/check_capability_conformance.pl tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl t/phase0_regression.t t/trace_cli.t t/cli_conformance_runner.t perl/LinkedSpec.pm perl/LinkedSpec)
+ done < <(git ls-files -- .github/workflows/ci.yml bin/linkedspec capability_conformance cli_conformance tools/check_capability_conformance.pl tools/check_language_capability_coverage.pl tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh tools/run_julia_local.sh tools/run_primary_cli_matrix.sh tools/run_cli_conformance.pl t/phase0_regression.t t/trace_cli.t t/cli_conformance_runner.t perl/LinkedSpec.pm perl/LinkedSpec)
 
  (( found == 0 )) || exit 1
 }
@@ -81,6 +81,7 @@ require_tracked_file tools/run_julia_local.sh
 require_tracked_file tools/run_primary_cli_matrix.sh
 require_tracked_file tools/run_cli_conformance.pl
 require_tracked_file tools/check_capability_conformance.pl
+require_tracked_file tools/check_language_capability_coverage.pl
 require_tracked_file bin/linkedspec
 require_tracked_file capability_conformance/manifest.json
 require_tracked_file cli_conformance/manifest.json
@@ -115,6 +116,7 @@ perl -c perl/LinkedSpec.pm
 perl -c bin/linkedspec
 perl -c tools/run_cli_conformance.pl
 perl -c tools/check_capability_conformance.pl
+perl -c tools/check_language_capability_coverage.pl
 perl -c -Iperl t/actionir_ast_parser.t
 perl -c -Iperl t/cli_conformance_runner.t
 perl -c -Iperl t/trace_cli.t
@@ -122,6 +124,9 @@ perl -c -Iperl t/phase0_regression.t
 
 log "checking machine-readable backend capability census"
 perl tools/check_capability_conformance.pl
+
+log "checking exhaustive current ActionIR documentation and neutral corpus coverage"
+perl tools/check_language_capability_coverage.pl
 
 log "running ActionIR AST parser focused suite"
 prove -Iperl t/actionir_ast_parser.t

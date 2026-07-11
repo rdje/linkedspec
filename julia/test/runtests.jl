@@ -1180,6 +1180,8 @@ end
     @test is_known_action_ir_call_name("entry_end_line")
     @test is_known_action_ir_call_name("match_end_line")
     @test is_known_action_ir_call_name("capture_until_boundary")
+    @test is_known_action_ir_call_name("mark_capture_slice")
+    @test is_known_action_ir_call_name("start_capture_slice_from")
     @test !is_known_action_ir_call_name("BACKTRACK")
     @test !is_known_action_ir_call_name("IBACKTRACK")
     @test !is_known_action_ir_call_name("mystery_helper")
@@ -4188,7 +4190,7 @@ end
 
     @test validation.root == CORPUS_ROOT
     @test validation.manifest.format == 1
-    @test validation.manifest.case_count == 99
+    @test validation.manifest.case_count == 105
     @test length(validation.manifest.cases) == validation.manifest.case_count
     @test length(validation.fixtures) == validation.manifest.case_count
     @test validation.fixtures[1].name == "proof_edge_array_literal"
@@ -4199,7 +4201,7 @@ end
     cli_error = IOBuffer()
     @test run_corpus_runner(["--corpus", CORPUS_ROOT]; io = cli_output, err = cli_error) == 0
     cli_text = String(take!(cli_output))
-    @test occursin("fixtures: 99", cli_text)
+    @test occursin("fixtures: 105", cli_text)
     @test occursin("manifest validated", cli_text)
     @test isempty(String(take!(cli_error)))
 
@@ -4600,7 +4602,7 @@ end
     execution = execute_corpus_fixtures(CORPUS_ROOT; offset = 0, limit = 40)
     failures = ["$(result.name): $(result.failure)" for result in corpus_failures(execution)]
 
-    @test execution.validation.manifest.case_count == 99
+    @test execution.validation.manifest.case_count == 105
     @test length(execution.results) == 40
     @test first(execution.results).name == "proof_edge_array_literal"
     @test last(execution.results).name == "terse_2_2_5_2_attached_switch_blocks"
@@ -4757,7 +4759,7 @@ end
         for result in execution.results if !corpus_fixture_passed(result)
     ]
 
-    @test execution.validation.manifest.case_count == 99
+    @test execution.validation.manifest.case_count == 105
     @test length(execution.results) == 31
     @test (first(execution.results).name, last(execution.results).name) ==
           ("tclite_command_subst", "lib_reader_cattribute")
@@ -4792,12 +4794,12 @@ end
     ]
 
     @test execution.validation.manifest.format == 1
-    @test execution.validation.manifest.case_count == 99
-    @test length(execution.results) == 99
+    @test execution.validation.manifest.case_count == 105
+    @test length(execution.results) == 105
     @test [result.name for result in execution.results] == execution.validation.manifest.cases
     @test (first(execution.results).name, last(execution.results).name) ==
-          ("proof_edge_array_literal", "lib_reader_cattribute")
-    @test corpus_passed_count(execution) == 99
+          ("proof_edge_array_literal", "capability_capture_named_surface")
+    @test corpus_passed_count(execution) == 105
     @test isempty(failures)
     @test all(result -> result.actual_output == Any[result.expected_json], execution.results)
 end

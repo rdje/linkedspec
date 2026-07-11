@@ -1,6 +1,6 @@
 ---
 id: julia-mdbook-usage-status
-title: Julia mdBook usage and status describe the native 99 of 99 interpreter boundary
+title: Julia mdBook usage and status describe the native 105-case interpreter boundary
 answers:
   - where does the mdBook document Julia usage
   - what Julia commands should the book show
@@ -14,6 +14,7 @@ date: 2026-07-10
 status: current
 tags: [julia, mdbook, documentation, parity, embedding, limitations, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.7.1 documents native usage and 99/99; FUTURE-PARITY-BACKLOG.1.5.4.2 documents canonical trace, 1,019 assertions, and 61/61 default/POSIX CLI identity."
+evidence_update_2026_07_10: "FUTURE-PARITY-BACKLOG.1.6.1 closes exhaustive language proof at 239 names and raises Julia's current package/corpus proof to 1,036 assertions and 105/105 exact outputs."
 reverify: "rg -n 'Julia Backend Commands, Embedding, and Status|Julia in-memory example|runtime-corpus-primary-cli|check_julia_primary_cli|run_julia_local|LINKEDSPEC_RUN_JULIA|generated Julia source' docs/linkedspec-book/src/appendix/backend-handoff.md docs/linkedspec-book/src/public-api/get-and-get-parser.md docs/linkedspec-book/src/public-api/trace-api.md docs/linkedspec-book/src/overview/project-status.md docs/linkedspec-book/src/development/local-ci-and-regression.md docs/tasks/JULIA-BACKEND-PARITY.md && mdbook build docs/linkedspec-book"
 ---
 
@@ -30,7 +31,7 @@ bash tools/run_julia_local.sh
 ```
 
 Direct package/full-corpus commands and opt-in shared CI through `LINKEDSPEC_RUN_JULIA=1` are also documented.
-The current local boundary is 99/99 exact corpus outputs, 1,019 package assertions, nine direct process families,
+The current local boundary is 105/105 exact corpus outputs, 1,036 package assertions, nine direct process families,
 and package/CLI status `runtime-corpus-primary-cli`.
 
 The limitations are explicit. Generated Julia source is not part of the current interpreter gate; `.7.2` defers
@@ -40,7 +41,7 @@ emitter parse/validation/compile/function-shell/staged trace coverage. `.7.3.2.2
 loading, `.7.3.2.3` closes native execution/direct canonical JSON, `.7.3.2.4` closes normalized errors/exits/trace
 routing, and `.7.3.2.5` closes direct-process no-drift. Global `.1.5.4.1`/`.2` then close exact boundary and
 canonical trace at 61/61; `.1.5.4.3` now closes recurring matrix integration. The Julia root remains delegated to
-global `.1.6` and `.3` rather than being presented as complete parity. `JuliaFormatter`
+remaining global `.1.6` outward-capability leaves and `.3` rather than being presented as complete parity. `JuliaFormatter`
 and `JET` remain optional local tooling rather than behavior prerequisites.
 
 Related facts: [[user-observable-backend-cli-parity-contract]], [[julia-generated-source-deferred]], [[julia-local-verification-gate]], [[julia-full-corpus-gate]],

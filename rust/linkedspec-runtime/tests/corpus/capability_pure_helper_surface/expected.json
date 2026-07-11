@@ -1,0 +1,47 @@
+[
+   {
+      "coalesce" : "fallback",
+      "concat_arrays" : [
+         1,
+         2,
+         3
+      ],
+      "contains" : 1,
+      "contains_substr" : 1,
+      "ends_with" : 1,
+      "flat" : [
+         "x",
+         "y",
+         "z"
+      ],
+      "has_key" : 1,
+      "num_abs" : 3,
+      "num_avg" : 4,
+      "num_ceil" : 3,
+      "num_clamp" : 10,
+      "num_div" : 3,
+      "num_floor" : 2,
+      "num_ge" : 1,
+      "num_le" : 1,
+      "num_median" : 3,
+      "num_mod" : 2,
+      "num_mul" : 12,
+      "num_ne" : 1,
+      "num_range" : 8,
+      "num_round" : 3,
+      "num_sum" : 6,
+      "slice" : [
+         "b",
+         "c"
+      ],
+      "starts_with" : 1,
+      "take_last" : [
+         "b",
+         "c"
+      ],
+      "uppercase_each" : [
+         "A",
+         "BC"
+      ]
+   }
+]

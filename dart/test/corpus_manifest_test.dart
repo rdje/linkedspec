@@ -334,7 +334,7 @@ void main() {
           .join('\n'),
       isEmpty,
     );
-    expect(result.validation.manifest.caseCount, 99);
+    expect(result.validation.manifest.caseCount, 105);
     expect(result.results, hasLength(result.validation.manifest.caseCount));
     expect(result.passed, isTrue);
     expect(result.passedCount, result.validation.manifest.caseCount);

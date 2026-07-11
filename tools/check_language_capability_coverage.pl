@@ -6,7 +6,10 @@ use Cwd qw(abs_path);
 use File::Basename qw(dirname);
 use File::Find qw(find);
 use File::Spec;
+use FindBin qw($Bin);
 use JSON::PP qw(decode_json);
+use lib "$Bin/../perl";
+use LinkedSpec::RuleIR::EmitContext ();
 
 my $repo_root = abs_path(File::Spec->catdir(dirname(__FILE__), '..'));
 my $report_only = 0;
@@ -65,6 +68,14 @@ for my $name (@dart) {
  fail("duplicate current call name '$name'") if $seen{$name}++;
 }
 
+my $perl_contracts = LinkedSpec::RuleIR::EmitContext::_build_action_lowering_contracts('Top');
+my %perl_current_contract;
+for my $contract (@{$perl_contracts}) {
+ next if $contract->{compatibility_surface};
+ my $name = $contract->{diag_name};
+ $perl_current_contract{$name} = 1 if defined($name) && $name =~ /^[A-Za-z_]\w*\z/;
+}
+
 my $book_source = '';
 my $book_root = File::Spec->catdir($repo_root, 'docs', 'linkedspec-book', 'src');
 find(
@@ -98,6 +109,13 @@ for my $name (@dart) {
  push @missing_corpus, $name unless $corpus_source =~ $corpus_pattern;
 }
 
+my %neutral_perl_contract_call;
+while ($corpus_source =~ /\b([A-Za-z_]\w*)\s*\(/g) {
+ my $name = $1;
+ $neutral_perl_contract_call{$name} = 1 if $perl_current_contract{$name};
+}
+my @missing_reference_contract = grep { !$seen{$_} } sort keys %neutral_perl_contract_call;
+
 if ($report_only) {
  printf "language-capability-coverage: REPORT (%d current call names; %d neutral fixtures)\n",
   scalar(@dart), scalar(@{$manifest->{cases}});
@@ -105,11 +123,16 @@ if ($report_only) {
   @missing_book ? ' (' . join(', ', @missing_book) . ')' : '';
  printf "  missing from neutral corpus source: %d%s\n", scalar(@missing_corpus),
   @missing_corpus ? ' (' . join(', ', @missing_corpus) . ')' : '';
+ printf "  neutral Perl contract calls missing from backend inventories: %d%s\n",
+  scalar(@missing_reference_contract),
+  @missing_reference_contract ? ' (' . join(', ', @missing_reference_contract) . ')' : '';
  exit 0;
 }
 
 fail('current call names missing from the mdBook: ' . join(', ', @missing_book)) if @missing_book;
 fail('current call names missing from neutral corpus source: ' . join(', ', @missing_corpus)) if @missing_corpus;
+fail('neutral current Perl contract calls missing from Dart/Julia inventories: ' .
+ join(', ', @missing_reference_contract)) if @missing_reference_contract;
 
 printf "language-capability-coverage: OK (%d current call names documented and present in %d neutral fixtures)\n",
  scalar(@dart), scalar(@{$manifest->{cases}});
