@@ -32,7 +32,8 @@ use crate::error::{LinkedSpecError, Result};
 use crate::expr::CodeBlock;
 use crate::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use crate::types::{
-    AcodeEntry, BcodeEntry, CompiledRule, CompiledSpec, CompiledUserFunction, ParseMode,
+    AcodeEntry, BcodeEntry, CompiledRule, CompiledSpec, CompiledUserFunction, DependencyRef,
+    ParseMode,
 };
 
 /// Compile a parsed `SpecFile` into a `CompiledSpec` ready for the runtime.
@@ -268,6 +269,7 @@ fn is_unsupported_actionir_helper_error(error: &str) -> bool {
 
 fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
     let mut regex_patterns: Vec<String> = Vec::new();
+    let mut dependency_refs: Vec<DependencyRef> = Vec::new();
     let mut acode_dispatch: Vec<AcodeEntry> = Vec::new();
     let mut bcode_dispatch: Vec<BcodeEntry> = Vec::new();
     let mut preamble: Option<CodeBlock> = None;
@@ -320,6 +322,10 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
 
                 for target in targets {
                     let child_regex_idx = target.index; // from `-> rule[N]`
+                    dependency_refs.push(DependencyRef {
+                        label: target.label.clone(),
+                        index: child_regex_idx,
+                    });
                     acode_dispatch.push(AcodeEntry {
                         regex_idx: triggering_regex_idx,
                         child_label: target.label.clone(),
@@ -339,6 +345,10 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                 fluent_chain,
             } => {
                 last_regex_line = None;
+                dependency_refs.push(DependencyRef {
+                    label: target.clone(),
+                    index: 0,
+                });
                 let parsed_code = code
                     .as_deref()
                     .map(|c| parse_rule_code_block(&rule.header.label, "blind-call", c))
@@ -421,6 +431,7 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
         parse_mode,
         mode: rule.header.mode.clone(),
         regex_patterns,
+        dependency_refs,
         acode_dispatch,
         bcode_dispatch,
         preamble,

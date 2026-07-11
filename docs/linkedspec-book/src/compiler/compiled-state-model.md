@@ -80,6 +80,12 @@ runs through the compiled ActionIR body. The Rust runtime resolves those compile
 executes them in fresh function-local variable stores, restores caller stores after return, and supports
 compatible receiver chains and standalone discard.
 
+Rust also projects its compiled state outward through `CompiledSpec::descriptor_state()` and
+`CompiledSpec::to_descriptor_json()`. The typed records live in `linkedspec_core::descriptor`, preserve ordered
+rule dependencies and staged function metadata, derive deterministic definition/compile/redefinition order, and
+remain independent of the runtime engine. `CompiledRule.dependency_refs` preserves source order explicitly;
+deserialized older compiled state can still derive the same public refs from dispatch entries.
+
 The Dart backend now has the same compiled-state boundary. `compileSpec(...)` in
 `dart/lib/src/compiler/compiled_spec.dart` validates parsed `SpecFile` input by default, builds ordered
 `CompiledSpec` / `CompiledRule` records, carries the `UserFunctionRegistry`, records mode metadata, regexes,

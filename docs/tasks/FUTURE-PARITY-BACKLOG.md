@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-11` (canonical descriptor identity `.1.6.2.1` closed; Rust projection `.1.6.2.2` active).
+- Last updated: `2026-07-11` (Rust outward descriptor projection `.1.6.2.2` closed; four-backend admission `.1.6.2.3` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -979,20 +979,31 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.2.1 - reconcile descriptor model identity`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.2.2`
-  Status: `active`
+  Status: `done`
   Goal: Add an idiomatic Rust outward descriptor projection over existing compiled state.
   Acceptance: Public Rust APIs project deterministic `spec`, `functions`, `dependency_regex_map`, and `meta`
     values, including rule dependency refs and preserved staged function metadata, without coupling callers to the
     runtime engine or changing execution/serialization compatibility; focused shape/round-trip tests pass.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `linkedspec-core::descriptor` exports typed serializable descriptor, rule, dependency-regex,
+    function, mode, handler, and metadata records. `CompiledSpec::descriptor_state()` and
+    `to_descriptor_json()` project the four public keys without a runtime-engine dependency. Compilation now
+    preserves ordered `DependencyRef` values on `CompiledRule`; old serialized state remains readable through the
+    default plus dispatch-derived fallback. Three focused tests prove exact shape/staged metadata, compiled-state
+    JSON round-trip identity, and deterministic last-definition projection. The full core package passes. The full
+    Rust gate passes formatting, 137 runtime, 105 oracle, 196 integration, three generated-source, ten trace, and
+    61x2 CLI cases. Strict clippy reports only 14 pre-existing errors in untouched files and none in this leaf.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.2.2 - expose Rust compiled descriptors`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.2.3`
-  Status: `pending`
+  Status: `active`
   Goal: Admit and close four-backend outward descriptor parity.
   Acceptance: Focused neutral shape evidence proves the documented top-level keys, metadata identities/order,
     rule/dependency semantics, and staged function fields across Perl/Rust/Dart/Julia; update the census from
     partial/gap to pass, synchronize public/live docs, run recurring gates, and advance to `.1.6.3`.
+    The final comparison must also resolve the outer function-record convention exposed by `.2`: Perl uses
+    `kind`/`version`/`source_text` without `index`, Dart/Julia use `index`/`source` without `kind`/`version`, and
+    Rust currently publishes the neutral-definition identity plus `index`. Nested `body_payload`,
+    `body_parse_job`, and `body_ast` semantics are already aligned.
   Verification: `pending`
   Commit: `pending`
 
@@ -1262,8 +1273,8 @@ before implementation.
 | 44 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.5` | `done` | Corrected 239-name inventory, Perl-contract reverse check, six governed admissions, and exact 105/105 four-backend proof; `.1.6.1` closes. |
 | 45 | `FUTURE-PARITY-BACKLOG.1.6.2.0` | `done` | Toolbox/source audit found stale Perl descriptor-model identity and split reconciliation, Rust projection, and final admission. |
 | 46 | `FUTURE-PARITY-BACKLOG.1.6.2.1` | `done` | Perl now reports the composing descriptor state plus explicit nested model identities; Phase 0 `1..1030` passes. |
-| 47 | `FUTURE-PARITY-BACKLOG.1.6.2.2` | `active` | Add Rust's idiomatic outward descriptor projection. |
-| 48 | `FUTURE-PARITY-BACKLOG.1.6.2.3` | `pending` | Prove/admit four-backend descriptor parity and close `.1.6.2`. |
+| 47 | `FUTURE-PARITY-BACKLOG.1.6.2.2` | `done` | Typed Rust descriptor state/JSON, ordered dependency refs, staged metadata, round trips, and full Rust gate pass. |
+| 48 | `FUTURE-PARITY-BACKLOG.1.6.2.3` | `active` | Normalize outer function records, prove/admit four-backend descriptor parity, and close `.1.6.2`. |
 | 49 | `FUTURE-PARITY-BACKLOG.1.6.3` | `pending` | Add structured Rust native runtime diagnostics. |
 | 50 | `FUTURE-PARITY-BACKLOG.1.6.4` | `pending` | Add native named/file resolution to Rust, Dart, and Julia. |
 | 51 | `FUTURE-PARITY-BACKLOG.1.6.5` | `pending` | Extend Dart native trace through frontend/compiler/function-shell/staged phases. |

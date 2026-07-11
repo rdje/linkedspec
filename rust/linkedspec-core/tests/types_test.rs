@@ -28,6 +28,7 @@ fn compiled_rule_json_roundtrip() {
         parse_mode: ParseMode::Seek,
         mode: RuleMode::Default,
         regex_patterns: vec!["hello".into(), "world".into()],
+        dependency_refs: Vec::new(),
         acode_dispatch: vec![AcodeEntry {
             regex_idx: 0,
             child_label: "Child".into(),
@@ -68,6 +69,7 @@ fn compiled_spec_json_roundtrip() {
                 parse_mode: ParseMode::Seek,
                 mode: RuleMode::Default,
                 regex_patterns: vec!["/a/".into()],
+                dependency_refs: Vec::new(),
                 acode_dispatch: vec![AcodeEntry {
                     regex_idx: 0,
                     child_label: "Child".into(),
@@ -93,6 +95,7 @@ fn compiled_spec_json_roundtrip() {
                 parse_mode: ParseMode::Consume,
                 mode: RuleMode::And,
                 regex_patterns: vec!["/b/".into()],
+                dependency_refs: Vec::new(),
                 acode_dispatch: vec![],
                 bcode_dispatch: Vec::new(),
                 preamble: None,

@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.2.2 — project public state without making it runtime state):
+  Keep the engine's `CompiledSpec` as execution truth and implement introspection as an owned typed projection.
+  Preserve only information that cannot be reconstructed reliably—dependency refs in source order—on compiled
+  rules; derive maps, combined patterns, and deterministic orders at the public boundary. A serde-defaulted field
+  plus dispatch fallback keeps older serialized state readable. Also compare complete function records, not only
+  nested staged payloads: semantic alignment can coexist with user-visible outer field drift.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.1.6.2.1 — name composed and nested models independently):
   One metadata field cannot accurately identify both an outward composed object and one of its components. Keep
   `descriptor_model` for the public composition, then expose `compiled_spec_model` and

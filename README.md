@@ -210,8 +210,8 @@ Top-level project docs:
   split pure, position, marker-control, and capture/mark repairs under `.1.6.1.2.2`. Those repairs and final
   admission are closed: the corrected shared inventory contains 239 current names, every name is present in the
   mdBook and neutral source, current Perl contract calls are reverse-checked, and all four backends pass the
-  expanded 105-case corpus exactly. Descriptor identity `.1.6.2.1` is now canonical on Perl/Dart/Julia; active
-  `.1.6.2.2` adds Rust's outward projection before final admission.
+  expanded 105-case corpus exactly. Descriptor identity `.1.6.2.1` and typed Rust projection `.1.6.2.2` are
+  closed; active `.1.6.2.3` normalizes outer function records and admits exact four-backend parity.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
   {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven baseline success, four baseline

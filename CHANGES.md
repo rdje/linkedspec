@@ -1,6 +1,23 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.2.2 — expose Rust compiled descriptors
+
+**Typed public API:** `linkedspec_core::descriptor` now exports serializable descriptor, rule, handler, mode,
+dependency-regex, function, and metadata records. `CompiledSpec::descriptor_state()` returns the typed public
+projection and `to_descriptor_json()` returns its JSON form, with no runtime-engine dependency.
+
+**Stable state projection:** Compilation preserves ordered `DependencyRef` records on each `CompiledRule`.
+Projection derives deterministic definition/last-definition compile/redefinition order, combined dependency
+patterns, model identities, function order/count, and staged `body_payload` / `body_parse_job` / `body_ast`.
+Older serialized compiled state remains readable and can derive refs from dispatch entries.
+
+**Proof/frontier:** Three focused tests prove exact shape, staged metadata, compiled-state JSON round trips, and
+last-definition determinism. The complete core package and Rust gate pass: formatting, 137 runtime, 105 oracle,
+196 integration, three generated-source, ten trace, and 61x2 CLI cases. Strict clippy reports only 14 pre-existing
+errors in untouched files. Rust moves gap → partial; `.1.6.2.3` owns exact outer function-record normalization and
+final admission.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.1.6.2.1 — reconcile descriptor model identity
 
 **Canonical metadata:** Perl outward descriptors now identify the composing `compiled_descriptor_state` and name

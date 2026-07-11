@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.2.1` — canonical outward descriptor identities.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.2.0` — descriptor audit/split.
-- recent_context: Perl now matches the book/Dart/Julia: `descriptor_model=compiled_descriptor_state` plus explicit
-  `compiled_spec_model` and `compiled_dependency_regex_model`. Exact probe and Phase 0 `1..1030` pass in 509s.
-  Rust still has no outward projection; census is 51 pass / one partial / eight gap.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.2.2` — typed Rust outward descriptor projection.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.2.1` — canonical descriptor identities.
+- recent_context: Rust `descriptor_state()` / `to_descriptor_json()` expose the four public keys with ordered refs,
+  deterministic metadata, dependency patterns, and staged functions. Full Rust gate passes. Outer function records
+  still differ across variants; census is 51 pass / two partial / seven gap pending `.1.6.2.3`.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.2.1 - reconcile descriptor model identity`; previous committed HEAD is
-  `d0d8005f FUTURE-PARITY-BACKLOG.1.6.2.0 - split outward descriptor parity`.
+  `FUTURE-PARITY-BACKLOG.1.6.2.2 - expose Rust compiled descriptors`; previous committed HEAD is
+  `f1d82ddc FUTURE-PARITY-BACKLOG.1.6.2.1 - reconcile descriptor model identity`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.2.2` Rust outward descriptor projection is active.
-- next_action: implement public Rust descriptor state/JSON projection with deterministic rule/function/dependency/
-  metadata shapes over existing `CompiledSpec`, then add focused neutral shape and round-trip locks.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.2.3` four-backend descriptor admission is active.
+- next_action: choose and enforce one outer function-record convention across Perl/Rust/Dart/Julia, add a neutral
+  four-backend descriptor shape gate, promote the capability row to pass, and advance to `.1.6.3`.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

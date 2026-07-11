@@ -17,7 +17,7 @@ It also exposes a generated-source path (`linkedspec_runtime::source_emitter`) t
 `CompiledSpec`, a validated rule-family plan, and a `parse(input)` entry point. Generated parsers now route through a
 plan-aware executor: default, OR acode, AND acode, AND bcode, OR bcode, REP acode, REP bcode, REP-AND acode, and
 REP-AND bcode families run directly. The generated-source test harness validates every supported structural family
-and a manifest-backed corpus subset; the full 99-fixture corpus remains the interpreter oracle gate.
+and a manifest-backed corpus subset; the full 105-fixture corpus remains the interpreter oracle gate.
 
 ## Quick Start
 
@@ -26,6 +26,32 @@ cd rust/
 cargo build
 cargo test
 ```
+
+### Compiled descriptor introspection
+
+Rust exposes the backend-neutral outward descriptor directly from its in-memory compiled state:
+
+```rust
+use linkedspec_core::compiler::compile;
+use linkedspec_core::parser::parse_spec;
+
+let spec = parse_spec("Top::\n -> Child\n\nChild:\n /x/\n")?;
+let compiled = compile(&spec)?;
+
+let typed = compiled.descriptor_state();
+assert_eq!(typed.meta.descriptor_model, "compiled_descriptor_state");
+assert_eq!(typed.meta.compiled_rule_order, ["Top", "Child"]);
+assert_eq!(typed.spec["Top"].dependency_refs[0].label, "Child");
+
+let json = compiled.to_descriptor_json()?;
+assert!(json.get("dependency_regex_map").is_some());
+# Ok::<(), Box<dyn std::error::Error>>(())
+```
+
+`descriptor_state()` returns typed, serializable records from `linkedspec_core::descriptor`;
+`to_descriptor_json()` returns the same public `spec` / `functions` / `dependency_regex_map` / `meta` projection
+as JSON. Neither API depends on `linkedspec-runtime` or launches a subprocess. Runtime execution continues to use
+`CompiledSpec` directly.
 
 ## Architecture
 

@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.2.2 — expose Rust compiled descriptors**
+  (DONE — typed Rust projection closed; four-backend admission `.1.6.2.3` active).
+
+  **Implementation:** Public typed `descriptor_state()` and JSON `to_descriptor_json()` project `spec`,
+  `functions`, `dependency_regex_map`, and `meta` directly from `CompiledSpec`. Ordered dependency refs and staged
+  function metadata survive compiled-state round trips; runtime execution remains independent.
+
+  **Proof:** Three focused descriptor tests, full core package, formatting, 137 runtime, 105 oracle, 196
+  integration, three generated-source, ten trace, and 61x2 CLI cases pass. Strict clippy finds only 14 pre-existing
+  untouched-file errors.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.2.1 — reconcile descriptor model identity**
   (DONE — Perl/Dart/Julia identity aligned; Rust projection `.1.6.2.2` active).
 

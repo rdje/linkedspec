@@ -255,6 +255,16 @@ pub struct BcodeEntry {
     pub fluent_chain: Vec<(String, String)>,
 }
 
+/// A rule dependency reference in source order.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct DependencyRef {
+    /// Referenced rule label.
+    pub label: String,
+    /// Zero-based regex slot in the referenced rule.
+    #[serde(rename = "idx")]
+    pub index: usize,
+}
+
 /// A compiled rule specification — the output of the compiler, input to the runtime.
 ///
 /// This is the Rust-native equivalent of what the Perl variant achieves through
@@ -273,6 +283,9 @@ pub struct CompiledRule {
     pub mode: crate::ast::RuleMode,
     /// Regex patterns for this rule (compiled from `/pattern/` body elements).
     pub regex_patterns: Vec<String>,
+    /// Ordered child-regex dependencies from action and blind-call edges.
+    #[serde(default)]
+    pub dependency_refs: Vec<DependencyRef>,
     /// Action edge dispatch: fires when the matching regex alternative matches.
     pub acode_dispatch: Vec<AcodeEntry>,
     /// Blind-call dispatch: ordered list of entries for `=> child` edges.

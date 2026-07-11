@@ -237,7 +237,33 @@ The outward descriptor is a projection of those models for public/tooling consum
 
 That distinction is important. The public descriptor is useful, but it is not the same thing as saying the compiler should reason from loose historical parallel hashes internally.
 
-Perl, Dart, and Julia expose the top-level projection with the same model identities: `descriptor_model` names the
-composing `compiled_descriptor_state`, while `compiled_spec_model` and `compiled_dependency_regex_model` name its
-two nested states. Rust publicly exposes serializable `CompiledSpec` but not the outward projection;
-`.1.6.2.2` owns it, and `.1.6.2.3` owns final four-backend admission.
+## Rust in-memory descriptor API
+
+Rust projects the same public concept without depending on its runtime engine:
+
+```rust
+use linkedspec_core::compiler::compile;
+use linkedspec_core::parser::parse_spec;
+
+let spec = parse_spec("Top::\n -> Child\n\nChild:\n /x/\n")?;
+let compiled = compile(&spec)?;
+
+let descriptor = compiled.descriptor_state();
+assert_eq!(descriptor.meta.descriptor_model, "compiled_descriptor_state");
+assert_eq!(descriptor.meta.compiled_rule_order, ["Top", "Child"]);
+assert_eq!(descriptor.spec["Top"].dependency_refs[0].label, "Child");
+
+let json = compiled.to_descriptor_json()?;
+assert!(json.get("functions").is_some());
+# Ok::<(), Box<dyn std::error::Error>>(())
+```
+
+`descriptor_state()` returns typed serializable records from `linkedspec_core::descriptor`.
+`to_descriptor_json()` returns their JSON representation. Both are projections over `CompiledSpec`; neither
+launches a subprocess or requires `linkedspec-runtime`. Ordered `dependency_refs`, function order, staged
+`body_payload` / `body_parse_job` / `body_ast`, definition order, last-definition compile order, and model
+identities survive compiled-state serialization round trips.
+
+All four implemented variants now expose the top-level projection and composing/nested model identities. Rust's
+typed/API implementation is complete under `.1.6.2.2`. Final admission `.1.6.2.3` still owns one outer
+user-function-record convention mismatch; the nested staged payload, job, and AST semantics already align.

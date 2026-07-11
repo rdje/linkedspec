@@ -18,20 +18,21 @@ evidence: "FUTURE-PARITY-BACKLOG.1.6.0 adds capability_conformance/manifest.json
 evidence_update_2026_07_10: "FUTURE-PARITY-BACKLOG.1.6.1 closes exhaustive current-language proof at 239 bidirectionally checked ActionIR names and 105 exact fixtures on Perl, Rust, Dart, and Julia. The 60-state census is now 51 pass, one partial, and eight gap."
 evidence_update_2026_07_11: "FUTURE-PARITY-BACKLOG.1.6.2.0 uses return_descriptor to prove Perl's projection has the stale descriptor_model value compiled_spec_state_v1 while its composing owner, mdBook, Dart, and Julia use compiled_descriptor_state. The census is now 50 pass, two partial, and eight gap until .1.6.2.1 reconciles the public tag."
 evidence_update_2026_07_11_identity: "FUTURE-PARITY-BACKLOG.1.6.2.1 changes Perl descriptor_model to compiled_descriptor_state and adds explicit compiled_spec_model / compiled_dependency_regex_model identities, matching Dart/Julia and the mdBook. Phase 0 1..1030 passes; the census returns to 51 pass, one partial, and eight gap while Rust projection remains active."
+evidence_update_2026_07_11_rust_descriptor: "FUTURE-PARITY-BACKLOG.1.6.2.2 adds typed Rust descriptor_state/to_descriptor_json projection with ordered dependency refs, staged function metadata, deterministic order, and compiled-state round-trip proof. The census is 51 pass, two partial, and seven gap until .1.6.2.3 normalizes outer function records and admits the row."
 reverify: "perl tools/check_capability_conformance.pl && rg -n 'FUTURE-PARITY-BACKLOG.1.6.[0-6]' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 `capability_conformance/manifest.json` is the current user-observable capability census. The checker validates the
 schema, exact backend set, evidence paths, status vocabulary, unique ids, gap ownership, and explicit legacy/future
-exclusions. After descriptor-model reconciliation, its 15 rows and 60 backend states classify 51 pass, one partial,
-and eight gap.
+exclusions. After Rust descriptor projection, its 15 rows and 60 backend states classify 51 pass, two partial, and
+seven gap.
 
 The audit distinguishes implementation gaps from proof gaps:
 
 - the 105-fixture interpreter corpus passes all four backends and is indexed against the 239-name current
   non-legacy ActionIR surface; `.1.6.1` closed that neutral proof;
-- Perl/Dart/Julia expose the outward descriptor with aligned composing/nested model identities; Rust exposes only
-  its internal/public `CompiledSpec` shape, so `.1.6.2.2` owns the projection;
+- all four expose outward descriptors and aligned model identities; `.1.6.2.3` owns exact outer function-record
+  normalization and final admission;
 - Perl/Dart/Julia expose structured runtime diagnostic attribution, while Rust uses a string payload in
   `LinkedSpecError::Runtime`; `.1.6.3` owns the structured record;
 - the native file-oriented named-spec role exists only as Perl `get_parser(...)`; Rust/Dart/Julia process adapters

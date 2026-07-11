@@ -38,7 +38,7 @@
       "gap_owner": "FUTURE-PARITY-BACKLOG.1.6.2",
       "backends": {
         "perl": {"status": "pass", "references": ["perl/LinkedSpec.pm", "perl/LinkedSpec/CompilerState.pm", "t/phase0_regression.t"]},
-        "rust": {"status": "gap", "references": ["rust/linkedspec-core/src/types.rs"], "note": "CompiledSpec is public and serializable but has no documented outward descriptor projection."},
+        "rust": {"status": "partial", "references": ["rust/linkedspec-core/src/descriptor.rs", "rust/linkedspec-core/tests/descriptor_test.rs"], "note": "Typed descriptor_state/to_descriptor_json projection and focused/full Rust gates pass; .1.6.2.3 owns exact four-backend outer function-record normalization and final admission."},
         "dart": {"status": "pass", "references": ["dart/lib/src/compiler/compiled_spec.dart"]},
         "julia": {"status": "pass", "references": ["julia/src/compiler/CompiledSpec.jl"]}
       }
