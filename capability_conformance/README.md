@@ -39,5 +39,6 @@ The census intentionally records proof quality separately from implementation be
 does not by itself prove every helper and API described by the mdBook; `FUTURE-PARITY-BACKLOG.1.6.1` owns that
 coverage mapping. Generated source remains separately owned by `FUTURE-PARITY-BACKLOG.3`. `.3.1.0` demonstrated
 why execution proof matters by exposing Perl's lost dependency indexes; `.3.1.2` repairs that mechanism and passes
-focused contract proof. Rust v1 identity/metadata/errors plus exact neutral plan/direct result/trace roles now align
-through `.3.1.3.2`. Perl and Rust remain partial until joint baseline admission `.3.1.3.3`.
+focused contract proof. Rust v1 identity/metadata/errors plus exact neutral plan/direct result/trace roles align.
+Admission `.3.1.3.3` promotes Perl to pass; Rust remains partial solely for 8/105 generated breadth under `.3.2`.
+The current census is 57 pass / one partial / two gaps.

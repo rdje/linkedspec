@@ -149,7 +149,7 @@
     "new_backend_admission_target": "accepted_subset_plus_all_generated_families"
   },
   "current_backend_states": {
-    "perl": "partial",
+    "perl": "pass",
     "rust": "partial",
     "dart": "gap",
     "julia": "gap"

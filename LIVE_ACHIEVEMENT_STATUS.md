@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.3.1.3.3 — admit Perl/Rust generated baseline**
+  (DONE — census 57/1/2; `.3.1` closed; Rust 105-case generated classifier `.3.2.0` active).
+
+  **Admission:** Perl generated source promotes partial→pass. Rust remains partial solely for generated breadth
+  8/105; Dart/Julia remain gap. Contract/checker/manifest/public status now agree exactly.
+
+  **Proof:** Focused Perl 69 assertions and Rust 5/5; canonical Perl 61x2 + Phase 0 `1..1030`/652s; fresh complete
+  Rust 137/105/196/5/5/5/10 + 61x2. `.3.1.3` and `.3.1` close with no behavior code.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.1.3.2 — align Rust generated plans and trace**
   (DONE — exact plan/rejections/direct result/portable trace green; baseline admission `.3` active).
 

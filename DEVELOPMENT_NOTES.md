@@ -1,6 +1,14 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.1.3.3 — make capability promotion an explicit verified act):
+  Green implementation tests do not silently change census status. Admission must rerun the contract fixture and
+  complete backend gates, then update the executable contract, capability manifest, checker expectations, public
+  book, and continuity state together. A backend may pass the neutral baseline while remaining partial for a
+  separately quantified breadth obligation: Rust is now partial for exactly 8/105 generated fixtures, not for
+  identity, errors, plans, results, tracing, families, or isolated compilation. State the residual mechanism in the
+  manifest note so future work cannot reopen already-admitted roles or promote from implementation belief alone.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.1.3.2 — make result projection part of generated-source parity):
   Structural execution equality can still hide an API result-shape mismatch. Rust already separates legacy
   accumulator-returning `Engine::execute` from portable direct-value `Engine::execute_value`; source generation

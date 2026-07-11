@@ -67,8 +67,10 @@ The neutral fixture also locks result projection. Typed v1 `execute` and
 native/CLI value contract. Legacy `parse` and `parse_with_trace` retain Rust's
 historical accumulator envelope. The three portable generated-rule enter,
 family-decision, and exit roles carry source/rule/family context beside native
-`rust_runtime:generated_plan:*` detail. Explicit baseline admission remains
-`FUTURE-PARITY-BACKLOG.3.1.3.3`; full 105-case generated breadth remains `.3.2`.
+`rust_runtime:generated_plan:*` detail. The Perl/Rust baseline is admitted:
+Perl is pass, while Rust is partial solely because generated compile/run proof
+covers eight of the 105 interpreter fixtures. Full Rust breadth is active under
+`FUTURE-PARITY-BACKLOG.3.2`.
 
 ```rust
 use linkedspec_runtime::source_emitter::{

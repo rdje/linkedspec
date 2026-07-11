@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.1.3.3 — admit Perl/Rust generated baseline
+
+Admitted the aligned generated-source contract-v1 baseline without behavior code. Updated the executable contract
+and capability census from 56 pass / 2 partial / 2 gap to 57/1/2: Perl generated source promotes to pass; Rust stays
+partial solely because its independent generated compile/run proof covers the named eight-case subset rather than
+all 105 interpreter fixtures; Dart and Julia remain gaps.
+
+Reverified the admission independently. The contract checker and focused Perl generated-source suite pass 69
+assertions; focused Rust source-emitter passes 5/5. Canonical Perl CI passes all contract/native/239-name/AST/trace
+checks, 61/61 CLI default and POSIX, and Phase 0 `1..1030` in 652 seconds. A fresh complete Rust gate passes
+137 unit, 105 corpus, 196 integration, 5 diagnostics, 5 source-emitter, 5 loader, 10 trace, docs/build, and 61x2 CLI.
+Closed `.3.1.3` and `.3.1`; activated scalable full-manifest Rust classifier `.3.2.0`.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.1.3.2 — align Rust generated plans and trace
 
 Added Rust's exact contract-v1 `GeneratedPlanRow` projection, emitted `plan()`/`validate_plan(...)`, ten neutral

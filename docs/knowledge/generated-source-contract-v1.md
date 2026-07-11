@@ -16,6 +16,7 @@ evidence_update_2026_07_11_perl: "FUTURE-PARITY-BACKLOG.3.1.2 implements the v1 
 evidence_update_2026_07_11_rust_audit: "FUTURE-PARITY-BACKLOG.3.1.3.0 proves the existing Rust scaffold predates v1 identity, structured error, exact unknown-family rejection, and neutral generated trace-role requirements; .3.1.3.1-.3 now own alignment and admission."
 evidence_update_2026_07_11_rust_metadata_errors: "FUTURE-PARITY-BACKLOG.3.1.3.1 implements Rust caller identity, deterministic contract/version/identity metadata, typed generated_source_error stages/codes/attribution, host compile/load projection, typed generated execution, and exact compatibility adapters. Focused 4/4 and complete Rust 137/105/196/5/4/5/10 plus 61x2 pass; exact neutral plan/trace remains .3.1.3.2."
 evidence_update_2026_07_11_rust_plan_trace: "FUTURE-PARITY-BACKLOG.3.1.3.2 implements exact neutral plan rows/ten families/four rejections, direct v1 top-rule result, and three portable trace roles beside native detail. It preserves the legacy accumulator envelope and trace. Focused 5/5 + 10/10 and clean full Rust 137/105/196/5/5/5/10 plus 61x2 pass; admission remains .3.1.3.3."
+evidence_update_2026_07_11_admission: "FUTURE-PARITY-BACKLOG.3.1.3.3 passes the focused 69-assertion Perl contract, focused Rust 5/5 source-emitter test, canonical Perl gate including Phase 0 1..1030 and 61x2 CLI, and complete Rust 137/105/196/5/5/5/10 plus 61x2 CLI gate. The baseline contract is admitted: Perl passes, Rust remains partial only for 8/105 generated compile/run breadth, and .3.1 closes."
 reverify: "perl -c tools/check_generated_source_contract.pl && perl tools/check_generated_source_contract.pl && perl tools/check_capability_conformance.pl && rg -n 'check_generated_source_contract|generated_source_contract' tools/run_ci_local.sh capability_conformance/README.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -41,6 +42,10 @@ The accepted initial subset is the same eight fixtures already used by Rust's
 generated-source test. Rust must additionally expand to all 105 interpreter
 fixtures under `.3.2`; new Dart and Julia emitters must prove the subset plus
 all generated families. The interpreter corpus remains the primary oracle.
+
+The Perl/Rust v1 baseline is admitted under `.3.1.3.3`. Admission does not
+promote Rust to pass because baseline semantic coverage and full-manifest
+generated compile/run breadth are separate claims.
 
 Related facts: [[generated-source-parity-audit]],
 [[perl-generated-source-capture-not-standalone]],

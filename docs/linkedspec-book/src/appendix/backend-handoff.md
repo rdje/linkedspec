@@ -581,7 +581,7 @@ its 60 states are 57 pass, one partial state, and two gaps. Each non-pass state 
 | --- | --- | --- |
 | Native named/file resolution | ADR `0026` and the 14/9/4 fixture fix portable names, exact paths, ordered roots, strict UTF-8, and typed stages. Perl, Rust, Dart, and Julia consume the contract directly; exact admission is closed. | closed `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, Dart, and Julia propagate a caller-owned emitter through frontend/compiler/function/staged/runtime phases. Dart's direct routed/quiet/failure proof and recurring gates are admitted. | closed `.1.6.5` |
-| Generated parser source | Perl contract-v1 proof is green. Rust has identity/metadata/errors, exact ten-family plan/four rejections, direct v1 result, portable trace roles, all-family execution, and the eight-case subset. Dart and Julia have no emitter. | `.3.1.3.3` baseline admission; `.3.2` Rust breadth; `.3.3` Dart; `.3.4` Julia; `.3.5` admission |
+| Generated parser source | Perl contract-v1 is admitted pass. Rust's baseline is admitted and it remains partial solely for generated compile/run breadth 8/105. Dart and Julia have no emitter. | `.3.2` Rust breadth; `.3.3` Dart; `.3.4` Julia; `.3.5` admission |
 
 Deprecated Perl plugins, general future `parse_job(...)` authoring, semantic introspection/MCP, generic final-
 codeblock equivalence, and the not-yet-implemented Lua backend are explicit exclusions/future owners rather than
@@ -599,13 +599,13 @@ independent result/trace/identity/plan/error proof. `.3.1.3.0` then audited Rust
 its pre-contract scaffold was green for all families and eight fixtures. `.3.1.3.1` now supplies typed source
 identity, contract/version metadata, structured emission/compile-load/validation/execution errors, and compatible
 legacy adapters. `.3.1.3.2` now adds exact neutral plan strings and four rejections, direct v1 result projection,
-and the three portable trace roles while preserving legacy accumulator/trace behavior. `.3.1.3.3` owns admission,
-so census remains 56/2/2 until it closes.
+and the three portable trace roles while preserving legacy accumulator/trace behavior. `.3.1.3.3` reruns complete
+Perl/Rust gates and admits that baseline: census is 57/1/2, with Perl pass and Rust partial solely for 8/105 breadth.
 
 `FUTURE-PARITY-BACKLOG.3.0` turns that broad owner into an executable order. `.3.1.1` first fixes a versioned neutral
 contract for emission, host compile/load, direct generated execution, exact result/error/source identity, trace,
 family-plan validation, and manifest proof; `.3.1.2` repairs Perl and `.3.1.3.3` admits the aligned Perl/Rust
-baseline. `.3.2` then classifies and expands Rust from the named eight-case subset
+baseline. Active `.3.2` classifies and expands Rust from the named eight-case subset
 to all 105 fixtures, splitting any failures before repair. `.3.3` and `.3.4` add equivalent Dart and Julia source
 emitters in scaffold, direct-family, and corpus-proof slices. `.3.5` alone may promote all 60 states to pass. Because
 the artifacts are host-language source, byte identity is not required; ADR `0023` requires equivalent operations

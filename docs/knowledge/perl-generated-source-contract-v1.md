@@ -12,6 +12,7 @@ date: 2026-07-11
 status: current
 tags: [perl, generated-source, public-api, LinkedRE, trace, diagnostics]
 evidence: "FUTURE-PARITY-BACKLOG.3.1.2 adds LinkedSpec::emit_generated_source, perl/LinkedSpec/GeneratedSource.pm, Compiler.pm reconstruction from compiled dependency_refs, and t/generated_source_contract.t. Public and legacy captures are deterministic and byte-identical. Independently evaluated source exposes Execute, ExecuteWithTrace, LinkedSpecGeneratedMetadata, LinkedSpecGeneratedPlan, and ValidateGeneratedPlan; exact result, arbitrary-package loading, indexes 0/1, slash regex, identity, generated_rule_enter/family_decision/rule_exit, four rejection codes, and structured emission/execution failures pass. Existing generated trace suites pass; Phase 0 reaches 1..1030."
+evidence_update_2026_07_11_admission: "FUTURE-PARITY-BACKLOG.3.1.3.3 repeats focused 69-assertion contract proof and the canonical Perl gate including Phase 0 1..1030 and 61x2 CLI, promotes the generated-source state to pass, and closes .3.1."
 reverify: "perl -c perl/LinkedSpec/GeneratedSource.pm && perl -c perl/LinkedSpec/Compiler.pm && PERL5LIB= prove -Iperl t/generated_source_contract.t t/trace_generated_handler_branch.t t/trace_generated_nonrep_dispatch.t t/trace_generated_rep_dispatch.t && rg -n 'emit_generated_source|LinkedRE::oredRE|ValidateGeneratedPlan|ExecuteWithTrace' perl/LinkedSpec.pm perl/LinkedSpec/GeneratedSource.pm perl/LinkedSpec/Compiler.pm t/generated_source_contract.t"
 ---
 
@@ -37,8 +38,8 @@ and `ValidateGeneratedPlan`. Plan count/label/family/unknown-family drift is
 rejected before execution as an attributed `generated_source_error`. Debug trace
 contains generated rule enter, family decision, and rule exit semantic roles.
 
-The implementation is complete under `.3.1.2`; capability promotion remains a
-separate admission step under `.3.1.3`.
+The implementation completed under `.3.1.2` and its separate `.3.1.3.3`
+admission promotes Perl generated source to pass.
 
 Related facts: [[generated-source-contract-v1]],
 [[perl-generated-source-capture-not-standalone]], [[handler-ir-design]].

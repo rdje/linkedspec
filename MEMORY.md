@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.1.3.2` — aligned Rust neutral plan/result/trace v1 roles.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.3.1.3.1` — added Rust v1 identity/metadata/error roles.
-- recent_context: Census remains 56/2/2 until explicit admission. Rust now passes exact ten-family plan/four
-  rejections/direct neutral result/three trace roles while legacy generated parse/trace retains the accumulator
-  envelope. Perl and Rust v1 baselines are green; `.3.1.3.3` owns full gates/status promotion and `.3.1` closeout.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.1.3.3` — admitted the Perl/Rust generated-source v1 baseline.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.3.1.3.2` — aligned Rust neutral plan/result/trace v1 roles.
+- recent_context: Census is 57/1/2. Perl generated source is pass. Rust's v1 roles/all-family/eight-case proof pass;
+  its only partial boundary is generated compile/run breadth 8/105. Dart/Julia remain gaps. `.3.1` is closed;
+  `.3.2.0` owns a scalable full-manifest Rust classifier before any discovered mechanism is repaired.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.3.1.3.2 - align Rust generated plans and trace`; previous committed HEAD is
-  `47524860 FUTURE-PARITY-BACKLOG.3.1.3.1 - add Rust generated-source v1 metadata`.
+  `FUTURE-PARITY-BACKLOG.3.1.3.3 - admit Perl Rust generated baseline`; previous committed HEAD is
+  `b9373d4a FUTURE-PARITY-BACKLOG.3.1.3.2 - align Rust generated plans and trace`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.3.1.3.3`; Perl/Rust v1 baseline admission is active.
-- next_action: run the required focused and complete Perl/Rust admission gates, promote Perl generated source to
-  pass while Rust remains partial solely for 8/105 breadth, close `.3.1`, sync all capability/public/continuity
-  records, clean safe artifacts, and commit before activating Rust breadth `.3.2`.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.3.2.0`; scalable Rust full-manifest generated classification is active.
+- next_action: extend the existing isolated generated-crate harness to drive all 105 checked-in fixtures through
+  parse/validate/compile/direct interpreter oracle/emission/host compile/run with deterministic per-case stage
+  reporting and no skips; retain the eight-case and all-family proofs, then split failures before behavior fixes.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

@@ -247,7 +247,7 @@ fail('corpus_proof.new_backend_admission_target has an unexpected value')
  unless $contract->{corpus_proof}{new_backend_admission_target} eq 'accepted_subset_plus_all_generated_families';
 
 require_keys('current_backend_states', $contract->{current_backend_states}, [qw(perl rust dart julia)], []);
-my %expected_state = (perl => 'partial', rust => 'partial', dart => 'gap', julia => 'gap');
+my %expected_state = (perl => 'pass', rust => 'partial', dart => 'gap', julia => 'gap');
 fail("current_backend_states.$_ must be $expected_state{$_}")
  for grep { $contract->{current_backend_states}{$_} ne $expected_state{$_} } keys %expected_state;
 my $capability_manifest = read_json(
@@ -262,5 +262,5 @@ for my $backend (sort keys %expected_state) {
   unless defined($actual) && $actual eq $expected_state{$backend};
 }
 
-printf "generated-source-contract: OK (v1; %d families; %d behavior case; %d/105 subset; states 56/2/2)\n",
+printf "generated-source-contract: OK (v1; %d families; %d behavior case; %d/105 subset; states 57/1/2)\n",
  scalar(@families), scalar(@{$contract->{behavior_cases}}), scalar(@subset);
