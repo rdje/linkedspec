@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.2.2 — scan structure, preserve action text):
+  Use byte positions for ASCII `.spec` delimiters over already-valid UTF-8 strings; substrings then preserve
+  Unicode bytes without conflating Unicode with an encoding. Quote-aware brace/parenthesis scanners must treat both
+  single and double quotes as delimiters and honor escapes. Keep the parser permissive and typed, leaving semantic
+  rejection to validation. For compact lifecycle fluent syntax, normalize calls into multiple same-line statements
+  with semicolons only between calls; preserve newline-delimited block text without adding semicolons. Prove all
+  shipped sources and every rule-only corpus source on both runtime language baselines, while routing function
+  shells only through their spec-owned later projection.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.2.1 — give Lua AST records identities before parsing):
   Do not let Lua table shape stand in for a semantic type. Use private metatables for source node variants and the
   typed JSON layer for scalar/array/harray payloads; represent codeblocks as an explicit body-kind node with exact

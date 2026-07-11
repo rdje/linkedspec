@@ -559,8 +559,11 @@ ASTs for specs, functions, ordinary/staged spans, staged parse jobs, rules,
 simple/bounded modes, all ten body variants, targets, and fluent calls. Private
 node identities and typed JSON projection prevent arrays, harrays, and
 codeblocks from being inferred from incidental table layout. Representative
-provenance and every body variant round-trip on both runtimes; `parse_spec`
-remains absent. The universal rule parser `.2.2` is active.
+provenance and every body variant round-trip on both runtimes. The public
+`parse_spec(source)` producer now parses rule paragraphs into those nodes: all
+21 shipped specs and 102 rule-only corpus sources pass on PUC Lua and LuaJIT.
+The other three corpus sources begin with top-level functions and remain owned
+by spec-returned projection `.2.4`. Source validation `.2.3` is active.
 
 Lua embedding code can construct the neutral data model directly:
 
@@ -599,6 +602,30 @@ The projection uses the same field names as the other variants, including
 `result_policy`, and `failure_policy`. Constructor lists must be dense and
 one-based. Optional function payloads must already be typed JSON values; plain
 Lua tables are rejected rather than guessed.
+
+The rule parser recognizes simple/bounded modes, header-line regexes, action
+and blind edges, grouped/indexed targets, lifecycle/plain blocks, markers,
+multiline fluent continuations, receiver `when`/`otherwise` blocks, comments,
+and permissive raw fallback. Nested scanning preserves braces inside both
+single- and double-quoted strings. Because Lua strings may contain arbitrary
+bytes, the public source seam rejects invalid UTF-8 before scanning; Unicode is
+still the logical character model. Statement separation follows the universal
+rule exactly:
+
+```text
+E {
+  set_key(meta, "a", 1)
+  set_key(meta, 'b', 2)
+  return(meta)
+}
+
+E { set_key(meta, "a", 1); set_key(meta, 'b', 2); return(meta) }
+```
+
+The first block uses physical newlines. The second uses semicolons only between
+multiple statements on one line; its last statement has no trailing semicolon.
+Parsing remains permissive and does not imply validation, compilation, runtime,
+corpus execution, or primary CLI readiness.
 
 ### Julia Backend Commands, Embedding, and Status
 

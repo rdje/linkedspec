@@ -7,6 +7,15 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.2.2 — parse Lua rule source**
+  (DONE — all shipped/rule-only corpus sources parse both runtimes; validation `.2.3` next).
+
+  **Implementation:** Public typed rule parser covers modes, regexes, edges, blocks, markers, fluents, comments,
+  raw fallback, nested delimiters, both quote forms, and line-attributed errors. Primary/corpus execution stays off.
+
+  **Proof:** PUC Lua 23/23 and LuaJIT 23/23 pass with 21 shipped specs and 102 rule-only corpus sources. Three
+  function shells stay delegated. Newline separators and same-line semicolon-only-between behavior are locked.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.2.1 — add typed Lua source AST**
   (DONE — neutral data/provenance round-trips both runtimes; parser `.2.2` next).
 

@@ -1,6 +1,24 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.2.2 — parse Lua rule source
+
+Added public native `parse_spec(source)` and typed line/message parse errors. The shared Lua 5.1/5.4 scanner emits
+the `.2.1` AST for headers/modes, header-rest and body regexes, grouped/indexed action and blind edges,
+lifecycle/plain/attached blocks, split/conditional/lifecycle markers, fluent continuations, comments, and raw
+fallback. Nested block/argument scanning preserves braces inside single- and double-quoted strings.
+Lua byte strings are admitted as logical source only when they are strict UTF-8; invalid bytes produce a typed,
+positioned parse error before structure scanning.
+
+Locked exact statement separation: physical newlines remain separators without inserted semicolons. Compact
+lifecycle fluent calls become same-line statement text joined by `; ` only between calls, never after the last.
+The primary command and corpus execution remain explicitly unavailable; parsing alone claims no validation,
+compiler, runtime, CLI, capability, or generated-source behavior.
+
+The local gate passes syntax/process/manifest checks plus 23/23 PUC Lua and 23/23 LuaJIT tests. Both runtimes parse
+all 21 shipped specs and 102 rule-only corpus sources; three top-level function shells remain for `.2.4`. Roadmap,
+mdBook examples, README, KM, task, and live docs advance to source validation `.2.3`.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.2.1 — add typed Lua source AST
 
 Added a data-only native Lua source AST with validated private node identities for specs, functions, ordinary and

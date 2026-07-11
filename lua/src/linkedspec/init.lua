@@ -1,13 +1,14 @@
 local corpus = require("linkedspec.corpus")
 local json = require("linkedspec.json")
 local spec_ast = require("linkedspec.spec_ast")
+local spec_parser = require("linkedspec.spec_parser")
 
 local M = {}
 
 M.PACKAGE_NAME = "linkedspec"
 M.PACKAGE_VERSION = "0.1.0"
 M.BACKEND_NAME = "lua"
-M.PARITY_STATUS = "corpus_io"
+M.PARITY_STATUS = "source_parser"
 M.CLI_ENTRYPOINT = "lua/bin/linkedspec-lua"
 M.CORPUS_RUNNER_ENTRYPOINT = "lua/bin/corpus_runner.lua"
 
@@ -60,5 +61,7 @@ end
 M.json = json
 M.load_corpus_fixtures = corpus.load_corpus_fixtures
 M.spec_ast = spec_ast
+M.parse_spec = spec_parser.parse_spec
+M.is_spec_parse_error = spec_parser.is_parse_error
 
 return M

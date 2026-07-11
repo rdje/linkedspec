@@ -126,13 +126,13 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "corpus_io", "status parity")
+  assert_equal(first.parity, "source_parser", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
 end)
 
-test("parser CLI stays explicitly unavailable", function()
+test("parser CLI stays unavailable while native parser API is explicit", function()
   local result = linkedspec.cli_scaffold_result({ "--help" })
   assert_equal(result.exit_code, 2, "CLI scaffold status")
   assert_equal(
@@ -140,7 +140,7 @@ test("parser CLI stays explicitly unavailable", function()
     "linkedspec-lua: backend scaffold; parser CLI is not implemented\n",
     "CLI scaffold error"
   )
-  assert_equal(linkedspec.parse_spec, nil, "parser API must not be faked")
+  assert_equal(type(linkedspec.parse_spec), "function", "native parser API")
 end)
 
 test("strict JSON preserves null array and harray identity", function()
@@ -410,6 +410,228 @@ test("source AST rejects malformed types and unsupported variants", function()
       body_span = ast.source_span({ line_start = 1, line_end = 1 }),
     })
   end, "must be a typed JSON value", "ambiguous payload")
+end)
+
+local function body_kind(rule, index)
+  return rule.body[index].kind
+end
+
+local function starts_with_top_level_function(source)
+  for line in (source .. "\n"):gmatch("(.-)\n") do
+    local text = line:match("^%s*(.-)%s*$")
+    if text ~= "" and text:sub(1, 1) ~= "#" then
+      return text:match("^fn%s") ~= nil
+    end
+  end
+  return false
+end
+
+local function nul_delimited_paths(command)
+  local handle = assert(io.popen(command, "r"))
+  local output = handle:read("*a")
+  assert(handle:close())
+  local paths = {}
+  local start = 1
+  while start <= #output do
+    local ending = assert(output:find("\0", start, true))
+    paths[#paths + 1] = output:sub(start, ending - 1)
+    start = ending + 1
+  end
+  table.sort(paths)
+  return paths
+end
+
+local function read_file(path)
+  local handle = assert(io.open(path, "rb"))
+  local value = handle:read("*a")
+  assert(handle:close())
+  return value
+end
+
+test("source parser handles headers inline bodies and modes", function()
+  local modes = {
+    { "R1:AND", "And" },
+    { "R2:OR+", "OrPlus" },
+    { "R3::*", "Star" },
+    { "R4:?", "Optional" },
+    { "R5:AND{2,4}", "AndBounded" },
+    { "R6:OR{3}", "OrBounded" },
+    { "R7:&", "Single" },
+    { "R8:|", "Pipe" },
+  }
+  for _, item in ipairs(modes) do
+    local parsed = linkedspec.parse_spec(item[1] .. "\n /x/")
+    assert_equal(parsed.rules[1].header.mode.name, item[2], item[1])
+    assert_equal(ast.node_type(body_kind(parsed.rules[1], 1)), "RegexBodyElementKind", item[1] .. " regex")
+  end
+  local inline = linkedspec.parse_spec('Top:: /x/ I { return(entry_text()) } E.return("done")')
+  assert_equal(#inline.rules[1].body, 3, "inline element count")
+  assert_equal(ast.node_type(body_kind(inline.rules[1], 1)), "RegexBodyElementKind", "inline regex")
+  assert_equal(ast.node_type(body_kind(inline.rules[1], 2)), "CodeBlockBodyElementKind", "inline block")
+  assert_equal(body_kind(inline.rules[1], 3).code, 'return("done")', "inline fluent lifecycle")
+end)
+
+test("source parser keeps header-line regex slots", function()
+  local single = linkedspec.parse_spec("Top::\n -> semi\n\nsemi : /;/")
+  assert_equal(body_kind(ast.find_rule(single, "semi"), 1).pattern, ";", "single header regex")
+  local pair = linkedspec.parse_spec("Top::\n -> bracket\n\nbracket : /\\(/ /\\)/")
+  assert_equal(body_kind(ast.find_rule(pair, "bracket"), 1).pattern, "\\(", "first header regex")
+  assert_equal(body_kind(ast.find_rule(pair, "bracket"), 2).pattern, "\\)", "second header regex")
+end)
+
+test("source parser handles action blind grouped indexed and fluent edges", function()
+  local parsed = linkedspec.parse_spec([[
+Top::->Child.push
+ -> Child[1] .return(array("?child:", copy(array(Child))))
+ -> A | B { return(entry_text()) }
+ =>Helper.trim()
+
+Child: /x/ /y/
+Helper: /h/
+]])
+  local top = ast.top_rule(parsed)
+  assert_equal(#top.body, 4, "top edge count")
+  assert_equal(body_kind(top, 1).targets[1].label, "Child", "compact target")
+  assert_equal(body_kind(top, 1).fluent_chain[1].method, "push", "compact fluent")
+  assert_equal(body_kind(top, 2).targets[1].index, 1, "indexed target")
+  assert_equal(body_kind(top, 2).fluent_chain[1].args, 'array("?child:", copy(array(Child)))', "nested args")
+  assert_equal(body_kind(top, 3).targets[2].label, "B", "grouped target")
+  assert_equal(body_kind(top, 3).code, "return(entry_text())", "grouped code")
+  assert_equal(body_kind(top, 4).target, "Helper", "blind target")
+  assert_equal(body_kind(top, 4).fluent_chain[1].method, "trim", "blind fluent")
+end)
+
+test("source parser attaches multiline action fluent continuations", function()
+  local parsed = linkedspec.parse_spec([[
+Top::
+ -> item
+  .if(on)
+    .push(item, out)
+  .else()
+    .return_undef()
+  .endif()
+
+item: /x/
+]])
+  local calls = body_kind(ast.top_rule(parsed), 1).fluent_chain
+  assert_equal(#calls, 5, "continuation count")
+  assert_equal(calls[1].method, "if", "first continuation")
+  assert_equal(calls[2].args, "item, out", "continuation args")
+  assert_equal(calls[5].method, "endif", "last continuation")
+end)
+
+test("source parser normalizes attached when otherwise blocks", function()
+  local parsed = linkedspec.parse_spec([[
+Top::
+ -> Done.when(false) {
+    return("bad")
+ }.otherwise {
+    return("fallback")
+ }
+ I.when(false) { set(out, "bad") } otherwise { set(out, "fallback") }
+
+Done:
+ /x/
+]])
+  local top = ast.top_rule(parsed)
+  assert_contains(body_kind(top, 1).code, "when(false)", "action when")
+  assert_contains(body_kind(top, 1).code, 'return("fallback")', "action otherwise")
+  assert_contains(body_kind(top, 2).code, "otherwise", "lifecycle otherwise")
+  assert_contains(body_kind(top, 2).code, 'set(out, "fallback")', "lifecycle fallback")
+end)
+
+test("source parser uses semicolons only between compact same-line statements", function()
+  local parsed = linkedspec.parse_spec([[
+Top::
+ I.set(out, undef).set(out, "ok").return(out)
+ /a/ E {
+   set(out, "a")
+   set(other, 'b')
+   return(out)
+ }
+ /b/ EX { set(out, "a"); set(other, 'b'); return(out) }
+]])
+  local top = ast.top_rule(parsed)
+  assert_equal(body_kind(top, 1).code, 'set(out, undef); set(out, "ok"); return(out)', "compact separators")
+  assert_equal(
+    body_kind(top, 3).code,
+    'set(out, "a")\nset(other, \'b\')\nreturn(out)',
+    "physical newline separators"
+  )
+  assert_equal(
+    body_kind(top, 5).code,
+    'set(out, "a"); set(other, \'b\'); return(out)',
+    "same-line separators without trailing semicolon"
+  )
+end)
+
+test("source parser handles multiline fluent arguments and quoted braces", function()
+  local parsed = linkedspec.parse_spec([[
+Top::
+ I.return({
+  "type" => "function_definition_error",
+  "source_text" => entry_text()
+ })
+ /a/ I { print("literal { brace"); print('literal } brace') }
+ /b/ E { return("ok") }
+]])
+  local top = ast.top_rule(parsed)
+  assert_contains(body_kind(top, 1).code, '"source_text" => entry_text()', "multiline fluent argument")
+  assert_contains(body_kind(top, 3).code, 'print("literal { brace")', "double-quoted brace")
+  assert_contains(body_kind(top, 3).code, "print('literal } brace')", "single-quoted brace")
+  assert_equal(ast.node_type(body_kind(top, 4)), "RegexBodyElementKind", "post-brace regex")
+end)
+
+test("source parser preserves raw lines and returns typed parse errors", function()
+  local raw = linkedspec.parse_spec("Top::\n raw compatibility line")
+  assert_equal(ast.node_type(body_kind(ast.top_rule(raw), 1)), "RawBodyElementKind", "raw fallback")
+  local ok, parse_error = pcall(
+    linkedspec.parse_spec,
+    "fn normalize(value) { return(trim(value)) }\n\nTop::\n /x/"
+  )
+  assert_equal(ok, false, "top-level function rejection")
+  assert_equal(linkedspec.is_spec_parse_error(parse_error), true, "typed parse error")
+  assert_equal(parse_error.line, 1, "parse error line")
+  local utf8_ok, utf8_error = pcall(linkedspec.parse_spec, "Top::\n /" .. string.char(0xFF) .. "/")
+  assert_equal(utf8_ok, false, "invalid UTF-8 source rejection")
+  assert_equal(linkedspec.is_spec_parse_error(utf8_error), true, "invalid UTF-8 typed error")
+  assert_contains(utf8_error.message, "not valid UTF-8 at byte", "invalid UTF-8 position")
+end)
+
+test("source parser accepts every shipped spec", function()
+  local paths = nul_delimited_paths("find specs -maxdepth 1 -type f -name '*.spec' -print0")
+  if #paths == 0 then
+    fail("shipped spec inventory is empty")
+  end
+  for _, path in ipairs(paths) do
+    local parsed = linkedspec.parse_spec(read_file(path))
+    if #parsed.rules == 0 then
+      fail("shipped spec parsed without rules: " .. path)
+    end
+  end
+end)
+
+test("source parser accepts every rule-only corpus spec", function()
+  local validation = linkedspec.load_corpus_fixtures("rust/linkedspec-runtime/tests/corpus")
+  local parsed_count = 0
+  local skipped_function_shells = 0
+  for _, fixture in ipairs(validation.fixtures) do
+    if starts_with_top_level_function(fixture.spec_source) then
+      skipped_function_shells = skipped_function_shells + 1
+    else
+      local parsed = linkedspec.parse_spec(fixture.spec_source)
+      if #parsed.rules == 0 then
+        fail("corpus spec parsed without rules: " .. fixture.name)
+      end
+      parsed_count = parsed_count + 1
+    end
+  end
+  if parsed_count <= 80 then
+    fail("too few rule-only corpus specs parsed: " .. parsed_count)
+  end
+  if skipped_function_shells == 0 then
+    fail("expected at least one staged function-shell corpus spec")
+  end
 end)
 
 io.stdout:write("1..", total, "\n")

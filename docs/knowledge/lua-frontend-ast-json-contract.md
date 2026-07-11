@@ -12,14 +12,14 @@ answers:
 date: 2026-07-11
 status: current
 tags: [lua, AST, parser, JSON, staged-parsing, provenance, codeblock]
-evidence: "LUA-BACKEND-PARITY.2.1 adds lua/src/linkedspec/spec_ast.lua and three focused test groups. The full local gate passes 13/13 on PUC Lua and 13/13 on LuaJIT; parse_spec remains absent."
+evidence: "LUA-BACKEND-PARITY.2.1 adds lua/src/linkedspec/spec_ast.lua; .2.2 adds its first source producer. The current full local gate passes 23/23 on PUC Lua and 23/23 on LuaJIT."
 reverify: "bash tools/run_lua_local.sh"
 ---
 
 `lua/src/linkedspec/spec_ast.lua` defines validated, metatable-typed data nodes for `SpecFile`,
 `FunctionDefinition`, `SourceSpan`, `StagedSourceSpan`, `StagedParseJob`, `Rule`, `RuleHeader`, `RuleMode`, ten body
 element variants, `EdgeTarget`, and `FluentCall`. It exposes top-rule/rule lookup and Rust-equivalent mode queries.
-This leaf deliberately has no source parser.
+`LUA-BACKEND-PARITY.2.2` now produces these nodes through public rule-level `parse_spec(source)`.
 
 `to_json(node)` projects recursively into the repository's typed JSON values; `from_json(type, value)` validates
 and reconstructs the node. Field names match the Rust/Dart/Julia contract: `functions`, `rules`, `source_span`,
