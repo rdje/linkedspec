@@ -168,16 +168,23 @@ export 'src/runtime/interpreter.dart'
         RuntimeInterpreterException,
         RuntimeLifecycleEvent,
         RuntimeParseResult;
+export 'src/runtime/generated_plan.dart'
+    show GeneratedPlanRow, GeneratedRuleFamily;
 export 'src/source_emitter.dart'
     show
         GeneratedSourceCode,
         GeneratedSourceException,
         GeneratedSourceMetadata,
         GeneratedSourceStage,
+        buildGeneratedRulePlan,
+        classifyGeneratedRuleFamily,
         emitDartSource,
         emitDartSourceV1,
+        executeGeneratedParserV1,
+        executeGeneratedParserWithTraceV1,
         linkedSpecGeneratedSourceContract,
-        linkedSpecGeneratedSourceFormatVersion;
+        linkedSpecGeneratedSourceFormatVersion,
+        validateGeneratedRulePlanV1;
 export 'src/scaffold.dart'
     show
         describeLinkedSpecDartScaffold,

@@ -7,6 +7,7 @@ import '../action/function_registry.dart';
 import '../ast/spec_ast.dart';
 import '../compiler/compiled_spec.dart';
 import '../trace/trace.dart';
+import 'generated_plan.dart';
 import 'matching.dart';
 
 final _leadingBlankLine = RegExp(r'[ \t]*\n');
@@ -139,6 +140,37 @@ final class LinkedSpecRuntimeEngine {
     String? topRule,
     LinkedSpecTraceEmitter? trace,
   }) {
+    return _parse(input, topRule: topRule, trace: trace);
+  }
+
+  /// Execute through a validated generated-family plan.
+  ///
+  /// Generated source adapters validate ordered labels and families before
+  /// calling this method. Each rule entry then selects its structural executor
+  /// from [generatedPlan] instead of re-classifying the compiled rule.
+  RuntimeParseResult executeGeneratedWithPlan(
+    String input,
+    Map<String, GeneratedRuleFamily> generatedPlan,
+    String sourceIdentity, {
+    String? topRule,
+    LinkedSpecTraceEmitter? trace,
+  }) {
+    return _parse(
+      input,
+      topRule: topRule,
+      trace: trace,
+      generatedPlan: Map.unmodifiable(generatedPlan),
+      generatedSourceIdentity: sourceIdentity,
+    );
+  }
+
+  RuntimeParseResult _parse(
+    String input, {
+    String? topRule,
+    LinkedSpecTraceEmitter? trace,
+    Map<String, GeneratedRuleFamily>? generatedPlan,
+    String? generatedSourceIdentity,
+  }) {
     final label = topRule ?? _defaultTopRuleLabel();
     final context = _RuntimeExecutionContext(
       engine: this,
@@ -147,6 +179,8 @@ final class LinkedSpecRuntimeEngine {
       maxIterations: maxIterations,
       topRule: label,
       trace: trace,
+      generatedPlan: generatedPlan,
+      generatedSourceIdentity: generatedSourceIdentity,
     );
     // Mirror Perl's public parser wrapper; direct descriptor handlers bypass
     // this leading trivia skip.
@@ -275,6 +309,19 @@ final class LinkedSpecRuntimeEngine {
       );
     }
 
+    final generatedFamily = context.generatedPlan?[label];
+    if (context.generatedPlan != null && generatedFamily == null) {
+      throw RuntimeInterpreterException(
+        "generated rule plan does not contain '$label'",
+        diagnostic: context.diagnostic(
+          stage: 'generated_rule_plan',
+          summary: 'Dart generated rule plan lookup failed',
+          detail: "generated rule plan does not contain '$label'",
+          ruleLabel: label,
+        ),
+      );
+    }
+
     final recursionKey = '$label:$entryRegexIndex:${context.cursorCodeUnit}';
     if (!context.activeRuleEntries.add(recursionKey)) {
       context.trace?.traceDecision(
@@ -296,6 +343,23 @@ final class LinkedSpecRuntimeEngine {
     );
     context.enterRule(label);
     context.enterRuleLocalBindingScope();
+    final generatedIdentity = context.generatedSourceIdentity;
+    if (generatedFamily != null && generatedIdentity != null) {
+      context.trace?.emitEvent(
+        LinkedSpecTraceEventKind.mark,
+        'generated_rule_enter',
+        'source_identity=$generatedIdentity rule=$label '
+            'entry_regex_idx=$entryRegexIndex cursor=${context.cursorCodeUnit}',
+        LinkedSpecTraceLevel.low,
+      );
+      context.trace?.emitEvent(
+        LinkedSpecTraceEventKind.mark,
+        'generated_family_decision',
+        'source_identity=$generatedIdentity rule=$label '
+            'family=${generatedFamily.wireName}',
+        LinkedSpecTraceLevel.low,
+      );
+    }
     final traceScope = context.trace?.enterScope(
       'dart_runtime:rule',
       'label=$label entry_regex=$entryRegexIndex '
@@ -314,7 +378,9 @@ final class LinkedSpecRuntimeEngine {
       }
 
       try {
-        final result = rule.blindEdges.isNotEmpty
+        final usesBlindDispatch =
+            generatedFamily?.usesBlindDispatch ?? rule.blindEdges.isNotEmpty;
+        final result = usesBlindDispatch
             ? _executeBlindRule(rule, context)
             : _executeRegexRule(rule, entryRegexIndex, context);
         traceExitDetails =
@@ -340,6 +406,15 @@ final class LinkedSpecRuntimeEngine {
     } finally {
       if (traceScope != null) {
         context.trace?.exitScope(traceScope, traceExitDetails);
+      }
+      if (generatedFamily != null && generatedIdentity != null) {
+        context.trace?.emitEvent(
+          LinkedSpecTraceEventKind.mark,
+          'generated_rule_exit',
+          'source_identity=$generatedIdentity rule=$label '
+              'family=${generatedFamily.wireName} $traceExitDetails',
+          LinkedSpecTraceLevel.low,
+        );
       }
       context.exitRuleLocalBindingScope();
       context.exitRule();
@@ -5859,6 +5934,8 @@ final class _RuntimeExecutionContext {
     required this.maxIterations,
     required this.topRule,
     required this.trace,
+    this.generatedPlan,
+    this.generatedSourceIdentity,
   }) : registers = RuntimeMatchRegisters.empty(input);
 
   final LinkedSpecRuntimeEngine engine;
@@ -5867,6 +5944,8 @@ final class _RuntimeExecutionContext {
   final int maxIterations;
   final String topRule;
   final LinkedSpecTraceEmitter? trace;
+  final Map<String, GeneratedRuleFamily>? generatedPlan;
+  final String? generatedSourceIdentity;
   final Map<String, Object?> variables = <String, Object?>{};
   final Map<String, List<Object?>> arrays = <String, List<Object?>>{};
   final Map<String, Map<String, Object?>> hashes =

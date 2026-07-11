@@ -2,6 +2,9 @@ import 'dart:convert';
 
 import 'ast/spec_ast.dart';
 import 'compiler/compiled_spec.dart';
+import 'runtime/generated_plan.dart';
+import 'runtime/interpreter.dart';
+import 'trace/trace.dart';
 
 /// Backend-neutral generated-source contract implemented by this emitter.
 const linkedSpecGeneratedSourceContract = 'linkedspec-generated-source-v1';
@@ -141,6 +144,161 @@ final class GeneratedSourceMetadata {
   }
 }
 
+/// Classify one compiled rule into the exact contract-v1 structural family.
+GeneratedRuleFamily classifyGeneratedRuleFamily(CompiledRule rule) {
+  final mode = rule.modeMetadata.name;
+  final isRepetition = switch (mode) {
+    'Plus' ||
+    'Star' ||
+    'Optional' ||
+    'OrPlus' ||
+    'AndPlus' ||
+    'OrBounded' ||
+    'AndBounded' => true,
+    _ => false,
+  };
+
+  if (isRepetition) {
+    if (rule.blindEdges.isNotEmpty) {
+      return rule.modeMetadata.isAnd
+          ? GeneratedRuleFamily.repAndBcode
+          : GeneratedRuleFamily.repBcode;
+    }
+    return rule.modeMetadata.isAnd
+        ? GeneratedRuleFamily.repAndAcode
+        : GeneratedRuleFamily.repAcode;
+  }
+
+  if (rule.blindEdges.isNotEmpty) {
+    return mode == 'Or'
+        ? GeneratedRuleFamily.orBcode
+        : GeneratedRuleFamily.andBcode;
+  }
+
+  return switch (mode) {
+    'Default' => GeneratedRuleFamily.defaultFamily,
+    'Or' => GeneratedRuleFamily.orAcode,
+    'Single' => GeneratedRuleFamily.andSingleAcode,
+    'And' || 'Pipe' =>
+      rule.regexPatterns.length <= 1 && rule.actionEdges.length <= 1
+          ? GeneratedRuleFamily.andSingleAcode
+          : GeneratedRuleFamily.andAcodeSeq,
+    _ => throw StateError('unsupported generated rule mode $mode'),
+  };
+}
+
+/// Build the ordered backend-neutral plan for one compiled specification.
+List<GeneratedPlanRow> buildGeneratedRulePlan(CompiledSpec compiled) {
+  return List<GeneratedPlanRow>.unmodifiable([
+    for (final label in compiled.compiledRuleOrder)
+      GeneratedPlanRow(
+        label: label,
+        family: classifyGeneratedRuleFamily(
+          compiled.rulesByLabel[label]!,
+        ).wireName,
+      ),
+  ]);
+}
+
+/// Validate an exposed contract-v1 plan before generated execution.
+void validateGeneratedRulePlanV1(
+  CompiledSpec compiled,
+  List<GeneratedPlanRow> generatedPlan,
+  String sourceIdentity,
+) {
+  _validatedGeneratedRulePlanV1(compiled, generatedPlan, sourceIdentity);
+}
+
+/// Execute through a validated generated structural-family plan.
+Object? executeGeneratedParserV1(
+  CompiledSpec compiled,
+  List<GeneratedPlanRow> generatedPlan,
+  String input,
+  String sourceIdentity, {
+  String? topRule,
+}) {
+  final validated = _validatedGeneratedRulePlanV1(
+    compiled,
+    generatedPlan,
+    sourceIdentity,
+  );
+  try {
+    return LinkedSpecRuntimeEngine(compiled)
+        .executeGeneratedWithPlan(
+          input,
+          validated,
+          sourceIdentity,
+          topRule: topRule,
+        )
+        .value;
+  } on GeneratedSourceException {
+    rethrow;
+  } on RuntimeInterpreterException catch (error) {
+    throw _generatedExecutionFailure(
+      compiled,
+      validated,
+      sourceIdentity,
+      error,
+      topRule: topRule,
+      ruleLabel: error.diagnostic?.ruleLabel,
+    );
+  } on Object catch (error) {
+    throw _generatedExecutionFailure(
+      compiled,
+      validated,
+      sourceIdentity,
+      error,
+      topRule: topRule,
+    );
+  }
+}
+
+/// Execute through a validated plan while emitting native and portable trace.
+Object? executeGeneratedParserWithTraceV1(
+  CompiledSpec compiled,
+  List<GeneratedPlanRow> generatedPlan,
+  String input,
+  LinkedSpecTraceConfig traceConfig,
+  String sourceIdentity, {
+  String? topRule,
+}) {
+  final validated = _validatedGeneratedRulePlanV1(
+    compiled,
+    generatedPlan,
+    sourceIdentity,
+  );
+  try {
+    return LinkedSpecRuntimeEngine(compiled)
+        .executeGeneratedWithPlan(
+          input,
+          validated,
+          sourceIdentity,
+          topRule: topRule,
+          trace: LinkedSpecTraceEmitter(traceConfig),
+        )
+        .value;
+  } on GeneratedSourceException {
+    rethrow;
+  } on RuntimeInterpreterException catch (error) {
+    throw _generatedExecutionFailure(
+      compiled,
+      validated,
+      sourceIdentity,
+      error,
+      topRule: topRule,
+      ruleLabel: error.diagnostic?.ruleLabel,
+    );
+  } on Object catch (error) {
+    throw _generatedExecutionFailure(
+      compiled,
+      validated,
+      sourceIdentity,
+      error,
+      topRule: topRule,
+    );
+  }
+}
+
 /// Emit a generated Dart library for [compiled] using the compatibility identity.
 String emitDartSource(CompiledSpec compiled) {
   return emitDartSourceV1(compiled, '<inline>');
@@ -176,6 +334,15 @@ String emitDartSourceV1(CompiledSpec compiled, String sourceIdentity) {
     final specJson = jsonEncode(normalizedSpec.toJson());
     final specJsonBase64 = base64Encode(utf8.encode(specJson));
     final identityLiteral = _dartStringLiteral(sourceIdentity);
+    final planSource = StringBuffer();
+    for (final row in buildGeneratedRulePlan(compiled)) {
+      planSource
+        ..write('  GeneratedPlanRow(label: ')
+        ..write(_dartStringLiteral(row.label))
+        ..write(', family: ')
+        ..write(_dartStringLiteral(row.family))
+        ..writeln('),');
+    }
 
     return '''// Generated LinkedSpec parser library.
 // Contract id: linkedspec-generated-source-v1.
@@ -191,6 +358,8 @@ const linkedspecGeneratedSourceContract =
 const linkedspecGeneratedSourceFormat = 1;
 const linkedspecGeneratedSourceIdentity = $identityLiteral;
 const _compiledSpecJsonBase64 = '$specJsonBase64';
+const _generatedPlan = <GeneratedPlanRow>[
+$planSource];
 
 GeneratedSourceMetadata metadata() {
   return const GeneratedSourceMetadata(
@@ -219,20 +388,24 @@ CompiledSpec _loadCompiledSpec() {
 
 final _compiledSpec = _loadCompiledSpec();
 
+List<GeneratedPlanRow> plan() => _generatedPlan;
+
+void validatePlan(List<GeneratedPlanRow> actual) {
+  validateGeneratedRulePlanV1(
+    _compiledSpec,
+    actual,
+    linkedspecGeneratedSourceIdentity,
+  );
+}
+
 Object? execute(String input, {String? topRule}) {
-  try {
-    return LinkedSpecRuntimeEngine(_compiledSpec)
-        .execute(input, topRule: topRule)
-        .value;
-  } on GeneratedSourceException {
-    rethrow;
-  } on Object catch (error) {
-    throw GeneratedSourceException.executionFailed(
-      linkedspecGeneratedSourceIdentity,
-      error,
-      ruleLabel: topRule,
-    );
-  }
+  return executeGeneratedParserV1(
+    _compiledSpec,
+    _generatedPlan,
+    input,
+    linkedspecGeneratedSourceIdentity,
+    topRule: topRule,
+  );
 }
 
 Object? executeWithTrace(
@@ -240,19 +413,14 @@ Object? executeWithTrace(
   LinkedSpecTraceConfig traceConfig, {
   String? topRule,
 }) {
-  try {
-    return LinkedSpecRuntimeEngine(_compiledSpec)
-        .executeWithTrace(input, traceConfig, topRule: topRule)
-        .value;
-  } on GeneratedSourceException {
-    rethrow;
-  } on Object catch (error) {
-    throw GeneratedSourceException.executionFailed(
-      linkedspecGeneratedSourceIdentity,
-      error,
-      ruleLabel: topRule,
-    );
-  }
+  return executeGeneratedParserWithTraceV1(
+    _compiledSpec,
+    _generatedPlan,
+    input,
+    traceConfig,
+    linkedspecGeneratedSourceIdentity,
+    topRule: topRule,
+  );
 }
 ''';
   } on GeneratedSourceException {
@@ -264,6 +432,102 @@ Object? executeWithTrace(
       detail: error.toString(),
     );
   }
+}
+
+Map<String, GeneratedRuleFamily> _validatedGeneratedRulePlanV1(
+  CompiledSpec compiled,
+  List<GeneratedPlanRow> generatedPlan,
+  String sourceIdentity,
+) {
+  if (compiled.compiledRuleOrder.length != generatedPlan.length) {
+    throw GeneratedSourceException(
+      stage: GeneratedSourceStage.validateGeneratedPlan,
+      code: GeneratedSourceCode.generatedPlanRowCountMismatch,
+      summary: 'Generated rule plan row count does not match compiled rules',
+      sourceIdentity: sourceIdentity,
+      detail:
+          'expected=${compiled.compiledRuleOrder.length} '
+          'actual=${generatedPlan.length}',
+    );
+  }
+
+  final validated = <String, GeneratedRuleFamily>{};
+  for (var index = 0; index < generatedPlan.length; index += 1) {
+    final expectedLabel = compiled.compiledRuleOrder[index];
+    final row = generatedPlan[index];
+    if (row.label != expectedLabel) {
+      throw GeneratedSourceException(
+        stage: GeneratedSourceStage.validateGeneratedPlan,
+        code: GeneratedSourceCode.generatedPlanLabelMismatch,
+        summary: 'Generated rule plan label does not match compiled rule',
+        sourceIdentity: sourceIdentity,
+        ruleLabel: expectedLabel,
+        detail: 'row=$index expected=$expectedLabel actual=${row.label}',
+      );
+    }
+
+    final actualFamily = GeneratedRuleFamily.fromWireName(row.family);
+    if (actualFamily == null) {
+      throw GeneratedSourceException(
+        stage: GeneratedSourceStage.validateGeneratedPlan,
+        code: GeneratedSourceCode.generatedPlanUnknownFamily,
+        summary: 'Generated rule plan contains an unknown family',
+        sourceIdentity: sourceIdentity,
+        ruleLabel: expectedLabel,
+        handlerFamily: row.family,
+        detail: 'row=$index',
+      );
+    }
+
+    final expectedFamily = classifyGeneratedRuleFamily(
+      compiled.rulesByLabel[expectedLabel]!,
+    );
+    if (actualFamily != expectedFamily) {
+      throw GeneratedSourceException(
+        stage: GeneratedSourceStage.validateGeneratedPlan,
+        code: GeneratedSourceCode.generatedPlanFamilyMismatch,
+        summary: 'Generated rule plan family does not match compiled rule',
+        sourceIdentity: sourceIdentity,
+        ruleLabel: expectedLabel,
+        handlerFamily: row.family,
+        detail:
+            'row=$index expected=${expectedFamily.wireName} '
+            'actual=${row.family}',
+      );
+    }
+    validated[expectedLabel] = actualFamily;
+  }
+  return Map<String, GeneratedRuleFamily>.unmodifiable(validated);
+}
+
+GeneratedSourceException _generatedExecutionFailure(
+  CompiledSpec compiled,
+  Map<String, GeneratedRuleFamily> validatedPlan,
+  String sourceIdentity,
+  Object error, {
+  String? topRule,
+  String? ruleLabel,
+}) {
+  final effectiveRule = ruleLabel ?? topRule ?? _topRuleLabel(compiled);
+  return GeneratedSourceException.executionFailed(
+    sourceIdentity,
+    error,
+    ruleLabel: effectiveRule,
+    handlerFamily: effectiveRule == null
+        ? null
+        : validatedPlan[effectiveRule]?.wireName,
+  );
+}
+
+String? _topRuleLabel(CompiledSpec compiled) {
+  for (final label in compiled.compiledRuleOrder) {
+    if (compiled.rulesByLabel[label]!.header.isTop) {
+      return label;
+    }
+  }
+  return compiled.compiledRuleOrder.isEmpty
+      ? null
+      : compiled.compiledRuleOrder.first;
 }
 
 String _dartStringLiteral(String value) {

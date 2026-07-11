@@ -1,6 +1,25 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.3.2 — add Dart generated family execution
+
+Added Dart's exact contract-v1 generated plan: ordered public label/family rows, the ten neutral family names, and
+classification from compiled mode, regex/action-edge counts, and blind edges. Generated libraries now expose
+`plan()` and `validatePlan(...)`. Validation rejects row-count, ordered-label, known-family mismatch, and arbitrary
+unknown-family mutations before execution with distinct portable codes and source/rule/family/detail attribution.
+
+Added generated-plan execution to the native Dart runtime. After validation converts neutral strings to typed
+families, each rule entry consults its generated family and directly selects regex/acode or blind/bcode structural
+dispatch; the plan is not decorative metadata. Traced execution emits portable `generated_rule_enter`,
+`generated_family_decision`, and `generated_rule_exit` roles alongside existing native trace and preserves source,
+rule, and handler-family identity in failures.
+
+Expanded source-emitter proof from 3 to 5 tests. A single caller-owned offline package analyzes and runs generated
+libraries for all ten structural families against native interpreter values, validates every emitted plan, proves
+all four rejection codes, and locks trace roles. Temporary package/cache cleanup remains recursive. Focused 5/5 and
+the complete Dart gate pass 180 tests, 61x2 CLI, and 105/105 corpus. Dart remains a gap pending the accepted
+manifest-subset admission in `.3.3.3`; census stays 58/0/2.
+
 ## 2026-07-11 — FUTURE-PARITY-BACKLOG.3.3.1 — add Dart generated-source scaffold
 
 Added public `emitDartSource(...)` and `emitDartSourceV1(...)` APIs with contract-v1 metadata, format/source-identity

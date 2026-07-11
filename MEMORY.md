@@ -18,20 +18,20 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.3.1` — added deterministic Dart v1 emitter scaffold and isolation proof.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.3.2.2` — admitted strict recurring all-105 Rust generated breadth.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.3.3.2` — added exact Dart ten-family generated plan/direct execution.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.3.3.1` — added deterministic Dart v1 emitter scaffold and isolation proof.
 - recent_context: Census remains 58/0/2. Perl/Rust pass; Dart/Julia remain gaps. Dart now exports compatibility/v1
-  emitters with stable metadata/errors, effective-state normalization, Unicode source plus strict-UTF-8/Base64
-  payload, and caller-owned offline analyze/run/cleanup. Focused 3/3 and complete 178/61x2/105 pass. `.3.3.2` is active.
+  emitters plus exact ten-family ordered plan, four pre-execution rejections, per-rule direct structural routing,
+  portable trace roles, and isolated all-family host proof. Focused 5/5 and complete 180/61x2/105 pass. `.3.3.3` active.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.3.3.1 - add Dart generated-source scaffold`; previous committed HEAD is
-  `919b0f10 FUTURE-PARITY-BACKLOG.3.2.2 - admit Rust generated-source breadth`.
+  `FUTURE-PARITY-BACKLOG.3.3.2 - add Dart generated family execution`; previous committed HEAD is
+  `1bfdb18e FUTURE-PARITY-BACKLOG.3.3.1 - add Dart generated-source scaffold`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.3.3.2`; Dart generated family-plan/direct structural execution is active.
-- next_action: Knowledge-Map-first compare Dart `CompiledRule` structure and runtime dispatch against the ten neutral
-  family roles, then add typed ordered plan rows, exact four-way pre-execution validation, direct family routing,
-  source/rule/family diagnostics, portable generated trace roles, and an isolated synthetic all-family matrix.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.3.3.3`; Dart generated manifest admission is active.
+- next_action: Drive the contract's exact eight-case accepted subset interpreter-first through Dart emission, one
+  isolated host package compile/run, exact direct-result/plan/trace/identity checks, complete admission gates, then
+  promote Dart only if contract/capability/checker/book/task evidence all agree.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

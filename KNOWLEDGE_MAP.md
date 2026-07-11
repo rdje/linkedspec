@@ -3123,11 +3123,11 @@ _Dart propagates one optional trace emitter through function extraction and stag
 - **source:** [`docs/knowledge/dart-function-staged-trace-events.md`](docs/knowledge/dart-function-staged-trace-events.md)
 
 ### dart-generated-source-deferred
-_Dart now has a deterministic generated-source scaffold; family-plan and admission remain split_
+_Dart generated source has exact ten-family direct execution; manifest admission remains_
 
 - **answers:** does Dart generated source exist now | what did DART-BACKEND-PARITY.7.2 decide | why was generated Dart source deferred | what must the Dart source emitter still prove | is generated Dart source required for Dart parity | how does Dart embed Unicode generated spec state | where is the Dart generated-source compile run harness
 - **date:** 2026-07-11 · **status:** current
-- **evidence:** `DART-BACKEND-PARITY.7.2 deferred codegen after the interpreter milestone; ADR 0023 later made it required public parity. FUTURE-PARITY-BACKLOG.3.3.1 now adds dart/lib/src/source_emitter.dart, public exports, and dart/test/source_emitter_test.dart. Focused 3/3 proves exact metadata/errors, deterministic Unicode/$ emission, and a caller-owned private-PUB_CACHE package that resolves offline, analyzes, runs direct output/failure attribution, and deletes itself. The complete Dart gate passes 178 tests, 61x2 CLI, and 105/105 corpus. .3.3.2 family plan/direct execution and .3.3.3 manifest admission remain.`
+- **evidence:** `DART-BACKEND-PARITY.7.2 deferred codegen; ADR 0023 later required it. FUTURE-PARITY-BACKLOG.3.3.1 adds deterministic public v1 emission/isolation. .3.3.2 adds generated_plan.dart, exact ten-family classification/rows, four plan rejections, typed per-rule structural routing in interpreter.dart, three portable trace roles, and one isolated offline package compiling/running every family against interpreter values. Focused 5/5 and complete Dart 180 tests, 61x2 CLI, and 105/105 corpus pass. .3.3.3 manifest admission remains.`
 - **reverify:** `cd dart && dart test test/source_emitter_test.dart && dart analyze --fatal-infos --fatal-warnings && rg -n 'FUTURE-PARITY-BACKLOG\\.3\\.3|emitDartSourceV1|_compiledSpecJsonBase64|PUB_CACHE' ../docs/tasks/FUTURE-PARITY-BACKLOG.md lib/src/source_emitter.dart test/source_emitter_test.dart`
 - **source:** [`docs/knowledge/dart-generated-source-deferred.md`](docs/knowledge/dart-generated-source-deferred.md)
 

@@ -15,9 +15,9 @@ cursor-control behavior, structured runtime diagnostics, and trace
 controls/sinks plus runtime trace events, staged function-body dispatch, and
 registered user-function runtime execution. Its corpus layer now has a
 manifest-backed executable harness whose checked-in 105-fixture corpus gate is
-green. The public package also exports a deterministic generated-source v1
-scaffold with typed metadata/errors and isolated caller-package compile/run
-proof; exact family-plan/direct execution and manifest admission remain active.
+green. The public package also exports deterministic generated-source v1
+emission, typed metadata/errors, the exact ten-family plan/direct executor, and
+isolated caller-package compile/run proof; manifest admission remains active.
 
 ## Commands
 
@@ -56,15 +56,17 @@ Write `generated` as UTF-8 into a caller-owned Dart package that depends on
 Unicode Dart source; normalized spec state is strict-UTF-8/Base64 data inside
 it. Structured failures use `GeneratedSourceException.toJson()`.
 
-The current scaffold is not a complete generated-source parity claim. Exact
-ten-family plan validation/direct structural execution is `.3.3.2`, and
-manifest-backed admission is `.3.3.3`.
+Generated libraries expose `plan()` and `validatePlan(...)`. All ten neutral
+families route directly through validated per-rule structural dispatch, and
+count/label/family/unknown-family drift fails before execution. This is not yet
+a complete parity claim: manifest-backed admission remains `.3.3.3`.
 
 ## Status
 
-`FUTURE-PARITY-BACKLOG.3.3.1` closes the generated-source scaffold: focused 3/3
-and complete format/analyze/178 tests/61x2 CLI/105 corpus pass. Dart remains a
-generated-source capability gap until `.3.3.2` and `.3.3.3` close.
+`FUTURE-PARITY-BACKLOG.3.3.1` closes the generated-source scaffold; `.3.3.2`
+closes exact ten-family plan/direct execution and four plan rejections. Focused
+5/5 and complete format/analyze/180 tests/61x2 CLI/105 corpus pass. Dart remains
+a generated-source capability gap until `.3.3.3` admission closes.
 
 `DART-BACKEND-PARITY.7.5` closes the scoped interpreter-first Dart milestone.
 `FUTURE-PARITY-BACKLOG.1.5.3.1` replaces the old corpus-oriented primary boundary:

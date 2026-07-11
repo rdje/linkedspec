@@ -120,9 +120,19 @@ not synonymous with UTF-8, and UTF-16/UTF-32 are other Unicode encodings.
 
 The scaffold proof creates a caller-owned temporary package and private package
 cache, resolves offline, analyzes the emitted library, runs its direct result,
-checks structured execution failure, and deletes the package/cache. Exact
-family-plan validation, direct family dispatch, and portable generated trace
-roles remain the next Dart slice; the backend is not admitted pass yet.
+checks structured execution failure, and deletes the package/cache.
+
+Dart now also emits `plan()` and `validatePlan(...)`. The ordered plan uses the
+same ten family strings listed above. Row-count, label, known-family mismatch,
+and unknown-family errors are distinct and occur before parser execution. Once
+validated, each typed family controls whether that rule takes the acode/regex
+or bcode/blind structural executor; the plan is not merely descriptive.
+
+Generated traced execution adds `generated_rule_enter`,
+`generated_family_decision`, and `generated_rule_exit` beside Dart's richer
+native trace. One isolated host package compiles and runs all ten families
+against native interpreter values. Dart is still not admitted pass: the exact
+eight-case manifest subset remains the final interpreter-first admission slice.
 
 ## Why this matters
 

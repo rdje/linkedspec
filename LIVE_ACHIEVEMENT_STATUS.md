@@ -7,8 +7,19 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.3.3.2 — add Dart generated family execution**
+  (DONE — exact ten-family direct dispatch passes; Dart manifest admission `.3.3.3` active).
+
+  **Implementation:** Emitted ordered label/family rows use all ten contract names. Four distinct plan failures are
+  rejected before execution. Validated typed families select regex/acode versus blind/bcode dispatch on every rule
+  entry and portable enter/decision/exit trace roles preserve source/rule/family identity.
+
+  **Proof:** One caller-owned offline package analyzes/runs all ten generated family libraries against interpreter
+  values, then deletes itself/cache. Focused 5/5 and complete Dart 180 tests/61x2 CLI/105 corpus pass. Census remains
+  58/0/2 until interpreter-first accepted-subset admission `.3.3.3`.
+
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.3.1 — add Dart generated-source scaffold**
-  (DONE — deterministic v1 emission and isolated compile/run pass; Dart family-plan `.3.3.2` active).
+  (DONE — deterministic v1 emission and isolated compile/run pass; Dart family-plan `.3.3.2` followed).
 
   **Implementation:** Public compatibility/v1 emitters consume effective compiled state and emit a native Dart
   library with contract/format/identity metadata, ordinary/traced direct-value roles, and typed portable emission,
@@ -16,7 +27,7 @@ Current execution status for interruption-safe batch workflow recovery.
 
   **Isolation/proof:** A caller-owned temporary package and private `PUB_CACHE` resolve offline, analyze, execute
   direct Unicode/`$` output, attribute a missing-rule failure, and are recursively deleted. Focused 3/3 and complete
-  Dart format/analyze/178 tests/61x2 CLI/105 corpus pass. Census stays 58/0/2 until `.3.3.2`/`.3.3.3` admission.
+  Dart format/analyze/178 tests/61x2 CLI/105 corpus pass. `.3.3.2` has since closed; `.3.3.3` owns admission.
 
 - 2026-07-11: **FUTURE-PARITY-BACKLOG.3.2.2 — admit Rust generated-source breadth**
   (DONE — strict recurring 105/105 admitted; Rust pass; census 58/0/2; Dart `.3.3.1` followed).

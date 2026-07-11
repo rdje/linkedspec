@@ -1780,15 +1780,31 @@ before implementation.
 - [x] **HONEST STATUS** — capability census stays 58/0/2; Dart remains gap until `.3.3.2` and `.3.3.3` admission.
 
 - ID: `FUTURE-PARITY-BACKLOG.3.3.2`
-  Status: `active`
+  Status: `done`
   Goal: Add Dart typed family-plan metadata and direct generated structural execution.
   Acceptance: Cover every current default/OR/AND/repetition acode/bcode family, validate label/family plans before
     execution, retain trace and diagnostic/source identity, and compile/run a synthetic all-family matrix.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: focused format/analyze/source-emitter 5/5; isolated ten-family package analyze/run; four exact
+    rejections; portable trace roles; complete Dart gate 180 tests, 61x2 CLI, and 105/105 corpus.
+  Commit: `FUTURE-PARITY-BACKLOG.3.3.2 - add Dart generated family execution`
+
+### `FUTURE-PARITY-BACKLOG.3.3.2` outcome
+
+- [x] **EXACT PLAN** — emitted libraries expose ordered `GeneratedPlanRow { label, family }` rows using all ten
+  neutral default/OR/AND/repetition acode/bcode family strings.
+- [x] **FOUR REJECTIONS** — count, label, known-family mismatch, and arbitrary unknown-family inputs fail before
+  execution with distinct contract-v1 stage/code/source/rule/family/detail records.
+- [x] **DIRECT STRUCTURAL ROUTING** — validated typed families are passed into the native engine and select regex/
+  acode versus blind/bcode dispatch on every generated rule entry instead of serving as decorative metadata.
+- [x] **TRACE/DIAGNOSTIC IDENTITY** — traced generated execution emits `generated_rule_enter`,
+  `generated_family_decision`, and `generated_rule_exit`; failures preserve source and available rule/family.
+- [x] **ALL-FAMILY HOST PROOF** — one caller-owned offline temporary Dart package analyzes and runs generated
+  libraries for every ten-family case against direct interpreter values, then recursively deletes package/cache.
+- [x] **COMPLETE DART** — canonical gate passes 180 package tests, 61x2 CLI, and 105/105 interpreter corpus.
+- [x] **HONEST STATUS** — census stays 58/0/2; curated interpreter-first generated admission remains `.3.3.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.3.3.3`
-  Status: `pending`
+  Status: `active`
   Goal: Admit generated Dart source against manifest-backed oracle fixtures.
   Acceptance: Run the neutral curated subset through interpreter-first exact comparison, emitted-source
     compile/run, complete Dart gates, docs/KM/no-drift, and cleanup; promote Dart's generated-source gap only after
@@ -2077,10 +2093,11 @@ before implementation.
 | 70 | `FUTURE-PARITY-BACKLOG.3.2.2` | `done` | Unconditional recurring 105/105 plus full Rust gate admit generated-source breadth. |
 | 71 | `FUTURE-PARITY-BACKLOG.3.3` | `active` | Dart needs emitter scaffold, family plan/direct execution, and manifest proof. |
 | 72 | `FUTURE-PARITY-BACKLOG.3.3.1` | `done` | Dart emits deterministic v1 source and passes isolated compile/run plus complete Dart gates. |
-| 73 | `FUTURE-PARITY-BACKLOG.3.3.2` | `active` | Add exact Dart family plan, validation, direct structural execution, and trace roles. |
-| 74 | `FUTURE-PARITY-BACKLOG.3.4` | `pending` | Julia needs emitter scaffold, family plan/direct execution, and manifest proof. |
-| 75 | `FUTURE-PARITY-BACKLOG.3.5` | `pending` | Exact four-backend admission promotes all states only after every generated-source proof passes. |
-| 76 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
+| 73 | `FUTURE-PARITY-BACKLOG.3.3.2` | `done` | Exact ten-family plan/direct dispatch/four rejections/trace pass in isolated host package. |
+| 74 | `FUTURE-PARITY-BACKLOG.3.3.3` | `active` | Admit Dart against interpreter-first accepted manifest subset and complete gates. |
+| 75 | `FUTURE-PARITY-BACKLOG.3.4` | `pending` | Julia needs emitter scaffold, family plan/direct execution, and manifest proof. |
+| 76 | `FUTURE-PARITY-BACKLOG.3.5` | `pending` | Exact four-backend admission promotes all states only after every generated-source proof passes. |
+| 77 | `FUTURE-PARITY-BACKLOG.1.3` | `pending` | Lua inherits the complete capability and identical CLI gates after current backends converge. |
 | 65 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
 | 66 | `FUTURE-PARITY-BACKLOG.4` | `pending` | Function extensions need explicit language decisions before code. |
 | 67 | `FUTURE-PARITY-BACKLOG.5` | `pending` | Helper caveats are documented but not normalized. |
@@ -2749,6 +2766,7 @@ Read-only evidence recorded on 2026-07-10:
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.2.1` | Exact `.3.2.0` terminal report and five requested mechanism inventories; capability/public/task/KM continuity review; governance/whitespace/mdBook/cleanup. | PASS. All failure inventories are empty; no repair child or behavior code is justified; strict recurring admission `.3.2.2` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.2.2` | Unconditional ordinary classifier; contract/checker path/count/no-ignore/strict enforcement; independent 105/105/186.42s; complete Rust 137/105/105-generated/196/5/5/5/10 + 61x2; strict-Clippy classification/changed-test pass; 58/0/2 capability; docs/KM/governance/mdBook/cleanup. | PASS. Rust generated source promotes to pass; `.3.2` closes and Dart scaffold `.3.3.1` is active. |
 | `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.3.1` | Public compatibility/v1 Dart emitters; exact metadata/errors/determinism; isolated private-cache offline pub/analyze/run/cleanup; focused 3/3; complete Dart 178 tests + 61x2 + 105 corpus; docs/KM/governance/mdBook/cleanup. | PASS. Dart scaffold is green without census promotion; exact family-plan/direct execution `.3.3.2` is active. |
+| `2026-07-11` | `FUTURE-PARITY-BACKLOG.3.3.2` | Exact ten-family plan/four rejections/direct per-rule family dispatch/three trace roles; isolated all-family package; focused 5/5; complete Dart 180 tests + 61x2 + 105 corpus; docs/KM/governance/mdBook/cleanup. | PASS. Dart implementation roles are green; curated manifest admission `.3.3.3` is active without premature census promotion. |
 
 ## Commit Log
 
@@ -2816,6 +2834,7 @@ Read-only evidence recorded on 2026-07-10:
 | `FUTURE-PARITY-BACKLOG.3.2.1` | `FUTURE-PARITY-BACKLOG.3.2.1 - close zero-failure Rust classification` | Empty five-mechanism repair inventory and strict-admission handoff; no behavior code. |
 | `FUTURE-PARITY-BACKLOG.3.2.2` | `FUTURE-PARITY-BACKLOG.3.2.2 - admit Rust generated-source breadth` | Unconditional recurring all-105 proof, complete Rust gates, 58/0/2 promotion, and Dart handoff. |
 | `FUTURE-PARITY-BACKLOG.3.3.1` | `FUTURE-PARITY-BACKLOG.3.3.1 - add Dart generated-source scaffold` | Deterministic v1 emitter, typed scaffold errors, isolated caller-package compile/run, and `.3.3.2` handoff. |
+| `FUTURE-PARITY-BACKLOG.3.3.2` | `FUTURE-PARITY-BACKLOG.3.3.2 - add Dart generated family execution` | Exact ten-family direct routing, four plan rejections, portable trace, isolated matrix, and `.3.3.3` handoff. |
 
 ## Changelog
 
@@ -2888,6 +2907,12 @@ Read-only evidence recorded on 2026-07-10:
   caller-owned temporary package/private cache resolves offline, analyzes, runs Unicode/`$` output, attributes a
   missing-rule failure, and deletes itself. Focused 3/3 and complete Dart 178/61x2/105 pass. Census remains 58/0/2;
   exact family-plan/direct structural execution `.3.3.2` becomes active before manifest admission `.3.3.3`.
+- `2026-07-11`: `.3.3.2` adds the exact ten-family Dart plan and validates row count, ordered label, known-family
+  mismatch, and unknown family before execution with distinct portable codes. Validated typed families select
+  regex/acode versus blind/bcode structural dispatch on every generated rule entry. Portable enter/decision/exit
+  trace roles retain source/rule/family identity. One isolated package analyzes/runs all ten generated libraries
+  against interpreter values. Focused 5/5 and complete Dart 180/61x2/105 pass; census remains 58/0/2 and curated
+  interpreter-first admission `.3.3.3` becomes active.
 - `2026-07-11`: `.1.6.4.5` adds Perl's separate portable `SpecLoader` facade and direct 14/9/4 plus pipeline proof
   without changing legacy `get_parser`/`PathSearch`. The canonical core gate passes the required new test, 239-name
   coverage, focused suites, 61x2 CLI, and Phase 0 `1..1030` in 556 seconds. Combined with immediately prior full

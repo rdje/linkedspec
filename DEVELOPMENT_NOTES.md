@@ -1,6 +1,16 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (FUTURE-PARITY-BACKLOG.3.3.2 — a generated plan must control execution, not annotate it):
+  Dart compiled state already carries the Rust-equivalent classifier inputs: exact mode, regex/action-edge counts,
+  and blind edges. Derive the same ten neutral families from those fields and validate arbitrary string rows before
+  converting them to a typed map, so unknown family remains testable and distinct from known-but-wrong family.
+  Pass that map into the runtime context and select acode/regex versus bcode/blind dispatch on every rule entry;
+  merely validating then calling the ordinary interpreter would make the table decorative. Emit portable trace
+  roles around the existing native rule scope and preserve the richer trace. Prove the classifier and executor as
+  one isolated multi-library host package so all ten families compile and run through emitted source, while keeping
+  corpus admission separate and preventing an implementation-green result from silently promoting the census.
+
 - 2026-07-11 (FUTURE-PARITY-BACKLOG.3.3.1 — serialize effective semantics, not host build state):
   A first source-emitter scaffold can remain deterministic and caller-owned without inventing a second Dart
   compiled-state decoder. Reconstruct a normalized `SpecFile` from the effective ordered `CompiledSpec` functions
