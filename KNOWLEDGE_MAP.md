@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **422** facts · **2894** question keys.
+> **423** facts · **2904** question keys.
 
 ## Questions → fact
 
@@ -26,6 +26,7 @@
 - "are Lua AST constructor lists sparse or dense" -> [lua-frontend-ast-json-contract](docs/knowledge/lua-frontend-ast-json-contract.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "are Lua ActionIR spans Unicode characters or bytes" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "are Lua match positions bytes or Unicode characters" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
+- "are Lua rule stores local across child calls" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "are PPlugin and PluginBridge part of the target architecture" -> [pplugin-pluginbridge-transition-machinery](docs/knowledge/pplugin-pluginbridge-transition-machinery.md) · 2026-06-12 · reverify: `grep -n 'transition.removal.machinery\|plugin-hosting framework' ARCHITECTURE_STATE.md`
 - "are Perl CLI long options case sensitive" -> [perl-primary-cli-conformance-audit](docs/knowledge/perl-primary-cli-conformance-audit.md) · 2026-07-10 · reverify: `PERL5LIB= prove -v -Iperl t/trace_cli.t; sed -n '1,260p' bin/linkedspec; rg -n 'DUMP_NONE|sub log_output|sub trace_decision' perl/LinkedSpec/Trace.pm perl/LinkedSpec/Validation.pm perl/LinkedSpec/Compiler.pm; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md`
 - "are Perl CLI options case sensitive now" -> [perl-primary-cli-strict-arguments](docs/knowledge/perl-primary-cli-strict-arguments.md) · 2026-07-10 · reverify: `perl -c bin/linkedspec && PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec && PERL5LIB= POSIXLY_CORRECT=1 perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec`
@@ -607,10 +608,12 @@
 - "does Lua corpus IO accept UTF-16 or UTF-32" -> [lua-corpus-manifest-io](docs/knowledge/lua-corpus-manifest-io.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua detect missing and stale fixture directories" -> [lua-corpus-manifest-io](docs/knowledge/lua-corpus-manifest-io.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua dispatch function body AST jobs yet" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua execute compiled LinkedSpec rules in memory" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua fall through to global functions" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua have compile_spec" -> [lua-compiled-spec-state](docs/knowledge/lua-compiled-spec-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua load all 105 corpus fixtures" -> [lua-corpus-manifest-io](docs/knowledge/lua-corpus-manifest-io.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua match the outward descriptor contract" -> [lua-compiled-spec-state](docs/knowledge/lua-compiled-spec-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
+- "does Lua next advance a rule iteration" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua parse ActionIR" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua parse spec files yet" -> [lua-core-spec-parser](docs/knowledge/lua-core-spec-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua parse spec source yet" -> [lua-frontend-ast-json-contract](docs/knowledge/lua-frontend-ast-json-contract.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
@@ -623,7 +626,10 @@
 - "does Lua raw scan fn definitions" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua reject duplicate labels and bad edge targets" -> [lua-frontend-validation](docs/knowledge/lua-frontend-validation.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua resolve ActionIR helper contracts" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
+- "does Lua run lifecycle blocks in order" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua snapshot source before compilation" -> [lua-compiled-spec-state](docs/knowledge/lua-compiled-spec-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
+- "does Lua support action and blind child dispatch" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua support exit_now" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support generic trailing codeblocks" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support named captures and PCRE recursion" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
 - "does Lua support seek and consume regex matching" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
@@ -1177,6 +1183,7 @@
 - "how do Julia AST types serialize to JSON" -> [julia-frontend-ast-json-contract](docs/knowledge/julia-frontend-ast-json-contract.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia --startup-file=no --history-file=no -e 'import Pkg; Pkg.test()'`
 - "how do Julia controlled fixtures parse staged function shells" -> [julia-controlled-corpus-execution](docs/knowledge/julia-controlled-corpus-execution.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()'`
 - "how do Lua AST nodes serialize to JSON" -> [lua-frontend-ast-json-contract](docs/knowledge/lua-frontend-ast-json-contract.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "how do Lua retv and direct output work" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how do Lua user functions resolve before helpers" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how do Perl and Rust parse :name scalar slot shorthand" -> [terse-scalar-slot-shorthand](docs/knowledge/terse-scalar-slot-shorthand.md) · 2026-07-06 · reverify: `prove -q -Iperl t/actionir_ast_parser.t t/trace_emit_context_bridge.t t/trace_actionir_pipeline.t t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-core parse_retired_colon_scalar_slot_reports_bare_read_migration`
 - "how do Perl and Rust skip later block statements after return(expr)" -> [terse-expression-valued-block-early-return](docs/knowledge/terse-expression-valued-block-early-return.md) · 2026-06-30 · reverify: `perl -Iperl -MLinkedSpec -e 'print LinkedSpec::call_spec_handler_subst(q{Top}, q{return({ return(\"a\"); \"b\" })}), qq{\\n}' && cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_1_4_expression_valued_block && cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`
@@ -1281,6 +1288,7 @@
 - "how does Lua diagnose user function recursion" -> [lua-user-function-registry](docs/knowledge/lua-user-function-registry.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "how does Lua distinguish no match from zero width at offset zero" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
 - "how does Lua distinguish source AST codeblocks from tables" -> [lua-frontend-ast-json-contract](docs/knowledge/lua-frontend-ast-json-contract.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
+- "how does Lua guard recursion and zero progress" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua handle Unicode function source spans" -> [lua-function-definition-shell-projection](docs/knowledge/lua-function-definition-shell-projection.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua parse semicolon action statements" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "how does Lua parse semicolon statement separators" -> [lua-core-spec-parser](docs/knowledge/lua-core-spec-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
@@ -2478,6 +2486,7 @@
 - "where is the Lua ActionIR contract resolver" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "where is the Lua action AST parser" -> [lua-actionir-ast-parser](docs/knowledge/lua-actionir-ast-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "where is the Lua compiled spec state" -> [lua-compiled-spec-state](docs/knowledge/lua-compiled-spec-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
+- "where is the Lua runtime interpreter" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "where is the Lua runtime matching code" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
 - "where is the Lua spec parser" -> [lua-core-spec-parser](docs/knowledge/lua-core-spec-parser.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "where is the Lua spec validator" -> [lua-frontend-validation](docs/knowledge/lua-frontend-validation.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
@@ -2641,6 +2650,7 @@
 - "which receiver method families are current" -> [terse-type-method-surface-closed](docs/knowledge/terse-type-method-surface-closed.md) · 2026-07-04 · reverify: `rg -n 'SPEC-FORMAT-TERSE\\.7\\.4|type-method|Receiver-Dot Method Families|scores\\.sum|TRACE-OBSERVABILITY\\.4\\.5|frontier empty|RUST-PARITY\\.7\\.3\\.5' ROADMAP_V2.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md docs/linkedspec-book/src/appendix/helper-contract-catalog.md docs/knowledge && mdbook build docs/linkedspec-book && bash knowledge-map/scripts/check_knowledge_map.sh`
 - "which regex engine does Lua LinkedSpec use" -> [lua-runtime-matching-state](docs/knowledge/lua-runtime-matching-state.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
 - "which regex flags are portable in Julia helpers" -> [julia-helper-regex-flag-normalization](docs/knowledge/julia-helper-regex-flag-normalization.md) · 2026-07-10 · reverify: `JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia -e 'using Pkg; Pkg.test()' && JULIA_DEPOT_PATH=/private/tmp/linkedspec-julia-depot /opt/homebrew/bin/julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --case portmap_constant`
+- "which rule modes does Lua execute" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "which runtime owner follows RUST-PARITY.7.3.4.1" -> [rust-header-rest-action-edge-spacing](docs/knowledge/rust-header-rest-action-edge-spacing.md) · 2026-07-03 · reverify: `rg -n 'parse_mode_suffix_strict|re_action|re_blind|header_rest_action_edge|compact_arrow|RUST-PARITY\\.7\\.3\\.4\\.1|RUST-PARITY\\.7\\.3\\.4\\.4|lib_reader_sattribute|lib_reader_cattribute|->\\[ \\\\t\\]\\*|=>\\[ \\\\t\\]\\*' specs/spec.spec rust/linkedspec-core/src/parser.rs rust/linkedspec-core/src/compiler.rs rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/tests/integration_test.rs docs/tasks/RUST-PARITY.md docs/linkedspec-book/src docs/knowledge`
 - "which scalar bare-read surface is next after SPEC-FORMAT-TERSE.1.2.3.3" -> [terse-scalar-bare-read-seams](docs/knowledge/terse-scalar-bare-read-seams.md) · 2026-06-29 · reverify: `perl -Iperl -MLinkedSpec -e 'my @stmts=(q{return(count)}, q{set(out,count)}, q{name = value}, q{set_key(meta,key,value)}, q{items += value}, q{meta[key] = value}, q{return(foo[\"a\"][z])}, q{return(foo[\"a\"][1])}, q{push(A,B)}); for my $stmt (@stmts) { my $out=LinkedSpec::call_spec_handler_subst(\"Top\",$stmt); $out =~ s/\\n/\\\\n/g; print \"$stmt => $out\\n\" }' && cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml terse_1_2_3_4`
 - "which scalar bare-read surface is next after SPEC-FORMAT-TERSE.1.2.3.3.1" -> [terse-scalar-bare-read-seams](docs/knowledge/terse-scalar-bare-read-seams.md) · 2026-06-29 · reverify: `perl -Iperl -MLinkedSpec -e 'my @stmts=(q{return(count)}, q{set(out,count)}, q{name = value}, q{set_key(meta,key,value)}, q{items += value}, q{meta[key] = value}, q{return(foo[\"a\"][z])}, q{return(foo[\"a\"][1])}, q{push(A,B)}); for my $stmt (@stmts) { my $out=LinkedSpec::call_spec_handler_subst(\"Top\",$stmt); $out =~ s/\\n/\\\\n/g; print \"$stmt => $out\\n\" }' && cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml terse_1_2_3_4`
@@ -4478,6 +4488,15 @@ _Lua runtime matching uses disposable dual-ABI native PCRE2 with neutral matches
 - **evidence:** `LUA-BACKEND-PARITY.4.1 adds lua/native/regex_pcre2.c, tools/build_lua_native.sh, lua/src/linkedspec/matching.lua, disposable dual-ABI gate builds, and five focused matching tests. The gate passes 60/60 on PUC Lua and LuaJIT and leaves no /private/tmp/linkedspec-lua-native.* tree.`
 - **reverify:** `bash tools/run_lua_local.sh && find /private/tmp -maxdepth 1 -type d -name 'linkedspec-lua-native.*' -print`
 - **source:** [`docs/knowledge/lua-runtime-matching-state.md`](docs/knowledge/lua-runtime-matching-state.md)
+
+### lua-runtime-rule-interpreter
+_Lua runtime interpreter executes compiled modes, lifecycle flow, local child dispatch, and guarded repetition_
+
+- **answers:** where is the Lua runtime interpreter | does Lua execute compiled LinkedSpec rules in memory | which rule modes does Lua execute | does Lua support action and blind child dispatch | does Lua run lifecycle blocks in order | how do Lua retv and direct output work | does Lua next advance a rule iteration | does Lua support exit_now | are Lua rule stores local across child calls | how does Lua guard recursion and zero progress
+- **date:** 2026-07-11 · **status:** current
+- **evidence:** `LUA-BACKEND-PARITY.4.2 adds lua/src/linkedspec/interpreter.lua and exports runtime_engine(...), runtime_parse(...), runtime_execute(...), typed results/events/errors, and JSON projection. lua/test/run.lua locks default/AND/OR/repetition modes, action/blind children, lifecycle order, local stores, retv, return/next/exit_now, bounds, cursors, direct output, false/null identity, recursion, zero progress, and typed failures. tools/run_lua_local.sh passes 66/66 on PUC Lua and LuaJIT.`
+- **reverify:** `bash tools/run_lua_local.sh`
+- **source:** [`docs/knowledge/lua-runtime-rule-interpreter.md`](docs/knowledge/lua-runtime-rule-interpreter.md)
 
 ### lua-toolchain-package-policy
 _Lua uses PUC 5.4 primary, LuaJIT secondary, repo paths, and disposable dual-ABI PCRE2 builds_

@@ -1,6 +1,22 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-11 — LUA-BACKEND-PARITY.4.2 — add Lua runtime rule interpreter
+
+Added typed `LinkedSpecRuntimeEngine`, `RuntimeParseResult`, lifecycle-event, and interpreter-error boundaries over
+compiled state and native matching. The engine executes default, Single, AND, OR, optional, star/plus, and bounded
+regex or blind families with action-edge children, entry/local registers, `retv`, narrow accumulators, seek/consume
+cursors, applicable `I/LS/LE/IT/EX/LX/E` order, and a direct one-value output wrapper.
+
+Added explicit `return`/`return_undef`, iteration-correct `next`, immediate typed `exit_now`, rule-local binding
+copy/restore, repetition bounds, same-rule/cursor recursion cutoff, zero-progress termination, and false/null
+preservation. Focused tests also lock typed invalid-bound/helper errors and stable JSON. Broader helper/value/control,
+staged functions, corpus execution, primary CLI, capability, and generated source remain later owners.
+
+Syntax/native-build/process/manifest checks and 66/66 tests pass on both PUC Lua and LuaJIT; no native artifact
+remains. Full local CI passes phase0 `1..1030`, CLI 61x2, census 60/0/0, and doctrines. Status advances to
+`runtime_dispatch`, and mechanism-sized helper-family split `.4.3.0` is next.
+
 ## 2026-07-11 — LUA-BACKEND-PARITY.4.1 — add Lua runtime matching
 
 Selected native PCRE2 after direct provider audit. LPeg exists on both runtimes but constructs PEGs rather than

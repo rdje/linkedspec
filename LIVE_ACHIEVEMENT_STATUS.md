@@ -7,6 +7,17 @@ Current execution status for interruption-safe batch workflow recovery.
 - Stop policy: stop early only for a real blocker such as unresolved failing tests, ambiguous roadmap direction, conflict with user changes, or a slice expanding beyond a safe boundary.
 
 ## Latest Completed Slice
+- 2026-07-11: **LUA-BACKEND-PARITY.4.2 — add Lua runtime rule interpreter**
+  (DONE — compiled dispatch passes both runtimes; helper-family split `.4.3.0` next).
+
+  **Implementation:** Typed in-memory engine/result/event/errors execute compiled modes, action/blind children,
+  lifecycle order, local stores, `retv`, narrow accumulators, `return`/`next`/`exit_now`, bounds, cursors, direct
+  output, and recursion/zero-progress guards. False remains distinct from null across child returns.
+
+  **Proof:** PUC Lua 66/66 and LuaJIT 66/66 plus native build, syntax/process/105-manifest, and exact 239-name
+  proofs pass. Full CI passes phase0 `1..1030`, CLI 61x2, census 60/0/0, and doctrines. Runtime status is
+  `runtime_dispatch`; helper/value breadth remains explicitly unclaimed.
+
 - 2026-07-11: **LUA-BACKEND-PARITY.4.1 — add Lua runtime matching**
   (DONE — dual-ABI native PCRE2 matching passes; compiled rule interpreter `.4.2` next).
 

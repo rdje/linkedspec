@@ -8,13 +8,15 @@ typed source/provenance AST data, permissive rule-level source parsing, a typed
 structural ActionIR parser, current-name ActionIR contract resolution, and an
 ordered user-function/body-job registry with fresh invocation frames. Typed
 compiled rule/dependency/payload state and exact outward descriptors are also
-available in memory. Native PCRE2 matching now supplies stable seek/consume,
-captures, Unicode positions, and entry/local match registers.
+available in memory. Native PCRE2 matching supplies stable seek/consume,
+captures, Unicode positions, and entry/local match registers. The first
+compiled-rule interpreter executes rule modes, edges, lifecycle blocks,
+repetition, and direct result channels entirely in memory.
 Source validation and optional strict-unused checks are also available.
 Top-level function nodes returned by `specs/user_function_definition.spec` can
 be projected and composed with rule parsing. Staged body dispatch, corpus
-execution, the primary CLI
-contract, and generated source are deliberately not implemented yet.
+execution, broad helper/value semantics, the primary CLI contract, and
+generated source are deliberately not implemented yet.
 
 Run the local gate from the repository root:
 
@@ -226,9 +228,9 @@ and registry-aware contracts. Child regex slots are resolved into structured
 `compiled:to_json()` projects the internal effective state.
 `compiled:to_descriptor_json()` and `linkedspec.to_descriptor_json(compiled)`
 project the executable shared contract with exactly `spec`, `functions`,
-`dependency_regex_map`, and `meta`. The compiler marks handlers as
-`lua_interpreter_rule` / `compiled_state_only`; matching and rule execution
-remain owned by runtime layer `.4`.
+`dependency_regex_map`, and `meta`. The descriptor retains the
+`lua_interpreter_rule` / `compiled_state_only` compiled-handler boundary;
+callers execute that state through the separate runtime engine.
 
 Compile ordered rule patterns and match directly in memory:
 
@@ -254,5 +256,39 @@ named captures, byte/code-unit and Unicode-character spans, 1-based line/
 column, and explicit zero-width state. `runtime_match_registers(input)` creates
 immutable cursor/capture state; `with_local_match(...)` and `enter_child()` keep
 entry and local matches separate. Invalid patterns, input bytes, offsets, and
-modes are typed runtime-regex failures. Rule dispatch and helper execution begin
-in `.4.2` and `.4.3`.
+modes are typed runtime-regex failures.
+
+Execute compiled rules directly in the host process:
+
+```lua
+local source = [[
+Top::
+ /a/ -> Child
+ E { return(retv) }
+
+Child:
+ /b/
+ E { return("child") }
+]]
+
+local compiled = linkedspec.compile_spec(linkedspec.parse_spec(source))
+local engine = linkedspec.runtime_engine(compiled, { parse_mode = "seek" })
+local result = linkedspec.runtime_parse(engine, "ab")
+
+assert(result.matched)
+assert(result.value == "child")
+assert(result.output[1] == "child")
+assert(result.cursor_code_unit == 2)
+```
+
+`runtime_parse(...)` and its `runtime_execute(...)` alias execute default,
+AND, OR, single, optional, plus/star, and bounded families. Action and blind
+edges dispatch children through `retv`; lifecycle payloads run in applicable
+`I`, `LS`, `LE`, `IT`, `EX`, `LX`, `E` order. Repetition has explicit bounds,
+zero-progress and recursion cutoffs, and `next()` advances to the next rule
+iteration. Rule-local writes are restored when a child returns. `return(...)`
+preserves false as distinct from `json.null`, while `exit_now(status)` raises a
+typed immediate runtime error. The result exposes the direct value, neutral
+one-element output wrapper, byte/code-unit and character cursors, and lifecycle
+events. Helper/value breadth beyond the narrow dispatch-facing evaluator
+remains owned by `.4.3`.

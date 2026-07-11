@@ -499,19 +499,56 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   live status, and bounded memory close matching `.4.1` and activate compiled rule interpreter `.4.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.2`
-  Status: `active`
+  Status: `done`
   Goal: Execute rule modes, dispatch, lifecycles, recursion, and result channels.
   Acceptance: Default/OR/AND/repetition acode/bcode paths, bounds, cursor state, explicit return/next/exit, retv,
     local stores, lifecycle order, recursion/safety cutoffs, and direct output shape match the oracle.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-07-11.** Added a typed Lua runtime engine/result/event/error boundary over compiled
+    state and the `.4.1` matcher. Default, Single, AND, OR, optional, star/plus, and bounded modes execute regex or
+    blind paths with action-edge child dispatch, entry/local register transfer, `retv`, narrow accumulators,
+    cursor state, and a direct one-value output wrapper. Applicable `I/LS/LE/IT/EX/LX/E` ordering is recorded.
+    `return(...)`, `return_undef()`, iteration-correct `next()`, and immediate typed `exit_now(...)` execute;
+    false is preserved separately from null. Child rule bindings are copied/restored, bounds and invalid helpers
+    fail through typed errors, and same-rule/cursor recursion plus zero-progress terminate safely. The focused gate
+    passes 66/66 on both PUC Lua and LuaJIT with all prior process/manifest/current-name proofs green.
+  Commit: `LUA-BACKEND-PARITY.4.2 - add Lua runtime rule interpreter`
+
+### `LUA-BACKEND-PARITY.4.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua could compile neutral rules and match patterns but had no owner for executable
+  rule modes, edges, lifecycle actions, child results, repetition, or direct parse output.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `.4.1` intentionally stopped at match/register primitives. Without a runtime
+  owner, callers could not preserve rule-local scopes, distinguish false/null results, interpret `next()` as an
+  iteration control, or apply recursion/progress fences consistently with Dart/Julia.
+- [x] **FIX** — Added `interpreter.lua` with typed engine/result/event/errors, compiled-rule dispatch, narrow
+  ActionIR execution, lifecycle flow, local store isolation, `retv`, accumulators, repetition/control semantics,
+  recursion/progress guards, and JSON projection; exported the API from the native module.
+- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 66/66 on PUC Lua and 66/66 on LuaJIT. Focused
+  cases lock default seek/consume repetition, action/blind children, AND/OR, bounds, lifecycle order, local stores,
+  `retv`, `return`/`next`/`exit_now`, false/null identity, cursors, output shape, recursion, zero progress, and typed
+  unsupported-helper failures.
+- [x] **NO REGRESSION** — Frontend/ActionIR/registry/compiler/matching/process/manifest/239-name proofs remain
+  green. Runtime helper breadth, staged functions, corpus execution, primary CLI, capability, and generated source
+  remain explicit later owners; the gate removes only its own inactive native temp tree. Full local CI passes
+  phase0 `1..1030`, CLI 61x2, capability/generated-source/native-resolution, and all doctrines.
+- [x] **LOCKSTEP** — Roadmaps, task index/tree, Lua README/API, mdBook handoff/status, Knowledge Map, changes/
+  development/live status, and bounded memory close `.4.2` and activate helper-family split `.4.3.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.3`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the complete helper/value/control/method surface in recursively split batches.
+  Children: `.4.3.0`
   Acceptance: Every current governed helper and method is behavior-tested, including scalar/string/number,
     array/harray mutation and pure operations, captures/positions/cursor/marks, controls, assignments, tree walks,
     diagnostic calls, and final-codeblock equivalence; split by mechanism before broad implementation.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-BACKEND-PARITY.4.3.0`
+  Status: `active`
+  Goal: Split the complete Lua helper/value/control/method surface into mechanism-sized executable leaves.
+  Acceptance: Every current family has one ordered owner with explicit dependencies, scope, verification, and
+    no-drift closeout; no broad helper implementation starts before the split is durable.
   Verification: `pending`
   Commit: `pending`
 
@@ -664,7 +701,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
 | 10 | `LUA-BACKEND-PARITY.3.3` | `done` | Ordered registry/jobs, exact calls, immutable stitching, and isolated frames pass both runtimes. |
 | 11 | `LUA-BACKEND-PARITY.3.4` | `done` | Typed effective rules/dependencies/payloads and exact outward descriptors pass both runtimes. |
 | 12 | `LUA-BACKEND-PARITY.4.1` | `done` | Dual-ABI PCRE2 matching and neutral registers pass 60/60 on both runtimes. |
-| 13 | `LUA-BACKEND-PARITY.4.2` | `active` | Execute compiled rule modes, dispatch, lifecycles, and result channels. |
+| 13 | `LUA-BACKEND-PARITY.4.2` | `done` | First compiled-rule interpreter passes 66/66 on both runtimes. |
+| 14 | `LUA-BACKEND-PARITY.4.3.0` | `active` | Split helper/value/control/method breadth before implementation. |
 
 ## Initial toolchain evidence (read-only planning audit)
 
@@ -716,3 +754,4 @@ does not claim that LuaJIT already passes the later complete secondary compatibi
 | `LUA-BACKEND-PARITY.3.3` | `LUA-BACKEND-PARITY.3.3 - add Lua function registry` | Ordered definitions/jobs, exact resolution, immutable stitching, isolated frames, and compiled-state handoff. |
 | `LUA-BACKEND-PARITY.3.4` | `LUA-BACKEND-PARITY.3.4 - compile Lua spec state` | Ordered effective state, dependency regexes, ActionIR payloads, exact descriptor, and matching handoff. |
 | `LUA-BACKEND-PARITY.4.1` | `LUA-BACKEND-PARITY.4.1 - add Lua runtime matching` | Disposable dual-ABI PCRE2 adapter, neutral matches/registers, and rule-runtime handoff. |
+| `LUA-BACKEND-PARITY.4.2` | `LUA-BACKEND-PARITY.4.2 - add Lua runtime rule interpreter` | First compiled-rule interpreter, lifecycle/edge dispatch, local results/control, and helper-family split handoff. |

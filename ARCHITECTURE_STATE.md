@@ -5,6 +5,11 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-11`
+- `2026-07-11` refresh: `LUA-BACKEND-PARITY.4.2` adds the first executable Lua compiled-rule owner.
+  `lua/src/linkedspec/interpreter.lua` composes compiled state with native PCRE2 matching and executes default/
+  AND/OR/repetition modes, action/blind children, lifecycle flow, local stores, `retv`, narrow accumulators,
+  explicit controls, direct output, and recursion/progress fences. The identical 66-test gate passes PUC Lua and
+  LuaJIT. Broad helper/value behavior remains split-first work under active `.4.3.0`.
 - `2026-07-11` refresh: `FUTURE-PARITY-BACKLOG.3.3.3` admits generated Dart source. Its recurring test consumes
   the contract's exact eight-case list, proves checked-in values through the interpreter before emission, then
   analyzes/runs all emitted libraries in one isolated offline package with exact metadata/plan/trace identity.

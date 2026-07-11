@@ -573,6 +573,38 @@ checked equal to Dart/Julia. Function-shell projection now consumes explicitly
 typed `function_definition` / `function_definition_error` nodes returned by
 `specs/user_function_definition.spec`; Lua does not raw-scan `fn` source.
 
+The next Lua runtime layer consumes that compiled state directly in memory.
+`runtime_engine(compiled, options)` plus `runtime_parse(engine, input)` (or the
+`runtime_execute` alias) executes default, AND, OR, single, optional,
+plus/star, and bounded rule families over the native PCRE2 matcher. Action and
+blind edges transfer child results through `retv`; lifecycle payloads run in
+applicable `I`, `LS`, `LE`, `IT`, `EX`, `LX`, `E` order. Rule-local bindings
+are restored across child calls, recursion and zero-progress paths terminate,
+`next()` advances the current rule iteration, and `exit_now(status)` stops with
+a typed runtime error. Parse results retain the direct value, neutral
+one-element output wrapper, byte/code-unit and character cursors, and lifecycle
+events. PUC Lua and LuaJIT pass the same 66-test gate. This is the narrow
+dispatch-facing boundary; broad helper/value behavior, staged function
+execution, corpus execution, the primary CLI, and generated source remain
+later owned work.
+
+```lua
+local source = [[
+Top::
+ /a/ -> Child
+ E { return(retv) }
+
+Child:
+ /b/
+ E { return("child") }
+]]
+
+local compiled = linkedspec.compile_spec(linkedspec.parse_spec(source))
+local result = linkedspec.runtime_parse(linkedspec.runtime_engine(compiled), "ab")
+assert(result.value == "child")
+assert(result.output[1] == "child")
+```
+
 Lua embedding code can construct the neutral data model directly:
 
 ```lua

@@ -126,7 +126,7 @@ test("backend status is a fresh structured value", function()
   assert_equal(first.backend, "lua", "status backend")
   assert_equal(first.package, "linkedspec", "status package")
   assert_equal(first.version, "0.1.0", "status version")
-  assert_equal(first.parity, "runtime_matching", "status parity")
+  assert_equal(first.parity, "runtime_dispatch", "status parity")
   assert_equal(first.runtime, linkedspec.runtime_implementation(), "status runtime")
   first.backend = "mutated"
   assert_equal(second.backend, "lua", "status copy isolation")
@@ -1763,6 +1763,205 @@ test("runtime matching returns typed dialect input and boundary failures", funct
   assert_runtime_regex_error(function()
     linkedspec.runtime_match_registers("y", { local_match = other_match })
   end, "does not belong to register input", nil, "foreign match")
+end)
+
+test("runtime interpreter repeats default rules and preserves direct result shape", function()
+  local compiled = linkedspec.compile_spec(linkedspec.parse_spec("Top::\n /a/\n"))
+  local result = linkedspec.runtime_parse(linkedspec.runtime_engine(compiled), "aaa")
+  assert_equal(linkedspec.interpreter.node_type(result), "RuntimeParseResult", "parse result type")
+  assert_equal(result.matched, true, "default matched")
+  assert_equal(result.cursor_code_unit, 3, "default repeated cursor")
+  assert_equal(result.cursor_char_offset, 3, "default character cursor")
+  assert_equal(result.value, json.null, "default value")
+  assert_equal(result.output[1], json.null, "one-value output wrapper")
+  assert_equal(json.decode(json.encode(linkedspec.interpreter.to_json(result))).matched, true, "result JSON")
+
+  local seek = linkedspec.runtime_parse(linkedspec.runtime_engine(compiled), "za")
+  assert_equal(seek.cursor_code_unit, 2, "seek advances to match")
+  local consume = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(compiled, { parse_mode = "consume" }),
+    "za"
+  )
+  assert_equal(consume.matched, false, "consume stays anchored")
+  assert_equal(consume.cursor_code_unit, 0, "consume cursor")
+end)
+
+test("runtime action edges dispatch children and publish retv", function()
+  local source = [[
+Top::
+ /a/ -> Child
+ E { return(retv) }
+
+Child:
+ /b/
+ E { return("child") }
+]]
+  local result = linkedspec.runtime_execute(
+    linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec(source))),
+    "ab"
+  )
+  assert_equal(result.matched, true, "action dispatch matched")
+  assert_equal(result.value, "child", "retv result")
+  assert_equal(result.cursor_code_unit, 2, "child cursor")
+  assert_equal(result.output[1], "child", "direct output")
+end)
+
+test("runtime blind AND and OR dispatch preserve mode behavior", function()
+  local function terminal(label, pattern, value)
+    return compiled_test_rule(label, false, ast.rule_mode("Single"), {
+      ast.body_element({ kind = ast.regex_body_kind({ pattern = pattern }), source = "/" .. pattern .. "/", line = 1 }),
+      ast.body_element({
+        kind = ast.code_block_body_kind({ lifecycle = "LE", code = 'return("' .. value .. '")' }),
+        source = 'LE { return("' .. value .. '") }',
+        line = 2,
+      }),
+    })
+  end
+  local and_top = compiled_test_rule("Top", true, ast.rule_mode("And"), {
+    ast.body_element({ kind = ast.blind_edge_body_kind({ target = "A" }), source = "=> A", line = 1 }),
+    ast.body_element({ kind = ast.blind_edge_body_kind({ target = "B" }), source = "=> B", line = 2 }),
+  })
+  local and_spec = ast.spec_file({ rules = { and_top, terminal("A", "a", "A"), terminal("B", "b", "B") } })
+  local and_result = linkedspec.runtime_parse(linkedspec.runtime_engine(linkedspec.compile_spec(and_spec)), "ab")
+  assert_equal(and_result.matched, true, "blind AND matched")
+  assert_equal(json.kind(and_result.value), "array", "blind AND value")
+  assert_equal(table.concat(and_result.value, ","), "A,B", "blind AND child order")
+
+  local or_top = compiled_test_rule("Top", true, ast.rule_mode("Or"), {
+    ast.body_element({ kind = ast.blind_edge_body_kind({ target = "A" }), source = "=> A", line = 1 }),
+    ast.body_element({ kind = ast.blind_edge_body_kind({ target = "B" }), source = "=> B", line = 2 }),
+    ast.body_element({
+      kind = ast.code_block_body_kind({ lifecycle = "E", code = "return(retv)" }),
+      source = "E { return(retv) }",
+      line = 3,
+    }),
+  })
+  local or_spec = ast.spec_file({ rules = { or_top, terminal("A", "a", "A"), terminal("B", "b", "B") } })
+  local or_result = linkedspec.runtime_parse(linkedspec.runtime_engine(linkedspec.compile_spec(or_spec)), "b")
+  assert_equal(or_result.value, "B", "blind OR first success")
+end)
+
+test("runtime lifecycle order and local stores survive guarded repetition", function()
+  local body = {}
+  local function lifecycle_element(name, code, line)
+    body[#body + 1] = ast.body_element({
+      kind = ast.code_block_body_kind({ lifecycle = name, code = code }),
+      source = name .. " { " .. code .. " }",
+      line = line,
+    })
+  end
+  lifecycle_element("I", 'set(state, "entered")', 1)
+  lifecycle_element("LS", 'set(loop, "start")', 2)
+  body[#body + 1] = ast.body_element({ kind = ast.regex_body_kind({ pattern = "a" }), source = "/a/", line = 3 })
+  lifecycle_element("LE", "set(last, match_text())", 4)
+  lifecycle_element("IT", 'set(iteration, "done")', 5)
+  lifecycle_element("EX", 'set(extended, "done")', 6)
+  lifecycle_element("LX", 'set(loop, "exit")', 7)
+  lifecycle_element("E", "return(state)", 8)
+  local spec = ast.spec_file({ rules = { compiled_test_rule("Top", true, ast.rule_mode("Plus"), body) } })
+  local result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(spec)),
+    "a"
+  )
+  assert_equal(result.value, "entered", "local scalar store")
+  local names = {}
+  for index, event in ipairs(result.lifecycle_events) do names[index] = event.lifecycle end
+  assert_equal(table.concat(names, ","), "I,LS,LE,IT,LS,EX,LX,E", "lifecycle order")
+end)
+
+test("runtime interpreter guards bounds recursion zero progress and unsupported helpers", function()
+  local bounded = compiled_test_rule("Top", true, ast.or_bounded_rule_mode({ min = 2, max = 2 }), {
+    ast.body_element({ kind = ast.regex_body_kind({ pattern = "a" }), source = "/a/", line = 1 }),
+  })
+  local ok, bounded_error = pcall(function()
+    linkedspec.runtime_parse(
+      linkedspec.runtime_engine(linkedspec.compile_spec(ast.spec_file({ rules = { bounded } }))),
+      "a"
+    )
+  end)
+  assert_equal(ok, false, "bounded failure")
+  assert_equal(linkedspec.is_runtime_interpreter_error(bounded_error), true, "bounded typed error")
+  assert_contains(bounded_error.message, "expected at least 2 matches", "bounded detail")
+
+  local recursive = compiled_test_rule("Top", true, ast.rule_mode("Or"), {
+    ast.body_element({ kind = ast.regex_body_kind({ pattern = "" }), source = "//", line = 1 }),
+    ast.body_element({ kind = ast.blind_edge_body_kind({ target = "Top" }), source = "=> Top", line = 1 }),
+  })
+  local recursive_result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(
+      ast.spec_file({ rules = { recursive } }),
+      { validate_source = false }
+    )),
+    ""
+  )
+  assert_equal(recursive_result.matched, false, "recursion cutoff")
+
+  local zero = compiled_test_rule("Top", true, ast.rule_mode("Star"), {
+    ast.body_element({ kind = ast.regex_body_kind({ pattern = "" }), source = "//", line = 1 }),
+  })
+  local zero_result = linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(ast.spec_file({ rules = { zero } }))),
+    ""
+  )
+  assert_equal(zero_result.matched, true, "zero-width match remains present")
+  assert_equal(zero_result.cursor_code_unit, 0, "zero-progress cutoff")
+
+  local unsupported = linkedspec.compile_spec(linkedspec.parse_spec("Top::\n /x/ E { invented_helper() }\n"))
+  local helper_ok, helper_error = pcall(
+    linkedspec.runtime_parse,
+    linkedspec.runtime_engine(unsupported),
+    "x"
+  )
+  assert_equal(helper_ok, false, "unsupported runtime helper")
+  assert_equal(linkedspec.is_runtime_interpreter_error(helper_error), true, "unsupported typed error")
+end)
+
+test("runtime control and local stores match the cross-backend rule contract", function()
+  local next_engine = linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ /skip/ { next() }
+ /keep/
+ E { return(match_text()) }
+]])))
+  local next_result = linkedspec.runtime_parse(next_engine, "skipkeep")
+  assert_equal(next_result.value, "keep", "next advances to the next rule iteration")
+  assert_equal(next_result.cursor_code_unit, 8, "next preserves cursor progress")
+
+  local scoped_engine = linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ /a/ -> Child { set(shared, "parent") }
+ E { return(shared) }
+
+Child:
+ /b/
+ LE { set(shared, "child") }
+ E { return(shared) }
+]])))
+  local scoped_result = linkedspec.runtime_parse(scoped_engine, "ab")
+  assert_equal(scoped_result.value, "parent", "child local store does not leak into caller")
+
+  local false_engine = linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ /a/ -> Child
+
+Child:
+ /b/
+ E { return(false) }
+]])))
+  local false_result = linkedspec.runtime_parse(false_engine, "ab")
+  assert_equal(false_result.value, false, "false child return is not replaced by null")
+  assert_equal(false_result.output[1], false, "false direct output is preserved")
+
+  local exit_engine = linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
+Top::
+ /x/
+ E { exit_now(7); return("unreachable") }
+]])))
+  local exit_ok, exit_error = pcall(linkedspec.runtime_parse, exit_engine, "x")
+  assert_equal(exit_ok, false, "exit_now terminates immediately")
+  assert_equal(linkedspec.is_runtime_interpreter_error(exit_error), true, "exit_now typed error")
+  assert_equal(exit_error.message, "exit_now(7) in rule Top", "exit_now detail")
+  assert_equal(exit_error.status, 7, "exit_now status")
 end)
 
 io.stdout:write("1..", total, "\n")

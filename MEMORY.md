@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `LUA-BACKEND-PARITY.4.1` — native PCRE2 matching and neutral registers pass both runtimes.
-- prior_leaf: `LUA-BACKEND-PARITY.3.4` — typed effective state and exact descriptors pass both runtimes.
-- recent_context: a minimal PCRE2 binding builds per PUC/LuaJIT ABI into disposable owned temp state; shared Lua
-  owns seek/consume, captures, Unicode positions, entry/local registers, zero-width presence/progress, JSON, and
-  typed failures. Lua 60x2 and full CI (phase0 1030, CLI 61x2, census 60/0/0) pass; no rule dispatch/helpers.
+- latest_completed_leaf: `LUA-BACKEND-PARITY.4.2` — compiled rule dispatch and result/control flow pass both runtimes.
+- prior_leaf: `LUA-BACKEND-PARITY.4.1` — native PCRE2 matching and neutral registers pass both runtimes.
+- recent_context: typed Lua engine/result/events execute modes, action/blind children, lifecycle order, local stores,
+  `retv`, narrow accumulators, `return`/`next`/`exit_now`, bounds, seek/consume cursors, direct output, and recursion/
+  progress guards. Lua 66x2 passes; helper/value breadth, staged functions, corpus/CLI execution remain unclaimed.
 - latest_commit: this resume block is prepared for commit
-  `LUA-BACKEND-PARITY.4.1 - add Lua runtime matching`; previous committed HEAD is
-  `270a2662 LUA-BACKEND-PARITY.3.4 - compile Lua spec state`.
+  `LUA-BACKEND-PARITY.4.2 - add Lua runtime rule interpreter`; previous committed HEAD is
+  `57841c52 LUA-BACKEND-PARITY.4.1 - add Lua runtime matching`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `LUA-BACKEND-PARITY.4.2`; compiled rule interpreter is active.
-- next_action: Execute rule modes, action/blind dispatch, lifecycle order, recursion/safety cutoffs, cursor state,
-  explicit return/next/exit, retv, local stores, and direct result shape over the `.4.1` matcher before helper breadth.
+- active_work_unit: `LUA-BACKEND-PARITY.4.3.0`; helper/value/control/method family splitting is active.
+- next_action: Split every current Lua helper/value/control/method mechanism into ordered executable leaves with
+  explicit dependencies and no-drift closeout before implementing broad helper behavior.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;

@@ -1,6 +1,15 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-11 (LUA-BACKEND-PARITY.4.2 — catch control at the iteration boundary):
+  `next()` is not a rule return. Catch it around one regex/blind attempt, count the consumed iteration, preserve
+  cursor progress, and continue without running the skipped remainder. Keep fatal `exit_now(...)` as an immediate
+  typed runtime failure, not a value. Lua's `and/or` idiom is unsafe for DSL values because valid `false` returns
+  collapse into fallback values; branch explicitly wherever null and false must remain distinct. Child rules may
+  read caller bindings but must restore the caller's scalar/array/harray state when they return, so clone rule-local
+  stores at entry and restore the original references on every success/error/flow path. Keep this interpreter
+  dispatch-facing; split helper breadth before implementation rather than hiding partial families in one evaluator.
+
 - 2026-07-11 (LUA-BACKEND-PARITY.4.1 — bind the dialect, not merely a pattern library):
   Engine presence is not semantic compatibility. LPeg cannot serve as an arbitrary PCRE parser; shelling out would
   break native in-memory embedding, and a single C module cannot safely cross PUC Lua/LuaJIT ABIs. Keep the binding

@@ -208,6 +208,23 @@ local function runtime_regex_match(input, alternative, raw)
   }, TYPE_MTS.RuntimeRegexMatch)
 end
 
+function M.reindex_runtime_regex_match(match, alternative_index)
+  if M.node_type(match) ~= "RuntimeRegexMatch" then fail("reindex expects RuntimeRegexMatch") end
+  if type(alternative_index) ~= "number" or alternative_index % 1 ~= 0 or alternative_index < 0 then
+    fail("reindexed alternative must be a non-negative integer")
+  end
+  return setmetatable({
+    input = match.input,
+    alternative_index = alternative_index,
+    pattern = match.pattern,
+    byte_start = match.byte_start,
+    byte_end = match.byte_end,
+    groups = match.groups,
+    captures = match.captures,
+    named = match.named,
+  }, TYPE_MTS.RuntimeRegexMatch)
+end
+
 local function native_match(alternative, input, byte_cursor, anchored)
   local ok, raw_or_error = pcall(native.match, alternative.native_regex, input, byte_cursor, anchored)
   if not ok then
