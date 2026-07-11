@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-10` (Dart exact empty-local-match positions closed; Julia `.1.6.1.2.2.2.3` active).
+- Last updated: `2026-07-10` (all exact empty-local-match positions closed; Rust marker-control `.1.6.1.2.2.3.1` active).
 - Owner: repo-local workflow
 
 ## Goal
@@ -764,13 +764,16 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3 - align Julia pure helper values`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2`
-  Status: `active`
+  Status: `done`
   Goal: Align empty local-match position projection on Rust, Dart, and Julia.
   Children: `.1.6.1.2.2.2.1`, `.1.6.1.2.2.2.2`, `.1.6.1.2.2.2.3`
   Acceptance: Match Perl's exact null capture/length/position plus empty-map/list/has and 1-based line/column defaults
     after entry match without inventing a local match; close one backend per committed child.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Rust, Dart, and Julia now return the exact Perl position fixture value and independently preserve
+    a real zero-width match at offset zero. Each backend projects absent local capture/length/position as null,
+    containers as empty, named presence as numeric `0`, and diagnostic line/column defaults as 1. The unchanged
+    99-case corpus remains green on every backend.
+  Commit: closed by `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3 - align Julia empty-match positions`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1`
   Status: `done`
@@ -798,14 +801,19 @@ before implementation.
   Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2 - align Dart empty-match positions`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3`
-  Status: `active`
+  Status: `done`
   Goal: Align Julia empty local-match position projection and close `.2`.
   Acceptance: Exact position fixture value and existing corpus pass.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Julia's nullable `RuntimeMatchRegisters.local_match` already distinguishes absence from a real
+    zero-width match, so helper projection now returns numeric named presence and 1-based line/column defaults
+    without changing null capture/length/start/end or empty group/map values. The governed exact fixture and an
+    independent zero-width-at-zero regression pass. The offline package suite passes 1,022 assertions, both shared
+    61-case CLI environments pass, and the unchanged corpus passes 99/99. The disposable 122 MB verification depot
+    was removed after its result was consumed.
+  Commit: prepared in `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3 - align Julia empty-match positions`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3`
-  Status: `pending`
+  Status: `active`
   Goal: Align marker aliases and matched-case/default control semantics.
   Children: `.1.6.1.2.2.3.1`, `.1.6.1.2.2.3.2`, `.1.6.1.2.2.3.3`
   Acceptance: Newline `i`/`elif` executes like `if`/`elseif`; a matching case excludes default; end markers preserve
@@ -814,7 +822,7 @@ before implementation.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1`
-  Status: `pending`
+  Status: `active`
   Goal: Align Rust marker aliases/control fixture.
   Acceptance: Remove unknown `i`/`elif` diagnostics and return `["elif","case-b"]` without regressing switch.
   Verification: `pending`
@@ -1138,8 +1146,8 @@ before implementation.
 | 34 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3` | `done` | Julia exact pure fixture, 1,020 assertions, 61x2 CLI, and 99 corpus pass; pure parent closes. |
 | 35 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1` | `done` | Rust exact position fixture, zero-width distinction, 137 library, 193 integration, and 99 oracle pass. |
 | 36 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2` | `done` | Dart exact position fixture, nullable absence, zero-width distinction, 154 tests, 61x2 CLI, and 99 corpus pass. |
-| 37 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3` | `active` | Align Julia empty local-match projection. |
-| 38 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1` | `pending` | Align Rust marker aliases/control. |
+| 37 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3` | `done` | Julia exact position fixture, nullable absence, zero-width distinction, 1,022 assertions, 61x2 CLI, and 99 corpus pass; position parent closes. |
+| 38 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1` | `active` | Align Rust marker aliases/control. |
 | 39 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2` | `pending` | Align Dart marker switch selection. |
 | 40 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3` | `pending` | Align Julia marker switch selection. |
 | 41 | `FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1` | `pending` | Complete Rust capture/mark semantics. |

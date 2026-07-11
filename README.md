@@ -169,7 +169,7 @@ Top-level directories and files:
     `.1.5.1.5` now closes canonical trace at 53/53 exact cases with local-gate integration. Its signoff exposed a
     pre-existing UTF-8 argv/JSON mojibake boundary; `.1.5.1.6` closes that repair. Perl/Rust/Dart now pass 61/61.
     Julia `.1.5.4.1` renders exact help, validates strict UTF-8 file bytes, and emits phase-only primary errors.
-    `.1.5.4.2` adds the independent canonical trace while preserving native rich trace. Current proof is 1,020
+    `.1.5.4.2` adds the independent canonical trace while preserving native rich trace. Current proof is 1,022
     assertions plus 99/99 and 61/61 default/POSIX. `.1.5.4.3` closes exact four-backend CLI identity with one
     recurring warmed 4x2x61 driver; capability census `.1.6` is active and generated-source parity remains `.3`.
 - `.github/workflows/`
@@ -207,9 +207,8 @@ Top-level project docs:
   `.1.6.1.1` repaired universal Perl newline splitting and `.1.6.1.2.1` repaired the narrower generated terminator
   after newline `endswitch()`. A diagnostic 105-case run then passed 100/105 on each non-reference backend and
   split pure, position, marker-control, and capture/mark repairs under active `.1.6.1.2.2`; the mandatory corpus
-  remains at its green 99-case boundary until final admission. Rust, Dart, and Julia pure-value children
-  `.2.2.1.1` through `.3` are closed; Rust and Dart empty-local-match `.2.2.2.1`/`.2` are closed and active
-  `.2.2.2.3` aligns Julia.
+  remains at its green 99-case boundary until final admission. Rust, Dart, and Julia pure-value and
+  empty-local-match children are closed; active `.2.2.3.1` aligns Rust marker aliases/control.
 - Run the current backend-neutral primary CLI fixture baseline with `PERL5LIB= perl
   tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl
   {{REPO_ROOT}}/bin/linkedspec`. The manifest locks two help, 20 usage, seven baseline success, four baseline

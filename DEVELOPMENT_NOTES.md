@@ -1,6 +1,13 @@
 # DEVELOPMENT NOTES
 Engineering notes for LinkedSpec refactoring and stabilization.
 
+- 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3 — align semantics, not host value types):
+  Julia and Dart both already modeled local-match absence with a nullable match object, but both leaked host
+  booleans and null diagnostic locations through helper projection. Backend parity belongs at the helper contract:
+  numeric presence and 1-based absent diagnostics coexist with nullable capture/position values and typed source
+  booleans. Reuse the native nullable register instead of adding a parallel presence flag; always prove a present
+  zero-width match so absence cannot later be inferred from offsets.
+
 - 2026-07-10 (FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2 — project absence at the helper boundary):
   Dart's nullable match object already preserves the semantic distinction that Rust needed explicit state to add.
   The defect was projection: diagnostic line/column helpers leaked null and named-presence helpers leaked host

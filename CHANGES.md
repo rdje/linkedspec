@@ -1,6 +1,19 @@
 # CHANGES
 Detailed technical history of changes prepared for commit.
 
+## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3 — align Julia empty-match positions
+
+**Exact projection:** Julia already carries entry/local matches as nullable `RuntimeRegexMatch` values. Named-
+presence helpers now return numeric `1`/`0`, and absent local-match line/column helpers return the 1-based default;
+existing null capture/length/start/end and empty group/map projections remain intact.
+
+**No sentinel regression:** Added the governed full-value position fixture and an independent zero-width-at-zero
+lock. A real zero-width match remains present with empty capture text, zero length/start/end, and `match_has = 1`.
+
+**Proof/frontier:** The offline package suite passes 1,022 assertions, both 61-case CLI environments pass, and the
+unchanged corpus passes 99/99. The 122 MB disposable depot was removed after verification. All three position
+children and their parent close; Rust marker-control `.1.6.1.2.2.3.1` is active.
+
 ## 2026-07-10 — FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2 — align Dart empty-match positions
 
 **Exact projection:** Dart already carries local-match absence as a nullable `RuntimeRegexMatch`; helper projection

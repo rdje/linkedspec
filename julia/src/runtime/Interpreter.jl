@@ -4524,10 +4524,10 @@ end
 
 function _runtime_has_named_capture(engine, one_match, args, context, rule_label, current_edge)
     if one_match === nothing || isempty(args)
-        return false
+        return 0
     end
     name = _runtime_capture_name(engine, first(args), context, rule_label, current_edge)
-    return haskey(one_match.named, name)
+    return haskey(one_match.named, name) ? 1 : 0
 end
 
 function _runtime_capture_name(engine, expr, context, rule_label, current_edge)
@@ -4548,7 +4548,7 @@ _runtime_match_length(one_match) = one_match === nothing ? nothing : char_length
 
 function _runtime_match_line(one_match, at_end::Bool)
     if one_match === nothing
-        return nothing
+        return 1
     end
     offset = at_end ? one_match.codeunit_end : one_match.codeunit_start
     return line_column_at_codeunit_offset(one_match.input, offset).line
@@ -4556,7 +4556,7 @@ end
 
 function _runtime_match_column(one_match, at_end::Bool)
     if one_match === nothing
-        return nothing
+        return 1
     end
     offset = at_end ? one_match.codeunit_end : one_match.codeunit_start
     return line_column_at_codeunit_offset(one_match.input, offset).column

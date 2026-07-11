@@ -18,19 +18,19 @@ durable cross-cutting facts live in `docs/decisions/` (layer C).
   gate `tools/run_ci_local.sh` enforce it).
 
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2` — Dart empty-local-match positions match exactly.
-- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1` — Rust empty-local-match positions match exactly.
-- recent_context: Dart projects absent local matches from its existing nullable match state: null/empty/default
-  values and numeric presence do not conflate a real zero-width match at offset zero. Dart passes 154 package
-  tests, 61x2 CLI, and 99 corpus; Julia position plus all control/capture children remain before final 105 admission.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3` — Julia closes exact empty-local-match positions.
+- prior_leaf: `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2` — Dart empty-local-match positions match exactly.
+- recent_context: Rust, Dart, and Julia now project absent local matches identically without conflating a real
+  zero-width match at offset zero. Julia passes 1,022 assertions, 61x2 CLI, and 99 corpus; marker control and all
+  capture children remain before final 105 admission.
 - latest_commit: this resume block is prepared for commit
-  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2 - align Dart empty-match positions`; previous committed HEAD is
-  `32ffc40a FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1 - align Rust empty-match positions`.
+  `FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3 - align Julia empty-match positions`; previous committed HEAD is
+  `469abca6 FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2 - align Dart empty-match positions`.
 - push_policy: check `git status -sb` for the live ahead count; do not push mid-PNT unless explicitly instructed
   or the documented 300-commit threshold policy is deliberately invoked.
-- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2.2.3` Julia empty-local-match projection is active.
-- next_action: align Julia's exact empty local-match capture/length/position/map/has and 1-based line/column values
-  after an entry match without conflating a real zero-width match; preserve the unchanged 99-case corpus.
+- active_work_unit: `FUTURE-PARITY-BACKLOG`; `.1.6.1.2.2.3.1` Rust marker aliases/control is active.
+- next_action: align Rust newline `i`/`elif` aliases and matched-case/default exclusion under the exact governed
+  control fixture; preserve the unchanged 99-case corpus.
   The director's single-source `foo.spec` parser+stimuli roundtrip idea is parked in
   `FUTURE-PARITY-BACKLOG.8.1`;
   the corrected AND/OR edge-default model is parked in `.9.1`; semantic introspection/MCP is parked in `.10.1`;
